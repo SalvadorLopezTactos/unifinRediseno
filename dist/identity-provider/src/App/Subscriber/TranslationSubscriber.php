@@ -12,17 +12,16 @@
 
 namespace Sugarcrm\IdentityProvider\App\Subscriber;
 
-use Pimple\Container;
+use Sugarcrm\IdentityProvider\App\Application;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Cookie;
 
 class TranslationSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var Container
+     * @var Application
      */
     protected $app;
 
@@ -36,7 +35,7 @@ class TranslationSubscriber implements EventSubscriberInterface
      */
     protected $localeParamName;
 
-    public function __construct(Container $app, $localeParamName)
+    public function __construct(Application $app, $localeParamName)
     {
         $this->app = $app;
         $this->locale =  $this->app['locale'];
@@ -54,12 +53,11 @@ class TranslationSubscriber implements EventSubscriberInterface
             case $request->query->has($this->localeParamName):
                 $this->locale = $request->query->get($this->localeParamName);
                 break;
-            case $request->cookies->has($this->localeParamName):
-                $this->locale = $request->cookies->get($this->localeParamName);
+            case !empty($this->app->getCookieService()->getLocaleCookie($request)):
+                $this->locale = $this->app->getCookieService()->getLocaleCookie($request);
                 break;
         }
         $this->app['locale'] = $this->locale;
-        $this->app['app.locale'] = strtolower(explode('-', $this->locale)[0]);
     }
 
     /**
@@ -69,16 +67,7 @@ class TranslationSubscriber implements EventSubscriberInterface
     public function onKernelResponse(FilterResponseEvent $event)
     {
         $response = $event->getResponse();
-        $cookie = new Cookie(
-            $this->localeParamName,
-            $this->locale,
-            time() + 84600 * 365,
-            '/',
-            $event->getRequest()->getHost(),
-            false,
-            false
-        );
-        $response->headers->setCookie($cookie);
+        $this->app->getCookieService()->setLocaleCookie($response, $this->locale);
     }
 
     /**

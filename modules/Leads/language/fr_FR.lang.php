@@ -322,4 +322,7 @@ Après avoir confirmé chacun des modules souhaités, cliquez sur le bouton Enre
     'LBL_FILTER_LEADS_REPORTS' => 'Rapports sur les leads',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Objectifs commerciaux auxquels un consentement a été donné',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Dernière mise à jour de consentement',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Impossible de changer le statut {{moduleSingular}}. Ce {{moduleSingular}} a déjà été converti.',
 );

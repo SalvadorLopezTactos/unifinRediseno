@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Vista preliminar',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'ADVERTÈNCIA: Si canvia el mòdul primari, tots els camps ja afegits a la plantilla hauran de ser eliminats.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Aquí està l&#39;arxiu que ha sol·licitat (Podeu modificar aquest text)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Pressupost',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Aquesta plantilla s&#39;utilitza per imprimir pressupost en format PDF.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'pressupost',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Pressupost (amb serveis)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Aquesta plantilla s&#39;utilitza per imprimir un Pressupost, incloent-hi informació de servei, en PDF.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'servicequote',
+
   'LBL_TPL_INVOICE_NAME' => 'Factura',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Aquesta plantilla s&#39;utilitza per imprimir factures en format PDF.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'factura',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Factura (amb serveis)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Aquesta plantilla s&#39;utilitza per imprimir una Factura, incloent-hi informació de servei, en PDF.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'serviceinvoice',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Nombre pressupost:',
   'LBL_TPL_SALES_PERSON' => 'Venedor:',
   'LBL_TPL_VALID_UNTIL' => 'Vàlid fins:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Nombre de referència',
   'LBL_TPL_PRODUCT' => 'Producte',
   'LBL_TPL_RLI' => 'Línia d&#39;impostos articles',
+  'LBL_TPL_DURATION' => 'Durada',
+  'LBL_TPL_DURATION_STARTS' => 'Inici:',
+  'LBL_TPL_DURATION_ENDS' => 'Fi:',
   'LBL_TPL_LIST_PRICE' => 'Preu de Llista',
   'LBL_TPL_UNIT_PRICE' => 'Preu Unitari',
   'LBL_TPL_EXT_PRICE' => 'Preu Ext.',

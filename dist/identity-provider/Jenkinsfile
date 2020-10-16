@@ -6,20 +6,62 @@ import groovy.json.JsonSlurper
 // Default IdM image to use throughout the pipeline.
 idmDefaultImage = ''
 
+def podLabel = "IdentityProvider-pipeline-${UUID.randomUUID()}"
+
+// Pod template for actions of PRs that have been merged to master
+// NB: we need it as a separate `podTemplate` because of this: https://sugarcrm.atlassian.net/browse/EA-4361
+if (env.BRANCH_NAME == 'master') {
+    podTemplate(
+        label: podLabel,
+        containers: [
+            // Used to upload and download localization sources
+            containerTemplate(
+                name: 'localizer',
+                image: 'registry.sugarcrm.net/identity-provider/localizer:1.1.0',
+                ttyEnabled: true,
+                command: 'cat'
+            )
+        ]
+    ) {
+        node(podLabel) {
+            ansiColor('xterm') {
+                stage('SCM IdentityProvider') {
+                    pullRequestStatus(description: 'SCM IdentityProvider') {
+                        checkout scm
+                    }
+                }
+                stage('Localizations update') {
+                    pullRequestStatus(description: 'Localizations update') {
+                        withCredentials([usernamePassword(credentialsId: 'sugarcrmci-github-token',
+                                                          passwordVariable: 'GITHUB_PASSWORD',
+                                                          usernameVariable: 'GITHUB_USERNAME'),
+                                        string(credentialsId: 'CROWDIN_API_KEY_IDENTITY_PROVIDER',
+                                               variable: 'CROWDIN_API_KEY_IDENTITY_PROVIDER')]) {
+                            container(name:'localizer') {
+                                sh """
+                                localizer --version
+                                localizer crowdin -- --version
+                                localizer sync
+                                """
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return
+}
+
+// Pod template for actions of development PRs
 podTemplate(
-    label: 'IdentityProvider-pipeline3',
-    nodeSelector: 'kubernetes.io/hostname=ip-10-27-16-140',
+    label: podLabel,
+    nodeSelector: 'kubernetes.io/hostname=ip-10-27-17-41',
     containers: [
         // Used to build the container image
         containerTemplate(
             name: 'docker',
             image: 'docker',
-            ttyEnabled: true,
-            command: 'cat'
-        ),
-        containerTemplate(
-            name: 'elasticsearch',
-            image: 'docker.elastic.co/elasticsearch/elasticsearch:5.4.2',
             ttyEnabled: true,
             command: 'cat'
         ),
@@ -65,6 +107,13 @@ podTemplate(
             ttyEnabled: true,
             command: 'cat'
         ),
+        // Used to upload and download localization sources
+        containerTemplate(
+            name: 'localizer',
+            image: 'registry.sugarcrm.net/identity-provider/localizer:1.0.1',
+            ttyEnabled: true,
+            command: 'cat'
+        ),
     ],
     volumes: [
         // Required docker socket to be able to build container images. This will use
@@ -72,7 +121,7 @@ podTemplate(
         hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')
     ]
 ) {
-    node('IdentityProvider-pipeline3') {
+    node(podLabel) {
         ansiColor('xterm') {
             // Git commit hash. Is used for labeling docker containers.
             idmRevision = ''
@@ -86,6 +135,7 @@ podTemplate(
             idmDefaultImage = ''
 
             mangoInstalledBaseImage = 'registry.sugarcrm.net/identity-provider/idm-mango-installed'
+            mangoOIDCImage = 'registry.sugarcrm.net/identity-provider/idm-mango-oidc'
 
             // k8s namespace for the entire pipeline.
             // We use `localhost` suffix for Hydra hack to skip ssl verification that is not done for hosts w/ localhost suffix.
@@ -95,7 +145,8 @@ podTemplate(
 
             stage('SCM IdentityProvider') {
                 pullRequestStatus(description: 'SCM IdentityProvider') {
-                    checkout scm
+                    def scmVars = checkout scm
+                    env.GIT_BRANCH = scmVars.GIT_BRANCH
                     sh "git rev-parse --short HEAD > .git/commit-id"
                     idmRevision = readFile('.git/commit-id').trim()
                 }
@@ -116,7 +167,7 @@ podTemplate(
                         sh "sed -e 's/%%IamNS%%/${idmNS}/g' tests/behat/db/fixtures.sql -i"
                         parallel(
                             lib_php71: { createIdmImage('php71') },
-                            lib_php72: { createIdmImage('php72') },
+                            lib_php73: { createIdmImage('php73') },
                             service: { createIdmServiceImage() },
                         )
 
@@ -146,7 +197,7 @@ podTemplate(
                     container(name:'docker') {
                         parallel(
                                 php71: { runIdmPhpUnitSuite('php71', 'Unit Tests') },
-                                php72: { runIdmPhpUnitSuite('php72', 'Unit Tests') },
+                                php73: { runIdmPhpUnitSuite('php73', 'Unit Tests') },
                         )
                     }
                 }
@@ -157,7 +208,7 @@ podTemplate(
                     container(name:'docker') {
                         parallel(
                                 php71: { runIdmPhpUnitSuite('php71', 'Functional Tests') },
-                                php72: { runIdmPhpUnitSuite('php72', 'Functional Tests') },
+                                php73: { runIdmPhpUnitSuite('php73', 'Functional Tests') },
                         )
                     }
                 }
@@ -165,22 +216,23 @@ podTemplate(
 
             stage('Fetch Mango build') {
                 pullRequestStatus(description: 'Fetch Mango build') {
+                    def changeTitle = env.CHANGE_TITLE ?: ''
                     container(name:'python') {
                         sh """#!/usr/bin/env python
 import urllib.request, urllib.error, json, re
 
 artifact = 'Build Ent'
 user_feature_author = '${env.CHANGE_AUTHOR}'
-pr_number_match = re.findall(r'\\b[A-Za-z]+[-_]?\\d+\\b', '${env.CHANGE_TITLE.replaceAll("'", "\\\\'")}')
+pr_number_match = re.findall(r'\\b[A-Za-z]+[-_]?\\d+\\b', '${changeTitle.replaceAll("'", "\\\\'")}')
 user_feature_branch = pr_number_match[0] if len(pr_number_match) > 0 else ''
 team_feature_author = 'avlasov'
-team_feature_branch = 'idm_90_sprint4'
+team_feature_branch = 'idm_91'
 deploy_feature_data_url = "http://honeycomb.sugarcrm.io/rest/v1/deploy/%s%s"
 deploy_master_data_url = 'https://honeycomb.sugarcrm.io/rest/v1/builds/active'
 build_url = "http://honeycomb.sugarcrm.io/download/deploy/{author}{branch}/{number}/SugarEnt-{version}{branch}.zip"
 build_url_master = "https://honeycomb.sugarcrm.io/download/train/{version}/{number}/SugarEnt-{version}.zip"
 out = "sugarcrm.zip"
-github_to_honeycomb_authors = {
+github_to_honeycomb_authors_nonstandard = {
     'alex-vlasov': 'avlasov',
     'ddolbik': 'ddolbik',
     'kolotaev': 'ekolotaev',
@@ -190,10 +242,16 @@ github_to_honeycomb_authors = {
 class SkipFetchException(Exception): pass
 
 def get_honey_comb_author_name(github_name):
-    if github_name in github_to_honeycomb_authors:
-        return github_to_honeycomb_authors[github_name]
+    if github_name in github_to_honeycomb_authors_nonstandard:
+        return github_to_honeycomb_authors_nonstandard[github_name]
     else:  # try to extract author name from modern standard h-comb form.
         return github_name.split('-sugarcrm')[0]
+
+def fetch_archive(build_url, tag):
+    print('Fetching %s build...' % build_url)
+    urllib.request.urlretrieve(build_url, out)
+    with open('mango-build-number', 'w') as f:
+        f.write(str(tag.replace('-', '').lower()))
 
 def get_feature_build(author, branch):
     url = deploy_feature_data_url % (author, branch)
@@ -242,6 +300,7 @@ def get_master_build(url):
 user_feature_author = get_honey_comb_author_name(user_feature_author)
 try:
     build_url, tag = get_feature_build(user_feature_author, user_feature_branch)
+    fetch_archive(build_url, tag)
 except urllib.error.HTTPError as e:
     try:
         # For PRs not to master we are not interested in team feature branches.
@@ -249,31 +308,27 @@ except urllib.error.HTTPError as e:
             raise SkipFetchException('Team feature branch is not needed for IdP branch: %s' % '${env.CHANGE_TARGET}')
         print(str(e) + '. Falling back to team feature branch.')
         build_url, tag = get_feature_build(team_feature_author, team_feature_branch)
+        fetch_archive(build_url, tag)
     except (urllib.error.HTTPError, SkipFetchException) as e:
         print(str(e) + '. Falling back to master Mango build.')
         build_url, tag = get_master_build(deploy_master_data_url)
+        fetch_archive(build_url, tag)
 
-if build_url and tag:
-    print('Fetching %s build...' % build_url)
-    urllib.request.urlretrieve(build_url, out)
-    with open('mango-build-number', 'w') as f:
-        f.write(str(tag.replace('-', '').lower()))
-else:
+if not build_url or not tag:
     raise SystemExit('No useful Mango build was found at all!')
                 """
                     }
                 }
 
                 // Store the sugarcrm installed image name for later usage.
-                mangoInstalledBaseImage = mangoInstalledBaseImage + ':' + readFile('mango-build-number').trim()
+                mangoInstalledBaseImage = mangoInstalledBaseImage + "-${idmRevision}:" + readFile('mango-build-number').trim()
+                mangoOIDCImage = mangoOIDCImage + "-${idmRevision}:" + readFile('mango-build-number').trim()
             }
 
             stage('Install SugarCRM') {
                 pullRequestStatus(description: 'Install SugarCRM') {
                     try {
                         mangoBuild = "mango-built"
-                        mangoInstallNet = "mango-install-net"
-                        behatTestsEnvElastic = "behat-tests-env-elastic"
 
                         container(name:'docker') {
                             // Unpack downloaded Mango build into 'sugarcrm' directory inside bootstrap.
@@ -289,19 +344,15 @@ else:
 
                             sh """
                             echo 'Installing SugarCRM.'
-                            docker network create --driver bridge ${mangoInstallNet}
-                            docker run --name=${behatTestsEnvElastic} \
-                            --network=${mangoInstallNet} -p 9200:9200 \
-                            -e "http.host=0.0.0.0" -e "transport.host=127.0.0.1" -e "xpack.security.enabled=false" \
-                            -d docker.elastic.co/elasticsearch/elasticsearch:5.4.2
                             """
 
                             withCredentials([string(credentialsId: 'SUGAR_LICENSE_KEY', variable: 'SUGAR_LICENSE_KEY')]) {
                                 sh """
                                 cd tests/docker/bootstrap/mango
                                 docker build --pull -t ${mangoBuild} .
-                                docker run --name=${mangoBuild} --network=${mangoInstallNet} \
-                                -e SUGAR_LICENSE_KEY="${env.SUGAR_LICENSE_KEY}" -p 80:80 -d ${mangoBuild}
+                                docker run --name=${mangoBuild}  \
+                                -e SUGAR_LICENSE_KEY="${env.SUGAR_LICENSE_KEY}" \
+                                -p 80:80 -d ${mangoBuild}
                                 sleep 10
 
                                 echo 'Creating image with installed SugarCRM. Image: ${mangoInstalledBaseImage}'
@@ -309,6 +360,11 @@ else:
 
                                 docker commit ${mangoBuild} ${mangoInstalledBaseImage}
                                 docker push ${mangoInstalledBaseImage}
+
+                                echo 'Creating derived OIDC image. Image: ${mangoOIDCImage}'
+                                cat Dockerfile.oidc | sed -e "s~mango-installed:latest~${mangoInstalledBaseImage}~" > Dockerfile.oidc.real
+                                docker build -t ${mangoOIDCImage} -f Dockerfile.oidc.real .
+                                docker push ${mangoOIDCImage}
                                 """
                             }
 
@@ -407,8 +463,8 @@ else:
                             -H 'cache-control: no-cache' \
                             -H 'content-type: application/json' \
                             -d '{
-                              "id": "srn:cloud:iam:eu:0000000001:app:crm:99711b76-bb31-11e8-8df0-985aeb8a5c2a",
-                              "client_name": "srn:cloud:iam:eu:0000000001:app:crm:99711b76-bb31-11e8-8df0-985aeb8a5c2a",
+                              "id": "srn:cloud:iam:eu:2000000001:app:crm:99711b76-bb31-11e8-8df0-985aeb8a5c2a",
+                              "client_name": "srn:cloud:iam:eu:2000000001:app:crm:99711b76-bb31-11e8-8df0-985aeb8a5c2a",
                               "client_secret": "mangoOIDCClientSecret",
                               "client_uri": "http://behat-tests-mango-oidc.${idmNS}",
                               "redirect_uris": ["http://localhost/consumer", "http://behat-tests-mango-oidc.${idmNS}/?module=Users&action=OAuth2CodeExchange"],
@@ -426,8 +482,8 @@ else:
                             -H 'cache-control: no-cache' \
                             -H 'content-type: application/json' \
                             -d '{
-                              "id": "srn:cloud:iam:eu:0000000001:app:native:806bfb76-ee57-43ea-9022-aa91e6b6c617",
-                              "client_name": "srn:cloud:iam:eu:0000000001:app:native:806bfb76-ee57-43ea-9022-aa91e6b6c617",
+                              "id": "srn:cloud:iam:eu:2000000001:app:native:806bfb76-ee57-43ea-9022-aa91e6b6c617",
+                              "client_name": "srn:cloud:iam:eu:2000000001:app:native:806bfb76-ee57-43ea-9022-aa91e6b6c617",
                               "client_secret": "NativeOIDCClientSecret",
                               "client_uri": "http://behat-tests-mango-oidc.${idmNS}",
                               "redirect_uris": ["http://localhost/consumer", "http://behat-tests-mango-oidc.${idmNS}/?module=Users&action=OAuth2CodeExchange"],
@@ -437,7 +493,7 @@ else:
                             }' \
                             """
 
-                            def mangoBasicAuth = valueFromSh("echo -n 'srn%3Acloud%3Aiam%3Aeu%3A0000000001%3Aapp%3Acrm%3A99711b76-bb31-11e8-8df0-985aeb8a5c2a:mangoOIDCClientSecret' | base64 -w 0 -")
+                            def mangoBasicAuth = valueFromSh("echo -n 'srn%3Acloud%3Aiam%3Aeu%3A2000000001%3Aapp%3Acrm%3A99711b76-bb31-11e8-8df0-985aeb8a5c2a:mangoOIDCClientSecret' | base64 -w 0 -")
 
                             def mangoToken = valueFromSh(
                                 """
@@ -482,7 +538,7 @@ else:
                                   -H 'authorization: Bearer ${iamOperatorToken}' \
                                   -H 'cache-control: no-cache' \
                                   -H 'content-type: application/x-www-form-urlencoded' \
-                                  -d '{"actions":["get"],"effect":"allow","id":"mangoOIDCKeySet","subjects":["srn:cloud:iam:eu:0000000001:app:crm:99711b76-bb31-11e8-8df0-985aeb8a5c2a"],"resources":["rn:hydra:keys:mangoOIDCKeySet:private","rn:hydra:keys:mangoOIDCKeySet:public"]}' \
+                                  -d '{"actions":["get"],"effect":"allow","id":"mangoOIDCKeySet","subjects":["srn:cloud:iam:eu:2000000001:app:crm:99711b76-bb31-11e8-8df0-985aeb8a5c2a"],"resources":["rn:hydra:keys:mangoOIDCKeySet:private","rn:hydra:keys:mangoOIDCKeySet:public"]}' \
                             """
                             )
                             echo policies
@@ -570,7 +626,7 @@ else:
                             kubectl --namespace ${idmNS} create -f k8s/pipeline/mango/saml-same-window-service.yaml
 
                             cat k8s/pipeline/mango/oidc-deployment.yaml \
-                            | sed -e "s~%%MANGO_INSTALLED_IMAGE%%~${mangoInstalledBaseImage}~g" \
+                            | sed -e "s~%%MANGO_INSTALLED_IMAGE%%~${mangoOIDCImage}~g" \
                             | sed -e "s~%%OP_SERVICE_URL%%~http://hydra.${idmIamNS}~g" \
                             | sed -e "s~%%IDP_SERVICE_URL%%~http://idp.${idmIamNS}~g" \
                             | sed -e "s~%%IDM_NAMESPACE%%~${idmNS}~g" \
@@ -615,6 +671,10 @@ else:
                                 kubectl --namespace ${idmIamNS} exec -i \$(kubectl --namespace ${idmIamNS} get pods | grep 'idp-' | cut -d' ' -f 1) date
                                 echo "Hydra time: "
                                 kubectl --namespace ${idmIamNS} exec -i \$(kubectl --namespace ${idmIamNS} get pods | grep 'hydra' | cut -d' ' -f 1) date
+                                echo "Mango SAML time: "
+                                kubectl --namespace ${idmNS} exec -i \$(kubectl --namespace ${idmNS} get pods | grep 'behat-tests-mango-saml-base' | cut -d' ' -f 1) date
+                                echo "SAML server time: "
+                                kubectl --namespace ${idmNS} exec -i \$(kubectl --namespace ${idmNS} get pods | grep 'saml-server' | cut -d' ' -f 1) date
 
                                 kubectl --namespace ${idmNS} exec -i idm -- curl -XGET http://behat-tests-mango
                                 kubectl --namespace ${idmNS} exec -i idm -- curl -XGET http://behat-tests-mango-ldap
@@ -629,7 +689,6 @@ else:
 
                                 kubectl --namespace ${idmNS} exec -i idm -- curl -XGET http://hydra.${idmIamNS}/.well-known/openid-configuration
                                 kubectl --namespace ${idmNS} exec -i idm -- curl -XGET http://idp.${idmIamNS}
-                                
                                 """
                                 if (extendedTestsEnabled) {
                                     sh """
@@ -642,9 +701,11 @@ else:
                                 default: {runBehatSuite('default', 'http://behat-tests-mango', 'selenium', 'not-used')},
                                 ldap: {runBehatSuite('ldap', 'http://behat-tests-mango-ldap', 'selenium-ldap', 'not-used')},
                                 saml: {runBehatSuite('saml', 'http://behat-tests-mango-saml-base', 'selenium', 'not-used')},
-                                'oidc+portal+soap': {runBehatSuite('oidc', "http://behat-tests-mango-oidc.${idmNS}", 'selenium-oidc', "http://behat-tests-mango-oidc.${idmNS}")
-                                                runBehatSuite('portal', "http://behat-tests-mango-oidc.${idmNS}", 'selenium-oidc', 'not-used')
-                                                runBehatSuite('soap', 'http://multiple-instances-are-used', 'selenium-oidc', 'not-used')},
+                                'oidc+portal+soap': {
+                                    runBehatSuite('portal', "http://behat-tests-mango-oidc.${idmNS}", 'selenium-oidc', 'not-used')
+                                    runBehatSuite('soap', 'http://multiple-instances-are-used', 'selenium-oidc', 'not-used')
+                                    runBehatSuite('oidc', "http://behat-tests-mango-oidc.${idmNS}", 'selenium-oidc', "http://behat-tests-mango-oidc.${idmNS}")
+                                },
                                 rest: {runBehatSuite('rest', "http://We-dont-use-mango-there", 'selenium-oidc', "http://idp.${idmIamNS}")},
                                 LoginService: {runBehatSuite('LoginService', "http://We-dont-use-mango-there", 'selenium-oidc', 'not-used')}
                             )
@@ -752,9 +813,9 @@ def iamOperatorScm() {
 // Removes previously created containers and networks used for Mango installation.
 def cleanupMangoInstall() {
     sh """
+    docker ps | grep ${mangoBuild} && docker stop ${mangoBuild} || echo "Skip..."
     docker ps -a | grep ${mangoBuild} && docker rm -fv ${mangoBuild} || echo "Skip..."
-    docker ps -a | grep ${behatTestsEnvElastic} && docker rm -fv ${behatTestsEnvElastic} || echo "Skip..."
-    docker network ls | grep ${mangoInstallNet} && docker network rm ${mangoInstallNet} || echo "Skip..."
+    docker images | grep ${mangoBuild} && docker rmi -f ${mangoBuild} || echo "Skip..."
     """
 }
 
@@ -783,8 +844,14 @@ def runBehatSuite(suite, mangoUrl, seleniumHost, restUrl) {
     if (extendedTestsEnabled) {
         testRunCommand = testRunCommand + ' -x'
     }
-    testRunCommand = testRunCommand + ' --format html -vv'
-    sh "${testRunCommand}"
+    
+    def retryStep = 30
+    def retryCounter = 0
+    retry(5) {
+        sleep (retryStep * retryCounter + new Random().nextInt(30))
+        retryCounter++
+        sh "${testRunCommand}"
+    }
 }
 
 // Collects all logs and prints them.
@@ -823,6 +890,16 @@ def collectLogs() {
         sh """
         echo "Mango ${kv[0]} mysql error_log"
         kubectl --namespace ${idmNS} exec -i \$(kubectl --namespace ${idmNS} get pod -l "app=${kv[1]}" -o jsonpath='{.items[0].metadata.name}') cat /var/log/mysql/error.log || echo "Skip..."
+        echo "\n\n"
+        """
+        sh """
+        echo "Mango ${kv[0]} container logs"
+        kubectl logs --namespace ${idmNS} \$(kubectl --namespace ${idmNS} get pod -l "app=${kv[1]}" -o jsonpath='{.items[0].metadata.name}') || echo "Skip..."
+        echo "\n\n"
+        """
+        sh """
+        echo "Mango ${kv[0]} failed container logs"
+        kubectl logs --namespace ${idmNS} \$(kubectl --namespace ${idmNS} get pod -l "app=${kv[1]}" -o jsonpath='{.items[0].metadata.name}') --previous || echo "Skip..."
         echo "\n\n"
         """
     }

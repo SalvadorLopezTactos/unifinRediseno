@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Endret',
     'LBL_DELETED' => 'Slettet',
     'LBL_REVENUELINEITEMS' => 'Omsetningsposter',
+    'LBL_ENTRY_SOURCE' => 'Notatkilde',
+    'LBL_SOURCE_EXTERNAL' => 'Ekstern',
+    'LBL_SOURCE_INTERNAL' => 'Intern',
 
     // Help Text
     // List View Help Text

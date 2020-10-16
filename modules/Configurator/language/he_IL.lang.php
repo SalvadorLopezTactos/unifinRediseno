@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'יחס הממדים של התמונה אמור להיות בין 1:1 ל-10:1. גודל התמונה ישתנה.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'יחס הממדים של התמונה חייב להיות בין 3:1 ל-20:1. העלה קובץ חדש עם יחס זה.',
     'ERR_ALERT_FILE_UPLOAD' => 'שגיאה במהלך העלאת התמונה.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'לא ניתן ליצור ספריית תמונות',
     'LBL_LOGGER'=>'הגדרות מתעד',
 	'LBL_LOGGER_FILENAME'=>'שם קובץ תיעוד',
-	'LBL_LOGGER_FILE_EXTENSION'=>'הרחבה',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'גודל תיעוד מרבי',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'תבנית תאריך ברירת מחדל',
 	'LBL_LOGGER_LOG_LEVEL'=>'רמת תיעוד',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'הגב על הגדרות יומן הרישום',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'מספר התווים המרבי להצגה בכל רשומת תגובה',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

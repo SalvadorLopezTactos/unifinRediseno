@@ -14,15 +14,15 @@ $mod_strings = array (
     'LBL_DASHBOARD_MODULE' => 'モジュール',
     'LBL_MODULE_NAME' => 'ダッシュボード',
     'LBL_MODULE_NAME_SINGULAR' => 'ダッシュボード',
-    'LBL_VIEW' => 'ビュー',
-    'LBL_MANAGE_DASHBOARDS' => 'ダッシュ ボードを管理',
+    'LBL_VIEW' => '一覧',
+    'LBL_MANAGE_DASHBOARDS' => 'ダッシュボードを管理',
     'NTC_DELETE_CONFIRMATION_MULTIPLE' => '本当に選択したレコードを削除しますか？<br>' .
-        'これらのレコードを共有したユーザーも、アクセスできなくなります。',
+        'これらのレコードを共有したユーザも、アクセスできなくなります。',
     'LBL_DELETE_DASHBOARD_CONFIRM' => '本当にダッシュボード {{name}} を削除しますか？<br>' .
-        'これらのダッシュボードを共有したユーザーも、アクセスできなくなります。',
+        'これらのダッシュボードを共有したユーザも、アクセスできなくなります。',
     'LBL_DELETE_DASHBOARD_SUCCESS' => 'ダッシュボード "{{name}}" は削除されました。',
-    'LBL_DEFAULT_DASHBOARD' => 'デフォルトのダッシュ ボード',
-    'LBL_FILTER_BY_MODULE' => '{{module}} モジュールのすべてのダッシュ ボード',
-    'LBL_FILTER_BY_MODULE_AND_VIEW' => '{{module}} モジュール {{view}} ビューのすべてのダッシュ ボード',
+    'LBL_DEFAULT_DASHBOARD' => 'デフォルトのダッシュボード',
+    'LBL_FILTER_BY_MODULE' => '{{module}} モジュールのすべてのダッシュボード',
+    'LBL_FILTER_BY_MODULE_AND_VIEW' => '{{module}} モジュール {{view}} ビューのすべてのダッシュボード',
     'LBL_COPY_OF' => '{{{name}}} のコピー',
 );

@@ -269,39 +269,7 @@ class FontManager{
     private function getFilenameShort(){
         return preg_replace("/.php$/i", "",$this->filename);
     }
-    /**
-     * This method delete all the files related to the font define in the filename attribute.
-     * @return boolean true on success
-     */
-    public function deleteFont(){
-        global $current_user;
-        if(!$current_user->isDeveloperForAnyModule()){
-            sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
-        }
-        $this->loadFontFile();
-        if($this->font_type == "core" || $this->fontPath == K_PATH_FONTS){
-            array_push($this->errors, translate("ERR_DELETE_CORE_FILE","Configurator"));
-             return false;
-        }
-        if(file_exists($this->fontPath.$this->filename)){
-            if(is_writable($this->fontPath.$this->filename)){
-                unlink($this->fontPath.$this->filename);
-                if(file_exists($this->fontPath.$this->getFilenameShort().".ctg.z") && is_writable($this->fontPath.$this->getFilenameShort().".ctg.z")){
-                    unlink($this->fontPath.$this->getFilenameShort()."ctg.z");
-                }
-                if(file_exists($this->fontPath.$this->getFilenameShort().".z") && is_writable($this->fontPath.$this->getFilenameShort().".z")){
-                    unlink($this->fontPath.$this->getFilenameShort().".z");
-                }
-                $this->clearCachedFile();
-                return true;
-            }else{
-                array_push($this->errors, $this->fontPath.$this->filename . " " . translate("ERR_FONT_NOT_WRITABLE","Configurator"));
-            }
-        }else{
-            array_push($this->errors, $this->fontPath . " " . translate("ERR_FONT_FILE_DO_NOT_EXIST","Configurator"));
-        }
-        return false;
-    }
+
     /**
      * This method add a font to SugarCRM from a font file and a metric file using MakeFont()
      * @param $font_file string

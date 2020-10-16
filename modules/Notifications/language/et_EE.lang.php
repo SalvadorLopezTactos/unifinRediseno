@@ -50,4 +50,6 @@ $mod_strings = array(
     'LBL_PARENT_ID' => 'Ema ID',
     'LBL_READ' => 'Loetud',
     'LBL_UNREAD' => 'Lugemata',
+    'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'Teid mainis kasutaja',
+    'LBL_YOU_HAVE_BEEN_MENTIONED' => 'Teid on mainitud',
 );

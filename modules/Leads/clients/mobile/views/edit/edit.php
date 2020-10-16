@@ -41,6 +41,7 @@ $viewdefs['Leads']['mobile']['view']['edit'] = array(
                 'phone_mobile',
                 'phone_home',
                 'email',
+                'tag',
                 'primary_address_street',
                 'primary_address_city',
                 'primary_address_state',

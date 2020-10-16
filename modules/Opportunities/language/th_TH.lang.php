@@ -15,6 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'แดชบอร์ดรายการโอกาส',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกโอกาส',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'รายละเอียดโอกาสทางการขาย',
 
     'LBL_MODULE_NAME' => 'โอกาสทางการขาย',
     'LBL_MODULE_NAME_SINGULAR' => 'โอกาสทางการขาย',
@@ -25,6 +26,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => 'ชื่อโอกาสทางการขาย:',
     'LBL_OPPORTUNITY' => 'โอกาสทางการขาย:',
     'LBL_NAME' => 'ชื่อโอกาสทางการขาย',
+    'LBL_TIME' => 'เวลา',
     'LBL_INVITEE' => 'ที่อยู่ติดต่อ',
     'LBL_CURRENCIES' => 'สกุลเงิน',
     'LBL_LIST_OPPORTUNITY_NAME' => 'ชื่อ',
@@ -75,6 +77,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'ประเภท:',
     'LBL_CAMPAIGN' => 'แคมเปญ:',
     'LBL_NEXT_STEP' => 'ขั้นตอนถัดไป:',
+    'LBL_SERVICE_START_DATE' => 'Service Start Date',
     'LBL_LEAD_SOURCE' => 'ที่มาของผู้สนใจ',
     'LBL_SALES_STAGE' => 'ขั้นตอนการขาย',
     'LBL_SALES_STATUS' => 'สถานะ',
@@ -142,6 +145,16 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE_FORECAST' => 'ประมาณการ',
     'LBL_WORKSHEET' => 'เวิร์กชีท',
 
+    'LBL_RENEWAL' => 'การต่ออายุ',
+    'LBL_RENEWAL_OPPORTUNITIES' => 'การต่ออายุโอกาสทางการขาย',
+    'LBL_RENEWAL_PARENT' => 'โอกาสทางการขายหลัก',
+    'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'ID หลักของการต่ออายุ',
+    'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
+
+    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
+    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
+    'LBL_WIDGET_AMOUNT' => 'Amount',
+
     'TPL_RLI_CREATE' => 'โอกาสทางการขายต้องมีรายการบรรทัดรายได้ที่เกี่ยวข้อง',
     'TPL_RLI_CREATE_LINK_TEXT' => 'สร้างรายการบรรทัดรายได้',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'รายการบรรทัดการเสนอราคา',
@@ -152,6 +165,7 @@ $mod_strings = array(
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'คุณไม่สามารถลบโอกาสทางการขายที่มีรายการบรรทัดรายได้ที่ปิด',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'ระเบียนที่เลือกไว้บางรายการมีรายการบรรทัดรายได้ที่ปิด และไม่สามารถลบได้',
     'LBL_INCLUDED_RLIS' => 'จำนวนรายการบรรทัดรายได้ที่รวม',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'การเสนอราคา',
 
@@ -186,7 +200,7 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'หลังจากที่คุณเริ่มต้นการเปลี่ยนแปลงนี้ ระเบียนรายการบรรทัดรายได้จะได้รับการสร้างขึ้นสำหรับ {{module_name}} ที่มีอยู่แล้วแต่ละรายการในพื้นหลัง เมื่อรายการบรรทัดรายได้เสร็จสมบูรณ์และใช้ได้ จะมีการส่งการแจ้งเตือนไปยังที่อยู่อีเมลในโปรไฟล์ผู้ใช้ของคุณ โปรดทราบว่าอินสแตนซ์ของคุณจะต้องมีการกำหนดค่าให้ส่งอีเมลผ่านทาง การดูแลระบบ > การตั้งค่าอีเมล เพื่อให้ระบบสามารถส่งอีเมลได้',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'โมดูล {{plural_module_name}} ให้คุณสามารถติดตามการขายแต่ละรายการได้จากต้นจนจบ บันทึก {{module_name}} แต่ละรายการจะแสดงทัศนวิสัยของการขาย และรวมถึงข้อมูลการขายที่เกี่ยวข้อง พร้อมด้วยบันทึกสำคัญต่าง ๆ ที่เกี่ยวข้องด้วย เช่น {{quotes_module}}, {{contacts_module}} เป็นต้น {{module_name}} มักจะดำเนินการผ่านขั้นตอนการขายหลากหลายขั้นตอนจนกว่ามันจะได้รับการทำเครื่องหมายว่า "ปิดการขายสำเร็จ" หรือ "ปิดการขายไม่สำเร็จ" {{plural_module_name}} สามารถพลังการขายมีมากขึ้นไปอีกโดยการใช้โมดูล {{forecasts_singular_module}} ของ Sugar เพื่อทำความเข้าใจ และพยากรณ์เทรนด์การขาย พร้อมทั้งมุ่งเน้นไปยังโควต้าการขายที่ประสบความสำเร็จ',
+    'LBL_HELP_RECORDS' => 'โมดูล {{plural_module_name}} ให้คุณสามารถติดตามการขายแต่ละรายการได้จากต้นจนจบ บันทึก {{module_name}} แต่ละรายการจะแสดงทัศนวิสัยของการขาย และรวมถึงข้อมูลการขายที่เกี่ยวข้อง พร้อมด้วยบันทึกสำคัญต่าง ๆ ที่เกี่ยวข้องด้วย เช่น {{quotes_module}}, {{contacts_module}} เป็นต้น {{module_name}} มักจะดำเนินการผ่านขั้นตอนการขายหลากหลายขั้นตอนจนกว่ามันจะได้รับการทำเครื่องหมายว่า "ปิดการขายสำเร็จ" หรือ "ปิดการขายไม่สำเร็จ" {{plural_module_name}} สามารถเพิ่มพลังการขายมีมากขึ้นไปอีกโดยการใช้โมดูล {{forecasts_singular_module}} ของ Sugar เพื่อทำความเข้าใจ และพยากรณ์เทรนด์การขาย พร้อมทั้งมุ่งเน้นไปยังโควต้าการขายที่ประสบความสำเร็จ',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'โมดูล {{plural_module_name}} ให้คุณสามารถติดตามการขายแต่ละรายการได้จากต้นจนจบ บันทึก {{module_name}} แต่ละรายการจะแสดงทัศนวิสัยของการขาย และรวมถึงข้อมูลการขายที่เกี่ยวข้อง พร้อมด้วยบันทึกสำคัญต่าง ๆ ที่เกี่ยวข้องด้วย เช่น {{quotes_module}}, {{contacts_module}} เป็นต้น 
@@ -216,4 +230,6 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'แสดงโอกาสทางการขายสิบอันดับสูงสุดในแผนภูมิฟอง',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'โอกาสทางการขายของฉัน',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "โอกาสทางการขายของทีม",
+
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
 );

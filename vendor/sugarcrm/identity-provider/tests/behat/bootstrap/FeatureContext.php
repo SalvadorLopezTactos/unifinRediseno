@@ -134,7 +134,7 @@ class FeatureContext extends BehatFormatterContext implements PageObjectAware
     {
         $condition = '!document.querySelector(".alert-wrapper .alert-process .loading") '
             . '&& !document.querySelector("span[sfuuid]:empty:not([class])");';
-        $this->getSession()->wait(20000, $condition);
+        $this->getSession()->wait(40000, $condition);
     }
 
     /**

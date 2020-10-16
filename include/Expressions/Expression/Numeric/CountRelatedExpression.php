@@ -65,6 +65,10 @@ class CountRelatedExpression extends NumericExpression
             var link = this.context.model.get(linkField);
             if (link.count) {
                 current_value = link.count;
+            // otherwise, check if target field is set in context model,
+            // which may be called by a processes dashlet
+            } else if (this.context.model.has(target)) {
+                current_value = this.context.model.get(target);
             }
         }
 

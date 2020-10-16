@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Προηγούμενο',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'ΠΡΟΕΙΔΟΠΟΙΗΣΗ: Εάν αλλάξετε την βασική ενότητα, όλα τα πεδία που έχουν ήδη προστεθεί στο πρότυπο θα πρέπει να μετακινηθούν.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Εδώ είναι το αρχείο που ζητήσατε (μπορείτε να αλλάξετε αυτό το κείμενο)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Προσφορά',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Το πρότυπο αυτό χρησιμοποιείται για την εκτύπωση Προσφοράς σε μορφή PDF.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'προσφορά',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Προσφορά (με υπηρεσίες)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Αυτό το πρότυπο χρησιμοποιείται για την εκτύπωση μίας προσφοράς, συμπεριλαμβανομένων των πληροφοριών υπηρεσίας, σε μορφή PDF.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'servicequote',
+
   'LBL_TPL_INVOICE_NAME' => 'Τιμολόγιο',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Το πρότυπο αυτό χρησιμοποιείται για την εκτύπωση τιμολογίου σε μορφή PDF.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'τιμολόγιο',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Τιμολόγιο (με υπηρεσίες)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Αυτό το πρότυπο χρησιμοποιείται για την εκτύπωση ενός τιμολογίου, συμπεριλαμβανομένων των πληροφοριών υπηρεσίας, σε μορφή PDF.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'serviceinvoice',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Αριθμός προσφοράς:',
   'LBL_TPL_SALES_PERSON' => 'Πωλητής:',
   'LBL_TPL_VALID_UNTIL' => 'Ισχύει μέχρι:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Αριθμός Παρτίδας',
   'LBL_TPL_PRODUCT' => 'Εισηγμένα Στοιχεία Γραμμής',
   'LBL_TPL_RLI' => 'Γραμμή Στοιχείων Εσόδων',
+  'LBL_TPL_DURATION' => 'Διάρκεια',
+  'LBL_TPL_DURATION_STARTS' => 'Έναρξη:',
+  'LBL_TPL_DURATION_ENDS' => 'Λήξη:',
   'LBL_TPL_LIST_PRICE' => 'Τιμοκατάλογος',
   'LBL_TPL_UNIT_PRICE' => 'Τιμή Μονάδας',
   'LBL_TPL_EXT_PRICE' => 'Εξωτ.Τιμή',

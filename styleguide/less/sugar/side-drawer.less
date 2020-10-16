@@ -1,0 +1,36 @@
+/* SIDE DRAWER
+  ----------------*/
+
+.side-drawer {
+  position: fixed;
+  left: 25%;
+  right: 0;
+  display: none;
+  z-index: @zindexHeaderpane + 1;
+
+  .drawer-content {
+    background-color: @grayLighter;
+    border-radius: 3px;
+    border-left: 1px solid fade(@black, 10%);
+    height: 100%;
+  }
+
+  .close-drawer {
+    width: 30px;
+    left: -25px;
+    top: 10px;
+    position: absolute;
+
+    .btn {
+      background: @grayLighter;
+      border-right: none;
+      margin-left: 0;
+    }
+  }
+
+  .dashboard {
+    border-left: none;
+    overflow-x: none;
+    overflow-y: visible;
+  }
+}

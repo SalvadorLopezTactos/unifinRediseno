@@ -37,7 +37,7 @@ document.getElementById('progress_div').innerHTML = '{sugar_getimage name="bar_l
 	<input type="hidden" id="return_action" name="return_action" value="ReportsWizardType">
 	<input type="hidden" name="run_query" value="0">
 	<input type="hidden" name="save_and_run_query" value="0">
-	<input type="hidden" name="current_step" value="{$current_step}">
+    <input type="hidden" name="current_step" value="{$current_step|escape:'html':'UTF-8'}">
 	<input type="hidden" name="record" value="{$record}">
 	<input type="hidden" name="save_report" value="0">
 	<input type="hidden" name="is_delete" value="0">

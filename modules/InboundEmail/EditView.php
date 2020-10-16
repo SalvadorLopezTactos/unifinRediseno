@@ -210,7 +210,7 @@ if ($focus->mailbox_type == 'template') {
 	$xtpl = new XTemplate('modules/InboundEmail/EditView.html');
 }
 // if no IMAP libraries available, disable Save/Test Settings
-if(!function_exists('imap_open')) {
+if (!extension_loaded('imap')) {
 	$xtpl->assign('IE_DISABLED', 'DISABLED');
 }
 // standard assigns

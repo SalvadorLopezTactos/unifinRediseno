@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'E-mailuri: Contacte',
     'LBL_EMAILS_LEADS_REL' => 'Emails:Piste de urmarire',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'E-mailuri: Oportunităţi',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'E-mailuri: Note',
     'LBL_EMAILS_PROJECT_REL' => 'E-mail-uri: Proiect',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'E-mail-uri: Sarcină proiecte',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'de la',
     'LBL_REPLY_TO' => 'Raspunde catre',
     'LBL_HTML_BODY' => 'Corp HTLM',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'Recipiente',
     'LBL_LEADS_SUBPANEL_TITLE' => 'Antete',
     'LBL_MESSAGE_SENT' => 'Mesaj trimis',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'Răspundeți la Id',
     'LBL_TYPE' => 'Tip',
     'LBL_EMAIL_STATE' => 'Stare',
+    'LBL_EMAIL_DIRECTION' => 'Direcție',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'Va rugam verificati!',

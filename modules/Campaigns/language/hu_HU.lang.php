@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Alapértelmezett céllista nem található',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nem található bejegyzés',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'A bejegyzések feldolgozva',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Követő neve:',
   'LBL_EDIT_TRACKER_URL'=>'Követő URL:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'Nincsenek optimális értékek mentve bejövő email fiókjához.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Kérem, ellenőrizze a bejövő email beállításokat!',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} ajánlás, amely a kampány során jött létre, törlésre került.',
+    'LBL_PROSPECT_LIST' => 'Cél lista',
 );
 
 

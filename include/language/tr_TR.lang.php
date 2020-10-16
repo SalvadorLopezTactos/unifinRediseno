@@ -43,6 +43,8 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'Tahmin Çalışma Sayfası',
     'ForecastManagerWorksheets' => 'Satış Tahmini Yönetici Çalışma Sayfası',
     'MergeRecords'=>'Kayıtları Birleştir',
+      'VisualPipeline'=>'Görsel Satış Olasılığı',
+      'ConsoleConfiguration' => 'Konsol Yapılandırması',
     'Quotas' => 'Kotalar',
     'Teams' => 'Takımlar',
     'TeamNotices' => 'Takım Bildirimleri',
@@ -75,6 +77,11 @@ $app_list_strings = array (
     'pmse_Project' => 'Süreç Tanımı',
     'pmse_Business_Rules' => 'İş Kuralını İşlet',
     'pmse_Emails_Templates' => 'E-Posta Şablonlarını İşle',
+    'BusinessCenters' => 'İş Merkezleri',
+    'Shifts' => 'Shifts',
+    'ShiftExceptions' => 'Shift Exceptions',
+    'Purchases' => 'Purchases',
+    'PurchasedLineItems' => 'Purchased Line Items',
     'WorkFlow' => 'İş Akış Tanımları',
     'EAPM' => 'Harici Hesaplar',
     'Worksheet' => 'Çalışma Sayfası',
@@ -116,6 +123,8 @@ $app_list_strings = array (
     'DataPrivacy' => 'Veri Gizliliği',
     'ReportSchedules' => 'Planları Raporla',
     'CommentLog' => 'Yorum günlüğü',
+    'Holidays' => 'Tatiller',
+    'ChangeTimers' => 'Zamanlayıcıları Değiştirin',
   ),
 
     'moduleIconList' =>
@@ -131,6 +140,8 @@ $app_list_strings = array (
         'Tasks' => 'Görev',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'DP',
+        'BusinessCenters' => 'İM',
+        'PurchasedLineItems' => 'PL',
     ),
 
   'moduleListSingular' =>
@@ -150,6 +161,8 @@ $app_list_strings = array (
     'Calendar' => 'Takvim',
     'Leads' => 'Potansiyel',
     'Manufacturers' => 'Üretici',
+    'VisualPipeline' => 'GörselSatışOlasılığı',
+    'ConsoleConfiguration' => 'KonsolYapılandırması',
     'Contracts'=>'Kontrat',
     'Quotes' => 'Teklif',
     'Products' => 'Teklif Kalemi',
@@ -196,6 +209,11 @@ $app_list_strings = array (
     'pmse_Project' => 'Süreç Tanımı',
     'pmse_Business_Rules' => 'İş Kuralını İşlet',
     'pmse_Emails_Templates' => 'İşlem E-postası Şablonu',
+    'BusinessCenters' => 'İş Merkezi',
+    'Shifts' => 'Shift',
+    'ShiftExceptions' => 'Shift Exceptions',
+    'Purchases' => 'Purchase',
+    'PurchasedLineItems' => 'Purchased Line Item',
     'WorkFlow' => 'İş Akışı',
     'EAPM' => 'Harici Hesap',
     'Worksheet' => 'Çalışma Sayfası',
@@ -224,7 +242,7 @@ $app_list_strings = array (
     'Comments' => 'Açıklama',
     'CommentLog' => 'Yorum günlüğü',
     'Currencies' => 'Para Birimi',
-    'ProductTemplates' => 'Ürün Şablonu:',
+    'ProductTemplates' => 'Product',
     'ProductTypes' => 'Ürün Tipi',
     'Shippers' => 'Nakliyatçı',
     'Subscriptions' => 'Abonelik',
@@ -236,6 +254,8 @@ $app_list_strings = array (
     'EmailParticipants' => 'E-posta Katılımcısı',
     'DataPrivacy' => 'Veri Gizliliği',
     'ReportSchedules' => 'Planı Raporla',
+    'Holidays' => 'Tatil',
+    'ChangeTimers' => 'Zamanlayıcıyı Değiştirin',
   ),
 
 /*
@@ -321,6 +341,11 @@ $app_list_strings = array (
     'T3' => 'Aşama 3',
     'T4' => 'Aşama 4',
   ),
+  'generate_purchase_dom' => [
+      'Yes' => 'Yes',
+      'No' => 'No',
+      'Completed' => 'Completed',
+  ],
   'lead_source_default_key' => 'Kendini Oluşturulan',
   'lead_source_dom' =>
   array (
@@ -589,6 +614,12 @@ $app_list_strings = array (
     'RegularUser' => 'Normal Kullanıcı',
     'Administrator' => 'Yönetici',
   ),
+  'license_type_dom' =>
+    array (
+        'CURRENT' => 'Mevcut Ürün',
+        'SUGAR_SERVE' => 'Sugar Hizmeti',
+        'SUGAR_SELL' => 'Sugar Satışı',
+    ),
   'user_status_dom' =>
   array (
     'Active' => 'Aktif',
@@ -693,6 +724,8 @@ $app_list_strings = array (
     'Meetings' => 'Toplantı',
     'Calls' => 'Tel.Araması',
       'KBContents' => 'Bilgi Tabanı',
+      'PurchasedLineItems' => 'Purchased Line Item',
+      'Purchases' => 'Purchase',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Hesap',
@@ -722,7 +755,13 @@ $app_list_strings = array (
     'Prospects' => 'Hedef',
       'KBContents' => 'Bilgi Tabanı',
       'Notes' => 'Not',
+    'PurchasedLineItems' => 'Purchased Line Item',
+    'Purchases' => 'Purchase',
   ),
+
+  'changetimer_parent_type' => [
+      'Cases' => 'Talep',
+  ],
 
   'product_status_default_key' => 'Gönderildi',
   'product_status_quote_key' => 'Teklifler',
@@ -883,7 +922,8 @@ $app_list_strings = array (
     'Forum' => 'Forum',
     'Web' => 'Web',
     'InboundEmail' => 'E-Posta',
-    'Twitter' => 'Twitter'
+    'Twitter' => 'Twitter',
+    'Portal' => 'Portal',
   ),
     'dataprivacy_type_default_key' => '',
     'dataprivacy_type_dom' => array(
@@ -916,6 +956,11 @@ $app_list_strings = array (
         'Medium' => 'Orta',
         'High' => 'Yüksek',
     ),
+    'business_day_status_dom' => [
+        'Open' => 'Açık',
+        'Open 24 Hours' => '24 Saat Açık',
+        'Closed' => 'Kapalı',
+    ],
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -1145,6 +1190,13 @@ $app_list_strings = array (
     'dom_email_states' => array(
         'Draft' => 'Taslak',
         'Archived' => 'Arşivlendi',
+    ),
+
+    'dom_email_direction' => array(
+        'Unknown' => 'Bilinmeyen',
+        'Outbound' => 'Giden',
+        'Inbound' => 'Gelen',
+        'Internal' => 'Dahili',
     ),
 
     'scheduler_status_dom' =>
@@ -2096,6 +2148,11 @@ $app_list_strings = array (
         240000 => 'Her 4 dakikada',
         300000 => 'Her 5 dakikada',
   ),
+    'first_response_met_sla_dom'=> [
+        '' => '',
+        'Yes' => 'Evet',
+        'No' => 'Hayır',
+    ],
     'forecasts_chart_options_group' => array(
         'forecast' => 'Satış Tahminimde',
         'sales_stage' => 'Satış Aşaması',
@@ -2123,6 +2180,7 @@ $app_list_strings = array (
         'record' => 'Kayıt',
         'records' => 'Liste',
         'activities' => 'Aktivite Akışı',
+        'multi-line' => 'Çok Satırlı Liste',
     ),
     'reportschedule_time_interval_dom' => array(
         '3600' => 'Saat başı',
@@ -2133,6 +2191,23 @@ $app_list_strings = array (
         '1209600' => 'Her 2 Haftada',
         '2419200' => 'Her 4 Haftada',
     ),
+    'pipeline_records_per_column' => array(
+        '10' => '10',
+        '15' => '15',
+        '20' => '20',
+    ),
+    //Service Duration
+    'service_duration_unit_dom' =>
+        array (
+            'year' => 'Yıl(lar)',
+            'month' => 'Ay(lar)',
+            'day' => 'Gün(ler)',
+        ),
+        'shift_exception_type_dom' => [
+            'time_off' => 'Time Off',
+            'event' => 'Event',
+            'other' => 'Other',
+        ],
 );
 
 $app_strings = array (
@@ -2144,7 +2219,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Bağlantıyı İzleyin',
   'LBL_TOGGLE_VISIBILITY' => 'Görünürlüğü Değiştir', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivite Akışı',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2020 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar ve 3-D Küp, SugarCRM Inc.&#39;in tescilli ticari markalarıdır. '.
         'Bu üründe kullanılan veya görünen diğer tüm şirket ve ürün adları, ilişkili olan '.
         'SugarCRM ®, Sugar Enterprise ™ ve Sugar ™ SugarCRM A.Ş. ticari markalarıdır',
@@ -2500,6 +2575,7 @@ $app_strings = array (
 
     'LBL_EMAIL_NO'                          => 'Hayır',
     'LBL_EMAIL_NOT_SENT'                    => 'Sistem talebinizi yerine getiremiyor. Lütfen sistem yöneticisine başvurun.',
+    'LBL_INSERT_TO_USER_PWD_FAILED'         => 'Could not insert in users_password_link.',
 
     'LBL_EMAIL_OK'                          => 'Tamam',
     'LBL_EMAIL_ONE_MOMENT'                  => 'Bir dakika lütfen...',
@@ -2718,8 +2794,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'İçeriğin dışarı aktarılabilmesi için aktif bir oturum gerekmektedir.',
     'ERR_NO_HEADER_ID' => 'Bu özellik bu temada mevcut değil.',
     'ERR_NOT_ADMIN' => "Sistem Yönetimi Fonksiyonlarına izin verilmemiş erişim.",
-    'ERR_DISABLED_FOR_IDM_MODE' => 'Şifre Yönetimi, sadece Bulut Ayarlarında kullanılabilir.',
-    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE' =>
+        'Şifre Yönetimi, sadece <a href="%s" target="_blank">Cloud Ayarlarında</a> kullanılabilir.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Salt okunur dosyalarda değişiklik yapmak istiyorsanız lütfen Sugar yöneticinizle iletişime geçin.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Doldurulması zorunlu alanlar eksik:',
@@ -2749,6 +2825,7 @@ $app_strings = array (
     'ERR_DB_VERSION' => 'Sugar CRM {0} dosyaları yalnızca Sugar CRM {1} Veritabanı ile kullanılabilir.',
     'ERR_DB_QUERY' => '{0}: Sorgu başarısız: {1}',
     'ERR_UW_RETIRED' => 'Yükseltme Sihirbazı bu sürümde mevcut değil.',
+    'ERR_NOT_CLOUD_INSTANCE' => 'Sugar&#39;ın bu kurulumu, bir SugarCloud kurlumu değil veya SugarCloud Insights için yapılandırılmamış.',
 
 
     'EXCEPTION_CREATE_MODULE_NOT_AUTHORIZED' => '{modulename} oluşturmak için yetkili değilsiniz. Germekmesi halinde yöneticinize başvurun.',
@@ -2771,6 +2848,7 @@ $app_strings = array (
     'EXCEPTION_NEED_LOGIN'              => 'Bu eylemi gerçekleştirmek için giriş yapmalısınız.',
     'EXCEPTION_INVALID_TOKEN'           => 'Kimlik doğrulama anahtarınız geçersiz.',
     'EXCEPTION_NOT_AUTHORIZED'          => 'Bu eylemi gerçekleştirmek için yetkiniz yok. Erişim ihtiyacı halinde yöneticinize başvurun',
+    'EXCEPTION_NOT_AUTHORIZED_TO_DATA'  => 'Verileri görmek için yetkiniz yok. Erişmeniz gerekiyorsa sistem yöneticiniz ile iletişime geçiniz.',
     'EXCEPTION_INACTIVE_PORTAL_USER'    => 'Portal hesabınız aktif olmadığı için Portale erişemezsiniz. Eğer erişim ihtiyacınız varsa müşteri destek hizmetlerine başvurun.',
     'EXCEPTION_PORTAL_NOT_CONFIGURED'   => 'Portal doğru yapılandırılmamış. Yardım için Portal Yöneticiniz ile görüşün.',
     'EXCEPTION_NO_METHOD'               => 'Talebiniz desteklenmiyor.Bu adres için HTTP metodu bulunamadı.',
@@ -2790,6 +2868,8 @@ $app_strings = array (
     'EXCEPTION_SEARCH_RUNTIME'          => 'Bir arama motoru çalışma zamanı hatası oluştu. Lütfen Sistem Yöneticinize başvurun.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
     'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Bir işlem tarafından kilitlenen alan düzenlenemez.',
+    'EXCEPTION_MODULE_DISABLED'         => 'This module is disabled for current user.',
+    'EXCEPTION_FIELD_DISABLED'          => 'This field is disabled for current user.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'Genel arıza veya hata durumuyla karşılaşıldı. Bu hatanın nedeni, tanımlı API hatalarının dışında yer almaktadır.',
@@ -2818,6 +2898,8 @@ $app_strings = array (
     'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Devam eden bir işlem tarafından kilitlenen alan düzenlenemez.',
     'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s devam eden bir işlem tarafından kilitlendi ve düzenlenemez.',
     'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s devam eden bir işlem tarafından kilitlendi ve düzenlenemez.',
+    'EXCEPTION_MODULE_DISABLED_DESC'       => 'This module is disabled for current user.',
+    'EXCEPTION_FIELD_DISABLED_DESC'        => 'This field is disabled for current user.',
 
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'Sistemde aynı ismi taşıyan bir dosya daha var.',
@@ -2907,6 +2989,7 @@ $app_strings = array (
     'LBL_CLOSE_AND_CREATE_BUTTON_LABEL' => 'Kapat ve Yeni Oluştur',
     'LBL_CLOSE_AND_CREATE_BUTTON_TITLE' => 'Kapat ve Yeni Oluştur',
     'LBL_CLOSE_AND_CREATE_BUTTON_KEY' => 'C',
+    'LBL_COPY_RECORD_URL' => 'Kayıt URL&#39;sini Kopyala',
     'LBL_OPEN_ITEMS' => 'Açık Öğeler:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'E-Posta Oluştur',
@@ -2935,6 +3018,8 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'Dokümanlar',
     'LBL_DATE_ENTERED' => 'Oluşturulma Tarihi:',
     'LBL_DATE_MODIFIED' => 'Değiştirilme Tarihi:',
+    'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'Genel Bakış Sekmesini Düzenleyin',
+    'LBL_EDIT_MODULE_TABS_BUTTON' => 'Modül Sekmelerini Düzenleyin',
     'LBL_EDIT_BUTTON' => 'Değiştir',
     'LBL_DUPLICATE_BUTTON' => 'Aynı Kayıttan Oluştur',
     'LBL_DELETE_BUTTON' => 'Sil',
@@ -2947,6 +3032,7 @@ $app_strings = array (
     'LBL_DST_NEEDS_FIXIN' => 'Yaz Saati düzenlemesi uygulama için gereklidir. Lütfen Yönetici konsolunda bulunan <a href="index.php?module=Administration&action=DstFix">Onay</a> bağlantısına gidin ve Yaz Saati Düzenlemesini uygulayın.',
     'LBL_EDIT_AS_NEW_BUTTON_LABEL' => 'Yeni olarak Değiştir',
     'LBL_EDIT_AS_NEW_BUTTON_TITLE' => 'Yeni olarak Değiştir',
+    'LBL_EDIT_IN_NEW_TAB' => 'Yeni Sekmede Düzenle',
     'LBL_FAVORITES' => 'Favoriler',
     'LBL_FILTER' => 'Filtre',
     'LBL_DEFAULT_DATA_FILTER' => 'Varsayılan Veri Filtresi',
@@ -3126,6 +3212,7 @@ $app_strings = array (
     'LBL_MODIFIED_ID'=>'Değiştiren ID',
     'LBL_MORE' => 'Daha fazla',
     'LBL_MORE_MODULES' => 'Daha fazla Modül',
+    'LBL_MORE_TABS' => 'More Tabs',
     'LBL_MULTIPLE_MODULES' => 'Çoklu Modüller',
     'LBL_MY_ACCOUNT' => 'Hesabım',
     'LBL_SYSTEM_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'sistem varsayılan değerleri',
@@ -3145,6 +3232,7 @@ $app_strings = array (
     'LBL_OPENTO_BUTTON_KEY' => 'T',
     'LBL_OPENTO_BUTTON_LABEL' => 'Kişiye Aç:',
     'LBL_OPENTO_BUTTON_TITLE' => 'Kişiye Aç:',
+    'LBL_OPEN_IN_NEW_TAB' => 'Yeni Sekmede Aç',
     'LBL_OPPORTUNITIES'=>'Fırsatlar',
     'LBL_OPPORTUNITY_NAME' => 'Fırsat İsmi',
     'LBL_OPPORTUNITY'=>'Fırsat',
@@ -3345,7 +3433,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2020 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Tüm Hakları Saklıdır.<br />SugarCRM, Sugar ve 3-D Küp, SugarCRM Inc.&#39;in tescilli ticari markalarıdır. '.
         'Bu üründe kullanılan veya görünen diğer tüm şirket ve ürün adları, ilişkili olan '.
         'ilgili şirketlerin ticari markalarıdır.',
@@ -3455,7 +3543,7 @@ $app_strings = array (
     'LNK_VIEW_CHANGE_LOG' => 'Değişiklik Tarihçesi Günlüğünü Görüntüle',
     'TPL_AUDIT_LOG_TITLE' => '{{{name}}} için Değişiklik Tarihçesi Günlüğü',
     'LBL_AUDIT_EMAIL_TOOLTIP' => 'E-posta adresi değişiklik tarihçesi günlüğünü görüntülemek için tıklayın',
-
+    'LBL_NO_SEARCH_RESULTS' => 'No results found for your search',
     'NTC_CLICK_BACK' => 'Lütfen web tarayıcısının geri butonuna basın ve hatayı düzeltin.',
     'NTC_DATE_FORMAT' => '(yıl-ay-gün)',
     'NTC_DATE_TIME_FORMAT' => '(yyyy-aa-gg 24:00)',
@@ -3493,12 +3581,15 @@ $app_strings = array (
     'WARN_LICENSE_SEATS_MAXED'=>  "Uyarı: Aktif kullanıcı sayısı izin verilen maksimum lisans sayısını aşıyor.",
     'ERROR_LICENSE_SEATS_MAXED'=>
         'Aktif kullanıcı sayısı Lisans Sayısı limitini aştı. Lütfen Yöneticinizle iletişime geçin.',
+    'ERROR_LICENSE_TYPE_SEATS_MAXED'=>
+        'Number of active %s users exceeds License Count limits. Please contact your Administrator.',
     'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'Yalnızca yönetici sisteme bağlanabilir.',
     'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
         'Kullanıcı Lisansı Sayısı limitine ulaşıldı. Yalnızca mevcut kullanıcılar sisteme bağlanabilir.',
     'WARN_ONLY_ADMINS'=> "Yalnızca yönetici sisteme bağlanabilir.",
     'WARN_UNSAVED_CHANGES'=> "Bu kayıtta yaptığınız değişiklikleri kaydetmeden çıkıyorsunuz. İlgili kayıttan çıkmak istediğinizden emin misiniz?",
     'LBL_WARN_UNSAVED_CHANGES' => 'Kaydedilmemiş değişiklikler var. Sayfadan ayrılmak ve değişiklikleri silmek istediğinizden emin misiniz?',
+    'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'One or more dashlets have unsaved changes. Are you sure you want to close the drawer?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Raporlar modülüne gidiyorsunuz. Bilgi Penceresine yapmış olduğunuz değişiklikler kaydedilmeyecek. Devam?',
     'ERROR_NO_RECORD' => 'Kayıt almada hata. Bu kayıt silinmiş olabilir veya görüntülemek için izniniz yok.',
     'ERROR_TYPE_NOT_VALID' => 'Hata. Bu tip geçerli değil.',
@@ -3515,7 +3606,10 @@ $app_strings = array (
     'ERROR_DATETIME' => 'Hata. Bu alan, geçerli bir tarih gerektirir.',
     'ERROR_IS_BEFORE' => 'Hata. Bu tarih alanının değeri {{this}} alanından sonra olamaz.',
     'ERROR_IS_AFTER' => 'Hata. Bu tarih alanının değeri {{this}} alanından önce olamaz.',
+    'ERROR_TIME_IS_BEFORE' => 'Hata. Bu alanın zamanı, {{this}} alanının zamanından önce olmalıdır.',
+    'ERROR_TIME_IS_AFTER' => 'Hata. Bu alanın zamanı, {{this}} alanının zamanından sonra olmalıdır.',
     'ERROR_NUMBER' => 'Hata. Bu alan, geçerli bir sayı gerektirir.',
+    'ERROR_INT' => 'Hata. Geçersiz tam sayı.',
     'ERROR_NO_BEAN' => 'Bean verileri alınamadı.',
     'ERROR_ACCESS_MODULE' => 'Bu modüle erişiminiz yok.',
     'ERROR_MAX_FILESIZE_EXCEEDED' => 'Hata. Ek çok büyük.',
@@ -3601,6 +3695,7 @@ $app_strings = array (
     'LBL_SCHEDULE_MEETING' => 'Toplantı Planla',
     'LBL_CREATE_TASK' => 'Görev Oluştur',
     'LBL_REMOVE_FROM_FAVORITES' => 'Favorilerimden kaldır',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => 'Form Üret',
     'LBL_SAVE_WEB_TO_LEAD_FORM' =>'Web&#39;den Potansiyel Kaydet Formu',
@@ -3629,36 +3724,21 @@ $app_strings = array (
     'ERR_SMARTY_UNEQUAL_RELATED_FIELD_PARAMETERS' => 'Hata : displayParams dizisinde eşit olmayan sayıda &#39;key&#39; ve &#39;copy&#39; elemanları bulunmaktadır.',
     'ERR_SMARTY_MISSING_DISPLAY_PARAMS' => 'displayParams Dizisinde eksik endeks:',
 
-    /* MySugar Framework (for Home and Dashboard) */
     'LBL_DASHLET' => 'Pano',
-    'LBL_DASHLET_CONFIGURE_GENERAL' => 'Genel',
     'LBL_DASHLET_CONFIGURE_FILTERS' => 'Filtreler',
     'LBL_DASHLET_CONFIGURE_MY_ITEMS_ONLY' => 'Yalnızca Benim Kalemlerim',
-    'LBL_DASHLET_CONFIGURE_MY_FAVORITES_ONLY' => 'Sadece Favorilerim',
     'LBL_DASHLET_CONFIGURE_TITLE' => 'Başlık',
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Satırları Göster',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'Şu anki kayıtla ilişkilendir',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'Bağlantılı Alan',
 
-    // MySugar status strings
-    'LBL_CREATING_NEW_PAGE' => 'Yeni Sayfa Oluşturuluyor...',
-    'LBL_NEW_PAGE_FEEDBACK' => 'Yeni bir sayfa oluşturdunuz. Dashlet Ekle menü adımı ile yeni içerik ekleyebilirsiniz.',
-    'LBL_DELETE_PAGE_CONFIRM' => 'Bu sayfayı silmek istediğinizden emin misiniz?',
-    'LBL_SAVING_PAGE_TITLE' => 'Sayfa Başlığı Kaydediliyor...',
-    'LBL_RETRIEVING_PAGE' => 'Sayfa Alınıyor...',
-    'LBL_MAX_DASHLETS_REACHED' => 'Yöneticinin belirlemiş olduğu maksimum Sugar Dashlet sayısına eriştiniz. Yeni bir tane eklemek için var olanlardan birini kaldırmanız gerekir.',
-    'LBL_ADDING_DASHLET' => 'Sugar Dashlet Ekleniyor ...',
-    'LBL_ADDED_DASHLET' => 'Sugar Dashlet Eklendi',
     'LBL_REMOVE_DASHLET_CONFIRM' => 'Bu Sugar Dashlet kaldırmak istediğinizden emin misiniz?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'Satırı kaldırmak istediğinizden emin misiniz?',
-    'LBL_REMOVING_DASHLET' => 'Sugar Dashlet Kaldırılıyor ...',
-    'LBL_REMOVED_DASHLET' => 'Sugar Dashlet Kaldırıldı',
     'LBL_MAXIMUM_OF' => 'Maksimum:',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'sütunları görüntülenebilir.',
 
     /* Sugar7 Dashboard */
     'LBL_DASHBOARD' => 'Gösterge Panosu',
-    'LBL_DASHBOARD_BWC' => 'Eski Bilgi Pencerelerim',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Panom',
     'LBL_COLLAPSE_ALL' => 'Tümünü Daralt',
     'LBL_EXPAND_ALL' => 'Tümünü Genişlet',
@@ -3689,9 +3769,33 @@ $app_strings = array (
 
     'LBL_DASHLET_LISTVIEW_NAME' => 'Liste Görünümü',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'Tanımladığınız kriterlere göre belirli bir modülünden kayıtları listeleyin.',
+
+    // Record view dashlet
+    'LBL_DASHLET_RECORDVIEW_NAME' => 'Kayıt Görüntüle',
+    'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Bir kaydı ve isteğe bağlı olarak ilgili kayıtları sekmelerde gösterir.',
+    'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'Temel Kayıt Türü',
+    'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => 'Bu {{moduleSingular}}',
+    'LBL_DASHLET_RECORDVIEW_TABS' => 'Sekmeler',
+    'LBL_DASHLET_RECORDVIEW_BASIC_LAYOUT_PREVIEW' => 'Temel Yerleşim Ön İzleme',
+    'TPL_DASHLET_RECORDVIEW_TOO_MANY_TABS' => 'Uyarı, sadece {{numWord}} ({{num}}) modülleri sekmelerde görüntülenebilir. ' .
+        'Başkalarını eklemek için lütfen bir veya daha fazla modülü kaldırın.',
+    'LBL_SIX' => 'altı', // record view dashlet tab limit
+
+    //Commentlog Dashlet
+    'LBL_DASHLET_COMMENTLOG_NAME' => 'Yorum Günlüğü',
+    'LBL_DASHLET_COMMENTLOG_DESCRIPTION' => 'Bir kaydın yorumlarını görüntüler',
+    'LBL_COMMENTS_LOG_DASHLET_NO_COMMENTS' => 'Yorumlar mevcut değil',
+    'LBL_COMMENTS_LOG_DASHLET_BUTTON_ADD' => 'Ekle',
+    'LBL_COMMENTS_LOG_DASHLET_PLACEHOLDER' => 'Yorum ekle',
+    'LBL_COMMENTS_LOG_DASHLET_VIEW_ALL' => 'Tümünü Göster',
+
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Benim {{module}}',
+    'LBL_DASHLET_PICK_A_RECORD' => 'Görüntülemek üzere kayıt seçilmedi',
+    'LBL_CONTENT_SEARCH_DASHLET' => 'Content Search Dashlet',
+    'LBL_CONTENT_SEARCH_DASHLET_GREETING' => 'What can we help you with today, {{username}}?',
+    'LBL_CONTENT_SEARCH_DASHLET_DISABLED' => 'Would you like to create a case?',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Fırsat Metrikleri',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'İlgili Hesap için Fırsat Ölçümleri.',
@@ -3699,6 +3803,14 @@ $app_strings = array (
     'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'Yakın zamanda öğeleri ve ürünleri kullanan listeler, Favoriler olarak kaydedildi',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Yakın Zamanda Kullanılan',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Favoriler',
+
+    'LBL_DASHBOARD_CONFIG' => 'Dashboard Configuration',
+    'LBL_LIST_VIEW__NAME' => 'Liste Görünümü',
+    'LBL_PIPELINE_VIEW_NAME' => 'Kutucuk Görünümü',
+    'LBL_PIPELINE_VIEW_BTN' => 'Kutucuk Görünümü',
+    'LBL_PIPELINE_VIEW_TAB_NAME' => '{{fieldName}} tarafından {{module}}',
+    'LBL_VISUAL_PIPELINE_DISABLED' => 'Kutucuk Görünümü etkin değil',
+    'LBL_VISUAL_PIPELINE_MOVE_FAILED' => '{{recordName}} could not be moved to {{columnLabel}} because of the following fields: ',
 
     'LBL_DASHLET_NO_RECORDS' => 'Bu zaman diliminde kayıtlar bulunamadı.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Talep Özeti',
@@ -3754,37 +3866,13 @@ $app_strings = array (
     'LBL_DASHLET_USEFULNESS_NAME' => 'Makaleler için Kullanışlı Değil',
     'LBL_DASHLET_USEFULNESS_DESC' => 'Displays a chart showing how useful the knowledge base article is',
 
-    // MySugar Menu Options
     'LBL_ADD_PAGE' => 'Sayfa Ekle',
-    'LBL_DELETE_PAGE' => 'Sayfayı Sil',
-    'LBL_CHANGE_LAYOUT' => 'Yerleşimi Değiştir',
-    'LBL_RENAME_PAGE' => 'Sayfayı Yeniden İsimlendir',
-
     'LBL_LOADING_PAGE' => 'Sayfa yükleniyor, lütfen bekleyin...',
-
-    'LBL_RELOAD_PAGE' => 'Lütfen bu Sugar Dashlet&#39;ini kullanmak için <a href="javascript: window.location.reload()">sayfayı tekrar yükleyin</a>.',
-    'LBL_ADD_DASHLETS' => 'Dashlet&#39;leri Ekle',
-    'LBL_CLOSE_DASHLETS' => 'Kapat',
-    'LBL_OPTIONS' => 'Seçenekler',
-    'LBL_NUMBER_OF_COLUMNS' => 'Kolon sayısını seçiniz',
-    'LBL_1_COLUMN' => '1 Kolon',
-    'LBL_2_COLUMN' => '2 Kolon',
-    'LBL_3_COLUMN' => '3 Kolon',
-    'LBL_PAGE_NAME' => 'Sayfa İsmi',
-
     'LBL_SEARCH_RESULTS' => 'Arama Sonuçları',
-    'TPL_SEARCH_RESULTS_FOR' => 'Şunun için arama sonuçları: {{searchTerm}}',
     'LBL_SEARCH_RESULTS_FOR' => 'Şunun için arama sonuçları: ',
-    'LBL_SEARCH_MODULES' => 'Modüller',
-    'LBL_SEARCH_CHARTS' => 'Grafikler',
-    'LBL_SEARCH_REPORT_CHARTS' => 'Rapor Grafikleri',
-    'LBL_SEARCH_TOOLS' => 'Araçlar',
     'LBL_SEARCH_HELP_TITLE' => 'Arama İpuçları',
-    'LBL_SEARCH_HELP_CLOSE_TOOLTIP' => 'Kapat',
     'LBL_SEARCH_RESULTS_FOUND' => 'Arama Sonuçları Bulundu',
     'LBL_SEARCH_RESULTS_TIME' => 'bayan',
-    'ERR_BLANK_PAGE_NAME' => 'Lütfen bir sayfa ismi giriniz.',
-    /* End MySugar Framework strings */
 
     /* Sales Pipeline Dashlet */
     'LBL_DASHLET_MY_PIPELINE' => 'Potansiyel Satışlarım',
@@ -3938,6 +4026,8 @@ $app_strings = array (
     //MB -Fixed Bug #32812 -Max
     'LBL_ASSIGNED_TO_NAME' => 'Atanan Kişi',
     'LBL_DESCRIPTION' => 'Tanım',
+    'LBL_PRIMARY_CONTACT_NAME' => 'Birincil Kontak',
+    'LBL_PRIMARY_CONTACT_ID' => 'Birincil Kontak Kimliği',
 
   'LBL_NONE' => '-yok-',
   'LBL_YESTERDAY'=> 'dün',
@@ -4311,6 +4401,8 @@ $app_strings = array (
     // start of: Quotes related
     'LBL_QLI_SINGLE_TITLE' => 'Teklif Kalemi',
     'LBL_DISCOUNT_TOTAL' => 'İndirim toplamı',
+    'LBL_DISCOUNT_PERCENT' => '% Percent',
+    'LBL_DISCOUNT_SELECT' => 'Determines if the discount is a percentage or flat amount',
     'LBL_TAX' => 'Vergi',
     'LBL_SHIPPING' => 'Nakliyat',
     'LBL_GRAND_TOTAL' => 'Genel Toplam',
@@ -4357,6 +4449,7 @@ $app_strings = array (
     'LBL_NO_ACCESS' => '(Erişim yok)',
     'LBL_NO_ACCESS_LOWER' => 'Kullanıcının kayda erişim hakkı bulunmamaktadır',
     'LBL_NO_FIELD_ACCESS' => 'Erişim yok',
+    'LBL_NO_LICENSE_ACCESS' => 'License Required',
     'LBL_VALUE_ERASED' => 'Değer Silindi',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Bu bilgiler, veri gizliliği isteği vasıtasıyla silindi',
     'LBL_CREATE_RELATED_RECORD' => 'İlişkili Kayıt Oluştur',
@@ -4526,6 +4619,15 @@ $app_strings = array (
     'LBL_MOBILE_ACTIVITYSTREAM_POST_PLACEHOLDER' => 'Bir kullanıcıdan bahsetmek için @ yazın. Bir kaydı referans göstermek için # yazın.',
     'LBL_MOBILE_NEW_COMMENT' => 'Yeni yorum',
     'LBL_RECENTLY_VIEWED' => 'Son Görüntülenenler',
+    'LBL_FILE_STORED_LOCALLY' => 'Dosya, yerel hafızaya kaydedilir ve aygıt çevrim içi olduğunda eşitlenir edilir.',
+    'LBL_IDM_USER_PROFILE_READONLY' => 'Düzenlenebilir olmayan bazı dosyaları değiştirmek isterseniz bu değişiklikleri bildirmek için lütfen Yöneticiyle iletişime geçin.',
+    'LBL_ACTIVITY_POST' => '{{{value}}} {{{link}}} bağlantısında',
+    'LBL_COMMENTLOG_EMPTY' => 'Yorum yok',
+    'LBL_COMMENTLOG_EXPANDBUTTON_EXPAND' => 'Sonraki {{{commentsLeft}}} yorumu göster',
+    'LBL_COMMENTLOG_EXPANDBUTTON_COLLAPSE' => 'Daralt',
+    'LBL_COMMENTLOG_CONFIRM_CREATE' => 'Yorum oluşturmayı onayla',
+    'LBL_COMMENTLOG_ERROR_IS_EMPTY' => 'Yorum Günlüğü boş olamaz',
+    'LBL_MOBILE_PDF_DOWNLOAD' => '{{{pdfTemplateName}}} PDF dosyasını indirin',
 
     'ERR_SYNC_FAILED' => 'Sunucu ile senkronize edilemiyor.',
     'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'SSO bağlantısı mevcut değil. Kurulumunuzun Sugar 7.5 veya sonrası olduğundan ve SSO tanımlandığından emin olun.',
@@ -4736,6 +4838,11 @@ $app_strings = array (
     'LBL_VO_RIGHT_MENU_BTN' => 'Sağ menü düğmesi',
     'LBL_VO_ADD_BTN' => 'Ekleme düğmesi',
 
+    // Cookie consent
+    'LBL_WIZ_USER_COOKIE_CONSENT' => 'This application uses cookies',
+    'LBL_USER_CLICK_FOR_COOKIE_CONSENT' => 'Check to accept (Required)',
+    'LBL_USER_COOKIE_CONSENT_TEXT' => 'This application uses cookies to aid in providing you with a better experience. By continuing, you consent to the use of cookies in accordance with our <a href="{{href}}" target="_blank">privacy policy</a>.',
+
     //begin portal
 
     //portal record tutorial
@@ -4745,20 +4852,36 @@ $app_strings = array (
     'LBL_PORTAL_TOUR_RECORD_VIEW_NOTE' => 'Eklenmiş notların ayrıntılarını görüntülemek için bu simgelere tıklayın.',
 
     //for portal
-
+    'LBL_PORTAL_HOME' => 'Home Dashboard',
+    'LBL_PORTAL_DASHBOARD_ALL_OPEN_CASES' => 'All Open Cases',
+    'LBL_PORTAL_DASHBOARD_RECENT_CASES' => 'Recently Resolved Cases',
     'LBL_PORTAL_SEARCH' => 'İsim, Numara ile Arama',
     'LBL_SIGNUP_BUTTON_LABEL' => 'Üye Ol',
+    'LBL_PORTAL_NO_EMAIL' => 'Did not get an email?',
+    'LBL_PORTAL_FORGOT_PASSWORD' => 'Forgot Password',
+    'LBL_PORTAL_FORGOT_USERNAME' => 'Forgot Username',
+    'LBL_PORTAL_ENTER_PASSWORD_TWICE' => 'Enter your password twice. Passwords must match.',
+    'LBL_PORTAL_RESET_PASSWORD' => 'Reset Password',
+    'LBL_PORTAL_REENTER_PASSWORD' => 'Re-enter Password',
+    'LBL_PORTAL_PASSWORD_MISMATCH' => 'Passwords do not match, please enter again',
+    'LBL_PORTAL_PASSWORD_RESET_SUCCESS' => 'Your password has been successfully reset.',
+    'LBL_PORTAL_PASSWORD_RESET_ERR_GENERAL' => 'An error occurred. Please initiate a new password reset request.',
     'LBL_PORTAL_SIGNUP_PROCESS' => 'Üyelik Kaydediliyor',
-    'LBL_PORTAL_SIGNUP_TITLE' => 'Kayıt olduğunuz için teşekkür ederiz!',
-    'LBL_PORTAL_SIGNUP' => 'Müşteri hizmetleri temsilcisi, hesabınızı yapılandırmak için kısa zamanda sizinle irtibata geçecektir.',
-    'LBL_PORTAL_SIGNUP_FIRST_NAME' => 'İsim',
-    'LBL_PORTAL_SIGNUP_LAST_NAME' => 'Soyisim',
-    'LBL_PORTAL_SIGNUP_EMAIL' => 'E-Posta',
+    'LBL_PORTAL_SIGNUP_TITLE' => 'Thank you for signing up',
+    'LBL_PORTAL_SIGNUP' => 'We will inform you after we confirm your details.',
+    'LBL_PORTAL_SIGNUP_FIRST_NAME' => 'First Name',
+    'LBL_PORTAL_SIGNUP_LAST_NAME' => 'Last Name',
+    'LBL_PORTAL_SIGNUP_USER_NAME' => 'Username',
+    'LBL_PORTAL_SIGNUP_EMAIL' => 'Email Address',
     'LBL_PORTAL_SIGNUP_PHONE' => '(###) ###-#### (isteğe bağlı)',
     'LBL_PORTAL_SIGNUP_COUNTRY' => 'Ülke',
     'LBL_PORTAL_SIGNUP_STATE' => 'Eyalet',
-    'LBL_PORTAL_SIGNUP_COMPANY' => 'Şirket',
+    'LBL_PORTAL_SIGNUP_COMPANY_NAME' => 'Company Name',
     'LBL_PORTAL_SIGNUP_JOBTITLE' => 'İş ünvanı (isteğe bağlı)',
+    'LBL_PORTAL_SIGNUP_PASSWORD' => 'Password',
+    'LBL_PORTAL_SIGNUP_PASSWORD1' => 'Confirm Password',
+    'LBL_PORTAL_SIGNUP_FORGOT_LOGIN' => 'Forgot Login',
+
     'LNK_PORTAL_LOGIN_FORGOTPASSWORD' => 'Şifre unutuldu?',
     'LBL_PORTAL_LOGIN_FORGOTPASSWORD' => 'Şifrenizi sıfırlamak için lütfen Sugar Yöneticisine başvurun.',
     'LBL_PORTAL_LOGIN_USERNAME' => 'Kullanıcı İsmi',
@@ -4768,9 +4891,14 @@ $app_strings = array (
     'LBL_PORTAL_PAGE_NOT_AVAIL' => 'Sayfa Mevcut Değil',
     'LBL_PORTAL_NOT_ENABLED_MSG' => "Üzgünüz, ama bu özellik şu anda mevcut değil.",
     'LBL_PORTAL_SEARCH_RESULTS_TITLE' => '"{query}" için arama sonuçlarını göster',
+    'LBL_PORTAL_DIDNT_GET_EMAIL' => 'Did not get an email?',
+    'LBL_PORTAL_CONTACT_INFO_CONTACT_US' => 'For assistance, or to contact us, please use any of the following: ',
+    'LBL_PORTAL_CONTACT_INFO_PHONE' => 'Phone: ',
+    'LBL_PORTAL_CONTACT_INFO_EMAIL' => 'Email: ',
+    'LBL_PORTAL_CONTACT_INFO_WEB' => 'Web: ',
 
     //for portal errors
-    'LBL_PORTAL_INVALID_CREDS' => 'Girilen kullanıcı adı / şifre kombinasyonu yanlış, lütfen tekrar deneyin.',
+    'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Your login was not successful. Please try again.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'Geçersiz Kimlik',
     'LBL_PORTAL_INVALID_GRANT' => 'Simgeniz geçersiz veya süresi dolmuş. Lütfen tekrar giriş yapın.',
     'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Anahtar Süresi Dolmuş',
@@ -4793,7 +4921,27 @@ $app_strings = array (
     'LBL_PORTAL_ROUTE_ERROR'=>'Modülü yüklemede sorun. Lütfen daha sonra tekrar deneyin veya destek birimine başvurun.',
     'LBL_PORTAL_OFFLINE' =>'Üzgünüz uygulama şu anda mevcut değil. Site yöneticisine başvurun.',
     'LBL_CONTACT_EDIT_PASSWORD_LNK_TEXT' => 'Şifreyi değiştir',
+    'LBL_PORTAL_SIGNUP_USER_NAME_ERROR' => 'Username is already registered in the system. Either request a forgotten password or select another username.',
+    'LBL_PORTAL_SIGNUP_EMAIL_ERROR' => 'The email provided is invalid.',
+    'LBL_PORTAL_SIGNUP_PASSWORD_ERROR' => 'The passwords do not match.',
     //end portal
+
+    // Final name given by marketing is Service Console
+    // Original name for this feature was Agent Workbench and was used
+    // throughout the development of this product.
+    'LBL_AGENT_WORKBENCH' => 'Service Console',
+    'LBL_AGENT_WORKBENCH_OVERVIEW' => 'Genel Bilgi',
+    'LBL_CASE_OVERDUE' => 'Overdue',
+    'LBL_CASE_DUE_SOON' => 'Due soon',
+    'LBL_CASE_DUE_LATER' => 'Due later',
+
+    // Renewals Console
+    'LBL_RENEWALS_CONSOLE' => 'Yenilemeler Konsolu',
+    'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'Genel Bilgi',
+    'LBL_RENEWALS_CONSOLE_STAGE_STATUS' => 'Aşama/Durum',
+    'LBL_RENEWALS_CONSOLE_NAME_ACCOUNT' => 'Ad/Hesap Adı',
+    'LBL_RENEWALS_CONSOLE_AMOUNT' => 'Worst | Likely | Best',
+
 
     //First time login wizard
     'LBL_WIZ_USER_PROFILE_TITLE' => 'Kullanıcı Profili',
@@ -4838,10 +4986,23 @@ $app_strings = array (
     'ERR_PASSWORD_MISMATCH' => 'Girmiş olduğunuz şifre sistemimizde kayıtlı olan ile uyuşmuyor.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Şifre gönderilemiyor',
     'LBL_REQUEST_PASSWORD' => 'Şifre talep et',
+    'LBL_RESET_PASSWORD' => 'Reset Password',
+    'LBL_RESET_PASSWORD_MESSAGE' => 'Enter your username and we will send you a link to reset your password.',
+    'LBL_RESET_PASSWORD_CONFIRMATION_MESSAGE' => 'Check your email <br><br> We have sent password reset instructions to the email address
+        we have on file.',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Hata: Bu kullanıcı için parola güncelleştirmede bir sorun oluştu.',
     'LBL_INCORRECT_PASSWORD' => 'Hata: Hatalı şifre.',
+    'LBL_PASSWORD_ENFORCE_TITLE' => 'The password you entered did not meet the password requirements. Please try again.',
+    'LBL_PASSWORD_MIN_LENGTH' => 'Minimum length is {0}.',
+    'LBL_PASSWORD_MAX_LENGTH' => 'Maximum length is {0}.',
+    'LBL_PASSWORD_ONE_UPPERCASE' => 'Must contain one upper case letter (A-Z).',
+    'LBL_PASSWORD_ONE_LOWERCASE' => 'Must contain one lower case letter (a-z).',
+    'LBL_PASSWORD_ONE_NUMBER' => 'Must contain one number (0-9).',
+    'LBL_PASSWORD_ONE_SPECIAL_CHAR' => 'Must contain one special character (~!@#$%^&*()_+-={}|).',
+    'LBL_PASSWORD_REGEX_REQUIREMENT' => 'The password must not match the regular expression pattern: {0}.',
 
     'LBL_PREFERRED_LANGUAGE' => 'Dil Tercihi:',
+    'LBL_PASSWORD_RESET_EMAIL_FAIL' => 'Could not send password reset email.',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Bir Rapor Seçin',
@@ -4983,6 +5144,25 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'Görevlerim',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Takım Görevleri',
 
+    'LBL_RECENTLY_VIEWED_CASES_DASHLET' => 'En Son Görüntülenen Taleplerim',
+
+    'LBL_REPORT_DASHLET_TITLE_12' => 'Durum Bazında Kullanıcıya Göre Açık Kalan Talepler',
+    'LBL_REPORT_DASHLET_TITLE_125' => 'Haftaya Göre İş Merkezi Bazında Yeni Talepler',
+    'LBL_REPORT_DASHLET_TITLE_126' => 'En Son Oluşturulan Talepler',
+    'LBL_REPORT_DASHLET_TITLE_127' => 'Haftaya Göre Müşteri Aşaması Bazında Yeni Talepler',
+    'LBL_REPORT_DASHLET_TITLE_128' => 'Müşteri Aşaması ve Önceliği Bazında Açık Talepler',
+    'LBL_REPORT_DASHLET_TITLE_129' => 'İş Merkezi Bazında Bu Ay Kararlaştırılan Toplam Talep',
+    'LBL_REPORT_DASHLET_TITLE_130' => 'Temsilci Bazında Bu Ay Kararlaştırılan Toplam Talep',
+    'LBL_REPORT_DASHLET_TITLE_131' => 'En Son Kararlaştırılan Talepler Listesi',
+    'LBL_REPORT_DASHLET_TITLE_132' => 'Haftaya Göre Bu Ay Kararlaştırılan Taleplerim',
+    'LBL_REPORT_DASHLET_TITLE_133' => 'Bugün Süresi Dolan ve Geçmiş',
+    'LBL_REPORT_DASHLET_TITLE_134' => 'Bugün Süresi Dolan ve Geçmiş Tüm Talepler',
+    'LBL_REPORT_DASHLET_TITLE_135' => 'Sonraki Tarih Bazında Açık Taleplerim',
+    'LBL_REPORT_DASHLET_TITLE_136' => 'Sonraki Tarih Bazında Tüm Açık Talepler',
+    'LBL_REPORT_DASHLET_TITLE_137' => 'Durum Bazında Açık Taleplerim',
+    'LBL_REPORT_DASHLET_TITLE_138' => 'Durum Bazında Geçen Haftaki Taleplerim',
+    'LBL_REPORT_DASHLET_TITLE_139' => 'Benim Tarafından Atanmış Olan Açık Taleplerin Durumu',
+
     //Audit subjects
     'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
@@ -5113,6 +5293,8 @@ $app_strings = array (
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Listeyi yenile',
+    // Refresh button on tile views
+    'LBL_TILE_REFRESH' => 'Refresh Tiles',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'daha fazla',
@@ -5387,6 +5569,12 @@ $app_strings = array (
     'LBL_LOCKED_FIELD_RECORD_VIEW_WARNING' => 'Bu kayıt bir işleme katılıyor ve bazı kilitli alanları içerebilir.',
     // @codingStandardsIgnoreEnd
 
+    'LBL_BUSINESS_CENTER' => 'İş Merkezi',
+    'LBL_BUSINESS_CENTER_ID' => 'İş Merkezi Kimliği',
+    'LBL_BUSINESS_CENTER_NAME' => 'İş Merkezi Adı',
+
+    'LBL_PLIS_ACTIVITIES' => 'Purchased Line Items Activities',
+
     //Tag Strings
     'LBL_TAG_NEW_TAG' => '(Yeni Etiket)',
     'LBL_TAG_FETCH_ERROR' => 'Etiketler alınırken bir hata oluştu.',
@@ -5424,14 +5612,47 @@ $app_strings = array (
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Silmek İçin İşaretle',
     'TPL_DATAPRIVACY_PII_TITLE' => '{{{name}}} için Kişisel Bilgiler',
 
+    'LBL_CHANGETIMERS_SUBPANEL_TITLE' => 'Zamanlayıcıları Değiştirin',
+
     'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Panonuza kopyalandı!',
     'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Panonuza kopyalanamadı',
 
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Onay Bağlantısını Kopyalayın',
 
+    // Activity Timeline Dashlet
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Etkileşimler',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} Interactions',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+        'Meetings and Notes related to a record.',
+
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'Daha fazlasını göster...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Daha az göster...',
+    'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Mevcut veri yok',
+
+    // Active Subscriptions Dashlet
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Aktif Abonelikler',
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => 'Belirli bir hesap için aktif abonelikler.',
+    'LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY' => ', miktar {{quantity}}',
+    'LBL_ACTIVE_SUBSCRIPTIONS_TOTAL' => 'Toplam:',
+    'LBL_NO_ACTIVE_SUBSCRIPTIONS' => 'Aktif abonelikler yok',
+    'LBL_REQUIRE_REVENUE_LINE_ITEMS' => 'Pano, {{module_name}} modülünün çalışması gerekli. {{module_name}} modülünü etkinleştirmekle ilgili yöneticinizle konuşun.',
+
+    // Customer Service
+    'LBL_EDIT_IN_STUDIO' => 'Studio&#39;yu kullanarak kayıt görünüm panosu yerleşimini düzenlemek için ' .
+        'Studio > {{module}} > Yerleşimler > Kayıt Görünüm Panosu. <a href={{linkToStudio}}>Studio&#39;da Düzenle</a>.',
+    'LBL_SERVICE_LEVEL' => 'Hizmet Seviyesi',
+    // Agent Workbench
+    'LBL_AGENT_WORKBENCH_NUMBER' => 'Numara',
+    'LBL_AGENT_WORKBENCH_FOLLOW_UP' => 'İzle',
+    'LBL_AGENT_WORKBENCH_PRIORITY_STATUS' => 'Öncelik/Durum',
+    'LBL_AGENT_WORKBENCH_SUBJECT_DESCRIPTION' => 'Konu/Açıklama',
+
+//Service Duration
+    'LBL_SERVICE_DURATION' => 'Hizmet Süresi',
+    'LBL_SERVICE_DURATION_VALUE' => 'Hizmet Süresi Değeri',
+    'LBL_SERVICE_DURATION_UNIT' => 'Hizmet Süresi Birimi',
+
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6428,7 +6649,7 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Karıştırılmış 
     'ISK' => 'kr',
     'INR' => '₨',
     'IDR' => 'Rp',
-    'IRR' => '﷼',
+    'IRR' => '77e8',
     'IMP' => '£',
     'ILS' => '₪',
     'JMD' => 'J$',
@@ -6457,18 +6678,18 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Karıştırılmış 
     'NIO' => 'C$',
     'NGN' => '₦',
     'NOK' => 'kr',
-    'OMR' => '﷼',
+    'OMR' => '77e8',
     'PKR' => '₨',
     'PAB' => 'B/.',
     'PYG' => 'Gs',
     'PEN' => 'S/.',
     'PHP' => '₱',
     'PLN' => 'zł',
-    'QAR' => '﷼',
+    'QAR' => '77e8',
     'RON' => 'lei',
     'RUB' => 'руб',
     'SHP' => '£',
-    'SAR' => '﷼',
+    'SAR' => '77e8',
     'RSD' => 'Дин.',
     'SCR' => '₨',
     'SGD' => '$',
@@ -6490,7 +6711,7 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Karıştırılmış 
     'UZS' => 'лв',
     'VEF' => 'Bs',
     'VND' => '₫',
-    'YER' => '﷼',
+    'YER' => '77e8',
     'ZWD' => 'Z$',
     );
 

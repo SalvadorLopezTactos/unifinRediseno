@@ -310,4 +310,7 @@ For å opprette {{module_name}}:
     'LBL_FILTER_LEADS_REPORTS' => 'Emner-rapporter',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Business Purposes Consented for',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Consent Last Updated',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Kan ikke endre {{moduleSingular}} status. Denne {{moduleSingular}} har allerede blitt konvertert.',
 );

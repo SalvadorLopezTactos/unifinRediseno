@@ -272,52 +272,60 @@ if($require_license){
 			$readme_contents = $manifest['readme'];
 		}
 	}
-	$license_final =<<<eoq2
-	<table width='100%'>
-	<tr>
-	<td colspan="3"><ul class="tablist">
-	<li id="license_li" class="active"><a id="license_link"  class="current" href="javascript:selectTabCSS('license');">{$mod_strings['LBL_LICENSE']}</a></li>
-	<li class="active" id="readme_li"><a id="readme_link" href="javascript:selectTabCSS('readme');">{$mod_strings['LBL_README']}</a></li>
-	</ul></td>
-	</tr>
-	</table>
-	<div id='license_div'>
-	<table>
-	<tr>
-	<td colspan="3">&nbsp;</td>
-	</tr>
-	<tr>
-	<td align="left" valign="top" colspan=2>
-	<b>{$mod_strings['LBL_MODULE_LICENSE']}</b>
-	</td>
-	</tr>
-	<tr>
-	<td align="left" valign="top" colspan=2>
-	<textarea cols="100" rows="8" readonly>{$contents}</textarea>
-	</td>
+    $contents_html = htmlspecialchars($contents);
+    $readme_contents_html = htmlspecialchars($readme_contents);
 
-	</tr>
-	<tr>
-	<td align="left" valign="top" colspan=2>
-	<input type='radio' id='radio_license_agreement_accept' name='radio_license_agreement' value='accept'>{$mod_strings['LBL_ACCEPT']}&nbsp;
-	<input type='radio' id='radio_license_agreement_reject' name='radio_license_agreement' value='reject' checked>{$mod_strings['LBL_DENY']}
-	</td>
+    $mod_strings_keys = ['LBL_LICENSE', 'LBL_README', 'LBL_MODULE_LICENSE', 'LBL_ACCEPT', 'LBL_DENY'];
+    foreach ($mod_strings_keys as $k) {
+        $mod_strings_escaped[$k] = htmlspecialchars($mod_strings[$k]);
+    }
 
-	</tr></table>
-	</div>
-	<div id='readme_div' style='display: none;'>
-	<table>
-	<tr>
-	<td colspan="3">&nbsp;</td>
-	</tr>
-	<tr>
-	<td align="left" valign="top" colspan=2>
-	<b>{$mod_strings['LBL_README']}</b>
-	</td>
-	</tr>
-	<tr>
-	<td align="left" valign="top" colspan=2>
-	<textarea cols="100" rows="8" readonly>{$readme_contents}</textarea>
+    $license_final =<<<eoq2
+    <table width="100%">
+    <tr>
+    <td colspan="3"><ul class="tablist">
+    <li id="license_li" class="active"><a id="license_link"  class="current" href="javascript:selectTabCSS('license');">{$mod_strings_escaped['LBL_LICENSE']}</a></li>
+    <li class="active" id="readme_li"><a id="readme_link" href="javascript:selectTabCSS('readme');">{$mod_strings_escaped['LBL_README']}</a></li>
+    </ul></td>
+    </tr>
+    </table>
+    <div id="license_div">
+    <table>
+    <tr>
+    <td colspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+    <td align="left" valign="top" colspan="2">
+    <b>{$mod_strings_escaped['LBL_MODULE_LICENSE']}</b>
+    </td>
+    </tr>
+    <tr>
+    <td align="left" valign="top" colspan="2">
+    <textarea cols="100" rows="8" readonly>{$contents_html}</textarea>
+    </td>
+
+    </tr>
+    <tr>
+    <td align="left" valign="top" colspan="2">
+    <input type="radio" id="radio_license_agreement_accept" name="radio_license_agreement" value="accept">{$mod_strings_escaped['LBL_ACCEPT']}&nbsp;
+    <input type="radio" id="radio_license_agreement_reject" name="radio_license_agreement" value="reject" checked>{$mod_strings_escaped['LBL_DENY']}
+    </td>
+
+    </tr></table>
+    </div>
+    <div id="readme_div" style="display: none;">
+    <table>
+    <tr>
+    <td colspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+    <td align="left" valign="top" colspan="2">
+    <b>{$mod_strings_escaped['LBL_README']}</b>
+    </td>
+    </tr>
+    <tr>
+    <td align="left" valign="top" colspan="2">
+    <textarea cols="100" rows="8" readonly>{$readme_contents_html}</textarea>
         </td>
 
     </tr>

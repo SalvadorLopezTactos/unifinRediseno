@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'İmajın en boy oranı 1:1 ve 10:1. arasında olmalı. İmaj yeniden boyutlandırılacaktır.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'İmajın en boy oranı 3:1 ve 20:1. arasında olmalı. Bu boyutlarda yeni bir imaj yükle.',
     'ERR_ALERT_FILE_UPLOAD' => 'Görüntü yükleme sırasında hata.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Görüntüler için dizin oluşturulamıyor',
     'LBL_LOGGER'=>'Kaydedici Ayarları',
 	'LBL_LOGGER_FILENAME'=>'Log Dosya İsmi',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Uzantı',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Maksimum log boyutu',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Varsayılan Tarih Formatı',
 	'LBL_LOGGER_LOG_LEVEL'=>'Log Seviyesi',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Yorum Günlüğü Ayarları',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Yorum girişi başına gösterilecek maksimum karakter',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

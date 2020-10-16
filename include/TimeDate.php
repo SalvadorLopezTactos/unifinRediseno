@@ -651,8 +651,9 @@ class TimeDate
     /**
      * Get DateTime from DB datetime string
      *
-     * @param string $date
-     * @return SugarDateTime
+     * @param string $date The date string, in database format.
+     * @return ?SugarDateTime|bool The converted SugarDateTime,
+     *   or either false or null on failure.
      */
     public function fromDb($date)
     {

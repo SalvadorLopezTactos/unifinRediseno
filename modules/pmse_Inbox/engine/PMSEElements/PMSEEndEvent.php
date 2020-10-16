@@ -30,17 +30,16 @@ class PMSEEndEvent extends PMSEEvent
      * $response['flow_filters'] = array('first_id', 'second_id'); //This attribute is used to filter the execution of the following elements
      * $response['flow_id'] = $flowData['id']; // The flowData id if present
      *
-     *
-     * @param type $flowData
-     * @param type $bean
-     * @param type $externalAction
-     * @return type
+     * @param mixed $flowData
+     * @param mixed $bean
+     * @param string $externalAction
+     * @param array $arguments
+     * @return array
+     * @throws SugarQueryException
      */
-
     public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
     {
-        $count = $this->countNumberOpenThreads($flowData);
-        if ($count <= 1) {
+        if (!$this->hasMultipleOpenThreads($flowData['cas_id'])) {
             //close the whole case, flows and remaining threads included
             $this->caseFlowHandler->closeCase($flowData['cas_id']);
         }
@@ -51,19 +50,25 @@ class PMSEEndEvent extends PMSEEvent
         $flowData['cas_flow_status'] = 'CLOSED';
         return $this->prepareResponse($flowData, 'ROUTE', 'CREATE');
     }
-    
-    public function countNumberOpenThreads($flowData)
-    {
-        // Original Query
-        // $query = "select count(*) as open from  pmse_bpm_thread where cas_id = {$flowData['cas_id']} and cas_thread_status = 'OPEN' ";
 
+    /**
+     * True if flow data has 2 or more open threads
+     *
+     * @param string $casId
+     * @return bool
+     * @throws SugarQueryException
+     */
+    protected function hasMultipleOpenThreads(string $casId): bool
+    {
         $q = $this->caseFlowHandler->retrieveSugarQueryObject();
         $q->from($this->caseFlowHandler->retrieveBean('pmse_BpmThread'));
-        $q->select()->fieldRaw("count(id) open_count");
-        $q->where()->equals('cas_id', $flowData['cas_id']);
+        $q->select()->fieldRaw("NULL");
+        $q->where()->equals('cas_id', $casId);
         $q->where()->equals('cas_thread_status', 'OPEN');
+        $q->limit(2);
         $result = $q->execute();
-        $count = array_pop($result);
-        return $count['open_count'];
+        $count = count($result);
+
+        return $count > 1;
     }
 }

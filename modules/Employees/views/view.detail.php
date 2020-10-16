@@ -87,7 +87,7 @@ EOHTML;
  		         $deleteWarning = $GLOBALS['mod_strings']['LBL_DELETE_USER_CONFIRM'];
  		     $this->ss->assign('DELETE_WARNING', $deleteWarning);
         }
-        $this->ss->assign('DISPLAY_DELETE', $showDeleteButton);
+        $this->ss->assign('DISPLAY_DELETE', $showDeleteButton && !$idpConfig->isIDMModeEnabled());
         
  		parent::display();
  	}

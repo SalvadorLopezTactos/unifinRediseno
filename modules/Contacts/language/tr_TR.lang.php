@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Kişiler Listesi Panosu',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Kişiler Kaydı Panosu',
-
+    'LBL_SITE_USER_ID' => 'Hash of site_url and contact id',
+    'LBL_COOKIE_CONSENT' => 'Cookie Consent',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Cookie Consent Received On',
     'LNK_CONTACT_REPORTS' => 'Kontak Raporlarını Görüntüle',
     'ERR_DELETE_RECORD' => 'Kontağı silmek için bir kayıt numarası belirtiniz.',
     'LBL_ACCOUNT_ID' => 'Müşteri ID:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Portal Bilgisi',
     'LBL_PORTAL_NAME' => 'Portal İsmi:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Portal Şifresi Belirtildi:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Portal User Company Name',
     'LBL_RECORD_SAVED_SUCCESS' => 'Başarılı şekilde {{moduleSingularLower}} oluşturdunuz: <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Sokak',
     'LBL_POSTAL_CODE' => 'Posta Kodu:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Fırsatlar',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokümanlar',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Teklifler',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Teklifler (Gönderim)',
     'LBL_QUOTES_BILL_TO' => 'Teklifler (Faturalanacak)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Teklif Kalemleri',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Profilinizi düzenlemek için tıklayın.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Siz buradan tercih ettiğiniz dili ayarlayabilirsiniz. Bu Sugar Portal tarafından kullanılan dili değişecektir.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Kullanıcı menüsünü kullanarak istediğiniz zaman Profilinize dönebilirsiniz.',
+    'ERR_PORTAL_NAME_EXISTS' => 'The portal name {0} already exists. Duplicate portal names are not allowed. Change the portal name to be unique.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Asıl Id',
@@ -279,4 +284,8 @@ $mod_strings = array (
     'LBL_FILTER_CONTACTS_REPORTS' => 'Kontak Raporları',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Şunun İçin İç Amaçlı Onaylı:',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Son Güncellemeye Onay Verin',
+
+    'LBL_ENTRY_SOURCE' => 'Contact Source',
+    'LBL_SOURCE_EXTERNAL' => 'External',
+    'LBL_SOURCE_INTERNAL' => 'Internal',
 );

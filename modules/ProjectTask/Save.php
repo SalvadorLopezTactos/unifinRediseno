@@ -63,11 +63,18 @@ else
 	$return_id = empty($_REQUEST['return_id']) ? $project->id
 		: $_REQUEST['return_id'];
 		
-	//if this navigation is going to list view, do not show the bean id, it will populate the mass update.
-	if($return_action == 'index') {
-		$return_id ='';
-	}		
-header("Location: index.php?module=$return_module&action=$return_action&record=$return_id");
+    //if this navigation is going to list view, do not show the bean id, it will populate the mass update.
+    if ($return_action == 'index') {
+        $return_id ='';
+    }
+
+    $return_location = 'index.php?'.http_build_query([
+        'module' => $return_module,
+        'action' => $return_action,
+        'record' => $return_id,
+    ]);
+
+    header('Location: '.$return_location);
 
 }
 ?>

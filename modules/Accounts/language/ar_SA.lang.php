@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'عروض الأسعار (شحن إلى)',
 	'LNK_ACCOUNT_REPORTS' => 'عرض تقارير الحساب',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'المستندات',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'لوحة معلومات قائمة الحسابات',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'لوحة معلومات سجل الحسابات',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'تفاصيل الحساب',
+    'LBL_NEXT_RENEWAL_DATE' => 'تاريخ التجديد التالي',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'اسم الحساب/الصناعة',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'الموقع',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'المخططات',

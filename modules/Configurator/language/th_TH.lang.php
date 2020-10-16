@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'อัตราส่วนภาพควรอยู่ระหว่าง 1:1 ถึง 10:1 ระบบจะปรับขนาดรูปภาพ',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'อัตราส่วนภาพต้องอยู่ระหว่าง 3:1 ถึง 20:1 โปรดอัปโหลดไฟล์ที่ใช้อัตราส่วนนี้',
     'ERR_ALERT_FILE_UPLOAD' => 'เกิดข้อผิดพลาดระหว่างการอัปโหลดรูปภาพ',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'ไม่สามารถสร้างไดเร็กทอรีสำหรับรูปภาพได้',
     'LBL_LOGGER'=>'การตั้งค่าเครื่องมือล็อก',
 	'LBL_LOGGER_FILENAME'=>'ชื่อล็อกไฟล์',
-	'LBL_LOGGER_FILE_EXTENSION'=>'นามสกุล',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'ขนาดล็อกสูงสุด',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'รูปแบบวันที่เริ่มต้น',
 	'LBL_LOGGER_LOG_LEVEL'=>'ระดับล็อก',
@@ -458,6 +458,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'การตั้งค่าการบันทึกความคิดเห็น',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'จำนวนอักขระสูงสุดที่จะแสดงในแต่ละความคิดเห็น',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

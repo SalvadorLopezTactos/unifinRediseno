@@ -322,4 +322,7 @@ Pēc katras prasītās moduļa apstiprināšanas spiediet "Saglabāt un Konvert�
     'LBL_FILTER_LEADS_REPORTS' => 'Interesentu atskaites',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Ir piekrišana biznesa mērķiem',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Piekrišana pēdējoreiz atjaunināta',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Nevar mainīt moduļa {{moduleSingular}} statusu. Šis modulis {{moduleSingular}} jau ir konvertēts.',
 );

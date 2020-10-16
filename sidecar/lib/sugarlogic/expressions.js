@@ -1017,7 +1017,7 @@ SEP.prototype.toConstant = function(expr) {
 SEP.prototype.getRelatedFieldsFromFormula = function(expr, actionTarget) {
     var fields = [],
         relateFunctions = ['related', 'count', 'rollupSum', 'rollupMax', 'rollupMin', 'rollupAve', 'rollupAvg',
-            'rollupCurrencySum', 'rollupConditionalSum', 'countConditional', 'maxRelatedDate'];
+            'rollupCurrencySum', 'rollupConditionalSum', 'countConditional', 'maxRelatedDate', 'rollupConditionalMinDate'];
 
     var recurseTokens = function(t, actionTarget){
         //First check if its a simple related field
@@ -1059,6 +1059,27 @@ SEP.prototype.getRelatedFieldsFromFormula = function(expr, actionTarget) {
 
                     fields.push(field);
 
+                    break;
+                case 'rollupConditionalMinDate':
+                    var field = {
+                        type: 'rollupConditionalMinDate',
+                        link: t.args[0].name,
+                        relate: t.args[1].value
+                    };
+                    var parseConditions = function(conditions) {
+                        if (conditions.type == 'function') {
+                            var conditionList = [];
+                            for (var i = 0; i < conditions.args.length; i++) {
+                                conditionList.push(conditions.args[i].value);
+                            }
+                            return conditionList;
+                        } else {
+                            return conditions.value;
+                        }
+                    }
+                    field.conditionFields = parseConditions(t.args[2]);
+                    field.conditionValues = parseConditions(t.args[3]);
+                    fields.push(field);
                     break;
                 case 'countConditional':
                     var field = {

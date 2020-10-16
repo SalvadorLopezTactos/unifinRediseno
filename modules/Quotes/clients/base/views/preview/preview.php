@@ -11,6 +11,9 @@
  */
 
 $viewdefs['Quotes']['base']['view']['preview'] = array(
+    'templateMeta' => array(
+        'maxColumns' => 1,
+    ),
     'panels' => array(
         array(
             'name' => 'panel_header',

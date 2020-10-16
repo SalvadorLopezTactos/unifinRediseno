@@ -71,7 +71,7 @@ class PMSECriteriaEvaluator
         } else {
             $resultToken->expValue = $this->expressionEvaluator->routeFunctionOperator(
                 $operationGroup,
-                $criteriaToken->currentValue[0],
+                $criteriaToken->currentValue[0] ?? null,
                 $criteriaToken->expOperator,
                 $criteriaToken->expValue,
                 $criteriaToken->expSubtype,

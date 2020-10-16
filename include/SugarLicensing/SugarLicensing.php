@@ -53,9 +53,6 @@ class SugarLicensing
 
         $curl = curl_init();
 
-        // Tell curl to use HTTP POST
-        curl_setopt($curl, CURLOPT_POST, true);
-
         // Tell curl not to return headers, but do return the response
         curl_setopt($curl, CURLOPT_HEADER, false);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -91,26 +88,54 @@ class SugarLicensing
      *
      * @param $endpoint
      * @param $payload
+     * @param bool $doDecode
+     * @param int $timeout
      * @return array
      */
-    public function request($endpoint, $payload)
+    public function request($endpoint, $payload, $doDecode = true, $timeout = 30)
     {
         // make sure that the first char is a "/"
         if (substr($endpoint, 0, 1) != "/") {
             $endpoint = "/" . $endpoint;
         }
 
-        curl_setopt($this->_curl, CURLOPT_URL, $this->_server . $endpoint);
+        $endpoint = $this->getServerName() . $endpoint;
+        curl_setopt($this->_curl, CURLOPT_URL, $endpoint);
 
-        if(is_array($payload)) {
-            $payload = json_encode($payload);
+        curl_setopt($this->_curl, CURLOPT_CONNECTTIMEOUT, $timeout);
+
+        // proxy settings
+        $proxy_config = Administration::getSettings('proxy');
+        if (!empty($proxy_config)
+            && !empty($proxy_config->settings['proxy_on'])
+            && $proxy_config->settings['proxy_on'] == 1) {
+            curl_setopt($this->_curl, CURLOPT_PROXY, $proxy_config->settings['proxy_host']);
+            curl_setopt($this->_curl, CURLOPT_PROXYPORT, $proxy_config->settings['proxy_port']);
+            if (!empty($proxy_settings['proxy_auth'])) {
+                curl_setopt(
+                    $this->_curl,
+                    CURLOPT_PROXYUSERPWD,
+                    $proxy_settings['proxy_username'] . ':' . $proxy_settings['proxy_password']
+                );
+            }
         }
 
-        curl_setopt($this->_curl, CURLOPT_POSTFIELDS, $payload);
+        if (!empty($payload)) {
+            if (is_array($payload)) {
+                $payload = json_encode($payload);
+            }
+
+            curl_setopt($this->_curl, CURLOPT_POST, true);
+            curl_setopt($this->_curl, CURLOPT_POSTFIELDS, $payload);
+        }
 
         $response = $this->_reqeust();
 
-        return json_decode($response, true);
+        if ($doDecode && $response != false) {
+            return json_decode($response, true);
+        }
+
+        return $response;
     }
 
     /**
@@ -124,9 +149,22 @@ class SugarLicensing
         
         if($results === FALSE)
         {
-            $GLOBALS['log']->fatal("Sugar Licensing encountered an error: " . curl_error($this->_curl));
+            $GLOBALS['log']->error("Sugar Licensing encountered an error: " . curl_error($this->_curl));
         }
 
         return $results;
+    }
+
+    /**
+     * get Sugar licensing server name
+     */
+    protected function getServerName()
+    {
+        global $sugar_config;
+        if (isset($sugar_config['license_server'])) {
+            return  rtrim(trim($sugar_config['license_server']), '/');
+        }
+
+        return $this->_server;
     }
 }

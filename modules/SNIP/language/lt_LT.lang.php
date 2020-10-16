@@ -51,7 +51,7 @@ $mod_strings = array(
     "LBL_SNIP_PURCHASE_SUMMARY" => "Kad galėtumėte naudotis el. pašto archyvavimo paslauga, Jūs turite nusipirkti licenciją šiai Sugar versijai.",
     "LBL_SNIP_PURCHASE" => "Spauskite čia, kad nusipirkti",
     'LBL_SNIP_EMAIL' => 'El. pašto archyvavimo adresas',
-    'LBL_SNIP_AGREE' => "Aš sutinku su viršuje išdėstytomis sąlygomis ir konfidencialumo sutarimu.",
+    'LBL_SNIP_AGREE' => "Sutinku su pirmiau pateiktomis sąlygomis ir <a href='https://www.sugarcrm.com/legal/privacy-policy/' target='_blank'>privatumo politika</a>.",
     'LBL_SNIP_PRIVACY' => 'konfidencialumo sutarimas',
 
     'LBL_SNIP_STATUS_PINGBACK_FAIL' => 'Ping patikrinimas nepavyko',

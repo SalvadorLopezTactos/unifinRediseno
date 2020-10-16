@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Muutmiskuupäev',
     'LBL_DELETED' => 'Kustutatud',
     'LBL_REVENUELINEITEMS' => 'Tuluartiklid',
+    'LBL_ENTRY_SOURCE' => 'Märkuse allikas',
+    'LBL_SOURCE_EXTERNAL' => 'Väline',
+    'LBL_SOURCE_INTERNAL' => 'Sisemine',
 
     // Help Text
     // List View Help Text

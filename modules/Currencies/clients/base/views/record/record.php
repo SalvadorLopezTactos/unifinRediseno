@@ -70,7 +70,6 @@ $viewdefs['Currencies']['base']['view']['record'] = array(
             'header' => false,
             'columns' => 2,
             'labels' => true,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 array(

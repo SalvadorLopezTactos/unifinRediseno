@@ -26,7 +26,7 @@
                     return;
                 }
                 // Portal specific fields to hide if portal is disabled
-                var portalFields = ['portal_name', 'portal_active', 'portal_password'];
+                var portalFields = ['portal_name', 'portal_active', 'portal_password', 'portal_user_company_name'];
                 var serverInfo = app.metadata.getServerInfo();
                 if (!serverInfo.portal_active) {
                     _.each(meta.panels, function(panel) {

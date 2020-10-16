@@ -24,9 +24,7 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Container;
 class QueueManager
 {
     const FTS_QUEUE = 'fts_queue';
-    const JOB_QUEUE = 'job_queue';
     const PROCESSED_NEW = '0';
-    const PROCESSED_DONE = '1';
     const DEFAULT_BUCKET_ID = -1;
 
     /**
@@ -309,11 +307,19 @@ class QueueManager
      */
     public function resetQueue(array $modules = array())
     {
-        $sql = sprintf('DELETE FROM %s ', self::FTS_QUEUE);
-        if ($modules) {
-            $modules = array_map(array($this->db, 'quoted'), $modules);
-            $sql .= sprintf(' WHERE bean_module IN (%s)', implode(',', $modules));
+        if (empty($modules)) {
+            // TRUNCATE should be the first query in the transaction in DB2
+            $this->db->commit();
+            $this->db->query($this->db->truncateTableSQL(self::FTS_QUEUE));
+            $this->db->commit();
+            return;
         }
+        $sql = sprintf('DELETE FROM %s ', self::FTS_QUEUE);
+        $quotedModules = [];
+        foreach ($modules as $module) {
+            $quotedModules[] = $this->db->quoted($module);
+        }
+        $sql .= sprintf(' WHERE bean_module IN (%s)', implode(',', $quotedModules));
         $this->db->query($sql);
     }
 
@@ -357,7 +363,8 @@ class QueueManager
             $bean->disableSynchronizingEmailParticipants = true;
         }
 
-        $bean->populateFromRow($bean->convertRow($row));
+        // ideally, don't need get extra data, let batch retrival to handle batch retrieval
+        $bean->populateFromRow($bean->convertRow($row), false, false);
 
         //TODO: MAR-4889 will remove this hack.
         if ($bean instanceof \Email) {
@@ -407,6 +414,9 @@ class QueueManager
                 $row['erased_fields'] = null;
             }
             $bean = $this->processQueryRow($module, $row);
+            if (isset($ftsIds[$bean->id])) {
+                $this->batchDeleteFromQueue($ftsIds[$bean->id], $module);
+            }
             $ftsIds[$bean->id] = $row['fts_id'];
 
             // init tags and favorites
@@ -479,7 +489,6 @@ class QueueManager
      */
     protected function insertRecord($id, $module)
     {
-        // TODO - avoid duplicate beans for performance - upsert ?
         $sql = sprintf(
             'INSERT INTO %s (id, bean_id, bean_module, date_modified, date_created)
             VALUES (%s, %s, %s, %s, %s)',
@@ -639,6 +648,7 @@ class QueueManager
         $this->batchRetrieveEmails($module, $beans);
         $this->batchRetrieveTags($module, $beans);
         $this->batchRetrieveFavorites($module, $beans);
+        $this->batchRetrieveEmailText($module, $beans);
         return $beans;
     }
 
@@ -713,6 +723,42 @@ class QueueManager
             while ($row = $stmt->fetch()) {
                 $id = $row['record_id'];
                 $beans[$id]->fetchedFtsData['user_favorites'][] = $row['assigned_user_id'];
+            }
+        }
+        return $beans;
+    }
+
+    /**
+     * batch retrieve email_text for Emails module
+     * @param string $module
+     * @param array $beans
+     * @return array
+     */
+    protected function batchRetrieveEmailText(string $module, array $beans)
+    {
+        if ($module != 'Emails') {
+            return $beans;
+        }
+
+        $ids = array_keys($beans);
+
+        if (!empty($ids)) {
+            $query = "SELECT email_id, from_addr, reply_to_addr, to_addrs, cc_addrs, bcc_addrs, " .
+                "description, description_html, raw_source " .
+                " FROM emails_text WHERE email_id IN (?)";
+            $conn = $this->db->getConnection();
+            $stmt = $conn->executeQuery($query, [$ids], [Connection::PARAM_STR_ARRAY]);
+
+            while ($row = $stmt->fetch()) {
+                $id = $row['email_id'];
+                $beans[$id]->description = $row['description'];
+                $beans[$id]->description_html = $row['description_html'];
+                $beans[$id]->raw_source = $row['raw_source'];
+                $beans[$id]->from_addr_name = $row['from_addr'];
+                $beans[$id]->reply_to_addr = $row['reply_to_addr'];
+                $beans[$id]->to_addrs_names = $row['to_addrs'];
+                $beans[$id]->cc_addrs_names = $row['cc_addrs'];
+                $beans[$id]->bcc_addrs_names = $row['bcc_addrs'];
             }
         }
         return $beans;

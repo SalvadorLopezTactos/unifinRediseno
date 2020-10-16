@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Genehmigte und aus der Wissensdatenbank ausgelaufene Artikel veröffentlichen.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Geplante Aufgabe',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Denormalisierte Team-Sicherheitsdaten neu erstellen',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Aktivitäten-Stream: Reiniger',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervall:',
@@ -161,6 +162,7 @@ Zum Abbrechen schreiben Sie 'quit'. Um den Dienst zu stoppen, 'shutdown'.
 'LBL_SENDEMAILREMINDERS'=> 'Senden der E-Mail-Erinnerungen ausführen',
 'LBL_CLEANJOBQUEUE' => 'Auftrags-Warteschlange bereinigen',
 'LBL_CLEANOLDRECORDLISTS' => 'Alte Datensatzlisten bereinigen',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Aktivitäten-Stream: Reiniger',
 'LBL_PMSEENGINECRON' => 'SugarBPM-Zeitplaner',
 );
 

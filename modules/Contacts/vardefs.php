@@ -235,12 +235,84 @@ $dictionary['Contact'] = array(
             'comment' => 'Reference to the portal',
             'duplicate_on_record_copy' => 'no',
         ),
+        'portal_user_company_name' => [
+            'name' => 'portal_user_company_name',
+            'vname' => 'LBL_PORTAL_USER_COMPANY_NAME',
+            'type' => 'varchar',
+            'len' => '255',
+            'group' => 'portal',
+            'comment' => 'User company name in the portal',
+            'studio' => [
+                'portalrecordview' => false,
+                'portallistview' => false,
+            ],
+            'duplicate_on_record_copy' => 'no',
+        ],
         'preferred_language' => array(
             'name' => 'preferred_language',
             'type' => 'enum',
             'vname' => 'LBL_PREFERRED_LANGUAGE',
             'options' => 'available_language_dom',
             'popupHelp' => 'LBL_LANG_PREF_TOOLTIP',
+        ),
+        'cookie_consent' => [
+            'name' => 'cookie_consent',
+            'vname' => 'LBL_COOKIE_CONSENT',
+            'type' => 'bool',
+            'default' => '0',
+            'audited' => true,
+            'comment' => 'Indicator whether this portal user accepts cookies',
+            'duplicate_on_record_copy' => 'no',
+        ],
+        'cookie_consent_received_on' => [
+            'name' => 'cookie_consent_received_on',
+            'vname' => 'LBL_COOKIE_CONSENT_RECEIVED_ON',
+            'type' => 'datetime',
+            'audited' => true,
+            'enable_range_search' => true,
+            'options' => 'date_range_search_dom',
+            'comment' => 'Date cookie consent received on',
+            'duplicate_on_record_copy' => 'no',
+        ],
+        'business_center_name' => array(
+            'name' => 'business_center_name',
+            'rname' => 'name',
+            'id_name' => 'business_center_id',
+            'vname' => 'LBL_BUSINESS_CENTER_NAME',
+            'type' => 'relate',
+            'link' => 'business_centers',
+            'table' => 'business_centers',
+            'join_name' => 'business_centers',
+            'isnull' => 'true',
+            'module' => 'BusinessCenters',
+            'dbType' => 'varchar',
+            'len' => 255,
+            'source' => 'non-db',
+            'unified_search' => true,
+            'comment' => 'The name of the business center represented by the business_center_id field',
+            'required' => false,
+        ),
+        'business_center_id' => array(
+            'name' => 'business_center_id',
+            'type' => 'relate',
+            'dbType' => 'id',
+            'rname' => 'id',
+            'module' => 'BusinessCenters',
+            'id_name' => 'business_center_id',
+            'reportable' => false,
+            'vname' => 'LBL_BUSINESS_CENTER_ID',
+            'audited' => true,
+            'massupdate' => false,
+            'comment' => 'The business center to which the case is associated',
+        ),
+        'business_centers' => array(
+            'name' => 'business_centers',
+            'type' => 'link',
+            'relationship' => 'business_center_contacts',
+            'link_type' => 'one',
+            'side' => 'right',
+            'source' => 'non-db',
+            'vname' => 'LBL_BUSINESS_CENTER',
         ),
         'accounts' => array(
             'name' => 'accounts',
@@ -299,6 +371,22 @@ $dictionary['Contact'] = array(
                 'account_name'
             )
         ),
+        'case_contact' => [
+            'name' => 'case_contact',
+            'type' => 'link',
+            'relationship' => 'contact_cases',
+            'source' => 'non-db',
+            'side' => 'right',
+            'vname' => 'LBL_CONTACT',
+            'module' => 'Cases',
+            'bean_name' => 'aCase',
+            'id_name' => 'primary_contact_id',
+            'link_type' => 'one',
+            'populate_list' => [
+                'account_id',
+                'account_name',
+            ],
+        ],
         'dataprivacy' => array(
             'name' => 'dataprivacy',
             'type' => 'link',
@@ -712,12 +800,42 @@ $dictionary['Contact'] = array(
                 'reportable' => true,
                 'importable' => 'true',
             ),
+        'entry_source' => [
+            'name' => 'entry_source',
+            'vname' => 'LBL_ENTRY_SOURCE',
+            'type' => 'enum',
+            'function' => 'getSourceTypes',
+            'function_bean' => 'Contacts',
+            'len' => '255',
+            'default' => 'internal',
+            'comment' => 'Determines if a record was created internal to the system or external to the system',
+            'readonly' => true,
+            'studio' => false,
+            'processes' => true,
+            'reportable' => true,
+        ],
+        // site_user_id is used as an analytics id
+        'site_user_id' => [
+            'name' => 'site_user_id',
+            'vname' => 'LBL_SITE_USER_ID',
+            'type' => 'varchar',
+            'len' => '64',
+            'reportable' => false,
+            'importable' => false,
+            'studio' => false,
+            'readonly' => true,
+        ],
     ),
     'indices' => array(
         array(
             'name' => 'idx_contacts_del_last',
             'type' => 'index',
             'fields' => array('deleted', 'last_name'),
+        ),
+        array(
+            'name' => 'idx_cont_del_last_dm',
+            'type' => 'index',
+            'fields' => array('deleted', 'last_name', 'date_modified'),
         ),
         array(
             'name' => 'idx_cont_del_reports',
@@ -727,7 +845,11 @@ $dictionary['Contact'] = array(
         array(
             'name' => 'idx_reports_to_id',
             'type' => 'index',
-            'fields' => array('reports_to_id'),
+            'fields' => array(
+                'deleted',
+                'reports_to_id',
+                'id',
+            ),
         ),
         array(
             'name' => 'idx_del_id_user',
@@ -745,7 +867,11 @@ $dictionary['Contact'] = array(
             'type' => 'index',
             'fields' => array('mkto_id')
         ),
-
+        [
+            'name' => 'idx_cont_portal_active',
+            'type' => 'index',
+            'fields' => ['portal_name', 'portal_active', 'deleted'],
+        ],
     ),
     'relationships' => array(
         'contact_direct_reports' => array(
@@ -911,6 +1037,12 @@ $dictionary['Contact'] = array(
         'team_security',
         'person',
     ),
+    'portal_visibility' => [
+        'class' => 'Contacts',
+        'links' => [
+            'Accounts' => 'accounts',
+        ],
+    ],
 );
 
 VardefManager::createVardef(

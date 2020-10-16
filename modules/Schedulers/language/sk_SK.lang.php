@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Zverejniť schválené články a články v báze znalostí s ukončenou platnosťou.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Naplánovaná úloha',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Prerobiť denormalizované tímové bezpečnostné údaje',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Modul očistenia aktivít',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Spustiť odoslanie pripomienok prostredníctvom e-mailu',
 'LBL_CLEANJOBQUEUE' => 'vyčíslenie pracovnej kvoty',
 'LBL_CLEANOLDRECORDLISTS' => 'Vyčistenie zoznamov starého záznamu',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Modul očistenia aktivít',
 'LBL_PMSEENGINECRON' => 'Plánovač SugarBPM',
 );
 

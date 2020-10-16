@@ -45,13 +45,13 @@
                             'include/javascript/twitterbootstrap/bootstrap-collapse.js'   => $target,
                             'include/javascript/twitterbootstrap/bootstrap-colorpicker.js' => $target,
                         );
-                        break;
+
                     case 'bootstrap_core':
                         return array(
                             'include/javascript/twitterbootstrap/bootstrap.min.js'       =>   $target,
                             'include/javascript/jquery/jquery.popoverext.js'             =>   $target,
                         );
-                        break;
+
                     case 'jquery_core':
                         return array (
                             'include/javascript/jquery/jquery-min.js'               =>  $target,
@@ -60,6 +60,7 @@
                             'include/javascript/jquery/jquery-migrate.min.js' =>  $target,
                         );
                         break;
+
                     case 'jquery_menus':
                         return array(
                             'include/javascript/jquery/jquery.hoverIntent.js'            =>   $target,
@@ -74,12 +75,10 @@
                             'include/javascript/jquery/jquery.dataTables.customSort.js'  =>   $target,
                             'include/javascript/jquery/jquery.jeditable.js'              =>   $target,
                         );
-                        break;
-                    default:
-                        break;
                 }
             }
         }
+
         $calendarJSFileName = file_exists('custom/include/javascript/calendar.js') ?
             'custom/include/javascript/calendar.js' : 'include/javascript/calendar.js';
         $js_groupings = array(
@@ -234,8 +233,6 @@
                    'include/javascript/sucrose/sucrose.min.js' => 'include/javascript/sugar_sidecar.min.js',
                    'include/SugarCharts/sucrose/js/sugarCharts.js' => 'include/javascript/sugar_sidecar.min.js',
                    // D3 (version 3.x) entire library
-                   'include/javascript/nvd3/lib/d3.min.js' => 'include/javascript/sugar_sidecar.min.js',
-                   'include/javascript/nvd3/nv.d3.min.js' => 'include/javascript/sugar_sidecar.min.js',
                    'include/javascript/sugar7/error.js' => 'include/javascript/sugar_sidecar.min.js',
                    'include/javascript/sugar7/touch.js' => 'include/javascript/sugar_sidecar.min.js',
                    'include/javascript/select2/select2.js' => 'include/javascript/sugar_sidecar.min.js',
@@ -247,6 +244,11 @@
                    'include/javascript/jquery/jquery.popoverext.js'           => 'include/javascript/sugar_sidecar.min.js',
                    'include/javascript/jquery/jquery.nouislider.js' => 'include/javascript/sugar_sidecar.min.js',
                    'include/javascript/nprogress/nprogress.js' => 'include/javascript/sugar_sidecar.min.js',
+                   // External app/MFE support
+                   'sidecar/node_modules/promise-polyfill/dist/polyfill.js'=> 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/systemjs/system.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/sugar7/external-apps.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/single-spa/single-spa.min.js' => 'include/javascript/sugar_sidecar.min.js',
 
                    'include/javascript/select2/language.js' => 'include/javascript/sugar_sidecar.min.js',
                    'sidecar/node_modules/moment/min/locales.min.js' => 'include/javascript/sugar_sidecar.min.js',
@@ -294,6 +296,7 @@
                     'include/javascript/sugar7/plugins/ListDisableSort.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/Editable.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/ListEditable.js'  => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/sugar7/plugins/FilterSharing.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/ListRemoveLinks.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/File.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/FieldDuplicate.js' => 'include/javascript/sugar_sidecar.min.js',
@@ -326,7 +329,7 @@
                     'include/javascript/tinymce4/jquery.tinymce.min.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/mousetrap/mousetrap.min.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/clipboardjs/clipboard.min.js' => 'include/javascript/sugar_sidecar.min.js',
-                )
+               )
            ),
 
             $sugar_grp_sugar7 = array(
@@ -496,16 +499,15 @@
             ),
         );
 
-    /**
-     * Check for custom additions to this code
-     */
+        if (!spl_autoload_functions()) {
+            // This block is required because this file could be called from a non-entrypoint (such as jssource/minify.php).
+            require 'vendor/autoload.php';
+        }
 
-    if(!class_exists('SugarAutoLoader')) {
-        // This block is required because this file could be called from a non-entrypoint (such as jssource/minify.php).
-        require_once('include/utils/autoloader.php');
-        SugarAutoLoader::init();
-    }
-
-    foreach(SugarAutoLoader::existing("custom/jssource/JSGroupings.php", SugarAutoLoader::loadExtension("jsgroupings")) as $file) {
-        require $file;
-    }
+        // check for custom additions to this code
+        foreach (SugarAutoLoader::existing(
+            'custom/jssource/JSGroupings.php',
+            SugarAutoLoader::loadExtension('jsgroupings')
+        ) as $file) {
+            require $file;
+        }

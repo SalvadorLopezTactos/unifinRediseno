@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -59,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => '적합성 확인중 오류가 발견되었습니다. SugarCRM설치가 올바른 작동을 위해서는 아래 목록의 문제들을 알맞은 단계에 걸쳐 확인하거나 재확인 버튼을 누르고 아니면 다시 설치하시기 바랍니다.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Call Time Pass Reference 를 작동하십시요.(이는 php.ini에서는 작동하실수 없습니다.)',
 
-	'ERR_CHECKSYS_CURL'					=> '찾지 못함: Sugar 일정관리의 기능이 제한됩니다. 이메일 보관 서비스가 실행되지 않습니다.',
+	'ERR_CHECKSYS_CURL'					=> '찾을 수 없음: Sugar 일정 관리가 제한된 기능으로 작동합니다. 이메일 보관 서비스가 실행되지 않습니다.',
     'ERR_CHECKSYS_IMAP'					=> '발견되지 않았습니다 : 수신 이메일과 캠페인(이메일)은 IMAP libraries를 요합니다. 모두  작동할수 없습니다.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'MS SQL서버 사용시 Magic Quotes GPC 를 작동할수 없습니다.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> '경고',
@@ -75,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'IIS/FastCGI sapi의 최고의 사용경험을 위해 php.ini파일의 fastcgi.logging 을 0으로 설정하십시요.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> '지원되지 않는 PHP버전이 설치되었습니다.',
     'LBL_DB_UNAVAILABLE'                => '데이타베이스가 이용불가합니다.',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '데이터베이스 지원을 찾을 수 없습니다. 지원되는 데이터베이스 유형인 MySQL, MS SQLServer, Oracle, 또는 DB2 중 하나에 필요한 드라이버가 있는지 확인하십시오. PHP 버전에 따라서, php.ini 파일 내의 extension에서 주석 처리를 제거하거나, 올바른 이진 파일로 다시 컴파일해야 할 수도 있습니다. 데이터베이스 지원을 활성화하는 방법에 대한 자세한 정보는 PHP 매뉴얼을 참조하십시오.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '데이터베이스 지원을 찾을 수 없습니다. 지원되는 데이터베이스 유형인 MySQL, MS SQLServer, Oracle, 또는 DB2 중 한 가지에 필요한 드라이버를 가지고 있는지 확인해 주십시오. PHP 버전에 따라 php.ini 파일에서 확장자를 주석 해제하거나 알맞은 바이너리 파일로 컴파일해야 할 수도 있습니다. 데이터베이스 지원을 활성화하는 방법에 대한 자세한 정보는 PHP 매뉴얼을 참조하십시오.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Sugar 어플리케이션에 필요한 XML Parser Libraries 연결 기능이 발견되지 않았습니다. PHP버전에 따라 php.ini 파일 확장을 uncomment 하거나 이진 파일을 재편집해야 합니다. 더 자세한 정보를 위해PHP 안내서를 참조하십시요.',
     'LBL_CHECKSYS_CSPRNG' => '난수 생성기',
     'ERR_CHECKSYS_MBSTRING'             => 'Sugar 어플리케이션에 필요한 Multibyte Strings PHP (mbstring)확장에 연결 기능이 발견되지 않았습니다. 일반적으로 mbstring 모듈은 PHP초기설정에 의해 작동이 불가하며 반드시 이원체 설치가 완료된후 사용가능한 mbstring과 같이 작동되어야 합니다. mbstring 작동가능 지원에 관한 더 자세한 정보를 위해서 PHP 안내서를 참조하십시오.',
@@ -476,6 +475,142 @@ $mod_strings = array(
 	'LBL_PATCH_UPLOAD' => '현 컴퓨터에서 패치 파일을 선택하십시오',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'PHP 역방향 적합성 모드가 작동중입니다. 계속 진행하려면 zend.ze1_compatibility_mode 를 작동을 중지하십시오.',
 
+    'meeting_notification_email' => array(
+        'name' => 'Meeting Notifications Emails',
+        'subject' => 'SugarCRM Meeting - $event_name ',
+        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'body' => '<div>
+	<p>To: $assigned_user</p>
+
+	<p>$assigned_by_user has invited you to a Meeting</p>
+
+	<p>Subject: $event_name<br/>
+	Start Date: $start_date<br/>
+	End Date: $end_date</p>
+
+	<p>Description: $description</p>
+
+	<p>Accept this meeting:<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Tentatively Accept this meeting:<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Decline this meeting:<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'To: $assigned_user
+
+$assigned_by_user has invited you to a Meeting
+
+Subject: $event_name
+Start Date: $start_date
+End Date: $end_date
+
+Description: $description
+
+Accept this meeting:
+<$accept_link>
+
+Tentatively Accept this meeting
+<$tentative_link>
+
+Decline this meeting
+<$decline_link>',
+    ),
+
+    'call_notification_email' => array(
+        'name' => 'Call Notifications Emails',
+        'subject' => 'SugarCRM Call - $event_name ',
+        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'body' => '<div>
+	<p>To: $assigned_user</p>
+
+	<p>$assigned_by_user has invited you to a Call</p>
+
+	<p>Subject: $event_name<br/>
+	Start Date: $start_date<br/>
+	Duration: $hoursh, $minutesm</p>
+
+	<p>Description: $description</p>
+
+	<p>Accept this call:<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Tentatively Accept this call:<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Decline this call:<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'To: $assigned_user
+
+$assigned_by_user has invited you to a Call
+
+Subject: $event_name
+Start Date: $start_date
+Duration: $hoursh, $minutesm
+
+Description: $description
+
+Accept this call:
+<$accept_link>
+
+Tentatively Accept this call
+<$tentative_link>
+
+Decline this call
+<$decline_link>',
+    ),
+
+    'assigned_notification_email' => array(
+        'name' => 'Assignment Notification Emails',
+        'subject' => 'SugarCRM - Assigned $module_name ',
+        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'body' => '<div>
+<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+
+<p>You may review this&nbsp;$module_name at:<br/>
+	<<a href="$module_link">$module_link</a>></p>
+</div>',
+        'txt_body' =>
+            '$assigned_by_user has assigned a $module_name to $assigned_user.
+
+You may review this $module_name at:
+<$module_link>',
+    ),
+
+    'scheduled_report_email' => array(
+        'name' => 'Scheduled Report Emails',
+        'subject' => 'Scheduled Report: $report_name as of $report_time',
+        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'body' => '<div>
+<p>Hello $assigned_user,</p>
+<p>Attached is an auto generated report that has been scheduled for you.</p>
+<p>Report Name: $report_name</p>
+<p>Report Run Date and Time: $report_time</p>
+</div>',
+        'txt_body' =>
+            'Hello $assigned_user,
+
+Attached is an auto generated report that has been scheduled for you.
+
+Report Name: $report_name
+
+Report Run Date and Time: $report_time',
+    ),
+
+    'comment_log_mention_email' => [
+        'name' => 'System Comment Log Email Notification',
+        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
+        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'body' =>
+            '<div>
+                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
+                <p>Please log in to Sugar to view the comment.</p>
+            </div>',
+        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
+            Please log in to Sugar to view the comment.',
+    ],
+
     'advanced_password_new_account_email' => array(
         'subject' => '새 계정 정보',
         'description' => '이 템플릿은 시스템 관리자가 사용자에 새 비밀번호 전송시 사용됩니다.',
@@ -492,4 +627,32 @@ $mod_strings = array(
 '최근 귀하의 계정 비밀번호 재설정을 위한 contact_user_pwd_last_changed을 요청하였습니다. 아래 링크를 클릭하여 비밀번호를 재설정하십시요. :$contact_user_link_guid',
         'name' => '이메일 비밀번호 분실',
         ),
+
+'portal_forgot_password_email_link' => [
+    'name' => '포탈 비밀번호 분실 이메일',
+    'subject' => '귀하의 계정 비밀번호를 재설정하십시오.',
+    'description' => '이 템플릿은 포탈 계정 비밀번호 재설정시 클릭할 링크를 사용자에게 전송할때 사용됩니다.',
+    'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>귀하는 최근 귀하의 계정 비밀번호 재설정을 요청하셨습니다. </p><p>아래 링크를 클릭하여 비밀번호를 재설정 하십시오.</p><p> <a href="$portal_user_link_guid">$portal_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+    'txt_body' =>
+'
+    귀하는 최근 귀하의 계정 비밀번호 재설정을 요청하셨습니다.
+
+    아래 링크를 클릭하여 비밀번호를 재설정 하십시오.
+
+    $portal_user_link_guid',
+],
+
+    'portal_password_reset_confirmation_email' => [
+        'name' => '포탈 비밀번호 재설정 확인 이메일',
+        'subject' => '귀하의 계정 비밀번호가 재설정되었습니다',
+        'description' => '이 템플릿은 포탈 사용자에게 사용자의 계정 비밀번호가 재설정되었다는 확인을 보내는 데에 사용됩니다.',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>이 이메일은 포탈 계정 비밀번호가 재설정되었음을 확인하기 위한 것입니다. </p><p>포탈에 로그인하기 위해 아래 링크를 사용하십시오.</p><p> <a href="$portal_login_url">$portal_login_url</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+        'txt_body' =>
+            '
+    이 이메일은 귀하의 포탈 계정 비밀번호가 재설정 되었음을 확인하기 위함입니다.
+
+    포탈에 로그인할 수 있도록 아래 링크를 사용하십시오.
+
+    $portal_login_url',
+    ],
 );

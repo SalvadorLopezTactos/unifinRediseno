@@ -24,7 +24,12 @@ class RememberMeServiceProvider implements ServiceProviderInterface
     public function register(Container $app)
     {
         $app['RememberMe'] = function ($app) {
-            return new RememberMe\Service($app->getSession(), $app->getDoctrineService());
+            return new RememberMe\Service(
+                $app->getSession(),
+                $app->getDoctrineService(),
+                $app->getOAuth2Service()->getClientID(),
+                $app->getAudit()
+            );
         };
     }
 }

@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publikuokite patvirtintus straipsnius ir nebegaliojančius žinių bazės straipsnius.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Suplanuota užduotis',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Atkurkite sugadintus komandos saugos duomenis',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Veiklos srauto valymo priemonė',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervalas:',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Siųsti priminimus el. paštu',
 'LBL_CLEANJOBQUEUE' => 'Išvalyti suplanuotą darbų eilę',
 'LBL_CLEANOLDRECORDLISTS' => 'Cleanup Old Record Lists',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Veiklos srauto valymo priemonė',
 'LBL_PMSEENGINECRON' => '„SugarBPM“ planuoklė',
 );
 

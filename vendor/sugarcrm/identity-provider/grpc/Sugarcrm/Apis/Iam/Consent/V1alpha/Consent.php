@@ -47,30 +47,9 @@ class Consent extends \Google\Protobuf\Internal\Message
      */
     private $modify_time = null;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $tenant
-     *           The tenant SRN this consent belongs to.
-     *     @type string $app
-     *           The application SRN for which consent is given.
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $scopes
-     *           List of consented scopes. This parameters is required when registering
-     *           a new consent and is ignored when removing a consent.
-     *     @type \Google\Protobuf\Timestamp $create_time
-     *           Consent creation timestamp.
-     *           &#64;ReadOnly
-     *     @type \Google\Protobuf\Timestamp $modify_time
-     *           Consent modification timestamp.
-     *           &#64;ReadOnly
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Consent\V1Alpha\Consent::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

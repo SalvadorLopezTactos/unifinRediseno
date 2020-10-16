@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'Contacte',
     'LBL_DISCOUNT_TOTAL' => 'Descompte Total',
     'LBL_DISCOUNT_AMOUNT' => 'Quantitat Descomptada',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'Valor de la Quantitat Descomptada',
     'LBL_EXT_PRICE' => 'Preu Ext.',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Nom del Símbol de Moneda',

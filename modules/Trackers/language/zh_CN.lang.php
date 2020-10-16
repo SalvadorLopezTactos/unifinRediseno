@@ -18,17 +18,7 @@
  ********************************************************************************/
 
 $mod_strings = array (
-		  //Labels for methods in the TrackerReporter.php file that are shown in TrackerDashlet
-		  'ShowActiveUsers'      => '显示启用用户',
-		  'ShowLastModifiedRecords' => '最后十条更改的记录',
-		  'ShowTopUser' => 'Top 用户',
-		  'ShowMyModuleUsage' => '我的模块使用情况',
-		  'ShowMyWeeklyActivities' => '我每周的活动日程',
-		  'ShowTop3ModulesUsed' => '我使用最多的三个模块',
-		  'ShowLoggedInUserCount' => '启用用户数量',
-		  'ShowMyCumulativeLoggedInTime' => '我的累计登录时间 (本周)',
-		  'ShowUsersCumulativeLoggedInTime' => '用户累计登录时间 (本周)',
-		  
+
 		  //Column header mapping
 		  'action' => '活动',
 		  'active_users' => '启用用户数量',

@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'แดชบอร์ดรายการปัญหา',
     'LBL_CASES_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกปัญหา',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'รายละเอียดเคส',
 
 	'ERR_DELETE_RECORD'					=> 'คุณต้องระบุเลขที่ระเบียนเพื่อลบบัญชี',
 	'LBL_ACCOUNT_ID'					=> 'ID บัญชี',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'ที่อยู่ติดต่อ',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'เคส',
 	'LBL_DESCRIPTION'					=> 'คำอธิบาย:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'ไฟล์แนบ',	
+    'LBL_FILENANE_ATTACHMENT'           => 'ไฟล์แนบ',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'ประวัติ',
 	'LBL_INVITEE'						=> 'ที่อยู่ติดต่อ',
 	'LBL_MEMBER_OF'						=> 'บัญชี',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'สร้างโดยชื่อผู้ใช้',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'ชื่อผู้ใช้ที่ระบุ',
     'LBL_EXPORT_TEAM_COUNT' => 'จำนวนทีม',
+    'LBL_CHANGETIMERS' => 'เปลี่ยนตัวตั้งเวลา',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'อีเมลของผู้ติดต่อที่เกี่ยวข้อง',
@@ -140,4 +143,11 @@ $mod_strings = array (
  - คุณต้องป้อนข้อมูลในฟิลด์ที่มีคำว่า "ต้องระบุ" กำกับไว้ ก่อนที่จะบันทึก
  - คลิก "แสดงเพิ่มเติม" เพื่อแสดงฟิลด์อื่นๆ หากจำเป็น
 2. คลิก "บันทึก" เพื่อสิ้นสุดการสร้างระเบียนใหม่ และกลับสู่เพจก่อนหน้า',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'ไม่พบสิ่งที่คุณกำลังค้นหาใช่หรือไม่',
+    'LBL_CREATE_CASE' => 'สร้าง {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'รายละเอียด SLA',
+    'LBL_HOURS' => 'ชั่วโมง',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

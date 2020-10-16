@@ -22,19 +22,9 @@ class ListTenantsRequest extends \Google\Protobuf\Internal\Message
      */
     private $page_token = '';
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type int $page_size
-     *     @type string $page_token
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Tenant\V1Alpha\Tenant::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

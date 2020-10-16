@@ -50,4 +50,6 @@ $mod_strings = array(
     'LBL_PARENT_ID' => 'Matični ID broj:',
     'LBL_READ' => 'Pročitano',
     'LBL_UNREAD' => 'Nepročitano',
+    'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'Pomenuo vas je korisnik',
+    'LBL_YOU_HAVE_BEEN_MENTIONED' => 'Neko vas je pomenuo',
 );

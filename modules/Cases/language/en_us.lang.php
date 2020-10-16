@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Cases List Dashboard',
     'LBL_CASES_RECORD_DASHBOARD' => 'Cases Record Dashboard',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Case Details',
 
 	'ERR_DELETE_RECORD'					=> 'You must specify a record number to delete the Account.',
 	'LBL_ACCOUNT_ID'					=> 'Account ID',
@@ -105,6 +106,7 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Created By User Name',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Assigned User Name',
     'LBL_EXPORT_TEAM_COUNT' => 'Team Count',
+    'LBL_CHANGETIMERS' => 'Change Timers',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Related Contacts\' Emails',
@@ -140,4 +142,10 @@ To create a {{module_name}}:
  - Fields marked "Required" must be completed prior to saving.
  - Click "Show More" to expose additional fields if necessary.
 2. Click "Save" to finalize the new record and return to the previous page.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Didn\'t find what you are looking for?',
+    'LBL_CREATE_CASE' => 'Create a {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'SLA Details',
+    'LBL_HOURS' => 'Hours',
 );

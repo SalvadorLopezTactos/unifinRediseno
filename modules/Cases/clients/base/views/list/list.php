@@ -79,6 +79,39 @@ $viewdefs['Cases']['base']['view']['list'] = array(
                     'default' => false,
                     'enabled' => true,
                 ),
+                [
+                    'name' => 'primary_contact_name',
+                    'label' => 'LBL_PRIMARY_CONTACT_NAME',
+                    'default' => false,
+                    'enabled' => true,
+                ],
+                array(
+                    'name' => 'business_center_name',
+                    'label' => 'LBL_BUSINESS_CENTER_NAME',
+                    'default' => false,
+                    'enabled' => true,
+                    'readonly' => true,
+                ),
+                array(
+                    'name' => 'service_level',
+                    'label' => 'LBL_SERVICE_LEVEL',
+                    'default' => false,
+                    'enabled' => true,
+                    'readonly' => true,
+                ),
+                array(
+                    'name' => 'follow_up_datetime',
+                    'label' => 'LBL_FOLLOW_UP',
+                    'default' => false,
+                    'enabled' => true,
+                ),
+                [
+                    'name' => 'first_response_sla_met',
+                    'label' => 'LBL_FIRST_RESPONSE_SLA_MET',
+                    'default' => false,
+                    'enabled' => true,
+                    'readonly' => true,
+                ],
             ),
         )
     )

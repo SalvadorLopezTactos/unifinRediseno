@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'Neinštalovateľné',
     'LBL_ML_VERSION' => 'Verzia',
 	'LBL_ML_INSTALL'=>'Inštalovať',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'Stopár',
 	'LBL_MODULE_NAME' => 'Sprievodca inováciou',
 	'LBL_MODULE_NAME_SINGULAR' => 'Sprievodca inováciou',
 	'LBL_UPLOAD_SUCCESS' => 'Aktualizačný balík bol úspešne nahratý. Kliknite na možnosť Ďalej a vykonajte záverečnú kontrolu.',

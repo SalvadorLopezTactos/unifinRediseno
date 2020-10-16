@@ -22,7 +22,9 @@ class ForecastHooks extends AbstractForecastHooks
      */
     public static function fixDateModified(Forecast $forecast, $event, $params = array())
     {
-        $forecast->date_modified = $forecast->fetched_row['date_modified'];
+        if (isset($forecast->fetched_row['date_modified'])) {
+            $forecast->date_modified = $forecast->fetched_row['date_modified'];
+        }
     }
 
     /**

@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Angebote (Liefern an)',
 	'LNK_ACCOUNT_REPORTS' => 'Firmenberichte anzeigen',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumente',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Firmenlisten-Dashboard',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Firmendatensatz-Dashboard',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Firmendaten',
+    'LBL_NEXT_RENEWAL_DATE' => 'Datum der nächsten Erneuerung',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Firmenname/Branche',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'Ort',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Diagramme',

@@ -18,17 +18,7 @@
  ********************************************************************************/
 
 $mod_strings = array (
-		  //Labels for methods in the TrackerReporter.php file that are shown in TrackerDashlet
-		  'ShowActiveUsers'      => 'Rodyti aktyvius vartotojus',
-		  'ShowLastModifiedRecords' => '10 paskutinių redaguotų įrašų',
-		  'ShowTopUser' => 'Top vartotojas',
-		  'ShowMyModuleUsage' => 'Mano modulio naudojimas',
-		  'ShowMyWeeklyActivities' => 'Mano savaitinė veikla',
-		  'ShowTop3ModulesUsed' => 'Mano Top 3 moduliai',
-		  'ShowLoggedInUserCount' => 'Aktyvūs vartotojai',
-		  'ShowMyCumulativeLoggedInTime' => 'Mano bendra prisijungimų trukmė (šią savaitę)',
-		  'ShowUsersCumulativeLoggedInTime' => 'Vartotojų bendra prisijungimų trukmė (šią savaitę)',
-		  
+
 		  //Column header mapping
 		  'action' => 'Veiksmas',
 		  'active_users' => 'Aktyvūs vartotojai',

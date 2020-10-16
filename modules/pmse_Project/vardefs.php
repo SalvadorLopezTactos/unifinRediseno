@@ -260,6 +260,17 @@ $dictionary['pmse_Project'] = array(
                 'include' => 'modules/pmse_Project/pmse_ProjectHelper.php',
             ),
         ),
+        'prj_run_order' => array(
+            'required' => false,
+            'default' => 1,
+            'name' => 'prj_run_order',
+            'vname' => 'LBL_PRJ_RUN_ORDER',
+            'type' => 'int',
+            'importable' => 'true',
+            'calculated' => false,
+            'studio' => 'visible',
+            'min' => '1',
+        ),
     ),
     'relationships' => array(),
     'optimistic_locking' => true,
@@ -288,6 +299,9 @@ $dictionary['pmse_Project'] = array(
     'ignore_templates' => array(
         'lockable_fields',
     ),
+    'portal_visibility' => [
+        'class' => 'PMSE',
+    ],
     'uses' => array(
         'basic',
         'team_security',

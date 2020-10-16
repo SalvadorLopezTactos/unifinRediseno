@@ -56,36 +56,9 @@ class Address extends \Google\Protobuf\Internal\Message
      */
     private $country = '';
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $street_address
-     *           Full street address component, which MAY include house number, street
-     *           name, Post Office Box, and multi-line extended street address
-     *           information. This field MAY contain multiple lines, separated by
-     *           newlines. Newlines can be represented either as a carriage return/line
-     *           feed pair ("\r\n") or as a single line feed character ("\n").
-     *           Sugar field mapping: `users.address_street`
-     *     @type string $locality
-     *           City or locality component.
-     *           Sugar field mapping: `users.address_city`
-     *     @type string $region
-     *           State, province, prefecture, or region component.
-     *           Sugar field mapping: `users.address_state`
-     *     @type string $postal_code
-     *           Zip code or postal code component.
-     *           Sugar field mapping: `users.address_postalcode`
-     *     @type string $country
-     *           Country name component.
-     *           Sugar field mapping: `users.address_country`
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\User\V1Alpha\User::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

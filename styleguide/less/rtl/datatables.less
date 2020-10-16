@@ -47,7 +47,7 @@ table.dataTable {
             &::before {
               right: -5px;
               left: auto;
-              #gradient > .horizontal(rgba(0,0,0,0.1), rgba(255,255,255,0));
+              #gradient > .horizontal(fade(@black, 10%), @white);
             }
           }
         }
@@ -61,7 +61,7 @@ table.dataTable {
           &::before {
             right: -5px;
             left: auto;
-            #gradient > .horizontal(rgba(0,0,0,0.1), rgba(255,255,255,0));
+            #gradient > .horizontal(fade(@black, 10%), @white);
           }
 
           .btn.rowaction {
@@ -115,9 +115,9 @@ table.dataTable {
             &::after {
               left: -5px;
               right: auto;
-              #gradient > .horizontal(rgba(255,255,255,0), rgba(0,0,0,0.1));
+              #gradient > .horizontal(@white, fade(@black, 10%));
 
-              background-color: transparent;
+              background-color: @transparent;
             }
           }
         }
@@ -130,9 +130,9 @@ table.dataTable {
             &::after {
               left: -5px;
               right: auto;
-              #gradient > .horizontal(rgba(255,255,255,0), rgba(0,0,0,0.1));
+              #gradient > .horizontal(@white, fade(@black, 10%));
 
-              background-color: transparent;
+              background-color: @transparent;
             }
           }
         }

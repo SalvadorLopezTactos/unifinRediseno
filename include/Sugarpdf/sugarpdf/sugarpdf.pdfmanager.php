@@ -55,7 +55,9 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
                 if (!empty($pdfTemplate->header_logo)) {
                     // Create a temporary copy of the header logo
                     // and append the original filename, so TCPDF can figure the extension
-                    $headerLogo = 'upload/' . $pdfTemplate->id . $pdfTemplate->header_logo;
+                    $uniqueNumber = rand(1, 500) / rand(1, 50);
+                    $headerLogo = 'upload/' . $uniqueNumber . '-' .
+                        $pdfTemplate->id . $pdfTemplate->header_logo;
                     copy('upload/' . $pdfTemplate->id, $headerLogo);
                 }
 
@@ -107,6 +109,24 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
                 'currency_id' => $this->bean->currency_id,
                 'charset_convert' => true, /* UTF-8 uses different bytes for Euro and Pounds */
             );
+
+            if (!empty($this->bean->date_quote_expected_closed)) {
+                $dt = new SugarDateTime($this->bean->date_quote_expected_closed);
+                $fields['date_quote_expected_closed'] = $GLOBALS['timedate']->asUserDate($dt);
+            }
+            if (!empty($this->bean->original_po_date)) {
+                $dt = new SugarDateTime($this->bean->original_po_date);
+                $fields['original_po_date'] = $GLOBALS['timedate']->asUserDate($dt);
+            }
+            if (!empty($this->bean->date_quote_closed)) {
+                $dt = new SugarDateTime($this->bean->date_quote_closed);
+                $fields['date_quote_closed'] = $GLOBALS['timedate']->asUserDate($dt);
+            }
+            if (!empty($this->bean->date_order_shipped)) {
+                $dt = new SugarDateTime($this->bean->date_order_shipped);
+                $fields['date_order_shipped'] = $GLOBALS['timedate']->asUserDate($dt);
+            }
+
             $currency->retrieve($this->bean->currency_id);
             $fields['currency_iso'] = $currency->iso4217;
 
@@ -127,6 +147,16 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
                 foreach ($product_bundle_line_items as $product_bundle_line_item) {
 
                     $bundleFields['products'][$count] = PdfManagerHelper::parseBeanFields($product_bundle_line_item, true);
+
+                    // Format the service start and end dates into the user preferred format
+                    if (!empty($product_bundle_line_item->service_start_date)) {
+                        $dt = new SugarDateTime($product_bundle_line_item->service_start_date);
+                        $bundleFields['products'][$count]['service_start_date'] = $GLOBALS['timedate']->asUserDate($dt);
+                    }
+                    if (!empty($product_bundle_line_item->service_end_date)) {
+                        $dt = new SugarDateTime($product_bundle_line_item->service_end_date);
+                        $bundleFields['products'][$count]['service_end_date'] = $GLOBALS['timedate']->asUserDate($dt);
+                    }
 
                     if ($product_bundle_line_item->object_name == "ProductBundleNote") {
                         $bundleFields['products'][$count]['name'] = $bundleFields['products'][$count]['description'];

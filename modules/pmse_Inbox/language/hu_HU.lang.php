@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => 'Felhasználó kijelölése alkalmazva',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Tervezési folyamat előnézet',
+    'LBL_PROJECT_RUN_ORDER' => 'Megrendelés futtatása',
 );
 

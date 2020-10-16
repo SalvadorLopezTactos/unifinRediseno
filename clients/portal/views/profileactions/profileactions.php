@@ -10,6 +10,12 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+global $sugar_version;
+global $sugar_flavor;
+global $current_language;
+
+$moduleName = 'PortalUser';
+
 $viewdefs['portal']['view']['profileactions'] = array(
     array(
         'route' => '#profile',
@@ -18,6 +24,12 @@ $viewdefs['portal']['view']['profileactions'] = array(
         'acl_action' => 'view',
         'icon' => 'fa-user',
     ),
+    [
+        'route' => get_help_url($sugar_flavor, $sugar_version, $current_language, $moduleName),
+        'label' => 'LBL_HELP',
+        'icon' => 'fa-question-circle',
+        'openwindow' => true,
+    ],
     array(
         'route' => '#logout/?clear=1',
         'label' => 'LBL_LOGOUT',

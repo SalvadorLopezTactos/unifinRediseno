@@ -74,25 +74,9 @@ class Status extends \Google\Protobuf\Internal\Message
      */
     private $details;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type int $code
-     *           The status code, which should be an enum value of google.rpc.Code.
-     *     @type string $message
-     *           A developer-facing error message, which should be in English. Any
-     *           user-facing error message should be localized and sent in the
-     *           google.rpc.Status.details field, or localized by the client.
-     *     @type \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $details
-     *           A list of messages that carry the error details.
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Rpc\Status::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

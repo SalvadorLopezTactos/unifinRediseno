@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+use Sugarcrm\Sugarcrm\Portal\Factory as PortalFactory;
 
 class NotesApiHelper extends SugarBeanApiHelper
 {
@@ -33,25 +33,39 @@ class NotesApiHelper extends SugarBeanApiHelper
         $data = parent::populateFromApi($bean, $submittedData, $options);
 
         //Only needed for Portal sessions
-        if (isset($_SESSION['type']) && $_SESSION['type'] == 'support_portal') {
+        $portalSession = PortalFactory::getInstance('Session');
+        if ($portalSession->isActive()) {
             if (empty($bean->id)) {
                 $bean->id = create_guid();
                 $bean->new_with_id = true;
             }
 
-            $contact = BeanFactory::getBean('Contacts',$_SESSION['contact_id']);
-            $account = $contact->account_id;
-
-            $bean->assigned_user_id = $contact->assigned_user_id;
-
-            $bean->team_id = $contact->fetched_row['team_id'];
-            $bean->team_set_id = $contact->fetched_row['team_set_id'];
-            $bean->acl_team_set_id = $contact->fetched_row['acl_team_set_id'];
-
-            $bean->account_id = $account;
-            $bean->contact_id= $contact->id;
+            $this->addPortalUserDataToBean($portalSession->getContact(), $bean);
         }
 
         return $data;
+    }
+
+    /**
+     * Adds portal user data to the Note record if created through the support portal
+     * @param Contact $contact Contact bean
+     * @param Note $note Note bean
+     */
+    public function addPortalUserDataToBean(Contact $contact, Note $note)
+    {
+        // This is an externally created record, mark it
+        $note->entry_source = 'external';
+
+        // Handle assignment
+        $note->assigned_user_id = $contact->assigned_user_id;
+
+        // And teams
+        $note->team_id = $contact->fetched_row['team_id'];
+        $note->team_set_id = $contact->fetched_row['team_set_id'];
+        $note->acl_team_set_id = $contact->fetched_row['acl_team_set_id'];
+
+        // And related data
+        $note->account_id = $contact->account_id;
+        $note->contact_id = $contact->id;
     }
 }

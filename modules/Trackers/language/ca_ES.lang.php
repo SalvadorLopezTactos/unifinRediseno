@@ -18,17 +18,7 @@
  ********************************************************************************/
 
 $mod_strings = array (
-		  //Labels for methods in the TrackerReporter.php file that are shown in TrackerDashlet
-		  'ShowActiveUsers'      => 'Mostrar Usuaris Actius',
-		  'ShowLastModifiedRecords' => 'Últims 10 Registres Modificats',
-		  'ShowTopUser' => 'Usuari Més Actiu',
-		  'ShowMyModuleUsage' => 'El Meu Us de Mòduls',
-		  'ShowMyWeeklyActivities' => 'La Meva Activitat Setmanal',
-		  'ShowTop3ModulesUsed' => 'Els Meus 3 Mòduls Més Usats',
-		  'ShowLoggedInUserCount' => 'Número d´Usuaris Actius',
-		  'ShowMyCumulativeLoggedInTime' => 'El Meu Temps de Sessió Acumulat (Aquesta Setmana)',
-		  'ShowUsersCumulativeLoggedInTime' => 'Temps de Sessió Acumulat de Tots els Usuaris (Aquesta Setmana)',
-		  
+
 		  //Column header mapping
 		  'action' => 'Acció',
 		  'active_users' => 'Número d´Usuaris Actius',

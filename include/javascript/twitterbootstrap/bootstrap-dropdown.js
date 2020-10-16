@@ -16,7 +16,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * ======================================================================== */
-
+/*
+ *THIS FILE WAS MODIFIED BY SUGARCRM INC. ON JULY 16, 2019
+ */
 
 +function ($) { "use strict";
 
@@ -109,7 +111,9 @@
             selector = selector && /#/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') //strip for ie7
         }
 
-        var $parent = selector && $(selector)
+        /* PX-481: Bootstrap upgrade, changes needed to files that could not be upgraded to v3.4.1,
+         * int order to fix 'data-target' XSS vulnerability, by replacing '$(target)' with '$(document).find(target)'*/
+        var $parent = selector !== '#' ? $(document).find(selector) : null
 
         return $parent && $parent.length ? $parent : $this.parent()
     }

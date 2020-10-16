@@ -118,8 +118,8 @@ class Comment extends Basic
     {
         // TODO: Fix this after ENGRD-17 is resolved.
         $encode = false;
-        parent::retrieve($id, $encode, $deleted);
-        return $this;
+        $ret = parent::retrieve($id, $encode, $deleted);
+        return $ret;
     }
 
     /**

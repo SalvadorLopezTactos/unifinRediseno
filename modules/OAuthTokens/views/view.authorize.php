@@ -36,12 +36,9 @@ class OauthTokensViewAuthorize extends SugarView
 
         if(empty($_REQUEST['confirm'])) {
             $sugar_smarty->assign('consumer', sprintf($GLOBALS['mod_strings']['LBL_OAUTH_CONSUMERREQ'], $token->consumer_obj->name));
-            $hash = md5(rand());
-            $_SESSION['oauth_hash'] = $hash;
-            $sugar_smarty->assign('hash', $hash);
             echo $sugar_smarty->fetch('modules/OAuthTokens/tpl/authorize.tpl');
         } else {
-            if($_REQUEST['sid'] != session_id() || $_SESSION['oauth_hash'] != $_REQUEST['hash']) {
+            if ($_REQUEST['sid'] != session_id()) {
                 sugar_die('Invalid request');
             }
             $verify = $token->authorize(array("user" => $current_user->id));

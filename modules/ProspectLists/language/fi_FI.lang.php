@@ -65,6 +65,12 @@ $mod_strings = array (
   'LBL_DOMAIN'=>'Ei sähköposteja verkkotunnukseen',
   'LBL_LIST_PROSPECTLIST_NAME'=>'Nimi',
 	'LBL_MORE_DETAIL' => 'Tarkemmin' /*for 508 compliance fix*/,
+    'LBL_ACCOUNTS' => 'Asiakkaat',
+    'LBL_CAMPAIGNS' => 'Kampanjat',
+    'LBL_CONTACTS' => 'Yhteystiedot',
+    'LBL_LEADS' => 'Liidit',
+    'LBL_PROSPECTS' => 'Tavoitteet',
+    'LBL_USERS' => 'Käyttäjät',
 
     // Help Text
     // List View Help Text

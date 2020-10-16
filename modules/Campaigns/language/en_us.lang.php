@@ -420,6 +420,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'No optimums were saved with your Inbound Email account.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Please review Inbound Email settings.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} leads that were created through this campaign have been deleted since creation.',
+    'LBL_PROSPECT_LIST' => 'Target List',
 );
 
 

@@ -82,18 +82,25 @@
             this.directorSolicitud="";
         }
 
-        if(this.model.get('tipo_producto_c')!=undefined){
-            if(this.model.get('tipo_producto_c')!='1'){ //Tipo 1 = LEASING
-                $('[data-type="opportunities_directores"]').hide();
-            }else{
-                if (this.model.get('tct_etapa_ddw_c')=="SI" && this.model.get('estatus_c')=="") {
-                  $('[data-type="opportunities_directores"]').hide();
-                }
-                else{
-                  $('[data-type="opportunities_directores"]').show();
+
+        if(this.view.action!="create"){
+            if(this.model.get('tipo_producto_c')!=undefined){
+                if(this.model.get('tipo_producto_c')!='1'){ //Tipo 1 = LEASING
+                    $('[data-type="opportunities_directores"]').hide();
+                }else{
+                    if (this.model.get('tct_etapa_ddw_c')=="SI" && this.model.get('estatus_c')=="") {
+                        $('[data-type="opportunities_directores"]').hide();
+                    }else if(banderaExcluye.check.includes(1)){
+                        $('[data-type="opportunities_directores"]').hide();
+                    }
+                    else{
+                        $('[data-type="opportunities_directores"]').show();
+                    }
                 }
             }
+
         }
+
 
         if(this.model.get("vobo_dir_c")==true){
             $('[data-type="opportunities_directores"]').attr('style', 'pointer-events:none;');
@@ -103,6 +110,7 @@
         this._super("_render");
 
         $('#director_solicitud').select2({width: '400px'});
+
     },
 
 })

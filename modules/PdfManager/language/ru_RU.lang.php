@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Предварительный просмотр',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'ВНИМАНИЕ: если Вы измените основной модуль, все поля, уже добавленные в шаблон, должны быть удалены.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Вот файл, который Вы просили (Этот текст можно изменить)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Коммерческое предложение',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Этот шаблон используется для вывода коммерческого предложения на экран в PDF.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'коммерческое предложение',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Коммерческое предложение (с услугами)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Этот шаблон используется для сохранения коммерческого предложения в формате PDF, включая информацию об обслуживании.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'коммерческое предложение на обслуживание',
+
   'LBL_TPL_INVOICE_NAME' => 'Инвойс',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Этот шаблон используется для вывода инвойса на экран в PDF.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'инйовс',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Счет-фактура (с услугами)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Этот шаблон используется для сохранения счета-фактуры в формате PDF, включая информацию об обслуживании.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'счет-фактура за обслуживание',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Номер КП:',
   'LBL_TPL_SALES_PERSON' => 'Менеджер по продажам',
   'LBL_TPL_VALID_UNTIL' => 'Действительно до:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Номер части',
   'LBL_TPL_PRODUCT' => 'Продукт',
   'LBL_TPL_RLI' => 'Доход по продуктам',
+  'LBL_TPL_DURATION' => 'Продолжительность',
+  'LBL_TPL_DURATION_STARTS' => 'Начало:',
+  'LBL_TPL_DURATION_ENDS' => 'Конец:',
   'LBL_TPL_LIST_PRICE' => 'Цена по прайсу',
   'LBL_TPL_UNIT_PRICE' => 'Цена за единицу',
   'LBL_TPL_EXT_PRICE' => 'Внешняя цена',

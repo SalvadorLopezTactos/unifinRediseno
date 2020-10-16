@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Επαφών',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Επαφών',
-
+    'LBL_SITE_USER_ID' => 'Hash των site_url και ταυτότητας επαφής',
+    'LBL_COOKIE_CONSENT' => 'Συγκατάθεση για cookies',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Η συγκατάθεση για cookies λήφθηκε στις',
     'LNK_CONTACT_REPORTS' => 'Αναφορές Επαφών',
     'ERR_DELETE_RECORD' => 'Καθορίστε αριθμό εγγραφής προκειμένου να διαγράψετε αυτή την επαφή.',
     'LBL_ACCOUNT_ID' => 'Ταυτότητα Λογαριασμού',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Πληροφορίες Portal',
     'LBL_PORTAL_NAME' => 'Όνομα Portal:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Ο νέος κωδικός Portal ισχύει:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Όνομα εταιρίας χρήστη πύλης',
     'LBL_RECORD_SAVED_SUCCESS' => 'Δημιουργήσατε με επιτυχία το {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Οδός',
     'LBL_POSTAL_CODE' => 'Τ.Κ:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Ευκαιρίες',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Έγγραφα',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Προσφορές',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Προσφορές (Παράδοση σε)',
     'LBL_QUOTES_BILL_TO' => 'Προσφορές (Λογαριασμός σε)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Γραμμή Εισηγμένων Ειδών',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Κάντε κλικ εδώ για να επεξεργαστείτε το προφίλ σας.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Εδώ είναι όπου μπορείτε να ορίσετε τη γλώσσα της προτίμησής σας. Αυτό θα αλλάξει τη γλώσσα που χρησιμοποιείται από το Portal του Sugar.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Μπορείτε να επιστρέψετε στο Προφίλ σας ανά πάσα στιγμή, χρησιμοποιώντας το Μενού Χρήστη.',
+    'ERR_PORTAL_NAME_EXISTS' => 'Το όνομα της πύλης {0} υπάρχει ήδη. Τα διπλότυπα ονόματα πύλης δεν επιτρέπονται. Αλλάξτε το όνομα της πύλης ώστε να είναι μοναδικό.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Κύρια Ταυτότητα',
@@ -279,4 +284,8 @@ $mod_strings = array (
     'LBL_FILTER_CONTACTS_REPORTS' => 'Αναφορές Επαφών',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Επαγγελματικοί σκοποί για τους οποίους δώσατε τη συγκατάθεσή σας',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Τελευταία ανανέωση συγκατάθεσης',
+
+    'LBL_ENTRY_SOURCE' => 'Πηγή επαφής',
+    'LBL_SOURCE_EXTERNAL' => 'Εξωτερικά',
+    'LBL_SOURCE_INTERNAL' => 'Εσωτερικά',
 );

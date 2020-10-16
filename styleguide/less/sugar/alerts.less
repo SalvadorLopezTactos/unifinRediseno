@@ -90,7 +90,7 @@ div.alert { /* rules here do not apply to alert in a list view (<table>) header 
   border-color: @alertSuccess;
 
   .indicator {
-    background-color: @alertSuccess;
+    background-color: @alertSuccessBackground;
     color: @alertSuccessText;
 
     i {
@@ -106,7 +106,7 @@ div.alert { /* rules here do not apply to alert in a list view (<table>) header 
   border-color: @alertError;
 
   .indicator {
-    background: @alertError;
+    background: @alertErrorBackground;
     color: @alertErrorText;
 
     i {
@@ -131,7 +131,7 @@ div.alert { /* rules here do not apply to alert in a list view (<table>) header 
   border-color: @alertWarning;
 
   .indicator {
-    background-color: @alertWarning;
+    background-color: @alertWarningBackground;
     color: @alertWarningText;
 
     i {
@@ -145,7 +145,7 @@ div.alert { /* rules here do not apply to alert in a list view (<table>) header 
   border-color: @alertInfo;
 
   .indicator {
-    background-color: @alertInfo;
+    background-color: @alertInfoBackground;
     color: @alertInfoText;
 
     i {
@@ -270,9 +270,9 @@ div.alert { /* rules here do not apply to alert in a list view (<table>) header 
         width: 50%;
 
         &:hover {
-          background-color: @warningBorder;
+          background-color: @warningBackground;
           text-decoration: none;
-          color: @white;
+          color: @black;
         }
       }
     }

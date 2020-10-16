@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Noklusētā tipa Mērķu saraksti netika atrasti',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nav atrasts neviens ieraksts',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Ieraksti tika apstrādāti',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Sekotāja nosaukums:',
   'LBL_EDIT_TRACKER_URL'=>'Sekošanas URL:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'Ienākošo e-pastu konti nav saglabāti ar optimāliem iestatījumiem.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Pārbaudiet ienākošo e-pastu iestatījumus.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} interesenti kas tika izveidoti caur šo kampaņu ir izdzēsti kopš izveidošanas.',
+    'LBL_PROSPECT_LIST' => 'Mērķu saraksts',
 );
 
 

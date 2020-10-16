@@ -123,8 +123,10 @@ class sucroseReports extends sucrose
             return;
         }
 
+        $firstTwoGroups = array_slice($this->group_by, 0, 2);
+
         // store last grouped field
-        $lastgroupfield = end($this->group_by);
+        $lastgroupfield = end($firstTwoGroups);
 
         if ($this->isDateSort($lastgroupfield)) {
             usort($super_set, array($this, "runDateSort"));
@@ -205,7 +207,7 @@ class sucroseReports extends sucrose
 
             $label = $total;
             if ($this->isCurrencyReportGroupTotal($dataset)) {
-                $label = currency_format_number($total, array(
+                $label = currency_format_number($this->chart_properties['thousands'] ? $total / 1000 : $total, array(
                     'currency_symbol' => $this->currency_symbol,
                     'decimals' => ($this->chart_properties['thousands'] ? 0 : null),
                 ));

@@ -1,5 +1,5 @@
 <?php
-// created: 2018-12-06 16:40:00
+// created: 2020-10-12 12:23:06
 $mod_strings = array (
   'LBL_ASSIGNED_TO_ID' => '指派的使用者 ID',
   'LBL_ASSIGNED_TO_NAME' => '已指派至',

@@ -69,37 +69,9 @@ class Tenant extends \Google\Protobuf\Internal\Message
      */
     private $logo = '';
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $name
-     *           Sugar Resource Name
-     *           srn:cloud:iam:eu:1234567890:tenant
-     *     @type \Google\Protobuf\Timestamp $create_time
-     *           Timestamp the tenant was created
-     *     @type \Google\Protobuf\Timestamp $modify_time
-     *           Timestamp the tenant was modified
-     *     @type string $display_name
-     *           Human friendly name of the tenant
-     *           SolarWinds Inc.
-     *     @type string $region
-     *           Region the tenant is created
-     *           us or eu
-     *     @type int $status
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $authn_providers
-     *           List of enabled authentication providers:
-     *           `local`
-     *           `ldap`
-     *           `saml`
-     *     @type string $logo
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Tenant\V1Alpha\Tenant::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

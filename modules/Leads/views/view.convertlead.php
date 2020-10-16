@@ -988,9 +988,18 @@ class ViewConvertLead extends SugarView
     	{
     		echo ("<span class='error'>" . translate('LBL_CONVERTLEAD_WARNING'));
     		$dupes = array();
-    		$q = "SELECT id, first_name, last_name FROM contacts WHERE first_name LIKE '{$lead->first_name}' AND last_name LIKE '{$lead->last_name}'";
-    		$result = $lead->db->query($q);
-    		while($row = $lead->db->fetchByAssoc($result)) {
+            $sql = <<<SQL
+SELECT id, first_name, last_name 
+FROM contacts 
+WHERE first_name LIKE ? AND last_name LIKE ?
+SQL;
+            $stmt = $lead->db
+                ->getConnection()
+                ->executeQuery(
+                    $sql,
+                    [$lead->first_name, $lead->last_name]
+                );
+            foreach ($stmt as $row) {
     			$contact = BeanFactory::getBean('Contacts', $row['id']);
     			$dupes[$row['id']] = $contact->name;
     		}
@@ -998,7 +1007,17 @@ class ViewConvertLead extends SugarView
     		{
     			foreach($dupes as $id => $name)
     			{
-    				echo (translate('LBL_CONVERTLEAD_WARNING_INTO_RECORD') . "<a href='index.php?module=Contacts&action=DetailView&record=$id'>$name</a>");
+                    $href = 'index.php?'.
+                        http_build_query([
+                            'module' => 'Contacts',
+                            'action' => 'DetailView',
+                            'record' => $id,
+                        ]);
+
+                    echo htmlspecialchars(translate('LBL_CONVERTLEAD_WARNING_INTO_RECORD')) .
+                        '<a href="'.htmlspecialchars($href).'">'.
+                         htmlspecialchars($name).'</a>';
+
     				break;
     			}
     		}

@@ -52,7 +52,7 @@ $mod_strings = array(
     "LBL_SNIP_PURCHASE_SUMMARY" => "Afin d'utiliser Archivage automatique d'emails, vous devez acheter une licence pour votre instance SugarCRM",
     "LBL_SNIP_PURCHASE" => "Cliquez ici pour acheter",
     'LBL_SNIP_EMAIL' => 'Adresse pour l&#39;Archivage automatique d&#39;emails',
-    'LBL_SNIP_AGREE' => "J'accepte les termes ci-dessus et l'<a href=\"http://www.sugarcrm.com/crm/TRUSTe/privacy.html\" target=\"_blank\">accord de confidentialité</a>.",
+    'LBL_SNIP_AGREE' => "J'accepte les termes ci-dessus et l'<a href='https://www.sugarcrm.com/legal/privacy-policy/' target='_blank'>accord de confidentialité</a>.",
     'LBL_SNIP_PRIVACY' => 'accord de confidentialité',
 
     'LBL_SNIP_STATUS_PINGBACK_FAIL' => 'Échec du pingback',

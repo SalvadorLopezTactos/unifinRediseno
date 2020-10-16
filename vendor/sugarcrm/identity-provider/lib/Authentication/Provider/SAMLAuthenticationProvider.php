@@ -306,7 +306,12 @@ class SAMLAuthenticationProvider implements AuthenticationProviderInterface
         $user->setAttribute('provision', $authService->isUserProvisionNeeded());
         $user->setAttribute('identityField', $identityMap['field']);
         $user->setAttribute('identityValue', $identityMap['value']);
-        $user->setAttribute('attributes', $this->mapper->map($response));
+
+        $mappedResponse = $this->mapper->map($response);
+        $user->setAttribute('attributes', $mappedResponse['attributes'] ?? []);
+        if (array_key_exists('custom_attributes', $mappedResponse)) {
+            $user->setAttribute('custom_attributes', $mappedResponse['custom_attributes']);
+        }
 
         // This is done for bwc-support of Sugar ability to use custom user-provision function.
         // @todo: Remove it for standalone IdM service. See BR-5065

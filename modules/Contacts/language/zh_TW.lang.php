@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => '聯繫人清單儀表板',
     'LBL_CONTACTS_RECORD_DASHBOARD' => '聯繫人紀錄儀表板',
-
+    'LBL_SITE_USER_ID' => 'site_url 和聯絡人 ID 的散列',
+    'LBL_COOKIE_CONSENT' => 'Cookie 同意書',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Cookie 同意書接收時間',
     'LNK_CONTACT_REPORTS' => '檢視連絡人報表',
     'ERR_DELETE_RECORD' => '必須指定記錄編號才能刪除聯絡人。',
     'LBL_ACCOUNT_ID' => '帳戶 ID：',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => '入口網站資訊',
     'LBL_PORTAL_NAME' => '入口網站名稱：',
     'LBL_PORTAL_PASSWORD_ISSET' => '入口網站密碼已設定：',
+    'LBL_PORTAL_USER_COMPANY_NAME' => '門戶用戶公司名稱',
     'LBL_RECORD_SAVED_SUCCESS' => '您已成功建立 {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>。',
     'LBL_STREET' => '街道',
     'LBL_POSTAL_CODE' => '郵遞區號：',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => '商機',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => '文件',
     'LBL_QUOTES_SUBPANEL_TITLE' => '報價',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => '報價（送貨至）',
     'LBL_QUOTES_BILL_TO' => '報價（帳單至）',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => '報價項目',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => '按一下此處編輯設定檔。',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => '此處用來設定慣用語言。此設定將變更 Sugar 入口網站使用的語言。',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => '您可以透過使用者功能表隨時返回設定檔。',
+    'ERR_PORTAL_NAME_EXISTS' => '門戶名稱 {0} 已存在。不允許使用重複的門戶名稱。請將其更改為唯一的門戶名稱。',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B 主體 ID',
@@ -279,4 +284,8 @@ $mod_strings = array (
     'LBL_FILTER_CONTACTS_REPORTS' => '連絡人報表',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => '業務目的同意',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => '同意上次更新',
+
+    'LBL_ENTRY_SOURCE' => '聯絡人來源',
+    'LBL_SOURCE_EXTERNAL' => '外部',
+    'LBL_SOURCE_INTERNAL' => '內部',
 );

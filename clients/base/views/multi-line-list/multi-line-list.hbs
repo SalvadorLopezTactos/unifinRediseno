@@ -1,0 +1,69 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+{{#each meta.panels}}
+    <table class="table table-striped dataTable multi-line-table">
+        <thead>
+            <tr>
+                {{#each ../leftColumns}}
+                    <th class="left-column"></th>
+                {{/each}}
+                {{#each fields}}
+                    <th class="{{#if widthClass}} {{widthClass}}{{/if}}"
+                    {{#if styles}} style="{{styles}}"{{/if}}
+                    {{#if name}} data-fieldname="{{name}}"{{/if}}>
+                        <span>{{str label ../../module}}</span>
+                    </th>
+                {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+            {{#each ../collection.models}}
+                <tr class="multi-line-row" data-id={{this.id}}>
+                    {{#each ../../leftColumns}}
+                        <td class='left-column'>
+                            {{field ../../../this model=../this template=../../../viewName}}
+                        </td>
+                    {{/each}}
+                    {{#each ../fields}}
+                        <td class="subfields{{#if align}} {{align}}{{/if}}">
+                            {{#each subfields}}
+                                <div class="subfield {{#if @index}}stylesGray{{else}}{{#eq name 'date_closed'}}stylesSemiBold{{/eq}}{{/if}}"{{#if name}} data-fieldname="{{name}}"{{/if}}>
+                                    {{field ../../../../this model=../../this template=../../../../viewName}}
+                                </div>
+                            {{/each}}
+                        </td>
+                    {{/each}}
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{#if ../collection.dataFetched}}
+        {{#unless ../../collection.length}}
+            <div class="block-footer">
+                <em>{{str "LBL_LISTVIEW_NO_RECORDS" this.module}}</em>
+            </div>
+        {{/unless}}
+    {{else}}
+       {{#unless ../../collection.length}}
+            <div class="block-footer">
+                {{loading 'LBL_ALERT_TITLE_LOADING'}}
+            </div>
+       {{/unless}}
+    {{/if}}
+{{/each}}
+
+{{#unless hasModuleAccess}}
+    <div class="block-footer">
+        <em>{{str "EXCEPTION_NOT_AUTHORIZED_TO_DATA" this.module}}</em>
+    </div>
+{{/unless}}

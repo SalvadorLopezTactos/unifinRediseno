@@ -65,7 +65,7 @@ $mod_strings = array (
 	'LBL_SETTINGS' => '設定',
 	'LBL_CREATE_NEW_RECORD' => 'アクティビティ作成',
     'LBL_CREATE_NEW_CALL' => '訪問を作成',
-    'LBL_CREATING_NEW_ACTIVITY' => '新しい会議を作成しています。<a href="javascript:void(0);" data-action="create-task">Create a task</a> もしくは<a href="javascript:void(0);" data-action="schedule-call">Schedule a call</a>したいですか',
+    'LBL_CREATING_NEW_ACTIVITY' => '新しい会議を作成しようとしています。会議ではなく、<a href="javascript:void(0);" data-action="create-task">タスクを作成</a>もしくは<a href="javascript:void(0);" data-action="schedule-call">電話を作成</a>しますか。',
 	'LBL_LOADING' => '読み込み中.....',
 	'LBL_SAVING' => '保存中.....',
 	'LBL_SENDING_INVITES' => '保存＆招待送信中.....',

@@ -248,25 +248,27 @@
 
         _.each(this.collection.models, function(model) {
             // loop through all models and call doValidate on each model
-            model.doValidate(this.getFields(this.module), _.bind(function(isValid) {
-                returnCt++;
+            model.doValidate(
+                this.getFields(this.module, model),
+                _.bind(function(isValid) {
+                    returnCt++;
 
-                if (this.hasValidModels && !isValid) {
-                    // hasValidModels was true, but a model returned false from validation
-                    this.hasValidModels = isValid;
-                }
-
-                // check if all model validations have occurred
-                if (returnCt === this.collection.length) {
-                    if (fromCreateView) {
-                        // the create waterfall wants the opposite of if this is validated
-                        callback(!this.hasValidModels);
-                    } else {
-                        // this view wants if the models are valid or not
-                        callback(this.hasValidModels);
+                    if (this.hasValidModels && !isValid) {
+                        // hasValidModels was true, but a model returned false from validation
+                        this.hasValidModels = isValid;
                     }
-                }
-            }, this));
+
+                    // check if all model validations have occurred
+                    if (returnCt === this.collection.length) {
+                        if (fromCreateView) {
+                            // the create waterfall wants the opposite of if this is validated
+                            callback(!this.hasValidModels);
+                        } else {
+                            // this view wants if the models are valid or not
+                            callback(this.hasValidModels);
+                        }
+                    }
+                }, this));
         }, this);
     },
 

@@ -17,13 +17,7 @@ $viewdefs['portal']['layout']['header'] = array(
             'layout' => 'module-list',
         ),
         array(
-            'view' => 'globalsearch',
-        ),
-        array(
             'view' => 'profileactions',
         ),
-        array(
-            'view' => 'quickcreate',
-        )
     ),
 );

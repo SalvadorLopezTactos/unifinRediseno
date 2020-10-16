@@ -93,6 +93,8 @@
         var panelName = (evt) ? $(evt.currentTarget).data('help-id') : this.selectedPanel;
         var oldPanel;
         var newPanel;
+        var currentEventViewColumns;
+        var tmpIndex;
 
         if (evt && panelName === this.selectedPanel) {
             // dont allow closing the same tab
@@ -119,6 +121,37 @@
         newPanel = _.find(this._components, function(component) {
             return component.name === panelName;
         }, this);
+
+        // This makes sure that the panel fields are correctly updated when not saved
+        _.each(newPanel.panelFields, function(panelField) {
+            panelField.currentState = 'unchecked';
+        }, this);
+
+        // Get current columns visible on the config accordion
+        currentEventViewColumns = newPanel.model.get(newPanel.eventViewName);
+
+        // For each visible column mark the corresponding panel field as checked
+        _.each(currentEventViewColumns, function(headerField) {
+            tmpIndex = _.findIndex(newPanel.panelFields, function(field) {
+                return field.name === headerField.name;
+            }, this);
+            if (tmpIndex >= 0) {
+                newPanel.panelFields[tmpIndex].currentState = 'checked';
+
+                _.each(newPanel.panelFields[tmpIndex].relatedFields, function(relField) {
+                    var tmpRelIndex = _.findIndex(newPanel.panelFields, function(field) {
+                        return field.name === relField;
+                    });
+
+                    // Make sure that the related fields, if unchecked, are filled
+                    if (tmpRelIndex >= 0 && (_.isUndefined(newPanel.panelFields[tmpRelIndex].currentState) ||
+                        newPanel.panelFields[tmpRelIndex].currentState === 'unchecked')) {
+                        newPanel.panelFields[tmpRelIndex].currentState = 'filled';
+                    }
+                }, this);
+            }
+        }, this);
+
         newPanel.trigger('config:panel:show');
     },
 

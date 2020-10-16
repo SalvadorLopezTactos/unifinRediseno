@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'E-mails: Kontakter',
     'LBL_EMAILS_LEADS_REL' => 'E-mails:Kundeemner',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'E-mails:Salgsmuligheder',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'E-mails:Noter',
     'LBL_EMAILS_PROJECT_REL' => 'E-mails:Projekt',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'E-mails:Projektopgave',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'Fra:',
     'LBL_REPLY_TO' => 'Svar til:',
     'LBL_HTML_BODY' => 'HTML-brødtekst',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'Modtagere',
     'LBL_LEADS_SUBPANEL_TITLE' => 'Kundeemner',
     'LBL_MESSAGE_SENT' => 'Beskeden er sendt',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'Svar til Id',
     'LBL_TYPE' => 'Type:',
     'LBL_EMAIL_STATE' => 'Tilstand',
+    'LBL_EMAIL_DIRECTION' => 'Retning',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'Kontrollér dette!',

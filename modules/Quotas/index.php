@@ -20,12 +20,9 @@ use Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 
-
-
 /* Requires to get the Currencies available to use */
 
-
-$header_text = '';
+$headerHTML = '';
 global $mod_strings;
 global $app_list_strings;
 global $app_strings;
@@ -35,9 +32,12 @@ global $sugar_config;
 $db = DBManagerFactory::getInstance();
 $focus = BeanFactory::newBean('Quotas');
 $currency = new ListCurrency();
-$params = array();
-$params[] = "<a href='index.php?module=Forecasts&action=index'>{$mod_strings['LBL_MODULE_FORECASTS_NAME']}</a>";
-$params[] = $mod_strings['LBL_MODULE_NAME'];
+$params = [];
+$params[] = sprintf(
+    '<a href="index.php?module=Forecasts&action=index">%s</a>',
+    htmlspecialchars($mod_strings['LBL_MODULE_FORECASTS_NAME'])
+);
+$params[] = htmlspecialchars($mod_strings['LBL_MODULE_NAME']);
 echo getClassicModuleTitle($focus->module_dir, $params, true);
 
 /* Set initial booleans for the module */
@@ -52,10 +52,10 @@ $timeperiod_id = InputValidation::getService()->getValidInputRequest('timeperiod
  * to select a time period.
  */
 if (!empty($timeperiod_id)) {
-    $optionsTimePeriod = $focus->getTimePeriodsSelectList($timeperiod_id);
+    $optionsTimePeriodHTML = $focus->getTimePeriodsSelectList($timeperiod_id);
     $currentUserQuota = $focus->getCurrentUserQuota($timeperiod_id);
 } else {
-    $optionsTimePeriod = $focus->getTimePeriodsSelectList();
+    $optionsTimePeriodHTML = $focus->getTimePeriodsSelectList();
 }
 
 /* 
@@ -93,24 +93,32 @@ $GLOBALS['log']->info("Quota list view");
 
 $currentUserQuotaRow = '';
 if (!empty($currentUserQuota['amount'])) {
-    $currentUserQuotaRow .= "<td scope='col' width='50%'><slot>" . $mod_strings['LBL_CURRENT_USER_QUOTA'] . "<br /><b>" . $currentUserQuota['formatted_amount'] . "</b></td>\n";
-} else if (!empty($timeperiod_id)) {
-    $currentUserQuotaRow .= "<td scope='col' width='50%'><slot>" . $mod_strings['LBL_CURRENT_USER_NO_QUOTA'] . "</td>\n";
+    $currentUserQuotaRow .= '
+<td scope="col" width="50%">
+    <slot>' . htmlspecialchars($mod_strings['LBL_CURRENT_USER_QUOTA']) . '<br>
+        <b>' . htmlspecialchars($currentUserQuota['formatted_amount']) . '</b>
+    </slot>
+</td>
+';
+
+} elseif (!empty($timeperiod_id)) {
+    $currentUserQuotaRow .= '<td scope="col" width="50%"><slot>' . htmlspecialchars($mod_strings['LBL_CURRENT_USER_NO_QUOTA']) . '</td>';
 }
 
-$selectTimePeriod = "<br />\n";
-$selectTimePeriod .= "<tr>\n";
-$selectTimePeriod .= "<td width='50%' valign='top' class='dataLabel'><slot> " . $mod_strings['LBL_TIME_PERIOD'] . "</slot>\n";
-$selectTimePeriod .= "<slot>\n";
-$selectTimePeriod .= "<select name='timeperiod' ONCHANGE='location = this.options[this.selectedIndex].value;'>\n";
-$selectTimePeriod .= $optionsTimePeriod;
-$selectTimePeriod .= "</select>\n";
-$selectTimePeriod .= "</slot>\n";
-$selectTimePeriod .= "</td>\n";
+$selectTimePeriod = '
+<br />
+<tr>
+    <td width="50%" valign="top" class="dataLabel">
+        <slot>' . htmlspecialchars($mod_strings['LBL_TIME_PERIOD']) . '</slot>
+        <slot>
+            <select name="timeperiod" ONCHANGE="location = this.options[this.selectedIndex].value;">'
+             .  $optionsTimePeriodHTML .
+            '</select>
+        </slot>
+    </td>
+';
 
-$listViewHeader = $selectTimePeriod . $currentUserQuotaRow;
-$listViewHeader .= "</tr>\n";
-
+$listViewHeader = $selectTimePeriod . $currentUserQuotaRow . '</tr>';
 
 $where  = "quotas.deleted=0 AND users.deleted = 0 ";
 if (!empty($timeperiod_id)) {
@@ -122,11 +130,28 @@ if (!empty($timeperiod_id)) {
 
 $ListView = new ListView();
 
-if(is_admin($current_user) && $_REQUEST['module'] != 'DynamicLayout' && !empty($_SESSION['editinplace'])){	
-		$header_text = "&nbsp;<a href='index.php?action=index&module=DynamicLayout&from_action=ListView&from_module=".$_REQUEST['module'] ."'>".SugarThemeRegistry::current()->getImage("EditLayout","border='0' align='bottom'",null,null,'.gif',$mod_strings['LBL_EDITLAYOUT'])."</a>";
+if (is_admin($current_user) && $_REQUEST['module'] !== 'DynamicLayout' && !empty($_SESSION['editinplace'])) {
+    $href = 'index.php?' . http_build_query(
+        [
+            'action' => 'index',
+            'module' => 'DynamicLayout',
+            'from_action' => 'ListView',
+            'from_module' => $_REQUEST['module'],
+        ]
+    );
+    $imageHTML = SugarThemeRegistry::current()
+        ->getImage(
+            "EditLayout",
+            'border="0" align="bottom"',
+            null,
+            null,
+            '.gif',
+            $mod_strings['LBL_EDITLAYOUT']
+        );
+    $headerHTML = '&nbsp;<a href="' . htmlspecialchars($href) . '">' . $imageHTML . '</a>';
 }
 $ListView->initNewXTemplate( 'modules/Quotas/ListView.html',$mod_strings);
-$ListView->setHeaderTitle($mod_strings['LBL_LIST_FORM_TITLE'] . $header_text);
+$ListView->setHeaderTitle(htmlspecialchars($mod_strings['LBL_LIST_FORM_TITLE']) . $headerHTML);
 $ListView->setHeaderText($listViewHeader);
 $ListView->show_export_button = false;
 $ListView->show_mass_update = false;
@@ -172,60 +197,58 @@ if (!empty($timeperiod_id)) {
 	
 ///////////////////////////////////////////////////////////////////////////////
 ////	QUOTAS MODULE EDIT VIEW
-	
-		$GLOBALS['log']->info("Quota edit view");
 
-		$committed = '';
-		$disabled = '';
-		
-		if ($focus->currency_id == NULL)
-	    	$selectCurrency = $currency->getSelectOptions();
-	    else
-	        $selectCurrency = $currency->getSelectOptions($focus->currency_id);
-	
-		if (empty($_REQUEST['user_id']))
-		{
-			$selectManagedUsers = $focus->getUserManagedSelectList($timeperiod_id);
-			$disabled = 'disabled="disabled"';			
-		}
-		else{
-			$selectManagedUsers = $focus->getUserManagedSelectList($timeperiod_id,
-																   $_REQUEST['user_id']);
-																   
-			if ($focus->committed == 1){
-				$committed = "CHECKED";
-			}
-		}
-
+        $GLOBALS['log']->info("Quota edit view");
+        $committed = '';
+        if (empty($focus->currency_id)) {
+            $selectCurrency = $currency->getSelectOptions();
+        } else {
+            $selectCurrency = $currency->getSelectOptions($focus->currency_id);
+        }
+        if (empty($_REQUEST['user_id'])) {
+            $selectManagedUsers = $focus->getUserManagedSelectList($timeperiod_id);
+        } else {
+            $selectManagedUsers = $focus->getUserManagedSelectList($timeperiod_id, $_REQUEST['user_id']);
+            if ($focus->committed == 1) {
+                $committed = "CHECKED";
+            }
+        }
 
         $csrf = CsrfAuthenticator::getInstance();
-        $edit_button ="<form name='EditView' method='POST' action='index.php'>\n";
-        $edit_button .= '<input type="hidden" name="'
-            . htmlspecialchars($csrf::FORM_TOKEN_FIELD, ENT_QUOTES)
-            . '" value="'
-            . htmlspecialchars($csrf->getFormToken(), ENT_QUOTES)
-            . '">' . "\n";
-		$edit_button .="<input type='hidden' name='module' value='Quotas'>\n";
-		if (!$is_new) {
-			$edit_button .="<input type='hidden' name='record' value='$focus->id'>\n";
-		}
-		$edit_button .="<input type='hidden' name='user_id' value='$user_id'>\n";
-		$edit_button .="<input type='hidden' name='timeperiod_id' value='$timeperiod_id'>\n";	
-		
-		$edit_button .="<input type='hidden' name='action'>\n";
-		$edit_button .="<input type='hidden' name='edit'>\n";
-		$edit_button .="<input type='hidden' name='isDuplicate'>\n";			
-		$edit_button .="<input type='hidden' name='return_module' value='Quotas'>\n";
-		$edit_button .="<input type='hidden' name='return_action' value='index'>\n";
-		$edit_button .="<input type='hidden' name='return_user_id' value='$user_id'>\n";
-		$edit_button .="<input type='hidden' name='return_timeperiod_id' value='$timeperiod_id'>\n";		
-		$edit_button .="<input type='hidden' name='return_id' value=''>\n";
-		
-		$edit_button .='<input title="'.$app_strings['LBL_SAVE_BUTTON_TITLE'].'" accessKey="'.$app_strings['LBL_SAVE_BUTTON_KEY'].'" class="button" ' . $disabled . ' onclick="this.form.action.value=\'Save\'; return check_form(\'EditView\');" type="submit" name="button" value="  '.$app_strings['LBL_SAVE_BUTTON_LABEL'].'  " >';
-	
-	    echo get_form_header($mod_strings['LBL_QUOTA']." ".$focus->user_full_name . '&nbsp;' . $header_text,$edit_button , false);
-		
-	    $GLOBALS['log']->info("Quota edit view");	
+        $editButtonHTML = '
+<form name="EditView" method="POST" action="index.php">
+<input type="hidden" name="' . htmlspecialchars($csrf::FORM_TOKEN_FIELD) .'" value="'. htmlspecialchars($csrf->getFormToken()). '" />
+<input type="hidden" name="module" value="Quotas">';
+        if (!$is_new) {
+            $editButtonHTML .= '<input type="hidden" name="record" value="' . htmlspecialchars($focus->id) . '">';
+        }
+
+        $disabled = empty($_REQUEST['user_id'])? ' disabled="disabled"' : '';
+
+        $editButtonHTML .= '
+<input type="hidden" name="user_id" value="' . htmlspecialchars($user_id) . '">
+<input type="hidden" name="timeperiod_id" value="' . htmlspecialchars($timeperiod_id) . '">
+<input type="hidden" name="action">
+<input type="hidden" name="edit">
+<input type="hidden" name="isDuplicate">
+<input type="hidden" name="return_module" value="Quotas">
+<input type="hidden" name="return_action" value="index">
+<input type="hidden" name="return_user_id" value="' . htmlspecialchars($user_id) . '">
+<input type="hidden" name="return_timeperiod_id" value="' . htmlspecialchars($timeperiod_id) . '">
+<input type="hidden" name="return_id" value="">
+<input title="' . htmlspecialchars($app_strings['LBL_SAVE_BUTTON_TITLE']) . '" accessKey="' . htmlspecialchars($app_strings['LBL_SAVE_BUTTON_KEY']) . '" 
+    class="button" ' . $disabled . ' onclick="this.form.action.value=\'Save\'; return check_form(\'EditView\');" type="submit" 
+    name="button" value="' . htmlspecialchars($app_strings['LBL_SAVE_BUTTON_LABEL']) . '" >
+';
+
+        $form_title = sprintf(
+            '%s %s&nbsp;%s',
+            htmlspecialchars($mod_strings['LBL_QUOTA']),
+            htmlspecialchars($focus->user_full_name),
+            $headerHTML
+        );
+        echo get_form_header($form_title, $editButtonHTML, false);
+        $GLOBALS['log']->info("Quota edit view");
 	    $xtpl=new XTemplate ('modules/Quotas/EditView.html');
 	    $xtpl->assign("MOD", $mod_strings);
 	    $xtpl->assign("APP", $app_strings);
@@ -258,32 +281,31 @@ if (!empty($timeperiod_id)) {
 /* Do not process the usual "main" ListView page, just use the quota object
  * and deliver the time period.
  */
-else
-	$ListView->processListViewTwo($focus, "", "");
-	
+else {
+    $ListView->processListViewTwo($focus, "", "");
+}
+
 function outputGroupQuota($groupQuota)
 {
-	$currency = new ListCurrency();
-	
-	$outputTotal = "<tr height='20'>\n";
-	$outputTotal .= "<td scope='col'><slot>&nbsp;</slot></td>\n";
-	$outputTotal .= "<td scope='col' colspan='3' ><slot>Total</slot></td>\n";
-	$outputTotal .= "</tr>\n";
-	$outputTotal .= "<tr height='20'>\n";
-	$outputTotal .= "<td scope='row' valign=TOP  class='oddListRowS1' bgcolor='#fdfdfd'><slot>&nbsp;</slot></td>\n";
-	$outputTotal .= "<td valign=TOP colspan='3' class='oddListRowS1' bgcolor='#fdfdfd'><slot>\n";
-	$outputTotal .= "<b><span id='groupQuota'>" . format_number($groupQuota, 2, 2, array('convert' => true, 'currency_symbol' => true)) . "</span></b>\n";
-	$outputTotal .= "&nbsp;&nbsp;&nbsp;&nbsp;" ;
- //removing the currency dropdown becuase the amount is already formatted.
-//					"<select onChange=\"ConvertRateSingle(this.options[this.selectedIndex].value," .
-//														 "document.getElementById('groupQuota'));\">";
-//	$outputTotal .= $currency->getSelectOptions();
-//	$outputTotal .= "</select>";
-	 
-	$outputTotal .= "</slot></td>\n";
-	$outputTotal .= "</tr>\n";
-	
-	return $outputTotal;
-}	
-
-?>
+    $formattedGroupQuota = htmlspecialchars(
+        format_number(
+            $groupQuota,
+            2,
+            2,
+            ['convert' => true, 'currency_symbol' => true,]
+        )
+    );
+    $outputTotalHTML = '
+<tr height="20">
+<td scope="col"><slot>&nbsp;</slot></td>
+<td scope="col" colspan="3" ><slot>Total</slot></td>
+</tr>
+<tr height="20">
+<td scope="row" valign=TOP  class="oddListRowS1" bgcolor="#fdfdfd"><slot>&nbsp;</slot></td>
+<td valign=TOP colspan="3" class="oddListRowS1" bgcolor="#fdfdfd"><slot>
+<b><span id="groupQuota">' . $formattedGroupQuota . '</span></b>
+&nbsp;&nbsp;&nbsp;&nbsp;
+</slot></td>
+</tr>';
+    return $outputTotalHTML;
+}

@@ -20,19 +20,9 @@ class GetAppRequest extends \Google\Protobuf\Internal\Message
      */
     private $name = '';
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $name
-     *           The SRN of the application to be retrieved.
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\App\V1Alpha\App::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

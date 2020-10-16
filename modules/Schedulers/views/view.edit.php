@@ -45,6 +45,11 @@ class SchedulersViewEdit extends ViewEdit {
 		global $mod_strings;
 		global $app_list_strings;
 
+        if (!empty($this->bean->system_job)) {
+            ACLController::displayNoAccess(true);
+            sugar_cleanup(true);
+        }
+
 		// job functions
 		$this->bean->job_function = $this->bean->job;
 		$this->ss->assign('JOB', $this->bean->job);

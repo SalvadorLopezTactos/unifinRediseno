@@ -14,24 +14,25 @@ Feature: LDAP
 
   Scenario: New LDAP user tries to login if provision is enabled
     Given I am on "/"
-    And I login as "abey" with password "abey" to tenant "0000000002"
+    And I login as "abey" with password "abey" to tenant "2000000002"
     Then I should see "You are logged in as abey"
-    Then I should see "Your tenant id is srn:cloud:iam:eu:0000000002:tenant"
+    Then I should see "Your tenant id is srn:cloud:iam:eu:2000000002:tenant"
     Then I should see "Authentication provider - LDAP"
     And I do logout
-    Then I should see "Log In"
+    Then I should see a "#tenant_hint" element
 
   Scenario: New LDAP user tries to login if provision is enabled and user filter is present
     Given I am on "/"
-    And I login as "user1" with password "user1" to tenant "0000000003"
+    And I login as "user1" with password "user1" to tenant "2000000003"
     Then I should see "You are logged in as user1"
-    Then I should see "Your tenant id is srn:cloud:iam:eu:0000000003:tenant"
+    Then I should see "Your tenant id is srn:cloud:iam:eu:2000000003:tenant"
     Then I should see "Authentication provider - LDAP"
     And I do logout
-    Then I should see "Log In"
+    Then I should see a "#tenant_hint" element
+    And the "tenant_hint" field should contain "2000000003"
 
   Scenario: User no see tenant if it pre-filled
-    Given I am on "/?tenant_hint=srn:cloud:iam:eu:0000000002:tenant"
+    Given I am on "/?tenant_hint=srn:cloud:iam:eu:2000000002:tenant"
     Then I wait for the element "input[name=user_name]"
     Then I should not see "Tenant"
     And I should not see a "#tid" element
@@ -40,9 +41,8 @@ Feature: LDAP
     Then I click "#submit_btn"
     And I wait for the page to be loaded
     Then I should see "You are logged in as abey"
-    Then I should see "Your tenant id is srn:cloud:iam:eu:0000000002:tenant"
+    Then I should see "Your tenant id is srn:cloud:iam:eu:2000000002:tenant"
     Then I should see "Authentication provider - LDAP"
     And I do logout
-    Then I should see "Log In"
-    And I should see an "input[placeholder=Tenant]" element
-    And I should see a "#tid" element
+    Then I should see a "#tenant_hint" element
+    And the "tenant_hint" field should contain "2000000002"

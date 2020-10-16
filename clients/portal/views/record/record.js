@@ -11,7 +11,11 @@
 ({
     extendsFrom: 'RecordView',
     sidebarClosed: false,
+    unwantedPlugins: ['Pii'],
+
     initialize: function(options) {
+        // remove pii plugin
+        this.plugins = _.difference(this.plugins, this.unwantedPlugins);
         this._super("initialize", [options]);
         // Once the sidebartoggle is rendered we close the sidebar so the arrows are updated SP-719
         app.controller.context.on("sidebarRendered", this.closeSidebar, this);

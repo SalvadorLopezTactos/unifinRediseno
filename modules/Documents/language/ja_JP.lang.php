@@ -129,7 +129,7 @@ $mod_strings = array (
     'ERR_DELETE_LATEST_VERSION'=> '最新版を削除することを許可されていません。',
     'LNK_NEW_MAIL_MERGE' => 'メールマージ',
     'LBL_MAIL_MERGE_DOCUMENT' => 'メールマージテンプレート:',
-    'ERR_MISSING_FILE' => 'このドキュメントにはファイルがありません。アップロード時のエラーである可能性があります。再度アップロードを実行するか、システム管理者に連絡してください。',
+    'ERR_MISSING_FILE' => 'このドキュメントにはファイルがありません。アップロード時のエラーである可能性があります。再度アップロードを実行するか、システム管理者にお問い合わせください。',
 
     'LBL_TREE_TITLE' => 'ドキュメント',
     //sub-panel vardefs.
@@ -164,4 +164,6 @@ $mod_strings = array (
     'LBL_BUGS_SUBPANEL_TITLE' => 'バグトラッカー',
     'LBL_QUOTES_SUBPANEL_TITLE' => '見積',
     'LBL_RLI_SUBPANEL_TITLE' => '商談品目',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PLIS_SUBPANEL_TITLE' => 'Purchased Line Items',
 );

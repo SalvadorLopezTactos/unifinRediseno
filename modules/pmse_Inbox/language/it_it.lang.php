@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => 'Assegna Utente Applicato',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Anteprima del disegno di processo',
+    'LBL_PROJECT_RUN_ORDER' => 'Ordine di esecuzione',
 );
 

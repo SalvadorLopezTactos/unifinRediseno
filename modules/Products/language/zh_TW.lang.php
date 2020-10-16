@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => '連絡人',
     'LBL_DISCOUNT_TOTAL' => '總折扣',
     'LBL_DISCOUNT_AMOUNT' => '折扣金額',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => '折扣金額的值',
     'LBL_EXT_PRICE' => '附加價',
     'LBL_CURRENCY_SYMBOL_NAME' => '貨幣符號名稱',

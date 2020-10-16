@@ -155,6 +155,11 @@ class PMSECrmDataWrapper implements PMSEObservable
     protected $logger;
 
     /**
+     * @var ServiceBase
+     */
+    private $apiService;
+
+    /**
      * @global type $beanList
      * @global type $db
      * @codeCoverageIgnore
@@ -647,10 +652,30 @@ class PMSECrmDataWrapper implements PMSEObservable
     }
 
     /**
+     * Get the api service
+     * @return ServiceBase|null
+     */
+    public function getService()
+    {
+        return $this->apiService;
+    }
+
+    /**
+     * Set the api service
+     * @param ServiceBase $api
+     */
+    public function setService(ServiceBase $api)
+    {
+        $this->apiService = $api;
+    }
+
+    // @codingStandardsIgnoreStart
+    /**
      * @codeCoverageIgnore
      */
     public function _get(array $args, ModuleApi $moduleApi)
     {
+        // @codingStandardsIgnoreEnd
         $output = null;
         $data = $args['data'];
         $filter = isset($args['filter']) ? $args['filter'] : '';
@@ -767,6 +792,10 @@ class PMSECrmDataWrapper implements PMSEObservable
                 $output = $this->getAllRelated($filter, $moduleApi, 'one-to-many', $baseModule, $type);
                 $outputType = 1;
                 break;
+            case 'outboundEmailsAccounts':
+                $output = $this->getOutboundEmailAccounts($args);
+                $outputType = 1;
+                break;
             //case 'Log':
             //    $output = $this->retrieveHistoryLog($filter);
             //    $outputType = 1;
@@ -824,42 +853,57 @@ class PMSECrmDataWrapper implements PMSEObservable
         $ie = $this->getInboundEmailBean();
         $ie->email = $email;
 
-        $query = "SELECT users.id, users.first_name, users.last_name, eabr.primary_address, ea.email_address,
-        		  	'Users' module FROM users JOIN email_addr_bean_rel eabr ON
-        		  	(users.id = eabr.bean_id and eabr.deleted=0) JOIN email_addresses ea ON
-        		  	(eabr.email_address_id = ea.id)  WHERE (users.deleted = 0 AND eabr.primary_address = 1)
-        		  	AND (first_name LIKE '$filter%' OR last_name LIKE '$filter%' OR email_address LIKE '$filter%')
-				  	UNION ALL
-					SELECT contacts.id, contacts.first_name, contacts.last_name, eabr.primary_address,
-					ea.email_address, 'Contacts' module FROM contacts JOIN email_addr_bean_rel eabr ON
-					(contacts.id = eabr.bean_id and eabr.deleted=0) JOIN email_addresses ea ON
-					(eabr.email_address_id = ea.id)  WHERE (contacts.deleted = 0 AND eabr.primary_address = 1)
-					AND (first_name LIKE '$filter%' OR last_name LIKE '$filter%' OR email_address LIKE '$filter%')
-					UNION ALL
-					SELECT leads.id, leads.first_name, leads.last_name, eabr.primary_address, ea.email_address,
-					'Leads' module FROM leads JOIN email_addr_bean_rel eabr ON
-					(leads.id = eabr.bean_id and eabr.deleted=0) JOIN email_addresses ea ON
-					(eabr.email_address_id = ea.id)  WHERE (leads.deleted = 0 AND eabr.primary_address = 1)
-					AND (first_name LIKE '$filter%' OR last_name LIKE '$filter%' OR email_address LIKE '$filter%')
-					UNION ALL
-					SELECT prospects.id, prospects.first_name, prospects.last_name, eabr.primary_address,
-					ea.email_address, 'Prospects' module FROM prospects JOIN email_addr_bean_rel eabr ON
-					(prospects.id = eabr.bean_id and eabr.deleted=0) JOIN email_addresses ea ON
-					(eabr.email_address_id = ea.id)  WHERE (prospects.deleted = 0 AND eabr.primary_address = 1)
-					AND (first_name LIKE '$filter%' OR last_name LIKE '$filter%' OR email_address LIKE '$filter%')
-					UNION ALL
-					SELECT accounts.id, '' first_name, accounts.name last_name, eabr.primary_address,
-					ea.email_address, 'Accounts' module FROM accounts JOIN email_addr_bean_rel eabr ON
-					(accounts.id = eabr.bean_id and eabr.deleted=0) JOIN email_addresses ea ON
-					(eabr.email_address_id = ea.id)  WHERE (accounts.deleted = 0 AND eabr.primary_address = 1)
-					AND (email_address LIKE '$filter%' OR name LIKE '$filter%')";
-        $r = $ie->db->limitQuery($query, 0, 25, true);
+        $query = <<<SQL
+SELECT users.id, users.first_name, users.last_name, eabr.primary_address, ea.email_address, 'Users' module
+FROM users
+JOIN email_addr_bean_rel eabr ON (users.id = eabr.bean_id AND eabr.deleted=0)
+JOIN email_addresses ea ON(eabr.email_address_id = ea.id)
+WHERE (users.deleted = 0 AND eabr.primary_address = 1)
+AND (first_name LIKE :filter OR last_name LIKE :filter OR email_address LIKE :filter)
+UNION ALL
+SELECT contacts.id, contacts.first_name, contacts.last_name, eabr.primary_address, ea.email_address, 'Contacts' module
+FROM contacts
+JOIN email_addr_bean_rel eabr ON(contacts.id = eabr.bean_id AND eabr.deleted=0)
+JOIN email_addresses ea ON(eabr.email_address_id = ea.id)
+WHERE (contacts.deleted = 0 AND eabr.primary_address = 1)
+AND (first_name LIKE :filter OR last_name LIKE :filter OR email_address LIKE :filter)
+UNION ALL
+SELECT leads.id, leads.first_name, leads.last_name, eabr.primary_address, ea.email_address, 'Leads' module
+FROM leads
+JOIN email_addr_bean_rel eabr ON(leads.id = eabr.bean_id AND eabr.deleted=0)
+JOIN email_addresses ea ON(eabr.email_address_id = ea.id)
+WHERE (leads.deleted = 0 AND eabr.primary_address = 1)
+AND (first_name LIKE :filter OR last_name LIKE :filter OR email_address LIKE :filter)
+UNION ALL
+SELECT prospects.id, prospects.first_name, prospects.last_name, eabr.primary_address, ea.email_address,
+'Prospects' module FROM prospects 
+JOIN email_addr_bean_rel eabr ON(prospects.id = eabr.bean_id AND eabr.deleted=0)
+JOIN email_addresses ea ON(eabr.email_address_id = ea.id)
+WHERE (prospects.deleted = 0 AND eabr.primary_address = 1)
+AND (first_name LIKE :filter OR last_name LIKE :filter OR email_address LIKE :filter)
+UNION ALL
+SELECT accounts.id, '' first_name, accounts.name last_name, eabr.primary_address, ea.email_address, 'Accounts' module
+FROM accounts
+JOIN email_addr_bean_rel eabr ON (accounts.id = eabr.bean_id AND eabr.deleted=0)
+JOIN email_addresses ea ON(eabr.email_address_id = ea.id)
+WHERE (accounts.deleted = 0 AND eabr.primary_address = 1) AND (email_address LIKE :filter OR name LIKE :filter)
+SQL;
+        $query = $this->db->getConnection()
+            ->getDatabasePlatform()
+            ->modifyLimitQuery($query, 25, 0);
 
-        while ($a = $ie->db->fetchByAssoc($r)) {
+        $stmt = $this->db->getConnection()
+            ->executeQuery(
+                $query,
+                ['filter' => $filter . '%']
+            );
+
+        foreach ($stmt as $a) {
             $person = array();
             $person['fullName'] = $a['first_name'] . ' ' . $a['last_name'];
             $person['emailAddress'] = $a['email_address'];
             $person['id'] = $a['id'];
+            $person['module'] = $a['module'];
             $out[] = $person;
         }
 
@@ -930,40 +974,48 @@ class PMSECrmDataWrapper implements PMSEObservable
     /**
      * Retrieve list of Users
      * @param string $filter
-     * @return object
+     * @return array
      */
     public function retrieveUsers($filter = '')
     {
-        //$beanFactory = $this->getBeanFactory();
-        $res = new stdClass();
-        $res->search = $filter;
-        $res->success = true;
-        $output = array();
-        $where = 'users.deleted = 0 ';
-        $where .= ' AND users.status = \'Active\' ';
-        $where .= ' AND NOT (users.is_group = 1 OR users.portal_only = 1)';
+        $users = BeanFactory::newBean('Users');
+        $teams = BeanFactory::newBean('Teams');
+
+        $q = new SugarQuery;
+        $q->from($users);
+        $q->select([
+            'id',
+            'first_name',
+            'last_name',
+        ]);
+        $q->orderBy('first_name', 'ASC')
+            ->orderBy('last_name', 'ASC');
+
+        $q->where()
+            ->equals('status', 'Active')
+            ->notEquals('is_group', 1)
+            ->notEquals('portal_only', 1);
 
         if (!empty($filter)) {
-            $where .= ' AND (users.first_name LIKE \'%' . $filter . '%\' ';
-            $where .= 'OR users.last_name LIKE \'%' . $filter . '%\' ';
-            $where .= 'OR users.user_name LIKE \'%' . $filter . '%\' )';
+            $q->where()
+                ->queryOr()
+                ->contains('first_name', $filter)
+                ->contains('last_name', $filter)
+                ->contains('user_name', $filter);
+        }
+        $result = [];
+        $rows = $q->execute();
+        foreach ($rows as $row) {
+            $result[] = [
+                'value' => $row['id'],
+                'text' => $teams->getDisplayName(
+                    $row['first_name'],
+                    $row['last_name']
+                ),
+            ];
         }
 
-        $order = 'users.first_name, users.last_name';
-
-        $usersData = $this->usersBean->get_full_list($order, $where);
-        if (is_array($usersData)) {
-            foreach ($usersData as $user) {
-                $userTmp = array();
-                $userTmp['value'] = $user->id;
-                $userFullName = $this->teamsBean->getDisplayName($user->first_name, $user->last_name);
-                $userTmp['text'] = $userFullName;
-
-                $output[] = $userTmp;
-            }
-        }
-        $res->result = $output;
-        return $output;
+        return $result;
     }
 
 
@@ -1023,7 +1075,7 @@ class PMSECrmDataWrapper implements PMSEObservable
      */
     public function retrieveModules($filter = '')
     {
-        $moduleList = PMSEEngineUtils::getStudioModules();
+        $moduleList = PMSEEngineUtils::getModules();
         $output = array();
         foreach ($moduleList as $module) {
             if (!empty($module->name) && (empty($filter) || stripos($module->name, $filter) !== false)) {
@@ -1085,7 +1137,6 @@ class PMSECrmDataWrapper implements PMSEObservable
      */
     public function retrieveActivities($filter = '')
     {
-        //$activityBean = new BpmnActivity();
         $activityBean = $this->getActivityBean();
         $fields = array(
             'act_uid',
@@ -1096,62 +1147,33 @@ class PMSECrmDataWrapper implements PMSEObservable
 
         switch (strtolower($filter)) {
             case 'user':
-//                $where = 'pmse_bpmn_activity.act_task_type=\'USERTASK\'';
-//                $joinedTables = array(
-//                    array('INNER', 'pmse_bpm_activity_definition', 'pmse_bpm_activity_definition.id=pmse_bpmn_activity.id'),
-//                    array('INNER', 'pmse_bpm_dynamic_forms', 'pmse_bpm_dynamic_forms.dyn_uid=pmse_bpm_activity_definition.act_type')
-//                );
-//                $select = array('pmse_bpmn_activity.*');
-                $where = "a.act_task_type='USERTASK'";
                 $this->sugarQueryObject->joinTable('pmse_bpm_activity_definition', array('alias' => 'b'))
                     ->on()->equalsField('b.id', 'a.id');
                 $this->sugarQueryObject->joinTable('pmse_bpm_dynamic_forms', array('alias' => 'c'))
                     ->on()->equalsField('c.dyn_uid', 'b.act_type');
+                $this->sugarQueryObject
+                    ->where()
+                    ->equals('a.act_task_type', 'USERTASK');
                 break;
             case 'script':
-//                $where = 'pmse_bpmn_activity.act_task_type=\'SCRIPTTASK\'';
-//                $joinedTables = array(
-//                    array('INNER', 'pmse_bpm_activity_definition', 'pmse_bpm_activity_definition.id=pmse_bpmn_activity.id')
-//                );
-//                $select = array('pmse_bpmn_activity.*');
-                $where = "a.act_task_type='SCRIPTTASK'";
                 $this->sugarQueryObject->joinTable('pmse_bpm_activity_definition', array('alias' => 'b'))
                     ->on()->equalsField('b.id', 'a.id');
+                $this->sugarQueryObject
+                    ->where()
+                    ->equals('a.act_task_type', 'SCRIPTTASK');
                 break;
             case '':
-                $where = '';
-//                $joinedTables = array();
-//                $select = array();
                 break;
             default:
-                $where = 'a.act_task_type=\'USERTASK\' AND a.prj_id=\'' . $filter . '\'';
-//                $joinedTables = array(
-//                    array('INNER', 'pmse_bpm_activity_definition', 'pmse_bpm_activity_definition.id=pmse_bpmn_activity.id'),
-//                    array('INNER', 'pmse_bpm_dynamic_forms', 'pmse_bpm_dynamic_forms.dyn_uid=pmse_bpm_activity_definition.act_type'),
-//                    array('INNER', 'pmse_project', 'pmse_project.id=pmse_bpmn_activity.prj_id')
-//                );
-//                $select = array('pmse_bpmn_activity.*');
-//                $where = "a.act_task_type='USERTASK' AND d.id='" . $filter . "'";
-//                $this->sugarQueryObject->joinRaw(
-//                    "INNER JOIN pmse_bpm_activity_definition b ON (b.id=a.id)",
-//                    array('alias' => 'b')
-//                );
-//                $this->sugarQueryObject->joinRaw(
-//                    "INNER JOIN pmse_bpm_dynamic_forms c ON (c.dyn_uid=b.act_type)",
-//                    array('alias' => 'c')
-//                );
-                // replaced the a.prj_id for the c.prj_id field in the last join in order to remove duplicate rows
-                // $this->sugarQueryObject->joinRaw("INNER JOIN pmse_project d ON (d.id=a.prj_id)", array('alias' => 'd'));
-                // $this->sugarQueryObject->joinRaw("INNER JOIN pmse_project d ON (d.id=c.prj_id)", array('alias' => 'd'));
+                $this->sugarQueryObject
+                    ->where()
+                    ->equals('a.act_task_type', 'USERTASK')
+                    ->equals('a.prj_id', $filter);
                 break;
         }
-        $this->sugarQueryObject->where()->queryAnd()
-            ->addRaw($where);
         // TODO add debug log here
         $activityList = $this->sugarQueryObject->execute();
 
-//        $activityList = $this->getSelectRows($activityBean,'', $where, 0, -1, -1, $select, $joinedTables);
-//        $activityList = $activityList['rowList'];
         $output = array();
         foreach ($activityList as $activity) {
             $tmpACtivity = array();
@@ -1159,7 +1181,6 @@ class PMSECrmDataWrapper implements PMSEObservable
             $tmpACtivity['text'] = $activity['name'];
             $output[] = $tmpACtivity;
         }
-        //$res->result = $output;
         return $output;
     }
 
@@ -1424,43 +1445,39 @@ class PMSECrmDataWrapper implements PMSEObservable
         try {
             global $db;
 
-            //$get_projID_query = "select prj_id from bpmn_project where prj_uid = '$res->targetProcess'";
-            $get_projID_query = "select id from pmse_project where id = " . $db->quoted($res->targetProcess);
-            $result = $db->Query($get_projID_query);
-            $row = $db->fetchByAssoc($result);
-//            $projId = $row['prj_id'];
-            $projId = $row['id'];
+            $projId = $db->getConnection()
+                ->executeQuery(
+                    'SELECT id FROM pmse_project WHERE id=?',
+                    [$res->targetProcess]
+                )->fetchColumn();
 
-            //$get_proID_query = "select pro_id from bpmn_process where prj_id = $projId";
-            $get_proID_query = "select id from pmse_bpmn_process where prj_id = " . $db->quoted($projId);
-            $result = $db->Query($get_proID_query);
-            $row = $db->fetchByAssoc($result);
-//            $proId = $row['pro_id'];
-            $proId = $row['id'];
+            $proId = $db->getConnection()
+                ->executeQuery(
+                    'SELECT id FROM pmse_bpmn_process WHERE prj_id=?',
+                    [$projId]
+                )->fetchColumn();
 
-            //$get_actIds = "select act_id from bpm_activity_definition where pro_id = $proId;";
-            $get_actIds = "select id from pmse_bpm_activity_definition where pro_id = " . $db->quoted($proId);
-            $result = $db->Query($get_actIds);
-            $row = $db->fetchByAssoc($result);
-            $activity = array();
-            while (is_array($row)) {
-//                $activity[$row['act_id']] = '';
-                $activity[$row['id']] = '';
-                $row = $db->fetchByAssoc($result);
+            $actIdsStmt = $db->getConnection()
+                ->executeQuery(
+                    'SELECT id FROM pmse_bpm_activity_definition WHERE pro_id = ?',
+                    [$proId]
+                );
+
+            $activity = [];
+            while (false !== ($actId = $actIdsStmt->fetchColumn())) {
+                $activity[$actId] = '';
             }
 
-//            $get_act_types = "select act_id, act_script_type from bpmn_activity where pro_id = $proId;";
-            $get_act_types = "select id, act_script_type from pmse_bpmn_activity where pro_id = " .
-                $db->quoted($proId);
-            $result = $db->Query($get_act_types);
-            $row = $db->fetchByAssoc($result);
-            while (is_array($row)) {
-//                if (isset($activity[$row['act_id']])) {
-//                    $activity[$row['act_id']] = $row['act_script_type'];
+            $actTypesStmt = $db->getConnection()
+                ->executeQuery(
+                    'SELECT id, act_script_type FROM pmse_bpmn_activity WHERE pro_id = ?',
+                    [$proId]
+                );
+
+            foreach ($actTypesStmt as $row) {
                 if (isset($activity[$row['id']])) {
                     $activity[$row['id']] = $row['act_script_type'];
                 }
-                $row = $db->fetchByAssoc($result);
             }
 
             $cleanActivityFiels = '';
@@ -1483,44 +1500,51 @@ class PMSECrmDataWrapper implements PMSEObservable
                     }
                 }
 
-                $update_activity = sprintf(
-                    "UPDATE pmse_bpm_activity_definition"
-                        . " SET act_field_module = %s, act_fields = %s, act_readonly_fields = '',"
-                        . " act_required_fields = ''"
-                        . " WHERE pro_id = %s AND id = %s",
-                    $db->quoted($res->newModule),
-                    $db->quoted($cleanActivityFiels),
-                    $db->quoted($proId),
-                    $db->quoted($actId)
-                );
-
-                $resultUpdate = $db->Query($update_activity);
+                $db->getConnection()
+                    ->update(
+                        'pmse_bpm_activity_definition',
+                        [
+                            'act_field_module' => $res->newModule,
+                            'act_fields' => $cleanActivityFiels,
+                            'act_readonly_fields' => '',
+                            'act_required_fields' => '',
+                        ],
+                        [
+                            'pro_id' => $proId,
+                            'id' => $actId,
+                        ]
+                    );
             }
             //cleaning gateways
-            //$clear_gatewayConditions = "update bpmn_flow set flo_condition = '' where flo_element_origin in (select gat_id from bpmn_gateway where prj_id = $projId)";
-            $clear_gatewayConditions = "update pmse_bpmn_flow set flo_condition = '' where flo_element_origin in (select id from pmse_bpmn_gateway where id = '$projId')";
-            $resultUpdate = $db->Query($clear_gatewayConditions);
+            $updateSQL = <<<SQL
+UPDATE pmse_bpmn_flow
+SET flo_condition = ''
+WHERE flo_element_origin IN (
+  SELECT id FROM pmse_bpmn_gateway WHERE id = ?
+)
+SQL;
+
+            $db->getConnection()
+                ->executeUpdate(
+                    $updateSQL,
+                    [$projId]
+                );
+
             //cleaning other events not email type
-//            $update_evendef1 = "update bpm_event_definition set evn_module = '$res->newModule', evn_criteria = '', evn_params = '' where evn_id in (select evn_id from bpmn_event where evn_behavior = 'CATCH' and prj_id = $projId and evn_type = 'INTERMEDIATE');";
-            $update_evendef1 = "update pmse_bpm_event_definition set evn_module = '$res->newModule', evn_criteria = '', evn_params = '' where id in (select id from pmse_bpmn_event where evn_behavior = 'CATCH' and prj_id = '$projId' and evn_type = 'INTERMEDIATE');";
-            $resultUpdate = $db->Query($update_evendef1);
-            //cleaning start events
-            /* $update_evendef2 = "update bpm_event_definition set evn_module = '$res->newModule', evn_criteria = '[]' where pro_id = $proId and evn_type = 'START';";
-              $resultUpdate = $db->Query($update_evendef2);
-
-              $get_event_name = "select evn_name from bpmn_event where pro_id = $proId and evn_type = 'START';";
-              $result = $db->Query($get_event_name);
-              $row = $db->fetchByAssoc($result);
-
-              $changedEventName = $row['evn_name'];
-              $newModule = substr($res->newModule, 0, -1);
-              $targetModule = substr($res->targetModule, 0, -1);
-              $changedEventName = str_replace($targetModule, $newModule, $changedEventName);
-              $messageEvent = strtoupper($newModule);
-
-              $update_event = "update bpmn_event set evn_name = '$changedEventName', evn_message = '$messageEvent' where pro_id = $proId and evn_type = 'START';";
-              $resultUpdate = $db->Query($update_event); */
-
+            $updateSQL = <<<SQL
+UPDATE pmse_bpm_event_definition 
+SET evn_module = ?, evn_criteria = '', evn_params = '' 
+WHERE id IN (
+  SELECT id 
+  FROM pmse_bpmn_event
+  WHERE evn_behavior = 'CATCH' AND prj_id = ? AND evn_type = 'INTERMEDIATE'
+)
+SQL;
+            $db->getConnection()
+                ->executeUpdate(
+                    $updateSQL,
+                    [$res->newModule, $projId]
+                );
             $res->success = true;
         } catch (Exception $ex) {
             $res->error = $ex->getMessage();
@@ -1568,7 +1592,8 @@ class PMSECrmDataWrapper implements PMSEObservable
 
         foreach ($fieldsData as $field) {
             $tmpField = array();
-            if (isset($field['vname']) && (PMSEEngineUtils::isValidField($field, $type))) {
+            if (isset($field['vname']) && (PMSEEngineUtils::isValidField($field, $type)) &&
+                PMSEEngineUtils::isSupportedField($moduleBean->object_name, $field['name'], $type)) {
                 // If this is a locked field list AND this field is part of a group
                 if ($type === 'RR' && !empty($field['group'])) {
                     // If the group field for this field exists in vardefs then we can skip this field
@@ -2038,8 +2063,10 @@ class PMSECrmDataWrapper implements PMSEObservable
         $this->sugarQueryObject->from($caseBean, array('alias' => 'a'));
         $this->sugarQueryObject->joinTable('pmse_bpm_flow', array('joinType' => 'LEFT', 'alias' => 'b'))
             ->on()->equalsField('a.cas_id', 'b.cas_id');
-        $this->sugarQueryObject->where()->queryAnd()
-            ->addRaw("b.cas_id = $casID and a.cas_index = $casIndex");
+        $this->sugarQueryObject->where()
+            ->equals('b.cas_id', $casID)
+            ->equals('a.cas_index', $casIndex);
+
         $rows = $this->sugarQueryObject->execute();
 
 
@@ -2306,6 +2333,32 @@ class PMSECrmDataWrapper implements PMSEObservable
         }
         $result['result'] = $arr;
         return $result;
+    }
+
+    /**
+     * Gets OutboundEmail accounts for bpm to use. By setting the `bpm_request` registry value,
+     * OutboundEmail ignores visibility and acls to retrieve all accounts except the Portal user's account
+     * and the Email archiver account
+     *
+     * @param array $args REST API arguments.
+     * @return array OutboundEmail accounts
+     * @throws SugarApiExceptionError
+     * @throws SugarApiExceptionInvalidParameter
+     * @throws SugarApiExceptionNotAuthorized
+     */
+    public function getOutboundEmailAccounts(array $args)
+    {
+        // indicate we are coming from SugarBPM
+        ProcessManager\Registry\Registry::getInstance()->set('bpm_request', true, true);
+        $outboundFilterApi = new PMSEFilterOutboundEmailsApi();
+        $args['module'] = 'OutboundEmail';
+        $api = $this->getService();
+        if (empty($api)) {
+            throw new Exception('Could not find the request api service');
+        }
+        $ret = $outboundFilterApi->filterList($api, $args);
+        ProcessManager\Registry\Registry::getInstance()->set('bpm_request', false, true);
+        return $ret;
     }
 
     /**

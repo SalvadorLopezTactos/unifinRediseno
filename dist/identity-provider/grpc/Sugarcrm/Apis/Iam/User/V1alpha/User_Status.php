@@ -4,13 +4,20 @@
 
 namespace Sugarcrm\Apis\Iam\User\V1alpha;
 
-if (false) {
+/**
+ * Indicates if the user object is enabled
+ *
+ * Protobuf enum <code>Sugarcrm\Apis\Iam\User\V1alpha\User\Status</code>
+ */
+class User_Status
+{
     /**
-     * This class is deprecated. Use Sugarcrm\Apis\Iam\User\V1alpha\User\Status instead.
-     * @deprecated
+     * Generated from protobuf enum <code>ACTIVE = 0;</code>
      */
-    class User_Status {}
+    const ACTIVE = 0;
+    /**
+     * Generated from protobuf enum <code>INACTIVE = 1;</code>
+     */
+    const INACTIVE = 1;
 }
-class_exists(User\Status::class);
-@trigger_error('Sugarcrm\Apis\Iam\User\V1alpha\User_Status is deprecated and will be removed in the next major release. Use Sugarcrm\Apis\Iam\User\V1alpha\User\Status instead', E_USER_DEPRECATED);
 

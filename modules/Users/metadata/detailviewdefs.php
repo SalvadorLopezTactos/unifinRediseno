@@ -29,7 +29,12 @@ $viewdefs['Users']['DetailView'] = array(
                       'customCode'=>'{$USER_TYPE_READONLY}',
                   ),
             ),
-            array('picture'),
+            array('picture',
+                array(
+                    'name'=>'license_type',
+                    'customCode'=>'{$LICENSE_TYPE_READONLY}',
+                ),
+            ),
         ),
         'LBL_EMPLOYEE_INFORMATION' => array(
             array('employee_status','show_on_employees'),
@@ -38,6 +43,7 @@ $viewdefs['Users']['DetailView'] = array(
             array('reports_to_name','phone_other'),
             array('','phone_fax'),
             array('','phone_home'),
+            array('business_center_name',''),
             array('messenger_type','messenger_id'),
             array('address_street','address_city'),
             array('address_state','address_postalcode'),

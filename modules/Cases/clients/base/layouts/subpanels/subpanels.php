@@ -85,5 +85,12 @@ $viewdefs['Cases']['base']['layout']['subpanels'] = array (
               'link' => 'kbcontents',
           ),
       ),
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_CHANGETIMERS_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'changetimers',
+            ],
+        ],
   ),
 );

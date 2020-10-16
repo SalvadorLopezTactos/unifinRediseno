@@ -77,23 +77,6 @@
                             <td>{$yesNoDropCreate}</td>
                         </tr>
                     {/if}
-                    {if $db->supports('fulltext')}
-                        <tr>
-                            <td></td>
-                            <td><strong>{$MOD.LBL_FTS}</strong></td>
-                            <td>
-                                {if $db->full_text_indexing_installed()}
-                                    {$MOD.LBL_FTS_INSTALLED}
-                                {else}
-                                    <span class="stop">
-                                        <strong>{$MOD.LBL_FTS_INSTALLED_ERR1}</strong>
-                                        <br>
-                                        {$MOD.LBL_FTS_INSTALLED_ERR2}
-                                    </span>
-                                {/if}
-                            </td>
-                        </tr>
-                    {/if}
                     {if $smarty.session.install_type && $smarty.session.install_type eq 'custom'}
                         <tr>
                             <td colspan="3" align="left"></td>

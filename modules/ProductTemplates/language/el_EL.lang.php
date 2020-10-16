@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => 'Προβολή Κατασκευαστών',
   'LNK_NEW_PRODUCT_CATEGORY' => 'Προβολή Κατηγοριών Προϊόντος',
   'LNK_NEW_PRODUCT_TYPE' => 'Προβολή Τύπων Προϊόντος',
-  'LNK_NEW_PRODUCT' => 'Δημιουργία Προϊόντος για Κατάλογο',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => 'Πάροχοι Αποστολής',
   'LNK_PRODUCT_LIST' => 'Προβολή Καταλόγου Προϊόντος',
   'NTC_DELETE_CONFIRMATION' => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την εγγραφή;',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => 'Κατηγορίες Προϊόντων',
   'LBL_MANUFACTURERS' => 'Κατασκευαστές',
   'LBL_PRODUCT_TYPES' => 'Τύποι Προϊόντων',
-
+  'LBL_RENEWABLE' => 'Ανανεώσιμη',
+  'LBL_SERVICE' => 'Υπηρεσία',
 );
-
-
-?>

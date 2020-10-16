@@ -79,6 +79,7 @@ class EmailTemplate extends SugarBean {
 		'accept_status_name',
         'acl_role_set_id',
 	);
+    public $text_only;
 
     protected $storedVariables = array();
 
@@ -789,5 +790,19 @@ class EmailTemplate extends SugarBean {
     {
         $pattern = '/\$[a-zA-Z]+_[a-zA-Z0-9_]+/';
         return !!preg_match($pattern, $tplStr);
+    }
+
+    /**
+     * Current template is internal Forgot Password Template
+     *
+     * @return bool
+     */
+    public function isForgotPasswordTemplate(): bool
+    {
+        $pwdConf = $GLOBALS['sugar_config']['passwordsetting'];
+        return in_array(
+            $this->id,
+            [$pwdConf['generatepasswordtmpl'], $pwdConf['lostpasswordtmpl']]
+        );
     }
 }

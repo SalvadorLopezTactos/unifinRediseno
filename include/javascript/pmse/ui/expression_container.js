@@ -281,6 +281,8 @@ ExpressionContainer.prototype.handleCriteriaBuilder = function (globalParent, pa
             constants: false
         },
         config = {};
+    var combosKey;
+    var optionItem;
 
     if (globalParent.globalCBControl.isOpen()) {
         globalParent.globalCBControl.close();
@@ -296,7 +298,19 @@ ExpressionContainer.prototype.handleCriteriaBuilder = function (globalParent, pa
         });
         if (parentVariable.isReturnType) {
             config = {
-                constants: true,
+                constants: {
+                    basic: true,
+                    date: true,
+                    datetime: true,
+                    timespan: true,
+                    datespan: false,
+                    currency: true,
+                    businessHours: {
+                        show: true,
+                        targetModuleBC: isRelatedToBusinessCenters(parentVariable.parent.base_module),
+                        selectedModuleBC: false
+                    }
+                },
                 variables: {
                     dataRoot: null,
                     data: parentVariable.inputFields,
@@ -315,6 +329,13 @@ ExpressionContainer.prototype.handleCriteriaBuilder = function (globalParent, pa
                 });
                 return;
             }
+
+            // When decision table module fields are loaded in the business rule designer, the optionItem properties
+            // are separated from them into a "combos" object. The code below extracts the optionItem for the current
+            // field (parentVariable) so that it to be used in the switch below
+            combosKey = parentVariable.module + parentVariable.parent.moduleFieldSeparator + parentVariable.field;
+            optionItem = parentVariable.combos[combosKey] || {};
+
             switch (parentVariable.fieldType) {
                 case 'Date':
                 case 'Datetime':
@@ -326,7 +347,13 @@ ExpressionContainer.prototype.handleCriteriaBuilder = function (globalParent, pa
                             date: parentVariable.fieldType === 'Date',
                             datetime: parentVariable.fieldType === 'Datetime',
                             timespan: parentVariable.fieldType === 'Datetime',
-                            datespan: parentVariable.fieldType === 'Date'
+                            datespan: parentVariable.fieldType === 'Date',
+                            businessHours: {
+                                show: parentVariable.variableMode === 'conclusion',
+                                targetModuleBC: parentVariable.fieldType === 'Datetime' && optionItem.businessHours &&
+                                    optionItem.businessHours.targetModuleBC,
+                                selectedModuleBC: false
+                            }
                         },
                         variables: {
                             dataRoot: null,

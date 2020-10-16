@@ -75,18 +75,6 @@ class ProductCategory extends SugarBean
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function bean_implements($interface)
-    {
-        switch ($interface) {
-            case 'ACL':
-                return true;
-        }
-        return false;
-    }
-
-    /**
      * Return the name of the product category
      *
      * @return string

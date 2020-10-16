@@ -17,7 +17,6 @@ class PMSELoggerWriter extends SugarLogger
     public function __construct()
     {
         $config = SugarConfig::getInstance();
-        $this->ext = '.log';
         $this->logfile = 'PMSE';
         $this->dateFormat = $config->get('logger.file.dateFormat', $this->dateFormat);
         $this->logSize = $config->get('logger.file.maxSize', $this->logSize);

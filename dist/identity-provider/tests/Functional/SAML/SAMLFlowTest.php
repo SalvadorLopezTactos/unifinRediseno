@@ -186,6 +186,10 @@ abstract class SAMLFlowTest extends AppFlowTest
             'You are logged in',
             $this->webClient->getResponse()->getContent()
         );
+
+        $cookieTid = $this->webClient->getCookieJar()->get('tid');
+        $this->assertNotNull($cookieTid);
+        $this->assertEquals('srn:cloud:idp:eu:2000000001:tenant:2000000001', $cookieTid->getValue());
     }
 
     /**
@@ -228,6 +232,9 @@ abstract class SAMLFlowTest extends AppFlowTest
         }
 
         $this->webClient->request('GET', $this->samlLogoutEndpoint);
+
+        $cookies = $this->webClient->getCookieJar();
+        $this->assertEquals(1, $cookies->get('cloud-log')->getValue());
 
         $response = $this->webClient->getResponse();
         $this->assertEquals(302, $response->getStatusCode());
@@ -280,9 +287,8 @@ abstract class SAMLFlowTest extends AppFlowTest
             ['SAMLResponse' => $this->encodeSAMLAssertion(file_get_contents($responseFile))]
         );
         $this->webClient->followRedirect();
-        $cookies = $this->webClient->getCookieJar();
-        $this->assertEquals(1, $cookies->get('cloud-log')->getValue());
-        $this->assertContains('Log In', $this->webClient->getResponse()->getContent());
+
+        $this->assertContains('Show log in form', $this->webClient->getResponse()->getContent());
     }
 
     /**

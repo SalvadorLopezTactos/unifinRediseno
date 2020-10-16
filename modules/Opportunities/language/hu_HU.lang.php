@@ -15,6 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Lehetőségek listája műszerfal',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Lehetőség bejegyzések műszerfal',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Lehetőség részletei',
 
     'LBL_MODULE_NAME' => 'Lehetőségek',
     'LBL_MODULE_NAME_SINGULAR' => 'Lehetőség',
@@ -25,6 +26,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => 'Lehetőség neve:',
     'LBL_OPPORTUNITY' => 'Lehetőség:',
     'LBL_NAME' => 'Lehetőség neve',
+    'LBL_TIME' => 'Idő',
     'LBL_INVITEE' => 'Kapcsolatok',
     'LBL_CURRENCIES' => 'Pénznemek',
     'LBL_LIST_OPPORTUNITY_NAME' => 'Név',
@@ -75,6 +77,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Típus:',
     'LBL_CAMPAIGN' => 'Kampány:',
     'LBL_NEXT_STEP' => 'Következő lépés:',
+    'LBL_SERVICE_START_DATE' => 'Service Start Date',
     'LBL_LEAD_SOURCE' => 'Ajánlás forrása:',
     'LBL_SALES_STAGE' => 'Eladási szint:',
     'LBL_SALES_STATUS' => 'Állapot',
@@ -142,6 +145,16 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE_FORECAST' => 'Előrejelzés',
     'LBL_WORKSHEET' => 'Munkalap',
 
+    'LBL_RENEWAL' => 'Megújítás',
+    'LBL_RENEWAL_OPPORTUNITIES' => 'Megújítási lehetőségek',
+    'LBL_RENEWAL_PARENT' => 'Szülőlehetőség',
+    'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'Megújítási szülőazonosító',
+    'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
+
+    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
+    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
+    'LBL_WIDGET_AMOUNT' => 'Amount',
+
     'TPL_RLI_CREATE' => 'Minden lehetőségnek kapcsolódnia kell egy bevételi sorhoz. <a href="javascript:void(0);" id="createRLI">Bevételi sor létrehozása</a>.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Bevételi sor tétel létrehozása.',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Megajánlott Tételek',
@@ -152,6 +165,7 @@ $mod_strings = array(
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Azok a lehetőségek, amelyekhez lezárt bevételi sorok kapcsolódnak, nem törölhetők.',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'A kijelölt rekordok közül, egy vagy több bejegyzés lezárt bevételi sort tartalmaz, ezért nem lehet törölni.',
     'LBL_INCLUDED_RLIS' => 'Bevett bevételsor-elemek száma',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Árajánlatok',
 
@@ -186,19 +200,19 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Miután Ön kezdeményezi ezt a változtatást, a Bevételi Sortételek adatai minden meglévő {{module_name}} modulra vonatkozóan a háttérben megjelennek. Ha a Bevételi Sortételek adatai készen vannak és rendelkezésre állnak a rendszer értesítést küld az Ön felhasználói profiljának e-mail címére. Kérjük, vegye figyelembe, hogy a példánya úgy kell legyen konfigurálva, hogy tudjon e-mailt küldeni az Admin > Email Beállításokon keresztül, hogy az értesítés elküldhető legyen.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'A(z) {{plural_module_name}} modul segítségével a kezdetektől a végéig nyomon követheti az egyedi értékesítéseket. Minden {{module_name}} bejegyzés egy prospektív értékesítést jelent, és tartalmazza a releváns értékesítési adatokat, valamint az olyan fontos bejegyzésekhez kapcsolódó adatokat, mint a(z) {{quotes_module}}, {{contacts_module}} stb. Egy {{module_name}} jellemzően több értékesítési fázison megy át, amíg „Lezárt, megnyert” vagy „Lezárt, elveszített” minősítést nem kap. A(z) {{plural_module_name}} ennél tovább is emelhető a Sugar {{forecasts_singular_module}} modul használatával, amelynek segítségével megértheti és képes lesz előre jelezni az értékesítési trendeket, és fókuszálhatja a munkáját annak érdekében, hogy elérje az értékesítési kvótákat.',
+    'LBL_HELP_RECORDS' => 'A(z) {{plural_module_name}} modul segítségével a kezdetektől a végéig nyomon követheti az egyedi értékesítéseket és az adott értékesítésekhez tartozó sor tételeket. Minden {{module_name}} bejegyzés egy prospektív értékesítést jelent, és tartalmazza a releváns értékesítési adatokat, valamint az olyan fontos bejegyzésekhez kapcsolódó adatokat, mint a(z) {{quotes_module}}, {{contacts_module}} stb. Egy {{module_name}} általában több értékesítési szinten áthalad, amíg „Lezárt, megnyert” vagy „Lezárt, elveszített” minősítést nem kap. A(z) {{plural_module_name}} ennél tovább is emelhető a Sugar {{forecasts_singular_module}} modul használatával, amelynek segítségével megértheti és képes lesz előre jelezni az értékesítési trendeket, és fókuszálhatja a munkáját annak érdekében, hogy elérje az értékesítési kvótákat.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'A(z) {{plural_module_name}} modul segítségével a kezdetektől a végéig nyomon követheti az egyedi értékesítéseket és az adott értékesítésekhez tartozó sor tételeket. Minden {{module_name}} bejegyzés egy prospektív értékesítést jelent, és tartalmazza a releváns értékesítési adatokat, valamint az olyan fontos bejegyzésekhez kapcsolódó adatokat, mint a(z) {{quotes_module}}, {{contacts_module}} stb.
+    'LBL_HELP_RECORD' => 'A(z) {{plural_module_name}} modul segítségével a kezdetektől a végéig nyomon követheti az egyedi értékesítéseket. Minden {{module_name}} bejegyzés egy prospektív értékesítést jelent, és tartalmazza a releváns értékesítési adatokat, valamint az olyan fontos bejegyzésekhez kapcsolódó adatokat, mint a(z) {{quotes_module}}, {{contacts_module}} stb.
 
 - Szerkessze ennek a rekordnak a mezőit külön-külön, vagy kattintson a Szerkesztés gombra.
-- Tekintse meg, vagy szerkessze a hivatkozásokat a bal alsó „Adatnézet” kapcsoló használatával.
-- A bal alsó modul „Tevékenységfolyam” lehetőségre való kapcsolásával felhasználói hozzászólásokat írhat és tekinthet meg, illetve rögzítheti a módosítási előzményeket a(z) {{activitystream_singular_module}} modulban.
-- A rekord neve mellett jobbra található ikonok segítségével jelölje be kedvencének a tartalmat, vagy kövesse annak utóéletét!
+- Tekintse meg, vagy szerkessze az alpanelek egyéb rekordjai felé mutató linkeket a bal alsó „Adatnézet” kapcsoló használatával.
+- Hozzon létre vagy tekintsen meg felhasználói megjegyzéseket, és rögzítse a módosítási előzményeket a(z) {{activitystream_singular_module}} részben a bal alsó tábla „Tevékenységfolyamra” kapcsolásával.
+- A rekord neve mellett jobbra található ikonok segítségével jelölje be kedvencének a tartalmat, vagy kövesse annak utóéletét.
 - Egyéb tevékenységek a Szerkesztés gombtól jobbra szereplő műveleti gomb legördülő menüjében találhatók.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'A(z) {{plural_module_name}} modul segítségével a kezdetektől a végéig nyomon követheti az egyedi értékesítéseket és az adott értékesítésekhez tartozó sor tételeket. Minden {{module_name}} bejegyzés egy prospektív értékesítést jelent, és tartalmazza a releváns értékesítési adatokat, valamint az olyan fontos bejegyzésekhez kapcsolódó adatokat, mint a(z) {{quotes_module}}, {{contacts_module}} stb. 
+    'LBL_HELP_CREATE' => 'A(z) {{plural_module_name}} modul segítségével a kezdetektől a végéig nyomon követheti az egyedi értékesítéseket és az adott értékesítésekhez tartozó sor tételeket. Minden {{module_name}} bejegyzés egy prospektív értékesítést jelent, és tartalmazza a releváns értékesítési adatokat, valamint az olyan fontos bejegyzésekhez kapcsolódó adatokat, mint a(z) {{quotes_module}}, {{contacts_module}} stb.
 
 {{module_name}} létrehozásához:
 1. Adjon meg értékeket a mezőkben szükség szerint.
@@ -216,4 +230,6 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'A tíz legjobb Eladási Lehetőség Termékeit jeleníti meg egy diagramon.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Lehetőségeim',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Csoportom Lehetőségei",
+
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
 );

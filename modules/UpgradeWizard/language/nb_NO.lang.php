@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'Kan ikke innstallere',
     'LBL_ML_VERSION' => 'Versjon',
 	'LBL_ML_INSTALL'=>'Installer',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'Følger',
 	'LBL_MODULE_NAME' => 'Oppgraderingsveiviser',
 	'LBL_MODULE_NAME_SINGULAR' => 'Oppgraderingsveiviser',
 	'LBL_UPLOAD_SUCCESS' => 'Oppgraderingspakken er lastet opp. Klikk Neste for å utføre en siste sjekk.',

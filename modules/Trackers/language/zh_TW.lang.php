@@ -18,17 +18,7 @@
  ********************************************************************************/
 
 $mod_strings = array (
-		  //Labels for methods in the TrackerReporter.php file that are shown in TrackerDashlet
-		  'ShowActiveUsers'      => '顯示使用中使用者',
-		  'ShowLastModifiedRecords' => '最近 10 條修改記錄',
-		  'ShowTopUser' => '重要使用者',
-		  'ShowMyModuleUsage' => '我的模組使用量',
-		  'ShowMyWeeklyActivities' => '我的每週活動',
-		  'ShowTop3ModulesUsed' => '我已使用的 3 個重要模組',
-		  'ShowLoggedInUserCount' => '使用中使用者計數',
-		  'ShowMyCumulativeLoggedInTime' => '我的累計登入時間（本週）',
-		  'ShowUsersCumulativeLoggedInTime' => '使用者累計登入時間（本週）',
-		  
+
 		  //Column header mapping
 		  'action' => '動作',
 		  'active_users' => '使用中使用者計數',

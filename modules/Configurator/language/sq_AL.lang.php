@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'Raporti i aspektit të imazhit duhet të jetë ndërmjet 1:1 dhe 10:1.Imazhi do të ridimensohet.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'Raporti i aspektit të imazhit duhet të jetë ndërmjet 3:1 dhe 20:1. Ngarkoni një dosje të re me këtë raport.',
     'ERR_ALERT_FILE_UPLOAD' => 'Gabim gjatë ngarkimit të imazhit.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Nuk mund të krijohet direktori për imazhe',
     'LBL_LOGGER'=>'Paramterat e memorjes',
 	'LBL_LOGGER_FILENAME'=>'Identifikimi i emrit të dosjes',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Zgjatje',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Madhësia maksimale e identifikimit',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'formatim i gabuar i datës',
 	'LBL_LOGGER_LOG_LEVEL'=>'Identifikimi i nivelit',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Cilësimet e evidencës së komenteve',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Maksimumi i karaktereve që shfaqen për regjistër komenti',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

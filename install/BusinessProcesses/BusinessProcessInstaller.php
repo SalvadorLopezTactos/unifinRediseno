@@ -11,6 +11,7 @@
  */
 
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 /**
  * Class that handles installation of business process data on install of Sugar
@@ -90,6 +91,63 @@ class BusinessProcessInstaller
      * @var int
      */
     protected $cleanupCount = 0;
+
+    /**
+     * The logger object to use, if one is supplied
+     * @var Object
+     */
+    protected $logger;
+
+    /**
+     * The method/function to call when logging something from this class
+     * @var string
+     */
+    protected $logMethod = 'installLog';
+
+    /**
+     * Holds the state of the license checker so that this object knows what to
+     * do with it when the time comes
+     * @var bool
+     */
+    protected $licenseCheckState;
+
+    /**
+     * Sets the logger object and method for this class
+     * @param string $method The method to call
+     * @param Object $object The object to use
+     * @return BusinessProcessInstaller
+     */
+    public function setLogger(string $method, $object = null) : BusinessProcessInstaller
+    {
+        $this->logMethod = $method;
+        $this->logger = $object;
+        return $this;
+    }
+
+    /**
+     * Logs a message to a log
+     * @param string $msg The message to log
+     */
+    protected function log(string $msg) : void
+    {
+        // If there is a log method, use it
+        if ($this->logMethod) {
+            // This will be what we call, unless...
+            $call = $this->logMethod;
+
+            // There was a logger object given to this object
+            if ($this->logger) {
+                // In which case we need to call the object method
+                $call = [$this->logger, $this->logMethod];
+            }
+
+            // Call it
+            call_user_func($call, $msg);
+        } else {
+            // Fallback to the base logger
+            LoggerManager::getLogger()->info($msg);
+        }
+    }
 
     /**
      * Gets the PMSEImporter object
@@ -186,7 +244,7 @@ class BusinessProcessInstaller
      */
     protected function appendInstalled(array $installed)
     {
-        $this->installed = array_merge($this->installed, $installed);
+        $this->installed = array_merge_recursive($this->installed, $installed);
     }
 
     /**
@@ -247,21 +305,29 @@ class BusinessProcessInstaller
                         // If we were successful then we will have an ID of the
                         // project that was imported
                         if (isset($result['id'])) {
+                            // Mark what was just installed
                             $this->markInstalled($ext, $result['id']);
+
+                            // Mark any installed dependencies
+                            $this->appendInstalled($importer->getDependencyKeysByType());
+
+                            // Mark the file as having been installed
                             $this->markFileInstalled($file);
                         }
                     } catch (Exception $e) {
+                        $this->log('An Exception was raised: ' . $e->getMessage());
+
                         // Log the failure to this object
-                        $this->failures[] = $data['id'];
+                        $this->failures[] = $data['id'] ?? '- NO ID FOUND -';
 
                         // Log to the installer
-                        installLog(
+                        $this->log(
                             sprintf(
                                 'Process Import of file %s for %s \'%s\' (ID: %s) failed',
                                 $file,
                                 $ext,
-                                $data['name'],
-                                $data['id']
+                                $data['name'] ?? '- NO NAME FOUND -',
+                                $data['id'] ?? '- NO ID FOUND -'
                             )
                         );
                     }
@@ -462,6 +528,10 @@ class BusinessProcessInstaller
      */
     public function install() : BusinessProcessInstaller
     {
+        // This should not be a problem for installation, but it is necessary for
+        // upgrades
+        $this->suspendLicenseChecks();
+
         // Get the installation data
         $this->collectInstallationFiles();
 
@@ -470,6 +540,9 @@ class BusinessProcessInstaller
 
         // Save the data
         $this->save();
+
+        // Set the flag back to what it was if it needs it
+        $this->resumeLicenseChecks();
 
         return $this;
     }
@@ -533,9 +606,41 @@ class BusinessProcessInstaller
     public function logInstallTotals() : BusinessProcessInstaller
     {
         foreach ($this->getInstallTotalsLog() as $entry) {
-            installLog($entry);
+            $this->log($entry);
         }
 
         return $this;
+    }
+
+    /**
+     * Suspends the license enforcement of record checks so that the data needed
+     * can be installed and retrieved
+     * @return bool The previous state of the license admin work flag
+     */
+    protected function suspendLicenseChecks() : bool
+    {
+        // Needed for license management overrides. This should be done before
+        // any data is collected to ensure all necessary data is collected.
+        $acm = AccessControlManager::instance();
+        $this->licenseCheckState = $acm->getAdminWork();
+        if ($this->licenseCheckState !== true) {
+            $acm->setAdminWork(true, true);
+        }
+
+        return $this->licenseCheckState;
+    }
+
+    /**
+     * Resets the license enforcement check if it is needed
+     * @return bool Always true
+     */
+    protected function resumeLicenseChecks() : bool
+    {
+        // Reset the admin flag on the access control manager if it needs it.
+        if ($this->licenseCheckState !== true) {
+            AccessControlManager::instance()->setAdminWork(false, true);
+        }
+
+        return true;
     }
 }

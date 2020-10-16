@@ -31,6 +31,7 @@ class IdmUserFilterApi extends FilterApi
                     'SugarApiExceptionNotAuthorized',
                 ],
                 'minVersion' => '11.2',
+                'ignoreSystemStatusError' => true,
             ],
         ];
     }

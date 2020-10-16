@@ -268,6 +268,8 @@ $dictionary['TeamSetModule'] = array(
         'team_set_id' => array(
             'name' => 'team_set_id',
             'type' => 'id',
+            'isnull' => false,
+            'required' => true,
         ),
         'module_table_name' => array(
             'name' => 'module_table_name',
@@ -275,6 +277,8 @@ $dictionary['TeamSetModule'] = array(
             'type' => 'name',
             'dbType' => 'varchar',
             'len' => 128,
+            'isnull' => false,
+            'required' => true,
         ),
         'deleted' => array(
             'name' => 'deleted',

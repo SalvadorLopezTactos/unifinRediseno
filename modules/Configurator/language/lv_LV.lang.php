@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'Attēla novietojuma koeficientam jābūt starp 1:1 un 10:1.  Attēla izmērs tiks izmainīts.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'Attēla novietojuma koeficientam jābūt starp 3:1 un 20:1.  Augšupielādējiet jaunu failu ar šo koeficientu.',
     'ERR_ALERT_FILE_UPLOAD' => 'Kļūda augšupielādējot attēlu.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Nevar izveidot direktoriju attēliem',
     'LBL_LOGGER'=>'Žurnāla iestatījumi',
 	'LBL_LOGGER_FILENAME'=>'Žurnāla faila nosaukums',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Paplašinājums',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Maksimālais žurnāla faila izmērs',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Noklusētais datuma formāts',
 	'LBL_LOGGER_LOG_LEVEL'=>'Žurnāla līmenis',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Komentāru žurnāla iestatījumi',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Maksimālais rakstzīmju skaits komentāra ieraksta parādīšanai',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

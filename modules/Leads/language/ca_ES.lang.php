@@ -322,4 +322,7 @@ Després de confirmar cada mòdul necessari i desitjat, feu clic al botó Desa i
     'LBL_FILTER_LEADS_REPORTS' => 'Informes de potencials',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Objectius empresarials consentits',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Darrera actualització del consetiment',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'No s&#39;ha pogut canviar l&#39;estat de {{moduleSingular}}. Aquest {{moduleSingular}} ja s&#39;ha convertit.',
 );

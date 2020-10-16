@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Muokattu viimeksi',
     'LBL_DELETED' => 'Poistettu',
     'LBL_REVENUELINEITEMS' => 'Tuoterivit',
+    'LBL_ENTRY_SOURCE' => 'Huomautuksen alkuperä',
+    'LBL_SOURCE_EXTERNAL' => 'Ulkoinen',
+    'LBL_SOURCE_INTERNAL' => 'Sisäinen',
 
     // Help Text
     // List View Help Text

@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Falllisten-Dashboard',
     'LBL_CASES_RECORD_DASHBOARD' => 'Fallbericht-Dashboard',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Details zu dem Fall',
 
 	'ERR_DELETE_RECORD'					=> 'Zum Löschen der Firma muss eine Datensatznummer angegeben werden.',
 	'LBL_ACCOUNT_ID'					=> 'Firmen-ID',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Kontakte',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Tickets',
 	'LBL_DESCRIPTION'					=> 'Beschreibung:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Dateianhang',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Dateianhang',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Verlauf',
 	'LBL_INVITEE'						=> 'Kontakte',
 	'LBL_MEMBER_OF'						=> 'Firma',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Erstellt von',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Zugewiesener Benutzer',
     'LBL_EXPORT_TEAM_COUNT' => 'Team-Anzahl',
+    'LBL_CHANGETIMERS' => 'Zeitmesser ändern',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Verknüpfte Kontakt-E-Mails',
@@ -140,4 +143,11 @@ So erstellen Sie ein {{module_name}}:
 - Felder, die als Pflichtfeld markiert sind, müssen vor dem Speichern ausgefüllt werden. 
 - Klicken Sie auf "Mehr anzeigen", um weitere Felder zu erfassen. 
 2. Klicken Sie auf "Speichern", um den Datensatz fertigzustellen und auf die letzte Seite zurück zu kommen.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Haben Sie nicht gefunden, wonach Sie suchen?',
+    'LBL_CREATE_CASE' => 'Erstellen Sie einen {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'SLA-Details',
+    'LBL_HOURS' => 'Stunden',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

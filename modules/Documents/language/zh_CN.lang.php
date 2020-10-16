@@ -164,4 +164,6 @@ $mod_strings = array (
     'LBL_BUGS_SUBPANEL_TITLE' => '缺陷',
     'LBL_QUOTES_SUBPANEL_TITLE' => '报价',
     'LBL_RLI_SUBPANEL_TITLE' => '营收单项',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PLIS_SUBPANEL_TITLE' => 'Purchased Line Items',
 );

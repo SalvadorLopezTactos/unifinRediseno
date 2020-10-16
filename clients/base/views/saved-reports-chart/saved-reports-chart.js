@@ -264,6 +264,9 @@
         // default settings is current settings with defaults
         settings = this.getDefaultSettings();
 
+        // get translation for the chart label if possible
+        settings.label = app.lang.get(settings.label, this.module);
+
         // this does what extend/defaults does but we need it for x_axis_label before
         chartType = updated ? config.chartType : settings.chart_type || config.chartType;
 

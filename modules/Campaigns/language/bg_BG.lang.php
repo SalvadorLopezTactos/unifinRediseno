@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Целева група от тип "По подразбиране" не бе намерена',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Няма намерени записи',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Записа бяха обработени',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Име на маркера:',
   'LBL_EDIT_TRACKER_URL'=>'Маркер:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'Не бяха определени оптимални настройки за входяща поща.  Моля, проверете съответните настройки',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Моля прегледайте настройиките на входяща електронна поща.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} потенциални клиенти, създадени през тази кампания са били изтрити в последствие.',
+    'LBL_PROSPECT_LIST' => 'Целева група',
 );
 
 

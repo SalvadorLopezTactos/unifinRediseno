@@ -7,11 +7,14 @@
 #
 # Copyright (C) SugarCRM Inc. All rights reserved.
 
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: behat-tests-mango-oidc
 spec:
+  selector:
+    matchLabels:
+      app: behat-tests-mango-oidc
   replicas: 1
   template:
     metadata:
@@ -21,7 +24,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: mango
-          image: library/mango-installed:latest
+          image: library/mango-oidc:latest
           imagePullPolicy: IfNotPresent
           ports:
             - name: apache

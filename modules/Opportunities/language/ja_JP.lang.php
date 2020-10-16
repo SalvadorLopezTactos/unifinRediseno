@@ -13,8 +13,9 @@
 
 $mod_strings = array(
     // Dashboard Names
-    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => '商談リスト ダッシュ ボード',
-    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => '商談レコードダッシュ ボード',
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => '商談リスト ダッシュボード',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => '商談レコードダッシュボード',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => '商談詳細',
 
     'LBL_MODULE_NAME' => '商談',
     'LBL_MODULE_NAME_SINGULAR' => '商談',
@@ -25,11 +26,12 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => '商談名:',
     'LBL_OPPORTUNITY' => '商談名:',
     'LBL_NAME' => '商談名',
+    'LBL_TIME' => '時間',
     'LBL_INVITEE' => '取引先担当者',
     'LBL_CURRENCIES' => '通貨',
     'LBL_LIST_OPPORTUNITY_NAME' => '名前',
     'LBL_LIST_ACCOUNT_NAME' => '取引先',
-    'LBL_LIST_DATE_CLOSED' => '受注予定日',
+    'LBL_LIST_DATE_CLOSED' => 'クローズ予定日',
     'LBL_LIST_AMOUNT' => '達成可能',
     'LBL_LIST_AMOUNT_USDOLLAR' => '合計金額',
     'LBL_ACCOUNT_ID' => '取引先ID',
@@ -70,13 +72,14 @@ $mod_strings = array(
     'UPDATE_MERGE_TXT' => '複数の通貨を１つにまとめます。同じ通貨のレコードが複数ある場合、それらを１つにします。これは他のモジュールの通貨も統合します。',
     'LBL_ACCOUNT_NAME' => '取引先:',
     'LBL_CURRENCY' => '通貨:',
-    'LBL_DATE_CLOSED' => '受注予定日:',
+    'LBL_DATE_CLOSED' => 'クローズ予定日:',
     'LBL_DATE_CLOSED_TIMESTAMP' => '予想クローズ日のタイムスタンプ',
     'LBL_TYPE' => 'タイプ:',
     'LBL_CAMPAIGN' => 'キャンペーン:',
     'LBL_NEXT_STEP' => '次のステップ:',
+    'LBL_SERVICE_START_DATE' => 'Service Start Date',
     'LBL_LEAD_SOURCE' => 'リードソース:',
-    'LBL_SALES_STAGE' => '商談ステージ:',
+    'LBL_SALES_STAGE' => 'セールスステージ:',
     'LBL_SALES_STATUS' => 'ステータス',
     'LBL_PROBABILITY' => '確度 (%):',
     'LBL_DESCRIPTION' => '詳細:',
@@ -100,7 +103,7 @@ $mod_strings = array(
     'LBL_PROJECTS_SUBPANEL_TITLE' => 'プロジェクト',
     'LBL_ASSIGNED_TO_NAME' => 'アサイン先:',
     'LBL_LIST_ASSIGNED_TO_NAME' => 'アサイン先',
-    'LBL_LIST_SALES_STAGE' => '商談ステージ',
+    'LBL_LIST_SALES_STAGE' => 'セールスステージ',
     'LBL_MY_CLOSED_OPPORTUNITIES' => '私のクローズ済み商談',
     'LBL_TOTAL_OPPORTUNITIES' => '商談総額',
     'LBL_CLOSED_WON_OPPORTUNITIES' => '受注済み商談',
@@ -142,9 +145,19 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE_FORECAST' => '売上予測',
     'LBL_WORKSHEET' => 'ワークシート',
 
+    'LBL_RENEWAL' => '更新',
+    'LBL_RENEWAL_OPPORTUNITIES' => '商談の更新',
+    'LBL_RENEWAL_PARENT' => '親商談',
+    'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => '親IDの更新',
+    'LBL_MONTH_YEAR_RENEWAL' => '{{month}}、{{year}}',
+
+    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
+    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
+    'LBL_WIDGET_AMOUNT' => 'Amount',
+
     'TPL_RLI_CREATE' => '商談は商談品目と関係がなければなりません。商談品目を新規作成する。',
     'TPL_RLI_CREATE_LINK_TEXT' => '商談品目を作成する。',
-    'LBL_PRODUCTS_SUBPANEL_TITLE' => '見積済商品',
+    'LBL_PRODUCTS_SUBPANEL_TITLE' => '見積品目',
     'LBL_RLI_SUBPANEL_TITLE' => '商談品目',
 
     'LBL_TOTAL_RLIS' => '商談品目総数',
@@ -152,6 +165,7 @@ $mod_strings = array(
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'クローズされた商談品目を含む商談を削除することはできません',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => '選択されたレコードがクローズされた商談品目を含んでいるため削除できません。',
     'LBL_INCLUDED_RLIS' => '含まれている商品数',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => '見積',
 
@@ -171,9 +185,9 @@ $mod_strings = array(
         '確認をクリックすると、すべての売上予測データを消去して商談ビューが変更されます。'
         .'また、商談品目のターゲットモジュールが含まれるすべてのプロセス定義は無効になります。'
         .'この操作が意図したものでなければ、キャンセルをクリックして以前の設定に戻ってください。',
-    'LBL_OPPS_CONFIG_SALES_STAGE_1a' => '全ての商談品目がクローズされ、少なくとも一つ受注した場合、',
+    'LBL_OPPS_CONFIG_SALES_STAGE_1a' => 'すべての商談品目がクローズされ、少なくとも一つ受注した場合、',
     'LBL_OPPS_CONFIG_SALES_STAGE_1b' => '商談セールスステージは「クローズされた受注」にセットされます。',
-    'LBL_OPPS_CONFIG_SALES_STAGE_2a' => '全ての商談品目がクローズされた失注ステージにある場合、',
+    'LBL_OPPS_CONFIG_SALES_STAGE_2a' => 'すべての商談品目がクローズされた失注ステージにある場合、',
     'LBL_OPPS_CONFIG_SALES_STAGE_2b' => '商談セールスステージは「クローズされた失注」にセットされます。',
     'LBL_OPPS_CONFIG_SALES_STAGE_3a' => '商談品目がまだオープンの場合、',
     'LBL_OPPS_CONFIG_SALES_STAGE_3b' => '商談は進捗が少ないセールスステージにマークされます。',
@@ -186,23 +200,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'この変更を開始した後、既存の{{module_name}} の商談品目のレコードが作成されます。商談品目が完了し使用可能の場合、通知がユーザプロファイルのEメールアドレスに送信されます。インスタンスは通知が送信されるために　管理＞Eメール設定　でEメールを送信するように設定する必要がありますのでご注意ください。',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} モジュールで個々の売り上げを始めから終わりまで追跡することができます。各 {{module_name}} レコードは売り上げ見込みを表し、関連する売上データと {{quotes_module}} や　{{contacts_module}} といった関連する他の重要なレコードを含みます。{{module_name}} は「受注」または「失注」と記されるまで通常複数の売り上げステージを通って進みます。{{plural_module_name}} は Sugar の {{forecasts_singular_module}} モジュールを使うことで売り上げの傾向を理解、予測したり、売り上げノルマを達成するために仕事に集中したりと、さらに活用することができます。',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}}モジュールにより、個別の販売を最初から最後まで追跡することが可能になります。各{{module_name}}レコードは販売見込みを表し、また、関連販売データ、および{{quotes_module}}、{{contacts_module}}などの重要なデータを含むことができます。{{module_name}}は一般的に複数のセールスステージを通じて使用され、最終的に「クローズドウォン」か「クローズドロスト」とマークされます。{{plural_module_name}}では、Sugarの{{forecasts_singular_module}}モジュールにより機能を強化し、販売トレンドの理解や予測、および販売ノルマの達成に集中することができます。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} モジュールで個々の売り上げやその売り上げに属するラインアイテムを始めから終わりまで追跡することができます。各 {{module_name}} レコードは売り上げ見込みを表し、関連する売上データと {{quotes_module}} や {{contacts_module}} といった関連する他の重要なレコードを含みます。 
+    'LBL_HELP_RECORD' => '{{plural_module_name}} により、個別の販売とこれらの販売ラインの品目を最初から最後まで追跡することが可能になります。各{{module_name}} レコードは販売見込みを表し、また関連販売データや、{{quotes_module}}、{{contacts_module}} などの重要なデータを含めることができます。
 
-- 各フィールドまたは編集ボタンをクリックし、このレコードのフィールドを編集します。
- - 左下のペインを「データビュー」に切り替えることにより、サブパネル内の他のレコードへのリンクを表示または変更します。 
-- 左下のペインを「アクティビティーストリーム」に切り替えることにより、ユーザーのコメントを作成して表示し、変更履歴を {{activitystream_singular_module}} に記録します。 
-- レコード名の右側にあるアイコンを使用して、このレコードをフォローまたはお気に入りにします。 
-- 編集ボタンの右側にあるドロップダウンのアクションメニューに追加のアクションがあります。',
+- 各フィールド、または編集ボタンをクリックして、このレコードフィールドを編集する。
+- 左下のウインドウと「データビュー」をトグリングすることにより、表示したり、リンクをサブパネル内に他のレコードに変更する。
+- 左下のウインドウと「アクティビティストリーム」をトグリングすることにより、{{activitystream_singular_module}} 内にユーザコメントの作成や表示、および変更履歴を記録する。
+- レコード名の右側のアイコンにより、この記録をフォローする、またはブックマークする。
+- 編集ボタンの右側にあるドロップダウンアクションメニューで、その他の操作をすることができます。',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} モジュールで個々の売り上げやその売り上げに属するラインアイテムを始めから終わりまで追跡することができます。各 {{module_name}} レコードは売り上げ見込みを表し、関連する売上データと {{quotes_module}} や {{contacts_module}} といった関連する他の重要なレコードを含みます。 {{module_name}} の作成方法； 
-1. 希望のフィールドの値を入力します。 
- - 「必須」と記されたフィールドは保存する前に完了している必要があります。
- - 必要に応じて、「さらに表示」をクリックし、追加のフィールドを表示します。 
-2. 「保存」をクリックして新しいレコードを確定し、前のページに戻ります。',
+    'LBL_HELP_CREATE' => '{{plural_module_name}} により、個別の販売とこれらの販売ラインの品目を最初から最後まで追跡することが可能になります。各{{module_name}} レコードは販売見込みを表し、また関連販売データや、{{quotes_module}}、{{contacts_module}} などの重要なデータを含めることができます。
+
+{{module_name}} の作成：
+1. フィールドにお望みの値をつける。
+- 保存前に、「必須」というマークのあるフィールドを必ず記入する。
+- 必要に応じて、「他を表示する」をクリックして、その他のフィールドを表示する。
+2.「保存」をクリックして、新しいレコードを完成し、前にページに戻る。',
 
 // END ENT/ULT
 
@@ -214,4 +230,6 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'トップ10の商談をバブルチャートで表示する',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => '私の商談',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "チームの商談",
+
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
 );

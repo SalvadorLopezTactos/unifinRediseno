@@ -15,6 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Dashboard opportunitylijst',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Dashboard opportunityrecord',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Opportunity details',
 
     'LBL_MODULE_NAME' => 'Opportunities',
     'LBL_MODULE_NAME_SINGULAR' => 'Opportunity',
@@ -25,6 +26,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => 'Opportunitynaam:',
     'LBL_OPPORTUNITY' => 'Opportunity:',
     'LBL_NAME' => 'Opportunitynaam',
+    'LBL_TIME' => 'Tijd',
     'LBL_INVITEE' => 'Personen',
     'LBL_CURRENCIES' => 'Valutas',
     'LBL_LIST_OPPORTUNITY_NAME' => 'Opportunity',
@@ -75,6 +77,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Type:',
     'LBL_CAMPAIGN' => 'Campagne:',
     'LBL_NEXT_STEP' => 'Volgende stap:',
+    'LBL_SERVICE_START_DATE' => 'Service Start Date',
     'LBL_LEAD_SOURCE' => 'Bron voor lead:',
     'LBL_SALES_STAGE' => 'Verkoopstadium:',
     'LBL_SALES_STATUS' => 'Status',
@@ -142,6 +145,16 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE_FORECAST' => 'Forecast',
     'LBL_WORKSHEET' => 'Werkblad',
 
+    'LBL_RENEWAL' => 'Verlenging',
+    'LBL_RENEWAL_OPPORTUNITIES' => 'Opportunities verlenging',
+    'LBL_RENEWAL_PARENT' => 'Bovenliggende opportunity',
+    'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'Bovenliggende ID verlenging',
+    'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
+
+    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
+    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
+    'LBL_WIDGET_AMOUNT' => 'Amount',
+
     'TPL_RLI_CREATE' => 'Een opportunity moet een bijbehorende opportunityregel hebben.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Maak een Opportunityregel aan.',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Geoffreerde producten',
@@ -152,6 +165,7 @@ $mod_strings = array(
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'U kunt geen Opportunities verwijderen die afgesloten opportunityregels bevatten',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Één of meer van de geselecteerde gegevens bevat gesloten opportunityregels en kan daarom niet worden verwijderd.',
     'LBL_INCLUDED_RLIS' => '# inbegrepen onderdelen van de Omzetregel',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Offertes',
 
@@ -186,10 +200,10 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Nadat u deze wijziging heeft doorgevoerd zullen de records van het onderdeel Omzetregel op de achtergrond worden aangemaakt voor elke huidige {{module_name}}. Zodra de onderdelen van de Omzetregel voltooid en beschikbaar zijn zal een bericht naar het e-mailadres van uw gebruikersprofiel worden gestuurd. Houd er rekening mee dat uw exemplaar zo moet zijn geconfigureerd dat er een e-mail wordt gestuurd. Dit kunt u doen via Beheer > E-mailinstellingen om het bericht te verzenden.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Met de module {{plural_module_name}} kunt u een individuele verkoop van begin tot eind volgen. Elk {{module_name}}-record vertegenwoordigt een verwachte verkoop en bevat zowel relevante verkoopgegevens als andere belangrijke records zoals {{quotes_module}}, {{contacts_module}}, etc. Een {{module_name}} doorloopt doorgaans meerdere verkoopfasen tot deze als "Gesloten, gewonnen" of "Gesloten, verloren" wordt gemarkeerd. {{plural_module_name}} kan verder worden uitgebreid door middel van de {{forecasts_singular_module}} module van Sugar om verkooptrends te voorspellen en om werk specifiek te richten op het behalen van verkoopquota&#39;s.',
+    'LBL_HELP_RECORDS' => 'Met de module {{plural_module_name}} kunt u individuele verkoop van begin tot eind volgen. Elke {{module_name}} record vertegenwoordigt een mogelijke verkoop en omvat relevante verkoopgegevens, evenals gegevens die betrekking hebben op andere belangrijke records zoals {{quotes_module}}, {{contacts_module}}, etc. Een {{module_name}} doorloopt doorgaans verscheidene verkoopfases tot deze als "Gesloten, gewonnen" of "Gesloten, verloren" wordt gemarkeerd. {{plural_module_name}} kan nog verder worden uitgebreid door de {{forecasts_singular_module}}ing module van Sugar te gebruiken om verkooptrends te begrijpen en voorspellen en om werk zo in te richten dat bepaalde verkoopquota&#39;s worden behaald.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Met de module {{plural_module_name}} kunt u de individuele verkoop van begin tot eind volgen. Elk {{module_name}} record vertegenwoordigt een verwachte verkoop en bevat relevante verkoopgegevens, evenals gegevens met betrekking tot andere belangrijke records zoals {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'Met de module {{plural_module_name}} kunt u de individuele verkoop en regelitems die betrekking hebben op die verkoop van begin tot eind volgen. Elk {{module_name}} record vertegenwoordigt een mogelijke verkoop en bevat relevante verkoopgegevens, evenals gegevens met betrekking tot andere belangrijke records zoals {{quotes_module}}, {{contacts_module}}, etc.
 
 - Bewerk de velden van deze record door op een individueel veld te klikken of de knop Bewerken.
 - Bekijk of wijzig links naar andere records in de subpanelen door het paneel links onderin op "Gegevensweergave" te zetten.
@@ -198,7 +212,7 @@ $mod_strings = array(
 - Er zijn ook andere acties mogelijk vanuit het vervolgkeuzemenu Acties rechts van de knop Bewerken.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Met de module {{plural_module_name}} kunt u de individuele verkoop en de regelitems die daarbij horen van begin tot eind volgen. Elke record van {{module_name}} vertegenwoordigt een verwachte verkoop en omvat relevante verkoopgegevens en gegevens met betrekking tot andere belangrijke records, zoals {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'Met de module {{plural_module_name}} kunt u de individuele verkoop en de regelitems die daarbij horen van begin tot eind volgen. Elke record van {{module_name}} vertegenwoordigt een mogelijke verkoop en omvat relevante verkoopgegevens en gegevens met betrekking tot andere belangrijke records, zoals {{quotes_module}}, {{contacts_module}}, etc.
 
 Eem {{module_name}} aanmaken:
 1. Voer de gewenste waarden in voor de velden.
@@ -216,4 +230,6 @@ Eem {{module_name}} aanmaken:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Toont de top 10 Revenue Line Items in een &#39;bubble&#39; diagram.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Mijn Opportunities',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Mijn Team Opportunities",
+
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
 );

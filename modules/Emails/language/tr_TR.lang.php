@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'E-Postalar: Kontaklar',
     'LBL_EMAILS_LEADS_REL' => 'E-Postalar: Potansiyeller',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'E-Postalar: Fırsatlar',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'E-Postalar: Notlar',
     'LBL_EMAILS_PROJECT_REL' => 'E-Postalar: Proje Görevleri',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'E-Postalar: Proje Görevleri',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'Kimden:',
     'LBL_REPLY_TO' => 'Yanıt Verilecek Kişi:',
     'LBL_HTML_BODY' => 'HTML İçeriği',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'Alıcılar',
     'LBL_LEADS_SUBPANEL_TITLE' => 'Potansiyeller',
     'LBL_MESSAGE_SENT' => 'Mesaj Gönderildi',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'Yanıt Verilecek Kimlik',
     'LBL_TYPE' => 'Tipi:',
     'LBL_EMAIL_STATE' => 'Durum',
+    'LBL_EMAIL_DIRECTION' => 'Yön',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'Lütfen kontrol edin!',

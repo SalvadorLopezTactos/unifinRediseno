@@ -35,6 +35,9 @@
         this.context.on('lead:convert:save', this.handleSave, this);
 
         this.before('render', this.checkRequiredAccess);
+
+        // Indicates that this view is being opened from Tile View
+        this.fromPipeline = this.context.parent && this.context.parent.get('layout') === 'pipeline-records';
     },
 
     /**
@@ -358,8 +361,12 @@
         });
         if (!this.disposed && doClose) {
             this.context.trigger('lead:convert:exit');
-            app.drawer.close();
-            app.router.record('Leads', leadsModel.id);
+            if (this.fromPipeline) {
+                app.drawer.close(level === 'success');
+            } else {
+                app.drawer.close();
+                app.router.record('Leads', leadsModel.id);
+            }
         }
     },
 

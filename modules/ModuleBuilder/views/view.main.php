@@ -14,7 +14,6 @@ class ViewMain extends SugarView
 { 	
     public function __construct()
     {
-		$this->options['show_footer'] = false;
         parent::__construct();
  	}
  	

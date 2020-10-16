@@ -32,24 +32,41 @@
 <pre class="pre-scrollable">
 {
   "filter": [{
-    "$from": [
-      {
+    "$from": [{
+      "parent_type": "Users",
+      "parent_id": "$current_user_id"
+    }, {
+      "parent_type": "Contacts",
+      "parent_id": "fa300a0e-0ad1-b322-9601-512d0983c19a"
+    }, {
+      "email_address_id": "b0701501-1fab-8ae7-3942-540da93f5017"
+    }, {
+      "parent_type": "Leads",
+      "parent_id": "73b1087e-4bb6-11e7-acaa-3c15c2d582c6",
+      "email_address_id": "b651d834-4bb6-11e7-bfcf-3c15c2d582c6"
+    }]
+  }]
+}
+</pre>
+    Equivalent to:
+<pre class="pre-scrollable">
+{
+  "filter": [{
+    "from_collection": {
+      "$in": [{
         "parent_type": "Users",
         "parent_id": "$current_user_id"
-      },
-      {
+      }, {
         "parent_type": "Contacts",
         "parent_id": "fa300a0e-0ad1-b322-9601-512d0983c19a"
-      },
-      {
+      }, {
         "email_address_id": "b0701501-1fab-8ae7-3942-540da93f5017"
-      },
-      {
+      }, {
         "parent_type": "Leads",
         "parent_id": "73b1087e-4bb6-11e7-acaa-3c15c2d582c6",
         "email_address_id": "b651d834-4bb6-11e7-bfcf-3c15c2d582c6"
-      }
-    ]
+      }]
+    }
   }]
 }
 </pre>
@@ -62,24 +79,18 @@
 {
   "filter": [{
     "$or": [{
-      "$to": [
-        {
-          "parent_type": "Users",
-          "parent_id": "$current_user_id"
-        }
-      ],
-      "$cc": [
-        {
-          "parent_type": "Users",
-          "parent_id": "$current_user_id"
-        }
-      ],
-      "$bcc": [
-        {
-          "parent_type": "Users",
-          "parent_id": "$current_user_id"
-        }
-      ]
+      "$to": [{
+        "parent_type": "Users",
+        "parent_id": "$current_user_id"
+      }],
+      "$cc": [{
+        "parent_type": "Users",
+        "parent_id": "$current_user_id"
+      }],
+      "$bcc": [{
+        "parent_type": "Users",
+        "parent_id": "$current_user_id"
+      }]
     }]
   }, {
     "state": {
@@ -90,6 +101,114 @@
   }]
 }
 </pre>
+    Equivalent to:
+<pre class="pre-scrollable">
+{
+  "filter": [{
+    "$or": [{
+      "to_collection": {
+        "$in": [{
+          "parent_type": "Users",
+          "parent_id": "$current_user_id"
+        }]
+      },
+      "cc_collection": {
+        "$in": [{
+          "parent_type": "Users",
+          "parent_id": "$current_user_id"
+        }]
+      },
+      "bcc_collection": {
+        "$in": [{
+          "parent_type": "Users",
+          "parent_id": "$current_user_id"
+        }]
+      }
+    }]
+  }, {
+    "state": {
+      "$in": [
+        "Archived"
+      ]
+    }
+  }]
+}
+</pre>
+</div>
+
+<h4>Filter By Sender and Recipients</h4>
+<div class="well well-small">
+    This would return all archived emails sent by a contact to the current user.
+<pre class="pre-scrollable">
+{
+  "filter": [{
+    "$from": [{
+      "parent_type": "Contacts",
+      "parent_id": "fa300a0e-0ad1-b322-9601-512d0983c19a"
+    }]
+  }, {
+    "$or": [{
+      "$to": [{
+        "parent_type": "Users",
+        "parent_id": "$current_user_id"
+      }],
+      "$cc": [{
+        "parent_type": "Users",
+        "parent_id": "$current_user_id"
+      }],
+      "$bcc": [{
+        "parent_type": "Users",
+        "parent_id": "$current_user_id"
+      }]
+    }]
+  }, {
+    "state": {
+      "$in": [
+        "Archived"
+      ]
+    }
+  }]
+}
+</pre>
+    Equivalent to:
+<pre class="pre-scrollable">
+{
+  "filter": [{
+    "from_collection": {
+      "$in": [{
+        "parent_type": "Contacts",
+        "parent_id": "fa300a0e-0ad1-b322-9601-512d0983c19a"
+      }]
+    }
+  }, {
+    "$or": [{
+      "to_collection": {
+        "$in": [{
+          "parent_type": "Users",
+          "parent_id": "$current_user_id"
+        }]
+      },
+      "cc_collection": {
+        "$in": [{
+          "parent_type": "Users",
+          "parent_id": "$current_user_id"
+        }]
+      },
+      "bcc_collection": {
+        "$in": [{
+          "parent_type": "Users",
+          "parent_id": "$current_user_id"
+        }]
+      }
+    }]
+  }, {
+    "state": {
+      "$in": [
+        "Archived"
+      ]
+    }
+  }]
+}
 </div>
 
 <h2>Change Log</h2>

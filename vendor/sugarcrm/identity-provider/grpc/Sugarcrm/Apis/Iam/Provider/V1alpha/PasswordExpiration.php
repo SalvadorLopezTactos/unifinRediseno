@@ -30,23 +30,9 @@ class PasswordExpiration extends \Google\Protobuf\Internal\Message
      */
     private $attempt = 0;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type \Google\Protobuf\Duration $time
-     *           Password expiration time expressed in seconds from the time a new
-     *           password has been generated for the given user. Use a value of 0 to
-     *           never expire any passwords.
-     *     @type int $attempt
-     *           Password expiration attempts.
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Provider\V1Alpha\Provider::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

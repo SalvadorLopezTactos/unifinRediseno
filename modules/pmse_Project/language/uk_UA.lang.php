@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'Статус',
   'LBL_PRJ_MODULE' => 'Основний модуль',
+  'LBL_PRJ_RUN_ORDER' => 'Порядок виконання',
   'LBL_PMSE_BUTTON_SAVE' => 'Зберегти',
   'LBL_PMSE_BUTTON_CANCEL' => 'Скасувати',
   'LBL_PMSE_BUTTON_YES' => 'Так',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Визначення процесу було імпортовано, але воно містить одну чи кілька дій Бізнес-правил, для яких не було вибрано бізнес-правил.',
     'LBL_BPM_IMPORT_SELECT' => 'Це визначення процесу містить наведені нижче бізнес-правила та шаблони повідомлень електронної пошти. '
         . 'Виберіть ті, які потрібно імпортувати.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'Бізнес-правила',
     'LBL_EMAIL_TEMPLATES' => 'Шаблони повідомлень електронної пошти',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'Відповідальний керівник',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Створенено користувачем',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Востаннє змінено користувачем',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Електронна пошта системи',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Бізнес-правило',
     'LBL_PMSE_LABEL_RULE' => 'Правило',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Призначити відповідального користувача',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Update "Assigned To" on record',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Додати пов&#39;язаний запис',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Пов&#39;язаний модуль',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Назва активності - порожньо.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Назва "%s" вже існує.',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'дні/днів',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'години/годин',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'Хвилини/Хвилин',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'робочий час',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'Бізнес-центр',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'Із основного модуля',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'З ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' Модуль',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'Ряд, число та булеве значення',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'Номер',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'Значення',

@@ -310,19 +310,24 @@ class ProjectTask extends SugarBean {
             $resource_id = $this->resource_id;
         }
         $db = DBManagerFactory::getInstance();
-        $resource_table = $db->getConnection()
+        $resourceType = $db->getConnection()
             ->executeQuery(
                 'SELECT DISTINCT resource_type FROM project_resources WHERE resource_id = ?',
                 [$resource_id]
             )->fetchColumn();
-        if (false !== $resource_table) {
-            if (empty($resource_table)) {
+        if (false !== $resourceType) {
+            if (empty($resourceType)) {
                 return '&nbsp;';
             }
-            $resource = $db->concat(strtolower($resource_table), array('first_name', 'last_name'));
+            $resourceBean = BeanFactory::newBean($resourceType);
+            if (!$resourceBean instanceof SugarBean) {
+                return '&nbsp;';
+            }
+            $resourceTableName = $resourceBean->getTableName();
+            $resource = $db->concat($resourceTableName, array('first_name', 'last_name'));
             return $db->getConnection()
                 ->executeQuery(
-                    "SELECT {$resource} as resource_name FROM {$resource_table} WHERE id = ?",
+                    "SELECT {$resource} as resource_name FROM {$resourceTableName} WHERE id = ?",
                     [$resource_id]
                 )->fetchColumn();
         } else {
@@ -354,7 +359,7 @@ class ProjectTask extends SugarBean {
                 $tasks = array();
                 foreach($subProjectTasks as &$task)
                 {
-                    array_push($tasks, $task->toArray(true));
+                    array_push($tasks, $task->toArray());
                 }
                 $parentProjectTask->percent_complete = $this->_calculateCompletePercent($tasks);
                 unset($tasks);

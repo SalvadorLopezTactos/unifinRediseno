@@ -9,16 +9,15 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
 
+/*********************************************************************************
  * Description: TODO:  To be written.
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-
-
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 require_once('modules/CampaignTrackers/Forms.php');
 global $app_strings;
@@ -28,77 +27,114 @@ global $sugar_version, $sugar_config;
 
 $focus = BeanFactory::newBean('CampaignTrackers');
 
-if(isset($_REQUEST['record'])) {
+if (isset($_REQUEST['record'])) {
     $focus->retrieve($_REQUEST['record']);
 }
 $old_id = '';
 
-if(isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] == 'true') {
-	$focus->id = "";
+if (isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] === 'true') {
+    $focus->id = '';
 }
 
+$GLOBALS['log']->info('Campaign Tracker Edit View');
 
-
-
-$GLOBALS['log']->info("Campaign Tracker Edit View");
-
-$xtpl=new XTemplate ('modules/CampaignTrackers/EditView.html');
-$xtpl->assign("MOD", $mod_strings);
-$xtpl->assign("APP", $app_strings);
+$xtpl = new XTemplate('modules/CampaignTrackers/EditView.html');
+$xtpl->assign('MOD', $mod_strings);
+$xtpl->assign('APP', $app_strings);
 
 $campaignName = '';
 $campaignId = '';
 if (!empty($_REQUEST['campaign_name'])) {
-	$xtpl->assign("CAMPAIGN_NAME", $_REQUEST['campaign_name']);
-	$campaignName = $_REQUEST['campaign_name'];
+    $xtpl->assign('CAMPAIGN_NAME', $_REQUEST['campaign_name']);
+    $campaignName = $_REQUEST['campaign_name'];
 } else {
-	$xtpl->assign("CAMPAIGN_NAME", $focus->campaign_name);
-	$campaignName = $focus->campaign_name;
+    $xtpl->assign('CAMPAIGN_NAME', $focus->campaign_name);
+    $campaignName = $focus->campaign_name;
 }
 if (!empty($_REQUEST['campaign_id'])) {
-	$xtpl->assign("CAMPAIGN_ID", $_REQUEST['campaign_id']);
-	$campaignId = $_REQUEST['campaign_id'];
+    $xtpl->assign('CAMPAIGN_ID', $_REQUEST['campaign_id']);
+    $campaignId = $_REQUEST['campaign_id'];
 } else {
-	$xtpl->assign("CAMPAIGN_ID", $focus->campaign_id);
-	$campaignId = $focus->campaign_id;
+    $xtpl->assign('CAMPAIGN_ID', $focus->campaign_id);
+    $campaignId = $focus->campaign_id;
 }
-$params = array();
-$params[] = "<a href='index.php?module=Campaigns&action=DetailView&record={$campaignId}'>{$campaignName}</a>";
-$params[] = $mod_strings['LBL_MODULE_NAME'];
-echo getClassicModuleTitle($focus->module_dir, $params, true);
+$params = [];
+$href = 'index.php?' . http_build_query([
+        'module' => 'Campaigns',
+        'action' => 'DetailView',
+        'record' => $campaignId,
+    ]);
+$params[] = sprintf(
+    '<a href="%s">%s</a>',
+    htmlspecialchars($href),
+    htmlspecialchars($campaignName)
+);
+$params[] = htmlspecialchars($mod_strings['LBL_MODULE_NAME']);
+$xtpl->assign('PAGE_TITLE', getClassicModuleTitle($focus->module_dir, $params, true));
 
-if (isset($_REQUEST['return_module'])) $xtpl->assign("RETURN_MODULE", $_REQUEST['return_module']);
-if (isset($_REQUEST['return_action'])) $xtpl->assign("RETURN_ACTION", $_REQUEST['return_action']);
-if (isset($_REQUEST['return_id'])) $xtpl->assign("RETURN_ID", $_REQUEST['return_id']);
+$request = InputValidation::getService();
+$returnModule = $request->getValidInputRequest('return_module', 'Assert\Mvc\ModuleName');
+$returnId = $request->getValidInputRequest('return_id', 'Assert\Guid');
+$returnAction = $request->getValidInputRequest('return_action');
 
-$xtpl->assign("JAVASCRIPT", get_set_focus_js().get_validate_record_js());
-$xtpl->assign("ID", $focus->id);
+if ($returnModule !== null) {
+    $xtpl->assign('RETURN_MODULE', $returnModule);
+}
+if ($returnAction !== null) {
+    $xtpl->assign('RETURN_ACTION', $returnAction);
+}
+if ($returnId !== null) {
+    $xtpl->assign('RETURN_ID', $returnId);
+}
+
+$xtpl->assign('JAVASCRIPT', get_set_focus_js() . get_validate_record_js());
+$xtpl->assign('ID', $focus->id);
 
 
-
-$xtpl->assign("TRACKER_NAME", $focus->tracker_name);
-$xtpl->assign("TRACKER_URL", $focus->tracker_url);
+$xtpl->assign('TRACKER_NAME', $focus->tracker_name);
+$xtpl->assign('TRACKER_URL', $focus->tracker_url);
 
 global $current_user;
-if(is_admin($current_user) && $_REQUEST['module'] != 'DynamicLayout' && !empty($_SESSION['editinplace'])){	
-	$record = '';
-	if(!empty($_REQUEST['record'])){
-		$record = 	$_REQUEST['record'];
-	}
-	$xtpl->assign("ADMIN_EDIT","<a href='index.php?action=index&module=DynamicLayout&from_action=".$_REQUEST['action'] ."&from_module=".$_REQUEST['module'] ."&record=".$record. "'>".SugarThemeRegistry::current()->getImage("EditLayout","border='0' align='bottom'",null,null,'.gif',$mod_strings['LBL_EDIT_LAYOUT'])."</a>");
+$module = $request->getValidInputRequest('module', 'Assert\Mvc\ModuleName');
+if ($module !== 'DynamicLayout' && !empty($_SESSION['editinplace']) && is_admin($current_user)) {
+    $record = $request->getValidInputRequest('record', null, '');
+    $action = $request->getValidInputRequest('action');
+
+    $href = 'index.php?' . http_build_query([
+            'action' => 'index',
+            'module' => 'DynamicLayout',
+            'from_action' => $action,
+            'from_module' => $module,
+            'record' => $record,
+        ]);
+    $xtpl->assign(
+        'ADMIN_EDIT',
+        sprintf(
+            '<a href="%s">%s</a>',
+            htmlspecialchars($href),
+            SugarThemeRegistry::current()->getImage(
+                'EditLayout',
+                'border="0" align="bottom"',
+                null,
+                null,
+                '.gif',
+                $mod_strings['LBL_EDIT_LAYOUT']
+            )
+        )
+    );
 }
+
 if (!empty($focus->is_optout) && $focus->is_optout == 1) {
-	$xtpl->assign("IS_OPTOUT_CHECKED","checked");
-	$xtpl->assign("TRACKER_URL_DISABLED","disabled");
+    $xtpl->assign('IS_OPTOUT_CHECKED', 'checked');
+    $xtpl->assign('TRACKER_URL_DISABLED', 'disabled');
 }
 
-$xtpl->parse("main");
+$xtpl->parse('main');
 
-$xtpl->out("main");
+$xtpl->out('main');
 
 $javascript = new javascript();
 $javascript->setFormName('EditView');
 $javascript->setSugarBean($focus);
 $javascript->addAllFields('');
 echo $javascript->getScript();
-?>

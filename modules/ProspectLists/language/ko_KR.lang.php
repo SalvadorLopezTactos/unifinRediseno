@@ -65,6 +65,12 @@ $mod_strings = array (
   'LBL_DOMAIN'=>'도메인으로 이메일이 없습니다.',
   'LBL_LIST_PROSPECTLIST_NAME'=>'이름',
 	'LBL_MORE_DETAIL' => '세부정보 더보기' /*for 508 compliance fix*/,
+    'LBL_ACCOUNTS' => '계정',
+    'LBL_CAMPAIGNS' => '캠페인',
+    'LBL_CONTACTS' => '연락처',
+    'LBL_LEADS' => '관심고객',
+    'LBL_PROSPECTS' => '목표 고객',
+    'LBL_USERS' => '사용자',
 
     // Help Text
     // List View Help Text

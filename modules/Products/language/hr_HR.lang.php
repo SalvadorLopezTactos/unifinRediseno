@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'Kontakt',
     'LBL_DISCOUNT_TOTAL' => 'Ukupni popust',
     'LBL_DISCOUNT_AMOUNT' => 'Iznos popusta',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'Iznos popusta',
     'LBL_EXT_PRICE' => 'Proširena cijena',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Naziv simbola valute',

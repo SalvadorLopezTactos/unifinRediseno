@@ -24,7 +24,10 @@ $viewdefs['DocumentRevisions']['DetailView'] = array(
         '' => 
         array (
             array (
-                'document_name',
+                array (
+                    'name' => 'document_name',
+                    'customCode' => '<a href="index.php?module=DocumentRevisions&action=DetailView&record={$fields.document_id.value|escape:"url"}">{$fields.document_name.value|escape}</a>',
+                ),
                 'latest_revision',
             ),
             

@@ -21,7 +21,7 @@
      * @inheritdoc
      */
     bindDataChange: function() {
-        if(this.model) {
+        if (this.model) {
             this.model.on("change:metadata", this.setMetadata, this);
             this.model.on("change:layout", this.setWidth, this);
             this.model.on("applyDragAndDrop", this.applyDragAndDrop, this);
@@ -31,31 +31,75 @@
             }, this);
             this.model.trigger('setMode', this.context.get("create") ? 'edit' : 'view');
         }
+        if (this.context) {
+            this.context.on('tabbed-dashboard:switch-tab', function(index) {
+                this.setMetadata({tabIndex: index});
+            }, this);
+        }
     },
 
     /**
-     * Replace all components based on the dashboard metadata value
+     * Remove all components from the dashboard.
+     * @private
      */
-    setMetadata: function() {
-        if(!this.model.get("metadata")) return;
-        //Clean all components
+    _cleanComponents: function() {
+        // Clean all components
         _.each(this._components, function(component) {
             component.dispose();
         }, this);
         this._components = [];
         this.$el.children().remove();
+    },
 
-        var components = app.utils.deepCopy(this.model.get("metadata")).components;
+    /**
+     * Replace all components based on the dashboard metadata value
+     * @param {Object} [options] Options.
+     * @param {number} [options.tabIndex=0] Index of the currently active tab.
+     */
+    setMetadata: function(options) {
+        if (!this.model.has('metadata')) {
+            return;
+        }
+
+        this._cleanComponents();
+
+        var metadata = app.utils.deepCopy(this.model.get('metadata'));
+        var tabIndex = 0;
+        if (options && !_.isUndefined(options.tabIndex)) {
+            tabIndex = options.tabIndex;
+        } else {
+            var tabComp = this.layout.getComponent('tabbed-dashboard');
+            if (tabComp) {
+                tabIndex = tabComp.activeTab;
+            }
+        }
+
+        var components = metadata.components;
+
+        // if this is a tabbed dashboard, inject the metadata from the currently active tab and mark the active tab
+        if (metadata.tabs) {
+            components = metadata.tabs[tabIndex].components;
+            var tabs = app.utils.deepCopy(metadata.tabs);
+            var tabOptions = {activeTab: tabIndex, tabs: tabs};
+            this.context.trigger('tabbed-dashboard:update', tabOptions);
+        }
+
         _.each(components, function(component, index) {
-            this.initComponents([{
-                layout: {
+            if (component.rows) {
+                var row = {
                     type: 'dashlet-row',
                     width: component.width,
                     components: component.rows,
-                    index: index + ''
-                }
-            }]);
-        } , this);
+                    index: index + '',
+                };
+                this.initComponents([{
+                    layout: row,
+                }]);
+            } else {
+                // if 'rows' not defined, we assume its a non-dashlet component and display it as is
+                this.initComponents([component]);
+            }
+        }, this);
 
         this.loadData();
         this.render();
@@ -68,7 +112,7 @@
         var metadata = this.model.get("metadata"),
             $el = this.$el.children();
 
-        _.each(metadata.components, function(component, index){
+        _.each(metadata.components, function(component, index) {
             $el.get(index).className = $el.get(index).className.replace(/span\d+\s*/, '');
             $($el.get(index)).addClass("span" + component.width);
         }, this);
@@ -86,6 +130,13 @@
         this._super('_render');
         if (this.model.has('css_class')) {
             this.$el.addClass(this.model.get('css_class'));
+        } else {
+            /** For predefined dashlets/dashboard, in case
+            storing css class on model is not possible. */
+            var metadata = this.model.get('metadata');
+            if (metadata && metadata.css_class) {
+                this.$el.addClass(metadata.css_class);
+            }
         }
     },
 
@@ -140,6 +191,24 @@
     },
 
     /**
+     * Gets component from metadata.
+     *
+     * @param {Object} metadata for all dashboard components
+     * @return {Object} dashboard component
+     */
+    getComponentsFromMetadata: function(metadata) {
+        var component;
+        // this is a tabbed dashboard
+        if (metadata.tabs) {
+            var tabIndex = this.context.get('activeTab') || 0;
+            component = metadata.tabs[tabIndex].components;
+        } else {
+            component = metadata.components;
+        }
+        return component;
+    },
+
+    /**
      * Retrives the seperate component metadata from the whole dashboard components
      *
      * @param {Object} metadata for all dashboard componenets
@@ -147,8 +216,9 @@
      * @return {Object} component metadata and its dashlet frame layout
      */
     getCurrentComponent: function(metadata, tracekey) {
-        var position = tracekey.split(''),
-            component = metadata.components;
+        var position = tracekey.split('');
+        var component = this.getComponentsFromMetadata(metadata);
+
         _.each(position, function(index) {
             component = component.rows ? component.rows[index] : component[index];
         }, this);

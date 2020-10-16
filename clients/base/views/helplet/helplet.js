@@ -67,12 +67,14 @@
 
     /**
      * Method to fetch the help object from the app.help utility.
+     *
+     * @param {Object|null} langContext Additional language to pass in the helpObject strings
      */
-    createHelpObject: function() {
-        var helpUrl = {
+    createHelpObject: function(langContext) {
+        var helpUrl = _.extend({
             more_info_url: this._createMoreHelpLink(),
             more_info_url_close: '</a>'
-        };
+        }, langContext);
         var ctx = this.context.parent || this.context;
         this.helpObject = app.help.get(ctx.get('module'), ctx.get('layout'), helpUrl);
     },
@@ -112,6 +114,16 @@
     },
 
     /**
+     * Override this to sanitize and fix route elements if necessary
+     *
+     * @param {Object} params
+     * @return {Object}
+     */
+    sanitizeUrlParams: function(params) {
+        return params;
+    },
+
+    /**
      * Collects server version, language, module, and route and returns an HTML
      * link to be used in the template.
      *
@@ -124,24 +136,29 @@
         var module = app.controller.context.get('module');
         var route = app.controller.context.get('layout');
 
-        if (route === 'records') {
-            route = 'list';
+        var params = {
+            edition: serverInfo.flavor,
+            version: serverInfo.version,
+            lang: lang,
+            module: module,
+            route: route
+        };
+
+        if (params.route === 'records') {
+            params.route = 'list';
         }
 
-        var url = 'http://www.sugarcrm.com/crm/product_doc.php?' +
-            'edition=' + serverInfo.flavor +
-            '&version=' + serverInfo.version +
-            '&lang=' + lang +
-            '&module=' + module +
-            '&route=' + route;
-
-        if (route === 'bwc') {
+        if (params.route === 'bwc') {
             // Parse `action` URL param.
             var action = window.location.hash.match(/#bwc.*action=(\w*)/i);
             if (action && !_.isUndefined(action[1])) {
-                url += '&action=' + action[1];
+                params.action = action[1];
             }
         }
+
+        params = this.sanitizeUrlParams(params);
+
+        var url = 'http://www.sugarcrm.com/crm/product_doc.php?' + $.param(params);
 
         return '<a href="' + url + '" target="_blank">';
     }

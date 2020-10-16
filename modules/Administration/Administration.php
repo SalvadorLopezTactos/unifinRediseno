@@ -12,6 +12,8 @@
 
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\DBAL\Query\Expression\CompositeExpression;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 
 class Administration extends SugarBean {
     var $settings;
@@ -54,6 +56,202 @@ class Administration extends SugarBean {
     public $disable_row_level_security = true;
     public static $passwordPlaceholder = "::PASSWORD::";
 
+    /**
+    * List of default values needed for Pendo analytics
+    *
+    * @var array
+    */
+    protected $analyticsDefaults = [
+        'si_id' => 'unknown_si_id',
+        'si_name' => 'unknown_si_name',
+        'si_type' => 'unknown_si_type',
+        'si_license_current' => false,
+        'si_license_serve' => false,
+        'si_license_sell' => false,
+        'si_tier' => 'unknown_si_tier',
+        'si_customer_since' => 'unknown_si_customer_since',
+        'si_sic_code' => 'unknown_si_sic_code',
+        'si_employees_no' => 'unknown_si_employees_no',
+        'si_managing_team' => 'unknown_si_managing_team',
+        'si_partner_name' => 'unknown_si_partner_name',
+        'si_partner_type' => 'unknown_si_partner_type',
+        'si_account_record' => 'unknown_si_account_record',
+        'si_customer_region' => 'unknown_si_customer_region',
+        'si_billing_country' => 'unknown_si_billing_country',
+        'si_billing_state' => 'unknown_si_billing_state',
+        'si_billing_city' => 'unknown_si_billing_city',
+        'si_postal_code' => 'unknown_si_postal_code',
+        'si_cloud_instance' => 'unknown_si_cloud_instance',
+        'si_usage_designation' => 'unknown_si_usage_designation',
+        'si_no_of_licenses' => 'unknown_si_no_of_licenses',
+        'si_cloud_region' => 'unknown_si_cloud_region',
+        'si_upgrade_frequency' => 'unknown_si_upgrade_frequency',
+        'si_db_size' => 'unknown_si_db_size',
+        'si_file_system_size' => 'unknown_si_file_system_size',
+        'si_sum_size' => 'unknown_si_sum_size',
+        'si_rli_enabled' => 'unknown_rli_enabled',
+        'si_forecasts_is_setup' => 'unknown_forcasts_is_setup',
+        'si_product_list' => 'unknown_product_list',
+        'portal_active' => 'unknown_portal_activated',
+    ];
+
+    /**
+     * Additional properties to add to the analytic account data
+     *
+     * @var array
+     */
+    protected $addedAnalyticAccountData = [
+        'activity_streams_enabled' => 'activity_streams_enabled',
+        'editable_preview_enabled' => 'preview_edit',
+        'list_view_items_per_page' => 'list_max_entries_per_page',
+        'subpanel_items_per_page' => 'list_max_entries_per_subpanel',
+        'lead_conversion_options' => 'lead_conv_activity_opt',
+        'system_default_currency_code' => 'default_currency_iso4217',
+        'system_default_language' => 'default_language',
+    ];
+
+    /**
+     * List of mapped data needed from SI for Pendo analytics
+     *
+     * @var array
+     */
+    protected $analyticsFieldMap = [
+        'account_id' => [
+            'name' => 'si_id',
+            'default' => 'unknown_si_id',
+            'label' => 'Account ID',
+        ],
+        'account_name' => [
+            'name' => 'si_name',
+            'default' => 'unknown_account_name',
+            'label' => 'Account Name',
+        ],
+        'account_type' => [
+            'name' => 'si_type',
+            'default' => 'unknown_si_type',
+            'label' => 'Account Type',
+        ],
+        'license_current' => [
+            'name' => 'si_license_current',
+            'default' => false,
+            'label' => 'License Current',
+        ],
+        'license_serve' => [
+            'name' => 'si_license_serve',
+            'default' => false,
+            'label' => 'License Serve',
+        ],
+        'license_sell' => [
+            'name' => 'si_license_sell',
+            'default' => false,
+            'label' => 'License Sell',
+        ],
+        'account_tier' => [
+            'name' => 'si_tier',
+            'default' => 'unknown_si_tier',
+            'label' => 'Account Tier',
+        ],
+        'customer_since' => [
+            'name' => 'si_customer_since',
+            'default' => 'unknown_si_customer_since',
+            'label' => 'Customer Since',
+        ],
+        'sic_code' => [
+            'name' => 'si_sic_code',
+            'default' => 'unknown_si_sic_code',
+            'label' => 'SIC Code',
+        ],
+        'employees_no' => [
+            'name' => 'si_employees_no',
+            'default' => 'unknown_si_employees_no',
+            'label' => 'Number of Employees',
+        ],
+        'account_managing_team' => [
+            'name' => 'si_managing_team',
+            'default' => 'unknown_si_managing_team',
+            'label' => 'Managing Team',
+        ],
+        'account_partner_name' => [
+            'name' => 'si_partner_name',
+            'default' => 'unknown_si_partner_name',
+            'label' => 'Partner Name',
+        ],
+        'partner_type_c' => [
+            'name' => 'si_partner_type',
+            'default' => 'unknown_si_partner_type',
+            'label' => 'Partner Type',
+        ],
+        'account_record' => [
+            'name' => 'si_account_record',
+            'default' => 'unknown_si_account_record',
+            'label' => 'Account Record Link',
+        ],
+        'customer_region' => [
+            'name' => 'si_customer_region',
+            'default' => 'unknown_si_customer_region',
+            'label' => 'Customer Region',
+        ],
+        'billing_country' => [
+            'name' => 'si_billing_country',
+            'default' => 'unknown_si_billing_country',
+            'label' => 'Billing Country',
+        ],
+        'billing_state' => [
+            'name' => 'si_billing_state',
+            'default' => 'unknown_si_billing_state',
+            'label' => 'Billing State',
+        ],
+        'billing_city' => [
+            'name' => 'si_billing_city',
+            'default' => 'unknown_si_billing_state',
+            'label' => 'Billing City',
+        ],
+        'postal_code' => [
+            'name' => 'si_postal_code',
+            'default' => 'unknown_si_postal_code',
+            'label' => 'Postal Code',
+        ],
+        'cloud_instance' => [
+            'name' => 'si_cloud_instance',
+            'default' => 'unknown_si_cloud_instance',
+            'label' => 'Cloud Instance',
+        ],
+        'usage_designation' => [
+            'name' => 'si_usage_designation',
+            'default' => 'unknown_si_usage_designation',
+            'label' => 'Usage Designation',
+        ],
+        'no_of_licenses' => [
+            'name' => 'si_no_of_licenses',
+            'default' => 'unknown_si_no_of_licenses',
+            'label' => 'Postal Code',
+        ],
+        'cloud_region' => [
+            'name' => 'si_cloud_region',
+            'default' => 'unknown_si_cloud_region',
+            'label' => 'Cloud Region',
+        ],
+        'upgrade_frequency' => [
+            'name' => 'si_upgrade_frequency',
+            'default' => 'unknown_si_upgrade_frequency',
+            'label' => 'Upgrade Frequency',
+        ],
+        'db_size' => [
+            'name' => 'si_db_size',
+            'default' => 'unknown_si_db_size',
+            'label' => 'Database Size',
+        ],
+        'file_system_size' => [
+            'name' => 'si_upgrade_frequency',
+            'default' => 'unknown_si_file_system_size',
+            'label' => 'File System Size',
+        ],
+        'total_sum_size' => [
+            'name' => 'si_sum_size',
+            'default' => 'unknown_si_sum_size',
+            'label' => 'Total Size',
+        ],
+    ];
 
     public function __construct() {
         parent::__construct();
@@ -176,56 +374,48 @@ class Administration extends SugarBean {
     /**
      * Save a setting
      *
-     * @param string $category      Category for the config value
-     * @param string $key           Key for the config value
-     * @param string|array $value   Value of the config param
-     * @param string $platform      Which platform this belongs to (API use only, If platform is empty it will not be returned in the API calls)
-     * @return int                  Number of records Returned
+     * @param string $category Category for the config value
+     * @param string $key Key for the config value
+     * @param string|array $value Value of the config param
+     * @param string $platform Which platform this belongs to (API use only, If platform is empty it will not be returned in the API calls)
+     * @return int Number of records Returned
      */
-    public function saveSetting($category, $key, $value, $platform = '') {
+    public function saveSetting($category, $key, $value, $platform = '')
+    {
         // platform is always lower case
         $platform = strtolower($platform);
         $conn = $this->db->getConnection();
-
         $builder = $conn->createQueryBuilder();
         $query = $builder
-            ->select('COUNT(*) AS the_count')
+            ->select('NULL')
             ->from($this->table_name)
-            ->where($this->getConfigWhere($builder, $category, $key, $platform));
-
-        $stmt = $query->execute();
-
-        $row = $stmt->fetch();
-        $row_count = $row['the_count'];
-
+            ->where($this->getConfigWhere($builder, $category, $key, $platform))
+            ->setMaxResults(1);
+        $result = $query->execute()->fetchColumn();
         if (is_array($value)) {
             $value = json_encode($value);
         }
-
-        if($category."_".$key == 'ldap_admin_password' || $category."_".$key == 'proxy_password')
+        if ($category . "_" . $key == 'ldap_admin_password' || $category . "_" . $key == 'proxy_password') {
             $value = $this->encrpyt_before_save($value);
-
+        }
         $builder = $conn->createQueryBuilder();
-        if ($row_count == 0) {
+        if ($result === false) {
             $query = $builder
                 ->insert($this->table_name)
-                ->values(array(
+                ->values([
                     'category' => $builder->createPositionalParameter($category),
                     'name' => $builder->createPositionalParameter($key),
                     'platform' => $builder->createPositionalParameter($platform),
                     'value' => $builder->createPositionalParameter($value),
-                ));
-        }
-        else{
+                ]);
+        } else {
             $query = $builder
                 ->update($this->table_name)
                 ->set('value', $builder->createPositionalParameter($value))
                 ->where($this->getConfigWhere($builder, $category, $key, $platform));
         }
         $result = $query->execute();
-
         sugar_cache_clear('admin_settings_cache');
-
         // check to see if category is a module
         if (!empty($platform)) {
             // we have an api call so lets clear out the cache for the module + platform
@@ -233,13 +423,22 @@ class Administration extends SugarBean {
             // FIXME TY-839 'portal' should be the platform, not category
             if (in_array($category, $moduleList) || $category == 'portal') {
                 $cache_key = "ModuleConfig-" . $category;
-                if($platform != "base")  {
+                if ($platform != "base") {
                     $cache_key .= $platform;
                 }
                 sugar_cache_clear($cache_key);
             }
         }
 
+        // need to update subscription info
+        if ($category === 'license' && $key === 'key') {
+            // This section of code is a portion of the code referred
+            // to as Critical Control Software under the End User
+            // License Agreement.  Neither the Company nor the Users
+            // may modify any portion of the Critical Control Software.
+            SubscriptionManager::instance()->downloadSubscriptionContent($value);
+            //END REQUIRED CODE DO NOT MODIFY
+        }
         return $result;
     }
 
@@ -388,7 +587,7 @@ class Administration extends SugarBean {
 
     /**
      * Check if the Bean Implements anything special
-     * @param $interface 
+     * @param $interface
      * @return bool
      */
     public function bean_implements($interface)
@@ -397,6 +596,97 @@ class Administration extends SugarBean {
             case 'ACL':return true;
         }
         return false;
-    }    
+    }
+
+    /**
+     * Adds defaults to the server array if certain properties are missing
+     * @param array $server The server info from metadata
+     * @return array
+     */
+    public function getUpdatedAnalyticData(array $server = [])
+    {
+        $config = Container::getInstance()->get(SugarConfig::class);
+        $return = [];
+
+        // Add in additional account items before handling defaults
+        foreach ($this->addedAnalyticAccountData as $k => $v) {
+            $return[$k] = $config->get($v) ?? 'unknown_' . $k;
+        }
+
+        // Now handle defaults
+        foreach ($this->analyticsDefaults as $k => $v) {
+            $return[$k] = $server[$k] ?? $v;
+        }
+
+        return $return;
+    }
+
+    /**
+     * Updates server information from metadata with additional analytics server
+     * data
+     * @param array $data Original payload of server information
+     * @param array $settings Configuration for the instance
+     * @return array
+     */
+    public function getUpdatedAnalyticServerInfo(array $data = [], array $settings = [])
+    {
+
+        // Needed for Pendo analytics
+        if (!empty($settings['site_id'])) {
+            $data['site_id'] = $settings['site_id'];
+        }
+
+        if (isset($settings['Opportunities_opps_view_by'])) {
+            $data['si_rli_enabled'] = $settings['Opportunities_opps_view_by'] === 'RevenueLineItems';
+        } else {
+            LoggerManager::getLogger()->error('Unable to get Opportunities_opps_view_by from system config.');
+            $data['si_rli_enabled'] = 'unknown_rli_enabled';
+        }
+
+        if (isset($settings['Forecasts_is_setup'])) {
+            $data['si_forecasts_is_setup'] = $settings['Forecasts_is_setup'] === 1;
+        } else {
+            LoggerManager::getLogger()->error('Unable to get Forecasts_is_setup from system config.');
+            $data['si_forecasts_is_setup'] = 'unknown_forcasts_is_setup';
+        }
+
+        if (!empty($settings['license_subscription']['subscription'])) {
+            $s = $settings['license_subscription']['subscription'];
+
+            // Add in products from license server
+            if (!empty($s['addons']) && is_array($s['addons'])) {
+                $products = [];
+                foreach ($s['addons'] as $addon) {
+                    if (!empty($addon['product_name'])) {
+                        $products[] = $addon['product_name'];
+                    }
+                }
+
+                if (!empty($products)) {
+                    $data['si_product_list'] = implode(", ", $products);
+                } else {
+                    LoggerManager::getLogger()->error('Unable to get product list from license server.');
+                    $data['si_product_list'] = 'unknown_product_list';
+                }
+            }
+
+            // Now add in other default mapped values
+            foreach ($this->analyticsFieldMap as $k => $v) {
+                if (empty($s[$k])) {
+                    $data[$v['name']] = $v['default'];
+                    LoggerManager::getLogger()->error(
+                        sprintf(
+                            'Unable to get %s from license server.',
+                            $v['label']
+                        )
+                    );
+                } else {
+                    $data[$v['name']] = $s[$k];
+                }
+            }
+        }
+
+        return $data;
+    }
 }
 

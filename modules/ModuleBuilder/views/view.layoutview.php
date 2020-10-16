@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+
 require_once 'modules/ModuleBuilder/parsers/constants.php' ;
 
 class ViewLayoutView extends SugarView
@@ -22,6 +24,9 @@ class ViewLayoutView extends SugarView
         parent::__construct($bean, $view_object_map, $request);
         $GLOBALS ['log']->debug('in ViewLayoutView');
         $this->editModule = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
+        if (!AccessControlManager::instance()->allowModuleAccess($this->editModule)) {
+            throw new SugarApiExceptionModuleDisabled();
+        }
         $this->editLayout = $this->request->getValidInputRequest('view','Assert\ComponentName');
         $this->package = $this->request->getValidInputRequest('view_package', 'Assert\ComponentName');
         $mb = $this->request->getValidInputRequest('MB');
@@ -150,6 +155,11 @@ class ViewLayoutView extends SugarView
         $smarty->assign ( 'nextPanelId', $parser->getFirstNewPanelId() ) ;
         $smarty->assign ( 'displayAsTabs', $parser->getUseTabs() ) ;
         $smarty->assign ( 'tabDefs', $parser->getTabDefs() ) ;
+        // no tabs and collapse for preview
+        if ($this->editLayout === MB_PREVIEWVIEW) {
+            $smarty->assign('no_tabs', true);
+            $smarty->assign('no_collapse', true);
+        }
         $smarty->assign ( 'syncDetailEditViews', $parser->getSyncDetailEditViews() ) ;
         $smarty->assign('fieldwidth', 300 / $parser->getMaxColumns());
         // Bug 57260 - LBL_PANEL_DEFAULT not translated for undeployed modules in layout editor

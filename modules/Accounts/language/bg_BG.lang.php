@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Оферти (Да се достави на)',
 	'LNK_ACCOUNT_REPORTS' => 'Справки за организации',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Документи',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Електронно табло на списъка на профилите',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Електронно табло на записа на профилите',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Подробна информация за профила',
+    'LBL_NEXT_RENEWAL_DATE' => 'Дата на следващо обновяване',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Име на профила/Отрасъл',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'Местоположение',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Графики',

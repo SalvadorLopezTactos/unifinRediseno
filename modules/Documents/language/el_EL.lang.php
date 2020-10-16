@@ -164,4 +164,6 @@ $mod_strings = array (
     'LBL_BUGS_SUBPANEL_TITLE' => 'Σφάλματα',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Προσφορές',
     'LBL_RLI_SUBPANEL_TITLE' => 'Γραμμή Στοιχείων Εσόδων',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PLIS_SUBPANEL_TITLE' => 'Purchased Line Items',
 );

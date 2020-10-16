@@ -27,22 +27,24 @@ if(!empty($_REQUEST['reg_ex'])){
 	$reg_ex = 'checked';
 }
 set_time_limit(180);
-echo <<<EOQ
-<form action='index.php' name='logview'>
-<input type='hidden' name='action' value='LogView'>
-<input type='hidden' name='module' value='Configurator'>
-<input type='hidden' name='doaction' value=''>
-<input type='button' onclick='document.logview.doaction.value="all";document.logview.submit()' name='all' value='{$mod_strings['LBL_ALL']}'>
-<input type='button' onclick='document.logview.doaction.value="mark";document.logview.submit()' name='mark' value='{$mod_strings['LBL_MARK_POINT']}'>
-<input type='submit' name='display' value='{$mod_strings['LBL_REFRESH_FROM_MARK']}'>
-<input type='button' onclick='document.logview.doaction.value="next";document.logview.submit()' name='next' value='{$mod_strings['LBL_NEXT_']}'>
+?>
+<form action="index.php" name="logview">
+<input type="hidden" name="action" value="LogView">
+<input type="hidden" name="module" value="Configurator">
+<input type="hidden" name="doaction" value="">
+<input type="button" onclick="document.logview.doaction.value='all';document.logview.submit()" name="all" value="<?=htmlspecialchars($mod_strings['LBL_ALL'])?>">
+<input type="button" onclick="document.logview.doaction.value='mark';document.logview.submit()" name="mark" value="<?=htmlspecialchars($mod_strings['LBL_MARK_POINT'])?>">
+<input type="submit" name="display" value="<?=htmlspecialchars($mod_strings['LBL_REFRESH_FROM_MARK'])?>">
+<input type="button" onclick="document.logview.doaction.value='next';document.logview.submit()" name="next" value="<?=htmlspecialchars($mod_strings['LBL_NEXT_'])?>">
 <br><br>
-{$mod_strings['LBL_SEARCH']} <input type='text' name='filter' value='$filter'>&nbsp;{$mod_strings['LBL_REG_EXP']} <input type='checkbox' name='reg_ex' $reg_ex>
-<br>
-{$mod_strings['LBL_IGNORE_SELF']} <input type='checkbox' name='ignore_self' $ignore_self>
+    <?= htmlspecialchars($mod_strings['LBL_SEARCH']) ?><input type="text" name="filter" value="<?= htmlspecialchars($filter) ?>">&nbsp;
+    <?php //@codingStandardsIgnoreStart ?>
+    <?= htmlspecialchars($mod_strings['LBL_REG_EXP']) ?><input type="checkbox" name="reg_ex"<?php if ($reg_ex) :?> checked="checked"<?php endif; ?>>
+    <br>
+    <?= htmlspecialchars($mod_strings['LBL_IGNORE_SELF']) ?> <input type="checkbox" name="ignore_self"<?php if ($ignore_self) :?> checked="checked"><?php endif; ?>>
+    <?php //@codingStandardsIgnoreEnd ?>
 </form>
-EOQ;
-
+<?php
 define('PROCESS_ID', 1);
 define('LOG_LEVEL', 2);
 define('LOG_NAME', 3);
@@ -50,7 +52,6 @@ define('LOG_DATA', 4);
 
 // bug 53041 - now that we are respecting file name suffixes for log files, we need to get the log file name properly
 $config = SugarConfig::getInstance();
-$ext = $config->get('logger.file.ext');
 $logfile = $config->get('logger.file.name');
 $log_dir = $config->get('log_dir');
 $log_dir = $log_dir . (empty($log_dir)?'':'/');
@@ -61,7 +62,7 @@ if( !empty($file_suffix) )
     $date_suffix = "_" . date(str_replace("%", "", $file_suffix));
 }
 
-$logFile = $log_dir . $logfile . $date_suffix . $ext;
+$logFile = $log_dir . $logfile . $date_suffix . '.log';
 
 if (!file_exists($logFile)) {
 	die('No Log File');
@@ -71,7 +72,7 @@ $doaction =(!empty($_REQUEST['doaction']))?$_REQUEST['doaction']:'';
 
 switch($doaction){
 	case 'mark':
-		echo "<h3>{$mod_strings['LBL_MARKING_WHERE_START_LOGGING']}</h3><br>";
+        echo '<h3>' . htmlspecialchars($mod_strings['LBL_MARKING_WHERE_START_LOGGING']) . '</h3><br>';
 		$_SESSION['log_file_size'] = filesize($logFile);
 		break;
 	case 'next':
@@ -90,13 +91,13 @@ switch($doaction){
 
 
 if (!empty ($_REQUEST['display'])) {
-	echo "<h3>{$mod_strings['LBL_DISPLAYING_LOG']}</h3>";
+    echo '<h3>' . htmlspecialchars($mod_strings['LBL_DISPLAYING_LOG']) . '</h3>';
 	$process_id =  getmypid();
 
-	echo $mod_strings['LBL_YOUR_PROCESS_ID'].' [' . $process_id. ']';
-	echo '<br>'.$mod_strings['LBL_YOUR_IP_ADDRESS'].' ' . $_SERVER['REMOTE_ADDR'];
+    echo htmlspecialchars($mod_strings['LBL_YOUR_PROCESS_ID'] . ' [' . $process_id . ']');
+    echo '<br>' . htmlspecialchars($mod_strings['LBL_YOUR_IP_ADDRESS'] . ' ' . $_SERVER['REMOTE_ADDR']);
 	if($ignore_self){
-		echo $mod_strings['LBL_IT_WILL_BE_IGNORED'];
+        echo htmlspecialchars($mod_strings['LBL_IT_WILL_BE_IGNORED']);
 	}
 	if (empty ($_SESSION['log_file_size'])) {
 		$_SESSION['log_file_size'] = 0;
@@ -108,7 +109,7 @@ if (!empty ($_REQUEST['display'])) {
 		$pos = $_SESSION['log_file_size'] - $cur_size;
 	}
 	if($_SESSION['log_file_size'] == $cur_size){
-		echo '<br>'.$mod_strings['LBL_LOG_NOT_CHANGED'].'<br>';
+        echo '<br>' . htmlspecialchars($mod_strings['LBL_LOG_NOT_CHANGED']) . '<br>';
 	}else{
 		$fp = sugar_fopen($logFile, 'r');
 		fseek($fp, $pos , SEEK_END);
@@ -139,4 +140,3 @@ if (!empty ($_REQUEST['display'])) {
 
 	}
 }
-?>

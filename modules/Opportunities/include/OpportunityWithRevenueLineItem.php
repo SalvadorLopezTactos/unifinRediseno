@@ -64,9 +64,13 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
             'workflow' => false,
         ),
         'sales_stage' => array(
+            'calculated' => true,
+            'enforced' => true,
+            'formula' => 'opportunitySalesStage($revenuelineitems, "sales_stage")',
+            'readonly' => true,
             'audited' => false,
             'required' => false,
-            'studio' => false,
+            'studio' => true,
             'massupdate' => false,
             'reportable' => false,
             'workflow' => false,
@@ -96,7 +100,7 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
         'closed_revenue_line_items' => array(
             'reportable' => true,
             'workflow' => true
-        )
+        ),
     );
 
     /**
@@ -123,7 +127,7 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
      */
     public function doMetadataConvert()
     {
-        // always runt he parent first, since we need to fix the vardefs before doing the viewdefs
+        // always run the parent first, since we need to fix the vardefs before doing the viewdefs
         parent::doMetadataConvert();
 
         // fix the view defs now
@@ -132,7 +136,9 @@ class OpportunityWithRevenueLineItem extends OpportunitySetup
                 'commit_stage' => false,
                 'sales_status' => true,
                 'sales_stage' => false,
-                'probability' => false
+                'probability' => false,
+                'renewal' => true,
+                'renewal_parent_name' => true,
             )
         );
 
@@ -434,5 +440,15 @@ EOL;
     protected function fixProductsModule()
     {
         $this->fixProductsModuleField('revenuelineitem_name', 'massupdate', true);
+    }
+
+    /**
+     * Fix Account module.
+     */
+    protected function fixAccountModule()
+    {
+        if (file_exists($this->accModuleExtFolder . '/Vardefs/' . $this->accModuleExtVardefFile)) {
+            unlink($this->accModuleExtFolder . '/Vardefs/' . $this->accModuleExtVardefFile);
+        }
     }
 }

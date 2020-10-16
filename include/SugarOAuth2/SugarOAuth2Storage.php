@@ -11,6 +11,8 @@
  */
 
 use Sugarcrm\Sugarcrm\Util\Uuid;
+use Sugarcrm\Sugarcrm\Session\SessionStorage;
+use Sugarcrm\Sugarcrm\Security\Csrf\CsrfTokenStorage;
 
 /**
  * Sugar OAuth2.0 Storage system, allows the OAuth2 library we are using to
@@ -329,13 +331,17 @@ class SugarOAuth2Storage implements IOAuth2GrantUser, IOAuth2RefreshTokens, Suga
                 && !empty($_SESSION['oauth2']['token_check_time'])
                 && $_SESSION['oauth2']['token_check_time'] < time()) {
                 // Refresh token needs to be verified
-                global $db;
-
-                $row = $db->fetchOne("SELECT COUNT(id) AS token_count FROM oauth_tokens WHERE id = '".$db->quote($_SESSION['oauth2']['refresh_token'])."'");
-                if (empty($row['token_count'])) {
-                    // No, or 0 token_count, the refresh token is invalid
-                    return NULL;
+                $result = DBManagerFactory::getInstance()->getConnection()
+                    ->executeQuery(
+                        "SELECT NULL FROM oauth_tokens WHERE id = ?",
+                        [$_SESSION['oauth2']['refresh_token']]
+                    )
+                    ->fetchColumn();
+                if ($result === false) {
+                    // the refresh token is invalid
+                    return null;
                 }
+                
                 // Check came out okay, update the token check time
                 $_SESSION['oauth2']['token_check_time'] = time() + self::TOKEN_CHECK_TIME;
             }
@@ -427,6 +433,13 @@ class SugarOAuth2Storage implements IOAuth2GrantUser, IOAuth2RefreshTokens, Suga
 
         $IdPSessionIndex = !empty($_SESSION['IdPSessionIndex']) ? $_SESSION['IdPSessionIndex'] : null;
         $externalLogin = !empty($_SESSION['externalLogin']) ? $_SESSION['externalLogin'] : false;
+
+        $csrfTokenStorage = null;
+        $sessionStorage = $this->restoreSessionByIdFromCookie($oauth_token);
+        if ($sessionStorage && $sessionStorage->offsetExists(CsrfTokenStorage::SESSION_NAMESPACE)) {
+            $csrfTokenStorage = $sessionStorage->offsetGet(CsrfTokenStorage::SESSION_NAMESPACE);
+        }
+
         $clientInfo = $this->getClientDetails($client_id);
         if ( $clientInfo === false ) {
             return false;
@@ -468,6 +481,9 @@ class SugarOAuth2Storage implements IOAuth2GrantUser, IOAuth2RefreshTokens, Suga
             if ($IdPSessionIndex) {
                 $_SESSION['IdPSessionIndex'] = $IdPSessionIndex;
             }
+            if ($csrfTokenStorage) {
+                $_SESSION[CsrfTokenStorage::SESSION_NAMESPACE] = $csrfTokenStorage;
+            }
             $_SESSION['externalLogin'] = $externalLogin;
             $_SESSION['is_valid_session'] = true;
             $_SESSION['ip_address'] = query_client_ip();
@@ -489,6 +505,29 @@ class SugarOAuth2Storage implements IOAuth2GrantUser, IOAuth2RefreshTokens, Suga
         }
 
         throw new SugarApiException('Could not start session because client type was not found');
+    }
+
+    /**
+     * Try to restore session by session id from cookie
+     * @param string $currentSessionId
+     * @return SessionStorage|null
+     */
+    private function restoreSessionByIdFromCookie($currentSessionId): ?SessionStorage
+    {
+        if (empty($_COOKIE['PHPSESSID'])) {
+            return null;
+        }
+        $sessionStorage = null;
+        $sessionId = $_COOKIE['PHPSESSID'];
+        if ($sessionId !== $currentSessionId) {
+            $sessionStorage = SessionStorage::getInstance();
+            if ($sessionStorage->sessionHasId() && $sessionStorage->getId() !== $sessionId) {
+                $sessionStorage->unlock();
+            }
+            $sessionStorage->setId($sessionId);
+            $sessionStorage->start();
+        }
+        return $sessionStorage;
     }
 
     /**

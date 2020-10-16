@@ -153,6 +153,26 @@ class UserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers ::setLocalUser
+     */
+    public function testSetLocalUser()
+    {
+        $user = new User('barry', '');
+        $user->setAttribute('someName1', 'someValue1');
+        $user->setAttribute('someName2', 'someValue2');
+
+        $localUser = new User('barryLocal', '');
+        $localUser->setAttribute('someName1', 'someLocalValue1');
+        $localUser->setAttribute('someName3', 'someLocalValue3');
+
+        $user->setLocalUser($localUser);
+
+        $this->assertEquals('someValue1', $user->getAttribute('someName1'));
+        $this->assertEquals('someValue2', $user->getAttribute('someName2'));
+        $this->assertEquals('someLocalValue3', $user->getAttribute('someName3'));
+    }
+
+    /**
      * @covers ::getOidcAttribute
      */
     public function testGetOidcAttribute()

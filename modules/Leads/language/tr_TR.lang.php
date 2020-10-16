@@ -322,4 +322,7 @@ Her zorunlu ve istenen modülü onayladıktan sonra, üstteki Kaydet ve Dönüş
     'LBL_FILTER_LEADS_REPORTS' => 'Potansiyel Raporları',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Şunun İçin İç Amaçlı Onaylı:',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Son Güncellemeye Onay Verin',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => '{{moduleSingular}} durumu değiştirilemiyor. Bu {{moduleSingular}} önceden değiştirilmiş.',
 );

@@ -14,6 +14,8 @@
 
 global $app_list_strings, $app_strings, $current_user;
 
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+
 $mod_strings = return_module_language($GLOBALS['current_language'], 'Users');
 
 $focus = BeanFactory::getBean('Users', $_REQUEST['record']);
@@ -24,7 +26,12 @@ if ( !is_admin($focus) ) {
     $sugar_smarty->assign('APP_LIST', $app_list_strings);
     
     $categories = ACLAction::getUserActions($_REQUEST['record'],true);
-    
+
+    $acm = AccessControlManager::instance();
+    $categories = array_filter($categories, function ($module) use ($acm) {
+        return $acm->allowModuleAccess($module);
+    }, ARRAY_FILTER_USE_KEY);
+
     //clear out any removed tabs from user display
     if(!$GLOBALS['current_user']->isAdminForModule('Users')){
         $tabs = $focus->getPreference('display_tabs');

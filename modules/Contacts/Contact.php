@@ -11,7 +11,8 @@
  */
 
 use Sugarcrm\Sugarcrm\Security\Password\Hash;
-
+use Sugarcrm\Sugarcrm\Portal\Factory as PortalFactory;
+use Sugarcrm\Sugarcrm\Util\Uuid;
 
 /**
  *  Contact is used to store customer information.
@@ -105,6 +106,9 @@ class Contact extends Person {
 	var $rel_opportunity_table = "opportunities_contacts";
 	var $rel_quotes_table = "quotes_contacts";
 
+    public $business_center_name;
+    public $business_center_id;
+
     //Marketo
     var $mkto_sync;
     var $mkto_id;
@@ -115,6 +119,8 @@ class Contact extends Person {
 	var $emailAddress;
 	var $new_schema = true;
 	var $importable = true;
+    public $portal_user_company_name;
+    public $site_user_id;
 
 	// This is used to retrieve related fields from form posts.
 	var $additional_column_fields = Array('bug_id', 'assigned_user_name', 'account_name', 'account_id', 'opportunity_id', 'case_id', 'task_id', 'note_id', 'meeting_id', 'call_id', 'email_id'
@@ -124,6 +130,7 @@ class Contact extends Person {
 	var $relationship_fields = Array(
         'account_id'=> 'accounts',
         'bug_id' => 'bugs',
+        'business_center_id'=>'business_centers',
         'call_id'=>'calls',
         'case_id'=>'cases',
         'email_id'=>'emails',
@@ -134,6 +141,10 @@ class Contact extends Person {
         'contacts_users_id' => 'user_sync',
     );
 
+    /**
+     * @var string Source of the contact
+     */
+    public $entry_source = 'internal';
 
 	public function __construct() {
 		parent::__construct();
@@ -497,6 +508,12 @@ class Contact extends Person {
      */
     public function save($check_notify = false)
     {
+        // verify if portal_name already exists
+        if (!empty($this->verifyDuplicatePortalName())) {
+            throw new SugarApiExceptionNotAuthorized('ERR_PORTAL_NAME_EXISTS', [$this->portal_name], $this->module_name);
+        }
+
+        // no duplicate so get going
         if(!is_null($this->sync_contact)) {
             if(empty($this->fetched_row) || $this->fetched_row['sync_contact'] != $this->sync_contact) {
                 $this->load_relationship('user_sync');
@@ -509,7 +526,75 @@ class Contact extends Person {
 
             }
         }
+
+        // Support for Pendo analytics in Portal
+        if (!empty($this->portal_active)) {
+            $this->getSiteUserId();
+        }
+
+        // Update the datetime the consent was granted
+        if (!empty($this->cookie_consent) && empty($this->cookie_consent_received_on)) {
+            $this->cookie_consent_received_on = TimeDate::getInstance()->nowDb();
+        }
+        // Wipe the datetime if the consent was revoked
+        if (empty($this->cookie_consent) && !empty($this->cookie_consent_received_on)) {
+            $this->cookie_consent_received_on = null;
+        }
+
+        //Set business_center_id to the same as related account when not provided
+        if ($this->load_relationship('accounts')) {
+            $accounts = $this->accounts->getBeans();
+            if ($accounts) {
+                $account = array_shift($accounts);
+                if ($account->business_center_id) {
+                    $this->business_center_id = $account->business_center_id;
+                }
+            }
+        }
+
         return parent::save($check_notify);
+    }
+
+    /**
+     * Gets and sets a site user id for analytics
+     * @param boolean $save Whether to save updates on set, defaults to false
+     * @return string
+     */
+    public function getSiteUserId($save = false)
+    {
+        if (empty($this->site_user_id)) {
+            if (!$this->id) {
+                $this->id = Uuid::uuid1();
+                $this->new_with_id = true;
+            }
+
+            $this->site_user_id = getSiteHash($this->id);
+
+            // Handle saving only if explicitly told to
+            if ($save) {
+                $this->save();
+            }
+        }
+
+        return $this->site_user_id;
+    }
+
+    /**
+     * Checks if a duplicate portal_name exists in the DB
+     * @return false|string
+     */
+    public function verifyDuplicatePortalName()
+    {
+        $query = new SugarQuery();
+        $query->select(['portal_name']);
+        $query->from($this);
+        $query->where()
+            ->equals('portal_name', $this->portal_name);
+        if (!empty($this->id)) {
+            $query->where()->notEquals('id', $this->id);
+        }
+        // just one duplicate record will do the trick
+        return $query->getOne();
     }
 
     /**
@@ -547,13 +632,29 @@ class Contact extends Person {
      */
     public function getOwnerWhere($user_id, $table_alias = null)
     {
-        if (isset($_SESSION['type'], $_SESSION['contact_id']) && $_SESSION['type'] === 'support_portal') {
+        $portalSession = PortalFactory::getInstance('Session');
+        if ($portalSession->isActive() && ($contactId = $portalSession->getContactId())) {
             if ($table_alias === null) {
                 $table_alias = $this->table_name;
             }
-            return $table_alias  . '.id = ' . $this->db->quoted($_SESSION['contact_id']);
+            return $table_alias  . '.id = ' . $this->db->quoted($contactId);
         }
 
         return parent::getOwnerWhere($user_id, $table_alias);
+    }
+
+    /**
+     * Provides the dropdown list elements needed for the `entry_source`. This is
+     * a system status so it should not be editable in the dropdownlist editor,
+     * thus it is wrapped in a function. However, the values should be localizable
+     * hence the use of labels.
+     * @return array
+     */
+    public function getSourceTypes()
+    {
+        return [
+            'external' => translate('LBL_SOURCE_EXTERNAL', 'Contacts'),
+            'internal' => translate('LBL_SOURCE_INTERNAL', 'Contacts'),
+        ];
     }
 }

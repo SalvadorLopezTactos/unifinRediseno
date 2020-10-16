@@ -173,7 +173,7 @@ class PMSERelatedModule
         // If there are filter property details, filter our filter list
         // NOTE: Since `$def` is a stdClass object, this needs to be converted to an array to check for properties to
         // ensure that the object is not empty
-        if (!empty((array)$def->filter)) {
+        if (!empty($def->filter) && !empty((array)$def->filter)) {
             $filteredBeans = $this->filterBeans($beansForFilter, array($def->filter));
         } else {
             // Otherwise, use the filter list as-is

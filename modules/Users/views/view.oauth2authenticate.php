@@ -60,6 +60,20 @@ class UsersViewOAuth2Authenticate extends SidecarView
                 'scope' => $scope,
             ]);
 
+            $loginStatus = apiCheckLoginStatus();
+            if (true !== $loginStatus) {
+                $oauthServer = \SugarOAuth2Server::getOAuth2Server($this->platform);
+                $tokenInfo = $oauthServer->verifyAccessToken($this->authorization['access_token']);
+                /** @var User $user */
+                $user = BeanFactory::getBean('Users', $tokenInfo['user_id']);
+                if (!$user->isAdmin()) {
+                    if ($loginStatus['level'] == 'maintenance') {
+                        SugarApplication::redirect('./#maintenance');
+                    } elseif ($loginStatus['message'] === 'ERROR_LICENSE_SEATS_MAXED') {
+                        SugarApplication::redirect('./#licenseSeats');
+                    }
+                }
+            }
             // Adding the setcookie() here instead of calling $api->setHeader() because
             // manually adding a cookie header will break 3rd party apps that use cookies
             setcookie(

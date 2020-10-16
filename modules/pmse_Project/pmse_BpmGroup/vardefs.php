@@ -72,6 +72,9 @@ $dictionary['pmse_BpmGroup'] = array(
         'lockable_fields',
         'commentlog',
     ),
+    'portal_visibility' => [
+        'class' => 'PMSE',
+    ],
     'uses' => array(
         'basic',
         'assignable',

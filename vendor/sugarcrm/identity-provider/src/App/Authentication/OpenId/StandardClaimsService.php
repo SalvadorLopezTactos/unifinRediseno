@@ -13,6 +13,7 @@
 namespace Sugarcrm\IdentityProvider\App\Authentication\OpenId;
 
 use Sugarcrm\IdentityProvider\Authentication\User;
+use Sugarcrm\IdentityProvider\STS\Claims;
 use Sugarcrm\IdentityProvider\App\Application;
 
 /**
@@ -29,18 +30,6 @@ class StandardClaimsService
         'user_type' => 'user_type',
     ];
 
-    protected $oidcClaims = [
-        'given_name',
-        'family_name',
-        'middle_name',
-        'nickname',
-        'email',
-        'phone_number',
-        'address',
-        'department',
-        'title',
-    ];
-
     /**
      * @var Application
      */
@@ -55,9 +44,10 @@ class StandardClaimsService
      * Convert Identity Provider user attributes to OpenID claims.
      * Result omits attributes without a value.
      * @param User $user
+     * @param array $requestedScopes
      * @return array
      */
-    public function getUserClaims(User $user)
+    public function getUserClaims(User $user, array $requestedScopes = []): array
     {
         $user = $user->getLocalUser();
 
@@ -72,12 +62,21 @@ class StandardClaimsService
         foreach ($this->userClaimMapping as $claimName => $userAttributeName) {
             $mappedData[$claimName] = $user->getAttribute($userAttributeName);
         }
-        foreach ($this->oidcClaims as $claimName) {
+        foreach (Claims::OIDC_ATTRIBUTES as $claimName) {
             $mappedData[$claimName] = $user->getOidcAttribute($claimName);
         }
-        return array_filter($mappedData, function ($value) {
+        $mappedData = array_filter($mappedData, function ($value) {
             return !is_null($value);
         });
+        $forbiddenClaims = array_reduce(
+            array_diff_key(Claims::CLAIMS_BY_SCOPE, array_flip($requestedScopes)),
+            function ($carry, $value) {
+                $carry = array_merge($carry, $value);
+                return $carry;
+            },
+            []
+        );
+        return array_diff_key($mappedData, array_flip($forbiddenClaims));
     }
 
     /**

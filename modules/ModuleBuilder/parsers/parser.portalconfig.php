@@ -11,7 +11,7 @@
  */
 
 use Sugarcrm\Sugarcrm\Security\Crypto\CSPRNG;
-
+use Sugarcrm\Sugarcrm\Portal\Factory as PortalFactory;
 
 class ParserModifyPortalConfig extends ModuleBuilderParser
 {
@@ -28,8 +28,27 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
         $tabController = new TabController();
         $tabController->getPortalTabs();
 
-        $portalFields = array('defaultUser', 'appName', 'logoURL', 'serverUrl',
-            'maxQueryResult', 'maxSearchQueryResult');
+        if (isset($settings['caseDeflection'])) {
+            if ($settings['caseDeflection'] === 'true') {
+                $settings['caseDeflection'] = 'enabled';
+            } else {
+                $settings['caseDeflection'] = 'disabled';
+            }
+        }
+
+        $portalFields = [
+            'caseDeflection',
+            'defaultUser',
+            'appName',
+            'logoURL',
+            'logomarkURL',
+            'serverUrl',
+            'maxQueryResult',
+            'maxSearchQueryResult',
+            'portalModules',
+            'contactInfo',
+        ];
+
         $portalConfig = $this->getDefaultPortalSettings();
 
         foreach ($portalFields as $field) {
@@ -52,8 +71,14 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
      */
     protected function refreshCache()
     {
-        MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_SERVERINFO), ['base']);
-        MetaDataManager::refreshCache(array('portal'));
+        MetaDataManager::refreshSectionCache([MetaDataManager::MM_SERVERINFO], ['base']);
+
+        // Rebuild the relevant sections of the Portal cache
+        $sections = [
+            MetaDataManager::MM_CONFIG,
+            MetaDataManager::MM_MODULES,
+        ];
+        MetaDataManager::refreshSectionCache($sections, ['portal']);
     }
 
     /**
@@ -63,6 +88,7 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
     {
         $portalConfig = array(
             'appStatus' => 'offLine',
+            'caseDeflection' => 'enabled',
             'on' => 0
         );
         $this->savePortalSettings($portalConfig);
@@ -85,6 +111,12 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
             'logFormatter' => 'SimpleFormatter',
             'metadataTypes' => array(),
             'defaultModule' => 'Cases',
+            'caseDeflection' => PortalFactory::getInstance('Settings')->isServe() ? 'enabled' : 'disabled',
+            'contactInfo' => [
+                'contactPhone' => '',
+                'contactEmail' => '',
+                'contactURL' => '',
+            ],
             'orderByDefaults' => array(
                 'Cases' => array(
                     'field' => 'case_number',
@@ -152,7 +184,9 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
             }
             // TODO: category should be `support`, platform should be `portal`
             $admin = $this->getAdministrationBean();
-            if ($admin->saveSetting('portal', $fieldKey, $fieldValue, 'support') === false) {
+            if ($fieldKey === 'portalModules' && $this->validatePortalModulesList($fieldValue)) {
+                TabController::setPortalTabs($fieldValue);
+            } elseif ($admin->saveSetting('portal', $fieldKey, $fieldValue, 'support') === false) {
                 $GLOBALS['log']->fatal("Error saving portal config var $fieldKey, orig: "
                     . print_r($fieldValue, true) . " , json:".json_encode($fieldValue));
             }
@@ -164,6 +198,22 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
             $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
             $moduleInstallerClass::handlePortalConfig();
         }
+    }
+
+    /**
+     * Validates that a given list contains only names of modules that are
+     * Portal-compatible
+     *
+     * @param array $modules the list of module names
+     * @return bool true if the list is valid, false otherwise
+     */
+    private function validatePortalModulesList($modules): bool
+    {
+        // Input should be an array of module names starting with "Home"
+        if (!is_array($modules) || !isset($modules[0]) || $modules[0] !== 'Home') {
+            return false;
+        }
+        return empty(array_diff($modules, TabController::getAllPortalTabs()));
     }
 
     /**

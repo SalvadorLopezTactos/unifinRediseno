@@ -310,4 +310,7 @@ Për të krijuar një {{module_name}}:
     'LBL_FILTER_LEADS_REPORTS' => 'Raportet e kontaktit',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Qëllimet e biznesit u miratuan për',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Miratimi i përditësuar së fundi',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'E pamundur të ndryshohet statusi i {{moduleSingular}}. Ky {{moduleSingular}} është konvertuar tashmë.',
 );

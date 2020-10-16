@@ -605,7 +605,7 @@ class HTTP_WebDAV_Server
             $href.= $path;
             //TODO make sure collection resource pathes end in a trailing slash
 
-            echo "  <D:href>$href</D:href>\n";
+            echo '  <D:href>' . htmlspecialchars($href) . '</D:href>';
 
             // report all found properties and their values (if any)
             if (isset($file["props"]) && is_array($file["props"])) {
@@ -739,10 +739,14 @@ class HTTP_WebDAV_Server
             echo "  <D:href>".$this->_urlencode($_SERVER["SCRIPT_NAME"].$this->path)."</D:href>\n";
 
             foreach($options["props"] as $prop) {
-                echo "   <D:propstat>\n";
-                echo "    <D:prop><$prop[name] xmlns=\"$prop[ns]\"/></D:prop>\n";
-                echo "    <D:status>HTTP/1.1 $prop[status]</D:status>\n";
-                echo "   </D:propstat>\n";
+                echo '   <D:propstat>';
+                echo '    <D:prop><'
+                    . htmlspecialchars($prop['name'])
+                    . ' xmlns="'
+                    . htmlspecialchars($prop['ns'])
+                    . '"/></D:prop>';
+                echo '   <D:status>HTTP/1.1 ' . htmlspecialchars($prop['status']) . '</D:status>';
+                echo '   </D:propstat>';
             }
 
             if ($responsedescr) {
@@ -1282,10 +1286,12 @@ class HTTP_WebDAV_Server
             echo "  <D:activelock>\n";
             echo "   <D:lockscope><D:$options[scope]/></D:lockscope>\n";
             echo "   <D:locktype><D:$options[type]/></D:locktype>\n";
-            echo "   <D:depth>$options[depth]</D:depth>\n";
-            echo "   <D:owner>$options[owner]</D:owner>\n";
+            echo '   <D:depth>' . htmlspecialchars($options['depth']) . '</D:depth>';
+            echo '   <D:owner>' . htmlspecialchars($options['owner']) . '</D:owner>';
             echo "   <D:timeout>$timeout</D:timeout>\n";
-            echo "   <D:locktoken><D:href>$options[locktoken]</D:href></D:locktoken>\n";
+            echo '   <D:locktoken><D:href>'
+                . htmlspecialchars($options['locktoken'])
+                . '</D:href></D:locktoken>';
             echo "  </D:activelock>\n";
             echo " </D:lockdiscovery>\n";
             echo "</D:prop>\n\n";

@@ -51,7 +51,7 @@ class DropDownHelper
             //When renaming tabs ensure that the modList dropdown is filtered properly.
             case 'moduleList':
                 $hiddenModList = array_flip($GLOBALS['modInvisList']);
-                $moduleList = array_flip($GLOBALS['moduleList']);
+                $moduleList = array_flip(SugarACL::filterModuleList($GLOBALS['moduleList']));
 
                 foreach ($dropdown as $k => $v) {
                     if (isset($moduleList[$k])) {

@@ -11,7 +11,7 @@
  */
 *}
 <iframe id="yui-history-iframe" src="index.php?entryPoint=getImage&imageName=sugar-yui-sprites-grey.png" title="index.php?entryPoint=getImage&imageName=sugar-yui-sprites-grey.png"></iframe>
-<input id="yui-history-field" type="hidden"> 
+<input id="yui-history-field" type="hidden">
 <div class='ytheme-gray' id='mblayout' style="position:relative; height:0px; overflow:visible;">
 </div>
 <div id='mbcenter'>
@@ -70,9 +70,7 @@ MBLoader.insert();
     {/if}
     <input type="button" class="button" value="{$mod.LBL_DROPDOWNEDITOR}" onclick="ModuleBuilder.main('dropdowns');">
     </td><td align="left">
-    <a href="http://www.sugarcrm.com" target="_blank">
-        <img height="25" width="83" class="img" src="{sugar_getjspath file='include/images/poweredby_sugarcrm_65.png'}" border="0" align="absmiddle"/>
-    </a>
-     </td></tr></table>
+    &nbsp;
+    </td></tr></table>
 </div>
 {include file='modules/ModuleBuilder/tpls/assistantJavascript.tpl'}

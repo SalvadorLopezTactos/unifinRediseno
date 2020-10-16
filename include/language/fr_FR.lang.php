@@ -43,6 +43,8 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'Tableau des Prévisions',
     'ForecastManagerWorksheets' => 'Tableaux de gestion des prévisions',
     'MergeRecords'=>'Fusions Enregistrements',
+      'VisualPipeline'=>'Portefeuille visuel',
+      'ConsoleConfiguration' => 'Configuration de la console',
     'Quotas' => 'Objectifs',
     'Teams' => 'Équipes',
     'TeamNotices' => 'Notification aux équipes',
@@ -75,6 +77,11 @@ $app_list_strings = array (
     'pmse_Project' => 'Définitions des processus',
     'pmse_Business_Rules' => 'Règles de gestion',
     'pmse_Emails_Templates' => 'Modèles d&#39;email des processus',
+    'BusinessCenters' => 'Centres d&#39;affaires',
+    'Shifts' => 'Shifts',
+    'ShiftExceptions' => 'Shift Exceptions',
+    'Purchases' => 'Purchases',
+    'PurchasedLineItems' => 'Purchased Line Items',
     'WorkFlow' => 'Définitions du Workflow :',
     'EAPM' => 'Liens externes',
     'Worksheet' => 'Feuille de travail',
@@ -116,6 +123,8 @@ $app_list_strings = array (
     'DataPrivacy' => 'Confidentialité des données',
     'ReportSchedules' => 'Calendriers de rapports',
     'CommentLog' => 'Log de commentaire',
+    'Holidays' => 'Congés',
+    'ChangeTimers' => 'Modifier les minuteries',
   ),
 
     'moduleIconList' =>
@@ -131,6 +140,8 @@ $app_list_strings = array (
         'Tasks' => 'Ta',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'DP',
+        'BusinessCenters' => 'CA',
+        'PurchasedLineItems' => 'PL',
     ),
 
   'moduleListSingular' =>
@@ -150,6 +161,8 @@ $app_list_strings = array (
     'Calendar' => 'Calendrier',
     'Leads' => 'Lead',
     'Manufacturers' => 'Fabricant',
+    'VisualPipeline' => 'Portefeuillevisuel',
+    'ConsoleConfiguration' => 'Configaurationdelaconsole',
     'Contracts'=>'Contrat',
     'Quotes' => 'Devis',
     'Products' => 'Ligne de devis',
@@ -196,6 +209,11 @@ $app_list_strings = array (
     'pmse_Project' => 'Définition de processus',
     'pmse_Business_Rules' => 'Règle de gestion',
     'pmse_Emails_Templates' => 'Process modèle d&#39;email',
+    'BusinessCenters' => 'Centre d&#39;affaires',
+    'Shifts' => 'Shift',
+    'ShiftExceptions' => 'Shift Exceptions',
+    'Purchases' => 'Purchase',
+    'PurchasedLineItems' => 'Purchased Line Item',
     'WorkFlow' => 'WorkFlow',
     'EAPM' => 'Lien externe',
     'Worksheet' => 'Feuille de travail',
@@ -224,7 +242,7 @@ $app_list_strings = array (
     'Comments' => 'Commentaire',
     'CommentLog' => 'Log de commentaire',
     'Currencies' => 'Devise',
-    'ProductTemplates' => 'Catalogue produit',
+    'ProductTemplates' => 'Product',
     'ProductTypes' => 'Type de produit',
     'Shippers' => 'Transporteur',
     'Subscriptions' => 'Abonnés',
@@ -236,6 +254,8 @@ $app_list_strings = array (
     'EmailParticipants' => 'Participant par e-mail',
     'DataPrivacy' => 'Confidentialité des données',
     'ReportSchedules' => 'Calendrier de rapports',
+    'Holidays' => 'Congé',
+    'ChangeTimers' => 'Modifier les minuteries',
   ),
 
 /*
@@ -321,6 +341,11 @@ $app_list_strings = array (
     'T3' => 'Niveau 3',
     'T4' => 'Niveau 4',
   ),
+  'generate_purchase_dom' => [
+      'Yes' => 'Yes',
+      'No' => 'No',
+      'Completed' => 'Completed',
+  ],
   'lead_source_default_key' => 'Auto généré',
   'lead_source_dom' =>
   array (
@@ -589,6 +614,12 @@ $app_list_strings = array (
     'RegularUser' => 'Utilisateur normal',
     'Administrator' => 'Administrateur',
   ),
+  'license_type_dom' =>
+    array (
+        'CURRENT' => 'Produit actuel',
+        'SUGAR_SERVE' => 'Sugar Serve',
+        'SUGAR_SELL' => 'Sugar Sell',
+    ),
   'user_status_dom' =>
   array (
     'Active' => 'Actif',
@@ -693,6 +724,8 @@ $app_list_strings = array (
     'Meetings' => 'Réunion',
     'Calls' => 'Appel',
       'KBContents' => 'Base de connaissances',
+      'PurchasedLineItems' => 'Purchased Line Item',
+      'Purchases' => 'Purchase',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Compte',
@@ -722,7 +755,13 @@ $app_list_strings = array (
     'Prospects' => 'Cible',
       'KBContents' => 'Base de connaissances',
       'Notes' => 'Note',
+    'PurchasedLineItems' => 'Purchased Line Item',
+    'Purchases' => 'Purchase',
   ),
+
+  'changetimer_parent_type' => [
+      'Cases' => 'Ticket',
+  ],
 
   'product_status_default_key' => 'Expédié',
   'product_status_quote_key' => 'Quotes',
@@ -883,7 +922,8 @@ $app_list_strings = array (
     'Forum' => 'Forum',
     'Web' => 'Web',
     'InboundEmail' => 'Composer un email',
-    'Twitter' => 'Twitter'
+    'Twitter' => 'Twitter',
+    'Portal' => 'Portail',
   ),
     'dataprivacy_type_default_key' => '',
     'dataprivacy_type_dom' => array(
@@ -916,6 +956,11 @@ $app_list_strings = array (
         'Medium' => 'Moyenne',
         'High' => 'Élevée',
     ),
+    'business_day_status_dom' => [
+        'Open' => 'Ouvert',
+        'Open 24 Hours' => 'Ouvert 24 heures sur 24',
+        'Closed' => 'Fermé',
+    ],
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -1145,6 +1190,13 @@ $app_list_strings = array (
     'dom_email_states' => array(
         'Draft' => 'Brouillon',
         'Archived' => 'Archivé',
+    ),
+
+    'dom_email_direction' => array(
+        'Unknown' => 'Inconnu',
+        'Outbound' => 'Sortant',
+        'Inbound' => 'Entrant',
+        'Internal' => 'Interne',
     ),
 
     'scheduler_status_dom' =>
@@ -2096,6 +2148,11 @@ $app_list_strings = array (
         240000 => 'Toutes les 4 minutes',
         300000 => 'Toutes les 5 minutes',
   ),
+    'first_response_met_sla_dom'=> [
+        '' => '',
+        'Yes' => 'Oui',
+        'No' => 'Non',
+    ],
     'forecasts_chart_options_group' => array(
         'forecast' => 'Prévisions incluses',
         'sales_stage' => 'Phase de vente',
@@ -2123,6 +2180,7 @@ $app_list_strings = array (
         'record' => 'Enregistrement',
         'records' => 'Liste',
         'activities' => 'Volet d&#39;activité',
+        'multi-line' => 'Liste multi-ligne',
     ),
     'reportschedule_time_interval_dom' => array(
         '3600' => 'Toutes les heures',
@@ -2133,6 +2191,23 @@ $app_list_strings = array (
         '1209600' => 'Toutes les 2 semaines',
         '2419200' => 'Toutes les 4 semaines',
     ),
+    'pipeline_records_per_column' => array(
+        '10' => '10',
+        '15' => '15',
+        '20' => '20',
+    ),
+    //Service Duration
+    'service_duration_unit_dom' =>
+        array (
+            'year' => 'Année(s)',
+            'month' => 'Mois',
+            'day' => 'Jour(s)',
+        ),
+        'shift_exception_type_dom' => [
+            'time_off' => 'Time Off',
+            'event' => 'Event',
+            'other' => 'Other',
+        ],
 );
 
 $app_strings = array (
@@ -2144,7 +2219,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Lien de suivis',
   'LBL_TOGGLE_VISIBILITY' => 'Changer la visibilité', // Record view header panel element
   'LBL_ACTIVITIES' => 'Activités',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2020 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar et le Cube 3-D sont des marques déposées de SugarCRM Inc. '.
         'Tous les autres noms de sociétés et de produits utilisés dans ce produit peuvent être des marques déposées des '.
         'SugarCRM ®, Sugar Enterprise™ et Sugar™ sont des marques de SugarCRM Inc.',
@@ -2500,6 +2575,7 @@ $app_strings = array (
 
     'LBL_EMAIL_NO'                          => 'Non',
     'LBL_EMAIL_NOT_SENT'                    => 'Le système ne peut pas traiter votre demande. Veuillez contacter l&#39;administrateur du système.',
+    'LBL_INSERT_TO_USER_PWD_FAILED'         => 'Insertion impossible dans lien_mot de passe_utilisateur.',
 
     'LBL_EMAIL_OK'                          => 'Ok',
     'LBL_EMAIL_ONE_MOMENT'                  => 'Veuillez patienter...',
@@ -2716,8 +2792,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Une session active est nécessaire pour l&#39;exportation.',
     'ERR_NO_HEADER_ID' => 'Cette fonctionnalité n&#39;est pas supportée dans ce thème.',
     'ERR_NOT_ADMIN' => "Accès non autorisé à l'administration.",
-    'ERR_DISABLED_FOR_IDM_MODE' => 'La gestion des mots de passe n&#39;est disponible que dans les paramètres du Cloud.',
-    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE' =>
+        'La gestion des mots de passe n&#39;est disponible que dans <a href="%s" target="_blank">Paramètres du Cloud</a>.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Veuillez contacter votre administrateur Sugar si vous souhaitez modifier les champs en lecture seule.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Champ obligatoire manquant :',
@@ -2747,6 +2823,7 @@ $app_strings = array (
     'ERR_DB_VERSION' => 'Les fichiers Sugar CRM pour une version {0} doivent être utilisés avec une base de données SugarCRM {1}.',
     'ERR_DB_QUERY' => '{0}: Échec de la requête : {1}',
     'ERR_UW_RETIRED' => 'L&#39;assistant de mise à jour n&#39;est pas disponible pour cette version.',
+    'ERR_NOT_CLOUD_INSTANCE' => 'Cette instance de Sugar n&#39;est pas une instance SugarCloud ou n&#39;est pas configurée pour les informations SugarCloud.',
 
 
     'EXCEPTION_CREATE_MODULE_NOT_AUTHORIZED' => 'Vous n&#39;êtes pas autorisé à créer un enregistrement de type {moduleName}. Veuillez contacter votre administrateur SugarCRM si vous souhaitez cet accès.',
@@ -2769,6 +2846,7 @@ $app_strings = array (
     'EXCEPTION_NEED_LOGIN'              => 'Vous devez être identifié pour réaliser cette action.',
     'EXCEPTION_INVALID_TOKEN'           => 'Votre jeton d&#39;identification est invalide.',
     'EXCEPTION_NOT_AUTHORIZED'          => 'Vous n&#39;êtes pas autorisé à réaliser cette action. Veuillez contacter votre administrateur SugarCRM si vous souhaitez cet accès.',
+    'EXCEPTION_NOT_AUTHORIZED_TO_DATA'  => 'Vous n&#39;êtes pas autorisé à consulter les données. Veuillez contacter votre administrateur SugarCRM si vous souhaitez cet accès.',
     'EXCEPTION_INACTIVE_PORTAL_USER'    => 'Vous ne pouvez pas accéder au portail car votre accès est inactif. Veuillez contacter votre chargé de clientèle si vous souhaitez un accès.',
     'EXCEPTION_PORTAL_NOT_CONFIGURED'   => 'Le portail n&#39;est pas configuré correctement. Veuillez contacter l&#39;administrateur du portail pour toute assistance.',
     'EXCEPTION_NO_METHOD'               => 'Votre requête n&#39;est pas supportée. La méthode HTTP pour votre requête sur ce chemin est introuvable.',
@@ -2788,6 +2866,8 @@ $app_strings = array (
     'EXCEPTION_SEARCH_RUNTIME'          => 'Une erreur du runtime du moteur de rechercher s&#39;est produite. Veuillez contacter votre administrateur système.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
     'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Un champ verrouillé par un processus ne peut pas être modifié.',
+    'EXCEPTION_MODULE_DISABLED'         => 'Ce module est désactivé pour l&#39;utilisateur actuel.',
+    'EXCEPTION_FIELD_DISABLED'          => 'Ce champ est désactivé pour l&#39;utilisateur actuel.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'Un problème est survenu à cause d&#39;un échec majeur ou d&#39;une erreur. Les raisons pour ce type d&#39;exception sont en dehors du champ normal des erreurs liées à des API.',
@@ -2816,6 +2896,8 @@ $app_strings = array (
     'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Un champ actuellement verrouillé par un processus en cours d&#39;exécution ne peut pas être modifié.',
     'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s est verrouillé par un processus en cours d’exécution et ne peut pas être modifié.',
     'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s sont verrouillés par un processus en cours d’exécution et ne peuvent pas être modifiés.',
+    'EXCEPTION_MODULE_DISABLED_DESC'       => 'Ce module est désactivé pour l&#39;utilisateur actuel.',
+    'EXCEPTION_FIELD_DISABLED_DESC'        => 'Ce champ est désactivé pour l&#39;utilisateur actuel.',
 
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'Un fichier portant le même nom existe déjà dans le système.',
@@ -2905,6 +2987,7 @@ $app_strings = array (
     'LBL_CLOSE_AND_CREATE_BUTTON_LABEL' => 'Terminer l&#39;activité et dupliquer',
     'LBL_CLOSE_AND_CREATE_BUTTON_TITLE' => 'Terminer l&#39;activité et dupliquer',
     'LBL_CLOSE_AND_CREATE_BUTTON_KEY' => 'C',
+    'LBL_COPY_RECORD_URL' => 'Copier l&#39;URL de l&#39;enregistrement',
     'LBL_OPEN_ITEMS' => 'Non clos :',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'Envoyer un Email',
@@ -2933,6 +3016,8 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'Documents',
     'LBL_DATE_ENTERED' => 'Date de création :',
     'LBL_DATE_MODIFIED' => 'Date de modification :',
+    'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'Modifier l&#39;onglet Aperçu',
+    'LBL_EDIT_MODULE_TABS_BUTTON' => 'Modifier les onglets du module',
     'LBL_EDIT_BUTTON' => 'Éditer',
     'LBL_DUPLICATE_BUTTON' => 'Dupliquer',
     'LBL_DELETE_BUTTON' => 'Supprimer',
@@ -2945,6 +3030,7 @@ $app_strings = array (
     'LBL_DST_NEEDS_FIXIN' => 'Pour le bon fonctionnement de l&#39;application il est nécessaire qu&#39;un patch sur l&#39;heure d&#39;été soit intégré. SVP allez dans le module <a href="index.php?module=Administration&action=DstFix">Repair</a> dans la console d&#39;administration et cliquez sur le fix pour l&#39;heure d&#39;été.',
     'LBL_EDIT_AS_NEW_BUTTON_LABEL' => 'Éditer comme Nouveau',
     'LBL_EDIT_AS_NEW_BUTTON_TITLE' => 'Éditer comme Nouveau',
+    'LBL_EDIT_IN_NEW_TAB' => 'Éditer dans un nouvel onglet',
     'LBL_FAVORITES' => 'Favoris',
     'LBL_FILTER' => 'Filtre',
     'LBL_DEFAULT_DATA_FILTER' => 'Filtre de données par défaut',
@@ -3124,6 +3210,7 @@ $app_strings = array (
     'LBL_MODIFIED_ID'=>'Modifié par (ID)',
     'LBL_MORE' => 'plus',
     'LBL_MORE_MODULES' => 'Plus de modules',
+    'LBL_MORE_TABS' => 'Plus d&#39;onglets',
     'LBL_MULTIPLE_MODULES' => 'Plusieurs Modules',
     'LBL_MY_ACCOUNT' => 'Ma configuration',
     'LBL_SYSTEM_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'paramétrage système par défaut',
@@ -3143,6 +3230,7 @@ $app_strings = array (
     'LBL_OPENTO_BUTTON_KEY' => 'T',
     'LBL_OPENTO_BUTTON_LABEL' => 'Ouvrir à : ',
     'LBL_OPENTO_BUTTON_TITLE' => 'Ouvrir à :',
+    'LBL_OPEN_IN_NEW_TAB' => 'Ouvrir dans un nouvel onglet',
     'LBL_OPPORTUNITIES'=>'Affaires',
     'LBL_OPPORTUNITY_NAME' => 'Nom affaire',
     'LBL_OPPORTUNITY'=>'Affaire',
@@ -3343,7 +3431,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2020 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Tous droits réservés.<br />SugarCRM, Sugar et le Cube 3-D sont des marques déposées de SugarCRM Inc. '.
         'Tous les autres noms de sociétés et de produits utilisés dans ce produit peuvent être des marques déposées des '.
         'sociétés respectives auxquelles ils sont associés.',
@@ -3459,7 +3547,7 @@ Cordialement, SugarCRM',
     'LNK_VIEW_CHANGE_LOG' => 'Voir le log d&#39;audit',
     'TPL_AUDIT_LOG_TITLE' => 'Log d&#39;audit pour {{{name}}}',
     'LBL_AUDIT_EMAIL_TOOLTIP' => 'Cliquer pour voir le log d&#39;audit de l&#39;adresse email',
-
+    'LBL_NO_SEARCH_RESULTS' => 'Aucun résultat trouvé pour votre recherche',
     'NTC_CLICK_BACK' => 'Merci de cliquer sur le bouton "Précédent" de votre navigateur et de corriger le problème.',
     'NTC_DATE_FORMAT' => '(aaaa-mm-jj)',
     'NTC_DATE_TIME_FORMAT' => '(aaaa-mm-jj 24:00)',
@@ -3497,12 +3585,15 @@ Cordialement, SugarCRM',
     'WARN_LICENSE_SEATS_MAXED'=>  "Attention : vous avez plus d'utilisateurs actifs que le nombre autorisé par votre licence.",
     'ERROR_LICENSE_SEATS_MAXED'=>
         'Le nombre d&#39;utilisateurs actifs dépasse la limite du nombre autorisé. Veuillez contacter votre administrateur.',
+    'ERROR_LICENSE_TYPE_SEATS_MAXED'=>
+        'Number of active %s users exceeds License Count limits. Please contact your Administrator.',
     'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'Seuls les administrateurs peuvent se connecter.',
     'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
         'La limite du nombre d&#39;utilisateurs autorisés a été atteinte. Seuls les utilisateurs existants peuvent se connecter.',
     'WARN_ONLY_ADMINS'=> "Seuls les administrateurs peuvent se connecter.",
     'WARN_UNSAVED_CHANGES'=> "Vous êtes sur le point de quitter cet enregistrement sans sauvegarder vos modifications. Êtes-vous sûr de vouloir quitter cet enregistrement ?",
     'LBL_WARN_UNSAVED_CHANGES' => 'Vous n&#39;avez pas sauvegardé vos changements. Êtes-vous sur de vouloir quitter cette page et perdre ainsi vos modifications ?',
+    'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'Un ou plusieurs dashlets ont des changements non sauvegardés. Êtes-vous sûr de vouloir fermer le tiroir ?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Vous allez vous déplacer vers le module de rapports. Vos changements sur le dashlet ne seront pas sauvegardées. Souhaitez-vous continuer ?',
     'ERROR_NO_RECORD' => 'Erreur de récupération de l&#39;enregistrement. Cet enregistrement est peut être supprimé ou vous n&#39;avez pas le droit de le visualiser.',
     'ERROR_TYPE_NOT_VALID' => 'Erreur. Ce type n&#39;est pas valide.',
@@ -3519,7 +3610,10 @@ Cordialement, SugarCRM',
     'ERROR_DATETIME' => 'Erreur. Ce champ nécessite une date valide.',
     'ERROR_IS_BEFORE' => 'Erreur. La date de ce champ ne peut être après la date du champ {{this}}.',
     'ERROR_IS_AFTER' => 'Erreur. La date de ce champ ne peut être avant la date du champ {{this}}.',
+    'ERROR_TIME_IS_BEFORE' => 'Erreur. L&#39;heure de ce champ doit être antérieure à l&#39;heure du champ {{this}}.',
+    'ERROR_TIME_IS_AFTER' => 'Erreur. L&#39;heure de ce champ doit être postérieure à l&#39;heure du champ {{this}}.',
     'ERROR_NUMBER' => 'ERREUR : Ce champ requiert un nombre',
+    'ERROR_INT' => 'Erreur. Entier invalide.',
     'ERROR_NO_BEAN' => 'Échec pour obtenir un bean.',
     'ERROR_ACCESS_MODULE' => 'Vous n&#39;avez pas accès à ce module.',
     'ERROR_MAX_FILESIZE_EXCEEDED' => 'Erreur, La pièce jointe est trop volumineuse.',
@@ -3605,6 +3699,7 @@ Cordialement, SugarCRM',
     'LBL_SCHEDULE_MEETING' => 'Planifier une Réunion',
     'LBL_CREATE_TASK' => 'Créer une Tache',
     'LBL_REMOVE_FROM_FAVORITES' => 'Supprimer de mes Favoris',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => 'Afficher le Formulaire',
     'LBL_SAVE_WEB_TO_LEAD_FORM' =>'Le formulaire de capture de Leads me convient',
@@ -3633,36 +3728,21 @@ Cordialement, SugarCRM',
     'ERR_SMARTY_UNEQUAL_RELATED_FIELD_PARAMETERS' => 'Erreur : Le nombre d&#39;arguments est différent entre les éléments &#39;key&#39; et &#39;copy&#39; dans le tableau des paramètres d&#39;affichage.',
     'ERR_SMARTY_MISSING_DISPLAY_PARAMS' => 'Index manquants dans le tableau des paramètres d&#39;affichage : ',
 
-    /* MySugar Framework (for Home and Dashboard) */
     'LBL_DASHLET' => 'Dashlet',
-    'LBL_DASHLET_CONFIGURE_GENERAL' => 'Général',
     'LBL_DASHLET_CONFIGURE_FILTERS' => 'Filtrer',
     'LBL_DASHLET_CONFIGURE_MY_ITEMS_ONLY' => 'Mes éléments seulement',
-    'LBL_DASHLET_CONFIGURE_MY_FAVORITES_ONLY' => 'Liés à mes favoris',
     'LBL_DASHLET_CONFIGURE_TITLE' => 'Titre',
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Afficher les lignes',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'Relatif à l&#39;enregistrement courant',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'Champ lié',
 
-    // MySugar status strings
-    'LBL_CREATING_NEW_PAGE' => 'Créer une nouvelle page ...',
-    'LBL_NEW_PAGE_FEEDBACK' => 'Vous avez créé une nouvelle page. Vous devez ajouter un nouveau contenu dans l&#39;option du menu "Ajouter un dashlet".',
-    'LBL_DELETE_PAGE_CONFIRM' => 'Êtes-vous sûr(e) de vouloir supprimer cette page ?',
-    'LBL_SAVING_PAGE_TITLE' => 'Sauvegarder le titre de cette page ...',
-    'LBL_RETRIEVING_PAGE' => 'Recherche de la page ...',
-    'LBL_MAX_DASHLETS_REACHED' => 'Vous avez atteint le nombre maximum de Dashlets autorisé par votre administrateur. Vous devez en supprimer pour en ajouter de nouveaux.',
-    'LBL_ADDING_DASHLET' => 'Ajout en cours...',
-    'LBL_ADDED_DASHLET' => 'Dashlet ajouté',
     'LBL_REMOVE_DASHLET_CONFIRM' => 'Êtes-vous sûr(e) de vouloir supprimer le Dashlet ?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'Êtes-vous sur de vouloir supprimer cette ligne ?',
-    'LBL_REMOVING_DASHLET' => 'Suppression du Dashlet en cours...',
-    'LBL_REMOVED_DASHLET' => 'Dashlet supprimé',
     'LBL_MAXIMUM_OF' => 'Maximum de ',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => ' colonnes peuvent etre affichées',
 
     /* Sugar7 Dashboard */
     'LBL_DASHBOARD' => 'Tableau de bord',
-    'LBL_DASHBOARD_BWC' => 'Mon tableau de bord en version précédente',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Mon tableau de bord',
     'LBL_COLLAPSE_ALL' => 'Tout réduire',
     'LBL_EXPAND_ALL' => 'Tout agrandir',
@@ -3693,9 +3773,33 @@ Cordialement, SugarCRM',
 
     'LBL_DASHLET_LISTVIEW_NAME' => 'Vue Liste',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'Liste les enregistrements d&#39;un module en fonction de vos critères.',
+
+    // Record view dashlet
+    'LBL_DASHLET_RECORDVIEW_NAME' => 'Enregistrement',
+    'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Affiche un enregistrement et, le cas échéant, les enregistrements associés dans des onglets.',
+    'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'Type d&#39;enregistrement de base',
+    'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => 'Ce {{moduleSingular}}',
+    'LBL_DASHLET_RECORDVIEW_TABS' => 'Onglets',
+    'LBL_DASHLET_RECORDVIEW_BASIC_LAYOUT_PREVIEW' => 'Pré-visualisation de la Mise en page de base',
+    'TPL_DASHLET_RECORDVIEW_TOO_MANY_TABS' => 'Avertissement, seuls les modules {{numWord}} ({{num}}) peuvent être affichés dans les onglets. ' .
+        'Veuillez supprimer un ou plusieurs modules avant d&#39;en ajouter d&#39;autres.',
+    'LBL_SIX' => 'six', // record view dashlet tab limit
+
+    //Commentlog Dashlet
+    'LBL_DASHLET_COMMENTLOG_NAME' => 'Log de commentaire',
+    'LBL_DASHLET_COMMENTLOG_DESCRIPTION' => 'Affiche les commentaires d&#39;un enregistrement',
+    'LBL_COMMENTS_LOG_DASHLET_NO_COMMENTS' => 'Aucun commentaire disponible',
+    'LBL_COMMENTS_LOG_DASHLET_BUTTON_ADD' => 'Ajouter',
+    'LBL_COMMENTS_LOG_DASHLET_PLACEHOLDER' => 'Ajouter un commentaire',
+    'LBL_COMMENTS_LOG_DASHLET_VIEW_ALL' => 'Tout afficher',
+
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Mes {{module}}',
+    'LBL_DASHLET_PICK_A_RECORD' => 'Aucun enregistrement sélectionné pour l&#39;affichage',
+    'LBL_CONTENT_SEARCH_DASHLET' => 'Dashlet de recherche de contenu',
+    'LBL_CONTENT_SEARCH_DASHLET_GREETING' => 'Que pouvons-nous faire pour vous aider aujourd&#39;hui, {{username}} ?',
+    'LBL_CONTENT_SEARCH_DASHLET_DISABLED' => 'Souhaitez-vous créer un ticket ?',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Indicateurs sur les affaires',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Indicateurs sur les affaires pour compte associé.',
@@ -3703,6 +3807,14 @@ Cordialement, SugarCRM',
     'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'Listes Articles et produits utilisés récemment enregistrés comme Favoris',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Utilisés récemment',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Favoris',
+
+    'LBL_DASHBOARD_CONFIG' => 'Dashboard Configuration',
+    'LBL_LIST_VIEW__NAME' => 'Vue Liste',
+    'LBL_PIPELINE_VIEW_NAME' => 'Vue en mosaïque',
+    'LBL_PIPELINE_VIEW_BTN' => 'Vue en mosaïque',
+    'LBL_PIPELINE_VIEW_TAB_NAME' => '{{module}} par {{fieldName}}',
+    'LBL_VISUAL_PIPELINE_DISABLED' => 'La vue en mosaïque n&#39;est pas activée',
+    'LBL_VISUAL_PIPELINE_MOVE_FAILED' => '{{recordName}} could not be moved to {{columnLabel}} because of the following fields: ',
 
     'LBL_DASHLET_NO_RECORDS' => 'Aucun enregistrements trouvé à ce jour.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Indicateurs sur les tickets',
@@ -3758,37 +3870,13 @@ Cordialement, SugarCRM',
     'LBL_DASHLET_USEFULNESS_NAME' => 'Utilité des articles',
     'LBL_DASHLET_USEFULNESS_DESC' => 'Displays a chart showing how useful the knowledge base article is',
 
-    // MySugar Menu Options
     'LBL_ADD_PAGE' => 'Ajouter un onglet',
-    'LBL_DELETE_PAGE' => 'Supprimer l&#39;onglet',
-    'LBL_CHANGE_LAYOUT' => 'Changer le nombre de colonnes',
-    'LBL_RENAME_PAGE' => 'Renommer l&#39;onglet',
-
     'LBL_LOADING_PAGE' => 'Chargement en cours, veuillez patienter...',
-
-    'LBL_RELOAD_PAGE' => 'Merci de <a href="javascript : window.location.reload()">réactualiser la fenêtre</a> pour utiliser ce Dashlet.',
-    'LBL_ADD_DASHLETS' => 'Ajouter un Dashlet',
-    'LBL_CLOSE_DASHLETS' => 'Fermer',
-    'LBL_OPTIONS' => 'Options',
-    'LBL_NUMBER_OF_COLUMNS' => 'Nombre de colonnes',
-    'LBL_1_COLUMN' => '1 colonne',
-    'LBL_2_COLUMN' => '2 colonnes',
-    'LBL_3_COLUMN' => '3 colonnes',
-    'LBL_PAGE_NAME' => 'Nom de l&#39;onglet',
-
     'LBL_SEARCH_RESULTS' => 'Résultats de recherche',
-    'TPL_SEARCH_RESULTS_FOR' => 'Résultats de la recherche pour : {{searchTerm}}',
     'LBL_SEARCH_RESULTS_FOR' => 'Résultats de la recherche pour : ',
-    'LBL_SEARCH_MODULES' => 'Modules',
-    'LBL_SEARCH_CHARTS' => 'Graphique',
-    'LBL_SEARCH_REPORT_CHARTS' => 'Graphique de rapport',
-    'LBL_SEARCH_TOOLS' => 'Outils',
     'LBL_SEARCH_HELP_TITLE' => 'Conseils de recherche',
-    'LBL_SEARCH_HELP_CLOSE_TOOLTIP' => 'Fermer',
     'LBL_SEARCH_RESULTS_FOUND' => 'Résultats trouvés',
     'LBL_SEARCH_RESULTS_TIME' => 'mme.',
-    'ERR_BLANK_PAGE_NAME' => 'Veuillez entrer un nom de page.',
-    /* End MySugar Framework strings */
 
     /* Sales Pipeline Dashlet */
     'LBL_DASHLET_MY_PIPELINE' => 'Mon Portefeuille',
@@ -3942,6 +4030,8 @@ Cordialement, SugarCRM',
     //MB -Fixed Bug #32812 -Max
     'LBL_ASSIGNED_TO_NAME' => 'Assigné à',
     'LBL_DESCRIPTION' => 'Description',
+    'LBL_PRIMARY_CONTACT_NAME' => 'Contact principal',
+    'LBL_PRIMARY_CONTACT_ID' => 'ID du contact principal',
 
   'LBL_NONE' => '-aucun-',
   'LBL_YESTERDAY'=> 'hier',
@@ -4332,6 +4422,8 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     // start of: Quotes related
     'LBL_QLI_SINGLE_TITLE' => 'Ligne de devis',
     'LBL_DISCOUNT_TOTAL' => 'Total Remise',
+    'LBL_DISCOUNT_PERCENT' => '% Pourcentage',
+    'LBL_DISCOUNT_SELECT' => 'Détermine si la remise est un pourcentage ou un montant forfaitaire',
     'LBL_TAX' => 'Taxes',
     'LBL_SHIPPING' => 'Frais de livraison',
     'LBL_GRAND_TOTAL' => 'Total général',
@@ -4378,6 +4470,7 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     'LBL_NO_ACCESS' => '(Aucun accès)',
     'LBL_NO_ACCESS_LOWER' => 'L&#39;utilisateur n&#39;a pas accès à l&#39;enregistrement',
     'LBL_NO_FIELD_ACCESS' => 'Pas d&#39;accès',
+    'LBL_NO_LICENSE_ACCESS' => 'Licence obligatoire',
     'LBL_VALUE_ERASED' => 'Valeur effacée',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Ces informations ont été effacées par une demande de confidentialité de données',
     'LBL_CREATE_RELATED_RECORD' => 'Créer enregistrement relatif',
@@ -4547,6 +4640,15 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     'LBL_MOBILE_ACTIVITYSTREAM_POST_PLACEHOLDER' => 'Tapez @ pour parler d&#39;un utilisateur. Tapez # pour faire référence à un enregistrement.',
     'LBL_MOBILE_NEW_COMMENT' => 'Nouveau commentaire',
     'LBL_RECENTLY_VIEWED' => 'Dernières consultations',
+    'LBL_FILE_STORED_LOCALLY' => 'Le fichier est stocké sur le stockage local et sera synchronisé une fois l&#39;appareil en ligne.',
+    'LBL_IDM_USER_PROFILE_READONLY' => 'Si vous souhaitez modifier certains champs qui ne sont pas modifiables, veuillez contacter l&#39;administrateur pour l&#39;en informer.',
+    'LBL_ACTIVITY_POST' => '{{{value}}}sur {{{link}}}',
+    'LBL_COMMENTLOG_EMPTY' => 'Aucun commentaire',
+    'LBL_COMMENTLOG_EXPANDBUTTON_EXPAND' => 'Afficher les prochains commentaires {{{commentsLeft}}}',
+    'LBL_COMMENTLOG_EXPANDBUTTON_COLLAPSE' => 'Rétracter',
+    'LBL_COMMENTLOG_CONFIRM_CREATE' => 'Confirmer la création d&#39;un commentaire',
+    'LBL_COMMENTLOG_ERROR_IS_EMPTY' => 'Le journal des commentaires ne peut pas être vide',
+    'LBL_MOBILE_PDF_DOWNLOAD' => 'Télécharger le PDF {{{pdfTemplateName}}}',
 
     'ERR_SYNC_FAILED' => 'Impossible de synchroniser avec le serveur.',
     'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'L&#39;identification SSO est indisponible. Veuillez vous assurer que cette instance est une version Sugar 7.5 ou supérieure et configurée pour le SSO.',
@@ -4757,6 +4859,11 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     'LBL_VO_RIGHT_MENU_BTN' => 'Bouton de menu de droite',
     'LBL_VO_ADD_BTN' => 'Ajouter un bouton',
 
+    // Cookie consent
+    'LBL_WIZ_USER_COOKIE_CONSENT' => 'Cette application utilise des cookies',
+    'LBL_USER_CLICK_FOR_COOKIE_CONSENT' => 'Cochez pour accepter (Obligatoire)',
+    'LBL_USER_COOKIE_CONSENT_TEXT' => 'Cette application utilise des cookies pour vous offrir une meilleure expérience. En continuant, vous consentez à l&#39;utilisation de cookies conformément à notre politique de confidentialité <a href="{{href}}" target="_blank">politique de confidentialité</a>.',
+
     //begin portal
 
     //portal record tutorial
@@ -4766,20 +4873,36 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     'LBL_PORTAL_TOUR_RECORD_VIEW_NOTE' => 'Cliquez sur cet icône pour voir le détail des notes attachés',
 
     //for portal
-
+    'LBL_PORTAL_HOME' => 'Tableau de bord d&#39;accueil',
+    'LBL_PORTAL_DASHBOARD_ALL_OPEN_CASES' => 'Tous les tickets ouverts',
+    'LBL_PORTAL_DASHBOARD_RECENT_CASES' => 'Tickets résolus récemment',
     'LBL_PORTAL_SEARCH' => 'Recherche par nom, numéro',
     'LBL_SIGNUP_BUTTON_LABEL' => 'Enregistrement',
+    'LBL_PORTAL_NO_EMAIL' => 'Vous n&#39;avez pas reçu d&#39;email ?',
+    'LBL_PORTAL_FORGOT_PASSWORD' => 'Mot de passe oublié',
+    'LBL_PORTAL_FORGOT_USERNAME' => 'Nom d&#39;utilisateur oublié',
+    'LBL_PORTAL_ENTER_PASSWORD_TWICE' => 'Saisissez deux fois votre mot de passe. Les mots de passe doivent correspondre.',
+    'LBL_PORTAL_RESET_PASSWORD' => 'Réinitialiser le Mot de passe',
+    'LBL_PORTAL_REENTER_PASSWORD' => 'Confirmez le mot de passe',
+    'LBL_PORTAL_PASSWORD_MISMATCH' => 'Les mots de passe ne correspondent pas, veuillez les saisir à nouveau',
+    'LBL_PORTAL_PASSWORD_RESET_SUCCESS' => 'Votre mot de passe a été réinitialisé.',
+    'LBL_PORTAL_PASSWORD_RESET_ERR_GENERAL' => 'Une erreur est survenue. Veuillez faire une nouvelle demande de réinitialisation de mot de passe.',
     'LBL_PORTAL_SIGNUP_PROCESS' => 'Enregistrement en cours',
-    'LBL_PORTAL_SIGNUP_TITLE' => 'Merci pour votre enregistrement !',
-    'LBL_PORTAL_SIGNUP' => 'Un chargé de clientèle prendra contact avec vous rapidement pour configurer votre compte.',
+    'LBL_PORTAL_SIGNUP_TITLE' => 'Merci pour votre enregistrement',
+    'LBL_PORTAL_SIGNUP' => 'Nous vous informerons dès que nous aurons confirmé vos données.',
     'LBL_PORTAL_SIGNUP_FIRST_NAME' => 'Prénom',
     'LBL_PORTAL_SIGNUP_LAST_NAME' => 'Nom',
-    'LBL_PORTAL_SIGNUP_EMAIL' => 'Composer un email',
+    'LBL_PORTAL_SIGNUP_USER_NAME' => 'Nom utilisateur',
+    'LBL_PORTAL_SIGNUP_EMAIL' => 'Adresse e-mail',
     'LBL_PORTAL_SIGNUP_PHONE' => '## ## ## ## ## (optionnel)',
     'LBL_PORTAL_SIGNUP_COUNTRY' => 'Pays',
     'LBL_PORTAL_SIGNUP_STATE' => 'Région',
-    'LBL_PORTAL_SIGNUP_COMPANY' => 'Société',
+    'LBL_PORTAL_SIGNUP_COMPANY_NAME' => 'Nom de la Société',
     'LBL_PORTAL_SIGNUP_JOBTITLE' => 'Fonction (optionnel)',
+    'LBL_PORTAL_SIGNUP_PASSWORD' => 'Mot de Passe',
+    'LBL_PORTAL_SIGNUP_PASSWORD1' => 'Confirmer le mot de passe',
+    'LBL_PORTAL_SIGNUP_FORGOT_LOGIN' => 'Identifiant oublié',
+
     'LNK_PORTAL_LOGIN_FORGOTPASSWORD' => 'Mot de passe oublié ?',
     'LBL_PORTAL_LOGIN_FORGOTPASSWORD' => 'Veuillez contacter votre administrateur Sugar pour réinitialiser votre mot de passe.',
     'LBL_PORTAL_LOGIN_USERNAME' => 'Nom d&#39;utilisateur',
@@ -4789,9 +4912,14 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     'LBL_PORTAL_PAGE_NOT_AVAIL' => 'Page inaccessible',
     'LBL_PORTAL_NOT_ENABLED_MSG' => "Nous sommes mais cette fonctionnalité n'est pas disponible pour le moment.",
     'LBL_PORTAL_SEARCH_RESULTS_TITLE' => 'Afficher les résultats de recherche pour "{query}"',
+    'LBL_PORTAL_DIDNT_GET_EMAIL' => 'Vous n&#39;avez pas reçu d&#39;email ?',
+    'LBL_PORTAL_CONTACT_INFO_CONTACT_US' => 'Pour obtenir de l&#39;aide ou nous contacter, veuillez utiliser l&#39;un des moyens suivants : ',
+    'LBL_PORTAL_CONTACT_INFO_PHONE' => 'Téléphone: ',
+    'LBL_PORTAL_CONTACT_INFO_EMAIL' => 'Email: ',
+    'LBL_PORTAL_CONTACT_INFO_WEB' => 'Web: ',
 
     //for portal errors
-    'LBL_PORTAL_INVALID_CREDS' => 'Le couple identifiant/mot de passe est incorrect, veuillez essayer de nouveau.',
+    'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Votre connexion n&#39;a pas réussi. Veuillez réessayer.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'Identifiants invalides.',
     'LBL_PORTAL_INVALID_GRANT' => 'Votre token est invalide ou il a expiré. Veuillez essayer de nouveau.',
     'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Le token a expiré',
@@ -4814,7 +4942,27 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     'LBL_PORTAL_ROUTE_ERROR'=>'Erreur lors du chargement du module. Veuillez essayer de nouveau ou contacter le support technique.',
     'LBL_PORTAL_OFFLINE' =>'L&#39;application est temporairement indisponible. Veuillez contacter l&#39;administrateur du site.',
     'LBL_CONTACT_EDIT_PASSWORD_LNK_TEXT' => 'Changer le mot de passe',
+    'LBL_PORTAL_SIGNUP_USER_NAME_ERROR' => 'Le nom d&#39;utilisateur est déjà enregistré dans le système. Demandez un mot de passe oublié ou sélectionnez un autre nom d&#39;utilisateur.',
+    'LBL_PORTAL_SIGNUP_EMAIL_ERROR' => 'L&#39;email fourni n&#39;est pas valide.',
+    'LBL_PORTAL_SIGNUP_PASSWORD_ERROR' => 'Les mots de passes ne correspondent pas.',
     //end portal
+
+    // Final name given by marketing is Service Console
+    // Original name for this feature was Agent Workbench and was used
+    // throughout the development of this product.
+    'LBL_AGENT_WORKBENCH' => 'Service Console',
+    'LBL_AGENT_WORKBENCH_OVERVIEW' => 'Informations Workbench',
+    'LBL_CASE_OVERDUE' => 'Overdue',
+    'LBL_CASE_DUE_SOON' => 'Due soon',
+    'LBL_CASE_DUE_LATER' => 'Due later',
+
+    // Renewals Console
+    'LBL_RENEWALS_CONSOLE' => 'Console de renouvellement',
+    'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'Aperçu',
+    'LBL_RENEWALS_CONSOLE_STAGE_STATUS' => 'Étape/Statut',
+    'LBL_RENEWALS_CONSOLE_NAME_ACCOUNT' => 'Nom/Nom du compte',
+    'LBL_RENEWALS_CONSOLE_AMOUNT' => 'Worst | Likely | Best',
+
 
     //First time login wizard
     'LBL_WIZ_USER_PROFILE_TITLE' => 'Informations en tant qu&#39;employé',
@@ -4859,10 +5007,23 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     'ERR_PASSWORD_MISMATCH' => 'Le mot de passe ne correspond pas avec celui du système.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Impossible d&#39;envoyer le mot de passe',
     'LBL_REQUEST_PASSWORD' => 'Demande de mot de passe',
+    'LBL_RESET_PASSWORD' => 'Réinitialiser le Mot de passe',
+    'LBL_RESET_PASSWORD_MESSAGE' => 'Saisissez votre nom d&#39;utilisateur et nous vous enverrons un lien pour réinitialiser votre mot de passe.',
+    'LBL_RESET_PASSWORD_CONFIRMATION_MESSAGE' => 'Vérifiez votre messagerie <br><br> Nous avons envoyé des instructions de réinitialisation de mot de passe à l&#39;adresse e-mail
+        que nous avons dans nos dossiers.',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Erreur : Un problème est survenu lors de la mise à jour du mot de passe de cet utilisateur.',
     'LBL_INCORRECT_PASSWORD' => 'Erreur : Mot de passe incorrect',
+    'LBL_PASSWORD_ENFORCE_TITLE' => 'Le mot de passe que vous avez entré ne satisfaisait pas aux exigences de sécurité. Veuillez en saisir un nouveau.',
+    'LBL_PASSWORD_MIN_LENGTH' => 'La longueur minimale est {0}.',
+    'LBL_PASSWORD_MAX_LENGTH' => 'La longueur maximale est {0}.',
+    'LBL_PASSWORD_ONE_UPPERCASE' => 'Doit contenir une lettre en Majuscule (A-Z).',
+    'LBL_PASSWORD_ONE_LOWERCASE' => 'Doit contenir une lettre en Minuscule (a-z).',
+    'LBL_PASSWORD_ONE_NUMBER' => 'Doit contenir un chiffre (0-9).',
+    'LBL_PASSWORD_ONE_SPECIAL_CHAR' => 'Doit contenir un caractère spécial (~!@#$%^&*()_+-={}|).',
+    'LBL_PASSWORD_REGEX_REQUIREMENT' => 'Le mot de passe ne doit pas correspondre au modèle d&#39;expression régulière : {0}.',
 
     'LBL_PREFERRED_LANGUAGE' => 'Préférence de langue :',
+    'LBL_PASSWORD_RESET_EMAIL_FAIL' => 'Impossible d&#39;envoyer un e-mail de réinitialisation de mot de passe.',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Sélectionner un rapport',
@@ -5004,6 +5165,25 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'Mes Tâches',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Tâches de l&#39;équipe',
 
+    'LBL_RECENTLY_VIEWED_CASES_DASHLET' => 'Mes tickets consultés récemment',
+
+    'LBL_REPORT_DASHLET_TITLE_12' => 'Tickets ouverts par utilisateur par statut',
+    'LBL_REPORT_DASHLET_TITLE_125' => 'Nouveaux tickets par centre d&#39;affaires par semaine',
+    'LBL_REPORT_DASHLET_TITLE_126' => 'Tickets créés récemment',
+    'LBL_REPORT_DASHLET_TITLE_127' => 'Nouveaux tickets par niveau de client par semaine',
+    'LBL_REPORT_DASHLET_TITLE_128' => 'Tickets ouverts par niveau de client et priorité',
+    'LBL_REPORT_DASHLET_TITLE_129' => 'Nombre total de tickets résolus ce mois-ci par centre d&#39;affaires',
+    'LBL_REPORT_DASHLET_TITLE_130' => 'Nombre total de tickets résolus ce mois-ci par agent',
+    'LBL_REPORT_DASHLET_TITLE_131' => 'Liste des tickets résolus récemment',
+    'LBL_REPORT_DASHLET_TITLE_132' => 'Mes tickets résolus ce mois-ci par semaine',
+    'LBL_REPORT_DASHLET_TITLE_133' => 'Mes tickets dus aujourd&#39;hui et en retard',
+    'LBL_REPORT_DASHLET_TITLE_134' => 'Tous les tickets dus aujourd&#39;hui et en retard',
+    'LBL_REPORT_DASHLET_TITLE_135' => 'Mes tickets ouverts par date de suivi',
+    'LBL_REPORT_DASHLET_TITLE_136' => 'Tous les tickets ouverts par date de suivi',
+    'LBL_REPORT_DASHLET_TITLE_137' => 'Mes tickets ouverts par statut',
+    'LBL_REPORT_DASHLET_TITLE_138' => 'Mes tickets de la semaine dernière par statut',
+    'LBL_REPORT_DASHLET_TITLE_139' => 'Statut des tâches ouvertes que j&#39;ai assignées',
+
     //Audit subjects
     'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'IU de BWC',
@@ -5134,6 +5314,8 @@ Remarques : Les noms des champs en base de données peuvent aussi être utilisé
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Actualiser la liste',
+    // Refresh button on tile views
+    'LBL_TILE_REFRESH' => 'Rafraîchir la mosaïque',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'plus',
@@ -5413,6 +5595,12 @@ Pour créer un nouvel enregistrement en utilisant les valeurs que vous venez d&#
     'LBL_LOCKED_FIELD_RECORD_VIEW_WARNING' => 'Cet enregistrement participe à un processus et peut contenir des champs verrouillés.',
     // @codingStandardsIgnoreEnd
 
+    'LBL_BUSINESS_CENTER' => 'Centre d&#39;affaires',
+    'LBL_BUSINESS_CENTER_ID' => 'Centre d&#39;affaires (ID)',
+    'LBL_BUSINESS_CENTER_NAME' => 'Nom du centre d&#39;affaires',
+
+    'LBL_PLIS_ACTIVITIES' => 'Purchased Line Items Activities',
+
     //Tag Strings
     'LBL_TAG_NEW_TAG' => '(Nouveau Tag)',
     'LBL_TAG_FETCH_ERROR' => 'Une erreur est survenu lors de la récupération des tags.',
@@ -5450,14 +5638,47 @@ Pour créer un nouvel enregistrement en utilisant les valeurs que vous venez d&#
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Marquer à effacer',
     'TPL_DATAPRIVACY_PII_TITLE' => 'Données personnelles pour {{{name}}}',
 
+    'LBL_CHANGETIMERS_SUBPANEL_TITLE' => 'Modifier les minuteries',
+
     'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Copié à votre presse-papier !',
     'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Impossible de copier à votre presse-papier',
 
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Copier le lien de confirmation',
 
+    // Activity Timeline Dashlet
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Interactions',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} Interactions',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+        'Meetings and Notes related to a record.',
+
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'Afficher plus...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Afficher moins...',
+    'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Aucune donnée disponible',
+
+    // Active Subscriptions Dashlet
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Abonnements actifs',
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => 'Abonnements actifs pour un compte spécifique.',
+    'LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY' => ', quantité {{quantity}}',
+    'LBL_ACTIVE_SUBSCRIPTIONS_TOTAL' => 'Total :',
+    'LBL_NO_ACTIVE_SUBSCRIPTIONS' => 'Aucun abonnement actif',
+    'LBL_REQUIRE_REVENUE_LINE_ITEMS' => 'Ce dashlet nécessite {{module_name}} pour fonctionner. Demandez à votre administrateur d&#39;activer {{module_name}}.',
+
+    // Customer Service
+    'LBL_EDIT_IN_STUDIO' => 'Utilisez Studio pour modifier la mise en page de dashlet d&#39;enregistrement en allant sur ' .
+        'Studio > {{module}} > Mises en page > Dashlet de vue d&#39;enregistrement. <a href={{linkToStudio}}>Modifier dans Studio</a>.',
+    'LBL_SERVICE_LEVEL' => 'Niveau de service',
+    // Agent Workbench
+    'LBL_AGENT_WORKBENCH_NUMBER' => 'Numéro',
+    'LBL_AGENT_WORKBENCH_FOLLOW_UP' => 'Suivi',
+    'LBL_AGENT_WORKBENCH_PRIORITY_STATUS' => 'Priorité/Statut',
+    'LBL_AGENT_WORKBENCH_SUBJECT_DESCRIPTION' => 'Objet/Description',
+
+//Service Duration
+    'LBL_SERVICE_DURATION' => 'Durée du service',
+    'LBL_SERVICE_DURATION_VALUE' => 'Valeur de la durée du service',
+    'LBL_SERVICE_DURATION_UNIT' => 'Valeur de la durée du service',
+
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6454,7 +6675,7 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Fichier incorporé';
     'ISK' => 'kr',
     'INR' => '₨',
     'IDR' => 'Rp',
-    'IRR' => '﷼',
+    'IRR' => '77e8',
     'IMP' => '£',
     'ILS' => '₪',
     'JMD' => 'J$',
@@ -6483,18 +6704,18 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Fichier incorporé';
     'NIO' => 'C$',
     'NGN' => '₦',
     'NOK' => 'kr',
-    'OMR' => '﷼',
+    'OMR' => '77e8',
     'PKR' => '₨',
     'PAB' => 'B/.',
     'PYG' => 'Gs',
     'PEN' => 'S/.',
     'PHP' => '₱',
     'PLN' => 'zł',
-    'QAR' => '﷼',
+    'QAR' => '77e8',
     'RON' => 'lei',
     'RUB' => 'руб',
     'SHP' => '£',
-    'SAR' => '﷼',
+    'SAR' => '77e8',
     'RSD' => 'Дин.',
     'SCR' => '₨',
     'SGD' => '$',
@@ -6516,7 +6737,7 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Fichier incorporé';
     'UZS' => 'лв',
     'VEF' => 'Bs',
     'VND' => '₫',
-    'YER' => '﷼',
+    'YER' => '77e8',
     'ZWD' => 'Z$',
     );
 

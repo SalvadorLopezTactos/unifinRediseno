@@ -65,6 +65,12 @@ $mod_strings = array (
   'LBL_DOMAIN'=>'Bu Alana E-Posta yok',
   'LBL_LIST_PROSPECTLIST_NAME'=>'İsim',
 	'LBL_MORE_DETAIL' => 'Daha Fazla Detay' /*for 508 compliance fix*/,
+    'LBL_ACCOUNTS' => 'Hesaplar',
+    'LBL_CAMPAIGNS' => 'Kampanyalar',
+    'LBL_CONTACTS' => 'Kontaklar',
+    'LBL_LEADS' => 'Potansiyeller',
+    'LBL_PROSPECTS' => 'Hedefler',
+    'LBL_USERS' => 'Kullanıcılar',
 
     // Help Text
     // List View Help Text

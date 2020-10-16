@@ -499,12 +499,6 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
 
     				$searchForm->setup(array ($name => array()) ,$unifiedSearchFields , '' , 'saved_views' /* hack to avoid setup doing further unwanted processing */ ) ;
     				$where_clauses = $searchForm->generateSearchWhere() ;
-    				require_once 'include/SearchForm/SearchForm2.php' ;
-    				$searchForm = new SearchForm ($seed, $name ) ;
-
-    				$searchForm->setup(array ($name => array()) ,$unifiedSearchFields , '' , 'saved_views' /* hack to avoid setup doing further unwanted processing */ ) ;
-    				$where_clauses = $searchForm->generateSearchWhere() ;
-    				$emailQuery = false;
 
     				$where = '';
     				if (count($where_clauses) > 0 ) {
@@ -563,21 +557,45 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
     				$main_query = $ret_array['select'] . $params['custom_select'] . $ret_array['from'] . $params['custom_from'] . $ret_array['where'] . $params['custom_where'] . $ret_array['order_by'] . $params['custom_order_by'];
     			} else {
     				if ($beanName == "User") {
-    					$filterFields = array('id', 'user_name', 'first_name', 'last_name', 'email_address');
+                        $filterFields = ['id', 'user_name', 'first_name', 'last_name', 'email_address'];
                         $filterFields = self::$helperObject->checkFieldAccess($filterFields, $seed);
-    					$main_query = "select users.id, ea.email_address, users.user_name, first_name, last_name from users ";
-    					$main_query = $main_query . " LEFT JOIN email_addr_bean_rel eabl ON eabl.bean_module = '{$seed->module_dir}'
-    LEFT JOIN email_addresses ea ON (ea.id = eabl.email_address_id) ";
-    					$main_query = $main_query . "where ((users.first_name like '{$search_string}') or (users.last_name like '{$search_string}') or (users.user_name like '{$search_string}') or (ea.email_address like '{$search_string}')) and users.deleted = 0 and users.is_group = 0 and users.employee_status = 'Active'";
+                        $main_query = <<<SQL
+SELECT users.id, ea.email_address, users.user_name, first_name, last_name
+FROM users
+LEFT JOIN email_addr_bean_rel eabl ON eabl.bean_module = %s
+LEFT JOIN email_addresses ea ON (ea.id = eabl.email_address_id)
+WHERE (
+  (users.first_name LIKE %s) 
+  OR (users.last_name LIKE %s) 
+  OR (users.user_name LIKE %s) 
+  OR (ea.email_address LIKE %s)
+) AND users.deleted = 0 AND users.is_group = 0 AND users.employee_status = 'Active'
+SQL;
+                        $main_query = sprintf(
+                            $main_query,
+                            $seed->db->quoted($seed->module_dir),
+                            $seed->db->quoted($search_string),
+                            $seed->db->quoted($search_string),
+                            $seed->db->quoted($search_string),
+                            $seed->db->quoted($search_string)
+                        );
     				} // if
     				if ($beanName == "ProjectTask") {
-    					$filterFields = array('id', 'name', 'project_id', 'project_name');
+                        $filterFields = ['id', 'name', 'project_id', 'project_name'];
                         $filterFields = self::$helperObject->checkFieldAccess($filterFields, $seed);
-    					$main_query = "select {$seed->table_name}.project_task_id id,{$seed->table_name}.project_id, {$seed->table_name}.name, project.name project_name from {$seed->table_name} ";
-    					$seed->add_team_security_where_clause($main_query);
-    					$main_query .= "LEFT JOIN teams ON $seed->table_name.team_id=teams.id AND (teams.deleted=0) ";
-    		            $main_query .= "LEFT JOIN project ON $seed->table_name.project_id = project.id ";
-    		            $main_query .= "where {$seed->table_name}.name like '{$search_string}%'";
+                        $table = $seed->table_name;
+                        $main_query = <<<SQL
+SELECT {$table}.project_task_id id, {$table}.project_id, {$table}.name, project.name project_name 
+FROM {$table}
+SQL;
+                        $seed->add_team_security_where_clause($main_query);
+
+                        $main_query .= <<<SQL
+LEFT JOIN teams ON {$table}.team_id=teams.id AND teams.deleted = 0
+LEFT JOIN project ON {$table}.project_id = project.id
+WHERE {$table}.name LIKE %s
+SQL;
+                        $main_query = sprintf($main_query, $seed->db->quoted($search_string . '%'));
     				} // if
     			} // else
 

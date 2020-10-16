@@ -14,6 +14,9 @@
  //		Function: name of the function to be called in TreeData.php, the function will be called statically.
  //		PARAM prefixed properties: array of these property/values will be passed to the function as parameter.
 
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\File;
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
+
 require_once('include/JSON.php');
 require_once('include/upload_file.php');
 
@@ -23,11 +26,22 @@ $file_name = $json->decode(html_entity_decode($_REQUEST['file_name']));
 	$file_name = $file_name['jsonObject'];
   }
 
-$filesize = '';
-if(file_exists($file_name)){
-    $filesize =filesize($file_name);
+$constraint = new File([
+    'baseDirs' => [
+        UploadStream::getDir(),
+    ],
+]);
+
+$violations = Validator::getService()->validate($file_name, $constraint);
+
+if (count($violations) > 0) {
+    sugar_die($violations);
 }
 
+$filesize = '';
+if(file_exists($file_name)){
+    $filesize = filesize($file_name);
+}
 
 $response = '';
 

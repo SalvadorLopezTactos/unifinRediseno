@@ -349,44 +349,6 @@
         </td>
     </tr>
     <tr>
-    <tr>
-        {if !empty($settings.captcha_on) || !($VALID_PUBLIC_KEY)}
-            {assign var='captcha_checked' value='CHECKED'}
-        {else}
-            {assign var='captcha_checked' value=''}
-        {/if}
-        <td width="25%" scope="row">{$MOD.ENABLE_CAPTCHA}
-            :&nbsp{sugar_help text=$MOD.LBL_CAPTCHA_HELP_TEXT WIDTH=400}</td>
-        <td scope="row" width="75%"><input type='hidden' name='captcha_on' value='0'><input name="captcha_on"
-                                                                                            id="captcha_id" value="1"
-                                                                                            class="checkbox"
-                                                                                            tabindex='1' type="checkbox" {$captcha_checked}
-                                                                                            onclick='toggleDisplay("captcha_config_display");'>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="4" id="captcha_config_display" width="100%" scope="row" style="display:{$CAPTCHA_CONFIG_DISPLAY}">
-            <table width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td width="10%" scope="row">{$MOD.LBL_PUBLIC_KEY}<span class="required">*</span></td>
-                    <td width="40%"><input type="text" name="captcha_public_key" id="captcha_public_key" size="45"
-                                           value="{$settings.captcha_public_key}" tabindex='1'
-                                           onblur="this.value=this.value.replace(/^\s+/,'').replace(/\s+$/,'')">
-                    </td>
-                    <td width="10%" scope="row">{$MOD.LBL_PRIVATE_KEY}<span class="required">*</span></td>
-                    <td width="40%"><input type="text" name="captcha_private_key" size="45"
-                                           value="{$settings.captcha_private_key}" tabindex='1'
-                                           onblur="this.value=this.value.replace(/^\s+/,'').replace(/\s+$/,'')">
-                    </td>
-                </tr>
-                {if !($VALID_PUBLIC_KEY)}
-                    <tr>
-                        <td scope="row"><span class='error'>{$MOD.ERR_PUBLIC_CAPTCHA_KEY}</span></td>
-                    </tr>
-                {/if}
-            </table>
-        </td>
-    </tr>
     {if !empty($settings.honeypot_on)}
         {assign var='honeypot_checked' value='CHECKED'}
     {else}
@@ -614,6 +576,18 @@
                     <td colspan='4'>
                         <table cellspacing='0' cellpadding='1' id='ldap_display' style='display:{$ldap_display}'
                                width='100%'>
+                            <tr>
+                                <td width='25%' scope="row" valign='top'
+                                    nowrap>{$MOD.LBL_LDAP_ENCRYPTION_TYPE} {sugar_help text=$MOD.LBL_LDAP_ENCRYPTION_TYPE_DESC}
+                                </td>
+                                <td width='25%' align="left" valign='top'>
+                                    <select tabindex='2' id="ldap_encryption" name="ldap_encryption">
+                                        {$LDAP_ENCRYPTION_TYPE_OPTIONS}
+                                    </select>
+                                </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
                             <tr>
                                 <td width='25%' scope="row" valign='top'
                                     nowrap>{$MOD.LBL_LDAP_SERVER_HOSTNAME} {sugar_help text=$MOD.LBL_LDAP_SERVER_HOSTNAME_DESC}</td>{$settings.proxy_host}
@@ -987,16 +961,6 @@
 </form>
 {$JAVASCRIPT}
 
-
-{if !($VALID_PUBLIC_KEY)}
-    <script>
-        document.getElementById('captcha_public_key').focus();
-        document.getElementById('captcha_id').checked = true;
-        document.getElementById('forgotpassword_checkbox').checked = true;
-    </script>
-{/if}
-
-
 {literal}
 <script>
 function addcheck(form) {{/literal}
@@ -1182,14 +1146,10 @@ function forgot_password_enable(check) {
             forgot_password_input[i].disabled = '';
         for (j = 0; j < forgot_password_select.length; j++)
             forgot_password_select[j].disabled = '';
-        document.ConfigurePasswordSettings.captcha_on[1].disabled = '';
         document.ConfigurePasswordSettings.honeypot_on[1].disabled = '';
     } else {
-        document.ConfigurePasswordSettings.captcha_on[1].disabled = 'disabled';
-        document.ConfigurePasswordSettings.captcha_on[1].checked = '';
         document.ConfigurePasswordSettings.honeypot_on[1].disabled = 'disabled';
         document.ConfigurePasswordSettings.honeypot_on[1].checked = '';
-        document.getElementById("captcha_config_display").style.display = 'none';
         for (i = 0; i < forgot_password_input.length; i++)
             forgot_password_input[i].disabled = 'disabled';
         for (j = 0; j < forgot_password_select.length; j++)

@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Previzualizare',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'AVERTISMENT: Dacă schimbați modulul primar, toate câmpurile deja adăugat la șablon vor trebui să fie eliminate.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Aici este fișierul solicitat-(Aveți posibilitatea să modificați acest text)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Ofertă',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Acest șablon este utilizat pentru a imprima Oferta în PDF.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'ofertă',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Ofertă (cu servicii)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Acest șablon este utilizat pentru a imprima Oferta, inclusiv informațiile despre servicii, în PDF.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'servicequote',
+
   'LBL_TPL_INVOICE_NAME' => 'Factura',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Acest șablon este utilizat pentru a imprima factura în format PDF.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'factura',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Factură (cu servicii)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Acest șablon este utilizat pentru a imprima o Factură, inclusiv informațiile despre servicii, în PDF.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'serviceinvoice',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Număr ofertă:',
   'LBL_TPL_SALES_PERSON' => 'Agent de vânzări:',
   'LBL_TPL_VALID_UNTIL' => 'Valabil pana la:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Numar Piesa:',
   'LBL_TPL_PRODUCT' => 'Produs',
   'LBL_TPL_RLI' => 'Elemente venit',
+  'LBL_TPL_DURATION' => 'Durata',
+  'LBL_TPL_DURATION_STARTS' => 'Începe de la:',
+  'LBL_TPL_DURATION_ENDS' => 'Se finalizează la:',
   'LBL_TPL_LIST_PRICE' => 'Lista preturi:',
   'LBL_TPL_UNIT_PRICE' => 'Pret Unitate:',
   'LBL_TPL_EXT_PRICE' => 'Preţ ext.',

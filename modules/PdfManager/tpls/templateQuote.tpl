@@ -68,30 +68,69 @@
 <table style="width: 100%;" border="0">
 <tbody>
 <tr style="color: #ffffff;" bgcolor="#4B4B4B">
-<td width="70%">{$MOD.LBL_TPL_QUANTITY}</td>
-<td width="175%">{$MOD.LBL_TPL_PART_NUMBER}</td>
-<td width="175%">{$MOD.LBL_TPL_PRODUCT}</td>
-<td width="70%">{$MOD.LBL_TPL_LIST_PRICE}</td>
-<td width="70%">{$MOD.LBL_TPL_UNIT_PRICE}</td>
-<td width="70%">{$MOD.LBL_TPL_EXT_PRICE}</td>
-<td width="70%">{$MOD.LBL_TPL_DISCOUNT}</td>
+    {if $withServices}
+        <td width="60%">{$MOD.LBL_TPL_QUANTITY}</td>
+        <td width="150%">{$MOD.LBL_TPL_PART_NUMBER}</td>
+        <td width="150%">{$MOD.LBL_TPL_PRODUCT}</td>
+        <td width="120%">{$MOD.LBL_TPL_DURATION}</td>
+        <td width="80%">{$MOD.LBL_TPL_LIST_PRICE}</td>
+        <td width="80%">{$MOD.LBL_TPL_UNIT_PRICE}</td>
+        <td width="80%">{$MOD.LBL_TPL_EXT_PRICE}</td>
+        <td width="80%">{$MOD.LBL_TPL_DISCOUNT}</td>
+    {else}
+        <td width="70%">{$MOD.LBL_TPL_QUANTITY}</td>
+        <td width="175%">{$MOD.LBL_TPL_PART_NUMBER}</td>
+        <td width="175%">{$MOD.LBL_TPL_PRODUCT}</td>
+        <td width="70%">{$MOD.LBL_TPL_LIST_PRICE}</td>
+        <td width="70%">{$MOD.LBL_TPL_UNIT_PRICE}</td>
+        <td width="70%">{$MOD.LBL_TPL_EXT_PRICE}</td>
+        <td width="70%">{$MOD.LBL_TPL_DISCOUNT}</td>
+    {/if}
 </tr>
 <!--START_PRODUCT_LOOP-->
 <tr>
-<td width="70%">{literal}{if isset($product.quantity)}{$product.quantity}{/if}{/literal}</td>
-<td width="175%">{literal}{if isset($product.mft_part_num)}{$product.mft_part_num}{/if}{/literal}</td>
-<td width="175%">{literal}{if isset($product.name)}{$product.name}{/if}{if isset($product.list_price)}<br></br>{$product.description}{/if}{/literal}</td>
-<td align="right" width="70%">{literal}{if isset($product.list_price)}{$product.list_price}{/if}{/literal}</td>
-<td align="right" width="70%">{literal}{if isset($product.discount_price)}{$product.discount_price}{/if}{/literal}</td>
-<td align="right" width="70%">{literal}{if isset($product.ext_price)}{$product.ext_price}{/if}{/literal}</td>
-<td align="right" width="70%">{literal}
-    {if isset($product.discount_amount)}
-        {if !empty($product.discount_select)}
-            {sugar_number_format var=$product.discount_amount}%
-        {else}
-            {sugar_currency_format var=$product.discount_amount currency_id=$product.currency_id}
-        {/if}
-    {/if}{/literal}</td>
+    {if $withServices}
+        <td width="60%">{literal}{if isset($product.quantity)}{$product.quantity}{/if}{/literal}</td>
+        <td width="150%">{literal}{if isset($product.manufacturer_name)}{$product.manufacturer_name}{/if}
+                {if isset($product.mft_part_num)}<br></br>{$product.mft_part_num}{/if}{/literal}</td>
+        <td width="150%">{literal}{if isset($product.name)}{$product.name}{/if}{if isset($product.list_price)}<br></br>{$product.description}{/if}{/literal}</td>
+        <td width="120%">{literal}
+                {if !empty($product.service_duration_value) && !empty($product.service_duration_unit)}
+                        {$product.service_duration_value} {$product.service_duration_unit}
+                {/if}
+                {if !empty($product.service_start_date) && !empty($product.service_end_date)}
+                        <br></br>{/literal}{$MOD.LBL_TPL_DURATION_STARTS} {literal}{$product.service_start_date}
+                        <br></br>{/literal}{$MOD.LBL_TPL_DURATION_ENDS} {literal}{$product.service_end_date}
+                {/if}{/literal}
+        </td>
+        <td align="right" width="80%">{literal}{if isset($product.list_price)}{$product.list_price}{/if}{/literal}</td>
+        <td align="right" width="80%">{literal}{if isset($product.discount_price)}{$product.discount_price}{/if}{/literal}</td>
+        <td align="right" width="80%">{literal}{if isset($product.ext_price)}{$product.ext_price}{/if}{/literal}</td>
+        <td align="right" width="80%">{literal}
+                {if isset($product.discount_amount)}
+                {if !empty($product.discount_select)}
+                {sugar_number_format var=$product.discount_amount}%
+                {else}
+                {sugar_currency_format var=$product.discount_amount currency_id=$product.currency_id}
+                {/if}
+                {/if}{/literal}</td>
+    {else}
+        <td width="70%">{literal}{if isset($product.quantity)}{$product.quantity}{/if}{/literal}</td>
+        <td width="175%">{literal}{if isset($product.manufacturer_name)}{$product.manufacturer_name}{/if}
+                        {if isset($product.mft_part_num)}<br></br>{$product.mft_part_num}{/if}{/literal}</td>
+        <td width="175%">{literal}{if isset($product.name)}{$product.name}{/if}{if isset($product.list_price)}<br></br>{$product.description}{/if}{/literal}</td>
+        <td align="right" width="70%">{literal}{if isset($product.list_price)}{$product.list_price}{/if}{/literal}</td>
+        <td align="right" width="70%">{literal}{if isset($product.discount_price)}{$product.discount_price}{/if}{/literal}</td>
+        <td align="right" width="70%">{literal}{if isset($product.ext_price)}{$product.ext_price}{/if}{/literal}</td>
+        <td align="right" width="70%">{literal}
+                {if isset($product.discount_amount)}
+                {if !empty($product.discount_select)}
+                {sugar_number_format var=$product.discount_amount}%
+                {else}
+                {sugar_currency_format var=$product.discount_amount currency_id=$product.currency_id}
+                {/if}
+                {/if}{/literal}</td>
+    {/if}
 </tr>
 <!--END_PRODUCT_LOOP--></tbody>
 </table>

@@ -96,6 +96,7 @@ class LeadConvert
                 $this->lead->opportunity_name = $modules['Opportunities']->name;
             }
 
+            $this->copyDependentData($moduleDef);
             $this->setAssignedForModulesToLeads($moduleDef);
             $this->setRelationshipForModulesToLeads($moduleDef);
 
@@ -197,7 +198,7 @@ class LeadConvert
                     $this->modules,
                     $transferActivitiesModules
                 );
-                Activity::enable();
+                Activity::restoreToPreviousState();
             } elseif ($activitySetting === static::TRANSFERACTION_MOVE &&
                 $transferActivitiesAction === static::TRANSFERACTION_MOVE &&
                 !empty($this->contact)
@@ -224,6 +225,28 @@ class LeadConvert
         if (isset($this->modules['Accounts'])) {
             $this->modules[$moduleName]->account_id = $this->modules['Accounts']->id;
             $this->modules[$moduleName]->account_name = $this->modules['Accounts']->name;
+        }
+    }
+
+    /**
+     * Copy data from dependent modules as specified in convert settings.
+     *
+     * @param $moduleDef
+     */
+    protected function copyDependentData($moduleDef)
+    {
+        if (isset($this->modules[$moduleDef['module']]) && !empty($moduleDef['dependentModules'])) {
+            $toBean = $this->modules[$moduleDef['module']];
+            foreach ($moduleDef['dependentModules'] as $module => $dependency) {
+                if (isset($this->modules[$module]) && !empty($dependency['fieldMapping'])) {
+                    $fromBean = $this->modules[$module];
+                    foreach ($dependency['fieldMapping'] as $toField => $fromField) {
+                        if (empty($toBean->$toField) && isset($fromBean->$fromField)) {
+                            $toBean->$toField = $fromBean->$fromField;
+                        }
+                    }
+                }
+            }
         }
     }
 

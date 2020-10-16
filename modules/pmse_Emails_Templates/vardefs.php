@@ -265,6 +265,9 @@ $dictionary['pmse_Emails_Templates'] = array(
     'ignore_templates' => array(
         'lockable_fields',
     ),
+    'portal_visibility' => [
+        'class' => 'PMSE',
+    ],
     'uses' => array(
         'basic',
         'team_security',

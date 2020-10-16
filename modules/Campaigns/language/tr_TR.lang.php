@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Varsayılan tipte Hedef Liste bulunamadı',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Hiç kayıt bulunamadı',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Girişler İşlendi',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Takip Edici İsmi:',
   'LBL_EDIT_TRACKER_URL'=>'Takip Edici URL:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'Gelen E-posta hesabında optimum değerler kaydedilmedi.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Lütfen Gelen E-Posta ayarlarını gözden geçirin.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => 'Bu kampanya yoluyla oluşturulmuş {0} potansiyel, oluşturulduğu günden sonra silindi.',
+    'LBL_PROSPECT_LIST' => 'Aday Müşteri Listesi',
 );
 
 

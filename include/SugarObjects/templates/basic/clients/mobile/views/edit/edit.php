@@ -25,6 +25,7 @@ $viewdefs[$module_name]['mobile']['view']['edit'] = array(
             'label' => 'LBL_PANEL_DEFAULT',
             'fields' => array(
                 'name',
+                'tag',
                 'assigned_user_name',
                 'team_name',
             ),

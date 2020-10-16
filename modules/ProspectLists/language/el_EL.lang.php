@@ -65,6 +65,12 @@ $mod_strings = array (
   'LBL_DOMAIN'=>'Κανένα email στην Περιοχή',
   'LBL_LIST_PROSPECTLIST_NAME'=>'Όνομα',
 	'LBL_MORE_DETAIL' => 'Περισσότερες Λεπτομέρειες' /*for 508 compliance fix*/,
+    'LBL_ACCOUNTS' => 'Λογαριασμοί',
+    'LBL_CAMPAIGNS' => 'Καμπάνιες',
+    'LBL_CONTACTS' => 'Επαφές',
+    'LBL_LEADS' => 'Δυνητικοί Πελάτες',
+    'LBL_PROSPECTS' => 'Στόχοι',
+    'LBL_USERS' => 'Χρήστες',
 
     // Help Text
     // List View Help Text

@@ -105,4 +105,6 @@ $mod_strings = array(
     'LBL_OPERATOR_LAST_YEAR' => 'viime vuonna',
     'LBL_OPERATOR_THIS_YEAR' => 'tänä vuonna',
     'LBL_OPERATOR_NEXT_YEAR' => 'ensi vuonna',
+    'LBL_OPEN_ISSUES' => 'Avaa {0}',
+    'LBL_RECENTLY_RESOLVED_ISSUES' => 'Viimeksi ratkaistut',
 );

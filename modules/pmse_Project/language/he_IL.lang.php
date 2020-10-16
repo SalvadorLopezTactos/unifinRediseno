@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'מצב',
   'LBL_PRJ_MODULE' => 'מודול מטרה',
+  'LBL_PRJ_RUN_ORDER' => 'סדר הפעלה',
   'LBL_PMSE_BUTTON_SAVE' => 'שמירה',
   'LBL_PMSE_BUTTON_CANCEL' => 'בטל',
   'LBL_PMSE_BUTTON_YES' => 'כן',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'הגדרת התהליך יובאה, אך היא מכילה פעולת כלל עסקי אחת או יותר עבורה לא נבחרו כללים עסקיים.',
     'LBL_BPM_IMPORT_SELECT' => 'הגדרת תהליך זו מכילה את תבניות הדוא"ל ואת הכללים העסקיים הבאים. '
         . 'עליך לבחור את אלה שברצונך לייבא.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'כללים עסקיים',
     'LBL_EMAIL_TEMPLATES' => 'תבניות דוא"ל',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'מפקח',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'נוצר על ידי משתמש',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'שונה לאחרונה על ידי משתמש',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'דוא"ל מערכת',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'כלל עסקי',
     'LBL_PMSE_LABEL_RULE' => 'כלל',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'הקצה משתמש',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'עדכן "מוקצה ל-" ברשומה',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'הוסף רשומה מקושרת',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'מודול קשור',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'שם הפעילות ריק',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'השם "%s" כבר קיים במשפחת צורות',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'ימים',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'שעות',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'דקות',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'שעות עבודה',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'מרכז עסקים',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'ממודול מטרה',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'מאת ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' מודול',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'שרשרת, מספר ובולאני',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'מספר',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'ערך',

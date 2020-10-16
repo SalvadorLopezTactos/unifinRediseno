@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Atvejų sąrašo ataskaitų sritis',
     'LBL_CASES_RECORD_DASHBOARD' => 'Atvejų duomenų ataskaitų sritis',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Išsami atvejo informacija',
 
 	'ERR_DELETE_RECORD'					=> 'Privalote nurodyti įrašo numerį, kad būtų galima ištrinti klientą.',
 	'LBL_ACCOUNT_ID'					=> 'Kliento ID',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Kontaktai',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Aptarnavimai',
 	'LBL_DESCRIPTION'					=> 'Aprašymas:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Prisegtukas',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Prisegtukas',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Istorija',
 	'LBL_INVITEE'						=> 'Kontaktai',
 	'LBL_MEMBER_OF'						=> 'Klientas',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Sukurta',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Atsakingas',
     'LBL_EXPORT_TEAM_COUNT' => 'Komandos skaičius',
+    'LBL_CHANGETIMERS' => 'Keisti laikmačius',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Susijusio kontakto el. paštas',
@@ -140,4 +143,11 @@ To create a {{module_name}}:
  - Fields marked "Required" must be completed prior to saving.
  - Click "Show More" to expose additional fields if necessary.
 2. Click "Save" to finalize the new record and return to the previous page.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Neradote to, ko ieškojote?',
+    'LBL_CREATE_CASE' => 'Kurti {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'Išsami SLA informacija',
+    'LBL_HOURS' => 'Valandos',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Podgląd',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'UWAGA: Jeśli zmienisz moduł podstawowy, wszystkie pola dodane do szablonu będą musiały zostać usunięte.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Oto wyszukiwany plik (ten tekst można zmienić)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Oferta',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Ten szablon jest używany do wydrukowania oferty w formacie PDF.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'oferta',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Oferta (z usługami)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Ten szablon jest używany do wydrukowania oferty wraz z informacjami o usłudze w formacie PDF.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'oferta usługi',
+
   'LBL_TPL_INVOICE_NAME' => 'Faktura',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Ten szablon jest używany do wydrukowania faktury w formacie PDF.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'faktura',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Faktura (z usługami)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Ten szablon jest używany do drukowania faktury wraz z informacjami o usłudze w formacie PDF.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'faktura za usługi',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Numer oferty:',
   'LBL_TPL_SALES_PERSON' => 'Przedstawiciel handlowy:',
   'LBL_TPL_VALID_UNTIL' => 'Obowiązuje do:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Numer partii',
   'LBL_TPL_PRODUCT' => 'Pozycja oferty',
   'LBL_TPL_RLI' => 'Pozycje szansy',
+  'LBL_TPL_DURATION' => 'Czas trwania',
+  'LBL_TPL_DURATION_STARTS' => 'Początek:',
+  'LBL_TPL_DURATION_ENDS' => 'Koniec:',
   'LBL_TPL_LIST_PRICE' => 'Cena katalogowa',
   'LBL_TPL_UNIT_PRICE' => 'Cena jednostkowa',
   'LBL_TPL_EXT_PRICE' => 'Kwota zewnętrzna',

@@ -83,7 +83,10 @@ class TeamSetManager {
                     $prefStmt = $conn->executeQuery($query, array($tokens[1]));
 
                     while (($userPrefRow = $prefStmt->fetch())) {
-						$prefs = unserialize(base64_decode($userPrefRow['contents']));
+                        $prefs = unserialize(
+                            base64_decode($userPrefRow['contents']),
+                            ['allowed_classes' => false]
+                        );
 						$team_set_id = SugarArray::staticGet($prefs, implode('.', array_slice($tokens, 2)));
 						if(!empty($team_set_id)){
 							//this is the team set id that is being used in user preferences we have to be sure to not remove it.

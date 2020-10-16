@@ -31,6 +31,7 @@ $viewdefs[$module_name]['mobile']['view']['edit'] = array(
                 ),
                 'sales_stage',
                 'date_closed',
+                'tag',
                 'assigned_user_name',
 			    'team_name',
             ),

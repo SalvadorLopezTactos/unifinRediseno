@@ -66,6 +66,7 @@
              * @private
              */
             this.model._doValidateCurrentPassword = function(fields, errors, callback) {
+                var showPasswordAlert = false;
                 // Find the change my password field
                 var field = _.find(fields, function(field) {
                     return field.type === 'change-my-password';
@@ -78,21 +79,43 @@
                     return;
                 }
 
+                var fieldName = field.name;
                 //Get the current password
-                var current = this.get(field.name + '_current_password');
-                var password = this.get(field.name + '_new_password'),
-                    confirmation = this.get(field.name + '_confirm_password');
+                var current = this.get(fieldName + '_current_password');
+                var password = this.get(fieldName + '_new_password');
+                var confirmation = this.get(fieldName + '_confirm_password');
 
                 if (_.isEmpty(current) && _.isEmpty(password) && _.isEmpty(confirmation)) {
                     callback(null, fields, errors);
                     return;
                 }
                 //current is non-empty but we haven't put new/confirm passwords
-                if (!_.isEmpty(current) && _.isEmpty(password) && _.isEmpty(confirmation)) {
-                    errors[field.name] = errors[field.name] || {};
-                    errors[field.name]['new_password'] = true;
-                    callback(null, fields, errors);
-                    return;
+                if (!_.isEmpty(current)) {
+                    if (_.isEmpty(password) || _.isEmpty(confirmation) || password !== confirmation) {
+                        errors[fieldName] = errors[fieldName] || {};
+                        errors[fieldName].new_password = true;
+                        callback(null, fields, errors);
+                        return;
+                    } else {
+                        var data = app.utils.validatePassword(password);
+                        if (!data.isValid) {
+                            var errMsg = app.lang.get('LBL_PASSWORD_ENFORCE_TITLE');
+                            errors[fieldName] = errors[fieldName] || {};
+                            errors[fieldName].new_password = true;
+                            app.alert.dismiss('passwords_invalid');
+                            if (data.error) {
+                                errMsg += '<br><br>' + data.error;
+                            }
+                            showPasswordAlert = true;
+                            app.alert.show('passwords_invalid', {
+                                level: 'error',
+                                messages: errMsg,
+                            });
+                            callback(null, fields, errors);
+                            app.alert.dismiss('invalid-data');
+                            return;
+                        }
+                    }
                 }
                 //Validate current password
                 var alertOptions = {
@@ -104,13 +127,13 @@
                 app.api.verifyPassword(current, {
                     success: function(data) {
                         if(!data || !data.valid) {
-                            errors[field.name] = errors[field.name] || {};
-                            errors[field.name]['current_password'] = true;
+                            errors[fieldName] = errors[fieldName] || {};
+                            errors[fieldName].current_password = true;
                         }
                     },
                     error: function(error) {
-                        errors[field.name] = errors[field.name] || {};
-                        errors[field.name]['current_password'] = true;
+                        errors[fieldName] = errors[fieldName] || {};
+                        errors[fieldName].current_password = true;
                     },
                     /**
                      * After check is done, close alert and trigger the completion of the validation to the editor
@@ -118,6 +141,9 @@
                     complete: function() {
                         app.alert.dismiss('validation');
                         callback(null, fields, errors);
+                        if (showPasswordAlert) {
+                            app.alert.dismiss('invalid-data');
+                        }
                     }
                 });
             };

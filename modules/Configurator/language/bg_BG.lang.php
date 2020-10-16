@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'The aspect ratio of the image should be between 1:1 или 10:1.  The image will be resized.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'The aspect ratio of the image must be between 3:1 или 20:1.  Upload a new file with this ratio.',
     'ERR_ALERT_FILE_UPLOAD' => 'Грешка при зареждане на изображението.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Не може да бъде създадена директория за изображения',
     'LBL_LOGGER'=>'Настройка на логовете',
 	'LBL_LOGGER_FILENAME'=>'Име на файла за вход',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Разширение',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Максимален размер на файла',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Формат на датата по подразбиране',
 	'LBL_LOGGER_LOG_LEVEL'=>'Ниво на входа',
@@ -458,6 +458,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Настройки на журнала на коментарите',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Максимален брой символи, които да бъдат показвани за въведен коментар',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

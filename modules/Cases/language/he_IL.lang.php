@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'לוח מחוונים של רשימת מקרים',
     'LBL_CASES_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת מקרים',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'פרטי אירוע',
 
 	'ERR_DELETE_RECORD'					=> 'You must specify a record number to delete the account.',
 	'LBL_ACCOUNT_ID'					=> 'זהות חשבון',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'אנשי קשר',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'אירועים',
 	'LBL_DESCRIPTION'					=> 'תיאור:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'צירוף קבצים',	
+    'LBL_FILENANE_ATTACHMENT'           => 'צירוף קבצים',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'הסטוריה',
 	'LBL_INVITEE'						=> 'אנשי קשר',
 	'LBL_MEMBER_OF'						=> 'חשבון',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'נוצר על ידי שם משתמש',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'הוקצה למשתמש ששמו',
     'LBL_EXPORT_TEAM_COUNT' => 'מונה צוות',
+    'LBL_CHANGETIMERS' => 'שינוי טיימרים',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'קשור לדואר אלקטרוני של איש קשר',
@@ -140,4 +143,11 @@ $mod_strings = array (
  - יש להשלים את השדות המסומנים כ"נדרשים" לפני השמירה.
  - לחץ על "הצג עוד" כדי להציג שדות אחרים לפי הצורך.
 2. לחץ על "שמור" כדי להשלים את הרישום החדש ולחזור לדף הקודם.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'לא מצאת את מה שחיפשת?',
+    'LBL_CREATE_CASE' => 'צור {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'פרטי SLA',
+    'LBL_HOURS' => 'שעות',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

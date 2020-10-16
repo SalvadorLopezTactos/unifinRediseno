@@ -31,6 +31,20 @@ $dictionary['pmse_EmailMessage'] = array(
             'len' => 255,
             'comment' => 'Name of the sender',
         ),
+        'reply_to_addr' => array(
+            'name' => 'reply_to_addr',
+            'vname' => 'LBL_REPLY_TO',
+            'type' => 'varchar',
+            'len' => 255,
+            'comment' => 'Email address of the account the recipient should reply to',
+        ),
+        'reply_to_name' => array(
+            'name' => 'reply_to_name',
+            'vname' => 'LBL_REPLY_TO_NAME',
+            'type' => 'varchar',
+            'len' => 255,
+            'comment' => 'Name of the account the recipient should reply to',
+        ),
         'to_addrs' => array(
             'name' => 'to_addrs',
             'vname' => 'LBL_TO',
@@ -80,6 +94,11 @@ $dictionary['pmse_EmailMessage'] = array(
             'type' => 'bool',
             'default' => 0,
         ),
+        'outbound_email_id' => [
+            'name' => 'outbound_email_id',
+            'type' => 'id',
+            'vname' => 'LBL_OUTBOUND_EMAIL_ID',
+        ],
     ),
     'relationships' => array(),
     'optimistic_locking' => true,

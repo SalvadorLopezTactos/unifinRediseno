@@ -50,4 +50,6 @@ $mod_strings = array(
     'LBL_PARENT_ID' => 'Szülő azonosítója',
     'LBL_READ' => 'Olvasott',
     'LBL_UNREAD' => 'Olvasatlan',
+    'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'Megemlítette Önt',
+    'LBL_YOU_HAVE_BEEN_MENTIONED' => 'Megemlítették Önt',
 );

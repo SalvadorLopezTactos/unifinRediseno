@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => 'יצרנים',
   'LNK_NEW_PRODUCT_CATEGORY' => 'קטגוריות מוצרים',
   'LNK_NEW_PRODUCT_TYPE' => 'סוגי מוצרים',
-  'LNK_NEW_PRODUCT' => 'צור מוצר עבור קטלוג',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => 'ספקי שילוח',
   'LNK_PRODUCT_LIST' => 'צפייה בקטלוג מוצרים',
   'NTC_DELETE_CONFIRMATION' => 'אתה בטוח בשברצונך למחוק רשומה זו?',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => 'קטגוריית מוצרים',
   'LBL_MANUFACTURERS' => 'יצרנים',
   'LBL_PRODUCT_TYPES' => 'סוגי מוצרים',
-
+  'LBL_RENEWABLE' => 'ניתן לחידוש',
+  'LBL_SERVICE' => 'שירות',
 );
-
-
-?>

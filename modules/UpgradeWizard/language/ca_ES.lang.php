@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'Desinstalable',
     'LBL_ML_VERSION' => 'Versió',
 	'LBL_ML_INSTALL'=>'Instal·lar',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'Monitorització',
 	'LBL_MODULE_NAME' => 'Assistent d&#39;actualitzacions',
 	'LBL_MODULE_NAME_SINGULAR' => 'Assistent d&#39;actualitzacions',
 	'LBL_UPLOAD_SUCCESS' => 'Actualització d&#39;un paquet carregat amb èxit. Feu clic a Següent per realitzar una comprovació final.',

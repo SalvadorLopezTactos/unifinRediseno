@@ -50,4 +50,6 @@ $mod_strings = array(
     'LBL_PARENT_ID' => '親ID',
     'LBL_READ' => '既読',
     'LBL_UNREAD' => '未読',
+    'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => '次のユーザに言及されています:',
+    'LBL_YOU_HAVE_BEEN_MENTIONED' => 'あなたは言及されています',
 );

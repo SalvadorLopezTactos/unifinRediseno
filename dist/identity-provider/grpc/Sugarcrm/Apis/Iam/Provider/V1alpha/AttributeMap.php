@@ -40,29 +40,9 @@ class AttributeMap extends \Google\Protobuf\Internal\Message
      */
     private $overwrite = false;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $source
-     *           Source field name from the claim/assertion. Note that the syntax is
-     *           provider dependent.
-     *     @type string $destination
-     *           The destination field to map the value from the source field to.
-     *           Examples:
-     *            attributes.given_name
-     *            attributes.address.street_address
-     *     @type bool $overwrite
-     *           If false do not map source->destination if a value is already present.
-     *           True will always map the value regardless if any previous value is
-     *           present.
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Provider\V1Alpha\Provider::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

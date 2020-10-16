@@ -11,6 +11,7 @@
  */
 
 use Doctrine\DBAL\Connection;
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 class ACLRole extends SugarBean{
     var $module_dir = 'ACLRoles';
@@ -228,6 +229,9 @@ public static function getAllRoles($returnAsArray = false)
                 continue;
             }
             //end
+            if (!AccessControlManager::instance()->allowModuleAccess($action->category)) {
+                continue;
+            }
 
             if(!isset($role_actions[$action->category])){
                 $role_actions[$action->category] = array();
@@ -269,38 +273,6 @@ function mark_relationships_deleted($id){
 
         parent::mark_relationships_deleted($id);
 }
-
-    /**
-     *  toArray()
-     * returns this role as an array
-     *
-     * @return array of fields with id, name, description
-     */
-    public function toArray($dbOnly = false, $stringOnly = false, $upperKeys = false)
-    {
-        $array_fields = array('id', 'name', 'description');
-        $arr = array();
-        foreach($array_fields as $field){
-            if(isset($this->$field)){
-                $arr[$field] = $this->$field;
-            }else{
-                $arr[$field] = '';
-            }
-        }
-        return $arr;
-    }
-
-    /**
-    * fromArray($arr)
-    * converts an array into an role mapping name value pairs into files
-    *
-    * @param Array $arr
-    */
-    function fromArray($arr){
-        foreach($arr as $name=>$value){
-            $this->$name = $value;
-        }
-    }
 
     /**
      * Updates users date_modified to make sure clients use latest version of ACLs

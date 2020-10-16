@@ -23,6 +23,22 @@
      * @inheritdoc
      */
     _getSaveConfigAttributes: function() {
+        _.each(this.model.get('worksheet_columns'), function(column) {
+            if (column.name === 'service_duration') {
+                column.fields = column.fields || [
+                    {
+                        'name': 'service_duration_value',
+                        'label': 'LBL_SERVICE_DURATION_VALUE'
+                    },
+                    {
+                        'name': 'service_duration_unit',
+                        'label': 'LBL_SERVICE_DURATION_UNIT'
+                    },
+                ];
+                column.css_class = 'service-duration-field';
+                column.inline = true;
+            }
+        }, this);
         var saveObj = this.model.toJSON();
         var lineNum;
         var footerRows = [];
@@ -76,6 +92,12 @@
             if (col.type === 'parent') {
                 requiredRelatedFields.push(col.id_name);
                 requiredRelatedFields.push(col.type_name);
+            }
+
+            if (col.name === 'service_duration') {
+                _.each(col.fields, function(field) {
+                    requiredRelatedFields.push(field.name);
+                }, this);
             }
         }, this);
 

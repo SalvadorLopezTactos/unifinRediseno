@@ -106,11 +106,7 @@ ygDDList.prototype.endDrag = function(e) {
 	dragEl.innerHTML = '';
 
 	this.afterEndDrag(e);
-    
-    // Bug #47097 : Dashlets not displayed after moving them
-    if ( this.needsReloadAfterDrop && this.dashletID ) {
-        SUGAR.mySugar.retrieveDashlet(this.dashletID); //"predefined_chart"
-    }
+
 };
 
 ygDDList.prototype.afterEndDrag = function(e) {

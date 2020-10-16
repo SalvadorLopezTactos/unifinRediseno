@@ -12,9 +12,8 @@
 
 $mod_strings = array(
     // Dashboard Names
-    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => '商談品目リストのダッシュ ボード',
-    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => '商談品目レコードのダッシュ ボード',
-
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => '商談品目リストのダッシュボード',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => '商談品目レコードのダッシュボード',
     'LBL_CAMPAIGN_PRODUCT' => 'キャンペーン商品',
     'LBL_MODULE_NAME' => '商談品目',
     'LBL_MODULE_NAME_SINGULAR' => '商談品目',
@@ -25,7 +24,7 @@ $mod_strings = array(
     'LBL_PRODUCT' => '商品:',
     'LBL_RELATED_PRODUCTS' => '関連商品',
     'LBL_LEAD_SOURCE' => 'リードソース',
-    'LBL_LIST_NAME' => '商談品目',
+    'LBL_LIST_NAME' => 'Name',
     'LBL_LIST_MANUFACTURER' => '製造元',
     'LBL_LIST_LBL_MFT_PART_NUM' => 'パートナンバー',
     'LBL_LIST_QUANTITY' => '数量',
@@ -36,7 +35,7 @@ $mod_strings = array(
     'LBL_LIST_ACCOUNT_NAME' => 'アカウント名',
     'LBL_LIST_OPPORTUNITY_NAME' => '商談名',
     'LBL_LIST_PROBABILITY' => '確度',
-    'LBL_LIST_SALES_STAGE' => '商談ステージ',
+    'LBL_LIST_SALES_STAGE' => 'セールスステージ',
     'LBL_LIST_CONTACT_NAME' => '取引先担当者',
     'LBL_LIST_QUOTE_NAME' => '見積名',
     'LBL_LIST_DATE_PURCHASED' => '購買日',
@@ -44,7 +43,7 @@ $mod_strings = array(
     'LBL_LIST_DATE_CLOSED' => 'クローズ予定日',
     'LBL_LIST_COMMIT_STAGE' => 'コミットステージ',
     'LBL_LIST_PRODUCT_TEMPLATE' => '商品テンプレート:',
-    'LBL_NAME' => '商談品目:',
+    'LBL_NAME' => 'Name',
     'LBL_URL' => '商品URL:',
     'LBL_QUOTE_NAME' => '見積名:',
     'LBL_ASSOCIATED_QUOTE' => '関連する見積',
@@ -119,10 +118,10 @@ $mod_strings = array(
     'LBL_PRODUCT_CATEGORIES' => '商品カテゴリ',
     'LBL_PRODUCT_TYPES' => '商品タイプ',
     'LBL_ASSIGNED_TO_NAME' => 'アサイン先',
-    'LBL_ASSIGNED_TO' => 'アサインされたユーザー名',
-    'LBL_ASSIGNED_TO_ID'=>'アサインされたユーザーID',
-    'LBL_EXPORT_ASSIGNED_USER_NAME' => 'アサインされたユーザー名',
-    'LBL_EXPORT_ASSIGNED_USER_ID' => 'アサインされたユーザーID',
+    'LBL_ASSIGNED_TO' => 'アサインされたユーザ名',
+    'LBL_ASSIGNED_TO_ID'=>'アサインされたユーザID',
+    'LBL_EXPORT_ASSIGNED_USER_NAME' => 'アサインされたユーザ名',
+    'LBL_EXPORT_ASSIGNED_USER_ID' => 'アサインされたユーザID',
     'LBL_CAMPAIGN_ID' => 'キャンペーンID',
     'LBL_PRODUCT_TEMPLATE' => '商品テンプレート:',
     'LBL_PRODUCT_TEMPLATE_ID' => '商品テンプレートID:',
@@ -135,10 +134,15 @@ $mod_strings = array(
     'LBL_MANUFACTURERS' => '製造元',
     'LBL_EXPERT_ID' => '製品エキスパート',
     'LBL_FORECAST' => '売上予測',
-    'LBL_CALCULATED_LINE_ITEM_AMOUNT' => '商談品目総計',
+    'LBL_CALCULATED_LINE_ITEM_AMOUNT' => 'Calculated Amount',
+    'LBL_GENERATE_PURCHASE' => 'Generate Purchase',
+    'LBL_PURCHASED_LINE_ITEM' => 'Generated Purchased Line Item',
+    'LBL_PLI_NAME' => 'Generated Purchased Line Item Name',
+    'LBL_PLI_ID' => 'Generated Purchased Line Item ID',
     'LBL_CONTACT' => '取引先担当者',
     'LBL_DISCOUNT_TOTAL' => '値引計',
     'LBL_DISCOUNT_AMOUNT' => '値引額',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_TOTAL_DISCOUNT_AMOUNT' => '値引額合計',
     'LBL_EXT_PRICE' => '割増価格',
     'LBL_CURRENCY_SYMBOL_NAME' => '通貨シンボル名',
@@ -153,7 +157,7 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE' => 'コミットステージ',
     'LBL_COMMIT_STAGE_FORECAST' => '売上予測',
     'LBL_PROBABILITY' => '確度 (%):',
-    'LBL_SALES_STAGE' => '商談ステージ',
+    'LBL_SALES_STAGE' => 'セールスステージ',
     'LBL_SALES_STATUS' => '商談品目ステータス',
     'LBL_PIPELINE_TOTAL_IS' => 'パイプラインの合計は',
     'LBL_CONVERT_RLI_TO_QUOTE' => '商談品目から見積を生成',
@@ -170,7 +174,7 @@ $mod_strings = array(
     'LBL_CONVERT_TO_QUOTE_ERROR_MESSAGE' => '商談品目から見積の作成にエラーがありました',
 
     'LBL_DISCOUNT_AS_PERCENT' => '値引%',
-    'SAVE_RLI_QUOTE_NOTICE' => 'この商品は既に見積に変更されています。変更は対応する見積にアップデートされません。',
+    'SAVE_RLI_QUOTE_NOTICE' => 'この商品は既に見積に変更されています。変更は対応する見積に更新されません。',
 
     'LBL_QUOTED' => '見積完了',
     'LBL_NOT_QUOTED' => '見積未完了',
@@ -180,10 +184,10 @@ $mod_strings = array(
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}}モジュールは、{{opportunities_singular_module}}のレコードに含まれていて、販売のライフサイクルを通じて追跡しているビジネスの個々の製品で構成されています。 {{opportunities_singular_module}}レコードは1つ以上の{{module_name}}レコードのヘッダーとして機能します。これにより{{opportunities_module}} and {{forecasts_singular_module}}がともに動くときに、ユーザーの{{forecasts_singular_module}}と {{worksheet_module}}が個別に含むか含まないかだけでなく、それぞれの製品の{{opportunities_singular_module}}が営業ステージと確度を持つ事ができるので、より大きな精度を持つ事になります。各{{module_name}}は組織の製品カタログからの製品に関連しています。そうすることで、製品の値が自動的に{{module_name}}に一致するフィールドを設定するために発生することになります。',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}}モジュールは、{{opportunities_singular_module}}のレコードに含まれていて、販売のライフサイクルを通じて追跡しているビジネスの個々の製品で構成されています。 {{opportunities_singular_module}}レコードは1つ以上の{{module_name}}レコードのヘッダとして機能します。これにより{{opportunities_module}} and {{forecasts_singular_module}}がともに動くときに、ユーザの{{forecasts_singular_module}}と {{worksheet_module}}が個別に含むか含まないかだけでなく、それぞれの製品の{{opportunities_singular_module}}が営業ステージと確度を持つ事ができるので、より大きな精度を持つ事になります。各{{module_name}}は組織の製品カタログからの製品に関連しています。そうすることで、製品の値が自動的に{{module_name}}に一致するフィールドを設定するために発生することになります。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}}モジュールは、{{opportunities_singular_module}}のレコードに含まれており、営業ライフサイクルを通じて追跡しているビジネスの個々の製品で構成されています。 {{opportunities_singular_module}}レコードが1つ以上の{{module_name}}レコードのヘッダーとして機能します。 - 個々のフィールドまたは[編集]ボタンをクリックして、このレコードのフィールドを編集します。 - 左下のペインに「データビュー」をトグルしてサブパネル内の他のレコードへのリンクを表示または変更してください。 - ユーザーコメントを作成もしくは表示し、左下ペインの「アクティブストリーム」をトグルして{{activitystream_singular_module}}内のレコードを変更してください。-レコード名の右のアイコンを使用してこのレコードをフォローするかお気に入りにしてください。- 追加のアクションは、[編集]ボタンの右にあるドロップダウンの操作メニューにあります。',
+    'LBL_HELP_RECORD' => '{{plural_module_name}}モジュールは、{{opportunities_singular_module}}のレコードに含まれており、営業ライフサイクルを通じて追跡しているビジネスの個々の製品で構成されています。 {{opportunities_singular_module}}レコードが1つ以上の{{module_name}}レコードのヘッダとして機能します。 - 個々のフィールドまたは[編集]ボタンをクリックして、このレコードのフィールドを編集します。 - 左下のペインに「データビュー」をトグルしてサブパネル内の他のレコードへのリンクを表示または変更してください。 - ユーザコメントを作成もしくは表示し、左下ペインの「アクティブストリーム」をトグルして{{activitystream_singular_module}}内のレコードを変更してください。-レコード名の右のアイコンを使用してこのレコードをフォローするかお気に入りにしてください。- 追加のアクションは、[編集]ボタンの右にあるドロップダウンの操作メニューにあります。',
 
     // Create View Help Text
     'LBL_HELP_CREATE' => '{{plural_module_name}} モジュールは、{{opportunities_singular_module}} のレコードに含まれ、販売のライフサイクルを通じて追跡しているビジネスの個々の製品で構成されています。{{opportunities_singular_module}} レコードは1つ以上の{{module_name}} レコードのヘッダとして機能します。

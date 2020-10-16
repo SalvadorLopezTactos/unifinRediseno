@@ -31,6 +31,10 @@ $viewdefs['Cases']['EditView'] = array(
           'account_name',
 	  ),
 
+        array (
+            'business_center_name',
+        ),
+
 	  array (
 	    'status',
           'follow_up_datetime',
@@ -61,6 +65,7 @@ $viewdefs['Cases']['EditView'] = array(
 	      'name' => 'resolution',
 	      'nl2br' => true,
 	    ),
+        'resolved_datetime',
 	  ),
 
 	  array(

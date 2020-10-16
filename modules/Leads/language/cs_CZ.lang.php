@@ -310,4 +310,7 @@ Vytvoření modulu {{module_name}}:
     'LBL_FILTER_LEADS_REPORTS' => 'Reporty leadů',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Se souhlasem pro obchodní účely',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Poslední aktualizace souhlasu',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Nelze změnit stav {{moduleSingular}}. Tento {{moduleSingular}} byl již převeden.',
 );

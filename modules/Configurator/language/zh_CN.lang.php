@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => '图象的纵横比应处于 1:1 到 10:1 之间。图象将被重新调整。',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => '图象的纵横比应处于 3:1 到 20:1之间。  使用这个比率上载一个新文件。',
     'ERR_ALERT_FILE_UPLOAD' => '上传图片发生错误。',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => '无法创建图片的目录',
     'LBL_LOGGER'=>'日志记录设定',
 	'LBL_LOGGER_FILENAME'=>'日志文件名',
-	'LBL_LOGGER_FILE_EXTENSION'=>'扩展',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'最大日志大小',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'默认日期格式',
 	'LBL_LOGGER_LOG_LEVEL'=>'日志级别',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => '评论日志设置',
     'LBL_COMMENT_LOG_MAX_CHARS' => '每个评论条目能显示的最大字符数',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

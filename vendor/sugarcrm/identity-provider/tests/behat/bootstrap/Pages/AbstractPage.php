@@ -19,7 +19,7 @@ use Sugarcrm\IdentityProvider\Authentication\Exception\RuntimeException;
 
 abstract class AbstractPage extends Page
 {
-    protected const DEFAULT_TIMEOUT = 10;
+    protected const DEFAULT_TIMEOUT = 60;
 
     protected $loadingAlertXpath = "//div[@class='alert-top']//div[@class='loading']";
 

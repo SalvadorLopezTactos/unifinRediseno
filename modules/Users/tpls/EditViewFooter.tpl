@@ -261,11 +261,21 @@
                     <th align="left" scope="row" colspan="4"><h4>{$MOD.LBL_LAYOUT_OPTIONS}</h4></th>
                 </tr>
                             <tr>
-                                <td colspan="4">
+                                <td colspan="2" width="50%">
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                         <tr>
                                             <td scope="row" align="left" style="padding-bottom: 2em;">{$TAB_CHOOSER}</td>
                                             <td width="90%" valign="top"><BR>&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td colspan="2" width="50%">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td scope="row" width="17%">
+                                            <slot>{$MOD.LBL_FIELD_NAME_PLACEMENT}:</slot>&nbsp;{sugar_help text=$MOD.LBL_FIELD_NAME_PLACEMENT_TEXT}
+                                            </td>
+                                            <td width="33%"><slot><select tabindex='12' name="field_name_placement">{$FIELD_NAME_PLACEMENT}</select></slot></td>
                                         </tr>
                                     </table>
                                 </td>

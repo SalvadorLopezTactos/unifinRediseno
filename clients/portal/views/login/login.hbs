@@ -15,21 +15,27 @@
         <div class="tcenter">
             <h2 class="brand"><img src="{{logoUrl}}" alt="SugarCRM"></h2>
         </div>
+        <br>
+        <br>
         <form name='{{name}}' class="tcenter">
             {{#each meta.panels}}
                 {{#each fields}}
                     <div class="control-group">{{field ../../this model=../../model}}</div>
                 {{/each}}
-                <p class="help-block">
-                    <strong>{{str "LNK_PORTAL_LOGIN_FORGOTPASSWORD"}}</strong>
-                <br />
-                    {{str "LBL_PORTAL_LOGIN_FORGOTPASSWORD"}}
-                </p>
             {{/each}}
-            <div class="login-footer">
-                {{#each meta.buttons}}
-                {{field ../this model=../model}}
-                {{/each}}
+            {{#each meta.buttons}}
+                <div class="control-group">
+                    {{field ../this model=../model}}
+                </div>
+            {{/each}}
+            <br>
+            <br>
+            <div class="control-group">
+            {{#if showPortalPasswordReset}}
+                <a href="#forgotpassword" class="btn btn-link btn-invisible">{{str "LBL_PORTAL_FORGOT_PASSWORD"}}</a>
+                <br>
+            {{/if}}
+                <a href="#signup" class="btn btn-link btn-invisible">{{str "LBL_SIGNUP_BUTTON_LABEL"}}</a>
             </div>
         </form>
     </div>

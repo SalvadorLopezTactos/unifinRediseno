@@ -487,7 +487,12 @@ class PMSEBeanHandler
                 $this->expressionEvaluator = ProcessManager\Factory::getPMSEObject('PMSEExpressionEvaluator');
             }
             $now = new DateTime();
-            $now->add($this->expressionEvaluator->processDateInterval($response->value));
+            if (PMSEEngineUtils::isForBusinessTimeOp($value->expValue)) {
+                PMSEEngineUtils::setExpBean($value);
+                $now = $this->expressionEvaluator->executeDateSpanBCOp($now, '+', $value->expValue, $value->expBean);
+            } else {
+                $now->add($this->expressionEvaluator->processDateInterval($response->value));
+            }
             $response->value = $timedate->asIso($now);
         }
 

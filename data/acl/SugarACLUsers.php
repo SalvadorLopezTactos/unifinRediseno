@@ -26,6 +26,7 @@ class SugarACLUsers extends SugarACLStrategy
             'employee_status' => true,
             'is_admin' => true,
             'UserType' => true,
+            'license_type' => true,
         );
 
     public $no_access_fields = array(
@@ -83,8 +84,12 @@ class SugarACLUsers extends SugarACLStrategy
         }
 
         // Deny access to export if it disabled globally or user is not an admin
-        if ($view == 'export' && (!empty($sugar_config['disable_export'])
-                || !$current_user->isAdminForModule($module))) {
+        if ($view == 'export' &&
+            (
+                !empty($sugar_config['disable_export']) ||
+                (!$current_user->isAdminForModule($module) && !empty($sugar_config['admin_export_only']))
+            )
+        ) {
             return false;
         }
 
@@ -99,20 +104,17 @@ class SugarACLUsers extends SugarACLStrategy
             $context['action'] = SugarACLStrategy::fixUpActionName($context['action']);
         }
 
-        // even an admin can't delete themselves
-        if( $myself ) {
-            if ( $view == 'delete') {
-                // Here's the obvious way to disable yourself
+        $isAStatusChangeAttempt = $view === 'field' && $bean && $this->isAStatusChangeAttempt($bean, $context);
+        if ($myself && ($view === 'delete' || $isAStatusChangeAttempt)) {
+            // Employee can't delete or deactivate self
+            if ($bean instanceof Employee) {
                 return false;
             }
-            if ( $view == 'field'
-                 && ( $context['action'] == 'edit' || $context['action'] == 'massupdate' || $context['action'] == 'delete' )
-                 && ( $context['field'] == 'employee_status' || $context['field'] == 'status' ) ) {
-                // This is another way to disable yourself
-                return false;
+            // Admin can't delete or deactivate self without other active admins
+            if ($bean->isAdmin()) {
+                return $this->doesSystemHaveOtherActiveAdmins($bean);
             }
         }
-
 
         if($current_user->isAdminForModule($module)) {
             return true;
@@ -267,5 +269,49 @@ class SugarACLUsers extends SugarACLStrategy
     public function myselfCheck($user, $current_user)
     {
         return $user && $current_user && $user->id == $current_user->id;
+    }
+
+    /**
+     * Check if system has other active admins except provided bean
+     *
+     * @param User $bean
+     * @return bool
+     * @throws SugarQueryException
+     */
+    protected function doesSystemHaveOtherActiveAdmins(User $bean): bool
+    {
+        $query = new SugarQuery();
+        $query->from($bean);
+        $query->where()->notEquals('id', $bean->id);
+        $query->where()->equals('status', 'Active');
+        $query->where()->equals('is_admin', '1');
+        $query->limit(1);
+        $stmt = $query->compile()->execute();
+
+        return $stmt->fetchColumn() !== false;
+    }
+
+    /**
+     * Check if user tries to change status or employee_status
+     * @param SugarBean $bean
+     * @param array $context
+     * @return bool
+     */
+    private function isAStatusChangeAttempt(SugarBean $bean, array $context): bool
+    {
+        if (empty($context['action']) || empty($context['field']) || empty($context['newValue'])) {
+            return false;
+        }
+
+        if (!in_array($context['action'], ['edit', 'massupdate', 'delete'], true)) {
+            return false;
+        }
+
+        if (($context['field'] === 'status' && $bean->status !== $context['newValue'])
+            || ($context['field'] === 'employee_status' && $bean->employee_status !== $context['newValue'])) {
+            return true;
+        }
+
+        return false;
     }
 }

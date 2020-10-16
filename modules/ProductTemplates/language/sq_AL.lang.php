@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => 'Prodhuesit',
   'LNK_NEW_PRODUCT_CATEGORY' => 'Kategoritë e produkteve',
   'LNK_NEW_PRODUCT_TYPE' => 'Llojet e Produkteve',
-  'LNK_NEW_PRODUCT' => 'Krijo produkt për katalog',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => 'Ofruesit e transportit',
   'LNK_PRODUCT_LIST' => 'Shiko katalogun i produkteve',
   'NTC_DELETE_CONFIRMATION' => 'A jeni të sigurtë që dëshironi të fshini këtë regjistrim?',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => 'Kategoritë e Produkteve',
   'LBL_MANUFACTURERS' => 'Prodhuesit',
   'LBL_PRODUCT_TYPES' => 'Llojet e Produkteve',
-
+  'LBL_RENEWABLE' => 'I rinovueshëm',
+  'LBL_SERVICE' => 'Shërbimi',
 );
-
-
-?>

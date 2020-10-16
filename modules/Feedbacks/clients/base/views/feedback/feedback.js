@@ -22,6 +22,7 @@
  * @class View.Views.Base.Feedbacks.FeedbackView
  * @alias SUGAR.App.view.views.BaseFeedbacksFeedbackView
  * @extends View.View
+ * @deprecated Feedback functionality is deprecated
  */
 ({
     plugins: ['ErrorDecoration'],
@@ -38,6 +39,8 @@
      * {@link #send} the Feedback.
      */
     initialize: function(options) {
+        app.logger.warn('Feedback functionality has been deprecated and will be removed in a future release');
+
         options.model = app.data.createBean('Feedbacks');
         var fieldsMeta = _.flatten(_.pluck(options.meta.panels, 'fields'));
         options.model.fields = {};

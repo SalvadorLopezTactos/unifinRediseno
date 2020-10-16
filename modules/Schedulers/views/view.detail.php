@@ -30,6 +30,10 @@ class SchedulersViewDetail extends ViewDetail {
  	 */
  	function display()
  	{
+        if (!empty($this->bean->system_job)) {
+            ACLController::displayNoAccess(true);
+            sugar_cleanup(true);
+        }
 		$this->bean->parseInterval();
 		$this->bean->setIntervalHumanReadable();
 		$this->ss->assign('JOB_INTERVAL', $this->bean->intervalHumanReadable);

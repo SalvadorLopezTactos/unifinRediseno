@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'Status',
   'LBL_PRJ_MODULE' => 'Målmodul',
+  'LBL_PRJ_RUN_ORDER' => 'Körningsordning',
   'LBL_PMSE_BUTTON_SAVE' => 'Spara',
   'LBL_PMSE_BUTTON_CANCEL' => 'Avbryt',
   'LBL_PMSE_BUTTON_YES' => 'Ja',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Processdefinitionen har importerats, men innehåller en eller fler Affärsregelhandlingar som inte har tillhörande affärsregler.',
     'LBL_BPM_IMPORT_SELECT' => 'Den här processdefinitionen innehåller följande affärsregler och e-post mallar. '
         . 'Välj de du vill importera.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'Affärsregler',
     'LBL_EMAIL_TEMPLATES' => 'E-postmallar',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'Handledare',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Skapad av användare',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Senast redigerad av användare',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'System-e-post',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Affärsregel',
     'LBL_PMSE_LABEL_RULE' => 'Regel',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Tilldela Användare',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Uppdatera "Tilldelad" på post',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Lägg till relaterad record',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Relaterad modul',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Namnet på aktiviteten är tom:',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Namnet "%s" finns redan.',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'dagar',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'timmar',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'minuter',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'affärstid',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'Affärscenter',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'Från målmodulen',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'Från ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' Modul',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'Sträng, Nummer och Boolean',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'Nummer',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'Värde',

@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Painel de lista de casos',
     'LBL_CASES_RECORD_DASHBOARD' => 'Painel de registro de casos',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Detalhes da ocorrência',
 
 	'ERR_DELETE_RECORD'					=> 'Um número de registro deve ser especificado para excluir a Conta.',
 	'LBL_ACCOUNT_ID'					=> 'ID da Conta',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Contatos',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Ocorrências',
 	'LBL_DESCRIPTION'					=> 'Descrição:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Anexo de Arquivo',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Anexo de Arquivo',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Histórico',
 	'LBL_INVITEE'						=> 'Contatos',
 	'LBL_MEMBER_OF'						=> 'Conta',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Criado por nome do usuário',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nome de usuário atribuído',
     'LBL_EXPORT_TEAM_COUNT' => 'Contagem de equipe',
+    'LBL_CHANGETIMERS' => 'Alterar temporizadores',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'E-mails de contatos relacionados',
@@ -140,4 +143,11 @@ Para criar um {{module_name}}:
 - Os campos marcados como "Obrigatório" devem ser preenchidos antes de salvar. 
 - Clique em "Ver Mais" para expor campos adicionais, se necessário. 
 2. Clique em "Salvar" para finalizar o novo registro e voltar para a página anterior.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Não encontrou o que procura?',
+    'LBL_CREATE_CASE' => 'Crie um {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'Detalhes de SLA',
+    'LBL_HOURS' => 'Horas',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

@@ -65,6 +65,12 @@ $mod_strings = array (
   'LBL_DOMAIN'=>'Inga mail tlll domänen',
   'LBL_LIST_PROSPECTLIST_NAME'=>'Namn',
 	'LBL_MORE_DETAIL' => 'Fler Detaljer' /*for 508 compliance fix*/,
+    'LBL_ACCOUNTS' => 'Konton',
+    'LBL_CAMPAIGNS' => 'Kampanjer',
+    'LBL_CONTACTS' => 'Kontakter',
+    'LBL_LEADS' => 'Leads',
+    'LBL_PROSPECTS' => 'Mål',
+    'LBL_USERS' => 'Användare',
 
     // Help Text
     // List View Help Text

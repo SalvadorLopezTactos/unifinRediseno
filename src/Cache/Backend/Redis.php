@@ -25,13 +25,16 @@ use Symfony\Component\Cache\Simple\RedisCache;
 final class Redis extends RedisCache
 {
     /**
-     * @param string|null $host
-     * @param int|null $port
+     * @param string $host
+     * @param int $port
+     * @param bool $persistent
+     * @param float $timeout
+     * @param string $persistentId
      *
      * @throws Exception
      * @codeCoverageIgnore
      */
-    public function __construct(?string $host, ?int $port = null)
+    public function __construct(string $host = '127.0.0.1', int $port = 6379, bool $persistent = false, float $timeout = 0, string $persistentId = '')
     {
         if (!extension_loaded('redis')) {
             throw new Exception('Redis extension is not loaded');
@@ -41,19 +44,23 @@ final class Redis extends RedisCache
 
         if (version_compare(phpversion('redis'), '4.0.0') >= 0) {
             try {
-                $this->connect($client, $host, $port);
+                $this->connect($client, $host, $port, $timeout, $persistentId, $persistent);
             } catch (RedisException $e) {
                 throw new Exception($e->getMessage(), 0, $e);
             }
-        } elseif (!@$this->connect($client, $host, $port)) {
+        } elseif (!@$this->connect($client, $host, $port, $timeout, '', false)) {
             throw new Exception(error_get_last()['message']);
         }
 
         parent::__construct($client);
     }
 
-    private function connect(Client $client, ?string $host, ?int $port) : bool
+    private function connect(Client $client, string $host, int $port, float $timeout, string $persistentId, bool $persistent) : bool
     {
-        return $client->connect($host ?? '127.0.0.1', $port ?? 6379);
+        if ($persistent) {
+            return $client->pconnect($host, $port, $timeout, $persistentId);
+        } else {
+            return $client->connect($host, $port, $timeout);
+        }
     }
 }

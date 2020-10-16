@@ -22,8 +22,8 @@ $mod_strings = array (
     //END DON'T CONVERT
 
     // Dashboard Names
-    'LBL_LEADS_LIST_DASHBOARD' => 'リードリストのダッシュ ボード',
-    'LBL_LEADS_RECORD_DASHBOARD' => 'リードレコードのダッシュ ボード',
+    'LBL_LEADS_LIST_DASHBOARD' => 'リードリストのダッシュボード',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'リードレコードのダッシュボード',
 
     'ERR_DELETE_RECORD' => 'リードを削除するにはレコード番号を指定する必要があります。',
     'LBL_ACCOUNT_DESCRIPTION'=> '取引先情報',
@@ -99,7 +99,7 @@ $mod_strings = array (
     'LBL_DO_NOT_CALL' => '電話不可:',
     'LBL_DUPLICATE' => '類似のリード',
     'LBL_EMAIL_ADDRESS' => 'Eメール:',
-    'LBL_EMAIL_OPT_OUT' => 'Eメール送信除外:',
+    'LBL_EMAIL_OPT_OUT' => 'メール送信除外:',
     'LBL_EXISTING_ACCOUNT' => '既存の取引先を使用',
     'LBL_EXISTING_CONTACT' => '既存の取引先担当者を使用',
     'LBL_EXISTING_OPPORTUNITY' => '既存の商談を使用',
@@ -113,7 +113,7 @@ $mod_strings = array (
     'LBL_VCARD' => 'vCard',
     'LBL_IMPORT_VCARDTEXT' => 'vCardをインポートすることによって新規リードを作成します。',
     'LBL_INVALID_EMAIL'=>'無効なEメール:',
-    'LBL_INVITEE' => '直接的なリポート',
+    'LBL_INVITEE' => '報告メンバー',
     'LBL_LAST_NAME' => '姓:',
     'LBL_LEAD_SOURCE_DESCRIPTION' => 'リードソース詳細:',
     'LBL_LEAD_SOURCE' => 'リードソース:',
@@ -166,10 +166,10 @@ $mod_strings = array (
     'LBL_PRIMARY_ADDRESS_STREET_3'=>'主となる住所 3:',
     'LBL_PRIMARY_ADDRESS_STREET' => '主となる番地その他:',
     'LBL_PRIMARY_ADDRESS' => '主となる住所:',
-    'LBL_RECORD_SAVED_SUCCESS' => '作成に成功しました {{moduleSingularLower}} {{full_name}}.',
+    'LBL_RECORD_SAVED_SUCCESS' => '{{moduleSingularLower}}<a href="#{{buildRoute model=this}}">{{full_name}}</a> の作成に成功しました 。',
     'LBL_REFERED_BY' => '紹介元:',
-    'LBL_REPORTS_TO_ID'=>'上司ID',
-    'LBL_REPORTS_TO' => '上司:',
+    'LBL_REPORTS_TO_ID'=>'報告先ID',
+    'LBL_REPORTS_TO' => '報告先:',
     'LBL_REPORTS_FROM' => '以下からのレポート:',
     'LBL_SALUTATION' => '敬称',
     'LBL_MODIFIED'=>'更新者',
@@ -316,4 +316,7 @@ Sugarがあなたの{{module_name}}の情報と一致する既存のレコード
     'LBL_FILTER_LEADS_REPORTS' => 'リードのレポート',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => '以下のことに同意したビジネス目的:',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => '最後に更新された同意',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => '{{moduleSingular}} ステータスを変更できません。この {{moduleSingular}} はすでにコンバート済みです。',
 );

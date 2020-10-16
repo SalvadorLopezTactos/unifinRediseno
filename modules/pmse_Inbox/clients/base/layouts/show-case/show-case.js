@@ -180,7 +180,7 @@
         this.recordComponent.model.on('error:validation', showInvalidModel, this.recordComponent);
 
         this._super('loadData', loadDataParams);
-        this._render();
+        this.render();
         this._delegateEvents();
     },
 
@@ -525,8 +525,8 @@
                         _.indexOf(this.noEditFields, field.def.name) >= 0 ||
                         field.parent || (field.name && this.buttons[field.name]);
 
-                    if (readonlyField) {
-                        // exclude read only fields
+                    // exclude readOnly Fields and record-decor field wrappers
+                    if (readonlyField || field.type === this.decoratorField) {
                         return;
                     }
                     if (this.checkRequired(field)) {
@@ -573,6 +573,10 @@
                 this.noEditFields = [];
 
                 _.each(panels, function(panel) {
+                    // get user preference for labelsOnTop before iterating through
+                    // fields
+                    panel.labelsOnTop = this.getLabelPlacement();
+
                     // it is assumed that a field is an object but it can also be a string
                     // while working with the fields, might as well take the opportunity to check the user's ACLs for the field
                     _.each(panel.fields, function(field, index) {
@@ -600,6 +604,7 @@
                         } else if (field.readonly || !app.acl.hasAccessToModel('edit', this.model, field.name)) {
                             this.noEditFields.push(field.name);
                         }
+                        field.labelsOnTop = panel.labelsOnTop;
                     }, this);
 
                     // Set flag so that show more link can be displayed to show hidden panel.
@@ -635,11 +640,18 @@
              */
             checkReadonly: function(field){
                 var isReadonly = false;
+                if (this.buttons[field.name]) {
+                    return false;
+                }
                 _.each(this.context.get('case').readonly, function(caseField) {
                     if (field.name === caseField) {
                         isReadonly = true;
                     }
                 }, this);
+
+                if (this.context.get('case').reclaim) {
+                    isReadonly = true;
+                }
                 return isReadonly;
             },
 

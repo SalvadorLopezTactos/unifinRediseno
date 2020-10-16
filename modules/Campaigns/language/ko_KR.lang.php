@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'기본 유형의 목표 목록이 발견되지 않았습니다.',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'항목이 발견되지 않았습니다.',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => '항목이 진행되었습니다.',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'추적기명',
   'LBL_EDIT_TRACKER_URL'=>'추적 URL',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> '수신 이메일 계정과 저장된 최적의 조건이 없습니다.',
     'ERR_REVIEW_EMAIL_SETTINGS' => '수신 이메일 설정을 재검토하십시오.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '이 캠페인을 통해 생성된 0주 예비고객이 생성시부터 삭제되었습니다.',
+    'LBL_PROSPECT_LIST' => '잠재고객 목록',
 );
 
 

@@ -48,6 +48,17 @@ interface MappingInterface
     public function addModuleField($baseField, $field, MultiFieldProperty $property);
 
     /**
+     * Create a module only field with long text type. This field will be added on top
+     * of a MultiFieldBase. If the base does not exist it will be created.
+     * The module field is prefixed with the "{Module}__" prefix.
+     * the doc_values will be set to false
+     * @param string $baseField The non-prefixed base field name
+     * @param string $field The (multi) field name to create the mapping for
+     * @param MultiFieldProperty $property The mapping properties of the field
+     */
+    public function addModuleLongField($baseField, $field, MultiFieldProperty $property);
+
+    /**
      * Create a common field. This field will be added on top
      * of a MultiFieldBase. If the base does not exist it will be created.
      * The common field is prefixed with the "Common__" prefix.

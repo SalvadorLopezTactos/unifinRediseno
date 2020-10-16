@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Dashbord for saksliste',
     'LBL_CASES_RECORD_DASHBOARD' => 'Dashbord for saksoppføring',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Saksdetaljer',
 
 	'ERR_DELETE_RECORD'					=> 'Du må oppgi et registreringsnummer for å slette denne bedrift.',
 	'LBL_ACCOUNT_ID'					=> 'Bedrift-ID',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Kontakter',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Saker',
 	'LBL_DESCRIPTION'					=> 'Beskrivelse:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Vedlegg',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Vedlegg',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Historie',
 	'LBL_INVITEE'						=> 'Kontakter',
 	'LBL_MEMBER_OF'						=> 'Bedrift',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Opprettet Av Brukernavn',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Tildelt Brukernavn',
     'LBL_EXPORT_TEAM_COUNT' => 'Gruppe-antall',
+    'LBL_CHANGETIMERS' => 'Endre timere',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Relaterte kontakers e-poster',
@@ -134,4 +137,11 @@ For å opprette {{module_name}}:
 - Felt som er merket "Obligatorisk" må oppdateres før du lagrer. 
 - Klikk "Vis mer" for å avsløre flere felt hvis det er nødvendig. 
 2. Klikk "Lagre" for å sluttføre den nye posten og gå tilbake til forrige side.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Fant du ikke det du ser etter?',
+    'LBL_CREATE_CASE' => 'Opprett en {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'SLA-detaljer',
+    'LBL_HOURS' => 'Timer',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

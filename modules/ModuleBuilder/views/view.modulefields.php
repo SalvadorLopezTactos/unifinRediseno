@@ -12,6 +12,7 @@
 
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 class ViewModulefields extends SugarView
 {
@@ -52,6 +53,9 @@ class ViewModulefields extends SugarView
         $smarty->assign('mod_strings', $mod_strings);
 
         $module_name = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
+        if (!AccessControlManager::instance()->allowModuleAccess($module_name)) {
+            throw new SugarApiExceptionModuleDisabled();
+        }
 
         global $current_language;
         $module_strings = return_module_language($current_language, $module_name);
@@ -75,7 +79,10 @@ class ViewModulefields extends SugarView
             global $dictionary;
             $f = array($mod_strings['LBL_HCUSTOM']=>array(), $mod_strings['LBL_HDEFAULT']=>array());
 
-            foreach($dictionary[$objectName]['fields'] as $def) {
+            foreach ($dictionary[$objectName]['fields'] as $fieldName => $def) {
+                if (!AccessControlManager::instance()->allowFieldAccess($module_name, $fieldName)) {
+                    continue;
+                }
                 if (!$this->isValidStudioField($def)) {
                     continue;
                 }
@@ -183,6 +190,9 @@ class ViewModulefields extends SugarView
 
                        $type = $this->mbModule->mbvardefs->vardefs['fields'][$k][$field]['type'];
                        $this->mbModule->mbvardefs->vardefs['fields'][$k][$field]['type'] = isset($fieldTypes[$type]) ? $fieldTypes[$type] : ucfirst($type);
+                        if (!AccessControlManager::instance()->allowFieldAccess($module_name, $field)) {
+                            continue;
+                        }
                        if ($this->isValidStudioField($this->mbModule->mbvardefs->vardefs['fields'][$k][$field])) {
                            $fieldsData[] = $this->mbModule->mbvardefs->vardefs['fields'][$k][$field];
                        }

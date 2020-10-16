@@ -324,6 +324,17 @@
     },
 
     /**
+     * Fieldsets need to check its fields to see if they are all empty
+     *
+     * @override
+     */
+    isFieldEmpty: function() {
+        return _.every(this._getChildFields(), function(field) {
+            return field.isFieldEmpty();
+        });
+    },
+
+    /**
      * @inheritdoc
      *
      * We need this empty so it won't affect the nested fields that have the

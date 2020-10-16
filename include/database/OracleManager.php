@@ -49,7 +49,6 @@ class OracleManager extends DBManager
     protected $capabilities = array(
         "affected_rows" => true,
         "case_sensitive" => true,
-        "fulltext" => true,
         "auto_increment_sequence" => true,
         'limit_subquery' => true,
         "recursive_query" => true,
@@ -1303,7 +1302,7 @@ WHERE OWNER = ?
     /**
      * @see DBManager::setAutoIncrement()
      */
-    protected function setAutoIncrement($table, $field_name)
+    protected function setAutoIncrement($table, $field_name, array $platformOptions = [])
     {
         $this->deleteAutoIncrement($table, $field_name);
         $this->query(
@@ -1584,22 +1583,6 @@ LEFT JOIN all_constraints c
             else
                 $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name} FOREIGN KEY ({$fields}) REFERENCES {$definition['foreignTable']}({$definition['foreignField']})";
             break;
-        case 'fulltext':
-                if($drop) {
-                    $sql = "DROP INDEX {$name}";
-                } else {
-                    $indextype=$definition['indextype'];
-                    $parameters="";
-                    //add parameters attribute if oracle version of 10 or more.
-                    $ver = $this->version();
-                    $tok = strtok($ver, '.');
-                    if ($tok !== false && $tok > 9) {
-                        $parameters = isset($definition['parameters'])
-                            ? "parameters ('". $definition['parameters']. "')" : "";
-                    }
-                   $sql = "CREATE INDEX {$name} ON $table($fields) INDEXTYPE IS $indextype $parameters";
-                }
-                break;
         }
         return $sql;
 	}
@@ -1787,35 +1770,6 @@ LEFT JOIN all_constraints c
     }
 
     /**
-     * Generate fulltext query from set of terms
-     * @param string $fields Field to search against
-     * @param array $terms Search terms that may be or not be in the result
-     * @param array $must_terms Search terms that have to be in the result
-     * @param array $exclude_terms Search terms that have to be not in the result
-     */
-    public function getFulltextQuery($field, $terms, $must_terms = array(), $exclude_terms = array(), $label = 1)
-    {
-        $condition = $or_condition = $not_condition = array();
-        foreach($must_terms as $term) {
-            $condition[] = $this->quoteTerm($term);
-        }
-
-        foreach($terms as $term) {
-            $or_condition[] = $this->quoteTerm($term);
-        }
-
-        if(!empty($or_condition)) {
-            $condition[] = "(".join(" | ", $or_condition).")";
-        }
-
-        foreach($exclude_terms as $term) {
-            $not_condition[] = " ~".$this->quoteTerm($term);
-        }
-        $condition = $this->quoted(join(" & ",$condition).join('', $not_condition));
-        return "CONTAINS($field, $condition, $label) > 0";
-    }
-
-    /**
      * (non-PHPdoc)
      * @see DBManager::getScriptName()
      */
@@ -1951,11 +1905,6 @@ LEFT JOIN all_constraints c
     public function valid()
     {
         return function_exists("ocilogon");
-    }
-
-    public function full_text_indexing_installed()
-    {
-        return true;
     }
 
     /**

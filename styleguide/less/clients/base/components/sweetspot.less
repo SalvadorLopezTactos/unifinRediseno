@@ -28,40 +28,40 @@
   left: ~'calc(50% - 250px)';
   margin: 0 auto;
   border-radius: 10px;
-  border: 6px solid rgba(0, 0, 0, 0.5);
+  border: 6px solid fade(@black, 50%);
 
   &[data-theme=light] {
     border-radius: 2px;
-    border: 1px solid #ddd;
-    box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.5);
+    border: 1px solid @grayLighter;
+    box-shadow: 2px 5px 15px fade(@black, 50%);
 
     input[type=text] {
-      color: #333;
-      background-color: transparent;
+      color: @grayDarkish;
+      background-color: @transparent;
     }
 
     ul {
-      background-color: transparent;
+      background-color: @transparent;
     }
 
     .sweetspot-results {
       p {
         margin: 0 10px;
         padding: 2px 0 0;
-        background-color: transparent;
+        background-color: @transparent;
         color: @gray;
-        border-bottom: 1px solid #c5c5c5;
+        border-bottom: 1px solid @grayDarkish;
       }
 
       li[data-sweetaction] {
         border-radius: 0;
 
         &.active {
-          background-color: rgba(0, 0, 0, 0.07);
+          background-color: fade(@black, 7%);
         }
 
         &:hover {
-          background-color: rgba(0, 0, 0, 0.07);
+          background-color: fade(@black, 7%);
         }
       }
     }
@@ -70,8 +70,8 @@
   &[data-theme=dark] {
     border-radius: 2px;
     border: 1px solid @grayDark;
-    box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.5);
-    background-color: #343433;
+    box-shadow: 2px 5px 15px fade(@black, 50%);
+    background-color: @grayDarkish;
 
     input[type=text] {
       color: @sweetspotDarkText;
@@ -79,7 +79,7 @@
     }
 
     ul {
-      background-color: #343433;
+      background-color: @grayDark;
     }
 
     img {
@@ -87,7 +87,7 @@
     }
 
     i {
-      color: rgba(255, 255, 255, 0.8);
+      color: fade(@white, 80%);
 
       &:hover {
         color: @sweetspotDarkText;
@@ -101,7 +101,7 @@
         padding: 2px 0 0;
         background-color: transparent;
         color: @sweetspotDarkText;
-        border-bottom: 1px solid #6c6c6c;
+        border-bottom: 1px solid @grayLight;
       }
 
       li[data-sweetaction] {
@@ -112,31 +112,31 @@
 
           > div.result-text {
             div.result-keyword.label {
-              background-color: rgba(255, 255, 255, 0.8);
-              color: #343433;
+              background-color: fade(@white, 80%);
+              color: @grayDark;
               border: none;
             }
           }
         }
 
         .sweetspot-icon {
-          color: rgba(255, 255, 255, 0.8);
+          color: fade(@white, 80%);
         }
 
         .fa-mail-forward {
-          color: rgba(255, 255, 255, 0.8);
+          color: fade(@white, 80%);
         }
 
         &.active {
-          background-color: rgba(255, 255, 255, 0.07);
+          background-color: fade(@white, 7%);
 
           .fa-mail-forward {
-            color: rgba(255, 255, 255, 0.8);
+            color: fade(@white, 80%);
           }
         }
 
         &:hover {
-          background-color: rgba(255, 255, 255, 0.07);
+          background-color: fade(@white, 7%);
         }
       }
     }
@@ -171,7 +171,7 @@
     margin: 3px 3px 0 0;
 
     &:hover {
-      color: #333;
+      color: @grayDark;
       cursor: pointer;
     }
   }
@@ -200,7 +200,7 @@
       li[data-sweetaction] {
         height: 50px;
         margin: 5px;
-        background-color: transparent;
+        background-color: @transparent;
         border-radius: 3px;
         position: relative;
 
@@ -255,7 +255,7 @@
 
           .fa-mail-forward {
             display: block;
-            color: rgba(0, 0, 0, 0.7);
+            color: fade(@black, 70%);
           }
 
           .result-icon {
@@ -276,7 +276,7 @@
           right: 20px;
           top: 12px;
           font-size: 20px;
-          color: rgba(0, 0, 0, 0.2);
+          color: fade(@black, 20%);
         }
       }
     }
@@ -285,7 +285,7 @@
       height: 18px;
       margin: 0;
       padding: 2px 10px 0;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: fade(@black, 50%);
       color: @sweetspotGrey;
       border-radius: 0;
       font-size: 11px;

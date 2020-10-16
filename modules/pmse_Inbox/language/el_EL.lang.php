@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => 'Αντιστοίχιση χρήστη εφαρμόζεται',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Προεπισκόπηση διαδικασίας σχεδιασμού',
+    'LBL_PROJECT_RUN_ORDER' => 'Σειρά Λειτουργίας',
 );
 

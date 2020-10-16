@@ -51,7 +51,7 @@ $mod_strings = array(
     "LBL_SNIP_PURCHASE_SUMMARY" => "이메일 보관 서비스를 사용하려면 SugarCRM 예시로부터 라이센스를 구입해야합니다.",
     "LBL_SNIP_PURCHASE" => "구입하려면 이곳을 클릭하십시오,",
     'LBL_SNIP_EMAIL' => '이메일 보관 주소',
-    'LBL_SNIP_AGREE' => "본인은 상기 조항과 개인보호 조약에 동의합니다.",
+    'LBL_SNIP_AGREE' => "본인은 상기 조항과 <a href='https://www.sugarcrm.com/legal/privacy-policy/' target='_blank'>개인정보 정책</a>에 동의합니다.",
     'LBL_SNIP_PRIVACY' => '개인보호 조약',
 
     'LBL_SNIP_STATUS_PINGBACK_FAIL' => 'Pingback 이 실패하였습니다.',

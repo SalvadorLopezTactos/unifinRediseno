@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => '状态',
   'LBL_PRJ_MODULE' => '目标模块',
+  'LBL_PRJ_RUN_ORDER' => '运行顺序',
   'LBL_PMSE_BUTTON_SAVE' => '保存',
   'LBL_PMSE_BUTTON_CANCEL' => '取消',
   'LBL_PMSE_BUTTON_YES' => '是',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => '已导入流程定义，但该流程定义含有一个或多个商务规则动作（尚未选择商务规则）。',
     'LBL_BPM_IMPORT_SELECT' => '此流程定义含有以下商务规则和电子邮件模板。'
         . '请选择您要导入的项目。',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => '商务规则',
     'LBL_EMAIL_TEMPLATES' => '电子邮件模板',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => '主管',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => '由用户创建',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => '最新用户修改',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => '系统电子邮件',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => '商务规则',
     'LBL_PMSE_LABEL_RULE' => '规则',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => '分配用户',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => '更新记录上的“负责人”',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => '新增相关记录',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => '相关模块',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => '活动名称为空。',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => '形状组合中已包含此名称 "%s"。',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => '天',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => '小时',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => '分钟',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => '营业时间',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => '业务中心',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => '来自目标模块',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => '来自 ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' 模块',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => '字符串、数字和 Boolean',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => '编号',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => '值',

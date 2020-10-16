@@ -51,7 +51,7 @@ $mod_strings = array(
     "LBL_SNIP_PURCHASE_SUMMARY" => "כדי להשתמש בארכיון הדואר,עליך לרכוש רישיון להתקנת שוגר שלך",
     "LBL_SNIP_PURCHASE" => "הקלק כאן לרכישה",
     'LBL_SNIP_EMAIL' => 'כתובת ארכיון הדואר',
-    'LBL_SNIP_AGREE' => "I agree to the above terms and the <a href=&#39;http://www.sugarcrm.com/crm/TRUSTe/privacy.html&#39; target=&#39;_blank&#39;>privacy agreement</a>.",
+    'LBL_SNIP_AGREE' => "אני מסכים לתנאים שלעיל ול<a href='https://www.sugarcrm.com/legal/privacy-policy/' target='_blank'>מדיניות הפרטיות</a>.",
     'LBL_SNIP_PRIVACY' => 'הצהרת פרטיות',
 
     'LBL_SNIP_STATUS_PINGBACK_FAIL' => 'שליחת פינג חוזר נכשלה',

@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'Sähköpostit: Yhteystiedot',
     'LBL_EMAILS_LEADS_REL' => 'Sähköpostit: Liidit',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'Sähköpostit: Mahdollisuudet',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'Sähköpostit: Muistiinpanot',
     'LBL_EMAILS_PROJECT_REL' => 'Sähköpostit:Projekti',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'Sähköpostit:ProjektiTehtävä',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'Lähettäjä:',
     'LBL_REPLY_TO' => 'Vastaa:',
     'LBL_HTML_BODY' => 'HTML-runko',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'Vastaanottajat',
     'LBL_LEADS_SUBPANEL_TITLE' => 'Liidit',
     'LBL_MESSAGE_SENT' => 'Viesti lähetetty',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'Vastauksen tunnus',
     'LBL_TYPE' => 'Tyyppi:',
     'LBL_EMAIL_STATE' => 'Tila',
+    'LBL_EMAIL_DIRECTION' => 'Suunta',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'Tarkista!',

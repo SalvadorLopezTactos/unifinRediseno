@@ -31,6 +31,7 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
         'Activities',
         'Products',
         'ProductTemplates',
+        'ProductBundles',
         'Leads',
         'Users',
         'pmse_Business_Rules',
@@ -285,8 +286,28 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
      */
     public function getDefaultDefForModule($module)
     {
+        // check if custom def exists
+        $fileName = "modules/$module/clients/base/layouts/convert-main-for-leads/convert-main-for-leads.php";
+
+        if (file_exists("custom/$fileName")) {
+            include "custom/$fileName";
+        } elseif (file_exists($fileName)) {
+            include $fileName;
+        }
+
+        if (isset($viewdefs[$module]['base']['layout']['convert-main-for-leads'])) {
+            return $viewdefs[$module]['base']['layout']['convert-main-for-leads'];
+        }
+
+        // check if original def exists
         $originalViewDef = $this->getOriginalViewDefs();
         $originalConvertDef = $this->getConvertDef($originalViewDef);
+
+        if ($moduleDef = $this->getDefForModule($module, $originalConvertDef)) {
+            return $moduleDef;
+        }
+
+        // use default def
         $defaultModuleDef = array_merge(array('module' => $module), $this->defaultModuleDefSettings);
 
         // if duplicate check is enabled for a module that is not already in the original viewdef
@@ -295,8 +316,7 @@ class ConvertLayoutMetadataParser extends GridLayoutMetaDataParser
             $defaultModuleDef['duplicateCheckOnStart'] = true;
         }
 
-        $moduleDef = $this->getDefForModule($module, $originalConvertDef);
-        return $moduleDef ? $moduleDef : $defaultModuleDef;
+        return $defaultModuleDef;
     }
 
     /**

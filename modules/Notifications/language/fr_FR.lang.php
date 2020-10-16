@@ -50,4 +50,6 @@ $mod_strings = array(
     'LBL_PARENT_ID' => 'Parent (ID)',
     'LBL_READ' => 'Lu',
     'LBL_UNREAD' => 'Non Lu',
+    'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'Vous avez été mentionné par',
+    'LBL_YOU_HAVE_BEEN_MENTIONED' => 'Vous avez été mentionné',
 );

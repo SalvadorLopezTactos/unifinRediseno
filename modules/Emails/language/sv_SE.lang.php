@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'Email:Kontakter',
     'LBL_EMAILS_LEADS_REL' => 'Email:Leads',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'Email:Affärsmöjligheter',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'Email:Anteckningar',
     'LBL_EMAILS_PROJECT_REL' => 'Email:Projekt',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'Email:Projektuppgifter',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'Avsändare:',
     'LBL_REPLY_TO' => 'Svara till:',
     'LBL_HTML_BODY' => 'HTML meddelande',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'Mottagare',
     'LBL_LEADS_SUBPANEL_TITLE' => 'Leads',
     'LBL_MESSAGE_SENT' => 'Meddelande skickat',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'Svara till Id',
     'LBL_TYPE' => 'Typ',
     'LBL_EMAIL_STATE' => 'Tillstånd',
+    'LBL_EMAIL_DIRECTION' => 'Riktning',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'Var god kontrollera!',

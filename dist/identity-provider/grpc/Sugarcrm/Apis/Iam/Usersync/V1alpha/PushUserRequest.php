@@ -28,21 +28,9 @@ class PushUserRequest extends \Google\Protobuf\Internal\Message
      */
     private $user = null;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type int $action
-     *           message action user could be created, updated or deleted
-     *     @type \Sugarcrm\Apis\Iam\User\V1alpha\User $user
-     *           user data object
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Usersync\V1Alpha\Pushuser::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

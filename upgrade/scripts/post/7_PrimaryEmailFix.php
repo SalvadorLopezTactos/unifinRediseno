@@ -50,8 +50,7 @@ class SugarUpgradePrimaryEmailFix extends UpgradeScript
                 true, 
                 $emailAddress['reply_to_address'], 
                 $emailAddress['invalid_email'], 
-                $emailAddress['opt_out'], 
-                $emailAddress['email_address_id']
+                $emailAddress['opt_out']
             );
 
             $user->emailAddress->save($user->id, $user->module_dir);

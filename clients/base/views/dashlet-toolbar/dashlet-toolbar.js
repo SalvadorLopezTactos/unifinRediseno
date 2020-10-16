@@ -29,6 +29,21 @@
         'hidden.bs.dropdown': '_toggleAria'
     },
 
+    /**
+     * Button states.
+     */
+    _STATE: {
+        EDIT: 'edit',
+        VIEW: 'view'
+    },
+
+    /**
+     * List of fields to display in the header.
+     *
+     * @property {Object[]|null}
+     */
+    headerFields: null,
+
     initialize: function(options) {
         _.extend(options.meta, app.metadata.getView(null, 'dashlet-toolbar'), options.meta.toolbar);
         app.view.View.prototype.initialize.call(this, options);
@@ -41,6 +56,101 @@
          * @type {boolean}
          */
         this.canEdit = app.acl.hasAccessToModel('edit', model) || false;
+
+        this.buttons = this.meta.buttons;
+    },
+
+    /**
+     * @inheritdoc
+     */
+    bindDataChange: function() {
+        this._super('bindDataChange');
+        this.context.on('dashlet:toolbar:change', function(headerFields, headerButtons, dashletModel, dashlet) {
+            this.headerFields = headerFields;
+            this.buttons = _.union(headerButtons, this.meta.buttons);
+            if (dashletModel) {
+                this.dashletModel = dashletModel;
+            }
+            if (dashlet) {
+                this.dashlet = dashlet;
+            }
+            this.render();
+        }, this);
+    },
+
+    /**
+     * @inheritdoc
+     *
+     * Handle the record state if this is a toolbar for a dashablerecord.
+     */
+    _render: function() {
+        this._super('_render');
+        if (this.dashlet) {
+            this._handleRecordState(this.dashlet && this.dashlet.action);
+        }
+    },
+
+    /**
+     * Handle changes between edit/detail mode (for record view dashlets).
+     *
+     * @param {string} action Action name.
+     * @private
+     */
+    _handleRecordState: function(action) {
+        if (action === 'edit') {
+            this.setButtonStates(this._STATE.EDIT);
+            this.toggleEdit(true);
+        } else {
+            this.setButtonStates(this._STATE.VIEW);
+        }
+    },
+
+    /**
+     * Show/hide buttons depending on the state defined for each buttons in the
+     * metadata.
+     *
+     * @param {string} state The {@link #_STATE} of the current view.
+     */
+    setButtonStates: function(state) {
+        this.currentState = state;
+
+        _.each(this.buttons, function(field) {
+            field = this.getField(field.name);
+            if (!field) {
+                return;
+            }
+            var showOn = field.def && field.def.showOn;
+            if (_.isUndefined(showOn) || (showOn === state)) {
+                field.show();
+            } else {
+                field.hide();
+            }
+        }, this);
+
+        this.toggleButtons(true);
+    },
+
+    /**
+     * Enables or disables the action buttons that are currently shown on the
+     * page. Toggles the `.disabled` class by default.
+     *
+     * @param {boolean} [enable=false] Whether to enable or disable the action
+     *   buttons. Defaults to `false`.
+     */
+    toggleButtons: function(enable) {
+        var state = !_.isUndefined(enable) ? !enable : false;
+
+        _.each(this.buttons, function(button) {
+            button = this.getField(button.name);
+            if (!button) {
+                return;
+            }
+
+            var showOn = button.def && button.def.showOn;
+            if (_.isUndefined(showOn) || this.currentState === showOn) {
+                button.setDisabled(state);
+            }
+        }, this);
     },
 
     /**
@@ -86,9 +196,15 @@
         this.layout.viewReport();
     },
 
+    /**
+     * Edit the dashlet.
+     *
+     * @param {Event} evt The click event.
+     */
     editClicked: function(evt) {
         this.layout.editDashlet();
     },
+
     /**
      * Toggle current dashlet frame when user clicks the toolbar action
      *

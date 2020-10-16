@@ -15,6 +15,7 @@ namespace Sugarcrm\IdentityProvider\Authentication\User;
 use Sugarcrm\IdentityProvider\Authentication\User as LocalUser;
 use Symfony\Component\Security\Core\User\UserChecker;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Exception\DisabledException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Sugarcrm\IdentityProvider\Authentication\Exception\InvalidIdentifier\EmptyFieldException;
 use Sugarcrm\IdentityProvider\Authentication\Exception\InvalidIdentifier\EmptyIdentifierException;
@@ -64,6 +65,10 @@ class SAMLUserChecker extends UserChecker
             if (empty($this->config['sp']['provisionUser'])) {
                 throw $e;
             }
+            if ($this->localUserProvider->isDeactivatedUserExist($value, Providers::SAML)) {
+                throw new DisabledException('User account is disabled');
+            }
+
             $localUser = $this->localUserProvider->createUser(
                 $value,
                 Providers::SAML,

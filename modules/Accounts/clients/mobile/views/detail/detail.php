@@ -15,33 +15,37 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
-$viewdefs['Accounts']['mobile']['view']['detail'] = array(
-	'templateMeta' => array(
-                            'maxColumns' => '1', 
-                            'widths' => array(
-								array('label' => '10', 'field' => '30'), 
-                            ),                                  
-                           ),
-    'panels' => array(
-        array(
+
+$viewdefs['Accounts']['mobile']['view']['detail'] = [
+    'templateMeta' => [
+        'maxColumns' => '1',
+        'widths' => [
+            [
+                'label' => '10',
+                'field' => '30',
+            ],
+        ],
+    ],
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
-            'fields' => array(
-                array(
+            'fields' => [
+                [
                     'name'=>'name',
-                    'displayParams'=>array(
-                        'required'=>true,
-                        'wireless_edit_only'=>true,
-                    ),
-                ),
+                    'displayParams' => [
+                        'required' => true,
+                        'wireless_edit_only' => true,
+                    ],
+                ],
                 'phone_office',
-                array(
-                    'name'=>'website',
-                    'displayParams'=>array(
+                [
+                    'name' => 'website',
+                    'displayParams' => [
                         'type'=>'link',
-                    ),
-                ),
+                    ],
+                ],
                 'email',
+                'tag',
                 'billing_address_street',
                 'billing_address_city',
                 'billing_address_state',
@@ -54,7 +58,7 @@ $viewdefs['Accounts']['mobile']['view']['detail'] = array(
                 'shipping_address_country',
                 'assigned_user_name',
                 'team_name',
-            ),
-        ),
-	),
-);
+            ],
+        ],
+    ],
+];

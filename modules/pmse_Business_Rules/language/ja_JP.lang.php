@@ -42,7 +42,7 @@ $mod_strings = array (
     'LBL_PMSE_IMPORT_BUTTON_LABEL' => 'インポート',
 
     'LBL_PMSE_MY_BUSINESS_RULES' => '私のプロセスビジネスルール',
-    'LBL_PMSE_ALL_BUSINESS_RULES' => '全てのプロセスビジネスルール',
+    'LBL_PMSE_ALL_BUSINESS_RULES' => 'すべてのプロセスビジネスルール',
 
     'LBL_PMSE_BUSINESS_RULES_SINGLE_HIT' => 'プロセスビジネスルール　シングルヒット',
 

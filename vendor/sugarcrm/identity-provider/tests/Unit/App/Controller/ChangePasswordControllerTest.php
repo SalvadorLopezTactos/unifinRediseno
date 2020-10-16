@@ -17,6 +17,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\DBAL\Driver\Statement;
 
 use Sugarcrm\IdentityProvider\App\Authentication\AuthProviderManagerBuilder;
+use Sugarcrm\IdentityProvider\App\Authentication\OAuth2Service;
 use Sugarcrm\IdentityProvider\App\Authentication\RevokeAccessTokensService;
 use Sugarcrm\IdentityProvider\App\Controller\ChangePasswordController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -52,6 +53,12 @@ class ChangePasswordControllerTest extends \PHPUnit_Framework_TestCase
      * @var \PHPUnit_Framework_MockObject_MockObject | Request
      */
     protected $request;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject | OAuth2Service
+     */
+    protected $oauth2Service;
+
 
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject | Service
@@ -141,6 +148,9 @@ class ChangePasswordControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->application = $this->createMock(Application::class);
         $this->request = $this->createMock(Request::class);
+
+        $this->oauth2Service = $this->createMock(OAuth2Service::class);
+        $this->application->method('getOAuth2Service')->willReturn($this->oauth2Service);
 
         $this->revokeAccessTokensService = $this->createMock(RevokeAccessTokensService::class);
         $this->application->method('getRevokeAccessTokensService')->willReturn($this->revokeAccessTokensService);

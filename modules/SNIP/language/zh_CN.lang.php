@@ -54,7 +54,7 @@ $mod_strings = array(
     "LBL_SNIP_PURCHASE_SUMMARY" => "您必须购买 SugarCRM 实例的许可证才能用电子邮件归档",
     "LBL_SNIP_PURCHASE" => "点击这里购买",
     'LBL_SNIP_EMAIL' => '电子邮件归档地址',
-    'LBL_SNIP_AGREE' => "我同意上述条款和 <a href='http://www.sugarcrm.com/crm/TRUSTe/privacy.html' target='_blank'>隐私协议</a>。",
+    'LBL_SNIP_AGREE' => "我同意上述条款和 <a href='https://www.sugarcrm.com/legal/privacy-policy/' target='_blank'>隐私政策</a>。",
     'LBL_SNIP_PRIVACY' => '隐私协议',
 
     'LBL_SNIP_STATUS_PINGBACK_FAIL' => '回ping失败',

@@ -570,10 +570,6 @@ function deleteCache(){
 	       	}
 	   }
 	}
-	//Rebuild dashlets cache
-	require_once('include/Dashlets/DashletCacheBuilder.php');
-	$dc = new DashletCacheBuilder();
-    $dc->buildCache();
 }
 
 function deleteChance(){
@@ -977,7 +973,7 @@ function checkSystemCompliance() {
 	}
 
 	// imap
-	if(function_exists('imap_open')) {
+    if (extension_loaded('imap')) {
 		$ret['imapStatus'] = "<b><span class=go>{$installer_mod_strings['LBL_CHECKSYS_OK']}</span></b>";
 	} else {
 		$ret['imapStatus'] = "<b><span class=go>{$installer_mod_strings['ERR_CHECKSYS_IMAP']}</span></b>";
@@ -2150,104 +2146,6 @@ function handleExecuteSqlKeys($db, $tableName, $disable)
     }
 }
 
-function parseAndExecuteSqlFile($sqlScript,$forStepQuery='',$resumeFromQuery='')
-{
-	global $sugar_config;
-	$alterTableSchema = '';
-	$sqlErrors = array();
-	if(!isset($_SESSION['sqlSkippedQueries'])){
-		$_SESSION['sqlSkippedQueries'] = array();
-	}
-	$db = DBManagerFactory::getInstance();
-	$disable_keys = ($db->dbType == "mysql"); // have to use old way for now for upgrades
-	if(strpos($resumeFromQuery,",") != false){
-		$resumeFromQuery = explode(",",$resumeFromQuery);
-	}
-	if(file_exists($sqlScript)) {
-		$fp = fopen($sqlScript, 'r');
-		$contents = stream_get_contents($fp);
-		$anyScriptChanges =$contents;
-		$resumeAfterFound = false;
-		if(rewind($fp)) {
-			$completeLine = '';
-			$count = 0;
-			while($line = fgets($fp)) {
-				if(strpos($line, '--') === false) {
-					$completeLine .= " ".trim($line);
-					if(strpos($line, ';') !== false) {
-						$query = '';
-						$query = str_replace(';','',$completeLine);
-						//if resume from query is not null then find out from where
-						//it should start executing the query.
-
-						if($query != null && $resumeFromQuery != null){
-							if(!$resumeAfterFound){
-								if(strpos($query,",") != false){
-									$queArray = explode(",",$query);
-									for($i=0;$i<sizeof($resumeFromQuery);$i++){
-										if(strcasecmp(trim($resumeFromQuery[$i]),trim($queArray[$i]))==0){
-											$resumeAfterFound = true;
-										} else {
-											$resumeAfterFound = false;
-											break;
-										}
-									}//for
-
-								}
-								elseif(strcasecmp(trim($resumeFromQuery),trim($query))==0){
-									$resumeAfterFound = true;
-								}
-							}
-							if($resumeAfterFound){
-								$count++;
-							}
-							// if $count=1 means it is just found so skip the query. Run the next one
-							if($query != null && $resumeAfterFound && $count >1){
-    							$tableName = getAlterTable($query);
-								if($disable_keys)
-								{
-									handleExecuteSqlKeys($db, $tableName, true);
-								}
-								$db->query($query);
-								if($db->checkError()){
-									//put in the array to use later on
-									$_SESSION['sqlSkippedQueries'][] = $query;
-								}
-								if($disable_keys)
-								{
-									handleExecuteSqlKeys($db, $tableName, false);
-								}
-								$progQuery[$forStepQuery]=$query;
-								post_install_progress($progQuery,$action='set');
-							}//if
-						}
-						elseif($query != null){
-							$tableName = getAlterTable($query);
-							if($disable_keys)
-							{
-								handleExecuteSqlKeys($db, $tableName, true);
-							}
-							$db->query($query);
-							if($disable_keys)
-							{
-								handleExecuteSqlKeys($db, $tableName, false);
-							}
-							$progQuery[$forStepQuery]=$query;
-							post_install_progress($progQuery,$action='set');
-							if($db->checkError()){
-								//put in the array to use later on
-								$_SESSION['sqlSkippedQueries'][] = $query;
-							}
-						}
-						$completeLine = '';
-					}
-				}
-			}//while
-		}
-	}
-}
-
-
 function getAlterTable($query){
 	$query = strtolower($query);
 	if (preg_match('/^\s*alter\s+table\s+/', $query)) {
@@ -2612,257 +2510,6 @@ function repairDBForUpgrade($execute=false,$path=''){
 }
 
 /**
- * upgradeDashletsForSalesAndMarketing
- *
- */
-function upgradeDashletsForSalesAndMarketing() {
-	if(file_exists($cachedfile = sugar_cached('dashlets/dashlets.php'))) {
-   	   require($cachedfile);
-   	}
-
-   	if(file_exists('modules/Home/dashlets.php')) {
-   	   require('modules/Home/dashlets.php');
-   	}
-
-
-
-    require_once('include/MySugar/MySugar.php');
-
-    $prefstomove = array(
-        'mypbss_date_start' => 'MyPipelineBySalesStageDashlet',
-        'mypbss_date_end' => 'MyPipelineBySalesStageDashlet',
-        'mypbss_sales_stages' => 'MyPipelineBySalesStageDashlet',
-        'mypbss_chart_type' => 'MyPipelineBySalesStageDashlet',
-        'lsbo_lead_sources' => 'OpportunitiesByLeadSourceByOutcomeDashlet',
-        'lsbo_ids' => 'OpportunitiesByLeadSourceByOutcomeDashlet',
-        'pbls_lead_sources' => 'OpportunitiesByLeadSourceDashlet',
-        'pbls_ids' => 'OpportunitiesByLeadSourceDashlet',
-        'pbss_date_start' => 'PipelineBySalesStageDashlet',
-        'pbss_date_end' => 'PipelineBySalesStageDashlet',
-        'pbss_sales_stages' => 'PipelineBySalesStageDashlet',
-        'pbss_chart_type' => 'PipelineBySalesStageDashlet',
-        'obm_date_start' => 'OutcomeByMonthDashlet',
-        'obm_date_end' => 'OutcomeByMonthDashlet',
-        'obm_ids' => 'OutcomeByMonthDashlet');
-
-	$GLOBALS['mod_strings'] = return_module_language($GLOBALS['current_language'], 'Home');
-    $db = DBManagerFactory::getInstance();
-    $result = $db->query("SELECT id FROM users where deleted = '0'");
-
-   	while($row = $db->fetchByAssoc($result)) {
-	      $current_user = new User();
-	      $current_user->retrieve($row['id']);
-
-	      //Set the user theme to be 'Sugar' theme since this is run for CE flavor conversions
-	      $current_user->setPreference('user_theme', 'Sugar', 0, 'global');
-
-		  $pages = $current_user->getPreference('pages', 'Home');
-
-		  if(empty($pages)) {
-             continue;
-		  }
-
-		  $empty_dashlets = array();
-		  $dashlets = $current_user->getPreference('dashlets', 'Home');
-		  $dashlets = !empty($dashlets) ? $dashlets : $empty_dashlets;
-   		  $existingDashlets = array();
-   		  foreach($dashlets as $id=>$dashlet) {
-   		  	      if(!empty($dashlet['className']) && !is_array($dashlet['className'])) {
-		  	         $existingDashlets[$dashlet['className']] = $dashlet['className'];
-   		  	      }
-		  } //foreach
-
-
-		    // BEGIN 'Sales Page'
-		    $salesDashlets = array();
-		    foreach($defaultSalesDashlets as $salesDashletName=>$module){
-				// clint - fixes bug #20398
-				// only display dashlets that are from visibile modules and that the user has permission to list
-				$myDashlet = new MySugar($module);
-				$displayDashlet = $myDashlet->checkDashletDisplay();
-		    	if (isset($dashletsFiles[$salesDashletName]) && $displayDashlet){
-		            $options = array();
-		            $prefsforthisdashlet = array_keys($prefstomove,$salesDashletName);
-		            foreach ( $prefsforthisdashlet as $pref ) {
-		               $options[$pref] = $current_user->getPreference($pref);
-		            }
-
-		            $salesDashlets[create_guid()] = array('className' => $salesDashletName,
-												 'module'=>$module,
-			                                         'fileLocation' => $dashletsFiles[$salesDashletName]['file'],
-		                                             'options' => $options);
-		    	}
-		    }
-
-		    foreach ($defaultSalesChartDashlets as $salesChartDashlet=>$module) {
-				$savedReport = new SavedReport();
-				$reportId = $savedReport->retrieveReportIdByName($salesChartDashlet);
-				// clint - fixes bug #20398
-				// only display dashlets that are from visibile modules and that the user has permission to list
-				$myDashlet = new MySugar($module);
-				$displayDashlet = $myDashlet->checkDashletDisplay();
-
-				if(isset($reportId) && $displayDashlet) {
-		    		$salesDashlets[create_guid()] = array('className' => 'ChartsDashlet',
-													 	  'module'=>$module,
-		    											  'fileLocation' => $dashletsFiles['ChartsDashlet']['file'],
-		    											  'reportId' => $reportId);
-		    	}
-		    }
-
-		    $count = 0;
-		    $salesColumns = array();
-		    $salesColumns[0] = array();
-		    $salesColumns[0]['width'] = '60%';
-		    $salesColumns[0]['dashlets'] = array();
-		    $salesColumns[1] = array();
-		    $salesColumns[1]['width'] = '40%';
-		    $salesColumns[1]['dashlets'] = array();
-
-		    foreach($salesDashlets as $guid=>$dashlet){
-		        if($count % 2 == 0) array_push($salesColumns[0]['dashlets'], $guid);
-		        else array_push($salesColumns[1]['dashlets'], $guid);
-		        $count++;
-		    }
-		    // END 'Sales Page'
-
-			// BEGIN 'Marketing Page'
-			$marketingDashlets = array();
-		    foreach ($defaultMarketingChartDashlets as $marketingChartDashlet=>$module){
-				$savedReport = new SavedReport();
-				$reportId = $savedReport->retrieveReportIdByName($marketingChartDashlet);
-				// clint - fixes bug #20398
-				// only display dashlets that are from visibile modules and that the user has permission to list
-				$myDashlet = new MySugar($module);
-				$displayDashlet = $myDashlet->checkDashletDisplay();
-
-				if(isset($reportId) && $displayDashlet) {
-		    		$marketingDashlets[create_guid()] = array('className' => 'ChartsDashlet',
-													 		'module'=>$module,
-		    												'fileLocation' => $dashletsFiles['ChartsDashlet']['file'],
-		    												'reportId' => $reportId, );
-			    }
-		    }
-
-		    foreach($defaultMarketingDashlets as $marketingDashletName=>$module){
-				// clint - fixes bug #20398
-				// only display dashlets that are from visibile modules and that the user has permission to list
-				$myDashlet = new MySugar($module);
-				$displayDashlet = $myDashlet->checkDashletDisplay();
-
-		    	if (isset($dashletsFiles[$marketingDashletName]) && $displayDashlet){
-			        $options = array();
-	            $prefsforthisdashlet = array_keys($prefstomove,$marketingDashletName);
-	            foreach ( $prefsforthisdashlet as $pref ) {
-	               $options[$pref] = $current_user->getPreference($pref);
-	            } //foreach
-	            $marketingDashlets[create_guid()] = array('className' => $marketingDashletName,
-										 		 'module'=>$module,
-		                                         'fileLocation' => $dashletsFiles[$marketingDashletName]['file'],
-	                                             'options' => $options);
-	    		}
-		    }
-
-		    $count = 0;
-		    $marketingColumns = array();
-		    $marketingColumns[0] = array();
-		    $marketingColumns[0]['width'] = '30%';
-		    $marketingColumns[0]['dashlets'] = array();
-		    $marketingColumns[1] = array();
-		    $marketingColumns[1]['width'] = '30%';
-		    $marketingColumns[1]['dashlets'] = array();
-		    $marketingColumns[2] = array();
-		    $marketingColumns[2]['width'] = '40%';
-		    $marketingColumns[2]['dashlets'] = array();
-
-		    foreach($marketingDashlets as $guid=>$dashlet){
-		        if($count % 3 == 0) array_push($marketingColumns[0]['dashlets'], $guid);
-		        else if($count % 3 == 1) array_push($marketingColumns[1]['dashlets'], $guid);
-		        else array_push($marketingColumns[2]['dashlets'], $guid);
-		        $count++;
-		    }
-			// END 'Marketing Page'
-
-		    // BEGIN 'Support Page'- bug46195
-			$supportDashlets = array();
-		    foreach ($defaultSupportChartDashlets as $supportChartDashlet=>$module){
-				$savedReport = new SavedReport();
-				$reportId = $savedReport->retrieveReportIdByName($supportChartDashlet);
-				$myDashlet = new MySugar($module);
-				$displayDashlet = $myDashlet->checkDashletDisplay();
-
-				if(isset($reportId) && $displayDashlet) {
-		    		$supportDashlets[create_guid()] = array('className' => 'ChartsDashlet',
-													 		'module'=>$module,
-		    												'fileLocation' => $dashletsFiles['ChartsDashlet']['file'],
-		    												'reportId' => $reportId, );
-			    }
-		    }
-
-		    foreach($defaultSupportDashlets as $supportDashletName=>$module){
-
-				$myDashlet = new MySugar($module);
-				$displayDashlet = $myDashlet->checkDashletDisplay();
-
-		    	if (isset($dashletsFiles[$supportDashletName]) && $displayDashlet){
-			        $options = array();
-	            $prefsforthisdashlet = array_keys($prefstomove,$supportDashletName);
-	            foreach ( $prefsforthisdashlet as $pref ) {
-	               $options[$pref] = $current_user->getPreference($pref);
-	            } //foreach
-	            $supportDashlets[create_guid()] = array('className' => $supportDashletName,
-										 		 'module'=>$module,
-		                                         'fileLocation' => $dashletsFiles[$supportDashletName]['file'],
-	                                             'options' => $options);
-	    		}
-		    }
-
-		    $count = 0;
-		    $supportColumns = array();
-		    $supportColumns[0] = array();
-		    $supportColumns[0]['width'] = '30%';
-		    $supportColumns[0]['dashlets'] = array();
-		    $supportColumns[1] = array();
-		    $supportColumns[1]['width'] = '30%';
-		    $supportColumns[1]['dashlets'] = array();
-		    $supportColumns[2] = array();
-		    $supportColumns[2]['width'] = '40%';
-		    $supportColumns[2]['dashlets'] = array();
-
-		    foreach($supportDashlets as $guid=>$dashlet){
-		        if($count % 3 == 0) array_push($supportColumns[0]['dashlets'], $guid);
-		        else if($count % 3 == 1) array_push($supportColumns[1]['dashlets'], $guid);
-		        else array_push($supportColumns[2]['dashlets'], $guid);
-		        $count++;
-		    }
-			// END ' Support Page' - bug 46195
-
-
-		   	//Set the dashlets pages to user preferences table
-		   	$pageIndex = count($pages);
-			$pages[$pageIndex]['columns'] = $salesColumns;
-			$pages[$pageIndex]['numColumns'] = '2';
-			$pages[$pageIndex]['pageTitle'] = $GLOBALS['mod_strings']['LBL_HOME_PAGE_2_NAME'];	// "Sales Page"
-			$pageIndex++;
-
-			$pages[$pageIndex]['columns'] = $marketingColumns;
-			$pages[$pageIndex]['numColumns'] = '3';
-			$pages[$pageIndex]['pageTitle'] = $GLOBALS['mod_strings']['LBL_HOME_PAGE_6_NAME'];	// "Marketing Page"
-			$pageIndex++;
-
-			$pages[$pageIndex]['columns'] = $supportColumns;
-			$pages[$pageIndex]['numColumns'] = '4';
-			$pages[$pageIndex]['pageTitle'] = $GLOBALS['mod_strings']['LBL_HOME_PAGE_3_NAME'];	// " Support Page" - bug 46195
-
-		    $dashlets = array_merge($dashlets, $salesDashlets, $marketingDashlets, $supportDashlets);
-		    $current_user->setPreference('dashlets', $dashlets, 0, 'Home');
-		    $current_user->setPreference('pages', $pages, 0, 'Home');
-		} //while
-
-} //upgradeDashletsForSalesAndMarketing
-
-
-/**
  * upgradeUserPreferences
  * This method updates the user_preferences table and sets the pages/dashlets for users
  * which have ACL access to Trackers so that the Tracker dashlets are set in their user perferences
@@ -2900,26 +2547,6 @@ function upgradeUserPreferences() {
    	} else if(file_exists('modules/Dashboard/dashlets.php')) {
    	   require('modules/Dashboard/dashlets.php');
    	}
-
-	$upgradeTrackingDashlets = array('TrackerDashlet'=>array(
-									    'file' => 'modules/Trackers/Dashlets/TrackerDashlet/TrackerDashlet.php',
-									    'class' => 'TrackerDashlet',
-									    'meta' => 'modules/Trackers/Dashlets/TrackerDashlet/TrackerDashlet.meta.php',
-									    'module' => 'Trackers',
-									 ),
-									 'MyModulesUsedChartDashlet'=>array(
-									    'file' => 'modules/Charts/Dashlets/MyModulesUsedChartDashlet/MyModulesUsedChartDashlet.php',
-									    'class' => 'MyModulesUsedChartDashlet',
-									    'meta' => 'modules/Charts/Dashlets/MyModulesUsedChartDashlet/MyModulesUsedChartDashlet.meta.php',
-									    'module' => 'Trackers',
-									 ),
-									 'MyTeamModulesUsedChartDashlet'=>array(
-									    'file' => 'modules/Charts/Dashlets/MyTeamModulesUsedChartDashlet/MyTeamModulesUsedChartDashlet.php',
-									    'class' => 'MyTeamModulesUsedChartDashlet',
-									    'meta' => 'modules/Charts/Dashlets/MyTeamModulesUsedChartDashlet/MyTeamModulesUsedChartDashlet.meta.php',
-									    'module' => 'Trackers',
-									 )
-							   );
 
     $GLOBALS['mod_strings'] = return_module_language($GLOBALS['current_language'], 'Home');
 
@@ -2990,42 +2617,6 @@ function upgradeUserPreferences() {
    		  	      }
 		  }
 
-		  if(ACLController::checkAccess('Trackers', 'view', false, 'Tracker')) {
-				$trackingDashlets = array();
-			    foreach($upgradeTrackingDashlets as $trackingDashletName=>$entry){
-			    	if (empty($existingDashlets[$trackingDashletName])) {
-			            $trackingDashlets[create_guid()] = array('className' => $trackingDashletName,
-				                                                 'fileLocation' => $entry['file'],
-			                                                     'options' => array());
-			    	}
-			    }
-
-			    if(empty($trackingDashlets)) {
-			       continue;
-			    }
-
-			    $trackingColumns = array();
-			    $trackingColumns[0] = array();
-			    $trackingColumns[0]['width'] = '50%';
-			    $trackingColumns[0]['dashlets'] = array();
-
-			    foreach($trackingDashlets as $guid=>$dashlet){
-			            array_push($trackingColumns[0]['dashlets'], $guid);
-			    }
-
-			    //Set the tracker dashlets to user preferences table
-		 		$dashlets = array_merge($dashlets, $trackingDashlets);
-		 		$current_user->setPreference('dashlets', $dashlets, 0, 'Home');
-
-		    	//Set the dashlets pages to user preferences table
-		    	$pageIndex = count($pages);
-				$pages[$pageIndex]['columns'] = $trackingColumns;
-				$pages[$pageIndex]['numColumns'] = '1';
-				$pages[$pageIndex]['pageTitle'] = $GLOBALS['mod_strings']['LBL_HOME_PAGE_4_NAME'];
-				$current_user->setPreference('pages', $pages, 0, 'Home');
-                $changed = true;
-		  } //if
-
         // we need to force save the changes to disk, otherwise we lose them.
         if($changed)
         {
@@ -3073,16 +2664,6 @@ function upgradeUserPreferences() {
 	   }
 	}
 
-	//Write the entries to cache/dashlets/dashlets.php
-	if(file_exists($cachedfile = sugar_cached('dashlets/dashlets.php'))) {
-	   require($cachedfile);
-	   foreach($upgradeTrackingDashlets as $id=>$entry) {
-	   	   if(!isset($dashletsFiles[$id])) {
-	   	   	  $dashletsFiles[$id] = $entry;
-	   	   }
-	   }
-	   write_array_to_file("dashletsFiles", $dashletsFiles, $cachedfile);
-	} //if
 }
 
 
@@ -3115,56 +2696,6 @@ function upgradeLocaleNameFormat($name_format) {
     return true;
 }
 
-
-function migrate_sugar_favorite_reports(){
-    require_once('modules/SugarFavorites/SugarFavorites.php');
-
-    // Need to repair the RC1 instances that have incorrect GUIDS
-    $deleteRows = array();
-    $res = $GLOBALS['db']->query("select * from sugarfavorites where module='Reports'");
-    while($row = $GLOBALS['db']->fetchByAssoc($res)){
-        $expectedId = SugarFavorites::generateGUID('Reports', $row['record_id'], $row['assigned_user_id']);
-        if ($row['id'] != $expectedId) {
-            $deleteRows[] = $row['id'];
-        }
-    }
-    $GLOBALS['db']->query("delete from sugarfavorites where id in ('" . implode("','",$deleteRows) . "')");
-    // End Repair
-
-
-    $active_users = array();
-    $res = $GLOBALS['db']->query("select id, user_name, deleted, status from users where is_group = 0 and portal_only = 0 and status = 'Active' and deleted = 0");
-    while($row = $GLOBALS['db']->fetchByAssoc($res)){
-        $active_users[] = $row['id'];
-    }
-
-    foreach($active_users as $user_id){
-        $user = new User();
-        $user->retrieve($user_id);
-
-        $user_favorites = $user->getPreference('favorites', 'Reports');
-        if(!is_array($user_favorites)) $user_favorites = array();
-
-        if(!empty($user_favorites)){
-            foreach($user_favorites as $report_id => $bool){
-                $fav = new SugarFavorites();
-                $record = SugarFavorites::generateGUID('Reports', $report_id, $user_id);
-                if(!$fav->retrieve($record, true, false)){
-                        $fav->new_with_id = true;
-                }
-                $fav->id = $record;
-                $fav->module = 'Reports';
-                $fav->record_id = $report_id;
-                $fav->assigned_user_id = $user->id;
-                $fav->created_by = $user->id;
-                $fav->modified_user_id = $user->id;
-
-                $fav->deleted = 0;
-                $fav->save();
-            }
-        }
-    }
-}
 
 function add_custom_modules_favorites_search(){
     $module_directories = scandir('modules');
@@ -3391,58 +2922,6 @@ function upgradeFolderSubscriptionsTeamSetId()
     logThis("Finished upgradeFolderSubscriptionsTeamSetId()");
 }
 
-/**
- * upgradeModulesForTeam
- *
- * This method update the associated_user_id, name, name_2 to the private team records on teams table
- * This function is used for upgrade process from 5.1.x and 5.2.x.
- *
- */
-function upgradeModulesForTeam() {
-    logThis("In upgradeModulesForTeam()");
-    $result = $GLOBALS['db']->query("SELECT id, user_name, first_name, last_name FROM users where deleted=0");
-
-    while($row = $GLOBALS['db']->fetchByAssoc($result)) {
-    	$results2 = $GLOBALS['db']->query("SELECT id FROM teams WHERE name = '({$row['user_name']})'");
-    	$assoc = '';
-  		if(!$assoc = $GLOBALS['db']->fetchByAssoc($results2)) {
-  			//if team does not exist, then lets create the team for this user
-  			$team = new Team();
-			$user = new User();
-  			$user->retrieve($row['id']);
-			$team->new_user_created($user);
-			$team_id = $team->id;
-  		}else{
-  			$team_id =$assoc['id'];
-  		}
-
-  			//upgrade the team
-  			$name = is_null($row['first_name'])?'':$row['first_name'];
-			$name_2 = is_null($row['last_name'])?'':$row['last_name'];
-			$associated_user_id = $row['id'];
-
-			//Bug 32914
-			//Ensure team->name is not empty by using team->name_2 if available
-			if(empty($name) && !empty($name_2)) {
-			   $name = $name_2;
-			   $name_2 = '';
-			}
-
-			$query = "UPDATE teams SET name = '{$name}', name_2 = '{$name_2}', associated_user_id = '{$associated_user_id}' WHERE id = '{$team_id}'";
-			$GLOBALS['db']->query($query);
-    } //while
-
-    //Update the team_set_id and default_team columns
-    $ce_to_pro_or_ent = isset($_SESSION['upgrade_from_flavor']) && preg_match('/^SugarCE.*?(Pro|Ent|Corp|Ult)$/', $_SESSION['upgrade_from_flavor']);
-
-    //Update team_set_id
-	if($ce_to_pro_or_ent) {
-	   $GLOBALS['db']->query("update users set team_set_id = (select teams.id from teams where teams.associated_user_id = users.id)");
-	   $GLOBALS['db']->query("update users set default_team = (select teams.id from teams where teams.associated_user_id = users.id)");
-	}
-
-}
-
 
     function addNewSystemTabsFromUpgrade($from_dir){
         global $path;
@@ -3518,92 +2997,6 @@ function upgradeModulesForTeam() {
 		}
 	}
 
-	function check_FTS(){
-		//check to see if FTS is installed
-		global $sugar_config;
-		if(is_callable(array($GLOBALS['db'], "supports")) && $GLOBALS['db']->supports('fulltext') && $GLOBALS['db']->full_text_indexing_installed()) {
-            return true;
-		}
-		return false;
-	}
-
-    /**
-     * convertImageToText
-     * @deprecated
-     * This method attempts to convert date type image to text on Microsoft SQL Server.
-     * This method could NOT be used in any other type of datebases.
-     */
-	function convertImageToText($table_name,$column_name){
-		$set_lang = "SET LANGUAGE us_english";
-		$GLOBALS['db']->query($set_lang);
-	    if($GLOBALS['db']->lastError()){
-            logThis('An error occurred when performing this query-->'.$set_lang);
-        }
-       $q="SELECT data_type
-        FROM INFORMATION_SCHEMA.Tables T JOIN INFORMATION_SCHEMA.Columns C
-        ON T.TABLE_NAME = C.TABLE_NAME where T.TABLE_NAME = '$table_name' and C.COLUMN_NAME = '$column_name'";
-       $res= $GLOBALS['db']->query($q);
-       if($GLOBALS['db']->lastError()){
-            logThis('An error occurred when performing this query-->'.$q);
-        }
-       $row= $GLOBALS['db']->fetchByAssoc($res);
-
-     if(trim(strtolower($row['data_type'])) == 'image'){
-        $addContent_temp = "alter table {$table_name} add {$column_name}_temp text null";
-        $GLOBALS['db']->query($addContent_temp);
-        if($GLOBALS['db']->lastError()){
-            logThis('An error occurred when performing this query-->'.$addContent_temp);
-        }
-        $qN = "select count=datalength({$column_name}), id, {$column_name} from {$table_name}";
-        $result = $GLOBALS['db']->query($qN);
-        while($row = $GLOBALS['db']->fetchByAssoc($result)){
-           if($row['count'] >8000){
-                $contentLength = $row['count'];
-                $start = 1;
-                $next=8000;
-                $convertedContent = '';
-                while($contentLength >0){
-                    $stepsQuery = "select cont=convert(varchar(max), convert(varbinary(8000), substring({$column_name},{$start},{$next}))) from {$table_name} where id= '{$row['id']}'";
-                    $steContQ = $GLOBALS['db']->query($stepsQuery);
-                    if($GLOBALS['db']->lastError()){
-                        logThis('An error occurred when performing this query-->'.$stepsQuery);
-                    }
-                    $stepCont = $GLOBALS['db']->fetchByAssoc($steContQ);
-                    if(isset($stepCont['cont'])){
-                        $convertedContent = $convertedContent.$stepCont['cont'];
-                    }
-                    $start = $start+$next;
-                    $contentLength = $contentLength - $next;
-                }
-                $addContentDataText="update {$table_name} set {$column_name}_temp = '{$convertedContent}' where id= '{$row['id']}'";
-                $GLOBALS['db']->query($addContentDataText);
-                if($GLOBALS['db']->lastError()){
-                    logThis('An error occurred when performing this query-->'.$addContentDataText);
-                }
-           }
-           else{
-                $addContentDataText="update {$table_name} set {$column_name}_temp =
-                convert(varchar(max), convert(varbinary(8000), {$column_name})) where id= '{$row['id']}'";
-                $GLOBALS['db']->query($addContentDataText);
-                if($GLOBALS['db']->lastError()){
-                    logThis('An error occurred when performing this query-->'.$addContentDataText);
-                }
-           }
-        }
-        //drop the contents now and change contents_temp to contents
-        $dropColumn = "alter table {$table_name} drop column {$column_name}";
-        $GLOBALS['db']->query($dropColumn);
-        if($GLOBALS['db']->lastError()){
-            logThis('An error occurred when performing this query-->'.$dropColumn);
-        }
-        $changeColumnName = "EXEC sp_rename '{$table_name}.[{$column_name}_temp]','{$column_name}','COLUMN'";
-        $GLOBALS['db']->query($changeColumnName);
-        if($GLOBALS['db']->lastError()){
-            logThis('An error occurred when performing this query-->'.$changeColumnName);
-        }
-     }
-    }
-
 	 /**
      * clearHelpFiles
      * This method attempts to delete all English inline help files.
@@ -3620,51 +3013,6 @@ function upgradeModulesForTeam() {
 	            logThis("Deleted file: $the_file");
 	        }
 	    }
-	}
-
-
-	/**
-	 * fix_assigned_user_link_reports
-	 *
-	 * This method goes through the existing reports and fixes errors with the reports definition
-	 * where the assigned_user_link may have been pointing to the wrong relationship name
-	 * ("teams" instead of "team_memberships").  Also, fix errors where the team_memberships relationship
-	 * may have been incorrectly pointing to the wrong name definition ("teams" instead of "team_memberships").
-	 * This will fix existing reports created before 5.2.0d that used the Assigned User Name's
-	 * teams as a filter.  The fix will allow the Teams folder for the Assigned To User field to
-	 * be displayed.  Also, the fix to the team memberships relationship name will correctly fix the
-	 * query to join against the team_memberships table rather than the teams table.
-	 *
-	 * @param $path String variable for the log path
-	 *
-	 */
-	function fix_report_relationships($path='') {
-		if(!empty($path)) {
-		   logThis('Begin fix_report_relationships', $path);
-		}
-
-		$query = "SELECT id, content FROM saved_reports WHERE deleted = 0";
-        $result = $GLOBALS['db']->query($query);
-
-        while($row = $GLOBALS['db']->fetchByAssoc($result)) {
-        	  $content = $row['content'];
-        	  $content = str_replace('&quot;', '"', $content);
-			  $content2 = str_replace(':assigned_user_link:teams', ':assigned_user_link:team_memberships', $content);
-              $content3 = str_replace('{"name":"teams","relationship_name":"team_memberships"', '{"name":"team_memberships","relationship_name":"team_memberships"', $content2);
-
-              //If the contents have been altered, update the saved_report definition
-              if($content != $content3) {
-              	 $update_query = 'UPDATE saved_reports SET content = \'' . $GLOBALS['db']->quote($content3) . '\' WHERE id = \'' . $row['id'] . '\'';
-              	 if(!empty($path)) {
-              	 	logThis('Running SQL:' . $update_query, $path);
-              	 }
-              	 $GLOBALS['db']->query($update_query);
-              }
-        }
-
-        if(!empty($path)) {
-           logThis('End fix_report_relationships', $path);
-        }
 	}
 
 	/**
@@ -4267,39 +3615,6 @@ function repairSearchFields($globString='modules/*/metadata/SearchFields.php', $
 	{
 		logThis('End repairSearchFields', $path);
 	}
-}
-
-/**
- * repairUpgradeHistoryTable
- *
- * This is a helper function used in the upgrade process to fix upgrade_history entries so that the filename column points
- * to the new upload directory location introduced in 6.4 versions
- */
-function repairUpgradeHistoryTable()
-{
-    require_once('modules/Configurator/Configurator.php');
-    new Configurator();
-    global $sugar_config;
-
-    //Now upgrade the upgrade_history table entries
-    $results = $GLOBALS['db']->query('SELECT id, filename FROM upgrade_history');
-    $upload_dir = $sugar_config['cache_dir'].'upload/';
-
-    //Create regular expression string to
-    $match = '/^' . str_replace('/', '\/', $upload_dir) . '(.*?)$/';
-
-    while(($row = $GLOBALS['db']->fetchByAssoc($results)))
-    {
-        $file = str_replace('//', '/', $row['filename']); //Strip out double-paths that may exist
-
-        if(!empty($file) && preg_match($match, $file, $matches))
-        {
-            //Update new file location to use the new $sugar_config['upload_dir'] value
-            $new_file_location = $sugar_config['upload_dir'] . $matches[1];
-            $GLOBALS['db']->query("UPDATE upgrade_history SET filename = '{$new_file_location}' WHERE id = '{$row['id']}'");
-        }
-    }
-
 }
 
 

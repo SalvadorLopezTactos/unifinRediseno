@@ -138,10 +138,13 @@ class TemplateEnum extends TemplateText{
 		$def = parent::get_field_def();
 		$def['options'] = !empty($this->options) ? $this->options : $this->ext1;
 		$def['default'] = !empty($this->default) ? $this->default : $this->default_value;
-		$def['len'] = $this->max_size;
+
 		// this class may be extended, so only do the unserialize for genuine TemplateEnums
-		if (get_class( $this ) == 'TemplateEnum' && empty($def['dependency']) )
-			$def['dependency'] = isset($this->ext4)? @unserialize(html_entity_decode($this->ext4)) : null ;
+        if (get_class($this) == 'TemplateEnum' && empty($def['dependency'])) {
+            $def['dependency'] = isset($this->ext4) ?
+                @unserialize(html_entity_decode($this->ext4), ['allowed_classes' => false])
+                : null;
+        }
         if (!empty($this->visibility_grid))
             $def['visibility_grid'] = $this->visibility_grid;
 

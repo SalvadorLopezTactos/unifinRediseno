@@ -16,7 +16,7 @@
 
     &:checked + img,
     &:checked + span {
-      border-color: #999;
+      border-color: @grayLightish;
       opacity: 1;
     }
 
@@ -28,8 +28,8 @@
 
   img,
   &.other span {
-    background: #fff;
-    border: 1px solid #ddd;
+    background: @white;
+    border: 1px solid @grayLighter;
     position: relative;
     opacity: 0.7;
   }
@@ -43,7 +43,7 @@
   &.other span {
     padding: 14px;
     font-size: 18px;
-    color: #2674b7;
+    color: @blue;
     display: inline-block;
   }
 }

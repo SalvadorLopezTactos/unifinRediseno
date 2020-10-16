@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Datum poslední úpravy',
     'LBL_DELETED' => 'Odstranit',
     'LBL_REVENUELINEITEMS' => 'Řádky obchodu',
+    'LBL_ENTRY_SOURCE' => 'Zdroj poznámky',
+    'LBL_SOURCE_EXTERNAL' => 'Externí',
+    'LBL_SOURCE_INTERNAL' => 'Interní',
 
     // Help Text
     // List View Help Text

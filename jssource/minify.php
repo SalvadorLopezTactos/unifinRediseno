@@ -15,17 +15,8 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 if(!defined('sugarEntry'))define('sugarEntry', true);
 
-if (!defined('SUGAR_BASE_DIR')) {
-    define('SUGAR_BASE_DIR', str_replace('\\', '/', dirname(__DIR__)));
-}
+require __DIR__ . '/../vendor/autoload.php';
 
-set_include_path(
-    dirname(__FILE__) . PATH_SEPARATOR
-    . SUGAR_BASE_DIR . PATH_SEPARATOR
-    . get_include_path()
-);
-
-require_once 'include/SugarObjects/SugarConfig.php';
 require_once 'include/utils/array_utils.php';
 
 $minifyUtils = null;
@@ -116,10 +107,8 @@ if(isset($_REQUEST['root_directory'])){
     }
 
     if ($argv[1] != '-?') {
-        chdir($from);
         require_once('include/utils.php');
         require_once('include/utils/file_utils.php');
-        require_once('include/utils/autoloader.php');
         require_once('include/utils/sugar_file_utils.php');
         require_once('include/dir_inc.php');
     }

@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Nadzorna ploča za popis slučajeva',
     'LBL_CASES_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o slučajevima',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Detalji o slučaju',
 
 	'ERR_DELETE_RECORD'					=> 'Morate navesti broj zapisa da biste izbrisali račun.',
 	'LBL_ACCOUNT_ID'					=> 'ID računa',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Kontakti',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Slučajevi',
 	'LBL_DESCRIPTION'					=> 'Opis:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Datoteka priloga',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Datoteka priloga',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Povijest',
 	'LBL_INVITEE'						=> 'Kontakti',
 	'LBL_MEMBER_OF'						=> 'Račun',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Stvorio korisnik s kor. imenom',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Ime dodijeljenog korisnika',
     'LBL_EXPORT_TEAM_COUNT' => 'Broj članova u timu',
+    'LBL_CHANGETIMERS' => 'Promijeni mjerače vremena',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'E-pošta povezanih kontakata',
@@ -140,4 +143,11 @@ Da biste stvorili {{module_name}}:
  - Polja označena „Obavezno” moraju se ispuniti prije spremanja.
  - Kliknite na „Prikaži više” da biste otkrili dodatna polja ako je potrebno.
 2. Kliknite na „Spremi” da biste završili novi zapis i vratili se na prethodnu stranicu.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Niste pronašli što ste tražili?',
+    'LBL_CREATE_CASE' => 'Izradi modul {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'Detalji sporazuma o razini usluga',
+    'LBL_HOURS' => 'Sati',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

@@ -331,6 +331,8 @@
      * definition. If the parent context is defined, make the new context as a
      * child of the parent context.
      *
+     * NOTE: same function is also used in side-drawer.js to have consistent behavior
+     *
      * @param {Object} def The layout or view definition.
      * @private
      */
@@ -380,7 +382,7 @@
 
         if (this._isMainAppContent(drawers.$top)) {
             //make sure that the main application content is set as a drawer
-            drawers.$top.addClass('drawer');
+            drawers.$top.addClass('drawer').trigger('drawer:add');
             $('body').addClass('noscroll');
             app.$contentEl.addClass('noscroll');
         }
@@ -607,7 +609,7 @@
             .off('scroll.prevent'); //remove event handler that prevents scrolling
 
         if (this._isMainAppContent(drawers.$bottom)) {
-            drawers.$bottom.removeClass('drawer active');
+            drawers.$bottom.removeClass('drawer active').trigger('drawer:remove');
             $('body').removeClass('noscroll');
             app.$contentEl.removeClass('noscroll');
         } else {
@@ -824,7 +826,7 @@
     _scrollBackToOriginal: function($drawer) {
         var scrollPositions = this.scrollTopPositions.pop();
 
-        if (!scrollPositions || !scrollPositions.length) {
+        if (!scrollPositions || _.isEmpty(scrollPositions)) {
             return;
         }
 

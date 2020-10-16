@@ -95,7 +95,16 @@ let migrateStorage = function(cache) {
             JSON.parse(value);
             value = cache.store.deserialize(value);
         } catch (e) {
-            value = unquote(value);
+            if (typeof value === 'string') {
+                // only call unquote if it's already quoted, or is an object-like string 
+                if ((value[0] === "'" && value[value.length - 1] === "'")
+                    || (value[0] === '"' && value[value.length - 1] === '"')
+                    || (value[0] === "{" && value[value.length - 1] === "}")) {
+                    value = unquote(value);
+                }
+            } else {
+                value = unquote(value);
+            }
         }
 
         if (value === null) {

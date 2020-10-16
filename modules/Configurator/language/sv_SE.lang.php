@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'Bildkvoten måste vara mellan 1:1 och 10:1. Bilden kommer att skalas om.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'Bildkvoten måste vara mellan 3:1 och 20:1. Ladda upp en ny fil med denna bildkvot.',
     'ERR_ALERT_FILE_UPLOAD' => 'Error under uppladdning av bild.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Det går inte att skapa katalog för bilder',
     'LBL_LOGGER'=>'Logger-inställningar',
 	'LBL_LOGGER_FILENAME'=>'Logfil namn',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Tillägg',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Maximal logfilsstorlek',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Standard datumformat',
 	'LBL_LOGGER_LOG_LEVEL'=>'Lognivå',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Kommentarlogginställningar',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Maximalt antal tecken att visa per kommentarpost',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

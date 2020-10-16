@@ -312,6 +312,7 @@ EmailPickerField.prototype._onPanelValueGeneration = function () {
 				newEmailItem.value = data['emailAddress'];
 				newEmailItem.label = data['fullName'];
                 newEmailItem.id = data.id;
+                newEmailItem.module = data.module;
 				break;
 			default:
 				throw new Error('_onPanelValueGeneration(): invalid fieldPanelItem\'s id.');

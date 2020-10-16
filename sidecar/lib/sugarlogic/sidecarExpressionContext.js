@@ -85,55 +85,61 @@ App.utils.extendFrom(SEC, SE.ExpressionContext, {
             }, this);
         }, this);
 
-
+        // Breaking dependency creation/setup into two steps. This is in order to support fetching 'relate' field values
+        // in a single pass after all related calc fields are known. This is because during creation, 'relate' fields
+        // may be populatable based on a parent model. Other related field types would not be and are not requested
+        // during _requestRollups. 'relate' fields however are ALWAYS fetched in _handleRelateExpression
+        // so we need to gather them all before we trigger any dependencies.
         _.each(depsMeta, function(dep) {
             var newDep = SUGAR.forms.Dependency.fromMeta(dep, this);
             if (newDep) {
                 relatedFields = _.union(relatedFields, newDep.getRelatedFields());
-
-                // We need to re-run this code on render. See below.
-                if (scContext.isCreate() || newDep.fireLinkOnlyDependency() || isCreate) {
-                    SUGAR.forms.Trigger.fire.apply(newDep.trigger);
-                    this.view.trigger('sugarlogic:initialize');
-                }
-
-                //We need to fire onLoad dependencies when a row toggles
-                if (newDep.testOnLoad) {
-                    scContext.on('list:editrow:fire', function() {
-                        scContext.isOnLoad = true;
-                        SUGAR.forms.Trigger.fire.apply(this.trigger, arguments);
-                        scContext.isOnLoad = null;
-                    }, newDep);
-                }
-
-                if (this.collection instanceof SUGAR.App.data.beanCollection) {
-                    //For views with collections, we need to trigger onLoad dependencies during sync
-                    //For dependent fields and other actions which work outside of edit.
-                    this.collection.on('sync', function(synced, syncData) {
-                        var models;
-                        var ids;
-                        if (synced instanceof SUGAR.App.data.beanCollection) {
-                            //only update the changed set when we have a list
-                            ids = _.pluck(syncData, 'id');
-                            models = synced.filter(function(model) {
-                                return _.contains(ids, model.id);
-                            });
-
-                            //Use defer to prevent script timeouts on large lists
-                            _.defer(updateCollection, models, newDep.trigger);
-                        } else {
-                            updateCollection([synced], newDep.trigger);
-                        }
-                    }, this);
-                    this.collection.on('add', function(model){updateCollection([model], newDep.trigger)}, this);
-                    updateCollection(this.collection.models, newDep.trigger);
-                }
-
                 this.dependencies.push(newDep);
             }
         }, this);
 
         this._setupLinks(relatedFields);
+
+        _.each(this.dependencies, function(newDep) {
+            // We need to re-run this code on render. See below.
+            if (scContext.isCreate() || newDep.fireLinkOnlyDependency() || isCreate) {
+                SUGAR.forms.Trigger.fire.apply(newDep.trigger);
+                this.view.trigger('sugarlogic:initialize');
+            }
+
+            //We need to fire onLoad dependencies when a row toggles
+            if (newDep.testOnLoad) {
+                scContext.on('list:editrow:fire', function() {
+                    scContext.isOnLoad = true;
+                    SUGAR.forms.Trigger.fire.apply(this.trigger, arguments);
+                    scContext.isOnLoad = null;
+                }, newDep);
+            }
+
+            if (this.collection instanceof SUGAR.App.data.beanCollection) {
+                //For views with collections, we need to trigger onLoad dependencies during sync
+                //For dependent fields and other actions which work outside of edit.
+                this.collection.on('sync', function(synced, syncData) {
+                    var models;
+                    var ids;
+                    if (synced instanceof SUGAR.App.data.beanCollection) {
+                        //only update the changed set when we have a list
+                        ids = _.pluck(syncData, 'id');
+                        models = synced.filter(function(model) {
+                            return _.contains(ids, model.id);
+                        });
+
+                        //Use defer to prevent script timeouts on large lists
+                        _.defer(updateCollection, models, newDep.trigger);
+                    } else {
+                        updateCollection([synced], newDep.trigger);
+                    }
+                }, this);
+                this.collection.on('add', function(model){updateCollection([model], newDep.trigger)}, this);
+                updateCollection(this.collection.models, newDep.trigger);
+            }
+        }, this);
+
         this._requestRollups(relatedFields);
 
         // Fields are initialized upon view `render` and they can be
@@ -403,17 +409,39 @@ App.utils.extendFrom(SEC, SE.ExpressionContext, {
                     self.setRelatedFields(toSet, true, model);
                 }
             }
-            var data = {id: record, action: "related"},
-                params = {module: module, fields: JSON.stringify(fields)};
 
-            api.call("read", api.buildURL("ExpressionEngine", "related", data, params), data, params, {
+            var data = {id: record, action: "related"};
+            var params = {module: module, fields: self._getUniqueFieldsList(fields)};
+
+            api.call('create', api.buildURL('ExpressionEngine', 'related', data), _.extend(data, params), {
                 success: function(resp) {
                     self.setRelatedFields(resp, silent, model);
                     return resp;
-                }});
+                }
+            });
         }
         return null;
     },
+
+    /**
+     * Takes a list of field objects and returns a new list containing only the
+     * unique field objects from the original list
+     * @param fieldsList the list of field objects
+     * @private
+     */
+    _getUniqueFieldsList: function(fieldsList) {
+        var newFieldsList = [];
+        for (var i = 0; i < fieldsList.length; i++) {
+            var fieldAlreadyExists = _.find(newFieldsList, function(field) {
+                return _.isEqual(field, fieldsList[i]);
+            });
+            if (!fieldAlreadyExists) {
+                newFieldsList.push(fieldsList[i]);
+            }
+        }
+        return newFieldsList;
+    },
+
     /**
      * Handle Updating or Create a Relationship Context
      *
@@ -737,7 +765,8 @@ App.utils.extendFrom(SEC, SE.ExpressionContext, {
     //PreSetup but don't load any related contexts we might need
     _setupLinks : function(relatedFields){
         _.each(relatedFields, function(field) {
-            if (field.link && field.relate && field.type == "related") {
+            if (field.link && field.relate && (
+                field.type === "related" || field.type === "rollupSum")) {
                 var relContext = this.view.context.getChildContext({link:field.link});
                 if (relContext) {
                     relContext.set("fields", _.union(relContext.get("fields") || [], [field.relate]));
@@ -1622,7 +1651,7 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
 
             if (this.model) {
                 fields = _.filter(fields, function(field) {
-                    return this.model.fields[field] && this.model.fields[field].type !== 'link';
+                    return this.model.fields && this.model.fields[field] && this.model.fields[field].type !== 'link';
                 }, this);
             }
 

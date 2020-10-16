@@ -46,27 +46,9 @@ class SRN extends \Google\Protobuf\Internal\Message
      */
     private $resource;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $partition
-     *           Partition
-     *     @type string $service
-     *           Service
-     *     @type string $region
-     *           Region
-     *     @type string $tenant
-     *           Tenant
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $resource
-     *           Resource
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Srn::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

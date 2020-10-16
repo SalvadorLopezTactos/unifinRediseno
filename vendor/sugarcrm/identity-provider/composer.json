@@ -1,6 +1,6 @@
 {
     "name": "sugarcrm/identity-provider",
-    "version": "1.5.1",
+    "version": "1.9.0",
     "description": "SugarCRM Identity Provider",
     "type": "project",
     "license": "proprietary",
@@ -40,15 +40,16 @@
         "symfony/validator": "^3.1",
         "symfony/console": "^3.1",
         "symfony/translation": "^3.1",
-        "onelogin/php-saml": "^3.1",
-        "paragonie/random_compat": "^2.0",
+        "onelogin/php-saml": "~3.1.0",
         "etechnika/idna-convert": "1.0.3",
         "league/oauth2-client": "2.2.1",
         "spomky-labs/jose": "7.0.1",
         "Jimdo/prometheus_client_php": "^0.9.1",
         "google/protobuf": "v3.6.0.1",
         "grpc/grpc": "^1.13",
-        "google/gax": "^0.36.0"
+        "google/gax": "^0.36.0",
+        "ramsey/uuid": "3.8.0",
+        "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
         "phpunit/phpunit": "~5.5",
@@ -63,11 +64,9 @@
         "sensiolabs/behat-page-object-extension": "^2.0",
         "behat/soap-extension": "0.1.1",
         "doctrine/doctrine-migrations-bundle": "~1.1.1",
-        "guzzlehttp/guzzle": "^6.2",
         "ubirak/rest-api-behat-extension": "^7.0.0",
         "guzzlehttp/psr7": "^1.4",
-        "php-http/curl-client": "^1.7",
-        "ramsey/uuid": "2.9.0"
+        "php-http/curl-client": "^1.7"
     },
     "minimum-stability": "stable",
     "extra": {

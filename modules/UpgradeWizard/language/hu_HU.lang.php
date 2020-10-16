@@ -258,8 +258,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'Nem törölhető',
     'LBL_ML_VERSION' => 'Verzió',
 	'LBL_ML_INSTALL'=>'Telepít',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'Nyomkövető',
 	'LBL_MODULE_NAME' => 'Frissítés Varázsló',
 	'LBL_MODULE_NAME_SINGULAR' => 'Frissítés Varázsló',
 	'LBL_UPLOAD_SUCCESS' => 'A frissítési csomag sikeresen feltöltve. Kattintson a Tovább gombra a végső ellenőrzéshez.',

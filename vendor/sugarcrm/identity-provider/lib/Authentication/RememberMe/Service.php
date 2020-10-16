@@ -13,6 +13,7 @@
 namespace Sugarcrm\IdentityProvider\Authentication\RememberMe;
 
 use Sugarcrm\IdentityProvider\App\Authentication\AuthProviderManagerBuilder;
+use Sugarcrm\IdentityProvider\Authentication\Audit;
 use Sugarcrm\IdentityProvider\Authentication\User;
 use Sugarcrm\IdentityProvider\Srn;
 use Sugarcrm\IdentityProvider\Authentication\UserProvider\LocalUserProvider;
@@ -36,16 +37,31 @@ class Service
      */
     protected $db;
 
+    /**
+     * @var string
+     */
+    private $applicationSRN;
+
+    /**
+     * @var Audit
+     */
+    private $audit;
+
     const STORAGE_KEY = 'loggedInIdentities';
 
     /**
+     * Service constructor.
      * @param SessionInterface $session
      * @param Connection $db
+     * @param string $applicationSRN
+     * @param Audit $audit
      */
-    public function __construct(SessionInterface $session, Connection $db)
+    public function __construct(SessionInterface $session, Connection $db, string $applicationSRN, Audit $audit)
     {
         $this->storage = $session;
         $this->db = $db;
+        $this->applicationSRN = $applicationSRN;
+        $this->audit = $audit;
     }
 
     /**
@@ -119,6 +135,6 @@ class Service
      */
     protected function getLocalUserProvider($tenantId): LocalUserProvider
     {
-        return new LocalUserProvider($this->db, $tenantId);
+        return new LocalUserProvider($this->db, $tenantId, $this->applicationSRN, $this->audit);
     }
 }

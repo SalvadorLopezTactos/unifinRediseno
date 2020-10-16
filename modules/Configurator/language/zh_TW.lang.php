@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => '圖像外觀比例應介於 1:1 和 10:1 之間。圖像將被重新調整。',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => '圖像外觀比例必須介於 3:1 和 20:1 之間。請上載符合該要求的新檔案。',
     'ERR_ALERT_FILE_UPLOAD' => '上載圖像時出錯。',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => '無法創建圖片的目錄',
     'LBL_LOGGER'=>'記錄器設定',
 	'LBL_LOGGER_FILENAME'=>'記錄檔名稱',
-	'LBL_LOGGER_FILE_EXTENSION'=>'副檔名',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'最大記錄大小',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'預設日期格式',
 	'LBL_LOGGER_LOG_LEVEL'=>'記錄層級',
@@ -458,6 +458,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => '注釋記錄設定',
     'LBL_COMMENT_LOG_MAX_CHARS' => '每個注釋條目要顯示的最大字元數',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

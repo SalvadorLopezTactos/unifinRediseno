@@ -65,7 +65,6 @@ $viewdefs['Notifications']['base']['view']['record'] = array(
             'name' => 'panel_body',
             'label' => 'LBL_PANEL_BODY',
             'columns' => 2,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 array(
@@ -86,7 +85,6 @@ $viewdefs['Notifications']['base']['view']['record'] = array(
             'label' => 'LBL_PANEL_ADVANCED',
             'hide' => true,
             'columns' => 2,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 array(

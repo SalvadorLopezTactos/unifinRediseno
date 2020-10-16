@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => 'Kasutaja määramine rakendatud',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Protsessi kujunduse eelvaade',
+    'LBL_PROJECT_RUN_ORDER' => 'Käitamise järjestus',
 );
 

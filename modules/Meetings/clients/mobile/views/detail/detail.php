@@ -61,6 +61,7 @@ $viewdefs['Meetings']['mobile']['view']['detail'] = array(
                     ),
                 ),
                 'description',
+                'tag',
                 'parent_name',
                 'assigned_user_name',
                 'team_name',

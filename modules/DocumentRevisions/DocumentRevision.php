@@ -136,9 +136,6 @@ class DocumentRevision extends SugarBean {
 
 	function fill_in_additional_detail_fields()
 	{
-		global $theme;
-		global $current_language;
-		
 		parent::fill_in_additional_detail_fields();
 
         if ( empty($this->id) && empty($this->document_id) && isset($_REQUEST['return_id']) && !empty($_REQUEST['return_id']) ) {
@@ -155,7 +152,6 @@ class DocumentRevision extends SugarBean {
 		if ($row != null) {
 			$this->document_name = $row['document_name'];
             $this->name = $this->document_name;
-            $this->document_name = '<a href="index.php?module=Documents&action=DetailView&record='.$this->document_id.'">'.$row['document_name'].'</a>';
 			$this->latest_revision = $row['revision'];	
 			$this->latest_revision_id = $row['document_revision_id'];
 
@@ -227,19 +223,7 @@ class DocumentRevision extends SugarBean {
 		return $return;
 	}
 
-	function fill_document_name_revision($doc_id) {
 
-		//find the document name and current version.
-		$query = "SELECT documents.document_name, revision FROM documents, document_revisions where documents.id = '$doc_id'";
-		$query .= " AND document_revisions.id = documents.document_revision_id";
-		$result = $this->db->query($query,true,"Error fetching document details...:");
-		$row = $this->db->fetchByAssoc($result);
-		if ($row != null) {
-			$this->name = $row['document_name'];
-			$this->latest_revision = $row['revision'];	
-		}	
-	}
-	
     public function list_view_parse_additional_sections(&$list_form)
     {
 		return $list_form;
@@ -252,36 +236,23 @@ class DocumentRevision extends SugarBean {
 		return $revision_fields;
 	}
 
-    public static function get_document_revision_name($doc_revision_id)
-    {
-		if (empty($doc_revision_id)) return null;
-		
-		$db = DBManagerFactory::getInstance();				
-		$query="select revision from document_revisions where id='$doc_revision_id'";
-		$result=$db->query($query);
-		if (!empty($result)) {
-			$row=$db->fetchByAssoc($result);
-			if (!empty($row)) {
-				return $row['revision'];
-			}
-		}
-		return null;
-	}
-
     public static function get_document_revisions($doc_id)
     {
-		$return_array= Array();
-		if (empty($doc_id)) return $return_array;
-		
-		$db = DBManagerFactory::getInstance();				
-		$query="select id, revision from document_revisions where document_id='$doc_id' and deleted=0";
-		$result=$db->query($query);
-		if (!empty($result)) {
-			while (($row=$db->fetchByAssoc($result)) != null) {
-				$return_array[$row['id']]=$row['revision'];
-			}
-		}
-		return $return_array;
+        $return_array = [];
+        if (empty($doc_id)) {
+            return $return_array;
+        }
+
+        $db = DBManagerFactory::getInstance();
+        $stmt = $db->getConnection()
+            ->executeQuery(
+                'SELECT id, revision FROM document_revisions WHERE document_id=? AND deleted=0',
+                [$doc_id]
+            );
+        foreach ($stmt as $row) {
+            $return_array[$row['id']] = $row['revision'];
+        }
+        return $return_array;
     }
 
     /**

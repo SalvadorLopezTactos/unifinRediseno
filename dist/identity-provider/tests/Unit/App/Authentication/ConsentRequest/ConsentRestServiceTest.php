@@ -63,7 +63,12 @@ class ConsentRestServiceTest extends \PHPUnit_Framework_TestCase
             'address',
             'phone',
         ]);
-        $this->assertContains('View email, address, phone number', $result);
-        $this->assertContains('Access all of the above information at any time', $result);
+        $this->assertEquals('View email, address, phone number', $result[0]);
+        $this->assertEquals(
+            'View and update any Sugar data (Accounts, Contacts, Leads, etc.) that you are permitted to access',
+            $result[1]
+        );
+        $this->assertEquals('View your Sugar profile which includes first and last name', $result[2]);
+        $this->assertEquals('Access all the above information at any time', $result[3]);
     }
 }

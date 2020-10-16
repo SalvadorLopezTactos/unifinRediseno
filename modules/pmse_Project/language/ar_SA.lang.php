@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'الحالة',
   'LBL_PRJ_MODULE' => 'الوحدة المستهدفة',
+  'LBL_PRJ_RUN_ORDER' => 'ترتيب التشغبل',
   'LBL_PMSE_BUTTON_SAVE' => 'حفظ',
   'LBL_PMSE_BUTTON_CANCEL' => 'إلغاء',
   'LBL_PMSE_BUTTON_YES' => 'نعم',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'تم استيراد تعريف العملية إلا أنه يحتوي على إجراء أو أكثر من إجراءات قاعدة الأعمال التي لم يتم اختيار قواعد الأعمال لها.',
     'LBL_BPM_IMPORT_SELECT' => 'يحتوي تعريف العملية على قواعد العمل وقوالب البريد الإلكتروني التالية. '
         . 'الرجاء اختيار ما تريد.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'قواعد العمل',
     'LBL_EMAIL_TEMPLATES' => 'قوالب البريد الإلكتروني',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'مشرف',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'تاريخ الإنشاء بواسطة المستخدم',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'تاريخ آخر تعديل بواسطة المستخدم',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'البريد الإلكتروني للنظام',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'قاعدة العمل',
     'LBL_PMSE_LABEL_RULE' => 'القاعدة',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'تعيين المستخدم',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'تحديث "تعيين إلى" في السجل',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'إضافة سجل ذي صلة',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'الوحدة ذات الصلة',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'اسم النشاط فارغ.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'الاسم "%s" موجود بالفعل في عائلة الشكل.',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'أيام',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'ساعات',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'دقائق',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'ساعات العمل',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'مركز الأعمال',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'من وحدة العملاء المستهدفين',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'من ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' الوحدة',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'سلسلة ورقم وقيمة منطقية',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'العدد',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'القيمة',

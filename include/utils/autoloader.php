@@ -136,11 +136,9 @@ class SugarAutoLoader
         'tests',
         'examples',
         'docs',
-        'vendor/log4php',
         'upload',
         'portal',
         'vendor/HTMLPurifier',
-        'vendor/reCaptcha',
         'vendor/ytree',
         'vendor/pclzip',
         'vendor/nusoap',
@@ -180,16 +178,6 @@ class SugarAutoLoader
      */
     public static $devMode = false;
 
-    /**
-     * @var array List of composer paths
-     */
-    protected static $composerPaths = array(
-        'include_paths' => 'vendor/composer/include_paths.php',
-        'autoload_namespaces' => 'vendor/composer/autoload_namespaces.php',
-        'autoload_psr4' => 'vendor/composer/autoload_psr4.php',
-        'autoload_classmap' => 'vendor/composer/autoload_classmap.php',
-        'autoload_files' => 'vendor/composer/autoload_files.php',
-    );
     protected static $baseDirs;
     protected static $ds = DIRECTORY_SEPARATOR;
 
@@ -233,101 +221,16 @@ class SugarAutoLoader
             self::$devMode = true;
         }
 
-        // Composer integration
-        self::loadComposerIncludePaths();
-        self::loadComposerPsr4();
-        self::loadComposerPsr0();
-
-        // Build class map (implicitly includes Composer's classmap)
         self::loadClassMap();
-
-        // Register ourself (prepend)
-        self::registerAutoload(true);
-
-        // Load files
-        self::loadFiles();
-
-        // Load extensions
+        self::registerAutoload();
         self::loadExts();
-    }
-
-    /**
-     * Load Composer generated include paths
-     */
-    public static function loadComposerIncludePaths()
-    {
-        $includePaths = self::getIncludeReturn(self::$composerPaths['include_paths']);
-        array_push($includePaths, get_include_path());
-        set_include_path(join(PATH_SEPARATOR, $includePaths));
-    }
-
-    /**
-     * Load Composer generated PSR4 namespace mappings
-     */
-    public static function loadComposerPsr4()
-    {
-        $map = self::getIncludeReturn(self::$composerPaths['autoload_psr4']);
-        foreach ($map as $namespace => $paths) {
-            if (is_array($paths)) {
-                foreach ($paths as $path) {
-                    $path = self::normalizeFilePath($path);
-                    self::addNamespace($namespace, $path, 'psr4');
-                }
-            } else {
-                $path = self::normalizeFilePath($paths);
-                self::addNamespace($namespace, $path, 'psr4');
-            }
-        }
-    }
-
-    /**
-     * Load Composer generated PSR0 namespace mappings
-     */
-    public static function loadComposerPsr0()
-    {
-        $map = self::getIncludeReturn(self::$composerPaths['autoload_namespaces']);
-        foreach ($map as $namespace => $paths) {
-            if (is_array($paths)) {
-                foreach ($paths as $path) {
-                    $path = self::normalizeFilePath($path);
-                    self::addNamespace($namespace, $path, 'psr0');
-                }
-            } else {
-                $path = self::normalizeFilePath($paths);
-                self::addNamespace($namespace, $path, 'psr0');
-            }
-        }
-    }
-
-    /**
-     * Get Composer generated class map
-     * @return array
-     */
-    public static function getComposerClassMap()
-    {
-        $classMap = self::getIncludeReturn(self::$composerPaths['autoload_classmap']);
-        return array_map(array('SugarAutoLoader', 'normalizeFilePath'), $classMap);
-    }
-
-    /**
-     * Helper function returning an include file
-     * @param string $file Filename to include
-     * @param mixed $default Default value to return if file is not found
-     * @return mixed
-     */
-    protected static function getIncludeReturn($file, $default = array())
-    {
-        if (file_exists($file)) {
-            $return = @include $file;
-        }
-        return (!isset($return) ? $default : $return);
     }
 
     /**
      * Register SugarAutoLoader
      * @param boolean $prepend Prepend on top of spl_autoload stack
      */
-    public static function registerAutoload($prepend = true)
+    public static function registerAutoload($prepend = false)
     {
         spl_autoload_register(array('SugarAutoLoader', 'autoload'), true, $prepend);
     }
@@ -340,9 +243,6 @@ class SugarAutoLoader
     public static function autoload($class)
 	{
         global $beanFiles;
-
-        // work around for PHP 5.3.0 - 5.3.2 https://bugs.php.net/50731
-        $class = ltrim($class, '\\');
 
         if (!empty(self::$noAutoLoad[$class])) {
             return false;
@@ -377,10 +277,6 @@ class SugarAutoLoader
             require_once $beanFiles[$class];
             return true;
         }
-
-		if (strncmp('HTMLPurifier', $class, 12) == 0) {
-			return HTMLPurifier_Bootstrap::autoload($class);
-		}
 
 	    // Split on _, capitalize elements and make a path
 	    // foo_bar -> Foo/Bar.
@@ -796,9 +692,10 @@ class SugarAutoLoader
         return false;
     }
 
-
     /**
      * Load all classes in self::$classMap
+     *
+     * @deprecated
      */
     public static function loadAll()
     {
@@ -1038,7 +935,6 @@ class SugarAutoLoader
         return array_merge(self::getDirFiles($dir, $get_dirs, $extension), self::getDirFiles("custom/$dir", $get_dirs, $extension));
     }
 
-
     /**
      * Build file cache
      */
@@ -1067,9 +963,6 @@ class SugarAutoLoader
             require $file;
         }
 
-        // add composer classmap
-        $class_map = array_merge($class_map, self::getComposerClassMap());
-
         // Don't save to disk in development mode as the map will be ignored
         // and its content will not be incremental.
         if (!self::$devMode) {
@@ -1085,14 +978,14 @@ class SugarAutoLoader
      */
     public static function loadClassMap()
     {
-        $class_map = array();
+        $class_map = null;
 
         // in development mode we start with a clean slate
         if (!self::$devMode) {
             @include sugar_cached(self::CLASS_CACHE_FILE);
         }
 
-        if(empty($class_map)) {
+        if ($class_map === null) {
             // oops, something happened to cache
             // try to rebuild
             self::buildClassCache();
@@ -1110,17 +1003,6 @@ class SugarAutoLoader
 	    include "ModuleInstall/extensions.php";
 	    self::$extensions = $extensions;
 	}
-
-    /**
-     * Load files
-     */
-    protected static function loadFiles()
-    {
-        $files = self::getIncludeReturn(self::$composerPaths['autoload_files']);
-        foreach ($files as $file) {
-            require_once $file;
-        }
-    }
 
 	/**
 	 * Add filename to list of existing files

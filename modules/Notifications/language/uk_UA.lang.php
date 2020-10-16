@@ -50,4 +50,6 @@ $mod_strings = array(
     'LBL_PARENT_ID' => 'ID батьківського запису',
     'LBL_READ' => 'Прочитано',
     'LBL_UNREAD' => 'Не прочитано',
+    'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'Вас згадано в дописі користувача',
+    'LBL_YOU_HAVE_BEEN_MENTIONED' => 'Вас згадано',
 );

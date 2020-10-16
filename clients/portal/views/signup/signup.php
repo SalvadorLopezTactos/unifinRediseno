@@ -11,77 +11,67 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['portal']['view']['signup'] = array(
+$viewdefs['portal']['view']['signup'] = [
     'action' => 'list',
-    'buttons' =>
-    array(
-        array(
+    'buttons' => [
+        [
             'name' => 'signup_button',
             'type' => 'button',
             'label' => 'LBL_SIGNUP_BUTTON_LABEL',
             'primary' => true,
-        ),
-        array(
-            'name' => 'cancel_button',
-            'type' => 'button',
-            'label' => 'LBL_CANCEL_BUTTON_LABEL',
-            'css_class' => 'pull-left',
-        ),
-    ),
-    'panels' =>
-    array(
-        array(
+        ],
+    ],
+    'panels' => [
+        [
             'label' => 'LBL_PANEL_DEFAULT',
             'fields' =>
-            array(
-                array(
+            [
+                [
                     'name' => 'first_name',
                     'type' => 'varchar',
                     'placeholder' => 'LBL_PORTAL_SIGNUP_FIRST_NAME',
-                    'required' => true,
-                ),
-                array(
+                ],
+                [
                     'name' => 'last_name',
                     'type' => 'varchar',
                     'placeholder' => 'LBL_PORTAL_SIGNUP_LAST_NAME',
+                    'no_required_placeholder' => true,
                     'required' => true,
-                ),
-                array(
+                ],
+                [
+                    'name' => 'company_name',
+                    'type' => 'varchar',
+                    'placeholder' => 'LBL_PORTAL_SIGNUP_COMPANY_NAME',
+                ],
+                [
                     'name' => 'email',
                     'type' => 'email-text',
                     'placeholder' => 'LBL_PORTAL_SIGNUP_EMAIL',
+                    'no_required_placeholder' => true,
                     'required' => true,
-                ),
-                array(
-                    'name' => 'phone_work',
-                    'type' => 'phone',
-                    'placeholder' => 'LBL_PORTAL_SIGNUP_PHONE',
-                ),
-                array(
-                    'name' => 'country',
-                    'type' => 'enum',
-                    'placeholder' => 'LBL_PORTAL_SIGNUP_COUNTRY',
-                    'options' => 'countries_dom',
-                    'required' => true,
-                ),
-                array(
-                    'name' => 'state',
-                    'type' => 'enum',
-                    'placeholder' => 'LBL_PORTAL_SIGNUP_STATE',
-                    'options' => 'state_dom',
-                ),
-                array(
-                    'name' => 'company',
+                ],
+                [
+                    'name' => 'user_name',
                     'type' => 'varchar',
-                    'placeholder' => 'LBL_PORTAL_SIGNUP_COMPANY',
+                    'placeholder' => 'LBL_PORTAL_SIGNUP_USER_NAME',
+                    'no_required_placeholder' => true,
                     'required' => true,
-                ),
-                array(
-                    'name' => 'title',
-                    'type' => 'varchar',
-                    'placeholder' => 'LBL_PORTAL_SIGNUP_JOBTITLE',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+                [
+                    'name' => 'password',
+                    'type' => 'password',
+                    'placeholder' => 'LBL_PORTAL_SIGNUP_PASSWORD',
+                    'no_required_placeholder' => true,
+                    'required' => true,
+                ],
+                [
+                    'name' => 'password1',
+                    'type' => 'password',
+                    'placeholder' => 'LBL_PORTAL_SIGNUP_PASSWORD1',
+                    'no_required_placeholder' => true,
+                    'required' => true,
+                ],
+            ],
+        ],
+    ],
+];

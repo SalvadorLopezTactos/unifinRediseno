@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'لوحة معلومات قائمة جهات الاتصال',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'لوحة معلومات سجل جهات الاتصال',
-
+    'LBL_SITE_USER_ID' => 'تجزئة site_url ومعرف جهة الاتصال',
+    'LBL_COOKIE_CONSENT' => 'الموافقة على ملف تعريف الارتباط',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'تم تلقي الموافقة على ملف تعريف الارتباط بتاريخ',
     'LNK_CONTACT_REPORTS' => 'عرض تقارير جهة الاتصال',
     'ERR_DELETE_RECORD' => 'تحديد رقم السجل لحذف جهة الاتصال:',
     'LBL_ACCOUNT_ID' => 'معرّف الحساب:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'معلومات البوابة',
     'LBL_PORTAL_NAME' => 'اسم البوابة:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'كلمة مرور البوابة المعينة:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'اسم شركة مستخدم المدخل',
     'LBL_RECORD_SAVED_SUCCESS' => 'تم إنشاء {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a> بنجاح.',
     'LBL_STREET' => 'الشارع',
     'LBL_POSTAL_CODE' => 'الرمز البريدي:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'الفرص',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'المستندات',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'عروض الأسعار',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'عروض الأسعار (شحن إلى)',
     'LBL_QUOTES_BILL_TO' => 'عروض الأسعار (دفع الفاتورة إلى)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'البنود المسعرة',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'انقر هنا لتعديل ملف التعريف الخاص بك.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'هنا يمكنك تعيين لغتك المفضلة.  سيؤدي ذلك إلى تغيير اللغة المستخدمة من قبل مدخل Sugar.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'يمكنك العودة إلى ملف التعريف في أي وقت باستخدام قائمة المستخدم.',
+    'ERR_PORTAL_NAME_EXISTS' => 'اسم المدخل {0} موجود بالفعل. غير مسموح بتكرار أسماء المداخل. قم بتغيير اسم المدخل إلى اسم فريد.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'المعرّف الرئيسي لـ D&B',
@@ -279,4 +284,8 @@ $mod_strings = array (
     'LBL_FILTER_CONTACTS_REPORTS' => 'تقارير جهات الاتصال',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'الأغراض التجارية التي تمت الموافقة عليها',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'آخر تحديث للموافقة',
+
+    'LBL_ENTRY_SOURCE' => 'مصدر جهة الاتصال',
+    'LBL_SOURCE_EXTERNAL' => 'خارجي',
+    'LBL_SOURCE_INTERNAL' => 'داخلي',
 );

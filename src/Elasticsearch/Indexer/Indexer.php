@@ -69,6 +69,21 @@ class Indexer
     protected $db;
 
     /**
+     * long text type
+     * @var array
+     */
+    protected $longFieldTypes = array(
+        'longtext',
+        'htmleditable_tinymce',
+    );
+
+    /**
+     * long text search flag
+     * @var bool
+     */
+    protected $longTextEnabled = false;
+
+    /**
      * Ctor
      * @param array $config
      * @param Container $container
@@ -82,7 +97,9 @@ class Indexer
         if (!empty($config['max_bulk_threshold'])) {
             $this->maxBulkThreshold = (int) $config['max_bulk_threshold'];
         }
-
+        if (!empty($config['enable_long_text_search'])) {
+            $this->longTextEnabled = (bool) $config['enable_long_text_search'];
+        }
         $this->container = $container;
         $this->db = $db;
     }
@@ -328,9 +345,10 @@ class Indexer
 
         // Populate field data from bean for bean index fields
         $data = array();
-        foreach (array_keys($fields) as $field) {
+        foreach ($fields as $field => $type) {
             if (isset($bean->$field)) {
-                if (is_string($bean->$field)) {
+                if (is_string($bean->$field)
+                    && (!$this->longTextEnabled || !in_array($type, $this->longFieldTypes))) {
                     $data[$field] = mb_strcut($this->decodeBeanField($bean->$field), 0, self::MAX_SIZE_OF_TEXT);
                 } else {
                     $data[$field] = $this->decodeBeanField($bean->$field);

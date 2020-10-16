@@ -65,6 +65,12 @@ $mod_strings = array (
   'LBL_DOMAIN'=>'Žádné emaily k doméně',
   'LBL_LIST_PROSPECTLIST_NAME'=>'Název',
 	'LBL_MORE_DETAIL' => 'Více informací' /*for 508 compliance fix*/,
+    'LBL_ACCOUNTS' => 'Zákazníci',
+    'LBL_CAMPAIGNS' => 'Kampaně',
+    'LBL_CONTACTS' => 'Kontakty',
+    'LBL_LEADS' => 'Zájemci',
+    'LBL_PROSPECTS' => 'Adresáti',
+    'LBL_USERS' => 'Uživatelé',
 
     // Help Text
     // List View Help Text

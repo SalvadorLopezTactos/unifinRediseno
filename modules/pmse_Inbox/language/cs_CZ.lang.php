@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => 'Přiřazení uživatele použito',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Náhled návrhu procesu',
+    'LBL_PROJECT_RUN_ORDER' => 'Spustit příkaz',
 );
 

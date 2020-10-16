@@ -53,30 +53,9 @@ class PasswordRequirements extends \Google\Protobuf\Internal\Message
      */
     private $require_special = false;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type int $minimum_length
-     *           Minimum length
-     *     @type int $maximum_length
-     *           Maximum length
-     *     @type bool $require_upper
-     *           Must contain at least one upper case letter (A-Z)
-     *     @type bool $require_lower
-     *           Must contain at least one lower case letter (a-z)
-     *     @type bool $require_number
-     *           Must contain at least one number (0-9)
-     *     @type bool $require_special
-     *           Must contain at least one of the following special characters:
-     *           ~ ! &#64; # $ % ^ & * , _ + - = { } |
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Provider\V1Alpha\Provider::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

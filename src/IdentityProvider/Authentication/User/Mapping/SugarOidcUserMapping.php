@@ -207,6 +207,27 @@ class SugarOidcUserMapping implements MappingInterface
             return null;
         }
 
+        if (in_array($userLanguage, $this->getDisabledLanguages()) === true) {
+            return null;
+        }
+
         return $userLanguage;
+    }
+
+    protected function getDisabledLanguages(): array
+    {
+        $disabled = [];
+        $languages = \LanguageManager::getEnabledAndDisabledLanguages();
+        if (empty($languages['disabled'])) {
+            return [];
+        }
+
+        foreach ($languages['disabled'] as $key => $lang) {
+            if (!empty($lang['module'])) {
+                $disabled[] = $lang['module'];
+            }
+        }
+
+        return $disabled;
     }
 }

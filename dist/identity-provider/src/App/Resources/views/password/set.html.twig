@@ -25,7 +25,8 @@
                     <span class="edit">
                       <input type="password" name="confirmPassword" id="confirmPassword" value=""
                              placeholder="{{ 'Confirm password'|trans }}"
-                             aria-label="confirmPassword">
+                             aria-label="confirmPassword"
+                             onkeydown="onInputKeyDown(event);">
                     </span>
                 </div>
                 <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token }}">

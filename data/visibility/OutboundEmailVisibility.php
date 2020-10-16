@@ -10,6 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\ProcessManager\Registry;
+
+
 class OutboundEmailVisibility extends SugarVisibility
 {
     /**
@@ -21,6 +24,11 @@ class OutboundEmailVisibility extends SugarVisibility
     public function addVisibilityWhere(&$query)
     {
         global $current_user;
+
+        // SugarBPM ignores any visibility
+        if (Registry\Registry::getInstance()->get('bpm_request') === true) {
+            return $query;
+        }
 
         $db = DBManagerFactory::getInstance();
         $where = '';

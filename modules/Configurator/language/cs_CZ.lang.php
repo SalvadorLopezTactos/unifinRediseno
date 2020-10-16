@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'Poměr stran obrazu by měly být od 1:1 do 10:1. Velikost obrázku bude upravena.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'Poměr stran obrázku musí být mezi 3:1 a 20:1. Nahrát nový soubor s tímto poměrem.',
     'ERR_ALERT_FILE_UPLOAD' => 'Chyba při nahrávání obrázku',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Nelze vytvořit adresář pro obrázky',
     'LBL_LOGGER'=>'Logger nastavení',
 	'LBL_LOGGER_FILENAME'=>'Jméno Log souboru',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Přípona',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Maximální velikost logu',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Výchozí formát data',
 	'LBL_LOGGER_LOG_LEVEL'=>'Log úroveň',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Nastavení protokolu komentářů',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Maximální počet znaků, které lze zobrazit u jednoho komentáře',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

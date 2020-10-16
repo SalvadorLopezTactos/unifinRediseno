@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => '이메일:연락처',
     'LBL_EMAILS_LEADS_REL' => '이메일:주 예비고객',
     'LBL_EMAILS_OPPORTUNITIES_REL' => '이메일:예비고객',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => '이메일:노트',
     'LBL_EMAILS_PROJECT_REL' => '이메일:프로젝트',
     'LBL_EMAILS_PROJECT_TASK_REL' => '이메일:프로젝트 작업',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => '발신인',
     'LBL_REPLY_TO' => '답장',
     'LBL_HTML_BODY' => 'HTML 본문',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => '수신인',
     'LBL_LEADS_SUBPANEL_TITLE' => '주 예비고객',
     'LBL_MESSAGE_SENT' => '메세지 전송',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'Id에 답장',
     'LBL_TYPE' => '종류:',
     'LBL_EMAIL_STATE' => '도:',
+    'LBL_EMAIL_DIRECTION' => '방향',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => '확인하십시오',

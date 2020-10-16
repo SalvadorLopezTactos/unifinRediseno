@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => '客户反馈列表仪表板',
     'LBL_CASES_RECORD_DASHBOARD' => '客户反馈记录仪表板',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => '客户反馈细节',
 
 	'ERR_DELETE_RECORD'					=> '必须指定记录编号才能删除帐户。',
 	'LBL_ACCOUNT_ID'					=> '帐户 ID',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> '联系人',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> '客户反馈',
 	'LBL_DESCRIPTION'					=> '说明:',
-	'LBL_FILENANE_ATTACHMENT' 			=> '附加文件',	
+    'LBL_FILENANE_ATTACHMENT'           => '附加文件',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> '历史记录',
 	'LBL_INVITEE'						=> '联系人',
 	'LBL_MEMBER_OF'						=> '帐户',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => '由用户名创建',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => '分配的用户名',
     'LBL_EXPORT_TEAM_COUNT' => '团队数量',
+    'LBL_CHANGETIMERS' => '更改计时器',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => '相关联系人的电子邮件',
@@ -140,4 +143,11 @@ $mod_strings = array (
 - 标记为“必填”的字段在保存前必须先填写完整。
 - 如有需要，点击“显示更多”以显示其他字段。
 2. 点击“保存”以完成新记录，并返回至上一页。',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => '没有找到所需的内容？',
+    'LBL_CREATE_CASE' => '创建 {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'SLA 详细信息',
+    'LBL_HOURS' => '小时',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

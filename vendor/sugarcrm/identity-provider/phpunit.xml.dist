@@ -53,5 +53,7 @@
         <env name="IDM_REGION" value="eu"/>
         <env name="RECAPTCHA_SITEKEY" value="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"/>
         <env name="RECAPTCHA_SECRETKEY" value="6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"/>
+        <env name="DISABLE_GRPC" value="true"/>
+        <env name="REGIONS_FILE" value="tests/Unit/fixtures/regions.yaml"/>
     </php>
 </phpunit>

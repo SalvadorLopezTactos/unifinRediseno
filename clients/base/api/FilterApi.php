@@ -12,6 +12,8 @@
  */
 
 use Doctrine\DBAL\FetchMode;
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+use Sugarcrm\Sugarcrm\Denormalization\Relate\FieldConfig;
 
 class FilterApi extends SugarApi
 {
@@ -228,6 +230,9 @@ class FilterApi extends SugarApi
             $options['erased_fields'] = true;
         }
 
+        // if true, return nulls last for order by fields
+        $options['nulls_last'] = !empty($args['nulls_last']);
+
         return $options;
     }
 
@@ -242,8 +247,16 @@ class FilterApi extends SugarApi
     protected function getOrderByFromArgs(array $args, SugarBean $seed = null)
     {
         $orderBy = parent::getOrderByFromArgs($args, $seed);
+        // denormalized and synchronized relate fields to be used for ORDER BY queries
+        $synchronizedFields = isset($args['module'])
+            ? (new FieldConfig)->getSynchronizedModuleFields($args['module'])
+            : null;
         $converted = array();
         foreach ($orderBy as $field => $direction) {
+            // use denormalized fields for ORDER BY if this was configured
+            if (isset($synchronizedFields[$field])) {
+                $field = $synchronizedFields[$field]['denorm_field_name'];
+            }
             $converted[] = array($field, $direction ? 'ASC' : 'DESC');
         }
 
@@ -360,6 +373,9 @@ class FilterApi extends SugarApi
                 'select' => ['id'],
                 'erased_fields' => false,
             ]));
+
+            $seed->disable_row_level_security = true;
+            $q = $this->createQuery($seed, $args, $options);
         }
 
         return array($args, $q, $options, $seed);
@@ -382,8 +398,20 @@ class FilterApi extends SugarApi
         }
 
         if (count($query->order_by) < 1) {
-            self::addOrderBy($query, $this->defaultOrderBy);
+            self::addOrderBy($query, $this->defaultOrderBy, $options['nulls_last']);
         }
+
+        // This section of code is a portion of the code referred
+        // to as Critical Control Software under the End User
+        // License Agreement.  Neither the Company nor the Users
+        // may modify any portion of the Critical Control Software.
+
+        // add not in filter
+        $inaccessibleList = AccessControlManager::instance()->getNotAccessibleRecords($seed->getModuleName());
+        if (!empty($inaccessibleList)) {
+            self::addFilter('id', ['$not_in' => $inaccessibleList], $query->where(), $query);
+        }
+        //END REQUIRED CODE DO NOT MODIFY
 
         return $query;
     }
@@ -529,7 +557,7 @@ class FilterApi extends SugarApi
         $q->select($fields);
 
         if (!empty($options['order_by'])) {
-            self::addOrderBy($q, $options['order_by']);
+            self::addOrderBy($q, $options['order_by'], $options['nulls_last']);
         }
 
         // nagative limit means no limit
@@ -545,18 +573,19 @@ class FilterApi extends SugarApi
     /**
      * Adds order by to query
      * @param SugarQuery $q
-     * @param $orderByOption
+     * @param array $orderByOption
+     * @param bool $nullsLast
      * @throws SugarApiExceptionInvalidParameter
      * @throws SugarApiExceptionNotAuthorized
      */
-    protected static function addOrderBy(SugarQuery $q, array $orderByOption)
+    protected static function addOrderBy(SugarQuery $q, array $orderByOption, bool $nullsLast = false)
     {
         foreach ($orderByOption as $orderBy) {
             // ID and date_modified are used to give some order to the system
             if ($orderBy[0] != 'date_modified' && $orderBy[0] != 'id') {
                 self::verifyField($q, $orderBy[0]);
             }
-            $q->orderBy($orderBy[0], $orderBy[1]);
+            $q->orderBy($orderBy[0], $orderBy[1], $nullsLast);
         }
     }
 
@@ -922,7 +951,10 @@ class FilterApi extends SugarApi
      */
     protected static function addFilter($field, $filter, SugarQuery_Builder_Where $where, SugarQuery $q)
     {
-        if ($field == '$or') {
+        // It's an email participant filter if the module is Emails and the field is an email participants operand.
+        if ($q->getFromBean()->getModuleName() === 'Emails' && in_array($field, ['$from', '$to', '$cc', '$bcc'])) {
+            static::addEmailParticipantFilter($q, $where, $filter, $field);
+        } elseif ($field == '$or') {
             static::addFilters($filter, $where->queryOr(), $q);
         } elseif ($field == '$and') {
             static::addFilters($filter, $where->queryAnd(), $q);
@@ -952,7 +984,7 @@ class FilterApi extends SugarApi
      * @throws SugarApiExceptionInvalidParameter
      * @throws SugarApiExceptionNotAuthorized
      */
-    private static function addFieldFilter(SugarQuery $q, SugarQuery_Builder_Where $where, $filter, $field)
+    protected static function addFieldFilter(SugarQuery $q, SugarQuery_Builder_Where $where, $filter, $field)
     {
         static $sfh;
         if (!isset($sfh)) {
@@ -967,6 +999,15 @@ class FilterApi extends SugarApi
         if (!empty($fieldInfo['field'])) {
             $field = $fieldInfo['field'];
         }
+
+        // It's an email participant filter if the module is Emails and the field is an email participants field.
+        $fromModule = $q->getFromBean()->getModuleName();
+        $emailParticipantsFields = ['from_collection', 'to_collection', 'cc_collection', 'bcc_collection'];
+        if ($fromModule === 'Emails' && in_array($field, $emailParticipantsFields)) {
+            static::addEmailParticipantFieldFilter($q, $where, $filter, $field);
+            return;
+        }
+
         $fieldType = !empty($fieldInfo['def']['custom_type']) ? $fieldInfo['def']['custom_type'] :
             $fieldInfo['def']['type'];
         $sugarField = $sfh->getSugarField($fieldType);
@@ -1079,6 +1120,51 @@ class FilterApi extends SugarApi
                 default:
                     throw new SugarApiExceptionInvalidParameter('Did not recognize the operand: ' . $op);
             }
+        }
+    }
+
+    /**
+     * Handles the from_collection, to_collection, cc_collection, and bcc_collection fields for filtering.
+     *
+     * @param SugarQuery $q
+     * @param SugarQuery_Builder_Where $where
+     * @param array $filter
+     * @param string $field
+     * @throws SugarApiExceptionInvalidParameter
+     */
+    protected static function addEmailParticipantFieldFilter(
+        SugarQuery $q,
+        SugarQuery_Builder_Where $where,
+        $filter,
+        $field
+    ) {
+        static $operands = [
+            'from_collection' => '$from',
+            'to_collection' => '$to',
+            'cc_collection' => '$cc',
+            'bcc_collection' => '$bcc',
+        ];
+        $operand = $operands[$field];
+
+        if (!is_array($filter)) {
+            throw new SugarApiExceptionInvalidParameter("No operands defined for {$field}");
+        }
+
+        if (!array_key_exists('$in', $filter)) {
+            throw new SugarApiExceptionInvalidParameter("{$field} requires the use of the \$in operand");
+        }
+
+        $supportedOperands = ['$in'];
+        $unsupportedOperands = array_diff(array_keys($filter), $supportedOperands);
+
+        if (!empty($unsupportedOperands)) {
+            throw new SugarApiExceptionInvalidParameter(
+                "{$field} does not support these operands: " . implode(', ', $unsupportedOperands)
+            );
+        }
+
+        foreach ($supportedOperands as $op) {
+            static::addEmailParticipantFilter($q, $where, $filter[$op], $operand);
         }
     }
 
@@ -1201,6 +1287,116 @@ class FilterApi extends SugarApi
         }
         $q->distinct(false);
         $q->select()->fieldRaw('tracker.track_max', 'last_viewed_date');
+    }
+
+    /**
+     * This function adds a from, to, cc, or bcc filter to the sugar query based on the value of `$field`.
+     *
+     * <code>
+     * array(
+     *     'filter' => array(
+     *         '$from' => array(
+     *             array(
+     *                 'parent_type' => 'Users',
+     *                 'parent_id' => '$current_user_id',
+     *             ),
+     *             array(
+     *                 'parent_type' => 'Contacts',
+     *                 'parent_id' => 'fa300a0e-0ad1-b322-9601-512d0983c19a',
+     *             ),
+     *             array(
+     *                 'email_address_id' => 'b0701501-1fab-8ae7-3942-540da93f5017',
+     *             ),
+     *             array(
+     *                 'parent_type' => 'Leads',
+     *                 'parent_id' => '73b1087e-4bb6-11e7-acaa-3c15c2d582c6',
+     *                 'email_address_id' => 'b651d834-4bb6-11e7-bfcf-3c15c2d582c6',
+     *             ),
+     *         ),
+     *     ),
+     * )
+     * </code>
+     *
+     * The above filter definition would return all emails sent by the current user, by the contact whose ID is
+     * fa300a0e-0ad1-b322-9601-512d0983c19a, using the email address foo@bar.com, which is referenced by the ID
+     * b0701501-1fab-8ae7-3942-540da93f5017, or by the lead whose ID is 73b1087e-4bb6-11e7-acaa-3c15c2d582c6 using the
+     * email address biz@baz.com, which is referenced by the ID b651d834-4bb6-11e7-bfcf-3c15c2d582c6. Any number of
+     * tuples can be provided in the definition. When the $current_user_id macro is used for the parent_id field, it is
+     * swapped for the current user's ID.
+     *
+     * @param SugarQuery $q The whole SugarQuery object
+     * @param SugarQuery_Builder_Where $where The Where part of the SugarQuery object
+     * @param array $filter
+     * @param string $field The filter to use: $from, $to, $cc, or $bcc.
+     * @throws SugarApiExceptionInvalidParameter
+     * @throws SugarQueryException
+     */
+    protected static function addEmailParticipantFilter(SugarQuery $q, SugarQuery_Builder_Where $where, $filter, $field)
+    {
+        if (!is_array($filter)) {
+            throw new SugarApiExceptionInvalidParameter('$from requires an array');
+        }
+
+        static $links = [
+            '$from' => 'from',
+            '$to' => 'to',
+            '$cc' => 'cc',
+            '$bcc' => 'bcc',
+        ];
+        $link = $links[$field];
+
+        $fta = $q->getFromAlias();
+        $joinParams = [
+            'joinType' => 'LEFT',
+        ];
+        $join = $q->join($link, $joinParams);
+        $jta = $join->joinName();
+        $join->on()->equalsField("{$fta}.id", "{$jta}.email_id");
+        $or = $where->queryOr();
+
+        foreach ($filter as $def) {
+            if (!is_array($def)) {
+                throw new SugarApiExceptionInvalidParameter(
+                    "definition for {$field} operand is invalid: must be an array"
+                );
+            }
+
+            // The `parent_type` and `parent_id` fields must be defined if the `email_address_id` isn't. The `parent_id`
+            // field must be defined if the `parent_type` is defined. The `parent_type` field must be defined if the
+            // `parent_id` field is defined.
+            if (!isset($def['email_address_id']) || isset($def['parent_type']) || isset($def['parent_id'])) {
+                if (!isset($def['parent_type'])) {
+                    throw new SugarApiExceptionInvalidParameter(
+                        "definition for {$field} operand is invalid: parent_type is required"
+                    );
+                }
+
+                if (!isset($def['parent_id'])) {
+                    throw new SugarApiExceptionInvalidParameter(
+                        "definition for {$field} operand is invalid: parent_id is required"
+                    );
+                }
+            }
+
+            if (isset($def['parent_id']) && $def['parent_id'] === '$current_user_id') {
+                $def['parent_id'] = static::$current_user->id;
+            }
+
+            $and = $or->queryAnd();
+            $and->equals("{$jta}.address_type", $link);
+
+            if (isset($def['email_address_id'])) {
+                $and->equals("{$jta}.email_address_id", $def['email_address_id']);
+            }
+
+            if (isset($def['parent_type'])) {
+                $and->equals("{$jta}.parent_type", $def['parent_type']);
+            }
+
+            if (isset($def['parent_id'])) {
+                $and->equals("{$jta}.parent_id", $def['parent_id']);
+            }
+        }
     }
 
     /**

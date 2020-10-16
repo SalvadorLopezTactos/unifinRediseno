@@ -141,6 +141,7 @@ $viewdefs['Leads']['DetailView'] = array (
 
 		array (
 			'email',
+            'business_center_name',
 		),			
 		
 		array (

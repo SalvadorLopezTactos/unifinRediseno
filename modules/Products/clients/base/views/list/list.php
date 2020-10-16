@@ -41,7 +41,9 @@ $viewdefs['Products']['base']['view']['list'] = array(
                     'enabled' => true,
                     'default' => true,
                 ),
-                'quantity',
+                array(
+                    'name' => 'quantity',
+                ),
                  array(
                     'name' => 'discount_price',
                     'type' => 'currency',
@@ -83,7 +85,10 @@ $viewdefs['Products']['base']['view']['list'] = array(
                 ),
                 array(
                     'name' => 'assigned_user_name',
-                )
+                ),
+                array(
+                    'name' => 'service',
+                ),
             ),
         ),
     )

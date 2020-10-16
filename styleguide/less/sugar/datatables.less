@@ -229,6 +229,11 @@
       white-space: nowrap;
       position: relative;
       vertical-align: middle;
+
+      &.pill {
+        // overrule the width: 100% above
+        width: inherit;
+      }
     }
 
     .btn-toolbar {
@@ -1062,6 +1067,12 @@ FLEXLIST GENERIC */
   }
 }
 
+// multi line list view
+.multi-line-list-view .left-column {
+  min-width: 30px;
+  width: 30px;
+}
+
 .main-pane.span12 .flex-list-view.right-actions.scroll-width .dataTable {
   td:last-child > span,
   th:last-child .dropdown,
@@ -1379,4 +1390,52 @@ div.audit-email {
       }
     }
   }
+}
+
+/* Multi-line-list */
+.dataTable.multi-line-table {
+  th {
+    font-size: 13px;
+    font-weight: bold;
+    padding: 2px 4px;
+    background-color: @contentBackground;
+  }
+
+  td {
+    &.subfields {
+      font-size: 13px;
+      vertical-align: top;
+      padding: 2px;
+      overflow: hidden;
+
+      .subfield {
+        height: 20px;
+        padding: 2px;
+
+        .label {
+          border: none;
+          line-height: 16px;
+          font-size: 13px;
+
+          &.expired {
+            color: @darkRed;
+            background-color: @lightRed;
+          }
+
+          &.soon-expired {
+            color: @darkOrange;
+            background-color: @lightOrange;
+          }
+        }
+      }
+    }
+  }
+}
+
+.stylesGray {
+  color: @grayLight;
+}
+
+.stylesSemiBold {
+  font-weight: 600;
 }

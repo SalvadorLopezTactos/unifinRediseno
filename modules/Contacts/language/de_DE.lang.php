@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Kontaktlisten-Dashboard',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Kontaktbericht-Dashboard',
-
+    'LBL_SITE_USER_ID' => 'Hash der site_url und Kontakt-ID',
+    'LBL_COOKIE_CONSENT' => 'Cookie-Einwilligung',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Cookie-Einwilligung erhalten am',
     'LNK_CONTACT_REPORTS' => 'Kontaktberichte anzeigen',
     'ERR_DELETE_RECORD' => 'Bitte geben Sie die Datensatznummer an, um den Kontakt zu löschen.',
     'LBL_ACCOUNT_ID' => 'Firmen-ID:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Portal­-Information',
     'LBL_PORTAL_NAME' => 'Portal-Name:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Portal-Passwort ist konfiguriert:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Name des Unternehmens des Portal-Benutzers',
     'LBL_RECORD_SAVED_SUCCESS' => 'Der {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a> wurde erfolgreich erstellt.',
     'LBL_STREET' => 'Straße',
     'LBL_POSTAL_CODE' => 'PLZ:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Verkaufschancen',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumente',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Angebote',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Angebote (liefern an)',
     'LBL_QUOTES_BILL_TO' => 'Angebote (Rechnung an)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Produkte',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Bitte klicken Sie hier, um Ihr Profil zu bearbeiten.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Hier können Sie ihre bevorzugte Sprache einstellen. Damit andern Sie die Sprache, die vom Sugar-Portal verwendet wird.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Über das Benutzermenü können Sie jederzeit zu Ihrem Profil zurückkehren.',
+    'ERR_PORTAL_NAME_EXISTS' => 'Dieser Portal-Name {0} ist bereits vorhanden. Doppelte Portal-Namen sind nicht zulässig. Ändern Sie den Portal-Namen so, dass er eindeutig ist.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Principal-IP',
@@ -279,4 +284,8 @@ So erstellen Sie ein {{module_name}}:
     'LBL_FILTER_CONTACTS_REPORTS' => 'Kontakte-Berichte',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Geschäftszwecke, zugestimmt für',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Zustimmung zuletzt aktualisiert',
+
+    'LBL_ENTRY_SOURCE' => 'Quelle des Kontakts',
+    'LBL_SOURCE_EXTERNAL' => 'Extern',
+    'LBL_SOURCE_INTERNAL' => 'Intern',
 );

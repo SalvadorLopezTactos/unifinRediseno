@@ -21,20 +21,9 @@ class UpdateServiceAccountRequest extends \Google\Protobuf\Internal\Message
      */
     private $service_account = null;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type \Sugarcrm\Apis\Iam\Sa\V1alpha\ServiceAccount $service_account
-     *           The service account to be updated. The name (SRN) is required to be set.
-     *           Use a `FieldMask` to send partial field list.
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Sa\V1Alpha\Sa::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

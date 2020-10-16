@@ -22,6 +22,25 @@ use Sugarcrm\IdentityProvider\STS\EndpointService;
  */
 class Config
 {
+    const LDAP_ENCRYPTION_NONE = 'none';
+    const LDAP_ENCRYPTION_SSL = 'ssl';
+    const LDAP_ENCRYPTION_TLS = 'tls';
+    const IDM_MODE_KEY = 'idm_mode';
+
+    /**
+     * list of key names with values in array format
+     * @var array
+     */
+    protected $idmArrayTypeAttributes = [
+        'http_client',
+        'cloudConsoleRoutes',
+        'caching',
+        'requestedOAuthScopes',
+
+        // @deprecated: allowedSAs will be removed in the future versions.
+        'allowedSAs',
+    ];
+
     /**
      * @var \SugarConfig
      */
@@ -38,6 +57,12 @@ class Config
     protected $configurator;
 
     /**
+     * idm settings
+     * @var \Administration
+     */
+    protected $idmSettings;
+
+    /**
      * @param \SugarConfig $sugarConfig
      */
     public function __construct(\SugarConfig $sugarConfig)
@@ -46,14 +71,78 @@ class Config
     }
 
     /**
-     * @param string $key
+     * get settings either from SugarConfig or from Database,
+     * idm_mode.* config are stored in Database's config table.
+     *
+     * @param string $key full qualified name, such as idm_mode.enabled
      * @param mixed $default
      *
      * @return mixed
      */
     public function get($key, $default = null)
     {
-        return $this->sugarConfig->get($key, $default);
+        if (strncmp($key, self::IDM_MODE_KEY, strlen(self::IDM_MODE_KEY)) !== 0) {
+            return $this->sugarConfig->get($key, $default);
+        } elseif ($key === self::IDM_MODE_KEY) {
+            // get all idm config from db
+            $result = [];
+            foreach ($this->getIdmSettings()->settings as $idmKey => $value) {
+                if (strncmp($idmKey, self::IDM_MODE_KEY, strlen(self::IDM_MODE_KEY)) === 0) {
+                    $idmKey = preg_replace('/' . self::IDM_MODE_KEY . '_' . '/', '', $idmKey, 1);
+                    if (!empty($idmKey)) {
+                        $result[$idmKey] = $value;
+                    }
+                }
+            }
+            return $result ?? $default;
+        } else {
+            // construct key for db config setting
+            list($idmMode, $idmKey) = explode('.', $key, 2);
+            $dbConfigKey = $idmMode . '_' . $idmKey;
+            if (isset($this->getIdmSettings()->settings[$dbConfigKey])) {
+                return $this->getIdmSettings()->settings[$dbConfigKey];
+            }
+            return $default;
+        }
+    }
+
+    /**
+     * to get idm_mode's attribute value for a given key
+     * @param string $key key name for an attribute
+     * @param mixed $default
+     */
+    protected function getIdmSettingsByKey(string $key, $default = null)
+    {
+        return $this->get(self::IDM_MODE_KEY . '.' . $key, $default);
+    }
+
+    /**
+     * check if value is array for a given key
+     * @param string $key
+     * @return bool
+     */
+    protected function isArrayTypeValue(string $key) : bool
+    {
+        return in_array($key, $this->idmArrayTypeAttributes);
+    }
+
+    /**
+     * init idm settings
+     */
+    public function getIdmSettings()
+    {
+        if (!$this->idmSettings) {
+            $this->idmSettings = \Administration::getSettings(self::IDM_MODE_KEY);
+        }
+        return $this->idmSettings;
+    }
+
+    /**
+     * refresh idm settings
+     */
+    protected function refreshIdmSettings()
+    {
+        $this->idmSettings = \Administration::getSettings(self::IDM_MODE_KEY);
     }
 
     /**
@@ -77,19 +166,17 @@ class Config
             return [];
         }
 
-        $config = $this->get('idm_mode');
-
-        $stsUrl = rtrim($config['stsUrl'], '/ ');
-        $ipdUrl = rtrim($config['idpUrl'], '/ ');
-        $stsKeySetId = isset($config['stsKeySetId']) ? $config['stsKeySetId'] : null;
+        $stsUrl = rtrim($this->getIdmSettingsByKey('stsUrl', '/ '));
+        $ipdUrl = rtrim($this->getIdmSettingsByKey('idpUrl', '/ '));
+        $stsKeySetId = $this->getIdmSettingsByKey('stsKeySetId');
         $urlKeys = $stsKeySetId ? $stsUrl . '/keys/' . $stsKeySetId : null;
 
         $endpointService = new EndpointService(['host' => $stsUrl]);
 
         $idmModeConfig = [
-            'tid' => !empty($config['tid']) ? $config['tid'] : '',
-            'clientId' => $config['clientId'],
-            'clientSecret' => $config['clientSecret'],
+            'tid' => $this->getIdmSettingsByKey('tid', ''),
+            'clientId' => $this->getIdmSettingsByKey('clientId'),
+            'clientSecret' => $this->getIdmSettingsByKey('clientSecret'),
             'stsUrl' => $stsUrl,
             'idpUrl' => $ipdUrl,
             'redirectUri' => rtrim($this->get('site_url'), '/') . '/?module=Users&action=OAuth2CodeExchange',
@@ -97,13 +184,14 @@ class Config
             'urlAccessToken' => $endpointService->getOAuth2Endpoint(EndpointInterface::TOKEN_ENDPOINT),
             'urlResourceOwnerDetails' => $endpointService->getOAuth2Endpoint(EndpointInterface::INTROSPECT_ENDPOINT),
             'urlUserInfo' => $endpointService->getUserInfoEndpoint(),
-            'http_client' => !empty($config['http_client']) ? $config['http_client'] : [],
-            'cloudConsoleUrl' => !empty($config['cloudConsoleUrl']) ? $config['cloudConsoleUrl'] : '',
-            'cloudConsoleRoutes' => !empty($config['cloudConsoleRoutes']) ? $config['cloudConsoleRoutes'] : [],
-            'caching' => array_replace_recursive($this->getIDMModeDefaultCachingConfig(), $config['caching'] ?? []),
-            'crmOAuthScope' => $config['crmOAuthScope'] ?? '',
-            'requestedOAuthScopes' => $config['requestedOAuthScopes'] ?? [],
-            'allowedSAs' => $config['allowedSAs'] ?? [],
+            'http_client' => $this->getIdmSettingsByKey('http_client', []),
+            'cloudConsoleUrl' => $this->getIdmSettingsByKey('cloudConsoleUrl', ''),
+            'cloudConsoleRoutes' => $this->getIdmSettingsByKey('cloudConsoleRoutes', []),
+            'caching' => array_replace_recursive($this->getIDMModeDefaultCachingConfig(), $this->getIdmSettingsByKey('caching') ?? []),
+            'crmOAuthScope' => $this->getIdmSettingsByKey('crmOAuthScope', ''),
+            'requestedOAuthScopes' => $this->getIdmSettingsByKey('requestedOAuthScopes', []),
+            // @deprecated: allowedSAs will be removed in the future versions.
+            'allowedSAs' => $this->getIdmSettingsByKey('allowedSAs', []),
         ];
 
         if ($stsKeySetId) {
@@ -138,7 +226,7 @@ class Config
 
         $additional = array_merge($additional, array_map('urlencode', $parts));
 
-        return join('/', array_merge([$serverUrl], $additional));
+        return join('/', array_merge([$serverUrl], $additional)) . '?tenant_hint=' . urlencode($config['tid']);
     }
 
     /**
@@ -147,7 +235,7 @@ class Config
      */
     public function isIDMModeEnabled() : bool
     {
-        return (bool)$this->get('idm_mode.enabled', false);
+        return (bool)$this->getIdmSettingsByKey('enabled', false);
     }
 
     /**
@@ -167,22 +255,54 @@ class Config
     }
 
     /**
+     * get Idm Mode data from source, without any calculated fields
+     * @return mixed
+     */
+    protected function getIdmModeData()
+    {
+        return $this->get(Config::IDM_MODE_KEY, []);
+    }
+
+    /**
      * Enable or disable IDM mode
      *
      * @param false|array $config
      */
-    public function setIDMMode($config) : void
+    public function setIDMMode($config, $refreshCache = true) : void
     {
-        $configurator = $this->getConfigurator();
-        if ($config) {
-            $configurator->config['idm_mode'] = $config;
-        } else {
-            $configurator->config['idm_mode']['enabled'] = false;
+        // get IDM config data from source
+        $oldConfig = $this->getIdmModeData();
+        if (is_array($config)) {
+            ksort($config);
+            ksort($oldConfig);
+            if ($config == $oldConfig) {
+                // same config, don't need to do anything
+                return;
+            }
         }
-        $configurator->handleOverride();
-        $configurator->clearCache();
 
-        $this->refreshCache();
+        if ($config === false || !is_array($config)) {
+            if (!$this->isIDMModeEnabled()) {
+                // was idm off, do nothing
+                return;
+            }
+            $this->getIdmSettings()->saveSetting(self::IDM_MODE_KEY, 'enabled', false);
+        } else {
+            foreach ($config as $key => $value) {
+                if ((is_array($value) && !$this->isArrayTypeValue($key))
+                    || (!is_array($value) && $this->isArrayTypeValue($key))) {
+                    if (!empty($GLOBALS['log'])) {
+                        $GLOBALS['log']->error("value for key=$key is unexpected in array!");
+                    }
+                }
+                $this->getIdmSettings()->saveSetting(self::IDM_MODE_KEY, $key, $value);
+            }
+        }
+
+        $this->refreshIdmSettings();
+        if ($refreshCache) {
+            $this->refreshCache();
+        }
     }
 
     /**
@@ -190,9 +310,6 @@ class Config
      */
     protected function refreshCache(): void
     {
-        $this->sugarConfig->clearCache('idm_mode');
-        $this->sugarConfig->clearCache('idm_mode.enabled');
-
         $repairAndClear = new \RepairAndClear();
         $repairAndClear->repairAndClearAll(['clearAll'], ['Employees', 'Users'], false, false, false);
 
@@ -218,17 +335,6 @@ class Config
         return array_filter($this->getUserVardef(), function ($def) {
             return !empty($def['idm_mode_disabled']);
         });
-    }
-
-    /**
-     * @return \Configurator
-     */
-    protected function getConfigurator() : \Configurator
-    {
-        if (is_null($this->configurator)) {
-            $this->configurator = new \Configurator();
-        }
-        return $this->configurator;
     }
 
     /**
@@ -310,10 +416,10 @@ class Config
 
         // make sure host is in symfony/ldap format
         $host = $this->getLdapSetting('ldap_hostname', '127.0.0.1');
-        $encryption = 'none';
-        if (strpos($host, 'ldaps://') === 0) {
+        $encryption = $this->getLdapSetting('ldap_encryption', self::LDAP_ENCRYPTION_NONE);
+        if (strpos($host, 'ldaps://') === 0 && $encryption != self::LDAP_ENCRYPTION_TLS) {
             $host = substr($host, strlen('ldaps://'));
-            $encryption = 'ssl';
+            $encryption = self::LDAP_ENCRYPTION_SSL;
         }
 
         $ldap = [
@@ -434,7 +540,7 @@ class Config
             'ttl' => [
                 'introspectToken' => 10, // 10 seconds for introspecting user token
                 'userInfo' => 10, // 10 seconds for requesting user info
-                'keySet' => 7 * 24 * 60 * 60, // 7 days for requesting keySet for Mango client
+                'keySet' => 24 * 60 * 60, // 24 hours for requesting keySet for Mango client
             ],
         ];
     }

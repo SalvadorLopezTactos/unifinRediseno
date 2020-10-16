@@ -32,6 +32,7 @@ $viewdefs['Quotes']['base']['view']['subpanel-list'] = array(
                     'default' => true,
                     'name' => 'account_name',
                     'sortable' => false,
+                    'readonly' => true,
                 ),
                 array(
                     'label' => 'LBL_LIST_AMOUNT_USDOLLAR',

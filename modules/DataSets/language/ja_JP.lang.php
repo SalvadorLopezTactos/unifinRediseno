@@ -80,7 +80,7 @@ $mod_strings = array (
   'LBL_LAYOUT_LIST_ORDER_X' => '順番Xを列挙:',
   'LBL_LAYOUT_LIST_ORDER_Z' => '順番Zを列挙:',
   'LBL_MODIFY_HEAD' => 'ヘッダの属性を変更:',
-  'LBL_MODIFY_HEAD_HEADER' => 'ヘッダーの属性を追加/編集する:',
+  'LBL_MODIFY_HEAD_HEADER' => 'ヘッダの属性を追加/編集する:',
   'LBL_MODIFY_BODY' => '本文の属性を変更:',
   'LBL_MODIFY_BODY_HEADER' => '本文の属性を追加/編集する:',
   

@@ -33,9 +33,7 @@ if(!SugarACL::checkAccess('Reports', 'edit', $context))
 }
 global $current_user, $mod_strings, $ACLAllowedModules, $current_language, $app_list_strings, $app_strings, $sugar_config, $sugar_version;
 
-$params = array();
-$params[] = $mod_strings['LBL_CREATE_CUSTOM_REPORT'];
-echo getClassicModuleTitle("Reports", $params, false);
+echo getClassicModuleTitle("Reports", [ htmlspecialchars($mod_strings['LBL_CREATE_CUSTOM_REPORT']) ], false);
 
 $ACLAllowedModules = getACLAllowedModules();
 uksort($ACLAllowedModules,"juliansort");

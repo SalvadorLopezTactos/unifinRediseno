@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => '적용된 사용자 할당',
 
     'LBL_PMSE_LABEL_PREVIEW' => '프로세스 설계 미리 보기',
+    'LBL_PROJECT_RUN_ORDER' => '주문 실행',
 );
 

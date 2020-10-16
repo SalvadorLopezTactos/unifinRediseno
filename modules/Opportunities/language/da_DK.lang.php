@@ -15,6 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Mulighedsliste-dashboard',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Mulighedsoptegnelser-dashboard',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Oplysninger om salgsmulighed',
 
     'LBL_MODULE_NAME' => 'Salgsmuligheder',
     'LBL_MODULE_NAME_SINGULAR' => 'Salgsmulighed',
@@ -25,6 +26,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => 'Salgsmulighedsnavn:',
     'LBL_OPPORTUNITY' => 'Salgsmulighed:',
     'LBL_NAME' => 'Salgsmulighedsnavn',
+    'LBL_TIME' => 'Klokkeslæt',
     'LBL_INVITEE' => 'Kontakter',
     'LBL_CURRENCIES' => 'Valutaer',
     'LBL_LIST_OPPORTUNITY_NAME' => 'Navn',
@@ -75,6 +77,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Type:',
     'LBL_CAMPAIGN' => 'Kampagne:',
     'LBL_NEXT_STEP' => 'Næste trin:',
+    'LBL_SERVICE_START_DATE' => 'Service Start Date',
     'LBL_LEAD_SOURCE' => 'Kilde til kundeemne:',
     'LBL_SALES_STAGE' => 'Salgsfase:',
     'LBL_SALES_STATUS' => 'Status',
@@ -142,6 +145,16 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE_FORECAST' => 'Forpligte stadie prognose',
     'LBL_WORKSHEET' => 'Regneark',
 
+    'LBL_RENEWAL' => 'Fornyelse',
+    'LBL_RENEWAL_OPPORTUNITIES' => 'Fornyelsesmuligheder',
+    'LBL_RENEWAL_PARENT' => 'Overordnet mulighed',
+    'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'Fornyelse overordnet ID',
+    'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
+
+    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
+    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
+    'LBL_WIDGET_AMOUNT' => 'Amount',
+
     'TPL_RLI_CREATE' => 'En salgs mulighed, skal have en tilknyttet Revenue Line Item.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Skabe en Revenue Line Item.',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Produkter',
@@ -152,6 +165,7 @@ $mod_strings = array(
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Du kan ikke slette Opportunities som inneholder lukkede Revenue poster',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'En eller flere av de valgte postene inneholder lukkede Revenue poster og kan ikke slettes.',
     'LBL_INCLUDED_RLIS' => '# af inkluderede indtægt linje-emner',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Tilbud',
 
@@ -186,25 +200,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Efter du indleder denne ændring, vil indtægt lije. emneposter blive oprettet for hver eksisterende {{module_name}} i baggrunden. Når indtægt linje-emner er fuldstændige og tilgængelige, vil en meddelelse blive sendt til e-mailadressen på din brugerprofil. Bemærk, at dit eksempel skal konfigureres til at sende e-mail via Admin > E-mail-indstillinger, for at beskeden kan sendes.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} -modulet giver dig mulighed at spore individuelle salg fra start til slut. Hver {{module_name}} post repræsenterer et potentielt salg og omfatter relevante salgsdata samt vedrørende andre vigtige poster såsom {{quotes_module}}, {{contacts_module}} osv. En {{module_name}} vil typisk komme videre gennem flere salgsstadier, før det markeres enten "Lukket vandt" eller "Lukket tabt". {{plural_module_name}} kan udnyttes yderligere ved hjælp af Sugars {{forecasts_singular_module}}ing modul til at forstå og forudsige salgstendenser samt fokusere arbejdet mhp. at opnå salgskvoter.',
+    'LBL_HELP_RECORDS' => 'Modulet {{plural_module_name}} gør det muligt for dig at følge individuelle salg fra start til slut. Hver enkelt {{module_name}} post angiver et potentielt salg og inkluderer relevante salgsdata og relaterer til andre vigtige poster såsom {{quotes_module}}, {{contacts_module}}, osv. Et {{module_name}} vi typisk gå igennem adskillige faser før den angives som værende "Lukket vundet" eller "Lukket tabt". {{plural_module_name}} kan udnyttes yderligere ved hjælp af Sugars {{forecasts_singular_module}} modul til at forstå og forudsige salgstendenser, samt til at fokusere arbejde på at opnå salgsomsætning.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} -modulet gør det mulgit for dig at følge enkelte salg og de linjeposter, der hører til disse salg, fra start til slut. Hver {{module_name}} post repræsenterer et potentielt salg og indeholder relevante salgsdata samt relaterer til andre vigtige poster, som for eksempel {{quotes_module}}, {{contacts_module}} etc.
+    'LBL_HELP_RECORD' => 'Modulet {{plural_module_name}} gør det muligt for dig at følge individuelle salg, og de varelinjer, der hører til de pågældende salg, fra start til slut. Hver enkelt {{module_name}} post angiver et potentielt og inkluderer relevante salgsdata og relaterer til andre vigtige poster såsom {{quotes_module}}, {{contacts_module}} osv.
 
-- Rediger denne posts felter ved at klikke på det enkelte felt eller Edit-knappen.
-- Se eller modificer links til andre poster ved at skifte det nederste venstre vindue til "Data View".
-- Skriv eller se brugerkommentarer og ændringer i postens historie i {{activitystream_singular_module}} ved at skifte det nederste venstre vindue til "Activity Stream".
-- Følg eller gør denne post til en favorit ved hjælp af ikonerne til højre for postens navn.
-- Yderligere handlinger findes i dropdown-menuen Actions til højre for Edit-knappen.',
+- Redigér dette registers felter ved at klikke på et individuelt felt eller knappen Redigér.
+- Se eller modificér links til andre registre i underpanelerne ved at skifte den nederste venstre rude til "Datavisning".
+- Lav og se brugerkommentarer og optag ændringshistorik i {{activitystream_singular_module}} ved at skifte den nederste venstre rude til "Aktivitetsstrøm".
+- Følg eller gør dette register til en favorit vha. ikonerne til højre for registernavnet.
+- Yderligere handlinger er tilgængelige i rullelisten Handlinger til højre for knappen Redigér.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} -modulet giver dig mulighed for at spore individuelle salg og de linjeposter, der hører til disse salg, fra start til slut. Hver {{module_name}} post repræsenterer et potentielt salg og omfatter relevante salgsdata, samt data der relaterer sig til andre vigtige poster, såsom {{quotes_module}}, {{contacts_module}} etc.
+    'LBL_HELP_CREATE' => 'Modulet {{plural_module_name}} giver dig mulighed for at følge individuelle salg og de varelinjer, der hører til disse salg, fra start til slut. Hvert enkelt {{module_name}} post angiver et potentielt salg og inkluderer relevante salgsdata og relaterer til andre vigtige poster såsom {{quotes_module}}, {{contacts_module}} osv.
 
 For at oprette et {{module_name}}:
 1. Angiv værdier for felterne som ønsket.
  - Felter med "Påkrævet" skal være udfyldte inden der gemmes.
  - Klik på "Se mere" for at vise yderligere felter, hvis det er nødvendigt.
-2. Klik på "Gem" for at afslutte den nye post og vende tilbage til den foregående side.',
+2. Klik på "Gem" for at afslutte det nye register og vende tilbage til den foregående side.',
 
 // END ENT/ULT
 
@@ -216,4 +230,6 @@ For at oprette et {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Viser top Ti muligheder i et boblediagram.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Mine muligheder',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Mit teams muligheder",
+
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
 );

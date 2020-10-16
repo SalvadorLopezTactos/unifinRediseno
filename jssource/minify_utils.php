@@ -27,8 +27,6 @@ class SugarMinifyUtils
         //add prefix to key if it was passed in
         $compress_exempt_files = array(
             $prefix.sugar_cached('')                => true,
-            $prefix.'include/javascript/nvd3/lib/d3.min.js' => true,
-            $prefix.'include/javascript/nvd3/nv.d3.min.js' => true,
             $prefix.'include/javascript/d3-sugar/d3-sugar.min.js' => true,
             $prefix.'include/javascript/sucrose/sucrose.min.js' => true,
             $prefix.'include/javascript/tiny_mce'   => true,

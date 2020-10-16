@@ -119,6 +119,7 @@ $viewdefs['Emails']['mobile']['view']['detail'] = array(
                     'name' => 'state',
                     'label' => 'LBL_LIST_STATUS',
                 ),
+                'tag',
                 'parent_name',
                 'assigned_user_name',
                 'team_name',

@@ -129,7 +129,7 @@ class File extends Basic
     /**
      * {@inheritdoc}
      */
-    public function populateFromRow(array $row, $convert = false)
+    public function populateFromRow(array $row, $convert = false, $getMoreData = true)
     {
         $row = parent::populateFromRow($row, $convert);
 

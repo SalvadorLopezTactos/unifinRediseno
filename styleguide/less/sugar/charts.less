@@ -101,8 +101,8 @@ span.count {
   &.label {
     font-size: 14px;
     display: inline-block;
-    width: 28px;
-    height: 28px;
+    width: @countBadgeWidth;
+    height: @countBadgeHeight;
     line-height: 22px;
     padding: 3px;
   }
@@ -235,43 +235,43 @@ span.count {
 
 //Opportunities Treemap
 .stage_closedwon {
-  fill: #2ca02c;
+  fill: @army;
 }
 
 .stage_prospecting {
-  fill: darken(#ff7f0e, 35%);
+  fill: darken(@darkOrange, 35%);
 }
 
 .stage_closedlost {
-  fill: #d62728;
+  fill: @red;
 }
 
 .stage_qualification {
-  fill: #ff7f0e;
+  fill: @orange;
 }
 
 .stage_thisopp {
-  fill: #1f77b4;
+  fill: @darkTeal;
 }
 
 .stage_negotiationreview {
-  fill: darken(#2ca02c, 40%);
+  fill: darken(@green, 40%);
 }
 
 .stage_perceptionanalysis {
-  fill: darken(#2ca02c, 30%);
+  fill: darken(@green, 30%);
 }
 
 .stage_proposalpricequote {
-  fill: darken(#2ca02c, 45%);
+  fill: darken(@green, 45%);
 }
 
 .stage_valueproposition {
-  fill: #ff7f0e;
+  fill: @orange;
 }
 
 .stage_iddecisionmakers {
-  fill: #9467bd;
+  fill: @purple;
 }
 
 .stage_needsanalysis {

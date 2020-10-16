@@ -83,9 +83,6 @@
                 // it's the equivalent of 0
                 value = 0;
             }
-        } else {
-            // it's a number, so make it an integer
-            value = Math.round(value);
         }
 
         return value;

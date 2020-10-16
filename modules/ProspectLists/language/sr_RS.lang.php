@@ -65,6 +65,12 @@ $mod_strings = array (
   'LBL_DOMAIN'=>'Nema email poruka na domenu',
   'LBL_LIST_PROSPECTLIST_NAME'=>'Naziv',
 	'LBL_MORE_DETAIL' => 'Više detalja' /*for 508 compliance fix*/,
+    'LBL_ACCOUNTS' => 'Nalozi',
+    'LBL_CAMPAIGNS' => 'Kampanje',
+    'LBL_CONTACTS' => 'Kontakti',
+    'LBL_LEADS' => 'Potencijalni klijenti',
+    'LBL_PROSPECTS' => 'Ciljevi',
+    'LBL_USERS' => 'Korisnici',
 
     // Help Text
     // List View Help Text

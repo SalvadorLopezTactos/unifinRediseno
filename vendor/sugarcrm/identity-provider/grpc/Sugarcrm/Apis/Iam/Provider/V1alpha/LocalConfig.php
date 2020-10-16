@@ -25,21 +25,16 @@ class LocalConfig extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.sugarcrm.apis.iam.provider.v1alpha.LoginLockout login_lockout = 4;</code>
      */
     private $login_lockout = null;
-
     /**
-     * Constructor.
+     * Password will be hashed additionally with MD5 to support old SOAP integrations
      *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type \Sugarcrm\Apis\Iam\Provider\V1alpha\PasswordRequirements $password_requirements
-     *     @type \Sugarcrm\Apis\Iam\Provider\V1alpha\PasswordExpiration $password_expiration
-     *     @type \Sugarcrm\Apis\Iam\Provider\V1alpha\LoginLockout $login_lockout
-     * }
+     * Generated from protobuf field <code>bool legacy_md5_support = 5;</code>
      */
-    public function __construct($data = NULL) {
+    private $legacy_md5_support = false;
+
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Provider\V1Alpha\Provider::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**
@@ -104,6 +99,32 @@ class LocalConfig extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Sugarcrm\Apis\Iam\Provider\V1alpha\LoginLockout::class);
         $this->login_lockout = $var;
+
+        return $this;
+    }
+
+    /**
+     * Password will be hashed additionally with MD5 to support old SOAP integrations
+     *
+     * Generated from protobuf field <code>bool legacy_md5_support = 5;</code>
+     * @return bool
+     */
+    public function getLegacyMd5Support()
+    {
+        return $this->legacy_md5_support;
+    }
+
+    /**
+     * Password will be hashed additionally with MD5 to support old SOAP integrations
+     *
+     * Generated from protobuf field <code>bool legacy_md5_support = 5;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setLegacyMd5Support($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->legacy_md5_support = $var;
 
         return $this;
     }

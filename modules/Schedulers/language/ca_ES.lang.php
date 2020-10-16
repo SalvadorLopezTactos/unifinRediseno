@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publiqueu articles aprovats i articles de la base de coneixement caducats.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Tasca planificada',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Reconstuïu les dades de seguretat desregularitzades de l&#39;equip',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Purgador de la seqüència d&#39;activitats',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intèrval:',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Executa l&#39;enviament de recordatoris per correu electrònic',
 'LBL_CLEANJOBQUEUE' => 'Alliberar espai en cua de treball',
 'LBL_CLEANOLDRECORDLISTS' => 'Netejar antigues llistes de registres',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Purgador de la seqüència d&#39;activitats',
 'LBL_PMSEENGINECRON' => 'Planificador de SugarBPM',
 );
 

@@ -26,7 +26,7 @@ $connector_strings = array (
 										<ol>
 											<li>Twitter Developersサイトを表示します。 <a href=\'https://apps.twitter.com\' target=\'_blank\'>https://apps.twitter.com</a>.</li>
 											<li>アプリケーションを登録したいTwitter アカウントでサインインします。</li>
-											<li>登録フォーム内に、アプリケーションの名称を入力します。ユーザーがSugarからTwitterアカウントを認証すると、この名称が表示されます。</li>
+											<li>登録フォーム内に、アプリケーションの名称を入力します。ユーザがSugarからTwitterアカウントを認証すると、この名称が表示されます。</li>
 											<li>[Description（説明）]を入力します。</li>
 											<li>[Application Website URL（アプリケーションウェブサイトURL）]を入力します。</li>
 											<li>[Callback URL（コールバックURL）
@@ -38,8 +38,8 @@ $connector_strings = array (
 									</td>
 								</tr>
 							</table>',
-    'LBL_NAME' => 'ツイッターユーザー名',
-    'LBL_ID' => 'ツイッターユーザー名',
+    'LBL_NAME' => 'Twitterユーザ名',
+    'LBL_ID' => 'Twitterユーザ名',
 	'company_url' => 'URL',
     'oauth_consumer_key' => 'コンシューマキー',
     'oauth_consumer_secret' => 'コンシューマシークレット',

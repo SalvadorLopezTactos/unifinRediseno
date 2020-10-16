@@ -21,7 +21,6 @@ class ViewDisplayProperties extends ViewList
 	{
  		$this->options['show_all'] = false;
  		$this->options['show_javascript'] = true;
- 		$this->options['show_footer'] = false;
  		$this->options['show_header'] = false;
         parent::process($params);
  	}

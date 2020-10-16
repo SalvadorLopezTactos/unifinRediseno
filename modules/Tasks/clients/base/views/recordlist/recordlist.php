@@ -41,6 +41,7 @@ $viewdefs['Tasks']['base']['view']['recordlist']['rowactions']['actions'] = arra
     ),
     array(
         'type' => 'rowaction',
+        'name' => 'delete_button',
         'icon' => 'fa-trash-o',
         'event' => 'list:deleterow:fire',
         'label' => 'LBL_DELETE_BUTTON',

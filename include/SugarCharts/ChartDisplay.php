@@ -171,9 +171,10 @@ class ChartDisplay
 
                     // check for any unsupported drillthru fields for sidecar modules
                     if ($allowDrillthru) {
-                        // no drillthru on fields: 'datetime' (no column function), 'multienum'
+                        // no drillthru on fields: 'datetime/datetimecombo' (no column function), 'multienum'
                         if ($groupByType === 'multienum'
-                            || ($groupByType === 'datetime' && empty($group_def['column_function']))) {
+                            || ((in_array($groupByType, ['datetime', 'datetimecombo'])
+                                && empty($group_def['column_function'])))) {
                             $allowDrillthru = false;
                         }
                     }

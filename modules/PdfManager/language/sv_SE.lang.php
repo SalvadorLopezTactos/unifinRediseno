@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Förhandsgranska',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'VARNING: Om du ändrar primärmodulen, kommer alla fält som redan adderats till templaten att raderas.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Här är filen du begärde (Du kan ändra den här texten)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Offert',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Den här templaten används för att skriva Offert i PDF.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'offert',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Offert (med tjänster)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Den här mallen används för att skriva ut en offert, inklusive tjänsteinformation, i PDF.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'tjänsteoffert',
+
   'LBL_TPL_INVOICE_NAME' => 'Faktura',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Den här templaten används för att skriva Faktura i PDF.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'faktura',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Faktura (med tjänster)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Den här mallen används för att skriva ut en faktura, inklusive tjänsteinformation, i PDF.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'tjänstefaktura',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Offert nummer:',
   'LBL_TPL_SALES_PERSON' => 'Säljare:',
   'LBL_TPL_VALID_UNTIL' => 'Giltig till:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Delnummer:',
   'LBL_TPL_PRODUCT' => 'Produkt',
   'LBL_TPL_RLI' => 'Intäktsposter',
+  'LBL_TPL_DURATION' => 'Varaktighet',
+  'LBL_TPL_DURATION_STARTS' => 'Startar:',
+  'LBL_TPL_DURATION_ENDS' => 'Slutar:',
   'LBL_TPL_LIST_PRICE' => 'Listpris',
   'LBL_TPL_UNIT_PRICE' => 'Enhetspris',
   'LBL_TPL_EXT_PRICE' => 'Externt pris',

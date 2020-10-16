@@ -27,6 +27,10 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Accounts List Dashboard',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Accounts Record Dashboard',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Account Details',
+    'LBL_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Account Name/Industry',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'Location',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Charts',
@@ -156,7 +160,7 @@ $mod_strings = array (
 	'NTC_REMOVE_ACCOUNT_CONFIRMATION' => 'Are you sure you want to remove this record?',
 	'NTC_REMOVE_MEMBER_ORG_CONFIRMATION' => 'Are you sure you want to remove this record as a member organization?',
 	'LBL_ASSIGNED_USER_NAME' => 'Assigned to:',
-    'LBL_PROSPECT_LIST' => 'Prospect List',
+    'LBL_PROSPECT_LIST' => 'Target List',
     'LBL_ACCOUNTS_SUBPANEL_TITLE'=>'Accounts',
     'LBL_PROJECT_SUBPANEL_TITLE' => 'Projects',
 	'LBL_COPY' => 'Copy' /*for 508 compliance fix*/,

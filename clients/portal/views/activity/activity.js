@@ -17,11 +17,11 @@
 ({
     events: {
         'click [data-action=loadPreview]': 'loadPreview',
-        'click [data-action=addNote]': 'openNoteModal',
+        'click [data-action=addNote]': 'openNoteDrawer',
         'click [name=show_more_button]': 'showMoreRecords'
     },
 
-    plugins: ['RelativeTime'],
+    plugins: ['RelativeTime', 'LinkedModel'],
 
     /**
      * Default settings used for the `RelativeTime` plugin.
@@ -204,8 +204,12 @@
     /**
      * Open the modal for writing a note
      * @param event
+     * @deprecated since 9.2.0, may be removed in 10.2.0
      */
     openNoteModal: function(event) {
+        app.logger.warn('`Portal.ActivityView#openNoteModal` is deprecated in 9.2.0 and ' +
+            'may be removed in 10.2.0. Please use `Portal.ActivityView#openNoteDrawer` to create a note.');
+
         if (Modernizr.touch) {
             app.$contentEl.addClass('content-overflow-visible');
         }
@@ -213,6 +217,30 @@
         this.layout.trigger("app:view:activity:editmodal");
         this.$('li.open').removeClass('open');
         return false;
+    },
+
+    /**
+     * Open a drawer for writing a note.
+     *
+     * @param {Event} event
+     */
+    openNoteDrawer: function(event) {
+        var self = this;
+        var model = this.createLinkModel(this.context.get('parentModel'), this.context.get('link'));
+        model.set('portal_flag', true);
+
+        app.drawer.open({
+            layout: 'create',
+            context: {
+                create: true,
+                module: this.context.get('module'),
+                model: model
+            }
+        }, function(context, model) {
+            if (model) {
+                self.collection.fetch({relate: true});
+            }
+        });
     },
 
     /**

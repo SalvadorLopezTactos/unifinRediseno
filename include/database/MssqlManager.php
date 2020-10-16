@@ -79,7 +79,6 @@ abstract class MssqlManager extends DBManager
     protected $capabilities = array(
         "affected_rows" => true,
         "select_rows" => true,
-        'fulltext' => true,
         "fix:expandDatabase" => true, // Support expandDatabase fix
         "create_user" => true,
         "create_db" => true,
@@ -897,66 +896,6 @@ WHERE TABLE_NAME = ?
         return false; // no database available
     }
 
-
-    /**
-     * This call is meant to be used during install, when Full Text Search is enabled
-     * Indexing would always occur after a fresh sql server install, so this code creates
-     * a catalog and table with full text index.
-     */
-    public function full_text_indexing_setup()
-    {
-        $this->logger->debug('MSSQL about to wakeup FTS');
-
-        if($this->getDatabase()) {
-                //create wakeup catalog
-                $FTSqry[] = "if not exists(  select * from sys.fulltext_catalogs where name ='wakeup_catalog' )
-                CREATE FULLTEXT CATALOG wakeup_catalog
-                ";
-
-                //drop wakeup table if it exists
-                $FTSqry[] = "IF EXISTS(SELECT 'fts_wakeup' FROM sysobjects WHERE name = 'fts_wakeup' AND xtype='U')
-                    DROP TABLE fts_wakeup
-                ";
-                //create wakeup table
-                $FTSqry[] = "CREATE TABLE fts_wakeup(
-                    id nvarchar(36) NOT NULL CONSTRAINT pk_fts_wakeup_id PRIMARY KEY CLUSTERED (id ASC ),
-                    body text NULL,
-                    kb_index int IDENTITY(1,1) NOT NULL CONSTRAINT wakeup_fts_unique_idx UNIQUE NONCLUSTERED
-                )
-                ";
-                //create full text index
-                 $FTSqry[] = "CREATE FULLTEXT INDEX ON fts_wakeup
-                (
-                    body
-                    Language 0X0
-                )
-                KEY INDEX wakeup_fts_unique_idx ON wakeup_catalog
-                WITH CHANGE_TRACKING AUTO
-                ";
-
-                //insert dummy data
-                $FTSqry[] = "INSERT INTO fts_wakeup (id ,body)
-                VALUES ('".create_guid()."', 'SugarCRM Rocks' )";
-
-
-                //create queries to stop and restart indexing
-                $FTSqry[] = 'ALTER FULLTEXT INDEX ON fts_wakeup STOP POPULATION';
-                $FTSqry[] = 'ALTER FULLTEXT INDEX ON fts_wakeup DISABLE';
-                $FTSqry[] = 'ALTER FULLTEXT INDEX ON fts_wakeup ENABLE';
-                $FTSqry[] = 'ALTER FULLTEXT INDEX ON fts_wakeup SET CHANGE_TRACKING MANUAL';
-                $FTSqry[] = 'ALTER FULLTEXT INDEX ON fts_wakeup START FULL POPULATION';
-                $FTSqry[] = 'ALTER FULLTEXT INDEX ON fts_wakeup SET CHANGE_TRACKING AUTO';
-
-                foreach($FTSqry as $q){
-                    sleep(3);
-                    $this->query($q);
-                }
-                $this->create_default_full_text_catalog();
-        }
-
-        return false; // no database available
-    }
-
     protected $date_formats = array(
         '%Y-%m-%d' => 10,
         '%Y-%m' => 7,
@@ -1010,7 +949,7 @@ WHERE TABLE_NAME = ?
                 }
                 return "ISNULL($string$additional_parameters_string)";
             case 'concat':
-                return implode("+",$all_parameters);
+                return "CONCAT(" . implode(",", $all_parameters) . ")";
             case 'text2char':
                 return "CAST($string AS varchar(8000))";
             case 'quarter':
@@ -1341,7 +1280,7 @@ WHERE TABLE_NAME = ?
         return $sql;
     }
 
-    protected function setAutoIncrement($table, $field_name)
+    protected function setAutoIncrement($table, $field_name, array $platformOptions = [])
     {
 		return "identity(1,1)";
 	}
@@ -1510,18 +1449,6 @@ INNER JOIN sys.columns c
         return $columns;
     }
 
-
-    /**
-     * Get FTS catalog name for current DB
-     */
-    protected function ftsCatalogName()
-    {
-        if(isset($this->connectOptions['db_name'])) {
-            return $this->connectOptions['db_name']."_fts_catalog";
-        }
-        return 'sugar_fts_catalog';
-    }
-
     /**
      * @see DBManager::add_drop_constraint()
      */
@@ -1566,89 +1493,9 @@ INNER JOIN sys.columns c
             else
                 $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name}  FOREIGN KEY ({$fields}) REFERENCES {$definition['foreignTable']}({$definition['foreignFields']})";
             break;
-        case 'fulltext':
-            if ($this->full_text_indexing_enabled() && $drop) {
-                $sql = "DROP FULLTEXT INDEX ON {$table}";
-            } elseif ($this->full_text_indexing_enabled()) {
-                $catalog_name=$this->ftsCatalogName();
-                if ( isset($definition['catalog_name']) && $definition['catalog_name'] != 'default')
-                    $catalog_name = $definition['catalog_name'];
-
-                $language = "Language 1033";
-                if (isset($definition['language']) && !empty($definition['language']))
-                    $language = "Language " . $definition['language'];
-
-                $key_index = $definition['key_index'];
-
-                $change_tracking = "auto";
-                if (isset($definition['change_tracking']) && !empty($definition['change_tracking']))
-                    $change_tracking = $definition['change_tracking'];
-
-                $sql = " CREATE FULLTEXT INDEX ON $table ($fields $language) KEY INDEX $key_index ON $catalog_name WITH CHANGE_TRACKING $change_tracking" ;
-            }
-            break;
         }
         return $sql;
     }
-
-    /**
-     * Returns true if Full Text Search is installed
-     *
-     * @return bool
-     */
-    public function full_text_indexing_installed()
-    {
-        $ftsChckRes = $this->getOne("SELECT FULLTEXTSERVICEPROPERTY('IsFulltextInstalled') as fts");
-        return !empty($ftsChckRes);
-    }
-
-    /**
-     * @see DBManager::full_text_indexing_enabled()
-     */
-    protected function full_text_indexing_enabled($dbname = null)
-    {
-        // check to see if we already have install setting in session
-    	if(!isset($_SESSION['IsFulltextInstalled']))
-            $_SESSION['IsFulltextInstalled'] = $this->full_text_indexing_installed();
-
-        // check to see if FTS Indexing service is installed
-        if(empty($_SESSION['IsFulltextInstalled']))
-            return false;
-
-        // grab the dbname if it was not passed through
-		if (empty($dbname)) {
-			global $sugar_config;
-			$dbname = $sugar_config['dbconfig']['db_name'];
-		}
-        //we already know that Indexing service is installed, now check
-        //to see if it is enabled
-		$res = $this->getOne("SELECT DATABASEPROPERTY('$dbname', 'IsFulltextEnabled') ftext");
-        return !empty($res);
-	}
-
-    /**
-     * Creates default full text catalog
-     */
-	protected function create_default_full_text_catalog()
-    {
-		if ($this->full_text_indexing_enabled()) {
-		    $catalog = $this->ftsCatalogName();
-            $this->logger->debug("Creating the default catalog for full-text indexing, $catalog");
-
-            //drop catalog if exists.
-			$ret = $this->query("
-                if not exists(
-                    select *
-                        from sys.fulltext_catalogs
-                        where name ='$catalog'
-                        )
-                CREATE FULLTEXT CATALOG $catalog");
-
-			if (empty($ret)) {
-                $this->logger->error("Error creating default full-text catalog, $catalog");
-			}
-		}
-	}
 
     /**
      * Function returns name of the constraint automatically generated by sql-server.
@@ -1909,35 +1756,6 @@ EOQ;
     {
         $term = str_replace("%", "*", $term); // Mssql wildcard is *
         return '"'.$term.'"';
-    }
-
-    /**
-     * Generate fulltext query from set of terms
-     * @param string $fields Field to search against
-     * @param array $terms Search terms that may be or not be in the result
-     * @param array $must_terms Search terms that have to be in the result
-     * @param array $exclude_terms Search terms that have to be not in the result
-     */
-    public function getFulltextQuery($field, $terms, $must_terms = array(), $exclude_terms = array())
-    {
-        $condition = $or_condition = array();
-        foreach($must_terms as $term) {
-            $condition[] = $this->quoteTerm($term);
-        }
-
-        foreach($terms as $term) {
-            $or_condition[] = $this->quoteTerm($term);
-        }
-
-        if(!empty($or_condition)) {
-            $condition[] = "(".join(" | ", $or_condition).")";
-        }
-
-        foreach($exclude_terms as $term) {
-            $condition[] = " NOT ".$this->quoteTerm($term);
-        }
-        $condition = $this->quoted(join(" AND ",$condition));
-        return "CONTAINS($field, $condition)";
     }
 
     /**

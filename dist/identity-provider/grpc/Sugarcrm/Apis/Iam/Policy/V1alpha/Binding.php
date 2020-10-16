@@ -14,46 +14,20 @@ use Google\Protobuf\Internal\GPBUtil;
 class Binding extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Role SRN
-     *
      * Generated from protobuf field <code>string role = 1;</code>
      */
     private $role = '';
     /**
-     * List of subject SRN's being:
-     * users   --> srn:cloud:iam::123456789012:user:xxxx
-     * groups  --> srn:cloud:iam::123456789012:group:xxxx
-     * clients --> srn:cloud:iam::123456789012:client:xxxx
-     * tenant  --> srn:cloud:iam::123456789012:tenant (???)
-     *
      * Generated from protobuf field <code>repeated string members = 2;</code>
      */
     private $members;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $role
-     *           Role SRN
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $members
-     *           List of subject SRN's being:
-     *           users   --> srn:cloud:iam::123456789012:user:xxxx
-     *           groups  --> srn:cloud:iam::123456789012:group:xxxx
-     *           clients --> srn:cloud:iam::123456789012:client:xxxx
-     *           tenant  --> srn:cloud:iam::123456789012:tenant (???)
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Policy\V1Alpha\Policy::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**
-     * Role SRN
-     *
      * Generated from protobuf field <code>string role = 1;</code>
      * @return string
      */
@@ -63,8 +37,6 @@ class Binding extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Role SRN
-     *
      * Generated from protobuf field <code>string role = 1;</code>
      * @param string $var
      * @return $this
@@ -78,12 +50,6 @@ class Binding extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * List of subject SRN's being:
-     * users   --> srn:cloud:iam::123456789012:user:xxxx
-     * groups  --> srn:cloud:iam::123456789012:group:xxxx
-     * clients --> srn:cloud:iam::123456789012:client:xxxx
-     * tenant  --> srn:cloud:iam::123456789012:tenant (???)
-     *
      * Generated from protobuf field <code>repeated string members = 2;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
@@ -93,12 +59,6 @@ class Binding extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * List of subject SRN's being:
-     * users   --> srn:cloud:iam::123456789012:user:xxxx
-     * groups  --> srn:cloud:iam::123456789012:group:xxxx
-     * clients --> srn:cloud:iam::123456789012:client:xxxx
-     * tenant  --> srn:cloud:iam::123456789012:tenant (???)
-     *
      * Generated from protobuf field <code>repeated string members = 2;</code>
      * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this

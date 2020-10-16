@@ -176,11 +176,53 @@ class SugarFieldDatetime extends SugarFieldBase {
     }
 
     /**
+     * Convert a variable to datetime string in GMT.
+     * @param string $var The variable name.
+     * @return boolean True if evaluated, otherwise false.
+     */
+    protected function evaluateVariable(&$var): bool
+    {
+        $timeDate = TimeDate::getInstance();
+        // supported variables
+        $vars = array(
+            '$nowTime' => $timeDate->tzUser($timeDate->getNow()),
+            '$tomorrowTime' => $timeDate->tzUser($timeDate->getNow())->modify('+1 day'),
+        );
+        return isset($vars[$var]) && ($var = $vars[$var]->format('Y-m-d\TH:i:s'));
+    }
+
+    /**
+     * Evaluate the given variable or array of variables.
+     * @param string|array $value The variable name or array of variable names.
+     * @return bool True if parsed, otherwise false.
+     */
+    protected function parseVariable(&$value): bool
+    {
+        if (!is_array($value)) {
+            return $this->evaluateVariable($value);
+        } else {
+            // work on copy
+            $temp = $value;
+            $firstEval = $this->evaluateVariable($temp[0]);
+            $secondEval = $this->evaluateVariable($temp[1]);
+            if ($firstEval || $secondEval) {
+                $value = $temp;
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function fixForFilter(&$value, $columnName, SugarBean $bean, SugarQuery $q, SugarQuery_Builder_Where $where, $op)
     {
         if($op === '$daterange') {
+            return true;
+        }
+        if ($this->parseVariable($value)) {
             return true;
         }
         $dateLengthCheck = is_array($value) ? reset($value) : $value;

@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => 'Gebruiker toewijzen toegepast',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Voorbeeld procesontwerp',
+    'LBL_PROJECT_RUN_ORDER' => 'Volgorde uitvoering',
 );
 

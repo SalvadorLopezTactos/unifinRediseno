@@ -213,10 +213,12 @@ const Utils = {
      *   groups of 3 digits to the left of the decimal to add.
      * @param {string} decimalSeparator Character to replace decimal in arg
      *   number with.
+     * @param {boolean} toStringOnly Flag for integer type field if `true`,
+     *   convert integer to string value, else rounds it.
      * @return {string} Formatted number string OR original value if it is not
      *   a number.
      */
-    formatNumber: function(value, round, precision, numberGroupSeparator, decimalSeparator) {
+    formatNumber: function(value, round, precision, numberGroupSeparator, decimalSeparator, toStringOnly) {
         round = round || precision;
         var original = value;
         if (_.isNaN(value) || !_.isFinite(value)) {
@@ -242,8 +244,9 @@ const Utils = {
         if (_.isString(precision)) {
             precision = parseInt(precision);
         }
+        // stop rounding if integer type field
+        value = toStringOnly === true ? value.toString() : Big(value).toFixed(precision);
 
-        value = Big(value).toFixed(precision);
         return (_.isString(numberGroupSeparator) && _.isString(decimalSeparator)) ?
             this.addNumberSeparators(value, numberGroupSeparator, decimalSeparator) : value;
     },
@@ -991,6 +994,25 @@ const Utils = {
             isRTL = new RegExp('^[^' + ltrChars + ']*[' + rtlChars + ']');
 
         return isRTL.test(value);
+    },
+
+    /**
+     * Converts provided value to provided type. Intended to convert numbers
+     * stored as strings using the appropriate conversion function.
+     *
+     * @param {string} value The value to convert
+     * @param {string} type Abbreviated type to be converted to
+     * @returns {number} Value converted to provided type
+     */
+    convertNumericType: function (value, type) {
+        switch (type) {
+            case 'int':
+                return parseInt(value);
+            case 'float':
+            case 'decimal':
+                return parseFloat(value);
+        }
+        return Number(value);
     }
 };
 

@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-'LBL_ACCESS_ALL'=>'すべての',
+'LBL_ACCESS_ALL'=>'すべて',
 'LBL_ACCESS_NONE'=>'なし',
 'LBL_ACCESS_OWNER'=>'オーナー',
 'LBL_ACCESS_NORMAL'=>'標準',

@@ -80,27 +80,38 @@ $sugar_smarty->assign('TDWIDTH', $tdwidth);
 $sugar_smarty->assign('ACTION_NAMES', $names);
 
 $params = array();
-$params[] = "<a href='index.php?module=ACLRoles&action=index'>{$mod_strings['LBL_MODULE_NAME']}</a>";
-if(empty($role->id)){
-	$params[] = $GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL'];
-}else{
-	$params[] = $role->get_summary_text();
-}
-echo getClassicModuleTitle("ACLRoles", $params, true);
-
-$buttons = array(
-	"<input title=".$app_strings['LBL_SAVE_BUTTON_TITLE']." id='save_button'
-		accessKey=".$app_strings['LBL_SAVE_BUTTON_KEY']." class='button primary'
-		onclick=\"this.form.action.value='Save';return check_form('EditView');\"
-		type='submit' name='button' value=".$app_strings['LBL_SAVE_BUTTON_LABEL']." >",
-	"<input title=".$app_strings['LBL_CANCEL_BUTTON_TITLE']."
-		class='button cancel_button' accessKey=".$app_strings['LBL_CANCEL_BUTTON_KEY']."
-		type='submit' name='save' value=".$app_strings['LBL_CANCEL_BUTTON_LABEL']."
-		onclick=\"document.EditView.action.value='".$return['action']."';document.EditView.module.value='".$return['module']."';document.EditView.record.value='".$return['record']."';document.EditView.submit();\">",
+$params[] = sprintf(
+    '<a href="index.php?module=ACLRoles&action=index">%s</a>',
+    htmlspecialchars($mod_strings['LBL_MODULE_NAME'])
 );
+if(empty($role->id)){
+    $params[] = htmlspecialchars($GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL']);
+}else{
+    $params[] = htmlspecialchars($role->get_summary_text());
+}
+echo getClassicModuleTitle('ACLRoles', $params, true);
+
+$escapedHTML = static function ($html): string {
+    return htmlspecialchars($html, ENT_QUOTES);
+};
+
+$buttons = [
+    <<<HTML
+<input title="{$escapedHTML($app_strings['LBL_SAVE_BUTTON_TITLE'])}" id="save_button" 
+        accessKey="{$escapedHTML($app_strings['LBL_SAVE_BUTTON_KEY'])}" class="button primary"
+        onclick="this.form.action.value='Save';return check_form('EditView');"
+        type="submit" name="button" value="{$escapedHTML($app_strings['LBL_SAVE_BUTTON_LABEL'])}" >
+HTML
+    ,
+    <<<HTML
+<input title="{$escapedHTML($app_strings['LBL_CANCEL_BUTTON_TITLE'])}" class="button cancel_button"
+        accessKey="{$escapedHTML($app_strings['LBL_CANCEL_BUTTON_KEY'])}"
+        type="submit" name="save" value="{$escapedHTML($app_strings['LBL_CANCEL_BUTTON_LABEL'])}"
+        onclick="document.EditView.action.value='{$escapedHTML($return['action'])}';document.EditView.module.value='{$escapedHTML($return['module'])}';document.EditView.record.value='{$escapedHTML($return['record'])}';document.EditView.submit();">
+HTML
+    ,
+];
 
 $action_buttons = $buttons;
 $sugar_smarty->assign('ACTION_MENU', $action_buttons);
 echo $sugar_smarty->fetch('modules/ACLRoles/EditView.tpl');
-
-?>

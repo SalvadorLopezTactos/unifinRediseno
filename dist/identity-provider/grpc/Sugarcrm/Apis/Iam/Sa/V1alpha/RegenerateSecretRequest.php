@@ -20,19 +20,9 @@ class RegenerateSecretRequest extends \Google\Protobuf\Internal\Message
      */
     private $name = '';
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $name
-     *           SRN of the service account for which to regenerate the keys.
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Sa\V1Alpha\Sa::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

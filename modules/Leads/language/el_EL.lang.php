@@ -322,4 +322,7 @@ $mod_strings = array (
     'LBL_FILTER_LEADS_REPORTS' => 'Αναφορές Δυνητικών Πελατών',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Επαγγελματικοί σκοποί για τους οποίους δώσατε τη συγκατάθεσή σας',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Τελευταία ανανέωση συγκατάθεσης',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Αδυναμία αλλαγής της κατάστασης της {{moduleSingular}}. Αυτή η {{moduleSingular}} έχει ήδη μετατραπεί.',
 );

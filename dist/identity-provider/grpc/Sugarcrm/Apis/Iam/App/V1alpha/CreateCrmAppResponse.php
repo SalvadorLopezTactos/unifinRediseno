@@ -29,24 +29,9 @@ class CreateCrmAppResponse extends \Google\Protobuf\Internal\Message
      */
     private $jwks = null;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type \Sugarcrm\Apis\Iam\App\V1alpha\App $app
-     *           The created OAuth2 app
-     *     @type \Sugarcrm\Apis\Iam\JSONWebKeySet $jwks
-     *           The JSON Web Key Set. Currently we only return the key set identifier.
-     *           When Mango is updated, we need to implement the full return of this
-     *           key set so Mango doesn't need to reach out to keys API to retrieve
-     *           the keys.
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\App\V1Alpha\App::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

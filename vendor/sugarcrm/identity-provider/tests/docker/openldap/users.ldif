@@ -57,6 +57,25 @@ sn: user1
 uid: user1
 userpassword: user1
 
+dn: cn=david,ou=people,dc=openldap,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: david
+givenName: David
+mail: david@example.com
+postalAddress: 665 Wall Street $Unit 25
+postalCode: 11219
+sn: Olliver
+st: NY
+l: NYC
+street: Wall Street
+telephoneNumber: 315-565-3072
+title: Senior Account Rep
+uid: david
+userPassword: david
+
 dn: cn=onlyldapuser,ou=people,dc=openldap,dc=com
 objectClass: inetOrgPerson
 objectClass: organizationalPerson
@@ -127,6 +146,7 @@ objectClass: top
 objectClass: groupOfNames
 cn: Group1
 member: cn=user1,ou=people,dc=openldap,dc=com
+member: cn=david,ou=people,dc=openldap,dc=com
 member: cn=user\, comma,ou=people,dc=openldap,dc=com
 member: cn=user1\, comma,ou=people,dc=openldap,dc=com
 

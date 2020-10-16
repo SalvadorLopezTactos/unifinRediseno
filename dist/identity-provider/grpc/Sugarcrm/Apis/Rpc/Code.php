@@ -11,7 +11,7 @@ namespace Sugarcrm\Apis\Rpc;
  * `FAILED_PRECONDITION` if both codes apply. Similarly prefer `NOT_FOUND` or
  * `ALREADY_EXISTS` over `FAILED_PRECONDITION`.
  *
- * Protobuf type <code>sugarcrm.apis.rpc.Code</code>
+ * Protobuf enum <code>Sugarcrm\Apis\Rpc\Code</code>
  */
 class Code
 {

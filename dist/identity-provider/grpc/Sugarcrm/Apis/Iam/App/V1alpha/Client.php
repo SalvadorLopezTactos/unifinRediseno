@@ -46,24 +46,9 @@ class Client extends \Google\Protobuf\Internal\Message
      */
     private $redirect_uris;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $client_id
-     *     @type string $client_secret
-     *     @type string $tenant_id
-     *     @type string $issuer
-     *     @type string $auth_uri
-     *     @type string $token_uri
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $redirect_uris
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\App\V1Alpha\Client::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

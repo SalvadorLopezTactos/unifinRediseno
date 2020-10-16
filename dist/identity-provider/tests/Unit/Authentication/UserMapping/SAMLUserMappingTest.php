@@ -92,6 +92,58 @@ class SAMLUserMappingTest extends PHPUnit_Framework_TestCase
                 'test@test.com',
                 ['email' => 'test@test.com', 'title' => 'foo'],
             ],
+            'moreThenOneDepth' => [
+                [
+                    'name_id' => 'email',
+                    'attr1' => 'title',
+                    'ln' => 'attr.last_name',
+                    'fn' => 'attr.first_name',
+                ],
+                [
+                    'attr1' => ['foo'],
+                    'ln' => ['Bobby'],
+                    'fn' => ['Foo'],
+                ],
+                'test@test.com',
+                [
+                    'email' => 'test@test.com',
+                    'title' => 'foo',
+                    'attr' => [
+                        'last_name' => 'Bobby',
+                        'first_name' => 'Foo',
+                    ],
+                ],
+            ],
+            'moreThenOneDepthWithCustomAttributes' => [
+                [
+                    'name_id' => 'email',
+                    'attr1' => 'title',
+                    'ln' => 'attr.last_name',
+                    'fn' => 'attr.first_name',
+                    'title' => 'custom_attributes.title',
+                    'customAddr' => 'custom_attributes.addr.street',
+                ],
+                [
+                    'attr1' => ['foo'],
+                    'ln' => ['Bobby'],
+                    'fn' => ['Foo'],
+                    'title' => ['Senior Account Rep'],
+                    'customAddr' => ['Wall Street'],
+                ],
+                'test@test.com',
+                [
+                    'email' => 'test@test.com',
+                    'title' => 'foo',
+                    'attr' => [
+                        'last_name' => 'Bobby',
+                        'first_name' => 'Foo',
+                    ],
+                    'custom_attributes' => [
+                        ['name' => 'title', 'value' => 'Senior Account Rep'],
+                        ['name' => 'addr.street', 'value' => 'Wall Street'],
+                    ],
+                ],
+            ],
         ];
     }
 

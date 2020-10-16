@@ -17,17 +17,38 @@ class SugarUpgradeConfigSettings extends UpgradeScript
     public $order = 3000;
     public $type = self::UPGRADE_CUSTOM;
 
+    /**
+     * Keys that should be updated on all upgrades, provided their values are
+     * different than default
+     * @var array
+     */
+    private $forceUpgrade = [
+        'preview_edit',
+        'default_background_image',
+    ];
+
     public function run()
     {
         // Fill the missing settings.
         $defaultSettings = get_sugar_config_defaults();
         foreach ($defaultSettings as $key => $defaultValue) {
-
+            // This adds new configs that have not been previously set
             if (!array_key_exists($key, $this->upgrader->config)) {
                 $this->log("Setting $key does not exist. Setting the default value.");
                 $this->upgrader->config[$key] = $defaultValue;
             }
 
+            // This adds config settings that were previously set but are now
+            // different, but only if they are not the default value already
+            if (in_array($key, $this->forceUpgrade)) {
+                $this->log("Config key $key is set to be updated.");
+                if ($this->upgrader->config[$key] != $defaultValue) {
+                    $this->log("Config key $key updated to new value.");
+                    $this->upgrader->config[$key] = $defaultValue;
+                } else {
+                    $this->log("Config key $key was not changed. It is already set to default.");
+                }
+            }
         }
 
         $this->upgrader->config['sugar_version'] = $this->to_version;
@@ -37,7 +58,6 @@ class SugarUpgradeConfigSettings extends UpgradeScript
 				'level'=>'fatal',
 				'file' =>
 				array (
-						'ext' => '.log',
 						'name' => 'sugarcrm',
 						'dateFormat' => '%c',
 						'maxSize' => '10MB',
@@ -77,7 +97,7 @@ class SugarUpgradeConfigSettings extends UpgradeScript
                 'snip_url',
             ),
         );
-        
+
         foreach ($data as $version => $config_keys) {
             if (version_compare($this->from_version, $version, '<')) {
                 foreach ($config_keys as $key) {

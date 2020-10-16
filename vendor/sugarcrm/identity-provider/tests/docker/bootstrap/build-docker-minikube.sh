@@ -52,9 +52,7 @@ SCRIPT_DIR=$PWD
 #sleep 5
 eval $(minikube docker-env --shell bash)
 
-docker network create --driver bridge mango-install-net
-
-docker run --name=behat-tests-env-elastic --network=mango-install-net -p 9200:9200 \
+docker run --name=behat-tests-env-elastic  -p 9200:9200 \
 -e "http.host=0.0.0.0" -e "transport.host=127.0.0.1" \
 -e "xpack.security.enabled=false" -e ES_JAVA_OPTS="-Xms512m -Xmx512m" \
 -d docker.elastic.co/elasticsearch/elasticsearch:5.4.3
@@ -99,7 +97,7 @@ rm -rf sugarcrm
 cd ../
 
 # install
-docker run --name=mango-built --network=mango-install-net \
+docker run --name=mango-built  \
 -e SUGAR_LICENSE_KEY=${SUGAR_LICENSE_KEY} \
 -p 8082:80 -d mango-built
 
@@ -107,10 +105,13 @@ sleep 10
 docker exec -it mango-built curl "http://localhost/install.php?goto=SilentInstall&cli=true"
 docker commit mango-built mango-installed
 
+cd mango
+docker build -t mango-oidc -f Dockerfile.oidc .
+cd -
+
 # cleanup services
 docker rm -fv mango-built
 docker rm -fv behat-tests-env-elastic
-docker network rm mango-install-net
 
 # Build idm image as a Behat tests container and executor
 cd ../../..

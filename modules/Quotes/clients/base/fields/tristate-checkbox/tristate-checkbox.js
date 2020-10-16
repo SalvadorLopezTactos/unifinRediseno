@@ -75,6 +75,12 @@
     tooltipLabel: undefined,
 
     /**
+     * Service related fields
+     * @type Array
+     */
+    serviceRelatedFieldArr: undefined,
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -86,9 +92,31 @@
 
         this.isRequired = this.def.required || false;
 
-        this.changeState(this._getInitialState());
+        // if current state is not defined the get the initial state
+        this.changeState(options.viewDefs && options.viewDefs.currentState ?
+            options.viewDefs.currentState : this._getInitialState());
+
+        this.serviceRelatedFieldArr = [
+            'service_start_date',
+            'service_end_date',
+            'renewable',
+            'service_duration',
+            'service',
+        ];
 
         this.tooltipLabel = app.lang.get('LBL_CONFIG_TOOLTIP_FIELD_REQUIRED_BY', this.module);
+        if (this.name === 'service_duration') {
+            //See if the Service Duration column is added to the worksheet columns
+            var hasServiceDurationCol = _.find(this.context.get('worksheet_columns'), function(col) {
+                return col.name === 'service_duration';
+            });
+
+            //If the service duration column exists in worksheet columns
+            //Mark it as checked in the howto panels
+            if (!_.isUndefined(hasServiceDurationCol)) {
+                this.changeState('checked');
+            }
+        }
     },
 
     /**
@@ -195,11 +223,23 @@
 
         if (toggleFieldOn) {
             _.each(relatedFields, function(relatedField) {
-                this.dependentFields[relatedField.name] = {
-                    module: relatedField.def.labelModule,
-                    field: relatedField.name,
-                    reason: 'related_fields'
-                };
+                //If service field is toggled on
+                //Add all the other service related fields to the dependent fields as they are all co-dependent
+                if (_.contains(this.serviceRelatedFieldArr, relatedField.name)) {
+                    _.each(this.serviceRelatedFieldArr, function(serviceRelatedField) {
+                        this.dependentFields[serviceRelatedField] = {
+                            module: relatedField.def.labelModule,
+                            field: serviceRelatedField,
+                            reason: 'related_fields'
+                        };
+                    }, this);
+                } else {
+                    this.dependentFields[relatedField.name] = {
+                        module: relatedField.def.labelModule,
+                        field: relatedField.name,
+                        reason: 'related_fields'
+                    };
+                }
             }, this);
 
             this.isRequired = true;
@@ -207,16 +247,34 @@
             if (this.currentStateName === 'unchecked') {
                 // if we haven't changed this field from unchecked yet
                 // change to the related state
-                this.changeState('filled');
+                if (_.contains(this.serviceRelatedFieldArr, this.name)) {
+                    // if this is a service field, change the state of all its related field to checked
+                    this.changeState('checked');
+                } else {
+                    this.changeState('filled');
+                }
             }
         } else {
             _.each(relatedFields, function(relatedField) {
-                delete this.dependentFields[relatedField.name];
+                if (_.contains(this.serviceRelatedFieldArr, relatedField.name)) {
+                    // if one service field is deleted from the dependentFields list,
+                    // remove all the service related fields from it as well
+                    _.each(this.serviceRelatedFieldArr, function(serviceRelatedField) {
+                        delete this.dependentFields[serviceRelatedField];
+                    }, this);
+                } else {
+                    delete this.dependentFields[relatedField.name];
+                }
             }, this);
 
             if (_.isEmpty(this.dependentFields)) {
                 // Removing related fields that are not required by any displayed fields and is not checked
                 if (this.currentStateName === 'filled') {
+                    this.changeState('unchecked');
+                }
+
+                if (this.currentStateName === 'checked' && _.contains(this.serviceRelatedFieldArr, this.name)) {
+                    // removing all the service related fields if even one is not checked and is not being displayed
                     this.changeState('unchecked');
                 }
                 this.isRequired = false;
@@ -233,11 +291,16 @@
                 relatedFields.push(this);
             }
             _.each(this.def.relatedFields, function(fieldName) {
-                this.context.trigger(
-                    'config:' + this.def.eventViewName + ':' + fieldName + ':related:toggle',
-                    relatedFields,
-                    toggleFieldOn
-                );
+                // If the toggled field is a service field
+                // Don't trigger the related toggle listener for service related fields
+                // else it results in an infinite loop
+                if (!_.contains(this.serviceRelatedFieldArr, fieldName)) {
+                    this.context.trigger(
+                        'config:' + this.def.eventViewName + ':' + fieldName + ':related:toggle',
+                        relatedFields,
+                        toggleFieldOn
+                    );
+                }
             }, this);
         }
 
@@ -295,6 +358,11 @@
             this.changeState(nextState);
         } else {
             this._onCheckboxClicked(this.currentStateName, nextState);
+            // if the nextState for any service related field is 'filled', set the nextState to 'unchecked'
+            // this only happens while unchecking any service field
+            if (_.contains(this.serviceRelatedFieldArr, this.name) && nextState === 'filled') {
+                nextState = 'unchecked';
+            }
             this.changeState(nextState);
         }
     },

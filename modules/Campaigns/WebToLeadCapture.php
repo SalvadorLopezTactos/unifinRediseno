@@ -191,7 +191,7 @@ if (isset($_POST['campaign_id']) && !empty($_POST['campaign_id'])) {
                 ''
             );
 
-            if ($redirect_url !== null) {
+    if (!empty($redirect_url)) {
                 $params = array();
                 foreach ($_REQUEST as $param => $_) {
                     if (is_array($_)) {

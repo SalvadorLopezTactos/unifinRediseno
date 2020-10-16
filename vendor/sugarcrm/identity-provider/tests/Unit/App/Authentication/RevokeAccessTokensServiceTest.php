@@ -69,7 +69,7 @@ class RevokeAccessTokensServiceTest extends \PHPUnit_Framework_TestCase
         $this->logger
             ->expects($this->once())
             ->method('info')
-            ->with('Sending revoke tokens {user_srn} of tenant {tid_srn}');
+            ->with('Sending revoke tokens for user {user_name} with SRN {user_srn} of tenant {tid_srn}');
         $this->logger
             ->expects($this->never())
             ->method('warning');
@@ -107,11 +107,11 @@ class RevokeAccessTokensServiceTest extends \PHPUnit_Framework_TestCase
         $this->logger
             ->expects($this->once())
             ->method('info')
-            ->with('Sending revoke tokens {user_srn} of tenant {tid_srn}');
+            ->with('Sending revoke tokens for user {user_name} with SRN {user_srn} of tenant {tid_srn}');
         $this->logger
             ->expects($this->once())
             ->method('warning')
-            ->with('Incorrect response by revoke tokens');
+            ->with('Incorrect response by revoke tokens for user {user_name} with SRN {user_srn}');
 
         $this->grpcUserApi->expects($this->once())
             ->method('RevokeAccessTokens')

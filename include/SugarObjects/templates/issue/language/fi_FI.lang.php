@@ -27,9 +27,15 @@ $mod_strings = array (
   'LBL_RESOLUTION' => 'Ratkaisuvaihe',
   'LBL_LAST_MODIFIED' => 'Päivitetty',
   'LBL_ASSIGNED_TO_ID'=>'Vastuuhenkilö:',
-  'LBL_ASSIGNED_TO_NAME' => 'Vastuuhenkilö',  	  
+  'LBL_ASSIGNED_TO_NAME' => 'Vastuuhenkilö',
   'LBL_WORK_LOG' => 'Työloki:',
+    'LBL_FOLLOW_UP' => 'Seuranta',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
+    'LBL_RESOLVED_DATETIME' => 'Ratkaisupäivä',
+    'LBL_HOURS_TO_RESOLUTION' => 'Ratkaisuaika tunneissa',
+    'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Ratkaisuaika tunneissa (aukioloaikaa)',
+    'LBL_PENDING_PROCESSING' => 'Odottaa käsittelyä',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Luonut:',
   'LBL_DATE_CREATED' => 'Luotu:',
   'LBL_DATE_ENTERED' => 'Luontipäivä',
@@ -44,5 +50,5 @@ $mod_strings = array (
     'LBL_EDIT_BUTTON' => 'Muokkaa',
     'LBL_REMOVE' => 'Poista',
 
-  
+
   );

@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Numatytas adresatų sąrašo tipas nerastas',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nerasta jokių įrašų',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Įvykdyti įrašai',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Sekamos nuorodos pavadinimas:',
   'LBL_EDIT_TRACKER_URL'=>'Sekamos nuorodos adresas:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'Nebuvo išsaugota Jūsų įeinančiu pašto dėžute.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Prašome peržiūrėti įeinančio pašto nustatymus.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} potencialūs klientai buvo ištrinti iš šios kampanijos.',
+    'LBL_PROSPECT_LIST' => 'Adresatų sąrašas',
 );
 
 

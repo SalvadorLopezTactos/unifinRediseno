@@ -43,6 +43,8 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'เวิร์กชีทประมาณการ',
     'ForecastManagerWorksheets' => 'เวิร์กชีทเครื่องมือจัดการประมาณการ',
     'MergeRecords'=>'ผสานระเบียน',
+      'VisualPipeline'=>'กระบวนการขายเสมือน',
+      'ConsoleConfiguration' => 'การกำหนดค่าคอนโซล',
     'Quotas' => 'โควตา',
     'Teams' => 'ทีม',
     'TeamNotices' => 'ประกาศของทีม',
@@ -75,6 +77,11 @@ $app_list_strings = array (
     'pmse_Project' => 'การกำหนดกระบวนการ',
     'pmse_Business_Rules' => 'กฎทางธุรกิจของกระบวนการ',
     'pmse_Emails_Templates' => 'เทมเพลทอีเมลของกระบวนการ',
+    'BusinessCenters' => 'ศูนย์บริการธุรกิจ',
+    'Shifts' => 'Shifts',
+    'ShiftExceptions' => 'Shift Exceptions',
+    'Purchases' => 'Purchases',
+    'PurchasedLineItems' => 'Purchased Line Items',
     'WorkFlow' => 'การกำหนดเวิร์กโฟลว์',
     'EAPM' => 'บัญชีภายนอก',
     'Worksheet' => 'เวิร์กชีท',
@@ -116,6 +123,8 @@ $app_list_strings = array (
     'DataPrivacy' => 'การคุ้มครองข้อมูลส่วนบุคคล (Data Privacy)',
     'ReportSchedules' => 'ตารางเวลารายงาน',
     'CommentLog' => 'บันทึกความคิดเห็น',
+    'Holidays' => 'วันหยุด',
+    'ChangeTimers' => 'เปลี่ยนตัวตั้งเวลา',
   ),
 
     'moduleIconList' =>
@@ -131,6 +140,8 @@ $app_list_strings = array (
         'Tasks' => 'Ts',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'DP',
+        'BusinessCenters' => 'BC',
+        'PurchasedLineItems' => 'PL',
     ),
 
   'moduleListSingular' =>
@@ -150,6 +161,8 @@ $app_list_strings = array (
     'Calendar' => 'ปฏิทิน',
     'Leads' => 'ผู้สนใจ',
     'Manufacturers' => 'ผู้ผลิต',
+    'VisualPipeline' => 'กระบวนการขายเสมือน',
+    'ConsoleConfiguration' => 'การกำหนดค่าคอนโซล',
     'Contracts'=>'สัญญา',
     'Quotes' => 'การเสนอราคา',
     'Products' => 'รายการบรรทัดการเสนอราคา',
@@ -196,6 +209,11 @@ $app_list_strings = array (
     'pmse_Project' => 'การกำหนดกระบวนการ',
     'pmse_Business_Rules' => 'กฎทางธุรกิจของกระบวนการ',
     'pmse_Emails_Templates' => 'เทมเพลทอีเมลของกระบวนการ',
+    'BusinessCenters' => 'ศูนย์บริการธุรกิจ',
+    'Shifts' => 'Shift',
+    'ShiftExceptions' => 'Shift Exceptions',
+    'Purchases' => 'Purchase',
+    'PurchasedLineItems' => 'Purchased Line Item',
     'WorkFlow' => 'เวิร์กโฟลว์',
     'EAPM' => 'บัญชีภายนอก',
     'Worksheet' => 'เวิร์กชีท',
@@ -224,7 +242,7 @@ $app_list_strings = array (
     'Comments' => 'ความคิดเห็น',
     'CommentLog' => 'บันทึกความคิดเห็น',
     'Currencies' => 'สกุลเงิน',
-    'ProductTemplates' => 'เทมเพลทผลิตภัณฑ์',
+    'ProductTemplates' => 'Product',
     'ProductTypes' => 'ประเภทผลิตภัณฑ์',
     'Shippers' => 'ผู้ให้บริการการส่งสินค้า',
     'Subscriptions' => 'การสมัคร',
@@ -236,6 +254,8 @@ $app_list_strings = array (
     'EmailParticipants' => 'ผู้มีส่วนร่วมในอีเมล',
     'DataPrivacy' => 'การคุ้มครองข้อมูลส่วนบุคคล (Data Privacy)',
     'ReportSchedules' => 'ตารางเวลารายงาน',
+    'Holidays' => 'วันหยุด',
+    'ChangeTimers' => 'เปลี่ยนตัวตั้งเวลา',
   ),
 
 /*
@@ -321,6 +341,11 @@ $app_list_strings = array (
     'T3' => 'เทียร์ 3',
     'T4' => 'เทียร์ 4',
   ),
+  'generate_purchase_dom' => [
+      'Yes' => 'Yes',
+      'No' => 'No',
+      'Completed' => 'Completed',
+  ],
   'lead_source_default_key' => 'สร้างขึ้นด้วยตนเอง',
   'lead_source_dom' =>
   array (
@@ -589,6 +614,12 @@ $app_list_strings = array (
     'RegularUser' => 'ผู้ใช้ทั่วไป',
     'Administrator' => 'ผู้ดูแลระบบ',
   ),
+  'license_type_dom' =>
+    array (
+        'CURRENT' => 'ผลิตภัณฑ์ปัจจุบัน',
+        'SUGAR_SERVE' => 'Sugar บริการรับใช้',
+        'SUGAR_SELL' => 'Sugar การขาย',
+    ),
   'user_status_dom' =>
   array (
     'Active' => 'ใช้งาน',
@@ -693,6 +724,8 @@ $app_list_strings = array (
     'Meetings' => 'การประชุม',
     'Calls' => 'การโทร',
       'KBContents' => 'ฐานความรู้',
+      'PurchasedLineItems' => 'Purchased Line Item',
+      'Purchases' => 'Purchase',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'บัญชี',
@@ -722,7 +755,13 @@ $app_list_strings = array (
     'Prospects' => 'เป้าหมาย',
       'KBContents' => 'ฐานความรู้',
       'Notes' => 'หมายเหตุ',
+    'PurchasedLineItems' => 'Purchased Line Item',
+    'Purchases' => 'Purchase',
   ),
+
+  'changetimer_parent_type' => [
+      'Cases' => 'เคส',
+  ],
 
   'product_status_default_key' => 'ส่ง',
   'product_status_quote_key' => 'การเสนอราคา',
@@ -883,7 +922,8 @@ $app_list_strings = array (
     'Forum' => 'ฟอรัม',
     'Web' => 'เว็บ',
     'InboundEmail' => 'อีเมล',
-    'Twitter' => 'Twitter'
+    'Twitter' => 'Twitter',
+    'Portal' => 'พอร์ทัล',
   ),
     'dataprivacy_type_default_key' => '',
     'dataprivacy_type_dom' => array(
@@ -916,6 +956,11 @@ $app_list_strings = array (
         'Medium' => 'ปานกลาง',
         'High' => 'สูง',
     ),
+    'business_day_status_dom' => [
+        'Open' => 'เปิด',
+        'Open 24 Hours' => 'เปิด 24 ชั่วโมง',
+        'Closed' => 'ปิด',
+    ],
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -1145,6 +1190,13 @@ $app_list_strings = array (
     'dom_email_states' => array(
         'Draft' => 'ร่าง',
         'Archived' => 'เก็บถาวร',
+    ),
+
+    'dom_email_direction' => array(
+        'Unknown' => 'ไม่ทราบ',
+        'Outbound' => 'ขาออก',
+        'Inbound' => 'ขาเข้า',
+        'Internal' => 'ภายใน',
     ),
 
     'scheduler_status_dom' =>
@@ -2096,6 +2148,11 @@ $app_list_strings = array (
         240000 => 'ทุก 4 นาที',
         300000 => 'ทุก 5 นาที',
   ),
+    'first_response_met_sla_dom'=> [
+        '' => '',
+        'Yes' => 'ใช่',
+        'No' => 'ไม่',
+    ],
     'forecasts_chart_options_group' => array(
         'forecast' => 'ในประมาณการ',
         'sales_stage' => 'ขั้นตอนการขาย',
@@ -2123,6 +2180,7 @@ $app_list_strings = array (
         'record' => 'ระเบียน',
         'records' => 'รายการ',
         'activities' => 'สตรีมกิจกรรม',
+        'multi-line' => 'รายการแบบหลายบรรทัด',
     ),
     'reportschedule_time_interval_dom' => array(
         '3600' => 'รายชั่วโมง',
@@ -2133,6 +2191,23 @@ $app_list_strings = array (
         '1209600' => 'ทุก 2 สัปดาห์',
         '2419200' => 'ทุก 4 สัปดาห์',
     ),
+    'pipeline_records_per_column' => array(
+        '10' => '10',
+        '15' => '15',
+        '20' => '20',
+    ),
+    //Service Duration
+    'service_duration_unit_dom' =>
+        array (
+            'year' => 'ปี',
+            'month' => 'เดือน',
+            'day' => 'วัน',
+        ),
+        'shift_exception_type_dom' => [
+            'time_off' => 'Time Off',
+            'event' => 'Event',
+            'other' => 'Other',
+        ],
 );
 
 $app_strings = array (
@@ -2144,7 +2219,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'เปิดลิงก์',
   'LBL_TOGGLE_VISIBILITY' => 'สลับการแสดงผล', // Record view header panel element
   'LBL_ACTIVITIES' => 'สตรีมกิจกรรม',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2020 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar และลูกบาศก์ 3-D เป็นเครื่องหมายการค้าจดทะเบียนของ SugarCRM Inc. '.
         'ชื่อบริษัทและผลิตภัณฑ์อื่นๆ ทั้งหมดที่ใช้หรือปรากฏในผลิตภัณฑ์นี้อาจเป็นเครื่องหมายการค้าของ'.
         'SugarCRM ®, Sugar Enterprise™ และ Sugar™ เป็นเครื่องหมายการค้าของ SugarCRM Inc.',
@@ -2500,6 +2575,7 @@ $app_strings = array (
 
     'LBL_EMAIL_NO'                          => 'ไม่',
     'LBL_EMAIL_NOT_SENT'                    => 'เกิดปัญหาในการส่งอีเมลคำขอ โปรดติดต่อผู้ดูแลระบบ',
+    'LBL_INSERT_TO_USER_PWD_FAILED'         => 'ไม่สามารถใส่ใน users_password_link ได้',
 
     'LBL_EMAIL_OK'                          => 'ตกลง',
     'LBL_EMAIL_ONE_MOMENT'                  => 'โปรดรอสักครู่...',
@@ -2716,8 +2792,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'ต้องมีเซสชันที่ใช้งานเพื่อส่งออกเนื้อหา',
     'ERR_NO_HEADER_ID' => 'คุณลักษณะนี้ไม่สามารถใช้ได้ในธีมนี้',
     'ERR_NOT_ADMIN' => "ไม่มีสิทธิ์ในการเข้าถึงการดูแลระบบ",
-    'ERR_DISABLED_FOR_IDM_MODE' => 'การจัดการรหัสผ่านสามารถทำได้ในการตั้งค่าระบบคลาวด์เท่านั้น',
-    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE' =>
+        'การจัดการรหัสผ่านมีให้ใช้งานใน<a href="%s" target="_blank">การตั้งค่าระบบคลาวด์</a> เท่านั้น',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'กรุณาติดต่อผู้ดูแลระบบ Sugar ของคุณ ถ้าคุณต้องการทำการเปลี่ยนแปลงลงในช่องที่ตั้งค่าไว้ให้อ่านได้อย่างเดียวเท่านั้น',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'ไม่มีข้อมูลในฟิลด์ที่ต้องระบุ',
@@ -2747,6 +2823,7 @@ $app_strings = array (
     'ERR_DB_VERSION' => 'ไฟล์ Sugar CRM {0} จะต้องใช้กับฐานข้อมูล Sugar CRM {1} เท่านั้น',
     'ERR_DB_QUERY' => '{0}: การสืบค้นล้มเหลว: {1}',
     'ERR_UW_RETIRED' => 'วิซาร์ดการอัปเกรดไม่สามารถใช้ได้ในเวอร์ชันนี้',
+    'ERR_NOT_CLOUD_INSTANCE' => 'อินสแตนซ์ Sugar นี้ไม่ได้เป็นทั้งอินสแตนซ์ SugarCloud และไม่ใช่การกำหนดค่าสำหรับ SugarCloud Insights',
 
 
     'EXCEPTION_CREATE_MODULE_NOT_AUTHORIZED' => 'คุณไม่ได้รับอนุญาตให้สร้าง {moduleName} โปรดติดต่อผู้ดูแลระบบถ้าต้องการสิทธิ์เข้าถึง',
@@ -2769,6 +2846,7 @@ $app_strings = array (
     'EXCEPTION_NEED_LOGIN'              => 'คุณต้องล็อกอินเพื่อดำเนินการนี้',
     'EXCEPTION_INVALID_TOKEN'           => 'โทเค็นการตรวจสอบสิทธิ์ของคุณไม่ถูกต้อง',
     'EXCEPTION_NOT_AUTHORIZED'          => 'คุณไม่ได้รับอนุญาตให้ดำเนินการนี้ โปรดติดต่อผู้ดูแลระบบถ้าต้องการสิทธิ์เข้าถึง',
+    'EXCEPTION_NOT_AUTHORIZED_TO_DATA'  => 'คุณไม่ได้รับอนุญาตให้ดูข้อมูล โปรดติดต่อผู้ดูแลระบบถ้าต้องการสิทธิ์เข้าถึง',
     'EXCEPTION_INACTIVE_PORTAL_USER'    => 'คุณไม่สามารถเข้าถึงพอร์ทัลเนื่องจากบัญชีพอร์ทัลของคุณไม่อยู่ในสถานะใช้งาน โปรดติดต่อฝ่ายสนับสนุนลูกค้าถ้าต้องการสิทธิ์เข้าถึง',
     'EXCEPTION_PORTAL_NOT_CONFIGURED'   => 'พอร์ทัลไม่ได้กำหนดค่าไว้อย่างถูกต้อง โปรดติดต่อผู้ดูแลระบบพอร์ทัลเพื่อขอความช่วยเหลือ',
     'EXCEPTION_NO_METHOD'               => 'ไม่มีการสนับสนุนคำขอของคุณ ไม่พบเมทธอด HTTP ของคำขอสำหรับเส้นทางนี้',
@@ -2788,6 +2866,8 @@ $app_strings = array (
     'EXCEPTION_SEARCH_RUNTIME'          => 'เกิดข้อผิดพลาดรันไทม์กับเครื่องมือค้นหา โปรดติดต่อผู้ดูแลระบบ',
     'EXCEPTION_INVALID_PLATFORM'        => 'แพลตฟอร์มที่ระบุไม่ถูกต้อง',
     'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'ฟิลด์ที่ล็อคโดยกระบวนการไม่สามารถแก้ไขได้',
+    'EXCEPTION_MODULE_DISABLED'         => 'โมดูลนี้ไม่เปิดใช้งานแก่ผู้ใช้ปัจจุบัน',
+    'EXCEPTION_FIELD_DISABLED'          => 'ฟิลด์นี้ไม่เปิดใช้งานแก่ผู้ใช้ปัจจุบัน',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'พบเงื่อนไขเนื่องจากการทำงานล้มเหลวหรือข้อผิดพลาดทั่วไป ข้อยกเว้นนี้มีสาเหตุหลายอย่าง แต่โดยทั่วไปมักจะอยู่นอกขอบเขตของข้อยกเว้น API ที่เจาะจง',
@@ -2816,6 +2896,8 @@ $app_strings = array (
     'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'ฟิลด์ที่ล็อคโดยกระบวนการที่ทำงานอยู่ไม่สามารถแก้ไขได้',
     'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s ถูกล็อคโดยกระบวนการที่ทำงานอยู่ และไม่สามารถแก้ไขได้',
     'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s ถูกล็อคโดยกระบวนการที่ทำงานอยู่ และไม่สามารถแก้ไขได้',
+    'EXCEPTION_MODULE_DISABLED_DESC'       => 'โมดูลนี้ไม่เปิดใช้งานแก่ผู้ใช้ปัจจุบัน',
+    'EXCEPTION_FIELD_DISABLED_DESC'        => 'ฟิลด์นี้ไม่เปิดใช้งานแก่ผู้ใช้ปัจจุบัน',
 
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'มีไฟล์ชื่อเดียวกันนี้อยู่แล้วในระบบ',
@@ -2905,6 +2987,7 @@ $app_strings = array (
     'LBL_CLOSE_AND_CREATE_BUTTON_LABEL' => 'ปิดและสร้างใหม่',
     'LBL_CLOSE_AND_CREATE_BUTTON_TITLE' => 'ปิดและสร้างใหม่',
     'LBL_CLOSE_AND_CREATE_BUTTON_KEY' => 'C',
+    'LBL_COPY_RECORD_URL' => 'คัดลอก URL ระเบียน',
     'LBL_OPEN_ITEMS' => 'รายการที่เปิด:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'เขียนอีเมล',
@@ -2933,6 +3016,8 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'เอกสาร',
     'LBL_DATE_ENTERED' => 'วันที่สร้าง:',
     'LBL_DATE_MODIFIED' => 'วันที่แก้ไข:',
+    'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'แก้ไขแท็บภาพรวม',
+    'LBL_EDIT_MODULE_TABS_BUTTON' => 'แก้ไขแท็บโมดูล',
     'LBL_EDIT_BUTTON' => 'แก้ไข',
     'LBL_DUPLICATE_BUTTON' => 'ทำซ้ำ',
     'LBL_DELETE_BUTTON' => 'ลบ',
@@ -2945,6 +3030,7 @@ $app_strings = array (
     'LBL_DST_NEEDS_FIXIN' => 'แอปพลิเคชันกำหนดให้ใช้การแก้ไขเวลาออมแสง โปรดไปที่ลิงก์ <a href="index.php?module=Administration&action=DstFix">ซ่อมแซม</a> ในคอนโซลการดูแลระบบ และใช้การแก้ไขเวลาออมแสง',
     'LBL_EDIT_AS_NEW_BUTTON_LABEL' => 'แก้ไขเป็นรายการใหม่',
     'LBL_EDIT_AS_NEW_BUTTON_TITLE' => 'แก้ไขเป็นรายการใหม่',
+    'LBL_EDIT_IN_NEW_TAB' => 'แก้ไขในแท็บใหม่',
     'LBL_FAVORITES' => 'รายการโปรด',
     'LBL_FILTER' => 'ตัวกรอง',
     'LBL_DEFAULT_DATA_FILTER' => 'ตัวกรองข้อมูลเริ่มต้น',
@@ -3124,6 +3210,7 @@ $app_strings = array (
     'LBL_MODIFIED_ID'=>'แก้ไขโดย ID',
     'LBL_MORE' => 'เพิ่มเติม',
     'LBL_MORE_MODULES' => 'โมดูลเพิ่มเติม',
+    'LBL_MORE_TABS' => 'แท็บเพิ่มเติม',
     'LBL_MULTIPLE_MODULES' => 'หลายโมดูล',
     'LBL_MY_ACCOUNT' => 'การตั้งค่าของฉัน',
     'LBL_SYSTEM_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'ค่าเริ่มต้นของระบบ',
@@ -3143,6 +3230,7 @@ $app_strings = array (
     'LBL_OPENTO_BUTTON_KEY' => 'T',
     'LBL_OPENTO_BUTTON_LABEL' => 'เปิดไปที่: ',
     'LBL_OPENTO_BUTTON_TITLE' => 'เปิดไปที่:',
+    'LBL_OPEN_IN_NEW_TAB' => 'เปิดในแท็บใหม่',
     'LBL_OPPORTUNITIES'=>'โอกาสทางการขาย',
     'LBL_OPPORTUNITY_NAME' => 'ชื่อโอกาสทางการขาย',
     'LBL_OPPORTUNITY'=>'โอกาสทางการขาย',
@@ -3343,7 +3431,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2020 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'สงวนลิขสิทธิ์<br />SugarCRM, Sugar และลูกบาศก์ 3-D เป็นเครื่องหมายการค้าจดทะเบียนของ SugarCRM Inc. '.
         'ชื่อบริษัทและผลิตภัณฑ์อื่นๆ ทั้งหมดที่ใช้หรือปรากฏในผลิตภัณฑ์นี้อาจเป็นเครื่องหมายการค้าของ'.
         'บริษัทที่เกี่ยวข้องนั้นๆ',
@@ -3459,7 +3547,7 @@ $app_strings = array (
     'LNK_VIEW_CHANGE_LOG' => 'ดูรายงาน Audit Log',
     'TPL_AUDIT_LOG_TITLE' => 'รายงาน Audit Log สำหรับ {{{name}}}',
     'LBL_AUDIT_EMAIL_TOOLTIP' => 'คลิกเพื่อดูบันทึกการตรวจสอบที่อยู่อีเมล',
-
+    'LBL_NO_SEARCH_RESULTS' => 'ไม่เจอผลลัพธ์การค้นหาของคุณ',
     'NTC_CLICK_BACK' => 'โปรดคลิกปุ่มย้อนกลับของเบราว์เซอร์และแก้ไขข้อผิดพลาด',
     'NTC_DATE_FORMAT' => '(yyyy-mm-dd)',
     'NTC_DATE_TIME_FORMAT' => '(yyyy-mm-dd 24:00)',
@@ -3497,12 +3585,15 @@ $app_strings = array (
     'WARN_LICENSE_SEATS_MAXED'=>  "คำเตือน: จำนวนผู้ใช้ที่ใช้งานเกินจำนวนใบอนุญาตสูงสุดที่ใช้ได้แล้ว",
     'ERROR_LICENSE_SEATS_MAXED'=>
         'จำนวนผู้ใช้งานเกินขีดจำกัดจำนวนใบอนุญาต กรุณาติดต่อผู้ดูแลระบบของคุณ',
+    'ERROR_LICENSE_TYPE_SEATS_MAXED'=>
+        'Number of active %s users exceeds License Count limits. Please contact your Administrator.',
     'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'มีเพียงผู้ดูแลระบบเท่านั้นที่สามารถลงชื่อเข้าใช้งานได้',
     'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
         'จำนวนผู้ใช้ใบอนุญาตมีปริมาณถึงขีดจำกัดแล้ว ผู้ใช้ที่มีอยู่เท่านั้นที่จะสามารถลงชื่อเข้าใช้ได้',
     'WARN_ONLY_ADMINS'=> "มีเพียงผู้ดูแลระบบเท่านั้นที่สามารถลงชื่อเข้าใช้งานได้",
     'WARN_UNSAVED_CHANGES'=> "คุณกำลังจะออกจากระเบียนนี้โดยไม่บันทึกการเปลี่ยนแปลงที่ทำไว้กับระเบียน คุณแน่ใจหรือไม่ว่าต้องการออกจากระเบียนนี้",
     'LBL_WARN_UNSAVED_CHANGES' => 'คุณมีการเปลี่ยนแปลงที่ยังไม่ได้บันทึก คุณต้องการออกจากเพจและยกเลิกการเปลี่ยนแปลงหรือไม่',
+    'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'ส่วนข้อมูลหนึ่งหรือมากกว่าหนึ่งแห่งมีการเปลี่ยนแปลงที่ยังไม่ได้บันทึก',
     'LBL_NAVIGATE_TO_REPORTS' => 'คุณกำลังย้ายไปที่โมดูลรายงาน การเปลี่ยนแปลงในส่วนข้อมูลจะไม่ได้รับการบันทึก ต้องการดำเนินการต่อหรือไม่',
     'ERROR_NO_RECORD' => 'เกิดข้อผิดพลาดในการเรียกระเบียน ระเบียนนี้อาจะถูกลบแล้วหรือคุณไม่ได้รับอนุญาตให้ดู',
     'ERROR_TYPE_NOT_VALID' => 'ข้อผิดพลาด ประเภทไม่ถูกต้อง',
@@ -3519,7 +3610,10 @@ $app_strings = array (
     'ERROR_DATETIME' => 'ข้อผิดพลาด ฟิลด์นี้ต้องมีวันที่ที่ถูกต้อง',
     'ERROR_IS_BEFORE' => 'ข้อผิดพลาด วันที่ของฟิลด์นี้ต้องอยู่ก่อนวันที่ของฟิลด์ {{this}}',
     'ERROR_IS_AFTER' => 'ข้อผิดพลาด วันที่ของฟิลด์นี้ต้องอยู่หลังวันที่ของฟิลด์ {{this}}',
+    'ERROR_TIME_IS_BEFORE' => 'ข้อผิดพลาด เวลาของฟิลด์นี้ต้องอยู่ก่อนถึงเวลาของฟิลด์ {{this}}',
+    'ERROR_TIME_IS_AFTER' => 'ข้อผิดพลาด เวลาของฟิลด์นี้ต้องอยู่ก่อนถึงเวลาของฟิลด์ {{this}}',
     'ERROR_NUMBER' => 'ข้อผิดพลาด ฟิลด์นี้ต้องมีตัวเลขที่ถูกต้อง',
+    'ERROR_INT' => 'ข้อผิดพลาด จำนวนเต็มไม่ถูกต้อง',
     'ERROR_NO_BEAN' => 'ไม่สามารถเรียกบีน',
     'ERROR_ACCESS_MODULE' => 'คุณไม่มีสิทธิ์เข้าถึงโมดูลนี้',
     'ERROR_MAX_FILESIZE_EXCEEDED' => 'ไฟล์แนบนี้มีขนาดใหญ่เกินไป',
@@ -3605,6 +3699,7 @@ $app_strings = array (
     'LBL_SCHEDULE_MEETING' => 'วางกำหนดการประชุม',
     'LBL_CREATE_TASK' => 'สร้างงาน',
     'LBL_REMOVE_FROM_FAVORITES' => 'นำออกจากรายการโปรดของฉัน',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => 'สร้างฟอร์ม',
     'LBL_SAVE_WEB_TO_LEAD_FORM' =>'บันทึกเว็บไปยังฟอร์มของผู้สนใจ',
@@ -3633,36 +3728,21 @@ $app_strings = array (
     'ERR_SMARTY_UNEQUAL_RELATED_FIELD_PARAMETERS' => 'ข้อผิดพลาด: มีจำนวนอาร์กิวเมนต์ที่ไม่เท่ากันสำหรับอีลิเมนต์ &#39;key&#39; และ &#39;copy&#39; ในอาร์เรย์ displayParams',
     'ERR_SMARTY_MISSING_DISPLAY_PARAMS' => 'ไม่มีดัชนีในอาร์เรย์ displayParams สำหรับ: ',
 
-    /* MySugar Framework (for Home and Dashboard) */
     'LBL_DASHLET' => 'ส่วนข้อมูล',
-    'LBL_DASHLET_CONFIGURE_GENERAL' => 'ทั่วไป',
     'LBL_DASHLET_CONFIGURE_FILTERS' => 'ตัวกรอง',
     'LBL_DASHLET_CONFIGURE_MY_ITEMS_ONLY' => 'รายการของฉันเท่านั้น',
-    'LBL_DASHLET_CONFIGURE_MY_FAVORITES_ONLY' => 'รายการโปรดของฉันเท่านั้น',
     'LBL_DASHLET_CONFIGURE_TITLE' => 'ชื่อเรื่อง',
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'แสดงแถว',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'เชื่อมโยงกับระเบียนปัจจุบัน',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'ฟิลด์ที่เชื่อมโยง',
 
-    // MySugar status strings
-    'LBL_CREATING_NEW_PAGE' => 'กำลังสร้างเพจใหม่...',
-    'LBL_NEW_PAGE_FEEDBACK' => 'คุณสร้างเพจใหม่แล้ว คุณสามารถเพิ่มเนื้อหาใหม่ด้วยตัวเลือกเมนูเพิ่มส่วนข้อมูล Sugar',
-    'LBL_DELETE_PAGE_CONFIRM' => 'คุณแน่ใจหรือไม่ว่าต้องการลบเพจนี้',
-    'LBL_SAVING_PAGE_TITLE' => 'กำลังบันทึกชื่อเพจ...',
-    'LBL_RETRIEVING_PAGE' => 'กำลังเรียกเพจ...',
-    'LBL_MAX_DASHLETS_REACHED' => 'คุณมีส่วนข้อมูล Sugar ถึงจำนวนสูงสุดที่ผู้ดูแลระบบตั้งค่าไว้แล้ว โปรดนำส่วนข้อมูล Sugar ออกก่อนที่จะเพิ่ม',
-    'LBL_ADDING_DASHLET' => 'กำลังเพิ่มส่วนข้อมูล Sugar...',
-    'LBL_ADDED_DASHLET' => 'เพิ่มส่วนข้อมูล Sugar แล้ว',
     'LBL_REMOVE_DASHLET_CONFIRM' => 'คุณแน่ใจหรือไม่ว่าต้องการนำส่วนข้อมูล Sugar ออก',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'คุณแน่ใจหรือไม่ว่าต้องการนำแถวนี้ออก',
-    'LBL_REMOVING_DASHLET' => 'กำลังนำส่วนข้อมูล Sugar ออก...',
-    'LBL_REMOVED_DASHLET' => 'นำส่วนข้อมูล Sugar ออกแล้ว',
     'LBL_MAXIMUM_OF' => 'จำนวนสูงสุด ',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => ' คอลัมน์สามารถแสดงผลได้',
 
     /* Sugar7 Dashboard */
     'LBL_DASHBOARD' => 'แดชบอร์ด',
-    'LBL_DASHBOARD_BWC' => 'แดชบอร์ดเดิมของฉัน',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'แดชบอร์ดของฉัน',
     'LBL_COLLAPSE_ALL' => 'ยุบทั้งหมด',
     'LBL_EXPAND_ALL' => 'ขยายทั้งหมด',
@@ -3693,9 +3773,33 @@ $app_strings = array (
 
     'LBL_DASHLET_LISTVIEW_NAME' => 'มุมมองรายการ',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'แสดงระเบียนจากโมดูลหนึ่งๆ ตามเกณฑ์ที่คุณกำหนด',
+
+    // Record view dashlet
+    'LBL_DASHLET_RECORDVIEW_NAME' => 'มุมมองระเบียน',
+    'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'แสดงระเบียนและระเบียนเกี่ยวข้องที่เลือกในแท็บ',
+    'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'ประเภทฐานระเบียน',
+    'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => '{{moduleSingular}} นี้',
+    'LBL_DASHLET_RECORDVIEW_TABS' => 'แท็บ',
+    'LBL_DASHLET_RECORDVIEW_BASIC_LAYOUT_PREVIEW' => 'ตัวอย่างเลย์เอาต์พื้นฐาน',
+    'TPL_DASHLET_RECORDVIEW_TOO_MANY_TABS' => 'คำเตือน โมดูล {{numWord}} ({{num}}) เท่านั้นที่จะแสดงในแท็บ ' .
+        'กรุณาลบหนึ่งโมดูลหรือมากกว่าก่อนที่จะเพิ่มโมดูลอื่น',
+    'LBL_SIX' => 'หก', // record view dashlet tab limit
+
+    //Commentlog Dashlet
+    'LBL_DASHLET_COMMENTLOG_NAME' => 'บันทึกความคิดเห็น',
+    'LBL_DASHLET_COMMENTLOG_DESCRIPTION' => 'แสดงความเห็นสำหรับระเบียน',
+    'LBL_COMMENTS_LOG_DASHLET_NO_COMMENTS' => 'ไม่มีความคิดเห็นใดที่ใช้ได้',
+    'LBL_COMMENTS_LOG_DASHLET_BUTTON_ADD' => 'เพิ่ม',
+    'LBL_COMMENTS_LOG_DASHLET_PLACEHOLDER' => 'เพิ่มความคิดเห็น',
+    'LBL_COMMENTS_LOG_DASHLET_VIEW_ALL' => 'ดูทั้งหมด',
+
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'ไม่มีข้อมูล คุณไม่มีสิทธิ์เข้าถึงโมดูลนี้' .
         " \nโปรดอัปเดตหรือนำส่วนข้อมูลนี้ออก",
     'TPL_DASHLET_MY_MODULE' => '{{module}} ของฉัน',
+    'LBL_DASHLET_PICK_A_RECORD' => 'ไม่ได้เลือกแสดงระเบียนใด ๆ',
+    'LBL_CONTENT_SEARCH_DASHLET' => 'ส่วนข้อมูลค้นหาเนื้อหา',
+    'LBL_CONTENT_SEARCH_DASHLET_GREETING' => 'วันนี้ให้ฉันช่วยอะไรคุณได้บ้าง {{username}}',
+    'LBL_CONTENT_SEARCH_DASHLET_DISABLED' => 'คุณต้องการสร้างเคสหรือเปล่า',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'เมตริกโอกาสทางการขาย',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'เมตริคโอกาสทางการขายสำหรับบัญชีที่เกี่ยวข้อง',
@@ -3703,6 +3807,14 @@ $app_strings = array (
     'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'ทำรายการสิ่งของที่ถูกนำมาใช้ และผลิตภัณฑ์ที่ได้รับบันทึกเป็นรายการโปรดล่าสุด',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'ใช้ล่าสุด',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'รายการโปรด',
+
+    'LBL_DASHBOARD_CONFIG' => 'Dashboard Configuration',
+    'LBL_LIST_VIEW__NAME' => 'มุมมองแบบรายการ',
+    'LBL_PIPELINE_VIEW_NAME' => 'มุมมองแบบแผ่นป้าย',
+    'LBL_PIPELINE_VIEW_BTN' => 'มุมมองแบบแผ่นป้าย',
+    'LBL_PIPELINE_VIEW_TAB_NAME' => '{{module}} โดย{{fieldName}}',
+    'LBL_VISUAL_PIPELINE_DISABLED' => 'มุมมองแบบแผ่นป้ายไม่สามารถใช้งานได้',
+    'LBL_VISUAL_PIPELINE_MOVE_FAILED' => '{{recordName}} could not be moved to {{columnLabel}} because of the following fields: ',
 
     'LBL_DASHLET_NO_RECORDS' => 'ไม่พบระเบียนในขณะนี้',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'สรุปเคส',
@@ -3758,37 +3870,13 @@ $app_strings = array (
     'LBL_DASHLET_USEFULNESS_NAME' => 'ประโยชน์ของบทความ',
     'LBL_DASHLET_USEFULNESS_DESC' => 'แสดงแผนภูมิที่บอกว่าบทความฐานความรู้นั้นมีประโยชน์มากเพียงใด',
 
-    // MySugar Menu Options
     'LBL_ADD_PAGE' => 'เพิ่มเพจ',
-    'LBL_DELETE_PAGE' => 'ลบเพจ',
-    'LBL_CHANGE_LAYOUT' => 'เปลี่ยนเลย์เอาต์',
-    'LBL_RENAME_PAGE' => 'เปลี่ยนชื่อเพจ',
-
     'LBL_LOADING_PAGE' => 'กำลังโหลดเพจ โปรดรอสักครู่...',
-
-    'LBL_RELOAD_PAGE' => 'โปรด<a href="javascript: window.location.reload()">โหลดหน้าต่างนี้ใหม่</a> เพื่อใช้ส่วนข้อมูล Sugar นี้',
-    'LBL_ADD_DASHLETS' => 'เพิ่มส่วนข้อมูล',
-    'LBL_CLOSE_DASHLETS' => 'ปิด',
-    'LBL_OPTIONS' => 'ตัวเลือก',
-    'LBL_NUMBER_OF_COLUMNS' => 'เลือกจำนวนคอลัมน์',
-    'LBL_1_COLUMN' => '1 คอลัมน์',
-    'LBL_2_COLUMN' => '2 คอลัมน์',
-    'LBL_3_COLUMN' => '3 คอลัมน์',
-    'LBL_PAGE_NAME' => 'ชื่อเพจ',
-
     'LBL_SEARCH_RESULTS' => 'ผลการค้นหา',
-    'TPL_SEARCH_RESULTS_FOR' => 'ผลการค้นหา: {{searchTerm}}',
     'LBL_SEARCH_RESULTS_FOR' => 'ผลการค้นหา: ',
-    'LBL_SEARCH_MODULES' => 'โมดูล',
-    'LBL_SEARCH_CHARTS' => 'แผนภูมิ',
-    'LBL_SEARCH_REPORT_CHARTS' => 'แผนภูมิของรายงาน',
-    'LBL_SEARCH_TOOLS' => 'เครื่องมือ',
     'LBL_SEARCH_HELP_TITLE' => 'เคล็ดลับการค้นหา',
-    'LBL_SEARCH_HELP_CLOSE_TOOLTIP' => 'ปิด',
     'LBL_SEARCH_RESULTS_FOUND' => 'พบผลการค้นหา',
     'LBL_SEARCH_RESULTS_TIME' => 'มิลลิวินาที',
-    'ERR_BLANK_PAGE_NAME' => 'โปรดป้อนชื่อเพจ',
-    /* End MySugar Framework strings */
 
     /* Sales Pipeline Dashlet */
     'LBL_DASHLET_MY_PIPELINE' => 'กระบวนการขายของฉัน',
@@ -3942,6 +4030,8 @@ $app_strings = array (
     //MB -Fixed Bug #32812 -Max
     'LBL_ASSIGNED_TO_NAME' => 'ระบุให้',
     'LBL_DESCRIPTION' => 'คำอธิบาย',
+    'LBL_PRIMARY_CONTACT_NAME' => 'ผู้ติดต่อหลัก',
+    'LBL_PRIMARY_CONTACT_ID' => 'ID ผู้ติดต่อหลัก',
 
   'LBL_NONE' => '-ไม่มี-',
   'LBL_YESTERDAY'=> 'เมื่อวานนี้',
@@ -4332,6 +4422,8 @@ $app_strings = array (
     // start of: Quotes related
     'LBL_QLI_SINGLE_TITLE' => 'สินค้าในไลน์ที่เสนอราคาแล้ว',
     'LBL_DISCOUNT_TOTAL' => 'ยอดรวมส่วนลด',
+    'LBL_DISCOUNT_PERCENT' => '% Percent',
+    'LBL_DISCOUNT_SELECT' => 'Determines if the discount is a percentage or flat amount',
     'LBL_TAX' => 'ภาษี',
     'LBL_SHIPPING' => 'การขนส่ง',
     'LBL_GRAND_TOTAL' => 'ยอดรวมทั้งหมด',
@@ -4378,6 +4470,7 @@ $app_strings = array (
     'LBL_NO_ACCESS' => '(ไม่มีสิทธิ์เข้าถึง)',
     'LBL_NO_ACCESS_LOWER' => 'ไม่มีสิทธิ์เข้าถึง',
     'LBL_NO_FIELD_ACCESS' => 'ไม่มีสิทธิ์เข้าถึง',
+    'LBL_NO_LICENSE_ACCESS' => 'License Required',
     'LBL_VALUE_ERASED' => 'ลบค่าแล้ว',
     'LBL_VALUE_ERASED_TOOLTIP' => 'ลบข้อมูลนี้ตามการร้องขอการคุ้มครองข้อมูลส่วนบุคคลแล้ว',
     'LBL_CREATE_RELATED_RECORD' => 'สร้างระเบียนที่เกี่ยวข้อง',
@@ -4547,6 +4640,15 @@ $app_strings = array (
     'LBL_MOBILE_ACTIVITYSTREAM_POST_PLACEHOLDER' => 'พิมพ์ @ เพื่อพูดถึงผู้ใช้ พิมพ์ # เพื่ออ้างอิงระเบียน',
     'LBL_MOBILE_NEW_COMMENT' => 'ความคิดเห็นใหม่',
     'LBL_RECENTLY_VIEWED' => 'ดูล่าสุด',
+    'LBL_FILE_STORED_LOCALLY' => 'ไฟล์ถูกนำเก็บไปยังพื้นที่จัดเก็บในเครื่องและจะทำการซิงค์เมื่ออุปกรณ์ออนไลน์',
+    'LBL_IDM_USER_PROFILE_READONLY' => 'หากคุณต้องการเปลี่ยนฟิลด์ที่แก้ไขไม่ได้ กรุณาติดต่อผู้ดูแลระบบเพื่อแจ้งถึงการเปลี่ยนแปลงเหล่านี้',
+    'LBL_ACTIVITY_POST' => '{{{value}}}บน{{{link}}}',
+    'LBL_COMMENTLOG_EMPTY' => 'ไม่มีความคิดเห็น',
+    'LBL_COMMENTLOG_EXPANDBUTTON_EXPAND' => 'แสดงความคิดเห็น{{{commentsLeft}}} ถัดไป',
+    'LBL_COMMENTLOG_EXPANDBUTTON_COLLAPSE' => 'ยุบ',
+    'LBL_COMMENTLOG_CONFIRM_CREATE' => 'การสร้างการยืนยันความคิดเห็น',
+    'LBL_COMMENTLOG_ERROR_IS_EMPTY' => 'บันทึกความคิดเห็นไม่สามารถเว้นว่างได้',
+    'LBL_MOBILE_PDF_DOWNLOAD' => 'ดาวน์โหลด PDF {{{pdfTemplateName}}}',
 
     'ERR_SYNC_FAILED' => 'ไม่สามารถซิงค์กับเซิร์ฟเวอร์',
     'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'ล็อกอิน SSO ไม่ได้ โปรดตรวจสอบว่าอินสแตนซ์อยู่ใน Sugar 7.5 ขึ้นไปและมีการกำหนดค่าสำหรับ SSO',
@@ -4757,6 +4859,11 @@ $app_strings = array (
     'LBL_VO_RIGHT_MENU_BTN' => 'ปุ่มเมนูด้านขวา',
     'LBL_VO_ADD_BTN' => 'เพิ่มปุ่ม',
 
+    // Cookie consent
+    'LBL_WIZ_USER_COOKIE_CONSENT' => 'แอปพลิเคชันนี้ใช้คุกกี้',
+    'LBL_USER_CLICK_FOR_COOKIE_CONSENT' => 'ทำเครื่องหมายเพื่อยินยอม (จำเป็น)',
+    'LBL_USER_COOKIE_CONSENT_TEXT' => 'แอปพลิเคชันนี้ใช้คุกกี้เพื่อช่วยให้ประสบการณ์ที่ดีกว่าแก่คุณ คุณยินยอมการใช้คุกกี้ตามที่ระบุใน <a href="{{href}}" target="_blank">นโยบายความเป็นส่วนตัว</a> ของเราโดยการดำเนินการใช้แอปพลิเคชันต่อไป',
+
     //begin portal
 
     //portal record tutorial
@@ -4766,20 +4873,36 @@ $app_strings = array (
     'LBL_PORTAL_TOUR_RECORD_VIEW_NOTE' => 'คลิกที่ไอคอนเหล่านี้เพื่อดูรายละเอียดของบันทึกที่แนบมา',
 
     //for portal
-
+    'LBL_PORTAL_HOME' => 'แดชบอร์ดหน้าหลัก',
+    'LBL_PORTAL_DASHBOARD_ALL_OPEN_CASES' => 'เคสที่เปิดทั้งหมด',
+    'LBL_PORTAL_DASHBOARD_RECENT_CASES' => 'เคสที่ได้รับการแก้ไขเมื่อเร็ว ๆ นี้',
     'LBL_PORTAL_SEARCH' => 'ค้นหาจากชื่อ, หมายเลข',
     'LBL_SIGNUP_BUTTON_LABEL' => 'สมัคร',
+    'LBL_PORTAL_NO_EMAIL' => 'ไม่ได้รับอีเมลใช่ไหม',
+    'LBL_PORTAL_FORGOT_PASSWORD' => 'ลืมรหัสผ่าน',
+    'LBL_PORTAL_FORGOT_USERNAME' => 'ลืมชื่อผู้ใช้',
+    'LBL_PORTAL_ENTER_PASSWORD_TWICE' => 'ใส่รหัสผ่านของคุณซ้ำสองครั้ง รหัสผ่านจะต้องตรงกัน',
+    'LBL_PORTAL_RESET_PASSWORD' => 'รีเซ็ตรหัสผ่าน',
+    'LBL_PORTAL_REENTER_PASSWORD' => 'ใส่รหัสผ่านอีกครั้ง',
+    'LBL_PORTAL_PASSWORD_MISMATCH' => 'รหัสผ่านไม่ตรงกัน กรุณาใส่ใหม่อีกครั้ง',
+    'LBL_PORTAL_PASSWORD_RESET_SUCCESS' => 'ดำเนินการรีเซ็ตรหัสผ่านของคุณเสร็จสมบูรณ์แล้ว',
+    'LBL_PORTAL_PASSWORD_RESET_ERR_GENERAL' => 'มีข้อผิดพลาดเกิดขึ้น โปรดสร้างรหัสผ่านใหม่และส่งคำขอรีเซ็ตรหัสผ่าน',
     'LBL_PORTAL_SIGNUP_PROCESS' => 'ลงทะเบียน',
     'LBL_PORTAL_SIGNUP_TITLE' => 'ขอขอบคุณที่สมัครใช้งาน',
-    'LBL_PORTAL_SIGNUP' => 'ตัวแทนฝ่ายบริการลูกค้าจะติดต่อคุณในเร็วๆ นี้เพื่อกำหนดค่าบัญชีของคุณ',
+    'LBL_PORTAL_SIGNUP' => 'เราจะแจ้งให้คุณทราบหลังจากที่ยืนยันข้อมูลของคุณแล้ว',
     'LBL_PORTAL_SIGNUP_FIRST_NAME' => 'ชื่อ',
     'LBL_PORTAL_SIGNUP_LAST_NAME' => 'นามสกุล',
-    'LBL_PORTAL_SIGNUP_EMAIL' => 'อีเมล',
+    'LBL_PORTAL_SIGNUP_USER_NAME' => 'ชื่อผู้ใช้',
+    'LBL_PORTAL_SIGNUP_EMAIL' => 'ที่อยู่อีเมล',
     'LBL_PORTAL_SIGNUP_PHONE' => '(###) ###-#### (เลือกระบุได้)',
     'LBL_PORTAL_SIGNUP_COUNTRY' => 'ประเทศ',
     'LBL_PORTAL_SIGNUP_STATE' => 'รัฐ',
-    'LBL_PORTAL_SIGNUP_COMPANY' => 'บริษัท',
+    'LBL_PORTAL_SIGNUP_COMPANY_NAME' => 'ชื่อบริษัท',
     'LBL_PORTAL_SIGNUP_JOBTITLE' => 'ตำแหน่งงาน (เลือกระบุได้)',
+    'LBL_PORTAL_SIGNUP_PASSWORD' => 'รหัสผ่าน',
+    'LBL_PORTAL_SIGNUP_PASSWORD1' => 'ยืนยันรหัสผ่าน',
+    'LBL_PORTAL_SIGNUP_FORGOT_LOGIN' => 'ลืมล็อกอิน',
+
     'LNK_PORTAL_LOGIN_FORGOTPASSWORD' => 'ลืมรหัสผ่าน?',
     'LBL_PORTAL_LOGIN_FORGOTPASSWORD' => 'โปรดติดต่อผู้ดูแลระบบ Sugar ของคุณเพื่อรีเซ็ตรหัสผ่าน',
     'LBL_PORTAL_LOGIN_USERNAME' => 'ชื่อผู้ใช้',
@@ -4789,9 +4912,14 @@ $app_strings = array (
     'LBL_PORTAL_PAGE_NOT_AVAIL' => 'ไม่สามารถใช้เพจ',
     'LBL_PORTAL_NOT_ENABLED_MSG' => "ขออภัย คุณลักษณะนี้ไม่สามารถใช้ได้ในขณะนี้",
     'LBL_PORTAL_SEARCH_RESULTS_TITLE' => 'แสดงผลลัพธ์การสืบค้นสำหรับ "{query}"',
+    'LBL_PORTAL_DIDNT_GET_EMAIL' => 'ไม่ได้รับอีเมลใช่ไหม',
+    'LBL_PORTAL_CONTACT_INFO_CONTACT_US' => 'หากต้องการความช่วยเหลือหรือต้องการติดต่อเรา โปรดใช้ช่องทางดังต่อไปนี้: ',
+    'LBL_PORTAL_CONTACT_INFO_PHONE' => 'โทรศัพท์: ',
+    'LBL_PORTAL_CONTACT_INFO_EMAIL' => 'อีเมล: ',
+    'LBL_PORTAL_CONTACT_INFO_WEB' => 'เว็บ: ',
 
     //for portal errors
-    'LBL_PORTAL_INVALID_CREDS' => 'คู่ของชื่อผู้ใช้/รหัสผ่านที่ระบุไม่ถูกต้อง โปรดลองอีกครั้ง',
+    'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'ล็อกอินไม่สำเร็จ โปรดลองใหม่อีกครั้ง',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'ข้อมูลประจำตัวไม่ถูกต้อง',
     'LBL_PORTAL_INVALID_GRANT' => 'โทเค็นของคุณไม่ถูกต้องหรือหมดอายุ โปรดล็อกอินอีกครั้ง',
     'LBL_PORTAL_INVALID_GRANT_TITLE' => 'โทเค็นหมดอายุแล้ว',
@@ -4814,7 +4942,27 @@ $app_strings = array (
     'LBL_PORTAL_ROUTE_ERROR'=>'มีปัญหาในการโหลดโมดูล โปรดลองอีกครั้งในภายหลังหรือติดต่อฝ่ายสนับสนุน',
     'LBL_PORTAL_OFFLINE' =>'ขออภัย แอปพลิเคชันไม่สามารถใช้ได้ในขณะนี้ โปรดติดต่อผู้ดูแลระบบของไซต์',
     'LBL_CONTACT_EDIT_PASSWORD_LNK_TEXT' => 'เปลี่ยนรหัสผ่าน',
+    'LBL_PORTAL_SIGNUP_USER_NAME_ERROR' => 'ชื่อผู้ใช้นี้มีอยู่ในระบบแล้ว กรุณาส่งคำร้องการลืมรหัสผ่านหรือเลือกชื่อผู้ใช้ใหม่',
+    'LBL_PORTAL_SIGNUP_EMAIL_ERROR' => 'อีเมลที่ให้มาไม่ถูกต้อง',
+    'LBL_PORTAL_SIGNUP_PASSWORD_ERROR' => 'รหัสผ่านไม่ตรงกัน',
     //end portal
+
+    // Final name given by marketing is Service Console
+    // Original name for this feature was Agent Workbench and was used
+    // throughout the development of this product.
+    'LBL_AGENT_WORKBENCH' => 'Service Console',
+    'LBL_AGENT_WORKBENCH_OVERVIEW' => 'ภาพรวม',
+    'LBL_CASE_OVERDUE' => 'Overdue',
+    'LBL_CASE_DUE_SOON' => 'Due soon',
+    'LBL_CASE_DUE_LATER' => 'Due later',
+
+    // Renewals Console
+    'LBL_RENEWALS_CONSOLE' => 'ต่ออายุคอนโซล',
+    'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'ภาพรวม',
+    'LBL_RENEWALS_CONSOLE_STAGE_STATUS' => 'ระยะ/สถานะ',
+    'LBL_RENEWALS_CONSOLE_NAME_ACCOUNT' => 'ชื่อ/ชื่อบัญชี',
+    'LBL_RENEWALS_CONSOLE_AMOUNT' => 'Worst | Likely | Best',
+
 
     //First time login wizard
     'LBL_WIZ_USER_PROFILE_TITLE' => 'โปรไฟล์ผู้ใช้',
@@ -4859,10 +5007,23 @@ $app_strings = array (
     'ERR_PASSWORD_MISMATCH' => 'รหัสผ่านที่ป้อนไม่ตรงกับที่อยู่ในระบบ',
     'LBL_CANNOT_SEND_PASSWORD' => 'ไม่สามารถส่งรหัสผ่าน',
     'LBL_REQUEST_PASSWORD' => 'ขอรับรหัสผ่าน',
+    'LBL_RESET_PASSWORD' => 'รีเซ็ตรหัสผ่าน',
+    'LBL_RESET_PASSWORD_MESSAGE' => 'ใส่ชื่อผู้ใช้และเราจะส่งลิงก์ไปให้คุณรีเซ็ตรหัสผ่าน',
+    'LBL_RESET_PASSWORD_CONFIRMATION_MESSAGE' => 'กรุณาตรวจดูอีเมลของคุณ <br><br> เราได้ส่งคำแนะนำในการเปลี่ยนรหัสผ่านไปยังที่อยู่อีเมล
+        ที่เรามีในไฟล์',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'ข้อผิดพลาด: มีปัญหาในการอัปเดตรหัสผ่านสำหรับผู้ใช้นี้',
     'LBL_INCORRECT_PASSWORD' => 'ข้อผิดพลาด: รหัสผ่านไม่ถูกต้อง',
+    'LBL_PASSWORD_ENFORCE_TITLE' => 'รหัสผ่านที่คุณป้อนไม่ตรงตามข้อกำหนดการใช้รหัสผ่าน โปรดลองอีกครั้ง',
+    'LBL_PASSWORD_MIN_LENGTH' => 'ความยาวน้อยสุดคือ {0}',
+    'LBL_PASSWORD_MAX_LENGTH' => 'ความยาวมากสุดคือ {0}',
+    'LBL_PASSWORD_ONE_UPPERCASE' => 'ต้องมีตัวอักษรพิมพ์ใหญ่หนึ่งตัว (A-Z)',
+    'LBL_PASSWORD_ONE_LOWERCASE' => 'ต้องมีตัวอักษรพิมพ์เล็กหนึ่งตัว (a-z)',
+    'LBL_PASSWORD_ONE_NUMBER' => 'ต้องมีตัวเลขหนึ่งตัว (0-9)',
+    'LBL_PASSWORD_ONE_SPECIAL_CHAR' => 'ต้องมีอักขระพิเศษหนึ่งตัว (~!@#$%^&*()_+-={}|)',
+    'LBL_PASSWORD_REGEX_REQUIREMENT' => 'รหัสผ่านจะต้องไม่ตรงกับรูปแบบเอ็กซ์เพรสชันทั่วไป: {0}',
 
     'LBL_PREFERRED_LANGUAGE' => 'ภาษาที่ต้องการ:',
+    'LBL_PASSWORD_RESET_EMAIL_FAIL' => 'ไม่สามารถส่งอีเมลรีเซ็ตรหัสผ่านได้',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'เลือกรายงาน',
@@ -5004,6 +5165,25 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'งานของฉัน',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'งานของทีม',
 
+    'LBL_RECENTLY_VIEWED_CASES_DASHLET' => 'เคสที่เปิดดูล่าสุด',
+
+    'LBL_REPORT_DASHLET_TITLE_12' => 'เคสที่เปิดแยกตามผู้ใช้และสถานะ',
+    'LBL_REPORT_DASHLET_TITLE_125' => 'เคสใหม่สร้างโดยศูนย์ธุรกิจเรียงตามสัปดาห์',
+    'LBL_REPORT_DASHLET_TITLE_126' => 'เคสที่สร้างล่าสุด',
+    'LBL_REPORT_DASHLET_TITLE_127' => 'เคสใหม่สร้างโดยลูกค้าเรียงตามสัปดาห์',
+    'LBL_REPORT_DASHLET_TITLE_128' => 'เคสที่เปิดโดยลูกค้าตามความสำคัญ',
+    'LBL_REPORT_DASHLET_TITLE_129' => 'เคสทั้งหมดที่ได้รับการแก้ไขโดยศูนย์ธุรกิจในเดือนนี้',
+    'LBL_REPORT_DASHLET_TITLE_130' => 'เคสทั้งหมดที่ได้รับการแก้ไขโดยตัวแทนในเดือนนี้',
+    'LBL_REPORT_DASHLET_TITLE_131' => 'รายการเคสที่ได้รับการแก้ไขเมื่อเร็ว ๆ นี้',
+    'LBL_REPORT_DASHLET_TITLE_132' => 'เคสที่ได้รับการแก้ไขของฉันในเดือนนี้เรียงตามสัปดาห์',
+    'LBL_REPORT_DASHLET_TITLE_133' => 'เคสที่ครบกำหนดวันนี้และเคสที่เกินกำหนดของฉัน',
+    'LBL_REPORT_DASHLET_TITLE_134' => 'เคสทั้งหมดที่ครบกำหนดวันนี้และเคสที่เกินกำหนด',
+    'LBL_REPORT_DASHLET_TITLE_135' => 'เคสที่เปิดอยู่ของฉันเรียงตามวันครบกำหนดติดตามผล',
+    'LBL_REPORT_DASHLET_TITLE_136' => 'เคสที่เปิดอยู่ทั้งหมดเรียงตามวันครบกำหนดติดตามผล',
+    'LBL_REPORT_DASHLET_TITLE_137' => 'เคสที่เปิดอยู่ของฉันเรียงตามสถานะ',
+    'LBL_REPORT_DASHLET_TITLE_138' => 'เคสในสัปดาห์ที่แล้วของฉันเรียงตามสถานะ',
+    'LBL_REPORT_DASHLET_TITLE_139' => 'สถานะงานที่เปิดไว้ซึ่งมอบหมายโดยฉัน',
+
     //Audit subjects
     'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
@@ -5134,6 +5314,8 @@ $app_strings = array (
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'รีเฟรชรายการ',
+    // Refresh button on tile views
+    'LBL_TILE_REFRESH' => 'Refresh Tiles',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'เพิ่มเติม',
@@ -5414,6 +5596,12 @@ $app_strings = array (
     'LBL_LOCKED_FIELD_RECORD_VIEW_WARNING' => 'ระเบียนนี้มีส่วนร่วมในกระบวนการและอาจมีฟิลด์ที่ล็อคอยู่',
     // @codingStandardsIgnoreEnd
 
+    'LBL_BUSINESS_CENTER' => 'ศูนย์บริการธุรกิจ',
+    'LBL_BUSINESS_CENTER_ID' => 'ID ศูนย์บริการธุรกิจ',
+    'LBL_BUSINESS_CENTER_NAME' => 'ชื่อศูนย์บริการธุรกิจ',
+
+    'LBL_PLIS_ACTIVITIES' => 'Purchased Line Items Activities',
+
     //Tag Strings
     'LBL_TAG_NEW_TAG' => '(แท็กใหม่)',
     'LBL_TAG_FETCH_ERROR' => 'เกิดข้อผิดพลาดขณะเรียกแท็ก',
@@ -5451,14 +5639,47 @@ $app_strings = array (
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'ทำเครื่องหมายเพื่อลบออก',
     'TPL_DATAPRIVACY_PII_TITLE' => 'ข้อมูลส่วนตัวสำหรับ {{{name}}}',
 
+    'LBL_CHANGETIMERS_SUBPANEL_TITLE' => 'เปลี่ยนเวลา',
+
     'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'คัดลอกไปยังคลิปบอร์ดของคุณ!',
     'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'ไม่สามารถคัดลอกไปยังคลิปบอร์ดได้',
 
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'คัดลอกลิงก์ยืนยัน',
 
+    // Activity Timeline Dashlet
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'การโต้ตอบ',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} การโต้ตอบ',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+        'Meetings and Notes related to a record.',
+
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'แสดงเพิ่มเติม...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'แสดงน้อยลง...',
+    'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'ไม่มีข้อมูล',
+
+    // Active Subscriptions Dashlet
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'การเป็นสมาชิกที่เปิดใช้งาน',
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => 'การเป็นสมาชิกที่เปิดใช้งานสำหรับบัญชีเฉพาะ',
+    'LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY' => ', ปริมาณ {{quantity}}',
+    'LBL_ACTIVE_SUBSCRIPTIONS_TOTAL' => 'รวม:',
+    'LBL_NO_ACTIVE_SUBSCRIPTIONS' => 'ไม่มีการเป็นสมาชิกที่เปิดใช้งาน',
+    'LBL_REQUIRE_REVENUE_LINE_ITEMS' => 'ส่วนข้อมูลนี้ต้องใช้ {{module_name}} ในการทำงาน กรุณาแจ้งกับผู้ดูแลระบบเรื่องการเปิดใช้งาน {{module_name}}',
+
+    // Customer Service
+    'LBL_EDIT_IN_STUDIO' => 'ใช้สตูดิโอเพื่อแก้ไขเลย์เอาต์มุมมองส่วนข้อมูลของระเบียนโดยไปที่ ' .
+        'สตูดิโอ > {{module}} > เลย์เอาต์ > ส่วนข้อมูลมุมมองระเบียน <a href={{linkToStudio}}>แก้ไขในสตูดิโอ</a>',
+    'LBL_SERVICE_LEVEL' => 'ระดับบริการ',
+    // Agent Workbench
+    'LBL_AGENT_WORKBENCH_NUMBER' => 'เลขที่',
+    'LBL_AGENT_WORKBENCH_FOLLOW_UP' => 'การติดตามผล',
+    'LBL_AGENT_WORKBENCH_PRIORITY_STATUS' => 'ลำดับความสำคัญ/สถานะ',
+    'LBL_AGENT_WORKBENCH_SUBJECT_DESCRIPTION' => 'หัวข้อ/คำอธิบาย',
+
+//Service Duration
+    'LBL_SERVICE_DURATION' => 'ระยะการบริการ',
+    'LBL_SERVICE_DURATION_VALUE' => 'ค่าระยะการบริการ',
+    'LBL_SERVICE_DURATION_UNIT' => 'หน่วยระยะการบริการ',
+
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6455,7 +6676,7 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'ไฟล์ที�
     'ISK' => 'kr',
     'INR' => '₨',
     'IDR' => 'Rp',
-    'IRR' => '﷼',
+    'IRR' => '77e8',
     'IMP' => '£',
     'ILS' => '₪',
     'JMD' => 'J$',
@@ -6484,18 +6705,18 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'ไฟล์ที�
     'NIO' => 'C$',
     'NGN' => '₦',
     'NOK' => 'kr',
-    'OMR' => '﷼',
+    'OMR' => '77e8',
     'PKR' => '₨',
     'PAB' => 'B/.',
     'PYG' => 'Gs',
     'PEN' => 'S/.',
     'PHP' => '₱',
     'PLN' => 'zł',
-    'QAR' => '﷼',
+    'QAR' => '77e8',
     'RON' => 'lei',
     'RUB' => 'руб',
     'SHP' => '£',
-    'SAR' => '﷼',
+    'SAR' => '77e8',
     'RSD' => 'Дин.',
     'SCR' => '₨',
     'SGD' => '$',
@@ -6517,7 +6738,7 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'ไฟล์ที�
     'UZS' => 'лв',
     'VEF' => 'Bs',
     'VND' => '₫',
-    'YER' => '﷼',
+    'YER' => '77e8',
     'ZWD' => 'Z$',
     );
 

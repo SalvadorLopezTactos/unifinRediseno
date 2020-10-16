@@ -66,12 +66,19 @@ class Mapping implements MappingInterface
     ];
 
     /**
-     * Base mapping for not indexed fields
+     * Base mapping for not indexed fields, set doc_values to false, make it searchable
+     * even the size is large than 32K
      * @var array
      */
     private $notIndexedBase = [
         'type' => 'keyword',
         'index' => false,
+    ];
+
+    private $notIndexedBaseNotDoc = [
+        'type' => 'keyword',
+        'index' => false,
+        'doc_values' => false,
     ];
 
     /**
@@ -146,6 +153,14 @@ class Mapping implements MappingInterface
         return $compiled;
     }
 
+    protected function getNotIndexedBase(bool $longField)
+    {
+        if ($longField && $this->isLongTextEnabled()) {
+            return $this->notIndexedBaseNotDoc;
+        }
+
+        return $this->notIndexedBase;
+    }
     /**
      * {@inheritdoc}
      */
@@ -153,7 +168,18 @@ class Mapping implements MappingInterface
     {
         $moduleField = $this->module . self::PREFIX_SEP . $baseField;
         $this->createMultiFieldBase($moduleField, $this->notIndexedBase)->addField($field, $property);
-        $this->createCopyToBase($baseField, [$moduleField]);
+        $this->createCopyToBase($baseField, $this->notIndexedBase, [$moduleField]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addModuleLongField($baseField, $field, MultiFieldProperty $property)
+    {
+        $moduleField = $this->module . self::PREFIX_SEP . $baseField;
+        $notIndexedbase = $this->getNotIndexedBase(true);
+        $this->createMultiFieldBase($moduleField, $notIndexedbase)->addField($field, $property);
+        $this->createCopyToBase($baseField, $notIndexedbase, [$moduleField]);
     }
 
     /**
@@ -163,7 +189,7 @@ class Mapping implements MappingInterface
     {
         $commonField = self::PREFIX_COMMON . $baseField;
         $this->createMultiFieldBase($commonField, $this->notIndexedBase)->addField($field, $property);
-        $this->createCopyToBase($baseField, [$commonField]);
+        $this->createCopyToBase($baseField, $this->notIndexedBase, [$commonField]);
     }
 
     /**
@@ -279,11 +305,12 @@ class Mapping implements MappingInterface
      * Create primary base field for indexing and _source purpose
      * copying the values into the given target field
      * @param string $field The primary field name
+     * @param array $notIndexedBase the notindexedBase
      * @param string[] $targetFields Array of target fields
      */
-    private function createCopyToBase($field, array $targetFields = [])
+    private function createCopyToBase($field, array $notIndexedBase, array $targetFields = [])
     {
-        $this->createMultiFieldBase($field, $this->notIndexedBase, $targetFields);
+        $this->createMultiFieldBase($field, $notIndexedBase, $targetFields);
     }
 
     /**
@@ -299,5 +326,18 @@ class Mapping implements MappingInterface
             throw new MappingException("Cannot redeclare field '{$field}' for module '{$this->module}'");
         }
         $this->properties[$field] = $property;
+    }
+
+    /**
+     * check sugar config if 'enable_long_text_search' is enabled
+     * @return bool
+     */
+    protected function isLongTextEnabled() : bool
+    {
+        global $sugar_config;
+        if ($sugar_config && !empty($sugar_config['enable_long_text_search'])) {
+            return true;
+        }
+        return false;
     }
 }

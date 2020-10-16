@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Datum izmene',
     'LBL_DELETED' => 'Obrisan',
     'LBL_REVENUELINEITEMS' => 'Stavke prihoda',
+    'LBL_ENTRY_SOURCE' => 'Izvor beleške',
+    'LBL_SOURCE_EXTERNAL' => 'Spoljašnji',
+    'LBL_SOURCE_INTERNAL' => 'Unutrašnji',
 
     // Help Text
     // List View Help Text

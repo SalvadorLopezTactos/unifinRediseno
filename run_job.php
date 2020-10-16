@@ -1,5 +1,10 @@
 <?php
- if(!defined('sugarEntry'))define('sugarEntry', true);
+
+use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
+
+if (!defined('sugarEntry')) {
+    define('sugarEntry', true);
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -34,6 +39,10 @@ $app_strings = return_application_language($current_language);
 
 $current_user = BeanFactory::newBean('Users');
 $current_user->getSystemUser();
+
+// allow admin access everything
+$adminWork = new AdminWork();
+$adminWork->startAdminWork();
 
 $GLOBALS['log']->debug('Starting job {$argv[1]} execution as ${argv[2]}');
 $result = SchedulersJob::runJobId($argv[1], $argv[2]);

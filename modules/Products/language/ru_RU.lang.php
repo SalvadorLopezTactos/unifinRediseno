@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'Контакт',
     'LBL_DISCOUNT_TOTAL' => 'Скидка итого',
     'LBL_DISCOUNT_AMOUNT' => 'Объем скидки',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'Значение суммы скидки',
     'LBL_EXT_PRICE' => 'Внешняя цена',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Символ валюты:',

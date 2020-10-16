@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'Соотношение сторон изображения должно быть между 1:1 и 10:1. Размер изображения будет изменен.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'Соотношение сторон изображения должно быть между 3:1 и 20:1. Загрузите новый файл.',
     'ERR_ALERT_FILE_UPLOAD' => 'Произошла ошибка в процессе загрузки изображения.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Невозможно создать каталог для изображений',
     'LBL_LOGGER'=>'Параметры журнала',
 	'LBL_LOGGER_FILENAME'=>'Имя файла журнала:',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Расширение',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Максимальный размер файла журнала:',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Формат даты по умолчанию',
 	'LBL_LOGGER_LOG_LEVEL'=>'Уровень детализации:',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Параметры журнала комментариев',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Максимальное количество символов для отображения в записи комментария',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

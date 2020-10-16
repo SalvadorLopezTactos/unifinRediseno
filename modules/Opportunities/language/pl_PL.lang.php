@@ -15,6 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Pulpit listy możliwości',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Pulpit rekordów możliwości',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Szczegóły szansy',
 
     'LBL_MODULE_NAME' => 'Szanse',
     'LBL_MODULE_NAME_SINGULAR' => 'Szansa',
@@ -25,6 +26,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => 'Nazwa szansy:',
     'LBL_OPPORTUNITY' => 'Szansa:',
     'LBL_NAME' => 'Nazwa szansy',
+    'LBL_TIME' => 'Czas',
     'LBL_INVITEE' => 'Kontakty',
     'LBL_CURRENCIES' => 'Waluty',
     'LBL_LIST_OPPORTUNITY_NAME' => 'Nazwa',
@@ -75,6 +77,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Typ:',
     'LBL_CAMPAIGN' => 'Kampania:',
     'LBL_NEXT_STEP' => 'Następny krok:',
+    'LBL_SERVICE_START_DATE' => 'Service Start Date',
     'LBL_LEAD_SOURCE' => 'Źródło pozyskania',
     'LBL_SALES_STAGE' => 'Etap sprzedaży',
     'LBL_SALES_STATUS' => 'Status',
@@ -142,6 +145,16 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE_FORECAST' => 'Prognoza',
     'LBL_WORKSHEET' => 'Arkusz',
 
+    'LBL_RENEWAL' => 'Odnowienie',
+    'LBL_RENEWAL_OPPORTUNITIES' => 'Szanse odnowienia',
+    'LBL_RENEWAL_PARENT' => 'Nadrzędne szanse',
+    'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'ID elementu nadrzędnego odnowienia',
+    'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
+
+    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
+    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
+    'LBL_WIDGET_AMOUNT' => 'Amount',
+
     'TPL_RLI_CREATE' => 'Szansa musi być powiązana z pozycją szansy.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Utwórz pozycję szansy',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Pozycje oferty',
@@ -152,6 +165,7 @@ $mod_strings = array(
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Nie możesz usunąć szans, które zawierają zamknięte Pozycje szansy',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Co najmniej jeden wybrany rekord zawiera zamknięte Pozycje szansy i nie może zostać usunięty.',
     'LBL_INCLUDED_RLIS' => 'Liczba uwzględnionych pozycji szans',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Oferty',
 
@@ -186,7 +200,7 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Po zainicjowaniu tej zmiany rekordy Pozycji szans zostaną utworzone dla każdej istniejącej {{module_name}} w tle. Kiedy Pozycje szansy będą ukończone i dostępne, na Twój adres e-mail użytkownika zostanie wysłane powiadomienie. Zwróć uwagę, że Twoja instancja musi zostać skonfigurowana w panelu Administrator > Ustawienia poczty e-mail, aby powiadomienie zostało wysłane.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Moduł {{plural_module_name}} umożliwia śledzenie indywidualnej sprzedaży od początku do końca. Każdy rekord {{module_name}} zawiera potencjalną sprzedaż i obejmuje odpowiadające dane sprzedaży, a także odnoszące się do innych ważnych rekordów, takich jak {{quotes_module}}, {{contacts_module}} itp. {{module_name}} zazwyczaj będzie przechodzić przez kilka etapów sprzedaży, dopóki nie zostanie oznaczony jako „Zakończone sukcesem” lub „Zakończone porażką”. Rekordy {{plural_module_name}} mogą być dalej wykorzystywane za pomocą modułu {{forecasts_singular_module}} w systemie Sugar do zrozumienia i przewidywania trendów w sprzedaży, a także koncentracji pracy w celu osiągnięcia celów sprzedaży.',
+    'LBL_HELP_RECORDS' => 'Moduł {{plural_module_name}} pozwala na śledzenie poszczególnych sprzedaży od początku do końca. Każdy rekord {{module_name}} reprezentuje potencjalną sprzedaż i obejmuje istotne dane sprzedaży, jak również dane odnoszące się do innych ważnych rekordów, takich jak {{quotes_module}}, {{contacts_module}} itp. {{module_name}} będzie zazwyczaj występował w kilku Etapach sprzedaży, dopóki nie zostanie oznaczony jako „Zamknięty wygrany” lub „Zamknięty przegrany”. {{plural_module_name}} mogą posłużyć jeszcze w aplikacji Sugar w module {{forecasts_singular_module}} jako pomoc w zrozumieniu i przewidywaniu trendów sprzedaży oraz koncentrowaniu prac na osiąganiu norm sprzedaży.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Moduł {{plural_module_name}} umożliwia śledzenie indywidualnej sprzedaży i powiązanych z nią pozycji od początku do końca. Każdy rekord {{module_name}} zawiera potencjalną sprzedaż i obejmuje odpowiadające dane sprzedaży, a także odnoszące się do innych ważnych rekordów, takich jak {{quotes_module}}, {{contacts_module}} itp. 
@@ -216,4 +230,6 @@ Aby utworzyć rekord {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Wyświetla najlepsze 10 szans sprzedażowych w wykresie bąbelkowym.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Moje szanse',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Szanse mojego zespołu",
+
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
 );

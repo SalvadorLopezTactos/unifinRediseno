@@ -32,6 +32,7 @@ $viewdefs['Notes']['mobile']['view']['edit'] = array(
                 'contact_name',
                 'parent_name',
                 'filename',
+                'tag',
                 'assigned_user_name',
                 'team_name',
             )

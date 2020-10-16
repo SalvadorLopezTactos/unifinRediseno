@@ -12,20 +12,32 @@
 
 namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication\ServiceAccount;
 
+use Sugarcrm\IdentityProvider\Srn\Converter;
+
 class Checker
 {
     protected $allowedSAs = [];
+    protected $ownTenantSRN = '';
 
     public function __construct(array $idmModeConfig)
     {
+        // @deprecated: allowedSAs and check against it will be removed in the future versions.
         $this->allowedSAs = $idmModeConfig['allowedSAs'] ?? [];
+        $this->ownTenantSRN = $idmModeConfig['tid'] ?? '';
     }
 
     /**
+     * @param array $accessTokenInfo
      * @return bool
      */
-    public function isAllowed(string $srn): bool
+    public function isAllowed(array $accessTokenInfo): bool
     {
-        return in_array($srn, $this->allowedSAs);
+        $subjectSRN = $accessTokenInfo['sub'] ?? '';
+
+        $tenantID = Converter::fromString($this->ownTenantSRN)->getTenantId();
+        $saTokenSubjectTenantID = Converter::fromString($subjectSRN)->getTenantId();
+
+        $isTokenForThisTenant = $tenantID == $saTokenSubjectTenantID;
+        return in_array($subjectSRN, $this->allowedSAs) || $isTokenForThisTenant;
     }
 }

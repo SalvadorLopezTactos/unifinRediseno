@@ -51,7 +51,7 @@ $mod_strings = array(
     "LBL_SNIP_PURCHASE_SUMMARY" => "Aby jste mohl používat email. archivaci, musíte si pro Váš SugarCRM objednat licenci.",
     "LBL_SNIP_PURCHASE" => "Klikněte zde k objednání",
     'LBL_SNIP_EMAIL' => 'Archivovaná email. adresa',
-    'LBL_SNIP_AGREE' => "Souhlasím s podmínkami a <a href=\"http://www.sugarcrm.com/crm/TRUSTe/privacy.html\" target=\"_blank\">ochraně osobních údajů</a>.",
+    'LBL_SNIP_AGREE' => "Souhlasím s výše uvedenými podmínkami a <a href='https://www.sugarcrm.com/legal/privacy-policy/' target='_blank'>zásadami ochrany osobních údajů</a>.",
     'LBL_SNIP_PRIVACY' => 'ochrana osobních údajů',
 
     'LBL_SNIP_STATUS_PINGBACK_FAIL' => 'Příkaz pingback se nezdařil',

@@ -27,9 +27,15 @@ $mod_strings = array (
   'LBL_RESOLUTION' => 'Oplossing',
   'LBL_LAST_MODIFIED' => 'Datum gewijzigd',
   'LBL_ASSIGNED_TO_ID'=>'Toegewezen aan:',
-  'LBL_ASSIGNED_TO_NAME' => 'Gebruiker:',  	  
+  'LBL_ASSIGNED_TO_NAME' => 'Gebruiker:',
   'LBL_WORK_LOG' => 'Werk Log:',
+    'LBL_FOLLOW_UP' => 'Opvolging',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
+    'LBL_RESOLVED_DATETIME' => 'Datum opgelost',
+    'LBL_HOURS_TO_RESOLUTION' => 'Uur tot oplossing',
+    'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Bedrijfsuren tot oplossing',
+    'LBL_PENDING_PROCESSING' => 'Wordt verwerkt',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Gemaakt door:',
   'LBL_DATE_CREATED' => 'Datum ingevoerd:',
   'LBL_DATE_ENTERED' => 'Datum ingevoerd:',
@@ -44,5 +50,5 @@ $mod_strings = array (
     'LBL_EDIT_BUTTON' => 'Wijzig',
     'LBL_REMOVE' => 'Verwijder',
 
-  
+
   );

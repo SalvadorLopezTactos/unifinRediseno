@@ -19,6 +19,7 @@
  */
 
 use Sugarcrm\Sugarcrm\ProcessManager;
+use Sugarcrm\Sugarcrm\ProcessManager\Registry;
 
 class PMSEDataParserGateway extends PMSEAbstractDataParser implements PMSEDataParserInterface
 {
@@ -128,6 +129,14 @@ class PMSEDataParserGateway extends PMSEAbstractDataParser implements PMSEDataPa
                         break;
                     case 'BUSINESS_RULES':
                         $this->dataParser = ProcessManager\Factory::getPMSEObject('PMSEBusinessRuleParser');
+                        break;
+                    case 'CONSTANT':
+                        // if business center hour, update expBean
+                        if ($criteriaToken->expSubtype === 'timespan'
+                            && PMSEEngineUtils::isForBusinessTimeOp($criteriaToken->expValue)) {
+                            PMSEEngineUtils::setExpBean($criteriaToken);
+                        }
+                        $isDefault = true;
                         break;
                     default:
                         $isDefault = true;

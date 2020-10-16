@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Eksempel',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'ADVARSEL: Hvis du ændrer den primære modul, alle områder allerede tilføjet til skabelon bliver nødt til at blive fjernet.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Her er filen du bestilte (Du kan ændre denne tekst)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Tilbud',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Denne skabelon bruges til at udskrive Quote i PDF.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'tilbud',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Tilbud (med serviceydelser)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Denne skabelon bruges til at printe et tilbud, herunder information om serviceydelser, som PDF.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'serviceydelsetilbud',
+
   'LBL_TPL_INVOICE_NAME' => 'Faktura',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Denne skabelon bruges til at printe fakturaer til PDF.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'Faktura',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Faktura (med serviceydelser)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Denne skabelon bruges til at printe en faktura, herunder information om serviceydelser, som PDF.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'serviceydelsefaktura',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Tilbudsnummer',
   'LBL_TPL_SALES_PERSON' => 'Sælger:',
   'LBL_TPL_VALID_UNTIL' => 'Gyldig til:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Artikelnummer:',
   'LBL_TPL_PRODUCT' => 'Angiven linjepost',
   'LBL_TPL_RLI' => 'Revenue Line Items',
+  'LBL_TPL_DURATION' => 'Varighed',
+  'LBL_TPL_DURATION_STARTS' => 'Starter:',
+  'LBL_TPL_DURATION_ENDS' => 'Slutter:',
   'LBL_TPL_LIST_PRICE' => 'Listepris',
   'LBL_TPL_UNIT_PRICE' => 'Enhedspris',
   'LBL_TPL_EXT_PRICE' => 'Ekst. pris',

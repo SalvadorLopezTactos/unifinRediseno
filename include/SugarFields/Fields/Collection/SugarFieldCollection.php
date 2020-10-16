@@ -263,7 +263,7 @@ class SugarFieldCollection extends SugarFieldBase {
      * @param string $fieldName Name of the collection field from which the
      *   restrictions are derived.
      * @param string $action Action we are attempting (view, list).
-     * @param array $fieldDef Field definition.
+     * @param array $fieldDef Field definition for this collection field.
      * @param ServiceBase $service REST API service.
      */
     public function processAdditionalAcls(
@@ -274,24 +274,41 @@ class SugarFieldCollection extends SugarFieldBase {
         array $fieldDef,
         ServiceBase $service = null
     ) {
-        $links = $fieldDef['links'] ?? [];
-        $forbiddenLinks = array_filter($links, function ($link) use ($action, $bean) {
-            return !SugarACL::checkField($bean->module_name, $link, $action);
-        });
-        if (!empty($forbiddenLinks)) {
-            if (!empty($data[$fieldName]['records'])) {
-                $data[$fieldName]['records'] = array_filter(
-                    $data[$fieldName]['records'],
-                    function ($record) use ($forbiddenLinks) {
-                        return !in_array($record['_link'], $forbiddenLinks);
-                    }
-                );
-            }
-
-            foreach ($forbiddenLinks as $link) {
-                unset($data[$fieldName]['next_offset'][$link]);
-            }
+        $forbiddenLinks = $this->getForbiddenLinks($bean, $action, $fieldDef['links'] ?? []);
+        if (empty($forbiddenLinks)) {
+            return;
         }
+
+        // strip out the record data from the collection
+        if (!empty($data[$fieldName]['records'])) {
+            $data[$fieldName]['records'] = array_values(array_filter(
+                $data[$fieldName]['records'],
+                function ($record) use ($forbiddenLinks) {
+                    return !in_array($record['_link'], $forbiddenLinks);
+                }
+            ));
+        }
+
+        // strip out any offending next_offset's
+        foreach ($forbiddenLinks as $link) {
+            unset($data[$fieldName]['next_offset'][$link]);
+        }
+    }
+
+    /**
+     * Returns a list of link fields which are forbidden by ACLs.
+     *
+     * @param SugarBean $bean The bean to check.
+     * @param string $action The action to check.
+     * @param array $links The list of all link fields for this collection.
+     * @return array The subset of $links which are ACL-restricted.
+     */
+    public function getForbiddenLinks(SugarBean $bean, string $action, array $links): array
+    {
+        $isOwner = $bean->isOwner($GLOBALS['current_user']->id);
+        return array_filter($links, function ($link) use ($action, $bean, $isOwner) {
+            return !SugarACL::checkField($bean->module_name, $link, $action, ['owner_override' => $isOwner]);
+        });
     }
 
     /**

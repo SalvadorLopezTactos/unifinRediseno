@@ -11,32 +11,37 @@
  */
 
 
-$mod_strings = array (
-	'LBL_MODULE_NAME' => 'Praznici',
-	'LBL_MODULE_NAME_SINGULAR' => 'Praznik',
-	'LBL_MODULE_TITLE' => 'Praznici: Početna stranica',
-	'LBL_HOLIDAY' => 'Praznik: ',
-	'LBL_HOLIDAY_DATE' => 'Datum praznika: ',
-	'LBL_NAME' => 'Datum praznika: ',
-	'LBL_DESCRIPTION' => 'Opis: ',
-	'LBL_RESOURCE_NAME' => 'Naziv resursa ',
-	
-	'LBL_SEARCH_FORM_TITLE' => 'Pretraživanje praznika',
-	'LBL_LIST_FORM_TITLE' => 'Popis praznika',		
+$mod_strings = [
+    'LBL_MODULE_NAME' => 'Praznici',
+    'LBL_MODULE_NAME_SINGULAR' => 'Praznik',
+    'LBL_MODULE_TITLE' => 'Praznici: Početna stranica',
+    'LBL_HOLIDAY' => 'Praznik: ',
+    'LBL_HOLIDAY_DATE' => 'Datum praznika: ',
+    'LBL_NAME' => 'Naziv praznika: ',
+    'LBL_DESCRIPTION' => 'Opis: ',
+    'LBL_RESOURCE_NAME' => 'Naziv resursa ',
 
-	'LNK_NEW_HOLIDAY' => 'Dodaj praznik',
-	'LNK_HOLIDAYS' => 'Praznici',
-	
-	'LBL_USERS_SUBPANEL_TITLE' => 'Korisnici',
-	'LBL_USER_HOLIDAY_SUBPANEL_TITLE'	=> 'Praznici korisnika',
-	
-	'LBL_RESOURCE' => 'Resurs: ',
-	'LBL_PERSON_TYPE' => 'Vrsta osobe',
-	'LBL_RELATED_MODULE'=> 'Povezani modul:',
-	
-	// For HolidaysQuickCreate.php
-	'LBL_SELECT_RESOURCE_TYPE' => 'Odaberite vrstu resursa...',
-	'LBL_USER' => 'Korisnik',
-	'LBL_CONTACT' => 'Kontakt',
-);
-?>
+    'LBL_SEARCH_FORM_TITLE' => 'Pretraživanje praznika',
+    'LBL_LIST_FORM_TITLE' => 'Popis praznika',
+
+    'LNK_NEW_HOLIDAY' => 'Dodaj praznik',
+    'LNK_HOLIDAYS' => 'Praznici',
+
+    'LBL_USERS_SUBPANEL_TITLE' => 'Korisnici',
+    'LBL_USER_HOLIDAY_SUBPANEL_TITLE' => 'Praznici korisnika',
+
+    'LBL_RESOURCE' => 'Resurs: ',
+    'LBL_PERSON_TYPE' => 'Vrsta osobe',
+    'LBL_RELATED_MODULE'=> 'Povezani modul:',
+
+    // For HolidaysQuickCreate.php
+    'LBL_SELECT_RESOURCE_TYPE' => 'Odaberite vrstu resursa...',
+    'LBL_USER' => 'Korisnik',
+    'LBL_CONTACT' => 'Kontakt',
+
+    // Sidecar subpanel list labels
+    'LBL_LIST_HOLIDAY_DATE' => 'Datum',
+    'LBL_LIST_HOLIDAY_NAME' => 'Naziv',
+    'LBL_LIST_DATE_ENTERED' => 'Datum stvaranja',
+    'LBL_LIST_DATE_MODIFIED' => 'Datum izmjene',
+];

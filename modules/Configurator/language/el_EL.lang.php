@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'Η αναλογία διάστασης της εικόνας θα πρέπει να είναι μεταξύ 1:1 και 10:1. Η εικόνα θα επαναταξινομηθεί.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'Η αναλογία διάστασης της εικόνας θα πρέπει να είναι μεταξύ 3:1 και 20:1. Φορτώστε ένα νέο αρχείο με αυτήν την αναλογία.',
     'ERR_ALERT_FILE_UPLOAD' => 'Λάθος κατά την φόρτωση της εικόνας.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Δεν είναι δυνατή η δημιουργία καταλόγου για εικόνες',
     'LBL_LOGGER'=>'Ρυθμίσεις Συνδεδεμένων',
 	'LBL_LOGGER_FILENAME'=>'Όνομα Αρχείου Καταγραφής',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Επέκταση',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Μέγιστο μέγεθος αρχείου καταγραφής',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Προεπιλογή μορφή ημερομηνίας',
 	'LBL_LOGGER_LOG_LEVEL'=>'Καταγραφή Επιπέδου',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Ρυθμίσεις Αρχείου σχολίου',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Μέγιστος αριθμός χαρακτήρων που θα εμφανίζονται ανά καταχώρηση σχολίου',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

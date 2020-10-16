@@ -26,21 +26,9 @@ class CreateServiceAccountRequest extends \Google\Protobuf\Internal\Message
      */
     private $description = '';
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $tenant
-     *           The tenant SRN to register this service account to
-     *     @type string $description
-     *           Short description
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Sa\V1Alpha\Sa::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

@@ -196,27 +196,30 @@ abstract class CurrencyRateUpdateAbstract
      * @param  string $table
      * @param  string $column
      * @param  string $currencyId
-     * @return Object database result object
+     * @return bool
      */
     protected function updateRate($table, $column, $currencyId)
     {
         // get the conversion rate
-        $rate = $this->db->getOne(sprintf("SELECT conversion_rate FROM currencies WHERE id = '%s'", $currencyId));
+        $rate = $this->db->getConnection()
+            ->executeQuery(
+                'SELECT conversion_rate FROM currencies WHERE id = ?',
+                [$currencyId]
+            )->fetchColumn();
 
-        if(empty($rate)) {
-            $GLOBALS['log']->error(string_format($GLOBALS['app_strings']['ERR_DB_QUERY'],array('CurrencyRateUpdate','unknown currency: ' . $currencyId)));
+        if (false === $rate) {
+            $GLOBALS['log']->error(
+                string_format(
+                    $GLOBALS['app_strings']['ERR_DB_QUERY'],
+                    array('CurrencyRateUpdate', 'unknown currency: ' . $currencyId)
+                )
+            );
             return false;
         }
 
-        // setup SQL statement
-        $query = sprintf("UPDATE %s SET %s = %s WHERE currency_id = '%s'",
-            $table,
-            $column,
-            $rate,
-            $currencyId
-        );
-        // execute
-        return $this->db->query($query, true,string_format($GLOBALS['app_strings']['ERR_DB_QUERY'],array('CurrencyRateUpdate',$query)));
+        $this->db->getConnection()
+            ->update($table, [$column => $rate], ['currency_id' => $currencyId]);
+        return true;
     }
 
     /**

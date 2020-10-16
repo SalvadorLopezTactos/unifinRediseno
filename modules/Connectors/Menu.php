@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
 global $mod_strings;
 global $current_user;
 $actions = array('ModifyProperties', 'ModifyDisplay',
@@ -27,7 +29,8 @@ if(in_array($GLOBALS['action'], $actions)){
 }
 
 if(!empty($_REQUEST['merge_module']) && ($GLOBALS['action'] == 'Step1' || $GLOBALS['action'] == 'Step2')) {
-   $merge_module = $_REQUEST['merge_module'];
+    $request = InputValidation::getService();
+    $merge_module = $request->getValidInputRequest('merge_module', 'Assert\Mvc\ModuleName');
    $GLOBALS['mod_strings'] = return_module_language($GLOBALS['current_language'], $merge_module);
    foreach(SugarAutoLoader::existingCustom("modules/{$merge_module}/Menu.php") as $file) {
        require $file;

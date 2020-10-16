@@ -63,6 +63,15 @@
     },
 
     /**
+     * discount-select field always has a value whether discount amount or discount percentage
+     *
+     * @override
+     */
+    isFieldEmpty: function() {
+        return false;
+    },
+
+    /**
      * @inheritdoc
      */
     _render: function() {

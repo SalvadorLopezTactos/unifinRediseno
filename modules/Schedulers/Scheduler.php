@@ -11,6 +11,7 @@
  */
 
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Job\RebuildJob;
+use Sugarcrm\Sugarcrm\ProductDefinition\Job\UpdateProductDefinitionJob;
 
 require_once 'install/install_utils.php';
 
@@ -34,6 +35,13 @@ class Scheduler extends SugarBean {
 	var $last_run;
 	var $status;
 	var $catch_up;
+
+    /**
+     * System job can't be viewed, edited or deleted. It isn't showed on listview.
+     * @var bool
+     */
+    public $system_job;
+
 	// object attributes
 	var $user;
 	var $intervalParsed;
@@ -115,7 +123,18 @@ class Scheduler extends SugarBean {
 		}
 	}
 
-	/**
+    /**
+     * @inheritDoc
+     */
+    public function ACLAccess($view, $context = null)
+    {
+        if (!empty($this->system_job)) {
+            return false;
+        }
+        return parent::ACLAccess($view, $context);
+    }
+
+    /**
 	 * Create a job from this scheduler
 	 * @return SchedulersJob
 	 */
@@ -867,7 +886,7 @@ class Scheduler extends SugarBean {
         $scheduler->job = 'function::pruneDatabase';
         $scheduler->date_time_start = create_date(2005, 1, 1) . ' ' . create_time(0, 0, 1);
         $scheduler->date_time_end = create_date(2020, 12, 31) . ' ' . create_time(23, 59, 59);
-        $scheduler->job_interval = '0::4::1::*::*';
+        $scheduler->job_interval = '0::1::1::*::*';
         $scheduler->status = 'Inactive';
         $scheduler->created_by = '1';
         $scheduler->modified_user_id = '1';
@@ -1024,6 +1043,33 @@ class Scheduler extends SugarBean {
         $scheduler->created_by = '1';
         $scheduler->modified_user_id = '1';
         $scheduler->catch_up = '0';
+        $schedulers[$scheduler->job] = $scheduler;
+
+        // Activity Stream Purger
+        $scheduler = BeanFactory::newBean('Schedulers');
+        $scheduler->name = $mod_strings['LBL_OOTB_ACTIVITY_STREAM_PURGER'];
+        $scheduler->job = 'class::SugarJobActivityStreamPurger';
+        $scheduler->date_time_start = create_date(2019, 4, 1) . ' ' . create_time(0, 0, 1);
+        $scheduler->date_time_end = create_date(2030, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->job_interval = '0::*/1::*::*::*';
+        $scheduler->status = 'Inactive';
+        $scheduler->created_by = '1';
+        $scheduler->modified_user_id = '1';
+        $scheduler->catch_up = '1';
+        $schedulers[$scheduler->job] = $scheduler;
+
+        // Update product definition
+        $scheduler = BeanFactory::newBean('Schedulers');
+        $scheduler->name = $mod_strings['LBL_OOTB_UPDATE_PRODUCT_DEFINITION'];
+        $scheduler->job = 'class::' . UpdateProductDefinitionJob::class;
+        $scheduler->date_time_start = create_date(2020, 5, 30) . ' ' . create_time(0, 0, 1);
+        $scheduler->date_time_end = create_date(2030, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->job_interval = '0::0::*::*::*';
+        $scheduler->status = 'Active';
+        $scheduler->created_by = '1';
+        $scheduler->modified_user_id = '1';
+        $scheduler->catch_up = '1';
+        $scheduler->system_job = '1';
         $schedulers[$scheduler->job] = $scheduler;
 
         return $schedulers;

@@ -18,17 +18,7 @@
  ********************************************************************************/
 
 $mod_strings = array (
-		  //Labels for methods in the TrackerReporter.php file that are shown in TrackerDashlet
-		  'ShowActiveUsers'      => 'Prikaži aktivne korisnike',
-		  'ShowLastModifiedRecords' => 'Poslednjih 10 izmenjenih zapisa',
-		  'ShowTopUser' => 'Glavni korisnik',
-		  'ShowMyModuleUsage' => 'Moji podaci o korišćenju modula',
-		  'ShowMyWeeklyActivities' => 'Moje nedeljne aktivnosti',
-		  'ShowTop3ModulesUsed' => 'Moja 3 najviše korišćena modula',
-		  'ShowLoggedInUserCount' => 'Broj aktivnih korisnika',
-		  'ShowMyCumulativeLoggedInTime' => 'Moje kumulativno vreme logovanja (ove nedelje)',
-		  'ShowUsersCumulativeLoggedInTime' => 'Kumulativno vreme logovanja korisnika (ove nedelje)',
-		  
+
 		  //Column header mapping
 		  'action' => 'Akcija',
 		  'active_users' => 'Broj aktivnih korisnika',

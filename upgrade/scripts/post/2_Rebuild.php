@@ -32,6 +32,10 @@ class SugarUpgradeRebuild extends UpgradeScript
         });
         $rac->repairDatabase();
 
+        // Refresh the SugarLogic cache to ensure that new SugarLogic functions
+        // are included
+        include 'include/Expressions/updatecache.php';
+
         if (!empty($rac->module_list)) {
             $this->log('Verifying audit tables for modules: ' . implode(',', $rac->module_list));
             $rac->rebuildAuditTables();

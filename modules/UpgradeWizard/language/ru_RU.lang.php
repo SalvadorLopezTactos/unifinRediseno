@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'Удаление',
     'LBL_ML_VERSION' => 'Версия',
 	'LBL_ML_INSTALL'=>'Установить',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'Трекер',
 	'LBL_MODULE_NAME' => 'Мастер обновления',
 	'LBL_MODULE_NAME_SINGULAR' => 'Мастер обновления',
 	'LBL_UPLOAD_SUCCESS' => 'Обновление успешно загружено. Нажмите "Продолжить" для окончательной проверки.',

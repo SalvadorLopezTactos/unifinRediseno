@@ -70,6 +70,7 @@ class ImportViewDupcheck extends ImportView
 
         $has_header = $_REQUEST['has_header'] == 'on' ? TRUE : FALSE;
         $importModule = $this->request->getValidInputRequest('import_module', 'Assert\Mvc\ModuleName', '');
+        $importModuleJs = json_encode($importModule);
         $uploadFileName = "upload://".basename($_REQUEST['tmp_file']);
         $splitter = new ImportFileSplitter($uploadFileName, $sugar_config['import_max_records_per_file']);
         $delimiter = $this->getDelimiterValue();
@@ -125,7 +126,12 @@ class ImportViewDupcheck extends ImportView
         $stepTitle4 = $mod_strings['LBL_IMPORT_RECORDS'];
 
         $dateTimeFormat = $GLOBALS['timedate']->get_cal_date_time_format();
-        $type = $this->request->getValidInputRequest('type', null, '');
+        $type = $this->request->getValidInputRequest(
+            'type',
+            ['Assert\Choice' => ['choices' => ['import', 'update', '']]],
+            ''
+        );
+        $typeJs = json_encode($type);
         $lblUsed = str_replace(":","",$mod_strings['LBL_INDEX_USED']);
         $lblNotUsed = str_replace(":","",$mod_strings['LBL_INDEX_NOT_USED']);
         return <<<EOJAVASCRIPT
@@ -157,7 +163,11 @@ ProcessImport = new function()
      * maximum number of records per file
      */
     this.recordThreshold   = {$sugar_config['import_max_records_per_file']};
+    
+    this.type = {$typeJs};
 
+    this.importModule = {$importModuleJs};
+    
     /*
      * submits the form
      */
@@ -169,12 +179,15 @@ ProcessImport = new function()
         YAHOO.util.Connect.asyncRequest('POST', 'index.php',
             {
                 success: function(o) {
-                        var locationStr = "index.php?module=Import"
-                            + "&action=Last"
-                            + "&current_step=" + document.getElementById("importstepdup").current_step.value
-                            + "&type={$type}"
-                            + "&import_module={$importModule}"
-                            + "&has_header=" +  document.getElementById("importstepdup").has_header.value ;
+                     var locationStr = "index.php?" + SUGAR.util.paramsToUrl({
+                        module: "Import",
+                        action: "Last",
+                        current_step: document.getElementById("importstepdup").current_step.value,
+                        type: ProcessImport.type,
+                        import_module: ProcessImport.importModule,
+                        has_header: document.getElementById("importstepdup").has_header.value
+                     });
+                        
                         if ( ProcessImport.fileCount >= ProcessImport.fileTotal ) {
                         	YAHOO.SUGAR.MessageBox.updateProgress(1,'{$mod_strings['LBL_IMPORT_COMPLETED']}');
                         	SUGAR.util.hrefURL(locationStr);
@@ -331,5 +344,3 @@ enableQS(false);
 EOJAVASCRIPT;
     }
 }
-
-?>

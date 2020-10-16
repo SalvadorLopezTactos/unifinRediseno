@@ -30,12 +30,16 @@
 				<input title="{APP.LBL_DELETE_BUTTON_TITLE}" accessKey="{APP.LBL_DELETE_BUTTON_KEY}" class="button" onclick="document.DetailView.return_action.value = 'ListView'; document.DetailView.return_module.value = 'Holidays'; document.DetailView.action.value = 'Delete'; return confirm('{APP.NTC_DELETE_CONFIRMATION}')" type="submit" name="Delete" value=" {APP.LBL_DELETE_BUTTON_LABEL} ">
 			</form>
 		</td>
-		
+
 	</tr>
 </table>
 
 <table width="100%" border="0" cellspacing="{GRIDLINE}" cellpadding="0">
 {PAGINATION}
+	<tr>
+		<td width="15%" valign="top"><slot>{MOD.LBL_HOLIDAY_DATE}</slot></td>
+		<td width="85%" valign="top"><slot>{DATE}&nbsp;</slot></td>
+	</tr>
 	<tr>
 		<td width="15%" valign="top"><slot>{MOD.LBL_NAME}</slot></td>
 		<td width="85%" valign="top"><slot>{NAME}&nbsp;</slot></td>

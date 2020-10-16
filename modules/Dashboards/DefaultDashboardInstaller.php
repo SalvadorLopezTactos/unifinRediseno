@@ -36,28 +36,65 @@ class DefaultDashboardInstaller
 
                 // Loop over each dashboard within the view dir
                 foreach ($dashboardFiles as $dashboardFile) {
-                    $dashboardContents = $this->getFileContents($dashboardFile);
-                    if (!$dashboardContents) {
-                        continue;
-                    }
-
-                    $this->setupSavedReportDashlets($dashboardContents['metadata']);
-
-                    $dashboardProperties = array(
-                        'name' => $dashboardContents['name'],
-                        'dashboard_module' => $module,
-                        'view_name' => $module !== 'Home' ? $layout : null,
-                        'metadata' => json_encode($dashboardContents['metadata']),
-                        'default_dashboard' => true,
-                        'team_id' => $this->globalTeamId,
-                    );
-                    $dashboardBean = $this->getNewDashboardBean();
-                    $this->storeDashboard($dashboardBean, $dashboardProperties);
+                    $this->buildDashboardFromFile($dashboardFile, $module, $layout);
                 }
             }
         }
     }
 
+    /**
+     * Build a single dashboard.
+     *
+     * @param string $dashboardFile Path to the dashboard file.
+     * @param string $module Module name.
+     * @param string $layout Layout name.
+     * @return bool true if installed. false if not installed.
+     */
+    public function buildDashboardFromFile(string $dashboardFile, string $module, string $layout)
+    {
+        $dashboardContents = $this->getFileContents($dashboardFile);
+        if (!$dashboardContents) {
+            return false;
+        }
+
+        // if this dashboard has a preset ID, make sure we haven't installed it before
+        if (isset($dashboardContents['id'])) {
+            $id = $dashboardContents['id'];
+            $bean = $this->getNewDashboardBean();
+            $exists = $bean->fetch($id) !== false;
+            if ($exists) {
+                return false;
+            }
+        }
+
+        $this->setupSavedReportDashlets($dashboardContents['metadata']);
+
+        $dashboardProperties = [
+            'name' => $dashboardContents['name'],
+            'dashboard_module' => $module,
+            'view_name' => $module !== 'Home' ? $layout : null,
+            'metadata' => json_encode($dashboardContents['metadata']),
+            'default_dashboard' => true,
+            'team_id' => $this->globalTeamId,
+        ];
+
+        // set up preset ID if necessary
+        if (isset($dashboardContents['id'])) {
+            $dashboardProperties['id'] = $id;
+            $dashboardProperties['new_with_id'] = true;
+        }
+
+        $dashboardBean = $this->getNewDashboardBean();
+        $this->storeDashboard($dashboardBean, $dashboardProperties);
+        return true;
+    }
+
+    /**
+     * Translate a saved Report title.
+     *
+     * @param string $title The translatable label for the Report title.
+     * @return string The Report title, translated into the current language.
+     */
     protected function translateSavedReportTitle($title)
     {
         return translate($title, 'Reports');
@@ -69,6 +106,13 @@ class DefaultDashboardInstaller
      */
     public function setupSavedReportDashlets(&$metadata)
     {
+        // recursively handle tabbed dashboards
+        if (!empty($metadata['tabs'])) {
+            foreach ($metadata['tabs'] as $index => $tab) {
+                $this->setupSavedReportDashlets($metadata['tabs'][$index]);
+            }
+        }
+
         if (!empty($metadata['components'])) {
             for ($i = 0; $i < count($metadata['components']); $i++) {
                 if (!empty($metadata['components'][$i]['rows'])) {
@@ -76,7 +120,8 @@ class DefaultDashboardInstaller
                         for ($k = 0; $k < count($metadata['components'][$i]['rows'][$j]); $k++) {
                             if (!empty($metadata['components'][$i]['rows'][$j][$k]['view'])) {
                                 $view = &$metadata['components'][$i]['rows'][$j][$k]['view'];
-                                if (!empty($view['type']) && $view['type'] == 'saved-reports-chart' && empty($view['saved_report_id'])) {
+                                $isSavedReportsChart = !empty($view['type']) && $view['type'] == 'saved-reports-chart';
+                                if ($isSavedReportsChart && empty($view['saved_report_id'])) {
                                     if (!empty($view['saved_report_key'])) {
                                         $title = $this->translateSavedReportTitle($view['saved_report_key']);
                                         if (empty($view['label'])) {
@@ -94,6 +139,13 @@ class DefaultDashboardInstaller
                                         installLog("removed invalid report dashlet: " . print_r($metadata['components'][$i]['rows'][$j][$k], true));
                                         unset($metadata['components'][$i]['rows'][$j][$k]);
                                     }
+                                } elseif ($isSavedReportsChart &&
+                                    isset($view['saved_report_id']) &&
+                                    isset($view['label']) &&
+                                    empty($view['saved_report'])
+                                ) {
+                                    // we don't want to have to repeat the label twice
+                                    $view['saved_report'] = $this->translateSavedReportTitle($view['label']);
                                 }
                             }
                         }

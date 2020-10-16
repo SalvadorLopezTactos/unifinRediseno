@@ -16,8 +16,6 @@
  * Feed requests on the server to prevent cross site or domain origin issues on 
  * the client.
  * 
- * Much of this code is borrowed from the getRSSFeed() method in 
- * modules/Home/Dashlets/RSSDashlet/RSSDashlet.php
  */
 class RSSFeedApi extends SugarApi
 {

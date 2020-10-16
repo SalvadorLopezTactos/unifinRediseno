@@ -27,9 +27,15 @@ $mod_strings = array (
   'LBL_RESOLUTION' => 'Riešenie',
   'LBL_LAST_MODIFIED' => 'Naposledy zmenené',
   'LBL_ASSIGNED_TO_ID'=>'Priradené k:',
-  'LBL_ASSIGNED_TO_NAME' => 'Používateľ:',  	  
+  'LBL_ASSIGNED_TO_NAME' => 'Používateľ:',
   'LBL_WORK_LOG' => 'Denník práce:',
+    'LBL_FOLLOW_UP' => 'Ďalšie sledovanie',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
+    'LBL_RESOLVED_DATETIME' => 'Dátum vyriešenia',
+    'LBL_HOURS_TO_RESOLUTION' => 'Hodiny na vyriešenie',
+    'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Hodiny v pracovnej dobe do vyriešenia',
+    'LBL_PENDING_PROCESSING' => 'Čaká sa na spracovanie',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Vytvoril:',
   'LBL_DATE_CREATED' => 'Dátum vytvorenia:',
   'LBL_DATE_ENTERED' => 'Dátum vytvorenia:',
@@ -44,5 +50,5 @@ $mod_strings = array (
     'LBL_EDIT_BUTTON' => 'Upraviť',
     'LBL_REMOVE' => 'Odstrániť',
 
-  
+
   );

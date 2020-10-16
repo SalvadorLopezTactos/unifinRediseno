@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 use Sugarcrm\Sugarcrm\ProcessManager\Registry;
@@ -1086,8 +1086,7 @@ class Importer
         foreach ($beanList as $moduleName => $beanName)
         {
             $tmp = BeanFactory::newBean($moduleName);
-            if( !empty($tmp->importable))
-            {
+            if (!empty($tmp->importable) && AccessControlManager::instance()->allowModuleAccess($moduleName)) {
                 $label = isset($GLOBALS['app_list_strings']['moduleList'][$moduleName]) ? $GLOBALS['app_list_strings']['moduleList'][$moduleName] : $moduleName;
                 $importableModules[$moduleName] = $label;
             }
@@ -1307,6 +1306,9 @@ class Importer
             $address['reply_to_address'],
             $address['invalid_email'],
             $address['opt_out'],
+            // `email_id` should be `null` unless the intent is to mutate the `email_address`, as this allows the email
+            // address to be changed. For example, changing `salez@sugarcrm.com` to `sales@sugarcrm.com` for all records
+            // linked to `salez@sugarcrm.com`. This is not the typical desire.
             $address['email_id']
         );
 

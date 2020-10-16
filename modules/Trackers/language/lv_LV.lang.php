@@ -18,17 +18,7 @@
  ********************************************************************************/
 
 $mod_strings = array (
-		  //Labels for methods in the TrackerReporter.php file that are shown in TrackerDashlet
-		  'ShowActiveUsers'      => 'Rādīt aktīvos lietotājus',
-		  'ShowLastModifiedRecords' => '10 pēdējie modificētie ieraksti',
-		  'ShowTopUser' => 'Top lietotāji',
-		  'ShowMyModuleUsage' => 'Mana moduļu izmantošana',
-		  'ShowMyWeeklyActivities' => 'Manas iknedēļas darbības',
-		  'ShowTop3ModulesUsed' => 'Mani 3 top moduļi',
-		  'ShowLoggedInUserCount' => 'Aktīvo lietotāju skaits',
-		  'ShowMyCumulativeLoggedInTime' => 'Mans kopējais pieslēgšanās laiks (Šonedēļ)',
-		  'ShowUsersCumulativeLoggedInTime' => 'Lietotāju kopējais pieslēgšanās laiks (Šonedēļ)',
-		  
+
 		  //Column header mapping
 		  'action' => 'Darbība',
 		  'active_users' => 'Aktīvo lietotāju skaits',

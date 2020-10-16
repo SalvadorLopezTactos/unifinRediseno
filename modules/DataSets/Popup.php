@@ -113,7 +113,7 @@ if ($reqForm == 'AddDataSetEditView')
 $form->assign("SET_RETURN_JS", $the_javascript);
 
 $form->assign("MODULE_NAME", $currentModule);
-$form->assign("FORM", $reqForm);
+$form->assign("FORM", htmlspecialchars($reqForm, ENT_QUOTES, 'UTF-8'));
 
 insert_popup_header($theme);
 
@@ -122,14 +122,12 @@ echo get_form_header($mod_strings['LBL_SEARCH_FORM_TITLE'], "", false);
 
 if ($description !== null)
 {
-	$last_search['DESCRIPTION'] = $description;
-
+    $last_search['DESCRIPTION'] = htmlspecialchars($description, ENT_QUOTES, 'UTF-8');
 }
 
 if ($name !== null)
 {
-	$last_search['NAME'] = $name;
-
+    $last_search['NAME'] = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
 }
 
 if (isset($last_search))
@@ -159,23 +157,23 @@ if ($reqForm  == 'AddDataSetEditView') {
 
 }
 
-
+$db = $GLOBALS['db'];
 
 if ($reqForm == 'EditView') {
 
 	if (empty($selfId)) $selfId = '';
 	//Don't allow picking of parents that are itself
-	if(!empty($where)) {
-		$where .= "AND data_sets.id!='". $selfId ."' AND data_sets.deleted=0 ";
-	} else {
-		$where = "data_sets.id!='". $selfId ."' AND data_sets.deleted=0 ";
-	}
-	
-	if(!empty($selfId)) {
-		$special_where_part = "WHERE id!='". $selfId ."' AND data_sets.deleted=0";
-	} else {
-		$special_where_part = "WHERE data_sets.deleted=0";
-	}
+    if (!empty($where)) {
+        $where .= 'AND data_sets.id !=' . $db->quoted($selfId) . ' AND data_sets.deleted=0 ';
+    } else {
+        $where = 'data_sets.id !=' . $db->quoted($selfId) . ' AND data_sets.deleted=0 ';
+    }
+
+    if (!empty($selfId)) {
+        $special_where_part = 'WHERE id !=' . $db->quoted($selfId) . ' AND data_sets.deleted=0';
+    } else {
+        $special_where_part = "WHERE data_sets.deleted=0";
+    }
 	//Don't allow picking of parents that already have children
 	if(!empty($where)){
 		$where .= " AND data_sets.id NOT IN

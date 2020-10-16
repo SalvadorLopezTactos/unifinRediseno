@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Voorvertoning',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'WAARSCHUWING: Als u de hoofd module aanpast, zullen alle reeds aangemaakte velden in het sjabloon moeten worden verwijderd.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Hier is het bestand dat u aangevraagd heeft (Deze tekst is aanpasbaar)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Offerte',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Dit Sjabloon wordt gebruikt om een Offerte te printen als PDF.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'Offerte',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Offerte (met diensten)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Dit sjabloon wordt gebruikt om een offerte af te drukken in PDF, met inbegrip van onderhoudsgegevens.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'offerte onderhoud',
+
   'LBL_TPL_INVOICE_NAME' => 'Factuur',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Dit Sjabloon wordt gebruikt om een Factuur te printen als PDF.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'Factuur',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Factuur (met diensten)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Dit sjabloon wordt gebruikt om een factuur af te drukken in PDF, met inbegrip van onderhoudsgegevens.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'onderhoudsfactuur',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Offerte nummer',
   'LBL_TPL_SALES_PERSON' => 'Verkoopmedewerker:',
   'LBL_TPL_VALID_UNTIL' => 'Geldig tot:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Artikelnummer:',
   'LBL_TPL_PRODUCT' => 'Product:',
   'LBL_TPL_RLI' => 'Opportunityregels',
+  'LBL_TPL_DURATION' => 'Duur',
+  'LBL_TPL_DURATION_STARTS' => 'Start:',
+  'LBL_TPL_DURATION_ENDS' => 'Einde:',
   'LBL_TPL_LIST_PRICE' => 'Bruto verkoopprijs:',
   'LBL_TPL_UNIT_PRICE' => 'Eenheidsprijs:',
   'LBL_TPL_EXT_PRICE' => 'Ext. Prijs',

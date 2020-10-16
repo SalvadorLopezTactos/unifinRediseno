@@ -51,6 +51,8 @@ class Note extends SugarBean
     var $object_name = "Note";
     var $importable = true;
 
+    public $entry_source = 'internal';
+
     // This is used to retrieve related fields from form posts.
     var $additional_column_fields = array(
         'contact_name',
@@ -70,6 +72,30 @@ class Note extends SugarBean
     {
         if (empty($this->email_id)) {
             parent::send_assignment_notifications($notify_user, $admin);
+        }
+    }
+
+    /**
+     * Populate the contact id field for new record if it's empty
+     */
+    protected function setContactId()
+    {
+        // supported parent module/field pair
+        $supportedModules = [
+            'Cases' => 'primary_contact_id',
+        ];
+
+        // If we are creating a new Note and the parent module is supported
+        // and contact_id is not already set, then set contact_id
+        if (!$this->isUpdate()
+            && empty($this->contact_id)
+            && !empty($this->parent_type)
+            && !empty($supportedModules[$this->parent_type])
+            && !empty($this->parent_id)) {
+            $parentBean = BeanFactory::retrieveBean($this->parent_type, $this->parent_id);
+            if (!empty($parentBean->{$supportedModules[$this->parent_type]})) {
+                $this->contact_id = $parentBean->{$supportedModules[$this->parent_type]};
+            }
         }
     }
 
@@ -99,6 +125,7 @@ class Note extends SugarBean
             $this->file_size = filesize($filePath);
         }
 
+        $this->setContactId();
         return parent::save($check_notify);
     }
 
@@ -298,5 +325,47 @@ class Note extends SugarBean
     public function getUploadId()
     {
         return !empty($this->upload_id) ? $this->upload_id : $this->id;
+    }
+
+    /**
+     * Provides the dropdown list elements needed for the `entry_source`. This is
+     * a system status so it should not be editable in the dropdownlist editor,
+     * thus it is wrapped in a function. However, the values should be localizable
+     * hence the use of labels.
+     * @return array
+     */
+    public function getSourceTypes()
+    {
+        return [
+            'external' => translate('LBL_SOURCE_EXTERNAL', 'Notes'),
+            'internal' => translate('LBL_SOURCE_INTERNAL', 'Notes'),
+        ];
+    }
+
+    /**
+     * Verifies if this note has an attachment
+     * @return bool
+     */
+    public function hasAttachment() : bool
+    {
+        return !empty($this->filename) && !empty($this->id) && file_exists('upload://' . $this->id);
+    }
+
+    /**
+     * Gets this note's attachment information
+     * @return array
+     */
+    public function getAttachment() : array
+    {
+        if ($this->hasAttachment()) {
+            $mimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), 'upload://' . $this->id);
+            return [
+                'id' => $this->id,
+                'filename' => $this->filename,
+                'name' => $this->filename,
+                'isImage' => strpos($mimeType, 'image') !== false,
+            ];
+        }
+        return [];
     }
 }

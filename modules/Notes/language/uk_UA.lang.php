@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Дата змінення',
     'LBL_DELETED' => 'Видалено',
     'LBL_REVENUELINEITEMS' => 'Доходи за продукти',
+    'LBL_ENTRY_SOURCE' => 'Джерело примітки',
+    'LBL_SOURCE_EXTERNAL' => 'Зовнішнє',
+    'LBL_SOURCE_INTERNAL' => 'Внутрішнє',
 
     // Help Text
     // List View Help Text

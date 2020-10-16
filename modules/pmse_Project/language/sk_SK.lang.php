@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'Stav',
   'LBL_PRJ_MODULE' => 'Cieľový modul',
+  'LBL_PRJ_RUN_ORDER' => 'Poradie spustenia',
   'LBL_PMSE_BUTTON_SAVE' => 'Uložiť',
   'LBL_PMSE_BUTTON_CANCEL' => 'Zrušiť',
   'LBL_PMSE_BUTTON_YES' => 'Áno',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Definícia procesu bola importovaná, ale obsahuje jednu alebo viacero akcií obchodného pravidla, pre ktoré neboli vybraté obchodné pravidlá.',
     'LBL_BPM_IMPORT_SELECT' => 'Táto definícia procesu obsahuje nasledujúce obchodné pravidlá a e-mailové šablóny. '
         . 'Vyberte tie, ktoré chcete importovať.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'Obchodné pravidlá',
     'LBL_EMAIL_TEMPLATES' => 'E-mailové šablóny',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'Inšpektor',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Vytvorené používateľom',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Naposledy upravené používateľom',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'E-mail systému',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Obchodné pravidlo',
     'LBL_PMSE_LABEL_RULE' => 'Pravidlo',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Priradiť používateľa',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Aktualizovať položku "Priradené k" v zázname',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Pridať súvisiaci záznam',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Súvisiaci modul',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Názov aktivity je prázdny.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Názov "%s" už existuje v tvare rodiny.',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'dni',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'hodiny',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'minúty',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'pracovná doba',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'Obchodné centrum',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'Z cieľového modulu',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'Od ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' Modul',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'Reťazec, číslo a logická hodnota',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'Číslo',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'Hodnota',

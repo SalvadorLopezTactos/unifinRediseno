@@ -363,6 +363,8 @@ $mod_strings = array(
 'LBL_LAYOUTS'=>'Izkārtojumi',
 'LBL_LISTVIEW'=>'Saraksta skatījums',
 'LBL_RECORDVIEW'=>'Ieraksta skats',
+'LBL_RECORDDASHLETVIEW'=>'Ieraksta skata dašlets',
+'LBL_PREVIEWVIEW'=>'Preview View',
 'LBL_MODULE_TITLE' => 'Studio',
 'LBL_NEW_PACKAGE' => 'Jauna pakotne',
 'LBL_NEW_PANEL'=>'Jauns panelis',
@@ -445,7 +447,8 @@ $mod_strings = array(
 'LBL_VISIBILITY_EDITOR' => 'Redzamības redaktors',
 'LBL_ROLLUP' => 'Apkopojums',
 'LBL_RELATED_FIELD' => 'Saistītais lauks',
-'LBL_CONFIG_PORTAL_URL'=>'URL uz pielāgoto logotipa attēlu. Ieteicamās logotipa dimensijas ir 163 × 18 pikseļi.',
+'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'URL uz pielāgoto firmas zīmes attēlu. Firmas zīmes ieteicamie izmēri ir 22 x 22 pikseļi. Augšupielādētie attēli, kuru izmērs jebkurā virzienā būs lielāks, tiks mērogoti līdz šiem maksimālajiem izmēriem.',
+'LBL_CONFIG_PORTAL_LOGO_URL'=> 'URL uz pielāgoto logotipa attēlu. Logotipa ieteicamais platums ir 200 pikseļi. Augšupielādētie attēli, kuru izmērs jebkurā virzienā būs lielāks, tiks mērogoti līdz šiem maksimālajiem izmēriem. Šis logotips tiks izmantots pieteikšanās ekrānā. Ja attēls netiks augšupielādēts, tad tiks izmantota firmas zīme.',
 'LBL_PORTAL_ROLE_DESC' => 'Nedzēsiet šo lomu. Customer Self-Service Portal Role ir sistēmas ģenerēta loma, kas ir izveidota Sugar Portal aktivēšanas laikā. Izmantojot lietotāja pieejas kontroles uzstādījumus šajā lomā lai aktivētu un/vai deaktivētu Kļūdu, Pieteikumu, Zināšanas bāzes moduļus Sugar Portālā. Nemainiet citas pieejas kontroles tiesības šajā lomā lai izvairītos no neparedzamas sistēmas uzvedības. Ja loma netīšām ir izdzēsta atjaunojiet to deaktivējot un atkal aktivējot Sugar Portālu.',
 
 //RELATIONSHIPS
@@ -586,15 +589,31 @@ $mod_strings = array(
     'LBL_PORTAL_DISABLED_MODULES' => 'Sekojoši moduļi ir atspējoti:',
     'LBL_PORTAL_ENABLE_MODULES' => 'Ja vēlaties tos aktivēt portālā, tad aktivējiet tos  <a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">šeit</a>.',
     'LBL_PORTAL_CONFIGURE' => 'Konfigurēt portālu',
+    'LBL_PORTAL_ENABLE_PORTAL' => 'Aktivizēt portālu',
+    'LBL_PORTAL_ENABLE_SEARCH' => 'Aktivizēt meklēšanu pirms pieteikuma atvēršanas',
     'LBL_PORTAL_THEME' => 'Portāla tēma',
     'LBL_PORTAL_ENABLE' => 'Aktivēt',
     'LBL_PORTAL_SITE_URL' => 'Jūsu portāla vietne ir pieejama:',
     'LBL_PORTAL_APP_NAME' => 'Aplikācijas nosaukums',
+    'LBL_PORTAL_LOGOMARK_URL' => 'Firmas zīmes URL',
+    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Firmas zīmes priekšskatījums',
     'LBL_PORTAL_LOGO_URL' => 'Logotipa URL',
+    'LBL_PORTAL_LOGO_PREVIEW' => 'Logotipa priekšskatījums',
+    'LBL_PORTAL_CONTACT_PHONE' => 'Tālrunis',
+    'LBL_PORTAL_CONTACT_EMAIL' => 'E-pasts',
+    'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Ir jāievada derīga e-pasta adrese',
+    'LBL_PORTAL_CONTACT_URL' => 'URL',
+    'LBL_PORTAL_CONTACT_INFO_ERROR' => 'Ir jānorāda vismaz viena saziņas metode',
     'LBL_PORTAL_LIST_NUMBER' => 'Sarakstā rādāmo ierakstu skaits',
     'LBL_PORTAL_DETAIL_NUMBER' => 'Detalizētā skatā rādāmo lauku skaits',
     'LBL_PORTAL_SEARCH_RESULT_NUMBER' => 'Globālās meklēšanas rezultātos rādāmo ierakstu skaits',
     'LBL_PORTAL_DEFAULT_ASSIGN_USER' => 'Pēc noklusējuma piešķirts jaunām portāla reģistrācijām',
+    'LBL_PORTAL_MODULES' => 'Portāla moduļi',
+    'LBL_CONFIG_PORTAL_CONTACT_INFO' => 'Portāla kontaktinformācija',
+    'LBL_CONFIG_PORTAL_CONTACT_INFO_HELP' => 'Konfigurējiet kontaktinformāciju, kas tiks parādīta Portāla lietotājiem, kuriem ir nepieciešama papildu palīdzība ar viņu uzņēmumu. Ir jākonfigurē vismaz viena opcija.',
+    'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Pavelciet un nometiet Portāla moduļu nosaukumus, lai iestatītu tos kā parādītus vai slēptus Portāla augšējā navigācijas joslā. Lai kontrolētu Portāla lietotāja piekļuvi moduļiem, izmantojiet <a href="?module=ACLRoles&action=index">Lomu pārvaldība.</a>',
+    'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Parādītie moduļi',
+    'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Slēptie moduļi',
 
 'LBL_PORTAL'=>'Portāls',
 'LBL_PORTAL_LAYOUTS'=>'Portāla izkārtojumi',
@@ -757,7 +776,7 @@ $mod_strings = array(
    . "Darbplūsmas definīcijas, kas satur darbību un ir iestatītas, lai atjauninātu šo lauku, vairs nepildīs šo darbību.<br>"
    . "Lauki, kuros izmantotas formulas, netiks aprēķināti reāllaikā "
    . "Sugar pašapkalpošanās portālā vai "
-   . "Mobilās rediģēšanas sjatījuma izkārtojumos.",
+   . "Mobilās rediģēšanas skatījuma izkārtojumos.",
 
 'LBL_POPHELP_DEPENDENT'=>"Izveidojiet formulu, lai noteiktu, vai šis lauks ir redzams izkārtojumos.<br/>"
         . "Atkarīgiem laukiem uz pārlūku balstītā mobilajā skatā tiks piemērota atkarības formula, <br/>"

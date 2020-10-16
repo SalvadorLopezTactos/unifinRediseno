@@ -58,10 +58,12 @@ $sugar_smarty->assign('ACTION_NAMES', $names);
 
 $return= array('module'=>'ACLRoles', 'action'=>'DetailView', 'record'=>$role->id);
 $sugar_smarty->assign('RETURN', $return);
-$params = array();
-$params[] = "<a href='index.php?module=ACLRoles&action=index'>{$mod_strings['LBL_MODULE_NAME']}</a>";
-$params[] = $role->get_summary_text();
-echo getClassicModuleTitle("ACLRoles", $params, true);
+
+echo getClassicModuleTitle("ACLRoles", [
+    sprintf('<a href="index.php?module=ACLRoles&action=index">%s</a>', htmlspecialchars($mod_strings['LBL_MODULE_NAME'])),
+    htmlspecialchars($role->get_summary_text()),
+], true);
+
 $hide_hide_supanels = true;
 
 echo $sugar_smarty->fetch('modules/ACLRoles/DetailView.tpl');
@@ -72,7 +74,3 @@ $_REQUEST['module'] = 'ACLRoles';
 $subpanel = new SubPanelTiles($role, 'ACLRoles');
 
 echo $subpanel->display();
-
-
-
-?>

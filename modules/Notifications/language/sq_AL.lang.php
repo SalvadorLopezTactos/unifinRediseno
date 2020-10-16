@@ -50,4 +50,6 @@ $mod_strings = array(
     'LBL_PARENT_ID' => 'ID mëmë',
     'LBL_READ' => 'Lexo',
     'LBL_UNREAD' => 'E palexuar',
+    'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'Je përmendur nga',
+    'LBL_YOU_HAVE_BEEN_MENTIONED' => 'Je përmendur',
 );

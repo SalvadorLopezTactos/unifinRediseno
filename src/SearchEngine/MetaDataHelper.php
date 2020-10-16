@@ -124,7 +124,8 @@ class MetaDataHelper
         }
 
         $list = array();
-        $modules = $this->mdm->getModuleList();
+        // get all modules
+        $modules = $this->mdm->getModuleList(false);
         foreach ($modules as $module) {
             $vardefs = $this->getModuleVardefs($module);
             if (!empty($vardefs['full_text_search'])) {

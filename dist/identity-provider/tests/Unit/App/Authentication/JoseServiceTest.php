@@ -104,7 +104,7 @@ class JoseServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateJWT()
     {
-        $srn = 'srn:cluster:idp:us:0000000001:user:d7af25a6-3ac4-4852-807f-47547606c519';
+        $srn = 'srn:cluster:idp:us:1000000001:user:d7af25a6-3ac4-4852-807f-47547606c519';
         $jwtString = IDMFixturesHelper::getValidJWT();
         $this->userToken->method('hasAttribute')->with('srn')->willReturn(true);
         $this->userToken->method('getAttribute')->willReturnMap([

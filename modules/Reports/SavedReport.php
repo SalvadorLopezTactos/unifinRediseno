@@ -77,7 +77,8 @@ class SavedReport extends Basic
         $team_id,
         $chart_type = 'none',
         $teamSetSelectedId = null,
-        $description = ''
+        $description = '',
+        $default_guid_id = null
     ) {
 		global $json;
 		global $current_user;
@@ -117,7 +118,15 @@ class SavedReport extends Basic
 		$this->is_published = $is_published;
 		$this->chart_type = $chart_type;
         $this->acl_team_set_id = $teamSetSelectedId;
-        $this->description = $description;
+        if ($description) {
+            $this->description = $description;
+        }
+        // As of 9.1, some stock reports provide their own static
+        // GUID. This handles those stock reports.
+        if ($default_guid_id) {
+            $this->new_with_id = true;
+            $this->id = $default_guid_id;
+        }
 
 		$this->save();
 		return $result;

@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Комерційні пропозиції (Фактична адреса)',
 	'LNK_ACCOUNT_REPORTS' => 'Переглянути звіти по контрагентах',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Документи',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Інформаційна панель списку контрагентів',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Інформаційна панель записів контрагентів',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Відомості про контрагента',
+    'LBL_NEXT_RENEWAL_DATE' => 'Дата наступного поновлення',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Ім&#39;я/галузь контрагента',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'Розташування',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Графіки',

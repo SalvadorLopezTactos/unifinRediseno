@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'Kontakt:',
     'LBL_DISCOUNT_TOTAL' => 'Lirimi total',
     'LBL_DISCOUNT_AMOUNT' => 'Vlera e zbritur',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'Vlera e sasisë së zbritur',
     'LBL_EXT_PRICE' => 'Çmimi i pritur',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Emri i simbloit të monedhës',

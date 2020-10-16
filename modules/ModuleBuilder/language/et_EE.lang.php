@@ -117,12 +117,12 @@ $mod_strings = array(
         'defaultdetailview'=>'Ala <b>Paigutus</b> sisaldab välju, mida kuvatakse praegu <b>Detailvaates</b>.<br/><br/><b>Tööriistakast</b> sisaldab suvandit <b>Prügikast</b> ning välju ja paigutuselemente, mida saab paigutusse lisada.<br><br>Muutke paigutust, pukseerides elemente ja välju suvandite <b>Tööriistakast</b> ja <b>Paigutus</b> vahel ning paigutuses endas.<br><br>Välja eemaldamiseks paigutusest lohistage väli kohta <b>Prügikast</b>. Väli on seejärel suvandis Tööriistakast paigutusse lisamiseks saadaval.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Viitab väljale Sõltuv, mis valemi väärtusest olenevalt võib olla nähtav või mitte.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Viitab väljale Arvutatud, mille väärtus arvutatakse valemi põhjal automaatselt.'
     ,
-        'defaultquickcreate'=>'Ala <b>Paigutus</b> sisaldab välju, mida kuvatakse praegu vormil <b>Kiirgeneraator</b>.<br><br>Vorm Kiirgeneraator kuvatakse mooduli alampaneelidel, kui klõpsate nuppu Loo.<br/><br/><b>Tööriistakast</b> sisaldab suvandit <b>Prügikast</b> ning välju ja paigutuselemente, mida saab paigutusse lisada.<br><br>Muutke paigutust, pukseerides elemente ja välju suvandite <b>Tööriistakast</b> ja <b>Paigutus</b> vahel ning paigutuses endas.<br><br>Välja eemaldamiseks paigutusest lohistage väli kohta <b>Prügikast</b>. Väli on seejärel suvandis Tööriistakast paigutusse lisamiseks saadaval.'
-    . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Viitab sõltuvale väljale, mis valemi väärtusest olenevalt võib olla nähtav või mitte.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Viitab arvutuslikule väljale, mille väärtus arvutatakse valemi põhjal automaatselt.'
+        'defaultquickcreate'=>'Ala <b>Paigutus</b> sisaldab välju, mida kuvatakse praegu vormis <b>Kiirgeneraator</b>.<br><br>Kiirgeneraatori vorm kuvatakse mooduli alampaneelidel nupu Loo klõpsamisel.<br/><br/><b>Tööriistakast</b> sisaldab suvandit <b>Prügikast</b> ning välju ja paigutuselemente, mida saab paigutusse lisada.<br><br>Muutke paigutust, pukseerides elemente ja välju suvandite <b>Tööriistakast</b> ja <b>Paigutus</b> vahel ning paigutuses endas.<br><br>Välja eemaldamiseks paigutusest lohistage väli kohta <b>Prügikast</b>. Väli on seejärel suvandis Tööriistakast paigutusse lisamiseks saadaval.'
+    . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Viitab väljale Sõltuv, mis valemi väärtusest olenevalt võib olla nähtav või mitte.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Viitab väljale Arvutatud, mille väärtus arvutatakse valemi põhjal automaatselt.'
     ,
         //this defualt will be used for edit view
         'default'	=> 'Ala <b>Paigutus</b> sisaldab välju, mida kuvatakse praegu <b>Redigeerimisvaates</b>.<br/><br/><b>Tööriistakast</b> sisaldab suvandit <b>Prügikast</b> ning välju ja paigutuselemente, mida saab paigutusse lisada.<br><br>Muutke paigutust, pukseerides elemente ja välju suvandite <b>Tööriistakast</b> ja <b>Paigutus</b> vahel ning paigutuses endas.<br><br>Välja eemaldamiseks paigutusest lohistage väli kohta <b>Prügikast</b>. Väli on seejärel suvandis Tööriistakast paigutusse lisamiseks saadaval.'
-    . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Viitab sõltuvale väljale, mis valemi väärtusest olenevalt võib olla nähtav või mitte.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Viitab arvutuslikule väljale, mille väärtus arvutatakse valemi põhjal automaatselt.'
+    . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Viitab väljale Sõltuv, mis valemi väärtusest olenevalt võib olla nähtav või mitte.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Viitab väljale Arvutatud, mille väärtus arvutatakse valemi põhjal automaatselt.'
     ,
         //this defualt will be used for edit view
         'defaultrecordview'   => 'Ala <b>Paigutus</b> sisaldab välju, mida kuvatakse praegu <b>Kirje vaates</b>.<br/><br/><b>Tööriistakast</b> sisaldab suvandit <b>Prügikast</b> ning välju ja paigutuselemente, mida saab paigutusse lisada.<br><br>Muutke paigutust, pukseerides elemente ja välju suvandite <b>Tööriistakast</b> ja <b>Paigutus</b> vahel ning paigutuses endas.<br><br>Välja eemaldamiseks paigutusest lohistage väli kohta <b>Prügikast</b>. Väli on seejärel suvandis Tööriistakast paigutusse lisamiseks saadaval.'
@@ -373,6 +373,8 @@ Müügivõimaluste kaasamisel peavad Kontod olema kas kohustuslikud või tuleb n
 'LBL_LAYOUTS'=>'Paigutused',
 'LBL_LISTVIEW'=>'Loendivaade',
 'LBL_RECORDVIEW'=>'Kirjevaade',
+'LBL_RECORDDASHLETVIEW'=>'Kirjevaate dashlet',
+'LBL_PREVIEWVIEW'=>'Preview View',
 'LBL_MODULE_TITLE' => 'Studio',
 'LBL_NEW_PACKAGE' => 'Uus pakett',
 'LBL_NEW_PANEL'=>'Uus paneel',
@@ -455,7 +457,8 @@ Müügivõimaluste kaasamisel peavad Kontod olema kas kohustuslikud või tuleb n
 'LBL_VISIBILITY_EDITOR' => 'Nähtavuse redaktor',
 'LBL_ROLLUP' => 'Kerimine',
 'LBL_RELATED_FIELD' => 'Seotud väli',
-'LBL_CONFIG_PORTAL_URL'=>'URL logo pildi kohandamiseks. Logo soovitatavad mõõtmed on 163 Ã 18 pikslit.',
+'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'URL kohandatud logomärgi pildi jaoks. Soovitatud logomärgi mõõtmed on 22 × 22 pikslit. Mis tahes suunas suurem üleslaaditud pilt mastaabitakse neile maksimummõõtudele.',
+'LBL_CONFIG_PORTAL_LOGO_URL'=> 'URL kohandatud logo pildi jaoks. Soovitatud logo laius on 200 pikslit. Mis tahes suunas suurem üleslaaditud pilt mastaabitakse neile maksimummõõtudele. Seda logo kasutatakse sisselogimiskuval. Kui üles ei laadita ühtegi pilti, siis kasutatakse logomärki.',
 'LBL_PORTAL_ROLE_DESC' => 'Ärge kustutage seda rolli. Klientide iseteenindusportaali roll on Sugari portaali aktiveerimisprotsessi käigus süsteemi loodud roll. Kasutage selles rollis olevaid juurdepääsukontrolle, et lubada ja/või keelata Sugari portaali moodulid Vead, Juhtumid või Teadmusbaas. Süsteemi tundmatu ja ettearvamatu käitumise vältimiseks ärge muutke selle rolli puhul muid juurdepääsukontrolle. Selle rolli juhusliku kustutamise korral taastage see, keelates ja lubades Sugari portaali.',
 
 //RELATIONSHIPS
@@ -596,15 +599,31 @@ Müügivõimaluste kaasamisel peavad Kontod olema kas kohustuslikud või tuleb n
     'LBL_PORTAL_DISABLED_MODULES' => 'Keelatud on järgmised moodulid:',
     'LBL_PORTAL_ENABLE_MODULES' => 'Kui soovite neid portaalis lubada, tehke seda <a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">siin</a>.',
     'LBL_PORTAL_CONFIGURE' => 'Konfigureeri portaal',
+    'LBL_PORTAL_ENABLE_PORTAL' => 'Luba portaal',
+    'LBL_PORTAL_ENABLE_SEARCH' => 'Luba otsing enne juhtumi avamist',
     'LBL_PORTAL_THEME' => 'Teema portaal',
     'LBL_PORTAL_ENABLE' => 'Luba',
     'LBL_PORTAL_SITE_URL' => 'Teie portaali sait on saadaval aadressil:',
     'LBL_PORTAL_APP_NAME' => 'Rakenduse nimi',
+    'LBL_PORTAL_LOGOMARK_URL' => 'Logomärgi URL',
+    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Logomärgi eelvaade',
     'LBL_PORTAL_LOGO_URL' => 'Logo URL',
+    'LBL_PORTAL_LOGO_PREVIEW' => 'Logo eelvaade',
+    'LBL_PORTAL_CONTACT_PHONE' => 'Telefon',
+    'LBL_PORTAL_CONTACT_EMAIL' => 'E-post',
+    'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Sisestada tuleb kehtiv meiliaadress',
+    'LBL_PORTAL_CONTACT_URL' => 'URL',
+    'LBL_PORTAL_CONTACT_INFO_ERROR' => 'Lisada tuleb vähemalt üks ühenduse võtmise viis',
     'LBL_PORTAL_LIST_NUMBER' => 'Loendis kuvatavate kirjete arv',
     'LBL_PORTAL_DETAIL_NUMBER' => 'Detailvaates kuvatavate väljade arv',
     'LBL_PORTAL_SEARCH_RESULT_NUMBER' => 'Globaalses otsingus kuvatavate tulemuste arv',
     'LBL_PORTAL_DEFAULT_ASSIGN_USER' => 'Uute portaali registreerimiste puhul määratud vaikeväärtus',
+    'LBL_PORTAL_MODULES' => 'Portaali moodulid',
+    'LBL_CONFIG_PORTAL_CONTACT_INFO' => 'Portaali kontaktandmed',
+    'LBL_CONFIG_PORTAL_CONTACT_INFO_HELP' => 'Konfigureerige kontaktandmeid, mida esitatakse portaali kasutajatele, kes vajavad oma kontoga täiendavat abi. Konfigureerida tuleb vähemalt üks suvand.',
+    'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Pukseerige allolevaid moodulite nimesid nende ülemisel navigeerimisribal kuvamise või peitmise seadistamiseks. Postaali kasutajate moodulitele juurdepääsu juhtimiseks kasutage <a href="?module=ACLRoles&action=index">Rollihaldust.</a>',
+    'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Kuvatavad moodulid',
+    'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Peidetud moodulid',
 
 'LBL_PORTAL'=>'Portaal',
 'LBL_PORTAL_LAYOUTS'=>'Portaali paigutused',
@@ -746,7 +765,7 @@ Müügivõimaluste kaasamisel peavad Kontod olema kas kohustuslikud või tuleb n
         . ' Kui väli on kaasatud mis tahes väljade väärtuste arvutamise valemisse, siis see valem enam ei toimi.'
         . '\n\nVäli pole enam aruannetes kasutamiseks saadaval; see muudatus hakkab kehtima pärast rakendusest välja ja uuesti sisse logimist. Välja sisaldavaid aruandeid tuleb värskendada, et neid oleks võimalik käivitada.'
         . '\n\nKas soovite jätkata?',
-'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Kas olete kindel, et soovite selle seose kustutada?<br>Märkus. Selle toimingu täitmine võib võtta mitu minutit.',
+'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Kas olete kindel, et soovite selle seose kustutada?<br>Märkus. Toimingu tegemiseks võib kuluda mitu minutit.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'See muudab selle seose püsivaks. Kas olete kindel, et soovite selle seose juurutada?',
 'LBL_CONFIRM_DONT_SAVE' => 'Pärast teie viimati salvestamist on tehtud muudatusi, kas soovite need salvestada?',
 'LBL_CONFIRM_DONT_SAVE_TITLE' => 'Kas salvestada muudatused?',
@@ -763,17 +782,17 @@ Müügivõimaluste kaasamisel peavad Kontod olema kas kohustuslikud või tuleb n
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Lubatud</b>: väli kuvatakse funktsioonis Duplikaatide ühendamine, kuid pole kasutamiseks saadaval filtri tingimuste puhul funktsioonis Duplikaatide otsimine.<br><b>Keelatud</b>: välja ei kuvata funktsioonis Duplikaatide ühendamine ja see pole kasutamiseks saadaval filtri tingimuste puhul funktsioonis Duplikaatide otsimine.'
 . '<br><b>Filtris</b>: väli kuvatakse funktsioonis Duplikaatide ühendamine ja on saadaval ka funktsioonis Duplikaatide otsimine.<br><b>Ainult filter</b>: välja ei kuvata funktsioonis Duplikaatide ühendamine, kuid see on saadaval funktsioonis Duplikaatide otsimine.<br><b>Vaikimisi valitud filter</b>: välja kasutatakse vaikimisi filtri tingimuse puhul lehel Duplikaatide otsimine ja kuvatakse ka funktsioonis Duplikaatide ühendamine.'
 ,
-'LBL_POPHELP_CALCULATED'=>"Looge valem selle välja väärtuse määramiseks.<br>"
-   . "Töövoo definitsioonid, mis sisaldavad seda välja uuendama määratud toimingut, ei käivita enam seda toimingut.<br>"
-   . "Valemeid kasutavaid välju ei arvutata enam reaalajas "
+'LBL_POPHELP_CALCULATED'=>"Välja väärtuse määramiseks looge valem.<br>"
+   . "Töövoo määratlused, mis sisaldavad tegevust, mis on määratud seda välja värskendama, ei täida enam seda tegevust.<br>"
+   . "Välju, mis kasutavad valemeid, ei arvutata reaalajas üksuses "
    . "Sugari iseteenindusportaalis ega "
-   . "Mobiilse redigeerimisvaate paigutustes.",
+   . "mobiilse redigeerimisvaate paigutustes reaalajas.",
 
 'LBL_POPHELP_DEPENDENT'=>"Looge valem, et määrata, kas see väli on paigutustes nähtav.<br/>"
-        . "Sõltuvad väljad jälgivad brauseripõhises mobiilivaates sõltuvusvalemit,<br/>"
-        . "kuid ei jälgi valemit omarakendustes, nagu Sugar Mobile for iPhone.<br/>"
-        . "Need ei jälgi valemit Sugari iseteenindusportaalis.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Valige see väli, kui otsite sellest moodulist kirjeid globaalse otsinguga.',
+        . "Sõltuvad väljad järgivad brauseripõhises mobiilivaates sõltuvusvalemit, <br/>"
+        . "kuid ei järgi valemit kohalikes rakendustes, näiteks iPhone’ile mõeldud Sugar Mobile’is. <br/>"
+        . "Need ei järgi valemit ka Sugari iseteenindusportaalis.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Sellest moodulist globaalse otsingu abil kirjete otsimisel kasutage seda välja.',
 //Revert Module labels
 'LBL_RESET' => 'Lähtesta',
 'LBL_RESET_MODULE' => 'Lähtesta moodul',

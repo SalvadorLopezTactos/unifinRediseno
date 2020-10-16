@@ -96,9 +96,11 @@ class MetaDataManagerMobile extends MetaDataManager
             'Activities',
             'Forecasts',
             'Home',
+            'Tags',
             // add in Users [Bug59548] since it is forcefully removed for the
             // CurrentUserApi
             'Users',
+            'CommentLog',
         );
     }
 
@@ -127,14 +129,14 @@ class MetaDataManagerMobile extends MetaDataManager
         if (isset($modulesInfo['Employees'])) {
             $modulesInfo['Employees']['visible'] = $modulesInfo['Employees']['display_tab'];
         }
-         
+
         return $modulesInfo;
     }
 
     /**
      * Gets the list of mobile modules. Used by getModules and the CurrentUserApi
      * to get the module list for a user.
-     * 
+     *
      * @return array The list of modules for mobile
      */
     public function getTabList($filter = true)
@@ -214,10 +216,10 @@ class MetaDataManagerMobile extends MetaDataManager
 
     /**
      * Normalizes the metadata response for the platform.
-     * 
-     * Mobile needs to cleanse itself of some of the stuff that base metadata 
+     *
+     * Mobile needs to cleanse itself of some of the stuff that base metadata
      * needs that mobile doesn't. That is done here.
-     * 
+     *
      * @param array $data The metadata collection
      * @return array The normalize metadata collection for this platform
      */

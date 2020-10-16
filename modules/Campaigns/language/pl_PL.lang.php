@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Nie znaleziono domyślnych typów grup odbiorców',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nie znaleziono żadnych wpisów',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Wpisy zostały przetworzone',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Nazwa śledzenia:',
   'LBL_EDIT_TRACKER_URL'=>'URL śledzenia:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'Nie zapisano właściwych ustawień dla Twojego konta poczty przychodzącej.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Sprawdź ustawienia poczty przychodzącej.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} — liczba usuniętych namiarów, które zostały utworzone podczas tej kampanii od utworzenia.',
+    'LBL_PROSPECT_LIST' => 'Lista celów',
 );
 
 

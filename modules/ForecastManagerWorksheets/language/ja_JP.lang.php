@@ -27,7 +27,7 @@ $mod_strings = array (
     //var defs
     'LBL_TIMEPERIOD_NAME' => '期間',
     'LBL_USER_NAME' => 'ユーザ名',
-    'LBL_REPORTS_TO_USER_NAME' => '上司',
+    'LBL_REPORTS_TO_USER_NAME' => '報告先',
 
     //forecast table
     'LBL_FORECAST_ID' => '売上予測ID',
@@ -149,6 +149,6 @@ $mod_strings = array (
     'LBL_HISTORY_LOG' => '最終確定',
     'LBL_NO_COMMIT' => '以前のコミットはありません',
 
-    'LBL_MANGER_SAVED' => '保存されたマネージャー'
+    'LBL_MANGER_SAVED' => '保存されたマネージャ'
 
 );

@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => 'Fabrikanten',
   'LNK_NEW_PRODUCT_CATEGORY' => 'Productcategorieën',
   'LNK_NEW_PRODUCT_TYPE' => 'Producttypen',
-  'LNK_NEW_PRODUCT' => 'Maak Product aan',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => 'Vervoerders',
   'LNK_PRODUCT_LIST' => 'Productcatalogus',
   'NTC_DELETE_CONFIRMATION' => 'Weet u zeker dat u dit record wilt verwijderen?',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => 'Productcategorieën',
   'LBL_MANUFACTURERS' => 'Fabrikanten',
   'LBL_PRODUCT_TYPES' => 'Producttypes',
-
+  'LBL_RENEWABLE' => 'Verlengbaar',
+  'LBL_SERVICE' => 'Dienst',
 );
-
-
-?>

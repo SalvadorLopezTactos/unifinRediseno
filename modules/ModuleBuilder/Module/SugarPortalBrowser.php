@@ -63,7 +63,7 @@ class SugarPortalBrowser
         // rest of the validation
         if ($this->isStudioEnabled($module)) {
             // Create the path to search
-            $path = "modules/$module/clients/portal/views/";
+            $path = 'modules/' . $module . '/clients/portal/views/';
 
             // Handle it
             // Bug 55003 - Notes showing as a portal module because it has non
@@ -71,8 +71,8 @@ class SugarPortalBrowser
             $views = SugarPortalModule::getViewFiles();
             $viewFiles = array_keys($views);
             foreach ($viewFiles as $file) {
-                $fullPath = $path . basename($file, '.php') . '/' . $file;
-                if (file_exists($fullPath)) {
+                $view = basename($file, '.php') . '/' . $file;
+                if (SugarAutoLoader::existingCustomOne($path . $view)) {
                     return true;
                 }
             }

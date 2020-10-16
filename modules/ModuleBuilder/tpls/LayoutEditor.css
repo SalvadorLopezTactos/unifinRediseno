@@ -66,3 +66,50 @@ body > .le_panel .le_edit, #toolbox .le_panel .le_edit {
 	cursor:pointer;
 	float:right;
 }
+
+.portal-module-list-container {
+	width: 235px;
+	display: inline-block;
+	border: 1px solid rgb(128,128,128);
+	margin: 2px;
+	vertical-align: top;
+}
+
+.portal-module-list-container ul {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.portal-module-list-container ul li {
+	list-style: none;
+	border-style: none;
+	background-color: white;
+	padding: 4px;
+	margin: 1px;
+}
+
+.portal-module-list-header {
+	text-align: center;
+	padding: 2px;
+	background-color: rgb(238, 238, 238);
+	border-bottom: 1px solid rgb(203,203,203);
+}
+
+.portal-module-list-scrolldiv {
+	height: 150px;
+	overflow: scroll;
+}
+
+.portal-module-list-container .ui-sortable-helper {
+	border: 2px solid rgb(128,128,128);
+}
+
+.portal-contact-info {
+	display: inline-block;
+	border: 1px solid rgb(128,128,128);
+}
+
+.hidden-portal-field {
+	display: none;
+}

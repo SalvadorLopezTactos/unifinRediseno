@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'E-pošta: Kontakti',
     'LBL_EMAILS_LEADS_REL' => 'E-pošta: Pot. klij.',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'E-pošta: Prilike',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'E-pošta: Bilješke',
     'LBL_EMAILS_PROJECT_REL' => 'E-pošta: Projekt',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'E-pošta: Projektni zadatak',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'Od:',
     'LBL_REPLY_TO' => 'Odgovori:',
     'LBL_HTML_BODY' => 'HTML tijelo',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'Primatelji',
     'LBL_LEADS_SUBPANEL_TITLE' => 'Pot. klij.',
     'LBL_MESSAGE_SENT' => 'Poruka poslana',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'Odgovori na Id',
     'LBL_TYPE' => 'Vrsta:',
     'LBL_EMAIL_STATE' => 'Stanje',
+    'LBL_EMAIL_DIRECTION' => 'Smjer',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'Provjerite!',

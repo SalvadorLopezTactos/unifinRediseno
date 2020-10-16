@@ -15,6 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => '영업기회 목록 대시보드',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => '영업기회 기록 대시보드',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => '영업기회 세부 사항',
 
     'LBL_MODULE_NAME' => '영업기회',
     'LBL_MODULE_NAME_SINGULAR' => '영업기회',
@@ -25,6 +26,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => '영업기회명',
     'LBL_OPPORTUNITY' => '영업기회',
     'LBL_NAME' => '영업기회명',
+    'LBL_TIME' => '시간',
     'LBL_INVITEE' => '연락처',
     'LBL_CURRENCIES' => '통화목록',
     'LBL_LIST_OPPORTUNITY_NAME' => '이름',
@@ -75,6 +77,7 @@ $mod_strings = array(
     'LBL_TYPE' => '종류',
     'LBL_CAMPAIGN' => '캠페인',
     'LBL_NEXT_STEP' => '다음 단계',
+    'LBL_SERVICE_START_DATE' => 'Service Start Date',
     'LBL_LEAD_SOURCE' => '잠재고객 출처',
     'LBL_SALES_STAGE' => '영업단계',
     'LBL_SALES_STATUS' => '상태',
@@ -142,6 +145,16 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE_FORECAST' => '예상',
     'LBL_WORKSHEET' => '워크시트',
 
+    'LBL_RENEWAL' => '갱신',
+    'LBL_RENEWAL_OPPORTUNITIES' => '갱신 기회',
+    'LBL_RENEWAL_PARENT' => '상위 영업기회',
+    'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => '상위 ID 갱신',
+    'LBL_MONTH_YEAR_RENEWAL' => '{{year}}, {{month}}',
+
+    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
+    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
+    'LBL_WIDGET_AMOUNT' => 'Amount',
+
     'TPL_RLI_CREATE' => '영업기회는 반드시 매출 라인아이템과 관련되어야 합니다. 신규 매출 라인아이템 생성하기',
     'TPL_RLI_CREATE_LINK_TEXT' => '수입 품목을 만듭니다.',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => '견적 라인아이템',
@@ -152,6 +165,7 @@ $mod_strings = array(
     'NOTICE_NO_DELETE_CLOSED_RLIS' => '완료된 매출 라인아이템을 가지고 있는 영업기회는 삭제할수 없습니다.',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => '하나 또는 그 이상의 레코드가 완료된 매출 라인아이템을 포함하고 있으며 삭제될수 없습니다.',
     'LBL_INCLUDED_RLIS' => '포함된 수익 라인 항목 중 #',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => '견적 목록',
 
@@ -186,16 +200,16 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => '이 변화를 시작한 후에, 영업선 항목 기록이기존의 각  {{module_name}}을 위해 백그라운드에 생성됩니다. 영업선 항목이 완전하고 사용할 수있는 경우, 알림이 사용자 프로필의 이메일 주소로 전송됩니다. 알림이 전송되도록하려면 관리자>이메일 설정을 통해  이메일을 보내도록 인스턴스가 설정되어야 함을 주의하십시오.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} 모듈을 사용하여 처음부터 끝까지 개별 판매를 추적할 수 있습니다. 각 {{module_name}} 레코드는 예상 판매를 나타내고 {{quotes_module}}, {{contacts_module}}, 등과 같이 관련된 다른 중요한 레코드뿐만 아니라 관련 판매 데이터도 포함합니다. {{module_name}}은(는) 일반적으로 "계약 성공" 또는 "계약 실패" 중 하나로 표시될 때까지 몇 개의 판매 단계를 통해 과정을 진행합니다. {{plural_module_name}}은(는) 판매 할당량을 달성하기 위한 작업에 초점을 맞추는 것뿐만 아니라 판매 경향을 이해하고 예측하기 위해 Sugar의 {{forecasts_singular_module}}ing 모듈을 사용하여 계속 활용할 수 있습니다.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} 모듈을 통해 개별 판매를 처음부터 끝까지 추적할 수 있습니다. 각 {{module_name}} 레코드는 예상 판매를 나타내며 {{quotes_module}}, {{contacts_module}} 등과 같이 관련된 다른 중요한 레코드뿐만 아니라 관련 판매 데이터도 포함합니다. {{module_name}}은 일반적으로 "계약 성공" 또는 "계약 실패"로 표시될 때까지 여러 판매 단계를 거칩니다.{{plural_module_name}}은 Sugar의 {{forecasts_singular_module}} 모듈을 동반해 사용하는 경우, 판매 동향을 이해하고 예측할 수 있을 뿐만 아니라 판매 할당량을 달성하기 위한 작업에 더욱 집중할 수 있습니다.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} 모듈을 통해 개별 판매 및 그 판매에 속한 라인 항목을 시작부터 끝까지 추적할 수 있습니다. 각 {{module_name}} 레코드는 예상 판매를 나타내며 {{quotes_module}}, {{contacts_module}} 등과 같은 관련된 다른 중요한 레코드는 물론 관련 판매 데이터도 포함합니다.
+    'LBL_HELP_RECORD' => '{{plural_module_name}} 모듈을 통해 개별 판매 및 그 판매에 속한 라인 항목을 시작부터 끝까지 추적할 수 있습니다. 각 {{module_name}} 레코드는 예상 판매를 나타내며 {{quotes_module}}, {{contacts_module}} 등과 같이 관련된 다른 중요한 레코드뿐만 아니라 관련 판매 데이터도 포함합니다.
 
-- 개별 필드 또는 편집 버튼을 클릭하여 이 레코드의 필드를 편집합니다.
-- 아래 왼쪽 창을 "데이터 보기"로 토글하여 하위 패널 내 다른 레코드 링크를 보거나 수정합니다.
-- 아래 왼쪽 창을 "활동 흐름"으로 토글하여 {{activitystream_singular_module}} 내의 사용자 의견 및 레코드 변경 이력을 작성하고 봅니다.
-- 레코드 이름 오른쪽의 아이콘을 사용하여 이 레코드를 추적하거나 즐겨찾기로 찾아봅니다.
-- 편집 버튼 오른쪽의 드롭다운 작업 메뉴에서 추가 작업이 가능합니다.',
+- 해당 기록의 필드를 편집하려면 개별 필드를 클릭하거나 편집 버튼을 클릭하세요.
+- 왼쪽 하단 화면을 "데이터 보기"로 전환해 하위 패널의 다른 레코드의 링크를 보거나 수정하세요.
+- 왼쪽 하단 화면을 "활동 스트림"으로 전환해 {{activitystream_singular_module}}에서 사용자 의견을 작성하고 변경 기록을 생성하세요.
+- 레코드 이름 오른쪽의 아이콘을 사용해 이 레코드를 팔로우하거나 즐겨찾기하세요.
+- 추가 기능은 편집 버튼 오른쪽의 드롭다운 메뉴에서 사용할 수 있습니다.',
 
     // Create View Help Text
     'LBL_HELP_CREATE' => '{{plural_module_name}} 모듈을 통해 개별 판매 및 그 판매에 속한 라인 항목을 시작부터 끝까지 추적할 수 있습니다. 각 {{module_name}} 레코드는 예상 판매를 나타내며 {{quotes_module}}, {{contacts_module}} 등과 같이 관련된 다른 중요한 레코드뿐만 아니라 관련 판매 데이터도 포함합니다.
@@ -216,4 +230,6 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => '버블 차트에 상위 10 판매 기회 표시.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => '내 기회',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "우리 팀의 기회",
+
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
 );

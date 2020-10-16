@@ -137,7 +137,7 @@ class IdmProvider extends BasicGenericProvider
      */
     protected function getAllowedClientOptions(array $options)
     {
-        return array_merge(parent::getAllowedClientOptions($options), ['handler']);
+        return array_merge(parent::getAllowedClientOptions($options), ['handler', 'verify']);
     }
 
     /**
@@ -251,7 +251,7 @@ class IdmProvider extends BasicGenericProvider
      */
     public function getKeySet()
     {
-        $cacheKey = 'oidc_key_set';
+        $cacheKey = 'oidc_key_set_' . $this->keySetId;
         $keySet = $this->getCache($cacheKey);
         if (is_null($keySet)) {
             $accessToken = $this->getAccessToken('client_credentials', ['scope' => 'hydra.keys.get']);
@@ -365,6 +365,14 @@ class IdmProvider extends BasicGenericProvider
         );
 
         $options['handler'] = $handlerStack;
+        $proxyConfig = $this->getHTTPClientProxy();
+        if (!empty($proxyConfig)) {
+            $options['proxy'] = $proxyConfig;
+        }
+
+        if (isset($config['http_client']['verify'])) {
+            $options['verify'] = $config['http_client']['verify'];
+        }
 
         return new HttpClient(
             array_intersect_key($options, array_flip($this->getAllowedClientOptions($options)))
@@ -372,10 +380,36 @@ class IdmProvider extends BasicGenericProvider
     }
 
     /**
+     * Return HTTP client proxy
+     *
+     * @return string
+     */
+    protected function getHTTPClientProxy(): string
+    {
+        $url = '';
+        $config = \Administration::getSettings('proxy');
+        if (!empty($config->settings) && !empty($config->settings['proxy_on'])) {
+            $url = $config->settings['proxy_host'] . ':' . $config->settings['proxy_port'];
+            if (!empty($config->settings['proxy_auth'])) {
+                $url = $config->settings['proxy_username'] . ':' . $config->settings['proxy_password'] . '@' . $url;
+            }
+        }
+        return $url;
+    }
+
+    /**
      * @inheritdoc
      */
     protected function checkResponse(ResponseInterface $response, $data)
     {
+        if (!is_array($data)) {
+            throw new IdentityProviderException(
+                'Invalid STS response ' . var_export($data, true),
+                $response->getStatusCode(),
+                $data
+            );
+        }
+
         if (!empty($data[$this->responseError]) && is_array($data[$this->responseError])) {
             $error = $data[$this->responseError];
             $message = !empty($error[$this->responseErrorMessage]) ? $error[$this->responseErrorMessage] : '';

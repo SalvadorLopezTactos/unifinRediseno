@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'E-Mails:Kontakte',
     'LBL_EMAILS_LEADS_REL' => 'E-Mails:Interessenten',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'E-Mails:Verkaufschancen',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'E-Mails:Notizen',
     'LBL_EMAILS_PROJECT_REL' => 'E-Mails:Projekt',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'E-Mails:Projektaufgabe',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'Von:',
     'LBL_REPLY_TO' => 'Antwort an:',
     'LBL_HTML_BODY' => 'HTML-Textkörper',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'Empfänger',
     'LBL_LEADS_SUBPANEL_TITLE' => 'Interessenten',
     'LBL_MESSAGE_SENT' => 'Nachricht gesendet',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'Antwort an ID',
     'LBL_TYPE' => 'Typ:',
     'LBL_EMAIL_STATE' => 'Status',
+    'LBL_EMAIL_DIRECTION' => 'Richtung',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'Bitte überprüfen!',

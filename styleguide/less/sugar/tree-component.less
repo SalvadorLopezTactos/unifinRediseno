@@ -1,6 +1,6 @@
 @smallTreeFont: 12px;
 @smallTreeHeight: 14px;
-@folderTreeColor: #47484a;
+@folderTreeColor: @grayDarkish;
 //mixin
 .smallTreeLi {
   margin-left: 18px;
@@ -91,7 +91,7 @@
 
     a {
       &.jstree-clicked {
-        color: #036 !important;
+        color: @night !important;
       }
 
       &.btn {
@@ -123,7 +123,7 @@
 
     &.jstree-contextmenu-disabled {
       a {
-        color: #aaa !important;
+        color: @grayLightish !important;
       }
     }
   }
@@ -200,7 +200,7 @@
     color: @gray;
     line-height: 26px;
     border-radius: 4px;
-    background-color: #f6f6f6;
+    background-color: @grayLighter;
     cursor: pointer;
     box-sizing: border-box;
 
@@ -323,7 +323,7 @@
 
     li[disabled=disabled] {
       a {
-        color: #aaa !important;
+        color: @grayLightish !important;
       }
     }
   }

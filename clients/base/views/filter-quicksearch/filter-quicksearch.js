@@ -58,6 +58,23 @@
 
     /**
      * @inheritdoc
+     */
+    bindDataChange: function() {
+        this.context.on('filter:clear', this.clearFilter, this);
+        this._super('bindDataChange');
+    },
+
+    /**
+     * Clears out the filter search text for the layout
+     */
+    clearFilter: function() {
+        this.currentSearch = '';
+        this.toggleInput();
+        this.$el.val('');
+    },
+
+    /**
+     * @inheritdoc
      *
      * Changes `this.$el` to point to the `<input>` element.
      */

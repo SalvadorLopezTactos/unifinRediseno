@@ -160,7 +160,6 @@ $viewdefs['Cases']['base']['view']['record'] = array(
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 array(
@@ -169,12 +168,15 @@ $viewdefs['Cases']['base']['view']['record'] = array(
                 ),
                 'priority',
                 'account_name',
+                'business_center_name',
                 'portal_viewable',
                 'type',
                 'source',
                 'status',
                 'follow_up_datetime',
+                'resolved_datetime',
                 'assigned_user_name',
+                'primary_contact_name',
                 array(
                     'name' => 'description',
                     'nl2br' => true,
@@ -196,7 +198,6 @@ $viewdefs['Cases']['base']['view']['record'] = array(
             'label' => 'LBL_RECORD_SHOWMORE',
             'hide' => true,
             'columns' => 2,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 array(

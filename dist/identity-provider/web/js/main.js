@@ -76,7 +76,7 @@ var showLoginForm = function () {
     if (loginForm) {
         loginForm.style.display = 'block';
     }
-}
+};
 
 var onDOMContentLoaded = function (e) {
     var loginButton = document.getElementById('submit_btn'),

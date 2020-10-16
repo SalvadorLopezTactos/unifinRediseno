@@ -162,5 +162,18 @@
         }
 
         this._super('_renderHtml');
+
+        if (typeof this.feed !== 'undefined') {
+            whiteList = app.config.allowedLinkSchemes;
+            this.feed.entries.forEach(function(el) {
+                el.isClickable = false;
+                for (let i = 0; i < whiteList.length; i++) {
+                    if (el.link.substring(0, whiteList[i].length + 1) === whiteList[i] + ':') {
+                        el.isClickable = true;
+                        break;
+                    }
+                }
+            });
+        }
     }
 })

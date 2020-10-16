@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\IdentityProvider\Tests\Unit\Authentication\UserProvider;
 
+use Sugarcrm\IdentityProvider\Authentication\Audit;
 use Sugarcrm\IdentityProvider\Authentication\User;
 use Sugarcrm\IdentityProvider\Authentication\UserProvider\LocalUserProvider;
 use Sugarcrm\IdentityProvider\Authentication\Provider\Providers;
@@ -43,6 +44,7 @@ class LocalUserProviderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     * @expectedExceptionMessage User not found
      */
     public function testLoadUserByUsernameUserDoesntExist()
     {
@@ -59,6 +61,7 @@ class LocalUserProviderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     * @expectedExceptionMessage User not found
      */
     public function testLoadUserByFieldAndProviderUserDoesNotExist()
     {
@@ -87,7 +90,12 @@ class LocalUserProviderTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $userProvider = $this->getMockBuilder(LocalUserProvider::class)
-            ->setConstructorArgs([$db, $actual['tenant']])
+            ->setConstructorArgs([
+                $db,
+                $actual['tenant'],
+                'srn:cloud:iam:eu:1000000001:app:idp:123',
+                $this->createMock(Audit::class),
+            ])
             ->setMethods(['getProviderId'])
             ->getMock();
 
@@ -109,12 +117,14 @@ class LocalUserProviderTest extends \PHPUnit_Framework_TestCase
                         $this->arrayHasKey('custom_attributes'),
                         $this->contains(json_encode($expected['custom_attributes']), false, true),
                         $this->arrayHasKey('status'),
-                        $this->contains(0, false, true),
+                        $this->contains('0', false, true),
                         $this->arrayHasKey('tenant_id'),
                         $this->contains($expected['tenant'], false, true),
                         $this->arrayHasKey('id'),
                         $this->arrayHasKey('create_time'),
-                        $this->arrayHasKey('modify_time')
+                        $this->arrayHasKey('modify_time'),
+                        $this->arrayHasKey('created_by'),
+                        $this->arrayHasKey('modified_by')
                     )],
                 ['user_providers',
                     $this->logicalAnd(
@@ -305,7 +315,12 @@ class LocalUserProviderTest extends \PHPUnit_Framework_TestCase
                 ])
             );
 
-        $userProvider = new LocalUserProvider($db, $tenantId);
+        $userProvider = new LocalUserProvider(
+            $db,
+            $tenantId,
+            'srn:cloud:iam:eu:1000000001:app:idp:123',
+            $this->createMock(Audit::class)
+        );
         $userProvider->linkUser($userId, $provider, $identityValue);
     }
 
@@ -317,6 +332,8 @@ class LocalUserProviderTest extends \PHPUnit_Framework_TestCase
     {
         $userId = 'some-user-id';
         $tenantId = 'some-tenant-id';
+        $modifyDate = '2019-06-28 12:46:48';
+        $applicationSRN = 'some-application-srn';
         $attributes = [
             'given_name' => 'given_name.value',
             'family_name' => 'family_name.value',
@@ -347,9 +364,18 @@ class LocalUserProviderTest extends \PHPUnit_Framework_TestCase
                     'data' => array_merge($attributes, $customAttributes),
                 ],
                 'expects' => [
-                    'data' => [
+                    'DB_data' => [
+                        'modify_time' => $modifyDate,
                         'attributes' => json_encode($attributes),
                         'custom_attributes' => json_encode($customAttributes),
+                        'modified_by' => $applicationSRN,
+                    ],
+                    'object_data' => [
+                        'id' => $userId,
+                        'modify_time' => $modifyDate,
+                        'attributes' => $attributes,
+                        'custom_attributes' => $customAttributes,
+                        'modified_by' => $applicationSRN,
                     ],
                     'identifier' => $expectsIdentifier,
                 ],
@@ -361,9 +387,18 @@ class LocalUserProviderTest extends \PHPUnit_Framework_TestCase
                     'data' => array_merge($attributes, $customAttributes, ['address' => []]),
                 ],
                 'expects' => [
-                    'data' => [
+                    'DB_data' => [
+                        'modify_time' => $modifyDate,
                         'attributes' => json_encode(array_merge($attributes, ['address' => new \stdClass])),
                         'custom_attributes' => json_encode($customAttributes),
+                        'modified_by' => $applicationSRN,
+                    ],
+                    'object_data' => [
+                        'id' => $userId,
+                        'modify_time' => $modifyDate,
+                        'attributes' => array_merge($attributes, ['address' => []]),
+                        'custom_attributes' => $customAttributes,
+                        'modified_by' => $applicationSRN,
                     ],
                     'identifier' => $expectsIdentifier,
                 ],
@@ -375,9 +410,18 @@ class LocalUserProviderTest extends \PHPUnit_Framework_TestCase
                     'data' => $customAttributes,
                 ],
                 'expects' => [
-                    'data' => [
+                    'DB_data' => [
+                        'modify_time' => $modifyDate,
                         'attributes' => '{}',
                         'custom_attributes' => json_encode($customAttributes),
+                        'modified_by' => $applicationSRN,
+                    ],
+                    'object_data' => [
+                        'id' => $userId,
+                        'modify_time' => $modifyDate,
+                        'attributes' => [],
+                        'custom_attributes' => $customAttributes,
+                        'modified_by' => $applicationSRN,
                     ],
                     'identifier' => $expectsIdentifier,
                 ],
@@ -389,9 +433,18 @@ class LocalUserProviderTest extends \PHPUnit_Framework_TestCase
                     'data' => $attributes,
                 ],
                 'expects' => [
-                    'data' => [
+                    'DB_data' => [
+                        'modify_time' => $modifyDate,
                         'attributes' => json_encode($attributes),
                         'custom_attributes' => '{}',
+                        'modified_by' => $applicationSRN,
+                    ],
+                    'object_data' => [
+                        'id' => $userId,
+                        'modify_time' => $modifyDate,
+                        'attributes' => $attributes,
+                        'custom_attributes' => [],
+                        'modified_by' => $applicationSRN,
                     ],
                     'identifier' => $expectsIdentifier,
                 ],
@@ -411,16 +464,43 @@ class LocalUserProviderTest extends \PHPUnit_Framework_TestCase
         $db = $this->getMockBuilder(Connection::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $userProvider = new LocalUserProvider($db, $in['tenantId']);
+        $user = new User('max', 'psswd', ['id' => $in['userId']]);
+
+        /** @var  \PHPUnit_Framework_MockObject_MockObject|LocalUserProvider $userProvider */
+        $userProvider = $this->getMockBuilder(LocalUserProvider::class)
+            ->enableOriginalConstructor()
+            ->setConstructorArgs([$db, $in['tenantId'], 'some-application-srn', $this->createMock(Audit::class)])
+            ->setMethods(['getCurrentDate', 'getUserData'])
+            ->getMock();
+
+        $userProvider->method('getCurrentDate')->willReturn('2019-06-28 12:46:48');
 
         $db->expects($this->once())
             ->method('update')
             ->with(
                 $this->equalTo('users'),
-                $this->equalTo($expects['data']),
+                $this->equalTo($expects['DB_data']),
                 $this->equalTo($expects['identifier'])
             );
 
-        $userProvider->updateUserAttributes($in['data'], $in['userId']);
+        $userProvider->updateUserAttributes($in['data'], $user);
+        $this->assertEquals($expects['object_data'], $user->getAttributes(), 'User should have updated attributes');
+    }
+
+    /**
+     * @covers ::getCurrentDate
+     */
+    public function testGetCurrentDate()
+    {
+        $provider = new LocalUserProvider(
+            $this->createMock(Connection::class),
+            'tid1',
+            'srn:cloud:iam:eu:1000000001:app:idp:123',
+            $this->createMock(Audit::class)
+        );
+        $this->assertRegExp('/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $provider->getCurrentDate());
+        $d1 = $provider->getCurrentDate();
+        $d2 = $provider->getCurrentDate();
+        $this->assertGreaterThanOrEqual(strtotime($d1), strtotime($d2));
     }
 }

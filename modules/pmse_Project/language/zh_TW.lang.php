@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => '狀態',
   'LBL_PRJ_MODULE' => '目標模組',
+  'LBL_PRJ_RUN_ORDER' => '運行順序',
   'LBL_PMSE_BUTTON_SAVE' => '儲存',
   'LBL_PMSE_BUTTON_CANCEL' => '取消',
   'LBL_PMSE_BUTTON_YES' => '是',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => '「流程定義」已匯入，但是包含一個或多個「商務規則」動作，而這些動作未選取商務規則。',
     'LBL_BPM_IMPORT_SELECT' => '此流程定義含有以下商務規則和電子郵件範本。 '
         . '請選擇要導入的項目。',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => '商務規則',
     'LBL_EMAIL_TEMPLATES' => '電子郵件範本',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => '主管',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => '由使用者建立',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => '上次修改人',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => '系統電子郵件',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => '商務規則',
     'LBL_PMSE_LABEL_RULE' => '規則',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => '指派使用者',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => '更新記錄上的「指派至」',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => '新增關聯記錄',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => '相關模組',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => '活動名稱為空。',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => '圖形家族已存在名稱 "%s"。',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => '天',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => '小時',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => '分鐘',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => '營業時數',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => '商務中心',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => '來自目標模組',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => '發件者 ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' 模組',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => '字串、數字和布林值',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => '編號',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => '值',

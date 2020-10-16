@@ -115,7 +115,14 @@ $dictionary['ACLField'] = array('table' => 'acl_fields', 'comment' => 'Determine
 'indices' => array (
       array('name' =>'aclfieldid', 'type' =>'primary', 'fields'=>array('id')),
       array('name' =>'idx_aclfield_role_del', 'type' =>'index', 'fields'=>array('role_id','category', 'deleted')),
+    array(
+        'name' => 'idx_del_category',
+        'type' => 'index',
+        'fields' => array(
+            'deleted',
+            'category',
+        ),
+    ),
                                                    )
 
                             );
-?>

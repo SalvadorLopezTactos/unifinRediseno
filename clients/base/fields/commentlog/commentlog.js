@@ -16,11 +16,15 @@
 ({
     fieldTag: 'textarea',
 
+    plugins: ['Taggable'],
+
     /**
      * @inheritdoc
      */
     events: {
-        'click [data-action=toggle]': 'toggleCollapsedEntry'
+        'click [data-action=toggle]': 'toggleCollapsedEntry',
+        'click [data-action=showall]': 'showAll',
+        'click [data-action=save]': 'save',
     },
 
     /**
@@ -43,6 +47,23 @@
         this._super('initialize', [options]);
         this.collapsedEntries = {};
         this._initSettings();
+        this.setUpTaggable();
+    },
+
+    /**
+     * Set model info to to properly check acl access for mentions
+     */
+    setUpTaggable: function() {
+        var module;
+        var id;
+        if (this.def.dashlet) {
+            module = this.view.collection.link.bean.module;
+            id = this.view.collection.link.bean.id;
+        } else {
+            module = this.context.get('module');
+            id = this.context.get('modelId');
+        }
+        this.setTaggableRecord(module, id);
     },
 
     /**
@@ -58,6 +79,20 @@
         };
         this._settings = _.extend({}, this._defaultSettings, configSettings);
         return this;
+    },
+
+    /**
+     * Get the correct collection depending if this is a collection field
+     * or a dashlet collection
+     *
+     * @return {Data.BeanCollection}
+     */
+    getCollection: function() {
+        if (this.def.dashlet) {
+            return this.view.collection;
+        } else {
+            return this.model.get(this.name);
+        }
     },
 
     /**
@@ -83,11 +118,14 @@
      * when this.getFormattedValue() returns the data format for message.
      */
     showCommentLog: function() {
-        var collection = this.model.get('commentlog');
-
+        var collection = this.getCollection();
         if (!collection) {
             return;
         }
+
+        // Set if we should show the View All button on the dashlet view
+        this._showViewAll = collection.dataFetched && collection.next_offset !== -1;
+
         var comments = collection.models;
 
         if (comments) {
@@ -99,15 +137,25 @@
                     this.collapsedEntries[id] = true;
                 }
 
+                var entry = this._escapeValue(commentModel.get('entry'));
+                var entryShort = this._getShortComment(entry);
+                var showShort = entry !== entryShort;
+
+                entry = this._insertHtmlLinks(entry);
+                entryShort = this._insertHtmlLinks(entryShort);
+
+                entry = this.formatTags(entry);
+                entryShort = this.formatTags(entryShort);
+
                 var msg = {
                     id: commentModel.get('id'),
-                    entry: commentModel.get('entry'),
-                    entryShort: this._getShortComment(commentModel.get('entry')),
+                    entry: new Handlebars.SafeString(entry),
+                    entryShort: new Handlebars.SafeString(entryShort),
                     created_by_name: commentModel.get('created_by_name'),
                     collapsed: this.collapsedEntries[id],
+                    showShort: showShort,
+                    date_entered: commentModel.get('date_entered'),
                 };
-
-                msg.showShort = msg.entry !== msg.entryShort;
 
                 // to date display format
                 var enteredDate = app.date(commentModel.get('date_entered'));
@@ -156,6 +204,40 @@
     },
 
     /**
+     * Escapes any dangerous values from the string
+     *
+     * @param {string} comment The comment entry
+     * @return {string} The escaped string
+     * @private
+     */
+    _escapeValue: function(comment) {
+        return Handlebars.Utils.escapeExpression(comment);
+    },
+
+    /**
+     * Replaces any text urls with html links
+     *
+     * @param {string} comment The comment entry
+     * @return {string} The entry with html for any links
+     * @private
+     */
+    _insertHtmlLinks: function(string) {
+        // http://, https://, ftp://
+        var urlPattern = /\b(?:https?|ftp):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim;
+
+        // www. sans http:// or https://
+        var pseudoUrlPattern = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+
+        // Email addresses
+        var emailAddressPattern = /[\w.]+@[a-zA-Z_-]+?(?:\.[a-zA-Z]{2,6})+/gim;
+
+        return string
+            .replace(urlPattern, '<a href="$&" target="_blank" rel="noopener">$&</a>')
+            .replace(pseudoUrlPattern, '$1<a href="http://$2" target="_blank" rel="noopener">$2</a>')
+            .replace(emailAddressPattern, '<a href="mailto:$&">$&</a>');
+    },
+
+    /**
      * Save the id in this.collapsedEntries to keep track of what entries are shortened on view or not
      * @param event
      */
@@ -163,6 +245,14 @@
         var id = $(event.currentTarget).data('commentId');
         this.collapsedEntries[id] = !this.collapsedEntries[id];
         this.render();
+    },
+
+    /**
+     * Load all comments into the dashlet
+     */
+    showAll: function() {
+        this.showAllClicked = true;
+        this.view.loadData({loadAll: true});
     },
 
     /**
@@ -174,15 +264,73 @@
     },
 
     /**
+     * Save a new comment on the dashlet
+     */
+    save: function() {
+        if (this.view._mode === 'preview') {
+            return;
+        }
+        var value = this.getCurrentCommentText();
+        if (_.isEmpty(value)) {
+            return;
+        }
+        var commentBean = app.data.createRelatedBean(this.model, null, 'commentlog_link', {entry: value});
+        var success = _.bind(function() {
+            this.setCurrentCommentText('');
+            this.view.loadData({loadAll: !!this.showAllClicked});
+        }, this);
+        commentBean.sync('create', commentBean, {success: success, relate: true});
+    },
+
+    /**
+     * Get the current comment text.
+     *
+     * @return {string} The current comment text.
+     */
+    getCurrentCommentText: function() {
+        var el = this.getTextArea();
+        return this.unformat(el.val());
+    },
+
+    /**
+     * Set the current comment text.
+     *
+     * @param {string} text The desired comment text.
+     */
+    setCurrentCommentText: function(text) {
+        var el = this.getTextArea();
+        el.val(text);
+    },
+
+    /**
+     * Get the comment log textarea
+     *
+     * @return {jQuery} The textarea element
+     */
+    getTextArea: function() {
+        return this.$el.find(this.fieldTag);
+    },
+
+    /**
+     * Commentlog needs to check if it has any messages in the collection
+     * @override
+     */
+    isFieldEmpty: function() {
+        return this.getCollection().length === 0;
+    },
+
+    /**
      * @inheritdoc
      */
     bindDomChange: function() {
+        if (this.def.dashlet) {
+            return;
+        }
         if (!(this.model instanceof Backbone.Model)) {
             return;
         }
 
-        var el = this.$el.find(this.fieldTag);
-
+        var el = this.getTextArea();
         var self = this;
 
         el.on('change', function() {
@@ -201,9 +349,8 @@
                     _link: 'commentlog_link',
                 });
 
-                collectionField.add(self._newEntryModel);
+                collectionField.add(self._newEntryModel, {silent: true});
             }
-
             self._newEntryModel.set('entry', value);
         });
     },
@@ -226,5 +373,17 @@
                 this.render();
             }, this);
         }
-    },
+
+        if (this.def.dashlet) {
+            var collection = this.getCollection();
+            if (collection) {
+                collection.on('sync', function() {
+                    if (this.disposed) {
+                        return;
+                    }
+                    this.render();
+                }, this);
+            }
+        }
+    }
 })

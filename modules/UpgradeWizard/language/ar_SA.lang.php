@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'غير قابل لإلغاء التثبيت',
     'LBL_ML_VERSION' => 'الإصدار',
 	'LBL_ML_INSTALL'=>'تثبيت',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'المتعقب',
 	'LBL_MODULE_NAME' => 'معالج الترقية',
 	'LBL_MODULE_NAME_SINGULAR' => 'معالج الترقية',
 	'LBL_UPLOAD_SUCCESS' => 'تم تحميل حزمة الترقية بنجاح. انقر "التالي" لإجراء فحص نهائي.',

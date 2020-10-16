@@ -12,7 +12,7 @@
 
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\UsernamePasswordTokenFactory;
-use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\AuthProviderBasicManagerBuilder;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\AuthProviderApiLoginManagerBuilder;
 use Sugarcrm\Sugarcrm\IdentityProvider\OAuth2StateRegistry;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\OAuth2\Client\Provider\IdmProvider;
 use Sugarcrm\Sugarcrm\Util\Uuid;
@@ -30,8 +30,7 @@ class OAuth2Authenticate extends BaseAuthenticate implements ExternalLoginInterf
      */
     public function getLoginUrl($returnQueryVars = [])
     {
-        $config = new Config(\SugarConfig::getInstance());
-        $idmModeConfig = $config->getIDMModeConfig();
+        $idmModeConfig = $this->getIDMModeConfig();
         if (empty($idmModeConfig['stsUrl'])) {
             throw new \RuntimeException('IDM-mode config and URL were not found.');
         }
@@ -65,8 +64,7 @@ class OAuth2Authenticate extends BaseAuthenticate implements ExternalLoginInterf
      */
     public function getLogoutUrl(): string
     {
-        $config = new Config(\SugarConfig::getInstance());
-        $idmModeConfig = $config->getIDMModeConfig();
+        $idmModeConfig = $this->getIDMModeConfig();
         return $idmModeConfig['idpUrl'] . '/logout?redirect_uri='.$idmModeConfig['idpUrl'];
     }
 
@@ -78,7 +76,7 @@ class OAuth2Authenticate extends BaseAuthenticate implements ExternalLoginInterf
         $config = new Config(\SugarConfig::getInstance());
         $token = (new UsernamePasswordTokenFactory($username, $password, ['tenant' => $this->getTenant($config)]))
             ->createIdPAuthenticationToken();
-        $manager = $this->getAuthProviderBasicBuilder($config)
+        $manager = $this->getAuthProviderApiLoginBuilder($config)
             ->buildAuthProviders();
         $resultToken = $manager->authenticate($token);
         if ($resultToken->isAuthenticated()) {
@@ -97,18 +95,17 @@ class OAuth2Authenticate extends BaseAuthenticate implements ExternalLoginInterf
      */
     protected function getTenant(Config $config)
     {
-        $idmModeConfig = $config->get('idm_mode', []);
+        $idmModeConfig = $config->getIDMModeConfig();
         return !empty($idmModeConfig['tid']) ? $idmModeConfig['tid'] : '';
     }
 
     /**
      * @param Config $config
-     *
-     * @return AuthProviderBasicManagerBuilder
+     * @return AuthProviderApiLoginManagerBuilder
      */
-    protected function getAuthProviderBasicBuilder(Config $config)
+    protected function getAuthProviderApiLoginBuilder(Config $config): AuthProviderApiLoginManagerBuilder
     {
-        return new AuthProviderBasicManagerBuilder($config);
+        return new AuthProviderApiLoginManagerBuilder($config);
     }
 
     /**
