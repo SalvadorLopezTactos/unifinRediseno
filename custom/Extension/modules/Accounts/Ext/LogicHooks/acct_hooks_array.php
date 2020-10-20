@@ -253,3 +253,11 @@ $hook_array['before_save'][] = Array(
     'Account_Hooks',
     'ActualizaEmpleadosDDW'
 );
+
+$hook_array['before_save'][] = Array(
+    23,
+    'Establece integración con Dynamics 365',
+    'custom/modules/Accounts/Account_Hooks.php',
+    'Account_Hooks',
+    'IntegraDynamics'
+);

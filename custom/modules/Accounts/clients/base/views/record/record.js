@@ -1859,6 +1859,9 @@
         // this.context.on('button:save_button:click', this.borraTel, this);
         //this.context.on('button:prospecto_contactado:click',this.validaContactado, this);  //se añade validación para validar campos al convertir prospecto contactado.
         this.context.on('button:convierte_lead:click', this.validalead, this);
+        this.context.on('button:dynamics_button:click', this.requestDynamics, this);
+
+
     },
 
     /*
@@ -2626,6 +2629,38 @@
                 }
             }, 5000);
         }
+    },
+
+    requestDynamics:function(){
+
+        var self=this;
+        var body={
+            "accion":this.model.get('id')
+        }
+        app.alert.show('infoDynamics', {
+            level: 'process',
+            closeable: false,
+            messages: app.lang.get('LBL_LOADING'),
+        });
+        //Consumir servicio de OTP
+        app.api.call('create', app.api.buildURL("Dynamics365"), body, {
+            success: _.bind(function (data) {
+                app.alert.dismiss('infoDynamics');
+                if(data !=null){
+                    self.model.set('control_dynamics_365_c',data);
+                }
+            }, this),
+            error: _.bind(function (response) {
+                app.alert.dismiss('infoDynamics');
+                app.alert.show('error_otp', {
+                    level: 'error',
+                    messages: response.textStatus+'\n"Error al enviar información hacia Dynamics 365"',
+                    autoClose: true
+                });
+
+            },this)
+        });
+
     },
 
 
