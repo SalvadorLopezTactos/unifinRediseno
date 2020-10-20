@@ -210,6 +210,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
           'label' => 'LBL_ACCOUNT_LEASING',
           'readonly' => true,
           'span' => 12,
+          'dismiss_label' => true,
+
         ),
       ),
     ),
@@ -319,6 +321,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
           'label' => 'LBL_CUENTA_PRODUCTOS',
           'studio' => 'visible',
           'span' => 12,
+          'dismiss_label' => true,
+
         ),
       ),
     ),
@@ -339,6 +343,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
           'studio' => 'visible',
           'label' => 'LBL_ACCOUNT_UNI_PRODUTOS',
           'span' => 12,
+          'dismiss_label' => true,
+
         ),
       ),
     ),
