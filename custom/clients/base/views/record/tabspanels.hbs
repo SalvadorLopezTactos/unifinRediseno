@@ -51,13 +51,11 @@
         {{else}}
             <div class="row-fluid record-panel" data-panelName="{{name}}">
                 <div class="row-fluid record-panel-header {{#eq panelState "collapsed"}}panel-inactive{{/eq}}{{#notEq panelState "collapsed"}}panel-active{{/notEq}}">
-                    <h4 class="pull-left">
-                        {{str label ../../../view.module}}
-                    </h4>
-                    <div class="pull-right">
+                    <div class="pull-left">
                         <button class="btn btn-invisible record-panel-arrow">
                             <i class="fa fa-chevron-{{#eq panelState "collapsed"}}down{{/eq}}{{#notEq panelState "collapsed"}}up{{/notEq}}" rel="tooltip" data-container="body" data-title="Toggle Visibility"></i>
                         </button>
+                        {{str label ../../../view.module}}
                     </div>
                 </div>
             <div class="row-fluid record-panel-content {{#eq panelState "collapsed"}}hide{{/eq}}">
