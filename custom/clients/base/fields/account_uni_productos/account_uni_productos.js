@@ -124,7 +124,8 @@
 
     _render: function () {
         this._super("_render");
-        $("div.record-label[data-name='account_uni_productos']").attr('style', 'display:none;'); //campo custom account_uni_productos
+        $("span.normal[data-fieldname='account_uni_productos']").find('.row-fluid > .record-label').attr('style', 'display:none;');
+        //campo custom account_uni_productos
         this.cargalistas(); //funcion de cargar listas
 
 
