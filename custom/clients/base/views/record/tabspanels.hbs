@@ -51,46 +51,48 @@
         {{else}}
             <div class="row-fluid record-panel" data-panelName="{{name}}">
                 <div class="row-fluid record-panel-header {{#eq panelState "collapsed"}}panel-inactive{{/eq}}{{#notEq panelState "collapsed"}}panel-active{{/notEq}}">
-                    <span class="pull-left">
+                    <h4 class="pull-left">
+                        {{str label ../../../view.module}}
+                    </h4>
+                    <div class="pull-right">
                         <button class="btn btn-invisible record-panel-arrow">
                             <i class="fa fa-chevron-{{#eq panelState "collapsed"}}down{{/eq}}{{#notEq panelState "collapsed"}}up{{/notEq}}" rel="tooltip" data-container="body" data-title="Toggle Visibility"></i>
                         </button>
-                        {{str label ../../../view.module}}
-                    </span>
+                    </div>
                 </div>
             <div class="row-fluid record-panel-content {{#eq panelState "collapsed"}}hide{{/eq}}">
         {{/if}}
         {{#each grid}}
-            <div class="row-fluid panel_body {{../name}}">
-            {{#each this}}
-                    <div class="span{{span}} record-cell{{#if cell_css_class}} {{cell_css_class}}{{/if}}" data-type="{{type}}" data-name="{{name}}">
-                        {{#if ../../labels}}
-                            {{#unless dismiss_label}}
-                                <div class="record-label" data-name="{{name}}">
-                                    {{#if label}}{{str label ../../../../../../../view.module}}{{/if}}
-                                </div>
-                            {{/unless}}
-                        {{/if}}
-                        {{#if name}}
-                            <span class="normal{{#if css}} {{css}}{{/if}} index{{index}}" data-fieldname="{{name}}" data-index="{{index}}">
-                                {{field ../../../../../view model=../../../../../view.model template=../../../../../view.action}}
-                            </span>
-                        {{/if}}
-                        {{#unless ../../../../view.createMode}}
-                            {{#notHas name ../../../../../view.noEditFields}}
-                                <span class="record-edit-link-wrapper" data-name="{{name}}" data-wrapper="edit">
+                <div class="row-fluid panel_body {{../name}}">
+                    {{#each this}}
+                        <div class="span{{span}} record-cell{{#if cell_css_class}} {{cell_css_class}}{{/if}}" data-type="{{type}}" data-name="{{name}}">
+                            {{#if ../../labels}}
+                                {{#unless dismiss_label}}
+                                    <div class="record-label" data-name="{{name}}">
+                                        {{#if label}}{{str label ../../../../../../../view.module}}{{/if}}
+                                    </div>
+                                {{/unless}}
+                            {{/if}}
+                            {{#if name}}
+                                <span class="normal{{#if css}} {{css}}{{/if}} index{{index}}" data-fieldname="{{name}}" data-index="{{index}}">
+                                    {{field ../../../../../view model=../../../../../view.model template=../../../../../view.action}}
+                                </span>
+                            {{/if}}
+                            {{#unless ../../../../view.createMode}}
+                                {{#notHas name ../../../../../view.noEditFields}}
+                                    <span class="record-edit-link-wrapper" data-name="{{name}}" data-wrapper="edit">
                                         <a class="record-edit-link btn btn-invisible" data-type="{{type}}" data-name="{{name}}"><i class="fa fa-pencil"></i></a>
                                     </span>
-                                <span class="record-lock-link-wrapper hide" data-name="{{name}}">
+                                    <span class="record-lock-link-wrapper hide" data-name="{{name}}">
                                         <a class="record-lock-link btn btn-invisible" data-type="{{type}}" data-name="{{name}}">
                                             <i class="fa fa-lock" rel="tooltip" data-original-title="{{str 'LBL_LOCKED_FIELD_RECORD_VIEW_TOOLTIP'}}" data-placement="right"></i>
                                         </a>
                                     </span>
-                            {{/notHas}}
-                        {{/unless}}
+                                {{/notHas}}
+                            {{/unless}}
                         </div>
-            {{/each}}
-            </div>
+                    {{/each}}
+                </div>
         {{/each}}
         {{#unless newTab}}</div></div>{{/unless}}
         {{#eq @index ../../view.meta.lastPanelIndex}}</div>{{/eq}}
