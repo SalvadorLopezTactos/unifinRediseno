@@ -56,7 +56,7 @@ function NotiFiscalDiaria_job()
 	$ruta_archivo = $_SERVER['DOCUMENT_ROOT'].$site."/upload/".$name_file;
 	$ruta_archivo2 = "/upload/".$name_file;
     //$GLOBALS['log']->fatal('archivo',$ruta_archivo);
-    $file = fopen($ruta_archivo, "wb");
+    $file = fopen($ruta_archivo, "w");
 
 	$flag = false;
 	foreach($datos as $row) {
@@ -130,7 +130,7 @@ WHERE B.notifica_fiscal_c = 1 AND
 			}
 			
             $GLOBALS['log']->fatal("SE ADJUNTA ARCHIVO: ".$name_file);
-            $mailer->addAttachment(new \Attachment('upload/'.$name_file));
+            $mailer->addAttachment(new \Attachment('upload/'.$name_file) , $name_file, 'Base64', "text/csv" );
 			$mailer->send();
 			
 			$update = "UPDATE notification_accounts SET status = '2' WHERE ID IN ({$allid})";
