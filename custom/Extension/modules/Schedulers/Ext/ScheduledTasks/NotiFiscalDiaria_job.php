@@ -54,9 +54,11 @@ function NotiFiscalDiaria_job()
 	$name_file = "SOLICITUD_PROVEEDORES_SAT_{$hoy}_CONCENTRADO.csv";
 	//$GLOBALS['log']->fatal('name_file',$name_file);
 	$ruta_archivo = $_SERVER['DOCUMENT_ROOT'].$site."/upload/".$name_file;
-	$ruta_archivo2 = "/upload/".$name_file;
-    //$GLOBALS['log']->fatal('archivo',$ruta_archivo);
-    $file = fopen($ruta_archivo, "w");
+	$ruta_archivo2 = "upload/".$name_file;
+	
+    $GLOBALS['log']->fatal('archivo',$ruta_archivo);
+	$GLOBALS['log']->fatal('archivo',$ruta_archivo2);
+    $file = fopen($ruta_archivo2, "w");
 
 	$flag = false;
 	foreach($datos as $row) {
