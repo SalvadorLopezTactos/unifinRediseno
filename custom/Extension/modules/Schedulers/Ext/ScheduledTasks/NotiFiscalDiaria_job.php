@@ -72,7 +72,7 @@ function NotiFiscalDiaria_job()
 		//mb_convert_encoding($ruta_archivo, 'UTF-16LE', 'UTF-8');
 		
 		//$GLOBALS['log']->fatal('archivo',$ruta_archivo);
-		$file = fopen($ruta_archivo, "w");
+		$file = fopen($ruta_archivo2, "w");
 		fputs($file, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ));
 		$flag = false;
 		foreach($datos as $row) {
