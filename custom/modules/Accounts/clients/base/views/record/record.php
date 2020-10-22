@@ -211,7 +211,6 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
           'readonly' => true,
           'span' => 12,
           'dismiss_label' => true,
-
         ),
       ),
     ),
@@ -274,6 +273,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         ),
         8 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         9 => 
         array (
@@ -297,9 +298,13 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         ),
         13 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         14 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         15 => 'business_center_name',
       ),
@@ -355,7 +360,6 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
       'name' => 'LBL_RECORDVIEW_PANEL16',
       'label' => 'LBL_RECORDVIEW_PANEL16',
       'columns' => 2,
-      'labelsOnTop' => 1,
       'placeholders' => 1,
       'fields' => 
       array (
@@ -377,6 +381,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         ),
         3 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         4 => 
         array (
@@ -386,6 +392,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         ),
         5 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         6 => 
         array (
@@ -395,6 +403,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         ),
         7 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         8 => 
         array (
@@ -403,6 +413,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         ),
         9 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         10 => 
         array (
@@ -412,6 +424,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         ),
         11 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         12 => 
         array (
@@ -440,6 +454,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         ),
         17 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         18 => 
         array (
@@ -448,6 +464,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         ),
         19 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         20 => 
         array (
@@ -641,6 +659,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         ),
         27 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         28 => 'website',
         29 => 
@@ -672,6 +692,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         ),
         35 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         36 => 
         array (
@@ -720,6 +742,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         ),
         45 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         46 => 
         array (
@@ -738,6 +762,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         ),
         49 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
       ),
     ),
@@ -853,6 +879,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         ),
         7 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         8 => 
         array (
@@ -1097,7 +1125,6 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
       'name' => 'LBL_RECORDVIEW_PANEL1',
       'label' => 'LBL_RECORDVIEW_PANEL1',
       'columns' => 2,
-      'labelsOnTop' => 1,
       'placeholders' => 1,
       'fields' => 
       array (
@@ -1106,8 +1133,10 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
           'name' => 'ctpldnoseriefiel_c',
           'label' => 'LBL_CTPLDNOSERIEFIEL',
         ),
-        1 => 
+        1 =>
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         2 => 
         array (
@@ -1136,6 +1165,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         ),
         7 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         8 => 
         array (
@@ -1256,7 +1287,6 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
       'name' => 'LBL_RECORDVIEW_PANEL7',
       'label' => 'LBL_RECORDVIEW_PANEL7',
       'columns' => 2,
-      'labelsOnTop' => 1,
       'placeholders' => 1,
       'fields' => 
       array (
@@ -1297,6 +1327,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         ),
         7 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         8 => 
         array (
@@ -1317,7 +1349,6 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
       'name' => 'LBL_RECORDVIEW_PANEL6',
       'label' => 'LBL_RECORDVIEW_PANEL6',
       'columns' => 2,
-      'labelsOnTop' => 1,
       'placeholders' => 1,
       'fields' => 
       array (
@@ -1348,6 +1379,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         ),
         5 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         6 => 
         array (
@@ -1462,6 +1495,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         ),
         15 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         16 => 
         array (
@@ -1503,6 +1538,8 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         ),
         23 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         24 => 
         array (

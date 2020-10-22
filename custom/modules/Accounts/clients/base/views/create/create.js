@@ -315,6 +315,7 @@
         this.$("div[data-name='sectoreconomico_c']").hide();
         this.$("div[data-name='subsectoreconomico_c']").hide();
         this.$("div[data-name='actividadeconomica_c']").hide();
+        this.$(".record-cell[data-name='blank_space']").hide();
 
     },
 
