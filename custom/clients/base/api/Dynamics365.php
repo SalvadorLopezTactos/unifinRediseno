@@ -43,14 +43,13 @@ class Dynamics365 extends SugarApi
     {
         global $sugar_config;
         //Obtiene parámetros, el id de cuenta
-        $idCuenta=$args['idCuenta'];
-
-        //$host="https://login.windows.net/unifin.com.mx/oauth2/token";
+        $idCuenta=$args['accion'];
         $host=$sugar_config['dynamics_token_host'];
         $client_id=$sugar_config['dynamics_token_client_id'];
         $client_secret=$sugar_config['dynamics_token_client_secret'];
         $resource=$sugar_config['dynamics_token_resource'];
 
+        //Prepara token request
         $request=array(
             'grant_type' => 'client_credentials',
             'client_id' => $client_id,
@@ -59,88 +58,114 @@ class Dynamics365 extends SugarApi
         );
 
         //Llamada a api para obtener token
-        $response=$this->postDynamics($host,"",$request);
-
+        $response=$this->postDynamicsToken($host,$request);
         $token=$response->access_token;
-
+        // $GLOBALS['log']->fatal('Dynamics request: '. $request);
+        // $GLOBALS['log']->fatal('Dynamics token: '. $token);
         $token_format=array("Authorization: Bearer ".$token);
 
         /*
          * Se obtienen datos de la Cuenta para armar cuerpo de la petición
          * */
         $beanCuenta = BeanFactory::getBean('Accounts', $idCuenta);
-
         //Obtener régimen fiscal
         $regimen_fiscal=$beanCuenta->tipodepersona_c;
+        //Genera estructura de petición para alta de proveedor
+        $records_list=array();
         $body_elements=array();
-
-        if($regimen_fiscal!='Perona Moral'){
+        $body_elements["DataAreaId"]="UFIN";
+        $body_elements["VENDORACCOUNTNUMBER"]=$beanCuenta->idcliente_c;
+        $body_elements["CURRENCYCODE"]="MXN";
+        $body_elements["DIOTOPERATIONTYPE"]="Other";
+        $body_elements["DIOTVENDORTYPE"]=($beanCuenta->pais_nacimiento_c=='2') ? "DomesticVendor" : "ForeignVendor";
+        $body_elements["LANGUAGEID"]="es-MX";
+        $body_elements["RFCFEDERALTAXNUMBER"]=$beanCuenta->rfc_c;
+        $body_elements["VENDORGROUPID"]="PROV";
+        $body_elements["PRIMARYEMAILADDRESS"]=$beanCuenta->email1;
+        $body_elements["PRIMARYEMAILADDRESSDESCRIPTION"]="PRINCIPAL";
+        $body_elements["PRIMARYEMAILADDRESSPURPOSE"]="Business";
+        $body_elements["DEFAULTOFFSETACCOUNTTYPE"]="Ledger";
+        $body_elements["SALESTAXGROUPCODE"]="IVA16%";
+        $body_elements["DEFAULTVENDORPAYMENTMETHODNAME"]="TRANSFER";
+        //Persona Fisica y PFAE
+        if($regimen_fiscal!='Persona Moral'){
             //Se arma petición para enviar proveedor de Persona Física o PFAE
-            $body_elements["DataAreaId"]="UFIN";
-            $body_elements["VENDORACCOUNTNUMBER"]=$beanCuenta->idcliente_c;
-            if($beanCuenta->pais_nacimiento_c=='2'){//País México = 2
-                $body_elements["COMPANYTYPE"]='LegalPerson';
-            }else{
-                $body_elements["COMPANYTYPE"]='ForeignCompany';
-            }
-            $body_elements["DEFAULTLEDGERDIMENSIONDISPLAYVALUE"]="";
-            $body_elements["CURRENCYCODE"]="MXN";
-            //Sección con atributos que de los que no se tienen en CRM
-            $body_elements["DEFAULTOFFSETACCOUNTTYPE"]="Ledger";
-            /*
-            $body_elements["DEFAULTPAYMENTDAYNAME"]="MXN";
-            $body_elements["DEFAULTPAYMENTTERMSNAME"]="MXN";
-            $body_elements["DEFAULTVENDORPAYMENTMETHODNAME"]="MXN";
-            */
-            $body_elements["DIOTOPERATIONTYPE"]="Other";
-            if($beanCuenta->pais_nacimiento_c=='2'){//País México = 2
-                $body_elements["DIOTVENDORTYPE"]="DomesticVendor";
-            }else{
-                $body_elements["DIOTVENDORTYPE"]="ForeignVendor";
-            }
-
+            $body_elements["VENDORPARTYTYPE"]="Person";
+            $body_elements["COMPANYTYPE"]=($beanCuenta->pais_nacimiento_c=='2') ? "LegalPerson" : "ForeignCompany";
             $body_elements["PERSONFIRSTNAME"]=$beanCuenta->primernombre_c;
             $body_elements["PERSONLASTNAME"]=$beanCuenta->apellidopaterno_c;
-            $body_elements["PERSONMIDDLENAME"]=$beanCuenta->segundonombre_c;
-            $body_elements["LANGUAGEID"]="es-MX";
-            $body_elements["RFCFEDERALTAXNUMBER"]=$beanCuenta->rfc_c;
-            //$body_elements["FOREIGNVENDORTAXREGISTRATIONID"]="";
-            //$body_elements["SALESTAXGROUPCODE"]="";
-            $body_elements["VENDORGROUPID"]="PROV";
-            $body_elements["VENDORPARTYTYPE"]="Person";
-            $body_elements["PRIMARYEMAILADDRESS"]=$beanCuenta->email1;
-            $body_elements["PRIMARYEMAILADDRESSDESCRIPTION"]="PRINCIPAL";
-            $body_elements["PRIMARYEMAILADDRESSPURPOSE"]="Business";
-
-            /*
-             * Sección para obtener direcciones
-             * */
-
+            $body_elements["PERSONMIDDLENAME"]=$beanCuenta->apellidomaterno_c;
+        }else{
+            $body_elements["VENDORPARTYTYPE"]="Organization";
+            $body_elements["COMPANYTYPE"]=($beanCuenta->pais_nacimiento_c=='2') ? "LegalEntity" : "ForeignCompany";
+            $body_elements["VENDORORGANIZATIONNAME"]=$beanCuenta->razonsocial_c;
+            $body_elements["VENDORSEARCHNAME"]=$beanCuenta->razonsocial_c;
         }
 
+        //Recupera dirección
+        $beanCuenta->load_relationship('accounts_dire_direccion_1');
+        foreach ($beanCuenta->accounts_dire_direccion_1->getBeans() as $a_direccion) {
+            if (!empty($a_direccion->calle)) {
+                //Arma petición para enviar dirección
+                $body_elements["ADDRESSDESCRIPTION"]="PRINCIPAL";
+                $body_elements["ADDRESSLOCATIONROLES"]="Business";
+                $body_elements["ADDRESSCOUNTRYREGIONID"]="MEX";
+                $body_elements["ADDRESSZIPCODE"]=$a_direccion->dire_direccion_dire_codigopostal_name;
+                $body_elements["ADDRESSSTREET"]=$a_direccion->calle;
+                $body_elements["ADDRESSSTREETNUMBER"]=$a_direccion->numext;
+            }
+        }
 
-
-
-        $argsVendor=array(
+        //Recupera cuentas bancarias
+        $beanCuenta->load_relationship('cta_cuentas_bancarias_accounts');
+        $GLOBALS['log']->fatal('Recupera cuenta bancaria');
+        foreach ($beanCuenta->cta_cuentas_bancarias_accounts->getBeans() as $ctaBancaria) {
+            //Valida Cuenta bancaria
+            $GLOBALS['log']->fatal('Itera cuenta bancaria');
+            if (strlen($ctaBancaria->cuenta)>=8 || strlen($ctaBancaria->clabe)>=8 ) {
+                $GLOBALS['log']->fatal('Entra cuenta bancaria: '. $ctaBancaria->name);
+                //Arma petición para enviar cuenta bancaria
+                global $app_list_strings;
+                $mapeoBancos = $app_list_strings['dynamics365_mapeo_bancos_list'];
+                $rutaBancaria = $app_list_strings['dynamics365_ruta_bancaria_list'];
+                $idBancoDynamics = $mapeoBancos[$ctaBancaria->banco];
+                $body_elements["BANKGROUPID"]=$idBancoDynamics;
+                $body_elements["ROUTINGNUMBER"]=$rutaBancaria[$idBancoDynamics];
+                //Valida Cuenta bancaria
+                if (strlen($ctaBancaria->cuenta)>=8) {
+                    $body_elements["VENDORBANKACCOUNTID"]="T-".substr($ctaBancaria->cuenta, -8);
+                    $body_elements["BANKACCOUNTNUMBER"]=$ctaBancaria->cuenta;
+                    $records_list[]=$body_elements;
+                }
+                //Valida CLABE
+                if (strlen($ctaBancaria->clabe)>=8 ) {
+                    $body_elements["VENDORBANKACCOUNTID"]="I-".substr($ctaBancaria->clabe, -8);
+                    $body_elements["BANKACCOUNTNUMBER"]=$ctaBancaria->clabe;
+                    $records_list[]=$body_elements;
+                }
+            }
+        }
+        //Estructua ejemplo
+        /*$argsVendor=array(
             "_contract"=>array(
-                    "DataAreaId"=>"UFIN",
-                    "VENDORACCOUNTNUMBER"=>"23901",
-                    "ADDRESSCITY"=>"CDMX",
-                    "ADDRESSCOUNTRYREGIONID"=>"MEX",
-                    "ADDRESSCOUNTYID"=>"POLANCO V",
-                    "ADDRESSDESCRIPTION"=>"POLANCO V",
-                    "ADDRESSLOCATIONROLES"=>"Business",
-                    "ADDRESSSTATEID"=>"CDMX",
-                    "ADDRESSSTREET"=>"Texcoco",
-                    "ADDRESSSTREETNUMBER"=>"80",
-                    "ADDRESSZIPCODE"=>"55240",
-                    "COMPANYTYPE"=>"LegalEntity",
-                    "CURRENCYCODE"=>"MXN",
-                    "DEFAULTLEDGERDIMENSIONDISPLAYVALUE"=>"",
-                    "DEFAULTOFFSETACCOUNTTYPE"=>"Ledger",
-                    "DEFAULTPAYMENTDAYNAME"=>"LUNES",//NO MANDAR
-                    "DEFAULTPAYMENTTERMSNAME"=>"CONTADO",
-                    "DEFAULTVENDORPAYMENTMETHODNAME"=>"TRANSFER",
+                "DataAreaId"=>"UFIN",
+                "VENDORACCOUNTNUMBER"=>"23901",
+                "ADDRESSCITY"=>"CDMX",
+                "ADDRESSCOUNTRYREGIONID"=>"MEX",
+                "ADDRESSCOUNTYID"=>"POLANCO V",
+                "ADDRESSDESCRIPTION"=>"POLANCO V",
+                "ADDRESSLOCATIONROLES"=>"Business",
+                "ADDRESSSTATEID"=>"CDMX",
+                "ADDRESSSTREET"=>"Texcoco",
+                "ADDRESSSTREETNUMBER"=>"80",
+                "ADDRESSZIPCODE"=>"55240",
+                "COMPANYTYPE"=>"LegalEntity",
+                "CURRENCYCODE"=>"MXN",
+                "DEFAULTLEDGERDIMENSIONDISPLAYVALUE"=>"",
+                "DEFAULTOFFSETACCOUNTTYPE"=>"Ledger",
+                "DEFAULTPAYMENTDAYNAME"=>"LUNES",//NO MANDAR
+                "DEFAULTPAYMENTTERMSNAME"=>"CONTADO",
+                "DEFAULTVENDORPAYMENTMETHODNAME"=>"TRANSFER",
                 "DIOTOPERATIONTYPE"=>"085",
                 "DIOTVENDORTYPE"=>"DomesticVendor",
                 "LANGUAGEID"=>"es-MX",
@@ -162,36 +187,33 @@ class Dynamics365 extends SugarApi
                 "BANKGROUPID"=>"014",
                 "ROUTINGNUMBER"=>"123456789101"
             )
-        );
+        );*/
+
+        //Valida total de registros en $records_list
+        if (count($records_list)==0) {
+            $records_list[]=$body_elements;
+        }
+
+        //Itera $records_list
+        $responseDynamics = '';
+        foreach ($records_list as $item) {
+          $argsVendor = array(
+              '_contract'=>$item
+          );
 
 
-        $argsVendor=array(
-            "_contract"=>array(
-                "DataAreaId"=>"UFIN",
-                "VENDORACCOUNTNUMBER"=>"23901",
-                "COMPANYTYPE"=>"LegalPerson",
-                "CURRENCYCODE"=>"MXN",
-                "DIOTOPERATIONTYPE"=>"Other",
-                "DIOTVENDORTYPE"=>"DomesticVendor",
-                "LANGUAGEID"=>"es-MX",
-                "RFCFEDERALTAXNUMBER"=>"LOBS9204102W3",
-                "VENDORGROUPID"=>"PROV",
-                "VENDORPARTYTYPE"=>"Organization",
-                "VENDORORGANIZATIONNAME"=>"ENTERPRISES DANONE  S.A. de C.V.",
-                "VENDORSEARCHNAME"=>"ENTERPRISES DANONE  S.A. de C.V.",
-            )
-        );
-
-        $hostVendor="https://unifindevaos.sandbox.ax.dynamics.com/api/services/TT_ProveedorServicesGrp/TT_ProveedorServices/createVendor/";
-        $GLOBALS['log']->fatal('JSON');
-        $GLOBALS['log']->fatal(json_encode($argsVendor));
-        $responseCreate=$this->postDynamics($hostVendor,$token_format,$argsVendor);
-
-        return $responseCreate;
+          $hostVendor=$resource."/api/services/TT_ProveedorServicesGrp/TT_ProveedorServices/createVendor";
+          $GLOBALS['log']->fatal('Request Dynamics: Alta proveedor');
+          $GLOBALS['log']->fatal(json_encode($argsVendor));
+          $responseCreate=$this->postDynamics($hostVendor,$token,$argsVendor);
+          //$GLOBALS['log']->fatal('Response: '. $responseCreate);
+          $responseDynamics = ($responseCreate->Success) ? $responseDynamics . ' - ' . $responseCreate->Message : $responseDynamics . ' - ' . $responseCreate->ExceptionType;
+        }
+        return $responseDynamics;
 
     }
 
-    public function postDynamics($host,$token, $fields)
+    public function postDynamicsToken($host,$fields)
     {
         $curl = curl_init();
 
@@ -206,20 +228,32 @@ class Dynamics365 extends SugarApi
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => $fields,
         ));
-        if($token!=""){
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-                    'Content-Type: application/json'
-                )
-            );
-            curl_setopt($curl, CURLOPT_HTTPHEADER, $token);
-            curl_setopt($curl,CURLOPT_POSTFIELDS,json_encode($fields));
-            //curl_setopt($curl,CURLOPT_POSTFIELDS,'{\n   \"_contract\": \"{\\\"DataAreaId\\\":\\\"UFIN\\\",\\\"VENDORACCOUNTNUMBER\\\":\\\"0000PRUEBA07\\\",\\\"ADDRESSCITY\\\":\\\"CDMX\\\",\\\"ADDRESSCOUNTRYREGIONID\\\":\\\"MEX\\\",\\\"ADDRESSCOUNTYID\\\":\\\"POLANCO V\\\",\\\"ADDRESSDESCRIPTION\\\":\\\"PRINCIPAL\\\",\\\"ADDRESSLOCATIONROLES\\\":\\\"Business\\\",\\\"ADDRESSSTATEID\\\":\\\"CDMX\\\",\\\"ADDRESSSTREET\\\":\\\"Texcoco\\\",\\\"ADDRESSSTREETNUMBER\\\":\\\"80\\\",\\\"ADDRESSZIPCODE\\\":\\\"55240\\\",\\\"COMPANYTYPE\\\":\\\"LegalEntity\\\",\\\"CURRENCYCODE\\\":\\\"MXN\\\",\\\"DEFAULTLEDGERDIMENSIONDISPLAYVALUE\\\":\\\"\\\",\\\"DEFAULTOFFSETACCOUNTTYPE\\\":\\\"Ledger\\\",\\\"DEFAULTPAYMENTDAYNAME\\\":\\\"LUNES\\\",\\\"DEFAULTPAYMENTTERMSNAME\\\":\\\"CONTADO\\\",\\\"DEFAULTVENDORPAYMENTMETHODNAME\\\":\\\"TRANSFER\\\",\\\"DIOTOPERATIONTYPE\\\":\\\"Other\\\",\\\"DIOTVENDORTYPE\\\":\\\"DomesticVendor\\\",\\\"LANGUAGEID\\\":\\\"es-MX\\\",\\\"PERSONFIRSTNAME\\\":\\\"NOMBRE\\\",\\\"PERSONLASTNAME\\\":\\\"APELLIDO\\\",\\\"PERSONMIDDLENAME\\\":\\\"SEGNOMBRE\\\",\\\"PRIMARYEMAILADDRESS\\\":\\\"CORREO@PRUEBA.COM\\\",\\\"PRIMARYEMAILADDRESSDESCRIPTION\\\":\\\"PRINCIPAL\\\",\\\"PRIMARYEMAILADDRESSPURPOSE\\\":\\\"Business\\\",\\\"RFCFEDERALTAXNUMBER\\\":\\\"ABR010822TE7\\\",\\\"SALESTAXGROUPCODE\\\":\\\"IVA16%\\\",\\\"VENDORGROUPID\\\":\\\"PROV\\\",\\\"VENDORORGANIZATIONNAME\\\":\\\"Administradora Cantillo  S.A. de C.V.\\\",\\\"VENDORPARTYTYPE\\\":\\\"Organization\\\",\\\"VENDORSEARCHNAME\\\":\\\"Prueba dos\\\",\\\"FOREIGNVENDORTAXREGISTRATIONID\\\":\\\"\\\",\\\"VENDORBANKACCOUNTID\\\":\\\"T-0000674321\\\",\\\"BANKACCOUNTNUMBER\\\":\\\"014180655022843137\\\",\\\"BANKGROUPID\\\":\\\"014\\\",\\\"ROUTINGNUMBER\\\":\\\"123456789101\\\"}\"\n}');
-        }
-
 
         $response = curl_exec($curl);
-
         curl_close($curl);
+        return json_decode($response);
+    }
+
+    public function postDynamics($host,$token, $fields)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_URL, $host);
+        //curl_setopt($ch, CURLOPT_USERAGENT, $agent);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLINFO_HEADER_OUT, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Authorization: Bearer '.$token));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+
+
+        //$GLOBALS['log']->fatal('Manda dynamic proveedor: ' . $host);
+        $response = curl_exec($ch);
+
+        curl_close($ch);
+        $GLOBALS['log']->fatal($response);
         return json_decode($response);
     }
 

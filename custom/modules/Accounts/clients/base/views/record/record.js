@@ -2632,34 +2632,46 @@
     },
 
     requestDynamics:function(){
+        //Valida que sea proveedor
+        var tipo_cuenta=this.model.get('tipo_registro_cuenta_c');
+        var proveedor=this.model.get('esproveedor_c');
+        var cedente=this.model.get('cedente_factor_c');
+        var deudor=this.model.get('deudor_factor_c');
+        if (tipo_cuenta =='5' || proveedor || cedente || deudor) {
+            var self=this;
+            var body={
+                "accion":this.model.get('id')
+            }
+            app.alert.show('infoDynamics', {
+                level: 'process',
+                closeable: false,
+                messages: app.lang.get('LBL_LOADING'),
+            });
+            //Consumir servicio de OTP
+            app.api.call('create', app.api.buildURL("Dynamics365"), body, {
+                success: _.bind(function (data) {
+                    app.alert.dismiss('infoDynamics');
+                    if(data !=null){
+                        self.model.set('control_dynamics_365_c',data);
+                    }
+                }, this),
+                error: _.bind(function (response) {
+                    app.alert.dismiss('infoDynamics');
+                    app.alert.show('error_otp', {
+                        level: 'error',
+                        messages: response.textStatus+'\n"Error al enviar información hacia Dynamics 365"',
+                        autoClose: true
+                    });
 
-        var self=this;
-        var body={
-            "accion":this.model.get('id')
+                },this)
+            });
+        }else {
+            app.alert.show('no_envia_dynamics', {
+                level: 'warning',
+                messages: 'La cuenta no cumple con los criterios de Proveedor para enviar a Dynamics 365',
+                autoClose: true
+            });
         }
-        app.alert.show('infoDynamics', {
-            level: 'process',
-            closeable: false,
-            messages: app.lang.get('LBL_LOADING'),
-        });
-        //Consumir servicio de OTP
-        app.api.call('create', app.api.buildURL("Dynamics365"), body, {
-            success: _.bind(function (data) {
-                app.alert.dismiss('infoDynamics');
-                if(data !=null){
-                    self.model.set('control_dynamics_365_c',data);
-                }
-            }, this),
-            error: _.bind(function (response) {
-                app.alert.dismiss('infoDynamics');
-                app.alert.show('error_otp', {
-                    level: 'error',
-                    messages: response.textStatus+'\n"Error al enviar información hacia Dynamics 365"',
-                    autoClose: true
-                });
-
-            },this)
-        });
 
     },
 
@@ -3291,7 +3303,7 @@
         //Validacion Actividad Economica - antes macro sector
         if (($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "") && (this.model.get('tipo_registro_cuenta_c') == '3' || this.model.get('tipo_registro_cuenta_c') == '5'
             || this.model.get('esproveedor_c') == true || this.model.get('subtipo_registro_cuenta_c') == '7' || this.model.get('subtipo_registro_cuenta_c') == '8' || this.model.get('subtipo_registro_cuenta_c') == '9')) {
-            
+
             $('.campoAE').find('.record-label').css('color', 'red');
             $('.list_ae').find('.select2-choice').css('border-color', 'red');
             errors['actividadeconomica_c'] = "Error: Favor de verificar los errores";
@@ -5375,7 +5387,7 @@
         //Extiende This
         cont_uni_p = this;
         Productos = [];
-        //Facha Actual 
+        //Facha Actual
         var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth() + 1;
@@ -5861,16 +5873,16 @@
     //        this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
 
     //RFC_ValidatePadron: function (fields, errors, callback) {
-    //	
+    //
     //	var rfc = this.getField('rfc_c');
     //	var valuerfc = this.model.get('rfc_c');
     //	var anticrfc = this._get_rfc_antiguo();
-    //	        
-    //	if( (this.model.get('pais_nacimiento_c') == "2") 
+    //
+    //	if( (this.model.get('pais_nacimiento_c') == "2")
     //		&& (!_.isEmpty(valuerfc) && valuerfc != "" && valuerfc != "undefined")
     //		&& (anticrfc != valuerfc) && (rfc.action === "edit" || rfc.action === "create")
     //		&& ( this.model.get('estado_rfc_c') == null || this.model.get('estado_rfc_c') == "" || this.model.get('estado_rfc_c') == "0")){
-    //		
+    //
     //		app.api.call('GET', app.api.buildURL('GetRFCValido/?rfc='+this.model.get('rfc_c')),null, {
     //			success: _.bind(function (data) {
     //				if (data != "" && data != null) {
@@ -5905,8 +5917,8 @@
     //					});
     //					errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
     //					errors['error_RFC_Padron'].required = true;
-    //				}		
-    //				callback(null, fields, errors);					
+    //				}
+    //				callback(null, fields, errors);
     //			}, this),
     //			error: _.bind(function (error) {
     //				app.alert.show("Error Validar RFC", {
@@ -5922,7 +5934,7 @@
     //		});
     //	}else{
     //      	  callback(null, fields, errors);
-    //    }			
+    //    }
     //},
 
     //cambioRFC: function(){
