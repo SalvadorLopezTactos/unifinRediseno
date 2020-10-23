@@ -1531,7 +1531,7 @@ where rfc_c = '{$bean->rfc_c}' and
         $queryResult = $db->query($query);
         // Resumen Vista 360
         $beanResumen = BeanFactory::getBean('tct02_Resumen', $bean->id);
-        // uni_Productos 
+        // uni_Productos
         $bean->load_relationship('accounts_uni_productos_1');
         $relatedBeans = $bean->accounts_uni_productos_1->getBeans();
         foreach ($relatedBeans as $rel) {
@@ -1764,29 +1764,4 @@ where rfc_c = '{$bean->rfc_c}' and
 
     }
 
-    public function IntegraDynamics($bean = null, $event = null, $args = null)
-    {
-
-        //Integración con Dynamics en creación de cuenta
-        //Obteniendo tipo de Cuenta
-        // Proveedor esproveedor_c check
-        // Tipo cliente tipo_registro_cuenta_c =3
-        // Cedente Factoraje cedente_factor_c check
-        // Deudor Factoraje deudor_factor_c check
-        $tipo_cuenta=$bean->tipo_registro_cuenta_c;
-        $proveedor=$bean->esproveedor_c;
-        $cedente=$bean->cedente_factor_c;
-        $deudor=$bean->deudor_factor_c;
-
-        if(!$args['isUpdate'] && ($tipo_cuenta=='3' || $proveedor || $cedente || $deudor)){
-            //Consumir servicio de dynamics, declarado en custom api
-            $apiDynamics= new Dynamics365();
-            $body=array('accion'=>"456");
-            $response=$apiDynamics->setRequestDynamics('',$body);
-
-            $bean->control_dynamics_365_c=$response;
-        }
-
-
-    }
 }
