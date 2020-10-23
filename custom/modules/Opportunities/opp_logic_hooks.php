@@ -100,7 +100,7 @@
                     $numeroDeFolio = $callApi->generarFolios(2);
                     $bean->idsolicitud_c = $numeroDeFolio;
                 }
-                if($bean->tct_etapa_ddw_c=='SI') {//@jesus
+                if($bean->tct_etapa_ddw_c=='SI' && $bean->tipo_de_operacion_c != 'RATIFICACION_INCREMENTO') {//@jesus
                     $bean->name = "PRE - SOLICITUD " . $numeroDeFolio . " - " . $beanCuenta->name;
                 }else{
                     if($bean->tipo_de_operacion_c != "RATIFICACION_INCREMENTO"){
@@ -196,12 +196,22 @@
     */
     function creaSolicitud($bean = null, $event = null, $args = null)
     {
+        require_once("custom/clients/base/api/excluir_productos.php");
+
         global $db, $current_user;
+            $args_uni_producto=[];
+            $args_uni_producto['idCuenta']=$bean->account_id;
+            $args_uni_producto['Producto']=$bean->tipo_producto_c;
+            $EjecutaApi = new excluir_productos();
+            $response_exluye = $EjecutaApi->Excluyeprecalif(null,$args_uni_producto);
             $GLOBALS['log']->fatal('Inicia creaSolicitud');
+            $GLOBALS['log']->fatal('Respuesta Excluyeprecalif: '.$response_exluye);
             $generaSolicitud = false;
             $generaSolicitud = ($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI' && $bean->tipo_producto_c!='6' && $bean->tipo_producto_c!='1') ? true : $generaSolicitud;
             $generaSolicitud = ($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI' && $bean->tipo_producto_c=='1' && $bean->vobo_dir_c== true) ? true : $generaSolicitud;
             $generaSolicitud = ($bean->tipo_producto_c =='3' || $bean->tipo_producto_c =='7' || ($bean->tipo_de_operacion_c == 'RATIFICACION_INCREMENTO' && $bean->tipo_producto_c!='1')) ? true : $generaSolicitud;
+            $generaSolicitud = ($bean->tipo_de_operacion_c == 'RATIFICACION_INCREMENTO' && $bean->tipo_producto_c=='1' && $response_exluye==1) ? true : $generaSolicitud;
+            $generaSolicitud = ($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI' && $bean->tipo_producto_c=='1' && $response_exluye== 1) ? true : $generaSolicitud;
             if($generaSolicitud){
                 $GLOBALS['log']->fatal('valor generaSolicitud: '.$generaSolicitud);
             if (($bean->id_process_c == 0 || $bean->id_process_c == null || empty($bean->id_process_c))/* && $bean->estatus_c == 'P' */ && $bean->tipo_operacion_c == '1') {
@@ -289,7 +299,15 @@ SQL;
     }
 
         public function creaRatificacion($bean = null, $event = null, $args = null){
+
+            require_once("custom/clients/base/api/excluir_productos.php");
             global $current_user;
+            $args_uni_producto=[];
+            $args_uni_producto['idCuenta']=$bean->account_id;
+            $args_uni_producto['Producto']=$bean->tipo_producto_c;
+            $EjecutaApi = new excluir_productos();
+            $response_exluye = $EjecutaApi->Excluyeprecalif(null,$args_uni_producto);
+
             $_REQUEST['crea_ratificacion'] += 1;
             if($bean->ratificacion_incremento_c==1 && $bean->tipo_operacion_c == '2' && $bean->tipo_de_operacion_c == 'LINEA_NUEVA'){
                 // CVV - 30/03/2016 - Crea una nueva operacion para la solicitud de R/I
@@ -315,7 +333,7 @@ SQL;
                 $opp->name = " R/I " . $bean->name;
                 //author: Salvador Lopez
                 //SECION DE PRECALIFICACION COMERCIAL
-                if($bean->tipo_producto_c=='1'){
+                if($bean->tipo_producto_c=='1'&& $response_exluye==0){
                     $opp->tct_etapa_ddw_c="SI";//SOLICITUD INICIAL
                     $opp->estatus_c="1";//VALIDACION COMERCIAL
                 }else{
@@ -339,7 +357,7 @@ SQL;
                 $opp->ca_pago_mensual_c = $bean->ca_pago_mensual_c;
 
                 //Se hereda director de solicitud
-                $opp->director_solicitud_c = $bean->director_solicitud_c;
+                //$opp->director_solicitud_c = $bean->director_solicitud_c;
 
                 //AF - 16/03/2018 - Cambio de porcentaje de renta incial: Hereda valor de la línea nueva y no de condiciones financieras
                 $opp->porciento_ri_c = $bean->porciento_ri_c;

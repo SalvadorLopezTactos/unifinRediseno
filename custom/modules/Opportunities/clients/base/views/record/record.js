@@ -19,6 +19,7 @@
         this.events['keydown input[name=puntos_tasa_moratorio_c]'] = 'limitanumero';
         this.events['keydown input[name=factor_moratorio_c]'] = 'limitanumero';
         this.events['click a[name=cancel_button]'] = 'cancelClicked';
+        this.events['click a[name=edit_button]'] = 'editClicked';
         this.events['click a[name=monto_c]'] = 'formatcoin';
         this.events['click a[name=amount]'] = 'formatcoin';
         this.events['click a[name=ca_pago_mensual_c]'] = 'formatcoin';
@@ -26,6 +27,10 @@
         //Oculta botones para autorizar y rechazar Solicitud (precalificacion)
         $('[name="vobo_leasing"]').hide();
         $('[name="rechazo_leasing"]').hide();
+        //Oculta campos referentes a Precalificacion comercial
+        //$('[data-name="opportunities_directores"]').hide();
+        //$('[data-name="vobo_descripcion_txa_c"]').hide();
+        //$('[data-name="doc_scoring_chk_c"]').hide();
 
         //Contexto para exlcuir_check
         banderaExcluye= this;
@@ -137,7 +142,7 @@
         //de ratificacion_incremento_c se haya seleccionado
         this.model.addValidationTask('alertaDirectorNotificacion', _.bind(this.alertaDirectorNotificacion, this));
         //Validación para poder autorizar o rechazar la pre-solicitud
-        //this.model.on('sync', this.autorizapre, this);
+        this.model.on('sync', this.autorizapre, this);
         this.model.on('change:estatus_c', this.refrescaPipeLine, this);
     },
 
@@ -217,6 +222,34 @@
     cancelClicked: function () {
         this._super('cancelClicked');
         window.contador = 0;
+        this.autorizapre();
+        //this.muestraOcultaCampoDirector();
+        this.controlVistaCamposPrecalificacion();
+    },
+
+    editClicked:function(){
+        this._super('editClicked');
+        this.autorizapre();
+        //this.muestraOcultaCampoDirector();
+        this.controlVistaCamposPrecalificacion();
+
+    },
+
+    muestraOcultaCampoDirector:function(){
+
+        if(this.model.get('tipo_producto_c')!=undefined){
+            if(this.model.get('tipo_producto_c')!='1'){ //Tipo 1 = LEASING
+                $('[data-type="opportunities_directores"]').hide();
+            }else{
+                if (banderaExcluye.check.includes(1)) {
+                    $('[data-type="opportunities_directores"]').hide();
+                }
+                else{
+                    $('[data-type="opportunities_directores"]').show();
+                }
+            }
+        }
+
     },
 
     //No muestra en alert en algunos casos
@@ -287,12 +320,13 @@
 
         }
 
-        this.evaluaCampoSolicitudVobo();
-        this.evaluaCampoEnviarNotificacion();
+        //this.evaluaCampoSolicitudVobo();
+        //this.evaluaCampoEnviarNotificacion();
     },
 
     _render: function () {
         this._super("_render");
+
         //Victor M.L 30-08-2018
         //Agrega validación para restringir edición de Gestión Comercial
         this.noEdita();
@@ -317,8 +351,9 @@
         //Oculta campo de control para director de la solicitud
         $('[data-name="director_solicitud_c"]').hide();
 
-        this.evaluaCampoSolicitudVobo();
-        this.evaluaCampoEnviarNotificacion();
+        //this.evaluaCampoSolicitudVobo();
+        //this.evaluaCampoEnviarNotificacion();
+        this.controlVistaCamposPrecalificacion();
 
         //Victor M.L 19-07-2018
         //no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
@@ -545,11 +580,12 @@
 
         //Oculta campo de Director Notificado
         this.$('div[data-name="director_notificado_c"]').hide();
+        this.$('div[data-name="bandera_excluye_chk_c"]').hide();
     },
 
     evaluaCampoSolicitudVobo:function () {
 
-        if(this.model.get('tipo_producto_c')=='1'){
+        if(this.model.get('tipo_producto_c')=='1' && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))){
             $('[data-name="vobo_descripcion_txa_c"]').show();
             if(this.model.get('director_notificado_c')){
                 //Se establece como solo lectura el campo
@@ -578,6 +614,15 @@
         }else{
             $('[data-name="doc_scoring_chk_c"]').attr('style', '');
         }
+
+        if(this.model.get('tipo_producto_c')=='1' && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))){
+            $('[data-name="doc_scoring_chk_c"]').show();
+        }else{
+
+            $('[data-name="doc_scoring_chk_c"]').hide();
+        }
+
+
     },
 
     validacionCuentaSubcuentaCheck: function (fields, errors, callback) {
@@ -1290,7 +1335,7 @@
                 }
                 else {
                     if (this.model.get('tct_razon_op_perdida_ddw_c') != "") {
-                        if (this.model.get('tct_etapa_ddw_c') == "SI") {
+                        if (this.model.get('tct_etapa_ddw_c') == "SI" && this.model.get('tipo_de_operacion_c')!="RATIFICACION_INCREMENTO") {
                             this.model.set('estatus_c', 'K');
 
                             app.alert.show("CancelcacSol", {
@@ -2583,8 +2628,10 @@
         var id= this.model.get('id');
         var producto=this.model.get('tipo_producto_c');
         var operacion=this.model.get('tipo_de_operacion_c');
+        var status=this.model.get('estatus_c');
 
-        if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA" && banderaExcluye.check.includes(0)) {
+        //if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA") {
+        if(producto==1 && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0) && status!="K")) {
             app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
                 success: function  (data) {
                     if (data.records.length == 0) {
@@ -2610,8 +2657,10 @@
         var producto= this.model.get('tipo_producto_c');
         var operacion=this.model.get('tipo_de_operacion_c');
         var chk=this.model.get('ratificacion_incremento_c');
-        if (operacion!='RATIFICACION_INCREMENTO'&& chk!=true) {
-            if ((check == false || check == undefined) && producto == 1 && operacion == 'LINEA_NUEVA' && banderaExcluye.check.includes(0)) {
+        var status=this.model.get('estatus_c');
+        if (chk!=true && status!="K") {
+            if ((check == false || check == undefined) && producto == 1 && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))) {
+            //if ((check == false || check == undefined) && producto == 1 && operacion == 'LINEA_NUEVA' && banderaExcluye.check.includes(0)) {
                 app.alert.show("Error_vobo", {
                     level: "info",
                     messages: "La solicitud pasará a integración de expediente en cuanto se tenga el Vo.Bo del director.",
@@ -2773,8 +2822,8 @@
             });
         }
 
-        this.evaluaCampoSolicitudVobo();
-        this.evaluaCampoEnviarNotificacion();
+        //this.evaluaCampoSolicitudVobo();
+        //this.evaluaCampoEnviarNotificacion();
     },
 
     reqBenefSuby: function (fields, errors, callback) {
@@ -3005,29 +3054,39 @@
     },
 
     exluyeFunc: function () {
-        var operacion=this.model.get('tipo_de_operacion_c');
+
         var producto= this.model.get('tipo_producto_c');
-        var etapa= this.model.get('tct_etapa_ddw_c');
         var status= this.model.get('estatus_c');
         var cuenta=this.model.get('account_id');
 
-        if (producto== "1" && operacion == 'LINEA_NUEVA' && (etapa=="SI"|| etapa=="P") && status!='K'){
+        if (producto== "1" && status!='K'){
             app.api.call('GET', app.api.buildURL('productoExcluye/' + cuenta + "/" + producto), null, {
                 success: _.bind(function (data) {
                     if(data=='1'){
                         banderaExcluye.check.push(1);
                         this.autorizapre();
+                        //$('[data-name="opportunities_directores"]').hide();
+                        //$('[data-name="vobo_descripcion_txa_c"]').hide();
+                        //$('[data-name="doc_scoring_chk_c"]').hide();
+                        self.model.set('bandera_excluye_chk_c',1);
                     }else{
                         banderaExcluye.check.push(0);
+                        //$('[data-name="opportunities_directores"]').show();
+                        //$('[data-name="vobo_descripcion_txa_c"]').show();
+                        //$('[data-name="doc_scoring_chk_c"]').show();
                     }
+                    this.controlVistaCamposPrecalificacion();
                 }, self),
             });
+        }else {
+            this.controlVistaCamposPrecalificacion();
         }
     },
   
     alertaDirectorNotificacion:function (fields, errors, callback) {
 
-        if(this.model.get('ratificacion_incremento_c')==true && this.model.get('tipo_producto_c')=='1' && this.model.get('tipo_de_operacion_c')!='RATIFICACION_INCREMENTO' && Object.keys(errors).length==0){
+        if(this.model.get('ratificacion_incremento_c')==true && this.model.get('tipo_producto_c')=='1' && this.model.get('tipo_de_operacion_c')!='RATIFICACION_INCREMENTO' && Object.keys(errors).length==0
+        && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))){
             app.alert.show("alert_director_ratificacion", {
                 level: "info",
                 title: "Se debe de enviar la notificación para VoBo del director dentro de la solicitud generada para Ratificación/Incremento",
@@ -3037,6 +3096,31 @@
         }
 
         callback(null, fields, errors);
+    },
+
+    controlVistaCamposPrecalificacion:function () {
+
+        if(this.model.get('tipo_producto_c')!=undefined){
+            if(this.model.get('tipo_producto_c')!='1' || banderaExcluye.check.includes(1)){
+                $('[data-name="opportunities_directores"]').hide();
+                $('[data-name="vobo_descripcion_txa_c"]').hide();
+                $('[data-name="doc_scoring_chk_c"]').hide();
+
+            }else{
+
+                if(this.model.get('director_notificado_c') || this.model.get('estatus_c')=='K' || this.model.get('estatus_c')=='R' || this.model.get('estatus_c')=='N'){
+                    $('[data-name="opportunities_directores"]').attr('style','pointer-events:none');
+                    $('[data-name="vobo_descripcion_txa_c"]').attr('style','pointer-events:none');
+                    $('[data-name="doc_scoring_chk_c"]').attr('style','pointer-events:none');
+
+                }
+
+            }
+
+        }
+
+
+
     }
 
 })

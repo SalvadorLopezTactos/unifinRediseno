@@ -90,12 +90,20 @@ array (
               6 => 
               array (
                 'type' => 'rowaction',
+                'event' => 'button:dynamics_button:click',
+                'name' => 'dynamics_365',
+                'label' => 'Enviar a Dynamics 365',
+                'acl_action' => 'view',
+              ),
+              7 => 
+              array (
+                'type' => 'rowaction',
                 'event' => 'button:cotizador_button:click',
                 'name' => 'cotizador',
                 'label' => 'Cotizador',
                 'acl_action' => 'view',
               ),
-              7 => 
+              8 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:Historial_cotizaciones_button:click',
@@ -103,7 +111,7 @@ array (
                 'label' => 'Historial de Cotizaciones',
                 'acl_action' => 'view',
               ),
-              8 => 
+              9 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:expediente_button:click',
@@ -111,7 +119,7 @@ array (
                 'label' => 'Expediente',
                 'acl_action' => 'view',
               ),
-              9 => 
+              10 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:negociacion:click',
@@ -119,7 +127,7 @@ array (
                 'label' => 'Generar Disposicion',
                 'acl_action' => 'view',
               ),
-              12 => 
+              11 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:convierte_lead:click',
@@ -128,7 +136,7 @@ array (
                 'acl_action' => 'view',
                 'class' => 'jcmx1',
               ),
-              13 => 
+              12 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:conversion_cliente_uniclick:click',
@@ -137,7 +145,7 @@ array (
                 'acl_action' => 'view',
                 'class' => 'jcmx1',
               ),
-              14 => 
+              13 => 
               array (
                 'name' => 'send_survey',
                 'type' => 'rowaction',
@@ -145,7 +153,7 @@ array (
                 'acl_action' => 'send_survey',
                 'event' => 'button:send_survey:click',
               ),
-              15 => 
+              14 => 
               array (
                 'name' => 'send_poll',
                 'type' => 'rowaction',
@@ -153,14 +161,14 @@ array (
                 'acl_action' => 'send_poll',
                 'event' => 'button:send_poll:click',
               ),
-              16 => 
+              15 => 
               array (
                 'name' => 'get_account_asesor',
                 'type' => 'rowaction',
                 'label' => 'Quiero esta Cuenta',
                 'event' => 'button:get_account_asesor:click',
               ),
-              17 => 
+              16 => 
               array (
                 'name' => 'send_account_asesor',
                 'type' => 'rowaction',
@@ -232,6 +240,14 @@ array (
             array (
               0 => 
               array (
+                'name' => 'control_dynamics_365_c',
+                'label' => 'LBL_CONTROL_DYNAMICS_365_C',
+              ),
+              1 => 
+              array (
+              ),
+              2 => 
+              array (
                 'name' => 'account_tipoSubtipo',
                 'studio' => 'visible',
                 'label' => 'LBL_ACCOUNT_TIPOSUBTIPO',
@@ -239,70 +255,70 @@ array (
                 'dismiss_label' => true,
                 'span' => 12,
               ),
-              1 => 
+              3 => 
               array (
                 'name' => 'rfc_qr',
                 'label' => 'LBL_RFC_QR',
                 'studio' => 'visible',
                 'span' => 12,
               ),
-              2 => 
+              4 => 
               array (
                 'name' => 'path_img_qr_c',
                 'label' => 'LBL_PATH_IMG_QR',
                 'span' => 12,
               ),
-              3 => 
+              5 => 
               array (
                 'name' => 'nivel_digitalizacion_c',
                 'label' => 'LBL_NIVEL_DIGITALIZACION_C',
               ),
-              4 => 
+              6 => 
               array (
                 'name' => 'tipo_registro_cuenta_c',
                 'label' => 'LBL_TIPO_REGISTRO_CUENTA',
               ),
-              5 => 
+              7 => 
               array (
                 'name' => 'subtipo_registro_cuenta_c',
                 'label' => 'LBL_SUBTIPO_REGISTRO_CUENTA',
               ),
-              6 => 
+              8 => 
               array (
                 'name' => 'tct_prioridad_ddw_c',
               ),
-              7 => 
+              9 => 
               array (
                 'name' => 'tct_homonimo_chk_c',
                 'label' => 'LBL_TCT_HOMONIMO_CHK',
               ),
-              8 => 
+              10 => 
               array (
               ),
-              9 => 
+              11 => 
               array (
                 'name' => 'esproveedor_c',
                 'label' => 'LBL_ESPROVEEDOR',
               ),
-              10 => 
+              12 => 
               array (
                 'name' => 'cedente_factor_c',
                 'label' => 'LBL_CEDENTE_FACTOR',
               ),
-              11 => 
+              13 => 
               array (
                 'name' => 'deudor_factor_c',
                 'label' => 'LBL_DEUDOR_FACTOR',
               ),
-              12 => 
+              14 => 
               array (
                 'name' => 'tct_no_contactar_chk_c',
                 'label' => 'LBL_TCT_NO_CONTACTAR_CHK',
               ),
-              13 => 
+              15 => 
               array (
               ),
-              14 => 
+              16 => 
               array (
               ),
             ),
@@ -737,8 +753,6 @@ array (
               ),
               49 => 
               array (
-                  /*'name' => 'multilinea_c',
-                  'label' => 'LBL_MULTILINEA_C',*/
               ),
             ),
           ),
@@ -795,28 +809,6 @@ array (
             'placeholders' => 1,
             'fields' => 
             array (
-              // 0 => 
-              // array (
-              //   'name' => 'tct_macro_sector_ddw_c',
-              //   'label' => 'LBL_TCT_MACRO_SECTOR_DDW',
-              // ),
-              // 1 => 
-              // array (
-              //   'name' => 'sectoreconomico_c',
-              //   'label' => 'LBL_SECTORECONOMICO',
-              // ),
-              // 2 => 
-              // array (
-              //   'name' => 'subsectoreconomico_c',
-              //   'studio' => 'visible',
-              //   'label' => 'LBL_SUBSECTORECONOMICO',
-              // ),
-              // 3 => 
-              // array (
-              //   'name' => 'actividadeconomica_c',
-              //   'studio' => 'visible',
-              //   'label' => 'LBL_ACTIVIDADECONOMICA',
-              // ),
               0 => 
               array (
                 'related_fields' => 
@@ -853,7 +845,7 @@ array (
                 'name' => 'potencial_cuenta_c',
                 'label' => 'LBL_POTENCIAL_CUENTA',
               ),
-              4 =>
+              4 => 
               array (
                 'name' => 'total_empleados_c',
                 'label' => 'LBL_TOTAL_EMPLEADOS_C',
@@ -864,9 +856,9 @@ array (
                 'name' => 'empleados_c',
                 'label' => 'LBL_EMPLEADOS',
               ),
-              6 =>
+              6 => 
               array (
-                'related_fields' =>
+                'related_fields' => 
                 array (
                   0 => 'currency_id',
                   1 => 'base_rate',
@@ -874,11 +866,10 @@ array (
                 'name' => 'tct_depositos_promedio_c',
                 'label' => 'LBL_TCT_DEPOSITOS_PROMEDIO_C',
               ),
-              7 =>
+              7 => 
               array (
-                
               ),
-              8 =>
+              8 => 
               array (
                 'related_fields' => 
                 array (
@@ -888,21 +879,21 @@ array (
                 'name' => 'tct_prom_cheques_cur_c',
                 'label' => 'LBL_TCT_PROM_CHEQUES_CUR_C',
               ),
-              9 =>
+              9 => 
               array (
                 'name' => 'dates_account_statements',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_DATES_ACCOUNT_STATEMENTS_C',
                 'type' => 'dates_account_statements',
               ),
-              10 =>
+              10 => 
               array (
                 'name' => 'tct_dates_acc_statements_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_DATES_ACC_STATEMENTS_C',
                 'span' => 12,
               ),
-              11 =>
+              11 => 
               array (
                 'name' => 'potencial_autos',
                 'studio' => 'visible',
@@ -978,15 +969,15 @@ array (
               ),
               5 => 
               array (
-                  'name' => 'promotorrm_c',
-                  'studio' => 'visible',
-                  'label' => 'LBL_PROMOTORRM_C',
-                  'initial_filter' => 'filterPromotorTemplate',
-                  'initial_filter_label' => 'LBL_FILTER_PROMOTOR_TEMPLATE',
-                  'filter_populate' =>
-                      array (
-                          'tipodeproducto_c' => '11',
-                      ),
+                'name' => 'promotorrm_c',
+                'studio' => 'visible',
+                'label' => 'LBL_PROMOTORRM_C',
+                'initial_filter' => 'filterPromotorTemplate',
+                'initial_filter_label' => 'LBL_FILTER_PROMOTOR_TEMPLATE',
+                'filter_populate' => 
+                array (
+                  'tipodeproducto_c' => '11',
+                ),
               ),
             ),
           ),
