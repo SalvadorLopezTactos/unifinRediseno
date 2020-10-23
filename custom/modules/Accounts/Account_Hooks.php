@@ -1531,7 +1531,7 @@ where rfc_c = '{$bean->rfc_c}' and
         $queryResult = $db->query($query);
         // Resumen Vista 360
         $beanResumen = BeanFactory::getBean('tct02_Resumen', $bean->id);
-        // uni_Productos 
+        // uni_Productos
         $bean->load_relationship('accounts_uni_productos_1');
         $relatedBeans = $bean->accounts_uni_productos_1->getBeans();
         foreach ($relatedBeans as $rel) {
@@ -1763,4 +1763,5 @@ where rfc_c = '{$bean->rfc_c}' and
 
 
     }
+
 }
