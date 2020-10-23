@@ -57,7 +57,7 @@ function NotiFiscalDiaria_job()
 		//$GLOBALS['log']->fatal('name_file',$name_file);
 		
 		$ruta_archivo = $_SERVER['DOCUMENT_ROOT'].$site."/upload/".$name_file;
-		$ruta_archivo2 = "/upload/".$name_file;
+		$ruta_archivo2 = "upload/".$name_file;
 	
 		date_default_timezone_set('America/Mexico_City');
 		header('Content-Encoding: UTF-8');
@@ -72,6 +72,7 @@ function NotiFiscalDiaria_job()
 		//mb_convert_encoding($ruta_archivo, 'UTF-16LE', 'UTF-8');
 		
 		//$GLOBALS['log']->fatal('archivo',$ruta_archivo);
+		$GLOBALS['log']->fatal('archivo',$ruta_archivo2);
 		$file = fopen($ruta_archivo2, "w");
 		fputs($file, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ));
 		$flag = false;
