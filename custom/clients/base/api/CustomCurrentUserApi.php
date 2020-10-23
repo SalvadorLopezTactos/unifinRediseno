@@ -50,6 +50,8 @@ class CustomCurrentUserApi extends CurrentUserApi
         $userArray['current_user']['depurar_leads_c'] = $current_user->depurar_leads_c;
         $userArray['current_user']['tct_cancelar_ref_cruzada_chk_c'] = $current_user->tct_cancelar_ref_cruzada_chk_c;
         $userArray['current_user']['multilinea_c'] = $current_user->multilinea_c;
+        $userArray['current_user']['responsable_oficina_chk_c'] = $current_user->responsable_oficina_chk_c;
+        $userArray['current_user']['excluir_precalifica_c'] = $current_user->excluir_precalifica_c;
 
         return $userArray;
     }

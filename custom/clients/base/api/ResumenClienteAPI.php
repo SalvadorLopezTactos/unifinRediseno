@@ -54,7 +54,7 @@ class ResumenClienteAPI extends SugarApi
         3 = CREDITO AUTOMOTRIZ
         4 = FACTORAJE
         5 = LINEA CREDITO SIMPLE
-		6 = UNICLICK
+		    6 = UNICLICK
         */
 
         //Define colores:
@@ -160,7 +160,7 @@ class ResumenClienteAPI extends SugarApi
             "fecha_pago" => "",
             "promotor" => "",
             "color" => "");
-		 //Uniclick
+        //Uniclick
         $arr_principal['uniclick'] = array("linea_autorizada" => "",
             "estatus_atencion"=>"",
             "tipo_cuenta"=>"",
@@ -178,7 +178,15 @@ class ResumenClienteAPI extends SugarApi
             "linea_disponible" => "",
             "promotor" => "",
             "color" => "");
-
+        //Seguros
+        $arr_principal['seguros'] = array(
+            "total" => 0,
+            "ganadas" => 0,
+            "proceso" => 0,
+            "prima" => 0,
+            "ingreso" => 0,
+            "color" => $Azul
+        );
         //Historial de contactos
         $arr_principal['historial_contactos'] = array(
             "ultima_cita" => "",
@@ -204,7 +212,8 @@ class ResumenClienteAPI extends SugarApi
             "inegi_sector" => "",
             "inegi_subsector" => "",
             "inegi_clase" => "",
-            "inegi_descripcion" => ""
+            "inegi_descripcion" => "",
+            "inegi_acualiza_uni2" => ""
         );
 
         //String operaciones
@@ -228,21 +237,17 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['factoring']['promotor']=$beanPersona->promotorfactoraje_c;
             $arr_principal['credito_auto']['promotor']=$beanPersona->promotorcredit_c;
             $arr_principal['fleet']['promotor']=$beanPersona->promotorfleet_c;
-			$arr_principal['credito_sos']['promotor']=$beanPersona->promotorleasing_c;
+			      $arr_principal['credito_sos']['promotor']=$beanPersona->promotorleasing_c;
             $arr_principal['uniclick']['promotor']=$beanPersona->promotoruniclick_c;
             $arr_principal['unilease']['promotor']=$beanPersona->promotoruniclick_c;
             $arr_principal['rm']['promotor']=$beanPersona->promotorrm_c;
-
 
             //Nivel satisfacción
             $arr_principal['leasing']['nivel_satisfaccion']=$beanPersona->nivel_satisfaccion_c;
             $arr_principal['factoring']['nivel_satisfaccion']=$beanPersona->nivel_satisfaccion_factoring_c;
             $arr_principal['credito_auto']['nivel_satisfaccion']=$beanPersona->nivel_satisfaccion_ca_c;
-
             //Estatus atención
             $arr_principal['historial_contactos']['estatus_atencion']=$beanPersona->tct_status_atencion_ddw_c;
-
-
         }
 
         ############################
@@ -274,10 +279,8 @@ class ResumenClienteAPI extends SugarApi
             //$vencimiento_cauto = date("Y-m-d");
             $vencimiento_cauto = "";
             $vencimiento_sos = "";
-
             $vencimiento_sos='';
-
-			$vencimiento_uniclick ='';
+			      $vencimiento_uniclick ='';
             $vencimiento_unilease ='';
 
             //Recorre operaciones
@@ -606,7 +609,6 @@ class ResumenClienteAPI extends SugarApi
                   $users[] = $row['id_c'];
                 }
 
-
                 //Recorre llamadas
                 if (count($users)>0) {
                   foreach ($relatedCalls as $call) {
@@ -649,8 +651,6 @@ class ResumenClienteAPI extends SugarApi
                       }
                   }
                 }
-
-
                 $arr_principal['historial_contactos']['llamadas']= $total_llamadas;
                 //$GLOBALS['log']->fatal("ResumenPersona: 2");
             }
@@ -711,7 +711,6 @@ class ResumenClienteAPI extends SugarApi
                     $arr_principal['leasing']['anexos_historicos']= $beanResumen->leasing_anexos_historicos;
                 }
 
-
                 //Recupera Factoring
                 // $arr_principal['factoring']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_f_c;
                 $arr_principal['factoring']['fecha_pago']= $beanResumen->factoring_fecha_pago;
@@ -723,7 +722,6 @@ class ResumenClienteAPI extends SugarApi
                 {
                     $arr_principal['factoring']['anexos_historicos']= $beanResumen->factoring_anexos_historicos;
                 }
-
 
                 //Recupera Credito Auto
                 // $arr_principal['credito_auto']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_ca_c;
@@ -743,7 +741,7 @@ class ResumenClienteAPI extends SugarApi
                 //Recupera Crédito SOS
                 $arr_principal['credito_sos']['fecha_pago']=$beanResumen->sos_fecha_pago_c;
 
-				//Recupera Uniclick
+				        //Recupera Uniclick
                 // $arr_principal['uniclick']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_uc_c;
                 $arr_principal['uniclick']['fecha_pago']= $beanResumen->cauto_fecha_pago;
 
@@ -758,7 +756,7 @@ class ResumenClienteAPI extends SugarApi
                 $arr_principal['inegi']['inegi_subsector'] = $beanResumen->inegi_subsector_c;
                 $arr_principal['inegi']['inegi_clase'] = $beanResumen->inegi_clase_c;
                 $arr_principal['inegi']['inegi_descripcion'] = $beanResumen->inegi_descripcion_c;
-
+                $arr_principal['inegi']['inegi_acualiza_uni2'] = $beanResumen->inegi_acualiza_uni2_c;
             }
         }
 
@@ -902,9 +900,7 @@ class ResumenClienteAPI extends SugarApi
             //amarillo
             if($fecha_VL > $current_date && $meses <= 2) {
                 $arr_principal['leasing']['color']=$Amarillo;
-
             }
-
         }
 
         /**
@@ -939,9 +935,7 @@ class ResumenClienteAPI extends SugarApi
             //amarillo
             if($fecha_VL > $current_date && $meses <= 2) {
                 $arr_principal['factoring']['color']=$Amarillo;
-
             }
-
         }
 
         /**
@@ -1051,7 +1045,30 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['historial_contactos']['color'] = $Rojo;
         }
 
-
+        ############################
+        ## Recupera y procesa Seguros asociadas
+        ############################
+        if($beanPersona->load_relationship('s_seguros_accounts')) {
+          $relatedSeguros = $beanPersona->s_seguros_accounts->getBeans();
+          if($relatedSeguros) {
+            $arr_principal['seguros']['total'] = count($relatedSeguros);
+            foreach($relatedSeguros as $seguro) {
+              if($seguro->etapa == 9) {
+                $ganadas = $ganadas + 1;
+                $prima += $seguro->prima_neta_ganada_c;
+                $ingreso += $seguro->prima_neta;
+              }
+              else {
+                if($seguro->etapa != 10) $proceso = $proceso + 1;
+              }
+            }
+            $arr_principal['seguros']['ganadas'] = $ganadas;
+            $arr_principal['seguros']['proceso'] = $proceso;
+            $arr_principal['seguros']['prima'] = $prima;
+            $arr_principal['seguros']['ingreso'] = $ingreso;
+          }
+        }
+        
         ############################
         ## Regresa resultado
         // $GLOBALS['log']->fatal('resultado de API:');
@@ -1059,7 +1076,5 @@ class ResumenClienteAPI extends SugarApi
         //$api->platform;
 
         return $arr_principal;
-
     }
-
 }

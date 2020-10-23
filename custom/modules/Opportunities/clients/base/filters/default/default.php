@@ -1,5 +1,5 @@
 <?php
-// created: 2018-08-21 11:19:06
+// created: 2020-09-03 01:00:24
 $viewdefs['Opportunities']['base']['filter']['default'] = array (
   'default_filter' => 'all_records',
   'fields' => 
@@ -29,6 +29,12 @@ $viewdefs['Opportunities']['base']['filter']['default'] = array (
     array (
     ),
     'date_entered' => 
+    array (
+    ),
+    'tipo_operacion_c' => 
+    array (
+    ),
+    'ratificacion_incremento_c' => 
     array (
     ),
     'sales_status' => 

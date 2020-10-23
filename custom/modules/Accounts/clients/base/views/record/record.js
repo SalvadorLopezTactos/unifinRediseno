@@ -289,7 +289,6 @@
         this.model.addValidationTask('FleetUP', _.bind(this.requeridosFleetUP, this));
         this.model.addValidationTask('UniclickUP', _.bind(this.requeridosUniclickUP, this));
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
-
     },
 
     /** Asignacion modal */
@@ -825,7 +824,7 @@
         pld.render();
         //Potencial Autos
         Pautos.autos = app.utils.deepCopy(Pautos.prev_autos);
-        this.model.set('potencial_autos', Pautos);
+        // this.model.set('potencial_autos', Pautos);
         Pautos.render();
         // this.model._previousAttributes.account_telefonos = account_telefonos;
         // this.model._previousAttributes.account_direcciones = account_direcciones;
@@ -835,10 +834,15 @@
         this.$('[data-name="promotorcredit_c"]').attr('style', '');
         this.$('[data-name="promotorfleet_c"]').attr('style', '');
 
-        //Clasificacion Sectorial - Actividad Economica
+        //Valores Previos Clasificacion Sectorial - Actividad Economica e INEGI
         clasf_sectorial.ActividadEconomica = app.utils.deepCopy(clasf_sectorial.prevActEconomica);
+        clasf_sectorial.ResumenCliente.inegi.inegi_sector = clasf_sectorial.prevActEconomica.inegi_sector;
+        clasf_sectorial.ResumenCliente.inegi.inegi_subsector = clasf_sectorial.prevActEconomica.inegi_subsector;
+        clasf_sectorial.ResumenCliente.inegi.inegi_rama = clasf_sectorial.prevActEconomica.inegi_rama;
+        clasf_sectorial.ResumenCliente.inegi.inegi_subrama = clasf_sectorial.prevActEconomica.inegi_subrama;
+        clasf_sectorial.ResumenCliente.inegi.inegi_clase = clasf_sectorial.prevActEconomica.inegi_clase;
+        clasf_sectorial.ResumenCliente.inegi.inegi_descripcion = clasf_sectorial.prevActEconomica.inegi_descripcion;
         clasf_sectorial.render();
-
     },
 
     bindDataChange: function () {
@@ -1102,9 +1106,10 @@
 
         this.$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
 
-        if (app.user.attributes.multilinea_c == 0 || app.user.attributes.multilinea_c == "") {
-            $('div[data-name=multilinea_c]').css("pointer-events", "none");
-        }
+        // if (app.user.attributes.multilinea_c == 0 || app.user.attributes.multilinea_c == "") {
+        //     $('div[data-name=multilinea_c]').css("pointer-events", "none");
+        // }
+
         //Oculta campos de Macro Sector
         this.$("div[data-name='tct_macro_sector_ddw_c']").hide();
         this.$("div[data-name='sectoreconomico_c']").hide();
@@ -5392,6 +5397,7 @@
                     Productos[key]['visible_noviable'] = (Productos[key]['visible_noviable'] != "0") ? true : false;
                     Productos[key]['no_viable'] = (Productos[key]['no_viable'] != "0") ? true : false;
                     Productos[key]['multilinea_c'] = (Productos[key]['multilinea_c'] == "1") ? true : false;
+                    Productos[key]['exclu_precalif_c'] = (Productos[key]['exclu_precalif_c'] == "1") ? true : false;
 
                     switch (tipoProducto) {
                         case "1": //Leasing
@@ -5435,6 +5441,13 @@
                             ResumenProductos['unilease'] = Productos[key];
                             Oproductos.productos.tct_tipo_cuenta_ul_c = Productos[key]['tipo_cuenta'];
                             Oproductos.productos.tct_subtipo_ul_txf_c = Productos[key]['subtipo_cuenta'];
+                            break;
+                        case "10": //Seguros
+                            var dias = fecha1.diff(fecha2, 'days');
+                            Productos[key]['dias'] = dias;
+                            ResumenProductos['seguros'] = Productos[key];
+                            Oproductos.productos.tct_tipo_cuenta_se_c = Productos[key]['tipo_cuenta'];
+                            Oproductos.productos.tct_subtipo_se_txf_c = Productos[key]['subtipo_cuenta'];
                             break;
                         default:
                             break;
@@ -5823,7 +5836,7 @@
         var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
 
 
-        if ($('.list_u_canal').select2('val') == "0" && userprod.includes('8')) {
+        if ($('.list_u_canal').select2('val') == "0"  && (userprod.includes('8') || userprod.includes('9'))) {
             $('.list_u_canal').find('.select2-choice').css('border-color', 'red');
             faltantesUniclickCanal += 1;
         }

@@ -684,18 +684,18 @@ SQL;
 
     public function textToUppperCase($bean = null, $event = null, $args = null)
     {
-        if ($_REQUEST['module'] != 'Import') {
-            foreach ($bean as $field => $value) {
-                if ($bean->field_defs[$field]['type'] == 'varchar' && $field != 'encodedkey_mambu_c' && $field != 'path_img_qr_c') {
-                    $value = mb_strtoupper($value, "UTF-8");
-                    $bean->$field = $value;
-                }
-                if ($bean->field_defs[$field]['name'] == 'name') {
-                    $value = mb_strtoupper($value, "UTF-8");
-                    $bean->$field = $value;
-                }
-            }
+      if ($_REQUEST['module'] != 'Import') {
+        foreach ($bean as $field => $value) {
+          if ($bean->field_defs[$field]['type'] == 'varchar' && $field != 'encodedkey_mambu_c' && $field != 'path_img_qr_c' && $field != 'salesforce_id_c') {
+               $value = mb_strtoupper($value, "UTF-8");
+               $bean->$field = $value;
+          }
+          if ($bean->field_defs[$field]['name'] == 'name') {
+               $value = mb_strtoupper($value, "UTF-8");
+               $bean->$field = $value;
+          }
         }
+      }
     }
 
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/19/2015 Description: Logic hook to call WS Actualiza persona en UNICS*/
@@ -1254,8 +1254,8 @@ where rfc_c = '{$bean->rfc_c}' and
             $beanprod = null;
 
             $module = 'uni_Productos';
-            $key_productos = array('1', '4', '3', '6', '8', '7', '9');
-            $name_productos = array('-LEASING', '-FACTORAJE', '-CRÉDITO AUTOMOTRIZ', '-FLEET', '-UNICLICK', '-CRÉDITO SOS', '-UNILEASE');
+            $key_productos = array('1', '4', '3', '6', '8', '7', '9', '10');
+            $name_productos = array('-LEASING', '-FACTORAJE', '-CRÉDITO AUTOMOTRIZ', '-FLEET', '-UNICLICK', '-CRÉDITO SOS', '-UNILEASE', '-SEGUROS');
             $count = count($name_productos);
             $current_prod = null;
             $fechaAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
@@ -1310,6 +1310,9 @@ where rfc_c = '{$bean->rfc_c}' and
                         break;
                     case '9': //Unilease
                         $beanprod->assigned_user_id = $bean->user_id7_c;
+                        break;
+                    case '10': //Seguros
+                        $beanprod->assigned_user_id = '1';
                         break;
                 }
                 //Guarda registro y vincula a cuenta

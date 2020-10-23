@@ -147,7 +147,11 @@ array (
             'name' => 'subpuesto_c',
             'label' => 'LBL_SUBPUESTO',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'no_empleado_c',
+            'label' => 'LBL_NO_EMPLEADO',
+          ),
         ),
         2 => 
         array (
@@ -347,6 +351,28 @@ array (
             'name' => 'multilinea_c',
             'label' => 'LBL_MULTILINEA_C',
           ),
+        ),
+        8 => 
+        array (
+          0 => 
+          array (
+            'name' => 'notifica_fiscal_c',
+            'label' => 'LBL_NOTIFICA_FISCAL',
+          ),
+          1 => 
+          array (
+            'name' => 'responsable_oficina_chk_c',
+            'label' => 'LBL_RESPONSABLE_OFICINA_CHK',
+          ),
+        ),
+        9 => 
+        array (
+          0 => 
+          array (
+            'name' => 'excluir_precalifica_c',
+            'label' => 'LBL_EXCLUIR_PRECALIFICA',
+          ),
+          1 => '',
         ),
       ),
     ),

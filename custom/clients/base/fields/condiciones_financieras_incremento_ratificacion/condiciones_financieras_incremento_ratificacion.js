@@ -42,8 +42,10 @@
         this._super('initialize', [options]);
         this.listascfRI();
 
-
-
+        contRI.oFinancieraRI = [];
+        contRI.oFinancieraRI.ratificacion = [];
+        contRI.prev_oFinancieraRI = [];
+        contRI.prev_oFinancieraRI.prev_ratificacion = [];
     },
 
     listascfRI: function () {
@@ -158,7 +160,7 @@
         }else {
             input.css('border-color', '');
             //Actualiza modelo con el valor de los campos modificados
-            contRI.oFinancieraRI.ratificacion[index][nombre] = numero;
+            this.oFinancieraRI.ratificacion[index][nombre] = numero;
         }
 
     },
@@ -304,8 +306,8 @@
         var inputs= this.$("[data-name='"+nombre+"']");
         var index = inputs.index(input);
         //Elimina el objeto de la lista
-        contRI.oFinancieraRI.ratificacion.splice([index],1);
-        contRI.render();
+        this.oFinancieraRI.ratificacion.splice([index],1);
+        this.render();
     },
 
     //Evento que actualiza los campos de la condicion con base en el activo seleccionado
@@ -408,6 +410,6 @@
         var nombre= input[0].dataset.name;
         var inputs= this.$("[data-name='"+nombre+"']");
         var index = inputs.index(input);
-        contRI.oFinancieraRI.ratificacion[index][nombre]=input[index].value;
+        this.oFinancieraRI.ratificacion[index][nombre]=input[index].value;
     },
 })

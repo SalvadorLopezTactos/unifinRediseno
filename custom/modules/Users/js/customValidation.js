@@ -191,6 +191,7 @@ $(window).load(function(){
     $('#cuenta_especial_c').attr('disabled','disabled');
     $('#depurar_leads_c').attr('disabled','disabled');
     $('#multilinea_c').attr('disabled','disabled');
+    $('#responsable_oficina_chk_c').attr('disabled','disabled');
 
    }
   }catch(error){
@@ -230,6 +231,7 @@ $(window).load(function(){
       $('#cuenta_especial_c').attr('disabled','disabled');
       $('#depurar_leads_c').attr('disabled','disabled');
       $('#multilinea_c').attr('disabled','disabled');
+      $('#responsable_oficina_chk_c').attr('disabled','disabled');
 
     }
   }

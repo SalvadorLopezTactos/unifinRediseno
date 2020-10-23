@@ -1,5 +1,5 @@
 <?php
- // created: 2019-06-26 13:09:28
+ // created: 2020-09-22 18:48:44
 
 $app_list_strings['Relaciones_Activas_list']=array (
   '' => '',
@@ -13,6 +13,7 @@ $app_list_strings['Relaciones_Activas_list']=array (
   'Depositario' => 'Depositario',
   'Directivo' => 'Directivo',
   'Referencia' => 'Referencia',
+  'Garante' => 'Garante',
   'Referencia Personal' => 'Referencia Personal',
   'Referencia Cliente' => 'Referencia Cliente',
   'Referencia Proveedor' => 'Referencia Proveedor',
