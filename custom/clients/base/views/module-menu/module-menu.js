@@ -71,7 +71,7 @@
                     var roleReasignacionPromotores = false;
                     _.each(data, function (key, value) {
 
-                        if (key == "Reasignacion de Promotores") {
+                        if (key == "Reasignacion de Promotores" || key == "Admin CRM" ) {
                             roleReasignacionPromotores = true;
                         }
                     });
