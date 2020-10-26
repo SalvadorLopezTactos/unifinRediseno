@@ -201,8 +201,7 @@ SQL;
                 $telefono->assigned_user_id = $bean->assigned_user_id;
                 $telefono->team_set_id = $bean->team_set_id;
                 $telefono->team_id = $bean->team_id;
-                $telefono->whatsapp_c = $a_telefono['whatsapp_c'] == 1 ? 1 : 0;
-                $GLOBALS['log']->fatal('WhatsApp: ' . $telefono->whatsapp_c);
+                $telefono->whatsapp_c = ($a_telefono['tipotelefono']==3 || $a_telefono['tipotelefono']==4) && $a_telefono['whatsapp_c'] == 1 ? 1 : 0;
                 $current_id_list[] = $telefono->save();
             }
             //retrieve all related records
