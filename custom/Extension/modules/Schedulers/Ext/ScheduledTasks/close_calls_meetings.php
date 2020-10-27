@@ -31,12 +31,12 @@
 
         $contadorc=0;
         $contadorm=0;
-
+        $today = date("Y-m-d H:i:s");
         while($row = $GLOBALS['db']->fetchByAssoc($resultc) )
         {
             $idc = $row['id'];
             $queryUpdatec="update calls
-              set status = 'Not Held', date_modified=now()
+              set status = 'Not Held', date_modified='{$today}'
               where id='{$idc}';";
             $resultUpdatec = $GLOBALS['db']->query($queryUpdatec);
             $contadorc++;
@@ -54,7 +54,7 @@
         {
             $idm = $row['id'];
             $queryUpdatem="update meetings
-              set status = 'Not Held',date_modified=now()
+              set status = 'Not Held',date_modified='{$today}'
               where id='{$idm}';";
             $resultUpdatem = $GLOBALS['db']->query($queryUpdatem);
             $contadorm++;
