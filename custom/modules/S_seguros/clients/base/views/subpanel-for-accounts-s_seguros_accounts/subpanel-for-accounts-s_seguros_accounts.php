@@ -1,5 +1,5 @@
 <?php
-// created: 2020-08-20 10:38:27
+// created: 2020-10-26 18:58:30
 $viewdefs['S_seguros']['base']['view']['subpanel-for-accounts-s_seguros_accounts'] = array (
   'panels' => 
   array (
@@ -26,6 +26,20 @@ $viewdefs['S_seguros']['base']['view']['subpanel-for-accounts-s_seguros_accounts
         ),
         2 => 
         array (
+          'name' => 'tipo_registro_sf_c',
+          'label' => 'LBL_TIPO_REGISTRO_SF',
+          'enabled' => true,
+          'default' => true,
+        ),
+        3 => 
+        array (
+          'name' => 'ejecutivo_c',
+          'label' => 'LBL_EJECUTIVO',
+          'enabled' => true,
+          'default' => true,
+        ),
+        4 => 
+        array (
           'name' => 'prima_obj_c',
           'label' => 'LBL_PRIMA_OBJ_C',
           'enabled' => true,
@@ -33,21 +47,22 @@ $viewdefs['S_seguros']['base']['view']['subpanel-for-accounts-s_seguros_accounts
           'currency_format' => true,
           'default' => true,
         ),
-        3 => 
+        5 => 
         array (
           'name' => 'prima_neta_ganada_c',
           'label' => 'LBL_PRIMA_NETA_GANADA',
+          'type' => 'currency',
           'enabled' => true,
           'default' => true,
         ),
-        4 => 
+        6 => 
         array (
           'name' => 'fecha_ini_c',
           'label' => 'LBL_FECHA_INI_C',
           'enabled' => true,
           'default' => true,
         ),
-        5 => 
+        7 => 
         array (
           'label' => 'LBL_DATE_MODIFIED',
           'enabled' => true,
@@ -63,12 +78,12 @@ $viewdefs['S_seguros']['base']['view']['subpanel-for-accounts-s_seguros_accounts
     'direction' => 'desc',
   ),
   'type' => 'subpanel-list',
-    'rowactions' =>
+  'rowactions' => 
   array (
-    'actions' =>
+    'actions' => 
     array (
-    0 =>
-    array (
+      0 => 
+      array (
         'type' => 'rowaction',
         'css_class' => 'btn',
         'tooltip' => 'LBL_PREVIEW',
