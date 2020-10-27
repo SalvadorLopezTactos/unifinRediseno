@@ -11,7 +11,6 @@ class NotificacionDirector
         global $db;
 
         if($bean->director_solicitud_c!="" && $bean->director_solicitud_c!=null && $bean->director_notificado_c==0 && $bean->doc_scoring_chk_c==1){
-            $GLOBALS['log']->fatal("Inicia notificaDirector");
 
             $documento="";
             $extensionArchivo="";
@@ -53,12 +52,8 @@ class NotificacionDirector
             //Obteniendo correo de director Leasing
             $beanDirector = BeanFactory::retrieveBean('Users', $idDirector);
             if(!empty($beanDirector)){
-                $GLOBALS['log']->fatal("Obtiene correo de director Leasing");
                 $correo_director=$beanDirector->email1;
                 $nombreDirector=$beanDirector->full_name;
-
-                $GLOBALS['log']->fatal("Correo: ".$correo_director);
-
             }
 
             $urlSugarDoc=$GLOBALS['sugar_config']['site_url'].'/#Documents/';
@@ -96,7 +91,6 @@ class NotificacionDirector
                 }
 
                 //Obtener correo de director regional
-                $GLOBALS['log']->fatal("Obtener correo de director regional");
                 $idUsuarioAsignado=$bean->assigned_user_id;
                 $region_asignado="";
                 $correo_regional="";
@@ -106,11 +100,9 @@ class NotificacionDirector
                 $beanAsignado = BeanFactory::retrieveBean('Users', $idUsuarioAsignado);
                 if(!empty($beanAsignado)){
                     $region_asignado=$beanAsignado->region_c;
-                    $GLOBALS['log']->fatal("Region Asignado: ".$region_asignado);
                 }
 
                 if($region_asignado!=""){
-                    $GLOBALS['log']->fatal("Realiza consulta para director regional: ".$region_asignado);
                     //PUESTO USUARIO DIRECTOR REGIONAL LEASING =33
                     $queryDirectorRegional=<<<SQL
  SELECT id,puestousuario_c, u.status,u.user_name,uc.region_c FROM users u INNER JOIN  users_cstm uc
@@ -140,7 +132,7 @@ SQL;
                     $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION A DIRECTOR DE SOLICITUD ".$correo_director);
 
                     //Enviando correo a director de solicitud con copia  a director regional leasing
-                    $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreo,$correo_director,$nombreDirector,$rutasAdjuntos,$array_user_regional);
+                    $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreo,$correo_director,$nombreDirector,$rutasAdjuntos,$array_user_regional,$current_user->id, $idSolicitud);
 
                     //ENVIANDO NOTIFICACIÓN A DIRECTOR REGIONAL
                     /*
@@ -340,14 +332,15 @@ SQL;
 
     }
 
+
     public function estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion){
 
 
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreDirector . '</b>
-      <br><br>Se le informa que se ha generado una solicitud de Leasing para la cuenta: <b>'. $nombreCuenta.'</b> y se solicita su autorización.
+      <br><br>Se le informa que se ha generado una solicitud de Leasing para la cuenta: <b>'. $nombreCuenta.'</b> y se solicita su VoBo.
       <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
       <br><br>Se adjunta documento con scoring comercial
-      <br><br>Descripción de asesor:<br>'.$descripcion.'
+      <br><br>Comentarios de asesor:<br>'.$descripcion.'
       <br><br>Atentamente Unifin</font></p>
       <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
 
@@ -391,8 +384,12 @@ SQL;
 
     }
 
-    public function enviarNotificacionDirector($asunto,$cuerpoCorreo,$correoDirector,$nombreDirector,$adjuntos=array(),$recipients=array()){
+    public function enviarNotificacionDirector($asunto,$cuerpoCorreo,$correoDirector,$nombreDirector,$adjuntos=array(),$recipients=array() , $userid,$recordid){
         //Enviando correo a asesor origen
+        $insert = '';
+        $hoy = date("Y-m-d H:i:s");
+        $cc ='';
+
         try{
             $mailer = MailerFactory::getSystemDefaultMailer();
             $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
@@ -404,9 +401,16 @@ SQL;
             if(count($recipients)>0){
                 for($i=0;$i<count($recipients);$i++){
                     $mailer->addRecipientsCc(new EmailIdentity($recipients[$i]['correo'], $recipients[$i]['nombre']));
+                    $cc = $cc.$recipients[$i]['correo'].',';
                 }
 
             }
+
+            /*Se agregan como copia oculta Correos de Wendy Reyes y Cristian Carral*/
+            $mailer->addRecipientsBcc(new EmailIdentity('wendy.reyes@unifin.com.mx', 'Wendy Reyes Peralta'));
+            $mailer->addRecipientsBcc(new EmailIdentity('ccarral@unifin.com.mx', 'Cristian Carral'));
+            $mailcco = 'wendy.reyes@unifin.com.mx,ccarral@unifin.com.mx';
+
             //Añadiendo múltiples adjuntos
             $GLOBALS['log']->fatal("ADJUNTOS TIENE: ".count($adjuntos)." ELEMENTOS");
             if(count($adjuntos)>0){
@@ -417,11 +421,47 @@ SQL;
             }
             $result = $mailer->send();
 
-        }catch (Exception $e){
+            //$GLOBALS['log']->fatal('mailer',$mailer);
+
+            if($correoDirector != ''){
+                $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,description) 
+                VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$correoDirector}', '{$asunto}','TO', 'Solicitudes','OK', 'Correo exitosamente enviado')";
+            }
+            //$GLOBALS['log']->fatal($insert);
+            $GLOBALS['db']->query($insert);
+            if($cc !=''){
+                $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,description) 
+                VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$cc}', '{$asunto}','CC', 'Solicitudes','OK','Correo exitosamente enviado')";
+                $GLOBALS['db']->query($insert);
+            }
+
+            $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,description) 
+            VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$mailcco}', '{$asunto}','CCO', 'Solicitudes','OK','Correo exitosamente enviado')";
+            $GLOBALS['db']->query($insert);
+
+        } catch (Exception $e){
             $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email ".$nombreDirector);
             $GLOBALS['log']->fatal("Exception ".$e);
-        }
 
+            $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,error_code,description)
+            VALUES (uuid() , '{$userid}' , '{$recordid}','{$hoy}','".$correoDirector."-".$cc."-".$mailcco."' , '{$asunto}','to', 'Solicitudes','ERROR','01', '{$e->getMessage()}')";
+            //$GLOBALS['log']->fatal($insert);
+            $GLOBALS['db']->query($insert);
+        } catch (MailerException $me) {
+            $message = $me->getMessage();
+            switch ($me->getCode()) {
+                case \MailerException::FailedToConnectToRemoteServer:
+                    $GLOBALS["log"]->fatal("BeanUpdatesMailer :: error sending email, system smtp server is not set");
+                    break;
+                default:
+                    $GLOBALS["log"]->fatal("BeanUpdatesMailer :: error sending e-mail (method: {$mailTransmissionProtocol}), (error: {$message})");
+                    break;
+            }
+            $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,error_code,description)
+            VALUES (uuid() , '{$userid}' , '{$recordid}','{$hoy}' ,'".$correoDirector."-".$cc."-".$mailcco."', '{$asunto}','to', 'Solicitudes','ERROR','02', '{$message}')";
+            //$GLOBALS['log']->fatal($insert);
+            $GLOBALS['db']->query($insert);
+        }
 
     }
 
