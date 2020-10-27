@@ -173,7 +173,7 @@ SQL;
         global $app_list_strings;
         global $current_user;
         global $db;
-        $GLOBALS['log']->fatal("Inicia notificaEstatusAsesor");
+
         $estatus=$bean->estatus_c;
         $idAsesor=$bean->assigned_user_id;
         $nombreAsesor=$bean->assigned_user_name;
@@ -187,7 +187,6 @@ SQL;
         }
 
         if($estatus=='K' && $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){//Solicitud cancelada
-            $GLOBALS['log']->fatal("Condicion 1, estatus K");
             //Comprobando el fetched_row
             //Enviar notificación al asesor asignado
             //Se arma cuerpo de la notificación
@@ -204,37 +203,32 @@ SQL;
             //Obteniendo correo de director Leasing
             $beanAsesor = BeanFactory::retrieveBean('Users', $idAsesor);
             if(!empty($beanAsesor)){
-                $GLOBALS['log']->fatal("Obteniendo correo de director Leasing");
-
                 $correo_asesor=$beanAsesor->email1;
                 $nombreAsesor=$beanAsesor->full_name;
-                $equipoPrincipal=$beanAsesor->equipos_c;
-
-                $GLOBALS['log']->fatal("Equipos del usuario: ".$equipoPrincipal);
+                $equipoPrincipal=$beanAsesor->equipo_c;
             }
 
             if($correo_asesor!=""){
 
                 if($equipoPrincipal!="" && $equipoPrincipal!="Equipo 0"){
-                    $GLOBALS['log']->fatal("Realiza consulta cuando el equipo principal es: ".$equipoPrincipal);
                     //Puesto 6 = Backoffice Leasing
-                    $queryBackOffice="SELECT id,puestousuario_c, u.status,u.user_name,uc.region_c,uc.equipos_c
-                    FROM users u INNER JOIN users_cstm uc ON u.id=uc.id_c
-                    WHERE uc.puestousuario_c='6' AND u.status='Active' and u.deleted=0 AND uc.equipos_c
-                      IN('^".$equipoPrincipal."^')";
-                    $GLOBALS['log']->fatal($queryBackOffice);
+                    $queryBackOffice=<<<SQL
+ SELECT id,puestousuario_c, u.status,u.user_name,uc.region_c,uc.equipo_c FROM users u INNER JOIN  users_cstm uc
+ ON u.id=uc.id_c WHERE uc.puestousuario_c='6' AND uc.equipo_c='{$equipoPrincipal}'AND u.status='Active'  and u.deleted=0;
+SQL;
                     $queryResult = $db->query($queryBackOffice);
                     $users_bo=array();
                     if($queryResult->num_rows>0){
                         while ($row = $db->fetchByAssoc($queryResult)) {
                             array_push($users_bo,$row['id']);
                         }
+
                         if(count($users_bo)>0){
+
                             for ($i=0;$i<count($users_bo);$i++){
                                 $beanAsignado = BeanFactory::retrieveBean('Users', $users_bo[$i]);
                                 if(!empty($beanAsignado)){
                                     array_push($users_bo_emails,array('correo'=>$beanAsignado->email1,"nombre"=>$beanAsignado->full_name));
-
                                 }
                             }
 
@@ -250,16 +244,15 @@ SQL;
 
                 $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION (ESTATUS RECHAZADA) A ASESOR ASIGNADO DE SOLICITUD ".$correo_asesor);
 
-                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,array(),$users_bo_emails);
+                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,array(),$users_bo_emails,$current_user->id, $idSolicitud);
 
             }else{
                 $GLOBALS['log']->fatal("ASESOR LEASING ".$nombreAsesor." NO TIENE EMAIL");
             }
 
-        }elseif($estatus=='PE' && $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){ //Solicitud Aprobada
+        }else if($estatus=='PE' && $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){ //Solicitud Aprobada
 
             //Enviar notificación al asesor asignado
-            $GLOBALS['log']->fatal("Entra condicion 2, enviar notificacion al Director asignado (estatus PE)");
             //Se arma cuerpo de la notificación
             $urlSugar=$GLOBALS['sugar_config']['site_url'].'/#Opportunities/';
             $nombreCuenta=$bean->account_name;
@@ -270,7 +263,7 @@ SQL;
 
             $equipoPrincipal="";
             $users_bo_emails=array();
-            $GLOBALS['log']->fatal("Obtiene correo del dir leasing");
+
             //Obteniendo correo de director Leasing
             $beanAsesor = BeanFactory::retrieveBean('Users', $idAsesor);
             if(!empty($beanAsesor)){
@@ -280,16 +273,14 @@ SQL;
             }
 
             if($correo_asesor!=""){
-                $GLOBALS['log']->fatal("Correo Director Leasing : ".$correo_asesor);
+
                 if($equipoPrincipal!="" && $equipoPrincipal!="Equipo 0"){
                     //Puesto 6 = Backoffice Leasing
-                    $GLOBALS['log']->fatal("Estatus Aprobado, realiza consulta para equipo principal: ".$equipoPrincipal);
-                    $queryBackOffice="SELECT id,puestousuario_c, u.status,u.user_name,uc.region_c,uc.equipos_c
-                    FROM users u INNER JOIN users_cstm uc ON u.id=uc.id_c
-                    WHERE uc.puestousuario_c='6' AND u.status='Active' and u.deleted=0 AND uc.equipos_c
-                      IN('^".$equipoPrincipal."^')";
+                    $queryBackOffice=<<<SQL
+ SELECT id,puestousuario_c, u.status,u.user_name,uc.region_c,uc.equipo_c FROM users u INNER JOIN  users_cstm uc
+ ON u.id=uc.id_c WHERE uc.puestousuario_c='6' AND uc.equipo_c='{$equipoPrincipal}'AND u.status='Active'  and u.deleted=0;
+SQL;
                     $queryResult = $db->query($queryBackOffice);
-                    $GLOBALS['log']->fatal($queryBackOffice);
                     $users_bo=array();
                     if($queryResult->num_rows>0){
                         while ($row = $db->fetchByAssoc($queryResult)) {
@@ -308,9 +299,7 @@ SQL;
                     }
 
                 }
-                $GLOBALS['log']->fatal("Enviará notificacion AUTORIZADA, no cumple condicion de equipo != 0");
-                $GLOBALS['log']->fatal("Correos Backoffice a enviar: ");
-                $GLOBALS['log']->fatal("RESULTADO", print_r($users_bo_emails, true));
+
                 //$estatusString=$app_list_strings['estatus_c_operacion_list'][$estatus];
                 $estatusString="Autorizada";
 
@@ -318,7 +307,7 @@ SQL;
 
                 $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION (ESTATUS AUTORIZADA) A ASESOR ASIGNADO DE SOLICITUD ".$correo_asesor);
 
-                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,array(),$users_bo_emails);
+                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,array(),$users_bo_emails,$current_user->id, $idSolicitud);
 
             }else{
                 $GLOBALS['log']->fatal("ASESOR LEASING ".$nombreAsesor." NO TIENE EMAIL");
@@ -326,8 +315,8 @@ SQL;
 
         }
 
-    }
 
+    }
 
     public function estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion){
 
@@ -421,18 +410,18 @@ SQL;
 
             if($correoDirector != ''){
                 $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,description) 
-                VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$correoDirector}', '{$asunto}','TO', 'Solicitudes','OK', 'Correo exitosamente enviado')";
+				VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$correoDirector}', '{$asunto}','TO', 'Solicitudes','OK', 'Correo exitosamente enviado')";
             }
             //$GLOBALS['log']->fatal($insert);
             $GLOBALS['db']->query($insert);
             if($cc !=''){
                 $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,description) 
-                VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$cc}', '{$asunto}','CC', 'Solicitudes','OK','Correo exitosamente enviado')";
+				VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$cc}', '{$asunto}','CC', 'Solicitudes','OK','Correo exitosamente enviado')";
                 $GLOBALS['db']->query($insert);
             }
 
             $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,description) 
-            VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$mailcco}', '{$asunto}','CCO', 'Solicitudes','OK','Correo exitosamente enviado')";
+			VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$mailcco}', '{$asunto}','CCO', 'Solicitudes','OK','Correo exitosamente enviado')";
             $GLOBALS['db']->query($insert);
 
         } catch (Exception $e){
@@ -440,7 +429,7 @@ SQL;
             $GLOBALS['log']->fatal("Exception ".$e);
 
             $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,error_code,description)
-            VALUES (uuid() , '{$userid}' , '{$recordid}','{$hoy}','".$correoDirector."-".$cc."-".$mailcco."' , '{$asunto}','to', 'Solicitudes','ERROR','01', '{$e->getMessage()}')";
+			VALUES (uuid() , '{$userid}' , '{$recordid}','{$hoy}','".$correoDirector."-".$cc."-".$mailcco."' , '{$asunto}','to', 'Solicitudes','ERROR','01', '{$e->getMessage()}')";
             //$GLOBALS['log']->fatal($insert);
             $GLOBALS['db']->query($insert);
         } catch (MailerException $me) {
@@ -454,7 +443,7 @@ SQL;
                     break;
             }
             $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,error_code,description)
-            VALUES (uuid() , '{$userid}' , '{$recordid}','{$hoy}' ,'".$correoDirector."-".$cc."-".$mailcco."', '{$asunto}','to', 'Solicitudes','ERROR','02', '{$message}')";
+			VALUES (uuid() , '{$userid}' , '{$recordid}','{$hoy}' ,'".$correoDirector."-".$cc."-".$mailcco."', '{$asunto}','to', 'Solicitudes','ERROR','02', '{$message}')";
             //$GLOBALS['log']->fatal($insert);
             $GLOBALS['db']->query($insert);
         }
