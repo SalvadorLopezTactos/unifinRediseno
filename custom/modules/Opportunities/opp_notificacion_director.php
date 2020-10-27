@@ -238,7 +238,7 @@ SQL;
                         while ($row = $db->fetchByAssoc($queryResult)) {
                             array_push($users_bo,$row['id']);
                         }
-                        $GLOBALS['log']->fatal("Users bo :".$users_bo);
+                        $GLOBALS['log']->fatal("Users bo :".count($users_bo));
                         if(count($users_bo)>0){
                             $GLOBALS['log']->fatal("Cantidad users_BO :".$users_bo);
 
@@ -246,6 +246,7 @@ SQL;
                                 $beanAsignado = BeanFactory::retrieveBean('Users', $users_bo[$i]);
                                 if(!empty($beanAsignado)){
                                     array_push($users_bo_emails,array('correo'=>$beanAsignado->email1,"nombre"=>$beanAsignado->full_name));
+
                                 }
                             }
 
@@ -336,7 +337,6 @@ SQL;
             }
 
         }
-
 
     }
 
