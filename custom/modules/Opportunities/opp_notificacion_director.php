@@ -187,7 +187,7 @@ SQL;
         }
 
         if($estatus=='K' && $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){//Solicitud cancelada
-            //$GLOBALS['log']->fatal("Condicion 1, estatus K");
+            $GLOBALS['log']->fatal("Condicion 1, estatus K");
             //Comprobando el fetched_row
             //Enviar notificación al asesor asignado
             //Se arma cuerpo de la notificación
@@ -204,24 +204,25 @@ SQL;
             //Obteniendo correo de director Leasing
             $beanAsesor = BeanFactory::retrieveBean('Users', $idAsesor);
             if(!empty($beanAsesor)){
-                //$GLOBALS['log']->fatal("Obteniendo correo de director Leasing");
+                $GLOBALS['log']->fatal("Obteniendo correo de director Leasing");
+
                 $correo_asesor=$beanAsesor->email1;
                 $nombreAsesor=$beanAsesor->full_name;
                 $equipoPrincipal=$beanAsesor->equipos_c;
 
-                //$GLOBALS['log']->fatal("Equipos del usuario: ".$equipoPrincipal);
+                $GLOBALS['log']->fatal("Equipos del usuario: ".$equipoPrincipal);
             }
 
             if($correo_asesor!=""){
 
                 if($equipoPrincipal!="" && $equipoPrincipal!="Equipo 0"){
-                    //$GLOBALS['log']->fatal("Realiza consulta cuando el equipo principal es: ".$equipoPrincipal);
+                    $GLOBALS['log']->fatal("Realiza consulta cuando el equipo principal es: ".$equipoPrincipal);
                     //Puesto 6 = Backoffice Leasing
                     $queryBackOffice="SELECT id,puestousuario_c, u.status,u.user_name,uc.region_c,uc.equipos_c
                     FROM users u INNER JOIN users_cstm uc ON u.id=uc.id_c
                     WHERE uc.puestousuario_c='6' AND u.status='Active' and u.deleted=0 AND uc.equipos_c
                       IN('^".$equipoPrincipal."^')";
-                    //$GLOBALS['log']->fatal($queryBackOffice);
+                    $GLOBALS['log']->fatal($queryBackOffice);
                     $queryResult = $db->query($queryBackOffice);
                     $users_bo=array();
                     if($queryResult->num_rows>0){
@@ -258,7 +259,7 @@ SQL;
         }elseif($estatus=='PE' && $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){ //Solicitud Aprobada
 
             //Enviar notificación al asesor asignado
-            //$GLOBALS['log']->fatal("Entra condicion 2, enviar notificacion al Director asignado (estatus PE)");
+            $GLOBALS['log']->fatal("Entra condicion 2, enviar notificacion al Director asignado (estatus PE)");
             //Se arma cuerpo de la notificación
             $urlSugar=$GLOBALS['sugar_config']['site_url'].'/#Opportunities/';
             $nombreCuenta=$bean->account_name;
@@ -269,7 +270,7 @@ SQL;
 
             $equipoPrincipal="";
             $users_bo_emails=array();
-            //$GLOBALS['log']->fatal("Obtiene correo del dir leasing");
+            $GLOBALS['log']->fatal("Obtiene correo del dir leasing");
             //Obteniendo correo de director Leasing
             $beanAsesor = BeanFactory::retrieveBean('Users', $idAsesor);
             if(!empty($beanAsesor)){
@@ -282,13 +283,13 @@ SQL;
                 $GLOBALS['log']->fatal("Correo Director Leasing : ".$correo_asesor);
                 if($equipoPrincipal!="" && $equipoPrincipal!="Equipo 0"){
                     //Puesto 6 = Backoffice Leasing
-                    //$GLOBALS['log']->fatal("Estatus Aprobado, realiza consulta para equipo principal: ".$equipoPrincipal);
+                    $GLOBALS['log']->fatal("Estatus Aprobado, realiza consulta para equipo principal: ".$equipoPrincipal);
                     $queryBackOffice="SELECT id,puestousuario_c, u.status,u.user_name,uc.region_c,uc.equipos_c
                     FROM users u INNER JOIN users_cstm uc ON u.id=uc.id_c
                     WHERE uc.puestousuario_c='6' AND u.status='Active' and u.deleted=0 AND uc.equipos_c
                       IN('^".$equipoPrincipal."^')";
                     $queryResult = $db->query($queryBackOffice);
-
+                    $GLOBALS['log']->fatal($queryBackOffice);
                     $users_bo=array();
                     if($queryResult->num_rows>0){
                         while ($row = $db->fetchByAssoc($queryResult)) {
@@ -307,9 +308,9 @@ SQL;
                     }
 
                 }
-                //$GLOBALS['log']->fatal("Enviará notificacion AUTORIZADA, no cumple condicion de equipo != 0");
-                //$GLOBALS['log']->fatal("Correos Backoffice a enviar: ");
-                //$GLOBALS['log']->fatal("RESULTADO", print_r($users_bo_emails, true));
+                $GLOBALS['log']->fatal("Enviará notificacion AUTORIZADA, no cumple condicion de equipo != 0");
+                $GLOBALS['log']->fatal("Correos Backoffice a enviar: ");
+                $GLOBALS['log']->fatal("RESULTADO", print_r($users_bo_emails, true));
                 //$estatusString=$app_list_strings['estatus_c_operacion_list'][$estatus];
                 $estatusString="Autorizada";
 
