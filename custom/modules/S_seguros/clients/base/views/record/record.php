@@ -379,6 +379,8 @@ array (
               ),
               34 => 
               array (
+                'name' => 'notifica_kam_c',
+                'label' => 'LBL_NOTIFICA_KAM',
               ),
             ),
           ),
