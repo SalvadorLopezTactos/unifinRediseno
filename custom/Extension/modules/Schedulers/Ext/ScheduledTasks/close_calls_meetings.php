@@ -31,7 +31,7 @@
 
         $contadorc=0;
         $contadorm=0;
-        $today = date("Y-m-d");
+        $today = date("Y-m-d H:i:s");
         while($row = $GLOBALS['db']->fetchByAssoc($resultc) )
         {
             $idc = $row['id'];
