@@ -29,14 +29,14 @@ array (
               'click' => 'button:btn_rfc:click',
             ),
           ),
-          2 => 
+          2 =>
           array (
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
             'name' => 'save_button',
             'label' => 'LBL_SAVE_BUTTON_LABEL',
             'css_class' => 'btn btn-primary',
-            'showOn' => 'edit',
+            'showOn' => 'edit', 
             'acl_action' => 'edit',
           ),
           3 => 
