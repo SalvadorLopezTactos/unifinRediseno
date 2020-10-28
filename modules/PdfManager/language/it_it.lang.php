@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Anteprima',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'ATTENZIONE: Se si cambia il modulo primario, tutti i campi già aggiunti al modello dovranno essere rimossi.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Questo è il file che hai richiesto (E´ possibile modificare questo testo)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Offerta',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Questo modello è utilizzato per stampare l´Offerta in PDF.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'offerta',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Offerta (con servizi)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Questo modello viene utilizzato per stampare un&#39;Offerta, incluse le informazioni sui servizi, in PDF.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'offerta servizio',
+
   'LBL_TPL_INVOICE_NAME' => 'Fattura',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Questo modello è utilizzato per stampare la Fattura in PDF.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'Fattura',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Fattura (con servizi)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Questo modello viene utilizzato per stampare una Fattura, incluse le informazioni sui servizi, in PDF.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'fattura servizio',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Numero di Offerta:',
   'LBL_TPL_SALES_PERSON' => 'Commerciale:',
   'LBL_TPL_VALID_UNTIL' => 'Valido fino a:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Codice Prodotto',
   'LBL_TPL_PRODUCT' => 'Prodotto',
   'LBL_TPL_RLI' => 'Elementi dell´Opportunità',
+  'LBL_TPL_DURATION' => 'Durata',
+  'LBL_TPL_DURATION_STARTS' => 'Inizio:',
+  'LBL_TPL_DURATION_ENDS' => 'Fine:',
   'LBL_TPL_LIST_PRICE' => 'Prezzo di Listino',
   'LBL_TPL_UNIT_PRICE' => 'Prezzo Unitario',
   'LBL_TPL_EXT_PRICE' => 'Prezzo est.',

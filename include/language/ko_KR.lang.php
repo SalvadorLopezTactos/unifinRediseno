@@ -43,6 +43,8 @@ $app_list_strings = array (
     'ForecastWorksheets' => '예측 워크시트',
     'ForecastManagerWorksheets' => '예측 관리자 워크시트',
     'MergeRecords'=>'기록 통합',
+      'VisualPipeline'=>'비주얼 파이프라인',
+      'ConsoleConfiguration' => '콘솔 설정',
     'Quotas' => '견적',
     'Teams' => '팀',
     'TeamNotices' => '팀 알림',
@@ -75,6 +77,11 @@ $app_list_strings = array (
     'pmse_Project' => '프로세스 정의',
     'pmse_Business_Rules' => '프로세스 비즈니스 규칙',
     'pmse_Emails_Templates' => '공정 이메일 템플릿',
+    'BusinessCenters' => '업무 센터',
+    'Shifts' => 'Shifts',
+    'ShiftExceptions' => 'Shift Exceptions',
+    'Purchases' => 'Purchases',
+    'PurchasedLineItems' => 'Purchased Line Items',
     'WorkFlow' => '작업흐름 정의',
     'EAPM' => '외부 계정',
     'Worksheet' => '워크시트',
@@ -116,6 +123,8 @@ $app_list_strings = array (
     'DataPrivacy' => '데이터 프라이버시',
     'ReportSchedules' => '보고서 일정',
     'CommentLog' => '의견 로그',
+    'Holidays' => '공휴일',
+    'ChangeTimers' => '타이머 변경',
   ),
 
     'moduleIconList' =>
@@ -131,6 +140,8 @@ $app_list_strings = array (
         'Tasks' => '작업',
         'Dashboards' => 'Ds',
         'DataPrivacy' => '데이터 프라이버시',
+        'BusinessCenters' => 'BC',
+        'PurchasedLineItems' => 'PL',
     ),
 
   'moduleListSingular' =>
@@ -150,6 +161,8 @@ $app_list_strings = array (
     'Calendar' => '캘린더',
     'Leads' => '관심고객:',
     'Manufacturers' => '제조자',
+    'VisualPipeline' => '비주얼파이프라인',
+    'ConsoleConfiguration' => '콘솔설정',
     'Contracts'=>'계약',
     'Quotes' => '견적',
     'Products' => '견적 라인아이템',
@@ -196,6 +209,11 @@ $app_list_strings = array (
     'pmse_Project' => '프로세스 정의',
     'pmse_Business_Rules' => '프로세스 비즈니스 규칙',
     'pmse_Emails_Templates' => '이메일 템플릿 프로세스',
+    'BusinessCenters' => '업무 센터',
+    'Shifts' => 'Shift',
+    'ShiftExceptions' => 'Shift Exceptions',
+    'Purchases' => 'Purchase',
+    'PurchasedLineItems' => 'Purchased Line Item',
     'WorkFlow' => '작업흐름',
     'EAPM' => '외부 계정',
     'Worksheet' => '워크시트',
@@ -224,7 +242,7 @@ $app_list_strings = array (
     'Comments' => '의견',
     'CommentLog' => '의견 로그',
     'Currencies' => '화폐',
-    'ProductTemplates' => '제품 템플릿',
+    'ProductTemplates' => 'Product',
     'ProductTypes' => '제품 유형',
     'Shippers' => '배송자',
     'Subscriptions' => '구독',
@@ -236,6 +254,8 @@ $app_list_strings = array (
     'EmailParticipants' => '이메일 참가자',
     'DataPrivacy' => '데이터 프라이버시',
     'ReportSchedules' => '보고서 일정',
+    'Holidays' => '공휴일',
+    'ChangeTimers' => '타이머 변경',
   ),
 
 /*
@@ -321,6 +341,11 @@ $app_list_strings = array (
     'T3' => '3단계',
     'T4' => '4단계',
   ),
+  'generate_purchase_dom' => [
+      'Yes' => 'Yes',
+      'No' => 'No',
+      'Completed' => 'Completed',
+  ],
   'lead_source_default_key' => '자가 생성됨',
   'lead_source_dom' =>
   array (
@@ -589,6 +614,12 @@ $app_list_strings = array (
     'RegularUser' => '일반사용자',
     'Administrator' => '관리자',
   ),
+  'license_type_dom' =>
+    array (
+        'CURRENT' => '현재 제품',
+        'SUGAR_SERVE' => 'Sugar 제공',
+        'SUGAR_SELL' => 'Sugar 판매',
+    ),
   'user_status_dom' =>
   array (
     'Active' => '작동중',
@@ -693,6 +724,8 @@ $app_list_strings = array (
     'Meetings' => '회의',
     'Calls' => '전화상담',
       'KBContents' => '지식 기반',
+      'PurchasedLineItems' => 'Purchased Line Item',
+      'Purchases' => 'Purchase',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => '거래처',
@@ -722,7 +755,13 @@ $app_list_strings = array (
     'Prospects' => '목표고객',
       'KBContents' => '지식 베이스',
       'Notes' => '메모',
+    'PurchasedLineItems' => 'Purchased Line Item',
+    'Purchases' => 'Purchase',
   ),
+
+  'changetimer_parent_type' => [
+      'Cases' => '사례',
+  ],
 
   'product_status_default_key' => '배송',
   'product_status_quote_key' => '견적',
@@ -883,7 +922,8 @@ $app_list_strings = array (
     'Forum' => '포럼',
     'Web' => '웹',
     'InboundEmail' => '다른 이메일:',
-    'Twitter' => '트위터'
+    'Twitter' => '트위터',
+    'Portal' => '포탈',
   ),
     'dataprivacy_type_default_key' => '',
     'dataprivacy_type_dom' => array(
@@ -916,6 +956,11 @@ $app_list_strings = array (
         'Medium' => '보통',
         'High' => '높음',
     ),
+    'business_day_status_dom' => [
+        'Open' => '운영',
+        'Open 24 Hours' => '24시간 운영',
+        'Closed' => '종료',
+    ],
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -1145,6 +1190,13 @@ $app_list_strings = array (
     'dom_email_states' => array(
         'Draft' => '임시 보관',
         'Archived' => '보관됨',
+    ),
+
+    'dom_email_direction' => array(
+        'Unknown' => '알 수 없음',
+        'Outbound' => '아웃바운드',
+        'Inbound' => '인바운드',
+        'Internal' => '내부',
     ),
 
     'scheduler_status_dom' =>
@@ -2096,6 +2148,11 @@ $app_list_strings = array (
         240000 => '매 4분마다',
         300000 => '매 5분마다',
   ),
+    'first_response_met_sla_dom'=> [
+        '' => '',
+        'Yes' => '예',
+        'No' => '아니오',
+    ],
     'forecasts_chart_options_group' => array(
         'forecast' => '예측에 포함',
         'sales_stage' => '영업단계',
@@ -2123,6 +2180,7 @@ $app_list_strings = array (
         'record' => '기록',
         'records' => '목록',
         'activities' => '활동흐름',
+        'multi-line' => '다중 회선 목록',
     ),
     'reportschedule_time_interval_dom' => array(
         '3600' => '시간당',
@@ -2133,6 +2191,23 @@ $app_list_strings = array (
         '1209600' => '2주마다',
         '2419200' => '4주마다',
     ),
+    'pipeline_records_per_column' => array(
+        '10' => '10',
+        '15' => '15',
+        '20' => '20',
+    ),
+    //Service Duration
+    'service_duration_unit_dom' =>
+        array (
+            'year' => '년',
+            'month' => '월',
+            'day' => '일',
+        ),
+        'shift_exception_type_dom' => [
+            'time_off' => 'Time Off',
+            'event' => 'Event',
+            'other' => 'Other',
+        ],
 );
 
 $app_strings = array (
@@ -2144,7 +2219,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => '링크 팔로잉',
   'LBL_TOGGLE_VISIBILITY' => '토글 가시성', // Record view header panel element
   'LBL_ACTIVITIES' => '액티비티 스트림',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2020 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar 및 3-D 큐브는 SugarCRM Inc. 등록상표입니다. '.
         '이 제품에 사용되거나 나타난 모든 여타 기업 및 상품명은 '.
         'SugarCRM ®, Sugar Enterprise™ 및 Sugar™는 SugarCRM, Inc.의 상표입니다.',
@@ -2500,6 +2575,7 @@ $app_strings = array (
 
     'LBL_EMAIL_NO'                          => '아니오',
     'LBL_EMAIL_NOT_SENT'                    => '시스템이 귀하의 요청을 진행할수 없습니다. 관리자에 문의하십시오.',
+    'LBL_INSERT_TO_USER_PWD_FAILED'         => 'users_password_link에 삽입할 수 없습니다.',
 
     'LBL_EMAIL_OK'                          => '확인',
     'LBL_EMAIL_ONE_MOMENT'                  => '잠시만 기다려 주십시오.',
@@ -2716,8 +2792,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => '작동중인 세션의 내용물 보내기가 필요합니다.',
     'ERR_NO_HEADER_ID' => '현재 항목은 선택된 테마에서는 작동하지 않습니다.',
     'ERR_NOT_ADMIN' => "관리자모드 접속 승인이 필요합니다.",
-    'ERR_DISABLED_FOR_IDM_MODE' => '암호 관리는 클라우드 설정에서만 사용할 수 있습니다.',
-    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE' =>
+        '비밀번호 관리는 <a href="%s" target="_blank">클라우드 설정</a>에서만 사용 가능합니다.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => '읽기 전용 필드를 변경하려면 Sugar 관리자에게 문의하십시오.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => '다음의 필수 항목을 입력하셔합니다:',
@@ -2747,6 +2823,7 @@ $app_strings = array (
     'ERR_DB_VERSION' => 'Sugar CRM 0 파일은 오직 Sugar CRM 1 데이터베이스와 함께 사용될수 있습니다.',
     'ERR_DB_QUERY' => '요청이 실패하였습니다.',
     'ERR_UW_RETIRED' => '이 버전에서는 마법사 업그레이드가 불가능합니다.',
+    'ERR_NOT_CLOUD_INSTANCE' => 'Sugar의 이 인스턴스는 SugarCloud 인스턴스가 아니거나 SugarCloud 인사이트용으로 구성되어있지 않습니다.',
 
 
     'EXCEPTION_CREATE_MODULE_NOT_AUTHORIZED' => '모듈 생성 권한이 없습니다. 접속하시려면 관리자에 문의하십시오.',
@@ -2769,6 +2846,7 @@ $app_strings = array (
     'EXCEPTION_NEED_LOGIN'              => '이 액션을 실행하려면 로그인을 해야합니다.',
     'EXCEPTION_INVALID_TOKEN'           => '사용자 인증암호가 유효하지 않습니다.',
     'EXCEPTION_NOT_AUTHORIZED'          => '이 액션의 실행 권한이 없습니다. 접속하려면 관리자에 문의하십시오.',
+    'EXCEPTION_NOT_AUTHORIZED_TO_DATA'  => '데이터를 볼 수 있는 권한이 없습니다. 액세스가 필요한 경우 관리자에게 문의하십시오.',
     'EXCEPTION_INACTIVE_PORTAL_USER'    => '현재 포털계정이 비활성화되었기 때문에 접속이 불가능합니다. 귀사의 CRM관리자에게 문의해주십시오.',
     'EXCEPTION_PORTAL_NOT_CONFIGURED'   => '포탈 생성이 완료되지 않았습니다. 도움을 받으려면 포탈관리자에 문의하십시오.',
     'EXCEPTION_NO_METHOD'               => '귀하의 요청은 지원되지 않습니다. 요청하신 HTTP 방식을 찾을수 없습니다.',
@@ -2788,6 +2866,8 @@ $app_strings = array (
     'EXCEPTION_SEARCH_RUNTIME'          => '검색 엔진 런타임 오류가 발생했습니다. 시스템 관리자에 문의하십시오.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
     'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => '프로세스에 의해 락(lock)이 된 필드는 편집할 수 없습니다.',
+    'EXCEPTION_MODULE_DISABLED'         => '이 모듈은 현재 사용자가 사용할 수 없습니다.',
+    'EXCEPTION_FIELD_DISABLED'          => '이 필드는 현재 사용자가 사용할 수 없습니다.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => '일반적인 고장이나 오류로 인해 문제가 발생했습니다. 원인은 예외적인 범위의 경우이지만, 일반적으로 더 구체적인 API 예외의 범위에 속합니다.',
@@ -2816,6 +2896,8 @@ $app_strings = array (
     'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => '현재 실행중인 프로세스에 의해 잠긴 필드는 편집될 수 없습니다.',
     'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s는 실행중인 프로세스에 의해 락 (lock)이 되어 편집할 수 없습니다.',
     'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s는 실행중인 프로세스에 의해 잠겨있으며 편집할 수 없습니다.',
+    'EXCEPTION_MODULE_DISABLED_DESC'       => '이 모듈은 현재 사용자가 사용할 수 없습니다.',
+    'EXCEPTION_FIELD_DISABLED_DESC'        => '이 필드는 현재 사용자가 사용할 수 없습니다.',
 
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => '같은 이름의 파일이 존재합니다.',
@@ -2905,6 +2987,7 @@ $app_strings = array (
     'LBL_CLOSE_AND_CREATE_BUTTON_LABEL' => '저장하고 새 정보 입력하기',
     'LBL_CLOSE_AND_CREATE_BUTTON_TITLE' => '저장하고 새 정보 입력하기',
     'LBL_CLOSE_AND_CREATE_BUTTON_KEY' => 'C',
+    'LBL_COPY_RECORD_URL' => '레코드 URL 복사',
     'LBL_OPEN_ITEMS' => '열린 아이템:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => '이메일 작성하기',
@@ -2933,6 +3016,8 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'문서',
     'LBL_DATE_ENTERED' => '생성일자:',
     'LBL_DATE_MODIFIED' => '수정일자:',
+    'LBL_EDIT_OVERVIEW_TAB_BUTTON' => '개요 탭 편집',
+    'LBL_EDIT_MODULE_TABS_BUTTON' => '모듈 탭 편집',
     'LBL_EDIT_BUTTON' => '수정하기',
     'LBL_DUPLICATE_BUTTON' => '복제하기',
     'LBL_DELETE_BUTTON' => '삭제하기',
@@ -2945,6 +3030,7 @@ $app_strings = array (
     'LBL_DST_NEEDS_FIXIN' => '현재 시스템에 일광절약시간을 적용하셔야 합니다. 다음 <a href=index.php?module=Administration&action=DstFix >링크</a>를 클릭하여 일광절약시간을 바르게 적용해주십시오.',
     'LBL_EDIT_AS_NEW_BUTTON_LABEL' => '신규 편집하기',
     'LBL_EDIT_AS_NEW_BUTTON_TITLE' => '신규 편집하기',
+    'LBL_EDIT_IN_NEW_TAB' => '새로운 탭에서 편집하기',
     'LBL_FAVORITES' => '즐겨찾기목록',
     'LBL_FILTER' => '필터',
     'LBL_DEFAULT_DATA_FILTER' => '기본값 델타 필터',
@@ -3124,6 +3210,7 @@ $app_strings = array (
     'LBL_MODIFIED_ID'=>'수정자 ID',
     'LBL_MORE' => '더보기',
     'LBL_MORE_MODULES' => '더 많은 모듈',
+    'LBL_MORE_TABS' => '더 많은 탭',
     'LBL_MULTIPLE_MODULES' => '다중 모듈',
     'LBL_MY_ACCOUNT' => '내 설정보기',
     'LBL_SYSTEM_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => '시스템 초기설정',
@@ -3143,6 +3230,7 @@ $app_strings = array (
     'LBL_OPENTO_BUTTON_KEY' => 'T',
     'LBL_OPENTO_BUTTON_LABEL' => 'Open To:',
     'LBL_OPENTO_BUTTON_TITLE' => 'Open To:',
+    'LBL_OPEN_IN_NEW_TAB' => '새로운 탭으로 열기',
     'LBL_OPPORTUNITIES'=>'영업기회',
     'LBL_OPPORTUNITY_NAME' => '영업기회명',
     'LBL_OPPORTUNITY'=>'영업기회',
@@ -3343,7 +3431,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2020 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         '판권 소유.<br />SugarCRM, Sugar 및 3-D 큐브는 SugarCRM Inc. 등록 상표입니다. '.
         '이 제품에 사용되거나 등장하는 모든 기업 및 상품명은 '.
         '상품과 관련된 각 기업의 상표일 수 있습니다.',
@@ -3453,7 +3541,7 @@ $app_strings = array (
     'LNK_VIEW_CHANGE_LOG' => '감사 로그 보기',
     'TPL_AUDIT_LOG_TITLE' => '{{{name}}}의 감사 로그',
     'LBL_AUDIT_EMAIL_TOOLTIP' => '이메일 주소 감사 로그를 보려면 클릭하십시오',
-
+    'LBL_NO_SEARCH_RESULTS' => '귀하의 검색 결과를 찾을 수 없습니다',
     'NTC_CLICK_BACK' => '브라우저 뒤로 버튼을 클릭하여 오류를 수정하십시오.',
     'NTC_DATE_FORMAT' => '(연도-월-일)',
     'NTC_DATE_TIME_FORMAT' => '(연도-월-일 24:00)',
@@ -3491,12 +3579,15 @@ $app_strings = array (
     'WARN_LICENSE_SEATS_MAXED'=>  "경고: 라이센스가 허용하는 사용자 수를 초과하였습니다.",
     'ERROR_LICENSE_SEATS_MAXED'=>
         '활성 사용자 수가 라이센스 수 제한을 초과합니다. 관리자에게 문의하십시오.',
+    'ERROR_LICENSE_TYPE_SEATS_MAXED'=>
+        'Number of active %s users exceeds License Count limits. Please contact your Administrator.',
     'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => '관리자만 로그인할 수 있습니다.',
     'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
         '사용자 라이센스 수 한도에 도달했습니다. 기존 사용자만 로그인 할 수 있습니다.',
     'WARN_ONLY_ADMINS'=> "관리자만 로그인할 수 있습니다.",
     'WARN_UNSAVED_CHANGES'=> "입력한 정보를 저장하지 않은 상태에서 페이지를 이동하려합니다. 자료를 잃어버릴 수 있습니다. 정말 이동하시겠습니까?",
     'LBL_WARN_UNSAVED_CHANGES' => '저장되지 않은 변경 사항이 있습니다. 변경 사항을 취소하고 페이지를 벗어나시겠습니까?',
+    'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => '1개 이상의 Dashlet에 저장되지 않은 변경사항이 있습니다. 서랍을 닫으시겠습니까?',
     'LBL_NAVIGATE_TO_REPORTS' => '보고서 모듈로 이동하고 있습니다. 대시렛창(dashlet)에 대한 변경 사항이 저장되지 않습니다. 계속하시겠습니까?',
     'ERROR_NO_RECORD' => '자료를 가져오기를 실패하였습니다. 이 자료는 지워졌거나 읽기권한이 변경된 상태일 수 있습니다.',
     'ERROR_TYPE_NOT_VALID' => '에러. 형식이 올바르지 않습니다.',
@@ -3513,7 +3604,10 @@ $app_strings = array (
     'ERROR_DATETIME' => '오류. 올바르지 않은 날짜형식을 입력하셨습니다.',
     'ERROR_IS_BEFORE' => '오류. 필드의 날짜가 ..필드의 날짜보다 뒤일수 없습니다.',
     'ERROR_IS_AFTER' => '오류. 필드의 날짜가 ..필드의 날짜보다 전일수 없습니다.',
+    'ERROR_TIME_IS_BEFORE' => '에러. 이 필드의 시간은 {{this}} 필드의 이전이어야 합니다.',
+    'ERROR_TIME_IS_AFTER' => '에러. 이 필드의 시간은 {{this}} 필드의 이후이어야 합니다.',
     'ERROR_NUMBER' => '유효한 숫자를 입력하십시오.',
+    'ERROR_INT' => '에러. 유효하지 않은 정수.',
     'ERROR_NO_BEAN' => '값 획득 실패',
     'ERROR_ACCESS_MODULE' => '이 모듈에 접근할수 없습니다.',
     'ERROR_MAX_FILESIZE_EXCEEDED' => '오류가 발생했습니다. 첨부 파일이 너무 큽니다.',
@@ -3599,6 +3693,7 @@ $app_strings = array (
     'LBL_SCHEDULE_MEETING' => '회의일정',
     'LBL_CREATE_TASK' => '작업 추가하기',
     'LBL_REMOVE_FROM_FAVORITES' => '내 즐겨찾기에서 삭제',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => '웹투리드 폼 만들기',
     'LBL_SAVE_WEB_TO_LEAD_FORM' =>'웹투리드 폼으로 저장하기',
@@ -3627,36 +3722,21 @@ $app_strings = array (
     'ERR_SMARTY_UNEQUAL_RELATED_FIELD_PARAMETERS' => '오류 : 키 와 displayParams 배열의  복사 요소에 대한 인수의 불평등 수 있습니다.',
     'ERR_SMARTY_MISSING_DISPLAY_PARAMS' => '대한 displayParams 배열의 인덱스를 누락:',
 
-    /* MySugar Framework (for Home and Dashboard) */
     'LBL_DASHLET' => '대쉬릿',
-    'LBL_DASHLET_CONFIGURE_GENERAL' => '일반',
     'LBL_DASHLET_CONFIGURE_FILTERS' => '필터',
     'LBL_DASHLET_CONFIGURE_MY_ITEMS_ONLY' => '내 관련자료만',
-    'LBL_DASHLET_CONFIGURE_MY_FAVORITES_ONLY' => '내 즐겨찾기만',
     'LBL_DASHLET_CONFIGURE_TITLE' => '제목',
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => '가로열 표시',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => '현재 기록 관련',
     'LBL_DASHLET_CONFIGURE_LINKED' => '연결 필드',
 
-    // MySugar status strings
-    'LBL_CREATING_NEW_PAGE' => '새로운 페이지를 생성중입니다.',
-    'LBL_NEW_PAGE_FEEDBACK' => '신규 페이지를 만들었습니다. 대쉬릿 추가메뉴에서 새로운 대쉬릿을 추가할 수 있습니다.',
-    'LBL_DELETE_PAGE_CONFIRM' => '이 페이지를 삭제하시겠습니까?',
-    'LBL_SAVING_PAGE_TITLE' => '페이지 제목을 저장중입니다.',
-    'LBL_RETRIEVING_PAGE' => '페이지 복구중입니다.',
-    'LBL_MAX_DASHLETS_REACHED' => '관리자가 설정한 대쉬릿 최대 허용 숫자에 도달했습니다. 더 추가하려면 배치된 대쉬릿을 삭제하십시오.',
-    'LBL_ADDING_DASHLET' => '대쉬릿을 추가중입니다..',
-    'LBL_ADDED_DASHLET' => '대쉬릿이 추가되었습니다.',
     'LBL_REMOVE_DASHLET_CONFIRM' => '대쉬릿을 제거하시겠습니까?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => '행을 삭제하시겠습니까?',
-    'LBL_REMOVING_DASHLET' => '대쉬릿을 제거중입니다.',
-    'LBL_REMOVED_DASHLET' => '대쉬릿이 제거되었습니다.',
     'LBL_MAXIMUM_OF' => '최대의',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => '행이 표시될 수 있습니다',
 
     /* Sugar7 Dashboard */
     'LBL_DASHBOARD' => '대시보드',
-    'LBL_DASHBOARD_BWC' => '내 기존 대시보드',
     'LBL_DEFAULT_DASHBOARD_TITLE' => '내 대시보드',
     'LBL_COLLAPSE_ALL' => '전체 접기',
     'LBL_EXPAND_ALL' => '전체 확장',
@@ -3687,9 +3767,33 @@ $app_strings = array (
 
     'LBL_DASHLET_LISTVIEW_NAME' => '목록보기',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => '지정된 분류대로 특정 모듈의 기록을 표시합니다.',
+
+    // Record view dashlet
+    'LBL_DASHLET_RECORDVIEW_NAME' => '레코드 보기',
+    'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => '탭에 레코드 및 선택적으로 관련된 레코드 표시.',
+    'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => '기본 레코드 유형',
+    'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => '이 {{moduleSingular}}',
+    'LBL_DASHLET_RECORDVIEW_TABS' => '탭',
+    'LBL_DASHLET_RECORDVIEW_BASIC_LAYOUT_PREVIEW' => '기본 레이아웃 미리보기',
+    'TPL_DASHLET_RECORDVIEW_TOO_MANY_TABS' => '경고, 오직 {{numWord}} ({{num}}) 모듈만이 탭에 표시될 수 있습니다. ' .
+        '다른 것을 추가하기 전에 하나 또는 그 이상의 모듈을 제거하십시오.',
+    'LBL_SIX' => '6', // record view dashlet tab limit
+
+    //Commentlog Dashlet
+    'LBL_DASHLET_COMMENTLOG_NAME' => '코멘트 로그',
+    'LBL_DASHLET_COMMENTLOG_DESCRIPTION' => '레코드를 위해 코멘트 표시',
+    'LBL_COMMENTS_LOG_DASHLET_NO_COMMENTS' => '사용 가능한 코멘트가 없음',
+    'LBL_COMMENTS_LOG_DASHLET_BUTTON_ADD' => '추가하기',
+    'LBL_COMMENTS_LOG_DASHLET_PLACEHOLDER' => '코멘트 추가하기',
+    'LBL_COMMENTS_LOG_DASHLET_VIEW_ALL' => '모두 보기',
+
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => '내 {{module}}',
+    'LBL_DASHLET_PICK_A_RECORD' => '표시를 위해 선택된 레코드가 없음',
+    'LBL_CONTENT_SEARCH_DASHLET' => '콘텐츠 검색 Dashlet',
+    'LBL_CONTENT_SEARCH_DASHLET_GREETING' => '{{username}} 님, 오늘은 무엇을 도와드릴까요?',
+    'LBL_CONTENT_SEARCH_DASHLET_DISABLED' => '사례를 만드시겠습니까?',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => '영업기회 매트릭스(Metrics)',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => '관련 거래처의 영업기회 메트릭스',
@@ -3697,6 +3801,14 @@ $app_strings = array (
     'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> '최근에 사용된 항목 및 즐겨찾기로 저장된 제품 나열',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => '최근 사용',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => '즐겨찾기',
+
+    'LBL_DASHBOARD_CONFIG' => 'Dashboard Configuration',
+    'LBL_LIST_VIEW__NAME' => '목록 보기',
+    'LBL_PIPELINE_VIEW_NAME' => '타일 보기',
+    'LBL_PIPELINE_VIEW_BTN' => '타일 보기',
+    'LBL_PIPELINE_VIEW_TAB_NAME' => '{{fieldName}}의 {{module}}',
+    'LBL_VISUAL_PIPELINE_DISABLED' => '타일 보기는 가능하지 않음',
+    'LBL_VISUAL_PIPELINE_MOVE_FAILED' => '{{recordName}} could not be moved to {{columnLabel}} because of the following fields: ',
 
     'LBL_DASHLET_NO_RECORDS' => '기록을 이 시간에 찾을 수 없습니다.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => '사례 요약',
@@ -3752,37 +3864,13 @@ $app_strings = array (
     'LBL_DASHLET_USEFULNESS_NAME' => '기사의 유용성',
     'LBL_DASHLET_USEFULNESS_DESC' => 'Displays a chart showing how useful the knowledge base article is',
 
-    // MySugar Menu Options
     'LBL_ADD_PAGE' => '페이지 추가하기',
-    'LBL_DELETE_PAGE' => '페이지 삭제',
-    'LBL_CHANGE_LAYOUT' => '레이아웃 변경',
-    'LBL_RENAME_PAGE' => '페이지 이름변경',
-
     'LBL_LOADING_PAGE' => '로딩중입니다. 잠시만 기다려주십시오.',
-
-    'LBL_RELOAD_PAGE' => '선택한 현황판을 사용하기 위해서, <a href=javascript: window.location.reload()>여기를 클릭</a>하여 현재 페이지를 새로고침하세요.',
-    'LBL_ADD_DASHLETS' => '현황판 추가하기',
-    'LBL_CLOSE_DASHLETS' => '닫기',
-    'LBL_OPTIONS' => '옵션',
-    'LBL_NUMBER_OF_COLUMNS' => '열 개수를 선택하세요',
-    'LBL_1_COLUMN' => '1열',
-    'LBL_2_COLUMN' => '2열',
-    'LBL_3_COLUMN' => '3열',
-    'LBL_PAGE_NAME' => '페이지 이름',
-
     'LBL_SEARCH_RESULTS' => '검색된 결과',
-    'TPL_SEARCH_RESULTS_FOR' => '다음에 대한 검색 결과: {{searchTerm}}',
     'LBL_SEARCH_RESULTS_FOR' => '다음에 대한 검색 결과: ',
-    'LBL_SEARCH_MODULES' => '모듈목록',
-    'LBL_SEARCH_CHARTS' => '차트목록',
-    'LBL_SEARCH_REPORT_CHARTS' => '보고서 차트',
-    'LBL_SEARCH_TOOLS' => '도구목록',
     'LBL_SEARCH_HELP_TITLE' => '검색',
-    'LBL_SEARCH_HELP_CLOSE_TOOLTIP' => '닫기',
     'LBL_SEARCH_RESULTS_FOUND' => '검색된 결과를 찾았습니다.',
     'LBL_SEARCH_RESULTS_TIME' => 'ms.',
-    'ERR_BLANK_PAGE_NAME' => '페이지명을 입력해주십시오.',
-    /* End MySugar Framework strings */
 
     /* Sales Pipeline Dashlet */
     'LBL_DASHLET_MY_PIPELINE' => '내 파이프라인',
@@ -3936,6 +4024,8 @@ $app_strings = array (
     //MB -Fixed Bug #32812 -Max
     'LBL_ASSIGNED_TO_NAME' => '담당자',
     'LBL_DESCRIPTION' => '설명',
+    'LBL_PRIMARY_CONTACT_NAME' => '주요 연락처',
+    'LBL_PRIMARY_CONTACT_ID' => '주요 연락처 ID',
 
   'LBL_NONE' => '-없음-',
   'LBL_YESTERDAY'=> '어제',
@@ -4309,6 +4399,8 @@ $app_strings = array (
     // start of: Quotes related
     'LBL_QLI_SINGLE_TITLE' => '견적 라인아이템',
     'LBL_DISCOUNT_TOTAL' => '할인 합계',
+    'LBL_DISCOUNT_PERCENT' => '% Percent',
+    'LBL_DISCOUNT_SELECT' => 'Determines if the discount is a percentage or flat amount',
     'LBL_TAX' => '세금',
     'LBL_SHIPPING' => '물류/운송',
     'LBL_GRAND_TOTAL' => '최종 합계',
@@ -4355,6 +4447,7 @@ $app_strings = array (
     'LBL_NO_ACCESS' => '접속할수 없습니다.',
     'LBL_NO_ACCESS_LOWER' => '레코드에접근 불가한 사용자',
     'LBL_NO_FIELD_ACCESS' => '접근 금지',
+    'LBL_NO_LICENSE_ACCESS' => 'License Required',
     'LBL_VALUE_ERASED' => '값 삭제',
     'LBL_VALUE_ERASED_TOOLTIP' => '이 정보는 데이터 프라이버시 요청을 통해 삭제되었습니다.',
     'LBL_CREATE_RELATED_RECORD' => '관련 기록 생성하기',
@@ -4524,6 +4617,15 @@ $app_strings = array (
     'LBL_MOBILE_ACTIVITYSTREAM_POST_PLACEHOLDER' => '@ 입력하여 사용자를 언급하십시오. # 입력하여 레코드를 참조하십시오.',
     'LBL_MOBILE_NEW_COMMENT' => '새로운 코멘트',
     'LBL_RECENTLY_VIEWED' => '최근에 본 항목',
+    'LBL_FILE_STORED_LOCALLY' => '파일이 로컬 저장소에 저장되며 장치가 온라인에 연결되면 동기화가 이루어집니다.',
+    'LBL_IDM_USER_PROFILE_READONLY' => '편집할 수 없는 특정 값을 변경하고 싶으신 경우, 관리자에게 연락해 변경 사항을 남겨주세요.',
+    'LBL_ACTIVITY_POST' => '{{{link}}}의 {{{value}}}',
+    'LBL_COMMENTLOG_EMPTY' => '의견 없음',
+    'LBL_COMMENTLOG_EXPANDBUTTON_EXPAND' => '다음 {{{commentsLeft}}} 의견 보기',
+    'LBL_COMMENTLOG_EXPANDBUTTON_COLLAPSE' => '접힘',
+    'LBL_COMMENTLOG_CONFIRM_CREATE' => '의견 생성 확인',
+    'LBL_COMMENTLOG_ERROR_IS_EMPTY' => '의견 로그는 비워둘 수 없습니다',
+    'LBL_MOBILE_PDF_DOWNLOAD' => 'PDF {{{pdfTemplateName}}} 다운로드',
 
     'ERR_SYNC_FAILED' => '서버와 동일화가 불가능합니다.',
     'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'SSO 로그인을 사용할 수 없습니다. 인스턴스가 슈가 7.5 또는 이상이어야하며  SSO로 설정되어야 합니다.',
@@ -4734,6 +4836,11 @@ $app_strings = array (
     'LBL_VO_RIGHT_MENU_BTN' => '오른쪽 메뉴 버튼',
     'LBL_VO_ADD_BTN' => '추가 버튼',
 
+    // Cookie consent
+    'LBL_WIZ_USER_COOKIE_CONSENT' => '이 어플리케이션은 쿠키를 사용합니다',
+    'LBL_USER_CLICK_FOR_COOKIE_CONSENT' => '수락을 체크해주십시오 (필수)',
+    'LBL_USER_COOKIE_CONSENT_TEXT' => '이 어플리케이션은 더 나은 경험을 제공하기 위한 목적으로 쿠키를 사용합니다. 계속 진행하면 귀하는 당사 <a href="{{href}}" target="_blank">개인정보 정책</a>에 따른 쿠키 사용을 동의하게 됩니다.',
+
     //begin portal
 
     //portal record tutorial
@@ -4743,20 +4850,36 @@ $app_strings = array (
     'LBL_PORTAL_TOUR_RECORD_VIEW_NOTE' => '첨부된 메모의 세부사항을 보려면 이 아이콘을 클릭하십시오.',
 
     //for portal
-
+    'LBL_PORTAL_HOME' => '홈 대시보드',
+    'LBL_PORTAL_DASHBOARD_ALL_OPEN_CASES' => '모든 열린 사례목록',
+    'LBL_PORTAL_DASHBOARD_RECENT_CASES' => '최근 해결된 사례 목록',
     'LBL_PORTAL_SEARCH' => '이름과 번호로 검색',
     'LBL_SIGNUP_BUTTON_LABEL' => '가입하기',
+    'LBL_PORTAL_NO_EMAIL' => '이메일을 받지 못하셨습니까?',
+    'LBL_PORTAL_FORGOT_PASSWORD' => '비밀번호를 분실하셨습니까',
+    'LBL_PORTAL_FORGOT_USERNAME' => '사용자명을 분실하셨습니까',
+    'LBL_PORTAL_ENTER_PASSWORD_TWICE' => '비밀번호를 두 번 입력하십시오. 비밀번호는 반드시 일치해야 합니다.',
+    'LBL_PORTAL_RESET_PASSWORD' => '비밀번호 재설정',
+    'LBL_PORTAL_REENTER_PASSWORD' => '비밀번호 재입력',
+    'LBL_PORTAL_PASSWORD_MISMATCH' => '비밀번호가 일치하지 않습니다. 다시 입력해주십시오',
+    'LBL_PORTAL_PASSWORD_RESET_SUCCESS' => '귀하의 비밀번호가 성공적으로 재설정 되었습니다',
+    'LBL_PORTAL_PASSWORD_RESET_ERR_GENERAL' => '에러가 발생했습니다. 새로운 비밀번호 재설정을 요청해 주십시오.',
     'LBL_PORTAL_SIGNUP_PROCESS' => '등록중',
-    'LBL_PORTAL_SIGNUP_TITLE' => '가입해주셔서 감사합니다.',
-    'LBL_PORTAL_SIGNUP' => '고객 서비스 담당자가 귀하의 계정 형성을 위해 곧 연락드리겠습니다.',
+    'LBL_PORTAL_SIGNUP_TITLE' => '가입해주셔서 감사합니다',
+    'LBL_PORTAL_SIGNUP' => '귀하의 세부사항을 확인한 후 알려드릴 것입니다.',
     'LBL_PORTAL_SIGNUP_FIRST_NAME' => '이름',
     'LBL_PORTAL_SIGNUP_LAST_NAME' => '성',
-    'LBL_PORTAL_SIGNUP_EMAIL' => '이메일',
+    'LBL_PORTAL_SIGNUP_USER_NAME' => '사용자명',
+    'LBL_PORTAL_SIGNUP_EMAIL' => '이메일 주소',
     'LBL_PORTAL_SIGNUP_PHONE' => '(###) ###-#### (선택사항)',
     'LBL_PORTAL_SIGNUP_COUNTRY' => '국가:',
     'LBL_PORTAL_SIGNUP_STATE' => '도:',
-    'LBL_PORTAL_SIGNUP_COMPANY' => '회사',
+    'LBL_PORTAL_SIGNUP_COMPANY_NAME' => '회사명',
     'LBL_PORTAL_SIGNUP_JOBTITLE' => '직급',
+    'LBL_PORTAL_SIGNUP_PASSWORD' => '비밀번호',
+    'LBL_PORTAL_SIGNUP_PASSWORD1' => '비밀번호 확인',
+    'LBL_PORTAL_SIGNUP_FORGOT_LOGIN' => '로그인 분실',
+
     'LNK_PORTAL_LOGIN_FORGOTPASSWORD' => '비밀번호를 분실하셨습니까?',
     'LBL_PORTAL_LOGIN_FORGOTPASSWORD' => '비밀번호 재설정을 위해서는 Sugar 관리자에 문의하십시오.',
     'LBL_PORTAL_LOGIN_USERNAME' => '사용자명:',
@@ -4766,9 +4889,14 @@ $app_strings = array (
     'LBL_PORTAL_PAGE_NOT_AVAIL' => '사용이 불가능한 페이지입니다.',
     'LBL_PORTAL_NOT_ENABLED_MSG' => "죄송합니다. 이 기능은 현재 사용이 불가능합니다.",
     'LBL_PORTAL_SEARCH_RESULTS_TITLE' => '<요청>한 검색결과를 표시합니다.',
+    'LBL_PORTAL_DIDNT_GET_EMAIL' => '이메일을 받지 못하셨습니까?',
+    'LBL_PORTAL_CONTACT_INFO_CONTACT_US' => '도움이 필요하거나 저희에게 연락하시려면 다음의 방법 중 한 가지를 사용하십시오: ',
+    'LBL_PORTAL_CONTACT_INFO_PHONE' => '전화번호: ',
+    'LBL_PORTAL_CONTACT_INFO_EMAIL' => '이메일: ',
+    'LBL_PORTAL_CONTACT_INFO_WEB' => '웹: ',
 
     //for portal errors
-    'LBL_PORTAL_INVALID_CREDS' => '입력된 사용자명과 비밀번호가 맞지 않습니다. 다시 시도해 주십시오.',
+    'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => '귀하의 로그인이 실패했습니다. 다시 시도해 주십시오.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => '유효하지 않은 증명서',
     'LBL_PORTAL_INVALID_GRANT' => '귀하의 암호는 유효하지 않거나 만료되었습니다. 다시 시도해 주십시오.',
     'LBL_PORTAL_INVALID_GRANT_TITLE' => '암호 만료',
@@ -4791,7 +4919,27 @@ $app_strings = array (
     'LBL_PORTAL_ROUTE_ERROR'=>'모듈 로딩 문제입니다. 나중에 다시 시도하거나 관리자에 문의하십시오.',
     'LBL_PORTAL_OFFLINE' =>'죄송합니다. 이 어플리케이션은 현재 사용이 불가능합니다. 관리자에 문의하십시오.',
     'LBL_CONTACT_EDIT_PASSWORD_LNK_TEXT' => '비밀번호 변경하기',
+    'LBL_PORTAL_SIGNUP_USER_NAME_ERROR' => '사용자명이 이미 시스템에 등록되어 있습니다. 비밀번호 분실 요청을 하시거나 다른 사용자명을 선택하십시오.',
+    'LBL_PORTAL_SIGNUP_EMAIL_ERROR' => '제공된 이메일이 유효하지 않습니다.',
+    'LBL_PORTAL_SIGNUP_PASSWORD_ERROR' => '비밀번호가 일치하지 않습니다.',
     //end portal
+
+    // Final name given by marketing is Service Console
+    // Original name for this feature was Agent Workbench and was used
+    // throughout the development of this product.
+    'LBL_AGENT_WORKBENCH' => 'Service Console',
+    'LBL_AGENT_WORKBENCH_OVERVIEW' => '개요',
+    'LBL_CASE_OVERDUE' => 'Overdue',
+    'LBL_CASE_DUE_SOON' => 'Due soon',
+    'LBL_CASE_DUE_LATER' => 'Due later',
+
+    // Renewals Console
+    'LBL_RENEWALS_CONSOLE' => '콘솔 갱신',
+    'LBL_RENEWALS_CONSOLE_OVERVIEW' => '개요',
+    'LBL_RENEWALS_CONSOLE_STAGE_STATUS' => '단계/상태',
+    'LBL_RENEWALS_CONSOLE_NAME_ACCOUNT' => '이름/계정명',
+    'LBL_RENEWALS_CONSOLE_AMOUNT' => 'Worst | Likely | Best',
+
 
     //First time login wizard
     'LBL_WIZ_USER_PROFILE_TITLE' => '사용자 프로필',
@@ -4836,10 +4984,23 @@ $app_strings = array (
     'ERR_PASSWORD_MISMATCH' => '입력된 비밀번호가 시스템과 일치하지 앖습니다.',
     'LBL_CANNOT_SEND_PASSWORD' => '비밀번호를 보낼수 없습니다.',
     'LBL_REQUEST_PASSWORD' => '비밀번호 요청',
+    'LBL_RESET_PASSWORD' => '비밀번호 재설정',
+    'LBL_RESET_PASSWORD_MESSAGE' => '사용자명을 입력하면 저희가 귀하의 비밀번호를 재설정할 수 있는 링크를 보내드릴 것입니다.',
+    'LBL_RESET_PASSWORD_CONFIRMATION_MESSAGE' => '이메일을 확인해 주십시오<br><br> 비밀번호 재설정 지침을 저희가 보유한 파일에 있는 이메일 주소로
+        발송했습니다.',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => '오류 :이 사용자에 대한 암호를 업데이트하는 데 문제가 발생했습니다.',
     'LBL_INCORRECT_PASSWORD' => '오류 : 잘못된 암호를 입력하였습니다.',
+    'LBL_PASSWORD_ENFORCE_TITLE' => '입력한 비밀번호가 요구사항에 맞지 않습니다. 다시 시도해 주십시오.',
+    'LBL_PASSWORD_MIN_LENGTH' => '최소 길이는 {0} 입니다.',
+    'LBL_PASSWORD_MAX_LENGTH' => '최대 길이는 {0} 입니다.',
+    'LBL_PASSWORD_ONE_UPPERCASE' => '하나의 대문자를 반드시 포함해야 합니다(A-Z).',
+    'LBL_PASSWORD_ONE_LOWERCASE' => '하나의 소문자를 반드시 포함해야 합니다(a-z).',
+    'LBL_PASSWORD_ONE_NUMBER' => '하나의 숫자를 반드시 포함해야 합니다(0~9).',
+    'LBL_PASSWORD_ONE_SPECIAL_CHAR' => '하나의 특수문자를 반드시 포함해야 합니다(~!@#$%^&*()_+-={}|).',
+    'LBL_PASSWORD_REGEX_REQUIREMENT' => '비밀번호는 정규식 패턴 {0} 과 일치해서는 안됩니다.',
 
     'LBL_PREFERRED_LANGUAGE' => '언어 설정:',
+    'LBL_PASSWORD_RESET_EMAIL_FAIL' => '비밀번호 재설정 이메일을 보낼 수 없습니다.',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => '보고서 선택',
@@ -4981,6 +5142,25 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => '내 과제 목록',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => '팀 작업',
 
+    'LBL_RECENTLY_VIEWED_CASES_DASHLET' => '나의 최근 본 사례들',
+
+    'LBL_REPORT_DASHLET_TITLE_12' => '상태별 사용자로 사례 열기',
+    'LBL_REPORT_DASHLET_TITLE_125' => '주별 업무 센터의 새로운 사례',
+    'LBL_REPORT_DASHLET_TITLE_126' => '최근 만들어진 사례',
+    'LBL_REPORT_DASHLET_TITLE_127' => '주별 고객 등급으로 새로운 사례',
+    'LBL_REPORT_DASHLET_TITLE_128' => '고객 등급 및 우선 순위별 사례 열기',
+    'LBL_REPORT_DASHLET_TITLE_129' => '업무 센터별 이번 달에 해결된 전체 사례',
+    'LBL_REPORT_DASHLET_TITLE_130' => '에이전트별 이번 달에 해결된 전체 사례',
+    'LBL_REPORT_DASHLET_TITLE_131' => '최근 해결된 사례들의 목록',
+    'LBL_REPORT_DASHLET_TITLE_132' => '주별 이번 달에 해결된 나의 사례',
+    'LBL_REPORT_DASHLET_TITLE_133' => '나의 사례가 금일 만료 및 만료일 도과함',
+    'LBL_REPORT_DASHLET_TITLE_134' => '모든 사례가 금일 만료 및 만료일 도과함',
+    'LBL_REPORT_DASHLET_TITLE_135' => '후속 조치 일자별 나의 열린 사례',
+    'LBL_REPORT_DASHLET_TITLE_136' => '후속 조치 일자별 모든 열린 사례',
+    'LBL_REPORT_DASHLET_TITLE_137' => '상대별 나의 열린 사례',
+    'LBL_REPORT_DASHLET_TITLE_138' => '상태별 지난 주 나의 사례',
+    'LBL_REPORT_DASHLET_TITLE_139' => '내가 할당한 열린 작업 상태',
+
     //Audit subjects
     'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
@@ -5111,6 +5291,8 @@ $app_strings = array (
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => '목록 새로고침',
+    // Refresh button on tile views
+    'LBL_TILE_REFRESH' => 'Refresh Tiles',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => '더보기',
@@ -5379,6 +5561,12 @@ $app_strings = array (
     'LBL_LOCKED_FIELD_RECORD_VIEW_WARNING' => '이 기록은 프로세스의 일부로 진행중이며 일부 잠긴 필드를 포함할 수 있습니다.',
     // @codingStandardsIgnoreEnd
 
+    'LBL_BUSINESS_CENTER' => '업무 센터',
+    'LBL_BUSINESS_CENTER_ID' => '업무 센터 ID',
+    'LBL_BUSINESS_CENTER_NAME' => '업무 센터 이름',
+
+    'LBL_PLIS_ACTIVITIES' => 'Purchased Line Items Activities',
+
     //Tag Strings
     'LBL_TAG_NEW_TAG' => '(새로운 태그)',
     'LBL_TAG_FETCH_ERROR' => '태그를 가져오는 동안 오류가 발생했습니다.',
@@ -5416,14 +5604,47 @@ $app_strings = array (
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => '삭제하기로 표시',
     'TPL_DATAPRIVACY_PII_TITLE' => '{{{name}}}의 개인 정보',
 
+    'LBL_CHANGETIMERS_SUBPANEL_TITLE' => '타이머 변경',
+
     'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => '클립보드에 복사되었습니다!',
     'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => '클립보드에 복사할 수 없습니다',
 
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => '확인 링크 복사',
 
+    // Activity Timeline Dashlet
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => '상호작용',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} 상호작용',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+        'Meetings and Notes related to a record.',
+
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => '더 보기...',
     'LBL_COMMENT_LOG_SHOW_LESS' => '메뉴 접기...',
+    'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => '사용 가능한 일자가 없음',
+
+    // Active Subscriptions Dashlet
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => '구독 활성화',
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => '특정 계정의 구독을 활성화합니다.',
+    'LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY' => ', 재고 {{quantity}}',
+    'LBL_ACTIVE_SUBSCRIPTIONS_TOTAL' => '합계:',
+    'LBL_NO_ACTIVE_SUBSCRIPTIONS' => '활성화된 구독 없음',
+    'LBL_REQUIRE_REVENUE_LINE_ITEMS' => '이 대시렛이 작동하려면 {{module_name}}이(가) 필요합니다. {{module_name}}을(를) 활성화하려면 관리자와 연락하세요.',
+
+    // Customer Service
+    'LBL_EDIT_IN_STUDIO' => '다음으로 이동하여 레코드 보기 대시렛 레이아웃을 편집할 수 있도록 Studio를 사용하십시오.' .
+        'Studio > {{module}} > 레이아웃 > 기록 보기 대시렛. <a href={{linkToStudio}}>Studio에서 편집하기</a>.',
+    'LBL_SERVICE_LEVEL' => '서비스 수준',
+    // Agent Workbench
+    'LBL_AGENT_WORKBENCH_NUMBER' => '숫자',
+    'LBL_AGENT_WORKBENCH_FOLLOW_UP' => '후속 조치',
+    'LBL_AGENT_WORKBENCH_PRIORITY_STATUS' => '우선순위/상태',
+    'LBL_AGENT_WORKBENCH_SUBJECT_DESCRIPTION' => '제목/설명',
+
+//Service Duration
+    'LBL_SERVICE_DURATION' => '서비스 기간',
+    'LBL_SERVICE_DURATION_VALUE' => '서비스 기간 값',
+    'LBL_SERVICE_DURATION_UNIT' => '서비스 기간 단위',
+
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6420,7 +6641,7 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = '임베드된 파일'
     'ISK' => 'kr',
     'INR' => '₨',
     'IDR' => 'Rp',
-    'IRR' => '﷼',
+    'IRR' => '77e8',
     'IMP' => '£',
     'ILS' => '₪',
     'JMD' => 'J$',
@@ -6449,18 +6670,18 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = '임베드된 파일'
     'NIO' => 'C$',
     'NGN' => '₦',
     'NOK' => 'kr',
-    'OMR' => '﷼',
+    'OMR' => '77e8',
     'PKR' => '₨',
     'PAB' => 'B/.',
     'PYG' => 'Gs',
     'PEN' => 'S/.',
     'PHP' => '₱',
     'PLN' => 'zł',
-    'QAR' => '﷼',
+    'QAR' => '77e8',
     'RON' => 'lei',
     'RUB' => 'руб',
     'SHP' => '£',
-    'SAR' => '﷼',
+    'SAR' => '77e8',
     'RSD' => 'Дин.',
     'SCR' => '₨',
     'SGD' => '$',
@@ -6482,7 +6703,7 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = '임베드된 파일'
     'UZS' => 'лв',
     'VEF' => 'Bs',
     'VND' => '₫',
-    'YER' => '﷼',
+    'YER' => '77e8',
     'ZWD' => 'Z$',
     );
 

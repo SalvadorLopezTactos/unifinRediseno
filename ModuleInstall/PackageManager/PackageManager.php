@@ -14,6 +14,8 @@ define("CREDENTIAL_CATEGORY", "ml");
 define("CREDENTIAL_USERNAME", "username");
 define("CREDENTIAL_PASSWORD", "password");
 
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 require_once('vendor/nusoap//nusoap.php');
 require_once('include/utils/zip_utils.php');
 SugarAutoLoader::requireWithCustom('ModuleInstall/ModuleInstaller.php');
@@ -22,12 +24,24 @@ class PackageManager{
     var $soap_client;
 
     /**
+     * @var string
+     */
+    private $baseUpgradeDir;
+
+    /**
+     * @var string
+     */
+    private $baseTempUpgradeDir;
+
+    /**
      * Constructor: In this method we will initialize the nusoap client to point to the hearbeat server
      */
     public function __construct()
     {
         $this->db = DBManagerFactory::getInstance();
         $this->upload_dir = empty($GLOBALS['sugar_config']['upload_dir']) ? 'upload' : rtrim($GLOBALS['sugar_config']['upload_dir'], '/\\');
+        $this->baseUpgradeDir = $this->upload_dir . '/upgrades';
+        $this->baseTempUpgradeDir = $this->upload_dir . '/temp';
     }
 
     function initializeComm(){
@@ -371,13 +385,185 @@ class PackageManager{
         return $md5;
     }
 
+    /**
+     * return base upload upgrade dir
+     * @return string
+     */
+    public function getBaseUploadUpgradeDir(): string
+    {
+        return $this->baseUpgradeDir;
+    }
+
+    /**
+     * Upload package zip file and check package content. Return uploaded file path.
+     * @param string $type what is package type? It will match with type from manifest
+     * @return string
+     * @throws SugarException
+     */
+    public function uploadPackage(string $type): string
+    {
+        if (empty($_FILES['upgrade_zip']['tmp_name'])) {
+            throw $this->getSugarException('ERR_UW_NO_UPLOAD_FILE');
+        }
+
+        $uploadFile = new UploadFile('upgrade_zip');
+        if (!$uploadFile->confirm_upload()) {
+            throw $this->getSugarExceptionWithExtraData('ERR_UW_NO_UPLOAD_FILE', $uploadFile->getErrorMessage());
+        }
+
+        $storedFileName = $uploadFile->get_stored_file_name();
+        $isFileMoved = $uploadFile->final_move($storedFileName);
+        if (strtolower(pathinfo($storedFileName, PATHINFO_EXTENSION)) !== 'zip' || !$isFileMoved) {
+            throw $this->getSugarExceptionWithExtraData(
+                'LBL_UPGRADE_WIZARD_INVALID_PKG',
+                $uploadFile->getErrorMessage()
+            );
+        }
+
+        $tempPackageFile = $this->upload_dir . '/' . $storedFileName;
+
+        $manifestFile = $this->extractManifest($tempPackageFile, '');
+        if (!is_file($manifestFile)) {
+            throw $this->getSugarExceptionWithExtraData(
+                'LBL_UPGRADE_WIZARD_INVALID_PKG',
+                $uploadFile->getErrorMessage()
+            );
+        }
+
+        $moduleScanner = new ModuleScanner();
+        $moduleScanner->lockConfig();
+        $fileScanIssues = $moduleScanner->scanFile($manifestFile);
+        if (!empty($fileScanIssues)) {
+            throw $this->getSugarExceptionWithExtraData('ML_MANIFEST_ISSUE', $moduleScanner->getFormattedIssues());
+        }
+
+        list($manifest, ) = $this->requireManifestFile($manifestFile);
+        $configCheckIssues = $moduleScanner->checkConfig($manifest);
+        if (!empty($configCheckIssues)) {
+            throw $this->getSugarExceptionWithExtraData('ML_MANIFEST_ISSUE', $moduleScanner->getFormattedIssues());
+        }
+
+        try {
+            UpgradeWizardCommon::validate_manifest($manifest);
+        } catch (Exception $e) {
+            throw $this->getSugarExceptionWithExtraData('ML_MANIFEST_ISSUE', $e->getMessage());
+        }
+
+        /*
+         * Exclude the bad permutations. Default is misleading here as'module' is the default.
+         * 'default' maps to an upgrade path which may no longer be supported
+         */
+        $uploadedPackageType = $manifest['type'];
+        if ($type === 'module' && !in_array($uploadedPackageType, ['module', 'theme', 'langpack'])) {
+            throw $this->getSugarException('ERR_UW_NOT_ACCEPTIBLE_TYPE');
+        } elseif ($type === 'default' && $uploadedPackageType === 'patch') {
+            throw $this->getSugarException('ERR_UW_ONLY_PATCHES');
+        }
+
+        $baseFilename = pathinfo($tempPackageFile, PATHINFO_BASENAME);
+
+        mkdir_recursive($this->baseUpgradeDir . '/' . $uploadedPackageType);
+        $targetPath = sprintf('%s/%s/%s', $this->baseUpgradeDir, $uploadedPackageType, $baseFilename);
+        $targetManifest = remove_file_extension($targetPath) . '-manifest.php';
+
+        //Verify this isn't going to conflict with an existing package.
+        if (file_exists($targetPath) && md5_file($targetPath) != md5_file($tempPackageFile)) {
+            throw $this->getSugarExceptionWithExtraData(
+                'LBL_UPGRADE_WIZARD_INVALID_PKG',
+                'An existing package with the filename ' . $baseFilename . ' detected.'
+            );
+        }
+
+        if (!empty($manifest['icon'])) {
+            $iconLocation = $this->extractFile($tempPackageFile, $manifest['icon'], $this->baseTempUpgradeDir);
+            $targetIconLocation = sprintf(
+                '%s-icon.%s',
+                remove_file_extension($targetPath),
+                pathinfo($iconLocation, PATHINFO_EXTENSION)
+            );
+            copy($iconLocation, $targetIconLocation);
+        }
+
+        if (rename($tempPackageFile, $targetPath)) {
+            copy($manifestFile, $targetManifest);
+            $GLOBALS['ML_STATUS_MESSAGE'] = $baseFilename . translate('Administration', 'LBL_UW_UPLOAD_SUCCESS');
+            return $targetPath;
+        } else {
+            $GLOBALS['ML_STATUS_MESSAGE'] = translate('Administration', 'ERR_UW_UPLOAD_ERROR');
+            throw $this->getSugarException('ERR_UW_UPLOAD_ERROR');
+        }
+    }
+
+    /**
+     * Delete temp files. Return SugarException with extra data
+     * @param string $errorLabel this label with translated and used as key
+     * @return SugarException
+     */
+    private function getSugarException(string $errorLabel): SugarException
+    {
+        return new SugarException($errorLabel, null, 'Administration');
+    }
+
+    /**
+     * Delete temp files. Return SugarException with extra data
+     * @param string $errorLabel this label with translated and used as key
+     * @param mixed $extraData additional data with error explanation
+     * @return SugarException
+     */
+    private function getSugarExceptionWithExtraData(string $errorLabel, $extraData): SugarException
+    {
+        $exception = $this->getSugarException($errorLabel);
+        $exception->setExtraData('error_description', $extraData);
+        return $exception;
+    }
+
     //////////////////////////////////////////////////////////////////////
     /////////// INSTALL SECTION
-    function extractFile( $zip_file, $file_in_zip, $base_tmp_upgrade_dir){
-        $my_zip_dir = mk_temp_dir( $base_tmp_upgrade_dir );
-        $this->addToCleanup($my_zip_dir);
-        unzip_file( $zip_file, $file_in_zip, $my_zip_dir );
-        return( "$my_zip_dir/$file_in_zip" );
+
+    /**
+     * Unzip package in temporary directory and return directory patch
+     * @param string $baseTmpUpgradeDir
+     * @param string $file
+     * @return string
+     */
+    public function unzipPackageFileInTempDir(string $baseTmpUpgradeDir, string $file): string
+    {
+        $tmpUnzipDir = $this->prepareTemporaryUnzipDir($baseTmpUpgradeDir);
+        unzip($file, $tmpUnzipDir);
+        return $tmpUnzipDir;
+    }
+
+    /**
+     * Create temporary directory in $baseTmpUpgradeDir.
+     * Unzip $fileInZip into temporary directory and return path to unzipped file.
+     * @param string $zipFile
+     * @param string $fileInZip
+     * @param string $baseTmpUpgradeDir
+     * @return string
+     */
+    public function extractFile(string $zipFile, string $fileInZip, string $baseTmpUpgradeDir): string
+    {
+        $tmpUnzipDir = $this->prepareTemporaryUnzipDir($baseTmpUpgradeDir);
+        unzip_file($zipFile, $fileInZip, $tmpUnzipDir);
+        return $tmpUnzipDir . '/' . $fileInZip;
+    }
+
+    /**
+     * Create $base if it doesn't exist.
+     * Create temporary directory in $base. Add temporary directory to auto clean up.
+     * Return temporary directory path.
+     * @param string $base path to base directory
+     * @return string
+     */
+    private function prepareTemporaryUnzipDir(string $base): string
+    {
+        if (!file_exists($base)) {
+            sugar_mkdir($base, null, true);
+        }
+
+        $unzipDir = mk_temp_dir($base);
+        $this->addToCleanup($unzipDir);
+        return $unzipDir;
     }
 
     function extractManifest( $zip_file,$base_tmp_upgrade_dir ) {
@@ -469,7 +655,7 @@ class PackageManager{
             $license_file = $this->extractFile($base_filename, 'LICENSE', $base_tmp_upgrade_dir);
         if(is_file($manifest_file)){
             $GLOBALS['log']->debug("VALIDATING MANIFEST". $manifest_file);
-            require_once( $manifest_file );
+            list($manifest, ) = $this->requireManifestFile($manifest_file);
             $this->validate_manifest($manifest );
             $upgrade_zip_type = $manifest['type'];
             $GLOBALS['log']->debug("VALIDATED MANIFEST");
@@ -518,13 +704,65 @@ class PackageManager{
             return $messages;
     }
 
-    function unlinkTempFiles() {
-        global $sugar_config;
-        @unlink($_FILES['upgrade_zip']['tmp_name']);
-        @unlink("upload://".$_FILES['upgrade_zip']['name']);
+    /**
+     * Require manifest.php in isolated function is required
+     * because some manifest comes with logic inside and could rewrite local values.
+     * Throw SugarException if file doesn't exist. Because callers don't expect no valid file manifest here.
+     *
+     * @param string $manifestFilePath
+     * @return array
+     *
+     * @throws SugarException
+     */
+    private function requireManifestFile(string $manifestFilePath): array
+    {
+        $manifest = [];
+        $installdefs = [];
+        try {
+            /**
+             * replace upload://upgrades to upload/upgrades to support old package manager behavior(getStagedPackages)
+             * @TODO must be delete when all package CRUD is moved to DB
+             */
+            $manifestFilePath = str_replace('upload://upgrades', $this->baseUpgradeDir, $manifestFilePath);
+            $manifestFilePath = FileLoader::validateFilePath($manifestFilePath, true);
+        } catch (\RuntimeException $e) {
+            throw $this->getSugarException('ERR_UW_NO_MANIFEST');
+        }
+        require $manifestFilePath;
+        return [$manifest, $installdefs];
     }
 
-    function performInstall($file, $silent=true){
+    /**
+     * delete temp upload files
+     */
+    public function deleteTempUploadFiles(): void
+    {
+        self::unlinkTempFiles();
+    }
+
+    public static function unlinkTempFiles(): void
+    {
+        if (empty($_FILES['upgrade_zip'])) {
+            return;
+        }
+        $tmpFileName = $_FILES['upgrade_zip']['tmp_name'];
+        if (is_uploaded_file($tmpFileName) && file_exists($tmpFileName)) {
+            unlink($tmpFileName);
+        }
+        $filePath = UploadStream::path('upload://' . $_FILES['upgrade_zip']['name']);
+        if (null !== $filePath && file_exists($filePath)) {
+            unlink($filePath);
+        }
+    }
+
+    /**
+     * Install package. Return UpgradeHistory of installed package.
+     * @param string $file
+     * @param bool $silent
+     * @return UpgradeHistory|null
+     */
+    public function performInstall($file, $silent = true):? UpgradeHistory
+    {
         global $sugar_config;
         global $mod_strings;
         global $current_language;
@@ -544,7 +782,7 @@ class PackageManager{
              $GLOBALS['log']->debug("1: ".$file);
             // handle manifest.php
             $target_manifest = remove_file_extension( $file ) . '-manifest.php';
-            include($target_manifest);
+            list($manifest, $installdefs) = $this->requireManifestFile($target_manifest);
             $GLOBALS['log']->debug("2: ".$file);
             $unzip_dir = mk_temp_dir( $base_tmp_upgrade_dir );
             $this->addToCleanup($unzip_dir);
@@ -582,8 +820,10 @@ class PackageManager{
 			$new_upgrade->manifest		= base64_encode(serialize($serial_manifest));
             //$new_upgrade->unique_key    = (isset($manifest['unique_key'])) ? $manifest['unique_key'] : '';
             $new_upgrade->save();
+            return $new_upgrade;
                     //unlink($file);
         }//fi
+        return null;
     }
 
     function performUninstall($name){
@@ -692,7 +932,7 @@ class PackageManager{
                 continue;
             }
 
-            require_once $target_manifest;
+            list($manifest, ) = $this->requireManifestFile($target_manifest);
             $manifest_type = $manifest['type'];
             if (($view == 'default' && $manifest_type != 'patch')
                  || ($view == 'module' && $manifest_type != 'module'
@@ -823,7 +1063,7 @@ class PackageManager{
 				case "patch":
 					if($populate){
 						$manifest_file = $this->extractManifest($filename, $base_tmp_upgrade_dir);
-						require_once($manifest_file);
+                        list($manifest, $installdefs) = $this->requireManifestFile($manifest_file);
 						$GLOBALS['log']->info("Filling in upgrade_history table");
 						$populate = false;
 						if( isset( $manifest['name'] ) ){
@@ -846,7 +1086,10 @@ class PackageManager{
 						$installed->manifest = base64_encode(serialize($serial_manifest));
 						$installed->save();
 					}else{
-						$serial_manifest = unserialize(base64_decode($installed->manifest));
+                        $serial_manifest = unserialize(
+                            base64_decode($installed->manifest),
+                            ['allowed_classes' => false]
+                        );
 						$manifest = $serial_manifest['manifest'];
 					}
                     if (is_file($filename) && !empty($manifest['is_uninstallable'])
@@ -873,7 +1116,8 @@ class PackageManager{
 				    'uninstallable' =>$uninstallable,
 				    'file_install' =>  $file_uninstall ,
 				    'file' =>  fileToHash($filename),
-				    'enabled' => $enabled_string
+                    'enabled' => $enabled_string,
+                    'id' => $installed->id,
 				);
 				break;
 				default:

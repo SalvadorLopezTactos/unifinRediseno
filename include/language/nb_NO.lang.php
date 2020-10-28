@@ -43,6 +43,8 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'Arbeidsplan for Prognoser',
     'ForecastManagerWorksheets' => 'Arbeidsflate for prognoser',
     'MergeRecords'=>'Fusjonér registre',
+      'VisualPipeline'=>'Visuell pipeline',
+      'ConsoleConfiguration' => 'Konsollkonfigurasjon',
     'Quotas' => 'Budsjetter',
     'Teams' => 'Grupper',
     'TeamNotices' => 'Gruppemeldinger',
@@ -75,6 +77,11 @@ $app_list_strings = array (
     'pmse_Project' => 'Prosessdefinisjoner',
     'pmse_Business_Rules' => 'Prosess forretning regel',
     'pmse_Emails_Templates' => 'E-postmalprosess',
+    'BusinessCenters' => 'Forretningssentre',
+    'Shifts' => 'Shifts',
+    'ShiftExceptions' => 'Shift Exceptions',
+    'Purchases' => 'Purchases',
+    'PurchasedLineItems' => 'Purchased Line Items',
     'WorkFlow' => 'Workflow-definisjoner:',
     'EAPM' => 'Eksterne konto',
     'Worksheet' => 'Regneark',
@@ -116,6 +123,8 @@ $app_list_strings = array (
     'DataPrivacy' => 'Personvern for data',
     'ReportSchedules' => 'Rapportplaner',
     'CommentLog' => 'Kommentarlogg',
+    'Holidays' => 'Ferier',
+    'ChangeTimers' => 'Endre timere',
   ),
 
     'moduleIconList' =>
@@ -131,6 +140,8 @@ $app_list_strings = array (
         'Tasks' => 'Oppgaver',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'DP',
+        'BusinessCenters' => 'BC',
+        'PurchasedLineItems' => 'PL',
     ),
 
   'moduleListSingular' =>
@@ -150,6 +161,8 @@ $app_list_strings = array (
     'Calendar' => 'Kalender',
     'Leads' => 'Lead',
     'Manufacturers' => 'Produsent',
+    'VisualPipeline' => 'VisualPipeline',
+    'ConsoleConfiguration' => 'ConsoleConfiguration',
     'Contracts'=>'Kontrakt',
     'Quotes' => 'Tilbud',
     'Products' => 'Produkt',
@@ -196,6 +209,11 @@ $app_list_strings = array (
     'pmse_Project' => 'Prosessdefinisjoner',
     'pmse_Business_Rules' => 'Prosess Forretnings regel',
     'pmse_Emails_Templates' => 'Process Email Mal',
+    'BusinessCenters' => 'Forretningssenter',
+    'Shifts' => 'Shift',
+    'ShiftExceptions' => 'Shift Exceptions',
+    'Purchases' => 'Purchase',
+    'PurchasedLineItems' => 'Purchased Line Item',
     'WorkFlow' => 'Arbeidsflyt',
     'EAPM' => 'Ekstern konto',
     'Worksheet' => 'Regneark',
@@ -224,7 +242,7 @@ $app_list_strings = array (
     'Comments' => 'Kommentar',
     'CommentLog' => 'Kommentarlogg',
     'Currencies' => 'Valuta',
-    'ProductTemplates' => 'Produktmal',
+    'ProductTemplates' => 'Product',
     'ProductTypes' => 'Produkttype',
     'Shippers' => 'Avsenderleverandør',
     'Subscriptions' => 'Abonnement',
@@ -236,6 +254,8 @@ $app_list_strings = array (
     'EmailParticipants' => 'E-postdeltaker',
     'DataPrivacy' => 'Personvern for data',
     'ReportSchedules' => 'Rapportplan',
+    'Holidays' => 'Ferie',
+    'ChangeTimers' => 'Endre timer',
   ),
 
 /*
@@ -321,6 +341,11 @@ $app_list_strings = array (
     'T3' => 'Lag 3',
     'T4' => 'Lag 4',
   ),
+  'generate_purchase_dom' => [
+      'Yes' => 'Yes',
+      'No' => 'No',
+      'Completed' => 'Completed',
+  ],
   'lead_source_default_key' => 'Selv-generert',
   'lead_source_dom' =>
   array (
@@ -589,6 +614,12 @@ $app_list_strings = array (
     'RegularUser' => 'Vanlig bruker',
     'Administrator' => 'Administrator',
   ),
+  'license_type_dom' =>
+    array (
+        'CURRENT' => 'Gjeldende produkt',
+        'SUGAR_SERVE' => 'Sugar Serve',
+        'SUGAR_SELL' => 'Sugar Sell',
+    ),
   'user_status_dom' =>
   array (
     'Active' => 'Aktiv',
@@ -693,6 +724,8 @@ $app_list_strings = array (
     'Meetings' => 'Møte',
     'Calls' => 'Opringning:',
       'KBContents' => 'KB-dokumenter',
+      'PurchasedLineItems' => 'Purchased Line Item',
+      'Purchases' => 'Purchase',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Konto',
@@ -722,7 +755,13 @@ $app_list_strings = array (
     'Prospects' => 'Mål',
       'KBContents' => 'KB-dokumenter',
       'Notes' => 'Notat',
+    'PurchasedLineItems' => 'Purchased Line Item',
+    'Purchases' => 'Purchase',
   ),
+
+  'changetimer_parent_type' => [
+      'Cases' => 'Sak',
+  ],
 
   'product_status_default_key' => 'Sendt',
   'product_status_quote_key' => 'Tilbud',
@@ -883,7 +922,8 @@ $app_list_strings = array (
     'Forum' => 'Forum',
     'Web' => 'Web',
     'InboundEmail' => 'E-postadresse',
-    'Twitter' => 'Twitter'
+    'Twitter' => 'Twitter',
+    'Portal' => 'Portal',
   ),
     'dataprivacy_type_default_key' => '',
     'dataprivacy_type_dom' => array(
@@ -916,6 +956,11 @@ $app_list_strings = array (
         'Medium' => 'Medium',
         'High' => 'Høy',
     ),
+    'business_day_status_dom' => [
+        'Open' => 'Åpen',
+        'Open 24 Hours' => 'Åpen 24 timer',
+        'Closed' => 'Lukket',
+    ],
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -1145,6 +1190,13 @@ $app_list_strings = array (
     'dom_email_states' => array(
         'Draft' => 'Utkast',
         'Archived' => 'Arkivert',
+    ),
+
+    'dom_email_direction' => array(
+        'Unknown' => 'Ukjent',
+        'Outbound' => 'Utgående',
+        'Inbound' => 'Inngående',
+        'Internal' => 'Intern',
     ),
 
     'scheduler_status_dom' =>
@@ -2096,6 +2148,11 @@ $app_list_strings = array (
         240000 => 'Hvert 4. minutt',
         300000 => 'Hvert 5. minutt',
   ),
+    'first_response_met_sla_dom'=> [
+        '' => '',
+        'Yes' => 'Ja',
+        'No' => 'Nei',
+    ],
     'forecasts_chart_options_group' => array(
         'forecast' => 'I prognose',
         'sales_stage' => 'Salgsfase',
@@ -2123,6 +2180,7 @@ $app_list_strings = array (
         'record' => 'Post',
         'records' => 'Liste',
         'activities' => 'Aktivitetstrøm',
+        'multi-line' => 'Liste over flere linjer',
     ),
     'reportschedule_time_interval_dom' => array(
         '3600' => 'Hver time',
@@ -2133,6 +2191,23 @@ $app_list_strings = array (
         '1209600' => 'Hver andre uke',
         '2419200' => 'Hver fjerde uke',
     ),
+    'pipeline_records_per_column' => array(
+        '10' => '10',
+        '15' => '15',
+        '20' => '20',
+    ),
+    //Service Duration
+    'service_duration_unit_dom' =>
+        array (
+            'year' => 'År',
+            'month' => 'Måned(er)',
+            'day' => 'Dag(er)',
+        ),
+        'shift_exception_type_dom' => [
+            'time_off' => 'Time Off',
+            'event' => 'Event',
+            'other' => 'Other',
+        ],
 );
 
 $app_strings = array (
@@ -2144,7 +2219,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Følg link',
   'LBL_TOGGLE_VISIBILITY' => 'Bytte mellom visning', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivitetstrøm',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2020 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar og 3-D kuben er registrerte varemerker for SugarCRM Inc. '.
         'Alle andre selskaps- og produktnavn som brukes eller vises i dette produktet kan være varemerker for de '.
         'SugarCRM ®, Sugar Enterprise™ og Sugar™ er varemerker av SugarCRM Inc.',
@@ -2500,6 +2575,7 @@ $app_strings = array (
 
     'LBL_EMAIL_NO'                          => 'Nei',
     'LBL_EMAIL_NOT_SENT'                    => 'Systemet kan ikke behandle forespørselen. Vennligst kontakt systemadministrator.',
+    'LBL_INSERT_TO_USER_PWD_FAILED'         => 'Kunne ikke sette inn users_password_link.',
 
     'LBL_EMAIL_OK'                          => 'OK',
     'LBL_EMAIL_ONE_MOMENT'                  => 'Vent litt...',
@@ -2718,8 +2794,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'En aktiv sesjon er påkrevet for å eksportere innhold.',
     'ERR_NO_HEADER_ID' => 'Dette valget er ikke tilgjengelig i dette temaet.',
     'ERR_NOT_ADMIN' => "Ulovlig adgang til administrasjon.",
-    'ERR_DISABLED_FOR_IDM_MODE' => 'Password Management er kun tilgjengelig i skyinnstillinger.',
-    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE' =>
+        'Passordadministrering er kun tilgjengelig i <a href="%s" target="_blank">skyinnstillinger</a>.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Kontakt Sugar-administrator hvis du ønsker å endre skrivebeskyttede felt.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Du må fylle ut felt:',
@@ -2749,6 +2825,7 @@ $app_strings = array (
     'ERR_DB_VERSION' => 'Sugar CRM {0} filer kan bare brukes med en Sugar CRM {1} Database.',
     'ERR_DB_QUERY' => '{0}: spørring mislyktes: {1}',
     'ERR_UW_RETIRED' => 'Oppgrader Wizard er ikke tilgjengelig i denne versjonen.',
+    'ERR_NOT_CLOUD_INSTANCE' => 'Denne forekomsten av Sugar er enten ikke en SugarCloud-forekomst eller ikke konfigurert for SugarCloud Insights.',
 
 
     'EXCEPTION_CREATE_MODULE_NOT_AUTHORIZED' => 'Du er ikke autorisert til å opprette  {moduleName}. Kontakt administratoren hvis du trenger tilgang.',
@@ -2771,6 +2848,7 @@ $app_strings = array (
     'EXCEPTION_NEED_LOGIN'              => 'Du må være logget inn for å utføre denne handlingen.',
     'EXCEPTION_INVALID_TOKEN'           => 'Din autentiserings token er ugyldig.',
     'EXCEPTION_NOT_AUTHORIZED'          => 'Du er ikke autorisert til å utføre denne handlingen. Kontakt administratoren hvis du trenger tilgang.',
+    'EXCEPTION_NOT_AUTHORIZED_TO_DATA'  => 'Du er ikke autorisert til å vise data. Kontakt administratoren hvis du trenger tilgang.',
     'EXCEPTION_INACTIVE_PORTAL_USER'    => 'Du kan ikke få tilgang til portalen fordi din portalkonto er inaktiv. Vennligst kontakt kundeservice dersom du trenger tilgang.',
     'EXCEPTION_PORTAL_NOT_CONFIGURED'   => 'Portalen er ikke riktig konfigurert. Kontakt din Portal Administrator for å få hjelp.',
     'EXCEPTION_NO_METHOD'               => 'Din forespørsel ble ikke støttet. Kunne ikke finne HTTP-metoden av din forespørsel for denne banen.',
@@ -2790,6 +2868,8 @@ $app_strings = array (
     'EXCEPTION_SEARCH_RUNTIME'          => 'En gjennomkjøringsfeil oppsto i søkemotoren. Ta kontakt med systemadministratoren din.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
     'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Et felt som er låst av en prosess kan ikke redigeres.',
+    'EXCEPTION_MODULE_DISABLED'         => 'Denne modulen er deaktivert for nåværende bruker.',
+    'EXCEPTION_FIELD_DISABLED'          => 'Dette feltet er deaktivert for nåværende bruker.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'En tilstand oppstod på grunn av en generell svikt eller feil. Årsakene til dette unntakets rekkevidde, faller generelt utenfor rammen av en mer spesifikk API unntak.',
@@ -2818,6 +2898,8 @@ $app_strings = array (
     'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Et felt som er låst av en prosess som kjører kan ikke redigeres.',
     'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s er låst av en prosess som kjører og kan ikke redigeres.',
     'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s er låst av en prosess som kjører, og kan ikke redigeres.',
+    'EXCEPTION_MODULE_DISABLED_DESC'       => 'Denne modulen er deaktivert for nåværende bruker.',
+    'EXCEPTION_FIELD_DISABLED_DESC'        => 'Dette feltet er deaktivert for nåværende bruker.',
 
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'En fil med samme navn finnes allerede i systemet.',
@@ -2907,6 +2989,7 @@ $app_strings = array (
     'LBL_CLOSE_AND_CREATE_BUTTON_LABEL' => 'Lukk og opprett ny',
     'LBL_CLOSE_AND_CREATE_BUTTON_TITLE' => 'Lukk og opprett ny',
     'LBL_CLOSE_AND_CREATE_BUTTON_KEY' => 'C',
+    'LBL_COPY_RECORD_URL' => 'Kopier register-URL',
     'LBL_OPEN_ITEMS' => 'Åpne elementer:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'Skriv e-post',
@@ -2935,6 +3018,8 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'Dokumenter',
     'LBL_DATE_ENTERED' => 'Opprettet dato:',
     'LBL_DATE_MODIFIED' => 'Sist endret:',
+    'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'Rediger Oversikt-fane',
+    'LBL_EDIT_MODULE_TABS_BUTTON' => 'Rediger Modul-faner',
     'LBL_EDIT_BUTTON' => 'Rediger',
     'LBL_DUPLICATE_BUTTON' => 'Dupliser',
     'LBL_DELETE_BUTTON' => 'Slett',
@@ -2947,6 +3032,7 @@ $app_strings = array (
     'LBL_DST_NEEDS_FIXIN' => 'Programmet krever sommertid for å brukes. Gå til <a href="index.php?module=Administration&action=DstFix">Reparer</a>-lenken i administrasjonskonsollen og bruk sommertid.',
     'LBL_EDIT_AS_NEW_BUTTON_LABEL' => 'Rediger som ny',
     'LBL_EDIT_AS_NEW_BUTTON_TITLE' => 'Rediger som ny',
+    'LBL_EDIT_IN_NEW_TAB' => 'Rediger i ny fane',
     'LBL_FAVORITES' => 'Favoritter',
     'LBL_FILTER' => 'Filter',
     'LBL_DEFAULT_DATA_FILTER' => 'Standard datafilter',
@@ -3126,6 +3212,7 @@ $app_strings = array (
     'LBL_MODIFIED_ID'=>'Endret av Id',
     'LBL_MORE' => 'mer',
     'LBL_MORE_MODULES' => 'Flere moduler',
+    'LBL_MORE_TABS' => 'Flere faner',
     'LBL_MULTIPLE_MODULES' => 'Flere moduler',
     'LBL_MY_ACCOUNT' => 'Min konto',
     'LBL_SYSTEM_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'systemstandard',
@@ -3145,6 +3232,7 @@ $app_strings = array (
     'LBL_OPENTO_BUTTON_KEY' => 'T',
     'LBL_OPENTO_BUTTON_LABEL' => 'Åpne til:',
     'LBL_OPENTO_BUTTON_TITLE' => 'Åpne til: [Alt+T]',
+    'LBL_OPEN_IN_NEW_TAB' => 'Åpne i ny fane',
     'LBL_OPPORTUNITIES'=>'Muligheter',
     'LBL_OPPORTUNITY_NAME' => 'Mulighetsnavn',
     'LBL_OPPORTUNITY'=>'Mulighet',
@@ -3345,7 +3433,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2020 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Alle rettigheter reservert. <br /> SugarCRM, Sugar og 3-D kuben er registrerte varemerker for SugarCRM Inc. '.
         'Alle andre selskaps- og produktnavn som brukes eller vises i dette produktet kan være varemerker for de '.
         'respektive selskapene som de er tilknyttet til.',
@@ -3464,7 +3552,7 @@ SugarCRM',
     'LNK_VIEW_CHANGE_LOG' => 'Vis revisjonslogg',
     'TPL_AUDIT_LOG_TITLE' => 'Revisjonslogg for {{{name}}}',
     'LBL_AUDIT_EMAIL_TOOLTIP' => 'Klikk for å vise e-postadresses overvåkingslogg',
-
+    'LBL_NO_SEARCH_RESULTS' => 'Ingen resultater funnet for søket ditt',
     'NTC_CLICK_BACK' => 'Klikk Tilbake-knappen i nettleseren og rett feilen.',
     'NTC_DATE_FORMAT' => '(åååå-mm-dd)',
     'NTC_DATE_TIME_FORMAT' => '(åååå-mm-dd 24:00)',
@@ -3502,12 +3590,15 @@ SugarCRM',
     'WARN_LICENSE_SEATS_MAXED'=>  "Advarsel: Antall aktive brukere er allerede tilsvarende maksimalt antall tillatte lisenser.",
     'ERROR_LICENSE_SEATS_MAXED'=>
         'Antall aktive brukere overskrider lisensantallgrenser. Kontakt systemansvarlig.',
+    'ERROR_LICENSE_TYPE_SEATS_MAXED'=>
+        'Number of active %s users exceeds License Count limits. Please contact your Administrator.',
     'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'Bare administratorer kan logge inn.',
     'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
         'Brukerlisenstallgrensen er nådd. Bare eksisterende brukere kan logge inn.',
     'WARN_ONLY_ADMINS'=> "Bare administratorer kan logge inn.",
     'WARN_UNSAVED_CHANGES'=> "Du er i ferd med å forlate denne posten uten å lagre eventuelle endringer du har gjort. Er du sikker på at du vil forlate denne posten?",
     'LBL_WARN_UNSAVED_CHANGES' => 'Du har ulagrede endringer. Er du sikker på at du vil forlate siden og forkaste endringene?',
+    'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'En eller flere små streker har ulagrede endringer. Er du sikker på at du vil lukke skuffen?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Du flytter til rapportmodulen. Endringene til dashlet vil ikke bli lagret. Fortsett?',
     'ERROR_NO_RECORD' => 'En feil oppsto ved henting av fil. Denne oppføringen kan ha blitt slettet eller så har du ikke tilgang til å vise filen.',
     'ERROR_TYPE_NOT_VALID' => 'Error. Denne typen er ikke gyldig.',
@@ -3524,7 +3615,10 @@ SugarCRM',
     'ERROR_DATETIME' => 'Feil. Dette felt krever en gyldig dato.',
     'ERROR_IS_BEFORE' => 'Feil. Datoen for dette feltet kan ikke være etter datoen for {{this}} feltet.',
     'ERROR_IS_AFTER' => 'Feil. Datoen for dette feltet kan ikke være før datoen for {{this}} feltet.',
+    'ERROR_TIME_IS_BEFORE' => 'Feil: Klokkeslettet for dette feltet må være før klokkeslettet for {{this}} feltet.',
+    'ERROR_TIME_IS_AFTER' => 'Feil: Klokkeslettet for dette feltet må være etter klokkeslettet for {{this}} feltet.',
     'ERROR_NUMBER' => 'Feil. Dette felt kever et gyldig nummer.',
+    'ERROR_INT' => 'Feil: Ugyldig heltall.',
     'ERROR_NO_BEAN' => 'Fikk ikke tak i bean.',
     'ERROR_ACCESS_MODULE' => 'Du har ikke tilgang til denne modul.',
     'ERROR_MAX_FILESIZE_EXCEEDED' => 'Vedlegget er for stort.',
@@ -3610,6 +3704,7 @@ SugarCRM',
     'LBL_SCHEDULE_MEETING' => 'Opprett møte',
     'LBL_CREATE_TASK' => 'Opprett oppgave',
     'LBL_REMOVE_FROM_FAVORITES' => 'Fjern fra Mine favoritter',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => 'Lag skjema',
     'LBL_SAVE_WEB_TO_LEAD_FORM' =>'Lagre web til leadblankett',
@@ -3638,36 +3733,21 @@ SugarCRM',
     'ERR_SMARTY_UNEQUAL_RELATED_FIELD_PARAMETERS' => 'Error: There are an unequal number of arguments for the &#39;key&#39; and &#39;copy&#39; elements in the displayParams array.',
     'ERR_SMARTY_MISSING_DISPLAY_PARAMS' => 'Missing index in displayParams Array for:',
 
-    /* MySugar Framework (for Home and Dashboard) */
     'LBL_DASHLET' => 'Dashlet',
-    'LBL_DASHLET_CONFIGURE_GENERAL' => 'Generell',
     'LBL_DASHLET_CONFIGURE_FILTERS' => 'Filtre',
     'LBL_DASHLET_CONFIGURE_MY_ITEMS_ONLY' => 'Kun mine ting',
-    'LBL_DASHLET_CONFIGURE_MY_FAVORITES_ONLY' => 'Kun mine favoritter',
     'LBL_DASHLET_CONFIGURE_TITLE' => 'Tittel',
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Vis rader',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'Relatert til nåværende post',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'Koblet felt',
 
-    // MySugar status strings
-    'LBL_CREATING_NEW_PAGE' => 'Opprett ny side...',
-    'LBL_NEW_PAGE_FEEDBACK' => 'Du har opprettet en ny side. Du kan legge til nytt innhold med Legg til dashlet-menyen.',
-    'LBL_DELETE_PAGE_CONFIRM' => 'Vil du virkelig slette denne siden?',
-    'LBL_SAVING_PAGE_TITLE' => 'Lagrer sidetittel...',
-    'LBL_RETRIEVING_PAGE' => 'Henter side...',
-    'LBL_MAX_DASHLETS_REACHED' => 'Du har oppnådd det maksimale antall Dashlets som din administrator tillater. Vennligst fjern en Dashlet for å legge til flere.',
-    'LBL_ADDING_DASHLET' => 'Legger til Dashlet ...',
-    'LBL_ADDED_DASHLET' => 'Dashlet lagt til',
     'LBL_REMOVE_DASHLET_CONFIRM' => 'Er du sikker på at du vil gjerne Dashlet?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'Er du sikker på at du vil fjerne rekken?',
-    'LBL_REMOVING_DASHLET' => 'Fjerner Dashlet ...',
-    'LBL_REMOVED_DASHLET' => 'Dashlet er fjernet',
     'LBL_MAXIMUM_OF' => 'Maksimalt av',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'kolonner kan vises.',
 
     /* Sugar7 Dashboard */
     'LBL_DASHBOARD' => 'Hjem',
-    'LBL_DASHBOARD_BWC' => 'Mitt Legacy Dashboard',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Mitt Dashboard',
     'LBL_COLLAPSE_ALL' => 'Forminsk alle',
     'LBL_EXPAND_ALL' => 'Forstørr alle',
@@ -3698,9 +3778,33 @@ SugarCRM',
 
     'LBL_DASHLET_LISTVIEW_NAME' => 'Listevisning',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'Lister poster fra en bestemt modul i henhold til kriteriene du definerer.',
+
+    // Record view dashlet
+    'LBL_DASHLET_RECORDVIEW_NAME' => 'Registervisning',
+    'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Viser et register og valgfrie relaterte registre i faner.',
+    'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'Grunnregistertype',
+    'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => 'Denne {{moduleSingular}}',
+    'LBL_DASHLET_RECORDVIEW_TABS' => 'Faner',
+    'LBL_DASHLET_RECORDVIEW_BASIC_LAYOUT_PREVIEW' => 'Grunnleggende forhåndsvisning av layout',
+    'TPL_DASHLET_RECORDVIEW_TOO_MANY_TABS' => 'Advarsel, kun {{numWord}} ({{num}}) moduler kan vises i faner. ' .
+        'Fjern en eller flere moduler før nye legges til.',
+    'LBL_SIX' => 'seks', // record view dashlet tab limit
+
+    //Commentlog Dashlet
+    'LBL_DASHLET_COMMENTLOG_NAME' => 'Kommentarlogg',
+    'LBL_DASHLET_COMMENTLOG_DESCRIPTION' => 'Viser kommentarer for et register',
+    'LBL_COMMENTS_LOG_DASHLET_NO_COMMENTS' => 'Ingen kommentarer tilgjengelig',
+    'LBL_COMMENTS_LOG_DASHLET_BUTTON_ADD' => 'Legg til',
+    'LBL_COMMENTS_LOG_DASHLET_PLACEHOLDER' => 'Legg til kommentar',
+    'LBL_COMMENTS_LOG_DASHLET_VIEW_ALL' => 'Vis alle',
+
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Min {{module}}',
+    'LBL_DASHLET_PICK_A_RECORD' => 'Ingen register valgt for visning',
+    'LBL_CONTENT_SEARCH_DASHLET' => 'Innholdssøk liten strek',
+    'LBL_CONTENT_SEARCH_DASHLET_GREETING' => 'Hva kan vi hjelpe deg med i dag, {{username}}?',
+    'LBL_CONTENT_SEARCH_DASHLET_DISABLED' => 'Vil du opprette en sak?',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Salgsmulighet Metrics',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Mulighetsmetrikk for tilhørende konto.',
@@ -3708,6 +3812,14 @@ SugarCRM',
     'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'Lister nylig brukte elementer og produkter som er lagret i Favoritter',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Nylig brukt',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Favoritter',
+
+    'LBL_DASHBOARD_CONFIG' => 'Dashboard Configuration',
+    'LBL_LIST_VIEW__NAME' => 'Listevisning',
+    'LBL_PIPELINE_VIEW_NAME' => 'Flisvisning',
+    'LBL_PIPELINE_VIEW_BTN' => 'Flisvisning',
+    'LBL_PIPELINE_VIEW_TAB_NAME' => '{{module}} etter {{fieldName}}',
+    'LBL_VISUAL_PIPELINE_DISABLED' => 'Flisvisning er ikke aktivert',
+    'LBL_VISUAL_PIPELINE_MOVE_FAILED' => '{{recordName}} could not be moved to {{columnLabel}} because of the following fields: ',
 
     'LBL_DASHLET_NO_RECORDS' => 'Ingen poster ble funnet på dette tidspunkt.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Sakssammendrag',
@@ -3763,37 +3875,13 @@ SugarCRM',
     'LBL_DASHLET_USEFULNESS_NAME' => 'Nyttighet for artikler',
     'LBL_DASHLET_USEFULNESS_DESC' => 'Displays a chart showing how useful the knowledge base article is',
 
-    // MySugar Menu Options
     'LBL_ADD_PAGE' => 'Legg til side',
-    'LBL_DELETE_PAGE' => 'Fjern side',
-    'LBL_CHANGE_LAYOUT' => 'Endre sideoppsett',
-    'LBL_RENAME_PAGE' => 'Endre navn på side',
-
     'LBL_LOADING_PAGE' => 'Laster side, vent litt...',
-
-    'LBL_RELOAD_PAGE' => 'Vennligst <a href="javascript: window.location.reload()">reload the window</a> to use this Dashlet.',
-    'LBL_ADD_DASHLETS' => 'Legg til dashlets',
-    'LBL_CLOSE_DASHLETS' => 'Lukk',
-    'LBL_OPTIONS' => 'Valg',
-    'LBL_NUMBER_OF_COLUMNS' => 'Klikk et ikon for å velge antall kolonner',
-    'LBL_1_COLUMN' => '1 kolonne',
-    'LBL_2_COLUMN' => '2 kolonner',
-    'LBL_3_COLUMN' => '3 kolonner',
-    'LBL_PAGE_NAME' => 'Sidenavn',
-
     'LBL_SEARCH_RESULTS' => 'Søkeresultater',
-    'TPL_SEARCH_RESULTS_FOR' => 'Søketreff for: {{searchTerm}}',
     'LBL_SEARCH_RESULTS_FOR' => 'Søketreff for: ',
-    'LBL_SEARCH_MODULES' => 'Moduler',
-    'LBL_SEARCH_CHARTS' => 'Diagrammer',
-    'LBL_SEARCH_REPORT_CHARTS' => 'Rapportdiagrammer',
-    'LBL_SEARCH_TOOLS' => 'Verktøy',
     'LBL_SEARCH_HELP_TITLE' => 'Jobber med flervalg og lagrede søk',
-    'LBL_SEARCH_HELP_CLOSE_TOOLTIP' => 'Lukk',
     'LBL_SEARCH_RESULTS_FOUND' => 'Søkeresultater funnet',
     'LBL_SEARCH_RESULTS_TIME' => 'ms.',
-    'ERR_BLANK_PAGE_NAME' => 'Skriv et sidenavn.',
-    /* End MySugar Framework strings */
 
     /* Sales Pipeline Dashlet */
     'LBL_DASHLET_MY_PIPELINE' => 'Mitt salgsforløp',
@@ -3947,6 +4035,8 @@ SugarCRM',
     //MB -Fixed Bug #32812 -Max
     'LBL_ASSIGNED_TO_NAME' => 'Tildelt',
     'LBL_DESCRIPTION' => 'Beskrivelse',
+    'LBL_PRIMARY_CONTACT_NAME' => 'Primærkontakt',
+    'LBL_PRIMARY_CONTACT_ID' => 'Primærkontakt-ID',
 
   'LBL_NONE' => '-ingen-',
   'LBL_YESTERDAY'=> 'i går',
@@ -4320,6 +4410,8 @@ SugarCRM',
     // start of: Quotes related
     'LBL_QLI_SINGLE_TITLE' => 'Tilbudsført linjeelement',
     'LBL_DISCOUNT_TOTAL' => 'Total rabatt',
+    'LBL_DISCOUNT_PERCENT' => '% Percent',
+    'LBL_DISCOUNT_SELECT' => 'Determines if the discount is a percentage or flat amount',
     'LBL_TAX' => 'Skatt',
     'LBL_SHIPPING' => 'Frakt',
     'LBL_GRAND_TOTAL' => 'Totalsum',
@@ -4366,6 +4458,7 @@ SugarCRM',
     'LBL_NO_ACCESS' => '(Ingen adgang)',
     'LBL_NO_ACCESS_LOWER' => 'Ingen adgang',
     'LBL_NO_FIELD_ACCESS' => 'Ingen tilgang',
+    'LBL_NO_LICENSE_ACCESS' => 'License Required',
     'LBL_VALUE_ERASED' => 'Verdi slettet',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Denne informasjonen ble slettet via forespørsel om personvern',
     'LBL_CREATE_RELATED_RECORD' => 'Opprett relatert post',
@@ -4535,6 +4628,15 @@ SugarCRM',
     'LBL_MOBILE_ACTIVITYSTREAM_POST_PLACEHOLDER' => 'Skriv inn @ for å nevne en bruker. Skriv inn # for å referere til en post.',
     'LBL_MOBILE_NEW_COMMENT' => 'Ny kommentar',
     'LBL_RECENTLY_VIEWED' => 'Nylig viste',
+    'LBL_FILE_STORED_LOCALLY' => 'Fil er lagret på lokal lagring og vil synkroniseres så enheten er online.',
+    'LBL_IDM_USER_PROFILE_READONLY' => 'Hvis du ønsker å endre visse felt som ikke er redigerbare, kontakt administratoren din for å varsle om disse endringene.',
+    'LBL_ACTIVITY_POST' => '{{{value}}}på {{{link}}}',
+    'LBL_COMMENTLOG_EMPTY' => 'Ingen kommentar',
+    'LBL_COMMENTLOG_EXPANDBUTTON_EXPAND' => 'Vis neste {{{commentsLeft}}} kommentarer',
+    'LBL_COMMENTLOG_EXPANDBUTTON_COLLAPSE' => 'Slå sammen',
+    'LBL_COMMENTLOG_CONFIRM_CREATE' => 'Bekreft kommentaropprettelse',
+    'LBL_COMMENTLOG_ERROR_IS_EMPTY' => 'Kommentarlogg kan ikke være tom',
+    'LBL_MOBILE_PDF_DOWNLOAD' => 'Last ned {{{pdfTemplateName}}} PDF',
 
     'ERR_SYNC_FAILED' => 'Kan ikke synkronisere med serveren.',
     'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'SSO-pålogging er utilgjengelig. Sørg for at instansen er på Sugar 7.5 eller høyere og konfigurert for SSO.',
@@ -4745,6 +4847,11 @@ SugarCRM',
     'LBL_VO_RIGHT_MENU_BTN' => 'Høyre menyknapp',
     'LBL_VO_ADD_BTN' => 'Legg til knapp',
 
+    // Cookie consent
+    'LBL_WIZ_USER_COOKIE_CONSENT' => 'Denne applikasjonen bruker informasjonskapsler',
+    'LBL_USER_CLICK_FOR_COOKIE_CONSENT' => 'Sjekk for å godta (kreves)',
+    'LBL_USER_COOKIE_CONSENT_TEXT' => 'Denne applikasjonen bruker informasjonskapsler for å bidra til å gi deg en bedre opplevelse. Ved å fortsette samtykker du til bruk av informasjonskapsler i samsvar med vår <a href="{{href}}" target="_blank">personvernerklæring</a>.',
+
     //begin portal
 
     //portal record tutorial
@@ -4754,20 +4861,36 @@ SugarCRM',
     'LBL_PORTAL_TOUR_RECORD_VIEW_NOTE' => 'Klikk på disse ikonene for å vise detaljene i vedlagte notater.',
 
     //for portal
-
+    'LBL_PORTAL_HOME' => 'Hjem dashbord',
+    'LBL_PORTAL_DASHBOARD_ALL_OPEN_CASES' => 'Alle åpne saker',
+    'LBL_PORTAL_DASHBOARD_RECENT_CASES' => 'Nylig løste saker',
     'LBL_PORTAL_SEARCH' => 'Søk ved navn, nummer',
     'LBL_SIGNUP_BUTTON_LABEL' => 'Registrér',
+    'LBL_PORTAL_NO_EMAIL' => 'Fikk du ikke en e-post?',
+    'LBL_PORTAL_FORGOT_PASSWORD' => 'Glemt passord',
+    'LBL_PORTAL_FORGOT_USERNAME' => 'Glemt brukernavn',
+    'LBL_PORTAL_ENTER_PASSWORD_TWICE' => 'Skriv inn passordet ditt to ganger. Passord stemmer ikke overens.',
+    'LBL_PORTAL_RESET_PASSWORD' => 'Tilbakestill passord',
+    'LBL_PORTAL_REENTER_PASSWORD' => 'Skriv inn passord på nytt',
+    'LBL_PORTAL_PASSWORD_MISMATCH' => 'Passord stemmer ikke overens, oppgi på nytt',
+    'LBL_PORTAL_PASSWORD_RESET_SUCCESS' => 'Passordene dine er tilbakestilte.',
+    'LBL_PORTAL_PASSWORD_RESET_ERR_GENERAL' => 'En feil oppstod. Initier en ny passordtilbakestillingsforespørsel.',
     'LBL_PORTAL_SIGNUP_PROCESS' => 'Registrering',
-    'LBL_PORTAL_SIGNUP_TITLE' => 'Takk for at du registrerte deg!',
-    'LBL_PORTAL_SIGNUP' => 'En kundebehandler vil kontakte deg snart for å konfigurere kontoen.',
+    'LBL_PORTAL_SIGNUP_TITLE' => 'Takk for at du registrerte deg',
+    'LBL_PORTAL_SIGNUP' => 'Vi informerer deg etter at vi bekrefter detaljene dine.',
     'LBL_PORTAL_SIGNUP_FIRST_NAME' => 'Fornavn',
     'LBL_PORTAL_SIGNUP_LAST_NAME' => 'Etternavn',
+    'LBL_PORTAL_SIGNUP_USER_NAME' => 'Brukernavn',
     'LBL_PORTAL_SIGNUP_EMAIL' => 'E-postadresse',
     'LBL_PORTAL_SIGNUP_PHONE' => '(###) ###-#### (valgfritt)',
     'LBL_PORTAL_SIGNUP_COUNTRY' => 'Land',
     'LBL_PORTAL_SIGNUP_STATE' => 'Fylke',
-    'LBL_PORTAL_SIGNUP_COMPANY' => 'Firma',
+    'LBL_PORTAL_SIGNUP_COMPANY_NAME' => 'Firmanavn',
     'LBL_PORTAL_SIGNUP_JOBTITLE' => 'Jobbtittel (valgfritt)',
+    'LBL_PORTAL_SIGNUP_PASSWORD' => 'Passord',
+    'LBL_PORTAL_SIGNUP_PASSWORD1' => 'Bekreft passord',
+    'LBL_PORTAL_SIGNUP_FORGOT_LOGIN' => 'Glemt pålogging',
+
     'LNK_PORTAL_LOGIN_FORGOTPASSWORD' => 'Glemt passord?',
     'LBL_PORTAL_LOGIN_FORGOTPASSWORD' => 'Du må kontakte din Sugar-administrator for å tilbakestille passordet.',
     'LBL_PORTAL_LOGIN_USERNAME' => 'Brukernavn',
@@ -4777,9 +4900,14 @@ SugarCRM',
     'LBL_PORTAL_PAGE_NOT_AVAIL' => 'Siden er ikke tilgjengelig',
     'LBL_PORTAL_NOT_ENABLED_MSG' => "Vi beklager, men denne funksjonen er for øyeblikket ikke tilgjengelig.",
     'LBL_PORTAL_SEARCH_RESULTS_TITLE' => 'Vis søkeresultater for "{query}"',
+    'LBL_PORTAL_DIDNT_GET_EMAIL' => 'Fikk du ikke en e-post?',
+    'LBL_PORTAL_CONTACT_INFO_CONTACT_US' => 'For hjelp, eller for å kontakte oss, bruk et av følgende: ',
+    'LBL_PORTAL_CONTACT_INFO_PHONE' => 'Telefonnummer: ',
+    'LBL_PORTAL_CONTACT_INFO_EMAIL' => 'E-post: ',
+    'LBL_PORTAL_CONTACT_INFO_WEB' => 'Web: ',
 
     //for portal errors
-    'LBL_PORTAL_INVALID_CREDS' => 'Brukernavnet og/eller passordet er galt, vennligst forsøk igjen.',
+    'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Påloggingen var ikke vellykket. Prøv igjen.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'Gal påloggingsinformasjon',
     'LBL_PORTAL_INVALID_GRANT' => 'Din påloggingskapsel har utløpt eller er ugyldig. Vennligst logg inn på nytt.',
     'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Påloggingskapselen har utløpt',
@@ -4802,7 +4930,27 @@ SugarCRM',
     'LBL_PORTAL_ROUTE_ERROR'=>'Problemet ved lasting av modulen. Vennligst prøv igjen senere, eller kontakt support.',
     'LBL_PORTAL_OFFLINE' =>'Sorry, programmet er ikke tilgjengelig for øyeblikket. Vennligst kontakt administrator.',
     'LBL_CONTACT_EDIT_PASSWORD_LNK_TEXT' => 'Endre passord',
+    'LBL_PORTAL_SIGNUP_USER_NAME_ERROR' => 'Brukernavnet er allerede registrert i systemet. Be enten om et glemt passord eller velg et annet brukernavn.',
+    'LBL_PORTAL_SIGNUP_EMAIL_ERROR' => 'E-posten som ble oppgitt er ugyldig.',
+    'LBL_PORTAL_SIGNUP_PASSWORD_ERROR' => 'Passordene stemmer ikke overens.',
     //end portal
+
+    // Final name given by marketing is Service Console
+    // Original name for this feature was Agent Workbench and was used
+    // throughout the development of this product.
+    'LBL_AGENT_WORKBENCH' => 'Service Console',
+    'LBL_AGENT_WORKBENCH_OVERVIEW' => 'Oversikt',
+    'LBL_CASE_OVERDUE' => 'Overdue',
+    'LBL_CASE_DUE_SOON' => 'Due soon',
+    'LBL_CASE_DUE_LATER' => 'Due later',
+
+    // Renewals Console
+    'LBL_RENEWALS_CONSOLE' => 'Fornyelser-konsoll',
+    'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'Oversikt',
+    'LBL_RENEWALS_CONSOLE_STAGE_STATUS' => 'Trinn/status',
+    'LBL_RENEWALS_CONSOLE_NAME_ACCOUNT' => 'Navn/kontonavn',
+    'LBL_RENEWALS_CONSOLE_AMOUNT' => 'Worst | Likely | Best',
+
 
     //First time login wizard
     'LBL_WIZ_USER_PROFILE_TITLE' => 'Brukerprofil',
@@ -4847,10 +4995,22 @@ SugarCRM',
     'ERR_PASSWORD_MISMATCH' => 'Passord angitt samsvarer ikke med det i vårt system.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Kan ikke sende passord',
     'LBL_REQUEST_PASSWORD' => 'Be om passord',
+    'LBL_RESET_PASSWORD' => 'Tilbakestill passord',
+    'LBL_RESET_PASSWORD_MESSAGE' => 'Skriv inn brukernavnet ditt og vi sender deg en lenke for å tilbakestille passordet ditt.',
+    'LBL_RESET_PASSWORD_CONFIRMATION_MESSAGE' => 'Sjekk e-posten din <br><br> Vi har sendt instruksjoner for tilbakestilling av passord til e-postadressen vi har registrert.',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Feil: Det oppstod et problem med å oppdatere passordet for denne brukeren.',
     'LBL_INCORRECT_PASSWORD' => 'Feil: Ugyldig passord.',
+    'LBL_PASSWORD_ENFORCE_TITLE' => 'Passordet du skrev oppfyller ikke kravene til passord. Vennligst prøv igjen.',
+    'LBL_PASSWORD_MIN_LENGTH' => 'Minimal lengde er {0}.',
+    'LBL_PASSWORD_MAX_LENGTH' => 'Maksimal lengde er {0}.',
+    'LBL_PASSWORD_ONE_UPPERCASE' => 'Må inneholde én stor bokstav (A-Z).',
+    'LBL_PASSWORD_ONE_LOWERCASE' => 'Må inneholde én liten bokstav (a-z).',
+    'LBL_PASSWORD_ONE_NUMBER' => 'Må inneholde ett tall (0-9).',
+    'LBL_PASSWORD_ONE_SPECIAL_CHAR' => 'Må inneholde ett spesialtegn (~!@#$%^&*()_+-={}|).',
+    'LBL_PASSWORD_REGEX_REQUIREMENT' => 'Passordet må ikke stemme overens med det vanlige uttrykksmønsteret: {0}.',
 
     'LBL_PREFERRED_LANGUAGE' => 'Innstilling for språk:',
+    'LBL_PASSWORD_RESET_EMAIL_FAIL' => 'Kunne ikke sende e-post med tilbakestilling av passord.',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Velg en rapport',
@@ -4992,6 +5152,25 @@ SugarCRM',
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'Mine oppgaver',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Team oppgaver',
 
+    'LBL_RECENTLY_VIEWED_CASES_DASHLET' => 'Mine nylig viste saker',
+
+    'LBL_REPORT_DASHLET_TITLE_12' => 'Åpne saker av bruker etter status',
+    'LBL_REPORT_DASHLET_TITLE_125' => 'Nye saker for forretningssenter etter uke',
+    'LBL_REPORT_DASHLET_TITLE_126' => 'Nylig opprettede saker',
+    'LBL_REPORT_DASHLET_TITLE_127' => 'Nye saker for kundeklasse etter uke',
+    'LBL_REPORT_DASHLET_TITLE_128' => 'Åpne saker etter kundeklasse og prioritet',
+    'LBL_REPORT_DASHLET_TITLE_129' => 'Antall saker løst denne måneden etter forretningssenter',
+    'LBL_REPORT_DASHLET_TITLE_130' => 'Antall saker løst denne måneden etter agent',
+    'LBL_REPORT_DASHLET_TITLE_131' => 'Liste over nylig løste saker',
+    'LBL_REPORT_DASHLET_TITLE_132' => 'Mine saker løst denne månedene etter uke',
+    'LBL_REPORT_DASHLET_TITLE_133' => 'Mine saker som skal inn i dag og som er forsinket',
+    'LBL_REPORT_DASHLET_TITLE_134' => 'Alle saker som skal inn i dag og som er forsinket',
+    'LBL_REPORT_DASHLET_TITLE_135' => 'Mine åpne saker etter oppfølgingsdato',
+    'LBL_REPORT_DASHLET_TITLE_136' => 'Alle åpne saker etter oppfølgingsdato',
+    'LBL_REPORT_DASHLET_TITLE_137' => 'Mine åpne saker etter status',
+    'LBL_REPORT_DASHLET_TITLE_138' => 'Mine saker siste uke etter status',
+    'LBL_REPORT_DASHLET_TITLE_139' => 'Status for åpne oppgaver tilordnet av meg',
+
     //Audit subjects
     'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
@@ -5122,6 +5301,8 @@ SugarCRM',
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Oppdater liste',
+    // Refresh button on tile views
+    'LBL_TILE_REFRESH' => 'Refresh Tiles',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'mer',
@@ -5390,6 +5571,12 @@ SugarCRM',
     'LBL_LOCKED_FIELD_RECORD_VIEW_WARNING' => 'Denne posten deltar i en prosess, og kan inneholde noen låste felt.',
     // @codingStandardsIgnoreEnd
 
+    'LBL_BUSINESS_CENTER' => 'Forretningssenter',
+    'LBL_BUSINESS_CENTER_ID' => 'Forretningssenter-ID',
+    'LBL_BUSINESS_CENTER_NAME' => 'Navn på forretningssenter',
+
+    'LBL_PLIS_ACTIVITIES' => 'Purchased Line Items Activities',
+
     //Tag Strings
     'LBL_TAG_NEW_TAG' => '(Ny tag)',
     'LBL_TAG_FETCH_ERROR' => 'En feil oppsto under henting av tags.',
@@ -5427,14 +5614,47 @@ SugarCRM',
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Merk for å slette',
     'TPL_DATAPRIVACY_PII_TITLE' => 'Personlig informasjon for {{{name}}}',
 
+    'LBL_CHANGETIMERS_SUBPANEL_TITLE' => 'Endre timere',
+
     'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Kopiert til utklippstavlen!',
     'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Kunne ikke kopiere til utklippstavlen',
 
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Kopier bekreftelseskobling',
 
+    // Activity Timeline Dashlet
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Interaksjoner',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} interaksjoner',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+        'Meetings and Notes related to a record.',
+
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'Vis mer ...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Vis mindre ...',
+    'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Ingen data tilgjengelig',
+
+    // Active Subscriptions Dashlet
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Aktive abonnement',
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => 'Aktive abonnement for en spesifikk konto.',
+    'LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY' => ', antall {{quantity}}',
+    'LBL_ACTIVE_SUBSCRIPTIONS_TOTAL' => 'Total:',
+    'LBL_NO_ACTIVE_SUBSCRIPTIONS' => 'Ingen aktive abonnement',
+    'LBL_REQUIRE_REVENUE_LINE_ITEMS' => 'Denne dashleten krever {{module_name}} for å fungere. Snakk med administratoren din om å aktivere {{module_name}}.',
+
+    // Customer Service
+    'LBL_EDIT_IN_STUDIO' => 'Bruk Studio for å redigere visningslayout ved å gå til ' .
+        'Studio > {{module}} > Layouts > Registrer dahsletvisning. <a href={{linkToStudio}}>Rediger i Studio</a>.',
+    'LBL_SERVICE_LEVEL' => 'Servicenivå',
+    // Agent Workbench
+    'LBL_AGENT_WORKBENCH_NUMBER' => 'Nummer',
+    'LBL_AGENT_WORKBENCH_FOLLOW_UP' => 'Oppfølging',
+    'LBL_AGENT_WORKBENCH_PRIORITY_STATUS' => 'Prioritet/status',
+    'LBL_AGENT_WORKBENCH_SUBJECT_DESCRIPTION' => 'Emne/beskrivelse',
+
+//Service Duration
+    'LBL_SERVICE_DURATION' => 'Servicevarighet',
+    'LBL_SERVICE_DURATION_VALUE' => 'Servicevarighetsverdi',
+    'LBL_SERVICE_DURATION_UNIT' => 'Servicevarighetsenhet',
+
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6431,7 +6651,7 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Vedlagt fil';
     'ISK' => 'kr',
     'INR' => '₨',
     'IDR' => 'Rp',
-    'IRR' => '﷼',
+    'IRR' => '77e8',
     'IMP' => '£',
     'ILS' => '₪',
     'JMD' => 'J$',
@@ -6460,18 +6680,18 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Vedlagt fil';
     'NIO' => 'C$',
     'NGN' => '₦',
     'NOK' => 'kr',
-    'OMR' => '﷼',
+    'OMR' => '77e8',
     'PKR' => '₨',
     'PAB' => 'B/.',
     'PYG' => 'Gs',
     'PEN' => 'S/.',
     'PHP' => '₱',
     'PLN' => 'zł',
-    'QAR' => '﷼',
+    'QAR' => '77e8',
     'RON' => 'lei',
     'RUB' => 'руб',
     'SHP' => '£',
-    'SAR' => '﷼',
+    'SAR' => '77e8',
     'RSD' => 'ДИН.',
     'SCR' => '₨',
     'SGD' => '$',
@@ -6493,7 +6713,7 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Vedlagt fil';
     'UZS' => 'лв',
     'VEF' => 'Bs',
     'VND' => '₫',
-    'YER' => '﷼',
+    'YER' => '77e8',
     'ZWD' => 'Z$',
     );
 

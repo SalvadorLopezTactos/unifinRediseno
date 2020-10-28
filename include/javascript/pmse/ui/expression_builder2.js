@@ -393,7 +393,12 @@ ExpressionControl.prototype.setConstantPanel = function(settings) {
             datetime: true,
             timespan: true,
             datespan: false,
-            currency: true
+            currency: true,
+            businessHours: {
+                show: true,
+                targetModuleBC: false,
+                selectedModuleBC: ''
+            }
         };
     } else {
         defaults = jQuery.extend(true, defaults, settings);
@@ -944,6 +949,12 @@ ExpressionControl.prototype._onPanelValueGeneration = function () {
                         expLabel: data.ammount + data.unittime,
                         expValue: data.ammount + data.unittime
                     };
+
+                    // Check if the data includes business center settings
+                    if (data.businesscenter && data.businesscentername) {
+                        itemData.expBean = data.businesscenter;
+                        itemData.expLabel = itemData.expLabel + ' ' + '(' + data.businesscentername + ")";
+                    }
                     break;
                 case 'form-constant-currency':
                     itemData = {
@@ -1202,6 +1213,7 @@ ExpressionControl.prototype._createModulePanel = function () {
                         } else {
                             dependantField.disable();
                         }
+                        dependantField.setValue('');
                     }
                 },
                 {
@@ -1250,6 +1262,11 @@ ExpressionControl.prototype._createModulePanel = function () {
     }
     if (settings) {
         moduleField = this._evaluationPanels.module.getItem("module");
+        moduleField._attributes = moduleField._attributes || {};
+        var callType = this.getCallType(settings);
+        if (callType !== null) {
+            moduleField._attributes = _.extend(moduleField._attributes, {call_type: callType});
+        }
         moduleField.setDataURL(settings.dataURL)
             .setDataRoot(settings.dataRoot)
             .setLabelField(settings.textField)
@@ -1261,6 +1278,23 @@ ExpressionControl.prototype._createModulePanel = function () {
         this._evaluationPanel.disable();
     }
     return this._evaluationPanels.module;
+};
+
+/**
+ * Gets the call type
+ *
+ * @param {object} The evaluation settings
+ * @return {string} A call type
+ */
+ExpressionControl.prototype.getCallType = function (settings) {
+    var ret = null;
+    var ct;
+    if (settings.fieldDataURLAttr && settings.fieldDataURLAttr.call_type) {
+        ct = settings.fieldDataURLAttr.call_type;
+        // return empty string for Start or Gateway
+        ret = (ct === 'ST' || ct === 'GT') ? '' : ct;
+    }
+    return ret;
 };
 
 ExpressionControl.prototype._createFormResponsePanel = function () {
@@ -1577,53 +1611,67 @@ ExpressionControl.prototype._createDateTimeConstantPanel = function() {
 
 ExpressionControl.prototype._createTimespanPanel = function() {
     var settings = this._constantSettings.timespan;
+    var businessHoursSettings = this._constantSettings.businessHours;
+    var timeSpanControlItems;
+
     if (!this._constantPanels.timespan) {
         this._constantPanels.timespan = new FormPanel({
             expressionControl: this,
             id: "form-constant-timespan",
             title: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_TITLE"),
             foregroundAppendTo: this._panel._getUsableAppendTo(),
-            items: [
-                {
-                    type: "integer",
-                    name: "ammount",
-                    label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_AMOUNT"),
-                    filter: "integer",
-                    width: "40%",
-                    required: true,
-                    disabled: true
-                }, {
-                    type: "dropdown",
-                    label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_UNIT"),
-                    name: "unittime",
-                    width: "60%",
-                    disabled: false,
-                    options: [
-                        {
-                            label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_YEARS"),
-                            value: "y"
-                        }, {
-                            label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MONTHS"),
-                            value: "m"
-                        }, {
-                            label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_WEEKS"),
-                            value: "w"
-                        }, {
-                            label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS"),
-                            value: "d"
-                        }, {
-                            label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS"),
-                            value: "h"
-                        }, {
-                            label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES"),
-                            value: "min"
-                        }
-                    ]
-                }
-            ]
+            items: []
         });
         this._constantPanel.addItem(this._constantPanels.timespan);
     }
+
+    // Define the default time span control items
+    timeSpanControlItems = [
+        {
+            type: "integer",
+            name: "ammount",
+            label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_AMOUNT"),
+            filter: "integer",
+            width: "40%",
+            required: true,
+            disabled: true
+        }, {
+            type: "dropdown",
+            label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_UNIT"),
+            name: "unittime",
+            width: "60%",
+            disabled: false,
+            options: [
+                {
+                    label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_YEARS"),
+                    value: "y"
+                }, {
+                    label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MONTHS"),
+                    value: "m"
+                }, {
+                    label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_WEEKS"),
+                    value: "w"
+                }, {
+                    label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS"),
+                    value: "d"
+                }, {
+                    label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS"),
+                    value: "h"
+                }, {
+                    label: translate("LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES"),
+                    value: "min"
+                }
+            ]
+        }
+    ];
+
+    // Include the business hours controls as well if indicated and the user has access to Business Centers
+    if (businessHoursSettings && businessHoursSettings.show && App.acl.hasAccess('access', 'BusinessCenters')) {
+        timeSpanControlItems = this._addBusinessHoursSettingsToTimeSpan(timeSpanControlItems);
+    }
+
+    this._constantPanels.timespan.setItems(timeSpanControlItems);
+
     if (settings) {
         this._constantPanels.timespan.enable();
     } else {
@@ -1632,6 +1680,82 @@ ExpressionControl.prototype._createTimespanPanel = function() {
 
     return this;
 };
+
+/**
+ * Adds the "business hours" option to the timespan unit dropdown as well as the business center selector
+ * @param items array of timespan control items to add the business hours options to
+ * @private
+ */
+ExpressionControl.prototype._addBusinessHoursSettingsToTimeSpan = function(items) {
+    var businessCenterSelector;
+    var businessCenterName;
+
+    // Create the business center selector dropdown
+    businessCenterSelector = new FormPanelFriendlyDropdown({
+        name: "businesscenter",
+        id: 'businesscenter-selector',
+        label: translate('LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER'),
+        width: "75%",
+        required: true,
+        disabled: false,
+        onChange: function() {
+            businessCenterName.setValue(this.getSelectedText());
+        },
+        searchURL: "BusinessCenters?filter[0][name][$starts]={%TERM%}",
+        searchValue: "id",
+        searchLabel: "name"
+    });
+
+    // Only show the "From Target Module" option in the business center selector if the targetModuleBC flag is true
+    if (this._constantSettings.businessHours.targetModuleBC) {
+        businessCenterSelector.addOption({
+            'label': translate('LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE'),
+            'value': 'target_module_bc'
+        });
+    }
+
+    // Only show the "From {selected} Module" option in the business center selector if the selectedModuleBC is set
+    // to something other than the empty string (if this option should be shown, selectedModuleBC should be set to
+    // the selected module's name)
+    if (this._constantSettings.businessHours.selectedModuleBC) {
+        businessCenterSelector.addOption({
+            'label': translate('LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM') +
+            this._constantSettings.businessHours.selectedModuleBC +
+            translate('LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE'),
+            'value': 'filter_module_bc'
+        });
+    }
+
+    // Create a hidden field to store the name of the business center for the pill label
+    businessCenterName = new FormPanelHidden({
+        name: 'businesscentername',
+        id: 'businesscenter-name'
+    });
+
+    // Add the business hours option to the timespan unit dropdown
+    items[1].options.push({
+        label: translate('LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS'),
+        value: "bh"
+    });
+
+    // Set the business center dropdown to show/hide based on whether the user has selected the business hours option
+    items[1].onChange = function (field, newValue, oldValue) {
+        var form = field.getForm();
+        if (newValue === 'bh') {
+            form.addItem(businessCenterSelector, 2);
+            form.addItem(businessCenterName, 3);
+            form.getParent().setBodyHeight(form.getParent()._bodyHeight * 1.5);
+        } else if (oldValue === 'bh') {
+            form.removeItem(businessCenterSelector);
+            form.removeItem(businessCenterName);
+            form.getParent().setBodyHeight(form.getParent()._bodyHeight / 1.5);
+            businessCenterSelector.setValue('');
+            businessCenterName.setValue('');
+        }
+    };
+
+    return items;
+}
 
 ExpressionControl.prototype._createDatespanPanel = function() {
     var settings = this._constantSettings.datespan;

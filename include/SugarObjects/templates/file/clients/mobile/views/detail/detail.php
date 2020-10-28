@@ -34,6 +34,7 @@ $viewdefs[$module_name]['mobile']['view']['detail'] = array(
                 ),
                 'active_date',
                 'exp_date',
+                'tag',
                 'assigned_user_name',
 	  	    	'team_name',
             ),

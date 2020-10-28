@@ -28,21 +28,9 @@ class CustomAttribute extends \Google\Protobuf\Internal\Message
      */
     private $value = '';
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $name
-     *           Name of the custom attribute
-     *     @type string $value
-     *           Value of the custom attribute
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\User\V1Alpha\User::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

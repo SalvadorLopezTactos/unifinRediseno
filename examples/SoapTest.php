@@ -59,17 +59,6 @@ echo $soapclient->response;
 echo '<BR><BR><b>HERE IS RESULT:</b><BR>';
 echo print_r($result);
 
-echo '<br><br><b>Update a portal user fields:</b><BR>';
-$result = $soapclient->call('update_portal_user',array('session'=>$session,'portal_name'=>'dan','name_value_list'=>array(array('name'=>'email1', 'value'=>'Dan_Aarons@example.com'))));
-echo '<b>HERE IS ERRORS:</b><BR>';
-echo $soapclient->error_str;
-
-echo '<BR><BR><b>HERE IS RESPONSE:</b><BR>';
-echo $soapclient->response;
-
-echo '<BR><BR><b>HERE IS RESULT:</b><BR>';
-echo print_r($result);
-
 echo '<br><br><b>Get list of contacts:</b><BR>';
 $result = $soapclient->call('get_entry_list',array('session'=>$session,'module_name'=>'Contacts','query'=>'','order_by'=>'contacts.last_name asc','offset'=>$offset, 'select_fields'=>array(), 'max_results'=>'5'));
 echo '<b>HERE IS ERRORS:</b><BR>';
@@ -93,4 +82,3 @@ echo '<BR><BR><b>HERE IS RESULT:</b><BR>';
 echo print_r($result);
 
 }
-?>

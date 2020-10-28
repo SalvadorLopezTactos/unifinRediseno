@@ -206,6 +206,8 @@ class SetPasswordController
                 'password_hash' => $password,
                 'password_last_changed' => (new \DateTime())->format('Y-m-d H:i:s'),
                 'login_attempts' => 0,
+                'modify_time' => gmdate('Y-m-d H:i:s'),
+                'modified_by' => $app->getOAuth2Service()->getClientID(),
             ],
             ['tenant_id' => $tenantId, 'id' => $id]
         );

@@ -131,6 +131,9 @@ $dictionary['pmse_BpmnExtension'] = array(
         'lockable_fields',
         'commentlog',
     ),
+    'portal_visibility' => [
+        'class' => 'PMSE',
+    ],
     'uses' => array(
         'basic',
         'assignable',

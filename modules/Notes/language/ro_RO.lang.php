@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Data Modificarii',
     'LBL_DELETED' => 'Şters',
     'LBL_REVENUELINEITEMS' => 'Elemente venit',
+    'LBL_ENTRY_SOURCE' => 'Sursă notă',
+    'LBL_SOURCE_EXTERNAL' => 'Extern',
+    'LBL_SOURCE_INTERNAL' => 'Intern',
 
     // Help Text
     // List View Help Text

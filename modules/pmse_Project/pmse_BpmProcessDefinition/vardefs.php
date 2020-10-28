@@ -170,6 +170,9 @@ $dictionary['pmse_BpmProcessDefinition'] = array(
         'class' =>'LockedFieldsRelatedModulesUtilities',
         'method' => 'getRelatedFields',
     ),
+    'portal_visibility' => [
+        'class' => 'PMSE',
+    ],
     'ignore_templates' => array(
         'taggable',
         'lockable_fields',

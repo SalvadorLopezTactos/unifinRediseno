@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Contacts List Dashboard',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Contacts Record Dashboard',
-
+    'LBL_SITE_USER_ID' => 'Hash of site_url and contact id',
+    'LBL_COOKIE_CONSENT' => 'Cookie Consent',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Cookie Consent Received On',
     'LNK_CONTACT_REPORTS' => 'View Contact Reports',
     'ERR_DELETE_RECORD' => 'Specify the record number to delete the Contact.',
     'LBL_ACCOUNT_ID' => 'Account ID:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Portal Information',
     'LBL_PORTAL_NAME' => 'Portal Name:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Portal Password is Set:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Portal User Company Name',
     'LBL_RECORD_SAVED_SUCCESS' => 'You successfully created the {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Street',
     'LBL_POSTAL_CODE' => 'Postal Code:',
@@ -147,7 +150,7 @@ $mod_strings = array (
     'LBL_SELECT_CHECKED_BUTTON_TITLE' => 'Select Checked Contacts',
     'LBL_STATE' => 'State:',
     'LBL_SYNC_CONTACT' => 'Sync to Mail Client:',
-    'LBL_PROSPECT_LIST' => 'Prospect List',
+    'LBL_PROSPECT_LIST' => 'Target List',
     'LBL_TEAM_ID' => 'Team ID:',
     'LBL_TITLE' => 'Title:',
     'LNK_CREATE' => 'Create Person',
@@ -243,6 +246,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Click here to edit your profile.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Here is where you can set your preferred language.  This will change the language used by Sugar Portal.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'You can return to your Profile at any time using the User menu.',
+    'ERR_PORTAL_NAME_EXISTS' => 'The portal name {0} already exists. Duplicate portal names are not allowed. Change the portal name to be unique.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Principal Id',
@@ -279,4 +283,8 @@ To create a {{module_name}}:
     'LBL_FILTER_CONTACTS_REPORTS' => 'Contacts\' reports',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Business Purposes Consented for',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Consent Last Updated',
+
+    'LBL_ENTRY_SOURCE' => 'Contact Source',
+    'LBL_SOURCE_EXTERNAL' => 'External',
+    'LBL_SOURCE_INTERNAL' => 'Internal',
 );

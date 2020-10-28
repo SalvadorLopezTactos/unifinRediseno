@@ -115,11 +115,6 @@ foreach ($beanFiles as $beanname=>$beanpath) {
 	//set index name as the key.
 	$var_indices=array();
 	foreach ($indices as $definition) {
-		//database helpers do not know how to handle full text indices
-		if ($definition['type']=='fulltext') {
-			continue;
-		}
-
 		if(empty($definition['db']) or $definition['db'] == $focus->db->dbType) {
 			$var_indices[$definition['name']] = $definition;
 		}

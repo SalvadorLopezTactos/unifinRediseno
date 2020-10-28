@@ -31,6 +31,7 @@ class SugarACLEmails extends SugarACLStrategy
 
         $immutableFields = [
             'reply_to_status',
+            'direction',
         ];
 
         if (in_array($context['field'], $immutableFields)) {

@@ -43,6 +43,8 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'Prognosark',
     'ForecastManagerWorksheets' => 'Prognoschef arbetsark',
     'MergeRecords'=>'Förena poster',
+      'VisualPipeline'=>'Visuell pipeline',
+      'ConsoleConfiguration' => 'Konsolkonfiguration',
     'Quotas' => 'Offerter',
     'Teams' => 'Team',
     'TeamNotices' => 'Team notiser',
@@ -75,6 +77,11 @@ $app_list_strings = array (
     'pmse_Project' => 'Processdefinition',
     'pmse_Business_Rules' => 'Affärsprocessregler',
     'pmse_Emails_Templates' => 'Processemailmallar',
+    'BusinessCenters' => 'Affärscenter',
+    'Shifts' => 'Shifts',
+    'ShiftExceptions' => 'Shift Exceptions',
+    'Purchases' => 'Purchases',
+    'PurchasedLineItems' => 'Purchased Line Items',
     'WorkFlow' => 'Arbetsflöden definitioner:',
     'EAPM' => 'Externa Konton',
     'Worksheet' => 'Arbetsark',
@@ -116,6 +123,8 @@ $app_list_strings = array (
     'DataPrivacy' => 'Datasekretess',
     'ReportSchedules' => 'Rapportscheman',
     'CommentLog' => 'Kommentarslogg',
+    'Holidays' => 'Semester',
+    'ChangeTimers' => 'Ändra timers',
   ),
 
     'moduleIconList' =>
@@ -131,6 +140,8 @@ $app_list_strings = array (
         'Tasks' => 'Uppgift',
         'Dashboards' => 'Paneler',
         'DataPrivacy' => 'DP',
+        'BusinessCenters' => 'BC',
+        'PurchasedLineItems' => 'PL',
     ),
 
   'moduleListSingular' =>
@@ -150,6 +161,8 @@ $app_list_strings = array (
     'Calendar' => 'Kalender',
     'Leads' => 'Möjlig kund',
     'Manufacturers' => 'Tillverkare',
+    'VisualPipeline' => 'VisualPipeline',
+    'ConsoleConfiguration' => 'Konsolkonfiguration',
     'Contracts'=>'Kontrakt',
     'Quotes' => 'Offert',
     'Products' => 'Produkt',
@@ -196,6 +209,11 @@ $app_list_strings = array (
     'pmse_Project' => 'Processdefinition',
     'pmse_Business_Rules' => 'Affärsprocessregel',
     'pmse_Emails_Templates' => 'Processemailmall',
+    'BusinessCenters' => 'Affärscenter',
+    'Shifts' => 'Shift',
+    'ShiftExceptions' => 'Shift Exceptions',
+    'Purchases' => 'Purchase',
+    'PurchasedLineItems' => 'Purchased Line Item',
     'WorkFlow' => 'Arbetsflöde',
     'EAPM' => 'Externt Konto',
     'Worksheet' => 'Arbetsark',
@@ -224,7 +242,7 @@ $app_list_strings = array (
     'Comments' => 'Kommentera',
     'CommentLog' => 'Kommentarslogg',
     'Currencies' => 'Valuta',
-    'ProductTemplates' => 'Produkt mall',
+    'ProductTemplates' => 'Product',
     'ProductTypes' => 'Produkttyp',
     'Shippers' => 'Fraktleverantör',
     'Subscriptions' => 'Prenumeration',
@@ -236,6 +254,8 @@ $app_list_strings = array (
     'EmailParticipants' => 'E-deltagare',
     'DataPrivacy' => 'Datasekretess',
     'ReportSchedules' => 'Rapportschema',
+    'Holidays' => 'Semester',
+    'ChangeTimers' => 'Ändra timer',
   ),
 
 /*
@@ -321,6 +341,11 @@ $app_list_strings = array (
     'T3' => 'Nivå 3',
     'T4' => 'Nivå 4',
   ),
+  'generate_purchase_dom' => [
+      'Yes' => 'Yes',
+      'No' => 'No',
+      'Completed' => 'Completed',
+  ],
   'lead_source_default_key' => 'Självgenererad',
   'lead_source_dom' =>
   array (
@@ -589,6 +614,12 @@ $app_list_strings = array (
     'RegularUser' => 'Vanlig användare',
     'Administrator' => 'Administratör',
   ),
+  'license_type_dom' =>
+    array (
+        'CURRENT' => 'Aktuell produkt',
+        'SUGAR_SERVE' => 'Sugar Serve',
+        'SUGAR_SELL' => 'Sugar försäljning',
+    ),
   'user_status_dom' =>
   array (
     'Active' => 'Aktiv',
@@ -693,6 +724,8 @@ $app_list_strings = array (
     'Meetings' => 'Möte',
     'Calls' => 'Telefonsamtal',
       'KBContents' => 'Kunskapsbas',
+      'PurchasedLineItems' => 'Purchased Line Item',
+      'Purchases' => 'Purchase',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Konto',
@@ -722,7 +755,13 @@ $app_list_strings = array (
     'Prospects' => 'Mål',
       'KBContents' => 'Kunskapsbas',
       'Notes' => 'Anteckning',
+    'PurchasedLineItems' => 'Purchased Line Item',
+    'Purchases' => 'Purchase',
   ),
+
+  'changetimer_parent_type' => [
+      'Cases' => 'Ärende',
+  ],
 
   'product_status_default_key' => 'Skickad',
   'product_status_quote_key' => 'Offerter',
@@ -883,7 +922,8 @@ $app_list_strings = array (
     'Forum' => 'Forum',
     'Web' => 'Webb',
     'InboundEmail' => 'Email',
-    'Twitter' => 'Twitter'
+    'Twitter' => 'Twitter',
+    'Portal' => 'Portal',
   ),
     'dataprivacy_type_default_key' => '',
     'dataprivacy_type_dom' => array(
@@ -916,6 +956,11 @@ $app_list_strings = array (
         'Medium' => 'Medel',
         'High' => 'Hög',
     ),
+    'business_day_status_dom' => [
+        'Open' => 'Öppet',
+        'Open 24 Hours' => 'Öppet 24 timmar',
+        'Closed' => 'Stängt',
+    ],
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -1145,6 +1190,13 @@ $app_list_strings = array (
     'dom_email_states' => array(
         'Draft' => 'Utkast',
         'Archived' => 'Arkiverad',
+    ),
+
+    'dom_email_direction' => array(
+        'Unknown' => 'Okänd',
+        'Outbound' => 'Utgående',
+        'Inbound' => 'Inkommande',
+        'Internal' => 'Intern',
     ),
 
     'scheduler_status_dom' =>
@@ -2096,6 +2148,11 @@ $app_list_strings = array (
         240000 => 'Var fjärde minut',
         300000 => 'Var femte minut',
   ),
+    'first_response_met_sla_dom'=> [
+        '' => '',
+        'Yes' => 'Ja',
+        'No' => 'Nej',
+    ],
     'forecasts_chart_options_group' => array(
         'forecast' => 'I prognos',
         'sales_stage' => 'Säljnivå',
@@ -2123,6 +2180,7 @@ $app_list_strings = array (
         'record' => 'Post',
         'records' => 'Lista',
         'activities' => 'Aktivitetsström',
+        'multi-line' => 'Lista med flera linjer',
     ),
     'reportschedule_time_interval_dom' => array(
         '3600' => 'Varje timme',
@@ -2133,6 +2191,23 @@ $app_list_strings = array (
         '1209600' => 'Varannan vecka',
         '2419200' => 'Var 4: e vecka',
     ),
+    'pipeline_records_per_column' => array(
+        '10' => '10',
+        '15' => '15',
+        '20' => '20',
+    ),
+    //Service Duration
+    'service_duration_unit_dom' =>
+        array (
+            'year' => 'År',
+            'month' => 'Månad(er)',
+            'day' => 'Dag(ar)',
+        ),
+        'shift_exception_type_dom' => [
+            'time_off' => 'Time Off',
+            'event' => 'Event',
+            'other' => 'Other',
+        ],
 );
 
 $app_strings = array (
@@ -2144,7 +2219,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Följ Länk',
   'LBL_TOGGLE_VISIBILITY' => 'Växla Synlighet', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivitetsström',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2020 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar och 3-D-kuben är registrerade varumärken för SugarCRM Inc. '.
         'Alla andra företags- och produktnamn som används eller förekommer i denna produkt kan vara varumärken tillhörande '.
         'SugarCRM ®, Sugar Enterprise™ och Sugar™ är varumärken tillhörande SugarCRM Inc.',
@@ -2500,6 +2575,7 @@ $app_strings = array (
 
     'LBL_EMAIL_NO'                          => 'Nej',
     'LBL_EMAIL_NOT_SENT'                    => 'Systemet kan inte processa din begäran. Var snäll och kontakta din system administratör',
+    'LBL_INSERT_TO_USER_PWD_FAILED'         => 'Kunde inte sätta in i users_password_link.',
 
     'LBL_EMAIL_OK'                          => 'OK',
     'LBL_EMAIL_ONE_MOMENT'                  => 'Ett ögonblick...',
@@ -2718,8 +2794,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Det krävs en aktiv session för att exportera innehållet.',
     'ERR_NO_HEADER_ID' => 'Den här funktionen är inte tillgänglig i det här temat.',
     'ERR_NOT_ADMIN' => "Obehörig åtkomst till administrationen.",
-    'ERR_DISABLED_FOR_IDM_MODE' => 'Lösenordshantering är endast tillgänglig i Cloud-inställningar.',
-    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE' =>
+        'Lösenordshantering är endast tillgänglig i <a href="%s" target="_blank">Cloud Settings</a>.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Vänligen kontakta din Sugar-administratör om du vill ändra i fälten som bara kan läsas.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Saknar obligatoriskt fält:',
@@ -2749,6 +2825,7 @@ $app_strings = array (
     'ERR_DB_VERSION' => 'Sugar CRM {0} Filer Ska Endast Användas Med Sugar CRM {1} Databas.',
     'ERR_DB_QUERY' => '{0}: sökfråga misslyckades: {1}',
     'ERR_UW_RETIRED' => 'Upgrade Wizard är inte tillgänglig i den här versionen.',
+    'ERR_NOT_CLOUD_INSTANCE' => 'Denna instans av Sugar är antingen ingen SugarCloud-instans eller är inte konfigurerad för SugarCloud Insights.',
 
 
     'EXCEPTION_CREATE_MODULE_NOT_AUTHORIZED' => 'Du har inte behörighet att skapa {moduleName}. Kontakta din administratör om du behöver åtkomst.',
@@ -2771,6 +2848,7 @@ $app_strings = array (
     'EXCEPTION_NEED_LOGIN'              => 'Du måste logga in för att utföra den här handlingen.',
     'EXCEPTION_INVALID_TOKEN'           => 'Din autentiseringstoken är ogiltig.',
     'EXCEPTION_NOT_AUTHORIZED'          => 'Du har inte behörighet att utföra den här handlingen. Kontakta din administratör om du behöver åtkomst.',
+    'EXCEPTION_NOT_AUTHORIZED_TO_DATA'  => 'Du har inte behörighet att se data. Kontakta din administratör om du behöver åtkomst.',
     'EXCEPTION_INACTIVE_PORTAL_USER'    => 'Du kan inte nå Portal för ditt portal konto är felaktigt. Vänligen kontakta kundservice om du behöver åtkomst.',
     'EXCEPTION_PORTAL_NOT_CONFIGURED'   => 'Portal är inte konfigurerad rätt. Kontakta din Portal Administratör för hjälp.',
     'EXCEPTION_NO_METHOD'               => 'Din begäran stöds inte. Kunde inte hitta HTTP metoden av din begäran för den här pathen.',
@@ -2790,6 +2868,8 @@ $app_strings = array (
     'EXCEPTION_SEARCH_RUNTIME'          => 'Ett fel uppstod vid körning av sökmotorn. Kontakta din systemadministratör.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
     'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Ett fält som är låst av en process kan inte redigeras.',
+    'EXCEPTION_MODULE_DISABLED'         => 'Denna modul är inaktiverad för den aktuella användaren.',
+    'EXCEPTION_FIELD_DISABLED'          => 'Detta fält är inaktiverat för den aktuella användaren.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'Ett tillstånd inträffade på grund av ett allmänt fel eller misstag. Skälen för undantaget intervall men generellt faller utanför ramen för en mer specifik undantags API.',
@@ -2818,6 +2898,8 @@ $app_strings = array (
     'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Ett fält som för närvarande är låst av pågående process kan inte redigeras.',
     'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s är låst av en pågående process och kan inte redigeras.',
     'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s är låst av en pågående process och kan inte redigeras.',
+    'EXCEPTION_MODULE_DISABLED_DESC'       => 'Denna modul är inaktiverad för den aktuella användaren.',
+    'EXCEPTION_FIELD_DISABLED_DESC'        => 'Detta fält är inaktiverat för den aktuella användaren.',
 
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'En fil med samma namn existerar redan i systemet.',
@@ -2907,6 +2989,7 @@ $app_strings = array (
     'LBL_CLOSE_AND_CREATE_BUTTON_LABEL' => 'Stäng och skapa ny',
     'LBL_CLOSE_AND_CREATE_BUTTON_TITLE' => 'Stäng och skapa ny',
     'LBL_CLOSE_AND_CREATE_BUTTON_KEY' => 'C',
+    'LBL_COPY_RECORD_URL' => 'Kopiera postens URL',
     'LBL_OPEN_ITEMS' => 'Öppna Objekt:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'Skriv email',
@@ -2935,6 +3018,8 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'Dokument',
     'LBL_DATE_ENTERED' => 'Skapat datum',
     'LBL_DATE_MODIFIED' => 'Senast redigerad:',
+    'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'Redigera översiktsflik',
+    'LBL_EDIT_MODULE_TABS_BUTTON' => 'Redigera modulflikar',
     'LBL_EDIT_BUTTON' => 'Redigera',
     'LBL_DUPLICATE_BUTTON' => 'Duplicera',
     'LBL_DELETE_BUTTON' => 'Radera',
@@ -2947,6 +3032,7 @@ $app_strings = array (
     'LBL_DST_NEEDS_FIXIN' => 'Den här applikationen behöver en sommartidsfix för att användas.  Vänligen gå till<a href="index.php?module=Administration&action=DstFix">Repair</a> länken i adminkonsollen och lägg till sommartidsinställningsfixen.',
     'LBL_EDIT_AS_NEW_BUTTON_LABEL' => 'Editera som ny',
     'LBL_EDIT_AS_NEW_BUTTON_TITLE' => 'Editera som ny',
+    'LBL_EDIT_IN_NEW_TAB' => 'Redigera i ny flik',
     'LBL_FAVORITES' => 'Favoriter',
     'LBL_FILTER' => 'Filter',
     'LBL_DEFAULT_DATA_FILTER' => 'Standarddatafilter',
@@ -3126,6 +3212,7 @@ $app_strings = array (
     'LBL_MODIFIED_ID'=>'Ändrad av ID',
     'LBL_MORE' => 'mer',
     'LBL_MORE_MODULES' => 'Flera moduler',
+    'LBL_MORE_TABS' => 'Fler flikar',
     'LBL_MULTIPLE_MODULES' => 'Flera moduler',
     'LBL_MY_ACCOUNT' => 'Mitt konto',
     'LBL_SYSTEM_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'systemets standard',
@@ -3145,6 +3232,7 @@ $app_strings = array (
     'LBL_OPENTO_BUTTON_KEY' => 'T',
     'LBL_OPENTO_BUTTON_LABEL' => 'Öppna till:',
     'LBL_OPENTO_BUTTON_TITLE' => 'Öppna till: [Alt+T]',
+    'LBL_OPEN_IN_NEW_TAB' => 'Öppna i ny flik',
     'LBL_OPPORTUNITIES'=>'Affärsmöjligheter',
     'LBL_OPPORTUNITY_NAME' => 'Namn på affärsmöjlighet:',
     'LBL_OPPORTUNITY'=>'Affärsmöjlighet',
@@ -3345,7 +3433,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2020 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Med ensamrätt.<br />SugarCRM, Sugar och 3-D-kuben är registrerade varumärken för SugarCRM Inc. '.
         'Alla andra företags- och produktnamn som används eller förekommer i denna produkt kan vara varumärken tillhörande '.
         'respektive företag de associeras med.',
@@ -3455,7 +3543,7 @@ $app_strings = array (
     'LNK_VIEW_CHANGE_LOG' => 'Visa granskningsloggen',
     'TPL_AUDIT_LOG_TITLE' => 'Granskningslogg för {{{name}}}',
     'LBL_AUDIT_EMAIL_TOOLTIP' => 'Klicka för att visa e-postadress granskningslogg',
-
+    'LBL_NO_SEARCH_RESULTS' => 'Inga resultat hittades för din sökning',
     'NTC_CLICK_BACK' => 'Var god klicka på tillbakaknappen i webbläsaren för att åtgärda problemet.',
     'NTC_DATE_FORMAT' => '[åååå-mm-dd]',
     'NTC_DATE_TIME_FORMAT' => '[åååå-mm-dd 24:00]',
@@ -3493,12 +3581,15 @@ $app_strings = array (
     'WARN_LICENSE_SEATS_MAXED'=>  "Varning: Antalet aktiva använd överskrider max antalet som licensen tillåter.",
     'ERROR_LICENSE_SEATS_MAXED'=>
         'Antalet aktiva användare överskrider antalet licenser gränser. Kontakta din administratör.',
+    'ERROR_LICENSE_TYPE_SEATS_MAXED'=>
+        'Number of active %s users exceeds License Count limits. Please contact your Administrator.',
     'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'Endast administratörer kan logga in.',
     'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
         'Gränsen för användarens licensantal har nåtts. Endast befintliga användare kan logga in.',
     'WARN_ONLY_ADMINS'=> "Endast administratörer kan logga in.",
     'WARN_UNSAVED_CHANGES'=> "Du håller på att stänga denna post utan att spara dina ändringar. Är du säker på att du vill lämna denna post?",
     'LBL_WARN_UNSAVED_CHANGES' => 'Du har ändringar som inte sparats. Är du säker på att du vill lämna sidan och ignorera ändringarna?',
+    'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'En eller flera dashlets har osparade ändringar. Är du säker på att du vill stänga lådan?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Du flyttar till modulen Rapporter. Dina ändringar av dashlet sparas inte. Fortsätta?',
     'ERROR_NO_RECORD' => 'Fel vid hämtande av post. Posten är raderad eller så har du inte behörighet att visa den.',
     'ERROR_TYPE_NOT_VALID' => 'Error. Den här typen är inte godkänd.',
@@ -3515,7 +3606,10 @@ $app_strings = array (
     'ERROR_DATETIME' => 'Fel. Fältet kräver ett giltigt datum.',
     'ERROR_IS_BEFORE' => 'Fel. Datumet för detta fält kan inte vara efter datum för {{this}} fält.',
     'ERROR_IS_AFTER' => 'Fel. Datumet för detta fält kan inte vara före datum för {{this}} fält.',
+    'ERROR_TIME_IS_BEFORE' => 'Fel. Datumet för detta fält måste var före datum för {{this}} fält.',
+    'ERROR_TIME_IS_AFTER' => 'Fel. Tiden för detta fält måste var efter tiden för {{this}} fält.',
     'ERROR_NUMBER' => 'Fel. Detta fält kräver ett giltigt nummer.',
+    'ERROR_INT' => 'Fel. Ogiltigt heltal.',
     'ERROR_NO_BEAN' => 'Misslyckades att få bean.',
     'ERROR_ACCESS_MODULE' => 'Du har inte tillgång till denna modul.',
     'ERROR_MAX_FILESIZE_EXCEEDED' => 'Fel. Bilagan är för stor.',
@@ -3601,6 +3695,7 @@ $app_strings = array (
     'LBL_SCHEDULE_MEETING' => 'Schemalägg möte',
     'LBL_CREATE_TASK' => 'Skapa uppgift',
     'LBL_REMOVE_FROM_FAVORITES' => 'Ta bort från mina favoiriter',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => 'Generera formulär',
     'LBL_SAVE_WEB_TO_LEAD_FORM' =>'Spara Webb till Lead formulär',
@@ -3629,36 +3724,21 @@ $app_strings = array (
     'ERR_SMARTY_UNEQUAL_RELATED_FIELD_PARAMETERS' => 'Fel: Det är ett ojämnt antal argument för &#39;key&#39; och &#39;copy&#39; elementen i displayParams array.',
     'ERR_SMARTY_MISSING_DISPLAY_PARAMS' => 'Saknat index i displayParams Array för:',
 
-    /* MySugar Framework (for Home and Dashboard) */
     'LBL_DASHLET' => 'Dashlet',
-    'LBL_DASHLET_CONFIGURE_GENERAL' => 'Allmän',
     'LBL_DASHLET_CONFIGURE_FILTERS' => 'Filter',
     'LBL_DASHLET_CONFIGURE_MY_ITEMS_ONLY' => 'Endast mina tilldelade objekt',
-    'LBL_DASHLET_CONFIGURE_MY_FAVORITES_ONLY' => 'Endast mina favoriter',
     'LBL_DASHLET_CONFIGURE_TITLE' => 'Titel',
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Visa rader',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'Relatera till aktuell post',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'Kopplat fält',
 
-    // MySugar status strings
-    'LBL_CREATING_NEW_PAGE' => 'Skapar ny sida...',
-    'LBL_NEW_PAGE_FEEDBACK' => 'Du har skapat en ny sida. Du kan lägga till nytt innehåll via Lägg till Dashlet i menyalternativen.',
-    'LBL_DELETE_PAGE_CONFIRM' => 'Är du säker på att du vill radera sidan?',
-    'LBL_SAVING_PAGE_TITLE' => 'Sparar sidans titel...',
-    'LBL_RETRIEVING_PAGE' => 'Hämtar sida...',
-    'LBL_MAX_DASHLETS_REACHED' => 'Du har nått maximalt antal dashlets som din administratör har satt upp. Var god ta bort en dashlet för att kunna lägga till en ny.',
-    'LBL_ADDING_DASHLET' => 'Lägger till Sugardashlet ...',
-    'LBL_ADDED_DASHLET' => 'Sugardashlet tillagd',
     'LBL_REMOVE_DASHLET_CONFIRM' => 'Är du säker på att du vill radera Sugardashleten?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'Är du säker på att du vill ta bort raden?',
-    'LBL_REMOVING_DASHLET' => 'Raderar Sugardashlet ...',
-    'LBL_REMOVED_DASHLET' => 'Sugardashlet raderad',
     'LBL_MAXIMUM_OF' => 'Maximalt av',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'kolumner kan visas.',
 
     /* Sugar7 Dashboard */
     'LBL_DASHBOARD' => 'Instrumentpanel',
-    'LBL_DASHBOARD_BWC' => 'Mitt Legacy Dashboard',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Min Dashboard',
     'LBL_COLLAPSE_ALL' => 'Dra ihop alla',
     'LBL_EXPAND_ALL' => 'Utöka alla',
@@ -3689,9 +3769,33 @@ $app_strings = array (
 
     'LBL_DASHLET_LISTVIEW_NAME' => 'Listvy',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'Listar poster från en viss modul enligt kriterier som du definierar.',
+
+    // Record view dashlet
+    'LBL_DASHLET_RECORDVIEW_NAME' => 'Postvy',
+    'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Visar en post och (valfritt) relaterade poster i flikar.',
+    'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'Basposttyp',
+    'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => 'Denna {{moduleSingular}}',
+    'LBL_DASHLET_RECORDVIEW_TABS' => 'Flikar',
+    'LBL_DASHLET_RECORDVIEW_BASIC_LAYOUT_PREVIEW' => 'Förhandsvisning av grundlayout',
+    'TPL_DASHLET_RECORDVIEW_TOO_MANY_TABS' => 'Varning, endast {{numWord}} ({{num}})-moduler kan visas i flikar. ' .
+        'Ta bort en eller flera moduler innan du lägger till fler.',
+    'LBL_SIX' => 'sex', // record view dashlet tab limit
+
+    //Commentlog Dashlet
+    'LBL_DASHLET_COMMENTLOG_NAME' => 'Kommentarslogg',
+    'LBL_DASHLET_COMMENTLOG_DESCRIPTION' => 'Visa kommentarer för en post',
+    'LBL_COMMENTS_LOG_DASHLET_NO_COMMENTS' => 'Inga kommentarer tillgängliga',
+    'LBL_COMMENTS_LOG_DASHLET_BUTTON_ADD' => 'Lägg till',
+    'LBL_COMMENTS_LOG_DASHLET_PLACEHOLDER' => 'Lägg till kommentar',
+    'LBL_COMMENTS_LOG_DASHLET_VIEW_ALL' => 'Se alla',
+
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Mina {{module}}',
+    'LBL_DASHLET_PICK_A_RECORD' => 'Ingen post vald för visning',
+    'LBL_CONTENT_SEARCH_DASHLET' => 'Innehållssökning för dashlet',
+    'LBL_CONTENT_SEARCH_DASHLET_GREETING' => 'Vad kan vi hjälpa dig med idag, {{username}}?',
+    'LBL_CONTENT_SEARCH_DASHLET_DISABLED' => 'Vill du skapa ett ärende?',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Affärsmöjlighet Metrics',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Möjlighetsvärden för relaterat konto.',
@@ -3699,6 +3803,14 @@ $app_strings = array (
     'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'Lista nyligen använda föremål och produkter sparade som favoriter',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Nyligen använda',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Favoriter',
+
+    'LBL_DASHBOARD_CONFIG' => 'Dashboard Configuration',
+    'LBL_LIST_VIEW__NAME' => 'Listvy',
+    'LBL_PIPELINE_VIEW_NAME' => 'Brickvy',
+    'LBL_PIPELINE_VIEW_BTN' => 'Brickvy',
+    'LBL_PIPELINE_VIEW_TAB_NAME' => '{{module}} efter {{fieldName}}',
+    'LBL_VISUAL_PIPELINE_DISABLED' => 'Brickvy är inte aktiverad',
+    'LBL_VISUAL_PIPELINE_MOVE_FAILED' => '{{recordName}} could not be moved to {{columnLabel}} because of the following fields: ',
 
     'LBL_DASHLET_NO_RECORDS' => 'Inga poster hittades vid denna tidpunkt.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Case sammandrag',
@@ -3754,37 +3866,13 @@ $app_strings = array (
     'LBL_DASHLET_USEFULNESS_NAME' => 'Användbarhet för artiklar',
     'LBL_DASHLET_USEFULNESS_DESC' => 'Displays a chart showing how useful the knowledge base article is',
 
-    // MySugar Menu Options
     'LBL_ADD_PAGE' => 'Lägg till sida',
-    'LBL_DELETE_PAGE' => 'Radera sida',
-    'LBL_CHANGE_LAYOUT' => 'Ändra layout',
-    'LBL_RENAME_PAGE' => 'Döp om sidan',
-
     'LBL_LOADING_PAGE' => 'Laddar sidan, var god vänta...',
-
-    'LBL_RELOAD_PAGE' => '<a href="javascript: window.location.reload()">Ladda om sidan</a> för att använda Sugardashleten.',
-    'LBL_ADD_DASHLETS' => 'Lägg till dashlet',
-    'LBL_CLOSE_DASHLETS' => 'Stäng',
-    'LBL_OPTIONS' => 'Alternativ',
-    'LBL_NUMBER_OF_COLUMNS' => 'Klicka på en ikon för att välja antal kolumner',
-    'LBL_1_COLUMN' => '1 Kolumn',
-    'LBL_2_COLUMN' => '2 Kolumner',
-    'LBL_3_COLUMN' => '3 Kolumner',
-    'LBL_PAGE_NAME' => 'Sidnamn',
-
     'LBL_SEARCH_RESULTS' => 'Sökresultat',
-    'TPL_SEARCH_RESULTS_FOR' => 'Sökresultat för: {{searchTerm}}',
     'LBL_SEARCH_RESULTS_FOR' => 'Sökresultat för: ',
-    'LBL_SEARCH_MODULES' => 'Moduler',
-    'LBL_SEARCH_CHARTS' => 'Diagram',
-    'LBL_SEARCH_REPORT_CHARTS' => 'Rapportdiagram',
-    'LBL_SEARCH_TOOLS' => 'Verktyg',
     'LBL_SEARCH_HELP_TITLE' => 'Söktips',
-    'LBL_SEARCH_HELP_CLOSE_TOOLTIP' => 'Stäng',
     'LBL_SEARCH_RESULTS_FOUND' => 'Sökresultat Hittade',
     'LBL_SEARCH_RESULTS_TIME' => 'ms.',
-    'ERR_BLANK_PAGE_NAME' => 'Var god ange ett sidnamn',
-    /* End MySugar Framework strings */
 
     /* Sales Pipeline Dashlet */
     'LBL_DASHLET_MY_PIPELINE' => 'Min pipeline',
@@ -3938,6 +4026,8 @@ $app_strings = array (
     //MB -Fixed Bug #32812 -Max
     'LBL_ASSIGNED_TO_NAME' => 'Tilldelad till',
     'LBL_DESCRIPTION' => 'Beskrivning',
+    'LBL_PRIMARY_CONTACT_NAME' => 'Primär kontakt',
+    'LBL_PRIMARY_CONTACT_ID' => 'Primär kontakt-ID',
 
   'LBL_NONE' => '-ingen-',
   'LBL_YESTERDAY'=> 'Igår',
@@ -4311,6 +4401,8 @@ $app_strings = array (
     // start of: Quotes related
     'LBL_QLI_SINGLE_TITLE' => 'Offererad radartikel',
     'LBL_DISCOUNT_TOTAL' => 'Total rabatt',
+    'LBL_DISCOUNT_PERCENT' => '% Percent',
+    'LBL_DISCOUNT_SELECT' => 'Determines if the discount is a percentage or flat amount',
     'LBL_TAX' => 'Skatt',
     'LBL_SHIPPING' => 'Frakt',
     'LBL_GRAND_TOTAL' => 'Totalsumma',
@@ -4357,6 +4449,7 @@ $app_strings = array (
     'LBL_NO_ACCESS' => '(Ingen tillgång)',
     'LBL_NO_ACCESS_LOWER' => 'Ingen tillgång',
     'LBL_NO_FIELD_ACCESS' => 'Ingen tillgång',
+    'LBL_NO_LICENSE_ACCESS' => 'License Required',
     'LBL_VALUE_ERASED' => 'Värdet raderades',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Den här informationen raderas via datasekretessbegäran',
     'LBL_CREATE_RELATED_RECORD' => 'Skapa Relaterad Post',
@@ -4526,6 +4619,15 @@ $app_strings = array (
     'LBL_MOBILE_ACTIVITYSTREAM_POST_PLACEHOLDER' => 'Skriv @ för att nämna en användare. Skriv # för att referera till en post.',
     'LBL_MOBILE_NEW_COMMENT' => 'Ny kommentar',
     'LBL_RECENTLY_VIEWED' => 'Senast visade',
+    'LBL_FILE_STORED_LOCALLY' => 'Filen lagras på lokal lagring och synkroniseras när enheten är online.',
+    'LBL_IDM_USER_PROFILE_READONLY' => 'Om du vill ändra vissa fält som inte kan redigeras, kontakta administratören för att meddela dessa ändringar.',
+    'LBL_ACTIVITY_POST' => '{{{value}}}på {{{link}}}',
+    'LBL_COMMENTLOG_EMPTY' => 'Ingen kommentar',
+    'LBL_COMMENTLOG_EXPANDBUTTON_EXPAND' => 'Visa nästa {{{commentsLeft}}} kommentarer',
+    'LBL_COMMENTLOG_EXPANDBUTTON_COLLAPSE' => 'Minska',
+    'LBL_COMMENTLOG_CONFIRM_CREATE' => 'Bekräfta att kommentar skapats',
+    'LBL_COMMENTLOG_ERROR_IS_EMPTY' => 'Kommentarsloggen kan inte vara tom',
+    'LBL_MOBILE_PDF_DOWNLOAD' => 'Ladda ner {{{pdfTemplateName}}} PDF',
 
     'ERR_SYNC_FAILED' => 'Det går inte att synkronisera med servern.',
     'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'SSO-inloggning är inte tillgängligt. Kontrollera att Sugar är uppdaterat till version 7.5 eller senare och konfigurerat för SSO.',
@@ -4736,6 +4838,11 @@ $app_strings = array (
     'LBL_VO_RIGHT_MENU_BTN' => 'Höger menyknapp',
     'LBL_VO_ADD_BTN' => 'Lägg till knapp',
 
+    // Cookie consent
+    'LBL_WIZ_USER_COOKIE_CONSENT' => 'Denna applikation använder kakor',
+    'LBL_USER_CLICK_FOR_COOKIE_CONSENT' => 'Kryssa i för att acceptera (obligatoriskt)',
+    'LBL_USER_COOKIE_CONSENT_TEXT' => 'Denna applikation använder kakor för att hjälpa dig få en bättre upplevelse. Genom att fortsätta ger du samtycke till användandet av kakor i enlighet med vår <a href="{{href}}" target="_blank">sekretesspolicy</a>.',
+
     //begin portal
 
     //portal record tutorial
@@ -4745,20 +4852,36 @@ $app_strings = array (
     'LBL_PORTAL_TOUR_RECORD_VIEW_NOTE' => 'Klicka på ikonerna för att visa information om bifogade anteckningar.',
 
     //for portal
-
+    'LBL_PORTAL_HOME' => 'Startinstrumentpanel',
+    'LBL_PORTAL_DASHBOARD_ALL_OPEN_CASES' => 'Alla öppna ärenden',
+    'LBL_PORTAL_DASHBOARD_RECENT_CASES' => 'Nyligen lösta ärenden',
     'LBL_PORTAL_SEARCH' => 'Sök på namn, nummer',
     'LBL_SIGNUP_BUTTON_LABEL' => 'Registrera Dig',
+    'LBL_PORTAL_NO_EMAIL' => 'Fick du ingen e-post?',
+    'LBL_PORTAL_FORGOT_PASSWORD' => 'Glömt lösenord',
+    'LBL_PORTAL_FORGOT_USERNAME' => 'Glömt användarnamn',
+    'LBL_PORTAL_ENTER_PASSWORD_TWICE' => 'Ange ditt lösenord två gånger. Lösenorden måste matcha.',
+    'LBL_PORTAL_RESET_PASSWORD' => 'Återställ lösenord',
+    'LBL_PORTAL_REENTER_PASSWORD' => 'Ange lösenord igen',
+    'LBL_PORTAL_PASSWORD_MISMATCH' => 'Lösenorden matchar inte, var god ange igen',
+    'LBL_PORTAL_PASSWORD_RESET_SUCCESS' => 'Ditt lösenord har återställts.',
+    'LBL_PORTAL_PASSWORD_RESET_ERR_GENERAL' => 'Ett fel inträffade. Var god initiera en ny begäran om återställning av lösenord.',
     'LBL_PORTAL_SIGNUP_PROCESS' => 'Registrerar',
-    'LBL_PORTAL_SIGNUP_TITLE' => 'Tack för att du registrerade dig!',
-    'LBL_PORTAL_SIGNUP' => 'En representant från kundservice kommer kontakta dig snart efter att du konfigurerat ditt konto.',
+    'LBL_PORTAL_SIGNUP_TITLE' => 'Tack för att du registrerade dig',
+    'LBL_PORTAL_SIGNUP' => 'Vi kommer att informera dig efter vi har bekräftat din information.',
     'LBL_PORTAL_SIGNUP_FIRST_NAME' => 'Förnamn',
     'LBL_PORTAL_SIGNUP_LAST_NAME' => 'Efternamn',
-    'LBL_PORTAL_SIGNUP_EMAIL' => 'Email',
+    'LBL_PORTAL_SIGNUP_USER_NAME' => 'Användarnamn',
+    'LBL_PORTAL_SIGNUP_EMAIL' => 'E-postadress',
     'LBL_PORTAL_SIGNUP_PHONE' => '(###) ###-#### (valfri)',
     'LBL_PORTAL_SIGNUP_COUNTRY' => 'Land',
     'LBL_PORTAL_SIGNUP_STATE' => 'Region',
-    'LBL_PORTAL_SIGNUP_COMPANY' => 'Företag',
+    'LBL_PORTAL_SIGNUP_COMPANY_NAME' => 'Företagsnamn',
     'LBL_PORTAL_SIGNUP_JOBTITLE' => 'Jobbtitel (frivilligt)',
+    'LBL_PORTAL_SIGNUP_PASSWORD' => 'Lösenord',
+    'LBL_PORTAL_SIGNUP_PASSWORD1' => 'Bekräfta lösenord',
+    'LBL_PORTAL_SIGNUP_FORGOT_LOGIN' => 'Glömt inloggning',
+
     'LNK_PORTAL_LOGIN_FORGOTPASSWORD' => 'Glöm lösenord?',
     'LBL_PORTAL_LOGIN_FORGOTPASSWORD' => 'Kontakta din Sugar Admin för att återställa ditt lösenord.',
     'LBL_PORTAL_LOGIN_USERNAME' => 'Användarnamn',
@@ -4768,9 +4891,14 @@ $app_strings = array (
     'LBL_PORTAL_PAGE_NOT_AVAIL' => 'Sidan är inte tillgänglig',
     'LBL_PORTAL_NOT_ENABLED_MSG' => "Tyvärr, den här funktionen är inte tillgänglig just nu.",
     'LBL_PORTAL_SEARCH_RESULTS_TITLE' => 'Visa sökresultat för "{query}"',
+    'LBL_PORTAL_DIDNT_GET_EMAIL' => 'Fick du ingen e-post?',
+    'LBL_PORTAL_CONTACT_INFO_CONTACT_US' => 'För assistans, eller för att kontakta oss, var god använd något av följande: ',
+    'LBL_PORTAL_CONTACT_INFO_PHONE' => 'Telefon: ',
+    'LBL_PORTAL_CONTACT_INFO_EMAIL' => 'E-post: ',
+    'LBL_PORTAL_CONTACT_INFO_WEB' => 'Webb: ',
 
     //for portal errors
-    'LBL_PORTAL_INVALID_CREDS' => 'Användarnamnet/lösenord kombinationen du uppgav är felaktig, vänligen försök igen.',
+    'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Din inloggning lyckades inte. Var god och försök igen.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'Fel Inloggningsuppgifter',
     'LBL_PORTAL_INVALID_GRANT' => 'Din token är ogiltig eller har gått ut. Vänligen logga in igen',
     'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Token har gått ut',
@@ -4793,7 +4921,27 @@ $app_strings = array (
     'LBL_PORTAL_ROUTE_ERROR'=>'Problem med laddning av modul. Försök igen senare eller kontakta support.',
     'LBL_PORTAL_OFFLINE' =>'Tyvärr är applikationen inte tillgänglig just nu. Vänligen kontakta site administratören.',
     'LBL_CONTACT_EDIT_PASSWORD_LNK_TEXT' => 'Ändra lösenord',
+    'LBL_PORTAL_SIGNUP_USER_NAME_ERROR' => 'Användarnamnet är redan registrerat i systemet. Begär antingen ett glömt lösenord eller välj ett annat användarnamn.',
+    'LBL_PORTAL_SIGNUP_EMAIL_ERROR' => 'Den uppgivna e-postadressen är ogiltig.',
+    'LBL_PORTAL_SIGNUP_PASSWORD_ERROR' => 'Lösenorden stämmer ej överens.',
     //end portal
+
+    // Final name given by marketing is Service Console
+    // Original name for this feature was Agent Workbench and was used
+    // throughout the development of this product.
+    'LBL_AGENT_WORKBENCH' => 'Service Console',
+    'LBL_AGENT_WORKBENCH_OVERVIEW' => 'Översikt',
+    'LBL_CASE_OVERDUE' => 'Overdue',
+    'LBL_CASE_DUE_SOON' => 'Due soon',
+    'LBL_CASE_DUE_LATER' => 'Due later',
+
+    // Renewals Console
+    'LBL_RENEWALS_CONSOLE' => 'Konsol för förnyelse',
+    'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'Översikt',
+    'LBL_RENEWALS_CONSOLE_STAGE_STATUS' => 'Stadium / status',
+    'LBL_RENEWALS_CONSOLE_NAME_ACCOUNT' => 'Namn / kontonamn',
+    'LBL_RENEWALS_CONSOLE_AMOUNT' => 'Worst | Likely | Best',
+
 
     //First time login wizard
     'LBL_WIZ_USER_PROFILE_TITLE' => 'Användarinformation',
@@ -4838,10 +4986,22 @@ $app_strings = array (
     'ERR_PASSWORD_MISMATCH' => 'Lösenordet stämmer inte överens med lösenordet i vårt system.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Kan inte skicka lösenord',
     'LBL_REQUEST_PASSWORD' => 'Begär lösenord',
+    'LBL_RESET_PASSWORD' => 'Återställ lösenord',
+    'LBL_RESET_PASSWORD_MESSAGE' => 'Ange ditt användarnamn så skickar vi en länk för att återställa ditt lösenord.',
+    'LBL_RESET_PASSWORD_CONFIRMATION_MESSAGE' => 'Kontrollera din e-post <br><br> Vi har skickat instruktioner för återställande av lösenordet till e-postadressen vi har registrerat.',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Fel: Det gick inte att uppdatera lösenordet för denna användare.',
     'LBL_INCORRECT_PASSWORD' => 'Fel: Felaktigt lösenord.',
+    'LBL_PASSWORD_ENFORCE_TITLE' => 'Lösenordet du angav uppfyller inte lösenordskriterierna. Försök igen.',
+    'LBL_PASSWORD_MIN_LENGTH' => 'Minimal längd är {0}.',
+    'LBL_PASSWORD_MAX_LENGTH' => 'Maximal längd är {0}.',
+    'LBL_PASSWORD_ONE_UPPERCASE' => 'Måste innehålla en stor bokstav (A-Z).',
+    'LBL_PASSWORD_ONE_LOWERCASE' => 'Måste innehålla en liten bokstav (a-z).',
+    'LBL_PASSWORD_ONE_NUMBER' => 'Måste innehålla en siffra (0-9).',
+    'LBL_PASSWORD_ONE_SPECIAL_CHAR' => 'Måste innehålla ett specialtecken (~!@#$%^&*()_+-={}|).',
+    'LBL_PASSWORD_REGEX_REQUIREMENT' => 'Lösenordet får inte matcha mönstret för det reguljära uttrycket: {0}.',
 
     'LBL_PREFERRED_LANGUAGE' => 'Språkinställning:',
+    'LBL_PASSWORD_RESET_EMAIL_FAIL' => 'Kunde inte skicka e-post för återställning av lösenord.',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Välj en rapport',
@@ -4983,6 +5143,25 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'Mina uppgifter',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Team uppgifter',
 
+    'LBL_RECENTLY_VIEWED_CASES_DASHLET' => 'Ärenden jag sett nyligen',
+
+    'LBL_REPORT_DASHLET_TITLE_12' => 'Öppna ärenden per användare per status',
+    'LBL_REPORT_DASHLET_TITLE_125' => 'Nya ärenden per affärscenter per vecka',
+    'LBL_REPORT_DASHLET_TITLE_126' => 'Nyligen skapade ärenden',
+    'LBL_REPORT_DASHLET_TITLE_127' => 'Nya ärenden per kundnivå per vecka',
+    'LBL_REPORT_DASHLET_TITLE_128' => 'Öppna ärenden per kundnivå och prioritet',
+    'LBL_REPORT_DASHLET_TITLE_129' => 'Totalt antal ärenden avgjorda denna månad per affärscenter',
+    'LBL_REPORT_DASHLET_TITLE_130' => 'Totalt antal ärenden avgjorda denna månad per agent',
+    'LBL_REPORT_DASHLET_TITLE_131' => 'Lista över nyligen avgjorda ärenden',
+    'LBL_REPORT_DASHLET_TITLE_132' => 'Mina avgjorda ärenden denna månad per vecka',
+    'LBL_REPORT_DASHLET_TITLE_133' => 'Mina ärenden som förfaller idag och redan förfallna',
+    'LBL_REPORT_DASHLET_TITLE_134' => 'Alla ärenden som förfaller idag och redan förfallna',
+    'LBL_REPORT_DASHLET_TITLE_135' => 'Mina öppna ärenden per uppföljningsdatum',
+    'LBL_REPORT_DASHLET_TITLE_136' => 'Alla öppna ärenden per uppföljningsdatum',
+    'LBL_REPORT_DASHLET_TITLE_137' => 'Mina öppna ärenden per status',
+    'LBL_REPORT_DASHLET_TITLE_138' => 'Mina ärenden förra veckan per status',
+    'LBL_REPORT_DASHLET_TITLE_139' => 'Status för öppna ärenden som tilldelats av mig',
+
     //Audit subjects
     'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
@@ -5113,6 +5292,8 @@ $app_strings = array (
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Uppdatera listan',
+    // Refresh button on tile views
+    'LBL_TILE_REFRESH' => 'Refresh Tiles',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'mer',
@@ -5381,6 +5562,12 @@ $app_strings = array (
     'LBL_LOCKED_FIELD_RECORD_VIEW_WARNING' => 'Posten deltar i en process och kan innehålla vissa låsta fält.',
     // @codingStandardsIgnoreEnd
 
+    'LBL_BUSINESS_CENTER' => 'Affärscenter',
+    'LBL_BUSINESS_CENTER_ID' => 'Affärscenter ID',
+    'LBL_BUSINESS_CENTER_NAME' => 'Affärscenter namn',
+
+    'LBL_PLIS_ACTIVITIES' => 'Purchased Line Items Activities',
+
     //Tag Strings
     'LBL_TAG_NEW_TAG' => '(Ny tagg)',
     'LBL_TAG_FETCH_ERROR' => 'Ett fel uppstod vid hämtning av taggar.',
@@ -5418,14 +5605,47 @@ $app_strings = array (
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Markera för att radera',
     'TPL_DATAPRIVACY_PII_TITLE' => 'Personlig information för {{{name}}}',
 
+    'LBL_CHANGETIMERS_SUBPANEL_TITLE' => 'Ändra timers',
+
     'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Kopierad till urklipp!',
     'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Kunde inte kopieras till urklipp',
 
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Kopiera bekräftelselänk',
 
+    // Activity Timeline Dashlet
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Interaktioner',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} Interaktioner',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+        'Meetings and Notes related to a record.',
+
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'Visa fler ...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Visa Mindre...',
+    'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Inga data tillgängliga',
+
+    // Active Subscriptions Dashlet
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Aktiva prenumerationer',
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => 'Aktiva prenumerationer för ett specifikt konto.',
+    'LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY' => ', kvantitet {{quantity}}',
+    'LBL_ACTIVE_SUBSCRIPTIONS_TOTAL' => 'Totalt:',
+    'LBL_NO_ACTIVE_SUBSCRIPTIONS' => 'Inga aktiva prenumerationer',
+    'LBL_REQUIRE_REVENUE_LINE_ITEMS' => 'Denna instrumentpanel kräver {{module_name}} för att fungera. Kontakta din administratör om att aktivera {{module_name}}.',
+
+    // Customer Service
+    'LBL_EDIT_IN_STUDIO' => 'Använd Studio för att redigera layouten för dashlet-vyn genom att gå till ' .
+        'Studio > {{module}} > Layouter > Inspelningsvy instrumentpanel. <a href={{linkToStudio}}>Redigera i Studio</a>.',
+    'LBL_SERVICE_LEVEL' => 'Servicenivå',
+    // Agent Workbench
+    'LBL_AGENT_WORKBENCH_NUMBER' => 'Antal',
+    'LBL_AGENT_WORKBENCH_FOLLOW_UP' => 'Följ upp',
+    'LBL_AGENT_WORKBENCH_PRIORITY_STATUS' => 'Prioritet/Status',
+    'LBL_AGENT_WORKBENCH_SUBJECT_DESCRIPTION' => 'Ämne/beskrivning',
+
+//Service Duration
+    'LBL_SERVICE_DURATION' => 'Servicevaraktighet',
+    'LBL_SERVICE_DURATION_VALUE' => 'Värde servicevaraktighet',
+    'LBL_SERVICE_DURATION_UNIT' => 'Servicevaraktighet enhet',
+
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6422,7 +6642,7 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Inbäddad fil';
     'ISK' => 'kr',
     'INR' => '₨',
     'IDR' => 'Rp',
-    'IRR' => '﷼',
+    'IRR' => '77e8',
     'IMP' => '£',
     'ILS' => '₪',
     'JMD' => 'J$',
@@ -6451,18 +6671,18 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Inbäddad fil';
     'NIO' => 'C$',
     'NGN' => '₦',
     'NOK' => 'kr',
-    'OMR' => '﷼',
+    'OMR' => '77e8',
     'PKR' => '₨',
     'PAB' => 'B/.',
     'PYG' => 'Gs',
     'PEN' => 'S/.',
     'PHP' => '₱',
     'PLN' => 'zł',
-    'QAR' => '﷼',
+    'QAR' => '77e8',
     'RON' => 'lei',
     'RUB' => 'руб',
     'SHP' => '£',
-    'SAR' => '﷼',
+    'SAR' => '77e8',
     'RSD' => 'Дин.',
     'SCR' => '₨',
     'SGD' => '$',
@@ -6484,7 +6704,7 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Inbäddad fil';
     'UZS' => 'лв',
     'VEF' => 'Bs',
     'VND' => '₫',
-    'YER' => '﷼',
+    'YER' => '77e8',
     'ZWD' => 'Z$',
     );
 

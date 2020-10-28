@@ -50,4 +50,6 @@ $mod_strings = array(
     'LBL_PARENT_ID' => 'Üst ID',
     'LBL_READ' => 'Okundu',
     'LBL_UNREAD' => 'Okunmadı',
+    'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'Sizden bahseden kişi:',
+    'LBL_YOU_HAVE_BEEN_MENTIONED' => 'Sizden bahsedildi',
 );

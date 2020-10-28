@@ -54,7 +54,7 @@ $mod_strings = array(
     "LBL_SNIP_PURCHASE_SUMMARY" => "For at kunne bruge e-mail arkivering skal du købe en licens til din SugarCRM instans",
     "LBL_SNIP_PURCHASE" => "Klik her for at købe",
     'LBL_SNIP_EMAIL' => 'E-mail arkiverings adresse',
-    'LBL_SNIP_AGREE' => "Jeg accepterer ovenstående betingelser og <a href='http://www.sugarcrm.com/crm/TRUSTe/privacy.html' target='_blank'>fortrolighedspolitik</a>.",
+    'LBL_SNIP_AGREE' => "I agree to the above terms and the <a href='https://www.sugarcrm.com/legal/privacy-policy/' target='_blank'>privacy policy</a>.",
     'LBL_SNIP_PRIVACY' => 'fortrolighedspolitik',
 
     'LBL_SNIP_STATUS_PINGBACK_FAIL' => 'Pingback fejlede',

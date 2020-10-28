@@ -1,7 +1,4 @@
 <?php
-
-// TODO: replace this file with the ultra-lite/container Composer package once the support of PHP 5.6 is dropped.
-
 namespace UltraLite\Container;
 
 use Psr\Container\ContainerInterface;
@@ -42,7 +39,7 @@ class Container implements ContainerInterface
     /**
      * @param string $path
      */
-    public function configureFromFile($path)
+    public function configureFromFile(string $path)
     {
         foreach (require $path as $serviceId => $serviceFactory) {
             $this->set($serviceId, $serviceFactory);
@@ -71,7 +68,7 @@ class Container implements ContainerInterface
     /**
      * @return string[]
      */
-    public function listServiceIds()
+    public function listServiceIds() : array
     {
         return array_keys($this->serviceFactories);
     }
@@ -79,7 +76,7 @@ class Container implements ContainerInterface
     /**
      * @return mixed
      */
-    private function getServiceFromFactory($serviceId)
+    private function getServiceFromFactory(string $serviceId)
     {
         $serviceFactory = $this->serviceFactories[$serviceId];
         $containerToUseForDependencies = $this->delegateContainer ?: $this;

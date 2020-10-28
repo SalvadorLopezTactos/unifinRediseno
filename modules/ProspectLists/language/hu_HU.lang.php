@@ -65,6 +65,12 @@ $mod_strings = array (
   'LBL_DOMAIN'=>'Nincsenek emailek a domainhez',
   'LBL_LIST_PROSPECTLIST_NAME'=>'Név',
 	'LBL_MORE_DETAIL' => 'Részletek' /*for 508 compliance fix*/,
+    'LBL_ACCOUNTS' => 'Kliensek',
+    'LBL_CAMPAIGNS' => 'Kampányok',
+    'LBL_CONTACTS' => 'Kapcsolatok',
+    'LBL_LEADS' => 'Ajánlások',
+    'LBL_PROSPECTS' => 'Célok',
+    'LBL_USERS' => 'Felhasználók',
 
     // Help Text
     // List View Help Text

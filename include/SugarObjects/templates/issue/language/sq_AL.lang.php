@@ -27,9 +27,15 @@ $mod_strings = array (
   'LBL_RESOLUTION' => 'Rezolucioni',
   'LBL_LAST_MODIFIED' => 'Ndryshimi i fundit',
   'LBL_ASSIGNED_TO_ID'=>'Drejtuar:',
-  'LBL_ASSIGNED_TO_NAME' => 'Përdorues',  	  
+  'LBL_ASSIGNED_TO_NAME' => 'Përdorues',
   'LBL_WORK_LOG' => 'identifikimi i punës',
+    'LBL_FOLLOW_UP' => 'Ndiq',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
+    'LBL_RESOLVED_DATETIME' => 'Data e zgjidhjes',
+    'LBL_HOURS_TO_RESOLUTION' => 'Koha e zgjidhjes',
+    'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Orët e punës së zgjidhjes',
+    'LBL_PENDING_PROCESSING' => 'Në pritje për t&#39;u përpunuar',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Krijuar nga',
   'LBL_DATE_CREATED' => 'të dhëna të krijuara',
   'LBL_DATE_ENTERED' => 'Të dhënat e krijuara',
@@ -44,5 +50,5 @@ $mod_strings = array (
     'LBL_EDIT_BUTTON' => 'Ndrysho [Alt+E]',
     'LBL_REMOVE' => 'Hiqe',
 
-  
+
   );

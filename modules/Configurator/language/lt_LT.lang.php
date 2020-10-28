@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'Paveiksliuko dydis turi būti santykiu tarp  1:1 ir 10:1.  Paveiksliukas bus pertvarkytas.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'Paveiksliuko dydis turi būti santykiu tarp 3:1 and 20:1.  Atsiųskite paveiksliuką su nauju santykiu.',
     'ERR_ALERT_FILE_UPLOAD' => 'Klaida siunčiant paveiksliuką',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Nepavyko sukurti paveikslų katalogo',
     'LBL_LOGGER'=>'Registravimo nustatymai',
 	'LBL_LOGGER_FILENAME'=>'Registravimo failo vardas',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Plėtinys',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Maksimalus registravimo failo dydis',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Numatytasis datos formatas',
 	'LBL_LOGGER_LOG_LEVEL'=>'Istorijos kaupimo lygis',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Komentarų žurnalo nustatymai',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Didžiausias rodomas komentaro įrašo simbolių skaičius',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

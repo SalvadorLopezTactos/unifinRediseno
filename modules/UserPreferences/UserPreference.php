@@ -223,7 +223,10 @@ class UserPreference extends SugarBean
 
         $value = array();
         if ($contents) {
-            $value = unserialize(base64_decode($contents));
+            $value = unserialize(
+                base64_decode($contents),
+                ['allowed_classes' => false]
+            );
         }
 
         $this->storeToCache($value, $category);

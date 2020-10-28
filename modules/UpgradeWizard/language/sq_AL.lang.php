@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'E painstalueshme',
     'LBL_ML_VERSION' => 'Versioni',
 	'LBL_ML_INSTALL'=>'Instalo',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'Gjurmuesit',
 	'LBL_MODULE_NAME' => 'Rindërto Wizardin',
 	'LBL_MODULE_NAME_SINGULAR' => 'Rindërto Wizardin',
 	'LBL_UPLOAD_SUCCESS' => 'Paketa e rindërtuar është ngarkuar suksesshëm. Shtyp Vijim për të performuar kontrollin përfundimtar',

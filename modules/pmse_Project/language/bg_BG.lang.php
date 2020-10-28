@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'Статус',
   'LBL_PRJ_MODULE' => 'Основен модул',
+  'LBL_PRJ_RUN_ORDER' => 'Ред на изпълнение',
   'LBL_PMSE_BUTTON_SAVE' => 'Съхрани',
   'LBL_PMSE_BUTTON_CANCEL' => 'Отмени',
   'LBL_PMSE_BUTTON_YES' => 'Да',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Дефиницията на процеса е импортирана, но съдържа едно или повече действия за Бизнес правило, за които не са избрани бизнес правила.',
     'LBL_BPM_IMPORT_SELECT' => 'Тази дефиниция на процес съдържа следните бизнес правила и шаблони на електронни писма. '
         . 'Моля, изберете тези, които искате да импортирате.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'Бизнес правила',
     'LBL_EMAIL_TEMPLATES' => 'Шаблони на електронно писмо',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'Началник',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Създадено от',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Последно модифицирано от',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Системен имейл',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Бизнес правило',
     'LBL_PMSE_LABEL_RULE' => 'Правило',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Отговорник',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Актуализирайте "Присвоен на" в записа',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Добави свързан запис',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Свързан модул',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Името на дейността е празно.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Името"%s" вече съществува.',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'дни',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'часове',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'минути',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'работно време',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'Бизнес център',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'От Основен модул',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'От ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' Модул',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'Стинг, Число или Булева стойност',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'Номер',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'Стойност',

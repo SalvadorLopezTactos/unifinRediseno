@@ -168,9 +168,9 @@ class CustomQuery extends SugarBean {
 			if(!is_admin($current_user) || $building_query==true){
 				$split_query = preg_split('{{tj}}', $customQuery);
 
-				$team_join_part = 	"INNER JOIN team_memberships
-								ON team_memberships.deleted=0 AND ".$split_query[1].".team_id = team_memberships.team_id
-								AND team_memberships.user_id = '".$current_user->id."'";
+                $team_join_part = "INNER JOIN team_memberships
+                ON team_memberships.deleted=0 AND " . $split_query[1] . ".team_id = team_memberships.team_id
+                AND team_memberships.user_id = " .  $this->getSlaveDb()->quoted($current_user->id);
 
 				$sub_chunk = "{tj}".$split_query[1]."{tj}";
 
@@ -470,27 +470,25 @@ in use by a data set, especially if the data set has the custom layout enabled.
 		//end foreach if column names have changed
 		}
 
-		if($check_bind==true){
-		//check to see if query is attached to data set with custom layout enabled
-			$query = "	SELECT id FROM data_sets
-						WHERE query_id='".$this->id."'
-						AND custom_layout = 'Enabled'
-						AND deleted='0'
-						";
-            $result = $this->getSlaveDb()->query($query, true, "error check custom binding: $query");
-			$GLOBALS['log']->debug("check custom binding: result is ".print_r($result, true));
-            if (($row = $this->getSlaveDb()->fetchByAssoc($result)) == null) {
-			//if($this->db->getRowCount($result) > 0){
-				//data sets exists with this query and custom layout enabled
-				$check_bind=false;
-				//end if rows exist
-			}
-		//end if check_bind is true to even see if there are any data sets with this query
-		}
-
-		return $check_bind;
-
-	//end function check_broken_bind
+        if ($check_bind == true) {
+            //check to see if query is attached to data set with custom layout enabled
+            $query = <<<SQL
+SELECT id FROM data_sets
+WHERE query_id = ?
+AND custom_layout = 'Enabled'
+AND deleted = '0'
+SQL;
+            $dataSetId = $this->getSlaveDb()
+                ->getConnection()
+                ->executeQuery(
+                    $query,
+                    [$this->id]
+                )->fetchColumn();
+            if (false === $dataSetId) {
+                $check_bind = false;
+            }
+        }
+        return $check_bind;
 	}
 
 	function remove_layout($column_name){
@@ -537,60 +535,56 @@ SQL;
 	}
 
 
-	function modify_layout($column_name, $new_column_name){
+    public function modify_layout($column_name, $new_column_name)
+    {
+        $query = <<<SQL
+SELECT dataset_layouts.id 'id'
+FROM dataset_layouts
+LEFT JOIN data_sets ON data_sets.id = dataset_layouts.parent_id
+WHERE data_sets.query_id = ?
+AND dataset_layouts.parent_value = ?
+AND data_sets.custom_layout = 'Enabled'
+AND data_sets.deleted = '0'
+SQL;
+        $stmt = $this->getSlaveDb()
+            ->getConnection()
+            ->executeQuery(
+                $query,
+                [$this->id, $column_name]
+            );
+        foreach ($stmt as $row) {
+            $dataset_object = new DataSet_Layout();
+            $dataset_object->retrieve($row['id']);
+            $dataset_object->parent_value = $new_column_name;
+            $dataset_object->save();
+        }
+    }
 
-		$query = "	SELECT dataset_layouts.id 'id'
-					FROM dataset_layouts
-					LEFT JOIN data_sets ON data_sets.id = dataset_layouts.parent_id
-					WHERE data_sets.query_id = '".$this->id."'
-					AND dataset_layouts.parent_value='".$column_name."'
-					AND data_sets.custom_layout='Enabled'
-					AND data_sets.deleted = '0'
-					";
+    public function add_column_to_layouts($new_column_name)
+    {
+        //find out where this query exists
+        $query = <<<SQL
+SELECT data_sets.id 'parent_id'
+FROM data_sets
+WHERE data_sets.query_id = ?
+AND data_sets.deleted = '0'
+SQL;
 
-        $result = $this->getSlaveDb()->query($query, true, "Error running query modify layout for column");
-		$GLOBALS['log']->debug("check custom binding modify layout: result is ".print_r($result, true));
-		//data sets exists with this query and custom layout enabled
-        while (($row = $this->getSlaveDb()->fetchByAssoc($result)) != null) {
-				$dataset_object = new DataSet_Layout();
-				$dataset_object->retrieve($row['id']);
-				$dataset_object->parent_value = $new_column_name;
-				$dataset_object->save();
-			//end while
-			}
-		//end if rows exist
-		//}
-
-	//end function modify_layout
-	}
-
-	function add_column_to_layouts($new_column_name){
-
-		//find out where this query exists
-		$query = "	SELECT data_sets.id 'parent_id'
-					FROM data_sets
-					WHERE data_sets.query_id = '".$this->id."'
-					AND data_sets.deleted = '0'
-					";
-
-        $result = $this->getSlaveDb()->query($query, true, "Error finding where query exists");
-		$GLOBALS['log']->debug("check custom binding add columns to layout: result is ".print_r($result, true));
-		//data sets exists with this query and custom layout enabled
-        while (($row = $this->getSlaveDb()->fetchByAssoc($result)) != null) {
-				//Get new position
-				$layout_object = new DataSet_Layout();
-				$controller = new Controller();
-				$controller->init($layout_object, "New");
-				$controller->change_component_order("", "", $row['parent_id']);
-				$layout_object->construct($row['parent_id'], "Column", false, "Normal", $new_column_name);
-
-			//end while
-			}
-		//end if rows exist
-		//}
-
-	//end function add_column_to_layouts
-	}
+        $stmt = $this->getSlaveDb()
+            ->getConnection()
+            ->executeQuery(
+                $query,
+                [$this->id]
+            );
+        foreach ($stmt as $row) {
+            //Get new position
+            $layout_object = new DataSet_Layout();
+            $controller = new Controller();
+            $controller->init($layout_object, "New");
+            $controller->change_component_order("", "", $row['parent_id']);
+            $layout_object->construct($row['parent_id'], "Column", false, "Normal", $new_column_name);
+        }
+    }
 
     /**
      * Instantiates and returns slave database connection
@@ -610,5 +604,3 @@ SQL;
 */
 //end class
 }
-
-?>

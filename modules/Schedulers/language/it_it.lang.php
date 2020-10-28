@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Pubblicare gli articoli approvati e gli articoli KB scaduti.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Operazione pianificata',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Ricostruisci dati di sicurezza squadra denormalizzati',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Responsabile ripulitura flusso attività',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervallo:',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Esegui invio notifiche di promemoria tramite posta elettronica',
 'LBL_CLEANJOBQUEUE' => 'Pulisci Coda Job',
 'LBL_CLEANOLDRECORDLISTS' => 'Pulire Vecchi Elenchi',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Responsabile ripulitura flusso attività',
 'LBL_PMSEENGINECRON' => 'Schedulatore SugarBPM',
 );
 

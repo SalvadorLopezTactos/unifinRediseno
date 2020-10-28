@@ -16,6 +16,7 @@ use Sugarcrm\Sugarcrm\Security\Validator\Validator;
 use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Platform as PlatformConstraint;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
+use Sugarcrm\Sugarcrm\Portal\Factory as PortalFactory;
 
 abstract class ServiceBase implements LoggerAwareInterface
 {
@@ -66,8 +67,9 @@ abstract class ServiceBase implements LoggerAwareInterface
 
         // get the currrent person object of interest
         $apiPerson = $GLOBALS['current_user'];
-        if (isset($_SESSION['type']) && $_SESSION['type'] == 'support_portal') {
-            $apiPerson = BeanFactory::getBean('Contacts', $_SESSION['contact_id']);
+        $portalSession = PortalFactory::getInstance('Session');
+        if ($portalSession->isActive()) {
+            $apiPerson = $portalSession->getContact();
         }
         // If they have their own language set, use that instead
         if (isset($apiPerson->preferred_language) && !empty($apiPerson->preferred_language)) {

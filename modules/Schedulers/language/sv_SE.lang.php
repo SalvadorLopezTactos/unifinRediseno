@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicera godkända artiklar och inaktuella kunskapsbas-artiklar.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Schemalagt jobb',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Återskapa denormaliserad gruppsäkerhetsdata',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Rensare för aktivitetsström',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervall:',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Aktivera sändning av email-påminnelser',
 'LBL_CLEANJOBQUEUE' => 'Rensa Upp Job Köer',
 'LBL_CLEANOLDRECORDLISTS' => 'Cleanup gamla postlistor',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Rensare för aktivitetsström',
 'LBL_PMSEENGINECRON' => 'SugarBPM-schemaläggare',
 );
 

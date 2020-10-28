@@ -45,6 +45,9 @@ $viewdefs[$module_name]['EditView'] = array(
         array(
             'follow_up_datetime',
         ),
+        array (
+            'resolved_datetime',
+        ),
     array (
       array('name'=>'name', 'displayParams'=>array('size'=>60)),
     ),

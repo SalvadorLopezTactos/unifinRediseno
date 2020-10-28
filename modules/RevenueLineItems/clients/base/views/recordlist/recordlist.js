@@ -19,6 +19,11 @@
         this.plugins = _.union(this.plugins || [], ['CommittedDeleteWarning']);
         this._super("initialize", [options]);
         this.before('mergeduplicates', this._checkMergeModels, this);
+
+        //Extend the prototype's events object to setup additional events for this controller
+        this.events = _.extend({}, this.events, {
+            'click [name=inline-cancel]': 'cancelClicked'
+        });
     },
 
     /**
@@ -72,6 +77,30 @@
 
         var catalog = this._super('_createCatalog', [fields]);
         return catalog;
+    },
+
+    /**
+     * @inheritdoc
+     *
+     * Tracks the last row where the view was changed to non-edit
+     */
+    toggleRow: function(modelId, isEdit) {
+        this._super('toggleRow', [modelId, isEdit]);
+        if (!isEdit) {
+            this.lastToggledModel = this.collection.get(modelId);
+        }
+    },
+
+    /**
+     * Adds a reverting of model attributes when cancelling an edit view of
+     * a row. This fixes issues with service fields not properly clearing when
+     * cancelling the edit
+     */
+    cancelClicked: function() {
+        if (this.lastToggledModel) {
+            this.lastToggledModel.revertAttributes();
+        }
+        this.resize();
     }
 })
 

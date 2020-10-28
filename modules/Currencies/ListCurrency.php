@@ -208,50 +208,6 @@ EOQ;
 	}
 	return $options;
 	}
-	function getTable(){
-		$this->lookupCurrencies();
-		$usdollar = translate('LBL_US_DOLLAR');
-		$currency = translate('LBL_CURRENCY');
-		$currency_sym = $sugar_config['default_currency_symbol'];
-		$conv_rate = translate('LBL_CONVERSION_RATE');
-		$add = translate('LBL_ADD');
-		$delete = translate('LBL_DELETE');
-		$update = translate('LBL_UPDATE');
-        $module = InputValidation::getService()->getValidInputRequest('module', 'Assert\Mvc\ModuleName', '');
-        $action = InputValidation::getService()->getValidInputRequest('action');
-
-		$form = $html = "<br><table cellpadding='0' cellspacing='0' border='0'  class='tabForm'><tr><td><tableborder='0' cellspacing='0' cellpadding='0'>";
-		$form .= <<<EOQ
-					<form name='DeleteCurrency' action='index.php' method='post'>
-                        <input type='hidden' name='action' value='{$action}'>
-		                <input type='hidden' name='module' value='{$module}'>
-		                <input type='hidden' name='deleteCur' value=''>
-                    </form>
-
-					<tr><td><B>$currency</B></td><td><B>ISO 4217</B>&nbsp;</td><td><B>$currency_sym</B></td><td colspan='2'><B>$conv_rate</B></td></tr>
-					<tr><td>$usdollar</td><td>USD</td><td>$</td><td colspan='2'>1</td></tr>
-					<form name="UpdateCurrency" action="index.php" method="post">
-                        <input type='hidden' name='action' value='{$action}'>
-					    <input type='hidden' name='module' value='{$module}'>
-EOQ;
-		if(isset($this->list ) && !empty($this->list )){
-		foreach ($this->list as $data){
-
-			$form .= '<tr><td>'.$data->iso4217. '<input type="hidden" name="iso[]" value="'.$data->iso4217.'"></td><td><input type="hidden" name="id[]" value="'.$data->id.'">'.$data->name. '<input type="hidden" name="name[]" value="'.$data->name.'"></td><td>'.$data->symbol. '<input type="hidden" name="symbol[]" value="'.$data->symbol.'"></td><td>'.$data->conversion_rate.'&nbsp;</td><td><input type="text" name="rate[]" value="'.$data->conversion_rate.'"><td>&nbsp;<input type="button" name="delete" class="button" value="'.$delete.'" onclick="document.forms[\'DeleteCurrency\'].deleteCur.value=\''.$data->id.'\';document.forms[\'DeleteCurrency\'].submit();"> </td></tr>';
-		}
-		}
-		$form .= <<<EOQ
-					<tr><td></td><td></td><td></td><td></td><td></td><td>&nbsp;<input type='submit' name='Update' value='$update' class='button'></TD></form> </td></tr>
-					<tr><td colspan='3'><br></td></tr>
-					<form name="AddCurrency" action="index.php" method="post">
-					<input type='hidden' name='action' value='{$action}'>
-					<input type='hidden' name='module' value='{$module}'>
-					<tr><td><input type = 'text' name='addname' value=''>&nbsp;</td><td><input type = 'text' name='addiso' size='3' maxlength='3' value=''>&nbsp;</td><td><input type = 'text' name='addsymbol' value=''></td><td colspan='2'>&nbsp;<input type ='text' name='addrate'></td><td>&nbsp;<input type='submit' name='Add' value='$add' class='button'></td></tr>
-					</form></table></td></tr></table>
-EOQ;
-	return $form;
-
-	}
 
 	function setCurrencyFields($fields){
 		$json = getJSONobj();

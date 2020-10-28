@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -584,4 +583,33 @@ Click on the link below to reset your password:
 $contact_user_link_guid',
         'name' => 'Forgot Password email',
         ),
+
+'portal_forgot_password_email_link' => [
+    'name' => 'Portal Forgot Password Email',
+    'subject' => 'Reset your account password',
+    'description' => 'This template is used to send a user a link to click to reset the Portal user\'s account password.',
+    'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>You recently requested to reset your account password. </p><p>Click on the link below to reset your password:</p><p> <a href="$portal_user_link_guid">$portal_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+    'txt_body' =>
+'
+    You recently requested to reset your account password.
+
+    Click on the link below to reset your password:
+
+    $portal_user_link_guid',
+],
+
+    'portal_password_reset_confirmation_email' => [
+        'name' => 'Portal Password Reset Confirmation Email',
+        'subject' => 'Your account password has been reset',
+        'description' => 'This template is used to send a confirmation to a Portal user that their accout password has been reset.',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>This email is to confirm that your Portal account password has been reset. </p><p>Use the link below to log in to the Portal:</p><p> <a href="$portal_login_url">$portal_login_url</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+        'txt_body' =>
+            '
+    This email is to confirm that your Portal account password has been reset.
+
+    Use the link below to log in to the Portal:
+
+    $portal_login_url',
+    ],
+
 );

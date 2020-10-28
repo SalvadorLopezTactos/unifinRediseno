@@ -12,6 +12,8 @@
 
 namespace Sugarcrm\IdentityProvider\App\Listener\Success;
 
+use Psr\Log\LoggerInterface;
+use Sugarcrm\IdentityProvider\Authentication\Audit;
 use Sugarcrm\IdentityProvider\Authentication\User;
 use Sugarcrm\IdentityProvider\Authentication\UserProvider\LocalUserProvider;
 use Sugarcrm\IdentityProvider\App\Authentication\AuthProviderManagerBuilder;
@@ -38,18 +40,37 @@ class UpdateUserAttributesListener
     private $db;
 
     /**
+     * @var string
+     */
+    private $applicationSRN;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * UpdateUserAttributesListener constructor.
      * @param Connection $db
      * @param SessionInterface $session
+     * @param string $applicationSRN
+     * @param LoggerInterface $logger
      */
-    public function __construct(Connection $db, SessionInterface $session)
-    {
+    public function __construct(
+        Connection $db,
+        SessionInterface $session,
+        string $applicationSRN,
+        LoggerInterface $logger
+    ) {
         $this->db = $db;
         $this->session = $session;
+        $this->applicationSRN = $applicationSRN;
+        $this->logger = $logger;
     }
 
     /**
-     * make this class callable
+     * Updates user attributes if they have changed.
+     *
      * @param AuthenticationEvent $event
      * @param string $eventName
      * @param EventDispatcherInterface $dispatcher
@@ -80,7 +101,7 @@ class UpdateUserAttributesListener
 
         $this->getLocalUserProvider()->updateUserAttributes(
             array_merge($localAttr, $user->getAttribute('attributes')),
-            $user->getLocalUser()->getAttribute('id')
+            $localUser
         );
     }
 
@@ -94,6 +115,7 @@ class UpdateUserAttributesListener
     {
         $tenant = $this->session->get(TenantConfigInitializer::SESSION_KEY);
         $tenantId = Converter::fromString($tenant)->getTenantId();
-        return new LocalUserProvider($this->db, $tenantId);
+        $audit = new Audit($this->logger, $tenant, $this->applicationSRN);
+        return new LocalUserProvider($this->db, $tenantId, $this->applicationSRN, $audit);
     }
 }

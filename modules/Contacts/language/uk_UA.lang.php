@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Інформаційна панель списку контактів',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Інформаційна панель записів контактів',
-
+    'LBL_SITE_USER_ID' => 'Хеш параметрів site_url і contact id',
+    'LBL_COOKIE_CONSENT' => 'Згода на використання файлів cookie',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Дата отримання згоди на використання файлів cookie',
     'LNK_CONTACT_REPORTS' => 'Переглянути звіти по контакту',
     'ERR_DELETE_RECORD' => 'Необхідно вказати номер запису, щоб видалити контакт.',
     'LBL_ACCOUNT_ID' => 'Контрагент (ID):',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Інформація на порталі',
     'LBL_PORTAL_NAME' => 'Назва порталу:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Встановлений пароль до порталу:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Назва компанії користувача порталу',
     'LBL_RECORD_SAVED_SUCCESS' => 'Ви успішно створили {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Вулиця',
     'LBL_POSTAL_CODE' => 'Поштовий індекс:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Угоди',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Документи',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Комерційні пропозиції',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Комерційні пропозиції (Фактична адреса)',
     'LBL_QUOTES_BILL_TO' => 'Комерційні пропозиції (Юридична адреса)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Продукти комерційної пропозиції',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Натисніть тут, щоб відредагувати Ваш профіль.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Тут ви можете встановити бажану мову. Зміниться мова, яка використовується Порталом Sugar.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Ви можете повернутися в ваш профіль у будь-який час, використовуючи меню користувача',
+    'ERR_PORTAL_NAME_EXISTS' => 'Ім&#39;я порталу {0} вже існує. Дублювання імен порталів не допускається. Змініть ім&#39;я порталу на унікальне.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Основний Id',
@@ -279,4 +284,8 @@ $mod_strings = array (
     'LBL_FILTER_CONTACTS_REPORTS' => 'Звіти по контактам',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Узгоджені бізнес-цілі',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Останнє оновлення погодження',
+
+    'LBL_ENTRY_SOURCE' => 'Джерело контакту',
+    'LBL_SOURCE_EXTERNAL' => 'Зовнішнє',
+    'LBL_SOURCE_INTERNAL' => 'Внутрішнє',
 );

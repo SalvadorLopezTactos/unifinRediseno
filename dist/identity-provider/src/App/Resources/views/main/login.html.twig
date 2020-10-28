@@ -13,7 +13,7 @@
 {% extends "index-with-alerts.html.twig" %}
 
 {% block content %}
-<div class="thumbnail login">
+<div class="thumbnail login" id="loginFormBox">
     <div class="tcenter">
         {% include 'logo.html.twig' %}
     </div>
@@ -34,17 +34,7 @@
 
     <form name="login" id="submit_section" class="tcenter" method="post" action="{{ path('loginProcess') }}"
           style="display: {{ ssoLogin ? 'none' : 'block' }}">
-        {% if tid %}
-            <input type="hidden" name="tid" value="{{ tid }}">
-        {% endif %}
-        {% if tid is empty %}
-            <div class="control-group">
-            <span class="edit">
-              <input type="text" name="tid" id="tid" value="" placeholder="{{ 'Tenant'|trans }}" class="inherit-width"
-                     aria-label="tenant">
-            </span>
-            </div>
-        {% endif %}
+        <input type="hidden" name="tid" value="{{ tid }}">
         <div class="control-group">
             <span class="edit">
               <input type="text" name="user_name" id="username" value="{{ user_name }}" placeholder="{{ 'User Name'|trans }}"
@@ -69,12 +59,6 @@
         <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token }}">
         <input type="submit" id="submit-from" style="display: none">
     </form>
-    {% if show_sso_button %}
-        <div class="tright login-footer">
-            <a href="{{ path('samlInit') }}" class="btn btn-primary" role="button"
-               name="sso_button" id="sso_btn">{{ 'Single Sign-On'|trans }}</a>
-        </div>
-    {% endif %}
 </div>
 {% endblock %}
 {% block marketing %}

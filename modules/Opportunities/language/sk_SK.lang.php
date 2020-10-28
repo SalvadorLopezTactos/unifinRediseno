@@ -15,6 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Informačný panel so zoznamom príležitostí',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Informačný panel so záznamom príležitostí',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Podrobnosti o príležitosti',
 
     'LBL_MODULE_NAME' => 'Obchodné príležitosti',
     'LBL_MODULE_NAME_SINGULAR' => 'Obchodná príležitosť',
@@ -25,6 +26,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => 'Názov obchodnej príležitosti:',
     'LBL_OPPORTUNITY' => 'Obchodná príležitosť:',
     'LBL_NAME' => 'Názov obchodnej príležitosti:',
+    'LBL_TIME' => 'Čas',
     'LBL_INVITEE' => 'Kontakty',
     'LBL_CURRENCIES' => 'Meny',
     'LBL_LIST_OPPORTUNITY_NAME' => 'Názov',
@@ -75,6 +77,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Typ:',
     'LBL_CAMPAIGN' => 'Kampaň:',
     'LBL_NEXT_STEP' => 'Ďalší krok',
+    'LBL_SERVICE_START_DATE' => 'Service Start Date',
     'LBL_LEAD_SOURCE' => 'Zdroj príležitostí',
     'LBL_SALES_STAGE' => 'Fáza predaja',
     'LBL_SALES_STATUS' => 'Stav',
@@ -142,6 +145,16 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE_FORECAST' => 'Prognóza',
     'LBL_WORKSHEET' => 'Tabuľka',
 
+    'LBL_RENEWAL' => 'Obnovenie',
+    'LBL_RENEWAL_OPPORTUNITIES' => 'Príležitosti obnovenia',
+    'LBL_RENEWAL_PARENT' => 'Nadradená príležitosť',
+    'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'ID nadradeného obnovenia',
+    'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
+
+    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
+    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
+    'LBL_WIDGET_AMOUNT' => 'Amount',
+
     'TPL_RLI_CREATE' => 'Príležitosť musí mať priradenú položku krivky výnosu.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Vytvoriť položku krivky výnosu.',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Položky ponuky',
@@ -152,6 +165,7 @@ $mod_strings = array(
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Nemôžete vymazať príležitosti, ktoré obsahujú uzavreté položky krivky výnosu',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Jeden alebo viac z vybratých záznamov obsahuje uzavreté položky krivky výnosu a nemôže byť odstránený.',
     'LBL_INCLUDED_RLIS' => '# zo zahrnutých položiek krivky výnosu',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Ponuky',
 
@@ -193,7 +207,7 @@ $mod_strings = array(
 
 – Polia tohto záznamu upravíte kliknutím na jednotlivé polia alebo stlačením tlačidla Upraviť.
 – Prepojenia na ďalšie záznamy v podpaneloch možno zobraziť alebo upraviť prepnutím ľavého spodného panelu na „Zobrazenie údajov“.
-– Poznámky používateľa a históriu zmien záznamov môžete upraviť a zobraziť v module {{activitystream_singular_module}} prepnutím ľavého spodného panelu na „Aktivity“.
+– Poznámky používateľa a históriu zmien záznamov môžete vytvoriť a zobraziť v module {{activitystream_singular_module}} prepnutím ľavého spodného panelu na „Aktivity“.
 – Záznam môžete sledovať alebo označiť ako obľúbený pomocou ikon napravo od názvu záznamu.
 – Ďalšie akcie sú k dispozícii v rozbaľovacej ponuke Akcie napravo od tlačidla Upraviť.',
 
@@ -216,4 +230,6 @@ Ak chcete vytvoriť modul {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Zobrazí desať najlepších príležitostí v bublinovom grafe.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Moje príležitosti',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Príležitosti môjho tímu",
+
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
 );

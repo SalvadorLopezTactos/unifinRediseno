@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => 'Användare tilldelad',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Processdesign förhandsvisning',
+    'LBL_PROJECT_RUN_ORDER' => 'Körningsordning',
 );
 

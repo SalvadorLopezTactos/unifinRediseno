@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Offerter (skickas till)',
 	'LNK_ACCOUNT_REPORTS' => 'Organisationsrapporter',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokument',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Listpanel för konton',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Postpanel för konton',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Kontoinformation',
+    'LBL_NEXT_RENEWAL_DATE' => 'Datum för nästa förnyelse',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Kontonamn / bransch',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'Plats',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Diagram',

@@ -79,6 +79,7 @@ class SAMLAuthenticationProviderTest extends PHPUnit_Framework_TestCase
         $this->session = $this->createMock(SessionInterface::class);
         $this->response = $this->createMock(Response::class);
         $this->userMapping = $this->createMock(SAMLUserMapping::class);
+        $this->userMapping->method('map')->willReturn([]);
     }
 
     /**
@@ -490,19 +491,27 @@ class SAMLAuthenticationProviderTest extends PHPUnit_Framework_TestCase
         return [
             'Okta Identity Provider' => [
                 IDMFixturesHelper::getOktaParameters(),
-                ['name_id' => 'email', 'attribute1' => 'title', 'attribute2' => 'department'],
+                'mapping' => [
+                    'name_id' => 'attributes.email',
+                    'attribute1' => 'attributes.title',
+                    'attribute2' => 'attributes.department'
+                ],
                 base64_encode($oktaResponse),
                 ['email' => 'sugarcrm.idm.developer@gmail.com', 'title' => 'Foo', 'department' => 'Bar'],
             ],
             'Onelogin Identity Provider' => [
                 IDMFixturesHelper::getOneLoginParameters(),
-                ['name_id' => 'email', 'attribute1' => 'department'],
+                'mapping' => ['name_id' => 'attributes.email', 'attribute1' => 'attributes.department'],
                 base64_encode($oneLoginResponse),
                 ['email' => 'sugarcrm.idm.developer@gmail.com', 'department' => 'Development'],
             ],
             'ADFS Identity Provider' => [
                 IDMFixturesHelper::getADFSParameters(),
-                ['name_id' => 'email', 'surname' => 'last_name', 'givenname' => 'first_name'],
+                'mapping' => [
+                    'name_id' => 'attributes.email',
+                    'surname' => 'attributes.last_name',
+                    'givenname' => 'attributes.first_name'
+                ],
                 base64_encode($adfsLoginResponse),
                 ['email' => 'sugardeveloper@test.com', 'last_name' => 'Developer', 'first_name' => 'Sugar'],
             ],

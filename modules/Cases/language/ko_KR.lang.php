@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => '사례 목록 대시보드',
     'LBL_CASES_RECORD_DASHBOARD' => '사례 기록 대시보드',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => '케이스 세부사항',
 
 	'ERR_DELETE_RECORD'					=> '거래처를 삭제하시려면 정확한 고유번호를 입력하셔야합니다.',
 	'LBL_ACCOUNT_ID'					=> '거래처 ID',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> '연락처',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> '사례목록',
 	'LBL_DESCRIPTION'					=> '설명',
-	'LBL_FILENANE_ATTACHMENT' 			=> '파일 첨부',	
+    'LBL_FILENANE_ATTACHMENT'           => '파일 첨부',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> '완료된 활동',
 	'LBL_INVITEE'						=> '연락처',
 	'LBL_MEMBER_OF'						=> '거래처',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => '생성자명',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => '담당자명',
     'LBL_EXPORT_TEAM_COUNT' => '팀 카운트',
+    'LBL_CHANGETIMERS' => '타이머 변경',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => '관련된 연락처의 이메일',
@@ -134,4 +137,11 @@ $mod_strings = array (
 - "필수"로표시된 필드는 저장하기 전에완료해야 합니다.
 - 필요한경우추가필드를노출하려면 "더보기"를클릭합니다. 
 2. “저장하기”를 클릭하여 새 기록을 완성하고 이전 페이지로 돌아갑니다.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => '찾는 것을 발견하지 못하셨습니까?',
+    'LBL_CREATE_CASE' => '{{module_name}} 생성하기',
+
+    'LBL_SLA_DETAILS' => 'SLA 세부 사항',
+    'LBL_HOURS' => '시간',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

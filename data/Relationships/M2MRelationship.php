@@ -291,13 +291,11 @@ class M2MRelationship extends SugarRelationship
         {
             if ($lhs->$lhsLinkName instanceof Link2)
             {
-                $lhs->$lhsLinkName->load();
                 $this->callBeforeDelete($lhs, $rhs, $lhsLinkName);
             }
 
             if ($rhs->$rhsLinkName instanceof Link2)
             {
-                $rhs->$rhsLinkName->load();
                 $this->callBeforeDelete($rhs, $lhs, $rhsLinkName);
             }
         }
@@ -317,13 +315,11 @@ class M2MRelationship extends SugarRelationship
         {
             if ($lhs->$lhsLinkName instanceof Link2)
             {
-                $lhs->$lhsLinkName->load();
                 $this->callAfterDelete($lhs, $rhs, $lhsLinkName);
             }
 
             if ($rhs->$rhsLinkName instanceof Link2)
             {
-                $rhs->$rhsLinkName->load();
                 $this->callAfterDelete($rhs, $lhs, $rhsLinkName);
             }
         }

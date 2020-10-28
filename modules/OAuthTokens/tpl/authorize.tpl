@@ -15,7 +15,6 @@
 <input type='hidden' name='action' value='authorize'/>
 <input type='hidden' name='module' value='OAuthTokens'/>
 <input type='hidden' name='sid' value='{$sid}'/>
-<input type='hidden' name='hash' value='{$hash}'/>
 <input type='hidden' name='confirm' value='1'/>
 
 {$consumer}<br/>

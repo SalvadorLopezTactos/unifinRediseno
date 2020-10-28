@@ -55,7 +55,7 @@ abstract class AppFlowTest extends WebTestCase
                 'env' => Application::ENV_TESTS,
             ]
         );
-        $app->getSession()->set('tenant', 'srn:cloud:idp:eu:0000000001:tenant:0000000001');
+        $app->getSession()->set('tenant', 'srn:cloud:idp:eu:2000000001:tenant:2000000001');
         $tenantConfiguration = $this->getMockBuilder(TenantConfiguration::class)
             ->disableOriginalConstructor()
             ->setMethods(['get'])

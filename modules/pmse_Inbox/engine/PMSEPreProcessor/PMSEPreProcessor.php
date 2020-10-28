@@ -13,6 +13,7 @@
 
 use Sugarcrm\Sugarcrm\ProcessManager;
 use Sugarcrm\Sugarcrm\ProcessManager\Registry;
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 class PMSEPreProcessor
 {
@@ -21,6 +22,11 @@ class PMSEPreProcessor
      * @var type
      */
     private static $instance;
+
+    /**
+     * @var array
+     */
+    protected $executedFlowIds;
 
     /**
      *
@@ -69,6 +75,7 @@ class PMSEPreProcessor
         $this->validator = ProcessManager\Factory::getPMSEObject('PMSEValidator');
         $this->caseFlowHandler = ProcessManager\Factory::getPMSEObject('PMSECaseFlowHandler');
         $this->logger = PMSELogger::getInstance();
+        $this->executedFlowIds = [];
     }
 
     /**
@@ -181,7 +188,7 @@ class PMSEPreProcessor
      * Sets subject data into the registry so that the bean save call can use it
      * @param array $flowData
      */
-    private function setSubjectData(array $flowData)
+    protected function setSubjectData(array $flowData)
     {
         // Store prj_id, pro_id, bpmn_id and bpmn_type in the registry for later
         // use. prj_id is only set in flowData that comes from getAllEvents, so
@@ -240,6 +247,14 @@ class PMSEPreProcessor
         if ($request->getExternalAction() == 'TERMINATE_CASE') {
             $result = $this->terminateCaseByBeanAndProcess($request->getBean());
         } else {
+            // Needed for license management overrides. This should be done before
+            // any data is collected for process management
+            $acm = AccessControlManager::instance();
+            $isAdminWork = $acm->getAdminWork();
+            if ($isAdminWork !== true) {
+                $acm->setAdminWork(true, true);
+            }
+
             // Now handle actual processing of the request
             $flowDataList = $this->getFlowDataList($request);
 
@@ -251,8 +266,7 @@ class PMSEPreProcessor
                 // Massage the flow data for required elements first
                 $flowData = $this->processFlowData($flowData);
 
-                // For handling Security Subject saving later on
-                $this->setSubjectData($flowData);
+
 
                 // Make sure we start fresh each time with validation and such
                 $request->reset();
@@ -267,6 +281,23 @@ class PMSEPreProcessor
                         // This should maybe mark the flow as completed or something
                         // since this flow will now live on in perpetuity. For now
                         // this is ok as realistically, this should never be the case
+                        continue;
+                    }
+                }
+
+                // Special Case Handling
+                // Trigger processes for
+                // 1) record imports
+                // 2) multiple start events
+                // 3) as per the run order - we need to make sure we don't revisit a process definition
+                // and trigger a process, if its run_order value is out of order,
+                // for instance, P1, P2, P3 criteria is checked and only P1 and P3 pass the criteria then
+                // we shouldn't go back and trigger P2 even if later on P3 updates
+                // the record and satisfies the criteria for P2
+
+                $eventId = $flowData['evn_id'];
+                if (isset($this->executedFlowIds[$bean->id])) {
+                    if ($flowData['evn_type'] === 'START' && in_array($eventId, $this->executedFlowIds[$bean->id])) {
                         continue;
                     }
                 }
@@ -303,6 +334,9 @@ class PMSEPreProcessor
                         $exExternalAction = $validatedRequest->getExternalAction();
                         $exArguments = $validatedRequest->getArguments();
 
+                        // For handling Security Subject accounting later on
+                        $this->setSubjectData($exFlowData);
+
                         // Run the executer and capture the result
                         $res = $this->executer->runEngine(
                             $exFlowData,
@@ -336,11 +370,23 @@ class PMSEPreProcessor
                 if ($request->getResult() == 'TERMINATE_CASE') {
                     $result = $this->terminateCaseByBeanAndProcess($request->getBean(), $data);
                 }
+
+                // Store project id if this flow's project has its "Run Order" set, so we don't trigger this process
+                // on future save.
+                if (is_int($flowData['prj_run_order'])) {
+                    $this->executedFlowIds[$bean->id][] = $eventId;
+                }
             }
 
             // Clear validator caches AFTER the loop completes so that the cache
             // is clear for future iterations
             $this->validator->clearValidatorCaches();
+
+            // Reset the admin flag on the access control manager if it needs it.
+            // This should be done at the very end of process management.
+            if ($isAdminWork !== true) {
+                $acm->setAdminWork(false, true);
+            }
         }
 
         return $result;
@@ -511,8 +557,15 @@ class PMSEPreProcessor
 
     /**
      * Optimized version of get all events method.
+     *
+     * Gets BPM Events related to the bean argument. Events are sorted by
+     * 1. bpm_project.prj_run_order (Process Definition Run Order) with nulls last
+     * 2. rd.evn_params (Events that trigger the process) in order New, Updates, rest
+     * 3. rd.date_entered (Datetime the Process Definition was created) oldest -> newest
+     *
      * @param SugarBean $bean
      * @return array
+     * @throws \Doctrine\DBAL\DBALException
      */
     public function getAllEvents(SugarBean $bean)
     {
@@ -555,7 +608,7 @@ class PMSEPreProcessor
             rd.pro_locked_variables, rd.pro_terminate_variables, rd.date_entered,
             flow.id, flow.cas_id, flow.cas_index, flow.bpmn_id, flow.bpmn_type,
             flow.cas_user_id, flow.cas_thread, flow.cas_sugar_module,
-            flow.cas_sugar_object_id, flow.cas_flow_status
+            flow.cas_sugar_object_id, flow.cas_flow_status, prj.prj_run_order
         FROM
             pmse_bpm_related_dependency rd
         LEFT JOIN
@@ -565,6 +618,10 @@ class PMSEPreProcessor
                 flow.cas_flow_status='WAITING' AND
                 flow.cas_sugar_object_id IN (?) AND
                 flow.deleted = 0
+        LEFT JOIN
+            pmse_project prj
+            ON
+                rd.prj_id = prj.id
         WHERE
             rd.deleted = 0 AND rd.pro_status != 'INACTIVE' AND (
                 (
@@ -584,6 +641,12 @@ class PMSEPreProcessor
                 )
             )
             ORDER BY (
+                CASE 
+                WHEN prj.prj_run_order IS NULL
+                THEN 1
+                ELSE 0
+                END
+            ) ASC, prj.prj_run_order ASC, (
                 CASE $evnParamsChar
                 WHEN 'new' THEN 1
                 WHEN 'updated' THEN 2
@@ -735,5 +798,4 @@ class PMSEPreProcessor
 
         return $bean;
     }
-
 }

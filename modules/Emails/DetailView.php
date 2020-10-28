@@ -216,7 +216,7 @@ if ($focus->type=='campaign' and !empty($_REQUEST['parent_id']) and !empty($_REQ
         $campaign_data=$row['campaign_data'];
         $macro_values=array();
         if (!empty($campaign_data)) {
-            $macro_values=unserialize(from_html($campaign_data));
+            $macro_values = unserialize(from_html($campaign_data), ['allowed_classes' => false]);
         }
 
         if (count($macro_values) > 0) {

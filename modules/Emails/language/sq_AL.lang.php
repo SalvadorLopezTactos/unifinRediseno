@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'Emailet:Kontaktet',
     'LBL_EMAILS_LEADS_REL' => 'Emailet:Udhëheqjet',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'Emailet:Mundësitë',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'Emailet:Shënimet',
     'LBL_EMAILS_PROJECT_REL' => 'Emailet:Projektet',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'Emailet:detyrat projektuese',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'nga',
     'LBL_REPLY_TO' => 'Përgjigju:',
     'LBL_HTML_BODY' => 'HTML trupi',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'Pranuesit',
     'LBL_LEADS_SUBPANEL_TITLE' => 'udhëheqjet',
     'LBL_MESSAGE_SENT' => 'Mesazhi u dërgua',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'Përgjigjju identifikuesit',
     'LBL_TYPE' => 'Lloji',
     'LBL_EMAIL_STATE' => 'Gjendja',
+    'LBL_EMAIL_DIRECTION' => 'Drejtimi',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'Ju lutemi kontrolloni!',

@@ -43,9 +43,11 @@ class AuthenticationController
             'password' => $request->get('password'),
             'tenant' => $request->get('tid'),
         ];
+        $dataToLog = $data;
+        $dataToLog['password'] = '***obfuscated***';
 
         $app->getLogger()->debug('Validation auth user request', [
-            'data' => $data,
+            'data' => $dataToLog,
             'tags' => ['IdM.rest.authentication'],
         ]);
         $constraint = new Assert\Collection([
@@ -75,10 +77,14 @@ class AuthenticationController
                 $data['user_name'],
                 $data['password']
             )->createAuthenticationToken();
-            $app->getLogger()->info('Authentication token for user:{user_name}', [
-                'user_name' => $token->getUsername(),
-                'tags' => ['IdM.rest.authentication'],
-            ]);
+            $app->getLogger()->info(
+                'Trying to authenticate user {user_name} in tenant {tenant}',
+                [
+                    'user_name' => $token->getUsername(),
+                    'tenant' => Srn\Converter::toString($tenantSrn),
+                    'tags' => ['IdM.rest.authentication'],
+                ]
+            );
             $token = $app->getAuthManagerService()->authenticate($token);
             /** @var User $localUser */
             $localUser = $token->getUser()->getLocalUser();
@@ -88,7 +94,7 @@ class AuthenticationController
                 $userIdentity
             );
 
-            $claims = $app->getOIDCClaimsService()->getUserClaims($localUser);
+            $claims = $app->getOIDCClaimsService()->getUserClaims($localUser, ['profile', 'email', 'address', 'phone']);
             $claims['tid'] = Srn\Converter::toString($tenantSrn);
 
             $result = [
@@ -98,31 +104,51 @@ class AuthenticationController
                     'id_ext' => $claims,
                 ],
             ];
-            $app->getLogger()->info('Authentication success for {user_name} and {tenant} from {ip}', [
-                'user_name' =>  Srn\Converter::toString($userSrn),
-                'tenant' => Srn\Converter::toString($tenantSrn),
-                'ip' => $request->getClientIp(),
-                'tags' => ['IdM.rest.authentication'],
-            ]);
+            $app->getLogger()->info(
+                'Authentication success for user {user_name} with SRN {user_srn} in tenant {tenant} from {ip}',
+                [
+                    'user_name' => $token->getUsername(),
+                    'user_srn' => Srn\Converter::toString($userSrn),
+                    'tenant' => Srn\Converter::toString($tenantSrn),
+                    'ip' => $request->getClientIp(),
+                    'tags' => ['IdM.rest.authentication'],
+                    'event' => 'after_login',
+                ]
+            );
             return new JsonResponse($result);
         } catch (BadCredentialsException $e) {
-            $app->getLogger()->notice('Bad credentials occurred for user:{user_name}', [
-                'user_name' => $data['user_name'],
-                'tags' => ['IdM.rest.authentication'],
-            ]);
+            $app->getLogger()->notice(
+                'Bad credentials occurred for user {user_name} with SRN {user_srn} in tenant {tenant}',
+                [
+                    'user_name' => $data['user_name'],
+                    'user_srn' => isset($userSrn) ? Srn\Converter::toString($userSrn) : 'unknown',
+                    'tenant' => isset($tenantSrn) ? Srn\Converter::toString($tenantSrn) : 'invalid',
+                    'tags' => ['IdM.rest.authentication'],
+                    'event' => 'login_failed',
+                ]
+            );
             return $this->getUnauthorizedResponse('Invalid credentials');
         } catch (AuthenticationException $e) {
-            $app->getLogger()->warning('Authentication Exception occurred for user:{user_name}', [
-                'user_name' => $data['user_name'],
-                'exception' => $e,
-                'tags' => ['IdM.rest.authentication'],
-            ]);
+            $app->getLogger()->warning(
+                'Authentication Exception occurred for user {user_name} with SRN {user_srn} in tenant {tenant}',
+                [
+                    'user_name' => $data['user_name'],
+                    'user_srn' => isset($userSrn) ? Srn\Converter::toString($userSrn) : 'unknown',
+                    'tenant' => isset($tenantSrn) ? Srn\Converter::toString($tenantSrn) : 'invalid',
+                    'exception' => $e,
+                    'tags' => ['IdM.rest.authentication'],
+                    'event' => 'login_failed',
+                ]
+            );
             return $this->getUnauthorizedResponse($e->getMessage());
         } catch (\Exception $e) {
-            $app->getLogger()->error('Exception occurred for user:{user_name}', [
+            $app->getLogger()->error('Exception occurred for user {user_name} with SRN {user_srn} in tenant {tenant}', [
                 'user_name' => $data['user_name'],
+                'user_srn' => isset($userSrn) ? Srn\Converter::toString($userSrn) : 'unknown',
+                'tenant' => isset($tenantSrn) ? Srn\Converter::toString($tenantSrn) : 'invalid',
                 'exception' => $e,
                 'tags' => ['IdM.rest.authentication'],
+                'event' => 'login_failed',
             ]);
             return $this->getUnauthorizedResponse('APP ERROR: ' . $e->getMessage());
         }

@@ -11,6 +11,8 @@
  */
 
 require_once 'data/SugarACLStrategy.php';
+use Sugarcrm\Sugarcrm\ProcessManager\Registry;
+
 
 class SugarACLOutboundEmail extends SugarACLStrategy
 {
@@ -20,6 +22,11 @@ class SugarACLOutboundEmail extends SugarACLStrategy
     public function checkAccess($module, $view, $context)
     {
         if (in_array($view, ['access', 'team_security'])) {
+            return true;
+        }
+
+        // SugarBPM ignores ACLs for OutboundEmail accounts
+        if (Registry\Registry::getInstance()->get('bpm_request') === true) {
             return true;
         }
 

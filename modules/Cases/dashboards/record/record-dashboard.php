@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-return array(
+return [
     'metadata' =>
     array(
         'components' =>
@@ -43,4 +43,5 @@ return array(
         ),
     ),
     'name' => 'LBL_CASES_RECORD_DASHBOARD',
-);
+    'id' => '5d672260-7b52-11e9-93ba-f218983a1c3e',
+];

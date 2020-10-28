@@ -132,8 +132,6 @@ EOQ;
 echo $out;
 installLog("calling handleSugarConfig()");
 $bottle = handleSugarConfig();
-installLog("calling handleLog4Php()");
-handleLog4Php();
 
 $server_software = $_SERVER["SERVER_SOFTWARE"];
 if (strpos($server_software, 'Microsoft-IIS') !== false) {
@@ -202,11 +200,6 @@ $nonStandardModules = array(//'Tracker',
 Activity::disable();
 // Disable processes for the time being
 Registry\Registry::getInstance()->set('setup:disable_processes', true);
-//If this is MIcrosoft install and FTS is enabled, then fire index wake up method to prime the indexing service.
-if ($db->supports('fulltext') && $db->full_text_indexing_installed()) {
-    installLog("Enabling fulltext indexing");
-    $db->full_text_indexing_setup();
-}
 
 /**
  * loop through all the Beans and create their tables
@@ -308,6 +301,9 @@ foreach ($rel_dictionary as $rel_name => $rel_data) {
     }
 }
 
+// write init product definition
+(new \Sugarcrm\Sugarcrm\ProductDefinition\Config\InitProductDefinition())->setDefaultProductDefinition();
+
 // Setup the relationship cache and build out the initial vardef cache
 SugarRelationshipFactory::rebuildCache();
 
@@ -354,6 +350,12 @@ $forecast_config = ForecastsDefaults::setupForecastSettings();
 $opps_config = OpportunitiesDefaults::setupOpportunitiesSettings();
 
 unset($opps_config);
+
+//Install Tile View configuration
+$visualPipelineConfig = VisualPipelineDefaults::setupPipelineSettings();
+
+// Install Console Configuration settings
+$consoleConfig = ConsoleConfigurationDefaults::setupConsoleConfigurationSettings();
 
 installerHook('pre_createUsers');
 if ($new_tables) {
@@ -458,6 +460,7 @@ $disabledTabs = array(
     "contracts",
     "revenuelineitems",
     "dataprivacy",
+    'changetimers',
 );
 
 installerHook('pre_setHiddenSubpanels');
@@ -485,6 +488,7 @@ $enabled_tabs[] = 'Tasks';
 $enabled_tabs[] = 'Notes';
 $enabled_tabs[] = 'Forecasts';
 $enabled_tabs[] = 'Cases';
+$enabled_tabs[] = 'ProductTemplates';
 $enabled_tabs[] = 'Prospects';
 $enabled_tabs[] = 'ProspectLists';
 $enabled_tabs[] = 'Tags';
@@ -492,6 +496,7 @@ $enabled_tabs[] = 'pmse_Project';
 $enabled_tabs[] = 'pmse_Inbox';
 $enabled_tabs[] = 'pmse_Business_Rules';
 $enabled_tabs[] = 'pmse_Emails_Templates';
+$enabled_tabs[] = 'BusinessCenters';
 
 if ($_SESSION['demoData'] != 'no') {
     $enabled_tabs[] = 'Bugs';
@@ -535,7 +540,6 @@ $rm->invokeArgs($converter, array('RevenueLineItems'));
 
 // Create default dashboards
 installLog('creating default dashboards');
-require_once 'modules/Dashboards/DefaultDashboardInstaller.php';
 $defaultDashboardInstaller = new DefaultDashboardInstaller();
 global $moduleList;
 $defaultDashboardInstaller->buildDashboardsFromFiles($moduleList);
@@ -600,7 +604,6 @@ if (isset($_SESSION['INSTALLED_LANG_PACKS']) && ArrayFunctions::is_array_access(
 ) {
     updateUpgradeHistory();
 }
-
 
 
 require_once('modules/Connectors/InstallDefaultConnectors.php');
@@ -706,7 +709,7 @@ MetaDataManager::setupMetadata(array('base'), array('en_us'));
 
 // TODO: Remove the following. (See MAR-1314)
 // Restore the activity stream behaviour.
-Activity::enable();
+Activity::restoreToPreviousState();
 // Allow processes to resume at this point
 Registry\Registry::getInstance()->drop('setup:disable_processes');
 installerHook('post_performSetup');

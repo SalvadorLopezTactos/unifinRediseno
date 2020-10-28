@@ -65,6 +65,12 @@ $mod_strings = array (
   'LBL_DOMAIN'=>'没有电子邮件的域',
   'LBL_LIST_PROSPECTLIST_NAME'=>'名称',
 	'LBL_MORE_DETAIL' => '更多细节' /*for 508 compliance fix*/,
+    'LBL_ACCOUNTS' => '帐户',
+    'LBL_CAMPAIGNS' => '市场活动',
+    'LBL_CONTACTS' => '联系人',
+    'LBL_LEADS' => '潜在客户',
+    'LBL_PROSPECTS' => '目标',
+    'LBL_USERS' => '用户',
 
     // Help Text
     // List View Help Text

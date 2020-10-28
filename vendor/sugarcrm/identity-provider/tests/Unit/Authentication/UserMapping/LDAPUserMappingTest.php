@@ -88,6 +88,51 @@ class LDAPUserMappingTest extends \PHPUnit_Framework_TestCase
                     'first_name' => 'Foo',
                 ],
             ],
+            'Mapping and Entry all match with more then one depth' => [
+                [
+                    'l' => 'city',
+                    'sn' => 'attr.last_name',
+                    'cn' => 'attr.first_name',
+                ],
+                new Entry('foo', ['cn' => 'Foo', 'sn' => 'Bobby', 'l' => 'New York']),
+                [
+                    'attr' => [
+                        'last_name' => 'Bobby',
+                        'first_name' => 'Foo',
+                    ],
+                    'city' => 'New York',
+                ],
+            ],
+            'Mapping and Entry all match with more then one depth with custom_attributes' => [
+                [
+                    'l' => 'city',
+                    'sn' => 'attr.last_name',
+                    'cn' => 'attr.first_name',
+                    'title' => 'custom_attributes.title',
+                    'customAddr' => 'custom_attributes.addr.street',
+                ],
+                new Entry(
+                    'foo',
+                    [
+                        'cn' => 'Foo',
+                        'sn' => 'Bobby',
+                        'l' => 'New York',
+                        'title' => 'Senior Account Rep',
+                        'customAddr' => 'Wall Street',
+                    ]
+                ),
+                [
+                    'attr' => [
+                        'last_name' => 'Bobby',
+                        'first_name' => 'Foo',
+                    ],
+                    'city' => 'New York',
+                    'custom_attributes' => [
+                      ['name' => 'title', 'value' => 'Senior Account Rep'],
+                      ['name' => 'addr.street', 'value' => 'Wall Street'],
+                    ],
+                ],
+            ],
         ];
     }
 

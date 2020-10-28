@@ -32,12 +32,12 @@ class ConsentRestService implements ConsentTokenServiceInterface
             ],
         ],
         'single' => [
-            'offline' => 'Access all of the above information at any time',
-            'profile' => 'View your Sugar user profile which includes first name and last name',
-            'openid' => 'Authenticate using OpenID Connect',
             'https://apis.sugarcrm.com/auth/crm' => 'View and update any Sugar data (Accounts, Contacts, Leads, etc.)'
                 . ' that you are permitted to access',
+            'profile' => 'View your Sugar profile which includes first and last name',
             'https://apis.sugarcrm.com/auth/iam' => 'View and manage your Identity and Access Management (IAM) objects',
+            'openid' => 'Authenticate using OpenID Connect',
+            'offline' => 'Access all the above information at any time',
         ],
     ];
 
@@ -98,6 +98,17 @@ class ConsentRestService implements ConsentTokenServiceInterface
             }
         }
         $mappedScopes = array_values($mappedScopes);
+
+        $singleMapping = array_keys(self::SCOPE_MAPPING['single']);
+
+        // Sorting scopes in specific order for output
+        uksort(
+            $scopes,
+            function ($a, $b) use ($singleMapping) {
+                return array_search($a, $singleMapping) - array_search($b, $singleMapping);
+            }
+        );
+
         foreach ($scopes as $scope => $value) {
             $mappedScopes[] = array_key_exists($scope, self::SCOPE_MAPPING['single'])
                 ? $this->translator->trans(self::SCOPE_MAPPING['single'][$scope]) : $scope;

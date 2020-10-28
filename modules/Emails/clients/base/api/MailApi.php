@@ -11,6 +11,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\File;
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
+use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\ViolationException;
+
 class MailApi extends ModuleApi
 {
     /*-- API Argument Constants --*/
@@ -744,9 +748,15 @@ class MailApi extends ModuleApi
         $fileGUID = $args['file_guid'];
         $fileName = $email->et->userCacheDir . "/" . $fileGUID;
         $filePath = clean_path($fileName);
-        if (file_exists($filePath)) {
-            unlink($filePath);
+        $fileConstraint = new File([
+            'baseDirs' => [realpath($email->et->userCacheDir)],
+        ]);
+        $violations = Validator::getService()->validate($filePath, $fileConstraint);
+        if ($violations->count()) {
+            throw new ViolationException('Invalid mail attachment file path', $violations);
         }
+
+        unlink($filePath);
         return true;
     }
 

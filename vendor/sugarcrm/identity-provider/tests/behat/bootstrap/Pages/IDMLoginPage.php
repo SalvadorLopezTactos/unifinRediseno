@@ -20,6 +20,7 @@ class IDMLoginPage extends AbstractPage
     protected $passwordCss = "input#password";
     protected $logInCss = "a#submit_btn";
     protected $allowAccessCss = "a#consent_continue_btn";
+    protected $showLoginFormCss = "a#show_login_form_btn";
 
     public function login($tid, $username, $password)
     {
@@ -33,6 +34,11 @@ class IDMLoginPage extends AbstractPage
         if (!$this->getAttributeValue($this->tidCss, 'type') == 'hidden') {
             $this->waitElementByCss($this->tidCss, self::DEFAULT_TIMEOUT);
             $this->sendKeysByCss($this->tidCss, $tid);
+        }
+        // If tenant is configured with SAML provider along with Local, SAML form is always shown the first.
+        // We need to switch to local/LDAP login-form
+        if ($this->doesCssElementExist($this->showLoginFormCss)) {
+            $this->clickByCss($this->showLoginFormCss);
         }
         $this->sendKeysByCss($this->usernameCss, $username);
         $this->sendKeysByCss($this->passwordCss, $password);

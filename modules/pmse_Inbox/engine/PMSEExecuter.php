@@ -544,6 +544,7 @@ class PMSEExecuter
         }
         $endTime = microtime(true);
         $executionResult['elapsed_time'] = $endTime - $startTime;
+        PMSEEngineUtils::dropRegistry();
         return $executionResult;
     }
 

@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'Statusi',
   'LBL_PRJ_MODULE' => 'Moduli i synimit',
+  'LBL_PRJ_RUN_ORDER' => 'Ekzekuto porosinë',
   'LBL_PMSE_BUTTON_SAVE' => 'Ruaj',
   'LBL_PMSE_BUTTON_CANCEL' => 'Anulo',
   'LBL_PMSE_BUTTON_YES' => 'Po',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Përcaktimi i procesit është importuar por përmban një ose më shumë veprime të rregullit të biznesit për të cilin nuk janë zgjedhur rregullat e biznesit.',
     'LBL_BPM_IMPORT_SELECT' => 'Përcaktimi i procesit përmban rregullat e biznesit dhe shabllonet e mëposhtme të emailit. '
         . 'Zgjidh ato që dëshiron të importosh.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'Rregullat e biznesit',
     'LBL_EMAIL_TEMPLATES' => 'Shabllonet e emailit',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'Mbikëqyrës',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Krijuar nga përdoruesi',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Modifikuar së fundmi nga përdoruesi',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Emaili i sistemit',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Rregulla biznesi',
     'LBL_PMSE_LABEL_RULE' => 'Rregulla',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Përdorues i caktuar',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Përditëso "Caktuar te" në regjistrim',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Shto regjistrim të lidhur',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Modul i lidhur',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Emri i aktivitetit është i zbrazur.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Emri "%s" vetëm se ekziston në familjen e formave.',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'Ditët',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'orët',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'minutat',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'orari i punës',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'Qendra e biznesit',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'Nga moduli i synuar',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'Nga ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' Moduli',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'Varg, numër dhe boolean',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'Numri',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'Vlera',

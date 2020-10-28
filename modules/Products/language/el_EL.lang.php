@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'Επαφή',
     'LBL_DISCOUNT_TOTAL' => 'Σύνολο Έκπτωσης',
     'LBL_DISCOUNT_AMOUNT' => 'Ποσό Έκπτωσης',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'Αξία έκπτωσης ποσού',
     'LBL_EXT_PRICE' => 'Εξωτ.Τιμή',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Όνομα Συμβόλου Νομίσματος',

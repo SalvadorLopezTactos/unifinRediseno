@@ -48,6 +48,7 @@ $vardefs = array(
             'studio' => false,
             'isnull' => true,
             'duplicate_on_record_copy' => 'always',
+            'reportable' => false,
         ),
 		'team_count' =>
 		array (

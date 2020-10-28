@@ -1,4 +1,5 @@
 <?php
+
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
@@ -12,14 +13,16 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 if($GLOBALS['sugar_config']['disable_export'] || (!empty($GLOBALS['sugar_config']['admin_export_only']) && !is_admin($current_user))){
-	die("Exports Disabled");
+    die("Exports Disabled");
 }
-
-$export_object = BeanFactory::getBean('DataSets', $_REQUEST['record']);
+$export_object = BeanFactory::retrieveBean('DataSets', $_REQUEST['record']);
+if ($export_object === null) {
+    sugar_die($app_strings['ERROR_NO_RECORD']);
+}
 $csv_output = $export_object->export_csv();
-
+$module = $export_object->getModuleName();
 header("Pragma: cache");
-header("Content-Disposition: inline; filename={$_REQUEST['module']}.csv");
+header("Content-Disposition: inline; filename={$module}.csv");
 header("Content-Type: text/csv; charset=UTF-8");
 header( "Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
 header("Last-Modified: " . TimeDate::httpTime() );
@@ -28,4 +31,3 @@ header("Content-Length: ".strlen($csv_output));
 print $csv_output;
 sugar_cleanup();
 exit;
-?>

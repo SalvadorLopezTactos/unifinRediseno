@@ -37,7 +37,6 @@
 		CAL.items_resizable = "{$items_resizable}";
 		CAL.cells_per_day = {$cells_per_day};	
 		CAL.current_params = {literal}{}{/literal};
-		CAL.dashlet = "{$dashlet}";		
 		CAL.grid_start_ts = {$grid_start_ts};
 		CAL.scroll_slot = {$scroll_slot};
 		CAL.basic.min_height = {$basic_min_height};

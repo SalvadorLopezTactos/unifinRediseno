@@ -16,6 +16,8 @@ use Doctrine\DBAL\Connection;
 use Sugarcrm\IdentityProvider\App\Authentication\ConfigAdapter\AbstractConfigAdapter;
 use Sugarcrm\IdentityProvider\App\Authentication\ConfigAdapter\ConfigAdapterFactory;
 use Sugarcrm\IdentityProvider\Srn\Srn;
+use Sugarcrm\IdentityProvider\App\Repository\Exception\TenantNotActiveException;
+use Sugarcrm\IdentityProvider\App\Repository\Exception\TenantNotExistsException;
 use Sugarcrm\IdentityProvider\Authentication\Tenant;
 
 /**
@@ -88,11 +90,11 @@ class TenantConfiguration
         $list = $qb->execute()->fetchAll(\PDO::FETCH_ASSOC);
 
         if (0 == count($list)) {
-            throw new \RuntimeException('Tenant not exists or deleted');
+            throw new TenantNotExistsException('Tenant not found');
         }
 
         if ($list[0]['status'] != Tenant::STATUS_ACTIVE) {
-            throw new \RuntimeException('Tenant isn\'t active');
+            throw new TenantNotActiveException('Tenant isn\'t active');
         }
 
         return $this->normalize($list);

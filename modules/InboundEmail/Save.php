@@ -62,11 +62,12 @@ else
 /////////////////////////////////////////////////////////
 ////	SERVICE STRING CONCATENATION
 $useSsl = (isset($_REQUEST['ssl']) && $_REQUEST['ssl'] == 1) ? true : false;
-$optimum = $focus->getSessionConnectionString($focus->server_url, $focus->email_user, $focus->port, $focus->protocol);
+$remoteSystemName = RemoteSystemName::fromString($focus->server_url);
+$optimum = $focus->getSessionConnectionOptions($remoteSystemName, $focus->email_user, $focus->port, $focus->protocol);
 if (empty($optimum)) {
-	$optimum = $focus->findOptimumSettings($useSsl, $focus->email_user, $focus->email_password, $focus->server_url, $focus->port, $focus->protocol, $focus->mailbox);
+    $optimum = $focus->findOptimumSettings($useSsl, $focus->email_user, $focus->email_password, $remoteSystemName, $focus->port, $focus->protocol, $focus->mailbox);
 } // if
-$delimiter = $focus->getSessionInboundDelimiterString($focus->server_url, $focus->email_user, $focus->port, $focus->protocol);
+$delimiter = $focus->getSessionInboundDelimiterString($remoteSystemName, $focus->email_user, $focus->port, $focus->protocol);
 
 //added check to ensure the $optimum['serial']) is not empty.
 if (ArrayFunctions::is_array_access($optimum) && (count($optimum) > 0) && !empty($optimum['serial'])) {

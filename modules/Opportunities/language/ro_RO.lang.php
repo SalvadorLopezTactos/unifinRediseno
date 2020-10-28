@@ -15,6 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Tabloul de bord Listă oportunități',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare oportunități',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Detalii oportunitate',
 
     'LBL_MODULE_NAME' => 'Oportunităţi',
     'LBL_MODULE_NAME_SINGULAR' => 'Oportunitate',
@@ -25,6 +26,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => 'Nume Oportunitate:',
     'LBL_OPPORTUNITY' => 'Oportunitati',
     'LBL_NAME' => 'Nume Oportunitate:',
+    'LBL_TIME' => 'Timp',
     'LBL_INVITEE' => 'Contacte',
     'LBL_CURRENCIES' => 'Valute',
     'LBL_LIST_OPPORTUNITY_NAME' => 'Nume',
@@ -75,6 +77,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Tip:',
     'LBL_CAMPAIGN' => 'Campanie',
     'LBL_NEXT_STEP' => 'Următorul pas:',
+    'LBL_SERVICE_START_DATE' => 'Service Start Date',
     'LBL_LEAD_SOURCE' => 'Sursa principala',
     'LBL_SALES_STAGE' => 'Sadiul Vanzarilor',
     'LBL_SALES_STATUS' => 'Status',
@@ -142,6 +145,16 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE_FORECAST' => 'Previziune',
     'LBL_WORKSHEET' => 'Foaie de lucru',
 
+    'LBL_RENEWAL' => 'Reînnoire',
+    'LBL_RENEWAL_OPPORTUNITIES' => 'Oportunități de reînnoire',
+    'LBL_RENEWAL_PARENT' => 'Oportunitate principală',
+    'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'Reînnoire ID părinte',
+    'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
+
+    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
+    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
+    'LBL_WIDGET_AMOUNT' => 'Amount',
+
     'TPL_RLI_CREATE' => 'O oportunitate trebuie să aibă un venit asociat articol. Creați un element linie de venituri.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Creează un element de venit.',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Produse din ofertă',
@@ -152,6 +165,7 @@ $mod_strings = array(
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Nu se pot șterge oportunități care conțin închise Articole linie de venituri',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Una sau mai multe dintre înregistrările selectate conține închise Articole linie de venituri și nu pot fi șterse.',
     'LBL_INCLUDED_RLIS' => '# din elementele de linie ale venitului',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Oferte',
 
@@ -186,25 +200,24 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'După ce iniţiaţi această modificare, în fundal vor fi create înregistrări de elemente de venit pentru fiecare {{module_name} existent. Atunci când elementele de venit sunt complete şi disponibile, va fi trimisă o notificare la adresa de e-mail de pe profilul dvs. de utilizator. De reţinut faptul că platforma dvs. trebuie configurată pentru a trimite e-mail-uri prin Admin > Setări E-mail pentru ca notificările să fie trimise.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulul {{plural_module_name}} vă permite să urmăriți vânzările individuale de la început și până la sfârșit. Fiecare înregistrare {{module_name}} reprezintă o potențială vânzare și include date relevante privind vânzarea și referitoare la alte înregistrări importante, cum ar fi {{quotes_module}}, {{contacts_module}} etc. Un {{module_name}} va avea în general mai multe etape ale vânzării, până când este marcat fie „Închis, câștigat” sau „Închis, pierdut”. {{plural_module_name}} poate fi valorificat și mai mult utilizând modulul {{forecasts_singular_module}} din Sugar, pentru a înțelege și previziona tendințele de vânzări, precum și pentru a direcționa activitatea în vederea atingerii cotelor de vânzări.',
+    'LBL_HELP_RECORDS' => 'Modulul {{plural_module_name}} îți permite să urmărești vânzări individuale de la început până la sfârșit. Fiecare înregistrare {{module_name}} reprezintă o vânzare potențială și include date relevante de vânzări, precum și date cu privire la alte înregistrări importante cum ar fi {{quotes_module}}, {{contacts_module}}, etc. Un modul {{module_name}} va trece în mod obișnuit prin câteva etape de vânzări până când este marcat fie „Câștigat”, fie „Pierdut”. {{plural_module_name}} poate fi valorificat și mai mult folosind modulul {{forecasts_singular_module}} al Sugar pentru a înțelege și pentru a prevedea tendințe de vânzări și pentru a viza atingerea cotelor de vânzări.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modulul {{plural_module_name}} vă permite să urmăriți vânzările individuale și articolele ce aparțin acestor vânzări, de la început și până la sfârșit. Fiecare înregistrare {{module_name}} reprezintă o potențială vânzare și include date relevante privind vânzarea și referitoare la alte înregistrări importante, cum ar fi {{quotes_module}}, {{contacts_module}} etc.
+    'LBL_HELP_RECORD' => 'Modulul {{plural_module_name}} îți permite să urmărești vânzări individuale și articolele ce aparțin acestor vânzări, de la început până la sfârșit. Fiecare înregistrare din modulul {{module_name}} reprezintă o vânzare potențială și include informații relevante privind vânzarea și alte înregistrări importante, cum ar fi {{quotes_module}}, {{contacts_module}} etc. 
 
-- Editați câmpurile acestei înregistrări făcând clic pe un câmp individual sau pe butonul Editare.
-- Vizualizați sau modificați linkurile către alte înregistrări din panourile secundare prin comutarea panoului din partea stângă jos la „Vizualizare date”.
-- Creați și vizualizați comentarii și istoricul modificărilor efectuate de utilizator în {{activitystream_singular_module}} comutând panoul din partea stângă jos la „Flux de activități”.
-- Urmăriți și marcați ca preferată această înregistrare utilizând pictogramele din partea dreaptă a denumirii înregistrării.
+- Editează câmpurile acestei înregistrări făcând clic pe un câmp individual sau pe butonul Editare.
+- Vizualizează sau modifică linkurile către alte înregistrări din panourile secundare prin comutarea panoului din partea stângă jos la „Vizualizare date”.
+- Creează și vizualizează comentarii și istoricul modificărilor efectuate de utilizator în {{activitystream_singular_module}} comutând panoul din partea stângă jos la „Flux de activități”.
+- Urmărește și marchează ca preferată această înregistrare utilizând pictogramele din partea dreaptă a denumirii înregistrării.
 - Acțiuni suplimentare sunt disponibile în meniul vertical Acțiuni din partea dreaptă a butonului Editare.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modulul {{plural_module_name}} vă permite să urmăriți vânzările individuale și articolele ce aparțin acestor vânzări, de la început și până la sfârșit. Fiecare înregistrare {{module_name}} reprezintă o potențială vânzare și include date relevante privind vânzarea și referitoare la alte înregistrări importante, cum ar fi {{quotes_module}}, {{contacts_module}} etc.
-
-Pentru a crea {{module_name}}:
-1. Introduceţi valori pentru câmpuri după cum doriţi.
- - Câmpurile marcate cu „Obligatoriu" trebuie să fie completate înainte de a salva.
- - Faceţi clic pe „Afişare mai multe" pentru a afişa câmpuri suplimentare, dacă este necesar.
-2. Faceţi clic pe „Salvare" pentru a finaliza noua înregistrare şi pentru a reveni la pagina anterioară.',
+    'LBL_HELP_CREATE' => 'Modulul {{plural_module_name}} îți permite să urmărești vânzări individuale și articolele ce aparțin acestor vânzări, de la început până la sfârșit. Fiecare înregistrare din modulul {{module_name}} reprezintă o vânzare potențială și include informații relevante despre vânzare și alte înregistrări importante, cum ar fi {{quotes_module}}, {{contacts_module}} etc.
+Pentru a crea un modul {{module_name}}:
+1. Introdu valori în câmpuri, după cum dorești.
+- Câmpurile marcate cu „Obligatoriu” trebuie completate înainte de salvare.
+- Dă clic pe „Afișează mai multe” pentru a afișa câmpuri suplimentare, dacă este necesar.
+2. Dă clic pe „Salvează” pentru a finaliza înregistrarea nouă și pentru a reveni la pagina anterioară.',
 
 // END ENT/ULT
 
@@ -216,4 +229,6 @@ Pentru a crea {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Afişează top zece Oportunităţi într-o diagramă cu bule.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Oportunităţile mele',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Oportunităţile echipei mele",
+
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
 );

@@ -15,14 +15,14 @@ $sugar_config['verify_client_ip'] = false;
 $sugar_config['passwordsetting']['SystemGeneratedPasswordON'] = '0';
 
 $sugar_config['idm_mode']['enabled'] = true;
-$sugar_config['idm_mode']['clientId'] = 'srn:cloud:iam:eu:0000000001:app:crm:99711b76-bb31-11e8-8df0-985aeb8a5c2a';
+$sugar_config['idm_mode']['clientId'] = 'srn:cloud:iam:eu:2000000001:app:crm:99711b76-bb31-11e8-8df0-985aeb8a5c2a';
 $sugar_config['idm_mode']['clientSecret'] = 'mangoOIDCClientSecret';
 $sugar_config['idm_mode']['stsUrl'] = getenv('OP_SERVICE_URL'); // or just sts.namespace
 $sugar_config['idm_mode']['idpUrl'] = getenv('IDP_SERVICE_URL'); // or just idp.namespace
 $sugar_config['idm_mode']['http_client']['retry_count'] = 0;
 $sugar_config['idm_mode']['http_client']['delay_strategy'] = 'linear';
 $sugar_config['idm_mode']['stsKeySetId'] = 'mangoOIDCKeySet';
-$sugar_config['idm_mode']['tid'] = 'srn:cloud:iam:eu:0000000001:tenant';
+$sugar_config['idm_mode']['tid'] = 'srn:cloud:iam:eu:2000000001:tenant';
 $sugar_config['idm_mode']['crmOAuthScope'] = 'https://apis.sugarcrm.com/auth/crm';
 $sugar_config['idm_mode']['requestedOAuthScopes'] = [
     'offline',

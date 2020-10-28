@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'Contactpersoon',
     'LBL_DISCOUNT_TOTAL' => 'Totale korting',
     'LBL_DISCOUNT_AMOUNT' => 'Kortingsbedrag',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'Kortingsbedrag',
     'LBL_EXT_PRICE' => 'Ext. Prijs',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Valutasymbool',

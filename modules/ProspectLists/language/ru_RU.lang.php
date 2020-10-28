@@ -65,6 +65,12 @@ $mod_strings = array (
   'LBL_DOMAIN'=>'Нет e-mail-сообщений для домена',
   'LBL_LIST_PROSPECTLIST_NAME'=>'Название',
 	'LBL_MORE_DETAIL' => 'Детальнее' /*for 508 compliance fix*/,
+    'LBL_ACCOUNTS' => 'Контрагенты',
+    'LBL_CAMPAIGNS' => 'Маркетинговые кампании',
+    'LBL_CONTACTS' => 'Контакты',
+    'LBL_LEADS' => 'Предварительные контакты',
+    'LBL_PROSPECTS' => 'Адресаты',
+    'LBL_USERS' => 'Пользователи',
 
     // Help Text
     // List View Help Text

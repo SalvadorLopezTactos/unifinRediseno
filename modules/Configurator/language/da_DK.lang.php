@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'Højde-bredde-forholdet på billedet skal være mellem 1:1 og 10:1. Størrelsen på billedet tilpasses.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'Højde-bredde-forholdet på billedet skal være mellem 3:1 og 20:1. Upload en ny fil med dette højde-bredde-forhold.',
     'ERR_ALERT_FILE_UPLOAD' => 'Fejl under upload af billedet.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Kunne ikke oprette mappe til billeder',
     'LBL_LOGGER'=>'Logføringsindstillinger',
 	'LBL_LOGGER_FILENAME'=>'Logfilnavn',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Filtype',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Maksimal logstørrelse',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Standarddatoformat',
 	'LBL_LOGGER_LOG_LEVEL'=>'Logføringsniveau',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Kommentar log-indstillinger',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Maksimum antal tegn at vise pr kommentar',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

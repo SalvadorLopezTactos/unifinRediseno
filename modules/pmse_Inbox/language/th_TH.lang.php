@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => 'ใช้การระบุผู้ใช้แล้ว',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'แสดงตัวอย่างการออกแบบกระบวนการ',
+    'LBL_PROJECT_RUN_ORDER' => 'เรียกใช้คำสั่ง',
 );
 

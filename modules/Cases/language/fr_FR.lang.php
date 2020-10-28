@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Tableau de bord de la liste de Tickets',
     'LBL_CASES_RECORD_DASHBOARD' => 'Tableau de bord de l&#39;enregistrement de Tickets',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Détails du ticket',
 
 	'ERR_DELETE_RECORD'					=> 'Vous devez spécifier un ID pour toute suppression.',
 	'LBL_ACCOUNT_ID'					=> 'Compte (ID)',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Contacts',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Tickets',
 	'LBL_DESCRIPTION'					=> 'Description :',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Attachement de fichier',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Attachement de fichier',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Historique',
 	'LBL_INVITEE'						=> 'Contacts',
 	'LBL_MEMBER_OF'						=> 'Compte',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Créé par',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Assigné à',
     'LBL_EXPORT_TEAM_COUNT' => 'Nb. équipes',
+    'LBL_CHANGETIMERS' => 'Modifier les minuteries',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Historique des emails des contacts liés',
@@ -140,4 +143,11 @@ Pour créer un enregistrement {{module_name}}, les étapes suivantes sont néces
 - Les champs identifiés comme "Obligatoire" doivent être complétés avant la sauvegarde.
 - Cliquer sur "Voir plus" pour afficher plus de champs, si nécessaire.
 2. Cliquer sur "Sauvegarder" pour finaliser l&#39;enregistrement et retourner sur la page précédente.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Vous n&#39;avez pas trouvé ce que vous cherchez ?',
+    'LBL_CREATE_CASE' => 'Créer un {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'Détails SLA',
+    'LBL_HOURS' => 'Heures',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

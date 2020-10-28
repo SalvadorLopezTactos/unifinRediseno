@@ -22,19 +22,9 @@ class ListTenantsResponse extends \Google\Protobuf\Internal\Message
      */
     private $next_page_token = '';
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type \Sugarcrm\Apis\Iam\Tenant\V1alpha\Tenant[]|\Google\Protobuf\Internal\RepeatedField $tenants
-     *     @type string $next_page_token
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Tenant\V1Alpha\Tenant::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

@@ -10,6 +10,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\Security\ValueObjects\PlatformName;
 
 /**
  * SidecarView.php
@@ -70,7 +71,9 @@ class SidecarView extends SugarView
         $this->ss->assign('processAuthorFiles', true);
 
         //Load sidecar theme css
-        $theme = new SidecarTheme();
+
+        $theme = new SidecarTheme(PlatformName::base());
+
         $this->ss->assign("css_url", $theme->getCSSURL());
         $this->ss->assign("developerMode", inDeveloperMode());
         $this->ss->assign('shouldResourcesBeMinified', shouldResourcesBeMinified());

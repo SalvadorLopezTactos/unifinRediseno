@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Case-liste dashboard',
     'LBL_CASES_RECORD_DASHBOARD' => 'Caseoptegnelses-dashboard',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Sagsoplysninger',
 
 	'ERR_DELETE_RECORD'					=> 'Du skal angive et postnummer for at slette virksomheden.',
 	'LBL_ACCOUNT_ID'					=> 'Virksomheds-id',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Kontakter',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Sager',
 	'LBL_DESCRIPTION'					=> 'Beskrivelse:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Vedhæftet fil',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Vedhæftet fil',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Historik',
 	'LBL_INVITEE'						=> 'Kontakter',
 	'LBL_MEMBER_OF'						=> 'Virksomhed',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Oprettet af bruger',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Tildelt brugernavn',
     'LBL_EXPORT_TEAM_COUNT' => 'Team bruger',
+    'LBL_CHANGETIMERS' => 'Skift timere',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Relaterede kontakters e-mail-adresser',
@@ -136,4 +139,11 @@ To create a {{module_name}}:
 2. Click "Save" to finalize the new record and return to the previous page.
 - Choose "Save and view" to open the new {{module_name}} in record view.
 - Choose "Save and create new" to immediately create another new {{module_name}}.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Didn&#39;t find what you are looking for?',
+    'LBL_CREATE_CASE' => 'Create a {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'SLA detaljer',
+    'LBL_HOURS' => 'Timer',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

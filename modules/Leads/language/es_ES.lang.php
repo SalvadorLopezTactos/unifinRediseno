@@ -322,4 +322,7 @@ Tras confirmar cada módulo necesario y deseado, haga clic en el botón Guardar 
     'LBL_FILTER_LEADS_REPORTS' => 'Informes de Clientes Potenciales',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Consentimiento para fines comerciales',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Consentimiento actualizado por última vez',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'No se ha podido cambiar el estado de {{moduleSingular}}. Este {{moduleSingular}} ya se ha convertido.',
 );

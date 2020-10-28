@@ -52,6 +52,7 @@ class UsersApiHelper extends SugarBeanApiHelper
     {
         $record = BeanFactory::newBean($module);
         $record->id = $recordId;
+        $record->disable_row_level_security = false;
         return $record->checkUserAccess($user);
     }
 

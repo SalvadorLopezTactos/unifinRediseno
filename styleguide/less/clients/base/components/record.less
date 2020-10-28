@@ -42,7 +42,7 @@
   }
 
   #recordTab > .dropdown.open > a {
-    background: #eaeaea;
+    background: @grayLighter;
   }
 
   #recordTab li.hidden {
@@ -85,7 +85,7 @@
   }
 
   .record-label {
-    color: lighten(@gray, 12%);
+    color: @grayLight;
     margin-left: 7px;
   }
 
@@ -265,10 +265,6 @@
 
     &.edit {
       padding-left: 5px;
-    }
-
-    .detail .record-cell {
-      max-width: 180px;
     }
   }
 
@@ -591,35 +587,51 @@
 /* Record Subpanel Header Styling */
 .record-panel {
   .record-panel-header {
-    background: #f5f5f5;
+    background: @white;
     display: block !important;
-    padding: 0 5px 0 15px;
     width: auto !important;
-    border-top: 1px solid rgba(220, 220, 220, 1);
-    box-shadow: inset 0 1px 0 0 white;
-    border-bottom: 1px solid #cfcfcf;
+    border-top: 1px solid @panelBorderColor;
     cursor: pointer;
+    font-size: @fontSizePanelHeader;
+    font-weight: 600;
+    text-transform: uppercase;
+    height: @panelHeaderHeight;
 
-    &:hover {
-      background: #fafafa;
+    span {
+      padding: @panelPaddingTop @panelPaddingSide 0 @panelPaddingSide;
+    }
+
+    .btn {
+      margin: 0 0 5px;
+      padding: 0; // override normal btn padding to not interfere with span padding
+      > .fa {
+        font-size: 10px;
+      }
+    }
+
+    &.panel-inactive:hover {
+      background: @panelInactiveHoverColor;
     }
 
     &.panel-active {
       background: @white;
-    }
-
-    &.panel-inactive {
-      .pull-left { font-weight: normal; }
-    }
-
-    .record-panel-arrow {
-      margin: 4px 5px 0 0;
     }
   }
 
   .record-panel-content {
     padding: 13px;
     box-sizing: border-box;
+  }
+}
+
+// in create view, add a bottom border to the last panel so user knows it can be expanded
+.record-create {
+  .tab-pane > .record-panel:last-of-type {
+    border-bottom: 1px solid @panelBorderColor;
+  }
+
+  .record-panel:last-of-type {
+    border-bottom: 1px solid @panelBorderColor;
   }
 }
 
@@ -647,5 +659,159 @@
     margin-bottom: 3px;
   }
 }
+
+.record-cell {
+  &.label-pill {
+    .record-label {
+      border: 1px dashed #b2bec6;
+      border-radius: 4px;
+      cursor: pointer;
+      padding: 2px 8px;
+      width: max-content;
+      margin-bottom: 12px;
+
+      .label-plus {
+        margin-right: 2px;
+      }
+
+      &:hover {
+        border-color: #0679c8;
+        background-color: #e2f2fe;
+        color: #0679c8;
+
+        .label-plus {
+          color: #0679c8;
+        }
+      }
+    }
+
+    [data-wrapper="edit"] {
+      display: none;
+    }
+  }
+
+  &:not(.label-pill) {
+    .label-plus {
+      display: none;
+    }
+  }
+}
+
+.labels-on-side {
+  .record-label {
+    max-width: 100%;
+    float: right;
+    box-sizing: border-box;
+    margin: 4px 0 0;
+    padding: 2px 8px;
+    border: 1px solid transparent;
+
+    // We want our label on the left in rtl text
+    html.rtl & {
+      float: left;
+    }
+
+    .record-cell.label-pill & {
+      margin: 4px 0 0;
+    }
+  }
+
+  .record-link-wrapper {
+    margin-left: @labelOnSideGutterWidth;
+
+    html.rtl & {
+      margin-right: @labelOnSideGutterWidth;
+      margin-left: 0;
+    }
+  }
+
+  .record-label-wrapper {
+    margin-bottom: @labelOnSideVerticalSpacing;
+  }
+
+  &.label-pill {
+    margin: 0;
+  }
+
+  .normal {
+    > .detail,
+    > .erased,
+    > .edit {
+      display: inline-block;
+      width: inherit;
+    }
+
+    > .detail,
+    > .erased {
+      margin-bottom: 0;
+    }
+
+    > .edit {
+      margin-bottom: 16px;
+    }
+  }
+
+  .fieldset-inline .record-label {
+    float: initial;
+    line-height: @fontSizeSmall;
+    margin: 0 0 3px 7px;
+    padding: 0;
+    border: none;
+
+    .record-label-symbol {
+      margin-right: 2px;
+    }
+
+    .fieldset-field {
+      margin-bottom: 16px;
+    }
+  }
+}
+
+.row-fluid > .record-cell {
+  float: left;
+
+  html.rtl & {
+    float: right;
+  }
+
+  &:not(:first-child) {
+    margin-left: @fluidGridGutterWidth;
+
+    html.rtl & {
+      margin-right: @fluidGridGutterWidth;
+      margin-left: 0;
+    }
+  }
+}
+
+.spanInputLabel (@columns, @columnWidth, @gutterWidth) {
+  width: (@columnWidth * @columns) + (@gutterWidth * (@columns - 1));
+}
+
+// override default grid values for labels-on-side
+.spanInputLabelX (@index) when (@index > 0) {
+  .labels-on-side > .span@{index} { .spanInputLabel(@index, @labelOnSideNarrowColumnWidth, @labelOnSideGutterWidth); }
+
+  @media (min-width: 768px) {
+    .labels-on-side > .span@{index} { .spanInputLabel(@index, @labelsOnSideColumnWidth768, @labelOnSideGutterWidth); }
+  }
+
+  @media (min-width: 1029px) {
+    .labels-on-side > .span@{index} { .spanInputLabel(@index, @gridColumnWidth768, @labelOnSideGutterWidth); }
+  }
+
+  @media (min-width: 1370px) {
+    .labels-on-side > .span@{index} { .spanInputLabel(@index, @gridColumnWidth, @labelOnSideGutterWidth); }
+  }
+
+  @media (min-width: 1550px) {
+    .labels-on-side.record-cell > .span@{index} { .spanInputLabel(@index, @gridColumnWidth1200, @labelOnSideGutterWidth); }
+  }
+
+  .spanInputLabelX(@index - 1);
+}
+
+.spanInputLabelX (@gridColumns);
 
 /* NEW SKIN END */

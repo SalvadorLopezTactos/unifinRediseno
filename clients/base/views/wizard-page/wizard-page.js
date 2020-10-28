@@ -107,7 +107,7 @@
                         fields:      panel.fields,
                         columns:     panel.columns,
                         labels:      panel.labels,
-                        labelsOnTop: panel.labelsOnTop
+                        labelsOnTop: true,
                     },
                     gridResults = this.getGridBuilder(options).build();
                 panel.grid   = gridResults.grid;

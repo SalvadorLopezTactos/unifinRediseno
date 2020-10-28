@@ -10,8 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Portal\Factory as PortalFactory;
 
-class CurrentUserPortalApi extends CurrentUserApi {
+class CurrentUserPortalApi extends CurrentUserApi
+{
     /**
      * Retrieves the current portal user info
      *
@@ -25,25 +27,24 @@ class CurrentUserPortalApi extends CurrentUserApi {
 
         // Get the basics
         $user_data = $this->getBasicUserInfo($api->platform);
-        // Fill in the portal specific stuff
-        $contact = $this->getPortalContact();
+
+        // Fill in the portal specific information
+        $ps = PortalFactory::getInstance('Session');
+        $contact = $ps->getContact();
         $user_data['type'] = 'support_portal';
         $user_data['user_id'] = $current_user->id;
         $user_data['user_name'] = $current_user->user_name;
         $user_data['acl'] = $this->getAcls('portal');
-        $user_data['id'] = $_SESSION['contact_id'];
-        
-        // We need to ask the visibility system for the list of account ids
-        $visibility = new SupportPortalVisibility($contact);
-        $user_data['account_ids'] = $visibility->getAccountIds();
-
+        $user_data['id'] = $contact->id;
+        $user_data['account_ids'] = $ps->getAccountIds();
         $user_data['full_name'] = $contact->full_name;
         $user_data['picture'] = $contact->picture;
         $user_data['portal_name'] = $contact->portal_name;
-        if(isset($contact->preferred_language)) {
+        if (isset($contact->preferred_language)) {
             $user_data['preferences']['language'] = $contact->preferred_language;
         }
-        
+        $user_data['site_user_id'] = $contact->getSiteUserId(true);
+        $user_data['cookie_consent'] = !empty($contact->cookie_consent);
         return array('current_user'=>$user_data);
     }
 
@@ -56,50 +57,40 @@ class CurrentUserPortalApi extends CurrentUserApi {
      */
     public function updateCurrentUser(ServiceBase $api, array $args)
     {
-        $bean = $this->getPortalContact();
-        // setting these for the loadBean
-        $args['module'] = $bean->module_name;
-        $args['record'] = $bean->id;
+        $contact = PortalFactory::getInstance('Session')->getContact();
 
-        $id = $this->updateBean($bean, $api, $args);
+        // setting these for the loadBean
+        $args['module'] = $contact->module_name;
+        $args['record'] = $contact->id;
+
+        $id = $this->updateBean($contact, $api, $args);
 
         return $this->retrieveCurrentUser($api, $args);
     }
 
     /**
-     * Gets the current portal user's Contact bean.
-     * When working with Portal this contains the interesting user info
-     *
-     * @return Contact
-     */
-    protected function getPortalContact(){
-        if(!isset($this->portal_contact)){
-            $this->portal_contact = BeanFactory::getBean('Contacts', $_SESSION['contact_id']);
-        }
-        return $this->portal_contact;
-    }
-
-    /**
      * Checks a given password and sends back the contact bean if the password matches
-     * 
+     *
      * @param string $passwordToVerify
      * @return Contact
      */
-    protected function getUserIfPassword($passwordToVerify) {
-        $contact = $this->getPortalContact();
+    protected function getUserIfPassword($passwordToVerify)
+    {
+        $contact = PortalFactory::getInstance('Session')->getContact();
+
         $currentPassword = $contact->portal_password;
         if (User::checkPassword($passwordToVerify, $currentPassword)) {
             return $contact;
         }
-        
+
         return null;
     }
 
     /**
      * Changes a portal password for a contact from old to new
-     * 
+     *
      * @param Contact $bean Contact bean
-     * @param string $old Old password 
+     * @param string $old Old password
      * @param string $new New password
      * @return array
      */
@@ -116,53 +107,70 @@ class CurrentUserPortalApi extends CurrentUserApi {
 
     /**
      * Gets the preference for user login expiration
-     * 
+     *
      * @return null
      */
-    protected function getUserLoginExpirationPreference() {
+    protected function getUserLoginExpirationPreference()
+    {
         return null;
     }
 
     /**
      * Manipulates the ACLs for portal
-     * 
+     *
      * @param array $acls
      * @return array
      */
-    protected function verifyACLs(Array $acls) {
+    protected function verifyACLs(array $acls)
+    {
         $acls['admin'] = 'no';
         $acls['developer'] = 'no';
         $acls['delete'] = 'no';
         $acls['import'] = 'no';
         $acls['export'] = 'no';
         $acls['massupdate'] = 'no';
-        
+
         return $acls;
     }
 
     /**
-     * Enforces module specific ACLs for users without accounts
-     * 
+     * Enforces module specific ACLs
+     *
      * @param array $acls
      * @return array
      */
-    protected function enforceModuleACLs(Array $acls) {
-        $apiPerson = $this->getPortalContact();
-        // This is a change in the ACL's for users without Accounts
-        $vis = new SupportPortalVisibility($apiPerson);
+    protected function enforceModuleACLs(array $acls)
+    {
+        // nobody can create new Filters
+        $acls['Filters']['create'] = 'no';
+        // nobody can create new Dashboards
+        $acls['Dashboards']['create'] = 'no';
 
-        $accounts = $vis->getAccountIds();
-        if (count($accounts)==0) {
+        // This is a change in the ACL's for users without Accounts
+        $ps = PortalFactory::getInstance('Session');
+        $accounts = $ps->getAccountIds();
+        if (empty($accounts)) {
             // This user has no accounts, modify their ACL's so that they match up with enforcement
             $acls['Accounts']['access'] = 'no';
-            $acls['Cases']['access'] = 'no';
+            if (!PortalFactory::getInstance('Settings')->allowCasesForContactsWithoutAccount()) {
+                $acls['Cases']['access'] = 'no';
+            }
         }
         foreach ($acls as $modName => $modAcls) {
             if ($modName === 'Contacts') continue;
 
             $acls[$modName]['edit'] = 'no';
         }
-        
+
         return $acls;
+    }
+
+    /**
+     * @deprecated use PortalFactory::getInstance('Session')->getContact()
+     * @return Contact
+     */
+    protected function getPortalContact()
+    {
+        return PortalFactory::getInstance('Session')->getContact();
     }
 }

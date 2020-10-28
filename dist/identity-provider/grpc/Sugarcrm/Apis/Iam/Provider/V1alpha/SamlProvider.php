@@ -32,23 +32,9 @@ class SamlProvider extends \Google\Protobuf\Internal\Message
      */
     private $attribute_mapping;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $name
-     *           srn:cloud:idp::1234567890:provider:saml
-     *     @type \Sugarcrm\Apis\Iam\Provider\V1alpha\SamlConfig $config
-     *           SAML Configuration
-     *     @type \Sugarcrm\Apis\Iam\Provider\V1alpha\AttributeMap[]|\Google\Protobuf\Internal\RepeatedField $attribute_mapping
-     *           Attribute mappings
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Provider\V1Alpha\Provider::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

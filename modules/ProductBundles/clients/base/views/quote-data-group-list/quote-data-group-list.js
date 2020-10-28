@@ -372,18 +372,17 @@
         var modelId = rowModel.cid;
         var modelModule = rowModel.module;
         var quoteId = rowModel.get('quote_id');
+        var accountId = rowModel.get('account_id');
         var productId = rowModel.get('id');
-        var quoteModel;
+        var quoteModel = this.context.get('parentModel');
 
         this.toggleCancelButton(false, rowModel.cid);
         this.toggleRow(modelModule, modelId, false);
         this.onNewItemChanged();
 
-        // when a new row is added if it does not have quote_id already, set it
-        if (rowModel.module === 'Products' && _.isUndefined(quoteId)) {
-            quoteModel = this.context.get('parentModel');
-
-            if (quoteModel) {
+        if (quoteModel && rowModel.module === 'Products') {
+            // when a new row is added if it does not have quote_id already, set it
+            if (_.isUndefined(quoteId)) {
                 quoteId = quoteModel.get('id');
 
                 app.api.relationships('create', 'Products', {
@@ -394,27 +393,52 @@
                         quote_id: quoteId
                     }
                 }, null, {
-                    success: _.bind(function(response) {
-                        var record = response.record;
-                        var relatedRecord = response.related_record;
-                        var pbItems = this.model.get('product_bundle_items');
-                        var quoteModel = this.context.get('parentModel');
-
-                        _.each(pbItems.models, function(itemModel) {
-                            if (itemModel.get('id') === record.id) {
-                                itemModel.setSyncedAttributes(record);
-                                itemModel.set(record);
-                            }
-                        }, this);
-
-                        if (quoteModel) {
-                            quoteModel.setSyncedAttributes(relatedRecord);
-                            quoteModel.set(relatedRecord);
-                        }
-
-                    }, this)
+                    success: _.bind(this._updateFromRelationshipCall, this, true)
                 });
             }
+            // when a new row is added if it does not have account_id already, set it
+            if (_.isUndefined(accountId)) {
+                accountId = quoteModel.get('billing_account_id');
+
+                if (accountId) {
+                    app.api.relationships('create', 'Products', {
+                        id: productId,
+                        link: 'account_link',
+                        relatedId: accountId,
+                        related: {
+                            account_id: accountId
+                        }
+                    }, null, {
+                        success: _.bind(this._updateFromRelationshipCall, this, false)
+                    });
+                }
+            }
+        }
+    },
+
+    /**
+     * Updates the item model and Quote model based on Relationship API calls
+     *
+     * @param {boolean} updateQuote If we should update the Quote record or not
+     * @param {Object} response The API Data response
+     * @private
+     */
+    _updateFromRelationshipCall: function(updateQuote, response) {
+        var record = response.record;
+        var relatedRecord = response.related_record;
+        var pbItems = this.model.get('product_bundle_items');
+        var quoteModel = this.context.get('parentModel');
+
+        _.each(pbItems.models, function(itemModel) {
+            if (itemModel.get('id') === record.id) {
+                itemModel.setSyncedAttributes(record);
+                itemModel.set(record);
+            }
+        }, this);
+
+        if (updateQuote && quoteModel) {
+            quoteModel.setSyncedAttributes(relatedRecord);
+            quoteModel.set(relatedRecord);
         }
     },
 
@@ -558,6 +582,32 @@
 
         // add model to toggledModels to be toggled next render
         this.toggledModels[relatedModel.cid] = relatedModel;
+
+        //If related model has service duration and unit fields,
+        //add a custom service duration field to relatedModel
+        if (!_.isUndefined(relatedModel.fields.service_duration_value) &&
+            !_.isUndefined(relatedModel.fields.service_duration_unit)) {
+
+            var durationField = {
+                'name': 'service_duration',
+                'type': 'fieldset',
+                'css_class': 'service-duration-field',
+                'label': 'LBL_SERVICE_DURATION',
+                'inline': true,
+                'show_child_labels': false,
+                'fields': [
+                    relatedModel.fields.service_duration_value,
+                    relatedModel.fields.service_duration_unit,
+                ],
+                'related_fields': [
+                    'service_start_date',
+                    'service_end_date',
+                    'renewable',
+                    'service',
+                ],
+            };
+            relatedModel.fields.service_duration = durationField;
+        }
 
         // adding to the collection will trigger the render
         this.collection.add(relatedModel);
@@ -827,8 +877,13 @@
             });
             $row.removeClass('ui-sortable');
 
-            //trigger sugarlogic
-            this.context.trigger('list:editrow:fire', toggleModel);
+            // Since the act of toggling the fields to "edit" mode is deferred
+            // (see toggleFields in Editable.js), SugarLogic must also be deferred
+            // until that act is complete. Otherwise, SetValue actions cannot take
+            // place as the fields are not yet in edit mode.
+            _.defer(function(context, toggleModel) {
+                context.trigger('list:editrow:fire', toggleModel);
+            }, this.context, toggleModel);
         } else if ($row.hasClass('not-sortable')) {
             // if this is not edit mode and row still has not-sortable (from being a brand new row)
             // then remove the not-sortable and add the sortable classes

@@ -322,4 +322,7 @@ After confirming each required and desired module, click the Save and Convert bu
     'LBL_FILTER_LEADS_REPORTS' => 'Leads&#39; reports',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Nõustutud ärieesmärgid:',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Nõusoleku viimane uuendamine',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Mooduli {{moduleSingular}} olekut ei saa muuta. Moodul {{moduleSingular}} on juba teisendatud.',
 );

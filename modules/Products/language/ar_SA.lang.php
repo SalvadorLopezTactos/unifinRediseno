@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'جهة الاتصال',
     'LBL_DISCOUNT_TOTAL' => 'إجمالي الخصم',
     'LBL_DISCOUNT_AMOUNT' => 'مبلغ الخصم',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'قيمة مبلغ الخصم',
     'LBL_EXT_PRICE' => 'الامتداد السعر',
     'LBL_CURRENCY_SYMBOL_NAME' => 'اسم رمز العملة',

@@ -47,6 +47,7 @@ Feature: Mixed LDAP and Local authentication
     And I wait for element "input[name=username]"
     Then I login as "user1" with password "user1Local"
     And I should see "Invalid Credentials"
+    And I should not see "External auth only user is not allowed to login using Sugar credentials"
     And I should not see "Accounts"
 
   Scenario: Existing LDAP user tries to login using local auth, and is configured without "LDAP Authentication Only"

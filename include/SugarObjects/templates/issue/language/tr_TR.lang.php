@@ -27,9 +27,15 @@ $mod_strings = array (
   'LBL_RESOLUTION' => 'Çözünürlük',
   'LBL_LAST_MODIFIED' => 'Değiştirilme Tarihi',
   'LBL_ASSIGNED_TO_ID'=>'Atanan Kişi:',
-  'LBL_ASSIGNED_TO_NAME' => 'Atanan Kişi:',  	  
+  'LBL_ASSIGNED_TO_NAME' => 'Atanan Kişi:',
   'LBL_WORK_LOG' => 'İş Tarihçesi:',
+    'LBL_FOLLOW_UP' => 'İzle',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
+    'LBL_RESOLVED_DATETIME' => 'Kararlaştırılmış Tarih',
+    'LBL_HOURS_TO_RESOLUTION' => 'Çözünürlük Saatleri',
+    'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Çözünürlük İş Saatleri',
+    'LBL_PENDING_PROCESSING' => 'Bekleyen İşlem',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Oluşturan:',
   'LBL_DATE_CREATED' => 'Oluşturulma Tarihi:',
   'LBL_DATE_ENTERED' => 'Oluşturulma Tarihi:',
@@ -44,5 +50,5 @@ $mod_strings = array (
     'LBL_EDIT_BUTTON' => 'Değiştir',
     'LBL_REMOVE' => 'Sil',
 
-  
+
   );

@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -236,6 +235,8 @@ EOQ3;
 
 
 $GLOBALS['sugar_config']['default_language'] = 'en_us';
+$GLOBALS['sugar_config']['languages'] = ['en_us' => 'English (US)'];
+
 $app_list_strings = return_app_list_strings_language($GLOBALS['sugar_config']['default_language']);
 $ftsTypeDropdown = "<select name='setup_fts_type' id='setup_fts_type'>";
 $ftsTypeDropdown .= get_select_options_with_id($app_list_strings['fts_type'], '');

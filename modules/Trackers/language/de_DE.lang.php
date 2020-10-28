@@ -18,17 +18,7 @@
  ********************************************************************************/
 
 $mod_strings = array (
-		  //Labels for methods in the TrackerReporter.php file that are shown in TrackerDashlet
-		  'ShowActiveUsers'      => 'Aktive Benutzer anzeigen',
-		  'ShowLastModifiedRecords' => 'Letzte 10 geänderten Einträge',
-		  'ShowTopUser' => 'Top-Benutzer',
-		  'ShowMyModuleUsage' => 'Verwendung von "Mein Modul"',
-		  'ShowMyWeeklyActivities' => 'Meine wöchentliche Aktivität',
-		  'ShowTop3ModulesUsed' => 'Meine 3 am häufigsten verwendeten Module',
-		  'ShowLoggedInUserCount' => 'Anzahl aktiver Benutzer',
-		  'ShowMyCumulativeLoggedInTime' => 'Meine gesamte Login-Zeit (Diese Woche)',
-		  'ShowUsersCumulativeLoggedInTime' => 'Login-Zeit aller Benutzer (Diese Woche)',
-		  
+
 		  //Column header mapping
 		  'action' => 'Aktion',
 		  'active_users' => 'Anzahl aktiver Benutzer',

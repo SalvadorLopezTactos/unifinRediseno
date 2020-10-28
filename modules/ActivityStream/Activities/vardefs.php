@@ -256,6 +256,11 @@ $dictionary['Activity'] = array(
             'type' => 'index',
             'fields' => array('parent_type', 'parent_id'),
         ),
+        array(
+            'name' => 'activity_type_date',
+            'type' => 'index',
+            'fields' => array('activity_type', 'date_entered'),
+        ),
     ),
     'relationships' => array(
         'comments' => array(

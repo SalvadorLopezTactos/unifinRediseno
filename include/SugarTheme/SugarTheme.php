@@ -651,19 +651,19 @@ EOHTML;
     /**
      * Returns an image tag for the given image.
      *
-     * @param  string $image image name
+     * @param string $imageName
      * @param  string $other_attributes optional, other attributes to add to the image tag, not cached
-	 * @param  string $width optional, defaults to the actual image's width
-	 * @param  string $height optional, defaults to the actual image's height
-	 * @param  string $ext optional, image extension (TODO can we deprecate this one ?)
+     * @param int|null $width optional, defaults to the actual image's width
+     * @param int|null $height optional, defaults to the actual image's height
+     * @param  string $ext optional, image extension (TODO can we deprecate this one ?)
      * @param  string $alt optional, only used when image contains something useful, i.e. "Sally's profile pic"
      * @return string HTML image tag or sprite
      */
     public function getImage(
         $imageName,
         $other_attributes = '',
-		$width = null,
-		$height = null,
+        ?int $width = null,
+        ?int $height = null,
 		$ext = null,
         $alt = ''
     )
@@ -711,7 +711,8 @@ EOHTML;
 
 		$attr_width = (is_null($width)) ? "" : "width=\"$width\"";
 		$attr_height = (is_null($height)) ? "" : "height=\"$height\"";
-		return $cached_results[$imageName] . " $attr_width $attr_height $other_attributes alt=\"$alt\" />";
+        $altText = htmlspecialchars($alt);
+        return $cached_results[$imageName] . " $attr_width $attr_height $other_attributes alt=\"$altText\" />";
     }
 
 	/**
@@ -775,8 +776,9 @@ EOHTML;
 			$attr .= ' class="spr_'.$class.'"';
 		}
 
-		if($title)
-			$attr .= ' title="'.$title.'"';
+        if ($title) {
+            $attr .= ' title="' . htmlspecialchars($title) . '"';
+        }
 
 		// use </span> instead of /> to prevent weird UI results
 		$GLOBALS['log']->debug("Sprites: generated sprite -> $attr");

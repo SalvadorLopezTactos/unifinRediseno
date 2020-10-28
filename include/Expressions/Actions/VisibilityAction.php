@@ -45,7 +45,7 @@ class VisibilityAction extends AbstractAction
 
             if (!SUGAR.forms.SetVisibilityAction.initialized) {
                 var head = document.getElementsByTagName('head')[0];
-                var cssdef = 'span.vis_action_hidden, .vis_action_hidden * { visibility:hidden}'
+                var cssdef = 'span.vis_action_hidden, .vis_action_hidden * { visibility: hidden; }'
                 var newStyle = document.createElement('style');
                 newStyle.setAttribute('type', 'text/css');
                 if (newStyle.styleSheet)
@@ -86,11 +86,12 @@ class VisibilityAction extends AbstractAction
                 }
             },
             sidecarExec : function(context, target, hide) {
-                var inv_class = 'vis_action_hidden',
-                    panel_class = 'record-panel-content',
-                    wasHidden = $(target).hasClass(inv_class),
-                    field = context.view.getField(this.target),
-                    row = $(target).parents('.panel_body')[0];
+                var inv_class = 'vis_action_hidden';
+                var panel_class = 'record-panel-content';
+                var element = $(target);
+                var wasHidden = element.hasClass(inv_class);
+                var field = context.view.getField(this.target);
+                var row = element.parents('.row-fluid')[0];
 
                 if (field && _.isUndefined(field.wasRequired)) {
                     field.wasRequired = field.def.required;
@@ -182,22 +183,24 @@ class VisibilityAction extends AbstractAction
                 el.style.display = hide ? 'none' : '';
             },
             checkRowSidecar: function(el, inv_class) {
-                if (!el || el.children) {
+                if (!el || el.children.length === 0) {
                     return;
                 }
-                var hide = true;
-                for(var i = 0; i < el.children.length; i++) {
-                    var node = el.children[i];
-                    // Hide row
-                    if (node.tagName.toLowerCase() == 'div' &&
-                        !$(node).hasClass(inv_class) &&  // all members contain the invisible class
-                        $(node).children().length > 1
-                    ) { // is a valid non-empty field
-                        hide = false;
-                        break;
-                    }
-                }
-                el.style.display = hide ? 'none' : '';
+
+                // All the fields in a row that we'd potentially want to show
+                var allFields = [].slice.call(el.children);
+                var hideableFields = _.filter(allFields, function(e) {
+                    return $(e).hasClass('record-cell');
+                });
+
+                // Check if all the elements in the row we're looking at have
+                // the hidden class.
+                var shouldRowBeHidden = _.chain(hideableFields)
+                    .map(function(e) { return $(e).hasClass(inv_class); })
+                    .reduce(function(a, c) { return a && c; })
+                    .value();
+
+                el.style.display = shouldRowBeHidden ? 'none' : '';
             },
             checkPanelSidecar: function(el, inv_class, panel_class) {
                 if (!el || !el.children) {

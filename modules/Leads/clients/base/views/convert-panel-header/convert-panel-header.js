@@ -391,8 +391,8 @@
      */
     toggleActiveIndicator: function(active) {
         var $activeIndicator = this.$('.active-indicator i');
-        $activeIndicator.toggleClass('fa-chevron-up', active);
-        $activeIndicator.toggleClass('fa-chevron-down', !active);
+        $activeIndicator.toggleClass('fa-chevron-down', active);
+        $activeIndicator.toggleClass('fa-chevron-right', !active);
     },
 
     /**

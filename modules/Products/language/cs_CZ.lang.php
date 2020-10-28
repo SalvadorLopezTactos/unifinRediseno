@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'Kontakt',
     'LBL_DISCOUNT_TOTAL' => 'Celková sleva',
     'LBL_DISCOUNT_AMOUNT' => 'Výše slevy:',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'Hodnota výše slevy',
     'LBL_EXT_PRICE' => 'Rozšířená cena',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Symbol měny',

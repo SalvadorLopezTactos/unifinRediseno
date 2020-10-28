@@ -12,6 +12,22 @@
 
 
 class RegisterLeadApi extends SugarApi {
+    /**
+     * Fields that are expected from the client
+     * @var array
+     */
+    protected $expectedFields = [
+        'first_name',
+        'last_name',
+        'phone_work',
+        'email',
+        'primary_address_country',
+        'primary_address_state',
+        'account_name',
+        'title',
+        'preferred_language',
+    ];
+
     public function registerApiRest() {
         return array(
             'create' => array(
@@ -27,33 +43,6 @@ class RegisterLeadApi extends SugarApi {
     }
 
     /**
-     * Fetches data from the $args array and updates the bean with that data
-     * @param $bean SugarBean The bean to be updated
-     * @param ServiceBase $api The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
-     * @param array $args The arguments array passed in from the API
-     * @return id Bean id
-     */
-    protected function updateBean(SugarBean $bean, ServiceBase $api, array $args)
-    {
-        // Bug 54515: Set modified by and created by users to assigned to user. If not set default to admin.
-        $bean->update_modified_by = false;
-        $bean->set_created_by = false;
-        $admin = Administration::getSettings();
-        if (isset($admin->settings['supportPortal_RegCreatedBy']) && !empty($admin->settings['supportPortal_RegCreatedBy'])) {
-            $bean->created_by = $admin->settings['supportPortal_RegCreatedBy'];
-            $bean->modified_user_id = $admin->settings['supportPortal_RegCreatedBy'];
-        } else {
-            $bean->created_by = '1';
-            $bean->modified_user_id = '1';
-        }
-
-        // Bug 54516 users not getting notified on new record creation
-        $bean->save(true);
-
-        return parent::updateBean($bean, $api, $args);
-    }
-
-    /**
      * Creates lead records
      * @param ServiceBase $apiServiceBase The API class of the request, used in cases where the API changes how the fields are pulled from the args array.
      * @param array $args The arguments array passed in from the API
@@ -61,17 +50,14 @@ class RegisterLeadApi extends SugarApi {
      */
     public function createLeadRecord(ServiceBase $api, array $args)
     {
-        // Bug 54647 Lead registration can create empty leads
-        if (!isset($args['last_name'])) {
-            throw new SugarApiExceptionMissingParameter();
-        }
+        $msg = 'This endpoint is deprecated for portal lead creation as of 9.2.0';
+        LoggerManager::getLogger()->deprecated($msg);
 
-        /**
-         *
-         * Bug56194: This API can be hit without logging into Sugar, but the creation of a Lead SugarBean
-         * uses messages that require the use of the app strings.
-         *
-         **/
+        // Clients should always send the last name and the lead source
+        $this->requireArgs($args, ['last_name', 'lead_source']);
+
+        // Bug56194: Creation of a Lead SugarBean uses messages that require the use of the app strings.
+        // In this case, lead_source is parsed in the email message that is sent out when a new lead is created.
         global $app_list_strings;
         global $current_language;
         if(!isset($app_list_strings)){
@@ -79,29 +65,27 @@ class RegisterLeadApi extends SugarApi {
         }
 
         $bean = BeanFactory::newBean('Leads');
-        // we force team and teamset because there is no current user to get them from
-        $fields = array(
-            'team_set_id' => '1',
-            'team_id' => '1',
-            'lead_source' => 'Support Portal User Registration',
-        );
 
-        $admin = Administration::getSettings();
+        // Force team and teamset because there is no current user to get them from
+        $bean->team_set_id = '1';
+        $bean->team_id = '1';
 
-        if (isset($admin->settings['portal_defaultUser']) && !empty($admin->settings['portal_defaultUser'])) {
-            $fields['assigned_user_id'] = json_decode(html_entity_decode($admin->settings['portal_defaultUser']));
-        }
+        // Bug 54515: Set modified by and created by users to assigned to user. If not set default to admin.
+        $bean->update_modified_by = false;
+        $bean->set_created_by = false;
+        $bean->created_by = '1';
+        $bean->modified_user_id = '1';
 
-        $fieldList = array('first_name', 'last_name', 'phone_work', 'email', 'primary_address_country', 'primary_address_state', 'account_name', 'title', 'preferred_language');
-        foreach ($fieldList as $fieldName) {
-            if (isset($args[$fieldName])) {
-                $fields[$fieldName] = $args[$fieldName];
+        foreach ($this->expectedFields as $field) {
+            if (isset($args[$field])) {
+                $fields[$field] = $args[$field];
             }
         }
 
-        $id = $this->updateBean($bean, $api, $fields);
-        return $id;
+        // Mimic the essential behavior of updateBean
+        // Bug 54516 users not getting notified on new record creation
+        $this->populateBean($bean, $api, $fields);
+        $bean->save(true);
+        return $bean->id;
     }
-
-
 }

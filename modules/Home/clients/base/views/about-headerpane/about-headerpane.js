@@ -23,7 +23,14 @@
      */
     _formatTitle: function(title) {
         var serverInfo = app.metadata.getServerInfo();
-        return app.lang.get(title, this.module, serverInfo) + this._getMarketingVersion(serverInfo.marketing_version);
+        var aboutVars = {
+            product_name: serverInfo.product_name,
+            version: serverInfo.version,
+            custom_version: serverInfo.custom_version,
+            build: serverInfo.build,
+            flav: serverInfo.flavor[0]
+        };
+        return app.lang.get(title, this.module, aboutVars) + this._getMarketingVersion(serverInfo.marketing_version);
     },
 
     /**

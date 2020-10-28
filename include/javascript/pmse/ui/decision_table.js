@@ -627,6 +627,13 @@ var PMSE = PMSE || {};
             combos = {};
             for (i = 0; i < data.result.length; i += 1) {
                 module = data.result[i];
+                module.fields = setDatetimeFieldsBCOptions({
+                    targetModule: this.base_module,
+                    selectedModule: module.module_name,
+                    fields: module.fields,
+                    showTargetModuleOption: true,
+                    showSelectedModuleOption: true
+                });
                 for (j = 0; j < module.fields.length; j += 1) {
                     fields.push({
                         label: module.fields[j].text,

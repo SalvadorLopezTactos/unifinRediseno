@@ -18,18 +18,9 @@ class GetTenantRequest extends \Google\Protobuf\Internal\Message
      */
     private $name = '';
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $name
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Tenant\V1Alpha\Tenant::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

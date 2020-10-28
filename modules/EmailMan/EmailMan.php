@@ -215,17 +215,22 @@ class EmailMan extends SugarBean{
         }
 
         //also store the recipient_email address
-        $query = "SELECT addr.email_address FROM email_addresses addr,email_addr_bean_rel eb WHERE eb.deleted=0 AND addr.id=eb.email_address_id AND bean_id ='". $related_id ."' AND primary_address = '1'";
-
-        $result=$this->db->query($query);
-        $row=$this->db->fetchByAssoc($result);
-        if ($row)
-        {
-            $temp_array['RECIPIENT_EMAIL']=$row['email_address'];
+        $query = <<<SQL
+SELECT addr.email_address
+FROM email_addresses addr, email_addr_bean_rel eb 
+WHERE eb.deleted=0 AND addr.id=eb.email_address_id AND bean_id = ? AND primary_address = '1'
+SQL;
+        $emailAddress = $this->db->getConnection()
+            ->executeQuery(
+                $query,
+                [$related_id]
+            )->fetchColumn();
+        if (false !== $emailAddress) {
+            $temp_array['RECIPIENT_EMAIL'] = $emailAddress;
         }
 
         $this->email1 = $temp_array['RECIPIENT_EMAIL'];
-		$temp_array['EMAIL_LINK'] = $current_user->getEmailLink('email1', $this, '', '', 'ListView');
+        $temp_array['EMAIL_LINK'] = $current_user->getEmailLink('email1', $this, '', '', 'ListView');
 
         return $temp_array;
     }

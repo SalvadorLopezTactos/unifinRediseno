@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Änderungsdatum',
     'LBL_DELETED' => 'Gelöscht',
     'LBL_REVENUELINEITEMS' => 'Umsatzposten',
+    'LBL_ENTRY_SOURCE' => 'Quelle der Notiz',
+    'LBL_SOURCE_EXTERNAL' => 'Extern',
+    'LBL_SOURCE_INTERNAL' => 'Intern',
 
     // Help Text
     // List View Help Text

@@ -322,4 +322,7 @@ Po potwierdzeniu wprowadzonych zmian w modułach kliknij przycisk Zapisz i przek
     'LBL_FILTER_LEADS_REPORTS' => 'Raporty dotyczące namiarów',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Wyrażono zgodę na cele biznesowe dla',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Ostatnia aktualizacja zgody',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Nie można zmienić statusu {{moduleSingular}}. Ten {{moduleSingular}} został już skonwertowany.',
 );

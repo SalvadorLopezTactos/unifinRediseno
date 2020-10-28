@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Kontaktpersonu saraksta instrumentu panelis',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Kontaktpersonu ierakstu instrumentu panelis',
-
+    'LBL_SITE_USER_ID' => 'Site_url un contact id hash',
+    'LBL_COOKIE_CONSENT' => 'Piekrišana sīkdatnēm',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Piekrišana sīkdatnēm saņemta',
     'LNK_CONTACT_REPORTS' => 'Kontaktpersonu atskaites',
     'ERR_DELETE_RECORD' => 'Lai dzēstu kontaktpersonu, jānorāda ieraksta numurs.',
     'LBL_ACCOUNT_ID' => 'Uzņēmuma ID:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Portāla informācija',
     'LBL_PORTAL_NAME' => 'Portāla nosaukums:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Portāla parole ir uzstādīta:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Portāla lietotāja uzņēmuma nosaukums',
     'LBL_RECORD_SAVED_SUCCESS' => 'Jūs veiksmīgi izveidojāt {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Iela',
     'LBL_POSTAL_CODE' => 'Pasta indekss:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Iespējas',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenti',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Piedāvājumi',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Piedāvājumi (Piegādāt)',
     'LBL_QUOTES_BILL_TO' => 'Piedāvājumi (Rēķinu izstādīt)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Piedāvājuma rindas',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Klikšķiniet šeit lai rediģētu profilu.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Šeit Jūs varat iestatīt valodu. Tas izmainīs Sugar Portālā izmantoto valodu.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'jūs varat atgriezties Profila sadaļā jebkurā laikā izmantojot Lietotāja izvēlni',
+    'ERR_PORTAL_NAME_EXISTS' => 'Portāla nosaukums {0} jau pastāv. Vienādi portālu nosaukumi nav pieļaujami. Mainiet portāla nosaukumu, lai tas būtu unikāls.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Pamata Id',
@@ -279,4 +284,8 @@ Lai izveidotu {{module_name}}:
     'LBL_FILTER_CONTACTS_REPORTS' => 'Kontaktu atskaites',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Ir piekrišana biznesa mērķiem',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Piekrišana pēdējoreiz atjaunināta',
+
+    'LBL_ENTRY_SOURCE' => 'Kontaktpersonas avots',
+    'LBL_SOURCE_EXTERNAL' => 'Ārējais',
+    'LBL_SOURCE_INTERNAL' => 'Iekšējais',
 );

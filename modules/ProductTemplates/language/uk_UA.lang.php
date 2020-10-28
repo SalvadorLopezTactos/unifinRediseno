@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => 'Переглянути виробників',
   'LNK_NEW_PRODUCT_CATEGORY' => 'Переглянути категорії продуктів',
   'LNK_NEW_PRODUCT_TYPE' => 'Переглянути типи продуктів',
-  'LNK_NEW_PRODUCT' => 'Створити продукт для каталогу',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => 'Постачальники перевезень',
   'LNK_PRODUCT_LIST' => 'Переглянути каталог продуктів',
   'NTC_DELETE_CONFIRMATION' => 'Ви дійсно бажаєте видалити цей запис?',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => 'Категорії продуктів',
   'LBL_MANUFACTURERS' => 'Виробники',
   'LBL_PRODUCT_TYPES' => 'Типи продуктів',
-
+  'LBL_RENEWABLE' => 'Із можливістю поновлення',
+  'LBL_SERVICE' => 'Послуга',
 );
-
-
-?>

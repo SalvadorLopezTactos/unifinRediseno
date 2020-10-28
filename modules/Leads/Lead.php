@@ -91,6 +91,9 @@ class Lead extends Person {
 
 	var $team_name;
 
+    public $business_center_name;
+    public $business_center_id;
+
     //Marketo
     var $mkto_sync;
     var $mkto_id;
@@ -107,7 +110,13 @@ class Lead extends Person {
 
 	// This is used to retrieve related fields from form posts.
 	var $additional_column_fields = Array('assigned_user_name', 'task_id', 'note_id', 'meeting_id', 'call_id', 'email_id');
-	var $relationship_fields = Array('email_id'=>'emails','call_id'=>'calls','meeting_id'=>'meetings','task_id'=>'tasks',);
+    public $relationship_fields = array(
+        'business_center_id'=>'business_centers',
+        'email_id'=>'emails',
+        'call_id'=>'calls',
+        'meeting_id'=>'meetings',
+        'task_id'=>'tasks',
+    );
 
 	function create_list_query($order_by, $where, $show_deleted=0)
 	{
@@ -366,7 +375,15 @@ class Lead extends Person {
 	}
 
 	function save($check_notify = false) {
-		// call save first so that $this->id will be set
+        //Set business_center_id to the same as related account when not provided
+        if (empty($this->business_center_id)) {
+            $related_account = BeanFactory::retrieveBean('Accounts', $this->account_id);
+            if (!empty($related_account) && !empty($related_account->business_center_id)) {
+                $this->business_center_id = $related_account->business_center_id;
+            }
+        }
+
+        // call save first so that $this->id will be set
 		$value = parent::save($check_notify);
 		return $value;
 	}

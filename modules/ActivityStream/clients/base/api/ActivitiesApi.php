@@ -74,7 +74,12 @@ class ActivitiesApi extends FilterApi
 
     public function getRecordActivities(ServiceBase $api, array $args)
     {
-        $this->requireActivityStreams($args['module']);
+        if (!Activity::isEnabled()) {
+            $response = array();
+            $response['next_offset'] = -1;
+            $response['args'] = $args;
+            return $response;
+        }
 
         $params = $this->parseArguments($api, $args);
         $record = BeanFactory::retrieveBean($args['module'], $args['record']);

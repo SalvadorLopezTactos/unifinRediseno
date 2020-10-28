@@ -184,12 +184,13 @@ class EmailReminder
             AND deleted = 0
             AND email_reminder_sent = 0
             AND status != 'Held'
-            AND date_start >= '{$this->now}'
-            AND date_start <= '{$this->max}'
+            AND date_start >= ?
+            AND date_start <= ?
         ";
-        $re = $db->query($query);
+        $stmt = $db->getConnection()
+            ->executeQuery($query, [$this->now, $this->max]);
         $meetings = array();
-        while($row = $db->fetchByAssoc($re) ) {
+        foreach ($stmt as $row) {
             $remind_ts = $GLOBALS['timedate']->fromDb($db->fromConvert($row['date_start'],'datetime'))->modify("-{$row['email_reminder_time']} seconds")->ts;
             $now_ts = $GLOBALS['timedate']->getNow()->ts;
             if ( $now_ts >= $remind_ts ) {
@@ -212,12 +213,13 @@ class EmailReminder
             AND deleted = 0
             AND email_reminder_sent = 0
             AND status != 'Held'
-            AND date_start >= '{$this->now}'
-            AND date_start <= '{$this->max}'
+            AND date_start >= ?
+            AND date_start <= ?
         ";
-        $re = $db->query($query);
+        $stmt = $db->getConnection()
+            ->executeQuery($query, [$this->now, $this->max]);
         $calls = array();
-        while($row = $db->fetchByAssoc($re) ) {
+        foreach ($stmt as $row) {
             $remind_ts = $GLOBALS['timedate']->fromDb($db->fromConvert($row['date_start'],'datetime'))->modify("-{$row['email_reminder_time']} seconds")->ts;
             $now_ts = $GLOBALS['timedate']->getNow()->ts;
             if ( $now_ts >= $remind_ts ) {
@@ -247,13 +249,18 @@ class EmailReminder
             default:
                 return array();
         }
-    
+
         $emails = array();
         // fetch users
-        $query = "SELECT user_id FROM {$field_part}s_users WHERE {$field_part}_id = '{$id}' AND accept_status != 'decline' AND deleted = 0
-        ";
-        $re = $db->query($query);
-        while($row = $db->fetchByAssoc($re) ) {
+        $query = <<<SQL
+SELECT user_id
+FROM {$field_part}s_users 
+WHERE {$field_part}_id = ? AND accept_status != 'decline' AND deleted = 0
+SQL;
+
+        $stmt = $db->getConnection()
+            ->executeQuery($query, [$id]);
+        foreach ($stmt as $row) {
             $user = BeanFactory::getBean('Users', $row['user_id']);
             if ( !empty($user->email1) ) {
                 $arr = array(
@@ -265,9 +272,15 @@ class EmailReminder
             }
         }        
         // fetch contacts
-        $query = "SELECT contact_id FROM {$field_part}s_contacts WHERE {$field_part}_id = '{$id}' AND accept_status != 'decline' AND deleted = 0";
-        $re = $db->query($query);
-        while($row = $db->fetchByAssoc($re) ) {
+        $query = <<<SQL
+SELECT contact_id
+FROM {$field_part}s_contacts
+WHERE {$field_part}_id = ? AND accept_status != 'decline' AND deleted = 0
+SQL;
+
+        $stmt = $db->getConnection()
+            ->executeQuery($query, [$id]);
+        foreach ($stmt as $row) {
             $contact = BeanFactory::getBean('Contacts', $row['contact_id']);
             if ( !empty($contact->email1) ) {
                 $arr = array(
@@ -279,9 +292,15 @@ class EmailReminder
             }
         }        
         // fetch leads
-        $query = "SELECT lead_id FROM {$field_part}s_leads WHERE {$field_part}_id = '{$id}' AND accept_status != 'decline' AND deleted = 0";
-        $re = $db->query($query);
-        while($row = $db->fetchByAssoc($re) ) {
+        $query = <<<SQL
+SELECT lead_id
+FROM {$field_part}s_leads
+WHERE {$field_part}_id = ? AND accept_status != 'decline' AND deleted = 0
+SQL;
+
+        $stmt = $db->getConnection()
+            ->executeQuery($query, [$id]);
+        foreach ($stmt as $row) {
             $lead = BeanFactory::getBean('Leads', $row['lead_id']);
             if ( !empty($lead->email1) ) {
                 $arr = array(

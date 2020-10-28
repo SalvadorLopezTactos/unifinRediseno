@@ -11,6 +11,8 @@
  */
 
 
+use Sugarcrm\Sugarcrm\Security\ValueObjects\PlatformName;
+
 class ViewPortalTheme extends SugarView
 {
 	/**
@@ -47,7 +49,7 @@ class ViewPortalTheme extends SugarView
         //Loading label
         $smarty->assign('LBL_LOADING', $app_strings['LBL_ALERT_TITLE_LOADING']);
 
-        $theme = new SidecarTheme();
+        $theme = new SidecarTheme(PlatformName::base());
         $smarty->assign("css_url", $theme->getCSSURL());
 
 

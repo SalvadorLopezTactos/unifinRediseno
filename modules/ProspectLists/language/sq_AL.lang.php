@@ -65,6 +65,12 @@ $mod_strings = array (
   'LBL_DOMAIN'=>'jo meila në domen',
   'LBL_LIST_PROSPECTLIST_NAME'=>'Emri',
 	'LBL_MORE_DETAIL' => 'Më tepër detaje' /*for 508 compliance fix*/,
+    'LBL_ACCOUNTS' => 'Llogaritë',
+    'LBL_CAMPAIGNS' => 'Fushatat',
+    'LBL_CONTACTS' => 'Kontaktet',
+    'LBL_LEADS' => 'Udhëheqjet',
+    'LBL_PROSPECTS' => 'Objektivat',
+    'LBL_USERS' => 'Përdoruesit',
 
     // Help Text
     // List View Help Text

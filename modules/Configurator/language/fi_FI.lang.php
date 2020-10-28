@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'Kuvasuhteen tulisi olla väliltä 1:1 ja 10:1. Kuvan kokoa muutetaan.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'Kuvasuhteen on oltava välillä 3:1 ja 20:1. Lataa uusi tiedosto tällä kuvasuhteella.',
     'ERR_ALERT_FILE_UPLOAD' => 'Virhe kuvan lataamisessa.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Kuvahakemistoa ei voida luoda',
     'LBL_LOGGER'=>'Lokinpidon asetukset',
 	'LBL_LOGGER_FILENAME'=>'Lokitiedoston nimi',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Pääte',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Lokin enimmäiskoko',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Oletus päivämäärän formaatti',
 	'LBL_LOGGER_LOG_LEVEL'=>'Lokin taso',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Kommenttilokin asetukset',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Näytettävä enimmäismerkkimäärä kommenttimerkintää kohden',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

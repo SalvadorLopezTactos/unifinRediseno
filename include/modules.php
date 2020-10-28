@@ -14,6 +14,7 @@ $moduleList = array();
 // this list defines the modules shown in the top tab list of the app
 //the order of this list is the default order displayed - do not change the order unless it is on purpose
 $moduleList[] = 'Home';
+$moduleList[] = 'ProductTemplates';
 $moduleList[] = 'Calendar';
 $moduleList[] = 'Calls';
 $moduleList[] = 'Meetings';
@@ -29,7 +30,6 @@ $moduleList[] = 'Emails';
 $moduleList[] = 'Campaigns';
 $moduleList[] = 'Prospects';
 $moduleList[] = 'ProspectLists';
-
 $moduleList[] = 'Quotes';
 $moduleList[] = 'Products';
 $moduleList[] = 'Forecasts';
@@ -38,6 +38,7 @@ $moduleList[] = 'pmse_Project';
 $moduleList[] = 'pmse_Inbox';
 $moduleList[] = 'pmse_Business_Rules';
 $moduleList[] = 'pmse_Emails_Templates';
+$moduleList[] = 'BusinessCenters';
 
 $moduleList[] = 'Documents';
 $moduleList[] = 'Cases';
@@ -200,6 +201,8 @@ $beanList['pmse_BpmConfig'] = 'pmse_BpmConfig';
 $beanList['pmse_BpmGroup'] = 'pmse_BpmGroup';
 $beanList['pmse_BpmGroupUser'] = 'pmse_BpmGroupUser';
 $beanList['pmse_EmailMessage'] = 'pmse_EmailMessage';
+$beanList['BusinessCenters'] = 'BusinessCenter';
+$beanList['ChangeTimers'] = 'ChangeTimer';
 $beanList['Empty'] = 'EmptyBean';
 $beanList['UpgradeHistory'] = 'UpgradeHistory';
 $beanList['OutboundEmail'] = 'OutboundEmail';
@@ -360,6 +363,8 @@ $beanFiles['pmse_BpmConfig'] = 'modules/pmse_Project/pmse_BpmConfig/pmse_BpmConf
 $beanFiles['pmse_BpmGroup'] = 'modules/pmse_Project/pmse_BpmGroup/pmse_BpmGroup.php';
 $beanFiles['pmse_BpmGroupUser'] = 'modules/pmse_Project/pmse_BpmGroupUser/pmse_BpmGroupUser.php';
 $beanFiles['pmse_EmailMessage'] = 'modules/pmse_Emails_Templates/pmse_EmailMessage/pmse_EmailMessage.php';
+$beanFiles['BusinessCenter'] = 'modules/BusinessCenters/BusinessCenter.php';
+$beanFiles['ChangeTimer'] = 'modules/ChangeTimers/ChangeTimer.php';
 
 $beanFiles['Configurator']          = 'modules/Configurator/Configurator.php';
 $beanFiles['EmptyBean'] = 'data/EmptyBean.php';
@@ -374,7 +379,7 @@ $modInvisList = array('Administration', 'CustomFields', 'Connectors',
     'Dropdown', 'Dynamic', 'DynamicFields', 'DynamicLayout', 'EditCustomFields',
     'Help', 'Import',  'MySettings', 'EditCustomFields','FieldsMetaData',
     'UpgradeWizard', 'Trackers', 'Connectors', 'Employees', 'Calendar',
-    'Manufacturers', 'ProductBundles', 'ProductBundleNotes', 'ProductCategories', 'ProductTemplates', 'ProductTypes',
+    'Manufacturers', 'ProductBundles', 'ProductBundleNotes', 'ProductCategories', 'ProductTypes',
     'Shippers', 'TaxRates', 'TeamNotices', 'Teams', 'TimePeriods', 'ForecastOpportunities', 'Quotas',
     'ContractTypes',
     'ACLFields', 'Holidays', 'SNIP', 'ForecastDirectReports',
@@ -422,7 +427,7 @@ $modInvisList = array('Administration', 'CustomFields', 'Connectors',
     'pmse_BpmGroupUser',
     'pmse_EmailMessage',
     'ReportSchedules',
-    );
+);
 $adminOnlyList = array(
                     //module => list of actions  (all says all actions are admin only)
                    //'Administration'=>array('all'=>1, 'SupportPortal'=>'allow'),
@@ -449,6 +454,7 @@ $modInvisList[] = 'CustomQueries';
 $modInvisList[] = 'DataSets';
 $modInvisList[] = 'DataSet_Attribute';
 $modInvisList[] = 'ReportMaker';
+$modInvisList[] = 'ChangeTimers';
 
 //$modInvisList[] = 'QueryBuilder';
 $modInvisList[] = 'WorkFlow';
@@ -690,6 +696,13 @@ $beanList['EmbeddedFiles'] = 'EmbeddedFile';
 $beanFiles['EmbeddedFile'] = 'modules/EmbeddedFiles/EmbeddedFile.php';
 $modInvisList[] = 'EmbeddedFiles';
 
+$beanList['VisualPipeline']  = 'VisualPipeline';
+$beanFiles['VisualPipeline'] = 'modules/VisualPipeline/VisualPipeline.php';
+$modInvisList[] = 'VisualPipeline';
+
+$beanList['ConsoleConfiguration']  = 'ConsoleConfiguration';
+$beanFiles['ConsoleConfiguration'] = 'modules/ConsoleConfiguration/ConsoleConfiguration.php';
+$modInvisList[] = 'ConsoleConfiguration';
 
 // this module doesn't need a Bean
 $modInvisList[] = 'Feedbacks';

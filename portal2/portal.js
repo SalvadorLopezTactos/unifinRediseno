@@ -16,11 +16,7 @@
             {
                 name: 'portal-index',
                 route: '',
-                callback: function() {
-                    app.controller.loadView({
-                        layout: 'home'
-                    });
-                }
+                callback: loadHome,
             },
             {
                 name: 'logout',
@@ -31,12 +27,63 @@
                 route: 'logout'
             },
             {
+                name: 'forgotpassword',
+                route: 'forgotpassword',
+                callback: function() {
+                    app.controller.loadView({
+                        layout: 'forgotpassword',
+                        create: true
+                    });
+                }
+            },
+            {
+                name: 'resetpwdconfirmation',
+                route: 'resetpwdconfirmation',
+                callback: function() {
+                    app.controller.loadView({
+                        layout: 'resetpwdconfirmation',
+                        create: true
+                    });
+                }
+            },
+            {
                 name: 'signup',
                 route: 'signup',
                 callback: function() {
                     app.controller.loadView({
                         module: 'Signup',
                         layout: 'signup',
+                        create: true
+                    });
+                }
+            },
+            {
+                name: 'signup-success',
+                route: 'signup-success',
+                callback: function() {
+                    app.controller.loadView({
+                        layout: 'signup-success',
+                        create: true
+                    });
+                }
+            },
+            {
+                name: 'resetpassword',
+                route: 'resetpassword/:id',
+                callback: function(id) {
+                    app.controller.loadView({
+                        layout: 'resetpassword',
+                        resetID: id,
+                        create: true
+                    });
+                }
+            },
+            {
+                name: 'contact-info',
+                route: 'contact-info',
+                callback: function() {
+                    app.controller.loadView({
+                        layout: 'contact-info',
                         create: true
                     });
                 }
@@ -98,11 +145,7 @@
             {
                 name: 'home',
                 route: 'Home',
-                callback: function() {
-                    app.controller.loadView({
-                        layout: 'home'
-                    });
-                }
+                callback: loadHome,
             },
             {
                 name: 'list',
@@ -135,6 +178,20 @@
         }
     };
 
+    var loadHome = function() {
+        if (_.includes(app.metadata.getModuleNames({access: 'read'}), 'Dashboards')) {
+            app.controller.loadView({
+                module: 'Dashboards',
+                layout: 'servehome',
+            });
+        } else {
+            // legacy Home "dashboard"
+            app.controller.loadView({
+                layout: 'home',
+            });
+        }
+    };
+
     var oRoutingBefore = app.routing.beforeRoute;
     app.routing.beforeRoute = function(route, args) {
         var dm;
@@ -143,12 +200,30 @@
             'error',
             'profile',
             'profileedit',
-            'logout'
+            'logout',
+            'resetpassword'
         ];
 
         app.logger.debug('Loading route. ' + (route ? route : 'No route or undefined!'));
 
         if (!oRoutingBefore.call(this, route, args)) {
+            return false;
+        }
+
+        if (app.api.isAuthenticated() && !app.user.get('cookie_consent')) {
+            var reloadCb = {
+                complete: function() {
+                    window.location.reload();
+                }
+            };
+
+            app.controller.loadView({
+                layout: 'consent-wizard',
+                modelId: app.user.get('id'),
+                module: 'Contacts',
+                callbacks: reloadCb,
+            });
+            app.additionalComponents.header.hide();
             return false;
         }
 
@@ -165,7 +240,7 @@
 
         // Handle index case - get default module if provided. Otherwise, fallback to Home if possible or alert.
         if (route === 'index') {
-            dm = typeof(app.config) !== undefined && app.config.defaultModule ? app.config.defaultModule : null;
+            dm = typeof (app.config) !== undefined && app.config.defaultModule ? app.config.defaultModule : null;
             if (dm && app.metadata.getModule(dm) && app.acl.hasAccess('read', dm)) {
                 app.router.list(dm);
             } else if (app.acl.hasAccess('read', 'Home')) {

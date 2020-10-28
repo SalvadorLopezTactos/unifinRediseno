@@ -29,6 +29,9 @@ $viewdefs['Home']['base']['layout']['record'] = array(
                                     'loadModule' => 'Dashboards',
                                 ),
                                 array(
+                                    'view' => 'tabbed-dashboard',
+                                ),
+                                array(
                                     'layout' => 'dashlet-main',
                                 ),
                             ),

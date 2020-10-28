@@ -68,7 +68,7 @@ $mod_strings = array (
   'LBL_PRODUCT' => '商品',
   'LBL_PRODUCT_ID' => '商品ID:',
   'LBL_QUANTITY' => '在庫数量:',
-  'LBL_RELATED_PRODUCTS' => '関連見積り済商品',
+  'LBL_RELATED_PRODUCTS' => '関連見積品目',
   'LBL_SEARCH_FORM_TITLE' => '商品カタログ検索',
   'LBL_STATUS' => '在庫:',
   'LBL_SUPPORT_CONTACT' => 'サポート問合せ先:',
@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => '製造元',
   'LNK_NEW_PRODUCT_CATEGORY' => '商品カテゴリ',
   'LNK_NEW_PRODUCT_TYPE' => '商品タイプ',
-  'LNK_NEW_PRODUCT' => 'カタログ用の商品を作成',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => '運送会社',
   'LNK_PRODUCT_LIST' => '商品カタログ',
   'NTC_DELETE_CONFIRMATION' => '本当にこのレコードを削除してよいですか？',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => '商品カテゴリ',
   'LBL_MANUFACTURERS' => '製造元',
   'LBL_PRODUCT_TYPES' => '商品タイプ',
-
+  'LBL_RENEWABLE' => 'Renewable',
+  'LBL_SERVICE' => 'Service',
 );
-
-
-?>

@@ -1,72 +1,24 @@
+QUnit.module( "ajax" );
 
-module("ajax");
+QUnit.test( "jQuery.ajax() deprecations on jqXHR", function( assert ) {
+	assert.expect( 3 );
 
-// Can't run this in PhantomJS because it's a local file
-if ( window.location.protocol !== "file:" ) {
+	var done = assert.async();
 
-	test( "jQuery.ajax() with empty JSON string", function() {
-		expect( 2 );
+	expectWarning( assert, ".success(), .error(), .compete() calls", 3, function() {
 
-		stop();
-		jQuery.migrateReset();
-		jQuery.ajax({
-			url: "data/empty.json",
-			dataType: "json",
-			cache: false,
-			success: function( data ) {
-				equal( data, null, "empty string converted to null" );
-				equal( jQuery.migrateWarnings.length, 1, "warned" );
-			},
-			error: function( xhr, msg ) {
-				ok( false, "error: "+ msg );
-			},
-			complete: function() {
-				start();
-			}
-		});
-	});
+		jQuery.ajax( "/not-found.404" )
+			.success( jQuery.noop )
+			.error( function( jQXHR ) {
 
-	test( "jQuery.ajax() with 'null' JSON string", function() {
-		expect( 2 );
+				// Local file errors returns 0, pretend it's a 404
+				assert.equal( jQXHR.status || 404, 404, "ajax error" );
+			} )
+			.complete( function() {
+				assert.ok( true, "ajax complete" );
+				// Wait for expectWarning to complete
+				setTimeout(done, 1);
+			} );
+	} );
 
-		stop();
-		jQuery.migrateReset();
-		jQuery.ajax({
-			url: "data/null.json",
-			dataType: "json",
-			cache: false,
-			success: function( data ) {
-				equal( data, null, "'null' converted to null" );
-				equal( jQuery.migrateWarnings.length, 0, "did not warn" );
-			},
-			error: function( xhr, msg ) {
-				ok( false, "error: "+ msg );
-			},
-			complete: function() {
-				start();
-			}
-		});
-	});
-
-	test( "jQuery.ajax() with simple JSON string", function() {
-		expect( 2 );
-
-		stop();
-		jQuery.migrateReset();
-		jQuery.ajax({
-			url: "data/simple.json",
-			dataType: "json",
-			cache: false,
-			success: function( data ) {
-				equal( data.gibson, 42, "right answer" );
-				equal( jQuery.migrateWarnings.length, 0, "did not warn" );
-			},
-			error: function( xhr, msg ) {
-				ok( false, "error: "+ msg );
-			},
-			complete: function() {
-				start();
-			}
-		});
-	});
-}
+} );

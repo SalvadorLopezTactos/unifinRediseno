@@ -30,11 +30,6 @@
         // init bean collection used for type aheads
         this.filterResults = app.data.createBeanCollection('Tags');
 
-        // initialize value to empty array
-        if (!this.model.has(this.name)) {
-            this.model.setDefault(this.name, []);
-        }
-
         // Set append as default when mass updating tags
         this.appendTagValue = true;
         this.model.setDefault('tag_type', this.appendTagValue ? '1' : '0');

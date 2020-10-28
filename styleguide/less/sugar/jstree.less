@@ -29,7 +29,7 @@
     display: inline-block;
     line-height: 16px;
     height: 16px;
-    color: black;
+    color: @black;
     white-space: nowrap;
     text-decoration: none;
     padding: 1px 2px;
@@ -147,7 +147,7 @@ li.jstree-closed > ul {
   }
 
   a.jstree-search {
-    color: aqua;
+    color: @ocean;
   }
 
   .jstree-search {
@@ -208,7 +208,7 @@ li.jstree-closed > ul {
   }
 
   .jstree-locked a {
-    color: silver;
+    color: @slate;
     cursor: default;
   }
 }
@@ -240,20 +240,20 @@ li.jstree-closed > ul {
 
 #vakata-contextmenu.jstree-sugar-context,
 #vakata-contextmenu.jstree-sugar-context li ul {
-  background: #f0f0f0;
-  border: 1px solid #979797;
-  -moz-box-shadow: 1px 1px 2px #999;
-  -webkit-box-shadow: 1px 1px 2px #999;
-  box-shadow: 1px 1px 2px #999;
+  background: @grayLighter;
+  border: 1px solid @grayLight;
+  -moz-box-shadow: 1px 1px 2px @grayLightish;
+  -webkit-box-shadow: 1px 1px 2px @grayLightish;
+  box-shadow: 1px 1px 2px @grayLightish;
 }
-#vakata-contextmenu.jstree-sugar-context a { color: black; }
+#vakata-contextmenu.jstree-sugar-context a { color: @black; }
 
 #vakata-contextmenu.jstree-sugar-context a:hover,
 #vakata-contextmenu.jstree-sugar-context .vakata-hover > a {
   padding: 0 5px;
-  background: #e8eff7;
-  border: 1px solid #aecff7;
-  color: black;
+  background: @grayLighter;
+  border: 1px solid @blue;
+  color: @black;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
@@ -261,15 +261,15 @@ li.jstree-closed > ul {
 
 #vakata-contextmenu.jstree-sugar-context li.jstree-contextmenu-disabled a,
 #vakata-contextmenu.jstree-sugar-context li.jstree-contextmenu-disabled a:hover {
-  color: silver;
-  background: transparent;
+  color: @slate;
+  background: @transparent;
   border: 0;
   padding: 1px 4px;
 }
 
 #vakata-contextmenu.jstree-sugar-context li.vakata-separator {
-  background: white;
-  border-top: 1px solid #e0e0e0;
+  background: @white;
+  border-top: 1px solid @grayLighter;
   margin: 0;
 }
 #vakata-contextmenu.jstree-sugar-context li ul { margin-left: -4px; }

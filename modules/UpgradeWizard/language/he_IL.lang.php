@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'לא בר-התקנה',
     'LBL_ML_VERSION' => 'גרסה',
 	'LBL_ML_INSTALL'=>'התקן',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'מעקב',
 	'LBL_MODULE_NAME' => 'אשף השדרוג',
 	'LBL_MODULE_NAME_SINGULAR' => 'אשף השדרוג',
 	'LBL_UPLOAD_SUCCESS' => 'חבילת השדרוג הועלתה בהצלחה. לחץ על הבא כדי לבצע בדיקה סופית.',

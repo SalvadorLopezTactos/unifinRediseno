@@ -18,17 +18,7 @@
  ********************************************************************************/
 
 $mod_strings = array (
-		  //Labels for methods in the TrackerReporter.php file that are shown in TrackerDashlet
-		  'ShowActiveUsers'      => 'アクティブユーザの表示',
-		  'ShowLastModifiedRecords' => '最新10件の変更されたレコード',
-		  'ShowTopUser' => 'トップユーザ',
-		  'ShowMyModuleUsage' => '私のモジュール利用状況',
-		  'ShowMyWeeklyActivities' => '私の今週のアクティビティ',
-		  'ShowTop3ModulesUsed' => '私のトップ3利用モジュール',
-		  'ShowLoggedInUserCount' => 'アクティブユーザ数',
-		  'ShowMyCumulativeLoggedInTime' => '私の累積ログイン時間（今週）',
-		  'ShowUsersCumulativeLoggedInTime' => 'ユーザの累積ログイン時間（今週）',
-		  
+
 		  //Column header mapping
 		  'action' => 'アクション',
 		  'active_users' => 'アクティブユーザ',
@@ -54,7 +44,7 @@ $mod_strings = array (
 		  'LBL_MODULE_NAME_SINGULAR' => 'トラッカー',
 		  'LBL_TRACKER_SETTINGS' => 'トラッカー設定',
 		  'LBL_TRACKER_QUERIES_DESC' => 'トラッカークエリ',
-		  'LBL_TRACKER_QUERIES_HELP' => '「遅延クエリのログ」が有効で、「遅延クエリの閾値」よりもクエリの実行時間が越える場合にSQL文をトラックする',
+		  'LBL_TRACKER_QUERIES_HELP' => '「スロークエリのログ」が有効で、「スロークエリの閾値」よりもクエリの実行時間が越える場合にSQL文をトラックする',
 		  'LBL_TRACKER_PERF_DESC' => 'パフォーマンストラッカー',
 		  'LBL_TRACKER_PERF_HELP' => 'データベースの行き来、ファイルアクセス、メモリー使用量をトラックする',
 		  'LBL_TRACKER_SESSIONS_DESC' => 'セッショントラッカー',

@@ -1784,7 +1784,7 @@ class Report
                         $view_action = ACLAction::getUserAccessLevel($current_user->id, $linkModName, 'view', $type = 'module');
 
                         if ($list_action == ACL_ALLOW_NONE || $view_action == ACL_ALLOW_NONE) {
-                            if ((isset($_REQUEST['DynamicAction']) && $_REQUEST['DynamicAction'] == 'retrievePage') || (isset($_REQUEST['module']) && $_REQUEST['module'] == 'Home')) {
+                            if ((isset($_REQUEST['DynamicAction']) && $_REQUEST['DynamicAction'] === 'retrievePage') || (isset($_REQUEST['module']) && $_REQUEST['module'] === 'Home')) {
                                 throw new Exception($mod_strings['LBL_NO_ACCESS'] . "----" . $linkModName);
                             } else {
                                 $this->handleException($mod_strings['LBL_NO_ACCESS'] . "----" . $linkModName);
@@ -2916,5 +2916,30 @@ class Report
             $recordCount = (int) $row['record_count'];
         }
         return $recordCount;
+    }
+
+    /**
+     * Use summary_columns labels to override the ones in group_defs
+     */
+    public function fixGroupLabels()
+    {
+        // Summary labels are customizable. Summary label should be used instead of group label
+        if (isset($this->report_def['summary_columns']) && isset($this->report_def['group_defs'])) {
+            for ($i = 0; $i < count($this->report_def['group_defs']); $i++) {
+                $isValid = true;
+                if (isset($this->report_def['group_defs'][$i]['qualifier'])) {
+                    if (!isset($this->report_def['summary_columns'][$i]['qualifier'])) {
+                        $isValid = false;
+                    } elseif ($this->report_def['group_defs'][$i]['qualifier'] != $this->report_def['summary_columns'][$i]['qualifier']) {
+                        $isValid = false;
+                    }
+                }
+                if ($this->report_def['group_defs'][$i]['name'] == $this->report_def['summary_columns'][$i]['name']
+                    && isset($this->report_def['summary_columns'][$i]['label'])
+                    && $isValid) {
+                    $this->report_def['group_defs'][$i]['label'] = $this->report_def['summary_columns'][$i]['label'];
+                }
+            }
+        }
     }
 }

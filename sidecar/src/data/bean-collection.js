@@ -602,11 +602,11 @@ const BeanCollection = Backbone.Collection.extend({
         delete options.view;
         options.silent = true;
         options.success = _.wrap(options.success, _.bind(function(orig, data) {
-            var length = data.records.length;
+            var length = this.link ? data.record_count : data.records.length;
             var hasAtLeastAmount = length >= amount;
             var properties = {
                 length: length,
-                hasMore: data.next_offset !== -1
+                hasMore: this.link ? data.has_more : data.next_offset !== -1
             };
 
             if (_.isFunction(orig)) {
@@ -628,14 +628,18 @@ const BeanCollection = Backbone.Collection.extend({
                 link: this.link.name
             };
             module = this.link.bean.module;
-            endpoint = 'relationships';
+            endpoint = 'relatedLeanCount';
         }
 
         var callbacks = _.pick(options, 'success', 'complete', 'error');
         options = _.omit(options, 'success', 'complete', 'error');
         options = SUGAR.App.data.parseOptionsForSync(method, this, options);
 
+        if (this.link) {
+            return SUGAR.App.api[endpoint](module, data, options.params, callbacks, options.apiOptions);
+        }
         return SUGAR.App.api[endpoint](method, module, data, options.params, callbacks, options.apiOptions);
+
     },
 
     /**

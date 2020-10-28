@@ -13,9 +13,9 @@
 
 require SugarAutoLoader::loadWithMetafiles('Project', 'projecttemplate_listviewdefs');
 
-require_once('include/SearchForm/SearchForm.php');
+require_once 'include/SearchForm/SearchForm.php';
 
-echo getClassicModuleTitle($mod_strings['LBL_MODULE_NAME'], array($mod_strings['LBL_PROJECT_TEMPLATES_TITLE']), true);
+echo getClassicModuleTitle(htmlspecialchars($mod_strings['LBL_MODULE_NAME']), array(htmlspecialchars($mod_strings['LBL_PROJECT_TEMPLATES_TITLE'])), true);
 
 $header_text = '';
 
@@ -128,18 +128,20 @@ for ($i = 0; $i < count($lv->data['data']); $i++) {
 $lv->ss->assign('act','ProjectTemplatesEditView');
 
 $savedSearchName = empty($_REQUEST['saved_search_select_name']) ? '' : (' - ' . $_REQUEST['saved_search_select_name']);
-echo get_form_header($current_module_strings['LBL_LIST_FORM_TITLE'] . $savedSearchName, '', false);
+echo get_form_header(htmlspecialchars($current_module_strings['LBL_LIST_FORM_TITLE'] . $savedSearchName), '', false);
 
 echo $lv->display();
 
 // awu: Bug 11452 - removing export for non-admin users without a mass update form
 // faking a massupdate form, which is expected on page load
-if (!is_admin($current_user)){
-$form = "<form action='index.php' id='MassUpdate' method='post' name='MassUpdate'><textarea id='uid' name='uid'></textarea><input name='action' value='index' /><input name='module' value='Project'></form>";
-echo $form;
-$hide_form = "<script>
-document.getElementById('MassUpdate').style.display = 'none';
-</script>";
-echo $hide_form;
-}
 ?>
+<?php if (!is_admin($current_user)) : ?>
+    <form action="index.php" id="MassUpdate" method="post" name="MassUpdate">
+        <textarea id="uid" name="uid"></textarea>
+        <input name="action" value="index" />
+        <input name="module" value="Project" />
+    </form>
+    <script>
+        document.getElementById('MassUpdate').style.display = 'none';
+    </script>
+<?php endif;

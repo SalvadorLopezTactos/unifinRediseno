@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Vista Preliminar',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'ADVERTENCIA: Si cambia el módulo primario, todos los campos ya agregados a la plantilla tendrán que ser eliminados.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Aquí está el archivo que ha solicitado (Puede cambiar este texto)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Cotización',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Esta plantilla es utilizada para imprimir Presupuestos en PDF.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'cotización',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Presupuesto (con servicios)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Esta plantilla se utiliza para imprimir un Presupuesto, incluida la información de servicio, en PDF.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'presupuestodeservicio',
+
   'LBL_TPL_INVOICE_NAME' => 'Factura',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Esta plantilla es utilizada para imprimir Facturas en PDF.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'factura',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Factura (con servicios)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Esta plantilla se utiliza para imprimir una Factura, incluida la información de servicio, en PDF.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'facturadeservicio',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Número de Cotización:',
   'LBL_TPL_SALES_PERSON' => 'Vendedor:',
   'LBL_TPL_VALID_UNTIL' => 'Válido hasta:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Número de Pieza',
   'LBL_TPL_PRODUCT' => 'Partida Individual Cotizada',
   'LBL_TPL_RLI' => 'Artículos de Línea de Ganancia',
+  'LBL_TPL_DURATION' => 'Duración',
+  'LBL_TPL_DURATION_STARTS' => 'Inicio:',
+  'LBL_TPL_DURATION_ENDS' => 'Fin:',
   'LBL_TPL_LIST_PRICE' => 'Precio de Lista',
   'LBL_TPL_UNIT_PRICE' => 'Precio Unitario',
   'LBL_TPL_EXT_PRICE' => 'Precio Ext.',

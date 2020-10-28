@@ -26,21 +26,9 @@ class LocalProvider extends \Google\Protobuf\Internal\Message
      */
     private $config = null;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $name
-     *           srn:cloud:idp::1234567890:provider:local
-     *     @type \Sugarcrm\Apis\Iam\Provider\V1alpha\LocalConfig $config
-     *           Local configuration
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Provider\V1Alpha\Provider::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

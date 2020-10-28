@@ -96,6 +96,7 @@ class PMSEBusinessRule extends PMSEScriptTask
             $rst_definition = htmlspecialchars_decode($rst_definition, ENT_QUOTES);
             $logBR .= "executing $rst_name \n";
             $bean = $this->caseFlowHandler->retrieveBean($sugarModule, $sugarRecord);
+            PMSEEngineUtils::setRegistry($bean);
 
             //go thru fetched_row to obtain the fields array, and then use the
             //bean property for each field.

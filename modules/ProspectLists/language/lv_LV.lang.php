@@ -65,6 +65,12 @@ $mod_strings = array (
   'LBL_DOMAIN'=>'Nav e-pastu uz šo domēnu',
   'LBL_LIST_PROSPECTLIST_NAME'=>'Nosaukums',
 	'LBL_MORE_DETAIL' => 'Vairāk informācijas' /*for 508 compliance fix*/,
+    'LBL_ACCOUNTS' => 'Klienti',
+    'LBL_CAMPAIGNS' => 'Kampaņas',
+    'LBL_CONTACTS' => 'Kontakti',
+    'LBL_LEADS' => 'Interesenti',
+    'LBL_PROSPECTS' => 'Mērķi',
+    'LBL_USERS' => 'Lietotāji',
 
     // Help Text
     // List View Help Text

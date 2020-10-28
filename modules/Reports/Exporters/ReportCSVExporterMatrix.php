@@ -73,6 +73,7 @@ abstract class ReportCSVExporterMatrix extends ReportCSVExporterBase
     protected function runQuery()
     {
         $this->reporter->run_summary_query();
+        $this->reporter->fixGroupLabels();
         $this->detailHeaders = $this->reporter->getDataTypeForColumnsForMatrix();
         $this->displayHeaders = $this->matrixCleanUpHeaders();
         $this->trie = $this->matrixTrieBuilder();

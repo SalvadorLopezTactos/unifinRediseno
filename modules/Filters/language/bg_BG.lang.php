@@ -105,4 +105,6 @@ $mod_strings = array(
     'LBL_OPERATOR_LAST_YEAR' => 'миналата година',
     'LBL_OPERATOR_THIS_YEAR' => 'текущата година',
     'LBL_OPERATOR_NEXT_YEAR' => 'следващата година',
+    'LBL_OPEN_ISSUES' => 'Отвори {0}',
+    'LBL_RECENTLY_RESOLVED_ISSUES' => 'Наскоро решени',
 );

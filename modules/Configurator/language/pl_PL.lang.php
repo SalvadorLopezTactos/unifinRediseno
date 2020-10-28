@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'Proporcje obrazka powinny wynosić od 1:1 do 10:1.  Obrazek zostanie przeskalowany.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'Proporcje obrazka powinny wynosić od 3:1 do 20:1.  Prześlij nowy plik z takimi parametrami.',
     'ERR_ALERT_FILE_UPLOAD' => 'Błąd podczas ładowania obrazka.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Nie można utworzyć katalogu na obrazy',
     'LBL_LOGGER'=>'Ustawienia dziennika',
 	'LBL_LOGGER_FILENAME'=>'Nazwa pliku logu',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Rozszerzenie',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Maksymalna wielkość logu',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Domyślny format daty',
 	'LBL_LOGGER_LOG_LEVEL'=>'Poziom logowania',
@@ -458,6 +458,10 @@ Aby skonfigurować opcje systemu, kliknij <a href="index.php?module=Administrati
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Ustawienia dziennika komentarzy',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Maksymalna liczba znaków na wpis komentarza',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

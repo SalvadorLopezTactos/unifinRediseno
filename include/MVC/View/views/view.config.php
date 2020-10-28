@@ -20,21 +20,18 @@ $view_config = array(
 		 					'show_header' => false,
 		 					'show_subpanels' => false,
 		 					'show_search' => false,
-		 					'show_footer' => false,
 		 					'show_javascript' => true,
 		 				),
 		 	'authenticate' => array(
 		 					'show_header' => false,
 		 					'show_subpanels' => false,
 		 					'show_search' => false,
-		 					'show_footer' => false,
 		 					'show_javascript' => false,
 		 				),
 		 	'subpanelcreates' => array(
 		 					'show_header' => false,
 		 					'show_subpanels' => false,
 		 					'show_search' => false,
-		 					'show_footer' => false,
 		 					'show_javascript' => true,
 		 				),
 		 ),
@@ -43,7 +40,6 @@ $view_config = array(
             'param_value' => true,
                              'config' => array(
                                           'show_header' => true,
-                                          'show_footer' => false,
                                           'view_print'  => true,
                                           'show_title' => false,
                                           'show_subpanels' => false,
@@ -84,7 +80,6 @@ $view_config = array(
             'param_value' => true,
                              'config' => array(
                                           'show_header' => false,
-                                          'show_footer' => false,
                                           'view_print'  => false,
                                           'show_title' => false,
                                           'show_subpanels' => false,
@@ -96,7 +91,6 @@ $view_config = array(
             'param_value' => true,
             'config' => array(
                 'show_header' => false,
-                'show_footer' => false,
                 'view_print'  => false,
                 'show_title' => true,
                 'show_subpanels' => false,

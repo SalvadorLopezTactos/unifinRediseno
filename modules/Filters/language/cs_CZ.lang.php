@@ -105,4 +105,6 @@ $mod_strings = array(
     'LBL_OPERATOR_LAST_YEAR' => 'minulý rok',
     'LBL_OPERATOR_THIS_YEAR' => 'tento rok',
     'LBL_OPERATOR_NEXT_YEAR' => 'příští rok',
+    'LBL_OPEN_ISSUES' => 'Otevřít {0}',
+    'LBL_RECENTLY_RESOLVED_ISSUES' => 'Nedávno vyřešeno',
 );

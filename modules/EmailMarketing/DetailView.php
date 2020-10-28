@@ -105,12 +105,19 @@ if (empty($_REQUEST['campaign_name'])) {
 	$campaign_name=$_REQUEST['campaign_name'];
 }
 
-$params = array();
-$params[] = "<a href='index.php?module=Campaigns&action=index'>{$mod_strings['LNK_CAMPAIGN_LIST']}</a>";
-$params[] = "<a href='index.php?module=Campaigns&action=DetailView&record={$campaign_id}'>{$campaign_name}</a>";
-$params[] = $focus->name;
+$href = 'index.php?' . http_build_query(
+    [
+        'module' => 'Campaigns',
+        'action' => 'DetailView',
+        'record' => $campaign_id,
+    ]
+);
 
-echo getClassicModuleTitle($focus->module_dir, $params, true);
+echo getClassicModuleTitle(htmlspecialchars($focus->module_dir), [
+    sprintf('<a href="index.php?module=Campaigns&action=index">%s</a>', htmlspecialchars($mod_strings['LNK_CAMPAIGN_LIST'])),
+    sprintf('<a href="%s">%s</a>', $href, htmlspecialchars($campaign_name)),
+    htmlspecialchars($focus->name),
+], true);
 
 if (!empty($focus->all_prospect_lists)) {
 	$xtpl->assign("MESSAGE_FOR", $mod_strings['LBL_ALL_PROSPECT_LISTS']);

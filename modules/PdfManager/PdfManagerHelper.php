@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 /*
  * Function used in vardefs to retrieve options list
@@ -301,6 +302,10 @@ class PdfManagerHelper
                 ($forRelatedField && isset($def['studio']['related']) && self::isFalse($def['studio']['related']))
             ))))
             {
+                continue;
+            }
+
+            if (!AccessControlManager::instance()->allowFieldAccess($moduleName, $fieldName)) {
                 continue;
             }
 

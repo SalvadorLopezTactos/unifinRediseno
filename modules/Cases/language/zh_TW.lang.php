@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => '案件清單儀表板',
     'LBL_CASES_RECORD_DASHBOARD' => '案件紀錄儀表板',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => '案例詳細資料',
 
 	'ERR_DELETE_RECORD'					=> '您必須指定記錄編號才能刪除「帳戶」。',
 	'LBL_ACCOUNT_ID'					=> '帳戶 ID',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> '連絡人',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> '實例',
 	'LBL_DESCRIPTION'					=> '描述：',
-	'LBL_FILENANE_ATTACHMENT' 			=> '檔案附件',	
+    'LBL_FILENANE_ATTACHMENT'           => '檔案附件',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> '歷史',
 	'LBL_INVITEE'						=> '連絡人',
 	'LBL_MEMBER_OF'						=> '帳戶',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => '由使用者名稱建立',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => '指派的使用者名稱',
     'LBL_EXPORT_TEAM_COUNT' => '群組計數',
+    'LBL_CHANGETIMERS' => '更改計時器',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => '關聯連絡人電子郵件',
@@ -140,4 +143,11 @@ $mod_strings = array (
  - 標記為「必填」的欄位在儲存前必須先填寫完整。
  - 按一下「顯示更多」以顯示更多欄位（若需）。
 2. 按一下「儲存」以完成新記錄並返回至上一頁。',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => '沒有找到所需要的內容?',
+    'LBL_CREATE_CASE' => '建立 {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'SLA 詳細訊息',
+    'LBL_HOURS' => '小時',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

@@ -15,6 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Kontrolna tabla liste prodajnih prilika',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa prodajnih prilika',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Detalji prodajnih prilika',
 
     'LBL_MODULE_NAME' => 'Prodajne prilike',
     'LBL_MODULE_NAME_SINGULAR' => 'Prilika',
@@ -25,6 +26,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => 'Ime prodajne prilike:',
     'LBL_OPPORTUNITY' => 'Prodajna prilika',
     'LBL_NAME' => 'Ime prodajne prilike',
+    'LBL_TIME' => 'Vreme',
     'LBL_INVITEE' => 'Kontakti',
     'LBL_CURRENCIES' => 'Valute',
     'LBL_LIST_OPPORTUNITY_NAME' => 'Ime',
@@ -75,6 +77,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Tip:',
     'LBL_CAMPAIGN' => 'Kampanja:',
     'LBL_NEXT_STEP' => 'Sledeći korak:',
+    'LBL_SERVICE_START_DATE' => 'Service Start Date',
     'LBL_LEAD_SOURCE' => 'Izvor informacije o potencijalnom klijentu:',
     'LBL_SALES_STAGE' => 'Faza prodaje:',
     'LBL_SALES_STATUS' => 'Status',
@@ -142,6 +145,16 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE_FORECAST' => 'Prognoza',
     'LBL_WORKSHEET' => 'Tabela',
 
+    'LBL_RENEWAL' => 'Obnova',
+    'LBL_RENEWAL_OPPORTUNITIES' => 'Obnova prodajnih prilika',
+    'LBL_RENEWAL_PARENT' => 'Nadređena prodajna prilika',
+    'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'ID nadređene obnove',
+    'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
+
+    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
+    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
+    'LBL_WIDGET_AMOUNT' => 'Amount',
+
     'TPL_RLI_CREATE' => 'Prodajna prilika mora da ima povezanu stavku prihoda. <a href="javascript:void(0);" id="createRLI">Napravite stavku prihoda</a>.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Napravi stavku prihoda.',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Proizvodi',
@@ -152,6 +165,7 @@ $mod_strings = array(
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Nije moguće obirsati prodajne prilike koje sadrže stavke prihoda.',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Jedan ili više izabranih zapisa sadrži zatvorene stavke prihoda i nije ih moguće obrisati.',
     'LBL_INCLUDED_RLIS' => '# od priloženih stavki linije prihoda',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Ponude',
 
@@ -186,10 +200,10 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Kada pokrenete ovu promenu, zapisi o stavci prihoda će biti kreirani za svaki postojeći {{module_name}} u pozadini. Kada se stavke prihoda formiraju i kada budu dostupne, biće poslato obaveštenje na e-mail adresu sa Vašeg profila. Obratite pažnju da Vaša instanca mora da bude konfigurisana da pošalje e-mail putem Admin > E-mail postavke kako bi se obaveštenja poslala.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} omogućava praćenje pojedinačnih prodaja od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i podatke povezane s ostalim važnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}} itd. Modul {{module_name}} obično prolazi kroz nekoliko faza prodaje dok ne dobije oznaku „Zatvoreni dobitak” ili „Zatvoreni gubitak”. Modul {{plural_module_name}} može dodatno da se iskoristi upotrebom Sugar modula za {{forecasts_singular_module}} da bi se razumeli i predviđali trendova prodaje, kao i da bi se poslovanja usmerilo na dostizanje prodajnih kvota.',
+    'LBL_HELP_RECORDS' => 'Moduli {{plural_module_name}} omogućavaju praćenje pojedinačnih prodaja od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i podatke povezane s ostalim važnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}} itd. Modul {{module_name}} obično prolazi kroz nekoliko faza prodaje dok ne dobije oznaku „Zatvoreni dobitak” ili „Zatvoreni gubitak”. Moduli {{plural_module_name}} mogu dodatno da se iskoriste upotrebom Sugar modula za {{forecasts_singular_module}} da bi se razumeli i predviđali trendova prodaje, kao i da bi se poslovanja usmerilo na dostizanje prodajnih kvota.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} vam omogućava praćenje pojedinačnih prodaja i stavki koje pripadaju tim prodajama od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i podatke povezane s ostalim važnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}} itd.
+    'LBL_HELP_RECORD' => 'Moduli {{plural_module_name}} vam omogućavaju praćenje pojedinačnih prodaja i stavki koje pripadaju tim prodajama od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i podatke povezane s ostalim važnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}} itd.
 
 - Uredite ova polja zapisa klikom na pojedinačno polje ili na dugme Uredi.
 - Pogledajte ili izmenite veze na ostalim zapisima u podpločama prebacivanjem donjeg levog okna na „Pregled podataka”.
@@ -198,7 +212,7 @@ $mod_strings = array(
 - Dodatne radnje dostupne su u padajućem meniju Radnji koje se nalaze levo od dugmeta Uredi.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} vam omogućava da pratite pojedinačne prodaje i stavke koje pripadaju tim prodajama od početka do kraja. Svaki zapis {{module_name}} o modulu predstavlja potencijalnu prodaju i uključuje bitne podatke o prodaji, kao i podatke povezane sa ostalim bitnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}}, itd.
+    'LBL_HELP_CREATE' => 'Moduli {{plural_module_name}} vam omogućavaju da pratite pojedinačne prodaje i stavke koje pripadaju tim prodajama od početka do kraja. Svaki zapis {{module_name}} o modulu predstavlja potencijalnu prodaju i uključuje bitne podatke o prodaji, kao i podatke povezane sa ostalim bitnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}}, itd.
 
 Kreiranje modula {{module_name}}:
 1. Unesite vrednost u polja po želji.
@@ -216,4 +230,6 @@ Kreiranje modula {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Prikazuje deset najboljih prodajnih prilika kružnim grafikonom.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Moje prodajne prilike',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Prodajne prilike moga tima",
+
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
 );

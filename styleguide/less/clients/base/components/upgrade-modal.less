@@ -96,12 +96,12 @@
 
   .progress .bar.in-progress {
     background-image: none;
-    background-color: #ebb71c;
+    background-color: @orange;
   }
 
   .progress .bar.error {
     background-image: none;
-    background-color: #b81213;
+    background-color: @darkRed;
   }
   .control-group input[type="password"], .upgrade .control-group input[type="text"] {
     margin-bottom: 10px;
@@ -123,28 +123,28 @@
       height: 60px;
       padding: 6px;
       text-align: center;
-      color: #58595b;
+      color: @gray;
       font-size: 11px;
-      background-color: #f3f3f3;
-      background-image: linear-gradient(to bottom, #f8f8f8, #ededed);
+      background-color: @grayLighter;
+      background-image: linear-gradient(to bottom, @grayLighter, @white);
       background-repeat: repeat-x;
       transition: all 0s;
 
       &:hover {
-        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2), 2px 2px 1px rgba(0, 0, 0, 0.1);
+        box-shadow: 1px 1px 1px fade(@black, 20%), 2px 2px 1px fade(@black, 10%);
         border: none;
       }
 
       &:hover i {
         text-decoration: none;
-        color: #58595b;
+        color: @gray;
       }
 
       i {
         font-size: 24px;
         display: inline-block;
         width: 100%;
-        color: #bbb;
+        color: @grayLightish;
       }
     }
   }
@@ -172,29 +172,29 @@
 }
 
 .upgrade .color_red {
-  color: #b81213;
+  color: @darkRed;
   background: none;
 }
 
 .upgrade .color_yellow {
-  color: #e6af17;
+  color: @yellow;
   background: none;
 }
 
 .upgrade .alert-danger {
-  background-color: #b81213;
-  color: #fff;
+  background-color: @darkRed;
+  color: @white;
   text-shadow: none !important;
 }
 
 .upgrade .color_green {
-  color: #37880e;
+  color: @darkGreen;
   background: none;
 }
 
 .upgrade .alert-success {
-  background-color: #37880e;
-  color: #fff;
+  background-color: @darkGreen;
+  color: @white;
   text-shadow: none !important;
 }
 
@@ -208,19 +208,19 @@
 }
 
 .upgrade .alert .close .fa-times {
-  color: #000;
+  color: @black;
 }
 
 .upgrade .fa-ellipsis-h {
-  background: #ebb542;
+  background: @orange;
   border-radius: 10px;
   padding: 2px 1px 0;
   line-height: 14px;
-  color: #fff;
+  color: @white;
 }
 
 .upgrade .upload-file {
-  border: 3px solid #eee;
+  border: 3px solid @grayLighter;
   display: inline-block;
   height: 36px;
   padding-top: 4px;

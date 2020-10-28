@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+
 class ViewLabels extends ViewModulefields
 {
     /**
@@ -32,6 +34,9 @@ class ViewLabels extends ViewModulefields
          global $locale;
 
          $editModule = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
+        if (!AccessControlManager::instance()->allowModuleAccess($editModule)) {
+            throw new SugarApiExceptionModuleDisabled();
+        }
          $labels = $this->request->getValidInputRequest('labels');
          $allLabels = ($labels == 'all');
 

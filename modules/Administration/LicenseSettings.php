@@ -18,10 +18,7 @@
  ********************************************************************************/
 
 
-
-
-
-
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 
 global $timedate;
 global $mod_strings;
@@ -75,11 +72,25 @@ echo getClassicModuleTitle(
         );
 global $currentModule;
 
-
-
-
-
-
+$isLicenseUpdateDenied = \SugarConfig::getInstance()->get('deny_license_update', false);
+if ($isLicenseUpdateDenied) {
+    $saveButtonTable = '';
+} else {
+    $saveButtonTable = <<<HTML
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="actionsContainer">
+<tr>
+    <td>
+        <input 
+            title="{$app_strings['LBL_EDIT_BUTTON_TITLE']}" 
+            class="button primary" onclick="toggleDisplay('detail_view_div');toggleDisplay('edit_view_div');" 
+            type="button" name="button" 
+            value="{$app_strings['LBL_EDIT_BUTTON_LABEL']}">
+    </td>
+    <td align="right" nowrap><span class="required">&nbsp;</td>
+</tr>
+</table>
+HTML;
+}
 
 $GLOBALS['log']->info("Administration LicenseSettings view");
 
@@ -92,6 +103,7 @@ $xtpl->assign("RETURN_ACTION", "index");
 
 $xtpl->assign("MODULE", $currentModule);
 $xtpl->assign("HEADER", getClassicModuleTitle("Administration", array("{MOD.LBL_MANAGE_LICENSE}"), true));
+$xtpl->assign('SAVE_BUTTON_TABLE', $saveButtonTable);
 
 //move the url part out LBL_MANUAL_VALIDATION3 in the language file
 $manualValidation3Url = '<a href="https://updates.sugarcrm.com/license/" target="_blank">https://updates.sugarcrm.com/license/</a>';
@@ -102,7 +114,10 @@ $manualValidation3 = str_replace(
 );
 $xtpl->assign("MANUAL_VALIDATION3", $manualValidation3);
 
-if(!empty($focus->settings['license_users']))$xtpl->assign("LICENSE_USERS",          $focus->settings['license_users']);
+$totalLicenseUsers = SubscriptionManager::instance()->getTotalNumberOfUsers();
+if (!empty($focus->settings['license_users'])) {
+    $xtpl->assign("LICENSE_USERS", $totalLicenseUsers);
+}
 if(!empty($focus->settings['license_expire_date'])) $xtpl->assign("LICENSE_EXPIRE_DATE",    $timedate->to_display_date( $focus->settings['license_expire_date'], false) );
 if(!empty($focus->settings['license_key']))$xtpl->assign("LICENSE_KEY",            $focus->settings['license_key']);
 if(!empty($focus->settings['license_validation_key']))$xtpl->assign("LICENSE_VALIDATION_KEY",          md5($focus->settings['license_validation_key']));

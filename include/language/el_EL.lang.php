@@ -43,6 +43,8 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'Πρόβλεψη Φύλλου Εργασίας',
     'ForecastManagerWorksheets' => 'Πρόβλεψη Διευθυντή Φύλλου Εργασίας',
     'MergeRecords'=>'Συγχώνευση Εγγραφών',
+      'VisualPipeline'=>'Προβολή Γραφημάτων ή Πινάκων',
+      'ConsoleConfiguration' => 'Διαμόρφωση Κονσόλας',
     'Quotas' => 'Ποσοστώσεις',
     'Teams' => 'Ομάδες',
     'TeamNotices' => 'Ειδοποιήσεις Ομάδας',
@@ -75,6 +77,11 @@ $app_list_strings = array (
     'pmse_Project' => 'Ορισμοί Διεργασιών',
     'pmse_Business_Rules' => 'Διεργασίες Επιχειρησιακών Κανόνων',
     'pmse_Emails_Templates' => 'Διεργασία Προτύπου Email',
+    'BusinessCenters' => 'Επιχειρηματικά κέντρα',
+    'Shifts' => 'Shifts',
+    'ShiftExceptions' => 'Shift Exceptions',
+    'Purchases' => 'Purchases',
+    'PurchasedLineItems' => 'Purchased Line Items',
     'WorkFlow' => 'Ορισμοί Ροής Εργασίας',
     'EAPM' => 'Εξωτερικοί Λογαριασμοί',
     'Worksheet' => 'Φύλλο Εργασίας',
@@ -116,6 +123,8 @@ $app_list_strings = array (
     'DataPrivacy' => 'Πολιτική προστασίας προσωπικών δεδομένων',
     'ReportSchedules' => 'Χρονοδιαγράμματα Αναφοράς',
     'CommentLog' => 'Αρχείο σχολίου',
+    'Holidays' => 'Αργίες',
+    'ChangeTimers' => 'Αλλαγή Χρονομέτρων',
   ),
 
     'moduleIconList' =>
@@ -131,6 +140,8 @@ $app_list_strings = array (
         'Tasks' => 'Ερ',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'ΒΔ',
+        'BusinessCenters' => 'Εκ',
+        'PurchasedLineItems' => 'PL',
     ),
 
   'moduleListSingular' =>
@@ -150,6 +161,8 @@ $app_list_strings = array (
     'Calendar' => 'Ημερολόγιο',
     'Leads' => 'Δυνητικός Πελάτης',
     'Manufacturers' => 'Κατασκευαστής',
+    'VisualPipeline' => 'VisualPipeline',
+    'ConsoleConfiguration' => 'ConsoleConfiguration',
     'Contracts'=>'Σύμβαση',
     'Quotes' => 'Προσφορά',
     'Products' => 'Γραμμή Εισηγμένων Ειδών',
@@ -196,6 +209,11 @@ $app_list_strings = array (
     'pmse_Project' => 'Ορισμοί Διεργασιών',
     'pmse_Business_Rules' => 'Διεργασίες Επιχειρησιακών Κανόνων',
     'pmse_Emails_Templates' => 'Διεργασία Προτύπου Email',
+    'BusinessCenters' => 'Επιχειρηματικό κέντρο',
+    'Shifts' => 'Shift',
+    'ShiftExceptions' => 'Shift Exceptions',
+    'Purchases' => 'Purchase',
+    'PurchasedLineItems' => 'Purchased Line Item',
     'WorkFlow' => 'Ροή Εργασίας',
     'EAPM' => 'Εξωτερικός Λογαριασμός',
     'Worksheet' => 'Φύλλο Εργασίας',
@@ -224,7 +242,7 @@ $app_list_strings = array (
     'Comments' => 'Σχόλιο',
     'CommentLog' => 'Αρχείο σχολίου',
     'Currencies' => 'Νόμισμα',
-    'ProductTemplates' => 'Πρότυπο Προϊόντος',
+    'ProductTemplates' => 'Product',
     'ProductTypes' => 'Τύπος Προϊόντος',
     'Shippers' => 'Πάροχος Αποστολής',
     'Subscriptions' => 'Συνδρομή',
@@ -236,6 +254,8 @@ $app_list_strings = array (
     'EmailParticipants' => 'Αποστολή Email στον συμμετέχων',
     'DataPrivacy' => 'Πολιτική προστασίας προσωπικών δεδομένων',
     'ReportSchedules' => 'Χρονοδιάγραμμα Αναφοράς',
+    'Holidays' => 'Αργία',
+    'ChangeTimers' => 'Αλλαγή χρονομέτρου',
   ),
 
 /*
@@ -321,6 +341,11 @@ $app_list_strings = array (
     'T3' => 'Βαθμίδα 3',
     'T4' => 'Βαθμίδα 4',
   ),
+  'generate_purchase_dom' => [
+      'Yes' => 'Yes',
+      'No' => 'No',
+      'Completed' => 'Completed',
+  ],
   'lead_source_default_key' => 'Αυτο-παραγώμενο',
   'lead_source_dom' =>
   array (
@@ -589,6 +614,12 @@ $app_list_strings = array (
     'RegularUser' => 'Τακτικός Χρήστης',
     'Administrator' => 'Διαχειριστής',
   ),
+  'license_type_dom' =>
+    array (
+        'CURRENT' => 'Υφιστάμενο προϊόν',
+        'SUGAR_SERVE' => 'Sugar Serve',
+        'SUGAR_SELL' => 'Sugar Sell',
+    ),
   'user_status_dom' =>
   array (
     'Active' => 'Ενεργός',
@@ -693,6 +724,8 @@ $app_list_strings = array (
     'Meetings' => 'Συνάντηση',
     'Calls' => 'Κλήση',
       'KBContents' => 'Βάση Γνώσεων',
+      'PurchasedLineItems' => 'Purchased Line Item',
+      'Purchases' => 'Purchase',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Λογαριασμός',
@@ -722,7 +755,13 @@ $app_list_strings = array (
     'Prospects' => 'Στόχος',
       'KBContents' => 'Βάση Γνώσεων',
       'Notes' => 'Σημείωση',
+    'PurchasedLineItems' => 'Purchased Line Item',
+    'Purchases' => 'Purchase',
   ),
+
+  'changetimer_parent_type' => [
+      'Cases' => 'Υπόθεση',
+  ],
 
   'product_status_default_key' => 'Πλοίο',
   'product_status_quote_key' => 'Προσφορές',
@@ -883,7 +922,8 @@ $app_list_strings = array (
     'Forum' => 'Φόρουμ',
     'Web' => 'Διαδίκτυο',
     'InboundEmail' => 'Οποιοδήποτε Email',
-    'Twitter' => 'Twitter'
+    'Twitter' => 'Twitter',
+    'Portal' => 'Portal',
   ),
     'dataprivacy_type_default_key' => '',
     'dataprivacy_type_dom' => array(
@@ -916,6 +956,11 @@ $app_list_strings = array (
         'Medium' => 'Μέσο',
         'High' => 'Υψηλό',
     ),
+    'business_day_status_dom' => [
+        'Open' => 'Ανοιχτό',
+        'Open 24 Hours' => 'Ανοιχτό 24 ώρες',
+        'Closed' => 'Κλειστό',
+    ],
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -1145,6 +1190,13 @@ $app_list_strings = array (
     'dom_email_states' => array(
         'Draft' => 'Πρόχειρο',
         'Archived' => 'Αρχειοθετήθηκε',
+    ),
+
+    'dom_email_direction' => array(
+        'Unknown' => 'Άγνωστο',
+        'Outbound' => 'Εξερχομένα',
+        'Inbound' => 'Εισερχόμενα',
+        'Internal' => 'Εσωτερικά',
     ),
 
     'scheduler_status_dom' =>
@@ -2096,6 +2148,11 @@ $app_list_strings = array (
         240000 => 'Κάθε 4 λεπτά',
         300000 => 'Κάθε 5 λεπτά',
   ),
+    'first_response_met_sla_dom'=> [
+        '' => '',
+        'Yes' => 'Ναι',
+        'No' => 'Όχι',
+    ],
     'forecasts_chart_options_group' => array(
         'forecast' => 'στην Πρόβλεψη',
         'sales_stage' => 'Στάδιο Πώλησης',
@@ -2123,6 +2180,7 @@ $app_list_strings = array (
         'record' => 'Εγγραφή',
         'records' => 'Λίστα',
         'activities' => 'Ροή δραστηριότητας',
+        'multi-line' => 'Λίστα πολλαπλών γραμμών',
     ),
     'reportschedule_time_interval_dom' => array(
         '3600' => 'Ωριαίος',
@@ -2133,6 +2191,23 @@ $app_list_strings = array (
         '1209600' => 'Κάθε 2 Εβδομάδες',
         '2419200' => 'Κάθε 4 Εβδομάδες',
     ),
+    'pipeline_records_per_column' => array(
+        '10' => '10',
+        '15' => '15',
+        '20' => '20',
+    ),
+    //Service Duration
+    'service_duration_unit_dom' =>
+        array (
+            'year' => 'Έτος(η)',
+            'month' => 'Μήνας(ες)',
+            'day' => 'Ημέρα(ες)',
+        ),
+        'shift_exception_type_dom' => [
+            'time_off' => 'Time Off',
+            'event' => 'Event',
+            'other' => 'Other',
+        ],
 );
 
 $app_strings = array (
@@ -2144,7 +2219,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Follow Link',
   'LBL_TOGGLE_VISIBILITY' => 'Εναλλαγή Ορατότητας', // Record view header panel element
   'LBL_ACTIVITIES' => 'Ροή Δραστηριοτήτων',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2020 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'Tο SugarCRM, τo Sugar και ο 3-D κύβος είναι σήματα κατατεθέντα της SugarCRM Inc. '.
         'Όλα τα υπόλοιπα ονόματα εταιρειών και προϊόντων που χρησιμοποιούνται ή που εμφανίζονται σε αυτό το προϊόν ενδέχεται να είναι εμπορικά σήματα των '.
         'SugarCRM ®, Sugar Enterprise™ και Sugar™ είναι εμπορικά σήματα της SugarCRM Inc.',
@@ -2500,6 +2575,7 @@ $app_strings = array (
 
     'LBL_EMAIL_NO'                          => 'Όχι',
     'LBL_EMAIL_NOT_SENT'                    => 'Το σύστημα δεν είναι ικανό να επεξεργαστεί το αίτημα σας. Παρακαλώ επικοινωνήστε με τον Διαχειριστή του συστήματος.',
+    'LBL_INSERT_TO_USER_PWD_FAILED'         => 'Δεν ήταν δυνατή η εισαγωγή στη διεύθυνση users_password_link.',
 
     'LBL_EMAIL_OK'                          => 'Εντάξει',
     'LBL_EMAIL_ONE_MOMENT'                  => 'Μια στιγμή παρακαλώ...',
@@ -2716,8 +2792,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Μια ενεργή συνεδρία απαιτείται για την εξαγωγή περιεχομένου.',
     'ERR_NO_HEADER_ID' => 'Αυτο το χαρακτηριστικό δεν είναι διαθέσιμο σε αυτό το θέμα.',
     'ERR_NOT_ADMIN' => "Μη εξουσιοδοτημένη πρόσβαση στη διαχείριση.",
-    'ERR_DISABLED_FOR_IDM_MODE' => 'Η διαχείριση κωδικού πρόσβασης είναι διαθέσιμη μόνο στις ρυθμίσεις Cloud.',
-    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE' =>
+        'Η Διαχείριση κωδικού πρόσβασης είναι διαθέσιμη μόνο στο <a href="%s" target="_blank">Cloud Settings</a>.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Επικοινωνήστε με το διαχειριστή Sugar αν θέλετε να κάνετε αλλαγές στα πεδία που είναι μόνο για ανάγνωση.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Λείπει το υποχρεωτικό πεδίο:',
@@ -2747,6 +2823,7 @@ $app_strings = array (
     'ERR_DB_VERSION' => 'Sugar CRM {0} Τα Αρχεία Μπορούν να Χρησιμοποιηθούν Μόνο με Sugar CRM {1}Βάση Δεδομένων.',
     'ERR_DB_QUERY' => '{0}: αποτυχημένο ερώτημα: {1}',
     'ERR_UW_RETIRED' => 'Ο "Οδηγός Αναβάθμισης" δεν είναι διαθέσιμος σε αυτήν την έκδοση.',
+    'ERR_NOT_CLOUD_INSTANCE' => 'Αυτή η περίπτωση Sugar είτε δεν είναι περίπτωση SugarCloud ή δεν είναι διαμορφωμένη για τα SugarCloud Insights.',
 
 
     'EXCEPTION_CREATE_MODULE_NOT_AUTHORIZED' => 'Δεν έχετε δικαίωμα να δημιουργήσετε {moduleName}. Επικοινωνήστε με τον Διαχειριστή σας για πρόσβαση.',
@@ -2769,6 +2846,7 @@ $app_strings = array (
     'EXCEPTION_NEED_LOGIN'              => 'Θα πρέπει να συνδεθείτε για να εκτελέσετε αυτήν την ενέργεια.',
     'EXCEPTION_INVALID_TOKEN'           => 'Τα σημεία ελέγχου δεν είναι έγκυρα.',
     'EXCEPTION_NOT_AUTHORIZED'          => 'Δεν έχετε δικαίωμα να εκτελέσετε αυτή την ενέργεια. Επικοινωνήστε με τον διαχειριστή σας εάν χρειάζεστε πρόσβαση.',
+    'EXCEPTION_NOT_AUTHORIZED_TO_DATA'  => 'Δεν έχετε δικαίωμα να εμφανίσετε τα δεδομένα. Επικοινωνήστε με τον Διαχειριστή σας για να σας αποδοθεί δικαίωμα πρόσβασης.',
     'EXCEPTION_INACTIVE_PORTAL_USER'    => 'Δεν έχετε πρόσβαση στο Portal, επειδή ο λογαριασμός του portal σας είναι ανενεργός. Παρακαλώ επικοινωνήστε με την υποστήριξη πελατών, αν χρειάζεστε πρόσβαση.',
     'EXCEPTION_PORTAL_NOT_CONFIGURED'   => 'Το Portal δεν έχει ρυθμιστεί σωστά. Επικοινωνήστε με τον Διαχειριστή του Portal για βοήθεια.',
     'EXCEPTION_NO_METHOD'               => 'Το αίτημά σας δεν υποστηρίζεται. Δεν είναι δυνατή η εύρεση της μεθόδου HTTP του αιτήματός σας για αυτή την διαδρομή.',
@@ -2788,6 +2866,8 @@ $app_strings = array (
     'EXCEPTION_SEARCH_RUNTIME'          => 'Εντοπίστηκε σφάλμα χρόνου εκτέλεσης μηχανής αναζήτησης. Παρακαλώ επικοινωνήστε με το Διαχειριστή συστήματος.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
     'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Δεν μπορείτε να επεξεργαστείτε ένα πεδίο που είναι κλειδωμένο από διαδικασία.',
+    'EXCEPTION_MODULE_DISABLED'         => 'Αυτή η ενότητα είναι απενεργοποιημένη για τον τρέχοντα χρήστη.',
+    'EXCEPTION_FIELD_DISABLED'          => 'Αυτό το πεδίο είναι απενεργοποιημένο για τον τρέχοντα χρήστη.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'Μια κατάσταση παρουσιάστηκε λόγω μιας γενικής αποτυχίας ή λάθους. Οι λόγοι για αυτό το εύρος εξαίρεσης, αλλά γενικά δεν εμπίπτει στο πεδίο εφαρμογής, για περισσότερο από μία συγκεκριμένη εξαίρεση API.',
@@ -2816,6 +2896,8 @@ $app_strings = array (
     'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Δεν μπορείτε να επεξεργαστείτε ένα πεδίο που είναι κλειδωμένο από διεργασία που εκτελείται.',
     'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s είναι κλειδωμένο από μια διεργασία που εκτελείται και δεν μπορείτε να το επεξεργαστείτε.',
     'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s είναι κλειδωμένα από μια διεργασία που εκτελείται και δεν μπορείτε να τα επεξεργαστείτε.',
+    'EXCEPTION_MODULE_DISABLED_DESC'       => 'Αυτή η ενότητα είναι απενεργοποιημένη για τον τρέχοντα χρήστη.',
+    'EXCEPTION_FIELD_DISABLED_DESC'        => 'Αυτό το πεδίο είναι απενεργοποιημένο για τον τρέχοντα χρήστη.',
 
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'Ένα αρχείο με το ίδιο όνομα υπάρχει ήδη στο σύστημα.',
@@ -2905,6 +2987,7 @@ $app_strings = array (
     'LBL_CLOSE_AND_CREATE_BUTTON_LABEL' => 'Κλείσιμο και Δημιουργία Νέου',
     'LBL_CLOSE_AND_CREATE_BUTTON_TITLE' => 'Κλείσιμο και Δημιουργία Νέου',
     'LBL_CLOSE_AND_CREATE_BUTTON_KEY' => 'C',
+    'LBL_COPY_RECORD_URL' => 'Αντιγραφή URL εγγραφής',
     'LBL_OPEN_ITEMS' => 'Άνοιγμα στοιχείων:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'L',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'Σύνταξη Email',
@@ -2933,6 +3016,8 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'Έγγραφα',
     'LBL_DATE_ENTERED' => 'Ημερομηνία Δημιουργίας:',
     'LBL_DATE_MODIFIED' => 'Ημερομηνία Τροποποίησης:',
+    'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'Επεξεργασία Καρτέλας Επισκόπηση',
+    'LBL_EDIT_MODULE_TABS_BUTTON' => 'Επεξεργασία ΚαρτελώνΜονάδας',
     'LBL_EDIT_BUTTON' => 'Επεξεργασία',
     'LBL_DUPLICATE_BUTTON' => 'Αντίγραφο',
     'LBL_DELETE_BUTTON' => 'Διαγραφή',
@@ -2945,6 +3030,7 @@ $app_strings = array (
     'LBL_DST_NEEDS_FIXIN' => 'Η εφαρμογή απαιτεί μια επιδιόρθωση Θερινής Ώρας, για να εφαρμοστεί. Παρακαλώ πηγαίνετε στον Σύνδεσμο <a href="index.php?module=Administration&action=DstFix">Επιδιόρθωση</a> στην κονσόλα Διαχειριστή και εφαρμόστε την επιδιόρθωση της Θερινής Ώρας.',
     'LBL_EDIT_AS_NEW_BUTTON_LABEL' => 'Επεξεργασία Ως Νέο',
     'LBL_EDIT_AS_NEW_BUTTON_TITLE' => 'Επεξεργασία Ως Νέο',
+    'LBL_EDIT_IN_NEW_TAB' => 'Τροποποίηση σε νέα καρτέλα',
     'LBL_FAVORITES' => 'Αγαπημένα',
     'LBL_FILTER' => 'Φίλτρο',
     'LBL_DEFAULT_DATA_FILTER' => 'Default Data Filter',
@@ -3124,6 +3210,7 @@ $app_strings = array (
     'LBL_MODIFIED_ID'=>'Τροποποιήθηκε από Ταυτότητα',
     'LBL_MORE' => 'Περισσότερα',
     'LBL_MORE_MODULES' => 'Περισσότερες Ενότητες',
+    'LBL_MORE_TABS' => 'Περισσότερες καρτέλες',
     'LBL_MULTIPLE_MODULES' => 'Multiple Modules',
     'LBL_MY_ACCOUNT' => 'Ρυθμίσεις Μου',
     'LBL_SYSTEM_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'προεπιλογή συστήματος',
@@ -3143,6 +3230,7 @@ $app_strings = array (
     'LBL_OPENTO_BUTTON_KEY' => 'T',
     'LBL_OPENTO_BUTTON_LABEL' => 'Άνοιγμα Σε:',
     'LBL_OPENTO_BUTTON_TITLE' => 'Άνοιγμα Σε:',
+    'LBL_OPEN_IN_NEW_TAB' => 'Άνοιγμα σε νέα καρτέλα',
     'LBL_OPPORTUNITIES'=>'Ευκαιρίες',
     'LBL_OPPORTUNITY_NAME' => 'Όνομα Ευκαιρίας',
     'LBL_OPPORTUNITY'=>'Ευκαιρία',
@@ -3343,7 +3431,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2020 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Με Επιφύλαξη Παντός Δικαιώματος.<br />Το SugarCRM, τo Sugar και ο 3-D κύβος είναι σήματα κατατεθέντα της SugarCRM Inc. '.
         'Όλα τα υπόλοιπα ονόματα εταιρειών και προϊόντων που χρησιμοποιούνται ή που εμφανίζονται σε αυτό το προϊόν ενδέχεται να είναι εμπορικά σήματα των '.
         'αντίστοιχων εταιριών με τις οποίες συνδέονται.',
@@ -3453,7 +3541,7 @@ $app_strings = array (
     'LNK_VIEW_CHANGE_LOG' => 'Προβολή αρχείου καταγραφής ελέγχου',
     'TPL_AUDIT_LOG_TITLE' => 'Αρχείο καταγραφής ελέγχου για {{{name}}}',
     'LBL_AUDIT_EMAIL_TOOLTIP' => 'Κάντε κλικ για να προβάλετε το αρχείο καταγραφής ελέγχου Διεύθυνσης ηλεκτρονικού ταχυδρομείου',
-
+    'LBL_NO_SEARCH_RESULTS' => 'Δεν βρέθηκαν αποτελέσματα για την αναζήτησή σας',
     'NTC_CLICK_BACK' => 'Για να διορθωθεί το λάθος, παρακαλώ πατήστε το προηγούμενο πλήκτρο του browser.',
     'NTC_DATE_FORMAT' => '(εεεε-μμ-ηη)',
     'NTC_DATE_TIME_FORMAT' => '(εεεε-μμ-ηη 24:00)',
@@ -3491,12 +3579,15 @@ $app_strings = array (
     'WARN_LICENSE_SEATS_MAXED'=>  "Προειδοποίηση: Ο αριθμός ενεργών χρηστών υπερβαίνει τον μέγιστο αριθμό αδειών που επιτρέπονται.",
     'ERROR_LICENSE_SEATS_MAXED'=>
         'Ο αριθμός των ενεργών χρηστών υπερβαίνει τον αριθμό αδειών. Επικοινωνήστε με το διαχειριστή σας.',
+    'ERROR_LICENSE_TYPE_SEATS_MAXED'=>
+        'Number of active %s users exceeds License Count limits. Please contact your Administrator.',
     'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'Μόνο οι διαχειριστές μπορούν να συνδεθούν.',
     'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
         'Έχει επιτευχθεί το όριο αριθμού αδειών χρηστών. Μόνο οι υπάρχοντες χρήστες μπορούν να συνδεθούν.',
     'WARN_ONLY_ADMINS'=> "Μόνο οι διαχειριστές μπορούν να συνδεθούν.",
     'WARN_UNSAVED_CHANGES'=> "Είστε έτοιμοι να αφήσετε αυτήν την εγγραφή, χωρίς να αποθηκεύσετε τυχόν αλλαγές που μπορεί να γίνουν στο αρχείο. Είστε βέβαιοι ότι θέλετε να φύγετε από αυτήν την εγγραφή;",
     'LBL_WARN_UNSAVED_CHANGES' => 'Έχετε μη αποθηκευμένες αλλαγές. Είστε βέβαιοι ότι θέλετε να αφήσετε τη σελίδα και να απορρίψετε τις αλλαγές;',
+    'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'Ένας ή περισσότεροι πίνακες στοιχείων έχουν μη αποθηκευμένες αλλαγές. Είστε βέβαιοι ότι θέλετε να κλείσετε το συρτάρι;',
     'LBL_NAVIGATE_TO_REPORTS' => 'Μεταφέρεστε στην ενότητα Αναφορών. Οι αλλαγές σας στον πίνακα στοιχείων αρχικής σελίδας, δεν θα αποθηκευτούν. Συνέχεια;',
     'ERROR_NO_RECORD' => 'Λάθος κατά την ανάκτηση εγγραφής. Αυτή η εγγραφή μπορεί να διαγράφηκε ή ίσως δεν επιτρέπεται να την δείτε.',
     'ERROR_TYPE_NOT_VALID' => 'Λάθος: Ο τύπος αυτός είναι άκυρος.',
@@ -3513,7 +3604,10 @@ $app_strings = array (
     'ERROR_DATETIME' => 'Λάθος: Το πεδίο απαιτεί έγκυρη ημερομηνία.',
     'ERROR_IS_BEFORE' => 'Λάθος. Η ημερομηνία αυτού του πεδίου δεν μπορεί να είναι μεταγενέστερη από την ημερομηνία του πεδίου {{this}}.',
     'ERROR_IS_AFTER' => 'Λάθος. Η ημερομηνία αυτού του πεδίου δεν μπορεί να είναι πριν από την ημερομηνία του πεδίου {{this}}.',
+    'ERROR_TIME_IS_BEFORE' => 'Λάθος. Η ώρα σε αυτό το πεδίο θα πρέπει να προηγείται της ώρας που εμφανίζεται στο πεδίο {{this}}.',
+    'ERROR_TIME_IS_AFTER' => 'Λάθος. Η ώρα σε αυτό το πεδίο θα πρέπει να έπεται της ώρας που εμφανίζεται στο πεδίο {{this}}.',
     'ERROR_NUMBER' => 'Λάθος. Αυτό το πεδίο απαιτεί έναν έγκυρο αριθμό.',
+    'ERROR_INT' => 'Λάθος. Άκυρος ακέραιος.',
     'ERROR_NO_BEAN' => 'Απέτυχε να πάρει bean.',
     'ERROR_ACCESS_MODULE' => 'Δεν έχετε πρόσβαση σε αυτή την ενότητα.',
     'ERROR_MAX_FILESIZE_EXCEEDED' => 'Λάθος: Το επισυναπτόμενο αρχείο είναι πολύ μεγάλο.',
@@ -3599,6 +3693,7 @@ $app_strings = array (
     'LBL_SCHEDULE_MEETING' => 'Προγραμματισμός Συνάντησης',
     'LBL_CREATE_TASK' => 'Δημιουργία Εργασίας',
     'LBL_REMOVE_FROM_FAVORITES' => 'Αφαίρεση Από Αγαπημένα Μου',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => 'Δημιουργία Φόρμας',
     'LBL_SAVE_WEB_TO_LEAD_FORM' =>'Αποθήκευση Διαδικτύου στην Φόρμα Δυνητικού Πελάτη',
@@ -3627,36 +3722,21 @@ $app_strings = array (
     'ERR_SMARTY_UNEQUAL_RELATED_FIELD_PARAMETERS' => 'Λάθος: Υπάρχει ένας άνισος αριθμός των επιχειρημάτων για το &#39;κλειδί&#39;  και την &#39;αντιγραφή&#39; στοιχείων στην εμφάνιση Params array.',
     'ERR_SMARTY_MISSING_DISPLAY_PARAMS' => 'Λείπει το ευρετήριο στην εμφάνιση Params Array για:',
 
-    /* MySugar Framework (for Home and Dashboard) */
     'LBL_DASHLET' => 'Πίνακας Στοιχείων Αρχικής Σελίδας',
-    'LBL_DASHLET_CONFIGURE_GENERAL' => 'Γενικά',
     'LBL_DASHLET_CONFIGURE_FILTERS' => 'Φίλτρα',
     'LBL_DASHLET_CONFIGURE_MY_ITEMS_ONLY' => 'Μόνο τα Στοιχεία Μου',
-    'LBL_DASHLET_CONFIGURE_MY_FAVORITES_ONLY' => 'Μόνο τα Αγαπημένα Μου',
     'LBL_DASHLET_CONFIGURE_TITLE' => 'Τίτλος',
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Εμφάνιση Γραμμών',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'Σχετίζονται με την τρέχουσα εγγραφή',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'Συνδεδεμένο πεδίο',
 
-    // MySugar status strings
-    'LBL_CREATING_NEW_PAGE' => 'Δημιουργία Νέας Σελίδας...',
-    'LBL_NEW_PAGE_FEEDBACK' => 'Έχετε δημιουργήσει μία νέα σελίδα. Μπορείτε να προσθέσετε νέο περιεχόμενο με την επιλογή Προσθήκη Πίνακα Στοιχείων Αρχικής Σελίδας του Sugar.',
-    'LBL_DELETE_PAGE_CONFIRM' => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την σελίδα;',
-    'LBL_SAVING_PAGE_TITLE' => 'Αποθήκευση Τίτλου Σελίδας ...',
-    'LBL_RETRIEVING_PAGE' => 'Ανάκτηση Σελίδας...',
-    'LBL_MAX_DASHLETS_REACHED' => 'Έχετε φτάσει στον μέγιστο αριθμό των Πινάκων Στοιχείων Αρχικής Σελίδας του Sugar που σας έχει ορίσει ο διαχειριστής. Παρακαλώ αφαιρέσετε έναν Πίνακα Στοιχείων για να προσθέσετε έναν νέο.',
-    'LBL_ADDING_DASHLET' => 'Προσθήκη Πίνακα Στοιχείων Αρχικής Σελίδας Sugar ...',
-    'LBL_ADDED_DASHLET' => 'Προστέθηκε Πίνακας Στοιχείων Αρχικής Σελίδας Sugar',
     'LBL_REMOVE_DASHLET_CONFIRM' => 'Είστε βέβαιοι ότι θέλτε να αφαιρέσετε τον Πίνακα Στοιχείων Sugar;',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'Είστε βέβαιοι ότι θέλετε να αφαιρέσετε τη γραμμή;',
-    'LBL_REMOVING_DASHLET' => 'Αφαίρεση Πίνακα Στοιχείων Sugar ...',
-    'LBL_REMOVED_DASHLET' => 'Αφαιρέθηκε ο Πίνακας Στοιχείων Sugar',
     'LBL_MAXIMUM_OF' => 'Μέγιστο',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'των στηλών που μπορούν να εμφανιστούν',
 
     /* Sugar7 Dashboard */
     'LBL_DASHBOARD' => 'Πίνακας Εργαλείων',
-    'LBL_DASHBOARD_BWC' => 'Πίνακας Εργαλείων Μου',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Ο πίνακας εργαλείων μου',
     'LBL_COLLAPSE_ALL' => 'Σύμπτυξη Όλων',
     'LBL_EXPAND_ALL' => 'Ανάπτυξη Όλων',
@@ -3687,9 +3767,33 @@ $app_strings = array (
 
     'LBL_DASHLET_LISTVIEW_NAME' => 'Προβολή Λίστας',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'Λίστα εγγραφών από μια συγκεκριμένη ενότητα, σύμφωνα με τα κριτήρια που ορίζετε.',
+
+    // Record view dashlet
+    'LBL_DASHLET_RECORDVIEW_NAME' => 'Προβολή εγγραφής',
+    'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Εμφανίζει μια εγγραφεί και προαιρετικά σχετιζόμενες εγγραφές σε καρτέλες.',
+    'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'Τύπος βάσης εγγραφής',
+    'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => 'This {{moduleSingular}}',
+    'LBL_DASHLET_RECORDVIEW_TABS' => 'Καρτέλες',
+    'LBL_DASHLET_RECORDVIEW_BASIC_LAYOUT_PREVIEW' => 'Προεπισκόπιση βασικής διάταξης',
+    'TPL_DASHLET_RECORDVIEW_TOO_MANY_TABS' => 'Προειδοποίηση, μόνο μονάδες {{numWord}} ({{num}}) μπορεί να εμφανιστούν σε καρτέλες. ' .
+        'Αφαιρέστε μία ή περισσότερες μονάδες προτού προσθέσετε άλλες.',
+    'LBL_SIX' => 'έξι', // record view dashlet tab limit
+
+    //Commentlog Dashlet
+    'LBL_DASHLET_COMMENTLOG_NAME' => 'Αρχείο σχολίου',
+    'LBL_DASHLET_COMMENTLOG_DESCRIPTION' => 'Εμφανίζει σχόλια για εγγραφή',
+    'LBL_COMMENTS_LOG_DASHLET_NO_COMMENTS' => 'Δεν υπάρχουν σχόλια',
+    'LBL_COMMENTS_LOG_DASHLET_BUTTON_ADD' => 'Προσθήκη',
+    'LBL_COMMENTS_LOG_DASHLET_PLACEHOLDER' => 'Προσθήκη σχολίου',
+    'LBL_COMMENTS_LOG_DASHLET_VIEW_ALL' => 'Εμφάνιση όλων',
+
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Οι {{module}} μου',
+    'LBL_DASHLET_PICK_A_RECORD' => 'Δεν επιλέξατε εγγραφή για εμφάνιση',
+    'LBL_CONTENT_SEARCH_DASHLET' => 'Πίνακας στοιχείων αναζήτησης περιεχομένου',
+    'LBL_CONTENT_SEARCH_DASHLET_GREETING' => 'Σε τί μπορούμε να σας βοηθήσουμε με σήμερα, {{username}};',
+    'LBL_CONTENT_SEARCH_DASHLET_DISABLED' => 'Θέλετε να δημιουργήσετε μια υπόθεση;',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Ευκαιρία Μετρήσεων',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Μετρήσεις Ευκαιρίας για Σχετικό Λογαριασμό.',
@@ -3697,6 +3801,14 @@ $app_strings = array (
     'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'Λίστες πρόσφατα χρησιμοποιημένων στοιχείων και προϊόντων που αποθηκεύονται ως αγαπημένα',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Χρησιμοποιήθηκαν πρόσφατα',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Αγαπημένα',
+
+    'LBL_DASHBOARD_CONFIG' => 'Dashboard Configuration',
+    'LBL_LIST_VIEW__NAME' => 'Προβολή Λίστας',
+    'LBL_PIPELINE_VIEW_NAME' => 'Εμφάνιση πλακιδίου',
+    'LBL_PIPELINE_VIEW_BTN' => 'Εμφάνιση πλακιδίου',
+    'LBL_PIPELINE_VIEW_TAB_NAME' => '{{module}} βάσει {{fieldName}}',
+    'LBL_VISUAL_PIPELINE_DISABLED' => 'Δεν είναι ενεργοποιημένη η εμφάνιση πλακιδίου',
+    'LBL_VISUAL_PIPELINE_MOVE_FAILED' => '{{recordName}} could not be moved to {{columnLabel}} because of the following fields: ',
 
     'LBL_DASHLET_NO_RECORDS' => 'Δεν βρέθηκαν εγγραφές αυτή τη στιγμή.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Περίληψη Υπόθεσης',
@@ -3752,37 +3864,13 @@ $app_strings = array (
     'LBL_DASHLET_USEFULNESS_NAME' => 'Usefulness for Articles',
     'LBL_DASHLET_USEFULNESS_DESC' => 'Displays a chart showing how useful the knowledge base article is',
 
-    // MySugar Menu Options
     'LBL_ADD_PAGE' => 'Προσθήκη Σελίδας',
-    'LBL_DELETE_PAGE' => 'Διαγραφή Σελίδας',
-    'LBL_CHANGE_LAYOUT' => 'Αλλαγή Διάταξης',
-    'LBL_RENAME_PAGE' => 'Μετονομασία Σελίδας',
-
     'LBL_LOADING_PAGE' => 'Φόρτωση σελίδας, παρακαλώ περιμένετε...',
-
-    'LBL_RELOAD_PAGE' => 'Παρακαλώ <a href="javascript: window.location.reload()">ξαναφορτώστε το παράθυρο</a> για να χρησιμοποιήσετε αυτόν τον Πίνακα Στοιχείων Sugar.',
-    'LBL_ADD_DASHLETS' => 'Προσθήκη Πίνακα Στοιχείων Sugar',
-    'LBL_CLOSE_DASHLETS' => 'Κλείσιμο',
-    'LBL_OPTIONS' => 'Επιλογές',
-    'LBL_NUMBER_OF_COLUMNS' => 'Επιλέξτε τον αριθμό των στηλών',
-    'LBL_1_COLUMN' => '1 Στήλη',
-    'LBL_2_COLUMN' => '2 Στήλες',
-    'LBL_3_COLUMN' => '3 Στήλες',
-    'LBL_PAGE_NAME' => 'Όνομα Σελίδας',
-
     'LBL_SEARCH_RESULTS' => 'Αναζήτηση Αποτελεσμάτων',
-    'TPL_SEARCH_RESULTS_FOR' => 'Search Results for: {{searchTerm}}',
     'LBL_SEARCH_RESULTS_FOR' => 'Search Results for: ',
-    'LBL_SEARCH_MODULES' => 'Ενότητες',
-    'LBL_SEARCH_CHARTS' => 'Γραφήματα',
-    'LBL_SEARCH_REPORT_CHARTS' => 'Αναφορές Γραφημάτων',
-    'LBL_SEARCH_TOOLS' => 'Εργαλεία',
     'LBL_SEARCH_HELP_TITLE' => 'Συμβουλές Αναζήτησης',
-    'LBL_SEARCH_HELP_CLOSE_TOOLTIP' => 'Κλείσιμο',
     'LBL_SEARCH_RESULTS_FOUND' => 'Βρέθηκαν Αποτελέσματα Αναζήτησης',
     'LBL_SEARCH_RESULTS_TIME' => 'κυρία',
-    'ERR_BLANK_PAGE_NAME' => 'Παρακαλώ εισάγετε ένα όνομα σελίδας.',
-    /* End MySugar Framework strings */
 
     /* Sales Pipeline Dashlet */
     'LBL_DASHLET_MY_PIPELINE' => 'Η διαδρομή μου',
@@ -3936,6 +4024,8 @@ $app_strings = array (
     //MB -Fixed Bug #32812 -Max
     'LBL_ASSIGNED_TO_NAME' => 'Ανατέθηκε σε',
     'LBL_DESCRIPTION' => 'Περιγραφή',
+    'LBL_PRIMARY_CONTACT_NAME' => 'Κύρια μέθοδος επικοινωνίας',
+    'LBL_PRIMARY_CONTACT_ID' => 'Ταυτότητα Κύριας Μεθόδου Επικοινωνίας',
 
   'LBL_NONE' => '-κανένα-',
   'LBL_YESTERDAY'=> 'χθες',
@@ -4309,6 +4399,8 @@ $app_strings = array (
     // start of: Quotes related
     'LBL_QLI_SINGLE_TITLE' => 'Γραμμή Εισηγμένων ειδών',
     'LBL_DISCOUNT_TOTAL' => 'Συνολική έκπτωση',
+    'LBL_DISCOUNT_PERCENT' => '% Percent',
+    'LBL_DISCOUNT_SELECT' => 'Determines if the discount is a percentage or flat amount',
     'LBL_TAX' => 'Φόρος',
     'LBL_SHIPPING' => 'Παράδοση',
     'LBL_GRAND_TOTAL' => 'Γενικό Σύνολο',
@@ -4355,6 +4447,7 @@ $app_strings = array (
     'LBL_NO_ACCESS' => '(Δεν έχετε Πρόσβαση)',
     'LBL_NO_ACCESS_LOWER' => 'Κανένα Δικαίωμα Πρόσβασης',
     'LBL_NO_FIELD_ACCESS' => 'Δεν Υπάρχει πρόσβαση',
+    'LBL_NO_LICENSE_ACCESS' => 'License Required',
     'LBL_VALUE_ERASED' => 'Τιμή διαγράφεται',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Αυτές οι πληροφορίες διαγράφηκαν μέσω αίτησης προστασίας προσωπικών δεδομένων',
     'LBL_CREATE_RELATED_RECORD' => 'Δημιουργία Σχετικής Εγγραφής',
@@ -4524,6 +4617,15 @@ $app_strings = array (
     'LBL_MOBILE_ACTIVITYSTREAM_POST_PLACEHOLDER' => 'Type @ to mention a user. Type # to reference a record.',
     'LBL_MOBILE_NEW_COMMENT' => 'New comment',
     'LBL_RECENTLY_VIEWED' => 'Πρόσφατη Προβολή',
+    'LBL_FILE_STORED_LOCALLY' => 'Το αρχείο αποθηκεύεται στο τοπικό αποθηκευτικό χώρο και συγχρονίζεται όταν η συσκευή είναι συνδεδεμένη.',
+    'LBL_IDM_USER_PROFILE_READONLY' => 'Αν θέλετε να αλλάξετε ορισμένα πεδία που δεν είναι επεξεργάσιμα, επικοινωνήστε με τον Διαχειριστή για να ειδοποιήσετε για αυτές τις αλλαγές.',
+    'LBL_ACTIVITY_POST' => '{{{value}}}on {{{link}}}',
+    'LBL_COMMENTLOG_EMPTY' => 'Κανένα σχόλιο',
+    'LBL_COMMENTLOG_EXPANDBUTTON_EXPAND' => 'Εμφάνιση των επόμενων {{{commentsLeft}}} σχολίων',
+    'LBL_COMMENTLOG_EXPANDBUTTON_COLLAPSE' => 'Σύμπτυξη',
+    'LBL_COMMENTLOG_CONFIRM_CREATE' => 'Επιβεβαιώστε τη δημιουργία σχολίων',
+    'LBL_COMMENTLOG_ERROR_IS_EMPTY' => 'Το Αρχείο Σχολίου δεν μπορεί να είναι κενό',
+    'LBL_MOBILE_PDF_DOWNLOAD' => 'Κάντε λήψη του PDF {{{pdfTemplateName}}}',
 
     'ERR_SYNC_FAILED' => 'Ανίκανο να συγχρονιστεί με τον διακομιστή.',
     'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'SSO σύνδεση δεν είναι διαθέσιμη. Εξασφαλίστε ότι είναι για το Sugar 7.5 ή μεγαλύτερο και διαμορφωμένο για SSO.',
@@ -4734,6 +4836,11 @@ $app_strings = array (
     'LBL_VO_RIGHT_MENU_BTN' => 'Δεξί πλήκτρο μενού',
     'LBL_VO_ADD_BTN' => 'Προσθήκη κουμπιού',
 
+    // Cookie consent
+    'LBL_WIZ_USER_COOKIE_CONSENT' => 'Αυτή η εφαρμογή χρησιμοποιεί cookies',
+    'LBL_USER_CLICK_FOR_COOKIE_CONSENT' => 'Έλεγχος για αποδοχή (Απαιτείται)',
+    'LBL_USER_COOKIE_CONSENT_TEXT' => 'Αυτή η εφαρμογή χρησιμοποιεί cookies για να μας βοηθήσει να σας προσφέρουμε μια καλύτερη εμπειρία. Συνεχίζοντας, συναινείτε στη χρήση cookie σύμφωνα με την <a href="{{href}}" target="_blank"> πολιτική απορρήτου </a>.',
+
     //begin portal
 
     //portal record tutorial
@@ -4743,20 +4850,36 @@ $app_strings = array (
     'LBL_PORTAL_TOUR_RECORD_VIEW_NOTE' => 'Κάντε κλικ σε αυτά τα εικονίδια για να δείτε τις λεπτομέρειες των συνημμένων σημειώσεων.',
 
     //for portal
-
+    'LBL_PORTAL_HOME' => 'Πίνακας Εργαλείων Αρχικής Σελίδας',
+    'LBL_PORTAL_DASHBOARD_ALL_OPEN_CASES' => 'Όλες οι ανοικτές υποθέσεις',
+    'LBL_PORTAL_DASHBOARD_RECENT_CASES' => 'Πρόσφατα επιλυθείσες υποθέσεις',
     'LBL_PORTAL_SEARCH' => 'Αναζήτηση ανά Όνομα, Αριθμό',
     'LBL_SIGNUP_BUTTON_LABEL' => 'Εγγραφή',
+    'LBL_PORTAL_NO_EMAIL' => 'Δεν λάβατε ένα email;',
+    'LBL_PORTAL_FORGOT_PASSWORD' => 'Ξέχασα τον Κωδικό Πρόσβασης',
+    'LBL_PORTAL_FORGOT_USERNAME' => 'Ξέχασα το όνομα χρήστη',
+    'LBL_PORTAL_ENTER_PASSWORD_TWICE' => 'Εισαγάγετε τον κωδικό σας δύο φορές. Οι κωδικοί πρέπει να ταιριάζουν.',
+    'LBL_PORTAL_RESET_PASSWORD' => 'Επαναφορά Κωδικού Πρόσβασης',
+    'LBL_PORTAL_REENTER_PASSWORD' => 'Καταχωρίστε ξανά τον κωδικό πρόσβασης',
+    'LBL_PORTAL_PASSWORD_MISMATCH' => 'Οι κωδικοί πρόσβασης δεν ταιριάζουν, εισάγετέ τους ξανά',
+    'LBL_PORTAL_PASSWORD_RESET_SUCCESS' => 'Ο κωδικός πρόσβασής σας έχει επαναφερθεί επιτυχώς.',
+    'LBL_PORTAL_PASSWORD_RESET_ERR_GENERAL' => 'Παρουσιάστηκε σφάλμα. Αρχίστε μια νέα αίτηση επαναφοράς κωδικού πρόσβασης.',
     'LBL_PORTAL_SIGNUP_PROCESS' => 'Εγγραφή',
-    'LBL_PORTAL_SIGNUP_TITLE' => 'Ευχαριστούμε για την εγγραφή σας!',
-    'LBL_PORTAL_SIGNUP' => 'Ένας εκπρόσωπος εξυπηρέτησης πελατών, θα επικοινωνήσει μαζί σας σύντομα, για να ρυθμίσετε τον λογαριασμό σας.',
+    'LBL_PORTAL_SIGNUP_TITLE' => 'Ευχαριστούμε για την εγγραφή σας',
+    'LBL_PORTAL_SIGNUP' => 'Θα σας ενημερώσουμε αφού επιβεβαιώσουμε τα στοιχεία σας.',
     'LBL_PORTAL_SIGNUP_FIRST_NAME' => 'Όνομα',
     'LBL_PORTAL_SIGNUP_LAST_NAME' => 'Επώνυμο',
-    'LBL_PORTAL_SIGNUP_EMAIL' => 'Email',
+    'LBL_PORTAL_SIGNUP_USER_NAME' => 'Όνομα Χρήστη',
+    'LBL_PORTAL_SIGNUP_EMAIL' => 'Διεύθυνση Email',
     'LBL_PORTAL_SIGNUP_PHONE' => '(###) ###-#### (προαιρετικό)',
     'LBL_PORTAL_SIGNUP_COUNTRY' => 'Χώρα',
     'LBL_PORTAL_SIGNUP_STATE' => 'Περιοχή',
-    'LBL_PORTAL_SIGNUP_COMPANY' => 'Εταιρεία',
+    'LBL_PORTAL_SIGNUP_COMPANY_NAME' => 'Όνομα Εταιρείας',
     'LBL_PORTAL_SIGNUP_JOBTITLE' => 'Τίτλος Εργασίας (προαιρετικό)',
+    'LBL_PORTAL_SIGNUP_PASSWORD' => 'Κωδικός Πρόσβασης',
+    'LBL_PORTAL_SIGNUP_PASSWORD1' => 'Επιβεβαίωση Κωδικού Πρόσβασης',
+    'LBL_PORTAL_SIGNUP_FORGOT_LOGIN' => 'Ξέχασα τα στοιχεία σύνδεσης',
+
     'LNK_PORTAL_LOGIN_FORGOTPASSWORD' => 'Ξεχάσατε τον Κωδικό Πρόσβασης;',
     'LBL_PORTAL_LOGIN_FORGOTPASSWORD' => 'Επικοινωνήστε με το διαχειριστή Sugar για να επαναφέρετε τον κωδικό πρόσβασής σας.',
     'LBL_PORTAL_LOGIN_USERNAME' => 'Όνομα Χειριστή',
@@ -4766,9 +4889,14 @@ $app_strings = array (
     'LBL_PORTAL_PAGE_NOT_AVAIL' => 'Μη Διαθέσιμη Σελίδα',
     'LBL_PORTAL_NOT_ENABLED_MSG' => "Λυπούμαστε, αλλά αυτή η δυνατότητα δεν είναι διαθέσιμη αυτή τη στιγμή.",
     'LBL_PORTAL_SEARCH_RESULTS_TITLE' => 'Εμφάνιση αναζήτησης αποτελεσμάτων για "{query}"',
+    'LBL_PORTAL_DIDNT_GET_EMAIL' => 'Δεν λάβατε ένα email;',
+    'LBL_PORTAL_CONTACT_INFO_CONTACT_US' => 'Για βοήθεια ή για να επικοινωνήσετε μαζί μας, χρησιμοποιήστε ένα από τα παρακάτω: ',
+    'LBL_PORTAL_CONTACT_INFO_PHONE' => 'Τηλέφωνο: ',
+    'LBL_PORTAL_CONTACT_INFO_EMAIL' => 'Email: ',
+    'LBL_PORTAL_CONTACT_INFO_WEB' => 'Ιστοσελίδα: ',
 
     //for portal errors
-    'LBL_PORTAL_INVALID_CREDS' => 'Ο συνδυασμός όνομα χειριστή/κωδικός πρόσβασης είναι λανθασμένος, παρακαλώ δοκιμάστε ξανά.',
+    'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Η προσπάθεια σύνδεσής σας δεν ήταν επιτυχής. Παρακαλώ δοκιμάστε ξανά.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'Άκυρα Πιστοποιητικά',
     'LBL_PORTAL_INVALID_GRANT' => 'Το σημείο σας είναι άκυρο ή έχει λήξει. Παρακαλώ συνδεθείτε ξανά.',
     'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Ληγμένο Σημείο',
@@ -4791,7 +4919,27 @@ $app_strings = array (
     'LBL_PORTAL_ROUTE_ERROR'=>'ενότητα φόρτωσης ζητημάτων. Παρακαλώ δοκιμάστε ξανά αργότερα ή επικοινωνήστε με την υποστήριξη.',
     'LBL_PORTAL_OFFLINE' =>'Μας συγχωρείτε, η εφαρμογή δεν είναι διαθέσιμη αυτήν την στιγμή. Παρακαλώ, επικοινωνήστε με τον διαχειριστή της ιστοσελίδας.',
     'LBL_CONTACT_EDIT_PASSWORD_LNK_TEXT' => 'Αλλαγή Κωδικού Πρόσβασης',
+    'LBL_PORTAL_SIGNUP_USER_NAME_ERROR' => 'Η προσπάθεια σύνδεσής σας δεν ήταν επιτυχής. Το όνομα χρήστη είναι ήδη καταχωρημένο στο σύστημα. Είτε ζητήστε έναν ξεχασμένο κωδικό πρόσβασης είτε επιλέξτε ένα άλλο όνομα χρήστη.',
+    'LBL_PORTAL_SIGNUP_EMAIL_ERROR' => 'Το παρεχόμενο email δεν είναι έγκυρο.',
+    'LBL_PORTAL_SIGNUP_PASSWORD_ERROR' => 'Οι κωδικοί πρόσβασης δεν ταιριάζουν.',
     //end portal
+
+    // Final name given by marketing is Service Console
+    // Original name for this feature was Agent Workbench and was used
+    // throughout the development of this product.
+    'LBL_AGENT_WORKBENCH' => 'Service Console',
+    'LBL_AGENT_WORKBENCH_OVERVIEW' => 'Επισκόπηση',
+    'LBL_CASE_OVERDUE' => 'Overdue',
+    'LBL_CASE_DUE_SOON' => 'Due soon',
+    'LBL_CASE_DUE_LATER' => 'Due later',
+
+    // Renewals Console
+    'LBL_RENEWALS_CONSOLE' => 'Κονσόλα Ανανεώσεων',
+    'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'Επισκόπηση',
+    'LBL_RENEWALS_CONSOLE_STAGE_STATUS' => 'Στάδιο/Κατάσταση',
+    'LBL_RENEWALS_CONSOLE_NAME_ACCOUNT' => 'Όνομα/Όνομα Λογαριασμού',
+    'LBL_RENEWALS_CONSOLE_AMOUNT' => 'Worst | Likely | Best',
+
 
     //First time login wizard
     'LBL_WIZ_USER_PROFILE_TITLE' => 'Προφίλ Χειριστή',
@@ -4836,10 +4984,22 @@ $app_strings = array (
     'ERR_PASSWORD_MISMATCH' => 'Οι κωδικοί πρόσβασης που εισάγατε δεν ταιριάζουν με τους κωδικούς του συστήματος μας.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Δεν μπορεί να στείλει τον κωδικό πρόσβασης',
     'LBL_REQUEST_PASSWORD' => 'Αίτημα Κωδικού Πρόσβασης',
+    'LBL_RESET_PASSWORD' => 'Επαναφορά Κωδικού Πρόσβασης',
+    'LBL_RESET_PASSWORD_MESSAGE' => 'Εισαγάγετε το όνομα χρήστη και θα σας στείλουμε έναν σύνδεσμο για να επαναφέρετε τον κωδικό πρόσβασής σας.',
+    'LBL_RESET_PASSWORD_CONFIRMATION_MESSAGE' => 'Ελέγξτε το email σας <br> <br> Έχουμε στείλει τις οδηγίες επαναφοράς κωδικού πρόσβασης στη διεύθυνση ηλεκτρονικού ταχυδρομείου που έχουμε στο αρχείο.',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Σφάλμα: Υπήρξε ένα πρόβλημα κατά την ενημέρωση του κωδικού πρόσβασης για αυτόν τον χρήστη.',
     'LBL_INCORRECT_PASSWORD' => 'Σφάλμα: Εσφαλμένος Κωδικός Πρόσβασης.',
+    'LBL_PASSWORD_ENFORCE_TITLE' => 'Ο κωδικός πρόσβασης που εισάγατε δεν πληρεί τις απαιτήσεις του κωδικού πρόσβασης. Παρακαλώ δοκιμάστε ξανά.',
+    'LBL_PASSWORD_MIN_LENGTH' => 'Το ελάχιστο μήκος είναι {0}.',
+    'LBL_PASSWORD_MAX_LENGTH' => 'Το μέγιστο μήκος είναι {0}.',
+    'LBL_PASSWORD_ONE_UPPERCASE' => 'Πρέπει να περιέχει ένα κεφαλαίο γράμμα (A-Z).',
+    'LBL_PASSWORD_ONE_LOWERCASE' => 'Πρέπει να περιέχει ένα πεζό γράμμα (a-z).',
+    'LBL_PASSWORD_ONE_NUMBER' => 'Πρέπει να περιέχει έναν αριθμό (0-9).',
+    'LBL_PASSWORD_ONE_SPECIAL_CHAR' => 'Πρέπει να περιέχει έναν ειδικό χαρακτήρα (~!@#$%^&*()_+-={}|).',
+    'LBL_PASSWORD_REGEX_REQUIREMENT' => 'Ο κωδικός πρόσβασης δεν πρέπει να ταιριάζει με το πρότυπο κανονικής έκφρασης: {0}.',
 
     'LBL_PREFERRED_LANGUAGE' => 'Γλώσσα προτίμησης:',
+    'LBL_PASSWORD_RESET_EMAIL_FAIL' => 'Δεν ήταν δυνατή η αποστολή email επαναφοράς κωδικού πρόσβασης.',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Επιλογή Αναφοράς',
@@ -4981,6 +5141,25 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'Εργασίες Μου',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Εργασίες Ομάδας',
 
+    'LBL_RECENTLY_VIEWED_CASES_DASHLET' => 'Οι υποθέσεις που είδα πρόσφατα',
+
+    'LBL_REPORT_DASHLET_TITLE_12' => 'Ανοικτές υποθέσεις βάσει χρήστη βάσει κατάστασης',
+    'LBL_REPORT_DASHLET_TITLE_125' => 'Νέες υποθέσεις βάσει επιχειρηματικού κέντρου βάσει εβδομάδας',
+    'LBL_REPORT_DASHLET_TITLE_126' => 'Πρόσφατα δημιουργημένες υποθέσεις',
+    'LBL_REPORT_DASHLET_TITLE_127' => 'Νέες υποθέσεις βάσει βαθμίδας πελάτει βάσει εβδομάδας',
+    'LBL_REPORT_DASHLET_TITLE_128' => 'Ανοικτές υποθέσεις βάσει βαθμίδας πελάτη και προτεραιότητας',
+    'LBL_REPORT_DASHLET_TITLE_129' => 'Σύνολο υποθέσεων που επιλύθηκαν αυτό το μήνα βάσει επιχειρηματικού κέντρου',
+    'LBL_REPORT_DASHLET_TITLE_130' => 'Σύνολο υποθέσεων που επιλύθηκαν αυτό το μήνα από τον πράκτορα',
+    'LBL_REPORT_DASHLET_TITLE_131' => 'Κατάλογος υποθέσεων που επιλύθηκαν πρόσφατα',
+    'LBL_REPORT_DASHLET_TITLE_132' => 'Οι υποθέσεις μου που επιλύθηκαν αυτό το μήνα βάσει εβδομάδας',
+    'LBL_REPORT_DASHLET_TITLE_133' => 'Οι υποθέσεις μου που λήγουν σήμερα και οι εκπρόθεσμες',
+    'LBL_REPORT_DASHLET_TITLE_134' => 'Όλες οι υποθέσεις που λήγουν σήμερα και οι εκπρόθεσμες',
+    'LBL_REPORT_DASHLET_TITLE_135' => 'Οι ανοικτές υποθέσεις μου βάσει ημερομηνίας επανεξέτασης',
+    'LBL_REPORT_DASHLET_TITLE_136' => 'Όλες οι ανοικτές υποθέσεις βάσει ημερομηνίας επανεξέτασης',
+    'LBL_REPORT_DASHLET_TITLE_137' => 'Οι ανοικτές υποθέσεις μου βάσει κατάστασης',
+    'LBL_REPORT_DASHLET_TITLE_138' => 'Οι υποθέσεις μου την προηγούμενη εβδομάδα βάσει κατάστασης',
+    'LBL_REPORT_DASHLET_TITLE_139' => 'Κατάσταση των ανοικτών καθηκόντων που ανέθεσα',
+
     //Audit subjects
     'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'UI BWC',
@@ -5111,6 +5290,8 @@ $app_strings = array (
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Ανανέωση λίστας',
+    // Refresh button on tile views
+    'LBL_TILE_REFRESH' => 'Refresh Tiles',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'περισσότερο',
@@ -5385,6 +5566,12 @@ $app_strings = array (
     'LBL_LOCKED_FIELD_RECORD_VIEW_WARNING' => 'Αυτή η εγγραφή συμμετέχει σε μια διαδικασία και μπορεί να περιέχει ορισμένα κλειδωμένα πεδία.',
     // @codingStandardsIgnoreEnd
 
+    'LBL_BUSINESS_CENTER' => 'Επιχειρηματικό κέντρο',
+    'LBL_BUSINESS_CENTER_ID' => 'Ταυτότητα επιχειρηματικού κέντρου',
+    'LBL_BUSINESS_CENTER_NAME' => 'Όνομα επιχειρηματικού κέντρου',
+
+    'LBL_PLIS_ACTIVITIES' => 'Purchased Line Items Activities',
+
     //Tag Strings
     'LBL_TAG_NEW_TAG' => '(New Tag)',
     'LBL_TAG_FETCH_ERROR' => 'Παρουσιάστηκε σφάλμα κατά την ανάκτηση ετικέτας.',
@@ -5422,14 +5609,47 @@ $app_strings = array (
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Σήμανση για διαγραφή',
     'TPL_DATAPRIVACY_PII_TITLE' => 'Προσωπικές πληροφορίες για {{{name}}}',
 
+    'LBL_CHANGETIMERS_SUBPANEL_TITLE' => 'Αλλαγή Χρονομέτρων',
+
     'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Αντιγράφηκε στο πρόχειρό σας!',
     'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Δεν ήταν δυνατό να αντιγραφεί στο Πρόχειρό σας',
 
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Αντιγράψτε το Σύνδεσμο Επιβεβαίωσης',
 
+    // Activity Timeline Dashlet
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Αλληλεπιδράσεις',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '{{moduleSingular}} Αλληλεπιδράσεις',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+        'Meetings and Notes related to a record.',
+
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'Προβολή περισσοτέρων...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Εμφάνιση λιγότερων...',
+    'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Δεν διατίθενται δεδομένα',
+
+    // Active Subscriptions Dashlet
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Ενεργές Συνδρομές',
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => 'Ενεργές συνδρομές για συγκεκριμένο λογαριασμό.',
+    'LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY' => ', ποσότητα {{quantity}}',
+    'LBL_ACTIVE_SUBSCRIPTIONS_TOTAL' => 'Σύνολο:',
+    'LBL_NO_ACTIVE_SUBSCRIPTIONS' => 'Δεν υπάρχουν ενεργές συνδρομές',
+    'LBL_REQUIRE_REVENUE_LINE_ITEMS' => 'Αυτός ο πίνακας στοιχείων απαιτεί {{module_name}} για να λειτουργήσει. Συζητήστε με το διαχειριστή σας σχετικά με την ενεργοποίηση του {{module_name}}.',
+
+    // Customer Service
+    'LBL_EDIT_IN_STUDIO' => 'Χρησιμοποιήστε το Studio για να τροποποιήσετε την εμφάνιση της διάταξης του πίνακα στοιχείων της εγγραφής πηγαίνοντας στο ' .
+        'Στούντιο > {{module}} > Διατάξεις > Εμφάνιση πίνακα στοιχείων εγγραφής. <a href={{linkToStudio}}>τροποποίηση στο Στούντιο</a>.',
+    'LBL_SERVICE_LEVEL' => 'Επίπεδο υπηρεσίας',
+    // Agent Workbench
+    'LBL_AGENT_WORKBENCH_NUMBER' => 'Αριθμός',
+    'LBL_AGENT_WORKBENCH_FOLLOW_UP' => 'Επανεξέταση',
+    'LBL_AGENT_WORKBENCH_PRIORITY_STATUS' => 'Προτεραιότητα/κατάσταση',
+    'LBL_AGENT_WORKBENCH_SUBJECT_DESCRIPTION' => 'Θέμα/περιγραφή',
+
+//Service Duration
+    'LBL_SERVICE_DURATION' => 'Διάρκεια Υπηρεσίας',
+    'LBL_SERVICE_DURATION_VALUE' => 'Τιμή Διάρκειας Υπηρεσίας',
+    'LBL_SERVICE_DURATION_UNIT' => 'Μονάδα Διάρκειας Υπηρεσίας',
+
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6426,7 +6646,7 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Embedded File';
     'ISK' => 'kr',
     'INR' => '₨',
     'IDR' => 'Rp',
-    'IRR' => '﷼',
+    'IRR' => '77e8',
     'IMP' => '£',
     'ILS' => '₪',
     'JMD' => 'J$',
@@ -6455,18 +6675,18 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Embedded File';
     'NIO' => 'C$',
     'NGN' => '₦',
     'NOK' => 'kr',
-    'OMR' => '﷼',
+    'OMR' => '77e8',
     'PKR' => '₨',
     'PAB' => 'B/.',
     'PYG' => 'Gs',
     'PEN' => 'S/.',
     'PHP' => '₱',
     'PLN' => 'zł',
-    'QAR' => '﷼',
+    'QAR' => '77e8',
     'RON' => 'λέι',
     'RUB' => 'руб',
     'SHP' => '£',
-    'SAR' => '﷼',
+    'SAR' => '77e8',
     'RSD' => 'Дин.',
     'SCR' => '₨',
     'SGD' => '$',
@@ -6488,7 +6708,7 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Embedded File';
     'UZS' => 'лв',
     'VEF' => 'Bs',
     'VND' => '₫',
-    'YER' => '﷼',
+    'YER' => '77e8',
     'ZWD' => 'Z$',
     );
 

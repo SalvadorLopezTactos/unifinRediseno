@@ -126,7 +126,14 @@
             }, this);
             if (toggle && availableToggle) {
                 var disabled = !!availableToggle.disabled;
-                temp[toggle] = {toggle: toggle, title: availableToggle.label, 'class': availableToggle.icon, disabled: disabled};
+                temp[toggle] = {
+                    toggle: toggle,
+                    title: availableToggle.label,
+                    class: availableToggle.icon,
+                    css_class: availableToggle.css_class,
+                    disabled: disabled,
+                    route: availableToggle.route
+                };
             }
         }, this);
 
@@ -163,9 +170,13 @@
     toggleView: function (e) {
         var $el = this.$(e.currentTarget);
         // Only toggle if we click on an inactive button
-        if (!$el.hasClass("active")) {
+        if (!$el.hasClass('active')) {
             var data = $el.data();
-            app.user.lastState.set(this.toggleViewLastStateKey, data.view);
+            if (data.route) {
+                app.router.navigate(this.module + '/' + data.route, {trigger: true});
+            } else {
+                app.user.lastState.set(this.toggleViewLastStateKey, data.view);
+            }
             this.showComponent(data.view);
             this._toggleAria($el);
         }
@@ -178,7 +189,10 @@
      * @private
      */
     _toggleAria: function(btn) {
-        this.$el.find('.btn').attr('aria-pressed', false);
+        //If the buttons are present on the layout
+        if (this.$el) {
+            this.$('.btn').attr('aria-pressed', false);
+        }
         btn.attr('aria-pressed', true);
     },
 

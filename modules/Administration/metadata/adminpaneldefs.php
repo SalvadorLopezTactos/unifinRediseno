@@ -14,20 +14,52 @@ use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 
 global $current_user,$admin_group_header;
 
+$config = \SugarConfig::getInstance();
+
+// Needed to see if this is configured for Sugar Cloud Insights
+$insights = $config->get('cloud_insight', []);
+if (!empty($insights['enabled'])) {
+    $admin_option_defs['Administration']['insights'] = [
+        'LeadReports',
+        'LBL_CLOUD_INSIGHTS_ADMIN_TITLE',
+        'LBL_CLOUD_INSIGHTS_ADMIN_DESC',
+        './index.php?module=Administration&action=CloudInsights',
+        null,
+        sprintf(
+            'onclick="return SUGAR.Administration.CloudInsights.LinkToLanding(\'%s\', \'%s\');"',
+            $insights['url'],
+            $insights['key']
+        ),
+    ];
+
+    $admin_group_header[] = [
+        'LBL_SUGAR_CLOUD_TITLE',
+        '',
+        false,
+        $admin_option_defs,
+        'LBL_SUGAR_CLOUD_DESC',
+    ];
+}
+
 //users and security.
 $admin_option_defs=array();
 $admin_option_defs['Users']['user_management']= array('Users','LBL_MANAGE_USERS_TITLE','LBL_MANAGE_USERS','./index.php?module=Users&action=index');
 $admin_option_defs['Users']['roles_management']= array('Roles','LBL_MANAGE_ROLES_TITLE','LBL_MANAGE_ROLES','./index.php?module=ACLRoles&action=index');
 $admin_option_defs['Users']['teams_management']= array('Teams','LBL_MANAGE_TEAMS_TITLE','LBL_MANAGE_TEAMS','./index.php?module=Teams&action=index');
 
-$idpConfig = new Authentication\Config(\SugarConfig::getInstance());
+$idpConfig = new Authentication\Config($config);
 $idmModeConfig = $idpConfig->getIDMModeConfig();
 if ($idpConfig->isIDMModeEnabled()) {
     $passwordManagerUrl = $idpConfig->buildCloudConsoleUrl('passwordManagement');
     $passwordManagerTarget = '_blank';
+    $passwordManagerLink = str_replace(
+        '"',
+        "\\'",
+        sprintf($GLOBALS['app_strings']['ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE'], $passwordManagerUrl)
+    );
     $passwordManagerOnClick = sprintf(
         'onclick = "app.alert.show(\'disabled-for-idm-mode\', {level: \'info\', messages: \'%s\'});"',
-        $GLOBALS['app_strings']['ERR_DISABLED_FOR_IDM_MODE']
+        $passwordManagerLink
     );
 } else {
     $passwordManagerUrl = './index.php?module=Administration&action=PasswordManager';
@@ -66,7 +98,7 @@ $admin_option_defs['Administration']['documentation']= array('OnlineDocumentatio
         'javascript:void window.open("index.php?module=Administration&action=SupportPortal&view=documentation&help_module=Administration&edition='.$sugar_flavor.'&key='.$server_unique_key.'&language='.$current_language.'", "helpwin","width=600,height=600,status=0,resizable=1,scrollbars=1,toolbar=0,location=0")');
 if(!empty($license->settings['license_latest_versions'])){
 	$encodedVersions = $license->settings['license_latest_versions'];
-	$versions = unserialize(base64_decode( $encodedVersions));
+    $versions = unserialize(base64_decode($encodedVersions), ['allowed_classes' => false]);
 	include('sugar_version.php');
 	if(!empty($versions)){
 		foreach($versions as $version){
@@ -96,11 +128,6 @@ if (!isset($GLOBALS['sugar_config']['disable_uw_upload']) || !$GLOBALS['sugar_co
 }
 
 $admin_option_defs['Administration']['currencies_management']= array('Currencies','LBL_MANAGE_CURRENCIES','LBL_CURRENCY','javascript:parent.SUGAR.App.router.navigate("Currencies", {trigger: true});');
-
-if (!isset($GLOBALS['sugar_config']['hide_admin_backup']) || !$GLOBALS['sugar_config']['hide_admin_backup'])
-{
-    $admin_option_defs['Administration']['backup_management']= array('Backups','LBL_BACKUPS_TITLE','LBL_BACKUPS','./index.php?module=Administration&action=Backups');
-}
 
 $admin_option_defs['Administration']['languages']= array('Currencies','LBL_MANAGE_LANGUAGES','LBL_LANGUAGES','./index.php?module=Administration&action=Languages&view=default');
 
@@ -188,6 +215,13 @@ $admin_option_defs['Administration']['styleguide'] = array(
     'javascript:parent.SUGAR.App.router.navigate("Styleguide", {trigger: true});',
 );
 
+$admin_option_defs['any']['denormalization'] = [
+    'Administration',
+    'LBL_MANAGE_RELATE_DENORMALIZATION_TITLE',
+    'LBL_MANAGE_RELATE_DENORMALIZATION_DESC',
+    'javascript:void(parent.SUGAR.App.router.navigate("Administration/denormalization", {trigger: true}));',
+];
+
 $admin_group_header[]= array('LBL_STUDIO_TITLE','',false,$admin_option_defs, 'LBL_TOOLS_DESC');
 
 
@@ -270,6 +304,22 @@ $admin_group_header []= array(
 
 
 
+$admin_option_defs = array();
+$admin_option_defs['Administration']['PipelineSettingsPanel'] = array(
+    'Administration',
+    'LBL_PIPELINE_LINK_NAME',
+    'LBL_PIPELINE_LINK_DESCRIPTION',
+    'javascript:void(parent.SUGAR.App.router.navigate("VisualPipeline/config", {trigger: true}));',
+);
+
+$admin_group_header[] = array(
+    'LBL_PIPELINE_SECTION_HEADER',
+    '',
+    false,
+    $admin_option_defs,
+    'LBL_PIPELINE_SECTION_DESCRIPTION',
+);
+
 if(SugarAutoLoader::existing('custom/modules/Administration/Ext/Administration/administration.ext.php')){
 	include('custom/modules/Administration/Ext/Administration/administration.ext.php');
 }
@@ -341,4 +391,3 @@ foreach ($admin_group_header as $key=>$values) {
 
 	}
 }
-?>

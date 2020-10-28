@@ -107,5 +107,34 @@ SUGAR.Administration = {
 
 			return loaded;
 		}
-	}
-}
+    },
+
+    /**
+     * Handles pushing users to Cloud Insights service as needed
+     * @type {Object}
+     */
+    CloudInsights: {
+        /**
+         * Handles the actual sending of the user, using a POST request of data
+         * that includes the user's key from the config
+         * @param {string} url The URL of the service
+         * @param {string} key The key to use for identification
+         */
+        LinkToLanding: function(url, key) {
+            // Dirty, for sure, but it handles what we want. Create a hidden form
+            // that will send the `key` as POST data to `url`
+            var f = $('<form target="_blank" method="POST" style="display:none;"></form>').attr({
+                action: url
+            }).appendTo(document.body);
+
+            $('<input type="hidden" />').attr({
+                name: 'key',
+                value: key
+            }).appendTo(f);
+            f.submit();
+            f.remove();
+
+            return false;
+        }
+    }
+};

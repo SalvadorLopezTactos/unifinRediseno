@@ -227,8 +227,8 @@ class ProductBundle extends SugarBean
      */
     public function clear_productbundle_product_relationship($bundle_id)
     {
-        $query = "delete from $this->rel_products where (bundle_id='$bundle_id') and deleted=0";
-        $this->db->query($query, true, "Error clearing product bundle to product relationship: ");
+        $this->db->getConnection()
+            ->delete($this->rel_products, ['bundle_id' => $bundle_id, 'deleted' => 0]);
         return true;
     }
 
@@ -239,8 +239,8 @@ class ProductBundle extends SugarBean
      */
     public function clear_product_productbundle_relationship($product_id)
     {
-        $query = "delete from $this->rel_products where (product_id='$product_id') and deleted=0";
-        $this->db->query($query, true, "Error clearing product to product bundle relationship: ");
+        $this->db->getConnection()
+            ->delete($this->rel_products, ['product_id' => $product_id, 'deleted' => 0]);
         return true;
     }
 

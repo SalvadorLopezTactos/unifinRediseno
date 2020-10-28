@@ -18,8 +18,14 @@ function additionalDetailsTask($fields) {
 	}
 
 	$overlib_string = '';
-    if(!empty($fields['DATE_START'])) $overlib_string .= '<b>'. $mod_strings['LBL_START_DATE_AND_TIME'] . '</b> ' . $fields['DATE_START'] .  '<br>';
-	if(!empty($fields['DATE_DUE'])) $overlib_string .= '<b>'. $mod_strings['LBL_DUE_DATE_AND_TIME'] . '</b> ' . $fields['DATE_DUE'] .  '<br>';
+    if (!empty($fields['DATE_START'])) {
+        $userTimeStart = $GLOBALS['timedate']->to_display_date_time($fields['DATE_START']);
+        $overlib_string .= '<b>' . $mod_strings['LBL_START_DATE_AND_TIME'] . '</b> ' . $userTimeStart . ' <br>';
+    }
+    if (!empty($fields['DATE_DUE'])) {
+        $userTimeDue = $GLOBALS['timedate']->to_display_date_time($fields['DATE_DUE']);
+        $overlib_string .= '<b>' . $mod_strings['LBL_DUE_DATE_AND_TIME'] . '</b> ' . $userTimeDue . ' <br>';
+    }
 	if(!empty($fields['PRIORITY'])) $overlib_string .= '<b>'. $mod_strings['LBL_PRIORITY'] . '</b> ' . $fields['PRIORITY'] . '<br>';
 	if(!empty($fields['STATUS'])) $overlib_string .= '<b>'. $mod_strings['LBL_STATUS'] . '</b> ' . $fields['STATUS'] . '<br>';
 		

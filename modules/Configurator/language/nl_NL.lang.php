@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'De beeldverhouding moet tussen 1:1 en 10:1  zijn. De afbeelding zal worden aangepast.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'De beeldverhouding moet tussen 3:1 and 20:1 zijn.  Upload een nieuw bestand met de juiste beeldverhouding.',
     'ERR_ALERT_FILE_UPLOAD' => 'Fout tijdens uploaden van afbeelding.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Kan geen map aanmaken voor afbeeldingen',
     'LBL_LOGGER'=>'Loggerinstellingen',
 	'LBL_LOGGER_FILENAME'=>'Bestandsnaam log',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Extensie',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Maximale afmetingen log',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Default date format',
 	'LBL_LOGGER_LOG_LEVEL'=>'Logniveau',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Instellingen opmerkingenlogboek',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Maximaal aantal tekens per opmerkingeninvoer',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

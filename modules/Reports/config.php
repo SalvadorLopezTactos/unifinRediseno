@@ -64,15 +64,19 @@ function getAllowedReportModules(&$local_modListHeader, $skipCache = false) {
 			array_key_exists("Project", $all_modules)) {
 			$report_modules[$key] = $value;
 		}
-		 
-	    if($key == 'Users' || $key == 'Teams'  || $key =='EmailAddresses') {
+
+        $specialModules = [
+            'Users',
+            'Teams',
+            'EmailAddresses',
+            'Releases',
+            'CampaignLog',
+            'Manufacturers',
+            'ChangeTimers',
+        ];
+        if (in_array($key, $specialModules)) {
             $report_modules[$key] = $value;
         }
-
-		if($key=='Releases' || $key == 'CampaignLog' || $key == 'Manufacturers') {
-			$report_modules[$key] = $value;
-		}
-
 	}
 
 	global $beanFiles;

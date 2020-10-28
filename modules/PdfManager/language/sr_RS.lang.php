@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Pregled',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'UPOZORENJE: Ako promenite primarni modul, sva polja koja su već dodata u šablon biće uklonjena',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Ovo je fajl koji ste tražili (ovaj tekst možete kasnije promeniti)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Ponuda',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Ovaj šablon se koristi za štampanje Ponude u PDF varijanti',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'ponuda',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Ponuda (sa uslugama)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Ovaj šablon se koristi za štampanje Ponude, uključujući i informacije o uslugama, u PDF varijanti.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'servicequote',
+
   'LBL_TPL_INVOICE_NAME' => 'Faktura',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Ovaj šablon se koristi za štampanje predračuna u PDF varijanti',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'predračun',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Faktura (sa uslugama)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Ovaj šablon se koristi za štampanje Fakture, uključujući i informacije o uslugama, u PDF varijanti.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'serviceinvoice',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Broj ponude:',
   'LBL_TPL_SALES_PERSON' => 'Osoba iz prodaje:',
   'LBL_TPL_VALID_UNTIL' => 'Važi do:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Broj dela:',
   'LBL_TPL_PRODUCT' => 'Proizvod:',
   'LBL_TPL_RLI' => 'Stavke prihoda',
+  'LBL_TPL_DURATION' => 'Trajanje',
+  'LBL_TPL_DURATION_STARTS' => 'Počinje:',
+  'LBL_TPL_DURATION_ENDS' => 'Završava se:',
   'LBL_TPL_LIST_PRICE' => 'Cena:',
   'LBL_TPL_UNIT_PRICE' => 'Jedinična cena:',
   'LBL_TPL_EXT_PRICE' => 'Procenjena cena',

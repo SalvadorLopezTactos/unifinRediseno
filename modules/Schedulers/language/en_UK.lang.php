@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publish approved articles & Expired KB Articles.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Scheduled Job',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Rebuild Denormalised Team Security Data',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Activity Stream Purger',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Run Email Reminders Sending',
 'LBL_CLEANJOBQUEUE' => 'Cleanup Job Queue',
 'LBL_CLEANOLDRECORDLISTS' => 'Cleanup Old Record Lists',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Activity Stream Purger',
 'LBL_PMSEENGINECRON' => 'SugarBPM Scheduler',
 );
 

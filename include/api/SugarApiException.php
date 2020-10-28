@@ -269,3 +269,21 @@ class SugarApiExceptionFieldEditDisabled extends SugarApiExceptionNotAuthorized
     public $errorLabel = 'field_locked';
     public $messageLabel = 'EXCEPTION_FIELD_LOCKED_FOR_EDIT';
 }
+
+/**
+ * Attempt to access for disabled module
+ */
+class SugarApiExceptionModuleDisabled extends SugarApiExceptionNotAuthorized
+{
+    public $errorLabel = 'module_disabled';
+    public $messageLabel = 'EXCEPTION_MODULE_DISABLED';
+}
+
+/**
+ * Attempt to access for disabled field
+ */
+class SugarApiExceptionFieldDisabled extends SugarApiExceptionNotAuthorized
+{
+    public $errorLabel = 'field_disabled';
+    public $messageLabel = 'EXCEPTION_FIELD_DISABLED';
+}

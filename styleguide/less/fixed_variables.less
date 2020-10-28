@@ -7,6 +7,7 @@
 @gray: #555;
 @grayLight: #717171;
 @grayLightish: #999;
+@grayMid: #d5dce0;
 @grayLighter: #f6f6f6;
 @white: #fff;
 @transparent: rgba(0, 0, 0, 0);
@@ -37,62 +38,145 @@
 
 // Accent colors (defined)
 // -------------------------------------------------------------
-@mint: #18e7d2;
-@green: #54cb14;
-@army: #429e10;
-@yellow: #f4e429;
-@orange: #fbc02d;
-@red: #e61718;
-@pink: #de5af1;
-@purple: #854edb;
-@night: #011523;
+// Standard:
+@army: #6cdf46;
 @blue: #0679c8;
-@ocean: #41b7d1;
-@pacific: #198cc6;
-@teal: #1cc8d3;
-@coral: #da3eac;
-@moss: #33800d;
-@stone: #0f7799;
-@cider: #7e6017;
-@rose: #ebaaaa;
-@cream: #fdf8ee;
+@coral: #f476b1;
+@green: #00ba83;
+@night: #011523;
+@orange: #ff9445;
+@ocean: #517bf8;
+@pacific: #36b0ff;
+@pink: #cd74f2;
+@purple: #8f5ff5;
+@red: #fa374f;
+@teal: #00e0e0;
+@yellow: #ffd132;
+
+// Dark:
+@darkArmy: #537600;
+@darkBlue: #016faa;
+@darkCoral: #a23354;
+@darkGreen: #056f37;
+@darkOcean: #29388c;
+@darkOrange: #9b4617;
+@darkPacific: #145c95;
+@darkPink: #832a83;
+@darkPurple: #4c2d85;
+@darkRed: #bb0e1b;
+@darkTeal: #00636e;
+@darkYellow: #866500;
+
+// Light:
+@lightArmy: #e4fbb4;
+@lightCoral: #fde2eb;
+@lightGreen: #baffcc;
+@lightOcean: #c6ddff;
+@lightOrange: #ffdebc;
+@lightPacific: #c0edff;
+@lightPink: #f7d0fd;
+@lightPurple: #e2d4fd;
+@lightRed: #ffd4d0;
+@lightTeal: #c5fffb;
+@lightYellow: #fff7ad;
 
 // Elemental labels colors
 // -------------------------------------------------------------
-@el-accounts: #51cd15;
-@el-bugs: #e61718;
-@el-calendar: #00bd9c;
-@el-calls: #01d1ff;
-@el-campaigns: #ffcf00;
-@el-campaignlog: @el-campaigns;
-@el-cases: #e85479;
-@el-contacts: #51b71a;
-@el-documents: #fb8724;
-@el-emails: #2c97de;
-@el-files: #ef6907;
-@el-forecasts: #1fce6d;
-@el-kbarticles: #3590eb;
-@el-kbcontents: @el-kbarticles;
-@el-kbdocuments: @el-kbarticles;
-@el-kblocalizations: #183cc8;
-@el-kbrevisions: #7541c5;
-@el-leads: #7651fc;
-@el-meetings: #2ee0cd;
-@el-notes: #198cc6;
-@el-opportunities: #a05cff;
-@el-pmse: #9aa5ad;
-@el-products: #011523;
-@el-prospectlists: #429e10;
-@el-prospects: @el-prospectlists;
-@el-quotas: #18e7d2;
-@el-quotes: #00beab;
-@el-reports: #ff973e;
-@el-rli: #00cbf3;
-@el-tasks: #de5af1;
-@el-tags: #9aa5ad;
-@el-users: #6b7479;
-@el-workflow: #41b7d1;
-@el-dataprivacy: #9aa5ad;
+@el-accounts-text: @darkGreen;
+@el-accounts-bg: @lightGreen;
+@el-bugs-text: @darkRed;
+@el-bugs-bg: @lightRed;
+@el-calendar-text: @darkTeal;
+@el-calendar-bg: @lightTeal;
+@el-calls-text: @darkPacific;
+@el-calls-bg: @lightPacific;
+@el-campaigns-text: @darkYellow;
+@el-campaigns-bg: @lightYellow;
+@el-campaignlog-text: @darkYellow;
+@el-campaignlog-bg: @lightYellow;
+@el-cases-text: @darkOrange;
+@el-cases-bg: @lightOrange;
+@el-contacts-text: @darkPink;
+@el-contacts-bg: @lightPink;
+@el-documents-text: @darkCoral;
+@el-documents-bg: @lightCoral;
+@el-emails-text: @darkOcean;
+@el-emails-bg: @lightOcean;
+@el-files-text: @darkOrange;
+@el-files-bg: @lightOrange;
+@el-forecasts-text: @darkArmy;
+@el-forecasts-bg: @lightArmy;
+@el-kbarticles-text: @darkCoral;
+@el-kbarticles-bg: @lightCoral;
+@el-kbcontents-text: @darkCoral;
+@el-kbcontents-bg: @lightCoral;
+@el-kbdocuments-text: @darkCoral;
+@el-kbdocuments-bg: @lightCoral;
+@el-kblocalizations-text: @darkCoral;
+@el-kblocalizations-bg: @lightCoral;
+@el-kbrevisions-text: @darkCoral;
+@el-kbrevisions-bg: @lightCoral;
+@el-leads-text: @darkPurple;
+@el-leads-bg: @lightPurple;
+@el-meetings-text: @darkTeal;
+@el-meetings-bg: @lightTeal;
+@el-notes-text: @darkGreen;
+@el-notes-bg: @lightGreen;
+@el-opportunities-text: @darkRed;
+@el-opportunities-bg: @lightRed;
+@el-pmse-text: @grayDarkish;
+@el-pmse-bg: @grayMid;
+@el-products-text: @darkPurple;
+@el-products-bg: @lightPurple;
+@el-prospectlists-text: @darkArmy;
+@el-prospectlists-bg: @lightArmy;
+@el-prospects-text: @darkYellow;
+@el-prospects-bg: @lightYellow;
+@el-quotas-text: @darkPacific;
+@el-quotas-bg: @lightPacific;
+@el-quotes-text: @darkOcean;
+@el-quotes-bg: @lightOcean;
+@el-reports-text: @darkOrange;
+@el-reports-bg: @lightOrange;
+@el-rli-text: @darkPacific;
+@el-rli-bg: @lightPacific;
+@el-tags-text: @darkPink;
+@el-tags-bg: @lightPink;
+@el-tasks-text: @darkPurple;
+@el-tasks-bg: @lightPurple;
+@el-users-text: @darkTeal;
+@el-users-bg: @lightTeal;
+@el-workflow-text: @darkOcean;
+@el-workflow-bg: @darkOcean;
+@el-dataprivacy-text: @darkArmy;
+@el-dataprivacy-bg: @lightArmy;
+
+// Color coded enum colors
+// -------------------------------------------------------------
+@enum-fg1: @darkYellow;
+@enum-fg2: @darkArmy;
+@enum-fg3: @darkTeal;
+@enum-fg4: @darkOcean;
+@enum-fg5: @darkPurple;
+@enum-fg6: @darkCoral;
+@enum-fg7: @grayDark;
+@enum-fg8: @white;
+@enum-fg9: @darkRed;
+@enum-fg10: @darkOrange;
+@enum-fg11: @darkGreen;
+@enum-fg12: @lightTeal;
+@enum-bg1: @lightYellow;
+@enum-bg2: @lightArmy;
+@enum-bg3: @lightTeal;
+@enum-bg4: @lightOcean;
+@enum-bg5: @lightPurple;
+@enum-bg6: @lightCoral;
+@enum-bg7: @grayMid;
+@enum-bg8: @steel;
+@enum-bg9: @lightRed;
+@enum-bg10: @lightOrange;
+@enum-bg11: @lightGreen;
+@enum-bg12: @lightTeal;
 
 // Scaffolding
 // -------------------------
@@ -120,8 +204,8 @@
 
 //Shadows
 //--------------------------
-@shadowWidget: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
-@shadowWidgetInset: inset 0 2px 1px rgba(0, 0, 0, 0.1);
+@shadowWidget: 0 2px 2px 0 fade(@black, 10%);
+@shadowWidgetInset: inset 0 2px 1px fade(@black, 10%);
 
 @borderWidget: 1px solid darken(@grayLighter, 10%);
 @borderWidgetLight: 1px solid darken(@grayLighter, 5%);
@@ -144,7 +228,7 @@
 
 // Tables
 // -------------------------
-@tableBackground: transparent; // overall background-color
+@tableBackground: @transparent; // overall background-color
 @tableBackgroundAccent: lighten(@grayLighter, 1%); // for striping
 @tableBorderColor: darken(@grayLighter, 5%); // table and cell border
 @tableBorder: 1px solid @tableBorderColor;
@@ -154,29 +238,35 @@
 // Form states and alerts
 // -------------------------
 
-@inform: @pacific;
-@infoText: @inform;
-@infoAlertText: @white;
-@infoBackground: @inform;
-@infoBorder: @inform;
+@inform: @ocean;
+@infoText: @darkOcean;
+@infoAlertText: @black;
+@infoBackground: @lightOcean;
+@infoBorder: @ocean;
 
-@success: @green;
-@successText: @success;
-@successAlertText: @white;
-@successBackground: @success;
-@successBorder: @success;
+@pending: @gray;
+@pendingText: @grayDark;
+@pendingAlertText: @black;
+@pendingBackground: @grayMid;
+@pendingBorder: @gray;
 
-@warning: #fbc02d;
-@warningText: @warning;
-@warningAlertText: @white;
-@warningBackground: @warning;
-@warningBorder: @warning;
+@success: @army;
+@successText: @darkArmy;
+@successAlertText: @black;
+@successBackground: @lightArmy;
+@successBorder: @army;
+
+@warning: @yellow;
+@warningText: @darkYellow;
+@warningAlertText: @black;
+@warningBackground: @lightYellow;
+@warningBorder: @yellow;
 
 @error: @red;
-@errorText: @error;
-@errorAlertText: @white;
-@errorBackground: @error;
-@errorBorder: @error;
+@errorText: @darkRed;
+@errorAlertText: @black;
+@errorBackground: @lightRed;
+@errorBorder: @red;
 
 @warningTableBackground:lighten(@yellow, 47%);
 @confirmationBackground:lighten(@yellow, 47%);
@@ -192,14 +282,14 @@
 
 @btnPrimaryBackground: @PrimaryButton;
 @btnPrimaryBackgroundHighlight: @PrimaryButton;
-@btnInfoBackground: @inform;
-@btnInfoBackgroundHighlight: @inform;
-@btnSuccessBackground: @success;
-@btnSuccessBackgroundHighlight: @success;
-@btnWarningBackground: @warning;
-@btnWarningBackgroundHighlight: @warning;
-@btnDangerBackground: @error;
-@btnDangerBackgroundHighlight: @error;
+@btnInfoBackground: @infoBackground;
+@btnInfoBackgroundHighlight: @infoBackground;
+@btnSuccessBackground: @successBackground;
+@btnSuccessBackgroundHighlight: @successBackground;
+@btnWarningBackground: @warningBackground;
+@btnWarningBackgroundHighlight: @warningBackground;
+@btnDangerBackground: @errorBackground;
+@btnDangerBackgroundHighlight: @errorBackground;
 @btnInverseBackground: @black;
 @btnInverseBackgroundHighlight: @black;
 
@@ -208,7 +298,7 @@
 @btnSecondaryColor: @linkColor;
 @btnSecondaryBackgroundHover: #f2f5f9;
 @btnSecondaryBackgroundActive: #e0e8ed;
-@btnSecondaryBoxShadowActive: inset 0 1px 3px 0 rgba(1, 21, 35, 0.1);
+@btnSecondaryBoxShadowActive: inset 0 1px 3px 0 fade(@night, 10%);
 @btnSecondaryBackgroundFocus: @white;
 @btnSecondaryBackgroundDisabled: #f8fafd;
 @btnSecondaryColorDisabled: rgba(6, 121, 200, 0.3);
@@ -309,7 +399,7 @@
 @navbarInverseSearchBackground: lighten(@navbarInverseBackground, 25%);
 @navbarInverseSearchBackgroundFocus: @white;
 @navbarInverseSearchBorder: @navbarInverseBackground;
-@navbarInverseSearchPlaceholderColor: #ccc;
+@navbarInverseSearchPlaceholderColor: @grayLighter;
 @navbarInverseBrandColor: @navbarInverseLinkColor;
 
 // Pagination
@@ -337,7 +427,7 @@
 
 // Special enhancement for popovers
 @popoverArrowOuterWidth: @popoverArrowWidth + 1;
-@popoverArrowOuterColor: rgba(0, 0, 0, 0.25);
+@popoverArrowOuterColor: fade(@black, 25%);
 
 // Default 940px grid
 // -------------------------
@@ -368,6 +458,13 @@
 // 768px-979px
 @fluidGridColumnWidth768: percentage(@gridColumnWidth768/@gridRowWidth768);
 @fluidGridGutterWidth768: percentage(@gridGutterWidth768/@gridRowWidth768);
+
+// Labels On Side View Grid
+// -------------------------
+@labelOnSideGutterWidth: 12px;
+@labelsOnSideColumnWidth768: 28px;
+@labelOnSideVerticalSpacing: 16px;
+@labelOnSideNarrowColumnWidth: 30px;
 
 @afterleftcaretpos: 10px;
 
@@ -403,46 +500,45 @@
 @chartTickColor: @grayLight;
 @chartTickWidth: 1px;
 
-// Default chart fill colors
+// Default chart fill colors (slightly lighter than stroke colours)
 // -------------------------
-@fill00: #1285d5; //@blue (new)
-@fill01: #2fdbca; //@mint (new)
-@fill02: #de3839; //@red
-@fill03: #f3cc25; //@yellow (new)
-@fill04: #956cd6; //@purple
-@fill05: #da8ee5; //@pink (new)
-@fill06: #3c910e; //@army (new)
-@fill07: #61d523; //@green
-@fill08: #d35db1; //@coral
-@fill09: #166e90; //@ocean
-@fill10: #f19547; //@orange (new)
-@fill11: #3ab5f5; //@pacific (new)
-@fill12: #24e7f4; //@teal (new)
-@fill13: #09467c; //@night (new)
+@fill00: @blue;
+@fill01: @teal;
+@fill02: @red;
+@fill03: @yellow;
+@fill04: @purple;
+@fill05: @pink;
+@fill06: @army;
+@fill07: @green;
+@fill08: @coral;
+@fill09: @ocean;
+@fill10: @orange;
+@fill11: @pacific;
+@fill12: @darkCoral;
+@fill13: @night;
 
 // Default chart stroke colors
 // -------------------------
-@stroke00: #0679c8; //@blue (new)
-@stroke01: #17dbc7; //@mint (new)
-@stroke02: #e61718; //@red
-@stroke03: #ffcf00; //@yellow (new)
-@stroke04: #854edb; //@purple
-@stroke05: #da72e8; //@pink (new)
-@stroke06: #318105; //@army (new)
-@stroke07: #54cb14; //@green
-@stroke08: #da3eac; //@coral
-@stroke09: #0c6181; //@ocean
-@stroke10: #fb8724; //@orange (new)
-@stroke11: #17b0ff; //@pacific (new)
-@stroke12: #00f0ff; //@teal (new)
-@stroke13: #02396a; //@night (new)
-
+@stroke00: @blue;
+@stroke01: @teal;
+@stroke02: @red;
+@stroke03: @yellow;
+@stroke04: @purple;
+@stroke05: @pink;
+@stroke06: @army;
+@stroke07: @green;
+@stroke08: @coral;
+@stroke09: @ocean;
+@stroke10: @orange;
+@stroke11: @pacific;
+@stroke12: @darkCoral;
+@stroke13: @night;
 
 /* NEW SKIN START */
 
 // Open Sans Font Path
 // -------------------------
-@os-font-path: "../../../../styleguide/assets/fonts/opensans";
+@os-font-path: "@{siteUrl}/styleguide/assets/fonts/opensans";
 
 // New Theme Variables
 // -------------------------
@@ -460,14 +556,14 @@
 @btnPrimaryActiveBackground: #005087;
 @btnPrimaryActiveBorder: #033d64;
 @btnPrimaryHoverBackground: #0463a4;
-@btnPrimaryHoverActiveBgGrad: rgba(0, 21, 35, 0.1);
+@btnPrimaryHoverActiveBgGrad: fade(@night, 10%);
 @btnPrimaryHoverBorder: #033d64;
 @btnBackground: @white;
 @btnBackgroundHighlight: @white;
 @btnActiveBackground: #021e32;
 @btnIconColor: @black;
-@btnDisabledIconColor: #b2b2b2;
-@inputBorderColor: #ebedef;
+@btnDisabledIconColor: @grayLightish;
+@inputBorderColor: @grayLighter;
 
 // Select2
 // -------------------------
@@ -495,7 +591,7 @@
 // Headerpane
 // -------------------------
 @headerBackground: @white;
-@headerpaneSideToggleColor: #9aa5ad;
+@headerpaneSideToggleColor: @slate;
 @headerpaneSideToggleBackground: #ebedef;
 
 // Footer
@@ -508,7 +604,16 @@
 @subpanelBackground: #ebedef;
 @subpanelClosedBackground: #ebedef;
 @subpanelHoverBackground: #e3e5e8;
-@subpanelDisabledHeaderColor: rgba(0, 0, 0, 0.3);
+@subpanelDisabledHeaderColor: fade(@black, 30%);
+
+// Panel Headers
+// -------------------------
+@fontSizePanelHeader: 14px;
+@panelHeaderHeight: 44px;
+@panelPaddingTop: (@panelHeaderHeight - @fontSizePanelHeader) / 2 - 3;
+@panelPaddingSide: 15px;
+@panelInactiveHoverColor: #f7f8f9;
+@panelBorderColor: #d3dbe1;
 
 // Tables
 // -------------------------
@@ -530,11 +635,11 @@
 
 // Loading
 // -------------------------
-@loadingColor: #717175;
+@loadingColor: @grayLight;
 
 // Input placeholder text color
 // -------------------------
-@placeholderText: #9aa5ad;
+@placeholderText: @slate;
 
 // Record view
 // -------------------------
@@ -549,14 +654,30 @@
 // -------------------------
 @alertFontSize: @baseFontSize + 2px; // 14px
 @alertIconFontSize: @baseFontSize + 3px; // 15px
-@alertError: @rose;
-@alertErrorText: @red;
+@alertError: @red;
+@alertErrorBackground: @lightRed;
+@alertErrorText: @darkRed;
 @alertInfo: @ocean;
-@alertInfoText: @stone;
+@alertInfoBackground: @lightOcean;
+@alertInfoText: @darkOcean;
 @alertSuccess: @green;
-@alertSuccessText: @moss;
-@alertWarning: @orange;
-@alertWarningText: @cider;
-@alertConfirmationBackground: @cream;
+@alertSuccessBackground: @lightGreen;
+@alertSuccessText: @darkGreen;
+@alertWarning: @yellow;
+@alertWarningBackground: @lightYellow;
+@alertWarningText: @darkYellow;
+@alertConfirmationBackground: @white;
 
 /* NEW SKIN END */
+
+// Label badges
+@countBadgeHeight: 28px;
+@countBadgeWidth: 28px;
+
+// Tabs
+@tabBackgroundActive: @contentBackground;
+@tabBackgroundInactive: @white;
+
+// Agent workbench related
+@workbenchOverviewDashletHeight: 520px;
+@workbenchDrawerDashletHeight: 458px;

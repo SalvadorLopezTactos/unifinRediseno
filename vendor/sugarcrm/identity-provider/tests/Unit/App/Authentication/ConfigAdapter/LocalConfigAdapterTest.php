@@ -65,6 +65,7 @@ final class LocalConfigAdapterTest extends TestCase
                 'attempt' => 0,
                 'time' => 0,
             ],
+            'legacy_md5_support' => false,
         ];
 
         return [

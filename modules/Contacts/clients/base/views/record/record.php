@@ -168,7 +168,6 @@ $viewdefs['Contacts']['base']['view']['record'] = array(
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 'title',
@@ -176,6 +175,7 @@ $viewdefs['Contacts']['base']['view']['record'] = array(
                 'department',
                 'do_not_call',
                 'account_name',
+                'business_center_name',
                 'email',
                 array(
                     'name' => 'tag',
@@ -188,7 +188,6 @@ $viewdefs['Contacts']['base']['view']['record'] = array(
             'name' => 'panel_hidden',
             'label' => 'LBL_RECORD_SHOWMORE',
             'hide' => true,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 array(
@@ -291,8 +290,8 @@ $viewdefs['Contacts']['base']['view']['record'] = array(
                 array(
                     'name' => 'preferred_language',
                     'type' => 'language',
-                    'span' => 12,
                 ),
+                'portal_user_company_name',
                 'portal_name',
                 'portal_active',
                 array(

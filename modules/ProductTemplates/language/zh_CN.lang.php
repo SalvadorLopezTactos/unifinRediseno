@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => '查看制造商',
   'LNK_NEW_PRODUCT_CATEGORY' => '查看产品类别',
   'LNK_NEW_PRODUCT_TYPE' => '产品类型',
-  'LNK_NEW_PRODUCT' => '在目录中新增产品',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => '运输供应商',
   'LNK_PRODUCT_LIST' => '查看产品目录',
   'NTC_DELETE_CONFIRMATION' => '您确定要删除这条记录吗？',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => '产品类别',
   'LBL_MANUFACTURERS' => '制造商',
   'LBL_PRODUCT_TYPES' => '产品类型',
-
+  'LBL_RENEWABLE' => '可续订',
+  'LBL_SERVICE' => '服务',
 );
-
-
-?>

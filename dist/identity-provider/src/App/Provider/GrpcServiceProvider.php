@@ -19,6 +19,7 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Sugarcrm\Apis\Iam\App\V1alpha\AppAPIClient;
 use Sugarcrm\Apis\Iam\User\V1alpha\UserAPIClient;
+use Sugarcrm\Apis\Iam\Consent\V1alpha\ConsentAPIClient;
 use Sugarcrm\IdentityProvider\App\ServiceDiscovery;
 use Sugarcrm\IdentityProvider\Authentication\Exception\RuntimeException;
 
@@ -34,6 +35,7 @@ class GrpcServiceProvider implements ServiceProviderInterface
             $app['grpc.discovery'] = null;
             $app['grpc.userapi'] = null;
             $app['grpc.appapi'] = null;
+            $app['grpc.consentapi'] = null;
             return;
         }
 
@@ -100,6 +102,20 @@ class GrpcServiceProvider implements ServiceProviderInterface
             $grpcHost = isset($hostInfo['port']) ? $hostInfo['host'] . ':' . $hostInfo['port'] : $hostInfo['host'];
 
             return new AppAPIClient(
+                $grpcHost,
+                [
+                    'credentials' => $app['grpc.service.credentials']($hostInfo['scheme'] ?? 'http'),
+                    'update_metadata' => $requestMetadataUpdater,
+                ]
+            );
+        };
+
+        $app['grpc.consentapi'] = function ($app) use ($requestMetadataUpdater) {
+            $appApiUrl = $app['grpc.service.url']('iam-consent:v1alpha');
+            $hostInfo = parse_url($appApiUrl);
+            $grpcHost = isset($hostInfo['port']) ? $hostInfo['host'] . ':' . $hostInfo['port'] : $hostInfo['host'];
+
+            return new ConsentAPIClient(
                 $grpcHost,
                 [
                     'credentials' => $app['grpc.service.credentials']($hostInfo['scheme'] ?? 'http'),

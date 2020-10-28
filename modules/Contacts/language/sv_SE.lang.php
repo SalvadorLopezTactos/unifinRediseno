@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Panel för kontaktlistor',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Panel för kontaktposter',
-
+    'LBL_SITE_USER_ID' => 'Hash för site-url och kontakt-id',
+    'LBL_COOKIE_CONSENT' => 'Medgivande för kaka',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Medgivande för kaka mottagen den',
     'LNK_CONTACT_REPORTS' => 'Kontaktrapporter',
     'ERR_DELETE_RECORD' => 'Ett objektnummer måste specificeras för att kunna radera kontakten.',
     'LBL_ACCOUNT_ID' => 'Organisations ID:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Portal information',
     'LBL_PORTAL_NAME' => 'Portalnamn:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Portallösenord är satt:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Portalanvändarens företagsnamn',
     'LBL_RECORD_SAVED_SUCCESS' => 'Du har skapat med framgång {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Gata',
     'LBL_POSTAL_CODE' => 'Postnummer:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Affärsmöjligheter',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokument',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Offerter',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Offerter (skickas till)',
     'LBL_QUOTES_BILL_TO' => 'Offerter (Räkning skickas till)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Produkter',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Klicka här för att redigera din profil.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Här är var du kan ställa in önskat språk. Detta kommer att ändra det språk som används av Sugar Portal.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Du kan återgå till din profil när som helst med hjälp av användarmenyn.',
+    'ERR_PORTAL_NAME_EXISTS' => 'Portalnamnet {0} finns redan. Du får inte ha samma som någon annan, så ändra det till nåt unikt.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Huvud-ID',
@@ -279,4 +284,8 @@ För att skapa en {{module_name}}:
     'LBL_FILTER_CONTACTS_REPORTS' => 'Kontakternas rapporter',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Affärsändamål som samtyckts till',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Samtycke uppdaterades senast',
+
+    'LBL_ENTRY_SOURCE' => 'Kontaktkälla',
+    'LBL_SOURCE_EXTERNAL' => 'Extern',
+    'LBL_SOURCE_INTERNAL' => 'Intern',
 );

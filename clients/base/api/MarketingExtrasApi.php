@@ -45,21 +45,29 @@ class MarketingExtrasApi extends SugarApi
     public function getMarketingExtras(ServiceBase $api, array $args): array
     {
         $marketingExtras = $this->getMarketingExtrasService();
-        $url = '';
+        $contentUrl = '';
+        $imageUrl = '';
         if ($marketingExtras->areMarketingExtrasEnabled()) {
             try {
                 $options = $this->parseArgs($args);
                 $lang = $options['language'];
-                $url = $marketingExtras->getMarketingContentUrl($lang);
+                $contentUrl = $marketingExtras->getMarketingContentUrl($lang);
+            } catch (Exception $e) {
+                // deliberately swallow exceptions so we don't throw errors to the client
+                LoggerManager::getLogger()->warn('Marketing Extras: ' . $e->getMessage());
+            }
+            try {
+                $imageUrl = $marketingExtras->getBackgroundImageUrl();
             } catch (Exception $e) {
                 // deliberately swallow exceptions so we don't throw errors to the client
                 LoggerManager::getLogger()->warn('Marketing Extras: ' . $e->getMessage());
             }
         }
 
-        return array(
-            'content_url' => $url,
-        );
+        return [
+            'content_url' => $contentUrl,
+            'image_url' => $imageUrl,
+        ];
     }
 
     /**

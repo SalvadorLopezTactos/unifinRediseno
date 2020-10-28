@@ -28,12 +28,11 @@ global $current_user;
 
 //if (!is_admin($current_user)) sugar_die("Unauthorized access to administration.");
 //account for use within wizards
-if(!isset($_REQUEST['inline']) || $_REQUEST['inline'] != 'inline'){
-	$params = array();
-	$params[] = "<a href='index.php?module=Campaigns&action=index'>{$mod_strings['LBL_MODULE_NAME']}</a>";
-	$params[] = $mod_strings['LBL_CAMPAIGN_DIAGNOSTICS'];
-	
-	echo getClassicModuleTitle('Campaigns', $params, true);
+if (!isset($_REQUEST['inline']) || $_REQUEST['inline'] != 'inline') {
+    echo getClassicModuleTitle('Campaigns', [
+        sprintf('<a href="index.php?module=Campaigns&action=index">%s</a>', htmlspecialchars($mod_strings['LBL_MODULE_NAME'])),
+        htmlspecialchars($mod_strings['LBL_CAMPAIGN_DIAGNOSTICS']),
+    ], true);
 }
 
 global $theme;

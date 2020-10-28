@@ -725,7 +725,7 @@
                 this.model.set({currency_id: newData.currency_id});
                 delete newData.currency_id;
             }
-            this.model.set(newData);
+            this._setRelated(newData);
             return;
         }
 
@@ -766,7 +766,7 @@
                     self.model.set({currency_id: newData.currency_id});
                     delete newData.currency_id;
                 }
-                self.model.set(newData);
+                self._setRelated(newData);
             }
         });
     },
@@ -1061,6 +1061,48 @@
     unbindDom: function() {
         this.$(this.fieldTag).select2('destroy');
         app.view.Field.prototype.unbindDom.call(this);
-    }
+    },
 
+    /**
+     * Set new values, first checking for any parent/child dependencies, setting
+     * parent values first.
+     *
+     * @param {Object} attrs new values to set on model
+     * @private
+     */
+    _setRelated: function(attrs) {
+        var dependentAttrs = this._getDependentAttributes(attrs);
+        attrs = _.omit(attrs, _.keys(dependentAttrs));
+
+        this.model.set(attrs);
+        if (!_.isEmpty(dependentAttrs)) {
+            this._setRelated(dependentAttrs);
+        }
+    },
+
+    /**
+     * Gets attributes that depend on other attributes also being set.
+     *
+     * If a field has a visibility grid, it is a dropdown whose contents  depend
+     * on another dropdown. If its parent is also in the attrs about to be set,
+     * we need to ensure children are set after their parents.
+     *
+     * @param {Object} attrs Bean attributes
+     * @return {Object} Attributes with dependencies
+     * @private
+     */
+    _getDependentAttributes: function(attrs) {
+        var fields = this.model.fields || {};
+        var dependentAttrs = {};
+        _.each(attrs, function(val, key) {
+            var field = fields[key];
+            if (field &&
+                field.visibility_grid &&
+                field.visibility_grid.trigger in attrs) {
+                dependentAttrs[key] = val;
+            }
+        }, this);
+
+        return dependentAttrs;
+    }
 })

@@ -43,6 +43,8 @@ $app_list_strings = array (
     'ForecastWorksheets' => 'Прогнозни планове',
     'ForecastManagerWorksheets' => 'Прогнозни планове на мениджъра',
     'MergeRecords'=>'Сливане на записи',
+      'VisualPipeline'=>'Визуални текущи възможности',
+      'ConsoleConfiguration' => 'Конфигуриране на конзола',
     'Quotas' => 'Квоти',
     'Teams' => 'Екип',
     'TeamNotices' => 'Членове на екипите',
@@ -75,6 +77,11 @@ $app_list_strings = array (
     'pmse_Project' => 'Дефиниции на процеси',
     'pmse_Business_Rules' => 'Бизнес правила в процеси',
     'pmse_Emails_Templates' => 'Шаблони на писма в процеси',
+    'BusinessCenters' => 'Бизнес центрове',
+    'Shifts' => 'Shifts',
+    'ShiftExceptions' => 'Shift Exceptions',
+    'Purchases' => 'Purchases',
+    'PurchasedLineItems' => 'Purchased Line Items',
     'WorkFlow' => 'Дефиниции на работните процеси',
     'EAPM' => 'Профили в други приложения',
     'Worksheet' => 'План',
@@ -116,6 +123,8 @@ $app_list_strings = array (
     'DataPrivacy' => 'Поверителност на личните данни',
     'ReportSchedules' => 'Графици на справките',
     'CommentLog' => 'Регистър на коментари',
+    'Holidays' => 'Почивни дни',
+    'ChangeTimers' => 'Промени таймери',
   ),
 
     'moduleIconList' =>
@@ -131,6 +140,8 @@ $app_list_strings = array (
         'Tasks' => 'З',
         'Dashboards' => 'Ds',
         'DataPrivacy' => 'DP (ПЛД)',
+        'BusinessCenters' => 'БЦ',
+        'PurchasedLineItems' => 'PL',
     ),
 
   'moduleListSingular' =>
@@ -150,6 +161,8 @@ $app_list_strings = array (
     'Calendar' => 'Календар',
     'Leads' => 'Потенциален клиент',
     'Manufacturers' => 'Производител',
+    'VisualPipeline' => 'VisualPipeline',
+    'ConsoleConfiguration' => 'ConsoleConfiguration',
     'Contracts'=>'Договор',
     'Quotes' => 'Оферта',
     'Products' => 'Офериран продукт',
@@ -196,6 +209,11 @@ $app_list_strings = array (
     'pmse_Project' => 'Дефиниция на процес',
     'pmse_Business_Rules' => 'Бизне правило в процес',
     'pmse_Emails_Templates' => 'Шаблон на писмо в процеси',
+    'BusinessCenters' => 'Бизнес център',
+    'Shifts' => 'Shift',
+    'ShiftExceptions' => 'Shift Exceptions',
+    'Purchases' => 'Purchase',
+    'PurchasedLineItems' => 'Purchased Line Item',
     'WorkFlow' => 'Работен процес',
     'EAPM' => 'Външен профил',
     'Worksheet' => 'План',
@@ -224,7 +242,7 @@ $app_list_strings = array (
     'Comments' => 'Коментар',
     'CommentLog' => 'Регистър на коментари',
     'Currencies' => 'Валута',
-    'ProductTemplates' => 'Продуктов шаблон',
+    'ProductTemplates' => 'Product',
     'ProductTypes' => 'Тип на продукт',
     'Shippers' => 'Транспортна фирма',
     'Subscriptions' => 'Абонамент',
@@ -236,6 +254,8 @@ $app_list_strings = array (
     'EmailParticipants' => 'Адресат на електронно писмо',
     'DataPrivacy' => 'Поверителност на личните данни',
     'ReportSchedules' => 'График на справките',
+    'Holidays' => 'Почивен ден',
+    'ChangeTimers' => 'Промени таймер',
   ),
 
 /*
@@ -321,6 +341,11 @@ $app_list_strings = array (
     'T3' => 'Ниво 3',
     'T4' => 'Ниво 4',
   ),
+  'generate_purchase_dom' => [
+      'Yes' => 'Yes',
+      'No' => 'No',
+      'Completed' => 'Completed',
+  ],
   'lead_source_default_key' => 'По инициатива на клиента',
   'lead_source_dom' =>
   array (
@@ -589,6 +614,12 @@ $app_list_strings = array (
     'RegularUser' => 'Потребител на системата',
     'Administrator' => 'Администратор',
   ),
+  'license_type_dom' =>
+    array (
+        'CURRENT' => 'Текущ продукт',
+        'SUGAR_SERVE' => 'Sugar Serve',
+        'SUGAR_SELL' => 'Продажба чрез Sugar',
+    ),
   'user_status_dom' =>
   array (
     'Active' => 'Активен',
@@ -693,6 +724,8 @@ $app_list_strings = array (
     'Meetings' => 'Среща',
     'Calls' => 'Обаждане',
       'KBContents' => 'База от знания',
+      'PurchasedLineItems' => 'Purchased Line Item',
+      'Purchases' => 'Purchase',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Oрганизация',
@@ -722,7 +755,13 @@ $app_list_strings = array (
     'Prospects' => 'Целеви клиент',
       'KBContents' => 'База от знания',
       'Notes' => 'Бележка',
+    'PurchasedLineItems' => 'Purchased Line Item',
+    'Purchases' => 'Purchase',
   ),
+
+  'changetimer_parent_type' => [
+      'Cases' => 'Казус',
+  ],
 
   'product_status_default_key' => 'Изпрати',
   'product_status_quote_key' => 'Оферти',
@@ -883,7 +922,8 @@ $app_list_strings = array (
     'Forum' => 'Форум',
     'Web' => 'Уеб',
     'InboundEmail' => 'Електронна поща',
-    'Twitter' => 'Туитър'
+    'Twitter' => 'Туитър',
+    'Portal' => 'Портал',
   ),
     'dataprivacy_type_default_key' => '',
     'dataprivacy_type_dom' => array(
@@ -916,6 +956,11 @@ $app_list_strings = array (
         'Medium' => 'Средна',
         'High' => 'Висока',
     ),
+    'business_day_status_dom' => [
+        'Open' => 'Отворен',
+        'Open 24 Hours' => 'Отворен 24 часа',
+        'Closed' => 'Затворен',
+    ],
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -1145,6 +1190,13 @@ $app_list_strings = array (
     'dom_email_states' => array(
         'Draft' => 'Работен вариант',
         'Archived' => 'Архивни',
+    ),
+
+    'dom_email_direction' => array(
+        'Unknown' => 'Неизвестен',
+        'Outbound' => 'Изходящо',
+        'Inbound' => 'Входящо',
+        'Internal' => 'Вътрешен',
     ),
 
     'scheduler_status_dom' =>
@@ -2096,6 +2148,11 @@ $app_list_strings = array (
         240000 => 'На всеки 4 минути',
         300000 => 'На всеки 5 минути',
   ),
+    'first_response_met_sla_dom'=> [
+        '' => '',
+        'Yes' => 'Да',
+        'No' => 'Не',
+    ],
     'forecasts_chart_options_group' => array(
         'forecast' => 'Включено в прогнозата',
         'sales_stage' => 'Етап на преговори',
@@ -2123,6 +2180,7 @@ $app_list_strings = array (
         'record' => 'Запис',
         'records' => 'Списък',
         'activities' => 'Хронология',
+        'multi-line' => 'Списък на много линии',
     ),
     'reportschedule_time_interval_dom' => array(
         '3600' => 'Всеки час',
@@ -2133,6 +2191,23 @@ $app_list_strings = array (
         '1209600' => 'Всеки 2 седмици',
         '2419200' => 'Всеки 4 седмици',
     ),
+    'pipeline_records_per_column' => array(
+        '10' => '10',
+        '15' => '15',
+        '20' => '20',
+    ),
+    //Service Duration
+    'service_duration_unit_dom' =>
+        array (
+            'year' => 'Година(и)',
+            'month' => 'Месец(и)',
+            'day' => 'Ден/дни',
+        ),
+        'shift_exception_type_dom' => [
+            'time_off' => 'Time Off',
+            'event' => 'Event',
+            'other' => 'Other',
+        ],
 );
 
 $app_strings = array (
@@ -2144,7 +2219,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Следвай линка',
   'LBL_TOGGLE_VISIBILITY' => 'Промяна на статуса за визуализация', // Record view header panel element
   'LBL_ACTIVITIES' => 'Хронология',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2019 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2020 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar и 3-D кубът са регистрирани търговски марки на SugarCRM Inc. '.
         'Всички други наименования на фирми и продукти, използвани или упоменати в този продукт е възможно да са търговски марки на '.
         'SugarCRM ®, Sugar Enterprise™ и Sugar™ са търговски марки на SugarCRM Inc.',
@@ -2500,6 +2575,7 @@ $app_strings = array (
 
     'LBL_EMAIL_NO'                          => 'Не',
     'LBL_EMAIL_NOT_SENT'                    => 'Системата не е в състояние да обработи заявката Ви. Моля, свържете се със системния администратор.',
+    'LBL_INSERT_TO_USER_PWD_FAILED'         => 'Не можахме да вмъкнем в users_password_link.',
 
     'LBL_EMAIL_OK'                          => 'ОК',
     'LBL_EMAIL_ONE_MOMENT'                  => 'Моля, изчакайте...',
@@ -2716,8 +2792,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Необходимо е активна сесия, за да бъде експортирано съдържанието.',
     'ERR_NO_HEADER_ID' => 'Тази опция не се поддържа от текущата визуализация.',
     'ERR_NOT_ADMIN' => "Достъпът до панел &quot;Администриране&quot; не е разрешен.",
-    'ERR_DISABLED_FOR_IDM_MODE' => '"Управление на пароли" е достъпно само в "Настройки на облака".',
-    'ERR_GOTO_CLOUD_CONSOLE' => 'Please go to the <a href="%s" target="_blank">Cloud Settings</a>.',
+    'ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE' =>
+        'Управление на пароли е достъпно само в <a href="%s" target="_blank">Настройки на облак</a>.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Моля, обърнете се към администратора на Sugar, ако искате да направите промени в полетата, които са само за четене.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Липсва задължително поле:',
@@ -2747,6 +2823,7 @@ $app_strings = array (
     'ERR_DB_VERSION' => 'Файловете на Sugar CRM {0} могат да бъдат използвани единствено с база данни на Sugar CRM {1}.',
     'ERR_DB_QUERY' => '{0}: неузпешна заявка към базата данни: {1}',
     'ERR_UW_RETIRED' => 'Електронен помощник за актуализация не е наличен за текущата версия.',
+    'ERR_NOT_CLOUD_INSTANCE' => 'Тази инсталация на Sugar или не е инсталация на SugarCloud, или не е конфигурирана за Анализ на SugarCloud.',
 
 
     'EXCEPTION_CREATE_MODULE_NOT_AUTHORIZED' => 'Не сте оторизиран да създадете {moduleName}. Свържете се с администратор ако се нуждаете от достъп.',
@@ -2769,6 +2846,7 @@ $app_strings = array (
     'EXCEPTION_NEED_LOGIN'              => 'Необходимо е да сте влязли в системата, за да изпълните това действие.',
     'EXCEPTION_INVALID_TOKEN'           => 'Вашият токен за аутентикация не е валиден.',
     'EXCEPTION_NOT_AUTHORIZED'          => 'Не сте оторизиран да изпълните това действие. Свържете се с администратор, който да ви осигури достъп.',
+    'EXCEPTION_NOT_AUTHORIZED_TO_DATA'  => 'Не сте оторизирани да разглеждате данните. Свържете се с администратора си, ако се нуждаете от достъп.',
     'EXCEPTION_INACTIVE_PORTAL_USER'    => 'Нямате достъп до Портала, защото вашият портален потребител не е активен. Моля свържете се с потребителска поддръжка ако се нуждаете от достъп.',
     'EXCEPTION_PORTAL_NOT_CONFIGURED'   => 'Порталът не е конфигуриран правилно. Свържете се с администратор на Портала за съдействие.',
     'EXCEPTION_NO_METHOD'               => 'Заявката не се поддържа от системата. Не може да бъде намерен кореспондиращ HTTP метод за въведения път.',
@@ -2788,6 +2866,8 @@ $app_strings = array (
     'EXCEPTION_SEARCH_RUNTIME'          => 'Грешка във времето за работа на търсачката. Обърнете се към вашия системен администратор.',
     'EXCEPTION_INVALID_PLATFORM'        => 'Invalid platform specified.',
     'EXCEPTION_FIELD_LOCKED_FOR_EDIT'   => 'Поле, което е заключено от процес, не може да бъде редактирано.',
+    'EXCEPTION_MODULE_DISABLED'         => 'Този модул е забранен за сегашния потребител.',
+    'EXCEPTION_FIELD_DISABLED'          => 'Това поле е забранено за сегашния потребител.',
 
     // Default SugarApiException descriptions, used in the exceptions help endpoint
     'EXCEPTION_UNKNOWN_EXCEPTION_DESC'     => 'Възникнала е генерална грешка или отказ. Причините могат да бъдат различни и не попадат в обхвата на управляваните от интерфейса изключения.',
@@ -2816,6 +2896,8 @@ $app_strings = array (
     'EXCEPTION_FIELD_LOCKED_FOR_EDIT_DESC' => 'Поле, което в момента е заключено от активен процес, не може да бъде редактирано.',
     'EXCEPTION_FIELD_IS_LOCKED_FOR_EDIT'   => '%s е заключено от активен процес и не може да се редактира.',
     'EXCEPTION_FIELDS_ARE_LOCKED_FOR_EDIT' => '%s са заключени от активен процес и не могат да се редактират.',
+    'EXCEPTION_MODULE_DISABLED_DESC'       => 'Този модул е забранен за сегашния потребител.',
+    'EXCEPTION_FIELD_DISABLED_DESC'        => 'Това поле е забранено за сегашния потребител.',
 
     //Lotus Live specific error messages
     'ERR_EXTERNAL_API_LOTUS_LIVE_CONFLICT' => 'Файл със същото име вече съществува в системата.',
@@ -2905,6 +2987,7 @@ $app_strings = array (
     'LBL_CLOSE_AND_CREATE_BUTTON_LABEL' => 'Финализирай и създай нов запис',
     'LBL_CLOSE_AND_CREATE_BUTTON_TITLE' => 'Финализирай и създай нов запис',
     'LBL_CLOSE_AND_CREATE_BUTTON_KEY' => 'Ц',
+    'LBL_COPY_RECORD_URL' => 'Копиране на URL адреса на записа',
     'LBL_OPEN_ITEMS' => 'Неприключени записи:',
     'LBL_COMPOSE_EMAIL_BUTTON_KEY' => 'Л',
     'LBL_COMPOSE_EMAIL_BUTTON_LABEL' => 'Ново писмо',
@@ -2933,6 +3016,8 @@ $app_strings = array (
     'LBL_DOCUMENTS'=>'Документи',
     'LBL_DATE_ENTERED' => 'Създадено на:',
     'LBL_DATE_MODIFIED' => 'Модифицирано на:',
+    'LBL_EDIT_OVERVIEW_TAB_BUTTON' => 'Редактиране на раздел Преглед',
+    'LBL_EDIT_MODULE_TABS_BUTTON' => 'Редактиране на раздели Модул',
     'LBL_EDIT_BUTTON' => 'Редактирай',
     'LBL_DUPLICATE_BUTTON' => 'Дублирай',
     'LBL_DELETE_BUTTON' => 'Изтрий',
@@ -2945,6 +3030,7 @@ $app_strings = array (
     'LBL_DST_NEEDS_FIXIN' => 'Приложението изисква лятното часово време да се приложи. Моля, посетете раздел <a href="index.php?module=Administration&action=DstFix">Системна поддръжка</a> от секция Администриране и изберете Daylight Saving Time fix.',
     'LBL_EDIT_AS_NEW_BUTTON_LABEL' => 'Редактирай като нов',
     'LBL_EDIT_AS_NEW_BUTTON_TITLE' => 'Редактирай като нов',
+    'LBL_EDIT_IN_NEW_TAB' => 'Редактиране в нов раздел',
     'LBL_FAVORITES' => 'Предпочитани записи',
     'LBL_FILTER' => 'Филтър',
     'LBL_DEFAULT_DATA_FILTER' => 'Филтър на данни по подразбиране',
@@ -3124,6 +3210,7 @@ $app_strings = array (
     'LBL_MODIFIED_ID'=>'Модифицирано от',
     'LBL_MORE' => 'още',
     'LBL_MORE_MODULES' => 'Повече модули',
+    'LBL_MORE_TABS' => 'Още табулатори',
     'LBL_MULTIPLE_MODULES' => 'Няколко модула',
     'LBL_MY_ACCOUNT' => 'Персонални настройки',
     'LBL_SYSTEM_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'системни настройки по подразбиране',
@@ -3143,6 +3230,7 @@ $app_strings = array (
     'LBL_OPENTO_BUTTON_KEY' => 'Т',
     'LBL_OPENTO_BUTTON_LABEL' => 'Open To:',
     'LBL_OPENTO_BUTTON_TITLE' => 'Open To:',
+    'LBL_OPEN_IN_NEW_TAB' => 'Отваряне в нов раздел',
     'LBL_OPPORTUNITIES'=>'Възможности',
     'LBL_OPPORTUNITY_NAME' => 'Сделка',
     'LBL_OPPORTUNITY'=>'Възможност',
@@ -3343,7 +3431,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2019 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2020 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Всички права запазени.<br />SugarCRM, Sugar и 3-D кубът са регистрирани търговски марки на SugarCRM Inc. '.
         'Всички други наименования на фирми и продукти, използвани или упоменати в този продукт е възможно да са търговски марки на '.
         'съответните компании, с които те са свързани.',
@@ -3453,7 +3541,7 @@ $app_strings = array (
     'LNK_VIEW_CHANGE_LOG' => 'Преглед на Дневника на одитите',
     'TPL_AUDIT_LOG_TITLE' => 'Дневник на одитите за {{{name}}}',
     'LBL_AUDIT_EMAIL_TOOLTIP' => 'Щракнете, за да прегледате дневника на одита на електронната поща',
-
+    'LBL_NO_SEARCH_RESULTS' => 'Не са намерени резултати за търсенето ви',
     'NTC_CLICK_BACK' => 'Натиснете бутонът за предишен екран в браузъра и отстранете проблема.',
     'NTC_DATE_FORMAT' => '(гггг-мм-дд)',
     'NTC_DATE_TIME_FORMAT' => '(гггг-мм-дд 24:00)',
@@ -3491,12 +3579,15 @@ $app_strings = array (
     'WARN_LICENSE_SEATS_MAXED'=>  "Внимание: Броят на потребителите надхвърля разрешените от лиценза.",
     'ERROR_LICENSE_SEATS_MAXED'=>
         'Броят на активните потребители надхвърля ограниченията за брой лицези. Обърнете се към вашия администратор.',
+    'ERROR_LICENSE_TYPE_SEATS_MAXED'=>
+        'Number of active %s users exceeds License Count limits. Please contact your Administrator.',
     'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS' => 'Само администраторите могат да влизат в системата.',
     'WARN_LICENSE_SEATS_MAXED_ONLY_EXISTING_USERS'=>
         'Достигнат е лимитът за брой потребителски лицензи. Само съществуващи потребители могат да влизат в системата.',
     'WARN_ONLY_ADMINS'=> "Само администраторите могат да влизат в системата.",
     'WARN_UNSAVED_CHANGES'=> "Вие сте на път да излезете от този запис, без да се запазят всички промени, които може да сте направили. Наистина ли желаете да затворите този запис?",
     'LBL_WARN_UNSAVED_CHANGES' => 'Направените промени не са запазени. Сигурни ли сте, че желаете да напуснете страницата и да загубите измененията?',
+    'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'Един или повече елементи от информационното табло имат незапазени промени. Сигурни ли сте, че желаете да затворите чекмеджето?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Прехвърляте се в модул Справки. Направените промени в раздела няма да бъдат запазени. Ще продължите ли?',
     'ERROR_NO_RECORD' => 'Грешка при опит за достъп до записа.  Може да е изтрит или не разполагате с необходимите права за достъп до записа.',
     'ERROR_TYPE_NOT_VALID' => 'Грешка. Невалидно въведени данни.',
@@ -3513,7 +3604,10 @@ $app_strings = array (
     'ERROR_DATETIME' => 'Грешка. Полето изисква валидна дата.',
     'ERROR_IS_BEFORE' => 'Грешка. Датата на това поле не може да бъде след датата на полето {{this}}.',
     'ERROR_IS_AFTER' => 'Грешка. Датата на това поле не може да бъде преди датата на полето {{this}}.',
+    'ERROR_TIME_IS_BEFORE' => 'Грешка. Часът в това поле трябва да бъде преди часа в полето {{this}}.',
+    'ERROR_TIME_IS_AFTER' => 'Грешка. Часът в това поле трябва да бъде след часа в полето {{this}}.',
     'ERROR_NUMBER' => 'Грешка: Полето изисква валиден номер.',
+    'ERROR_INT' => 'Грешка. Невалидно число.',
     'ERROR_NO_BEAN' => 'Неуспешно получаване на файл bean.',
     'ERROR_ACCESS_MODULE' => 'Нямате достъп до този модул',
     'ERROR_MAX_FILESIZE_EXCEEDED' => 'Грешка: Прикаченият файл е прекалено голям.',
@@ -3599,6 +3693,7 @@ $app_strings = array (
     'LBL_SCHEDULE_MEETING' => 'Насрочване на среща',
     'LBL_CREATE_TASK' => 'Добавяне на задача',
     'LBL_REMOVE_FROM_FAVORITES' => 'Премести от Избрани',
+    'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => 'Създай формата',
     'LBL_SAVE_WEB_TO_LEAD_FORM' =>'Запазване на Уеб форма',
@@ -3627,36 +3722,21 @@ $app_strings = array (
     'ERR_SMARTY_UNEQUAL_RELATED_FIELD_PARAMETERS' => 'Error: There are an unequal number of arguments for the &amp;amp;amp;amp;amp;amp;#39;key&amp;amp;amp;amp;amp;amp;#39; and &amp;amp;amp;amp;amp;amp;#39;copy&amp;amp;amp;amp;amp;amp;#39; elements in the displayParams array.',
     'ERR_SMARTY_MISSING_DISPLAY_PARAMS' => 'Missing index in displayParams Array for:',
 
-    /* MySugar Framework (for Home and Dashboard) */
     'LBL_DASHLET' => 'Панел',
-    'LBL_DASHLET_CONFIGURE_GENERAL' => 'Базови настройки',
     'LBL_DASHLET_CONFIGURE_FILTERS' => 'Филтри',
     'LBL_DASHLET_CONFIGURE_MY_ITEMS_ONLY' => 'Моите записи',
-    'LBL_DASHLET_CONFIGURE_MY_FAVORITES_ONLY' => 'Само моите предпочитани записи',
     'LBL_DASHLET_CONFIGURE_TITLE' => 'Заглавие',
     'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Показване на редове',
     'LBL_DASHLET_CONFIGURE_INTELLIGENT' => 'Отнеси към текущия запис',
     'LBL_DASHLET_CONFIGURE_LINKED' => 'Свързано поле',
 
-    // MySugar status strings
-    'LBL_CREATING_NEW_PAGE' => 'Създаване на нова страница ...',
-    'LBL_NEW_PAGE_FEEDBACK' => 'Създадена е нова страница. Можете да вмъквате съдържание чрез използване на опция Добавяне на панели.',
-    'LBL_DELETE_PAGE_CONFIRM' => 'Сигурни ли сте, че искате да изтриете тази страница?',
-    'LBL_SAVING_PAGE_TITLE' => 'Запазване на съдържанието на страницата ...',
-    'LBL_RETRIEVING_PAGE' => 'Отваряне на страницата ...',
-    'LBL_MAX_DASHLETS_REACHED' => 'Достигнахте максималния брой панели, определени от администратора. Необходимо е да премахнете панел, за да добавите нов.',
-    'LBL_ADDING_DASHLET' => 'Добавяне на раздел ...',
-    'LBL_ADDED_DASHLET' => 'Разделът е добавен',
     'LBL_REMOVE_DASHLET_CONFIRM' => 'Сигурни ли сте, че искате да премахнете този раздел?',
     'LBL_REMOVE_DASHLET_ROW_CONFIRM' => 'Сигурни ли сте, че желаете да изтриете този ред?',
-    'LBL_REMOVING_DASHLET' => 'Изтриване на раздел ...',
-    'LBL_REMOVED_DASHLET' => 'Панелът е изтрит',
     'LBL_MAXIMUM_OF' => 'Максимум',
     'LBL_COLUMNS_CAN_BE_DISPLAYED' => 'колони могат да бъдат визуализирани.',
 
     /* Sugar7 Dashboard */
     'LBL_DASHBOARD' => 'Начало',
-    'LBL_DASHBOARD_BWC' => 'Моето електронно табло с модули изпълнявани в режиум на съвместимост',
     'LBL_DEFAULT_DASHBOARD_TITLE' => 'Моето електронно табло',
     'LBL_COLLAPSE_ALL' => 'Свиване на всички',
     'LBL_EXPAND_ALL' => 'Показване на всички',
@@ -3687,9 +3767,33 @@ $app_strings = array (
 
     'LBL_DASHLET_LISTVIEW_NAME' => 'Списък на записите',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'Показва списък на записите от конкретен модул според предефинираните критерии.',
+
+    // Record view dashlet
+    'LBL_DASHLET_RECORDVIEW_NAME' => 'Изглед с детайли за записа',
+    'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Показва запис и евентуално свързани записи в раздели.',
+    'LBL_DASHLET_RECORDVIEW_BASE_RECORD_TYPE' => 'Тип основен запис',
+    'TPL_DASHLET_RECORDVIEW_THIS_RECORD_TYPE' => 'Този {{moduleSingular}}',
+    'LBL_DASHLET_RECORDVIEW_TABS' => 'Раздели',
+    'LBL_DASHLET_RECORDVIEW_BASIC_LAYOUT_PREVIEW' => 'Основен преглед на подредбата',
+    'TPL_DASHLET_RECORDVIEW_TOO_MANY_TABS' => 'Внимание, само {{numWord}} ({{num}}) модула мпогат да бъдат показвани в раздели. ' .
+        'Моля, премахнете един или няколко модула, преди да добавяте други.',
+    'LBL_SIX' => 'шест', // record view dashlet tab limit
+
+    //Commentlog Dashlet
+    'LBL_DASHLET_COMMENTLOG_NAME' => 'Регистър на коментари',
+    'LBL_DASHLET_COMMENTLOG_DESCRIPTION' => 'Показва коментарите за даден запис',
+    'LBL_COMMENTS_LOG_DASHLET_NO_COMMENTS' => 'Няма налични коментари',
+    'LBL_COMMENTS_LOG_DASHLET_BUTTON_ADD' => 'Добави',
+    'LBL_COMMENTS_LOG_DASHLET_PLACEHOLDER' => 'Добавяне на коментар',
+    'LBL_COMMENTS_LOG_DASHLET_VIEW_ALL' => 'Вижте всички',
+
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => 'Моите {{module}}',
+    'LBL_DASHLET_PICK_A_RECORD' => 'Няма избран запис за показване',
+    'LBL_CONTENT_SEARCH_DASHLET' => 'Елемент за търсене на съдържание',
+    'LBL_CONTENT_SEARCH_DASHLET_GREETING' => 'С какво можем да Ви помогнем днес, {{username}}?',
+    'LBL_CONTENT_SEARCH_DASHLET_DISABLED' => 'Желаете ли да създадете казус?',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Измерители на възможностите',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Метрики на възможностите за свързан профил.',
@@ -3697,6 +3801,14 @@ $app_strings = array (
     'LBL_PRODUCT_QUICK_PICKS_DASHLET_DESCRIPTION'=> 'Дава списък на последно използваните елементи и продукти, записани като предпочитани',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Наскоро използвани',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Предпочитани',
+
+    'LBL_DASHBOARD_CONFIG' => 'Dashboard Configuration',
+    'LBL_LIST_VIEW__NAME' => 'Изглед на списък',
+    'LBL_PIPELINE_VIEW_NAME' => 'Изглед на плочки',
+    'LBL_PIPELINE_VIEW_BTN' => 'Изглед на плочки',
+    'LBL_PIPELINE_VIEW_TAB_NAME' => '{{module}} по {{fieldName}}',
+    'LBL_VISUAL_PIPELINE_DISABLED' => 'Изгледът на плочки не е активиран',
+    'LBL_VISUAL_PIPELINE_MOVE_FAILED' => '{{recordName}} could not be moved to {{columnLabel}} because of the following fields: ',
 
     'LBL_DASHLET_NO_RECORDS' => 'Няма открити записи.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Резюме на казуса',
@@ -3752,37 +3864,13 @@ $app_strings = array (
     'LBL_DASHLET_USEFULNESS_NAME' => 'Полезност на статиите',
     'LBL_DASHLET_USEFULNESS_DESC' => 'Displays a chart showing how useful the knowledge base article is',
 
-    // MySugar Menu Options
     'LBL_ADD_PAGE' => 'Добавяне на страница',
-    'LBL_DELETE_PAGE' => 'Изтриване на страницата',
-    'LBL_CHANGE_LAYOUT' => 'Промяна на подредбата',
-    'LBL_RENAME_PAGE' => 'Преименуване на страницата',
-
     'LBL_LOADING_PAGE' => 'Страницата се зарежда, моля изчакайте...',
-
-    'LBL_RELOAD_PAGE' => 'Моля <a href=&quot;javascript: window.location.reload()&quot;>презаредете страницата,</a> за да използвате този раздел.',
-    'LBL_ADD_DASHLETS' => 'Добавяне на раздели',
-    'LBL_CLOSE_DASHLETS' => 'Затвори',
-    'LBL_OPTIONS' => 'Опции',
-    'LBL_NUMBER_OF_COLUMNS' => 'Натиснете върху иконата, за да изберете броя на колони',
-    'LBL_1_COLUMN' => '1 колона',
-    'LBL_2_COLUMN' => '2 колона',
-    'LBL_3_COLUMN' => '3 колона',
-    'LBL_PAGE_NAME' => 'Име на страницата',
-
     'LBL_SEARCH_RESULTS' => 'Резултати от търсенето',
-    'TPL_SEARCH_RESULTS_FOR' => 'Резултати от търсенето за: {{searchTerm}}',
     'LBL_SEARCH_RESULTS_FOR' => 'Резултати от търсенето за: ',
-    'LBL_SEARCH_MODULES' => 'Модули',
-    'LBL_SEARCH_CHARTS' => 'Графики',
-    'LBL_SEARCH_REPORT_CHARTS' => 'Допълнителни графики',
-    'LBL_SEARCH_TOOLS' => 'Други',
     'LBL_SEARCH_HELP_TITLE' => 'Работа със съхранени критерии за търсене',
-    'LBL_SEARCH_HELP_CLOSE_TOOLTIP' => 'Затвори',
     'LBL_SEARCH_RESULTS_FOUND' => 'Намерени са резултати при търсенето',
     'LBL_SEARCH_RESULTS_TIME' => 'Г-ца',
-    'ERR_BLANK_PAGE_NAME' => 'Моля въведете име на страницата.',
-    /* End MySugar Framework strings */
 
     /* Sales Pipeline Dashlet */
     'LBL_DASHLET_MY_PIPELINE' => 'Моите възможности категоризирани по етап на преговори',
@@ -3936,6 +4024,8 @@ $app_strings = array (
     //MB -Fixed Bug #32812 -Max
     'LBL_ASSIGNED_TO_NAME' => 'Отговорник',
     'LBL_DESCRIPTION' => 'Описание',
+    'LBL_PRIMARY_CONTACT_NAME' => 'Основен контакт',
+    'LBL_PRIMARY_CONTACT_ID' => 'ИД на основен контакт',
 
   'LBL_NONE' => 'Няма въведени данни',
   'LBL_YESTERDAY'=> 'вчера',
@@ -4325,6 +4415,8 @@ $app_strings = array (
     // start of: Quotes related
     'LBL_QLI_SINGLE_TITLE' => 'Офериран елемент',
     'LBL_DISCOUNT_TOTAL' => 'Обща отстъпка',
+    'LBL_DISCOUNT_PERCENT' => '% Percent',
+    'LBL_DISCOUNT_SELECT' => 'Determines if the discount is a percentage or flat amount',
     'LBL_TAX' => 'Такси',
     'LBL_SHIPPING' => 'Доставка',
     'LBL_GRAND_TOTAL' => 'Обща сума',
@@ -4371,6 +4463,7 @@ $app_strings = array (
     'LBL_NO_ACCESS' => '(липса на достъп)',
     'LBL_NO_ACCESS_LOWER' => 'Потребителят няма достъп до записа',
     'LBL_NO_FIELD_ACCESS' => 'Липса на достъп',
+    'LBL_NO_LICENSE_ACCESS' => 'License Required',
     'LBL_VALUE_ERASED' => 'Стойността е изтрита',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Тези данни бяха изтрити поради заявка за защита на данните',
     'LBL_CREATE_RELATED_RECORD' => 'Създай свързан запис',
@@ -4540,6 +4633,15 @@ $app_strings = array (
     'LBL_MOBILE_ACTIVITYSTREAM_POST_PLACEHOLDER' => 'Въведете @ посочване на потребител. Въведете # за препратка към запис.',
     'LBL_MOBILE_NEW_COMMENT' => 'Нов коментар',
     'LBL_RECENTLY_VIEWED' => 'Разгледани скоро',
+    'LBL_FILE_STORED_LOCALLY' => 'Файлът е записан в локално пространство за съхранение и ще бъде синхронизиран, след като устройството е онлайн.',
+    'LBL_IDM_USER_PROFILE_READONLY' => 'Ако желаете да промените някои полета, които не могат да бъдат редактирани, свържете се с администратор, за да отбележи тези промени.',
+    'LBL_ACTIVITY_POST' => '{{{value}}}на {{{link}}}',
+    'LBL_COMMENTLOG_EMPTY' => 'Без коментар',
+    'LBL_COMMENTLOG_EXPANDBUTTON_EXPAND' => 'Покажи следващите {{{commentsLeft}}} коментара',
+    'LBL_COMMENTLOG_EXPANDBUTTON_COLLAPSE' => 'Скрий',
+    'LBL_COMMENTLOG_CONFIRM_CREATE' => 'Потвърдете създаване на коментар',
+    'LBL_COMMENTLOG_ERROR_IS_EMPTY' => 'Регистърът на коментари не може да бъде празен',
+    'LBL_MOBILE_PDF_DOWNLOAD' => 'Изтегляне на {{{pdfTemplateName}}} PDF',
 
     'ERR_SYNC_FAILED' => 'Няма възможност за синхронизация със сървър.',
     'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'Влизане в системата по метода Single Sign-On (SSO) не е възможно. Моля проверете, че версията на Sugar е 7.5 или по-висока, както и че системата е конфигурирана да използва SSO.',
@@ -4750,6 +4852,11 @@ $app_strings = array (
     'LBL_VO_RIGHT_MENU_BTN' => 'Десен бутон за менюто',
     'LBL_VO_ADD_BTN' => 'Бутон за добавяне',
 
+    // Cookie consent
+    'LBL_WIZ_USER_COOKIE_CONSENT' => 'Това приложение използва "бисквитки".',
+    'LBL_USER_CLICK_FOR_COOKIE_CONSENT' => 'Отметнете, за да приемете (Задължително)',
+    'LBL_USER_COOKIE_CONSENT_TEXT' => 'Това приложение използва "бисквитки", за да помогне да ви предоставим по-добро преживяване. Продължавайки, вие се съгласявате с използването на "бисквитки" съгласно нашата <a href="{{href}}" target="_blank">политика за поверителност</a>.',
+
     //begin portal
 
     //portal record tutorial
@@ -4759,20 +4866,36 @@ $app_strings = array (
     'LBL_PORTAL_TOUR_RECORD_VIEW_NOTE' => 'Натиснете иконите, за да видите подробности за прикачените бележки.',
 
     //for portal
-
+    'LBL_PORTAL_HOME' => 'Начално електронно табло',
+    'LBL_PORTAL_DASHBOARD_ALL_OPEN_CASES' => 'Всички отворени казуси',
+    'LBL_PORTAL_DASHBOARD_RECENT_CASES' => 'Наскоро разрешени казуси',
     'LBL_PORTAL_SEARCH' => 'Търсене по Име, Номер',
     'LBL_SIGNUP_BUTTON_LABEL' => 'Настройки',
+    'LBL_PORTAL_NO_EMAIL' => 'Не получихте електронна поща?',
+    'LBL_PORTAL_FORGOT_PASSWORD' => 'Забравена парола',
+    'LBL_PORTAL_FORGOT_USERNAME' => 'Забравено потребителско име',
+    'LBL_PORTAL_ENTER_PASSWORD_TWICE' => 'Въведете паролата си два пъти. Паролите трябва да съвпадат.',
+    'LBL_PORTAL_RESET_PASSWORD' => 'Промяна на парола',
+    'LBL_PORTAL_REENTER_PASSWORD' => 'Повторно въвеждане на парола',
+    'LBL_PORTAL_PASSWORD_MISMATCH' => 'Паролите не съвпадат, въведете отново',
+    'LBL_PORTAL_PASSWORD_RESET_SUCCESS' => 'Паролата Ви беше променена успешно.',
+    'LBL_PORTAL_PASSWORD_RESET_ERR_GENERAL' => 'Възникна грешка. Моля, подайте нова заявка за промяна на парола.',
     'LBL_PORTAL_SIGNUP_PROCESS' => 'Регистриране',
-    'LBL_PORTAL_SIGNUP_TITLE' => 'Благодарим за регистрацията!',
-    'LBL_PORTAL_SIGNUP' => 'Представител на звено клиентска поддръжка ще се свърже с Вас скоро, за да конфигура Вашия потребител.',
+    'LBL_PORTAL_SIGNUP_TITLE' => 'Благодарим за регистрацията',
+    'LBL_PORTAL_SIGNUP' => 'Ще Ви информираме, след като потвърдим данните Ви.',
     'LBL_PORTAL_SIGNUP_FIRST_NAME' => 'Име',
     'LBL_PORTAL_SIGNUP_LAST_NAME' => 'Фамилия',
-    'LBL_PORTAL_SIGNUP_EMAIL' => 'Електронна поща',
+    'LBL_PORTAL_SIGNUP_USER_NAME' => 'Потребителско име',
+    'LBL_PORTAL_SIGNUP_EMAIL' => 'Адрес на електронна поща',
     'LBL_PORTAL_SIGNUP_PHONE' => '(###) ###-#### (Опционно)',
     'LBL_PORTAL_SIGNUP_COUNTRY' => 'Държава',
     'LBL_PORTAL_SIGNUP_STATE' => 'Област',
-    'LBL_PORTAL_SIGNUP_COMPANY' => 'Организация',
+    'LBL_PORTAL_SIGNUP_COMPANY_NAME' => 'Наименование на кампанията',
     'LBL_PORTAL_SIGNUP_JOBTITLE' => 'Длъжност (опционно)',
+    'LBL_PORTAL_SIGNUP_PASSWORD' => 'Парола',
+    'LBL_PORTAL_SIGNUP_PASSWORD1' => 'Потвърждение на паролата',
+    'LBL_PORTAL_SIGNUP_FORGOT_LOGIN' => 'Забравено потребителско име или парола',
+
     'LNK_PORTAL_LOGIN_FORGOTPASSWORD' => 'Забравена парола?',
     'LBL_PORTAL_LOGIN_FORGOTPASSWORD' => 'Моля, свържете с вашия администратор на Sugar за генериране на нова парола.',
     'LBL_PORTAL_LOGIN_USERNAME' => 'Потребителско име',
@@ -4782,9 +4905,14 @@ $app_strings = array (
     'LBL_PORTAL_PAGE_NOT_AVAIL' => 'Страницата не е налична',
     'LBL_PORTAL_NOT_ENABLED_MSG' => "Съжаляваме, но тази опция не е достъпна в момента.",
     'LBL_PORTAL_SEARCH_RESULTS_TITLE' => 'Покажи резултатите от търсенето за "{query}"',
+    'LBL_PORTAL_DIDNT_GET_EMAIL' => 'Не получихте електронна поща?',
+    'LBL_PORTAL_CONTACT_INFO_CONTACT_US' => 'За съдействие или връзка с нас използвайте някое от следните: ',
+    'LBL_PORTAL_CONTACT_INFO_PHONE' => 'Телефон: ',
+    'LBL_PORTAL_CONTACT_INFO_EMAIL' => 'Електронна поща: ',
+    'LBL_PORTAL_CONTACT_INFO_WEB' => 'Интернет страница: ',
 
     //for portal errors
-    'LBL_PORTAL_INVALID_CREDS' => 'Въведената комбинация потребителско име/парола не е валидна. Моля опитайте отново.',
+    'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Влизането Ви не беше успешно. Опитайте отново.',
     'LBL_PORTAL_INVALID_CREDS_TITLE' => 'Невалидно потребителско име или парола',
     'LBL_PORTAL_INVALID_GRANT' => 'Вашият токен е невалиден или изтекъл. Моля влезте в системата отново.',
     'LBL_PORTAL_INVALID_GRANT_TITLE' => 'Изтекла сесия',
@@ -4807,7 +4935,27 @@ $app_strings = array (
     'LBL_PORTAL_ROUTE_ERROR'=>'Възникна казус при зареждане на модула. Моля опитайте отново по-късно или се свържете с отговорник техническата поддръжка.',
     'LBL_PORTAL_OFFLINE' =>'Приложението не е достъпно в момента. Моля свържете се с администратор на сайта.',
     'LBL_CONTACT_EDIT_PASSWORD_LNK_TEXT' => 'Смяна на парола',
+    'LBL_PORTAL_SIGNUP_USER_NAME_ERROR' => 'Потребителското име вече е регистрирано в системата. Или заявете забравена парола, или изберете друго потребителско име.',
+    'LBL_PORTAL_SIGNUP_EMAIL_ERROR' => 'Предоставената електронна поща е невалидна.',
+    'LBL_PORTAL_SIGNUP_PASSWORD_ERROR' => 'Паролите не съвпадат.',
     //end portal
+
+    // Final name given by marketing is Service Console
+    // Original name for this feature was Agent Workbench and was used
+    // throughout the development of this product.
+    'LBL_AGENT_WORKBENCH' => 'Service Console',
+    'LBL_AGENT_WORKBENCH_OVERVIEW' => 'Преглед',
+    'LBL_CASE_OVERDUE' => 'Overdue',
+    'LBL_CASE_DUE_SOON' => 'Due soon',
+    'LBL_CASE_DUE_LATER' => 'Due later',
+
+    // Renewals Console
+    'LBL_RENEWALS_CONSOLE' => 'Конзола за обновявания',
+    'LBL_RENEWALS_CONSOLE_OVERVIEW' => 'Преглед',
+    'LBL_RENEWALS_CONSOLE_STAGE_STATUS' => 'Етап/статус',
+    'LBL_RENEWALS_CONSOLE_NAME_ACCOUNT' => 'Име/Име на профил',
+    'LBL_RENEWALS_CONSOLE_AMOUNT' => 'Worst | Likely | Best',
+
 
     //First time login wizard
     'LBL_WIZ_USER_PROFILE_TITLE' => 'Профил на потребителя',
@@ -4852,10 +5000,22 @@ $app_strings = array (
     'ERR_PASSWORD_MISMATCH' => 'Въведената парола не съвпада с тази в системата.',
     'LBL_CANNOT_SEND_PASSWORD' => 'Паролата не може да бъде изпратена',
     'LBL_REQUEST_PASSWORD' => 'Изпрати заявка за нова парола',
+    'LBL_RESET_PASSWORD' => 'Промяна на парола',
+    'LBL_RESET_PASSWORD_MESSAGE' => 'Въведете своето потребителско име и ние ще ви изпратим връзка, за да промените паролата си.',
+    'LBL_RESET_PASSWORD_CONFIRMATION_MESSAGE' => 'Проверете електронната си поща <br><br>Ние ви изпратихме инструкции за смяна на паролата на адреса, който имаме записан.',
     'LBL_PASSWORD_UPDATE_GENERIC_ISSUE' => 'Грешка: Възникна проблем при актуализация на паролата на този потребител.',
     'LBL_INCORRECT_PASSWORD' => 'Грешка: Некоректна парола',
+    'LBL_PASSWORD_ENFORCE_TITLE' => 'Въведената парола не отговаря на изискванията за парола. Моля, опитайте отново.',
+    'LBL_PASSWORD_MIN_LENGTH' => 'Минималната дължина е {0}.',
+    'LBL_PASSWORD_MAX_LENGTH' => 'Максималната дължина е {0}.',
+    'LBL_PASSWORD_ONE_UPPERCASE' => 'Трябва да съдържа една главна буква (A-Z).',
+    'LBL_PASSWORD_ONE_LOWERCASE' => 'Трябва да съдържа една малка буква (a-z).',
+    'LBL_PASSWORD_ONE_NUMBER' => 'Трябва да съдържа една цифра (0-9).',
+    'LBL_PASSWORD_ONE_SPECIAL_CHAR' => 'Трябва да съдържа един специален символ (~!@#$%^&*()_+-={}|).',
+    'LBL_PASSWORD_REGEX_REQUIREMENT' => 'Паролата не трябва да съвпада със схема на обикновен израз: {0}.',
 
     'LBL_PREFERRED_LANGUAGE' => 'Предпочитание за език:',
+    'LBL_PASSWORD_RESET_EMAIL_FAIL' => 'Не можахме да изпратим електронна поща за смяна на парола.',
 
     //Saved Reports
     'LBL_REPORT_SELECT' => 'Избери справка',
@@ -4997,6 +5157,25 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'Моите задачи',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Задачи на екипа',
 
+    'LBL_RECENTLY_VIEWED_CASES_DASHLET' => 'Моите наскоро разглеждани казуси',
+
+    'LBL_REPORT_DASHLET_TITLE_12' => 'Текущи казуси по потребител и по статус',
+    'LBL_REPORT_DASHLET_TITLE_125' => 'Нови казуси по бизнес център и по седмица',
+    'LBL_REPORT_DASHLET_TITLE_126' => 'Наскоро създадени казуси',
+    'LBL_REPORT_DASHLET_TITLE_127' => 'Нови казуси по ниво на клиент и по седмица',
+    'LBL_REPORT_DASHLET_TITLE_128' => 'Текущи казуси по ниво на клиент и по приоритет',
+    'LBL_REPORT_DASHLET_TITLE_129' => 'Общо разрешени казуси този месец от бизнес център',
+    'LBL_REPORT_DASHLET_TITLE_130' => 'Общо разрешени казуси този месец от агент',
+    'LBL_REPORT_DASHLET_TITLE_131' => 'Списък на наскоро разрешените казуси',
+    'LBL_REPORT_DASHLET_TITLE_132' => 'Моите разрешени казуси този месец по седмица',
+    'LBL_REPORT_DASHLET_TITLE_133' => 'Моите казуси със срок днес или просрочени',
+    'LBL_REPORT_DASHLET_TITLE_134' => 'Всички казуси със срок днес или просрочени',
+    'LBL_REPORT_DASHLET_TITLE_135' => 'Моите текущи казуси по последваща дата',
+    'LBL_REPORT_DASHLET_TITLE_136' => 'Всички текущи казуси по последваща дата',
+    'LBL_REPORT_DASHLET_TITLE_137' => 'Моите текущи казуси по статус',
+    'LBL_REPORT_DASHLET_TITLE_138' => 'Моите казуси през последната седмица по статус',
+    'LBL_REPORT_DASHLET_TITLE_139' => 'Статус на текущите задачи, възложени от мен',
+
     //Audit subjects
     'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'SugarBPM',
     'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
@@ -5127,6 +5306,8 @@ $app_strings = array (
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Обновяване на списъка',
+    // Refresh button on tile views
+    'LBL_TILE_REFRESH' => 'Refresh Tiles',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'повече',
@@ -5407,6 +5588,12 @@ $app_strings = array (
     'LBL_LOCKED_FIELD_RECORD_VIEW_WARNING' => 'Този запис участва в процес и може да съдържа някои заключени полета.',
     // @codingStandardsIgnoreEnd
 
+    'LBL_BUSINESS_CENTER' => 'Бизнес център',
+    'LBL_BUSINESS_CENTER_ID' => 'ИД на бизнес център',
+    'LBL_BUSINESS_CENTER_NAME' => 'Наименование на бизнес център',
+
+    'LBL_PLIS_ACTIVITIES' => 'Purchased Line Items Activities',
+
     //Tag Strings
     'LBL_TAG_NEW_TAG' => '(Нов маркер)',
     'LBL_TAG_FETCH_ERROR' => 'Възникна грешка при изтегляне на маркери.',
@@ -5444,14 +5631,47 @@ $app_strings = array (
     'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Маркирай за изтриване',
     'TPL_DATAPRIVACY_PII_TITLE' => 'Лична информация за {{{name}}}',
 
+    'LBL_CHANGETIMERS_SUBPANEL_TITLE' => 'Промени таймери',
+
     'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Копирано в клипборда!',
     'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Копирането в клипборда неуспешно',
 
     'LBL_COPY_EMAIL_ADDRESS_CONFIRMATION_LINK' => 'Копиране на връзката за потвърждение',
 
+    // Activity Timeline Dashlet
+    'LBL_ACTIVITY_TIMELINE_DASHLET' => 'Взаимодействия',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Взаимодействия на {{moduleSingular}}',
+    'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION' => 'Interactions displays Calls, Emails, ' .
+        'Meetings and Notes related to a record.',
+
     // Comment Log
     'LBL_COMMENT_LOG_SHOW_MORE' => 'Покажи повече...',
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Покажи по-малко...',
+    'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Липсват данни',
+
+    // Active Subscriptions Dashlet
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Активни абонаменти',
+    'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => 'Активни абонаменти за конкретен профил.',
+    'LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY' => ', количество {{quantity}}',
+    'LBL_ACTIVE_SUBSCRIPTIONS_TOTAL' => 'Общо:',
+    'LBL_NO_ACTIVE_SUBSCRIPTIONS' => 'Няма активни абонаменти',
+    'LBL_REQUIRE_REVENUE_LINE_ITEMS' => 'Този панел изисква {{module_name}} да функционира. Говорете с админстратора си за разрешаване на {{module_name}}.',
+
+    // Customer Service
+    'LBL_EDIT_IN_STUDIO' => 'Използвайте "Студио", за да редактирате подредбата на електронното табло за преглед на записи като отидете на ' .
+        'Студио > {{module}} > Подредби > Панел с изглед на запис. <a href={{linkToStudio}}>Редактирайте в Студио</a>.',
+    'LBL_SERVICE_LEVEL' => 'Ниво на обслужване',
+    // Agent Workbench
+    'LBL_AGENT_WORKBENCH_NUMBER' => 'Номер',
+    'LBL_AGENT_WORKBENCH_FOLLOW_UP' => 'Последващо действие',
+    'LBL_AGENT_WORKBENCH_PRIORITY_STATUS' => 'Приоритет/Статус',
+    'LBL_AGENT_WORKBENCH_SUBJECT_DESCRIPTION' => 'Тема/Описание',
+
+//Service Duration
+    'LBL_SERVICE_DURATION' => 'Продължителност на изпълнение',
+    'LBL_SERVICE_DURATION_VALUE' => 'Стойност на продължителност на изпълнение',
+    'LBL_SERVICE_DURATION_UNIT' => 'Единица за продължителност на изпълнение',
+
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -6448,7 +6668,7 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Вграден фа�
     'ISK' => 'kr',
     'INR' => '₨',
     'IDR' => 'Rp',
-    'IRR' => '﷼',
+    'IRR' => '77e8',
     'IMP' => '£',
     'ILS' => '₪',
     'JMD' => 'J$',
@@ -6477,18 +6697,18 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Вграден фа�
     'NIO' => 'C$',
     'NGN' => '₦',
     'NOK' => 'kr',
-    'OMR' => '﷼',
+    'OMR' => '77e8',
     'PKR' => '₨',
     'PAB' => 'B/.',
     'PYG' => 'Gs',
     'PEN' => 'S/.',
     'PHP' => '₱',
     'PLN' => 'zł',
-    'QAR' => '﷼',
+    'QAR' => '77e8',
     'RON' => 'lei',
     'RUB' => 'руб',
     'SHP' => '£',
-    'SAR' => '﷼',
+    'SAR' => '77e8',
     'RSD' => 'Дин.',
     'SCR' => '₨',
     'SGD' => '$',
@@ -6510,7 +6730,7 @@ $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Вграден фа�
     'UZS' => 'лв',
     'VEF' => 'Bs',
     'VND' => '₫',
-    'YER' => '﷼',
+    'YER' => '77e8',
     'ZWD' => 'Z$',
     );
 

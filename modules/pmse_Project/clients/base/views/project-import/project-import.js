@@ -85,40 +85,40 @@
         } else {
             app.alert.show('upload', {level: 'process', title: 'LBL_UPLOADING', autoclose: false});
             var callbacks = {
-                    success: function (data) {
-                        // Success callback is called no matter due to some funky code with the
-                        // jquery-iframe-transport plugin. So we manually call the error callback instead
-                        if (data.error) {
-                            callbacks.error(data);
-                            return;
-                        }
-                        app.alert.dismiss('upload');
-                        var route = app.router.buildRoute(self.module, data.project_import.id);
-                        route = route + '/layout/designer?imported=true';
-                        app.router.navigate(route, {trigger: true});
-                        app.alert.show('process-import-saved', {
-                            level: 'success',
-                            messages: app.lang.get('LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS', self.module),
-                            autoClose: true
-                        });
-                        // Shows warning message if PD contains BR
-                        if (data.project_import.br_warning) {
-                            app.alert.show('process-import-save-with-br', {
-                                level: 'warning',
-                                messages: app.lang.get('LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR', self.module),
-                                autoClose: false
-                            });
-                        }
-                    },
-                    error: function (error) {
-                        app.alert.dismiss('upload');
-                        app.alert.show('process-import-saved', {
-                            level: 'error',
-                            messages: error.error_message,
+                success: function(data) {
+                    app.alert.dismiss('upload');
+                    var route = app.router.buildRoute(self.module, data.project_import.id);
+                    route = route + '/layout/designer?imported=true';
+                    app.router.navigate(route, {trigger: true});
+                    app.alert.show('process-import-saved', {
+                        level: 'success',
+                        messages: app.lang.get('LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS', self.module),
+                        autoClose: true
+                    });
+                    // Shows warning message if PD contains BR
+                    if (data.project_import.br_warning) {
+                        app.alert.show('process-import-save-with-br', {
+                            level: 'warning',
+                            messages: app.lang.get('LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR', self.module),
                             autoClose: false
                         });
                     }
-                };
+                },
+                error: function(error) {
+                    var messages = [
+                        app.lang.get('LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR', self.module),
+                    ' ',
+                    error.message
+                    ];
+
+                    app.alert.dismiss('upload');
+                    app.alert.show('process-import-saved', {
+                        level: 'error',
+                        messages: messages,
+                        autoClose: false
+                    });
+                }
+            };
 
             var ids = this._getSelectedIds();
             var attributes = {
@@ -126,20 +126,26 @@
                 module: this.model.module,
                 field: 'project_import'
             };
-            var params = {
-                format: 'sugar-html-json',
-            };
             var ajaxParams = {
-                files: projectFile,
                 processData: false,
-                iframe: true,
-            };
-            var body = {
-                selectedIds: JSON.stringify(ids)
+                contentType: false,
             };
 
-            var url = app.api.buildURL(this.model.module, 'file', attributes, params);
-            app.api.call('create', url, body, callbacks, ajaxParams);
+            var fd = new FormData();
+            fd.append('selectedIds', JSON.stringify(ids));
+            var attachedFile = projectFile[0];
+            // we check if we really have files to work with
+            if (!_.isUndefined(attachedFile) && attachedFile.files && attachedFile.files.length) {
+                fd.append(attributes.field, attachedFile.files[0]);
+            }
+
+            var urlOptions = {
+                'htmlJsonFormat': false,
+                'deleteIfFails': true
+            };
+
+            var url = app.api.buildFileURL(attributes, urlOptions);
+            app.api.call('create', url, fd, callbacks, ajaxParams);
         }
     },
 

@@ -4,13 +4,22 @@
 
 namespace Sugarcrm\Apis\Iam\Usersync\V1alpha;
 
-if (false) {
+/**
+ * Protobuf enum <code>Sugarcrm\Apis\Iam\Usersync\V1alpha\PushUserRequest\Action</code>
+ */
+class PushUserRequest_Action
+{
     /**
-     * This class is deprecated. Use Sugarcrm\Apis\Iam\Usersync\V1alpha\PushUserRequest\Action instead.
-     * @deprecated
+     * Generated from protobuf enum <code>CREATE = 0;</code>
      */
-    class PushUserRequest_Action {}
+    const CREATE = 0;
+    /**
+     * Generated from protobuf enum <code>UPDATE = 1;</code>
+     */
+    const UPDATE = 1;
+    /**
+     * Generated from protobuf enum <code>DELETE = 2;</code>
+     */
+    const DELETE = 2;
 }
-class_exists(PushUserRequest\Action::class);
-@trigger_error('Sugarcrm\Apis\Iam\Usersync\V1alpha\PushUserRequest_Action is deprecated and will be removed in the next major release. Use Sugarcrm\Apis\Iam\Usersync\V1alpha\PushUserRequest\Action instead', E_USER_DEPRECATED);
 

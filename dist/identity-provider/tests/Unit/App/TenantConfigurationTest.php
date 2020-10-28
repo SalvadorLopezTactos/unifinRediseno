@@ -126,7 +126,7 @@ class TenantConfigurationTest extends \PHPUnit_Framework_TestCase
                         'status' => 0,
                     ],
                 ],
-                'tenantId' => '0000000002',
+                'tenantId' => '1000000002',
                 'providerConfig' => $providerConfig,
                 'expectedConfig' => $baseConfig +
                     [
@@ -145,7 +145,7 @@ class TenantConfigurationTest extends \PHPUnit_Framework_TestCase
                         'status' => 0,
                     ],
                 ],
-                'tenantId' => '0000000003',
+                'tenantId' => '1000000003',
                 'providerConfig' => $providerConfig,
                 'expectedConfig' => $baseConfig +
                     [
@@ -199,16 +199,16 @@ class TenantConfigurationTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers ::merge
-     * @expectedException \RuntimeException
+     * @expectedException \Sugarcrm\IdentityProvider\App\Repository\Exception\TenantNotActiveException
      * @expectedExceptionMessage Tenant isn't active
      */
     public function testMergeInactiveTenant()
     {
-        $this->srn->method('getTenantId')->willReturn('0000000002');
+        $this->srn->method('getTenantId')->willReturn('1000000002');
         $this->queryBuilder
             ->expects($this->once())
             ->method('setParameters')
-            ->with([':tenant_id' => '0000000002'])
+            ->with([':tenant_id' => '1000000002'])
             ->willReturnSelf();
         $this->statement
             ->expects($this->once())
@@ -223,8 +223,8 @@ class TenantConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * Testing initialize tenant config if tenant not exists.
      * @covers ::merge
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Tenant not exists or deleted
+     * @expectedException \Sugarcrm\IdentityProvider\App\Repository\Exception\TenantNotExistsException
+     * @expectedExceptionMessage Tenant not found
      */
     public function testMergeEmptyTenant()
     {

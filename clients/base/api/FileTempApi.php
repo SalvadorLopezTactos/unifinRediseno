@@ -10,6 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\File;
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
+use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\ViolationException;
 
 /**
  * API Class to handle temporary image (attachment) interactions with a field in
@@ -83,8 +86,13 @@ class FileTempApi extends FileApi {
         // Handle ACL
         $this->verifyFieldAccess($bean, $field);
 
-        $filepath = UploadStream::path("upload://tmp/") . $args['temp_id'];
-        if (is_file($filepath)) {
+        $uploadDir = UploadStream::path("upload://tmp/");
+        $filepath = $uploadDir . $args['temp_id'];
+
+        $fileConstraint = new File(['baseDirs' => [realpath($uploadDir)]]);
+        $violations = Validator::getService()->validate($filepath, $fileConstraint);
+
+        if (!$violations->count()) {
             $filedata = getimagesize($filepath);
 
             $info = array(
@@ -106,7 +114,7 @@ class FileTempApi extends FileApi {
                 }
             );
         } else {
-            throw new SugarApiExceptionInvalidParameter('File not found');
+            throw new ViolationException('Invalid temp image file path', $violations);
         }
     }
 }

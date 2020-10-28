@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Esetek listája műszerfal',
     'LBL_CASES_RECORD_DASHBOARD' => 'Eset bejegyzések műszerfal',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Eset részletek',
 
 	'ERR_DELETE_RECORD'					=> 'Adjon meg egy azonosítót a kliens törléséhez!',
 	'LBL_ACCOUNT_ID'					=> 'Kliens azonosító',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Kapcsolatok',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Esetek',
 	'LBL_DESCRIPTION'					=> 'Leírás:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Melléklet',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Melléklet',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Előzmények',
 	'LBL_INVITEE'						=> 'Kapcsolatok',
 	'LBL_MEMBER_OF'						=> 'Kliens',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Létrehozó neve',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Felelős felhasználó',
     'LBL_EXPORT_TEAM_COUNT' => 'Csoportlétszám',
+    'LBL_CHANGETIMERS' => 'Időzítők módosítása',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Kontakszemélyek emailjei',
@@ -134,4 +137,11 @@ $mod_strings = array (
 - A kötelező mezők kitöltése nélkül mentés nem lehetséges. 
 - Ha hiányzó mezőt talál, kattintson a "Több mutatása" opcióra a ráadás mezők felfedéséhez! 
 2. Kattintson a "Mentés" gombra a rekord mentéséhez és a korábbi oldalra való visszatéréshez.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Nem találta meg, amit keresett?',
+    'LBL_CREATE_CASE' => '{{module_name}} létrehozása',
+
+    'LBL_SLA_DETAILS' => 'SLA részletek',
+    'LBL_HOURS' => 'Óra',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

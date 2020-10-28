@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 use Sugarcrm\Sugarcrm\Util\Uuid;
 
 class OAuth2Api extends SugarApi
@@ -118,12 +119,29 @@ class OAuth2Api extends SugarApi
         }
 
         $loginStatus = apiCheckLoginStatus();
+        global $current_user;
         if ($loginStatus !== true && $loginStatus['level'] != 'warning') {
             if (($loginStatus['level'] == 'admin_only' || $loginStatus['level'] == 'maintenance')
-                 && $GLOBALS['current_user']->isAdmin() ) {
+                 && $current_user->isAdmin() ) {
                 // Let them through
+            } elseif (!empty($current_user) && $current_user->allowNonAdminToContinue($loginStatus)) {
+                // allow non admin user go through
             } else {
                 if ($loginStatus['message'] === 'ERROR_LICENSE_SEATS_MAXED') {
+                    $seatNeeded = 0;
+                    $exceededLicenseTypes = SubscriptionManager::instance()->getSystemLicenseTypesExceededLimit($seatNeeded);
+                    $msg = '';
+                    $i = 0;
+
+                    foreach ($exceededLicenseTypes as $type => $extraNumbers) {
+                        if ($i > 0) {
+                            $msg .= ' and ';
+                        }
+                        $msg .= User::getLicenseTypeDescription($type) . ' ';
+                        $i++;
+                    }
+
+                    $errorMsg = sprintf(translate('ERROR_LICENSE_TYPE_SEATS_MAXED'), $msg);
                     $GLOBALS['log']->error($loginStatus['message']);
                     $e = new SugarApiExceptionLicenseSeatsNeeded(
                         'ERROR_LICENSE_SEATS_MAXED_ONLY_ADMINS',
@@ -132,6 +150,7 @@ class OAuth2Api extends SugarApi
                         0,
                         'license_seats_needed'
                     );
+                    $e->setMessage($errorMsg);
                     throw $e;
                 }
                 // This is no good, they shouldn't be allowed in.

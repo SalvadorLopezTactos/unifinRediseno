@@ -48,13 +48,15 @@ class ConfiguratorController extends SugarController
         'logger_file_dateFormat',
         'logger_level',
         'logger_file_maxLogs',
-        'logger_file_ext',
 
         'activity_streams_enabled',
 
         'marketing_extras_enabled',
         'commentlog_maxchars',
+        'allowed_link_schemes',
 
+        'catalog_enabled',
+        'catalog_url',
         // SugarBPM settings
         'processes_auto_validate_on_import',
         'processes_auto_validate_on_autosave',
@@ -71,26 +73,6 @@ class ConfiguratorController extends SugarController
             sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
         }
         $this->view = 'fontmanager';
-    }
-
-    /**
-     * Delete a font and go back to the font manager
-     */
-    function action_deleteFont(){
-        global $current_user;
-        if(!is_admin($current_user)){
-            sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
-        }
-        $urlSTR = 'index.php?module=Configurator&action=FontManager';
-        $filename = $this->request->getValidInputRequest('filename', 'Assert\File');
-        if ($filename) {
-            $fontManager = new FontManager();
-            $fontManager->filename = $filename;
-            if(!$fontManager->deleteFont()){
-                $urlSTR .='&error='.urlencode(implode("<br>",$fontManager->errors));
-            }
-        }
-        header("Location: $urlSTR");
     }
 
     function action_listview(){
@@ -162,7 +144,6 @@ class ConfiguratorController extends SugarController
         $configurator = new Configurator();
         $configurator->populateFromPost();
         $configurator->handleOverride();
-        $configurator->parseLoggerSettings();
         $configurator->saveConfig();
 
         // Bug 37310 - Delete any existing currency that matches the one we've just set the default to during the admin wizard

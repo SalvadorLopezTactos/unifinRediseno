@@ -12,7 +12,7 @@
 --}}
 {{#each collection.models}}
     <li{{#eq id ../active.id}} class="active"{{/eq}}>
-        <a class="ellipsis_inline" tabindex="-1" href="#{{buildRoute model=this}}" data-route="#{{buildRoute model=this}}">
+        <a class="ellipsis_inline" data-name="{{fieldValue this 'name'}}"  tabindex="-1" href="#{{buildRoute model=this}}" data-route="#{{buildRoute model=this}}">
             {{#if this.attributes.default_dashboard}}
                 <i class="fa fas fa-dashboard-default"></i>
             {{else}}

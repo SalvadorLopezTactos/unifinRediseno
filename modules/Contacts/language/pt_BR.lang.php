@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Painel de lista de contatos',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Painel de registo de contatos',
-
+    'LBL_SITE_USER_ID' => 'Hash de site_url e ID de contato',
+    'LBL_COOKIE_CONSENT' => 'Autorização de cookies',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Autorização de cookies recebida em',
     'LNK_CONTACT_REPORTS' => 'Visualizar relatórios de contato',
     'ERR_DELETE_RECORD' => 'Um número de registro deve ser especificado para eliminar o Contato.',
     'LBL_ACCOUNT_ID' => 'ID da Conta',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Informação do Portal',
     'LBL_PORTAL_NAME' => 'Nome do Portal',
     'LBL_PORTAL_PASSWORD_ISSET' => 'A senha do portal foi definida:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Nome da empresa do usuário do portal',
     'LBL_RECORD_SAVED_SUCCESS' => 'Você criou com sucesso o {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Rua',
     'LBL_POSTAL_CODE' => 'Código Postal',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Oportunidades',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documentos',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Cotações',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Cotações (enviar para)',
     'LBL_QUOTES_BILL_TO' => 'Cotações (cobrança para)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Itens de linha de cotação',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Clique aqui para editar seu perfil.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Aqui, você pode definir seu idioma de preferência. Isso alterará o idioma usado pelo Portal Sugar.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Você pode voltar para o seu Perfil a qualquer momento usando o menu do Usuário.',
+    'ERR_PORTAL_NAME_EXISTS' => 'O nome do portal {0} já existe. Não são permitidos nomes de portais duplicados. Altere o nome do portal para que seja exclusivo.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'Id principal do D&B',
@@ -279,4 +284,8 @@ Para criar um {{module_name}}:
     'LBL_FILTER_CONTACTS_REPORTS' => 'Relatórios dos Contatos',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Objetivos Comerciais autorizados para',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Autorização atualizada pela última vez',
+
+    'LBL_ENTRY_SOURCE' => 'Origem do contato',
+    'LBL_SOURCE_EXTERNAL' => 'Externo',
+    'LBL_SOURCE_INTERNAL' => 'Interno',
 );

@@ -29,16 +29,22 @@ global $theme;
 
 $current_module_strings = return_module_language($current_language, 'MergeRecords');
 
-
 $focus = BeanFactory::newBean('MergeRecords');
 $focus->load_merge_bean($_REQUEST['merge_module'], true, $_REQUEST['record']);
 
 $this->bean = $focus->merge_bean;
 
 $params = array();
-$params[] = "<a href='index.php?module={$focus->merge_bean->module_dir}&action=index'>{$GLOBALS['app_list_strings']['moduleList'][$focus->merge_bean->module_dir]}</a>";
-$params[] = $mod_strings['LBL_STEP2_FORM_TITLE'];
-$params[] = $focus->merge_bean->name;
+
+$q = http_build_query([
+    'module' => $focus->merge_bean->module_dir,
+    'action' => 'index',
+]);
+
+$params[] = '<a href="'.htmlspecialchars('index.php?'.$q).'">'.htmlspecialchars($GLOBALS['app_list_strings']['moduleList'][$focus->merge_bean->module_dir]).'</a>';
+$params[] = htmlspecialchars($mod_strings['LBL_STEP2_FORM_TITLE']);
+$params[] = htmlspecialchars($focus->merge_bean->name);
+
 echo getClassicModuleTitle($focus->merge_bean->module_dir, $params, true);
 
        $order_by_name = $focus->merge_module.'2_'.strtoupper($focus->merge_bean->object_name).'_ORDER_BY' ;
@@ -51,8 +57,8 @@ echo '<form onsubmit="return check_form(\'MassUpdate\');" id="MassUpdate" name="
     .'<input type="hidden" value="false" name="delete"/>'
     .'<input type="hidden" value="false" name="merge"/>'
     .'<input type="hidden" value="MergeRecords" name="module"/>'
-    ."<input type='hidden' name='lvso' value='{$lvso}' />"
-    ."<input type='hidden' name='{$order_by_name}' value='{$request_order_by_name}' />";
+    .'<input type="hidden" name="lvso" value="'.htmlspecialchars($lvso).'"/>'
+    .'<input type="hidden" name="'.htmlspecialchars($order_by_name).'" value="'.htmlspecialchars($request_order_by_name).'"/>';
 
 $focus->populate_search_params($_REQUEST);
 echo $focus->get_inputs_for_search_params($_REQUEST);

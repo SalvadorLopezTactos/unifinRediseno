@@ -1,7 +1,4 @@
 <?php
-
-// TODO: replace this file with the ultra-lite/container Composer package once the support of PHP 5.6 is dropped.
-
 namespace UltraLite\Container\Exception;
 
 use Psr\Container\NotFoundExceptionInterface;

@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'ไม่พบรายการเป้าหมายที่เป็นประเภทค่าเริ่มต้น',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'ไม่พบรายการ',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'ประมวลผลรายการแล้ว',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'ชื่อเครื่องมือติดตาม:',
   'LBL_EDIT_TRACKER_URL'=>'URL เครื่องมือติดตาม:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'ไม่มีการบันทึกค่าที่เหมาะสมที่สุดกับบัญชีอีเมลขาเข้าของคุณ',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'โปรดตรวจทานการตั้งค่าอีเมลขาเข้า',
     'LBL_LEADS_DELETED_SINCE_CREATED' => 'มีการลบผู้สนใจ {0} รายที่สร้างผ่านแคมเปญนี้นับตั้งแต่สร้าง',
+    'LBL_PROSPECT_LIST' => 'รายการเป้าหมาย',
 );
 
 

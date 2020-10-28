@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Náhled',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'UPOZORNĚNÍ: Pokud změníte primární modul, všechna pole již přidány do šablony budou muset být odstraněny.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Zde je soubor o který jste požádal (můžete změnit text)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Nabídka',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Tato šablona se používá pro tisk nabídky ve formátu PDF.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'Nabídka',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Nabídka (se službami)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Tato šablona se používá k tisku nabídky, včetně informací o službách, ve formátu PDF.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'nabídkaslužeb',
+
   'LBL_TPL_INVOICE_NAME' => 'Faktura',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Tato šablona se používá pro tisk faktury ve formátu PDF.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'Faktura',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Faktura (se službami)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Tato šablona se používá k tisku faktury, včetně informací o službách, ve formátu PDF.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'fakturaslužeb',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Číslo faktury',
   'LBL_TPL_SALES_PERSON' => 'Prodejce:',
   'LBL_TPL_VALID_UNTIL' => 'Platné do:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Číslo dílu:',
   'LBL_TPL_PRODUCT' => 'Produkt',
   'LBL_TPL_RLI' => 'Řádky obchodu',
+  'LBL_TPL_DURATION' => 'Doba trvání',
+  'LBL_TPL_DURATION_STARTS' => 'Začátek:',
+  'LBL_TPL_DURATION_ENDS' => 'Konec:',
   'LBL_TPL_LIST_PRICE' => 'Ceník',
   'LBL_TPL_UNIT_PRICE' => 'Cena za kus',
   'LBL_TPL_EXT_PRICE' => 'Rozšířená cena',

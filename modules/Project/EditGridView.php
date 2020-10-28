@@ -33,12 +33,13 @@ if(!empty($_REQUEST['record']))
     $focus->retrieve($_REQUEST['record']);
 }
 
-$params = array();
-$params[] = "<a href='index.php?module=Project&action=index'>{$mod_strings['LBL_MODULE_NAME']}</a>";
-if ($focus->is_template)
-	$params[] = "<a href='index.php?module=Project&action=ProjectTemplatesDetailView&record={$focus->id}'>{$focus->name}</a>";
-else
-    $params[] = "<a href='index.php?module=Project&action=DetailView&record={$focus->id}'>{$focus->name}</a>";
+$params[] = '<a href="index.php?module=Project&action=index">' . htmlspecialchars($mod_strings['LBL_MODULE_NAME']) .'</a>';
+$href = 'index.php?' . http_build_query([
+        'module' => 'Project',
+        'action' => $focus->is_template ? 'ProjectTemplatesDetailView' : 'DetailView',
+        'record' => $focus->id,
+    ]);
+$params[] = '<a href="' . htmlspecialchars($href). '">' . htmlspecialchars($focus->name). '</a>';
 
 echo getClassicModuleTitle("Project", $params, true);
 

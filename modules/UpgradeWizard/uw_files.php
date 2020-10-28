@@ -11,7 +11,6 @@
  */
 
 
-
 global $sugar_version;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -30,7 +29,6 @@ if(count($uwFilesCurrent) < 5) {
 		'modules/UpgradeWizard/index.php',
 		'modules/UpgradeWizard/Menu.php',
 		'modules/UpgradeWizard/preflight.php',
-		'modules/UpgradeWizard/preflightJson.php',
 		'modules/UpgradeWizard/start.php',
 		'modules/UpgradeWizard/su_utils.php',
 		'modules/UpgradeWizard/su.php',
@@ -58,7 +56,6 @@ if(count($uwFilesCurrent) < 5) {
 
 $uw_files = array(
     // standard files we steamroll with no warning
-    'log4php.properties',
     'include/utils/encryption_utils.php',
     'include/utils.php',
     'include/language/en_us.lang.php',

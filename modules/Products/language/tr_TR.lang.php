@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'Kontak',
     'LBL_DISCOUNT_TOTAL' => 'Toplam İndirim',
     'LBL_DISCOUNT_AMOUNT' => 'İndirim Miktarı',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'İndirim Miktarı Değeri',
     'LBL_EXT_PRICE' => 'Tutar',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Para Sembol İsmi',

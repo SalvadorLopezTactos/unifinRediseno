@@ -18,7 +18,7 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 require_once 'include/SugarSmarty/plugins/function.sugar_action_menu.php';
 require_once 'include/SugarSmarty/plugins/function.sugar_csrf_form_token.php';
 
-$header_text = '';
+$headerHTML = '';
 global $mod_strings;
 global $app_list_strings;
 global $app_strings;
@@ -31,8 +31,11 @@ if (!is_admin($current_user) && !is_admin_for_module($GLOBALS['current_user'],'P
 $focus = BeanFactory::newBean('Manufacturers');
 
 $params = array();
-$params[] = "<a href='index.php?module=Administration&action=index'>".translate('LBL_MODULE_NAME','Administration')."</a>";
-$params[] = $mod_strings['LBL_MODULE_NAME'];
+$params[] = sprintf(
+    '<a href="index.php?module=Administration&action=index">%s</a>',
+    htmlspecialchars(translate('LBL_MODULE_NAME', 'Administration'))
+);
+$params[] = htmlspecialchars($mod_strings['LBL_MODULE_NAME']);
 echo getClassicModuleTitle($focus->module_dir, $params, true);
 
 $is_edit = false;
@@ -58,20 +61,38 @@ $GLOBALS['log']->info("Manufacturer list view");
 global $theme;
 
 $ListView = new ListView();
-$module = InputValidation::getService()->getValidInputRequest('module', 'Assert\Mvc\ModuleName');
+$module = $_REQUEST['module']?? null;
 
-$button  = "<form border='0' action='index.php' method='post' name='form'>\n";
-$button .= smarty_function_sugar_csrf_form_token(array(), $ListView);
-$button .= "<input type='hidden' name='module' value='Manufacturers'>\n";
-$button .= "<input type='hidden' name='action' value='EditView'>\n";
-$button .= "<input type='hidden' name='edit' value='true'>\n";
-$button .= "<input type='hidden' name='return_module' value='".$currentModule."'>\n";
-$button .= "<input type='hidden' name='return_action' value='".$action."'>\n";
-$button .= "<input title='".$app_strings['LBL_NEW_BUTTON_TITLE']."' accessyKey='".$app_strings['LBL_NEW_BUTTON_KEY']."' class='button primary' type='submit' name='New' value='".$app_strings['LBL_NEW_BUTTON_LABEL']."' id='btn_create'>\n";
-$button .= "</form>\n";
+$button = '
+<form action="index.php" method="post" name="form">
+' . smarty_function_sugar_csrf_form_token([], $ListView) . '
+    <input type="hidden" name="module" value="Manufacturers">
+    <input type="hidden" name="action" value="EditView">
+    <input type="hidden" name="edit" value="true">
+    <input type="hidden" name="return_module" value="' . htmlspecialchars($currentModule) .'">
+    <input type="hidden" name="return_action" value="' . htmlspecialchars($action) .'">
+    <input title="' . htmlspecialchars($app_strings['LBL_NEW_BUTTON_TITLE']) . '" accessKey="' . htmlspecialchars($app_strings['LBL_NEW_BUTTON_KEY']) . '" class="button primary" type="submit" name="New" value="' . htmlspecialchars($app_strings['LBL_NEW_BUTTON_LABEL']) . '" id="btn_create">
+</form>';
 
-if(is_admin($current_user) && $module != 'DynamicLayout' && !empty($_SESSION['editinplace'])){
-		$header_text = "&nbsp;<a href='index.php?action=index&module=DynamicLayout&from_action=ListView&from_module=".htmlspecialchars($module, ENT_QUOTES, 'UTF-8') ."'>".SugarThemeRegistry::current()->getImage("EditLayout","border='0' alt='Edit Layout' align='bottom'",null,null,'.gif',$mod_strings['LBL_EDITLAYOUT'])."</a>";
+if (is_admin($current_user) && $module !== 'DynamicLayout' && !empty($_SESSION['editinplace'])) {
+    $href = 'index.php?' . http_build_query(
+        [
+            'action' => 'index',
+            'module' => 'DynamicLayout',
+            'from_action' => 'ListView',
+            'from_module' => $module,
+        ]
+    );
+    $imageHTML = SugarThemeRegistry::current()
+        ->getImage(
+            "EditLayout",
+            'border="0" alt="Edit Layout" align="bottom"',
+            null,
+            null,
+            '.gif',
+            $mod_strings['LBL_EDITLAYOUT']
+        );
+    $headerHTML = '&nbsp;<a href="' . htmlspecialchars($href) . '">' . $imageHTML . '</a>';
 }
 $ListView->initNewXTemplate( 'modules/Manufacturers/ListView.html',$mod_strings);
 $ListView->xTemplateAssign("DELETE_INLINE_PNG",  SugarThemeRegistry::current()->getImage('delete_inline','align="absmiddle" border="0"',null,null,'.gif',$app_strings['LNK_DELETE']));
@@ -81,7 +102,7 @@ $action_button = smarty_function_sugar_action_menu(array(
     'buttons' => array($button),
 ), $ListView);
 
-$ListView->setHeaderTitle($header_text.$action_button);
+$ListView->setHeaderTitle($headerHTML.$action_button);
 
 $ListView->show_select_menu = false;
 $ListView->show_export_button = false;
@@ -92,22 +113,26 @@ $ListView->processListView($focus, "main", "MANUFACTURER");
 
 if ($is_edit) {
 
-		$edit_button ="<form name='EditView' method='POST' action='index.php'>\n";
-        $edit_button .= smarty_function_sugar_csrf_form_token(array(), $ListView);
-		$edit_button .="<input type='hidden' name='module' value='Manufacturers'>\n";
-		$edit_button .="<input type='hidden' name='record' value='$focus->id'>\n";
-		$edit_button .="<input type='hidden' name='action'>\n";
-		$edit_button .="<input type='hidden' name='edit'>\n";
-		$edit_button .="<input type='hidden' name='isDuplicate'>\n";
-		$edit_button .="<input type='hidden' name='return_module' value='Manufacturers'>\n";
-		$edit_button .="<input type='hidden' name='return_action' value='index'>\n";
-		$edit_button .="<input type='hidden' name='return_id' value=''>\n";
-		$edit_button .='<input title="'.$app_strings['LBL_SAVE_BUTTON_TITLE'].'" accessKey="'.$app_strings['LBL_SAVE_BUTTON_KEY'].'" class="button" onclick="this.form.action.value=\'Save\'; return check_form(\'EditView\');" type="submit" name="button primary" value="'.$app_strings['LBL_SAVE_BUTTON_LABEL'].'" id="btn_save">';
-		$edit_button .=' <input title="'.$app_strings['LBL_SAVE_NEW_BUTTON_TITLE'].'" class="button" onclick="this.form.action.value=\'Save\'; this.form.isDuplicate.value=\'true\'; this.form.edit.value=\'true\'; this.form.return_action.value=\'EditView\'; return check_form(\'EditView\')" type="submit" name="button" value="'.$app_strings['LBL_SAVE_NEW_BUTTON_LABEL'].'" >';
-		if(is_admin($current_user) && $module != 'DynamicLayout' && !empty($_SESSION['editinplace'])){
-		$header_text = "&nbsp;<a href='index.php?action=index&module=DynamicLayout&edit=true&from_action=EditView&from_module=".htmlspecialchars($module, ENT_QUOTES, 'UTF-8') ."'>".SugarThemeRegistry::current()->getImage("EditLayout","border='0' alt='Edit Layout' align='bottom'",null,null,'.gif',$mod_strings['LBL_EDITLAYOUT'])."</a>";
-		}
-echo get_form_header($mod_strings['LBL_MANUFACTURER']." ".$focus->name . ' '. $header_text,$edit_button , false);
+    $editButtonHTML = '
+<form name="EditView" method="POST" action="index.php">
+' . smarty_function_sugar_csrf_form_token([], $ListView) . '
+<input type="hidden" name="module" value="Manufacturers">
+<input type="hidden" name="record" value="' . htmlspecialchars($focus->id) . '">
+<input type="hidden" name="action">
+<input type="hidden" name="edit">
+<input type="hidden" name="isDuplicate">
+<input type="hidden" name="return_module" value="Manufacturers">
+<input type="hidden" name="return_action" value="index">
+<input type="hidden" name="return_id" value="">
+<input title="' . htmlspecialchars($app_strings['LBL_SAVE_BUTTON_TITLE']) . '" accessKey="' . htmlspecialchars($app_strings['LBL_SAVE_BUTTON_KEY']) . '" 
+    class="button" onclick="this.form.action.value=\'Save\'; return check_form(\'EditView\');" type="submit" name="button primary" 
+    value="' . htmlspecialchars($app_strings['LBL_SAVE_BUTTON_LABEL']) . '" id="btn_save">
+<input title="' . htmlspecialchars($app_strings['LBL_SAVE_NEW_BUTTON_TITLE']) . '" class="button" 
+    onclick="this.form.action.value=\'Save\'; this.form.isDuplicate.value=\'true\'; this.form.edit.value=\'true\'; this.form.return_action.value=\'EditView\'; return check_form(\'EditView\')" 
+    type="submit" name="button" value="' . htmlspecialchars($app_strings['LBL_SAVE_NEW_BUTTON_LABEL']) . '" >';
+
+    $formTitle = sprintf('%s %s %s', htmlspecialchars($mod_strings['LBL_MANUFACTURER']), htmlspecialchars($focus->name), $headerHTML);
+    echo get_form_header($formTitle, $editButtonHTML, false);
 
 
 	$GLOBALS['log']->info("Manufacturers edit view");
@@ -150,4 +175,3 @@ $javascript->setSugarBean($focus);
 $javascript->addAllFields('');
 echo $javascript->getScript();
 }
-?>

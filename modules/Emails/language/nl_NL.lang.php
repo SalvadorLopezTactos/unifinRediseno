@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'E-mails: contactpersonen',
     'LBL_EMAILS_LEADS_REL' => 'E-mails: leads',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'E-mails: opportunities',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'E-mails: notities',
     'LBL_EMAILS_PROJECT_REL' => 'E-mails: project',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'E-mails: projecttaak',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'Van:',
     'LBL_REPLY_TO' => 'Antwoord naar:',
     'LBL_HTML_BODY' => 'HTML Inhoud',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'Ontvanger(s)',
     'LBL_LEADS_SUBPANEL_TITLE' => 'Leads',
     'LBL_MESSAGE_SENT' => 'Bericht verstuurd',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'Id Antwoorden aan',
     'LBL_TYPE' => 'Type:',
     'LBL_EMAIL_STATE' => 'Provincie',
+    'LBL_EMAIL_DIRECTION' => 'Richting',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'Gelieve controleren!',

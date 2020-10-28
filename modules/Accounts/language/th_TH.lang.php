@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'การเสนอราคา (จัดส่ง)',
 	'LNK_ACCOUNT_REPORTS' => 'ดูรายงานบัญชี',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'เอกสาร',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'แดชลอร์ดรายการบัญชี',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกบัญชี',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'รายละเอียดบัญชี',
+    'LBL_NEXT_RENEWAL_DATE' => 'วันที่การต่ออายุครั้งต่อไป',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'ชื่อบัญชี/อุตสาหกรรม',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'ตำแหน่ง',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'แผนภูมิ',

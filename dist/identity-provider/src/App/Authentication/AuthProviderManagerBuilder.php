@@ -25,6 +25,7 @@ use Sugarcrm\IdentityProvider\Encoder\EncoderBuilder;
 use Sugarcrm\IdentityProvider\Authentication\User\LDAPUserChecker;
 use Sugarcrm\IdentityProvider\Authentication\User\LocalUserChecker;
 use Sugarcrm\IdentityProvider\Authentication\User\SAMLUserChecker;
+use Sugarcrm\IdentityProvider\Authentication\Audit;
 use Sugarcrm\IdentityProvider\Srn\Converter;
 use Sugarcrm\IdentityProvider\Srn\Srn;
 use Sugarcrm\IdentityProvider\App\Authentication\Lockout;
@@ -82,7 +83,12 @@ class AuthProviderManagerBuilder
      */
     protected function getLocalAuthProvider(Application $app): DaoAuthenticationProvider
     {
-        $userProvider = new LocalUserProvider($app->getDoctrineService(), $this->tenant->getTenantId());
+        $userProvider = new LocalUserProvider(
+            $app->getDoctrineService(),
+            $this->tenant->getTenantId(),
+            $app->getOAuth2Service()->getClientID(),
+            $this->getAudit($app)
+        );
         $userChecker = new LocalUserChecker(new Lockout($app));
 
         // local auth provider
@@ -166,6 +172,24 @@ class AuthProviderManagerBuilder
      */
     protected function getLocalUserProvider($app)
     {
-        return new LocalUserProvider($app->getDoctrineService(), $this->tenant->getTenantId());
+        return new LocalUserProvider(
+            $app->getDoctrineService(),
+            $this->tenant->getTenantId(),
+            $app->getOAuth2Service()->getClientID(),
+            $this->getAudit($app)
+        );
+    }
+
+    /**
+     * @param Application $app
+     * @return Audit
+     */
+    private function getAudit(Application $app): Audit
+    {
+        return new Audit(
+            $app->getLogger(),
+            Converter::toString($this->tenant),
+            $app->getOAuth2Service()->getClientID()
+        );
     }
 }

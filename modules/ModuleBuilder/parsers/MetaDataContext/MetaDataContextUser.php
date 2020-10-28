@@ -12,6 +12,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+
 /**
  * User metadata context
  */
@@ -49,7 +51,11 @@ class MetaDataContextUser implements MetaDataContextInterface
     public function getHash()
     {
         $hash = $this->context->getHash();
-        //The admin state of a user can affect the metadata result regardless of roles
+        // use license type as part of hash,
+        // will use a user with all system subscriptions as default context,
+        // so no extra hash for that user
+        $hash = md5($hash . SubscriptionManager::instance()->getUserLicenseTypesInString($this->user));
+
         if ($this->user->isAdmin()) {
             $hash = md5($hash . "admin");
         }
@@ -79,7 +85,10 @@ class MetaDataContextUser implements MetaDataContextInterface
     {
         if ($user->load_relationship('acl_role_sets')) {
             $roleSets = $user->acl_role_sets->getBeans();
-            return array_shift($roleSets);
+            if (!empty($roleSets)) {
+                return array_shift($roleSets);
+            }
+            return null;
         }
 
         return null;

@@ -50,4 +50,6 @@ $mod_strings = array(
     'LBL_PARENT_ID' => 'ID הורה',
     'LBL_READ' => 'נקרא',
     'LBL_UNREAD' => 'לא נקרא',
+    'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'קיבלת אזכור מ-',
+    'LBL_YOU_HAVE_BEEN_MENTIONED' => 'קיבלת אזכור',
 );

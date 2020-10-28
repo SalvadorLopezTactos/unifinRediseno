@@ -901,6 +901,10 @@ AdamEvent.prototype._makeCriteriaField = function() {
                             dataURL: 'pmse_Project/CrmData/related/' + PROJECT_MODULE,
                             dataRoot: 'result',
                             fieldDataURL: 'pmse_Project/CrmData/fields/{{MODULE}}',
+                            fieldDataURLAttr: {
+                                // RM = Received Message
+                                call_type: 'RM'
+                            },
                             fieldDataRoot: 'result'
                         },
                         user: {
@@ -925,7 +929,12 @@ AdamEvent.prototype._makeCriteriaField = function() {
                         constant:
                             {
                                 datetime: true,
-                                timespan: true
+                                timespan: true,
+                                businessHours: {
+                                    show: true,
+                                    targetModuleBC: isRelatedToBusinessCenters(PROJECT_MODULE),
+                                    selectedModuleBC: ''
+                                }
                             },
                         variable:
                             {
@@ -957,6 +966,39 @@ AdamEvent.prototype.createConfigureAction = function () {
         repeatEveryCombo, everyOptions, repeatEveryNumberCombo, cyclicDate, fixedRadio, cyclicRadio, incrementWasClicked = false,
         durationTextField, unitComboBox, fixedDate, incrementCkeck, durationTextField2, unitComboBox2, operationCombo, criteria,
         root = this, hiddenParams, hiddenFn, callback = {}, ddlModules, ddlEmailTemplate, aTemplate, criteriaField, emailTemplates, datecriteria;
+    var fromSelector;
+
+    // Creates and populates a search and select field for choosing a User to set as the "From" and/or "Reply To" field
+    // of an outgoing email from SugarBPM
+    var createEmailFromField = function(changeFunction) {
+        var emailFromField = new SearchableCombobox({
+            label: 'From',
+            name: 'address_from',
+            submit: false,
+            required: true,
+            fieldWidth: 414,
+            change: changeFunction,
+            searchURL: 'pmse_Project/CrmData/outboundEmailsAccounts?filter[0][name][$starts]={%TERM%}' +
+            '&fields=id,name&max_num={%PAGESIZE%}&offset={%OFFSET%}',
+            searchValue: 'id',
+            searchLabel: 'name',
+            searchMore: {
+                module: 'OutboundEmail',
+                fields: ['id', 'name'],
+                filterOptions: null
+            },
+            _searchMoreLayout: 'selection-list-for-bpm',
+            options: [
+                {'text': translate('LBL_PMSE_FORM_OPTION_CREATED_BY_USER'), 'value': 'created_by'},
+                {'text': translate('LBL_PMSE_FORM_OPTION_CURRENT_USER'), 'value': 'currentuser'},
+                {'text': translate('LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER'), 'value': 'modified_user_id'},
+                {'text': translate('LBL_PMSE_FORM_OPTION_RECORD_OWNER'), 'value': 'owner'},
+                {'text': translate('LBL_PMSE_FORM_OPTION_SUPERVISOR'), 'value': 'supervisor'},
+                {'text': translate('LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL'), 'value': 'system_email'}
+            ]
+        });
+        return emailFromField;
+    };
 
     //Event PMSE.Form PMSE.Proxy
     proxy = new SugarProxy({
@@ -1069,6 +1111,10 @@ AdamEvent.prototype.createConfigureAction = function () {
                             textField: "text",
                             valueField: "value",
                             fieldDataURL: 'pmse_Project/CrmData/fields/{{MODULE}}',
+                            fieldDataURLAttr: {
+                                // ST = Start
+                                call_type: 'ST'
+                            },
                             fieldDataRoot: 'result',
                             fieldTextField: "text",
                             fieldValueField: "value",
@@ -1185,18 +1231,26 @@ AdamEvent.prototype.createConfigureAction = function () {
                 hiddenParams = new HiddenField({name: 'evn_params'});
                 hiddenFn = function () {
                     var parentForm = this.parent, address = {};
-
-                    //address['to'] = parentForm.items[2].getObject();
-                    //address['cc'] = parentForm.items[3].getObject();
-                    //address['bcc'] = parentForm.items[4].getObject();
-                    address.to = parentForm.items[2].getObject();
-                    address.cc = parentForm.items[3].getObject();
-                    address.bcc = parentForm.items[4].getObject();
+                    address.from = {
+                        'name': parentForm.items[2].getSelectedText(),
+                        'id': parentForm.items[2].value || ''
+                    };
+                    address.replyTo = {
+                        'name': parentForm.items[2].getSelectedText(),
+                        'id': parentForm.items[2].value || ''
+                    };
+                    address.to = parentForm.items[3].getObject();
+                    address.cc = parentForm.items[4].getObject();
+                    address.bcc = parentForm.items[5].getObject();
                     hiddenParams.setValue(JSON.stringify(address));
                 };
+
+                fromSelector = createEmailFromField(hiddenFn);
+
                 items = [
                     ddlModules,
                     ddlEmailTemplate,
+                    fromSelector,
                     {
                         jtype: 'emailpicker',
                         label: translate('LBL_PMSE_FORM_LABEL_EMAIL_TO'),
@@ -1255,18 +1309,26 @@ AdamEvent.prototype.createConfigureAction = function () {
                                 hiddenParams.setValue(data.evn_params);
                                 for (i = 0; i < f.items.length; i += 1) {
                                     switch (f.items[i].name) {
-                                    case 'address_to':
-                                        f.items[i].setValue(params.to);
-                                        emailPickerFields.push(i);
-                                        break;
-                                    case 'address_cc':
-                                        f.items[i].setValue(params.cc);
-                                        emailPickerFields.push(i);
-                                        break;
-                                    case 'address_bcc':
-                                        f.items[i].setValue(params.bcc);
-                                        emailPickerFields.push(i);
-                                        break;
+                                        case 'address_from':
+                                            if (params.from && params.from.name && params.from.id) {
+                                                f.items[i].setValue({
+                                                    text: params.from.name,
+                                                    value: params.from.id
+                                                });
+                                            }
+                                            break;
+                                        case 'address_to':
+                                            f.items[i].setValue(params.to);
+                                            emailPickerFields.push(i);
+                                            break;
+                                        case 'address_cc':
+                                            f.items[i].setValue(params.cc);
+                                            emailPickerFields.push(i);
+                                            break;
+                                        case 'address_bcc':
+                                            f.items[i].setValue(params.bcc);
+                                            emailPickerFields.push(i);
+                                            break;
                                     }
                                 }
                             }
@@ -1567,6 +1629,7 @@ AdamEvent.prototype.createConfigureAction = function () {
             ddlEmailTemplate = new ComboboxField({
                 jtype: 'combobox',
                 name: 'evn_criteria',
+                required: true,
                 label: translate('LBL_PMSE_FORM_LABEL_EMAIL_TEMPLATE'),
                 proxy: new SugarProxy({
                     url: 'pmse_Project/CrmData/emailtemplates',
@@ -1602,14 +1665,26 @@ AdamEvent.prototype.createConfigureAction = function () {
             hiddenParams = new HiddenField({name: 'evn_params'});
             hiddenFn = function () {
                 var parentForm = this.parent, address = {};
-                address.to = parentForm.items[2].getObject();
-                address.cc = parentForm.items[3].getObject();
-                address.bcc = parentForm.items[4].getObject();
+                address.from = {
+                    'name': parentForm.items[2].getSelectedText(),
+                    'id': parentForm.items[2].value || ''
+                };
+                address.replyTo = {
+                    'name': parentForm.items[2].getSelectedText(),
+                    'id': parentForm.items[2].value || ''
+                };
+                address.to = parentForm.items[3].getObject();
+                address.cc = parentForm.items[4].getObject();
+                address.bcc = parentForm.items[5].getObject();
                 hiddenParams.setValue(JSON.stringify(address));
             };
+
+            fromSelector = createEmailFromField(hiddenFn);
+
             items = [
                 ddlModules,
                 ddlEmailTemplate,
+                fromSelector,
                 {
                     jtype: 'emailpicker',
                     label: translate('LBL_PMSE_FORM_LABEL_EMAIL_TO'),
@@ -1669,6 +1744,14 @@ AdamEvent.prototype.createConfigureAction = function () {
                             hiddenParams.setValue(data.evn_params);
                             for (i = 0; i < f.items.length; i += 1) {
                                 switch (f.items[i].name) {
+                                    case 'address_from':
+                                        if (params.from && params.from.name && params.from.id) {
+                                            f.items[i].setValue({
+                                                text: params.from.name,
+                                                value: params.from.id
+                                            });
+                                        }
+                                        break;
                                     case 'address_to':
                                         f.items[i].setValue(params.to);
                                         emailPickerFields.push(i);
@@ -1997,11 +2080,8 @@ AdamEvent.prototype.callbackFunctionForSendMessageEvent = function(data, element
     // Validate the number of incoming and outgoing edges
     validationTools.validateNumberOfEdges(1, null, 1, 1, element);
 
-    // Check that the email template field is set and the template exists
-    validationTools.validateAtom('TEMPLATE', null, null, data.evn_criteria, element, validationTools);
-
-    // Validate each of the criteria boxes
-    element.validateSendMessageCriteriaBoxes(data, element, validationTools);
+    // Validate the send message data
+    element.validateSendMessageData(data, element, validationTools);
 };
 
 /**
@@ -2015,14 +2095,9 @@ AdamEvent.prototype.callbackFunctionForEndEvent = function(data, element, valida
     // Validate the number of incoming and outgoing edges
     validationTools.validateNumberOfEdges(1, null, 0, 0, element);
 
-    // If this is a send message end event
+    // If this is a send message end event, validate the send message data
     if (element.getEventMarker() === 'MESSAGE') {
-
-        // Validate the email template
-        validationTools.validateAtom('TEMPLATE', null, null, data.evn_criteria, element, validationTools);
-
-        // Validate each of the criteria boxes
-        element.validateSendMessageCriteriaBoxes(data, element, validationTools);
+        element.validateSendMessageData(data, element, validationTools);
     }
 };
 
@@ -2071,28 +2146,50 @@ AdamEvent.prototype.validateWaitEventCriteriaBox = function(data, element, valid
 };
 
 /**
- * Validates all criteria/recipient boxes of a send message event configuration
+ * Validates the send message data for a send message or end send message event
  * @param {Object} data contains the element settings information received from the API call
  * @param {Object} element is the element on the canvas that is currently being examined/validated
  * @param {Object} validationTools is a collection of utility functions for validating element data
  */
-AdamEvent.prototype.validateSendMessageCriteriaBoxes = function(data, element, validationTools) {
-    var field;
+AdamEvent.prototype.validateSendMessageData = function(data, element, validationTools) {
     var criteria = [];
-
-    // If the criteria box is not empty, its data is a string, so parse it
     if (data.evn_params) {
         criteria = JSON.parse(data.evn_params);
     }
 
-    // Check that the "To:" field has at least one recipient (required field)
-    if (!criteria.to || !criteria.to.length) {
+    // Check that the email template field is set and the template exists
+    validationTools.validateAtom('TEMPLATE', null, null, data.evn_criteria, element, validationTools);
+
+    // Check that the "From:" field is set (required field)
+    if (!criteria.from || !criteria.from.name || !criteria.from.id) {
+        validationTools.createWarning(element, 'LBL_PMSE_ERROR_FIELD_REQUIRED', 'From');
+    }
+
+    // Validate each of the criteria boxes
+    element.validateSendMessageCriteriaBoxes(element, validationTools, criteria);
+};
+
+/**
+ * Validates all criteria/recipient boxes of a send message event configuration
+ * @param {Object} data contains the element settings information received from the API call
+ * @param {Object} element is the element on the canvas that is currently being examined/validated
+ * @param {Object} criteria contains the recipient information of the send message data (to, cc, bcc options)
+ */
+AdamEvent.prototype.validateSendMessageCriteriaBoxes = function(element, validationTools, criteria) {
+
+    // Validate the atoms in the criteria boxes
+    if (criteria.to && criteria.to.length) {
+        element.validateCriteriaBoxAtoms(element, validationTools, criteria.to, true);
+    } else {
         validationTools.createWarning(element, 'LBL_PMSE_ERROR_FIELD_REQUIRED', 'To');
     }
 
-    // Validate the atoms in each criteria box
-    for (field in criteria) {
-        element.validateCriteriaBoxAtoms(element, validationTools, criteria[field], true);
+    if (criteria.cc && criteria.cc.length) {
+        element.validateCriteriaBoxAtoms(element, validationTools, criteria.cc, true);
+    }
+
+    if (criteria.bcc && criteria.bcc.length) {
+        element.validateCriteriaBoxAtoms(element, validationTools, criteria.bcc, true);
     }
 };
 

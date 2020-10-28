@@ -224,24 +224,41 @@ class RelateRecordApi extends SugarApi
     public function createRelatedRecord(ServiceBase $api, array $args)
     {
         $primaryBean = $this->loadBean($api, $args);
-        list($linkName) = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view','create');
-
-        /** @var Link2 $link */
-        $link = $primaryBean->$linkName;
-        $module = $link->getRelatedModuleName();
-        $moduleApi = $this->getModuleApi($api, $module);
-        $moduleApiArgs = $this->getModuleApiArgs($args, $module);
-        $relatedBean = $moduleApi->createBean($api, $moduleApiArgs, array(
-            'not_use_rel_in_req' => true,
-            'new_rel_id' => $primaryBean->id,
-            'new_rel_relname' => $link->getLinkForOtherSide(),
-        ));
+        $relatedBean = $this->createRelatedBean($api, $args, $primaryBean);
 
         $args['remote_id'] = $relatedBean->id;
 
         $relatedArray = $this->getRelatedRecord($api, $args);
 
         return $this->formatNearAndFarRecords($api, $args, $primaryBean, $relatedArray);
+    }
+
+    /**
+     * Creates a bean and relates it to a primary bean.
+     * Passed $args['module'] and $args['record'] are always ignored in favor of the instance
+     * passed as $primaryBean
+     *
+     * @param ServiceBase $api The API class of the request.
+     * @param array $args The arguments array passed in from the API.
+     * @param SugarBean $primaryBean The bean for what we want to create a related one.
+     * @return SugarBean Created instance of a bean
+     * @throws SugarApiExceptionError In case if the module API has improper interface
+     */
+    public function createRelatedBean(ServiceBase $api, array $args, SugarBean $primaryBean)
+    {
+        list($linkName) = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view', 'create');
+
+        /** @var Link2 $link */
+        $link = $primaryBean->$linkName;
+        $module = $link->getRelatedModuleName();
+        $moduleApi = $this->getModuleApi($api, $module);
+        $moduleApiArgs = $this->getModuleApiArgs($args, $module);
+
+        return $moduleApi->createBean($api, $moduleApiArgs, [
+            'not_use_rel_in_req' => true,
+            'new_rel_id' => $primaryBean->id,
+            'new_rel_relname' => $link->getLinkForOtherSide(),
+        ]);
     }
 
     public function createRelatedLink(ServiceBase $api, array $args)

@@ -322,4 +322,7 @@ After confirming each required and desired module, click the Save and Convert bu
     'LBL_FILTER_LEADS_REPORTS' => 'Leads&#39; reports',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Business Purposes Consented for',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Consent Last Updated',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Unable to change {{moduleSingular}} status. This {{moduleSingular}} has already been converted.',
 );

@@ -36,15 +36,7 @@ class SugarUpgradeAddNewModulesToMegamenu extends UpgradeScript
      *
      * @var array
      */
-    public $newModuleDefs = array(
-        // Upgrade from 7.6.X and below to 7.7+
-        array(
-            'name' => 'Tags Module',
-            'fromVersion' => array('7.7.0', '<'),
-            'modules' => array(
-                'Tags',
-            ),
-        ),
+    public $newModuleDefs = [
         // Upgrade from 7.5.X and below to 7.6+ on ent
         array(
             'name' => 'PMSE Modules',
@@ -70,7 +62,24 @@ class SugarUpgradeAddNewModulesToMegamenu extends UpgradeScript
                 'pmse_Emails_Templates',
             ),
         ),
-    );
+        // 9.1.0 new Business Center module
+        [
+            'name' => 'Business Centers Module',
+            'fromVersion' => ['9.1.0', '<'],
+            'toFlavor' => ['ent'],
+            'modules' => ['BusinessCenters'],
+            'forceVisible' => true,
+        ],
+        // 9.1.0 new Business Center module (pro->ent conversion)
+        [
+            'name' => 'Business Centers Module',
+            'fromFlavor' => ['pro'],
+            'toFlavor' => ['ent'],
+            'fromVersion' => ['9.1.0', '>='],
+            'modules' => ['BusinessCenters'],
+            'forceVisible' => true,
+        ],
+    ];
 
     public function run()
     {
@@ -81,11 +90,14 @@ class SugarUpgradeAddNewModulesToMegamenu extends UpgradeScript
         $tabs = $this->getExistingTabs($tc);
 
         foreach ($this->newModuleDefs as $def) {
+            $this->log('Checking module set ' . $def['name']);
+
             // Build our boolean criteria check
             $check = $this->buildCheckCriteria($def);
 
             // If we are good to go, then go
             if (!$check) {
+                $this->log('Skipping module set ' . $def['name']);
                 continue;
             }
 
@@ -221,16 +233,22 @@ class SugarUpgradeAddNewModulesToMegamenu extends UpgradeScript
     }
 
     /**
-     * Gets the tabs list with new modules added to it
-     * @param Array $tabs Current list of modules in the megamenu
-     * @param Array $def Defs that contain a modules array to add
-     * @return array
+     * Gets the tabs list with new modules added to it.
+     * @param array $tabs Current list of modules in the megamenu
+     * @param array $def Defs that contain a modules array to add
+     * @return array The list of tabs.
      */
-    public function getNewTabsList(Array $tabs, Array $def)
+    public function getNewTabsList(array $tabs, array $def)
     {
         // Add in our new modules
         foreach ($def['modules'] as $m) {
-            if (!isset($tabs[0][$m]) && !isset($tabs[1][$m])) {
+            if (isset($def['forceVisible']) && $def['forceVisible']) {
+                // add to the enabled tab list and remove from the disabled tab list
+                $tabs[0][$m] = $m;
+                if (isset($tabs[1][$m])) {
+                    unset($tabs[1][$m]);
+                }
+            } elseif (!isset($tabs[0][$m]) && !isset($tabs[1][$m])) {
                 $tabs[0][$m] = $m;
             }
         }

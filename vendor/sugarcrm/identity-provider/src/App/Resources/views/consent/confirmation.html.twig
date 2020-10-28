@@ -4,14 +4,14 @@
 <div class="thumbnail idm-consent">
     {% include 'logo.html.twig' %}
     <section class="content">
-        <h3>{{ 'Application is asking for permission'|trans }}</h3>
+        <h3>{{ 'Application is requesting access'|trans }}</h3>
         {% if are_scopes_empty %}
             <p>
-                {{ '"%client%" is asking for access.'|raw|trans({'%client%': client}) }}
+                {{ '"%client%" is requesting access.'|raw|trans({'%client%': client}) }}
             </p>
         {% else %}
             <p>
-                {{ '"%client%" would like to:'|raw|trans({'%client%': client}) }}
+                {{ '"%client%" is requesting access to use your Sugar account to:'|raw|trans({'%client%': client}) }}
                 <ul>
                     {% for scope in scopes %}
                         <li> {{ scope }} </li>
@@ -19,6 +19,12 @@
                 </ul>
             </p>
         {% endif %}
+        <p>{{  'Please proceed with caution and only allow access if you are logging into "%client%".'|raw|trans({'%client%': client}) }}</p>
+        {% set termsLink = '<a href="https://www.sugarcrm.com/legal/terms-use" target="_blank">' %}
+        {% set endlink = '</a>' %}
+        {% set privacyLink = '<a href="https://www.sugarcrm.com/legal/privacy-policy" target="_blank">' %}
+        <p>{{  'Learn about how %client% will handle your Sugar data by reviewing the %termsLink%Terms of Use%endlink% and %privacyLink%Privacy policies%endlink%.'|
+            trans({'%termsLink%': termsLink,'%privacyLink%': privacyLink, '%endlink%': endlink, '%client%': client})|raw}}</p>
         <p>{{ 'Do you want to allow this access?'|trans }}<br/><br/></p>
     </section>
     <nav class="nav tcenter">

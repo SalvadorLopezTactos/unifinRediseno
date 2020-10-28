@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobile Plusサーバ',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'サブパネルで表示するページごとのアイテム数',
 	'LOG_MEMORY_USAGE'=>'メモリ使用状況のログ',
-    'LOG_SLOW_QUERIES' => 'スロークエリーのログ',
+    'LOG_SLOW_QUERIES' => 'スロークエリのログ',
     'LOCK_HOMEPAGE_HELP'=>'この設定は以下を非許可にします。<BR> 1) ホームで新規ホームページとダッシュレットを追加 <BR>2) ドラッグアンドドロップによるホームのダッシュレットの配置のカスタマイズ',
     'CURRENT_LOGO'=>'現在のロゴ',
     'CURRENT_LOGO_HELP'=>'このロゴはSugarアプリケーションのフッタの左端に表示されます。',
@@ -121,7 +121,7 @@ $mod_strings = array (
     'NEW_QUOTE_LOGO'=>'新たな見積用ロゴをアップロード',
     'NEW_QUOTE_LOGO_HELP'=>'画像フォーマットはJPEGである必要があります。<br>推奨サイズは 867x74pxです。',
     'QUOTES_CURRENT_LOGO'=>'見積用ロゴ',
-	'SLOW_QUERY_TIME_MSEC'=>'遅延クエリの閾値（ミリ秒）',
+	'SLOW_QUERY_TIME_MSEC'=>'スロークエリの閾値（ミリ秒）',
 	'STACK_TRACE_ERRORS'=>'エラースタックトレースの表示',
 	'UPLOAD_MAX_SIZE'=>'最大アップロードサイズ',
 	'VERIFY_CLIENT_IP'=>'ユーザのIPアドレスの正当性を確認',
@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => '画像の縦横比は1:1から10:1までの間でなければなりません。画像のサイズは自動的に変更されます。',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => '画像の縦横比は3:1から20:1までの間でなければなりません。正しい比率のファイルを新しくアップロードしてください。',
     'ERR_ALERT_FILE_UPLOAD' => '画像をアップロード中にエラーが発生しました。',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'イメージからダイレクトリーを作成することができません',
     'LBL_LOGGER'=>'ログ設定',
 	'LBL_LOGGER_FILENAME'=>'ログファイル名',
-	'LBL_LOGGER_FILE_EXTENSION'=>'拡張子',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'ログファイルの最大サイズ',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'デフォルト日付フォーマット',
 	'LBL_LOGGER_LOG_LEVEL'=>'ログレベル',
@@ -204,7 +204,7 @@ $mod_strings = array (
 	'LBL_LOGGER_MAX_LOGS'=>'ログファイルの最大数 (ローテーション前)',
 	'LBL_LOGGER_FILENAME_SUFFIX' =>'ファイル名に追加するサフィックス',
 	'LBL_VCAL_PERIOD' => 'vCal更新の周期:',
-    'LBL_NO_PRIVATE_TEAM_UPDATE' => 'プライベート チーム名にユーザー名フィールドが継承されることを防止する',
+    'LBL_NO_PRIVATE_TEAM_UPDATE' => 'プライベート チーム名にユーザ名フィールドが継承されることを防止する',
     'LBL_IMPORT_MAX_RECORDS' => 'インポート - 行の最大数',
     'LBL_IMPORT_MAX_RECORDS_HELP' => '１回のインポートでインポート可能な行数を指定します。インポート行数が<br>この数を超えた場合、ユーザにはアラートが表示されます。数の指定がない場合<br>インポート可能な行数の制限はありません。',
 	'vCAL_HELP' => 'この設定は、現在の日付から何カ月先までの電話および会議の空き状況を公開するかを決定する際に利用されます。</BR>空き状況を公開しない場合は、「0」を入力してください。最短期間は1カ月、最長期間は12カ月です。',
@@ -216,8 +216,8 @@ $mod_strings = array (
     'PDF_CREATOR' => 'PDF作成者',
     'PDF_CREATOR_INFO' => 'ドキュメントの作成者を設定します。<br>通常はPDFドキュメントを生成するアプリケーションの名前になります。',
 
-    'PDF_AUTHOR' => '著作者',
-    'PDF_AUTHOR_INFO' => 'ドキュメントプロパティに表示される著作者',
+    'PDF_AUTHOR' => '作成者',
+    'PDF_AUTHOR_INFO' => 'ドキュメントプロパティに表示される作成者',
 
     'PDF_HEADER_LOGO' => '見積PDFドキュメント用',
     'PDF_HEADER_LOGO_INFO' => 'この画像は、見積PDFドキュメントのデフォルトヘッダ領域に表示されます。',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'コメントログ設定',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'コメントエントリごとの最大表示文字数',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

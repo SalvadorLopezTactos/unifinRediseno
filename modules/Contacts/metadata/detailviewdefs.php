@@ -144,6 +144,7 @@ $viewdefs['Contacts']['DetailView'] = array(
             'studio' => 'false',
             'label' => 'LBL_EMAIL_ADDRESS',
           ),
+            'business_center_name',
         ),
 
         array (

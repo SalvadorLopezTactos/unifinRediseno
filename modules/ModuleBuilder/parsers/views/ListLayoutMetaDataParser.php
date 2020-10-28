@@ -46,8 +46,6 @@ class ListLayoutMetaDataParser extends AbstractMetaDataParser implements MetaDat
     
     protected $allowedViews = array(
         MB_LISTVIEW,
-        MB_DASHLET,
-        MB_DASHLETSEARCH,
         MB_POPUPLIST,
         MB_POPUPSEARCH,
         MB_SIDECARPOPUPVIEW,

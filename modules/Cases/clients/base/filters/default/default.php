@@ -23,6 +23,7 @@ $viewdefs['Cases']['base']['filter']['default'] = array(
         'date_entered' => array(),
         'date_modified' => array(),
         'tag' => array(),
+        'follow_up_datetime' => [],
         'assigned_user_name' => array(),
         '$owner' => array(
             'predefined_filter' => true,

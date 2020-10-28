@@ -29,6 +29,7 @@ $viewdefs['Quotes']['mobile']['view']['detail'] = array(
                 ),
                 'billing_account_name',
                 'quote_stage',
+                'tag',
             ),
     	),
 	),

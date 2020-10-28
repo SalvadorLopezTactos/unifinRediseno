@@ -12,6 +12,7 @@
 --}}
 {{#if value}}
     {{#notEq value 'http://'}}
-        <iframe src="{{value}}" height="{{def.height}}" width="100%"{{#if dir}} dir="{{dir}}"{{/if}}></iframe>
+        <iframe src="{{value}}" height="{{def.height}}" width="100%"{{#if dir}} dir="{{dir}}"{{/if}}
+            {{#if def.sandbox}} sandbox="{{def.sandbox}}"{{/if}}></iframe>
     {{/notEq}}
 {{/if}}

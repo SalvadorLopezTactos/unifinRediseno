@@ -54,7 +54,7 @@ $mod_strings = array(
     "LBL_SNIP_PURCHASE_SUMMARY" => "Da biste upotrebljavali arhiviranje e-pošte, morate kupiti licencu za instancu SugarCRM",
     "LBL_SNIP_PURCHASE" => "Kliknite ovdje za kupnju",
     'LBL_SNIP_EMAIL' => 'Adresa arhiviranja e-pošte',
-    'LBL_SNIP_AGREE' => "Prihvaćam gornje uvjete i <a href='http://www.sugarcrm.com/crm/TRUSTe/privacy.html' target='_blank'>ugovor o privatnosti</a>.",
+    'LBL_SNIP_AGREE' => "Prihvaćam gore navedene uvjete i <a href='https://www.sugarcrm.com/legal/privacy-policy/' target='_blank'>pravila o zaštiti privatnosti</a>.",
     'LBL_SNIP_PRIVACY' => 'ugovor o privatnosti',
 
     'LBL_SNIP_STATUS_PINGBACK_FAIL' => 'Povezn. pingback nije uspjela',

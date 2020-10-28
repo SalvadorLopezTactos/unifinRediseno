@@ -44,8 +44,8 @@ class PMSEProjectCRUDApi extends ModuleApi
     public function deleteRecord(ServiceBase $api, array $args)
     {
         $this->requireArgs($args,array('module','record'));
+        $projectBean = $this->loadBean($api, $args, 'delete');
 
-        $projectBean = BeanFactory::getBean($args['module'], $args['record']);
         $projectBean->prj_status = 'INACTIVE';
         $projectBean->save();
 
@@ -67,8 +67,7 @@ class PMSEProjectCRUDApi extends ModuleApi
         }
 
 
-        $bean = $this->loadBean($api, $args, 'delete');
-        $bean->mark_deleted($args['record']);
+        $projectBean->mark_deleted($args['record']);
 
         return array('id'=>$bean->id);
     }

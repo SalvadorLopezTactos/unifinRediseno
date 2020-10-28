@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Forhåndsvisning',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'ADVARSEL: Hvis du endrer den primære modulen, så må alle feltene som allerede er lagt til malen fjernes.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Her er filen du etterspurte (Du kan endre denne teksten)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Tilbud',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Denne malen brukes til å skrive ut Tilbud som PDF.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'tilbud',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Tilbud (med tjenester)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Denne malen brukes for å skrive ut et tilbud, inkludert tjenesteinformasjon, i PDF.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'servicequote',
+
   'LBL_TPL_INVOICE_NAME' => 'Faktura',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Denne malen brukes til å skrive ut Faktura som PDF.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'faktura',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Faktura (med tjenester)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Denne malen brukes for å skrive ut en faktura, inkludert tjenesteinformasjon, i PDF.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'serviceinvoice',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Tilbudsnummer:',
   'LBL_TPL_SALES_PERSON' => 'Selger:',
   'LBL_TPL_VALID_UNTIL' => 'Gyldig til:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Delenummer',
   'LBL_TPL_PRODUCT' => 'Produkt',
   'LBL_TPL_RLI' => 'Omsetningsposter',
+  'LBL_TPL_DURATION' => 'Varighet',
+  'LBL_TPL_DURATION_STARTS' => 'Starter:',
+  'LBL_TPL_DURATION_ENDS' => 'Slutter:',
   'LBL_TPL_LIST_PRICE' => 'Listepris',
   'LBL_TPL_UNIT_PRICE' => 'Enhetspris',
   'LBL_TPL_EXT_PRICE' => 'Ekst. pris',

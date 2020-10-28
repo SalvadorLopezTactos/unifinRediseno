@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Kontaktliste-dashboard',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Kontaktoptegnelses-dashboard',
-
+    'LBL_SITE_USER_ID' => 'Hash of site_url and contact id',
+    'LBL_COOKIE_CONSENT' => 'Cookie Consent',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Cookie Consent Received On',
     'LNK_CONTACT_REPORTS' => 'Kontaktrapporter',
     'ERR_DELETE_RECORD' => 'Angiv postnummeret for at slette kontakten.',
     'LBL_ACCOUNT_ID' => 'Virksomheds-id:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Portaloplysninger',
     'LBL_PORTAL_NAME' => 'Portalnavn:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Portaladgangskode er angivet:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Portal User Company Name',
     'LBL_RECORD_SAVED_SUCCESS' => 'Du har med succes skabt {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Gade',
     'LBL_POSTAL_CODE' => 'Postnummer:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Salgsmuligheder',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenter',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Tilbud',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Send tilbud til',
     'LBL_QUOTES_BILL_TO' => 'Send regning til',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Produkter',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Klik her for at redigere din profil.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Her er hvor du kan indstille dit foretrukne sprog. Dette vil ændre det sprog, der anvendes af Sugar Portal.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Du kan vende tilbage til din Profile på ethvert tidspunkt ved hjælp af brugermenuen.',
+    'ERR_PORTAL_NAME_EXISTS' => 'The portal name {0} already exists. Duplicate portal names are not allowed. Change the portal name to be unique.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Principal-id',
@@ -279,4 +284,8 @@ For at oprette en {{module_name}}:.
     'LBL_FILTER_CONTACTS_REPORTS' => 'Kontaktpersoners rapporter',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Forretningsformål samtykke til',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Samtykke sidst opdateret',
+
+    'LBL_ENTRY_SOURCE' => 'Contact Source',
+    'LBL_SOURCE_EXTERNAL' => 'External',
+    'LBL_SOURCE_INTERNAL' => 'Internal',
 );

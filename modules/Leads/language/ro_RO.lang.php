@@ -316,4 +316,7 @@ După confirmarea fiecărui modul solicitat şi dorit, faceţi clic pe butonul S
     'LBL_FILTER_LEADS_REPORTS' => 'Rapoarte piste',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Scopuri comerciale permise pentru',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Ultima actualizare a consimțământului',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Nu se poate modifica starea {{moduleSingular}}. Acest {{moduleSingular}} a fost deja convertit.',
 );

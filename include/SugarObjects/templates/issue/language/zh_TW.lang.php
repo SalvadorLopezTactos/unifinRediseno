@@ -27,9 +27,15 @@ $mod_strings = array (
   'LBL_RESOLUTION' => '解決方式',
   'LBL_LAST_MODIFIED' => '上次修改',
   'LBL_ASSIGNED_TO_ID'=>'指派至：',
-  'LBL_ASSIGNED_TO_NAME' => '使用者：',  	  
+  'LBL_ASSIGNED_TO_NAME' => '使用者：',
   'LBL_WORK_LOG' => '工作記錄：',
+    'LBL_FOLLOW_UP' => '待處理',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
+    'LBL_RESOLVED_DATETIME' => '已解決日期',
+    'LBL_HOURS_TO_RESOLUTION' => '距離解決的小時數',
+    'LBL_BUSINESS_HOURS_TO_RESOLUTION' => '距離解決的工作時長',
+    'LBL_PENDING_PROCESSING' => '擱置處理中',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => '建立人：',
   'LBL_DATE_CREATED' => '建立日期：',
   'LBL_DATE_ENTERED' => '建立日期：',
@@ -44,5 +50,5 @@ $mod_strings = array (
     'LBL_EDIT_BUTTON' => '編輯',
     'LBL_REMOVE' => '移除',
 
-  
+
   );

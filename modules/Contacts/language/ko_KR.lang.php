@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => '연락처 목록 대시보드',
     'LBL_CONTACTS_RECORD_DASHBOARD' => '연락처 기록 대시보드',
-
+    'LBL_SITE_USER_ID' => 'site_url 및 연락처 id 해시',
+    'LBL_COOKIE_CONSENT' => '쿠키 동의',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => '쿠키 동의 수신됨',
     'LNK_CONTACT_REPORTS' => '연락처와 관련된 보고서 보기',
     'ERR_DELETE_RECORD' => '연락처를 삭제하기 위해선 정확한 고유번호를 입력하셔야합니다.',
     'LBL_ACCOUNT_ID' => '거래처 ID',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => '포털 정보',
     'LBL_PORTAL_NAME' => '포털명',
     'LBL_PORTAL_PASSWORD_ISSET' => '포탈 암호',
+    'LBL_PORTAL_USER_COMPANY_NAME' => '포탈 사용자 회사명',
     'LBL_RECORD_SAVED_SUCCESS' => '성공적으로 생성하였습니다 {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => '상세주소',
     'LBL_POSTAL_CODE' => '우편번호',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => '영업기회',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => '문서',
     'LBL_QUOTES_SUBPANEL_TITLE' => '견적',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => '견적서 (배송지주소)',
     'LBL_QUOTES_BILL_TO' => '견적서 (청구지주소)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => '견적 라인아이템',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => '프로파일 편집을 위해 이곳을 클릭하십시요.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => '이곳에서 선호하는 언어를 저장할수 있습니다. 이는 Sugar포탈에 사용되는 언어를 교체합니다.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => '사용자 메뉴에서 언제든지 프로파일로 돌아올수 있습니다.',
+    'ERR_PORTAL_NAME_EXISTS' => '포탈 이름 {0} 이미 존재합니다. 중복 포탈 이름이 허용되지 않습니다. 포탈 이름을 고유한 것으로 변경하십시오.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B 사용자 Id',
@@ -273,4 +278,8 @@ $mod_strings = array (
     'LBL_FILTER_CONTACTS_REPORTS' => '연락처 보고서',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => '동의한 사업 목적',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => '동의서 최종 업데이트',
+
+    'LBL_ENTRY_SOURCE' => '연락처 출처',
+    'LBL_SOURCE_EXTERNAL' => '외부',
+    'LBL_SOURCE_INTERNAL' => '내부',
 );

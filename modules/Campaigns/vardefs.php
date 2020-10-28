@@ -188,6 +188,7 @@ $dictionary['Campaign'] = array (
             'type' => 'link',
             'relationship' => 'prospect_list_campaigns',
             'source' => 'non-db',
+            'vname' => 'LBL_PROSPECT_LIST',
             
         ),
         'emailmarketing' => array (

@@ -13,6 +13,8 @@
 namespace Sugarcrm\IdentityProvider\Authentication\UserProvider;
 
 use Sugarcrm\IdentityProvider\Authentication\User;
+use Sugarcrm\IdentityProvider\STS\Claims;
+use Sugarcrm\IdentityProvider\Authentication\Audit;
 use Sugarcrm\IdentityProvider\Authentication\Provider\Providers;
 
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -21,7 +23,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DBALException;
-use Rhumsaa\Uuid\Uuid;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Class UserProvider.
@@ -45,15 +47,29 @@ class LocalUserProvider implements UserProviderInterface
     private $tenantId;
 
     /**
+     * @var string
+     */
+    private $applicationSRN;
+
+    /**
+     * @var Audit
+     */
+    private $audit;
+
+    /**
      * UserProvider constructor.
      *
      * @param Connection $db
      * @param string $tenantId
+     * @param string $applicationSRN
+     * @param Audit $audit
      */
-    public function __construct(Connection $db, $tenantId)
+    public function __construct(Connection $db, string $tenantId, string $applicationSRN, Audit $audit)
     {
         $this->db = $db;
         $this->tenantId = $tenantId;
+        $this->applicationSRN = $applicationSRN;
+        $this->audit = $audit;
     }
 
     /**
@@ -61,9 +77,9 @@ class LocalUserProvider implements UserProviderInterface
      */
     public function loadUserByUsername($username)
     {
-        $row = $this->getUserData($username, Providers::LOCAL);
+        $row = $this->getUserData($username, Providers::LOCAL, User::STATUS_ACTIVE);
         if (!$row) {
-            throw new UsernameNotFoundException();
+            throw new UsernameNotFoundException('User not found');
         }
 
         return new User($row['identity_value'], $row['password_hash'], $row);
@@ -80,9 +96,9 @@ class LocalUserProvider implements UserProviderInterface
      */
     public function loadUserByFieldAndProvider($value, $provider)
     {
-        $row = $this->getUserData($value, $provider);
+        $row = $this->getUserData($value, $provider, User::STATUS_ACTIVE);
         if (!$row) {
-            throw new UsernameNotFoundException();
+            throw new UsernameNotFoundException('User not found');
         }
 
         return new User($row['identity_value'], $row['password_hash'], $row);
@@ -97,7 +113,7 @@ class LocalUserProvider implements UserProviderInterface
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
         }
 
-        $userData = $this->getUserData($user->getUsername(), Providers::LOCAL);
+        $userData = $this->getUserData($user->getUsername(), Providers::LOCAL, User::STATUS_ACTIVE);
 
         return new User($userData['identity_value'], $userData['password_hash'], $userData);
     }
@@ -124,7 +140,7 @@ class LocalUserProvider implements UserProviderInterface
     public function createUser($value, $provider, $data = [])
     {
         $newUserId = (string)Uuid::uuid4();
-        $oidcAttributesKeys = array_flip(User::OIDC_ATTRIBUTES);
+        $oidcAttributesKeys = array_flip(Claims::OIDC_ATTRIBUTES);
 
         // we need a valid email
         $emailValue = filter_var($value, FILTER_VALIDATE_EMAIL)
@@ -142,11 +158,13 @@ class LocalUserProvider implements UserProviderInterface
 
         $userData = [
             'id' => $newUserId,
-            'create_time' => date("Y-m-d H:i:s"),
-            'modify_time' => date("Y-m-d H:i:s"),
-            'status' => User::STATUS_ACTIVE,
+            'create_time' => gmdate("Y-m-d H:i:s"),
+            'modify_time' => gmdate("Y-m-d H:i:s"),
+            'created_by' => $this->applicationSRN,
+            'modified_by' => $this->applicationSRN,
+            'status' => (string)User::STATUS_ACTIVE,
             'tenant_id' => $this->tenantId,
-            'user_type' => User::USER_TYPE_REGULAR_USER,
+            'user_type' => (string)User::USER_TYPE_REGULAR_USER,
             'attributes' => json_encode($attributes),
             'custom_attributes' => json_encode(array_diff_key($data, $oidcAttributesKeys)),
         ];
@@ -163,6 +181,7 @@ class LocalUserProvider implements UserProviderInterface
         $userData['attributes'] = json_decode($userData['attributes'], true);
         $userData['custom_attributes'] = json_decode($userData['custom_attributes'], true);
 
+        $this->audit->audit('Create User', $newUserId, [], $userData);
         return new User($value, null, $userData);
     }
 
@@ -205,9 +224,10 @@ class LocalUserProvider implements UserProviderInterface
      *
      * @param string $value identity-value to to search User against
      * @param string $providerCode code of the provider user came from
+     * @param int $status
      * @return array|null
      */
-    protected function getUserData($value, $providerCode)
+    protected function getUserData(string $value, string $providerCode, int $status = User::STATUS_ACTIVE)
     {
         $qb = $this->db->createQueryBuilder()
             ->select(
@@ -217,6 +237,8 @@ class LocalUserProvider implements UserProviderInterface
                  users.status,
                  users.create_time,
                  users.modify_time,
+                 users.created_by,
+                 users.modified_by,
                  users.attributes,
                  users.custom_attributes,
                  users.last_login,
@@ -243,7 +265,7 @@ class LocalUserProvider implements UserProviderInterface
                 ':value' => (string)$value,
                 ':tenant_id' => $this->tenantId,
                 ':provider' => (string)$providerCode,
-                ':user_status' => User::STATUS_ACTIVE,
+                ':user_status' => $status,
             ]);
 
         $row = $qb->execute()->fetch(\PDO::FETCH_ASSOC);
@@ -258,26 +280,67 @@ class LocalUserProvider implements UserProviderInterface
     }
 
     /**
+     * Check is exists deactivated user
+     *
+     * @param string $value identity-value to to search User against
+     * @param string $providerCode code of the provider user originates from
+     * @return bool
+     */
+    public function isDeactivatedUserExist(string $value, string $providerCode): bool
+    {
+        $row = $this->getUserData($value, $providerCode, User::STATUS_INACTIVE);
+        return (bool)$row;
+    }
+
+    /**
      * Update User attributes
      *
      * @param array $data
-     * @param string $userId
+     * @param User $user
      * @throws DBALException if SQL-insert was incorrect.
      */
-    public function updateUserAttributes(array $data, string $userId): void
+    public function updateUserAttributes(array $data, User $user): void
     {
-        $oidcAttributesKeys = array_flip(User::OIDC_ATTRIBUTES);
-        $updateData = [
-            'attributes' => json_encode(array_intersect_key($data, $oidcAttributesKeys), JSON_FORCE_OBJECT),
-            'custom_attributes' => json_encode(array_diff_key($data, $oidcAttributesKeys), JSON_FORCE_OBJECT),
+        $oldUserData = [
+            'attributes' => (array)$user->getAttribute('attributes'),
+            'custom_attributes' => (array)$user->getAttribute('custom_attributes'),
+        ];
+
+        $oidcAttributesKeys = array_flip(Claims::OIDC_ATTRIBUTES);
+        $updateAttributes = [
+            'modify_time' => $this->getCurrentDate(),
+            'modified_by' => $this->applicationSRN,
+            'attributes' => array_intersect_key($data, $oidcAttributesKeys),
+            'custom_attributes' => array_diff_key($data, $oidcAttributesKeys),
         ];
         $this->db->update(
             'users',
-            $updateData,
+            [
+                'modify_time' => $updateAttributes['modify_time'],
+                'modified_by' => $updateAttributes['modified_by'],
+                'attributes' => json_encode($updateAttributes['attributes'], JSON_FORCE_OBJECT),
+                'custom_attributes' => json_encode($updateAttributes['custom_attributes'], JSON_FORCE_OBJECT),
+            ],
             [
                 'tenant_id' => $this->tenantId,
-                'id' => $userId,
+                'id' => $user->getAttribute('id'),
             ]
         );
+        // Update User object to be consistent with DB changes.
+        foreach ($updateAttributes as $attribute => $value) {
+            $user->setAttribute($attribute, $value);
+        }
+
+        $this->audit->audit('Update User', $user->getAttribute('id'), $oldUserData, $updateAttributes);
+    }
+
+    /**
+     * Get current date.
+     *
+     * @return string
+     */
+    public function getCurrentDate(): string
+    {
+        return gmdate('Y-m-d H:i:s');
     }
 }

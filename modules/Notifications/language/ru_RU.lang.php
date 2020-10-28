@@ -50,4 +50,6 @@ $mod_strings = array(
     'LBL_PARENT_ID' => 'ID изначальной записи',
     'LBL_READ' => 'Прочитано',
     'LBL_UNREAD' => 'Не прочитано',
+    'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'Вас упомянуто в записи пользователя',
+    'LBL_YOU_HAVE_BEEN_MENTIONED' => 'Вас упомянуто',
 );

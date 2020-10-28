@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Lista de alvos do tipo padrão não foi encontrada',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nenhuma entrada encontrada',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Entradas foram processadas',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Nome do Rastreador:',
   'LBL_EDIT_TRACKER_URL'=>'URL do Rastreador:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'Nenhuma opção foi gravada na sua Caixa de Entrada de E-mail.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Revise a configuração de sua Caixa de Entrada de E-mail.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} potenciais que foram criados a partir desta campanha foram excluído desde a sua criação.',
+    'LBL_PROSPECT_LIST' => 'Lista de alvos',
 );
 
 

@@ -88,11 +88,6 @@ class SugarLogger implements LoggerTemplate
     {
         $config = SugarConfig::getInstance();
 
-        $extConfig = trim($config->get('logger.file.ext', $this->ext));
-        if (strcmp($extConfig, '') != 0 ) {
-            $this->ext = $extConfig;
-        }
-
         $logfileConfig = trim($config->get('logger.file.name', $this->logfile));
         if (strcmp($logfileConfig, '') != 0) {
             $this->logfile = $logfileConfig;

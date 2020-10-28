@@ -22,9 +22,9 @@ $mod_strings = array(
     'LBL_EMAIL_PROVIDER' => 'Eメールプロバイダ',
     'LBL_LISTVIEW_FILTER_ALL' => 'すべてのアカウント',
     'LBL_HELP_RECORDS' => '{{plural_module_name}} モジュールは、 ' .
-        '顧客にメールを送信するために使用することのできる、Smtp メール アカウントの管理に使用されます。',
+        '顧客にメールを送信するために使用することのできる、SMTP アカウントの管理に使用されます。',
     'LBL_HELP_RECORD' => '{{plural_module_name}} モジュールは、 ' .
-        '顧客にメールを送信するために使用することのできる、Smtp メール アカウントの管理に使用されます。',
+        '顧客にメールを送信するために使用することのできる、SMTP アカウントの管理に使用されます。',
     'EXCEPTION_CREATE_SYSTEM_ACCOUNT_NOT_AUTHORIZED' => '{module} には「{type}」タイプのレコードを作成することはできません。',
     'LBL_SYSTEM_ACCOUNT' => 'これは、システム アカウントです。',
     'LBL_EMAIL_ADDRESS_ID' => 'EメールアドレスID',

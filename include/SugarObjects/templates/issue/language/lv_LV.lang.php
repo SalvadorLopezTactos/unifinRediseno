@@ -27,9 +27,15 @@ $mod_strings = array (
   'LBL_RESOLUTION' => 'Risinājums',
   'LBL_LAST_MODIFIED' => 'Modificēts',
   'LBL_ASSIGNED_TO_ID'=>'Piešķirts lietotājam:',
-  'LBL_ASSIGNED_TO_NAME' => 'Piešķirts lietotājam:',  	  
+  'LBL_ASSIGNED_TO_NAME' => 'Piešķirts lietotājam:',
   'LBL_WORK_LOG' => 'Darba Žurnāls:',
+    'LBL_FOLLOW_UP' => 'Turpmākā darbība',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
+    'LBL_RESOLVED_DATETIME' => 'Atrisināšanas datums',
+    'LBL_HOURS_TO_RESOLUTION' => 'Stundas līdz risinājumam',
+    'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Darba stundas līdz risinājumam',
+    'LBL_PENDING_PROCESSING' => 'Gaida apstrādi',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Izveidoja:',
   'LBL_DATE_CREATED' => 'Izveides datums:',
   'LBL_DATE_ENTERED' => 'Izveides datums:',
@@ -44,5 +50,5 @@ $mod_strings = array (
     'LBL_EDIT_BUTTON' => 'Rediģēt',
     'LBL_REMOVE' => 'Noņemt',
 
-  
+
   );

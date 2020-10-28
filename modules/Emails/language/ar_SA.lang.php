@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'رسائل البريد الإلكتروني: جهات الاتصال',
     'LBL_EMAILS_LEADS_REL' => 'رسائل البريد الإلكتروني: العملاء المتوقعون',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'رسائل البريد الإلكتروني: الفرص',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'رسائل البريد الإلكتروني: ملاحظات',
     'LBL_EMAILS_PROJECT_REL' => 'رسائل البريد الإلكتروني: المشروع',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'رسائل البريد الإلكتروني: مهمة مشروع',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'من:',
     'LBL_REPLY_TO' => 'الرد على:',
     'LBL_HTML_BODY' => 'نص HTML الأساسي',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'المستلمون',
     'LBL_LEADS_SUBPANEL_TITLE' => 'العملاء المتوقعون',
     'LBL_MESSAGE_SENT' => 'تم إرسال الرسالة',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'معرف الرد على',
     'LBL_TYPE' => 'النوع:',
     'LBL_EMAIL_STATE' => 'الحالة',
+    'LBL_EMAIL_DIRECTION' => 'الاتجاه',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'يُرجى الفحص!',

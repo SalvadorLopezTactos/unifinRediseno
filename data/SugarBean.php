@@ -23,6 +23,7 @@ require_once 'include/utils.php';
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DBALException;
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 use Sugarcrm\Sugarcrm\Audit\EventRepository;
 use Sugarcrm\Sugarcrm\Audit\FieldChangeList;
 use Sugarcrm\Sugarcrm\DataPrivacy\Erasure\FieldList as ErasureFieldList;
@@ -572,28 +573,25 @@ class SugarBean
                 $this->setupCustomFields($this->module_dir);
             }
 
-            if (empty($this->list_fields)) {
-                $this->list_fields = $this->_loadCachedArray(
-                    $this->module_name,
-                    $this->object_name,
-                    'list_fields'
-                );
+            static $moduleDefs = array();
+            if (file_exists('modules/' . $this->module_name . '/field_arrays.php')) {
+                // If the data was not loaded, try loading again....
+                if (!isset($moduleDefs[$this->object_name])) {
+                    include 'modules/' . $this->module_name . '/field_arrays.php';
+                    $moduleDefs[$this->object_name] = $fields_array;
+                }
             }
 
-            if (empty($this->column_fields)) {
-                $this->column_fields = $this->_loadCachedArray(
-                    $this->module_name,
-                    $this->object_name,
-                    'column_fields'
-                );
+            if (empty($this->list_fields) && isset($moduleDefs[$this->object_name][$this->object_name]['list_fields'])) {
+                $this->list_fields = $moduleDefs[$this->object_name][$this->object_name]['list_fields'];
             }
 
-            if (empty($this->required_fields)) {
-                $this->required_fields = $this->_loadCachedArray(
-                    $this->module_name,
-                    $this->object_name,
-                    'required_fields'
-                );
+            if (empty($this->column_fields) && isset($moduleDefs[$this->object_name][$this->object_name]['column_fields'])) {
+                $this->column_fields = $moduleDefs[$this->object_name][$this->object_name]['column_fields'];
+            }
+
+            if (empty($this->required_fields) && isset($moduleDefs[$this->object_name][$this->object_name]['required_fields'])) {
+                $this->required_fields = $moduleDefs[$this->object_name][$this->object_name]['required_fields'];
             }
 
             if(isset($GLOBALS['dictionary'][$this->object_name]) && !$this->disable_vardefs)
@@ -818,7 +816,7 @@ class SugarBean
             $this->auditEnabledRelateFields = array();
             foreach ($this->field_defs as $field => $properties) {
                 if (($field === 'team_id' || !empty($properties['Audited']) || !empty($properties['audited']))
-                    && SugarACL::checkField($this->module_dir, $field, 'access', array('bean' => $this))) {
+                    && $this->ACLFieldAccess($field, 'access', array('bean' => $this))) {
                     $this->audit_enabled_fields[$field] = $properties;
                     if ($properties['type'] === 'relate' && !empty($properties['id_name'])) {
                         // we need this id_field => relate_field mapping for 'view change log'
@@ -1914,11 +1912,12 @@ class SugarBean
         }
 
         $this->populateFetchedEmail('bean_field');
+        $this->fixUpFormatting();
         $this->commitAuditedStateChanges(null);
         $this->saveData($isUpdate, $check_notify);
 
         if ($isUpdate) {
-            $nonEmptyFields = array_keys(array_filter($this->toArray(true)));
+            $nonEmptyFields = array_keys(array_filter($this->toArray()));
             $this->getErasedFieldsRepository()->removeBeanFields(
                 $this->getTableName(),
                 $this->id,
@@ -2056,8 +2055,6 @@ class SugarBean
         $this->in_save = true;
         // cn: SECURITY - strip XSS potential vectors
         $this->cleanBean();
-        // This is used so custom/3rd-party code can be upgraded with fewer issues, this will be removed in a future release
-        $this->fixUpFormatting();
         global $timedate;
         global $current_user, $action;
 
@@ -3324,6 +3321,20 @@ class SugarBean
         // to make sure it doesn't contain trailing spaces
         $id = $this->db->fromConvert($id, 'id');
 
+        // add access control
+        // This section of code is a portion of the code referred
+        // to as Critical Control Software under the End User
+        // License Agreement.  Neither the Company nor the Users
+        // may modify any portion of the Critical Control Software.
+        if (!empty($id) && is_string($id)) {
+            if (!AccessControlManager::instance()->allowRecordAccess($this->getModuleName(), $id)) {
+                $GLOBALS['log']->fatal('Not authorized to access record ' . $this->getModuleName() . ':' . $id);
+                $this->id = null;
+                return $this;
+            }
+        }
+        //END REQUIRED CODE DO NOT MODIFY
+
         $custom_logic_arguments['id'] = $id;
         $this->call_custom_logic('before_retrieve', $custom_logic_arguments);
 
@@ -3343,6 +3354,7 @@ class SugarBean
             'team_security' => !$this->disable_row_level_security,
             'erased_fields' => $this->retrieve_erased_fields,
             'action' => 'view',
+            'bean_id' => $id !== -1 ? $id : null,
         ]);
 
         $query->select('*');
@@ -3782,12 +3794,17 @@ class SugarBean
     /**
      * Sets value from fetched row into the bean.
      *
+     * Introducing new parameter, $getMoreData, some times,
+     * the deep retrieval data could be done in batch fashion,
+     * so it could be ignore
+     *
      * @param array $row Fetched row
      * @param bool $convert Apply convertField to fields
+     * @param bool $getMoreData Need Retrieve more data
      *
      * Internal function, do not override.
      */
-    public function populateFromRow(array $row, $convert = false)
+    public function populateFromRow(array $row, $convert = false, $getMoreData = true)
     {
         global $locale;
 
@@ -5664,7 +5681,7 @@ class SugarBean
                 }
             }
 
-            $bean->populateFromRow($row);
+            $bean->populateFromRow($row, true);
 
             // panel_name is not a standard SugarBean field but it's used for fetching
             // data for composite subpanels. assign it to the bean manually.
@@ -7324,34 +7341,19 @@ class SugarBean
         return $array_assign;
     }
 
-    /**
-    * returns this bean as an array
-    *
-    * @return array of fields with id, name, access and category
-    */
-    function toArray($dbOnly = false, $stringOnly = false, $upperKeys=false)
-    {
-        static $cache = array();
-        $arr = array();
 
-        foreach($this->field_defs as $field=>$data)
-        {
-            if( !$dbOnly || !isset($data['source']) || $data['source'] == 'db')
-            if(!$stringOnly || is_string($this->$field))
-            if($upperKeys)
-            {
-                                if(!isset($cache[$field])){
-                                    $cache[$field] = strtoupper($field);
-                                }
-                $arr[$cache[$field]] = $this->$field;
-            }
-            else
-            {
-                if(isset($this->$field)){
-                    $arr[$field] = $this->$field;
-                }else{
-                    $arr[$field] = '';
-                }
+    /**
+     * Returns an associative array where the keys are the names of the fields described in vardefs and the values are their values
+     * @param bool $dbOnly Deprecated, the flag whether to return only fields that are stored in the database
+     * @final
+     * @return array
+     */
+    public function toArray(bool $dbOnly = false): array
+    {
+        $arr = [];
+        foreach ($this->field_defs as $field => $data) {
+            if (!$dbOnly || !isset($data['source']) || $data['source'] === 'db') {
+                $arr[$field] = $this->$field ?? '';
             }
         }
         return $arr;
@@ -7652,62 +7654,6 @@ class SugarBean
     public function afterImportSave()
     {
     }
-
-    /**
-     * This function is designed to cache references to field arrays that were previously stored in the
-     * bean files and have since been moved to separate files. Was previously in include/CacheHandler.php
-     *
-     * @deprecated
-     * @param $module_name string the module directory
-     * @param $object_name string the object name
-     * @param $key string the type of field array we are referencing, i.e. list_fields, column_fields, required_fields
-     **/
-    private function _loadCachedArray(
-        $module_name,
-        $object_name,
-        $key
-        )
-    {
-        static $moduleDefs = array();
-
-        $fileName = 'field_arrays.php';
-
-        $cache_key = "load_cached_array.$module_name.$object_name.$key";
-        $result = sugar_cache_retrieve($cache_key);
-        if(!empty($result))
-        {
-        	// Use SugarCache::EXTERNAL_CACHE_NULL_VALUE to store null values in the cache.
-        	if($result == SugarCache::EXTERNAL_CACHE_NULL_VALUE)
-        	{
-        		return null;
-        	}
-
-            return $result;
-        }
-
-        if (file_exists('modules/'.$module_name.'/'.$fileName)) {
-            // If the data was not loaded, try loading again....
-            if (!isset($moduleDefs[$object_name])) {
-                include 'modules/' . $module_name . '/' . $fileName;
-                $moduleDefs[$object_name] = $fields_array;
-            }
-
-            // Now that we have tried loading, make sure it was loaded
-            if (empty($moduleDefs[$object_name][$object_name][$key])) {
-                // It was not loaded....  Fail.  Cache null to prevent future repeats of this calculation
-				sugar_cache_put($cache_key, SugarCache::EXTERNAL_CACHE_NULL_VALUE);
-                return  null;
-            }
-
-            // It has been loaded, cache the result.
-            sugar_cache_put($cache_key, $moduleDefs[$object_name][$object_name][$key]);
-            return $moduleDefs[$object_name][$object_name][$key];
-        }
-
-        // It was not loaded....  Fail.  Cache null to prevent future repeats of this calculation
-        sugar_cache_put($cache_key, SugarCache::EXTERNAL_CACHE_NULL_VALUE);
-		return null;
-	}
 
     /**
      * Returns the ACL category for this module; defaults to the SugarBean::$acl_category if defined

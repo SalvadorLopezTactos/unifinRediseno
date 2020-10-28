@@ -27,9 +27,15 @@ $mod_strings = array (
   'LBL_RESOLUTION' => 'Felbontás',
   'LBL_LAST_MODIFIED' => 'Utolsó módosítás',
   'LBL_ASSIGNED_TO_ID'=>'Felelős:',
-  'LBL_ASSIGNED_TO_NAME' => 'Felhasználó:',  	  
+  'LBL_ASSIGNED_TO_NAME' => 'Felhasználó:',
   'LBL_WORK_LOG' => 'Munkanapló:',
+    'LBL_FOLLOW_UP' => 'Követési tevékenység',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
+    'LBL_RESOLVED_DATETIME' => 'Megoldás dátuma',
+    'LBL_HOURS_TO_RESOLUTION' => 'Órák a megoldásig',
+    'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Üzemidő a megoldásig',
+    'LBL_PENDING_PROCESSING' => 'Feldolgozás folyamatban',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Létrehozta:',
   'LBL_DATE_CREATED' => 'Létrehozás dátuma:',
   'LBL_DATE_ENTERED' => 'Létrehozás dátuma:',
@@ -44,5 +50,5 @@ $mod_strings = array (
     'LBL_EDIT_BUTTON' => 'Szerkesztés',
     'LBL_REMOVE' => 'Eltávolítás',
 
-  
+
   );

@@ -942,6 +942,12 @@ FormPanelHidden.prototype.createHTML = function () {
     return this;
 };
 
+/**
+ * Disables the reset of a FormPanelHidden field, preventing
+ * issues when entering multiple items in a criteria box
+ */
+FormPanelHidden.prototype.reset = function () {};
+
 //TextField
 var FormPanelText = function (settings) {
     FormPanelField.call(this, settings);
@@ -2053,6 +2059,24 @@ FormPanelRadio.prototype._createControl = function () {
             this._htmlControl.push(label);
         }
         FormPanelField.prototype._createControl.call(this);
+    }
+    return this;
+};
+
+/**
+ * Radio button event handler
+ *
+ * @return {Object} Object that calls this function
+ */
+FormPanelRadio.prototype.fireDependentFields = function() {
+    var dependantField, moduleField, option;
+    if (this._form && this._form._htmlBody && this._form._htmlBody[0]) {
+        option = PMSE.ElementHelper.prototype._getSelectedOption.call(this, this._form);
+        moduleField = this._form.getItem('module');
+        dependantField = this._form.getItem('field');
+        if (dependantField && moduleField && option) {
+            dependantField._fireDependencyHandler(moduleField, option.value);
+        }
     }
     return this;
 };

@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Data de modificació',
     'LBL_DELETED' => 'Suprimit',
     'LBL_REVENUELINEITEMS' => 'Línia d&#39;impostos articles',
+    'LBL_ENTRY_SOURCE' => 'Origen de la nota',
+    'LBL_SOURCE_EXTERNAL' => 'Extern',
+    'LBL_SOURCE_INTERNAL' => 'Intern',
 
     // Help Text
     // List View Help Text

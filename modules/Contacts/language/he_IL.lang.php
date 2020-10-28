@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'לוח מחוונים של רשימת אנשי קשר',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת אנשי קשר',
-
+    'LBL_SITE_USER_ID' => 'קוד Hash של site_url ושל מזהה איש קשר',
+    'LBL_COOKIE_CONSENT' => 'הסכמה לשימוש בקובצי Cookie',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'הסכמה לשימוש בקובצי Cookie התקבלה בתאריך',
     'LNK_CONTACT_REPORTS' => 'צפה בדוחות על אנשי קשר',
     'ERR_DELETE_RECORD' => 'Specify the record number to delete the contact.',
     'LBL_ACCOUNT_ID' => 'זהות חשבון:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'מידע על הפורטל',
     'LBL_PORTAL_NAME' => 'שם פורטל:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'הסיסמא לפורטל היא:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'שם החברה של המשתמש בפורטל',
     'LBL_RECORD_SAVED_SUCCESS' => 'יצרת בהצלחה את {{moduleSingularLower}} {{full_name}}.',
     'LBL_STREET' => 'רחוב',
     'LBL_POSTAL_CODE' => 'מיקוד:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'הזדמנויות',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'מסמכים',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'הצעות מחיר',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'הצעת מחיר נשלחה אל',
     'LBL_QUOTES_BILL_TO' => 'הצעות מחיר לחשבונית',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'פרטי שורות מצוטטים',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'לחץ כאן על מנת לערוך את הפרופיל שלך',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'באשרוצך להגדיר כאן את השפה המועדפת עליך. זה ישנה את השפה אשר בשימוש של פורטל שוגר.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'באפשרותך לחזור לפרופיל שלך בכל עת באמצעות תפריט המשתמש.',
+    'ERR_PORTAL_NAME_EXISTS' => 'שם הפורטל {0} כבר קיים. אין אפשרות להשתמש בשמות פורטל כפולים. שנה את שם הפורטל לשם ייחודי.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Id עיקרי',
@@ -273,4 +278,8 @@ $mod_strings = array (
     'LBL_FILTER_CONTACTS_REPORTS' => 'דוחות של אנשי קשר',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'הסכמה למטרות עסקיות עבור',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'ההסכמה עודכנה לאחרונה בתאריך',
+
+    'LBL_ENTRY_SOURCE' => 'מקור איש הקשר',
+    'LBL_SOURCE_EXTERNAL' => 'חיצוני',
+    'LBL_SOURCE_INTERNAL' => 'פנימי',
 );

@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Информационная панель списка обращений',
     'LBL_CASES_RECORD_DASHBOARD' => 'Информационная панель записей обращений',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Сведения об обращении',
 
 	'ERR_DELETE_RECORD'					=> 'Вы должны указать номер записи перед удалением контрагента.',
 	'LBL_ACCOUNT_ID'					=> 'Контрагент',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Контакты',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Обращения',
 	'LBL_DESCRIPTION'					=> 'Описание:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Приложение',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Приложение',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'История',
 	'LBL_INVITEE'						=> 'Контакты',
 	'LBL_MEMBER_OF'						=> 'Контрагент',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Создано Пользователем',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Ответственный пользователь',
     'LBL_EXPORT_TEAM_COUNT' => 'Team Count',
+    'LBL_CHANGETIMERS' => 'Изменить таймеры',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Email-сообщения соответствующих контактов',
@@ -140,4 +143,11 @@ $mod_strings = array (
 - Поля, отмеченные как "Обязательные", должны быть заполнены перед сохранением.
 - Нажмите "Показать больше", чтобы отобразить дополнительные поля при необходимости.
 2. Нажмите "Сохранить", чтобы завершить создание новой записи и вернуться на предыдущую страницу.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Не нашли нужную информацию?',
+    'LBL_CREATE_CASE' => 'Создать {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'Сведения о Соглашении об уровне обслуживания (SLA)',
+    'LBL_HOURS' => 'Часы',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

@@ -10,23 +10,44 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$viewdefs['portal']['layout']['portal-list'] = array (
-  'components' => array (
-    array (
-      'view' => 'portal-list-top',
-    ),
-    array (
-      'view' => 'filter',
-    ),
-    array (
-      'view' => 'list',
-    ),
-    array (
-      'view' => 'list-bottom',
-    ),
-  ),
-  'type' => 'simple',
-  'name' => 'dashboard-list',
-  'span' => 12,
-  'css_class' => 'thumbnail',
-);
+$viewdefs['portal']['layout']['portal-list'] = [
+    'components' => [
+        [
+            'view' => 'portal-list-top',
+        ],
+        [
+            'layout' => [
+                'type' => 'filterpanel',
+                'last_state' => [
+                    'id' => 'list-filterpanel',
+                    'defaults' => [
+                        'toggle-view' => 'list',
+                    ],
+                ],
+                'refresh_button' => true,
+                'components' => [
+                    [
+                        'layout' => 'filter',
+                        'loadModule' => 'Filters',
+                    ],
+                    [
+                        'view' => 'filter-rows',
+                    ],
+                    [
+                        'view' => 'filter-actions',
+                    ],
+                ],
+            ],
+        ],
+        [
+            'view' => 'list',
+        ],
+        [
+            'view' => 'list-bottom',
+        ],
+    ],
+    'type' => 'simple',
+    'name' => 'dashboard-list',
+    'span' => 12,
+    'css_class' => 'thumbnail',
+];

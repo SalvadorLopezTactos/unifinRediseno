@@ -121,7 +121,7 @@ $mod_strings = array(
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Označuje závislé pole, ktoré môže alebo nemusí byť viditeľné v závislosti od hodnoty vzorca.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Označuje vypočítavané pole, ktorého hodnota sa automaticky určí na základe vzorca.'
     ,
         //this defualt will be used for edit view
-        'default'	=> 'Oblasť <b>Rozloženie</b> obsahuje polia, ktoré sa momentálne zobrazujú v časti <b>Zobrazenie na úpravy</b>.<br/><br/>Časť <b>Nástroje</b> obsahuje <b>Kôš</b> a polia a prvky rozloženia, ktoré do rozloženia možno pridať.<br><br>Vykonajte zmeny v rozložení pretiahnutím prvkov a polí medzi časťami <b>Nástroje</b> a <b>Rozloženie</b> a v rámci samotného rozloženia.<br><br>Ak chcete pole z rozloženia odstrániť, pretiahnite pole do priečinka <b>Kôš</b>. Pole potom bude k dispozícii v časti Nástroje na prípadné pridanie do rozloženia.'
+        'default'	=> 'Oblasť <b>Rozloženie</b> obsahuje polia, ktoré sa momentálne zobrazujú v časti <b>Zobrazenie na úpravy</b>.<br/><br/>Časť <b>Nástroje</b> obsahuje <b>Kôš</b> a polia a prvky rozloženia, ktoré do rozloženia možno pridať. <br><br>Vykonajte zmeny v rozložení pretiahnutím prvkov a polí medzi časťami <b>Nástroje</b> a <b>Rozloženie</b> a v rámci samotného rozloženia.<br><br>Ak chcete pole z rozloženia odstrániť, pretiahnite pole do priečinka <b>Kôš</b>. Pole potom bude k dispozícii v časti Nástroje na prípadné pridanie do rozloženia.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Označuje závislé pole, ktoré môže alebo nemusí byť viditeľné v závislosti od hodnoty vzorca.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Označuje vypočítavané pole, ktorého hodnota sa automaticky určí na základe vzorca.'
     ,
         //this defualt will be used for edit view
@@ -373,6 +373,8 @@ Ak sú zahrnuté Príležitosti, je treba v rozložení prevodu buď požadovať
 'LBL_LAYOUTS'=>'Rozloženia',
 'LBL_LISTVIEW'=>'Náhľad zoznamu',
 'LBL_RECORDVIEW'=>'Zobrazenie záznamu',
+'LBL_RECORDDASHLETVIEW'=>'Dashlet zobrazenia záznamu',
+'LBL_PREVIEWVIEW'=>'Preview View',
 'LBL_MODULE_TITLE' => 'Studio',
 'LBL_NEW_PACKAGE' => 'Nový balík',
 'LBL_NEW_PANEL'=>'Nový panel',
@@ -455,7 +457,8 @@ Ak sú zahrnuté Príležitosti, je treba v rozložení prevodu buď požadovať
 'LBL_VISIBILITY_EDITOR' => 'Editor viditeľnosti',
 'LBL_ROLLUP' => 'Kumulatívne',
 'LBL_RELATED_FIELD' => 'Súvisiace pole',
-'LBL_CONFIG_PORTAL_URL'=>'URL k vlastnému obrázku loga. Odporúčané rozmery loga sú 163 x 18 pixelov.',
+'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'URL k vlastnému obrázku značky loga. Odporúčané rozmery značky loga sú 22 x 22 pixelov. Nahraté obrázky, ktoré sú v niektorom smere väčšie, sa zmenšia na tieto maximálne rozmery.',
+'LBL_CONFIG_PORTAL_LOGO_URL'=> 'URL k vlastnému obrázku loga. Odporúčaná šírka loga je 200 pixelov. Nahraté obrázky, ktoré sú v niektorom smere väčšie, sa zmenšia na tieto maximálne rozmery. Toto logo sa použije na prihlasovacej obrazovke. Ak nie je nahratý žiadny obrázok, použije sa značka loga.',
 'LBL_PORTAL_ROLE_DESC' => 'Nemažte túto rolu. Rola Samoobslužný portál je systémom generovaná rola vytvorená počas aktivačného procesu v Sugar portáli. Použite ovládacie prvky prístupu v rámci tejto role a povoľte alebo blokujte moduly Chyby, Prípady a Báza znalostí v Sugar portáli. Neupravujte žiadne iné prístupové práva pre túto rolu – vyhnete sa tak neznámemu a nepredvídateľnému správaniu systému. V prípade neúmyselného vymazania tejto role ju obnovte zakázaním a následným povolením Sugar portálu.',
 
 //RELATIONSHIPS
@@ -596,15 +599,31 @@ Ak sú zahrnuté Príležitosti, je treba v rozložení prevodu buď požadovať
     'LBL_PORTAL_DISABLED_MODULES' => 'Nasledujúce moduly sú blokované:',
     'LBL_PORTAL_ENABLE_MODULES' => 'Ak ich chcete v portáli povoliť, povolte ich <a id="configure_tabs" target="_blank" href="./index.php?module=Administration&amp;action=ConfigureTabs">tu</a>.',
     'LBL_PORTAL_CONFIGURE' => 'Nastaviť portál',
+    'LBL_PORTAL_ENABLE_PORTAL' => 'Povoliť portál',
+    'LBL_PORTAL_ENABLE_SEARCH' => 'Povoliť vyhľadávanie pred otvorením prípadu',
     'LBL_PORTAL_THEME' => 'Téma portálu',
     'LBL_PORTAL_ENABLE' => 'Povoliť',
     'LBL_PORTAL_SITE_URL' => 'Stránka vášho portálu je k dispozícii na adrese:',
     'LBL_PORTAL_APP_NAME' => 'Názov aplikácie',
+    'LBL_PORTAL_LOGOMARK_URL' => 'URL značky loga',
+    'LBL_PORTAL_LOGOMARK_PREVIEW' => 'Náhľad značky loga',
     'LBL_PORTAL_LOGO_URL' => 'Adresa URL loga',
+    'LBL_PORTAL_LOGO_PREVIEW' => 'Náhľad loga',
+    'LBL_PORTAL_CONTACT_PHONE' => 'Telefón',
+    'LBL_PORTAL_CONTACT_EMAIL' => 'E-mail',
+    'LBL_PORTAL_CONTACT_EMAIL_INVALID' => 'Musíte zadať platnú e-mailovú adresu',
+    'LBL_PORTAL_CONTACT_URL' => 'URL',
+    'LBL_PORTAL_CONTACT_INFO_ERROR' => 'Musí byť určený aspoň jeden spôsob kontaktu',
     'LBL_PORTAL_LIST_NUMBER' => 'Počet záznamov na zobrazenie v zozname',
     'LBL_PORTAL_DETAIL_NUMBER' => 'Počet polí na zobrazenie v Zobrazení podrobností',
     'LBL_PORTAL_SEARCH_RESULT_NUMBER' => 'Počet výsledkov na zobrazenie v globálnom vyhľadávaní',
     'LBL_PORTAL_DEFAULT_ASSIGN_USER' => 'Priradené predvolené nastavenia pre nové registrácie na portáli',
+    'LBL_PORTAL_MODULES' => 'Moduly portálu',
+    'LBL_CONFIG_PORTAL_CONTACT_INFO' => 'Kontaktné informácie portálu',
+    'LBL_CONFIG_PORTAL_CONTACT_INFO_HELP' => 'Nakonfigurujte kontaktné informácie, ktoré sú prezentované používateľom portálu, ktorí požadujú ďalšiu pomoc so svojím účtom. Musí byť nakonfigurovaná aspoň jedna možnosť.',
+    'LBL_CONFIG_PORTAL_MODULES_HELP' => 'Potiahnite a pustite názvy modulov portálu, čím nastavíte ich zobrazenie alebo skrytie v hornej navigačnej lište portálu. Ak chcete riadiť prístup používateľov portálu k modulom, použite možnosť <a href="?module=ACLRoles&action=index">Správa rol.</a>',
+    'LBL_CONFIG_PORTAL_MODULES_DISPLAYED' => 'Zobrazené moduly',
+    'LBL_CONFIG_PORTAL_MODULES_HIDDEN' => 'Skryté moduly',
 
 'LBL_PORTAL'=>'Portál',
 'LBL_PORTAL_LAYOUTS'=>'Rozloženia portálu',
@@ -746,7 +765,7 @@ Ak sú zahrnuté Príležitosti, je treba v rozložení prevodu buď požadovať
         . ' Ak je pole zahrnuté vo vzorci na výpočet hodnôt pre všetky polia, vzorec prestane fungovať.'
         . '\n\nPole už bude k dispozícii na použitie v hláseniach, táto zmena sa prejaví po odhlásení a opätovnom prihlásení do aplikácie. Všetky hlásenia, ktoré obsahujú pole, bude treba aktualizovať, aby ich bolo možné spustiť.'
         . '\n\nChcete pokračovať?',
-'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Naozaj chcete vymazať tento vzťah?<br>Poznámka: Vykonávanie tejto operácie môže trvať niekoľko minút.',
+'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Naozaj chcete odstrániť tento vzťah?<br>Poznámka: Táto operácia môže trvať niekoľko minút.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Vzťah sa tak stane trvalým. Naozaj chcete použiť tento vzťah?',
 'LBL_CONFIRM_DONT_SAVE' => 'Od posledného uloženia boli vykonané zmeny. Chcete ich uložiť?',
 'LBL_CONFIRM_DONT_SAVE_TITLE' => 'Uložiť zmeny?',
@@ -764,16 +783,16 @@ Ak sú zahrnuté Príležitosti, je treba v rozložení prevodu buď požadovať
 . '<br><b>Vo filtri</b>: pole sa zobrazí vo funkcii Zlúčenie duplikátov a bude k dispozícii aj vo funkcii Vyhľadávanie duplikátov. <br><b>Iba filter</b>: pole sa nezobrazí vo funkcii Zlúčenie duplikátov, ale bude k dispozícii vo funkcii Vyhľadávanie duplikátov. <br><b>Predvolene vybratý filter</b>: pole sa predvolene použije pre podmienky filtrovania na stránke vyhľadávania duplikátov a zobrazí sa aj vo funkcii Zlúčenie duplikátov.'
 ,
 'LBL_POPHELP_CALCULATED'=>"Vytvorte vzorec na určenie hodnoty v tomto poli.<br>"
-   . "Definície pracovného postupu obsahujúce akciu, ktoré sú nastavené na aktualizáciu tohto poľa, už nebudú vykonávať danú akciu.<br>"
-   . "Polia používajúce vzorce sa nebudú vypočítavať v reálnom čase v "
+   . "Definície pracovného postupu obsahujúce akciu, ktoré sú nastavené na aktualizáciu tohto poľa, už viac nebudú vykonávať príslušnú akciu.<br>"
+   . "Polia používajúce vzorce nebudú počítané v reálnom čase v "
    . "samoobslužný portál Sugar alebo "
-   . "Rozloženia Zobrazenia na úpravy pre mobilné telefóny.",
+   . "Rozloženia zobrazenia na úpravy pre mobilné telefóny.",
 
 'LBL_POPHELP_DEPENDENT'=>"Vytvorte vzorec na určenie, či je toto pole viditeľné v rozloženiach.<br/>"
-        . "Závislé polia sa budú riadiť vzorcom závislosti v mobilnom zobrazení založenom na prehliadači, <br/>"
+        . "Závislé polia sa budú riadiť vzorcom závislosti v zobrazení v prehliadači v mobilných zariadeniach, <br/>"
         . "ale nebudú sa riadiť vzorcom v natívnych aplikáciách, napríklad Sugar Mobile pre iPhone. <br/>"
-        . "Nebudú sa riadiť vzorcom v samoobslužnom portáli Sugar.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Pri vyhľadávaní záznamov s použitím globálneho vyhľadávania na tomto module si vyberte použitie tohto poľa.',
+        . "Nebudú sa riadiť vzorcom na samoobslužnom portáli Sugar.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Použitie tohto poľa vyberte pri vyhľadávaní záznamov pomocou globálneho vyhľadávania na tomto module.',
 //Revert Module labels
 'LBL_RESET' => 'Obnoviť',
 'LBL_RESET_MODULE' => 'Obnoviť modul',

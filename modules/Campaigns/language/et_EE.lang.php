@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Eesmärkide loendit või vaiketüüpi ei leitud',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Kandeid ei leitud',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Kandeid töödeldi',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Otsija nimi:',
   'LBL_EDIT_TRACKER_URL'=>'Otsija URL:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'Teie sissetuleva meili konto puhul pole salvestatud ühtegi optimaalset sätet.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Vaadake sissetuleva meili sätteid.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => 'Selle kampaania kaudu loodud {0} müügivihjet on kustutatud loomisest alates.',
+    'LBL_PROSPECT_LIST' => 'Märklaudloend',
 );
 
 

@@ -20,7 +20,6 @@ class Calendar {
 	
 	public $view = 'week'; // current view
 	public $style; // calendar style (basic or advanced)
-	public $dashlet = false; // if is displayed in dashlet	
 	public $date_time; // current date
 	
 	public $show_tasks = true;

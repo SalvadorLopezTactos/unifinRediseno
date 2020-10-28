@@ -131,11 +131,14 @@ class SugarWidgetFieldMultiEnum extends SugarWidgetFieldEnum {
 
     /**
      * {@inheritDoc}
+     *
+     * shouldIfNull defaults to false for multienum fields.
      */
-    public function _get_column_select($layout_def)
+    // @codingStandardsIgnoreStart
+    public function _get_column_select($layout_def, bool $shouldIfNull = false)
     {
-        $column = parent::_get_column_select($layout_def);
+    // @codingStandardsIgnoreEnd
+        $column = parent::_get_column_select($layout_def, $shouldIfNull);
         return $this->reporter->db->convert($column, 'text2char');
     }
 }
-?>

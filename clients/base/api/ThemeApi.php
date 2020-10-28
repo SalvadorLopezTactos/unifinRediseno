@@ -11,6 +11,7 @@
  */
 
 
+use Sugarcrm\Sugarcrm\Security\ValueObjects\PlatformName;
 
 class ThemeApi extends SugarApi
 {
@@ -66,11 +67,7 @@ class ThemeApi extends SugarApi
      */
     public function getCSSURLs(ServiceBase $api, array $args)
     {
-        // Validating arguments
-        $platform = isset($args['platform']) ? $args['platform'] : 'base';
-        $themeName = isset($args['themeName']) ? $args['themeName'] : 'default';
-
-        $theme = new SidecarTheme($platform, $themeName);
+        $theme = $this->newSidecarTheme($args);
         // Otherwise we just return the CSS Url so the application can load the CSS file.
         // getCSSURL method takes care of generating CSS file(s) if it doesn't exist in cache.
         return array("url" => array_values($theme->getCSSURL()));
@@ -88,12 +85,8 @@ class ThemeApi extends SugarApi
     {
         // If `preview` is defined, it means that the call was made by the Theme Editor in Studio so we want to return
         // plain text/css
-        // Validating arguments
-        $platform = isset($args['platform']) ? $args['platform'] : 'base';
-        $themeName = isset($args['themeName']) ? $args['themeName'] : 'default';
-        $minify = isset($args['min']) ? true : false;
-
-        $theme = new SidecarTheme($platform, $themeName);
+        $theme = $this->newSidecarTheme($args);
+        $minify = isset($args['min']);
         $theme->loadVariables();
         $theme->setVariables($args);
         $theme->setVariable('baseUrl', '"../../styleguide/assets"');
@@ -116,12 +109,8 @@ class ThemeApi extends SugarApi
      */
     public function getCustomThemeVars(ServiceBase $api, array $args)
     {
-        // Validating arguments
-        $platform = isset($args['platform']) ? $args['platform'] : 'base';
-        $themeName = isset($args['themeName']) ? $args['themeName'] : null;
-
+        $theme = $this->newSidecarTheme($args);
         $output = array();
-        $theme = new SidecarTheme($platform, $themeName);
         $variablesByType = $theme->getThemeVariables();
         foreach ($variablesByType as $type => $variables) {
             foreach ($variables as $lessVar => $lessValue) {
@@ -151,12 +140,12 @@ class ThemeApi extends SugarApi
             throw new SugarApiExceptionMissingParameter('Missing colors');
         }
 
-        // Validating arguments
-        $platform = isset($args['platform']) ? $args['platform'] : 'base';
-        $themeName = isset($args['themeName']) ? $args['themeName'] : null;
-
-        $theme = new SidecarTheme($platform, $themeName);
-
+        if (isset($args['platform'])) {
+            $platformName = PlatformName::fromString($args['platform']);
+        } else {
+            $platformName = PlatformName::base();
+        }
+        $theme = $this->newSidecarTheme($args);
         // if reset=true is passed
         if (!empty($args['reset'])) {
             $theme->saveThemeVariables($args['reset']);
@@ -176,9 +165,23 @@ class ThemeApi extends SugarApi
         }
 
         $system_config = new Administration();
-        $system_config->saveSetting($platform, 'css', $urls);
+        $system_config->saveSetting($platformName->value(), 'css', $urls);
 
         return $urls;
+    }
+
+    /**
+     * @param array $args
+     * @return SidecarTheme
+     */
+    protected function newSidecarTheme(array $args): SidecarTheme
+    {
+        if (isset($args['platform'])) {
+            $platformName = PlatformName::fromString($args['platform']);
+        } else {
+            $platformName = PlatformName::base();
+        }
+        return new SidecarTheme($platformName);
     }
 
 }

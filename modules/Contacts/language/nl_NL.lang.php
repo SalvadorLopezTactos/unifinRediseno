@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Dashboard Contactenlijst',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Dashboard Contactenrecord',
-
+    'LBL_SITE_USER_ID' => 'Hekje van site_url en contact id',
+    'LBL_COOKIE_CONSENT' => 'Cookietoestemming',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Cookietoestemming ontvangen op',
     'LNK_CONTACT_REPORTS' => 'Bekijk Persoonsrapporten',
     'ERR_DELETE_RECORD' => 'U dient een recordnummer op te geven om dit contact te verwijderen',
     'LBL_ACCOUNT_ID' => 'Organisatie ID:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Portal gegevens',
     'LBL_PORTAL_NAME' => 'Portal naam:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Portal wachtwoord is gezet:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Bedrijfsnaam portaalgebruiker',
     'LBL_RECORD_SAVED_SUCCESS' => 'U heeft {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a> succesvol aangemaakt.',
     'LBL_STREET' => 'Straat',
     'LBL_POSTAL_CODE' => 'Postcode:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Opportunities',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documenten',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Offertes',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Afleveradres',
     'LBL_QUOTES_BILL_TO' => 'Factuuradres',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Geoffreerde producten',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Klik hier om uw profiel te beheren.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Hier kunt u uw voorkeurstaal instellen. Dit zal de taal wijzigen die in het Sugar Portal gebruikt wordt.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'U kunt altijd terugkeren naar uw Profiel middels het Gebruikersmenu.',
+    'ERR_PORTAL_NAME_EXISTS' => 'De portaalnaam {0} bestaat al. Dubbele portaalnamen zijn niet toegestaan. Wijzig de portaalnaam zodat deze uniek is.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Principal-Id',
@@ -279,4 +284,8 @@ Om een {{module_name}} aan te maken:
     'LBL_FILTER_CONTACTS_REPORTS' => 'Persoonsrapportages',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Toestemming zakelijke doeleinden voor',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Toestemming voor het laatst bijgewerkt',
+
+    'LBL_ENTRY_SOURCE' => 'Contactpersoon bron',
+    'LBL_SOURCE_EXTERNAL' => 'Extern',
+    'LBL_SOURCE_INTERNAL' => 'Intern',
 );

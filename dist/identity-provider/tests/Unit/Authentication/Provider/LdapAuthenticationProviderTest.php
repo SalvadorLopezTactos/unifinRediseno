@@ -91,6 +91,7 @@ class LdapAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
         $this->ldapCollection = $this->getMockBuilder(CollectionInterface::class)->getMock();
         $this->userChecker = $this->getMockBuilder(UserCheckerInterface::class)->getMock();
         $this->mapper = $this->createMock(LDAPUserMapping::class);
+        $this->mapper->method('map')->willReturn([]);
 
         parent::setUp();
     }
@@ -532,6 +533,7 @@ class LdapAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testRetrieveUserReturnsUserWithIdentityPairAndMappedAttributes()
     {
+        $mapper = $this->createMock(LDAPUserMapping::class);
         $username = 'testuser';
         $password = 'testpassword';
         $ldapEntry = new Entry('dn', []);
@@ -539,14 +541,14 @@ class LdapAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
             'field' => 'username',
             'value' => $username,
         ];
-        $mappedAttributes = ['attributes_given_name' => 'Baz'];
+        $mappedAttributes = ['attributes' => ['attributes_given_name' => 'Baz'] ];
         $provider = $this->getMockBuilder(LdapAuthenticationProvider::class)
             ->setConstructorArgs([
                 $this->userProvider,
                 $this->userChecker,
                 'key',
                 $this->ldap,
-                $this->mapper,
+                $mapper,
                 '{username}',
                 true,
                 array_merge($this->ldapConfig, ['searchDn' => 'admin', 'searchPassword' => 'admin']),
@@ -564,14 +566,14 @@ class LdapAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
             ->with($username)
             ->willReturn($user);
 
-        $this->mapper->method('mapIdentity')->willReturn($identityMap);
-        $this->mapper->method('map')->willReturn($mappedAttributes);
+        $mapper->method('mapIdentity')->willReturn($identityMap);
+        $mapper->method('map')->willReturn($mappedAttributes);
 
         $user->expects($this->exactly(3))
             ->method('setAttribute')->withConsecutive(
                 ['identityField', 'username'],
                 ['identityValue', $username],
-                ['attributes', $mappedAttributes]
+                ['attributes', $mappedAttributes['attributes']]
             );
 
         $provider->authenticate($token);

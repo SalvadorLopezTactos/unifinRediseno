@@ -11,3 +11,6 @@ $mod_strings['LBL_SEARCH_FORM_TITLE'] = 'Búsqueda de una Artículos de Línea d
 $mod_strings['LBL_COMMIT_STAGE_FORECAST'] = 'Forecast';
 $mod_strings['LBL_LEAD_SOURCE'] = 'Fuente del Lead';
 $mod_strings['LBL_LEADS_SUBPANEL_TITLE'] = 'Leads';
+$mod_strings['LBL_LIST_OPPORTUNITY_NAME'] = 'Nombre de Solicitud y Línea';
+$mod_strings['LBL_OPPORTUNITY_ID'] = 'ID de Solicitud y Línea';
+$mod_strings['LBL_OPPORTUNITY'] = 'Solicitud y Línea';

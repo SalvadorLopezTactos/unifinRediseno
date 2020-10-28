@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Dashboard caselijst',
     'LBL_CASES_RECORD_DASHBOARD' => 'Dashboard caserecord',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Details case',
 
 	'ERR_DELETE_RECORD'					=> 'U dient een record te selecteren om de organisatie te verwijderen.',
 	'LBL_ACCOUNT_ID'					=> 'Organisatie ID',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Personen',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Cases',
 	'LBL_DESCRIPTION'					=> 'Beschrijving:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Bijlage',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Bijlage',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Geschiedenis',
 	'LBL_INVITEE'						=> 'Personen',
 	'LBL_MEMBER_OF'						=> 'Organisatie',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Aangemaakt door',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Toegewezen aan',
     'LBL_EXPORT_TEAM_COUNT' => 'Team aantal',
+    'LBL_CHANGETIMERS' => 'Timers veranderen',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Gerelateerde e-mails van contactpersonen',
@@ -140,4 +143,11 @@ To create a {{module_name}}:
  - Fields marked "Required" must be completed prior to saving.
  - Click "Show More" to expose additional fields if necessary.
 2. Click "Save" to finalize the new record and return to the previous page.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Hebt u niet gevonden wat u zocht?',
+    'LBL_CREATE_CASE' => 'Maak een {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'SLA details',
+    'LBL_HOURS' => 'Uur',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

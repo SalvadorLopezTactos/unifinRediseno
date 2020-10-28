@@ -50,4 +50,6 @@ $mod_strings = array(
     'LBL_PARENT_ID' => 'ID elementu nadrzędnego',
     'LBL_READ' => 'Przeczytane',
     'LBL_UNREAD' => 'Nieprzeczytane',
+    'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'Wspomniano przez',
+    'LBL_YOU_HAVE_BEEN_MENTIONED' => 'Wspomniano',
 );

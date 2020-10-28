@@ -261,7 +261,15 @@ class PMSEBusinessRuleConversor
         if (isset($conclusions)) {
             foreach ($conclusions as $conclusion) {
                 if ($conclusion->conclusion_type == 'variable') {
-                    $valueToken = $this->processValueExpression($conclusion->value);
+                    try {
+                        $valueToken = $this->processValueExpression($conclusion->value);
+                    } catch (PMSEExpressionEvaluationException $e) {
+                        if ($e->getCode() === PMSEExpressionEvaluator::getExceptionCode('NO_BUSINESS_CENTER')) {
+                            continue;
+                        } else {
+                            throw $e;
+                        }
+                    }
                     $type = $this->evaluatedBean->field_defs[$conclusion->conclusion_value]['type'];
                     switch ($type) {
                         case 'currency':

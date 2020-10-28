@@ -12,6 +12,7 @@ use Sugarcrm\Sugarcrm\Security\Validator\Constraints\ComponentName;
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 require_once 'modules/ModuleBuilder/parsers/constants.php' ;
 
@@ -21,6 +22,10 @@ class ViewPopupview extends ViewListView
     {
         parent::__construct();
         $this->editModule = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
+        if (!AccessControlManager::instance()->allowModuleAccess($this->editModule)) {
+            throw new SugarApiExceptionModuleDisabled();
+        }
+
         $this->editLayout = $this->request->getValidInputRequest('view', 'Assert\ComponentName');
         $this->editPackage = $this->request->getValidInputRequest('view_package', 'Assert\ComponentName');
 

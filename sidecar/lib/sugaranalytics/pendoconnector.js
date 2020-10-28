@@ -16,6 +16,43 @@
         // disabling of IP address/geolocation tracking is handled by talking with Pendo directly
         // see https://help.pendo.io/resources/support-library/analytics/disable-ip-address-and-geo-location-logging.html
 
+        /**
+        * List of default values needed for Pendo analytics
+        */
+        serverInfoDefaults: {
+            'si_id': 'unknown_si_id',
+            'si_name': 'unknown_si_name',
+            'si_type': 'unknown_si_type',
+            'si_license_current': false,
+            'si_license_serve': false,
+            'si_license_sell': false,
+            'si_tier': 'unknown_si_tier',
+            'si_customer_since': 'unknown_si_customer_since',
+            'si_sic_code': 'unknown_si_sic_code',
+            'si_employees_no': 'unknown_si_employees_no',
+            'si_managing_team': 'unknown_si_managing_team',
+            'si_partner_name': 'unknown_si_partner_name',
+            'si_partner_type': 'unknown_si_partner_type',
+            'si_account_record': 'unknown_si_account_record',
+            'si_customer_region': 'unknown_si_customer_region',
+            'si_billing_country': 'unknown_si_billing_country',
+            'si_billing_state': 'unknown_si_billing_state',
+            'si_billing_city': 'unknown_si_billing_city',
+            'si_postal_code': 'unknown_si_postal_code',
+            'si_cloud_instance': 'unknown_si_cloud_instance',
+            'si_usage_designation': 'unknown_si_usage_designation',
+            'si_no_of_licenses': 'unknown_si_no_of_licenses',
+            'si_cloud_region': 'unknown_si_cloud_region',
+            'si_upgrade_frequency': 'unknown_si_upgrade_frequency',
+            'si_db_size': 'unknown_si_db_size',
+            'si_file_system_size': 'unknown_si_file_system_size',
+            'si_sum_size': 'unknown_si_sum_size',
+            'si_rli_enabled': 'unknown_rli_enabled',
+            'si_forecasts_is_setup': 'unknown_forcasts_is_setup',
+            'si_product_list': 'unknown_product_list',
+            'portal_active': 'unknown_portal_activated'
+        },
+
         /*
          * Called on app:init.
          *
@@ -25,7 +62,7 @@
             // do nothing. pendo agent will be loaded by start() when id (apiKey) is available
         },
 
-        /* 
+        /*
          * Called on app:start, prepare or open the connection to the analytics system.
          *
          * @param {string} id Tracking id for the analytics system.
@@ -51,6 +88,10 @@
          * @member SUGAR.App.analytics.connector.Pendo
          */
         configure: function() {
+            // check consent for portal user
+            if (app.config.platform === 'portal' && !app.user.get('cookie_consent')) {
+                return;
+            }
             // user data
             var visitorId = app.user.get('site_user_id') || 'unknown_user';
             var userType = app.user.get('type') || 'unknown_user_type';
@@ -58,32 +99,56 @@
             var roles = app.user.get('roles');
             roles = Array.isArray(roles) ? (roles.length >= 1 ? roles.join(',') : 'no_roles') : 'unknown_roles';
 
+            var licenses = app.user.get('licenses');
+            licenses = Array.isArray(licenses) && licenses.length > 0 ? licenses.join(',') : 'no_licenses';
+
             // account data
+            var activityStreamsEnabled = app.config.activityStreamsEnabled ? 'True' : 'False';
+            var editablePreviewEnabled = app.config.previewEdit ? 'True' : 'False';
+            var listMaxEntriesPerPage = app.config.maxQueryResult || 'unknown_list_view_items_per_page';
+            var listMaxEntriesPerSubpanel = app.config.maxSubpanelResult || 'unknown_list_view_items_per_page';
+            var leadConversionOptions = app.config.leadConvActivityOpt || 'unknown_lead_conversion_options';
+            var systemDefaultCurrencyCode = app.currency.getBaseCurrency().iso4217 ||
+                'unknown_system_default_currency_code';
+            var systemDefaultLanguage = app.lang.getLanguage() || 'unknown_system_default_language';
+
             var serverInfo = app.metadata.getServerInfo();
             var accountId = serverInfo.site_id || 'unknown_account';
             var siteUrl = _.isFunction(app.utils.getSiteUrl) ? app.utils.getSiteUrl() : 'unknown_domain';
             var version = serverInfo.version || 'unknown_version';
             var flavor = serverInfo.flavor || 'unknown_edition';
-
+            var accountBasicInfo = {
+                id: accountId,
+                domain: siteUrl,
+                edition: flavor,
+                version: version,
+                activity_streams_enabled: activityStreamsEnabled,
+                editable_preview_enabled: editablePreviewEnabled,
+                list_view_items_per_page: listMaxEntriesPerPage,
+                subpanel_items_per_page: listMaxEntriesPerSubpanel,
+                lead_conversion_options: leadConversionOptions,
+                system_default_currency_code: systemDefaultCurrencyCode,
+                system_default_language: systemDefaultLanguage
+            };
+            var accountServerInfo = _.each(this.serverInfoDefaults, function(value, name, serverInfoList) {
+                serverInfoList[name] = serverInfo[name] || value;
+                return serverInfoList;
+            });
             pendo.initialize({
                 visitor: {
                     id: visitorId,
                     user_type: userType,
                     language: language,
-                    roles: roles
+                    roles: roles,
+                    licenses: licenses
                 },
-                account: {
-                    id: accountId,
-                    domain: siteUrl,
-                    edition: flavor,
-                    version: version
-                }
+                account: _.extend(accountBasicInfo, accountServerInfo)
             });
         },
 
         /*
          * Track an activity.
-         * 
+         *
          * Pendo auto-tracks most events.
          * You don't have to do this every single time you want to track something.
          * See https://help.pendo.io/resources/support-library/api/index.html?bash#track-events
@@ -95,7 +160,7 @@
             pendo.track(trackType, trackData);
         },
 
-        /* 
+        /*
          * Track a change of page.
          *
          * @param {string} pageUri Uri of the page viewed.
@@ -126,7 +191,7 @@
 
         /*
          * Set tracker params.
-         * 
+         *
          * Currently do nothing.
          * @param {string} key The param name.
          * @param {*} value The configuration value to send to the tracker.

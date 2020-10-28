@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'Durum',
   'LBL_PRJ_MODULE' => 'Hedef Modül',
+  'LBL_PRJ_RUN_ORDER' => 'Düzeni Çalıştır',
   'LBL_PMSE_BUTTON_SAVE' => 'Kaydet',
   'LBL_PMSE_BUTTON_CANCEL' => 'İptal',
   'LBL_PMSE_BUTTON_YES' => 'Evet',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'İşlem Tanımı içe aktarıldı ancak İş Kuralı seçilmeyen bir veya daha fazla İş Kuralı eylemi içermektedir.',
     'LBL_BPM_IMPORT_SELECT' => 'Bu Süreç Tanımı, aşağıdaki İş Kurallarını ve E-posta Şablonlarını içerir. '
         . 'Lütfen içe aktarmak istediklerinizi seçin.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'İş Kuralları',
     'LBL_EMAIL_TEMPLATES' => 'E-Posta Şablonları',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'Amir',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Oluşturan Kullanıcı',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Son Değiştiren Kullanıcı',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Sistem E-postası',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'İş Kuralı',
     'LBL_PMSE_LABEL_RULE' => 'Kural',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Kullanıcı Ata',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Kayıtta "Şuna Atanmış"ı güncelle',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'İlişkili Kaydı Ekle',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'İlişkili Modül',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Aktivitenin ismi boş.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'İsim "%s" zaten şekil ailesinde var.',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'gün',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'saat',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'dakika',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'çalışma saatleri',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'İş Merkezi',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'Hedef Modülden',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'Kimden',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' Modül',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'Dize, Sayı ve Mantıksal Değer',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'Numara',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'Değer',

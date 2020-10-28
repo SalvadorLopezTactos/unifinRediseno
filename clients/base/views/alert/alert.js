@@ -314,11 +314,13 @@
     },
 
     /**
-     * Remove br tags after alerts which are needed to stack alerts vertically.
+     * Deprecated. Please use {@link #dispose} instead.
+     *
+     * @deprecated 9.2.0 and may be removed in 10.2.0 or any subsequent release.
      */
     close: function() {
-        this.unbindCancelAndReturn();
-        this.$el.next('br').remove();
+        app.logger.warn('View.Views.Base.AlertView#close has been deprecated since 9.2.0 and may be ' +
+            'removed in 10.2.0 or any subsequent release');
         this.dispose();
     },
 
@@ -355,11 +357,15 @@
     },
 
     /**
-     * Unbind keydown event
+     * Unbind keyboard shortcuts.
      */
     unbindCancelAndReturn: function() {
         if (this.level === 'confirmation') {
-            app.shortcuts.restoreSession();
+            // make sure we don't wipe out any other components' shortcut session
+            var currentShortcutSession = app.shortcuts.getCurrentSession();
+            if (currentShortcutSession.layout === this) {
+                app.shortcuts.restoreSession();
+            }
         }
     },
 
@@ -367,5 +373,20 @@
      * @override
      */
     bindDataChange: function() {
+    },
+
+    /**
+     * Unbind keyboard shortcuts before disposing.
+     * Also, remove br tags after alerts which are needed to stack alerts
+     * vertically.
+     *
+     * @inheritdoc
+     */
+    _dispose: function() {
+        this.unbindCancelAndReturn();
+        if (this.$el) {
+            this.$el.next('br').remove();
+        }
+        this._super('_dispose');
     }
 })

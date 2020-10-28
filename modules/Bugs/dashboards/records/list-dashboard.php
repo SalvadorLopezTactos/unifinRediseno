@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-return array(
+return [
     'metadata' => array(
         'components' => array(
             array(
@@ -34,4 +34,5 @@ return array(
         ),
     ),
     'name' => 'LBL_BUGS_LIST_DASHBOARD',
-);
+    'id' => '5d673e80-7b52-11e9-833f-f218983a1c3e',
+];

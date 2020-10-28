@@ -128,6 +128,24 @@
     },
 
     /**
+     * Gets component from metadata.
+     *
+     * @param {Object} metadata for all dashboard components
+     * @return {Object} dashboard component
+     */
+    getComponentsFromMetadata: function(metadata) {
+        var component;
+        // this is a tabbed dashboard
+        if (metadata.tabs) {
+            var tabIndex = this.context.get('activeTab') || 0;
+            component = metadata.tabs[tabIndex].components;
+        } else {
+            component = metadata.components;
+        }
+        return component;
+    },
+
+    /**
      * Adds a row to the dashboard
      *
      * @param {Number} columns the number of columns in this row
@@ -142,7 +160,7 @@
         });
         var metadata = this.model.get('metadata'),
             position = this.index.split(''),
-            component = metadata.components;
+            component = this.getComponentsFromMetadata(metadata);
         _.each(position, function(index){
             component = component.rows ? component.rows[index] : component[index];
         }, this);
@@ -200,7 +218,7 @@
     removeRow: function(index) {
         var metadata = this.model.get("metadata"),
             position = this.index.split(''),
-            component = metadata.components;
+            component = this.getComponentsFromMetadata(metadata);
         _.each(position, function(index){
             component = component.rows ? component.rows[index] : component[index];
         }, this);

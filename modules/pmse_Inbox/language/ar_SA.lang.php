@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => 'تم تطبيق تخصيص المستخدم',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'معاينة تصميم العملية',
+    'LBL_PROJECT_RUN_ORDER' => 'ترتيب التشغبل',
 );
 

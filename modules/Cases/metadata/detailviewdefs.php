@@ -38,6 +38,10 @@ $viewdefs['Cases']['DetailView'] = array(
           'account_name',
 	  ),
 
+        array (
+            'business_center_name',
+        ),
+
 	  array (
 
 	    array (
@@ -52,6 +56,7 @@ $viewdefs['Cases']['DetailView'] = array(
 
 	  array (
 	    'resolution',
+        'resolved_datetime',
 	  ),
 
 	  array (

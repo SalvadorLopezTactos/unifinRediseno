@@ -203,4 +203,29 @@ class EmailParticipant extends SugarBean
     {
         return $this->getRecordName();
     }
+
+    /**
+     * Is the participant an employee?
+     *
+     * This is used when determining the direction of an email.
+     *
+     * @see Email::getDirection()
+     * @uses SugarEmailAddress::getEmployeesWithEmailAddress()
+     * @return bool
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function isAnEmployee()
+    {
+        if (!empty($this->parent_type) && !in_array($this->parent_type, ['Employees', 'Users'])) {
+            return false;
+        }
+
+        if (!is_string($this->email_address_id)) {
+            return false;
+        }
+
+        $employees = SugarEmailAddress::getEmployeesWithEmailAddress($this->email_address_id);
+
+        return count($employees) > 0;
+    }
 }

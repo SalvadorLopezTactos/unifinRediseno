@@ -50,6 +50,11 @@
     },
 
     /**
+     * Do not let a decorator field manage this field's design
+     */
+    disableDecoration: true,
+
+    /**
      * @inheritdoc
      *
      * Default the `repeat_end_type` to "Until" and update the visibility of the

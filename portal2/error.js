@@ -37,7 +37,7 @@
      */
     app.error.handleNeedLoginError = function(error) {
         backToLogin(true);
-        alertUser("needs_login_error" , "LBL_PORTAL_INVALID_CREDS_TITLE", "LBL_PORTAL_INVALID_CREDS");
+        alertUser('needs_login_error' , 'LBL_PORTAL_INVALID_CREDS_TITLE', 'LBL_PORTAL_LOGIN_UNSUCCESSFUL');
     };
 
     /**

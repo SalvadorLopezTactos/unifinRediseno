@@ -17,6 +17,7 @@ use Silex\Api\ControllerProviderInterface;
 use Silex\ControllerCollection;
 use Sugarcrm\IdentityProvider\App\Controller\AuthenticationController;
 use Sugarcrm\IdentityProvider\App\Controller\ChangePasswordController;
+use Sugarcrm\IdentityProvider\App\Controller\AdminConsentController;
 use Sugarcrm\IdentityProvider\App\Controller\ConsentController;
 use Sugarcrm\IdentityProvider\App\Controller\MainController;
 use Sugarcrm\IdentityProvider\App\Controller\SAMLController;
@@ -42,6 +43,7 @@ class ControllerProvider implements ControllerProviderInterface
         $mainController = new MainController();
         $samlController = new SAMLController();
         $consentController = new ConsentController($app);
+        $adminConsentController = new AdminConsentController($app);
         $setPasswordController = new SetPasswordController();
         $changePasswordController = new ChangePasswordController();
         $authenticationController = new AuthenticationController();
@@ -56,6 +58,8 @@ class ControllerProvider implements ControllerProviderInterface
                 'forgotPasswordRender',
                 'forgotPasswordProcess',
                 'logout',
+                'samlAcs',
+                'samlLogout',
             ];
             //TODO This constraint should be more complex solution Or need to be removed.
             if (!in_array($request->attributes->get('_route'), $exceptionRoutes)) {
@@ -74,7 +78,7 @@ class ControllerProvider implements ControllerProviderInterface
         $clearLogoutFunction = function (Request $request, Response $response, Application $app) {
             $token = $app->getRememberMeService()->retrieve();
             if ($token && $token->isAuthenticated()) {
-                $app->getLogoutService()->clearLogoutCookies($request, $response);
+                $app->getCookieService()->clearLogoutCookies($response);
             }
         };
 
@@ -84,7 +88,8 @@ class ControllerProvider implements ControllerProviderInterface
 
         $controllers
             ->get('/', [$mainController, 'renderFormAction'])
-            ->bind('loginRender');
+            ->bind('loginRender')
+            ->before($app['RegionChecker']);
         $controllers
             ->post('/', [$mainController, 'postFormAction'])
             ->bind('loginProcess')
@@ -92,7 +97,8 @@ class ControllerProvider implements ControllerProviderInterface
 
         $controllers
             ->get('/password/forgot', [$forgotPasswordController, 'renderForgotPasswordForm'])
-            ->bind('forgotPasswordRender');
+            ->bind('forgotPasswordRender')
+            ->before($app['RegionChecker']);
         $controllers
             ->get('/password/success-sent', [$forgotPasswordController, 'successSent'])
             ->bind('forgotPasswordSuccessSent');
@@ -103,7 +109,8 @@ class ControllerProvider implements ControllerProviderInterface
 
         $controllers
             ->match('/logout', [$mainController, 'logoutAction'])
-            ->bind('logout');
+            ->bind('logout')
+            ->before($app['RegionChecker']);
 
         $controllers
             ->post('/authenticate', [$authenticationController, 'authenticate'])
@@ -166,6 +173,36 @@ class ControllerProvider implements ControllerProviderInterface
             ->post('/password/change', [$changePasswordController, 'changePasswordAction'])
             ->bind('changePassword')
             ->before([$changePasswordController, 'preCheck']);
+
+        $controllers
+            ->get('/consent/admin/consent', [$adminConsentController, 'adminConsentAction'])
+            ->bind('adminConsent')
+            ->before([$adminConsentController, 'preCheck']);
+
+        $controllers
+            ->get('/consent/admin/consent/finish', [$adminConsentController, 'adminConsentFinishAction'])
+            ->bind('adminConsentFinish')
+            ->before([$adminConsentController, 'preCheck']);
+
+        $controllers
+            ->get('/consent/admin/consent/cancel', [$adminConsentController, 'adminConsentCancelAction'])
+            ->bind('adminConsentCancel')
+            ->before([$adminConsentController, 'preCheck']);
+
+        $controllers
+            ->get('/consent/admin/consent/remove', [$adminConsentController, 'adminConsentRemoveAction'])
+            ->bind('adminConsentRemove')
+            ->before([$adminConsentController, 'preCheck']);
+
+        $controllers
+            ->get('/consent/admin/consent/remove/finish', [$adminConsentController, 'adminConsentRemoveFinishAction'])
+            ->bind('adminConsentRemoveFinish')
+            ->before([$adminConsentController, 'preCheck']);
+
+        $controllers
+            ->get('/consent/admin/consent/remove/cancel', [$adminConsentController, 'adminConsentRemoveCancelAction'])
+            ->bind('adminConsentRemoveCancel')
+            ->before([$adminConsentController, 'preCheck']);
 
         return $controllers;
     }

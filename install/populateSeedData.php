@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +9,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
 
 // load the correct demo data and main application language file depending upon the installer language selected; if
 // it's not found fall back on en_us
@@ -445,13 +443,13 @@ for($i=0; $i<$number_contacts; $i++) {
 	$contact->primary_address_postalcode = mt_rand(10000,99999);
 	$contact->primary_address_country = 'USA';
 
+    // Set the account ID field prior to save so that Portal Active is not disabled
+    $contact->account_id = $account_id;
+
 	$contact->save();
     addTagsToBean($contact);
 
     $contacts[] = $contact->id;
-
-    // Create a linking table entry to assign an account to the contact.
-	$contact->set_relationship('accounts_contacts', array('contact_id'=>$contact->id ,'account_id'=> $account_id, 'primary_account' => 1), false);
 
 	//Create new tasks
 	$task = new Task();
@@ -526,7 +524,6 @@ for($i=0; $i<$number_contacts; $i++) {
 	$email->description = $sugar_demodata['email_seed_data_descriptions'];
     $email->description_html = $sugar_demodata['email_seed_data_description_html'];
 	$email->status = 'sent';
-    $email->state = $i % 2 === 0 ? 'Draft' : 'Archived';
 	$email->parent_id = $account_id;
 	$email->parent_type = 'Accounts';
     if (key($sugar_demodata['email_seed_data_types']) === null) {
@@ -540,25 +537,65 @@ for($i=0; $i<$number_contacts; $i++) {
 	$email->load_relationship('accounts');
 	$email->accounts->add($contacts_account);
 
-    if ($email->state === 'Archived') {
-        $from = BeanFactory::newBean('EmailParticipants');
-        $from->new_with_id = true;
-        $from->id = \Sugarcrm\Sugarcrm\Util\Uuid::uuid1();
-        BeanFactory::registerBean($from);
-        $from->parent_type = 'Users';
-        $from->parent_id = $contacts_account->assigned_user_id;
-        $email->load_relationship('from');
-        $email->from->add($from);
-    }
+    $from = BeanFactory::newBean('EmailParticipants');
+    $from->new_with_id = true;
+    $from->id = \Sugarcrm\Sugarcrm\Util\Uuid::uuid1();
+    BeanFactory::registerBean($from);
+    $email->load_relationship('from');
 
     $to = BeanFactory::newBean('EmailParticipants');
     $to->new_with_id = true;
     $to->id = \Sugarcrm\Sugarcrm\Util\Uuid::uuid1();
     BeanFactory::registerBean($to);
-    $to->parent_type = $contact->getModuleName();
-    $to->parent_id = $contact->id;
     $email->load_relationship('to');
-    $email->to->add($to);
+
+    $mod = $i % 4;
+    switch ($mod) {
+        case 1:  // State: Archived - Direction: Outbound
+            $email->state = Email::STATE_ARCHIVED;
+            $userIndex = mt_rand(0, count($sugar_demodata['users']) - 1);
+            $userId = $sugar_demodata['users'][$userIndex]['id'];
+            $from->parent_type = 'Users';
+            $from->parent_id = $userId;
+            $email->from->add($from);
+
+            $to->parent_type = 'Contacts';
+            $to->parent_id = $contact->id;
+            $email->to->add($to);
+            break;
+        case 2:  // State: Archived - Direction: Inbound
+            $email->state = Email::STATE_ARCHIVED;
+            $from->parent_type = 'Contacts';
+            $from->parent_id = $contact->id;
+            $email->from->add($from);
+
+            $userIndex = mt_rand(0, count($sugar_demodata['users']) - 1);
+            $userId = $sugar_demodata['users'][$userIndex]['id'];
+            $to->parent_type = 'Users';
+            $to->parent_id = $userId;
+            $email->to->add($to);
+            break;
+        case 3:  // State: Archived - Direction: Internal
+            $email->state = Email::STATE_ARCHIVED;
+            $fromIndex = mt_rand(0, count($sugar_demodata['users']) - 1);
+            $fromId = $sugar_demodata['users'][$fromIndex]['id'];
+            $from->parent_type = 'Users';
+            $from->parent_id = $fromId;
+            $email->from->add($from);
+
+            $toIndex = mt_rand(0, count($sugar_demodata['users']) - 1);
+            $toId = $sugar_demodata['users'][$toIndex]['id'];
+            $to->parent_type = 'Users';
+            $to->parent_id = $toId;
+            $email->to->add($to);
+            break;
+        default:  // State: Draft - Direction: Unknown
+            $email->state = Email::STATE_DRAFT;
+            $to->parent_type = 'Contacts';
+            $to->parent_id = $contact->id;
+            $email->to->add($to);
+            break;
+    }
 
     // Add $email to the resave queue to force it to be saved now that all of the relationships have been saved. The
     // email won't be added to the queue twice. This guarantees that the email will only be saved once.
@@ -778,6 +815,12 @@ foreach($sugar_demodata['producttemplate_seed_data'] as $v){
 	$template->weight = $v['weight'];
 	$template->date_available = $v['date_available'];
 	$template->qty_in_stock = $v['qty_in_stock'];
+    if ($v['service']) {
+        $template->service = $v['service'];
+        $template->service_duration_unit = $v['service_duration_unit'];
+        $template->service_duration_value = $v['service_duration_value'];
+        $template->renewable = $v['renewable'];
+    }
 	$template->save();
 }
 installLog("DemoData: Done Products Metadata");
@@ -945,6 +988,9 @@ $GLOBALS['mod_strings']  = $installerStrings;
         $contact->set_relationship('opportunities_contacts', array('contact_id'=>$contact->id ,'opportunity_id'=> $opportunity_ids[$opportunity_key], 'contact_role'=>$app_list_strings['opportunity_relationship_type_default_key']), false);
     }
 
+    $renewalOppIds[] = OpportunitiesSeedData::populateServiceData($app_list_strings, $accounts);
+    array_push($opportunity_ids, $renewalOppIds);
+
     installLog("DemoData: Done Opportunities");
 
     echo '.';
@@ -953,6 +999,20 @@ $GLOBALS['mod_strings']  = $installerStrings;
     ForecastsSeedData::populateSeedData($timeperiods);
 
     installLog("DemoData: Done Forecasts");
+
+    echo '.';
+
+    installLog("DemoData: VisualPipeline");
+    VisualPipelineSeedData::populateSeedData();
+
+    installLog("DemoData: Done VisualPipeline");
+
+    echo '.';
+
+    installLog("DemoData: ConsoleConfiguration");
+    ConsoleConfigurationSeedData::populateSeedData();
+
+    installLog("DemoData: Done ConsoleConfiguration");
 
     echo '.';
 

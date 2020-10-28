@@ -322,4 +322,7 @@ Após confirmar cada módulo obrigatório e desejado, clique no botão Salvar e 
     'LBL_FILTER_LEADS_REPORTS' => 'Relatórios dos Potenciais',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Objetivos Comerciais autorizados para',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Autorização atualizada pela última vez',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Não é possível alterar o status de {{moduleSingular}}. Este {{moduleSingular}} já foi convertido.',
 );

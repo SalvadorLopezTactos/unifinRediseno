@@ -1,35 +1,104 @@
+﻿QUnit.module( "data" );
 
-module("data");
+QUnit.test( "jQuery.data() camelCased names", function( assert ) {
 
-test( "basic .data() sanity check", function() {
-	expect( 4 );
+	var sames = [
+			"datum",
+			"ropeAdope",
+			"Олег\u0007Michał",
+			"already-Big",
+			"number-2",
+			"unidash-"
+		],
+		diffs = [
+			"dat-data",
+			"hangy-dasher-",
+			"-dashy-hanger"
+		];
 
-	var $foo = jQuery("#foo");
+	assert.expect( 16 );
 
-	equal( $foo.data("x"), undefined, "no data initially" );
-	$foo.data( "x", 42 );
-	equal( $foo.data("x"), 42, "set a numeric value" );
-	$foo.data( "x", function(){ alert("whoops"); });
-	equal( typeof $foo.data("x"), "function", "set a function value" );
-	$foo.removeData("x");
-	equal( $foo.data("x"), undefined, "data was removed" );
-});
+	var curData,
+		div = document.createElement( "div" );
 
-test( "jQuery.fn.data('events')", function() {
-	expect( 6 );
+	// = .hasData + noWarning
+	expectNoWarning( assert, "No existing data object", function() {
+		sames.concat( diffs ).forEach( function( name ) {
+			jQuery.data( div, name );
+		} );
+		assert.equal( jQuery.hasData( div ), false, "data probes did not fill a data object" );
+	} );
 
-	var $foo = jQuery("#foo");
+	// = sames.length + diffs.length + noWarning
+	expectNoWarning( assert, "Data set/get without warning via API", function() {
+		sames.concat( diffs ).forEach( function( name, index ) {
+			jQuery.data( div, name, index );
+			assert.equal( jQuery.data( div, name ), index, name + "=" + index );
+		} );
+	} );
 
-	expectNoWarning( "$.data('events')", function() {
-		equal( $foo.data("events"), undefined, "no events initially" );
-		$foo.data("events", 42);
-		equal( $foo.data("events"), 42, "got our own defined data" );
-		$foo.removeData("events");
-		equal( $foo.data("events"), undefined, "no events again" );
-	});
-	expectWarning( "$.data('events')", function() {
-		$foo.bind( "click", jQuery.noop );
-		equal( typeof $foo.data("events"), "object", "got undocumented events object" );
-		$foo.unbind( "click", jQuery.noop );
-	});
-});
+	// Camelized values set for all names above, get the data object
+	curData = jQuery.data( div );
+
+	// = diffs.length + warning
+	expectWarning( assert, "Dashed name conflicts", diffs.length, function() {
+		diffs.forEach( function( name, index ) {
+			curData[ name ] = index;
+			assert.equal( jQuery.data( div, name ), curData[ name ],
+				name + " respects data object" );
+		} );
+	} );
+
+} );
+
+QUnit.test( "jQuery.data() camelCased names (mass setter)", function( assert ) {
+	var sames = [
+			"datum",
+			"ropeAdope",
+			"Олег\u0007Michał",
+			"already-Big",
+			"number-2",
+			"unidash-"
+		],
+		diffs = [
+			"dat-data",
+			"hangy-dasher-",
+			"-dashy-hanger"
+		];
+
+	assert.expect( 11 );
+
+	var div = document.createElement( "div" );
+
+	// = sames.length + noWarning
+	expectNoWarning( assert, "Data set as an object and get without warning via API", function() {
+		var testData = {};
+
+		sames.forEach( function( name, index ) {
+			testData[ name ] = index;
+		} );
+
+		jQuery.data( div, testData );
+
+		sames.forEach( function( name, index ) {
+			assert.equal( jQuery.data( div, name ), index, name + "=" + index );
+		} );
+	} );
+
+	// = diffs.length + warning
+	expectWarning( assert, "Data set as an object and get without warning via API", function() {
+		var testData = {};
+
+		diffs.forEach( function( name, index ) {
+			testData[ name ] = index;
+		} );
+
+		jQuery.data( div, testData );
+
+		diffs.forEach( function( name, index ) {
+			assert.equal( jQuery.data( div, name ), index, name + "=" + index );
+		} );
+	} );
+
+} );
+

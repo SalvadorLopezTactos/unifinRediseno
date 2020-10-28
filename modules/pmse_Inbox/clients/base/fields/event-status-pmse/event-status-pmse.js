@@ -48,7 +48,6 @@
     styleLabel: function () {
         var $label;
         $label = this.$el.children(0);
-        $label.removeClass('ellipsis_inline');
         switch (this.value) {
             case 'IN PROGRESS':
                 $label.addClass('label label-process-in-progress');

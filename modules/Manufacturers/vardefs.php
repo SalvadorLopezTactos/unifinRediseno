@@ -45,10 +45,7 @@ $dictionary['Manufacturer'] = array(
         ),
     ),
     'acls' => array(
-        'SugarACLDeveloperOrAdmin' => array(
-            'aclModule' => 'Products',
-            'allowUserRead' => true,
-        ),
+        'SugarACLProduct' => true,
         'SugarACLStatic' => false,
     ),
     'uses' => array(

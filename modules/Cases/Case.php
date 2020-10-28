@@ -10,12 +10,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-// aCase is used to store case information.
-class aCase extends Basic
+/**
+ * Class aCase
+ * aCase is used to store case information.
+ */
+class aCase extends Issue
 {
     // Stored fields
     var $id;
-    var $date_entered;
     var $date_modified;
     var $modified_user_id;
     var $assigned_user_id;
@@ -24,7 +26,6 @@ class aCase extends Basic
     var $resolution;
     var $description;
     var $name;
-    var $status;
     var $priority;
 
     public $follow_up_datetime;
@@ -37,6 +38,8 @@ class aCase extends Basic
     var $bug_id;
     var $account_name;
     var $account_id;
+    public $business_center_name;
+    public $business_center_id;
     var $contact_id;
     var $task_id;
     var $note_id;
@@ -78,6 +81,7 @@ class aCase extends Basic
         'meeting_id'=>'meetings',
         'call_id'=>'calls',
         'email_id'=>'emails',
+        'business_center_id'=>'business_centers',
     );
 
 
@@ -98,12 +102,103 @@ class aCase extends Basic
     var $new_schema = true;
 
 
-
-
-
-    function get_summary_text()
+    /**
+     * To handle SLA fields
+     */
+    public function handleSLAFields()
     {
-        return "$this->name";
+        $now = TimeDate::getInstance()->nowDb();
+
+        // first response target time
+        if (!empty($this->follow_up_datetime)) {
+            $this->first_response_target_datetime = $this->follow_up_datetime;
+        }
+
+        // first response actual time
+        $this->first_response_actual_datetime = $now;
+
+        // hours to first response
+        $hours = $this->getHoursBetween(
+            new \SugarDateTime($this->date_entered, new DateTimeZone('UTC')),
+            new \SugarDateTime($now, new DateTimeZone('UTC')),
+            $this->business_center_id ? $this->business_center_id : ''
+        );
+        $this->hours_to_first_response = $hours['calendarHours'];
+        $this->business_hrs_to_first_response = $hours['businessHours'];
+
+        if (!empty($this->first_response_target_datetime)) {
+            // first response variance from target
+            $this->first_response_var_from_target = $this->getFirstResponseVariance(
+                $this->first_response_actual_datetime,
+                $this->first_response_target_datetime
+            );
+
+            // first response SLA met
+            $this->first_response_sla_met = $this->first_response_var_from_target <= 0 ? 'Yes' : 'No';
+        }
+
+        // first response user
+        $this->first_response_user_id = $this->assigned_user_id;
+    }
+
+    /**
+     * @param string $actual
+     * @param string $target
+     * @return float|int
+     * @throws Exception
+     */
+    protected function getFirstResponseVariance(string $actual, string $target)
+    {
+        $actualDateTime = new \SugarDateTime($actual, new DateTimeZone('UTC'));
+        $targetDateTime = new \SugarDateTime($target, new DateTimeZone('UTC'));
+        $businessCenterId = $this->business_center_id ?? '';
+        if ($actualDateTime >= $targetDateTime) {
+            $hours = $this->getHoursBetween($targetDateTime, $actualDateTime, $businessCenterId);
+        } else {
+            $hours = $this->getHoursBetween($actualDateTime, $targetDateTime, $businessCenterId);
+            $hours['businessHours'] = $hours['businessHours'] * -1.0;
+        }
+        return $hours['businessHours'];
+    }
+
+    /**
+     * Set resolved_datetime to current time when a case is resolved
+     * Set business_center_id to the same as related account when not provided
+     *
+     * @see parent::save()
+     */
+    public function save($check_notify = false)
+    {
+        if ($this->isResolvedStatus($this->status)) {
+            if (empty($this->resolved_datetime)) {
+                $this->resolved_datetime = TimeDate::getInstance()->nowDb();
+            }
+        } elseif (!empty(\SugarConfig::getInstance()->get('clear_resolved_date')) &&
+            $this->isResolvedStatus($this->fetched_row['status'])) {
+            $this->resolved_datetime = '';
+        }
+        if (empty($this->business_center_id)) {
+            $related_account = BeanFactory::retrieveBean('Accounts', $this->account_id);
+            if (!empty($related_account) && !empty($related_account->business_center_id)) {
+                $this->business_center_id = $related_account->business_center_id;
+            }
+        }
+
+        // When new_rel_relname & new_rel_id are added by RelateRecordApi, parent id is set to new_rel_id by default.
+        // Once the new_rel_relname is case_contact and primary_contact_name is set (because we allow users to modify),
+        // we want to make sure the primary contact id is set for new_rel_id.
+        if (!empty($this->new_rel_id) &&
+            !empty($this->new_rel_relname) &&
+            $this->new_rel_relname === 'case_contact' &&
+            $this->new_rel_id !== $this->primary_contact_id) {
+            $this->new_rel_id = $this->primary_contact_id;
+        }
+
+        // if first_response_sent changing from false to true
+        if (empty($this->fetched_row['first_response_sent']) && !empty($this->first_response_sent)) {
+            $this->handleSLAFields();
+        }
+        return parent::save($check_notify);
     }
 
     function listviewACLHelper()

@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
 if (!function_exists('verifyAndCleanup')) {
     /**
      * Verifies the given user's data, sends the result as JSON, and then exits
@@ -189,6 +191,11 @@ if (!$focus->is_group && !$focus->portal_only) {
         $focus->setAdmin(false);
     }
 
+    // set License types
+    if (!empty($_POST['LicenseTypes'])) {
+        $focus->license_type = InputValidation::getService()->getValidInputPost('LicenseTypes', 'Assert\ArrayRecursive');
+    }
+
     if (empty($_POST['receive_notifications'])) {
         $focus->receive_notifications = 0;
     }
@@ -362,6 +369,10 @@ if (!$focus->is_group && !$focus->portal_only) {
     } elseif (!isset($_POST['use_real_names']) && !isset($_POST['from_dcmenu'])) {
         // Make sure we're on the full form and not the QuickCreate.
         $focus->setPreference('use_real_names', 'off', 0, 'global');
+    }
+    $field_name_placement = InputValidation::getService()->getValidInputPost('field_name_placement');
+    if (isset($field_name_placement)) {
+        $focus->setPreference('field_name_placement', $field_name_placement, 0, 'global');
     }
 
     if (isset($_POST['mail_smtpauth_req'])) {

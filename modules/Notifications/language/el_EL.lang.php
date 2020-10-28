@@ -50,4 +50,6 @@ $mod_strings = array(
     'LBL_PARENT_ID' => 'Γονική Ταυτότητα',
     'LBL_READ' => 'Αναγνωσμένο',
     'LBL_UNREAD' => 'Μη Αναγνωσμένο',
+    'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'Έχετε αναφερθεί από',
+    'LBL_YOU_HAVE_BEEN_MENTIONED' => 'Έχετε αναφερθεί',
 );

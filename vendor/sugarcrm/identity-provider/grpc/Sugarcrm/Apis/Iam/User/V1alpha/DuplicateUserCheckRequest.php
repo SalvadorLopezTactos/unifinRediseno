@@ -32,23 +32,9 @@ class DuplicateUserCheckRequest extends \Google\Protobuf\Internal\Message
      */
     private $identity_values;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $tenant
-     *           Tenant SRN
-     *     @type string $provider
-     *           Auth provider key
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $identity_values
-     *           List of identity values to check
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\User\V1Alpha\User::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

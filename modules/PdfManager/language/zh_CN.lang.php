@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => '预览',
   'LBL_ALERT_SWITCH_BASE_MODULE' => '警告：如果您更改主要模块，所有已添加到模版的字段将被移除。',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => '这是您请求的文件（您可以更改其文本）',
-  
 
   'LBL_TPL_QUOTE_NAME' => '报价',
   'LBL_TPL_QUOTE_DESCRIPTION' => '这个模版用于打印 PDF 格式的报价。',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => '报价',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => '报价（含服务）',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => '此模板用于以 PDF 格式打印报价（含服务信息）。',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => '服务报价',
+
   'LBL_TPL_INVOICE_NAME' => '发票',
   'LBL_TPL_INVOICE_DESCRIPTION' => '这个模版用于打印 PDF 格式的发票。',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => '发票',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => '发票（含服务）',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => '此模板用于以 PDF 格式打印发票（含服务信息）。',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => '服务发票',
+
   'LBL_TPL_QUOTE_NUMBER' => '报价编号：',
   'LBL_TPL_SALES_PERSON' => '销售人员：',
   'LBL_TPL_VALID_UNTIL' => '有效期至：',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => '部件编号',
   'LBL_TPL_PRODUCT' => '已报价单项',
   'LBL_TPL_RLI' => '营收单项',
+  'LBL_TPL_DURATION' => '持续时间',
+  'LBL_TPL_DURATION_STARTS' => '开始：',
+  'LBL_TPL_DURATION_ENDS' => '结束：',
   'LBL_TPL_LIST_PRICE' => '标价',
   'LBL_TPL_UNIT_PRICE' => '单价',
   'LBL_TPL_EXT_PRICE' => '额外费用',

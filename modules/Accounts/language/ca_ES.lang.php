@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Pressupostos (enviats a)',
 	'LNK_ACCOUNT_REPORTS' => 'Informes de comptes',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documents',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Quadre de comandament de llista de comptes',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Quadre de comandament de registre de comptes',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Detalls del compte',
+    'LBL_NEXT_RENEWAL_DATE' => 'Data de la propera renovació',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Nom de compte/Indústria',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'Ubicació',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Gràfics',

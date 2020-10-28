@@ -19,6 +19,8 @@ use Sugarcrm\IdentityProvider\App\Application;
 use Sugarcrm\IdentityProvider\App\Controller\SetPasswordController;
 use Sugarcrm\IdentityProvider\App\Repository\OneTimeTokenRepository;
 use Sugarcrm\IdentityProvider\Authentication\OneTimeToken;
+use Sugarcrm\IdentityProvider\App\Authentication\OAuth2Service;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -103,6 +105,30 @@ class SetPasswordControllerTest extends \PHPUnit_Framework_TestCase
     protected $db;
 
     /**
+     * @var OAuth2Service | \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $oauthService;
+
+    /**
+     * @var array
+     */
+    private $config = [
+        'local' => [
+            'password_requirements' => [
+                'minimum_length' => 3,
+                'maximum_length' => 6,
+                'require_upper' => true,
+                'require_lower' => true,
+                'require_number' => true,
+                'require_special' => true,
+            ],
+        ],
+        'idm' => [
+            'region' => 'eu'
+        ],
+    ];
+
+    /**
      * @inheritdoc
      */
     protected function setUp()
@@ -129,6 +155,8 @@ class SetPasswordControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->translator = new Translator('en');
 
+        $this->oauthService = $this->createMock(OAuth2Service::class);
+
         $this->application = $this->createPartialMock(
             Application::class,
             [
@@ -140,7 +168,8 @@ class SetPasswordControllerTest extends \PHPUnit_Framework_TestCase
                 'getLogger',
                 'getEncoderFactory',
                 'getDoctrineService',
-                'getTranslator'
+                'getTranslator',
+                'getOAuth2Service',
             ]
         );
 
@@ -154,21 +183,8 @@ class SetPasswordControllerTest extends \PHPUnit_Framework_TestCase
         $this->application->method('getEncoderFactory')->willReturn($this->encoderFactory);
         $this->application->method('getDoctrineService')->willReturn($this->db);
         $this->application->method('getTranslator')->willReturn($this->translator);
-
-        $this->application->method('getConfig')->willReturn(
-            [
-                'local' => [
-                    'password_requirements' => [
-                        'minimum_length' => 3,
-                        'maximum_length' => 6,
-                        'require_upper' => true,
-                        'require_lower' => true,
-                        'require_number' => true,
-                        'require_special' => true,
-                    ],
-                ],
-            ]
-        );
+        $this->application->method('getConfig')->willReturn($this->config);
+        $this->application->method('getOAuth2Service')->willReturn($this->oauthService);
 
         $this->request = $this->createMock(Request::class);
 
@@ -196,12 +212,12 @@ class SetPasswordControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->request->method('get')->willReturnMap([
             ['token', null, 'token'],
-            ['tid', null, '0000000001'],
+            ['tid', null, '1000000001'],
         ]);
 
         $this->oneTimeTokenRepository->expects($this->once())
             ->method('findUserByTokenAndTenant')
-            ->with('token', '0000000001')
+            ->with('token', '1000000001')
             ->willThrowException(new \RuntimeException());
 
         $this->setPasswordController->showSetPasswordForm($this->application, $this->request);
@@ -214,18 +230,18 @@ class SetPasswordControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->request->method('get')->willReturnMap([
             ['token', null, 'token'],
-            ['tid', null, '0000000001'],
+            ['tid', null, '1000000001'],
         ]);
 
         $this->oneTimeTokenRepository->expects($this->once())
             ->method('findUserByTokenAndTenant')
-            ->with('token', '0000000001')
+            ->with('token', '1000000001')
             ->willReturn($this->oneTimeToken);
 
         $this->twig->expects($this->once())
             ->method('render')
             ->with('password/set.html.twig', [
-                    'tid' => '0000000001',
+                    'tid' => '1000000001',
                     'token' => 'token',
                     'csrf_token' => 'csrfToken',
                 ])->willReturn('template');
@@ -256,7 +272,7 @@ class SetPasswordControllerTest extends \PHPUnit_Framework_TestCase
             'emptyPassword' => [
                 'request' => [
                     ['token', null, 'token'],
-                    ['tid', null, '0000000001'],
+                    ['tid', null, '1000000001'],
                     ['newPassword', null, ''],
                     ['confirmPassword', null, '1234'],
                     ['csrf_token', null, 'csrfToken'],
@@ -266,7 +282,7 @@ class SetPasswordControllerTest extends \PHPUnit_Framework_TestCase
             'passwordTooShort' => [
                 'request' => [
                     ['token', null, 'token'],
-                    ['tid', null, '0000000001'],
+                    ['tid', null, '1000000001'],
                     ['newPassword', null, '1'],
                     ['confirmPassword', null, '1'],
                     ['csrf_token', null, 'csrfToken'],
@@ -276,7 +292,7 @@ class SetPasswordControllerTest extends \PHPUnit_Framework_TestCase
             'passwordTooLong' => [
                 'request' => [
                     ['token', null, 'token'],
-                    ['tid', null, '0000000001'],
+                    ['tid', null, '1000000001'],
                     ['newPassword', null, '111111111111111111'],
                     ['confirmPassword', null, '111111111111111111'],
                     ['csrf_token', null, 'csrfToken'],
@@ -286,7 +302,7 @@ class SetPasswordControllerTest extends \PHPUnit_Framework_TestCase
             'passwordHaveNoUpper' => [
                 'request' => [
                     ['token', null, 'token'],
-                    ['tid', null, '0000000001'],
+                    ['tid', null, '1000000001'],
                     ['newPassword', null, '1a3!5'],
                     ['confirmPassword', null, '1a3!5'],
                     ['csrf_token', null, 'csrfToken'],
@@ -296,7 +312,7 @@ class SetPasswordControllerTest extends \PHPUnit_Framework_TestCase
             'passwordHaveNoLower' => [
                 'request' => [
                     ['token', null, 'token'],
-                    ['tid', null, '0000000001'],
+                    ['tid', null, '1000000001'],
                     ['newPassword', null, '1A3!5'],
                     ['confirmPassword', null, '1A3!5'],
                     ['csrf_token', null, 'csrfToken'],
@@ -306,7 +322,7 @@ class SetPasswordControllerTest extends \PHPUnit_Framework_TestCase
             'passwordHaveNoNumber' => [
                 'request' => [
                     ['token', null, 'token'],
-                    ['tid', null, '0000000001'],
+                    ['tid', null, '1000000001'],
                     ['newPassword', null, 'aAc!b'],
                     ['confirmPassword', null, 'aAc!b'],
                     ['csrf_token', null, 'csrfToken'],
@@ -316,7 +332,7 @@ class SetPasswordControllerTest extends \PHPUnit_Framework_TestCase
             'passwordHaveNoSpecial' => [
                 'request' => [
                     ['token', null, 'token'],
-                    ['tid', null, '0000000001'],
+                    ['tid', null, '1000000001'],
                     ['newPassword', null, 'aAcdb1'],
                     ['confirmPassword', null, 'aAcdb1'],
                     ['csrf_token', null, 'csrfToken'],
@@ -326,7 +342,7 @@ class SetPasswordControllerTest extends \PHPUnit_Framework_TestCase
             'passwordAndConfirmDonNotMatch' => [
                 'request' => [
                     ['token', null, 'token'],
-                    ['tid', null, '0000000001'],
+                    ['tid', null, '1000000001'],
                     ['newPassword', null, 'aAc!b1'],
                     ['confirmPassword', null, 'aAc!b11'],
                     ['csrf_token', null, 'csrfToken'],
@@ -353,7 +369,7 @@ class SetPasswordControllerTest extends \PHPUnit_Framework_TestCase
         $this->twig->expects($this->once())
             ->method('render')
             ->with('password/set.html.twig', [
-                'tid' => '0000000001',
+                'tid' => '1000000001',
                 'token' => 'token',
                 'csrf_token' => 'csrfToken',
             ])->willReturn('template');
@@ -374,7 +390,7 @@ class SetPasswordControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->request->method('get')->willReturnMap([
             ['token', null, 'token'],
-            ['tid', null, '0000000001'],
+            ['tid', null, '1000000001'],
             ['newPassword', null, 'aAc!b1'],
             ['confirmPassword', null, 'aAc!b1'],
             ['csrf_token', null, 'csrfToken'],
@@ -382,7 +398,7 @@ class SetPasswordControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->oneTimeTokenRepository->expects($this->once())
             ->method('findUserByTokenAndTenant')
-            ->with('token', '0000000001')
+            ->with('token', '1000000001')
             ->willThrowException(new \RuntimeException());
 
         $this->setPasswordController->setPassword($this->application, $this->request);
@@ -395,17 +411,19 @@ class SetPasswordControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->request->method('get')->willReturnMap([
             ['token', null, 'token'],
-            ['tid', null, '0000000001'],
+            ['tid', null, '1000000001'],
             ['newPassword', null, 'aAc!b1'],
             ['confirmPassword', null, 'aAc!b1'],
             ['csrf_token', null, 'csrfToken'],
         ]);
         $this->oneTimeToken->method('getUserId')->willReturn('userId');
-        $this->oneTimeToken->expects($this->once())->method('getTenantId')->willReturn('0000000001');
+        $this->oneTimeToken->expects($this->once())->method('getTenantId')->willReturn('1000000001');
+
+        $this->oauthService->method('getClientID')->willReturn('some-service-clientId-srn');
 
         $this->oneTimeTokenRepository->expects($this->once())
             ->method('findUserByTokenAndTenant')
-            ->with('token', '0000000001')
+            ->with('token', '1000000001')
             ->willReturn($this->oneTimeToken);
 
         $this->encoder->expects($this->once())
@@ -417,9 +435,11 @@ class SetPasswordControllerTest extends \PHPUnit_Framework_TestCase
             $this->equalTo('users'),
             $this->callback(function ($data) {
                 $this->assertEquals('encodedPassword', $data['password_hash']);
+                $this->assertEquals('some-service-clientId-srn', $data['modified_by']);
+                $this->assertArrayHasKey('modify_time', $data);
                 return true;
             }),
-            $this->equalTo(['tenant_id'=> '0000000001', 'id' => 'userId'])
+            $this->equalTo(['tenant_id'=> '1000000001', 'id' => 'userId'])
         );
 
         $this->oneTimeTokenRepository->expects($this->once())->method('delete')->with($this->oneTimeToken);

@@ -75,12 +75,11 @@ if($upload_max_filesize_bytes < constant('SUGARCRM_MIN_UPLOAD_MAX_FILESIZE_BYTES
 $request = InputValidation::getService();
 $run = $request->getValidInputRequest('run', null, "");
 $releaseId = $request->getValidInputRequest('release_id', null, "");
-$loadModuleFromDir = $request->getValidInputRequest('load_module_from_dir', null, null);
 $upgradeZipEscaped = $request->getValidInputRequest('upgrade_zip_escaped', null, "");
 $installFile = $request->getValidInputRequest('install_file');
 $reloadMetadata = $request->getValidInputRequest('reloadMetadata');
 
-if ($run !== "") {
+if ($run !== "" && empty($GLOBALS['sugar_config']['use_common_ml_dir'])) {
     if ($run == "upload") {
         $perform = false;
         if ($releaseId != "") {
@@ -89,12 +88,6 @@ if ($run !== "") {
             $tempFile = $pm->download('','',$releaseId);
             $perform = true;
             $base_filename = urldecode($tempFile);
-        } elseif (!empty($loadModuleFromDir)) {
-        	//copy file to proper location then call performSetup
-        	copy($loadModuleFromDir.'/'.$upgradeZipEscaped, "upload://".$upgradeZipEscaped);
-
-        	$perform = true;
-            $base_filename = urldecode($upgradeZipEscaped);
         } else {
             if( empty( $_FILES['upgrade_zip']['tmp_name'] ) ){
                 echo $mod_strings['ERR_UW_NO_UPLOAD_FILE'];
@@ -120,12 +113,16 @@ if ($run !== "") {
     			//SCAN THE MANIFEST FILE TO MAKE SURE NO COPIES OR ANYTHING ARE HAPPENING IN IT
 	    		$ms = new ModuleScanner();
 	    		$ms->lockConfig();
-		    	$fileIssues = $ms->scanFile($manifest_file);
-    			if(!empty($fileIssues)){
-    				echo '<h2>' . $mod_strings['ML_MANIFEST_ISSUE'] . '</h2><br>';
-    				$ms->displayIssues();
-    				die();
-    			}
+                if ((defined('MODULE_INSTALLER_PACKAGE_SCAN') && MODULE_INSTALLER_PACKAGE_SCAN)
+                    || !empty($GLOBALS['sugar_config']['moduleInstaller']['packageScan'])) {
+                    $ms->scanArchive(UploadFile::realpath($tempFile));
+                } else {
+                    $ms->scanFile($manifest_file);
+                }
+                if ($ms->hasIssues()) {
+                    $ms->displayIssues();
+                    die();
+                }
     			list($manifest, $installdefs) = MSLoadManifest($manifest_file);
     			if($ms->checkConfig($manifest_file)) {
     				echo '<h2>' . $mod_strings['ML_MANIFEST_ISSUE'] . '</h2><br>';
@@ -209,23 +206,8 @@ else {
 $csrfToken = smarty_function_sugar_csrf_form_token(array(), $smarty);
 
 // upload link
-if(!empty($GLOBALS['sugar_config']['use_common_ml_dir']) && $GLOBALS['sugar_config']['use_common_ml_dir'] && !empty($GLOBALS['sugar_config']['common_ml_dir'])){
-	//rrs
-	$form = '<form name="move_form" action="index.php?module=Administration&view=module&action=UpgradeWizard" method="post"  ><input type=hidden name="run" value="upload" /><input type=hidden name="load_module_from_dir" id="load_module_from_dir" value="'.$GLOBALS['sugar_config']['common_ml_dir'].'" /><input type=hidden name="upgrade_zip_escaped" value="" />';
-    $form .= $csrfToken;
-	$form .= '<br>'.$mod_strings['LBL_MODULE_UPLOAD_DISABLE_HELP_TEXT'].'</br>';
-	$form .='<table width="100%" class="edit view"><tr><th align="left">'.$mod_strings['LBL_ML_NAME'].'</th><th align="left">'.$mod_strings['LBL_ML_ACTION'].'</th></tr>';
-	if ($handle = opendir($GLOBALS['sugar_config']['common_ml_dir'])) {
-		while (false !== ($filename = readdir($handle))) {
-	        if($filename == '.' || $filename == '..' || !preg_match("#.*\.zip\$#", $filename)) {
-                continue;
-            }
-	        $form .= '<tr><td>'.$filename.'</td><td><input type=button class="button" value="'.$mod_strings['LBL_UW_BTN_UPLOAD'].'" onClick="document.move_form.upgrade_zip_escaped.value = escape( \''.$filename.'\');document.move_form.submit();" /></td></tr>';
-	    }
-	}
-	$form .= '</table></form>';
-//rrs
-
+if (!empty($GLOBALS['sugar_config']['use_common_ml_dir'])) {
+    $form = '<br>' . $mod_strings['LBL_MODULE_UPLOAD_DISABLE_HELP_TEXT'] . '</br>';
 }else{
     $form =<<<eoq
 <form name="the_form" enctype="multipart/form-data" action="{$form_action}" method="post"  >

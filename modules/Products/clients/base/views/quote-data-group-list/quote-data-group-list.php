@@ -36,6 +36,14 @@ $viewdefs['Products']['base']['view']['quote-data-group-list'] = array(
                     'widthClass' => 'cell-large',
                     'type' => 'quote-data-relate',
                     'required' => true,
+                    'related_fields' => array(
+                        'service',
+                        'service_start_date',
+                        'service_end_date',
+                        'renewable',
+                        'service_duration_value',
+                        'service_duration_unit',
+                    ),
                 ),
                 array(
                     'name' => 'mft_part_num',

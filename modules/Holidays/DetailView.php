@@ -51,12 +51,11 @@ $xtpl->assign("RETURN_MODULE", "Holidays");
 $xtpl->assign("RETURN_ACTION", "DetailView");
 $xtpl->assign("ACTION", "EditView");
 
-$xtpl->assign("NAME", $focus->holiday_date);
+$xtpl->assign("DATE", $focus->holiday_date);
+$xtpl->assign("NAME", $focus->name);
 $xtpl->assign("DESCRIPTION", nl2br(url2html($focus->description)));
 
 $detailView->processListNavigation($xtpl, "HOLIDAY", $offset);
 
 $xtpl->parse("main");
 $xtpl->out("main");
-
-?>

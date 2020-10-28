@@ -252,7 +252,8 @@ class SugarQuery_Builder_Field
                 }
             }
             if (!empty($this->def['link']) && !$this->query->getJoinAlias($this->def['link'])) {
-                if ($this instanceof SugarQuery_Builder_Field_Select) {
+                if (($this instanceof SugarQuery_Builder_Field_Select) ||
+                    ($related && $this instanceof SugarQuery_Builder_Field_OrderBy)) {
                     $params['team_security'] = false;
                 }
                 if (isset($this->def['id_name']) && $this->def['id_name'] != $this->def['name']) {
@@ -320,7 +321,7 @@ class SugarQuery_Builder_Field
 
     /**
      * Gets a field name from a field, which could be already aliased to a table
-     * 
+     *
      * @param string $field The field to get the name from
      * @return string
      */
@@ -329,7 +330,7 @@ class SugarQuery_Builder_Field
         if (strpos($field, '.') === false) {
             return $field;
         }
-        
+
         $parts = explode('.', $field);
         return $parts[1];
     }

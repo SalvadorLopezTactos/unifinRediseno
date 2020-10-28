@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'E-kirjad: kontaktid',
     'LBL_EMAILS_LEADS_REL' => 'E-kirjad: müügivihjed',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'E-kirjad: müügivõimalused',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'E-kirjad: märkused',
     'LBL_EMAILS_PROJECT_REL' => 'E-kirjad: projekt',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'E-kirjad: projekti ülesanne',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'Kellelt:',
     'LBL_REPLY_TO' => 'Vasta:',
     'LBL_HTML_BODY' => 'HTML-i keha',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'Saajad',
     'LBL_LEADS_SUBPANEL_TITLE' => 'Müügivihjed',
     'LBL_MESSAGE_SENT' => 'Sõnum saadetud',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'Vastuse ID',
     'LBL_TYPE' => 'Tüüp:',
     'LBL_EMAIL_STATE' => 'Riik',
+    'LBL_EMAIL_DIRECTION' => 'Suund',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'Palun kontrollige!',

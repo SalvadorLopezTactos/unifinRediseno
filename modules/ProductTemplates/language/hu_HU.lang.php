@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => 'Gyártók',
   'LNK_NEW_PRODUCT_CATEGORY' => 'Termékkategóriák',
   'LNK_NEW_PRODUCT_TYPE' => 'Terméktípusok',
-  'LNK_NEW_PRODUCT' => 'Termék létrehozása a katalógusban',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => 'Szállítási szolgáltatók',
   'LNK_PRODUCT_LIST' => 'Termékkatalógus megtekintése',
   'NTC_DELETE_CONFIRMATION' => 'Biztos benne, hogy törölni kívánja ezt rekordot?',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => 'Termékkategóriák',
   'LBL_MANUFACTURERS' => 'Gyártók',
   'LBL_PRODUCT_TYPES' => 'Terméktípusok',
-
+  'LBL_RENEWABLE' => 'Megújítható',
+  'LBL_SERVICE' => 'Szolgáltatás',
 );
-
-
-?>

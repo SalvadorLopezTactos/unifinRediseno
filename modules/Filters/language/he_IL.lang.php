@@ -105,4 +105,6 @@ $mod_strings = array(
     'LBL_OPERATOR_LAST_YEAR' => 'בשנה שעברה',
     'LBL_OPERATOR_THIS_YEAR' => 'בשנה זו',
     'LBL_OPERATOR_NEXT_YEAR' => 'בשנה הבאה',
+    'LBL_OPEN_ISSUES' => '{0} פתוחים',
+    'LBL_RECENTLY_RESOLVED_ISSUES' => 'נפתרו לאחרונה',
 );

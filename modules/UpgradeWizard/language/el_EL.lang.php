@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'Απεγκατάσταση',
     'LBL_ML_VERSION' => 'Έκδοση',
 	'LBL_ML_INSTALL'=>'Εγκατάσταση',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'Σημείο Εντοπισμού',
 	'LBL_MODULE_NAME' => 'Οδηγός Αναβάθμισης',
 	'LBL_MODULE_NAME_SINGULAR' => 'Οδηγός Αναβάθμισης',
 	'LBL_UPLOAD_SUCCESS' => 'Η αναβάθμιση πακέτου φορτώθηκε με επιτυχία. Πατήστε το κουμπί "Επόμενο" για να εκτελέσετε έναν τελικό έλεγχο.',

@@ -30,7 +30,9 @@
         'click [name=delete_button]': 'deleteClicked',
         'click [name=add_button]': 'addClicked',
         'click [name=collapse_button]': 'collapseClicked',
-        'click [name=expand_button]': 'expandClicked'
+        'click [name=expand_button]': 'expandClicked',
+        'click [name=edit_overview_tab_button]': 'editOverviewTabClicked',
+        'click [name=edit_module_tabs_button]': 'editModuleTabsClicked'
     },
 
     initialize: function(options) {
@@ -66,6 +68,7 @@
      */
     _bindEvents: function() {
         this.context.on('record:set:state', this.setRecordState, this);
+        this.context.on('tabbed-dashboard:switch-tab', this.switchTab, this);
     },
 
     /**
@@ -79,6 +82,33 @@
         this.setButtonStates(state);
         this.inlineEditMode = state === 'edit';
         this.toggleEdit(this.inlineEditMode);
+    },
+
+    /**
+     * Event handler for button 'Edit Overview Tab'.
+     *
+     * @param {Event} evt Triggered mouse event
+     */
+    editOverviewTabClicked: function(evt) {
+        // switch to overview tab
+        if (this.context.get('activeTab') !== 0) {
+            this.context.trigger('tabbed-dashboard:switch-tab', 0);
+        }
+        this.editClicked(evt);
+    },
+
+    /**
+     * Event handler for button 'Edit Module Tabs'.
+     *
+     * @param {Event} evt Triggered mouse event
+     */
+    editModuleTabsClicked: function(evt) {
+        app.drawer.open({
+            layout: 'config-drawer',
+            context: {
+                module: 'ConsoleConfiguration',
+            }
+        });
     },
 
     editClicked: function(evt) {
@@ -207,6 +237,55 @@
     },
 
     /**
+     * Handle event: 'tabbed-dashboard:switch-tab'.
+     *
+     * @param {number} tabIndex New tab's index
+     */
+    switchTab: function(tabIndex) {
+        this.context.set('activeTab', tabIndex);
+        this._enableEditButton(this._isDashboard());
+    },
+
+    /**
+     * Check if this is a tabbed dashboard and active tab is a dashboard.
+     *
+     * @return {bool} True if this is not a tabbed dashboard
+     * or active tab is a dashboard, false otherwise
+     * @private
+     */
+    _isDashboard: function() {
+        var tabs = this.context.get('tabs');
+        if (!tabs) {
+            return true;
+        }
+        var tabIndex = this.context.get('activeTab') || 0;
+        return tabs[tabIndex] && tabs[tabIndex].components && tabs[tabIndex].components[0].rows;
+    },
+
+    /**
+     * Show/hide edit button.
+     *
+     * @param {bool} state True to show, false to hide
+     * @private
+     */
+    _enableEditButton: function(state) {
+        var dropdown = _.find(this.buttons, function(button) {
+            return button.type === 'actiondropdown';
+        });
+        if (dropdown) {
+            var editButton =  _.find(dropdown.fields, function(field) {
+                return field.name === 'edit_button';
+            });
+            if (editButton) {
+                editButton.setDisabled(!state);
+                editButton.isHidden = !state;
+                dropdown._orderButtons();
+                dropdown.render();
+            }
+        }
+    },
+
+    /**
      * Defer rendering until after the data loads. See #_renderHeader for more info.
      *
      * We defer rendering until after data load because by default, the fields
@@ -248,6 +327,9 @@
         this._setButtons();
         this.setButtonStates(this.context.get('create') ? 'create' : 'view');
         this.setEditableFields();
+        if (!this._isDashboard()) {
+            this._enableEditButton(false);
+        }
     },
 
     handleCancel: function() {
@@ -311,7 +393,8 @@
             app.router.navigate(route, {trigger: true});
             return;
         }
-        var contextBro = this.context.parent.getChildContext({module: 'Home'});
+        var contextBro = this.context.parent && this.context.parent.get('layout') === 'multi-line' ?
+            this.context.parent : this.context.parent.getChildContext({module: 'Home'});
         switch (change) {
             case 'delete':
                 contextBro.get('collection').remove(model);

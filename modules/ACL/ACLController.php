@@ -9,6 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 require_once('modules/ACLActions/actiondefs.php');
 class ACLController
 {
@@ -25,7 +26,7 @@ class ACLController
      */
     public static function checkAccess($category, $action, $is_owner = false, $type = 'module')
     {
-        return SugarACL::checkAccess($category, $action, $is_owner?array("owner_override" => true):array());
+        return SugarACL::checkAccess($category, $action, $is_owner ? ["owner_override" => true] : []);
     }
 
     /**

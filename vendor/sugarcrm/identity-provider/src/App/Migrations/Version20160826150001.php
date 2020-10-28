@@ -68,6 +68,8 @@ class Version20160826150001 extends AbstractMigration
               is_locked_out BOOL DEFAULT false,
               failed_login_attempts MEDIUMINT UNSIGNED DEFAULT 0,
               user_type TINYINT(1) DEFAULT 0,
+              created_by VARCHAR(255) NOT NULL,
+              modified_by VARCHAR(255) NOT NULL,
               PRIMARY KEY (tenant_id, id),
               KEY idx_users_create_time (create_time),
               FOREIGN KEY fk_users_tenants (tenant_id) REFERENCES tenants(id)

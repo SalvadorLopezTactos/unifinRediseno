@@ -356,6 +356,40 @@ $dictionary['ProductTemplate'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_FORECAST_WORKSHEET',
         ),
+        'service_duration_value' => array(
+            'name' => 'service_duration_value',
+            'vname' => 'LBL_SERVICE_DURATION_VALUE',
+            'type' => 'int',
+            'min' => '1',
+            'len' => '5',
+            'studio' => false,
+            'required' => false,
+            'comment' => 'Value of the service duration, if service duration is 4 Months the value is 4',
+        ),
+        'service_duration_unit' => array (
+            'name' => 'service_duration_unit',
+            'vname' => 'LBL_SERVICE_DURATION_UNIT',
+            'type' => 'enum',
+            'options' => 'service_duration_unit_dom',
+            'len' => 50,
+            'studio' => false,
+            'audited' => false,
+            'comment' => 'Service Duration unit like Year(s), Month(s) or Day(s)',
+        ),
+        'renewable' => [
+            'name' => 'renewable',
+            'vname' => 'LBL_RENEWABLE',
+            'type' => 'bool',
+            'default' => 0,
+            'comment' => 'Indicates whether the sales item is renewable (e.g. a service)',
+        ],
+        'service' => [
+            'name' => 'service',
+            'vname' => 'LBL_SERVICE',
+            'type' => 'bool',
+            'default' => 0,
+            'comment' => 'Indicates whether the sales item is a service or a product',
+        ],
     ),
     'relationships' => array(
         'product_templates_product_categories' => array(
@@ -386,7 +420,6 @@ $dictionary['ProductTemplate'] = array(
             'relationship_type' => 'one-to-many'
         ),
     ),
-    'acls' => array('SugarACLDeveloperOrAdmin' => array('aclModule' => 'Products', 'allowUserRead' => true)),
     'indices' => array (
         array('name' => 'idx_producttemplate_status', 'type' => 'index', 'fields' => array('status')),
         array('name' => 'idx_producttemplate_qty_in_stock', 'type' => 'index', 'fields' => array('qty_in_stock')),
@@ -400,6 +433,7 @@ VardefManager::createVardef(
     array(
         'default',
         'assignable',
-        'currency'
+        'currency',
+        'team_security',
     )
 );

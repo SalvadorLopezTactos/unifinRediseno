@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Целевой список по умолчанию не обнаружен',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Записи не обнаружены',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Записи были обработаны',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Название трекера:',
   'LBL_EDIT_TRACKER_URL'=>'URL трекера:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'По Вашему аккаунту Входящих Email сообщений оптимальные настройки не сохранены.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Пожалуйста, проверьте настройки на входящие письма.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} предварительных контактов, созданных благодаря этой компании, были удалены после создания.',
+    'LBL_PROSPECT_LIST' => 'Целевой список',
 );
 
 

@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Targetlijst of standaardwaarde niet gevonden',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Geen items gevonden',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Items zijn verwerkt',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Trackernaam:',
   'LBL_EDIT_TRACKER_URL'=>'Tracker URL:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'Er werden geen optima opgeslagen bij uw inkomende e-mailaccount. Raadpleeg de instellingen a.u.b.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Raadpleeg de instellingen voor inkomende e-mail a.u.b.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} leads die zijn gemaakt via deze campagne zijn verwijderd sinds aanmaak.',
+    'LBL_PROSPECT_LIST' => 'Targetlijst',
 );
 
 

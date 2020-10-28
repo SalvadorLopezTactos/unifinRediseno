@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Data modyfikacji',
     'LBL_DELETED' => 'Usunięto',
     'LBL_REVENUELINEITEMS' => 'Pozycje szansy',
+    'LBL_ENTRY_SOURCE' => 'Źródło notatki',
+    'LBL_SOURCE_EXTERNAL' => 'Zewnętrzne',
+    'LBL_SOURCE_INTERNAL' => 'Wewnętrzne',
 
     // Help Text
     // List View Help Text

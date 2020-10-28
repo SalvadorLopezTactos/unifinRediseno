@@ -34,15 +34,10 @@ class KBContentsApiHelper extends SugarBeanApiHelper {
 
         $bean->load_relationship('attachments');
         $result['attachment_list'] = array();
-        foreach ($bean->attachments->getBeans() as $attachment) {
-            $mimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), 'upload://'. $attachment->id);
-            $attach = array(
-                'id' => $attachment->id,
-                'filename' => $attachment->filename,
-                'name' => $attachment->filename,
-                'isImage' => strpos($mimeType, 'image') !== false,
-            );
-            array_push($result['attachment_list'], $attach);
+        foreach ($bean->attachments->getBeans() as $note) {
+            if ($attachment = $note->getAttachment()) {
+                array_push($result['attachment_list'], $attachment);
+            }
         }
 
         $query = new SugarQuery();

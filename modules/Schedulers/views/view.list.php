@@ -18,4 +18,20 @@ class SchedulersViewList extends ViewList
  		parent::display();
  		$this->seed->displayCronInstructions();
  	}
+
+    /**
+     * process list view
+     */
+    public function listViewProcess()
+    {
+        if (!is_array($this->params)) {
+            $this->params = [];
+        }
+        if (empty($this->params['custom_where'])) {
+            $this->params['custom_where'] = '';
+        }
+
+        $this->params['custom_where'] .= sprintf(" AND %s.system_job <> '1'", $this->bean->getTableName());
+        return parent::listViewProcess();
+    }
 }

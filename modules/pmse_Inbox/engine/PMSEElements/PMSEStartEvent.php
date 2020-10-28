@@ -160,6 +160,10 @@ class PMSEStartEvent extends PMSEEvent
         $case->cas_finish_date = '';
         $case->cas_pin = $cas_pin;
         $case->cas_module = $moduleName;
+        // this is triggered by portal account signup
+        if (isset($bean->entry_source) && $bean->entry_source === 'external') {
+            $case->disable_row_level_security = true;
+        }
 
         $case->save();
 

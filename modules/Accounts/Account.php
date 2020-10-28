@@ -91,6 +91,9 @@ class Account extends Company {
 	var $module_dir = 'Accounts';
 	var $emailAddress;
 
+    public $business_center_name;
+    public $business_center_id;
+
 	var $team_name;
 	var $team_id;
 	var $quote_id;
@@ -105,12 +108,21 @@ class Account extends Company {
 	var $additional_column_fields = Array('assigned_user_name', 'assigned_user_id', 'opportunity_id', 'bug_id', 'case_id', 'contact_id', 'task_id', 'note_id', 'meeting_id', 'call_id', 'email_id', 'parent_name', 'member_id'
 	, "quote_id"
 	);
-	var $relationship_fields = Array('opportunity_id'=>'opportunities', 'bug_id' => 'bugs', 'case_id'=>'cases',
-									'contact_id'=>'contacts', 'task_id'=>'tasks', 'note_id'=>'notes',
-									'meeting_id'=>'meetings', 'call_id'=>'calls', 'email_id'=>'emails','member_id'=>'members',
-									'quote_id'=>'quotes',
-									'project_id'=>'project',
-									);
+    public $relationship_fields = array(
+        'bug_id' => 'bugs',
+        'business_center_id'=>'business_centers',
+        'call_id'=>'calls',
+        'case_id'=>'cases',
+        'contact_id'=>'contacts',
+        'email_id'=>'emails',
+        'meeting_id'=>'meetings',
+        'member_id'=>'members',
+        'note_id'=>'notes',
+        'opportunity_id'=>'opportunities',
+        'project_id'=>'project',
+        'quote_id'=>'quotes',
+        'task_id'=>'tasks',
+    );
 
     //Meta-Data Framework fields
     var $push_billing;

@@ -11,6 +11,8 @@
  */
 
 
+use Sugarcrm\Sugarcrm\Dbal\Connection;
+
 class KBContentsConfigApi extends ConfigModuleApi
 {
     /**
@@ -118,12 +120,19 @@ class KBContentsConfigApi extends ConfigModuleApi
         $bean = BeanFactory::newBean('KBContents');
 
         if (!empty($lang) && !empty($values)) {
-            $inString = implode(',', array_map(array($db, 'quoted'), $lang));
-            $setParams = array();
+            $setParams = [];
+            $paramValues = [];
+            $types = [];
             foreach ($values as $key => $value) {
-                $setParams[] = $key . ' = ' . $db->quoted($value);
+                $setParams[] = $key . ' = ?';
+                $paramValues[] = $value;
+                $types[] = null;
             }
-            $db->query('UPDATE ' . $bean->table_name . ' SET ' . implode(',', $setParams) . ' WHERE language IN (' . $inString . ')');
+            $paramValues[] = $lang;
+            $types[] = Connection::PARAM_STR_ARRAY;
+            $sql = 'UPDATE ' . $bean->table_name . ' SET ' . implode(',', $setParams) . ' WHERE language IN (?)';
+            $db->getConnection()
+                ->executeUpdate($sql, $paramValues, $types);
         }
     }
 

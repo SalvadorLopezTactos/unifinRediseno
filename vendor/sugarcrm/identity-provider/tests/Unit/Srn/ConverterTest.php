@@ -98,12 +98,12 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
                 ]
             ],
             'tenant with leading zeroes' => [
-                'srn:cloud:idp:eu:1:tenant',
+                'srn:cloud:idp:eu:1000000001:tenant',
                 [
                     'partition' => 'cloud',
                     'service' => 'idp',
                     'region' => 'eu',
-                    'tenant' => '0000000001',
+                    'tenant' => '1000000001',
                     'resource' => ['tenant'],
                 ]
             ],

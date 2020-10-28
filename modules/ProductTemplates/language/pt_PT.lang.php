@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => 'Ver Fabricantes',
   'LNK_NEW_PRODUCT_CATEGORY' => 'Ver Categorias de Produtos',
   'LNK_NEW_PRODUCT_TYPE' => 'Tipos de Produtos',
-  'LNK_NEW_PRODUCT' => 'Criar Produto',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => 'Transportadoras',
   'LNK_PRODUCT_LIST' => 'Catálogo de Produtos',
   'NTC_DELETE_CONFIRMATION' => 'Tem a certeza de que pretende eliminar este registo?',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => 'Categorias de Produto',
   'LBL_MANUFACTURERS' => 'Fabricantes',
   'LBL_PRODUCT_TYPES' => 'Tipos de Produtos',
-
+  'LBL_RENEWABLE' => 'Renovável',
+  'LBL_SERVICE' => 'Serviço',
 );
-
-
-?>

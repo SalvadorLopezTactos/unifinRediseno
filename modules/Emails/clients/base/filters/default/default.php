@@ -21,6 +21,7 @@ $viewdefs['Emails']['base']['filter']['default'] = array(
         ),
         'assigned_user_name' => array(),
         'parent_name' => array(),
+        'direction' => array(),
         'tag' => array(),
         'mailbox_name' => array(),
         'total_attachments' => array(),
@@ -31,6 +32,26 @@ $viewdefs['Emails']['base']['filter']['default'] = array(
         '$favorite' => array(
             'predefined_filter' => true,
             'vname' => 'LBL_FAVORITES_FILTER',
+        ),
+        'from_collection' => array(
+            'type' => 'email-recipients',
+            'decorate_invalid' => false,
+            'decorate_opt_out' => false,
+        ),
+        'to_collection' => array(
+            'type' => 'email-recipients',
+            'decorate_invalid' => false,
+            'decorate_opt_out' => false,
+        ),
+        'cc_collection' => array(
+            'type' => 'email-recipients',
+            'decorate_invalid' => false,
+            'decorate_opt_out' => false,
+        ),
+        'bcc_collection' => array(
+            'type' => 'email-recipients',
+            'decorate_invalid' => false,
+            'decorate_opt_out' => false,
         ),
     ),
 );

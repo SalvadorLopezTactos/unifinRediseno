@@ -20,8 +20,8 @@ use Symfony\Component\Security\Core\Exception\BadCredentialsException;
  */
 class CryptPasswordEncoder extends BasePasswordEncoder
 {
-    private $algorithm;
-    private $iterations;
+    protected $algorithm;
+    protected $iterations;
 
     /**
      * Allowed algorithms
@@ -39,9 +39,14 @@ class CryptPasswordEncoder extends BasePasswordEncoder
      *
      * @param string $algorithm          The digest algorithm to use
      * @param int    $iterations         The number of iterations to use to stretch the password hash
+     *
+     * @throws \LogicException
      */
     public function __construct($algorithm = 'CRYPT_SHA512', $iterations = self::DEFAULT_ITERATIONS)
     {
+        if (!in_array($algorithm, $this->algoList, true)) {
+            throw new \LogicException(sprintf('The algorithm "%s" is not supported.', $algorithm));
+        }
         $this->algorithm = $algorithm;
         $this->iterations = $iterations;
     }
@@ -50,10 +55,6 @@ class CryptPasswordEncoder extends BasePasswordEncoder
     {
         if ($this->isPasswordTooLong($raw)) {
             throw new BadCredentialsException('Invalid password.');
-        }
-
-        if (!in_array($this->algorithm, $this->algoList, true)) {
-            throw new \LogicException(sprintf('The algorithm "%s" is not supported.', $this->algorithm));
         }
 
         return crypt($raw, $this->getSalt($salt));

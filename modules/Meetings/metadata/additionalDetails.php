@@ -24,9 +24,9 @@ function additionalDetailsMeeting($fields)
         $overlib_string .= '<b>' . $mod_strings['LBL_SUBJECT'] . '</b> ' . $fields['NAME'];
         $overlib_string .= '<br>';
     }
-    //Modify by jchi 6/27/2008 1515pm china time , bug 20626.
     if (!empty($fields['DATE_START'])) {
-        $overlib_string .= '<b>' . $mod_strings['LBL_DATE_TIME'] . '</b> ' . $fields['DATE_START'] . ' <br>';
+        $userTimeStart = $GLOBALS['timedate']->to_display_date_time($fields['DATE_START']);
+        $overlib_string .= '<b>' . $mod_strings['LBL_DATE_TIME'] . '</b> ' . $userTimeStart . ' <br>';
     }
     if (isset($fields['DURATION_HOURS']) || isset($fields['DURATION_MINUTES'])) {
         $overlib_string .= '<b>' . $mod_strings['LBL_DURATION'] . '</b> ';

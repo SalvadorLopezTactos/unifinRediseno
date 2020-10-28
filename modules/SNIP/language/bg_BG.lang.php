@@ -51,7 +51,7 @@ $mod_strings = array(
     "LBL_SNIP_PURCHASE_SUMMARY" => "In order to use Sugar Ease, you must purchase a license for your SugarCRM instance",
     "LBL_SNIP_PURCHASE" => "Щракнете тук, за да закупите",
     'LBL_SNIP_EMAIL' => 'Sugar Ease Email',
-    'LBL_SNIP_AGREE' => "Съгласен съм с горните условия и <a href='http://www.sugarcrm.com/crm/TRUSTe/privacy.html' target='_blank'>декларацията за поверителност</a>.",
+    'LBL_SNIP_AGREE' => "Съгласен съм с горните условия и <a href='https://www.sugarcrm.com/legal/privacy-policy/' target='_blank'>политиката за поверителност</a>.",
     'LBL_SNIP_PRIVACY' => 'споразумение за поверителност',
 
     'LBL_SNIP_STATUS_PINGBACK_FAIL' => 'Обратното иззвъняване неуспешно',

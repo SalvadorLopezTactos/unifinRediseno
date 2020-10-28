@@ -133,7 +133,6 @@ class Audit extends SugarBean
         }
 
         $fieldDefs = $this->fieldDefs;
-        $return = array();
 
         $aclCheckContext = array('bean' => $bean);
         $rows = [];
@@ -151,12 +150,12 @@ class Audit extends SugarBean
             $viewName = array_search($row['field_name'], Team::$nameTeamsetMapping);
             if ($viewName) {
                 $row['field_name'] = $viewName;
-                $return[] = $this->handleTeamSetField($row);
+                $rows[] = $this->handleTeamSetField($row);
                 continue;
             }
 
             if ($this->handleRelateField($bean, $row)) {
-                $return[] = $row;
+                $rows[] = $row;
                 continue;
             }
 
@@ -398,50 +397,43 @@ class Audit extends SugarBean
      */
     public static function getAssociatedFieldName($fieldName, $fieldValue)
     {
-    global $focus,  $genericAssocFieldsArray, $moduleAssocFieldsArray;
+        global $focus, $genericAssocFieldsArray, $moduleAssocFieldsArray;
 
-        if (!empty($moduleAssocFieldsArray[$focus->object_name]) && array_key_exists($fieldName, $moduleAssocFieldsArray[$focus->object_name])) {
-        $assocFieldsArray =  $moduleAssocFieldsArray[$focus->object_name];
-
+        if (!empty($moduleAssocFieldsArray[$focus->object_name])
+            && array_key_exists($fieldName, $moduleAssocFieldsArray[$focus->object_name])
+        ) {
+            $assocFieldsArray = $moduleAssocFieldsArray[$focus->object_name];
         } elseif (array_key_exists($fieldName, $genericAssocFieldsArray)) {
-            $assocFieldsArray =  $genericAssocFieldsArray;
+            $assocFieldsArray = $genericAssocFieldsArray;
         } else {
             return $fieldValue;
         }
-        $query = "";
         $field_arr = $assocFieldsArray[$fieldName];
-        $query = "SELECT ";
+        $sql = <<<SQL
+SELECT %s FROM {$field_arr['table_name']}
+WHERE {$field_arr['select_field_join']} = ?
+SQL;
+
+        $db = DBManagerFactory::getInstance();
+        $row = $db->getConnection()
+            ->executeQuery(
+                sprintf(
+                    $sql,
+                    is_array($field_arr['select_field_name']) ?
+                        implode(',', $field_arr['select_field_name']) : $field_arr['select_field_name']
+                ),
+                [$fieldValue]
+            )->fetch();
+
         if (is_array($field_arr['select_field_name'])) {
-            $count = count($field_arr['select_field_name']);
-            $index = 1;
+            $returnVal = '';
             foreach ($field_arr['select_field_name'] as $col) {
-                $query .= $col;
-                if ($index < $count) {
-                    $query .= ", ";
-                }
-                $index++;
+                $returnVal .= $row[$col] . ' ';
             }
-         } else {
-               $query .= $field_arr['select_field_name'];
-         }
 
-         $query .= " FROM ".$field_arr['table_name']." WHERE ".$field_arr['select_field_join']." = '".$fieldValue."'";
-
-         $db = DBManagerFactory::getInstance();
-         $result = $db->query($query);
-         if (!empty($result)) {
-             if ($row = $db->fetchByAssoc($result)) {
-                if (is_array($field_arr['select_field_name'])) {
-                    $returnVal = "";
-                    foreach ($field_arr['select_field_name'] as $col) {
-                        $returnVal .= $row[$col]." ";
-                    }
-
-                    return $returnVal;
-                } else {
-                       return $row[$field_arr['select_field_name']];
-                }
-            }
+            return $returnVal;
+        } else {
+            return $row[$field_arr['select_field_name']];
         }
     }
 }

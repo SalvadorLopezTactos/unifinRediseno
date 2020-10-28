@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Llista de públic objectiu per defecte no trobada',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'No s´han trobat entrades',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Les entrades han estat processades',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Nom de Seguiment:',
   'LBL_EDIT_TRACKER_URL'=>'URL de Seguiment:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'No s´han guardat valors òptims amb el seu compte de correu entrant.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Reviseu la configuració de correu electrònic entrants.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} clients potencials creats a través d&#39;aquesta campanya s&#39;han eliminat des de la seva creació.',
+    'LBL_PROSPECT_LIST' => 'Llista d&#39;bjectius',
 );
 
 

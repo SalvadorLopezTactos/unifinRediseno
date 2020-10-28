@@ -11,7 +11,21 @@
  */
 require_once('include/formbase.php');
 
-$focus = BeanFactory::newBean('Schedulers');
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
+$id = InputValidation::getService()->getValidInputRequest('record');
+$focus = null;
+if (!empty($id)) {
+    /** @var Scheduler $focus */
+    $focus = BeanFactory::retrieveBean('Schedulers', $id);
+    if (!empty($focus->system_job)) {
+        ACLController::displayNoAccess(true);
+        sugar_cleanup(true);
+    }
+}
+if (empty($focus)) {
+    $focus = BeanFactory::newBean('Schedulers');
+}
 $focus = populateFromPost('', $focus);
 
 ///////////////////////////////////////////////////////////////////////////////

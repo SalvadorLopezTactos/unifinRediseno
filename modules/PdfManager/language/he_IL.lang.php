@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'תצוגה מקדימה',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'אזהרה: במידה ותשנה את המודול העיקרי, כל השדות שכבר נוספו לתבנית ידרשו הסרה.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'הנה הקובץ שביקשת',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'הצעת מחיר',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'תבנית זו משתמשת ליצירת הצעת מחיר ב PDF',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'הצעת מחיר',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'הצעת מחיר (עם שירותים)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'תבנית זו משמשת להדפסת הצעת מחיר, כולל מידע על השירותים, במסמך PDF.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'servicequote',
+
   'LBL_TPL_INVOICE_NAME' => 'חשבונית',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'תבנית זו משתמשת ליצירת חשבונית ב PDF',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'חשבונית',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'חשבונית (עם שירותים)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'תבנית זו משמשת להדפסת חשבונית, כולל מידע על השירותים, במסמך PDF.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'serviceinvoice',
+
   'LBL_TPL_QUOTE_NUMBER' => 'מספר הצעת מחיר',
   'LBL_TPL_SALES_PERSON' => 'איש מכירות',
   'LBL_TPL_VALID_UNTIL' => 'תקף עד',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'מספר החלק:',
   'LBL_TPL_PRODUCT' => 'הצעת מחיר לשורת פריט',
   'LBL_TPL_RLI' => 'שורת פריט הכנסה',
+  'LBL_TPL_DURATION' => 'משך זמן',
+  'LBL_TPL_DURATION_STARTS' => 'התחלה:',
+  'LBL_TPL_DURATION_ENDS' => 'סיום:',
   'LBL_TPL_LIST_PRICE' => 'מחיר מחירון',
   'LBL_TPL_UNIT_PRICE' => 'מחיר יחידה:',
   'LBL_TPL_EXT_PRICE' => 'מחיר שלוחה',

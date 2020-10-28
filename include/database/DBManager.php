@@ -234,7 +234,6 @@ abstract class DBManager implements LoggerAwareInterface
 	 * select_rows		Can report row count for SELECT
 	 * 					implement getRowCount()
 	 * case_sensitive	Supports case-sensitive text columns
-	 * fulltext			Supports fulltext search indexes
 	 * inline_keys		Supports defining keys together with the table
 	 * auto_increment_sequence Autoincrement support implemented as sequence
 	 * limit_subquery   Supports LIMIT clauses in subqueries
@@ -784,7 +783,7 @@ abstract class DBManager implements LoggerAwareInterface
         return $this->insertParams(
             $bean->getTableName(),
             $bean->getFieldDefinitions(),
-            get_object_vars($bean)
+            $bean->toArray()
         );
 	}
 
@@ -1338,10 +1337,6 @@ abstract class DBManager implements LoggerAwareInterface
 
             //Don't attempt to fix the same index twice in one pass;
             if (isset($correctedIndexes[$name]))
-                continue;
-
-            //database helpers do not know how to handle full text indices
-            if ($value['type']=='fulltext')
                 continue;
 
             if ( in_array($value['type'],array('alternate_key','foreign')) )
@@ -2429,6 +2424,12 @@ abstract class DBManager implements LoggerAwareInterface
             }
         }
 
+        // If our values array is empty, return false to avoid executing a
+        // malformed query
+        if (empty($values)) {
+            return false;
+        }
+
         $builder = $this->getConnection()->createQueryBuilder();
         $builder->update($table);
 
@@ -2848,30 +2849,32 @@ abstract class DBManager implements LoggerAwareInterface
 	/**
 	 * Generates SQL for create index statement for a bean.
 	 *
-	 * @param  SugarBean $bean SugarBean instance
+     * @param  SugarBean|string $beanOrTableName SugarBean instance or a table name
 	 * @param  array  $fields fields used in the index
 	 * @param  string $name index name
 	 * @param  bool   $unique Optional, set to true if this is an unique index
 	 * @return string SQL Select Statement
 	 */
-	public function createIndexSQL(SugarBean $bean, array $fields, $name, $unique = true)
-	{
-		$unique = ($unique) ? "unique" : "";
-		$tablename = $bean->getTableName();
-		$columns = array();
-		// get column names
-		foreach ($fields as $fieldDef)
-			$columns[] = $fieldDef['name'];
+    public function createIndexSQL($beanOrTableName, array $fields, $name, $unique = true): string
+    {
+        $unique = ($unique) ? "unique" : "";
+        $tableName = $beanOrTableName instanceof SugarBean ? $beanOrTableName->getTableName() : $beanOrTableName;
+        $columns = [];
+        // get column names
+        foreach ($fields as $fieldDef) {
+            $columns[] = $fieldDef['name'];
+        }
 
-		if (empty($columns))
-			return "";
+        if (empty($columns)) {
+            return "";
+        }
 
-		$columns = implode(",", $columns);
+        $columns = implode(",", $columns);
 
-		return "CREATE $unique INDEX $name ON $tablename ($columns)";
-	}
+        return "CREATE $unique INDEX $name ON $tableName ($columns)";
+    }
 
-	/**
+    /**
 	 * Returns the type of the variable in the field
 	 *
 	 * @param  array $fieldDef Vardef-format field def
@@ -2997,7 +3000,11 @@ abstract class DBManager implements LoggerAwareInterface
 
 		$auto_increment = '';
 		if(!empty($fieldDef['auto_increment']) && $fieldDef['auto_increment'])
-			$auto_increment = $this->setAutoIncrement($table , $fieldDef['name']);
+            $auto_increment = $this->setAutoIncrement(
+                $table,
+                $fieldDef['name'],
+                $fieldDef['auto_increment_platform_options'] ?? []
+            );
 
 		$required = 'NULL';  // MySQL defaults to NULL, SQL Server defaults to NOT NULL -- must specify
 		//Starting in 6.0, only ID and auto_increment fields will be NOT NULL in the DB.
@@ -3086,9 +3093,10 @@ abstract class DBManager implements LoggerAwareInterface
 	 * @abstract
 	 * @param  string $table Table name
 	 * @param  string $field_name Field name
+     * @param  array $platformOptions Options related to a platform autoincrement statement
 	 * @return string
 	 */
-	protected function setAutoIncrement($table, $field_name)
+    protected function setAutoIncrement($table, $field_name, array $platformOptions = [])
 	{
 		$this->deleteAutoIncrement($table, $field_name);
 		return "";
@@ -3355,7 +3363,7 @@ abstract class DBManager implements LoggerAwareInterface
             }
             $fields = $bean->getActivityEnabledFieldDefinitions($excludeType);
         } elseif (!empty($options['for']) && $options['for'] == 'audit') {
-            $fields = $bean->getAuditEnabledFieldDefinitions();
+            $fields = $bean->getAuditEnabledFieldDefinitions(true);
         }
 
         if (isset($options['field_filter']) && is_array($options['field_filter'])) {
@@ -3368,7 +3376,7 @@ abstract class DBManager implements LoggerAwareInterface
         }
 
         // remove fields which do not present in the current state
-        $fields = array_intersect_key($fields, (array) $bean);
+        $fields = array_intersect_key($fields, $bean->toArray());
 
         if (is_array($fields) and count($fields) > 0) {
             foreach ($fields as $field => $vardefs) {
@@ -3495,15 +3503,6 @@ abstract class DBManager implements LoggerAwareInterface
         $audit_fields = $bean->getAuditEnabledFieldDefinitions();
         return $this->getDataChanges($bean, array('field_filter'=>array_keys($audit_fields)));
     }
-
-	/**
-	 * Setup FT indexing
-	 * @abstract
-	 */
-	public function full_text_indexing_setup()
-	{
-		// Most DBs have nothing to setup, so provide default empty function
-	}
 
 	/**
 	 * Quotes a string for storing in the database
@@ -3837,50 +3836,6 @@ abstract class DBManager implements LoggerAwareInterface
 		return false;
 	}
 
-	/**
-	 * Parse fulltext search query with mysql syntax:
-	 *  terms quoted by ""
-	 *  + means the term must be included
-	 *  - means the term must be excluded
-	 *  * or % at the end means wildcard
-	 * @param string $query
-	 * @return array of 3 elements - query terms, mandatory terms and excluded terms
-	 */
-	public function parseFulltextQuery($query)
-	{
-		/* split on space or comma, double quotes with \ for escape */
-		if(strpbrk($query, " ,")) {
-			// ("([^"]*?)"|[^" ,]+)((, )+)?
-			// '/([^" ,]+|".*?[^\\\\]")(,|\s)\s*/'
-			if(!preg_match_all('/("([^"]*?)"|[^"\s,]+)((,\s)+)?/', $query, $m)) {
-				return false;
-			}
-			$qterms = $m[1];
-		} else {
-			$qterms = array($query);
-		}
-		$terms = $must_terms = $not_terms = array();
-		foreach($qterms as $item) {
-			if($item[0] == '"') {
-				$item = trim($item, '"');
-			}
-			if($item[0] == '+') {
-                if (strlen($item) > 1) {
-                    $must_terms[] = substr($item, 1);
-                }
-                continue;
-			}
-			if($item[0] == '-') {
-                if (strlen($item) > 1) {
-				    $not_terms[] = substr($item, 1);
-                }
-                continue;
-			}
-			$terms[] = $item;
-		}
-		return array($terms, $must_terms, $not_terms);
-	}
-
     // Methods to check respective queries
 	protected $standardQueries = array(
 		'ALTER TABLE' => 'verifyAlterTable',
@@ -4021,7 +3976,9 @@ abstract class DBManager implements LoggerAwareInterface
         }
 
         if (!empty($row) && $encode && $this->encode) {
-            return array_map(array($this, "encodeHTML"), $row);
+            return array_map(function ($value) : ?string {
+                return $this->encodeHTML($value);
+            }, $row);
         } else {
            return $row;
         }
@@ -4625,23 +4582,6 @@ abstract class DBManager implements LoggerAwareInterface
 	 * @param string $password
 	 */
 	abstract public function createDbUser($database_name, $host_name, $user, $password);
-
-	/**
-	 * Check if the database supports fulltext indexing
-	 * Note that database driver can be capable of supporting FT (see supports('fulltext))
-	 * but particular instance can still have it disabled
-	 * @return bool
-	 */
-	abstract public function full_text_indexing_installed();
-
-	/**
-	 * Generate fulltext query from set of terms
-	 * @param string $field Field to search against
-	 * @param array $terms Search terms that may be or not be in the result
-	 * @param array $must_terms Search terms that have to be in the result
-	 * @param array $exclude_terms Search terms that have to be not in the result
-	 */
-	abstract public function getFulltextQuery($field, $terms, $must_terms = array(), $exclude_terms = array());
 
 	/**
 	 * Get install configuration for this DB

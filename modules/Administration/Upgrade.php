@@ -11,7 +11,6 @@
  */
 
 
-
 global $app_strings;
 global $app_list_strings;
 global $mod_strings;
@@ -20,14 +19,7 @@ global $gridline;
 
 
 echo getClassicModuleTitle($mod_strings['LBL_MODULE_NAME'], array($mod_strings['LBL_UPGRADE_TITLE']), false);
-$str1="";
-if ($GLOBALS['db']->supports('fulltext')) {
 
-	$str1='<tr><td scope="row">';
-	$str1.=SugarThemeRegistry::current()->getImage('Repair','align="absmiddle" border="0"',null,null,'.gif',$mod_strings['LBL_REPAIR_ORACLE_FULLTEXT']);
-	$str1.='&nbsp;<a href="./index.php?module=Administration&action=RebuildFulltextIndices">' . $mod_strings['LBL_REPAIR_ORACLE_FULLTEXT'] .'</a></td>';
-	$str1.='<td>' .$mod_strings['LBL_REPAIR_ORACLE_FULLTEXT_DESC'] . '</td></tr>';
-}
 ?>
 <p>
 <table class="other view">
@@ -76,10 +68,6 @@ if(strpos($server_software,'Microsoft-IIS') === false) {
 	<td> <?php echo $mod_strings['LBL_REBUILD_SCHEDULERS_DESC_SHORT'] ; ?> </td>
 </tr>
 <tr>
-    <td scope="row"><?php echo SugarThemeRegistry::current()->getImage('Rebuild','align="absmiddle" border="0"', null,null,'.gif',$mod_strings['LBL_REBUILD_DASHLETS_TITLE']); ?>&nbsp;<a href="./index.php?module=Administration&action=RebuildDashlets"><?php echo $mod_strings['LBL_REBUILD_DASHLETS_TITLE']; ?></a></td>
-    <td> <?php echo $mod_strings['LBL_REBUILD_DASHLETS_DESC_SHORT'] ; ?> </td>
-</tr>
-<tr>
     <td scope="row"><?php echo SugarThemeRegistry::current()->getImage('Rebuild','align="absmiddle" border="0"', null,null,'.gif',$mod_strings['LBL_REBUILD_CONFIG']); ?>&nbsp;<a href="./index.php?module=Administration&action=RebuildWorkFlow"><?php echo $mod_strings['LBL_REBUILD_WORKFLOW']; ?></a></td>
     <td> <?php echo $mod_strings['LBL_REBUILD_WORKFLOW_DESC'] ; ?> </td>
 </tr>
@@ -123,11 +111,6 @@ if(strpos($server_software,'Microsoft-IIS') === false) {
 	<td scope="row"><?php echo SugarThemeRegistry::current()->getImage('Repair','align="absmiddle" border="0"',null,null,'.gif',$mod_strings['LBL_REPAIR_ROLES']); ?>&nbsp;<a href="./index.php?module=ACL&action=install_actions"><?php echo $mod_strings['LBL_REPAIR_ROLES']; ?></a></td>
 	<td> <?php echo $mod_strings['LBL_REPAIR_ROLES_DESC'] ; ?> </td>
 </tr>
-<tr>
-	<td scope="row"><?php echo SugarThemeRegistry::current()->getImage('Repair','align="absmiddle" border="0"', null,null,'.gif',$mod_strings['LBL_REPAIR_ORACLE_VARCHAR']); ?>&nbsp;<a href="./index.php?module=Administration&action=RepairOracleVarcharColumns"><?php echo $mod_strings['LBL_REPAIR_ORACLE_VARCHAR']; ?></a></td>
-	<td> <?php echo $mod_strings['LBL_REPAIR_ORACLE_VARCHAR_DESC'] ; ?> </td>
-</tr>
-<?php echo $str1; ?>
 <tr>
 	<td scope="row"><?php echo SugarThemeRegistry::current()->getImage('Repair','align="absmiddle" border="0"', null,null,'.gif',$mod_strings['LBL_REPAIR_IE']); ?>&nbsp;<a href="./index.php?module=Administration&action=RepairIE"><?php echo $mod_strings['LBL_REPAIR_IE']; ?></a></td>
 	<td> <?php echo $mod_strings['LBL_REPAIR_IE_DESC'] ; ?> </td>

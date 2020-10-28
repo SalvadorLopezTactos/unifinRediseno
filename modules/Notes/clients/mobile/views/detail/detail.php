@@ -31,8 +31,8 @@ $viewdefs['Notes']['mobile']['view']['detail'] = array(
                 'parent_name',
                 'date_modified',
                 'filename',
+                'tag',
             )
         )
     ),
 );
-?>

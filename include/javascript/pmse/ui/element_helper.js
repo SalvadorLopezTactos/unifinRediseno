@@ -268,6 +268,55 @@ PMSE.ElementHelper.prototype._getDecimalSeparatorRegExp = function () {
 };
 
 /**
+ * Check if this is a Base Module option
+ * @param {Object} option
+ * @param {Object} field
+ * @return {String}
+ */
+PMSE.ElementHelper.prototype._isBaseModuleOption = function (option, field) {
+    return (option && option.value && option.value === field._attributes.base_module) ?
+        true : false;
+};
+
+/**
+ * Get selected option
+ * @param {Object} form
+ * @return {Object}
+ */
+PMSE.ElementHelper.prototype._getSelectedOption = function (form) {
+    return (form && form._htmlBody && form._htmlBody[0]) ?
+        jQuery(form._htmlBody[0]).find('option:selected')[0] : null;
+};
+
+/**
+ * Mode should disable fields
+ * @param {Object} mode
+ * @return {Boolean}
+ */
+PMSE.ElementHelper.prototype._modeShouldDisableFields = function (mode) {
+    return _.indexOf(['EmailPickerField', 'ExpressionControl'], mode) > -1 ? true : false;
+};
+
+/**
+ * Control should add changes/changes_to/changes_from operators
+ * @param {Object} control
+ * @return {Boolean}
+ */
+PMSE.ElementHelper.prototype._controlShouldAddChanges = function (control, selVal) {
+    return _.indexOf(['evn_criteria', 'pro_terminate_variables'], control._name) > -1 && _.isUndefined(selVal);
+};
+
+/**
+ * Get selected module relationship type
+ * @param {Object} form
+ * @return {String}
+ */
+PMSE.ElementHelper.prototype._getSelectedModuleRelType = function (form) {
+    var selectedData = form.getItem('module').getSelectedData();
+    return (selectedData && selectedData.type) ? selectedData.type : '';
+};
+
+/**
  * Parses the input for either a string or a number, returns the result
  * @param {String} value
  * @return {String}
@@ -748,13 +797,34 @@ PMSE.ElementHelper.prototype.processValueDependency = function (dependantField, 
     if (this.EXTRA_OPERATORS[labelField]) {
         operators = operators.concat(this.EXTRA_OPERATORS[labelField]);
     }
-    if (!selVal) {
+    if (form && form.id && form.id === 'form-module-field-evaluation') {
+        var option = this._getSelectedOption(form);
         var expControl = (this._parent) ? this._parent : null;
-        if (expControl && expControl._name &&
-            (expControl._name === 'evn_criteria' || expControl._name === 'pro_terminate_variables')) {
-            operators = operators.concat(this.OPERATORS.changes);
+        if (!option || this._isBaseModuleOption(option, parentField) ||
+            this._getSelectedModuleRelType(form) === 'one') {
+            parentField.enable();
+            if (this._controlShouldAddChanges(expControl, selVal)) {
+                operators = operators.concat(this.OPERATORS.changes);
+            }
+        } else {
+            var radioIdx = _.findIndex(form._htmlBody, {checked: true});
+            // All or Any radio button is checked
+            if (radioIdx > -1 && form._htmlBody[radioIdx].type === 'radio') {
+                if (form._htmlBody[radioIdx].value === 'Any') {
+                    parentField.enable();
+                    if (this._controlShouldAddChanges(expControl, selVal)) {
+                        operators = operators.concat(this.OPERATORS.changes);
+                    }
+                } else if (form._htmlBody[radioIdx].value === 'All') {
+                    parentField.enable();
+                }
+            // No radio button is checked
+            } else {
+                parentField.disable();
+            }
         }
-    } else if (selVal == 'updated' || selVal == 'allupdates') {
+    }
+    if (selVal == 'updated' || selVal == 'allupdates') {
         var url = parentField._dataURL,
             base = parentField._attributes ? parentField._attributes.base_module : false;
         if (url && base && (url.substring(url.length - base.length) === base)) {
@@ -831,7 +901,7 @@ PMSE.ElementHelper.prototype.valueDependencyHandler = function (dependantField, 
         var res = this.doValueDependency(dependantField, parentField, value, parent);
         operatorField = res.operator;
         dependantField = res.value;
-        if (this._mode == 'EmailPickerField' &&
+        if (this._modeShouldDisableFields(this._mode) &&
             parentField._disabled) {
             if (!dependantField._disabled) {
                 dependantField.disable();

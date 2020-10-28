@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Kontaktų sąrašo ataskaitų sritis',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Kontaktų duomenų ataskaitų sritis',
-
+    'LBL_SITE_USER_ID' => 'site_url ir kontakto ID maiša',
+    'LBL_COOKIE_CONSENT' => 'Sutikimas dėl slapukų',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Sutikimas dėl slapukų gautas',
     'LNK_CONTACT_REPORTS' => 'Kontaktų ataskaitos',
     'ERR_DELETE_RECORD' => 'Nurodykite įrašą, kad ištrinti kontaktą.',
     'LBL_ACCOUNT_ID' => 'Kliento ID:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Portalo informacija',
     'LBL_PORTAL_NAME' => 'Portalo pavadinimas:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Portalo slaptažodis nustatytas:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Portalo vartotojo įmonės pavadinimas',
     'LBL_RECORD_SAVED_SUCCESS' => 'You successfully created the {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Gatvė',
     'LBL_POSTAL_CODE' => 'Pašto kodas:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Pardavimai',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumentai',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Pasiūlymai',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Siųsti pasiūlymą',
     'LBL_QUOTES_BILL_TO' => 'Pasiūlymai',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Quoted Line Items',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Click here to edit your profile.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Here is where you can set your preferred language.  This will change the language used by Sugar Portal.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'You can return to your Profile at any time using the User menu.',
+    'ERR_PORTAL_NAME_EXISTS' => 'Portalo pavadinimas {0} jau yra. Pasikartojantys portalų pavadinimai neleidžiami. Pakeiskite portalo pavadinimą, kad jis būtų unikalus.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Principal Id',
@@ -279,4 +284,8 @@ To create a {{module_name}}:
     'LBL_FILTER_CONTACTS_REPORTS' => 'Contacts&#39; reports',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Verslo tikslais sutikote su',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Sutikimas paskutinį kartą atnaujintas',
+
+    'LBL_ENTRY_SOURCE' => 'Kontakto šaltinis',
+    'LBL_SOURCE_EXTERNAL' => 'Išorinis',
+    'LBL_SOURCE_INTERNAL' => 'Vidinis',
 );

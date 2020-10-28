@@ -56,10 +56,6 @@ final class BackwardCompatible implements CacheInterface
             return $default;
         }
 
-        if ($value === SugarCache::EXTERNAL_CACHE_NULL_VALUE) {
-            return null;
-        }
-
         return $value;
     }
 

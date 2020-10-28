@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'Mitteinstallitav',
     'LBL_ML_VERSION' => 'Versioon',
 	'LBL_ML_INSTALL'=>'Installi',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'Tracker',
 	'LBL_MODULE_NAME' => 'Uuendamis Viisard',
 	'LBL_MODULE_NAME_SINGULAR' => 'Uuendamis Viisard',
 	'LBL_UPLOAD_SUCCESS' => 'Uuendamispakett on edukalt üleslaetud. Kliki Järgmine viimase ülevaatuse teostamiseks.',

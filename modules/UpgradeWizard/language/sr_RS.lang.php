@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'Nemoguće instalirati',
     'LBL_ML_VERSION' => 'Verzija',
 	'LBL_ML_INSTALL'=>'Instaliraj',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'Sistem za praćenje',
 	'LBL_MODULE_NAME' => 'Čarobnjak nadgradnje',
 	'LBL_MODULE_NAME_SINGULAR' => 'UpgradeWizard',
 	'LBL_UPLOAD_SUCCESS' => 'Uspešno poslat paket nadgradnje. Kliknite na Sledeći za poslednju proveru.',

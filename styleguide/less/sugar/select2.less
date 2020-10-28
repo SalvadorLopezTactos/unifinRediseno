@@ -145,7 +145,7 @@
     }
 
     a {
-      background: #e5f4fb;
+      background: @grayLighter;
     }
 
     a:hover {
@@ -783,7 +783,7 @@
 
     &:nth-child(2) {
       top: 2px;
-      background: #aaa;
+      background: @grayLightish;
       left: 2px;
       right: -2px;
       z-index: 2;
@@ -791,7 +791,7 @@
 
     &:nth-child(3) {
       top: 4px;
-      background: #ccc;
+      background: @grayLighter;
       left: 4px;
       right: -4px;
       z-index: 1;
@@ -802,7 +802,7 @@
       display: block;
       position: absolute;
       overflow: hidden;
-      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+      box-shadow: inset 0 0 0 1px fade(@black, 25%);
       color: transparent;
     }
   }

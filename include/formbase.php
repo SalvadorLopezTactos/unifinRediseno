@@ -435,12 +435,8 @@ function add_to_prospect_list($query_panel,$parent_module,$parent_type,$parent_i
     $GLOBALS['log']->debug('add_prospects_to_prospect_list:parameters:'.$link_attribute);
     $GLOBALS['log']->debug('add_prospects_to_prospect_list:parameters:'.$link_type);
 
+    $focus = BeanFactory::getBean($parent_module, $parent_id);
 
-    if (!class_exists($parent_type)) {
-        require_once FileLoader::validateFilePath('modules/'.$parent_module.'/'.$parent_type.'.php');
-    }
-    $focus = new $parent_type();
-    $focus->retrieve($parent_id);
     if(empty($focus->id)) {
         return false;
     }

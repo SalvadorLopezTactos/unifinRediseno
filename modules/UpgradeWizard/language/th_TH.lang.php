@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'ถอนการติดตั้งได้',
     'LBL_ML_VERSION' => 'เวอร์ชัน',
 	'LBL_ML_INSTALL'=>'ติดตั้ง',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'เครื่องมือติดตาม',
 	'LBL_MODULE_NAME' => 'UpgradeWizard',
 	'LBL_MODULE_NAME_SINGULAR' => 'UpgradeWizard',
 	'LBL_UPLOAD_SUCCESS' => 'อัปโหลดแพ็คเกจการอัปเกรดสำเร็จแล้ว ให้คลิกที่ถัดไปเพื่อดำเนินการตรวจสอบขั้นสุดท้าย',

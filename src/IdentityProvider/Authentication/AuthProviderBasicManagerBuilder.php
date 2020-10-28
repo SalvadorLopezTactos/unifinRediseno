@@ -120,7 +120,7 @@ class AuthProviderBasicManagerBuilder
     protected function getLocalAuthProvider()
     {
         $encoderFactory = new EncoderFactory([
-            User::class => (new EncoderBuilder())->buildEncoder($this->encoderConfig),
+            User::class => (new EncoderBuilder())->buildEncoder($this->encoderConfig, true, true),
         ]);
 
         return new DaoAuthenticationProvider(

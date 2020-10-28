@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'Kontakt',
     'LBL_DISCOUNT_TOTAL' => 'Całkowity rabat',
     'LBL_DISCOUNT_AMOUNT' => 'Kwota rabatu',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'Wartość kwoty rabatu',
     'LBL_EXT_PRICE' => 'Kwota zewnętrzna',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Nazwa symbolu waluty',

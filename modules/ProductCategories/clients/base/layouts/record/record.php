@@ -64,6 +64,9 @@ $viewdefs['ProductCategories']['base']['layout']['record'] = array(
                             'components' => array(
                                 array(
                                     'layout' => 'preview',
+                                    'xmeta' => [
+                                        'editable' => true,
+                                    ],
                                 ),
                             ),
                         ),

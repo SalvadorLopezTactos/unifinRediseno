@@ -33,12 +33,18 @@ while($a = $db->fetchByAssoc($r)) {
 }
 
 if(empty($badAccts)) {
-	echo $mod_strings['LBL_REPAIR_IE_SUCCESS'];
+    echo htmlspecialchars($mod_strings['LBL_REPAIR_IE_SUCCESS']);
 } else {
-	echo "<div class='error'>{$mod_strings['LBL_REPAIR_IE_FAILURE']}</div><br />";
-	foreach($badAccts as $id => $acctName) {
-		echo "<a href='index.php?module=InboundEmail&action=EditView&record={$id}' target='_blank'>{$acctName}</a><br />";
-	}
+    echo '<div class="error">'.htmlspecialchars($mod_strings['LBL_REPAIR_IE_FAILURE']).'</div><br/>';
+    foreach ($badAccts as $id => $acctName) {
+        $href = 'index.php?'.
+            http_build_query([
+                'module' => 'InboundEmail',
+                'action' => 'EditView',
+                'record' => $id,
+            ]);
+        echo '<a href="'.htmlspecialchars($href).'" target="_blank">'.htmlspecialchars($acctName).'</a><br/>';
+    }
 }
 
 ?>

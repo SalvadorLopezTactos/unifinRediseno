@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => '联系人列表仪表板',
     'LBL_CONTACTS_RECORD_DASHBOARD' => '联系人记录仪表板',
-
+    'LBL_SITE_USER_ID' => 'site_url 和联系人 ID 的散列',
+    'LBL_COOKIE_CONSENT' => 'Cookie 同意书',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Cookie 同意书接收时间',
     'LNK_CONTACT_REPORTS' => '查看联系人报表',
     'ERR_DELETE_RECORD' => '必须指定记录编号才能删除客户。',
     'LBL_ACCOUNT_ID' => '帐户 ID：',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => '门户网站信息',
     'LBL_PORTAL_NAME' => '门户网站名称：',
     'LBL_PORTAL_PASSWORD_ISSET' => '已设置门户网站密码：',
+    'LBL_PORTAL_USER_COMPANY_NAME' => '门户用户公司名称',
     'LBL_RECORD_SAVED_SUCCESS' => '您已成功创建 {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>。',
     'LBL_STREET' => '街道',
     'LBL_POSTAL_CODE' => '邮编：',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => '商业机会',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => '文档',
     'LBL_QUOTES_SUBPANEL_TITLE' => '报价',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => '报价 (运送到)',
     'LBL_QUOTES_BILL_TO' => '报价 (账单到)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => '已报价单项',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => '点击这里编辑您的个人资料。',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => '在这里你可以设置你喜欢的语言。这将改变Sugar门户所使用的语言。',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => '您可以随时使用用户菜单返回到个人账户设置',
+    'ERR_PORTAL_NAME_EXISTS' => '门户名称 {0} 已存在。不允许使用重复的门户名称。请将其更改为唯一的门户名称。',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B 主要编号',
@@ -279,4 +284,8 @@ $mod_strings = array (
     'LBL_FILTER_CONTACTS_REPORTS' => '联系人报告',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => '许可的商业目的',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => '上次更新的许可',
+
+    'LBL_ENTRY_SOURCE' => '联系人来源',
+    'LBL_SOURCE_EXTERNAL' => '外部',
+    'LBL_SOURCE_INTERNAL' => '内部',
 );

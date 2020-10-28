@@ -37,19 +37,6 @@ class User implements AdvancedUserInterface
     const USER_TYPE_ADMINISTRATOR = 1;
 
     /**
-     * OpenId Connect standard attributes
-     */
-    const OIDC_ATTRIBUTES = [
-        'given_name',
-        'family_name',
-        'middle_name',
-        'nickname',
-        'address',
-        'email',
-        'phone_number',
-    ];
-
-    /**
      * @var string
      */
     private $username;
@@ -246,6 +233,11 @@ class User implements AdvancedUserInterface
     public function setLocalUser(User $localUser)
     {
         $this->localUser = $localUser;
+        foreach ($localUser->getAttributes() as $name => $value) {
+            if (!$this->hasAttribute($name)) {
+                $this->setAttribute($name, $value);
+            }
+        }
     }
 
     /**

@@ -587,9 +587,9 @@ class IndexManager
 
         $modules = $this->getAllEnabledModules();
         foreach ($this->getManagedIndices($modules) as $index) {
-            $status[$index->getName()] = $this->enableIndexRefresh($index)->getStatus();
+            $this->enableIndexRefresh($index);
         }
-        return $status;
+        return $this->getRefreshStatus($modules);
     }
 
     /**
@@ -599,9 +599,24 @@ class IndexManager
      * more records are in need of processing from the fts_queue table.
      *
      * @param array $modules List of modules
-     * @return array List of affected indices and status code
      */
     public function disableRefresh(array $modules)
+    {
+        if (!$this->enableRefreshIntervalIndexing) {
+            return;
+        }
+
+        foreach ($this->getManagedIndices($modules) as $index) {
+            $this->setIndexRefresh($index, $this->reindexRefreshInterval);
+        }
+    }
+
+    /**
+     * get refresh status
+     * @param array $modules
+     * @return array
+     */
+    public function getRefreshStatus(array $modules)
     {
         $status = [];
         if (!$this->enableRefreshIntervalIndexing) {
@@ -609,11 +624,10 @@ class IndexManager
         }
 
         foreach ($this->getManagedIndices($modules) as $index) {
-            $status[$index->getName()] = $this->setIndexRefresh($index, $this->reindexRefreshInterval)->getStatus();
+            $status[$index->getName()] = $index->getSettings()->getRefreshInterval();
         }
         return $status;
     }
-
     /**
      * Enable replicas for all indices. This method is primarily called by the
      * scheduler when no more records are in the fts_queue table. This implies
@@ -698,22 +712,25 @@ class IndexManager
      * Set index interval
      * @param Index $index
      * @param int|string $interval
-     * @return Response
      */
     protected function setIndexRefresh(Index $index, $interval)
     {
+        // don't set refresh_interval if the value is the same
+        if ($index->getSettings()->getRefreshInterval() == $interval) {
+            return;
+        }
+
         $this->container->logger->info(sprintf(
             "IndexManager: Set refresh interval %s for %s",
             $interval,
             $index->getName()
         ));
-        return $index->getSettings()->setRefreshInterval($interval);
+        $index->getSettings()->setRefreshInterval($interval);
     }
 
     /**
      * Set proper refresh interval for given index from configuration
      * @param Index $index
-     * @return Response
      */
     protected function enableIndexRefresh(Index $index)
     {
@@ -721,7 +738,7 @@ class IndexManager
         if (!isset($config['index.refresh_interval'])) {
             throw new IndexManagerException("No refresh_interval config setting available");
         }
-        return $this->setIndexRefresh($index, $config['index.refresh_interval']);
+        $this->setIndexRefresh($index, $config['index.refresh_interval']);
     }
 
     /**

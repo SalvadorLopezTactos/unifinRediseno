@@ -63,7 +63,8 @@ class ImportViewError extends SugarView
     {
         $this->ss->assign("IMPORT_MODULE", $this->request->getValidInputRequest('import_module', 'Assert\Mvc\ModuleName', ''));
         $this->ss->assign("ACTION", 'Step1');
-        $this->ss->assign("MESSAGE", $this->request->getValidInputRequest('message', null, ''));
+        $message = $this->request->getValidInputRequest('message', null, '');
+        $this->ss->assign("MESSAGE", htmlspecialchars($message, ENT_QUOTES, 'UTF-8'));
         $this->ss->assign("SOURCE","");
         if ( isset($_REQUEST['source']) )
         $this->ss->assign("SOURCE", $this->request->getValidInputRequest('source', array('Assert\Choice' => array('choices' => self::getImportSourceOptions())), ''));

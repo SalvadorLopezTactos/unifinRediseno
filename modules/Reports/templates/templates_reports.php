@@ -162,7 +162,12 @@ function reportCriteriaWithResult(&$reporter,&$args) {
 	$smarty->assign('isSaveResults', $isSaveResults);
 	$smarty->assign('report_type', $report_type);
 	$smarty->assign('reportDetailView', getReportDetailViewString($reporter,$args));
-	$form_header = get_form_header( $mod_strings['LBL_TITLE'].": ".$args['reporter']->saved_report->name, "", false);
+    $form_header = get_form_header(
+        $mod_strings['LBL_TITLE'] . ": "
+            . htmlspecialchars($args['reporter']->saved_report->name, ENT_QUOTES, 'UTF-8'),
+        "",
+        false
+    );
 	$smarty->assign('form_header', $form_header);
 	$smarty->assign('report_offset', $reporter->report_offset);
 	$smarty->assign('sort_by', $sort_by);
@@ -285,7 +290,7 @@ function reportCriteriaWithResult(&$reporter,&$args) {
 EOD
     ;
 
-    $reportName =  $args['reporter']->saved_report->name;
+    $reportName = $args['reporter']->saved_report->name;
     $reportNameEncoded = json_encode($reportName, JSON_HEX_APOS | JSON_HEX_QUOT);
 
     $shareButtonCode = 'parent.SUGAR.App.bwc.shareRecord("Reports", "$report_id", '.$reportNameEncoded.");";
@@ -712,7 +717,12 @@ function template_reports_report(&$reporter,&$args) {
 	$smarty->assign('isSaveResults', $isSaveResults);
 	$smarty->assign('report_type', $report_type);
 
-	$form_header = get_form_header($mod_strings['LBL_TITLE'].": ".$args['reporter']->saved_report->name, "", false);
+    $form_header = get_form_header(
+        $mod_strings['LBL_TITLE'] . ": "
+        . htmlspecialchars($args['reporter']->saved_report->name, ENT_QUOTES, 'UTF-8'),
+        "",
+        false
+    );
 	$smarty->assign('form_header', $form_header);
 	$smarty->assign('report_offset', $reporter->report_offset);
 	$smarty->assign('sort_by', $sort_by);
@@ -866,7 +876,7 @@ function reportResults(&$reporter, &$args) {
 	$searchArray = array("'", "\r\n", "\n");
 	$replaceArray = array("\\'", "", "");
 	$filterStringForUI = str_replace($searchArray, $replaceArray, $reporter->createFilterStringForUI());
-	echo "<script>var filterString='" . htmlspecialchars($filterStringForUI) . "';</script>";
+        echo "<script>var filterString='" . htmlspecialchars($filterStringForUI, ENT_QUOTES, 'UTF-8') . "';</script>";
 	if ($reporter->report_def['chart_type']== 'none') {
 		$do_chart = false;
 	}

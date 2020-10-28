@@ -60,14 +60,16 @@
              * @param {Function} callback Async.js waterfall callback
              */
             this.model._doValidatePasswordConfirmation = function(fields, errors, callback) {
+                var showPasswordAlert = false;
                 // Find any change password field
                 var changePasswordFields = _.filter(fields, function(field) {
                     return field.type === 'change-password' || field.type === 'change-my-password';
                 });
                 _.each(changePasswordFields, function(field) {
+                    var fieldName = field.name;
                     // Get the new password and the confirmation
-                    var password = this.get(field.name + '_new_password'),
-                        confirmation = this.get(field.name + '_confirm_password');
+                    var password = this.get(fieldName + '_new_password');
+                    var confirmation = this.get(fieldName + '_confirm_password');
 
                     /**
                      * Passwords don't match
@@ -75,8 +77,9 @@
                     if (password !== confirmation) {
                         // Adds the validation error
                         // confirm_password is added to errorName2Keys on initialize
-                        errors[field.name] = errors[field.name] || {};
-                        errors[field.name]['confirm_password'] = true;
+                        errors[fieldName] = errors[fieldName] || {};
+                        errors[fieldName].confirm_password = true;
+                        showPasswordAlert = true;
                         if (this.showPopupAlerts) {
                             app.alert.show('passwords_mismatch', {
                                 level: 'error',
@@ -85,20 +88,39 @@
                                 autoCloseDelay: 5000,
                             });
                         }
-                    } else if (!errors[field.name]) {
-                        /**
-                         * Passwords match
-                         */
-                        this.unset(field.name + '_current_password'); //Needs to be cleared for change-my-password
-                        if (password !== '') {
-                            this.unset(field.name + '_new_password');
-                            this.unset(field.name + '_confirm_password');
-                            this.set(field.name, password);
+                    } else {
+                        var data = app.utils.validatePassword(password);
+                        if (!data.isValid) {
+                            var errMsg = app.lang.get('LBL_PASSWORD_ENFORCE_TITLE');
+                            errors[fieldName] = errors[fieldName] || {};
+                            errors[fieldName].confirm_password = true;
+                            if (data.error) {
+                                errMsg += '<br><br>' + data.error;
+                            }
+                            showPasswordAlert = true;
+                            app.alert.show('passwords_invalid', {
+                                level: 'error',
+                                messages: errMsg,
+                            });
+                        } else if (!errors[fieldName]) {
+                            /**
+                             * Passwords match
+                             */
+                            this.unset(fieldName + '_current_password'); //Needs to be cleared for change-my-password
+                            if (password !== '') {
+                                this.unset(fieldName + '_new_password');
+                                this.unset(fieldName + '_confirm_password');
+                                this.set(fieldName, password);
+                            }
                         }
                     }
+
                 }, this);
 
                 callback(null, fields, errors);
+                if (showPasswordAlert) {
+                    app.alert.dismiss('invalid-data');
+                }
             };
 
             /**
@@ -255,4 +277,5 @@
         this.model.removeValidationTask('password_confirmation_' + this.cid);
         this._super('_dispose');
     }
+
 })

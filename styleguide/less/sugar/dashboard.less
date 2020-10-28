@@ -226,6 +226,14 @@
   }
 }
 
+.row-model-data {
+  .dashboard {
+    .headerpane {
+      position: static;
+    }
+  }
+}
+
 /* Dashboard inside right hand side panel */
 //FIXME: UIUX-2174 will refactor this part.
 .sidebar-content {
@@ -451,3 +459,185 @@
 }
 
 /* NEW SKIN END */
+
+.side,
+.sidebar-content {
+  .tabbable:not(.hide-tabs) {
+    .nav-tabs {
+      display: flex;
+      margin-bottom: 0;
+      border-collapse: collapse;
+      border-bottom: 1px solid @tableBorderColor;
+
+      li {
+        margin-top: 10px;
+
+        > a {
+          border: none;
+          margin: 0;
+        }
+      }
+
+      &.active {
+        border-bottom-color: transparent;
+      }
+
+      .nav-item {
+        flex-basis: 27%;
+        border-left: 1px solid @tableBorderColor;
+        border-top: 1px solid @tableBorderColor;
+        white-space: nowrap;
+
+        > a {
+          margin: 0;
+          padding: 10px;
+          border-radius: 0;
+        }
+      }
+
+      &.related-tabs {
+        height: 48px;
+      }
+
+      .nav-item:first-child {
+        margin-left: 10px;
+      }
+
+      .nav-item.border-right {
+        border-right: 1px solid @tableBorderColor;
+      }
+
+      .tab-controls {
+        flex-basis: 16%;
+        padding: 10px;
+        text-align: center;
+        border-top: none;
+        border-right: none;
+        border-left: 1px solid @tableBorderColor;
+        margin-right: 10px;
+      }
+
+      .more-tabs {
+        flex-basis: 8%;
+        text-align: center;
+        border-top: 1px solid @tableBorderColor;
+        border-left: 1px solid @tableBorderColor;
+        border-right: 1px solid @tableBorderColor;
+        margin-right: 10px;
+
+        .nav-item:first-child {
+          margin-left: 0;
+        }
+
+        .nav-item {
+          border-left: none;
+          margin-top: 0;
+        }
+
+        > a {
+          padding: 10px;
+        }
+
+        button {
+          padding: 8px;
+        }
+
+        .btn-group.open {
+          .dropdown-menu {
+            margin-top: 3px;
+          }
+        }
+
+        .dropdown-menu {
+          top: 46px;
+          right: 10px;
+          left: initial;
+          z-index: 1500;
+        }
+
+        .nav-tabs li {
+          margin-top: 0;
+        }
+      }
+    }
+
+    .dashboard {
+      top: 105px;
+
+      .headerpane {
+        top: 94px;
+      }
+    }
+  }
+}
+
+.dashboard .tabbable {
+  background-color: #fff;
+
+  .nav-tabs > li > a {
+    border-radius: 0;
+    margin-left: -1px;
+    border-left: 1px solid @grayLighter;
+    border-right: 1px solid @grayLighter;
+    outline: none;
+  }
+}
+
+.console_dashboard,
+.agent_workbench_dashboard {
+  .dashlet-container {
+    overflow-y: auto;
+    height: @workbenchOverviewDashletHeight;
+    max-height: @workbenchOverviewDashletHeight;
+
+    > div {
+      height: 100%;
+
+      .thumbnail.dashlet:not(.collapsed) {
+        display: flex;
+        flex-direction: column;
+        height: ~"calc(@{workbenchOverviewDashletHeight} - 12px)";
+        max-height: ~"calc(@{workbenchOverviewDashletHeight} - 12px)";
+
+        .dashlet-unordered-list.dashablerecord .tab-content {
+          height: 100%;
+        }
+
+        .dashlet-unordered-list:not(.dashablerecord) .tab-content {
+          height: auto;
+        }
+
+        .dashlet-content {
+          display: flex;
+          flex-grow: 1;
+          flex-direction: column;
+
+          .list-view {
+            flex-grow: 1;
+            flex-basis: 1;
+            display: flex;
+            max-height: unset;
+            flex-direction: column;
+          }
+        }
+      }
+    }
+  }
+
+  .thumbnail.dashlet:not(.collapsed) h4.dashlet-title {
+    padding-top: 11px;
+    padding-bottom: 11px;
+  }
+
+  .side-drawer {
+    .dashlet-container {
+      height: @workbenchDrawerDashletHeight;
+      max-height: @workbenchDrawerDashletHeight;
+
+      > div .thumbnail.dashlet:not(.collapsed) {
+        height: ~"calc(@{workbenchDrawerDashletHeight} - 12px)";
+        max-height: ~"calc(@{workbenchDrawerDashletHeight} - 12px)";
+      }
+    }
+  }
+}

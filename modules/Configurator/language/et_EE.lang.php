@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'Pildi kuvasuhte peaks olema vahemikus 1:1 kuni 10:1. Pildi suurust muudetakse.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'Pildi kuvasuhe peab olema vahemikus 3:1 kuni 20:1. Laadige üles uus fail selle suhtega.',
     'ERR_ALERT_FILE_UPLOAD' => 'Tõrge pildi üleslaadimisel.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Piltide kataloogi ei saa luua',
     'LBL_LOGGER'=>'Loggeri sätted',
 	'LBL_LOGGER_FILENAME'=>'Logi faili nimi',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Laiend',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Maksimaalne logi suurus',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Kuupäeva vaikevorming',
 	'LBL_LOGGER_LOG_LEVEL'=>'Logi tase',
@@ -458,6 +458,10 @@ Täiendavate süsteemi sätete konfigureerimiseks klõpsake <a href="index.php?m
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Kommentaaride logi sätted',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Maksimaalne kommentaari kirje kohta kuvatav tärkide arv',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

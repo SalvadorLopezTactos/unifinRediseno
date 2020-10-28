@@ -14,6 +14,9 @@ use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
 use Sugarcrm\Sugarcrm\MetaData\RefreshQueue;
 use Sugarcrm\Sugarcrm\Logger\Factory as LoggerFactory;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
@@ -277,10 +280,11 @@ class MetaDataManager implements LoggerAwareInterface
             'merge_relate_update_timeout' => true,
             'merge_relate_max_attempt' => true,
         ),
+        'catalog_enabled' => true,
+        'catalog_url' => true,
         'default_decimal_seperator' => true,
         'default_number_grouping_seperator' => true,
         'default_currency_significant_digits' => true,
-        'enable_legacy_dashboards' => true,
         'logger' => array(
             'level' => true,
             'write_to_server' => true,
@@ -395,6 +399,42 @@ class MetaDataManager implements LoggerAwareInterface
     protected $additionalVardefProps = array(
         'dynamic_subpanel_name',
     );
+
+    /**
+     * acl values for blocked access
+     * @var array
+     */
+    protected $aclWithNoAccess = [
+        'access' => 'no',
+        'view' => 'no',
+        'list' => 'no',
+        'edit' => 'no',
+        'delete' => 'no',
+        'import' => 'no',
+        'export' => 'no',
+        'massupdate'  => 'no',
+    ];
+
+    /**
+     * access acl values for full access
+     * @var array
+     */
+    protected $aclWithFullAccess = [
+        'access' => 'yes',
+        'view' => 'yes',
+        'list' => 'yes',
+        'edit' => 'yes',
+        'delete' => 'yes',
+        'import' => 'yes',
+        'export' => 'yes',
+        'massupdate'  => 'yes',
+    ];
+
+    /**
+     * idp config
+     * @var
+     */
+    protected $idpConfig;
 
     /**
      * The constructor for the class. Sets the visibility flag, the visibility
@@ -630,29 +670,53 @@ class MetaDataManager implements LoggerAwareInterface
     public function getModuleViews($moduleName, MetaDataContextInterface $context = null)
     {
         $data = $this->getModuleClientData('view', $moduleName, $context);
-        $data = $this->removeDisabledFields($data);
+        $data = $this->removeDisabledFields($moduleName, $data);
         return $data;
     }
 
     /**
      * Removes disabled fields from view definition
      *
+     * @param string $moduleName
      * @param array $data
      * @return array
      */
-    protected function removeDisabledFields(array $data)
+    protected function removeDisabledFields(string $moduleName, array $data)
     {
         foreach ($data as $key => $value) {
             if (is_array($value)) {
                 if ($key === 'fields') {
-                    $value = array_filter($value, function ($field) {
-                        return !is_array($field) || !isset($field['enabled']) || $field['enabled'];
+                    $value = array_filter($value, function ($field) use ($moduleName) {
+                        if (!is_array($field)) {
+                            return !is_array($field);
+                        }
+
+                        // check enable flag
+                        if (isset($field['enabled']) && empty($field['enabled'])) {
+                            return false;
+                        }
+
+                        // check AccessControl
+                        // This section of code is a portion of the code referred
+                        // to as Critical Control Software under the End User
+                        // License Agreement.  Neither the Company nor the Users
+                        // may modify any portion of the Critical Control Software.
+                        if (empty($field['name'])
+                            || (AccessControlManager::instance()->isFieldAccessControlledModule($moduleName)
+                                && !AccessControlManager::instance()->allowFieldAccess($moduleName, $field['name'])
+                            )
+                        ) {
+                            return false;
+                        }
+                        //END REQUIRED CODE DO NOT MODIFY
+                        return true;
+
                     });
 
                     // make sure the resulting array has no gaps in keys
                     $value = array_values($value);
                 } else {
-                    $value = $this->removeDisabledFields($value);
+                    $value = $this->removeDisabledFields($moduleName, $value);
                 }
                 $data[$key] = $value;
             }
@@ -767,10 +831,8 @@ class MetaDataManager implements LoggerAwareInterface
      */
     public function getModulesData(MetaDataContextInterface $context = null)
     {
-        $filterModules = false;
-        if (SugarConfig::getInstance()->get('roleBasedViews') && !($context instanceof MetaDataContextDefault)) {
-            $filterModules = true;
-        }
+        $filterModules = $this->getFilterModulesFlag($context);
+
         if (!isset($this->data['full_module_list'])) {
             $this->data['full_module_list'] = $this->getModuleList($filterModules);
         }
@@ -803,7 +865,7 @@ class MetaDataManager implements LoggerAwareInterface
             $vardefs['fields'] = MassUpdate::setMassUpdateFielddefs($vardefs['fields'], $moduleName);
         }
 
-        $data['fields'] = isset($vardefs['fields']) ? $vardefs['fields'] : array();
+        $data['fields'] = $this->getVardefFields($moduleName, $vardefs);
         // Add the _hash for the fields array
         $data['fields']['_hash'] = md5(serialize($data['fields']));
         $data['nameFormat'] = isset($vardefs['name_format_map'])?$vardefs['name_format_map']:null;
@@ -961,6 +1023,33 @@ class MetaDataManager implements LoggerAwareInterface
     }
 
     /**
+     * applying Field Access Control to vardefs' fields
+     * @param string $moduleName
+     * @param array $vardefs
+     * @return array
+     */
+    protected function getVardefFields(string $moduleName, array $vardefs) : array
+    {
+        if (!isset($vardefs['fields'])) {
+            return [];
+        }
+
+        $data = $vardefs['fields'];
+        // This section of code is a portion of the code referred
+        // to as Critical Control Software under the End User
+        // License Agreement.  Neither the Company nor the Users
+        // may modify any portion of the Critical Control Software.
+        if (AccessControlManager::instance()->isFieldAccessControlledModule($moduleName)) {
+            foreach ($data as $fieldName => $value) {
+                if (!AccessControlManager::instance()->allowFieldAccess($moduleName, $fieldName)) {
+                    unset($data[$fieldName]);
+                }
+            }
+        }
+        //END REQUIRED CODE DO NOT MODIFY
+        return $data;
+    }
+    /**
      * Gets the ACL's for the module, will also expand them so the client side of the ACL's don't have to do as many checks.
      *
      * @param  string $module     The module we want to fetch the ACL for
@@ -984,10 +1073,15 @@ class MetaDataManager implements LoggerAwareInterface
         $outputAcl['admin'] = ($userObject->isAdminForModule($module)) ? 'yes' : 'no';
         $outputAcl['developer'] = ($userObject->isDeveloperForModule($module)) ? 'yes' : 'no';
 
-        if (!SugarACL::moduleSupportsACL($module)) {
-            foreach (array('access', 'view', 'list', 'edit', 'delete', 'import', 'export', 'massupdate') as $action) {
-                $outputAcl[$action] = 'yes';
-            }
+        // This section of code is a portion of the code referred
+        // to as Critical Control Software under the End User
+        // License Agreement.  Neither the Company nor the Users
+        // may modify any portion of the Critical Control Software.
+        if (!AccessControlManager::instance()->allowModuleAccess($module)) {
+            $outputAcl = array_merge($outputAcl, $this->aclWithNoAccess);
+            //END REQUIRED CODE DO NOT MODIFY
+        } elseif (!SugarACL::moduleSupportsACL($module)) {
+            $outputAcl = array_merge($outputAcl, $this->aclWithFullAccess);
         } else {
             $context = array(
                 'user' => $userObject,
@@ -2066,16 +2160,9 @@ class MetaDataManager implements LoggerAwareInterface
         $data['version'] = $this->getInstanceVersionValue('sugar_version');
         $data['build'] = $this->getInstanceVersionValue('sugar_build');
         $data['marketing_version'] = $this->getInstanceVersionValue('sugar_mar_version');
-        /*
-        $data['flavor'] = $GLOBALS['sugar_flavor'];
-        $data['version'] = $GLOBALS['sugar_version'];
-        $data['build'] = $GLOBALS['sugar_build'];
-        $data['marketing_version'] = $GLOBALS['sugar_mar_version'];
-        */
-        // Product Name for Professional edition.
-        $data['product_name'] = "SugarCRM Professional";
-        // Product Name for Enterprise edition.
-        $data['product_name'] = "SugarCRM Enterprise";
+
+        $data['product_name'] = "SugarCRM";
+
         if (file_exists('custom/version.php')) {
             include 'custom/version.php';
             $data['custom_version'] = $custom_version;
@@ -2102,17 +2189,26 @@ class MetaDataManager implements LoggerAwareInterface
         }
 
         //Adds the portal status to the server info collection.
-        $admin = Administration::getSettings();
         //Property 'on' of category 'portal' must be a boolean.
-        $data['portal_active'] = !empty($admin->settings['portal_on']);
+        $data['portal_active'] = !empty($system_config->settings['portal_on']);
 
-        // needed for Pendo analytics
-        if (!empty($admin->settings['site_id'])) {
-            $data['site_id'] = $admin->settings['site_id'];
-        }
-        return $data;
+        // Add in analytic data
+        return $system_config->getUpdatedAnalyticServerInfo($data, $system_config->settings);
     }
 
+    /**
+     * get Idp config
+     *
+     * @return Authentication\Config
+     */
+    protected function getIdpConfig()
+    {
+        if (empty($this->idpConfig)) {
+            $this->idpConfig = new Authentication\Config(\SugarConfig::getInstance());
+        }
+
+        return $this->idpConfig;
+    }
     /**
      * Gets configs
      *
@@ -2124,7 +2220,7 @@ class MetaDataManager implements LoggerAwareInterface
         $administration = new Administration();
         $administration->retrieveSettings();
 
-        $idpConfig = new Authentication\Config(\SugarConfig::getInstance());
+        $idpConfig = $this->getIdpConfig();
         $properties = $this->getConfigProperties();
         $properties = $this->parseConfigProperties($sugarConfig, $properties);
         $configs = $this->handleConfigPropertiesExceptions($properties);
@@ -2142,7 +2238,7 @@ class MetaDataManager implements LoggerAwareInterface
             }
         }
 
-        $auth = AuthenticationController::getInstance($sugarConfig['authenticationClass'] ?? null);
+        $auth = AuthenticationController::getInstance($sugarConfig['authenticationClass'] ?? null, $idpConfig);
 
         if ($auth->isExternal()) {
             $configs['externalLogin'] = true;
@@ -2153,6 +2249,10 @@ class MetaDataManager implements LoggerAwareInterface
             $configs['analytics'] = $sugarConfig['analytics'];
         } else {
             $configs['analytics'] = array('enabled' => false);
+        }
+
+        if (isset($sugarConfig['passwordsetting'])) {
+            $configs['passwordsetting'] = $sugarConfig['passwordsetting'];
         }
 
         $caseBean = BeanFactory::newBean('Cases');
@@ -2200,6 +2300,10 @@ class MetaDataManager implements LoggerAwareInterface
             $sugarConfig['processes_auto_validate_on_autosave'] : true;
         $configs['processDesignerAutosaveInterval'] = isset($sugarConfig['processes_auto_save_interval']) ?
             $sugarConfig['processes_auto_save_interval'] : 30000;
+
+        //Allowed Link Schemes Setting
+        $configs['allowedLinkSchemes'] = isset($sugarConfig['allowed_link_schemes']) ?
+            $sugarConfig['allowed_link_schemes'] : ['http', 'https'];
 
         return $configs;
     }
@@ -2430,6 +2534,9 @@ class MetaDataManager implements LoggerAwareInterface
      */
     public function getMetadata($args = array(), MetaDataContextInterface $context = null)
     {
+        // disable admin work, metadata is always access controlled
+        $adminWork = new AdminWork();
+        $adminWork->reset(false);
         $data =  $this->getMetadataInternal($args, $context);
         //update the hash before returning to ensure the base and context hashes are incorperated.
         //Internally this hash is not stored with a context cache.
@@ -2450,11 +2557,21 @@ class MetaDataManager implements LoggerAwareInterface
 
         $intialContext = ($isDefaultContext || $this->public) ? $defaultContext : $partialContext;
 
-        //Start with the default metadata
+        // to retrieve default data
+        $defaultData = [];
+        if ($intialContext->getHash() != $defaultContext->getHash()) {
+            $defaultData = $this->loadAndCacheMetadata($args, $defaultContext, $ignoreCache);
+        }
+        // Start with the default or partial metadata
         $data = $this->loadAndCacheMetadata($args, $intialContext, $isDefaultContext && $ignoreCache);
 
+        // merge partial and default together
+        if (!empty($defaultData)) {
+            $data = array_merge($defaultData, $data);
+        }
+
         // Get our metadata if a users specific context was provided
-        if (!$this->public && !$isDefaultContext) {
+        if (!$this->public && !($context instanceof MetaDataContextDefault)) {
             $contextData = $this->loadAndCacheMetadata(false, $context, $ignoreCache, $data['_hash']);
             $data = array_merge($data, $contextData);
         }
@@ -2872,6 +2989,21 @@ class MetaDataManager implements LoggerAwareInterface
     }
 
     /**
+     * get filter module flag
+     * @param MetaDataContextInterface $context
+     * @return bool
+     */
+    protected function getFilterModulesFlag(MetaDataContextInterface $context = null)
+    {
+        $filterModules = false;
+        if (SugarConfig::getInstance()->get('roleBasedViews') && !($context instanceof MetaDataContextDefault)) {
+            $filterModules = true;
+        }
+
+        return $filterModules;
+    }
+
+    /**
      * Gets full module list and data for each module and uses that data to
      * populate the modules/full_module_list section of the metadata
      *
@@ -2881,10 +3013,8 @@ class MetaDataManager implements LoggerAwareInterface
      */
     public function populateModules($data, MetaDataContextInterface $context = null)
     {
-        $filterModules = false;
-        if (SugarConfig::getInstance()->get('roleBasedViews') && !($context instanceof MetaDataContextDefault)) {
-            $filterModules = true;
-        }
+        $filterModules = $this->getFilterModulesFlag($context);
+
         $this->data['full_module_list'] = $data['full_module_list'] = $this->getModuleList($filterModules);
         $this->data['modules'] = $data['modules'] = $this->getModulesData($context);
         $data['modules_info'] = $this->getModulesInfo(array(), $context);
@@ -2921,10 +3051,8 @@ class MetaDataManager implements LoggerAwareInterface
     {
         global $moduleList;
 
-        $filterModules = false;
-        if (SugarConfig::getInstance()->get('roleBasedViews') && !($context instanceof MetaDataContextDefault)) {
-            $filterModules = true;
-        }
+        $filterModules = $this->getFilterModulesFlag($context);
+
         $fullModuleList = $this->getFullModuleList($filterModules);
 
         $modulesInfo = array();
@@ -3054,7 +3182,7 @@ class MetaDataManager implements LoggerAwareInterface
     public function getFilteredModuleList($list)
     {
         $user = $this->getCurrentUser();
-        if (!empty($user->id) && !empty($GLOBALS['sugar_config']['roleBasedViews']) && !$this->public) {
+        if (!empty($user->id) && !$this->public) {
             $list = SugarACL::filterModuleList($list);
         }
 
@@ -3679,6 +3807,18 @@ class MetaDataManager implements LoggerAwareInterface
     }
 
     /**
+     * get current user's hash key
+     */
+    public function getCurrentUserCachedMetadataHashKey()
+    {
+        global $current_user;
+        if (empty($current_user)) {
+            return null;
+        }
+
+        return $this->getCachedMetadataHashKey(new MetaDataContextUser($current_user));
+    }
+    /**
      * Public accessor that gets the hash for a metadata file cache. This is a
      * wrapper to {@see getCachedMetadataHash}
      *
@@ -4144,7 +4284,7 @@ class MetaDataManager implements LoggerAwareInterface
     }
 
     /**
-     * Returns all possible metadata contexts
+     * Returns all possible metadata contexts, context will be based on license's types
      *
      * @param boolean $public Is metadata public
      * @return MetaDataContextInterface[]
@@ -4152,17 +4292,30 @@ class MetaDataManager implements LoggerAwareInterface
     protected static function getAllMetadataContexts($public)
     {
         $contexts = array();
-        $adminUser = BeanFactory::newBean("Users");
-        $adminUser->is_admin = '1';
+        $allSubsetsOfSystemSubscriptions = SubscriptionManager::instance()->getAllSubsetsOfSystemSubscriptions();
+        $users = [];
+        foreach ($allSubsetsOfSystemSubscriptions as $subscriptions) {
+            $user = BeanFactory::newBean('Users');
+            $user->license_type = json_encode($subscriptions);
+            $users[] = $user;
+            $adminUser = BeanFactory::newBean('Users');
+            $adminUser->is_admin = '1';
+            $adminUser->license_type = json_encode($subscriptions);
+            $users[] = $adminUser;
+        }
         if (!$public) {
             $roleSets = self::getAllRoleSets();
             foreach ($roleSets as $roleSet) {
                 $contexts[] = new MetaDataContextRoleSet($roleSet);
-                $contexts[] = new MetaDataContextUser($adminUser, $roleSet);
+                foreach ($users as $user) {
+                    $contexts[] = new MetaDataContextUser($user, $roleSet);
+                }
             }
         }
         $contexts[] = new MetaDataContextDefault();
-        $contexts[] = new MetaDataContextUser($adminUser);
+        foreach ($users as $user) {
+            $contexts[] = new MetaDataContextUser($user);
+        }
 
         return $contexts;
     }

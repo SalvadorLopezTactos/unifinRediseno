@@ -168,6 +168,44 @@ class SAMLUserCheckerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers ::checkPostAuth
+     *
+     * @expectedException \Symfony\Component\Security\Core\Exception\DisabledException
+     */
+    public function testIfUserDisabledAndAutoCreateUsersIsTrue(): void
+    {
+        $user = new User('max@test.com', '', [
+            'identityValue' => 'max@test.com',
+            'identityField' => 'email',
+            'attributes' => ['a' => 'b'],
+        ]);
+        $config = [
+            'sp' => [
+                'provisionUser' => true,
+            ],
+        ];
+        $this->localUserProvider->expects($this->at(0))
+            ->method('loadUserByFieldAndProvider')
+            ->with('max@test.com', Providers::SAML)
+            ->willThrowException(new UsernameNotFoundException('User not found'));
+        $this->localUserProvider->expects($this->at(1))
+            ->method('loadUserByFieldAndProvider')
+            ->with('max@test.com', Providers::LOCAL)
+            ->willThrowException(new UsernameNotFoundException('User not found'));
+        $this->localUserProvider->expects($this->once())
+            ->method('isDeactivatedUserExist')
+            ->with('max@test.com', Providers::SAML)
+            ->willReturn(true);
+
+        $this->localUserProvider->expects($this->never())
+            ->method('createUser');
+
+
+        $userChecker = new SAMLUserChecker($this->localUserProvider, $config);
+        $userChecker->checkPostAuth($user);
+    }
+
+    /**
      * Test Linking to existing Local users Autocreated SAML users
      * @covers ::checkPostAuth
      * @covers ::getLocalUser

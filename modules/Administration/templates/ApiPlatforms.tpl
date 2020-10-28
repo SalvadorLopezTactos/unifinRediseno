@@ -82,6 +82,7 @@
         $('head').append(
             "<style type='text/css'>" +
                 ".yui-dt > div { margin-right: -15px; }" +
+                ".yui-dt-liner  { font-style: italic; }" +
                 "tr.yui-dt-rec { border-bottom: 1px solid #BBB; }" +
                 ".add_table td>div {" +
                     "display: inline-block;" +
@@ -94,10 +95,13 @@
             [
                 {key: "name", label: lbl_api_platforms, width: 200, sortable: false, formatter: function (cell, rec, col, data) {
                     if (rec.getData('custom')) {
-                        cell.innerHTML = data + '<a style="float: right;" href="javascript:void()" ' +
+                        cell.innerHTML ='<a style="float: right;" href="javascript:void()" ' +
                             'onclick="deleteRow(this);">' + deleteImage + '</a>';
+                        const platformName = document.createElement('span');
+                        platformName.textContent =  data;
+                        cell.prepend(platformName);
                     } else {
-                        cell.innerHTML = '<i>' + data + '</i>';
+                        cell.textContent = data;
                     }
                 }}
             ],

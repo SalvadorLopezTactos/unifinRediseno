@@ -15,6 +15,8 @@ namespace Sugarcrm\IdentityProvider\Tests\Unit\App\Provider;
 use Psr\Log\LoggerInterface;
 
 use Sugarcrm\IdentityProvider\App\Application;
+use Sugarcrm\IdentityProvider\App\Repository\Exception\TenantInDifferentRegionException;
+use Sugarcrm\IdentityProvider\App\Regions\TenantRegion;
 use Sugarcrm\IdentityProvider\App\Repository\TenantRepository;
 use Sugarcrm\IdentityProvider\App\TenantConfiguration;
 use Sugarcrm\IdentityProvider\App\Provider\TenantConfigInitializer;
@@ -34,7 +36,6 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  */
 class TenantConfigInitializerTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var Application | \PHPUnit_Framework_MockObject_MockObject
      */
@@ -76,6 +77,11 @@ class TenantConfigInitializerTest extends \PHPUnit_Framework_TestCase
     private $rememberMeService;
 
     /**
+     * @var TenantRegion | \PHPUnit_Framework_MockObject_MockObject
+     */
+    private $tenantRegion;
+
+    /**
      * @var Srn\Manager
      */
     private $srnManager;
@@ -96,6 +102,15 @@ class TenantConfigInitializerTest extends \PHPUnit_Framework_TestCase
     private $tenantConfigArray = ['base', 'idm', 'merged', 'with', 'tenant', 'config'];
 
     /**
+     * @var array
+     */
+    private $config = [
+        'idm' => [
+            'region' => 'na',
+        ],
+    ];
+
+    /**
      * @inheritdoc
      */
     protected function setUp()
@@ -105,6 +120,11 @@ class TenantConfigInitializerTest extends \PHPUnit_Framework_TestCase
         $this->logger = $this->createMock(LoggerInterface::class);
 
         $this->application = $this->createMock(Application::class);
+
+        $this->application->method('getConfig')->willReturn($this->config);
+
+        $this->tenantRegion = $this->createMock(TenantRegion::class);
+        $this->application->method('getTenantRegion')->willReturn($this->tenantRegion);
 
         $this->rememberMeService = $this->createMock(RememberMeService::class);
         $this->application->method('getRememberMeService')->willReturn($this->rememberMeService);
@@ -116,6 +136,7 @@ class TenantConfigInitializerTest extends \PHPUnit_Framework_TestCase
         $this->sessionService = $this->createMock(Session::class);
         $this->request = $this->createMock(Request::class);
         $this->request->request = $this->createMock(ParameterBag::class);
+        $this->request->cookies = $this->createMock(ParameterBag::class);
         $this->request->headers = $this->createMock(HeaderBag::class);
         $this->request->attributes = $this->createMock(ParameterBag::class);
         $this->request->attributes->method('get')->willReturn('someRoute');
@@ -155,26 +176,27 @@ class TenantConfigInitializerTest extends \PHPUnit_Framework_TestCase
     public function priorityOfTenantSourcesDP()
     {
         $tenants = [
-            'session' => 'srn:session:tenant:eu:0000000001:tenant',
+            'session' => 'srn:session:tenant:eu:1000000001:tenant',
+            'cookie' => 'srn:session:tenant:eu:2000000002:tenant',
             'requestLoginHintId' => [
-                ['tenant_hint', null, '0000000003'],
+                ['tenant_hint', null, '1000000003'],
                 ['tid', null, ''],
             ],
             'requestLoginHintShortId' => [
-                ['tenant_hint', null, '3'],
+                ['tenant_hint', null, '1000000003'],
                 ['tid', null, ''],
             ],
             'requestTid' => [
-                ['tid', null, 'srn:request:tenant:eu:0000000003:tenant'],
+                ['tid', null, 'srn:request:tenant:eu:1000000003:tenant'],
                 ['tenant_hint', null, ''],
             ],
             'requestLoginHint' => [
                 ['tid', null, ''],
-                ['tenant_hint', null, 'srn:request:tenant:eu:0000000004:tenant'],
+                ['tenant_hint', null, 'srn:request:tenant:eu:1000000004:tenant'],
             ],
             'requestBoth' => [
-                ['tid', null, 'srn:request:tenant:eu:0000000003:tenant'],
-                ['tenant_hint', null, 'srn:request:tenant:eu:0000000004:tenant'],
+                ['tid', null, 'srn:request:tenant:eu:1000000003:tenant'],
+                ['tenant_hint', null, 'srn:request:tenant:eu:1000000004:tenant'],
             ],
         ];
 
@@ -185,7 +207,7 @@ class TenantConfigInitializerTest extends \PHPUnit_Framework_TestCase
             ]));
         $tokenWithTenant->method('getAttribute')
             ->will($this->returnValueMap([
-                    ['tenantSrn', 'srn:request:tenant:eu:0000000004:tenant'],
+                    ['tenantSrn', 'srn:request:tenant:eu:1000000004:tenant'],
                 ]));
 
         return [
@@ -195,15 +217,40 @@ class TenantConfigInitializerTest extends \PHPUnit_Framework_TestCase
                         'has' => true,
                         'tenant' => $tenants['session'],
                     ],
+                    'cookie' => [
+                        'has' => false,
+                        'tenant' => null,
+                    ],
                     'jwtTenant' => null,
                     'requestTenant' => [],
                     'token' => null,
                 ],
-                'tenantId' => '0000000001',
+                'tenantId' => '1000000001',
                 'expectedTenant' =>
                     [
                         'string' => $tenants['session'],
                         'object' => Srn\Converter::fromString($tenants['session'])
+                    ],
+            ],
+            'tenant from cookie' => [
+                'input' => [
+                    'session' => [
+                        'has' => false,
+                        'tenant' => null,
+                    ],
+                    'cookie' => [
+                        'has' => true,
+                        'tenant' => $tenants['cookie'],
+                    ],
+                    'jwtTenant' => null,
+                    'requestTenant' => [],
+                    'token' => null,
+                ],
+                'tenantId' => '2000000002',
+                'expectedTenant' =>
+                    [
+                        'string' => $tenants['cookie'],
+                        'object' => Srn\Converter::fromString($tenants['cookie'])
                     ],
             ],
             'tenant from request login hint' => [
@@ -212,14 +259,18 @@ class TenantConfigInitializerTest extends \PHPUnit_Framework_TestCase
                         'has' => false,
                         'tenant' => null,
                     ],
+                    'cookie' => [
+                        'has' => false,
+                        'tenant' => null,
+                    ],
                     'jwtTenant' => null,
                     'requestTenant' => $tenants['requestLoginHint'],
                     'token' => null,
                 ],
-                'tenantId' => '0000000003',
+                'tenantId' => '1000000003',
                 'expectedTenant' => [
-                    'string' => 'srn:request:tenant:eu:0000000004:tenant',
-                    'object' => Srn\Converter::fromString('srn:request:tenant:eu:0000000004:tenant')
+                    'string' => 'srn:request:tenant:eu:1000000004:tenant',
+                    'object' => Srn\Converter::fromString('srn:request:tenant:eu:1000000004:tenant')
                 ],
             ],
             'tenant id from request login hint' => [
@@ -228,14 +279,18 @@ class TenantConfigInitializerTest extends \PHPUnit_Framework_TestCase
                         'has' => false,
                         'tenant' => null,
                     ],
+                    'cookie' => [
+                        'has' => false,
+                        'tenant' => null,
+                    ],
                     'jwtTenant' => null,
                     'requestTenant' => $tenants['requestLoginHintId'],
                     'token' => null,
                 ],
-                'tenantId' => '0000000003',
+                'tenantId' => '1000000003',
                 'expectedTenant' => [
-                    'string' => 'srn:createdPartition:createdService::0000000003:createdResource',
-                    'object' => Srn\Converter::fromString('srn:createdPartition:createdService::0000000003:createdResource'),
+                    'string' => 'srn:createdPartition:createdService::1000000003:createdResource',
+                    'object' => Srn\Converter::fromString('srn:createdPartition:createdService::1000000003:createdResource'),
                 ],
             ],
             'tenant short id from request login hint' => [
@@ -244,14 +299,18 @@ class TenantConfigInitializerTest extends \PHPUnit_Framework_TestCase
                         'has' => false,
                         'tenant' => null,
                     ],
+                    'cookie' => [
+                        'has' => false,
+                        'tenant' => null,
+                    ],
                     'jwtTenant' => null,
                     'requestTenant' => $tenants['requestLoginHintShortId'],
                     'token' => null,
                 ],
-                'tenantId' => '3',
+                'tenantId' => '1000000003',
                 'expectedTenant' => [
-                    'string' => 'srn:createdPartition:createdService::0000000003:createdResource',
-                    'object' => Srn\Converter::fromString('srn:createdPartition:createdService::0000000003:createdResource'),
+                    'string' => 'srn:createdPartition:createdService::1000000003:createdResource',
+                    'object' => Srn\Converter::fromString('srn:createdPartition:createdService::1000000003:createdResource'),
                 ],
             ],
             'tenant from request tid' => [
@@ -260,14 +319,18 @@ class TenantConfigInitializerTest extends \PHPUnit_Framework_TestCase
                         'has' => false,
                         'tenant' => null,
                     ],
+                    'cookie' => [
+                        'has' => false,
+                        'tenant' => null,
+                    ],
                     'jwtTenant' => null,
                     'requestTenant' => $tenants['requestTid'],
                     'token' => null,
                 ],
-                'tenantId' => '0000000004',
+                'tenantId' => '1000000004',
                 'expectedTenant' => [
-                    'string' => 'srn:request:tenant:eu:0000000003:tenant',
-                    'object' => Srn\Converter::fromString('srn:request:tenant:eu:0000000003:tenant')
+                    'string' => 'srn:request:tenant:eu:1000000003:tenant',
+                    'object' => Srn\Converter::fromString('srn:request:tenant:eu:1000000003:tenant')
                 ],
             ],
             'tenant from request both' => [
@@ -276,14 +339,18 @@ class TenantConfigInitializerTest extends \PHPUnit_Framework_TestCase
                         'has' => false,
                         'tenant' => null,
                     ],
+                    'cookie' => [
+                        'has' => false,
+                        'tenant' => null,
+                    ],
                     'jwtTenant' => null,
                     'requestTenant' => $tenants['requestBoth'],
                     'token' => null,
                 ],
-                'tenantId' => '0000000003',
+                'tenantId' => '1000000003',
                 'expectedTenant' => [
-                    'string' => 'srn:request:tenant:eu:0000000003:tenant',
-                    'object' => Srn\Converter::fromString('srn:request:tenant:eu:0000000003:tenant')
+                    'string' => 'srn:request:tenant:eu:1000000003:tenant',
+                    'object' => Srn\Converter::fromString('srn:request:tenant:eu:1000000003:tenant')
                 ],
             ],
             'tenant from authorized user' => [
@@ -292,14 +359,18 @@ class TenantConfigInitializerTest extends \PHPUnit_Framework_TestCase
                         'has' => false,
                         'tenant' => null,
                     ],
+                    'cookie' => [
+                        'has' => false,
+                        'tenant' => null,
+                    ],
                     'jwtTenant' => null,
                     'requestTenant' => [],
                     'token' => $tokenWithTenant,
                 ],
-                'tenantId' => '0000000004',
+                'tenantId' => '1000000004',
                 'expectedTenant' => [
-                    'string' => 'srn:request:tenant:eu:0000000004:tenant',
-                    'object' => Srn\Converter::fromString('srn:request:tenant:eu:0000000004:tenant')
+                    'string' => 'srn:request:tenant:eu:1000000004:tenant',
+                    'object' => Srn\Converter::fromString('srn:request:tenant:eu:1000000004:tenant')
                 ],
             ],
             'tenant from authorized user and session' => [
@@ -308,15 +379,40 @@ class TenantConfigInitializerTest extends \PHPUnit_Framework_TestCase
                         'has' => true,
                         'tenant' => $tenants['session'],
                     ],
+                    'cookie' => [
+                        'has' => false,
+                        'tenant' => null,
+                    ],
                     'jwtTenant' => null,
                     'requestTenant' => [],
                     'token' => $tokenWithTenant,
                 ],
-                'tenantId' => '0000000001',
+                'tenantId' => '1000000001',
                 'expectedTenant' =>
                     [
                         'string' => $tenants['session'],
                         'object' => Srn\Converter::fromString($tenants['session'])
+                    ],
+            ],
+            'tenant from authorized user and cookie' => [
+                'input' => [
+                    'session' => [
+                        'has' => false,
+                        'tenant' => null,
+                    ],
+                    'cookie' => [
+                        'has' => true,
+                        'tenant' => $tenants['cookie'],
+                    ],
+                    'jwtTenant' => null,
+                    'requestTenant' => [],
+                    'token' => $tokenWithTenant,
+                ],
+                'tenantId' => '1000000004',
+                'expectedTenant' =>
+                    [
+                        'string' => 'srn:request:tenant:eu:1000000004:tenant',
+                        'object' => Srn\Converter::fromString('srn:request:tenant:eu:1000000004:tenant'),
                     ],
             ],
         ];
@@ -340,6 +436,16 @@ class TenantConfigInitializerTest extends \PHPUnit_Framework_TestCase
         $this->sessionService->method('get')->willReturnMap(
             [
                 ['tenant', null, $input['session']['tenant']],
+            ]
+        );
+        $this->request->cookies->method('has')->willReturnMap(
+            [
+                ['samlTid', $input['cookie']['has']],
+            ]
+        );
+        $this->request->cookies->method('get')->willReturnMap(
+            [
+                ['samlTid', null, $input['cookie']['tenant']],
             ]
         );
         $this->request
@@ -417,5 +523,44 @@ class TenantConfigInitializerTest extends \PHPUnit_Framework_TestCase
             ->willReturn(null);
 
         call_user_func($this->initializer, $this->request);
+    }
+
+    /**
+     * @see testTenantInDifferentRegion
+     * @return array
+     */
+    public function getTenantsInDifferentRegion(): array
+    {
+        return [
+            ['tenantRegion' => 'eu', 'tenantId' => '2000000001', 'tenantString' => '2000000001'],
+            ['tenantRegion' => 'eu', 'tenantId' => '2000000002', 'tenantString' => 'srn:dev:iam:eu:2000000002:tenant'],
+            ['tenantRegion' => 'eu', 'tenantId' => '2000000003', 'tenantString' => 'srn:dev:iam:na:2000000003:tenant'],
+        ];
+    }
+
+    /**
+     * @covers ::checkTenantRegion
+     * @dataProvider getTenantsInDifferentRegion
+     * @param string $tenantRegion
+     * @param string $tenantId
+     */
+    public function testTenantInDifferentRegion(string $tenantRegion, string $tenantId, string $tenantString)
+    {
+        $this->request
+            ->method('get')
+            ->willReturnMap([[TenantConfigInitializer::REQUEST_KEY, null, $tenantString]]);
+
+        $this->tenantRegion
+            ->method('getRegion')
+            ->with($this->equalTo($tenantId))
+            ->willReturn($tenantRegion);
+
+        try {
+            call_user_func($this->initializer, $this->request);
+            $this->fail();
+        } catch (TenantInDifferentRegionException $exception) {
+            $this->assertEquals($tenantId, $exception->getTenantId());
+            $this->assertEquals($tenantRegion, $exception->getTenantRegion());
+        }
     }
 }

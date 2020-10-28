@@ -80,7 +80,7 @@ array (
             'name' => 'body_html',
             'studio' => 'visible',
             'label' => 'LBL_BODY_HTML',
-            'customCode' => '{$fields.body_html.value|from_html}',
+            'customCode' => '<iframe sandbox srcdoc="{$fields.body_html.value}" style="border: 0" />',
           ),
         ),
         4 =>

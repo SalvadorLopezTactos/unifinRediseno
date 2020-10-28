@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'Állapot',
   'LBL_PRJ_MODULE' => 'Célmodul',
+  'LBL_PRJ_RUN_ORDER' => 'Megrendelés futtatása',
   'LBL_PMSE_BUTTON_SAVE' => 'Mentés',
   'LBL_PMSE_BUTTON_CANCEL' => 'Mégsem',
   'LBL_PMSE_BUTTON_YES' => 'Igen',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'A folyamatmehatározás importálásra került, de egy vagy több olyan üzleti szabály műveletet tartalmaz, amelyre üzleti szabályok nem lettek kiválasztva.',
     'LBL_BPM_IMPORT_SELECT' => 'A folyamatdefiníció a következő üzleti szabályokat és e-mail sablonokat tartalmazza. '
         . 'Válassza ki az importálni kívánt elemeket.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'Üzleti szabályok',
     'LBL_EMAIL_TEMPLATES' => 'E-mail sablonok',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'Felügyelő',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Felhasználó által létrehozva',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Utolsóként módosította a felhasználó',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Rendszer e-mail',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Üzleti Szabály',
     'LBL_PMSE_LABEL_RULE' => 'Szabály',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Felhasználó Hozzáadása',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Frissítse a "Hozzárendelve ehhez" bejegyzést',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Megfelelő Adat Hozzáadása',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Kapcsolódó modul',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'A tevékenység neve üres.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'A "%s" név már létezik az alakcsaládban.',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'nap',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'óra',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'perc',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'működési idő',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'Üzleti központ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'Célmodul felől',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'Feladó ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' Modul',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'Sztring, Szám és Logiaki változó',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'Szám',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'Érték',

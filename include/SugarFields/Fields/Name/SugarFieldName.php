@@ -23,10 +23,25 @@ class SugarFieldName extends SugarFieldBase
         if (!empty($bean->field_defs[$fieldName]) && !empty($bean->field_defs[$fieldName]['fields'])) {
             //iterate through array to create search with concatenated fields
             $conField = $bean->db->concat($tableName, $bean->field_defs[$fieldName]['fields']);
-            $likeSql = $bean->db->getLikeSQL($conField, "{$value}%");
-            $where->addRaw($likeSql);
-            //return false so no further processing is done on this field
-            return false;
+            $filterSql = '';
+            switch ($op) {
+                case '$equals':
+                    $filterSql = $conField . ' = ' . $bean->db->quoted($value);
+                    break;
+                case '$not_equals':
+                    $filterSql = $conField . ' != ' . $bean->db->quoted($value);
+                    break;
+                case '$starts':
+                    $filterSql = $bean->db->getLikeSQL($conField, "{$value}%");
+                    break;
+                default:
+                    break;
+            }
+            if (!empty($filterSql)) {
+                //return false so no further processing is done on this field
+                $where->addRaw($filterSql);
+                return false;
+            }
         }
         return true;
     }

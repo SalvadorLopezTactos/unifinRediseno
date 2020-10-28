@@ -36,6 +36,7 @@ class SamlConfigAdapterTest extends \PHPUnit_Framework_TestCase
                     'acs' => 'http://idp-php/acs',
                     'slo' => 'http://idp-php/logout',
                     'provisionUser' => true,
+                    'signatureAlgorithm' => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha512',
                 ],
                 json_encode([
                     'idp_sso_url' => 'https://sugarcrm-idmeloper-dev.onelogin.com/trust/saml2/http-post/sso/735046',
@@ -71,7 +72,7 @@ YAcpEEeMZZps8zfYfwhodIsttwQO2agEBtEtob5ft9LMMK5kRdIXxzg=
                     'same_window' => true,
                     'request_signing_pkey' => 'test_pkey',
                     'request_signing_cert' => 'test_cert',
-                    'request_signing_method' => 'RSA_SHA256',
+                    'request_signing_method' => 1,
                     'sign_authn_request' => false,
                     'sign_logout_request' => false,
                     'sign_logout_response' => false,
@@ -84,6 +85,7 @@ YAcpEEeMZZps8zfYfwhodIsttwQO2agEBtEtob5ft9LMMK5kRdIXxzg=
                     'acs' => 'http://idp-php/acs',
                     'slo' => 'http://idp-php/logout',
                     'provisionUser' => false,
+                    'signatureAlgorithm' => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256',
                 ],
                 json_encode([
                     'idp_sso_url' => 'https://sugarcrm-idmeloper-dev.onelogin.com/trust/saml2/http-post/sso/735046',
@@ -141,5 +143,7 @@ YAcpEEeMZZps8zfYfwhodIsttwQO2agEBtEtob5ft9LMMK5kRdIXxzg=
         $this->assertEquals($expected['acs'], $config['sp']['assertionConsumerService']['url']);
         $this->assertEquals($expected['slo'], $config['sp']['singleLogoutService']['url']);
         $this->assertEquals($expected['provisionUser'], $config['sp']['provisionUser']);
+        $this->assertEquals($expected['signatureAlgorithm'], $config['security']['signatureAlgorithm']);
+        $this->assertFalse($config['security']['requestedAuthnContext']);
     }
 }

@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Kontrolna tabla liste kontakata',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa kontakata',
-
+    'LBL_SITE_USER_ID' => 'Heš za site_url i id kontakta',
+    'LBL_COOKIE_CONSENT' => 'Saglasnost za korišćenje kolačića',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Saglasnost za korišćenje kolačića je primljena',
     'LNK_CONTACT_REPORTS' => 'Pregled izveštaja sa kontaktima',
     'ERR_DELETE_RECORD' => 'Morate navesti broj zapisa da bi obrisali kontakt.',
     'LBL_ACCOUNT_ID' => 'ID broj kompanije:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Informacija o portalu',
     'LBL_PORTAL_NAME' => 'Korisničko ime na portalu:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Portal lozinka je postavljena:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Naziv kompanije korisnika portala',
     'LBL_RECORD_SAVED_SUCCESS' => 'Uspešno ste napravili {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Ulica',
     'LBL_POSTAL_CODE' => 'Poštanski broj:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Prodajne prilike',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenta',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Ponude',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Ponude dostaviti',
     'LBL_QUOTES_BILL_TO' => 'Ponude naplatiti',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Proizvodi',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Kliknite ovde za izmenu vašeg profila.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Ovde podešavate željeni jezik. Ovime menjate jezik koji koristi Sugar Portal.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Možete se vratiti na vaš Profil u bilo koje vreme preko Korisničkog menija.',
+    'ERR_PORTAL_NAME_EXISTS' => 'Naziv portala {0} već postoji. Dupli nazivi portala nisu dozvoljena. Promenite nazivi portala kako bi bio jedinstven.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B Direktorski Id',
@@ -279,4 +284,8 @@ Da bi {{module_name}} bio kreiran:
     'LBL_FILTER_CONTACTS_REPORTS' => 'Izveštaji kontakta',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Pristanak u poslovne svrhe za',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Poslednje ažuriranje pristanka',
+
+    'LBL_ENTRY_SOURCE' => 'Kontaktirajte izvor',
+    'LBL_SOURCE_EXTERNAL' => 'Spoljašnji',
+    'LBL_SOURCE_INTERNAL' => 'Unutrašnji',
 );

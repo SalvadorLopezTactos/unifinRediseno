@@ -14,7 +14,7 @@
   color: @white;
   vertical-align: baseline;
   white-space: nowrap;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  text-shadow: 0 -1px 0 fade(@black, 25%);
   background-color: @grayLight;
 }
 // Set unique padding and border-radius
@@ -51,20 +51,35 @@ a {
 .label,
 .badge {
   // Important (red)
-  &-important { background-color: @errorText; }
-  &-important[href] { background-color: darken(@errorText, 10%); }
+  &-important {
+    background-color: @errorBackground;
+    color: @errorText;
+  }
+  &-important[href] { background-color: darken(@errorBackground, 10%); }
   // Warnings (orange)
-  &-warning { background-color: @orange; }
-  &-warning[href] { background-color: darken(@orange, 10%); }
+  &-warning {
+    background-color: @warningBackground;
+    color: @warningText;
+  }
+  &-warning[href] { background-color: darken(@warningBackground, 10%); }
   // Success (green)
-  &-success { background-color: @successText; }
-  &-success[href] { background-color: darken(@successText, 10%); }
+  &-success {
+    background-color: @successBackground;
+    color: @successText;
+  }
+  &-success[href] { background-color: darken(@successBackground, 10%); }
   // Info (turquoise)
-  &-info { background-color: @infoText; }
+  &-info {
+    background-color: @infoBackground;
+    color: @infoText;
+  }
   &-info[href] { background-color: darken(@infoText, 10%); }
   // Inverse (black)
-  &-inverse { background-color: @grayDark; }
-  &-inverse[href] { background-color: darken(@grayDark, 10%); }
+  &-inverse {
+    background-color: @grayLight;
+    color: @grayDark;
+  }
+  &-inverse[href] { background-color: darken(@grayLight, 10%); }
 }
 
 // Quick fix for labels/badges in buttons
@@ -104,7 +119,6 @@ a.label,
 a > .label {
   font-weight: 500;
   text-shadow: none;
-  color: @white;
   text-decoration: none;
   cursor: pointer;
 }
@@ -127,7 +141,7 @@ a > .label {
   .inactive [class*="label-"],
   [data-type="follow"] .label,
   [data-type="follow"] .label:hover {
-  background-color: transparent;
+  background-color: @transparent;
   border: 1px solid @gray;
   color: @grayDark;
   font-weight: 500;
@@ -146,7 +160,7 @@ a > .label {
 [data-type="follow"],
 [data-type="badge"] {
   .label:not([class*="label-"]) {
-    background: transparent;
+    background: @transparent;
     border-color: @gray;
     color: @grayDark;
     font-weight: 500;
@@ -236,28 +250,31 @@ a > .label {
   &-important {
     background-color: @errorBackground;
     border: 1px solid @errorBackground;
+    color: @errorText;
   }
 
   &-warning {
     background-color: @warningBackground;
-    color: @warningAlertText;
-    border: 1px solid @warningBorder;
+    color: @warningText;
+    border: 1px solid @warningBackground;
   }
 
   &-pending {
-    background-color: transparent;
-    color: @grayDark;
-    border: 1px solid @gray;
+    background-color: @pendingBackground;
+    border: 1px solid @pendingBackground;
+    color: @pendingText;
   }
 
   &-success {
     background-color: @successBackground;
     border: 1px solid @successBackground;
+    color: @successText;
   }
 
   &-info {
     background-color: @infoBackground;
     border: 1px solid @infoBackground;
+    color: @infoText;
   }
 
   &-inverse,
@@ -265,43 +282,190 @@ a > .label {
   &-log { background-color: @black; }
 
   /* Modules */
-  &-Accounts { background-color: @el-accounts; }
-  &-Bugs { background-color: @el-bugs; }
-  &-Calendar { background-color: @el-calendar; }
-  &-Calls { background-color: @el-calls; }
-  &-Campaigns { background-color: @el-campaigns; }
-  &-CampaignLog { background-color: @el-campaignlog; }
-  &-Cases { background-color: @el-cases; }
-  &-Contacts { background-color: @el-contacts; }
-  &-Documents { background-color: @el-documents; }
-  &-Emails { background-color: @el-emails; }
-  &-Files { background-color: @el-files; }
-  &-Forecasts { background-color: @el-forecasts; }
-  &-KBArticles { background-color: @el-kbarticles; }
-  &-KBContents { background-color: @el-kbcontents; }
-  &-KBDocuments { background-color: @el-kbdocuments; }
-  &-KBLocalizations { background-color: @el-kblocalizations; }
-  &-KBRevisions { background-color: @el-kbrevisions; }
-  &-Leads { background-color: @el-leads; }
-  &-Meetings { background-color: @el-meetings; }
-  &-Notes { background-color: @el-notes; }
-  &-Opportunities { background-color: @el-opportunities; }
-  &-pmse_Business_Rules { background-color: @el-pmse; }
-  &-pmse_Emails_Templates { background-color: @el-pmse; }
-  &-pmse_Inbox { background-color: @el-pmse; }
-  &-pmse_Project { background-color: @el-pmse; }
-  &-Products { background-color: @el-products; }
-  &-Prospects { background-color: @el-prospects; }
-  &-ProspectLists { background-color: @el-prospectlists; }
-  &-Quotas { background-color: @el-quotas; }
-  &-Quotes { background-color: @el-quotes; }
-  &-Reports { background-color: @el-reports; }
-  &-RevenueLineItems { background-color: @el-rli; }
-  &-Tags { background-color: @el-tags; }
-  &-Tasks { background-color: @el-tasks; }
-  &-Users { background-color: @el-users; }
-  &-Workflow { background-color: @el-workflow; }
-  &-DataPrivacy { background-color: @el-dataprivacy; }
+  &-Accounts {
+    background-color: @el-accounts-bg;
+    color: @el-accounts-text;
+  }
+
+  &-Bugs {
+    background-color: @el-bugs-bg;
+    color: @el-bugs-text;
+  }
+
+  &-Calendar {
+    background-color: @el-calendar-bg;
+    color: @el-calendar-text;
+  }
+
+  &-Calls {
+    background-color: @el-calls-bg;
+    color: @el-calls-text;
+  }
+
+  &-Campaigns {
+    background-color: @el-campaigns-bg;
+    color: @el-campaigns-text;
+  }
+
+  &-CampaignLog {
+    background-color: @el-campaignlog-bg;
+    color: @el-campaignlog-text;
+  }
+
+  &-Cases {
+    background-color: @el-cases-bg;
+    color: @el-cases-text;
+  }
+
+  &-Contacts {
+    background-color: @el-contacts-bg;
+    color: @el-contacts-text;
+  }
+
+  &-Documents {
+    background-color: @el-documents-bg;
+    color: @el-documents-text;
+  }
+
+  &-Emails {
+    background-color: @el-emails-bg;
+    color: @el-emails-text;
+  }
+
+  &-Files {
+    background-color: @el-files-bg;
+    color: @el-files-text;
+  }
+
+  &-Forecasts {
+    background-color: @el-forecasts-bg;
+    color: @el-forecasts-text;
+  }
+
+  &-KBArticles {
+    background-color: @el-kbarticles-bg;
+    color: @el-kbarticles-text;
+  }
+
+  &-KBContents {
+    background-color: @el-kbcontents-bg;
+    color: @el-kbcontents-text;
+  }
+
+  &-KBDocuments {
+    background-color: @el-kbdocuments-bg;
+    color: @el-kbdocuments-text;
+  }
+
+  &-KBLocalizations {
+    background-color: @el-kblocalizations-bg;
+    color: @el-kblocalizations-text;
+  }
+
+  &-KBRevisions {
+    background-color: @el-kbrevisions-bg;
+    color: @el-kbrevisions-text;
+  }
+
+  &-Leads {
+    background-color: @el-leads-bg;
+    color: @el-leads-text;
+  }
+
+  &-Meetings {
+    background-color: @el-meetings-bg;
+    color: @el-meetings-text;
+  }
+
+  &-Notes {
+    background-color: @el-notes-bg;
+    color: @el-notes-text;
+  }
+
+  &-Opportunities {
+    background-color: @el-opportunities-bg;
+    color: @el-opportunities-text;
+  }
+
+  &-pmse_Business_Rules {
+    background-color: @el-pmse-bg;
+    color: @el-pmse-text;
+  }
+
+  &-pmse_Emails_Templates {
+    background-color: @el-pmse-bg;
+    color: @el-pmse-text;
+  }
+
+  &-pmse_Inbox {
+    background-color: @el-pmse-bg;
+    color: @el-pmse-text;
+  }
+
+  &-pmse_Project {
+    background-color: @el-pmse-bg;
+    color: @el-pmse-text;
+  }
+
+  &-Products {
+    background-color: @el-products-bg;
+    color: @el-products-text;
+  }
+
+  &-Prospects {
+    background-color: @el-prospects-bg;
+    color: @el-prospects-text;
+  }
+
+  &-ProspectLists {
+    background-color: @el-prospectlists-bg;
+    color: @el-prospectlists-text;
+  }
+
+  &-Quotas {
+    background-color: @el-quotas-bg;
+    color: @el-quotas-text;
+  }
+
+  &-Quotes {
+    background-color: @el-quotes-bg;
+    color: @el-quotes-text;
+  }
+
+  &-Reports {
+    background-color: @el-reports-bg;
+    color: @el-reports-text;
+  }
+
+  &-RevenueLineItems {
+    background-color: @el-rli-bg;
+    color: @el-rli-text;
+  }
+
+  &-Tags {
+    background-color: @el-tags-bg;
+    color: @el-tags-text;
+  }
+
+  &-Tasks {
+    background-color: @el-tasks-bg;
+    color: @el-tasks-text;
+  }
+
+  &-Users {
+    background-color: @el-users-bg;
+    color: @el-users-text;
+  }
+
+  &-Workflow {
+    background-color: @el-workflow-bg;
+    color: @el-workflow-text;
+  }
+
+  &-DataPrivacy {
+    background-color: @el-dataprivacy-bg;
+    color: @el-dataprivacy-text;
+  }
 }
 
 // had to move &-dark-text out because a > .label was overriding

@@ -278,9 +278,13 @@
     _getArrowIconColorClass: function(newValue, oldValue) {
         var cls = '';
 
+        // Convert to big number first before any comparisons are done
+        newValue = Big(newValue || 0);
+        oldValue = Big(oldValue || 0);
+
         // figure out if it changed here based
         if (app.math.isDifferentWithPrecision(newValue, oldValue)) {
-            cls = (newValue > oldValue) ? ' fa-arrow-up font-green' : ' fa-arrow-down font-red';
+            cls = (newValue.gt(oldValue)) ? ' fa-arrow-up font-green' : ' fa-arrow-down font-red';
         }
         return cls;
     }

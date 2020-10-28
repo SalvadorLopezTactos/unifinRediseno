@@ -16,6 +16,7 @@ use Sugarcrm\IdentityProvider\App\Authentication\AuthProviderManagerBuilder;
 use Sugarcrm\IdentityProvider\Authentication\User;
 use Sugarcrm\IdentityProvider\App\Authentication\Lockout;
 use Sugarcrm\IdentityProvider\App\Provider\TenantConfigInitializer;
+use Sugarcrm\IdentityProvider\Authentication\Audit;
 use Sugarcrm\IdentityProvider\Authentication\UserProvider\LocalUserProvider;
 use Sugarcrm\IdentityProvider\Srn\Converter;
 
@@ -58,21 +59,29 @@ class OnAuthLockoutSubscriber implements EventSubscriberInterface
     protected $logger;
 
     /**
+     * @var string
+     */
+    private $applicationSRN;
+
+    /**
      * @param Lockout $lockout
      * @param Connection $db
      * @param Session $session
      * @param LoggerInterface $logger
+     * @param string $applicationSRN
      */
     public function __construct(
         Lockout $lockout,
         Connection $db,
         Session $session,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        string $applicationSRN
     ) {
         $this->lockout = $lockout;
         $this->db = $db;
         $this->session = $session;
         $this->logger = $logger;
+        $this->applicationSRN = $applicationSRN;
     }
 
     /**
@@ -153,10 +162,18 @@ class OnAuthLockoutSubscriber implements EventSubscriberInterface
             $user->setAttribute('failed_login_attempts', (int) $user->getAttribute('failed_login_attempts') + 1);
 
             $this->logger->info(
-                'FAILED LOGIN:attempts[' . $user->getAttribute('failed_login_attempts') .'] - '. $username
+                "FAILED LOGIN:attempts['{failed_login_attempts}'] - for user {user_name} with SRN {user_srn}",
+                [
+                    'failed_login_attempts' => $user->getAttribute('failed_login_attempts'),
+                    'user_name' => $username,
+                    'user_srn' => $token->hasAttribute('srn') ? $token->getAttribute('srn') : 'unknown',
+                ]
             );
         } else {
-            $this->logger->info('FAILED LOGIN: ' . $username);
+            $this->logger->info('FAILED LOGIN: for user {user_name} with SRN {user_srn}', [
+                'user_name' => $username,
+                'user_srn' => $token->hasAttribute('srn') ? $token->getAttribute('srn') : 'unknown',
+            ]);
         }
 
         if (!$this->lockout->isEnabled() || !$user) {
@@ -185,7 +202,8 @@ class OnAuthLockoutSubscriber implements EventSubscriberInterface
     {
         $tenant = $this->session->get(TenantConfigInitializer::SESSION_KEY);
         $tenantId = Converter::fromString($tenant)->getTenantId();
-        return new LocalUserProvider($this->db, $tenantId);
+        $audit = new Audit($this->logger, $tenant, $this->applicationSRN);
+        return new LocalUserProvider($this->db, $tenantId, $this->applicationSRN, $audit);
     }
 
     /**

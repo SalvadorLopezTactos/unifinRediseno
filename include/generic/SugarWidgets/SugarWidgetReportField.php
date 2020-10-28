@@ -135,10 +135,6 @@ class SugarWidgetReportField extends SugarWidgetField
             }
 
         }
-    } elseif (isset($layout_def['type']) && $layout_def['type'] == 'enum') {
-        // NULL and '' are displayed as None at least for enum fields
-        $db = $this->reporter->db;
-        $alias = $db->convert($alias, 'IFNULL', array($db->emptyValue($layout_def['type'])));
     }
 
 	$reportAlias[$alias] = $layout_def;

@@ -30,22 +30,9 @@ class JSONWebKeySet extends \Google\Protobuf\Internal\Message
      */
     private $key_set_id = '';
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type \Sugarcrm\Apis\Iam\JSONWebKey[]|\Google\Protobuf\Internal\RepeatedField $keys
-     *           List of JSON Web Keys
-     *     @type string $key_set_id
-     *           This parameter is out of scope of the RFC, but refers to the key set
-     *           identifier in our key store. This parameter is optional.
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Jwks::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

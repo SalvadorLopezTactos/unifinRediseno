@@ -27,9 +27,15 @@ $mod_strings = array (
   'LBL_RESOLUTION' => 'Rezoluţie',
   'LBL_LAST_MODIFIED' => 'Ultima modificare',
   'LBL_ASSIGNED_TO_ID'=>'Atribuit ID Utilizator',
-  'LBL_ASSIGNED_TO_NAME' => 'Utilizator:',  	  
+  'LBL_ASSIGNED_TO_NAME' => 'Utilizator:',
   'LBL_WORK_LOG' => 'Jurnal de munca',
+    'LBL_FOLLOW_UP' => 'Monitorizare ulterioară',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
+    'LBL_RESOLVED_DATETIME' => 'Data soluționării',
+    'LBL_HOURS_TO_RESOLUTION' => 'Ore până la soluționare',
+    'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Program de lucru până la soluționare',
+    'LBL_PENDING_PROCESSING' => 'Prelucrare în așteptare',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Creat de:',
   'LBL_DATE_CREATED' => 'Data creării:',
   'LBL_DATE_ENTERED' => 'Data creării:',
@@ -44,5 +50,5 @@ $mod_strings = array (
     'LBL_EDIT_BUTTON' => 'Editeaza',
     'LBL_REMOVE' => 'Eliminare',
 
-  
+
   );

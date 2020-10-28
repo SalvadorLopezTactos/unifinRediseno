@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'E-mail: Контакты',
     'LBL_EMAILS_LEADS_REL' => 'E-mail: Предварительные контакты',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'E-mail: Сделки',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'E-mail: Заметки',
     'LBL_EMAILS_PROJECT_REL' => 'Emailы:Проектный',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'Emailы:Проектное Задание',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'От:',
     'LBL_REPLY_TO' => 'Ответить:',
     'LBL_HTML_BODY' => 'Текст HTML',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'Получатели',
     'LBL_LEADS_SUBPANEL_TITLE' => 'Предварительные контакты',
     'LBL_MESSAGE_SENT' => 'Сообщение отправлено',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'Идентификатор адреса для ответа',
     'LBL_TYPE' => 'Тип:',
     'LBL_EMAIL_STATE' => 'Состояние',
+    'LBL_EMAIL_DIRECTION' => 'Сортировка',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'Обратите внимание!',

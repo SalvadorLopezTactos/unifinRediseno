@@ -211,7 +211,7 @@ $mod_strings = array (
     'LBL_TARGET_BUTTON_KEY'=>'T',
     'LBL_CAMPAIGN' => 'Campaign:',
   	'LBL_LIST_ASSIGNED_TO_NAME' => 'Assigned User',
-    'LBL_PROSPECT_LIST' => 'Prospect List',
+    'LBL_PROSPECT_LIST' => 'Target List',
     'LBL_PROSPECT' => 'Target',
     'LBL_CAMPAIGN_LEAD' => 'Campaigns',
 	'LNK_LEAD_REPORTS' => 'View Lead Reports',
@@ -322,4 +322,7 @@ After confirming each required and desired module, click the Save and Convert bu
     'LBL_FILTER_LEADS_REPORTS' => 'Leads\' reports',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Business Purposes Consented for',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Consent Last Updated',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Unable to change {{moduleSingular}} status. This {{moduleSingular}} has already been converted.',
 );

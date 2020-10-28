@@ -48,6 +48,7 @@ class AuthSettingsApi extends SugarApi
                     'SugarApiExceptionNotAuthorized',
                 ],
                 'minVersion' => '11.2',
+                'ignoreSystemStatusError' => true,
             ],
             'switchOnIdmMode' => [
                 'reqType' => ['POST'],
@@ -61,6 +62,7 @@ class AuthSettingsApi extends SugarApi
                     'SugarApiExceptionMissingParameter',
                 ],
                 'minVersion' => '11.2',
+                'ignoreSystemStatusError' => true,
             ],
             'switchOffIdmMode' => [
                 'reqType' => ['DELETE'],
@@ -73,6 +75,7 @@ class AuthSettingsApi extends SugarApi
                     'SugarApiExceptionNotAuthorized',
                 ],
                 'minVersion' => '11.2',
+                'ignoreSystemStatusError' => true,
             ],
         ];
     }

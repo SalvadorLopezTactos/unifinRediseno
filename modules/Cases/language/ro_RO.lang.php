@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Tabloul de bord Listă cazuri',
     'LBL_CASES_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare cazuri',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Detalii caz',
 
 	'ERR_DELETE_RECORD'					=> 'Trebuie să specifici un număr de înregistrare pentru a șterge contul.',
 	'LBL_ACCOUNT_ID'					=> 'Identitate Cont',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Contacte',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Cazuri',
 	'LBL_DESCRIPTION'					=> 'Descriere',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Fişier ataşat',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Fişier ataşat',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Istoric',
 	'LBL_INVITEE'						=> 'Contacte',
 	'LBL_MEMBER_OF'						=> 'Conturi',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Creat de utilizator',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Alocat utilizatorului',
     'LBL_EXPORT_TEAM_COUNT' => 'Echipa Cont',
+    'LBL_CHANGETIMERS' => 'Modificare temporizatoare',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Contacte Email Asociate',
@@ -134,4 +137,11 @@ Pentru a crea {{module_name}}:
 - Câmpurile marcate cu "Obligatoriu" trebuie să fie completate înainte de a salva.
 - Faceţi clic pe "Afişare mai multe" pentru a afişa câmpuri suplimentare, dacă este necesar.
 2. Faceţi clic pe "Salvare" pentru a finaliza noua înregistrare şi pentru a reveni la pagina anterioară.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Nu ați găsit ceea ce căutați?',
+    'LBL_CREATE_CASE' => 'Creați un {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'Detalii SLA',
+    'LBL_HOURS' => 'Ore',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

@@ -52,6 +52,9 @@ $vardefs = array(
             'duplicate_on_record_copy' => 'always',
             'sort_on' => array('last_name'),
             'exportable'=>true,
+            'related_fields' => array(
+                'assigned_user_id',
+            ),
      ),
 		      'assigned_user_link' =>
   array (

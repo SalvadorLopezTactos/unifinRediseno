@@ -111,4 +111,25 @@ class ArrayFunctions
 
         return call_user_func_array('array_merge', $args);
     }
+
+    /**
+     * get all possible subset permutations
+     *
+     * link: https://stackoverflow.com/questions/6092781/finding-the-subsets-of-an-array-in-php
+     * @param array $data
+     * @return array
+     */
+    public static function powerSet(array $data) : array
+    {
+        // add the empty set
+        $results = [[]];
+
+        foreach ($data as $element) {
+            foreach ($results as $combination) {
+                $results[] = array_merge([$element], $combination);
+            }
+        }
+
+        return $results;
+    }
 }

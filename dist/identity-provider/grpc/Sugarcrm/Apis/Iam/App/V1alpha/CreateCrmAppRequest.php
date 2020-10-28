@@ -42,33 +42,9 @@ class CreateCrmAppRequest extends \Google\Protobuf\Internal\Message
      */
     private $region = '';
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $tenant
-     *           The tenant SRN to register this client to
-     *     @type \Sugarcrm\Apis\Iam\App\V1alpha\App $app
-     *           The application to be created. The allowed properties are:
-     *            client_name
-     *            redirect_uris
-     *           Any other values are ignored.
-     *     @type string $region
-     *           The region where the CRM instance is provisioned. Note that the region
-     *           does not imply where this object is saved (which is always the region
-     *           which is assigned to the tenant). If a CRM instance is moved to another
-     *           region, a new CRM app should be created reflecting the proper region
-     *           and the old one should be removed.
-     *           For cloud provisioned instances this will reflect the cloud region.
-     *           For instances not provisioned within our cloud, we use the reserved
-     *           region "onpremise".
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\App\V1Alpha\App::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

@@ -56,10 +56,12 @@ class LoginServiceFeatureContext extends FeatureContext
      */
     public function iLoginToTenant(string $username, string $password, string $tenant): void
     {
+        $this->waitForElement('input[type=submit]');
+        $this->fillField('tenant_hint', $tenant);
+        $this->iClick('input[type=submit]');
         $this->waitForElement('input[name=user_name]');
         $this->fillField('user_name', $username);
         $this->fillField('password', $password);
-        $this->fillField('tid', $tenant);
         $this->iClick('#submit_btn');
     }
 
@@ -84,7 +86,7 @@ class LoginServiceFeatureContext extends FeatureContext
         $css = sprintf('img[%s="%s"]', $attr, $value);
         $element = $this->getSession()->getPage()->find('css', $css);
         if (is_null($element)) {
-            throw new \LogicException('Wrong logo');
+            throw new \LogicException('Wrong logo expected:' . $css);
         }
     }
 

@@ -78,7 +78,28 @@ $viewdefs['ProductTemplates']['base']['view']['list'] = array(
                     'base_rate_field' => 'base_rate',
                     'enabled' => true,
                     'default' => true,
-                )
+                ),
+                array(
+                    'name' => 'service',
+                ),
+                array(
+                    'name' => 'service_duration',
+                    'type' => 'fieldset',
+                    'css_class' => 'service-duration-field',
+                    'label' => 'LBL_SERVICE_DURATION',
+                    'inline' => true,
+                    'show_child_labels' => false,
+                    'fields' => array(
+                        array(
+                            'name' => 'service_duration_value',
+                            'label' => 'LBL_SERVICE_DURATION_VALUE',
+                        ),
+                        array(
+                            'name' => 'service_duration_unit',
+                            'label' => 'LBL_SERVICE_DURATION_UNIT',
+                        ),
+                    ),
+                ),
             ),
         ),
     ),

@@ -177,7 +177,7 @@
         float: none;
 
         .select2-choices {
-          background-color: transparent;
+          background-color: @transparent;
           border: none;
         }
       }
@@ -378,3 +378,22 @@ These will be removed with completion of ticket https://sugarcrm.atlassian.net/b
 /* HACKS END */
 
 /* NEW SKIN END */
+
+.side,
+.sidebar-content {
+  .tabbable:not(.hide-tabs) {
+    .preview-pane-tabs {
+      margin-top: 55px;
+
+      .preview-data {
+        padding: 10px 12px;
+      }
+    }
+
+    &.preview-active {
+      .preview-data {
+        padding: 10px 12px;
+      }
+    }
+  }
+}

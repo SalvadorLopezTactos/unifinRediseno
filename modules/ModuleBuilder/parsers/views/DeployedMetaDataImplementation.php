@@ -113,9 +113,26 @@ class DeployedMetaDataImplementation extends AbstractMetaDataImplementation impl
 					$this->_saveToFile ( $this->_sourceFilename, $loaded ) ;
 					$this->_mergeFielddefs ( $fielddefs , $loaded ) ;
 					break;
+                case MB_PREVIEWVIEW:
+                    // Fallback to record view
+                    $loaded = $this->_loadFromFile($this->getFileName(MB_RECORDVIEW, $this->_moduleName, MB_CUSTOMMETADATALOCATION, $client)) ;
 
+                    if ($loaded === null) {
+                        $loaded = $this->_loadFromFile($this->getFileName(MB_RECORDVIEW, $this->_moduleName, MB_BASEMETADATALOCATION, $client)) ;
+                    }
+
+                    if ($loaded) {
+                        // convert record defs
+                        $loaded = $this->getPreviewDefsFromRecord($loaded, $client);
+                        // save out our new definition so that we have a base record for the history to work from
+                        $this->_sourceFilename = $this->getFileName(MB_PREVIEWVIEW, $this->_moduleName, MB_CUSTOMMETADATALOCATION, $client);
+                        $this->_saveToFile($this->_sourceFilename, $loaded) ;
+                        $this->_mergeFielddefs($fielddefs, $loaded);
+                    }
+                    break;
                 case MB_SIDECARLISTVIEW:
                 case MB_RECORDVIEW:
+                case MB_RECORDDASHLETVIEW:
                 case MB_SIDECARPOPUPVIEW:
 				case MB_SIDECARDUPECHECKVIEW:
                 case MB_PORTALLISTVIEW:
@@ -126,10 +143,20 @@ class DeployedMetaDataImplementation extends AbstractMetaDataImplementation impl
                 case MB_WIRELESSADVANCEDSEARCH:
                 case MB_WIRELESSLISTVIEW:
                     $_viewtype = 'mobile';
-                if (in_array($view,
-                    array(MB_RECORDVIEW, MB_SIDECARPOPUPVIEW, MB_SIDECARDUPECHECKVIEW, MB_SIDECARLISTVIEW))) {
-                    $_viewtype = 'base';
-                }
+                    if (in_array(
+                        $view,
+                        array(
+                            MB_RECORDVIEW,
+                            MB_RECORDDASHLETVIEW,
+                            MB_PREVIEWVIEW,
+                            MB_SIDECARPOPUPVIEW,
+                            MB_SIDECARDUPECHECKVIEW,
+                            MB_SIDECARLISTVIEW,
+                            )
+                    )
+                    ) {
+                        $_viewtype = 'base';
+                    }
 
                     // Set a view type (ie, portal, wireless)
                     if(in_array($view, array(MB_PORTALLISTVIEW, MB_PORTALRECORDVIEW, MB_PORTALSEARCHVIEW)))
@@ -157,34 +184,6 @@ class DeployedMetaDataImplementation extends AbstractMetaDataImplementation impl
 
 					$loaded = $this->replaceVariables($loaded['defs'], $module);
 					$this->_saveToFile ( $this->_sourceFilename, $loaded , false ) ; // write out without the placeholder module_name and object
-					$this->_mergeFielddefs ( $fielddefs , $loaded ) ;
-					break;
-				case MB_DASHLETSEARCH:
-        		case MB_DASHLET:
-	        		$type = $module->getType () ;
-	        		$this->_sourceFilename = $this->getFileName ( $view, $moduleName, MB_CUSTOMMETADATALOCATION ) ;
-	        		$needSave = false;
-	        		if(file_exists( "custom/modules/{$moduleName}/metadata/".basename ( $this->_sourceFilename))){
-	        			$loaded = $this->_loadFromFile ( "custom/modules/{$moduleName}/metadata/".basename ( $this->_sourceFilename) )  ;
-	        		}
-	        		elseif(file_exists(
-	        			"modules/{$moduleName}/Dashlets/My{$moduleName}Dashlet/My{$moduleName}Dashlet.data.php")){
-	        			$loaded = $this->_loadFromFile ( "modules/{$moduleName}/Dashlets/My{$moduleName}Dashlet/My{$moduleName}Dashlet.data.php");
-	        		}
-	        		else{
-	        			$loaded = $this->_loadFromFile ( "include/SugarObjects/templates/$type/metadata/".basename ( $this->_sourceFilename ) ) ;
-	        			$needSave = true;
-	        		}
-	        		if ($loaded === null)
-						throw new Exception( get_class ( $this ) . ": cannot create dashlet view for module $moduleName - definitions for $view are missing in the SugarObject template for type $type" ) ;
-	        		$loaded = $this->replaceVariables($loaded, $module);
-	        		$temp = $this->_moduleName;
-	        		if($needSave){
-		        		$this->_moduleName = $this->_moduleName.'Dashlet';
-						$this->_saveToFile ( $this->_sourceFilename, $loaded,false) ; // write out without the placeholder module_name and object
-						$this->_moduleName = $temp;
-						unset($temp);
-	        		}
 					$this->_mergeFielddefs ( $fielddefs , $loaded ) ;
 					break;
 				case MB_POPUPLIST:
@@ -252,6 +251,31 @@ class DeployedMetaDataImplementation extends AbstractMetaDataImplementation impl
           }
         }
 
+        //For preview, if there is no preview.php under MB_BASEMETADATALOCATION, the original defs is record view defs.
+        if ($view === MB_PREVIEWVIEW) {
+            $sourceFilename = $this->getFileName($view, $moduleName, MB_BASEMETADATALOCATION, $client);
+            if (file_exists($sourceFilename)) {
+                $layout = $this->_loadFromFile($sourceFilename);
+            }
+            if (null === $layout) {
+                $sourceFilename = $this->getFileName(MB_RECORDVIEW, $moduleName, MB_CUSTOMMETADATALOCATION, $client);
+                $layout = $this->_loadFromFile($sourceFilename);
+                $layout = $this->getPreviewDefsFromRecord($layout, $client);
+            }
+            if (null === $layout) {
+                $sourceFilename = $this->getFileName(MB_RECORDVIEW, $moduleName, MB_BASEMETADATALOCATION, $client);
+                $layout = $this->_loadFromFile($sourceFilename);
+                $layout = $this->getPreviewDefsFromRecord($layout, $client);
+            }
+            if (null === $layout) {
+                $sourceFilename = $this->getFileName($view, $moduleName, MB_CUSTOMMETADATALOCATION, $client);
+                $layout = $this->_loadFromFile($sourceFilename);
+            }
+            if (null !== $layout) {
+                $this->_originalViewdefs = $layout ;
+            }
+        }
+
 		$this->_fielddefs = $fielddefs;
 
         // Set the panel defs (the old field defs)
@@ -264,6 +288,36 @@ class DeployedMetaDataImplementation extends AbstractMetaDataImplementation impl
 
         $this->_history = new History($this->getFileNameNoDefault($view, $moduleName, MB_HISTORYMETADATALOCATION));
 	}
+
+    /**
+     * Get preview defs based on record view defs.
+     * @param array $defs
+     * @param string $client
+     * @return array
+     */
+    protected function getPreviewDefsFromRecord($defs, $client = 'base'): array
+    {
+        if (isset($defs[$client]['view']['record']['panels'])) {
+            $defs[$client]['view']['preview']['panels'] = $defs[$client]['view']['record']['panels'];
+            foreach ($defs[$client]['view']['preview']['panels'] as $i => $panel) {
+                if (isset($panel['fields'])) {
+                    foreach ($panel['fields'] as $j => $field) {
+                        // remove 'favorite' and 'follow' as in preview.js
+                        if (is_array($field) && isset($field['type']) &&
+                            in_array($field['type'], array('favorite', 'follow'))) {
+                            unset($defs[$client]['view']['preview']['panels'][$i]['fields'][$j]);
+                        }
+                    }
+                }
+            }
+            // preview layout is always 1 column
+            $defs[$client]['view']['preview']['templateMeta'] = array(
+                'maxColumns' => 1,
+            );
+            unset($defs[$client]['view']['record']);
+        }
+        return $defs;
+    }
 
     /**
      * Gets viewdefs from a SugarObjects template when the expected metadata file

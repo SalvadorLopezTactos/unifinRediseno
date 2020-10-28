@@ -17,8 +17,7 @@ class TemplateImage extends TemplateText{
 		$def['studio'] = 'visible';		
 		$def['type'] = 'image';
 		$def['dbType'] = 'varchar';
-		$def['len']= 255;
-		
+
 		if(	isset($this->ext1)	)	$def[ 'border' ] 	= $this->ext1 ;            
 		if(	isset($this->ext2)	)	$def[ 'width' ] 	= $this->ext2 ;
 		if(	isset($this->ext3)	)	$def[ 'height' ] 	= $this->ext3 ;
