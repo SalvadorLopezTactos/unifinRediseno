@@ -39,6 +39,11 @@
                 route = '#bwc/index.php?entryPoint=BuscaDisposicion';
                 //app.user.lastState.set('Leads:filter:last-Leads-records', this.meta.filter);
                 break;
+
+            case '#RefinanciamientosMasivos':
+                route = '#bwc/index.php?entryPoint=RefinanciamientosMasivos';
+
+                break;
         }
 
         event.preventDefault();
@@ -66,7 +71,7 @@
                     var roleReasignacionPromotores = false;
                     _.each(data, function (key, value) {
 
-                        if (key == "Reasignacion de Promotores") {
+                        if (key == "Reasignacion de Promotores" || key == "Admin CRM" ) {
                             roleReasignacionPromotores = true;
                         }
                     });
