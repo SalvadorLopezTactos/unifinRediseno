@@ -642,7 +642,7 @@
 
     fulminantcolor: function () {
         $('#space').remove();
-        $('.search-filter').find('.control-group').before('<div id="space" style="background-color:#000042"><br></div>');
+        $('.search-filter').find('.control-group').before('<div id="space" style="background-color:#021741"><br></div>');
         // $('.control-group').css("background-color", "#e5e5e5");
         // $('.a11y-wrapper').css("background-color", "#e5e5e5");
         //$('.a11y-wrapper').css("background-color", "#c6d9ff");

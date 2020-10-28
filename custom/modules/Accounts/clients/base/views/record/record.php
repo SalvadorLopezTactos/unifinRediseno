@@ -516,22 +516,27 @@ $viewdefs['Accounts']['base']['view']['record'] = array (
         array (
           'name' => 'id_uniclick_c',
           'label' => 'LBL_ID_UNICLICK',
+            'span' => 6,
         ),
         1 => 
         array (
           'name' => 'estatus_persona_c',
           'label' => 'LBL_ESTATUS_PERSONA',
+            'span' => 6,
         ),
         2 => 
         array (
           'name' => 'tipodepersona_c',
           'studio' => 'visible',
           'label' => 'LBL_TIPODEPERSONA',
+            'span' => 6,
         ),
         3 => 
         array (
           'name' => 'primernombre_c',
           'label' => 'LBL_PRIMERNOMBRE',
+            'span' => 6,
+
         ),
         4 => 
         array (
