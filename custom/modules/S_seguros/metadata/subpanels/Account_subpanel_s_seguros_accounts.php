@@ -1,5 +1,5 @@
 <?php
-// created: 2020-08-20 10:38:26
+// created: 2020-10-26 18:58:29
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -13,6 +13,20 @@ $subpanel_layout['list_fields'] = array (
     'type' => 'enum',
     'default' => true,
     'vname' => 'LBL_ETAPA',
+    'width' => 10,
+  ),
+  'tipo_registro_sf_c' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'vname' => 'LBL_TIPO_REGISTRO_SF',
+    'width' => 10,
+  ),
+  'ejecutivo_c' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'vname' => 'LBL_EJECUTIVO',
     'width' => 10,
   ),
   'prima_obj_c' => 
