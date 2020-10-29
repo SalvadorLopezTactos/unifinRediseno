@@ -221,7 +221,7 @@ SQL;
                     $queryBackOffice="SELECT id,puestousuario_c, u.status,u.user_name,uc.region_c,uc.equipos_c
                     FROM users u INNER JOIN users_cstm uc ON u.id=uc.id_c
                     WHERE uc.puestousuario_c='6' AND u.status='Active' and u.deleted=0 AND uc.equipos_c
-                      LIKE('%^".$equipoPrincipal."^%')";
+                      LIKE'%^".$equipoPrincipal."^%'";
                     $GLOBALS['log']->fatal($queryBackOffice);
                     $queryResult = $db->query($queryBackOffice);
                     $users_bo=array();
@@ -292,7 +292,7 @@ SQL;
                     $queryBackOffice="SELECT id,puestousuario_c, u.status,u.user_name,uc.region_c,uc.equipos_c
                     FROM users u INNER JOIN users_cstm uc ON u.id=uc.id_c
                     WHERE uc.puestousuario_c='6' AND u.status='Active' and u.deleted=0 AND uc.equipos_c
-                      LIKE('%^".$equipoPrincipal."^%')";
+                      LIKE'%^".$equipoPrincipal."^%'";
                     $queryResult = $db->query($queryBackOffice);
                     $GLOBALS['log']->fatal($queryBackOffice);
                     $users_bo=array();
