@@ -12,6 +12,7 @@
         this.model.addValidationTask('Requeridos_c', _.bind(this.valida_Req, this));
         this.model.addValidationTask('prima_neta_ganada_c', _.bind(this.valida_PN, this));
         this.model.addValidationTask('comision_c', _.bind(this.comision, this));
+        this.model.addValidationTask('validaDoc', _.bind(this.validaDoc, this));
     },
 
     _render: function() {
@@ -25,12 +26,12 @@
     },
 
     roFunction: function() {
-    		if(this.model.get('etapa') == 2 || this.model.get('etapa') == 5 || this.model.get('etapa') == 9 || this.model.get('etapa') == 10 || app.user.get('puestousuario_c') != 56)
+    		if(this.model.get('etapa') == 2 || this.model.get('etapa') == 5 || this.model.get('etapa') == 9 || this.model.get('etapa') == 10 || (app.user.get('puestousuario_c') != 56 && this.model.get('etapa') != 1))
     		{
           $('[name="edit_button"]').hide();
     		  _.each(this.model.fields, function(field)
        	  {
-       			this.noEditFields.push(field.name);
+     			  this.noEditFields.push(field.name);
             $('.record-edit-link-wrapper[data-name='+field.name+']').remove();
          	},this);
      			this.noEditFields.push('prima_objetivo');
@@ -91,7 +92,6 @@
           autoClose: false
         });
         this.model.set('fecha_req','');
-
       }
       callback(null, fields, errors);
     },
@@ -181,5 +181,34 @@
         });
       }
       callback(null, fields, errors);
+    },
+
+    validaDoc: function (fields, errors, callback) {
+        var id = this.model.get('id');
+        var notikam = this.model.get('notifica_kam_c');
+        var etapa = this.model.get('etapa');
+        if(notikam == 1 && etapa == 1) {
+            app.api.call('GET', app.api.buildURL("S_seguros/" + id + "/link/s_seguros_documents_1"), null, {
+                success: function (data) {
+                    if(data.records.length == 0) {
+                      errors['doc_cliente_c'] = errors['doc_cliente_c'] || {};
+                      errors['doc_cliente_c'].required = true;
+                      app.alert.show("Error_documento", {
+                        level: "error",
+                        messages: "Se debe adjuntar al menos un documento para poder notificar al KAM.",
+                        autoClose: false
+                      });
+                    }
+                    callback(null, fields, errors);
+                },
+                error: function (e) {
+                    throw e;
+                }
+            });
+        }
+        else
+        {
+          callback(null, fields, errors);
+        }
     },
 })

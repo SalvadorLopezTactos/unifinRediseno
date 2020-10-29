@@ -54,3 +54,4 @@ $mod_strings['LBL_COMISION_TEC'] = 'Comisión';
 $mod_strings['LBL_PRIMA'] = 'Prima Neta';
 $mod_strings['LBL_RECORDVIEW_PANEL3'] = 'Información Técnica';
 $mod_strings['LBL_MOTIVO_NO_COTIZADO'] = 'Motivo No Cotizado';
+$mod_strings['LBL_NOTIFICA_KAM'] = 'Notificar a KAM';

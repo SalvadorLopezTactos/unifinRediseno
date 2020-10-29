@@ -18,6 +18,8 @@
         $("div.record-label[data-name='seguro_pipeline']").attr('style', 'display:none;');
         //Oculta campo seguro_pipeline
         this.$('div[data-name=seguro_pipeline]').hide();
+        //Oculta campo Notificar KAM
+        this.$('[data-name=notifica_kam_c]').hide();
     },
 
     addRegion: function() {

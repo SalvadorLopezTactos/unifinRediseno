@@ -179,21 +179,19 @@ array (
               array (
                 'name' => 's_seguros_accounts_name',
                 'label' => 'LBL_S_SEGUROS_ACCOUNTS_FROM_ACCOUNTS_TITLE',
+                'span' => 12,
               ),
               2 => 
-              array (
-              ),
-              3 => 
               array (
                 'name' => 'tipo',
                 'label' => 'LBL_TIPO',
               ),
-              4 => 
+              3 => 
               array (
                 'name' => 'tipo_registro_sf_c',
                 'label' => 'LBL_TIPO_REGISTRO_SF',
               ),
-              5 => 
+              4 => 
               array (
                 'name' => 'date_entered_by',
                 'readonly' => true,
@@ -217,56 +215,56 @@ array (
                   ),
                 ),
               ),
-              6 => 
+              5 => 
               array (
                 'name' => 'tipo_sf_c',
                 'label' => 'LBL_TIPO_SF',
               ),
-              7 => 
+              6 => 
               array (
                 'name' => 'ejecutivo_c',
                 'label' => 'LBL_EJECUTIVO',
               ),
-              8 => 
+              7 => 
               array (
                 'name' => 'tipo_referenciador',
                 'label' => 'LBL_TIPO_REFERENCIADOR',
               ),
-              9 => 
+              8 => 
               array (
                 'name' => 'referenciador',
                 'studio' => 'visible',
                 'label' => 'LBL_REFERENCIADOR',
               ),
-              10 => 
+              9 => 
               array (
                 'name' => 'region',
                 'label' => 'LBL_REGION',
                 'readonly' => true,
               ),
-              11 => 
+              10 => 
               array (
                 'name' => 'empleados_c',
                 'studio' => 'visible',
                 'label' => 'LBL_EMPLEADOS',
               ),
-              12 => 
+              11 => 
               array (
                 'name' => 'departamento_c',
                 'label' => 'LBL_DEPARTAMENTO',
                 'readonly' => true,
               ),
-              13 => 
+              12 => 
               array (
                 'name' => 'etapa',
                 'label' => 'LBL_ETAPA',
               ),
-              14 => 
+              13 => 
               array (
                 'name' => 'area',
                 'label' => 'LBL_AREA',
               ),
-              15 => 
+              14 => 
               array (
                 'name' => 'prima_objetivo',
                 'label' => 'LBL_PRIMA_OBJ_C',
@@ -284,101 +282,103 @@ array (
                   ),
                 ),
               ),
-              16 => 
+              15 => 
               array (
                 'name' => 'tipo_cambio_obj',
                 'label' => 'LBL_TIPO_CAMBIO_OBJ',
               ),
-              17 => 
+              16 => 
               array (
                 'name' => 'fecha_req',
                 'label' => 'LBL_FECHA_REQ',
               ),
-              18 => 
+              17 => 
               array (
                 'name' => 'fecha_cierre_c',
                 'label' => 'LBL_FECHA_CIERRE',
               ),
-              19 => 
+              18 => 
               array (
                 'name' => 'motivos_c',
                 'studio' => 'visible',
                 'label' => 'LBL_MOTIVOS',
               ),
-              20 => 
+              19 => 
               array (
                 'name' => 'motivo_no_cotizado_c',
                 'label' => 'LBL_MOTIVO_NO_COTIZADO',
               ),
-              21 => 
+              20 => 
               array (
                 'name' => 'requiere_ayuda_c',
                 'label' => 'LBL_REQUIERE_AYUDA',
               ),
-              22 => 
+              21 => 
               array (
                 'name' => 'servicios_a_incluir_c',
                 'label' => 'LBL_SERVICIOS_A_INCLUIR',
               ),
-              23 => 
+              22 => 
               array (
                 'name' => 'subramos_c',
                 'label' => 'LBL_SUBRAMOS',
               ),
-              24 => 
+              23 => 
               array (
                 'name' => 'oficina_c',
                 'label' => 'LBL_OFICINA',
               ),
-              25 => 
+              24 => 
               array (
                 'name' => 'kam_c',
                 'label' => 'LBL_KAM',
               ),
-              26 => 
+              25 => 
               array (
                 'name' => 'nacional_c',
                 'label' => 'LBL_NACIONAL',
               ),
-              27 => 
+              26 => 
               array (
                 'name' => 'fee_c',
                 'label' => 'LBL_FEE',
               ),
-              28 => 
+              27 => 
               array (
                 'name' => 'fee_p_c',
                 'label' => 'LBL_FEE_P',
               ),
-              29 => 
+              28 => 
               array (
                 'name' => 'razon_perdida_c',
                 'label' => 'LBL_RAZON_PERDIDA',
               ),
-              30 => 
+              29 => 
               array (
                 'name' => 'comentarios_c',
                 'studio' => 'visible',
                 'label' => 'LBL_COMENTARIOS',
               ),
-              31 => 
+              30 => 
               array (
                 'name' => 'no_renovable_c',
                 'label' => 'LBL_NO_RENOVABLE',
               ),
-              32 => 
+              31 => 
               array (
                 'name' => 'motivos_revision_c',
                 'studio' => 'visible',
                 'label' => 'LBL_MOTIVOS_REVISION',
               ),
-              33 => 
+              32 => 
               array (
                 'name' => 'info_actual',
                 'label' => 'LBL_INFO_ACTUAL',
               ),
-              34 => 
+              33 => 
               array (
+                'name' => 'notifica_kam_c',
+                'label' => 'LBL_NOTIFICA_KAM',
               ),
             ),
           ),
