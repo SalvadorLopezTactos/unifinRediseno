@@ -325,13 +325,6 @@ array (
                 'label' => 'LBL_ACCOUNT',
                 'readonly' => true,
               ),
-              35 => 
-              array (
-                'name' => 'business_center_name',
-              ),
-              36 => 
-              array (
-              ),
             ),
           ),
           2 => 
