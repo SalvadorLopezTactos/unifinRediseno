@@ -6,7 +6,7 @@
                 <div class="campoAE span6">
                     <label class="record-label" style="margin-left:0px">Actividad Económica</label>
                     <select class="row-fluid select2 list_ae" data-field="list_ae">
-                        {{#each actividadeconomica_list}}
+                        {{#each actividad_list}}
                         <option value="{{@key}}" {{ifSelected @key
                                               ../ActividadEconomica.ae.id}}>{{this}}</option>
                         {{/each}}
@@ -15,7 +15,7 @@
                 <div class="campoSSE span6">
                     <label class="record-label" style="margin-left:0px">Sub Sector Económico</label>
                     <select class="row-fluid select2 list_sse" data-field="list_sse">
-                        {{#each subsectoreconomico_list}}
+                        {{#each subsector_list}}
                         <option value="{{@key}}" {{ifSelected @key
                                               ../ActividadEconomica.sse.id}}>{{this}}</option>
                         {{/each}}
@@ -28,7 +28,7 @@
                 <div class="campoSE span6">
                     <label class="record-label" style="margin-left:0px">Sector Económico</label>
                     <select class="row-fluid select2 list_se" data-field="list_se">
-                        {{#each sectoreconomico_list}}
+                        {{#each sector_list}}
                         <option value="{{@key}}" {{ifSelected @key
                                               ../ActividadEconomica.se.id}}>{{this}}</option>
                         {{/each}}
@@ -37,7 +37,7 @@
                 <div class="campoMS span6">
                     <label class="record-label" style="margin-left:0px">Macro Sector</label>
                     <select class="row-fluid select2 list_ms" data-field="list_ms">
-                        {{#each tct_macro_sector_ddw_list}}
+                        {{#each macro_list}}
                         <option value="{{@key}}" {{ifSelected @key
                                               ../ActividadEconomica.ms.id}}>{{this}}</option>
                         {{/each}}

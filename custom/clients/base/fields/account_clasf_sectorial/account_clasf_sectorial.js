@@ -1,9 +1,9 @@
 ({
     //Carga de Listas de valores
-    actividadeconomica_list: null,
-    subsectoreconomico_list: null,
-    sectoreconomico_list: null,
-    tct_macro_sector_ddw_list: null,
+    actividad_list: null,
+    subsector_list: null,
+    sector_list: null,
+    macro_list: null,
     inegi_rama_list: null,
     inegi_subrama_list: null,
     inegi_sector_list: null,
@@ -130,9 +130,9 @@
         //campo custom account_clasf_sectorial ocualta la Etiqueta
         $("div.record-label[data-name='account_clasf_sectorial']").attr('style', 'display:none;');
         //Muestra y Oculta campos dependientes de Actividad Economica
-        if ($('.list_ae').select2('val') == "" || clasf_sectorial.ActividadEconomica.ae.id == "") {
-            clasf_sectorial.MuestraCamposAE();
-        }
+        // if ($('.list_ae').select2('val') == "" || clasf_sectorial.ActividadEconomica.ae.id == "") {
+        //     clasf_sectorial.MuestraCamposAE();
+        // }
         //funcion de cargar listas
         if (clasf_sectorial.renderlista != 1) {
             this.cargalistas();
@@ -158,157 +158,29 @@
         $(".campoID").attr('style', 'pointer-events:none;');
 
         //Carga los valores en los campos dependientes de Actividad Económica al momento de hacer el change
-        $('.list_ae').change(function (evt) {
-            clasf_sectorial.MuestraCamposAE(evt);
-            clasf_sectorial.ClasfSectorialApi(evt);
-        });
-        //carga los valores del sector dependientes del sub sector
-        $('.list_sse').change(function (evt) {
-            clasf_sectorial.obtenerSubSector();
-        });
-        //carga los valores del macrosector dependientes del sector
-        $('.list_se').change(function (evt) {
-            clasf_sectorial.obtenerSector();
-        });
+        // $('.list_ae').change(function (evt) {
+        //     // clasf_sectorial.MuestraCamposAE(evt);
+        //     // clasf_sectorial.ClasfSectorialApi(evt);
+        // });
+        // //carga los valores del sector dependientes del sub sector
+        // $('.list_sse').change(function (evt) {
+        //     clasf_sectorial.obtenerSubSector();
+        // });
+        // //carga los valores del macrosector dependientes del sector
+        // $('.list_se').change(function (evt) {
+        //     clasf_sectorial.obtenerSector();
+        // });
     },
 
-    MuestraCamposAE: function (evt) {
-        //Muestra los campos dependientes de Actividad Economica
-        if (evt != undefined) {
-            //Validacion evt para record y create
-            if ($(evt.currentTarget).val() == "") {
-                
-                $('.campoSSE').hide();
-                $('.campoSE').hide();
-                $('.campoMS').hide();
+    clasfSectorial: function () {
 
-            } else {
-                $('.campoSSE').show();
-                $('.campoSE').show();
-                $('.campoMS').show();
-            }
-
-        } else {
-            //Validación al momento de cargar la vista de la cuenta por render
-            if ($('.list_ae').select2('val') == "" || $('.list_ae').val() == undefined || $('.list_ae').val() == "") {
-                
-                $('.campoSSE').hide();
-                $('.campoSE').hide();
-                $('.campoMS').hide();
-
-            } else {
-                $('.campoSSE').show();
-                $('.campoSE').show();
-                $('.campoMS').show();
-            }
-        }
-    },
-
-    ClasfSectorialApi: function (evt) {
-
-        clasf_sectorial = this;
-        dataCS = [];
-        var idActEconomica = "";
-
+        
         if ($(evt.currentTarget).val() == '' || $(evt.currentTarget).val() == null || $(evt.currentTarget).val() == undefined) {
             idActEconomica = clasf_sectorial.ActividadEconomica.ae.id;
         } else {
             idActEconomica = $('.list_ae').select2('val');
         }
-        // console.log("AE " + idActEconomica);
-        if (idActEconomica != '' && idActEconomica != null && idActEconomica != undefined) {
 
-            app.alert.show('obtiene_subsector', {
-                level: 'process',
-                title: 'Cargando...',
-            });
-
-            app.api.call('GET', app.api.buildURL('GetClasfSectorial/' + idActEconomica), null, {
-                success: function (data) {
-                    dataCS = data;
-                    app.alert.dismiss('obtiene_subsector');
-                    if (dataCS != '') {
-                        clasf_sectorial['ActividadEconomica'] = dataCS;
-                        clasf_sectorial.combinaciones = dataCS['combinaciones'];
-
-                        var arrSubSector = [];
-                        for (var key in clasf_sectorial.combinaciones) { //actividad economica
-                            // console.log(key);
-                            var contador = 0;
-                            for (llave in clasf_sectorial.combinaciones[key]) {  //subsector economico
-                                arrSubSector[contador] = llave;
-                                contador++;
-                            }
-                        }
-
-                        var lista_sse = clasf_sectorial.valorSubsector(arrSubSector);
-                        clasf_sectorial.subsectoreconomico_list = lista_sse;
-                        // clasf_sectorial.render();
-                        $('.list_sse').trigger('change');
-                        $('.list_se').trigger('change');
-                    }
-                },
-                error: function (e) {
-                    throw e;
-                }
-            });
-        }
-    },
-
-    SaveClasfSectorial: function (fields, errors, callback) {
-
-        if ($('.list_ae').select2('val') != '') {
-            this.ActividadEconomica = clasf_sectorial.ActividadEconomica;
-        }
-        //Establece el objeto para guardar en los campos de Clasificacion Sectorial 
-        this.model.set('account_clasf_sectorial', this.ActividadEconomica);
-
-        callback(null, fields, errors);
-    },
-
-    valorSubsector: function (valores) {
-        //Se obtiene el Subsector dependiendo de la Actividad Economica que le corresponde 
-        var subsector_list = app.lang.getAppListStrings('subsectoreconomico_list');
-        var newSubSector_list = {};
-        for (var i = 0; i < valores.length; i++) {
-            var element = valores[i];
-
-            Object.keys(subsector_list).forEach(function (key) {
-
-                if (key == element) {
-                    newSubSector_list[key] = subsector_list[key];
-                }
-            });
-        }
-        return newSubSector_list;
-    },
-
-    obtenerSubSector: function () {
-        //Se obtiene el ID del Subsector para setear el Sector que le corresponde
-        var idActEconomica = clasf_sectorial.ActividadEconomica.ae.id;
-        var idSubSector = clasf_sectorial.ActividadEconomica.sse.id;
-
-        if (idActEconomica != '' && idActEconomica != undefined && idSubSector != '' && idSubSector != null && idSubSector != undefined) {
-
-            var arrsector = clasf_sectorial.combinaciones[idActEconomica][idSubSector];
-            var sector_list = app.lang.getAppListStrings('sectoreconomico_list');
-            var newSector_list = {};
-
-            for (var keys in arrsector) {
-                var elemento = keys;
-                // console.log(elemento);
-                Object.keys(sector_list).forEach(function (key) {
-                    if (key == elemento) {
-                        newSector_list[key] = sector_list[key];
-                    }
-                });
-            }
-
-            clasf_sectorial.sectoreconomico_list = newSector_list;
-            clasf_sectorial.renderlista = 1;
-            clasf_sectorial.render();
-            $('.list_sse').select2('val', idSubSector);
-        }
 
         /*************************************************API INEGI*************************************************/
         app.alert.show('obtiene_INEGI', {
@@ -344,46 +216,221 @@
                 throw e;
             }
         });
+
     },
 
-    obtenerSector: function () {
-        //Se obtiene el ID Sector para poder setear el Macro Sector que le corresponde
-        var idActEconomica = clasf_sectorial.ActividadEconomica.ae.id;
-        var idSubSector = clasf_sectorial.ActividadEconomica.sse.id;
-        var idSector = clasf_sectorial.ActividadEconomica.se.id;
+    SaveClasfSectorial: function (fields, errors, callback) {
 
-        if (idActEconomica != '' && idActEconomica != undefined && idSubSector != '' && idSubSector != undefined &&
-            idSector != '' && idSector != null && idSector != undefined) {
-
-            var arrmacro = clasf_sectorial.combinaciones[idActEconomica][idSubSector][idSector];
-            var macro_list = app.lang.getAppListStrings('tct_macro_sector_ddw_list');
-            var newMacro_list = {};
-
-            for (var i = 0; i < arrmacro.length; i++) {
-                var elementom = arrmacro[i];
-                // console.log(elementom);
-                Object.keys(macro_list).forEach(function (key) {
-
-                    if (key == elementom) {
-                        newMacro_list[key] = macro_list[key];
-                    }
-                });
-            }
-
-            clasf_sectorial.tct_macro_sector_ddw_list = newMacro_list;
-            clasf_sectorial.renderlista = 1;
-            clasf_sectorial.render();
-            $('.list_se').select2('val', idSector);
+        if ($('.list_ae').select2('val') != '') {
+            this.ActividadEconomica = clasf_sectorial.ActividadEconomica;
         }
+        //Establece el objeto para guardar en los campos de Clasificacion Sectorial 
+        this.model.set('account_clasf_sectorial', this.ActividadEconomica);
+
+        callback(null, fields, errors);
     },
+
+    // MuestraCamposAE: function (evt) {
+    //     //Muestra los campos dependientes de Actividad Economica
+    //     if (evt != undefined) {
+    //         //Validacion evt para record y create
+    //         if ($(evt.currentTarget).val() == "") {
+
+    //             $('.campoSSE').hide();
+    //             $('.campoSE').hide();
+    //             $('.campoMS').hide();
+
+    //         } else {
+    //             $('.campoSSE').show();
+    //             $('.campoSE').show();
+    //             $('.campoMS').show();
+    //         }
+
+    //     } else {
+    //         //Validación al momento de cargar la vista de la cuenta por render
+    //         if ($('.list_ae').select2('val') == "" || $('.list_ae').val() == undefined || $('.list_ae').val() == "") {
+
+    //             $('.campoSSE').hide();
+    //             $('.campoSE').hide();
+    //             $('.campoMS').hide();
+
+    //         } else {
+    //             $('.campoSSE').show();
+    //             $('.campoSE').show();
+    //             $('.campoMS').show();
+    //         }
+    //     }
+    // },
+
+    // ClasfSectorialApi: function (evt) {
+
+    //     clasf_sectorial = this;
+    //     dataCS = [];
+    //     var idActEconomica = "";
+
+    //     if ($(evt.currentTarget).val() == '' || $(evt.currentTarget).val() == null || $(evt.currentTarget).val() == undefined) {
+    //         idActEconomica = clasf_sectorial.ActividadEconomica.ae.id;
+    //     } else {
+    //         idActEconomica = $('.list_ae').select2('val');
+    //     }
+    //     // console.log("AE " + idActEconomica);
+    //     if (idActEconomica != '' && idActEconomica != null && idActEconomica != undefined) {
+
+    //         app.alert.show('obtiene_subsector', {
+    //             level: 'process',
+    //             title: 'Cargando...',
+    //         });
+
+    //         app.api.call('GET', app.api.buildURL('GetClasfSectorial/' + idActEconomica), null, {
+    //             success: function (data) {
+    //                 dataCS = data;
+    //                 app.alert.dismiss('obtiene_subsector');
+    //                 if (dataCS != '') {
+    //                     clasf_sectorial['ActividadEconomica'] = dataCS;
+    //                     clasf_sectorial.combinaciones = dataCS['combinaciones'];
+
+    //                     var arrSubSector = [];
+    //                     for (var key in clasf_sectorial.combinaciones) { //actividad economica
+    //                         // console.log(key);
+    //                         var contador = 0;
+    //                         for (llave in clasf_sectorial.combinaciones[key]) {  //subsector economico
+    //                             arrSubSector[contador] = llave;
+    //                             contador++;
+    //                         }
+    //                     }
+
+    //                     var lista_sse = clasf_sectorial.valorSubsector(arrSubSector);
+    //                     clasf_sectorial.subsectoreconomico_list = lista_sse;
+    //                     // clasf_sectorial.render();
+    //                     $('.list_sse').trigger('change');
+    //                     $('.list_se').trigger('change');
+    //                 }
+    //             },
+    //             error: function (e) {
+    //                 throw e;
+    //             }
+    //         });
+    //     }
+    // },
+
+    // valorSubsector: function (valores) {
+    //     //Se obtiene el Subsector dependiendo de la Actividad Economica que le corresponde 
+    //     var subsector_list = app.lang.getAppListStrings('subsector_list');
+    //     var newSubSector_list = {};
+    //     for (var i = 0; i < valores.length; i++) {
+    //         var element = valores[i];
+
+    //         Object.keys(subsector_list).forEach(function (key) {
+
+    //             if (key == element) {
+    //                 newSubSector_list[key] = subsector_list[key];
+    //             }
+    //         });
+    //     }
+    //     return newSubSector_list;
+    // },
+
+    // obtenerSubSector: function () {
+    //     //Se obtiene el ID del Subsector para setear el Sector que le corresponde
+    //     var idActEconomica = clasf_sectorial.ActividadEconomica.ae.id;
+    //     var idSubSector = clasf_sectorial.ActividadEconomica.sse.id;
+
+    //     if (idActEconomica != '' && idActEconomica != undefined && idSubSector != '' && idSubSector != null && idSubSector != undefined) {
+
+    //         var arrsector = clasf_sectorial.combinaciones[idActEconomica][idSubSector];
+    //         var sector_list = app.lang.getAppListStrings('sector_list');
+    //         var newSector_list = {};
+
+    //         for (var keys in arrsector) {
+    //             var elemento = keys;
+    //             // console.log(elemento);
+    //             Object.keys(sector_list).forEach(function (key) {
+    //                 if (key == elemento) {
+    //                     newSector_list[key] = sector_list[key];
+    //                 }
+    //             });
+    //         }
+
+    //         clasf_sectorial.sectoreconomico_list = newSector_list;
+    //         clasf_sectorial.renderlista = 1;
+    //         clasf_sectorial.render();
+    //         $('.list_sse').select2('val', idSubSector);
+    //     }
+
+    //     /*************************************************API INEGI*************************************************/
+    //     app.alert.show('obtiene_INEGI', {
+    //         level: 'process',
+    //         title: 'Cargando...',
+    //     });
+
+    //     app.api.call('GET', app.api.buildURL('clasificacionSectorialCNVB/' + idActEconomica + '/' + idSubSector), null, {
+    //         success: function (data) {
+    //             dataInegi = data;
+    //             app.alert.dismiss('obtiene_INEGI');
+    //             // console.log(data);
+    //             if (dataInegi != '') {
+    //                 //Envia los valores de los campos de INEGI a la vista HBS
+    //                 clasf_sectorial.ResumenCliente.inegi.inegi_sector = dataInegi['id_sector_inegi'];
+    //                 clasf_sectorial.ResumenCliente.inegi.inegi_subsector = dataInegi['id_subsector_inegi'];
+    //                 clasf_sectorial.ResumenCliente.inegi.inegi_rama = dataInegi['id_rama_inegi'];
+    //                 clasf_sectorial.ResumenCliente.inegi.inegi_subrama = dataInegi['id_subrama_inegi'];
+    //                 clasf_sectorial.ResumenCliente.inegi.inegi_clase = dataInegi['id_clase_inegi'];
+    //                 clasf_sectorial.ResumenCliente.inegi.inegi_descripcion = dataInegi['id_descripcion_inegi'];
+    //                 //Envia los valores al LH para guardarlos en el modulo de Resumen
+    //                 clasf_sectorial.ActividadEconomica.inegi_sector = dataInegi['id_sector_inegi'];
+    //                 clasf_sectorial.ActividadEconomica.inegi_subsector = dataInegi['id_subsector_inegi'];
+    //                 clasf_sectorial.ActividadEconomica.inegi_rama = dataInegi['id_rama_inegi'];
+    //                 clasf_sectorial.ActividadEconomica.inegi_subrama = dataInegi['id_subrama_inegi'];
+    //                 clasf_sectorial.ActividadEconomica.inegi_clase = dataInegi['id_clase_inegi'];
+    //                 clasf_sectorial.ActividadEconomica.inegi_descripcion = dataInegi['id_descripcion_inegi'];
+
+    //                 clasf_sectorial.render();
+    //             }
+    //         },
+    //         error: function (e) {
+    //             throw e;
+    //         }
+    //     });
+    // },
+
+    // obtenerSector: function () {
+    //     //Se obtiene el ID Sector para poder setear el Macro Sector que le corresponde
+    //     var idActEconomica = clasf_sectorial.ActividadEconomica.ae.id;
+    //     var idSubSector = clasf_sectorial.ActividadEconomica.sse.id;
+    //     var idSector = clasf_sectorial.ActividadEconomica.se.id;
+
+    //     if (idActEconomica != '' && idActEconomica != undefined && idSubSector != '' && idSubSector != undefined &&
+    //         idSector != '' && idSector != null && idSector != undefined) {
+
+    //         var arrmacro = clasf_sectorial.combinaciones[idActEconomica][idSubSector][idSector];
+    //         var macro_list = app.lang.getAppListStrings('macro_list');
+    //         var newMacro_list = {};
+
+    //         for (var i = 0; i < arrmacro.length; i++) {
+    //             var elementom = arrmacro[i];
+    //             // console.log(elementom);
+    //             Object.keys(macro_list).forEach(function (key) {
+
+    //                 if (key == elementom) {
+    //                     newMacro_list[key] = macro_list[key];
+    //                 }
+    //             });
+    //         }
+
+    //         clasf_sectorial.tct_macro_sector_ddw_list = newMacro_list;
+    //         clasf_sectorial.renderlista = 1;
+    //         clasf_sectorial.render();
+    //         $('.list_se').select2('val', idSector);
+    //     }
+    // },
 
     //Carga las listas desplegables para los campos.
     cargalistas: function () {
         //LISTAS CNBV
-        clasf_sectorial.actividadeconomica_list = app.lang.getAppListStrings('actividadeconomica_list');
-        clasf_sectorial.subsectoreconomico_list = app.lang.getAppListStrings('subsectoreconomico_list');
-        clasf_sectorial.sectoreconomico_list = app.lang.getAppListStrings('sectoreconomico_list');
-        clasf_sectorial.tct_macro_sector_ddw_list = app.lang.getAppListStrings('tct_macro_sector_ddw_list');
+        clasf_sectorial.actividadeconomica_list = app.lang.getAppListStrings('actividad_list');
+        clasf_sectorial.subsectoreconomico_list = app.lang.getAppListStrings('subsector_list');
+        clasf_sectorial.sectoreconomico_list = app.lang.getAppListStrings('sector_list');
+        clasf_sectorial.tct_macro_sector_ddw_list = app.lang.getAppListStrings('macro_list');
 
         //LISTAS INEGI
         clasf_sectorial.inegi_rama_list = app.lang.getAppListStrings('inegi_rama_list');
