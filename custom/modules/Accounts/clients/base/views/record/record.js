@@ -5482,19 +5482,25 @@
     requeridosLeasingUP: function (fields, errors, callback) {
         var faltantesleasup = 0;
         if ($('.chk_l_nv')[0] != undefined) {
-            if ($('.chk_l_nv')[0].checked && ($('.list_l_nv_razon').select2('val') == "" || $('.list_l_nv_razon').select2('val') == "0")) {
+            if ($('.chk_l_nv')[0].checked && ($('.list_l_nv_razon').select2('val') == "" || $('.list_l_nv_razon').select2('val') == null || $('.list_l_nv_razon').select2('val') == "0")) {
                 $('.list_l_nv_razon').find('.select2-choice').css('border-color', 'red'); //Razón de Lead no viable
                 faltantesleasup += 1;
             }
-            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "1" && ($('.list_l_nv_razon_fp').select2('val') == "" || $('.list_l_nv_razon_fp').select2('val') == "0")) {
+            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "1" && 
+            ($('.list_l_nv_razon_fp').select2('val') == "" || $('.list_l_nv_razon_fp').select2('val') == null || $('.list_l_nv_razon_fp').select2('val') == "0")) {
+
                 $('.list_l_nv_razon_fp').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantesleasup += 1;
             }
-            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "2" && ($('.list_l_nv_razon_cf').select2('val') == "" || $('.list_l_nv_razon_cf').select2('val') == "0")) {
+            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "2" && 
+            ($('.list_l_nv_razon_cf').select2('val') == "" || $('.list_l_nv_razon_cf').select2('val') == null || $('.list_l_nv_razon_cf').select2('val') == "0")) {
+            
                 $('.list_l_nv_razon_cf').find('.select2-choice').css('border-color', 'red'); //Condiciones Financieras
                 faltantesleasup += 1;
             }
-            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "7" && ($('.list_l_nv_razon_ni').select2('val') == "" || $('.list_l_nv_razon_ni').select2('val') == "0")) {
+            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "7" && 
+            ($('.list_l_nv_razon_ni').select2('val') == "" || $('.list_l_nv_razon_ni').select2('val') == null || $('.list_l_nv_razon_ni').select2('val') == "0")) {
+            
                 $('.list_l_nv_razon_ni').find('.select2-choice').css('border-color', 'red'); //Razón No se encuentra interesado
                 faltantesleasup += 1;
             }
@@ -5511,11 +5517,16 @@
                 $('.txt_l_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
                 faltantesleasup += 1;
             }
-            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "4" && ($('.list_l_nv_producto').select2('val') == "" || $('.list_l_nv_producto').select2('val') == "0")) {
+            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "4" && 
+            ($('.list_l_nv_producto').select2('val') == "" || $('.list_l_nv_producto').select2('val') == null || $('.list_l_nv_producto').select2('val') == "0")) {
+            
                 $('.list_l_nv_producto').find('.select2-choice').css('border-color', 'red'); //¿Qué producto?
                 faltantesleasup += 1;
             }
-            if (($('.list_l_nv_razon').select2('val') == "4" || $('.list_l_nv_razon option:selected').text() == "4" || $('.list_l_nv_razon')[0].innerText.trim() == "4") && ($('.list_l_nv_producto').select2('val') == "4" || $('.list_l_nv_producto option:selected').text() == "4" || $('.list_l_nv_producto')[0].innerText.trim() == "4") && $('.chk_l_nv')[0].checked && $('.txt_l_nv_otro').val().trim() == "") {
+            if (($('.list_l_nv_razon').select2('val') == "4" || $('.list_l_nv_razon option:selected').text() == "4" || $('.list_l_nv_razon')[0].innerText.trim() == "4") && 
+            ($('.list_l_nv_producto').select2('val') == "4" || $('.list_l_nv_producto option:selected').text() == "4" || $('.list_l_nv_producto')[0].innerText.trim() == "4") && 
+            $('.chk_l_nv')[0].checked && $('.txt_l_nv_otro').val().trim() == "") {
+            
                 $('.txt_l_nv_otro').css('border-color', 'red'); //TXT ¿Qué producto?
                 faltantesleasup += 1;
             }
@@ -5540,19 +5551,25 @@
     requeridosFactorajeUP: function (fields, errors, callback) {
         var faltantesFactorajeUP = 0;
         if ($('.chk_f_nv')[0] != undefined) {
-            if ($('.chk_f_nv')[0].checked && ($('.list_f_nv_razon').select2('val') == "" || $('.list_f_nv_razon').select2('val') == "0")) {
+            if ($('.chk_f_nv')[0].checked && ($('.list_f_nv_razon').select2('val') == "" || $('.list_f_nv_razon').select2('val') == null || $('.list_f_nv_razon').select2('val') == "0")) {
                 $('.list_f_nv_razon').find('.select2-choice').css('border-color', 'red'); //Razón de Lead no viable
                 faltantesFactorajeUP += 1;
             }
-            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "1" && ($('.list_f_nv_razon_fp').select2('val') == "" || $('.list_f_nv_razon_fp').select2('val') == "0")) {
+            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "1" && 
+            ($('.list_f_nv_razon_fp').select2('val') == "" || $('.list_f_nv_razon_fp').select2('val') == null || $('.list_f_nv_razon_fp').select2('val') == "0")) {
+            
                 $('.list_f_nv_razon_fp').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantesFactorajeUP += 1;
             }
-            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "2" && ($('.list_f_nv_razon_cf').select2('val') == "" || $('.list_f_nv_razon_cf').select2('val') == "0")) {
+            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "2" && 
+            ($('.list_f_nv_razon_cf').select2('val') == "" || $('.list_f_nv_razon_cf').select2('val') == null || $('.list_f_nv_razon_cf').select2('val') == "0")) {
+            
                 $('.list_f_nv_razon_cf').find('.select2-choice').css('border-color', 'red'); //Condiciones Financieras
                 faltantesFactorajeUP += 1;
             }
-            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "7" && ($('.list_f_nv_razon_ni').select2('val') == "" || $('.list_f_nv_razon_ni').select2('val') == "0")) {
+            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "7" && 
+            ($('.list_f_nv_razon_ni').select2('val') == "" || $('.list_f_nv_razon_ni').select2('val') == null || $('.list_f_nv_razon_ni').select2('val') == "0")) {
+            
                 $('.list_f_nv_razon_ni').find('.select2-choice').css('border-color', 'red'); //Razón No se encuentra interesado
                 faltantesFactorajeUP += 1;
             }
@@ -5569,11 +5586,16 @@
                 $('.txt_f_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
                 faltantesFactorajeUP += 1;
             }
-            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "4" && ($('.list_f_nv_producto').select2('val') == "" || $('.list_f_nv_producto').select2('val') == "0")) {
+            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "4" && 
+            ($('.list_f_nv_producto').select2('val') == "" || $('.list_f_nv_producto').select2('val') == null || $('.list_f_nv_producto').select2('val') == "0")) {
+            
                 $('.list_f_nv_producto').find('.select2-choice').css('border-color', 'red'); //¿Qué producto?
                 faltantesFactorajeUP += 1;
             }
-            if (($('.list_f_nv_razon').select2('val') == "4" || $('.list_f_nv_razon option:selected').text() == "4" || $('.list_f_nv_razon')[0].innerText.trim() == "4") && ($('.list_f_nv_producto').select2('val') == "4" || $('.list_f_nv_producto option:selected').text() == "4" || $('.list_f_nv_producto')[0].innerText.trim() == "4") && $('.chk_f_nv')[0].checked && $('.txt_f_nv_otro').val().trim() == "") {
+            if (($('.list_f_nv_razon').select2('val') == "4" || $('.list_f_nv_razon option:selected').text() == "4" || $('.list_f_nv_razon')[0].innerText.trim() == "4") && 
+            ($('.list_f_nv_producto').select2('val') == "4" || $('.list_f_nv_producto option:selected').text() == "4" || $('.list_f_nv_producto')[0].innerText.trim() == "4") && 
+            $('.chk_f_nv')[0].checked && $('.txt_f_nv_otro').val().trim() == "") {
+            
                 $('.txt_f_nv_otro').css('border-color', 'red'); //TXT ¿Qué producto?
                 faltantesFactorajeUP += 1;
             }
@@ -5598,19 +5620,25 @@
     requeridosCAUP: function (fields, errors, callback) {
         var faltantesCAUP = 0;
         if ($('.chk_ca_nv')[0] != undefined) {
-            if ($('.chk_ca_nv')[0].checked && ($('.list_ca_nv_razon').select2('val') == "" || $('.list_ca_nv_razon').select2('val') == "0")) {
+            if ($('.chk_ca_nv')[0].checked && ($('.list_ca_nv_razon').select2('val') == "" || $('.list_ca_nv_razon').select2('val') == null || $('.list_ca_nv_razon').select2('val') == "0")) {
                 $('.list_ca_nv_razon').find('.select2-choice').css('border-color', 'red'); //Razón de Lead no viable
                 faltantesCAUP += 1;
             }
-            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "1" && ($('.list_ca_nv_razon_fp').select2('val') == "" || $('.list_ca_nv_razon_fp').select2('val') == "0")) {
+            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "1" && 
+            ($('.list_ca_nv_razon_fp').select2('val') == "" || $('.list_ca_nv_razon_fp').select2('val') == null || $('.list_ca_nv_razon_fp').select2('val') == "0")) {
+            
                 $('.list_ca_nv_razon_fp').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantesCAUP += 1;
             }
-            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "2" && ($('.list_ca_nv_razon_cf').select2('val') == "" || $('.list_ca_nv_razon_cf').select2('val') == "0")) {
+            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "2" && 
+            ($('.list_ca_nv_razon_cf').select2('val') == "" || $('.list_ca_nv_razon_cf').select2('val') == null || $('.list_ca_nv_razon_cf').select2('val') == "0")) {
+            
                 $('.list_ca_nv_razon_cf').find('.select2-choice').css('border-color', 'red'); //Condiciones Financieras
                 faltantesCAUP += 1;
             }
-            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "7" && ($('.list_ca_nv_razon_ni').select2('val') == "" || $('.list_ca_nv_razon_ni').select2('val') == "0")) {
+            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "7" && 
+            ($('.list_ca_nv_razon_ni').select2('val') == "" || $('.list_ca_nv_razon_ni').select2('val') == null || $('.list_ca_nv_razon_ni').select2('val') == "0")) {
+            
                 $('.list_ca_nv_razon_ni').find('.select2-choice').css('border-color', 'red'); //Razón No se encuentra interesado
                 faltantesCAUP += 1;
             }
@@ -5627,11 +5655,16 @@
                 $('.txt_ca_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
                 faltantesCAUP += 1;
             }
-            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "4" && ($('.list_ca_nv_producto').select2('val') == "" || $('.list_ca_nv_producto').select2('val') == "0")) {
+            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "4" && 
+            ($('.list_ca_nv_producto').select2('val') == "" || $('.list_ca_nv_producto').select2('val') == null || $('.list_ca_nv_producto').select2('val') == "0")) {
+            
                 $('.list_ca_nv_producto').find('.select2-choice').css('border-color', 'red'); //¿Qué producto?
                 faltantesCAUP += 1;
             }
-            if (($('.list_ca_nv_razon').select2('val') == "4" || $('.list_ca_nv_razon option:selected').text() == "4" || $('.list_ca_nv_razon')[0].innerText.trim() == "4") && ($('.list_ca_nv_producto').select2('val') == "4" || $('.list_ca_nv_producto option:selected').text() == "4" || $('.list_ca_nv_producto')[0].innerText.trim() == "4") && $('.chk_ca_nv')[0].checked && $('.txt_ca_nv_otro').val().trim() == "") {
+            if (($('.list_ca_nv_razon').select2('val') == "4" || $('.list_ca_nv_razon option:selected').text() == "4" || $('.list_ca_nv_razon')[0].innerText.trim() == "4") && 
+            ($('.list_ca_nv_producto').select2('val') == "4" || $('.list_ca_nv_producto option:selected').text() == "4" || $('.list_ca_nv_producto')[0].innerText.trim() == "4") && 
+            $('.chk_ca_nv')[0].checked && $('.txt_ca_nv_otro').val().trim() == "") {
+            
                 $('.txt_ca_nv_otro').css('border-color', 'red'); //TXT ¿Qué producto?
                 faltantesCAUP += 1;
             }
@@ -5656,19 +5689,25 @@
     requeridosFleetUP: function (fields, errors, callback) {
         var faltantesFleetUP = 0;
         if ($('.chk_fl_nv')[0] != undefined) {
-            if ($('.chk_fl_nv')[0].checked && ($('.list_fl_nv_razon').select2('val') == "" || $('.list_fl_nv_razon').select2('val') == "0")) {
+            if ($('.chk_fl_nv')[0].checked && ($('.list_fl_nv_razon').select2('val') == "" || $('.list_fl_nv_razon').select2('val') == null || $('.list_fl_nv_razon').select2('val') == "0")) {
                 $('.list_fl_nv_razon').find('.select2-choice').css('border-color', 'red'); //Razón de Lead no viable
                 faltantesFleetUP += 1;
             }
-            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "1" && ($('.list_fl_nv_razon_fp').select2('val') == "" || $('.list_fl_nv_razon_fp').select2('val') == "0")) {
+            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "1" && 
+            ($('.list_fl_nv_razon_fp').select2('val') == "" || $('.list_fl_nv_razon_fp').select2('val') == null || $('.list_fl_nv_razon_fp').select2('val') == "0")) {
+            
                 $('.list_fl_nv_razon_fp').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantesFleetUP += 1;
             }
-            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "2" && ($('.list_fl_nv_razon_cf').select2('val') == "" || $('.list_fl_nv_razon_cf').select2('val') == "0")) {
+            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "2" && 
+            ($('.list_fl_nv_razon_cf').select2('val') == "" || $('.list_fl_nv_razon_cf').select2('val') == null || $('.list_fl_nv_razon_cf').select2('val') == "0")) {
+            
                 $('.list_fl_nv_razon_cf').find('.select2-choice').css('border-color', 'red'); //Condiciones Financieras
                 faltantesFleetUP += 1;
             }
-            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "7" && ($('.list_fl_nv_razon_ni').select2('val') == "" || $('.list_fl_nv_razon_ni').select2('val') == "0")) {
+            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "7" && 
+            ($('.list_fl_nv_razon_ni').select2('val') == "" || $('.list_fl_nv_razon_ni').select2('val') == null || $('.list_fl_nv_razon_ni').select2('val') == "0")) {
+            
                 $('.list_fl_nv_razon_ni').find('.select2-choice').css('border-color', 'red'); //Razón No se encuentra interesado
                 faltantesFleetUP += 1;
             }
@@ -5685,11 +5724,16 @@
                 $('.txt_fl_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
                 faltantesFleetUP += 1;
             }
-            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "4" && ($('.list_fl_nv_producto').select2('val') == "" || $('.list_fl_nv_producto').select2('val') == "0")) {
+            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "4" && 
+            ($('.list_fl_nv_producto').select2('val') == "" || $('.list_fl_nv_producto').select2('val') == null || $('.list_fl_nv_producto').select2('val') == "0")) {
+            
                 $('.list_fl_nv_producto').find('.select2-choice').css('border-color', 'red'); //¿Qué producto?
                 faltantesFleetUP += 1;
             }
-            if (($('.list_fl_nv_razon').select2('val') == "4" || $('.list_fl_nv_razon option:selected').text() == "4" || $('.list_fl_nv_razon')[0].innerText.trim() == "4") && ($('.list_fl_nv_producto').select2('val') == "4" || $('.list_fl_nv_producto option:selected').text() == "4" || $('.list_fl_nv_producto')[0].innerText.trim() == "4") && $('.chk_fl_nv')[0].checked && $('.txt_fl_nv_otro').val().trim() == "") {
+            if (($('.list_fl_nv_razon').select2('val') == "4" || $('.list_fl_nv_razon option:selected').text() == "4" || $('.list_fl_nv_razon')[0].innerText.trim() == "4") && 
+            ($('.list_fl_nv_producto').select2('val') == "4" || $('.list_fl_nv_producto option:selected').text() == "4" || $('.list_fl_nv_producto')[0].innerText.trim() == "4") && 
+            $('.chk_fl_nv')[0].checked && $('.txt_fl_nv_otro').val().trim() == "") {
+            
                 $('.txt_fl_nv_otro').css('border-color', 'red'); //TXT ¿Qué producto?
                 faltantesFleetUP += 1;
             }
@@ -5714,19 +5758,25 @@
     requeridosUniclickUP: function (fields, errors, callback) {
         var faltantesUniclickUP = 0;
         if ($('.chk_u_nv')[0] != undefined) {
-            if ($('.chk_u_nv')[0].checked && ($('.list_u_nv_razon').select2('val') == "" || $('.list_u_nv_razon').select2('val') == "0")) {
+            if ($('.chk_u_nv')[0].checked && ($('.list_u_nv_razon').select2('val') == "" || $('.list_u_nv_razon').select2('val') == null || $('.list_u_nv_razon').select2('val') == "0")) {
                 $('.list_u_nv_razon').find('.select2-choice').css('border-color', 'red'); //Razón de Lead no viable
                 faltantesUniclickUP += 1;
             }
-            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "1" && ($('.list_u_nv_razon_fp').select2('val') == "" || $('.list_u_nv_razon_fp').select2('val') == "0")) {
+            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "1" && 
+            ($('.list_u_nv_razon_fp').select2('val') == "" || $('.list_u_nv_razon_fp').select2('val') == null || $('.list_u_nv_razon_fp').select2('val') == "0")) {
+            
                 $('.list_u_nv_razon_fp').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantesUniclickUP += 1;
             }
-            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "2" && ($('.list_u_nv_razon_cf').select2('val') == "" || $('.list_u_nv_razon_cf').select2('val') == "0")) {
+            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "2" && 
+            ($('.list_u_nv_razon_cf').select2('val') == "" || $('.list_u_nv_razon_cf').select2('val') == null || $('.list_u_nv_razon_cf').select2('val') == "0")) {
+                
                 $('.list_u_nv_razon_cf').find('.select2-choice').css('border-color', 'red'); //Condiciones Financieras
                 faltantesUniclickUP += 1;
             }
-            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "7" && ($('.list_u_nv_razon_ni').select2('val') == "" || $('.list_u_nv_razon_ni').select2('val') == "0")) {
+            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "7" && 
+            ($('.list_u_nv_razon_ni').select2('val') == "" || $('.list_u_nv_razon_ni').select2('val') == null || $('.list_u_nv_razon_ni').select2('val') == "0")) {
+            
                 $('.list_u_nv_razon_ni').find('.select2-choice').css('border-color', 'red'); //Razón No se encuentra interesado
                 faltantesUniclickUP += 1;
             }
@@ -5743,11 +5793,16 @@
                 $('.txt_u_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
                 faltantesUniclickUP += 1;
             }
-            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "4" && ($('.list_u_nv_producto').select2('val') == "" || $('.list_u_nv_producto').select2('val') == "0")) {
+            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "4" && 
+            ($('.list_u_nv_producto').select2('val') == "" || $('.list_u_nv_producto').select2('val') == null || $('.list_u_nv_producto').select2('val') == "0")) {
+            
                 $('.list_u_nv_producto').find('.select2-choice').css('border-color', 'red'); //¿Qué producto?
                 faltantesUniclickUP += 1;
             }
-            if (($('.list_u_nv_razon').select2('val') == "4" || $('.list_u_nv_razon option:selected').text() == "4" || $('.list_u_nv_razon')[0].innerText.trim() == "4") && ($('.list_u_nv_producto').select2('val') == "4" || $('.list_u_nv_producto option:selected').text() == "4" || $('.list_u_nv_producto')[0].innerText.trim() == "4") && $('.chk_u_nv')[0].checked && $('.txt_u_nv_otro').val().trim() == "") {
+            if (($('.list_u_nv_razon').select2('val') == "4" || $('.list_u_nv_razon option:selected').text() == "4" || $('.list_u_nv_razon')[0].innerText.trim() == "4") && 
+            ($('.list_u_nv_producto').select2('val') == "4" || $('.list_u_nv_producto option:selected').text() == "4" || $('.list_u_nv_producto')[0].innerText.trim() == "4") && 
+            $('.chk_u_nv')[0].checked && $('.txt_u_nv_otro').val().trim() == "") {
+            
                 $('.txt_u_nv_otro').css('border-color', 'red'); //TXT ¿Qué producto?
                 faltantesUniclickUP += 1;
             }
