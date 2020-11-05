@@ -144,6 +144,7 @@
         //Validación para poder autorizar o rechazar la pre-solicitud
         this.model.on('sync', this.autorizapre, this);
         this.model.on('change:estatus_c', this.refrescaPipeLine, this);
+
     },
 
     fulminantcolor: function () {
@@ -581,6 +582,9 @@
         //Oculta campo de Director Notificado
         this.$('div[data-name="director_notificado_c"]').hide();
         this.$('div[data-name="bandera_excluye_chk_c"]').hide();
+        this.$("div[data-name='renewal_parent_name']").remove();
+        this.$(".field-label[data-name='pipeline_opp']").remove();
+        this.$(".record-cell[data-name='blank_space']").hide();
     },
 
     evaluaCampoSolicitudVobo:function () {
