@@ -365,6 +365,8 @@
         //Oculta campo de solicitud para Vobo
         $('[data-name="vobo_descripcion_txa_c"]').hide();
         $('[data-name="director_notificado_c"]').hide();
+        this.$(".record-cell[data-name='blank_space']").hide();
+
 
     },
     /*
@@ -1243,6 +1245,9 @@
         $('[data-name="otro_suby_c"]').show();*/
                //Ocultando el panel de Oportunidad perdida
         $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
+        $("div[data-name='seguro_desempleo_c']").remove();
+        $("div[data-name='porciento_ri_c']").remove();
+
 
 
     },

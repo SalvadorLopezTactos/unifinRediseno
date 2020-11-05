@@ -208,6 +208,8 @@ $viewdefs['Opportunities']['base']['view']['record'] = array (
           'studio' => 'visible',
           'label' => 'LBL_PIPELINE_OPP',
           'span' => 12,
+          'dismiss_label' => true,
+
         ),
         1 => 
         array (
@@ -301,6 +303,8 @@ $viewdefs['Opportunities']['base']['view']['record'] = array (
         ),
         17 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         18 => 
         array (
@@ -374,6 +378,8 @@ $viewdefs['Opportunities']['base']['view']['record'] = array (
         ),
         25 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         26 => 
         array (
@@ -382,6 +388,8 @@ $viewdefs['Opportunities']['base']['view']['record'] = array (
         ),
         27 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         28 => 
         array (
@@ -500,6 +508,8 @@ $viewdefs['Opportunities']['base']['view']['record'] = array (
         ),
         47 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         48 => 
         array (
@@ -577,6 +587,8 @@ $viewdefs['Opportunities']['base']['view']['record'] = array (
         ),
         60 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         61 => 
         array (
@@ -629,6 +641,8 @@ $viewdefs['Opportunities']['base']['view']['record'] = array (
         ),
         70 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         71 => 
         array (
@@ -644,6 +658,8 @@ $viewdefs['Opportunities']['base']['view']['record'] = array (
         ),
         73 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         74 => 
         array (
@@ -684,6 +700,8 @@ $viewdefs['Opportunities']['base']['view']['record'] = array (
         ),
         81 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         82 => 
         array (
@@ -772,6 +790,8 @@ $viewdefs['Opportunities']['base']['view']['record'] = array (
         ),
         1 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         2 => 
         array (
@@ -790,6 +810,8 @@ $viewdefs['Opportunities']['base']['view']['record'] = array (
         ),
         5 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         6 => 
         array (
@@ -799,6 +821,8 @@ $viewdefs['Opportunities']['base']['view']['record'] = array (
         ),
         7 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         8 => 
         array (
@@ -828,6 +852,8 @@ $viewdefs['Opportunities']['base']['view']['record'] = array (
         ),
         1 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         2 => 
         array (
@@ -846,6 +872,8 @@ $viewdefs['Opportunities']['base']['view']['record'] = array (
         ),
         5 => 
         array (
+            'name' => 'blank_space',
+            'label' => 'LBL_BLANK_SPACE',
         ),
         6 => 
         array (
