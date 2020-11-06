@@ -1790,45 +1790,64 @@
     validaformato: function (fields, errors, callback) {
         //Validacion para pasar una expresion regular por los 3 campos y verificar dicho formato.
         var errorescampos = "";
-        if (this.model.get('primernombre_c') != "" || this.model.get('apellidopaterno_c') != "" || this.model.get('apellidomaterno_c') != "") {
-            var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
-            if (this.model.get('primernombre_c') != "" && this.model.get('primernombre_c') != undefined) {
-                var nombre = this.model.get('primernombre_c');
-                var res = expresion.test(nombre);
-                if (res != true) {
-                    errorescampos = errorescampos + '<b>-Primer Nombre<br></b>';;
-                    errors['primernombre_c'] = errors['primernombre_c'] || {};
-                    errors['primernombre_c'].required = true;
-                }
-            }
-            if (this.model.get('apellidopaterno_c') != "" && this.model.get('apellidopaterno_c') != undefined) {
-                var apaterno = this.model.get('apellidopaterno_c');
-                var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
-                var res = expresion.test(apaterno);
-                if (res != true) {
-                    errorescampos = errorescampos + '<b>-Apellido Paterno<br></b>';;
-                    errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
-                    errors['apellidopaterno_c'].required = true;
-                }
-            }
-            if (this.model.get('apellidomaterno_c') != "" && this.model.get('apellidomaterno_c') != undefined) {
-                var amaterno = this.model.get('apellidomaterno_c');
-                var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
-                var res = expresion.test(amaterno);
-                if (res != true) {
-                    errorescampos = errorescampos + '<b>-Apellido Materno<br></b>';;
-                    errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
-                    errors['apellidomaterno_c'].required = true;
-                }
-            }
-            if (errorescampos) {
-                app.alert.show("Error_validacion_Campos", {
-                    level: "error",
-                    messages: 'Los siguientes campos no permiten caracteres especiales:<br>' + errorescampos,
-                    autoClose: false
-                });
-            }
-        }
+		if(this.model.get('tipodepersona_c') != 'Persona Moral'){
+			if (this.model.get('primernombre_c') == undefined || this.model.get('apellidopaterno_c') == undefined || this.model.get('apellidomaterno_c') == undefined) {
+				if (this.model.get('primernombre_c') == undefined) {
+					errorescampos = errorescampos + '<b>-Primer Nombre<br></b>';;
+					errors['primernombre_c'] = errors['primernombre_c'] || {};
+					errors['primernombre_c'].required = true;                
+				}
+				if (this.model.get('apellidopaterno_c') == undefined) {
+					errorescampos = errorescampos + '<b>-Apellido Paterno<br></b>';;
+					errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
+					errors['apellidopaterno_c'].required = true;
+				}
+				if (this.model.get('apellidomaterno_c') == undefined) {
+					errorescampos = errorescampos + '<b>-Apellido Materno<br></b>';;
+					errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
+					errors['apellidomaterno_c'].required = true;
+				}           
+			}else if (this.model.get('primernombre_c') != "" || this.model.get('apellidopaterno_c') != "" || this.model.get('apellidomaterno_c') != "") {
+				var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
+				if (this.model.get('primernombre_c') != "" && this.model.get('primernombre_c') != undefined) {
+					var nombre = this.model.get('primernombre_c');
+					var res = expresion.test(nombre);
+					if (res != true) {
+						errorescampos = errorescampos + '<b>-Primer Nombre<br></b>';;
+						errors['primernombre_c'] = errors['primernombre_c'] || {};
+						errors['primernombre_c'].required = true;
+					}
+				}
+				if (this.model.get('apellidopaterno_c') != "" && this.model.get('apellidopaterno_c') != undefined) {
+					var apaterno = this.model.get('apellidopaterno_c');
+					var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
+					var res = expresion.test(apaterno);
+					if (res != true) {
+						errorescampos = errorescampos + '<b>-Apellido Paterno<br></b>';;
+						errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
+						errors['apellidopaterno_c'].required = true;
+					}
+				}
+				if (this.model.get('apellidomaterno_c') != "" && this.model.get('apellidomaterno_c') != undefined) {
+					var amaterno = this.model.get('apellidomaterno_c');
+					var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
+					var res = expresion.test(amaterno);
+					if (res != true) {
+						errorescampos = errorescampos + '<b>-Apellido Materno<br></b>';;
+						errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
+						errors['apellidomaterno_c'].required = true;
+					}
+				}
+				if (errorescampos) {
+					app.alert.show("Error_validacion_Campos", {
+						level: "error",
+						messages: 'Los siguientes campos no permiten caracteres especiales:<br>' + errorescampos,
+						autoClose: false
+					});
+				} 
+			}
+		}
+		
         callback(null, fields, errors);
     },
     validapasscurp: function (fields, errors, callback) {
