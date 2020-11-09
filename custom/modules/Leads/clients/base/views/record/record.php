@@ -27,7 +27,7 @@ array (
             'showOn' => 'edit',
             'acl_action' => 'edit',
           ),
-          2 => 
+          2 =>
           array (
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
@@ -272,14 +272,64 @@ array (
               23 => 
               array (
                 'name' => 'phone_mobile',
+                'label' => 'LBL_MOBILE_PHONE',
+                'inline' => true,
+                'type' => 'fieldset',
+                'fields' => 
+                array (
+                  0 => 
+                  array (
+                    'type' => 'rowaction',
+                    'event' => 'button:llamada_mobile:click',
+                    'css_class' => 'llamada_mobile btn fa fa-phone fa-large btn-success',
+                  ),
+                  1 => 
+                  array (
+                    'name' => 'phone_mobile',
+                  ),
+                ),                
               ),
               24 => 
               array (
                 'name' => 'phone_home',
                 'comment' => 'Home phone number of the contact',
                 'label' => 'LBL_HOME_PHONE',
+                'inline' => true,
+                'type' => 'fieldset',
+                'fields' => 
+                array (
+                  0 => 
+                  array (
+                    'type' => 'rowaction',
+                    'event' => 'button:llamada_home:click',
+                    'css_class' => 'llamada_home btn fa fa-phone fa-large btn-success',
+                  ),
+                  1 => 
+                  array (
+                    'name' => 'phone_home',
+                  ),
+                ),                
               ),
-              25 => 'phone_work',
+              25 =>
+              array (
+                'name' => 'phone_work',
+                'label' => 'LBL_OFFICE_PHONE',
+                'inline' => true,
+                'type' => 'fieldset',
+                'fields' => 
+                array (
+                  0 => 
+                  array (
+                    'type' => 'rowaction',
+                    'event' => 'button:llamada_work:click',
+                    'css_class' => 'llamada_work btn fa fa-phone fa-large btn-success',
+                  ),
+                  1 => 
+                  array (
+                    'name' => 'phone_work',
+                  ),
+                ),                
+              ),
               26 => 
               array (
                 'name' => 'detalle_plataforma_c',

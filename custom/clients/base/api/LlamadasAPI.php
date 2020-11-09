@@ -36,36 +36,29 @@ class LlamadasAPI extends SugarApi
     public function createcall($api, $args)
     {
         $GLOBALS['log']->fatal('>>>>>>>Entro llamadasAPI');//------------------------------------
-
         $id_cliente=$args['data'][0];
         $nombre_cliente=$args['data'][1];
-
+        $modulo=$args['data'][2];
         $GLOBALS['log']->fatal('id cliente: '.$id_cliente);//------------------------------------
-        $GLOBALS['log']->fatal('nombre del cliente: '.$nombre_cliente);//------------------------------------
-
+        $GLOBALS['log']->fatal('nombre del cliente: '.$nombre_cliente);//------------------------------------  
+        $GLOBALS['log']->fatal('modulo: '.$modulo);//------------------------------------
         $bean_call = BeanFactory::newBean('Calls');
         $GLOBALS['log']->fatal('Bean creado');//----------------------
-        
         $bean_call->name ='Llamada a:' .$nombre_cliente ;
         $GLOBALS['log']->fatal('Nombre asignado');//----------------------
-
         $bean_call->parent_id = $id_cliente;
-        $bean_call->parent_type = 'Accounts';
+        $bean_call->parent_type = $modulo;
         $GLOBALS['log']->fatal('Id de cliente asignado');//----------------------
-
         $bean_call->tct_call_issabel_c=1;
-
         global $current_user;
         $bean_call->assigned_user_id = $current_user->id;
-
         $bean_call->save();
-
+        if($modulo == 'Leads') {
+          $bean_call->load_relationship('leads');
+          $bean_call->leads->add($id_cliente);
+        }
         $GLOBALS['log']->fatal('Bean de llamadas guardado');//----------------------
-
         return $bean_call->id;
-
     }
-
 }
-
 ?>
