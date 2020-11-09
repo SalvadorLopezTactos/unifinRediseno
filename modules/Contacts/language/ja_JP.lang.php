@@ -19,9 +19,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
     // Dashboard Names
-    'LBL_CONTACTS_LIST_DASHBOARD' => '連絡先リストのダッシュ ボード',
-    'LBL_CONTACTS_RECORD_DASHBOARD' => '連絡先レコードのダッシュ ボード',
-
+    'LBL_CONTACTS_LIST_DASHBOARD' => '連絡先リストのダッシュボード',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => '連絡先レコードのダッシュボード',
+    'LBL_SITE_USER_ID' => 'site_urlおよび取引先担当者IDのハッシュ',
+    'LBL_COOKIE_CONSENT' => 'Cookieへの同意',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Cookieへの同意の受信日',
     'LNK_CONTACT_REPORTS' => '取引先担当者レポート',
     'ERR_DELETE_RECORD' => '取引先担当者を削除するにはレコード番号を指定する必要があります。',
     'LBL_ACCOUNT_ID' => '取引先ID:',
@@ -66,11 +68,11 @@ $mod_strings = array (
     'LBL_DEPARTMENT' => '部署:',
     'LBL_DESCRIPTION_INFORMATION' => '詳細情報',
     'LBL_DESCRIPTION' => '詳細:',
-    'LBL_DIRECT_REPORTS_SUBPANEL_TITLE'=>'直接的なリポート',
+    'LBL_DIRECT_REPORTS_SUBPANEL_TITLE'=>'報告メンバー',
     'LBL_DO_NOT_CALL' => '電話不可:',
     'LBL_DUPLICATE' => '重複の可能性がある取引先担当者',
     'LBL_EMAIL_ADDRESS' => 'Eメール:',
-    'LBL_EMAIL_OPT_OUT' => 'Eメール送信除外:',
+    'LBL_EMAIL_OPT_OUT' => 'メール送信除外:',
     'LBL_EMPTY_VCARD' => 'vCardファイルを選択してください',
     'LBL_EXISTING_ACCOUNT' => '既存の取引先を使用',
     'LBL_EXISTING_CONTACT' => '既存の取引先担当者を使用',
@@ -86,7 +88,7 @@ $mod_strings = array (
     'LBL_VCARD' => 'vCard',
     'LBL_IMPORT_VCARDTEXT' => 'vCardをインポートすることによって新規取引先担当者を作成します。',
     'LBL_INVALID_EMAIL'=>'無効なEメール:',
-    'LBL_INVITEE' => '直接的なリポート',
+    'LBL_INVITEE' => '報告メンバー',
     'LBL_LAST_NAME' => '姓:',
     'LBL_LEAD_SOURCE' => 'リードソース:',
     'LBL_LIST_ACCEPT_STATUS' => '出欠確認',
@@ -123,7 +125,8 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'ポータル情報',
     'LBL_PORTAL_NAME' => 'ポータルユーザ名:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'ポータルパスワード設定:',
-    'LBL_RECORD_SAVED_SUCCESS' => '作成に成功しました {{moduleSingularLower}} {{full_name}}.',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'ポータルユーザの会社名',
+    'LBL_RECORD_SAVED_SUCCESS' => '{{moduleSingularLower}}<a href="#{{buildRoute model=this}}">{{full_name}}</a> の作成に成功しました 。',
     'LBL_STREET' => '番地',
     'LBL_POSTAL_CODE' => '郵便番号:',
     'LBL_PRIMARY_ADDRESS_CITY' => '主となる市区町村:',
@@ -137,8 +140,8 @@ $mod_strings = array (
     'LBL_PRODUCTS_TITLE'=>'商品',
     'LBL_REVENUELINEITEMS_TITLE'=>'商談品目',
     'LBL_RELATED_CONTACTS_TITLE'=>'関連担当者',
-    'LBL_REPORTS_TO_ID'=>'上司ID:',
-    'LBL_REPORTS_TO' => '上司:',
+    'LBL_REPORTS_TO_ID'=>'報告先ID:',
+    'LBL_REPORTS_TO' => '報告先:',
     'LBL_RESOURCE_NAME' => 'リソース名',
     'LBL_SALUTATION' => '敬称:',
     'LBL_SAVE_CONTACT' => '取引先担当者保存',
@@ -179,9 +182,10 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => '商談',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'ドキュメント',
     'LBL_QUOTES_SUBPANEL_TITLE' => '見積',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => '見積（出荷先）',
     'LBL_QUOTES_BILL_TO' => '見積（請求先）',
-    'LBL_PRODUCTS_SUBPANEL_TITLE' => '見積済商品',
+    'LBL_PRODUCTS_SUBPANEL_TITLE' => '見積品目',
     'LBL_CONTRACTS_SUBPANEL_TITLE' => '契約',
     'LBL_COPY_ADDRESS_CHECKED_PRIMARY' => '主となる住所にコピー',
     'LBL_COPY_ADDRESS_CHECKED_ALT' => '別の住所にコピー',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'プロフィールを編集するにはここをクリック。',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => '言語を指定することができます。Sugar ポータルで利用する言語が変更されます。',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'ユーザメニューを使用していつでもプロフィールに戻ることができます。',
+    'ERR_PORTAL_NAME_EXISTS' => 'ポータル名 {0} は既に存在します。重複するポータル名は使用できません。一意のポータル名に変更してください。',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B プリンシパルID',
@@ -254,7 +259,7 @@ $mod_strings = array (
     'LBL_HELP_RECORDS' => '{{plural_module_name}}モジュールは、あなたの組織が関係を持っている人と、個々の人々で構成されています。 {{module_name}}レコードは通常、{{accounts_singular_module}} に関連していて、複数の{{plural_module_name}}は単一の{{accounts_singular_module}}に関係があります。Sugarに{{plural_module_name}}を作成するには様々な方法がありますが、例えば{{plural_module_name}} モジュール経由で, {{plural_module_name}}をインポートすることにより、または{{leads_module}}を{{plural_module_name}}にコンバートすることによりそうできます。{{module_name}}レコードが作成されたら、{{plural_module_name}}レコードの表示を経由して{{module_name}}に関連する情報を表示したり、編集することができます。 各{{module_name}}レコードは他のSugarレコード例えば {{meetings_module}}、 {{cases_module}}、 {{opportunities_module}}や他のたくさんのものと関連付けることができます。{{module_name}}レコードを、各個人との交流を続けたり見たりするハブとして利用することによりそうできます。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}}モジュールは、あなたの組織が関係を持っている人と、個々の人々で構成されています。 - 個々のフィールドまたは「編集」ボタンをクリックして、このレコードのフィールドを編集します。 -左下のペインに「データビュー」をトグルしてサブパネル内の他のレコードへのリンクを表示したり変更してください。左下ペインのアクティビティストリームをトグルすることにより、{{activitystream_singular_module}} 内のユーザーコメントやレコード変更履歴を作成したり閲覧してください。レコード名の右のアイコンを使用してこのレコードをフォローするかお気に入りに入れてください。追加のアクションは、編集ボタンの右にあるドロップダウンの操作メニューにあります。',
+    'LBL_HELP_RECORD' => '{{plural_module_name}}モジュールは、あなたの組織が関係を持っている人と、個々の人々で構成されています。 - 個々のフィールドまたは「編集」ボタンをクリックして、このレコードのフィールドを編集します。 -左下のペインに「データビュー」をトグルしてサブパネル内の他のレコードへのリンクを表示したり変更してください。左下ペインのアクティビティストリームをトグルすることにより、{{activitystream_singular_module}} 内のユーザコメントやレコード変更履歴を作成したり閲覧してください。レコード名の右のアイコンを使用してこのレコードをフォローするかお気に入りに入れてください。追加のアクションは、編集ボタンの右にあるドロップダウンの操作メニューにあります。',
 
     // Create View Help Text
     'LBL_HELP_CREATE' => '{{plural_module_name}} モジュールは、あなたの組織が関係を持っている個人で構成されています。
@@ -273,4 +278,8 @@ $mod_strings = array (
     'LBL_FILTER_CONTACTS_REPORTS' => '取引先担当者のレポート',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => '以下のことに同意したビジネス目的:',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => '最後に更新された同意',
+
+    'LBL_ENTRY_SOURCE' => '取引先担当者ソース',
+    'LBL_SOURCE_EXTERNAL' => '外部',
+    'LBL_SOURCE_INTERNAL' => '内部',
 );

@@ -33,7 +33,7 @@ class TenantRepositoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @var string
      */
-    protected $tenantId = '1';
+    protected $tenantId = '1000000001';
 
     /**
      * @inheritdoc
@@ -53,7 +53,7 @@ class TenantRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->db->expects($this->once())->method('fetchAssoc')->with(
             'SELECT * FROM tenants WHERE id = ?',
-            ['0000000001']
+            ['1000000001']
         )->willReturn([]);
 
         $this->repository->findTenantById($this->tenantId);
@@ -66,12 +66,12 @@ class TenantRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->db->expects($this->once())->method('fetchAssoc')->with(
             'SELECT * FROM tenants WHERE id = ?',
-            ['0000000001']
-        )->willReturn(['id' => '0000000001', 'region' => 'us', 'display_name' => 'Local Test Tenant', 'logo' => null]);
+            ['1000000001']
+        )->willReturn(['id' => '1000000001', 'region' => 'us', 'display_name' => 'Local Test Tenant', 'logo' => null]);
 
         $tenant = $this->repository->findTenantById($this->tenantId);
 
-        $this->assertEquals('0000000001', $tenant->getId());
+        $this->assertEquals('1000000001', $tenant->getId());
         $this->assertEquals('us', $tenant->getRegion());
         $this->assertEquals('Local Test Tenant', $tenant->getDisplayName());
         $this->assertEquals('', $tenant->getLogo());

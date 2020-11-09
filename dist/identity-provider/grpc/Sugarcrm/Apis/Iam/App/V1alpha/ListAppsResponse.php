@@ -22,19 +22,9 @@ class ListAppsResponse extends \Google\Protobuf\Internal\Message
      */
     private $next_page_token = '';
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type \Sugarcrm\Apis\Iam\App\V1alpha\App[]|\Google\Protobuf\Internal\RepeatedField $apps
-     *     @type string $next_page_token
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\App\V1Alpha\App::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

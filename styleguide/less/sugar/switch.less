@@ -11,7 +11,7 @@
   cursor: pointer;
   border-radius: 5px;
   border: 1px solid;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  border-color: fade(@black, 10%) fade(@black, 10%) fade(@black, 10%);
   position: relative;
   text-align: left;
   overflow: hidden;
@@ -177,7 +177,7 @@
     }
 
     &.switch-right {
-      .buttonBackground(@btnBackgroundHighlight, @btnBackground, @grayDark, 0 1px 1px rgba(255,255,255,.75));
+      .buttonBackground(@btnBackgroundHighlight, @btnBackground, @grayDark, 0 1px 1px fade(@white, 75%));
     }
 
     &.switch-primary,

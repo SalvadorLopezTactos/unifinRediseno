@@ -12,7 +12,7 @@
 
 require_once('modules/EAPM/EAPM.php');
 class MeetingsViewListbytype extends ViewList {
-    var $options = array('show_header' => false, 'show_title' => false, 'show_subpanels' => false, 'show_search' => true, 'show_footer' => false, 'show_javascript' => false, 'view_print' => false,);
+    public $options = array('show_header' => false, 'show_title' => false, 'show_subpanels' => false, 'show_search' => true, 'show_javascript' => false, 'view_print' => false,);
 
  	function listViewProcess(){
         if (!$eapmBean = EAPM::getLoginInfo('IBMSmartCloud', true) ) {

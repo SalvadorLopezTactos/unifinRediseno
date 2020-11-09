@@ -173,5 +173,31 @@
             );
         });
 
+        Handlebars.registerHelper('decoratedField', function(type, view, options) {
+            var def = {
+                type: type,
+                field: this
+            };
+
+            var field = app.view.createField({
+                type: type,
+                def: def,
+                viewDefs: def,
+                view: view,
+                model: options.hash.model,
+                viewName: options.hash.template,
+            });
+
+            if (options.hash.parent && _.isArray(options.hash.parent.fields)) {
+                options.hash.parent.fields.push(field);
+            }
+
+            return field.getPlaceholder();
+        });
+
+        Handlebars.registerHelper('timeAgo', function(str, options) {
+            return moment ? moment.utc(str).fromNow() : str;
+        });
+
     });
 })(SUGAR.App);

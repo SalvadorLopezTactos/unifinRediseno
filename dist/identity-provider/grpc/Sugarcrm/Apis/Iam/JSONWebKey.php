@@ -83,39 +83,9 @@ class JSONWebKey extends \Google\Protobuf\Internal\Message
      */
     private $d = '';
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $kty
-     *           Key Type
-     *     @type string $use
-     *           Public Key Use
-     *     @type string $key_ops
-     *           Key Operations
-     *     @type string $alg
-     *           Algorithm
-     *     @type string $kid
-     *           Key ID
-     *     @type string $x5u
-     *           X.509 URL
-     *     @type string $x5c
-     *           X.509 Certificate Chain
-     *     @type string $x5t
-     *           X.509 Certificate SHA-1 Thumbprint
-     *     @type string $n
-     *           Modulus
-     *     @type string $e
-     *           Public exponent
-     *     @type string $d
-     *           Private exponent
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Jwks::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

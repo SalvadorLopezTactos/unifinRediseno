@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Paneli i listës së kontakteve',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të kontakteve',
-
+    'LBL_SITE_USER_ID' => 'Hashi i site_url dhe ID e kontaktit',
+    'LBL_COOKIE_CONSENT' => 'Miratimi i kukive',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Miratimi i kukive u morë më',
     'LNK_CONTACT_REPORTS' => 'Shiko raportet e kontakteve',
     'ERR_DELETE_RECORD' => 'Duhet përcaktuar numrin e regjistrimit për të fshirë konaktin',
     'LBL_ACCOUNT_ID' => 'ID e Llogarisë',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Informacioni i portalit',
     'LBL_PORTAL_NAME' => 'Emri i portalit',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Fjalëkalimi i portalit është përcaktuar:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Emri i kompanisë përdoruese të portalit',
     'LBL_RECORD_SAVED_SUCCESS' => 'Ju me sukses keni krijuar {{moduleSingularLower}} {{full_name}}.',
     'LBL_STREET' => 'Rruga',
     'LBL_POSTAL_CODE' => 'Kodi postal',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Opportunities',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumentacionet',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Kuotat',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Kuotat ( transport deri)',
     'LBL_QUOTES_BILL_TO' => 'Kuotat ( faturat deri)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Artikujt e rreshtave të kuotuar',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Klikoni këtu të editoni profilin tuaj.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Këtu është vendi ku ju mund të caktoni gjuhën e preferuar. Kjo do të ndryshojë gjuhën e përdorur nga portali Sugar.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Ju mund të ktheheni në profilin tuaj në çdo kohë duke shfrytëzuar menunë e përdoruesit.',
+    'ERR_PORTAL_NAME_EXISTS' => 'Emri i portalit {0} tashmë ekziston. Emrat e dubluar të portaleve nuk lejohen. Ndrysho emrin e portalit që të jetë i veçantë.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B ID',
@@ -273,4 +278,8 @@ Për të krijuar një {{module_name}}:
     'LBL_FILTER_CONTACTS_REPORTS' => 'Raportet e kontaktit',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Qëllimet e biznesit u miratuan për',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Miratimi i përditësuar së fundi',
+
+    'LBL_ENTRY_SOURCE' => 'Burimi i kontaktit',
+    'LBL_SOURCE_EXTERNAL' => 'I jashtëm',
+    'LBL_SOURCE_INTERNAL' => 'I brendshëm',
 );

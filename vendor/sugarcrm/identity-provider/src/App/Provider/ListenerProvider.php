@@ -39,7 +39,9 @@ class ListenerProvider implements ServiceProviderInterface
                 AuthenticationEvents::AUTHENTICATION_SUCCESS,
                 new UpdateUserAttributesListener(
                     $app->getDoctrineService(),
-                    $app->getSession()
+                    $app->getSession(),
+                    $app->getOAuth2Service()->getClientID(),
+                    $app->getLogger()
                 )
             );
             $dispatcher->addListener(
@@ -55,7 +57,8 @@ class ListenerProvider implements ServiceProviderInterface
                     new Lockout($app),
                     $app->getDoctrineService(),
                     $app->getSession(),
-                    $app->getLogger()
+                    $app->getLogger(),
+                    $app->getOAuth2Service()->getClientID()
                 )
             );
 

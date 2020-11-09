@@ -151,7 +151,6 @@ $viewdefs['Tasks']['base']['view']['record'] = array(
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 'date_start',
@@ -171,7 +170,6 @@ $viewdefs['Tasks']['base']['view']['record'] = array(
             'label' => 'LBL_RECORD_SHOWMORE',
             'hide' => true,
             'columns' => 2,
-            'labelsOnTop' => true,
             'fields' => array(
                 array('name' => 'description', 'span' => 12),
                 array('name' => 'contact_name', 'span' => 12),

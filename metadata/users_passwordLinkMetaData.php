@@ -18,6 +18,16 @@ $dictionary['users_password_link'] = array(
             'type' => 'id',
             'required' => true,
         ) ,
+        'bean_id' => [
+            'name' => 'bean_id',
+            'type' => 'id',
+        ],
+        'bean_type' => [
+            'name' => 'bean_type',
+            'type' => 'varchar',
+            'len' =>'36',
+            'default' => 'User',
+        ],
         'username' => array(
             'name' => 'username',
             'vname' => 'LBL_USERNAME',
@@ -36,6 +46,12 @@ $dictionary['users_password_link'] = array(
             'required' => false,
             'reportable' => false,
         ) ,
+        'platform' => [
+            'name' => 'platform',
+            'type' => 'varchar',
+            'len' => 36,
+            'default' => 'base',
+        ],
     ) ,
     'indices' => array(
         array(
@@ -45,14 +61,28 @@ $dictionary['users_password_link'] = array(
                 'id'
             )
         ) ,
+        [
+            'name' => 'idx_bean_id_users_password_link',
+            'type' => 'index',
+            'fields' => [
+                'bean_id',
+            ],
+        ],
         array(
             'name' => 'idx_username',
             'type' => 'index',
             'fields' => array(
                 'username'
             )
-        )
+        ),
+        [
+            'name' => 'idx_id_deleted_platform',
+            'type' => 'index',
+            'fields' => [
+                'id',
+                'deleted',
+                'platform',
+            ],
+        ],
     ) ,
 );
-
-?>

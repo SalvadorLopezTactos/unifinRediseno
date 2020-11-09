@@ -84,7 +84,8 @@ class SugarDateTime extends DateTime
 	 * @param string $format Format like in date()
 	 * @param string $time Time to parse
 	 * @param DateTimeZone $timezone
-	 * @return SugarDateTime
+     * @return SugarDateTime|bool The created SugarDateTime object,
+     *   or false on failure.
 	 * @see DateTime::createFromFormat
 	 */
 	public static function createFromFormat($format, $time, $timezone = null)
@@ -466,7 +467,7 @@ class SugarDateTime extends DateTime
 	/**
 	 * Print date in standard DB format
 	 *
-	 * Set $tz parameter to false if you are sure that the date is in UTC.
+     * Set $tz parameter to false in order to prevent timezone conversion to UTC.
 	 *
 	 * @param bool $tz do conversion to UTC
 	 * @return string
@@ -642,33 +643,6 @@ class SugarDateTime extends DateTime
      */
     public function modify($modify)
     {
-        //PHP 5.2 does not understand the " of " format
-        if(PHP_VERSION_ID < 50300)
-        {
-            //Special case for first day of next month used in code base
-            switch ( strtolower($modify) )
-            {
-                case 'first day of this month' :
-                    $this->setDate($this->year, $this->month, 1);
-                    return $this;
-                    break;
-                case 'first day of next month' :
-                    $this->setDate($this->year, $this->month+1, 1);
-                    return $this;
-                    break;
-                case 'last day of this month' :
-                    $this->setDate($this->year, $this->month, $this->days_in_month);
-                    return $this;
-                    break;
-                case 'last day of next month' :
-                    $this->setDate($this->year, $this->month+1, 1);
-                    $this->setDate($this->year, $this->month, $this->days_in_month);
-                    return $this;
-                    break;
-            }
-            //Last ditch effort to resolve this to syntax used for versions below 5.3
-            $modify = str_replace(' of ', ' ', $modify);
-        }
         parent::modify($modify);
         return $this;
     }

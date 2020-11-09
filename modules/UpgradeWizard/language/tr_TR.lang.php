@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'Kaldırılabilir',
     'LBL_ML_VERSION' => 'Versiyon',
 	'LBL_ML_INSTALL'=>'Kur',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'Takip Edici',
 	'LBL_MODULE_NAME' => 'Yükseltme Sihirbazı',
 	'LBL_MODULE_NAME_SINGULAR' => 'Yükseltme Sihirbazı',
 	'LBL_UPLOAD_SUCCESS' => 'Yükseltme paketi başarılı bir biçimde yüklendi. İleri butonuna tıklayarak son bir kontrol yapın.',

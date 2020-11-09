@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Lista ciljeva tipa podrazumevano nije nađena',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nisu nađeni unosi',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Unosi su obrađeni',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Naziv sistema za praćenje:',
   'LBL_EDIT_TRACKER_URL'=>'URL sistema za praćenje:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'Optimalna podešavanja za Vaš dolazni email nalog nisu sačuvana.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Molimo vas proverite podešavanja za dolazni email.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} potencijalnih klijenata koji su kreirani kroz ovu kampanju je obrisano od poslednjeg kreiranja',
+    'LBL_PROSPECT_LIST' => 'Lista ciljeva',
 );
 
 

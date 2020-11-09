@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'Nepašalinamas',
     'LBL_ML_VERSION' => 'Versija',
 	'LBL_ML_INSTALL'=>'Įdiegti',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'Tracker',
 	'LBL_MODULE_NAME' => 'Atnaujinimo vedlys',
 	'LBL_MODULE_NAME_SINGULAR' => 'Atnaujinimo vedlys',
 	'LBL_UPLOAD_SUCCESS' => 'Atnaujinimo paketas sėkmingai įkeltas. Spustelėkite "Toliau" galutinio patikrinimo atlikimui.',

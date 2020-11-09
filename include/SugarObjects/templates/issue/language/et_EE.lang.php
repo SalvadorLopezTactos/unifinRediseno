@@ -27,9 +27,15 @@ $mod_strings = array (
   'LBL_RESOLUTION' => 'Resolutsioon',
   'LBL_LAST_MODIFIED' => 'Viimati muudetud',
   'LBL_ASSIGNED_TO_ID'=>'Määratud kasutajale:',
-  'LBL_ASSIGNED_TO_NAME' => 'Kasutaja:',  	  
+  'LBL_ASSIGNED_TO_NAME' => 'Kasutaja:',
   'LBL_WORK_LOG' => 'Töö logi:',
+    'LBL_FOLLOW_UP' => 'Järeltegevused',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
+    'LBL_RESOLVED_DATETIME' => 'Lahendamise kuupäev',
+    'LBL_HOURS_TO_RESOLUTION' => 'Otsuse tegemiseni jäänud tunnid',
+    'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Otsuse tegemiseni jäänud tööaeg',
+    'LBL_PENDING_PROCESSING' => 'Töötlemine ootel',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Looja:',
   'LBL_DATE_CREATED' => 'Loomiskuupäev:',
   'LBL_DATE_ENTERED' => 'Loomiskuupäev:',
@@ -44,5 +50,5 @@ $mod_strings = array (
     'LBL_EDIT_BUTTON' => 'Redigeeri',
     'LBL_REMOVE' => 'Eemalda',
 
-  
+
   );

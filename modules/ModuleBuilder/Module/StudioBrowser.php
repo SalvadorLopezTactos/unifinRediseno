@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+
 class StudioBrowser{
 	var $modules = array();
 	
@@ -17,7 +19,10 @@ class StudioBrowser{
 	    global $current_user;
 		$access = $current_user->getDeveloperModules();
 	    $d = dir('modules');
-		while($e = $d->read()){;
+        while ($e = $d->read()) {
+            if (!AccessControlManager::instance()->allowModuleAccess($e)) {
+                continue;
+            }
 			if(substr($e, 0, 1) == '.' || !is_dir('modules/' . $e))continue;
 			if(SugarAutoLoader::existingCustomOne("modules/{$e}/metadata/studio.php") && isset($GLOBALS [ 'beanList' ][$e]) && (in_array($e, $access) || $current_user->isAdmin())) // installed modules must also exist in the beanList
 			{
@@ -31,6 +36,9 @@ class StudioBrowser{
         while($e = $d->read()){
         	if( ( (isset($_REQUEST['view_module'])) && ($_REQUEST['view_module'] == 'Project') )
                 && ($e=='ProjectTask') && (isset($_REQUEST['id'])) && $_REQUEST['id']=='relEditor' && $_REQUEST['relationship_name'] == '') continue; //46141 - disabling creating custom relationship between Projects and ProjectTasks in studio
+            if (!AccessControlManager::instance()->allowModuleAccess($e)) {
+                continue;
+            }
         	if(substr($e, 0, 1) == '.' || !is_dir('modules/' . $e))continue;
             if(SugarAutoLoader::existingCustomOne("modules/{$e}/metadata/studio.php") && isset($GLOBALS [ 'beanList' ][$e])) // installed modules must also exist in the beanList
             {

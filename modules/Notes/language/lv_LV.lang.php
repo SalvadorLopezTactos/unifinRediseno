@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Modificēšanas datums',
     'LBL_DELETED' => 'Dzēsts',
     'LBL_REVENUELINEITEMS' => 'Ieņēmumu posteņi',
+    'LBL_ENTRY_SOURCE' => 'Piezīmes avots',
+    'LBL_SOURCE_EXTERNAL' => 'Ārējais',
+    'LBL_SOURCE_INTERNAL' => 'Iekšējais',
 
     // Help Text
     // List View Help Text

@@ -27,9 +27,15 @@ $mod_strings = array (
   'LBL_RESOLUTION' => 'Решение',
   'LBL_LAST_MODIFIED' => 'Последнее изменение',
   'LBL_ASSIGNED_TO_ID'=>'Ответственный (-ая):',
-  'LBL_ASSIGNED_TO_NAME' => 'Ответственный (-ая):',  	  
+  'LBL_ASSIGNED_TO_NAME' => 'Ответственный (-ая):',
   'LBL_WORK_LOG' => 'Журнал',
+    'LBL_FOLLOW_UP' => 'Дальнейшие действия',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
+    'LBL_RESOLVED_DATETIME' => 'Дата решения вопроса',
+    'LBL_HOURS_TO_RESOLUTION' => 'Остаток часов до решения вопроса',
+    'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Остаток рабочих часов до решения вопроса',
+    'LBL_PENDING_PROCESSING' => 'Ожидание обработки',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Кем создано:',
   'LBL_DATE_CREATED' => 'Дата создания:',
   'LBL_DATE_ENTERED' => 'Дата создания:',
@@ -44,5 +50,5 @@ $mod_strings = array (
     'LBL_EDIT_BUTTON' => 'Правка',
     'LBL_REMOVE' => 'Удалить',
 
-  
+
   );

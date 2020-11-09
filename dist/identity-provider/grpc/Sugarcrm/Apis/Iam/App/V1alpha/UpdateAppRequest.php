@@ -22,21 +22,9 @@ class UpdateAppRequest extends \Google\Protobuf\Internal\Message
      */
     private $app = null;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type \Sugarcrm\Apis\Iam\App\V1alpha\App $app
-     *           The application properties to be updated. See each App type to learn
-     *           which properties are allowed. Use a `FieldMask` to send partial update
-     *           requests.
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\App\V1Alpha\App::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

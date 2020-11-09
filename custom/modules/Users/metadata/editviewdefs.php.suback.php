@@ -112,7 +112,7 @@ array (
           1 => 
           array (
             'name' => 'UserType',
-            'customCode' => '{if $IS_ADMIN}{$USER_TYPE_DROPDOWN}{else}{$USER_TYPE_READONLY}{/if}',
+            'customCode' => '{if $IS_ADMIN && !$IDM_MODE_ENABLED}{$USER_TYPE_DROPDOWN}{else}{$USER_TYPE_READONLY}{/if}',
           ),
         ),
       ),
@@ -144,6 +144,19 @@ array (
         array (
           0 => 
           array (
+            'name' => 'subpuesto_c',
+            'label' => 'LBL_SUBPUESTO',
+          ),
+          1 => 
+          array (
+            'name' => 'no_empleado_c',
+            'label' => 'LBL_NO_EMPLEADO',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
             'name' => 'region_c',
             'label' => 'LBL_REGION',
           ),
@@ -153,7 +166,7 @@ array (
             'label' => 'LBL_TCT_TEAM_ADDRESS_TXF_C',
           ),
         ),
-        2 => 
+        3 => 
         array (
           0 => 
           array (
@@ -168,7 +181,7 @@ array (
             'label' => 'LBL_EQUIPOS_C',
           ),
         ),
-        3 => 
+        4 => 
         array (
           0 => 
           array (
@@ -182,6 +195,28 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_PRODUCTOS',
           ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'tct_id_uni2_txf_c',
+            'label' => 'LBL_TCT_ID_UNI2_TXF',
+          ),
+          1 => 
+          array (
+            'name' => 'tct_id_unics_txf_c',
+            'label' => 'LBL_TCT_ID_UNICS_TXF',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'id_active_directory_c',
+            'label' => 'LBL_ID_ACTIVE_DIRECTORY_C',
+          ),
+          1 => '',
         ),
       ),
       'lbl_editview_panel1' => 
@@ -258,6 +293,84 @@ array (
           array (
             'name' => 'tct_propietario_real_chk_c',
             'label' => 'LBL_TCT_PROPIETARIO_REAL_CHK',
+          ),
+          1 => 
+          array (
+            'name' => 'tct_vetar_usuarios_chk_c',
+            'label' => 'LBL_TCT_VETAR_USUARIOS_CHK_C',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'tct_alta_credito_simple_chk_c',
+            'label' => 'LBL_TCT_ALTA_CREDITO_SIMPLE_CHK',
+          ),
+          1 => 
+          array (
+            'name' => 'tct_no_contactar_chk_c',
+            'label' => 'LBL_TCT_NO_CONTACTAR_CHK',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'agente_telefonico_c',
+            'label' => 'LBL_AGENTE_TELEFONICO',
+          ),
+          1 => 
+          array (
+            'name' => 'deudor_factoraje_c',
+            'label' => 'LBL_DEUDOR_FACTORAJE',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'cuenta_especial_c',
+            'label' => 'LBL_CUENTA_ESPECIAL',
+          ),
+          1 => 
+          array (
+            'name' => 'depurar_leads_c',
+            'label' => 'LBL_DEPURAR_LEADS',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'tct_cancelar_ref_cruzada_chk_c',
+            'label' => 'LBL_TCT_CANCELAR_REF_CRUZADA_CHK',
+          ),
+          1 => 
+          array (
+            'name' => 'multilinea_c',
+            'label' => 'LBL_MULTILINEA_C',
+          ),
+        ),
+        8 => 
+        array (
+          0 => 
+          array (
+            'name' => 'notifica_fiscal_c',
+            'label' => 'LBL_NOTIFICA_FISCAL',
+          ),
+          1 => 
+          array (
+            'name' => 'responsable_oficina_chk_c',
+            'label' => 'LBL_RESPONSABLE_OFICINA_CHK',
+          ),
+        ),
+        9 => 
+        array (
+          0 => 
+          array (
+            'name' => 'excluir_precalifica_c',
+            'label' => 'LBL_EXCLUIR_PRECALIFICA',
           ),
           1 => '',
         ),

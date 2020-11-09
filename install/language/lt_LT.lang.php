@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -59,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Suderinamumo patikrinimo metu rasta klaidų. Kad įdiegtas „SugarCRM“ veiktų tinkamai, pašalinkite žemiau išvardytas problemas atlikdami atitinkamus veiksmus, o tada paspaukite pakartotinio tikrinimo mygtuką arba bandykite diegti dar kartą.',
     'ERR_CHECKSYS_CALL_TIME'            => '„Leisti perduoti skambučio laiko nuorodą“ yra įjungta – nustatyta kaip „Įjungta“ (faile php.ini ji turi būti nustatyta kaip „Išjungta“)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Nerasta: „Sugar“ planuoklė veiks ribotu funkcionalumu. El. pašto archyvavimo paslauga neveiks.',
+	'ERR_CHECKSYS_CURL'					=> 'Nerasta: veiks ribotos „Sugar“ planuoklės funkcijos. El. pašto archyvavimo paslauga neveiks.',
     'ERR_CHECKSYS_IMAP'					=> 'Nerasta: gaunamam el. paštui ir kampanijoms (el. paštu) reikalingos IMAP biliotekos. Nė vienas iš jų neveiks.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Negalima nustatyti „Magic Quotes GPC“ reikšmės „Įjungta", kai naudojamas „MS SQL Server“.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Įspėjimas: ',
@@ -75,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Norėdami, kad jūsų naudojimosi „IIS/FastCGI SAPI“ patirtis būtų optimali, faile php.ini nustatykite fastcgi.logging reikšmę 0.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Įdiegta nepalaikoma PHP versija: ( versija',
     'LBL_DB_UNAVAILABLE'                => 'Duomenų bazė neprieinama',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Nerastas duomenų bazės palaikymas. Įsitikinkite, kad turite reikiamas tvarkykles, skirtas vienam iš šių palaikomų duomenų bazės tipų: „MySQL“, „MS SQLServer“, „Oracle“ arba DB2. Atsižvelgiant į jūsų PHP versiją, gali reikėti anuliuoti plėtinio komentarus faile php.ini arba iš naujo sukompiliuoti su tinkamu dvejetainiu failu. Norėdami gauti daugiau informacijos, kaip aktyvinti duomenų bazės palaikymą, žr. PHP žinyną.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Nerastas duomenų bazės palaikymas. Įsitikinkite, kad turite reikiamas tvarkykles, skirtas vienam iš šių palaikomų duomenų bazių tipų: „MySQL“, „MS SQLServer“, „Oracle“ arba DB2. Priklausomai nuo turimos PHP versijos gali reikėti panaikinti plėtinio komentarus faile php.ini arba iš naujo sukompiliuoti su tinkamu dvejetainiu failu. Norėdami gauti daugiau informacijos, kaip įjungti duomenų bazės palaikymą, žr. PHP žinyną.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Nerasta „SugarCRM“ taikomajai programai reikalingų funkcijų, susietų su XML analizatoriaus bibliotekomis. Atsižvelgiant į naudojamą PHP versiją, gali reikėti anuliuoti plėtinio komentarus faile php.ini arba iš naujo sukompiliuoti su tinkamu dvejetainiu failu. Daugiau informacijos žr. PHP žinyne.',
     'LBL_CHECKSYS_CSPRNG' => 'Atsitiktinio numerio generatorius',
     'ERR_CHECKSYS_MBSTRING'             => 'Nerasta „SugarCRM“ taikomajai programai reikalingų funkcijų, susietų su „Multibyte Strings“ PHP plėtiniu (mbstring). <br/><br/>Paprastai pagal numatytąjį nustatymą modulis mbstring nėra įgalinamas PHP, todėl jį reikia suaktyvinti naudojant --enable-mbstring, kai PHP dvejetainis failas jau būna sukompiliuotas. Daugiau informacijos apie mbstring palaikymą žr. PHP žinyne.',
@@ -519,6 +518,142 @@ Išsamesnės informacijos žr. diegimo vadove.                                ",
 	'LBL_PATCH_UPLOAD' => 'Pasirinkite pataisos failą iš savo kompiuterio',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'PHP atgalinio suderinamumo režimas yra įjungtas. Prieš tęsdami, nustatykite zend.ze1_compatibility_mode išjungimo reikšmę.',
 
+    'meeting_notification_email' => array(
+        'name' => 'Meeting Notifications Emails',
+        'subject' => 'SugarCRM Meeting - $event_name ',
+        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'body' => '<div>
+	<p>To: $assigned_user</p>
+
+	<p>$assigned_by_user has invited you to a Meeting</p>
+
+	<p>Subject: $event_name<br/>
+	Start Date: $start_date<br/>
+	End Date: $end_date</p>
+
+	<p>Description: $description</p>
+
+	<p>Accept this meeting:<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Tentatively Accept this meeting:<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Decline this meeting:<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'To: $assigned_user
+
+$assigned_by_user has invited you to a Meeting
+
+Subject: $event_name
+Start Date: $start_date
+End Date: $end_date
+
+Description: $description
+
+Accept this meeting:
+<$accept_link>
+
+Tentatively Accept this meeting
+<$tentative_link>
+
+Decline this meeting
+<$decline_link>',
+    ),
+
+    'call_notification_email' => array(
+        'name' => 'Call Notifications Emails',
+        'subject' => 'SugarCRM Call - $event_name ',
+        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'body' => '<div>
+	<p>To: $assigned_user</p>
+
+	<p>$assigned_by_user has invited you to a Call</p>
+
+	<p>Subject: $event_name<br/>
+	Start Date: $start_date<br/>
+	Duration: $hoursh, $minutesm</p>
+
+	<p>Description: $description</p>
+
+	<p>Accept this call:<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Tentatively Accept this call:<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Decline this call:<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'To: $assigned_user
+
+$assigned_by_user has invited you to a Call
+
+Subject: $event_name
+Start Date: $start_date
+Duration: $hoursh, $minutesm
+
+Description: $description
+
+Accept this call:
+<$accept_link>
+
+Tentatively Accept this call
+<$tentative_link>
+
+Decline this call
+<$decline_link>',
+    ),
+
+    'assigned_notification_email' => array(
+        'name' => 'Assignment Notification Emails',
+        'subject' => 'SugarCRM - Assigned $module_name ',
+        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'body' => '<div>
+<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+
+<p>You may review this&nbsp;$module_name at:<br/>
+	<<a href="$module_link">$module_link</a>></p>
+</div>',
+        'txt_body' =>
+            '$assigned_by_user has assigned a $module_name to $assigned_user.
+
+You may review this $module_name at:
+<$module_link>',
+    ),
+
+    'scheduled_report_email' => array(
+        'name' => 'Scheduled Report Emails',
+        'subject' => 'Scheduled Report: $report_name as of $report_time',
+        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'body' => '<div>
+<p>Hello $assigned_user,</p>
+<p>Attached is an auto generated report that has been scheduled for you.</p>
+<p>Report Name: $report_name</p>
+<p>Report Run Date and Time: $report_time</p>
+</div>',
+        'txt_body' =>
+            'Hello $assigned_user,
+
+Attached is an auto generated report that has been scheduled for you.
+
+Report Name: $report_name
+
+Report Run Date and Time: $report_time',
+    ),
+
+    'comment_log_mention_email' => [
+        'name' => 'System Comment Log Email Notification',
+        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
+        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'body' =>
+            '<div>
+                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
+                <p>Please log in to Sugar to view the comment.</p>
+            </div>',
+        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
+            Please log in to Sugar to view the comment.',
+    ],
+
     'advanced_password_new_account_email' => array(
         'subject' => 'Naujos paskyros informacija',
         'description' => 'Šis šablonas naudojamas, kai sistemos administratorius siunčia vartotojui naują slaptažodį.',
@@ -547,4 +682,32 @@ Spustelėkite žemiau pateiktą nuorodą ir galėsite iš naujo nustatyti savo s
 $contact_user_link_guid',
         'name' => 'El. paštas pamiršus slaptažodį',
         ),
+
+'portal_forgot_password_email_link' => [
+    'name' => 'El. paštas pamiršus portalo slaptažodį',
+    'subject' => 'Atkurkite savo paskyros slaptažodį',
+    'description' => 'Šis šablonas naudojamas siunčiant vartotojui nuorodą, kurią spustelėjęs jis galės iš naujo nustatyti savo portalo vartotojo paskyros slaptažodį.',
+    'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Neseniai paprašėte atkurti jūsų paskyros slaptažodį. </p><p>Norėdami atkurti savo slaptažodį, spustelėkite toliau pateiktą nuorodą:</p><p> <a href="$portal_user_link_guid">$portal_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+    'txt_body' =>
+'
+    Neseniai paprašėte atkurti jūsų paskyros slaptažodį.
+
+    Norėdami atkurti savo slaptažodį, spustelėkite toliau pteiktą nuorodą:
+
+    $portal_user_link_guid',
+],
+
+    'portal_password_reset_confirmation_email' => [
+        'name' => 'Portalo slaptažodžio atkūrimo patvirtinimo el. laiškas',
+        'subject' => 'Jūsų paskyros slaptažodis buvo atkurtas',
+        'description' => 'Šis šablonas naudojamas siekiant išsiųsti portalo vartotojui patvirtinimą, kad jo paskyros slaptažodis buvo atkurtas.',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Šis el. laiškas skirtas patvirtinti, kad jūsų portalo paskyros slaptažodis buvo atkurtas. </p><p>Prisijunkite prie portalo naudodami toliau pateiktą nuorodą:</p><p> <a href="$portal_login_url">$portal_login_url</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+        'txt_body' =>
+            '
+    Šis el. laiškas skirtas pavirtinti, kad jūsų portalo paskyros slaptažodis buvo atkurtas.
+
+    Prisijunkite prie portalo naudodami toliau pateiktą nuorodą:
+
+    $portal_login_url',
+    ],
 );

@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => 'Valmistajat',
   'LNK_NEW_PRODUCT_CATEGORY' => 'Tuotekategoriat',
   'LNK_NEW_PRODUCT_TYPE' => 'Tuotetyypit',
-  'LNK_NEW_PRODUCT' => 'Luo tuote katalogiin',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => 'Toimituksen tarjoajat',
   'LNK_PRODUCT_LIST' => 'Näytä tuotekatalogi',
   'NTC_DELETE_CONFIRMATION' => 'Haluatko varmasti poistaa tämän tietueen?',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => 'Tuotekategoriat',
   'LBL_MANUFACTURERS' => 'Valmistajat',
   'LBL_PRODUCT_TYPES' => 'Tuotetyypit',
-
+  'LBL_RENEWABLE' => 'Uusittavissa',
+  'LBL_SERVICE' => 'Palvelu',
 );
-
-
-?>

@@ -40,11 +40,6 @@ class SugarUpgradeMerge7Templates extends UpgradeScript
 
     public function run()
     {
-        if (version_compare($this->from_version, '7.0', '<')) {
-            // Not needed from upgrades from Sugar 6
-            return;
-        }
-
         if (empty($this->upgrader->state['for_merge'])) {
             // no views to upgrade
             return;

@@ -117,7 +117,7 @@
         </td>
         <td  width='35%'>
             <div id="container_upload"></div>
-            <input type='text' id='company_logo' name='company_logo' style="display:none;">
+            <input type="text" id="commit_company_logo" name="commit_company_logo" style="display:none"/>
         </td>
     </tr>
     <tr>
@@ -429,8 +429,6 @@
 	<tr>
 		<td  scope="row" valign='middle'>{$MOD.LBL_LOGGER_FILENAME} <span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span></td>
 		<td   valign='middle' ><input type='text' name = 'logger_file_name'  value="{$config.logger.file.name}"></td>
-		<td  scope="row">{$MOD.LBL_LOGGER_FILE_EXTENSION} <span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span></td>
-		<td ><input name ="logger_file_ext" type="text" size="5" value="{$config.logger.file.ext}"></td>
 		<td scope="row">{$MOD.LBL_LOGGER_FILENAME_SUFFIX}</td>
 		<td ><select name = "logger_file_suffix" selected='{$config.logger.file.suffix}'>{$filename_suffix}</select></td>
 	</tr>
@@ -451,7 +449,28 @@
 	    <td><a href="index.php?module=Configurator&action=LogView" target="_blank">{$MOD.LBL_LOGVIEW}</a></td>
 	</tr>
 </table>
-
+{if $SHOW_CATALOG_CONFIG}
+<table width="100%" border="0" cellspacing="1" cellpadding="0" class="edit view">
+    <tr>
+        <th align="left" scope="row" colspan="4"><h4>{$MOD.LBL_SUGAR_CATALOG_SETTINGS}</h4></th>
+    </tr>
+	<tr>
+		<td width="25%" scope="row">{$MOD.LBL_SUGAR_CATALOG_ENABLED}</td>
+		{if !empty($config.catalog_enabled)}
+			{assign var='catalogChecked' value='CHECKED'}
+		{else}
+			{assign var='catalogChecked' value=''}
+		{/if}
+		<td><input type='hidden' name='catalog_enabled' value='false'><input name='catalog_enabled'  type="checkbox" value='true' {$catalogChecked}></td>
+	</tr>
+	{if !empty($config.developerMode)}
+	<tr>
+		<td width="25%" scope="row">{$MOD.LBL_SUGAR_CATALOG_URL}</td>
+		<td><input style="width:40%" name="catalog_url" value="{$config.catalog_url}"></td>
+	</tr>
+	{/if}
+</table>
+{/if}
 
 <div style="padding-top: 2px;">
 <input title="{$APP.LBL_SAVE_BUTTON_TITLE}" class="button primary"  type="submit" name="save" value="  {$APP.LBL_SAVE_BUTTON_LABEL}  " class="button primary"/>
@@ -483,47 +502,46 @@ function toggleDisplay_2(div_string){
     toggleDisplay(div_string);
     init_logo();
 }
- function uploadCheck(quotes){
+ function uploadCheck(){
     //AJAX call for checking the file size and comparing with php.ini settings.
     var callback = {
         upload:function(r) {
-            eval("var file_type = " + r.responseText);
-            var forQuotes = file_type['forQuotes'];
-            document.getElementById('loading_img_'+forQuotes).style.display="none";
-            bad_image = SUGAR.language.get('Configurator',(forQuotes == 'quotes')?'LBL_ALERT_TYPE_JPEG':'LBL_ALERT_TYPE_IMAGE');
-            switch(file_type['data']){
+            var file_type = JSON.parse(r.responseText);
+            document.getElementById('loading_img_company').style.display = 'none';
+            var bad_image = SUGAR.language.get('Configurator', 'LBL_ALERT_TYPE_IMAGE');
+            switch (file_type['data']) {
                 case 'other':
                     alert(bad_image);
-                    document.getElementById('my_file_' + forQuotes).value='';
+                    document.getElementById('my_file_company').value = '';
                     break;
                 case 'size':
-                    alert(SUGAR.language.get('Configurator','LBL_ALERT_SIZE_RATIO'));
-                    document.getElementById(forQuotes + "_logo").value=file_type['path'];
-                    document.getElementById(forQuotes + "_logo_image").src=file_type['url'];
+                    alert(SUGAR.language.get('Configurator', 'LBL_ALERT_SIZE_RATIO'));
+                    document.getElementById('commit_company_logo').value = '1';
+                    document.getElementById('company_logo_image').src = file_type['url'];
                     break;
                 case 'file_error':
-                    alert(SUGAR.language.get('Configurator','ERR_ALERT_FILE_UPLOAD'));
-                    document.getElementById('my_file_' + forQuotes).value='';
+                    alert(SUGAR.language.get('Configurator', 'ERR_ALERT_FILE_UPLOAD'));
+                    document.getElementById('my_file_company').value = '';
                     break;
                 //File good
                 case 'ok':
-                    document.getElementById(forQuotes + "_logo").value=file_type['path'];
-                    document.getElementById(forQuotes + "_logo_image").src=file_type['url'];
+                    document.getElementById('commit_company_logo').value = '1';
+                    document.getElementById('company_logo_image').src = file_type['url'];
                     break;
                 //error in getimagesize because unsupported type
                 default:
-                   alert(bad_image);
-                   document.getElementById('my_file_' + forQuotes).value='';
+                    alert(bad_image);
+                    document.getElementById('my_file_company').value = '';
             }
         },
         failure:function(r){
             alert(SUGAR.language.get('app_strings','LBL_AJAX_FAILURE'));
         }
     }
-    document.getElementById("company_logo").value='';
+    document.getElementById('commit_company_logo').value = '';
     document.getElementById('loading_img_company').style.display="inline";
     var file_name = document.getElementById('my_file_company').value;
-    postData = '&entryPoint=UploadFileCheck&forQuotes=false&csrf_token=' + SUGAR.csrf.form_token;
+    postData = '&entryPoint=UploadFileCheck&csrf_token=' + SUGAR.csrf.form_token;
     YAHOO.util.Connect.setForm(document.getElementById('upload_form'), true,true);
     if(file_name){
         if(postData.substring(0,1) == '&'){

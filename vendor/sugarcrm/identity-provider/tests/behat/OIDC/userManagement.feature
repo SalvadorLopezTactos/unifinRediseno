@@ -10,7 +10,7 @@
 @oidc @userManagement @extended
 Feature: User management
   When Mango is in IDM mode
-  User management should be limited
+  User management should be limited but employee can be created and updated
 
   Scenario: No password tab on user profile
     Given I am on the homepage
@@ -109,10 +109,10 @@ Feature: User management
     And I click "button[aria-label='Users - More']"
     And I wait for the element "a[data-navbar-menu-item=LNK_NEW_USER]"
     And I follow "Create New User"
-    Then The document should open in a new tab with url "http://console.sugarcrm.local/user-create"
+    Then The document should open in a new tab with url "http://console.sugarcrm.local/user-create?tenant_hint=srn%3Acloud%3Aiam%3Aeu%3A2000000001%3Atenant"
     And I logout
 
-  Scenario: Employee create link should redirect to Cloud Settings
+  Scenario: Create employee and edit employee
     Given I am on the homepage
     And I wait until the loading is completed
     Then I should see IdP login page
@@ -131,21 +131,24 @@ Feature: User management
     When I click "button[aria-label='Employees - More']"
     And I wait for the element "a[data-navbar-menu-item=LNK_NEW_EMPLOYEE]"
     And I follow "Create Employee"
-    Then The document should open in a new tab with url "http://console.sugarcrm.local/user-create"
-    And I logout
-
-  Scenario: Employee create page should not be available by direct link
-    Given I am on the homepage
-    And I wait until the loading is completed
-    Then I should see IdP login page
-    Given I do IdP login as "admin" with password "admin"
-    And I wait until the loading is completed
     And I wait for the page to be loaded
-    And I skip login wizard
-    When I am on "#bwc/index.php?module=Employees&action=EditView"
-    And I wait for the page to be loaded
+    And I wait until the loading is completed
     And I switch to BWC
-    Then I should see "The employee can be created only in"
+    Then I fill in "last_name" with "TestLastName"
+    And I fill in "Users0emailAddress0" with "test@host.com"
+    When I click "#SAVE_FOOTER"
+    And I wait for the element "#edit_button"
+    Then I should see "TestLastName"
+    And I should see "test@host.com"
+    When I click "#edit_button"
+    And I wait for the page to be loaded
+    And I wait until the loading is completed
+    And I wait for the element "#last_name"
+    Then I fill in "last_name" with "TestLastNameUpd"
+    When I click "#SAVE_FOOTER"
+    And I wait for the element "#edit_button"
+    Then I should see "TestLastNameUpd"
+    And I should see "test@host.com"
     And I logout
 
   Scenario: User copy link should not be available

@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => 'Piešķirt atbilstošam lietotājam',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Procesa izstrādes priekšskatījums',
+    'LBL_PROJECT_RUN_ORDER' => 'Izpildes secība',
 );
 

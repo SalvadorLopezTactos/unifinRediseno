@@ -124,7 +124,7 @@ class UpdateUserAttributesListenerTest extends \PHPUnit_Framework_TestCase
             ->method('updateUserAttributes')
             ->with(
                 $this->equalTo($expects),
-                $this->equalTo($userId)
+                $this->equalTo($this->localUser)
             );
 
         \call_user_func($this->listener, $this->event, $this->eventName, $this->dispatcher);

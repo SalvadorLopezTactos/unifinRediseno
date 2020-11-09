@@ -12,27 +12,60 @@
 
 namespace Sugarcrm\IdentityProvider\Tests\Unit\Encoder;
 
-use Sugarcrm\IdentityProvider\Encoder\EncoderBuilder;
-use Sugarcrm\IdentityProvider\Encoder\CryptPasswordEncoder;
+use Sugarcrm\IdentityProvider\Encoder\BCryptLegacyMD5PasswordEncoder;
+use Sugarcrm\IdentityProvider\Encoder\BCryptLegacyMD5StrictPasswordEncoder;
 use Sugarcrm\IdentityProvider\Encoder\BCryptPasswordEncoder;
+use Sugarcrm\IdentityProvider\Encoder\CryptLegacyMD5PasswordEncoder;
+use Sugarcrm\IdentityProvider\Encoder\CryptLegacyMD5StrictPasswordEncoder;
+use Sugarcrm\IdentityProvider\Encoder\CryptPasswordEncoder;
+use Sugarcrm\IdentityProvider\Encoder\EncoderBuilder;
 
 class EncoderBuilderTest extends \PHPUnit_Framework_TestCase
 {
     public function buildEncoderDataProvider()
     {
         return [
-            'default' => [BCryptPasswordEncoder::class, []],
-            'blowfish' => [BCryptPasswordEncoder::class, ['passwordHash' => ['backend' => 'native']]],
-            'sha2' => [CryptPasswordEncoder::class, ['passwordHash' => ['backend' => 'sha2']]],
+            'default' => [BCryptPasswordEncoder::class, [], false, false],
+            'blowfish' => [BCryptPasswordEncoder::class, ['passwordHash' => ['backend' => 'native']], false, false],
+            'sha2' => [
+                CryptPasswordEncoder::class,
+                ['passwordHash' => ['backend' => 'sha2', 'algo' => 'CRYPT_SHA256']],
+                false,
+                false,
+            ],
+            'blowfish_md5' => [
+                BCryptLegacyMD5PasswordEncoder::class,
+                ['passwordHash' => ['backend' => 'native']],
+                true,
+                false,
+            ],
+            'sha2_md5' => [
+                CryptLegacyMD5PasswordEncoder::class,
+                ['passwordHash' => ['backend' => 'sha2', 'algo' => 'CRYPT_SHA256']],
+                true,
+                false,
+            ],
+            'blowfish_md5_strict' => [
+                BCryptLegacyMD5StrictPasswordEncoder::class,
+                ['passwordHash' => ['backend' => 'native']],
+                true,
+                true,
+            ],
+            'sha2_md5_strict' => [
+                CryptLegacyMD5StrictPasswordEncoder::class,
+                ['passwordHash' => ['backend' => 'sha2', 'algo' => 'CRYPT_SHA256']],
+                true,
+                true,
+            ],
         ];
     }
 
     /**
      * @dataProvider buildEncoderDataProvider
      */
-    public function testBuildEncoder($expectedEncoderType, $config)
+    public function testBuildEncoder($expectedEncoderType, $config, $legacy_md5_support, $strict_verify)
     {
         $encoderBuilder = new EncoderBuilder();
-        $this->assertInstanceOf($expectedEncoderType, $encoderBuilder->buildEncoder($config));
+        $this->assertInstanceOf($expectedEncoderType, $encoderBuilder->buildEncoder($config, $legacy_md5_support, $strict_verify));
     }
 }

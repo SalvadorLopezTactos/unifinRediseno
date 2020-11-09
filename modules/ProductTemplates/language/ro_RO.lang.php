@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => 'Producatori',
   'LNK_NEW_PRODUCT_CATEGORY' => 'Categorii de Produse',
   'LNK_NEW_PRODUCT_TYPE' => 'Tipuri Produse',
-  'LNK_NEW_PRODUCT' => 'Creeaza produs pentru catalog',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => 'Furnizori Transport',
   'LNK_PRODUCT_LIST' => 'Vezi catalog produse',
   'NTC_DELETE_CONFIRMATION' => 'Esti sigur ca vrei sa stergi aceasta inregistrare?',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => 'Categorii de Produse',
   'LBL_MANUFACTURERS' => 'Producători',
   'LBL_PRODUCT_TYPES' => 'Tipuri Produse',
-
+  'LBL_RENEWABLE' => 'Se poate reînnoi',
+  'LBL_SERVICE' => 'Serviciu',
 );
-
-
-?>

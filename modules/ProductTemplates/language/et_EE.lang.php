@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => 'Vaata tootjaid',
   'LNK_NEW_PRODUCT_CATEGORY' => 'Vaata tootekategooriaid',
   'LNK_NEW_PRODUCT_TYPE' => 'Vaata tooteliike',
-  'LNK_NEW_PRODUCT' => 'Loo toode kataloogi jaoks',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => 'Vedajad',
   'LNK_PRODUCT_LIST' => 'Vaata tootekataloogi',
   'NTC_DELETE_CONFIRMATION' => 'Kas olete kindel, et soovite selle kirje kustutada?',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => 'Tootekategooriad',
   'LBL_MANUFACTURERS' => 'Tootjad',
   'LBL_PRODUCT_TYPES' => 'Tooteliigid',
-
+  'LBL_RENEWABLE' => 'Uuendatav',
+  'LBL_SERVICE' => 'Teenus',
 );
-
-
-?>

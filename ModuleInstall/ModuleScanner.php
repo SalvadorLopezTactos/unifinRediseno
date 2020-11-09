@@ -10,9 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+use Sugarcrm\Sugarcrm\Security\ModuleScanner\CodeScanner;
 use Sugarcrm\Sugarcrm\Security\Validator\Constraints\DropdownList as ConstraintsDropdownList;
 use Sugarcrm\Sugarcrm\Security\Validator\Validator;
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 class ModuleScanner{
 	private $manifestMap = array(
@@ -22,7 +23,6 @@ class ModuleScanner{
 			'install_images'=>'image_dir',
 			'install_menus'=>'menu',
 			'install_userpage'=>'user_page',
-			'install_dashlets'=>'dashlets',
 			'install_administration'=>'administration',
 			'install_connectors'=>'connectors',
 			'install_vardefs'=>'vardefs',
@@ -67,6 +67,7 @@ class ModuleScanner{
 	    'splfileinfo',
 	    'splfileobject',
 	    'pclzip',
+        'sugarautoloader',
 
     );
 	private $blackList = array(
@@ -385,6 +386,11 @@ class ModuleScanner{
 );
     private $methodsBlackList = array('setlevel', 'put' => array('sugarautoloader'), 'unlink' => array('sugarautoloader'));
 
+    /**
+     * @var CodeScanner
+     */
+    private $codeScanner;
+
     protected $installdefs;
 
 	public function printToWiki(){
@@ -436,6 +442,9 @@ class ModuleScanner{
                 $this->{$param} = array_merge($this->{$param}, $value);
             }
         }
+        $classesBlackList = array_diff($this->classBlackList, $this->classBlackListExempt);
+        $functionsBlackList = array_diff($this->blackList, $this->blackListExempt);
+        $this->codeScanner = new CodeScanner($classesBlackList, $functionsBlackList, $this->methodsBlackList);
 	}
 
 	private $issues = array();
@@ -571,12 +580,17 @@ class ModuleScanner{
                 $this->scanDir($next, $sugarFileAllowed);
             } else {
                 $issues = $this->scanFile($next, $sugarFileAllowed);
+
+                if (count($issues) > 0) {
+                    return false;
+                }
+
                 if ($this->isLanguageFile($next)) {
                     $this->checkLanguageFileKeysValidity($next);
                 }
 
                 // scan vardef file
-                if (empty($issues) && $this->isVardefFile($next)) {
+                if ($this->isVardefFile($next)) {
                     $this->scanVardefFile($next);
                 }
             }
@@ -625,26 +639,6 @@ class ModuleScanner{
     }
 
 	/**
-	 * Check if the file contents looks like PHP
-	 * @param string $contents File contents
-	 * @return boolean
-	 */
-	public function isPHPFile($contents)
-	{
-	    if(stripos($contents, '<?php') !== false) return true;
-	    for($tag=0;($tag = stripos($contents, '<?', $tag)) !== false;$tag++) {
-            if(strncasecmp(substr($contents, $tag, 13), '<?xml version', 13) == 0) {
-                // <?xml version is OK, skip it
-                $tag++;
-                continue;
-            }
-            // found <?, it's PHP
-            return true;
-	    }
-	    return false;
-	}
-
-	/**
 	 * Given a file it will open it's contents and check if it is a PHP file (not safe to just rely on extensions) if it finds <?php tags it will use the tokenizer to scan the file
 	 * $var()  and ` are always prevented then whatever is in the blacklist.
 	 * It will also ensure that all files are of valid extension types
@@ -678,89 +672,10 @@ class ModuleScanner{
             }
         }
 		$contents = file_get_contents($file);
-		if(!$this->isPHPFile($contents)) return $issues;
-		$tokens = @token_get_all($contents);
-		$checkFunction = false;
-		$possibleIssue = '';
-		$lastToken = false;
-		foreach($tokens as $index=>$token){
-			if(is_string($token[0])){
-				switch($token[0]){
-					case '`':
-						$issues['backtick'] = translate('ML_INVALID_FUNCTION') . " '`'";
-					case '(':
-						if($checkFunction)$issues[] = $possibleIssue;
-						break;
-				}
-				$checkFunction = false;
-				$possibleIssue = '';
-			}else{
-				$token['_msi'] = token_name($token[0]);
-				switch($token[0]){
-                    case T_WHITESPACE:
-                    case T_COMMENT:
-                        continue 2;
-					case T_EVAL:
-						if(in_array('eval', $this->blackList) && !in_array('eval', $this->blackListExempt))
-						$issues[]= translate('ML_INVALID_FUNCTION') . ' eval()';
-						break;
-					case T_STRING:
-						$token[1] = strtolower($token[1]);
-						if($lastToken !== false && $lastToken[0] == T_NEW) {
-                            if(!in_array($token[1], $this->classBlackList))break;
-                            if(in_array($token[1], $this->classBlackListExempt))break;
-                        } elseif ($token[0] == T_DOUBLE_COLON) {
-                            if(!in_array($lastToken[1], $this->classBlackList))break;
-                            if(in_array($lastToken[1], $this->classBlackListExempt))break;
-                        } else {
-                            //if nothing else fit, lets check the last token to see if this is a possible method call
-                            if ($lastToken !== false &&
-                            ($lastToken[0] == T_OBJECT_OPERATOR ||  $lastToken[0] == T_DOUBLE_COLON))
-                            {
-                                // check static blacklist for methods
-                                if(!empty($this->methodsBlackList[$token[1]])) {
-                                    if($this->methodsBlackList[$token[1]] == '*') {
-                                        $issues[]= translate('ML_INVALID_METHOD') . ' ' .$token[1].  '()';
-                                        break;
-                                    } else {
-                                        if($lastToken[0] == T_DOUBLE_COLON && $index > 2 && $tokens[$index-2][0] == T_STRING) {
-                                            $classname = strtolower($tokens[$index-2][1]);
-                                            if(in_array($classname, $this->methodsBlackList[$token[1]])) {
-                                                $issues[]= translate('ML_INVALID_METHOD') . ' ' .$classname . '::' . $token[1]. '()';
-                                                break;
-                                            }
-                                        }
-                                    }
-                                }
-                                //this is a method call, check the black list
-                                if(in_array($token[1], $this->methodsBlackList)){
-                                    $issues[]= translate('ML_INVALID_METHOD') . ' ' .$token[1].  '()';
-                                }
-                                break;
-                            }
 
+        $issues = $this->scanCode($contents);
 
-                            if(!in_array($token[1], $this->blackList))break;
-                            if(in_array($token[1], $this->blackListExempt))break;
-
-                        }
-					case T_VARIABLE:
-						$checkFunction = true;
-						$possibleIssue = translate('ML_INVALID_FUNCTION') . ' ' .  $token[1] . '()';
-						break;
-
-					default:
-						$checkFunction = false;
-						$possibleIssue = '';
-
-				}
-                if ($token[0] != T_WHITESPACE && $token[0] != T_COMMENT) {
-                    $lastToken = $token;
-                }
-			}
-
-		}
-		if(!empty($issues)){
+        if (count($issues) > 0) {
 			$this->issues['file'][$file] = $issues;
 		}
 
@@ -806,7 +721,7 @@ class ModuleScanner{
             }
         }
 
-        if (!empty($issues)) {
+        if (count($issues) > 0) {
             $this->issues['file'][$file] = $issues;
         }
         return $issues;
@@ -919,7 +834,7 @@ class ModuleScanner{
                 $this->scanCopy($from, $to);
             }
         }
-        if (!empty($issues)) {
+        if (count($issues) > 0) {
             $this->issues['manifest'][$manifestPath] = $issues;
         }
 	}
@@ -978,6 +893,33 @@ class ModuleScanner{
 		}
 	}
 
+    /**
+     * Formatted issues by type and file and return array.
+     * @return array
+     */
+    public function getFormattedIssues(): array
+    {
+        $out = [];
+        foreach ($this->issues as $type => $issuesByType) {
+            foreach ($issuesByType as $file => $issuesByFile) {
+                $file = str_replace($this->pathToModule . '/', '', $file);
+
+                if (!is_array($issuesByFile)) {
+                    $issuesByFile = [$issuesByFile];
+                }
+                foreach ($issuesByFile as $key => $issueText) {
+                    $words = explode(' ', $issueText);
+                    $words[0] = translate($words[0], 'Administration');
+                    $issuesByFile[$key] = implode(' ', $words);
+                }
+
+                $out[$type][$file] = $issuesByFile;
+            }
+        }
+
+        return $out;
+    }
+
 	/**
 	 *This function will take all issues of the current instance and print them to the screen
 	 **/
@@ -1033,6 +975,35 @@ class ModuleScanner{
 	    }
 	    return false;
 	}
+
+    protected function scanCode(string $code): array
+    {
+        $issueMessages = [];
+        foreach ($this->codeScanner->scan($code) as $issue) {
+            $issueMessages[] = $issue->getMessage();
+        }
+        return $issueMessages;
+    }
+
+    public function scanArchive(string $path): void
+    {
+        $zip = new ZipArchive;
+        if ($zip->open($path) === true) {
+            for ($i = 0; $i < $zip->numFiles; $i++) {
+                $fileName = $zip->getNameIndex($i);
+                $fp = $zip->getStream($fileName);
+                if ($fp === false) {
+                    throw new RuntimeException('Failed to read data from ' . $fileName);
+                }
+                $contents = stream_get_contents($fp);
+                fclose($fp);
+                $issues = $this->scanCode($contents);
+                if (count($issues) > 0) {
+                    $this->issues['file'][$fileName] = $issues;
+                }
+            }
+        }
+    }
 
 }
 

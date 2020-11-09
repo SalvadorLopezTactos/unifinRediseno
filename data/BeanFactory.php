@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 /**
  * Factory to create SugarBeans
@@ -48,6 +49,16 @@ class BeanFactory {
         if (!$id) {
             return self::newBean($module);
         }
+
+        // add access control
+        // This section of code is a portion of the code referred
+        // to as Critical Control Software under the End User
+        // License Agreement.  Neither the Company nor the Users
+        // may modify any portion of the Critical Control Software.
+        if (!AccessControlManager::instance()->allowRecordAccess($module, $id)) {
+            throw new SugarApiExceptionNotFound('This record is not found for your license type.');
+        }
+        //END REQUIRED CODE DO NOT MODIFY
 
     	// Check if params is an array, if not use old arguments
     	if (isset($params) && !is_array($params)) {

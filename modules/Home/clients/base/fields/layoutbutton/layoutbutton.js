@@ -35,13 +35,31 @@
     format: function(value) {
         var metadata = this.model.get("metadata");
         if(metadata) {
-            return (metadata.components) ? metadata.components.length : 1;
+            var components = this.getComponentsFromMetadata(metadata);
+            return components ? components.length : 1;
         }
         return value;
     },
     layoutClicked: function(evt) {
         var value = $(evt.currentTarget).data('value');
         this.setLayout(value);
+    },
+    /**
+     * Gets component from metadata.
+     *
+     * @param {Object} metadata for all dashboard components
+     * @return {Object} dashboard component
+     */
+    getComponentsFromMetadata: function(metadata) {
+        var component;
+        // this is a tabbed dashboard
+        if (metadata.tabs) {
+            var tabIndex = this.context.get('activeTab') || 0;
+            component = metadata.tabs[tabIndex].components;
+        } else {
+            component = metadata.components;
+        }
+        return component;
     },
     setLayout: function(value) {
         var span = 12 / value;
@@ -52,19 +70,20 @@
             }
             var setComponent = function() {
                 var metadata = this.model.get("metadata");
+                var components = this.getComponentsFromMetadata(metadata);
 
-                _.each(metadata.components, function(component){
+                _.each(components, function(component) {
                     component.width = span;
                 }, this);
 
-                if(metadata.components.length > value) {
-                    _.times(metadata.components.length - value, function(index){
-                        metadata.components[value - 1].rows = metadata.components[value - 1].rows.concat(metadata.components[value + index].rows);
-                    },this);
-                    metadata.components.splice(value);
+                if (components.length > value) {
+                    _.times(components.length - value, function(index) {
+                        components[value - 1].rows = components[value - 1].rows.concat(components[value + index].rows);
+                    }, this);
+                    components.splice(value);
                 } else {
-                    _.times(value - metadata.components.length, function(index) {
-                        metadata.components.push({
+                    _.times(value - components.length, function(index) {
+                        components.push({
                             rows: [],
                             width: span
                         });

@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => 'Caktimi i përdoruesit u zbatua',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Pamja paraprake e dizajnit të procesit',
+    'LBL_PROJECT_RUN_ORDER' => 'Ekzekuto porosinë',
 );
 

@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Oferty (Adres dostawy)',
 	'LNK_ACCOUNT_REPORTS' => 'Wyświetl raporty dotyczące Kontrahentów',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenty',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Pulpit listy kont',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Pulpit rekordów kont',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Szczegóły konta',
+    'LBL_NEXT_RENEWAL_DATE' => 'Data następnego odnowienia',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Nazwa kontrahenta/branża',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'Lokalizacja',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Wykresy',

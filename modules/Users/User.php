@@ -12,6 +12,9 @@
 
 require_once 'modules/Administration/updater_utils.php';
 
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+use Sugarcrm\Sugarcrm\Entitlements\Subscription;
 use \Sugarcrm\Sugarcrm\Security\Password\Hash;
 use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener;
@@ -67,6 +70,9 @@ class User extends Person {
 	var $receive_notifications;
 	var $default_team;
 
+    public $business_center_name;
+    public $business_center_id;
+
 	var $reports_to_name;
 	var $reports_to_id;
 	var $team_exists = false;
@@ -79,6 +85,18 @@ class User extends Person {
 	var $importable = true;
     public $site_user_id;
 
+    /**
+     * @var string, license type associated with the user
+     */
+    public $license_type;
+
+    /**
+     * old license type from DB
+     */
+    protected $oldLicenseType;
+
+    const DEFAULT_LICENSE_TYPE = 'CURRENT';
+
     static protected $demoUsers = array(
         'jim',
         'jane',
@@ -88,6 +106,24 @@ class User extends Person {
         'regina',
         'admin',
     );
+
+    /**
+     * support user names
+     */
+    const SUPPORT_USER_NAME = 'SugarCRMSupport';
+    const SUPPORT_PROVISION_USER_NAME = 'SugarCRMProvisionUser';
+    const SUPPORT_UPGRADE_USER_NAME = 'SugarCRMUpgradeUser';
+    const SUPPORT_PORTAL_USER = 'SugarCustomerSupportPortalUser';
+
+    /**
+     * array of well known support users
+     */
+    const SUPPORT_USERS = [
+        self::SUPPORT_USER_NAME,
+        self::SUPPORT_PROVISION_USER_NAME,
+        self::SUPPORT_UPGRADE_USER_NAME,
+        self::SUPPORT_PORTAL_USER,
+    ];
 
     /**
      * These modules don't take kindly to the studio trying to play about with them.
@@ -120,6 +156,16 @@ class User extends Person {
     }
 
     /**
+     * check if it is a support user
+     * @param User $user
+     * @return bool
+     */
+    public static function isSupportUser(\User $user) : bool
+    {
+        return in_array($user->user_name, self::SUPPORT_USERS);
+    }
+
+    /**
      * @var UserPreference
      */
     var $_userPreferenceFocus;
@@ -132,7 +178,11 @@ class User extends Person {
 
 	var $emailAddress;
 
-    public $relationship_fields = array('call_id' => 'calls', 'meeting_id' => 'meetings');
+    public $relationship_fields = array(
+        'call_id' => 'calls',
+        'meeting_id' => 'meetings',
+        'business_center_id'=>'business_centers',
+    );
 
 	var $new_schema = true;
 
@@ -153,13 +203,15 @@ class User extends Person {
      */
     public function getSystemUser()
     {
-        if (null === $this->retrieve('1'))
-            // handle cases where someone deleted user with id "1"
-            $this->retrieve_by_string_fields(array(
-                'status' => 'Active',
-                'is_admin' => '1',
-                ));
+        $q = new SugarQuery();
+        $q->from($this);
+        $q->select('id');
+        $q->where()->equals('is_admin', '1');
+        $q->where()->equals('status', 'Active');
+        //prefer to get the default administrator
+        $q->orderByRaw("(CASE WHEN id = '1' THEN 1 ELSE 0 END)", 'DESC');
 
+        $this->retrieve($q->getOne());
         return $this;
     }
 
@@ -444,12 +496,47 @@ class User extends Person {
     public function shouldUserCompleteWizard($category = 'global')
     {
         $systemStatus = apiCheckSystemStatus();
-        if ($systemStatus !== true) {
+        if ($systemStatus !== true && !$this->allowNonAdminToContinue($systemStatus)) {
             // System isn't ok, so no need to configure it
+            // or non-admin can continue is not allowed
             return false;
         }
         $ut = $this->getPreference('ut', $category);
         return !filter_var($ut, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * allow non-admin user continue to use this Sugar instance
+     * @param array|bool $systemStatus
+     * @param \User $user
+     */
+    public function allowNonAdminToContinue($systemStatus)
+    {
+        if ($systemStatus === true) {
+            return true;
+        }
+
+        if (!is_array($systemStatus) || $this->isAdmin()) {
+            return false;
+        }
+
+        if (isset($systemStatus['level']) && $systemStatus['level'] == 'admin_only'
+            && isset($systemStatus['message']) && $systemStatus['message'] === 'ERROR_LICENSE_SEATS_MAXED'
+            && empty($this->getUserExceededAndInvalidLicenseTypes())
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * get this user's license types either in exceeded limits or invalid categories
+     * @return array
+     */
+    public function getUserExceededAndInvalidLicenseTypes()
+    {
+        return SubscriptionManager::instance()->getUserExceededAndInvalidLicenseTypes($this);
     }
 
     /**
@@ -532,9 +619,8 @@ class User extends Person {
     public static function getSystemUsersWhere($comp = '!=', $logic = 'AND')
     {
         $db = DBManagerFactory::getInstance();
-        $users = array('SugarCRMSupport', 'SugarCRMUpgradeUser');
         $where = ' 1=1 ';
-        foreach ($users as $user) {
+        foreach (self::SUPPORT_USERS as $user) {
             $where .= sprintf(
                 " %s user_name %s %s ",
                 $logic,
@@ -590,28 +676,37 @@ class User extends Person {
 		// this will cause the logged in admin to have the licensed user count refreshed
 		if (isset($_SESSION)) unset($_SESSION['license_seats_needed']);
 
-		$query = "SELECT count(id) as total from users WHERE ".self::getLicensedUsersWhere();
+        // validate license type
+        if (isset($this->license_type)) {
+            $licenseTypes = $this->getLicenseTypes();
+            if ($this->isLicenseTypeModified($licenseTypes)) {
+                if (!$this->validateLicenseTypes($licenseTypes)) {
+                    throw new SugarApiExceptionInvalidParameter('Invalid license_type in module: Users');
+                }
 
+                // make sure only admin can modify the license type
+                global $current_user;
+                if (!$current_user->isAdmin()) {
+                    throw new SugarApiExceptionNotAuthorized('Not authorized to modify license_type in module: Users');
+                }
+            }
+            $this->setLicenseType($licenseTypes);
+        }
 
 		global $sugar_flavor;
         $admin = Administration::getSettings();
         if (!empty($sugar_flavor) && !empty($admin->settings['license_enforce_user_limit'])) {
 	        // Begin Express License Enforcement Check
 			// this will cause the logged in admin to have the licensed user count refreshed
-            unset($_SESSION['license_seats_needed']);
+            if (isset($_SESSION)) {
+                unset($_SESSION['license_seats_needed']);
+            }
             if ($this->portal_only != 1 && $this->is_group != 1 && $this->status == 'Active'
                   && (empty($this->fetched_row)
                       || $this->fetched_row['status'] == 'Inactive'
                       || $this->fetched_row['status'] == '')) {
-                $license_users = $admin->settings['license_users'];
-                $license_seats_needed = -1;
-                if ($license_users != '') {
-                    global $db;
-                    $result = $db->query($query, true, "Error filling in user array: ");
-                    $row = $db->fetchByAssoc($result);
-                    $license_seats_needed = $row['total'] - $license_users;
-                }
-                if ($license_seats_needed >= 0) {
+                $exceededLicenseTypes = SubscriptionManager::instance()->getUserExceededLicenseTypes($this);
+                if (count($exceededLicenseTypes)) {
                     $GLOBALS['log']->error(
                         'The number of active users is already the maximum number of licenses allowed.'
                         . ' New user cannot be created or activated.'
@@ -626,7 +721,12 @@ class User extends Person {
                         );
                         throw $e;
                     }
-                    $msg = translate('WARN_LICENSE_SEATS_EDIT_USER', 'Administration');
+
+                    $typeString = '';
+                    foreach ($exceededLicenseTypes as $type) {
+                        $typeString .= self::getLicenseTypeDescription($type) . ' ';
+                    }
+                    $msg = sprintf(translate('WARN_LICENSE_TYPE_SEATS_EDIT_USER', 'Administration'), $typeString);
                     if (isset($_REQUEST['action'])
                         && ($_REQUEST['action'] == 'MassUpdate' || $_REQUEST['action'] == 'Save')) {
                         $sv = new SugarView();
@@ -635,7 +735,6 @@ class User extends Person {
                         $sv->displayHeader();
                         $sv->errors[] = $msg;
                         $sv->displayErrors();
-                        $sv->displayFooter();
                         $msg = '';
                     }
                     // When action is not set, we're coming from the installer or non-UI source.
@@ -676,6 +775,15 @@ class User extends Person {
                 $this->new_with_id = true;
             }
             $this->site_user_id = getSiteHash($this->id);
+        }
+
+        // Update the datetime the consent was granted
+        if (!empty($this->cookie_consent) && empty($this->cookie_consent_received_on)) {
+            $this->cookie_consent_received_on = TimeDate::getInstance()->nowDb();
+        }
+        // Wipe the datetime if the consent was revoked
+        if (empty($this->cookie_consent) && !empty($this->cookie_consent_received_on)) {
+            $this->cookie_consent_received_on = null;
         }
 
 		parent::save($check_notify);
@@ -747,6 +855,54 @@ class User extends Person {
 
         return $this->id;
 	}
+
+    /**
+     * get system subscriptions
+     * @return array
+     */
+    public function getSystemLicenseTypesSelections() : array
+    {
+        $subscriptions = SubscriptionManager::instance()->getSystemSubscriptionKeys();
+        $selections = [];
+        foreach (array_keys($subscriptions) as $type) {
+            $selections[$type] = self::getLicenseTypeDescription($type);
+        }
+
+        return $selections;
+    }
+
+    /**
+     * get license type description
+     * @param string $type license type
+     * @return string
+     */
+    public static function getLicenseTypeDescription(string $type) : string
+    {
+        global $current_language;
+        $mod_strings = return_module_language($current_language, 'Users');
+        if ($type === Subscription::SUGAR_SERVE_KEY) {
+            return $mod_strings['LBL_LICENSE_SUGAR_SERVE'];
+        } elseif ($type === Subscription::SUGAR_SELL_KEY) {
+            return $mod_strings['LBL_LICENSE_SUGAR_SELL'];
+        } elseif ($type === Subscription::SUGAR_BASIC_KEY) {
+            global $sugar_flavor;
+            $mod_strings = return_module_language($current_language, 'Home');
+            if (!empty($sugar_flavor)) {
+                if ($sugar_flavor === 'ENT') {
+                    return $mod_strings['LBL_SUGAR_ENTERPRISE'];
+                }
+                if ($sugar_flavor === 'PRO') {
+                    return $mod_strings['LBL_SUGAR_PROFESSIONAL'];
+                }
+                if ($sugar_flavor === 'ULT') {
+                    return $mod_strings['LBL_SUGAR_ULTIMATE'];
+                }
+                return $mod_strings['LBL_LICENSE_INVALID_PRODUCT'];
+            }
+        }
+
+        return $mod_strings['LBL_LICENSE_TYPE_INVALID'];
+    }
 
 	/**
 	* @return boolean true if the user is a member of the role_name, false otherwise
@@ -847,6 +1003,10 @@ class User extends Person {
             }
 		}
 
+        // record old license type for detecting license type modification
+        if (!empty($this->license_type)) {
+            $this->oldLicenseType = $this->license_type;
+        }
 		return $ret;
 	}
 
@@ -1319,6 +1479,9 @@ class User extends Person {
 				$user_fields['UPLINE'] = translate('LBL_TEAM_UPLINE_EXPLICIT','Users');
 			}
 		}
+
+        // processing license type data
+        $user_fields['LICENSE_TYPE'] = $this->getLicenseTypesDescriptionString();
 
 		return $user_fields;
 	}
@@ -2146,24 +2309,25 @@ class User extends Person {
     }
 
     /**
-     * Send new password or link to user
+     * Send new password or link to user. Does not support HTML body due to security reasons.
      *
      * @param string $templateId     Id of email template
      * @param array  $additionalData additional params: link, url, password
      * @return array status: true|false, message: error message, if status = false and message = '' it means that send method has returned false
      */
-    public function sendEmailForPassword($templateId, array $additionalData = array()) {
+    public function sendEmailForPassword($templateId, array $additionalData = array())
+    {
         global $current_user,
                $app_strings;
 
         $mod_strings = return_module_language('', 'Users');
 
-        $result = array(
-            'status'  => false,
+        $result = [
+            'status' => false,
             'message' => ''
-        );
+        ];
 
-        $emailTemplate                             = BeanFactory::newBean('EmailTemplates');
+        $emailTemplate = BeanFactory::newBean('EmailTemplates');
         $emailTemplate->disable_row_level_security = true;
 
         if ($emailTemplate->retrieve($templateId) == '') {
@@ -2172,18 +2336,6 @@ class User extends Person {
         }
 
         $emailTemplate->body = $this->replaceInstanceVariablesInEmailTemplates($emailTemplate->body, $additionalData);
-
-        // in case the email is text-only and $emailTemplate->body_html is not empty, use a local variable for the HTML
-        // part to ignore the body_html property and prevent changing it on the EmailTemplate object
-        $htmlBody = null;
-
-        if ($emailTemplate->text_only != 1) {
-            $emailTemplate->body_html = $this->replaceInstanceVariablesInEmailTemplates(
-                $emailTemplate->body_html,
-                $additionalData
-            );
-            $htmlBody                 = $emailTemplate->body_html;
-        }
 
         try {
             $mailer = MailerFactory::getSystemDefaultMailer();
@@ -2194,16 +2346,12 @@ class User extends Person {
             // set the plain-text body
             $mailer->setTextBody($emailTemplate->body);
 
-            // set the HTML body... it will be null in the text-only case, but that's okay
-            $mailer->setHtmlBody($htmlBody);
-
             // make sure there is at least one message part (but only if the current user is an admin)...
 
-            // even though $htmlBody is already set, resetting it verifies that $mailer actually got it
+            // even though $textBody is already set, resetting it verifies that $mailer actually got it
             $textBody = $mailer->getTextBody();
-            $htmlBody = $mailer->getHtmlBody();
 
-            if ($current_user->is_admin && !$mailer->hasMessagePart($textBody) && !$mailer->hasMessagePart($htmlBody)) {
+            if ($current_user->is_admin && !$mailer->hasMessagePart($textBody)) {
                 throw new MailerException("No email body was provided", MailerException::InvalidMessageBody);
             }
 
@@ -2423,7 +2571,7 @@ class User extends Person {
      * @todo loop through vardefs instead
      * @internal runs into an issue when populating from field_defs for users - corrupts user prefs
      */
-    public function populateFromRow(array $row, $convert = false)
+    public function populateFromRow(array $row, $convert = false, $getMoreData = true)
     {
         unset($row['user_preferences']);
         return parent::populateFromRow($row, $convert);
@@ -2698,5 +2846,165 @@ class User extends Person {
         parent::mark_deleted($id);
 
         Container::getInstance()->get(Listener::class)->userDeleted($id);
+    }
+
+    /**
+     * set license types, it stored in json-encoded string
+     * @param array $types, array of types to pass in
+     */
+    public function setLicenseType(array $types = [])
+    {
+        global $current_user;
+        if (is_admin($current_user)) {
+            if (empty($types)) {
+                $this->license_type = null;
+            } else {
+                $this->license_type = json_encode($types);
+            }
+            if ($this->isLicenseTypeModified($types)) {
+                // need to refresh this user's metatdata cache
+                $this->update_date_modified = true;
+                // need to reset access control
+                if ($current_user->id === $this->id) {
+                    AccessControlManager::instance()->resetAccessControl();
+                }
+                // License Type has been changed, clear the report cache
+                $default_language = SugarConfig::getInstance()->get('default_language') ?? 'en_us';
+                $current_language = !empty($current_user->preferred_language) ?
+                    $current_user->preferred_language : $default_language;
+                $cacheFile = sugar_cached('modules/modules_def_' . $current_language . '_' .
+                    md5($current_user->id) . '.js');
+                if (file_exists($cacheFile)) {
+                    unlink($cacheFile);
+                }
+            }
+        }
+    }
+
+    /**
+     * check if license type has been modified
+     * @param array $newType
+     * @return bool
+     */
+    protected function isLicenseTypeModified(array $newTypes) : bool
+    {
+        if (empty($this->oldLicenseType)) {
+            $oldType = [SubscriptionManager::instance()->getUserDefaultLicenseType()];
+        } else {
+            $oldType = json_decode($this->oldLicenseType, true);
+        }
+
+        if (empty($newTypes)) {
+            $newTypes = [SubscriptionManager::instance()->getUserDefaultLicenseType()];
+        }
+
+        if (!empty(array_diff($newTypes, $oldType))) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * get license type. json-decoded to array
+     *
+     * @return array
+     */
+    public function getLicenseTypes() : array
+    {
+        // support user has the full privilidge to access all flavors
+        if (strcmp($this->user_name, self::SUPPORT_USER_NAME) === 0) {
+            return $this->getSystemSubscriptionKeys();
+        }
+
+        return $this->processLicenseTypes($this->license_type);
+    }
+
+    /**
+     * get license types' description in string
+     *
+     * @return string
+     */
+    protected function getLicenseTypesDescriptionString() : string
+    {
+        $userSubscriptions = SubscriptionManager::instance()->getUserSubscriptions($this);
+        $desc = '';
+        foreach ($userSubscriptions as $type) {
+            if (!empty($desc)) {
+                $desc .= '<BR>';
+            }
+            $desc .= self::getLicenseTypeDescription($type);
+        }
+        return $desc;
+    }
+    /**
+     * process license type in different format. string, json-encoded string, array.
+     *
+     * @param mixed $licenseTypes
+     * @return array
+     */
+    public function processLicenseTypes($licenseTypes) : array
+    {
+        if (empty($licenseTypes)) {
+            return [];
+        }
+
+        if (!is_string($licenseTypes) && !is_array($licenseTypes)) {
+            throw new SugarApiExceptionInvalidParameter('Invalid license_type format in module: Users');
+        }
+
+        if (is_array($licenseTypes)) {
+            // remove empty license types
+            $types = [];
+            foreach ($licenseTypes as $type) {
+                if (!empty($type)) {
+                    $types[] = $type;
+                }
+            }
+            return $types;
+        }
+
+        // remove '&quot;', in listview retrieveal, it does encode automatically
+        $licenseTypes = str_replace("&quot;", '"', $licenseTypes);
+        // string may be in json_econded format
+        $value = json_decode($licenseTypes, true);
+
+        if (is_array($value)) {
+            return $value;
+        }
+
+        throw new SugarApiExceptionInvalidParameter('Invalid license_type in processLicenseTypes');
+    }
+
+    /**
+     * validate license types. Only allow system entitled license types to go through
+     *
+     * @param array $licenseTypes
+     * @param bool $allowEmpty
+     *
+     * @return bool
+     */
+    public function validateLicenseTypes(array $licenseTypes, bool $allowEmpty = true) : bool
+    {
+        if (empty($licenseTypes) && !$allowEmpty) {
+            return false;
+        }
+
+        foreach ($licenseTypes as $type) {
+            if (!in_array($type, $this->getSystemSubscriptionKeys())) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * get system subscriptions
+     * @return array
+     */
+    protected function getSystemSubscriptionKeys() : array
+    {
+        return array_keys(SubscriptionManager::instance()->getSystemSubscriptionKeys());
     }
 }

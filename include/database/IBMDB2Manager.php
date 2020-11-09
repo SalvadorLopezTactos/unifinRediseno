@@ -100,7 +100,6 @@ class IBMDB2Manager  extends DBManager
 	 */
 	protected $capabilities = array(
 		"affected_rows" => true,
-		"fulltext" => true, // DB2 supports this though it needs to be initialized and we are currently not capable of doing though through code. Pending request to IBM
 		"auto_increment_sequence" => true, // Opted to use DB2 sequences instead of identity columns because of the restriction of only 1 identity per table
         "limit_subquery" => false, // DB2 doesn't support OPTIMIZE FOR n ROWS in sub query
         "recursive_query" => true,
@@ -1073,11 +1072,16 @@ public function convert($string, $type, array $additional_parameters = array())
 	/**+
 	 * @see DBManager::setAutoIncrement()
 	 */
-	protected function setAutoIncrement($table, $field_name)
+    protected function setAutoIncrement($table, $field_name, array $platformOptions = [])
 	{
 		$this->deleteAutoIncrement($table, $field_name);
-		$seqName = $this->_getSequenceName($table, $field_name, true);
-        $this->query("CREATE SEQUENCE $seqName START WITH 0 INCREMENT BY 1 NO MAXVALUE NO CYCLE NO CACHE");
+        if (!empty($platformOptions['cache'])) {
+            $seqCache = sprintf('CACHE %d', $platformOptions['cache']);
+        } else {
+            $seqCache = 'NO CACHE';
+        }
+        $seqName = $this->_getSequenceName($table, $field_name, true);
+        $this->query("CREATE SEQUENCE $seqName START WITH 0 INCREMENT BY 1 NO MAXVALUE NO CYCLE $seqCache");
         $this->query("SELECT NEXTVAL FOR $seqName  FROM SYSIBM.SYSDUMMY1"); // Making sure we initialize the sequence so that getAutoIncrement behaves as expected
 		return "";
 	}
@@ -1137,7 +1141,6 @@ public function convert($string, $type, array $additional_parameters = array())
     {
         $data = array();
         $this->populate_index_data($table_name, $index_name, $data);
-        $this->populate_fulltext_index_data($table_name, $index_name, $data);
 
         return $data;
     }
@@ -1147,7 +1150,7 @@ public function convert($string, $type, array $additional_parameters = array())
      *
      * @param string $table_name Table name
      * @param string $index_name Index name
-     * @param $data Array to be populated
+     * @param array $data Array to be populated
      */
     protected function populate_index_data($table_name, $index_name, &$data)
     {
@@ -1225,70 +1228,6 @@ INNER JOIN SYSCAT."INDEXCOLUSE" c
         }
     }
 
-    /**
-     * Populates array with fulltext index data
-     *
-     * @param string $table_name Table name
-     * @param string $index_name Index name
-     * @param $data Array to be populated
-     */
-    protected function populate_fulltext_index_data($table_name, $index_name, &$data)
-    {
-        if ($this->tableExistsExtended('TSINDEXES', 'SYSIBMTS', 'VIEW')) {
-            $filterByTable = $table_name !== null;
-            $filterByIndex = $index_name !== null;
-
-            $columns = array();
-            if (!$filterByTable) {
-                $columns[] = 'TABNAME AS table_name';
-            }
-
-            if (!$filterByIndex) {
-                $columns[] = 'INDNAME AS index_name';
-            }
-
-            $columns[] = 'COLNAME AS column_name';
-            $columns[] = 'language';
-
-            $query = 'SELECT ' . implode(', ', $columns) . '
-FROM SYSIBMTS.TSINDEXES';
-
-            $where = array('TABSCHEMA = ?');
-            $params = array($this->schema);
-
-            if ($filterByTable) {
-                $where[] = 'TABNAME = ?';
-                $params[] = strtoupper($table_name);
-            }
-
-            if ($filterByIndex) {
-                $where[] = 'INDNAME = ?';
-                $params[] = strtoupper($this->getValidDBName($index_name, true, 'index'));
-            }
-
-            $stmt = $this
-                ->getConnection()
-                ->executeQuery($query, $params);
-
-            while (($row = $stmt->fetch())) {
-                if (!$filterByTable) {
-                    $table_name = strtolower($row['table_name']);
-                }
-
-                if (!$filterByIndex) {
-                    $index_name = strtolower($row['index_name']);
-                }
-
-                $data[$table_name][$index_name]['name'] = $index_name;
-                $data[$table_name][$index_name]['type'] = 'fulltext';
-                $data[$table_name][$index_name]['fields'] = explode(',', strtolower($row['column_name']));
-                if (!empty($row['language'])) {
-                    $data[$table_name][$index_name]['message_locale'] = $row['language'];
-                }
-            }
-        }
-    }
-
 	/**~
 	 * @see DBManager::add_drop_constraint()
 	 * Note: Tested all constructs pending feedback from IBM on text search index creation from code
@@ -1331,44 +1270,10 @@ FROM SYSIBMTS.TSINDEXES';
 			else
 				$sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name} FOREIGN KEY ({$fields}) REFERENCES {$definition['foreignTable']}({$definition['foreignField']})";
 			break;
-		case 'fulltext':
-			/**
-			 * Until we have a better place to put this, here is a reference to how to install text search
-			 * http://publib.boulder.ibm.com/infocenter/db2luw/v9r7/index.jsp?topic=/com.ibm.db2.luw.admin.ts.doc/doc/c0053115.html
-			 * http://www.ibm.com/developerworks/data/tutorials/dm-0810shettar/index.html
-			 * http://publib.boulder.ibm.com/infocenter/db2luw/v9r5/index.jsp?topic=/com.ibm.db2.luw.sql.rtn.doc/doc/r0051989.html
-			 */
-			$local = isset($definition['message_locale']) ? $definition['message_locale'] : "";
-
-            // When using stored procedures DB2 becomes case sensitive.
-			$sql = strtoupper("CALL SYSPROC.SYSTS_DROP('', '{$name}', '{$local}', ?)");
-			if(!$drop)
-			{
-                if($this->getOne(strtoupper("SELECT count(*) FROM SYSIBMTS.TSINDEXES WHERE INDNAME = '{$name}'")) == 1) {
-                    $this->query($sql); // DROP THE TS INDEX IF IT EXISTS
-                }
-				$options = isset($definition['options']) ? $definition['options'] : "";
-				$sql = strtoupper("CALL SYSPROC.SYSTS_CREATE('', '{$name}', '{$table} ({$fields})', '{$options}', '{$local}', ?)");
-			}
-			// Note that the message output parameter is bound automatically and logged in query
-			break;
 		}
 
         $this->logger->info("IBMDB2Manager.add_drop_constraint: ".$sql);
 		return $sql;
-	}
-
-
-	/**-
-	 * @see DBManager::full_text_indexing_installed()
-	 * TODO FIX THIS!!!!
-	 */
-	public function full_text_indexing_installed()
-	{
-		return true;
-		// Part of DB2 since version 9.5 (http://www.ibm.com/developerworks/data/tutorials/dm-0810shettar/index.html)
-		// However there doesn't seem to be a programmatic way to create the text search indexes.
-		// Pending reply from IBM marking this as unsupported.
 	}
 
     /**
@@ -1442,25 +1347,6 @@ FROM SYSIBMTS.TSINDEXES';
 		$this->reorgQueueRemoveTable($name);
 		return $return;
 	}
-
-    /**
-     * Drops the table associated with a bean
-     *
-     * @param SugarBean $bean SugarBean instance
-     *
-     * @return bool query result
-     */
-    public function dropTable(SugarBean $bean)
-    {
-        // If we want drop table then we have to drop all FTS indexes if they are present
-        foreach ($this->get_indices($bean->getTableName()) as $index) {
-            if ($index['type'] == 'fulltext') {
-                $this->dropIndexes($bean->getTableName(), array($index), true);
-            }
-        }
-
-        return parent::dropTable($bean);
-    }
 
 	/**+
 	 * Truncate table
@@ -1583,33 +1469,6 @@ FROM SYSIBMTS.TSINDEXES';
 			return '"'.$term.'"';
 		}
 		return $term;
-	}
-
-	/**~
-	 * Generate fulltext query from set of terms
-	 * @param string $fields Field to search against
-	 * @param array $terms Search terms that may be or not be in the result
-	 * @param array $must_terms Search terms that have to be in the result
-	 * @param array $exclude_terms Search terms that have to be not in the result
-	 */
-	public function getFulltextQuery($field, $terms, $must_terms = array(), $exclude_terms = array())
-	{
-		$condition = array();
-        //Symbol for optional term search. Depends on version of database. Can be '%' or '?'.
-        //http://www-01.ibm.com/support/knowledgecenter/SSEPGG_10.1.0/com.ibm.db2.luw.admin.ts.doc/doc/r0052651.html
-        $symbol = version_compare($this->version(), '10', '<') ? '?' : '%';
-		foreach($terms as $term) {
-            $condition[] = $symbol . $this->quoteTerm($term);
-		}
-		foreach($must_terms as $term) {
-			$condition[] = "+".$this->quoteTerm($term);
-		}
-		foreach($exclude_terms as $term) {
-			$condition[] = "-".$this->quoteTerm($term);
-		}
-		$condition = $this->quoted(join(" ",$condition));
-
-		return "CONTAINS($field, $condition) = 1";
 	}
 
 	/**+

@@ -59,6 +59,7 @@ $viewdefs['base']['view']['planned-activities'] = array(
                         'label' => 'LBL_SCHEDULE_MEETING',
                         'acl_action' => 'create',
                         'acl_module' => 'Meetings',
+                        'name' => 'schedule_meeting',
                     ),
                     array(
                         'type' => 'dashletaction',
@@ -70,6 +71,7 @@ $viewdefs['base']['view']['planned-activities'] = array(
                         'label' => 'LBL_SCHEDULE_CALL',
                         'acl_action' => 'create',
                         'acl_module' => 'Calls',
+                        'name' => 'log_call',
                     ),
                 ),
             ),
@@ -103,7 +105,7 @@ $viewdefs['base']['view']['planned-activities'] = array(
     'panels' => array(
         array(
             'name' => 'panel_body',
-            'columns' => 3,
+            'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
@@ -137,10 +139,10 @@ $viewdefs['base']['view']['planned-activities'] = array(
             ),
             'link' => 'meetings',
             'module' => 'Meetings',
-            'order_by' => 'date_start:desc',
+            'order_by' => 'date_start:asc',
             'record_date' => 'date_start',
             'row_actions' => array(
-/*                array(
+                array(
                     'type' => 'rowaction',
                     'icon' => 'fa-times-circle',
                     'css_class' => 'btn btn-mini',
@@ -148,7 +150,7 @@ $viewdefs['base']['view']['planned-activities'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_PLANNED_ACTIVITIES_DASHLET_HELD_ACTIVITY',
                     'acl_action' => 'edit',
-                ),*/
+                ),
                 array(
                     'type' => 'unlink-action',
                     'icon' => 'fa-chain-broken',
@@ -160,10 +162,10 @@ $viewdefs['base']['view']['planned-activities'] = array(
                 ),
             ),
             'include_child_items' => true,
-            /*'invitation_actions' => array(
+            'invitation_actions' => array(
                 'name' => 'accept_status_users',
                 'type' => 'invitation-actions',
-            ),*/
+            ),
             'overdue_badge' => array(
                 'name' => 'date_start',
                 'type' => 'overdue-badge',
@@ -174,7 +176,6 @@ $viewdefs['base']['view']['planned-activities'] = array(
                 'assigned_user_name',
                 'assigned_user_id',
                 'date_start',
-                'status',
             ),
         ),
         array(
@@ -184,10 +185,10 @@ $viewdefs['base']['view']['planned-activities'] = array(
             ),
             'link' => 'calls',
             'module' => 'Calls',
-            'order_by' => 'date_start:desc',
+            'order_by' => 'date_start:asc',
             'record_date' => 'date_start',
             'row_actions' => array(
-/*                array(
+                array(
                     'type' => 'rowaction',
                     'icon' => 'fa-times-circle',
                     'css_class' => 'btn btn-mini',
@@ -195,7 +196,7 @@ $viewdefs['base']['view']['planned-activities'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_PLANNED_ACTIVITIES_DASHLET_HELD_ACTIVITY',
                     'acl_action' => 'edit',
-                ),*/
+                ),
                 array(
                     'type' => 'unlink-action',
                     'icon' => 'fa-chain-broken',
@@ -207,21 +208,19 @@ $viewdefs['base']['view']['planned-activities'] = array(
                 ),
             ),
             'include_child_items' => true,
-            /*'invitation_actions' => array(
+            'invitation_actions' => array(
                 'name' => 'accept_status_users',
                 'type' => 'invitation-actions',
-            ),*/
+            ),
             'overdue_badge' => array(
                 'name' => 'date_start',
                 'type' => 'overdue-badge',
-                'css_class' => 'pull-right',
             ),
             'fields' => array(
                 'name',
                 'assigned_user_name',
                 'assigned_user_id',
                 'date_start',
-                'status',
             ),
         ),
     ),

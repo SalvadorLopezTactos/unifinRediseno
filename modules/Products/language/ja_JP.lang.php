@@ -12,19 +12,19 @@
 
 $mod_strings = array(
     // Dashboard Names
-    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => '見積り済商品一覧のダッシュ ボード',
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => '見積品目一覧のダッシュボード',
 
     'LBL_CAMPAIGN_PRODUCT' => 'キャンペーン商品',
-    'LBL_MODULE_NAME' => '見積済商品',
-    'LBL_MODULE_NAME_SINGULAR' => '見積済商品',
-    'LBL_MODULE_TITLE' => '見積済商品:ホーム',
+    'LBL_MODULE_NAME' => '見積品目',
+    'LBL_MODULE_NAME_SINGULAR' => '見積品目',
+    'LBL_MODULE_TITLE' => '見積品目:ホーム',
     'LBL_SEARCH_FORM_TITLE' => '商品検索',
     'LBL_LIST_FORM_TITLE' => '商品一覧',
     'LBL_NEW_FORM_TITLE' => '商品作成',
-    'LBL_PRODUCT' => '見積済商品:',
-    'LBL_RELATED_PRODUCTS' => '関連見積り済商品',
+    'LBL_PRODUCT' => '見積品目:',
+    'LBL_RELATED_PRODUCTS' => '関連見積品目',
     'LBL_LEAD_SOURCE' => 'リードソース',
-    'LBL_LIST_NAME' => '見積済商品',
+    'LBL_LIST_NAME' => '見積品目',
     'LBL_LIST_MANUFACTURER' => '製造元',
     'LBL_MANUFACTURERS' => '製造元',
     'LBL_LIST_LBL_MFT_PART_NUM' => 'パートナンバー',
@@ -86,7 +86,7 @@ $mod_strings = array(
     'LBL_BOOK_VALUE_USDOLLAR' => '簿価（USドル）:',
     'LBL_BOOK_VALUE_DATE' => '簿価設定日:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => '商品',
-    'LBL_RELATED_PRODUCTS_TITLE' => '見積済商品',
+    'LBL_RELATED_PRODUCTS_TITLE' => '見積品目',
     'LBL_WEBSITE' => 'Webサイト',
     'LBL_COST_USDOLLAR' => '原価（USドル）',
     'LBL_DISCOUNT_USDOLLAR' => '値引（USドル）',
@@ -127,10 +127,11 @@ $mod_strings = array(
     'LBL_CONTACT' => '取引先担当者',
     'LBL_DISCOUNT_TOTAL' => '総値引',
     'LBL_DISCOUNT_AMOUNT' => '値引額',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => '割引額の値',
     'LBL_EXT_PRICE' => '価格',
     'LBL_CURRENCY_SYMBOL_NAME' => '通貨シンボル名',
-    'LBL_PRODUCTS_SUBPANEL_TITLE' => '見積済商品',
+    'LBL_PRODUCTS_SUBPANEL_TITLE' => '見積品目',
     'LNK_IMPORT_PRODUCTS' => '商品のインポート',
     'LBL_EDITLAYOUT' => 'レイアウト編集' /*for 508 compliance fix*/,
     //For export labels
@@ -141,12 +142,12 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE' => 'コミットステージ',
     'LBL_COMMIT_STAGE_FORECAST' => '売上予測',
     'LBL_PROBABILITY' => '確度 (%):',
-    'LBL_SALES_STAGE' => '商談ステージ',
+    'LBL_SALES_STAGE' => 'セールスステージ',
     'LBL_SALES_STATUS' => '商談品目ステータス',
     'LBL_PIPELINE_TOTAL_IS' => 'パイプラインの合計は',
 
     'LBL_CONVERT_TO_QUOTE_ERROR' => 'エラー:',
-    'LBL_CONVERT_TO_QUOTE_ERROR_MESSAGE' => '見積済商品から見積の変更にエラーがありました',
+    'LBL_CONVERT_TO_QUOTE_ERROR_MESSAGE' => '見積品目から見積の変更にエラーがありました',
 
     'LBL_DISCOUNT_AS_PERCENT' => '値引%',
 
@@ -155,7 +156,7 @@ $mod_strings = array(
     'LBL_HELP_RECORDS' => '{{plural_module_name}}モジュールは既に売却または顧客に販売されているプロセスにあるすべての製品で構成されています。組織によって販売されている製品のリストは、管理>製品カタログ内にあり、管理者が必要に応じて製品を追加できる機能を持っています。 {{plural_module_name}}を作成する際には、カタログから選択した製品のどちらかのオプションを持っているか、{{plural_module_name}}モジュールを介して新製品を作成します。Sugarで{{plural_module_name}}を作成する方法はたくさんありますが、例えば{{plural_module_name}}モジュール経由で、{{quotes_module}}モジュール、複製、{{plural_module_name}}などのインポートして{{module_name}}経由でなどがあります。{{module_name}} レコードが作成されたなら、{{plural_module_name}}レコードの表示を経由して{{module_name}}に関連する情報を表示したり、編集することができます。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}}モジュールは既に売却または顧客に販売されているプロセスにあるすべての製品で構成されています。 - 個々のフィールドまたは「編集」ボタンをクリックして、このレコードのフィールドを編集します。 - 左下のペインに「データビュー」をトグルしてサブパネル内の他のレコードへのリンクを変更したり表示してください。 - 左下ペインに「アクティビティストリーム」を切り替えることにより、{{activitystream_singular_module}}内のレコードを変更し、ユーザーのコメントを作成、閲覧してください - レコード名の右にあるアイコンを使用して、このレコードをフォローするか、お気に入りにしてください。 - 追加のアクションは、「編集」ボタンの右にあるドロップダウンの「操作」メニューにあります。',
+    'LBL_HELP_RECORD' => '{{plural_module_name}}モジュールは既に売却または顧客に販売されているプロセスにあるすべての製品で構成されています。 - 個々のフィールドまたは「編集」ボタンをクリックして、このレコードのフィールドを編集します。 - 左下のペインに「データビュー」をトグルしてサブパネル内の他のレコードへのリンクを変更したり表示してください。 - 左下ペインに「アクティビティストリーム」を切り替えることにより、{{activitystream_singular_module}}内のレコードを変更し、ユーザのコメントを作成、閲覧してください - レコード名の右にあるアイコンを使用して、このレコードをフォローするか、お気に入りにしてください。 - 追加のアクションは、「編集」ボタンの右にあるドロップダウンの「操作」メニューにあります。',
 
     // Create View Help Text
     'LBL_HELP_CREATE' => '{{plural_module_name}} モジュールは既に売却または顧客に販売されるプロセスにあるすべての製品で構成されています。
@@ -167,8 +168,8 @@ $mod_strings = array(
 2. 新しいレコードを確定し、前のページに戻るには「保存」をクリックします。',
 
     'LBL_PRODUCT_POSITION' => '製品バンドルポジション',
-    'LBL_PRODUCTS_QUOTE_DATA_LIST' => '見積済商品の見積データリスト',
-    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (新規見積り済み商品)',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => '見積品目の見積データリスト',
+    'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (新規見積済み商品)',
     'LBL_DISCOUNT_PERCENT' => '% パーセント',
     'LBL_DISCOUNT_TYPE' => '値引タイプ',
 );

@@ -40,10 +40,10 @@ $viewdefs['Reports']['mobile']['view']['edit'] = array(
                     'type' => 'enum',
                     'options' => 'dom_report_types',
                 ),
+                'tag',
                 'assigned_user_name',
                 'team_name',
             )
         )
     ),
 );
-?>

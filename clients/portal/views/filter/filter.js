@@ -27,6 +27,8 @@
         app.view.View.prototype._renderHtml.call(this);
         this.layout.off("list:search:toggle", null, this);
         this.layout.on("list:search:toggle", this.toggleSearch, this);
+        app.logger.warn('View.Views.Portal.FilterView' +
+            'has been deprecated since 9.2.0 and will be removed in a future release.');
     },
     getSearchFields: function() {
         var self = this;

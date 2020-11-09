@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'Κατάσταση',
   'LBL_PRJ_MODULE' => 'Ενότητα Στόχου',
+  'LBL_PRJ_RUN_ORDER' => 'Σειρά Λειτουργίας',
   'LBL_PMSE_BUTTON_SAVE' => 'Αποθήκευση',
   'LBL_PMSE_BUTTON_CANCEL' => 'Ακύρωση',
   'LBL_PMSE_BUTTON_YES' => 'Ναι',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Ο Ορισμός Διαδικασίας εισήχθηκε, αλλά περιέχει μία ή περισσότερες πράξεις Επιχειρησιακού Κανόνα για τις οποίες οι επιχειρησιακοί κανόνες δεν επιλέχθηκαν.',
     'LBL_BPM_IMPORT_SELECT' => 'Αυτός ο ορισμός διαδικασίας περιέχει τους παρακάτω Επιχειρησιακούς Κανόνες και Πρότυπα Ηλεκτρονικού Ταχυδρομείου. '
         . 'Παρακαλώ επιλέξτε αυτούς που θέλετε να εισαγάγετε.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'Επιχειρησιακοί Κανόνες',
     'LBL_EMAIL_TEMPLATES' => 'Πρότυπα Email',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'Supervisor',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Δημιουργήθηκε Από Χρήστη',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Τελευταία Τροποποίηση από Χρήστη',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Email συστήματος',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Επιχειρησιακοί Κανόνες',
     'LBL_PMSE_LABEL_RULE' => 'Κανόνας',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Χειριστής Ανάθεσης',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Ενημέρωση "Ανάθεση σε" στο αρχείο',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Προσθήκη Συναφούς Εγγραφής',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Σχετικά ενότητα',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Το όνομα της δραστηριότητας είναι άδειο.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Το όνομα "%s" υπάρχει ήδη σε οικογενειακό σχήμα.',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'ημέρες',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'ώρες',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'λεπτά',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'ώρες λειτουργίας',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'Επιχειρηματικό κέντρο',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'Από την ενότητα στόχου',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'Από ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' Ενότητα',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'Συμβολοσειρά, Αριθμός και Δυαδική τιμή',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'Αριθμός',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'Αξία',

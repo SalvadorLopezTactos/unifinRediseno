@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'Atinstalējams',
     'LBL_ML_VERSION' => 'Versija',
 	'LBL_ML_INSTALL'=>'Instalēt',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'Sekotājs',
 	'LBL_MODULE_NAME' => 'Jauninājuma vednis',
 	'LBL_MODULE_NAME_SINGULAR' => 'Jauninājuma vednis',
 	'LBL_UPLOAD_SUCCESS' => 'Jauninājuma pakotne veiksmīgi ielādēta. Spiediet turpināt, lai veiktu nobeiguma pārbaudi.',

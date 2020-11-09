@@ -550,9 +550,9 @@
 
     /**
      * Shortcut Session - a set of shortcuts, which can be activated and deactivated as a group.
-     * @param {Array} shortcutIds - an array of strings of shortcut IDs that will be enabled
-     * @param {View.Layout} layout - the layout that this shortcut session is tied to, which
-     *                               is normally the top-level layout
+     * @param {string[]} shortcutIds List of shortcut IDs that will be enabled.
+     * @param {View.Layout|View.View} layout The layout (or view) that this shortcut
+     *   session is tied to, which is normally the top-level layout.
      * @constructor
      */
     var ShortcutSession = function(shortcutIds, layout) {

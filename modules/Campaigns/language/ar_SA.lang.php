@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'لم يتم العثور على قائمة هدف من النوع الافتراضي',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'لم يتم العثور على إدخالات',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'تمت معالجة الإدخالات',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'اسم المتعقب:',
   'LBL_EDIT_TRACKER_URL'=>'عنوان URL للمتعقب:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'لم يتم حفظ الحدود المثالية مع حساب البريد الإلكتروني الوارد الخاص بك.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'يُرجى مراجعة إعدادات البريد الإلكتروني الداخلي.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} تم حذف العملاء المتوقعين الذين تم إنشاؤهم خلال هذه الحملة منذ الإنشاء.',
+    'LBL_PROSPECT_LIST' => 'قائمة العملاء المستهدفين',
 );
 
 

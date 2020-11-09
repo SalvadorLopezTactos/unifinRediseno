@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Guid;
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+
 /**
  * The SugarBean for Each commentlog message, should be immutable.
  */
@@ -20,7 +24,7 @@ class CommentLog extends Basic
     public $module_name = 'CommentLog';
     public $table_name = 'commentlog';
     public $new_schema = true;
-    public $importable = true;
+    public $entry;
 
     /**
      * The join table used to get the parent record for an entry
@@ -191,5 +195,135 @@ class CommentLog extends Basic
 
         $row = $qry->execute()->fetch();
         return $this->verifyParentData($row) ? $row : [];
+    }
+
+    /**
+     * @inheritDoc
+     * We also want to create Sugar notifications for any user that was mentioned
+     */
+    public function save($check_notify = false)
+    {
+        $id = parent::save($check_notify);
+        $this->createNotifications();
+        return $id;
+    }
+
+    /**
+     * Create Sugar notifications for each user mentioned in the comment
+     */
+    public function createNotifications()
+    {
+        $pattern = '/@\[([\w]+):([\d\w\-]+)\]/';
+        $new_rel_relname = $this->new_rel_relname;
+        $matches = [];
+        // We don't have the parent record here so no point in notifying the pinged user
+        if (!$new_rel_relname || !$this->load_relationship($new_rel_relname)) {
+            return;
+        }
+
+        $mentionedUsers = [];
+        $module = $this->$new_rel_relname->getRelatedModuleName();
+        $defaultLang = $this->getSugarConfigValue('default_language');
+        preg_match_all($pattern, $this->entry, $matches, PREG_SET_ORDER);
+        foreach ($matches as $mentionTag) {
+            if ($mentionTag[1] === 'Users' || $mentionTag[1] === 'Employees') {
+                $userId = $mentionTag[2];
+                if (!$this->validateGuid($userId)) {
+                    continue;
+                }
+                if (in_array($mentionTag[2], $mentionedUsers)) {
+                    continue;
+                }
+                $notification = $this->getNewBean('Notifications');
+                $user = $this->getBean('Users', $userId);
+                $userLanguage = !empty($user->preferred_language) ? $user->preferred_language : $defaultLang;
+
+                // we need to create a notification in the mentioned user's language
+                $modStrings = $this->getModStrings($userLanguage, 'Notifications');
+                $appListStrings = $this->getAppListStrings($userLanguage);
+
+                $singularModuleName = $appListStrings['moduleListSingular'][$module];
+                $notification->name = $singularModuleName . ': ' . $modStrings['LBL_YOU_HAVE_BEEN_MENTIONED'];
+                $notification->description = 'LBL_YOU_HAVE_BEEN_MENTIONED_BY';
+                $notification->parent_id = $this->new_rel_id;
+                $notification->parent_type = $module;
+                $notification->assigned_user_id = $userId;
+                $notification->severity = 'information';
+                $notification->is_read = 0;
+                $notification->save();
+                $mentionedUsers[] = $userId;
+            }
+        }
+    }
+
+    /**
+     * Wrapper for BeanFactory::newBean
+     *
+     * @param string $module The module name
+     * @return SugarBean|null
+     */
+    public function getNewBean(string $module): SugarBean
+    {
+        return BeanFactory::newBean($module);
+    }
+
+    /**
+     * Wrapper for BeanFactory::getBean
+     * @param string $module The module name
+     * @param string $id The record id
+     * @return SugarBean|null
+     * @throws Exception
+     */
+    public function getBean(string $module, string $id): SugarBean
+    {
+        return BeanFactory::getBean($module, $id);
+    }
+
+    /**
+     * Validate we have a guid
+     *
+     * @param string $guid
+     * @return bool
+     */
+    public function validateGuid(string $guid): bool
+    {
+        $constraint = new Guid();
+        $violations = Validator::getService()->validate($guid, $constraint);
+        return !(count($violations) > 0);
+    }
+
+    /**
+     * Retrieves sugar config values
+     *
+     * @param string $value The value to get
+     * @return mixed
+     */
+    public function getSugarConfigValue(string $value)
+    {
+        $config = Container::getInstance()->get(SugarConfig::class);
+        return $config->get($value);
+    }
+
+    /**
+     * Wrapper for return_module_language
+     *
+     * @param string $language What language to get
+     * @param string $module What module to get
+     * @return array The translated module strings for the specified module and language
+     */
+    public function getModStrings(string $language, string $module): array
+    {
+        return return_module_language($language, $module);
+    }
+
+    /**
+     * Wrapper for return_app_list_strings_language
+     *
+     * @param string $language What language to get
+     * @return array The translated app list strings for the specified language
+     */
+    public function getAppListStrings(string $language): array
+    {
+        return return_app_list_strings_language($language);
     }
 }

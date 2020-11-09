@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'De ne dezinstalat',
     'LBL_ML_VERSION' => 'Versiune',
 	'LBL_ML_INSTALL'=>'Instaleaza',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'Tracker',
 	'LBL_MODULE_NAME' => 'Upgradeaza  Wizard',
 	'LBL_MODULE_NAME_SINGULAR' => 'Upgradeaza  Wizard',
 	'LBL_UPLOAD_SUCCESS' => 'Incarcarea pachetului s-a efectuat cu succes.. Faceti clic pe Urmatorul pentru a efectua o verificare finala',

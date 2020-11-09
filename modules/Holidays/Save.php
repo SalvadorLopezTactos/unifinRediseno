@@ -10,30 +10,41 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+// Handle input validation up front
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
+$request = InputValidation::getService();
+$record = $request->getValidInputPost('record');
+$relate_id = $request->getValidInputRequest('relate_id');
+$return_module = $request->getValidInputRequest('return_module');
+$duplicateId = $request->getValidInputRequest('duplicateId', null, '');
+$return_action = $request->getValidInputPost('return_action', null, '');
+$return_id = $request->getValidInputPost('return_id', null, '');
+
 
 require_once('include/formbase.php');
 
 $focus = BeanFactory::newBean('Holidays');
 global $current_user;
 
-$focus->disable_row_level_security = true;	
-$focus->retrieve($_POST['record']);
+$focus->disable_row_level_security = true;
+$focus->retrieve($record);
 
 $focus = populateFromPost('', $focus);
 
-if ($focus->id != $_REQUEST['relate_id']) {
-    if ($_REQUEST['return_module'] != 'Project') {
-        $focus->person_id = $_REQUEST['relate_id'];
+if ($focus->id != $relate_id) {
+    if ($return_module === 'Users') {
+        $focus->person_id = $relate_id;
         $focus->person_type = "Users";
-    } elseif ($_REQUEST['return_module'] == 'Project') {
-        $focus->related_module = 'Project';
-        $focus->related_module_id = $_REQUEST['relate_id'];
+    } else {
+        $focus->related_module = $return_module;
+        $focus->related_module_id = $relate_id;
     }
 }
 
-if (!$focus->id && !empty($_REQUEST['duplicateId'])) {
+if (!$focus->id && !empty($duplicateId)) {
     $original_focus = BeanFactory::newBean('Holidays');
-    $original_focus->retrieve($_REQUEST['duplicateId']);
+    $original_focus->retrieve($duplicateId);
 
     $focus->person_id = $original_focus->person_id;
     $focus->person_type = $original_focus->person_type;
@@ -44,15 +55,24 @@ if (!$focus->id && !empty($_REQUEST['duplicateId'])) {
 $check_notify = FALSE;
 
 $focus->save($check_notify);
+
+// Added specifically for Business Center Holidays
+if ($focus->related_module !== 'Project') {
+    // Load up the relationship for this bean and save it
+    $focus->load_relationship('business_holidays');
+    $focus->business_holidays->add($focus->related_module_id);
+}
 $return_id = $focus->id;
 
-if(isset($_POST['return_module']) && $_POST['return_module'] != "") $return_module = $_POST['return_module'];
-else $return_module = "Holidays";
-if(isset($_POST['return_action']) && $_POST['return_action'] != "") $return_action = $_POST['return_action'];
-else $return_action = "DetailView";
-if(isset($_POST['return_id']) && $_POST['return_id'] != "") $return_id = $_POST['return_id'];
+if ($return_module === "") {
+    $return_module = "Holidays";
+}
+
+if ($return_action === "") {
+    $return_action = "DetailView";
+}
+
 
 $GLOBALS['log']->debug("Saved record with id of ".$return_id);
 
 handleRedirect($return_id,'Holidays');
-?>

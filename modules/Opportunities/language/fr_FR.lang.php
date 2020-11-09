@@ -15,6 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Tableau de bord de la liste d&#39;affaires',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Tableau de bord de l&#39;enregistrement d&#39;affaires',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Détails de l&#39;affaire',
 
     'LBL_MODULE_NAME' => 'Affaires',
     'LBL_MODULE_NAME_SINGULAR' => 'Affaire',
@@ -25,6 +26,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => 'Nom Affaire :',
     'LBL_OPPORTUNITY' => 'Affaire :',
     'LBL_NAME' => 'Nom Affaire',
+    'LBL_TIME' => 'Heure',
     'LBL_INVITEE' => 'Contacts',
     'LBL_CURRENCIES' => 'Devises',
     'LBL_LIST_OPPORTUNITY_NAME' => 'Affaires',
@@ -75,6 +77,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Type :',
     'LBL_CAMPAIGN' => 'Campagne :',
     'LBL_NEXT_STEP' => 'Prochaine étape:',
+    'LBL_SERVICE_START_DATE' => 'Date de début du service',
     'LBL_LEAD_SOURCE' => 'Origine Principale:',
     'LBL_SALES_STAGE' => 'Phase de vente:',
     'LBL_SALES_STATUS' => 'Statut',
@@ -142,6 +145,16 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE_FORECAST' => 'Prévision',
     'LBL_WORKSHEET' => 'Feuille de travail',
 
+    'LBL_RENEWAL' => 'Renouvellement',
+    'LBL_RENEWAL_OPPORTUNITIES' => 'Possibilités de renouvellement',
+    'LBL_RENEWAL_PARENT' => 'Affaire parent',
+    'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'ID affaire parent',
+    'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
+
+    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
+    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
+    'LBL_WIDGET_AMOUNT' => 'Amount',
+
     'TPL_RLI_CREATE' => 'Une affaire doit avoir au minimum une ligne de revenu.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Créer une Ligne de revenu',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Lignes de devis',
@@ -152,6 +165,7 @@ $mod_strings = array(
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Vous ne pouvez pas supprimer une Affaire qui contient des lignes de revenu terminées',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Un ou plusieurs enregistrements sélectionnés contient des lignes de revenu terminées et ne peuvent donc pas être supprimés.',
     'LBL_INCLUDED_RLIS' => '# éléments de ligne de revenu inclus',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Mise à jour ouverte',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Devis',
 
@@ -189,22 +203,22 @@ $mod_strings = array(
     'LBL_HELP_RECORDS' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles et les lignes de revenu appartenant à ces ventes du début jusqu&#39;à la fin. Chaque enregistrement de{{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} progressera à travers plusieurs étapes de vente jusqu&#39;à être marqué « Gagné » ou « Perdu ». {{plural_module_name}} peut être exploité encore plus en utilisation le module de {{forecasts_singular_module}} de Sugar pour comprendre et prédire les tendances de ventes, ainsi que pour axer le travail sur l&#39;atteinte de quotas de vente.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles et les lignes de revenu appartenant à ces ventes du début jusqu&#39;à la fin. Chaque enregistrement de{{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles et les lignes de revenu appartenant à ces ventes du début jusqu&#39;à la fin. Chaque enregistrement de{{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. 
 
 - Éditer chaque champs en cliquant directement sur le champ concerné ou en cliquant sur le bouton Éditer. 
-- Afficher ou modifier les liaisons avec les autres enregistrements dans les sous-panneaux et voir l&#39;historique des modifications en cliquant sur le bouton « Flux d’activité » en bas à gauche. 
-- Afficher et participer aux commentaire et au flux d&#39;activité via le module {{activitystream_singular_module}} en cliquant sur le bouton.
+- Afficher ou modifier les liaisons avec les autres enregistrements dans les sous-panneaux et voir l&#39;historique des modifications en cliquant sur le bouton "Flux d’activité" en bas à gauche. 
+Afficher et participer aux commentaire et au flux d&#39;activité via le module {{activitystream_singular_module}} en cliquant sur le bouton "Flux d’activité".
 - Suivre ou mettre en favoris l&#39;enregistrement en utilisant les icônes prévues à cet effet à droite du nom de l&#39;enregistrement. 
 - Des actions complémentaires sont disponibles dans la listes déroulantes des actions à droite du bouton Éditer.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles et les lignes de revenu appartenant à ces ventes du début jusqu&#39;à la fin. Chaque enregistrement de {{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles et les lignes de revenu appartenant à ces ventes du début jusqu&#39;à la fin. Chaque enregistrement de{{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. 
 
-Pour créer un {{module_name}} :
-1. Fournir des valeurs pour les champs à volonté.
- - Les champs marqués « Requis » doivent être remplis avant la sauvegarde.
- - Cliquer « Voir plus » pour exposer des champs supplémentaires si nécessaire.
-2. Cliquer sur « Sauvegarder » pour finaliser le nouvel enregistrement et revenir à la page antérieure.',
+Pour créer un enregistrement {{module_name}}, les étapes suivantes sont nécessaires : 
+1. Remplir les champs souhaités. 
+- Les champs identifiés comme "Obligatoire" doivent être complétés avant la sauvegarde. 
+- Cliquer sur "Voir plus" pour afficher plus de champs, si nécessaire. 
+2. Cliquer sur "Sauvegarder" pour finaliser l&#39;enregistrement et retourner sur la page précédente.',
 
 // END ENT/ULT
 
@@ -216,4 +230,6 @@ Pour créer un {{module_name}} :
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Afficher le top 10 des Affaires dans un graphique à bulles.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Mes Affaires',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Les Affaires de mon équipe",
+
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Impossible de modifier {{fieldName}} car ce {{moduleSingular}} n&#39;a pas d&#39;éléments de ligne ouverts.',
 );

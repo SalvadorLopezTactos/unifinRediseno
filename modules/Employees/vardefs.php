@@ -82,6 +82,7 @@ $dictionary['Employee']['fields']['status']['massupdate']=false;
 $dictionary['Employee']['fields']['is_admin']['massupdate']=false;
 //begin bug 48033
 $dictionary['Employee']['fields']['UserType']['massupdate']=false;
+$dictionary['Employee']['fields']['license_type']['massupdate']=false;
 $dictionary['Employee']['fields']['messenger_type']['massupdate']=false;
 $dictionary['Employee']['fields']['email_link_type']['massupdate']=false;
 //end bug 48033

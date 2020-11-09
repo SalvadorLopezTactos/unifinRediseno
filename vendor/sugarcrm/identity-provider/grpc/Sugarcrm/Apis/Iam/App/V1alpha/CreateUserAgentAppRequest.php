@@ -35,30 +35,9 @@ class CreateUserAgentAppRequest extends \Google\Protobuf\Internal\Message
      */
     private $app = null;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $tenant
-     *           The tenant SRN to register this client to.
-     *     @type \Sugarcrm\Apis\Iam\App\V1alpha\App $app
-     *           The application to be created. The allowed properties are:
-     *            client_name
-     *            redirect_uris
-     *            scopes
-     *            contacts
-     *            logo_uri
-     *            client_uri
-     *            policy_uri
-     *            tos_uri
-     *           Any other values are ignored.
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\App\V1Alpha\App::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

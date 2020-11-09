@@ -143,3 +143,26 @@ $dependencies['Opportunities']['likely_case_copy_when_closed'] = array(
         ),
     )
 );
+
+/**
+ * This dependency set the renewal_parent to read only when the renewal is true
+ */
+$dependencies['Opportunities']['renewal_parent_readonly'] = array(
+    'hooks' => array("edit"),
+    //Trigger formula for the dependency. Defaults to 'true'.
+    'trigger' => 'true',
+    'triggerFields' => array('renewal'),
+    'onload' => true,
+    //Actions is a list of actions to fire when the trigger is true
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly', //Action type
+            //The parameters passed in depend on the action type
+            'params' => array(
+                'target' => 'renewal_parent_name',
+                'label' => 'renewal_parent_name_label', //normally <field>_label
+                'value' => 'equal($renewal, true)', //Formula
+            ),
+        ),
+    ),
+);

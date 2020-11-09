@@ -20,6 +20,7 @@ use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 use Sugarcrm\Sugarcrm\Security\Context;
 use Sugarcrm\Sugarcrm\Security\Subject\SugarBPM;
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 /**
  * Class contains utilities as encoder and decoders for codes url, remove bound fields,
@@ -46,6 +47,21 @@ class PMSEEngineUtils
     protected static $idmConfig;
 
     /**
+     * @var array supported business time unit - only business hour (bh) for now
+     */
+    static protected $BusinessCenterTimeUnits = ['bh' => 'hours'];
+
+    /**
+     * @var array support related or target at this moment
+     */
+    static protected $beanTypes = ['related' => 'related', 'target' => 'target'];
+
+    /**
+     * @var array support id and type for now
+     */
+    static protected $registryTypes = ['id' => 'id', 'type' => 'type'];
+
+    /**
      * List of fields across all modules that should always be blacklisted
      * @var array
      */
@@ -60,7 +76,6 @@ class PMSEEngineUtils
             'user_hash',
             'portal_app',
             'portal_active',
-            'portal_name',
             'password',
             'is_admin',
         ),
@@ -76,9 +91,13 @@ class PMSEEngineUtils
             'modified_user_id',
             'date_entered',
             'date_modified',
+            'primary_contact_name',
+            'portal_name',
         ),
         // list for BR conditions (read)
         'BRR' => array(
+            'primary_contact_name',
+            'portal_name',
         ),
         // Add related record Activity item in Process Definitions
         'AC' => array(
@@ -87,17 +106,20 @@ class PMSEEngineUtils
             'viewcount',
             'created_by',
             'modified_user_id',
+            'portal_name',
         ),
         // Process Definitions
         'PD' => array(
             'kbdocument_body',
             'revision',
             'viewcount',
+            'portal_name',
         ),
         'GT' => array(
             'kbdocument_body',
             'revision',
             'viewcount',
+            'portal_name',
         ),
         // Change field action... this used to be the same as Add Related Record
         // but we needed different things from this
@@ -112,7 +134,13 @@ class PMSEEngineUtils
             'modified_user_id',
             'date_entered',
             'date_modified',
+            'portal_name',
         ),
+        // Readonly and Required fields in Activity
+        // Locked fields in Process Definition
+        'RR' => [
+            'portal_name',
+        ],
     );
 
     /**
@@ -146,7 +174,8 @@ class PMSEEngineUtils
         'localizations',
         'revisions',
         'attachments',
-        'usefulness'
+        'usefulness',
+        'archived_emails',
     );
 
     /**
@@ -166,10 +195,10 @@ class PMSEEngineUtils
      * @var array
      */
     public static $specialFields = array(
-        'All' => array('created_by', 'modified_user_id'),
+        'All' => array('created_by', 'modified_user_id', 'primary_contact_name'),
         'BR' => array('assigned_user_id', 'email1', 'outlook_id'),
         'BRR' => array('assigned_user_id', 'email1', 'outlook_id'),
-        'ET' => array('email1'),
+        'ET' => array('email1', 'portal_name'),
         'AC' => array('assigned_user_id', 'likely_case', 'worst_case', 'best_case', 'teams'),
         'CF' => array('assigned_user_id', 'likely_case', 'worst_case', 'best_case', 'teams'),
         'RR' => array(),
@@ -198,6 +227,109 @@ class PMSEEngineUtils
      * @var array
      */
     protected static $parentBeanCache = [];
+
+    /**
+     * To check if the given expression value is a business center unit.
+     *
+     * @param String $expValue expression value such as "2bh" or "4h"
+     * @return bool true if business unit, false otherwise
+     */
+    public static function isForBusinessTimeOp(String $expValue) : bool
+    {
+        $pattern = self::getBusinessTimePattern();
+        return preg_match($pattern, $expValue) === 1;
+    }
+
+    /**
+     * @param String $key
+     * @return String
+     */
+    public static function getBusinessTimeUnit(String $key) : String
+    {
+        return self::$BusinessCenterTimeUnits[$key] ?? '';
+    }
+
+    /**
+     * @param bool $checkOnly true if no need to get the matches
+     * @return String
+     */
+    public static function getBusinessTimePattern(bool $checkOnly = true) : String
+    {
+        $bcPattern = implode(array_keys(self::$BusinessCenterTimeUnits));
+        if ($checkOnly) {
+            return "/\d+{$bcPattern}/";
+        } else {
+            return "/(\d+)($bcPattern)/";
+        }
+    }
+
+    /**
+     * @param String $beanType
+     * @param String $registryType
+     * @return String
+     */
+    public static function getRegistryKey(String $beanType, String $registryType) : String
+    {
+        return 'pmse_' . self::$beanTypes[$beanType] . '_bean_' . self::$registryTypes[$registryType];
+    }
+
+    /**
+     * @param SugarBean|null $bean
+     * @param bool $target true if registering a target record, false for related record
+     */
+    public static function setRegistry(SugarBean $bean = null, bool $target = true)
+    {
+        if (empty($bean) || empty($bean->id) || empty($bean->module_dir)) {
+            return;
+        }
+
+        $type = $target ? 'target' : 'related';
+
+        Registry\Registry::getInstance()->set(self::getRegistryKey($type, 'id'), $bean->id, true);
+        Registry\Registry::getInstance()->set(self::getRegistryKey($type, 'type'), $bean->module_dir, true);
+    }
+
+    /**
+     * to drop the registry keys used by business hours
+     */
+    public static function dropRegistry()
+    {
+        foreach (self::$beanTypes as $bType) {
+            foreach (self::$registryTypes as $rType) {
+                $key = self::getRegistryKey($bType, $rType);
+                if (Registry\Registry::getInstance()->has($key)) {
+                    Registry\Registry::getInstance()->drop($key);
+                }
+            }
+        }
+    }
+
+    /**
+     * Get id and module from registry and retrieve the bean's business center id
+     *
+     * @param $criteriaToken
+     */
+    public static function setExpBean($criteriaToken)
+    {
+        if ($criteriaToken->expBean === 'filter_module_bc') {
+            $idKey = PMSEEngineUtils::getRegistryKey('related', 'id');
+            $typeKey = PMSEEngineUtils::getRegistryKey('related', 'type');
+        } elseif ($criteriaToken->expBean === 'target_module_bc') {
+            $idKey = PMSEEngineUtils::getRegistryKey('target', 'id');
+            $typeKey = PMSEEngineUtils::getRegistryKey('target', 'type');
+        } else {
+            return;
+        }
+        $beanId = Registry\Registry::getInstance()->get($idKey);
+        $beanType = Registry\Registry::getInstance()->get($typeKey);
+
+        if ($beanId && $beanType) {
+            $beanObj = BeanFactory::getBean($beanType, $beanId);
+            if ($beanObj && $beanObj->business_center_id) {
+                $criteriaToken->expBean = $beanObj->business_center_id;
+            }
+        }
+    }
 
     /**
      * Method to append the name fields from a bean to an array
@@ -1188,6 +1320,57 @@ class PMSEEngineUtils
     }
 
     /**
+     * Determines whether a module is a supported module
+     *
+     * @param string $module module name
+     * @return boolean
+     */
+    public static function isSupportedModule($module)
+    {
+        $prop = VardefManager::getModuleProperty($module, 'processes');
+
+        if (isset($prop) && !empty($prop['enabled'])) {
+            $request = InputValidation::getService();
+            $type = $request->getValidInputRequest('call_type', null, '');
+            if ($type === '' || !empty($prop['types'][$type])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Determines whether a field is a supported field
+     *
+     * @param string $module module name
+     * @param string $field supported field name
+     * @param string $type supported field type
+     * @return boolean
+     */
+    public static function isSupportedField($module, $field, $type = '')
+    {
+        $prop = VardefManager::getModuleProperty($module, 'processes');
+
+        // If $prop is empty, assume the module is enabled and all things are enabled
+        // unless the engine module validator says otherwise (default case)
+        if (empty($prop)) {
+            return true;
+        }
+
+        if (!empty($prop['enabled'])) {
+            // If there is no type property, or there is one and it is defined
+            // Then look for the field
+            if (!isset($prop['types'][$type]) || in_array($field, $prop['types'][$type])) {
+                return true;
+            }
+        }
+
+        // All other cases assume the field is not supported for this type of action
+        return false;
+    }
+
+    /**
      * Determines the validity of a field used in a process definition, business
      * rule, action element, etc.
      * @param array $def The field def
@@ -1420,10 +1603,53 @@ class PMSEEngineUtils
         return $moduleList;
     }
 
-    public static function getSupportedModules ($type = '') {
+    /**
+     * Gets All Modules
+     * @return $allModules
+     */
+    public static function getAllModules()
+    {
+        global $current_user, $beanList, $moduleList;
+
+        $access = $current_user->getDeveloperModules();
+        $allModules = array();
+        foreach ($moduleList as $module) {
+            if (isset($beanList[$module]) && in_array($module, $access)) {
+                $allModules[$module] = $beanList[$module];
+            }
+        }
+        return $allModules;
+    }
+
+    /**
+     * Gets Modules
+     * @param String $type
+     * @return Array
+     */
+    public static function getModules($type = '')
+    {
+        $moduleList = self::getStudioModules($type);
+        $allModules = self::getAllModules();
+        $nonStudioModules = array_diff_key($allModules, $moduleList);
+        foreach ($nonStudioModules as $name => $objectName) {
+            VardefManager::loadVardef($name, $objectName);
+            if (self::isSupportedModule($objectName)) {
+                $moduleList[$name] = StudioModuleFactory::getStudioModule($name);
+            }
+        }
+        return $moduleList;
+    }
+
+    /**
+     * Gets Supported Modules
+     * @param String $type
+     * @return Array
+     */
+    public static function getSupportedModules($type = '')
+    {
         if (!isset(self::$supportedModules[$type])) {
             self::$supportedModules[$type] = array();
-            $moduleList = self::getStudioModules($type);
+            $moduleList = self::getModules($type);
             foreach ($moduleList as $key => $module) {
                 self::$supportedModules[$type][] = $module->module;
             }

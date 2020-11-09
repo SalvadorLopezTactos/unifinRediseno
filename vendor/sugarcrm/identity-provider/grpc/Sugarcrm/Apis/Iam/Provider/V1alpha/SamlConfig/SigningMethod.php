@@ -4,6 +4,8 @@
 
 namespace Sugarcrm\Apis\Iam\Provider\V1alpha\SamlConfig;
 
+use UnexpectedValueException;
+
 /**
  * Protobuf type <code>sugarcrm.apis.iam.provider.v1alpha.SamlConfig.SigningMethod</code>
  */
@@ -17,6 +19,31 @@ class SigningMethod
      * Generated from protobuf enum <code>RSA_SHA512 = 1;</code>
      */
     const RSA_SHA512 = 1;
+
+    private static $valueToName = [
+        self::RSA_SHA256 => 'RSA_SHA256',
+        self::RSA_SHA512 => 'RSA_SHA512',
+    ];
+
+    public static function name($value)
+    {
+        if (!isset(self::$valueToName[$value])) {
+            throw new UnexpectedValueException(sprintf(
+                    'Enum %s has no name defined for value %s', __CLASS__, $value));
+        }
+        return self::$valueToName[$value];
+    }
+
+
+    public static function value($name)
+    {
+        $const = __CLASS__ . '::' . strtoupper($name);
+        if (!defined($const)) {
+            throw new UnexpectedValueException(sprintf(
+                    'Enum %s has no value defined for name %s', __CLASS__, $name));
+        }
+        return constant($const);
+    }
 }
 
 // Adding a class alias for backwards compatibility with the previous class name.

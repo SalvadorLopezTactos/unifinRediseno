@@ -30,7 +30,7 @@
                 editable.contents().find('body').html(value);
             }
         } else {
-            editable.html(value);
+            editable.attr('srcdoc', value);
         }
     }
 });

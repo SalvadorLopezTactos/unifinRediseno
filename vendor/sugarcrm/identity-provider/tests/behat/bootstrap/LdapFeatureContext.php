@@ -118,6 +118,9 @@ class LdapFeatureContext extends FeatureContext
                         $page->uncheckField($row['field']);
                     }
                     break;
+                case 'select':
+                    $page->selectFieldOption($row['field'], $row['value']);
+                    break;
                 default:
                     if ($row['field'] == 'ldap_admin_password' &&
                         $passwordEditHidden &&

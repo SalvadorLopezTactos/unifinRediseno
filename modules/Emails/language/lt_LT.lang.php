@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'Laiškai: Kontaktai',
     'LBL_EMAILS_LEADS_REL' => 'Laiškai: Potencialūs klientai',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'Laiškai: Pardavimai',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'Laiškai: Užrašai',
     'LBL_EMAILS_PROJECT_REL' => 'Laiškai: Projektai',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'Laiškai: Projektų užduotys',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'Siuntėjas:',
     'LBL_REPLY_TO' => 'Atsakyti:',
     'LBL_HTML_BODY' => 'HTML turinys',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'Gavėjai',
     'LBL_LEADS_SUBPANEL_TITLE' => 'Potencialūs kontaktai',
     'LBL_MESSAGE_SENT' => 'Laiškas išsiųstas',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'Atsakyti Id',
     'LBL_TYPE' => 'Tipas:',
     'LBL_EMAIL_STATE' => 'Būsena',
+    'LBL_EMAIL_DIRECTION' => 'Kryptis',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'Prašome pasitikrinti!',

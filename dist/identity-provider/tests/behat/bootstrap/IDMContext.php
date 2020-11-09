@@ -22,6 +22,12 @@ use PHPUnit\Framework\Assert;
 class IDMContext extends FeatureContext
 {
     /**
+     * List created contacts in portal
+     * @var array
+     */
+    private $portalUsers = [];
+
+    /**
      * Log into SugarCRM as administrator
      * @Given /^I logged in SugarCRM as administrator$/
      */
@@ -39,6 +45,7 @@ class IDMContext extends FeatureContext
      */
     public function iCreateContactAndGrantAccessToPortal($user, $password)
     {
+        $this->portalUsers[] = $user;
         $topMenuPage = $this->getPage(TopMenuPage::class);
         $topMenuPage->goToContacts();
         $contactsPage = $this->getPage(ContactsPage::class);
@@ -63,6 +70,17 @@ class IDMContext extends FeatureContext
     {
         $portalPage = $this->getPage(PortalPage::class);
         $portalPage->login($username, $password);
+    }
+
+    /**
+     * Login to portal with provided credentials
+     * @Then /^I accept use cookies in portal$/
+     */
+    public function acceptUseCookiesInPortal()
+    {
+        /** @var $portalPage PortalPage $portalPage */
+        $portalPage = $this->getPage(PortalPage::class);
+        $portalPage->acceptUseCookies();
     }
 
     /**
@@ -115,12 +133,14 @@ class IDMContext extends FeatureContext
      */
     public function deleteCreatedContacts($event)
     {
-        $contactName = $event->getScenario()->getTokens()['username'];
         $this->iLoggedInSugarCRMAsAdministrator();
         $topMenuPage = $this->getPage(TopMenuPage::class);
         $topMenuPage->goToContacts();
         $contactsPage = $this->getPage(ContactsPage::class);
-        $contactsPage->removeContact($contactName);
+        foreach ($this->portalUsers as $username) {
+            $contactsPage->removeContact($username);
+        }
+        $this->portalUsers = [];
         $topMenuPage->logout();
     }
 

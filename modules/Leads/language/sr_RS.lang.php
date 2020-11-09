@@ -322,4 +322,7 @@ After confirming each required and desired module, click the Save and Convert bu
     'LBL_FILTER_LEADS_REPORTS' => 'Vodeći izveštaji',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Pristanak u poslovne svrhe za',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Poslednje ažuriranje pristanka',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Nije moguće izmeniti status modul {{moduleSingular}}. Ovaj modul {{moduleSingular}} je već konvertovan.',
 );

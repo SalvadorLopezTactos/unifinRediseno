@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => '报价（运送到）',
 	'LNK_ACCOUNT_REPORTS' => '查看帐户报表',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => '文档',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => '帐户列表仪表板',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => '帐户记录仪表板',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => '账户详细信息',
+    'LBL_NEXT_RENEWAL_DATE' => '下一次续订的日期',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => '账户名称/行业',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => '地点',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => '图表',

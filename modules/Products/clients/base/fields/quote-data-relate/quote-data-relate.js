@@ -149,12 +149,17 @@
     },
 
     /**
-     * Overriding if there's no product_template_id or name, use the Products module and record ID
+     * Use the Products module and record ID to build route.
      *
      * @inheritdoc
      */
     _buildRoute: function() {
-        this.buildRoute(this.model.module, this.model.get('id'));
+        if (this.model.get('id') && app.acl.hasAccess('view', this.model.get('_module'))) {
+            this.href = '#' + app.router.buildRoute(this.model.get('_module'), this.model.get('id'));
+        } else {
+            // if no access to module, remove the href
+            this.href = undefined;
+        }
     },
 
     /**

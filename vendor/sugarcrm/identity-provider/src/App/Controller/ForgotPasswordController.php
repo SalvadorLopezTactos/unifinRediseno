@@ -61,7 +61,7 @@ class ForgotPasswordController
             ]);
         }
 
-        $app->getLogger()->info('Render forgot password form', [
+        $app->getLogger()->debug('Render forgot password form', [
             'params' => $params,
             'tags' => ['IdM.forgot'],
         ]);
@@ -132,12 +132,17 @@ class ForgotPasswordController
             $userApi = $app->getGrpcUserApi();
             $sendEmailRequest = new SendEmailForResetPasswordRequest();
             $sendEmailRequest->setName(Srn\Converter::toString($srn));
+            $sendEmailRequest->setLocale($app['locale']);
 
-            $app->getLogger()->info('Sending password-recovery email for {user_name} of tenant {tid}', [
-                'user_name' => $data['user_name'],
-                'tid' => $data['tid'],
-                'tags' => ['IdM.forgot'],
-            ]);
+            $app->getLogger()->info(
+                'Sending password-recovery email for {user_name} with SRN {user_srn} of tenant {tid}',
+                [
+                    'user_name' => $data['user_name'],
+                    'user_srn' => Srn\Converter::toString($srn),
+                    'tid' => $data['tid'],
+                    'tags' => ['IdM.forgot'],
+                ]
+            );
 
             [$response, $status] = $userApi->SendEmailForResetPassword($sendEmailRequest)->wait();
             $sent = $status && $status->code === 0;
@@ -155,9 +160,10 @@ class ForgotPasswordController
         } catch (\Exception $e) {
             $sent = false;
             $app->getLogger()->error(
-                'Error while sending password-recovery email for {user_name} of tenant {tid}',
+                'Error while sending password-recovery email for {user_name} with SRN {user_srn} of tenant {tid}',
                 [
                     'user_name' => $data['user_name'],
+                    'user_srn' => isset($srn) ? Srn\Converter::toString($srn) : 'unknown',
                     'tid' => $data['tid'],
                     'exception' => $e->getMessage(),
                     'tags' => ['IdM.forgot'],
@@ -199,12 +205,18 @@ class ForgotPasswordController
     /**
      * Get local user provider
      *
+     * @param Application $app
      * @param string $tenantId
      * @return LocalUserProvider
      */
     protected function getUserProvider(Application $app, string $tenantId): LocalUserProvider
     {
-        return new LocalUserProvider($app->getDoctrineService(), $tenantId);
+        return new LocalUserProvider(
+            $app->getDoctrineService(),
+            $tenantId,
+            $app->getOAuth2Service()->getClientID(),
+            $app->getAudit()
+        );
     }
 
     /**

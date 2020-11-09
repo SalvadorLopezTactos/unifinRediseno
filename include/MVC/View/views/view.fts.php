@@ -24,12 +24,12 @@ class ViewFts extends SugarView
 
         if($this->fullView)
         {
-            $this->options = array('show_title'=> true,'show_header'=> true,'show_footer'=> true,'show_javascript'=> true,'show_subpanels'=> false,'show_search'=> false);
+            $this->options = array('show_title'=> true,'show_header'=> true,'show_javascript'=> true,'show_subpanels'=> false,'show_search'=> false);
             $this->templateName = 'fts_full.tpl';
         }
         else
         {
-            $this->options = array('show_title'=> false,'show_header'=> false,'show_footer'=> false,'show_javascript'=> false,'show_subpanels'=> false,'show_search'=> false);
+            $this->options = array('show_title'=> false,'show_header'=> false,'show_javascript'=> false,'show_subpanels'=> false,'show_search'=> false);
             $this->templateName = 'fts_spot.tpl';
         }
         parent::__construct();

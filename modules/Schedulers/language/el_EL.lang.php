@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Δημοσιεύστε τα εγκεκριμένα άρθρα και τα ληγμένα άρθρα KB.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Χρονοπρογραμματισμένη Εργασία',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Αναδόμηση απομαλοποιημένων δεδομένων ασφαλείας ομάδας',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Καθαριστής ροής δραστηριότητας',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Διάστημα:',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Εκτελέστε αποστολή υπενθύμισης μέσω ηλεκτρονικού ταχυδρομείου',
 'LBL_CLEANJOBQUEUE' => '<b>Εκκαθάριση Εργασιών Ουράς Αναμονής</b>',
 'LBL_CLEANOLDRECORDLISTS' => 'Εκκαθάριση Λιστών Παλαιών Εγγραφών',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Καθαριστής ροής δραστηριότητας',
 'LBL_PMSEENGINECRON' => 'Χρονοδιάγραμμα SugarBPM',
 );
 

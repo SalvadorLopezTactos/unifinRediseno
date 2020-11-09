@@ -311,4 +311,7 @@ För att skapa en {{module_name}}:
     'LBL_FILTER_LEADS_REPORTS' => 'Leads&#39; rapporter',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Affärsändamål som samtyckts till',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Samtycke uppdaterades senast',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Kunde inte ändra status för {{moduleSingular}}. Denna {{moduleSingular}} har redan konverterats.',
 );

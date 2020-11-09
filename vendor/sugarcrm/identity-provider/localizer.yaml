@@ -1,0 +1,33 @@
+# Environment variable keys whose values are used to perform API calls, uploads, etc.
+envNames:
+  - github_user: "GITHUB_USERNAME"
+    github_password: "GITHUB_PASSWORD"
+    # Access token will be preferred over password if set
+    github_access_token: "GITHUB_ACCESS_TOKEN"
+
+# Repository's web location
+repositoryUrl: "https://github.com/sugarcrm/IdentityProvider"
+
+# Global flag to determine if sources should be uploaded to Crowdin.
+skipUpload: false
+
+# Globally defined message for commit
+commitMessage: "[TRANSLATIONS]: Add translations"
+
+# Global settings for pull-requesting new translation files
+pullRequest:
+  pushBranch: "master-translations"
+  targetBranch: "master"
+  title: "IDM-1147: Add translations for Login service"
+  body: "Some new translated files to be merged. Please review."
+  labels:
+    - "translations"
+  assignees:
+    - "kolotaev"
+  reviewers:
+    - "alex-vlasov"
+    - "ddolbik"
+    - "afedyk-sugarcrm"
+
+projects:
+  - name: "Identity Provider"

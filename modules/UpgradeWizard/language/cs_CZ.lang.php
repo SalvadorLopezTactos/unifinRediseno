@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'Lze odinstalovat',
     'LBL_ML_VERSION' => 'Verze',
 	'LBL_ML_INSTALL'=>'Instal',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'Traker',
 	'LBL_MODULE_NAME' => 'Upgrade Wizard',
 	'LBL_MODULE_NAME_SINGULAR' => 'Upgrade Wizard',
 	'LBL_UPLOAD_SUCCESS' => 'Balíček upgrade byl úspěšně nahrán. Vyber "Další" pro provedení poslední kontroly.',

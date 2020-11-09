@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => 'Prikaži proizvođače',
   'LNK_NEW_PRODUCT_CATEGORY' => 'Prikaži kategorije proizvoda',
   'LNK_NEW_PRODUCT_TYPE' => 'Prikaži vrste proizvoda',
-  'LNK_NEW_PRODUCT' => 'Stvori proizvod za katalog',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => 'Pružatelji usluge dostave',
   'LNK_PRODUCT_LIST' => 'Prikaži katalog proizvoda',
   'NTC_DELETE_CONFIRMATION' => 'Jeste li sigurni da želite izbrisati ovaj zapis?',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => 'Kategorije proizvoda',
   'LBL_MANUFACTURERS' => 'Proizvođači',
   'LBL_PRODUCT_TYPES' => 'Vrste proizvoda',
-
+  'LBL_RENEWABLE' => 'Može se obnoviti',
+  'LBL_SERVICE' => 'Usluga',
 );
-
-
-?>

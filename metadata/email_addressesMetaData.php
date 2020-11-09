@@ -288,6 +288,15 @@ $dictionary['email_addr_bean_rel'] = array(
                 'bean_module',
             ),
         ),
+        array(
+            'name' => 'idx_email_address_bean',
+            'type' => 'index',
+            'fields' => array(
+                'email_address_id',
+                'bean_module',
+                'bean_id',
+            ),
+        ),
     ),
     'relationships' => array(
     ),

@@ -7,7 +7,7 @@
 #
 # Copyright (C) SugarCRM Inc. All rights reserved.
 
-FROM php:7.2-apache-stretch
+FROM php:7.3-apache-stretch
 
 RUN apt-get update && apt-get install -y \
         zlib1g-dev \
@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
         libsasl2-dev \
         libgmp-dev \
         unzip \
+        libyaml-dev \
         libaio1 \
         --no-install-recommends \
     && ln -fs /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/ \
@@ -27,9 +28,11 @@ RUN apt-get update && apt-get install -y \
     && pecl install apcu \
     && pecl install apcu_bc \
     && pecl install grpc \
+    && pecl install yaml \
     && docker-php-ext-enable apcu --ini-name 10-docker-php-ext-apcu.ini \
     && docker-php-ext-enable apc --ini-name 20-docker-php-ext-apc.ini \
     && docker-php-ext-enable grpc \
+    && docker-php-ext-enable yaml \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o \
     APT::AutoRemove::SuggestsImportant=false
 

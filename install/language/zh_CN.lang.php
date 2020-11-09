@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -59,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => '在兼容性检查过程中发现错误。为了确保您的SugarCRM可以正常工作，请采取正确步骤解决下列问题或者单击再次检查按钮或再次执行安装。',
     'ERR_CHECKSYS_CALL_TIME'            => 'Allow Call Time Pass Reference是开启的(php.ini中的这个选项应设置为关闭的)',
 
-	'ERR_CHECKSYS_CURL'					=> '未找到：Sugar 工作计划可以使用的功能有限。电子邮件归档服务将无法使用。',
+	'ERR_CHECKSYS_CURL'					=> '未找到：Sugar Scheduler 将运行，但功能受限。“电子邮件归档”服务将不会运行。',
     'ERR_CHECKSYS_IMAP'					=> '未找到：接收邮件以及市场活动（邮件）需要IMAP库。否则不能正常工作。',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> '若使用MS SQL服务器，Magic Quotes GPC不可设置为"On"。',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> '警告：',
@@ -75,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => '为了获得IIS/FastCGI sapi的最佳效果，请在您的php.ini文件中设置fastcgi.logging为0。',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> '不支持当前PHP版本：（版本',
     'LBL_DB_UNAVAILABLE'                => '数据库不可用',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '未找到数据库支持。请确保您已为所支持的以下任一数据库类型安装所需的驱动程序：MySQL、MS SQLServer、Oracle，或 DB2。您可能需要移除 php.ini 文件中有关扩展的注释，或使用正确的二进制文件重新编译，具体视您的 PHP 版本而定。更多关于如何启用数据库支持的信息，请参考您的 PHP 手册。',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '未找到数据库支持。请确保您拥有下列受支持数据库类型之一所需的驱动程序：MySQL、MS SQLServer、Oracle 或 DB2。您可能需要在 php.ini 文件中取消批注扩展名，或使用正确的二进制文件重新编译，具体取决于您的 PHP 版本。请参阅您的 PHP 手册以获取有关如何启用数据库支持的更多信息。',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => '找不到Sugar应用程序需要的XML解析库功能。您可能要移除php.ini文件中有关扩展的注释，或重新编译正确的二进制文件，具体视您的PHP版本而定。欲知详情，请参考您的PHP手册。',
     'LBL_CHECKSYS_CSPRNG' => '随机数字生成器',
     'ERR_CHECKSYS_MBSTRING'             => '找不到Sugar应用程序需要的多字节字符串扩展(mbstring)功能。<br/><br/>一般来说，PHP默认不启用mbstring模块并且必须使用PHP自建的库--enable-mbstring来启动。欲知详情，请参考您的PHP手册。',
@@ -491,6 +490,142 @@ SugarCRM兼容版本：<br>
 	'LBL_PATCH_UPLOAD' => '从本地计算机上选择一个补丁文件',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => '已打开 PHP 向下兼容模式。设置 zend.ze1_compatibility_mode 至 OFF 来继续',
 
+    'meeting_notification_email' => array(
+        'name' => 'Meeting Notifications Emails',
+        'subject' => 'SugarCRM Meeting - $event_name ',
+        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'body' => '<div>
+	<p>To: $assigned_user</p>
+
+	<p>$assigned_by_user has invited you to a Meeting</p>
+
+	<p>Subject: $event_name<br/>
+	Start Date: $start_date<br/>
+	End Date: $end_date</p>
+
+	<p>Description: $description</p>
+
+	<p>Accept this meeting:<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Tentatively Accept this meeting:<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Decline this meeting:<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'To: $assigned_user
+
+$assigned_by_user has invited you to a Meeting
+
+Subject: $event_name
+Start Date: $start_date
+End Date: $end_date
+
+Description: $description
+
+Accept this meeting:
+<$accept_link>
+
+Tentatively Accept this meeting
+<$tentative_link>
+
+Decline this meeting
+<$decline_link>',
+    ),
+
+    'call_notification_email' => array(
+        'name' => 'Call Notifications Emails',
+        'subject' => 'SugarCRM Call - $event_name ',
+        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'body' => '<div>
+	<p>To: $assigned_user</p>
+
+	<p>$assigned_by_user has invited you to a Call</p>
+
+	<p>Subject: $event_name<br/>
+	Start Date: $start_date<br/>
+	Duration: $hoursh, $minutesm</p>
+
+	<p>Description: $description</p>
+
+	<p>Accept this call:<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Tentatively Accept this call:<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Decline this call:<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'To: $assigned_user
+
+$assigned_by_user has invited you to a Call
+
+Subject: $event_name
+Start Date: $start_date
+Duration: $hoursh, $minutesm
+
+Description: $description
+
+Accept this call:
+<$accept_link>
+
+Tentatively Accept this call
+<$tentative_link>
+
+Decline this call
+<$decline_link>',
+    ),
+
+    'assigned_notification_email' => array(
+        'name' => 'Assignment Notification Emails',
+        'subject' => 'SugarCRM - Assigned $module_name ',
+        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'body' => '<div>
+<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+
+<p>You may review this&nbsp;$module_name at:<br/>
+	<<a href="$module_link">$module_link</a>></p>
+</div>',
+        'txt_body' =>
+            '$assigned_by_user has assigned a $module_name to $assigned_user.
+
+You may review this $module_name at:
+<$module_link>',
+    ),
+
+    'scheduled_report_email' => array(
+        'name' => 'Scheduled Report Emails',
+        'subject' => 'Scheduled Report: $report_name as of $report_time',
+        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'body' => '<div>
+<p>Hello $assigned_user,</p>
+<p>Attached is an auto generated report that has been scheduled for you.</p>
+<p>Report Name: $report_name</p>
+<p>Report Run Date and Time: $report_time</p>
+</div>',
+        'txt_body' =>
+            'Hello $assigned_user,
+
+Attached is an auto generated report that has been scheduled for you.
+
+Report Name: $report_name
+
+Report Run Date and Time: $report_time',
+    ),
+
+    'comment_log_mention_email' => [
+        'name' => 'System Comment Log Email Notification',
+        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
+        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'body' =>
+            '<div>
+                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
+                <p>Please log in to Sugar to view the comment.</p>
+            </div>',
+        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
+            Please log in to Sugar to view the comment.',
+    ],
+
     'advanced_password_new_account_email' => array(
         'subject' => '新帐户信息',
         'description' => '这个模板是管理员用来发送新密码给用户的。',
@@ -513,4 +648,32 @@ $config_site_url
 您最近在 $contact_user_pwd_last_changed上要求重置您帐户的密码。点击下面的链接来重置您的密码：$contact_user_link_guid',
         'name' => '忘记密码邮件',
         ),
+
+'portal_forgot_password_email_link' => [
+    'name' => '门户忘记密码电子邮件',
+    'subject' => '重设您的账户密码',
+    'description' => '这个模板用于给用户提供一个链接，点击即可重设门户用户的账户密码。',
+    'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>您已请求重设账户密码。</p><p>点击以下链接以重设您的密码：</p><p> <a href="$portal_user_link_guid">$portal_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+    'txt_body' =>
+'
+    您已请求重设账户密码。
+
+    点击以下链接以重设密码：
+
+    $portal_user_link_guid',
+],
+
+    'portal_password_reset_confirmation_email' => [
+        'name' => '门户密码重设确认电子邮件',
+        'subject' => '您的账户密码已重设',
+        'description' => '此模板用于向门户用户发送确认，告知其账户密码已重设。',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>此电子邮件用于确认您的门户账户密码已重设</p><p>使用以下链接登录门户：</p><p> <a href="$portal_login_url">$portal_login_url</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+        'txt_body' =>
+            '
+    此电子邮件用于确认您的门户账户密码已重设。
+
+    使用以下链接登录门户：
+
+    $portal_login_url',
+    ],
 );

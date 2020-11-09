@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Tableau de bord de la liste de contacts',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Tableau de bord de l&#39;enregistrement de contacts',
-
+    'LBL_SITE_USER_ID' => 'Hash du site_url et Id contact',
+    'LBL_COOKIE_CONSENT' => 'Consentement aux cookies',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Consentement aux cookies reçu le',
     'LNK_CONTACT_REPORTS' => 'Rapports sur Contact',
     'ERR_DELETE_RECORD' => 'Un ID doit être spécifié pour toute suppression.',
     'LBL_ACCOUNT_ID' => 'Compte (ID) :',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Information sur le Portail',
     'LBL_PORTAL_NAME' => 'Nom sur le portail :',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Le mot de passe du portail est enregistré :',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Nom d&#39;entreprise de l&#39;utilisateur du portail',
     'LBL_RECORD_SAVED_SUCCESS' => 'Vous avez créé l&#39;enregistrement {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Rue',
     'LBL_POSTAL_CODE' => 'Code Postal :',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Affaires',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documents',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Devis',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Devis (livré à)',
     'LBL_QUOTES_BILL_TO' => 'Devis (facturé à)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Lignes de devis',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Cliquez ici pour éditer votre profil.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Vous pouvez paramétrer ici vos préférences liées à la localisation. Cela changera la langue utilisée par le portail Sugar.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Vous pouvez accéder à tout moment à votre profile en utilisant le menu utilisateur.',
+    'ERR_PORTAL_NAME_EXISTS' => 'Le nom du portail {0} existe déjà. Les noms de portail en double ne sont pas autorisés. Modifiez le nom du portail pour qu&#39;il soit unique.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'ID principal D&B',
@@ -279,4 +284,8 @@ Pour créer un enregistrement {{module_name}}, les étapes suivantes sont néces
     'LBL_FILTER_CONTACTS_REPORTS' => 'Rapports sur les contacts',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Objectifs commerciaux auxquels un consentement a été donné',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Dernière mise à jour de consentement',
+
+    'LBL_ENTRY_SOURCE' => 'Source Contact',
+    'LBL_SOURCE_EXTERNAL' => 'Externe',
+    'LBL_SOURCE_INTERNAL' => 'Interne',
 );

@@ -107,7 +107,8 @@ class OnAuthLockoutSubscriberTest extends \PHPUnit_Framework_TestCase
                 $this->lockout,
                 $this->dbConnection,
                 $this->session,
-                $this->logger
+                $this->logger,
+                'some-application-srn'
             ])
             ->getMock();
         $this->subscriber->method('getLocalUserProvider')->willReturn($this->userProvider);

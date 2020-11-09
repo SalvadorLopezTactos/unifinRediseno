@@ -94,6 +94,28 @@ class UpgradeHistory extends SugarBean
     }
 
     /**
+     * return unserialized and decoded package patch
+     * @return array
+     */
+    public function getPackagePatch(): array
+    {
+        $packagePatch = [];
+        if (!empty($this->patch)) {
+            $packagePatch = unserialize(base64_decode($this->patch));
+        }
+        return $packagePatch;
+    }
+
+    /**
+     * is package enabled?
+     * @return bool
+     */
+    public function isPackageEnabled(): bool
+    {
+        return intval($this->enabled) === 1;
+    }
+
+    /**
      * Check if this is an upgrade, if it is then return the latest version before this installation
      */
     public function determineIfUpgrade($id_name, $version)
@@ -252,12 +274,15 @@ class UpgradeHistory extends SugarBean
     function checkDependencies($dependencies = array()){
         $not_found = array();
         foreach($dependencies as $dependent){
+            if (empty($dependent['id_name']) || empty($dependent['version'])) {
+                continue;
+            }
             $found = false;
-            $query = "SELECT id FROM $this->table_name WHERE id_name = '".$dependent['id_name']."'";
+            $query = "SELECT id FROM $this->table_name WHERE id_name = " . $this->db->quoted($dependent['id_name']);
             $matches = $this->getList($query);
             if(0 != sizeof($matches)){
                 foreach($matches as $match){
-                    if($this->is_right_version_greater(explode('.', $match->version), explode('.', $dependent['version']))){
+                    if (version_compare($match->version, $dependent['version'], '>=')) {
                         $found = true;
                         break;
                     }//fi

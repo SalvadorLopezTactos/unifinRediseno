@@ -71,6 +71,43 @@ class SugarEmailAddress extends SugarBean
     }
 
     /**
+     * Returns the IDs of employees with the email address matching the given ID.
+     *
+     * The employees may or may not be actual users.
+     *
+     * @param string $emailAddressId
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public static function getEmployeesWithEmailAddress(string $emailAddressId)
+    {
+        $ids = [];
+
+        if (empty($emailAddressId)) {
+            return $ids;
+        }
+
+        $conn = DBManagerFactory::getInstance()->getConnection();
+        $sql = 'SELECT u.id FROM users u' .
+            ' INNER JOIN email_addr_bean_rel eabr ON eabr.bean_id = u.id' .
+            ' INNER JOIN email_addresses ea ON ea.id = eabr.email_address_id' .
+            ' WHERE ea.id = ? AND (eabr.bean_module = ? OR eabr.bean_module = ?) AND u.deleted = 0' .
+            ' AND ea.deleted = 0 AND eabr.deleted = 0';
+        $args = [
+            $emailAddressId,
+            'Users',
+            'Employees',
+        ];
+        $stmt = $conn->executeQuery($sql, $args);
+
+        while ($row = $stmt->fetch()) {
+            $ids[] = $row['id'];
+        }
+
+        return $ids;
+    }
+
+    /**
      * Gets a hashed string representation of an addresses array. This is used in
      * {@see handleLegacySave} for comparison of various address collections to
      * determine which one needs to be saved.
@@ -545,7 +582,6 @@ class SugarEmailAddress extends SugarBean
         $primaryValue = $primary;
         $widgetCount = 0;
         $hasEmailValue = false;
-        $email_ids = array();
 
         if (isset($_REQUEST) && isset($_REQUEST[$module . '_email_widget_id'])) {
 
@@ -619,14 +655,6 @@ class SugarEmailAddress extends SugarBean
                         }
                     }
                 }
-                if($fromRequest && empty($email_ids)) {
-                    foreach($_REQUEST as $k => $v) {
-                        if(preg_match('/'.$eId.'emailAddressId[0-9]+$/i', $k) && !empty($v)) {
-                            $key = str_replace('emailAddressId', 'emailAddress', $k);
-                            $email_ids[$key] = $v;
-                        }
-                    }
-                }
 
                 if ($fromRequest && empty($new_addrs)) {
                     foreach ($_REQUEST as $k => $v) {
@@ -670,12 +698,11 @@ class SugarEmailAddress extends SugarBean
 
                         if(strpos($k, 'emailAddress') !== false) {
                             if(!empty($reqVar) && !in_array($k, $deleteValues)) {
-                                $email_id   = (array_key_exists($k, $email_ids)) ? $email_ids[$k] : null;
                                 $primary    = ($k == $primaryValue) ? true : false;
                                 $replyTo    = ($k == $replyToField) ? true : false;
                                 $invalid    = (in_array($k, $invalidValues)) ? true : false;
                                 $optOut     = (in_array($k, $optOutValues)) ? true : false;
-                                $this->addAddress(trim($new_addrs[$k]), $primary, $replyTo, $invalid, $optOut, $email_id);
+                                $this->addAddress(trim($new_addrs[$k]), $primary, $replyTo, $invalid, $optOut);
                             }
                         }
                     } //foreach
@@ -694,6 +721,15 @@ class SugarEmailAddress extends SugarBean
 
     /**
      * Add new or update existing email address
+     *
+     * Use `null` for `$email_id` unless you want to force a change to the address. For example, changing
+     * `salez@sugarcrm.com` to `sales@sugarcrm.com`. Keep in mind, however, that this will change the email address for
+     * all records that use it, which is desirable in cases like an Erasure flow. `null` is the safest value because
+     * the ID will be loaded for the value `$addr` before the email address is mutated. If only the properties of the
+     * email address are changing (e.g., invalid_email, opt_out), then address can be mutated. If the email address
+     * itself is to be changed, then a new ID will be generated so the mutations only affect the email address that
+     * matches `$addr`.
+     *
      * @param string $addr Email address
      * @param bool $primary Default false
      * @param bool $replyTo Default false
@@ -722,7 +758,7 @@ class SugarEmailAddress extends SugarBean
 
         $key = false;
         foreach ($this->addresses as $k => $address) {
-            if ($address['email_address'] == $addr) {
+            if (strtoupper($address['email_address']) === strtoupper($new_address['email_address'])) {
                 $key = $k;
 
                 $diffCount = array_diff_assoc($new_address, $address);

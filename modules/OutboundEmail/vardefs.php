@@ -219,6 +219,11 @@ $dictionary['OutboundEmail'] = [
             'type' => 'index',
             'fields' => ['id', 'user_id'],
         ],
+        [
+            'name' => 'oe_type_idx',
+            'type' => 'index',
+            'fields' => ['type'],
+        ],
     ],
     'relationships' => [
         'outbound_email_email_addresses' => [

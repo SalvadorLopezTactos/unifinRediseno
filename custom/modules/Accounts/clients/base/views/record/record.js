@@ -289,7 +289,6 @@
         this.model.addValidationTask('FleetUP', _.bind(this.requeridosFleetUP, this));
         this.model.addValidationTask('UniclickUP', _.bind(this.requeridosUniclickUP, this));
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
-
     },
 
     /** Asignacion modal */
@@ -643,7 +642,7 @@
 
     fulminantcolor: function () {
         $('#space').remove();
-        $('.search-filter').find('.control-group').before('<div id="space" style="background-color:#000042"><br></div>');
+        $('.search-filter').find('.control-group').before('<div id="space" style="background-color:#021741"><br></div>');
         // $('.control-group').css("background-color", "#e5e5e5");
         // $('.a11y-wrapper').css("background-color", "#e5e5e5");
         //$('.a11y-wrapper').css("background-color", "#c6d9ff");
@@ -1116,6 +1115,8 @@
         this.$("div[data-name='sectoreconomico_c']").hide();
         this.$("div[data-name='subsectoreconomico_c']").hide();
         this.$("div[data-name='actividadeconomica_c']").hide();
+        this.$(".record-cell[data-name='blank_space']").hide();
+
 
     },
 
@@ -1860,6 +1861,9 @@
         // this.context.on('button:save_button:click', this.borraTel, this);
         //this.context.on('button:prospecto_contactado:click',this.validaContactado, this);  //se añade validación para validar campos al convertir prospecto contactado.
         this.context.on('button:convierte_lead:click', this.validalead, this);
+        this.context.on('button:dynamics_button:click', this.requestDynamics, this);
+
+
     },
 
     /*
@@ -2629,6 +2633,50 @@
         }
     },
 
+    requestDynamics:function(){
+        //Valida que sea proveedor
+        var tipo_cuenta=this.model.get('tipo_registro_cuenta_c');
+        var proveedor=this.model.get('esproveedor_c');
+        var cedente=this.model.get('cedente_factor_c');
+        var deudor=this.model.get('deudor_factor_c');
+        if (tipo_cuenta =='5' || proveedor || cedente || deudor) {
+            var self=this;
+            var body={
+                "accion":this.model.get('id')
+            }
+            app.alert.show('infoDynamics', {
+                level: 'process',
+                closeable: false,
+                messages: app.lang.get('LBL_LOADING'),
+            });
+            //Consumir servicio de OTP
+            app.api.call('create', app.api.buildURL("Dynamics365"), body, {
+                success: _.bind(function (data) {
+                    app.alert.dismiss('infoDynamics');
+                    if(data !=null){
+                        self.model.set('control_dynamics_365_c',data);
+                    }
+                }, this),
+                error: _.bind(function (response) {
+                    app.alert.dismiss('infoDynamics');
+                    app.alert.show('error_otp', {
+                        level: 'error',
+                        messages: response.textStatus+'\n"Error al enviar información hacia Dynamics 365"',
+                        autoClose: true
+                    });
+
+                },this)
+            });
+        }else {
+            app.alert.show('no_envia_dynamics', {
+                level: 'warning',
+                messages: 'La cuenta no cumple con los criterios de Proveedor para enviar a Dynamics 365',
+                autoClose: true
+            });
+        }
+
+    },
+
 
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono RECORD*/
     _doValidateEmailTelefono: function (fields, errors, callback) {
@@ -3257,7 +3305,7 @@
         //Validacion Actividad Economica - antes macro sector
         if (($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "") && (this.model.get('tipo_registro_cuenta_c') == '3' || this.model.get('tipo_registro_cuenta_c') == '5'
             || this.model.get('esproveedor_c') == true || this.model.get('subtipo_registro_cuenta_c') == '7' || this.model.get('subtipo_registro_cuenta_c') == '8' || this.model.get('subtipo_registro_cuenta_c') == '9')) {
-            
+
             $('.campoAE').find('.record-label').css('color', 'red');
             $('.list_ae').find('.select2-choice').css('border-color', 'red');
             errors['actividadeconomica_c'] = "Error: Favor de verificar los errores";
@@ -5341,7 +5389,7 @@
         //Extiende This
         cont_uni_p = this;
         Productos = [];
-        //Facha Actual 
+        //Facha Actual
         var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth() + 1;
@@ -5363,6 +5411,7 @@
                     Productos[key]['visible_noviable'] = (Productos[key]['visible_noviable'] != "0") ? true : false;
                     Productos[key]['no_viable'] = (Productos[key]['no_viable'] != "0") ? true : false;
                     Productos[key]['multilinea_c'] = (Productos[key]['multilinea_c'] == "1") ? true : false;
+                    Productos[key]['exclu_precalif_c'] = (Productos[key]['exclu_precalif_c'] == "1") ? true : false;
 
                     switch (tipoProducto) {
                         case "1": //Leasing
@@ -5433,19 +5482,25 @@
     requeridosLeasingUP: function (fields, errors, callback) {
         var faltantesleasup = 0;
         if ($('.chk_l_nv')[0] != undefined) {
-            if ($('.chk_l_nv')[0].checked && ($('.list_l_nv_razon').select2('val') == "" || $('.list_l_nv_razon').select2('val') == "0")) {
+            if ($('.chk_l_nv')[0].checked && ($('.list_l_nv_razon').select2('val') == "" || $('.list_l_nv_razon').select2('val') == null || $('.list_l_nv_razon').select2('val') == "0")) {
                 $('.list_l_nv_razon').find('.select2-choice').css('border-color', 'red'); //Razón de Lead no viable
                 faltantesleasup += 1;
             }
-            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "1" && ($('.list_l_nv_razon_fp').select2('val') == "" || $('.list_l_nv_razon_fp').select2('val') == "0")) {
+            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "1" && 
+            ($('.list_l_nv_razon_fp').select2('val') == "" || $('.list_l_nv_razon_fp').select2('val') == null || $('.list_l_nv_razon_fp').select2('val') == "0")) {
+
                 $('.list_l_nv_razon_fp').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantesleasup += 1;
             }
-            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "2" && ($('.list_l_nv_razon_cf').select2('val') == "" || $('.list_l_nv_razon_cf').select2('val') == "0")) {
+            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "2" && 
+            ($('.list_l_nv_razon_cf').select2('val') == "" || $('.list_l_nv_razon_cf').select2('val') == null || $('.list_l_nv_razon_cf').select2('val') == "0")) {
+            
                 $('.list_l_nv_razon_cf').find('.select2-choice').css('border-color', 'red'); //Condiciones Financieras
                 faltantesleasup += 1;
             }
-            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "7" && ($('.list_l_nv_razon_ni').select2('val') == "" || $('.list_l_nv_razon_ni').select2('val') == "0")) {
+            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "7" && 
+            ($('.list_l_nv_razon_ni').select2('val') == "" || $('.list_l_nv_razon_ni').select2('val') == null || $('.list_l_nv_razon_ni').select2('val') == "0")) {
+            
                 $('.list_l_nv_razon_ni').find('.select2-choice').css('border-color', 'red'); //Razón No se encuentra interesado
                 faltantesleasup += 1;
             }
@@ -5462,11 +5517,16 @@
                 $('.txt_l_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
                 faltantesleasup += 1;
             }
-            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "4" && ($('.list_l_nv_producto').select2('val') == "" || $('.list_l_nv_producto').select2('val') == "0")) {
+            if ($('.chk_l_nv')[0].checked == true && $('.list_l_nv_razon').select2('val') == "4" && 
+            ($('.list_l_nv_producto').select2('val') == "" || $('.list_l_nv_producto').select2('val') == null || $('.list_l_nv_producto').select2('val') == "0")) {
+            
                 $('.list_l_nv_producto').find('.select2-choice').css('border-color', 'red'); //¿Qué producto?
                 faltantesleasup += 1;
             }
-            if (($('.list_l_nv_razon').select2('val') == "4" || $('.list_l_nv_razon option:selected').text() == "4" || $('.list_l_nv_razon')[0].innerText.trim() == "4") && ($('.list_l_nv_producto').select2('val') == "4" || $('.list_l_nv_producto option:selected').text() == "4" || $('.list_l_nv_producto')[0].innerText.trim() == "4") && $('.chk_l_nv')[0].checked && $('.txt_l_nv_otro').val().trim() == "") {
+            if (($('.list_l_nv_razon').select2('val') == "4" || $('.list_l_nv_razon option:selected').text() == "4" || $('.list_l_nv_razon')[0].innerText.trim() == "4") && 
+            ($('.list_l_nv_producto').select2('val') == "4" || $('.list_l_nv_producto option:selected').text() == "4" || $('.list_l_nv_producto')[0].innerText.trim() == "4") && 
+            $('.chk_l_nv')[0].checked && $('.txt_l_nv_otro').val().trim() == "") {
+            
                 $('.txt_l_nv_otro').css('border-color', 'red'); //TXT ¿Qué producto?
                 faltantesleasup += 1;
             }
@@ -5491,19 +5551,25 @@
     requeridosFactorajeUP: function (fields, errors, callback) {
         var faltantesFactorajeUP = 0;
         if ($('.chk_f_nv')[0] != undefined) {
-            if ($('.chk_f_nv')[0].checked && ($('.list_f_nv_razon').select2('val') == "" || $('.list_f_nv_razon').select2('val') == "0")) {
+            if ($('.chk_f_nv')[0].checked && ($('.list_f_nv_razon').select2('val') == "" || $('.list_f_nv_razon').select2('val') == null || $('.list_f_nv_razon').select2('val') == "0")) {
                 $('.list_f_nv_razon').find('.select2-choice').css('border-color', 'red'); //Razón de Lead no viable
                 faltantesFactorajeUP += 1;
             }
-            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "1" && ($('.list_f_nv_razon_fp').select2('val') == "" || $('.list_f_nv_razon_fp').select2('val') == "0")) {
+            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "1" && 
+            ($('.list_f_nv_razon_fp').select2('val') == "" || $('.list_f_nv_razon_fp').select2('val') == null || $('.list_f_nv_razon_fp').select2('val') == "0")) {
+            
                 $('.list_f_nv_razon_fp').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantesFactorajeUP += 1;
             }
-            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "2" && ($('.list_f_nv_razon_cf').select2('val') == "" || $('.list_f_nv_razon_cf').select2('val') == "0")) {
+            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "2" && 
+            ($('.list_f_nv_razon_cf').select2('val') == "" || $('.list_f_nv_razon_cf').select2('val') == null || $('.list_f_nv_razon_cf').select2('val') == "0")) {
+            
                 $('.list_f_nv_razon_cf').find('.select2-choice').css('border-color', 'red'); //Condiciones Financieras
                 faltantesFactorajeUP += 1;
             }
-            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "7" && ($('.list_f_nv_razon_ni').select2('val') == "" || $('.list_f_nv_razon_ni').select2('val') == "0")) {
+            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "7" && 
+            ($('.list_f_nv_razon_ni').select2('val') == "" || $('.list_f_nv_razon_ni').select2('val') == null || $('.list_f_nv_razon_ni').select2('val') == "0")) {
+            
                 $('.list_f_nv_razon_ni').find('.select2-choice').css('border-color', 'red'); //Razón No se encuentra interesado
                 faltantesFactorajeUP += 1;
             }
@@ -5520,11 +5586,16 @@
                 $('.txt_f_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
                 faltantesFactorajeUP += 1;
             }
-            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "4" && ($('.list_f_nv_producto').select2('val') == "" || $('.list_f_nv_producto').select2('val') == "0")) {
+            if ($('.chk_f_nv')[0].checked == true && $('.list_f_nv_razon').select2('val') == "4" && 
+            ($('.list_f_nv_producto').select2('val') == "" || $('.list_f_nv_producto').select2('val') == null || $('.list_f_nv_producto').select2('val') == "0")) {
+            
                 $('.list_f_nv_producto').find('.select2-choice').css('border-color', 'red'); //¿Qué producto?
                 faltantesFactorajeUP += 1;
             }
-            if (($('.list_f_nv_razon').select2('val') == "4" || $('.list_f_nv_razon option:selected').text() == "4" || $('.list_f_nv_razon')[0].innerText.trim() == "4") && ($('.list_f_nv_producto').select2('val') == "4" || $('.list_f_nv_producto option:selected').text() == "4" || $('.list_f_nv_producto')[0].innerText.trim() == "4") && $('.chk_f_nv')[0].checked && $('.txt_f_nv_otro').val().trim() == "") {
+            if (($('.list_f_nv_razon').select2('val') == "4" || $('.list_f_nv_razon option:selected').text() == "4" || $('.list_f_nv_razon')[0].innerText.trim() == "4") && 
+            ($('.list_f_nv_producto').select2('val') == "4" || $('.list_f_nv_producto option:selected').text() == "4" || $('.list_f_nv_producto')[0].innerText.trim() == "4") && 
+            $('.chk_f_nv')[0].checked && $('.txt_f_nv_otro').val().trim() == "") {
+            
                 $('.txt_f_nv_otro').css('border-color', 'red'); //TXT ¿Qué producto?
                 faltantesFactorajeUP += 1;
             }
@@ -5549,19 +5620,25 @@
     requeridosCAUP: function (fields, errors, callback) {
         var faltantesCAUP = 0;
         if ($('.chk_ca_nv')[0] != undefined) {
-            if ($('.chk_ca_nv')[0].checked && ($('.list_ca_nv_razon').select2('val') == "" || $('.list_ca_nv_razon').select2('val') == "0")) {
+            if ($('.chk_ca_nv')[0].checked && ($('.list_ca_nv_razon').select2('val') == "" || $('.list_ca_nv_razon').select2('val') == null || $('.list_ca_nv_razon').select2('val') == "0")) {
                 $('.list_ca_nv_razon').find('.select2-choice').css('border-color', 'red'); //Razón de Lead no viable
                 faltantesCAUP += 1;
             }
-            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "1" && ($('.list_ca_nv_razon_fp').select2('val') == "" || $('.list_ca_nv_razon_fp').select2('val') == "0")) {
+            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "1" && 
+            ($('.list_ca_nv_razon_fp').select2('val') == "" || $('.list_ca_nv_razon_fp').select2('val') == null || $('.list_ca_nv_razon_fp').select2('val') == "0")) {
+            
                 $('.list_ca_nv_razon_fp').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantesCAUP += 1;
             }
-            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "2" && ($('.list_ca_nv_razon_cf').select2('val') == "" || $('.list_ca_nv_razon_cf').select2('val') == "0")) {
+            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "2" && 
+            ($('.list_ca_nv_razon_cf').select2('val') == "" || $('.list_ca_nv_razon_cf').select2('val') == null || $('.list_ca_nv_razon_cf').select2('val') == "0")) {
+            
                 $('.list_ca_nv_razon_cf').find('.select2-choice').css('border-color', 'red'); //Condiciones Financieras
                 faltantesCAUP += 1;
             }
-            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "7" && ($('.list_ca_nv_razon_ni').select2('val') == "" || $('.list_ca_nv_razon_ni').select2('val') == "0")) {
+            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "7" && 
+            ($('.list_ca_nv_razon_ni').select2('val') == "" || $('.list_ca_nv_razon_ni').select2('val') == null || $('.list_ca_nv_razon_ni').select2('val') == "0")) {
+            
                 $('.list_ca_nv_razon_ni').find('.select2-choice').css('border-color', 'red'); //Razón No se encuentra interesado
                 faltantesCAUP += 1;
             }
@@ -5578,11 +5655,16 @@
                 $('.txt_ca_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
                 faltantesCAUP += 1;
             }
-            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "4" && ($('.list_ca_nv_producto').select2('val') == "" || $('.list_ca_nv_producto').select2('val') == "0")) {
+            if ($('.chk_ca_nv')[0].checked == true && $('.list_ca_nv_razon').select2('val') == "4" && 
+            ($('.list_ca_nv_producto').select2('val') == "" || $('.list_ca_nv_producto').select2('val') == null || $('.list_ca_nv_producto').select2('val') == "0")) {
+            
                 $('.list_ca_nv_producto').find('.select2-choice').css('border-color', 'red'); //¿Qué producto?
                 faltantesCAUP += 1;
             }
-            if (($('.list_ca_nv_razon').select2('val') == "4" || $('.list_ca_nv_razon option:selected').text() == "4" || $('.list_ca_nv_razon')[0].innerText.trim() == "4") && ($('.list_ca_nv_producto').select2('val') == "4" || $('.list_ca_nv_producto option:selected').text() == "4" || $('.list_ca_nv_producto')[0].innerText.trim() == "4") && $('.chk_ca_nv')[0].checked && $('.txt_ca_nv_otro').val().trim() == "") {
+            if (($('.list_ca_nv_razon').select2('val') == "4" || $('.list_ca_nv_razon option:selected').text() == "4" || $('.list_ca_nv_razon')[0].innerText.trim() == "4") && 
+            ($('.list_ca_nv_producto').select2('val') == "4" || $('.list_ca_nv_producto option:selected').text() == "4" || $('.list_ca_nv_producto')[0].innerText.trim() == "4") && 
+            $('.chk_ca_nv')[0].checked && $('.txt_ca_nv_otro').val().trim() == "") {
+            
                 $('.txt_ca_nv_otro').css('border-color', 'red'); //TXT ¿Qué producto?
                 faltantesCAUP += 1;
             }
@@ -5607,19 +5689,25 @@
     requeridosFleetUP: function (fields, errors, callback) {
         var faltantesFleetUP = 0;
         if ($('.chk_fl_nv')[0] != undefined) {
-            if ($('.chk_fl_nv')[0].checked && ($('.list_fl_nv_razon').select2('val') == "" || $('.list_fl_nv_razon').select2('val') == "0")) {
+            if ($('.chk_fl_nv')[0].checked && ($('.list_fl_nv_razon').select2('val') == "" || $('.list_fl_nv_razon').select2('val') == null || $('.list_fl_nv_razon').select2('val') == "0")) {
                 $('.list_fl_nv_razon').find('.select2-choice').css('border-color', 'red'); //Razón de Lead no viable
                 faltantesFleetUP += 1;
             }
-            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "1" && ($('.list_fl_nv_razon_fp').select2('val') == "" || $('.list_fl_nv_razon_fp').select2('val') == "0")) {
+            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "1" && 
+            ($('.list_fl_nv_razon_fp').select2('val') == "" || $('.list_fl_nv_razon_fp').select2('val') == null || $('.list_fl_nv_razon_fp').select2('val') == "0")) {
+            
                 $('.list_fl_nv_razon_fp').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantesFleetUP += 1;
             }
-            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "2" && ($('.list_fl_nv_razon_cf').select2('val') == "" || $('.list_fl_nv_razon_cf').select2('val') == "0")) {
+            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "2" && 
+            ($('.list_fl_nv_razon_cf').select2('val') == "" || $('.list_fl_nv_razon_cf').select2('val') == null || $('.list_fl_nv_razon_cf').select2('val') == "0")) {
+            
                 $('.list_fl_nv_razon_cf').find('.select2-choice').css('border-color', 'red'); //Condiciones Financieras
                 faltantesFleetUP += 1;
             }
-            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "7" && ($('.list_fl_nv_razon_ni').select2('val') == "" || $('.list_fl_nv_razon_ni').select2('val') == "0")) {
+            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "7" && 
+            ($('.list_fl_nv_razon_ni').select2('val') == "" || $('.list_fl_nv_razon_ni').select2('val') == null || $('.list_fl_nv_razon_ni').select2('val') == "0")) {
+            
                 $('.list_fl_nv_razon_ni').find('.select2-choice').css('border-color', 'red'); //Razón No se encuentra interesado
                 faltantesFleetUP += 1;
             }
@@ -5636,11 +5724,16 @@
                 $('.txt_fl_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
                 faltantesFleetUP += 1;
             }
-            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "4" && ($('.list_fl_nv_producto').select2('val') == "" || $('.list_fl_nv_producto').select2('val') == "0")) {
+            if ($('.chk_fl_nv')[0].checked == true && $('.list_fl_nv_razon').select2('val') == "4" && 
+            ($('.list_fl_nv_producto').select2('val') == "" || $('.list_fl_nv_producto').select2('val') == null || $('.list_fl_nv_producto').select2('val') == "0")) {
+            
                 $('.list_fl_nv_producto').find('.select2-choice').css('border-color', 'red'); //¿Qué producto?
                 faltantesFleetUP += 1;
             }
-            if (($('.list_fl_nv_razon').select2('val') == "4" || $('.list_fl_nv_razon option:selected').text() == "4" || $('.list_fl_nv_razon')[0].innerText.trim() == "4") && ($('.list_fl_nv_producto').select2('val') == "4" || $('.list_fl_nv_producto option:selected').text() == "4" || $('.list_fl_nv_producto')[0].innerText.trim() == "4") && $('.chk_fl_nv')[0].checked && $('.txt_fl_nv_otro').val().trim() == "") {
+            if (($('.list_fl_nv_razon').select2('val') == "4" || $('.list_fl_nv_razon option:selected').text() == "4" || $('.list_fl_nv_razon')[0].innerText.trim() == "4") && 
+            ($('.list_fl_nv_producto').select2('val') == "4" || $('.list_fl_nv_producto option:selected').text() == "4" || $('.list_fl_nv_producto')[0].innerText.trim() == "4") && 
+            $('.chk_fl_nv')[0].checked && $('.txt_fl_nv_otro').val().trim() == "") {
+            
                 $('.txt_fl_nv_otro').css('border-color', 'red'); //TXT ¿Qué producto?
                 faltantesFleetUP += 1;
             }
@@ -5665,19 +5758,25 @@
     requeridosUniclickUP: function (fields, errors, callback) {
         var faltantesUniclickUP = 0;
         if ($('.chk_u_nv')[0] != undefined) {
-            if ($('.chk_u_nv')[0].checked && ($('.list_u_nv_razon').select2('val') == "" || $('.list_u_nv_razon').select2('val') == "0")) {
+            if ($('.chk_u_nv')[0].checked && ($('.list_u_nv_razon').select2('val') == "" || $('.list_u_nv_razon').select2('val') == null || $('.list_u_nv_razon').select2('val') == "0")) {
                 $('.list_u_nv_razon').find('.select2-choice').css('border-color', 'red'); //Razón de Lead no viable
                 faltantesUniclickUP += 1;
             }
-            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "1" && ($('.list_u_nv_razon_fp').select2('val') == "" || $('.list_u_nv_razon_fp').select2('val') == "0")) {
+            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "1" && 
+            ($('.list_u_nv_razon_fp').select2('val') == "" || $('.list_u_nv_razon_fp').select2('val') == null || $('.list_u_nv_razon_fp').select2('val') == "0")) {
+            
                 $('.list_u_nv_razon_fp').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantesUniclickUP += 1;
             }
-            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "2" && ($('.list_u_nv_razon_cf').select2('val') == "" || $('.list_u_nv_razon_cf').select2('val') == "0")) {
+            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "2" && 
+            ($('.list_u_nv_razon_cf').select2('val') == "" || $('.list_u_nv_razon_cf').select2('val') == null || $('.list_u_nv_razon_cf').select2('val') == "0")) {
+                
                 $('.list_u_nv_razon_cf').find('.select2-choice').css('border-color', 'red'); //Condiciones Financieras
                 faltantesUniclickUP += 1;
             }
-            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "7" && ($('.list_u_nv_razon_ni').select2('val') == "" || $('.list_u_nv_razon_ni').select2('val') == "0")) {
+            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "7" && 
+            ($('.list_u_nv_razon_ni').select2('val') == "" || $('.list_u_nv_razon_ni').select2('val') == null || $('.list_u_nv_razon_ni').select2('val') == "0")) {
+            
                 $('.list_u_nv_razon_ni').find('.select2-choice').css('border-color', 'red'); //Razón No se encuentra interesado
                 faltantesUniclickUP += 1;
             }
@@ -5694,11 +5793,16 @@
                 $('.txt_u_nv_porque').css('border-color', 'red'); //TXT ¿Por qué?
                 faltantesUniclickUP += 1;
             }
-            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "4" && ($('.list_u_nv_producto').select2('val') == "" || $('.list_u_nv_producto').select2('val') == "0")) {
+            if ($('.chk_u_nv')[0].checked == true && $('.list_u_nv_razon').select2('val') == "4" && 
+            ($('.list_u_nv_producto').select2('val') == "" || $('.list_u_nv_producto').select2('val') == null || $('.list_u_nv_producto').select2('val') == "0")) {
+            
                 $('.list_u_nv_producto').find('.select2-choice').css('border-color', 'red'); //¿Qué producto?
                 faltantesUniclickUP += 1;
             }
-            if (($('.list_u_nv_razon').select2('val') == "4" || $('.list_u_nv_razon option:selected').text() == "4" || $('.list_u_nv_razon')[0].innerText.trim() == "4") && ($('.list_u_nv_producto').select2('val') == "4" || $('.list_u_nv_producto option:selected').text() == "4" || $('.list_u_nv_producto')[0].innerText.trim() == "4") && $('.chk_u_nv')[0].checked && $('.txt_u_nv_otro').val().trim() == "") {
+            if (($('.list_u_nv_razon').select2('val') == "4" || $('.list_u_nv_razon option:selected').text() == "4" || $('.list_u_nv_razon')[0].innerText.trim() == "4") && 
+            ($('.list_u_nv_producto').select2('val') == "4" || $('.list_u_nv_producto option:selected').text() == "4" || $('.list_u_nv_producto')[0].innerText.trim() == "4") && 
+            $('.chk_u_nv')[0].checked && $('.txt_u_nv_otro').val().trim() == "") {
+            
                 $('.txt_u_nv_otro').css('border-color', 'red'); //TXT ¿Qué producto?
                 faltantesUniclickUP += 1;
             }
@@ -5826,16 +5930,16 @@
     //        this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
 
     //RFC_ValidatePadron: function (fields, errors, callback) {
-    //	
+    //
     //	var rfc = this.getField('rfc_c');
     //	var valuerfc = this.model.get('rfc_c');
     //	var anticrfc = this._get_rfc_antiguo();
-    //	        
-    //	if( (this.model.get('pais_nacimiento_c') == "2") 
+    //
+    //	if( (this.model.get('pais_nacimiento_c') == "2")
     //		&& (!_.isEmpty(valuerfc) && valuerfc != "" && valuerfc != "undefined")
     //		&& (anticrfc != valuerfc) && (rfc.action === "edit" || rfc.action === "create")
     //		&& ( this.model.get('estado_rfc_c') == null || this.model.get('estado_rfc_c') == "" || this.model.get('estado_rfc_c') == "0")){
-    //		
+    //
     //		app.api.call('GET', app.api.buildURL('GetRFCValido/?rfc='+this.model.get('rfc_c')),null, {
     //			success: _.bind(function (data) {
     //				if (data != "" && data != null) {
@@ -5870,8 +5974,8 @@
     //					});
     //					errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
     //					errors['error_RFC_Padron'].required = true;
-    //				}		
-    //				callback(null, fields, errors);					
+    //				}
+    //				callback(null, fields, errors);
     //			}, this),
     //			error: _.bind(function (error) {
     //				app.alert.show("Error Validar RFC", {
@@ -5887,7 +5991,7 @@
     //		});
     //	}else{
     //      	  callback(null, fields, errors);
-    //    }			
+    //    }
     //},
 
     //cambioRFC: function(){

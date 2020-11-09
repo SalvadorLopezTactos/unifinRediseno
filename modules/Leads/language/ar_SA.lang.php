@@ -322,4 +322,7 @@ $mod_strings = array (
     'LBL_FILTER_LEADS_REPORTS' => 'تقارير العميل المتوقع',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'الأغراض التجارية التي تمت الموافقة عليها',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'آخر تحديث للموافقة',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'تعذر تغيير حالة {{moduleSingular}}. تم تحويل {{moduleSingular}} بالفعل.',
 );

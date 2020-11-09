@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Pulpit listy zgloszeń',
     'LBL_CASES_RECORD_DASHBOARD' => 'Pulpit listy zgłoszeń',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Szczegóły zgłoszenia',
 
 	'ERR_DELETE_RECORD'					=> 'Aby usunąć Kontrahenta, musisz podać numer rekordu.',
 	'LBL_ACCOUNT_ID'					=> 'ID kontrahenta',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Kontakty',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Zgłoszenia',
 	'LBL_DESCRIPTION'					=> 'Opis:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Plik załącznika',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Plik załącznika',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Historia',
 	'LBL_INVITEE'						=> 'Kontakty',
 	'LBL_MEMBER_OF'						=> 'Kontrahent',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Utworzono przez (nazwa użytkownika)',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Przypisano do (nazwa użytkownika)',
     'LBL_EXPORT_TEAM_COUNT' => 'Liczebność zespołu',
+    'LBL_CHANGETIMERS' => 'Zmień liczniki',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Adresy e-mail powiązanych kontaktów',
@@ -140,4 +143,11 @@ Aby utworzyć moduł {{module_name}}:
 - Pola oznaczone jako Wymagane muszą zostać uzupełnione.
 - Kliknij opcję Pokaż więcej, aby w razie konieczności wyświetlić dodatkowe pola.
 2. Kliknij opcję Zapisz, aby zapisać nowy rekord i powrócić do poprzedniej strony.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Nie ma tego, czego szukasz?',
+    'LBL_CREATE_CASE' => 'Utwórz {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'Szczegóły umowy SLA',
+    'LBL_HOURS' => 'Godziny',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

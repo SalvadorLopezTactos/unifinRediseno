@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Ponuky (poslať komu)',
 	'LNK_ACCOUNT_REPORTS' => 'Zobraziť hlásenia spoločností',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenty',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Informačný panel so zoznamom účtov',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Informačný panel so záznamom účtov',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Podrobnosti o účte',
+    'LBL_NEXT_RENEWAL_DATE' => 'Dátum nasledujúceho obnovenia',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Názov účtu/odvetvia',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'Poloha',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafy',

@@ -115,7 +115,7 @@ module.exports = Backbone.View.extend({
             context: this.context
         });
 
-        if (oldLayout) {
+        if (oldLayout && oldLayout.el) {
             // Take out the previous layout element from the content container,
             // and then keep it in the document fragment
             // in order to destroy jQuery plugin safe.

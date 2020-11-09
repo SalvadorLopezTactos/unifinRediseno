@@ -17,6 +17,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\DBAL\Driver\Statement;
 
 use Sugarcrm\IdentityProvider\App\Authentication\AuthProviderManagerBuilder;
+use Sugarcrm\IdentityProvider\Authentication\Audit;
 use Sugarcrm\IdentityProvider\Authentication\RememberMe\Service;
 use Sugarcrm\IdentityProvider\Authentication\Provider\Providers;
 use Sugarcrm\IdentityProvider\Authentication\User;
@@ -60,7 +61,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $this->provider = $this->createMock(LocalUserProvider::class);
 
         $this->service = $this->getMockBuilder(Service::class)
-            ->setConstructorArgs([$this->session, $this->db])
+            ->setConstructorArgs([$this->session, $this->db, 'some-application-srn', $this->createMock(Audit::class)])
             ->setMethods(['getLocalUserProvider'])
             ->getMock();
         $this->service->expects($this->any())

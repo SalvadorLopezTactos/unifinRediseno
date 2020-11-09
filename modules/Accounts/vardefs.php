@@ -101,6 +101,46 @@ $dictionary['Account'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_CASES',
         ),
+        'business_center_name' => array(
+            'name' => 'business_center_name',
+            'rname' => 'name',
+            'id_name' => 'business_center_id',
+            'vname' => 'LBL_BUSINESS_CENTER_NAME',
+            'type' => 'relate',
+            'link' => 'business_centers',
+            'table' => 'business_centers',
+            'join_name' => 'business_centers',
+            'isnull' => 'true',
+            'module' => 'BusinessCenters',
+            'dbType' => 'varchar',
+            'len' => 255,
+            'source' => 'non-db',
+            'unified_search' => true,
+            'comment' => 'The name of the business center represented by the business_center_id field',
+            'required' => false,
+        ),
+        'business_center_id' => array(
+            'name' => 'business_center_id',
+            'type' => 'relate',
+            'dbType' => 'id',
+            'rname' => 'id',
+            'module' => 'BusinessCenters',
+            'id_name' => 'business_center_id',
+            'reportable' => false,
+            'vname' => 'LBL_BUSINESS_CENTER_ID',
+            'audited' => true,
+            'massupdate' => false,
+            'comment' => 'The business center to which the case is associated',
+        ),
+        'business_centers' => array(
+            'name' => 'business_centers',
+            'type' => 'link',
+            'relationship' => 'business_center_accounts',
+            'link_type' => 'one',
+            'side' => 'right',
+            'source' => 'non-db',
+            'vname' => 'LBL_BUSINESS_CENTER',
+        ),
         'tasks' => array(
             'name' => 'tasks',
             'type' => 'link',
@@ -331,11 +371,26 @@ $dictionary['Account'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_PROSPECT_LIST',
         ),
+        'next_renewal_date' => array(
+            'name' => 'next_renewal_date',
+            'vname' => 'LBL_NEXT_RENEWAL_DATE',
+            'type' => 'date',
+            'readonly' => true,
+        ),
     ),
     'indices' => array(
         array('name' => 'idx_accnt_parent_id', 'type' => 'index', 'fields' => array('parent_id')),
         array('name' => 'idx_account_billing_address_city', 'type' => 'index', 'fields' => array('billing_address_city')),
         array('name' => 'idx_account_billing_address_country', 'type' => 'index', 'fields' => array('billing_address_country')),
+        array(
+            'name' => 'idx_acc_del_l_name_dm',
+            'type' => 'index',
+            'fields' => array(
+                'deleted',
+                'name',
+                'date_modified',
+            ),
+        ),
     ),
     'relationships' => array(
         'member_accounts' => array(
@@ -495,6 +550,9 @@ $dictionary['Account'] = array(
         'team_security',
         'company',
     ),
+    'portal_visibility' => [
+        'class' => 'Accounts',
+    ],
 );
 
 VardefManager::createVardef(

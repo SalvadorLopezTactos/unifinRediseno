@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Panel för fallistor',
     'LBL_CASES_RECORD_DASHBOARD' => 'Panel för fallposter',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Ärendedetaljer',
 
 	'ERR_DELETE_RECORD'					=> 'Ett objektnummer måste specificeras för att kunna radera organisationen.',
 	'LBL_ACCOUNT_ID'					=> 'Konto-ID',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Kontakter',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Ärenden',
 	'LBL_DESCRIPTION'					=> 'Beskrivning:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Filbilaga',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Filbilaga',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Historik',
 	'LBL_INVITEE'						=> 'Kontakter',
 	'LBL_MEMBER_OF'						=> 'Organisation',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Skapad Av Användare Namn',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Tilldelat Användarnamn',
     'LBL_EXPORT_TEAM_COUNT' => 'Team Räknare',
+    'LBL_CHANGETIMERS' => 'Ändra timers',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Relaterad Kontakts Emails',
@@ -135,4 +138,11 @@ För att skapa en {{module_name}}:
  - Fält markerade som &#39;Obligatoriska&#39; måste fyllas i innan du sparar.
  - Klicka på &#39;Visa fler&#39; för att få fler fält om det behövs.
 2. Klicka på &#39;Spara&#39; för att färdigställa posten och gå tillbaks till den förra sidan.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Hittade du inte vad du letade efter?',
+    'LBL_CREATE_CASE' => 'Skapa ett {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'SLA-detaljer',
+    'LBL_HOURS' => 'Timmar',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

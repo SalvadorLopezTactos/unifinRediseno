@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => '修改的日期',
     'LBL_DELETED' => '已删除',
     'LBL_REVENUELINEITEMS' => '营收单项',
+    'LBL_ENTRY_SOURCE' => '笔记来源',
+    'LBL_SOURCE_EXTERNAL' => '外部',
+    'LBL_SOURCE_INTERNAL' => '内部',
 
     // Help Text
     // List View Help Text

@@ -836,13 +836,23 @@ class SugarQuery
      *
      * @param string $column
      * @param string $direction
+     * @param bool $nullsLast
      *
      * @return SugarQuery
      */
-    public function orderBy($column, $direction = 'DESC')
+    public function orderBy($column, $direction = 'DESC', $nullsLast = false)
     {
         $orderBy = new SugarQuery_Builder_Orderby($this, $direction);
         $orderBy->addField($column);
+
+        if ($nullsLast) {
+            $field = $orderBy->column->field;
+            if ($orderBy->column->table && strpos($field, '.') === false) {
+                $field = $orderBy->column->table . '.' . $field;
+            }
+            $this->orderByRaw("(CASE WHEN $field IS NULL THEN 1 ELSE 0 END)", 'ASC');
+        }
+
         $this->order_by[] = $orderBy;
 
         return $this;

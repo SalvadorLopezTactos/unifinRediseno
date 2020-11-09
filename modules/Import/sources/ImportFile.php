@@ -16,7 +16,9 @@
  * All Rights Reserved.
  ********************************************************************************/
 
-use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\File;
+use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\ViolationException;
 
 class ImportFile extends ImportDataSource
 {
@@ -89,11 +91,21 @@ class ImportFile extends ImportDataSource
         $checkUploadPath = true,
         $rowsCount = 0
     ) {
-        if ( !is_file($filename) || !is_readable($filename) ) {
+        $uploadDir = UploadStream::getDir();
+        $uploadPath = UploadStream::path($filename);
+        if (null === $uploadPath) {
             return false;
         }
+        $fileConstraint = new File(['baseDirs' => [realpath($uploadDir)]]);
+        $violations = Validator::getService()->validate($uploadPath, $fileConstraint);
 
-        FileLoader::validateFilePath(UploadStream::path($filename));
+        if ($violations->count()) {
+            throw new ViolationException('Invalid file path', $violations);
+        }
+
+        if (!is_file($filename) || !is_readable($filename)) {
+            return false;
+        }
 
         // turn on auto-detection of line endings to fix bug #10770
         ini_set('auto_detect_line_endings', '1');

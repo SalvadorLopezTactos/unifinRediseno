@@ -322,4 +322,7 @@ After confirming each required and desired module, click the Save and Convert bu
     'LBL_FILTER_LEADS_REPORTS' => 'Leads&#39; reports',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Verslo tikslais sutikote su',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Sutikimas paskutinį kartą atnaujintas',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Nepavyksta pakeisti {{moduleSingular}} būsenos. Šis {{moduleSingular}} jau konvertuotas.',
 );

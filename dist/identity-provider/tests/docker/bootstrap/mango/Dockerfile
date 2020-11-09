@@ -7,7 +7,7 @@
 #
 # Copyright (C) SugarCRM Inc. All rights reserved.
 
-FROM php:7.2-apache-stretch
+FROM php:7.2-apache-buster
 
 # install common packages
 RUN apt-get update && apt-get install -y \
@@ -56,8 +56,8 @@ RUN echo 'mysql-apt-config mysql-apt-config/select-tools select MySQL Server (Cu
     echo 'mysql-server mysql-server/root_password_again password Sugar123' | debconf-set-selections && \
     echo 'mysql-community-server mysql-community-server/root-pass password Sugar123' | debconf-set-selections && \
     echo 'mysql-community-server mysql-community-server/re-root-pass password Sugar123' | debconf-set-selections && \
-    wget http://dev.mysql.com/get/mysql-apt-config_0.8.3-1_all.deb && \
-    DEBIAN_FRONTEND=noninteractive dpkg -i mysql-apt-config_0.8.3-1_all.deb && \
+    wget http://dev.mysql.com/get/mysql-apt-config_0.8.12-1_all.deb && \
+    DEBIAN_FRONTEND=noninteractive dpkg -i mysql-apt-config_0.8.12-1_all.deb && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install mysql-server
 

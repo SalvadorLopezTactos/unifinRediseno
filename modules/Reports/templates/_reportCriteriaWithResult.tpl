@@ -36,7 +36,7 @@
 <input type="hidden" name="action" value="ReportCriteriaResults">
 <input type="hidden" name="module" value="Reports">
 <input type="hidden" id="record" name="record" value="{$report_id}">
-<input type="hidden" id="report_name" name="report_name" value="{$reportName}">
+<input type="hidden" id="report_name" name="report_name" value="{$reportName|escape:'html':'UTF-8'}">
 <input type="hidden" id="id" name="id" value="{$id}">
 <input type="hidden" name='report_def' value ="">
 <input type="hidden" name='save_as' value ="">
@@ -92,7 +92,7 @@ ACLAllowedModules = {$ACLAllowedModules};
 		<table width="100%" id="reportDetailsTable" name="reportDetailsTable" style="{$reportDetailsTableStyle}">
 			<tr>
 				<td wrap="true">
-					<b>{$mod_strings.LBL_REPORT_ATT_NAME}:</b> {$reportName}
+					<b>{$mod_strings.LBL_REPORT_ATT_NAME}:</b> {$reportName|escape:'html':'UTF-8'}
 				</td>
 				<td wrap="true">
 					<b>{$mod_strings.LBL_REPORT__ATT_TYPE}:</b> {$reportType}

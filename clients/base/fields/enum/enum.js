@@ -184,7 +184,7 @@
         var select2Options = this.getSelect2Options(optionsKeys);
         var $el = this.$(this.fieldTag);
         //FIXME remove check for tplName SC-2608
-        if (this.tplName === 'edit' || this.tplName === 'list-edit' || this.tplName === 'massupdate') {
+        if (_.contains(['edit', 'list-edit', 'massupdate', 'login'], this.tplName)) {
             $el.select2(select2Options);
             var plugin = $el.data('select2');
 
@@ -351,12 +351,12 @@
     },
 
     /**
-     * Allow overriding of what module is used for loading the enum options
+     * Allow overriding of what module is used for loading the enum options.
      *
-     * @return {string}
+     * @return {string} The module from which to load the enum options.
      */
     getLoadEnumOptionsModule: function() {
-        return this.module;
+        return this.def.enum_module || this.module;
     },
 
     /**

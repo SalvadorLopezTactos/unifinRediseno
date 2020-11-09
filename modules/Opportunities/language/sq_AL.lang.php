@@ -15,6 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Paneli i listës së shanseve',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të shanseve',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Detajet e mundësisë',
 
     'LBL_MODULE_NAME' => 'Mundësitë',
     'LBL_MODULE_NAME_SINGULAR' => 'Mundësi:',
@@ -25,6 +26,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => 'Emri i Mundësisë:',
     'LBL_OPPORTUNITY' => 'Mundësi:',
     'LBL_NAME' => 'Emri i Mundësisë:',
+    'LBL_TIME' => 'Ora',
     'LBL_INVITEE' => 'Kontaktet',
     'LBL_CURRENCIES' => 'Monedhat',
     'LBL_LIST_OPPORTUNITY_NAME' => 'Emri',
@@ -75,6 +77,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Lloji:',
     'LBL_CAMPAIGN' => 'Fushata:',
     'LBL_NEXT_STEP' => 'Hapi vijues',
+    'LBL_SERVICE_START_DATE' => 'Service Start Date',
     'LBL_LEAD_SOURCE' => 'Burimi i udhëheqjes',
     'LBL_SALES_STAGE' => 'Faza e shitjes',
     'LBL_SALES_STATUS' => 'Statusi',
@@ -142,6 +145,16 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE_FORECAST' => 'Parashikim',
     'LBL_WORKSHEET' => 'Fletë pune',
 
+    'LBL_RENEWAL' => 'Rinovimi',
+    'LBL_RENEWAL_OPPORTUNITIES' => 'Mundësitë e rinovimit',
+    'LBL_RENEWAL_PARENT' => 'Mundësia kryesore',
+    'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'ID-ja kryesore e rinovimit',
+    'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
+
+    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
+    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
+    'LBL_WIDGET_AMOUNT' => 'Amount',
+
     'TPL_RLI_CREATE' => 'Një mundësi patjetër duhet të ketë të shoqëruar rreshtin e llojit të të ardhurave',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Krijo rresht të të ardhurave',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Artikujt e rreshtave të kuotuar',
@@ -152,6 +165,7 @@ $mod_strings = array(
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Ju nuk mund të fshini mundësitë të cilat përmbajnë artikuj të mbyllur të rreshtave të të ardhurave',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Një ose më shumë nga të dhënat e selektuara përmbajnë artikuj të mbyllur të rreshtave të të ardhurave dhe nuk mund të fshihen',
     'LBL_INCLUDED_RLIS' => '# i artikujve të linjës së të ardhurave të përfshira',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Kuotat',
 
@@ -186,25 +200,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Pas fillimit të ndryshimit, raportet e artikujve të linjës të së ardhurave do të krijohen për çdo modul {{module_name}} ekzistues në sfond. Kur artikujt e linjës të së ardhurave të plotësohen dhe të disponohen, në adresën e emailit në profilin e përdoruesit do të dërgohet një njoftim. Ki parasysh se shembulli yt duhet të konfigurohet për të dërguar email nëpërmjet "Admin > Cilësimet e emailit" në mënyrë që të dërgohet njoftimi.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale nga fillimi e deri në fund. Çdo regjistër i {{module_name}} përfaqëson një shitje të mundshme, përfshin të dhënat përkatëse të shitjeve, si dhe lidhet me regjistra të tjerë të rëndësishëm siç janë {{quotes_module}}, {{contacts_module}} etj. Normalisht, {{module_name}} do të përpunohet në faza të ndryshme të shitjeve derisa të shënohet si "Fitim" apo "Humbje". {{plural_module_name}} mund të shfrytëzohen edhe më tej duke përdorur modulin {{forecasts_singular_module}} të Sugar për të kuptuar dhe parashikuar tendencat e shitjeve, si dhe për të drejtuar fokusin e punës në përmbushjen e kuotave të shitjeve.',
+    'LBL_HELP_RECORDS' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale nga fillimi deri në fund. Çdo regjistër i {{module_name}} përfaqëson një shitje të mundshme dhe përfshin të dhënat përkatëse të shitjeve, si dhe lidhet me regjistra të tjerë të rëndësishëm siç janë {{quotes_module}}, {{contacts_module}}, etj. Normalisht, {{module_name}} do të përpunohet në faza të ndryshme të shitjeve derisa të shënohet si "Fitim i mbyllur" apo "Humbje e mbyllur". {{plural_module_name}} mund të shfrytëzohen edhe më tej duke përdorur modulin {{forecasts_singular_module}} të Sugar për të kuptuar dhe parashikuar tendencat e shitjeve, si dhe për ta fokusuar punën në përmbushjen e kuotave të shitjeve.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale dhe artikujt e linjës që u përkasin këtyre shitjeve nga fillimi e deri në fund. Çdo regjistër i {{module_name}} përfaqëson një shitje të mundshme, përfshin të dhënat përkatëse të shitjeve, si dhe lidhet me regjistra të tjerë të rëndësishëm siç janë {{quotes_module}}, {{contacts_module}} etj.
+    'LBL_HELP_RECORD' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale dhe artikujt e linjës që u përkasin këtyre shitjeve nga fillimi deri në fund. Çdo regjistër i {{module_name}} përfaqëson një shitje të mundshme, përfshin të dhënat përkatëse të shitjeve, si dhe lidhet me regjistra të tjerë të rëndësishëm siç janë {{quotes_module}}, {{contacts_module}} etj.
 
-- Redakto fushat e këtij regjistri duke klikuar një fushë individuale ose butonin "Redakto".
+- Modifiko fushat e këtij regjistri duke klikuar një fushë individuale ose butonin "Modifiko".
 - Shiko ose modifiko lidhjet në regjistrat e tjerë në nënpanelet duke kaluar nga paneli majtas poshtë te "Shikimi i të dhënave".
-- Bëj dhe shiko komentet e përdoruesve dhe regjistro historikun e ndryshimeve në {{activitystream_singular_module}} duke lëvizur panelin e poshtëm majtas tek "Transmetimi i aktiviteteve".
+- Bëj dhe shiko komentet e përdoruesve dhe regjistro historikun e ndryshimeve në {{activitystream_singular_module}} duke lëvizur panelin e poshtëm majtas tek "Fluksi i aktiviteteve".
 - Ndiq ose bëje të preferuar këtë regjistër duke përdorur ikonat në të djathtë të emrit të regjistrit.
-- Veprime shtesë disponohen në menynë me zbritje të veprimeve në të djathë të butonit "Redakto".',
+- Veprime shtesë disponohen në menynë me zbritje të veprimeve në të djathë të butonit "Modifiko".',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale dhe artikujt e linjës që u përkasin këtyre shitjeve nga fillimi e deri në fund. Çdo {{module_name}} përfaqëson një shitje të mundshme, përfshin të dhënat përkatëse të shitjeve, si dhe lidhet me regjistra të tjerë të rëndësishëm siç janë {{quotes_module}}, {{contacts_module}} etj.
+    'LBL_HELP_CREATE' => 'Moduli {{plural_module_name}} të lejon të gjurmosh shitjet individuale dhe artikujt e linjës që u përkasin këtyre shitjeve nga fillimi deri në fund. Çdo regjistër i {{module_name}} përfaqëson një shitje të ardhshme, përfshin të dhënat përkatëse të shitjes, si dhe lidhet me regjistra të tjerë të rëndësishëm, siç janë {{quotes_module}}, {{contacts_module}} etj.
 
-To create an {{module_name}}:
-1. Provide values for the fields as desired.
- - Fields marked "Required" must be completed prior to saving.
- - Click "Show More" to expose additional fields if necessary.
-2. Click "Save" to finalize the new record and return to the previous page.',
+Për të krijuar një {{module_name}}:
+1. Jep vlera për fushat sipas dëshirës.
+ - Fushat e shënuar si "Të nevojshme" duhet të plotësohen përpara ruajtjes.
+ - Kliko "Shfaq më shumë" për të shfaqur fusha shtesë nëse është e nevojshme.
+2. Kliko "Ruaj" për të përfunduar regjistrimin e ri dhe për t&#39;u kthyer në faqen e mëparshme.',
 
 // END ENT/ULT
 
@@ -216,4 +230,6 @@ To create an {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Shfaq dhjetë rreshtat më të lartë në diagram fluskash',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Rrjeshti i të ardhurave të mia',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Rrjeshti i të ardhurave të ekipit tim",
+
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
 );

@@ -269,6 +269,7 @@ $dictionary['InboundEmail'] = array('table' => 'inbound_email', 'comment' => 'In
             'relationship_type' => 'one-to-many',
         ),
 	), /* end relationships */
+    'acls' => ['SugarACLAdminOnly' => true],
 );
 
 

@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => '연락처',
     'LBL_DISCOUNT_TOTAL' => '할인 합계',
     'LBL_DISCOUNT_AMOUNT' => '할인 금액',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => '할인 금액 가격',
     'LBL_EXT_PRICE' => 'Ext. 가격',
     'LBL_CURRENCY_SYMBOL_NAME' => '화폐 기호명',

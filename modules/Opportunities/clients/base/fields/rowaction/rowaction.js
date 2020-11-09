@@ -15,8 +15,7 @@
      * @inheritdoc
      */
     initialize: function(options) {
-        this.plugins = _.clone(this.plugins) || [];
-        this.plugins.push('DisableDelete');
+        this.plugins = _.union(this.plugins, ['DisableDelete']);
         this._super("initialize", [options]);
     }
 })

@@ -12,10 +12,10 @@
   width: 236px;
   text-align: left; // Reset given new insertion method
   background-clip: padding-box;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid @grayLighter;
+  border: 1px solid fade(@black, 20%);
   border-radius: 6px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px fade(@black, 20%);
 
   // Overrides for proper insertion
   white-space: normal;
@@ -48,7 +48,7 @@
   display: block;
   width: 0;
   height: 0;
-  border-color: transparent;
+  border-color: @transparent;
   border-style: solid;
 }
 
@@ -165,7 +165,7 @@
   border-bottom: 1px solid @black;
   border-radius: 2px 2px 0 0;
   font-size: 13px;
-  color: #fff;
+  color: @white;
 }
 
 .popover-content {

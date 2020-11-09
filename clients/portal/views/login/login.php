@@ -20,12 +20,6 @@ $viewdefs['portal']['view']['login'] = array(
                 'label' => 'LBL_LOGIN_BUTTON_LABEL',
                 'primary' => true,
             ),
-            array(
-                'name' => 'signup_button',
-                'type' => 'button',
-                'label' => 'LBL_SIGNUP_BUTTON_LABEL',
-                'css_class' => 'pull-left',
-            ),
         ),
     'panels' =>
         array(
@@ -47,6 +41,13 @@ $viewdefs['portal']['view']['login'] = array(
                         'no_required_placeholder' => true,
                         'required' => true,
                     ),
+                    [
+                        'name' => 'preferred_language',
+                        'type' => 'language',
+                        'options' => 'available_language_dom',
+                        'required' => false,
+                        'enabled' => true,
+                    ],
                 ),
             ),
         ),

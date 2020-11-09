@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Pieteikumu saraksta instrumentu panelis',
     'LBL_CASES_RECORD_DASHBOARD' => 'Pieteikumu ierakstu instrumentu panelis',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Informācija par pieteikumu',
 
 	'ERR_DELETE_RECORD'					=> 'Jums ir jānorāda ieraksta numurs, lai dzēstu uzņēmumu.',
 	'LBL_ACCOUNT_ID'					=> 'Uzņēmuma ID',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Kontaktpersonas',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Pieteikumi',
 	'LBL_DESCRIPTION'					=> 'Apraksts:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Pielikums',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Pielikums',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Vēsture',
 	'LBL_INVITEE'						=> 'Ielūgtie',
 	'LBL_MEMBER_OF'						=> 'Klients',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Izveidoja lietotājs',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Piešķirts lietotājam',
     'LBL_EXPORT_TEAM_COUNT' => 'Darba grupu skaits',
+    'LBL_CHANGETIMERS' => 'Mainīt taimerus',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Saistīto kontaktu e-pasti',
@@ -140,4 +143,11 @@ Lai izveidotu {{module_name}}:
 - Pirms saglabāšanas ir jāaizpilda lauki, kuri ir atzīmēti kā obligāti.
 - Ja nepieciešams redzēt papildu laukus, spiediet "Rādīt vairāk".
 2. Spiediet "Saglabāt", lai pabeigtu jauna ieraksta veidošanu un atgrieztos iepriekšējā lapā.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Neatradāt to, ko meklējāt?',
+    'LBL_CREATE_CASE' => 'Izveidot {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'Informācija par SLA',
+    'LBL_HOURS' => 'Stundas',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

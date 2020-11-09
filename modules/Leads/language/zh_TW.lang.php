@@ -322,4 +322,7 @@ $mod_strings = array (
     'LBL_FILTER_LEADS_REPORTS' => '潛在客戶報表',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => '業務目的同意',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => '同意上次更新',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => '無法更改 {{moduleSingular}} 狀態。此 {{moduleSingular}} 已轉換。',
 );

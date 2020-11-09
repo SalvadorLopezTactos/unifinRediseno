@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
         libldap2-dev \
         libsasl2-dev \
         libgmp-dev \
+        libyaml-dev \
         unzip \
         libaio1 \
         --no-install-recommends \
@@ -26,8 +27,10 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install mcrypt zip mysqli pdo_mysql gmp ldap \
     && pecl install apcu \
     && pecl install apcu_bc \
+    && pecl install yaml \
     && docker-php-ext-enable apcu --ini-name 10-docker-php-ext-apcu.ini \
     && docker-php-ext-enable apc --ini-name 20-docker-php-ext-apc.ini \
+    && docker-php-ext-enable yaml \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o \
     APT::AutoRemove::SuggestsImportant=false
 

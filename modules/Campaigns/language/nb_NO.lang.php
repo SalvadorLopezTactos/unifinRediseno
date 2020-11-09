@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Målliste av standartypen ble ikke funnet.',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Det ble ikke funnet noen elementer',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Elementene ble behandlet',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Tracker Navn:',
   'LBL_EDIT_TRACKER_URL'=>'Tracker URL:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'Ingen optimums ble lagret med din Innkommet e-post-konto.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Vennligts se gjennom inngående e-postinnstillinger.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} emner opprettet gjennom denne kampanjen har siden blitt slettet.',
+    'LBL_PROSPECT_LIST' => 'Målliste',
 );
 
 

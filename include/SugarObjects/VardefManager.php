@@ -23,6 +23,8 @@ class VardefManager{
     protected static $ignoreRelationshipsForModule = array();
     protected static $cache;
     protected static $sugarConfig;
+    private static $LFRCache = [];
+    private static $LFCCache = [];
 
     /**
      * List of templates that have already been fetched
@@ -837,9 +839,8 @@ class VardefManager{
     public static function getLinkFieldForRelationship($module, $object, $relName, $byLinkName = false)
     {
         $cacheKey = "LFR{$module}{$object}{$relName}";
-        $cacheValue = sugar_cache_retrieve($cacheKey);
-        if(!empty($cacheValue)) {
-            return $cacheValue;
+        if (isset(self::$LFRCache[$cacheKey])) {
+            return self::$LFRCache[$cacheKey];
         }
 
         // If we are searching by link name instead of relationship name, set that here
@@ -871,7 +872,7 @@ class VardefManager{
             $results = $matches;
         }
 
-        sugar_cache_put($cacheKey, $results);
+        self::$LFRCache[$cacheKey] = $results;
         return $results;
     }
 
@@ -886,10 +887,8 @@ class VardefManager{
     public static function getLinkFieldsForCollection($module, $objectName, $collectionName)
     {
         $cacheKey = "LFC{$module}{$objectName}{$collectionName}";
-        $cacheValue = sugar_cache_retrieve($cacheKey);
-
-        if (!empty($cacheValue)) {
-            return $cacheValue;
+        if (isset(self::$LFCCache[$cacheKey])) {
+            return self::$LFCCache[$cacheKey];
         }
 
         $links = array();
@@ -907,6 +906,7 @@ class VardefManager{
             }
         }
 
+        self::$LFCCache[$cacheKey] = $links;
         return $links;
     }
 
@@ -1198,5 +1198,18 @@ class VardefManager{
         }
 
         return true;
+    }
+
+    /**
+     * Get a particular property of the module
+     *
+     * @param  $module
+     * @param  $property
+     * @return Mixed returns a list of all elements in the module's property if the property is found
+     */
+    public static function getModuleProperty($module, $property, $default = null)
+    {
+        global $dictionary;
+        return $dictionary[$module][$property] ?? $default;
     }
 }

@@ -86,13 +86,16 @@ class SumRelatedExpression extends NumericExpression
             view = this.context.view,
             target = this.context.target,
             relationship = params[0].evaluate(),
-            rel_field = params[1].evaluate();
+            rel_field = params[1].evaluate(),
+            parent_type = this.context.model.fields[target].type,
+            parent_precision = this.context.model.fields[target].precision;
         var model = this.context.relatedModel || App.data.createRelatedBean(this.context.model, null, relationship),
             // has the model been removed from it's collection
             isCurrency = (model.fields[rel_field].type === 'currency'),
-            precision = model.fields[rel_field].precision || 6,
+            child_precision = model.fields[rel_field].precision || 6,
+            child_type = model.fields[rel_field].type,
             hasModelBeenRemoved = this.context.isRemoveEvent || false,
-            current_value = this.context.getRelatedField(relationship, 'rollupSum', rel_field) || '',
+            current_value = this.context.model.attributes[target] || '',
             rollup_value = '0';
 
         if (!_.isUndefined(this.context.relatedModel)) {
@@ -110,8 +113,12 @@ class SumRelatedExpression extends NumericExpression
 
         if (_.size(all_values) > 0) {
             rollup_value = _.reduce(all_values, function(memo, number) {
-                return App.math.add(memo, number, precision, true);
+                return App.math.add(memo, number, child_precision, true);
             }, '0');
+
+            if (parent_precision < child_precision) {
+                rollup_value = App.math.round(rollup_value, parent_precision, true);
+            }
 
             if (isCurrency) {
                 rollup_value = App.currency.convertFromBase(
@@ -119,6 +126,16 @@ class SumRelatedExpression extends NumericExpression
                     this.context.model.get('currency_id')
                 );
             }
+        }
+
+        // Needed to truncate app.math return value if child field is type int
+        if (child_type === 'int') {
+            rollup_value = rollup_value.split('.')[0];
+        }
+
+        // Needed to convert rollup value back to parent model type if parent model type is numeric
+        if (parent_type === 'int' || parent_type === 'float' || parent_type === 'decimal') {
+            rollup_value = App.utils.convertNumericType(rollup_value, parent_type);
         }
 
         if (!_.isEqual(rollup_value, current_value)) {

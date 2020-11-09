@@ -52,8 +52,11 @@
      * @param {Object} options
      */
     app.data.sync = _.wrap(app.data.sync, function(_super, method, model, options) {
-        options = options || {};
-        options.params = _.extend(options.params || {}, {erased_fields: true});
+        // append erased_fields only on the base app
+        if (app.config.platform === 'base') {
+            options = options || {};
+            options.params = _.extend(options.params || {}, {erased_fields: true});
+        }
 
         return _super.call(app.data, method, model, options);
     });

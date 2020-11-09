@@ -1,5 +1,10 @@
 <?php
- if(!defined('sugarEntry'))define('sugarEntry', true);
+
+use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
+
+if (!defined('sugarEntry')) {
+    define('sugarEntry', true);
+}
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -32,6 +37,10 @@ $app_strings = return_application_language($current_language);
 global $current_user;
 $current_user = BeanFactory::newBean('Users');
 $current_user->getSystemUser();
+
+// allow admin to access everything
+$adminWork = new AdminWork();
+$adminWork->startAdminWork();
 
 $GLOBALS['log']->debug('--------------------------------------------> at cron.php <--------------------------------------------');
 $cron_driver = !empty($sugar_config['cron_class'])?$sugar_config['cron_class']:'SugarCronJobs';

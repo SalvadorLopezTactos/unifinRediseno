@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Árajánlatok (Szállítási cím)',
 	'LNK_ACCOUNT_REPORTS' => 'Kliensjelentések megtekintése',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumentumok',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Kliensek listája műszerfal',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Kliensek bejegyzés műszerfal',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Fiókadatok',
+    'LBL_NEXT_RENEWAL_DATE' => 'Következő megújítása dátuma',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Fiók neve/ipar',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'Hely',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Diagramok',

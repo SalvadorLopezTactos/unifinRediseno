@@ -14,65 +14,21 @@ use Google\Protobuf\Internal\GPBUtil;
 class Policy extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Policy SRN
-     *
-     * Generated from protobuf field <code>string name = 1;</code>
-     */
-    private $name = '';
-    /**
-     * Policy bindings
-     *
-     * Generated from protobuf field <code>repeated .sugarcrm.apis.iam.policy.v1alpha.Binding bindings = 2;</code>
+     * Generated from protobuf field <code>repeated .sugarcrm.apis.iam.policy.v1alpha.Binding bindings = 1;</code>
      */
     private $bindings;
-
     /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $name
-     *           Policy SRN
-     *     @type \Sugarcrm\Apis\Iam\Policy\V1alpha\Binding[]|\Google\Protobuf\Internal\RepeatedField $bindings
-     *           Policy bindings
-     * }
+     * Generated from protobuf field <code>bytes etag = 2;</code>
      */
-    public function __construct($data = NULL) {
+    private $etag = '';
+
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Policy\V1Alpha\Policy::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**
-     * Policy SRN
-     *
-     * Generated from protobuf field <code>string name = 1;</code>
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Policy SRN
-     *
-     * Generated from protobuf field <code>string name = 1;</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setName($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->name = $var;
-
-        return $this;
-    }
-
-    /**
-     * Policy bindings
-     *
-     * Generated from protobuf field <code>repeated .sugarcrm.apis.iam.policy.v1alpha.Binding bindings = 2;</code>
+     * Generated from protobuf field <code>repeated .sugarcrm.apis.iam.policy.v1alpha.Binding bindings = 1;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getBindings()
@@ -81,9 +37,7 @@ class Policy extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Policy bindings
-     *
-     * Generated from protobuf field <code>repeated .sugarcrm.apis.iam.policy.v1alpha.Binding bindings = 2;</code>
+     * Generated from protobuf field <code>repeated .sugarcrm.apis.iam.policy.v1alpha.Binding bindings = 1;</code>
      * @param \Sugarcrm\Apis\Iam\Policy\V1alpha\Binding[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
@@ -91,6 +45,28 @@ class Policy extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Sugarcrm\Apis\Iam\Policy\V1alpha\Binding::class);
         $this->bindings = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bytes etag = 2;</code>
+     * @return string
+     */
+    public function getEtag()
+    {
+        return $this->etag;
+    }
+
+    /**
+     * Generated from protobuf field <code>bytes etag = 2;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setEtag($var)
+    {
+        GPBUtil::checkString($var, False);
+        $this->etag = $var;
 
         return $this;
     }

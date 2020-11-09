@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Nije pronađen popis meta vrste „zadano”',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nije pronađen nijedan unos',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Unosi su obrađeni',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Naziv pratitelja:',
   'LBL_EDIT_TRACKER_URL'=>'URL adresa pratitelja:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'Nema optimuma spremljenih s računom dolazne e-pošte.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Pregledajte postavke za dolaznu e-poštu.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => 'Više potencijalnih klijenata (njih {0}) koji su stvoreni u ovoj kampanji izbrisano je od stvaranja.',
+    'LBL_PROSPECT_LIST' => 'Popis meta',
 );
 
 

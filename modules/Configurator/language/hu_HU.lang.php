@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'A kép oldalaránya 1:1-10:1 között kell, hogy legyen. A kép átméretezésre kerül.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'A kép oldalaránya 3:1-20:1 között kell, hogy legyen. Töltsön fel egy új képet a kívánt arányszámmal!',
     'ERR_ALERT_FILE_UPLOAD' => 'Hiba a kép feltöltése közben.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Képtárolási könyvtár létrehozása sikertelen',
     'LBL_LOGGER'=>'Naplózási beállítások',
 	'LBL_LOGGER_FILENAME'=>'Naplófájl neve',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Kiterjesztés',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Maximális naplóméret',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Alapértelmezett dátumformátum',
 	'LBL_LOGGER_LOG_LEVEL'=>'Napló szintje',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Megjegyzés naplózási beállítások',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Megjeleníthető karakterek maximális száma megjegyzések bejegyzésnél',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

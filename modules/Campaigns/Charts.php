@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*********************************************************************************
-
 * Description:  Includes the functions for Customer module specific charts.
 ********************************************************************************/
 
@@ -195,7 +194,12 @@ class campaign_charts {
 			$opp_query1  = "select SUM(opp.amount) as revenue";
             $opp_query1 .= " from opportunities opp";
             $opp_query1 .= " right join campaigns camp on camp.id = opp.campaign_id";
-            $opp_query1 .= " where opp.sales_status = '".Opportunity::STAGE_CLOSED_WON;
+            $settings = Opportunity::getSettings();
+            if ($settings['opps_view_by'] === 'RevenueLineItems') {
+                $opp_query1 .= " where opp.sales_status = '" . Opportunity::STAGE_CLOSED_WON;
+            } elseif ($settings['opps_view_by'] === 'Opportunities') {
+                $opp_query1 .= " where opp.sales_stage = '" . Opportunity::STAGE_CLOSED_WON;
+            }
             $opp_query1 .= "' and camp.id=";
             $opp_query1 .= $focus->db->quoted($campaign_id);
             $opp_query1 .= " and opp.deleted=0";

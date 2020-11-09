@@ -27,9 +27,15 @@ $mod_strings = array (
   'LBL_RESOLUTION' => 'الحل',
   'LBL_LAST_MODIFIED' => 'تاريخ آخر تعديل',
   'LBL_ASSIGNED_TO_ID'=>'تعيين إلى:',
-  'LBL_ASSIGNED_TO_NAME' => 'المستخدم:',  	  
+  'LBL_ASSIGNED_TO_NAME' => 'المستخدم:',
   'LBL_WORK_LOG' => 'سجل الأعمال:',
+    'LBL_FOLLOW_UP' => 'المتابعة',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
+    'LBL_RESOLVED_DATETIME' => 'تاريخ الحل',
+    'LBL_HOURS_TO_RESOLUTION' => 'عدد الساعات إلى الحل',
+    'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'عدد ساعات العمل إلى الحل',
+    'LBL_PENDING_PROCESSING' => 'معالجة معلقة',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'تم الإنشاء بواسطة:',
   'LBL_DATE_CREATED' => 'تاريخ الإنشاء:',
   'LBL_DATE_ENTERED' => 'تاريخ الإنشاء:',
@@ -44,5 +50,5 @@ $mod_strings = array (
     'LBL_EDIT_BUTTON' => 'تحرير',
     'LBL_REMOVE' => 'إزالة',
 
-  
+
   );

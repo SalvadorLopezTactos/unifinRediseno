@@ -19,6 +19,6 @@ $mod_strings = array (
     'LBL_EMAIL_ADDRESS' => 'Eメールアドレス',
     'LBL_EMAIL_ADDRESSES' => 'Eメールアドレス',
     'LBL_INVALID_EMAIL'=>'無効なEメール:',
-    'LBL_EMAIL_OPT_OUT' => 'Eメール送信除外:',
+    'LBL_EMAIL_OPT_OUT' => 'メール送信除外:',
     'LBL_EMAIL_NON_PRIMARY' => '重要でないEメール',
 );

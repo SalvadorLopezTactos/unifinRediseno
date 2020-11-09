@@ -157,8 +157,10 @@
      * @return {Array} A list of filtered dashlet set.
      */
     getFilteredList: function(dashlets) {
-        var parentModule = app.controller.context.get('module');
-        var parentView = app.controller.context.get('layout');
+        var isMultiLine = this.context && this.context.parent && this.context.parent.get('layout') === 'multi-line';
+        var parentModule = isMultiLine ? this.context.parent.get('module') : app.controller.context.get('module');
+        // show record view dashlets for 'multi-line' dashboards
+        var parentView = isMultiLine ? 'record' : app.controller.context.get('layout');
 
         return _.chain(dashlets)
             .filter(function(dashlet) {
@@ -178,9 +180,25 @@
                     filterViews = [filterViews];
                 }
 
-                //if the filter is matched, then it returns true
-                return _.contains(filterModules, parentModule) &&
-                    _.contains(filterViews, parentView);
+                // if the filter is matched, then this will be true
+                var inModuleAndView = _.contains(filterModules, parentModule) && _.contains(filterViews, parentView);
+
+                // also allow blacklisting in addition to whitelisting
+                var blacklisted = false;
+                if (filter.blacklist) {
+                    filterModules = filter.blacklist.module || [];
+                    if (_.isString(filterModules)) {
+                        filterModules = [filterModules];
+                    }
+                    filterViews = filter.blacklist.view || [];
+                    if (_.isString(filterViews)) {
+                        filterViews = [filterViews];
+                    }
+
+                    blacklisted = _.contains(filterModules, parentModule) || _.contains(filterViews, parentView);
+                }
+
+                return inModuleAndView && !blacklisted;
             })
             .value();
     },

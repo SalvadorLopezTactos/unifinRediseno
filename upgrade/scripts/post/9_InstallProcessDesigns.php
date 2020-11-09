@@ -28,20 +28,18 @@ class SugarUpgradeInstallProcessDesigns extends UpgradeScript
      */
     public function run()
     {
-        if (version_compare($this->from_version, '9.0.0', '<')) {
-            // Get the installer
-            $bpi = new BusinessProcessInstaller;
+        // Get the installer
+        $bpi = new BusinessProcessInstaller;
 
-            // Prepare the upgrade then run the installer
-            $bpi->prepareUpgrade()->install();
+        // Prepare the upgrade then run the installer
+        $bpi->setLogger('log', $this)->prepareUpgrade()->install();
 
-            // Get the installed files and add them to the deleter
-            $this->fileToDelete($bpi->getInstalledFiles(), $this);
+        // Get the installed files and add them to the deleter
+        $this->fileToDelete($bpi->getInstalledFiles(), $this);
 
-            // Log what happened
-            foreach ($bpi->getInstallTotalsLog() as $entry) {
-                $this->log($entry);
-            }
+        // Log what happened
+        foreach ($bpi->getInstallTotalsLog() as $entry) {
+            $this->log($entry);
         }
     }
 }

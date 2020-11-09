@@ -15,6 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Řídicí panel seznamu příležitostí',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Řídicí panel záznamů příležitostí',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Podrobnosti o příležitosti',
 
     'LBL_MODULE_NAME' => 'Obchody',
     'LBL_MODULE_NAME_SINGULAR' => 'Příležitost',
@@ -25,6 +26,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => 'Název obchodu:',
     'LBL_OPPORTUNITY' => 'Obchody:',
     'LBL_NAME' => 'Název příležitosti',
+    'LBL_TIME' => 'Čas',
     'LBL_INVITEE' => 'Kontakty',
     'LBL_CURRENCIES' => 'Měny',
     'LBL_LIST_OPPORTUNITY_NAME' => 'Název',
@@ -75,6 +77,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Typ:',
     'LBL_CAMPAIGN' => 'Kampaň:',
     'LBL_NEXT_STEP' => 'Další krok:',
+    'LBL_SERVICE_START_DATE' => 'Service Start Date',
     'LBL_LEAD_SOURCE' => 'Zdrojový zájemce',
     'LBL_SALES_STAGE' => 'Fáze prodeje:',
     'LBL_SALES_STATUS' => 'Stav',
@@ -142,6 +145,16 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE_FORECAST' => 'Předpověď',
     'LBL_WORKSHEET' => 'List',
 
+    'LBL_RENEWAL' => 'Obnovení',
+    'LBL_RENEWAL_OPPORTUNITIES' => 'Příležitosti obnovení',
+    'LBL_RENEWAL_PARENT' => 'Nadřazená příležitost',
+    'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'ID nadřazeného obnovení',
+    'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
+
+    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
+    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
+    'LBL_WIDGET_AMOUNT' => 'Amount',
+
     'TPL_RLI_CREATE' => 'Příležitost musí mít asociovaný řádek tržby. <a href="javascript:void(0);" id="createRLI">Vytvořit řádek tržby</a>.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Vytvořit položku',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Položky nabídky',
@@ -152,6 +165,7 @@ $mod_strings = array(
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Nemůžete smazat příležitosti, které obsahují uzavřené řádky',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Jeden nebo více vybraných záznamů obsahuje uzavřené řádky a nemůže být smazán.',
     'LBL_INCLUDED_RLIS' => '# zahrnutých položek Příjmy',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Nabídky',
 
@@ -186,24 +200,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Po provedení této změny bude vytvořen řádek tržby pro každý {{module_name}} v pozadí. Jakmile je řádek tržby kompletní a dostupný, je odesláno upozornění na email ve vašem profilu. Aby vaše instance odesílala emaily, musí být email správně nastaven v Správce > Nastavení emailu.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje od začátku do konce. Každý záznam modulu {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd. {{module_name}} typicky postupuje přes několik prodejních fází, dokud není označen buď jako „Vyhráno“ nebo „Prohráno“. {{plural_module_name}} lze využít ještě dále pomocí modulu Sugar {{forecasts_singular_module}}, abyste mohli porozumět prodejním trendům a předpovídat je, jakož i zaměřit své úsilí na dosažení prodejních kvót.',
+    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje od začátku do konce. Každý záznam modulu {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd. {{module_name}} typicky postupuje přes několik prodejních fází, dokud není označen buď jako „Uzavřeno úspěšně“ nebo „Uzavřeno neúspěšně“. {{plural_module_name}} lze využít ještě dále pomocí modulu Sugar {{forecasts_singular_module}}, abyste mohli porozumět prodejním trendům a předpovídat je, jakož i zaměřit své úsilí na dosažení prodejních kvót.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje a řádkové položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd.
 
-- Upravte pole záznamu kliknutím na jednotlivé pole nebo na tlačítko Upravit. 
-- Zobrazte nebo upravte odkazy na jiné záznamy v dílčích panelech přepnutím spodního levého podokna na „Zobrazení dat“. 
-- Vytvořte a prohlédněte si uživatelské komentáře a historii změn záznamu v {{activitystream_singular_module}} tím, že přepnete spodní levý panel na „Přehled aktivit“. 
-- Sledujte záznam nebo jej označte jako oblíbený pomocí ikon vpravo od názvu záznamu. 
-- Další akce jsou k dispozici v rozbalovací nabídce Akce vpravo od tlačítka Upravit.',
+- Upravte pole tohoto záznamu klepnutím na jednotlivé pole nebo na tlačítko Upravit. 
+- Zobrazte nebo upravte odkazy na jiné záznamy v podpanelech přepnutím spodního levého podokna na „Zobrazení dat“.
+- Vytvořte a zobrazte uživatelské komentáře a historii změn v modulu {{activitystream_singular_module}} přepnutím spodního levého podokna na „Tok aktivit“.
+- Sledujte záznam nebo si ho přidejte do oblíbených pomocí tlačítek vpravo od názvu záznamu. 
+- Další akce jsou k dispozici v rozevírací nabídce Akce vpravo od tlačítka Upravit.',
 
     // Create View Help Text
     'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje a řádkové položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd.
 
 Chcete-li vytvořit modul {{module_name}}: 
 1. Vyplňte hodnoty polí dle potřeby. 
- - Pole označená jako „Povinné“ musí být před uložením vyplněna. 
- - V případě potřeby klikněte na položku „Zobrazit více“ pro zobrazení dalších polí. 2. Kliknutím na tlačítko „Uložit“ dokončete nový záznam a vraťte se na předchozí stránku.',
+ - Pole označená jako „Povinné“ musí být vyplněna před uložením. 
+ - V případě potřeby klikněte na položku „Zobrazit více“ pro zobrazení dalších polí. 
+2. Kliknutím na tlačítko „Uložit“ dokončete nový záznam a vraťte se na předchozí stránku.',
 
 // END ENT/ULT
 
@@ -215,4 +230,6 @@ Chcete-li vytvořit modul {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Zobrazuje nejlepších deset příležitostí v bublinkovém grafu',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Moje příležitosti',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Příležitosti mého týmu",
+
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
 );

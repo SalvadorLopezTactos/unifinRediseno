@@ -90,6 +90,20 @@ abstract class OpportunitySetup
      */
     protected $rliStudioFile = 'custom/modules/RevenueLineItems/metadata/studio.php';
 
+    /**
+     * Account Extension Folder
+     *
+     * @var string
+     */
+    protected $accModuleExtFolder = 'custom/Extension/modules/Accounts/Ext';
+    
+    /**
+     * Account Module Extension vardef dictionary change
+     *
+     * @var string
+     */
+    protected $accModuleExtVardefFile = 'acc_vardef.ext.php';
+
     public function __construct()
     {
         $this->bean = BeanFactory::newBean('Opportunities');
@@ -192,12 +206,16 @@ abstract class OpportunitySetup
         // hide RLI related fields from massupdate
         $this->fixProductsModule();
 
+        // hide RLI related fields in Account module
+        $this->fixAccountModule();
+
         // r&r the opp module
         $this->runRepairAndRebuild(
             array(
                 'Opportunities',
                 'Products',
                 'Forecasts',
+                'Accounts',
             )
         );
 
@@ -390,14 +408,21 @@ abstract class OpportunitySetup
     protected function setConfigSetting($setting, $value, $show = true)
     {
         $db = DBManagerFactory::getInstance();
-        $sql = "SELECT value FROM config
-                WHERE category = 'MySettings'
-                AND name = '" . $setting . "'
-                AND (platform = 'base' OR platform IS NULL OR platform = '')";
-        $results = $db->query($sql);
+        $sql = <<<SQL
+SELECT value FROM config
+WHERE category = 'MySettings'
+AND name = ?
+AND (platform = 'base' OR platform IS NULL OR platform = '')
+SQL;
 
-        while ($row = $db->fetchRow($results)) {
-            $tabArray = unserialize(base64_decode($row['value']));
+        $stmt = $db->getConnection()
+            ->executeQuery(
+                $sql,
+                [$setting]
+            );
+
+        foreach ($stmt as $row) {
+            $tabArray = unserialize(base64_decode($row['value']), ['allowed_classes' => false]);
 
             // in the setup, this might not be set yet.
             if (is_array($tabArray)) {
@@ -409,13 +434,22 @@ abstract class OpportunitySetup
                     unset($tabArray[$key]);
                 }
 
-                $sql = "UPDATE config
-                    SET value = '" . base64_encode(serialize($tabArray)) . "'
-                    WHERE category = 'MySettings'
-                    AND name = '" . $setting . "'
-                    AND (platform = 'base' OR platform IS NULL OR platform = '')";
-                $db->query($sql);
-                $db->commit();
+                $sql = <<<SQL
+UPDATE config
+SET value = ?
+WHERE category = 'MySettings'
+AND name = ?
+AND (platform = 'base' OR platform IS NULL OR platform = '')
+SQL;
+
+                $db->getConnection()
+                    ->executeUpdate(
+                        $sql,
+                        [
+                            base64_encode(serialize($tabArray)),
+                            $setting,
+                        ]
+                    );
             }
         }
     }
@@ -775,4 +809,9 @@ EOL;
      * Any Custom Logic for the Opportunity Module
      */
     abstract protected function fixOpportunityModule();
+
+    /**
+     * Fix Account module.
+     */
+    abstract protected function fixAccountModule();
 }

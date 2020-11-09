@@ -61,6 +61,15 @@ class SamlFeatureContext extends FeatureContext
     }
 
     /**
+     * @BeforeScenario @saml
+     */
+    public function beforeSAMLScenario()
+    {
+        $this->getSession()->reset();
+        $this->getSession()->restart();
+    }
+
+    /**
      * @AfterScenario @saml
      */
     public function afterSAMLScenario()

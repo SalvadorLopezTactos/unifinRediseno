@@ -32,22 +32,9 @@ class LoginLockout extends \Google\Protobuf\Internal\Message
      */
     private $time = null;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type int $type
-     *     @type int $attempt
-     *           Lockout users after un-successful login attempts
-     *     @type \Google\Protobuf\Duration $time
-     *           Login lockout time. Used if type TIME.
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Provider\V1Alpha\Provider::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

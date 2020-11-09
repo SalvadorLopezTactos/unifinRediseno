@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Преглед',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'ВНИМАНИЕ: Ако промените основния модул, всички полета вече добавени към шаблона ще бъдат премахнати.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Това е заявеният файл (Не можете да променяте този текст)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Оферта',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Шаблонът се използва за печат на Оферта в PDF формат.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'оферта',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Оферта (с услуги)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Този шаблон се използва за печат на Оферта, включително информация за обслужване, в PDF формат.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'servicequote',
+
   'LBL_TPL_INVOICE_NAME' => 'Фактура',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Този шаблон се използва за печат на Фактури в PDF формат.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'фактура',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Фактура (с услуги)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Този шаблон се използва за печат на Фактура, включително информация за обслужване, в PDF формат.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'serviceinvoice',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Номер на офертата:',
   'LBL_TPL_SALES_PERSON' => 'Търговец:',
   'LBL_TPL_VALID_UNTIL' => 'Валидна до:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Партиден номер:',
   'LBL_TPL_PRODUCT' => 'Офериран продукт',
   'LBL_TPL_RLI' => 'Приходни позиции',
+  'LBL_TPL_DURATION' => 'Продължителност',
+  'LBL_TPL_DURATION_STARTS' => 'Начало:',
+  'LBL_TPL_DURATION_ENDS' => 'Край:',
   'LBL_TPL_LIST_PRICE' => 'Каталожна цена',
   'LBL_TPL_UNIT_PRICE' => 'Единична цена',
   'LBL_TPL_EXT_PRICE' => 'Външна цена',

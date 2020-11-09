@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'يجب أن تتراوح نسبة العرض إلى الارتفاع بين 1:1 و10:1.  سوف يتم تغيير حجم الصورة.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'يجب أن تتراوح نسبة العرض إلى الارتفاع بين 3:1 و20:1.  تحميل ملف جديد بهذه النسبة.',
     'ERR_ALERT_FILE_UPLOAD' => 'حدث خطأ أثناء تحميل الصورة.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'تعذر إنشاء الدليل للصور',
     'LBL_LOGGER'=>'إعدادات المسجل',
 	'LBL_LOGGER_FILENAME'=>'اسم ملف السجل',
-	'LBL_LOGGER_FILE_EXTENSION'=>'الملحق',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'الحد الأقصى لحجم السجل',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'تنسيق التاريخ الافتراضي',
 	'LBL_LOGGER_LOG_LEVEL'=>'مستوى السجل',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'إعدادات سجل التعليق',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'العدد الأقصى للأحرف الذي سيتم إظهاره لكل إدخال تعليق',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

@@ -54,4 +54,28 @@ class SugarFieldDate extends SugarFieldDatetime {
         return $value;
     }
 
+    /**
+     * Sanitize date value
+     * @param string $value
+     * @param $vardef
+     * @param SugarBean $focus
+     * @param ImportFieldSanitize $settings
+     * @return bool|string
+     */
+    public function importSanitize($value, $vardef, $focus, ImportFieldSanitize $settings)
+    {
+        try {
+            $date = SugarDateTime::createFromFormat(
+                $settings->dateformat,
+                $value
+            );
+            if (intval($date->year) < 100) {
+                return false;
+            }
+        } catch (Exception $e) {
+            return false;
+        }
+
+        return $date->asDbDate(false);
+    }
 }

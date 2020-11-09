@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'วันที่แก้ไข',
     'LBL_DELETED' => 'ลบ',
     'LBL_REVENUELINEITEMS' => 'รายการบรรทัดรายได้',
+    'LBL_ENTRY_SOURCE' => 'แหล่งที่มาของบันทึก',
+    'LBL_SOURCE_EXTERNAL' => 'ภายนอก',
+    'LBL_SOURCE_INTERNAL' => 'ภายใน',
 
     // Help Text
     // List View Help Text

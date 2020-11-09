@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'פרסם מאמרים שאושרו ומאמרי KB שפג תוקפם.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' עבודה מתוזמנת',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'בנה מחדש נתוני אבטחת צוות לא מנורמל',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'מטהר פעילויות',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'מרווחים:',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'הפעל שליחת תזכורות בדוא"ל',
 'LBL_CLEANJOBQUEUE' => 'ניקוי תור משרות',
 'LBL_CLEANOLDRECORDLISTS' => 'נקה רשימת רשומות ישנה',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'מטהר פעילויות',
 'LBL_PMSEENGINECRON' => 'מתזמן SugarBPM',
 );
 

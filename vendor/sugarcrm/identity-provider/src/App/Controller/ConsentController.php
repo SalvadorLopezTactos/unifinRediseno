@@ -13,19 +13,19 @@
 namespace Sugarcrm\IdentityProvider\App\Controller;
 
 use Sugarcrm\Apis\Iam\App\V1alpha as AppApi;
+use Sugarcrm\IdentityProvider\App\Application;
+use Sugarcrm\IdentityProvider\App\Authentication\JoseService;
+use Sugarcrm\IdentityProvider\App\Authentication\OAuth2Service;
 use Sugarcrm\IdentityProvider\App\Authentication\ConsentRequest\ConsentToken;
 use Sugarcrm\IdentityProvider\App\Authentication\ConsentRequest\ConsentTokenInterface;
 use Sugarcrm\IdentityProvider\App\Provider\TenantConfigInitializer;
 use Sugarcrm\IdentityProvider\App\Repository\Exception\ConsentNotFoundException;
+use Sugarcrm\IdentityProvider\App\Repository\Exception\TenantNotExistsException;
 use Sugarcrm\IdentityProvider\Authentication\Consent\ConsentChecker;
 use Sugarcrm\IdentityProvider\Authentication\Tenant;
 use Sugarcrm\IdentityProvider\Srn;
-
-use Sugarcrm\IdentityProvider\App\Application;
-use Sugarcrm\IdentityProvider\App\Authentication\JoseService;
-use Sugarcrm\IdentityProvider\App\Authentication\OAuth2Service;
-
 use Sugarcrm\IdentityProvider\Srn\Converter;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -77,23 +77,32 @@ class ConsentController
             throw new BadRequestHttpException('Consent not found', null, 400);
         }
 
-        $consentToken = $app->getConsentRestService()->getToken($request->query->get('consent'));
-        $tenantSrn = $consentToken->getTenantSRN();
-        if ($tenantSrn) {
-            if (preg_match(Srn\SrnRules::TENANT_REGEX, $tenantSrn)) {
-                $storedTenant = $app->getTenantRepository()->findTenantById($tenantSrn);
-                $tenantSrn = Srn\Converter::toString(
-                    $app->getSrnManager($storedTenant->getRegion())->createTenantSrn($tenantSrn)
-                );
-                $consentToken->setTenantSRN($tenantSrn);
-            }
-            $this->sessionService->set(TenantConfigInitializer::SESSION_KEY, $tenantSrn);
-        }
         $params = [];
-        if ($consentToken->getUsername()) {
-            $params['login_hint'] = $consentToken->getUsername();
+        try {
+            $consentToken = $app->getConsentRestService()->getToken($request->query->get('consent'));
+            $tenantSrn = $consentToken->getTenantSRN();
+            if ($tenantSrn) {
+                if (preg_match(Srn\SrnRules::TENANT_REGEX, $tenantSrn)) {
+                    $storedTenant = $app->getTenantRepository()->findTenantById($tenantSrn);
+                    $tenantSrn = Srn\Converter::toString(
+                        $app->getSrnManager($storedTenant->getRegion())->createTenantSrn($tenantSrn)
+                    );
+                    $consentToken->setTenantSRN($tenantSrn);
+                }
+                $this->sessionService->set(TenantConfigInitializer::SESSION_KEY, $tenantSrn);
+            }
+            if ($consentToken->getUsername()) {
+                $params['login_hint'] = $consentToken->getUsername();
+            }
+            $this->sessionService->set('consent', $consentToken);
+        } catch (TenantNotExistsException $e) {
+            $app->getLogger()->info('Invalid tenant id', [
+                'errors' => $e->getMessage(),
+                'tags' => ['IdM.consent'],
+            ]);
+            $this->sessionService->getFlashBag()->add('error', $e->getMessage());
         }
-        $this->sessionService->set('consent', $consentToken);
+
         return $app->redirect($app->getUrlGeneratorService()->generate('loginRender', $params));
     }
 
@@ -135,6 +144,7 @@ class ConsentController
                     'tenant' => $consentToken->getTenantSRN(),
                     'client' => $clientId,
                     'user_name' => $userToken->getUser()->getUsername(),
+                    'user_srn' => $userToken->hasAttribute('srn') ? $userToken->getAttribute('srn') : 'unknown',
                     'scopes' => $consentToken->getScopes(),
                     'tags' => ['IdM.consent'],
                 ]

@@ -87,7 +87,7 @@ $mod_strings = array (
 	'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => '商談',
     'LBL_CASES_SUBPANEL_TITLE' => 'ケース',
     'LBL_BUGS_SUBPANEL_TITLE' => 'バグトラッカー',
-    'LBL_PRODUCTS_SUBPANEL_TITLE' => '見積済商品',
+    'LBL_PRODUCTS_SUBPANEL_TITLE' => '見積品目',
     'LBL_RLI_SUBPANEL_TITLE' => '商談品目',
     
 	'LBL_QUOTES_SUBPANEL_TITLE' => '見積',

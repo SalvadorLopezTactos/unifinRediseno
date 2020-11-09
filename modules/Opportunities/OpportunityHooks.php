@@ -23,6 +23,54 @@ class OpportunityHooks extends AbstractForecastHooks
     }
 
     /**
+     * Generate a renewal opportunity when an opportunity containing services is closed won.
+     *
+     * @param Opportunity $bean The bean we are working with
+     * @param string $event Which event was fired
+     * @param array $args Any additional Arguments
+     * @return bool
+     */
+    public static function generateRenewalOpportunity(Opportunity $bean, string $event, array $args): bool
+    {
+        if ($bean->canRenew() &&
+            !empty($args['dataChanges']['sales_status']) &&
+            $args['dataChanges']['sales_status']['after'] === Opportunity::STATUS_CLOSED_WON
+        ) {
+            $rliBeans = $bean->getClosedWonRenewableRLIs();
+
+            if (!empty($rliBeans)) {
+                // check if parent opportunity and its renewal opportunity exist
+                $parentBean = $bean->getRenewalParent();
+
+                if ($parentBean) {
+                    $renewalBean = $parentBean->getExistingRenewalOpportunity();
+                }
+
+                // check if its own renewal opportunity exists
+                if (empty($renewalBean)) {
+                    $renewalBean = $bean->getExistingRenewalOpportunity();
+                }
+
+                // create a new renewal opportunity
+                if (empty($renewalBean)) {
+                    $renewalBean = $bean->createNewRenewalOpportunity();
+                }
+
+                if ($renewalBean) {
+                    foreach ($rliBeans as $rliBean) {
+                        // create new renewal RLI
+                        $newRliBean = $renewalBean->createNewRenewalRLI($rliBean);
+                    }
+
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * This is a general hook that takes the Opportunity and saves it to the forecast worksheet record.
      *
      * @param Opportunity $bean The bean we are working with
@@ -113,6 +161,8 @@ class OpportunityHooks extends AbstractForecastHooks
                 if ($lost_rlis == $total_rlis) {
                     $bean->sales_status = Opportunity::STATUS_CLOSED_LOST;
                 } else {
+                    // update $bean->fetched_row['sales_status'] to avoid triggering generateRenewalOpportunity again
+                    $bean->retrieveSalesStatus();
                     $bean->sales_status = Opportunity::STATUS_CLOSED_WON;
                 }
             }

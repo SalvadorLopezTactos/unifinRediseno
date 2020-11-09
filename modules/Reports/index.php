@@ -15,7 +15,6 @@ global $theme;
 $GLOBALS['displayListView'] = true;
 
 require_once('modules/Reports/templates/templates_reports.php');
-require_once('modules/Reports/templates/templates_reports_index.php');
 require_once('modules/Reports/templates/templates_pdf.php');
 require_once('modules/Reports/templates/templates_export.php');
 
@@ -25,7 +24,7 @@ global $current_language, $report_modules, $modules_report, $mod_strings;
 $args = array();
 
 // set default
-if ($_REQUEST['action'] == 'index') {
+if ($_REQUEST['action'] === 'index') {
 if ( isset($_REQUEST['id'])) {
 	$saved_report_seed = BeanFactory::newBean('Reports');
 	$saved_report_seed->disable_row_level_security = true;
@@ -94,45 +93,43 @@ control($args);
 
 
 // show report interface
-if (isset($_REQUEST['page'] ) && $_REQUEST['page'] == 'report')
-{
-	checkSavedReportACL($args['reporter'],$args);
-	if (isset($_REQUEST['run_query']) && ($_REQUEST['run_query'] == 1)) {
-		template_reports_report($args['reporter'],$args);
-		if (!empty($_REQUEST['expanded_combo_summary_divs'])) {
-			$expandDivs = explode(" ",$_REQUEST['expanded_combo_summary_divs']);
-			foreach($expandDivs as $divId) {
-				str_replace(" ", "",$divId);
-				if ($divId != "")
-                    echo '<script>expandCollapseComboSummaryDiv("' . htmlspecialchars($divId, ENT_QUOTES, 'UTF-8') . '")
+    if (isset($_REQUEST['page']) && $_REQUEST['page'] === 'report') {
+        checkSavedReportACL($args['reporter'], $args);
+        if (!empty($_REQUEST['run_query'])) {
+            template_reports_report($args['reporter'], $args);
+            if (!empty($_REQUEST['expanded_combo_summary_divs'])) {
+                $expandDivs = explode(" ", $_REQUEST['expanded_combo_summary_divs']);
+                foreach ($expandDivs as $divId) {
+                    str_replace(" ", "", $divId);
+                    if ($divId !== '') {
+                        echo '<script>expandCollapseComboSummaryDiv(' . json_encode($divId, JSON_HEX_TAG) . ')
                         </script>';
-			}
-		}
-	}
-	else
-		include("modules/Reports/ReportsWizard.php");
+                    }
+                }
+            }
+        } else {
+            include 'modules/Reports/ReportsWizard.php';
+        }
 
-}
-// show report lists
-else
-{
-if ( empty($_REQUEST['search_form_only']) ) {
-    $params = array();
-    if(!empty($_REQUEST['favorite'])) {
-        $params[] = $mod_strings['LBL_FAVORITES_TITLE'];
-    } else {
-        $params[] = $app_strings['LBL_SEARCH'];
+    } else { // show report lists
+        if (empty($_REQUEST['search_form_only'])) {
+            $params = array();
+            if (!empty($_REQUEST['favorite'])) {
+                $params[] = htmlspecialchars($mod_strings['LBL_FAVORITES_TITLE']);
+            } else {
+                $params[] = htmlspecialchars($app_strings['LBL_SEARCH']);
+            }
+
+            //Override the create url
+            $createURL = 'index.php?module=Reports&report_module=&action=index&page=report&Create+Custom+Report=Create+Custom+Report';
+            echo getClassicModuleTitle("Reports", $params, true, '', $createURL) . '<div class="clear"></div>';
+        }
+
+        include SugarAutoLoader::existingCustomOne("modules/Reports/ListView.php");
     }
 
-    //Override the create url
-    $createURL = 'index.php?module=Reports&report_module=&action=index&page=report&Create+Custom+Report=Create+Custom+Report';
-    echo getClassicModuleTitle("Reports", $params, true, '', $createURL) . "<div class='clear'></div>";
 }
 
-include SugarAutoLoader::existingCustomOne("modules/Reports/ListView.php");
-}
-
-}
 function checkACLForEachColInArr ($arr, $full_table_list, $is_owner = 1){
 	foreach ($arr as $column) {
 		$col_module = $full_table_list[$column['table_key']]['module'];
@@ -329,7 +326,7 @@ function control(&$args)
                 $result = $saved_report->mark_published("yes");
                 if ($result == -1)
                 {
-                        $error_msg = $mod_strings['MSG_UNABLE_PUBLISH_ANOTHER'];
+                        $error_msg = htmlspecialchars($mod_strings['MSG_UNABLE_PUBLISH_ANOTHER']);
                 }
         }
         else if ( $_REQUEST['publish'] == 'no')
@@ -339,12 +336,10 @@ function control(&$args)
                 $result = $saved_report->mark_published("no");
                 if ($result == -1)
                 {
-                        $error_msg = $mod_strings['MSG_UNABLE_PUBLISH_YOU_OWN'];
+                        $error_msg = htmlspecialchars($mod_strings['MSG_UNABLE_PUBLISH_YOU_OWN']);
 
                 }
         }
         if(isset($error_msg)) echo $error_msg;
    }
 }
-
-?>

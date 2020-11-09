@@ -35,7 +35,7 @@
   font-weight: bold;
   line-height: @baseLineHeight;
   color: @grayLight;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  text-shadow: 0 1px 0 fade(@white, 50%);
   text-transform: uppercase;
 }
 // Space them out when they follow another list item (link)
@@ -56,7 +56,7 @@
 .nav-list .nav-header {
   margin-left: -15px;
   margin-right: -15px;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  text-shadow: 0 1px 0 fade(@white, 50%);
 }
 
 .nav-list > li > a {
@@ -66,7 +66,7 @@
 .nav-list > .active > a,
 .nav-list > .active > a:hover {
   color: @white;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+  text-shadow: 0 -1px 0 fade(@black, 20%);
   background-color: @linkColor;
 }
 
@@ -105,7 +105,7 @@
 
 // Give the tabs something to sit on
 .nav-tabs {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid @grayLighter;
 }
 // Make the list-items overlay the bottom border
 .nav-tabs > li {
@@ -116,20 +116,20 @@
   padding-top: 8px;
   padding-bottom: 8px;
   line-height: @baseLineHeight;
-  border: 1px solid transparent;
+  border: 1px solid @transparent;
   border-radius: 4px 4px 0 0;
 
   &:hover {
-    border-color: @grayLighter @grayLighter #ddd;
+    border-color: @grayLighter @grayLighter @grayLightish;
   }
 }
 // Active state, and it's :hover to override normal :hover
 .nav-tabs > .active > a,
 .nav-tabs > .active > a:hover {
   color: @gray;
-  background-color: @bodyBackground;
-  border: 1px solid #ddd;
-  border-bottom-color: transparent;
+  background-color: @tabBackgroundActive;
+  border: 1px solid @grayLighter;
+  border-bottom-color: @transparent;
   cursor: default;
 }
 
@@ -170,7 +170,7 @@
 }
 
 .nav-tabs.nav-stacked > li > a {
-  border: 1px solid #ddd;
+  border: 1px solid @grayLighter;
   border-radius: 0;
 }
 
@@ -185,7 +185,7 @@
 }
 
 .nav-tabs.nav-stacked > li > a:hover {
-  border-color: #ddd;
+  border-color: @grayLighter;
   z-index: 2;
 }
 
@@ -231,8 +231,8 @@
 // Active dropdown links
 // -------------------------
 .nav .active .dropdown-toggle .caret {
-  border-top-color: #fff;
-  border-bottom-color: #fff;
+  border-top-color: @white;
+  border-bottom-color: @white;
 }
 
 .nav-tabs .active .dropdown-toggle .caret {
@@ -319,14 +319,14 @@
   border-radius: 0 0 4px 4px;
 
   &:hover {
-    border-bottom-color: transparent;
-    border-top-color: #ddd;
+    border-bottom-color: @transparent;
+    border-top-color: @grayLighter;
   }
 }
 
 .tabs-below > .nav-tabs > .active > a,
 .tabs-below > .nav-tabs > .active > a:hover {
-  border-color: transparent #ddd #ddd;
+  border-color: @transparent @grayLighter @grayLighter;
 }
 
 // LEFT & RIGHT
@@ -349,7 +349,7 @@
 .tabs-left > .nav-tabs {
   float: left;
   margin-right: 19px;
-  border-right: 1px solid #ddd;
+  border-right: 1px solid @grayLighter;
 }
 
 .tabs-left > .nav-tabs > li > a {
@@ -358,19 +358,19 @@
 }
 
 .tabs-left > .nav-tabs > li > a:hover {
-  border-color: @grayLighter #ddd @grayLighter @grayLighter;
+  border-color: @grayLighter @grayLightish @grayLighter @grayLighter;
 }
 
 .tabs-left > .nav-tabs .active > a,
 .tabs-left > .nav-tabs .active > a:hover {
-  border-color: #ddd transparent #ddd #ddd;
+  border-color: @grayLighter @transparent @grayLighter @grayLighter;
 }
 
 // Tabs on the right
 .tabs-right > .nav-tabs {
   float: right;
   margin-left: 19px;
-  border-left: 1px solid #ddd;
+  border-left: 1px solid @grayLighter;
 }
 
 .tabs-right > .nav-tabs > li > a {
@@ -379,12 +379,12 @@
 }
 
 .tabs-right > .nav-tabs > li > a:hover {
-  border-color: @grayLighter @grayLighter @grayLighter #ddd;
+  border-color: @grayLighter @grayLighter @grayLighter @grayLightish;
 }
 
 .tabs-right > .nav-tabs .active > a,
 .tabs-right > .nav-tabs .active > a:hover {
-  border-color: #ddd #ddd #ddd transparent;
+  border-color: @grayLighter @grayLighter @grayLighter @transparent;
 }
 
 // DISABLED STATES
@@ -397,7 +397,7 @@
 // Nuke hover effects
 .nav > .disabled > a:hover {
   text-decoration: none;
-  background-color: transparent;
+  background-color: @transparent;
   cursor: default;
 }
 
@@ -476,7 +476,7 @@
 
 // Actual tabs (as links)
 .nav-tabs > li > a {
-  background-color: transparent;
+  background-color: @transparent;
   color: @gray;
   margin: 0 4px;
   //border: 1px solid darken(@grayLight, 5%);
@@ -533,7 +533,7 @@
 
 .tabs-below > .nav-tabs > .active > a,
 .tabs-below > .nav-tabs > .active > a:hover {
-  border-color: transparent @grayLight @grayLight @grayLight;
+  border-color: @transparent @grayLight @grayLight @grayLight;
 }
 
 // Tabs on the left
@@ -547,7 +547,7 @@
 
 .tabs-left > .nav-tabs .active > a,
 .tabs-left > .nav-tabs .active > a:hover {
-  border-color: @grayLight transparent @grayLight @grayLight;
+  border-color: @grayLight @transparent @grayLight @grayLight;
 }
 
 .tabs-left > .nav-tabs > li > a,
@@ -572,7 +572,7 @@
 
 .tabs-right > .nav-tabs .active > a,
 .tabs-right > .nav-tabs .active > a:hover {
-  border-color: @grayLight @grayLight @grayLight transparent;
+  border-color: @grayLight @grayLight @grayLight @transparent;
 }
 
 //These changes are from the initial bs commit but have changed in new bs
@@ -600,7 +600,7 @@
 
       &.active {
         font-weight: bold;
-        border-bottom: transparent;
+        border-bottom: @transparent;
         background: @white;
       }
 
@@ -646,6 +646,10 @@
   width: 20%;
 }
 
+.dashlet-tabs.tab6 .dashlet-tab {
+  width: 16%;
+}
+
 //Record view tabbed layout
 .record.tab-layout {
   padding: 0;
@@ -687,6 +691,73 @@
     > .row-fluid.panel_hidden {
       padding: 0 13px;
       box-sizing: border-box;
+    }
+  }
+}
+
+// Tabbed dashboard
+.nav-tabs-indented li.tab:first-child {
+  margin-left: 40px;
+}
+
+li.tab.tab-badgeable {
+  height: 36px;
+  margin-bottom: 0;
+
+  .tab-title {
+    text-align: left;
+    margin-right: 20px;
+    vertical-align: middle;
+  }
+
+  .label {
+    margin: 0 2px;
+    display: inline;
+  }
+
+  .case-expired {
+    color: @darkRed;
+    background-color: @lightRed;
+    border: none;
+  }
+
+  .case-soon {
+    color: @darkOrange;
+    background-color: @lightOrange;
+    border: none;
+  }
+
+  .case-future {
+    color: @black;
+    background-color: @white;
+    border: none;
+  }
+
+  &.active {
+    // Paint over the border (from the ul element) for the active tab only
+    border-bottom: 1px solid @tabBackgroundActive;
+    margin-bottom: -1px;
+  }
+
+  &:not(.active) {
+    background-color: @tabBackgroundInactive;
+  }
+
+  a {
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    min-height: @countBadgeHeight;
+    width: 162px;
+
+    // vertical centering hack for badgeless tabs, based off https://css-tricks.com/centering-in-the-unknown/
+    vertical-align: middle;
+
+    span:first-child::after {
+      content: '';
+      display: inline-block;
+      height: 20px;
     }
   }
 }

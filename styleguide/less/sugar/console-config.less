@@ -1,0 +1,43 @@
+// Setting widths for filter row fields
+.console-config .row-fluid div {
+  width: 28%;
+  display: inline-block;
+}
+
+.console-config .row-fluid .filter-selector div {
+  width: 100%;
+}
+
+// Hiding filter row fields
+.console-config .row-fluid .hide {
+  display: none;
+}
+
+// Hides "From/To" labels of values from "between" operators to save space
+.console-config .row-fluid .add-on {
+  display: none;
+}
+
+// Fixes issue with select2 fields automatically opening a search dropdown on creation
+.console-config .filter-selector .select2-drop {
+  display: none;
+}
+
+// Setting proper alignments of filter row fields
+.console-config .row-fluid .filter-actions.btn-group {
+  width: auto;
+  vertical-align: top;
+}
+
+.console-config .row-fluid .span4 {
+  margin-left: 0;
+  float: none;
+  vertical-align: top;
+}
+
+.console-config-fields {
+  & * .fieldset-field {
+    width: 50%;
+  }
+}
+

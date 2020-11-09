@@ -2493,6 +2493,13 @@ AdamActivity.prototype.getAction = function(type, w) {
                     success: function(data) {
                         App.alert.dismiss('upload');
                         if (data) {
+                            data.result = setDatetimeFieldsBCOptions({
+                                targetModule: PROJECT_MODULE,
+                                selectedModule: data.name,
+                                fields: data.result,
+                                showTargetModuleOption: true,
+                                showSelectedModuleOption: PROJECT_MODULE !== data.name
+                            });
                             updater_field.setOptions(data.result, true);
                         }
 
@@ -2525,6 +2532,13 @@ AdamActivity.prototype.getAction = function(type, w) {
                         success: function(data) {
                             App.alert.dismiss('upload');
                             if (data) {
+                                data.result = setDatetimeFieldsBCOptions({
+                                    targetModule: PROJECT_MODULE,
+                                    selectedModule: data.name,
+                                    fields: data.result,
+                                    showTargetModuleOption: true,
+                                    showSelectedModuleOption: PROJECT_MODULE !== data.name
+                                });
                                 updater_field.setOptions(data.result);
                             }
 
@@ -2536,6 +2550,13 @@ AdamActivity.prototype.getAction = function(type, w) {
                         success: function(data) {
                             App.alert.dismiss('upload');
                             if (data) {
+                                data.result = setDatetimeFieldsBCOptions({
+                                    targetModule: PROJECT_MODULE,
+                                    selectedModule: data.name,
+                                    fields: data.result,
+                                    showTargetModuleOption: true,
+                                    showSelectedModuleOption: PROJECT_MODULE !== data.name
+                                });
                                 updater_field.setOptions(data.result);
                             }
 
@@ -2697,6 +2718,13 @@ AdamActivity.prototype.getAction = function(type, w) {
                                 updater_field.proxy.getData({call_type: 'CF', base_module: updater_field.proxy.uid}, {
                                     success: function(fields) {
                                         if (fields) {
+                                            fields.result = setDatetimeFieldsBCOptions({
+                                                targetModule: PROJECT_MODULE,
+                                                selectedModule: fields.name,
+                                                fields: fields.result,
+                                                showTargetModuleOption: true,
+                                                showSelectedModuleOption: PROJECT_MODULE !== fields.name
+                                            });
                                             updater_field.setOptions(fields.result);
                                             updater_field.setValue(data.act_fields || null);
                                             updater_field.isValid();
@@ -2746,7 +2774,7 @@ AdamActivity.prototype.getAction = function(type, w) {
                     comboRelated.value = '';
                     comboRelated.proxy.url = 'pmse_Project/CrmData/related/' +
                         comboModules.getSelectedData().module_name;
-                    comboRelated.proxy.getData({removeTarget: true, cardinality: 'many'}, {
+                    comboRelated.proxy.getData({removeTarget: true, cardinality: 'many', call_type: 'AC'}, {
                         success: function(data) {
                             App.alert.dismiss('upload');
                             if (data) {
@@ -2762,6 +2790,13 @@ AdamActivity.prototype.getAction = function(type, w) {
                     success: function(data) {
                         App.alert.dismiss('upload');
                         if (data) {
+                            data.result = setDatetimeFieldsBCOptions({
+                                targetModule: PROJECT_MODULE,
+                                selectedModule: data.name,
+                                fields: data.result,
+                                showTargetModuleOption: true,
+                                showSelectedModuleOption: false
+                            });
                             updater_field.setOptions(data.result, true);
                         }
                     }
@@ -2782,6 +2817,13 @@ AdamActivity.prototype.getAction = function(type, w) {
                         success: function(data) {
                             App.alert.dismiss('upload');
                             if (data) {
+                                data.result = setDatetimeFieldsBCOptions({
+                                    targetModule: PROJECT_MODULE,
+                                    selectedModule: data.name,
+                                    fields: data.result,
+                                    showTargetModuleOption: true,
+                                    showSelectedModuleOption: false
+                                });
                                 updater_field.setOptions(data.result);
                             }
 
@@ -2794,6 +2836,13 @@ AdamActivity.prototype.getAction = function(type, w) {
                         success: function(data) {
                             App.alert.dismiss('upload');
                             if (data) {
+                                data.result = setDatetimeFieldsBCOptions({
+                                    targetModule: PROJECT_MODULE,
+                                    selectedModule: data.name,
+                                    fields: data.result,
+                                    showTargetModuleOption: true,
+                                    showSelectedModuleOption: false
+                                });
                                 updater_field.setOptions(data.result);
                             }
 
@@ -2861,7 +2910,7 @@ AdamActivity.prototype.getAction = function(type, w) {
                 'loaded': function(data) {
                     var params = data.act_params ? JSON.parse(data.act_params) : {};
                     self.canvas.emptyCurrentSelection();
-                    comboModules.proxy.getData({cardinality: 'all'}, {
+                    comboModules.proxy.getData({cardinality: 'all', call_type: 'AC'}, {
                         success: function(modules) {
                             if (modules && modules.success && modules.result && modules.result.length > 1) {
                                 modules.result = modules.result.splice(1);
@@ -2877,7 +2926,7 @@ AdamActivity.prototype.getAction = function(type, w) {
                                 var initialModule = data.act_field_module || modules.result[0].value;
                                 project.addMetadata('projectModuleFieldsRelated', {
                                     dataURL: 'pmse_Project/CrmData/fields/' + PROJECT_MODULE +
-                                        '?base_module=' + PROJECT_MODULE,
+                                        '?base_module=' + PROJECT_MODULE + '&call_type=PD',
                                     dataRoot: 'result',
                                     success: function(data) {
                                         updater_field.setVariables(data);
@@ -2908,7 +2957,7 @@ AdamActivity.prototype.getAction = function(type, w) {
                                 }
                                 comboRelated.proxy.url = 'pmse_Project/CrmData/related/' +
                                     comboModules.getSelectedData().module_name;
-                                comboRelated.proxy.getData({removeTarget: true, cardinality: 'many'}, {
+                                comboRelated.proxy.getData({removeTarget: true, cardinality: 'many', call_type: 'AC'}, {
                                     success: function(data) {
                                         if (data) {
                                             data.result.unshift({value: '', text: 'Select...'});
@@ -2927,6 +2976,13 @@ AdamActivity.prototype.getAction = function(type, w) {
                                 }
                                 updater_field.proxy.getData({base_module: updater_field.proxy.uid}, {
                                     success: function(fields) {
+                                        fields.result = setDatetimeFieldsBCOptions({
+                                            targetModule: PROJECT_MODULE,
+                                            selectedModule: fields.name,
+                                            fields: fields.result,
+                                            showTargetModuleOption: true,
+                                            showSelectedModuleOption: false
+                                        });
                                         updater_field.setOptions(fields.result);
                                         updater_field.setValue(data.act_fields || null);
                                         updater_field.isValid();

@@ -49,8 +49,7 @@ class MultiFieldHandler extends AbstractHandler implements
         ),
         'text' => array(
             'gs_string',
-            // Disable wildcard search awaiting optimization
-            //'gs_text_wildcard',
+            'gs_string_wildcard',
         ),
         'datetime' => array(
             'gs_datetime',
@@ -93,6 +92,19 @@ class MultiFieldHandler extends AbstractHandler implements
         'enum' => array(
             'gs_not_analyzed',
         ),
+    );
+
+    /**
+     * By default this handler creates not_analyzed multi field base to stack
+     * the different mappings on top of it. However for fields which contain
+     * long texts, we will hit the term limit of 32'766 bytes. Therefor for the
+     * listed fields a non-indexed multi field base will be created instead.
+     *
+     * @var array
+     */
+    protected $longFieldTypes = array(
+        'longtext',
+        'htmleditable_tinymce',
     );
 
     /**
@@ -380,6 +392,16 @@ class MultiFieldHandler extends AbstractHandler implements
     }
 
     /**
+     * check if it is a long type
+     * @param string $type
+     * @return bool
+     */
+    protected function isLongType(string $type) : bool
+    {
+        return in_array($type, $this->longFieldTypes);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildMapping(Mapping $mapping, $field, array $defs)
@@ -390,14 +412,19 @@ class MultiFieldHandler extends AbstractHandler implements
         }
 
         $fieldType = $defs['type'];
-
+        $longType = $this->isLongType($fieldType);
         foreach ($this->typesMultiField[$fieldType] as $multiField) {
             if ($property = $this->getMultiFieldProperty($multiField)) {
-                $mapping->addModuleField($field, $multiField, $property);
+                if (!$longType) {
+                    $mapping->addModuleField($field, $multiField, $property);
+                } else {
+                    $mapping->addModuleLongField($field, $multiField, $property);
+                }
 
                 // Sortable fields also receive a common field to make sorting
                 // possible when querying multiple modules at once.
-                if ($field === 'date_modified' || !empty($defs['full_text_search']['sortable'])) {
+                if (!$longType
+                    && ($field === 'date_modified' || !empty($defs['full_text_search']['sortable']))) {
                     $mapping->addCommonField($field, $multiField, $property);
                 }
             }

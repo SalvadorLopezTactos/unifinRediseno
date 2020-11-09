@@ -300,10 +300,16 @@
      * @protected
      */
     _onMouseWheelChange: function(mouseEvent) {
-        var delta = mouseEvent.type === 'mousewheel' ?
-            mouseEvent.originalEvent.wheelDelta / 20 :
-            mouseEvent.originalEvent.deltaY;
-
+        var delta;
+        if (mouseEvent.type === 'mousewheel') {
+            delta = mouseEvent.originalEvent.wheelDelta / 20;
+        } else if (this.phaser.device.firefox) {
+            //for firefox the scrollamount is reduced considerably (around 30 times);
+            // in order to have an immersive scroll behavior the delta has to be corrected
+            delta = mouseEvent.originalEvent.deltaY * 30;
+        } else {
+            delta = mouseEvent.originalEvent.deltaY;
+        }
         mouseEvent.preventDefault();
         this.phaser.events.onScrollWheel.dispatch(delta);
     },
@@ -853,8 +859,9 @@
                     };
                 };
 
-                // use scrollbar as long as we're not using firefox or safari or ie
-                this.useScrollbar = !(this.game.device.firefox || this.game.device.safari || this.game.device.ie);
+                // Restrict IE and Safari to have a scrollbar while
+                // moving the scrollbar with the mouse is not supported
+                this.useScrollbar = !(this.game.device.ie || this.game.device.safari);
 
                 if (this.game.hasTreeData) {
                     this._setTreeData(this.game.treeData);

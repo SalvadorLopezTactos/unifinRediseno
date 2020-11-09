@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Piedāvājumi (piegādes adrese)',
 	'LNK_ACCOUNT_REPORTS' => 'Skatīt uzņēmumu atskaites',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenti',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Klientu saraksta instrumentu panelis',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Klientu ierakstu instrumentu panelis',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Klienta informācija',
+    'LBL_NEXT_RENEWAL_DATE' => 'Nākamās atjaunošanas datums',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Klienta nosaukums/nozare',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'Atrašanās vieta',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Diagrammas',

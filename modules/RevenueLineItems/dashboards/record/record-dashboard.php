@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-return array(
+return [
     'metadata' =>
     array(
         'components' =>
@@ -63,4 +63,5 @@ return array(
         ),
     ),
     'name' => 'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD',
-);
+    'id' => '5d672788-7b52-11e9-8440-f218983a1c3e',
+];

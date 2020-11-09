@@ -220,9 +220,9 @@
 
         }
         if (faltantes == 0) {
-            if (cont_tel.oTelefonos.telefono.length >=1) {
+            if (this.oTelefonos.telefono.length >=1) {
                 var duplicados= false;
-                cont_tel.oTelefonos.telefono.forEach(function(element) {
+                this.oTelefonos.telefono.forEach(function(element) {
                     var iteracion = element.telefono;
                     iteracion = iteracion.replace(/\s+/gi,'');
 

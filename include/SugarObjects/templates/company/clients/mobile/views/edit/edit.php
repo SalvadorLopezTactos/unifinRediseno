@@ -31,6 +31,7 @@ $viewdefs[$module_name]['mobile']['view']['edit'] = array(
                     'type'=>'link',
                 ),
                 'email1',
+                'tag',
                 'assigned_user_name',
                 'team_name',
             ),

@@ -75,6 +75,10 @@
      * Label should be "More <module name>...".
      */
     setShowMoreLabel: function() {
+        if (!this.collection) {
+            return;
+        }
+
         var model = this.collection.at(0);
         var module = model ? model.module : this.context.get('module');
         var context = {
@@ -106,7 +110,9 @@
             prevCollection.off(null, null, this);
         }
         this.collection = this.context.get('collection');
-        this.collection.on('add remove reset', this.render, this);
+        if (this.collection) {
+            this.collection.on('add remove reset', this.render, this);
+        }
         this.render();
     },
 

@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+
 require_once('modules/ACLFields/actiondefs.php');
 
 /**
@@ -68,6 +70,9 @@ class ACLField extends SugarBean
                     $label = (!empty($fieldDefs[$fkey]['vname'])) ? $fieldDefs[$fkey]['vname'] : $def['vname'];
                     $fkey = strtolower($fkey);
                     $field = strtolower($field);
+                    if (!AccessControlManager::instance()->allowFieldAccess($module, $field)) {
+                        continue;
+                    }
                     $required = !empty($def['required']);
                     if ($field == 'name') {
                         $required = true;
@@ -171,13 +176,12 @@ AND deleted = 0';
     }
 
     /**
-     * Load user field ACL data
+     * Load user field ACL data.
      *
-     * @internal
-     * @param string $module_name Module name
-     * @param string $object
-     * @param string $user_id
-     * @param bool $refresh
+     * @param string $module_name Module name.
+     * @param string $object Object name.
+     * @param string $user_id User ID.
+     * @param bool $refresh If true, refresh. Defaults to false.
      * @return array
      */
     public static function loadUserFields($module_name, $object, $user_id, $refresh = false)
@@ -190,6 +194,13 @@ AND deleted = 0';
         if(!$refresh && isset(self::$acl_fields[$user_id][$module_name]))
         {
             return self::$acl_fields[$user_id][$module_name];
+        }
+        // do not fetch data for field ACL if it's disabled
+        // we need to use $dictionary directly instead of SugarBean as its constructor calls this method,
+        // and creating a new bean instance to access the dictionary data will create endless recursion
+        if (isset($dictionary[$object]['acl_fields']) && !$dictionary[$object]['acl_fields']) {
+            self::$acl_fields[$user_id][$module_name] = array();
+            return array();
         }
 
         // We can not cache per user ID because ACLs are stored per role
@@ -208,16 +219,6 @@ AND deleted = 0';
             if(isset(self::$acl_fields[$user_id][$module_name])) {
                 return self::$acl_fields[$user_id][$module_name];
             }
-        }
-
-        // do not fetch data for field ACL if it's disabled
-        // we need to use $dictionary directly instead of SugarBean as its constructor calls this method,
-        // and creating a new bean instance to access the dictionary data will create endless recursion
-        if (isset($dictionary[$object]['acl_fields']) && !$dictionary[$object]['acl_fields']) {
-            self::$acl_fields[$user_id][$module_name] = array();
-            self::storeToCache($user_id, 'fields', self::$acl_fields[$user_id]);
-
-            return array();
         }
 
         $query = 'SELECT af.name, af.aclaccess FROM acl_fields af '
@@ -244,7 +245,6 @@ AND deleted = 0';
 
         self::storeToCache($user_id, 'fields', self::$acl_fields[$user_id]);
         return self::$acl_fields[$user_id][$module_name];
-
     }
 
     public static $field_cache = array();
@@ -325,13 +325,15 @@ AND deleted = 0';
     * Returns 1 - for read access
     * returns 2 - for write access
     * returns 4 - for read/write access
-    * @internal
-    * @param String $field The name of the field to retrieve ACL access for
-    * @param String $module The name of the module that contains the field to lookup ACL access for
-    * @param string|User|null $user_id The user id of the user instance to check ACL access for, or the User object,
-    *                                  or null which means current user. Using User is recommended since it's fastest.
-    * @param boolean $is_owner Boolean value indicating whether or not the field access should also take into account ownership access
-    * @return Integer value indicating the ACL field level access
+    * @param string|bool $field The name of the field to retrieve ACL access for.
+    * @param string|int $module The name of the module that contains the field to
+    *   look up ACL access for.
+    * @param string|User|null $user_id The user id of the user instance to check
+    *   ACL access for, or the User object, or null which means current user.
+    *   Using User is recommended since it's fastest.
+    * @param boolean $is_owner Boolean value indicating whether or not the field
+    *   access should also take into account ownership access.
+    * @return int Integer value indicating the ACL field level access.
     */
     static function hasAccess($field = false, $module = 0, $user_id = null, $is_owner = null)
     {

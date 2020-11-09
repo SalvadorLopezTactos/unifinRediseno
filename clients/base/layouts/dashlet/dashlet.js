@@ -227,6 +227,24 @@
     },
 
     /**
+     * Gets component from metadata.
+     *
+     * @param {Object} metadata for all dashboard components
+     * @return {Object} dashboard component
+     */
+    getComponentsFromMetadata: function(metadata) {
+        var component;
+        // this is a tabbed dashboard
+        if (metadata.tabs) {
+            var tabIndex = this.context.get('activeTab') || 0;
+            component = metadata.tabs[tabIndex].components;
+        } else {
+            component = metadata.components;
+        }
+        return component;
+    },
+
+    /**
      * Retrives the seperate component metadata from the whole dashboard components
      *
      * @param {Object} metadata for all dashboard componenets
@@ -234,8 +252,9 @@
      * @return {Object} component metadata
      */
     getCurrentComponent: function(metadata, tracekey) {
-        var position = tracekey.split(''),
-            component = metadata.components;
+        var position = tracekey.split('');
+        var component = this.getComponentsFromMetadata(metadata);
+
         _.each(position, function(index){
             component = component.rows ? component.rows[index] : component[index];
         }, this);

@@ -142,7 +142,6 @@ $viewdefs[$module_name]['base']['view']['record'] = array(
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 array(
@@ -168,7 +167,6 @@ $viewdefs[$module_name]['base']['view']['record'] = array(
             'name' => 'panel_hidden',
             'label' => 'LBL_SHOW_MORE',
             'hide' => true,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 $_module_name.'_type',

@@ -79,7 +79,8 @@ $viewdefs['Leads']['EditView'] = array(
     
     array (
       'email',
-    ),         
+      'business_center_name',
+    ),
     
     array (
       'description',

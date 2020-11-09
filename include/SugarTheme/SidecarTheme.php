@@ -16,7 +16,7 @@
  * theme basis.
  ********************************************************************************/
 
-
+use Sugarcrm\Sugarcrm\Security\ValueObjects\PlatformName;
 
 /**
  * Class that provides tools for working with a theme.
@@ -25,14 +25,9 @@
 class SidecarTheme
 {
     /**
-     * @var string Client Name
+     * @var PlatformName
      */
-    private $myClient;
-
-    /**
-     * @var string Theme Name
-     */
-    private $myTheme;
+    private $platformName;
 
     /**
      * @var array A set of useful paths
@@ -57,20 +52,11 @@ class SidecarTheme
 
     /**
      * Constructor
-     *
-     * @param string $client Client Name
-     * @param string $themeName Theme Name
      */
-    public function __construct($client = 'base', $themeName = '')
+    public function __construct(PlatformName $platformName)
     {
-        // Get user theme if the themeName isn't defined
-        if (empty($themeName)) {
-            $themeName = $this->getUserTheme();
-        }
-
-        $this->myClient = $client;
-        $this->myTheme = $themeName;
-        $this->paths = $this->makePaths($client, $themeName);
+        $this->platformName = $platformName;
+        $this->paths = $this->makePaths($platformName);
         $this->compiler = new lessc;
 
         // Check for a customer less file. If exists, it will be compiled like other files
@@ -99,13 +85,6 @@ class SidecarTheme
         //If we found css files in cache we can return css urls
         if (count($filesInCache) === count($this->lessFilesToCompile)) {
             return $this->returnFileLocations($filesInCache);
-        }
-
-        //Since we did not find css files in cache we have to compile the theme.
-        //First check if the theme has metadata, otherwise compile the default theme instead
-        if ($this->myTheme !== 'default' && !$this->isDefined()) {
-            $clientDefaultTheme = new SidecarTheme($this->myClient, 'default');
-            return $clientDefaultTheme->getCSSURL();
         }
 
         //Arrived here we are going to compile missing css files
@@ -172,18 +151,22 @@ class SidecarTheme
         try {
             //In case we are building customer css file we need to create a temporary compiler.less
             if ($lessFile === 'custom') {
-                $compilerFile = $this->writeCustomCompiler($lessFile);
+                $compilerFile = $this->writeCustomCompiler();
             } else {
                 $compilerFile = $this->getLessFileLocation($lessFile);
             }
 
             //Load and set variables
             $this->loadVariables();
-            if (!isset($this->variables['baseUrl'])) {
-                //Relative path from /cache/themes/clients/PLATFORM/THEMENAME/FILE.css
-                //              to   /styleguide/assets/
-                $this->setVariable('baseUrl', '"../../../../styleguide/assets"');
+
+            if (!isset($this->variables['siteUrl'])) {
+                $this->setVariable('siteUrl', '"' . getValueFromConfig('site_url') . '"');
             }
+
+            if (!isset($this->variables['baseUrl'])) {
+                $this->setVariable('baseUrl', '"' . getValueFromConfig('site_url') . '/styleguide/assets"');
+            }
+
             $this->compiler->setVariables($this->loadVariables());
 
             if ($min) {
@@ -211,23 +194,11 @@ class SidecarTheme
         }
     }
 
-    /**
-     * Determines if the theme exists
-     *
-     * @return bool True if able to retrieve theme definition file in the file system.
-     */
-    public function isDefined()
-    {
-        // We compile expected theme by if we found variables.php in the file system (in /custom/themes or /themes)
-        $customThemeVars = $this->paths['custom'] . 'variables.php';
-        $baseThemeVars = $this->paths['base'] . 'variables.php';
-        return file_exists($customThemeVars) || file_exists($baseThemeVars);
-    }
 
     /**
      * Parse the variables.php metadata files of the theme
      *
-     * @return string Array of categorized variables
+     * @return array Array of categorized variables
      */
     public function getThemeVariables()
     {
@@ -240,17 +211,11 @@ class SidecarTheme
 
         // - the client/default base theme
         // - the client/default custom theme
-        if ($this->myClient !== 'base') {
-            $variables = $this->loadLessDefs($variables, 'styleguide/themes/clients/' . $this->myClient . '/default/variables.php', false);
-            $variables = $this->loadLessDefs($variables, 'custom/themes/clients/' . $this->myClient . '/default/variables.php');
+        if (!$this->platformName->isBase()) {
+            $variables = $this->loadLessDefs($variables, 'styleguide/themes/clients/' . $this->platformName->value() . '/default/variables.php', false);
+            $variables = $this->loadLessDefs($variables, 'custom/themes/clients/' . $this->platformName->value() . '/default/variables.php');
         }
 
-        // - the client/themeName base theme
-        // - the client/themeName custom theme
-        if ($this->myTheme !== 'default') {
-            $variables = $this->loadLessDefs($variables, 'styleguide/themes/clients/' . $this->myClient . '/' . $this->myTheme . '/variables.php');
-            $variables = $this->loadLessDefs($variables, 'custom/themes/clients/' . $this->myClient . '/' . $this->myTheme . '/variables.php');
-        }
         return $variables;
     }
 
@@ -265,7 +230,7 @@ class SidecarTheme
     public function saveThemeVariables($reset = false)
     {
         // take the contents from /themes/clients/base/default/variables.php
-        $baseDefaultTheme = new SidecarTheme('base', 'default');
+        $baseDefaultTheme = new SidecarTheme(PlatformName::base());
         $baseDefaultThemePaths = $baseDefaultTheme->getPaths();
 
         include $baseDefaultThemePaths['base'] . 'variables.php';
@@ -288,7 +253,7 @@ class SidecarTheme
                     }
                 }
             }
-            // save the theme variables in /themes/clients/$client/$themeName/variables.php
+            // save the theme variables in custom/themes/clients/$client/default/variables.php
             sugar_mkdir($this->paths['custom'], null, true);
             $write = "<?php\n" .
                 '// created: ' . date('Y-m-d H:i:s') . "\n" .
@@ -404,23 +369,6 @@ class SidecarTheme
     }
 
     /**
-     * Get the user preferred theme
-     *
-     * @return string themeName
-     */
-    private function getUserTheme()
-    {
-        // THIS IS A FIX FOR 7.1.5
-        // We no longer have multiple themes support.
-
-        // We removed the feature for the user to choose his preferred theme.
-        // In the future, we'll add this ability back. Meanwhile, there will be
-        // only one theme possible per platform, known as the `default` theme.
-
-        return 'default';
-    }
-
-    /**
      * Builds the paths attribute
      * 'base' : the path of the base theme
      * 'custom' : the path of the customized theme
@@ -428,19 +376,17 @@ class SidecarTheme
      * 'clients' : the clients path of less files to compile
      * 'hashKey' the theme hash key
      *
-     * @param string $client Client Name
-     * @param string $themeName Theme Name
-     *
      * @return array Paths related to this client and theme
      */
-    private function makePaths($client, $themeName)
+    private function makePaths(PlatformName $platformName)
     {
+        $plarformDirectory = $platformName->value();
         return array(
-            'base' => 'styleguide/themes/clients/' . $client . '/' . $themeName . '/',
-            'custom' => 'custom/themes/clients/' . $client . '/' . $themeName . '/',
-            'cache' => sugar_cached('themes/clients/' . $client . '/' . $themeName . '/'),
+            'base' => 'styleguide/themes/clients/' . $plarformDirectory . '/default/',
+            'custom' => 'custom/themes/clients/' . $plarformDirectory . '/default/',
+            'cache' => sugar_cached('themes/clients/' . $plarformDirectory . '/default/'),
             'clients' => 'styleguide/less/clients/',
-            'hashKey' => 'theme-' . $client . '-' . $themeName,
+            'hashKey' => 'theme-' . $plarformDirectory . '-default',
         );
     }
 
@@ -491,7 +437,7 @@ class SidecarTheme
      */
     private function getLessFileLocation($lessFile)
     {
-        $file = $this->paths['clients'] . $this->myClient . '/' . $lessFile . '.less';
+        $file = $this->paths['clients'] . $this->platformName->value() . '/' . $lessFile . '.less';
         $baseFile = $this->paths['clients'] . 'base' . '/' . $lessFile . '.less';
         return file_exists($file) ? $file : $baseFile;
     }

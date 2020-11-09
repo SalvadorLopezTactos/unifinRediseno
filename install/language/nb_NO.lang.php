@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -59,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Feil ble funnet under kompatibilitetskontrollen.  For at SugarCRM-installasjonenen skal fungere riktig, utfører du de passende tiltakene for å løse problemene nedenfor, og trykker enten på knappe «sjekk på nytt» eller prøv å installere på nytt.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Tillat Call Time Pass Reference er på (dette bør settes til av i php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Finner ikke: Sugar Scheduler vil kjøres med begrenset funksjonalitet. Tjenesten e-postarkivering kjøres ikke.',
+	'ERR_CHECKSYS_CURL'					=> 'Ikke funnet: Sugar Scheduler vil kjøre med begrenset funksjonalitet. E-postarkiveringstjenesten vil ikke kjøre.',
     'ERR_CHECKSYS_IMAP'					=> 'Finner ikke: InnkommendeE-post og kampanjer (e-post) krever IMAP-bibliotek. Ingen av dem kommer til å være funksjonell.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC kan ikke slås «På» når du bruker MS SQL Server.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Advarsel: ',
@@ -75,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'For den optimale bruken av IIS/FastCGI sapi, angi fastcgi.logging til 0 i php.ini-filen.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Ikke-støttet PHP-versjon installert: (ver',
     'LBL_DB_UNAVAILABLE'                => 'Databasen er utilgjengelig',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Finner ikke database-støtte.  Kontroller at du har de nødvendige driverne for en av følgende støttede databasetyper: MySQL, MS SQL, Oracle eller DB2.  Du må kanskje avkommentere utvidelsen i filen php.ini, eller rekompilere med rett binærfil, avhengig av din versjon av PHP.  Se PHP-håndboken for mer informasjon om hvordan du aktiverer Databasestøtte.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Databasestøtte ble ikke funnet. Sørg for at du har nødvendige drivere for en av følgende støttede databasetyper. MySQL, MS SQLServer, Oracle eller DB2. Du må kanskje avkommentere utvidelsen i php.ini-filen eller kompilere igjen med rett binær fil, avhengig av din versjon av PHP. Se PHP-håndboken for mer informasjon om hvordan man aktiverer databasestøtte.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Finner ikke funksjonene tilknyttet XML-analysebibliotekene som Sugar-programmet trenger. Du må kanskje avkommentere utvidelsen i php.ini-filen, eller omkompilere med rett binærfil, avhengig av din  PHP-versjon. Se PHP-veiledningen for mer informasjon.',
     'LBL_CHECKSYS_CSPRNG' => 'Slumptallsgeneratoren',
     'ERR_CHECKSYS_MBSTRING'             => 'Funksjoner knyttet til Multibyte Strings PHP-forlengelsen (mbstring) som Sugar-programmet trenger ble ikke funnet. <br/> <br/> Vanligvis er ikke mbstring-modulen aktivert som standard i PHP, og må aktiveres med --enable-mbstring når PHP binære bygges. Se PHP-veiledningen for mer informasjon om hvordan du aktiverer mbstring-støtte.',
@@ -476,6 +475,142 @@ $mod_strings = array(
 	'LBL_PATCH_UPLOAD' => 'Velg en oppdateringsfil fra den lokale datamaskinen',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'PHP-bakoverkompatibilitetsmodus er aktivert. Angi zend.ze1_compatibility_mode til Av for å fortsette',
 
+    'meeting_notification_email' => array(
+        'name' => 'Meeting Notifications Emails',
+        'subject' => 'SugarCRM Meeting - $event_name ',
+        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'body' => '<div>
+	<p>To: $assigned_user</p>
+
+	<p>$assigned_by_user has invited you to a Meeting</p>
+
+	<p>Subject: $event_name<br/>
+	Start Date: $start_date<br/>
+	End Date: $end_date</p>
+
+	<p>Description: $description</p>
+
+	<p>Accept this meeting:<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Tentatively Accept this meeting:<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Decline this meeting:<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'To: $assigned_user
+
+$assigned_by_user has invited you to a Meeting
+
+Subject: $event_name
+Start Date: $start_date
+End Date: $end_date
+
+Description: $description
+
+Accept this meeting:
+<$accept_link>
+
+Tentatively Accept this meeting
+<$tentative_link>
+
+Decline this meeting
+<$decline_link>',
+    ),
+
+    'call_notification_email' => array(
+        'name' => 'Call Notifications Emails',
+        'subject' => 'SugarCRM Call - $event_name ',
+        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'body' => '<div>
+	<p>To: $assigned_user</p>
+
+	<p>$assigned_by_user has invited you to a Call</p>
+
+	<p>Subject: $event_name<br/>
+	Start Date: $start_date<br/>
+	Duration: $hoursh, $minutesm</p>
+
+	<p>Description: $description</p>
+
+	<p>Accept this call:<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Tentatively Accept this call:<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Decline this call:<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'To: $assigned_user
+
+$assigned_by_user has invited you to a Call
+
+Subject: $event_name
+Start Date: $start_date
+Duration: $hoursh, $minutesm
+
+Description: $description
+
+Accept this call:
+<$accept_link>
+
+Tentatively Accept this call
+<$tentative_link>
+
+Decline this call
+<$decline_link>',
+    ),
+
+    'assigned_notification_email' => array(
+        'name' => 'Assignment Notification Emails',
+        'subject' => 'SugarCRM - Assigned $module_name ',
+        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'body' => '<div>
+<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+
+<p>You may review this&nbsp;$module_name at:<br/>
+	<<a href="$module_link">$module_link</a>></p>
+</div>',
+        'txt_body' =>
+            '$assigned_by_user has assigned a $module_name to $assigned_user.
+
+You may review this $module_name at:
+<$module_link>',
+    ),
+
+    'scheduled_report_email' => array(
+        'name' => 'Scheduled Report Emails',
+        'subject' => 'Scheduled Report: $report_name as of $report_time',
+        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'body' => '<div>
+<p>Hello $assigned_user,</p>
+<p>Attached is an auto generated report that has been scheduled for you.</p>
+<p>Report Name: $report_name</p>
+<p>Report Run Date and Time: $report_time</p>
+</div>',
+        'txt_body' =>
+            'Hello $assigned_user,
+
+Attached is an auto generated report that has been scheduled for you.
+
+Report Name: $report_name
+
+Report Run Date and Time: $report_time',
+    ),
+
+    'comment_log_mention_email' => [
+        'name' => 'System Comment Log Email Notification',
+        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
+        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'body' =>
+            '<div>
+                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
+                <p>Please log in to Sugar to view the comment.</p>
+            </div>',
+        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
+            Please log in to Sugar to view the comment.',
+    ],
+
     'advanced_password_new_account_email' => array(
         'subject' => 'Ny kontoinformasjon',
         'description' => 'Denne malen brukes når systemadministratoren sender et nytt passord til en bruker.',
@@ -504,4 +639,32 @@ Klikk på lenken nedenfor for å tilbakestille passordet,
 $contact_user_link_guid',
         'name' => 'E-post om glemt passord',
         ),
+
+'portal_forgot_password_email_link' => [
+    'name' => 'E-post om glemt passord i portal',
+    'subject' => 'Tilbakestill kontopassordet',
+    'description' => 'Denne malen brukes til å sende en bruker en lenk for å tilbakestille Portal-brukerens passord.',
+    'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Du ba nylig om å tilbakestille kontopassordet ditt. </p><p>Klikk på lenken nedenfor for å tilbakestille passordet ditt:</p><p> <a href="$portal_user_link_guid">$portal_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+    'txt_body' =>
+'
+    Du ba nylig om å tilbakestille kontopassordet ditt.
+
+    Klikk på lenken nedenfor for å tilbakestille passordet ditt:
+
+    $portal_user_link_guid',
+],
+
+    'portal_password_reset_confirmation_email' => [
+        'name' => 'E-post med bekreftelse av tilbakestilling av Portal-passord',
+        'subject' => 'Kontopassordet ditt er tilbakestilt',
+        'description' => 'Denne malen brukes for å sende en bekreftelse til en Portal-bruker om at kontopassordet deres har blitt tilbakestilt.',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Denne e-posten er for å bekrefte at ditt Portal-kontopassord har blitt tilbakestilt. </p><p>Bruk lenken nedenfor for å logge på portalen:</p><p> <a href="$portal_login_url">$portal_login_url</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+        'txt_body' =>
+            '
+    Denne e-posten er for å bekrefte at ditt Portal-kontopassord har blitt tilbakestilt.
+
+    Bruk lenken nedenfor for å logge på portalen:
+
+    $portal_login_url',
+    ],
 );

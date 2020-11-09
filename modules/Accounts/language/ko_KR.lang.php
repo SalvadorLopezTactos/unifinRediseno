@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => '견적서 (배송지 주소)',
 	'LNK_ACCOUNT_REPORTS' => '거래처와 관련된 보고서 보기',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => '문서',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => '계정 목록 대시보드',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => '계정 기록 대시보드',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => '계정 세부사항',
+    'LBL_NEXT_RENEWAL_DATE' => '다음 갱신 날짜',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => '계정 이름/분야',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => '위치',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => '차트',

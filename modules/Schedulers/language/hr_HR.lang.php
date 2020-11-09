@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Objavite odobrene članke i istekle članke baze znanja.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Zakazani posao',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Ponovna izgradnja denormaliziranih sigurnosnih podataka o timovima',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Brisač pregleda aktivnosti',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Pokreni slanje podsjetnika putem e-pošte',
 'LBL_CLEANJOBQUEUE' => 'Čišćenje reda čekanja poslova',
 'LBL_CLEANOLDRECORDLISTS' => 'Čišćenje popisa starih zapisa',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Brisač pregleda aktivnosti',
 'LBL_PMSEENGINECRON' => 'Planer SugarBPM',
 );
 

@@ -60,6 +60,7 @@ $viewdefs['Accounts']['EditView'] = array(
 
         array (
           'service_level',
+          'business_center_name',
         ),
 
         array (

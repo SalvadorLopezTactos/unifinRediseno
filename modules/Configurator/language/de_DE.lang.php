@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'Das Seitenverhältnis des Bildes sollte zwischen 1:1 und 10:1 sein. Das Bild wird skaliert.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'Das Seitenverhältnis des Bildes muss zwischen 3:1 und 20:1 sein. Laden Sie eine neue Datei mit diesem Seitenverhältnis hoch.',
     'ERR_ALERT_FILE_UPLOAD' => 'Fehler während des Hochladens des Bildes.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Verzeichnis für Bilder kann nicht erstellt werden',
     'LBL_LOGGER'=>'Einstellungen der Protokollierung',
 	'LBL_LOGGER_FILENAME'=>'Name der Protokolldatei',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Erweiterung',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Maximale Protokollgröße',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Standard-Datumsformat',
 	'LBL_LOGGER_LOG_LEVEL'=>'Protokollstufe',
@@ -458,6 +458,10 @@ Um zusätzliche Systemeinstellungen zu konfigurieren, klicken Sie <a href="index
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Einstellungen des Kommentarprotokolls',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Maximal anzuzeigende Zeichen pro Kommentareintrag',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

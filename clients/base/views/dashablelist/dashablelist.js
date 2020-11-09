@@ -193,18 +193,28 @@
      *   mode or not.
      */
     setLinkedFieldVisibility: function(visible, intelligent) {
-        var field = this.getField('linked_fields'),
-            fieldEl;
+        var field = this.getField('linked_fields');
         if (!field) {
             return;
         }
         intelligent = (intelligent === false || intelligent === '0') ? '0' : '1';
-        fieldEl = this.$('[data-name=linked_fields]');
+        var fieldEl = this.$('[data-name=linked_fields]');
         if (visible === '1' && intelligent === '1' && !_.isEmpty(field.items)) {
             fieldEl.show();
         } else {
             fieldEl.hide();
         }
+    },
+
+    /**
+     * In case the filter for the dashlet has been retrieved successfully
+     * a filter definition based dashlet setup will be triggered.
+     *
+     *  @param {Object} data object from specified filter request.
+     */
+    triggerDashletSetup: function(data) {
+        this.filterIsAccessible = true;
+        this._displayDashlet(data.filter_definition);
     },
 
     /**
@@ -245,15 +255,15 @@
 
         if (this.settings.get('intelligent') == '1') {
 
-            var link = this.settings.get('linked_fields'),
-                model = app.controller.context.get('model'),
-                module = this.settings.get('module'),
-                options = {
-                    link: {
-                        name: link,
-                        bean: model
-                    }
-                };
+            var link = this.settings.get('linked_fields');
+            var model = app.controller.context.get('model');
+            var module = this.settings.get('module');
+            var options = {
+                link: {
+                    name: link,
+                    bean: model
+                }
+            };
             this.collection = app.data.createBeanCollection(module, null, options);
             this.collection.setOption('relate', true);
             this.context.set('collection', this.collection);
@@ -300,7 +310,16 @@
                     }
                     var filter = filters.collection.get(filterId);
                     var filterDef = filter && filter.get('filter_definition');
-                    if (_.isUndefined(filterDef)) {
+                    // In case the filter assigned to the list-dashlet is NOT in the filters collection,
+                    // as collection only contains certain number (= max_filters) of entries.
+                    // Will make a separate api call to fetch the specified filter data.
+                    if (!filterDef) {
+                        var url = app.api.buildURL('Filters/' + filterId, null, null);
+                        app.api.call('read', url, null, {
+                            success: _.bind(this.triggerDashletSetup, this),
+                            error: _.bind(this._displayNoFilterAccess, this)
+                        });
+                    } else if (_.isUndefined(filterDef)) {
                         this.filterIsAccessible = false;
                         this._displayNoFilterAccess();
                     } else {
@@ -358,8 +377,8 @@
      * @return {string}
      */
     getLabel: function() {
-        var module = this.settings.get('module') || this.context.get('module'),
-            moduleName = app.lang.getModuleName(module, {plural: true});
+        var module = this.settings.get('module') || this.context.get('module');
+        var moduleName = app.lang.getModuleName(module, {plural: true});
         return app.lang.get(this.settings.get('label'), module, {module: moduleName});
     },
 
@@ -386,8 +405,8 @@
             context.trigger('filter:create:save');
         } else {
             // We are saving a dashlet with a predefined filter
-            var filterId = context.get('currentFilterId'),
-                obj = {id: filterId};
+            var filterId = context.get('currentFilterId');
+            var obj = {id: filterId};
             this.updateDashletFilterAndSave(obj);
         }
     },
@@ -434,7 +453,7 @@
     _initializeSettings: function() {
         if (this.intelligent === '0') {
             _.each(this.dashletConfig.panels, function(panel) {
-                panel.fields = panel.fields.filter(function(el) {return el.name !== 'intelligent'; });
+                panel.fields = panel.fields.filter(function(el) {return el.name !== 'intelligent';});
             }, this);
             this.settings.set('intelligent', '0');
             this.dashModel.set('intelligent', '0');
@@ -465,8 +484,8 @@
      * @private
      */
     _setDefaultModule: function() {
-        var availableModules = _.keys(this._getAvailableModules()),
-            module = this.settings.get('module') || this.context.get('module');
+        var availableModules = _.keys(this._getAvailableModules());
+        var module = this.settings.get('module') || this.context.get('module');
 
         if (_.contains(availableModules, module)) {
             this.settings.set('module', module);
@@ -495,9 +514,9 @@
      * @private
      */
     _updateDisplayColumns: function() {
-        var availableColumns = this._getAvailableColumns(),
-            columnsFieldName = 'display_columns',
-            columnsField = this.getField(columnsFieldName);
+        var availableColumns = this._getAvailableColumns();
+        var columnsFieldName = 'display_columns';
+        var columnsField = this.getField(columnsFieldName);
         if (columnsField) {
             columnsField.items = availableColumns;
         }
@@ -511,9 +530,9 @@
      * @param {String} moduleName Name of selected module.
      */
     updateLinkedFields: function(moduleName) {
-        var linked = this.getLinkedFields(moduleName),
-            displayColumn = this.getField('linked_fields'),
-            intelligent = this.dashModel.get('intelligent');
+        var linked = this.getLinkedFields(moduleName);
+        var displayColumn = this.getField('linked_fields');
+        var intelligent = this.dashModel.get('intelligent');
         if (displayColumn) {
             displayColumn.items = linked;
             this.setLinkedFieldVisibility('1', intelligent);
@@ -530,16 +549,16 @@
      * @return {Object} Hash with linked fields labels.
      */
     getLinkedFields: function(moduleName) {
-        var fieldDefs  = app.metadata.getModule(this.layout.module).fields;
-        var relates =  _.filter(fieldDefs, function(field) {
-                if (!_.isUndefined(field.type) && (field.type === 'link')) {
-                    if (app.data.getRelatedModule(this.layout.module, field.name) === moduleName) {
-                        return true;
-                    }
+        var fieldDefs = app.metadata.getModule(this.layout.module).fields;
+        var relates = _.filter(fieldDefs, function(field) {
+            if (!_.isUndefined(field.type) && (field.type === 'link')) {
+                if (app.data.getRelatedModule(this.layout.module, field.name) === moduleName) {
+                    return true;
                 }
-                return false;
-            }, this),
-            result = {};
+            }
+            return false;
+        }, this);
+        var result = {};
         _.each(relates, function(field) {
             result[field.name] = app.lang.get(field.vname || field.name, [this.layout.module, moduleName]);
         }, this);
@@ -555,11 +574,11 @@
      * @private
      */
     _configureDashlet: function() {
-        var availableModules = this._getAvailableModules(),
-            availableColumns = this._getAvailableColumns(),
-            relates = this.getLinkedFields(this.module);
+        var availableModules = this._getAvailableModules();
+        var availableColumns = this._getAvailableColumns();
+        var relates = this.getLinkedFields(this.module);
         _.each(this.getFieldMetaForView(this.meta), function(field) {
-            switch(field.name) {
+            switch (field.name) {
                 case 'module':
                     // load the list of available modules into the metadata
                     field.options = availableModules;
@@ -602,12 +621,12 @@
     _getAvailableModules: function() {
         if (_.isEmpty(this._availableModules) || !_.isObject(this._availableModules)) {
             this._availableModules = {};
-            var visibleModules = app.metadata.getModuleNames({filter: 'visible', access: 'read'}),
-                allowedModules = _.difference(visibleModules, this.moduleBlacklist);
+            var visibleModules = app.metadata.getModuleNames({filter: 'visible', access: 'read'});
+            var allowedModules = _.difference(visibleModules, this.moduleBlacklist);
 
             _.each(this.additionalModules, function(extraModules, module) {
                 if (_.contains(allowedModules, module)) {
-                    allowedModules = _.sortBy(_.union(allowedModules, extraModules), function(name) {return name});
+                    allowedModules = _.sortBy(_.union(allowedModules, extraModules), function(name) {return name;});
                 }
             });
             _.each(allowedModules, function(module) {
@@ -643,8 +662,8 @@
      * @private
      */
     _getAvailableColumns: function() {
-        var columns = {},
-            module = this.settings.get('module');
+        var columns = {};
+        var module = this.settings.get('module');
         if (!module) {
             return columns;
         }
@@ -673,7 +692,15 @@
 
         if (filterDef) {
             this._applyFilterDef(filterDef);
-            this.context.reloadData({'recursive': false});
+            this.context.reloadData({
+                recursive: false,
+                error: _.bind(this._displayNoFilterAccess, this)
+            });
+        } else {
+            var listBottom = this.layout.getComponent('list-bottom');
+            if (listBottom) {
+                listBottom.render();
+            }
         }
         this._startAutoRefresh();
     },
@@ -699,8 +726,8 @@
              * TODO we should support cleanup on all levels (currently made on 1st
              * level only).
              */
-            var specialField = /^\$/,
-                meta = app.metadata.getModule(this.module);
+            var specialField = /^\$/;
+            var meta = app.metadata.getModule(this.module);
             filterDef = _.filter(filterDef, function(def) {
                 var fieldName = _.keys(def).pop();
                 return specialField.test(fieldName) || meta.fields[fieldName];
@@ -746,9 +773,8 @@
 
             // Handle setting of the sortable flag on the list. This will not
             // always be true
-            var sortableFlag,
-                column,
-                fieldDef = app.metadata.getModule(this.module).fields[field.name];
+            var sortableFlag;
+            var fieldDef = app.metadata.getModule(this.module).fields[field.name];
 
             // If the module's field def says nothing about the sortability, then
             // assume it's ok to sort
@@ -759,7 +785,7 @@
                 sortableFlag = !!fieldDef.sortable;
             }
 
-            column = _.extend({sortable: sortableFlag}, field);
+            var column = _.extend({sortable: sortableFlag}, field);
 
             columns.push(column);
         }, this);

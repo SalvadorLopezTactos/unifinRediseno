@@ -16,7 +16,7 @@ Interface SessionStorageInterface extends \ArrayAccess, \Serializable {
 
     /**
      * Get the current SessionStorage object.
-     * @return SessionStorageInterface
+     * @return static
      */
     public static function getInstance();
 

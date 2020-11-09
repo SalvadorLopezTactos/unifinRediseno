@@ -131,7 +131,7 @@ class CalendarController extends SugarController
         if (!empty($_REQUEST['calendar_style']) && $_REQUEST['calendar_style'] == "basic") {
             global $timedate;
             $date = $timedate->asUserDate($timedate->fromUser($_REQUEST['datetime']));
-            $time = $timedate->asUserTime($timedate->fromUser($this->currentBean->$dateField));
+            $time = $timedate->to_display_time($this->currentBean->$dateField);
             $_REQUEST['datetime'] = $date . ' ' . $time;
         }
         $_POST[$dateField] = $_REQUEST['datetime'];

@@ -51,7 +51,7 @@ $mod_strings = array(
     "LBL_SNIP_PURCHASE_SUMMARY" => "Lai lietotu E-pasta arhivatoru, jāiegādājas licence Jūsu SugarCRM instancei.",
     "LBL_SNIP_PURCHASE" => "Klikšķini šeit, lai iegādātos",
     'LBL_SNIP_EMAIL' => 'E-pasta arhivēšanas adrese',
-    'LBL_SNIP_AGREE' => "Es piekrītu iepriekš minētajiem noteikumiem un   <a href=\"http://www.sugarcrm.com/crm/TRUSTe/privacy.html\" target=\"_blank\">privātuma līgumam</a>.",
+    'LBL_SNIP_AGREE' => "Es piekrītu iepriekš minētajiem noteikumiem un <a href='https://www.sugarcrm.com/legal/privacy-policy/' target='_blank'>privātuma politikai</a>.",
     'LBL_SNIP_PRIVACY' => 'privātuma līgums',
 
     'LBL_SNIP_STATUS_PINGBACK_FAIL' => 'Atpakaļ pingošana neizdevās',

@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Kapcsolatok listája műszerfal',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Kapcsolat bejegyzések műszerfal',
-
+    'LBL_SITE_USER_ID' => 'A(z) site_url és contact id kivonata',
+    'LBL_COOKIE_CONSENT' => 'Süti hozzájárulás',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Süti hozzájárulás kézhezvétele ekkor:',
     'LNK_CONTACT_REPORTS' => 'Kapcsolat-jelentések megtekintése',
     'ERR_DELETE_RECORD' => 'Adjon meg egy azonosítót az kliens törléséhez!',
     'LBL_ACCOUNT_ID' => 'Kliens azonosító:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Portál információ',
     'LBL_PORTAL_NAME' => 'Portál neve:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Portál jelszó beállítva:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Portál felhasználó cég neve',
     'LBL_RECORD_SAVED_SUCCESS' => 'Létrehozás sikeres: {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Utca',
     'LBL_POSTAL_CODE' => 'Irányítószám:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Lehetőségek',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumentumok',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Árajánlatok',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Árajánlatok (szállítási cím)',
     'LBL_QUOTES_BILL_TO' => 'Árajánlatok (számlázási cím)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Idézett Tételsorok',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Kattintson ide a profil szerkesztéséhez!',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Itt megadhatja az Ön által preferált nyelvet. A beállítás kihatással lesz a Sugar Portálra.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Bármikor visszatérhet a profilbeállításokhoz a Felhasználói menü használatával.',
+    'ERR_PORTAL_NAME_EXISTS' => 'A(z) {0} portál név már létezik. Két ugyanolyan portál név nem engedélyezett. Válasszon egyedi portál nevet.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B azonosító',
@@ -273,4 +278,8 @@ $mod_strings = array (
     'LBL_FILTER_CONTACTS_REPORTS' => 'Kapcsolatok jelentései',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Hozzájárulás üzleti célokhoz a következőhöz',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Hozzájárulás utolsó frissítése',
+
+    'LBL_ENTRY_SOURCE' => 'Kapcsolat forrása',
+    'LBL_SOURCE_EXTERNAL' => 'Külső',
+    'LBL_SOURCE_INTERNAL' => 'Belső',
 );

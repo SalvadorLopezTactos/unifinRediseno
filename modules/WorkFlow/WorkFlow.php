@@ -831,20 +831,23 @@ function get_front_triggers_secondary($workflow_id, & $trigger_count){
 	//type 'all' must be checked first before the rel_list loses some items, otherwise
 	//you can get in-accurate information
 
-	$query = "	SELECT *
-				FROM ".$this->rel_triggershells_table."
-				WHERE ".$this->rel_triggershells_table.".parent_id='".$workflow_id."'
-				AND ".$this->rel_triggershells_table.".deleted=0
-				AND ".$this->rel_triggershells_table.".frame_type='Secondary'
-				ORDER BY rel_module, rel_module_type ASC";
+        $sql = <<<SQL
+SELECT *
+FROM {$this->rel_triggershells_table}
+WHERE parent_id = ?
+AND deleted = 0
+AND frame_type = 'Secondary'
+ORDER BY rel_module, rel_module_type ASC
+SQL;
 
-		$result = $this->db->query($query,true," Error getting trigger contents for trigger write: ");
+        $stmt = $this->db->getConnection()
+            ->executeQuery($sql, [$workflow_id]);
 
 		$secondary_count = 0;
         $secondary_triggers = array();
 			$eval .= "\t //Secondary Triggers \n";
 		// Get the id and the name.
-		while($row = $this->db->fetchByAssoc($result, false)){
+        foreach ($stmt as $row) {
 			$real_secondary = $secondary_count + 1;
 
 
@@ -957,22 +960,18 @@ function get_alert_contents($workflow_id, $trigger_count, $alert_array_name){
 
 	$alert_string = "";
 
-		$query = "	SELECT $this->rel_alertshells_table.parent_id parent_id,
-							$this->rel_alertshells_table.id id,
-					$this->rel_alertshells_table.alert_text alert_text,
-					$this->rel_alertshells_table.source_type source_type,
-					$this->rel_alertshells_table.alert_type alert_type,
-					$this->rel_alertshells_table.custom_template_id custom_template_id
-					FROM $this->rel_alertshells_table
-					WHERE $this->rel_alertshells_table.deleted = 0
-					AND $this->rel_alertshells_table.parent_id = '".$workflow_id."'
-				 ";
-		$result = $this->db->query($query,true," Error getting trigger contents for trigger write: ");
+        $sql = <<<SQL
+SELECT parent_id parent_id, id, alert_text, source_type, alert_type, custom_template_id
+FROM  {$this->rel_alertshells_table}
+WHERE deleted = 0
+AND parent_id = ?
+SQL;
 
-		// Get the id and the name.
-		while($row = $this->db->fetchByAssoc($result)){
+        $stmt = $this->db->getConnection()
+            ->executeQuery($sql, [$workflow_id]);
 
-
+    // Get the id and the name.
+        foreach ($stmt as $row) {
 			$alert_string .="\t \$alertshell_array = array(); \n\n";
 
 			if($row['source_type']=="Custom Template"){
@@ -1031,20 +1030,18 @@ function get_alert_contents_for_file($workflow_id, $trigger_count, $alert_array_
 	$eval_dump .= "\t\t".'$_SESSION[\'WORKFLOW_ALERTS\'][\''.$alert_array_name.'\'] = isset($_SESSION[\'WORKFLOW_ALERTS\'][\''.$alert_array_name.'\']) '
 	            . '&& ArrayFunctions::is_array_access($_SESSION[\'WORKFLOW_ALERTS\'][\''.$alert_array_name.'\']) ? $_SESSION[\'WORKFLOW_ALERTS\'][\''.$alert_array_name.'\'] : array();'."\n";
 	$eval_dump .= "\t\t".'$_SESSION[\'WORKFLOW_ALERTS\'][\''.$alert_array_name.'\'] = ArrayFunctions::array_access_merge($_SESSION[\'WORKFLOW_ALERTS\'][\''.$alert_array_name.'\'],array (';
-        $query = "  SELECT $this->rel_alertshells_table.parent_id parent_id,
-                            $this->rel_alertshells_table.id id,
-                    $this->rel_alertshells_table.alert_text alert_text,
-                    $this->rel_alertshells_table.source_type source_type,
-                    $this->rel_alertshells_table.alert_type alert_type,
-                    $this->rel_alertshells_table.custom_template_id custom_template_id
-                    FROM $this->rel_alertshells_table
-                    WHERE $this->rel_alertshells_table.deleted = 0
-                    AND $this->rel_alertshells_table.parent_id = '".$workflow_id."'
-                 ";
-        $result = $this->db->query($query,true," Error getting trigger contents for trigger write: ");
+        $sql = <<<SQL
+SELECT parent_id, id, alert_text, source_type, alert_type, custom_template_id
+FROM {$this->rel_alertshells_table}
+WHERE deleted = 0
+AND parent_id = ?
+SQL;
 
-        // Get the id and the name.
-        while($row = $this->db->fetchByAssoc($result)){
+        $stmt = $this->db->getConnection()
+            ->executeQuery($sql, [$workflow_id]);
+
+    // Get the id and the name.
+        foreach ($stmt as $row) {
             $array_position_name = $alert_array_name."".$trigger_count."_alert".$alert_count;
             $eval_dump .= '\''.$array_position_name.'\',';
             $alert_string .= 'function process_wflow_'.$array_position_name.'(&$focus){
@@ -1097,17 +1094,18 @@ function get_action_contents($workflow_id, $trigger_count, $action_module_name, 
 	$action_count = 0;
 
 	$action_string = "";
+        $sql = <<<SQL
+SELECT *
+FROM {$this->rel_actionshells_table}
+WHERE deleted = 0
+AND parent_id = ?
+SQL;
 
-		$query = "	SELECT *
-					FROM $this->rel_actionshells_table
-					WHERE deleted = 0
-					AND parent_id = '".$workflow_id."'
-				 ";
-		$result = $this->db->query($query,true," Error getting trigger action shells for shell write: ");
+        $stmt = $this->db->getConnection()
+            ->executeQuery($sql, [$workflow_id]);
 
 		// Get the id and the name.
-		while($row = $this->db->fetchByAssoc($result)){
-
+        foreach ($stmt as $row) {
 			$process=true;
 
 			if($row['action_type']=="new" && ($row['action_module']=="Calls" || $row['action_module']=="Meetings" || $row['action_module']=="calls" || $row['action_module']=="meetings")){

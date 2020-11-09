@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'نشر المقابلات المعتمدة ومقابلات قواعد المعارف منتهية الصلاحية.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' وظيفة مجدولة',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'إعادة إنشاء بيانات أمان الفريق غير المتوافقة',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'مُزيل سير النشاط',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'الفاصل الزمني:',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'تشغيل إرسال تذكيرات البريد الإلكتروني',
 'LBL_CLEANJOBQUEUE' => 'تنظيف قوائم انتظار الوظائف',
 'LBL_CLEANOLDRECORDLISTS' => 'تنظيف لوائح السجلات القديمة',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'مُزيل سير النشاط',
 'LBL_PMSEENGINECRON' => 'جدولة SugarBPM',
 );
 

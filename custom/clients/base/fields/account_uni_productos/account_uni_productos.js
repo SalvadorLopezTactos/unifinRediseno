@@ -106,6 +106,8 @@
                 'assigned_user_id': ''
             }
         };
+
+
     },
 
     /**
@@ -122,8 +124,11 @@
 
     _render: function () {
         this._super("_render");
-        $("div.record-label[data-name='account_uni_productos']").attr('style', 'display:none;'); //campo custom account_uni_productos
+        $("span.normal[data-fieldname='account_uni_productos']").find('.row-fluid > .record-label').attr('style', 'display:none;');
+        //campo custom account_uni_productos
         this.cargalistas(); //funcion de cargar listas
+
+
 
         /*********************Funciones de visibilidad para campos conforme al check en cada producto*************************/
         /*************Producto Leasing*************/
@@ -190,6 +195,9 @@
         $('[data-field="chk_fe_multi"]').attr('style', 'pointer-events:none;'); //Check Fleet
         $('[data-field="chk_uniclick_multi"]').attr('style', 'pointer-events:none;'); //Check Uniclick
 
+        //inabilita campo check excluye_precalifiacion
+        $('[data-field="chk_ls_excluir"]').attr('style','pointer-events:none');
+
         try {
 
             cont_uni_p.nvproductos(); //HABILITA LOS CHECK DEPENDIENDO LOS PRODUCTOS QUE TIENE EL USUARIO
@@ -216,6 +224,11 @@
         //Funcion para dar estilo select2 a las listas deplegables.
         var $select = $('select.select2');
         $select.select2();
+
+        //Validacion para campo exluir precalificacion
+        if(App.user.attributes.excluir_precalifica_c== 1){
+            $('[data-field="chk_ls_excluir"]').attr('style','pointer-events:block');
+        }
     },
 
     /*************************************PRODUCTO LEASING*********************************************/
@@ -778,6 +791,12 @@
             if ($('.chk_uniclick_multi')[0] != undefined) {
                 //this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.leasing
                 this.tipoProducto.uniclick.multilinea_c = $('.chk_uniclick_multi')[0].checked;
+                this.model.set('account_uni_productos', this.tipoProducto);
+            }
+            if($('.chk_ls_excluir')[0]!=undefined){
+               //Check Excluir Pre-Calificación
+                this.tipoProducto.leasing.exclu_precalif_c = $('.chk_ls_excluir')[0].checked;
+                cont_uni_p.ResumenProductos.leasing.exclu_precalif_c=$('.chk_ls_excluir')[0].checked;
                 this.model.set('account_uni_productos', this.tipoProducto);
             }
 

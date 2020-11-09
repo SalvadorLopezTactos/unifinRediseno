@@ -1072,7 +1072,7 @@
 				.bind("delete_node.jstree", $.proxy(function (event, data) { 
 						var s = this._get_settings().ui.select_prev_on_delete,
 							obj = this._get_node(data.rslt.obj),
-							clk = (obj && obj.length) ? obj.find("a.jstree-clicked") : [],
+							clk = (obj && obj.length) ? obj.find("a.jstree-clicked") : $(),
 							_this = this;
 						clk.each(function () { _this.deselect_node(this); });
 						if(s && clk.length) { 

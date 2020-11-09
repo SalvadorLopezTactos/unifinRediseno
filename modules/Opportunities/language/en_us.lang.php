@@ -15,6 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Opportunities List Dashboard',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Opportunities Record Dashboard',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Opportunity Details',
 
     'LBL_MODULE_NAME' => 'Opportunities',
     'LBL_MODULE_NAME_SINGULAR' => 'Opportunity',
@@ -25,6 +26,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => 'Opportunity Name:',
     'LBL_OPPORTUNITY' => 'Opportunity:',
     'LBL_NAME' => 'Opportunity Name',
+    'LBL_TIME' => 'Time',
     'LBL_INVITEE' => 'Contacts',
     'LBL_CURRENCIES' => 'Currencies',
     'LBL_LIST_OPPORTUNITY_NAME' => 'Name',
@@ -141,6 +143,12 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE' => 'Commit Stage',
     'LBL_COMMIT_STAGE_FORECAST' => 'Forecast',
     'LBL_WORKSHEET' => 'Worksheet',
+
+    'LBL_RENEWAL' => 'Renewal',
+    'LBL_RENEWAL_OPPORTUNITIES' => 'Renewal Opportunities',
+    'LBL_RENEWAL_PARENT' => 'Parent Opportunity',
+    'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'Renewal Parent ID',
+    'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
 
     'TPL_RLI_CREATE' => 'An Opportunity must have an associated Revenue Line Item.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Create a Revenue Line Item.',

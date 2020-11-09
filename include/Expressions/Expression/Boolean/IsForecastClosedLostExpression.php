@@ -15,7 +15,7 @@
  * <b>isForecastClosedLost(String $status)</b><br>
  * Returns true if $status is in the forecast config for sales_stage_lost
  */
-class isForecastClosedLostExpression extends BooleanExpression
+class IsForecastClosedLostExpression extends BooleanExpression
 {
     /**
      * Returns itself when evaluating.

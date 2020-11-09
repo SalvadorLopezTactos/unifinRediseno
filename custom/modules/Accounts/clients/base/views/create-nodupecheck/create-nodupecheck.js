@@ -72,7 +72,7 @@
         /*
         AA 24/06/2019 Se añade evento para desabilitar el boton genera RFC si la nacionalidad es diferente de Mexicano
       */
-        this.model.on('change:tct_pais_expide_rfc_c', this.ocultaRFC, this);
+        //this.model.on('change:tct_pais_expide_rfc_c', this.ocultaRFC, this);
 
         //this.model.on('change:fechadenacimiento_c', this._doGenera_RFC_CURP, this);
         //this.model.on('change:fechaconstitutiva_c', this._doGenera_RFC_CURP, this);
@@ -335,8 +335,8 @@
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 9/28/2015 Description: Copiar relaciones activas de la Relacion creada desde el modulo de Relaciones y copiar esos valores en
          * el campo de tipo de relacion*/
         //Oculta la etiqueta del campo PLD
-        this.$('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
-
+        $('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
+		$('[data-name=tct_nuevo_pld_c]').hide();
         try {
             if (relContext != null) {
                 self.model.set("tipo_relacion_c", relContext.model.get("relaciones_activas"));
@@ -352,7 +352,7 @@
         $('div[data-name=tct_homonimo_chk_c]').hide();
 
         //campo Pais que expide el RFC nace oculto.
-        $('[data-name=tct_pais_expide_rfc_c]').hide();
+        //$('[data-name=tct_pais_expide_rfc_c]').hide();
         //Oculta panel del campo Tipo de Cuenta por Producto
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL17']").hide();
         //Oculta nombre de campo Potencial_Autos
@@ -381,8 +381,13 @@
         $("#drawers li.tab").removeClass('active');
         $('#drawers li.tab.panel_body').addClass("active");
         $('#drawers li.tab.LBL_RECORDVIEW_PANEL8').hide();
-        $('#drawers li.tab.LBL_RECORDVIEW_PANEL1').hide();
+        //$('#drawers li.tab.LBL_RECORDVIEW_PANEL1').hide();
         $('#drawers li.tab.LBL_RECORDVIEW_PANEL2').hide();
+		
+		//Oculta Peps de Persona Moral
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL7']").hide();
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL6']").hide();
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL9']").hide();
 
         if (this.context.parent.attributes.module == "Accounts" && this.model.get('tipo_relacion_c').includes('Propietario Real')) {
             $('#drawers li.tab.LBL_RECORDVIEW_PANEL1').show();
@@ -440,6 +445,9 @@
         this.$("div[data-name='sectoreconomico_c']").hide();
         this.$("div[data-name='subsectoreconomico_c']").hide();
         this.$("div[data-name='actividadeconomica_c']").hide();
+        this.$(".record-cell[data-name='blank_space']").hide();
+        this.$(".record-cell[data-name='blank_space']").hide();
+
     },
 
     _ActualizaEtiquetas: function () {
@@ -1782,45 +1790,64 @@
     validaformato: function (fields, errors, callback) {
         //Validacion para pasar una expresion regular por los 3 campos y verificar dicho formato.
         var errorescampos = "";
-        if (this.model.get('primernombre_c') != "" || this.model.get('apellidopaterno_c') != "" || this.model.get('apellidomaterno_c') != "") {
-            var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
-            if (this.model.get('primernombre_c') != "" && this.model.get('primernombre_c') != undefined) {
-                var nombre = this.model.get('primernombre_c');
-                var res = expresion.test(nombre);
-                if (res != true) {
-                    errorescampos = errorescampos + '<b>-Primer Nombre<br></b>';;
-                    errors['primernombre_c'] = errors['primernombre_c'] || {};
-                    errors['primernombre_c'].required = true;
-                }
-            }
-            if (this.model.get('apellidopaterno_c') != "" && this.model.get('apellidopaterno_c') != undefined) {
-                var apaterno = this.model.get('apellidopaterno_c');
-                var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
-                var res = expresion.test(apaterno);
-                if (res != true) {
-                    errorescampos = errorescampos + '<b>-Apellido Paterno<br></b>';;
-                    errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
-                    errors['apellidopaterno_c'].required = true;
-                }
-            }
-            if (this.model.get('apellidomaterno_c') != "" && this.model.get('apellidomaterno_c') != undefined) {
-                var amaterno = this.model.get('apellidomaterno_c');
-                var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
-                var res = expresion.test(amaterno);
-                if (res != true) {
-                    errorescampos = errorescampos + '<b>-Apellido Materno<br></b>';;
-                    errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
-                    errors['apellidomaterno_c'].required = true;
-                }
-            }
-            if (errorescampos) {
-                app.alert.show("Error_validacion_Campos", {
-                    level: "error",
-                    messages: 'Los siguientes campos no permiten caracteres especiales:<br>' + errorescampos,
-                    autoClose: false
-                });
-            }
-        }
+		if(this.model.get('tipodepersona_c') != 'Persona Moral'){
+			if (this.model.get('primernombre_c') == undefined || this.model.get('apellidopaterno_c') == undefined || this.model.get('apellidomaterno_c') == undefined) {
+				if (this.model.get('primernombre_c') == undefined) {
+					errorescampos = errorescampos + '<b>-Primer Nombre<br></b>';;
+					errors['primernombre_c'] = errors['primernombre_c'] || {};
+					errors['primernombre_c'].required = true;                
+				}
+				if (this.model.get('apellidopaterno_c') == undefined) {
+					errorescampos = errorescampos + '<b>-Apellido Paterno<br></b>';;
+					errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
+					errors['apellidopaterno_c'].required = true;
+				}
+				if (this.model.get('apellidomaterno_c') == undefined) {
+					errorescampos = errorescampos + '<b>-Apellido Materno<br></b>';;
+					errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
+					errors['apellidomaterno_c'].required = true;
+				}           
+			}else if (this.model.get('primernombre_c') != "" || this.model.get('apellidopaterno_c') != "" || this.model.get('apellidomaterno_c') != "") {
+				var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
+				if (this.model.get('primernombre_c') != "" && this.model.get('primernombre_c') != undefined) {
+					var nombre = this.model.get('primernombre_c');
+					var res = expresion.test(nombre);
+					if (res != true) {
+						errorescampos = errorescampos + '<b>-Primer Nombre<br></b>';;
+						errors['primernombre_c'] = errors['primernombre_c'] || {};
+						errors['primernombre_c'].required = true;
+					}
+				}
+				if (this.model.get('apellidopaterno_c') != "" && this.model.get('apellidopaterno_c') != undefined) {
+					var apaterno = this.model.get('apellidopaterno_c');
+					var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
+					var res = expresion.test(apaterno);
+					if (res != true) {
+						errorescampos = errorescampos + '<b>-Apellido Paterno<br></b>';;
+						errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
+						errors['apellidopaterno_c'].required = true;
+					}
+				}
+				if (this.model.get('apellidomaterno_c') != "" && this.model.get('apellidomaterno_c') != undefined) {
+					var amaterno = this.model.get('apellidomaterno_c');
+					var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
+					var res = expresion.test(amaterno);
+					if (res != true) {
+						errorescampos = errorescampos + '<b>-Apellido Materno<br></b>';;
+						errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
+						errors['apellidomaterno_c'].required = true;
+					}
+				}
+				if (errorescampos) {
+					app.alert.show("Error_validacion_Campos", {
+						level: "error",
+						messages: 'Los siguientes campos no permiten caracteres especiales:<br>' + errorescampos,
+						autoClose: false
+					});
+				} 
+			}
+		}
+		
         callback(null, fields, errors);
     },
     validapasscurp: function (fields, errors, callback) {

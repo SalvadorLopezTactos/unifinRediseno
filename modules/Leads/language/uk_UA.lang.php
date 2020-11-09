@@ -322,4 +322,7 @@ $mod_strings = array (
     'LBL_FILTER_LEADS_REPORTS' => 'Звіти по інтересам',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Узгоджені бізнес-цілі',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Останнє оновлення погодження',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Не вдалося змінити статус модуля {{moduleSingular}}. Модуль {{moduleSingular}} уже конвертовано.',
 );

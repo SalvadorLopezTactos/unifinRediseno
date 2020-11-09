@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'Eメール: 契約',
     'LBL_EMAILS_LEADS_REL' => 'Eメール: リード',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'Eメール: 商談',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'Eメール: メモ',
     'LBL_EMAILS_PROJECT_REL' => 'Eメール: プロジェクト',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'Eメール:　プロジェクトタスク',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'From:',
     'LBL_REPLY_TO' => '返信先：',
     'LBL_HTML_BODY' => 'HTML本文',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => '受信者',
     'LBL_LEADS_SUBPANEL_TITLE' => 'リード',
     'LBL_MESSAGE_SENT' => 'メッセージ送信',
@@ -201,8 +203,8 @@ $mod_strings = array(
     "LBL_SHOW_MORE_RECIPIENTS" => "他の宛先",
     "LBL_COMPOSE_ADDRESSBOOK" => "アドレス帳",
     'NTC_REMOVE_INVITEE' => 'あなたはEメールから、この受信者を削除してもよろしいですか？',
-    'WARNING_SETTINGS_NOT_CONF' => 'Eメール設定がEメールを送信するために正しく設定されていません。SMTP サーバー ' .
-        'は、<a href="#bwc/index.php?module=EmailMan&action=config">Eメールの設定</a> で設定する必要があります。',
+    'WARNING_SETTINGS_NOT_CONF' => 'Eメール設定がEメールを送信するために正しく設定されていません。SMTP サーバ' .
+        'は、<a href="#bwc/index.php?module=EmailMan&action=config">システムメール設定</a> で設定する必要があります。',
     'WARNING_NO_UPLOAD_DIR' => 'ファイルの添付ができません: "upload_tmp_dir"の値が検出されません。php. iniファイルで ' .
         'この設定を修正してください。',
     'WARNING_UPLOAD_DIR_NOT_WRITABLE' => 'ファイルの添付ができません:"upload_tmp_dir"の正しくないまたは使用できない値が ' .
@@ -231,7 +233,7 @@ $mod_strings = array(
     'LBL_BUTTON_REPLY_ALL' => 'すべての返信',
     'LBL_BUTTON_FORWARD' => '転送',
     'LBL_CASES_SUBPANEL_TITLE' => 'ケース',
-    'LBL_INBOUND_TITLE' => 'インバウンドEメール',
+    'LBL_INBOUND_TITLE' => 'インバウンドメール',
     'LBL_INTENT' => '目的',
     'LBL_MESSAGE_ID' => 'メッセージID',
     'LBL_REPLY_HEADER_1' => '次の値と一致する ',
@@ -246,7 +248,7 @@ $mod_strings = array(
     'LBL_LIST_ASSIGNED_TO_NAME' => 'アサイン先',
 
     // for Inbox
-    'LBL_ALL' => 'すべての',
+    'LBL_ALL' => 'すべて',
     'LBL_ASSIGN_WARN' => '２つのオプションがすべて選択されていることを確認してください。',
     'LBL_BACK_TO_GROUP' => 'グループ受信箱へ戻る',
     'LBL_BUTTON_DISTRIBUTE_KEY' => 'a',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'Id への返信',
     'LBL_TYPE' => 'タイプ:',
     'LBL_EMAIL_STATE' => '都道府県',
+    'LBL_EMAIL_DIRECTION' => '方向',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => '確認',
@@ -369,8 +372,8 @@ $mod_strings = array(
     'LBL_TEST_EMAIL_BODY' => 'このEメールはSugarCRMで指定された送信サーバの設定をテストするために送信されました。このEメールが正しく受信されたことは送信サーバの設定が正しいことを意味しています。',
 
     // for outbound email dialog
-    'LBL_SMTP_SERVER_HELP' => 'この SMTP メール サーバーは、送信メールに使用できます。メールサーバーを使用するために、' .
-        'Eメールアカウントにユーザー名とパスワードを入力してください。',
+    'LBL_SMTP_SERVER_HELP' => 'この SMTP サーバは、送信メールに使用できます。メールサーバを使用するために、' .
+        'Eメールアカウントにユーザ名とパスワードを入力してください。',
     'LBL_MISSING_DEFAULT_OUTBOUND_SMTP_SETTINGS' => '管理者はまだ送信用のデフォルトのアカウントを設定していません。Eメールのテスト送信ができません。',
     'LBL_MAIL_SMTPAUTH_REQ' => 'SMTP認証を利用？',
     'LBL_MAIL_SMTPPASS' => 'SMTPパスワード:',
@@ -414,14 +417,14 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => '更新日',
 
     // Email Error Messages
-    'LBL_INTERNAL_ERROR' => 'サーバー内部のエラーがありました。再度実行してください。',
+    'LBL_INTERNAL_ERROR' => 'サーバ内部のエラーがありました。再度実行してください。',
     'LBL_INVALID_CONFIGURATION' => 'Eメールは正しく設定されませんでした。正しい設定情報を入力してください。',
-    'LBL_INVALID_HEADER' => '全ての必要情報を入力してください。',
+    'LBL_INVALID_HEADER' => 'すべての必要情報を入力してください。',
     'LBL_INVALID_EMAIL' => '正しいEメールアドレスを入力してください。',
-    'LBL_FAILED_TO_CONNECT' => 'Eメールサーバーに接続できませんでした。Eメールの設定が正しいかどうか確認してください。',
+    'LBL_FAILED_TO_CONNECT' => 'Eメールサーバに接続できませんでした。システムメール設定が正しいかどうか確認してください。',
     'LBL_INVALID_ATTACHMENT' => 'ファイルを添付できませんでした。もう一度やり直してください。',
-    'LBL_EXECUTABLE_ATTACHMENT' => 'SMTP サーバーでは、実行可能な添付ファイルを受け付けていません。Eメールは送信されませんでした。',
-    'LBL_MISSING_CONFIGURATION' => 'Eメールの設定が指定されていません。有効なEメール設定を入力してください。',
+    'LBL_EXECUTABLE_ATTACHMENT' => 'SMTP サーバでは、実行可能な添付ファイルを受け付けていません。Eメールは送信されませんでした。',
+    'LBL_MISSING_CONFIGURATION' => 'システムメール設定が指定されていません。有効なシステムメール設定を入力してください。',
     'LBL_INVALID_MAILAPI_STATUS' => '無効なEメールステータスがリクエストされました。有効なステータスを入力してください。',
     'LBL_EXCEPTION' => '例外が発生しました',
     'LBL_ASSIGNMNT_ACT_RESULT' => '割当アクションの結果',
@@ -451,12 +454,12 @@ $mod_strings = array(
     // Help Message
     'LBL_HELP_COMPOSE_TITLE' => 'Eメールを作成',
     'LBL_HELP_COMPOSE' => '件名とEメール本文を入力し、Eメールを作成してください。Eメールを送信したり、後でEメールモジュール内のフォルダーからドラフトの編集するためには、「アクション」メニューから「下書きとして保存」を選択するか、「送信」をクリックしてください',
-    'LBL_EMAIL_INVALID_USER_CONFIGURATION' => 'Eメール設定が正しく設定されていません。SMTPサーバーは <a href="#bwc/index.php?module=Users">User Profile Email Settings</a>内で正しく設定される必要があります。',
-    'LBL_EMAIL_INVALID_SYSTEM_CONFIGURATION' => 'デフォルトシステムのSMTPサーバーが設定されていません。システム管理者に連絡してください。',
+    'LBL_EMAIL_INVALID_USER_CONFIGURATION' => 'Eメール設定が正しく設定されていません。SMTPサーバは <a href="#bwc/index.php?module=Users">User Profile Email Settings</a>内で正しく設定される必要があります。',
+    'LBL_EMAIL_INVALID_SYSTEM_CONFIGURATION' => 'デフォルトシステムのSMTPサーバが設定されていません。システム管理者にお問い合わせください。',
     'NTC_DELETE_CONFIRMATION_FORMATTED' => '本当に{0} を削除してもよろしいですか？' .
-        'このメールへのアクセスを持つすべてのユーザーから削除されます。',
+        'このメールへのアクセスを持つすべてのユーザから削除されます。',
     'NTC_DELETE_CONFIRMATION_MULTIPLE' => '本当に選択したEメールを削除してよろしいですか？' .
-        'それらにアクセスできるすべてのユーザーから削除されます。',
+        'それらにアクセスできるすべてのユーザから削除されます。',
 
     'LBL_OUTBOUND_EMAIL_ID_HELP' => 'アスタリスク (*) は、システム アカウントを示します。',
 

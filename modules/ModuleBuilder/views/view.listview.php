@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+
 require_once 'modules/ModuleBuilder/parsers/constants.php' ;
 
 class ViewListView extends SugarView
@@ -34,6 +36,9 @@ class ViewListView extends SugarView
     {
         parent::__construct($bean, $view_object_map, $request);
         $this->editModule = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
+        if (!AccessControlManager::instance()->allowModuleAccess($this->editModule)) {
+            throw new SugarApiExceptionModuleDisabled();
+        }
         $this->editLayout = $this->request->getValidInputRequest('view', 'Assert\ComponentName');
         $this->subpanel = $this->request->getValidInputRequest('subpanel');
         $this->subpanelLabel = $this->request->getValidInputRequest('subpanelLabel', null, false);

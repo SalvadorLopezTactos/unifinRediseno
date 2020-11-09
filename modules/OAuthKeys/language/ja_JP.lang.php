@@ -26,7 +26,7 @@ $mod_strings = array (
   'LBL_DESCRIPTION' => '詳細',
   'LBL_DELETED' => '削除済み',
   'LBL_NAME' => 'コンシューマキー名',
-  'LBL_CREATED_USER' => 'ユーザーによって作成されました',
+  'LBL_CREATED_USER' => 'ユーザによって作成されました',
   'LBL_MODIFIED_USER' => 'ユーザによって変更',
   'LBL_LIST_NAME' => 'キー名',
   'LBL_LIST_FORM_TITLE' => 'OAuthキー',
@@ -37,5 +37,5 @@ $mod_strings = array (
   'LNK_LIST' => 'OAuth一覧',
   'LBL_TOKENS' => 'トークン',
   'LBL_OAUTH_TYPE' => 'OAuthバージョン',
-  'LBL_CLIENT_TYPE' => 'クライエントタイプ',
+  'LBL_CLIENT_TYPE' => 'クライアントタイプ',
 );

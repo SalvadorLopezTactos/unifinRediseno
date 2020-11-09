@@ -310,4 +310,7 @@ $mod_strings = array (
     'LBL_FILTER_LEADS_REPORTS' => 'Ajánlások jelentései',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Hozzájárulás üzleti célokhoz a következőhöz',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Hozzájárulás utolsó frissítése',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'A(z) {{moduleSingular}} állapot nem módosítható. A(z) {{moduleSingular}} átalakítása már megtörtént.',
 );

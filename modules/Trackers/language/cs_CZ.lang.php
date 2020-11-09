@@ -18,17 +18,7 @@
  ********************************************************************************/
 
 $mod_strings = array (
-		  //Labels for methods in the TrackerReporter.php file that are shown in TrackerDashlet
-		  'ShowActiveUsers'      => 'Ukaž aktivní uživatele',
-		  'ShowLastModifiedRecords' => 'Posledních 10 modifikovaných záznamů',
-		  'ShowTopUser' => 'Top uživatel',
-		  'ShowMyModuleUsage' => 'Užití mých modulů',
-		  'ShowMyWeeklyActivities' => 'Moje týdenní aktivita',
-		  'ShowTop3ModulesUsed' => 'Nejpoužívanější 3 moduly',
-		  'ShowLoggedInUserCount' => 'Počítadlo aktviních uživatelů',
-		  'ShowMyCumulativeLoggedInTime' => 'Součet mého času v systému (tento týden)',
-		  'ShowUsersCumulativeLoggedInTime' => 'Součet času uživatelů v systému (tento týden)',
-		  
+
 		  //Column header mapping
 		  'action' => 'Akce',
 		  'active_users' => 'Počítadlo aktviních uživatelů',

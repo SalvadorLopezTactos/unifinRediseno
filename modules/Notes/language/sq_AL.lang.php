@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'Data e modifikimit',
     'LBL_DELETED' => 'E fshirë',
     'LBL_REVENUELINEITEMS' => 'Rreshti i llojeve të të ardhurave',
+    'LBL_ENTRY_SOURCE' => 'Burimi i shënimeve',
+    'LBL_SOURCE_EXTERNAL' => 'I jashtëm',
+    'LBL_SOURCE_INTERNAL' => 'I brendshëm',
 
     // Help Text
     // List View Help Text

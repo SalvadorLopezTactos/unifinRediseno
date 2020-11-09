@@ -18,6 +18,9 @@ const Language = require('core/language');
 const ViewManager = require('view/view-manager');
 const DataManager = require('data/data-manager');
 
+// Promise Polyfill for IE Support, remove when we drop that browser!
+import Promise from 'promise-polyfill';
+
 // Key prefix used to identify metadata in the local storage.
 var _keyPrefix = 'meta:';
 
@@ -30,6 +33,9 @@ var _mdLoaded = {};
 //Used to keep track if we are currently updating the metadata and prevent premature metadata validation from
 //interval functions.
 var _syncing = false;
+
+// A set of promises that must be resolved before we can trigger the metadata:sync:complete event.
+var externalSyncTasks = [];
 
 function _setHash(data, isPublic) {
     var pKey = isPublic ? 'public:' : '';
@@ -61,64 +67,73 @@ function _injectLabels(serverMetadata, labels) {
 // Parses the labels property of metadata which contains
 // URL to a JSON file with our language strings.
 // - metadata Metadata returned from /metadata GET
-function _fetchLabels(metadata, options) {
-    var labels, currentLanguage, langStringsUrl;
-    var userLang = User.getLanguage();
-
-    // Grab the lang strings
-    labels = metadata.ordered_labels || metadata.labels;
-
-    // Set the default language
-    Language.setDefaultLanguage(labels['default']);
-
-    // Since, at this stage, we may or may not have obtained our language yet,
-    // the labels property contains a 'default' property which we can use as a fallback.
-    if (options.language && labels[options.language]) {
-        currentLanguage = options.language;
-    } else if (labels[userLang]) {
-        currentLanguage = userLang;
-    } else {
-        currentLanguage = Language.getDefaultLanguage();
-        // since the user's preferred language does not exist, update it to the default language
-        if (User.id) {
-            User.updateLanguage(currentLanguage);
-        }
+function _fetchLabels(metadata, language) {
+    if (!metadata.ordered_labels && !metadata.labels) {
+        return Promise.resolve();
     }
-    Language.setCurrentLanguage(currentLanguage);
+    return new Promise((r, e) => {
+        var labels;
+        var currentLanguage;
+        var langStringsUrl;
+        var userLang = User.getLanguage();
 
-    langStringsUrl = Utils.buildUrl(labels[currentLanguage]);
+        // Grab the lang strings
+        labels = metadata.ordered_labels || metadata.labels;
 
-    SUGAR.App.api.call('read', langStringsUrl, null, {
-        success: function(labelsData) {
-            // In case server is not set up to serve mime-type correctly on .json files,
-            // e.g. honey-b seems to be misconfigured (probably a "popular misconfiguration")
-            try {
-                labelsData = _.isString(labelsData) ? JSON.parse(labelsData) : labelsData;
+        // Set the default language
+        Language.setDefaultLanguage(labels['default']);
+
+        // Since, at this stage, we may or may not have obtained our language yet,
+        // the labels property contains a 'default' property which we can use as a fallback.
+        if (language && labels[language]) {
+            currentLanguage = language;
+        } else if (labels[userLang]) {
+            currentLanguage = userLang;
+        } else {
+            currentLanguage = Language.getDefaultLanguage();
+            // since the user's preferred language does not exist, update it to the default language
+            if (User.id) {
+                User.updateLanguage(currentLanguage);
             }
-            catch (ex) {
-                SUGAR.App.logger.fatal('Failed to parse labels data: ' + ex);
-                options.error({
-                    code: 'sync_failed',
-                    label: 'ERR_SYNC_FAILED'
-                });
-                return;
-            }
-
-            options.success(labelsData);
-        },
-        error: function(err) {
-            //Force a sync fail to prevent possible infinite loops
-            err.code = 'sync_failed';
-            err.label = 'ERR_SYNC_FAILED';
-            options.error(err);
         }
-    });
+
+        Language.setCurrentLanguage(currentLanguage);
+        langStringsUrl = Utils.buildUrl(labels[currentLanguage]);
+
+        SUGAR.App.api.call('read', langStringsUrl, null, {
+            success: function(labelsData) {
+                // In case server is not set up to serve mime-type correctly on .json files,
+                // e.g. honey-b seems to be misconfigured (probably a "popular misconfiguration")
+                try {
+                    labelsData = _.isString(labelsData) ? JSON.parse(labelsData) : labelsData;
+                    // Injects lang strings in server metadata. Must do this before the call to self.set in
+                    // case it's overridden by a client (bad!) which expects all meta properties in metadata.
+                    _injectLabels(metadata, labelsData);
+                }
+                catch (ex) {
+                    SUGAR.App.logger.fatal('Failed to parse labels data: ' + ex);
+                    return e({
+                        code: 'sync_failed',
+                        label: 'ERR_SYNC_FAILED'
+                    });
+                }
+
+                r(labelsData);
+            },
+            error: function(err) {
+                //Force a sync fail to prevent possible infinite loops
+                err.code = 'sync_failed';
+                err.label = 'ERR_SYNC_FAILED';
+                e(err);
+            }
+        });
+    })
 }
 
 // Initializes custom layouts/views templates and controllers
 function _initCustomComponents(module, moduleName) {
-    var self = this,
-        platforms = (SUGAR.App.config.platform !== 'base') ? ['base', SUGAR.App.config.platform] : ['base'];
+    var self = this;
+    var platforms = (SUGAR.App.config.platform !== 'base') ? ['base', SUGAR.App.config.platform] : ['base'];
 
     _.each({'layout': 'layout', 'view': 'view', 'fieldTemplate': 'field', 'data': 'data'}, function(type, key) {
 
@@ -950,58 +965,52 @@ module.exports = {
             if (_.isFunction(cb)) cb(p);
         };
 
-        SUGAR.App.api.getMetadata({types: metadataTypes, callbacks: {
-            success: function(metadata) {
-                var compatible;
-                options = options || {};
+        SUGAR.App.api.getMetadata({
+            types: metadataTypes,
+            callbacks: {
+                success: function (metadata) {
+                    var compatible;
+                    options = options || {};
 
-                if (!_.isEmpty(metadata)) {
-                    SUGAR.App.logger.debug('Updating metadata');
-                    if (_mdLoaded[options.getPublic ? 'public:md' : 'md'] &&
-                        self.getHash(options.getPublic) == metadata._hash && !options.forceRefresh
-                    ) {
-                        SUGAR.App.logger.debug('Skipping update as metadata hash matches');
-                        return callback.call(self);
-                    }
-
-                    //If the response contains server_info, we need to run a compatibility check
-                    if (_.isEmpty(metadataTypes) || _.include(metadataTypes, 'server_info') && !options.getPublic) {
-                        compatible = SUGAR.App.isServerCompatible(metadata.server_info);
-                        //If compatible wasn't true, it will be set to an error string and we need to bomb out
-                        if (compatible !== true) {
-                            return callback(compatible);
+                    if (!_.isEmpty(metadata)) {
+                        SUGAR.App.logger.debug('Updating metadata');
+                        if (_mdLoaded[options.getPublic ? 'public:md' : 'md'] &&
+                            self.getHash(options.getPublic) == metadata._hash && !options.forceRefresh
+                        ) {
+                            SUGAR.App.logger.debug('Skipping update as metadata hash matches');
+                            callback();
                         }
-                    }
 
-                    _mdLoaded[options.getPublic ? 'public:md' : 'md'] = true;
+                        //If the response contains server_info, we need to run a compatibility check
+                        if (_.isEmpty(metadataTypes) || _.include(metadataTypes, 'server_info') && !options.getPublic) {
+                            compatible = SUGAR.App.isServerCompatible(metadata.server_info);
+                            //If compatible wasn't true, it will be set to an error string and we need to bomb out
+                            if (compatible !== true) {
+                                return errorCallback(compatible)
+                            }
+                        }
+                        _mdLoaded[options.getPublic ? 'public:md' : 'md'] = true;
 
-                    if (metadata.jssource) {
-                       self._loadJSSource(metadata, options, callback, errorCallback, self);
+                        Promise.all(_.union([
+                                self._loadJSSource(metadata, options),
+                                _fetchLabels(metadata, options)
+                            ],
+                            //Convert any synchronous callbacks to promises
+                            _.map(externalSyncTasks, task => Promise.resolve(task(metadata, options)))
+                        )).then(() => {
+                            self.set(metadata, options.getPublic);
+                            callback()
+                        }).catch(error => errorCallback(error));
                     } else {
-                        // Some clients may not want jssource (e.g. Nomad)
-                        if (metadata.labels || metadata.ordered_labels) {
-                            _fetchLabels(metadata, {
-                                language: options.language,
-                                success: function(labelsData) {
-                                    _injectLabels(metadata, labelsData);
-                                    self.set(metadata, options.getPublic);
-                                    callback.call(self);
-                                },
-                                error: errorCallback
-                            });
-                        } else {
-                            callback.call(self);
-                        }
+                        errorCallback({
+                            code: 'sync_failed',
+                            label: 'ERR_SYNC_FAILED'
+                        });
                     }
-                } else {
-                    callback.call(self, {
-                        code: 'sync_failed',
-                        label: 'ERR_SYNC_FAILED'
-                    });
-                }
-            },
-            error: errorCallback
-        }, public: options.getPublic, params: options.params});
+                },
+                error: errorCallback
+            }, public: options.getPublic, params: options.params
+        });
     },
 
     /**
@@ -1013,52 +1022,61 @@ module.exports = {
         return _syncing;
     },
 
-    _loadJSSource: function(metadata, options, callback, errorCallback, self) {
-        var scriptEl,
-           loadJS = this._checkJSSourceUpdated(metadata, !!options.getPublic);
-
-        //In the event of a hard reload, we can just stop the metadata sync
-        if (loadJS === 'reload') {
-            return Utils.hardRefresh();
-        }
-        else if (loadJS) {
-            SUGAR.jssource = false;
-            scriptEl = document.createElement("script");
-            scriptEl.src = Utils.buildUrl(metadata.jssource);
-
-            document.head.appendChild(scriptEl);
+    /**
+     * Adds a task/file/app to be fetched and synced
+     *
+     * @param {Promise|function} task
+     */
+    addSyncTask: function(task) {
+        if (!_.find(externalSyncTasks, task)) {
+            externalSyncTasks.push(task);
         }
 
-        async.parallel([
-            function(cb) {
-                if (loadJS) {
-                    Utils.doWhen('SUGAR.jssource', function() {
-                        self._declareClasses(SUGAR.jssource);
-                        cb();
-                    });
-                } else {
-                    cb();
-                }
-            },
-            function(cb) {
-                _fetchLabels(metadata, {
-                    language: options.language,
-                    success: function(labelsData) {
-                        // Injects lang strings in server metadata. Must do this before the call to self.set in
-                        // case it's overridden by a client (bad!) which expects all meta properties in metadata.
-                        _injectLabels(metadata, labelsData);
-                        self.set(metadata, options.getPublic);
-                        cb();
-                    },
-                    error: function() {
-                        errorCallback.apply(self, arguments);
-                        cb();
-                    }
-                });
+        return task;
+    },
+
+    /**
+     * Removes a task/file/app from being fetched and synced
+     *
+     * @param {Promise|function} task
+     */
+    removeSyncTask: function (task) {
+        externalSyncTasks = _.without(externalSyncTasks, task);
+    },
+
+    /**
+     * Loads a JS file from the given `metadata.jssource`
+     *
+     * @param {Object} metadata JS File metadata
+     * @param {Object} options Any options being passed
+     * @return {*}
+     * @private
+     */
+    _loadJSSource: function(metadata, options) {
+        const self = this;
+        if (!metadata.jssource) {
+            return Promise.resolve(self);
+        }
+
+        return new Promise(res => {
+            var scriptEl;
+            var loadJS = self._checkJSSourceUpdated(metadata, !!options.getPublic);
+
+            //In the event of a hard reload, we can just stop the metadata sync
+            if (loadJS === 'reload') {
+                return Utils.hardRefresh();
             }
-        ], () => {
-            if (callback) {
-                callback.call(self);
+            else if (loadJS) {
+                SUGAR.jssource = false;
+                scriptEl = document.createElement("script");
+                scriptEl.src = Utils.buildUrl(metadata.jssource);
+                document.head.appendChild(scriptEl);
+                Utils.doWhen('SUGAR.jssource', function() {
+                    self._declareClasses(SUGAR.jssource);
+                    res(self);
+                });
+            } else {
+                res(self);
             }
         });
     },

@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Попередній розгляд',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'УВАГА: якщо Ви зміните основний модуль, всі поля, вже додані в шаблон, повинні бути вилучені.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Ось файл, який ви запросили (Ви можете змінити цей текст)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Комерційна пропозиція',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Цей шаблон використовується для друку комерційної пропозиції у форматі PDF.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'комерційна пропозиція',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Комерційна пропозиція (з послугами)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Цей шаблон використовується для збереження комерційної пропозиції у форматі PDF, у тому числі інформації про обслуговування.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'комерційна пропозиція про надання послуг',
+
   'LBL_TPL_INVOICE_NAME' => 'Рахунок-фактура',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Цей шаблон використовується для друку рахунку-фактури у форматі PDF.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'рахунок-фактура',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Рахунок-фактура (з послугами)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Цей шаблон використовується для збереження рахунка-фактури у форматі PDF, у тому числі інформації про обслуговування.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'рахунок-фактура за надання послуг',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Номер комерційної пропозиції:',
   'LBL_TPL_SALES_PERSON' => 'Менеджер з продажу:',
   'LBL_TPL_VALID_UNTIL' => 'Дійсний до:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Номер частини',
   'LBL_TPL_PRODUCT' => 'Продукт комерційної пропозиції',
   'LBL_TPL_RLI' => 'Доходи за продукти',
+  'LBL_TPL_DURATION' => 'Тривалість',
+  'LBL_TPL_DURATION_STARTS' => 'Початок:',
+  'LBL_TPL_DURATION_ENDS' => 'Кінець:',
   'LBL_TPL_LIST_PRICE' => 'Заявлена ціна товару за прайсом',
   'LBL_TPL_UNIT_PRICE' => 'Ціна за одиницю:',
   'LBL_TPL_EXT_PRICE' => 'Зовнішня ціна',

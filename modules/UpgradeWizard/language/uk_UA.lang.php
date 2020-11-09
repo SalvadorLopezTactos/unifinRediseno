@@ -257,8 +257,6 @@ $mod_strings = array(
     'LBL_ML_UNINSTALLABLE' => 'Неможливо встановити',
     'LBL_ML_VERSION' => 'Версія',
 	'LBL_ML_INSTALL'=>'Встановити',
-	//adding the string used in tracker. copying from homepage
-	'LBL_HOME_PAGE_4_NAME' => 'Трекер',
 	'LBL_MODULE_NAME' => 'Майстер оновлення',
 	'LBL_MODULE_NAME_SINGULAR' => 'Майстер оновлення',
 	'LBL_UPLOAD_SUCCESS' => 'Завантажений файл не сумісний з встановленою версією Sugar:',

@@ -9,24 +9,118 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
+
 /**
- * Update OOB Reports
+ * Install OOB Reports that were added in post-7 releases.
  */
 class SugarUpgradeUpdateOOBReports extends UpgradeScript
 {
     public $order = 4500;
-    public $type = self::UPGRADE_CUSTOM;
+    public $type = self::UPGRADE_DB;
 
+    /**
+     * {@inheritDoc}
+     */
     public function run()
     {
-        if (version_compare($this->from_version, '8.1.0', '>=')) {
-            return;
+        // install the new Reports either when upgrading from pre-9.3.0 or on pro-to-ENT flavor conversion
+        if ($this->shouldInstallReports()) {
+            $this->installReports($this->getReportsToInstall());
+            // For the 9.1 release, we don't want these, but we may in the future.
+            //$this->newOOBReportsNotifications();
+        } else {
+            $this->log('Not installing new Serve Reports');
         }
+    }
+
+    /**
+     * Determine if we should install any new Reports this upgrade.
+     *
+     * @return bool true if we should install new Reports this upgrade. false
+     *   otherwise.
+     */
+    public function shouldInstallReports(): bool
+    {
+        $isFlavorConversion = !$this->fromFlavor('ent') && $this->toFlavor('ent');
+        $isBelowEntVersion = $this->toFlavor('ent') && version_compare($this->from_version, '9.3.0', '<');
+        return $isFlavorConversion || $isBelowEntVersion;
+    }
+
+    /**
+     * Install the OOB Reports with the given names.
+     *
+     * @param array $reportNames List of report names to install.
+     *   These should be actual Report names, not translatable labels.
+     */
+    public function installReports(array $reportNames)
+    {
+        $this->log('Temporarily enabling admin work for Report installation');
+        $adminWork = new AdminWork();
+        $adminWork->startAdminWork();
         require_once 'modules/Reports/SavedReport.php';
         require_once 'modules/Reports/SeedReports.php';
-        create_default_reports(true);
+        $this->log('Installing new Serve Reports');
+        create_default_reports(true, $reportNames);
+    }
 
-        $this->newOOBReportsNotifications();
+    /**
+     * Get the Reports to install for this upgrade.
+     *
+     * @return array A list of Report names.
+     */
+    public function getReportsToInstall(): array
+    {
+        // 9.1 new Serve Reports
+        $the_9_1_reports = [
+            'New Cases by Business Center by Week',
+            'Recently Created Cases',
+            'New Cases by Customer Tier by Week',
+            'Open Cases by Customer Tier and Priority',
+            'Total Cases Resolved this Month by Business Center',
+            'Total Cases Resolved this Month by Agent',
+            'List of Recently Resolved Cases',
+            'My Cases Resolved this Month by Week',
+            'My Cases Due Today and Overdue',
+            'All Cases Due Today and Overdue',
+            'My Open Cases by Followup Date',
+            'All Open Cases by Followup Date',
+            'My Open Cases by Status',
+            'My Cases in the Last Week by Status',
+            'Status of Open Tasks Assigned by Me',
+        ];
+
+        // 9.3 new Serve Reports
+        $the_9_3_reports = [
+            'Cases That Missed the First Response SLA',
+            'My SLA Success Rate',
+            'New Portal Users Awaiting Activation',
+            'Daily Average Time to First Response',
+            'Average Time to Resolution by Week by Type',
+            'My Average Difference From Follow-Up Date by Week',
+            'Open Cases Awaiting First Response That Missed SLA',
+            'First Response SLA Success Rate',
+            'Average Difference From Follow-Up Date by Week by Agent',
+            'Average Time to Resolution by Week by Agent',
+            'Open Cases Awaiting First Response Within SLA',
+            'Average Time to First Response by Agent',
+            'Average Time Spent on Cases by Week by Case Type',
+            'Average Time on Cases by Status by Type',
+            'Total Time Spent on Cases by Week by Case Type',
+            'List of Changes to Case Status',
+        ];
+
+        $reportsToInstall = [];
+        if ($this->toFlavor('ent')) {
+            if (!$this->fromFlavor('ent') || version_compare($this->from_version, '9.1.0', '<')) {
+                $reportsToInstall = array_merge($the_9_1_reports, $the_9_3_reports);
+            } elseif (version_compare($this->from_version, '9.3.0', '<')) {
+                $reportsToInstall = $the_9_3_reports;
+            }
+        }
+
+        return $reportsToInstall;
     }
 
     /**

@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Ei löydetty kohdelistaa jonka tyyppinä olisi default',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Merkintöjä ei löytynyt',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Merkinnät käsiteltiin',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Seuraajan nimi:',
   'LBL_EDIT_TRACKER_URL'=>'Seuraajan URL:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'Optimeita ei tallennettu sisääntulevan sähköpostin tilin kanssa.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Tarkista sisääntulevan sähköpostin asetukset.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} tämän kampanjan kautta luotua liidiä on poistettu kampanjan luonnista lähtien.',
+    'LBL_PROSPECT_LIST' => 'Tavoiteluettelo',
 );
 
 

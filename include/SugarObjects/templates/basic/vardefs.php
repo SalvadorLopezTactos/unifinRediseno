@@ -252,9 +252,9 @@ $vardefs = array(
             'fields' => array('id')
         ),
         'date_modified' => array(
-            'name' => 'idx_' . strtolower($table_name) . '_date_modfied',
+            'name' => 'idx_' . strtolower($table_name) . '_del_d_m',
             'type' => 'index',
-            'fields' => array('date_modified'),
+            'fields' => array('deleted', 'date_modified', 'id'),
         ),
         'deleted' => array(
             'name' => 'idx_' . strtolower($table_name) . '_id_del',
@@ -262,9 +262,9 @@ $vardefs = array(
             'fields' => array('id', 'deleted')
         ),
         'date_entered' => array(
-            'name' => 'idx_' . strtolower($table_name) . '_date_entered',
+            'name' => 'idx_' . strtolower($table_name) . '_del_d_e',
             'type' => 'index',
-            'fields' => array('date_entered')
+            'fields' => array('deleted', 'date_entered', 'id'),
         ),
         'name_del' => array(
             'name' => 'idx_' . strtolower($table_name) . '_name_del',

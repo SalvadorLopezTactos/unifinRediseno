@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-return array(
+return [
     'metadata' =>
     array(
         'components' =>
@@ -47,7 +47,7 @@ return array(
                                 'label' => 'TPL_DASHLET_MY_MODULE',
                                 'display_columns' =>
                                 array(
-                                    'full_name',
+                                    'name',
                                     'account_name',
                                     'email',
                                     'phone_work',
@@ -66,4 +66,5 @@ return array(
         ),
     ),
     'name' => 'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD',
-);
+    'id' => '5d6736ec-7b52-11e9-a00e-f218983a1c3e',
+];

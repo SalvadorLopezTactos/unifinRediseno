@@ -21,12 +21,59 @@ $viewdefs["Home"]["base"]["view"]["dashboard-headerpane"] = array(
                     "label"     => "LBL_CREATE_BUTTON_LABEL",
                     "css_class" => "btn btn-primary",
                 ),
-
+                array(
+                    "name"      => "edit_overview_tab_button",
+                    "type"      => "rowaction",
+                    "label"     => "LBL_EDIT_OVERVIEW_TAB_BUTTON",
+                    'acl_action' => 'edit',
+                    'allowed_layouts' => [
+                        [
+                            // service console
+                            'name' => 'dashboard',
+                            'id' => 'c108bb4a-775a-11e9-b570-f218983a1c3e',
+                        ],
+                        [
+                            // renewals console
+                            'name' => 'dashboard',
+                            'type' => 'renewals_console',
+                        ],
+                    ],
+                ),
+                array(
+                    "name"      => "edit_module_tabs_button",
+                    "type"      => "rowaction",
+                    "label"     => "LBL_EDIT_MODULE_TABS_BUTTON",
+                    'acl_action' => 'edit',
+                    'allowed_layouts' => [
+                        [
+                            // service console
+                            'name' => 'dashboard',
+                            'id' => 'c108bb4a-775a-11e9-b570-f218983a1c3e',
+                        ],
+                        [
+                            // renewals console
+                            'name' => 'dashboard',
+                            'type' => 'renewals_console',
+                        ],
+                    ],
+                ),
                 array(
                     "name"      => "edit_button",
                     "type"      => "rowaction",
                     "label"     => "LBL_EDIT_BUTTON",
                     'acl_action' => 'edit',
+                    'disallowed_layouts' => [
+                        [
+                            // service console
+                            'name' => 'dashboard',
+                            'id' => 'c108bb4a-775a-11e9-b570-f218983a1c3e',
+                        ],
+                        [
+                            // renewals console
+                            'name' => 'dashboard',
+                            'type' => 'renewals_console',
+                        ],
+                    ],
                 ),
                 array(
                     'type' => 'rowaction',
@@ -34,6 +81,18 @@ $viewdefs["Home"]["base"]["view"]["dashboard-headerpane"] = array(
                     'label' => 'LBL_DUPLICATE_BUTTON',
                     'acl_module' => 'Dashboards',
                     'acl_action' => 'create',
+                    'disallowed_layouts' => [
+                        [
+                            // this is the Agent Workbench
+                            'name' => 'dashboard',
+                            'id' => 'c108bb4a-775a-11e9-b570-f218983a1c3e',
+                        ],
+                        [
+                            // this is new renewals console
+                            'name' => 'dashboard',
+                            'type' => 'renewals_console',
+                        ],
+                    ],
                 ),
             ),
             "showOn" => "view",
@@ -51,6 +110,18 @@ $viewdefs["Home"]["base"]["view"]["dashboard-headerpane"] = array(
             "label"     => "LBL_DELETE_BUTTON_LABEL",
             "css_class" => "btn-danger",
             "showOn" => "edit",
+            'disallowed_layouts' => [
+                [
+                    // this is the Agent Workbench
+                    'name' => 'dashboard',
+                    'id' => 'c108bb4a-775a-11e9-b570-f218983a1c3e',
+                ],
+                [
+                    // this is new renewals console
+                    'name' => 'dashboard',
+                    'type' => 'renewals_console',
+                ],
+            ],
         ),
         array(
             "name"      => "save_button",

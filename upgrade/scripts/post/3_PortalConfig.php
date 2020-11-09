@@ -11,7 +11,7 @@
  */
 
 /**
- * Create portal config if does not exist
+ * Upgrades chartEngine to `sucrose` while updating to Sugar7.
  */
 class SugarUpgradePortalConfig extends UpgradeScript
 {

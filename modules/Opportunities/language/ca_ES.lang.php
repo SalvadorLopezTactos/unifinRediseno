@@ -15,6 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Quadre de comandament del llistat d&#39;oportunitats',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Quadre de comandament del registre d&#39;oportunitats',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Detalls de l&#39;oportunitat',
 
     'LBL_MODULE_NAME' => 'Oportunitats',
     'LBL_MODULE_NAME_SINGULAR' => 'Oportunitat',
@@ -25,6 +26,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => 'Nom de l&#39;oportunitat:',
     'LBL_OPPORTUNITY' => 'Oportunitat:',
     'LBL_NAME' => 'Nom Oportunitat',
+    'LBL_TIME' => 'Hora',
     'LBL_INVITEE' => 'Contactes',
     'LBL_CURRENCIES' => 'Monedes',
     'LBL_LIST_OPPORTUNITY_NAME' => 'Nom',
@@ -75,6 +77,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Tipus:',
     'LBL_CAMPAIGN' => 'Campanya:',
     'LBL_NEXT_STEP' => 'Pas següent:',
+    'LBL_SERVICE_START_DATE' => 'Service Start Date',
     'LBL_LEAD_SOURCE' => 'Origen del client potencial',
     'LBL_SALES_STAGE' => 'Etapa de vendes:',
     'LBL_SALES_STATUS' => 'Estat',
@@ -142,6 +145,16 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE_FORECAST' => 'Previsió',
     'LBL_WORKSHEET' => 'Full de càlcul',
 
+    'LBL_RENEWAL' => 'Renovació',
+    'LBL_RENEWAL_OPPORTUNITIES' => 'Oportunitats de renovació',
+    'LBL_RENEWAL_PARENT' => 'Oportunitat principal',
+    'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'ID principal de la renovació',
+    'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
+
+    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
+    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
+    'LBL_WIDGET_AMOUNT' => 'Amount',
+
     'TPL_RLI_CREATE' => 'Una oportunitat ha de tenir associada una línia d&#39;ingressos.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Crear un element de línia d&#39;ingressos.',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Elements de línies d&#39;oferta',
@@ -152,6 +165,7 @@ $mod_strings = array(
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'No pot esborrar oportunitats que continguin línies d&#39;ingressos tancades',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Un o més dels registres seleccionats conté línies d&#39;ingressos tancades, i no es pot esborrar.',
     'LBL_INCLUDED_RLIS' => '# d&#39;articles de línees d&#39;ingressos incloses',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Pressupostos',
 
@@ -186,7 +200,7 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Després d&#39;iniciar aquest canvi, es crearan els registres dels elements de línies d&#39;ingressos en segon terme per a cada {{module_name}} existent. Quan els elements de línia d&#39;ingressos estiguin complets  i disponibles, s&#39;enviarà una notificació a l&#39;adreça de correu electrònic del seu perfil. Si la instància s&#39;ha configurat per {{forecasts_module}}, Sugar també us enviarà una notificació quan els registres del {{module_name}} se sincronitzen amb el mòdul {{forecasts_module}} i estan disponibles per al nou {{forecasts_module}}. Teniu en compte que la instància s&#39;ha de configurar per enviar correus electrònics a Administració > Configuració de correu electrònic perquè s&#39;enviïn les notificacions.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de les vendes individuals de principi a fi. Cada registre de {{module_name}} representa una venda potencial i inclou les dades rellevants de la venda, així com les relacionades amb altres registres importants com ara {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} normalment avançarà per diverses etapes de venda fins que es marqui com "Guanyada tancada" o "Perduda tancada". Podeu aprofitar {{plural_module_name}} encara més amb el mòdul de {{forecasts_singular_module}} de Sugar per entendre i predir les tendències de vendes, així com per enfocar el treball i assolir quotes de vendes.',
+    'LBL_HELP_RECORDS' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de les vendes individuals de principi a fi. Cada registre de {{module_name}} representa una venda potencial i inclou dades rellevants per a la venda, així com dades relacionades amb altres registres importants, com {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} generalment progressarà per diverses etapes de venda fins que es marqui com a "Tancada guanyada" o "Tancada perduda". Podeu aprofitar {{plural_module_name}} encara més si utilitzeu el mòdul de {{forecasts_singular_module}} de Sugar per entendre i predir les tendències de venda, a més de concentrar el treball per obtenir les quotes de venda.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'El mòdul {{plural_module_name}} us permet fer un seguiment de les vendes individuals de principi a fi. Cada registre de {{module_name}} representa una venda potencial i inclou les dades rellevants de la venda, així com les relacionades amb altres registres importants com ara {{quotes_module}}, {{contacts_module}}, etc.
@@ -203,7 +217,7 @@ $mod_strings = array(
 Per crear un {{module_name}}:
 1. Proporcioneu els valors per als camps com desitgeu.
  -Els camps marcats com a "Obligatoris" s&#39;han de completar abans de desar.
- -Feu clic en "Mostra més" per mostrar els camps addicionals si fòs necessàri.
+ -Feu clic en "Mostra més" per mostrar els camps addicionals si fòs necessari.
 2. Feu clic en "Desa" per finalitzar el registre nou i tornar a la pàgina anterior.',
 
 // END ENT/ULT
@@ -216,4 +230,6 @@ Per crear un {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Mostra les 10 millors oportunitat de venda a un gràfic de bombolles',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Les meves oportunitats',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Les oportunitats del meu equip",
+
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
 );

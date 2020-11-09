@@ -98,6 +98,7 @@ $viewdefs['Quotes']['mobile']['view']['edit'] = array(
                 'date_quote_expected_closed',
                 'quote_type',
                 'description',
+                'tag',
                 'assigned_user_name',
                 'team_name',
             ),

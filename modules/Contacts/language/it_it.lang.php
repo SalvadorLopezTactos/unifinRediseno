@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Dashboard elenco contatti',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Dashboard record contatti',
-
+    'LBL_SITE_USER_ID' => 'Hash di site_url e id contatto',
+    'LBL_COOKIE_CONSENT' => 'Consenso ai cookie',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Consenso ai cookie ricevuto il',
     'LNK_CONTACT_REPORTS' => 'Visualizza il Report del Contatto',
     'ERR_DELETE_RECORD' => 'Per eliminare il contatto deve essere specificato il numero del record.',
     'LBL_ACCOUNT_ID' => 'ID Azienda:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Informazioni Portale',
     'LBL_PORTAL_NAME' => 'Nome Portale:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'La password del portale è impostata:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Nome azienda utente del portale',
     'LBL_RECORD_SAVED_SUCCESS' => 'Hai creato con successo {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Via',
     'LBL_POSTAL_CODE' => 'CAP:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Opportunità',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documenti',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Offerte',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Offerte (Spedire a)',
     'LBL_QUOTES_BILL_TO' => 'Offerte (Fatturare a)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Prodotti',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Clicca qui per modificare il tuo profilo.',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Quì è dove puoi impostare la lingua preferita. Questo cambierà la lingua usata da Sugar Portal.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Puoi tornare al tuo Profilo in qualsiasi momento usando il menù Utente.',
+    'ERR_PORTAL_NAME_EXISTS' => 'Il nome portale {0} esiste già. I nomi portale duplicati non sono ammessi. Modificare il nome portale in modo che sia unico.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'ID Principale DNB',
@@ -278,4 +283,8 @@ $mod_strings = array (
     'LBL_FILTER_CONTACTS_REPORTS' => 'Report Contatti',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Scopi commerciali consentiti per',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Ultimo aggiornamento consenso',
+
+    'LBL_ENTRY_SOURCE' => 'Origine contatto',
+    'LBL_SOURCE_EXTERNAL' => 'Esterno',
+    'LBL_SOURCE_INTERNAL' => 'Interno',
 );

@@ -11,7 +11,7 @@
             <div class="dropdown-menu bottom-up" id="languageDropdown" style="display: none">
                 <ul role="menu" id="languageMenu">
                     {% for key, value in locales %}
-                        <li><a href="{{ path(currentRoute, currentParams|merge({'locale': key})) }}">{{ value }}</a></li>
+                        <li><a href="{{ path(currentRoute, currentParams|merge({'lcid': key})) }}">{{ value }}</a></li>
                     {% endfor %}
                 </ul>
             </div>

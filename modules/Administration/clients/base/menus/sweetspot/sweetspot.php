@@ -115,14 +115,6 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'icon' => 'fa-cogs',
         'route' => '#Currencies',
     ),
-    // Backups
-    array(
-        'label' => 'LBL_BACKUPS_TITLE',
-        'acl_action' => 'studio',
-        'module' => $moduleName,
-        'icon' => 'fa-cogs',
-        'route' => $adminRoute . 'Backups',
-    ),
 
     // Languages
     array(

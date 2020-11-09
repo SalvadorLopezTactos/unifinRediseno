@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Řídicí panel seznamu případů',
     'LBL_CASES_RECORD_DASHBOARD' => 'Řídicí panel záznamů případů',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Podrobnosti o případu',
 
 	'ERR_DELETE_RECORD'					=> 'Pro vymazání zaměstnance musíte specifikovat číslo záznamu.',
 	'LBL_ACCOUNT_ID'					=> 'ID společnosti',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Kontakty',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Případy',
 	'LBL_DESCRIPTION'					=> 'Popis:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Přiložit soubor',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Přiložit soubor',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Historie',
 	'LBL_INVITEE'						=> 'Kontakty',
 	'LBL_MEMBER_OF'						=> 'Účet',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Vytvořeno uživatelem',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Přiřazený uživatel',
     'LBL_EXPORT_TEAM_COUNT' => 'Počet týmů',
+    'LBL_CHANGETIMERS' => 'Změňte časovače',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Přiřazené kontaktní email. adresy',
@@ -134,4 +137,11 @@ Chcete-li vytvořit modul {{module_name}}:
  - Pole označená jako „Povinné“ musí být vyplněna před uložením.
  - V případě potřeby klikněte na položku „Zobrazit více“ pro zobrazení dalších polí.
 2. Kliknutím na tlačítko „Uložit“ dokončete nový záznam a vraťte se na předchozí stránku.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Nenašli jste, co hledáte?',
+    'LBL_CREATE_CASE' => 'Vytvořit {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'Podrobnosti o SLA',
+    'LBL_HOURS' => 'Hodiny',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

@@ -13,7 +13,7 @@
 
 $mod_strings = array(
     // Dashboard Names
-    'LBL_NOTES_LIST_DASHBOARD' => 'メモリストのダッシュ ボード',
+    'LBL_NOTES_LIST_DASHBOARD' => 'メモリストのダッシュボード',
 
     'ERR_DELETE_RECORD' => 'あなたがアカウントを削除するには、レコード番号を指定する必要があります。',
     'LBL_ACCOUNT_ID' => '取引先ID:',
@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => '更新日',
     'LBL_DELETED' => '削除済み',
     'LBL_REVENUELINEITEMS' => '商談品目',
+    'LBL_ENTRY_SOURCE' => '注記ソース',
+    'LBL_SOURCE_EXTERNAL' => '外部',
+    'LBL_SOURCE_INTERNAL' => '内部',
 
     // Help Text
     // List View Help Text
@@ -98,7 +101,7 @@ $mod_strings = array(
 をSugarで作成する様々な方法があります。例えば{{plural_module_name}}モジュールを介して, {{plural_module_name}}をインポートすることにより,あるいは 履歴のサブパネル経由でなどです。{{module_name}}レコードが作成されたら、{{plural_module_name}}レコードの表示を経由して{{module_name}}に関連する情報を表示したり、編集することができます。各{{module_name}}レコードは{{accounts_module}}、{{contacts_module}}、{{opportunities_module}}など、またその他多くの他のSugarのレコードに関するものになります。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}}モジュールは、テキストや関連するレコードに該当する添付ファイルが含まれている個々の{{plural_module_name}}で構成されています。 - 個々のフィールドまたは「編集」ボタンをクリックして、このレコードのフィールドを編集します。 - 左下のペインに「データビュー」をトグルしてサブパネル内の他のレコードへのリンクを表示または変更してください。 - 左下ペインに「アクティビティストリーム」を切り替えることにより、{{activitystream_singular_module}}内のレコード変更履歴やユーザーのコメントを閲覧もしくは変更してください。 - レコード名の右にあるアイコンを使用して、このレコードをフォローするかお気に入りにしてください。 - 追加のアクションは、「編集」ボタンの右にあるドロップダウンの「操作」メニューにあります。',
+    'LBL_HELP_RECORD' => '{{plural_module_name}}モジュールは、テキストや関連するレコードに該当する添付ファイルが含まれている個々の{{plural_module_name}}で構成されています。 - 個々のフィールドまたは「編集」ボタンをクリックして、このレコードのフィールドを編集します。 - 左下のペインに「データビュー」をトグルしてサブパネル内の他のレコードへのリンクを表示または変更してください。 - 左下ペインに「アクティビティストリーム」を切り替えることにより、{{activitystream_singular_module}}内のレコード変更履歴やユーザのコメントを閲覧もしくは変更してください。 - レコード名の右にあるアイコンを使用して、このレコードをフォローするかお気に入りにしてください。 - 追加のアクションは、「編集」ボタンの右にあるドロップダウンの「操作」メニューにあります。',
 
     // Create View Help Text
     'LBL_HELP_CREATE' => '{{module_name}} を作成するには：

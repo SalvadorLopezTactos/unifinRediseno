@@ -25,7 +25,7 @@ $mod_strings = array (
     'LBL_LIST_ORDER' => 'Priorità (max=0):',
     'LNK_PRODUCT_LIST' => 'Catalogo Prodotti',
     'LNK_VIEW_PRODUCT_TYPES' => 'Visualizza Tipi di Prodotti',
-    'LNK_NEW_PRODUCT' => 'Crea articolo nel catalogo Prodotti',
+    'LNK_NEW_PRODUCT' => 'Create Product',
     'LNK_NEW_MANUFACTURER' => 'Produttori',
     'LNK_NEW_SHIPPER' => 'Addetti alla spedizione',
     'LNK_NEW_PRODUCT_CATEGORY' => 'Categoria Prodotti',

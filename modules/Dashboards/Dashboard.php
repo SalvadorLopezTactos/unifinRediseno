@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+
 /**
  *  Dashboards is used to store dashboard configuration data.
  */
@@ -38,22 +40,64 @@ class Dashboard extends Basic
             return $dashboard;
         }
 
+        $metadata = $this->processMetadataWithAcl($metadata);
+
+        // Re-encode and save the metadata back to the dashboard object before returning it.
+        $dashboard->metadata = json_encode($metadata);
+
+        return $dashboard;
+    }
+
+    /**
+     * apply ACL and license type restriction to metadata
+     * @param $metadata
+     * @return string
+     */
+    protected function processMetadataWithAcl($metadata)
+    {
         $dirty = false;
 
         // Loop through the dashboard, drilling down to the dashlet level.
         foreach($metadata->components as $component_key => $component) {
-            foreach($component->rows as $row_key => $row) {
-                foreach($row as $item_key => $item) {
+            foreach ($component->rows as $row_key => $row) {
+                foreach ($row as $item_key => $item) {
                     // Check if this user has access to the module upon which this dashlet is based.
-                    if(isset($item->context->module) && !SugarACL::checkAccess($item->context->module, 'access')) {
+                    if (isset($item->context->module) && !SugarACL::checkAccess($item->context->module, 'access')) {
                         // The user does not have access, remove the dashlet.
                         unset($metadata->components[$component_key]->rows[$row_key][$item_key]);
 
                         // Check if this row is now empty.
-                        if(count($metadata->components[$component_key]->rows[$row_key]) == 0) {
+                        if (count($metadata->components[$component_key]->rows[$row_key]) == 0) {
                             // This row is now empty, remove it and mark the metadata as dirty.
                             unset($metadata->components[$component_key]->rows[$row_key]);
                             $dirty = true;
+                        }
+                    }
+                    // Check if this row is license type controled
+                    // This section of code is a portion of the code referred
+                    // to as Critical Control Software under the End User
+                    // License Agreement.  Neither the Company nor the Users
+                    // may modify any portion of the Critical Control Software.
+                    if (isset($metadata->components[$component_key]->rows[$row_key]) &&
+                        is_array($metadata->components[$component_key]->rows[$row_key]) &&
+                        isset($metadata->components[$component_key]->rows[$row_key][$item_key])) {
+                        if (!empty($item->view->type)) {
+                            // This section of code is a portion of the code referred
+                            // to as Critical Control Software under the End User
+                            // License Agreement.  Neither the Company nor the Users
+                            // may modify any portion of the Critical Control Software.
+                            $allowAccess = $this->allowedToAccessDashlet($item->view->type);
+                            if (!$allowAccess) {
+                                // this is license controled dashlet
+                                unset($metadata->components[$component_key]->rows[$row_key][$item_key]);
+                                // Check if this row is now empty.
+                                if (count($metadata->components[$component_key]->rows[$row_key]) == 0) {
+                                    // This row is now empty, remove it and mark the metadata as dirty.
+                                    unset($metadata->components[$component_key]->rows[$row_key]);
+                                    $dirty = true;
+                                }
+                            }
+                            //END REQUIRED CODE DO NOT MODIFY
                         }
                     }
                 }
@@ -68,10 +112,22 @@ class Dashboard extends Basic
             }
         }
 
-        // Re-encode and save the metadata back to the dashboard object before returning it.
-        $dashboard->metadata = json_encode($metadata);
+        return $metadata;
+    }
 
-        return $dashboard;
+
+    /**
+     * @param string $dashletLabel
+     * @return bool
+     */
+    protected function allowedToAccessDashlet(string $label) : bool
+    {
+        // This section of code is a portion of the code referred
+        // to as Critical Control Software under the End User
+        // License Agreement.  Neither the Company nor the Users
+        // may modify any portion of the Critical Control Software.
+        return AccessControlManager::instance()->allowDashletAccess($label);
+        //END REQUIRED CODE DO NOT MODIFY
     }
 
     /**

@@ -86,7 +86,7 @@ $mod_strings = array (
   'LNK_NEW_MANUFACTURER' => 'Gamintojai',
   'LNK_NEW_PRODUCT_CATEGORY' => 'Prekių kategorijos',
   'LNK_NEW_PRODUCT_TYPE' => 'Prekių tipai',
-  'LNK_NEW_PRODUCT' => 'Sukurti prekę katalogui',
+  'LNK_NEW_PRODUCT' => 'Create Product',
   'LNK_NEW_SHIPPER' => 'Vežėjai',
   'LNK_PRODUCT_LIST' => 'Prekių katalogas',
   'NTC_DELETE_CONFIRMATION' => 'Ar tikrai norite ištrinti šį įrašą?',
@@ -108,8 +108,6 @@ $mod_strings = array (
   'LBL_PRODUCT_CATEGORIES' => 'Prekių kategorijos',
   'LBL_MANUFACTURERS' => 'Gamintojai',
   'LBL_PRODUCT_TYPES' => 'Prekių tipai',
-
+  'LBL_RENEWABLE' => 'Atnaujinimas',
+  'LBL_SERVICE' => 'Paslauga',
 );
-
-
-?>

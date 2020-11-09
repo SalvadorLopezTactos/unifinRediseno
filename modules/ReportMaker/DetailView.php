@@ -41,9 +41,7 @@ if(isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] == 'true') {
 	$focus->id = "";
 }
 
-$params = array();
-$params[] = $focus->get_summary_text();
-echo getClassicModuleTitle("ReportMaker", $params, true);
+echo getClassicModuleTitle("ReportMaker", [htmlspecialchars($focus->get_summary_text())], true);
 
 $GLOBALS['log']->info("ReportMaker detail view");
 

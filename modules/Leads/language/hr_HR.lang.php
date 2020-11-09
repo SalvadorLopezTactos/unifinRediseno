@@ -322,4 +322,7 @@ Nakon potvrđivanja svakog obaveznog i željenog modula kliknite na gumb Spremi 
     'LBL_FILTER_LEADS_REPORTS' => 'Izvješća pot. klijenata',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Privola dana za poslovne svrhe',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Posljednje ažuriranje privole',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Nije moguće promijeniti status modula {{moduleSingular}}. Taj je modul {{moduleSingular}} već pretvoren.',
 );

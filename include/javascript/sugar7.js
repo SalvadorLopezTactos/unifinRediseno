@@ -18,6 +18,7 @@
     var bwcRedirectRoutes = [
         'config',
         'create',
+        'pipeline',
         'editAllRecurrences',
         'layout',
         'list',
@@ -84,6 +85,38 @@
                         level: 'error',
                         messages: app.lang.getAppString('LBL_UNAUTHORIZED'),
                         title: app.lang.get('LBL_UNAUTHORIZED_TITLE')
+                    });
+                }
+            },
+            {
+                name: 'maintenance',
+                route: 'maintenance',
+                callback: function() {
+                    app.controller.loadView({
+                        module: 'Logout',
+                        layout: 'logout',
+                        create: true
+                    });
+                    app.alert.show('needs_login_error', {
+                        level: 'error',
+                        messages: app.lang.getAppString('EXCEPTION_MAINTENANCE'),
+                        title: app.lang.get('LBL_ERROR')
+                    });
+                }
+            },
+            {
+                name: 'licenseSeats',
+                route: 'licenseSeats',
+                callback: function() {
+                    app.controller.loadView({
+                        module: 'Logout',
+                        layout: 'logout',
+                        create: true
+                    });
+                    app.alert.show('needs_login_error', {
+                        level: 'error',
+                        messages: app.lang.getAppString('ERROR_LICENSE_SEATS_MAXED'),
+                        title: app.lang.get('LBL_ERROR')
                     });
                 }
             },
@@ -372,6 +405,21 @@
                 }
             },
             {
+                name: 'pipelineView',
+                route: ':module/pipeline',
+                callback: function(module) {
+                    if (!app.acl.hasAccessToModel('list', this.model)) {
+                        app.error.handleHttpError({status: 404});
+                        return;
+                    }
+
+                    app.controller.loadView({
+                        module: module,
+                        layout: 'pipeline-records'
+                    });
+                }
+            },
+            {
                 name: 'record',
                 route: ':module/:id(/:action)'
             },
@@ -580,6 +628,46 @@
 
             // FIXME: Show wizard functionality should be broken out into
             // another function; will be addressed in SC-2761.
+
+            // Check if cookie consent should be shown
+            var showConsent = false;
+            if (app.user && app.user.has('cookie_consent')) {
+                showConsent = !app.user.get('cookie_consent');
+                if (showConsent) {
+                    // If the license settings need to be input, don't show the cookie consent
+                    var systemConfig = app.metadata.getConfig();
+                    if (systemConfig.system_status &&
+                        systemConfig.system_status.level &&
+                        systemConfig.system_status.level === 'admin_only'
+                    ) {
+                        showConsent = false;
+                    }
+                }
+            }
+            if (showConsent) {
+                var callbacks = {
+                    complete: function() {
+                        var module = app.utils.getWindowLocationParameterByName('module', window.location.search);
+                        var action = app.utils.getWindowLocationParameterByName('action', window.location.search);
+
+                        // work around for saml authentication of a new user
+                        if (_.isString(module) && _.isString(action) &&
+                            module.toLowerCase() === 'users' && action.toLowerCase() === 'authenticate') {
+                            window.location = window.location.pathname;
+                        } else {
+                            window.location.reload(); //Reload when done
+                        }
+                    }
+                };
+                app.controller.loadView({
+                    layout: 'consent-wizard',
+                    module: 'Users',
+                    modelId: app.user.get('id'),
+                    callbacks: callbacks
+                });
+                app.additionalComponents.header.hide();
+                return false;
+            }
 
             // Check if first time login wizard should be shown
             var showWizard = false;

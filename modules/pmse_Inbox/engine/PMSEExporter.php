@@ -157,7 +157,7 @@ class PMSEExporter
         //File Name
         $filename = str_replace(' ', '_', $projectContent['project'][$this->name]) . '.' . $this->extension;
 
-        $api->setHeader("Content-Disposition", "attachment; filename=" . $filename);
+        $api->setHeader("Content-Disposition", "attachment; filename=\"" . $filename . "\"");
         $api->setHeader("Content-Type", "application/" . $this->extension);
         $api->setHeader("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
         $api->setHeader("Last-Modified", TimeDate::httpTime());

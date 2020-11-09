@@ -238,7 +238,7 @@
             return;
         }
 
-        this.favicon = new Favico({animation: 'none'});
+        this.favicon = new Favico({animation: 'none', bgColor: '#cd4503'});
         this.collection.on('reset', function() {
             var badge = this.collection.length;
             if (this.collection.next_offset > 0) {

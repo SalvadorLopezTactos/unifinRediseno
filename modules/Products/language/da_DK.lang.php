@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'Kontakt',
     'LBL_DISCOUNT_TOTAL' => 'Rabat i alt',
     'LBL_DISCOUNT_AMOUNT' => 'Rabatbeløb',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'Rabat værdibeløb',
     'LBL_EXT_PRICE' => 'Ekst. pris',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Navn på valutasymbol',

@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => '승인된 조항 & 만료 KB 조항을 게시합니다.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' 예정된 작업',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => '정규화되지 않은 팀 보안 데이터 다시 빌드',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => '활동 흐름 목록',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => '간격',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> '이메일 알림 전송 실행',
 'LBL_CLEANJOBQUEUE' => '대기중 작업 마무리하기',
 'LBL_CLEANOLDRECORDLISTS' => '예전 기록목록을 삭제합니다.',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => '활동 흐름 목록',
 'LBL_PMSEENGINECRON' => 'SugarBPM 일정관리',
 );
 

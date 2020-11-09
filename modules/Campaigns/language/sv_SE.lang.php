@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Mållistor av typen standard kunde inte hittas',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Inga poster hittades',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Posterna har behandlats',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Tracker namn:',
   'LBL_EDIT_TRACKER_URL'=>'Tracker-URL:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'Inga optimum sparades med ditt inkommande emailkonto.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Gå igenom inkommande emailinställningar.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} leads som var skapade genom den här kampanjen kommer att raderas efter skapandet.',
+    'LBL_PROSPECT_LIST' => 'Mållista',
 );
 
 

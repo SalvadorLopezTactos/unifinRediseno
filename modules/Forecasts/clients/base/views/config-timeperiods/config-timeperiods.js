@@ -62,7 +62,7 @@
         this.tpStartDate = this.model.get('timeperiod_start_date');
         if (this.tpStartDate) {
             // convert the tpStartDate to a Moment object
-            this.tpStartDate = app.date(this.tpStartDate, app.user.getPreference('datepref'));
+            this.tpStartDate = app.date(this.tpStartDate);
         }
     },
 

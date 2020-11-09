@@ -20,19 +20,9 @@ class RegenerateSecretResponse extends \Google\Protobuf\Internal\Message
      */
     private $client_secret = '';
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $client_secret
-     *           The newly generated client secret.
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Sa\V1Alpha\Sa::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

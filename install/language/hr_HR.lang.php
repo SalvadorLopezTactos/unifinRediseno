@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -59,7 +58,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Tijekom provjere kompatibilnosti otkrivene su pogreške. Da bi vaša instalacija aplikacije SugarCRM radila ispravno, poduzmite odgovarajuće korake za rješavanje problema navedene u nastavku i pritisnite gumb za ponovnu provjeru ili pokušajte ponovno instalirati.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Uključena je funkcija Allow Call Time Pass Reference (u php.ini mora biti postavljena na Isključeno)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Nije pronađeno: planer Sugar radit će s ograničenom funkcionalnošću. Usluga Arhiviranje e-pošte neće raditi.',
+	'ERR_CHECKSYS_CURL'					=> 'Nije pronađeno: Planer Sugar radit će uz ograničene funkcionalnosti. Uslugu za pohranjivanje e-pošte nije moguće pokrenuti.',
     'ERR_CHECKSYS_IMAP'					=> 'Nije pronađeno: dolazna e-pošta i kampanje (e-pošta) zahtijevaju biblioteke IMAP. Nijedno neće raditi.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Funkcija Magic Quotes GPC ne može biti uključena za vrijeme upotrebe poslužitelja MS SQL.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Upozorenje: ',
@@ -75,7 +74,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Za optimalno iskustvo upotrebe sučelja IIS/FastCGI sapi postavite fastcgi.logging na 0 u svojoj datoteci php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Instalirana nepodržana verzija PHP-a: ( ver.',
     'LBL_DB_UNAVAILABLE'                => 'Baza podataka nije dostupna',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Podrška za bazu podataka nije pronađena. Provjerite imate li potrebne upravljačke programe za jednu od navedenih podržanih vrsta baza podataka: MySQL, MS SQLServer, Oracle ili DB2. Možda ćete morati ukloniti komentar s proširenja u datoteci php.ini ili je prevesti s ispravnom binarnom datotekom ovisno o vašoj verziji PHP-a. Više informacija o tome kako uključiti Podršku za bazu podataka potražite u svojem priručniku za PHP.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Podrška za bazu podataka nije pronađena. Provjerite imate li potrebne upravljačke programe za jednu od navedenih podržanih vrsta baze podataka: MySQL, MS SQLServer, Oracle ili DB2. Možda ćete morati ukloniti komentar s proširenja u datoteci php.ini ili je prevesti s ispravnom binarnom datotekom ovisno o vašoj verziji PHP-a. Više informacija o tome kako omogućiti Podršku za bazu podataka potražite u svojem priručniku za PHP.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funkcije povezane s bibliotekama za raščlanjivanje XML koje su potrebne za aplikaciju Sugar nisu pronađene. Možda ćete morati ukloniti komentar s proširenja u datoteci php.ini ili je prevesti s ispravnom binarnom datotekom ovisno o vašoj verziji PHP-a. Više informacija potražite u svojem priručniku za PHP.',
     'LBL_CHECKSYS_CSPRNG' => 'Generator slučajnih brojeva',
     'ERR_CHECKSYS_MBSTRING'             => 'Funkcije povezane s proširenjem Multibyte Strings PHP (mbstring) koje su potrebne za aplikaciju Sugar nisu pronađene. <br/><br/>Modul mbstring inače nije zadano uključen u PHP-u i mora ga se aktivirati s pomoću opcije --enable-mbstring nakon ugradnje binarne datoteke PHP. Više informacija o tome kako uključiti podršku za mbstring potražite u svojem priručniku za PHP.',
@@ -555,6 +554,142 @@ $mod_strings = array(
 	'LBL_PATCH_UPLOAD' => 'Odaberite datoteku popravaka s lokalnog računala',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Uključen je način rada kompatibilnosti s ranijim verzijama PHP-a. Za nastavak postavite zend.ze1_compatibility_mode na Isključeno',
 
+    'meeting_notification_email' => array(
+        'name' => 'Meeting Notifications Emails',
+        'subject' => 'SugarCRM Meeting - $event_name ',
+        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'body' => '<div>
+	<p>To: $assigned_user</p>
+
+	<p>$assigned_by_user has invited you to a Meeting</p>
+
+	<p>Subject: $event_name<br/>
+	Start Date: $start_date<br/>
+	End Date: $end_date</p>
+
+	<p>Description: $description</p>
+
+	<p>Accept this meeting:<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Tentatively Accept this meeting:<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Decline this meeting:<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'To: $assigned_user
+
+$assigned_by_user has invited you to a Meeting
+
+Subject: $event_name
+Start Date: $start_date
+End Date: $end_date
+
+Description: $description
+
+Accept this meeting:
+<$accept_link>
+
+Tentatively Accept this meeting
+<$tentative_link>
+
+Decline this meeting
+<$decline_link>',
+    ),
+
+    'call_notification_email' => array(
+        'name' => 'Call Notifications Emails',
+        'subject' => 'SugarCRM Call - $event_name ',
+        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'body' => '<div>
+	<p>To: $assigned_user</p>
+
+	<p>$assigned_by_user has invited you to a Call</p>
+
+	<p>Subject: $event_name<br/>
+	Start Date: $start_date<br/>
+	Duration: $hoursh, $minutesm</p>
+
+	<p>Description: $description</p>
+
+	<p>Accept this call:<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Tentatively Accept this call:<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Decline this call:<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'To: $assigned_user
+
+$assigned_by_user has invited you to a Call
+
+Subject: $event_name
+Start Date: $start_date
+Duration: $hoursh, $minutesm
+
+Description: $description
+
+Accept this call:
+<$accept_link>
+
+Tentatively Accept this call
+<$tentative_link>
+
+Decline this call
+<$decline_link>',
+    ),
+
+    'assigned_notification_email' => array(
+        'name' => 'Assignment Notification Emails',
+        'subject' => 'SugarCRM - Assigned $module_name ',
+        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'body' => '<div>
+<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+
+<p>You may review this&nbsp;$module_name at:<br/>
+	<<a href="$module_link">$module_link</a>></p>
+</div>',
+        'txt_body' =>
+            '$assigned_by_user has assigned a $module_name to $assigned_user.
+
+You may review this $module_name at:
+<$module_link>',
+    ),
+
+    'scheduled_report_email' => array(
+        'name' => 'Scheduled Report Emails',
+        'subject' => 'Scheduled Report: $report_name as of $report_time',
+        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'body' => '<div>
+<p>Hello $assigned_user,</p>
+<p>Attached is an auto generated report that has been scheduled for you.</p>
+<p>Report Name: $report_name</p>
+<p>Report Run Date and Time: $report_time</p>
+</div>',
+        'txt_body' =>
+            'Hello $assigned_user,
+
+Attached is an auto generated report that has been scheduled for you.
+
+Report Name: $report_name
+
+Report Run Date and Time: $report_time',
+    ),
+
+    'comment_log_mention_email' => [
+        'name' => 'System Comment Log Email Notification',
+        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
+        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'body' =>
+            '<div>
+                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
+                <p>Please log in to Sugar to view the comment.</p>
+            </div>',
+        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
+            Please log in to Sugar to view the comment.',
+    ],
+
     'advanced_password_new_account_email' => array(
         'subject' => 'Informacije o novom računu',
         'description' => 'Ovaj predložak upotrebljava se kad administrator sustava korisniku pošalje novu lozinku.',
@@ -583,4 +718,32 @@ Kliknite na poveznicu u nastavku da biste ponovno postavili lozinku:
 $contact_user_link_guid',
         'name' => 'Poruka e-pošte o zaboravljenoj lozinki',
         ),
+
+'portal_forgot_password_email_link' => [
+    'name' => 'Poruka e-pošte o zaboravljenoj lozinki za portal',
+    'subject' => 'Ponovno postavite lozinku računa',
+    'description' => 'Ovaj se predložak upotrebljava za slanje poveznice za ponovno postavljanje lozinke računa korisnika portala.',
+    'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Nedavno ste zatražili ponovno postavljanje lozinke računa. </p><p>Kliknite na poveznicu u nastavku za ponovno postavljanje lozinke:</p><p> <a href="$portal_user_link_guid">$portal_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+    'txt_body' =>
+'
+    Nedavno ste zatražili ponovno postavljanje lozinke računa.
+
+    Kliknite na poveznicu u nastavku za ponovno postavljanje lozinke:
+
+    $portal_user_link_guid',
+],
+
+    'portal_password_reset_confirmation_email' => [
+        'name' => 'Potvrdna poruka e-pošte za ponovno postavljanje lozinke na portalu',
+        'subject' => 'Ponovno ste postavili lozinku računa',
+        'description' => 'Ovaj se predložak upotrebljava za slanje potvrde korisniku portala o ponovnom postavljanju lozinke računa.',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Ova e-pošta sadržava potvrdu o ponovnom postavljanju lozinke računa na portalu. </p><p>Upotrijebite poveznicu u nastavku za prijavu na portal:</p><p> <a href="$portal_login_url">$portal_login_url</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+        'txt_body' =>
+            '
+    Ova e-pošta sadržava potvrdu o ponovnom postavljanju lozinke računa na portalu.
+
+    Upotrijebite poveznicu u nastavku za prijavu na portal:
+
+    $portal_login_url',
+    ],
 );

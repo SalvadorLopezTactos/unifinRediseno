@@ -192,7 +192,6 @@ $viewdefs['Leads']['base']['view']['record'] = array(
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
             'labels' => true,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 'title',
@@ -200,6 +199,7 @@ $viewdefs['Leads']['base']['view']['record'] = array(
                 'website',
                 'do_not_call',
                 'account_name',
+                'business_center_name',
                 'email',
                 array(
                     'name' => 'tag',
@@ -213,7 +213,6 @@ $viewdefs['Leads']['base']['view']['record'] = array(
             'hide' => true,
             'columns' => 2,
             'labels' => true,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
                 array(

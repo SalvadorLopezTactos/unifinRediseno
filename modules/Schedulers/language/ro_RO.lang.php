@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicați articole aprobate și articole KB expirate.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Funcție programată',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Reconstruire date de securitate echipă denormalizate',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Golire flux de activități',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'interval',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Rulare trimitere mementouri e-mail',
 'LBL_CLEANJOBQUEUE' => 'Curăţare coadă de operaţii',
 'LBL_CLEANOLDRECORDLISTS' => 'Curăţare liste înregistrări vechi',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Golire flux de activități',
 'LBL_PMSEENGINECRON' => 'Programator SugarBPM',
 );
 

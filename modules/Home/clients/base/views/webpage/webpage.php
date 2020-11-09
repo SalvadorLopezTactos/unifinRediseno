@@ -50,7 +50,7 @@ $viewdefs['Home']['base']['view']['webpage'] = array(
             'name' => 'url',
             'label' => 'LBL_DASHLET_WEBPAGE_URL',
             'width' => '100%',
-
+            'sandbox' => 'allow-forms',
         ),
     ),
 );

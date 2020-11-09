@@ -358,7 +358,9 @@
             filter = {"filter": args_filter};
         }
 
-        options.params.order_by = 'date_entered:DESC'
+        options.params.order_by = 'date_entered:DESC';
+        options.fields = _.union(options.fields || [], ['likely_case', 'best_case', 'worst_case']);
+
         options = app.data.parseOptionsForSync(method, model, options);
 
         // custom success handler

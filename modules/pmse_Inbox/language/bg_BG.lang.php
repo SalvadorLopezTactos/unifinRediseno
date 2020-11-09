@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => 'Приложено е присвояване на потребител',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Визуализация на дизайна на процеса',
+    'LBL_PROJECT_RUN_ORDER' => 'Ред на изпълнение',
 );
 

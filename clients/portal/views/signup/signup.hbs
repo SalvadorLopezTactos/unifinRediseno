@@ -15,23 +15,21 @@
         <div class="tcenter">
             <h2 class="brand"><img src="{{logoUrl}}" alt="SugarCRM"></h2>
         </div>
-        <form name='{{name}}' class="tcenter">
-            {{#if _showSignupSuccess}}
-                <div class="alert alert-success tleft">
-                    <p><strong>{{str "LBL_PORTAL_SIGNUP_TITLE"}}</strong><p>
-                    <p>{{str "LBL_PORTAL_SIGNUP"}}</p>
+        <form class="tcenter">
+            {{#each meta.panels}}
+                {{#each fields}}
+                <div class="control-group">{{field ../../this model=../../model template="edit"}}</div>
+                {{/each}}
+            {{/each}}
+            {{#each meta.buttons}}
+                <div class="control-group">
+                    {{field ../this model=../model}}
                 </div>
-            {{else}}
-                {{#each meta.panels}}
-                    {{#each fields}}
-                    <div class="control-group">{{field ../../this model=../../model template="edit"}}</div>
-                    {{/each}}
-                {{/each}}
-            {{/if}}
-            <div class="signup-footer">
-                {{#each meta.buttons}}
-                   {{field ../this model=../model template="edit"}}
-                {{/each}}
+            {{/each}}
+            <br>
+            <br>
+            <div class="control-group">
+                <a href="#" class="btn btn-link btn-invisible">{{str "LBL_LOGIN_BUTTON_LABEL"}}</a>
             </div>
         </form>
     </div>

@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Goedgekeurde artikelen & vervallen KB artikelen publiceren.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Geplande taak',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Gedenormaliseerde teambeveiligingsgegevens opnieuw opbouwen',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Activity Stream Purger',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'E-mailherinneringen verzenden uitvoeren',
 'LBL_CLEANJOBQUEUE' => 'Gooi de wachtrij voor taak leeg',
 'LBL_CLEANOLDRECORDLISTS' => 'Oude recordlijsten opschonen',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Activity Stream Purger',
 'LBL_PMSEENGINECRON' => 'SugarBPM Taakplanner',
 );
 

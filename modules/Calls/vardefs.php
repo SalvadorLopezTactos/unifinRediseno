@@ -172,7 +172,7 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
     'massupdate' => false,
     'default'=> -1,
     'comment' => 'Specifies when a reminder alert should be issued; -1 means no alert; otherwise the number of seconds prior to the start',
-    'studio' => array('recordview' => false, 'wirelesseditview' => false),
+    'studio' => array('recordview' => false, 'wirelesseditview' => false, 'previewview' => false),
   ),
   'email_reminder_checked' => array(
     'name' => 'email_reminder_checked',
@@ -194,7 +194,7 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
     'massupdate' => false,
     'default'=> -1,
     'comment' => 'Specifies when a email reminder alert should be issued; -1 means no alert; otherwise the number of seconds prior to the start',
-    'studio' => array('recordview' => false, 'wirelesseditview' => false),
+      'studio' => array('recordview' => false, 'wirelesseditview' => false, 'previewview' => false),
   ),
   'email_reminder_sent' => array(
     'name' => 'email_reminder_sent',
@@ -658,7 +658,11 @@ $dictionary['Call'] = array('table' => 'calls', 'comment' => 'A Call is an activ
 	array(
 		'name' => 'idx_call_name',
 		'type' => 'index',
-		'fields'=> array('name'),
+        'fields'=> array(
+            'deleted',
+            'name',
+            'date_modified',
+        ),
 	),
 	array(
 		'name' => 'idx_status',

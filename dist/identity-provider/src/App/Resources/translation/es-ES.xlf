@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en-US" datatype="plaintext" original="en.xlf" target-language="es-ES">
+    <body>
+      <trans-unit id="1" approved="yes">
+        <source>Tenant</source>
+        <target state="final">Inquilino</target>
+      </trans-unit>
+      <trans-unit id="2" approved="yes">
+        <source>User Name</source>
+        <target state="final">Nombre de usuario</target>
+      </trans-unit>
+      <trans-unit id="3" approved="yes">
+        <source>Password</source>
+        <target state="final">Contraseña</target>
+      </trans-unit>
+      <trans-unit id="4" approved="yes">
+        <source>Forgot Password?</source>
+        <target state="final">¿Ha olvidado la contraseña?</target>
+      </trans-unit>
+      <trans-unit id="5" approved="yes">
+        <source>Log In</source>
+        <target state="final">Iniciar sesión</target>
+        <alt-trans>
+          <target>Inicia sesión</target>
+        </alt-trans>
+        <alt-trans>
+          <target>Inicio de sesión</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="6" approved="yes">
+        <source>Log out</source>
+        <target state="final">Cerrar sesión</target>
+        <alt-trans>
+          <target>Cierra sesión</target>
+        </alt-trans>
+        <alt-trans>
+          <target>Cierre de sesión</target>
+        </alt-trans>
+        <alt-trans>
+          <target>Inicia sesión</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="7" approved="yes">
+        <source>Single Sign-On</source>
+        <target state="final">Autenticación única</target>
+        <alt-trans>
+          <target>Cierra sesión</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="8" approved="yes">
+        <source>You are logged in as %user_name%</source>
+        <target state="final">Ha iniciado sesión como %user_name%</target>
+      </trans-unit>
+      <trans-unit id="9" approved="yes">
+        <source>Your tenant id is %tenant%</source>
+        <target state="final">Su identificación de inquilino es %tenant%</target>
+      </trans-unit>
+      <trans-unit id="10" approved="yes">
+        <source>Authentication provider - %provider%</source>
+        <target state="final">Proveedor de autenticación - %provider%</target>
+      </trans-unit>
+      <trans-unit id="11" approved="yes">
+        <source>Application not verified</source>
+        <target state="final">Aplicación no verificada</target>
+      </trans-unit>
+      <trans-unit id="12" approved="yes">
+        <source>This app hasn't been verified by SugarCRM admin yet and confirmed it's authentic.</source>
+        <target state="final">El administrador de SugarCRM todavía no ha verificado esta aplicación ni ha confirmado que es auténtica.</target>
+      </trans-unit>
+      <trans-unit id="13" approved="yes">
+        <source>Unverified apps may pose a threat to your personal data.</source>
+        <target state="final">Las aplicaciones no verificadas pueden suponer una amenaza para sus datos personales.</target>
+      </trans-unit>
+      <trans-unit id="14" approved="yes">
+        <source>Back to Safety</source>
+        <target state="final">Vuelta a seguridad</target>
+        <alt-trans>
+          <target>Vuelve a segridad</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="15" approved="yes">
+        <source>Application is requesting access</source>
+        <target state="final">La aplicación está solicitando acceso</target>
+      </trans-unit>
+      <trans-unit id="16" approved="yes">
+        <source>"%client%" is requesting access.</source>
+        <target state="final">"%client%" está solicitando acceso.</target>
+      </trans-unit>
+      <trans-unit id="17" approved="yes">
+        <source>"%client%" is requesting access to use your Sugar account to:</source>
+        <target state="final">"%client%" está solicitando acceso para utilizar su cuenta Sugar para:</target>
+      </trans-unit>
+      <trans-unit id="18" approved="yes">
+        <source>Do you want to allow this access?</source>
+        <target state="final">¿Quiere permitir este acceso?</target>
+      </trans-unit>
+      <trans-unit id="19" approved="yes">
+        <source>No, Thanks</source>
+        <target state="final">No, gracias</target>
+      </trans-unit>
+      <trans-unit id="20" approved="yes">
+        <source>Allow access</source>
+        <target state="final">Permite el acceso</target>
+        <alt-trans>
+          <target>Permite acceso</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="21" approved="yes">
+        <source>Sorry, service is not able to process the request.</source>
+        <target state="final">Lo sentimos, el servicio no puede procesar la solicitud.</target>
+      </trans-unit>
+      <trans-unit id="22" approved="yes">
+        <source>error</source>
+        <target state="final">error</target>
+      </trans-unit>
+      <trans-unit id="24" approved="yes">
+        <source>Can't log in? Forget your password?</source>
+        <target state="final">¿No puede iniciar sesión? ¿Ha olvidado su contraseña?</target>
+      </trans-unit>
+      <trans-unit id="25" approved="yes">
+        <source>Enter your user name below and we'll send you password reset instructions.</source>
+        <target state="final">Introduzca su nombre de usuario y le enviaremos las instrucciones para restablecer su contraseña.</target>
+      </trans-unit>
+      <trans-unit id="26" approved="yes">
+        <source>Required</source>
+        <target state="final">Obligatorio</target>
+        <alt-trans>
+          <target>Requerido</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="27" approved="yes">
+        <source>Cancel</source>
+        <target state="final">Cancelar</target>
+        <alt-trans>
+          <target>Cancela</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="28" approved="yes">
+        <source>Send</source>
+        <target state="final">Enviar</target>
+        <alt-trans>
+          <target>Envia</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="29" approved="yes">
+        <source>Reset your password</source>
+        <target state="final">Restablezca su contraseña</target>
+      </trans-unit>
+      <trans-unit id="30" approved="yes">
+        <source>Please choose a new password to finish log in.</source>
+        <target state="final">Elija una contraseña nueva para finalizar el inicio de sesión.</target>
+      </trans-unit>
+      <trans-unit id="31" approved="yes">
+        <source>Read some tips on %link%creating a secure password.%endlink%</source>
+        <target state="final">Lea algunos consejos para %link%crear una contraseña segura.%endlink%</target>
+      </trans-unit>
+      <trans-unit id="32" approved="yes">
+        <source>New password</source>
+        <target state="final">Contraseña nueva</target>
+      </trans-unit>
+      <trans-unit id="33" approved="yes">
+        <source>Confirm password</source>
+        <target state="final">Confirmar contraseña</target>
+        <alt-trans>
+          <target>Confirma la contraseña</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="34" approved="yes">
+        <source>Change password</source>
+        <target state="final">Cambiar contraseña</target>
+        <alt-trans>
+          <target>Cambia la contraseña</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="35" approved="yes">
+        <source>Password reset successful</source>
+        <target state="final">Restablecimiento de la contraseña correcto</target>
+      </trans-unit>
+      <trans-unit id="36" approved="yes">
+        <source>Awesome, you've successfully updated your password.</source>
+        <target state="final">Fantástico, ha actualizado su contraseña correctamente.</target>
+      </trans-unit>
+      <trans-unit id="37" approved="yes">
+        <source>Now you can log in and check if %link%your profile%endlink% is correct.</source>
+        <target state="final">Ahora puede iniciar sesión y comprobar si %link%su perfil%endlink% es correcto.</target>
+      </trans-unit>
+      <trans-unit id="38" approved="yes">
+        <source>Password reset email sent</source>
+        <target state="final">Correo electrónico para restablecer la contraseña enviado</target>
+      </trans-unit>
+      <trans-unit id="39" approved="yes">
+        <source>An email has been sent to following address %emailaddress%.</source>
+        <target state="final">Se ha enviado un correo electrónico a la siguiente dirección %emailaddress%.</target>
+      </trans-unit>
+      <trans-unit id="40" approved="yes">
+        <source>Follow the direction in the email to reset your password.</source>
+        <target state="final">Siga las instrucciones del correo electrónico para restablecer su contraseña.</target>
+      </trans-unit>
+      <trans-unit id="41" approved="yes">
+        <source>Done</source>
+        <target state="final">Hecho</target>
+      </trans-unit>
+      <trans-unit id="42" approved="yes">
+        <source>Login using SAML</source>
+        <target state="final">Inicio de sesión a través de SAML</target>
+      </trans-unit>
+      <trans-unit id="43" approved="yes">
+        <source>User is logged out</source>
+        <target state="final">El usuario ha cerrado sesión</target>
+      </trans-unit>
+      <trans-unit id="44" approved="yes">
+        <source>Back</source>
+        <target state="final">Atrás</target>
+      </trans-unit>
+      <trans-unit id="45" approved="yes">
+        <source>Invalid tenant ID</source>
+        <target state="final">Identificación de inquilino inválida</target>
+      </trans-unit>
+      <trans-unit id="46" approved="yes">
+        <source>All fields are required</source>
+        <target state="final">Todos los campos son obligatorios</target>
+      </trans-unit>
+      <trans-unit id="47" approved="yes">
+        <source>Invalid credentials</source>
+        <target state="final">Credenciales inválidas</target>
+      </trans-unit>
+      <trans-unit id="48" approved="yes">
+        <source>Password expired</source>
+        <target state="final">Contraseña caducada</target>
+      </trans-unit>
+      <trans-unit id="49" approved="yes">
+        <source>Invalid scope</source>
+        <target state="final">Ámbito inválido</target>
+      </trans-unit>
+      <trans-unit id="50" approved="yes">
+        <source>Authentication SAML request is not valid</source>
+        <target state="final">La solicitud SAML de autenticación no es válida</target>
+      </trans-unit>
+      <trans-unit id="51" approved="yes">
+        <source>Authentication SAML response is not valid</source>
+        <target state="final">La respuesta SAML de autenticación no es válida</target>
+      </trans-unit>
+      <trans-unit id="52" approved="yes">
+        <source>Too many failed login attempts.</source>
+        <target state="final">Demasiados intentos de inicio de sesión fallidos.</target>
+      </trans-unit>
+      <trans-unit id="53" approved="yes">
+        <source>Please contact the system administrator.</source>
+        <target state="final">Póngase en contacto con el administrador del sistema.</target>
+      </trans-unit>
+      <trans-unit id="54" approved="yes">
+        <source>You can try logging in again in</source>
+        <target state="final">Puede volver a intentar iniciar sesión en</target>
+      </trans-unit>
+      <trans-unit id="55" approved="yes">
+        <source>days</source>
+        <target state="final">días</target>
+      </trans-unit>
+      <trans-unit id="56" approved="yes">
+        <source>hours</source>
+        <target state="final">horas</target>
+      </trans-unit>
+      <trans-unit id="57" approved="yes">
+        <source>minutes</source>
+        <target state="final">minutos</target>
+      </trans-unit>
+      <trans-unit id="58" approved="yes">
+        <source>seconds</source>
+        <target state="final">segundos</target>
+      </trans-unit>
+      <trans-unit id="59" approved="yes">
+        <source>Private key and x509cert should be defined</source>
+        <target state="final">Debería definirse la clave privada y el certificado x509</target>
+      </trans-unit>
+      <trans-unit id="60" approved="yes">
+        <source>Invalid IdP configuration</source>
+        <target state="final">Configuración IdP inválida</target>
+      </trans-unit>
+      <trans-unit id="61" approved="yes">
+        <source>Invalid authentication services configuration</source>
+        <target state="final">Configuración de los servicios de autenticación inválida</target>
+      </trans-unit>
+      <trans-unit id="62" approved="yes">
+        <source>LDAP config option groupDn must not be empty</source>
+        <target state="final">El groupDN de la opción de configuración del LDAP no puede estar vacío</target>
+        <alt-trans>
+          <target>La opción de configuración de LDAP groupDn no puede estar vacía</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="63" approved="yes">
+        <source>LDAP groupAttribute must not be empty</source>
+        <target state="final">El groupAttribute del LDAP no puede estar vacío</target>
+        <alt-trans>
+          <target>El groupAttribute de LDAP no puede estar vacío</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="64" approved="yes">
+        <source>LDAP baseDn must not be empty</source>
+        <target state="final">El baseDn del LDAP no puede estar vacío</target>
+        <alt-trans>
+          <target>La baseDn de LDAP no puede estar vacía</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="65" approved="yes">
+        <source>Consent not found</source>
+        <target state="final">No se encontró la autorización</target>
+        <alt-trans>
+          <target>No se encontró autorización</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="66" approved="yes">
+        <source>Consent session not found</source>
+        <target state="final">No se encontró la sesión de consentimiento</target>
+        <alt-trans>
+          <target>No se encontró sesión de consentimiento</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="67" approved="yes">
+        <source>Failed to send email for password recovery. Please try again.</source>
+        <target state="final">No se pudo enviar el correo electrónico para recuperar la contraseña. Inténtelo de nuevo.</target>
+        <alt-trans>
+          <target>Error al enviar el correo electrónico para recuperar la contraseña. Inténtelo de nuevo.</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="68" approved="yes">
+        <source>SAML is not configured for given tenant</source>
+        <target state="final">El SAML no está configurado para el inquilino determinado</target>
+        <alt-trans>
+          <target>La SAML no está configurada para el inquilino determinado</target>
+        </alt-trans>
+        <alt-trans>
+          <target>SAML no está configurado para el inquilino determinado</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="69" approved="yes">
+        <source>Invalid SAML configuration</source>
+        <target state="final">Configuración del SAML inválida</target>
+        <alt-trans>
+          <target>Configuración de SAML inválida</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="70" approved="yes">
+        <source>SAML metadata validation failed:</source>
+        <target state="final">No se pudo realizar la validación de los metadatos del SAML:</target>
+        <alt-trans>
+          <target>No se puede realizar la validación de los metadatos del SAML:</target>
+        </alt-trans>
+        <alt-trans>
+          <target>No se puede realizar la validación de los metadatos de SAML:</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="71" approved="yes">
+        <source>Invalid SAML logout data</source>
+        <target state="final">Datos de cierre de sesión del SAML inválidos</target>
+        <alt-trans>
+          <target>Datos de cierre de sesión de SAML inválidos</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="72" approved="yes">
+        <source>Required parameters missing</source>
+        <target state="final">Faltan los parámetros obligatorios</target>
+      </trans-unit>
+      <trans-unit id="73" approved="yes">
+        <source>Invalid parameters</source>
+        <target state="final">Parámetros inválidos</target>
+      </trans-unit>
+      <trans-unit id="74" approved="yes">
+        <source>Password is empty</source>
+        <target state="final">La contraseña está vacía</target>
+      </trans-unit>
+      <trans-unit id="75" approved="yes">
+        <source>Password is too short. It should have {{ limit }} characters or more.</source>
+        <target state="final">La contraseña es demasiado corta. Debe tener {{ limit }} caracteres o más.</target>
+        <alt-trans>
+          <target>La contraseña es demasiado corta, Debe tener {{ limit }} caracteres o máse.</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="76" approved="yes">
+        <source>Password is too long. It should have {{ limit }} characters or less.</source>
+        <target state="final">La contraseña es demasiado larga. Debe tener {{ limit }} caracteres o menos.</target>
+      </trans-unit>
+      <trans-unit id="77" approved="yes">
+        <source>Password should contains at least one upper-case letter</source>
+        <target state="final">La contraseña debe contener al menos una letra mayúscula</target>
+      </trans-unit>
+      <trans-unit id="78" approved="yes">
+        <source>Password should contains at least one lower-case letter</source>
+        <target state="final">La contraseña debe contener al menos una letra minúscula</target>
+      </trans-unit>
+      <trans-unit id="79" approved="yes">
+        <source>Password should contains at least one number</source>
+        <target state="final">La contraseña debe contener al menos un número</target>
+      </trans-unit>
+      <trans-unit id="80" approved="yes">
+        <source>Password should contains at least one special character</source>
+        <target state="final">La contraseña debe contener al menos un carácter especial</target>
+      </trans-unit>
+      <trans-unit id="81" approved="yes">
+        <source>Password confirmation is empty</source>
+        <target state="final">La confirmación de la contraseña está vacía</target>
+      </trans-unit>
+      <trans-unit id="82" approved="yes">
+        <source>Password and password confirmation don't match</source>
+        <target state="final">La contraseña y la confirmación de la contraseña no coinciden</target>
+      </trans-unit>
+      <trans-unit id="83" approved="yes">
+        <source>One time token not found</source>
+        <target state="final">No se encontró la señal única</target>
+      </trans-unit>
+      <trans-unit id="84" approved="yes">
+        <source>Tenant not found</source>
+        <target state="final">No se encontró el inquilino</target>
+      </trans-unit>
+      <trans-unit id="85" approved="yes">
+        <source>User not found</source>
+        <target state="final">No se encuentró el usuario</target>
+      </trans-unit>
+      <trans-unit id="86" approved="yes">
+        <source>View</source>
+        <target state="final">Visualizar</target>
+        <alt-trans>
+          <target>Visualiza</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="87" approved="yes">
+        <source>email</source>
+        <target state="final">correo electrónico</target>
+        <alt-trans>
+          <target>correo elctrónico</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="88" approved="yes">
+        <source>address</source>
+        <target state="final">dirección</target>
+      </trans-unit>
+      <trans-unit id="89" approved="yes">
+        <source>phone number</source>
+        <target state="final">número de teléfono</target>
+      </trans-unit>
+      <trans-unit id="90" approved="yes">
+        <source>Access all the above information at any time</source>
+        <target state="final">Acceda a toda la información anterior en cualquier momento</target>
+        <alt-trans>
+          <target>Accede a toda la información anterior en cualquier momento</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="91" approved="yes">
+        <source>View your Sugar profile which includes first and last name</source>
+        <target state="final">Visualice su perfil Sugar que incluye su nombre y apellidos</target>
+      </trans-unit>
+      <trans-unit id="92" approved="yes">
+        <source>Authenticate using OpenID Connect</source>
+        <target state="final">Autentica mediante OpenID Connect</target>
+      </trans-unit>
+      <trans-unit id="93" approved="yes">
+        <source>View and update any Sugar data (Accounts, Contacts, Leads, etc.) that you are permitted to access</source>
+        <target state="final">Visualice y actualice cualquier dato de Sugar (cuentas, contactos, clientes potenciales, etc.) al que se le permita tener acceso</target>
+        <alt-trans>
+          <target>Visualiza y actualiza cualquier dato de Sugar (Cuentas, contactos, clientes potenciales, etc.) al que se le permita tener acceso</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="94" approved="yes">
+        <source>View and manage your Identity and Access Management (IAM) objects</source>
+        <target state="final">Visualice y gestione los objetos de Gestión de su acceso e identidad (IAM)</target>
+        <alt-trans>
+          <target>Visualice y gestione los objetos de Gestión de acceso e identidad (IAM)</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="95" approved="yes">
+        <source>Only authorized users can change password</source>
+        <target state="final">Únicamente los usuarios autorizados pueden cambiar la contraseña</target>
+      </trans-unit>
+      <trans-unit id="96" approved="yes">
+        <source>Only local users can change password</source>
+        <target state="final">Únicamente los usuarios locales pueden cambiar la contraseña</target>
+      </trans-unit>
+      <trans-unit id="97" approved="yes">
+        <source>Change your password</source>
+        <target state="final">Cambie su contraseña</target>
+      </trans-unit>
+      <trans-unit id="98" approved="yes">
+        <source>Please enter your old password and choose a new password.</source>
+        <target state="final">Introduzca su contraseña antigua y elija una nueva.</target>
+        <alt-trans>
+          <target>Introduzca su contraseña anterior y elija una nueva.</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="99" approved="yes">
+        <source>Old password</source>
+        <target state="final">Contraseña antigua</target>
+        <alt-trans>
+          <target>Contraseña anterior</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="100" approved="yes">
+        <source>Old password is empty</source>
+        <target state="final">La contraseña antigua está vacía</target>
+        <alt-trans>
+          <target>La contraseña anterior está vacía</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="101" approved="yes">
+        <source>Old password isn't valid</source>
+        <target state="final">La contraseña antigua no es válida</target>
+        <alt-trans>
+          <target>La contraseña anterior no es válida</target>
+        </alt-trans>
+        <alt-trans>
+          <target>La contraseña no es válida</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="102" approved="yes">
+        <source>No user is found</source>
+        <target state="final">No se encontró ningún usuario</target>
+      </trans-unit>
+      <trans-unit id="103" approved="yes">
+        <source>Password changed successful</source>
+        <target state="final">La contraseña se cambió correctamente</target>
+        <alt-trans>
+          <target>Cambio de la contraseña correcto</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="104" approved="yes">
+        <source>Continue</source>
+        <target state="final">Continuar</target>
+        <alt-trans>
+          <target>Continua</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="105" approved="yes">
+        <source>Tenant isn't active</source>
+        <target state="final">El inquilino está activo</target>
+      </trans-unit>
+      <trans-unit id="106" approved="yes">
+        <source>New password must be different from previous password</source>
+        <target state="final">La contraseña nueva debe ser diferente a la anterior contraseña</target>
+      </trans-unit>
+      <trans-unit id="107" approved="yes">
+        <source>Show log in form</source>
+        <target state="final">Mostrar formulario de inicio de sesión</target>
+        <alt-trans>
+          <target>Muestra el formulario de inicio de sesión</target>
+        </alt-trans>
+        <alt-trans>
+          <target>Muestra el formulario inicio de sesión</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="108" approved="yes">
+        <source>Tenant ID</source>
+        <target state="final">Identificación de inquilino</target>
+      </trans-unit>
+      <trans-unit id="109" approved="yes">
+        <source>Next</source>
+        <target state="final">Siguiente</target>
+      </trans-unit>
+      <trans-unit id="110" approved="yes">
+        <source>Please proceed with caution and only allow access if you are logging into "%client%".</source>
+        <target state="final">Proceda con precaución y salamente permita el acceso si está iniciando sesión en "%client%".</target>
+      </trans-unit>
+      <trans-unit id="111" approved="yes">
+        <source>Learn about how %client% will handle your Sugar data by reviewing the %termsLink%Terms of Use%endlink% and %privacyLink%Privacy policies%endlink%.</source>
+        <target state="final">Descubra cómo %client% tratará sus datos de Sugar mediante la revisión de las %termsLink%Condiciones de uso%endlink% y %privacyLink%las Políticas de privacidad%endlink%.</target>
+      </trans-unit>
+      <trans-unit id="112" approved="yes">
+        <source>You are about to authorize the application "%client%" to act on behalf of your users using the following permissions:</source>
+        <target state="final">Va a autorizar la aplicación "%client%" para que actúe en nombre de sus usuarios mediante los siguientes permisos:</target>
+      </trans-unit>
+      <trans-unit id="113" approved="yes">
+        <source>You are about to authorize of application "%client%" to act on behalf of your users.</source>
+        <target state="final">Va a autorizar la aplicación "%client%" para que actúe en nombre de sus usuarios.</target>
+      </trans-unit>
+      <trans-unit id="114" approved="yes">
+        <source>Remove access for application</source>
+        <target state="final">Eliminar el acceso de la aplicación</target>
+        <alt-trans>
+          <target>Retirar el acceso de la aplicación</target>
+        </alt-trans>
+      </trans-unit>
+      <trans-unit id="115" approved="yes">
+        <source>You are about to remove authorization for the application  "%client%" to act on behalf of your users.</source>
+        <target state="final">Va a eliminar la autorización de la aplicación "%client%" para que actúe en nombre de sus usuarios.</target>
+      </trans-unit>
+      <trans-unit id="116" approved="yes">
+        <source>You are about to remove authorization of application "%client%" to act on behalf of your users with the following permissions:</source>
+        <target state="final">Va a eliminar la autorización de la aplicación "%client%" para que actúe en nombre de sus usuarios mediante los siguientes permisos:</target>
+      </trans-unit>
+      <trans-unit id="117" approved="yes">
+        <source>Do you want to remove this access?</source>
+        <target state="final">¿Quiere eliminar este acceso?</target>
+      </trans-unit>
+      <trans-unit id="118" approved="yes">
+        <source>Remove access</source>
+        <target state="final">Eliminar acceso</target>
+      </trans-unit>
+      <trans-unit id="119" approved="yes">
+        <source>Authorize access for application</source>
+        <target state="final">Autorizar el acceso de la aplicación</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

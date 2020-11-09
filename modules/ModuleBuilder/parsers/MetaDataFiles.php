@@ -85,8 +85,6 @@ class MetaDataFiles
      * @static
      */
     public static $names = array(
-        MB_DASHLETSEARCH          => 'dashletviewdefs',
-        MB_DASHLET                => 'dashletviewdefs',
         MB_POPUPSEARCH            => 'popupdefs',
         MB_POPUPLIST              => 'popupdefs',
         MB_LISTVIEW               => 'listviewdefs' ,
@@ -97,6 +95,8 @@ class MetaDataFiles
         MB_DETAILVIEW             => 'detailviewdefs' ,
         MB_QUICKCREATE            => 'quickcreatedefs',
         MB_RECORDVIEW             => 'record',
+        MB_RECORDDASHLETVIEW      => 'recorddashlet',
+        MB_PREVIEWVIEW            => 'preview',
         MB_SIDECARPOPUPVIEW       => 'selection-list',
         MB_SIDECARDUPECHECKVIEW   => 'dupecheck-list',
         MB_WIRELESSEDITVIEW       => 'edit' ,
@@ -128,7 +128,8 @@ class MetaDataFiles
         MB_DETAILVIEW  => 'DetailView' ,
         MB_QUICKCREATE => 'QuickCreate',
         MB_RECORDVIEW  => array('base', 'view', 'record'),
-
+        MB_RECORDDASHLETVIEW  => array('base', 'view', 'recorddashlet'),
+        MB_PREVIEWVIEW  => array('base', 'view', 'preview'),
         MB_WIRELESSEDITVIEW => array('mobile','view','edit'),
         MB_WIRELESSDETAILVIEW => array('mobile','view','detail'),
         MB_PORTALEDITVIEW => array('portal','view','edit'),
@@ -872,7 +873,7 @@ class MetaDataFiles
                     $basePath .= '/' . $context->getHash();
                 }
                 sugar_mkdir($basePath,null,true);
-    
+
                 $output = "<?php\n\$clientCache['".$module."']['".$platforms[0]."']['".$type."'] = ".var_export($moduleResults,true).";\n\n";
                 sugar_file_put_contents_atomic($basePath.'/'.$type.'.php', $output);
             }

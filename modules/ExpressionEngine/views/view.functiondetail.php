@@ -13,7 +13,6 @@ class ViewFunctiondetail extends SugarView
 {
     public function __construct()
     {
-		$this->options['show_footer'] = false;
 		$this->options['show_header'] = false;
         parent::__construct();
  	}

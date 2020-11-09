@@ -49,6 +49,7 @@ $viewdefs['Products']['mobile']['view']['edit'] = array(
                     'name' => 'mft_part_num',
                     'readonly' => true,
                 ),
+                'tag',
                 'assigned_user_name',
                 'team_name',
             ),

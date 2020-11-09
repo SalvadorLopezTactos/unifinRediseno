@@ -22,6 +22,7 @@
                 and meetings.date_end  <UTC_TIMESTAMP()
                 and meetings.created_by != meetings.assigned_user_id
                 and (users_cstm.puestousuario_c = '27' or users_cstm.puestousuario_c = '31'  or users.id= 'eeae5860-bb05-4ae5-3579-56ddd8a85c31');";
+
         $querym="select id from meetings where status='Planned' and date_end < UTC_TIMESTAMP();";
 
         $resultc = $GLOBALS['db']->query($queryc);
@@ -30,12 +31,12 @@
 
         $contadorc=0;
         $contadorm=0;
-
+        $today = date("Y-m-d H:i:s");
         while($row = $GLOBALS['db']->fetchByAssoc($resultc) )
         {
             $idc = $row['id'];
             $queryUpdatec="update calls
-              set status = 'Not Held'
+              set status = 'Not Held', date_modified='{$today}'
               where id='{$idc}';";
             $resultUpdatec = $GLOBALS['db']->query($queryUpdatec);
             $contadorc++;
@@ -53,7 +54,7 @@
         {
             $idm = $row['id'];
             $queryUpdatem="update meetings
-              set status = 'Not Held'
+              set status = 'Not Held',date_modified='{$today}'
               where id='{$idm}';";
             $resultUpdatem = $GLOBALS['db']->query($queryUpdatem);
             $contadorm++;

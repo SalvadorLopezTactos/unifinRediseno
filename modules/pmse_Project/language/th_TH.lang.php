@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'สถานะ',
   'LBL_PRJ_MODULE' => 'โมดูลเป้าหมาย',
+  'LBL_PRJ_RUN_ORDER' => 'เรียกใช้คำสั่ง',
   'LBL_PMSE_BUTTON_SAVE' => 'บันทึก',
   'LBL_PMSE_BUTTON_CANCEL' => 'ยกเลิก',
   'LBL_PMSE_BUTTON_YES' => 'ใช่',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'นำเข้าการกำหนดกระบวนการแล้ว แต่มีการดำเนินการกับกฎทางธุรกิจอย่างน้อยหนึ่งรายการที่ไม่ได้เลือกกฎทางธุรกิจไว้',
     'LBL_BPM_IMPORT_SELECT' => 'นิยามกระบวนการประกอบด้วยกฎการทำธุรกิจ และเทมเพลตอีเมลดังต่อไปนี้ '
         . 'กรุณาเลือกไฟล์ที่คุณต้องการนำเข้า',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'กฎทางธุรกิจ',
     'LBL_EMAIL_TEMPLATES' => 'เทมเพลตอีเมล',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'หัวหน้างาน',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'สร้างโดยผู้ใช้',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'แก้ไขครั้งล่าสุดโดยผู้ใช้',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'อีเมลระบบ',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'กฎทางธุรกิจ',
     'LBL_PMSE_LABEL_RULE' => 'กฎ',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'ระบุผู้ใช้',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'อัปเดต "ระบุให้" ในระเบียน',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'เพิ่มระเบียนที่เกี่ยวข้อง',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'โมดูลที่เกี่ยวข้อง',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'ชื่อของกิจกรรมว่างเปล่า',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'มีชื่อ "%s" แล้วในกลุ่มรูปทรง',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'วัน',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'ชั่วโมง',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'นาที',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'เวลาทำการ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'ศูนย์บริการธุรกิจ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'จากโมดูลเป้าหมาย',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'จาก ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' โมดูล',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'สตริง ตัวเลข และบูลีน',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'ตัวเลข',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'ค่า',

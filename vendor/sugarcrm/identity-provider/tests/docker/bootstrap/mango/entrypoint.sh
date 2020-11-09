@@ -11,6 +11,7 @@
 
 # chown to get rid of "Can't open and lock privilege tables: Table 'mysql.host' doesn't exist" fatal error on mysql start
 rm /var/run/mysqld/mysqld.sock.lock
+rm -f /var/run/apache2/apache2.pid
 chown -R mysql:mysql /var/lib/mysql && chown -R mysql:mysql /var/log/mysql && service mysql start
 
 # copy config override

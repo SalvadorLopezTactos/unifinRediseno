@@ -7,6 +7,11 @@
   list-style: none;
 }
 
+.activitystream-disabled {
+  clear: both;
+  padding: 13px 13px 0;
+}
+
 .activitystream-posts-comments-container {
   border-bottom: @borderWidget;
   padding: 10px 68px 0 52px;
@@ -184,7 +189,7 @@
   font-size: @fontSizeSmall;
   overflow: hidden;
   margin: 5px 5px 5px 0;
-  color: #767676;
+  color: @grayLight;
 
   .close {
     font-size: 16px;
@@ -222,7 +227,7 @@ div[data-placeholder]:not(:focus):not([data-hide-placeholder])::before {
     border: none;
 
     /* additive */
-    box-shadow: 0 0 2px rgba(0, 0, 0, 1);
+    box-shadow: 0 0 2px @black;
   }
 }
 

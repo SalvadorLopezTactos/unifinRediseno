@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Jóváhagyott cikkek és elévült KB cikkek publikálása.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Ütemezett feladat',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Denormalizált csapat biztonsági adatok újraépítése',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Tevékenységfolyam törlő',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervallum:',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Email emlékeztetők küldésének futtatása',
 'LBL_CLEANJOBQUEUE' => 'Munkalista törlése',
 'LBL_CLEANOLDRECORDLISTS' => 'Régi rekord listák törlése',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Tevékenységfolyam törlő',
 'LBL_PMSEENGINECRON' => 'SugarBPM Ütemező',
 );
 

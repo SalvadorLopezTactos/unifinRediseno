@@ -26,20 +26,9 @@ class ListConsentsRequest extends \Google\Protobuf\Internal\Message
      */
     private $page_token = '';
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $tenant
-     *     @type int $page_size
-     *     @type string $page_token
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Consent\V1Alpha\Consent::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

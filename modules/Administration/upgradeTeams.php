@@ -39,13 +39,13 @@ while($row = $GLOBALS['db']->fetchByAssoc($results)) {
 		$team->new_user_created($user);
 		// BUG 10339: do not display messages for upgrade wizard
 		if(!isset($_REQUEST['upgradeWizard'])){
-			echo $mod_strings['LBL_UPGRADE_TEAM_CREATE'].' '. $row['user_name']. '<br>';
+            printf('%s %s<br>', htmlspecialchars($mod_strings['LBL_UPGRADE_TEAM_CREATE']), htmlspecialchars($row['user_name']));
 		}
 	}else{
-		echo $row2['name'] .' '.$mod_strings['LBL_UPGRADE_TEAM_EXISTS'].'<br>';
+        printf('%s %s<br>', htmlspecialchars($row2['name']), htmlspecialchars($mod_strings['LBL_UPGRADE_TEAM_EXISTS']));
 	}
 
 	$globalteam->add_user_to_team($row['id']);
 }
 
-echo '<br>' . $mod_strings['LBL_DONE'];
+echo '<br>' . htmlspecialchars($mod_strings['LBL_DONE']);

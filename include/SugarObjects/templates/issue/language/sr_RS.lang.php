@@ -27,9 +27,15 @@ $mod_strings = array (
   'LBL_RESOLUTION' => 'Rezolucija',
   'LBL_LAST_MODIFIED' => 'Poslednja izmena',
   'LBL_ASSIGNED_TO_ID'=>'Dodeljeno:',
-  'LBL_ASSIGNED_TO_NAME' => 'Korisnik:',  	  
+  'LBL_ASSIGNED_TO_NAME' => 'Korisnik:',
   'LBL_WORK_LOG' => 'Dnevnik rada:',
+    'LBL_FOLLOW_UP' => 'Praćenje',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
+    'LBL_RESOLVED_DATETIME' => 'Datum rešavanja',
+    'LBL_HOURS_TO_RESOLUTION' => 'Sati do rešenja',
+    'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'Radnih sati do rešenja',
+    'LBL_PENDING_PROCESSING' => 'Obrade na čekanju',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'Autor:',
   'LBL_DATE_CREATED' => 'Datum kreiranja:',
   'LBL_DATE_ENTERED' => 'Datum kreiranja:',
@@ -44,5 +50,5 @@ $mod_strings = array (
     'LBL_EDIT_BUTTON' => 'Izmeni',
     'LBL_REMOVE' => 'Ukloni',
 
-  
+
   );

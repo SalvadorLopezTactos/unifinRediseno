@@ -116,15 +116,24 @@ insert_popup_header($theme);
 $form->parse("embeded");
 $form->out("embeded");
 
-
-
 $form->parse("main");
 $form->out("main");
-	//rsmith
-	$temp_module = BeanFactory::newBean($_REQUEST['target_module']);
-	global $mod_strings, $current_language;
+
+//rsmith
+$temp_module = BeanFactory::newBean($_REQUEST['target_module']);
+global $mod_strings, $current_language;
+
+if ($temp_module === null) {
+    sugar_die("Target_module required");
+}
+
+if (isset($_REQUEST['field_num'])) {
+    $field_num = intval($_REQUEST['field_num']);
+} else {
+    sugar_die("field_num is not set in request");
+}
+
 	$mod_strings = return_module_language($current_language, $temp_module->module_dir);
-	$field_num = $_REQUEST['field_num'];
 	//now build toggle js
 	$type = $output_array['real_type'];
 	$js = "<script type=\"text/javascript\">";
@@ -133,14 +142,14 @@ $form->out("main");
 	$javascript = new javascript();
     $js .= processJsForSelectorField($javascript, $action_object->field, $type, $temp_module, $field_num, 'adv') . "}";
     $js .= "else{" . processJsForSelectorField($javascript, $action_object->field, $type, $temp_module, $field_num, 'field') . "}}</script>";
-	if(empty($action_object->set_type) || $action_object->set_type == "Basic"){
+if (empty($action_object->set_type) || ($action_object->set_type === "Basic")) {
 		$js .= $javascript->getScript(true);
 	}
 	else{
 		$javascript = new javascript();
 		$javascript->setFormName('EditView');
 		$javascript->setSugarBean($temp_module);
-		$javascript->addField($action_object->field, '', '', 'field_' . htmlspecialchars($_REQUEST['field_num'], ENT_QUOTES, 'UTF-8') . '__adv_value');
+        $javascript->addField($action_object->field, '', '', 'field_' . $field_num . '__adv_value');
 		$js .= $javascript->getScript(true);
 	}
 	echo $js;
@@ -154,26 +163,30 @@ function processJsForSelectorField(&$javascript, $field, $type, $tempModule, $fi
     $javascript = new javascript();
     // Validate everything.
     $workFlowActionsExceptionFields = array ();
+
+    $js_full_field_name =  json_encode('field_'.$fieldNumber.'__'.$ifAdvanced.'_value', JSON_HEX_TAG);
+    $js_vname = json_encode($javascript->stripEndColon(translate($tempModule->field_defs[$field]['vname'])), JSON_HEX_TAG);
+
     if (in_array($type, $workFlowActionsExceptionFields) != 1)
     {
-        $jsString .= "removeFromValidate('EditView', 'field_{$fieldNumber}__{$ifAdvanced}_value');";
+        $jsString .= 'removeFromValidate("EditView", '.$js_full_field_name.');';
     }
 
     if (in_array($type, array ('date', 'time', 'datetimecombo')))
     {
         $jsString .= "addToValidate("
             . "'EditView', "
-            . "'field_{$fieldNumber}__{$ifAdvanced}_value', "
+            . $js_full_field_name .", "
             . "'assigned_user_name', "
             . "1, "
-            . "'{$javascript->stripEndColon(translate($tempModule->field_defs[$field]['vname']))}'"
+            . $js_vname
             . ")";
     }
     else if (!(in_array($type, $workFlowActionsExceptionFields) == 1))
     {
         $javascript->setFormName('EditView');
         $javascript->setSugarBean($tempModule);
-        $javascript->addField($field, '', '', "field_{$_REQUEST['field_num']}__{$ifAdvanced}_value");
+        $javascript->addField($field, '', '', $js_full_field_name);
         $jsString .= $javascript->getScript(false);
     }
     return $jsString;

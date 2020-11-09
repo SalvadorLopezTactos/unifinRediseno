@@ -127,7 +127,6 @@ $viewdefs['pmse_Project']['base']['view']['record'] = [
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'newTab' => false,
             'panelDefault' => 'expanded',
@@ -143,6 +142,12 @@ $viewdefs['pmse_Project']['base']['view']['record'] = [
                     'span' => 6,
                 ],
                 [
+                    'name' => 'prj_run_order',
+                    'studio' => 'visible',
+                    'label' => 'LBL_PRJ_RUN_ORDER',
+                    'span' => 6,
+                ],
+                [
                     'name' => 'tag',
                     'span' => 12,
                 ],
@@ -153,7 +158,6 @@ $viewdefs['pmse_Project']['base']['view']['record'] = [
             'label' => 'LBL_SHOW_MORE',
             'hide' => true,
             'columns' => 2,
-            'labelsOnTop' => true,
             'placeholders' => true,
             'newTab' => false,
             'panelDefault' => 'expanded',

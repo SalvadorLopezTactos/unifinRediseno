@@ -37,6 +37,7 @@ $viewdefs['Tasks']['mobile']['view']['detail'] = array(
                 'date_start',
                 'date_due',
                 'description',
+                'tag',
                 'parent_name',
                 'assigned_user_name',
                 'team_name',

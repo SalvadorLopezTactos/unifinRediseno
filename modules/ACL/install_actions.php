@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+
 require_once 'modules/ACLRoles/SeedRoles.php';
 
 global $current_user,$beanList, $beanFiles, $mod_strings;
@@ -25,7 +27,9 @@ $GLOBALS['db']->query("UPDATE acl_actions set acltype = 'TrackerQuery' where cat
 
 if(is_admin($current_user)){
     foreach($ACLbeanList as $module=>$class){
-
+        if (!AccessControlManager::instance()->allowModuleAccess($module)) {
+            continue;
+        }
         if(empty($installed_classes[$class]) && isset($beanFiles[$class])){
             if($class == 'Tracker'){
                 ACLAction::addActions('Trackers', 'Tracker');

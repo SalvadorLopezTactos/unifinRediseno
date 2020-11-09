@@ -164,4 +164,6 @@ $mod_strings = array (
     'LBL_BUGS_SUBPANEL_TITLE' => '버그 목록',
     'LBL_QUOTES_SUBPANEL_TITLE' => '견적 목록',
     'LBL_RLI_SUBPANEL_TITLE' => '매출 라인아이템',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PLIS_SUBPANEL_TITLE' => 'Purchased Line Items',
 );

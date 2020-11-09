@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'איש קשר',
     'LBL_DISCOUNT_TOTAL' => 'סך-הכל הנחה',
     'LBL_DISCOUNT_AMOUNT' => 'סכום ההנחה',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'ערך סכום ההנחה',
     'LBL_EXT_PRICE' => 'מחיר שלוחה',
     'LBL_CURRENCY_SYMBOL_NAME' => 'שם סימון מטבע',

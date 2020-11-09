@@ -81,10 +81,19 @@ foreach($temp_field_array as $field_array)
 
 //Print the master record header to the page
 $params = array();
-$params[] = "<a href='index.php?module={$focus->merge_bean->module_dir}&action=index'>{$GLOBALS['app_list_strings']['moduleList'][$focus->merge_bean->module_dir]}</a>";
-$params[] = $mod_strings['LBL_LBL_MERGE_RECORDS_STEP_1'];
-$params[] = $focus->merge_bean->name;
+
+
+$q = http_build_query([
+    'module' => $focus->merge_bean->module_dir,
+    'action' => 'index',
+]);
+
+$params[] = '<a href="'.htmlspecialchars('index.php?'.$q).'">'.htmlspecialchars($GLOBALS['app_list_strings']['moduleList'][$focus->merge_bean->module_dir]).'</a>';
+$params[] = htmlspecialchars($mod_strings['LBL_LBL_MERGE_RECORDS_STEP_1']);
+$params[] = htmlspecialchars($focus->merge_bean->name);
+
 echo getClassicModuleTitle($focus->merge_bean->module_dir, $params, true);
+
 
 $xtpl = new XTemplate ('modules/MergeRecords/Step1.html');
 $xtpl->assign("MOD", $mod_strings);

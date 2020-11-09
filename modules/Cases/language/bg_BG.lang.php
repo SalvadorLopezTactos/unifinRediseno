@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Електронно табло със списък на казусите',
     'LBL_CASES_RECORD_DASHBOARD' => 'Електронно табло със запис на казусите',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Подробни данни за случай',
 
 	'ERR_DELETE_RECORD'					=> 'Трябва да определите номер, за да изтриете този запис.',
 	'LBL_ACCOUNT_ID'					=> 'Идентификатор на организацията',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Контакти',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Казуси',
 	'LBL_DESCRIPTION'					=> 'Описание:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Приложение',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Приложение',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'История',
 	'LBL_INVITEE'						=> 'Контакти',
 	'LBL_MEMBER_OF'						=> 'Организация',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Създаден от (User Name)',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Отговорник',
     'LBL_EXPORT_TEAM_COUNT' => 'Брой екипи',
+    'LBL_CHANGETIMERS' => 'Промени таймери',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Related Contacts&#39; Emails',
@@ -140,4 +143,11 @@ $mod_strings = array (
 * Изисква се полетата, маркирани като "Задължителни", да имат зададена стойност преди да се пристъпи към съхраняване на записа.
 * Натиснете върху "Покажи повече", за да бъдат визуализирани допълнителни полета ако е необходимо.
 2. Натиснете "Съхрани", за да запазите новия запис и да се върнете на предишната страница.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Не намерихте ли това, което търсехте?',
+    'LBL_CREATE_CASE' => 'Създаване на {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'Подробна информация за SLA',
+    'LBL_HOURS' => 'Часове',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

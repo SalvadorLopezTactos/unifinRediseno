@@ -13,3 +13,102 @@
   white-space: pre-wrap;
   word-wrap: break-word;
 }
+
+.commentLog.edit {
+  .new-msg-div > .dropdown-menu {
+    position: static;
+  }
+}
+
+// Comment log dashlet
+@commentLogDashletTimeColor: @grayLightish;
+@commentLogDashletNoCommentsAvailable: @grayLightish;
+@commentLogDashletItemHeaderColor: @grayDark;
+
+.commentlog-dashlet {
+  > span {
+    display: block;
+    border: none;
+  }
+}
+
+.comment-log-dashlet-content {
+  .new-comment {
+    position: relative;
+    padding: 10px;
+    margin-bottom: 0;
+
+    textarea {
+      width: 100%;
+      height: 60px;
+      box-sizing: border-box;
+      resize: none;
+    }
+
+    button[data-action=save] {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    .dropdown-menu {
+      position: static;
+      margin-bottom: 5px;
+
+      a {
+        border-top: 0;
+      }
+
+      li {
+        padding: 0;
+      }
+    }
+
+    .activitystream-tag-dropdown {
+      width: ~"calc(100% - 2px)";
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    clear: both;
+  }
+
+  ul > em {
+    text-align: center;
+    display: block;
+    color: @commentLogDashletNoCommentsAvailable;
+  }
+
+  li {
+    border-top: @borderWidget;
+    padding: 10px;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      flex-flow: nowrap;
+      flex: 0 0 100%;
+
+      time {
+        color: @commentLogDashletTimeColor;
+
+        span {
+          color: initial;
+        }
+      }
+
+      > a,
+      > time.relative {
+        font-weight: 600;
+        color: @commentLogDashletItemHeaderColor;
+      }
+    }
+
+    .toggle-text {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

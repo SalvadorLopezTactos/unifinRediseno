@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Előnézet',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'FIGYELEM: ha megváltoztatja az elsődleges modult, a sablonhoz korábban hozzáadott mezőket el kell távolítani!',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Itt van a bekért fájl (a szöveg megváltoztatható)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Árajánlat',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'A sablon PDF árajánlat nyomtatásához használható.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'árajánlat',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Árajánlat (szolgáltatásokkal)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'A sablon árajánlat kinyomtatására szolgál, szolgáltatásra vonatkozó adatokkal együtt, PDF változatban.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'szolgáltatásra vonatkozó árajánlat',
+
   'LBL_TPL_INVOICE_NAME' => 'Számla',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'A sablon PDF számla nyomtatásához használható.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'számla',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Számla (szolgáltatásokkal)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'A sablon számla kinyomtatására szolgál, szolgáltatásra vonatkozó adatokkal együtt, PDF változatban.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'szolgáltatásra vonatkozó számla',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Árajánlat száma:',
   'LBL_TPL_SALES_PERSON' => 'Értékesítő:',
   'LBL_TPL_VALID_UNTIL' => 'Érvényesség lejárta:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Cikkszám',
   'LBL_TPL_PRODUCT' => 'Termék',
   'LBL_TPL_RLI' => 'Bevétel sorok',
+  'LBL_TPL_DURATION' => 'Időtartam',
+  'LBL_TPL_DURATION_STARTS' => 'Kezdet:',
+  'LBL_TPL_DURATION_ENDS' => 'Vége:',
   'LBL_TPL_LIST_PRICE' => 'Listaár',
   'LBL_TPL_UNIT_PRICE' => 'Egységár',
   'LBL_TPL_EXT_PRICE' => 'Kibővített ár',

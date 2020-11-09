@@ -12,6 +12,7 @@ Feature: LDAP
   New user should not be able to login if provision disabled
   New user should be able to login and see complete registration screen
   User should be able to login using LDAP over SSL
+  User should be able to login using LDAP with TLS
   New LDAP user tries to login with anonymous LDAP bind if provision is enabled
   User should not be able to login if it does not belong to LDAP group
   User should be able to login if it belongs to LDAP group
@@ -73,6 +74,32 @@ Feature: LDAP
       | field | type | value |
       | ldap_hostname | text | ldap_ssl |
       | ldap_port | text | 636 |
+      | ldap_base_dn | text |  dc=openldap,dc=com |
+      | ldap_login_filter | text | |
+      | ldap_bind_attr    | text | dn |
+      | ldap_login_attr    | text | uid |
+      | ldap_group_checkbox    | checkbox | |
+      | ldap_authentication_checkbox    | checkbox | checked |
+      | ldap_admin_user    | text | cn=admin,ou=admins,dc=openldap,dc=com |
+      | ldap_admin_password    | text | admin&password |
+      | ldap_auto_create_users | checkbox | checked |
+    And I wait for element "input[name=username]"
+    Then I login as "user1" with password "user1"
+    And I wait for element "input[name=first_name]"
+    And I should see "Setup your user information"
+    Then I skip login wizard
+    And I wait until the loading is completed
+    And I wait for the page to be loaded
+    And I should see "Home Dashboard"
+    Then I logout
+  
+  @extended
+  Scenario: User should be able to login using LDAP with TLS
+    Given As "sugarAdmin" filling in the following LDAP settings:
+      | field | type | value |
+      | ldap_encryption | select | tls |
+      | ldap_hostname | text | ldap |
+      | ldap_port | text | 389 |
       | ldap_base_dn | text |  dc=openldap,dc=com |
       | ldap_login_filter | text | |
       | ldap_bind_attr    | text | dn |

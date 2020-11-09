@@ -24,9 +24,16 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Oferte (Expediere la)',
 	'LNK_ACCOUNT_REPORTS' => 'Vezi Rapoarte Cont',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documente',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Tabloul de bord Listă conturi',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare conturi',
+    'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'Detalii cont',
+    'LBL_NEXT_RENEWAL_DATE' => 'Data următoarei reînnoiri',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'Denumire cont/Industrie',
+    'LBL_RENEWALS_CONSOLE_LOCATION' => 'Locație',
+    'LBL_PURCHASES' => 'Purchases',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafic',

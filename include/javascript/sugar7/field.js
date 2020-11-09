@@ -263,6 +263,20 @@
             },
 
             /**
+             * Check if a field has a value
+             * Override this function to define you're own empty criteria
+             * @return {boolean}
+             */
+            isFieldEmpty: function() {
+                if (!this.model) {
+                    return true;
+                }
+                var value = this.model.get(this.name);
+                return _.isNull(value) || _.isUndefined(value) ||
+                    ((_.isString(value) || _.isArray(value)) && _.isEmpty(value));
+            },
+
+            /**
              * Help information block visibility is metadata driven
              * (`hide_help`).
              *

@@ -50,4 +50,6 @@ $mod_strings = array(
     'LBL_PARENT_ID' => 'Родителски идентификатор',
     'LBL_READ' => 'Прочетено',
     'LBL_UNREAD' => 'Непрочетено',
+    'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'Бяхте споменати от',
+    'LBL_YOU_HAVE_BEEN_MENTIONED' => 'Бяхте споменати',
 );

@@ -174,12 +174,6 @@ else {
 			$name = isset($_REQUEST['tempName'])?$_REQUEST['tempName']:'';
 		}
 
-		if(isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/MSIE/", $_SERVER['HTTP_USER_AGENT']))
-		{
-			$name = urlencode($name);
-			$name = str_replace("+", "_", $name);
-		}
-
 		header("Pragma: public");
 		header("Cache-Control: max-age=1, post-check=0, pre-check=0");
 		if(isset($_REQUEST['isTempFile']) && ($_REQUEST['type']=="SugarFieldImage")) {
@@ -199,8 +193,7 @@ else {
             {
                 header("Content-type: application/octet-stream");
             }
-               header("Content-Disposition: attachment; filename=\"".$name."\"");
-            
+            header("Content-Disposition: attachment; filename*=utf-8''" . rawurlencode($name));
 		}
 		// disable content type sniffing in MSIE
 		header("X-Content-Type-Options: nosniff");

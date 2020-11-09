@@ -101,59 +101,9 @@ class Attributes extends \Google\Protobuf\Internal\Message
      */
     private $department = '';
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type string $given_name
-     *           Given name(s) or first name(s) of the End-User. Note that in some
-     *           cultures, people can have multiple given names; all can be present, with
-     *           the names being separated by space characters.
-     *           Sugar field mapping: `users.first_name`
-     *     @type string $family_name
-     *           Surname(s) or last name(s) of the End-User. Note that in some cultures,
-     *           people can have multiple family names or no family name; all can be
-     *           present, with the names being separated by space characters.
-     *           Sugar field mapping: `users.last_name`
-     *     @type string $middle_name
-     *           Middle name(s) of the End-User. Note that in some cultures, people can
-     *           have multiple middle names; all can be present, with the names being
-     *           separated by space characters. Also note that in some cultures, middle
-     *           names are not used.
-     *           Sugar field mpping: n/a
-     *     @type string $nickname
-     *           Casual name of the End-User that may or may not be the same as the
-     *           given_name. For instance, a nickname value of Mike might be returned
-     *           alongside a given_name value of Michael.
-     *           Sugar legacy field mapping: n/a
-     *     @type \Sugarcrm\Apis\Iam\User\V1alpha\Address $address
-     *           End-User's preferred postal address.
-     *           Sugar field mapping: see `Address`
-     *     @type string $email
-     *           End-User's preferred e-mail address. Its value MUST conform to the
-     *           [RFC5322] addr-spec syntax. The RP MUST NOT rely upon this value being
-     *           unique.
-     *           Sugar field mapping: `users.email_addresses` link
-     *     @type string $phone_number
-     *           End-User's preferred telephone number. E.164 [E.164] is RECOMMENDED as
-     *           the format of this Claim, for example, +1 (425) 555-1212 or
-     *           +56 (2) 687 2400. If the phone number contains an extension, it is
-     *           RECOMMENDED that the extension be represented using the [RFC3966]
-     *           extension syntax, for example, +1 (604) 555-1234;ext=5678.
-     *           Sugar field mapping: `users.phone_work`
-     *     @type string $title
-     *           Title
-     *           Sugar field mapping: `users.title`
-     *     @type string $department
-     *           Department
-     *           Sugar field mapping: `users.department`
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\User\V1Alpha\User::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

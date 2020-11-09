@@ -39,7 +39,14 @@ $viewdefs['Users']['EditView'] = array(
                       'customCode' =>
                           '{if $IS_ADMIN && !$IDM_MODE_ENABLED}{$USER_TYPE_DROPDOWN}{else}{$USER_TYPE_READONLY}{/if}',
                       ),
+                array(
+                    'name' => 'license_type',
+                    'displayParams' => array('required'=>true),
+                    'customCode' =>
+                        '{if $IS_ADMIN}{$LICENSE_TYPE_DROPDOWN}{else}{$LICENSE_TYPE_READONLY}{/if}',
+                    ),
                 ),
+
             array('picture'),
         ),
         'LBL_EMPLOYEE_INFORMATION' => array(
@@ -53,6 +60,7 @@ $viewdefs['Users']['EditView'] = array(
                   'phone_other'),
             array('','phone_fax'),
             array('','phone_home'),
+            array('business_center_name',''),
             array('messenger_type','messenger_id'),
             array('address_street','address_city'),
             array('address_state','address_postalcode'),

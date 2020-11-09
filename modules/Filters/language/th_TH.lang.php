@@ -105,4 +105,6 @@ $mod_strings = array(
     'LBL_OPERATOR_LAST_YEAR' => 'ปีล่าสุด',
     'LBL_OPERATOR_THIS_YEAR' => 'ปีนี้',
     'LBL_OPERATOR_NEXT_YEAR' => 'ปีถัดไป',
+    'LBL_OPEN_ISSUES' => 'เปิด {0}',
+    'LBL_RECENTLY_RESOLVED_ISSUES' => 'แก้ไขแล้วเมื่อเร็ว ๆ นี้',
 );

@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -10,7 +9,6 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
 $viewdefs['base']['layout']['record'] = array(
     'components' => array(
         array(
@@ -74,8 +72,7 @@ $viewdefs['base']['layout']['record'] = array(
                                             ),
                                             array(
                                                 'layout' => 'activitystream',
-                                                'context' =>
-                                                array(
+                                                'context' => array(
                                                     'module' => 'Activities',
                                                 ),
                                             ),
@@ -90,34 +87,51 @@ $viewdefs['base']['layout']['record'] = array(
                     ),
                     array(
                         'layout' => array(
-                            'type' => 'base',
+                            'type' => 'tabbed-layout',
                             'name' => 'dashboard-pane',
+                            'label' => 'LBL_DASHBOARD',
                             'css_class' => 'dashboard-pane',
+                            'notabs' => true,
                             'components' => array(
                                 array(
                                     'layout' => array(
-                                        'type' => 'dashboard',
-                                        'last_state' => array(
-                                            'id' => 'last-visit',
-                                        )
+                                        'type' => 'base',
+                                        'label' => 'LBL_DASHBOARD',
+                                        'css_class' => 'dashboard-pane',
+                                        'components' => array(
+                                            array(
+                                                'layout' => array(
+                                                    'label' => 'LBL_DASHBOARD',
+                                                    'type' => 'dashboard',
+                                                    'last_state' => array(
+                                                        'id' => 'last-visit',
+                                                    ),
+                                                ),
+                                                'context' => array(
+                                                    'forceNew' => true,
+                                                    'module' => 'Home',
+                                                ),
+                                                'loadModule' => 'Dashboards',
+                                            ),
+                                        ),
                                     ),
-                                    'context' => array(
-                                        'forceNew' => true,
-                                        'module' => 'Home',
-                                    ),
-                                    'loadModule' => 'Dashboards',
                                 ),
                             ),
                         ),
                     ),
                     array(
                         'layout' => array(
-                            'type' => 'base',
+                            'type' => 'tabbed-layout',
                             'name' => 'preview-pane',
+                            'label' => 'LBL_PREVIEW',
                             'css_class' => 'preview-pane',
+                            'notabs' => true,
                             'components' => array(
                                 array(
                                     'layout' => 'preview',
+                                    'xmeta' => [
+                                        'editable' => true,
+                                    ],
                                 ),
                             ),
                         ),

@@ -13,6 +13,54 @@
 class EmailsApiHelper extends SugarBeanApiHelper
 {
     /**
+     * Convert reference to inline image (stored as Note) to URL link
+     * @param string $note ID of the note
+     * @param string $imagePrefix for image file
+     * @param string $imageFilename
+     * @param string $descriptionHtml reference to HTML to modify
+     */
+    private function cid2Link($noteId, $imagePrefix, $imageFilename, &$descriptionHtml)
+    {
+        $descriptionHtml = preg_replace(
+            '#class="image" src="cid:' . preg_quote($noteId, '#') . '\.(.+?)"#',
+            'class="image" src="' . $imagePrefix  . $noteId . '.\\1"',
+            $descriptionHtml
+        );
+
+        // ensure the image is in the cache
+        $note = BeanFactory::retrieveBean('Notes', $noteId);
+        if ($note) {
+            $src = 'upload://' . $note->getUploadId();
+            if (!file_exists($imageFilename) && file_exists($src)) {
+                copy($src, $imageFilename);
+            }
+        }
+    }
+
+    /**
+     * Convert all cid: links in this email into URLs
+     */
+    private function cids2Links($email, &$descriptionHtml)
+    {
+        $imagePrefix = rtrim($GLOBALS['sugar_config']['site_url'], '/').'/cache/images/';
+
+        $stmt = $email->db->getConnection()->executeQuery(
+            'SELECT id, file_mime_type FROM notes WHERE email_id = ? AND deleted = 0',
+            array($email->id)
+        );
+
+        sugar_mkdir(sugar_cached('images/'));
+        while ($a = $stmt->fetch()) {
+            list($type, $subtype) = explode('/', $a['file_mime_type']);
+            if (strtolower($type) === 'image') {
+                $noteId = $a['id'];
+                $imageFilename = sugar_cached('images/') . $noteId . '.' . strtolower($subtype);
+                $this->cid2Link($noteId, $imagePrefix, $imageFilename, $descriptionHtml);
+            }
+        }
+    }
+
+    /**
      * {@inheritdoc}
      *
      * `outbound_email_id` is not included in the response if the user does not have access to the outbound email
@@ -29,6 +77,10 @@ class EmailsApiHelper extends SugarBeanApiHelper
 
         if (empty($oe)) {
              unset($data['outbound_email_id']);
+        }
+
+        if (!empty($data['description_html'])) {
+            $this->cids2Links($bean, $data['description_html']);
         }
 
         return $data;

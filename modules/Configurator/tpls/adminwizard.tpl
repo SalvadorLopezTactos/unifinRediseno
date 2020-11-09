@@ -100,7 +100,7 @@ function disableReturnSubmission(e) {
                 </td>
                 <td  width='35%'>
                     <div id="container_upload"></div>
-                    <input type='text' id='company_logo' name='company_logo' style="display:none" />
+                    <input type="text" id="commit_company_logo" name="commit_company_logo" style="display:none" />
                 </td>
             </tr>
             <tr>
@@ -589,46 +589,46 @@ function changeEmailScreenDisplay(smtptype)
 }
 //changeEmailScreenDisplay("{/literal}{$mail_smtptype}{literal}");
 
-function uploadCheck(quotes){
+function uploadCheck(){
     //AJAX call for checking the file size and comparing with php.ini settings.
     var callback = {
         upload:function(r) {
-            eval("var file_type = " + r.responseText);
-            var forQuotes = file_type['forQuotes'];
-            document.getElementById('loading_img_'+forQuotes).style.display="none";
-            switch(file_type['data']){
+            var file_type = JSON.parse(r.responseText);
+            document.getElementById('loading_img_company').style.display = 'none';
+            bad_image = SUGAR.language.get('Configurator', 'LBL_ALERT_TYPE_IMAGE');
+            switch (file_type['data']) {
                 case 'other':
-                    alert(SUGAR.language.get('Configurator','LBL_ALERT_JPG_IMAGE'));
-                    document.getElementById('my_file_' + forQuotes).value='';
+                    alert(bad_image);
+                    document.getElementById('my_file_company').value = '';
                     break;
                 case 'size':
-                    alert(SUGAR.language.get('Configurator','LBL_ALERT_SIZE_RATIO'));
-                    document.getElementById(forQuotes + "_logo").value=file_type['path'];
-                    document.getElementById(forQuotes + "_logo_image").src=file_type['path'];
+                    alert(SUGAR.language.get('Configurator', 'LBL_ALERT_SIZE_RATIO'));
+                    document.getElementById('commit_company_logo').value = '1';
+                    document.getElementById('company_logo_image').src = file_type['url'];
                     break;
                 case 'file_error':
-                    alert(SUGAR.language.get('Configurator','ERR_ALERT_FILE_UPLOAD'));
-                    document.getElementById('my_file_' + forQuotes).value='';
+                    alert(SUGAR.language.get('Configurator', 'ERR_ALERT_FILE_UPLOAD'));
+                    document.getElementById('my_file_company').value = '';
                     break;
                 //File good
                 case 'ok':
-                    document.getElementById(forQuotes + "_logo").value=file_type['path'];
-                    document.getElementById(forQuotes + "_logo_image").src=file_type['path'];
+                    document.getElementById('commit_company_logo').value = '1';
+                    document.getElementById('company_logo_image').src = file_type['url'];
                     break;
                 //error in getimagesize because unsupported type
                 default:
-                   alert(SUGAR.language.get('Configurator','LBL_ALERT_TYPE_IMAGE'));
-                   document.getElementById('my_file_' + forQuotes).value='';
+                    alert(bad_image);
+                    document.getElementById('my_file_company').value = '';
             }
         },
         failure:function(r){
             alert(SUGAR.language.get('app_strings','LBL_AJAX_FAILURE'));
         }
     }
-    document.getElementById("company_logo").value='';
+    document.getElementById('commit_company_logo').value = '';
     document.getElementById('loading_img_company').style.display="inline";
     var file_name = document.getElementById('my_file_company').value;
-    postData = '&entryPoint=UploadFileCheck&forQuotes=false&csrf_token=' + SUGAR.csrf.form_token;
+    postData = '&entryPoint=UploadFileCheck&csrf_token=' + SUGAR.csrf.form_token;
     YAHOO.util.Connect.setForm(document.getElementById('upload_form'), true,true);
     if(file_name){
         if(postData.substring(0,1) == '&'){

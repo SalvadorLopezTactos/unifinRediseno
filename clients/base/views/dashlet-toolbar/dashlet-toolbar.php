@@ -37,6 +37,11 @@ $viewdefs["base"]["view"]["dashlet-toolbar"] = array(
                     "action" => "removeClicked",
                     "label" => "LBL_DASHLET_REMOVE_LABEL",
                     "name" => "remove_button",
+                    'disallowed_layouts' => [
+                        [
+                            'name' => 'row-model-data',
+                        ],
+                    ],
                 ),
             )
         )

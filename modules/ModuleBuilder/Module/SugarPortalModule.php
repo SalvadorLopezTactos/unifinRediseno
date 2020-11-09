@@ -11,26 +11,26 @@
  */
 
 
-class SugarPortalModule{
-	var $name;
-	
+class SugarPortalModule
+{
+    public $name;
+
     public function __construct($module)
-	{
-	    global $app_list_strings;
+    {
+        global $app_list_strings;
         $moduleNames = array_change_key_case($app_list_strings['moduleList']);
-		$this->name = $moduleNames[strtolower($module)];
-		$this->module = $module;
-		
-		$path = 'modules/'.$this->module.'/clients/portal/views/';
+        $this->name = $moduleNames[strtolower($module)];
+        $this->module = $module;
+
+        $path = 'modules/' . $this->module . '/clients/portal/views/';
         $views = self::getViewFiles();
-		foreach($views as $file => $def) {
-            $dirname = $path . basename($file, '.php') . '/';
-            if (is_dir($dirname) && file_exists($dirname . $file)) {
+        foreach ($views as $file => $def) {
+            $view = basename($file, '.php') . '/' . $file;
+            if (SugarAutoLoader::existingCustomOne($path . $view)) {
                 $this->views[$file] = $def;
             }
-		}
-	}
-	
+        }
+    }
 
 	function getNodes()
 	{

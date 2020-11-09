@@ -17,19 +17,16 @@ class UpdateUserRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.sugarcrm.apis.iam.user.v1alpha.User user = 1;</code>
      */
     private $user = null;
-
     /**
-     * Constructor.
+     * Should we send email to the new local user identity?
      *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type \Sugarcrm\Apis\Iam\User\V1alpha\User $user
-     * }
+     * Generated from protobuf field <code>bool send_email = 2;</code>
      */
-    public function __construct($data = NULL) {
+    private $send_email = false;
+
+    public function __construct() {
         \GPBMetadata\Apis\Iam\User\V1Alpha\User::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**
@@ -50,6 +47,32 @@ class UpdateUserRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Sugarcrm\Apis\Iam\User\V1alpha\User::class);
         $this->user = $var;
+
+        return $this;
+    }
+
+    /**
+     * Should we send email to the new local user identity?
+     *
+     * Generated from protobuf field <code>bool send_email = 2;</code>
+     * @return bool
+     */
+    public function getSendEmail()
+    {
+        return $this->send_email;
+    }
+
+    /**
+     * Should we send email to the new local user identity?
+     *
+     * Generated from protobuf field <code>bool send_email = 2;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setSendEmail($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->send_email = $var;
 
         return $this;
     }

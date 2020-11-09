@@ -21,6 +21,7 @@ class PingApi extends SugarApi {
                 'method' => 'ping',
                 'shortHelp' => 'An example API only responds with pong',
                 'longHelp' => 'include/api/help/ping_get_help.html',
+                'ignoreSystemStatusError' => true,
             ),
             'pingWithTime' => array(
                 'reqType' => 'GET',

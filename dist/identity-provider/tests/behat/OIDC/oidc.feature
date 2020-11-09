@@ -16,6 +16,8 @@ Feature: OIDC flow
   Verify OIDC login flow for LDAP user who has previously been provisioned. User not exists in Sugar
   Verify OIDC login flow for LDAP user who has previously been provisioned. User exists in Sugar
   Verify OIDC login flow for LDAP user who has not previously been provisioned
+  Verify OIDC login flow for SAML user who has not previously been provisioned. User not exists in Sugar
+  Verify OIDC login flow for SAML user who has previously been provisioned. User not exists in Sugar
   Verify OIDC login flow and required fields' provisioning for LDAP user who has not previously been provisioned.
   Verify OIDC login flow initiated by SugarCRM with invalid password
   Verify OIDC login flow initiated by SugarCRM
@@ -29,31 +31,32 @@ Feature: OIDC flow
 
   Scenario: Verify OIDC login flow for local user with tenant id. User not exists in Sugar
     Given I try to get Mango public metadata
-    Then I navigate to OIDC provider with tenant "0000000001" and user "" and custom scope ""
+    Then I navigate to OIDC provider with tenant "2000000001" and user "" and custom scope ""
     Then I should see IdP login page
     Given I do IdP login as "max" with password "max"
     Given I get access_token from STS
     When I use access_token for GET request "/rest/v11/me"
-    Then I verify response contains "user_name" with value "max"
-    And I verify response contains "full_name" with value "Max Jensen"
-    And I verify response contains "address_country" with value "testcountry"
+    Then I verify response contains "current_user.user_name" with value "max"
+    And I verify response contains "current_user.full_name" with value "Max Jensen"
+    And I verify response contains "current_user.address_country" with value "testcountry"
 
   Scenario: Verify OIDC login flow for local user. Tenant is not provided in auth url
     Given I try to get Mango public metadata
     Then I navigate to OIDC provider with tenant "" and user "sally" and custom scope ""
-    And I should see IdP login page
-    Then I fill in "0000000001" for "tid"
+    And I should see IdP tenant page
+    Then I fill in "2000000001" for "tenant_hint"
+    And I click "input[type=submit]"
     Then I do IdP login as "" with password "sally"
     Given I get access_token from STS
     When I use access_token for GET request "/rest/v11/me"
-    Then I verify response contains "user_name" with value "sally"
-    And I verify response contains "full_name" with value "sally sally_family"
-    And I verify response contains "address_country" with value "testcountry"
+    Then I verify response contains "current_user.user_name" with value "sally"
+    And I verify response contains "current_user.full_name" with value "sally sally_family"
+    And I verify response contains "current_user.address_country" with value "testcountry"
 
   Scenario: Verify OIDC login flow for local user. User confirm consent request
     Given I use "native" client
     And I try to get Mango public metadata
-    Then I navigate to OIDC provider with tenant "srn:cloud:iam::0000000001:tenant" and user "" and custom scope ""
+    Then I navigate to OIDC provider with tenant "srn:cloud:iam::2000000001:tenant" and user "" and custom scope ""
     Then I should see IdP login page
     Given I do IdP login as "max" with password "max"
     Then I confirm consent request
@@ -62,7 +65,7 @@ Feature: OIDC flow
   Scenario: Verify OIDC login flow for local user. User rejects consent request
     Given I use "native" client
     And I try to get Mango public metadata
-    Then I navigate to OIDC provider with tenant "srn:cloud:iam::0000000001:tenant" and user "" and custom scope ""
+    Then I navigate to OIDC provider with tenant "srn:cloud:iam::2000000001:tenant" and user "" and custom scope ""
     Then I should see IdP login page
     Given I do IdP login as "max" with password "max"
     Then I reject consent request
@@ -70,41 +73,81 @@ Feature: OIDC flow
 
   Scenario: Verify OIDC login flow for LDAP user who has previously been provisioned. User not exists in Sugar
     Given I try to get Mango public metadata
-    Then I navigate to OIDC provider with tenant "srn:cloud:iam::0000000001:tenant" and user "" and custom scope ""
+    Then I navigate to OIDC provider with tenant "srn:cloud:iam::2000000001:tenant" and user "" and custom scope ""
     Then I should see IdP login page
     Given I do IdP login as "abey" with password "abey"
     Given I get access_token from STS
     Then I use access_token for GET request "/rest/v11/me"
-    And I verify response contains "user_name" with value "abey"
+    And I verify response contains "current_user.user_name" with value "abey"
 
   Scenario: Verify OIDC login flow for LDAP user who has previously been provisioned. User exists in Sugar
     Given I try to get Mango public metadata
-    Then I navigate to OIDC provider with tenant "srn:cloud:iam::0000000001:tenant" and user "" and custom scope ""
+    Then I navigate to OIDC provider with tenant "srn:cloud:iam::2000000001:tenant" and user "" and custom scope ""
     Then I should see IdP login page
     Given I do IdP login as "admin" with password "admin"
     Given I get access_token from STS
     Then I use access_token for GET request "/rest/v11/me"
-    And I verify response contains "user_name" with value "admin"
+    And I verify response contains "current_user.user_name" with value "admin"
 
   Scenario: Verify OIDC login flow for LDAP user who has not previously been provisioned
     Given I try to get Mango public metadata
-    Then I navigate to OIDC provider with tenant "srn:cloud:iam::0000000001:tenant" and user "" and custom scope ""
+    Then I navigate to OIDC provider with tenant "srn:cloud:iam::2000000001:tenant" and user "" and custom scope ""
     Then I should see IdP login page
     Given I do IdP login as "tandav" with password "tandav"
     Given I get access_token from STS
     Then I use access_token for GET request "/rest/v11/me"
-    And I verify response contains "user_name" with value "tandav"
+    And I verify response contains "current_user.user_name" with value "tandav"
+
+  Scenario: Verify OIDC login flow for SAML user who has not previously been provisioned. User not exists in Sugar
+    Given I try to get Mango public metadata
+    Then I navigate to OIDC provider with tenant "srn:cloud:iam:eu:2000000001:tenant" and user "" and custom scope ""
+    Then I should see IdP login page
+    Then I click "a[name=external_login_button]"
+    Then I wait for the page to be loaded
+    Then I should see "Enter your username and password"
+    When I fill in "user6" for "username"
+    And I fill in "user6pass" for "password"
+    And I press "Login"
+    Given I get access_token from STS
+    Then I use access_token to get my full user information for version "v11"
+    And I verify response contains "user_name" with value "user6@example.com"
+    And I verify response contains "email.0.email_address" with value "user6@example.com"
+    And I verify response contains "full_name" with value "Kenneth Roberts"
+    And I verify response contains "address_city" with value "London"
+    And I verify response contains "title" with value "Company CEO"
+    And I verify response contains "department" with value "Board of directors"
+    And I verify response contains "phone_work" with value "+1-800-900-123"
+
+  Scenario: OIDC login flow for SAML user who has previously been provisioned. User not exists in Sugar
+    Given I try to get Mango public metadata
+    Then I navigate to OIDC provider with tenant "srn:cloud:iam:eu:2000000001:tenant" and user "" and custom scope ""
+    Then I should see IdP login page
+    Then I click "a[name=external_login_button]"
+    Then I wait for the page to be loaded
+    Then I should see "Enter your username and password"
+    When I fill in "user7" for "username"
+    And I fill in "user7pass" for "password"
+    And I press "Login"
+    Given I get access_token from STS
+    Then I use access_token to get my full user information for version "v11"
+    And I verify response contains "user_name" with value "user7@provisioned.example.com"
+    And I verify response contains "email.0.email_address" with value "user7@provisioned.example.com"
+    And I verify response contains "full_name" with value "Peter Hansson"
+    And I verify response contains "address_city" with value "Tokyo"
+    And I verify response contains "title" with value "Distinguished Engineer"
+    And I verify response contains "department" with value "Engineering"
+    And I verify response contains "phone_work" with value "+3-800-900-700"
 
   Scenario: Verify OIDC login flow and required fields' provisioning for LDAP user who has not previously been provisioned.
     Given I try to get Mango public metadata
-    Then I navigate to OIDC provider with tenant "srn:cloud:iam::0000000001:tenant" and user "" and custom scope ""
+    Then I navigate to OIDC provider with tenant "srn:cloud:iam::2000000001:tenant" and user "" and custom scope ""
     Then I should see IdP login page
     Given I do IdP login as "onlyldapuser" with password "onlyldapuser"
     Given I get access_token from STS
     Then I use access_token for GET request "/rest/v11/me"
-    And I verify response contains "user_name" with value "onlyldapuser"
-    And I verify response contains "full_name" with value "onlyldapuser@0000000001.com"
-    And I verify response contains "email.0.email_address" with value "onlyldapuser@0000000001.com"
+    And I verify response contains "current_user.user_name" with value "onlyldapuser"
+    And I verify response contains "current_user.full_name" with value "onlyldapuser"
+    And I verify response contains "current_user.email.0.email_address" with value "onlyldapuser@2000000001.com"
 
   Scenario: Verify OIDC login flow for legacy clients with invalid password
     Given I am on the homepage
@@ -163,27 +206,27 @@ Feature: OIDC flow
     Then I use access_token for POST request "/rest/v11/oauth2/sudo/sally"
     And I get access_token from sugar token response
     And I use access_token for GET request "/rest/v11/me"
-    Then I verify response contains "user_name" with value "sally"
-    Then I verify response contains "full_name" with value "sally sally_family"
+    Then I verify response contains "current_user.user_name" with value "sally"
+    Then I verify response contains "current_user.full_name" with value "sally sally_family"
     And I logout
 
   Scenario: Verify SugarCRM token endpoint in OIDC flow
     Given I get access_token for "sally" with password "sally"
     And I use access_token for GET request "/rest/v11/me"
-    Then I verify response contains "user_name" with value "sally"
-    Then I verify response contains "full_name" with value "sally sally_family"
+    Then I verify response contains "current_user.user_name" with value "sally"
+    Then I verify response contains "current_user.full_name" with value "sally sally_family"
 
   Scenario: Verify login service session
     Given I try to get Mango public metadata
-    Then I navigate to OIDC provider with tenant "srn:cloud:idp::0000000001:tenant" and user "" and custom scope ""
+    Then I navigate to OIDC provider with tenant "srn:cloud:idp::2000000001:tenant" and user "" and custom scope ""
     Then I should see IdP login page
     Given I do IdP login as "max" with password "max"
-    When I navigate to OIDC provider with tenant "srn:cloud:idp::0000000001:tenant" and user "" and custom scope ""
+    When I navigate to OIDC provider with tenant "srn:cloud:idp::2000000001:tenant" and user "" and custom scope ""
     Then I should not see a "#username" element
 
   Scenario: Verify that app is restricted by scope
     Given I try to get Mango public metadata
-    Then I navigate to OIDC provider with tenant "0000000001" and user "" and custom scope "test_scope"
+    Then I navigate to OIDC provider with tenant "2000000001" and user "" and custom scope "test_scope"
     Then I should see IdP login page
     Given I do IdP login as "max" with password "max"
     Then I should see "This app hasn't been verified by SugarCRM"

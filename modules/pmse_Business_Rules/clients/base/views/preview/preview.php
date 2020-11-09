@@ -11,6 +11,9 @@
  */
 
 $viewdefs['pmse_Business_Rules']['base']['view']['preview'] = [
+    'templateMeta' => [
+        'maxColumns' => 1,
+    ],
     'panels' => [
         [
             'name' => 'panel_header',

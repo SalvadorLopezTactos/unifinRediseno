@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Публікація затверджених статей та статей бази знань, термін дії яких закінчився.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Заплановане завдання',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Відновити денормалізовані дані безпеки команди',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Модуль очистки стрічки активності',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Інтервал:',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'Запуск надсилання сповіщень електронною поштою',
 'LBL_CLEANJOBQUEUE' => 'Очищення списку завдань',
 'LBL_CLEANOLDRECORDLISTS' => 'Очистити списки зі старими записами',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Модуль очистки стрічки активності',
 'LBL_PMSEENGINECRON' => 'Планувальник SugarBPM',
 );
 

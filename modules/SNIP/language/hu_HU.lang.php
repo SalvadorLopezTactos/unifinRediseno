@@ -51,7 +51,7 @@ $mod_strings = array(
     "LBL_SNIP_PURCHASE_SUMMARY" => "Az emailek archiválásához érvényes licenccel kell rendelkeznie SugarCRM alkalmazása számára",
     "LBL_SNIP_PURCHASE" => "Kattintson ide a vásárláshoz",
     'LBL_SNIP_EMAIL' => 'Email archiválási cím',
-    'LBL_SNIP_AGREE' => "Elfogadom a fenti feltételeket és az adatvédelmi megállapodás tartalmát.",
+    'LBL_SNIP_AGREE' => "Elfogadom a fenti feltételeket és az <a href='https://www.sugarcrm.com/legal/privacy-policy/' target='_blank'>adatvédelmi megállapodás</a> tartalmát.",
     'LBL_SNIP_PRIVACY' => 'adatvédelmi nyilatkozat',
 
     'LBL_SNIP_STATUS_PINGBACK_FAIL' => 'Sikertelen visszamenő ping',

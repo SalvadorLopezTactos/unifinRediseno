@@ -12,7 +12,7 @@
  */
 $viewdefs['Calls']['mobile']['view']['edit'] = array(
     'templateMeta' => array(
-        'maxColumns' => '1', 
+        'maxColumns' => '1',
         'widths' => array(
             array(
                 'label' => '10',
@@ -37,7 +37,7 @@ $viewdefs['Calls']['mobile']['view']['edit'] = array(
                         array(
                             'name' => 'date_end',
                             'required' => true,
-                            'readonly' => false,  
+                            'readonly' => false,
                         ),
                     ),
                 ),
@@ -79,6 +79,7 @@ $viewdefs['Calls']['mobile']['view']['edit'] = array(
                 ),
                 'description',
                 'parent_name',
+                'tag',
                 'assigned_user_name',
                 'team_name',
             ),

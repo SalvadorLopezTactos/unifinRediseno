@@ -89,6 +89,24 @@ $viewdefs['ProductTemplates']['base']['view']['product-catalog-dashlet-drawer-re
                 'category_name',
                 'manufacturer_name',
                 'mft_part_num',
+                array(
+                    'name' => 'service_duration',
+                    'type' => 'fieldset',
+                    'css_class' => 'service-duration-field',
+                    'label' => 'LBL_SERVICE_DURATION',
+                    'inline' => true,
+                    'show_child_labels' => false,
+                    'fields' => array(
+                        array(
+                            'name' => 'service_duration_value',
+                            'label' => 'LBL_SERVICE_DURATION_VALUE',
+                        ),
+                        array(
+                            'name' => 'service_duration_unit',
+                            'label' => 'LBL_SERVICE_DURATION_UNIT',
+                        ),
+                    ),
+                ),
                 'vendor_part_num',
                 'weight',
                 'type_name',

@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en-US" datatype="plaintext" original="en.xlf" target-language="et">
+    <body>
+      <trans-unit id="1">
+        <source>Tenant</source>
+        <target state="needs-translation">Tenant</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>User Name</source>
+        <target state="needs-translation">User Name</target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>Password</source>
+        <target state="needs-translation">Password</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>Forgot Password?</source>
+        <target state="needs-translation">Forgot Password?</target>
+      </trans-unit>
+      <trans-unit id="5">
+        <source>Log In</source>
+        <target state="needs-translation">Log In</target>
+      </trans-unit>
+      <trans-unit id="6">
+        <source>Log out</source>
+        <target state="needs-translation">Log out</target>
+      </trans-unit>
+      <trans-unit id="7">
+        <source>Single Sign-On</source>
+        <target state="needs-translation">Single Sign-On</target>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>You are logged in as %user_name%</source>
+        <target state="needs-translation">You are logged in as %user_name%</target>
+      </trans-unit>
+      <trans-unit id="9">
+        <source>Your tenant id is %tenant%</source>
+        <target state="needs-translation">Your tenant id is %tenant%</target>
+      </trans-unit>
+      <trans-unit id="10">
+        <source>Authentication provider - %provider%</source>
+        <target state="needs-translation">Authentication provider - %provider%</target>
+      </trans-unit>
+      <trans-unit id="11">
+        <source>Application not verified</source>
+        <target state="needs-translation">Application not verified</target>
+      </trans-unit>
+      <trans-unit id="12">
+        <source>This app hasn't been verified by SugarCRM admin yet and confirmed it's authentic.</source>
+        <target state="needs-translation">This app hasn't been verified by SugarCRM admin yet and confirmed it's authentic.</target>
+      </trans-unit>
+      <trans-unit id="13">
+        <source>Unverified apps may pose a threat to your personal data.</source>
+        <target state="needs-translation">Unverified apps may pose a threat to your personal data.</target>
+      </trans-unit>
+      <trans-unit id="14">
+        <source>Back to Safety</source>
+        <target state="needs-translation">Back to Safety</target>
+      </trans-unit>
+      <trans-unit id="15">
+        <source>Application is requesting access</source>
+        <target state="needs-translation">Application is requesting access</target>
+      </trans-unit>
+      <trans-unit id="16">
+        <source>"%client%" is requesting access.</source>
+        <target state="needs-translation">"%client%" is requesting access.</target>
+      </trans-unit>
+      <trans-unit id="17">
+        <source>"%client%" is requesting access to use your Sugar account to:</source>
+        <target state="needs-translation">"%client%" is requesting access to use your Sugar account to:</target>
+      </trans-unit>
+      <trans-unit id="18">
+        <source>Do you want to allow this access?</source>
+        <target state="needs-translation">Do you want to allow this access?</target>
+      </trans-unit>
+      <trans-unit id="19">
+        <source>No, Thanks</source>
+        <target state="needs-translation">No, Thanks</target>
+      </trans-unit>
+      <trans-unit id="20">
+        <source>Allow access</source>
+        <target state="needs-translation">Allow access</target>
+      </trans-unit>
+      <trans-unit id="21">
+        <source>Sorry, service is not able to process the request.</source>
+        <target state="needs-translation">Sorry, service is not able to process the request.</target>
+      </trans-unit>
+      <trans-unit id="22">
+        <source>error</source>
+        <target state="needs-translation">error</target>
+      </trans-unit>
+      <trans-unit id="24">
+        <source>Can't log in? Forget your password?</source>
+        <target state="needs-translation">Can't log in? Forget your password?</target>
+      </trans-unit>
+      <trans-unit id="25">
+        <source>Enter your user name below and we'll send you password reset instructions.</source>
+        <target state="needs-translation">Enter your user name below and we'll send you password reset instructions.</target>
+      </trans-unit>
+      <trans-unit id="26">
+        <source>Required</source>
+        <target state="needs-translation">Required</target>
+      </trans-unit>
+      <trans-unit id="27">
+        <source>Cancel</source>
+        <target state="needs-translation">Cancel</target>
+      </trans-unit>
+      <trans-unit id="28">
+        <source>Send</source>
+        <target state="needs-translation">Send</target>
+      </trans-unit>
+      <trans-unit id="29">
+        <source>Reset your password</source>
+        <target state="needs-translation">Reset your password</target>
+      </trans-unit>
+      <trans-unit id="30">
+        <source>Please choose a new password to finish log in.</source>
+        <target state="needs-translation">Please choose a new password to finish log in.</target>
+      </trans-unit>
+      <trans-unit id="31">
+        <source>Read some tips on %link%creating a secure password.%endlink%</source>
+        <target state="needs-translation">Read some tips on %link%creating a secure password.%endlink%</target>
+      </trans-unit>
+      <trans-unit id="32">
+        <source>New password</source>
+        <target state="needs-translation">New password</target>
+      </trans-unit>
+      <trans-unit id="33">
+        <source>Confirm password</source>
+        <target state="needs-translation">Confirm password</target>
+      </trans-unit>
+      <trans-unit id="34">
+        <source>Change password</source>
+        <target state="needs-translation">Change password</target>
+      </trans-unit>
+      <trans-unit id="35">
+        <source>Password reset successful</source>
+        <target state="needs-translation">Password reset successful</target>
+      </trans-unit>
+      <trans-unit id="36">
+        <source>Awesome, you've successfully updated your password.</source>
+        <target state="needs-translation">Awesome, you've successfully updated your password.</target>
+      </trans-unit>
+      <trans-unit id="37">
+        <source>Now you can log in and check if %link%your profile%endlink% is correct.</source>
+        <target state="needs-translation">Now you can log in and check if %link%your profile%endlink% is correct.</target>
+      </trans-unit>
+      <trans-unit id="38">
+        <source>Password reset email sent</source>
+        <target state="needs-translation">Password reset email sent</target>
+      </trans-unit>
+      <trans-unit id="39">
+        <source>An email has been sent to following address %emailaddress%.</source>
+        <target state="needs-translation">An email has been sent to following address %emailaddress%.</target>
+      </trans-unit>
+      <trans-unit id="40">
+        <source>Follow the direction in the email to reset your password.</source>
+        <target state="needs-translation">Follow the direction in the email to reset your password.</target>
+      </trans-unit>
+      <trans-unit id="41">
+        <source>Done</source>
+        <target state="needs-translation">Done</target>
+      </trans-unit>
+      <trans-unit id="42">
+        <source>Login using SAML</source>
+        <target state="needs-translation">Login using SAML</target>
+      </trans-unit>
+      <trans-unit id="43">
+        <source>User is logged out</source>
+        <target state="needs-translation">User is logged out</target>
+      </trans-unit>
+      <trans-unit id="44">
+        <source>Back</source>
+        <target state="needs-translation">Back</target>
+      </trans-unit>
+      <trans-unit id="45">
+        <source>Invalid tenant ID</source>
+        <target state="needs-translation">Invalid tenant ID</target>
+      </trans-unit>
+      <trans-unit id="46">
+        <source>All fields are required</source>
+        <target state="needs-translation">All fields are required</target>
+      </trans-unit>
+      <trans-unit id="47">
+        <source>Invalid credentials</source>
+        <target state="needs-translation">Invalid credentials</target>
+      </trans-unit>
+      <trans-unit id="48">
+        <source>Password expired</source>
+        <target state="needs-translation">Password expired</target>
+      </trans-unit>
+      <trans-unit id="49">
+        <source>Invalid scope</source>
+        <target state="needs-translation">Invalid scope</target>
+      </trans-unit>
+      <trans-unit id="50">
+        <source>Authentication SAML request is not valid</source>
+        <target state="needs-translation">Authentication SAML request is not valid</target>
+      </trans-unit>
+      <trans-unit id="51">
+        <source>Authentication SAML response is not valid</source>
+        <target state="needs-translation">Authentication SAML response is not valid</target>
+      </trans-unit>
+      <trans-unit id="52">
+        <source>Too many failed login attempts.</source>
+        <target state="needs-translation">Too many failed login attempts.</target>
+      </trans-unit>
+      <trans-unit id="53">
+        <source>Please contact the system administrator.</source>
+        <target state="needs-translation">Please contact the system administrator.</target>
+      </trans-unit>
+      <trans-unit id="54">
+        <source>You can try logging in again in</source>
+        <target state="needs-translation">You can try logging in again in</target>
+      </trans-unit>
+      <trans-unit id="55">
+        <source>days</source>
+        <target state="needs-translation">days</target>
+      </trans-unit>
+      <trans-unit id="56">
+        <source>hours</source>
+        <target state="needs-translation">hours</target>
+      </trans-unit>
+      <trans-unit id="57">
+        <source>minutes</source>
+        <target state="needs-translation">minutes</target>
+      </trans-unit>
+      <trans-unit id="58">
+        <source>seconds</source>
+        <target state="needs-translation">seconds</target>
+      </trans-unit>
+      <trans-unit id="59">
+        <source>Private key and x509cert should be defined</source>
+        <target state="needs-translation">Private key and x509cert should be defined</target>
+      </trans-unit>
+      <trans-unit id="60">
+        <source>Invalid IdP configuration</source>
+        <target state="needs-translation">Invalid IdP configuration</target>
+      </trans-unit>
+      <trans-unit id="61">
+        <source>Invalid authentication services configuration</source>
+        <target state="needs-translation">Invalid authentication services configuration</target>
+      </trans-unit>
+      <trans-unit id="62">
+        <source>LDAP config option groupDn must not be empty</source>
+        <target state="needs-translation">LDAP config option groupDn must not be empty</target>
+      </trans-unit>
+      <trans-unit id="63">
+        <source>LDAP groupAttribute must not be empty</source>
+        <target state="needs-translation">LDAP groupAttribute must not be empty</target>
+      </trans-unit>
+      <trans-unit id="64">
+        <source>LDAP baseDn must not be empty</source>
+        <target state="needs-translation">LDAP baseDn must not be empty</target>
+      </trans-unit>
+      <trans-unit id="65">
+        <source>Consent not found</source>
+        <target state="needs-translation">Consent not found</target>
+      </trans-unit>
+      <trans-unit id="66">
+        <source>Consent session not found</source>
+        <target state="needs-translation">Consent session not found</target>
+      </trans-unit>
+      <trans-unit id="67">
+        <source>Failed to send email for password recovery. Please try again.</source>
+        <target state="needs-translation">Failed to send email for password recovery. Please try again.</target>
+      </trans-unit>
+      <trans-unit id="68">
+        <source>SAML is not configured for given tenant</source>
+        <target state="needs-translation">SAML is not configured for given tenant</target>
+      </trans-unit>
+      <trans-unit id="69">
+        <source>Invalid SAML configuration</source>
+        <target state="needs-translation">Invalid SAML configuration</target>
+      </trans-unit>
+      <trans-unit id="70">
+        <source>SAML metadata validation failed:</source>
+        <target state="needs-translation">SAML metadata validation failed:</target>
+      </trans-unit>
+      <trans-unit id="71">
+        <source>Invalid SAML logout data</source>
+        <target state="needs-translation">Invalid SAML logout data</target>
+      </trans-unit>
+      <trans-unit id="72">
+        <source>Required parameters missing</source>
+        <target state="needs-translation">Required parameters missing</target>
+      </trans-unit>
+      <trans-unit id="73">
+        <source>Invalid parameters</source>
+        <target state="needs-translation">Invalid parameters</target>
+      </trans-unit>
+      <trans-unit id="74">
+        <source>Password is empty</source>
+        <target state="needs-translation">Password is empty</target>
+      </trans-unit>
+      <trans-unit id="75">
+        <source>Password is too short. It should have {{ limit }} characters or more.</source>
+        <target state="needs-translation">Password is too short. It should have {{ limit }} characters or more.</target>
+      </trans-unit>
+      <trans-unit id="76">
+        <source>Password is too long. It should have {{ limit }} characters or less.</source>
+        <target state="needs-translation">Password is too long. It should have {{ limit }} characters or less.</target>
+      </trans-unit>
+      <trans-unit id="77">
+        <source>Password should contains at least one upper-case letter</source>
+        <target state="needs-translation">Password should contains at least one upper-case letter</target>
+      </trans-unit>
+      <trans-unit id="78">
+        <source>Password should contains at least one lower-case letter</source>
+        <target state="needs-translation">Password should contains at least one lower-case letter</target>
+      </trans-unit>
+      <trans-unit id="79">
+        <source>Password should contains at least one number</source>
+        <target state="needs-translation">Password should contains at least one number</target>
+      </trans-unit>
+      <trans-unit id="80">
+        <source>Password should contains at least one special character</source>
+        <target state="needs-translation">Password should contains at least one special character</target>
+      </trans-unit>
+      <trans-unit id="81">
+        <source>Password confirmation is empty</source>
+        <target state="needs-translation">Password confirmation is empty</target>
+      </trans-unit>
+      <trans-unit id="82">
+        <source>Password and password confirmation don't match</source>
+        <target state="needs-translation">Password and password confirmation don't match</target>
+      </trans-unit>
+      <trans-unit id="83">
+        <source>One time token not found</source>
+        <target state="needs-translation">One time token not found</target>
+      </trans-unit>
+      <trans-unit id="84">
+        <source>Tenant not found</source>
+        <target state="needs-translation">Tenant not found</target>
+      </trans-unit>
+      <trans-unit id="85">
+        <source>User not found</source>
+        <target state="needs-translation">User not found</target>
+      </trans-unit>
+      <trans-unit id="86">
+        <source>View</source>
+        <target state="needs-translation">View</target>
+      </trans-unit>
+      <trans-unit id="87">
+        <source>email</source>
+        <target state="needs-translation">email</target>
+      </trans-unit>
+      <trans-unit id="88">
+        <source>address</source>
+        <target state="needs-translation">address</target>
+      </trans-unit>
+      <trans-unit id="89">
+        <source>phone number</source>
+        <target state="needs-translation">phone number</target>
+      </trans-unit>
+      <trans-unit id="90">
+        <source>Access all the above information at any time</source>
+        <target state="needs-translation">Access all the above information at any time</target>
+      </trans-unit>
+      <trans-unit id="91">
+        <source>View your Sugar profile which includes first and last name</source>
+        <target state="needs-translation">View your Sugar profile which includes first and last name</target>
+      </trans-unit>
+      <trans-unit id="92">
+        <source>Authenticate using OpenID Connect</source>
+        <target state="needs-translation">Authenticate using OpenID Connect</target>
+      </trans-unit>
+      <trans-unit id="93">
+        <source>View and update any Sugar data (Accounts, Contacts, Leads, etc.) that you are permitted to access</source>
+        <target state="needs-translation">View and update any Sugar data (Accounts, Contacts, Leads, etc.) that you are permitted to access</target>
+      </trans-unit>
+      <trans-unit id="94">
+        <source>View and manage your Identity and Access Management (IAM) objects</source>
+        <target state="needs-translation">View and manage your Identity and Access Management (IAM) objects</target>
+      </trans-unit>
+      <trans-unit id="95">
+        <source>Only authorized users can change password</source>
+        <target state="needs-translation">Only authorized users can change password</target>
+      </trans-unit>
+      <trans-unit id="96">
+        <source>Only local users can change password</source>
+        <target state="needs-translation">Only local users can change password</target>
+      </trans-unit>
+      <trans-unit id="97">
+        <source>Change your password</source>
+        <target state="needs-translation">Change your password</target>
+      </trans-unit>
+      <trans-unit id="98">
+        <source>Please enter your old password and choose a new password.</source>
+        <target state="needs-translation">Please enter your old password and choose a new password.</target>
+      </trans-unit>
+      <trans-unit id="99">
+        <source>Old password</source>
+        <target state="needs-translation">Old password</target>
+      </trans-unit>
+      <trans-unit id="100">
+        <source>Old password is empty</source>
+        <target state="needs-translation">Old password is empty</target>
+      </trans-unit>
+      <trans-unit id="101">
+        <source>Old password isn't valid</source>
+        <target state="needs-translation">Old password isn't valid</target>
+      </trans-unit>
+      <trans-unit id="102">
+        <source>No user is found</source>
+        <target state="needs-translation">No user is found</target>
+      </trans-unit>
+      <trans-unit id="103">
+        <source>Password changed successful</source>
+        <target state="needs-translation">Password changed successful</target>
+      </trans-unit>
+      <trans-unit id="104">
+        <source>Continue</source>
+        <target state="needs-translation">Continue</target>
+      </trans-unit>
+      <trans-unit id="105">
+        <source>Tenant isn't active</source>
+        <target state="needs-translation">Tenant isn't active</target>
+      </trans-unit>
+      <trans-unit id="106">
+        <source>New password must be different from previous password</source>
+        <target state="needs-translation">New password must be different from previous password</target>
+      </trans-unit>
+      <trans-unit id="107">
+        <source>Show log in form</source>
+        <target state="needs-translation">Show log in form</target>
+      </trans-unit>
+      <trans-unit id="108">
+        <source>Tenant ID</source>
+        <target state="needs-translation">Tenant ID</target>
+      </trans-unit>
+      <trans-unit id="109">
+        <source>Next</source>
+        <target state="needs-translation">Next</target>
+      </trans-unit>
+      <trans-unit id="110">
+        <source>Please proceed with caution and only allow access if you are logging into "%client%".</source>
+        <target state="needs-translation">Please proceed with caution and only allow access if you are logging into "%client%".</target>
+      </trans-unit>
+      <trans-unit id="111">
+        <source>Learn about how %client% will handle your Sugar data by reviewing the %termsLink%Terms of Use%endlink% and %privacyLink%Privacy policies%endlink%.</source>
+        <target state="needs-translation">Learn about how %client% will handle your Sugar data by reviewing the %termsLink%Terms of Use%endlink% and %privacyLink%Privacy policies%endlink%.</target>
+      </trans-unit>
+      <trans-unit id="112">
+        <source>You are about to authorize the application "%client%" to act on behalf of your users using the following permissions:</source>
+        <target state="needs-translation">You are about to authorize the application "%client%" to act on behalf of your users using the following permissions:</target>
+      </trans-unit>
+      <trans-unit id="113">
+        <source>You are about to authorize of application "%client%" to act on behalf of your users.</source>
+        <target state="needs-translation">You are about to authorize of application "%client%" to act on behalf of your users.</target>
+      </trans-unit>
+      <trans-unit id="114">
+        <source>Remove access for application</source>
+        <target state="needs-translation">Remove access for application</target>
+      </trans-unit>
+      <trans-unit id="115">
+        <source>You are about to remove authorization for the application  "%client%" to act on behalf of your users.</source>
+        <target state="needs-translation">You are about to remove authorization for the application  "%client%" to act on behalf of your users.</target>
+      </trans-unit>
+      <trans-unit id="116">
+        <source>You are about to remove authorization of application "%client%" to act on behalf of your users with the following permissions:</source>
+        <target state="needs-translation">You are about to remove authorization of application "%client%" to act on behalf of your users with the following permissions:</target>
+      </trans-unit>
+      <trans-unit id="117">
+        <source>Do you want to remove this access?</source>
+        <target state="needs-translation">Do you want to remove this access?</target>
+      </trans-unit>
+      <trans-unit id="118">
+        <source>Remove access</source>
+        <target state="needs-translation">Remove access</target>
+      </trans-unit>
+      <trans-unit id="119">
+        <source>Authorize access for application</source>
+        <target state="needs-translation">Authorize access for application</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

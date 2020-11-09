@@ -38,14 +38,20 @@ class TrackersViewTrackersettings extends SugarView
     	   translate('LBL_TRACKER_SETTINGS','Administration'),
     	   );
     }
-    
- 	/** 
+
+    /**
      * @see SugarView::display()
      */
- 	public function display()
+    public function display()
     {
         global $mod_strings, $app_strings;
-        
+        global $current_user;
+
+        if (!$current_user->isAdmin()) {
+            ACLController::displayNoAccess();
+            sugar_die('');
+        }
+
         $admin = Administration::getSettings();
         
         require('modules/Trackers/config.php');
@@ -60,8 +66,9 @@ class TrackersViewTrackersettings extends SugarView
                       if(empty($_POST[$entry['name']])) {
                         $admin->saveSetting('tracker', $entry['name'], 1);
                       }	else {
-                        $db = DBManagerFactory::getInstance();
-                        $db->query("DELETE FROM config WHERE category = 'tracker' and name = '" . $entry['name'] . "'");
+                            DBManagerFactory::getInstance()
+                                ->getConnection()
+                                ->delete('config', ['category' => 'tracker', 'name' => $entry['name']]);
                       }
                   }
                } //foreach

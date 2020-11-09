@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'Kontakti',
     'LBL_DISCOUNT_TOTAL' => 'Diskontto yhteensä',
     'LBL_DISCOUNT_AMOUNT' => 'Alennus',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'Alennuksen määrä',
     'LBL_EXT_PRICE' => 'Ulk. hinta',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Valuuttasymbolin nimi',

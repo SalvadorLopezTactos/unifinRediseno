@@ -30,7 +30,12 @@
                            {{#if ResumenProductos.leasing.multilinea_c}}checked{{/if}}
                            data-field="chk_ls_multi"/>
                 </div>
-
+                <div class="ls_excluir">
+                    <label class="record-label excluir" style="margin-left:0px">Excluir pre-calificación</label>
+                    <input type="checkbox" class="chk_ls_excluir"
+                           {{#if ResumenProductos.leasing.exclu_precalif_c}}checked{{/if}}
+                           data-field="chk_ls_excluir"/>
+                </div>
                 {{#if ResumenProductos.leasing.visible_noviable}}
                     <div class="l_nv mpad">
                         <label class="record-label mpad">No Viable Leasing</label>

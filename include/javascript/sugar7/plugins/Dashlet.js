@@ -40,7 +40,14 @@
             onAttach: function () {
                 this.on("init", function () {
                     this.dashletConfig = app.metadata.getView(this.module, this.name);
-                    this.dashModel = this.layout.context.get("model");
+
+                    /**
+                     * Dashboard record bean representing the dashboard to
+                     * which this dashlet is attached.
+                     *
+                     * @property {Object}
+                     */
+                    this.dashModel = this.layout.context.get('model');
 
                     var settings = _.extend({}, this.meta),
                         viewName = 'main',
@@ -48,6 +55,7 @@
                     delete settings.panels;
                     delete settings.action;
                     delete settings.dependencies;
+                    delete settings.buttons;
                     this.settings = new Dashlet(settings);
                     if (settings.module) {
                         this.model = this.context.parent.get("model");
@@ -108,17 +116,28 @@
              */
             _buildGridsFromPanelsMetadata: function() {
                 _.each(this.meta.panels, function (panel) {
+                    if (!_.isUndefined(this.getLabelPlacement)) {
+                        panel.labelsOnTop = this.getLabelPlacement();
+                    }
                     // it is assumed that a field is an object but it can also be a string
                     // while working with the fields, might as well take the opportunity to check the user's ACLs for the field
                     _.each(panel.fields, function (field, index) {
                         if (_.isString(field)) {
                             panel.fields[index] = field = {name: field};
                         }
+                        // bind labelsonTop preference to field for use in
+                        // templates
+                        field.labelsOnTop = panel.labelsOnTop;
                     }, this);
 
                     // labels: visibility for the label
                     if (_.isUndefined(panel.labels)) {
                         panel.labels = true;
+                    }
+
+                    // Set flag so that show more link can be displayed to show hidden panel.
+                    if (panel.hide) {
+                        this.hiddenPanelExists = true;
                     }
 
                     if (_.isFunction(this.getGridBuilder)) {
@@ -150,6 +169,10 @@
                     return this.settings.get('limit') * this.rowHeight;
                 }
             },
+
+            /**
+             * Run when the dashlet plugin is detached.
+             */
             onDetach: function() {
                 this.settings.off();
                 delete this.dashletConfig;

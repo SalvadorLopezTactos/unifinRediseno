@@ -1254,12 +1254,12 @@ function getUserVariable($localVarName, $varName) {
                 $massUpdateRun = isset($_REQUEST['massupdate']) && $_REQUEST['massupdate'] == 'true';
                 $uid = $this->request->getValidInputRequest('uid', array('Assert\Delimited' => array('constraints' => 'Assert\Guid')));
                 $uids = empty($uid) || $massUpdateRun ? '' : implode(',', $uid);
-                $select_entire_list = $massUpdateRun ? 0 : intval($this->request->getValidInputRequest('select_entire_list'));
+                $select_entire_list = $massUpdateRun ? 0 : (int)$this->request->getValidInputRequest('select_entire_list');
 
-                echo "<textarea style='display: none' name='uid'>{$uids}</textarea>\n" .
-                    "<input type='hidden' name='select_entire_list' value='{$select_entire_list}'>\n".
-                    "<input type='hidden' name='{$moduleString}' value='0'>\n".
-                    "<input type='hidden' name='{$moduleStringOrder}' value='0'>\n";
+                echo '<textarea style="display: none" name="uid">' . htmlspecialchars($uids). '</textarea>' .
+                    '<input type="hidden" name="select_entire_list" value="'. $select_entire_list .'">'.
+                    '<input type="hidden" name="' . htmlspecialchars($moduleString) .'" value="0">'.
+                    '<input type="hidden" name="' . htmlspecialchars($moduleStringOrder) .'" value="0">';
 
             }
 

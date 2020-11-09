@@ -12,7 +12,7 @@
 
 use \Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use \Sugarcrm\Sugarcrm\SearchEngine\Capability\GlobalSearch\GlobalSearchCapable;
-
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 class ViewModulefield extends SugarView
 {
@@ -94,9 +94,11 @@ class ViewModulefield extends SugarView
                 $field_name_exceptions[] = strtoupper($beanList[$relModule]) . '_ID';
             }
         }
-
+        $moduleName = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
+        if (!AccessControlManager::instance()->allowFieldAccess($moduleName, $field_name)) {
+            throw new SugarApiExceptionFieldDisabled();
+        }
         if(empty($_REQUEST['view_package']) || $_REQUEST['view_package'] == 'studio') {
-            $moduleName = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
             $objectName = BeanFactory::getObjectName($moduleName);
             $module = BeanFactory::newBean($moduleName);
 
@@ -193,7 +195,6 @@ class ViewModulefield extends SugarView
         {
             require_once('modules/ModuleBuilder/MB/ModuleBuilder.php');
             $mb = new ModuleBuilder();
-            $moduleName = $this->request->getValidInputRequest('view_module', 'Assert\ComponentName');
             $packageName = $this->request->getValidInputRequest('view_package', 'Assert\ComponentName');
             $module =& $mb->getPackageModule($packageName, $moduleName);
             $package =& $mb->packages[$packageName];

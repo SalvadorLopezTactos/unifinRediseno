@@ -1,5 +1,4 @@
 <?php
-if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -141,21 +140,6 @@ $out .=<<<EOQ
             </tr>
 EOQ;
 
-}
-
-if ($db->supports('fulltext')) {
-    if($db->full_text_indexing_installed()){
-        $FTSData = $mod_strings['LBL_FTS_INSTALLED'];
-    }else{
-        $FTSData = "<span class='stop'><b>{$mod_strings['LBL_FTS_INSTALLED_ERR1']}</b>  <br>{$mod_strings['LBL_FTS_INSTALLED_ERR2']}</span>";
-    }
-$out .=<<<EOQ
-            <tr>
-                <td></td>
-                <td><b>{$mod_strings['LBL_FTS']} </b></td>
-                <td>{$FTSData}</td>
-            </tr>
-EOQ;
 }
 
 if(isset($_SESSION['install_type'])  && !empty($_SESSION['install_type'])  && $_SESSION['install_type']=='custom'){
@@ -333,7 +317,7 @@ if (class_exists("ZipArchive")) {
 }
 
 // imap
-if (function_exists('imap_open')) {
+if (extension_loaded('imap')) {
     $imapStatus = "{$mod_strings['LBL_CHECKSYS_OK']}";
 } else {
     $imapStatus = "<span class='stop'><b>{$mod_strings['ERR_CHECKSYS_IMAP']}</b></span>";

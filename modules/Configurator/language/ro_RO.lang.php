@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'Raportul de aspect al imaginii ar trebui să fie 1:1 - 10:01. Imaginea va fi redimensionată.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'Raportul de aspect al imaginii trebuie să fie între 3:1 şi 20:1. Încărcaţi un fişier nou cu acest raport.',
     'ERR_ALERT_FILE_UPLOAD' => 'Eroare in timpul de incarcare a imaginii.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Nu s-a putut crea directorul pentru imagini',
     'LBL_LOGGER'=>'Setari Logger',
 	'LBL_LOGGER_FILENAME'=>'Numele fisierului jurnal',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Extensie',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Maxim log size',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Data format implicita',
 	'LBL_LOGGER_LOG_LEVEL'=>'Conectare la nivel',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Setări jurnal de comentarii',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Număr maxim de caractere de afișat pentru fiecare comentariu',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

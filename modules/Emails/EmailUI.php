@@ -17,6 +17,9 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 use Sugarcrm\Sugarcrm\Util\Serialized;
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Guid;
+use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\ViolationException;
 
 require_once("vendor/ytree/Tree.php");
 require_once("vendor/ytree/ExtNode.php");
@@ -60,6 +63,10 @@ class EmailUI {
 
 		$this->smarty = new Sugar_Smarty();
 		$this->folder = new SugarFolder();
+        $violations = Validator::getService()->validate($current_user->id, new Guid());
+        if ($violations->count()) {
+            throw new ViolationException('Invalid user ID', $violations);
+        }
 		$this->userCacheDir = sugar_cached("modules/Emails/{$current_user->id}");
 		$this->db = DBManagerFactory::getInstance();
         $this->request = InputValidation::getService();

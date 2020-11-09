@@ -15,6 +15,7 @@ namespace Sugarcrm\Sugarcrm\Security\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 use Sugarcrm\Sugarcrm\Security\Validator\ConstraintReturnValueInterface;
 use Sugarcrm\Sugarcrm\Security\Validator\ConstraintReturnValueTrait;
+use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 
 /**
  *
@@ -45,14 +46,29 @@ class File extends Constraint implements ConstraintReturnValueInterface
      */
     public function __construct($options = null)
     {
-        if (!isset($options['baseDirs'])) {
-            $options['baseDirs'][] = realpath(SUGAR_BASE_DIR);
+        $instanceRealPath = realpath(SUGAR_BASE_DIR);
+        if (empty($options['baseDirs'])) {
+            $options['baseDirs'] = [$instanceRealPath];
+        }
 
+        if (!is_array($options['baseDirs'])) {
+            throw new ConstraintDefinitionException('No basedirs defined');
+        }
+
+        $shadowInstancePaths = [];
+        foreach ($options['baseDirs'] as $key => $baseDir) {
+            $baseDir = realpath($baseDir);
+            if ($baseDir === false) {
+                throw new ConstraintDefinitionException('Cannot resolve base dir real path');
+            }
+
+            $options['baseDirs'][$key] = $baseDir;
             // add additional base directory when shadow is enabled
-            if (defined('SHADOW_INSTANCE_DIR')) {
-                $options['baseDirs'][] = SHADOW_INSTANCE_DIR;
+            if (defined('SHADOW_INSTANCE_DIR') && strpos($baseDir, $instanceRealPath) === 0) {
+                $shadowInstancePaths[] = str_replace($instanceRealPath, SHADOW_INSTANCE_DIR, $baseDir);
             }
         }
+        $options['baseDirs'] = array_merge($options['baseDirs'], $shadowInstancePaths);
 
         parent::__construct($options);
     }

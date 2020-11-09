@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+require_once 'include/utils.php';
+
 /**
  * sugar_mkdir
  * Call this function instead of mkdir to apply preconfigured permission
@@ -73,7 +75,7 @@ function sugar_mkdir($pathname, $mode=null, $recursive=false, $context='') {
  * @param $mode - The integer value of the permissions mode to set the created file to
  * @param $$use_include_path - boolean value indicating whether or not to search the the included_path
  * @param $context
- * @return boolean - Returns a file pointer on success, false otherwise
+ * @return resource|false - Returns a file pointer on success, false otherwise
  */
 function sugar_fopen($filename, $mode, $use_include_path=false, $context=null){
 	//check to see if the file exists, if not then use touch to create it.
@@ -135,18 +137,11 @@ function sugar_file_put_contents($filename, $data, $flags=null, $context=null){
  */
 function sugar_file_put_contents_atomic($filename, $data)
 {
-    if (!is_windows()) {
-        // On NFS, we want to interact with the target file system only at the final moment of rename
-        // in order to avoid race conditions, therefore, creating the temporary file in the temporary directory
-        $dir = sys_get_temp_dir();
-    } else {
-        // On Windows, we have to create the temporary file in the destination directory because otherwise,
-        // it will inherit the default permissions of the temporary directory which will block the web server
-        // from accessing the file
-        $dir = dirname($filename);
-    }
-
-    $temp = tempnam($dir, 'sugar');
+    // Suppress notices like "file created in the system's temporary directory"
+    // which may happen on shadow/NFS but are not relevant and will fail PHPUnit tests
+    $level = error_reporting(error_reporting() & ~E_NOTICE);
+    $temp = tempnam(dirname($filename), 'sugar');
+    error_reporting($level);
 
     if ($temp === false) {
         return false;
@@ -160,20 +155,13 @@ function sugar_file_put_contents_atomic($filename, $data)
 
     sugar_chmod($temp);
 
-    if (!@rename($temp, $filename))
-    {
-        @unlink($filename);
-        if (!@rename($temp, $filename))
-        {
-            // cleaning up temp file to avoid filling up temp dir
-            @unlink($temp);
-            trigger_error("sugar_file_put_contents_atomic() : fatal rename failure '$temp' -> '$filename'", E_USER_ERROR);
-        }
-    } else {
-        return file_exists($filename);
+    if (!rename($temp, $filename)) {
+        unlink($temp);
+
+        return false;
     }
 
-    return false;
+    return true;
 }
 
 /**

@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Lista de público objetivo por defecto no encontrada',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'No se han encontrado entradas',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Las entradas han sido procesadas',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Nombre de Seguimiento:',
   'LBL_EDIT_TRACKER_URL'=>'URL de Seguimiento:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'No se han guardado valores óptimos con su cuenta de correo de entrada.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Por favor, revise la configuración del correo de entrada.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} clientes potenciales que fueron creadas a través de esta campaña han sido eliminados desde su creación.',
+    'LBL_PROSPECT_LIST' => 'Lista de Público Objetivo',
 );
 
 

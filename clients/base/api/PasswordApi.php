@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+use Sugarcrm\Sugarcrm\Security\Password\Utilities;
 
 class PasswordApi extends SugarApi
 {
@@ -95,10 +95,18 @@ class PasswordApi extends SugarApi
             // if i need to generate a link
             if ($isLink) {
                 $guid = create_guid();
-                $url = $GLOBALS['sugar_config']['site_url'] . "/index.php?entryPoint=Changenewpassword&guid=$guid";
-                $time_now = TimeDate::getInstance()->nowDb();
-                $q = "INSERT INTO users_password_link (id, username, date_generated) VALUES('" . $guid . "','" . $username . "','" . $time_now . "') ";
-                $usr->db->query($q);
+                $url = prependSiteURL('/index.php?entryPoint=Changenewpassword&guid=' . $guid);
+                $values = [
+                    'guid' => $guid,
+                    'bean_id' => $usr_id,
+                    'bean_type' => $usr->module_name,
+                    'name' => $username,
+                    'platform' => $api->platform,
+                ];
+
+                if (empty(Utilities::insertIntoUserPwdLink($values))) {
+                    throw new SugarApiExceptionRequestMethodFailure(translate('LBL_INSERT_TO_USER_PWD_FAILED'));
+                }
             }
 
             if ($isLink && isset($res['lostpasswordtmpl'])) {

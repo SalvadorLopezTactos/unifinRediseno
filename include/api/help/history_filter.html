@@ -116,6 +116,31 @@
         <td>
             False
         </td>
-    </tr>    
+    </tr>
+    <tr>
+        <td>
+            alias_fields
+        </td>
+        <td>
+            Array
+        </td>
+        <td>
+            A list of field aliases from the valid modules [Tasks, Calls, Emails, Notes, Meetings] that need to be fetched. These field aliases can also be used in 'order_by'.
+            <br>
+            Example:
+            <code>
+            {
+              'record_date': 
+              {
+                'Calls': 'date_start',
+                'Emails': 'date_sent'
+              }
+            }
+            </code>
+        </td>
+        <td>
+            False
+        </td>
+    </tr>
     </tbody>
 </table>

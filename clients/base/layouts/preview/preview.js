@@ -145,6 +145,9 @@
             return;
         }
 
+        // trigger that preview is visible
+        this.layout.context.trigger('tabbed-layout:tab:change', this.name, true);
+
         var layout = this.$el.parents('.sidebar-content');
         layout.find('.side-pane').removeClass('active');
         layout.find('.dashboard-pane').hide();
@@ -165,6 +168,9 @@
         if (!this._isActive()) {
             return;
         }
+
+        // trigger that preview is not visible
+        this.layout.context.trigger('tabbed-layout:tab:change', this.name, false);
 
         var layout = this.$el.parents('.sidebar-content');
         layout.find('.side-pane').addClass('active');

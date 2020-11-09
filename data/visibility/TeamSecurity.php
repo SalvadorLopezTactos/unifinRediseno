@@ -14,6 +14,7 @@ use Sugarcrm\Sugarcrm\Bean\Visibility\Strategy;
 use Sugarcrm\Sugarcrm\Bean\Visibility\Strategy\AllowAll;
 use Sugarcrm\Sugarcrm\Bean\Visibility\Strategy\DenyAll;
 use Sugarcrm\Sugarcrm\Bean\Visibility\Strategy\TeamSecurity\Denormalized;
+use Sugarcrm\Sugarcrm\Bean\Visibility\Strategy\TeamSecurity\Retrieve;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\State;
 
@@ -113,6 +114,11 @@ class TeamSecurity extends NormalizedTeamSecurity
             if ($state->isAvailable()) {
                 return new Denormalized($state->getActiveTable(), $this->user);
             }
+        }
+
+        if (!empty($this->options['prefetch_for_retrieve'])
+            && !empty($this->options['bean_id']) ) {
+            return new Retrieve($this->user, $this->options['bean_id']);
         }
 
         return (new NormalizedTeamSecurity($this->bean))->setOptions($this->options);

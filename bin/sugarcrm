@@ -11,6 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
 use Sugarcrm\Sugarcrm\Console\Application;
 use Sugarcrm\Sugarcrm\Console\CommandRegistry\CommandRegistry;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
@@ -21,7 +22,7 @@ if (PHP_SAPI !== 'cli') {
     die('This command can only be invoked from the command line.' . PHP_EOL);
 }
 
-if (!file_exists(__DIR__ . '/../vendor/composer/autoload_classmap.php')) {
+if (!file_exists(__DIR__ . '/../vendor/autoload.php')) {
     die('Run "composer install" before using SugarCRM Console' . PHP_EOL);
 }
 
@@ -52,15 +53,17 @@ if (!empty($sugar_config['dbconfig']['db_name'])) {
     require_once 'include/entryPoint.php';
     $GLOBALS['current_user']->getSystemUser();
 
+    // allow admin to access everything
+    $adminWork = new AdminWork();
+    $adminWork->startAdminWork();
+
     $context = Container::getInstance()->get(Context::class);
     $subject = new Cli();
     $context->activateSubject($subject);
 
     $mode = CommandRegistry::MODE_INSTANCE;
 } else {
-    define('SUGAR_BASE_DIR', $sugarBaseDir);
-    require_once 'include/utils/autoloader.php';
-    SugarAutoLoader::init(false);
+    require 'vendor/autoload.php';
     $mode = CommandRegistry::MODE_STANDALONE;
 }
 

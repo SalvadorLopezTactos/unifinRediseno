@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => '电子邮件：联系人',
     'LBL_EMAILS_LEADS_REL' => '电子邮件：潜在客户',
     'LBL_EMAILS_OPPORTUNITIES_REL' => '电子邮件：商业机会',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => '电子邮件：笔记',
     'LBL_EMAILS_PROJECT_REL' => '电子邮件：项目',
     'LBL_EMAILS_PROJECT_TASK_REL' => '电子邮件：ProjectTask',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => '发件人：',
     'LBL_REPLY_TO' => '收件人：',
     'LBL_HTML_BODY' => 'HTML正文',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => '收件人',
     'LBL_LEADS_SUBPANEL_TITLE' => '潜在客户',
     'LBL_MESSAGE_SENT' => '发送消息',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => '收件人编号',
     'LBL_TYPE' => '类型:',
     'LBL_EMAIL_STATE' => '状态',
+    'LBL_EMAIL_DIRECTION' => '方向',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => '请检查！',

@@ -29,9 +29,9 @@
             tagRegExp = /@\[([\w]+):([\d\w\-]+):(.+?)\]/g,
             nbspRegExp = /&nbsp;/g;
 
-        app.plugins.register('Taggable', ['view'], {
+        app.plugins.register('Taggable', ['view', 'field'], {
             events: {
-                'keypress .taggable': '_checkForReferenceOrMention',
+                'keypress .taggable': '_onKeyPress',
                 'keydown .taggable': '_onKeydown',
                 'keyup .taggable': '_onKeyup',
                 'mouseover .activitystream-tag-dropdown li': '_setListOptionAsActive',
@@ -40,6 +40,7 @@
 
             taggableSearchAfter: 2, //search after entering this many characters
             taggableListLength: 8, //the number of search results that should be returned
+            taggableCursorPosition: 0, // position of the cursor
 
             /**
              * Reset typeahead when user clicks anywhere outside the dropdown.
@@ -109,12 +110,16 @@
              */
             formatTags: function(text) {
                 var html = '';
+                var labelNames = [
+                    'LBL_VALUE_ERASED',
+                    'LBL_NO_DATA_AVAILABLE_NO_PERIOD',
+                ];
 
                 if (text && (text.length > 0)) {
                     html = text.replace(tagRegExp, function(str, module, id, name) {
-                        // Use "Value erased" if the name has been erased.
-                        if (name === 'LBL_VALUE_ERASED') {
-                            name = app.lang.get('LBL_VALUE_ERASED', module);
+                        // Support for Value Erased and No data available
+                        if (_.contains(labelNames, name)) {
+                            name = app.lang.get(name, module);
                         }
 
                         // The backend mangles special characters, so we must
@@ -152,7 +157,9 @@
              * @param keypress
              * @private
              */
-            _checkForReferenceOrMention: function(event) {
+            _onKeyPress: function(event) {
+                this.taggableCursorPosition = this._getTaggableInput().prop('selectionStart');
+
                 // When taggable is disabled
                 if (!this._taggableEnabled) {
                     // enable taggable typeahead when @ or # is pressed
@@ -212,6 +219,26 @@
                             break;
                     }
                 }
+
+                var isTextarea = this._isTextArea(this._getTaggableInput());
+                // Reset taggable if we delete the @ or #
+                if (this._taggableEnabled && isTextarea && this._willDeleteMention()) {
+                    this._resetTaggable();
+                }
+            },
+
+            /**
+             * Checks if the char to be deleted will be a @ or #
+             * This is only to be used by textarea fields
+             * @return {boolean}
+             * @private
+             */
+            _willDeleteMention: function() {
+                var currentChar = this._getTaggableInput().val()[this.taggableCursorPosition];
+                if (currentChar === '@' || currentChar === '#') {
+                    return true;
+                }
+                return false;
             },
 
             /**
@@ -224,6 +251,8 @@
             _onKeyup: function(event) {
                 var selection = window.getSelection(),
                     range, $container, searchTerm;
+                var $taggable = this._getTaggableInput();
+                var isTextarea = this._isTextArea($taggable);
 
                 if (this._taggableEnabled) {
                     // Do not perform search if enter, tab, up arrow, or down arrow has been pressed while tag search
@@ -232,29 +261,58 @@
                         return;
                     }
 
-                    if (selection.rangeCount > 0) {
+                    if (isTextarea) {
+                        $container = $taggable;
+                        searchTerm = this.getCurrentSearchTerm($container);
+                    } else if (selection.rangeCount > 0) {
                         range = selection.getRangeAt(0);
                         $container = $(range.startContainer.parentNode);
-                        searchTerm = $.trim($container.text());
+                        searchTerm = $container.text();
+                    } else {
+                        return;
+                    }
 
-                        // Reset taggable if the cursor is outside the tagging span
-                        if (!$container.hasClass('sugar_tagging')) {
-                            this._resetTaggable();
-                        } else if (this._taggableListOpen && (searchTerm.length <= this.taggableSearchAfter)) {
-                            this._getDropdown().hide();
-                            this._taggableListOpen = null;
-                            this._taggableLastSearchTerm = null;
+                    searchTerm = $.trim(searchTerm);
+
+                    // Reset taggable if the cursor is outside the tagging span
+                    if (!$container.hasClass('sugar_tagging') && !isTextarea) {
+                        this._resetTaggable();
+                    } else if (this._taggableListOpen && (searchTerm.length <= this.taggableSearchAfter)) {
+                        this._getDropdown().hide();
+                        this._taggableListOpen = null;
+                        this._taggableLastSearchTerm = null;
+                    } else {
+                        if ((searchTerm.indexOf(mention) === 0) || (searchTerm.indexOf(reference) === 0)) {
+                            // Search for possible matches
+                            this._searchForTags(searchTerm);
                         } else {
-                            if ((searchTerm.indexOf(mention) === 0) || (searchTerm.indexOf(reference) === 0)) {
-                                // Search for possible matches
-                                this._searchForTags(searchTerm);
-                            } else {
-                                // Reset taggable if user deletes either the beginning @ or # character
-                                this._resetTaggable();
-                            }
+                            // Reset taggable if user deletes either the beginning @ or # character
+                            this._resetTaggable();
                         }
                     }
                 }
+            },
+
+            /**
+             * Gets the search term including @ or #
+             * Only supports textarea and input fields
+             *
+             * @param {jQuery} $container jQuery object for textarea
+             * @return {string}
+             */
+            getCurrentSearchTerm: function($container) {
+                var value = $container.val();
+                var char = value[this.taggableCursorPosition];
+                var start = this.taggableCursorPosition;
+                // find where the closest preceding @ or # is
+                while (char !== '@' && char !== '#') {
+                    if (start < 0) {
+                        return '';
+                    }
+                    start--;
+                    char = value[start];
+                }
+                return value.substring(start, this.taggableCursorPosition + 1);
             },
 
             /**
@@ -263,23 +321,27 @@
              * @private
              */
             _enableTaggable: function() {
-                var selection = window.getSelection(),
-                    range = selection.getRangeAt(0),
-                    tagElement = $(taggingHtml),
-                    textNode = tagElement.contents()[0],
-                    cursorPosition = _.some([/chrome/, /safari/, /opera\//, /webkit/], function(rx) {
-                        return rx.test(navigator.userAgent.toLowerCase());
-                    }) ? 1 : 0;
-
-                if (this._shouldEnableTaggable(range)) {
-                    range.insertNode(tagElement.get(0));
-                    range.setStart(textNode, cursorPosition);
-                    range.setEnd(textNode, cursorPosition);
-
-                    selection.removeAllRanges();
-                    selection.addRange(range);
-
+                if (this._isTextArea(this._getTaggableInput())) {
                     this._taggableEnabled = true;
+                } else {
+                    var selection = window.getSelection();
+                    var range = selection.getRangeAt(0);
+                    var tagElement = $(taggingHtml);
+                    var textNode = tagElement.contents()[0];
+                    var cursorPosition = _.some([/chrome/, /safari/, /opera\//, /webkit/], function(rx) {
+                            return rx.test(navigator.userAgent.toLowerCase());
+                        }) ? 1 : 0;
+
+                    if (this._shouldEnableTaggable(range)) {
+                        range.insertNode(tagElement.get(0));
+                        range.setStart(textNode, cursorPosition);
+                        range.setEnd(textNode, cursorPosition);
+
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+
+                        this._taggableEnabled = true;
+                    }
                 }
             },
 
@@ -315,13 +377,15 @@
              * @private
              */
             _resetTaggable: function() {
-                var $taggable = this._getTaggableInput().focus(),
-                    selection = window.getSelection(),
-                    range = selection.getRangeAt(0),
-                    $taggingSpan;
+                var $taggable = this._getTaggableInput().focus();
+                var selection = window.getSelection();
+                if (selection.rangeCount > 0) {
+                    var range = selection.getRangeAt(0);
+                }
+                var isTextarea = this._isTextArea($taggable);
 
-                if (this._taggableEnabled) {
-                    $taggingSpan = $taggable.find('.sugar_tagging');
+                if (this._taggableEnabled && !isTextarea) {
+                    var $taggingSpan = $taggable.find('.sugar_tagging');
 
                     if ($taggingSpan.length > 0) {
                         range.selectNodeContents($taggingSpan.get(0));
@@ -360,31 +424,36 @@
                     $tagToReplace = $taggable.find('.sugar_tagging'),
                     selection, range, $tagHtml;
 
+                var isTextArea = this._isTextArea($taggable);
+
                 if (!$selected.hasClass('disabled')) { //do not insert disabled tag option
                     $taggable.focus();
 
-                    selection = window.getSelection();
-                    range = selection.getRangeAt(0);
-                    $tagHtml = $(tagInEditTemplate(taggableData));
+                    if (isTextArea) {
+                        this._insertIntoTextarea($taggable, taggableData);
+                    } else {
+                        selection = window.getSelection();
+                        range = selection.getRangeAt(0);
+                        $tagHtml = $(tagInEditTemplate(taggableData));
 
-                    range.selectNode($tagToReplace.get(0));
-                    range.insertNode($tagHtml.get(0));
-                    range.selectNode($tagHtml.get(0));
-                    range.collapse(false);
+                        range.selectNode($tagToReplace.get(0));
+                        range.insertNode($tagHtml.get(0));
+                        range.selectNode($tagHtml.get(0));
+                        range.collapse(false);
 
-                    selection.removeAllRanges();
-                    selection.addRange(range);
+                        selection.removeAllRanges();
+                        selection.addRange(range);
 
-                    $tagToReplace
-                        .before('&nbsp;')
-                        .remove();
+                        $tagToReplace
+                            .before('&nbsp;')
+                            .remove();
 
-                    $tagHtml.data({
-                        id: taggableData.id,
-                        name: taggableData.name,
-                        module: taggableData.module
-                    });
-
+                        $tagHtml.data({
+                            id: taggableData.id,
+                            name: taggableData.name,
+                            module: taggableData.module
+                        });
+                    }
                     this._removeDropdown();
 
                     this._taggableEnabled = false;
@@ -393,6 +462,31 @@
                 }
 
                 event.preventDefault();
+            },
+
+            /**
+             * Insert the taggable variable directly into the textarea field and replace the searchterm
+             *
+             * @param {jQuery} $textarea textarea jQuery object
+             * @param {Object} taggableData contains module, id and name of mention tag
+             * @private
+             */
+            _insertIntoTextarea: function($textarea, taggableData) {
+                if (!$textarea) {
+                    return;
+                }
+
+                var variable = '@[' + taggableData.module + ':' + taggableData.id + ':' + taggableData.name + ']';
+                var lengthOfSearchTerm = this.getCurrentSearchTerm($textarea).length;
+                var startOfSearchTerm = this.taggableCursorPosition - lengthOfSearchTerm + 1;
+                var currentText = $textarea.val();
+
+                var front = currentText.substring(0, startOfSearchTerm);
+                var back = currentText.substring(this.taggableCursorPosition + 1, currentText.length);
+                // compose new text data that removes the searchterm (and the @ or #) and replaces it with
+                // the @mention variable
+                $textarea.val(front + variable + back);
+                $textarea.trigger('change');
             },
 
             /**
@@ -462,12 +556,17 @@
             _populateTagList: function(collection, searchTerm) {
                 var $tagList = this._initializeDropdown(),
                     currentSearchTerm;
+                var isTextarea = this._isTextArea(this._getTaggableInput());
 
                 if (collection.length > 0) {
                     searchTerm = $.trim(searchTerm);
 
                     // If the current search term differs from what was searched, do not display the dropdown list
-                    currentSearchTerm = $.trim(this._getTaggableInput().find('.sugar_tagging').text());
+                    if (isTextarea) {
+                        currentSearchTerm = $.trim(this.getCurrentSearchTerm(this._getTaggableInput()));
+                    } else {
+                        currentSearchTerm = $.trim(this._getTaggableInput().find('.sugar_tagging').text());
+                    }
                     if ($.trim(currentSearchTerm.substr(1)) !== searchTerm) {
                         this._taggableLastSearchTerm = null;
                         return;
@@ -616,6 +715,17 @@
              */
             _getTaggableInput: function() {
                 return this.$('.taggable');
+            },
+
+            /**
+             * Checks if the $input is a textarea
+             *
+             * @param {jQuery} $input Input to be checked
+             * @return {boolean}
+             * @private
+             */
+            _isTextArea: function($input) {
+                return $input.prop('nodeName') === 'TEXTAREA';
             },
 
             /**

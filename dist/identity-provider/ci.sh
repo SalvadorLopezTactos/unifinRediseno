@@ -13,4 +13,5 @@ cp -rf app/config/certs/travis.key.dist app/config/certs/travis.key
 
 # Setup real database for Functional Tests suite
 mysql -uroot -e "create database idm_db;" -pSugar123
+export DISABLE_GRPC=true
 ./bin/console migrations:migrate --no-interaction && ./bin/console fixtures:load

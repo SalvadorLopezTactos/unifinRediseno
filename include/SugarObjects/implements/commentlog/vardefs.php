@@ -32,6 +32,11 @@ $vardefs = array(
             'studio' => array(
                 'listview' => false,
                 'recordview' => true,
+                'wirelesseditview' => false,
+                'wirelessdetailview' => true,
+                'wirelesslistview' => false,
+                'wireless_basic_search' => false,
+                'wireless_advanced_search' => false,
             ),
             'full_text_search' => array(
                 'enabled' => true,

@@ -54,7 +54,7 @@ $mod_strings = array(
     "LBL_SNIP_PURCHASE_SUMMARY" => "لاستخدام خدمة أرشفة البريد الإلكتروني، يتعين عليك شراء ترخيص لمثال SugarCRM الخاص بك",
     "LBL_SNIP_PURCHASE" => "انقر هنا للشراء",
     'LBL_SNIP_EMAIL' => 'عنوان أرشفة البريد الإلكتروني',
-    'LBL_SNIP_AGREE' => "أوافق على الشروط أعلاه و <a href='http://www.sugarcrm.com/crm/TRUSTe/privacy.html' target='_blank'>اتفاقية الخصوصية</a>.",
+    'LBL_SNIP_AGREE' => "أوافق على الشروط أعلاه و<a href='https://www.sugarcrm.com/legal/privacy-policy/' target='_blank'>سياسة الخصوصية</a>.",
     'LBL_SNIP_PRIVACY' => 'اتفاقية الخصوصية',
 
     'LBL_SNIP_STATUS_PINGBACK_FAIL' => 'تعذر اختبار الاتصال',

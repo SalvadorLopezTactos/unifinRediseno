@@ -15,7 +15,7 @@ $viewdefs[$module_name]['base']['menu']['quickcreate'] = array(
     'layout' => 'create',
     'label' => 'LNK_NEW_LEAD',
     'visible' => true,
-    'order' => 3,
+    'order' => 4,
     'icon' => 'fa-plus',
     'related' => array(
         array(

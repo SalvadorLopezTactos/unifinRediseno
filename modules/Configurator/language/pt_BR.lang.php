@@ -193,9 +193,9 @@ $mod_strings = array (
     'LBL_ALERT_SIZE_RATIO' => 'A taxa de proporção da imagem deve estar entre 1:1 e 10:1. A imagem será redimensionada.',
     'LBL_ALERT_SIZE_RATIO_QUOTES' => 'A taxa de proporção da imagem deve estar entre 3:1 e 20:1. Carregue um novo arquivo com essa proporção.',
     'ERR_ALERT_FILE_UPLOAD' => 'Erro durante o carregamento da imagem.',
+    'ERR_ALERT_CUSTOM_IMAGES_PATH' => 'Não é possível criar um diretório para imagens',
     'LBL_LOGGER'=>'Configurações de agente de log',
 	'LBL_LOGGER_FILENAME'=>'Nome do arquivo de log',
-	'LBL_LOGGER_FILE_EXTENSION'=>'Extensão',
 	'LBL_LOGGER_MAX_LOG_SIZE'=>'Tamanho máximo do log',
 	'LBL_LOGGER_DEFAULT_DATE_FORMAT'=>'Formato padrão da data',
 	'LBL_LOGGER_LOG_LEVEL'=>'Nível do Log',
@@ -457,6 +457,10 @@ BSOFR
     //Comment log settings
     'LBL_COMMENT_LOG_SETTINGS' => 'Configurações do registo de comentários',
     'LBL_COMMENT_LOG_MAX_CHARS' => 'Número máximo de caracteres que podem ser exibidos por entrada de comentário',
+
+    'LBL_SUGAR_CATALOG_SETTINGS' => 'Sugar Catalog Settings',
+    'LBL_SUGAR_CATALOG_ENABLED' => 'Sugar Catalog Enabled',
+    'LBL_SUGAR_CATALOG_URL' => 'Sugar Catalog URL',
 );
 
 

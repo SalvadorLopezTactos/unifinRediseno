@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => 'Atribuir o usuário aplicado',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Visualização da estrutura do processo',
+    'LBL_PROJECT_RUN_ORDER' => 'Executar ordem',
 );
 

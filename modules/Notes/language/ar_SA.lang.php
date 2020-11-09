@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => 'تاريخ التعديل',
     'LBL_DELETED' => 'تم الحذف',
     'LBL_REVENUELINEITEMS' => 'بنود العائدات',
+    'LBL_ENTRY_SOURCE' => 'مصدر الملاحظة',
+    'LBL_SOURCE_EXTERNAL' => 'خارجي',
+    'LBL_SOURCE_INTERNAL' => 'داخلي',
 
     // Help Text
     // List View Help Text

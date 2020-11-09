@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Řídicí panel seznamu kontaktů',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Řídicí panel záznamů kontaktů',
-
+    'LBL_SITE_USER_ID' => 'Hodnota hash adresy url webu a id kontaktu',
+    'LBL_COOKIE_CONSENT' => 'Souhlas se soubory cookie',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Souhlas se soubory cookie byl přijat',
     'LNK_CONTACT_REPORTS' => 'Přehled reportů kontaktů',
     'ERR_DELETE_RECORD' => 'Pro smazání kontaktu musí být zadáno číslo záznamu.',
     'LBL_ACCOUNT_ID' => 'ID společnosti:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'Vstupní informace',
     'LBL_PORTAL_NAME' => 'Vstupní jméno:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'Vloženo vstupní heslo:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'Název společnosti uživatele portálu',
     'LBL_RECORD_SAVED_SUCCESS' => 'Úspěšně jste vytvořili {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_STREET' => 'Ulice',
     'LBL_POSTAL_CODE' => 'PSČ:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'Obchody',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenty',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Nabídky',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'Nabídky (Dodat na)',
     'LBL_QUOTES_BILL_TO' => 'Nabídky (Fakturovat na)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Položky nabídky',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'Klikněte zde k úpravě svého profilu',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'Zde můžete nastavit svůj preferovaný jazyk. Změní se tím jazyk použitý na Sugar portálu.',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'Na svůj profil se můžete kdykoliv vrátit použitím nabídky Uživatel.',
+    'ERR_PORTAL_NAME_EXISTS' => 'Název portálu {0} již existuje. Duplicitní názvy portálů nejsou povoleny. Změňte název portálu tak, aby byl jedinečný.',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'D&B hlavní Id',
@@ -273,4 +278,8 @@ Chcete-li vytvořit {{module_name}}:
     'LBL_FILTER_CONTACTS_REPORTS' => 'Reporty kontaktů',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Se souhlasem pro obchodní účely',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Poslední aktualizace souhlasu',
+
+    'LBL_ENTRY_SOURCE' => 'Zdroj kontaktu',
+    'LBL_SOURCE_EXTERNAL' => 'Externí',
+    'LBL_SOURCE_INTERNAL' => 'Interní',
 );

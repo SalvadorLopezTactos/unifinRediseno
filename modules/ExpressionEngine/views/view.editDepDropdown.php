@@ -15,7 +15,6 @@ class ViewEditDepDropdown extends SugarView
 {
     public function __construct()
     {
-        $this->options['show_footer'] = false;
         if (isset ($_REQUEST['embed']) && $_REQUEST['embed'])
         {
             $this->options['show_header'] = false;

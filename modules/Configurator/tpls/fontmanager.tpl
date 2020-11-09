@@ -67,16 +67,6 @@ YAHOO.util.Event.onDOMReady(function() {
     };
     var fontDataTable = new YAHOO.widget.DataTable("YuiListMarkup", fontColumnDefs, fontDataSource, oConfigs);
 
-    fontDataTable.subscribe("linkClickEvent", function(oArgs){
-        if(oArgs.target.name == "deleteButton"){
-            if(confirm('{/literal}{$MOD.LBL_JS_CONFIRM_DELETE_FONT}{literal}')){
-            	   document.getElementById("fontmanager").action.value = "deleteFont";
-            	   document.getElementById("fontmanager").filename.value = this.getRecord(oArgs.target)._oData.filename;
-            	   document.getElementById("fontmanager").submit();
-            }
-        }
-    });
-    
     document.getElementById('gobackbutton').onclick=function(){
         if(document.getElementById("fontmanager").return_action.value != ""){
         	document.location.href='index.php?module=Configurator&action=' + document.getElementById("fontmanager").return_action.value;

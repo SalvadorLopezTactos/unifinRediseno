@@ -19,8 +19,12 @@
 
 use Psr\Log\LoggerInterface;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\ViolationException;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\Context;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Language;
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
+use Sugarcrm\Sugarcrm\ProductDefinition\Config\Config as ProductDefinitionConfig;
 
 function make_sugar_config(&$sugar_config)
 {
@@ -28,6 +32,7 @@ function make_sugar_config(&$sugar_config)
     global $admin_export_only;
     global $cache_dir;
     global $calculate_response_time;
+    global $clear_resolved_date;
     global $create_default_user;
     global $dateFormats;
     global $dbconfig;
@@ -83,8 +88,11 @@ function make_sugar_config(&$sugar_config)
     'export_delimiter' => empty($export_delimiter) ? ',' : $export_delimiter,
     'cache_dir' => empty($cache_dir) ? 'cache/' : $cache_dir,
     'calculate_response_time' => empty($calculate_response_time) ? true : $calculate_response_time,
+    'clear_resolved_date' => empty($clear_resolved_date) ? true : $clear_resolved_date,
     'create_default_user' => empty($create_default_user) ? false : $create_default_user,
     'chartEngine' => 'sucrose',
+    'catalog_enabled' => false,
+    'catalog_url' => 'https://appcatalog.service.sugarcrm.com',
     'commentlog' => array(
         'maxchars' => 500,
     ),
@@ -233,6 +241,10 @@ function make_sugar_config(&$sugar_config)
             'merge_relate_update_timeout' => 90000,
             'merge_relate_max_attempt' => 3,
         ),
+        'allowed_link_schemes' => [
+            'http',
+            'https',
+        ],
     );
 }
 
@@ -255,6 +267,7 @@ function get_sugar_config_defaults()
     'error_number_of_cycles' =>  '10',
     'export_delimiter' => ',',
     'export_excel_compatible' => false,
+    'clear_resolved_date' => true,
     'cache_dir' => 'cache/',
     'calculate_response_time' => true,
     'commentlog' => array(
@@ -262,6 +275,8 @@ function get_sugar_config_defaults()
     ),
     'create_default_user' => false,
     'chartEngine' => 'sucrose',
+    'catalog_enabled' => false,
+    'catalog_url' => 'https://appcatalog.service.sugarcrm.com',
     'date_formats' => array (
     'Y-m-d' => '2010-12-23', 'm-d-Y' => '12-23-2010', 'd-m-Y' => '23-12-2010',
     'Y/m/d' => '2010/12/23', 'm/d/Y' => '12/23/2010', 'd/m/Y' => '23/12/2010',
@@ -325,10 +340,14 @@ function get_sugar_config_defaults()
     'list_max_entries_per_subpanel' => 5,
     'wl_list_max_entries_per_page' => 10,
     'wl_list_max_entries_per_subpanel' => 3,
+    'allowed_link_schemes' => array(
+        'http',
+        'https',
+    ),
     'lock_default_user_name' => false,
     'log_memory_usage' => false,
     'portal_view' => 'single_user',
-    'preview_edit' => false,
+    'preview_edit' => true,
     'resource_management' => array (
         'special_query_limit' => 50000,
         'special_query_modules' => array('Reports', 'Export', 'Import', 'Administration', 'Sync'),
@@ -371,7 +390,6 @@ function get_sugar_config_defaults()
     'default_navigation_paradigm' => 'gm',
     'admin_access_control' => false,
       'use_common_ml_dir'	=> false,
-      'common_ml_dir' => '',
     'vcal_time' => '2',
     'calendar' => array(
       'default_view' => 'week',
@@ -462,7 +480,7 @@ function get_sugar_config_defaults()
         'sugar_max_int' => 2147483647,
         'max_aggregate_email_attachments_bytes' => 10000000,
         'new_email_addresses_opted_out' => false,
-        'activity_streams_enabled' => true,
+        'activity_streams_enabled' => false,
         'activity_streams' => [
             // No more than the following number of Data Privacy records will be processed by a single cron job
             // execution.
@@ -472,16 +490,21 @@ function get_sugar_config_defaults()
             // minutes) for multiple Data Privacy records to be grouped in a single job before going into execution.
             'erasure_job_delay' => 0,
         ],
-        'idm_mode' => [
-            'enabled' => false,
-        ],
         'marketing_extras_enabled' => true,
         'marketing_extras_url' => 'https://marketing.sugarcrm.com/content',
+        'default_background_image' => 'include/images/login-background.png',
+
         'analytics' => array(
             'enabled' => true,
             'connector' => 'Pendo',
             'id' => '1dd345e9-b638-4bd2-7bfb-147a937d4728',
         ),
+        // portal
+        'portal' => [
+            'modules' => [
+                'KBContents',
+            ],
+        ],
     );
 
     if (empty($locale)) {
@@ -491,6 +514,7 @@ function get_sugar_config_defaults()
     $sugar_config_defaults['default_currencies'] = $locale->getDefaultCurrencies();
 
     $sugar_config_defaults = sugarArrayMerge($locale->getLocaleConfigDefaults(), $sugar_config_defaults);
+    $sugar_config_defaults[ProductDefinitionConfig::SUGAR_CONFIG_KEY] = ProductDefinitionConfig::DEFAULT_CONFIG;
 
     $sugar_config_defaults[TeamBasedACLConfigurator::CONFIG_KEY] = TeamBasedACLConfigurator::getDefaultConfig();
     return( $sugar_config_defaults );
@@ -745,7 +769,7 @@ function get_team_array($add_blank = false)
     } else {
         $query = 'SELECT t1.id, t1.name, t1.name_2 FROM teams t1, team_memberships t2 ';
         $where = 't1.deleted = 0 and t2.deleted = 0 and t1.id=t2.team_id and t2.user_id = '
-            . "'" . $current_user->id . "'";
+            . $db->quoted($current_user->id);
     }
 
     $team = BeanFactory::newBean('Teams');
@@ -967,6 +991,14 @@ function return_app_list_strings_language($language, $useCache = true)
 
     //Merge language files together
     foreach ($langs as $key => $lang) {
+
+        $violations = Validator::getService()->validate($lang, new Language());
+        if ($violations->count() > 0) {
+            throw new ViolationException(
+                'Violation for language value',
+                $violations
+            );
+        }
 
         $app_list_strings_state = $app_list_strings;
             foreach(SugarAutoLoader::existing(
@@ -3041,13 +3073,7 @@ function decodeJavascriptUTF8($str)
  */
 function check_php_version(string $version = PHP_VERSION)
 {
-    if (version_compare($version, '7.1.0', '<')) {
-        return -1;
-    }
-
-    if (version_compare($version, '7.2.0-dev', '>=')
-        && version_compare($version, '7.3.0', '<')
-    ) {
+    if (version_compare($version, '7.3.0', '<')) {
         return -1;
     }
 
@@ -3163,7 +3189,7 @@ function sugar_cleanup($exit = false)
     }
 
     // Now write the cached tracker_queries
-    if (class_exists("TrackerManager")) {
+    if (class_exists(TrackerManager::class, false)) {
         $trackerManager = TrackerManager::getInstance();
         if ($monitor = $trackerManager->getMonitor('tracker_queries')) {
             $trackerManager->saveMonitor($monitor, true);
@@ -3177,8 +3203,8 @@ function sugar_cleanup($exit = false)
     //check to see if this is not an `ajax call AND the user preference error flag is set
     if(
         (isset($_SESSION['USER_PREFRENCE_ERRORS']) && $_SESSION['USER_PREFRENCE_ERRORS'])
-        && ($_REQUEST['action']!='modulelistmenu' && $_REQUEST['action']!='DynamicAction')
-        && ($_REQUEST['action']!='favorites' && $_REQUEST['action']!='DynamicAction')
+        && ($_REQUEST['action']!=='modulelistmenu' && $_REQUEST['action']!=='DynamicAction')
+        && ($_REQUEST['action']!=='favorites' && $_REQUEST['action']!=='DynamicAction')
         && (empty($_REQUEST['to_pdf']) || !$_REQUEST['to_pdf'] )
         && (empty($_REQUEST['sugar_body_only']) || !$_REQUEST['sugar_body_only'] )
 
@@ -4009,15 +4035,12 @@ function sugarArrayMergeRecursive($gimp, $dom)
 {
     if (is_array($gimp) && is_array($dom)) {
         foreach ($dom as $domKey => $domVal) {
-            if (array_key_exists($domKey, $gimp)) {
-                if (is_array($domVal) && is_array($gimp[$domKey])) {
-                    $gimp[$domKey] = sugarArrayMergeRecursive($gimp[$domKey], $domVal);
-                } else {
-                    $gimp[$domKey] = $domVal;
-                }
-            } else {
-                $gimp[$domKey] = $domVal;
+            $areVariablesArray = array_key_exists($domKey, $gimp) && is_array($domVal) && is_array($gimp[$domKey]);
+            if ($areVariablesArray && (isArrayAssociative($domVal) || isArrayAssociative($gimp[$domKey]))) {
+                $gimp[$domKey] = sugarArrayMergeRecursive($gimp[$domKey], $domVal);
+                continue;
             }
+            $gimp[$domKey] = $domVal;
         }
     }
     // if the passed value for gimp isn't an array, then return the $dom
@@ -4025,6 +4048,16 @@ function sugarArrayMergeRecursive($gimp, $dom)
         return $dom;
 
     return $gimp;
+}
+
+/**
+ * Is array associative?
+ * @param array $array
+ * @return bool
+ */
+function isArrayAssociative(array $array): bool
+{
+    return !empty($array) && array_keys($array) !== range(0, count($array) - 1);
 }
 
 /**
@@ -4341,31 +4374,6 @@ function getStudioIcon($iconFileName='', $altFileName='', $width='48', $height='
          if (empty($iconName)) {
             return $app_strings['LBL_NO_IMAGE'];
          }
-     }
-
-    return SugarThemeRegistry::current()->getImage($iconName, "align=\"$align\" border=\"0\"", $width, $height);
-}
-
-/**
- * Function to grab the correct icon image for Dashlets Dialog
- * @param string $filename Location of the icon file
- * @param string $module Name of the module to fall back onto if file does not exist
- * @param string $width Width of image
- * @param string $height Height of image
- * @param string $align Alignment of image
- * @param string $alt Alt tag of image
- * @return string $string <img> tag with corresponding image
- */
-
-function get_dashlets_dialog_icon($module='', $width='32', $height='32', $align='absmiddle',$alt='')
-{
-    global $app_strings, $theme;
-     $iconName = _getIcon($module . "_32");
-     if (empty($iconName)) {
-         $iconName = _getIcon($module);
-     }
-     if (empty($iconName)) {
-         return $app_strings['LBL_NO_IMAGE'];
      }
 
     return SugarThemeRegistry::current()->getImage($iconName, "align=\"$align\" border=\"0\"", $width, $height);
@@ -5833,4 +5841,34 @@ function getSiteHash(string $str): string
 {
     $url = Container::getInstance()->get(SugarConfig::class)->get('site_url');
     return hash('sha256', $url . $str);
+}
+
+/**
+ * Returns values for attributes from sugar config
+ * @param string $key Sugar config attribute
+ * @return mixed
+ */
+function getValueFromConfig(string $key)
+{
+    $config = Container::getInstance()->get(SugarConfig::class);
+    return $config->get($key);
+}
+
+/**
+ * Creates site url
+ * @param string $addOn second half of the url
+ * @return string
+ */
+function prependSiteURL(string $addOn): string
+{
+    return getValueFromConfig('site_url') . $addOn;
+}
+
+/**
+ * check if it is CLI command line
+ * @return bool
+ */
+function isCli() : bool
+{
+    return PHP_SAPI === 'cli';
 }

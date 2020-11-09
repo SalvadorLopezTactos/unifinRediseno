@@ -42,6 +42,15 @@
     },
 
     /**
+     * Bool field always has a value whether checked or not
+     *
+     * @override
+     */
+    isFieldEmpty: function() {
+        return false;
+    },
+
+    /**
      * @inheritdoc
      */
     bindDomChange: function() {

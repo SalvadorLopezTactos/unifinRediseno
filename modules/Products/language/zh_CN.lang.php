@@ -127,6 +127,7 @@ $mod_strings = array(
     'LBL_CONTACT' => '联系人',
     'LBL_DISCOUNT_TOTAL' => '折扣总计',
     'LBL_DISCOUNT_AMOUNT' => '折扣数额',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
     'LBL_DISCOUNT_AMOUNT_VALUE' => '折扣金额数值',
     'LBL_EXT_PRICE' => '额外费用',
     'LBL_CURRENCY_SYMBOL_NAME' => '货币符号名称',

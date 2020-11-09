@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => 'Uygulanan Kullanıcıyı Ata',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'İşlem Tasarım Önizlemesi',
+    'LBL_PROJECT_RUN_ORDER' => 'Düzeni Çalıştır',
 );
 

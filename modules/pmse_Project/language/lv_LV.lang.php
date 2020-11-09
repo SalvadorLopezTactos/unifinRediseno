@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'Statuss',
   'LBL_PRJ_MODULE' => 'Mērķa modulis',
+  'LBL_PRJ_RUN_ORDER' => 'Izpildes secība',
   'LBL_PMSE_BUTTON_SAVE' => 'Saglabāt',
   'LBL_PMSE_BUTTON_CANCEL' => 'Atcelt',
   'LBL_PMSE_BUTTON_YES' => 'Jā',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Procesu definīcijas ir importētas, bet satur vienu vai vairākas Biznesa noteikumu darbības, kurām biznesa noteikumi nav izvēlēti.',
     'LBL_BPM_IMPORT_SELECT' => 'Šī procesa definīcija satur tālāk norādītos biznesa noteikumus un e-pasta veidnes. '
         . 'Atlasiet, ko vēlaties importēt.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'Biznesa noteikumi',
     'LBL_EMAIL_TEMPLATES' => 'E-pasta veidnes',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'Uzraugs',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Izveidoja lietotājs',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Pēdējoreiz modificēja lietotājs',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Sistēmas e-pasts',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Biznesa noteikums',
     'LBL_PMSE_LABEL_RULE' => 'Noteikums',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Piešķirt lietotāju',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Atjaunināt "Piešķirts" ierakstā',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Pievienot saistīto ierakstu',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Saistītais modulis',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Aktivitātes nosaukums ir tukšs.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Nosaukums "%s" jau eksistē objektu grupā.',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'dienas',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'stundas',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'minūtes',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'darba laiks',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'Biznesa centrs',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'No mērķa moduļa',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'No',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' Modulis',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'Teksts, numurs un Būla lielums',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'Numurs',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'Vērtība',

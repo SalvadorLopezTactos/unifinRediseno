@@ -15,6 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'لوحة معلومات قائمة الفرص',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'لوحة معلومات سجل الفرص',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'تفاصيل الفرصة',
 
     'LBL_MODULE_NAME' => 'الفرص',
     'LBL_MODULE_NAME_SINGULAR' => 'الفرصة',
@@ -25,6 +26,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => 'اسم الفرصة:',
     'LBL_OPPORTUNITY' => 'الفرصة:',
     'LBL_NAME' => 'اسم الفرصة',
+    'LBL_TIME' => 'الوقت',
     'LBL_INVITEE' => 'جهات الاتصال',
     'LBL_CURRENCIES' => 'العملات',
     'LBL_LIST_OPPORTUNITY_NAME' => 'الاسم',
@@ -75,6 +77,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'النوع:',
     'LBL_CAMPAIGN' => 'الحملة:',
     'LBL_NEXT_STEP' => 'الخطوة التالية:',
+    'LBL_SERVICE_START_DATE' => 'Service Start Date',
     'LBL_LEAD_SOURCE' => 'مصدر العميل المتوقع',
     'LBL_SALES_STAGE' => 'مرحلة المبيعات',
     'LBL_SALES_STATUS' => 'الحالة',
@@ -142,6 +145,16 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE_FORECAST' => 'التوقع',
     'LBL_WORKSHEET' => 'ورقة العمل',
 
+    'LBL_RENEWAL' => 'التجديد',
+    'LBL_RENEWAL_OPPORTUNITIES' => 'فرص التجديد',
+    'LBL_RENEWAL_PARENT' => 'الفرصة الأصلية',
+    'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'معرف أصل التجديد',
+    'LBL_MONTH_YEAR_RENEWAL' => '{{month}}، {{year}}',
+
+    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
+    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
+    'LBL_WIDGET_AMOUNT' => 'Amount',
+
     'TPL_RLI_CREATE' => 'يجب أن يكون للفرصة بند عائدات يقترن بها.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'قم بإنشاء بند عائدات.',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'البنود المسعرة',
@@ -152,6 +165,7 @@ $mod_strings = array(
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'لا يمكنك حذف الفرص التي تحتوي على بنود عائدات مغلقة',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'واحد أو أكثر من السجلات المحددة يحتوي على بنود العائدات مغلقة ولا يمكن حذفه.',
     'LBL_INCLUDED_RLIS' => '# من بنود العائدات المضمنة',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => '‏‏عروض الأسعار',
 
@@ -186,19 +200,19 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'بعد أن تبدأ هذا التغيير، يتم إنشاء سجلات بنود العائدات لكل وحدة {{module_name}} في الخلفية. عندما تكتمل بنود العائدات وتكون متاحة، يتم إرسال إشعار إلى عنوان البريد الإلكتروني المسجل في ملف تعريف المستخدم الخاص بك. الرجاء ملاحظة أن المثيل الخاص بنا يجب أن يتم تكوينه من أجل إرسال رسائل البريد الإلكتروني عبر مسؤول > إعدادات البريد الإلكتروني من أجل أن يتم إرسال الإشعار.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'تسمح الوحدة النمطية {{plural_module_name}} لك بتتبع مبيعات الأفراد من البداية إلى النهاية. يمثل كل سجل {{module_name}} عملية بيع متوقعة ويتضمن بيانات المبيعات ذات الصلة، ويرتبط كذلك بالسجلات المهمة الأخرى مثل {{quotes_module}} و{{contacts_module}}، إلخ. سيتم التقدم في {{module_name}} بصورة نموذجية عبر مراحل المبيعات المتعددة حتى تتم وضع علامة "إغلاق بسبب الفوز" أو "إغلاق بسبب الخسارة". يمكن رفع {{plural_module_name}} بصورة أكبر باستخدام وحدة {{forecasts_singular_module}} النمطية من Sugar لفهم اتجاهات المبيعات وتوقعها وكذلك تركيز العمل لتحقيق الحصص النسبية من المبيعات.',
+    'LBL_HELP_RECORDS' => 'تسمح الوحدة {{plural_module_name}} بتتبع مبيعات الأفراد من البداية إلى النهاية. يمثل كل سجل {{module_name}} عملية بيع متوقعة ويتضمن بيانات المبيعات ذات الصلة، ويرتبط كذلك بالسجلات المهمة الأخرى مثل {{quotes_module}} و{{contacts_module}}، إلخ. سيتم التقدم في {{module_name}} بصورة نموذجية عبر مراحل المبيعات المتعددة حتى تتم وضع علامة "إغلاق بسبب الفوز" أو "إغلاق بسبب الخسارة". يمكن الاستفادة من {{plural_module_name}} بصورة أكبر باستخدام وحدة {{forecasts_singular_module}} في Sugar لفهم اتجاهات المبيعات والتنبؤ بها وكذلك تركيز العمل لتحقيق الحصص النسبية من المبيعات.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'تسمح لك الوحدة النمطية {{plural_module_name}} بتتبع مبيعات الأفراد والبنود التي تنتمي إلى هذه المبيعات من البداية إلى النهاية. يمثل كل سجل {{module_name}} عملية بيع محتملة ويتضمن بيانات المبيعات ذات الصلة، كما يرتبط بالسجلات المهمة الأخرى مثل {{quotes_module}} و {{contacts_module}}، إلخ.
+    'LBL_HELP_RECORD' => 'تسمح الوحدة {{plural_module_name}} بتتبع مبيعات الأفراد والبنود التي تنتمي إلى هذه المبيعات من البداية إلى النهاية. يمثل كل سجل {{module_name}} عملية بيع محتملة ويتضمن بيانات المبيعات ذات الصلة، كما يرتبط بالسجلات المهمة الأخرى مثل {{quotes_module}} و{{contacts_module}}، إلخ.
 
 - حرر حقول هذا السجل بالنقر على حقل فردي أو الزر تحرير.
 - اعرض الارتباطات إلى السجلات الأخرى أو قم بتعديلها في اللوحات الفرعية بتبديل العمود السفلي الأيسر إلى "عرض البيانات".
 - قدم تعليقات مستخدم واعرضها وسجل تاريخ التغيير في {{activitystream_singular_module}} بتبديل العمود السفلي الأيسر إلى "سير النشاط".
 - اتبع هذا السجل أو قم بتفضيله باستخدام الأيقونات الموجودة على يمين اسم السجل.
-- تتوفر إجراءات إضافية في قائمة إجراءات المنسدلة إلى يمين الزر تحرير.',
+- تتوفر إجراءات إضافية في القائمة إجراءات المنسدلة إلى يمين الزر تحرير.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'تتيح لك الوحدة النمطية {{plural_module_name}} إمكانية تتبع مبيعات الأفراد والبنود التي تنتمي لهذه المبيعات من البداية إلى النهاية. يمثل كل سجل من سجلات {{module_name}} عملية بيع محتملة، كما يتضمن بيانات بيع ذات صلة، كما يتعلق بالسجلات المهمة الأخرى مثل {{quotes_module}} و{{contacts_module}}، إلخ.
+    'LBL_HELP_CREATE' => 'تسمح الوحدة {{plural_module_name}} بتتبع مبيعات الأفراد والبنود التي تنتمي لهذه المبيعات من البداية إلى النهاية. يمثل كل سجل من سجلات {{module_name}} عملية بيع محتملة ويتضمن بيانات بيع ذات صلة، كما يتعلق بالسجلات المهمة الأخرى مثل {{quotes_module}} و{{contacts_module}}، إلخ.
 
 لإنشاء {{module_name}}:
 1. قم بتزويد القيم المطلوبة في الحقول حسب الرغبة.
@@ -216,4 +230,6 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'عرض أعلى 10 فرص في مخطط الفقاعة.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'الفرص الخاصة بي',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "الفرص الخاصة بفريقي",
+
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
 );

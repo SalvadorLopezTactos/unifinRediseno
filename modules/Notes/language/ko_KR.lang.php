@@ -91,6 +91,9 @@ $mod_strings = array(
     'LBL_DATE_MODIFIED' => '수정일',
     'LBL_DELETED' => '삭제 완료',
     'LBL_REVENUELINEITEMS' => '매출 품목',
+    'LBL_ENTRY_SOURCE' => '노트 소스',
+    'LBL_SOURCE_EXTERNAL' => '외부',
+    'LBL_SOURCE_INTERNAL' => '내부',
 
     // Help Text
     // List View Help Text

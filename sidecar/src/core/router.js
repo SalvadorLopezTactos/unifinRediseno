@@ -16,6 +16,7 @@ const Language = require('core/language');
 const ErrorHandler = require('core/error');
 const Events = require('core/events');
 const Routing = require('core/routing');
+const User = require('core/user');
 
 /**
  * App router. It extends the standard Backbone.js router.
@@ -364,9 +365,18 @@ const Router = Backbone.Router.extend({
      *
      * Loads `home` layout for the `Home` module or `list` route with default
      * module defined in `SUGAR.App.config`.
+     * For external authentication it will try to load the page visited when auth was triggered.
      */
     index: function() {
         SUGAR.App.logger.debug("Route changed to index");
+        if (SUGAR.App.config.externalLogin) {
+            const lastPage = User.lastState.get('externalAuthLastPage');
+            if (lastPage) {
+                User.lastState.remove('externalAuthLastPage');
+                this.navigate(lastPage, {trigger: true});
+                return;
+            }
+        }
         if (SUGAR.App.config.defaultModule) {
             this.navigate(SUGAR.App.config.defaultModule, {trigger:true});
         }
@@ -449,6 +459,9 @@ const Router = Backbone.Router.extend({
         Events.trigger('app:login');
 
         if(SUGAR.App.config.externalLogin) {
+            if (Backbone.history.fragment) {
+                User.lastState.set('externalAuthLastPage', Backbone.history.fragment);
+            }
             // This will attempt reauth
             SUGAR.App.api.ping(null, {
                 success: function() {

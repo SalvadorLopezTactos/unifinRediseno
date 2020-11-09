@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'Wiadomości e-mail: Kontakty',
     'LBL_EMAILS_LEADS_REL' => 'Wiadomości e-mail: Namiary',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'Wiadomości e-mail: Szanse',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'Wiadomości e-mail: Notatki',
     'LBL_EMAILS_PROJECT_REL' => 'Wiadomości e-mail: Projekty',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'Wiadomości e-mail: Zadanie projektowe',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'Od:',
     'LBL_REPLY_TO' => 'Odp. do:',
     'LBL_HTML_BODY' => 'Treść HTML',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'Odbiorcy',
     'LBL_LEADS_SUBPANEL_TITLE' => 'Namiary',
     'LBL_MESSAGE_SENT' => 'Wiadomość wysłana',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'Odpowiedz ID',
     'LBL_TYPE' => 'Typ:',
     'LBL_EMAIL_STATE' => 'Województwo',
+    'LBL_EMAIL_DIRECTION' => 'Kierunek',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'Sprawdź!',

@@ -70,7 +70,6 @@ class SqlsrvManager extends MssqlManager
 
     protected $capabilities = array(
         "affected_rows" => true,
-        'fulltext' => true,
         'create_user' => true,
         "create_db" => true,
         "recursive_query" => true,
@@ -406,47 +405,6 @@ EOSQL;
 
         return true;
     }
-
-    /**
-     * protected function to return true if the given tablename has any fulltext indexes defined.
-     *
-     * @param  string $tableName
-     * @return bool
-     */
-    protected function doesTableHaveAFulltextIndexDefined($tableName)
-    {
-        $query = <<<EOSQL
-SELECT 1
-    FROM sys.fulltext_indexes i
-        JOIN sys.objects o ON i.object_id = o.object_id
-    WHERE o.name = '{$tableName}'
-EOSQL;
-
-        $result = $this->getOne($query);
-        if ( !$result ) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Override method to add support for detecting and dropping fulltext indices.
-     *
-     * {@inheritDoc}
-     */
-    protected function changeColumnSQL($tablename,$fieldDefs, $action, $ignoreRequired = false)
-    {
-        $sql = '';
-        if ( $action == 'drop' && $this->doesTableHaveAFulltextIndexDefined($tablename) ) {
-            $sql .= "DROP FULLTEXT INDEX ON {$tablename}";
-        }
-
-        $sql .= parent::changeColumnSQL($tablename, $fieldDefs, $action, $ignoreRequired);
-
-        return $sql;
-    }
-
 
 	/**
 	 * (non-PHPdoc)

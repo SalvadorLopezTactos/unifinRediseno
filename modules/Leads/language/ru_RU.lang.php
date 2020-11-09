@@ -322,4 +322,7 @@ $mod_strings = array (
     'LBL_FILTER_LEADS_REPORTS' => 'Отчёты по предварительным контактам',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Согласованные бизнес-цели',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Последнее обновление согласия',
+
+    // Leads Pipeline view
+    'LBL_PIPELINE_ERR_CONVERTED' => 'Не удалось изменить статус модуля {{moduleSingular}}. Модуль {{moduleSingular}} уже конвертирован.',
 );

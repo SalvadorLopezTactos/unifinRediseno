@@ -262,6 +262,7 @@ class SugarBeanApiHelper
                 // They aren't trying to modify this field
                 continue;
             }
+            $context['newValue'] = $submittedData[$fieldName];
             if ( !$bean->ACLFieldAccess($fieldName, $acl, $context) ) {
                 // No write access to this field, but they tried to edit it
                 throw new \SugarApiExceptionNotAuthorized(

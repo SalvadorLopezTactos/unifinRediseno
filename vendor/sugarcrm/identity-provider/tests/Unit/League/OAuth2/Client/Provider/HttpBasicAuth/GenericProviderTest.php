@@ -195,8 +195,8 @@ class GenericProviderTest extends \PHPUnit_Framework_TestCase
         ];
         $expectedResult = ['--', 'expected', '--', 'Result', '--'];
         $expectedAuthorization = 'Basic ' . base64_encode(
-                sprintf('%s:%s', $options['clientId'], $options['clientSecret'])
-            );
+            sprintf('%s:%s', $options['clientId'], $options['clientSecret'])
+        );
         $expectedRequestOptions = [
             'headers' => [
                 'Authorization' => $expectedAuthorization,
@@ -318,5 +318,39 @@ class GenericProviderTest extends \PHPUnit_Framework_TestCase
             ->with("The access_token is refreshed.", $this->isType('array'));
 
         $this->assertTrue($provider->refreshAccessToken());
+    }
+
+    /**
+     * @covers ::getClientID
+     */
+    public function testGetClientIDWithClientIdSet(): void
+    {
+        $options = $this->options;
+        $options['clientId'] = 'some-login-service-srn';
+        $provider = new GenericProvider($options);
+
+        $this->assertEquals('some-login-service-srn', $provider->getClientID());
+    }
+
+    /**
+     * @covers ::getClientID
+     */
+    public function testGGetClientIDWithClientIdInAccessTokenFile(): void
+    {
+        $options = $this->options;
+        $options['clientId'] = '';
+        # to bypass `is_readable()`
+        $options['accessTokenFile'] = __FILE__;
+
+        $provider = $this->getMockBuilder(GenericProvider::class)
+            ->setConstructorArgs([$options])
+            ->setMethods(['getAccessTokenFileData'])
+            ->getMock();
+
+        $provider->method('getAccessTokenFileData')->willReturn([
+            'client_id' => 'login-service-srn',
+        ]);
+
+        $this->assertEquals('login-service-srn', $provider->getClientID());
     }
 }

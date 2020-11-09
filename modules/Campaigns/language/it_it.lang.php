@@ -177,6 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Elenco obiettivi del tipo default non trovato',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nessun valore trovato',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'I valori in elenco sono stati elaborati',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Nome Tracker:',
   'LBL_EDIT_TRACKER_URL'=>'URL Tracker:',
@@ -420,6 +422,7 @@ $mod_strings = array (
     'ERR_NO_OPTS_SAVED'		=> 'Nessuna impostazione ottimale è stata salvata con la vostra casella di posta in ingresso.',
     'ERR_REVIEW_EMAIL_SETTINGS' => 'Si prega di rivedere le impostazioni della posta in ingresso.',
     'LBL_LEADS_DELETED_SINCE_CREATED' => '{0} lead che sono stati creati con questa campagna sono stati cancellati dopo la loro creazione.',
+    'LBL_PROSPECT_LIST' => 'Elenco obiettivi',
 );
 
 

@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\SearchEngine\Engine\Elastic;
 
@@ -190,6 +192,7 @@ class AdministrationApi extends SugarApi
                 'longHelp' => 'include/api/help/administration_enable_idm_migrations_post_help.html',
                 'exceptions' => ['SugarApiExceptionNotAuthorized'],
                 'minVersion' => '11.2',
+                'ignoreSystemStatusError' => true,
             ],
             // Disable migration mode for Idm
             'disableIdmMigration' => [
@@ -201,6 +204,18 @@ class AdministrationApi extends SugarApi
                 'longHelp' => 'include/api/help/administration_disable_idm_migrations_post_help.html',
                 'exceptions' => ['SugarApiExceptionNotAuthorized'],
                 'minVersion' => '11.2',
+                'ignoreSystemStatusError' => true,
+            ],
+            // license limits
+            'licenseLimits' => [
+                'reqType' => ['GET'],
+                'path' => ['Administration', 'license', 'limits'],
+                'pathVars' => [''],
+                'method' => 'getLicenseLimits',
+                'shortHelp' => 'get license seats',
+                'longHelp' => 'include/api/help/administration_disable_license_limits_get_help.html',
+                'exceptions' => ['SugarApiExceptionNotAuthorized'],
+                'ignoreSystemStatusError' => true,
             ],
         );
     }
@@ -214,11 +229,14 @@ class AdministrationApi extends SugarApi
     public function searchReindex(ServiceBase $api, array $args)
     {
         $this->ensureAdminUser();
+        $adminWork = new AdminWork();
+        $adminWork->startAdminWork();
 
         $clearData = isset($args['clear_data']) ? (bool) $args['clear_data'] : false;
         $modules = empty($args['module_list']) ? array() : explode(',', $args['module_list']);
         $engine = $this->getSearchEngine();
         $status = $engine->scheduleIndexing($modules, $clearData);
+
         return array('success' => $status);
     }
 
@@ -231,6 +249,8 @@ class AdministrationApi extends SugarApi
     public function searchStatus(ServiceBase $api, array $args)
     {
         $this->ensureAdminUser();
+        $adminWork = new AdminWork();
+        $adminWork->startAdminWork();
 
         $engine = $this->getSearchEngine();
 
@@ -259,7 +279,8 @@ class AdministrationApi extends SugarApi
     public function searchFields(ServiceBase $api, array $args)
     {
         $this->ensureAdminUser();
-
+        $adminWork = new AdminWork();
+        $adminWork->startAdminWork();
         $modules = empty($args['module_list']) ? array() : explode(',', $args['module_list']);
         $list = $this->getSearchFields($modules);
 
@@ -292,6 +313,7 @@ class AdministrationApi extends SugarApi
             arsort($flat, SORT_NUMERIC);
             $list = $flat;
         }
+
         return $list;
     }
 
@@ -345,6 +367,8 @@ class AdministrationApi extends SugarApi
     public function elasticSearchQueue(ServiceBase $api, array $args)
     {
         $this->ensureAdminUser();
+        $adminWork = new AdminWork();
+        $adminWork->startAdminWork();
 
         $total = 0;
         $queued = array();
@@ -377,6 +401,8 @@ class AdministrationApi extends SugarApi
     public function elasticSearchRouting(ServiceBase $api, array $args)
     {
         $this->ensureAdminUser();
+        $adminWork = new AdminWork();
+        $adminWork->startAdminWork();
 
         $engine = $this->getSearchEngine(true);
         $metaDataHelper = $engine->getMetaDataHelper();
@@ -398,6 +424,7 @@ class AdministrationApi extends SugarApi
                 ),
             );
         }
+
         return $result;
     }
 
@@ -410,6 +437,8 @@ class AdministrationApi extends SugarApi
     public function elasticSearchIndices(ServiceBase $api, array $args)
     {
         $this->ensureAdminUser();
+        $adminWork = new AdminWork();
+        $adminWork->startAdminWork();
 
         $engine = $this->getSearchEngine(true);
 
@@ -417,6 +446,7 @@ class AdministrationApi extends SugarApi
         foreach ($this->getIndices($engine) as $index) {
             $indices[$index->getName()] = $index->getStats()->getData();
         }
+
         return $indices;
     }
 
@@ -429,6 +459,8 @@ class AdministrationApi extends SugarApi
     public function elasticSearchMapping(ServiceBase $api, array $args)
     {
         $this->ensureAdminUser();
+        $adminWork = new AdminWork();
+        $adminWork->startAdminWork();
 
         $engine = $this->getSearchEngine(true);
 
@@ -491,12 +523,16 @@ class AdministrationApi extends SugarApi
     {
         $this->ensureAdminUser();
 
+        $adminWork = new AdminWork();
+        $adminWork->startAdminWork();
+
         $engine = $this->getSearchEngine(true);
         $indices = array();
 
         foreach ($this->getIndices($engine) as $index) {
             $indices[$index->getName()] = $index->getSettings()->getRefreshInterval();
         }
+
         return $indices;
     }
 
@@ -509,6 +545,8 @@ class AdministrationApi extends SugarApi
     public function elasticSearchRefreshTrigger(ServiceBase $api, array $args)
     {
         $this->ensureAdminUser();
+        $adminWork = new AdminWork();
+        $adminWork->startAdminWork();
 
         $engine = $this->getSearchEngine(true);
         $indices = array();
@@ -517,6 +555,7 @@ class AdministrationApi extends SugarApi
             $status = $index->refresh();
             $indices[$index->getName()] = $status->getStatus();
         }
+
         return $indices;
     }
 
@@ -529,6 +568,8 @@ class AdministrationApi extends SugarApi
     public function elasticSearchRefreshEnable(ServiceBase $api, array $args)
     {
         $this->ensureAdminUser();
+        $adminWork = new AdminWork();
+        $adminWork->startAdminWork();
 
         $engine = $this->getSearchEngine(true);
         return $engine->getContainer()->indexManager->enableRefresh();
@@ -543,6 +584,8 @@ class AdministrationApi extends SugarApi
     public function elasticSearchReplicasStatus(ServiceBase $api, array $args)
     {
         $this->ensureAdminUser();
+        $adminWork = new AdminWork();
+        $adminWork->startAdminWork();
 
         $engine = $this->getSearchEngine(true);
         $indices = array();
@@ -562,6 +605,8 @@ class AdministrationApi extends SugarApi
     public function elasticSearchReplicasEnable(ServiceBase $api, array $args)
     {
         $this->ensureAdminUser();
+        $adminWork = new AdminWork();
+        $adminWork->startAdminWork();
 
         $engine = $this->getSearchEngine(true);
         return $engine->getContainer()->indexManager->enableReplicas();
@@ -578,10 +623,17 @@ class AdministrationApi extends SugarApi
     public function enableIdmMigration(ServiceBase $api, array $args): array
     {
         $this->ensureAdminUser();
+        $adminWork = new AdminWork();
+        $adminWork->startAdminWork();
+
         $configurator = $this->getConfigurator();
         $configurator->config['maintenanceMode'] = true;
         $configurator->config['idmMigration'] = true;
         $configurator->handleOverride();
+        if (function_exists('opcache_invalidate')) {
+            opcache_invalidate('config_override.php', true);
+        }
+
         return ['success' => 'true'];
     }
 
@@ -596,14 +648,41 @@ class AdministrationApi extends SugarApi
     public function disableIdmMigration(ServiceBase $api, array $args): array
     {
         $this->ensureAdminUser();
+        $adminWork = new AdminWork();
+        $adminWork->startAdminWork();
+
         $configurator = $this->getConfigurator();
         $configurator->config['maintenanceMode'] = false;
         $configurator->config['idmMigration'] = false;
         $configurator->handleOverride();
         $this->clearCache();
+        if (function_exists('opcache_invalidate')) {
+            opcache_invalidate('config_override.php', true);
+        }
+
         return ['success' => 'true'];
     }
 
+    /**
+     * get license limits for the instance, the limits are based on license types
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     * @throws SugarApiExceptionNotAuthorized
+     */
+    public function getLicenseLimits(ServiceBase $api, array $args): array
+    {
+        $this->ensureAdminUser();
+        $seats = SubscriptionManager::instance()->getSystemSubscriptionSeats();
+        $defaultType = SubscriptionManager::instance()->getUserDefaultLicenseType();
+        $admin = Administration::getSettings();
+
+        return [
+            'default_limit' => $seats[$defaultType],
+            'limit_enforced' => empty($admin->settings['license_enforce_user_limit']) ? 0 : 1,
+            'seats' => $seats,
+        ];
+    }
     /**
      * Factory method to mock Configurator
      *

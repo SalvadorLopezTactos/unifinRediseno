@@ -9,7 +9,7 @@
         self = this;
         this._super("initialize", [options]);
 
-        App.events.on('data:sync:success',this.headerCSS, this);
+        // App.events.on('data:sync:success',this.headerCSS, this);
     },
 
     _render: function() {
@@ -22,9 +22,9 @@
         $("span.citas_field").parent().parent().children().attr('colspan',2);
     },
 
-    headerCSS:function(){
-        $('[data-name="assigned_user_name"]').css("width", "39%");
-        $('.record-cell[data-name="assigned_user_name"]').css("margin-left", "9%");
-    },
+    // headerCSS:function(){
+    //     $('[data-name="assigned_user_name"]').css("width", "39%");
+    //     $('.record-cell[data-name="assigned_user_name"]').css("margin-left", "9%");
+    // },
 })
 

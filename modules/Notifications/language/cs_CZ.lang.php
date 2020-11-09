@@ -50,4 +50,6 @@ $mod_strings = array(
     'LBL_PARENT_ID' => 'Zdrojové ID',
     'LBL_READ' => 'Přečtený',
     'LBL_UNREAD' => 'Nepřečtený',
+    'LBL_YOU_HAVE_BEEN_MENTIONED_BY' => 'Byli jste zmíněni (kým)',
+    'LBL_YOU_HAVE_BEEN_MENTIONED' => 'Byli jste zmíněni',
 );

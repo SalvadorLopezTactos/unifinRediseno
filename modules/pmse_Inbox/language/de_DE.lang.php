@@ -150,5 +150,6 @@ $mod_strings = array (
     'LBL_PMSE_ASSIGN_USER_APPLIED' => 'Benutzer-Zuweisung wurde ausgeführt',
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Prozess-Design Vorschau',
+    'LBL_PROJECT_RUN_ORDER' => 'Reihenfolge ausführen',
 );
 

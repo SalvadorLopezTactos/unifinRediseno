@@ -87,6 +87,7 @@ $mod_strings = array(
     'LBL_EMAILS_CONTACTS_REL' => 'อีเมล: ที่อยู่ติดต่อ',
     'LBL_EMAILS_LEADS_REL' => 'อีเมล: ผู้สนใจ',
     'LBL_EMAILS_OPPORTUNITIES_REL' => 'อีเมล: โอกาสทางการขาย',
+    'LBL_EMAILS_PURCHASES_REL' => 'Emails:Purchases',
     'LBL_EMAILS_NOTES_REL' => 'อีเมล: บันทึก',
     'LBL_EMAILS_PROJECT_REL' => 'อีเมล: โครงการ',
     'LBL_EMAILS_PROJECT_TASK_REL' => 'อีเมล: งานของโครงการ',
@@ -106,6 +107,7 @@ $mod_strings = array(
     'LBL_FROM' => 'จาก:',
     'LBL_REPLY_TO' => 'ตอบกลับ:',
     'LBL_HTML_BODY' => 'เนื้อหา HTML',
+    'LBL_MESSAGE_BODY' => 'Body',
     'LBL_INVITEE' => 'ผู้รับ',
     'LBL_LEADS_SUBPANEL_TITLE' => 'ผู้สนใจ',
     'LBL_MESSAGE_SENT' => 'ส่งข้อความแล้ว',
@@ -316,6 +318,7 @@ $mod_strings = array(
     'LBL_EMAIL_REPLY_TO_ID' => 'ตอบกลับ Id',
     'LBL_TYPE' => 'ประเภท:',
     'LBL_EMAIL_STATE' => 'รัฐ',
+    'LBL_EMAIL_DIRECTION' => 'ทิศทาง',
 
     //#20680 EmialTemplate Ext.Message.show;
     'LBL_EMAILTEMPLATE_MESSAGE_SHOW_TITLE' => 'โปรดตรวจสอบ',

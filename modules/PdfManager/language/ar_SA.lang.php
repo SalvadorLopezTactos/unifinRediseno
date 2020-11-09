@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'معاينة',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'تحذير: إذا قمت بتغيير الوحدة الرئيسية، فيجب أن تتم إزالة كل الحقول التي تمت إضافتها إلى القالب.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'إليك الملف الذي طلبته (يمكنك تغيير هذا النص)',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'عرض السعر',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'يستخدم هذا القالب لطباعة عرض السعر بصيغة PDF.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'عرض السعر',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'عرض السعر (متضمنًا الخدمات)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'هذا القالب يستخدم لطباعة عرض سعر، متضمنًا معلومات الخدمة، بتنسيق PDF.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'عرض السعر للخدمة',
+
   'LBL_TPL_INVOICE_NAME' => 'الفاتورة',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'يستخدم هذا القالب لطباعة الفاتورة بصيغة PDF.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'الفاتورة',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'الفاتورة (متضمنة الخدمات)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'هذا القالب يستخدم لطباعة فاتورة، متضمنة معلومات الخدمة، بتنسيق PDF.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'فاتورة الخدمة',
+
   'LBL_TPL_QUOTE_NUMBER' => 'رقم عرض السعر:',
   'LBL_TPL_SALES_PERSON' => 'مسؤول المبيعات:',
   'LBL_TPL_VALID_UNTIL' => 'صالح حتى:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'رقم الجزء',
   'LBL_TPL_PRODUCT' => 'البند المسعر',
   'LBL_TPL_RLI' => 'بنود العائدات',
+  'LBL_TPL_DURATION' => 'المدة',
+  'LBL_TPL_DURATION_STARTS' => 'البدء:',
+  'LBL_TPL_DURATION_ENDS' => 'الانتهاء:',
   'LBL_TPL_LIST_PRICE' => 'سعر القائمة',
   'LBL_TPL_UNIT_PRICE' => 'سعر الوحدة',
   'LBL_TPL_EXT_PRICE' => 'الامتداد السعر',

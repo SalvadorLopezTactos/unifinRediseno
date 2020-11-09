@@ -52,8 +52,6 @@ abstract class AbstractMetaDataImplementation
     protected $_sourceFilename = '' ; // the name of the file from which we loaded the definition we're working on - needed when we come to write out the historical record
     // would like this to be a constant, but alas, constants cannot contain arrays...
     protected $_fileVariables = array (
-    MB_DASHLETSEARCH            => 'dashletData',
-    MB_DASHLET                  => 'dashletData',
     MB_POPUPSEARCH              => 'popupMeta',
     MB_POPUPLIST                => 'popupMeta',
     MB_LISTVIEW                 => 'listViewDefs',
@@ -69,6 +67,8 @@ abstract class AbstractMetaDataImplementation
     MB_DETAILVIEW               => 'viewdefs',
     MB_QUICKCREATE              => 'viewdefs',
     MB_RECORDVIEW               => 'viewdefs',
+    MB_RECORDDASHLETVIEW        => 'viewdefs',
+    MB_PREVIEWVIEW              => 'viewdefs',
     MB_WIRELESSEDITVIEW         => 'viewdefs',
     MB_WIRELESSDETAILVIEW       => 'viewdefs',
     MB_WIRELESSLISTVIEW         => 'viewdefs',
@@ -84,7 +84,7 @@ abstract class AbstractMetaDataImplementation
     /**
      * Returns an array of modules affected by this object. In almost all cases
      * this will be a single array. For subpanels, it will be more than one.
-     * 
+     *
      * @return array List of modules changed within this object
      */
     public function getAffectedModules()

@@ -105,4 +105,6 @@ $mod_strings = array(
     'LBL_OPERATOR_LAST_YEAR' => 'pēdējais gads',
     'LBL_OPERATOR_THIS_YEAR' => 'šis gads',
     'LBL_OPERATOR_NEXT_YEAR' => 'nākamais gads',
+    'LBL_OPEN_ISSUES' => 'Atvērt {0}',
+    'LBL_RECENTLY_RESOLVED_ISSUES' => 'Nesen atrisinātie',
 );

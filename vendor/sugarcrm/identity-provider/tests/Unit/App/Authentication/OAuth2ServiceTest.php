@@ -396,7 +396,7 @@ class OAuth2ServiceTest extends \PHPUnit_Framework_TestCase
             ->method('getUser')
             ->willReturn($this->user);
 
-        $this->consentToken->expects($this->once())
+        $this->consentToken->expects($this->exactly(2))
             ->method('getScopes')
             ->willReturn($scope = ['offline', 'openid', 'hydra.*']);
 
@@ -450,7 +450,7 @@ class OAuth2ServiceTest extends \PHPUnit_Framework_TestCase
             ->method('getUser')
             ->willReturn($this->user);
 
-        $this->consentToken->expects($this->once())
+        $this->consentToken->expects($this->exactly(2))
             ->method('getScopes')
             ->willReturn($scope = ['offline', 'openid', 'hydra.*']);
 
@@ -560,5 +560,16 @@ class OAuth2ServiceTest extends \PHPUnit_Framework_TestCase
             ->method('refreshAccessToken')
             ->willReturn(true);
         $this->assertTrue($this->oAuth2Service->refreshAccessToken());
+    }
+
+    /**
+     * @covers ::getClientID
+     */
+    public function testGetClientID()
+    {
+        $this->oAuth2Provider->expects($this->once())
+            ->method('getClientID')
+            ->willReturn('some-application-client-id');
+        $this->assertEquals('some-application-client-id', $this->oAuth2Service->getClientID());
     }
 }

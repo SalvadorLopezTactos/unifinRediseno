@@ -13,9 +13,10 @@
 
 use Sugarcrm\Sugarcrm\Security\Crypto\CSPRNG;
 use Sugarcrm\Sugarcrm\Security\Password\Hash;
+use Sugarcrm\Sugarcrm\Portal\Factory as PortalFactory;
 
-
-class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform {
+class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform
+{
     /**
      * The user type for this client
      *
@@ -49,13 +50,14 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform {
      *
      * @return User
      */
-    public function getUserBean($user_id) {
+    public function getUserBean($user_id)
+    {
         $userBean = $this->findPortalApiUser();
         if ( $userBean == null ) {
             return false;
         }
 
-        if ( isset($this->contactBean) && $this->contactBean->id == $user_id ) {
+        if (isset($this->contactBean) && $this->contactBean->id == $user_id) {
             if (!isset($this->userBean)) {
                 $this->userBean = $userBean;
             }
@@ -66,7 +68,7 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform {
             // Need to disable the row-level security because this user probably doesn't have access to much of anything
             $contactBean->disable_row_level_security = true;
             $contactBean->retrieve($user_id);
-            if ( empty($contactBean->id) ) {
+            if (empty($contactBean->id)) {
                 return false;
             }
 
@@ -83,18 +85,20 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform {
      * Small validator for child classes to use to determine whether a session can
      * be written to
      */
-    public function canStartSession() {
+    public function canStartSession()
+    {
         return !empty($this->contactBean) && !empty($this->userBean);
     }
 
     /**
      * Fills in any added session data needed by this client type
      */
-    public function fillInAddedSessionData() {
+    public function fillInAddedSessionData()
+    {
         if ($this->canStartSession()) {
             $_SESSION['type'] = $this->userType;
-            $_SESSION['contact_id'] = $this->contactBean->id;
             $_SESSION['portal_user_id'] = $this->userBean->id;
+            PortalFactory::getInstance('Session')->setContactId($this->contactBean->id);
             // This is to make sure the licensing is handled correctly for portal logins
             $sessionManager = new SessionManager();
             $sessionManager->session_type = 'contact';
@@ -109,17 +113,18 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform {
      * @param OAuthToken
      * @return mixed
      */
-    public function getAuthBean(OAuthToken $token) {
+    public function getAuthBean(OAuthToken $token)
+    {
         $portalApiUser = $this->findPortalApiUser($token->consumer_obj->c_key);
-        if ( $portalApiUser == null ) {
+        if ($portalApiUser == null) {
             return false;
         }
         $contact = BeanFactory::newBean('Contacts');
         $contact->disable_row_level_security = true;
         $authBean = $contact->retrieve($token->contact_id);
-        if ( $authBean->portal_active != 1 ) {
+        if ($authBean->portal_active != 1) {
             $authBean = null;
-        } else if ( empty($authBean->portal_name) ) {
+        } elseif (empty($authBean->portal_name)) {
             $authBean = null;
         }
 
@@ -133,10 +138,11 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform {
      * @param string $client_id The client id for this check
      * @return array An array of contact_id and user_id
      */
-    public function getIdsForUser($user_id, $client_id) {
+    public function getIdsForUser($user_id, $client_id)
+    {
         $return = array('contact_id' => '', 'user_id' => '');
         $portalApiUser = $this->findPortalApiUser($client_id);
-        if ( $portalApiUser == null ) {
+        if ($portalApiUser == null) {
             return $return;
         }
 
@@ -151,20 +157,26 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform {
      *
      * @return void
      */
-    public function setupVisibility() {
+    public function setupVisibility()
+    {
         // Add the necessary visibility and acl classes to the default bean list
         $default_acls = SugarBean::getDefaultACL();
         // This one overrides the Static ACL's, so disable that
         unset($default_acls['SugarACLStatic']);
         $default_acls['SugarACLStatic'] = false;
-        $default_acls['SugarACLSupportPortal'] = true;
+
+        // allow extension of portal ACL
+        \SugarAutoLoader::requireWithCustom('data/acl/SugarACLPortal.php');
+        $portalAclClass = \SugarAutoLoader::customClass('SugarACLPortal');
+
+        $default_acls[$portalAclClass] = true;
         SugarBean::setDefaultACL($default_acls);
         SugarACL::resetACLs();
 
         $default_visibility = SugarBean::getDefaultVisibility();
         $default_visibility['SupportPortalVisibility'] = true;
         SugarBean::setDefaultVisibility($default_visibility);
-        $GLOBALS['log']->debug("Added SupportPortalVisibility to session.");
+        $GLOBALS['log']->debug('Added SupportPortalVisibility to session.');
     }
 
     /**
@@ -247,30 +259,30 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform {
    	 *
    	 * @ingroup oauth2_section_4
    	 */
-   	public function checkUserCredentials(IOAuth2GrantUser $storage, $client_id, $username, $password)
-   	{
-   	    if(empty($username)) {
-   	        return false;
-   	    }
+    public function checkUserCredentials(IOAuth2GrantUser $storage, $client_id, $username, $password)
+    {
+        if (empty($username)) {
+            return false;
+        }
         $clientInfo = $storage->getClientDetails($client_id);
-        if ( $clientInfo === false ) {
+        if ($clientInfo === false) {
             return false;
         }
 
         $portalApiUser = $this->findPortalApiUser($client_id);
-        if ( $portalApiUser == null ) {
+        if ($portalApiUser == null) {
            // Can't login as a portal user if there is no API user
             throw new SugarApiExceptionPortalNotConfigured();
         }
 
         $contact = $this->loadUserFromName($username);
-        if ( !empty($contact) && !User::checkPassword($password, $contact->portal_password) ) {
+        if (!empty($contact) && !User::checkPassword($password, $contact->portal_password)) {
            $contact = null;
         }
 
-        if ( !empty($contact) ) {
+        if (!empty($contact)) {
             $sessionManager = new SessionManager();
-            if(!$sessionManager->canAddSession()) {
+            if (!$sessionManager->canAddSession()) {
                 //not able to add another session right now
                 $GLOBALS['log']->error("Unable to add new session");
                 throw new SugarApiExceptionNeedLogin('too_many_concurrent_connections',array('Too many concurrent sessions'));
@@ -303,11 +315,11 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform {
         $contact = BeanFactory::newBean('Contacts');
         $contact->disable_row_level_security = true;
         $contact = $contact->retrieve_by_string_fields(
-            array(
-                'portal_name'=>$username,
-                'portal_active'=>'1',
-                'deleted'=>0,
-            ));
+            [
+                'portal_name' => $username,
+                'portal_active' => '1',
+            ]
+        );
 
         return $contact;
     }
@@ -329,11 +341,9 @@ class SugarOAuth2StoragePortal extends SugarOAuth2StoragePlatform {
 
         $tokenData['user_id'] = $tokenBean->assigned_user_id;
         $_SESSION['type'] = 'support_portal';
-        $_SESSION['contact_id'] = $tokenBean->contact_id;
         $_SESSION['portal_user_id'] = $tokenBean->assigned_user_id;
+        PortalFactory::getInstance('Session')->setContactId($tokenBean->contact_id);
 
         return $tokenData;
-
     }
-
 }

@@ -95,9 +95,9 @@ then
     SELENIUM_LOG="selenium.log"
 
     if [ "$(uname)" == "Darwin" ]; then
-        CHROME_DRIVER_URL="https://chromedriver.storage.googleapis.com/2.45/chromedriver_mac64.zip"
+        CHROME_DRIVER_URL="https://chromedriver.storage.googleapis.com/73.0.3683.20/chromedriver_mac64.zip"
     else
-        CHROME_DRIVER_URL="https://chromedriver.storage.googleapis.com/2.45/chromedriver_linux64.zip"
+        CHROME_DRIVER_URL="https://chromedriver.storage.googleapis.com/73.0.3683.20/chromedriver_linux64.zip"
     fi
     CHROME_DRIVER_PATH_ARCHIVE="chromedriver.zip"
     CHROME_DRIVER="chromedriver"
@@ -140,6 +140,13 @@ fi
 
 cd $INSTANCE_PATH
 
+CONFIG_FILE="${BEHAT_SUITE}_behat.yml"
+
+printf "Get contents of failed tests cache:\n"
+cat behat_rerun_cache_${BEHAT_SUITE}/$(ls behat_rerun_cache_${BEHAT_SUITE} | head -n 1) || echo "skipping..."
+printf "\n"
+
+echo "Creating config file ${CONFIG_FILE} ..."
 cat behat.yml.template | \
     sed -e "s~%%MANGO_URL%%~${INSTANCE_URL}~g" | \
     sed -e "s~%%SELENIUM_HOST%%~${SELENIUM_HOST}~g" | \
@@ -148,10 +155,11 @@ cat behat.yml.template | \
     sed -e "s~%%IDM_NS%%~${IDM_NS}~g" | \
     sed -e "s~%%BEHAT_SUITE%%~${BEHAT_SUITE}~g"| \
     sed -e "s~%%LDAP_HOST%%~${LDAP_SERVER_URL}~g" | \
-    sed -e "s~%%REST_SERVICE_URL%%~${REST_SERVICE_URL}~g" \
-    > ${BEHAT_SUITE}_behat.yml
+    sed -e "s~%%REST_SERVICE_URL%%~${REST_SERVICE_URL}~g" | \
+    sed -e "s~%%BEHAT_RERUN_CACHE%%~behat_rerun_cache_${BEHAT_SUITE}~g" \
+    > ${CONFIG_FILE}
 
-CMD="../../vendor/bin/behat -s ${BEHAT_SUITE} --config ${BEHAT_SUITE}_behat.yml"
+CMD="../../vendor/bin/behat -s ${BEHAT_SUITE} --config ${CONFIG_FILE} --verbose=2 --rerun"
 if [[ ${EXTENDED_TESTS} -eq 0 ]]
 then
 CMD="${CMD} --tags '~@extended'"
@@ -160,7 +168,7 @@ eval ${CMD}
 
 testsResult=$?
 
-rm ${BEHAT_SUITE}_behat.yml
+rm ${CONFIG_FILE}
 
 if [ $testsResult != 0 ]; then
     exit $testsResult

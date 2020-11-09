@@ -68,7 +68,6 @@ class CalendarDisplay {
 		$ss->assign('items_resizable',SugarConfig::getInstance()->get('calendar.items_resizable',true));
 		$ss->assign('cells_per_day',$cal->cells_per_day);
 
-		$ss->assign('dashlet',$cal->dashlet);
 		$ss->assign('grid_start_ts',intval($cal->grid_start_ts));
 
 		$ss->assign('year', $cal->date_time->format('Y'));
@@ -342,8 +341,6 @@ class CalendarDisplay {
             $str .= "<a href='index.php?action=index&module=Calendar&view=" . $this->cal->view
                 . "&" . $this->cal->get_neighbor_date_str("next") . "'>";
 
-		}else{
-			$str .= "<a href='#' onclick='return SUGAR.mySugar.retrieveDashlet(\"".$this->dashlet_id."\", \"index.php?module=Home&action=DynamicAction&DynamicAction=displayDashlet&sugar_body_only=1&".$this->cal->get_neighbor_date_str("next")."&id=".$this->dashlet_id."\")'>";
 		}
 			$str .= $cal_strings["LBL_NEXT_".strtoupper($this->cal->view)];
 
@@ -361,8 +358,6 @@ class CalendarDisplay {
 		if($_REQUEST['module'] == "Calendar"){
             $str .= "<a href='index.php?action=index&module=Calendar&view=" . $this->cal->view
                  . "&" . $this->cal->get_neighbor_date_str("previous") . "'>";
-		}else{
-			$str .= "<a href='#' onclick='return SUGAR.mySugar.retrieveDashlet(\"".$this->dashlet_id."\", \"index.php?module=Home&action=DynamicAction&DynamicAction=displayDashlet&sugar_body_only=1&".$this->cal->get_neighbor_date_str("previous")."&id=".$this->dashlet_id."\")'>";
 		}
 		$str .= SugarThemeRegistry::current()->getImage('calendar_previous','align="absmiddle" border="0"', null, null, '.gif', ''); //setting alt tag blank on purpose for 508 compliance
 		$str .= "&nbsp;&nbsp;".$cal_strings["LBL_PREVIOUS_".strtoupper($this->cal->view)] . "</a>";

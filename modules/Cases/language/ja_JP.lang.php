@@ -12,8 +12,9 @@
 
 $mod_strings = array (
     // Dashboard Names
-    'LBL_CASES_LIST_DASHBOARD' => 'ケースリストのダッシュ ボード',
-    'LBL_CASES_RECORD_DASHBOARD' => 'ケースレコードのダッシュ ボード',
+    'LBL_CASES_LIST_DASHBOARD' => 'ケースリストのダッシュボード',
+    'LBL_CASES_RECORD_DASHBOARD' => 'ケースレコードのダッシュボード',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'ケース詳細',
 
 	'ERR_DELETE_RECORD'					=> 'あなたがアカウントを削除するには、レコード番号を指定する必要があります。',
 	'LBL_ACCOUNT_ID'					=> '取引先ID',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> '取引先担当者',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'ケース',
 	'LBL_DESCRIPTION'					=> '詳細:',
-	'LBL_FILENANE_ATTACHMENT' 			=> '添付ファイル',	
+    'LBL_FILENANE_ATTACHMENT'           => '添付ファイル',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> '履歴',
 	'LBL_INVITEE'						=> '取引先担当者',
 	'LBL_MEMBER_OF'						=> '取引先',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => '作成者',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'アサイン先',
     'LBL_EXPORT_TEAM_COUNT' => 'チーム数',
+    'LBL_CHANGETIMERS' => 'タイマー変更',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => '関連取引先担当者のEメール',
@@ -124,7 +127,7 @@ $mod_strings = array (
     'LBL_HELP_RECORDS' => '{{plural_module_name}}モジュールは、顧客が組織に報告した製品またはサービスに関連した問題を追跡し、管理するために使用されます。 {{plural_module_name}}は通常ひとつの{{accounts_singular_module}}に関連し、複数の{{plural_module_nameが}}  {{accounts_singular_module}}に関連しているでしょう。Sugarで{{plural_module_name}}を作成する方法はたくさんありますが、例えば{{plural_module_name}}モジュール経由で、{{quotes_module}}モジュール、{{plural_module_name}}などをインポートして、またはEメールをコンバートしてなどがあります。{{module_name}} レコードが作成されたなら、{{plural_module_name}}レコードの表示を経由して{{module_name}}に関連する情報を表示したり、編集することができます。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}}モジュールは、顧客が組織に報告した製品またはサービスに関連した問題を追跡し、管理するために使用されます。 - 個々のフィールドまたは[編集]ボタンをクリックして、このレコードのフィールドを編集します。 - 左下のペインに「データビュー」をトグルしてサブパネル内の他のレコードへのリンクを表示または変更してください。 - ユーザーコメントを作成もしくは表示し、左下ペインの「アクティブストリーム」をトグルして{{activitystream_singular_module}}内のレコードを変更してください。-レコード名の右のアイコンを使用してこのレコードをフォローするかお気に入りにしてください。- 追加のアクションは、[編集]ボタンの右にあるドロップダウンの操作メニューにあります。',
+    'LBL_HELP_RECORD' => '{{plural_module_name}}モジュールは、顧客が組織に報告した製品またはサービスに関連した問題を追跡し、管理するために使用されます。 - 個々のフィールドまたは[編集]ボタンをクリックして、このレコードのフィールドを編集します。 - 左下のペインに「データビュー」をトグルしてサブパネル内の他のレコードへのリンクを表示または変更してください。 - ユーザコメントを作成もしくは表示し、左下ペインの「アクティブストリーム」をトグルして{{activitystream_singular_module}}内のレコードを変更してください。-レコード名の右のアイコンを使用してこのレコードをフォローするかお気に入りにしてください。- 追加のアクションは、[編集]ボタンの右にあるドロップダウンの操作メニューにあります。',
 
     // Create View Help Text
     'LBL_HELP_CREATE' => '{{plural_module_name}} モジュールは、顧客が組織に報告した製品またはサービスに関連した問題を追跡し、管理するために使用されます。
@@ -134,4 +137,11 @@ $mod_strings = array (
 - 「必須」フィールドは保存前に入力完了してください。
 - 必要に応じて、追加のフィールドを展開する「更に表示」をクリックします。
 2. 新しいレコードを確定し、前のページに戻るには「保存」をクリックします。',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'お探しのものが見つかりませんでしたか？',
+    'LBL_CREATE_CASE' => '{{module_name}} を作成',
+
+    'LBL_SLA_DETAILS' => 'SLA詳細',
+    'LBL_HOURS' => '時間',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

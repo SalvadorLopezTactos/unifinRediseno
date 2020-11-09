@@ -15,7 +15,9 @@
  * This file is here to provide a HTML template for the rest help api.
  */
 
-$theme = new SidecarTheme();
+use Sugarcrm\Sugarcrm\Security\ValueObjects\PlatformName;
+
+$theme = new SidecarTheme(PlatformName::base());
 
 $css_files = $theme->getCSSURL();
 

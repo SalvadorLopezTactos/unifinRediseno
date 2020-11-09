@@ -65,6 +65,12 @@ $mod_strings = array (
   'LBL_DOMAIN'=>'Блокиран домейн:',
   'LBL_LIST_PROSPECTLIST_NAME'=>'Име',
 	'LBL_MORE_DETAIL' => 'Детайли' /*for 508 compliance fix*/,
+    'LBL_ACCOUNTS' => 'Организации',
+    'LBL_CAMPAIGNS' => 'Кампании',
+    'LBL_CONTACTS' => 'Контакти',
+    'LBL_LEADS' => 'Потенциални клиенти',
+    'LBL_PROSPECTS' => 'Целеви клиенти',
+    'LBL_USERS' => 'Потребители',
 
     // Help Text
     // List View Help Text

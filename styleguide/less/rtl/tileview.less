@@ -1,0 +1,32 @@
+.my-pipeline-content {
+  .arrowholder.left,
+  .arrowholder.right {
+    .arrow {
+      transform: rotate(180deg);
+    }
+  }
+
+  .table {
+    display: block;
+
+    .header-column .total-amount,
+    .header-text {
+      text-align: right;
+    }
+
+    .pipeline-tile .list {
+      & > div {
+        text-align: right;
+
+        a {
+          float: right;
+        }
+      }
+    }
+  }
+}
+
+.pipeline-records .main-pane .my-pipeline-content .table-responsive .table td .column .tile .pipeline-tile .tile-header:hover .btn.delete {
+  left: 4px;
+  right: auto;
+}

@@ -27,9 +27,15 @@ $mod_strings = array (
   'LBL_RESOLUTION' => 'การแก้ไข',
   'LBL_LAST_MODIFIED' => 'แก้ไขครั้งล่าสุด',
   'LBL_ASSIGNED_TO_ID'=>'ระบุให้:',
-  'LBL_ASSIGNED_TO_NAME' => 'ผู้ใช้:',  	  
+  'LBL_ASSIGNED_TO_NAME' => 'ผู้ใช้:',
   'LBL_WORK_LOG' => 'ล็อกการทำงาน:',
+    'LBL_FOLLOW_UP' => 'การติดตามผล',
     'LBL_FOLLOW_UP_DATETIME' => 'Follow Up Date',
+    'LBL_RESOLVED_DATETIME' => 'วันที่ได้รับการแก้ไข',
+    'LBL_HOURS_TO_RESOLUTION' => 'ชั่วโมงไปสู่การคลี่คลาย',
+    'LBL_BUSINESS_HOURS_TO_RESOLUTION' => 'ชั่วโมงทำการไปสู่การคลี่คลาย',
+    'LBL_PENDING_PROCESSING' => 'กำลังอยู่ในขั้นตอนดำเนินการ',
+    'LBL_WIDGET_FOLLOW_UP_DATETIME' => 'Follow Up Date',
   'LBL_CREATED_BY' => 'สร้างโดย:',
   'LBL_DATE_CREATED' => 'วันที่สร้าง:',
   'LBL_DATE_ENTERED' => 'วันที่สร้าง:',
@@ -44,5 +50,5 @@ $mod_strings = array (
     'LBL_EDIT_BUTTON' => 'แก้ไข',
     'LBL_REMOVE' => 'นำออก',
 
-  
+
   );

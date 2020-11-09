@@ -111,55 +111,9 @@ class LdapConfig extends \Google\Protobuf\Internal\Message
      */
     private $include_user_dn = false;
 
-    /**
-     * Constructor.
-     *
-     * @param array $data {
-     *     Optional. Data for populating the Message object.
-     *
-     *     @type bool $auto_create_users
-     *           If the authenticated user does not exist one will be created using the
-     *           bind attribute as `User.sub_id`.
-     *     @type string $server
-     *           Example:
-     *           ldap.example.com
-     *           ldaps://ldap.example.com (for TLS)
-     *           ldaps://ldap.example.com:1234 (TLS and port)
-     *     @type string $user_dn
-     *           Example: ou=people,dc=example,dc=com
-     *     @type string $user_filter
-     *           Any additional filter params to apply when authenticating users
-     *           e.g. is_sugar_user=1 or (is_sugar_user=1)(is_sales=1)
-     *     @type string $bind_attribute
-     *           For Binding the LDAP User
-     *           Examples: AD: userPrincipalName, openLDAP: userPrincipalName, Mac OS X: uid
-     *     @type string $login_attribute
-     *           For searching for the LDAP User
-     *           Examples:AD: userPrincipalName, openLDAP: dn, Mac OS X: dn
-     *     @type bool $authentication
-     *           Bind to the LDAP server using a specific users credentials
-     *     @type string $authentication_user_dn
-     *           Used to search for the user. [May need to be fully qualified] It will bind anonymously if not provided.
-     *     @type string $authentication_password
-     *     @type bool $group_membership
-     *           Users must be a member of a specific group
-     *     @type string $group_dn
-     *           Example: ou=groups,dc=example,dc=com
-     *     @type string $group_name
-     *           Example cn=sugarcrm
-     *     @type string $group_attribute
-     *           The attribute of the Group that will be used to filter against the User Attribute
-     *           Example: memberUid
-     *     @type string $user_unique_attribute
-     *           The unique identifier of the person that will be used to check if they are a member of the group
-     *           Example: uid
-     *     @type bool $include_user_dn
-     *           Include the User DN with the User Attribute when checking group membership
-     * }
-     */
-    public function __construct($data = NULL) {
+    public function __construct() {
         \GPBMetadata\Apis\Iam\Provider\V1Alpha\Provider::initOnce();
-        parent::__construct($data);
+        parent::__construct();
     }
 
     /**

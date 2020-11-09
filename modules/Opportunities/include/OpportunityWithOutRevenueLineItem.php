@@ -68,6 +68,9 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
             'workflow' => true
         ),
         'sales_stage' => array(
+            'calculated' => false,
+            'enforced' => false,
+            'formula' => '',
             'audited' => true,
             'required' => true,
             'studio' => true,
@@ -100,7 +103,7 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
         'closed_revenue_line_items' => array(
             'reportable' => false,
             'workflow' => false
-        )
+        ),
     );
 
     /**
@@ -135,7 +138,9 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
                 'commit_stage' => $this->isForecastSetup(),
                 'sales_status' => false,
                 'sales_stage' => true,
-                'probability' => true
+                'probability' => true,
+                'renewal' => false,
+                'renewal_parent_name' => false,
             )
         );
 
@@ -145,6 +150,8 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
                 'commit_stage' => $this->isForecastSetup(),
                 'sales_status' => 'sales_stage',
                 'probability' => true,
+                'renewal' => false,
+                'renewal_parent_name' => false,
             )
         );
 
@@ -163,12 +170,23 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
      * - Removes the duplicate check change
      * - Removes the dependency extension that turns off the default oob dependencies
      */
-    protected function fixOpportunityModule()
+    public function fixOpportunityModule()
     {
+        // Clear the Opportunities extension vardefs
         if (file_exists($this->moduleExtFolder . '/Vardefs/' . $this->dupeCheckExtFile)) {
             unlink($this->moduleExtFolder . '/Vardefs/' . $this->dupeCheckExtFile);
         }
 
+        // Remove the renewal fields from the Opportunities module
+        SugarAutoLoader::ensureDir($this->moduleExtFolder . '/Vardefs');
+        $file_contents = <<<EOL
+<?php
+\$dictionary['Opportunity']['fields']['renewal'] = null;
+\$dictionary['Opportunity']['fields']['renewal_parent_name'] = null;
+EOL;
+        sugar_file_put_contents($this->moduleExtFolder . '/Vardefs/' . $this->dupeCheckExtFile, $file_contents);
+
+        // Clear the Opportunities extension dependencies
         if (file_exists($this->moduleExtFolder . '/Dependencies/' . $this->oppModuleDependencyFile)) {
             unlink($this->moduleExtFolder . '/Dependencies/' . $this->oppModuleDependencyFile);
         }
@@ -228,6 +246,10 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
 
         // disable the ACLs on RevenueLineItems
         ACLAction::removeActions('RevenueLineItems');
+
+        // remove RLI from lead convert settings
+        $parser = new ConvertLayoutMetadataParser('RevenueLineItems');
+        $parser->removeLayout('RevenueLineItems');
 
         // add the RLI module
         $affected_modules[] = 'RevenueLineItems';
@@ -630,5 +652,21 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
     protected function fixProductsModule()
     {
         $this->fixProductsModuleField('revenuelineitem_name', 'massupdate', false);
+    }
+
+    /**
+     * Fix Account module.
+     */
+    protected function fixAccountModule()
+    {
+        // lets make sure the dir is there
+        SugarAutoLoader::ensureDir($this->accModuleExtFolder . '/Vardefs');
+        
+        $file_contents = <<<EOL
+<?php
+\$dictionary['Account']['fields']['next_renewal_date'] = null;
+EOL;
+        
+        sugar_file_put_contents($this->accModuleExtFolder . '/Vardefs/' . $this->accModuleExtVardefFile, $file_contents);
     }
 }

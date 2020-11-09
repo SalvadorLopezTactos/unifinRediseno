@@ -1,5 +1,4 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -556,6 +555,142 @@ $mod_strings = array(
 	'LBL_PATCH_UPLOAD' => 'Uploader un patch',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Le mode Php Backward Compatibility est activé. Positionnez zend.ze1_compatibility_mode à Off pour la suite',
 
+    'meeting_notification_email' => array(
+        'name' => 'E-mails de notification de réunion',
+        'subject' => 'Réunion SugarCRM - $event_name ',
+        'description' => 'Ce modèle est utilisé lorsque le système envoie une notification de réunion à un utilisateur.',
+        'body' => '<div>
+	<p>À : $assigned_user</p>
+
+	<p>$assigned_by_user vous a invité à une réunion</p>
+
+	<p>Objet : $event_name<br/>
+	Date de début : $start_date<br/>
+	Date de fin : $end_date</p>
+
+	<p>Description : $description</p>
+
+	<p>Accepter cette réunion :<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Accepter provisoirement cette réunion :<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Refuser cette réunion :<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'À : $assigned_user
+
+$assigned_by_user vous a invité à une réunion
+
+Objet : $event_name
+Date de début : $start_date
+Date de fin : $end_date
+
+Description : $description
+
+Accepter cette réunion :
+<$accept_link>
+
+Accepter provisoirement cette réunion
+<$tentative_link>
+
+Refuser cette réunion
+<$decline_link>',
+    ),
+
+    'call_notification_email' => array(
+        'name' => 'E-mails de notification d\'appel',
+        'subject' => 'Appel SugarCRM - $event_name ',
+        'description' => 'Ce modèle est utilisé lorsque le système envoie une notification d\'appel à un utilisateur.',
+        'body' => '<div>
+	<p>À : $assigned_user</p>
+
+	<p>$assigned_by_user vous a invité à un appel</p>
+
+	<p>Objet : $event_name<br/>
+	Date de début : $start_date<br/>
+	Durée : $hoursh, $minutesm</p>
+
+	<p>Description : $description</p>
+
+	<p>Accepter cet appel :<br/>
+	<<a href="$accept_link">$accept_link</a>></p>
+	<p>Accepter provisoirement cet appel :<br/>
+	<<a href="$tentative_link">$tentative_link</a>></p>
+	<p>Refuser cet appel :<br/>
+	<<a href="$decline_link">$decline_link</a>></p>
+</div>',
+        'txt_body' =>
+            'À : $assigned_user
+
+$assigned_by_user vous a invité à un appel
+
+Objet : $event_name
+Date de début : $start_date
+Durée : $hoursh, $minutesm
+
+Description : $description
+
+Accepter cet appel :
+<$accept_link>
+
+Accepter provisoirement cet appel
+<$tentative_link>
+
+Refuser cet appel
+<$decline_link>',
+    ),
+
+    'assigned_notification_email' => array(
+        'name' => 'E-mails de notification d\'assignation',
+        'subject' => 'SugarCRM - $module_name assigné ',
+        'description' => 'Ce modèle est utilisé lorsque le système envoie une assignation de tâche à un utilisateur.',
+        'body' => '<div>
+<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+
+<p>Vous pouvez vérifier ce&nbsp;$module_name sur :<br/>
+	<<a href="$module_link">$module_link</a>></p>
+</div>',
+        'txt_body' =>
+            '$assigned_by_user has assigned a $module_name to $assigned_user.
+
+Vous pouvez vérifier $module_name sur :
+<$module_link>',
+    ),
+
+    'scheduled_report_email' => array(
+        'name' => 'E-mails de rapport planifié',
+        'subject' => 'Rapport planifié : $report_name à partir de $report_time',
+        'description' => 'Ce modèle est utilisé lorsque le système envoie un rapport planifié à un utilisateur.',
+        'body' => '<div>
+<p>Bonjour $assigned_user,</p>
+<p>Vous trouverez ci-joint un rapport généré automatiquement et planifié pour vous.</p>
+<p>Nom du rapport : $report_name</p>
+<p>Date et heure d\'exécution du rapport : $report_time</p>
+</div>',
+        'txt_body' =>
+            'Bonjour $assigned_user,
+
+Vous trouverez ci-joint un rapport généré automatiquement et planifié pour vous.
+
+Nom du rapport : $report_name
+
+Date et heure d\'exécution du rapport : $report_time',
+    ),
+
+    'comment_log_mention_email' => [
+        'name' => 'System Comment Log Email Notification',
+        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
+        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'body' =>
+            '<div>
+                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
+                <p>Please log in to Sugar to view the comment.</p>
+            </div>',
+        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
+            Please log in to Sugar to view the comment.',
+    ],
+
     'advanced_password_new_account_email' => array(
         'subject' => 'Information de votre compte utilisateur',
         'description' => 'Ce modèle est utilisé quand l\'administrateur envoi un nouveau mot de passe à un utilisateur.',
@@ -584,4 +719,32 @@ Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe :
 $contact_user_link_guid',
         'name' => 'Mot de passe d\'email oublié',
         ),
+
+'portal_forgot_password_email_link' => [
+    'name' => 'Email de mot de passe oublié du portail',
+    'subject' => 'Réinitialiser le mot de passe de votre compte utilisateur',
+    'description' => 'Ce modèle est utilisé pour transmettre à un utilisateur un lien à cliquer pour réinitialiser le mot de passe de son compte du portail.',
+    'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Vous venez de demander la réinitialisation du mot de passe de votre compte. </p><p>Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe :</p><p> <a href="$portal_user_link_guid">$portal_user_link_guid</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+    'txt_body' =>
+'
+    Vous venez de demander la réinitialisation du mot de passe de votre compte.
+
+    Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe :
+
+    $portal_user_link_guid',
+],
+
+    'portal_password_reset_confirmation_email' => [
+        'name' => 'Email de confirmation de réinitialisation du mot de passe du portail',
+        'subject' => 'Le mot de passe de votre compte a été réinitialisé',
+        'description' => 'Ce modèle est utilisé pour envoyer une confirmation de réinitialisation du mot de passe de son compte à un utilisateur du Portail.',
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Cet email a pour but de confirmer la réinitialisation du mot de passe de votre compte sur le Portail. </p><p>Utilisez le lien ci-dessous pour vous connecter au Portail :</p><p> <a href="$portal_login_url">$portal_login_url</a> </p> </td> </tr><tr><td colspan=\"2\"></td> </tr> </tbody></table> </div>',
+        'txt_body' =>
+            '
+    Cet email a pour but de confirmer la réinitialisation du mot de passe de votre compte sur le Portail.
+
+    Utilisez le lien ci-dessous pour vous connecter au Portail :
+
+    $portal_login_url',
+    ],
 );

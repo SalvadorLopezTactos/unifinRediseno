@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicar artigos aprovados e artigos KB expirados.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Tarefa agendada',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Reconstruir os dados de segurança não normalizados da equipe',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Purgador de cadeia de atividades',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervalo:',
@@ -163,6 +164,7 @@ Para sair, digite 'quit'. Para desligar o serviço, 'shutdown'.
 'LBL_SENDEMAILREMINDERS'=> 'Executar envio de lembretes por e-mail',
 'LBL_CLEANJOBQUEUE' => 'Limpar fila de trabalho',
 'LBL_CLEANOLDRECORDLISTS' => 'Limpar listas antigas de registros',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Purgador de cadeia de atividades',
 'LBL_PMSEENGINECRON' => 'Agendador do SugarBPM',
 );
 

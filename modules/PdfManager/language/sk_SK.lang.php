@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'Náhľad',
   'LBL_ALERT_SWITCH_BASE_MODULE' => 'UPOZORNENIE: Ak zmeníte primárny modul, všetky polia už pridané do šablóny budú musieť byť odstránené.',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'Tu je požadovaný súbor (môžete zmeniť tento text).',
-  
 
   'LBL_TPL_QUOTE_NAME' => 'Kvóta',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'Táto šablóna sa používa pre tlač Kvóty vo formáte PDF.',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => 'kvóta',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => 'Ponuka (so službami)',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'Táto šablóna sa používa pre tlač ponuky, vrátane informácií o službách, vo formáte PDF.',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'ponukaslužieb',
+
   'LBL_TPL_INVOICE_NAME' => 'Faktúra',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'Táto šablóna sa používa pre tlač faktúry vo formáte PDF.',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => 'faktúra',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'Faktúra (so službami)',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'Táto šablóna sa používa pre tlač faktúry, vrátane informácií o službách, vo formáte PDF.',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'faktúraslužieb',
+
   'LBL_TPL_QUOTE_NUMBER' => 'Číslo kvóty:',
   'LBL_TPL_SALES_PERSON' => 'Predajca:',
   'LBL_TPL_VALID_UNTIL' => 'Platí do:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'Referenčné číslo:',
   'LBL_TPL_PRODUCT' => 'Produkt',
   'LBL_TPL_RLI' => 'Položky riadku príjmov',
+  'LBL_TPL_DURATION' => 'Trvanie',
+  'LBL_TPL_DURATION_STARTS' => 'Začiatok:',
+  'LBL_TPL_DURATION_ENDS' => 'Ukončenie:',
   'LBL_TPL_LIST_PRICE' => 'Cenník',
   'LBL_TPL_UNIT_PRICE' => 'Jednotková cena',
   'LBL_TPL_EXT_PRICE' => 'Ext. cena',

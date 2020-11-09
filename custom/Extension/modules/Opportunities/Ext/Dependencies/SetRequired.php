@@ -61,6 +61,7 @@ $dependencies['Opportunities']['anio_c_required'] = array(
         ),
     ),
 );
+/*
 $dependencies['Opportunities']['f_tipo_factoraje_c_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
@@ -91,7 +92,7 @@ $dependencies['Opportunities']['f_aforo_c_required'] = array(
         ),
     ),
 );
-
+*/
 $dependencies['Opportunities']['assigned_user_name_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',

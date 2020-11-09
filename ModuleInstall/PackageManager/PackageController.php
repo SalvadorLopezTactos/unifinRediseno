@@ -314,30 +314,54 @@
             }
         }
 
- 		function remove(){
-            $file = '';
-
-            if(isset($_REQUEST['file'])) {
-                 $file = urldecode(hashToFile($_REQUEST['file']));
-            }
-            $GLOBALS['log']->debug("FILE TO REMOVE: ".$file);
-            if(!empty($file)){
-            	unlink($file);
-            	foreach(array("manifest", "icon") as $meta) {
-            	    $this->rmMetaFile($file, $meta);
-            	}
-                $realpath = UploadFile::realpath($file);
-                $md5_file = $realpath . '.md5';
-            if (file_exists($md5_file)) {
-                unlink($md5_file);
-            }
-            }
-            $this->sendJsonOutput(array('result' => 'true'));
+    /**
+     * Get package file path from $_REQUEST['file'] and remove all package related files.
+     * Directly return JSON to client
+     */
+    public function remove(): void
+    {
+        $file = '';
+        if (!empty($_REQUEST['file'])) {
+            $file = urldecode(hashToFile($_REQUEST['file']));
         }
+        try {
+            $this->removePackageFiles($file);
+            $result = true;
+        } catch (SugarException $e) {
+            $result = false;
+        }
+        $this->sendJsonOutput(['result' => $result]);
+    }
+
+    /**
+     * Remove all package related files. Return
+     * @param string $file path to package file
+     * @throws SugarException
+     */
+    public function removePackageFiles(string $file): void
+    {
+        global $log;
+        if (empty($file)) {
+            throw new SugarException('ERR_UW_NO_PACKAGE_FILE', null, 'Administration');
+        }
+
+        $log->debug('FILE TO REMOVE: ' . $file);
+        if (file_exists($file)) {
+            unlink($file);
+        }
+        // The package might be broken. That's why all meta files must be removed too.
+        foreach (['manifest', 'icon'] as $meta) {
+            $this->rmMetaFile($file, $meta);
+        }
+        $md5FilePath = UploadFile::realpath($file) . '.md5';
+        if (file_exists($md5FilePath)) {
+            unlink($md5FilePath);
+        }
+    }
 
     /**
     * Sends output in a JSON format
-    * 
+    *
     * @param mixed $output
     */
     protected function sendJsonOutput($output)

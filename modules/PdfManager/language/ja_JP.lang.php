@@ -33,7 +33,7 @@ $mod_strings = array (
   'LBL_LIST_NAME' => '名前',
   'LBL_LIST_FORM_TITLE' => 'PDFテンプレート一覧',
   'LBL_MODULE_NAME' => 'PDF設定',
-  'LBL_MODULE_NAME_SINGULAR' => 'PDFマネージャー',
+  'LBL_MODULE_NAME_SINGULAR' => 'PDFマネージャ',
   'LBL_MODULE_TITLE' => 'PDF設定',
   'LBL_HOMEPAGE_TITLE' => '私のPDFテンプレート',
   'LNK_NEW_RECORD' => 'PDFテンプレート作成',
@@ -53,8 +53,8 @@ $mod_strings = array (
   'LBL_TITLE' => 'タイトル',
   'LBL_SUBJECT' => '件名',
   'LBL_KEYWORDS' => 'キーワード',
-  'LBL_AUTHOR' => '著作者',
-  'LBL_PUBLISHED_POPUP_HELP' => 'それをユーザーに利用可能にするために、テンプレートを出版しなさい。',
+  'LBL_AUTHOR' => '作成者',
+  'LBL_PUBLISHED_POPUP_HELP' => 'テンプレートを発行してユーザが使用できるようにします。',
   'LBL_BASE_MODULE_POPUP_HELP' => 'テンプレートで利用可能なモジュールを選択してください。',
   'LBL_FIELD_POPUP_HELP' => 'フィールド値のための変数を挿入するために、フィールドを選びなさい。親モジュールのフィールドを選ぶためには、最初、最初のドロップダウンのフィールドリストの底でリンクエリアのモジュールを選び、そして、2番目のドロップダウンのフィールドを選びなさい。',
   'LBL_BODY_HTML_POPUP_HELP' => 'HTMLエディタでテンプレートを作成します。テンプレートを保存後、テンプレートのPDF版をプレビューできます。',
@@ -67,16 +67,23 @@ $mod_strings = array (
   'LBL_PREVIEW' => 'プレビュー',
   'LBL_ALERT_SWITCH_BASE_MODULE' => '警告：基本モジュールを変更した場合、既にテンプレートに追加されたすべてのフィールドを削除する必要があります。',  
   'LBL_EMAIL_PDF_DEFAULT_DESCRIPTION' => 'これは要求されたファイルです（テキストは変更可能です）',
-  
 
   'LBL_TPL_QUOTE_NAME' => '見積書',
   'LBL_TPL_QUOTE_DESCRIPTION' => 'このテンプレートは見積書をPDFで作成するときに使用されます。',
   'LBL_TPL_QUOTE_TEMPLATE_NAME' => '見積',
 
+  'LBL_TPL_QUOTE_SERVICES_NAME' => '見積（サービスに関する）',
+  'LBL_TPL_QUOTE_SERVICES_DESCRIPTION' => 'このテンプレートは、サービスインフォメーションを含めた見積をPDFで印刷するために使用します。',
+  'LBL_TPL_QUOTE_SERVICES_TEMPLATE_NAME' => 'サービス見積',
+
   'LBL_TPL_INVOICE_NAME' => '請求書',
   'LBL_TPL_INVOICE_DESCRIPTION' => 'このテンプレートは請求書をPDFで作成するときに使用されます。',
   'LBL_TPL_INVOICE_TEMPLATE_NAME' => '請求',
-  
+
+  'LBL_TPL_INVOICE_SERVICES_NAME' => 'インボイス（サービスに関する）',
+  'LBL_TPL_INVOICE_SERVICES_DESCRIPTION' => 'このテンプレートは、サービスインフォメーションを含めたインボイスをPDFで印刷するために使用します。',
+  'LBL_TPL_INVOICE_SERVICES_TEMPLATE_NAME' => 'サービスインボイス',
+
   'LBL_TPL_QUOTE_NUMBER' => '見積番号:',
   'LBL_TPL_SALES_PERSON' => '営業:',
   'LBL_TPL_VALID_UNTIL' => '有効期限:',
@@ -88,6 +95,9 @@ $mod_strings = array (
   'LBL_TPL_PART_NUMBER' => 'パートナンバー',
   'LBL_TPL_PRODUCT' => '商品',
   'LBL_TPL_RLI' => '商談品目',
+  'LBL_TPL_DURATION' => '期間',
+  'LBL_TPL_DURATION_STARTS' => '開始；',
+  'LBL_TPL_DURATION_ENDS' => '終了：',
   'LBL_TPL_LIST_PRICE' => '定価',
   'LBL_TPL_UNIT_PRICE' => '単価',
   'LBL_TPL_EXT_PRICE' => '価格',
@@ -104,9 +114,9 @@ $mod_strings = array (
   'LBL_TPL_INVOICE_NUMBER' => '請求番号:',
   'LBL_TPL_QUOTE' => '見積書',
   'LBL_TPL_INVOICE' => '請求書',
-  'LBL_HEADER_TITLE' => 'ヘッダータイトル',
-  'LBL_HEADER_TEXT' => 'ヘッダーテキスト',
-  'LBL_HEADER_LOGO_FILE' => 'ヘッダーロゴファイル',
-  'LBL_FOOTER_TEXT' => 'フッターテキスト',
+  'LBL_HEADER_TITLE' => 'ヘッダタイトル',
+  'LBL_HEADER_TEXT' => 'ヘッダテキスト',
+  'LBL_HEADER_LOGO_FILE' => 'ヘッダロゴファイル',
+  'LBL_FOOTER_TEXT' => 'フッタテキスト',
 
 );

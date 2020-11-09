@@ -105,4 +105,6 @@ $mod_strings = array(
     'LBL_OPERATOR_LAST_YEAR' => 'poprzedni rok',
     'LBL_OPERATOR_THIS_YEAR' => 'ten rok',
     'LBL_OPERATOR_NEXT_YEAR' => 'następny rok',
+    'LBL_OPEN_ISSUES' => 'Otwórz {0}',
+    'LBL_RECENTLY_RESOLVED_ISSUES' => 'Ostatnio rozwiązane',
 );

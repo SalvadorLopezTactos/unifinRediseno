@@ -21,7 +21,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'แดชบอร์ดรายการผู้ติดต่อ',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกผู้ติดต่อ',
-
+    'LBL_SITE_USER_ID' => 'แฮชของเว็บไซต์_url และ id_ผู้ติดต่อ',
+    'LBL_COOKIE_CONSENT' => 'การยอมรับคุกกี้',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'ได้รับการยอมรับคุกกี้ใน',
     'LNK_CONTACT_REPORTS' => 'ดูรายงานที่อยู่ติดต่อ',
     'ERR_DELETE_RECORD' => 'ระบุเลขที่ระเบียนเพื่อลบที่อยู่ติดต่อ',
     'LBL_ACCOUNT_ID' => 'ID บัญชี:',
@@ -123,6 +125,7 @@ $mod_strings = array (
     'LBL_PORTAL_INFORMATION' => 'ข้อมูลพอร์ทัล',
     'LBL_PORTAL_NAME' => 'ชื่อพอร์ทัล:',
     'LBL_PORTAL_PASSWORD_ISSET' => 'ตั้งค่ารหัสผ่านพอร์ทัล:',
+    'LBL_PORTAL_USER_COMPANY_NAME' => 'ชื่อบริษัทผู้ใช้พอร์ทัล',
     'LBL_RECORD_SAVED_SUCCESS' => 'คุณสร้าง {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a> สำเร็จแล้ว',
     'LBL_STREET' => 'ถนน',
     'LBL_POSTAL_CODE' => 'รหัสไปรษณีย์:',
@@ -179,6 +182,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITIES_SUBPANEL_TITLE' => 'โอกาสทางการขาย',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'เอกสาร',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'การเสนอราคา',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
     'LBL_QUOTES_SHIP_TO' => 'การเสนอราคา (จัดส่ง)',
     'LBL_QUOTES_BILL_TO' => 'การเสนอราคา (เรียกเก็บเงิน)',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'รายการบรรทัดการเสนอราคา',
@@ -243,6 +247,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_PROFILE_EDIT' => 'คลิกที่นี่เพื่อแก้ไขโปรไฟล์ของคุณ',
     'LBL_PORTAL_TOUR_PROFILE_LANGUAGE' => 'คุณสามารถกำหนดภาษาที่ต้องการได้ที่นี่ ซึ่งจะเปลี่ยนภาษาที่ใช้โดย Sugar Portal',
     'LBL_PORTAL_TOUR_PROFILE_RETURN' => 'คุณสามารถกลับไปที่โปรไฟล์ของคุณได้ทุกเมื่อโดยใช้เมนูผู้ใช้',
+    'ERR_PORTAL_NAME_EXISTS' => 'มีชื่อพอร์ทัล {0} แล้ว ระบบไม่อนุญาตให้มีชื่อพอร์ทัลซ้ำกัน โปรดเปลี่ยนชื่อพอร์ทัลเป็นชื่อที่ไม่ซ้ำกัน',
 
     //D&B Principal Identification
     'LBL_DNB_PRINCIPAL_ID' => 'ID ตัวการของ D&B',
@@ -279,4 +284,8 @@ $mod_strings = array (
     'LBL_FILTER_CONTACTS_REPORTS' => 'รายงานของที่อยู่ติดต่อ',
     'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'ยอมรับจุดประสงค์ต่าง ๆ ทางธุรกิจเพื่อ',
     'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'ยอมรับการปรับปรุงครั้งล่าสุด',
+
+    'LBL_ENTRY_SOURCE' => 'ที่มาของผู้ติดต่อ',
+    'LBL_SOURCE_EXTERNAL' => 'ภายนอก',
+    'LBL_SOURCE_INTERNAL' => 'ภายใน',
 );

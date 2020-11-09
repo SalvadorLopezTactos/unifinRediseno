@@ -47,7 +47,7 @@ return array(
                                 'label' => 'TPL_DASHLET_MY_MODULE',
                                 'display_columns' =>
                                 array(
-                                    'full_name',
+                                    'name',
                                     'account_name',
                                     'email',
                                     'phone_work',

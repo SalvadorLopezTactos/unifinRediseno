@@ -22,6 +22,7 @@ $mod_strings = array (
 
   'LBL_PRJ_STATUS' => 'Статус',
   'LBL_PRJ_MODULE' => 'Основной модуль',
+  'LBL_PRJ_RUN_ORDER' => 'Порядок выполнения',
   'LBL_PMSE_BUTTON_SAVE' => 'Сохранить',
   'LBL_PMSE_BUTTON_CANCEL' => 'Отмена',
   'LBL_PMSE_BUTTON_YES' => 'Да',
@@ -52,6 +53,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Определение процесса было импортировано, но содержит одно или несколько действий Бизнес-правил, для которых не были выбраны бизнес-правила.',
     'LBL_BPM_IMPORT_SELECT' => 'Это определение процесса содержит указанные ниже бизнес-правила и шаблоны электронной почты. '
         . 'Выберите те, которые нужно импортировать.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_ERROR' => 'There was an error importing the Process Definition.',
     'LBL_BUSINESS_RULES' => 'Бизнес-правила',
     'LBL_EMAIL_TEMPLATES' => 'Шаблоны сообщений',
 
@@ -193,12 +195,14 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_SUPERVISOR' => 'Ответственный руководитель',
     'LBL_PMSE_FORM_OPTION_CREATED_BY_USER' => 'Создано пользователем',
     'LBL_PMSE_FORM_OPTION_LAST_MODIFIED_USER' => 'Последнее изменение пользователем',
+    'LBL_PMSE_FORM_OPTION_SYSTEM_EMAIL' => 'Электронная почта системы',
 
     'LBL_PMSE_FORM_TITLE_BUSINESS_RULE' => 'Бизнес-правило',
     'LBL_PMSE_LABEL_RULE' => 'Правило',
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Назначить ответственного пользователя',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Обновить поле "Ответственный (-ая)" записи',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Добавить связанную запись',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Связанный модуль',
@@ -210,6 +214,11 @@ $mod_strings = array (
 
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Название активности - пусто.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Название "%s" уже существует.',
+
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -310,6 +319,11 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_DAYS' => 'дней',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_HOURS' => 'часов',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_MINUTES' => 'минут',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_HOURS' => 'рабочие часы',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER' => 'Бизнес-центр',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM_TARGET_MODULE' => 'Из основного модуля',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_FROM' => 'Из ',
+    'LBL_PMSE_EXPCONTROL_CONSTANTS_TIMESPAN_BUSINESS_CENTER_MODULE' => ' Модуль',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC' => 'Строка, число и булевое значение',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_NUMBER' => 'Номер',
     'LBL_PMSE_EXPCONTROL_CONSTANTS_BASIC_VALUE' => 'Значение',

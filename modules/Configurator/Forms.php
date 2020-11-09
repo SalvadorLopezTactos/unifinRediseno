@@ -49,7 +49,6 @@ function add_checks(f) {
 	removeFromValidate('ConfigureSettings', 'list_max_entries_per_subpanel');	
 
 	removeFromValidate('ConfigureSettings', 'logger_file_name');
-	removeFromValidate('ConfigureSettings', 'logger_file_ext');
 	removeFromValidate('ConfigureSettings', 'logger_file_maxSize');
 	removeFromValidate('ConfigureSettings', 'logger_file_maxLogs');
 
@@ -81,7 +80,6 @@ function add_checks(f) {
 	addToValidateMoreThan('ConfigureSettings', 'commentlog_maxchars', 'int', true, '', 1);
 
 	addToValidate('ConfigureSettings', 'logger_file_name', 'varchar', 'true', '{$mod_strings['LBL_LOGGER_FILENAME']}');
-	addToValidate('ConfigureSettings', 'logger_file_ext', 'varchar', 'true', '{$mod_strings['LBL_LOGGER_FILE_EXTENSION']}');
 	addToValidate('ConfigureSettings', 'logger_file_maxSize', 'varchar', 'true', '{$mod_strings['LBL_LOGGER_MAX_LOG_SIZE']}');
 	addToValidateMoreThan('ConfigureSettings', 'logger_file_maxLogs', 'int', true, '', 1);
 	

@@ -15,6 +15,7 @@ $mod_strings = array(
     // Dashboard Names
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => '机会列表仪表板',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => '机会记录仪表板',
+    'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => '商业机会详细信息',
 
     'LBL_MODULE_NAME' => '商业机会',
     'LBL_MODULE_NAME_SINGULAR' => '商业机会',
@@ -25,6 +26,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_NAME' => '商业机会名称：',
     'LBL_OPPORTUNITY' => '商业机会：',
     'LBL_NAME' => '商业机会名称',
+    'LBL_TIME' => '时间',
     'LBL_INVITEE' => '联系人',
     'LBL_CURRENCIES' => '货币',
     'LBL_LIST_OPPORTUNITY_NAME' => '名称',
@@ -75,6 +77,7 @@ $mod_strings = array(
     'LBL_TYPE' => '类型：',
     'LBL_CAMPAIGN' => '市场活动：',
     'LBL_NEXT_STEP' => '下一步：',
+    'LBL_SERVICE_START_DATE' => 'Service Start Date',
     'LBL_LEAD_SOURCE' => '潜在客户来源',
     'LBL_SALES_STAGE' => '销售阶段',
     'LBL_SALES_STATUS' => '状态',
@@ -142,6 +145,16 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE_FORECAST' => '预测',
     'LBL_WORKSHEET' => '工作表',
 
+    'LBL_RENEWAL' => '续订',
+    'LBL_RENEWAL_OPPORTUNITIES' => '续订商业机会',
+    'LBL_RENEWAL_PARENT' => '父级商业机会',
+    'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => '续订父 ID',
+    'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
+
+    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
+    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
+    'LBL_WIDGET_AMOUNT' => 'Amount',
+
     'TPL_RLI_CREATE' => '商业机会必须拥有关联的营收单项。',
     'TPL_RLI_CREATE_LINK_TEXT' => '新建营收单项。',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => '已报价单项',
@@ -152,6 +165,7 @@ $mod_strings = array(
     'NOTICE_NO_DELETE_CLOSED_RLIS' => '您不能删除包含已完成营收单项的商业机会',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => '所选择的记录中有一个或多个包含已完成营收单项，因此不能删除。',
     'LBL_INCLUDED_RLIS' => '包含的营收单项数量',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => '报价',
 
@@ -186,19 +200,19 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => '在您第一次执行此变更之后，系统会为每个现有的 {{module_name}} 在背景中创建营收单项记录。营收单项完成并可用后，系统会发送通知至您保存在用户资料中的电子邮件地址。请注意：您的实例必须通过“管理 > 电子邮件设置”配置为可发送电子邮件，才可能完成发送通知的动作。',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} 模块允许您全程追踪个人销售。每个 {{module_name}} 记录都代表一次预期销售，包含相关销售数据且与 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。{{module_name}} 一般会经历几个销售阶段，直到被标记为“谈成结束”或“丢单结束”。通过 Sugar 的 {{forecasts_singular_module}}ing 模块可以进一步利用 {{plural_module_name}} 来了解和预测销售趋势，并着力于达到销售定额。',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} 模块允许您全程追踪个人销售。每个 {{module_name}} 记录都代表一次预期销售，包括相关销售数据，且与 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。{{module_name}} 在最终标记为“谈成结束”或“丢单结束”前通常需要经过几个销售阶段。可使用 Sugar 的 {{forecasts_singular_module}}ing 模块来了解并预测销售趋势以及集中精力完成销售限额，对 {{plural_module_name}} 进行进一步利用。',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => '{{plural_module_name}} 模块允许您全程追踪个人销售和这些销售的明细项目。每个 {{module_name}} 记录都代表一次预期销售，包括相关销售数据，且与 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。
 
 - 通过点击单个字段或“编辑”按钮，编辑此记录的字段。 
-- 通过切换左下角窗格至“数据视图”，查看或修改子面板其他记录的链接。 
-- 通过切换左下角窗格至“活动流”，在 {{activitystream_singular_module}} 中撰写和查看用户注释以及记录更改历史。 
+- 通过将左下角窗格切换至“数据视图”，查看或修改子面板中其他记录的链接。 
+- 通过将左下角窗格切换至“活动流”，在 {{activitystream_singular_module}} 中撰写和查看用户注释以及记录更改历史。 
 - 使用记录名称右侧的图标关注此记录或将其新增至收藏夹。 
 - “编辑”按钮右侧的下拉“操作”菜单提供其他操作选项。',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} 模块允许您全程追踪销售和这些销售的明细项目。每个 {{module_name}} 记录都代表一次预期销售，包含相关销售数据，且与 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。
+    'LBL_HELP_CREATE' => '{{plural_module_name}} 模块允许您全程追踪个人销售和这些销售的明细项目。每个 {{module_name}} 记录都代表一次预期销售，包含相关销售数据，且与 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。
 
 若要创建 {{module_name}}：
 1. 按需提供字段值。
@@ -216,4 +230,6 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => '用气泡图显示前十个商业机会。',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => '我的商业机会',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "我的团队的商业机会",
+
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
 );

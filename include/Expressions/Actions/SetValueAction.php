@@ -153,14 +153,20 @@ JS;
                 }
             }
         } else {
+            $isDateTimeField = !empty($def['type']) && in_array($def['type'], [
+                'date',
+                'time',
+                'datetime',
+                'datetimecombo',
+            ]);
             if (isset($def['type']) && $def['type'] == 'bool') {
                 $target->$field = $result === true || $result === AbstractExpression::$TRUE;
+            } elseif (is_array($result) && $def['type'] != 'multienum') {
+                $target->$field = implode(', ', $result);
+            } elseif ($isDateTimeField && $result === false) {
+                $target->$field = null;
             } else {
-                if (is_array($result) && $def['type'] != 'multienum') {
-                    $target->$field = implode(', ', $result);
-                } else {
-                    $target->$field = $result;
-                }
+                $target->$field = $result;
             }
         }
     }

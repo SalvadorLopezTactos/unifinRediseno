@@ -12,9 +12,9 @@
 
 namespace Sugarcrm\IdentityProvider\Tests\Unit\App\Listener\Success;
 
-use Pimple\Container;
+use Sugarcrm\IdentityProvider\App\Application;
+use Sugarcrm\IdentityProvider\App\Authentication\CookieService;
 use Sugarcrm\IdentityProvider\App\Subscriber\TranslationSubscriber;
-use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -28,7 +28,7 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 class TranslationSubscriberTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject | Container
+     * @var \PHPUnit_Framework_MockObject_MockObject | Application
      */
     protected $application;
 
@@ -67,10 +67,30 @@ class TranslationSubscriberTest extends \PHPUnit_Framework_TestCase
      */
     protected $filterResponseEvent;
 
+    /**
+     * @var CookieService | \PHPUnit_Framework_MockObject_MockObject
+     */
+    private $cookieService;
+
+    /**
+     * @var string
+     */
+    private $paramName = 'locale';
+
+    /**
+     * @var TranslationSubscriber
+     */
+    private $subscriber;
 
     protected function setUp()
     {
-        $this->application = new Container();
+        $this->cookieService = $this->createMock(CookieService::class);
+
+        $this->application =  $this->createMock(Application::class);
+        $this->application->method('getCookieService')->willReturn($this->cookieService);
+        $this->application->method('offsetGet')->willReturnMap([
+            ['locale', 'en-US'],
+        ]);
 
         $this->request = $this->createMock(Request::class);
 
@@ -92,6 +112,8 @@ class TranslationSubscriberTest extends \PHPUnit_Framework_TestCase
         $this->filterResponseEvent->expects($this->any())->method('getResponse')->willReturn($this->response);
         $this->filterResponseEvent->expects($this->any())->method('getRequest')->willReturn($this->request);
 
+        $this->subscriber = new TranslationSubscriber($this->application, $this->paramName);
+
         parent::setUp();
     }
 
@@ -100,25 +122,21 @@ class TranslationSubscriberTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnKernelRequestDefaultLocale()
     {
-        $paramName = 'locale';
-
         $this->requestQuery->expects($this->once())
             ->method('has')
-            ->with($paramName)
+            ->with($this->paramName)
             ->willReturn(false);
+        $this->cookieService->expects($this->atLeastOnce())
+            ->method('getLocaleCookie')
+            ->with($this->request)
+            ->willReturn('');
 
-        $this->requestCookies->expects($this->once())
-            ->method('has')
-            ->with($paramName)
-            ->willReturn(false);
+        $this->application
+            ->expects($this->atLeastOnce())
+            ->method('offsetSet')
+            ->with('locale', 'en-US');
 
-        $this->application['locale'] = 'en-US';
-
-        $subscriber = new TranslationSubscriber($this->application, $paramName);
-        $subscriber->onKernelRequest($this->getResponseEvent);
-
-        $this->assertEquals('en-US', $this->application['locale']);
-        $this->assertEquals('en', $this->application['app.locale']);
+        $this->subscriber->onKernelRequest($this->getResponseEvent);
     }
 
     /**
@@ -126,30 +144,23 @@ class TranslationSubscriberTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnKernelRequestQueryLocale()
     {
-        $paramName = 'locale';
-
         $this->requestQuery->expects($this->once())
             ->method('has')
-            ->with($paramName)
+            ->with($this->paramName)
             ->willReturn(true);
-
         $this->requestQuery->expects($this->once())
             ->method('get')
-            ->with($paramName)
+            ->with($this->paramName)
             ->willReturn('de-DE');
+        $this->cookieService->expects($this->never())
+            ->method('getLocaleCookie');
 
-        $this->requestCookies->expects($this->never())
-            ->method('has')
-            ->with($paramName)
-            ->willReturn(false);
+        $this->application
+            ->expects($this->atLeastOnce())
+            ->method('offsetSet')
+            ->with('locale', 'de-DE');
 
-        $this->application['locale'] = 'en-US';
-
-        $subscriber = new TranslationSubscriber($this->application, $paramName);
-        $subscriber->onKernelRequest($this->getResponseEvent);
-
-        $this->assertEquals('de-DE', $this->application['locale']);
-        $this->assertEquals('de', $this->application['app.locale']);
+        $this->subscriber->onKernelRequest($this->getResponseEvent);
     }
 
     /**
@@ -157,30 +168,22 @@ class TranslationSubscriberTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnKernelRequestCookieLocale()
     {
-        $paramName = 'locale';
-
         $this->requestQuery->expects($this->once())
             ->method('has')
-            ->with($paramName)
+            ->with($this->paramName)
             ->willReturn(false);
 
-        $this->requestCookies->expects($this->once())
-            ->method('has')
-            ->with($paramName)
-            ->willReturn(true);
-
-        $this->requestCookies->expects($this->once())
-            ->method('get')
-            ->with($paramName)
+        $this->cookieService->expects($this->atLeastOnce())
+            ->method('getLocaleCookie')
+            ->with($this->request)
             ->willReturn('fr-FR');
 
-        $this->application['locale'] = 'en-US';
+        $this->application
+            ->expects($this->atLeastOnce())
+            ->method('offsetSet')
+            ->with('locale', 'fr-FR');
 
-        $subscriber = new TranslationSubscriber($this->application, $paramName);
-        $subscriber->onKernelRequest($this->getResponseEvent);
-
-        $this->assertEquals('fr-FR', $this->application['locale']);
-        $this->assertEquals('fr', $this->application['app.locale']);
+        $this->subscriber->onKernelRequest($this->getResponseEvent);
     }
 
     /**
@@ -188,23 +191,10 @@ class TranslationSubscriberTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnKernelResponse()
     {
-        $paramName = 'locale';
-        $this->application['locale'] = 'en-US';
+        $this->cookieService->expects($this->once())
+            ->method('setLocaleCookie')
+            ->with($this->response, 'en-US');
 
-        $this->request->expects($this->once())
-            ->method('getHost')
-            ->willReturn('http://test.url');
-
-        $this->responseHeaders->expects($this->once())
-            ->method('setCookie')
-            ->with($this->callback(function ($cookie) use ($paramName) {
-                /** @var Cookie $cookie */
-                $this->assertEquals('en-US', $cookie->getValue());
-                $this->assertEquals($paramName, $cookie->getName());
-                return true;
-            }));
-
-        $subscriber = new TranslationSubscriber($this->application, $paramName);
-        $subscriber->onKernelResponse($this->filterResponseEvent);
+        $this->subscriber->onKernelResponse($this->filterResponseEvent);
     }
 }

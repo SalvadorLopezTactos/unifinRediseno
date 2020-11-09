@@ -11,13 +11,13 @@
  */
 --}}
 <div class="accordion-heading {{#unless this.meta.dependentModules}}enabled{{/unless}}" data-module="{{this.meta.module}}">
+    <span class="active-indicator pull-left"><i class="fa fa-chevron-right"></i></span>
     <span class="pull-left step-circle">
         <span>{{this.meta.moduleNumber}}</span>
         <i class="fa fa-check-circle"></i>
     </span>
     <span class="title">{{this.initial.title}}</span>
     <span class="dupecheck-results"></span>
-    <span class="btn btn-invisible active-indicator pull-right"><i class="fa fa-chevron-down"></i></span>
     <span class="buttons pull-right">
         {{#each meta.buttons}}
             {{field ../this}}

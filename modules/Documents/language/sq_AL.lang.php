@@ -164,4 +164,6 @@ $mod_strings = array (
     'LBL_BUGS_SUBPANEL_TITLE' => 'gabimet',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Kuotat',
     'LBL_RLI_SUBPANEL_TITLE' => 'Rreshti i llojeve të të ardhurave',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PLIS_SUBPANEL_TITLE' => 'Purchased Line Items',
 );

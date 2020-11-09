@@ -38,6 +38,7 @@ $viewdefs[$module_name]['mobile']['view']['edit'] = array(
                     'name' => 'name',
                     'label' => 'LBL_SUBJECT',
                 ),
+                'tag',
                 'assigned_user_name',
                 'team_name',
             ),

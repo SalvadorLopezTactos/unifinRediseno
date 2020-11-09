@@ -14,6 +14,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CASES_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Υποθέσεων',
     'LBL_CASES_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφών Υποθέσεων',
+    'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Λεπτομέρειες υπόθεσης',
 
 	'ERR_DELETE_RECORD'					=> 'Πρέπει να προσδιορίσετε έναν αριθμό εγγραφής για να διαγράψετε τον λογαριασμό.',
 	'LBL_ACCOUNT_ID'					=> 'Ταυτότητα Λογαριασμού',
@@ -31,7 +32,7 @@ $mod_strings = array (
 	'LBL_CONTACTS_SUBPANEL_TITLE'		=> 'Επαφές',
 	'LBL_DEFAULT_SUBPANEL_TITLE'		=> 'Υποθέσεις',
 	'LBL_DESCRIPTION'					=> 'Περιγραφή:',
-	'LBL_FILENANE_ATTACHMENT' 			=> 'Επισύναψη Αρχείου',	
+    'LBL_FILENANE_ATTACHMENT'           => 'Επισύναψη Αρχείου',
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> 'Ιστορικό',
 	'LBL_INVITEE'						=> 'Επαφές',
 	'LBL_MEMBER_OF'						=> 'Λογαριασμός',
@@ -105,6 +106,8 @@ $mod_strings = array (
     'LBL_EXPORT_CREATED_BY_NAME' => 'Δημιουργήθηκε από Όνομα Χειριστή',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Ανατεθειμένο Όνομα Χειριστή',
     'LBL_EXPORT_TEAM_COUNT' => 'Αρίθμηση Ομάδας',
+    'LBL_CHANGETIMERS' => 'Αλλαγή Χρονομέτρων',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Σχετικές Επαφές Emails',
@@ -140,4 +143,11 @@ $mod_strings = array (
 - Τα πεδία με σήμανση "Υποχρεωτικό" πρέπει να συμπληρωθούν πριν από την αποθήκευση.
 - Κάντε κλικ στην επιλογή "Εμφάνιση Περισσότερων" για να εμφανιστούν πρόσθετα πεδία, εάν είναι απαραίτητο.
 2. Κάντε κλικ στην επιλογή "Αποθήκευση" για να οριστικοποιήσετε τη νέα εγγραφή και να επιστρέψετε στην προηγούμενη σελίδα.',
+    // Case deflection
+    'LBL_NO_LOOKING_FOR' => 'Δεν βρήκατε αυτό που ψάχνετε;',
+    'LBL_CREATE_CASE' => 'Δημιούργησε μία {{module_name}}',
+
+    'LBL_SLA_DETAILS' => 'Λεπτομέρειες SLA',
+    'LBL_HOURS' => 'Ώρες',
+    'LBL_WIDGET_STATUS' => 'Status',
 );

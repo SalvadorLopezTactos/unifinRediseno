@@ -34,6 +34,7 @@ $viewdefs['Opportunities']['mobile']['view']['edit'] = array(
                 'date_closed',
                 'sales_stage',
                 'probability',
+                'tag',
                 'assigned_user_name',
                 'team_name',
             )

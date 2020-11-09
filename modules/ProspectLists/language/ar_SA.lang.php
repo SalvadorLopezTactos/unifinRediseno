@@ -65,6 +65,12 @@ $mod_strings = array (
   'LBL_DOMAIN'=>'لا توجد رسائل بريد إلكتروني للمجال',
   'LBL_LIST_PROSPECTLIST_NAME'=>'الاسم',
 	'LBL_MORE_DETAIL' => 'مزيد من التفاصيل' /*for 508 compliance fix*/,
+    'LBL_ACCOUNTS' => 'الحسابات',
+    'LBL_CAMPAIGNS' => 'الحملات',
+    'LBL_CONTACTS' => 'جهات الاتصال',
+    'LBL_LEADS' => 'العملاء المتوقعون',
+    'LBL_PROSPECTS' => 'العملاء المستهدفون',
+    'LBL_USERS' => 'المستخدمون',
 
     // Help Text
     // List View Help Text

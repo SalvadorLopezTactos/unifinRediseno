@@ -40,6 +40,7 @@ $mod_strings = array (
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Onaylanan makaleleri ve Süresi Sona Eren KB Makalelerini yayınla.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Planlanmış İş',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Normalleştirilmemiş Takım Güvenliği Verisini Yeniden Oluştur',
+'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Aktivite Akış Boşaltma Yeri',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Sıklık Derecesi:',
@@ -158,6 +159,7 @@ $mod_strings = array (
 'LBL_SENDEMAILREMINDERS'=> 'E-posta Hatırlatıcısı Göndermeyi çalıştır',
 'LBL_CLEANJOBQUEUE' => 'İş Kuyruğunu Temizle',
 'LBL_CLEANOLDRECORDLISTS' => 'Eski Kayıt Listesini Temizle',
+'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Aktivite Akış Boşaltma Yeri',
 'LBL_PMSEENGINECRON' => 'SugarBPM Planlayıcı',
 );
 
