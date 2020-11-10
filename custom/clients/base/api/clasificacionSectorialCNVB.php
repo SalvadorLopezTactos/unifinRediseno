@@ -22,9 +22,9 @@ class clasificacionSectorialCNVB extends SugarApi
                 'reqType' => 'GET',
                 'noLoginRequired' => true,
                 //endpoint path
-                'path' => array('clasificacionSectorialCNVB','?','?'),
+                'path' => array('clasificacionSectorialCNVB','?'),
                 //endpoint variables
-                'pathVars' => array('module','idActividadEconomica','idSubSector'),
+                'pathVars' => array('module','idActividadEconomica'),
                 //method to call
                 'method' => 'getSectorCNVB',
                 //short help string to be displayed in the help documentation
@@ -32,10 +32,7 @@ class clasificacionSectorialCNVB extends SugarApi
                 //long help to be displayed in the help documentation
                 'longHelp' => '',
             ),
-
-
         );
-
     }
 
     /**
@@ -51,13 +48,13 @@ class clasificacionSectorialCNVB extends SugarApi
         $response=array();
 		
 		$ActividadEconomica=$args['idActividadEconomica'];
-        $SubSector=$args['idSubSector'];
+        // $SubSector=$args['idSubSector'];
 		
-        if( !(empty($ActividadEconomica)) && !(empty($SubSector)) ){
+        if( !(empty($ActividadEconomica))){
 			//$GLOBALS['log']->fatal('ActividadEconomica',$ActividadEconomica);
             //Obtener id de cuenta con el idCliente del parámetro
             
-			$query = 'select * from catalogo_clasificacion_sectorial where id_actividad_economica_cnbv = "'.$ActividadEconomica.'" and id_subsector_economico_cnbv = "'.$SubSector.'"';
+        $query = "SELECT * FROM catalogo_clasificacion_sectorial WHERE id_actividad_economica_cnbv = '{$ActividadEconomica}'";
 			$results = $GLOBALS['db']->query($query);
 			$row = $GLOBALS['db']->fetchByAssoc($results);
 			// $GLOBALS['log']->fatal('row',$row);
@@ -70,14 +67,9 @@ class clasificacionSectorialCNVB extends SugarApi
 		}else{
 			$response['code']='400';
 			$response['status']='Error';
-			$response['description']='No existe la Actividad economica proporcinada';
+			$response['description']='No Existe la Actividad Economica Proporcionada';
 		}
 
         return $response;
-
     }
-
-
 }
-
-?>

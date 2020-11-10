@@ -6,5 +6,4 @@ $app_list_strings['macro_list'] = array(
   '1' => 'Primarias',
   '2' => 'Secundarias',
   '3' => 'Terciarias',
-  '4' => 'Sector macro no clasificado en INEGI',
 );

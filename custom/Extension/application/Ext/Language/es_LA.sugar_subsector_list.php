@@ -88,6 +88,4 @@ $app_list_strings['subsector_list'] = array(
   '814' => 'Hogares con empleados domésticos',
   '931' => 'Actividades legislativas, gubernamentales y de impartición de justicia',
   '932' => 'Organismos internacionales y extraterritoriales',
-  'NA' => 'Subsector no clasificado en INEGI',
-  'NI' => 'No identificado',
 );

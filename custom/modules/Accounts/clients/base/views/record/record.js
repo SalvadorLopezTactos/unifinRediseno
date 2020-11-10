@@ -836,12 +836,13 @@
 
         //Valores Previos Clasificacion Sectorial - Actividad Economica e INEGI
         clasf_sectorial.ActividadEconomica = app.utils.deepCopy(clasf_sectorial.prevActEconomica);
-        clasf_sectorial.ResumenCliente.inegi.inegi_sector = clasf_sectorial.prevActEconomica.inegi_sector;
-        clasf_sectorial.ResumenCliente.inegi.inegi_subsector = clasf_sectorial.prevActEconomica.inegi_subsector;
-        clasf_sectorial.ResumenCliente.inegi.inegi_rama = clasf_sectorial.prevActEconomica.inegi_rama;
-        clasf_sectorial.ResumenCliente.inegi.inegi_subrama = clasf_sectorial.prevActEconomica.inegi_subrama;
         clasf_sectorial.ResumenCliente.inegi.inegi_clase = clasf_sectorial.prevActEconomica.inegi_clase;
-        clasf_sectorial.ResumenCliente.inegi.inegi_descripcion = clasf_sectorial.prevActEconomica.inegi_descripcion;
+        clasf_sectorial.ResumenCliente.inegi.inegi_subrama = clasf_sectorial.prevActEconomica.inegi_subrama;
+        clasf_sectorial.ResumenCliente.inegi.inegi_rama = clasf_sectorial.prevActEconomica.inegi_rama;
+        clasf_sectorial.ResumenCliente.inegi.inegi_subsector = clasf_sectorial.prevActEconomica.inegi_subsector;
+        clasf_sectorial.ResumenCliente.inegi.inegi_sector = clasf_sectorial.prevActEconomica.inegi_sector;
+        clasf_sectorial.ResumenCliente.inegi.inegi_macro = clasf_sectorial.prevActEconomica.inegi_macro;
+
         clasf_sectorial.render();
     },
 
