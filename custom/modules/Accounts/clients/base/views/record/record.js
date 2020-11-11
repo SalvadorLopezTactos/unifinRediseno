@@ -2640,7 +2640,7 @@
         var proveedor=this.model.get('esproveedor_c');
         var cedente=this.model.get('cedente_factor_c');
         var deudor=this.model.get('deudor_factor_c');
-        if (tipo_cuenta =='5' || proveedor || cedente || deudor) {
+        if (tipo_cuenta =='5' || tipo_cuenta=='3' || proveedor || cedente || deudor) {
             var self=this;
             var body={
                 "accion":this.model.get('id')
