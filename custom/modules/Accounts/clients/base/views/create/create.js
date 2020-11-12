@@ -2630,23 +2630,23 @@
                     // $('[data-name=tct_macro_sector_ddw_c]').find('.select2-choice').css('border-color', 'red');
                 }
                 //Requerido Subsector custom
-                if ($('.list_sse').select2('val') == "") {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';
-                    $('.list_sse').find('.select2-choice').css('border-color', 'red');
-                    // $('[name=subsectoreconomico_c]').css('border-color', 'red');
-                }
+                // if ($('.list_sse').select2('val') == "") {
+                //     RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';
+                //     $('.list_sse').find('.select2-choice').css('border-color', 'red');
+                //     // $('[name=subsectoreconomico_c]').css('border-color', 'red');
+                // }
                 //Requerido Sector custom
-                if ($('.list_se').select2('val') == "") {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
-                    $('.list_se').find('.select2-choice').css('border-color', 'red');
-                    // $('[name=sectoreconomico_c]').css('border-color', 'red');
-                }
+                // if ($('.list_se').select2('val') == "") {
+                //     RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
+                //     $('.list_se').find('.select2-choice').css('border-color', 'red');
+                //     // $('[name=sectoreconomico_c]').css('border-color', 'red');
+                // }
                 //Requerido macro sector custom
-                if ($('.list_ms').select2('val') == "") {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
-                    $('.list_ms').find('.select2-choice').css('border-color', 'red');
-                    // $('[name=actividadeconomica_c]').css('border-color', 'red');
-                }
+                // if ($('.list_ms').select2('val') == "") {
+                //     RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
+                //     $('.list_ms').find('.select2-choice').css('border-color', 'red');
+                //     // $('[name=actividadeconomica_c]').css('border-color', 'red');
+                // }
                 var direcciones = 0;
                 var tipodireccion = this.oDirecciones.direccion;
                 if (tipodireccion.length > 0) {
