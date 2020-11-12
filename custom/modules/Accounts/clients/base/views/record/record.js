@@ -44,7 +44,7 @@
         this.model.addValidationTask('tipo_proveedor_requerido', _.bind(this.validaProveedorRequerido, this));
         this.model.addValidationTask('check_info', _.bind(this.doValidateInfoReq, this));
         this.model.addValidationTask('macrosector', _.bind(this.macrosector, this));
-        this.model.addValidationTask('sectoreconomico', _.bind(this.sectoreconomico, this));
+        // this.model.addValidationTask('sectoreconomico', _.bind(this.sectoreconomico, this));
         this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
         this.model.addValidationTask('change:email', _.bind(this.expmail, this));
         //Valida que el campo Alta Cedente este check en el perfil del usuario. Adrian Arauz 20/09/2018
@@ -3328,13 +3328,13 @@
 
     sectoreconomico: function (fields, errors, callback) {
         //Validacion de Sector Economico custom
-        if (this.model.get('tipodepersona_c') != 'Persona Fisica' && ($('.list_se').select2('val') == '' || $('.list_se')[0].innerText.trim() == '') && (this.model.get('tipo_registro_cuenta_c') == '3' || this.model.get('tipo_registro_cuenta_c') == '5' || this.model.get('esproveedor_c') == true)) {
+        // if (this.model.get('tipodepersona_c') != 'Persona Fisica' && ($('.list_se').select2('val') == '' || $('.list_se')[0].innerText.trim() == '') && (this.model.get('tipo_registro_cuenta_c') == '3' || this.model.get('tipo_registro_cuenta_c') == '5' || this.model.get('esproveedor_c') == true)) {
 
-            $('.campoSE').find('.record-label').css('color', 'red');
-            $('.list_se').find('.select2-choice').css('border-color', 'red');
-            errors['sectoreconomico_c'] = "Error: Favor de verificar los errores";
-            errors['sectoreconomico_c'].required = true;
-        }
+        //     $('.campoSE').find('.record-label').css('color', 'red');
+        //     $('.list_se').find('.select2-choice').css('border-color', 'red');
+        //     errors['sectoreconomico_c'] = "Error: Favor de verificar los errores";
+        //     errors['sectoreconomico_c'].required = true;
+        // }
 
         //Validacion de php SetRequired para Sector Economico custom
         // if (this.model.get('tipo_registro_cuenta_c') != '1' || this.model.get('tipo_registro_cuenta_c') != '3' || this.model.get('subtipo_registro_cuenta_c') != '2') {
@@ -5232,9 +5232,9 @@
             necesarios = necesarios + '<b>Actividad Económica<br></b>';
         }
         //Requerido Sector Económico custom
-        if ($('.list_se').select2('val') == "" || $('.list_se')[0].innerText.trim() == "" || $('.list_se').select2('val') == null) {
-            necesarios = necesarios + '<b>Sector Económico<br></b>';
-        }
+        // if ($('.list_se').select2('val') == "" || $('.list_se')[0].innerText.trim() == "" || $('.list_se').select2('val') == null) {
+        //     necesarios = necesarios + '<b>Sector Económico<br></b>';
+        // }
         if (this.model.get('ventas_anuales_c') == "" || this.model.get('ventas_anuales_c') == null) {
             necesarios = necesarios + '<b>Ventas Anuales<br></b>';
         }
