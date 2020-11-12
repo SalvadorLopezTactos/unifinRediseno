@@ -6,7 +6,7 @@
                 <div class="campoAE span6">
                     <label class="record-label" style="margin-left:0px">Actividad Económica</label>
                     <select class="row-fluid select2 list_ae" data-field="list_ae">
-                        {{#each actividadeconomica_list}}
+                        {{#each actividad_list}}
                         <option value="{{@key}}" {{ifSelected @key
                                               ../ActividadEconomica.ae.id}}>{{this}}</option>
                         {{/each}}
@@ -14,12 +14,13 @@
                 </div>
                 <div class="campoSSE span6">
                     <label class="record-label" style="margin-left:0px">Sub Sector Económico</label>
-                    <select class="row-fluid select2 list_sse" data-field="list_sse">
-                        {{#each subsectoreconomico_list}}
+                    <input type="text" class="list_sse" data-field="list_sse" value="{{ActividadEconomica.label_subsector}}" />
+                    <!-- <select class="row-fluid select2 list_sse" data-field="list_sse">
+                        {{#each subsector_list}}
                         <option value="{{@key}}" {{ifSelected @key
                                               ../ActividadEconomica.sse.id}}>{{this}}</option>
                         {{/each}}
-                    </select>
+                    </select> -->
                 </div>
             </div>
         </tr>
@@ -27,44 +28,48 @@
             <div class="row-fluid" style="margin: 25px 0px 0px 0px;">
                 <div class="campoSE span6">
                     <label class="record-label" style="margin-left:0px">Sector Económico</label>
-                    <select class="row-fluid select2 list_se" data-field="list_se">
-                        {{#each sectoreconomico_list}}
+                    <input type="text" class="list_se" data-field="list_se" value="{{ActividadEconomica.label_sector}}" />
+                    <!-- <select class="row-fluid select2 list_se" data-field="list_se">
+                        {{#each sector_list}}
                         <option value="{{@key}}" {{ifSelected @key
                                               ../ActividadEconomica.se.id}}>{{this}}</option>
                         {{/each}}
-                    </select>
+                    </select> -->
                 </div>
                 <div class="campoMS span6">
                     <label class="record-label" style="margin-left:0px">Macro Sector</label>
-                    <select class="row-fluid select2 list_ms" data-field="list_ms">
-                        {{#each tct_macro_sector_ddw_list}}
+                    <input type="text" class="list_ms" data-field="list_ms" value="{{ActividadEconomica.label_macro}}" />
+                    <!-- <select class="row-fluid select2 list_ms" data-field="list_ms">
+                        {{#each macro_list}}
                         <option value="{{@key}}" {{ifSelected @key
                                               ../ActividadEconomica.ms.id}}>{{this}}</option>
                         {{/each}}
-                    </select>
+                    </select> -->
                 </div>
             </div>
         </tr>
         <tr>
             <div style="padding-top: 15px; padding-bottom: 10px;"><strong>INEGI</strong></div>
             <div class="row-fluid">
-                <div class="campoIS span6">
-                    <label class="record-label" style="margin-left:0px">Sector</label>
-                    <select class="row-fluid select2 list_sector" data-field="list_sector">
-                        {{#each inegi_sector_list}}
+                <div class="campoIC span6">
+                    <label class="record-label" style="margin-left:0px">Clase</label>
+                    <input type="text" class="list_clase" data-field="list_clase" value="{{ActividadEconomica.label_clase}}" />
+                    <!-- <select class="row-fluid select2 list_clase" data-field="list_clase">
+                        {{#each clase_list}}
                         <option value="{{@key}}" {{ifSelected @key
-                                              ../ResumenCliente.inegi.inegi_sector}}>{{this}}</option>
+                                              ../ResumenCliente.inegi.inegi_clase}}>{{this}}</option>
                         {{/each}}
-                    </select>
+                    </select> -->
                 </div>
-                <div class="campoISS span6">
-                    <label class="record-label" style="margin-left:0px">Subsector</label>
-                    <select class="row-fluid select2 list_ssector" data-field="list_ssector">
-                        {{#each inegi_subsector_list}}
+                <div class="campoISR span6">
+                    <label class="record-label" style="margin-left:0px">Subrama</label>
+                    <input type="text" class="list_subrama" data-field="list_subrama" value="{{ActividadEconomica.label_subrama}}" />
+                    <!-- <select class="row-fluid select2 list_subrama" data-field="list_subrama">
+                        {{#each subrama_list}}
                         <option value="{{@key}}" {{ifSelected @key
-                                              ../ResumenCliente.inegi.inegi_subsector}}>{{this}}</option>
+                                              ../ResumenCliente.inegi.inegi_subrama}}>{{this}}</option>
                         {{/each}}
-                    </select>
+                    </select> -->
                 </div>
             </div>
         </tr>
@@ -72,43 +77,47 @@
             <div class="row-fluid" style="margin: 25px 0px 0px 0px;">
                 <div class="campoIR span6">
                     <label class="record-label" style="margin-left:0px">Rama</label>
-                    <select class="row-fluid select2 list_rama" data-field="list_rama">
-                        {{#each inegi_rama_list}}
+                    <input type="text" class="list_rama" data-field="list_rama" value="{{ActividadEconomica.label_rama}}" />
+                    <!-- <select class="row-fluid select2 list_rama" data-field="list_rama">
+                        {{#each rama_list}}
                         <option value="{{@key}}" {{ifSelected @key
                                               ../ResumenCliente.inegi.inegi_rama}}>{{this}}</option>
                         {{/each}}
-                    </select>
+                    </select> -->
                 </div>
-                <div class="campoISR span6">
-                    <label class="record-label" style="margin-left:0px">Subrama</label>
-                    <select class="row-fluid select2 list_subrama" data-field="list_subrama">
-                        {{#each inegi_subrama_list}}
+                <div class="campoISS span6">
+                    <label class="record-label" style="margin-left:0px">Subsector</label>
+                    <input type="text" class="list_ssector" data-field="list_ssector" value="{{ActividadEconomica.label_isubsector}}" />
+                    <!-- <select class="row-fluid select2 list_ssector" data-field="list_ssector">
+                        {{#each subsector_list}}
                         <option value="{{@key}}" {{ifSelected @key
-                                              ../ResumenCliente.inegi.inegi_subrama}}>{{this}}</option>
+                                              ../ResumenCliente.inegi.inegi_subsector}}>{{this}}</option>
                         {{/each}}
-                    </select>
+                    </select> -->
                 </div>
             </div>
         </tr>
         <tr>
             <div class="row-fluid" style="margin: 25px 0px 0px 0px;">
-                <div class="campoIC span6">
-                    <label class="record-label" style="margin-left:0px">Clase</label>
-                    <select class="row-fluid select2 list_clase" data-field="list_clase">
-                        {{#each inegi_clase_list}}
+                <div class="campoIS span6">
+                    <label class="record-label" style="margin-left:0px">Sector</label>
+                    <input type="text" class="list_sector" data-field="list_sector" value="{{ActividadEconomica.label_isector}}" />
+                    <!-- <select class="row-fluid select2 list_sector" data-field="list_sector">
+                        {{#each sector_list}}
                         <option value="{{@key}}" {{ifSelected @key
-                                              ../ResumenCliente.inegi.inegi_clase}}>{{this}}</option>
+                                              ../ResumenCliente.inegi.inegi_sector}}>{{this}}</option>
                         {{/each}}
-                    </select>
+                    </select> -->
                 </div>
-                <div class="campoID span6">
-                    <label class="record-label" style="margin-left:0px">Descripción</label>
-                    <select class="row-fluid select2 list_descrip" data-field="list_descrip">
-                        {{#each inegi_descripcion_list}}
+                <div class="campoIMS span6">
+                    <label class="record-label" style="margin-left:0px">Macro</label>
+                    <input type="text" class="list_imacro" data-field="list_imacro" value="{{ActividadEconomica.label_imacro}}" />
+                    <!-- <select class="row-fluid select2 list_imacro" data-field="list_imacro">
+                        {{#each macro_list}}
                         <option value="{{@key}}" {{ifSelected @key
-                                              ../ResumenCliente.inegi.inegi_descripcion}}>{{this}}</option>
+                                              ../ResumenCliente.inegi.inegi_macro}}>{{this}}</option>
                         {{/each}}
-                    </select>
+                    </select> -->
                 </div>
             </div>
         </tr>

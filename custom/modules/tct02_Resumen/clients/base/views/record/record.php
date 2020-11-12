@@ -527,8 +527,8 @@ array (
               ),
               2 => 
               array (
-                'name' => 'inegi_rama_c',
-                'label' => 'LBL_INEGI_RAMA_C',
+                'name' => 'inegi_clase_c',
+                'label' => 'LBL_INEGI_CLASE_C',
               ),
               3 => 
               array (
@@ -537,8 +537,8 @@ array (
               ),
               4 => 
               array (
-                'name' => 'inegi_sector_c',
-                'label' => 'LBL_INEGI_SECTOR_C',
+                'name' => 'inegi_rama_c',
+                'label' => 'LBL_INEGI_RAMA_C',
               ),
               5 => 
               array (
@@ -547,13 +547,13 @@ array (
               ),
               6 => 
               array (
-                'name' => 'inegi_clase_c',
-                'label' => 'LBL_INEGI_CLASE_C',
+                'name' => 'inegi_sector_c',
+                'label' => 'LBL_INEGI_SECTOR_C',
               ),
               7 => 
               array (
-                'name' => 'inegi_descripcion_c',
-                'label' => 'LBL_INEGI_DESCRIPCION_C',
+                'name' => 'inegi_macro_c',
+                'label' => 'LBL_INEGI_MACRO_C',
               ),
             ),
           ),

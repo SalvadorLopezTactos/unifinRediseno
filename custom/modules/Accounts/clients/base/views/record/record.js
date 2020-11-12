@@ -836,12 +836,13 @@
 
         //Valores Previos Clasificacion Sectorial - Actividad Economica e INEGI
         clasf_sectorial.ActividadEconomica = app.utils.deepCopy(clasf_sectorial.prevActEconomica);
-        clasf_sectorial.ResumenCliente.inegi.inegi_sector = clasf_sectorial.prevActEconomica.inegi_sector;
-        clasf_sectorial.ResumenCliente.inegi.inegi_subsector = clasf_sectorial.prevActEconomica.inegi_subsector;
-        clasf_sectorial.ResumenCliente.inegi.inegi_rama = clasf_sectorial.prevActEconomica.inegi_rama;
-        clasf_sectorial.ResumenCliente.inegi.inegi_subrama = clasf_sectorial.prevActEconomica.inegi_subrama;
         clasf_sectorial.ResumenCliente.inegi.inegi_clase = clasf_sectorial.prevActEconomica.inegi_clase;
-        clasf_sectorial.ResumenCliente.inegi.inegi_descripcion = clasf_sectorial.prevActEconomica.inegi_descripcion;
+        clasf_sectorial.ResumenCliente.inegi.inegi_subrama = clasf_sectorial.prevActEconomica.inegi_subrama;
+        clasf_sectorial.ResumenCliente.inegi.inegi_rama = clasf_sectorial.prevActEconomica.inegi_rama;
+        clasf_sectorial.ResumenCliente.inegi.inegi_subsector = clasf_sectorial.prevActEconomica.inegi_subsector;
+        clasf_sectorial.ResumenCliente.inegi.inegi_sector = clasf_sectorial.prevActEconomica.inegi_sector;
+        clasf_sectorial.ResumenCliente.inegi.inegi_macro = clasf_sectorial.prevActEconomica.inegi_macro;
+
         clasf_sectorial.render();
     },
 
@@ -2639,7 +2640,7 @@
         var proveedor=this.model.get('esproveedor_c');
         var cedente=this.model.get('cedente_factor_c');
         var deudor=this.model.get('deudor_factor_c');
-        if (tipo_cuenta =='5' || proveedor || cedente || deudor) {
+        if (tipo_cuenta =='5' || tipo_cuenta=='3' || proveedor || cedente || deudor) {
             var self=this;
             var body={
                 "accion":this.model.get('id')

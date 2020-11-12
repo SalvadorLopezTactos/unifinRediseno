@@ -75,14 +75,13 @@ class clasificacionSectorial extends SugarApi
 				$bean_Account->tct_macro_sector_ddw_c = $row['id_macro_sector_cnbv'];
 				
 				$bean_Resumen->inegi_clase_c = $row['id_clase_inegi'];
-                $bean_Resumen->inegi_rama_c = $row['id_rama_inegi'];
                 $bean_Resumen->inegi_subrama_c = $row['id_subrama_inegi'];
-				$bean_Resumen->inegi_sector_c = $row['id_sector_inegi'];
+                $bean_Resumen->inegi_rama_c = $row['id_rama_inegi'];
                 $bean_Resumen->inegi_subsector_c = $row['id_subsector_inegi'];
-                $bean_Resumen->inegi_descripcion_c = $row['id_descripcion_inegi'];
-								
-				$bean_Resumen->inegi_acualiza_uni2_c = 1 ;
-				
+                $bean_Resumen->inegi_sector_c = $row['id_sector_inegi'];
+                $bean_Resumen->inegi_macro_c = $row['id_macro_inegi'];
+                $bean_Resumen->inegi_acualiza_uni2_c = 1 ;
+                
 				$bean_Account->save();
 				$bean_Resumen->save();
 				
@@ -92,7 +91,7 @@ class clasificacionSectorial extends SugarApi
 			}else{
 				$response['code']='400';
 				$response['status']='Error';
-				$response['description']='No existe la clase proporcinada';
+				$response['description']='No existe la clase proporcionada';
 			}
 			
 		}else{
@@ -102,10 +101,5 @@ class clasificacionSectorial extends SugarApi
         }
 
         return $response;
-
     }
-
-
 }
-
-?>
