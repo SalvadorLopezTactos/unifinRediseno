@@ -615,6 +615,18 @@ array (
                 ),
                 'span' => 12,
               ),
+              2 => 
+              array (
+                'name' => 'producto_c',
+                'label' => 'LBL_PRODUCTO',
+                'readonly' => true,
+              ),
+              3 => 
+              array (
+                'name' => 'id_disposicion_c',
+                'label' => 'LBL_ID_DISPOSICION',
+                'readonly' => true,
+              ),
             ),
           ),
         ),

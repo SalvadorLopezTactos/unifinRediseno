@@ -9,41 +9,53 @@ class Seguros_SF
 {
     public function getAccount($bean = null, $event = null, $args = null)
     {
-      $cuenta = BeanFactory::getBean('Accounts', $bean->s_seguros_accountsaccounts_ida, array('disable_row_level_security' => true));
-      $resumen = BeanFactory::getBean('tct02_Resumen', $bean->s_seguros_accountsaccounts_ida, array('disable_row_level_security' => true));
-        $GLOBALS['log']->fatal('Inicia Seguros_SalesForce');
-        global $sugar_config;
-        global $app_list_strings;
-   			require_once 'include/api/SugarApiException.php';
-        //Consulta Cuenta
-        if(!$cuenta->salesforce_id_c)
+        // Valida id_disposicion_c de Uni2
+        if($bean->id_disposicion_c)
         {
-          $token = $this->getToken();
-      		$url = $sugar_config['seguros_sf'].'data/acoountExists';
-      		$content = json_encode(array("nameAccount" => $cuenta->name));
-      		$curl = curl_init($url);
-      		curl_setopt($curl, CURLOPT_HEADER, false);
-      		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-      		curl_setopt($curl, CURLOPT_HTTPHEADER,
-      		array("Authorization: Bearer $token",
-      			"Content-type: application/json"));
-      		curl_setopt($curl, CURLOPT_POST, true);
-      		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
-      		$json_response = curl_exec($curl);
-      		curl_close($curl);
-      		$response = json_decode($json_response, true);
-          $id_sf = $response['id'];
-          if($id_sf)
+          global $db;
+          $id_disposicion = "select id_disposicion_c from s_seguros_cstm where id_c <> '{$bean->id}' and id_disposicion_c = '{$bean->id_disposicion_c}'";
+          $resultado = $db->query($id_disposicion);
+          $encontrado = $db->fetchByAssoc($resultado);
+          if($encontrado) throw new SugarApiExceptionInvalidParameter("No se puede guardar. Ya existe el Id Disposición");
+        }
+        else
+        {
+          //Consulta Cuenta        
+          $cuenta = BeanFactory::getBean('Accounts', $bean->s_seguros_accountsaccounts_ida, array('disable_row_level_security' => true));
+          $resumen = BeanFactory::getBean('tct02_Resumen', $bean->s_seguros_accountsaccounts_ida, array('disable_row_level_security' => true));
+          $GLOBALS['log']->fatal('Inicia Seguros_SalesForce');
+          global $sugar_config;
+          global $app_list_strings;
+     			require_once 'include/api/SugarApiException.php';
+          if(!$cuenta->salesforce_id_c)
           {
-            global $db;
-            $update = "update accounts_cstm set
-              salesforce_id_c='{$id_sf}'
-              where id_c = '{$cuenta->id}'";
-            $updateExecute = $db->query($update);
+            $token = $this->getToken();
+        		$url = $sugar_config['seguros_sf'].'data/acoountExists';
+        		$content = json_encode(array("nameAccount" => $cuenta->name));
+        		$curl = curl_init($url);
+        		curl_setopt($curl, CURLOPT_HEADER, false);
+        		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        		curl_setopt($curl, CURLOPT_HTTPHEADER,
+        		array("Authorization: Bearer $token",
+        			"Content-type: application/json"));
+        		curl_setopt($curl, CURLOPT_POST, true);
+        		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+        		$json_response = curl_exec($curl);
+        		curl_close($curl);
+        		$response = json_decode($json_response, true);
+            $id_sf = $response['id'];
+            if($id_sf)
+            {
+              global $db;
+              $update = "update accounts_cstm set
+                salesforce_id_c='{$id_sf}'
+                where id_c = '{$cuenta->id}'";
+              $updateExecute = $db->query($update);
+            }
           }
         }
         //Prospecto
-        if($bean->etapa == 1 && !$bean->id_salesforce)
+        if($bean->etapa == 1 && !$bean->id_salesforce && !$bean->id_disposicion_c)
         {
           global $db;
           $token = $this->getToken();
@@ -136,7 +148,7 @@ class Seguros_SF
           }
         }
         //Cotizando
-        if($bean->etapa == 2)
+        if($bean->etapa == 2 && !$bean->id_disposicion_c)
         {
           $token = $this->getToken();
           $serviciosaincluirc = $app_list_strings['servicios_a_incluir_c_list'][$bean->servicios_a_incluir_c];
@@ -170,7 +182,7 @@ class Seguros_SF
           if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
         }
         //Cotizado
-        if($bean->etapa == 4 && $bean->tipo_registro_sf_c == 1)
+        if($bean->etapa == 4 && $bean->tipo_registro_sf_c == 1 && !$bean->id_disposicion_c)
         {
           $token = $this->getToken();
           $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
@@ -194,7 +206,7 @@ class Seguros_SF
           if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
         }
         //No Cotizado
-        if($bean->etapa == 5 && $bean->tipo_registro_sf_c == 1)
+        if($bean->etapa == 5 && $bean->tipo_registro_sf_c == 1 && !$bean->id_disposicion_c)
         {
           $token = $this->getToken();
           $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
@@ -220,7 +232,7 @@ class Seguros_SF
           if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
         }
         //Presentación
-        if($bean->etapa == 6)
+        if($bean->etapa == 6 && !$bean->id_disposicion_c)
         {
           $token = $this->getToken();
           $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
@@ -244,7 +256,7 @@ class Seguros_SF
           if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
         }
         //Re-negociación
-        if($bean->etapa == 7)
+        if($bean->etapa == 7 && !$bean->id_disposicion_c)
         {
           $token = $this->getToken();
           $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
@@ -270,7 +282,7 @@ class Seguros_SF
           if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
         }
         //Ganada
-        if($bean->etapa == 9)
+        if($bean->etapa == 9 && !$bean->id_disposicion_c)
         {
           $token = $this->getToken();
           $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
@@ -314,7 +326,7 @@ class Seguros_SF
           if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
         }
         //No Ganada
-        if($bean->etapa == 10)
+        if($bean->etapa == 10 && !$bean->id_disposicion_c)
         {
           $token = $this->getToken();
           $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
@@ -345,7 +357,7 @@ class Seguros_SF
           if($response != 'Correcto') throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response);
         }
         //Solicitud de Cotización
-        if($bean->etapa == 11)
+        if($bean->etapa == 11 && !$bean->id_disposicion_c)
         {
           $token = $this->getToken();
           $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
