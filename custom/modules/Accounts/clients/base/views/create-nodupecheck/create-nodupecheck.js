@@ -446,6 +446,7 @@
         this.$("div[data-name='subsectoreconomico_c']").hide();
         this.$("div[data-name='actividadeconomica_c']").hide();
         this.$(".record-cell[data-name='blank_space']").hide();
+        this.$(".record-cell[data-name='blank_space']").hide();
 
     },
 
@@ -1475,20 +1476,20 @@
                 errors['actividadeconomica_c'].required = true;
             }
             //Requerido Subsector custom
-            if ($('.list_sse').select2('val') == "" || $('.list_sse').select2('val') == undefined) {
-                errors['subsectoreconomico_c'] = errors['subsectoreconomico_c'] || {};
-                errors['subsectoreconomico_c'].required = true;
-            }
-            //Requerido Sector custom
-            if ($('.list_se').select2('val') == "" || $('.list_se').select2('val') == undefined) {
-                errors['sectoreconomico_c'] = errors['sectoreconomico_c'] || {};
-                errors['sectoreconomico_c'].required = true;
-            }
-            //Requerido macro sector custom
-            if ($('.list_ms').select2('val') == "" || $('.list_ms').select2('val') == undefined) {
-                errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
-                errors['tct_macro_sector_ddw_c'].required = true;
-            }
+            // if ($('.list_sse').select2('val') == "" || $('.list_sse').select2('val') == undefined) {
+            //     errors['subsectoreconomico_c'] = errors['subsectoreconomico_c'] || {};
+            //     errors['subsectoreconomico_c'].required = true;
+            // }
+            // //Requerido Sector custom
+            // if ($('.list_se').select2('val') == "" || $('.list_se').select2('val') == undefined) {
+            //     errors['sectoreconomico_c'] = errors['sectoreconomico_c'] || {};
+            //     errors['sectoreconomico_c'].required = true;
+            // }
+            // //Requerido macro sector custom
+            // if ($('.list_ms').select2('val') == "" || $('.list_ms').select2('val') == undefined) {
+            //     errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
+            //     errors['tct_macro_sector_ddw_c'].required = true;
+            // }
             if (this.oTelefonos.telefono.length == 0) {
                 errors['account_telefonos'] = errors['account_telefonos'] || {};
                 errors['account_telefonos'].required = true;
@@ -1589,23 +1590,23 @@
                     // $('.list_ae').find('.select2-choice').css('border-color', 'red');                    
                 }
                 //Requerido Subsector custom
-                if ($('.list_sse').select2('val') == "") {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';
-                    // $('.campoSSE').find('.record-label').css('color', 'red');
-                    // $('.list_sse').find('.select2-choice').css('border-color', 'red');                    
-                }
-                //Requerido Sector custom
-                if ($('.list_se').select2('val') == "") {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
-                    // $('.campoSE').find('.record-label').css('color', 'red');
-                    // $('.list_se').find('.select2-choice').css('border-color', 'red');
-                }
-                //Requerido macro sector custom
-                if ($('.list_ms').select2('val') == "") {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
-                    // $('.campoMS').find('.record-label').css('color', 'red');
-                    // $('.list_ms').find('.select2-choice').css('border-color', 'red');
-                }
+                // if ($('.list_sse').select2('val') == "") {
+                //     RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';
+                //     // $('.campoSSE').find('.record-label').css('color', 'red');
+                //     // $('.list_sse').find('.select2-choice').css('border-color', 'red');                    
+                // }
+                // //Requerido Sector custom
+                // if ($('.list_se').select2('val') == "") {
+                //     RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
+                //     // $('.campoSE').find('.record-label').css('color', 'red');
+                //     // $('.list_se').find('.select2-choice').css('border-color', 'red');
+                // }
+                // //Requerido macro sector custom
+                // if ($('.list_ms').select2('val') == "") {
+                //     RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
+                //     // $('.campoMS').find('.record-label').css('color', 'red');
+                //     // $('.list_ms').find('.select2-choice').css('border-color', 'red');
+                // }
 
                 var direcciones = 0;
                 var tipodireccion = this.oDirecciones.direccion;
@@ -1789,45 +1790,64 @@
     validaformato: function (fields, errors, callback) {
         //Validacion para pasar una expresion regular por los 3 campos y verificar dicho formato.
         var errorescampos = "";
-        if (this.model.get('primernombre_c') != "" || this.model.get('apellidopaterno_c') != "" || this.model.get('apellidomaterno_c') != "") {
-            var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
-            if (this.model.get('primernombre_c') != "" && this.model.get('primernombre_c') != undefined) {
-                var nombre = this.model.get('primernombre_c');
-                var res = expresion.test(nombre);
-                if (res != true) {
-                    errorescampos = errorescampos + '<b>-Primer Nombre<br></b>';;
-                    errors['primernombre_c'] = errors['primernombre_c'] || {};
-                    errors['primernombre_c'].required = true;
-                }
-            }
-            if (this.model.get('apellidopaterno_c') != "" && this.model.get('apellidopaterno_c') != undefined) {
-                var apaterno = this.model.get('apellidopaterno_c');
-                var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
-                var res = expresion.test(apaterno);
-                if (res != true) {
-                    errorescampos = errorescampos + '<b>-Apellido Paterno<br></b>';;
-                    errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
-                    errors['apellidopaterno_c'].required = true;
-                }
-            }
-            if (this.model.get('apellidomaterno_c') != "" && this.model.get('apellidomaterno_c') != undefined) {
-                var amaterno = this.model.get('apellidomaterno_c');
-                var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
-                var res = expresion.test(amaterno);
-                if (res != true) {
-                    errorescampos = errorescampos + '<b>-Apellido Materno<br></b>';;
-                    errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
-                    errors['apellidomaterno_c'].required = true;
-                }
-            }
-            if (errorescampos) {
-                app.alert.show("Error_validacion_Campos", {
-                    level: "error",
-                    messages: 'Los siguientes campos no permiten caracteres especiales:<br>' + errorescampos,
-                    autoClose: false
-                });
-            }
-        }
+		if(this.model.get('tipodepersona_c') != 'Persona Moral'){
+			if (this.model.get('primernombre_c') == undefined || this.model.get('apellidopaterno_c') == undefined || this.model.get('apellidomaterno_c') == undefined) {
+				if (this.model.get('primernombre_c') == undefined) {
+					errorescampos = errorescampos + '<b>-Primer Nombre<br></b>';;
+					errors['primernombre_c'] = errors['primernombre_c'] || {};
+					errors['primernombre_c'].required = true;                
+				}
+				if (this.model.get('apellidopaterno_c') == undefined) {
+					errorescampos = errorescampos + '<b>-Apellido Paterno<br></b>';;
+					errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
+					errors['apellidopaterno_c'].required = true;
+				}
+				if (this.model.get('apellidomaterno_c') == undefined) {
+					errorescampos = errorescampos + '<b>-Apellido Materno<br></b>';;
+					errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
+					errors['apellidomaterno_c'].required = true;
+				}           
+			}else if (this.model.get('primernombre_c') != "" || this.model.get('apellidopaterno_c') != "" || this.model.get('apellidomaterno_c') != "") {
+				var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
+				if (this.model.get('primernombre_c') != "" && this.model.get('primernombre_c') != undefined) {
+					var nombre = this.model.get('primernombre_c');
+					var res = expresion.test(nombre);
+					if (res != true) {
+						errorescampos = errorescampos + '<b>-Primer Nombre<br></b>';;
+						errors['primernombre_c'] = errors['primernombre_c'] || {};
+						errors['primernombre_c'].required = true;
+					}
+				}
+				if (this.model.get('apellidopaterno_c') != "" && this.model.get('apellidopaterno_c') != undefined) {
+					var apaterno = this.model.get('apellidopaterno_c');
+					var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
+					var res = expresion.test(apaterno);
+					if (res != true) {
+						errorescampos = errorescampos + '<b>-Apellido Paterno<br></b>';;
+						errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
+						errors['apellidopaterno_c'].required = true;
+					}
+				}
+				if (this.model.get('apellidomaterno_c') != "" && this.model.get('apellidomaterno_c') != undefined) {
+					var amaterno = this.model.get('apellidomaterno_c');
+					var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
+					var res = expresion.test(amaterno);
+					if (res != true) {
+						errorescampos = errorescampos + '<b>-Apellido Materno<br></b>';;
+						errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
+						errors['apellidomaterno_c'].required = true;
+					}
+				}
+				if (errorescampos) {
+					app.alert.show("Error_validacion_Campos", {
+						level: "error",
+						messages: 'Los siguientes campos no permiten caracteres especiales:<br>' + errorescampos,
+						autoClose: false
+					});
+				} 
+			}
+		}
+		
         callback(null, fields, errors);
     },
     validapasscurp: function (fields, errors, callback) {

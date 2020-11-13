@@ -1,5 +1,5 @@
 <?php
- // created: 2020-10-07 17:58:31
+ // created: 2020-11-05 10:38:54
 
 $app_list_strings['idactivo_list']=array (
   '' => '',
@@ -12,4 +12,5 @@ $app_list_strings['idactivo_list']=array (
   '000100010001' => 'AVIONES',
   '000100030005' => 'MOTOS',
   '0003' => 'EQUIPO',
+  '00080001' => 'MOBILIARIO',
 );

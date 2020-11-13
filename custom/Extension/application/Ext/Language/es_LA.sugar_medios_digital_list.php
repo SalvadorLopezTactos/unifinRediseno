@@ -1,5 +1,5 @@
 <?php
- // created: 2020-07-15 20:15:54
+ // created: 2020-11-11 11:15:20
 
 $app_list_strings['medios_digital_list']=array (
   '' => '',
@@ -30,4 +30,5 @@ $app_list_strings['medios_digital_list']=array (
   25 => 'WhatsApp',
   26 => 'Chatbot',
   27 => 'Messenger',
+  28 => 'Acelerador Digital',
 );

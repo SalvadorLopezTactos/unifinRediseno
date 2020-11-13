@@ -55,3 +55,5 @@ $mod_strings['LBL_PRIMA'] = 'Prima Neta';
 $mod_strings['LBL_RECORDVIEW_PANEL3'] = 'Información Técnica';
 $mod_strings['LBL_MOTIVO_NO_COTIZADO'] = 'Motivo No Cotizado';
 $mod_strings['LBL_NOTIFICA_KAM'] = 'Notificar a KAM';
+$mod_strings['LBL_PRODUCTO'] = 'Tipo de Producto';
+$mod_strings['LBL_ID_DISPOSICION'] = 'Id Disposición';

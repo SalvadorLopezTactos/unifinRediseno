@@ -220,9 +220,9 @@
 
         }
         if (faltantes == 0) {
-            if (cont_tel.oTelefonos.telefono.length >=1) {
+            if (this.oTelefonos.telefono.length >=1) {
                 var duplicados= false;
-                cont_tel.oTelefonos.telefono.forEach(function(element) {
+                this.oTelefonos.telefono.forEach(function(element) {
                     var iteracion = element.telefono;
                     iteracion = iteracion.replace(/\s+/gi,'');
 
@@ -304,7 +304,8 @@
         var id_call='';
         var name_client=this.model.get('name');
         var id_client=this.model.get('id');
-        var Params=[id_client,name_client];
+        var modulo='Accounts';
+        var Params=[id_client,name_client,modulo];
         app.api.call('create', app.api.buildURL('createcall'),{data: Params}, {
             success: _.bind(function (data) {
                 id_call=data;
