@@ -105,7 +105,10 @@
 
         clasf_sectorial['prevActEconomica'] = app.utils.deepCopy(clasf_sectorial.ActividadEconomica);
         clasf_sectorial.render();
-        $('.list_ae').trigger('change');
+        
+        if (clasf_sectorial.ActividadEconomica.ae.id != "") {
+            $('.list_ae').trigger('change');
+        }
 
         //Api ResumenCliente para los campos de INEGI
         var idCuenta = clasf_sectorial.model.id; //Id de la Cuenta
@@ -137,8 +140,9 @@
         //campo custom account_clasf_sectorial ocualta la Etiqueta
         $("div.record-label[data-name='account_clasf_sectorial']").attr('style', 'display:none;');
         //Muestra y Oculta campos dependientes de Actividad Economica
-        // if ($('.list_ae').select2('val') == "" || clasf_sectorial.ActividadEconomica.ae.id == "") {
-        //     clasf_sectorial.MuestraCamposAE();
+        // if ($('.list_ae').select2('val') != "" || clasf_sectorial.ActividadEconomica.ae.id != "") {
+        //     // clasf_sectorial.MuestraCamposAE();
+        //     $('.list_ae').trigger('change');
         // }
         //funcion de cargar listas
         if (clasf_sectorial.renderlista != 1) {
