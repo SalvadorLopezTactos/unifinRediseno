@@ -3326,7 +3326,7 @@
         callback(null, fields, errors);
     },
 
-    sectoreconomico: function (fields, errors, callback) {
+    // sectoreconomico: function (fields, errors, callback) {
         //Validacion de Sector Economico custom
         // if (this.model.get('tipodepersona_c') != 'Persona Fisica' && ($('.list_se').select2('val') == '' || $('.list_se')[0].innerText.trim() == '') && (this.model.get('tipo_registro_cuenta_c') == '3' || this.model.get('tipo_registro_cuenta_c') == '5' || this.model.get('esproveedor_c') == true)) {
 
@@ -3344,8 +3344,8 @@
         //     errors['sectoreconomico_c'] = "Error: Favor de verificar los errores";
         //     errors['sectoreconomico_c'].required = true;
         // }
-        callback(null, fields, errors);
-    },
+        // callback(null, fields, errors);
+    // },
 
     validadirecc: function (fields, errors, callback) {
         //Campos requeridos
