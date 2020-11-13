@@ -26,32 +26,48 @@
          */
 
 		function buscaDuplicados($bean, $event, $arguments)
-		{
-			if(empty($bean->fetched_row['id']))
-			{
-				global $db;
-				$cliente = $bean->account_id;
-				$tipo = $bean->tipo_producto_c;
+        {
+            if (empty($bean->fetched_row['id'])) {
+                global $db;
+                $cliente = $bean->account_id;
+                $tipo = $bean->tipo_producto_c;
 
-                $beanCuenta = BeanFactory::retrieveBean('Accounts', $cliente,array('disable_row_level_security' => true));
-                $multilinea = $beanCuenta->multilinea_c;
-              //  $GLOBALS['log']->fatal("Multilinea  " .$multilinea);
 
-                $query = "select count(*) as total from opportunities a, opportunities_cstm b, accounts_opportunities c
- where a.id = b.id_c and a.id = c.opportunity_id and a.deleted = 0 and c.account_id = '$cliente' 
- and b.tct_etapa_ddw_c = 'SI' and isnull(b.estatus_c) and b.tipo_producto_c = '$tipo'";
+                $beanCuenta = BeanFactory::retrieveBean('Accounts', $cliente, array('disable_row_level_security' => true));
 
-                $result = $db->query($query);
-				$row = $db->fetchByAssoc($result);
-				$count = $row['total'];
-                //$GLOBALS['log']->fatal("Multiliena valores " .$count . " ll ".$multilinea);
+                $query = <<<SQL
+SELECT prod.name,prod.tipo_producto,cstm.multilinea_c FROM accounts_uni_productos_1_c rel
+INNER JOIN uni_productos prod
+ON prod.id=rel.accounts_uni_productos_1uni_productos_idb
+INNER JOIN uni_productos_cstm cstm
+ON cstm.id_c=prod.id
+WHERE rel.accounts_uni_productos_1accounts_ida='{$cliente}'
+AND prod.deleted='0' AND prod.tipo_producto='{$tipo}';
+SQL;
+                $queryResult = $db->query($query);
+                $respuesta = 0;
 
-                if($count > 0)
-				{
-					require_once 'include/api/SugarApiException.php';
-					throw new SugarApiExceptionInvalidParameter("No puede guardar la presolicitud, existe una abierta para el mismo cliente");
-				}
-			}
+                while ($row = $db->fetchByAssoc($queryResult)) {
+                    $respuesta = $row['multilinea_c'];
+                }
+                //Valida que la cuenta tenga el check de multilinea para ignorar los duplicados
+                if ($respuesta==0 || $respuesta==false) {
+
+                    $query = "select count(*) as total from opportunities a, opportunities_cstm b, accounts_opportunities c
+     where a.id = b.id_c and a.id = c.opportunity_id and a.deleted = 0 and c.account_id = '$cliente' 
+     and b.tct_etapa_ddw_c = 'SI' and isnull(b.estatus_c) and b.tipo_producto_c = '$tipo'";
+
+                    $result = $db->query($query);
+                    $row = $db->fetchByAssoc($result);
+                    $count = $row['total'];
+                    //$GLOBALS['log']->fatal("Multiliena valores " .$count . " ll ".$multilinea);
+
+                    if ($count > 0) {
+                        require_once 'include/api/SugarApiException.php';
+                        throw new SugarApiExceptionInvalidParameter("No puede guardar la presolicitud, existe una abierta para el mismo cliente");
+                    }
+                }
+        }
 		}
 
 		function setTeams($bean = null, $event = null, $args = null)
