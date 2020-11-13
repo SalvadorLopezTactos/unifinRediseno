@@ -732,22 +732,22 @@ $dependencies['Accounts']['ApellidoMaterno_required'] = array(
 //Dependencia para el sector economico para el tipo de persona fisica en registro prospecto e interesado
 //Adrian Arauz 13/07/18
 
-$dependencies['Accounts']['SectorEconomico_required'] = array(
-    'hooks' => array("all"),
-    'trigger' => 'true',
-    'triggerFields' => array('tipo_registro_cuenta_c', 'sectoreconomico_c', 'subtipo_registro_cuenta_c'),
-    'onload' => true,
-    'actions' => array(
-        array(
-            'name' => 'SetRequired',
-            'params' => array(
-                'target' => 'sectoreconomico_c',
-                'label' => 'sectoreconomico_c_label',
-                'value' => 'not(or(equal($tipo_registro_cuenta_c,"1"),equal($subtipo_registro_cuenta_c,"2"),equal($tipo_registro_cuenta_c,"5"),equal($tipo_registro_cuenta_c,"4")))',
-            ),
-        ),
-    ),
-);
+// $dependencies['Accounts']['SectorEconomico_required'] = array(
+//     'hooks' => array("all"),
+//     'trigger' => 'true',
+//     'triggerFields' => array('tipo_registro_cuenta_c', 'sectoreconomico_c', 'subtipo_registro_cuenta_c'),
+//     'onload' => true,
+//     'actions' => array(
+//         array(
+//             'name' => 'SetRequired',
+//             'params' => array(
+//                 'target' => 'sectoreconomico_c',
+//                 'label' => 'sectoreconomico_c_label',
+//                 'value' => 'not(or(equal($tipo_registro_cuenta_c,"1"),equal($subtipo_registro_cuenta_c,"2"),equal($tipo_registro_cuenta_c,"5"),equal($tipo_registro_cuenta_c,"4")))',
+//             ),
+//         ),
+//     ),
+// );
 //Dependencia para ventas anuales para Prospecto con Integracion de expediente. Actualizacion 17/07/18 Añadiendo excepciones para mejorar la fórmula.
 $dependencies['Accounts']['Ventas_anuales_required'] = array(
     'hooks' => array("all"),
