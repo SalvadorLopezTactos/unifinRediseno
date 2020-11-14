@@ -439,7 +439,7 @@
 
 
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
-		
+		this.model.addValidationTask('valida_actividad_economica', _.bind(this.valida_actividad_economica, this));
 		
 		/*RFC_ValidatePadron
 		  Validación de rfc en el padron de contribuyentes
@@ -3112,6 +3112,27 @@
 
         callback(null, fields, errors);
     },
+
+    valida_actividad_economica: function (fields, errors, callback){
+        //Validacion de Actividad Economica si el Tipo de Cuenta es "3" - Cliente
+        if (this.model.get('tipo_registro_cuenta_c') == '3' && this.model.get('tipo_registro_cuenta_c') != '1' && this.model.get('subtipo_registro_cuenta_c') != '2' &&
+        ($('.list_ae').select2('val') == '' || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null)) {
+            
+            app.alert.show("tipo_cuenta_cliente_ae", {
+                level: "error",
+                title: 'Hace falta seleccionar una Actividad Económica.',
+                autoClose: false
+            });
+
+            // $('.campoAE').find('.record-label').css('color', 'red');
+            $('.list_ae').find('.select2-choice').css('border-color', 'red');
+            errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
+            errors['actividadeconomica_c'].required = true;
+        }
+
+        callback(null, fields, errors);
+    },
+
 	/* Valida RFC con servicio de revisión del padron de contribuyentes */	
 	//        this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
 	
