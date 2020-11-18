@@ -2635,7 +2635,7 @@
         var status=this.model.get('estatus_c');
 
         //if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA") {
-        if(producto==1 && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0) && status!="K")) {
+        if(producto==1 && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0) && status!="K" && operacion=="LINEA_NUEVA")) {
             app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
                 success: function  (data) {
                     if (data.records.length == 0) {

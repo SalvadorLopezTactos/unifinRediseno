@@ -439,7 +439,7 @@
 
 
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
-		
+		this.model.addValidationTask('valida_actividad_economica', _.bind(this.valida_actividad_economica, this));
 		
 		/*RFC_ValidatePadron
 		  Validación de rfc en el padron de contribuyentes
@@ -2630,23 +2630,23 @@
                     // $('[data-name=tct_macro_sector_ddw_c]').find('.select2-choice').css('border-color', 'red');
                 }
                 //Requerido Subsector custom
-                if ($('.list_sse').select2('val') == "") {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';
-                    $('.list_sse').find('.select2-choice').css('border-color', 'red');
-                    // $('[name=subsectoreconomico_c]').css('border-color', 'red');
-                }
+                // if ($('.list_sse').select2('val') == "") {
+                //     RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';
+                //     $('.list_sse').find('.select2-choice').css('border-color', 'red');
+                //     // $('[name=subsectoreconomico_c]').css('border-color', 'red');
+                // }
                 //Requerido Sector custom
-                if ($('.list_se').select2('val') == "") {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
-                    $('.list_se').find('.select2-choice').css('border-color', 'red');
-                    // $('[name=sectoreconomico_c]').css('border-color', 'red');
-                }
+                // if ($('.list_se').select2('val') == "") {
+                //     RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
+                //     $('.list_se').find('.select2-choice').css('border-color', 'red');
+                //     // $('[name=sectoreconomico_c]').css('border-color', 'red');
+                // }
                 //Requerido macro sector custom
-                if ($('.list_ms').select2('val') == "") {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
-                    $('.list_ms').find('.select2-choice').css('border-color', 'red');
-                    // $('[name=actividadeconomica_c]').css('border-color', 'red');
-                }
+                // if ($('.list_ms').select2('val') == "") {
+                //     RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
+                //     $('.list_ms').find('.select2-choice').css('border-color', 'red');
+                //     // $('[name=actividadeconomica_c]').css('border-color', 'red');
+                // }
                 var direcciones = 0;
                 var tipodireccion = this.oDirecciones.direccion;
                 if (tipodireccion.length > 0) {
@@ -3112,6 +3112,27 @@
 
         callback(null, fields, errors);
     },
+
+    valida_actividad_economica: function (fields, errors, callback){
+        //Validacion de Actividad Economica si el Tipo de Cuenta es "3" - Cliente
+        if (this.model.get('tipo_registro_cuenta_c') == '3' && this.model.get('tipo_registro_cuenta_c') != '1' && this.model.get('subtipo_registro_cuenta_c') != '2' &&
+        ($('.list_ae').select2('val') == '' || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null)) {
+            
+            app.alert.show("tipo_cuenta_cliente_ae", {
+                level: "error",
+                title: 'Hace falta seleccionar una Actividad Económica.',
+                autoClose: false
+            });
+
+            // $('.campoAE').find('.record-label').css('color', 'red');
+            $('.list_ae').find('.select2-choice').css('border-color', 'red');
+            errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
+            errors['actividadeconomica_c'].required = true;
+        }
+
+        callback(null, fields, errors);
+    },
+
 	/* Valida RFC con servicio de revisión del padron de contribuyentes */	
 	//        this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
 	
