@@ -237,7 +237,8 @@
 
         //this.model.on('sync', this.get_phones, this);
         //Recupera datos para custom fields
-        this.get_phones();
+        this.get_uni_productos();
+		this.get_phones();
         this.get_addresses();
         this.get_v360();
         //this.get_Oproductos();
@@ -245,7 +246,7 @@
         this.get_resumen();
         this.get_analizate();
         //this.get_noviable();
-        this.get_uni_productos();
+        
 
         //Funcion para eliminar duplicados de arrays
         Array.prototype.unique = function (a) {
@@ -5469,6 +5470,7 @@
                     }
                 });
                 cont_uni_p['ResumenProductos'] = ResumenProductos;
+				contexto_cuenta['ResumenProductos'] = ResumenProductos;
                 cont_uni_p.render();
             },
             error: function (e) {
