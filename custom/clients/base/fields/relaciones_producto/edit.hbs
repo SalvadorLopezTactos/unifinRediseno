@@ -27,7 +27,8 @@
     <thead class="encabezado">
       <tr>
         <th>Relación</th>
-        <th>Productos</th>
+        <th>Tipo de Producto</th>
+        <th>Producto Financiero</th>
       </tr>
     </thead>
     <tbody>
@@ -37,6 +38,14 @@
         <td>
           <select class="select2 row-fluid producto_list" multiple="multiple" size="3" style="width: 100%"
             data-field="producto_list">
+              {{#each ../tipo_producto_list}}
+                  <option value="{{@key}}" {{ifMSelected @key ../prod}}>{{this}}</option>
+            {{/each}}
+          </select>
+        </td>
+        <td>
+          <select class="select2 row-fluid producto_financiero_list" multiple="multiple" size="3" style="width: 100%"
+            data-field="producto_financiero_list">
               {{#each ../tipo_producto_list}}
                   <option value="{{@key}}" {{ifMSelected @key ../prod}}>{{this}}</option>
             {{/each}}
