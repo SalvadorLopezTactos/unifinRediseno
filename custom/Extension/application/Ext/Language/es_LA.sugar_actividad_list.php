@@ -2,7 +2,6 @@
 // created: 2020-11-03 22:04:51
 
 $app_list_strings['actividad_list'] = array(
-  '' => '',
   '0111013' => 'Cultivo de Alpiste',
   '0111021' => 'Cultivo de Arroz',
   '0111039' => 'Cultivo de Avena',
@@ -1196,4 +1195,5 @@ $app_list_strings['actividad_list'] = array(
   '9912016' => 'Consulado',
   '9912024' => 'Gobierno Extranjero',
   '9919012' => 'Servicios de Oficinas Y Representaciones de Otros Paises Que Gozan de Extraterritorialidad',
+  '' => '',
 );
