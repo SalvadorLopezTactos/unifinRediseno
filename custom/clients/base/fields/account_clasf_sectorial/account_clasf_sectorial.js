@@ -199,6 +199,7 @@
         });
 
         if (idActEconomica != "" && idActEconomica != null && idActEconomica != undefined) {
+            console.log("idActEconomica "+idActEconomica);
 
             app.api.call('GET', app.api.buildURL('clasificacionSectorialCNVB/' + idActEconomica), null, {
                 success: function (data) {
