@@ -79,7 +79,12 @@ class Dynamics365 extends SugarApi
         $body_elements["DIOTOPERATIONTYPE"]="Other";
         $body_elements["DIOTVENDORTYPE"]=($beanCuenta->pais_nacimiento_c=='2') ? "DomesticVendor" : "ForeignVendor";
         $body_elements["LANGUAGEID"]="es-MX";
-        $body_elements["RFCFEDERALTAXNUMBER"]=$beanCuenta->rfc_c;
+        if($beanCuenta->pais_nacimiento_c=='2'){
+            $body_elements["RFCFEDERALTAXNUMBER"]=$beanCuenta->rfc_c;
+        }else{
+            $body_elements["FOREIGNVENDORTAXREGISTRATIONID"]="xexx000000000";
+        }
+        
         $body_elements["VENDORGROUPID"]="PROV";
         $body_elements["PRIMARYEMAILADDRESS"]=$beanCuenta->email1;
         $body_elements["PRIMARYEMAILADDRESSDESCRIPTION"]="PRINCIPAL";
