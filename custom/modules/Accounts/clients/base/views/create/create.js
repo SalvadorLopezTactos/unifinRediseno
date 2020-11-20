@@ -1654,7 +1654,7 @@
                 errors['tipo_proveedor_c'].required = true;
             }
             //Validacion de Actividad Economica - antes macrosector
-            if ($('.list_ae').select2('val') == '' || $('.list_ae').select2('val') == null) {
+            if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == '' || $('.list_ae').select2('val') == null) {
                 
                 $('.list_ae').find('.select2-choice').css('border-color', 'red');
                 errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
@@ -2017,7 +2017,7 @@
                 }
                 if (this.model.get('tipodepersona_c') == 'Persona Moral') {
                     //Requerido Actividad Economica - antes macro sector
-                    if ($('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
+                    if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
                         
                         $('.list_ae').find('.select2-choice').css('border-color', 'red');
                         errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
@@ -2046,7 +2046,7 @@
                         errors['genero_c'].required = true;
                     }
                     //Requerido Actividad Economica - antes macro sector
-                    if ($('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
+                    if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
                         
                         $('.list_ae').find('.select2-choice').css('border-color', 'red');
                         errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
@@ -2104,7 +2104,7 @@
                 errors['razonsocial_c'].required = true;
             }
             //Requerido Actividad Economica custom
-            if ($('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
+            if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
                 
                 $('.list_ae').find('.select2-choice').css('border-color', 'red');
                 errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
@@ -2624,7 +2624,7 @@
                     $('[data-name=nacionalidad_c]').find('.select2-choice').css('border-color', 'red');
                 }
                 //Validacion Actividad Economica custom
-                if ($('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == undefined) {
+                if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
                     $('.list_ae').find('.select2-choice').css('border-color', 'red');
                     // $('[data-name=tct_macro_sector_ddw_c]').find('.select2-choice').css('border-color', 'red');
@@ -3116,7 +3116,7 @@
     valida_actividad_economica: function (fields, errors, callback){
         //Validacion de Actividad Economica si el Tipo de Cuenta es "3" - Cliente
         if (this.model.get('tipo_registro_cuenta_c') == '3' && this.model.get('tipo_registro_cuenta_c') != '1' && this.model.get('subtipo_registro_cuenta_c') != '2' &&
-        ($('.list_ae').select2('val') == '' || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null)) {
+        ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == '' || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null)) {
             
             app.alert.show("tipo_cuenta_cliente_ae", {
                 level: "error",

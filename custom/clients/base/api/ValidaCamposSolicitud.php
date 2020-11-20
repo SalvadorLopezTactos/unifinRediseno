@@ -82,6 +82,9 @@ class ValidaCamposSolicitud extends SugarApi
                 if ($key=="activo_fijo_c" && floatval($beanPersona->$key) == 0) {
                     $beanPersona->$key = "";
                 }
+                if ($key=="actividadeconomica_c" && $beanPersona->actividadeconomica_c == "0") {
+                    $beanPersona->$key = "";
+                }
 
                 if ($beanPersona->$key == "" || $beanPersona->$key == null) {
                     $label = $beanPersona->field_defs[$key]['labelValue'];
@@ -101,6 +104,9 @@ class ValidaCamposSolicitud extends SugarApi
                     $beanPersona->$key = "";
                 }
                 if ($key=="activo_fijo_c" && floatval($beanPersona->$key) == 0) {
+                    $beanPersona->$key = "";
+                }
+                if ($key=="actividadeconomica_c" && $beanPersona->actividadeconomica_c == "0") {
                     $beanPersona->$key = "";
                 }
 

@@ -1471,7 +1471,7 @@
                 errors['nacionalidad_c'].required = true;
             }               
             //Validacion Actividad Economica custom
-            if ($('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == undefined) {
+            if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == undefined) {
                 errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                 errors['actividadeconomica_c'].required = true;
             }
@@ -1584,7 +1584,7 @@
                     $('[data-name=nacionalidad_c]').find('.select2-choice').css('border-color', 'red');
                 }
                 //Validacion Actividad Economica custom
-                if ($('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == undefined) {
+                if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
                     // $('.campoAE').find('.record-label').css('color', 'red');
                     // $('.list_ae').find('.select2-choice').css('border-color', 'red');                    

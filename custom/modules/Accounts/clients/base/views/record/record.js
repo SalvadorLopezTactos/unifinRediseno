@@ -3033,7 +3033,7 @@
                 errors['tipo_proveedor_c'].required = true;
             }
             //Validacion de Actividad Economica - antes macrosector
-            if ($('.list_ae').select2('val') == '' || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
+            if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == '' || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
                 //Entra a modo edición el campo custom
                 fieldAE1 = this.getField('account_clasf_sectorial');
                 this.inlineEditMode = true;
@@ -3305,8 +3305,14 @@
 
     macrosector: function (fields, errors, callback) {
         //Validacion Actividad Economica - antes macro sector
-        if (($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "") && (this.model.get('tipo_registro_cuenta_c') == '3' || this.model.get('tipo_registro_cuenta_c') == '5'
+        if (($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "") && (this.model.get('tipo_registro_cuenta_c') == '3' || this.model.get('tipo_registro_cuenta_c') == '5'
             || this.model.get('esproveedor_c') == true || this.model.get('subtipo_registro_cuenta_c') == '7' || this.model.get('subtipo_registro_cuenta_c') == '8' || this.model.get('subtipo_registro_cuenta_c') == '9')) {
+            
+            //Entra a modo edición el campo custom
+            fieldAE5 = this.getField('account_clasf_sectorial');
+            this.inlineEditMode = true;
+            this.setButtonStates(this.STATE.EDIT);
+            this.toggleField(fieldAE5);
 
             $('.campoAE').find('.record-label').css('color', 'red');
             $('.list_ae').find('.select2-choice').css('border-color', 'red');
@@ -3686,7 +3692,7 @@
                 }
                 if (this.model.get('tipodepersona_c') == 'Persona Moral') {
                     //Requerido Actividad Economica - antes macro sector
-                    if ($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
+                    if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
 
                         //Entra a modo edición el campo custom
                         fieldAE2 = this.getField('account_clasf_sectorial');
@@ -3722,7 +3728,7 @@
                         errors['genero_c'].required = true;
                     }
 
-                    if ($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
+                    if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
 
                         //Entra a modo edición el campo custom
                         fieldAE3 = this.getField('account_clasf_sectorial');
@@ -3787,7 +3793,7 @@
                 errors['razonsocial_c'].required = true;
             }
             //Requerido Actividad Economica custom
-            if ($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
+            if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
 
                 //Entra a modo edición el campo custom
                 fieldAE4 = this.getField('account_clasf_sectorial');
@@ -5229,7 +5235,7 @@
             necesarios = necesarios + '<b>RFC<br></b>';
         }
         //Requerido Actividad Economica - antes macro sector
-        if ($('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
+        if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
             necesarios = necesarios + '<b>Actividad Económica<br></b>';
         }
         //Requerido Sector Económico custom
