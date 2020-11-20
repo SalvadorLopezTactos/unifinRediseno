@@ -700,12 +700,10 @@
     resultCallback:function(id_call,context) {
         self=context;
         vicidial+='&leadid='+id_call;
-  			var body = {
-				  "url" : vicidial
-  			}
-	  		app.api.call('create', app.api.buildURL("callvicidial"), body , {
-            success: _.bind(function (data) {
-            }, this),
+        $.ajax({
+            cache:false,
+            type: "get",
+            url: vicidial,
         });
     },
 
