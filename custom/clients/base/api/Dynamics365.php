@@ -93,8 +93,8 @@ class Dynamics365 extends SugarApi
             $body_elements["VENDORPARTYTYPE"]="Person";
             $body_elements["COMPANYTYPE"]=($beanCuenta->pais_nacimiento_c=='2') ? "LegalPerson" : "ForeignCompany";
             $body_elements["PERSONFIRSTNAME"]=$beanCuenta->primernombre_c;
-            $body_elements["PERSONLASTNAME"]=$beanCuenta->apellidopaterno_c;
-            $body_elements["PERSONMIDDLENAME"]=$beanCuenta->apellidomaterno_c;
+            $body_elements["PERSONLASTNAME"]=$beanCuenta->apellidopaterno_c." ".$beanCuenta->apellidomaterno_c;
+            $body_elements["PERSONMIDDLENAME"]="";
         }else{
             $body_elements["VENDORPARTYTYPE"]="Organization";
             $body_elements["COMPANYTYPE"]=($beanCuenta->pais_nacimiento_c=='2') ? "LegalEntity" : "ForeignCompany";
