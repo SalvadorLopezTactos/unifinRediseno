@@ -6,7 +6,7 @@
                 <div class="campoAE span6">
                     <label class="record-label" style="margin-left:0px">Actividad Económica</label>
                     <label class="normal row-fluid select2 list_ae" data-field="list_ae">
-                        {{getUnifinListValue 'actividad_list' ActividadEconomica.ae.id}}
+                        {{#if ActividadEconomica.ae.id}}{{getUnifinListValue 'actividad_list' ActividadEconomica.ae.id}}{{/if}}
                     </label>
                 </div>
                 <div class="campoSSE span6">
