@@ -12,7 +12,7 @@
                 <div class="campoSSE span6">
                     <label class="record-label" style="margin-left:0px">Sub Sector Económico</label>
                     <label class="normal row-fluid select2 list_sse" data-field="list_sse">
-                        {{getUnifinListValue 'subsector_list' ActividadEconomica.sse.id}}
+                        {{#if ActividadEconomica.sse.id}}{{getUnifinListValue 'subsector_list' ActividadEconomica.sse.id}}{{/if}}
                     </label>
                 </div>
             </div>
@@ -22,13 +22,13 @@
                 <div class="campoSE span6">
                     <label class="record-label" style="margin-left:0px">Sector Económico</label>
                     <label class="normal row-fluid select2 list_se" data-field="list_se">
-                        {{getUnifinListValue 'sector_list' ActividadEconomica.se.id}}
+                        {{#if ActividadEconomica.se.id}}{{getUnifinListValue 'sector_list' ActividadEconomica.se.id}}{{/if}}
                     </label>
                 </div>
                 <div class="campoMS span6">
                     <label class="record-label" style="margin-left:0px">Macro Sector</label>
                     <label class="normal row-fluid select2 list_ms" data-field="list_ms">
-                        {{getUnifinListValue 'macro_list' ActividadEconomica.ms.id}}
+                        {{#if ActividadEconomica.ms.id}}{{getUnifinListValue 'macro_list' ActividadEconomica.ms.id}}{{/if}}
                     </label>
                 </div>
             </div>
@@ -39,13 +39,13 @@
                 <div class="campoIC span6">
                     <label class="record-label" style="margin-left:0px">Clase</label>
                     <label class="normal row-fluid select2 list_clase" data-field="list_clase">
-                        {{getUnifinListValue 'clase_list' ResumenCliente.inegi.inegi_clase}}
+                        {{#if ResumenCliente.inegi.inegi_clase}}{{getUnifinListValue 'clase_list' ResumenCliente.inegi.inegi_clase}}{{/if}}
                     </label>
                 </div>
                 <div class="campoISR span6">
                     <label class="record-label" style="margin-left:0px">Subrama</label>
                     <label class="normal row-fluid select2 list_subrama" data-field="list_subrama">
-                        {{getUnifinListValue 'subrama_list' ResumenCliente.inegi.inegi_subrama}}
+                        {{#if ResumenCliente.inegi.inegi_subrama}}{{getUnifinListValue 'subrama_list' ResumenCliente.inegi.inegi_subrama}}{{/if}}
                     </label>
                 </div>
             </div>
@@ -55,13 +55,13 @@
                 <div class="campoIR span6">
                     <label class="record-label" style="margin-left:0px">Rama</label>
                     <label class="normal row-fluid select2 list_rama" data-field="list_rama">
-                        {{getUnifinListValue 'rama_list' ResumenCliente.inegi.inegi_rama}}
+                        {{#if ResumenCliente.inegi.inegi_rama}}{{getUnifinListValue 'rama_list' ResumenCliente.inegi.inegi_rama}}{{/if}}
                     </label>
                 </div>
                 <div class="campoISS span6">
                     <label class="record-label" style="margin-left:0px">Subsector</label>
                     <label class="normal row-fluid select2 list_ssector" data-field="list_ssector">
-                        {{getUnifinListValue 'subsector_list' ResumenCliente.inegi.inegi_subsector}}
+                        {{#if ResumenCliente.inegi.inegi_subsector}}{{getUnifinListValue 'subsector_list' ResumenCliente.inegi.inegi_subsector}}{{/if}}
                     </label>
                 </div>
             </div>
@@ -71,13 +71,13 @@
                 <div class="campoIS span6">
                     <label class="record-label" style="margin-left:0px">Sector</label>
                     <label class="normal row-fluid select2 list_sector" data-field="list_sector">
-                        {{getUnifinListValue 'sector_list' ResumenCliente.inegi.inegi_sector}}
+                        {{#if ResumenCliente.inegi.inegi_sector}}{{getUnifinListValue 'sector_list' ResumenCliente.inegi.inegi_sector}}{{/if}}
                     </label>
                 </div>
                 <div class="campoIMS span6">
                     <label class="record-label" style="margin-left:0px">Macro</label>
                     <label class="normal row-fluid select2 list_imacro" data-field="list_imacro">
-                        {{getUnifinListValue 'macro_list' ResumenCliente.inegi.inegi_macro}}
+                        {{#if ResumenCliente.inegi.inegi_macro}}{{getUnifinListValue 'macro_list' ResumenCliente.inegi.inegi_macro}}{{/if}}
                     </label>
                 </div>
             </div>
