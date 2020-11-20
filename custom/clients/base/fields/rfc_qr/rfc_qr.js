@@ -138,30 +138,7 @@
 						self.$('#btn_Cancelar').removeClass('disabled');
 						self.$('#btn_Cancelar').attr('style', 'margin:10px');
 					}else {
-						var text = '[{"AL": "CIUDAD DE MEXICO 3",'+
-'"Apellido Materno": "JURADO",'+
-'"Apellido Paterno": "FLORES",'+
-'"CP": "13099",'+
-'"CURP": "FOJE910621HMCLRD09",'+
-'"Colonia": "SAN ANDRES",'+
-'"Correo electrónico": "",'+
-'"Entidad Federativa": "CIUDAD DE MEXICO",'+
-'"Fecha Nacimiento": "21-06-1991",'+
-'"Fecha de Inicio de operaciones": "02-01-2017",'+
-'"Fecha de alta": "02-01-2017",'+
-'"Fecha del último cambio de situación": "16-07-2014",'+
-'"Municipio o delegación": "TLAHUAC",'+
-'"Nombre": "EDUARDO AXEL",'+
-'"Nombre de la vialidad": "2DA CERRADA REPUBLICA DE CHILE",'+
-'"Número exterior": "5",'+
-'"Número interior": "",'+
-'"RFC": "FOJE910621260",'+
-'"Régimen": "Régimen de Ingresos por Dividendos (socios y accionistas)",'+
-'"Situación del contribuyente": "ACTIVO",'+
-'"Tipo de vialidad": "CALLE",'+
-'"﻿id": "custom_qr_QR_RFC_5fb4568bdcc59",'+
-'"path_img_qr": "custom/qr/QR_RFC_5fb4568bdcc59.png"}]';
-						data = JSON.parse(text);
+						
 						var indice_indicador = 0;
 						var Completo = '';
 						var RFC = data[0]["RFC"];
