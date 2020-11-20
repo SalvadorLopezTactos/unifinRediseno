@@ -162,12 +162,12 @@
         $(".campoSE").attr('style', 'pointer-events:none;');
         $(".campoMS").attr('style', 'pointer-events:none;');
         //Campos INEGI de Solo Lectura 
-        $(".campoIR").attr('style', 'pointer-events:none;');
-        $(".campoISR").attr('style', 'pointer-events:none;');
-        $(".campoIS").attr('style', 'pointer-events:none;');
-        $(".campoISS").attr('style', 'pointer-events:none;');
         $(".campoIC").attr('style', 'pointer-events:none;');
-        $(".campoID").attr('style', 'pointer-events:none;');
+        $(".campoISR").attr('style', 'pointer-events:none;');
+        $(".campoIR").attr('style', 'pointer-events:none;');
+        $(".campoISS").attr('style', 'pointer-events:none;');
+        $(".campoIS").attr('style', 'pointer-events:none;');
+        $(".campoIMS").attr('style', 'pointer-events:none;');
 
         //Carga los valores en los campos dependientes de Actividad Económica al momento de hacer el change
         $('.list_ae').change(function (evt) {
@@ -199,6 +199,7 @@
         });
 
         if (idActEconomica != "" && idActEconomica != null && idActEconomica != undefined) {
+            console.log("idActEconomica "+idActEconomica);
 
             app.api.call('GET', app.api.buildURL('clasificacionSectorialCNVB/' + idActEconomica), null, {
                 success: function (data) {

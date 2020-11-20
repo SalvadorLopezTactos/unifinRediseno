@@ -264,3 +264,21 @@ $dependencies['Accounts']['ventas_anuales_c'] = array
     'notActions' => array(),
 );
 
+// solo lectura campo rfc
+$dependencies['Accounts']['rfc_c'] = array
+(
+    'hooks' => array("edit"),
+    'trigger' => 'true',
+    'triggerFields' => array('name','id'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'rfc_c',
+                'value' => 'true',
+            ),
+        ),
+    ),
+    'notActions' => array(),
+);

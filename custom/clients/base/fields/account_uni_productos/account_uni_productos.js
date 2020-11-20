@@ -605,6 +605,9 @@
     },
 
     SaveUniProductos: function (fields, errors, callback) {
+		if (cont_uni_p.ResumenProductos == undefined) {
+			cont_uni_p.ResumenProductos = contexto_cuenta.ResumenProductos;
+		}
         if (cont_uni_p.ResumenProductos != undefined) {
             //Valida tipo de cuenta
             var guardaL = false;

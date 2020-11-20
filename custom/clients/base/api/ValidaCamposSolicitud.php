@@ -42,13 +42,12 @@ class ValidaCamposSolicitud extends SugarApi
         $producto = $args['producto'];
 
         $req_pm = "origen_cuenta_c,tipodepersona_c," .
-            "nombre_comercial_c,tct_macro_sector_ddw_c,sectoreconomico_c," .
-            "subsectoreconomico_c,actividadeconomica_c," .
+            "nombre_comercial_c,actividadeconomica_c," .
             "empleados_c,promotorleasing_c,promotorfactoraje_c,promotorcredit_c";
 
         $req_pf_y_pfae = "origen_cuenta_c,tipodepersona_c," .
             "primernombre_c,apellidopaterno_c,apellidomaterno_c," .
-            "tct_macro_sector_ddw_c,sectoreconomico_c,subsectoreconomico_c,actividadeconomica_c," .
+            "actividadeconomica_c," .
             "empleados_c," .
             "promotorleasing_c,promotorfactoraje_c,promotorcredit_c";
 
@@ -83,6 +82,9 @@ class ValidaCamposSolicitud extends SugarApi
                 if ($key=="activo_fijo_c" && floatval($beanPersona->$key) == 0) {
                     $beanPersona->$key = "";
                 }
+                if ($key=="actividadeconomica_c" && $beanPersona->actividadeconomica_c == "0") {
+                    $beanPersona->$key = "";
+                }
 
                 if ($beanPersona->$key == "" || $beanPersona->$key == null) {
                     $label = $beanPersona->field_defs[$key]['labelValue'];
@@ -102,6 +104,9 @@ class ValidaCamposSolicitud extends SugarApi
                     $beanPersona->$key = "";
                 }
                 if ($key=="activo_fijo_c" && floatval($beanPersona->$key) == 0) {
+                    $beanPersona->$key = "";
+                }
+                if ($key=="actividadeconomica_c" && $beanPersona->actividadeconomica_c == "0") {
                     $beanPersona->$key = "";
                 }
 
