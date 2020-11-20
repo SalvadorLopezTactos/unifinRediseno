@@ -599,12 +599,11 @@ array (
               array (
                 'name' => 'rfc_c',
                 'label' => 'LBL_RFC',
-              ),
-              13 => 
+              ),   
+			  13 => 
               array (
-                'type' => 'button',
-                'name' => 'generar_rfc_c',
-                'label' => 'LBL_GENERAR_RFC',
+                'name' => 'blank_space',
+                'label' => 'LBL_BLANK_SPACE',
               ),
               14 => 
               array (
