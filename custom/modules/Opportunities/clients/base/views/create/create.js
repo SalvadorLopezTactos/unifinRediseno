@@ -1228,6 +1228,7 @@
         $('[data-name="idsolicitud_c"]').show();
         $('[data-name="account_name"]').show();
         $('[data-name="tipo_producto_c"]').show();
+        $('[data-name="producto_financiero_c"]').show();
         $('[data-name="monto_c"]').show();
         $('[data-name="assigned_user_name"]').show();
         $('[data-name="picture"]').show();
