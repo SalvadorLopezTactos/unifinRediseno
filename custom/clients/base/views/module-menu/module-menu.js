@@ -42,7 +42,10 @@
 
             case '#RefinanciamientosMasivos':
                 route = '#bwc/index.php?entryPoint=RefinanciamientosMasivos';
+                break;
 
+            case '#Quantico':
+                route = '#bwc/index.php?entryPoint=ListaTareasQuantico';
                 break;
         }
 
