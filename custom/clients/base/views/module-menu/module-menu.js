@@ -7,6 +7,26 @@
         this._super('initialize', [options]);
 
         //this.customPopulateMenu();
+        var puesto_usuario=App.user.attributes.puestousuario_c;
+
+        /*
+        puesto 6 - BO Leasing, 12 - BO Factoraje, 17 - BO CA
+        puesto 5 - Asesor Leasing, 11 - Asesor Factoraje, 16 - Asesor CA, 53 - Asesor Uniclick, 54 - Asesor RM
+        */
+        //Mostrar lista de tareas únicamente para los puestos mencionados arriba
+        if(options.module=="Quantico"){
+
+            if(puesto_usuario =="6" || puesto_usuario =="12" || puesto_usuario =="17" ||
+            puesto_usuario =="5" || puesto_usuario =="11" || puesto_usuario =="16" || puesto_usuario =="53" || puesto_usuario =="54"){
+
+                this.tienePuesto=true;
+
+            }else{
+                this.tienePuesto=false;
+            }
+
+        }
+        
     },
 
     handleRouteEvent: function(event) {
@@ -42,7 +62,10 @@
 
             case '#RefinanciamientosMasivos':
                 route = '#bwc/index.php?entryPoint=RefinanciamientosMasivos';
+                break;
 
+            case '#Quantico':
+                route = '#bwc/index.php?entryPoint=ListaTareasQuantico';
                 break;
         }
 

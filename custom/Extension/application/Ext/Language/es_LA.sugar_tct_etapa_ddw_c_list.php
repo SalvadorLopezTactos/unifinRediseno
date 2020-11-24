@@ -1,5 +1,5 @@
 <?php
- // created: 2018-07-17 14:45:22
+ // created: 2020-11-23 18:18:38
 
 $app_list_strings['tct_etapa_ddw_c_list']=array (
   'SI' => 'SOLICITUD INICIAL',
@@ -7,4 +7,5 @@ $app_list_strings['tct_etapa_ddw_c_list']=array (
   'C' => 'CRÉDITO',
   'CL' => 'CLIENTE CON LÍNEA',
   'R' => 'RECHAZADO',
+  'D' => 'COMITÉ',
 );
