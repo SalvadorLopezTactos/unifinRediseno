@@ -35,8 +35,8 @@ class ApiCallQuantico
     }
 }
 global $current_user,$sugar_config;
-$objGUID="36f736ec-89fa-441f-9cef-ac5458f9b629";
-//$objGUID=$current_user->id_active_directory_c;
+//$objGUID="36f736ec-89fa-441f-9cef-ac5458f9b629";
+$objGUID=$current_user->id_active_directory_c;
 $url_token=$sugar_config['url_quantico_token'];
 
 //$url = "https://unifin-tst.outsystemsenterprise.com/Quantico_AccessControl/rest/CreateToken/CreateToken?ObjectGUID=".$objGUID;
