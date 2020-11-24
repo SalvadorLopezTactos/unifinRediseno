@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by JG.
  * User: tactos
@@ -23,16 +24,28 @@ class getProductosFinancieros extends SugarApi
 
     public function getcstmProdFinan($api, $args)
     {
-        global $db;
-        $producto = $args['tipoProd'];
+        $producto = empty($args['tipoProd']) ? '' : $args['tipoProd'];
+        $arrayTProductos = preg_split("/\,/", $producto);
         $records_in = [];
+        $TipoProductos = "";
 
-        $selectProductos="Select * from prod_estructura_productos WHERE tipo_producto={$producto}";
+        for ($i = 0; $i < count($arrayTProductos); $i++) {
+
+            if ($i == 0) {
+                $TipoProductos .= "tipo_producto = '{$arrayTProductos[$i]}'";
+            } else {
+                $TipoProductos .= "OR tipo_producto = '{$arrayTProductos[$i]}'";
+            }
+        }
+
+        $selectProductos = "SELECT tipo_producto, producto_financiero 
+        FROM prod_estructura_productos WHERE {$TipoProductos}";
+
         $result = $GLOBALS['db']->query($selectProductos);
+
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
             $records_in[] = $row;
         }
         return $records_in;
     }
-
 }
