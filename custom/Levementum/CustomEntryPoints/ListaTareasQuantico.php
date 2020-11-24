@@ -35,19 +35,18 @@ class ApiCallQuantico
     }
 }
 global $current_user,$sugar_config;
-    //Variables para puerto
-    //$Host=$sugar_config['url_Refinanciamientos'];
-$objGUID="36f736ec-89fa-441f-9cef-ac5458f9b629";
+//$objGUID="36f736ec-89fa-441f-9cef-ac5458f9b629";
+$objGUID=$current_user->id_active_directory_c;
+$url_token=$sugar_config['url_quantico_token'];
 
-$url = "https://unifin-tst.outsystemsenterprise.com/Quantico_AccessControl/rest/CreateToken/CreateToken?ObjectGUID=".$objGUID;
-//$url = "https://unifin-tst.outsystemsenterprise.com/Quantico_AccessControl/rest/CreateToken/CreateToken";
+//$url = "https://unifin-tst.outsystemsenterprise.com/Quantico_AccessControl/rest/CreateToken/CreateToken?ObjectGUID=".$objGUID;
+$url = $url_token.$objGUID;
 
 $objCall=ApiCallQuantico::callQuantico($url,"POST");
 
 $token=$objCall->Token;
 
 $GLOBALS['log']->fatal(print_r($objCall,true));
-
 
 ?>
 
@@ -58,15 +57,28 @@ $GLOBALS['log']->fatal(print_r($objCall,true));
     <?php
 
     if(!empty($token)){
-        //https://unifin-tst.outsystemsenterprise.com/Quantico_AccessControl/Quantico_CRMLogin.aspx?token=12345-XYZ&amp;IsBackoffice=True
-        $urlLoginQuantico="https://unifin-tst.outsystemsenterprise.com/Quantico_AccessControl/Quantico_CRMLogin.aspx?token=".$token."&IsBackoffice=True";
 
-        $respuesta=ApiCallQuantico::callQuantico($urlLoginQuantico,"GET");
-        $GLOBALS['log']->fatal(print_r($respuesta,true));
+        $url_login=$sugar_config['url_quantico_login'];
+        $booleano="";
+        //Puesto 6= BO Leasing, 12 = BO Factoraje, 17= BO Crédito Automotriz
+        if($current_user->puestousuario_c=='6' || $current_user->puestousuario_c=='12' || $current_user->puestousuario_c=='17')
+        {
+            $booleano="True";
 
-        echo '<iframe src="'.$respuesta.'" style="width:100%;height: 100%;position: absolute;"></iframe>';
+        }else{
+            $booleano="False";
+        }
+        //$urlLoginQuantico="https://unifin-tst.outsystemsenterprise.com/Quantico_AccessControl/Quantico_CRMLogin.aspx?token=".$token."&IsBackoffice=".$booleano;
+
+        $urlLoginQuantico=$url_login.$token."&IsBackoffice=".$booleano;
+
+        //$respuesta=ApiCallQuantico::callQuantico($urlLoginQuantico,"GET");
+        //$GLOBALS['log']->fatal(print_r($respuesta,true));
+
+        //echo '<iframe src="'.$urlLoginQuantico.'" style="width:100%;height: 100%;position: absolute;"></iframe>';
+        echo '<a href="'.$urlLoginQuantico.'" target="_blank">Dirigirse a Quantico</a>';
     } else {
-        echo '<h1>Este ObjectGuid no esta registrado en el sistema</h1>';
+        echo '<h1>Este ObjectGuid del usuario firmado no está registrado en el sistema</h1>';
     }
 ?>
 
