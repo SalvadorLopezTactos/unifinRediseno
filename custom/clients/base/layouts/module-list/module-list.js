@@ -9,10 +9,11 @@
 		moduleList.push('Cotizador');
         moduleList.push('Expediente');
         moduleList.push('ExpedienteUniclick');
-        //moduleList.splice(8, 0, 'Expediente');
+        moduleList.splice(8, 0, 'Quantico');
         moduleList.push('CotizadorProspectos');
         moduleList.push('BuscaDisposicion');
         moduleList.push('RefinanciamientosMasivos');
+        //moduleList.push('Quantico');
         _.each(moduleList, function(module) {
             this._addMenu(module, true);
         }, this);
@@ -45,6 +46,11 @@
                 break;
 
              case 'RefinanciamientosMasivos':
+                filter = 'all_records';
+                alias = true;
+                break;
+
+            case 'Quantico':
                 filter = 'all_records';
                 alias = true;
                 break;

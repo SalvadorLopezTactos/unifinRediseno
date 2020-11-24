@@ -1,5 +1,5 @@
 <?php
- // created: 2020-09-02 14:17:53
+ // created: 2020-11-23 18:33:06
 $dictionary['Opportunity']['fields']['estatus_c']['labelValue']='SubEtapa';
 $dictionary['Opportunity']['fields']['estatus_c']['dependency']='';
 $dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']=array (
@@ -56,6 +56,8 @@ $dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']=array (
       1 => 'P',
       2 => 'DP',
       3 => 'K',
+      4 => 'BO',
+      5 => 'DB',
     ),
     'C' => 
     array (
@@ -66,9 +68,8 @@ $dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']=array (
       4 => 'E',
       5 => 'RM',
       6 => 'SC',
-      7 => 'D',
-      8 => 'CN',
-      9 => 'SG',
+      7 => 'CN',
+      8 => 'SG',
     ),
     'CL' => 
     array (
@@ -78,6 +79,11 @@ $dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']=array (
     array (
       0 => 'CM',
       1 => 'R',
+    ),
+    'D' => 
+    array (
+      0 => 'AC',
+      1 => 'D',
     ),
   ),
 );
