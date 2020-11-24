@@ -46,6 +46,7 @@ class getProductosFinancieros extends SugarApi
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
             $records_in[] = $row;
         }
+        
         return $records_in;
     }
 }
