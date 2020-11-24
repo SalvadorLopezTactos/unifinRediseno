@@ -1,5 +1,5 @@
 <?php
- // created: 2020-09-02 14:03:50
+ // created: 2020-11-23 18:25:30
 
 $app_list_strings['estatus_c_operacion_list']=array (
   'P' => 'INTEGRACIÓN DE EXPEDIENTE',
@@ -21,4 +21,16 @@ $app_list_strings['estatus_c_operacion_list']=array (
   'PE' => 'EN ESPERA',
   '' => '',
   1 => 'EN VALIDACIÓN COMERCIAL',
+  'CZ' => 'COTIZACION',
+  'SL' => 'SOLICITUD DE COMPRA',
+  'OC' => 'ORDEN DE COMPRA',
+  'CT' => 'CONTRATACION',
+  'LB' => 'LIBERACION',
+  'CA' => 'CONTRATO ACTIVO',
+  'AL' => 'CONTRATO ACTIVO LIBERADO',
+  'T' => 'CONTRATO TERMINADO',
+  'OP' => 'OPERACIÓN DE PROSPECTO',
+  'BO' => 'VALIDACIÓN BO CRÉDITO',
+  'DB' => 'DEVUELTA BO CRÉDITO',
+  'AC' => 'AUTORIZADOR CARÁTULA',
 );
