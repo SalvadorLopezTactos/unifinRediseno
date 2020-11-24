@@ -17,7 +17,7 @@ class getProductosFinancieros extends SugarApi
                 'path' => array('GetProductosFinancieros', '?'),
                 'pathVars' => array('module', 'tipoProd'),
                 'method' => 'getcstmProdFinan',
-                'shortHelp' => 'Obtiene todos los productos relacionados a la cuenta',
+                'shortHelp' => 'Obtiene los productos financieros por Tipo de Producto',
             ),
         );
     }
@@ -46,7 +46,7 @@ class getProductosFinancieros extends SugarApi
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
             $records_in[] = $row;
         }
-        
+
         return $records_in;
     }
 }
