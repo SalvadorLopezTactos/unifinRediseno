@@ -206,3 +206,4 @@ $mod_strings['LBL_OPPORTUNITIES_LIST_DASHBOARD'] = 'Tablero de Lista de Solicitu
 $mod_strings['LBL_OPPORTUNITIES_RECORD_DASHBOARD'] = 'Tablero de Registro de Solicitudes y Líneas';
 $mod_strings['LBL_RENEWAL_OPPORTUNITIES'] = 'Solicitudes y Líneas de renovación';
 $mod_strings['LBL_RENEWAL_PARENT'] = 'Solicitud y Línea de padre';
+$mod_strings['LBL_PRODUCTO_FINANCIERO_C'] = 'Producto Financiero';
