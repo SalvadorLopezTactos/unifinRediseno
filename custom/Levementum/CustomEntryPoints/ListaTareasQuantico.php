@@ -49,6 +49,16 @@ $token=$objCall->Token;
 $GLOBALS['log']->fatal(print_r($objCall,true));
 
 ?>
+<script type="text/javascript">
+    window.onload = function () {
+        if(document.getElementById('linkQuantico')!=null){
+
+            document.getElementById('linkQuantico').click();
+
+        }
+    };
+
+</script>
 
 <!DOCTYPE html>
 <html>
@@ -76,9 +86,11 @@ $GLOBALS['log']->fatal(print_r($objCall,true));
         //$GLOBALS['log']->fatal(print_r($respuesta,true));
 
         //echo '<iframe src="'.$urlLoginQuantico.'" style="width:100%;height: 100%;position: absolute;"></iframe>';
-        echo '<a href="'.$urlLoginQuantico.'" target="_blank">Dirigirse a Quantico</a>';
+        echo '<a href="'.$urlLoginQuantico.'" target="_blank" id="linkQuantico">Dirigirse a Quantico</a>';
     } else {
-        echo '<h1>Este ObjectGuid del usuario firmado no está registrado en el sistema</h1>';
+        echo '<div style="text-align: center;vertical-align: middle;">
+    <h1>Este ObjectGuid del usuario firmado no está registrado en el sistema</h1>
+    </div>';
     }
 ?>
 

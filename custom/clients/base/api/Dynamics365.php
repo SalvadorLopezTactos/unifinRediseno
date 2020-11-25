@@ -58,7 +58,7 @@ class Dynamics365 extends SugarApi
         );
 
         //Llamada a api para obtener token
-        $response=$this->postDynamicsToken($host,$request);
+        $response=$this->postDynamicsRequest($host,$request);
         $token=$response->access_token;
         // $GLOBALS['log']->fatal('Dynamics request: '. $request);
         // $GLOBALS['log']->fatal('Dynamics token: '. $token);
@@ -150,49 +150,6 @@ class Dynamics365 extends SugarApi
                 }
             }
         }
-        //Estructua ejemplo
-        /*$argsVendor=array(
-            "_contract"=>array(
-                "DataAreaId"=>"UFIN",
-                "VENDORACCOUNTNUMBER"=>"23901",
-                "ADDRESSCITY"=>"CDMX",
-                "ADDRESSCOUNTRYREGIONID"=>"MEX",
-                "ADDRESSCOUNTYID"=>"POLANCO V",
-                "ADDRESSDESCRIPTION"=>"POLANCO V",
-                "ADDRESSLOCATIONROLES"=>"Business",
-                "ADDRESSSTATEID"=>"CDMX",
-                "ADDRESSSTREET"=>"Texcoco",
-                "ADDRESSSTREETNUMBER"=>"80",
-                "ADDRESSZIPCODE"=>"55240",
-                "COMPANYTYPE"=>"LegalEntity",
-                "CURRENCYCODE"=>"MXN",
-                "DEFAULTLEDGERDIMENSIONDISPLAYVALUE"=>"",
-                "DEFAULTOFFSETACCOUNTTYPE"=>"Ledger",
-                "DEFAULTPAYMENTDAYNAME"=>"LUNES",//NO MANDAR
-                "DEFAULTPAYMENTTERMSNAME"=>"CONTADO",
-                "DEFAULTVENDORPAYMENTMETHODNAME"=>"TRANSFER",
-                "DIOTOPERATIONTYPE"=>"085",
-                "DIOTVENDORTYPE"=>"DomesticVendor",
-                "LANGUAGEID"=>"es-MX",
-                "PERSONFIRSTNAME"=>"SALVADOR",
-                "PERSONLASTNAME"=>"LOPEZ",
-                "PERSONMIDDLENAME"=>"JOSE",
-                "PRIMARYEMAILADDRESS"=>"CORREO@PRUEBA.COM",
-                "PRIMARYEMAILADDRESSDESCRIPTION"=>"PRINCIPAL",
-                "PRIMARYEMAILADDRESSPURPOSE"=>"Business",
-                "RFCFEDERALTAXNUMBER"=>"ABR010822TE7",
-                "SALESTAXGROUPCODE"=>"IVA16%",
-                "VENDORGROUPID"=>"PROV",
-                "VENDORORGANIZATIONNAME"=>"ENTERPRISES DANONE  S.A. de C.V.",
-                "VENDORPARTYTYPE"=>"Organization",
-                "VENDORSEARCHNAME"=>"ENTERPRISES DANONE  S.A. de C.V.",
-                "FOREIGNVENDORTAXREGISTRATIONID"=>"",
-                //"VENDORBANKACCOUNTID"=>"T-000000010",
-                "BANKACCOUNTNUMBER"=>"014180655022843137",
-                "BANKGROUPID"=>"014",
-                "ROUTINGNUMBER"=>"123456789101"
-            )
-        );*/
 
         //Valida total de registros en $records_list
         if (count($records_list)==0) {
@@ -214,11 +171,36 @@ class Dynamics365 extends SugarApi
           //$GLOBALS['log']->fatal('Response: '. $responseCreate);
           $responseDynamics = ($responseCreate->Success) ? $responseDynamics . ' - ' . $responseCreate->Message : $responseDynamics . ' - ' . $responseCreate->ExceptionType;
         }
-        return $responseDynamics;
+
+        //Comienza integración Cuentas por pagar
+        $urlCPP="http://172.26.1.84:9011/proveedores/EnvioCuentasPorPagar365";
+
+        $bodyCPP=array(
+            'idProveedor' => $beanCuenta->idcliente_c
+        );
+
+        //Llamada a api para obtener token
+        $responseCPP=$this->postDynamicsRequest($urlCPP,$bodyCPP);
+        $GLOBALS['log']->fatal("RESPONSE CUENTAS POR PAGAR");
+        $GLOBALS['log']->fatal(json_encode($responseCPP));
+        
+        $data=$responseCPP->data;
+        $responseFull=array();
+
+        if(!empty($data)){
+
+            $responseFull=array($responseDynamics,$data);
+
+        }
+
+        $GLOBALS['log']->fatal("RESPONSE API DYNAMICS 365");
+        $GLOBALS['log']->fatal(json_encode($responseFull));
+
+        return $responseFull;
 
     }
 
-    public function postDynamicsToken($host,$fields)
+    public function postDynamicsRequest($host,$fields)
     {
         $curl = curl_init();
 
