@@ -180,7 +180,7 @@ class Dynamics365 extends SugarApi
         );
 
         //Llamada a api para obtener token
-        $responseCPP=$this->postDynamicsRequest($urlCPP,$bodyCPP);
+        $responseCPP=$this->postCPP($urlCPP,$bodyCPP);
         $GLOBALS['log']->fatal("RESPONSE CUENTAS POR PAGAR");
         $GLOBALS['log']->fatal(json_encode($responseCPP));
         
@@ -220,6 +220,29 @@ class Dynamics365 extends SugarApi
         curl_close($curl);
         return json_decode($response);
     }
+
+    public function postCPP($host,$fields)
+    {
+        $curl = curl_init();
+        $fields_string = json_encode($fields);
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $host,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => $fields_string,
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+        return json_decode($response);
+    }
+
+
 
     public function postDynamics($host,$token, $fields)
     {
