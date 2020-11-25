@@ -42,6 +42,7 @@
         cont_dir = this;
         this._super('initialize', [options]);
 
+		this.principal = 1;
         //Declaración de variables
         this.paises_list = {};
         this.estados_list = [];
@@ -62,7 +63,19 @@
         this.def.listTipo = App.lang.getAppListStrings('dir_tipo_unique_list');
         this.def.listMapIndicador = App.lang.getAppListStrings('dir_indicador_map_list');
         this.def.listIndicador = App.lang.getAppListStrings('dir_indicador_unique_list');
-
+		
+		//var auxindicador = [];
+		//
+		//for (var [key, value] of Object.entries(this.def.listIndicador)) {
+		//	var auxobject = null;
+		//	if(key != "2"){
+		//		auxobject = [key:value];
+		//		auxindicador.push(auxobject);
+		//	}
+		//}
+		//
+		//var obj = Object.fromEntries(auxindicador);		
+		//
         //Declaración de validation Tasks
         this.model.addValidationTask('check_multiple_fiscal', _.bind(this._doValidateDireccionIndicador, this));
 
@@ -73,57 +86,7 @@
 
     _render: function () {
         this._super("_render");
-		
-		//this.$("div.record-label[data-name='account_direcciones']").attr('style', 'display:none;');
-        
-		if(this.action == 'edit' && this.oDirecciones) {
-			for(var i = 0; i < this.oDirecciones.direccion.length ; i++) {
-				var inactivo = this.oDirecciones.direccion[i].inactivo;
-				var ind = this.oDirecciones.direccion[i].indicador;
-				var indv = this.oDirecciones.direccion[i].indicadorSeleccionados;
-				var res = indv.split("^");
-				res.push(ind);
-				//encontrar la dirección fiscal activa
-				if(res.indexOf("2") != -1 && inactivo == 0 ){
-					//select2-container select2-container-multi row-fluid select2 multi1_n_existing select2-choices-pills-close
-					//select2-container select2-container-multi select2-choices-pills-close select2-container-disabled row-fluid select2 multi1_n_existing
-					document.getElementsByClassName('multi_tipo_existing')[i].setAttribute("disabled", "true");
-					document.getElementsByClassName('multi1_n_existing')[i].setAttribute("disabled", "true");
-					//$('.multi1_n_existing').eq(i).addClass('disabled');
-					
-					document.getElementsByClassName('postalInputTempExisting')[i].readOnly = true;
-					document.getElementsByClassName('calleExisting')[i].readOnly = true;
-					document.getElementsByClassName('numExtExisting')[i].readOnly = true;
-					document.getElementsByClassName('numIntExisting')[i].readOnly = true;
-					
-					//select2-container select2-container-disabled row-fluid paisExisting select2
-					//select2-container row-fluid paisExisting select2
-					document.getElementsByClassName('paisExisting')[i].setAttribute("disabled", true);
-					document.getElementsByClassName('estadoExisting')[i].setAttribute("disabled", true);
-					document.getElementsByClassName('municipioExisting')[i].setAttribute("disabled", true);
-					document.getElementsByClassName('ciudadExisting')[i].setAttribute("disabled", true);
-					document.getElementsByClassName('coloniaExisting')[i].setAttribute("disabled", true);
-				}else{
-					document.getElementsByClassName('multi_tipo_existing')[i].setAttribute("disabled",false);
-					document.getElementsByClassName('multi1_n_existing')[i].setAttribute("disabled",false);
-					//$('.multi1_n_existing').eq(i).addClass('disabled');
-					
-					document.getElementsByClassName('postalInputTempExisting')[i].readOnly = false;
-					document.getElementsByClassName('calleExisting')[i].readOnly = false;
-					document.getElementsByClassName('numExtExisting')[i].readOnly = false;
-					document.getElementsByClassName('numIntExisting')[i].readOnly = false;
-					
-					//select2-container select2-container-disabled row-fluid paisExisting select2
-					//select2-container row-fluid paisExisting select2
-					document.getElementsByClassName('paisExisting')[i].setAttribute("disabled",false);
-					document.getElementsByClassName('estadoExisting')[i].setAttribute("disabled",false);
-					document.getElementsByClassName('municipioExisting')[i].setAttribute("disabled",false);
-					document.getElementsByClassName('ciudadExisting')[i].setAttribute("disabled",false);
-					document.getElementsByClassName('coloniaExisting')[i].setAttribute("disabled",false);
-				}
-			}	
-        }
-		
+				
     },
 
     getInfoAboutCP: function (evt) {
@@ -840,20 +803,9 @@
 		
 		var res = indicadorSeleccionados.split(",");
 		
-		if(res.indexOf('2')==-1){
 			//Actualiza modelo
 			this.nuevaDireccion.indicadorSeleccionados = '^'+indicadorSeleccionados.replace(/,/gi, "^,^")+'^';
-		}else{
-			res.splice(res.indexOf('2'), 1);
-			indicadorSeleccionados = res.toString();
-			this.nuevaDireccion.indicadorSeleccionados = '^'+indicadorSeleccionados.replace(/,/gi, "^,^")+'^';
-			this.render();
-			app.alert.show('seleccion_fiscal', {
-                level: 'error',
-                autoClose: true,
-                messages: 'No puede seleccionar tipo fiscal'
-            });
-		}
+		
     },
 
     _getTipoDireccion: function (idSelected, valuesSelected) {
@@ -1317,6 +1269,7 @@
 
     limpiaNuevaDireccion: function(){
         //Declaración de modelo para nueva dirección
+				
         var nuevaDireccion = {
             "tipodedireccion":"",
             "listTipo":this.def.listTipo,
@@ -1353,7 +1306,8 @@
             "inactivo":"",
             "secuencia":"",
             "id":"",
-            "direccionCompleta":""
+            "direccionCompleta":"",
+			"bloqueado":""
         };
         return nuevaDireccion;
 
@@ -1441,21 +1395,10 @@
 		
 		var res = indicadorSeleccionados.split(",");
 		
-		if(res.indexOf('2')==-1){
 			//Actualiza modelo
 			this.oDirecciones.direccion[index].indicadorSeleccionados = "";
 			this.oDirecciones.direccion[index].indicadorSeleccionados = '^'+indicadorSeleccionados.replace(/,/gi, "^,^")+'^';
-		}else{
-			res.splice(res.indexOf('2'), 1);
-			indicadorSeleccionados = res.toString();
-			this.oDirecciones.direccion[index].indicadorSeleccionados = '^'+indicadorSeleccionados.replace(/,/gi, "^,^")+'^';
-			this.render();
-			app.alert.show('seleccion_fiscal', {
-                level: 'error',
-                autoClose: true,
-                messages: 'No puede seleccionar tipo fiscal'
-            });
-		}
+		
 		
         //Actualiza modelo
         //this.oDirecciones.direccion[index].indicadorSeleccionados = "";
