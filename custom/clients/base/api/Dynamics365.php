@@ -196,7 +196,7 @@ class Dynamics365 extends SugarApi
         $GLOBALS['log']->fatal("RESPONSE API DYNAMICS 365");
         $GLOBALS['log']->fatal(json_encode($responseFull));
 
-        return $responseFull;
+        return $responseDynamics;
 
     }
 
