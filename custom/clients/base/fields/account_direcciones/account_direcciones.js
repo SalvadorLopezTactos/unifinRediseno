@@ -64,18 +64,14 @@
         this.def.listMapIndicador = App.lang.getAppListStrings('dir_indicador_map_list');
         this.def.listIndicador = App.lang.getAppListStrings('dir_indicador_unique_list');
 		
-		//var auxindicador = [];
-		//
-		//for (var [key, value] of Object.entries(this.def.listIndicador)) {
-		//	var auxobject = null;
-		//	if(key != "2"){
-		//		auxobject = [key:value];
-		//		auxindicador.push(auxobject);
-		//	}
-		//}
-		//
-		//var obj = Object.fromEntries(auxindicador);		
-		//
+		var auxindicador = new Object();		
+		for (var [key, value] of Object.entries(this.def.listIndicador)) {
+			if(key != "2"){
+				auxindicador[key]  = value;
+			}
+		}		
+		this.def.listIndicador = auxindicador;
+		
         //Declaración de validation Tasks
         this.model.addValidationTask('check_multiple_fiscal', _.bind(this._doValidateDireccionIndicador, this));
 
