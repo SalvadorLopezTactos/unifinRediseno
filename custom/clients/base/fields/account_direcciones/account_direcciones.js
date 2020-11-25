@@ -1389,12 +1389,14 @@
             }
         }
 		
-		var res = indicadorSeleccionados.split(",");
-		
-			//Actualiza modelo
+		//Actualiza modelo
 			this.oDirecciones.direccion[index].indicadorSeleccionados = "";
 			this.oDirecciones.direccion[index].indicadorSeleccionados = '^'+indicadorSeleccionados.replace(/,/gi, "^,^")+'^';
 		
+		var res = indicadorSeleccionados.split(",");
+		var bloqueado = (res.indexOf('2')!=-1) ? 1 : 0;
+		this.oDirecciones.direccion[index].bloqueado = bloqueado;
+		this.render();
 		
         //Actualiza modelo
         //this.oDirecciones.direccion[index].indicadorSeleccionados = "";
