@@ -38,7 +38,7 @@ class getProductosFinancieros extends SugarApi
             }
         }
 
-        $selectProductos = "SELECT tipo_producto, producto_financiero 
+        $selectProductos = "SELECT tipo_producto, producto_financiero,disponible_seleccion 
         FROM prod_estructura_productos WHERE {$TipoProductos}";
 
         $result = $GLOBALS['db']->query($selectProductos);
