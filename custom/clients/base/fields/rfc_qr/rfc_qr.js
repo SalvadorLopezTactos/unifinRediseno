@@ -407,6 +407,7 @@
 																		"indicador":"",
 																		"listIndicador":App.lang.getAppListStrings('dir_indicador_unique_list'),
 																		"indicadorSeleccionados":"",
+																		"bloqueado":"",
 																		"valCodigoPostal":"",
 																		"postal":"",
 																		"valPais":"",
@@ -444,6 +445,7 @@
 																	nuevaDireccion.tipoSeleccionados = '^1^';
 																	nuevaDireccion.indicador = "2";
 																	nuevaDireccion.indicadorSeleccionados = '^2^';
+																	nuevaDireccion.bloqueado = '1';
 																	nuevaDireccion.valCodigoPostal = CP;
 																	nuevaDireccion.postal = data.idCP;
 																	nuevaDireccion.calle = Calle;

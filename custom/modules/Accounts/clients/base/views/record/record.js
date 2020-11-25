@@ -4700,7 +4700,8 @@
                         var secuencia = data.records[i].secuencia;
                         var idDireccion = data.records[i].id;
                         var direccionCompleta = data.records[i].name;
-
+						var bloqueado = (indicadorSeleccionados.indexOf('2') != -1) ? 1 : 0;
+						
                         //Parsea a objeto direccion
                         var direccion = {
                             "tipodedireccion": tipo,
@@ -4738,7 +4739,8 @@
                             "inactivo": inactivo,
                             "secuencia": secuencia,
                             "id": idDireccion,
-                            "direccionCompleta": direccionCompleta
+                            "direccionCompleta": direccionCompleta,
+							"bloqueado": bloqueado							
                         };
 
                         //Agregar dirección
