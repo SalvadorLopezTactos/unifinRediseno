@@ -1398,6 +1398,8 @@
 		this.oDirecciones.direccion[index].bloqueado = bloqueado;
 		this.render();
 		
+		document.getElementsByClassName("multi1_n_existing")[index].focus();
+		document.getElementsByClassName("postalInputTempExisting")[index].focus();
         //Actualiza modelo
         //this.oDirecciones.direccion[index].indicadorSeleccionados = "";
         //this.oDirecciones.direccion[index].indicadorSeleccionados = '^'+indicadorSeleccionados.replace(/,/gi, "^,^")+'^';
