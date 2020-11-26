@@ -1082,7 +1082,8 @@ SQL;
                 $oportunidadSOS->account_id = $oportunidadL->account_id;
                 $oportunidadSOS->tct_etapa_ddw_c = "P";
                 $oportunidadSOS->estatus_c = "PE";
-                $oportunidadSOS->tipo_producto_c = 7;
+                $oportunidadSOS->tipo_producto_c = 2; # Se manda Credito Simple
+                $oportunidadSOS->producto_financiero_c = 40; # Se manda Credito SOS
                 $oportunidadSOS->monto_c = 0;
                 $oportunidadSOS->amount = 0;
                 $oportunidadSOS->assigned_user_id = $oportunidadL->assigned_user_id;
