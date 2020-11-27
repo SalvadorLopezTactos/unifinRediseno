@@ -816,6 +816,7 @@
 		var apellidomaterno_c = this.model._previousAttributes.apellidomaterno_c;
 		var fechadenacimiento_c = this.model._previousAttributes.fechadenacimiento_c;
 		var curp_c = this.model._previousAttributes.curp_c;
+		var email = this.model._previousAttributes.email;
 		
 		//Teléfonos
         var account_telefonos = app.utils.deepCopy(this.prev_oTelefonos.prev_telefono);
@@ -850,6 +851,7 @@
 		/********************************************/
 		this.model.set( 'rfc_c', rfc_c);
 		this.model.set( 'tipodepersona_c', tipodepersona_c);
+		this.model.set( 'email', email);
 		
 		if(tipodepersona_c == "Persona Moral") {
 			this.model.set( 'razonsocial_c', razonsocial_c);
