@@ -2,8 +2,9 @@
     events: {
         'change .producto_list': 'relTipo_Producto',
     },
-    
+
     productoSeleccionado: "",
+    producto_financiero_list: null,
 
     initialize: function (options) {
         //Inicializa campo custom
@@ -12,9 +13,10 @@
         options.def = options.def || {};
         rel_product = this;
 
-        // this.tipo_producto_list = App.lang.getAppListStrings('tipo_producto_list');
-        this.tipo_producto_list = App.lang.getAppListStrings('tipo_producto_relaciones_list'); //Lista que solo contiene UNICLICK
+        this.tipo_producto_list = App.lang.getAppListStrings('tipo_producto_list'); //Lista que contiene todos los tipos de producto
+        // this.tipo_producto_list = App.lang.getAppListStrings('tipo_producto_relaciones_list'); //Lista que solo contiene UNICLICK
         delete this.tipo_producto_list[""];
+
         this.model.on('change:relaciones_activas', this.rel_Productos, this);
         this.model.on('sync', this.loadData, this);
     },
@@ -35,7 +37,7 @@
         for (var property in list_rel_prod) {
             for (var k = 0; k < arr_re_selecc.length; k++) {
                 if (list_rel_prod.hasOwnProperty(property) && arr_re_selecc[k] == property) {
-                    arr_final_rel.push({ "rel": property, "prod": "" });
+                    arr_final_rel.push({ "rel": property, "prod": "", "fncro": "" });
 
                 }
             }
@@ -49,9 +51,10 @@
 
     actualizaCampo: function (relacion) {
         var array_temp = [];
-        var campo_json = (rel_product.model.get('relaciones_producto_c') != undefined && rel_product.model.get('relaciones_producto_c') != "")  ? rel_product.model.get('relaciones_producto_c') : JSON.stringify([{
+        var campo_json = (rel_product.model.get('relaciones_producto_c') != undefined && rel_product.model.get('relaciones_producto_c') != "") ? rel_product.model.get('relaciones_producto_c') : JSON.stringify([{
             'rel': "",
-            'prod': ""
+            'prod': "",
+            'fncro': ""
         }]);
         var campo_json = JSON.parse(campo_json);
 
@@ -60,8 +63,8 @@
                 console.log("opciones " + relacion[row].rel);
                 var flag = false;
                 var temp_val = "";
-                if (relacion[row].rel!='' && relacion[row].rel!=undefined) {
-                for (row_json in campo_json) {
+                if (relacion[row].rel != '' && relacion[row].rel != undefined) {
+                    for (row_json in campo_json) {
 
                         if (relacion[row].rel == campo_json[row_json].rel) {
                             flag = true;
@@ -69,7 +72,7 @@
                         }
                     }
 
-                    if (flag==true) {
+                    if (flag == true) {
                         array_temp.push(temp_val)
                     } else {
                         array_temp.push(relacion[row]);
@@ -86,6 +89,51 @@
         var selectProducto = $(events.currentTarget).val();
         var selectProducto_clsc = $(events.currentTarget).val();
 
+        /********Servicio para obtener los productos financieros por Tipo de Producto********/
+        DataProductFinanciers = [];
+
+        if (selectProducto != "" && selectProducto != null && selectProducto != undefined) {
+            console.log("selectProducto " + selectProducto);
+
+            app.api.call('GET', app.api.buildURL('GetProductosFinancieros/' + selectProducto), null, {
+                success: function (data) {
+                    DataProductFinanciers = data;
+                    ProdFinanciers = [];
+
+                    console.log(DataProductFinanciers);
+
+                    _.each(DataProductFinanciers, function (value, key) {
+                        var TipoProducto = DataProductFinanciers[key].tipo_producto;
+                        // var ProdFinanciero = DataProductFinanciers[key].producto_financiero;
+
+                        if (TipoProducto != "" && TipoProducto != null && TipoProducto != undefined) {
+
+                            ProdFinanciers.push(DataProductFinanciers[key].producto_financiero);
+                        
+                        } 
+                    });
+
+                    console.log(ProdFinanciers);
+                    
+                    var financiero_list = app.lang.getAppListStrings('producto_financiero_list');
+                    Object.keys(financiero_list).forEach(function (key) {
+
+                        if (!ProdFinanciers.includes(key)) {
+                            delete financiero_list[key];
+                        }
+                    });
+                    rel_product.producto_financiero_list = financiero_list;
+                    console.log(rel_product.producto_financiero_list);
+                    rel_product.rel_Productos();
+                    rel_product.render();
+
+                },
+                error: function (e) {
+                    throw e;
+                }
+            });
+        }
+
         for (var i = 0; i < selectProducto.length; i++) {
             selectProducto[i] = '^' + selectProducto[i] + '^';
         }
@@ -97,9 +145,11 @@
         for (var j = 0; j < selectProducto_clsc.length; j++) {
             cadena_temp += rel_product.tipo_producto_list[selectProducto_clsc[j]] + ",";
         }
+
         cadena_temp = cadena_temp.slice(0, -1);
         campo_temp[row.index()].productoList = cadena_temp;
         rel_product.model.set('relaciones_producto_c', JSON.stringify(campo_temp));
+
     },
 
     loadData: function () {
