@@ -165,7 +165,7 @@
 						
 						var indice_indicador = 0;
 						var Completo = '';
-						var RFC = data[0]["RFC"];
+						var RFC = data[0]["RFC"].toUpperCase();
 						var PathQR=data[0]["path_img_qr"];
 						var Correo = data[0]["Correo electrónico"];
 						var CP = data[0]["CP"];
@@ -276,8 +276,18 @@
 													self.model.set('fechadenacimiento_c', Nacimiento);
 													self.model.set('curp_c', CURP);
 												}
-												self.model.set('email1', Correo);
-												self.model.set('email', [{email_address: Correo, primary_address: true}]);
+												//self.model.set('email1', Correo);
+												var arrcorreos = self.model.attributes.email;
+												if(arrcorreos !== undefined ){
+													if(arrcorreos.length > 0){
+														arrcorreos.push({email_address: Correo, primary_address: false});
+														self.model.set('email', arrcorreos);
+													}else{
+														self.model.set('email', [{email_address: Correo, primary_address: true}]);
+													}
+												}else{
+													self.model.set('email', [{email_address: Correo, primary_address: true}]);
+												}
 												self.render();
 												// Valida duplicado
 												cont_dir.oDirecciones = contexto_cuenta.oDirecciones;
@@ -296,7 +306,6 @@
 													duplicado = (direccion[key].listEstado[direccion[key].estado] == Estado) ? duplicado+1 : duplicado;
 													duplicado = (direccion[key].listMunicipio[direccion[key].municipio] == Municipio) ? duplicado+1 : duplicado;
 													duplicado = (direccion[key].listColonia[direccion[key].colonia] == Colonia) ? duplicado+1 : duplicado;
-													auxd = contextol._limpiezaDatos(direccion[key].calle);
 													duplicado = (contextol._limpiezaDatos(direccion[key].calle) == contextol._limpiezaDatos(Calle)) ? duplicado+1 : duplicado;
 													duplicado = (contextol._limpiezaDatos(direccion[key].numext) == contextol._limpiezaDatos(Exterior)) ? duplicado+1 : duplicado;
 													duplicado = (contextol._limpiezaDatos(direccion[key].numint) == contextol._limpiezaDatos(Interior)) ? duplicado+1 : duplicado;
@@ -430,7 +439,7 @@
 																self.$('#validar_QR').attr('style', 'margin:10px');
 																self.$('#btn_Cancelar').removeClass('disabled');
 																self.$('#btn_Cancelar').attr('style', 'margin:10px');
-																cont_dir.render();
+																self.render();
 															}else {
 																if(cDuplicado == 0) {
 																	var nuevaDireccion = {
@@ -531,6 +540,7 @@
 																	self.$('#validar_QR').attr('style', 'margin:10px');
 																	self.$('#btn_Cancelar').removeClass('disabled');
 																	self.$('#btn_Cancelar').attr('style', 'margin:10px');
+																	self.render();
 																} else {
 																	app.alert.dismiss('precesando');
 																	app.alert.show('cp_not_found', {
@@ -546,7 +556,8 @@
 																	self.$('#validar_QR').removeClass('disabled');
 																	self.$('#validar_QR').attr('style', 'margin:10px');
 																	self.$('#btn_Cancelar').removeClass('disabled');
-																	self.$('#btn_Cancelar').attr('style', 'margin:10px');                                
+																	self.$('#btn_Cancelar').attr('style', 'margin:10px');    
+																	self.render();
 																}
 															}
 														}
