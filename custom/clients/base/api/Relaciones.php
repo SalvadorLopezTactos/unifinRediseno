@@ -44,10 +44,12 @@ class Relaciones extends SugarApi
             ra.rel_relaciones_accounts_1accounts_ida idCuenta,
             acstm.idcliente_c idCorto,
             a.name nombreCuenta,
+            acstm.tipodepersona_c regimenFiscal,
             rc.id_c idRelacion,
             rc.account_id1_c idCuentaRelacionada,
             acstm2.idcliente_c idCortoRelacionada,
             r.name nombreCuentaRelacionada,
+            acstm2.tipodepersona_c regimenFiscalRelacionada,
             r.relaciones_activas relacionesActivas,
             rc.relaciones_producto_c relacionesProducto
             FROM rel_relaciones_cstm rc
