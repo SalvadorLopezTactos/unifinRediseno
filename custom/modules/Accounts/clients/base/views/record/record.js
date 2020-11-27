@@ -805,6 +805,7 @@
 
     handleCancel: function () {
         this._super("handleCancel");
+		
         //Teléfonos
         var account_telefonos = app.utils.deepCopy(this.prev_oTelefonos.prev_telefono);
         this.model.set('account_telefonos', account_telefonos);
@@ -845,6 +846,22 @@
         clasf_sectorial.ResumenCliente.inegi.inegi_macro = clasf_sectorial.prevActEconomica.inegi_macro;
 
         clasf_sectorial.render();
+		
+		/********************************************/
+		this.model.set( 'rfc_c', this.model._previousAttributes.rfc_c);
+		this.model.set( 'tipodepersona_c', this.model._previousAttributes.tipodepersona_c);
+		
+		if(Regimen == "Persona Moral") {
+			this.model.set( 'razonsocial_c', this.model._previousAttributes.razonsocial_c );
+			this.model.set( 'fechaconstitutiva_c', this.model._previousAttributes.fechaconstitutiva_c );			
+		}else {
+			this.model.set( 'primernombre_c', this.model._previousAttributes.primernombre_c);
+			this.model.set( 'apellidopaterno_c', this.model._previousAttributes.apellidopaterno_c);
+			this.model.set( 'apellidomaterno_c', this.model._previousAttributes.apellidomaterno_c);
+			this.model.set( 'fechadenacimiento_c', this.model._previousAttributes.fechadenacimiento_c);
+			this.model.set( 'curp_c', this.model._previousAttributes.curp_c);			
+		}
+		/********************************************/
     },
 
     bindDataChange: function () {
@@ -4706,7 +4723,8 @@
                         var secuencia = data.records[i].secuencia;
                         var idDireccion = data.records[i].id;
                         var direccionCompleta = data.records[i].name;
-
+						var bloqueado = (indicadorSeleccionados.indexOf('2') != -1) ? 1 : 0;
+						
                         //Parsea a objeto direccion
                         var direccion = {
                             "tipodedireccion": tipo,
@@ -4744,7 +4762,8 @@
                             "inactivo": inactivo,
                             "secuencia": secuencia,
                             "id": idDireccion,
-                            "direccionCompleta": direccionCompleta
+                            "direccionCompleta": direccionCompleta,
+							"bloqueado": bloqueado							
                         };
 
                         //Agregar dirección
