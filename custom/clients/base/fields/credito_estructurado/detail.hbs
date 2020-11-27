@@ -1,0 +1,30 @@
+<!--
+/*
+ * @author eduardo.carrasco@tactos.com.mx
+ */
+-->
+<div style="border: 2px solid #055993;border-radius: 12px;padding:10px;">
+  <!-- Table list-->
+  <div class="list-view">
+    <table id="tableResult" class="table table-striped">
+        <thead>
+            <tr bgcolor="#0679c8" style="color:#fff">
+                <th>Nombre Condición</th>
+                <th>Porcentaje Aplicado</th>
+            </tr>
+        </thead>
+        <tbody>
+          {{#each myData3.records}}
+            <tr>
+                <td class="campo1Select">
+                  {{name}}
+                </td>
+                <td class="campo2Select">
+                  {{porcentaje}}
+                </td>
+            </tr>
+          {{/each}}
+        </tbody>
+    </table>
+  </div>
+</div>
