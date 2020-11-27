@@ -806,7 +806,18 @@
     handleCancel: function () {
         this._super("handleCancel");
 		
-        //Teléfonos
+		var rfc_c = this.model._previousAttributes.rfc_c;
+		var tipodepersona_c = this.model._previousAttributes.tipodepersona_c;
+		var razonsocial_c = this.model._previousAttributes.razonsocial_c;
+		var nombre_comercial_c = this.model._previousAttributes.nombre_comercial_c;
+		var fechaconstitutiva_c = this.model._previousAttributes.fechaconstitutiva_c;
+		var primernombre_c = this.model._previousAttributes.primernombre_c;
+		var apellidopaterno_c = this.model._previousAttributes.apellidopaterno_c;
+		var apellidomaterno_c = this.model._previousAttributes.apellidomaterno_c;
+		var fechadenacimiento_c = this.model._previousAttributes.fechadenacimiento_c;
+		var curp_c = this.model._previousAttributes.curp_c;
+		
+		//Teléfonos
         var account_telefonos = app.utils.deepCopy(this.prev_oTelefonos.prev_telefono);
         this.model.set('account_telefonos', account_telefonos);
         this.oTelefonos.telefono = account_telefonos;
@@ -836,6 +847,24 @@
         this.$('[data-name="promotorcredit_c"]').attr('style', '');
         this.$('[data-name="promotorfleet_c"]').attr('style', '');
 
+		/********************************************/
+		this.model.set( 'rfc_c', rfc_c);
+		this.model.set( 'tipodepersona_c', tipodepersona_c);
+		
+		if(tipodepersona_c == "Persona Moral") {
+			this.model.set( 'razonsocial_c', razonsocial_c);
+			this.model.set( 'nombre_comercial_c', nombre_comercial_c);
+			this.model.set( 'fechaconstitutiva_c', fechaconstitutiva_c);
+		}else {
+			this.model.set( 'primernombre_c', primernombre_c);
+			this.model.set( 'apellidopaterno_c', apellidopaterno_c);
+			this.model.set( 'apellidomaterno_c', apellidomaterno_c);
+			this.model.set( 'fechadenacimiento_c', fechadenacimiento_c);
+			this.model.set( 'curp_c', curp_c);
+		}
+		/********************************************/
+		
+
         //Valores Previos Clasificacion Sectorial - Actividad Economica e INEGI
         clasf_sectorial.ActividadEconomica = app.utils.deepCopy(clasf_sectorial.prevActEconomica);
         clasf_sectorial.ResumenCliente.inegi.inegi_clase = clasf_sectorial.prevActEconomica.inegi_clase;
@@ -847,21 +876,7 @@
 
         clasf_sectorial.render();
 		
-		/********************************************/
-		this.model.set( 'rfc_c', this.model._previousAttributes.rfc_c);
-		this.model.set( 'tipodepersona_c', this.model._previousAttributes.tipodepersona_c);
 		
-		if(Regimen == "Persona Moral") {
-			this.model.set( 'razonsocial_c', this.model._previousAttributes.razonsocial_c );
-			this.model.set( 'fechaconstitutiva_c', this.model._previousAttributes.fechaconstitutiva_c );			
-		}else {
-			this.model.set( 'primernombre_c', this.model._previousAttributes.primernombre_c);
-			this.model.set( 'apellidopaterno_c', this.model._previousAttributes.apellidopaterno_c);
-			this.model.set( 'apellidomaterno_c', this.model._previousAttributes.apellidomaterno_c);
-			this.model.set( 'fechadenacimiento_c', this.model._previousAttributes.fechadenacimiento_c);
-			this.model.set( 'curp_c', this.model._previousAttributes.curp_c);			
-		}
-		/********************************************/
     },
 
     bindDataChange: function () {
