@@ -805,21 +805,6 @@
 
     handleCancel: function () {
         this._super("handleCancel");
-		/********************************************/
-		this.model.set( 'rfc_c', this.model._previousAttributes.rfc_c);
-		this.model.set( 'tipodepersona_c', this.model._previousAttributes.tipodepersona_c);
-		
-		if(Regimen == "Persona Moral") {
-			this.model.set( 'razonsocial_c', this.model._previousAttributes.razonsocial_c );
-			this.model.set( 'fechaconstitutiva_c', this.model._previousAttributes.fechaconstitutiva_c );			
-		}else {
-			this.model.set( 'primernombre_c', this.model._previousAttributes.primernombre_c);
-			this.model.set( 'apellidopaterno_c', this.model._previousAttributes.apellidopaterno_c);
-			this.model.set( 'apellidomaterno_c', this.model._previousAttributes.apellidomaterno_c);
-			this.model.set( 'fechadenacimiento_c', this.model._previousAttributes.fechadenacimiento_c);
-			this.model.set( 'curp_c', this.model._previousAttributes.curp_c);			
-		}
-		/********************************************/
 		
         //Teléfonos
         var account_telefonos = app.utils.deepCopy(this.prev_oTelefonos.prev_telefono);
@@ -861,6 +846,22 @@
         clasf_sectorial.ResumenCliente.inegi.inegi_macro = clasf_sectorial.prevActEconomica.inegi_macro;
 
         clasf_sectorial.render();
+		
+		/********************************************/
+		this.model.set( 'rfc_c', this.model._previousAttributes.rfc_c);
+		this.model.set( 'tipodepersona_c', this.model._previousAttributes.tipodepersona_c);
+		
+		if(Regimen == "Persona Moral") {
+			this.model.set( 'razonsocial_c', this.model._previousAttributes.razonsocial_c );
+			this.model.set( 'fechaconstitutiva_c', this.model._previousAttributes.fechaconstitutiva_c );			
+		}else {
+			this.model.set( 'primernombre_c', this.model._previousAttributes.primernombre_c);
+			this.model.set( 'apellidopaterno_c', this.model._previousAttributes.apellidopaterno_c);
+			this.model.set( 'apellidomaterno_c', this.model._previousAttributes.apellidomaterno_c);
+			this.model.set( 'fechadenacimiento_c', this.model._previousAttributes.fechadenacimiento_c);
+			this.model.set( 'curp_c', this.model._previousAttributes.curp_c);			
+		}
+		/********************************************/
     },
 
     bindDataChange: function () {
