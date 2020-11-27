@@ -1,0 +1,59 @@
+<!--
+/*
+ * @author eduardo.carrasco@tactos.com.mx
+ */
+-->
+<div style="border: 2px solid #055993;border-radius: 12px;padding:10px;">
+<!--Cabecera-->
+  <div>
+  <table id="tableResult" class="table table-striped">
+      <thead>
+          <tr bgcolor="#0679c8" style="color:#fff">
+              <th width="50%">Nombre Condición</th>
+              <th width="50%">Porcentaje Aplicado</th>
+          </tr>
+      </thead>
+  </table>
+  </div>
+<!--Detalle-->
+  <div>
+      {{#each myData3.records}}
+        <div class="control-group comisiones" style="display: flex;flex-direction: row;align-items: flex-start" >
+          <input type="text" class="loadedcomision" value="{{name}}" style="width: 95%;margin: 4px;display: inline-block;">
+          <input type="number" class="loadedporcentaje" value="{{porcentaje}}" data-field="porcentaje" style="width: 95%;margin: 4px;display: inline-block;">
+          <div class="btn-toolbar prevent-mousedown">
+              <div class="btn-group prevent-mousedown">
+                  <a href="javascript:void(0)" class="btn removecomision" rel="tooltip" title="{{str "LBL_REMOVE"}}"><i class="fa fa-minus"></i></a>
+              </div>
+		  </div>
+        </div>
+      {{/each}}
+  </div>
+<!--Comisiones que se van agregando-->
+  <div>
+      {{#each myData.records}}
+          <div class="control-group comisiones2" style="display: flex;flex-direction: row;align-items: flex-start">
+              <input type="text" class="existingcomisiones" value="{{name}}" style="width: 95%;margin: 4px;display: inline-block;">
+              <input type="number" class="existingporcentaje" value="{{porcentaje}}" data-field="porcentaje" style="width: 95%;margin: 4px;display: inline-block;">
+              <div class="btn-toolbar prevent-mousedown">
+                  <div class="btn-group prevent-mousedown">
+                      <a href="javascript:void(0)" class="btn removecomision2" rel="tooltip" title="{{str "LBL_REMOVE"}}"><i class="fa fa-minus"></i></a>
+                  </div>
+              </div>
+          </div>
+      {{/each}}
+  </div>
+  <br>
+<!--Nueva comisión-->
+  <b>Nueva Comisión</b>
+  <div class="control-group comisiones2" style="display: flex;flex-direction: row;align-items: flex-start">
+      <input type="text" class="newcomision input-append" placeholder="Nombre Condición" style="width: 95%;margin: 4px;display: inline-block;">
+      <input type="number" class="newporcentaje" placeholder="Porcenteje Aplicado" data-field="porcentaje" style="width: 95%;margin: 4px;display: inline-block;">
+      <div class="btn-toolbar prevent-mousedown">
+         <div class="btn-group">
+            <a href="javascript:void(0)" class="btn addcomision"><i class="fa fa-check"></i></a>
+         </div>
+      </div>
+  </div>
+</div>
+{{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}

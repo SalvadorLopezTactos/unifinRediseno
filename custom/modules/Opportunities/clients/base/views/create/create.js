@@ -151,8 +151,31 @@
         this.showfieldBenef();
         this.showfieldSuby();
         this.model.addValidationTask('benef_req', _.bind(this.reqBenfArea, this));
+        this.model.on("change:producto_financiero_c", _.bind(this.producto_financiero, this));
+    },
 
-
+    producto_financiero: function () {
+        if(this.model.get('producto_financiero_c') == 43) {
+          $('[data-name="ce_destino_c"]').show();
+          $('[data-name="ce_tasa_c"]').show();
+          $('[data-name="ce_plazo_c"]').show();
+          $('[data-name="ce_moneda_c"]').show();
+          $('[data-name="ce_cambio_c"]').show();
+          $('[data-name="ce_apertura_c"]').show();
+          $('[data-name="ce_comentarios_c"]').show();
+          $('[data-name="credito_estructurado"]').show();
+        }
+        else
+        {
+          $('[data-name="ce_destino_c"]').hide();
+          $('[data-name="ce_tasa_c"]').hide();
+          $('[data-name="ce_plazo_c"]').hide();
+          $('[data-name="ce_moneda_c"]').hide();
+          $('[data-name="ce_cambio_c"]').hide();
+          $('[data-name="ce_apertura_c"]').hide();
+          $('[data-name="ce_comentarios_c"]').hide();
+          $('[data-name="credito_estructurado"]').hide();
+        }
     },
 
     _render: function () {
@@ -1248,9 +1271,6 @@
         $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
         $("div[data-name='seguro_desempleo_c']").remove();
         $("div[data-name='porciento_ri_c']").remove();
-
-
-
     },
 
     /*

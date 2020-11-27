@@ -311,15 +311,17 @@
             }
 
         });
+
         //Establece valores para año
         this.model.fields['ri_anio_c'].options = opciones_year;
-
         if (this.model.get('ratificacion_incremento_c') != true) {
             this.$('div[data-name=ri_usuario_bo_c]').hide();
         } else {
             this.$('div[data-name=ri_usuario_bo_c]').show();
-
         }
+        
+        //Oculta Crédito Estructurado
+        if(solicitud_cf.oFinanciera.condicion.length > 0) this.$('div[data-panelname=LBL_RECORDVIEW_PANEL4').hide();
 
         //this.evaluaCampoSolicitudVobo();
         //this.evaluaCampoEnviarNotificacion();
