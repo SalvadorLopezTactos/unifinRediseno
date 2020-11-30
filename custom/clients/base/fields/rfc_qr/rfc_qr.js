@@ -544,8 +544,8 @@
 																} else {
 																	app.alert.dismiss('precesando');
 																	app.alert.show('cp_not_found', {
-																		level: 'error',
-																		messages: 'C\u00F3digo Postal no encontrado'
+																		level: 'info',
+																		messages: 'Se agrego tipo fiscal a una dirección existente'
 																	});
 																	self.$('#activar_camara').removeClass('disabled');
 																	self.$('#activar_camara').attr('style', '');
