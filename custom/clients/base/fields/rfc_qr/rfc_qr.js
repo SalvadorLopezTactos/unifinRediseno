@@ -319,6 +319,7 @@
 													if(duplicado == 9 && cDireccionFiscal == 0) {
 														// Indicador
 														direccion[key].indicadorSeleccionados = direccion[key].indicadorSeleccionados + ',^2^';
+														direccion[key].bloqueado = '1';
 														var indicador = direccion[key].indicadorSeleccionados;
 														var dir_indicador_map_list = app.lang.getAppListStrings('dir_indicador_map_list');
 														indicador = indicador.substring(1,indicador.length-1);
@@ -331,6 +332,7 @@
 														cont_dir.oDirecciones.direccion = direccion;
 														cont_dir.render();
 														cDuplicado++;
+														
 														self.$('#activar_camara').removeClass('disabled');
 														self.$('#activar_camara').attr('style', '');
 														self.$('#archivo_qr').removeClass('disabled');
@@ -439,7 +441,7 @@
 																self.$('#validar_QR').attr('style', 'margin:10px');
 																self.$('#btn_Cancelar').removeClass('disabled');
 																self.$('#btn_Cancelar').attr('style', 'margin:10px');
-																self.render();
+																//self.render();
 															}else {
 																if(cDuplicado == 0) {
 																	var nuevaDireccion = {
@@ -540,9 +542,10 @@
 																	self.$('#validar_QR').attr('style', 'margin:10px');
 																	self.$('#btn_Cancelar').removeClass('disabled');
 																	self.$('#btn_Cancelar').attr('style', 'margin:10px');
-																	self.render();
+																	//self.render();
 																} else {
-																	app.alert.dismiss('precesando');
+																	cont_dir.render();
+																	//app.alert.dismiss('procesando');
 																	app.alert.show('cp_not_found', {
 																		level: 'info',
 																		messages: 'Se agrego tipo fiscal a una dirección existente'
@@ -557,7 +560,7 @@
 																	self.$('#validar_QR').attr('style', 'margin:10px');
 																	self.$('#btn_Cancelar').removeClass('disabled');
 																	self.$('#btn_Cancelar').attr('style', 'margin:10px');    
-																	self.render();
+																	//self.render();
 																}
 															}
 														}
