@@ -48,35 +48,35 @@ class altaLeadServices extends SugarApi
             } else {
                 /** PErsona Moral */
 
-                if (count($args['asociados']) > 0) {
+              //  if (count($args['asociados']) > 0) {
 
                     $obj_leads['lead'] = $this->sec_validacion($obj_leads['lead']);
 
                     /** Inicia Proceso validación Lead hijo  solo si el regimen fiscal es Moral*/
 
-                    for ($i = 0; $i < count($obj_leads['asociados']); $i++) {
+                    /*for ($i = 0; $i < count($obj_leads['asociados']); $i++) {
                         $obj_leads['asociados'][$i] = $this->sec_validacion($obj_leads['asociados'][$i]);
-                    }
+                    }*/
 
                     /** Validamos que ambos leads esten con estatus 200  */ # pendiente de validación OB001
 
 
-                    if ($obj_leads['asociados'][0]['requeridos'] == 'success' && $obj_leads['asociados'][0]['formato_texto'] == 'success'
+                    /*if ($obj_leads['asociados'][0]['requeridos'] == 'success' && $obj_leads['asociados'][0]['formato_texto'] == 'success'
                         && $obj_leads['asociados'][0]['formato_telefenos'] == 'success' && $obj_leads['asociados'][0]['formato_correo'] == 'success'
-                    ) {
+                    ) {*/
                         /** Proceso de Guardado */
 
                         $response_Services['lead'] = $this->insert_Leads_Asociados($obj_leads['lead'], "");
 
-                        if (!empty($response_Services['lead']['id']) && $response_Services['lead']['modulo'] == 'Leads') {
+                        /*if (!empty($response_Services['lead']['id']) && $response_Services['lead']['modulo'] == 'Leads') {
 
                             for ($i = 0; $i < count($obj_leads['asociados']); $i++) {
                                 $response_Services['asociados'][$i] = $this->insert_Leads_Asociados($obj_leads['asociados'][$i], $response_Services['lead']['id']);
                             }
-                        }
+                        }*/
                         // Actualizamos el campo asignado a de cada registro nuevo
                         $this->get_asignado($response_Services, "3");
-                    } else {
+                  /*  } else {
 
                         $GLOBALS['log']->fatal(print_r($obj_leads, true));
 
@@ -97,11 +97,11 @@ class altaLeadServices extends SugarApi
 
                             $response_Services ["asociados"][0] = $this->estatus(424, 'Error de información', '', "", $arrayErrores);
                         }
-                    }
+                    }*/
 
-                } else {
+                /*} else {
                     $response_Services ["lead"] = $this->estatus(422, 'Debe contenener al menos un contacto asociado', '', "", "");
-                }
+                }*/
 
             }
         } else {
@@ -444,6 +444,12 @@ class altaLeadServices extends SugarApi
         $bean_Lead->keyword_c = $dataOrigen['keyword_c'];
         $bean_Lead->campana_c = $dataOrigen['campana_c'];
         $bean_Lead->compania_c = $dataOrigen['compania_c'];
+        /** Seccion de Contacto **/
+        $bean_Lead->contacto_nombre_c = $dataOrigen['contacto_nombre_c'];
+        $bean_Lead->contacto_apellidop_c = $dataOrigen['contacto_apellidop_c'];
+        $bean_Lead->contacto_apellidom_c = $dataOrigen['contacto_apellidom_c'];
+        $bean_Lead->contacto_telefono_c = $dataOrigen['contacto_telefono_c'];
+        $bean_Lead->contacto_email_c = $dataOrigen['contacto_email_c'];
 
         # falta obtener el asignado a
 
@@ -513,7 +519,7 @@ class altaLeadServices extends SugarApi
     public function validaTextCampos($data)
     {
 
-        $campos_lead = ["nombre_c", "apellido_paterno_c", "apellido_materno_c"];
+        $campos_lead = ["nombre_c", "apellido_paterno_c", "apellido_materno_c","contacto_nombre_c","contacto_apellidop_c","contacto_apellidom_c"];
         $error_campo = [];
         $expresion = "/^[a-zA-ZÀ-ÿ\s]*$/";
 
@@ -538,7 +544,13 @@ class altaLeadServices extends SugarApi
 
         if (!empty($data['email'])) {
             if (!preg_match($expresionCorreo, $data['email'])) {
+
                 array_push($error_campo, 'email');
+            }
+        }
+        if (!empty($data['contacto_email_c'])) {
+            if (!preg_match($expresionCorreo, $data['contacto_email_c'])) {
+                array_push($error_campo, 'contacto_email_c');
             }
         }
         return $error_campo;
@@ -546,7 +558,7 @@ class altaLeadServices extends SugarApi
 
     public function validaTelefonos($data)
     {
-        $telefonos_lead = ["phone_mobile", "phone_home", "phone_work"];
+        $telefonos_lead = ["phone_mobile", "phone_home", "phone_work","contacto_telefono_c"];
         $expresionTelefono = "/^[0-9]{8,13}$/";
         $error_telefonos = [];
 

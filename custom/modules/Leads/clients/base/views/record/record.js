@@ -533,6 +533,8 @@
 
     _render: function (options) {
         this._super("_render");
+        this.$(".record-cell[data-name='blank_space']").hide();
+
     },
 
     convert_Lead_to_Accounts: function () {
