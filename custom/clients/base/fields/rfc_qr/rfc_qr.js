@@ -434,6 +434,7 @@
 																	level: 'info',
 																	messages: 'Se han actualizado los datos de dirección fiscal'
 																});
+																cont_dir.render();
 																self.$('#activar_camara').removeClass('disabled');
 																self.$('#activar_camara').attr('style', '');
 																self.$('#archivo_qr').removeClass('disabled');
