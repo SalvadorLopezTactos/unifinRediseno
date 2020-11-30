@@ -27,7 +27,7 @@ array (
             'showOn' => 'edit',
             'acl_action' => 'edit',
           ),
-          2 =>
+          2 => 
           array (
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
@@ -287,7 +287,7 @@ array (
                   array (
                     'name' => 'phone_mobile',
                   ),
-                ),                
+                ),
               ),
               24 => 
               array (
@@ -308,9 +308,9 @@ array (
                   array (
                     'name' => 'phone_home',
                   ),
-                ),                
+                ),
               ),
-              25 =>
+              25 => 
               array (
                 'name' => 'phone_work',
                 'label' => 'LBL_OFFICE_PHONE',
@@ -328,7 +328,7 @@ array (
                   array (
                     'name' => 'phone_work',
                   ),
-                ),                
+                ),
               ),
               26 => 
               array (
@@ -424,6 +424,36 @@ array (
                 'label' => 'LBL_COMPANIA',
               ),
               7 => 
+              array (
+                  'name' => 'blank_space',
+                  'label' => 'LBL_BLANK_SPACE',
+              ),
+              8 => 
+              array (
+                'name' => 'contacto_nombre_c',
+                'label' => 'LBL_CONTACTO_NOMBRE_C',
+              ),
+              9 => 
+              array (
+                'name' => 'contacto_apellidop_c',
+                'label' => 'LBL_CONTACTO_APELLIDOP_C',
+              ),
+              10 => 
+              array (
+                'name' => 'contacto_apellidom_c',
+                'label' => 'LBL_CONTACTO_APELLIDOM_C',
+              ),
+              11 => 
+              array (
+                'name' => 'contacto_telefono_c',
+                'label' => 'LBL_CONTACTO_TELEFONO_C',
+              ),
+              12 => 
+              array (
+                'name' => 'contacto_email_c',
+                'label' => 'LBL_CONTACTO_EMAIL_C',
+              ),
+              13 => 
               array (
               ),
             ),

@@ -4,10 +4,10 @@
   events: {
     'click #btn_Cancelar': 'cancelar',
     'click .btn_rfc_qr': 'btn_rfc_qr',
-		'click #validar_QR': 'validarServicioQR',
-		'click #activar_camara': 'activarCamara',
+	'click #validar_QR': 'validarServicioQR',
+	'click #activar_camara': 'activarCamara',
     'click #archivo_qr': 'cargarArchivo',
-		'change #btnSubir': 'SubirImagen',		
+	'change #btnSubir': 'SubirImagen',
   },
 
   initialize: function(options){
@@ -16,6 +16,7 @@
     self.picturecam = false;
     this.loadView = true;
     this.context.on('button:btn_rfc:click', this.btn_rfc_qr, this);
+	
   },
 
   render: function () {
@@ -23,6 +24,28 @@
     $("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
   },
 
+
+  _limpiezaDatos: function(cadena){
+		
+		cadena = cadena.trim().toLowerCase();
+		cadena = cadena.split(" ").join("");
+		cadena = cadena.replace(".", "");
+		cadena = cadena.replace("-", "");
+		cadena = cadena.replace("_", "");
+		cadena = cadena.replace(",", "");
+		cadena = cadena.replace(";", "");
+		cadena = cadena.replace(":", "");
+		cadena = cadena.replace("#", "");
+		cadena = cadena.replace("$", "");
+		cadena = cadena.replace("%", "");
+		cadena = cadena.replace("&", "");
+		cadena = cadena.replace("\d", "");
+		cadena = cadena.replace("\r", "");
+		cadena = cadena.replace("\t", "");
+		cadena = cadena.replace("\n", "");
+		return cadena;
+  },
+  
 	tieneSoporteUserMedia: function() {
 		return !!(navigator.getUserMedia || (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || navigator.webkitGetUserMedia || navigator.msGetUserMedia);
 	},
@@ -65,6 +88,7 @@
 	},
   
 	validarServicioQR:function () {
+		var contextol = this;
 		var input = this.$('input[type=file]');
 		var file = input[0].files[0];
 		var c = document.createElement("canvas");
@@ -141,7 +165,7 @@
 						
 						var indice_indicador = 0;
 						var Completo = '';
-						var RFC = data[0]["RFC"];
+						var RFC = data[0]["RFC"].toUpperCase();
 						var PathQR=data[0]["path_img_qr"];
 						var Correo = data[0]["Correo electrónico"];
 						var CP = data[0]["CP"];
@@ -252,15 +276,29 @@
 													self.model.set('fechadenacimiento_c', Nacimiento);
 													self.model.set('curp_c', CURP);
 												}
-												self.model.set('email1', Correo);
-												self.model.set('email', [{email_address: Correo, primary_address: true}]);
+												//self.model.set('email1', Correo);
+												var arrcorreos = self.model.attributes.email;
+												if(arrcorreos !== undefined ){
+													if(arrcorreos.length > 0){
+														arrcorreos.push({email_address: Correo, primary_address: false});
+														self.model.set('email', arrcorreos);
+													}else{
+														self.model.set('email', [{email_address: Correo, primary_address: true}]);
+													}
+												}else{
+													self.model.set('email', [{email_address: Correo, primary_address: true}]);
+												}
 												self.render();
 												// Valida duplicado
 												cont_dir.oDirecciones = contexto_cuenta.oDirecciones;
+												cont_tel.oTelefonos = contexto_cuenta.oTelefonos;
+												cont_tel.render();
 												var duplicado = 0;
 												var cDuplicado = 0;            
 												var cDireccionFiscal = 0;
 												var direccion = cont_dir.oDirecciones.direccion;
+												var auxd = '';
+												var auxd1 = '';
 												Object.keys(direccion).forEach(key => {
 													duplicado = 0;
 													duplicado = (direccion[key].valCodigoPostal == CP) ? duplicado+1 : duplicado;
@@ -268,16 +306,20 @@
 													duplicado = (direccion[key].listEstado[direccion[key].estado] == Estado) ? duplicado+1 : duplicado;
 													duplicado = (direccion[key].listMunicipio[direccion[key].municipio] == Municipio) ? duplicado+1 : duplicado;
 													duplicado = (direccion[key].listColonia[direccion[key].colonia] == Colonia) ? duplicado+1 : duplicado;
-													duplicado = (direccion[key].calle.trim().toLowerCase() == Calle.trim().toLowerCase()) ? duplicado+1 : duplicado;
-													duplicado = (direccion[key].numext.trim().toLowerCase() == Exterior.trim().toLowerCase()) ? duplicado+1 : duplicado;
+													duplicado = (contextol._limpiezaDatos(direccion[key].calle) == contextol._limpiezaDatos(Calle)) ? duplicado+1 : duplicado;
+													duplicado = (contextol._limpiezaDatos(direccion[key].numext) == contextol._limpiezaDatos(Exterior)) ? duplicado+1 : duplicado;
+													duplicado = (contextol._limpiezaDatos(direccion[key].numint) == contextol._limpiezaDatos(Interior)) ? duplicado+1 : duplicado;
+													//duplicado = (direccion[key].numext.trim().toLowerCase().replace(" ", "") == Exterior.trim().toLowerCase().replace(" ", "")) ? duplicado+1 : duplicado;
+													//duplicado = (direccion[key].numint.trim().toLowerCase().replace(" ", "") == Interior.trim().toLowerCase().replace(" ", "")) ? duplicado+1 : duplicado;
 													duplicado = (direccion[key].inactivo == 0) ? duplicado+1 : duplicado;
 													if(direccion[key].indicadorSeleccionados.includes('2') && direccion[key].inactivo == 0){ 
 														cDireccionFiscal = cDireccionFiscal + 1;
 														indice_indicador = key;
 													}
-													if(duplicado == 8 && cDireccionFiscal == 0) {
+													if(duplicado == 9 && cDireccionFiscal == 0) {
 														// Indicador
 														direccion[key].indicadorSeleccionados = direccion[key].indicadorSeleccionados + ',^2^';
+														direccion[key].bloqueado = '1';
 														var indicador = direccion[key].indicadorSeleccionados;
 														var dir_indicador_map_list = app.lang.getAppListStrings('dir_indicador_map_list');
 														indicador = indicador.substring(1,indicador.length-1);
@@ -290,6 +332,7 @@
 														cont_dir.oDirecciones.direccion = direccion;
 														cont_dir.render();
 														cDuplicado++;
+														
 														self.$('#activar_camara').removeClass('disabled');
 														self.$('#activar_camara').attr('style', '');
 														self.$('#archivo_qr').removeClass('disabled');
@@ -359,6 +402,7 @@
 																direccion[indice_indicador].valCodigoPostal = CP;
 																direccion[indice_indicador].calle = Calle.trim().toLowerCase();
 																direccion[indice_indicador].numext = Exterior.trim().toLowerCase();
+																direccion[indice_indicador].numint = Interior.trim().toLowerCase();
 																direccion[indice_indicador].inactivo = 0;
 																
 																//Pais
@@ -385,7 +429,7 @@
 																app.alert.dismiss('procesando');
 																app.alert.show('multiple_fiscal', {
 																	level: 'info',
-																	messages: 'Se han actualizado lso datos de dirección fiscal'
+																	messages: 'Se han actualizado los datos de dirección fiscal'
 																});
 																self.$('#activar_camara').removeClass('disabled');
 																self.$('#activar_camara').attr('style', '');
@@ -397,7 +441,7 @@
 																self.$('#validar_QR').attr('style', 'margin:10px');
 																self.$('#btn_Cancelar').removeClass('disabled');
 																self.$('#btn_Cancelar').attr('style', 'margin:10px');
-																cont_dir.render();
+																//self.render();
 															}else {
 																if(cDuplicado == 0) {
 																	var nuevaDireccion = {
@@ -498,11 +542,13 @@
 																	self.$('#validar_QR').attr('style', 'margin:10px');
 																	self.$('#btn_Cancelar').removeClass('disabled');
 																	self.$('#btn_Cancelar').attr('style', 'margin:10px');
+																	//self.render();
 																} else {
-																	app.alert.dismiss('precesando');
+																	cont_dir.render();
+																	//app.alert.dismiss('procesando');
 																	app.alert.show('cp_not_found', {
-																		level: 'error',
-																		messages: 'C\u00F3digo Postal no encontrado'
+																		level: 'info',
+																		messages: 'Se agrego tipo fiscal a una dirección existente'
 																	});
 																	self.$('#activar_camara').removeClass('disabled');
 																	self.$('#activar_camara').attr('style', '');
@@ -513,7 +559,8 @@
 																	self.$('#validar_QR').removeClass('disabled');
 																	self.$('#validar_QR').attr('style', 'margin:10px');
 																	self.$('#btn_Cancelar').removeClass('disabled');
-																	self.$('#btn_Cancelar').attr('style', 'margin:10px');                                
+																	self.$('#btn_Cancelar').attr('style', 'margin:10px');    
+																	//self.render();
 																}
 															}
 														}
@@ -607,9 +654,10 @@
 			canvas.style.display = 'none';
 			video.pause();
 			{video:false}
+			this.render();
 		}
   },
-
+  
   cargarArchivo: function() {
     this.$('#carga').show();
     this.$('#div_video').hide();
@@ -623,4 +671,5 @@
   cancelar: function() {
     this.$('#rfcModal').hide();
   },
+
 })
