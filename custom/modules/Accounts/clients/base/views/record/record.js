@@ -860,7 +860,7 @@
         this.$('[data-name="promotorfleet_c"]').attr('style', '');
 
 		/********************************************/
-		if(contexto_cuenta.cambioEdit != undefined){
+		if(contexto_cuenta.cambioEdit != undefined && contexto_cuenta.cambioEdit != 0){
 			this.model.set( 'rfc_c', rfc_c);
 			this.model.set( 'tipodepersona_c', tipodepersona_c);
 			this.model.set( 'email', email);
