@@ -163,6 +163,7 @@
 						self.$('#btn_Cancelar').attr('style', 'margin:10px');
 					}else {
 						
+						
 						var indice_indicador = 0;
 						var Completo = '';
 						var RFC = data[0]["RFC"].toUpperCase();
@@ -278,10 +279,11 @@
 												}
 												//self.model.set('email1', Correo);
 												var arrcorreos = self.model.attributes.email;
+												//contexto_cuenta.prev_email = arrcorreos;
 												if(arrcorreos !== undefined ){
 													if(arrcorreos.length > 0){
 														arrcorreos.push({email_address: Correo, primary_address: false});
-														self.model.set('email', arrcorreos);
+														self.model.set('email', arrcorreos);														
 													}else{
 														self.model.set('email', [{email_address: Correo, primary_address: true}]);
 													}
@@ -343,6 +345,7 @@
 														self.$('#validar_QR').attr('style', 'margin:10px');
 														self.$('#btn_Cancelar').removeClass('disabled');
 														self.$('#btn_Cancelar').attr('style', 'margin:10px');
+														cont_dir.render();
 													}
 												});
 												// Agrega Dirección
@@ -431,6 +434,7 @@
 																	level: 'info',
 																	messages: 'Se han actualizado los datos de dirección fiscal'
 																});
+																cont_dir.render();
 																self.$('#activar_camara').removeClass('disabled');
 																self.$('#activar_camara').attr('style', '');
 																self.$('#archivo_qr').removeClass('disabled');
