@@ -1273,6 +1273,8 @@
         $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
         $("div[data-name='seguro_desempleo_c']").remove();
         $("div[data-name='porciento_ri_c']").remove();
+        $('div[data-panelname="LBL_RECORDVIEW_PANEL2"]').addClass('hide');
+        $('div[data-panelname="LBL_RECORDVIEW_PANEL3"]').addClass('hide');
 
     },
 
