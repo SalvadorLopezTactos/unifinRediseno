@@ -16,8 +16,7 @@
         this._super("initialize", [options]);
 
         this.context.on('button:cancel_button:click', this.handleCancel, this);
-
-
+        
         this.totalllamadas = 0;
         this.totalreuniones = 0;
         this.flagheld = 0;
@@ -237,14 +236,17 @@
 
         //this.model.on('sync', this.get_phones, this);
         //Recupera datos para custom fields
+		
         this.get_uni_productos();
 		this.get_phones();
         this.get_addresses();
         this.get_v360();
+		
         //this.get_Oproductos();
         this.get_pld();
         this.get_resumen();
         this.get_analizate();
+		
         //this.get_noviable();
         
 
@@ -290,6 +292,7 @@
         this.model.addValidationTask('FleetUP', _.bind(this.requeridosFleetUP, this));
         this.model.addValidationTask('UniclickUP', _.bind(this.requeridosUniclickUP, this));
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
+		
     },
 
     /** Asignacion modal */
@@ -804,7 +807,8 @@
     },
 
     handleCancel: function () {
-        this._super("handleCancel");
+        this._super("handleCancel");	
+		
 		
 		var rfc_c = this.model._previousAttributes.rfc_c;
 		var tipodepersona_c = this.model._previousAttributes.tipodepersona_c;
@@ -815,8 +819,14 @@
 		var apellidopaterno_c = this.model._previousAttributes.apellidopaterno_c;
 		var apellidomaterno_c = this.model._previousAttributes.apellidomaterno_c;
 		var fechadenacimiento_c = this.model._previousAttributes.fechadenacimiento_c;
-		var curp_c = this.model._previousAttributes.curp_c;
-		var email = this.model._previousAttributes.email;
+		var curp_c = this.model._previousAttributes.curp_c;	
+		var email = '';
+		if(contexto_cuenta.cambio_previo_mail != undefined && contexto_cuenta.cambio_previo_mail==1){
+			email = this.model._previousAttributes.email;
+		}else{	
+			email = this.model.attributes.email;
+		}
+		
 		
 		//Teléfonos
         var account_telefonos = app.utils.deepCopy(this.prev_oTelefonos.prev_telefono);
@@ -1048,7 +1058,7 @@
         $('[data-subpanel-link="rel_relaciones_accounts_1"]').find(".dropdown-toggle").hide();
 
         this._super("_render");
-
+		
         //Ocultar campo "Ruta de Imagen QR" siempre. Se agregó a la vista para que esté disponible a través de this.model
         $('[data-name="path_img_qr_c"]').hide();
 
@@ -4702,7 +4712,7 @@
         var listMapIndicador = App.lang.getAppListStrings('dir_indicador_map_list');
         var listIndicador = App.lang.getAppListStrings('dir_indicador_unique_list');
         var idCuenta = this.model.get('id');
-
+		
         //Recupera información
         if (!_.isEmpty(idCuenta) && idCuenta != "") {
             app.api.call('GET', app.api.buildURL('Accounts/' + idCuenta + '/link/accounts_dire_direccion_1'), null, {
@@ -4897,7 +4907,7 @@
     },
 
     get_resumen: function () {
-        //Extiende This
+		//Extiende This
         this.autos = [];
         this.prev_autos = [];
         //Recupera id de cliente
@@ -4918,8 +4928,7 @@
             });
         }
     },
-
-
+	
     get_pld: function () {
         //Extiende This
         this.ProductosPLD = [];
