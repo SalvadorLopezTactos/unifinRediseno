@@ -163,7 +163,6 @@
 						self.$('#btn_Cancelar').attr('style', 'margin:10px');
 					}else {
 						
-						
 						var indice_indicador = 0;
 						var Completo = '';
 						var RFC = data[0]["RFC"].toUpperCase();
@@ -279,16 +278,18 @@
 												}
 												//self.model.set('email1', Correo);
 												var arrcorreos = self.model.attributes.email;
-												//contexto_cuenta.prev_email = arrcorreos;
 												if(arrcorreos !== undefined ){
 													if(arrcorreos.length > 0){
-														arrcorreos.push({email_address: Correo, primary_address: false});
+														arrcorreos[arrcorreos.length]={email_address: Correo, primary_address: false};
+														//arrcorreos.push({email_address: Correo, primary_address: false});
 														self.model.set('email', arrcorreos);														
 													}else{
 														self.model.set('email', [{email_address: Correo, primary_address: true}]);
+														contexto_cuenta.cambio_previo_mail = '1';
 													}
 												}else{
 													self.model.set('email', [{email_address: Correo, primary_address: true}]);
+													contexto_cuenta.cambio_previo_mail = '1';
 												}
 												self.render();
 												// Valida duplicado
@@ -322,6 +323,7 @@
 														// Indicador
 														direccion[key].indicadorSeleccionados = direccion[key].indicadorSeleccionados + ',^2^';
 														direccion[key].bloqueado = '1';
+														//contexto_cuenta.cambio_previo_mail = '1';
 														var indicador = direccion[key].indicadorSeleccionados;
 														var dir_indicador_map_list = app.lang.getAppListStrings('dir_indicador_map_list');
 														indicador = indicador.substring(1,indicador.length-1);
@@ -428,13 +430,14 @@
 																direccion[indice_indicador].ciudad = auxCiudad;
 																direccion[indice_indicador].listCiudad = listCiudad;
 																direccion[indice_indicador].listCiudadFull = listCiudad;                                  
-															
+																cont_dir.render();
+																
 																app.alert.dismiss('procesando');
 																app.alert.show('multiple_fiscal', {
 																	level: 'info',
 																	messages: 'Se han actualizado los datos de dirección fiscal'
 																});
-																cont_dir.render();
+																
 																self.$('#activar_camara').removeClass('disabled');
 																self.$('#activar_camara').attr('style', '');
 																self.$('#archivo_qr').removeClass('disabled');
