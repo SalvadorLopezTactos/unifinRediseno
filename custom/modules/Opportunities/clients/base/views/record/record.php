@@ -297,7 +297,7 @@ array (
               array (
                 'name' => 'producto_financiero_c',
                 'studio' => 'visible',
-                'label' => 'LBL_PRODUCTO_FINANCIERO',
+                'label' => 'LBL_PRODUCTO_FINANCIERO_C',
               ),
               16 => 
               array (
