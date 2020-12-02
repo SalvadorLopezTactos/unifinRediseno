@@ -809,7 +809,7 @@
     handleCancel: function () {
         this._super("handleCancel");			
 		
-		if(contexto_cuenta.cambioEdit != undefined && contexto_cuenta.cambioEdit != 0){
+		if(contexto_cuenta.cambioEdit != undefined && contexto_cuenta.cambioEdit != 0 && contexto_cuenta.cambio_previo_mail != undefined ){
 			var rfc_c = this.model._previousAttributes.rfc_c;
 			var tipodepersona_c = this.model._previousAttributes.tipodepersona_c;
 			var razonsocial_c = this.model._previousAttributes.razonsocial_c;
@@ -860,7 +860,7 @@
         this.$('[data-name="promotorfleet_c"]').attr('style', '');
 
 		/********************************************/
-		if(contexto_cuenta.cambioEdit != undefined && contexto_cuenta.cambioEdit != 0){
+		if(contexto_cuenta.cambioEdit != undefined && contexto_cuenta.cambioEdit != 0 && contexto_cuenta.cambio_previo_mail != undefined ){
 			this.model.set( 'rfc_c', rfc_c);
 			this.model.set( 'tipodepersona_c', tipodepersona_c);
 			this.model.set( 'email', email);
@@ -876,8 +876,9 @@
 				this.model.set( 'fechadenacimiento_c', fechadenacimiento_c);
 				this.model.set( 'curp_c', curp_c);
 			}
+			contexto_cuenta.cambio_previo_mail = 0;
 		}
-		contexto_cuenta.cambioEdit = 0;
+		
 		/********************************************/
 		
 
