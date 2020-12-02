@@ -297,7 +297,7 @@
 												cont_dir.oDirecciones = contexto_cuenta.oDirecciones;
 												cont_tel.oTelefonos = contexto_cuenta.oTelefonos;
 												cont_tel.render();
-												cont_dir.render();
+												
 												var duplicado = 0;
 												var cDuplicado = 0;            
 												var cDireccionFiscal = 0;
