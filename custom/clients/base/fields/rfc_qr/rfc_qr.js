@@ -162,7 +162,7 @@
 						self.$('#btn_Cancelar').removeClass('disabled');
 						self.$('#btn_Cancelar').attr('style', 'margin:10px');
 					}else {
-						
+													
 						var indice_indicador = 0;
 						var Completo = '';
 						var RFC = data[0]["RFC"].toUpperCase();
@@ -282,7 +282,8 @@
 													if(arrcorreos.length > 0){
 														arrcorreos[arrcorreos.length]={email_address: Correo, primary_address: false};
 														//arrcorreos.push({email_address: Correo, primary_address: false});
-														self.model.set('email', arrcorreos);														
+														self.model.set('email', arrcorreos);
+														contexto_cuenta.cambio_previo_mail = '2';
 													}else{
 														self.model.set('email', [{email_address: Correo, primary_address: true}]);
 														contexto_cuenta.cambio_previo_mail = '1';
@@ -323,6 +324,7 @@
 														// Indicador
 														direccion[key].indicadorSeleccionados = direccion[key].indicadorSeleccionados + ',^2^';
 														direccion[key].bloqueado = '1';
+														contexto_cuenta.cambio_previo_mail = '3';
 														//contexto_cuenta.cambio_previo_mail = '1';
 														var indicador = direccion[key].indicadorSeleccionados;
 														var dir_indicador_map_list = app.lang.getAppListStrings('dir_indicador_map_list');
@@ -449,6 +451,11 @@
 																self.$('#btn_Cancelar').removeClass('disabled');
 																self.$('#btn_Cancelar').attr('style', 'margin:10px');
 																//self.render();
+																if(contexto_cuenta.cambio_previo_mail == '1'){
+																	contexto_cuenta.cambio_previo_mail = '1';
+																}else{
+																	contexto_cuenta.cambio_previo_mail = '4';
+																}
 															}else {
 																if(cDuplicado == 0) {
 																	var nuevaDireccion = {
@@ -549,6 +556,7 @@
 																	self.$('#validar_QR').attr('style', 'margin:10px');
 																	self.$('#btn_Cancelar').removeClass('disabled');
 																	self.$('#btn_Cancelar').attr('style', 'margin:10px');
+																	contexto_cuenta.cambio_previo_mail = '5';
 																	//self.render();
 																} else {
 																	cont_dir.render();

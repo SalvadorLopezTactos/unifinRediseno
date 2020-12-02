@@ -16,7 +16,7 @@
         this._super("initialize", [options]);
 
         this.context.on('button:cancel_button:click', this.handleCancel, this);
-        
+	 
         this.totalllamadas = 0;
         this.totalreuniones = 0;
         this.flagheld = 0;
@@ -807,24 +807,25 @@
     },
 
     handleCancel: function () {
-        this._super("handleCancel");	
+        this._super("handleCancel");			
 		
-		
-		var rfc_c = this.model._previousAttributes.rfc_c;
-		var tipodepersona_c = this.model._previousAttributes.tipodepersona_c;
-		var razonsocial_c = this.model._previousAttributes.razonsocial_c;
-		var nombre_comercial_c = this.model._previousAttributes.nombre_comercial_c;
-		var fechaconstitutiva_c = this.model._previousAttributes.fechaconstitutiva_c;
-		var primernombre_c = this.model._previousAttributes.primernombre_c;
-		var apellidopaterno_c = this.model._previousAttributes.apellidopaterno_c;
-		var apellidomaterno_c = this.model._previousAttributes.apellidomaterno_c;
-		var fechadenacimiento_c = this.model._previousAttributes.fechadenacimiento_c;
-		var curp_c = this.model._previousAttributes.curp_c;	
-		var email = '';
-		if(contexto_cuenta.cambio_previo_mail != undefined && contexto_cuenta.cambio_previo_mail==1){
-			email = this.model._previousAttributes.email;
-		}else{	
-			email = this.model.attributes.email;
+		if(contexto_cuenta.cambioEdit != undefined && contexto_cuenta.cambioEdit != 0){
+			var rfc_c = this.model._previousAttributes.rfc_c;
+			var tipodepersona_c = this.model._previousAttributes.tipodepersona_c;
+			var razonsocial_c = this.model._previousAttributes.razonsocial_c;
+			var nombre_comercial_c = this.model._previousAttributes.nombre_comercial_c;
+			var fechaconstitutiva_c = this.model._previousAttributes.fechaconstitutiva_c;
+			var primernombre_c = this.model._previousAttributes.primernombre_c;
+			var apellidopaterno_c = this.model._previousAttributes.apellidopaterno_c;
+			var apellidomaterno_c = this.model._previousAttributes.apellidomaterno_c;
+			var fechadenacimiento_c = this.model._previousAttributes.fechadenacimiento_c;
+			var curp_c = this.model._previousAttributes.curp_c;	
+			var email = '';
+			if( contexto_cuenta.cambio_previo_mail==1){
+				email = this.model._previousAttributes.email;
+			}else{
+				email = this.model.attributes.email;
+			}
 		}
 		
 		
@@ -859,21 +860,24 @@
         this.$('[data-name="promotorfleet_c"]').attr('style', '');
 
 		/********************************************/
-		this.model.set( 'rfc_c', rfc_c);
-		this.model.set( 'tipodepersona_c', tipodepersona_c);
-		this.model.set( 'email', email);
-		
-		if(tipodepersona_c == "Persona Moral") {
-			this.model.set( 'razonsocial_c', razonsocial_c);
-			this.model.set( 'nombre_comercial_c', nombre_comercial_c);
-			this.model.set( 'fechaconstitutiva_c', fechaconstitutiva_c);
-		}else {
-			this.model.set( 'primernombre_c', primernombre_c);
-			this.model.set( 'apellidopaterno_c', apellidopaterno_c);
-			this.model.set( 'apellidomaterno_c', apellidomaterno_c);
-			this.model.set( 'fechadenacimiento_c', fechadenacimiento_c);
-			this.model.set( 'curp_c', curp_c);
+		if(contexto_cuenta.cambioEdit != undefined && contexto_cuenta.cambioEdit != 0){
+			this.model.set( 'rfc_c', rfc_c);
+			this.model.set( 'tipodepersona_c', tipodepersona_c);
+			this.model.set( 'email', email);
+			
+			if(tipodepersona_c == "Persona Moral") {
+				this.model.set( 'razonsocial_c', razonsocial_c);
+				this.model.set( 'nombre_comercial_c', nombre_comercial_c);
+				this.model.set( 'fechaconstitutiva_c', fechaconstitutiva_c);
+			}else {
+				this.model.set( 'primernombre_c', primernombre_c);
+				this.model.set( 'apellidopaterno_c', apellidopaterno_c);
+				this.model.set( 'apellidomaterno_c', apellidomaterno_c);
+				this.model.set( 'fechadenacimiento_c', fechadenacimiento_c);
+				this.model.set( 'curp_c', curp_c);
+			}
 		}
+		contexto_cuenta.cambioEdit = 0;
 		/********************************************/
 		
 
@@ -890,7 +894,7 @@
 		
 		
     },
-
+	
     bindDataChange: function () {
         this._super("bindDataChange");
         //Si el registro es Persona Fisica, ya no se podra cambiar a Persona Moral
@@ -1163,7 +1167,7 @@
         this.$("div[data-name='actividadeconomica_c']").hide();
         this.$(".record-cell[data-name='blank_space']").hide();
 
-
+		
     },
 
     editClicked: function () {
@@ -1174,7 +1178,8 @@
         this.$('[data-name="promotorcredit_c"]').attr('style', 'pointer-events:none');
         this.$('[data-name="promotorfleet_c"]').attr('style', 'pointer-events:none');
         this.$('[data-name="promotorrm_c"]').attr('style', 'pointer-events:none');
-
+		
+		contexto_cuenta.cambioEdit=1;
     },
 
     hideconfiinfo: function () {
