@@ -292,11 +292,12 @@
 													self.model.set('email', [{email_address: Correo, primary_address: true}]);
 													contexto_cuenta.cambio_previo_mail = '1';
 												}
-												self.render();
+												//self.render();
 												// Valida duplicado
 												cont_dir.oDirecciones = contexto_cuenta.oDirecciones;
 												cont_tel.oTelefonos = contexto_cuenta.oTelefonos;
 												cont_tel.render();
+												
 												var duplicado = 0;
 												var cDuplicado = 0;            
 												var cDireccionFiscal = 0;
@@ -684,7 +685,8 @@
   },
 
   cancelar: function() {
-    this.$('#rfcModal').hide();
+	  
+	this.$('#rfcModal').hide();	
   },
 
 })
