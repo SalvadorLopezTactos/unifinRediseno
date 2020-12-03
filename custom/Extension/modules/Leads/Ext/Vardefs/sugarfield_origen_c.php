@@ -1,6 +1,7 @@
 <?php
- // created: 2020-05-26 17:42:22
+ // created: 2020-12-02 22:44:53
 $dictionary['Lead']['fields']['origen_c']['labelValue']='Origen';
+$dictionary['Lead']['fields']['origen_c']['dependency']='';
 $dictionary['Lead']['fields']['origen_c']['visibility_grid']=array (
   'trigger' => 'tipo_registro_c',
   'values' => 
@@ -10,6 +11,7 @@ $dictionary['Lead']['fields']['origen_c']['visibility_grid']=array (
       0 => '',
       1 => '1',
       2 => '2',
+      3 => '3',
     ),
     2 => 
     array (
