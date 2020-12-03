@@ -54,7 +54,7 @@ SQL;
                 if ($respuesta==0 || $respuesta==false) {
 
                     $query = "select count(*) as total from opportunities a, opportunities_cstm b, accounts_opportunities c
-     where a.id = b.id_c and a.id = c.opportunity_id and a.deleted = 0 and c.account_id = '$cliente' 
+     where a.id = b.id_c and a.id = c.opportunity_id and a.deleted = 0 and c.account_id = '$cliente'
      and b.tct_etapa_ddw_c = 'SI' and isnull(b.estatus_c) and b.tipo_producto_c = '$tipo'";
 
                     $result = $db->query($query);
@@ -1161,7 +1161,7 @@ SQL;
                     $tipoSubtipo = mb_strtoupper(trim($tipoList[$tipo].' '.$subtipoList[$subtipo]),'UTF-8');
                     //Itera productos recuperados
                     foreach ($relateProducts as $product) {
-                        if ($tipoProducto == $product->tipo_producto) {
+                        if ($tipoProducto == $product->tipo_producto && (($product->tipo_cuenta!='3' && $product->subtipo_cuenta!=$subtipo ) || ($subtipo=='18')) ) {
                             //Actualiza tipo y subtipo de producto
                             $product->tipo_cuenta = $tipo;
                             $product->subtipo_cuenta = $subtipo;
