@@ -93,6 +93,11 @@ class clase_UniProducto
                                             $beanProducto->multilinea_c = $key['multilinea_c'] == true ? 1 : 0;
                                         }
                                         break;
+                                    case 2:
+                                        if ($key['producto'] == '2') {
+                                            $beanProducto->multilinea_c = $key['multilinea_c'] == true ? 1 : 0;
+                                        }
+                                        break;
                                 }
                                 $beanProducto->save();
                             }
