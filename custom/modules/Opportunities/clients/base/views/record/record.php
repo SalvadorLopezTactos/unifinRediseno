@@ -826,8 +826,6 @@ array (
               ),
               4 => 
               array (
-                'name' => 'ce_cambio_c',
-                'label' => 'LBL_CE_CAMBIO',
               ),
               5 => 
               array (
