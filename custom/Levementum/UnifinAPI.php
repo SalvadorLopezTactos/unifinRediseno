@@ -1611,11 +1611,12 @@ SQL;
                     "requiereEnviarCorreo" => $opportunidad['enviar_por_correo_c'],
                     "comision"=> $opportunidad['porcentaje_ca_c'],
                     "pagoInicialCotizacion"=> 0,
-                    "pagoMensual" => 0+$opportunidad['ca_pago_mensual_c']
+                    "pagoMensual" => 0+$opportunidad['ca_pago_mensual_c'],
+                    "idProductoFinanciero"=>$opportunidad['producto_financiero_c']==0?"":$opportunidad['producto_financiero_c']
 
                 );
                 //Si la Solicitud es de Credito SOS recalcula el valor del campo Riesgo a "Mayor".
-                if ($opportunidad['tipo_producto_c']=="SOS"){
+                if ($opportunidad['tipo_producto_c']=="SOS"){  # PREGUNTAR SI SE CAMBIA POR PRODUCTO FINANCIERO
                     //Setea valores constantes para la invocación de IniciaProceso
                     //$GLOBALS['log']->fatal("Setea valores de la solicitud SOS");
                     $fields['riesgoPersona'] = "MY";
