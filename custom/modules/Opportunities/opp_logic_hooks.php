@@ -54,9 +54,9 @@ SQL;
             if ($respuesta == 0 || $respuesta == false) {
 
                 $query = "select count(*) as total from opportunities a, opportunities_cstm b, accounts_opportunities c
-     where a.id = b.id_c and a.id = c.opportunity_id and a.deleted = 0 and c.account_id = '$cliente' 
+     where a.id = b.id_c and a.id = c.opportunity_id and a.deleted = 0 and c.account_id = '$cliente'
      and b.tct_etapa_ddw_c = 'SI' and isnull(b.estatus_c) and b.tipo_producto_c = '$tipo'";
-
+              
                 $result = $db->query($query);
                 $row = $db->fetchByAssoc($result);
                 $count = $row['total'];
@@ -1172,28 +1172,28 @@ SQL;
         }
     }
 
-    function actualizaTipoCuenta($tipo = null, $subtipo = null, $idCuenta = null, $tipoProducto = null)
-    {
-        //Valuda cuenta Asociada y producto
-        if ($idCuenta && $tipoProducto) {
-            //Recupera cuenta
-            $beanAccount = BeanFactory::getBean('Accounts', $idCuenta);
-            //Recupera productos y actualiza Tipo y subtipo
-            if ($beanAccount->load_relationship('accounts_uni_productos_1')) {
-                $relateProducts = $beanAccount->accounts_uni_productos_1->getBeans($beanAccount->id, array('disable_row_level_security' => true));
-                //Recupera valores
-                $tipoList = $app_list_strings['tipo_registro_cuenta_list'];
-                $subtipoList = $app_list_strings['subtipo_registro_cuenta_list'];
-                $tipoSubtipo = mb_strtoupper(trim($tipoList[$tipo] . ' ' . $subtipoList[$subtipo]), 'UTF-8');
-                //Itera productos recuperados
-                foreach ($relateProducts as $product) {
-                    if ($tipoProducto == $product->tipo_producto) {
-                        //Actualiza tipo y subtipo de producto
-                        $product->tipo_cuenta = $tipo;
-                        $product->subtipo_cuenta = $subtipo;
-                        $product->tipo_subtipo_cuenta = $tipoSubtipo;
-                        $product->save();
-                    }
+function actualizaTipoCuenta($tipo=null, $subtipo=null, $idCuenta=null, $tipoProducto=null)
+        {
+            //Valuda cuenta Asociada y producto
+      		  if($idCuenta && $tipoProducto){
+                //Recupera cuenta
+          		  $beanAccount = BeanFactory::getBean('Accounts', $idCuenta);
+                //Recupera productos y actualiza Tipo y subtipo
+                if ($beanAccount->load_relationship('accounts_uni_productos_1')) {
+                    $relateProducts = $beanAccount->accounts_uni_productos_1->getBeans($beanAccount->id,array('disable_row_level_security' => true));
+                    //Recupera valores
+                    $tipoList = $app_list_strings['tipo_registro_cuenta_list'];
+                    $subtipoList = $app_list_strings['subtipo_registro_cuenta_list'];
+                    $tipoSubtipo = mb_strtoupper(trim($tipoList[$tipo].' '.$subtipoList[$subtipo]),'UTF-8');
+                    //Itera productos recuperados
+                    foreach ($relateProducts as $product) {
+                        if ($tipoProducto == $product->tipo_producto && (($product->tipo_cuenta!='3' && $product->subtipo_cuenta!=$subtipo ) || ($subtipo=='18')) ) {
+                            //Actualiza tipo y subtipo de producto
+                            $product->tipo_cuenta = $tipo;
+                            $product->subtipo_cuenta = $subtipo;
+                            $product->tipo_subtipo_cuenta = $tipoSubtipo;
+                            $product->save();
+                        }
                 }
             }
         }
