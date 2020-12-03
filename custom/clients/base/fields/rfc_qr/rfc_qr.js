@@ -16,7 +16,8 @@
     self.picturecam = false;
     this.loadView = true;
     this.context.on('button:btn_rfc:click', this.btn_rfc_qr, this);
-	
+	var cuenta_recover = this;
+	var localstream = null;
   },
 
   render: function () {
@@ -126,7 +127,8 @@
 			self.$('#validar_QR').addClass('disabled');
 			self.$('#validar_QR').attr('style', 'pointer-events:none;margin:10px');
 			self.$('#btn_Cancelar').addClass('disabled');
-			self.$('#btn_Cancelar').attr('style', 'pointer-events:none;margin:10px');    
+			self.$('#btn_Cancelar').attr('style', 'pointer-events:none;margin:10px');   
+			var vid = self.$('#video');
 			c.width = imgn.width;
 			c.height = imgn.height;
 			ctx.drawImage(imgn,0,0)
@@ -162,7 +164,7 @@
 						self.$('#btn_Cancelar').removeClass('disabled');
 						self.$('#btn_Cancelar').attr('style', 'margin:10px');
 					}else {
-													
+							
 						var indice_indicador = 0;
 						var Completo = '';
 						var RFC = data[0]["RFC"].toUpperCase();
@@ -277,22 +279,36 @@
 													self.model.set('curp_c', CURP);
 												}
 												//self.model.set('email1', Correo);
-												var arrcorreos = self.model.attributes.email;
-												if(arrcorreos !== undefined ){
+												var arrcorreos = [];
+												var repetido = 0;
+												if(self.model.attributes.email !== undefined ){
+													arrcorreos = self.model.attributes.email;
 													if(arrcorreos.length > 0){
-														arrcorreos[arrcorreos.length]={email_address: Correo, primary_address: false};
-														//arrcorreos.push({email_address: Correo, primary_address: false});
-														self.model.set('email', arrcorreos);
-														contexto_cuenta.cambio_previo_mail = '2';
+														for(var y=0; y < arrcorreos.length; y++){
+															if(arrcorreos[y].email_address == Correo){
+																repetido = 1;
+															}
+														}
+														if(repetido == 0){
+															arrcorreos[arrcorreos.length]={email_address: Correo, primary_address: false};
+															contexto_cuenta.cambio_previo_mail = '2';
+														}
 													}else{
-														self.model.set('email', [{email_address: Correo, primary_address: true}]);
+														arrcorreos = [{email_address: Correo, primary_address: true}];
 														contexto_cuenta.cambio_previo_mail = '1';
 													}
 												}else{
-													self.model.set('email', [{email_address: Correo, primary_address: true}]);
+													arrcorreos = [{email_address: Correo, primary_address: true}];
 													contexto_cuenta.cambio_previo_mail = '1';
 												}
-												//self.render();
+												self.model.set('email', arrcorreos);
+												if(contexto_cuenta.cambioEdit != undefined && contexto_cuenta.cambioEdit == 1){
+													self.render();
+													//cont_seguimiento.tipoCuenta = contexto_cuenta.tipoCuenta;
+													//cont_seguimiento.subtipoCuenta = contexto_cuenta.tipoCuenta;
+													//cont_seguimiento.render();
+												}
+												
 												// Valida duplicado
 												cont_dir.oDirecciones = contexto_cuenta.oDirecciones;
 												cont_tel.oTelefonos = contexto_cuenta.oTelefonos;
@@ -350,6 +366,7 @@
 														self.$('#validar_QR').attr('style', 'margin:10px');
 														self.$('#btn_Cancelar').removeClass('disabled');
 														self.$('#btn_Cancelar').attr('style', 'margin:10px');
+														self.$('#rfcModal').hide();
 														cont_dir.render();
 													}
 												});
@@ -451,6 +468,7 @@
 																self.$('#validar_QR').attr('style', 'margin:10px');
 																self.$('#btn_Cancelar').removeClass('disabled');
 																self.$('#btn_Cancelar').attr('style', 'margin:10px');
+																self.$('#rfcModal').hide();
 																//self.render();
 																if(contexto_cuenta.cambio_previo_mail == '1'){
 																	contexto_cuenta.cambio_previo_mail = '1';
@@ -557,6 +575,7 @@
 																	self.$('#validar_QR').attr('style', 'margin:10px');
 																	self.$('#btn_Cancelar').removeClass('disabled');
 																	self.$('#btn_Cancelar').attr('style', 'margin:10px');
+																	self.$('#rfcModal').hide();
 																	contexto_cuenta.cambio_previo_mail = '5';
 																	//self.render();
 																} else {
@@ -575,7 +594,8 @@
 																	self.$('#validar_QR').removeClass('disabled');
 																	self.$('#validar_QR').attr('style', 'margin:10px');
 																	self.$('#btn_Cancelar').removeClass('disabled');
-																	self.$('#btn_Cancelar').attr('style', 'margin:10px');    
+																	self.$('#btn_Cancelar').attr('style', 'margin:10px'); 
+																	self.$('#rfcModal').hide();																	
 																	//self.render();
 																}
 															}
@@ -597,96 +617,138 @@
   activarCamara: function(){
     this.$('#carga').hide();
     this.$('#div_video').show();  
-		var elemento = null;
-		var video = this.$('#video')[0];
-			canvas = this.$('#canvas')[0];
-			snap = this.$('#snap')[0];
-			estado = this.$('#estado')[0];		
-		if(this.$('#activar_camara')[0].checked == true){
-			this.fileupload = false;
-			elemento = this.$('#div_video')[0];
-			elemento.style.display = 'block';
-			elemento = this.$('#carga')[0];
-			elemento.style.display = 'none';
-			elemento = this.$('#btnSubir')[0];
-			elemento.value = '';
-			elemento = this.$('#b64')[0];
-			elemento.value = "";
-			elemento = this.$('#img')[0];
-			elemento.src = "";
-			elemento.style.display = 'none';
-			if (this.tieneSoporteUserMedia()) {
-				this.getUserMedia(
-					{video: true, width: 400, height: 200},
-					function (stream) {
-						console.log("Permiso concedido");
-						video.srcObject = stream;
+	/**************************************/
+	this.$('#rfcModal').show();
+	this.$('#rfcModal').focus();
+	this.$('#rfcModal').blur();
+	this.$('#activar_camara').value = 1;
+    self.picturecam = false;
+	/**************************************/
+	var elemento = null;
+	var video = this.$('#video')[0];
+		canvas = this.$('#canvas')[0];
+		snap = this.$('#snap')[0];
+		estado = this.$('#estado')[0];		
+	if(this.$('#activar_camara')[0].checked == true){
+		this.fileupload = false;
+		elemento = this.$('#div_video')[0];
+		elemento.style.display = 'block';
+		elemento = this.$('#carga')[0];
+		elemento.style.display = 'none';
+		elemento = this.$('#btnSubir')[0];
+		elemento.value = '';
+		elemento = this.$('#b64')[0];
+		elemento.value = "";
+		elemento = this.$('#img')[0];
+		elemento.src = "";
+		elemento.style.display = 'none';
+		if (this.tieneSoporteUserMedia()) {
+			this.getUserMedia(
+				{video: true, width: 400, height: 200},
+				function (stream) {
+					console.log("Permiso concedido");
+					video.srcObject = stream;
+					localstream = stream;
+					video.play();
+					//Escuchar el click
+					snap.addEventListener("click", function(){
+						video.pause();
+						//Obtener contexto del canvas y dibujar sobre él
+						var contexto = canvas.getContext("2d");
+						canvas.width = video.width;
+						canvas.height = video.height;
+						contexto.drawImage(video, 0, 0, 280, 200);
+						var foto = canvas.toDataURL(); //Esta es la foto, en base 64
+						//estado.innerHTML = "Foto tomada con exito...";
+						canvas.style.display = 'block';
+						var body = {
+							"file" : foto
+						}
+						self.picturecam = true;							
 						video.play();
-						//Escuchar el click
-						snap.addEventListener("click", function(){
-							video.pause();
-							//Obtener contexto del canvas y dibujar sobre él
-							var contexto = canvas.getContext("2d");
-							canvas.width = video.width;
-							canvas.height = video.height;
-							contexto.drawImage(video, 0, 0, 280, 200);
-							var foto = canvas.toDataURL(); //Esta es la foto, en base 64
-							//estado.innerHTML = "Foto tomada con exito...";
-							canvas.style.display = 'block';
-							var body = {
-								"file" : foto
-							}
-							self.picturecam = true;							
-							video.play();
-						});
-					 }, function (error) {
-						//console.log("Permiso denegado o error: ", error);
-						//this.estado.innerHTML = "No se puede acceder a la cámara o no diste permiso.";
-            App.alert.show('no_camara', {
-              level: 'error',
-              messages: 'No se puede acceder a la cámara o no ha dado permiso.',
-              autoClose: true
-            });
 					});
-			} else {
-				//alert("Lo siento. Tu navegador no soporta esta característica");
-				//this.estado.innerHTML = "Parece que tu navegador no soporta esta característica. Intenta actualizarlo.";
-        App.alert.show('no_support', {
-          level: 'error',
-          messages: 'Parece que tu navegador no soporta esta característica. Intenta actualizarlo.',
-          autoClose: true
-        });
-			}
-		}else{
-			this.picturecam = false;
-			this.body = null;
-			var sprite = new Image();
-			var contexto = canvas.getContext("2d");
-			contexto.drawImage(sprite, 0, 0);
-			elemento = this.$('#carga')[0];
-			elemento.style.display = 'block';
-			elemento = document.getElementById("div_video");
-			elemento.style.display = 'none';
-			canvas.style.display = 'none';
-			video.pause();
-			{video:false}
-			this.render();
+				 }, function (error) {
+					//console.log("Permiso denegado o error: ", error);
+					//this.estado.innerHTML = "No se puede acceder a la cámara o no diste permiso.";
+           App.alert.show('no_camara', {
+             level: 'error',
+             messages: 'No se puede acceder a la cámara o no ha dado permiso.',
+             autoClose: true
+           });
+				});
+		} else {
+			//alert("Lo siento. Tu navegador no soporta esta característica");
+			//this.estado.innerHTML = "Parece que tu navegador no soporta esta característica. Intenta actualizarlo.";
+       App.alert.show('no_support', {
+         level: 'error',
+         messages: 'Parece que tu navegador no soporta esta característica. Intenta actualizarlo.',
+         autoClose: true
+       });
 		}
+	}else{
+		self.picturecam = false;
+		this.body = null;
+		var sprite = new Image();
+		var contexto = canvas.getContext("2d");
+		contexto.drawImage(sprite, 0, 0);
+		elemento = this.$('#carga')[0];
+		elemento.style.display = 'block';
+		elemento = document.getElementById("div_video");
+		elemento.style.display = 'none';
+		canvas.style.display = 'none';
+		video.pause();
+		{video:false}
+		this.render();
+	}
   },
   
   cargarArchivo: function() {
+	this.$('#rfcModal').show();
+	this.$('#rfcModal').focus();
+	this.$('#rfcModal').blur();
     this.$('#carga').show();
+	this.$('#carga').value = 1;
     this.$('#div_video').hide();
     self.picturecam = false;
   },
   
   btn_rfc_qr: function() {
     this.$('#rfcModal').show();
+	this.$('#rfcModal').focus();
+	this.$('#rfcModal').blur();
   },
 
   cancelar: function() {
-	  
-	this.$('#rfcModal').hide();	
+	var localstream = null;
+	//if (this.tieneSoporteUserMedia()) {
+	//	this.getUserMedia(
+	//		{video: true, width: 400, height: 200},
+	//		function (stream) {
+	//			localstream = stream; 
+	//			console.log("streaming"); 
+	//		 }, 
+	//		function(e) { 
+	//			console.log("background error : " + e); 
+	//		}); 
+	//} 
+	//var localstream;
+	//local = stream;
+	var elemento = null;
+	var video = this.$('#video')[0];
+		canvas = this.$('#canvas')[0];
+		snap = this.$('#snap')[0];
+		estado = this.$('#estado')[0];
+	elemento = this.$('#div_video')[0];
+   
+	video.pause;
+	video.src ="";
+	video.srcObject = null;
+    //localstream.stop();
+	this.$('#rfcModal').hide();
+	this.render();
+	self.picturecam = false;
+	self.$('#rfcModal').hide();
+	
   },
 
 })
