@@ -1,6 +1,4 @@
 ({
-  className: 'rfc_qr',
-
   events: {
     'click #btn_Cancelar': 'cancelar',
     'click .btn_rfc_qr': 'btn_rfc_qr',
@@ -8,9 +6,12 @@
 	'click #activar_camara': 'activarCamara',
     'click #archivo_qr': 'cargarArchivo',
 	'change #btnSubir': 'SubirImagen',
+	'click #rfc_qr': 'btn_rfc_qr',
   },
-
+	visible: false,
   initialize: function(options){
+	options = options || {};
+    options.def = options.def || {};
     this._super("initialize", [options]);
     self.body = null;
     self.picturecam = false;
@@ -20,8 +21,8 @@
 	var localstream = null;
   },
 
-  render: function () {
-    this._super("render");
+  _render: function () {
+    this._super("_render");
     $("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
   },
 
@@ -615,7 +616,7 @@
 	},
 	
   activarCamara: function(){
-    this.$('#carga').hide();
+    //this.$('#carga').hide();
     this.$('#div_video').show();  
 	/**************************************/
 	this.$('#rfcModal').show();
@@ -708,14 +709,18 @@
 	this.$('#rfcModal').blur();
     this.$('#carga').show();
 	this.$('#carga').value = 1;
-    this.$('#div_video').hide();
+    //this.$('#div_video').hide();
     self.picturecam = false;
   },
   
-  btn_rfc_qr: function() {
+  btn_rfc_qr: function(e) {
     this.$('#rfcModal').show();
 	this.$('#rfcModal').focus();
 	this.$('#rfcModal').blur();
+	//this.$('#rfc_qr').on('click');
+	//handleEdit: function(e, cell)
+	//self.handleEdit(e,'rfc_qr');
+	
   },
 
   cancelar: function() {
