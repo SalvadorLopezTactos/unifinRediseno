@@ -1,5 +1,5 @@
 <?php
- // created: 2020-11-23 10:46:53
+ // created: 2020-12-03 17:53:41
 
 $app_list_strings['producto_financiero_list']=array (
   0 => '',
@@ -31,7 +31,7 @@ $app_list_strings['producto_financiero_list']=array (
   34 => 'ARRENDAMIENTO PURO EXENTO IVA',
   35 => 'LÍNEA CRÉDITO SIMPLE USD',
   38 => 'ARRENDAMIENTO FRONTERA 8%',
-  39 => 'CS UNICLICK',
+  39 => 'UNICREDIT',
   40 => 'CRÉDITO SOS',
   41 => 'UNILEASE',
   42 => 'ARRENDAMIENTO ESTRUCTURADO',
@@ -39,9 +39,10 @@ $app_list_strings['producto_financiero_list']=array (
   44 => 'ARRENDAMIENTO ESTRUCTURADO USD',
   45 => 'CRÉDITO ESTRUCTURADO UC',
   46 => 'CRÉDITO ESTRUCTURADO USD UC',
-  47 => 'WKC',
+  47 => 'CRÉDITO SIMPLE USD UF',
   48 => 'UNICARD',
   49 => 'UNIPREMIUM',
   50 => 'UNIFACTOR',
   51 => 'UNIREVOLVING',
+  52 => 'WKC',
 );
