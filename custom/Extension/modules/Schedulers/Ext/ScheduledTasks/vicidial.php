@@ -11,8 +11,8 @@
         $bd="asteriskcdrdb";
         $con=new PDO("mysql:host=$host;port=3306;dbname=$bd;",$user,$passbd);
         $contador = 0;
-        if($con) {
-            $query2 = 'select * from calls_cstm where tct_call_issabel_c=1';
+        if($con) { 
+            $query2 = 'select b.* from calls a, calls_cstm b where a.id = b.id_c and a.deleted = 0 and b.tct_call_issabel_c = 1';
             $result2 = $GLOBALS['db']->query($query2);
             while ($row2 = $GLOBALS['db']->fetchByAssoc($result2)) {
                 $id = $row2['id_c'];
@@ -40,8 +40,8 @@
                     $beanCall->date_start = $date_start;
                     $beanCall->date_end = $date_end;
                     $beanCall->save();
-                    $contador++;
                     $GLOBALS['log']->fatal('Se ha modificado llamada:' . $id);
+                    $contador++;
                 }
             }
         }
