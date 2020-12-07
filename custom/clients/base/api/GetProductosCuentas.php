@@ -39,6 +39,8 @@ class GetProductosCuentas extends SugarApi
             1
             when up.tipo_producto = 2 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.tipo_cuenta = 1) then
             1
+            when up.tipo_producto = 12 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.tipo_cuenta = 1) then
+            1
             else 0
         end 'visible_noviable', up.*, upc.*, concat(u.first_name,' ',u.last_name) as full_name
         FROM accounts a
