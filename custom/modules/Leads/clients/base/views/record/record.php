@@ -381,6 +381,12 @@ array (
                 'label' => 'LBL_ACCOUNT',
                 'readonly' => true,
               ),
+              36 => 
+              array (
+                'name' => 'status_management_c',
+                'label' => 'LBL_STATUS_MANAGEMENT',
+                'span' => 12,
+              ),
             ),
           ),
           2 => 
