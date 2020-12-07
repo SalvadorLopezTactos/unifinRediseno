@@ -1277,7 +1277,7 @@
 
     condicionesFinancierasCheck: function (fields, errors, callback) {
         if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
-            if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7) {
+            if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && this.model.get("producto_financiero_c") != 43) {
                 if (solicitud_cf.oFinanciera.condicion.length == 0) {
                     errors[$(".addCondicionFinanciera")] = errors['condiciones_financieras'] || {};
                     errors[$(".addCondicionFinanciera")].required = true;
@@ -1298,7 +1298,7 @@
 
     condicionesFinancierasIncrementoCheck: function(fields, errors, callback) {
         if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
-            if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 7) {
+            if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 7 ) {
                 if (contRI.oFinancieraRI.ratificacion.length == 0) {
                     // console.log("contRI = 0");
                     errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};

@@ -1616,7 +1616,8 @@ SQL;
 
                 );
                 //Si la Solicitud es de Credito SOS recalcula el valor del campo Riesgo a "Mayor".
-                if ($opportunidad['tipo_producto_c']=="SOS"){  # PREGUNTAR SI SE CAMBIA POR PRODUCTO FINANCIERO
+      //          if ($opportunidad['tipo_producto_c']=="SOS"){  # PREGUNTAR SI SE CAMBIA POR PRODUCTO FINANCIERO
+                if ($opportunidad['tipo_producto_c']=="CREDITO SIMPLE" && $opportunidad['producto_financiero_c']==40){
                     //Setea valores constantes para la invocación de IniciaProceso
                     //$GLOBALS['log']->fatal("Setea valores de la solicitud SOS");
                     $fields['riesgoPersona'] = "MY";
@@ -1644,13 +1645,13 @@ SQL;
                     }
 
                     //En Leasing se calcula el riesgo neto
-                    if($opportunidad['tipo_producto_c']=="LEASING"){
+                    if($opportunidad['tipo_producto_c']=="LEASING" && $opportunidad['producto_financiero_c']==""){
                         $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Se asigna RI de operacion no de CF " . print_r($opportunidad['porciento_ri_c'],1));
                         $fields['rentaInicial'] =  $opportunidad['porciento_ri_c'];
                         $fields['monto'] = $opportunidad['monto_c'] * (1 - ($opportunidad['porciento_ri_c']/100));
                     }
 
-                    if($opportunidad['tipo_producto_c']=="CREDITO AUTOMOTRIZ"){
+                    if($opportunidad['tipo_producto_c']=="CREDITO AUTOMOTRIZ" && $opportunidad['producto_financiero_c']==""){
                         $fields['rentaInicial'] = $opportunidad['porcentaje_renta_inicial_c'];
                         //agregamos los 3 parametros para el cotizador
                         $fields['engancheAutomovil'] = 0+$opportunidad['ca_importe_enganche_c']; //LEASING : RENTA INICIA Y PARA CA. : ENGANCHE  Importe enganche Renta inicial
@@ -1666,7 +1667,7 @@ SQL;
                 }
 
                 //CVV - 29/03/2016 -  Se agregan los items que aplican para Factoraje
-                if($opportunidad['tipo_producto_c']=="FACTORAJE") {
+                if($opportunidad['tipo_producto_c']=="FACTORAJE" && $opportunidad['producto_financiero_c']=="") {
                     switch($opportunidad['f_tipo_factoraje_c']){
                         case 1:
                             $opportunidad['f_tipo_factoraje_c'] = "COBRANZA_DELEGADA_CON_RECURSOS";
