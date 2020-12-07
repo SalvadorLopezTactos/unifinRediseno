@@ -807,7 +807,10 @@
     },
 
     handleCancel: function () {
+		
         this._super("handleCancel");			
+		
+		this.$('#rfcModal').hide();
 		
 		if(contexto_cuenta.cambioEdit != undefined && contexto_cuenta.cambioEdit != 0 && contexto_cuenta.cambio_previo_mail != undefined ){
 			var rfc_c = this.model._previousAttributes.rfc_c;
@@ -1155,7 +1158,9 @@
             $('div[data-name=cuenta_especial_c]').css("pointer-events", "none");
         }
 
-        this.$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
+        //
+		this.$("div.record-label[data-name='rfc_qr']").attr('style', 'pointer-events:none;');
+		this.$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
 
         // if (app.user.attributes.multilinea_c == 0 || app.user.attributes.multilinea_c == "") {
         //     $('div[data-name=multilinea_c]').css("pointer-events", "none");
@@ -1181,7 +1186,7 @@
         this.$('[data-name="promotorrm_c"]').attr('style', 'pointer-events:none');
 		
 		contexto_cuenta.cambioEdit=1;
-    },
+	},
 
     hideconfiinfo: function () {
         $('div[data-name=account_telefonos]').hide();
