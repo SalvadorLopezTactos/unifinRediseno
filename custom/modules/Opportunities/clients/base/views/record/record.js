@@ -329,6 +329,10 @@
         {
             this.$(".record-cell[data-name='producto_financiero_c']").hide();
         }
+        if(this.model.get('negocio_c')=="" || this.model.get('negocio_c')==0)
+        {
+            this.$(".record-cell[data-name='negocio_c']").hide();
+        }
     },
 
     _render: function () {
@@ -592,6 +596,8 @@
         this.$(".field-label[data-name='pipeline_opp']").remove();
         this.$(".record-cell[data-name='blank_space']").hide();
         this.$('[data-name="producto_financiero_c"]').attr('style', 'pointer-events:none');
+        this.$('[data-name="negocio_c"]').attr('style', 'pointer-events:none');
+
     },
 
     evaluaCampoSolicitudVobo:function () {
