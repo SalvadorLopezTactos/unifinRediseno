@@ -260,8 +260,7 @@ array (
               array (
                 'name' => 'rfc_qr',
                 'label' => 'LBL_RFC_QR',
-                'readonly' => true,
-				'dismiss_label' => true,				
+                'dismiss_label' => true,
                 'studio' => 'visible',
                 'span' => 12,
               ),
