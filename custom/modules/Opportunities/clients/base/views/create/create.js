@@ -584,9 +584,11 @@
     buscaDuplicados: function (fields, errors, callback) {
         var cliente = this.model.get('account_id');
         var tipo = this.model.get('tipo_producto_c');
+        var producto = this.model.get('producto_financiero_c');
         var args = {
             'account_id': cliente,
-            'tipo_producto_c': tipo
+            'tipo_producto_c': tipo,
+            'producto_financiero_c': producto
         };
         var opportunities = app.api.buildURL("getOpportunities", '', {}, {});
         app.api.call("create", opportunities, {data: args}, {
