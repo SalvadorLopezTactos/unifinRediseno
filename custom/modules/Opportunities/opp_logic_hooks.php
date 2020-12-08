@@ -1059,6 +1059,12 @@ SQL;
             //($tipo=null, $subtipo=null, $idCuenta=null, $tipoProducto=null)
             //Actualiza en Solicitud Inicial y actualiza campos con valor Prospecto Interesado: 2,7
             $GLOBALS['log']->fatal('Actualiza tipo de Cuenta para producto: ' . $producto);
+
+            if($bean->negocio_c==10)
+            {
+                $producto=8;
+            }
+
             if ($etapa == "SI" && $bean->fetched_row['tct_etapa_ddw_c'] != $etapa) {
                 $GLOBALS['log']->fatal('Prospecto Interesado');
                 $this->actualizaTipoCuenta('2', '7', $cliente, $producto);
