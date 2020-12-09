@@ -13,6 +13,7 @@
         options.def = options.def || {};
         rel_product = this;
         this.aux_bandera = 0;
+        this.objectListaProdFinancieros={};
 
         this.tipo_producto_list = App.lang.getAppListStrings('tipo_producto_list'); //Lista que contiene todos los tipos de producto
         // this.tipo_producto_list = App.lang.getAppListStrings('tipo_producto_relaciones_list'); //Lista que solo contiene UNICLICK
@@ -30,7 +31,7 @@
         }, this);
     },
 
-    rel_Productos: function () {
+    rel_Productos: function (listaProdFinanciero,posicion) {
 
         var arr_re_selecc = rel_product.model.get('relaciones_activas');
         var list_rel_prod = App.lang.getAppListStrings('relaciones_producto_list');
@@ -39,9 +40,24 @@
         for (var property in list_rel_prod) {
             for (var k = 0; k < arr_re_selecc.length; k++) {
                 if (list_rel_prod.hasOwnProperty(property) && arr_re_selecc[k] == property) {
-                    arr_final_rel.push({ "rel": property, "prod": "", 'fncro': "", 'productoFncroList': "" });
+                    //Se agrega condición para mantener la lista de cada fila de forma independiente
+                    if(typeof(rel_product.productoSeleccionado)=="string"){
+                        arr_final_rel.push({ "rel": property, "prod": "", 'fncro': "", 'productoFncroList': "" });
+                    }else{
+                        if(typeof(posicion)=="number"){
+                            //Eliminando caracteres especiales
+                            arr_final_rel.push({ "rel": property, "prod": "", 'fncro': "", 'productoFncroList': rel_product.objectListaProdFinancieros[property] });
+                        }else{
+                            arr_final_rel.push({ "rel": property, "prod": "", 'fncro': "", 'productoFncroList': "" });
+                        }
+                        
+                    }
+                    
                 }
             }
+        }
+        if(listaProdFinanciero !=undefined && typeof(posicion)=="number"){
+            arr_final_rel[posicion].productoFncroList=listaProdFinanciero;
         }
         var jsonCampo = rel_product.actualizaCampo(arr_final_rel);
         console.log(jsonCampo);
@@ -103,6 +119,8 @@
         var row = $(events.currentTarget).closest("tr"); //Especifica el campo Tipo de Producto y busca el tr del producto seleccionado
         var selectProducto = $(events.currentTarget).val(); //Obtiene el valor del Tipo de Producto seleccionado
         var selectProducto_clsc = $(events.currentTarget).val(); //Obtiene el valor del Tipo de Producto seleccionado
+        this.row=$(events.currentTarget).closest("tr");
+        this.elemento=events;
 
         /********Servicio para obtener los productos financieros por Tipo de Producto********/
         if (selectProducto != "" && selectProducto != null && selectProducto != undefined) {
@@ -123,16 +141,43 @@
                     console.log(ProdFinanciers);
                     //Se crea nueva lista con los valores dependientes del tipo de producto que se seleccione
                     var financiero_list = app.lang.getAppListStrings('producto_financiero_list');
+                    
+                    
                     Object.keys(financiero_list).forEach(function (key) {
-
                         if (!ProdFinanciers.includes(key)) {
                             delete financiero_list[key];
                         }
                     });
+                    var relacion=$(rel_product.elemento.currentTarget).parent().siblings().eq(0).html();
+                    //Eliminando acentos al key, específicamente para "Cónyuge"
+                    var rel_clean=relacion.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
+
+                    rel_product.objectListaProdFinancieros[rel_clean]=financiero_list;
                     rel_product.producto_financiero_list = financiero_list; //Setea los valores dependientes por tipo de producto a la lista producto_financiero_list
                     console.log(rel_product.producto_financiero_list);
-                    rel_product.rel_Productos(); //Ejecuta la funcion de Tipo de Producto ya que se quitaba el valor al momento de seleccionar un producto financiero
+                    rel_product.rel_Productos(financiero_list,rel_product.row.index()); //Ejecuta la funcion de Tipo de Producto ya que se quitaba el valor al momento de seleccionar un producto financiero
+
+                    if(!_.isEmpty(rel_product.objectListaProdFinancieros)){
+
+                        for (var element in rel_product.objectListaProdFinancieros) {
+                            var nombre_relacion=element;
+                            var posicion=-1;
+                            for(var i=0;i<rel_product.productoSeleccionado.length;i++){
+
+                                if(rel_product.productoSeleccionado[i].rel==nombre_relacion){
+                                    posicion=i;
+                                    nombre_relacion=rel_product.productoSeleccionado[i].rel;
+                                }
+                            }
+                            if(posicion!=-1){
+                                rel_product.productoSeleccionado[posicion].productoFncroList=rel_product.objectListaProdFinancieros[nombre_relacion];
+                            }
+                            
+                        }
+
+                    }
+                    
                     rel_product.aux_bandera = 1; //Bandera para que no se cicle al momento de seleccionar un Tipo de producto y obtenga el producto financiero
                     rel_product.render();
 
