@@ -813,6 +813,7 @@
     },
 
     _ActualizaEtiquetas: function () {
+        self.model.set('negocio_c','0');
         if (this.model.get('tipo_producto_c') == '4') {
             this.$("div.record-label[data-name='plazo_c']").text("Plazo máximo en d\u00EDas");
             this.$("div.record-label[data-name='porcentaje_ca_c']").text("Comisi\u00F3n");
@@ -1217,43 +1218,50 @@
         var tipo_registro;
         //id de la Persona asociada
         var id_person = this.model.get('account_id');
-        //Recupera productos asociados
-        if (id_person && id_person != '' && id_person.length > 0) {
-            app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + id_person), null, {
-                success: _.bind(function (data) {
-                    if (data != null) {
-                        //Procesa registros
-                        Productos = data;
-                        var tipoCuentaLabel = app.lang.getAppListStrings('tipo_registro_cuenta_list');
-                        var tipoCuenta = "";
-                        var tipoProducto = this.model.get('tipo_producto_c');
-                        _.each(Productos, function (value, key) {
-                            var tipoProductoIterado = Productos[key].tipo_producto;
-                            if (tipoProducto == tipoProductoIterado) {
-                                tipoCuenta = Productos[key].tipo_cuenta;
-                            }
+        // Valida que sea diferente de Credito simple
+        if(this.model.get('tipo_producto_c')!='2')
+        {
+            //Recupera productos asociados
+            if (id_person && id_person != '' && id_person.length > 0 ) {
+                app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + id_person), null, {
+                    success: _.bind(function (data) {
+                        if (data != null) {
+                            //Procesa registros
+                            Productos = data;
+                            var tipoCuentaLabel = app.lang.getAppListStrings('tipo_registro_cuenta_list');
+                            var tipoCuenta = "";
+                            var tipoProducto = this.model.get('tipo_producto_c');
+                            _.each(Productos, function (value, key) {
+                                var tipoProductoIterado = Productos[key].tipo_producto;
+                                if (tipoProducto == tipoProductoIterado) {
+                                    tipoCuenta = Productos[key].tipo_cuenta;
+                                }
 
-                        });
+                            });
                         if (tipoCuenta != "2" && tipoCuenta != "3") {
                             app.alert.show("Cliente no v\u00E1lido", {
-                                level: "error",
-                                title: "No se puede asociar la operaci\u00F3n a una Cuenta de tipo: " + tipoCuentaLabel[tipoCuenta],
-                                autoClose: false
-                            });
+                                    level: "error",
+                                    title: "No se puede asociar la operaci\u00F3n a una Cuenta de tipo: " + tipoCuentaLabel[tipoCuenta],
+                                    autoClose: false
+                                });
 
-                            app.error.errorName2Keys['custom_message1'] = 'La cuenta asociada debe ser tipo Cliente o Prospecto';
-                            errors['account_name_5'] = errors['account_name_5'] || {};
-                            errors['account_name_5'].custom_message1 = true;
+                                app.error.errorName2Keys['custom_message1'] = 'La cuenta asociada debe ser tipo Cliente o Prospecto';
+                                errors['account_name_5'] = errors['account_name_5'] || {};
+                                errors['account_name_5'].custom_message1 = true;
+                            }
                         }
-                    }
-                    callback(null, fields, errors);
-                }, self),
-            });
-        } else {
-            app.error.errorName2Keys['custom_message1'] = 'La persona asociada debe ser tipo Cliente o Prospecto';
-            errors['account_name_6'] = errors['account_name_6'] || {};
-            errors['account_name_6'].custom_message1 = true;
-            errors['account_name_6'].required = true;
+                        callback(null, fields, errors);
+                    }, self),
+                });
+            } else {
+                app.error.errorName2Keys['custom_message1'] = 'La persona asociada debe ser tipo Cliente o Prospecto';
+                errors['account_name_6'] = errors['account_name_6'] || {};
+                errors['account_name_6'].custom_message1 = true;
+                errors['account_name_6'].required = true;
+                callback(null, fields, errors);
+            }
+        }
+        else {
             callback(null, fields, errors);
         }
     },
@@ -1284,7 +1292,7 @@
         $('[data-name="idsolicitud_c"]').show();
         $('[data-name="account_name"]').show();
         $('[data-name="tipo_producto_c"]').show();
-        $('[data-name="producto_financiero_c"]').show();
+       // $('[data-name="producto_financiero_c"]').show();
         $('[data-name="negocio_c"]').show();
         $('[data-name="monto_c"]').show();
         $('[data-name="assigned_user_name"]').show();
@@ -2090,6 +2098,7 @@
     },
 
     Updt_OptionProdFinan: function () {
+        self.model.set('producto_financiero_c','0');
         /** Recuperamos los productos financieros activo**/
         if (this.model.get('tipo_producto_c') != "" && this.model.get('negocio_c') != "") {
             var tipo_producto = this.model.get('tipo_producto_c');
