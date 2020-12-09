@@ -1238,8 +1238,8 @@
                                 }
 
                             });
-                            if (tipoCuenta != "3") {
-                                app.alert.show("Cliente no v\u00E1lido", {
+                        if (tipoCuenta != "2" && tipoCuenta != "3") {
+                            app.alert.show("Cliente no v\u00E1lido", {
                                     level: "error",
                                     title: "No se puede asociar la operaci\u00F3n a una Cuenta de tipo: " + tipoCuentaLabel[tipoCuenta],
                                     autoClose: false
