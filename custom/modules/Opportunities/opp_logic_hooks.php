@@ -235,7 +235,7 @@ SQL;
         $generaSolicitud = ($bean->tipo_producto_c == '3' || $bean->producto_financiero_c == '40' || ($bean->tipo_de_operacion_c == 'RATIFICACION_INCREMENTO' && $bean->tipo_producto_c != '1')) ? true : $generaSolicitud;
         $generaSolicitud = ($bean->tipo_de_operacion_c == 'RATIFICACION_INCREMENTO' && $bean->tipo_producto_c == '1' && $response_exluye == 1) ? true : $generaSolicitud;
         $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && $bean->tipo_producto_c == '1' && $response_exluye == 1) ? true : $generaSolicitud;
-        $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && $bean->producto_financiero_c!="" ) ? true : $generaSolicitud;
+        $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && $bean->producto_financiero_c!="0" ) ? true : $generaSolicitud;
 
         /*$GLOBALS['log']->fatal('valor Genera Solicitud JG: ' . $generaSolicitud);
         $GLOBALS['log']->fatal('Id process JG: ' . $bean->id_process_c);
@@ -308,7 +308,7 @@ SQL;
                       Línea con monto mayor/igual a 7.5 millones & Línea Leasing con id proceso
                     */
                     //$GLOBALS['log']->fatal('if para sos ' .$bean->id_process_c);
-                    if ($bean->tipo_producto_c == 1 && $bean->producto_financiero_c == "" && $bean->monto_c >= 7500000 && !empty($bean->id_process_c)) {
+                    if ($bean->tipo_producto_c == 1 && $bean->producto_financiero_c == "0" && $bean->monto_c >= 7500000 && !empty($bean->id_process_c)) {
                         $GLOBALS['log']->fatal('Entra if para sos ' );
 
                         //Manda a llamar a la funcion solicitudSOS para la generacion de la copia de la linea SOS con Leasing
