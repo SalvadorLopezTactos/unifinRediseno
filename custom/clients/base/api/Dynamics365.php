@@ -51,8 +51,8 @@ class Dynamics365 extends SugarApi
         $resource=$sugar_config['dynamics_token_resource'];
 
         //Comienza integración Cuentas por pagar
-        //$urlCPP==$sugar_config['dynamics_cuentas_por_pagar_host'];
-        $urlCPP=="http://172.26.1.84:9011/proveedores/EnvioCuentasPorPagar365";
+        $urlCPP=$sugar_config['dynamics_cuentas_por_pagar_host'];
+        //$urlCPP=="http://172.26.1.84:9011/proveedores/EnvioCuentasPorPagar365";
 
         //Prepara token request
         $request=array(
