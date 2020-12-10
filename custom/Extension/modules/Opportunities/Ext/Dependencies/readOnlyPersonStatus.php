@@ -23,3 +23,20 @@ $dependencies['Opportunities']['readOnly_person'] = array(
     )
 
 );
+$dependencies['Opportunities']['readOnly_Monto_c'] = array(
+    'hooks' => array("edit"),
+    'trigger' => 'true',
+    'triggerFields' => array('negocio_c','tipo_producto_c'),
+    'onload' => true,
+    'actions' => array(
+        //Persona
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'monto_c', //campo por afectar
+                'value' => 'equal($negocio_c,"2")',
+            ),
+        ),
+    )
+
+);
