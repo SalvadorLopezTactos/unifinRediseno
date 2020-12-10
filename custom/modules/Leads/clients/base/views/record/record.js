@@ -691,7 +691,7 @@
                 console.log('Llamada creada, id: '+id_call);
                 app.alert.show('message-to', {
                     level: 'info',
-                    messages: 'Usted esta llamando a '+name_client,
+                    messages: 'Usted está llamando a '+name_client,
                     autoClose: true
                 });
                 callback(id_call,self);

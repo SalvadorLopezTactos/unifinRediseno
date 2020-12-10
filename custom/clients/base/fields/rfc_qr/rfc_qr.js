@@ -4,10 +4,10 @@
   events: {
     'click #btn_Cancelar': 'cancelar',
     'click .btn_rfc_qr': 'btn_rfc_qr',
-	'click #validar_QR': 'validarServicioQR',
-	'click #activar_camara': 'activarCamara',
+		'click #validar_QR': 'validarServicioQR',
+		'click #activar_camara': 'activarCamara',
     'click #archivo_qr': 'cargarArchivo',
-	'change #btnSubir': 'SubirImagen',
+		'change #btnSubir': 'SubirImagen',		
   },
 
   initialize: function(options){
@@ -16,36 +16,15 @@
     self.picturecam = false;
     this.loadView = true;
     this.context.on('button:btn_rfc:click', this.btn_rfc_qr, this);
-	
   },
 
   render: function () {
     this._super("render");
-    $("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
+    //
+	$("div.record-label[data-name='rfc_qr']").attr('style', 'pointer-events:none;');
+	$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
   },
 
-
-  _limpiezaDatos: function(cadena){
-		
-		cadena = cadena.trim().toLowerCase();
-		cadena = cadena.split(" ").join("");
-		cadena = cadena.replace(".", "");
-		cadena = cadena.replace("-", "");
-		cadena = cadena.replace("_", "");
-		cadena = cadena.replace(",", "");
-		cadena = cadena.replace(";", "");
-		cadena = cadena.replace(":", "");
-		cadena = cadena.replace("#", "");
-		cadena = cadena.replace("$", "");
-		cadena = cadena.replace("%", "");
-		cadena = cadena.replace("&", "");
-		cadena = cadena.replace("\d", "");
-		cadena = cadena.replace("\r", "");
-		cadena = cadena.replace("\t", "");
-		cadena = cadena.replace("\n", "");
-		return cadena;
-  },
-  
 	tieneSoporteUserMedia: function() {
 		return !!(navigator.getUserMedia || (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || navigator.webkitGetUserMedia || navigator.msGetUserMedia);
 	},
@@ -87,6 +66,87 @@
 		}
 	},
   
+		
+  activarCamara: function(){
+    this.$('#carga').hide();
+    this.$('#div_video').show();  
+		var elemento = null;
+		var video = this.$('#video')[0];
+			canvas = this.$('#canvas')[0];
+			snap = this.$('#snap')[0];
+			estado = this.$('#estado')[0];		
+		if(this.$('#activar_camara')[0].checked == true){
+			this.fileupload = false;
+			elemento = this.$('#div_video')[0];
+			elemento.style.display = 'block';
+			elemento = this.$('#carga')[0];
+			elemento.style.display = 'none';
+			elemento = this.$('#btnSubir')[0];
+			elemento.value = '';
+			elemento = this.$('#b64')[0];
+			elemento.value = "";
+			elemento = this.$('#img')[0];
+			elemento.src = "";
+			elemento.style.display = 'none';
+			if (this.tieneSoporteUserMedia()) {
+				this.getUserMedia(
+					{video: true, width: 400, height: 200},
+					function (stream) {
+						console.log("Permiso concedido");
+						video.srcObject = stream;
+						video.play();
+						//Escuchar el click
+						snap.addEventListener("click", function(){
+							video.pause();
+							//Obtener contexto del canvas y dibujar sobre él
+							var contexto = canvas.getContext("2d");
+							canvas.width = video.width;
+							canvas.height = video.height;
+							contexto.drawImage(video, 0, 0, 280, 200);
+							var foto = canvas.toDataURL(); //Esta es la foto, en base 64
+							//estado.innerHTML = "Foto tomada con exito...";
+							canvas.style.display = 'block';
+							var body = {
+								"file" : foto
+							}
+							self.picturecam = true;							
+							video.play();
+						});
+					 }, function (error) {
+						//console.log("Permiso denegado o error: ", error);
+						//this.estado.innerHTML = "No se puede acceder a la cámara o no diste permiso.";
+            App.alert.show('no_camara', {
+              level: 'error',
+              messages: 'No se puede acceder a la cámara o no ha dado permiso.',
+              autoClose: true
+            });
+					});
+			} else {
+				//alert("Lo siento. Tu navegador no soporta esta característica");
+				//this.estado.innerHTML = "Parece que tu navegador no soporta esta característica. Intenta actualizarlo.";
+        App.alert.show('no_support', {
+          level: 'error',
+          messages: 'Parece que tu navegador no soporta esta característica. Intenta actualizarlo.',
+          autoClose: true
+        });
+			}
+		}else{
+			this.picturecam = false;
+			this.body = null;
+			var sprite = new Image();
+			var contexto = canvas.getContext("2d");
+			contexto.drawImage(sprite, 0, 0);
+			elemento = this.$('#carga')[0];
+			elemento.style.display = 'block';
+			elemento = document.getElementById("div_video");
+			elemento.style.display = 'none';
+			canvas.style.display = 'none';
+			video.pause();
+			{video:false}
+		}
+  },
+
+	
 	validarServicioQR:function () {
 		var contextol = this;
 		var input = this.$('input[type=file]');
@@ -126,7 +186,8 @@
 			self.$('#validar_QR').addClass('disabled');
 			self.$('#validar_QR').attr('style', 'pointer-events:none;margin:10px');
 			self.$('#btn_Cancelar').addClass('disabled');
-			self.$('#btn_Cancelar').attr('style', 'pointer-events:none;margin:10px');    
+			self.$('#btn_Cancelar').attr('style', 'pointer-events:none;margin:10px');   
+			var vid = self.$('#video');
 			c.width = imgn.width;
 			c.height = imgn.height;
 			ctx.drawImage(imgn,0,0)
@@ -162,7 +223,8 @@
 						self.$('#btn_Cancelar').removeClass('disabled');
 						self.$('#btn_Cancelar').attr('style', 'margin:10px');
 					}else {
-													
+							
+						
 						var indice_indicador = 0;
 						var Completo = '';
 						var RFC = data[0]["RFC"].toUpperCase();
@@ -277,26 +339,39 @@
 													self.model.set('curp_c', CURP);
 												}
 												//self.model.set('email1', Correo);
-												var arrcorreos = self.model.attributes.email;
-												if(arrcorreos !== undefined ){
-													if(arrcorreos.length > 0){
-														arrcorreos[arrcorreos.length]={email_address: Correo, primary_address: false};
-														//arrcorreos.push({email_address: Correo, primary_address: false});
-														self.model.set('email', arrcorreos);
-														contexto_cuenta.cambio_previo_mail = '2';
+												var arrcorreos = [];
+												var repetido = 0;
+												if(Correo!= "" ){
+													if(self.model.attributes.email !== undefined ){
+														arrcorreos = self.model.attributes.email;
+														if(arrcorreos.length > 0){
+															for(var y=0; y < arrcorreos.length; y++){
+																if(arrcorreos[y].email_address == Correo){
+																	repetido = 1;
+																}
+															}
+															if(repetido == 0){
+																arrcorreos[arrcorreos.length]={email_address: Correo, primary_address: false};
+																contexto_cuenta.cambio_previo_mail = '2';
+															}
+														}else{
+															arrcorreos = [{email_address: Correo, primary_address: true}];
+															contexto_cuenta.cambio_previo_mail = '1';
+														}
 													}else{
-														self.model.set('email', [{email_address: Correo, primary_address: true}]);
+														arrcorreos = [{email_address: Correo, primary_address: true}];
 														contexto_cuenta.cambio_previo_mail = '1';
 													}
-												}else{
-													self.model.set('email', [{email_address: Correo, primary_address: true}]);
-													contexto_cuenta.cambio_previo_mail = '1';
+													self.model.set('email', arrcorreos);
+													if(contexto_cuenta.cambioEdit != undefined && contexto_cuenta.cambioEdit == 1){
+														self.render();
+													}
 												}
-												self.render();
 												// Valida duplicado
 												cont_dir.oDirecciones = contexto_cuenta.oDirecciones;
 												cont_tel.oTelefonos = contexto_cuenta.oTelefonos;
 												cont_tel.render();
+												
 												var duplicado = 0;
 												var cDuplicado = 0;            
 												var cDireccionFiscal = 0;
@@ -349,6 +424,7 @@
 														self.$('#validar_QR').attr('style', 'margin:10px');
 														self.$('#btn_Cancelar').removeClass('disabled');
 														self.$('#btn_Cancelar').attr('style', 'margin:10px');
+														self.$('#rfcModal').hide();
 														cont_dir.render();
 													}
 												});
@@ -450,6 +526,7 @@
 																self.$('#validar_QR').attr('style', 'margin:10px');
 																self.$('#btn_Cancelar').removeClass('disabled');
 																self.$('#btn_Cancelar').attr('style', 'margin:10px');
+																self.$('#rfcModal').hide();
 																//self.render();
 																if(contexto_cuenta.cambio_previo_mail == '1'){
 																	contexto_cuenta.cambio_previo_mail = '1';
@@ -556,6 +633,7 @@
 																	self.$('#validar_QR').attr('style', 'margin:10px');
 																	self.$('#btn_Cancelar').removeClass('disabled');
 																	self.$('#btn_Cancelar').attr('style', 'margin:10px');
+																	self.$('#rfcModal').hide();
 																	contexto_cuenta.cambio_previo_mail = '5';
 																	//self.render();
 																} else {
@@ -574,7 +652,8 @@
 																	self.$('#validar_QR').removeClass('disabled');
 																	self.$('#validar_QR').attr('style', 'margin:10px');
 																	self.$('#btn_Cancelar').removeClass('disabled');
-																	self.$('#btn_Cancelar').attr('style', 'margin:10px');    
+																	self.$('#btn_Cancelar').attr('style', 'margin:10px'); 
+																	self.$('#rfcModal').hide();																	
 																	//self.render();
 																}
 															}
@@ -592,87 +671,7 @@
 			});
 		}
 	},
-	
-  activarCamara: function(){
-    this.$('#carga').hide();
-    this.$('#div_video').show();  
-		var elemento = null;
-		var video = this.$('#video')[0];
-			canvas = this.$('#canvas')[0];
-			snap = this.$('#snap')[0];
-			estado = this.$('#estado')[0];		
-		if(this.$('#activar_camara')[0].checked == true){
-			this.fileupload = false;
-			elemento = this.$('#div_video')[0];
-			elemento.style.display = 'block';
-			elemento = this.$('#carga')[0];
-			elemento.style.display = 'none';
-			elemento = this.$('#btnSubir')[0];
-			elemento.value = '';
-			elemento = this.$('#b64')[0];
-			elemento.value = "";
-			elemento = this.$('#img')[0];
-			elemento.src = "";
-			elemento.style.display = 'none';
-			if (this.tieneSoporteUserMedia()) {
-				this.getUserMedia(
-					{video: true, width: 400, height: 200},
-					function (stream) {
-						console.log("Permiso concedido");
-						video.srcObject = stream;
-						video.play();
-						//Escuchar el click
-						snap.addEventListener("click", function(){
-							video.pause();
-							//Obtener contexto del canvas y dibujar sobre él
-							var contexto = canvas.getContext("2d");
-							canvas.width = video.width;
-							canvas.height = video.height;
-							contexto.drawImage(video, 0, 0, 280, 200);
-							var foto = canvas.toDataURL(); //Esta es la foto, en base 64
-							//estado.innerHTML = "Foto tomada con exito...";
-							canvas.style.display = 'block';
-							var body = {
-								"file" : foto
-							}
-							self.picturecam = true;							
-							video.play();
-						});
-					 }, function (error) {
-						//console.log("Permiso denegado o error: ", error);
-						//this.estado.innerHTML = "No se puede acceder a la cámara o no diste permiso.";
-            App.alert.show('no_camara', {
-              level: 'error',
-              messages: 'No se puede acceder a la cámara o no ha dado permiso.',
-              autoClose: true
-            });
-					});
-			} else {
-				//alert("Lo siento. Tu navegador no soporta esta característica");
-				//this.estado.innerHTML = "Parece que tu navegador no soporta esta característica. Intenta actualizarlo.";
-        App.alert.show('no_support', {
-          level: 'error',
-          messages: 'Parece que tu navegador no soporta esta característica. Intenta actualizarlo.',
-          autoClose: true
-        });
-			}
-		}else{
-			this.picturecam = false;
-			this.body = null;
-			var sprite = new Image();
-			var contexto = canvas.getContext("2d");
-			contexto.drawImage(sprite, 0, 0);
-			elemento = this.$('#carga')[0];
-			elemento.style.display = 'block';
-			elemento = document.getElementById("div_video");
-			elemento.style.display = 'none';
-			canvas.style.display = 'none';
-			video.pause();
-			{video:false}
-			this.render();
-		}
-  },
-  
+
   cargarArchivo: function() {
     this.$('#carga').show();
     this.$('#div_video').hide();
@@ -685,6 +684,29 @@
 
   cancelar: function() {
     this.$('#rfcModal').hide();
+	self.picturecam = false;
+	self.$('#rfcModal').hide();
   },
-
+  
+  _limpiezaDatos: function(cadena){
+		
+		cadena = cadena.trim().toLowerCase();
+		cadena = cadena.split(" ").join("");
+		cadena = cadena.replace(".", "");
+		cadena = cadena.replace("-", "");
+		cadena = cadena.replace("_", "");
+		cadena = cadena.replace(",", "");
+		cadena = cadena.replace(";", "");
+		cadena = cadena.replace(":", "");
+		cadena = cadena.replace("#", "");
+		cadena = cadena.replace("$", "");
+		cadena = cadena.replace("%", "");
+		cadena = cadena.replace("&", "");
+		cadena = cadena.replace("\d", "");
+		cadena = cadena.replace("\r", "");
+		cadena = cadena.replace("\t", "");
+		cadena = cadena.replace("\n", "");
+		return cadena;
+  },
+  
 })

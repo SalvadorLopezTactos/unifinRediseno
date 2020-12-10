@@ -807,9 +807,12 @@
     },
 
     handleCancel: function () {
+		
         this._super("handleCancel");			
 		
-		if(contexto_cuenta.cambioEdit != undefined && contexto_cuenta.cambioEdit != 0){
+		this.$('#rfcModal').hide();
+		
+		if(contexto_cuenta.cambioEdit != undefined && contexto_cuenta.cambioEdit != 0 && contexto_cuenta.cambio_previo_mail != undefined ){
 			var rfc_c = this.model._previousAttributes.rfc_c;
 			var tipodepersona_c = this.model._previousAttributes.tipodepersona_c;
 			var razonsocial_c = this.model._previousAttributes.razonsocial_c;
@@ -860,7 +863,7 @@
         this.$('[data-name="promotorfleet_c"]').attr('style', '');
 
 		/********************************************/
-		if(contexto_cuenta.cambioEdit != undefined && contexto_cuenta.cambioEdit != 0){
+		if(contexto_cuenta.cambioEdit != undefined && contexto_cuenta.cambioEdit != 0 && contexto_cuenta.cambio_previo_mail != undefined ){
 			this.model.set( 'rfc_c', rfc_c);
 			this.model.set( 'tipodepersona_c', tipodepersona_c);
 			this.model.set( 'email', email);
@@ -876,8 +879,9 @@
 				this.model.set( 'fechadenacimiento_c', fechadenacimiento_c);
 				this.model.set( 'curp_c', curp_c);
 			}
+			contexto_cuenta.cambio_previo_mail = 0;
 		}
-		contexto_cuenta.cambioEdit = 0;
+		
 		/********************************************/
 		
 
@@ -1154,7 +1158,9 @@
             $('div[data-name=cuenta_especial_c]').css("pointer-events", "none");
         }
 
-        this.$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
+        //
+		this.$("div.record-label[data-name='rfc_qr']").attr('style', 'pointer-events:none;');
+		this.$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
 
         // if (app.user.attributes.multilinea_c == 0 || app.user.attributes.multilinea_c == "") {
         //     $('div[data-name=multilinea_c]').css("pointer-events", "none");
@@ -1180,7 +1186,7 @@
         this.$('[data-name="promotorrm_c"]').attr('style', 'pointer-events:none');
 		
 		contexto_cuenta.cambioEdit=1;
-    },
+	},
 
     hideconfiinfo: function () {
         $('div[data-name=account_telefonos]').hide();
@@ -2705,7 +2711,7 @@
                 success: _.bind(function (data) {
                     app.alert.dismiss('infoDynamics');
                     if(data !=null){
-                        self.model.set('control_dynamics_365_c',data);
+                        self.model.set('control_dynamics_365_c',data[0]);
                     }
                 }, this),
                 error: _.bind(function (response) {
