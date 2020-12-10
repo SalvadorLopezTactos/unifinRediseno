@@ -2433,7 +2433,6 @@
             this.$("div.record-label[data-name='ri_porcentaje_renta_inicial_c']").text("% Renta Inicial Incremento/Ratificaci\u00F3n");
             this.$("div.record-label[data-name='porcentaje_renta_inicial_c']").text("Porcentaje Renta Inicial");
         }
-
         //Se agrega condición para ocultar campo que no pertenecen a Fleet
         if (this.model.get('tipo_producto_c') == '6' || this.model.get('tipo_producto_c') == '7') {
 
@@ -2446,6 +2445,10 @@
             this.$('[data-name="porciento_ri_c"]').hide();
 
         }
+        //Valida la solicitud que sea de tipo CREDITO ESTRUCTURADO y oculta condiciones financieras
+        if (this.model.get('producto_financiero_c') == '43') {
+            this.$('div[data-name=condiciones_financieras]').hide();
+        }
         //Valida la solicitud que sea de tipo SOS y oculta campos
         if (this.model.get('tipo_producto_c') == '7') {
             this.$('div[data-name=condiciones_financieras]').hide();
@@ -2453,7 +2456,6 @@
             this.$('div[data-name="condiciones_financieras_incremento_ratificacion"]').hide();
             this.$("[data-name='monto_ratificacion_increment_c']").attr('style', 'pointer-events:none');
         }
-
         //Se habilitan acciones existentes en render
         //no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
         if (this.model.get('tct_etapa_ddw_c') == 'SI' || this.model.get('tct_etapa_ddw_c') == 'P') {
@@ -2461,19 +2463,16 @@
         } else {
             this.$('div[data-panelname=LBL_RECORDVIEW_PANEL1]').hide();
         }
-
         if (this.model.get('tipo_operacion_c') == '2') {
             this.$('div[data-name=plazo_ratificado_incremento_c]').show();
         } else {
             this.$('div[data-name=plazo_ratificado_incremento_c]').hide();
         }
-
         if (this.model.get('tipo_operacion_c') != '3') {
             //* Quitamos los campos Vendedor y Comisión
             this.$('div[data-name=opportunities_ag_vendedores_1_name]').hide();
             this.$('div[data-name=comision_c]').hide();
         }
-
         if (this.model.get('ratificacion_incremento_c') == false) {
             //Oculta campos para condiciones financieras
             this.$('div[data-name=plazo_ratificado_incremento_c]').hide();
