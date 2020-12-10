@@ -720,7 +720,7 @@
         //Recupera cuenta asociada
         var cuentaId = this.model.get('account_id');
         var faltantes = "";
-        if ((cuentaId != "" || cuentaId != null) && this.model.get('tct_oportunidad_perdida_chk_c') != true && this.model.get('tct_etapa_ddw_c') == 'SI' && producto!='' && producto_financiero=='' && producto_financiero!= undefined) {
+        if ((cuentaId != "" || cuentaId != null) && this.model.get('tct_oportunidad_perdida_chk_c') != true && this.model.get('tct_etapa_ddw_c') == 'SI' && producto!='' && producto_financiero_c=='' && producto_financiero_c!= undefined) {
 
             app.api.call('GET', app.api.buildURL('Accounts/' + cuentaId), null, {
                 success: _.bind(function (cuenta) {
