@@ -42,12 +42,17 @@ class Dynamics365 extends SugarApi
     public function setRequestDynamics($api, $args)
     {
         global $sugar_config;
+        global $db;
         //Obtiene parámetros, el id de cuenta
         $idCuenta=$args['accion'];
         $host=$sugar_config['dynamics_token_host'];
         $client_id=$sugar_config['dynamics_token_client_id'];
         $client_secret=$sugar_config['dynamics_token_client_secret'];
         $resource=$sugar_config['dynamics_token_resource'];
+
+        //Comienza integración Cuentas por pagar
+        //$urlCPP==$sugar_config['dynamics_cuentas_por_pagar_host'];
+        $urlCPP=="http://172.26.1.84:9011/proveedores/EnvioCuentasPorPagar365";
 
         //Prepara token request
         $request=array(
@@ -172,31 +177,42 @@ class Dynamics365 extends SugarApi
           $responseDynamics = ($responseCreate->Success) ? $responseDynamics . ' - ' . $responseCreate->Message : $responseDynamics . ' - ' . $responseCreate->ExceptionType;
         }
 
-        //Comienza integración Cuentas por pagar
-        $urlCPP="http://172.26.1.84:9011/proveedores/EnvioCuentasPorPagar365";
-
-        $bodyCPP=array(
-            'idProveedor' => $beanCuenta->idcliente_c
-        );
-
-        //Llamada a api para obtener token
-        $responseCPP=$this->postCPP($urlCPP,$bodyCPP);
-        $GLOBALS['log']->fatal("RESPONSE CUENTAS POR PAGAR");
-        $GLOBALS['log']->fatal(json_encode($responseCPP));
-        
-        $data=$responseCPP->data;
         $responseFull=array();
 
-        if(!empty($data)){
+        array_push($responseFull, $responseDynamics);
 
-            $responseFull=array($responseDynamics,$data);
+        //Llamada a api para Cuentas por pagar, solo se ejecuta la primera vez
+        if(!$beanCuenta->control_cpp_chk_c){
+            $GLOBALS['log']->fatal("Request cuentas por pagar: url: ".$urlCPP." idProveedor: ".$beanCuenta->idcliente_c);
+            $responseCPP=$this->postCPP("http://172.26.1.84:9011/proveedores/EnvioCuentasPorPagar365",$beanCuenta->idcliente_c);
+        
+            $GLOBALS['log']->fatal("RESPONSE CUENTAS POR PAGAR");
+            $GLOBALS['log']->fatal(print_r($responseCPP,true));
+
+            if(property_exists($responseCPP, "resultCode")){ //Condición para saber si se realizó correctamente la petición
+                $codigo=$responseCPP->resultCode;
+                if($codigo==1){
+                    $GLOBALS['log']->fatal("Proveedor ya registrado");
+                    array_push($responseFull, "");
+                }else{
+                    $GLOBALS['log']->fatal('Proveedor creado (Cuentas por pagar): '.$responseCPP->data->idProveedor365);
+                    array_push($responseFull, $responseCPP->data->idProveedor365);
+
+                    $queryUpdate="UPDATE accounts_cstm SET control_cpp_chk_c = '1', id_cpp_365_chk_c='{$responseCPP->data->idProveedor365}' WHERE id_c = '{$beanCuenta->id}'";
+                    $queryResult = $db->query($queryUpdate);
+
+                }
+            }else{
+                $GLOBALS['log']->fatal('Petición mal realizada (Cuentas por pagar): '.$responseCPP->data->idProveedor365);
+                array_push($responseFull, "");
+            }
 
         }
+        
+        $GLOBALS['log']->fatal("RESPONSE API DYNAMICS 365 Y CUENTAS POR PAGAR");
+        $GLOBALS['log']->fatal(print_r($responseFull,true));
 
-        $GLOBALS['log']->fatal("RESPONSE API DYNAMICS 365");
-        $GLOBALS['log']->fatal(json_encode($responseFull));
-
-        return $responseDynamics;
+        return $responseFull;
 
     }
 
@@ -221,7 +237,7 @@ class Dynamics365 extends SugarApi
         return json_decode($response);
     }
 
-    public function postCPP($host,$fields)
+    public function postCPP($host,$idProveedor)
     {
         $curl = curl_init();
         $fields_string = json_encode($fields);
@@ -234,7 +250,10 @@ class Dynamics365 extends SugarApi
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => $fields_string,
+            CURLOPT_POSTFIELDS => '{"idProveedor" : '.$idProveedor.'}',       
+            CURLOPT_HTTPHEADER => array(
+              'Content-Type: application/json'
+            ),
         ));
 
         $response = curl_exec($curl);

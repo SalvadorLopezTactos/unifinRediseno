@@ -2711,7 +2711,7 @@
                 success: _.bind(function (data) {
                     app.alert.dismiss('infoDynamics');
                     if(data !=null){
-                        self.model.set('control_dynamics_365_c',data);
+                        self.model.set('control_dynamics_365_c',data[0]);
                     }
                 }, this),
                 error: _.bind(function (response) {
