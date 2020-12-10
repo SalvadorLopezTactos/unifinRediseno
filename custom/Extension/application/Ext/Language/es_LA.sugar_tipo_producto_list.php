@@ -1,5 +1,5 @@
 <?php
- // created: 2020-12-03 17:33:38
+ // created: 2020-12-09 09:10:40
 
 $app_list_strings['tipo_producto_list']=array (
   '' => '',
