@@ -61,6 +61,20 @@ array (
               ),
               5 => 
               array (
+                'name' => 'negocio_c',
+                'label' => 'LBL_NEGOCIO_C',
+                'enabled' => true,
+                'default' => true,
+              ),
+              6 => 
+              array (
+                'name' => 'producto_financiero_c',
+                'label' => 'LBL_PRODUCTO_FINANCIERO_C',
+                'enabled' => true,
+                'default' => true,
+              ),
+              7 => 
+              array (
                 'name' => 'team_name',
                 'type' => 'teamset',
                 'label' => 'LBL_LIST_TEAM',

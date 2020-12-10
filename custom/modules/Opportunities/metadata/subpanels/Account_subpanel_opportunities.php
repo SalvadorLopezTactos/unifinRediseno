@@ -1,5 +1,5 @@
 <?php
-// created: 2020-08-12 13:18:30
+// created: 2020-12-09 15:09:37
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -14,6 +14,20 @@ $subpanel_layout['list_fields'] = array (
     'type' => 'enum',
     'default' => true,
     'vname' => 'LBL_TIPO_PRODUCTO',
+    'width' => 10,
+  ),
+  'negocio_c' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'vname' => 'LBL_NEGOCIO_C',
+    'width' => 10,
+  ),
+  'producto_financiero_c' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'vname' => 'LBL_PRODUCTO_FINANCIERO_C',
     'width' => 10,
   ),
   'tct_estapa_subetapa_txf_c' => 
