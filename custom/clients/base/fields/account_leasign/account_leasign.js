@@ -59,7 +59,7 @@
 
     if (id!= '' && id != undefined && id!= null) {
       //Forma url de petición
-      var url = app.api.buildURL('ResumenCliente/'+id, null, null, );
+      var url = app.api.buildURL('ResumenCliente/'+id, null, null, {});
       //Ejecuta petición ResumenCliente
       app.api.call('GET', url, {},{
         success: function (data){
