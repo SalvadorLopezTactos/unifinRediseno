@@ -85,7 +85,7 @@
 
         if(this.view.action!="create"){
             if(this.model.get('tipo_producto_c')!=undefined){
-                if(this.model.get('tipo_producto_c')!='1'){ //Tipo 1 = LEASING
+                if(this.model.get('tipo_producto_c')!='1' || (this.model.get('negocio_c')!='5' && this.model.get('producto_financiero_c')!='' && this.model.get('producto_financiero_c')!='0')){ //Tipo 1 = LEASING
                     $('[data-type="opportunities_directores"]').hide();
                 }else{
                     if (this.model.get('tct_etapa_ddw_c')=="SI" && this.model.get('estatus_c')=="") {
