@@ -483,9 +483,9 @@
 															}
 															if(cDireccionFiscal >= 1) {
 																direccion[indice_indicador].valCodigoPostal = CP;
-																direccion[indice_indicador].calle = Calle.trim().toLowerCase();
-																direccion[indice_indicador].numext = Exterior.trim().toLowerCase();
-																direccion[indice_indicador].numint = Interior.trim().toLowerCase();
+																direccion[indice_indicador].calle = Calle.trim();
+																direccion[indice_indicador].numext = Exterior.trim();
+																direccion[indice_indicador].numint = Interior.trim();
 																direccion[indice_indicador].inactivo = 0;
 																
 																//Pais
