@@ -1706,7 +1706,7 @@ SQL;
                 }
 
                 if($opportunidad['producto_financiero_c']=='43') {
-                    $fields['idCotizacion'] = $opportunidad['idcot_bpm_c'];
+                    //$fields['idCotizacion'] = $opportunidad['idcot_bpm_c'];
                     $fields['depositoGarantiaCotizacion'] = $opportunidad['deposito_garantia_c'];
                     $lista = str_replace('^','', $opportunidad['multiactivo_c']);
                     $lista = explode(',', $lista);

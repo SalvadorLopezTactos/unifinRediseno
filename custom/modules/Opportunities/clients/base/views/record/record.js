@@ -240,7 +240,7 @@
     muestraOcultaCampoDirector:function(){
 
         if(this.model.get('tipo_producto_c')!=undefined){
-            if(this.model.get('tipo_producto_c')!='1' ){ //Tipo 1 = LEASING
+            if(this.model.get('tipo_producto_c')!='1' && this.model.get('negocio_c')!='5' && this.model.get('producto_financiero_c')!='' && this.model.get('producto_financiero_c')!='0' ){ //Tipo 1 = LEASING
                 $('[data-type="opportunities_directores"]').hide();
             }else{
                 if (banderaExcluye.check.includes(1)) {
@@ -334,9 +334,7 @@
         {
             this.$(".record-cell[data-name='negocio_c']").hide();
         }
-        if(this.model.get('tipo_producto_c')=='1' && this.model.get('negocio_c')=="5" && (this.model.get('producto_financiero_c')=="0"|| this.model.get('producto_financiero_c')=="")){
-            $('[data-name="opportunities_directores"]').show();
-        }
+
     },
 
     _render: function () {
@@ -2648,11 +2646,13 @@
 
         var id= this.model.get('id');
         var producto=this.model.get('tipo_producto_c');
+        var negocio=this.model.get('negocio_c');
+        var producto_financiero=this.model.get('producto_financiero_c');
         var operacion=this.model.get('tipo_de_operacion_c');
         var status=this.model.get('estatus_c');
 
         //if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA") {
-        if(producto==1 && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0) && status!="K" && operacion=="LINEA_NUEVA")) {
+        if(producto==1 && negocio==5 && (producto_financiero==0 || producto_financiero=="") && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0) && status!="K" && operacion=="LINEA_NUEVA")) {
             app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
                 success: function  (data) {
                     if (data.records.length == 0) {
@@ -2676,11 +2676,13 @@
     notifvobo: function (fields, errors, callback){
         var check=this.model.get('vobo_dir_c');
         var producto= this.model.get('tipo_producto_c');
+        var negocio=this.model.get('negocio_c');
+        var producto_financiero=this.model.get('producto_financiero_c');
         var operacion=this.model.get('tipo_de_operacion_c');
         var chk=this.model.get('ratificacion_incremento_c');
         var status=this.model.get('estatus_c');
         if (chk!=true && status!="K") {
-            if ((check == false || check == undefined) && producto == 1 && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))) {
+            if ((check == false || check == undefined) && producto == 1 && negocio==5 && (producto_financiero==0 || producto_financiero=="") && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))) {
             //if ((check == false || check == undefined) && producto == 1 && operacion == 'LINEA_NUEVA' && banderaExcluye.check.includes(0)) {
                 app.alert.show("Error_vobo", {
                     level: "info",
@@ -3122,7 +3124,7 @@
     controlVistaCamposPrecalificacion:function () {
 
         if(this.model.get('tipo_producto_c')!=undefined){
-            if(this.model.get('tipo_producto_c')!='1' || (this.model.get('tipo_producto_c')=='1' && this.model.get('negocio_c')!="5" && this.model.get('producto_financiero_c')!="0")|| banderaExcluye.check.includes(1)){
+            if((this.model.get('tipo_producto_c')!='1' || (this.model.get('negocio_c')!='5' && this.model.get('producto_financiero_c')!='' && this.model.get('producto_financiero_c')!='0'))|| banderaExcluye.check.includes(1)){
                 $('[data-name="opportunities_directores"]').hide();
                 $('[data-name="vobo_descripcion_txa_c"]').hide();
                 $('[data-name="doc_scoring_chk_c"]').hide();
@@ -3133,7 +3135,6 @@
                     $('[data-name="opportunities_directores"]').attr('style','pointer-events:none');
                     $('[data-name="vobo_descripcion_txa_c"]').attr('style','pointer-events:none');
                     $('[data-name="doc_scoring_chk_c"]').attr('style','pointer-events:none');
-
                 }
 
             }
