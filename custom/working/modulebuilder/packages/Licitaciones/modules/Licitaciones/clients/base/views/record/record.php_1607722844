@@ -163,84 +163,81 @@ array (
             'label' => 'LBL_RECORD_BODY',
             'columns' => 2,
             'placeholders' => true,
-            'newTab' => false,
-            'panelDefault' => 'expanded',
+            'fields' => 
+            array (
+              0 => 'assigned_user_name',
+              1 => 'team_name',
+              2 => 
+              array (
+                'name' => 'tag',
+                'span' => 12,
+              ),
+            ),
+          ),
+          2 => 
+          array (
+            'name' => 'panel_hidden',
+            'label' => 'LBL_SHOW_MORE',
+            'hide' => true,
+            'columns' => 2,
+            'placeholders' => true,
             'fields' => 
             array (
               0 => 
               array (
-                'name' => 'lic_licitaciones_accounts_name',
+                'name' => 'description',
+                'span' => 12,
               ),
               1 => 
               array (
-                'name' => 'monto_total',
-                'related_fields' => 
+                'name' => 'date_modified_by',
+                'readonly' => true,
+                'inline' => true,
+                'type' => 'fieldset',
+                'label' => 'LBL_DATE_MODIFIED',
+                'fields' => 
                 array (
-                  0 => 'currency_id',
-                  1 => 'base_rate',
+                  0 => 
+                  array (
+                    'name' => 'date_modified',
+                  ),
+                  1 => 
+                  array (
+                    'type' => 'label',
+                    'default_value' => 'LBL_BY',
+                  ),
+                  2 => 
+                  array (
+                    'name' => 'modified_by_name',
+                  ),
                 ),
-                'label' => 'LBL_MONTO_TOTAL',
               ),
               2 => 
               array (
-                'name' => 'region',
-                'label' => 'LBL_REGION',
-              ),
-              3 => 
-              array (
-                'name' => 'equipo',
-                'label' => 'LBL_EQUIPO',
-              ),
-              4 => 
-              array (
-                'name' => 'fecha_ultimo_contacto',
-                'label' => 'LBL_FECHA_ULTIMO_CONTACTO',
-              ),
-              5 => 
-              array (
-                'name' => 'descripcion_contrato',
-                'studio' => 'visible',
-                'label' => 'LBL_DESCRIPCION_CONTRATO',
-              ),
-              6 => 
-              array (
-                'name' => 'institucion',
-                'label' => 'LBL_INSTITUCION',
-                'span' => 12,
-              ),
-              7 => 
-              array (
-                'name' => 'fecha_publicacion',
-                'label' => 'LBL_FECHA_PUBLICACION',
-              ),
-              8 => 
-              array (
-                'name' => 'fecha_apertura',
-                'label' => 'LBL_FECHA_APERTURA',
-              ),
-              9 => 
-              array (
-                'name' => 'fecha_inicio_contrato',
-                'label' => 'LBL_FECHA_INICIO_CONTRATO',
-              ),
-              10 => 
-              array (
-                'name' => 'fecha_fin_contrato',
-                'label' => 'LBL_FECHA_FIN_CONTRATO',
-              ),
-              11 => 
-              array (
-                'name' => 'assigned_user_name',
-              ),
-              12 => 
-              array (
+                'name' => 'date_entered_by',
+                'readonly' => true,
+                'inline' => true,
+                'type' => 'fieldset',
+                'label' => 'LBL_DATE_ENTERED',
+                'fields' => 
+                array (
+                  0 => 
+                  array (
+                    'name' => 'date_entered',
+                  ),
+                  1 => 
+                  array (
+                    'type' => 'label',
+                    'default_value' => 'LBL_BY',
+                  ),
+                  2 => 
+                  array (
+                    'name' => 'created_by_name',
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-        'templateMeta' => 
-        array (
-          'useTabs' => false,
         ),
       ),
     ),
