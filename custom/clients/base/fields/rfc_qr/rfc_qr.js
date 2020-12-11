@@ -231,9 +231,9 @@
 						var PathQR=data[0]["path_img_qr"];
 						var Correo = data[0]["Correo electrónico"];
 						var CP = data[0]["CP"];
-						var Calle = data[0]["Nombre de la vialidad"];
-						var Exterior = data[0]["Número exterior"];
-						var Interior = data[0]["Número interior"];
+						var Calle = data[0]["Nombre de la vialidad"].toUpperCase();
+						var Exterior = data[0]["Número exterior"].toUpperCase();
+						var Interior = data[0]["Número interior"].toUpperCase();
 						var Colonia = data[0]["Colonia"];
 						var Municipio = data[0]["Municipio o delegación"];
 						var Estado = data[0]["Entidad Federativa"];
