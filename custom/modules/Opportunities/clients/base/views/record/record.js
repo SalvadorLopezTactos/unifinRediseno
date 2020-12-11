@@ -606,7 +606,7 @@
 
     evaluaCampoSolicitudVobo:function () {
 
-        if(this.model.get('tipo_producto_c')=='1' &&this.model.get('negocio_c')=='5'&&this.model.get('producto_financiero_c')==''&& (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))){
+        if(this.model.get('tipo_producto_c')=='1' &&this.model.get('negocio_c')=='5'&&this.model.get('producto_financiero_c')=='0'&& (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))){
             $('[data-name="vobo_descripcion_txa_c"]').show();
             if(this.model.get('director_notificado_c')){
                 //Se establece como solo lectura el campo
