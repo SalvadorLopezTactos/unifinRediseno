@@ -174,6 +174,7 @@ array (
               3 => 
               array (
                 'name' => 'lic_licitaciones_accounts_name',
+                'label' => 'LBL_LIC_LICITACIONES_ACCOUNTS_FROM_ACCOUNTS_TITLE',
               ),
             ),
           ),
