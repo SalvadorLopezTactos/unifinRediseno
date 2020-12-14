@@ -1,6 +1,6 @@
 <?php
 
-$viewdefs['Calls']['base']['view']['MotivoCancelModal'] = array(
+$viewdefs['Meetings']['base']['view']['MotivoCancelModal'] = array(
      'buttons' => array(
         array(
             'name' => 'cancel_button',

@@ -834,8 +834,9 @@
 	
 	ConfirmCancelar: function(fields, errors, callback) {
 				
-		if ($.isEmptyObject(errors)&& this.model.get('parent_id') != "" && this.model.get('parent_type') == "Leads" && this.model.get('status')=="Held") {
-			if(this.model.get('resultado_c')=='Ilocalizable' || this.model.get('resultado_c')=='No_esta_Interesado' || this.model.get('resultado_c')=='Fuera_de_Perfil'){
+		if ($.isEmptyObject(errors)&& this.model.get('parent_id') != "" && this.model.get('parent_type') == "Leads") {
+			// Cancelar - no esta interesado, NO viable, NO interesado- cita forada,Cancelada por el prospecto no le interesa
+			if(this.model.get('resultado_c')=='2' ||this.model.get('resultado_c')=='18' || this.model.get('resultado_c')=='21' || this.model.get('resultado_c')=='25'){
 				/*************************************************/
 				if (Modernizr.touch) {
 					app.$contentEl.addClass('content-overflow-visible');
@@ -862,7 +863,15 @@
 				this.layout.trigger("app:view:MotivoCancelModal");
 				/**************************************/
 				callback(null, fields, errors);
-			}else if(this.model.get('resultado_c')=='Checklist_expediente' ){
+			}else if(this.model.get('resultado_c')=='4' ||this.model.get('resultado_c')=='5' || this.model.get('resultado_c')=='19' 
+			|| this.model.get('resultado_c')=='6' || this.model.get('resultado_c')=='4' || this.model.get('resultado_c')=='23'){
+				// Está Interesado. Se procede a generar expediente
+				// Está Interesado. Se agendó otra visita
+				// Está interesado. Se agendó otra llamada
+				// Está Interesado. Se recogió información
+				// Se cerró una venta
+				// Se procede a generar expediente
+				// Está interesado solicita cotización para proceder
 				var filter_arguments = {
 					"id": this.model.get('parent_id')
 				};
