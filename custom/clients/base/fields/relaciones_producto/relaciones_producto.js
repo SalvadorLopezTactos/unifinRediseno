@@ -44,11 +44,27 @@
                     if(typeof(rel_product.productoSeleccionado)=="string"){
                         arr_final_rel.push({ "rel": property, "prod": "", 'fncro': "", 'productoFncroList': "" });
                     }else{
-                        if(typeof(posicion)=="number"){
-                            //Eliminando caracteres especiales
+                        if(typeof(posicion)=="number"){//Validación para saber que la función fue llamada manualmente desde el success de api call
                             arr_final_rel.push({ "rel": property, "prod": "", 'fncro': "", 'productoFncroList': rel_product.objectListaProdFinancieros[property] });
                         }else{
-                            arr_final_rel.push({ "rel": property, "prod": "", 'fncro': "", 'productoFncroList': "" });
+                            //Validación para saber que la función se llamó desde el evento change del campo y además el objeto ya viene lleno 
+                            //para mantener los valores previamente seleccionados en la tabla de relaciones por producto
+                            if(!_.isEmpty(rel_product.objectListaProdFinancieros)){
+
+                                if(rel_product.objectListaProdFinancieros[property]==undefined){
+
+                                    arr_final_rel.push({ "rel": property, "prod": "", 'fncro': "", 'productoFncroList': "" });
+
+                                }else{
+
+                                    arr_final_rel.push({ "rel": property, "prod": "", 'fncro': "", 'productoFncroList': rel_product.objectListaProdFinancieros[property] });
+
+                                }
+
+                            }else{
+                                arr_final_rel.push({ "rel": property, "prod": "", 'fncro': "", 'productoFncroList': "" });
+                            }
+                            
                         }
                         
                     }
@@ -56,9 +72,11 @@
                 }
             }
         }
+        /*
         if(listaProdFinanciero !=undefined && typeof(posicion)=="number"){
             arr_final_rel[posicion].productoFncroList=listaProdFinanciero;
         }
+        */
         var jsonCampo = rel_product.actualizaCampo(arr_final_rel);
         console.log(jsonCampo);
         rel_product.model.set('relaciones_producto_c', JSON.stringify(jsonCampo));
@@ -72,9 +90,13 @@
         var campo_json = (rel_product.model.get('relaciones_producto_c') != undefined && rel_product.model.get('relaciones_producto_c') != "") ? rel_product.model.get('relaciones_producto_c') : JSON.stringify([{
             'rel': "",
             'prod': "",
+            'productoList':"",
             'fncro': "",
             'productoFncroList': "",
         }]);
+        if(rel_product.productoSeleccionado.length>0){
+            campo_json=campo_json=JSON.stringify(rel_product.productoSeleccionado);
+        }
         var campo_json = JSON.parse(campo_json);
         //Validación para mostrar las relaciones dependiendo si existe el valor de la relación en la lista relaciones_producto_list
         if (relacion != null) {
@@ -84,20 +106,10 @@
                 var temp_val = "";
                 if (relacion[row].rel != '' && relacion[row].rel != undefined) {
                     for (row_json in campo_json) {
-                        console.log("row_json + campo_json");
-                        console.log(row_json);
-                        console.log(campo_json);
-
-                        console.log("data if");
-                        console.log(relacion[row].rel);
-                        console.log(campo_json[row_json].rel);
-                        console.log(campo_json[row_json].prod);
 
                         if (relacion[row].rel == campo_json[row_json].rel) {
                             flag = true;
                             temp_val = campo_json[row_json];
-                            console.log("temp_val");
-                            console.log(temp_val);
                         }
                     }
 
@@ -105,8 +117,6 @@
                         array_temp.push(temp_val)
                     } else {
                         array_temp.push(relacion[row]);
-                        console.log("relacion[row]");
-                        console.log(relacion[row]);
                     }
                 }
             }
@@ -156,6 +166,13 @@
                     rel_product.objectListaProdFinancieros[rel_clean]=financiero_list;
                     rel_product.producto_financiero_list = financiero_list; //Setea los valores dependientes por tipo de producto a la lista producto_financiero_list
                     console.log(rel_product.producto_financiero_list);
+                    //Valor seleccionado en producto
+                    var selectProducto=$(rel_product.elemento.currentTarget).val();
+                    for (var i = 0; i < selectProducto.length; i++) {
+                        selectProducto[i] = '^' + selectProducto[i] + '^';  //Ciclo para concatenar ^ al Tipo de producto
+                    }
+                    rel_product.productoSeleccionado[rel_product.row.index()].prod = selectProducto.toString();
+
                     rel_product.rel_Productos(financiero_list,rel_product.row.index()); //Ejecuta la funcion de Tipo de Producto ya que se quitaba el valor al momento de seleccionar un producto financiero
 
                     if(!_.isEmpty(rel_product.objectListaProdFinancieros)){
