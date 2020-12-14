@@ -130,9 +130,10 @@ SQL;
             $bean->name = str_replace("PRE - ", "", $bean->name);
         }
         //Establece nombre para pre-solicitud Uniclick por Anfexi
-        if (!empty($bean->idsolicitud_c) && $bean->tipo_operacion_c == 1 && $bean->tipo_producto_c == '8' && $bean->tct_etapa_ddw_c == 'SI') {
+        $available_financiero=array("39","41","50","49","48","51");
+        if (!empty($bean->idsolicitud_c) && $bean->tipo_operacion_c == 1 && in_array($bean->producto_financiero ,$available_financiero) && $bean->tct_etapa_ddw_c == 'SI') {
             $bean->name = "PRE - SOLICITUD " . $numeroDeFolio . " - " . $beanCuenta->name;
-        } elseif ($bean->tipo_producto_c == '8' && $bean->tct_etapa_ddw_c == 'CL') {
+        } elseif (in_array($bean->producto_financiero ,$available_financiero) && $bean->tct_etapa_ddw_c == 'CL') {
             $bean->name = "LC " . $bean->id_linea_credito_c . " - " . $beanCuenta->name;
         }
         /* @Jesus Carrillo
