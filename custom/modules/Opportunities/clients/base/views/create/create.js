@@ -462,7 +462,7 @@
     },
 
     _ValidateAmount: function (fields, errors, callback) {
-        if (parseFloat(this.model.get('monto_c')) <= 0 && this.model.get('tipo_producto_c') != 7) {
+        if (parseFloat(this.model.get('monto_c')) <= 0 && this.model.get('producto_financiero_c') != 40) {
             errors['monto_c'] = errors['monto_c'] || {};
             errors['monto_c'].required = true;
 

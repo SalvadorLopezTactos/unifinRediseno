@@ -29,9 +29,9 @@ $manifest = array (
   'icon' => '',
   'is_uninstallable' => true,
   'name' => 'Licitaciones',
-  'published_date' => '2020-12-03 15:29:08',
+  'published_date' => '2020-12-11 21:39:00',
   'type' => 'module',
-  'version' => 1607009350,
+  'version' => 1607722741,
   'remove_tables' => 'prompt',
 );
 
