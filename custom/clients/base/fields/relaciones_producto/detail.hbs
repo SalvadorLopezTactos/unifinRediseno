@@ -17,7 +17,8 @@
     <thead class="encabezado">
       <tr>
         <th>Relación</th>
-        <th>Productos</th>
+        <th>Tipo de Producto</th>
+        <th>Producto Financiero</th>
       </tr>
     </thead>
     <tbody>
@@ -26,6 +27,9 @@
         <td>{{getUnifinListValue 'relaciones_producto_list' rel}}</td>
         <td>
           {{productoList}}
+        </td>
+        <td>
+          {{prodsFinancieros}}
         </td>
       </tr>
       {{/each}}
