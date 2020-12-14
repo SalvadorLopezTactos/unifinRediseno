@@ -241,13 +241,13 @@
         // console.log(financiero_temp[rowFinanciero.index()].fncro);
 
         cadena_fncro = "";
+        var list_prod_financiero = app.lang.getAppListStrings('producto_financiero_list');
         for (var z = 0; z < selectProdFinanciero_clsc.length; z++) {
-            cadena_fncro += rel_product.producto_financiero_list[selectProdFinanciero_clsc[z]] + ","; //Ciclo para obtener el valor a la lista producto_financiero_list
+            cadena_fncro += list_prod_financiero[selectProdFinanciero_clsc[z]] + ","; //Ciclo para obtener el valor a la lista producto_financiero_list
         }
         console.log("cadena_fncro " + cadena_fncro);
         cadena_fncro = cadena_fncro.slice(0, -1);
-        financiero_temp[rowFinanciero.index()].productoFncroList = cadena_fncro; //Se agrega variable productoFncroList para el valor de la etiqueta y lo muestre en el detail hbs
-        console.log(financiero_temp[rowFinanciero.index()].productoFncroList);
+        financiero_temp[rowFinanciero.index()].prodsFinancieros = cadena_fncro; //Se agrega variable prodsFinancieros para el valor de la etiqueta y lo muestre en el detail hbs
 
         rel_product.model.set('relaciones_producto_c', JSON.stringify(financiero_temp));
     },
