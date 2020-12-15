@@ -435,7 +435,7 @@ class altaLeadServices extends SugarApi
         $bean_Lead->phone_mobile = $dataOrigen['phone_mobile'];
         $bean_Lead->phone_home = $dataOrigen['phone_home'];
         $bean_Lead->phone_work = $dataOrigen['phone_work'];
-        $bean_Lead->detalle_plataforma_c = $dataOrigen['detalle_plataforma'];
+        $bean_Lead->detalle_plataforma_c = $dataOrigen['GLID'];
         $bean_Lead->assigned_user_id = $dataOrigen['assigned_user_id'];
         $bean_Lead->id_landing_c = $dataOrigen['id_landing_c'];
         $bean_Lead->lead_source_c = $dataOrigen['lead_source_c'];
@@ -726,7 +726,7 @@ class altaLeadServices extends SugarApi
         $cliente = '';
 
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Estimado(a) <b> user1 .</b>
-						<br><br>Tu Cliente/Prospecto cliente1 ha dejado sus datos como Lead en una campaña digital. 
+						<br><br>Tu Cliente/Prospecto cliente1 ha dejado sus datos como Lead en una campaña digital.
 						<br><br>Favor de contactarlo para dar el seguimiento adecuado.
 						<br><br>Si tienes alguna duda contacta a:
 						<br><br>Equipo CRM
@@ -786,5 +786,3 @@ class altaLeadServices extends SugarApi
 
 
 }
-
-
