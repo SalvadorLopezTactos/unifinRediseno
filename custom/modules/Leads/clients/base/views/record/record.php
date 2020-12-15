@@ -385,7 +385,11 @@ array (
               array (
                 'name' => 'status_management_c',
                 'label' => 'LBL_STATUS_MANAGEMENT',
-                'span' => 12,
+              ),
+              37 => 
+              array (
+                'name' => 'fecha_asignacion_c',
+                'label' => 'LBL_FECHA_ASIGNACION_C',
               ),
             ),
           ),
