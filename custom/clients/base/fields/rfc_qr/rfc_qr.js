@@ -709,4 +709,12 @@
 		return cadena;
   },
   
+  bindDataChange: function () {
+        this.model.on('change:' + this.name, function () {
+            if (this.action !== 'edit') {
+                this.render();
+            }
+        }, this);
+    },
+  
 })
