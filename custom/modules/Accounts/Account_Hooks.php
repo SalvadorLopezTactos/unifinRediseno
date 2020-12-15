@@ -201,7 +201,7 @@ SQL;
                 $telefono->assigned_user_id = $bean->assigned_user_id;
                 $telefono->team_set_id = $bean->team_set_id;
                 $telefono->team_id = $bean->team_id;
-                $telefono->whatsapp_c = ($a_telefono['tipotelefono']==3 || $a_telefono['tipotelefono']==4) && $a_telefono['whatsapp_c'] == 1 ? 1 : 0;
+                $telefono->whatsapp_c = ($a_telefono['tipotelefono'] == 3 || $a_telefono['tipotelefono'] == 4) && $a_telefono['whatsapp_c'] == 1 ? 1 : 0;
                 $current_id_list[] = $telefono->save();
             }
             //retrieve all related records
@@ -683,18 +683,18 @@ SQL;
 
     public function textToUppperCase($bean = null, $event = null, $args = null)
     {
-      if ($_REQUEST['module'] != 'Import') {
-        foreach ($bean as $field => $value) {
-          if ($bean->field_defs[$field]['type'] == 'varchar' && $field != 'encodedkey_mambu_c' && $field != 'path_img_qr_c' && $field != 'salesforce_id_c') {
-               $value = mb_strtoupper($value, "UTF-8");
-               $bean->$field = $value;
-          }
-          if ($bean->field_defs[$field]['name'] == 'name') {
-               $value = mb_strtoupper($value, "UTF-8");
-               $bean->$field = $value;
-          }
+        if ($_REQUEST['module'] != 'Import') {
+            foreach ($bean as $field => $value) {
+                if ($bean->field_defs[$field]['type'] == 'varchar' && $field != 'encodedkey_mambu_c' && $field != 'path_img_qr_c' && $field != 'salesforce_id_c') {
+                    $value = mb_strtoupper($value, "UTF-8");
+                    $bean->$field = $value;
+                }
+                if ($bean->field_defs[$field]['name'] == 'name') {
+                    $value = mb_strtoupper($value, "UTF-8");
+                    $bean->$field = $value;
+                }
+            }
         }
-      }
     }
 
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/19/2015 Description: Logic hook to call WS Actualiza persona en UNICS*/
@@ -1254,7 +1254,7 @@ where rfc_c = '{$bean->rfc_c}' and
 
             $module = 'uni_Productos';
             $key_productos = array('1', '4', '3', '6', '8', '10');
-            $name_productos = array('-LEASING', '-FACTORAJE', '-CRÉDITO AUTOMOTRIZ', '-FLEET', '-UNICLICK',  '-SEGUROS');
+            $name_productos = array('-LEASING', '-FACTORAJE', '-CRÉDITO AUTOMOTRIZ', '-FLEET', '-UNICLICK', '-SEGUROS');
             $count = count($name_productos);
             $current_prod = null;
             $fechaAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
@@ -1394,6 +1394,8 @@ where rfc_c = '{$bean->rfc_c}' and
 
     public function set_account_mambu($bean = null, $event = null, $args = null)
     {
+        $GLOBALS['log']->fatal('--------------MAMBU INICIA-----------------');
+
         global $sugar_config, $app_list_strings;
         $bank = $app_list_strings['banco_list'];
         //Cliente con Línea Vigente: 3,18
@@ -1455,6 +1457,40 @@ where rfc_c = '{$bean->rfc_c}' and
             if (count($array_cta_bancaria) > 0) {
                 $body['_cuentas_bancarias_clientes'] = $array_cta_bancaria;
             }
+            //Obtener solicitudes par identificar si existe alguna con Unifactor
+            $es_unificator = false;
+            if ($bean->load_relationship('opportunities')) {
+                //Fetch related beans
+                $solicitudesFinan = $bean->opportunities->getBeans();
+                if (!empty($solicitudesFinan)) {
+                    foreach ($solicitudesFinan as $sfinan) {
+                        if ($sfinan->producto_financiero_c == '50') {
+                            $es_unificator = true;
+                        }
+                    }
+                }
+            }
+
+            if ($es_unificator) {
+                $body_relacionados = array();
+                if ($bean->load_relationship('rel_relaciones_accounts')) {
+                    //Fetch related beans
+                    $relaciones = $bean->rel_relaciones_accounts->getBeans();
+                    if (!empty($relaciones)) {
+                        foreach ($relaciones as $rel) {
+                            $beanCuentaEmail = BeanFactory::retrieveBean('Accounts', $rel->account_id1_c, array('disable_row_level_security' => true));
+                            $item_relacionado=array(
+                                "_guid_relacionado_cl"=> $rel->account_id1_c,
+                                "_correo_relacionado_cl" => $beanCuentaEmail->email1,
+                                "_nombre_relacionado_cl" =>$rel->name,
+                                "_figura_relacionado_cl" => str_replace("^","",$rel->relaciones_activas)
+                            );
+                            array_push($body_relacionados,$item_relacionado);
+                        }
+                    }
+                }
+                $body['_relacionados_cliente'] = $body_relacionados;
+            }
             $GLOBALS['log']->fatal(json_encode($body));
             $callApi = new UnifinAPI();
             $resultado = $callApi->postMambu($url, $body, $auth_encode);
@@ -1470,7 +1506,7 @@ where rfc_c = '{$bean->rfc_c}' and
                 if (!empty($solicitudes)) {
                     foreach ($solicitudes as $sol) {
                         //Disparar integración hacia mambú de solicitudes para estatus AUTORIZADA
-                        if ($sol->tipo_producto_c == '8' && $sol->tct_id_mambu_c == "" && $sol->estatus_c == 'N') {
+                        if ($sol->tipo_producto_c == '8' && $sol->tct_id_mambu_c == "" && $sol->estatus_c == 'N') {## cambiar por pPF
                             $sol->save();
                         }
                     }
@@ -1742,22 +1778,22 @@ where rfc_c = '{$bean->rfc_c}' and
 
         if (($txt_empleados > 0) && (!empty($txt_empleados))) {
 
-            if (($txt_empleados > 0) && ($txt_empleados <=10)) {
+            if (($txt_empleados > 0) && ($txt_empleados <= 10)) {
                 $bean_account->empleados_c = '0a10';
             }
-            if (($txt_empleados > 10) && ($txt_empleados <=50)) {
+            if (($txt_empleados > 10) && ($txt_empleados <= 50)) {
                 $bean_account->empleados_c = '11a50';
             }
-            if (($txt_empleados > 50) && ($txt_empleados <=100)) {
+            if (($txt_empleados > 50) && ($txt_empleados <= 100)) {
                 $bean_account->empleados_c = '51a100';
             }
-            if (($txt_empleados > 100) && ($txt_empleados <=250)) {
+            if (($txt_empleados > 100) && ($txt_empleados <= 250)) {
                 $bean_account->empleados_c = '101a250';
             }
-            if (($txt_empleados > 250) && ($txt_empleados <=500)) {
+            if (($txt_empleados > 250) && ($txt_empleados <= 500)) {
                 $bean_account->empleados_c = '251a500';
             }
-            if (($txt_empleados > 500) && ($txt_empleados <=1000)) {
+            if (($txt_empleados > 500) && ($txt_empleados <= 1000)) {
                 $bean_account->empleados_c = '501a1000';
             }
             if ($txt_empleados > 1000) {

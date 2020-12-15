@@ -11,7 +11,7 @@ class ProductUnilease
     {
         global $sugar_config,$db;
 
-        if ($bean->tipo_producto_c == '9' && $bean->estatus_c=="N" && $bean->unilease_integracion_c==0) {
+        if ($bean->producto_financiero_c == '41' && $bean->estatus_c=="N" && $bean->unilease_integracion_c==0) {
 
             $GLOBALS['log']->fatal("Inicia Integracion UNILEASE");
             $url=$sugar_config['url_uni2_unilease'];
