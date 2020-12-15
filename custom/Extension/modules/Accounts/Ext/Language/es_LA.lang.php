@@ -339,3 +339,5 @@ $mod_strings['LBL_PROMOTORRM_C'] = 'Asesor RM';
 $mod_strings['LBL_MULTILINEA_C'] = 'Multilínea';
 $mod_strings['LBL_RECORDVIEW_PANEL21'] = 'Clasificación Sectorial';
 $mod_strings['LBL_CONTROL_DYNAMICS_365_C'] = 'Control Dynamics 365';
+$mod_strings['LBL_CONTROL_CPP_CHK'] = 'Control Cuentas por pagar';
+$mod_strings['LBL_ID_CPP_365_CHK'] = 'ID Cuentas por pagar 365';

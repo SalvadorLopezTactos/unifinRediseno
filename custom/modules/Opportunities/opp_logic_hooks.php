@@ -31,7 +31,7 @@ class OpportunityLogic
             global $db;
             $cliente = $bean->account_id;
             $tipo = $bean->tipo_producto_c;
-
+$FINACIERO=$bean->producto_financiero_c;
 
             $beanCuenta = BeanFactory::retrieveBean('Accounts', $cliente, array('disable_row_level_security' => true));
 
@@ -54,9 +54,9 @@ SQL;
             if ($respuesta == 0 || $respuesta == false) {
 
                 $query = "select count(*) as total from opportunities a, opportunities_cstm b, accounts_opportunities c
-     where a.id = b.id_c and a.id = c.opportunity_id and a.deleted = 0 and c.account_id = '$cliente' 
-     and b.tct_etapa_ddw_c = 'SI' and isnull(b.estatus_c) and b.tipo_producto_c = '$tipo'";
-
+     where a.id = b.id_c and a.id = c.opportunity_id and a.deleted = 0 and c.account_id = '$cliente'
+     and b.tct_etapa_ddw_c = 'SI' and isnull(b.estatus_c) and b.tipo_producto_c = '$tipo' and b.producto_financiero_c='$FINACIERO'";
+              
                 $result = $db->query($query);
                 $row = $db->fetchByAssoc($result);
                 $count = $row['total'];
@@ -130,9 +130,10 @@ SQL;
             $bean->name = str_replace("PRE - ", "", $bean->name);
         }
         //Establece nombre para pre-solicitud Uniclick por Anfexi
-        if (!empty($bean->idsolicitud_c) && $bean->tipo_operacion_c == 1 && $bean->tipo_producto_c == '8' && $bean->tct_etapa_ddw_c == 'SI') {
+        $available_financiero=array("39","41","50","49","48","51");
+        if (!empty($bean->idsolicitud_c) && $bean->tipo_operacion_c == 1 && in_array($bean->producto_financiero ,$available_financiero) && $bean->tct_etapa_ddw_c == 'SI') {
             $bean->name = "PRE - SOLICITUD " . $numeroDeFolio . " - " . $beanCuenta->name;
-        } elseif ($bean->tipo_producto_c == '8' && $bean->tct_etapa_ddw_c == 'CL') {
+        } elseif (in_array($bean->producto_financiero ,$available_financiero) && $bean->tct_etapa_ddw_c == 'CL') {
             $bean->name = "LC " . $bean->id_linea_credito_c . " - " . $beanCuenta->name;
         }
         /* @Jesus Carrillo
@@ -235,6 +236,7 @@ SQL;
         $generaSolicitud = ($bean->tipo_producto_c == '3' || $bean->producto_financiero_c == '40' || ($bean->tipo_de_operacion_c == 'RATIFICACION_INCREMENTO' && $bean->tipo_producto_c != '1')) ? true : $generaSolicitud;
         $generaSolicitud = ($bean->tipo_de_operacion_c == 'RATIFICACION_INCREMENTO' && $bean->tipo_producto_c == '1' && $response_exluye == 1) ? true : $generaSolicitud;
         $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && $bean->tipo_producto_c == '1' && $response_exluye == 1) ? true : $generaSolicitud;
+        $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && $bean->producto_financiero_c!="0" &&$bean->producto_financiero_c!="") ? true : $generaSolicitud;
 
         /*$GLOBALS['log']->fatal('valor Genera Solicitud JG: ' . $generaSolicitud);
         $GLOBALS['log']->fatal('Id process JG: ' . $bean->id_process_c);
@@ -303,11 +305,11 @@ SQL;
                               SET id_process_c =  '$process_id'
                               WHERE id_c = '{$bean->id}'";
                     $queryResult = $db->query($query);
-                    /*Preguntar sobre el tipo de producto Leasing para la creacion de SOS
+                    /*Preguntar sobre el tipo de producto Leasing  y producto financiero  para la creacion de SOS
                       Línea con monto mayor/igual a 7.5 millones & Línea Leasing con id proceso
                     */
                     //$GLOBALS['log']->fatal('if para sos ' .$bean->id_process_c);
-                    if ($bean->tipo_producto_c == 1 && $bean->monto_c >= 7500000 && !empty($bean->id_process_c)) {
+                    if ($bean->tipo_producto_c == 1 && ($bean->producto_financiero_c == 0 ||$bean->producto_financiero_c == "") && $bean->monto_c >= 7500000 && !empty($bean->id_process_c)) {
                         $GLOBALS['log']->fatal('Entra if para sos ' );
 
                         //Manda a llamar a la funcion solicitudSOS para la generacion de la copia de la linea SOS con Leasing
@@ -1055,9 +1057,15 @@ SQL;
         $cliente = $bean->account_id;
         //Evalua cambio en etapa o subetapa
         if ($bean->fetched_row['estatus_c'] != $subetapa || $bean->fetched_row['tct_etapa_ddw_c'] != $etapa) {
+            //Actualiza producto uniclick
+            if($bean->producto_financiero_c == '39' || $bean->producto_financiero_c == '41' || $bean->producto_financiero_c == '48' || $bean->producto_financiero_c == '49' || $bean->producto_financiero_c == '50' || $bean->producto_financiero_c == '51') $producto = 8;
             //($tipo=null, $subtipo=null, $idCuenta=null, $tipoProducto=null)
             //Actualiza en Solicitud Inicial y actualiza campos con valor Prospecto Interesado: 2,7
             $GLOBALS['log']->fatal('Actualiza tipo de Cuenta para producto: ' . $producto);
+            if($bean->negocio_c==10)
+            {
+                $producto=8;
+            }
             if ($etapa == "SI" && $bean->fetched_row['tct_etapa_ddw_c'] != $etapa) {
                 $GLOBALS['log']->fatal('Prospecto Interesado');
                 $this->actualizaTipoCuenta('2', '7', $cliente, $producto);
@@ -1083,7 +1091,6 @@ SQL;
                 $this->actualizaTipoCuenta('3', '18', $cliente, $producto);
                 $bean->tipo_operacion_c = '2';
             }
-
         }
     }
 
@@ -1109,6 +1116,7 @@ SQL;
             $oportunidadSOS->tct_etapa_ddw_c = "P";
             $oportunidadSOS->estatus_c = "PE";
             $oportunidadSOS->tipo_producto_c = 2; # Se manda Credito Simple
+            $oportunidadSOS->negocio_c = 2; # Se manda Negocio Credito Simple
             $oportunidadSOS->producto_financiero_c = 40; # Se manda Credito SOS
             $oportunidadSOS->monto_c = 0;
             $oportunidadSOS->amount = 0;
@@ -1172,28 +1180,28 @@ SQL;
         }
     }
 
-    function actualizaTipoCuenta($tipo = null, $subtipo = null, $idCuenta = null, $tipoProducto = null)
-    {
-        //Valuda cuenta Asociada y producto
-        if ($idCuenta && $tipoProducto) {
-            //Recupera cuenta
-            $beanAccount = BeanFactory::getBean('Accounts', $idCuenta);
-            //Recupera productos y actualiza Tipo y subtipo
-            if ($beanAccount->load_relationship('accounts_uni_productos_1')) {
-                $relateProducts = $beanAccount->accounts_uni_productos_1->getBeans($beanAccount->id, array('disable_row_level_security' => true));
-                //Recupera valores
-                $tipoList = $app_list_strings['tipo_registro_cuenta_list'];
-                $subtipoList = $app_list_strings['subtipo_registro_cuenta_list'];
-                $tipoSubtipo = mb_strtoupper(trim($tipoList[$tipo] . ' ' . $subtipoList[$subtipo]), 'UTF-8');
-                //Itera productos recuperados
-                foreach ($relateProducts as $product) {
-                    if ($tipoProducto == $product->tipo_producto) {
-                        //Actualiza tipo y subtipo de producto
-                        $product->tipo_cuenta = $tipo;
-                        $product->subtipo_cuenta = $subtipo;
-                        $product->tipo_subtipo_cuenta = $tipoSubtipo;
-                        $product->save();
-                    }
+function actualizaTipoCuenta($tipo=null, $subtipo=null, $idCuenta=null, $tipoProducto=null)
+        {
+            //Valuda cuenta Asociada y producto
+      		  if($idCuenta && $tipoProducto){
+                //Recupera cuenta
+          		  $beanAccount = BeanFactory::getBean('Accounts', $idCuenta);
+                //Recupera productos y actualiza Tipo y subtipo
+                if ($beanAccount->load_relationship('accounts_uni_productos_1')) {
+                    $relateProducts = $beanAccount->accounts_uni_productos_1->getBeans($beanAccount->id,array('disable_row_level_security' => true));
+                    //Recupera valores
+                    $tipoList = $app_list_strings['tipo_registro_cuenta_list'];
+                    $subtipoList = $app_list_strings['subtipo_registro_cuenta_list'];
+                    $tipoSubtipo = mb_strtoupper(trim($tipoList[$tipo].' '.$subtipoList[$subtipo]),'UTF-8');
+                    //Itera productos recuperados
+                    foreach ($relateProducts as $product) {
+                        if ($tipoProducto == $product->tipo_producto && (($product->tipo_cuenta!='3' && $product->subtipo_cuenta!=$subtipo ) || ($subtipo=='18')) ) {
+                            //Actualiza tipo y subtipo de producto
+                            $product->tipo_cuenta = $tipo;
+                            $product->subtipo_cuenta = $subtipo;
+                            $product->tipo_subtipo_cuenta = $tipoSubtipo;
+                            $product->save();
+                        }
                 }
             }
         }

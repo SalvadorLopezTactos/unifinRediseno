@@ -29,14 +29,14 @@ array (
               'click' => 'button:btn_rfc:click',
             ),
           ),
-          2 =>
+          2 => 
           array (
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
             'name' => 'save_button',
             'label' => 'LBL_SAVE_BUTTON_LABEL',
             'css_class' => 'btn btn-primary',
-            'showOn' => 'edit', 
+            'showOn' => 'edit',
             'acl_action' => 'edit',
           ),
           3 => 
@@ -223,8 +223,8 @@ array (
                 'studio' => 'visible',
                 'label' => 'LBL_ACCOUNT_LEASING',
                 'readonly' => true,
-                'span' => 12,
                 'dismiss_label' => true,
+                'span' => 12,
               ),
             ),
           ),
@@ -246,6 +246,8 @@ array (
               ),
               1 => 
               array (
+                'name' => 'id_cpp_365_chk_c',
+                'label' => 'LBL_ID_CPP_365_CHK',
               ),
               2 => 
               array (
@@ -260,6 +262,7 @@ array (
               array (
                 'name' => 'rfc_qr',
                 'label' => 'LBL_RFC_QR',
+                'dismiss_label' => true,
                 'studio' => 'visible',
                 'span' => 12,
               ),
@@ -346,8 +349,8 @@ array (
                 'name' => 'cuenta_productos',
                 'label' => 'LBL_CUENTA_PRODUCTOS',
                 'studio' => 'visible',
-                'span' => 12,
                 'dismiss_label' => true,
+                'span' => 12,
               ),
             ),
           ),
@@ -367,8 +370,8 @@ array (
                 'name' => 'account_uni_productos',
                 'studio' => 'visible',
                 'label' => 'LBL_ACCOUNT_UNI_PRODUTOS',
-                'span' => 12,
                 'dismiss_label' => true,
+                'span' => 12,
               ),
             ),
           ),
@@ -599,8 +602,8 @@ array (
               array (
                 'name' => 'rfc_c',
                 'label' => 'LBL_RFC',
-              ),   
-			  13 => 
+              ),
+              13 => 
               array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',

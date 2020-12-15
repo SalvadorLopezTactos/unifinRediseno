@@ -145,6 +145,7 @@
         this.model.on('sync', this.autorizapre, this);
         this.model.on('change:estatus_c', this.refrescaPipeLine, this);
 
+
     },
 
     fulminantcolor: function () {
@@ -239,7 +240,7 @@
     muestraOcultaCampoDirector:function(){
 
         if(this.model.get('tipo_producto_c')!=undefined){
-            if(this.model.get('tipo_producto_c')!='1'){ //Tipo 1 = LEASING
+            if(this.model.get('tipo_producto_c')!='1' && this.model.get('negocio_c')!='5' && this.model.get('producto_financiero_c')!='' && this.model.get('producto_financiero_c')!='0' ){ //Tipo 1 = LEASING
                 $('[data-type="opportunities_directores"]').hide();
             }else{
                 if (banderaExcluye.check.includes(1)) {
@@ -329,6 +330,11 @@
         {
             this.$(".record-cell[data-name='producto_financiero_c']").hide();
         }
+        if(this.model.get('negocio_c')=="" || this.model.get('negocio_c')==0)
+        {
+            this.$(".record-cell[data-name='negocio_c']").hide();
+        }
+
     },
 
     _render: function () {
@@ -592,11 +598,13 @@
         this.$(".field-label[data-name='pipeline_opp']").remove();
         this.$(".record-cell[data-name='blank_space']").hide();
         this.$('[data-name="producto_financiero_c"]').attr('style', 'pointer-events:none');
+        this.$('[data-name="negocio_c"]').attr('style', 'pointer-events:none');
+
     },
 
     evaluaCampoSolicitudVobo:function () {
 
-        if(this.model.get('tipo_producto_c')=='1' && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))){
+        if(this.model.get('tipo_producto_c')=='1' &&this.model.get('negocio_c')=='5'&&this.model.get('producto_financiero_c')=='0'&& (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))){
             $('[data-name="vobo_descripcion_txa_c"]').show();
             if(this.model.get('director_notificado_c')){
                 //Se establece como solo lectura el campo
@@ -708,9 +716,10 @@
             producto = "Crédito Automotriz";
         }
         //Recupera cuenta asociada
+        var producto_financiero = this.model.get('producto_financiero_c');
         var cuentaId = this.model.get('account_id');
         var faltantes = "";
-        if ((cuentaId != "" || cuentaId != null) && this.model.get('tct_oportunidad_perdida_chk_c') != true && this.model.get('tct_etapa_ddw_c') == 'SI' && this.model.get('tipo_producto_c') != "6" && this.model.get('tipo_producto_c') != "8" && this.model.get('tipo_producto_c') != "9") {
+        if ((cuentaId != "" || cuentaId != null) && this.model.get('tct_oportunidad_perdida_chk_c') != true && this.model.get('tct_etapa_ddw_c') == 'SI' && producto!='' && producto_financiero=='0' && producto_financiero!= undefined) {
 
             app.api.call('GET', app.api.buildURL('Accounts/' + cuentaId), null, {
                 success: _.bind(function (cuenta) {
@@ -1277,7 +1286,7 @@
 
     condicionesFinancierasCheck: function (fields, errors, callback) {
         if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
-            if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7) {
+            if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && this.model.get("producto_financiero_c") != 43) {
                 if (solicitud_cf.oFinanciera.condicion.length == 0) {
                     errors[$(".addCondicionFinanciera")] = errors['condiciones_financieras'] || {};
                     errors[$(".addCondicionFinanciera")].required = true;
@@ -1298,7 +1307,7 @@
 
     condicionesFinancierasIncrementoCheck: function(fields, errors, callback) {
         if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
-            if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 7) {
+            if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 7 ) {
                 if (contRI.oFinancieraRI.ratificacion.length == 0) {
                     // console.log("contRI = 0");
                     errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};
@@ -2423,7 +2432,6 @@
             this.$("div.record-label[data-name='ri_porcentaje_renta_inicial_c']").text("% Renta Inicial Incremento/Ratificaci\u00F3n");
             this.$("div.record-label[data-name='porcentaje_renta_inicial_c']").text("Porcentaje Renta Inicial");
         }
-
         //Se agrega condición para ocultar campo que no pertenecen a Fleet
         if (this.model.get('tipo_producto_c') == '6' || this.model.get('tipo_producto_c') == '7') {
 
@@ -2436,6 +2444,10 @@
             this.$('[data-name="porciento_ri_c"]').hide();
 
         }
+        //Valida la solicitud que sea de tipo CREDITO ESTRUCTURADO y oculta condiciones financieras
+        if (this.model.get('producto_financiero_c') == '43') {
+            this.$('div[data-name=condiciones_financieras]').hide();
+        }
         //Valida la solicitud que sea de tipo SOS y oculta campos
         if (this.model.get('tipo_producto_c') == '7') {
             this.$('div[data-name=condiciones_financieras]').hide();
@@ -2443,7 +2455,6 @@
             this.$('div[data-name="condiciones_financieras_incremento_ratificacion"]').hide();
             this.$("[data-name='monto_ratificacion_increment_c']").attr('style', 'pointer-events:none');
         }
-
         //Se habilitan acciones existentes en render
         //no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
         if (this.model.get('tct_etapa_ddw_c') == 'SI' || this.model.get('tct_etapa_ddw_c') == 'P') {
@@ -2451,19 +2462,16 @@
         } else {
             this.$('div[data-panelname=LBL_RECORDVIEW_PANEL1]').hide();
         }
-
         if (this.model.get('tipo_operacion_c') == '2') {
             this.$('div[data-name=plazo_ratificado_incremento_c]').show();
         } else {
             this.$('div[data-name=plazo_ratificado_incremento_c]').hide();
         }
-
         if (this.model.get('tipo_operacion_c') != '3') {
             //* Quitamos los campos Vendedor y Comisión
             this.$('div[data-name=opportunities_ag_vendedores_1_name]').hide();
             this.$('div[data-name=comision_c]').hide();
         }
-
         if (this.model.get('ratificacion_incremento_c') == false) {
             //Oculta campos para condiciones financieras
             this.$('div[data-name=plazo_ratificado_incremento_c]').hide();
@@ -2638,11 +2646,13 @@
 
         var id= this.model.get('id');
         var producto=this.model.get('tipo_producto_c');
+        var negocio=this.model.get('negocio_c');
+        var producto_financiero=this.model.get('producto_financiero_c');
         var operacion=this.model.get('tipo_de_operacion_c');
         var status=this.model.get('estatus_c');
 
         //if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA") {
-        if(producto==1 && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0) && status!="K" && operacion=="LINEA_NUEVA")) {
+        if(producto==1 && negocio==5 && (producto_financiero==0 || producto_financiero=="") && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0) && status!="K" && operacion=="LINEA_NUEVA")) {
             app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
                 success: function  (data) {
                     if (data.records.length == 0) {
@@ -2666,11 +2676,13 @@
     notifvobo: function (fields, errors, callback){
         var check=this.model.get('vobo_dir_c');
         var producto= this.model.get('tipo_producto_c');
+        var negocio=this.model.get('negocio_c');
+        var producto_financiero=this.model.get('producto_financiero_c');
         var operacion=this.model.get('tipo_de_operacion_c');
         var chk=this.model.get('ratificacion_incremento_c');
         var status=this.model.get('estatus_c');
         if (chk!=true && status!="K") {
-            if ((check == false || check == undefined) && producto == 1 && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))) {
+            if ((check == false || check == undefined) && producto == 1 && negocio==5 && (producto_financiero==0 || producto_financiero=="") && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))) {
             //if ((check == false || check == undefined) && producto == 1 && operacion == 'LINEA_NUEVA' && banderaExcluye.check.includes(0)) {
                 app.alert.show("Error_vobo", {
                     level: "info",
@@ -3112,7 +3124,7 @@
     controlVistaCamposPrecalificacion:function () {
 
         if(this.model.get('tipo_producto_c')!=undefined){
-            if(this.model.get('tipo_producto_c')!='1' || banderaExcluye.check.includes(1)){
+            if((this.model.get('tipo_producto_c')!='1' || (this.model.get('negocio_c')!='5' && this.model.get('producto_financiero_c')!='' && this.model.get('producto_financiero_c')!='0'))|| banderaExcluye.check.includes(1)){
                 $('[data-name="opportunities_directores"]').hide();
                 $('[data-name="vobo_descripcion_txa_c"]').hide();
                 $('[data-name="doc_scoring_chk_c"]').hide();
@@ -3123,7 +3135,6 @@
                     $('[data-name="opportunities_directores"]').attr('style','pointer-events:none');
                     $('[data-name="vobo_descripcion_txa_c"]').attr('style','pointer-events:none');
                     $('[data-name="doc_scoring_chk_c"]').attr('style','pointer-events:none');
-
                 }
 
             }

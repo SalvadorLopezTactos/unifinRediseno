@@ -1227,6 +1227,7 @@
     updateValueCalle: function(evt) {
         //Recupera valor
         calle = this.$('.newCalle').val();
+		calle = calle.toUpperCase();
         //Limipa borde
         this.$('.newCalle').css('border-color', '');
         //Actualiza modelo
@@ -1236,6 +1237,7 @@
     updateValueNumExt: function(evt) {
         //Recupera valor
         numExt = this.$('.newNumExt').val();
+		numExt = numExt.toUpperCase();
         //Limpia borde
         this.$('.newNumExt').css('border-color', '');
         //Actualiza modelo
@@ -1245,6 +1247,7 @@
     updateValueNumInt: function(evt) {
         //Recupera valor
         numInt = this.$('.newNumInt').val();
+		numInt = numInt.toUpperCase();
         //Actualiza modelo
         this.nuevaDireccion.numint = numInt;
     },
@@ -1316,6 +1319,7 @@
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
         var calle = input.val();
+		calle = calle.toUpperCase();
         //Actualiza modelo
         this.oDirecciones.direccion[index].calle = calle;
     },
@@ -1326,6 +1330,7 @@
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
         var numExt = input.val();
+		numExt = numExt.toUpperCase();
         //Actualiza modelo
         this.oDirecciones.direccion[index].numext = numExt;
     },
@@ -1340,6 +1345,7 @@
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
         var numInt = input.val();
+		numInt = numInt.toUpperCase();
         //Actualiza modelo
         this.oDirecciones.direccion[index].numint = numInt;
     },

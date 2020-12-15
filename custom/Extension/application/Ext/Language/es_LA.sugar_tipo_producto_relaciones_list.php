@@ -3,5 +3,6 @@
 
 $app_list_strings['tipo_producto_relaciones_list']=array (
   '' => '',
+  4 => 'FACTORAJE',
   8 => 'UNICLICK',
 );

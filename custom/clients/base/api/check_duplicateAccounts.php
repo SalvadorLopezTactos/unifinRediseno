@@ -57,7 +57,7 @@ class check_duplicateAccounts extends SugarApi
             if ($count == 0) {
 
                 $responsMeeting = $this->getMeetingsUser($bean);
-                
+
                 $requeridos = $this->validaRequeridos($bean);
 
                 if (($responsMeeting['status'] != "stop" && !empty($responsMeeting['data'])) && $requeridos == "") {
@@ -184,7 +184,7 @@ SITE;
 
         $bean_account->origen_cuenta_c = $bean_Leads->origen_c;
         $bean_account->detalle_origen_c = $bean_Leads->detalle_origen_c;
-
+        $bean_account->prospeccion_propia_c = $bean_Leads->prospeccion_propia_c;
         $bean_account->user_id3_c = $bean_Leads->user_id1_c; // Agente telefonico
         $bean_account->user_id4_c = $bean_Leads->user_id_c; // ¿Que Asesor?
         $bean_account->medio_detalle_origen_c = $bean_Leads->medio_digital_c;
