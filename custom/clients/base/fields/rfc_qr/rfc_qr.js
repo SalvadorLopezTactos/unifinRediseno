@@ -361,6 +361,7 @@
 													}else{
 														arrcorreos = [{email_address: Correo, primary_address: true}];
 														contexto_cuenta.cambio_previo_mail = '1';
+														self.render();
 													}
 													self.model.set('email', arrcorreos);
 													if(contexto_cuenta.cambioEdit != undefined && contexto_cuenta.cambioEdit == 1){
@@ -708,5 +709,13 @@
 		cadena = cadena.replace("\n", "");
 		return cadena;
   },
+  
+  bindDataChange: function () {
+        this.model.on('change:' + this.name, function () {
+            if (this.action !== 'edit') {
+                this.render();
+            }
+        }, this);
+    },
   
 })
