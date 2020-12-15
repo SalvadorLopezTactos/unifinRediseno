@@ -131,16 +131,17 @@ SQL;
         }
         //Establece nombre para pre-solicitud Uniclick por Anfexi
         $available_financiero=array("39","41","50","49","48","51");
-        if (!empty($bean->idsolicitud_c) && $bean->tipo_operacion_c == 1 && in_array($bean->producto_financiero ,$available_financiero) && $bean->tct_etapa_ddw_c == 'SI') {
+        if (!empty($bean->idsolicitud_c) && $bean->tipo_operacion_c == 1 && in_array($bean->producto_financiero_c ,$available_financiero) && $bean->tct_etapa_ddw_c == 'SI') {
             $bean->name = "PRE - SOLICITUD " . $numeroDeFolio . " - " . $beanCuenta->name;
-        } elseif (in_array($bean->producto_financiero ,$available_financiero) && $bean->tct_etapa_ddw_c == 'CL') {
+        } elseif (in_array($bean->producto_financiero_c ,$available_financiero) && $bean->tct_etapa_ddw_c == 'CL') {
             $bean->name = "LC " . $bean->id_linea_credito_c . " - " . $beanCuenta->name;
         }
         /* @Jesus Carrillo
          * Convertir a prospecto  interesado , si la cuenta inicial es prospecto
          */
         //$beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
-        if (($beanCuenta->tipo_registro_cuenta_c == '2' && $beanCuenta->subtipo_registro_cuenta_c == '2') || ($beanCuenta->tipo_registro_cuenta_c == '1' && $bean->tipo_producto_c == '8')) { // Prospecto - 2  // Contactado - 2
+        if (($beanCuenta->tipo_registro_cuenta_c == '2' && $beanCuenta->subtipo_registro_cuenta_c == '2') || ($beanCuenta->tipo_registro_cuenta_c == '1'
+                && in_array($bean->producto_financiero_c ,$available_financiero))) { // Prospecto - 2  // Contactado - 2
             $beanCuenta->tipo_registro_cuenta_c = '2'; //Interesado - 7
             $beanCuenta->subtipo_registro_cuenta_c = '7'; //Interesado - 7
             $beanCuenta->save();
@@ -291,9 +292,9 @@ SQL;
                 }
                 $row = $bean->db->fetchByAssoc($queryResult);
                 //En caso de obtener Producto Unilease, se manda la petición como si fuera Producto Leasing id=1
-                if ($row['tipo_producto_c'] == '9') {
+                /*if ($row['tipo_producto_c'] == '9') {
                     $row['tipo_producto_c'] = '1';
-                }
+                }*/
                 $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : ** JSR ** DATOS DE LA OPERACION " . print_r($row, true));
                 $callApi = new UnifinAPI();
                 $solicitudCreditoResultado = $callApi->obtenSolicitudCredito($row);
@@ -315,7 +316,8 @@ SQL;
                         //Manda a llamar a la funcion solicitudSOS para la generacion de la copia de la linea SOS con Leasing
                         OpportunityLogic::solicitudSOS($bean);
                     }
-                    if ($bean->id_process_c != 0 && $bean->id_process_c != null && $bean->id_process_c != "-1" && $bean->id_process_c != "" && $bean->tipo_producto_c != 4) {
+                    if ($bean->id_process_c != 0 && $bean->id_process_c != null && $bean->id_process_c != "-1" && $bean->id_process_c != ""
+                        && $bean->tipo_producto_c != 4) {
                         $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . "  <" . $current_user->user_name . "> : Despues de generar Process debe actualizarse la lista de condiciones financieras ");
                         $callApi->actualizaSolicitudCredito($bean);
                     }

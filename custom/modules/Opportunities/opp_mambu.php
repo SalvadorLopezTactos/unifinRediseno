@@ -18,8 +18,9 @@ class MambuLogic
     {
         global $sugar_config,$db;
         //traer el bean de la cuenta para obtener el encodedkey_mambu_c
+        $available_financiero=array("39","41","50","49","48","51");
         $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id, array('disable_row_level_security' => true));
-        if(($bean->producto_financiero_c == '39' || $bean->producto_financiero_c == '41' || $bean->producto_financiero_c == '48' || $bean->producto_financiero_c == '49' || $bean->producto_financiero_c == '50' || $bean->producto_financiero_c == '51') && $bean->estatus_c=="N" && $beanCuenta->encodedkey_mambu_c!="" && $bean->tct_id_mambu_c=="") {
+        if(in_array($bean->producto_financiero_c ,$available_financiero) && $bean->estatus_c=="N" && $beanCuenta->encodedkey_mambu_c!="" && $bean->tct_id_mambu_c=="") {
             $GLOBALS['log']->fatal("Inicia MambuLogic para creacion de Linea de credito Mambu");
             //Declara variables globales para la peticion del servicio Mambu
             $url=$sugar_config['url_mambu_gral'].'creditarrangements';
@@ -54,11 +55,11 @@ class MambuLogic
                      $producto_financiero_c=>"TRUE"
                     )
             );
-            $GLOBALS['log']->fatal('Petición: '. json_encode($body));
+            $GLOBALS['log']->fatal('Petición: Mambu interacion '. json_encode($body));
             //Llama a UnifinAPI para que realice el consumo de servicio a Mambu
             $callApi = new UnifinAPI();
             $resultado = $callApi->postMambu($url,$body,$auth_encode);
-            $GLOBALS['log']->fatal('Resultado: '. json_encode($resultado));
+            $GLOBALS['log']->fatal('Resultado: PEticion mambu integracion '. json_encode($resultado));
            if(!empty($resultado['encodedKey'])){
                $GLOBALS['log']->fatal('Ha realizado correctamente la linea de crédito a Mambu con la cuenta ' .$bean->name);
                $bean->tct_id_mambu_c=$resultado['encodedKey'];
