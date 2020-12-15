@@ -25,10 +25,10 @@ array (
               ),
               1 => 
               array (
-                'name' => 'cuenta',
-                'label' => 'LBL_CUENTA',
+                'name' => 'lic_licitaciones_accounts_name',
+                'label' => 'LBL_LIC_LICITACIONES_ACCOUNTS_FROM_ACCOUNTS_TITLE',
                 'enabled' => true,
-                'id' => 'ACCOUNT_ID_C',
+                'id' => 'LIC_LICITACIONES_ACCOUNTSACCOUNTS_IDA',
                 'link' => true,
                 'sortable' => false,
                 'default' => true,
