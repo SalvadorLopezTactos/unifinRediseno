@@ -1504,9 +1504,10 @@ where rfc_c = '{$bean->rfc_c}' and
                 //Fetch related beans
                 $solicitudes = $bean->opportunities->getBeans();
                 if (!empty($solicitudes)) {
+                    $available_financiero=array("39","41","50","49","48","51");
                     foreach ($solicitudes as $sol) {
                         //Disparar integración hacia mambú de solicitudes para estatus AUTORIZADA
-                        if ($sol->tipo_producto_c == '8' && $sol->tct_id_mambu_c == "" && $sol->estatus_c == 'N') {## cambiar por pPF
+                        if (in_array($sol->producto_financiero_c,$available_financiero ) && $sol->tct_id_mambu_c == "" && $sol->estatus_c == 'N') {## cambiar por pPF
                             $sol->save();
                         }
                     }

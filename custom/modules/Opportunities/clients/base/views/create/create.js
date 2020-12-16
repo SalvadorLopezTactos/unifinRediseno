@@ -18,6 +18,8 @@
     multiProducto: null,
     productos: null,
     multilinea_prod: null,
+    exist_PRodFinanciero:false,
+
     initialize: function (options) {
         self = this;
         window.bandera = 0;
@@ -72,6 +74,7 @@
         this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinanceras, this));
         this.model.addValidationTask('setRequiredAforoTipoFactoraje', _.bind(this.setRequiredAforoTipoFactoraje, this));
         //this.model.addValidationTask('check_requeridos', _.bind(this.validaDatosRequeridos, this));
+        this.model.addValidationTask('producto_financiero_c', _.bind(this.reqPrpductoFinanciero, this));
 
         /*
         * @author F. Javier G. Solar
@@ -151,14 +154,14 @@
         this.showfieldBenef();
         this.showfieldSuby();
         this.model.addValidationTask('benef_req', _.bind(this.reqBenfArea, this));
-        this.model.on("change:producto_financiero_c", _.bind(this.producto_financiero, this));
+       // this.model.on("change:producto_financiero_c", _.bind(this.producto_financiero, this));
        // this.Updt_OptionProdFinan(); # se comenta para hacer listas dependiente
        this.model.on("change:negocio_c", _.bind(this.Updt_OptionProdFinan, this));
         this.model.on('change:negocio_c', this.verificaOperacionProspecto, this);
 
     },
 
-    producto_financiero: function () {
+   /* producto_financiero: function () {
         if(this.model.get('producto_financiero_c') == 43) {
           $('[data-name="ce_destino_c"]').show();
           $('[data-name="ce_tasa_c"]').show();
@@ -180,7 +183,7 @@
           $('[data-name="ce_comentarios_c"]').hide();
           $('[data-name="credito_estructurado"]').hide();
         }
-    },
+    },*/
 
     _render: function () {
         this._super("_render");
@@ -393,7 +396,6 @@
         $('[data-name="vobo_descripcion_txa_c"]').hide();
         $('[data-name="director_notificado_c"]').hide();
         this.$(".record-cell[data-name='blank_space']").hide();
-
     },
     /*
     *Victor Martinez Lopez
@@ -1314,6 +1316,7 @@
         $("div[data-name='porciento_ri_c']").remove();
         $('div[data-panelname="LBL_RECORDVIEW_PANEL2"]').addClass('hide');
         $('div[data-panelname="LBL_RECORDVIEW_PANEL3"]').addClass('hide');
+        $('div[data-panelname="LBL_RECORDVIEW_PANEL4"]').addClass('hide');
 
     },
 
@@ -2121,9 +2124,11 @@
                         self.render();
                         if (temp_array != "") {
                             $('[data-name="producto_financiero_c"]').show();
+                         self.exist_PRodFinanciero=true;
                         }
                         else {
                             $('[data-name="producto_financiero_c"]').hide();
+                            self.exist_PRodFinanciero=false;
                         }
                     }
                     else {
@@ -2134,4 +2139,13 @@
         }
     },
 
+    reqPrpductoFinanciero: function (fields, errors, callback) {
+        var productofinan = this.model.get('producto_financiero_c');
+
+        if (this.exist_PRodFinanciero   && productofinan == "0") {
+            errors['producto_financiero_c'] = errors['producto_financiero_c'] || {};
+            errors['producto_financiero_c'].required = true;
+        }
+        callback(null, fields, errors);
+    },
 })

@@ -144,6 +144,7 @@
         //Validación para poder autorizar o rechazar la pre-solicitud
         this.model.on('sync', this.autorizapre, this);
         this.model.on('change:estatus_c', this.refrescaPipeLine, this);
+        this.model.addValidationTask('CreditoEstructurado', _.bind(this.reqCredito_Estructurado, this));
 
 
     },
@@ -1039,7 +1040,8 @@
                 errors['amount'].required = true;
             }
 
-            if (parseFloat(this.model.get('ca_pago_mensual_c')) <= 0 && this.model.get('tipo_producto_c') != "6" && this.model.get('tipo_producto_c') != "7") {
+            if (parseFloat(this.model.get('ca_pago_mensual_c')) <= 0 && this.model.get('tipo_producto_c') != "6" && this.model.get('tipo_producto_c') != "7"
+                && this.model.get('producto_financiero_c') != "43") {
                 errors['ca_pago_mensual_c'] = errors['ca_pago_mensual_c'] || {};
                 errors['ca_pago_mensual_c'].required = true;
             }
@@ -3143,6 +3145,34 @@
 
 
 
-    }
+    },
 
+    reqCredito_Estructurado:function (fields, errors, callback) {
+
+        if(this.model.get('producto_financiero_c') == '43')
+        {
+            if (this.model.get('ce_destino_c') == '' || this.model.get('ce_destino_c') == null) {
+                errors['ce_destino_c'] = errors['ce_destino_c'] || {};
+                errors['ce_destino_c'].required = true;
+            }
+            if (this.model.get('ce_tasa_c') == '' || this.model.get('ce_tasa_c') == null) {
+                errors['ce_tasa_c'] = errors['ce_tasa_c'] || {};
+                errors['ce_tasa_c'].required = true;
+            }
+            if (this.model.get('ce_plazo_c') == '' || this.model.get('ce_plazo_c') == null) {
+                errors['ce_plazo_c'] = errors['ce_plazo_c'] || {};
+                errors['ce_plazo_c'].required = true;
+            }
+            if (this.model.get('ce_moneda_c') == '' || this.model.get('ce_moneda_c') == null) {
+                errors['ce_moneda_c'] = errors['ce_moneda_c'] || {};
+                errors['ce_moneda_c'].required = true;
+            }
+            if (this.model.get('ce_apertura_c') == '' || this.model.get('ce_apertura_c') == null) {
+                errors['ce_apertura_c'] = errors['ce_apertura_c'] || {};
+                errors['ce_apertura_c'].required = true;
+            }
+        }
+
+        callback(null, fields, errors);
+    }
 })
