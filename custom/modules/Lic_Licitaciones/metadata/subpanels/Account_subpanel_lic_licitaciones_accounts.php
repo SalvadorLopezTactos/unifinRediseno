@@ -1,5 +1,5 @@
 <?php
-// created: 2020-12-15 03:49:49
+// created: 2020-12-16 00:08:24
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -15,13 +15,14 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_INSTITUCION',
     'width' => 10,
   ),
-  'description' => 
+  'descripcion_contrato' => 
   array (
     'type' => 'text',
-    'vname' => 'LBL_DESCRIPTION',
+    'default' => true,
+    'studio' => 'visible',
+    'vname' => 'LBL_DESCRIPCION_CONTRATO',
     'sortable' => false,
     'width' => 10,
-    'default' => true,
   ),
   'monto_total' => 
   array (

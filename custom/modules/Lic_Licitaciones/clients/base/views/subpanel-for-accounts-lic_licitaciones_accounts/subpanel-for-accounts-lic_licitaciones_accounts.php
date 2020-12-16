@@ -1,5 +1,5 @@
 <?php
-// created: 2020-12-15 03:49:50
+// created: 2020-12-16 00:08:25
 $viewdefs['Lic_Licitaciones']['base']['view']['subpanel-for-accounts-lic_licitaciones_accounts'] = array (
   'panels' => 
   array (
@@ -26,8 +26,8 @@ $viewdefs['Lic_Licitaciones']['base']['view']['subpanel-for-accounts-lic_licitac
         ),
         2 => 
         array (
-          'name' => 'description',
-          'label' => 'LBL_DESCRIPTION',
+          'name' => 'descripcion_contrato',
+          'label' => 'LBL_DESCRIPCION_CONTRATO',
           'enabled' => true,
           'sortable' => false,
           'default' => true,
