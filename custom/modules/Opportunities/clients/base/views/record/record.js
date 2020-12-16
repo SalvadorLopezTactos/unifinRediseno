@@ -86,6 +86,7 @@
         this.model.addValidationTask('check_validaccionCuentaSubcuenta', _.bind(this.validacionCuentaSubcuentaCheck, this));
         /* @author victor.martinez 23-07-2018  Valida campos requeridos de prospecto e Integracion de expediente */
         this.model.addValidationTask('pagounico', _.bind(this.validapagounico, this));
+        this.model.addValidationTask('CreditoEstructurado', _.bind(this.reqCredito_Estructurado, this));
 
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         this.model.addValidationTask('valida_cuentas_pld', _.bind(this.valida_pld, this));
@@ -144,9 +145,6 @@
         //Validación para poder autorizar o rechazar la pre-solicitud
         this.model.on('sync', this.autorizapre, this);
         this.model.on('change:estatus_c', this.refrescaPipeLine, this);
-        this.model.addValidationTask('CreditoEstructurado', _.bind(this.reqCredito_Estructurado, this));
-
-
     },
 
     fulminantcolor: function () {

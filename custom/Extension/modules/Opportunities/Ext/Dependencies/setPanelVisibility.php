@@ -1,6 +1,6 @@
 <?php
 $dependencies['Opportunities']['credito_estructurado']=array(
-    'hooks' => array("edit","view"),
+    'hooks' => array("view"),
     'trigger' => 'true',
     'triggerFields' => array('producto_financiero_c'),
     'onload' => true,
