@@ -321,7 +321,9 @@
         }
         
         //Oculta Crédito Estructurado
-        if(solicitud_cf.oFinanciera.condicion.length > 0) this.$('div[data-panelname=LBL_RECORDVIEW_PANEL4').hide();
+        if(this.model.get('producto_financiero_c')!='43') {
+            this.$('div[data-panelname=LBL_RECORDVIEW_PANEL4').hide();
+        }
 
         //this.evaluaCampoSolicitudVobo();
         //this.evaluaCampoEnviarNotificacion();

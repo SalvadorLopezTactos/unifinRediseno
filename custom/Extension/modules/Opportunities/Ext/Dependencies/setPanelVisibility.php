@@ -1,5 +1,5 @@
 <?php
-$dependencies['Opportunities']['credito_estructurado']=array(
+/*$dependencies['Opportunities']['credito_estructurado']=array(
     'hooks' => array("view"),
     'trigger' => 'true',
     'triggerFields' => array('producto_financiero_c'),
@@ -14,4 +14,4 @@ $dependencies['Opportunities']['credito_estructurado']=array(
         ),
     ),
    	'notActions' => array(),
-);
+);*/
