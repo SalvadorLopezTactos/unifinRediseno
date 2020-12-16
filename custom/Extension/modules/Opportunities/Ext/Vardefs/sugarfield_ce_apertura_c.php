@@ -1,5 +1,5 @@
 <?php
- // created: 2020-11-24 09:55:30
+ // created: 2020-12-15 17:45:49
 $dictionary['Opportunity']['fields']['ce_apertura_c']['labelValue']='Comisión por apertura';
 $dictionary['Opportunity']['fields']['ce_apertura_c']['full_text_search']=array (
   'enabled' => '0',
