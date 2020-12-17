@@ -132,7 +132,7 @@ array (
                 'type' => 'rowaction',
                 'event' => 'button:convierte_lead:click',
                 'name' => 'conviertelead',
-                'label' => 'Convertir a Lead',
+                'label' => 'Convertir a Prospecto',
                 'acl_action' => 'view',
                 'class' => 'jcmx1',
               ),
