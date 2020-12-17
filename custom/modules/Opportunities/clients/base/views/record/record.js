@@ -3149,7 +3149,7 @@
 
     reqCredito_Estructurado:function (fields, errors, callback) {
 
-        if(this.model.get('producto_financiero_c') == '43')
+        if(this.model.get('producto_financiero_c') == '43' && !this.model.get('tct_oportunidad_perdida_chk_c'))
         {
             if (this.model.get('ce_destino_c') == '' || this.model.get('ce_destino_c') == null) {
                 errors['ce_destino_c'] = errors['ce_destino_c'] || {};
