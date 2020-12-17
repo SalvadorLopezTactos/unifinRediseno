@@ -1056,9 +1056,15 @@ SQL;
         $cliente = $bean->account_id;
         //Evalua cambio en etapa o subetapa
         if ($bean->fetched_row['estatus_c'] != $subetapa || $bean->fetched_row['tct_etapa_ddw_c'] != $etapa) {
+            //Actualiza producto uniclick
+            if($bean->producto_financiero_c == '39' || $bean->producto_financiero_c == '41' || $bean->producto_financiero_c == '48' || $bean->producto_financiero_c == '49' || $bean->producto_financiero_c == '50' || $bean->producto_financiero_c == '51') $producto = 8;
             //($tipo=null, $subtipo=null, $idCuenta=null, $tipoProducto=null)
             //Actualiza en Solicitud Inicial y actualiza campos con valor Prospecto Interesado: 2,7
             $GLOBALS['log']->fatal('Actualiza tipo de Cuenta para producto: ' . $producto);
+            if($bean->negocio_c==10)
+            {
+                $producto=8;
+            }
             if ($etapa == "SI" && $bean->fetched_row['tct_etapa_ddw_c'] != $etapa) {
                 $GLOBALS['log']->fatal('Prospecto Interesado');
                 $this->actualizaTipoCuenta('2', '7', $cliente, $producto);
@@ -1084,7 +1090,6 @@ SQL;
                 $this->actualizaTipoCuenta('3', '18', $cliente, $producto);
                 $bean->tipo_operacion_c = '2';
             }
-
         }
     }
 

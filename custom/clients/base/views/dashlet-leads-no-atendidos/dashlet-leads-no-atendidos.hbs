@@ -1,0 +1,21 @@
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <td><b>Nombre</b></td>
+            <td><b>Subtipo de Lead</b></td>
+            <td><b>Acciones</b></td>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each dataLead}}
+        <tr>
+            <td><a href="#Leads/{{idLead}}" id="idLeads" target="_blank">{{nombre}}</a></td>
+            <td>{{#if subtipo}}{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo}}{{/if}}</td>
+            <td>
+                <button class="btn btn btnCancel" id="btnCancel" type="submit" title="{{idLead}}">Cancelar</button>
+                <a href="#Leads/{{idLead}}" id="btnProspecto" target="_blank" class="btn" rel="tooltip">Establecer Prospecto Contactado</a>
+            </td>  
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
