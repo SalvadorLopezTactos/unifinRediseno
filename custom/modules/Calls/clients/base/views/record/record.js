@@ -8,48 +8,49 @@
     },
 
     initialize: function (options) {
-            self = this;
-            this._super("initialize", [options]);
-            this.on('render',this.disableparentsfields,this);
-            this.on('render', this.noEditStatus,this);
-            //this.model.on('sync', this.bloqueaTodo, this);
-            //Habilita el campo parent_name cuando esta vacio y lo deshabilta cuando ya tiene una cuenta
-            this.model.on('sync',this.enableparentname,this);
-            this.model.on('sync', this.cambioFecha, this);
+        self = this;
+        this._super("initialize", [options]);
+        this.on('render',this.disableparentsfields,this);
+        this.on('render', this.noEditStatus,this);
+        //this.model.on('sync', this.bloqueaTodo, this);
+        //Habilita el campo parent_name cuando esta vacio y lo deshabilta cuando ya tiene una cuenta
+        this.model.on('sync',this.enableparentname,this);
+        this.model.on('sync', this.cambioFecha, this);
+        
+		this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
+        this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial2Call, this));
+        this.model.addValidationTask('VaildaConferencia', _.bind(this.validaConferencia, this));
           
-			this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
-            this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial2Call, this));
-            this.model.addValidationTask('VaildaConferencia', _.bind(this.validaConferencia, this));
+		/*****************************************/
+		//this.model.addValidationTask('valida_requeridos_Leads',_.bind(this.valida_requeridos_Leads, this));
+		/*********************************************/
+		this.model.addValidationTask('VaildaFecha', _.bind(this.VaildaFecha, this));
+		/*@Jesus Carrillo
+			Funcion que pinta de color los paneles relacionados
+        */
+        this.model.on('sync', this.fulminantcolor, this);
+        $('[data-name="status"]').find('.fa-pencil').remove();
+        $('.record-edit-link-wrapper[data-name=status]').remove();
+
+        this.model.on('sync', this.disablestatus1, this);
+        this.model.on('sync', this.disableFieldsTime,this);
            
-			/*****************************************/
-			//this.model.addValidationTask('valida_requeridos_Leads',_.bind(this.valida_requeridos_Leads, this));
-			/*********************************************/
-
-		   this.model.addValidationTask('VaildaFecha', _.bind(this.VaildaFecha, this));
-			
-            /*@Jesus Carrillo
-                Funcion que pinta de color los paneles relacionados
-            */
-            this.model.on('sync', this.fulminantcolor, this);
-
-            $('[data-name="status"]').find('.fa-pencil').remove();
-            $('.record-edit-link-wrapper[data-name=status]').remove();
-
-            this.model.on('sync', this.disablestatus1, this);
-            this.model.on('sync', this.disableFieldsTime,this);
-            
-			this.model.addValidationTask('resultCallReq',_.bind(this.resultCallRequerido, this));
-            this.events['click a[name=edit_button]'] = 'fechascallsymeet';
-			
-            this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
-			
-			
+		this.model.addValidationTask('resultCallReq',_.bind(this.resultCallRequerido, this));
+        this.events['click a[name=edit_button]'] = 'fechascallsymeet';
+		
+        this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
+		/***********  Lead Management  *************/
+		this.model.addValidationTask('lead_management', _.bind(this.ConfirmCancelar, this));  //OnConfirm cancelar LEad-PRospecto contactado
     },
 
     _render: function (options) {
         this._super("_render");
         this.enableparentname();
     },
+	
+	handleCancel: function (){
+	    this._super("handleCancel");	
+	},
 
     bloqueaTodo:function()
     {
@@ -623,5 +624,103 @@
 		//this._super('_render'); 
 		//callback(null, fields, errors);
 	},
+
+	ConfirmCancelar: function(fields, errors, callback) {
+				
+		if ($.isEmptyObject(errors)&& this.model.get('parent_id') != "" && this.model.get('parent_type') == "Leads" && this.model.get('status')=="Held") {
+			if(this.model.get('tct_resultado_llamada_ddw_c')=='Ilocalizable' || this.model.get('tct_resultado_llamada_ddw_c')=='No_esta_Interesado' || this.model.get('tct_resultado_llamada_ddw_c')=='Fuera_de_Perfil'){
+				/*************************************************/
+				if (Modernizr.touch) {
+					app.$contentEl.addClass('content-overflow-visible');
+				}
+				/**check whether the view already exists in the layout.
+				* If not we will create a new view and will add to the components list of the record layout
+				* */
+				
+				//var quickCreateView = this.layout.getComponent('MotivoCancelModal');
+				var quickCreateView = null;
+				if (!quickCreateView) {
+					/** Create a new view object */
+					quickCreateView = app.view.createView({
+						context: this.context,
+						name: 'MotivoCancelModal',
+						layout: this.layout,
+						module: 'Calls'
+					});
+					/** add the new view to the components list of the record layout*/
+					this.layout._components.push(quickCreateView);
+					this.layout.$el.append(quickCreateView.$el);
+				}
+				/**triggers an event to show the pop up quick create view*/
+				this.layout.trigger("app:view:MotivoCancelModal");
+				/**************************************/
+				callback(null, fields, errors);
+			}else if(this.model.get('tct_resultado_llamada_ddw_c')=='Checklist_expediente' ){
+				var filter_arguments = {
+					"id": this.model.get('parent_id')
+				};
+				app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
+					success: _.bind(function (data) {
+						console.log(data);
+						app.alert.dismiss('upload');
+						app.controller.context.reloadData({});
+						if (data.idCuenta === "") {
+							app.alert.show("Conversión", {
+								level: "error",
+								messages: data.mensaje,
+								autoClose: false
+							});
+							errors['status'] = errors['status'] || {};
+							errors['status'].required = true;
+							callback(null, fields, errors);
+						} else {
+							app.alert.show("Conversión", {
+								level: "success",
+								messages: data.mensaje,
+								autoClose: false
+							});
+							//this._disableActionsSubpanel();
+							callback(null, fields, errors);
+						}
+						//var btnConvert = this.getField("convert_Leads_button")
 	
+						//if (this.model.get('subtipo_registro_c') == '2') {
+						//    btnConvert.show();
+						//} else {
+						//    btnConvert.hide();
+						//}
+						//app.controller.context.reloadData({});
+						//SUGAR.App.controller.context.reloadData({})
+						/* Para refrescar solo un campo
+	
+						model.fetch({
+	
+						view: undefined,
+	
+						fields: ['industry']
+	
+						});
+						*/
+					}, this),
+					failure: _.bind(function (data) {
+						app.alert.dismiss('upload');
+						errors['status'] = errors['status'] || {};
+						errors['status'].required = true;
+						callback(null, fields, errors);	
+					}, this),
+					error: _.bind(function (data) {
+						errors['status'] = errors['status'] || {};
+						errors['status'].required = true;
+						app.alert.dismiss('upload');
+						callback(null, fields, errors);
+					}, this)
+				});
+			}else{
+				callback(null, fields, errors);
+			}
+		}else{
+			callback(null, fields, errors);
+		}
+    },
+		
 })

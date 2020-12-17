@@ -381,6 +381,16 @@ array (
                 'label' => 'LBL_ACCOUNT',
                 'readonly' => true,
               ),
+              36 => 
+              array (
+                'name' => 'status_management_c',
+                'label' => 'LBL_STATUS_MANAGEMENT',
+              ),
+              37 => 
+              array (
+                'name' => 'fecha_asignacion_c',
+                'label' => 'LBL_FECHA_ASIGNACION_C',
+              ),
             ),
           ),
           2 => 

@@ -1,0 +1,83 @@
+<style>
+
+    .modal-header_cstm h3 {
+        font-size: 16px;
+        font-weight: normal;
+		justify-content: center;
+		align-items: center;
+    }
+
+	.modal-header_cstm {
+        background: #fff7ad;
+        color: #866500;
+        padding: 1px;
+		justify-content: center;
+		align-items: center;
+		border-color: #ffd132;
+		text-align: center;
+		height: 48px;
+    }
+
+    .modal-body_cstm {
+        padding: 18px 40px 16px;
+		font-size: 14px;
+		display: block;
+    }
+
+    .fa-book {
+        color: #866500;
+    }
+
+    .modal_cstm {
+        position: absolute;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        top: 0;
+        overflow: auto;
+		border-color: #ffd132;
+		color: #555;
+        display: block;
+		width: auto;
+		height: auto;
+		 overflow: hidden;
+    }
+
+    .modal-backdrop {
+        display: flex;
+    }
+
+    .form-horizontal {
+        display: inline-block;
+    }
+	
+	.modal-footer_cstm {
+		border-top: 1px solid #ffd132;
+        background: #fff7ad;
+        color: #555;
+        padding: 1px;
+		justify-content: center;
+		border-color: #ffd132;
+		width: 100%;
+		height: 35px;
+    }
+	
+
+</style>
+
+<div class=" modal modal_cstm " id="CancelModalLead" tabindex="-1">
+    <div class="modal-header_cstm">
+        <h3><b><i class="fa fa-book" style="padding: 3px; "></i>Lead No Atendido</b></h3>
+    </div>
+	<div class="modal-body_cstm">
+		<div class="motivos" id="motivos" style="display:inline-block;padding: 5px;">
+			Motivo de Cancelación:&nbsp;
+			<select name="motivocancelacion" id="motivocancelacion" class="select2">
+                {{{motivo_list}}}
+            </select>
+		</div>
+    </div>
+    <div class="modal-footer_cstm" style="display: inline-flex;">
+		<button class="span6 btn" id="btn-cancela">Cancelar</button>
+        <button class="span6 btn" id="btn-aceptar">Aceptar</button>
+    </div>
+</div>
