@@ -35,7 +35,6 @@ class check_duplicateAccounts extends SugarApi
 
     public function validation_process($api, $args)
     {
-
         $id_Lead = $args['id'];
         $msjExiste = "El Lead que intentas convertir ya está registrada como Cuenta";
         $hayReunionPlaneada = false;
@@ -48,11 +47,8 @@ class check_duplicateAccounts extends SugarApi
          */
         $bean = BeanFactory::retrieveBean('Leads', $id_Lead, array('disable_row_level_security' => true));
         // $GLOBALS['log']->fatal("nombre del LEads " . $bean->first_name);
-
-
         $result = $this->existLeadAccount($bean);
         $count = count($result);
-
         if ($bean->subtipo_registro_c != "4") {
             if ($count == 0) {
 
@@ -83,54 +79,36 @@ class check_duplicateAccounts extends SugarApi
 <b></b><a href="$url/#Accounts/$bean_account->id">$bean_account->name</a></b>
 SITE;
 
-
                         $finish = array("idCuenta" => $bean_account->id, "mensaje" => $msj_succes);
-
                     }
                     // return array("idCuenta" => $bean_account->id, $resultadoRelaciones);
-
-
                 } else {
-
                     if ($requeridos != "") {
                         $msj_reunion = "Hace falta completar la siguiente información para convertir un <b>Lead: </b><br>" . $requeridos . "<br>";
                     }
-
                     if ($responsMeeting['status'] == "stop" || $responsMeeting['vacio'] ) {
                         $msj_reunion .= <<<SITE
                         El proceso no puede continuar. Falta al menos una <b>Reunión Planificada o Realizada asignada a un Asesor.</b>
 SITE;
                     }
-
                     $finish = array("idCuenta" => "", "mensaje" => $msj_reunion);
-
                 }
-
             } elseif ($count > 0) {
-
                 /** Si la cuenta existe actualizamos los asesores que se encuentre vacios o como 9 sin gestor en la cuenta encontrada */
                 $id_account = $result[0]['id'];
                 $responsMeeting = $this->getMeetingsUser($bean);
-
                 if ($responsMeeting['status'] == 'continue') {
                     $beanAccountExist = BeanFactory::retrieveBean('Accounts', $id_account, array('disable_row_level_security' => true));
-
-
                     $beanAccountExist->user_id_c = (($beanAccountExist->user_id_c == "569246c7-da62-4664-ef2a-5628f649537e"
                             || $beanAccountExist->user_id_c == "") && $responsMeeting['data']['LEASING'] != "") ? $responsMeeting['data']['LEASING'] : $beanAccountExist->user_id_c;
-
                     $beanAccountExist->user_id1_c = (($beanAccountExist->user_id1_c == "569246c7-da62-4664-ef2a-5628f649537e"
                             || $beanAccountExist->user_id1_c == "") && $responsMeeting['data']['FACTORAJE'] != "") ? $responsMeeting['data']['FACTORAJE'] : $beanAccountExist->user_id1_c;
-
                     $beanAccountExist->user_id2_c = (($beanAccountExist->user_id2_c == "569246c7-da62-4664-ef2a-5628f649537e"
                             || $beanAccountExist->user_id2_c == "") && $responsMeeting['data']['CREDITO AUTOMOTRIZ'] != "") ? $responsMeeting['data']['CREDITO AUTOMOTRIZ'] : $beanAccountExist->user_id2_c;
-
                     $beanAccountExist->user_id6_c = (($beanAccountExist->user_id6_c == "569246c7-da62-4664-ef2a-5628f649537e"
                             || $beanAccountExist->user_id6_c == "") && $responsMeeting['data']['FLEET'] != "") ? $responsMeeting['data']['FLEET'] : $beanAccountExist->user_id6_c;
                     $beanAccountExist->save();
-
                 }
-
                 $bean->subtipo_registro_c = "4";
                 $bean->save();
                 $msj_succes_duplic = <<<SITE
@@ -138,17 +116,11 @@ SITE;
 <b></b><a href="$url/#Accounts/$beanAccountExist->id">$beanAccountExist->name</a></b>
 SITE;
                 $finish = array("idCuenta" => $beanAccountExist->id, "mensaje" => $msj_succes_duplic);
-
-
             }
-
         } else {
             $finish = array("idCuenta" => "", "mensaje" => "El Lead ya ha sido convertido.");
-
-
         }
         return $finish;
-
     }
 
     public function createAccount($bean_Leads, $idMeetings, $rel)
@@ -161,10 +133,9 @@ SITE;
             $bean_account->user_id1_c = "569246c7-da62-4664-ef2a-5628f649537e";
             $bean_account->user_id2_c = "569246c7-da62-4664-ef2a-5628f649537e";
             $bean_account->user_id6_c = "569246c7-da62-4664-ef2a-5628f649537e";
-
         } else {
-            $bean_account->subtipo_registro_cuenta_c = "5"; // En Calificación - 5
-            $bean_account->tipo_registro_cuenta_c = "1"; //Lead - 1
+            $bean_account->subtipo_registro_cuenta_c = "2"; // Contactado - 2
+            $bean_account->tipo_registro_cuenta_c = "2"; //Prospecto - 2
         }
 
         switch ($bean_Leads->regimen_fiscal_c) {

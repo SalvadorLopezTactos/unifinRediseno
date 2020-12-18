@@ -136,7 +136,7 @@
         //this.getCurrentYearMonth("loading");
         //this.model.on("change:anio_c", _.bind(this.getCurrentYearMonth, this));
         //Evento para el campo monto cuando la solicitud es Credito SOS
-        this.model.on("change:tipo_producto_c", _.bind(this.bloqueamonto, this));
+        this.model.on("change:negocio_c", _.bind(this.bloqueamonto, this));
         this.model.on("change:account_id", _.bind(this.cuenta_asociada, this));
         //Funcion para obtener las oportunidades de leasing de la cuenta asi como valida la lista de productos
         this.set_lista_productos();
@@ -394,7 +394,6 @@
         $('[data-name="director_notificado_c"]').hide();
         this.$(".record-cell[data-name='blank_space']").hide();
 
-
     },
     /*
     *Victor Martinez Lopez
@@ -463,7 +462,7 @@
     },
 
     _ValidateAmount: function (fields, errors, callback) {
-        if (parseFloat(this.model.get('monto_c')) <= 0 && this.model.get('tipo_producto_c') != 7) {
+        if (parseFloat(this.model.get('monto_c')) <= 0 && this.model.get('producto_financiero_c') != 40) {
             errors['monto_c'] = errors['monto_c'] || {};
             errors['monto_c'].required = true;
 
@@ -1659,7 +1658,7 @@
 
         //Eliminar los productos Unilease, Credito sos Lista
         Object.keys(op2).forEach(function (key) {
-            if (key == 9 || key == 7) {
+            if (key == 9 || key == 7 || key == "0" || key == 8) {
                 delete op2[key];
             }
         });
@@ -1785,7 +1784,7 @@
     },
 
     bloqueamonto: function () {
-        if (this.model.get('tipo_producto_c') == 7) {
+        if (this.model.get('negocio_c') == '2') {
             $('[name="monto_c"]').prop("disabled", true);
             this.model.set('monto_c', 0);
             this.model.set('tct_etapa_ddw_c', "P");
@@ -1795,7 +1794,6 @@
             this.model.set('tct_etapa_ddw_c', "SI");
             this.model.set('estatus_c', "");
         }
-
     },
     //Evento para ejecutar la
     cuenta_asociada: function () {
@@ -1838,7 +1836,7 @@
     },
 
     setValidacionComercial: function (fields, errors, callback) {
-        if (this.model.get('tipo_producto_c') == 1 && this.model.get('tct_etapa_ddw_c') == "SI" && $.isEmptyObject(errors)) {
+        if (this.model.get('tipo_producto_c') == 1 && this.model.get('negocio_c') == 5 && (this.model.get('producto_financiero_c') == "" || this.model.get('producto_financiero_c') == "0") && this.model.get('tct_etapa_ddw_c') == "SI" && $.isEmptyObject(errors)) {
             var operacion = this.model.get('tipo_de_operacion_c');
             var producto = this.model.get('tipo_producto_c');
             var etapa = this.model.get('tct_etapa_ddw_c');
@@ -2121,7 +2119,6 @@
                         });
                         self.model.fields['producto_financiero_c'].options = optionsProdFinan;
                         self.render();
-
                         if (temp_array != "") {
                             $('[data-name="producto_financiero_c"]').show();
                         }
