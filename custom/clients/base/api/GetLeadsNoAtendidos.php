@@ -13,7 +13,7 @@ class GetLeadsNoAtendidos extends SugarApi
                 'path' => array('GetLeadsNoAtendidos'),
                 'pathVars' => array('module'),
                 'method' => 'getcstmLeadNoAtendido',
-                'shortHelp' => 'Obtiene todos los productos relacionados a la cuenta',
+                'shortHelp' => 'Obtiene los Lead con subtipo No Atendido',
             ),
         );
     }

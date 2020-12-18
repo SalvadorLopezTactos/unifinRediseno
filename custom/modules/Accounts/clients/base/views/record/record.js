@@ -5604,7 +5604,7 @@
                 errors['error_leasingUP'] = errors['error_leasingUP'] || {};
                 errors['error_leasingUP'].required = true;
             }
-            if (faltantesleasup == 0 && $('.chk_l_nv')[0].checked == true) {
+            if (faltantesleasup == 0 && $('.chk_l_nv')[0].checked == true && cont_uni_p.ResumenProductos.leasing.status_management_c != "3") {
                 this.model.set('promotorleasing_c', '9 - No Viable');
                 this.model.set('user_id_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.leasing.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
@@ -5673,7 +5673,7 @@
                 errors['error_FactorajeUP'] = errors['error_FactorajeUP'] || {};
                 errors['error_FactorajeUP'].required = true;
             }
-            if (faltantesFactorajeUP == 0 && $('.chk_f_nv')[0].checked == true) {
+            if (faltantesFactorajeUP == 0 && $('.chk_f_nv')[0].checked == true && cont_uni_p.ResumenProductos.factoring.status_management_c != "3") {
                 this.model.set('promotorfactoraje_c', '9 - No Viable');
                 this.model.set('user_id1_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.factoring.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
@@ -5742,7 +5742,7 @@
                 errors['error_CAUP'] = errors['error_CAUP'] || {};
                 errors['error_CAUP'].required = true;
             }
-            if (faltantesCAUP == 0 && $('.chk_ca_nv')[0].checked == true) {
+            if (faltantesCAUP == 0 && $('.chk_ca_nv')[0].checked == true && cont_uni_p.ResumenProductos.credito_auto.status_management_c != "3") {
                 this.model.set('promotorcredit_c', '9 - No Viable');
                 this.model.set('user_id2_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.credito_auto.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
@@ -5811,7 +5811,7 @@
                 errors['error_FLeetUP'] = errors['error_FLeetUP'] || {};
                 errors['error_FLeetUP'].required = true;
             }
-            if (faltantesFleetUP == 0 && $('.chk_fl_nv')[0].checked == true) {
+            if (faltantesFleetUP == 0 && $('.chk_fl_nv')[0].checked == true && cont_uni_p.ResumenProductos.fleet.status_management_c != "3") {
                 this.model.set('promotorfleet_c', '9 - No Viable');
                 this.model.set('user_id6_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.fleet.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
@@ -5880,7 +5880,7 @@
                 errors['error_UniclickUP'] = errors['error_UniclickUP'] || {};
                 errors['error_UniclickUP'].required = true;
             }
-            if (faltantesUniclickUP == 0 && $('.chk_u_nv')[0].checked == true) {
+            if (faltantesUniclickUP == 0 && $('.chk_u_nv')[0].checked == true && cont_uni_p.ResumenProductos.uniclick.status_management_c != "3") {
                 this.model.set('promotoruniclick_c', '9 - Sin Gestor');
                 this.model.set('user_id7_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.uniclick.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
