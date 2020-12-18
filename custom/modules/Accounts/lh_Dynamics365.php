@@ -25,10 +25,10 @@ class Accounts_Dynamics365
           $response=$apiDynamics->setRequestDynamics(null,$body);
 
           //Save result
-          $bean->control_dynamics_365_c=$response;
+          $bean->control_dynamics_365_c=$response[0];
           global $db;
           $update = "update accounts_cstm set
-            control_dynamics_365_c='{$response}'
+            control_dynamics_365_c='{$response[0]}'
             where id_c = '{$bean->id}'";
           $updateExecute = $db->query($update);
 

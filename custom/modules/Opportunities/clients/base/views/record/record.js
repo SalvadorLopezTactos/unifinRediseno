@@ -145,6 +145,7 @@
         this.model.on('sync', this.autorizapre, this);
         this.model.on('change:estatus_c', this.refrescaPipeLine, this);
 
+
     },
 
     fulminantcolor: function () {
@@ -239,7 +240,7 @@
     muestraOcultaCampoDirector:function(){
 
         if(this.model.get('tipo_producto_c')!=undefined){
-            if(this.model.get('tipo_producto_c')!='1'){ //Tipo 1 = LEASING
+            if(this.model.get('tipo_producto_c')!='1' ){ //Tipo 1 = LEASING
                 $('[data-type="opportunities_directores"]').hide();
             }else{
                 if (banderaExcluye.check.includes(1)) {
@@ -332,6 +333,9 @@
         if(this.model.get('negocio_c')=="" || this.model.get('negocio_c')==0)
         {
             this.$(".record-cell[data-name='negocio_c']").hide();
+        }
+        if(this.model.get('tipo_producto_c')=='1' && this.model.get('negocio_c')=="5" && (this.model.get('producto_financiero_c')=="0"|| this.model.get('producto_financiero_c')=="")){
+            $('[data-name="opportunities_directores"]').show();
         }
     },
 
@@ -602,7 +606,7 @@
 
     evaluaCampoSolicitudVobo:function () {
 
-        if(this.model.get('tipo_producto_c')=='1' && (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))){
+        if(this.model.get('tipo_producto_c')=='1' &&this.model.get('negocio_c')=='5'&&this.model.get('producto_financiero_c')=='0'&& (banderaExcluye.check.length==0 || banderaExcluye.check.includes(0))){
             $('[data-name="vobo_descripcion_txa_c"]').show();
             if(this.model.get('director_notificado_c')){
                 //Se establece como solo lectura el campo
@@ -714,9 +718,10 @@
             producto = "Crédito Automotriz";
         }
         //Recupera cuenta asociada
+        var producto_financiero = this.model.get('producto_financiero_c');
         var cuentaId = this.model.get('account_id');
         var faltantes = "";
-        if ((cuentaId != "" || cuentaId != null) && this.model.get('tct_oportunidad_perdida_chk_c') != true && this.model.get('tct_etapa_ddw_c') == 'SI' && this.model.get('tipo_producto_c') != "6" && this.model.get('tipo_producto_c') != "8" && this.model.get('tipo_producto_c') != "9") {
+        if ((cuentaId != "" || cuentaId != null) && this.model.get('tct_oportunidad_perdida_chk_c') != true && this.model.get('tct_etapa_ddw_c') == 'SI' && producto!='' && producto_financiero=='0' && producto_financiero!= undefined) {
 
             app.api.call('GET', app.api.buildURL('Accounts/' + cuentaId), null, {
                 success: _.bind(function (cuenta) {
@@ -2429,7 +2434,6 @@
             this.$("div.record-label[data-name='ri_porcentaje_renta_inicial_c']").text("% Renta Inicial Incremento/Ratificaci\u00F3n");
             this.$("div.record-label[data-name='porcentaje_renta_inicial_c']").text("Porcentaje Renta Inicial");
         }
-
         //Se agrega condición para ocultar campo que no pertenecen a Fleet
         if (this.model.get('tipo_producto_c') == '6' || this.model.get('tipo_producto_c') == '7') {
 
@@ -2442,6 +2446,10 @@
             this.$('[data-name="porciento_ri_c"]').hide();
 
         }
+        //Valida la solicitud que sea de tipo CREDITO ESTRUCTURADO y oculta condiciones financieras
+        if (this.model.get('producto_financiero_c') == '43') {
+            this.$('div[data-name=condiciones_financieras]').hide();
+        }
         //Valida la solicitud que sea de tipo SOS y oculta campos
         if (this.model.get('tipo_producto_c') == '7') {
             this.$('div[data-name=condiciones_financieras]').hide();
@@ -2449,7 +2457,6 @@
             this.$('div[data-name="condiciones_financieras_incremento_ratificacion"]').hide();
             this.$("[data-name='monto_ratificacion_increment_c']").attr('style', 'pointer-events:none');
         }
-
         //Se habilitan acciones existentes en render
         //no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
         if (this.model.get('tct_etapa_ddw_c') == 'SI' || this.model.get('tct_etapa_ddw_c') == 'P') {
@@ -2457,19 +2464,16 @@
         } else {
             this.$('div[data-panelname=LBL_RECORDVIEW_PANEL1]').hide();
         }
-
         if (this.model.get('tipo_operacion_c') == '2') {
             this.$('div[data-name=plazo_ratificado_incremento_c]').show();
         } else {
             this.$('div[data-name=plazo_ratificado_incremento_c]').hide();
         }
-
         if (this.model.get('tipo_operacion_c') != '3') {
             //* Quitamos los campos Vendedor y Comisión
             this.$('div[data-name=opportunities_ag_vendedores_1_name]').hide();
             this.$('div[data-name=comision_c]').hide();
         }
-
         if (this.model.get('ratificacion_incremento_c') == false) {
             //Oculta campos para condiciones financieras
             this.$('div[data-name=plazo_ratificado_incremento_c]').hide();
@@ -3118,7 +3122,7 @@
     controlVistaCamposPrecalificacion:function () {
 
         if(this.model.get('tipo_producto_c')!=undefined){
-            if(this.model.get('tipo_producto_c')!='1' || banderaExcluye.check.includes(1)){
+            if(this.model.get('tipo_producto_c')!='1' || (this.model.get('tipo_producto_c')=='1' && this.model.get('negocio_c')!="5" && this.model.get('producto_financiero_c')!="0")|| banderaExcluye.check.includes(1)){
                 $('[data-name="opportunities_directores"]').hide();
                 $('[data-name="vobo_descripcion_txa_c"]').hide();
                 $('[data-name="doc_scoring_chk_c"]').hide();

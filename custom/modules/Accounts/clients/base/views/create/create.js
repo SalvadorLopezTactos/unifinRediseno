@@ -574,12 +574,10 @@
                 }
             });
         }
-        //En otro caso, solo mostrar Lead
+        //En otro caso, no muestra nada
         else {
             Object.keys(new_options).forEach(function (key) {
-                if (key != "1") {
                     delete new_options[key];
-                }
             });
         }
         if (App.user.attributes.tct_alta_cd_chk_c == true || App.user.attributes.deudor_factoraje_c == true) {
