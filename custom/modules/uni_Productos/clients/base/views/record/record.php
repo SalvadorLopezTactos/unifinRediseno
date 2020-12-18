@@ -318,8 +318,6 @@ array (
               ),
               29 => 
               array (
-                'name' => 'exclu_precalif_c',
-                'label' => 'LBL_EXCLU_PRECALIF',
               ),
             ),
           ),
