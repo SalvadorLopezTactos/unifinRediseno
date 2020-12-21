@@ -6,6 +6,8 @@
         'click #assign_asesor': 'asignarPorAsesor',
         'click #assign_bd': 'asignarPorBD',
         'click #assign_cancel': 'asignarPorCancelados',
+        'click .modalRecordsCancel': 'closeModal',
+
     },
 
     initialize: function (options) {
@@ -51,4 +53,24 @@
     	alert("Asignación por base de datos");
 
     },
+
+    asignarPorCancelados:function(){
+
+    	var modal = $('#modalRecordsCancel');
+            if (modal) {
+                modal.show();
+            }
+    },
+
+    closeModal:function(){
+    	
+    	var modal = $('#modalRecordsCancel');
+    	if (modal) {
+    		modal.hide();
+      	}
+    }
+
+
+
+
 })

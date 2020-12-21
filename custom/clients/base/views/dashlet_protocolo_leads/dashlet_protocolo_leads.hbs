@@ -1,3 +1,95 @@
+<style>
+  /* The Modal (background) */
+  .btn-Guardar {
+        line-height: 18px;
+        text-align: center;
+        display: inline-block;
+        margin-top: 2px;
+        font-size: 12px;
+    }
+
+  .sinborde { /*Table without border*/
+  border: 0;
+  }
+
+  .modal {
+      position: fixed; /* Stay in place */
+      padding-top: 100px; /* Location of the box */
+      padding-bottom: 100px;
+      top: 0;
+      left:0;
+      /* width: 100%; /* Full width */
+      /*height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  /* Modal Content */
+  .modal-content {
+      position: relative;
+      background-color: #fefefe;
+      margin: auto;
+      padding: 1px;
+      border: 1px solid #888;
+      width: 98%;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+      -webkit-animation-name: animatetop;
+      -webkit-animation-duration: 0.4s;
+      animation-name: animatetop;
+      animation-duration: 0.4s
+  }
+
+  /* Add Animation */
+  @-webkit-keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+  }
+
+  @keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+  }
+
+  /* The Close Button */
+  .close {
+      color: white;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+  }
+
+  .modal-header {
+      padding: .5px 0px;
+      background-color: #21618C;
+      color: white;
+  }
+
+  .modal-body {
+    padding: .5px 0px;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .modal-footer {
+      padding: 2px 16px;
+      background-color: #21618C;
+      color: #ffffff;
+      font-size: 12px;
+      text-align: center;
+  }
+
+  .pointer {cursor: pointer;}
+
+</style>
+
 <div data-dashlet="dashlet" class="dashlet-content" style="padding:20px;">
 	<div class="bs-docs-example dashlet-container">
 		<div class="row-fluid">
@@ -16,3 +108,38 @@
 		</div>
   </div>
 <div>
+<!-- Comienza modal-->
+<div id="modalRecordsCancel" class="row-fluid" style="display:none">
+	 <div class="modal span12" style="width:100%">
+    	<!-- Modal content -->
+    	<div class="modal-content">
+    		<div class="modal-header">
+    			<span class="close modalRecordsCancel">&times;</span>
+    			<h2> &nbsp;&nbsp; Leads Cancelados/Aplazados</h2>
+
+    			<table class="dataTable table-striped table-border" style="table-layout: fixed;">
+    				<thead>
+    					<tr>
+    						<th class="span4">Nombre</th>
+    						<th class="span2">
+    							Tipo de Lead
+		                  	<i id="orderByAnexo" class="fa fa-unsorted"></i>
+		                	</th>
+		                	<th class="span2">
+		                  		Subtipo de Lead
+		                  	<i id="orderBySubtipo" class="fa fa-unsorted"></i>
+		                	</th>
+		                	<th class="span2">
+		                  		Estatus
+		                  	<i id="orderByStatus" class="fa fa-unsorted"></i>
+		                	</th>
+			                <th class="span2">Régimen Fiscal</th>
+			                <th class="span2">Usuario</th>
+			                <th class="span2">Fecha de creación</th>
+		              </tr>
+		            </thead>
+    			</table>
+    		</div><!-- modal header -->
+    	</div><!-- modal content-->
+    </div>
+</div><!-- Termina modal-->
