@@ -124,5 +124,20 @@ class callLead_class
   			}
 		  }
 	  }
+
+    function ConvierteLead($bean, $event, $arguments)
+    {
+ 			$parent_id = $bean->parent_id;
+ 			$parentType = $bean->parent_type;
+		  if($bean->status == "Held" && $bean->tct_call_issabel_c == 0 && $parentType == 'Leads') {
+        require_once("custom/clients/base/api/check_duplicateAccounts.php");
+        $filter_arguments = array("id" => $parent_id);
+        $callApi = new check_duplicateAccounts();
+        $convert = $callApi->validation_process(null,$filter_arguments);
+        $beanLead = BeanFactory::getBean('Leads', $parent_id);
+   			$beanLead->description = $convert["mensaje"];
+  			$beanLead->save();
+		  }
+	  }
 }
 ?>

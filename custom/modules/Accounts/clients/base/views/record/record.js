@@ -2568,9 +2568,9 @@
                     }
 
                     if (this.model.get("tipo_registro_cuenta_c") == "4" || this.model.get('tipo_registro_cuenta_c') == "5") {
-                        v360.ResumenCliente.general_cliente.tipo = "LEAD EN CALIFICACIÓN";
-                        this.model.set("tipo_registro_cuenta_c", "1");
-                        this.model.set("subtipo_registro_cuenta_list", "5");
+                        v360.ResumenCliente.general_cliente.tipo = "PROSPECTO CONTACTADO";
+                        this.model.set("tipo_registro_cuenta_c", "2");
+                        this.model.set("subtipo_registro_cuenta_list", "2");
                         this.model.set("show_panel_c", 1);
                         this.model.save();
                     }
@@ -2582,62 +2582,62 @@
             if ((Oproductos.productos.tct_tipo_cuenta_l_c == "4" || Oproductos.productos.tct_tipo_cuenta_l_c == "5") && productousuario.includes('1')) {
                 if (App.user.id == this.model.get('user_id_c')) {
                     tipo_producto = 1;
-                    api_params["tct_tipo_l_txf_c"] = "Lead";
-                    api_params["tct_subtipo_l_txf_c"] = "En Calificacion";
-                    api_params["tct_tipo_cuenta_l_c"] = "LEAD EN CALIFICACIÓN";
-                    Oproductos.productos.tct_tipo_cuenta_l_c = '1';
-                    Oproductos.productos.tct_subtipo_l_txf_c = '5';
-                    v360.ResumenCliente.leasing.tipo_cuenta = '1';
-                    v360.ResumenCliente.leasing.subtipo_cuenta = '5';
+                    api_params["tct_tipo_l_txf_c"] = "Prospecto";
+                    api_params["tct_subtipo_l_txf_c"] = "Contactado";
+                    api_params["tct_tipo_cuenta_l_c"] = "PROSPECTO CONTACTADO";
+                    Oproductos.productos.tct_tipo_cuenta_l_c = '2';
+                    Oproductos.productos.tct_subtipo_l_txf_c = '2';
+                    v360.ResumenCliente.leasing.tipo_cuenta = '2';
+                    v360.ResumenCliente.leasing.subtipo_cuenta = '2';
                 }
 
             }
             if ((Oproductos.productos.tct_tipo_cuenta_ca_c == "4" || Oproductos.productos.tct_tipo_cuenta_ca_c == "5") && productousuario.includes('3')) {
                 if (App.user.id == this.model.get('user_id2_c')) {
                     tipo_producto = 3;
-                    api_params["tct_tipo_ca_txf_c"] = "Lead";
-                    api_params["tct_subtipo_ca_txf_c"] = "En Calificación";
-                    api_params["tct_tipo_cuenta_ca_c"] = "LEAD EN CALIFICACIÓN";
-                    Oproductos.productos.tct_tipo_cuenta_ca_c = '1';
-                    Oproductos.productos.tct_subtipo_ca_txf_c = '5';
-                    v360.ResumenCliente.credito_auto.tipo_cuenta = '1';
-                    v360.ResumenCliente.credito_auto.subtipo_cuenta = '5';
+                    api_params["tct_tipo_ca_txf_c"] = "Prospecto";
+                    api_params["tct_subtipo_ca_txf_c"] = "Contactado";
+                    api_params["tct_tipo_cuenta_ca_c"] = "PROSPECTO CONTACTADO";
+                    Oproductos.productos.tct_tipo_cuenta_ca_c = '2';
+                    Oproductos.productos.tct_subtipo_ca_txf_c = '2';
+                    v360.ResumenCliente.credito_auto.tipo_cuenta = '2';
+                    v360.ResumenCliente.credito_auto.subtipo_cuenta = '2';
                 }
             }
             if ((Oproductos.productos.tct_tipo_cuenta_f_c == "4" || Oproductos.productos.tct_tipo_cuenta_f_c == "5") && productousuario.includes('4')) {
                 if (App.user.id == this.model.get('user_id1_c')) {
                     tipo_producto = 4;
-                    api_params["tct_tipo_f_txf_c"] = "Lead";
-                    api_params["tct_subtipo_f_txf_c"] = "En Calificación";
-                    api_params["tct_tipo_cuenta_f_c"] = "LEAD EN CALIFICACIÓN";
-                    Oproductos.productos.tct_tipo_cuenta_f_c = '1';
-                    Oproductos.productos.tct_subtipo_f_txf_c = '5';
-                    v360.ResumenCliente.factoring.tipo_cuenta = '1';
-                    v360.ResumenCliente.factoring.subtipo_cuenta = '5';
+                    api_params["tct_tipo_f_txf_c"] = "Prospecto";
+                    api_params["tct_subtipo_f_txf_c"] = "Contactado";
+                    api_params["tct_tipo_cuenta_f_c"] = "PROSPECTO CONTACTADO";
+                    Oproductos.productos.tct_tipo_cuenta_f_c = '2';
+                    Oproductos.productos.tct_subtipo_f_txf_c = '2';
+                    v360.ResumenCliente.factoring.tipo_cuenta = '2';
+                    v360.ResumenCliente.factoring.subtipo_cuenta = '2';
                 }
             }
             if ((Oproductos.productos.tct_tipo_cuenta_fl_c == "4" || Oproductos.productos.tct_tipo_cuenta_fl_c == "5") && productousuario.includes('6')) {
                 if (App.user.id == this.model.get('user_id6_c')) {
                     tipo_producto = 6;
-                    api_params["tct_tipo_fl_txf_c"] = "Lead";
-                    api_params["tct_subtipo_fl_txf_c"] = "En Calificación";
-                    api_params["tct_tipo_cuenta_fl_c"] = "LEAD EN CALIFICACIÓN";
-                    Oproductos.productos.tct_tipo_cuenta_fl_c = '1';
-                    Oproductos.productos.tct_subtipo_fl_txf_c = '5';
-                    v360.ResumenCliente.fleet.tipo_cuenta = '1';
-                    v360.ResumenCliente.fleet.subtipo_cuenta = '5';
+                    api_params["tct_tipo_fl_txf_c"] = "Prospecto";
+                    api_params["tct_subtipo_fl_txf_c"] = "Contactado";
+                    api_params["tct_tipo_cuenta_fl_c"] = "PROSPECTO CONTACTADO";
+                    Oproductos.productos.tct_tipo_cuenta_fl_c = '2';
+                    Oproductos.productos.tct_subtipo_fl_txf_c = '2';
+                    v360.ResumenCliente.fleet.tipo_cuenta = '2';
+                    v360.ResumenCliente.fleet.subtipo_cuenta = '2';
                 }
             }
             if ((Oproductos.productos.tct_tipo_cuenta_uc_c == "4" || Oproductos.productos.tct_tipo_cuenta_uc_c == "5") && productousuario.includes('8')) {
                 if (App.user.id == this.model.get('user_id7_c')) {
                     tipo_producto = 8;
-                    api_params["tct_tipo_uc_txf_c"] = "Lead";
-                    api_params["tct_subtipo_uc_txf_c"] = "En Calificación";
-                    api_params["tct_tipo_cuenta_uc_c"] = "LEAD EN CALIFICACIÓN";
-                    Oproductos.productos.tct_tipo_cuenta_uc_c = '1';
-                    Oproductos.productos.tct_subtipo_uc_txf_c = '5';
-                    v360.ResumenCliente.uniclick.tipo_cuenta = '1';
-                    v360.ResumenCliente.uniclick.subtipo_cuenta = '5';
+                    api_params["tct_tipo_uc_txf_c"] = "Prospecto";
+                    api_params["tct_subtipo_uc_txf_c"] = "Contactado";
+                    api_params["tct_tipo_cuenta_uc_c"] = "PROSPECTO CONTACTADO";
+                    Oproductos.productos.tct_tipo_cuenta_uc_c = '2';
+                    Oproductos.productos.tct_subtipo_uc_txf_c = '2';
+                    v360.ResumenCliente.uniclick.tipo_cuenta = '2';
+                    v360.ResumenCliente.uniclick.subtipo_cuenta = '2';
                 }
             }
             // Actualiza Productos
@@ -2650,9 +2650,9 @@
                 if (app.user.id == this.model.get('user_id7_c') && Productos[key].tipo_producto == 8) idprod = Productos[key].id;
                 if (idprod) {
                     var params = {};
-                    params["tipo_cuenta"] = "1";
-                    params["subtipo_cuenta"] = "5";
-                    params["tipo_subtipo_cuenta"] = "LEAD EN CALIFICACIÓN";
+                    params["tipo_cuenta"] = "2";
+                    params["subtipo_cuenta"] = "2";
+                    params["tipo_subtipo_cuenta"] = "PROSPECTO CONTACTADO";
                     var uni = app.api.buildURL('uni_Productos/' + idprod, null, null);
                     app.api.call('update', uni, params, {
                         success: _.bind(function (data) {
@@ -5604,7 +5604,7 @@
                 errors['error_leasingUP'] = errors['error_leasingUP'] || {};
                 errors['error_leasingUP'].required = true;
             }
-            if (faltantesleasup == 0 && $('.chk_l_nv')[0].checked == true) {
+            if (faltantesleasup == 0 && $('.chk_l_nv')[0].checked == true && cont_uni_p.ResumenProductos.leasing.status_management_c != "3") {
                 this.model.set('promotorleasing_c', '9 - No Viable');
                 this.model.set('user_id_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.leasing.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
@@ -5673,7 +5673,7 @@
                 errors['error_FactorajeUP'] = errors['error_FactorajeUP'] || {};
                 errors['error_FactorajeUP'].required = true;
             }
-            if (faltantesFactorajeUP == 0 && $('.chk_f_nv')[0].checked == true) {
+            if (faltantesFactorajeUP == 0 && $('.chk_f_nv')[0].checked == true && cont_uni_p.ResumenProductos.factoring.status_management_c != "3") {
                 this.model.set('promotorfactoraje_c', '9 - No Viable');
                 this.model.set('user_id1_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.factoring.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
@@ -5742,7 +5742,7 @@
                 errors['error_CAUP'] = errors['error_CAUP'] || {};
                 errors['error_CAUP'].required = true;
             }
-            if (faltantesCAUP == 0 && $('.chk_ca_nv')[0].checked == true) {
+            if (faltantesCAUP == 0 && $('.chk_ca_nv')[0].checked == true && cont_uni_p.ResumenProductos.credito_auto.status_management_c != "3") {
                 this.model.set('promotorcredit_c', '9 - No Viable');
                 this.model.set('user_id2_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.credito_auto.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
@@ -5811,7 +5811,7 @@
                 errors['error_FLeetUP'] = errors['error_FLeetUP'] || {};
                 errors['error_FLeetUP'].required = true;
             }
-            if (faltantesFleetUP == 0 && $('.chk_fl_nv')[0].checked == true) {
+            if (faltantesFleetUP == 0 && $('.chk_fl_nv')[0].checked == true && cont_uni_p.ResumenProductos.fleet.status_management_c != "3") {
                 this.model.set('promotorfleet_c', '9 - No Viable');
                 this.model.set('user_id6_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.fleet.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
@@ -5880,7 +5880,7 @@
                 errors['error_UniclickUP'] = errors['error_UniclickUP'] || {};
                 errors['error_UniclickUP'].required = true;
             }
-            if (faltantesUniclickUP == 0 && $('.chk_u_nv')[0].checked == true) {
+            if (faltantesUniclickUP == 0 && $('.chk_u_nv')[0].checked == true && cont_uni_p.ResumenProductos.uniclick.status_management_c != "3") {
                 this.model.set('promotoruniclick_c', '9 - Sin Gestor');
                 this.model.set('user_id7_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.uniclick.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
