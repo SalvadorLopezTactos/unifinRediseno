@@ -24,7 +24,7 @@
     			alert("Enviando notificación...");
     		},
     		onCancel: function(){
-    			alert("Cancelando operación!");
+    			alert("Cancelando operación!..");
     		}
     	});
     },
