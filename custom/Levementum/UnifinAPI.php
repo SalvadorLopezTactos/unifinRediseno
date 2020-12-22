@@ -2309,9 +2309,9 @@ SQL;
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_URL, $host);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
             curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
             curl_setopt($ch, CURLINFO_HEADER_OUT, 1);
+            curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                     'Content-Type: application/json',
                     'Authorization: Basic ' . $auth)
