@@ -2,26 +2,28 @@
     plugins: ['Dashlet'],
 
     events: {
-        'click #btnNoViable': 'noViable',
+        'click #btnNoViableActivo': 'noViableActivo',
     },
 
-    dataAccSolicitudes:[],
+    dataAccSolicitudesActivo:[],
 
     initialize: function (options) {
         this._super("initialize", [options]);
-        self_solpi = this;
-        this.cuentasProspectInteresado();
+        self_pi_activos = this;
+        this.cuentasProspectInteresadoActivo();
     },
 
 
-    cuentasProspectInteresado: function () {
-        //API para obtener los Leads sin contactar
-        app.api.call('GET', app.api.buildURL('GetLeadsProspectoInteresado/'), null, {
+    cuentasProspectInteresadoActivo: function () {
+        //API para obtener los Leads sin contactar con estatus Activo
+        estActivo = "1";
+
+        app.api.call('GET', app.api.buildURL('GetLeadsProspectoInteresado/'+ estActivo), null, {
             success: function (data) {
 
-                self_solpi.dataAccSolicitudes = data.records;
+                self_pi_activos.dataAccSolicitudesActivo = data.records;
                 // console.log(self_solpi.dataAccSolicitudes);
-                self_solpi.render();
+                self_pi_activos.render();
             },
             error: function (e) {
                 throw e;
@@ -29,9 +31,9 @@
         });
     },
 
-    noViable: function (events) {
+    noViableActivo: function (events) {
 
-        btnIdCuenta = $(events.currentTarget).attr('title');
+        btnIdCuentaActivo = $(events.currentTarget).attr('title');
         
         var quickCreateView = null;
         if (!quickCreateView) {
@@ -41,7 +43,7 @@
                 name: 'ModalNoViableCuentas',
                 layout: this.layout,
                 module: 'Accounts',
-                contextIdCuenta: btnIdCuenta
+                contextIdCuenta: btnIdCuentaActivo
             });
 
             this.layout._components.push(quickCreateView);
