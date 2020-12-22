@@ -35,8 +35,8 @@ class IntegracionQuantico
                 //"SinglePaymentPercentage"=>$bean->porciento_ri_c,
                 "SinglePaymentPercentage" => '0',
                 "CreditLineId" => '0',
-                "BackOfficeId" => $arrayBo[0],
-                "BackOfficeName" =>$app_list_strings['usuario_bo_0'][$arrayBo[0]]
+                "BackOfficeId" => str_replace("^","", $arrayBo[0]),
+                "BackOfficeName" =>$app_list_strings['usuario_bo_0'][str_replace("^","",$arrayBo[0])]
             );
             $callApi = new UnifinAPI();
             $resultado = $callApi->postQuantico($body, $auth_encode);
