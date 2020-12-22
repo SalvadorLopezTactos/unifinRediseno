@@ -220,3 +220,4 @@ $mod_strings['LBL_CE_COMISIONES'] = 'Comisiones';
 $mod_strings['CRéDITO_ESTRUCTURADO'] = 'Comisiones adicionales';
 $mod_strings['LBL_CREDITO_ESTRUCTURADO'] = 'Comisiones adicionales';
 $mod_strings['LBL_NEGOCIO_C'] = 'Negocio';
+$mod_strings['LBL_QUANTICO_ID_C'] = 'Id Quantico';

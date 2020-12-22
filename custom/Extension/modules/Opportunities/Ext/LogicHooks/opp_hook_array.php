@@ -96,7 +96,7 @@ $hook_array['before_save'][] = Array(
 );
 
 $hook_array['after_save'][] = Array(
-    9,
+    13,
     'Lanza petición a Unics cuando el producto es Unilease',
     'custom/modules/Opportunities/opp_unilease.php',
     'ProductUnilease', // name of the class
@@ -125,4 +125,12 @@ $hook_array['after_save'][] = Array(
     'custom/modules/Opportunities/opp_notificacion_director.php',
     'NotificacionDirector', // name of the class
     'notificaEstatusAsesor'
+);
+
+$hook_array['after_save'][] = Array(
+    14,
+    'Envía integracion Quantico de Leasing, Factoraje y CA',
+    'custom/modules/Opportunities/opp_quantico.php',
+    'IntegracionQuantico', // name of the class
+    'QuanticoIntegracion'
 );
