@@ -2300,8 +2300,9 @@ SQL;
 
     public function postQuantico($bodyJson,$auth)
     {
+        global $sugar_config;
         try {
-            $host=$GLOBALS['quantico_url_base'] . '/CreditRequestIntegration/rest/CreditRequestApi/PostRegister';
+            $host=$sugar_config['quantico_url_base'] . '/CreditRequestIntegration/rest/CreditRequestApi/PostRegister';
             $fields_string = json_encode($bodyJson);
             $GLOBALS['log']->fatal('Entra Funcion postQuantico');
             $ch = curl_init();
@@ -2320,7 +2321,7 @@ SQL;
             $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
             $response = json_decode($result, true);
-            $GLOBALS['log']->fatal('END Funcion postCBMambu');
+            $GLOBALS['log']->fatal('END Funcion postQuantico');
             return $response;
         } catch (Exception $exception) {
 
