@@ -1726,6 +1726,11 @@ SQL;
                 $fields['monto'] = $opportunidad['monto_c'] * (1 - ($opportunidad['porciento_ri_c'] / 100));
             }
 
+            if( $opportunidad['tipo_producto_c'] == "LEASING" && $opportunidad['negocio_c'] == '3')
+            {
+                $fields['arrendamientoEstructurado']= 1;
+            }
+
             //CVV - 29/03/2016 - Si el proceso es para un BO se elimina el item de promotor y se agrega el grupo de asignación
             if ($backoffice) {
                 unset($fields['promotor']);
