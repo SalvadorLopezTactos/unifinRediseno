@@ -7,13 +7,13 @@
         </tr>
     </thead>
     <tbody>
-        {{#each dataLead}}
+        {{#each dataLeadActivos}}
         <tr>
-            <td><a href="#Leads/{{idLead}}" id="idLeads" target="_blank">{{nombre}}</a></td>
+            <td><a href="#Leads/{{idLead}}" target="_blank">{{nombre}}</a></td>
             <td>{{#if subtipo}}{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo}}{{/if}}</td>
             <td>
-                <button class="btn btn btnCancel" id="btnCancel" type="submit" title="{{idLead}}">Cancelar</button>
-                <a href="#Leads/{{idLead}}" id="btnProspecto" target="_blank" class="btn" rel="tooltip">Establecer Prospecto Contactado</a>
+                <button class="btn btn btnCancelActivo" id="btnCancelActivo" type="submit" title="{{idLead}}">Cancelar</button>
+                <a href="#Leads/{{idLead}}" id="btnProspectoActivo" target="_blank" class="btn" rel="tooltip">Establecer Prospecto Contactado</a>
             </td>  
         </tr>
         {{/each}}
