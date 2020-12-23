@@ -182,6 +182,7 @@ class Dynamics365 extends SugarApi
         array_push($responseFull, $responseDynamics);
 
         //Llamada a api para Cuentas por pagar, solo se ejecuta la primera vez
+        $GLOBALS['log']->fatal("VALOR DE BANDERA CPP: ".$beanCuenta->control_cpp_chk_c);
         if(!$beanCuenta->control_cpp_chk_c){
             $GLOBALS['log']->fatal("Request cuentas por pagar: url: ".$urlCPP." idProveedor: ".$beanCuenta->idcliente_c);
             $responseCPP=$this->postCPP("http://172.26.1.84:9011/proveedores/EnvioCuentasPorPagar365",$beanCuenta->idcliente_c);
@@ -193,7 +194,10 @@ class Dynamics365 extends SugarApi
                 $codigo=$responseCPP->resultCode;
                 if($codigo==1){
                     $GLOBALS['log']->fatal("Proveedor ya registrado");
-                    array_push($responseFull, "");
+                    array_push($responseFull, $responseCPP->errores[0]);
+
+                    $queryUpdate="UPDATE accounts_cstm SET control_cpp_chk_c = '1', id_cpp_365_chk_c='{$responseCPP->errores[0]}' WHERE id_c = '{$beanCuenta->id}'";
+                    $queryResult = $db->query($queryUpdate);
                 }else{
                     $GLOBALS['log']->fatal('Proveedor creado (Cuentas por pagar): '.$responseCPP->data->idProveedor365);
                     array_push($responseFull, $responseCPP->data->idProveedor365);
