@@ -55,6 +55,8 @@
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
         this.model.addValidationTask('valida_usuarios_vetados',_.bind(this.valida_usuarios_vetados, this));
         this.model.on('sync',this.enableparentname,this);
+		/***********  Lead Management  *************/
+		this.model.addValidationTask('lead_management', _.bind(this.ConfirmCancelar, this));  //OnConfirm cancelar LEad-PRospecto contactado
     },
 
     _render: function (options) {
@@ -828,5 +830,112 @@
         for(var i=0;i<this.model.attributes.invitees.models.length;i++){
             this.invitados+=this.model.attributes.invitees.models[i].id + ',';
         }
+    },
+	
+	ConfirmCancelar: function(fields, errors, callback) {
+				
+		if ($.isEmptyObject(errors)&& this.model.get('parent_id') != "" && this.model.get('parent_type') == "Leads") {
+			// Cancelar - no esta interesado, NO viable, NO interesado- cita forada,Cancelada por el prospecto no le interesa
+			if(this.model.get('resultado_c')=='2' ||this.model.get('resultado_c')=='18' || this.model.get('resultado_c')=='21' || this.model.get('resultado_c')=='25'){
+				/*************************************************/
+				if (Modernizr.touch) {
+					app.$contentEl.addClass('content-overflow-visible');
+				}
+				/**check whether the view already exists in the layout.
+				* If not we will create a new view and will add to the components list of the record layout
+				* */
+				
+				//var quickCreateView = this.layout.getComponent('MotivoCancelModal');
+				var quickCreateView = null;
+				if (!quickCreateView) {
+					/** Create a new view object */
+					quickCreateView = app.view.createView({
+						context: this.context,
+						name: 'MotivoCancelModal',
+						layout: this.layout,
+						module: 'Calls'
+					});
+					/** add the new view to the components list of the record layout*/
+					this.layout._components.push(quickCreateView);
+					this.layout.$el.append(quickCreateView.$el);
+				}
+				/**triggers an event to show the pop up quick create view*/
+				this.layout.trigger("app:view:MotivoCancelModal");
+				/**************************************/
+				callback(null, fields, errors);
+			}else if(this.model.get('resultado_c')=='4' ||this.model.get('resultado_c')=='5' || this.model.get('resultado_c')=='19' 
+			|| this.model.get('resultado_c')=='6' || this.model.get('resultado_c')=='4' || this.model.get('resultado_c')=='23'){
+				// Está Interesado. Se procede a generar expediente
+				// Está Interesado. Se agendó otra visita
+				// Está interesado. Se agendó otra llamada
+				// Está Interesado. Se recogió información
+				// Se cerró una venta
+				// Se procede a generar expediente
+				// Está interesado solicita cotización para proceder
+				var filter_arguments = {
+					"id": this.model.get('parent_id')
+				};
+				app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
+					success: _.bind(function (data) {
+						console.log(data);
+						app.alert.dismiss('upload');
+						app.controller.context.reloadData({});
+						if (data.idCuenta === "") {
+							app.alert.show("Conversión", {
+								level: "error",
+								messages: data.mensaje,
+								autoClose: false
+							});
+							errors['status'] = errors['status'] || {};
+							errors['status'].required = true;
+							callback(null, fields, errors);
+						} else {
+							app.alert.show("Conversión", {
+								level: "success",
+								messages: data.mensaje,
+								autoClose: false
+							});
+							//this._disableActionsSubpanel();
+							callback(null, fields, errors);
+						}
+						//var btnConvert = this.getField("convert_Leads_button")
+	
+						//if (this.model.get('subtipo_registro_c') == '2') {
+						//    btnConvert.show();
+						//} else {
+						//    btnConvert.hide();
+						//}
+						//app.controller.context.reloadData({});
+						//SUGAR.App.controller.context.reloadData({})
+						/* Para refrescar solo un campo
+	
+						model.fetch({
+	
+						view: undefined,
+	
+						fields: ['industry']
+	
+						});
+						*/
+					}, this),
+					failure: _.bind(function (data) {
+						app.alert.dismiss('upload');
+						errors['status'] = errors['status'] || {};
+						errors['status'].required = true;
+						callback(null, fields, errors);	
+					}, this),
+					error: _.bind(function (data) {
+						errors['status'] = errors['status'] || {};
+						errors['status'].required = true;
+						app.alert.dismiss('upload');
+						callback(null, fields, errors);
+					}, this)
+				});
+			}else{
+				callback(null, fields, errors);
+			}
+		}else{
+			callback(null, fields, errors);
+		}
     },
 })

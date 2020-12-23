@@ -1,0 +1,161 @@
+<style>
+  /* The Modal (background) */
+  .btn-Guardar {
+        line-height: 18px;
+        text-align: center;
+        display: inline-block;
+        margin-top: 2px;
+        font-size: 12px;
+    }
+
+  .sinborde { /*Table without border*/
+  border: 0;
+  }
+
+  .modalDashlet {
+      position: fixed; /* Stay in place */
+      padding-top: 100px; /* Location of the box */
+      padding-bottom: 100%;
+      top: 0;
+      left:0;
+      /* width: 100%; /* Full width */
+      /*height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  /* Modal Content */
+  .modal-content {
+      position: relative;
+      background-color: #fefefe;
+      margin: auto;
+      padding: 1px;
+      border: 1px solid #888;
+      width: 98%;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+      -webkit-animation-name: animatetop;
+      -webkit-animation-duration: 0.4s;
+      animation-name: animatetop;
+      animation-duration: 0.4s
+  }
+
+  /* Add Animation */
+  @-webkit-keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+  }
+
+  @keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+  }
+
+  /* The Close Button */
+  .close {
+      color: white;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+  }
+
+  .modal-header {
+      padding: .5px 0px;
+      background-color: #21618C;
+      color: white;
+  }
+
+  .modal-body {
+    padding: .5px 0px;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .modal-footer {
+      padding: 2px 16px;
+      background-color: #21618C;
+      color: #ffffff;
+      font-size: 12px;
+      text-align: center;
+  }
+
+  .pointer {cursor: pointer;}
+
+  tr.border_ td {
+  	border: 1px solid #e9e9e9;
+}
+
+</style>
+
+<div data-dashlet="dashlet" class="dashlet-content" style="padding:20px;">
+	<div class="bs-docs-example dashlet-container">
+		<div class="row-fluid">
+			<div class="span3">
+				<button class="btn" style="background:#f7f8f9;width:90%" id="assign_cp">Asignación por Centro de Prospección</a>
+			</div>
+			<div class="span3">
+				<button class="btn" style="background:#f7f8f9;width:90%" id="assign_asesor">Asignación por asesor firmado</button>
+			</div>
+			<div class="span3">
+				<button class="btn" style="background:#f7f8f9;width:90%" id="assign_bd">Asignación automática por base de datos</a>
+			</div>
+			<div class="span3">
+				<button class="btn" style="background:#f7f8f9;width:90%" id="assign_cancel">Asignación a través de cancelados y aplazados</button>
+			</div>
+		</div>
+  </div>
+<div>
+<!-- Comienza modal-->
+<div id="modalRecordsCancel" class="row-fluid" style="display:none">
+	 <div class="modalDashlet span12" style="width:100%">
+    	<!-- Modal content -->
+    	<div class="modal-content">
+    		<div class="modal-header">
+    			<span class="close modalRecordsCancel">&times;</span>
+    			<h2> &nbsp;&nbsp; Leads Cancelados/Aplazados</h2>
+    		
+    			{{#if registros}}
+    			<table class="dataTable table-striped table-bordered" style="table-layout: fixed;">
+    				<thead>
+    					<tr>
+    						<th class="span4">Nombre</th>
+    						<th class="span2">
+    							Tipo de Lead
+		                  		<i id="orderByAnexo" class="fa fa-unsorted"></i>
+		                	</th>
+		                	<th class="span2">
+		                  		Subtipo de Lead
+		                  		<i id="orderBySubtipo" class="fa fa-unsorted"></i>
+		                	</th>
+		                	<th class="span2">
+		                  		Estatus
+		                  		<i id="orderByStatus" class="fa fa-unsorted"></i>
+		                	</th>
+			                <th class="span2">Acción</th>
+		              </tr>
+		            </thead>
+		    </div><!-- modal header -->
+		            <tbody>
+                    {{#each registros}}
+                    	<tr class="border_">
+                    		<td class="span4"><font color="#222">{{name}}</font></td>
+                    		<td class="span2"><font color="#222">{{getUnifinListValue 'tipo_registro_cuenta_list' tipo_registro_c}}</font></td>
+                    		<td class="span2"><font color="#222">{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo_registro_c}}</font></td>
+                    		<td class="span2"><font color="#222">{{getUnifinListValue 'status_management_list' status_management_c}}</font></td>
+                    		<td class="span2"><button class="btn btnLeadSelect" type="submit" data-id="{{id}}">Seleccionar</button></td>
+                     	</tr>
+                   {{/each}}
+                  </tbody>
+    			</table>
+    			{{/if}}
+    		
+    	</div><!-- modal content-->
+    </div>
+</div><!-- Termina modal-->
