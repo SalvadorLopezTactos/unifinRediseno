@@ -12,10 +12,10 @@
   border: 0;
   }
 
-  .modal {
+  .modalDashlet {
       position: fixed; /* Stay in place */
       padding-top: 100px; /* Location of the box */
-      padding-bottom: 100px;
+      padding-bottom: 100%;
       top: 0;
       left:0;
       /* width: 100%; /* Full width */
@@ -88,6 +88,10 @@
 
   .pointer {cursor: pointer;}
 
+  tr.border_ td {
+  	border: 1px solid #e9e9e9;
+}
+
 </style>
 
 <div data-dashlet="dashlet" class="dashlet-content" style="padding:20px;">
@@ -110,36 +114,48 @@
 <div>
 <!-- Comienza modal-->
 <div id="modalRecordsCancel" class="row-fluid" style="display:none">
-	 <div class="modal span12" style="width:100%">
+	 <div class="modalDashlet span12" style="width:100%">
     	<!-- Modal content -->
     	<div class="modal-content">
     		<div class="modal-header">
     			<span class="close modalRecordsCancel">&times;</span>
     			<h2> &nbsp;&nbsp; Leads Cancelados/Aplazados</h2>
-
-    			<table class="dataTable table-striped table-border" style="table-layout: fixed;">
+    		
+    			{{#if registros}}
+    			<table class="dataTable table-striped table-bordered" style="table-layout: fixed;">
     				<thead>
     					<tr>
     						<th class="span4">Nombre</th>
     						<th class="span2">
     							Tipo de Lead
-		                  	<i id="orderByAnexo" class="fa fa-unsorted"></i>
+		                  		<i id="orderByAnexo" class="fa fa-unsorted"></i>
 		                	</th>
 		                	<th class="span2">
 		                  		Subtipo de Lead
-		                  	<i id="orderBySubtipo" class="fa fa-unsorted"></i>
+		                  		<i id="orderBySubtipo" class="fa fa-unsorted"></i>
 		                	</th>
 		                	<th class="span2">
 		                  		Estatus
-		                  	<i id="orderByStatus" class="fa fa-unsorted"></i>
+		                  		<i id="orderByStatus" class="fa fa-unsorted"></i>
 		                	</th>
-			                <th class="span2">Régimen Fiscal</th>
-			                <th class="span2">Usuario</th>
-			                <th class="span2">Fecha de creación</th>
+			                <th class="span2">Acción</th>
 		              </tr>
 		            </thead>
+		    </div><!-- modal header -->
+		            <tbody>
+                    {{#each registros}}
+                    	<tr class="border_">
+                    		<td class="span4"><font color="#222">{{name}}</font></td>
+                    		<td class="span2"><font color="#222">{{getUnifinListValue 'tipo_registro_cuenta_list' tipo_registro_c}}</font></td>
+                    		<td class="span2"><font color="#222">{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo_registro_c}}</font></td>
+                    		<td class="span2"><font color="#222">{{getUnifinListValue 'status_management_list' status_management_c}}</font></td>
+                    		<td class="span2"><button class="btn btnLeadSelect" type="submit" data-id="{{id}}">Seleccionar</button></td>
+                     	</tr>
+                   {{/each}}
+                  </tbody>
     			</table>
-    		</div><!-- modal header -->
+    			{{/if}}
+    		
     	</div><!-- modal content-->
     </div>
 </div><!-- Termina modal-->
