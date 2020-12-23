@@ -5,6 +5,7 @@
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
+        this.fromProtocolo=options.context.attributes.dataFromProtocolo;
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
         this.model.on('sync', this._readonlyFields, this);
         this.model.on("change:lead_cancelado_c", _.bind(this._subMotivoCancelacion, this));
@@ -22,6 +23,10 @@
         this.on('render', this._hidechkLeadCancelado, this);
         this.model.on('change:name_c', this.cleanName, this);
         this.model.on("change:regimen_fiscal_c", _.bind(this._cleanRegFiscal, this));
+    },
+
+    delegateButtonEvents: function() {
+        this.context.on('button:cancel_button:click', this.cancel, this);
     },
 
     _cleanRegFiscal: function () {
@@ -545,6 +550,26 @@
                 return "true";
             }
         }
+    },
+
+    cancel: function () {
+
+        //Validación para obligar a registrar Lead a través de Protocolo al asesor firmado
+        //necesariamente se agrega 'else' para que en una creación natural, el botón cancel siga con el funcionamiento natural
+        if(this.fromProtocolo=='1'){
+            app.alert.show("requiredSetLead", {
+                level: "warning",
+                title: "Es necesario que complete el registro de Lead",
+                autoClose: false
+            });
+
+            // update the browser URL with the proper
+        app.router.navigate('#Home', {trigger: true});
+
+        }else{
+            this._super("cancel");
+        }
+        
     },
 
     _render: function (options) {

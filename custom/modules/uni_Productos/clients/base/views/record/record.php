@@ -175,8 +175,8 @@ array (
               ),
               1 => 
               array (
-                  'name' => 'multilinea_c',
-                  'label' => 'LBL_MULTILINEA_C',
+                'name' => 'multilinea_c',
+                'label' => 'LBL_MULTILINEA_C',
               ),
               2 => 
               array (
@@ -310,6 +310,14 @@ array (
               array (
                 'name' => 'fecha_asignacion_c',
                 'label' => 'LBL_FECHA_ASIGNACION_C',
+              ),
+              28 => 
+              array (
+                'name' => 'status_management_c',
+                'label' => 'LBL_STATUS_MANAGEMENT',
+              ),
+              29 => 
+              array (
               ),
             ),
           ),

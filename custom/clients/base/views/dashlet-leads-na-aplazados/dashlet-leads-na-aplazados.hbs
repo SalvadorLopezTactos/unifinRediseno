@@ -1,0 +1,19 @@
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <td><b>Nombre</b></td>
+            <td><b>Acciones</b></td>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each dataLeadAplazado}}
+        <tr>
+            <td><a href="#Leads/{{idLead}}" target="_blank">{{nombre}}</a></td>
+            <td>
+                <button class="btn btn btnCancel" id="btnCancelAplazado" type="submit" title="{{idLead}}">Cancelar</button>
+                <a href="#Leads/{{idLead}}" id="btnProspectoAplazado" target="_blank" class="btn" rel="tooltip">Establecer Prospecto Contactado</a>
+            </td>  
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
