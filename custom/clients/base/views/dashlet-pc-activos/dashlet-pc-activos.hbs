@@ -1,0 +1,25 @@
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <td><b>Nombre Cuenta</b></td>
+            <td><b>Tipo</b></td>
+            <td><b>Subtipo</b></td>
+            <td><b>Estatus Producto</b></td>
+            <td><b>Acciones</b></td>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each dataAcProspectoContactadoActivo}}
+        <tr>
+            <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
+            <td>{{#if tipoCuenta}}{{getUnifinListValue 'tipo_registro_cuenta_list' tipoCuenta}}{{/if}}</td>
+            <td>{{#if subtipoCuenta}}{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipoCuenta}}{{/if}}</td>
+            <td>{{#if EstatusProducto}}{{getUnifinListValue 'status_management_list' EstatusProducto}}{{/if}}</td>
+            <td>
+                <button class="btn btn btnCancelPCActivo" id="btnCancelPCActivo" type="submit" title="{{idCuenta}}">Cancelar</button>
+                <button class="btn btn btnPresolicitudActivo" id="btnPresolicitudActivo" type="submit" title="{{idCuenta}}">Registrar presolicitud</button>
+            </td>  
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
