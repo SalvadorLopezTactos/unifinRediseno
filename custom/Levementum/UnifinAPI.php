@@ -1587,6 +1587,7 @@ SQL;
 
             $monto = ($opportunidad['monto_gpo_emp_c'] != 0)? $opportunidad['monto_gpo_emp_c'] : $opportunidad['monto_c']; 
             $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : TIPO_PRODUCTO " . $opportunidad['tipo_producto_c']);
+                $productoFinancieroId = ($opportunidad['producto_financiero_c']==0 || $opportunidad['producto_financiero_c']==41 )?"":$opportunidad['producto_financiero_c'];
                 //CVV - 29/03/2016 - Se crea el arreglo con los campos que aplican para todos los productos
                 $fields = array(
                     "usuarioAutenticado" => $current_user->user_name,
@@ -1612,7 +1613,7 @@ SQL;
                     "comision"=> $opportunidad['porcentaje_ca_c'],
                     "pagoInicialCotizacion"=> 0,
                     "pagoMensual" => 0+$opportunidad['ca_pago_mensual_c'],
-                    "idProductoFinanciero"=>$opportunidad['producto_financiero_c']==0?"":$opportunidad['producto_financiero_c']
+                    "idProductoFinanciero"=>$productoFinancieroId
 
                 );
                 //Si la Solicitud es de Credito SOS recalcula el valor del campo Riesgo a "Mayor".
@@ -1645,13 +1646,13 @@ SQL;
                     }
 
                     //En Leasing se calcula el riesgo neto
-                    if($opportunidad['tipo_producto_c']=="LEASING" && $opportunidad['producto_financiero_c']==""){
+                    if($opportunidad['tipo_producto_c']=="LEASING"){
                         $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Se asigna RI de operacion no de CF " . print_r($opportunidad['porciento_ri_c'],1));
                         $fields['rentaInicial'] =  $opportunidad['porciento_ri_c'];
                         $fields['monto'] = $opportunidad['monto_c'] * (1 - ($opportunidad['porciento_ri_c']/100));
                     }
 
-                    if($opportunidad['tipo_producto_c']=="CREDITO AUTOMOTRIZ" && $opportunidad['producto_financiero_c']==""){
+                    if($opportunidad['tipo_producto_c']=="CREDITO AUTOMOTRIZ" ){
                         $fields['rentaInicial'] = $opportunidad['porcentaje_renta_inicial_c'];
                         //agregamos los 3 parametros para el cotizador
                         $fields['engancheAutomovil'] = 0+$opportunidad['ca_importe_enganche_c']; //LEASING : RENTA INICIA Y PARA CA. : ENGANCHE  Importe enganche Renta inicial
@@ -1667,7 +1668,7 @@ SQL;
                 }
 
                 //CVV - 29/03/2016 -  Se agregan los items que aplican para Factoraje
-                if($opportunidad['tipo_producto_c']=="FACTORAJE" && $opportunidad['producto_financiero_c']=="") {
+                if($opportunidad['tipo_producto_c']=="FACTORAJE" ) {
                     switch($opportunidad['f_tipo_factoraje_c']){
                         case 1:
                             $opportunidad['f_tipo_factoraje_c'] = "COBRANZA_DELEGADA_CON_RECURSOS";
@@ -1702,6 +1703,30 @@ SQL;
                     $fields['depositoGarantiaCotizacion'] = "0";
 					$fields['vrc'] = "0";
                     $fields['vri'] = "0";
+                }
+
+                if($opportunidad['producto_financiero_c']=='43') {
+                    //$fields['idCotizacion'] = $opportunidad['idcot_bpm_c'];
+                    $fields['depositoGarantiaCotizacion'] = $opportunidad['deposito_garantia_c'];
+                    $lista = str_replace('^','', $opportunidad['multiactivo_c']);
+                    $lista = explode(',', $lista);
+                    $multiactivos = array(
+                        "idActivoPrincipal" => "97",
+                        "indexActivoPrincipal" => "000100030001",
+                        "nombreActivoPrincipal" => "TRANSPORTE TERRESTRE AUTOS",
+                        "multiactivos" => $lista
+                    );
+                    $multiactivos = json_encode($multiactivos);
+                    $fields['idActivo'] = 97;
+                    $fields['indexActivo'] = '000100030001';
+                    $fields['cadenaMultiActivos'] = $multiactivos;
+                    $fields['tasa'] = 10;
+                    $fields['vrc'] = 5;
+                    $fields['vri'] = 10;
+                    $fields['rentaInicial'] = 1;
+                    $fields['plazo'] = 1;
+                    $fields['comision'] = 1;
+                    $fields['monto'] = $opportunidad['monto_c'] * (1 - ($opportunidad['porciento_ri_c']/100));
                 }
 
                 //CVV - 29/03/2016 - Si el proceso es para un BO se elimina el item de promotor y se agrega el grupo de asignación
