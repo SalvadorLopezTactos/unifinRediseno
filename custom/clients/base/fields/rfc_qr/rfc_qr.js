@@ -527,26 +527,26 @@
   																direccion[indice_indicador].listCiudad = listCiudad;
   																direccion[indice_indicador].listCiudadFull = listCiudad;                                  
                                 } else {
+                                  var quita = '';
+                                  if(direccion[indice_indicador].indicadorSeleccionados.includes('^2^,')) {
+                                    quita = direccion[indice_indicador].indicadorSeleccionados.replace("^2^,", "");
+                                  }
+                                  if(direccion[indice_indicador].indicadorSeleccionados.includes(',^2^')) {
+                                    quita = direccion[indice_indicador].indicadorSeleccionados.replace(",^2^", "");
+                                  }
+      														var indicador = quita;
+        													var dir_indicador_map_list = app.lang.getAppListStrings('dir_indicador_map_list');
+                                  direccion[indice_indicador].indicadorSeleccionados = quita;
+        													indicador = indicador.substring(1,indicador.length-1);
+        													indicador = indicador.split('^,^');
+        													indicador.sort();
+        													for (var key1 in dir_indicador_map_list) {
+        														var value = app.lang.getAppListStrings('dir_indicador_map_list')[key1];
+        														if (value == indicador) direccion[indice_indicador].indicador = key1;
+        													}
+                                  direccion[indice_indicador].bloqueado = 0;
+        													cont_dir.oDirecciones.direccion = direccion;
                                   if(duplicados == 0) {
-                                    var quita = '';
-                                    if(direccion[indice_indicador].indicadorSeleccionados.includes('^2^,')) {
-                                      quita = direccion[indice_indicador].indicadorSeleccionados.replace("^2^,", "");
-                                    }
-                                    if(direccion[indice_indicador].indicadorSeleccionados.includes(',^2^')) {
-                                      quita = direccion[indice_indicador].indicadorSeleccionados.replace(",^2^", "");
-                                    }
-      														  var indicador = quita;
-        														var dir_indicador_map_list = app.lang.getAppListStrings('dir_indicador_map_list');
-                                    direccion[indice_indicador].indicadorSeleccionados = quita;
-        														indicador = indicador.substring(1,indicador.length-1);
-        														indicador = indicador.split('^,^');
-        														indicador.sort();
-        														for (var key1 in dir_indicador_map_list) {
-        															var value = app.lang.getAppListStrings('dir_indicador_map_list')[key1];
-        															if (value == indicador) direccion[indice_indicador].indicador = key1;
-        														}
-                                    direccion[indice_indicador].bloqueado = 0;
-        														cont_dir.oDirecciones.direccion = direccion;
     																var nuevaDireccion = {
     																	"tipodedireccion":"",
     																	"listTipo":App.lang.getAppListStrings('dir_tipo_unique_list'),
