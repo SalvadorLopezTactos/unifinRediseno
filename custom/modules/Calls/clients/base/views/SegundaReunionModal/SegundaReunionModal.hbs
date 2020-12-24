@@ -1,0 +1,150 @@
+<style>
+
+    .modal-header_cstm h3 {
+        font-size: 16px;
+        font-weight: normal;
+		justify-content: center;
+		align-items: center;
+    }
+
+	.modal-header_cstm {
+        background: #fff7ad;
+        color: #866500;
+        padding: 1px;
+		justify-content: center;
+		align-items: center;
+		border-color: #ffd132;
+		text-align: center;
+		height: 48px;
+    }
+
+    .modal-body_cstm {
+        padding: 18px 40px 16px;
+		font-size: 14px;
+		display: block;
+    }
+
+    .fa-book {
+        color: #866500;
+    }
+
+    .modal_cstm {
+        position: absolute;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        top: 0;
+        overflow: auto;
+		border-color: #ffd132;
+		color: #555;
+        display: block;
+		width: auto;
+		height: auto;
+		 overflow: hidden;
+    }
+
+    .modal-backdrop {
+        /* bug fix - no overlay */
+        display: flex;
+    }
+
+    .form-horizontal {
+        display: inline-block;
+    }
+
+    .select_cstm {
+        margin: 1px 0px 1px 1px !important;
+		border-color: #ffd132;
+    }
+	
+	.modal-footer_cstm {
+		border-top: 1px solid #ffd132;
+        background: #fff7ad;
+        color: #555;
+        padding: 1px;
+		justify-content: center;
+		border-color: #ffd132;
+		width: 100%;
+		height: 35px;
+		justify-content: center;
+		
+    }
+	
+	.btn-esn{
+		text-align: center;
+		display: inline-block !important;
+		padding: 1px 1px;
+		margin: 0;
+		width: 50%;
+		color: #555;
+		font-size: 13px;
+		background: #faf8f7;
+		height: 100%;
+	}
+
+</style>
+
+<div class=" modal modal_cstm " id="SegundaReunionlModal" tabindex="-1" role="dialog">
+    <div class="modal-header_cstm">
+        <h3><b><i class="fa fa-book" style="padding: 3px; "></i>Lead Management</b></h3>
+    </div>
+	<div class="modal-body_cstm">
+		<div style="display: inline-flex;padding: 5px; ">
+            <label for="" style=" font-weight:bold;font-size: 15px; color: black; padding: 5px 5px;">Seleccione la opción deseada:</label>
+		</div><br>
+		<div class="opciones">
+			<input id="presolicitud" type="radio" value="presolicitud" name="me_option">&nbsp;&nbsp;Registrar presolicitud
+			<br><br>
+			<input id="cancelado" type="radio" value="cancelado" name="me_option">&nbsp;&nbsp;Cancelar Cuenta
+		</div>
+		<br><br>
+		<div class="motivos" id="motivos" style="display: none; padding: 5px;">
+			<div class="razon_noviable" id="razon_noviable" style="display:inline-block;padding: 5px;">
+				Razón No Viable:&nbsp;
+				<select name="RazonNoViable" id="RazonNoViable" class="select2">
+					{{{razon_nv_list}}}
+				</select>
+			</div>
+			<div class="fuera_perfil" id="fuera_perfil" style="padding: 5px;">
+				Fuera de Perfil:&nbsp;
+				<select name="FueradePerfil" id="FueradePerfil" class="select2">
+					{{{fuera_perfil_list}}}
+				</select>
+			</div>
+			<div class="cond_financieras" id="cond_financieras" style="padding: 5px;">
+				Condiciones Financieras:&nbsp;
+				<select name="condFinancieras" id="condFinancieras" class="select2">
+					{{{condiciones_financieras_list}}}
+				</select>
+			</div>
+			<div class="competencia_quien" id="competencia_quien" style="padding: 5px;">
+				¿Quién?:&nbsp;
+				<input type="text" class="comp_quien" id="comp_quien" data-field="comp_quien" />
+			</div>
+			<div class="competencia_porque" id="competencia_porque" style="padding: 5px;">
+				¿Por qué?:&nbsp;
+				<input type="text" class="comp_porque" id="comp_porque" data-field="comp_porque" />
+			</div>
+			<div class="no_product" id="no_product" style="padding: 5px;">
+				¿Qué producto?:&nbsp;
+				<select name="noProducto" id="noProducto" class="select2">
+					{{{no_producto_list}}}
+				</select>
+			</div>
+			<div class="otro_producto" id="otro_producto" style="padding: 5px;" >
+				Otro producto:&nbsp;
+				<input type="text" class="otroProducto" id="otroProducto" data-field="otroProducto" />
+			</div>
+			<div class="no_interesado" id="no_interesado" style="padding: 5px;">
+				No se encuentra interesado:&nbsp;
+				<select name="noInteresado" id="noInteresado" class="select2">
+					{{{no_interesado_list}}}
+				</select>
+			</div>
+			
+		</div>
+    </div>
+    <div class="modal-footer_cstm" style="display: inline-flex;">
+		<button class="span6 btn btn-esn" id="btn-asigna">Aceptar</button>
+    </div>
+	 
+</div>
