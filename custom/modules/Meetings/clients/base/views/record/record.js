@@ -56,7 +56,8 @@
         this.model.addValidationTask('valida_usuarios_vetados',_.bind(this.valida_usuarios_vetados, this));
         this.model.on('sync',this.enableparentname,this);
 		/***********  Lead Management  *************/
-		this.model.addValidationTask('lead_management', _.bind(this.ConfirmCancelar, this));  //OnConfirm cancelar LEad-PRospecto contactado
+		this.model.addValidationTask('lead_management', _.bind(this.ConfirmCancelar, this));  //OnConfirm cancelar LEad-PRospecto contactado}
+		this.model.addValidationTask('lmanage_seg_reun', _.bind(this.SegundaReunion, this));  //OnConfirm cancelar Cuenta segunda reunión
     },
 
     _render: function (options) {
@@ -934,6 +935,56 @@
 			}else{
 				callback(null, fields, errors);
 			}
+		}else{
+			callback(null, fields, errors);
+		}
+    },
+	
+	SegundaReunion: function(fields, errors, callback) {
+		var idcall =  this.model.get('id');
+		var held = 0;	
+		if ($.isEmptyObject(errors)&& this.model.get('parent_id') != "" && this.model.get('parent_type') == "Accounts" && this.model.get('status')=="Held" ) {
+			
+			App.api.call("read", app.api.buildURL("Accounts/" + this.model.get('parent_id') + "/link/meetings", null, null, {}), null, {
+             success: _.bind(function (data) {
+				for (var i = 0; i < data.records.length; i++) {
+					if(data.records[i].status == 'Held' && data.records[i].id != idcall){
+						held ++;
+					}
+				}
+				if (held > 0) {
+					// Cancelar - no esta interesado, NO viable, NO interesado- cita forada,Cancelada por el prospecto no le interesa
+					/*************************************************/
+					if (Modernizr.touch) {
+						app.$contentEl.addClass('content-overflow-visible');
+					}
+					/**check whether the view already exists in the layout.
+					* If not we will create a new view and will add to the components list of the record layout
+					* */
+					
+					//var quickCreateView = this.layout.getComponent('MotivoCancelModal');
+					var quickCreateView = null;
+					if (!quickCreateView) {
+						/** Create a new view object */
+						quickCreateView = app.view.createView({
+							context: this.context,
+							name: 'SegundaReunionModal',
+							layout: this.layout,
+							module: 'Meetings'
+						});
+						/** add the new view to the components list of the record layout*/
+						this.layout._components.push(quickCreateView);
+						this.layout.$el.append(quickCreateView.$el);
+					}
+					/**triggers an event to show the pop up quick create view*/
+					this.layout.trigger("app:view:SegundaReunionModal");
+					/**************************************/
+					callback(null, fields, errors);
+				}else{
+					callback(null, fields, errors);
+				}
+			 }, this)
+			});
 		}else{
 			callback(null, fields, errors);
 		}

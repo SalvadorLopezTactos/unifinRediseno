@@ -28,7 +28,13 @@
         $(document).ready(function () {
             window.bandera = 1;
         });
-
+		
+		this.idAccount=options.context.attributes.idAccount;
+		this.idNameAccount=options.context.attributes.idNameAccount;
+		if(this.idAccount!= undefined || this.idAccount!= null){
+			this.model.set('account_id',this.idAccount);
+			this.model.set('account_name',this.idNameAccount);
+		}
         /*
           Author: Adrian Arauz 2018-08-28
           funcion: Validar acceso para creación de solicitudes. No debe permitir crear solicitudes si usuario tiene rol: "Gestión Comercial"
