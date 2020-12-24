@@ -807,12 +807,9 @@
     },
 
     handleCancel: function () {
-		
-        this._super("handleCancel");			
-		
-		this.$('#rfcModal').hide();
-		
-		if(contexto_cuenta.cambioEdit != undefined && contexto_cuenta.cambioEdit != 0 && contexto_cuenta.cambio_previo_mail != undefined ){
+        this._super("handleCancel");
+		    this.$('#rfcModal').hide();
+/*		if(contexto_cuenta.cambioEdit != undefined && contexto_cuenta.cambioEdit != 0 && contexto_cuenta.cambio_previo_mail != undefined ){
 			var rfc_c = this.model._previousAttributes.rfc_c;
 			var tipodepersona_c = this.model._previousAttributes.tipodepersona_c;
 			var razonsocial_c = this.model._previousAttributes.razonsocial_c;
@@ -830,9 +827,8 @@
 				email = this.model.attributes.email;
 			}
 		}
-		
-		
-		//Teléfonos
+*/	
+		    //Teléfonos
         var account_telefonos = app.utils.deepCopy(this.prev_oTelefonos.prev_telefono);
         this.model.set('account_telefonos', account_telefonos);
         this.oTelefonos.telefono = account_telefonos;
@@ -861,8 +857,7 @@
         this.$('[data-name="promotorfactoraje_c"]').attr('style', '');
         this.$('[data-name="promotorcredit_c"]').attr('style', '');
         this.$('[data-name="promotorfleet_c"]').attr('style', '');
-
-		/********************************************/
+/*
 		if(contexto_cuenta.cambioEdit != undefined && contexto_cuenta.cambioEdit != 0 && contexto_cuenta.cambio_previo_mail != undefined ){
 			this.model.set( 'rfc_c', rfc_c);
 			this.model.set( 'tipodepersona_c', tipodepersona_c);
@@ -881,10 +876,7 @@
 			}
 			contexto_cuenta.cambio_previo_mail = 0;
 		}
-		
-		/********************************************/
-		
-
+*/
         //Valores Previos Clasificacion Sectorial - Actividad Economica e INEGI
         clasf_sectorial.ActividadEconomica = app.utils.deepCopy(clasf_sectorial.prevActEconomica);
         clasf_sectorial.ResumenCliente.inegi.inegi_clase = clasf_sectorial.prevActEconomica.inegi_clase;
@@ -893,10 +885,7 @@
         clasf_sectorial.ResumenCliente.inegi.inegi_subsector = clasf_sectorial.prevActEconomica.inegi_subsector;
         clasf_sectorial.ResumenCliente.inegi.inegi_sector = clasf_sectorial.prevActEconomica.inegi_sector;
         clasf_sectorial.ResumenCliente.inegi.inegi_macro = clasf_sectorial.prevActEconomica.inegi_macro;
-
         clasf_sectorial.render();
-		
-		
     },
 	
     bindDataChange: function () {
