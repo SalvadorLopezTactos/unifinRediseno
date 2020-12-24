@@ -1,0 +1,19 @@
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <td><b>Nombre Cuenta</b></td>
+            <td><b>Acciones</b></td>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each dataAcProspectoContactadoAplazado}}
+        <tr>
+            <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
+            <td>
+                <button class="btn btn btnCancelPCAplazado" id="btnCancelPCAplazado" type="submit" title="{{idCuenta}}">Cancelar</button>
+                <button class="btn btn btnPresolicitudAplazado" id="btnPresolicitudAplazado" type="submit" title="{{idCuenta}}">Registrar presolicitud</button>
+            </td>  
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
