@@ -20,9 +20,8 @@
 
   render: function () {
     this._super("render");
-    //
-	$("div.record-label[data-name='rfc_qr']").attr('style', 'pointer-events:none;');
-	$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
+  	$("div.record-label[data-name='rfc_qr']").attr('style', 'pointer-events:none;');
+  	$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
   },
 
 	tieneSoporteUserMedia: function() {
@@ -113,8 +112,6 @@
 							video.play();
 						});
 					 }, function (error) {
-						//console.log("Permiso denegado o error: ", error);
-						//this.estado.innerHTML = "No se puede acceder a la cámara o no diste permiso.";
             App.alert.show('no_camara', {
               level: 'error',
               messages: 'No se puede acceder a la cámara o no ha dado permiso.',
@@ -122,8 +119,6 @@
             });
 					});
 			} else {
-				//alert("Lo siento. Tu navegador no soporta esta característica");
-				//this.estado.innerHTML = "Parece que tu navegador no soporta esta característica. Intenta actualizarlo.";
         App.alert.show('no_support', {
           level: 'error',
           messages: 'Parece que tu navegador no soporta esta característica. Intenta actualizarlo.',
@@ -248,8 +243,7 @@
               "Tipo de vialidad": "CERRADA (CDA) O PRIVADA (PRIV)",
               "id": "custom_qr_QR_RFC_5fe10d78040f3",
               "path_img_qr": "custom/qr/QR_RFC_5fe10d78040f3.png"
-            });
-            console.log(data);*/
+            });*/
 						var RFC = data[0]["RFC"].toUpperCase();
 						var PathQR=data[0]["path_img_qr"];
 						var Correo = data[0]["Correo electrónico"];
@@ -430,7 +424,7 @@
 														var dir_indicador_map_list = app.lang.getAppListStrings('dir_indicador_map_list');
 														indicador = indicador.substring(1,indicador.length-1);
 														indicador = indicador.split('^,^');
-														indicador.sort();
+														indicador = indicador.sort((a,b)=>a-b);
 														for (var key1 in dir_indicador_map_list) {
 															var value = app.lang.getAppListStrings('dir_indicador_map_list')[key1];
 															if (value == indicador) direccion[key].indicador = key1;
@@ -505,7 +499,7 @@
 																	}
 																}
 															}
-															if(cDireccionFiscal >= 1 && duplicados == 0) {
+															if(cDireccionFiscal >= 1) {
                                 if(direccion[indice_indicador].indicador == 2) {
   																direccion[indice_indicador].valCodigoPostal = CP;
   																direccion[indice_indicador].calle = Calle.trim();
@@ -533,91 +527,99 @@
   																direccion[indice_indicador].listCiudad = listCiudad;
   																direccion[indice_indicador].listCiudadFull = listCiudad;                                  
                                 } else {
-                                  var quita = '';
-                                  quita = direccion[indice_indicador].indicadorSeleccionados.replace("^2^", "");
-    														  var indicador = quita;
-      														var dir_indicador_map_list = app.lang.getAppListStrings('dir_indicador_map_list');
-                                  direccion[indice_indicador].indicadorSeleccionados = quita;
-      														indicador = indicador.substring(1,indicador.length-1);
-      														indicador = indicador.split('^,^');
-      														indicador.sort();
-      														for (var key1 in dir_indicador_map_list) {
-      															var value = app.lang.getAppListStrings('dir_indicador_map_list')[key1];
-      															if (value == indicador) direccion[indice_indicador].indicador = key1;
-      														}                                                     
-      														cont_dir.oDirecciones.direccion = direccion;
-  																var nuevaDireccion = {
-  																	"tipodedireccion":"",
-  																	"listTipo":App.lang.getAppListStrings('dir_tipo_unique_list'),
-  																	"tipoSeleccionados":"",
-  																	"indicador":"",
-  																	"listIndicador":App.lang.getAppListStrings('dir_indicador_unique_list'),
-  																	"indicadorSeleccionados":"",
-  																	"bloqueado":"",
-  																	"valCodigoPostal":"",
-  																	"postal":"",
-  																	"valPais":"",
-  																	"pais":"",
-  																	"listPais":{},
-  																	"listPaisFull":{},
-  																	"valEstado":"",
-  																	"estado":"",
-  																	"listEstado":{},
-  																	"listEstadoFull":{},
-  																	"valMunicipio":"",
-  																	"municipio":"",
-  																	"listMunicipio":{},
-  																	"listMunicipioFull":{},
-  																	"valCiudad":"",
-  																	"ciudad":"",
-  																	"listCiudad":{},
-  																	"listCiudadFull":{},
-  																	"valColonia":"",
-  																	"colonia":"",
-  																	"listColonia":{},
-  																	"listColoniaFull":{},
-  																	"calle":"",
-  																	"numext":"",
-  																	"numint":"",
-  																	"principal":"",
-  																	"inactivo":"",
-  																	"secuencia":"",
-  																	"id":"",
-  																	"direccionCompleta":""
-  																};
-  																nuevaDireccion.secuencia = secuencia;
-  																nuevaDireccion.principal = "1";
-  																nuevaDireccion.tipodedireccion = "1";
-  																nuevaDireccion.tipoSeleccionados = '^1^';
-  																nuevaDireccion.indicador = "2";
-  																nuevaDireccion.indicadorSeleccionados = '^2^';
-  																nuevaDireccion.bloqueado = '1';
-  																nuevaDireccion.valCodigoPostal = CP;
-  																nuevaDireccion.postal = data.idCP;
-  																nuevaDireccion.calle = Calle;
-  																nuevaDireccion.numext = Exterior;
-  																nuevaDireccion.numint = Interior;
-  																//Pais
-  																nuevaDireccion.pais = auxPais;
-  																nuevaDireccion.listPais = listPais;
-  																nuevaDireccion.listPaisFull = listPais;
-  																//Estado
-  																nuevaDireccion.estado = auxEstado;
-  																nuevaDireccion.listEstado = listEstado;
-  																nuevaDireccion.listEstadoFull = listEstado;
-  																//Municipio
-  																nuevaDireccion.municipio = auxMunicipio;
-  																nuevaDireccion.listMunicipio = listMunicipio;
-  																nuevaDireccion.listMunicipioFull = listMunicipio;
-  																//Colonia
-  																nuevaDireccion.colonia = auxColonia;
-  																nuevaDireccion.listColonia = listColonia;
-  																nuevaDireccion.listColoniaFull = listColonia;
-  																//Ciudad
-  																nuevaDireccion.ciudad = auxCiudad;
-  																nuevaDireccion.listCiudad = listCiudad;
-  																nuevaDireccion.listCiudadFull = listCiudad;
-  															  cont_dir.oDirecciones.direccion.push(nuevaDireccion);
+                                  if(duplicados == 0) {
+                                    var quita = '';
+                                    if(direccion[indice_indicador].indicadorSeleccionados.includes('^2^,')) {
+                                      quita = direccion[indice_indicador].indicadorSeleccionados.replace("^2^,", "");
+                                    }
+                                    if(direccion[indice_indicador].indicadorSeleccionados.includes(',^2^')) {
+                                      quita = direccion[indice_indicador].indicadorSeleccionados.replace(",^2^", "");
+                                    }
+      														  var indicador = quita;
+        														var dir_indicador_map_list = app.lang.getAppListStrings('dir_indicador_map_list');
+                                    direccion[indice_indicador].indicadorSeleccionados = quita;
+        														indicador = indicador.substring(1,indicador.length-1);
+        														indicador = indicador.split('^,^');
+        														indicador.sort();
+        														for (var key1 in dir_indicador_map_list) {
+        															var value = app.lang.getAppListStrings('dir_indicador_map_list')[key1];
+        															if (value == indicador) direccion[indice_indicador].indicador = key1;
+        														}
+                                    direccion[indice_indicador].bloqueado = 0;
+        														cont_dir.oDirecciones.direccion = direccion;
+    																var nuevaDireccion = {
+    																	"tipodedireccion":"",
+    																	"listTipo":App.lang.getAppListStrings('dir_tipo_unique_list'),
+    																	"tipoSeleccionados":"",
+    																	"indicador":"",
+    																	"listIndicador":App.lang.getAppListStrings('dir_indicador_unique_list'),
+    																	"indicadorSeleccionados":"",
+    																	"bloqueado":"",
+    																	"valCodigoPostal":"",
+    																	"postal":"",
+    																	"valPais":"",
+    																	"pais":"",
+    																	"listPais":{},
+    																	"listPaisFull":{},
+    																	"valEstado":"",
+    																	"estado":"",
+    																	"listEstado":{},
+    																	"listEstadoFull":{},
+    																	"valMunicipio":"",
+    																	"municipio":"",
+    																	"listMunicipio":{},
+    																	"listMunicipioFull":{},
+    																	"valCiudad":"",
+    																	"ciudad":"",
+    																	"listCiudad":{},
+    																	"listCiudadFull":{},
+    																	"valColonia":"",
+    																	"colonia":"",
+    																	"listColonia":{},
+    																	"listColoniaFull":{},
+    																	"calle":"",
+    																	"numext":"",
+    																	"numint":"",
+    																	"principal":"",
+    																	"inactivo":"",
+    																	"secuencia":"",
+    																	"id":"",
+    																	"direccionCompleta":""
+    																};
+    																nuevaDireccion.secuencia = secuencia;
+    																nuevaDireccion.principal = "1";
+    																nuevaDireccion.tipodedireccion = "1";
+    																nuevaDireccion.tipoSeleccionados = '^1^';
+    																nuevaDireccion.indicador = "2";
+    																nuevaDireccion.indicadorSeleccionados = '^2^';
+    																nuevaDireccion.bloqueado = '1';
+    																nuevaDireccion.valCodigoPostal = CP;
+    																nuevaDireccion.postal = data.idCP;
+    																nuevaDireccion.calle = Calle;
+    																nuevaDireccion.numext = Exterior;
+    																nuevaDireccion.numint = Interior;
+    																//Pais
+    																nuevaDireccion.pais = auxPais;
+    																nuevaDireccion.listPais = listPais;
+    																nuevaDireccion.listPaisFull = listPais;
+    																//Estado
+    																nuevaDireccion.estado = auxEstado;
+    																nuevaDireccion.listEstado = listEstado;
+    																nuevaDireccion.listEstadoFull = listEstado;
+    																//Municipio
+    																nuevaDireccion.municipio = auxMunicipio;
+    																nuevaDireccion.listMunicipio = listMunicipio;
+    																nuevaDireccion.listMunicipioFull = listMunicipio;
+    																//Colonia
+    																nuevaDireccion.colonia = auxColonia;
+    																nuevaDireccion.listColonia = listColonia;
+    																nuevaDireccion.listColoniaFull = listColonia;
+    																//Ciudad
+    																nuevaDireccion.ciudad = auxCiudad;
+    																nuevaDireccion.listCiudad = listCiudad;
+    																nuevaDireccion.listCiudadFull = listCiudad;
+    															  cont_dir.oDirecciones.direccion.push(nuevaDireccion);
+                                  }
                                 }
   															cont_dir.render();
   															app.alert.dismiss('procesando');
@@ -791,8 +793,8 @@
 
   cancelar: function() {
     this.$('#rfcModal').hide();
-	self.picturecam = false;
-	self.$('#rfcModal').hide();
+	  self.picturecam = false;
+	  self.$('#rfcModal').hide();
   },
   
   _limpiezaDatos: function(cadena){
