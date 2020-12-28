@@ -26,6 +26,7 @@
     },
 
     delegateButtonEvents: function() {
+        this._super("delegateButtonEvents");
         this.context.on('button:cancel_button:click', this.cancel, this);
     },
 
@@ -552,8 +553,7 @@
         }
     },
 
-    cancel: function () {
-
+     cancel: function () {
         //Validación para obligar a registrar Lead a través de Protocolo al asesor firmado
         //necesariamente se agrega 'else' para que en una creación natural, el botón cancel siga con el funcionamiento natural
         if(this.fromProtocolo=='1'){
@@ -564,7 +564,7 @@
             });
 
             // update the browser URL with the proper
-        app.router.navigate('#Home', {trigger: true});
+            app.router.navigate('#Home', {trigger: true});
 
         }else{
             this._super("cancel");
