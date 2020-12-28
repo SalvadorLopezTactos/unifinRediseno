@@ -23,13 +23,53 @@
 
     	app.alert.show('navigateToNotificationCP', {
     		level: 'confirmation',
-    		messages: 'Se le enviará una notificación al Centro de Prospección.<br>¿Está seguro?',
+    		messages: 'Se notificará a Asesor Telefónico para que se le asigne un nuevo Lead',
     		autoClose: false,
     		onConfirm: function(){
-    			alert("Enviando notificación...");
+    			App.alert.show('asignaLeadCP', {
+    				level: 'process',
+    				title: 'Procesando',
+    			});
+
+    			//Obtener los agentes telefónicos disponibles para generarle el registro de tarea
+    			app.api.call("read", app.api.buildURL("GetSiguienteAgenteTel", null, null, {}), null, {
+                    success: _.bind(function (data) {
+                        if(data!=""){
+                        	var idAsesor=data;
+                        	var usuario=App.user.get('full_name');
+                        	var date= new Date();
+                        	var fechaString=date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+" 05:00:00";
+
+                        	var jsonDate = (new Date()).toJSON();
+
+                        	var bodyTask={
+                        		"name":"Asignar Lead a "+usuario,
+                        		"priority":"High",
+                        		"assigned_user_id":idAsesor,
+                        		"date_start": jsonDate
+                        	};
+
+                        	app.api.call("create", app.api.buildURL("Tasks", null, null, bodyTask), null, {
+                        		success: _.bind(function (data) {
+                        			console.log("TAREA CREADA CORRECTAMENTE AL ASESOR");
+                        			App.alert.dismiss('asignaLeadCP');
+                        			app.alert.show('taskCreteSuccess', {
+                        				level: 'success',
+                        				messages: 'Proceso completo<br>El agente encargado de gestionar la asignación es: '+data.assigned_user_name,
+                        				autoClose: false
+                        			});
+
+                        		},this)});
+
+                        }
+                    }, this)
+                });
+
+
+    		
     		},
     		onCancel: function(){
-    			alert("Cancelando operación!..");
+    			
     		}
     	});
     },
@@ -54,9 +94,65 @@
 
     asignarPorBD:function(){
 
-    	//Obtener registros para asignar automáticamente
-    	alert("Asignación por base de datos");
+    	//Obtiene registros cargados a través de carga de layout
+    	app.alert.show('assignLeadFromDB', {
+    		level: 'confirmation',
+    		messages: 'Se asignará un Lead obtenido de una base de datos especial<br>¿Está seguro?',
+    		autoClose: false,
+    		onConfirm: function(){
+    			//Obtiene registros provenientes de la bd especial
+    			App.alert.show('asignaFromDB', {
+    				level: 'process',
+    				title: 'Procesando',
+    			});
 
+    			app.api.call("read", app.api.buildURL("Leads/", null, null, {
+                    "filter": [
+                        {
+                        	"nombre_de_cargar_c": {
+                        		"$equals":"CARGA_28_08_2020_QA_ALEXIS"
+                            }
+                        }
+                    ]
+                }), null, {
+                    success: _.bind(function (data) {
+
+                    	if(data.records.length>0){
+	                    	var url = app.api.buildURL('Leads/' + data.records[0].id, null, null);
+                    		var api_params = {};
+		    				api_params['assigned_user_id']=App.user.get('id');
+		    				api_params['assigned_user_name']=App.user.get('full_name');
+		    				//Se modifica nombre de carga para evitar obtener nuevamente el registro ya asignado
+		    				api_params['nombre_de_cargar_c']="";
+
+	    					app.api.call('update', url, api_params, {
+	    						success: _.bind(function (data) {
+	    							app.alert.dismiss('asignaFromDB');
+	    							var mensaje='Se ha asignado el registro: '+'<a href="#Leads/'+data.id+'">'+data.name+'</a>';
+
+	    							app.alert.show('assignFromDB', {
+		    							level: 'success',
+		    							messages: mensaje,
+		                    		});
+	                			})
+	            			});
+            			}else{
+
+            				app.alert.show('sinRegistrosDB', {
+            					level: 'warning',
+            					messages: 'No existen registros disponibles para asignar',
+            					autoClose: true
+            				});
+            			}
+                    	
+                    }, this)
+                });//Fin api call obtener registros de la bd
+
+    		},//OnConfirm
+    		onCancel: function(){
+    			
+    		}//onCancel
+    	});
     },
 
     asignarPorCancelados:function(){
