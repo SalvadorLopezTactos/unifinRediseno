@@ -260,7 +260,7 @@ SQL;
     oppc.ri_ca_tasa_c, oppc.ri_deposito_garantia_c, oppc.ri_porcentaje_ca_c, oppc.ri_porcentaje_renta_inicial_c, oppc.ri_vrc_c,
     oppc.ri_vri_c, oppc.monto_ratificacion_increment_c, oppc.plazo_ratificado_incremento_c, oppc.ri_usuario_bo_c, oppc.instrumento_c, oppc.puntos_sobre_tasa_c, oppc.tipo_tasa_ordinario_c,
     oppc.tipo_tasa_moratorio_c, oppc.instrumento_moratorio_c, oppc.factor_moratorio_c, oppc.cartera_descontar_c, oppc.puntos_tasa_moratorio_c, oppc.tasa_fija_ordinario_c, oppc.tasa_fija_moratorio_c,
-    oppc.plan_financiero_c,oppc.producto_financiero_c
+    oppc.plan_financiero_c,oppc.producto_financiero_c,oppc.negocio_c
 				FROM
 					accounts_opportunities aop
 					INNER join
