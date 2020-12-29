@@ -473,6 +473,10 @@ SQL;
             }
 
             $opp->condiciones_financieras = $c_financieras;
+
+            $opp->negocio_c =  $bean->negocio_c;
+            $opp->producto_financiero_c = $bean->producto_financiero_c;
+
             $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> Condiciones en nueva solicitud : " . print_r(count($opp->condiciones_financieras), 1));
             $id = $opp->save();
 
