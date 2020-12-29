@@ -1584,7 +1584,7 @@ SQL;
 
             $monto = ($opportunidad['monto_gpo_emp_c'] != 0) ? $opportunidad['monto_gpo_emp_c'] : $opportunidad['monto_c'];
             $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : TIPO_PRODUCTO " . $opportunidad['tipo_producto_c']);
-            $productoFinancieroId = ($opportunidad['producto_financiero_c'] == 0 || $opportunidad['producto_financiero_c'] == 41) ? "" : $opportunidad['producto_financiero_c'];
+            $productoFinancieroId = ($opportunidad['producto_financiero_c'] == 0 || $opportunidad['producto_financiero_c'] == 41 || $opportunidad['producto_financiero_c'] == 42) ? "" : $opportunidad['producto_financiero_c'];
             //CVV - 29/03/2016 - Se crea el arreglo con los campos que aplican para todos los productos
             $fields = array(
                 "usuarioAutenticado" => $current_user->user_name,
