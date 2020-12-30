@@ -178,6 +178,8 @@
             					messages: 'No existen registros disponibles para asignar',
             					autoClose: true
             				});
+
+            				app.alert.dismiss('asignaFromDB');
             			}
                     	
                     }, this)
