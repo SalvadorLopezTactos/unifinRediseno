@@ -36,7 +36,7 @@
     	app.api.call('GET', app.api.buildURL('GetRegistrosAsignadosForProtocolo/' + id_user), null, {
             success: function (data) {
             	App.alert.dismiss('obtieneAsignados');
-            	if(data.total_asignados<20){
+            	if(data.total_asignados<20){ //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
             		self.viewEnable='1';
             		self.getLeadsAplazadosCancelados();
             	}else{
@@ -138,11 +138,14 @@
     				title: 'Procesando',
     			});
 
+    			//Se obtiene valor de una lista, para que el nombre del archivo de carga sea dinámico
+    			var nombre_archivo=App.lang.getAppListStrings('nombre_archivo_protocolo_leads_list')[1];
+
     			app.api.call("read", app.api.buildURL("Leads/", null, null, {
                     "filter": [
                         {
                         	"nombre_de_cargar_c": {
-                        		"$equals":"CARGA_28_08_2020_QA_ALEXIS"
+                        		"$equals":nombre_archivo
                             }
                         }
                     ]
