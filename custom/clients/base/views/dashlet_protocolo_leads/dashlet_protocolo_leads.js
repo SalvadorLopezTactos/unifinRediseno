@@ -16,7 +16,39 @@
     initialize: function (options) {
         this._super("initialize", [options]);
         self=this;
-        this.getLeadsAplazadosCancelados();
+        this.viewEnable=false;
+        this.getRegistrosAsignados();
+
+        //this.getLeadsAplazadosCancelados();
+    },
+
+    /*
+    Función ejecutada para saber si la información se debe de mostrar
+    */
+    getRegistrosAsignados:function(){
+
+    	var id_user=App.user.attributes.id;
+    	App.alert.show('obtieneAsignados', {
+    				level: 'process',
+    				title: 'Cargando',
+    			});
+
+    	app.api.call('GET', app.api.buildURL('GetRegistrosAsignadosForProtocolo/' + id_user), null, {
+            success: function (data) {
+            	App.alert.dismiss('obtieneAsignados');
+            	if(data.total_asignados<20){
+            		self.viewEnable='1';
+            		self.getLeadsAplazadosCancelados();
+            	}else{
+            		self.viewEnable=false;
+            		self.render();
+            	}
+            },
+            error: function (e) {
+                throw e;
+            }
+        });
+
     },
 
     asignarCP: function (evt) {
@@ -251,16 +283,28 @@
         App.alert.show('getLeadsCancelados', {
             level: 'process'
         });
-
-        app.api.call("read", app.api.buildURL("Leads/", null, null, {
-                    "filter": [
-                        {
-                        	"status_management_c": {
+        //subtipo_registro_c=3, LEAD CANCELADO
+        var filtro={
+        	"filter":[
+        		{
+        			"$or":[
+        				{
+        					"status_management_c": {
                         		"$in":['2','3']
                             }
-                        }
-                    ]
-                }), null, {
+        				},
+        				{
+        					"subtipo_registro_c": {
+        						"$in":['3']
+                            }
+        				},
+        			]
+        		}
+        	]
+
+        };
+
+        app.api.call("read", app.api.buildURL("Leads/", null, null, filtro), null, {
                     success: _.bind(function (data) {
 
                     	App.alert.dismiss('getLeadsCancelados');
@@ -272,7 +316,9 @@
 
     },
 
+    _render: function () {
+        this._super("_render");
 
-
+    },
 
 })
