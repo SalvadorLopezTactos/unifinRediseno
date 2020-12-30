@@ -144,7 +144,7 @@ class Seguros_SF
           }
           else
           {
-            throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response[errores][0]['describeError']);
+            if($response) throw new SugarApiExceptionInvalidParameter("No se puede guardar. ".$response[errores][0]['describeError']);
           }
         }
         //Cotizando
