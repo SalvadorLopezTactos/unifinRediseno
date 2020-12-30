@@ -389,6 +389,7 @@
 												cont_dir.oDirecciones = contexto_cuenta.oDirecciones;
 												cont_tel.oTelefonos = contexto_cuenta.oTelefonos;
 												cont_tel.render();
+                        var nada = 0;
                         var secuencia = 0;
 												var duplicado = 0;
                         var duplicados = 0;
@@ -402,7 +403,7 @@
                           secuencia = secuencia + 1;
 													duplicado = (direccion[key].valCodigoPostal == CP) ? duplicado+1 : duplicado;
 													duplicado = (direccion[key].listPais[direccion[key].pais] == Pais) ? duplicado+1 : duplicado;
-													duplicado = (direccion[key].listEstado[direccion[key].estado] == Estado) ? duplicado+1 : duplicado;
+													//duplicado = (direccion[key].listEstado[direccion[key].estado] == Estado) ? duplicado+1 : duplicado;
 													duplicado = (direccion[key].listMunicipio[direccion[key].municipio] == Municipio) ? duplicado+1 : duplicado;
 													duplicado = (direccion[key].listColonia[direccion[key].colonia] == Colonia) ? duplicado+1 : duplicado;
 													duplicado = (contextol._limpiezaDatos(direccion[key].calle) == contextol._limpiezaDatos(Calle)) ? duplicado+1 : duplicado;
@@ -413,8 +414,9 @@
 														cDireccionFiscal = cDireccionFiscal + 1;
 														indice_indicador = key;
 													}
-                          if(duplicado == 9) duplicados = 1;
-													if(duplicado == 9 && cDireccionFiscal == 0) {
+                          if(duplicado == 8) duplicados = 1;
+                          if(duplicado == 8 && cDireccionFiscal == 1) nada = 1;
+													if(duplicado == 8 && cDireccionFiscal == 0) {
 														// Indicador
 														direccion[key].indicadorSeleccionados = direccion[key].indicadorSeleccionados + ',^2^';
 														direccion[key].bloqueado = '1';
@@ -527,25 +529,27 @@
   																direccion[indice_indicador].listCiudad = listCiudad;
   																direccion[indice_indicador].listCiudadFull = listCiudad;                                  
                                 } else {
-                                  var quita = '';
-                                  if(direccion[indice_indicador].indicadorSeleccionados.includes('^2^,')) {
-                                    quita = direccion[indice_indicador].indicadorSeleccionados.replace("^2^,", "");
+                                  if(nada == 0) {
+                                    var quita = '';
+                                    if(direccion[indice_indicador].indicadorSeleccionados.includes('^2^,')) {
+                                      quita = direccion[indice_indicador].indicadorSeleccionados.replace("^2^,", "");
+                                    }
+                                    if(direccion[indice_indicador].indicadorSeleccionados.includes(',^2^')) {
+                                      quita = direccion[indice_indicador].indicadorSeleccionados.replace(",^2^", "");
+                                    }
+        														var indicador = quita;
+          													var dir_indicador_map_list = app.lang.getAppListStrings('dir_indicador_map_list');
+                                    direccion[indice_indicador].indicadorSeleccionados = quita;
+          													indicador = indicador.substring(1,indicador.length-1);
+          													indicador = indicador.split('^,^');
+          													indicador.sort();
+          													for (var key1 in dir_indicador_map_list) {
+          														var value = app.lang.getAppListStrings('dir_indicador_map_list')[key1];
+          														if (value == indicador) direccion[indice_indicador].indicador = key1;
+          													}
+                                    direccion[indice_indicador].bloqueado = 0;
+          													cont_dir.oDirecciones.direccion = direccion;
                                   }
-                                  if(direccion[indice_indicador].indicadorSeleccionados.includes(',^2^')) {
-                                    quita = direccion[indice_indicador].indicadorSeleccionados.replace(",^2^", "");
-                                  }
-      														var indicador = quita;
-        													var dir_indicador_map_list = app.lang.getAppListStrings('dir_indicador_map_list');
-                                  direccion[indice_indicador].indicadorSeleccionados = quita;
-        													indicador = indicador.substring(1,indicador.length-1);
-        													indicador = indicador.split('^,^');
-        													indicador.sort();
-        													for (var key1 in dir_indicador_map_list) {
-        														var value = app.lang.getAppListStrings('dir_indicador_map_list')[key1];
-        														if (value == indicador) direccion[indice_indicador].indicador = key1;
-        													}
-                                  direccion[indice_indicador].bloqueado = 0;
-        													cont_dir.oDirecciones.direccion = direccion;
                                   if(duplicados == 0) {
     																var nuevaDireccion = {
     																	"tipodedireccion":"",

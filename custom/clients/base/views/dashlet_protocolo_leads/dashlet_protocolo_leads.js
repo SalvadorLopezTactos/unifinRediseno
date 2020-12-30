@@ -16,7 +16,39 @@
     initialize: function (options) {
         this._super("initialize", [options]);
         self=this;
-        this.getLeadsAplazadosCancelados();
+        this.viewEnable=false;
+        this.getRegistrosAsignados();
+
+        //this.getLeadsAplazadosCancelados();
+    },
+
+    /*
+    Función ejecutada para saber si la información se debe de mostrar
+    */
+    getRegistrosAsignados:function(){
+
+    	var id_user=App.user.attributes.id;
+    	App.alert.show('obtieneAsignados', {
+    				level: 'process',
+    				title: 'Cargando',
+    			});
+
+    	app.api.call('GET', app.api.buildURL('GetRegistrosAsignadosForProtocolo/' + id_user), null, {
+            success: function (data) {
+            	App.alert.dismiss('obtieneAsignados');
+            	if(data.total_asignados<20){ //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
+            		self.viewEnable='1';
+            		self.getLeadsAplazadosCancelados();
+            	}else{
+            		self.viewEnable=false;
+            		self.render();
+            	}
+            },
+            error: function (e) {
+                throw e;
+            }
+        });
+
     },
 
     asignarCP: function (evt) {
@@ -106,11 +138,14 @@
     				title: 'Procesando',
     			});
 
+    			//Se obtiene valor de una lista, para que el nombre del archivo de carga sea dinámico
+    			var nombre_archivo=App.lang.getAppListStrings('nombre_archivo_protocolo_leads_list')[1];
+
     			app.api.call("read", app.api.buildURL("Leads/", null, null, {
                     "filter": [
                         {
                         	"nombre_de_cargar_c": {
-                        		"$equals":"CARGA_28_08_2020_QA_ALEXIS"
+                        		"$equals":nombre_archivo
                             }
                         }
                     ]
@@ -143,6 +178,8 @@
             					messages: 'No existen registros disponibles para asignar',
             					autoClose: true
             				});
+
+            				app.alert.dismiss('asignaFromDB');
             			}
                     	
                     }, this)
@@ -251,16 +288,28 @@
         App.alert.show('getLeadsCancelados', {
             level: 'process'
         });
-
-        app.api.call("read", app.api.buildURL("Leads/", null, null, {
-                    "filter": [
-                        {
-                        	"status_management_c": {
+        //subtipo_registro_c=3, LEAD CANCELADO
+        var filtro={
+        	"filter":[
+        		{
+        			"$or":[
+        				{
+        					"status_management_c": {
                         		"$in":['2','3']
                             }
-                        }
-                    ]
-                }), null, {
+        				},
+        				{
+        					"subtipo_registro_c": {
+        						"$in":['3']
+                            }
+        				},
+        			]
+        		}
+        	]
+
+        };
+
+        app.api.call("read", app.api.buildURL("Leads/", null, null, filtro), null, {
                     success: _.bind(function (data) {
 
                     	App.alert.dismiss('getLeadsCancelados');
@@ -272,7 +321,9 @@
 
     },
 
+    _render: function () {
+        this._super("_render");
 
-
+    },
 
 })
