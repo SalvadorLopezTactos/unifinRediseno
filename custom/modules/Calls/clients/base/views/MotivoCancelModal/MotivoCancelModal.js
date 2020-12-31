@@ -74,7 +74,7 @@
 					
 					app.alert.show('message-id', {
 						level: 'success',
-						messages: 'Lead Cancelado',
+						messages: 'Motivo de cancelación de Lead guardado',
 						autoClose: true
 					});
 				}, this)
