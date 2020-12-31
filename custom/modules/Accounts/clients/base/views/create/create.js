@@ -316,7 +316,10 @@
         this.$("div[data-name='subsectoreconomico_c']").hide();
         this.$("div[data-name='actividadeconomica_c']").hide();
         this.$(".record-cell[data-name='blank_space']").hide();
-
+        var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
+        if (accesoFiscal == 0) {
+          $('div[data-name=rfc_c]').css("pointer-events", "none");
+        }
     },
 
     initialize: function (options) {
@@ -440,7 +443,7 @@
 
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
 		this.model.addValidationTask('valida_actividad_economica', _.bind(this.valida_actividad_economica, this));
-		
+
 		/*RFC_ValidatePadron
 		  Validación de rfc en el padron de contribuyentes
 		*/
@@ -1653,7 +1656,7 @@
             }
             //Validacion de Actividad Economica - antes macrosector
             if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == '' || $('.list_ae').select2('val') == null) {
-                
+
                 $('.list_ae').find('.select2-choice').css('border-color', 'red');
                 errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                 errors['actividadeconomica_c'].required = true;
@@ -1854,26 +1857,26 @@
         //Origen: Prospección propia
         if (this.model.get('origen_cuenta_c') != '3') {
             this.model.set('prospeccion_propia_c', ''); //Limpia campo Prospeccion propia
-        } 
+        }
         //Origen: Referenciado Socio Comercial
         if (this.model.get('origen_cuenta_c') != '6') {
             this.model.set('account_id_c', ''); //Elimina usuario referenciado por db
             this.model.set('referenciador_c',''); //Elimina usuario referenciado por vista
-        } 
+        }
         //Origen: Referenciado Unifin
         if (this.model.get('origen_cuenta_c') != '7') {
             this.model.set('user_id5_c', ''); //Elimina usuario referido por db
             this.model.set('tct_referenciado_dir_rel_c',''); //Elimina usuario referido por vista
-        } 
+        }
         //Origen: Referenciado Cliente = 4, Referenciado Proveedor = 5, Referenciado Vendor = 8
         if (this.model.get('origen_cuenta_c') != '4' && this.model.get('origen_cuenta_c') != '5' && this.model.get('origen_cuenta_c') != '8') {
             this.model.set('account_id1_c', ''); //Elimina usuario referido db
             this.model.set('referido_cliente_prov_c',''); //Elimina usuario referido vista
-        } 
+        }
     },
 
     _cleanDependencies: function (){
-    
+
         /*******Limpia campos dependientes de Detalle Origen*******/
         //Acciones Estrategicas
         if (this.model.get('detalle_origen_c') != '5') {
@@ -1882,7 +1885,7 @@
         //Base de datos Emp
         if (this.model.get('detalle_origen_c') != '1') {
             this.model.set('tct_origen_busqueda_txf_c', ''); //Limpia campo Base
-        } 
+        }
         //Base de datos Afiliaciones
         if (this.model.get('detalle_origen_c') != '6') {
             this.model.set('camara_c', ''); //Limpia campo ¿De que Cámara Proviene?
@@ -1897,7 +1900,7 @@
         if (this.model.get('detalle_origen_c') != '5' && this.model.get('detalle_origen_c') != '1' &&
             this.model.get('detalle_origen_c') != '6' && this.model.get('detalle_origen_c') != '3' &&
             this.model.get('detalle_origen_c') != '9' && this.model.get('detalle_origen_c') != '10') {
-            
+
             this.model.set('tct_origen_ag_tel_rel_c', ''); //Se elimina Agente Telefonico Vista
             this.model.set('user_id3_c', '');  //Se elimina Agente Telefonico DB
         }
@@ -2016,7 +2019,7 @@
                 if (this.model.get('tipodepersona_c') == 'Persona Moral') {
                     //Requerido Actividad Economica - antes macro sector
                     if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
-                        
+
                         $('.list_ae').find('.select2-choice').css('border-color', 'red');
                         errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                         errors['actividadeconomica_c'].required = true;
@@ -2045,7 +2048,7 @@
                     }
                     //Requerido Actividad Economica - antes macro sector
                     if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
-                        
+
                         $('.list_ae').find('.select2-choice').css('border-color', 'red');
                         errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                         errors['actividadeconomica_c'].required = true;
@@ -2103,7 +2106,7 @@
             }
             //Requerido Actividad Economica custom
             if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
-                
+
                 $('.list_ae').find('.select2-choice').css('border-color', 'red');
                 errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
                 errors['actividadeconomica_c'].required = true;
@@ -3115,7 +3118,7 @@
         //Validacion de Actividad Economica si el Tipo de Cuenta es "3" - Cliente
         if (this.model.get('tipo_registro_cuenta_c') == '3' && this.model.get('tipo_registro_cuenta_c') != '1' && this.model.get('subtipo_registro_cuenta_c') != '2' &&
         ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == '' || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null)) {
-            
+
             app.alert.show("tipo_cuenta_cliente_ae", {
                 level: "error",
                 title: 'Hace falta seleccionar una Actividad Económica.',
@@ -3131,20 +3134,20 @@
         callback(null, fields, errors);
     },
 
-	/* Valida RFC con servicio de revisión del padron de contribuyentes */	
+	/* Valida RFC con servicio de revisión del padron de contribuyentes */
 	//        this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
-	
+
 	//RFC_ValidatePadron: function (fields, errors, callback) {
-	//	
+	//
 	//	var rfc = this.getField('rfc_c');
 	//	var valuerfc = this.model.get('rfc_c');
 	//	var anticrfc = this._get_rfc_antiguo();
-	//			        
-	//	if( (this.model.get('pais_nacimiento_c') == "2") 
-	//		&& ( !_.isEmpty(valuerfc) && valuerfc != "" && valuerfc != "undefined" ) 
+	//
+	//	if( (this.model.get('pais_nacimiento_c') == "2")
+	//		&& ( !_.isEmpty(valuerfc) && valuerfc != "" && valuerfc != "undefined" )
 	//		&& (anticrfc != valuerfc) && (rfc.action === "edit" || rfc.action === "create")
 	//		&& ( this.model.get('estado_rfc_c') == null || this.model.get('estado_rfc_c') == "" || this.model.get('estado_rfc_c') == "0")){
-	//		
+	//
 	//		app.api.call('GET', app.api.buildURL('GetRFCValido/?rfc='+this.model.get('rfc_c')),null, {
 	//			success: _.bind(function (data) {
 	//				if (data != "" && data != null) {
@@ -3170,7 +3173,7 @@
 	//						errors['error_RFC_Padron'].required = true;
     //                    }else if (data.code == '4') {
 	//						this.model.set('estado_rfc_c', '1');
-	//					}						
+	//					}
 	//				}else{
 	//					app.alert.show("Error Validar RFC", {
 	//						level: "error",
@@ -3179,8 +3182,8 @@
 	//					});
 	//					errors['error_RFC_Padron'] = errors['error_RFC_Padron'] || {};
 	//					errors['error_RFC_Padron'].required = true;
-	//				}		
-	//				callback(null, fields, errors);					
+	//				}
+	//				callback(null, fields, errors);
 	//			}, this),
 	//			error: _.bind(function (error) {
 	//				app.alert.show("Error Validar RFC", {
@@ -3196,9 +3199,9 @@
 	//		});
 	//	}else{
 	//      	  callback(null, fields, errors);
-    //    }			
+    //    }
     //},
-	
+
 	//cambioRFC: function(){
 	//	var original_rfc = this.model._previousAttributes.rfc_c;
 	//	this._set_rfc_antiguo(original_rfc);
