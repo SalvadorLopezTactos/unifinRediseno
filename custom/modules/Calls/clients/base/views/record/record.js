@@ -630,7 +630,20 @@
 				
 		if ($.isEmptyObject(errors)&& this.model.get('parent_id') != "" && this.model.get('parent_type') == "Leads" && this.model.get('status')=="Held") {
 			if(this.model.get('tct_resultado_llamada_ddw_c')=='Ilocalizable' || this.model.get('tct_resultado_llamada_ddw_c')=='No_esta_Interesado' || this.model.get('tct_resultado_llamada_ddw_c')=='Fuera_de_Perfil'){
-				/*************************************************/
+                var lead = app.data.createBean('Leads', {id:this.model.get('parent_id')});
+			    lead.fetch({
+				    success: _.bind(function (model) {
+					    model.set('lead_cancelado_c', true);
+					    model.save();
+					
+					    app.alert.show('message-id', {
+						    level: 'success',
+						    messages: 'Lead Cancelado',
+						    autoClose: true
+				    	});
+				    }, this)
+			    });
+                /*************************************************/
 				if (Modernizr.touch) {
 					app.$contentEl.addClass('content-overflow-visible');
 				}
@@ -683,25 +696,7 @@
 							//this._disableActionsSubpanel();
 							callback(null, fields, errors);
 						}
-						//var btnConvert = this.getField("convert_Leads_button")
-	
-						//if (this.model.get('subtipo_registro_c') == '2') {
-						//    btnConvert.show();
-						//} else {
-						//    btnConvert.hide();
-						//}
-						//app.controller.context.reloadData({});
-						//SUGAR.App.controller.context.reloadData({})
-						/* Para refrescar solo un campo
-	
-						model.fetch({
-	
-						view: undefined,
-	
-						fields: ['industry']
-	
-						});
-						*/
+						
 					}, this),
 					failure: _.bind(function (data) {
 						app.alert.dismiss('upload');
