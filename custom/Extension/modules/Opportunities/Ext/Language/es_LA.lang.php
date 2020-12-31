@@ -221,3 +221,6 @@ $mod_strings['CRéDITO_ESTRUCTURADO'] = 'Comisiones adicionales';
 $mod_strings['LBL_CREDITO_ESTRUCTURADO'] = 'Comisiones adicionales';
 $mod_strings['LBL_NEGOCIO_C'] = 'Negocio';
 $mod_strings['LBL_QUANTICO_ID_C'] = 'Id Quantico';
+$mod_strings['LBL_ADMIN_CARTERA_C'] = 'Creado por administración de cartera';
+$mod_strings['LBL_TIPO_SOL_ADMIN_CARTERA_C'] = 'Tipo de solicitud Administración de cartera';
+$mod_strings['LBL_PRODUCTO_ORIGEN_VENCIDO_C'] = 'Producto origen vencido';
