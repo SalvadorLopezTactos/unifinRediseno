@@ -18,6 +18,20 @@ class IntegracionQuantico
         if ($bean->idsolicitud_c != "" && $bean->id_process_c != "" && ($bean->tipo_producto_c == "1" || $bean->tipo_producto_c == "3"
                 || $bean->tipo_producto_c == "4") && $bean->quantico_id_c == "") {
             $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id, array('disable_row_level_security' => true));
+
+            if($beanCuenta->tipodepersona_c=='Persona Fisica')
+            {
+                $tipoPersona="1";
+            }
+            if ($beanCuenta->tipodepersona_c=='Persona Fisica con Actividad Empresarial')
+            {
+                $tipoPersona="2";
+            }
+            if ($beanCuenta->tipodepersona_c=='Persona Moral')
+            {
+                $tipoPersona="3";
+            }
+
             $body = array(
                 "RequestId" => $bean->idsolicitud_c,
                 "ProcessId" => $bean->id_process_c,
@@ -25,7 +39,7 @@ class IntegracionQuantico
                 "ClientName" => $bean->account_name,
                 "ProductId" => $bean->producto_financiero_c,
                 "RequestTypeId" => $bean->tipo_de_operacion_c,
-                "PersonTypeId" => $beanCuenta->tipodepersona_c,
+                "PersonTypeId" => $tipoPersona,
                 "ProductTypeId" => $bean->tipo_producto_c,
                 "CurrencyTypeId" => "1",
                 "RequestAmount" => $bean->monto_c,

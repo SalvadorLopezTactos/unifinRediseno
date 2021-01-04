@@ -265,7 +265,7 @@ $dependencies['Accounts']['ventas_anuales_c'] = array
 );
 
 // solo lectura campo rfc
-$dependencies['Accounts']['rfc_c'] = array
+/*$dependencies['Accounts']['rfc_c'] = array
 (
     'hooks' => array("edit"),
     'trigger' => 'true',
@@ -281,4 +281,4 @@ $dependencies['Accounts']['rfc_c'] = array
         ),
     ),
     'notActions' => array(),
-);
+);*/
