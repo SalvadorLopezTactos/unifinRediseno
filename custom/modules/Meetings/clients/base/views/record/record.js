@@ -839,6 +839,7 @@
 			var lead = app.data.createBean('Leads', {id:this.model.get('parent_id')});
 			lead.fetch({
 			    success: _.bind(function (model) {
+                 if(model.get('subtipo_registro_c')=='1'){
                     // Cancelar - no esta interesado, NO viable, NO interesado- cita forada,Cancelada por el prospecto no le interesa
 			        if(this.model.get('resultado_c')=='2' ||this.model.get('resultado_c')=='18' || this.model.get('resultado_c')=='21' || this.model.get('resultado_c')=='25'){
                         model.set('lead_cancelado_c', true);
@@ -910,25 +911,6 @@
 			        				//this._disableActionsSubpanel();
 			        				callback(null, fields, errors);
 			        			}
-			        			//var btnConvert = this.getField("convert_Leads_button")
-                            
-			        			//if (this.model.get('subtipo_registro_c') == '2') {
-			        			//    btnConvert.show();
-			        			//} else {
-			        			//    btnConvert.hide();
-			        			//}
-			        			//app.controller.context.reloadData({});
-			        			//SUGAR.App.controller.context.reloadData({})
-			        			/* Para refrescar solo un campo
-                            
-			        			model.fetch({
-                                
-			        			view: undefined,
-                                
-			        			fields: ['industry']
-                                
-			        			});
-			        			*/
 			        		}, this),
 			        		failure: _.bind(function (data) {
 			        			app.alert.dismiss('upload');
@@ -946,6 +928,9 @@
 			        }else{
 			        	callback(null, fields, errors);
                     }
+                 }else{
+                    callback(null, fields, errors);
+                 }
                 }, this)
             });
 		}else{
