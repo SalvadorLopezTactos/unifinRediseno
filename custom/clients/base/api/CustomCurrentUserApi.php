@@ -20,6 +20,7 @@ class CustomCurrentUserApi extends CurrentUserApi
     public function retrieveCurrentUser(ServiceBase $api, array $args)
     {
         $current_user = $this->getUserBean();
+        global $sugar_config;
 
         $userArray = parent::retrieveCurrentUser($api, $args);
         $userArray['current_user']['cac_c'] = $current_user->cac_c;
@@ -52,6 +53,8 @@ class CustomCurrentUserApi extends CurrentUserApi
         $userArray['current_user']['multilinea_c'] = $current_user->multilinea_c;
         $userArray['current_user']['responsable_oficina_chk_c'] = $current_user->responsable_oficina_chk_c;
         $userArray['current_user']['excluir_precalifica_c'] = $current_user->excluir_precalifica_c;
+        $userArray['current_user']['admin_cartera_c'] = $current_user->admin_cartera_c;
+        $userArray['current_user']['config_admin_cartera'] = $sugar_config['service_admin_cartera'];
 
         return $userArray;
     }

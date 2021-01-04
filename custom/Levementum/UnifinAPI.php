@@ -1389,6 +1389,7 @@ SQL;
     public function obtenSolicitudCredito($opportunidad)
     {
         global $current_user;
+        global $sugar_config;
         try {
             //Variables para factoraje, listas:
             $tipo_tasa_list[1] = "FIJA";
@@ -1613,6 +1614,11 @@ SQL;
                 "idProductoFinanciero" => $productoFinancieroId
 
             );
+            //Se valida si el Administrador de Cartera esta activo en el config y a nivel de solicitud/usuario
+            if ($opportunidad['admin_cartera_c'] == 1 && $sugar_config['service_admin_cartera'] == true) {
+                $fields['admin_cartera_active'] = true;
+            }
+
             //Si la Solicitud es de Credito SOS recalcula el valor del campo Riesgo a "Mayor".
             //          if ($opportunidad['tipo_producto_c']=="SOS"){  # PREGUNTAR SI SE CAMBIA POR PRODUCTO FINANCIERO
             if ($opportunidad['tipo_producto_c'] == "CREDITO SIMPLE" && $opportunidad['producto_financiero_c'] == 40) {
