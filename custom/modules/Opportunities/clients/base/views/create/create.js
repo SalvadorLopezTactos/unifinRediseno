@@ -165,6 +165,8 @@
        this.model.on("change:negocio_c", _.bind(this.Updt_OptionProdFinan, this));
         this.model.on('change:negocio_c', this.verificaOperacionProspecto, this);
 
+        this.adminUserCartera();
+
     },
 
    /* producto_financiero: function () {
@@ -402,7 +404,29 @@
         $('[data-name="vobo_descripcion_txa_c"]').hide();
         $('[data-name="director_notificado_c"]').hide();
         this.$(".record-cell[data-name='blank_space']").hide();
+
+        // Visualiza el campo check de Administracion de cartera del usuario
+        $('[data-name="admin_cartera_c"]').attr('style', 'pointer-events:none');
+
+        if (this.model.get('admin_cartera_c') == true && app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
+            //Bloquea campos de monto cuando es Administrador de cartera
+            $('[data-name="monto_c"]').attr('style', 'pointer-events:none'); //Monto de línea
+            $('[data-name="amount"]').attr('style', 'pointer-events:none'); //Monto a operar
+            $('[data-name="ca_pago_mensual_c"]').attr('style', 'pointer-events:none'); //Pago mensual
+            $('[data-name="ca_importe_enganche_c"]').attr('style', 'pointer-events:none'); //Pago unico
+            $('[data-name="porciento_ri_c"]').attr('style', 'pointer-events:none'); //% Pago unico
+        }
+        
     },
+
+    adminUserCartera: function () {
+        //Valida si el usuario es Administrador de cartera y que el servicio este activo en el config_override
+        if (app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
+            this.model.set('admin_cartera_c', true);
+        }
+    },
+
+
     /*
     *Victor Martinez Lopez
     * Valida que no se pueda crear un producto factoraje para personas fisicas
@@ -470,7 +494,7 @@
     },
 
     _ValidateAmount: function (fields, errors, callback) {
-        if (parseFloat(this.model.get('monto_c')) <= 0 && this.model.get('producto_financiero_c') != 40) {
+        if (parseFloat(this.model.get('monto_c')) <= 0 && this.model.get('producto_financiero_c') != 40 && this.model.get('admin_cartera_c') != true) {
             errors['monto_c'] = errors['monto_c'] || {};
             errors['monto_c'].required = true;
 
@@ -1305,6 +1329,11 @@
         $('[data-name="assigned_user_name"]').show();
         $('[data-name="picture"]').show();
         $('[data-name="tct_numero_vehiculos_c"]').show();
+
+        //Se visualiza campo de Administrador cartera solo si el usuario tiene activo el check
+        if (app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
+            $('[data-name="admin_cartera_c"]').show();
+        }
 
         /**Muestra campos de area Beneficiada y Subyacente **/
         /* $('[data-name="estado_benef_c"]').show();

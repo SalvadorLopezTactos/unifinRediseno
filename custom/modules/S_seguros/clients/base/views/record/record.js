@@ -13,6 +13,7 @@
         this.model.addValidationTask('prima_neta_ganada_c', _.bind(this.valida_PN, this));
         this.model.addValidationTask('comision_c', _.bind(this.comision, this));
         this.model.addValidationTask('validaDoc', _.bind(this.validaDoc, this));
+        this.model.addValidationTask('Notifica', _.bind(this.notifica, this));
     },
 
     _render: function() {
@@ -210,5 +211,16 @@
         {
           callback(null, fields, errors);
         }
+    },
+
+    notifica: function (fields, errors, callback) {
+        if (this.model.get('etapa') == 1 || this.model.get('etapa') == 2) {
+            app.alert.show("Notifica", {
+                level: "info",
+                messages: "Favor de Integrar la documentación/Información mínima requerida para determinar las condiciones del seguro a cotizar, tales como: Carátula de póliza actual, términos y condiciones, reporte de siniestralidad, listados de asegurados o bienes por asegurar, ubicaciones del bien, otros",
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
     },
 })
