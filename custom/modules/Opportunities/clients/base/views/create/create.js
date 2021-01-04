@@ -28,7 +28,7 @@
         $(document).ready(function () {
             window.bandera = 1;
         });
-		
+
 		this.idAccount=options.context.attributes.idAccount;
 		this.idNameAccount=options.context.attributes.idNameAccount;
 		if(this.idAccount!= undefined || this.idAccount!= null){
@@ -1845,7 +1845,7 @@
     },
 
     setValidacionComercial: function (fields, errors, callback) {
-        if (this.model.get('tipo_producto_c') == 1 && this.model.get('negocio_c') == 5 && (this.model.get('producto_financiero_c') == "" || this.model.get('producto_financiero_c') == "0") && this.model.get('tct_etapa_ddw_c') == "SI" && $.isEmptyObject(errors)) {
+        if (this.model.get('tipo_producto_c') == 1 && (this.model.get('negocio_c') == 5 || this.model.get('negocio_c') == 3) && (this.model.get('producto_financiero_c') == "" || this.model.get('producto_financiero_c') == "0") && this.model.get('tct_etapa_ddw_c') == "SI" && $.isEmptyObject(errors)) {
             var operacion = this.model.get('tipo_de_operacion_c');
             var producto = this.model.get('tipo_producto_c');
             var etapa = this.model.get('tct_etapa_ddw_c');
