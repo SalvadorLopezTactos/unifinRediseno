@@ -132,19 +132,19 @@
 
         var parametros = context.seleccionados;
         var horario = '{"Monday":{"entrada":"' + $("#LHin").val() + ($("#LMin").val() != "" ? (":" + $("#LMin").val()) : "") +
-            '","salida":"' + $("#LHout").val() + ($("#LMout").val() != "" ? ($(":" + "#LMout").val()) : "") + '"},' +
+            '","salida":"' + $("#LHout").val() + ($("#LMout").val() != "" ? (":" + $("#LMout").val()) : "") + '"},' +
             '"Tuesday":{"entrada":"' + $("#MHin").val() + ($("#MMin").val() != "" ? (":" + $("#MMin").val()) : "") +
-            '","salida":"' + $("#MHout").val() + ($("#MMout").val() != "" ? ($(":" + "#MMout").val()) : "") + '"},' +
+            '","salida":"' + $("#MHout").val() + ($("#MMout").val() != "" ? (":" + $("#MMout").val()) : "") + '"},' +
             '"Wednesday":{"entrada":"' + $("#MiHin").val() + ($("#MiMin").val() != "" ? (":" + $("#MiMin").val()) : "")
-            + '","salida":"' + $("#MiHout").val() + ($("#MiMout").val() != "" ? ($(":" + "#MiMout").val()) : "") + '"},' +
+            + '","salida":"' + $("#MiHout").val() + ($("#MiMout").val() != "" ? (":" + $("#MiMout").val()) : "") + '"},' +
             '"Thursday":{"entrada":"' + $("#JHin").val() + ($("#JMin").val() != "" ? (":" + $("#JMin").val()) : "") +
-            '","salida":"' + $("#JHout").val() + ($("#JMout").val() != "" ? ($(":" + "#JMout").val()) : "") + '"},' +
+            '","salida":"' + $("#JHout").val() + ($("#JMout").val() != "" ? (":" + $("#JMout").val()) : "") + '"},' +
             '"Friday":{"entrada":"' + $("#VHin").val() + ($("#VMin").val() != "" ? (":" + $("#VMin").val()) : "") +
-            '","salida":"' + $("#VHout").val() + ($("#VMout").val() != "" ? ($(":" + "#VMout").val()) : "") + '"},' +
+            '","salida":"' + $("#VHout").val() + ($("#VMout").val() != "" ? (":" + $("#VMout").val()) : "") + '"},' +
             '"Saturday":{"entrada":"' + $("#SHin").val() + ($("#SMin").val() != "" ? (":" + $("#SMin").val()) : "") +
-            '","salida":"' + $("#SHout").val() + ($("#SMout").val() != "" ? ($(":" + "#SMout").val()) : "") + '"},' +
+            '","salida":"' + $("#SHout").val() + ($("#SMout").val() != "" ? (":" + $("#SMout").val()) : "") + '"},' +
             '"Sunday":{"entrada":"' + $("#DHin").val() + ($("#DMin").val() != "" ? (":" + $("#DMin").val()) : "") +
-            '","salida":"' + $("#DHout").val() + ($("#DMout").val() != "" ? ($(":" + "#DMout").val()) : "") + '"}}';
+            '","salida":"' + $("#DHout").val() + ($("#DMout").val() != "" ? (":" + $("#DMout").val()) : "") + '"}}';
 
         console.log("Parametros " + parametros)
         if (parametros != "") {
