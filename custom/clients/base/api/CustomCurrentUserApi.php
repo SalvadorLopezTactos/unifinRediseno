@@ -5,7 +5,7 @@
     Extensión de output(campos custom) para CurrentUserApi
 
 */
-require_once("clients/base/api/CurrentUserApi.php");
+require_once("clients/base/api/OAuth2Api.php");
 
 class CustomCurrentUserApi extends CurrentUserApi
 {
@@ -52,6 +52,7 @@ class CustomCurrentUserApi extends CurrentUserApi
         $userArray['current_user']['multilinea_c'] = $current_user->multilinea_c;
         $userArray['current_user']['responsable_oficina_chk_c'] = $current_user->responsable_oficina_chk_c;
         $userArray['current_user']['excluir_precalifica_c'] = $current_user->excluir_precalifica_c;
+        $userArray['current_user']['access_hours_c'] = $current_user->access_hours_c;
 
         return $userArray;
     }
