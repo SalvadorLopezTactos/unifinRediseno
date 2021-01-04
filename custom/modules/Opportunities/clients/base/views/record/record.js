@@ -2676,7 +2676,7 @@
         var status = this.model.get('estatus_c');
 
         //if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA") {
-        if (producto == 1 && negocio == 5 && (producto_financiero == 0 || producto_financiero == "") && (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0) && status != "K" && operacion == "LINEA_NUEVA")) {
+        if (producto == 1 && (negocio == 5 ||negocio == 3) && (producto_financiero == 0 || producto_financiero == "") && (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0) && status != "K" && operacion == "LINEA_NUEVA")) {
             app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
                 success: function (data) {
                     if (data.records.length == 0) {
@@ -2706,7 +2706,7 @@
         var chk = this.model.get('ratificacion_incremento_c');
         var status = this.model.get('estatus_c');
         if (chk != true && status != "K") {
-            if ((check == false || check == undefined) && producto == 1 && negocio == 5 && (producto_financiero == 0 || producto_financiero == "") && (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0))) {
+            if ((check == false || check == undefined) && producto == 1 && (negocio == 5 || negocio == 3) && (producto_financiero == 0 || producto_financiero == "") && (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0))) {
                 //if ((check == false || check == undefined) && producto == 1 && operacion == 'LINEA_NUEVA' && banderaExcluye.check.includes(0)) {
                 app.alert.show("Error_vobo", {
                     level: "info",
