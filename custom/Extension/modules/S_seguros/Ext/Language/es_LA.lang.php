@@ -57,3 +57,5 @@ $mod_strings['LBL_MOTIVO_NO_COTIZADO'] = 'Motivo No Cotizado';
 $mod_strings['LBL_NOTIFICA_KAM'] = 'Notificar a KAM';
 $mod_strings['LBL_PRODUCTO'] = 'Tipo de Producto';
 $mod_strings['LBL_ID_DISPOSICION'] = 'Id Disposición';
+$mod_strings['LBL_TIPO_VENTA'] = 'Tipo de venta';
+$mod_strings['LBL_SEGURO_UNI2'] = 'Uni2';
