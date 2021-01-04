@@ -5,7 +5,7 @@
     Extensión de output(campos custom) para CurrentUserApi
 
 */
-require_once("clients/base/api/OAuth2Api.php");
+require_once("clients/base/api/CurrentUserApi.php");
 
 class CustomCurrentUserApi extends CurrentUserApi
 {
