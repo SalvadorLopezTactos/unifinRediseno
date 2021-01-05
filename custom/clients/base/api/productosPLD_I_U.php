@@ -436,7 +436,7 @@ class productosPLD_I_U extends SugarApi
         $pldCE->tct_pld_campo3_rel = $productosPLD['creditoRevolvente']['campo9'];
         $pldCE->account_id_c = $productosPLD['creditoRevolvente']['campo9_id'];
         $pldCE->tct_pld_campo4_ddw = $productosPLD['creditoRevolvente']['campo10'];
-        $pldCE->name = "Crédito Envolvente";
+        $pldCE->name = "Crédito Revolvente";
         $pldCE->description = $productosPLD['creditoRevolvente']['tipoProducto'];
 
         //Guardar registro
