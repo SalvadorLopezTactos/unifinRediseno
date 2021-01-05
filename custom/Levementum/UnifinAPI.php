@@ -1734,7 +1734,9 @@ SQL;
 
             if( $opportunidad['tipo_producto_c'] == "LEASING" && $opportunidad['negocio_c'] == '3')
             {
-                $fields['arrendamientoEstructurado']= "1";
+                $fields['arrendamientoEstructurado']= true;
+            }else{
+              $fields['arrendamientoEstructurado']= false;
             }
 
             //CVV - 29/03/2016 - Si el proceso es para un BO se elimina el item de promotor y se agrega el grupo de asignación
