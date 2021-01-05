@@ -629,91 +629,95 @@
 	ConfirmCancelar: function(fields, errors, callback) {
 				
 		if ($.isEmptyObject(errors)&& this.model.get('parent_id') != "" && this.model.get('parent_type') == "Leads" && this.model.get('status')=="Held") {
-			if(this.model.get('tct_resultado_llamada_ddw_c')=='Ilocalizable' || this.model.get('tct_resultado_llamada_ddw_c')=='No_esta_Interesado' || this.model.get('tct_resultado_llamada_ddw_c')=='Fuera_de_Perfil'){
-                var lead = app.data.createBean('Leads', {id:this.model.get('parent_id')});
-			    lead.fetch({
-				    success: _.bind(function (model) {
-					    model.set('lead_cancelado_c', true);
-					    model.save();
-					
-					    app.alert.show('message-id', {
-						    level: 'success',
-						    messages: 'Lead Cancelado',
-						    autoClose: true
-				    	});
-				    }, this)
-			    });
-                /*************************************************/
-				if (Modernizr.touch) {
-					app.$contentEl.addClass('content-overflow-visible');
-				}
-				/**check whether the view already exists in the layout.
-				* If not we will create a new view and will add to the components list of the record layout
-				* */
-				
-				//var quickCreateView = this.layout.getComponent('MotivoCancelModal');
-				var quickCreateView = null;
-				if (!quickCreateView) {
-					/** Create a new view object */
-					quickCreateView = app.view.createView({
-						context: this.context,
-						name: 'MotivoCancelModal',
-						layout: this.layout,
-						module: 'Calls'
-					});
-					/** add the new view to the components list of the record layout*/
-					this.layout._components.push(quickCreateView);
-					this.layout.$el.append(quickCreateView.$el);
-				}
-				/**triggers an event to show the pop up quick create view*/
-				this.layout.trigger("app:view:MotivoCancelModal");
-				/**************************************/
-				callback(null, fields, errors);
-			}else if(this.model.get('tct_resultado_llamada_ddw_c')=='Checklist_expediente' ){
-				var filter_arguments = {
-					"id": this.model.get('parent_id')
-				};
-				app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
-					success: _.bind(function (data) {
-						console.log(data);
-						app.alert.dismiss('upload');
-						app.controller.context.reloadData({});
-						if (data.idCuenta === "") {
-							app.alert.show("Conversión", {
-								level: "error",
-								messages: data.mensaje,
-								autoClose: false
-							});
-							errors['status'] = errors['status'] || {};
-							errors['status'].required = true;
-							callback(null, fields, errors);
-						} else {
-							app.alert.show("Conversión", {
-								level: "success",
-								messages: data.mensaje,
-								autoClose: false
-							});
-							//this._disableActionsSubpanel();
-							callback(null, fields, errors);
-						}
-						
-					}, this),
-					failure: _.bind(function (data) {
-						app.alert.dismiss('upload');
-						errors['status'] = errors['status'] || {};
-						errors['status'].required = true;
-						callback(null, fields, errors);	
-					}, this),
-					error: _.bind(function (data) {
-						errors['status'] = errors['status'] || {};
-						errors['status'].required = true;
-						app.alert.dismiss('upload');
-						callback(null, fields, errors);
-					}, this)
-				});
-			}else{
-				callback(null, fields, errors);
-			}
+			var lead = app.data.createBean('Leads', {id:this.model.get('parent_id')});
+			lead.fetch({
+			    success: _.bind(function (model) {
+                 if(model.get('subtipo_registro_c')=='1'){
+                    if(this.model.get('tct_resultado_llamada_ddw_c')=='Ilocalizable' || this.model.get('tct_resultado_llamada_ddw_c')=='No_esta_Interesado' || this.model.get('tct_resultado_llamada_ddw_c')=='Fuera_de_Perfil'){
+                        model.set('lead_cancelado_c', true);
+                        model.save();
+                    
+                        app.alert.show('message-id', {
+                            level: 'success',
+                            messages: 'Lead Cancelado',
+                            autoClose: true
+                        });
+                        /*************************************************/
+                        if (Modernizr.touch) {
+                            app.$contentEl.addClass('content-overflow-visible');
+                        }
+                        /**check whether the view already exists in the layout.
+                        * If not we will create a new view and will add to the components list of the record layout
+                        * */
+                        
+                        //var quickCreateView = this.layout.getComponent('MotivoCancelModal');
+                        var quickCreateView = null;
+                        if (!quickCreateView) {
+                            /** Create a new view object */
+                            quickCreateView = app.view.createView({
+                                context: this.context,
+                                name: 'MotivoCancelModal',
+                                layout: this.layout,
+                                module: 'Calls'
+                            });
+                            /** add the new view to the components list of the record layout*/
+                            this.layout._components.push(quickCreateView);
+                            this.layout.$el.append(quickCreateView.$el);
+                        }
+                        /**triggers an event to show the pop up quick create view*/
+                        this.layout.trigger("app:view:MotivoCancelModal");
+                        /**************************************/
+                        callback(null, fields, errors);
+                    }else if(this.model.get('tct_resultado_llamada_ddw_c')=='Checklist_expediente' ){
+                        var filter_arguments = {
+                            "id": this.model.get('parent_id')
+                        };
+                        app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
+                            success: _.bind(function (data) {
+                                console.log(data);
+                                app.alert.dismiss('upload');
+                                app.controller.context.reloadData({});
+                                if (data.idCuenta === "") {
+                                    app.alert.show("Conversión", {
+                                        level: "error",
+                                        messages: data.mensaje,
+                                        autoClose: false
+                                    });
+                                    errors['status'] = errors['status'] || {};
+                                    errors['status'].required = true;
+                                    callback(null, fields, errors);
+                                } else {
+                                    app.alert.show("Conversión", {
+                                        level: "success",
+                                        messages: data.mensaje,
+                                        autoClose: false
+                                    });
+                                    //this._disableActionsSubpanel();
+                                    callback(null, fields, errors);
+                                }
+                                
+                            }, this),
+                            failure: _.bind(function (data) {
+                                app.alert.dismiss('upload');
+                                errors['status'] = errors['status'] || {};
+                                errors['status'].required = true;
+                                callback(null, fields, errors);	
+                            }, this),
+                            error: _.bind(function (data) {
+                                errors['status'] = errors['status'] || {};
+                                errors['status'].required = true;
+                                app.alert.dismiss('upload');
+                                callback(null, fields, errors);
+                            }, this)
+                        });
+                    }else{
+                        callback(null, fields, errors);
+                    }
+                 }else{
+                    callback(null, fields, errors);
+                 }					   
+			    }, this)
+            });           
 		}else{
 			callback(null, fields, errors);
 		}

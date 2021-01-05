@@ -1,0 +1,415 @@
+<style>
+    .container {
+        overflow-y: auto;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+    }
+
+    #titulo {
+        color: #e2efe2;
+        background-color: #22608c;
+        border-color: #22608c;
+        border-radius: 10px;
+        margin-right: 15px;
+        height: 35px;
+        display: table;
+        width: 96%;
+        font-size: 18px;
+        margin-top: 2%;
+        margin-left: 1%;
+        line-height: 30px;
+        padding-left: 10px;
+
+    }
+
+    .SetHorario th {
+        padding: 5px;
+        width: 75px;
+        background-color: #22608c;
+    }
+
+    .SetHorario td {
+        padding: 5px;
+        width: 75px;
+        background-color: #f6f8f9;
+    }
+
+    .modal {
+        position: fixed;
+        top: 15%;
+        left: 21%;
+        z-index: 1050;
+        width: 560px;
+        margin-left: -280px;
+        background-color: #6c6c6cbd;
+        background-clip: padding-box;
+        outline: none;
+    }
+    select {
+        width: 75px;
+        border: 1px solid #f6f6f6;
+        background-color: #fff;
+    }
+    .dia
+    {
+        background: #1a74c2;
+        color: white;
+
+    }
+
+</style>
+<div class="container">
+    <h2 id="titulo" align="left"><b>Gestión de accesos a CRM</b></h2>
+    <br>
+    <div style="margin-left: 15px;">
+        <input id="filtroNombre" type="text" value="" placeholder="Nombre(s)">
+        <input id="filtroApellido" type="text" value="" placeholder="Apellido">
+        <i style="color: white" class="fa fa-search btn btn-primary" id="btn_search" type="button"> Buscar</i>
+    </div>
+    <br>
+
+    <div class="AgentesContainer" style="padding-left: 15px">
+        {{#if agentes}}
+            <div class="table-responsive text-nowrap">
+                <!--Table-->
+                <table class="table table-striped" style="width: 98%">
+                    <!--Table head-->
+                    <thead>
+                    <tr style="background: #20608c; color: white;">
+                        <th style="background: #f6f8f9;"></th>
+                        <th style="background: #f6f8f9;"></th>
+                        <th colspan="2">Lunes</th>
+                        <th colspan="2">Martes</th>
+                        <th colspan="2">Miercoles</th>
+                        <th colspan="2">Jueves</th>
+                        <th colspan="2">Viernes</th>
+                        <th colspan="2">Sabado</th>
+                        <th colspan="2">Domingo</th>
+                    </tr>
+                    <tr style="background: #0d75b994;">
+                        <th width="5%">
+                            <input type="checkbox" value="Todo" id="btn_STodo" class="btn btn-primary"
+                                   btnState="Off"/>
+                        </th>
+                        <th style="padding: 2px">AGENTE</th>
+                        <th style="padding: 2px">Inicio</th>
+                        <th style="padding: 2px">Salida</th>
+                        <th style="padding: 2px">Inicio</th>
+                        <th style="padding: 2px">Salida</th>
+                        <th style="padding: 2px">Inicio</th>
+                        <th style="padding: 2px">Salida</th>
+                        <th style="padding: 2px">Inicio</th>
+                        <th style="padding: 2px">Salida</th>
+                        <th style="padding: 2px">Inicio</th>
+                        <th style="padding: 2px">Salida</th>
+                        <th style="padding: 2px">Inicio</th>
+                        <th style="padding: 2px">Salida</th>
+                        <th style="padding: 2px">Inicio</th>
+                        <th style="padding: 2px">Salida</th>
+                    </tr>
+                    </thead>
+                    <!--Table head-->
+                    <!--Table body-->
+                    <tbody>
+                    {{#each agentes}}
+                        <tr class='single' style="border-bottom: 2px solid skyblue;">
+                            <th scope="row">
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                            <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'><input
+                                    type="checkbox" name="selected" value="{{id}}" class="selected"/></span>
+                          </div>
+                    </span>
+                            </th>
+                            <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{nombre_completo_c}}</span>
+                          </div>
+                    </span>
+                            </td>
+                            {{#each access_hours_c}}
+                                <td>
+                    <span sfuuid='880' class='list'>
+                          <div>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{entrada}}</span>
+                          </div>
+                    </span>
+                                </td>
+                                <td>
+                    <span sfuuid='880' class='list'>
+                          <div>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{salida}}</span>
+                          </div>
+                    </span>
+                                </td>
+                            {{/each}}
+                        </tr>
+                    {{/each}}
+                    <tr style="background: #f6f8f9;">
+                        <td colspan="13"></td>
+                        <td colspan="2">
+                            <div class="btn-group">
+                                <a class="btn fa fa-caret-left" id="previous_offset"></a>
+                                <a class="btn disabled" id="offset_value" from_set="" to_set=""
+                                   total="{{../total_page}}"></a>
+                                <a class="btn fa fa-caret-right" id="next_offset"></a>
+                            </div>
+                        </td>
+                        <td>
+                            <a class="btn fa fa-calendar openModalHorarios"> Asignar horario</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <!--Table body-->
+                </table>
+                <!--Table-->
+            </div>
+
+        {{else}}
+            <div class="block-footer">
+                {{str "LBL_NO_DATA_AVAILABLE"}}
+            </div>
+        {{/if}}
+    </div>
+    <textarea style="display: none" id="crossSeleccionados" value=""></textarea>
+
+    <div id="myModal" class="row-fluid" style="display:none; width: 55%">
+        <div class="modal " style="width:97%">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <!-- Modal header -->
+                <div class="modal-header" style="color: white;">
+                    <span class="close closeModalHorarios" style="color: white"><b>&times;</b></span>
+                    <h3><b>Actualizar Horario Agentes</b></h3>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <!--Table-->
+                    <table class="SetHorario " style="width: 27%; margin-bottom: 15px; margin-left: 40%">
+                        <!--Table head-->
+                        <thead>
+                        <tr style="color: white; text-align: center">
+                            <th>Día Semana</th>
+                            <th colspan="2">Hora Inicio</th>
+                            <th colspan="2">Hora Salida</th>
+                        </tr>
+                        <tr style="text-align: center">
+                            <td style="background: #0d75b994"></td>
+                            <td>Horas</td>
+                            <td>Minutos</td>
+                            <td>Horas</td>
+                            <td>Minutos</td>
+                        </tr>
+                        </thead>
+                        <!--Table head-->
+                        <!--Table body-->
+                        <tbody>
+                        <tr>
+                            <td class="dia" style="text-align: justify; background: #0d75b994"><b>Lunes</b></td>
+                            <td >
+                                <select class="select2 inherit-width  " id="LHin" data-name=""
+                                        data-placeholder="Horas" data-toggle="tooltip" title="">
+                                    {{{Horas}}}
+                                </select>
+                            </td>
+                            <td>
+                                <select class="select2 inherit-width " id="LMin" data-name=""
+                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
+                                    {{{Minutos}}}
+                                </select>
+                            </td>
+                            <td >
+                                <select class="select2 inherit-width  " id="LHout" data-name=""
+                                        data-placeholder="Horas" data-toggle="tooltip" title="">
+                                    {{{Horas}}}
+                                </select>
+                            </td>
+                            <td>
+                                <select class="select2 inherit-width " id="LMout" data-name=""
+                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
+                                    {{{Minutos}}}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="dia" style="text-align: justify; background: #0d75b994"><b>Martes</b></td>
+                            <td >
+                                <select class="select2 inherit-width  " id="MHin" data-name=""
+                                        data-placeholder="Horas" data-toggle="tooltip" title="">
+                                    {{{Horas}}}
+                                </select>
+                            </td>
+                            <td>
+                                <select class="select2 inherit-width " id="MMin" data-name=""
+                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
+                                    {{{Minutos}}}
+                                </select>
+                            </td>
+                            <td >
+                                <select class="select2 inherit-width  " id="MHout" data-name=""
+                                        data-placeholder="Horas" data-toggle="tooltip" title="">
+                                    {{{Horas}}}
+                                </select>
+                            </td>
+                            <td>
+                                <select class="select2 inherit-width " id="MMout" data-name=""
+                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
+                                    {{{Minutos}}}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="dia" style="text-align: justify; background: #0d75b994"><b>Miercoles</b></td>
+                            <td >
+                                <select class="select2 inherit-width  " id="MiHin" data-name=""
+                                        data-placeholder="Horas" data-toggle="tooltip" title="">
+                                    {{{Horas}}}
+                                </select>
+                            </td>
+                            <td>
+                                <select class="select2 inherit-width " id="MiMin" data-name=""
+                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
+                                    {{{Minutos}}}
+                                </select>
+                            </td>
+                            <td >
+                                <select class="select2 inherit-width  " id="MiHout" data-name=""
+                                        data-placeholder="Horas" data-toggle="tooltip" title="">
+                                    {{{Horas}}}
+                                </select>
+                            </td>
+                            <td>
+                                <select class="select2 inherit-width " id="MiMout" data-name=""
+                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
+                                    {{{Minutos}}}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="dia" style="text-align: justify; background: #0d75b994"><b>Jueves</b></td>
+                            <td >
+                                <select class="select2 inherit-width  " id="JHin" data-name=""
+                                        data-placeholder="Horas" data-toggle="tooltip" title="">
+                                    {{{Horas}}}
+                                </select>
+                            </td>
+                            <td>
+                                <select class="select2 inherit-width " id="JMin" data-name=""
+                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
+                                    {{{Minutos}}}
+                                </select>
+                            </td>
+                            <td >
+                                <select class="select2 inherit-width  " id="JHout" data-name=""
+                                        data-placeholder="Horas" data-toggle="tooltip" title="">
+                                    {{{Horas}}}
+                                </select>
+                            </td>
+                            <td>
+                                <select class="select2 inherit-width " id="JMout" data-name=""
+                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
+                                    {{{Minutos}}}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="dia" style="text-align: justify; background: #0d75b994"><b>Viernes</b></td>
+                            <td >
+                                <select class="select2 inherit-width  " id="VHin" data-name=""
+                                        data-placeholder="Horas" data-toggle="tooltip" title="">
+                                    {{{Horas}}}
+                                </select>
+                            </td>
+                            <td>
+                                <select class="select2 inherit-width " id="VMin" data-name=""
+                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
+                                    {{{Minutos}}}
+                                </select>
+                            </td>
+                            <td >
+                                <select class="select2 inherit-width  " id="VHout" data-name=""
+                                        data-placeholder="Horas" data-toggle="tooltip" title="">
+                                    {{{Horas}}}
+                                </select>
+                            </td>
+                            <td>
+                                <select class="select2 inherit-width " id="VMout" data-name=""
+                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
+                                    {{{Minutos}}}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="dia" style="text-align: justify; background: #0d75b994"><b>Sabado</b></td>
+                            <td >
+                                <select class="select2 inherit-width  " id="SHin" data-name=""
+                                        data-placeholder="Horas" data-toggle="tooltip" title="">
+                                    {{{Horas}}}
+                                </select>
+                            </td>
+                            <td>
+                                <select class="select2 inherit-width " id="SMin" data-name=""
+                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
+                                    {{{Minutos}}}
+                                </select>
+                            </td>
+                            <td >
+                                <select class="select2 inherit-width  " id="SHout" data-name=""
+                                        data-placeholder="Horas" data-toggle="tooltip" title="">
+                                    {{{Horas}}}
+                                </select>
+                            </td>
+                            <td>
+                                <select class="select2 inherit-width " id="SMout" data-name=""
+                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
+                                    {{{Minutos}}}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="dia" style="text-align: justify; background: #0d75b994"><b>Domingo</b></td>
+                            <td >
+                                <select class="select2 inherit-width  " id="DHin" data-name=""
+                                        data-placeholder="Horas" data-toggle="tooltip" title="">
+                                    {{{Horas}}}
+                                </select>
+                            </td>
+                            <td>
+                                <select class="select2 inherit-width " id="DMin" data-name=""
+                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
+                                    {{{Minutos}}}
+                                </select>
+                            </td>
+                            <td >
+                                <select class="select2 inherit-width  " id="DHout" data-name=""
+                                        data-placeholder="Horas" data-toggle="tooltip" title="">
+                                    {{{Horas}}}
+                                </select>
+                            </td>
+                            <td>
+                                <select class="select2 inherit-width " id="DMout" data-name=""
+                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
+                                    {{{Minutos}}}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><a class="btn fa fa-ban ExcluirHorario" style="background: #0e90d2; color: #ffffff;">
+                                Excluir de Horario</a></td>
+                            <td colspan="1"></td>
+                            <td colspan="2"><a class="btn fa fa-save UpdateHorario" style="background: #0e90d2; color: #ffffff;">
+                                Actualizar Horario</a></td>
+                        </tr>-->
+                        </tbody>
+                        <!--Table body-->
+                    </table>
+                    <!--Table-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

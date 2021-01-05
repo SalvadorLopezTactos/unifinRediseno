@@ -55,12 +55,15 @@ class IntegracionQuantico
             $callApi = new UnifinAPI();
             $resultado = $callApi->postQuantico($body, $auth_encode);
             $GLOBALS['log']->fatal('Resultado: PEticion Quantico integracion ' . json_encode($resultado));
+
             if ($resultado['Success']) {
                 $GLOBALS['log']->fatal('Ha realizado correctamente');
                 $query = "UPDATE opportunities_cstm
-                              SET quantico_id_c ='" . $resultado['ErrorMessage'] . "'
-                              WHERE id_c = '" . $bean->id . "'";
+                              SET quantico_id_c ='{$resultado['ErrorMessage']}'
+                              WHERE id_c = '{$bean->id}'";
                 $queryResult = $db->query($query);
+                $bean->quantico_id_c=$resultado['ErrorMessage'];
+
             } else {
                 $GLOBALS['log']->fatal("Error al procesar la solicitud a Quantico, verifique información");
             }
