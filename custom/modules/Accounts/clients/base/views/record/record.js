@@ -4579,7 +4579,7 @@
                     var relacionca = 0;
                     var relacionff = 0;
                     var relacioncs = 0;
-                    var relacionce =0;
+                    var relacioncr =0;
                     var productos = "";
                     if (data.records.length > 0) {
                         for (var l = 0; l < data.records.length; l++) {
@@ -4615,8 +4615,8 @@
                             //Credito Envolvente
                             if (App.user.attributes.productos_c.includes(8) && $('.campo10ddw-ce').select2('val') == "2") {
 
-                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CS')) {
-                                    relacionca++;
+                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CR')) {
+                                    relacioncr++;
                                 }
                             }
                         }
@@ -4660,7 +4660,7 @@
                         $('.campo4ddw-cs').find('.select2-choice').css('border-color', '');
                     }
                     //Validacion Credito revolvente
-                    if (relacionce == 0 && $('.campo10ddw-ce').select2('val') == "2") {
+                    if (relacioncr == 0 && $('.campo10ddw-ce').select2('val') == "2") {
                         $('.campo10ddw-ce').find('.select2-choice').css('border-color', 'red');
                         productos = productos + '<b>Crédito Revolvente</b><br>';
                         errors['error_CR'] = errors['error_FPR'] || {};
