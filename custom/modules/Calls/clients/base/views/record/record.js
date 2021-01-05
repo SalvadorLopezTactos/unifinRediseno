@@ -632,7 +632,7 @@
 			var lead = app.data.createBean('Leads', {id:this.model.get('parent_id')});
 			lead.fetch({
 			    success: _.bind(function (model) {
-                 if(model.get('subtipo_registro_c')=='1'){
+                if(model.get('subtipo_registro_c')=='1'){
                     if(this.model.get('tct_resultado_llamada_ddw_c')=='Ilocalizable' || this.model.get('tct_resultado_llamada_ddw_c')=='No_esta_Interesado' || this.model.get('tct_resultado_llamada_ddw_c')=='Fuera_de_Perfil'){
                         model.set('lead_cancelado_c', true);
                         model.save();
@@ -672,9 +672,12 @@
                         var filter_arguments = {
                             "id": this.model.get('parent_id')
                         };
+                        elemento = document.getElementById("content");
+                        elemento.setAttribute("style", "position: fixed;");
+
                         app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
                             success: _.bind(function (data) {
-                                console.log(data);
+                                //console.log(data);
                                 app.alert.dismiss('upload');
                                 app.controller.context.reloadData({});
                                 if (data.idCuenta === "") {
