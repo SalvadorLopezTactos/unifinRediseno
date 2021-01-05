@@ -465,7 +465,7 @@
         <!-- Seccion credito Envolvente -->
         <div class="content-CE">
             <div class="tituloProducto">
-                <h4><b>Crédito Revolvente (Unirevolving/Unicard)</b> <font COLOR="red">(Campos Requeridos: *)</font></h4>
+                <h4><b>Crédito Revolvente (Unirevolving/Unicard)</b> <font COLOR="red"></font></h4>
             </div>
         </div>
        <div class="container-CE borde-Contenedor">
@@ -476,14 +476,14 @@
             <div class="row-fluid Fila1-CE">
                 
                     <div class="span6 campo1-CE">
-                        <label class="record-label">1.-¿Número de pagos que espera realizar mensualmente? <font COLOR="red">*</font></label>
-                        <input type="text" class="campo1int-ce" data-name="¿¿Número de pagos que espera realizar mensualmente?" 
+                        <label class="record-label">1.-¿Número de pagos que espera realizar mensualmente? <font COLOR="red"></font></label>
+                        <input type="text" class="campo1int-ce" data-name="¿Número de pagos que espera realizar mensualmente?" 
                         value="{{ProductosPLD.creditoRevolvente.campo1}}"
                         data-field="campo1EE"/>
                     </div>
                 <div class="span6 campo2-ce">
                     <label class="record-label">2.-¿Monto total aproximado que espera realizar en el
-                        periodo? <font COLOR="red">*</font></label>
+                        periodo? <font COLOR="red"></font></label>
                     <div class="select2-addon">
                          <span class="currency edit">
                            <div class="select2-container select2" style="width: 100%;">
@@ -506,7 +506,7 @@
             <!-- Fila 3 FF -->
             <div class="row-fluid Fila3-CE">
                 <div class="span6 campo3-ce">
-                    <label class="record-label">3.-¿Instrumento monetario con el que espera realizar los pagos?(Multiselección) <font COLOR="red">*</font></label>
+                    <label class="record-label">3.-¿Instrumento monetario con el que espera realizar los pagos?(Multiselección) <font COLOR="red"></font></label>
                     <select class="campo3ddw-ce select2 row-fluid" id="multi12" multiple="multiple" size="6" style="display:block;" data-field="campo3CE"  data-name="¿Instrumento monetario con el que espera realizar los pagos">
                         {{#each campo29_list}}
                           <option value="{{@key}}" {{ifMSelected @key ../ProductosPLD.creditoRevolvente.campo3}}>{{this}}</option>
@@ -527,7 +527,7 @@
             <div class="row-fluid Fila3-CE">
                 <div class="span6 campo5-ce">
                     <label class="record-label row-fluid">4.-¿Cuál es el destino de los recursos que obtendrá de la
-                        celebración de esta operación? <font COLOR="red">*</font></label>
+                        celebración de esta operación? <font COLOR="red"></font></label>
                     <select class="campo5ddw-ce select2 row-fluid " data-field="campo5CE" data-name="¿Cuál es el destino de los recursos que obtendrá de la celebración de esta operación?">
                         {{#each campo30_list}}
                             <option value="{{@key}}" {{ifSelected @key
@@ -536,8 +536,8 @@
                     </select>
                 </div>
                 <div class="span6 campo6-ce">
-                    <label class="record-label ">5.-¿Espera realizar pagos anticipados a su crédito? <font COLOR="red">*</font></label>
-                    <select class="campo6ddw-ce select2 row-fluid" data-field="campo6CE" data-name="¿Espera realizar pagos anticipados a su crédito?-ff" >
+                    <label class="record-label ">5.-¿Espera realizar pagos anticipados a su crédito? <font COLOR="red"></font></label>
+                    <select class="campo6ddw-ce select2 row-fluid" data-field="campo6CE" data-name="¿Espera realizar pagos anticipados a su crédito?" >
                         {{#each campo6_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.creditoRevolvente.campo6}}>{{this}}</option>
@@ -550,7 +550,7 @@
             <div class="row-fluid Fila5-FF">
                 
                     <div class="span6 campo7-ce">
-                    <label class="record-label">6.-¿Espera utilizar su tarjeta en territorio? <font COLOR="red">*</font></label>
+                    <label class="record-label">6.-¿Espera utilizar su tarjeta en territorio? <font COLOR="red"></font></label>
                     <select class="campo7ddw-ce select2 row-fluid" id="multi12" multiple="multiple" size="6" style="display:block;" data-field="campo7CE" data-name="¿Espera utilizar su tarjeta en territorio?" >
                         {{#each campo7_list}}
                             <option value="{{@key}}" {{ifMSelected @key
@@ -566,7 +566,7 @@
                 <div class="span6 campo8-ce">
                     <label class="record-label ">7.-¿Usted actúa a nombre y por cuenta propia o a nombre y por
                         cuenta de un tercero?</label>
-                    <select class="row-fluid select2  campo8ddw-ce" data-field="campo8CE" data-name="¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?-cs">
+                    <select class="row-fluid select2  campo8ddw-ce" data-field="campo8CE" data-name="¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?">
                         {{#each campo2_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.creditoRevolvente.campo8}}>{{this}}</option>
@@ -582,7 +582,7 @@
             <div class="row-fluid Fila7-FF">
                 
                 <div class="span6 campo10-ce">
-                    <label class="record-label">8.-¿Los recursos son propios o los recursos son de un tercero? <font COLOR="red">*</font></label>
+                    <label class="record-label">8.-¿Los recursos son propios o los recursos son de un tercero? <font COLOR="red"></font></label>
                     <select class="row-fluid select2  campo10ddw-ce" data-field="campo10CE"  data-name="¿Los recursos son propios o los recursos son de un tercero?">
                         {{#each campo4_list}}
                             <option value="{{@key}}" {{ifSelected @key

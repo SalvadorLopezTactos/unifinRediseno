@@ -1079,7 +1079,7 @@
         //campo Pais que expide el RFC nace oculto.
         // $('[data-name=tct_pais_expide_rfc_c]').hide();
         // $('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
-        //$('[data-name=tct_nuevo_pld_c]').hide(); //Oculta campo tct_nuevo_pld_c
+        $('[data-name=tct_nuevo_pld_c]').hide(); //Oculta campo tct_nuevo_pld_c
         //Oculta la etiqueta del campo PLD
         this.$('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
         //Oculta nombre de campo Potencial_Autos
@@ -4009,6 +4009,7 @@
         var faltantesFF = "";
         var faltantesCA = "";
         var faltantesCS = "";
+        var faltantesCR = "";
 
         //Valida requeridos a partir de Prospecto Interesado
         var tipoCuenta = this.model.get('tipo_registro_cuenta_c');
@@ -4189,6 +4190,65 @@
                  $('.campo6ddw-ca').find('.select2-choice').css('border-color','');
                  }*/
             }
+            //Validacion campos faltantes de Credito Revolvente
+            /*if (App.user.attributes.tipodeproducto_c == '8') {
+                //Pregunta: campo1int-ce
+                if($('.campo1int-ce').val() == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
+                 $('.campo1int-ce').css('border-color', 'red');
+                 faltantesCR = faltantesCR + '<b>- '+$('.campo1int-ce')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo1int-ce').css('border-color', '');
+                 }
+                //Pregunta: campo2dec-ce
+                if($('.campo2dec-ce').val() == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
+                 $('.campo2dec-ce').css('border-color', 'red');
+                 faltantesCR = faltantesCR + '<b>- '+$('.campo2dec-ce')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo2dec-ce').css('border-color', '');
+                 }
+                //Pregunta: campo3ddw-ce
+                if($('.campo3ddw-ce').select2('val') == ''){
+                 $('.campo3ddw-ce').find('.select2-choice').css('border-color','red');
+                 faltantesCR = faltantesCR + '<b>- '+$('select.campo3ddw-ce')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo3ddw-ce').find('.select2-choice').css('border-color','');
+                 }
+                //Pregunta: campo5ddw-ce
+                if($('.campo5ddw-ce').select2('val') == ''){
+                 $('.campo5ddw-ce').find('.select2-choice').css('border-color','red');
+                 faltantesCR = faltantesCR + '<b>- '+$('select.campo5ddw-ce')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo5ddw-ce').find('.select2-choice').css('border-color','');
+                 }
+                 //Pregunta: campo6ddw-ce
+                 if($('.campo6ddw-ce').select2('val') == ''){
+                 $('.campo6ddw-ce').find('.select2-choice').css('border-color','red');
+                 faltantesCR = faltantesCR + '<b>- '+$('select.campo6ddw-ce')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo6ddw-ce').find('.select2-choice').css('border-color','');
+                 }
+                 //Pregunta: campo7ddw-ce
+                 if($('.campo7ddw-ce').select2('val') == ''){
+                 $('.campo7ddw-ce').find('.select2-choice').css('border-color','red');
+                 faltantesCR = faltantesCR + '<b>- '+$('select.campo7ddw-ce')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo7ddw-ce').find('.select2-choice').css('border-color','');
+                 }
+                 //Pregunta: campo8ddw-ce
+                 if($('.campo8ddw-ce').select2('val') == ''){
+                 $('.campo8ddw-ce').find('.select2-choice').css('border-color','red');
+                 faltantesCR = faltantesCR + '<b>- '+$('select.campo8ddw-ce')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo8ddw-ce').find('.select2-choice').css('border-color','');
+                 }
+                 //Pregunta: campo10ddw-ce
+                 if($('.campo10ddw-ce').select2('val') == ''){
+                 $('.campo10ddw-ce').find('.select2-choice').css('border-color','red');
+                 faltantesCR = faltantesCR + '<b>- '+$('select.campo10ddw-ce')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo10ddw-ce').find('.select2-choice').css('border-color','');
+                 }
+            }*/
             if ($('.campo2ddw-cs').select2('val') == "2" && $('.campo3rel-cs').select2('val') == "") {
                 $('.campo3rel-cs').find('.select2-choice').css('border-color', 'red');
                 faltantesCS = faltantesCS + '<b>- ' + $('.campo2ddw-cs')[1].getAttribute('data-name') + '<br></b>';
@@ -4227,6 +4287,14 @@
                 app.alert.show("faltantesCA", {
                     level: "error",
                     title: "PLD Crédito automotriz - Faltan las siguientes preguntas por contestar: <br>" + faltantesCA
+                });
+            }
+            if (faltantesCR != "") {
+                errors['PreguntasCR'] = "";
+                errors['PreguntasCR'].required = true;
+                app.alert.show("faltantesCR", {
+                    level: "error",
+                    title: "PLD Crédito Revolvente - Faltan las siguientes preguntas por contestar: <br>" + faltantesCR
                 });
             }
         }
