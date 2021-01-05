@@ -462,4 +462,108 @@
         </div>
     </div>
 
+     <div class="content_ff" style="display:{{ProductosPLD.creditoRevolvente.visible}}">
+        <!-- Seccion Credito Envolvente -->
+        <div class="content-CE">
+            <div class="tituloProducto">
+                <h4><b>Crédito Revolvente (Unirevolving/Unicard) </b> <font COLOR="red">(Campos Requeridos: *)</font></h4>
+            </div>
+        </div>
+        <div class="container borde-Contenedor">     
+         <!-- Fila 1 CE-->
+            <div class="row-fluid Fila1-CE">
+               <div class="span6 campo1-CE">
+                    <label class="record-label">1.-¿Número de pagos que espera realizar mensualmente? <font COLOR="red">*</font></label>
+                    <label class="campo1int-ee row-fluid" data-field="campo1EE"
+                           style="padding: 5px 7px;font-size: 14px;">
+                        {{ProductosPLD.creditoRevolvente.campo1}}
+                    </label>
+                </div>
+                 <div class="span6 campo2-ce">
+                    <label class="record-label">2.-¿Monto total aproximado que espera realizar en el periodo? <font COLOR="red">*</font></label>
+                    <label data-type="currency" class="row-fluid campo2-ce" data-field="campo2-ce"
+                           style="padding: 5px 7px;font-size: 14px;">
+                        ${{customFormatNumber ProductosPLD.creditoRevolvente.campo2}}
+                    </label>
+                </div>
+            </div>
+            <!-- Fila 2 CE -->
+            <div class="row-fluid Fila2-CE">
+                <div class="span6 campo3-ce">
+                    <label class="record-label">3.-¿Instrumento monetario con el que espera realizar los pagos? (*Es
+                        posible elegir más de una opción) <font COLOR="red">*</font></label>
+                    <label class="row-fluid campo3-ce" data-field="campo3ce"
+                           style="padding: 5px 7px;font-size: 14px;">
+                            {{ProductosPLD.creditoRevolvente.campo3_label}}
+                       
+                    </label>
+                </div>
+                
+                
+            </div>
+            <!-- Fila 3 CE -->
+            <div class="row-fluid Fila3-CE">
+                <div class="span6 campo5-ce">
+                    <label class="record-label row-fluid">4.-¿Cuál es el destino de los recursos que obtendrá de la
+                        celebración de esta operación? <font COLOR="red">*</font></label>
+                    <label class="campo5ddw-ce row-fluid" data-field="campo5ce"
+                           style="padding: 5px 7px;font-size: 14px;">
+                         {{ProductosPLD.creditoRevolvente.campo5_label}}
+                    </label>
+                </div>
+                <div class="span6 campo6-ce">
+                    <label class="record-label ">5.-¿Espera realizar pagos anticipados a su crédito? <font COLOR="red">*</font></label>
+                    <label class="campo6ddw-ce  row-fluid" data-field="campo6ce"
+                           style="padding: 5px 7px;font-size: 14px;">
+                            {{getUnifinListValue 'tct_pagoanticipado_list' ProductosPLD.creditoRevolvente.campo6}}
+                       
+                    </label>
+                </div>
+                
+            </div>
+            <!-- Fila 4 CE -->
+            <div class="row-fluid Fila4-CE">
+                <div class="span6 campo7-ce">
+                    <label class="record-label">6.-¿Espera utilizar su tarjeta en territorio? <font COLOR="red">*</font></label>
+                    <label class="campo7ddw-ce  row-fluid" data-field="campo7CE"
+                           style="padding: 5px 7px;font-size: 14px;">
+                          {{ProductosPLD.creditoRevolvente.campo7_label}}
+                    </label>
+                </div>
+            </div>
+            <!-- Fila 5 CE -->
+            <div class="row-fluid Fila5-CE">    
+                <div class="span6 campo8-ce">
+                    <label class="record-label ">7.-¿Usted actúa a nombre y por cuenta propia o a nombre y por
+                        cuenta de un tercero? <font COLOR="red">*</font></label>
+                    <label class="row-fluid campo8ddw-ce " data-field="campo8CE" data-id="{{ProductosPLD.creditoRevolvente.campo8}}"
+                           style="padding: 5px 7px;font-size: 14px;">
+                        {{ProductosPLD.creditoRevolvente.campo8_label}}
+                    </label>
+                </div>
+                <div class="span6 campo9-ce">
+                    <label class="record-label">8.-Propietario Real</label>
+                    <span class=" row-fluid">
+                     <a href="/unifin/#Accounts/{{{ProductosPLD.creditoRevolvente.campo9_id}}}"
+                        class="campo9rel-ap PR-link"
+                        data-type="relate" data-field="campo9CE"
+                        style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
+                         {{ProductosPLD.creditoRevolvente.campo9}}</a>
+                </span>
+                </div>   
+            </div>
+            <!-- Fila 6 CE -->
+            <div class="row-fluid Fila6-CE">
+                <div class="span6 campo10-ce">
+                    <label class="record-label">9.-¿Los recursos son propios o los recursos son de un tercero? <font COLOR="red">*</font></label>
+                    <label class=" row-fluid campo10ddw-ce " data-field="campo10CE" data-id="{{ProductosPLD.creditoRevolvente.campo10}}"
+                           style="padding: 5px 7px;font-size: 14px;">
+                        {{ProductosPLD.creditoRevolvente.campo10_label}}
+                    </label>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
 </div>

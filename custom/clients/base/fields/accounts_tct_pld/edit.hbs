@@ -461,5 +461,141 @@
         </div>
     </div>
 
+    <div class="content_ce" style="display:{{ProductosPLD.creditoRevolvente.visible}}">
+        <!-- Seccion credito Envolvente -->
+        <div class="content-CE">
+            <div class="tituloProducto">
+                <h4><b>Crédito Revolvente (Unirevolving/Unicard)</b> <font COLOR="red">(Campos Requeridos: *)</font></h4>
+            </div>
+        </div>
+       <div class="container-CE borde-Contenedor">
+            <!-- Fila 1 CE -->
+               
+
+            <!-- Fila 2 CE -->
+            <div class="row-fluid Fila1-CE">
+                
+                    <div class="span6 campo1-CE">
+                        <label class="record-label">1.-¿Número de pagos que espera realizar mensualmente? <font COLOR="red">*</font></label>
+                        <input type="text" class="campo1int-ce" data-name="¿¿Número de pagos que espera realizar mensualmente?" 
+                        value="{{ProductosPLD.creditoRevolvente.campo1}}"
+                        data-field="campo1EE"/>
+                    </div>
+                <div class="span6 campo2-ce">
+                    <label class="record-label">2.-¿Monto total aproximado que espera realizar en el
+                        periodo? <font COLOR="red">*</font></label>
+                    <div class="select2-addon">
+                         <span class="currency edit">
+                           <div class="select2-container select2" style="width: 100%;">
+                             <a href="javascript:void(0)" class="select2-choice" tabindex="-1">
+                               <span class="select2-chosen">$ (MXN)</span>
+                               <abbr class="select2-search-choice-close"></abbr>
+                               <span class="select2-arrow" role="presentation"><b role="presentation"></b></span>
+                             </a>
+                           </div>
+                         </span>
+                        <input type="text" data-type="currency" data-name="¿Monto total aproximado que espera realizar en el
+                        periodo?" class="currency edit campo2dec-ce"
+                               value="{{customFormatNumber ProductosPLD.creditoRevolvente.campo2}}"
+                               data-field="campo2-ce"/>
+                    </div>
+                </div>
+
+            
+            </div>
+            <!-- Fila 3 FF -->
+            <div class="row-fluid Fila3-CE">
+                <div class="span6 campo3-ce">
+                    <label class="record-label">3.-¿Instrumento monetario con el que espera realizar los pagos?(Multiselección) <font COLOR="red">*</font></label>
+                    <select class="campo3ddw-ce select2 row-fluid" id="multi12" multiple="multiple" size="6" style="display:block;" data-field="campo3CE"  data-name="¿Instrumento monetario con el que espera realizar los pagos">
+                        {{#each campo29_list}}
+                          <option value="{{@key}}" {{ifMSelected @key ../ProductosPLD.creditoRevolvente.campo3}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                    <!-- <select class="row-fluid campo16ddw-ff" id="multi12" multiple="multiple" size="6"
+                            style="display:block;" data-field="campo16FF" data-name="¿Instrumento monetario con el que espera realizar los pagos?-ff" id="multi-campo16" >
+                        {{#each campo16_list}}
+                            <option value="{{@key}}" {{ifMSelected @key
+                                                                  ../ProductosPLD.factorajeFinanciero.campo16}}>{{this}}</option>
+                        {{/each}}
+                    </select> -->
+                </div>
+                
+                
+            </div>
+            <!-- Fila 4 FF -->
+            <div class="row-fluid Fila3-CE">
+                <div class="span6 campo5-ce">
+                    <label class="record-label row-fluid">4.-¿Cuál es el destino de los recursos que obtendrá de la
+                        celebración de esta operación? <font COLOR="red">*</font></label>
+                    <select class="campo5ddw-ce select2 row-fluid " data-field="campo5CE" data-name="¿Cuál es el destino de los recursos que obtendrá de la celebración de esta operación?">
+                        {{#each campo30_list}}
+                            <option value="{{@key}}" {{ifSelected @key
+                                                                  ../ProductosPLD.creditoRevolvente.campo5}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="span6 campo6-ce">
+                    <label class="record-label ">5.-¿Espera realizar pagos anticipados a su crédito? <font COLOR="red">*</font></label>
+                    <select class="campo6ddw-ce select2 row-fluid" data-field="campo6CE" data-name="¿Espera realizar pagos anticipados a su crédito?-ff" >
+                        {{#each campo6_list}}
+                            <option value="{{@key}}" {{ifSelected @key
+                                                                  ../ProductosPLD.creditoRevolvente.campo6}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                
+            </div>
+            <!-- Fila 5 FF -->
+            <div class="row-fluid Fila5-FF">
+                
+                    <div class="span6 campo7-ce">
+                    <label class="record-label">6.-¿Espera utilizar su tarjeta en territorio? <font COLOR="red">*</font></label>
+                    <select class="campo7ddw-ce select2 row-fluid" id="multi12" multiple="multiple" size="6" style="display:block;" data-field="campo7CE" data-name="¿Espera utilizar su tarjeta en territorio?" >
+                        {{#each campo7_list}}
+                            <option value="{{@key}}" {{ifMSelected @key
+                                                                  ../ProductosPLD.creditoRevolvente.campo7}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                    </div>
+                   
+                
+            </div>
+            <!-- Fila 6 FF -->
+            <div class="row-fluid Fila6-FF">
+                <div class="span6 campo8-ce">
+                    <label class="record-label ">7.-¿Usted actúa a nombre y por cuenta propia o a nombre y por
+                        cuenta de un tercero?</label>
+                    <select class="row-fluid select2  campo8ddw-ce" data-field="campo8CE" data-name="¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?-cs">
+                        {{#each campo2_list}}
+                            <option value="{{@key}}" {{ifSelected @key
+                                                                  ../ProductosPLD.creditoRevolvente.campo8}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div> 
+               <div class="span6 campo9-ce">
+                    <label class="record-label">Propietario Real</label>
+                    <input type="hidden" class="bigdrop campo9rel-ce row-fluid" id="propietario_real_ce" data-name="Propietario Real-ce" data-field="campo9CE"/>
+                </div>
+            </div>
+            <!-- Fila 7 FF -->
+            <div class="row-fluid Fila7-FF">
+                
+                <div class="span6 campo10-ce">
+                    <label class="record-label">8.-¿Los recursos son propios o los recursos son de un tercero? <font COLOR="red">*</font></label>
+                    <select class="row-fluid select2  campo10ddw-ce" data-field="campo10CE"  data-name="¿Los recursos son propios o los recursos son de un tercero?">
+                        {{#each campo4_list}}
+                            <option value="{{@key}}" {{ifSelected @key
+                                                                  ../ProductosPLD.creditoRevolvente.campo10}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                
+            </div>
+            <!-- Fila 8 FF -->
+            <div class="row-fluid Fila8-FF">
+                
+            </div>
+        </div>
 
 </div>

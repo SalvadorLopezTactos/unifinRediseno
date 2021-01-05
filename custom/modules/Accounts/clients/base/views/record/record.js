@@ -437,6 +437,20 @@
                 this.ProductosPLD.creditoSimple.campo14 = this.$('.campo14chk-cs')[0].checked;
                 this.ProductosPLD.creditoSimple.campo20 = this.$('.campo20ddw-cs').select2('val');
                 this.ProductosPLD.creditoSimple.campo6 = this.$('.campo6ddw-cs').select2('val');
+                //Campos Credito Revolvente
+                this.ProductosPLD.creditoRevolvente.campo1=this.$('.campo1int-ce').val();
+                this.ProductosPLD.creditoRevolvente.campo2=this.$('.campo2dec-ce').val().replace(/,/gi, "");
+                this.ProductosPLD.creditoRevolvente.campo3=this.$('.campo3ddw-ce').select2('val').toString();
+                this.ProductosPLD.creditoRevolvente.campo5=this.$('.campo5ddw-ce').select2('val');
+                this.ProductosPLD.creditoRevolvente.campo6=this.$('.campo6ddw-ce').select2('val');
+                this.ProductosPLD.creditoRevolvente.campo7=this.$('.campo7ddw-ce').select2('val').toString();
+                this.ProductosPLD.creditoRevolvente.campo8=this.$('.campo8ddw-ce').select2('val');
+                this.ProductosPLD.creditoRevolvente.campo9=this.$('.campo9rel-ce').select2('val');
+                this.ProductosPLD.creditoRevolvente.campo9_id=this.$('.campo9rel-ce').select2('val');
+                this.ProductosPLD.creditoRevolvente.campo10=this.$('.campo10ddw-ce').select2('val');
+                this.ProductosPLD.creditoRevolvente.campo11=this.$('.campo11rel-ce').select2('val');
+                this.ProductosPLD.creditoRevolvente.campo11_id=this.$('.campo11rel-ce').select2('val');
+
             }
 
             //Valida cambios
@@ -4488,7 +4502,7 @@
 
     },
     proveedorRecursos: function (fields, errors, callback) {
-        if ($('.campo4ddw-ap').select2('val') == "2" || $('.campo4ddw-ca').select2('val') == "2" || $('.campo4ddw-ff').select2('val') == "2" || $('.campo4ddw-cs').select2('val') == "2") {
+        if ($('.campo4ddw-ap').select2('val') == "2" || $('.campo4ddw-ca').select2('val') == "2" || $('.campo4ddw-ff').select2('val') == "2" || $('.campo4ddw-cs').select2('val') == "2" || $('.campo10ddw-ce').select2('val') == "2") {
 
             var apicall = app.api.buildURL('Rel_Relaciones?filter[0][rel_relaciones_accounts_1accounts_ida][$equals]=' + this.model.get("id"), null);
             app.api.call('GET', apicall, {}, {
@@ -4498,6 +4512,7 @@
                     var relacionca = 0;
                     var relacionff = 0;
                     var relacioncs = 0;
+                    var relacionce =0;
                     var productos = "";
                     if (data.records.length > 0) {
                         for (var l = 0; l < data.records.length; l++) {
@@ -4528,6 +4543,13 @@
 
                                 if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CS')) {
                                     relacioncs++;
+                                }
+                            }
+                            //Credito Envolvente
+                            if (App.user.attributes.productos_c.includes(8) && $('.campo10ddw-ce').select2('val') == "2") {
+
+                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CS')) {
+                                    relacionca++;
                                 }
                             }
                         }
@@ -4569,6 +4591,15 @@
                         errors['error_FPR'].required = true;
                     } else {
                         $('.campo4ddw-cs').find('.select2-choice').css('border-color', '');
+                    }
+                    //Validacion Credito revolvente
+                    if (relacionce == 0 && $('.campo10ddw-ce').select2('val') == "2") {
+                        $('.campo10ddw-ce').find('.select2-choice').css('border-color', 'red');
+                        productos = productos + '<b>Crédito Revolvente</b><br>';
+                        errors['error_CR'] = errors['error_FPR'] || {};
+                        errors['error_CR'].required = true;
+                    } else {
+                        $('.campo10ddw-ce').find('.select2-choice').css('border-color', '');
                     }
                     if (productos != "") {
                         app.alert.show("Faltante Relacion Proveedor de Recursos", {
@@ -4963,6 +4994,10 @@
                     //CA
                     if (App.user.attributes.tipodeproducto_c == '3') {
                         contexto_cuenta.ProductosPLD.creditoAutomotriz.visible = 'block';
+                    }
+                    //CA
+                    if (App.user.attributes.tipodeproducto_c == '8') {
+                        contexto_cuenta.ProductosPLD.creditoRevolvente.visible = 'block';
                     }
                     //Genera objeto con valores previos para control de cancelar
                     contexto_cuenta.prev_ProductosPLD = app.utils.deepCopy(contexto_cuenta.ProductosPLD);
