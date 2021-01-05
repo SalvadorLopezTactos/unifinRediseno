@@ -147,7 +147,7 @@
         //Validación para poder autorizar o rechazar la pre-solicitud
         this.model.on('sync', this.autorizapre, this);
         this.model.on('change:estatus_c', this.refrescaPipeLine, this);
-        
+        this.model.on("change:admin_cartera_c", _.bind(this.adminUserCartera, this));
         this.adminUserCartera();
     },
 
@@ -613,11 +613,15 @@
             $('[data-name="ca_pago_mensual_c"]').attr('style', 'pointer-events:none'); //Pago mensual
             $('[data-name="ca_importe_enganche_c"]').attr('style', 'pointer-events:none'); //Pago unico
             $('[data-name="porciento_ri_c"]').attr('style', 'pointer-events:none'); //% Pago unico
+        
+        } else {
+            this.model.set('admin_cartera_c', false);
+            this.model.set('tipo_sol_admin_cartera_c', "");
+            this.model.set('producto_origen_vencido_c', "");
+            $('[data-name="admin_cartera_c"]').hide();
+            $('[data-name="tipo_sol_admin_cartera_c"]').hide();
+            $('[data-name="producto_origen_vencido_c"]').hide();
         }
-
-        this.model.on("change:admin_cartera_c", _.bind(function () {
-            this.adminUserCartera();
-        }, this));
 
     },
 
