@@ -145,10 +145,10 @@ class productosPLD_I_U extends SugarApi
                     'campo6' => '',
                     'campo6_label' => '',
                 ),
-                'creditoRevolvente' =>
+            'creditoRevolvente' =>
                 array(
                     'id_pld' => '',
-                    'tipoProducto' => 'CE',
+                    'tipoProducto' => 'CR',
                     'campo1' => '',
                     'campo2' => '',
                     'campo3' => '',
@@ -246,7 +246,7 @@ class productosPLD_I_U extends SugarApi
                         $productosPLD['creditoSimple']['campo6'] = $value->tct_pld_campo6_ddw;
 
                         break;
-                    case "CE":
+                    case "CR":
                             $productosPLD['creditoRevolvente']['id_pld'] = $value->id;
                             $productosPLD['creditoRevolvente']['campo1'] = $value->tct_pld_campo22_int;
                             $productosPLD['creditoRevolvente']['campo2'] = $value->tct_pld_campo23_dec;

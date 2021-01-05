@@ -122,7 +122,7 @@ class NuevoPLD_Class
               $pldCS->save();
 
               ########################
-              // Credito Revolvente CE
+              // Credito Revolvente CR
               ########################
               $pldCR = BeanFactory::newBean($modulo);
               //Agregar valores a campo
