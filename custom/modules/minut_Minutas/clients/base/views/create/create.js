@@ -135,7 +135,7 @@
     *Victor Martínez 23-10-2018
     */
     savestatusandlocation:function(fields, errors, callback){
-
+      
       if (Object.keys(errors).length == 0) {
           try {
             self=this;
@@ -174,6 +174,120 @@
                             $('[data-name="assigned_user_name"]').removeAttr("style");
                         }
                     });
+                    var parent_meet = modelo.get('parent_type');
+                    var parent_id_acc = modelo.get('parent_id');
+                    if(parent_meet == "Accounts"){
+                        
+                    }else if(parent_meet == "Leads"){
+                        var lead = app.data.createBean('Leads', {id:parent_id_acc});
+			            lead.fetch({
+			            success: _.bind(function (modelLead) {
+                            if(modelLead.get('subtipo_registro_c')=='1'){
+                                if(self.model.get('resultado_c')=='2' ||self.model.get('resultado_c')=='18' || self.model.get('resultado_c')=='21' || self.model.get('resultado_c')=='25'){
+                                    modelLead.set('subtipo_registro_c', "3");
+                                    modelLead.set('lead_cancelado_c', true);
+                                    modelLead.save();
+                                
+                                    app.alert.show('message-id', {
+                                        level: 'success',
+                                        messages: 'Lead Cancelado',
+                                        autoClose: true
+                                    });
+                                    /*************************************************/
+                                    if (Modernizr.touch) {
+                                        app.$contentEl.addClass('content-overflow-visible');
+                                    }
+                                    /**check whether the view already exists in the layout.
+                                    * If not we will create a new view and will add to the components list of the record layout
+                                    * */
+                                
+                                    //var quickCreateView = this.layout.getComponent('MotivoCancelModal');
+                                    var quickCreateView = null;
+                                    if (!quickCreateView) {
+                                        /** Create a new view object */
+                                        quickCreateView = app.view.createView({
+                                            context: this.context,
+                                            name: 'MotivoCancelModal',
+                                            layout: this.layout,
+                                            module: 'Calls'
+                                        });
+                                        /** add the new view to the components list of the record layout*/
+                                        this.layout._components.push(quickCreateView);
+                                        this.layout.$el.append(quickCreateView.$el);
+                                    }
+                                    /**triggers an event to show the pop up quick create view*/
+                                    this.layout.trigger("app:view:MotivoCancelModal");
+                                    /**************************************/
+                                    callback(null, fields, errors);
+                                }else if(self.model.get('resultado_c')=='4' ||self.model.get('resultado_c')=='5' || self.model.get('resultado_c')=='19' 
+                                || self.model.get('resultado_c')=='6' || self.model.get('resultado_c')=='7' || self.model.get('resultado_c')=='23'){
+                                    // Está Interesado. Se procede a generar expediente
+                                    // Está Interesado. Se agendó otra visita
+                                    // Está interesado. Se agendó otra llamada
+                                    // Está Interesado. Se recogió información
+                                    // Se cerró una venta
+                                    // Se procede a generar expediente
+                                    // Está interesado solicita cotización para proceder
+                                    modelLead.set('subtipo_registro_c', "4");
+                                    modelLead.save();
+                                    var filter_arguments = {
+                                        "id": parent_id_acc
+                                    };
+                                    app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
+                                        success: _.bind(function (data) {
+                                            console.log(data);
+                                            app.alert.dismiss('upload');
+                                            app.controller.context.reloadData({});
+                                            if (data.idCuenta === "") {
+                                                app.alert.show("Conversión", {
+                                                    level: "error",
+                                                    messages: data.mensaje,
+                                                    autoClose: false
+                                                });
+                                                errors['status'] = errors['status'] || {};
+                                                errors['status'].required = true;
+                                                callback(null, fields, errors);
+                                            } else {
+                                                app.alert.show("Conversión", {
+                                                    level: "success",
+                                                    messages: data.mensaje,
+                                                    autoClose: false
+                                                });
+                                                //this._disableActionsSubpanel();
+                                                callback(null, fields, errors);
+                                            }
+                                        }, this),
+                                        failure: _.bind(function (data) {
+                                            app.alert.dismiss('upload');
+                                            errors['status'] = errors['status'] || {};
+                                            errors['status'].required = true;
+                                            callback(null, fields, errors);	
+                                        }, this),
+                                        error: _.bind(function (data) {
+                                            errors['status'] = errors['status'] || {};
+                                            errors['status'].required = true;
+                                            app.alert.dismiss('upload');
+                                            callback(null, fields, errors);
+                                        }, this)
+                                    });
+                                }else if(self.model.get('resultado_c')=='3'){
+                                    modelLead.set('subtipo_registro_c', "2");
+                                    modelLead.set('status_management_c', "2");
+                                    modelLead.save();
+                                    callback(null, fields, errors);
+                                }else{
+                                    modelLead.set('subtipo_registro_c', "2");
+                                    modelLead.save();
+                                    callback(null, fields, errors);
+                                }
+                            }else{
+                                callback(null, fields, errors);
+                            }					   
+                        }, this)
+                        });
+                    }else{
+                        callback(null, fields, errors);
+                    }
                 }, this)
             });
           } catch (e) {
