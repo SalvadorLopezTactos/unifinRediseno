@@ -888,38 +888,35 @@
                                         if (data.nacionalidad_c == "") {
                                             RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
                                         }
-                                        // if (data.tct_macro_sector_ddw_c == "") {
-                                        //     RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
-                                        // }
-                                        // if (data.sectoreconomico_c == "") {
-                                        //     RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
-                                        // }
-                                        // if (data.subsectoreconomico_c == "") {
-                                        //     RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';
-                                        // }
-                                        if (data.actividadeconomica_c == "") {
-                                            RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
+                                        if (data.rfc_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
                                         }
-                                        if(data.rfc_c == "" && data.curp_c == "" && data.ctpldnoseriefiel_c == "" ){
-                                            RequeridosProvRec = RequeridosProvRec + '<b><br>Al menos la captura de alguno de estos campos:<br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br></b>';
+                                        if (data.tct_pais_expide_rfc_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-País que expide el RFC o equivalente<br></b>';
                                         }
-                                        if (data.tipo_registro_cuenta_c!= '4') {
-                                            app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
+                                        if (data.curp_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-CURP<br></b>';
+                                        }
+                                        if (data.profesion_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-Profesión<br></b>';
+                                        }
+                                        if (data.ctpldnoseriefiel_c == "" ) {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-No. Serie FIEL<br></b>';
+                                        }
+                                        app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                                 success: _.bind(function (data) {
-
                                                     var flag_inactivo =0;
                                                     for(var i=0;i<data.records.length;i++){
                                                         if(data.records[i].inactivo==true){
                                                             flag_inactivo++;
                                                         }   
                                                     }
-
                                                     if (data.records.length <= flag_inactivo) {
-                                                        for (var d = 0; d < data.records.length; d++) {
-                                                            if (!data.records[d].tipodedireccion.includes("1") && !data.records[d].tipodedireccion.includes("3") && !data.records[d].tipodedireccion.includes("5") && !data.records[d].tipodedireccion.includes("7")) {
-                                                                RequeridosProvRec = RequeridosProvRec + '<b>-Dirección Particular<br></b>';
-                                                            }
-                                                        }
+                                                        //for (var d = 0; d < data.records.length; d++) {
+                                                            //if (!data.records[d].tipodedireccion.includes("1") && !data.records[d].tipodedireccion.includes("3") && !data.records[d].tipodedireccion.includes("5") && !data.records[d].tipodedireccion.includes("7")) {
+                                                                RequeridosProvRec = RequeridosProvRec + '<b>-Dirección<br></b>';
+                                                            //}
+                                                        //}
                                                     }
                                                     if (RequeridosProvRec != "") {
                                                         app.alert.show("Campos faltantes en cuenta", {
@@ -929,14 +926,10 @@
                                                         });
                                                         errors['faltantescuenta'] = errors['faltantescuenta'] || {};
                                                         errors['faltantescuenta'].required = true;
-
                                                     }
                                                     callback(null, fields, errors);
                                                 }, this)
-                                            });
-                                        }else{
-                                            callback(null, fields, errors);
-                                        }
+                                        });
                                     }else {
                                         if (data.razonsocial_c == "") {
                                             RequeridosProvRec = RequeridosProvRec + '<b>-Denominación o Razón Social<br></b>';
@@ -953,17 +946,23 @@
                                         if (data.rfc_c == "") {
                                             RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
                                         }
-                                        if (data.tipo_registro_cuenta_c!= '4') {
-                                            app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
-                                                success: _.bind(function (data) {
-                                                    
+                                        if (data.tct_pais_expide_rfc_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-País que expide el RFC o equivalente<br></b>';
+                                        }
+                                        if (data.ctpldnoseriefiel_c == "" ){
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-No. Serie FIEL<br></b>';
+                                        }
+                                        if (data.actividadeconomica_c == "" ){
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
+                                        }
+                                        app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
+                                                success: _.bind(function (data) {                                                    
                                                     var flag_inactivo =0;
                                                     for(var i=0;i<data.records.length;i++){
                                                         if(data.records[i].inactivo==true){
                                                             flag_inactivo++;
-                                                        }   
+                                                        }
                                                     }
-
                                                     if (data.records.length <= flag_inactivo) {
                                                         RequeridosProvRec = RequeridosProvRec + '<b>-Domicilio<br></b>';
                                                     }
@@ -975,27 +974,20 @@
                                                         });
                                                         errors['errorpersonamoral'] = errors['errorpersonamoral'] || {};
                                                         errors['errorpersonamoral'].required = true;
-
                                                     }
                                                     callback(null, fields, errors);
                                                 }, this)
-                                            });
-                                        }else{
-                                            callback(null, fields, errors);
-                                        }
+                                        });
                                     }
                                 }, this)
                             });
-
-
                         }
                     }, this)
                 });
-            }else {
+            } else {
                 callback(null, fields, errors);
             }
         }
-
     },
 
     validaProveedorRecursoschange: function (){
@@ -1026,30 +1018,29 @@
                                     if (data.nacionalidad_c == "") {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
                                     }
-                                    // if (data.tct_macro_sector_ddw_c == "") {
-                                    //     RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
-                                    // }
-                                    // if (data.sectoreconomico_c == "") {
-                                    //     RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
-                                    // }
-                                    // if (data.subsectoreconomico_c == "") {
-                                    //     RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';
-                                    // }
-                                    if (data.actividadeconomica_c == "") {
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
+                                    if (data.rfc_c == "") {
+                                        RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
                                     }
-                                    if(data.rfc_c == "" && data.curp_c == "" && data.ctpldnoseriefiel_c == "" ){
-                                        RequeridosProvRec = RequeridosProvRec + '<b><br>Al menos la captura de alguno de estos campos:<br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br></b>';
+                                    if (data.tct_pais_expide_rfc_c == "") {
+                                        RequeridosProvRec = RequeridosProvRec + '<b>-País que expide el RFC o equivalente<br></b>';
                                     }
-                                    if (data.tipo_registro_cuenta_c!= '4') {
-                                        app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
+                                    if (data.curp_c == "") {
+                                        RequeridosProvRec = RequeridosProvRec + '<b>-CURP<br></b>';
+                                    }
+                                    if (data.profesion_c == "") {
+                                        RequeridosProvRec = RequeridosProvRec + '<b>-Profesión<br></b>';
+                                    }
+                                    if (data.ctpldnoseriefiel_c == "" ) {
+                                        RequeridosProvRec = RequeridosProvRec + '<b>-No. Serie FIEL<br></b>';
+                                    }
+                                    app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                             success: _.bind(function (data) {
                                                 if (data.records.length > 0) {
-                                                    for (var d = 0; d < data.records.length; d++) {
-                                                        if (!data.records[d].tipodedireccion.includes("1") && !data.records[d].tipodedireccion.includes("3") && !data.records[d].tipodedireccion.includes("5") && !data.records[d].tipodedireccion.includes("7")) {
-                                                            RequeridosProvRec = RequeridosProvRec + '<b>-Dirección Particular<br></b>';
-                                                        }
-                                                    }
+                                                    //for (var d = 0; d < data.records.length; d++) {
+                                                        //if (!data.records[d].tipodedireccion.includes("1") && !data.records[d].tipodedireccion.includes("3") && !data.records[d].tipodedireccion.includes("5") && !data.records[d].tipodedireccion.includes("7")) {
+                                                            RequeridosProvRec = RequeridosProvRec + '<b>-Dirección<br></b>';
+                                                        //}
+                                                    //}
                                                 }
                                                 if (RequeridosProvRec != "") {
                                                     app.alert.show("Campos faltantes en cuenta", {
@@ -1058,12 +1049,9 @@
                                                         autoClose: false
                                                     });
                                                 }
-                                                Relacionaccionistareturn;
+                                                return;
                                             }, this)
                                         });
-                                    }else{
-                                        return;
-                                    }
                                 }else {
                                     if (data.razonsocial_c == "") {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-Denominación o Razón Social<br></b>';
@@ -1074,8 +1062,16 @@
                                     if (data.rfc_c == "") {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
                                     }
-                                    if (data.tipo_registro_cuenta_c!= '4') {
-                                        app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
+                                    if (data.tct_pais_expide_rfc_c == "") {
+                                        RequeridosProvRec = RequeridosProvRec + '<b>-País que expide el RFC o equivalente<br></b>';
+                                    }
+                                    if (data.ctpldnoseriefiel_c == "" ){
+                                        RequeridosProvRec = RequeridosProvRec + '<b>-No. Serie FIEL<br></b>';
+                                    }
+                                    if (data.actividadeconomica_c == "" ){
+                                        RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
+                                    }
+                                    app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                             success: _.bind(function (data) {
                                                 if (data.records <= 0) {
                                                     RequeridosProvRec = RequeridosProvRec + '<b>-Domicilio<br></b>';
@@ -1086,14 +1082,10 @@
                                                         messages: 'Hace falta completar la siguiente información en la cuenta ' + '<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c') + '  </a>' + 'para una relación tipo <b>Proveedor de Recursos</b>:<br> ' + RequeridosProvRec,
                                                         autoClose: false
                                                     });
-
                                                 }
                                                 return;
                                             }, this)
-                                        });
-                                    }else{
-                                        return;
-                                    }
+                                    });
                                 }
                             }, this)
                         });
@@ -1102,6 +1094,7 @@
             });
         }
     },
+
     //Funcion para validar campos requeridos de relacion tipo Aval, Accionista y Representante
     validaRelacionesChange: function (){
         var requests=[];
