@@ -179,11 +179,12 @@
                     if(parent_meet == "Accounts"){
                         
                     }else if(parent_meet == "Leads"){
-                        var lead = app.data.createBean('Leads', {id:this.model.get('parent_id')});
+                        var lead = app.data.createBean('Leads', {id:parent_id_acc});
 			            lead.fetch({
 			            success: _.bind(function (modelLead) {
                             if(modelLead.get('subtipo_registro_c')=='1'){
                                 if(self.model.get('resultado_c')=='2' ||self.model.get('resultado_c')=='18' || self.model.get('resultado_c')=='21' || self.model.get('resultado_c')=='25'){
+                                    modelLead.set('subtipo_registro_c', "3");
                                     modelLead.set('lead_cancelado_c', true);
                                     modelLead.save();
                                 
@@ -227,6 +228,8 @@
                                     // Se cerró una venta
                                     // Se procede a generar expediente
                                     // Está interesado solicita cotización para proceder
+                                    modelLead.set('subtipo_registro_c', "4");
+                                    modelLead.save();
                                     var filter_arguments = {
                                         "id": parent_id_acc
                                     };
@@ -268,10 +271,13 @@
                                         }, this)
                                     });
                                 }else if(self.model.get('resultado_c')=='3'){
-                                    modelLead.set('lead_cancelado_c', true);
+                                    modelLead.set('subtipo_registro_c', "2");
+                                    modelLead.set('status_management_c', "2");
                                     modelLead.save();
                                     callback(null, fields, errors);
                                 }else{
+                                    modelLead.set('subtipo_registro_c', "2");
+                                    modelLead.save();
                                     callback(null, fields, errors);
                                 }
                             }else{
