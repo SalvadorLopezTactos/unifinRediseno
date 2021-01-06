@@ -5063,7 +5063,7 @@
                     if (App.user.attributes.tipodeproducto_c == '3') {
                         contexto_cuenta.ProductosPLD.creditoAutomotriz.visible = 'block';
                     }
-                    //CA
+                    //CR
                     if (App.user.attributes.tipodeproducto_c == '8') {
                         contexto_cuenta.ProductosPLD.creditoRevolvente.visible = 'block';
                     }

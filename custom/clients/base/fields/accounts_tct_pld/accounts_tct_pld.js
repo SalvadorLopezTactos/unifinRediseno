@@ -855,6 +855,8 @@
             pld.$('.content_ap').hide();
             pld.$('.content_ff').hide();
             pld.$('.content_ca').hide();
+            pld.$('.content_CR').hide();
+
 
             var puestousuario = App.user.attributes.puestousuario_c;
             var puestosvisibles = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "20", "33", "36", "44"];
@@ -874,10 +876,15 @@
                 if (App.user.attributes.tipodeproducto_c == '3') {
                     pld.$('.content_ca').show();
                 }
+                //CR
+                if (App.user.attributes.tipodeproducto_c == '8') {
+                    pld.$('.content_CR').show();
+                }
             } else {
                 pld.$('.content_ap').show();
                 pld.$('.content_ff').show();
                 pld.$('.content_ca').show();
+                pld.$('.content_CR').show();
             }
 
             /*
