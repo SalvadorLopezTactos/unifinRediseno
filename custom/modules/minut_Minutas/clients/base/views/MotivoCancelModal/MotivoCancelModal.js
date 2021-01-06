@@ -74,7 +74,7 @@
 					
 					app.alert.show('message-id', {
 						level: 'success',
-						messages: 'Motivo de cancelación de Lead guardado',
+						messages: 'Lead Cancelado',
 						autoClose: true
 					});
 				}, this)
@@ -98,11 +98,5 @@
             /**remove the view from the components list**/
             this.layout._components.splice(index, 1);
         }
-    },
-
-    _render: function () {
-        this._super("_render");
-
-        $('.record.tab-layout').attr('style', 'pointer-events:none');
     },
 })
