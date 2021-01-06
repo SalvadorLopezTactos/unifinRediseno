@@ -99,4 +99,10 @@
             this.layout._components.splice(index, 1);
         }
     },
+
+    _render: function () {
+        this._super("_render");
+
+        $('.record.tab-layout').attr('style', 'pointer-events:none');
+    },
 })
