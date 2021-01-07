@@ -615,6 +615,7 @@
         $(".content_ff").hide();
         //$(".content_ca").hide();
         //$(".content_cs").hide();
+        $(".content_CR").hide();
     },
 
     //Validaciones para mostrar campos de Arrendamiento Puro
