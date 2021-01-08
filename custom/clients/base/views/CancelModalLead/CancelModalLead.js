@@ -81,9 +81,18 @@
 
                 }, self_modal_get)
             });
-        }
-        self_modal_get.closeModal();
+            self_modal_get.closeModal();
+        
+        } else {
 
+            $('#motivocancelacion').css('border-color', 'red');
+            
+            app.alert.show("alert-motivo-cancel-modal", {
+                level: "error",
+                title: "Debe seleccionar motivo de Cancelación de Lead.",
+                autoClose: false
+            });
+        }
     },
 
     closeModal: function () {
