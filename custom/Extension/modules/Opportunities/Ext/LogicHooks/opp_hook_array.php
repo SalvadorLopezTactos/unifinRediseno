@@ -134,3 +134,11 @@ $hook_array['after_save'][] = Array(
     'IntegracionQuantico', // name of the class
     'QuanticoIntegracion'
 );
+
+$hook_array['after_save'][] = Array(
+    15,
+    'Actualizacion Quantico de Leasing, Factoraje y CA',
+    'custom/modules/Opportunities/opp_quantico.php',
+    'IntegracionQuantico', // name of the class
+    'QuanticoUpdate'
+);

@@ -2311,23 +2311,22 @@ SQL;
 
     }
 
-    public function postQuantico($bodyJson,$auth)
+    public function postQuantico($host,$body,$auth_encode)
     {
-        global $sugar_config;
         try {
-            $host=$sugar_config['quantico_url_base'] . '/CreditRequestIntegration/rest/CreditRequestApi/PostRegister';
-            $fields_string = json_encode($bodyJson);
+            $url = $host;
+            $fields_string = json_encode($body);
             $GLOBALS['log']->fatal('Entra Funcion postQuantico');
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_URL, $host);
+            curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
             curl_setopt($ch, CURLINFO_HEADER_OUT, 1);
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                     'Content-Type: application/json',
-                    'Authorization: Basic ' . $auth)
+                    'Authorization: Basic ' . $auth_encode)
             );
             $result = curl_exec($ch);
             $curl_info = curl_getinfo($ch);
