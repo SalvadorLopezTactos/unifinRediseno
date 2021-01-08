@@ -14,10 +14,11 @@
         'click .closeModalHorarios': 'closeModal',
         'click .UpdateHorario': 'updateHorarios',
         'click .ExcluirHorario': 'excluirHorarios',
-
-
+        'change #filtroNombre': 'checkTextOnly',
+        'change #filtroApellido': 'checkTextOnly',
 
     },
+
     agentes: [],
     back_page: 0,
     next_page: 20,
@@ -51,6 +52,7 @@
                 list_minutos += '<option value="' + minutos[j] + '">' + minutos[j] + '</option>';
             }
             this.Minutos = list_minutos;
+
         }
         else {
             var route = app.router.buildRoute(this.module, null, '');
@@ -151,7 +153,7 @@
             var Params = {
                 'seleccionados': parametros,
                 'horario': horario,
-                'excluir':false
+                'excluir': false
             };
             app.alert.show('Actualizando', {
                 level: 'process',
@@ -179,7 +181,7 @@
         }
 
     },
-    excluirHorarios:function () {
+    excluirHorarios: function () {
         var crossSeleccionados = $("#crossSeleccionados").val();
         context = this;
         if (this.flagSeleccionados == 1 && $('#btn_STodo').is(":checked")) {
@@ -235,7 +237,7 @@
             var Params = {
                 'seleccionados': parametros,
                 'horario': "",
-                'excluir':true
+                'excluir': true
             };
             app.alert.show('Actualizando', {
                 level: 'process',
@@ -457,4 +459,36 @@
         $("#offset_value").attr("to_set", next_to_set);
         this.record_getAgente("ok");
     },
+
+    checkTextOnly: function () {
+        app.alert.dismiss('Error_validacion_Campos');
+        var nombre = $("#filtroNombre").val();
+        var apaterno = $("#filtroApellido").val();
+
+        var camponame = "";
+        var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
+        if (nombre != "" && nombre != undefined) {
+            var comprueba = expresion.test(nombre);
+            if (comprueba != true) {
+                camponame = camponame + '<b>-Nombre<br></b>';
+                ;
+            }
+        }
+        if (apaterno != "" && apaterno != undefined) {
+            var expresion = new RegExp(/^[a-zA-ZÀ-ÿ\s]*$/g);
+            var validaap = expresion.test(apaterno);
+            if (validaap != true) {
+                camponame = camponame + '<b>-Apellido Paterno<br></b>';
+                ;
+            }
+        }
+        if (camponame) {
+            app.alert.show("Error_validacion_Campos", {
+                level: "error",
+                messages: 'Los siguientes campos no permiten caracteres especiales:<br>' + camponame,
+                autoClose: false
+            });
+        }
+    },
+
 })
