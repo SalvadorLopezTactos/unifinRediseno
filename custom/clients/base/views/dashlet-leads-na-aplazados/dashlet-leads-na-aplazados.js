@@ -36,7 +36,7 @@
 
         app.alert.show('go-to-lead-aplazado', {
             level: 'info',
-            title: 'Se direccionó al detalle del Lead, favor de agregar una Reunión o Llamada...',
+            title: 'Se direccionó al detalle del Lead, cuenta con lo que resta del día en curso para realizar una llamada o una reunión',
             autoClose: false
         });
     },
