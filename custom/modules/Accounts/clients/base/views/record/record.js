@@ -272,11 +272,12 @@
         this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'checkInVentas';
 
 
-        this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
+        
         // this.model.addValidationTask('LeasingNV', _.bind(this.requeridosleasingnv, this));
         // this.model.addValidationTask('FactorajeNV', _.bind(this.requeridosfacnv, this));
         // this.model.addValidationTask('CreditAutoNV', _.bind(this.requeridoscanv, this));
         this.model.addValidationTask('proveedorDeRecursos', _.bind(this.proveedorRecursos, this));
+        this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
         this.model.addValidationTask('valida_direcciones_de_relaciones_PR', _.bind(this.direccionesparticularPR, this));
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('Guarda_campos_auto_potencial', _.bind(this.savepotauto, this));
@@ -379,6 +380,9 @@
     saveProdPLD: function (fields, errors, callback) {
 
         if (this.model.get('tipo_registro_cuenta_c') != '') {
+             //Valida cambios
+             if ($.isEmptyObject(errors) && (this.inlineEditMode == false || (this.inlineEditMode && typeof ($('.campo4ddw-cs').select2('val')) == "string"))) {
+
             // Actualizar modelo de this.ProductosPLD
             // this.ProductosPLD.arrendamientoPuro.campo1 = $('.campo1txt-ap').val();
             if (this.ProductosPLD != null && typeof (this.$('.campo4ddw-cs').select2('val')) == "string") {
@@ -452,9 +456,6 @@
                 this.ProductosPLD.creditoRevolvente.campo11_id=this.$('.campo11rel-ce').select2('val');
 
             }
-
-            //Valida cambios
-            if ($.isEmptyObject(errors) && (this.inlineEditMode == false || (this.inlineEditMode && typeof ($('.campo4ddw-cs').select2('val')) == "string"))) {
                 //var obj_pld_old=JSON.stringify(this.model.get('accounts_tct_pld_1'));
                 //var obj_pld_new=JSON.stringify(this.ProductosPLD);
                 app.api.call('create', app.api.buildURL('SavePLD'), this.ProductosPLD, {
