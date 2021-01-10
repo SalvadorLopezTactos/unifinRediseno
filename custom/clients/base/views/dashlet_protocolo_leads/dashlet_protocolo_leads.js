@@ -36,7 +36,7 @@
     	app.api.call('GET', app.api.buildURL('GetRegistrosAsignadosForProtocolo/' + id_user), null, {
             success: function (data) {
             	App.alert.dismiss('obtieneAsignados');
-            	if(data.total_asignados<20){ //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
+            	if(data.total_asignados>0){ //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
             		self.viewEnable='1';
             		self.getLeadsAplazadosCancelados();
             	}else{
@@ -223,41 +223,84 @@
 
     	var nombre=$(evt.currentTarget).parent().parent().children().eq(0).children().html();
     	var id=$(evt.currentTarget).attr('data-id');
+        var tipo=$(evt.currentTarget).attr('data-type');
+        var idProducto=$(evt.currentTarget).attr('data-product');
+        
 
     	app.alert.show('confirmActivation', {
     		level: 'confirmation',
     		messages: 'Se procederá a activar el siguiente registro:<br>'+nombre+'<br>¿Estás seguro?',
     		autoClose: false,
     		onConfirm: function(){
-    			var url = app.api.buildURL('Leads/' + id, null, null);
+                if(tipo=='lead'){
+                    var url = app.api.buildURL('Leads/' + id, null, null);
 
-    			App.alert.show('activaLead', {
-    				level: 'process',
-    				title: 'Activando Lead, por favor espere',
-    			});
+                        App.alert.show('activaLead', {
+                            level: 'process',
+                            title: 'Activando registro, por favor espere',
+                        });
 
-    			var api_params = {};
-    			api_params['lead_cancelado_c']=0;
-    			api_params['motivo_cancelacion_c']="";
-    			api_params['status_management_c']="1";//Activo
-    			api_params['subtipo_registro_c']="1";//Sin Contactar
+                        var api_params = {};
+                        api_params['lead_cancelado_c']=0;
+                        api_params['motivo_cancelacion_c']="";
+                        api_params['status_management_c']="1";//Activo
+                        api_params['subtipo_registro_c']="1";//Sin Contactar
 
-    			app.api.call('update', url, api_params, {
-    				success: _.bind(function (data) {
-    					app.alert.dismiss('activaLead');
+                        app.api.call('update', url, api_params, {
+                            success: _.bind(function (data) {
+                                app.alert.dismiss('activaLead');
 
-    					var mensaje='Se ha actualizado el Lead: '+'<a href="#Leads/'+data.id+'">'+data.name+'</a>';
+                                var mensaje='Se ha actualizado el Lead: '+'<a href="#Leads/'+data.id+'">'+data.name+'</a>';
 
-    					app.alert.show('activaLeadSuccess', {
-    						level: 'success',
-    						messages: mensaje,
-                    	});
+                                app.alert.show('activaLeadSuccess', {
+                                    level: 'success',
+                                    messages: mensaje,
+                                });
 
-                    	var indice=self.searchIndex(self.registros,id);
-                    	self.registros.splice(indice, 1);
-                    	self.render();
-                })
-            });
+                                var indice=self.searchIndex(self.registros,id);
+                                self.registros.splice(indice, 1);
+                                self.render();
+                        })
+                    });
+                }else{
+                    //Activar cuenta
+                    var url = app.api.buildURL('uni_Productos/' + idProducto, null, null);
+
+                        App.alert.show('activaCuenta', {
+                            level: 'process',
+                            title: 'Activando registro, por favor espere',
+                        });
+
+                        var api_params = {};
+                        api_params['no_viable']=0;
+                        api_params['no_viable_razon']="";
+                        api_params['no_viable_razon_fp']="";
+                        api_params['no_viable_razon_ni']="";
+                        api_params['no_viable_producto']="";
+                        api_params['no_viable_otro_c']="";
+                        api_params['no_viable_quien']="";
+                        api_params['no_viable_porque']="";
+                        api_params['status_management_c']="1";
+                        
+
+                        app.api.call('update', url, api_params, {
+                            success: _.bind(function (data) {
+                                app.alert.dismiss('activaCuenta');
+
+                                var mensaje='Se ha actualizado el registro: '+'<a href="#Accounts/'+data.accounts_uni_productos_1accounts_ida+'">'+data.accounts_uni_productos_1_name+'</a>';
+
+                                app.alert.show('activaCuentaSuccess', {
+                                    level: 'success',
+                                    messages: mensaje,
+                                });
+
+                                var indice=self.searchIndex(self.registros,id);
+                                self.registros.splice(indice, 1);
+                                self.render();
+                        })
+                    });
+
+                }	
     		},
     		onCancel: function(){
     			
@@ -285,39 +328,25 @@
 
     getLeadsAplazadosCancelados:function(){
 
+        var id_user=App.user.attributes.id;
+
         App.alert.show('getLeadsCancelados', {
             level: 'process'
         });
+
         //subtipo_registro_c=3, LEAD CANCELADO
-        var filtro={
-        	"filter":[
-        		{
-        			"$or":[
-        				{
-        					"status_management_c": {
-                        		"$in":['2','3']
-                            }
-        				},
-        				{
-        					"subtipo_registro_c": {
-        						"$in":['3']
-                            }
-        				},
-        			]
-        		}
-        	]
+        app.api.call('GET', app.api.buildURL('GetLeadsAccountsAplazadosCancelados/'+ id_user), null, {
+            success: function (data) {
+                App.alert.dismiss('getLeadsCancelados');
+                self.registros=data.records;
+                self.render();
+            },
+            error: function (e) {
+                App.alert.dismiss('getLeadsCancelados');
+                throw e;
+            }
+        });
 
-        };
-
-        app.api.call("read", app.api.buildURL("Leads/", null, null, filtro), null, {
-                    success: _.bind(function (data) {
-
-                    	App.alert.dismiss('getLeadsCancelados');
-                    	self.registros=data.records;
-                        
-                        self.render();
-                    }, this)
-                });
 
     },
 
