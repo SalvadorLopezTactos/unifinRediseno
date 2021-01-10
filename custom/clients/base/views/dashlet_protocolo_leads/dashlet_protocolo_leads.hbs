@@ -147,7 +147,7 @@
     	<div class="modal-content">
     		<div class="modal-header">
     			<span class="close modalRecordsCancel">&times;</span>
-    			<h2> &nbsp;&nbsp; Leads Cancelados/Aplazados</h2>
+    			<h2> &nbsp;&nbsp; Registros Cancelados/Aplazados</h2>
     		
     			{{#if registros}}
     			<table class="dataTable table-striped table-bordered table-fixed" style="table-layout: fixed;">
@@ -155,11 +155,11 @@
     					<tr>
     						<th class="span4">Nombre</th>
     						<th class="span2">
-    							Tipo de Lead
+    							Tipo de registro
 		                  		<!--<i id="orderByAnexo" class="fa fa-unsorted"></i>-->
 		                	</th>
 		                	<th class="span2">
-		                  		Subtipo de Lead
+		                  		Subtipo de registro
 		                  		<!--<i id="orderBySubtipo" class="fa fa-unsorted"></i>-->
 		                	</th>
 		                	<th class="span2">
@@ -173,11 +173,11 @@
 		            <tbody>
                     {{#each registros}}
                     	<tr class="border_">
-                    		<td class="span4"><a href="#Leads/{{id}}" target="_blank">{{name}}</a></td>
+                    		<td class="span4"><a href="{{href}}" target="_blank">{{name}}</a></td>
                     		<td class="span2"><font color="#222">{{getUnifinListValue 'tipo_registro_cuenta_list' tipo_registro_c}}</font></td>
                     		<td class="span2"><font color="#222">{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo_registro_c}}</font></td>
                     		<td class="span2"><font color="#222">{{getUnifinListValue 'status_management_list' status_management_c}}</font></td>
-                    		<td class="span2"><button class="btn btnLeadSelect" type="submit" data-id="{{id}}">Seleccionar</button></td>
+                    		<td class="span2"><button class="btn btnLeadSelect" type="submit" data-id="{{id}}" data-type="{{record}}" data-product="{{idProducto}}">Seleccionar</button></td>
                      	</tr>
                    {{/each}}
                   </tbody>
