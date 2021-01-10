@@ -1,5 +1,5 @@
 <?php
- // created: 2020-09-22 18:48:44
+ // created: 2021-01-05 18:47:26
 
 $app_list_strings['Relaciones_Activas_list']=array (
   '' => '',
@@ -25,4 +25,5 @@ $app_list_strings['Relaciones_Activas_list']=array (
   'Proveedor de Recursos F' => 'Proveedor de los Recursos Factoraje Financiero',
   'Proveedor de Recursos CA' => 'Proveedor de los Recursos Crédito Automotriz',
   'Proveedor de Recursos CS' => 'Proveedor de los Recursos Crédito Simple',
+  'Proveedor de los Recursos CR' => 'Proveedor de los Recursos Crédito Revolvente',
 );

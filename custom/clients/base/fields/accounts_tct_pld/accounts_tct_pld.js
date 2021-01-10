@@ -15,6 +15,9 @@
     campo24_list: null,
     campo18_list: null,
     campo20_list: null,
+    campo7_list: null,
+    campo29_list: null,
+    campo30_list: null,
 
 
     events :{
@@ -22,6 +25,11 @@
         'keydown .campo22int-ff':'keyDownNewExtension',
         'keydown .campo23dec-ff': 'checkInVentas',
         'keydown .campo22int-ff':'checkInVentas',
+        'keydown .campo2dec-ce': 'keyDownNewExtension',
+        'keydown .campo2dec-ce': 'checkInVentas',
+        'keydown .campo1int-ce': 'keyDownNewExtension',
+        'keydown .campo1int-ce': 'checkInVentas',
+
 
     },
 
@@ -148,7 +156,28 @@
         dataPLD['creditoSimple']['campo20_label'] = pld.campo20_list[dataPLD['creditoSimple']['campo20']];
         dataPLD['creditoSimple']['campo6_label'] = pld.campo6_list[dataPLD['creditoSimple']['campo6']];
 
+        //data Credito Envolvente
+        var auxCampo3=dataPLD['creditoRevolvente']['campo3'].replace(/\^/g,"");
+        var arrayCampo3=auxCampo3.split(",");
+        var arrTemp=[];
+        for(var i=0;i<arrayCampo3.length;i++)
+        {
+            arrTemp.push(pld.campo29_list[arrayCampo3[i]]);
+        }
+        dataPLD['creditoRevolvente']['campo3_label'] =arrTemp.join();
+        
+        dataPLD['creditoRevolvente']['campo5_label'] = pld.campo30_list[dataPLD['creditoRevolvente']['campo5']];
+        dataPLD['creditoRevolvente']['campo8_label'] = pld.campo2_list[dataPLD['creditoRevolvente']['campo8']];
+        dataPLD['creditoRevolvente']['campo10_label'] = pld.campo4_list[dataPLD['creditoRevolvente']['campo10']];
 
+        var auxCampo7=dataPLD['creditoRevolvente']['campo7'].replace(/\^/g,"");
+        var arrayCampo7=auxCampo7.split(",");
+        var arrTemp=[];
+        for(var i=0;i<arrayCampo7.length;i++)
+        {
+            arrTemp.push(pld.campo7_list[arrayCampo7[i]]);
+        }
+        dataPLD['creditoRevolvente']['campo7_label'] =arrTemp.join();
         return dataPLD;
     },
 
@@ -165,6 +194,9 @@
         pld.campo24_list = app.lang.getAppListStrings('tct_plddestinorecursos_ff_ddw_list');
         pld.campo18_list = app.lang.getAppListStrings('tct_instmonetario_csddw_list');
         pld.campo20_list = app.lang.getAppListStrings('tct_destinorecursos_csddw_list');
+        pld.campo7_list = app.lang.getAppListStrings('tct_tarjeta_territorio_list');
+        pld.campo29_list = app.lang.getAppListStrings('tct_pld_campo29_ddw_list');
+        pld.campo30_list = app.lang.getAppListStrings('tct_pld_campo30_ddw_list_list');
 
     },
 
@@ -319,6 +351,16 @@
         });
 
 
+        //Validaciones preguntas Credito Envolvente
+        $('.campo8ddw-ce').change(function(evt)  {
+            pld.Muestracampo2CE();
+
+        });
+        $('.campo10ddw-ce').change(function(evt)  {
+            pld.Muestracampo3CE();
+
+        });
+
 
         //Validacion para mostrar los campos de Arrendamiento Puro dependiendo el regimen fiscal (Persona Moral)
         pld.validaregimen();
@@ -338,6 +380,10 @@
             //CS
             $('.campo3rel-cs').select2('data', {id: selfPLD.ProductosPLD.creditoSimple.campo3_id, text:  selfPLD.ProductosPLD.creditoSimple.campo3});
             //$('.campo5rel-cs').select2('data', {id: selfPLD.ProductosPLD.creditoSimple.campo5_id, text:  selfPLD.ProductosPLD.creditoSimple.campo5});
+            //Credito Envolvente
+            $('.campo9rel-ce').select2('data', {id: selfPLD.ProductosPLD.creditoRevolvente.campo9_id, text:  selfPLD.ProductosPLD.creditoRevolvente.campo9});
+            $('.campo11rel-ce').select2('data', {id: selfPLD.ProductosPLD.creditoRevolvente.campo11_id, text:  selfPLD.ProductosPLD.creditoRevolvente.campo11});
+
         }
 
         //Set class to select2
@@ -390,6 +436,19 @@
 
         //Se establece formato de multiselect a campo select con id "multil2 pregunta 3"
         this.$('select.campo18ddw-cs').select2({
+            width: '100%',
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
+
+
+        //formato Multiselect Pregunta Credito Envolvente
+        this.$('select.campo3ddw-ce').select2({
+            width: '100%',
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
+        this.$('select.campo7ddw-ce').select2({
             width: '100%',
             closeOnSelect: false,
             containerCssClass: 'select2-choices-pills-close'
@@ -556,6 +615,7 @@
         $(".content_ff").hide();
         //$(".content_ca").hide();
         //$(".content_cs").hide();
+        $(".content_CR").hide();
     },
 
     //Validaciones para mostrar campos de Arrendamiento Puro
@@ -734,6 +794,26 @@
         }
     },
 
+    //Validacion campo otro Credito Envolvente
+    
+    Muestracampo2CE: function () {
+        console.log("Propietario Real Credito Envolvente");
+        if (this.$('.campo8ddw-ce').select2('val') == "2") {
+            this.$('.campo9-ce').show();
+        } else {
+            this.$('.campo9-ce').hide();
+        }
+    },
+
+    Muestracampo3CE: function () {
+        console.log("Proveedor de Recursos Credito Envolvente");
+        if ($('.campo10ddw-ce').select2('val') == "2") {
+            $('.campo11-ce').show();
+        } else {
+            $('.campo11-ce').hide();
+        }
+    },
+
     validaregimen: function (){
         //Muestra campos por regimen fiscal
         //Campos nacen ocultos Arrendamiento Puro
@@ -776,6 +856,8 @@
             pld.$('.content_ap').hide();
             pld.$('.content_ff').hide();
             pld.$('.content_ca').hide();
+            pld.$('.content_CR').hide();
+
 
             var puestousuario = App.user.attributes.puestousuario_c;
             var puestosvisibles = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "20", "33", "36", "44"];
@@ -795,10 +877,15 @@
                 if (App.user.attributes.tipodeproducto_c == '3') {
                     pld.$('.content_ca').show();
                 }
+                //CR
+                if (App.user.attributes.tipodeproducto_c == '8') {
+                    pld.$('.content_CR').show();
+                }
             } else {
                 pld.$('.content_ap').show();
                 pld.$('.content_ff').show();
                 pld.$('.content_ca').show();
+                pld.$('.content_CR').show();
             }
 
             /*

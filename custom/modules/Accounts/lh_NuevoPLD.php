@@ -121,6 +121,29 @@ class NuevoPLD_Class
               //Guardar registro
               $pldCS->save();
 
+              ########################
+              // Credito Revolvente CR
+              ########################
+              $pldCR = BeanFactory::newBean($modulo);
+              //Agregar valores a campo
+              $idCuenta = $bean->id;
+              $pldCR->accounts_tct_pld_1accounts_ida = $idCuenta;
+              $pldCR->tct_pld_campo22_int = $productosPLD->creditoRevolvente->campo1;
+              $pldCR->tct_pld_campo23_dec = $productosPLD->creditoRevolvente->campo2;
+              $pldCR->tct_pld_campo16_ddw = (!empty($productosPLD->creditoRevolvente->campo3))? "^" . str_replace(",","^,^",$productosPLD->creditoRevolvente->campo3) . "^" : "";
+              $pldCR->account_id_c = $productosPLD->creditoRevolvente->campo3_id;
+              $pldCR->tct_pld_campo20_ddw = $productosPLD->creditoRevolvente->campo5;
+              $pldCR->tct_pld_campo6_ddw = $productosPLD->creditoRevolvente->campo6;
+              $pldCR->tct_pld_campo28_ddw_c = (!empty($productosPLD->creditoRevolvente->campo7))? "^" . str_replace(",","^,^",$productosPLD->creditoRevolvente->campo7) . "^" : "";
+              $pldCR->tct_pld_campo2_ddw = $productosPLD->creditoRevolvente->campo8;
+              $pldCR->tct_pld_campo3_rel = $productosPLD->creditoRevolvente->campo9;
+              $pldCR->account_id_c = $productosPLD->creditoRevolvente->campo9_id;
+              $pldCR->tct_pld_campo4_ddw = $productosPLD->creditoRevolvente->campo10;
+              $pldCR->name = "Crédito Revolvente";
+              $pldCR->description = "CR";
+              //Guardar registro
+              $pldCR->save();
+
               //Limpia campo tct_nuevo_pld_c
               $update = "update accounts_cstm set tct_nuevo_pld_c='' where id_c='{$bean->id}'";
               $GLOBALS['db']->query($update);
