@@ -238,7 +238,7 @@
         //Recupera datos para custom fields
 
         this.get_uni_productos();
-		this.get_phones();
+		    this.get_phones();
         this.get_addresses();
         this.get_v360();
 
@@ -4853,7 +4853,9 @@
                         var secuencia = data.records[i].secuencia;
                         var idDireccion = data.records[i].id;
                         var direccionCompleta = data.records[i].name;
-						var bloqueado = (indicadorSeleccionados.indexOf('2') != -1) ? 1 : 0;
+						            var bloqueado = (indicadorSeleccionados.indexOf('2') != -1) ? 1 : 0;
+                        var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
+                        if (accesoFiscal > 0) bloqueado = 0;
 
                         //Parsea a objeto direccion
                         var direccion = {
@@ -4893,7 +4895,7 @@
                             "secuencia": secuencia,
                             "id": idDireccion,
                             "direccionCompleta": direccionCompleta,
-							"bloqueado": bloqueado
+							              "bloqueado": bloqueado
                         };
 
                         //Agregar dirección
