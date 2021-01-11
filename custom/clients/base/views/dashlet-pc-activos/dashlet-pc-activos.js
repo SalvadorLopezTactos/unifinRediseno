@@ -36,6 +36,12 @@
 
         idCuentaActivo = $(events.currentTarget).attr('title');
 
+        app.alert.show('go-to-presolicitud-activo', {
+            level: 'info',
+            title: 'Cuenta con el resto del día en curso, para realizar una presolicitud',
+            autoClose: false
+        });
+
         app.alert.show('sol-pc-activo', {
             level: 'process',
             title: 'Cargando...',

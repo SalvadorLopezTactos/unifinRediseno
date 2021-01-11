@@ -105,4 +105,10 @@
         $('.modal').remove();
         $('.modal-backdrop').remove();
     },
+
+    _render: function () {
+        this._super("_render");
+        //Jquery para que no se cierre el modal con ESC o al dar clic afuera del modal
+        $('#CancelModalLead').modal({backdrop: 'static', keyboard: false});
+    },
 })
