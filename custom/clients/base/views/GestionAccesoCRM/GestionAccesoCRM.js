@@ -48,7 +48,7 @@
             }
             this.Horas = list_horas;
 
-            var list_minutos = '<option value=""  selected hidden>Min</option>';
+            var list_minutos = '<option value="00"  selected hidden>Min</option>';
             //var list_minutos = '';
             for (var j = 0; j < minutos.length; j++) {
                 list_minutos += '<option value=' + minutos[j] + '>' + minutos[j] + '</option>';
@@ -136,20 +136,20 @@
         var respuesta = this.validaSetHorario();
         if (respuesta == "") {
             var parametros = context.seleccionados;
-            var horario = '{"Monday":{"entrada":"' + $("#LHin").val() + ($("#LMin").val() != "" ? (":" + $("#LMin").val()) : "") +
-                '","salida":"' + $("#LHout").val() + ($("#LMout").val() != "" ? (":" + $("#LMout").val()) : "") + '"},' +
-                '"Tuesday":{"entrada":"' + $("#MHin").val() + ($("#MMin").val() != "" ? (":" + $("#MMin").val()) : "") +
-                '","salida":"' + $("#MHout").val() + ($("#MMout").val() != "" ? (":" + $("#MMout").val()) : "") + '"},' +
-                '"Wednesday":{"entrada":"' + $("#MiHin").val() + ($("#MiMin").val() != "" ? (":" + $("#MiMin").val()) : "")
-                + '","salida":"' + $("#MiHout").val() + ($("#MiMout").val() != "" ? (":" + $("#MiMout").val()) : "") + '"},' +
-                '"Thursday":{"entrada":"' + $("#JHin").val() + ($("#JMin").val() != "" ? (":" + $("#JMin").val()) : "") +
-                '","salida":"' + $("#JHout").val() + ($("#JMout").val() != "" ? (":" + $("#JMout").val()) : "") + '"},' +
-                '"Friday":{"entrada":"' + $("#VHin").val() + ($("#VMin").val() != "" ? (":" + $("#VMin").val()) : "") +
-                '","salida":"' + $("#VHout").val() + ($("#VMout").val() != "" ? (":" + $("#VMout").val()) : "") + '"},' +
-                '"Saturday":{"entrada":"' + $("#SHin").val() + ($("#SMin").val() != "" ? (":" + $("#SMin").val()) : "") +
-                '","salida":"' + $("#SHout").val() + ($("#SMout").val() != "" ? (":" + $("#SMout").val()) : "") + '"},' +
-                '"Sunday":{"entrada":"' + $("#DHin").val() + ($("#DMin").val() != "" ? (":" + $("#DMin").val()) : "") +
-                '","salida":"' + $("#DHout").val() + ($("#DMout").val() != "" ? (":" + $("#DMout").val()) : "") + '"}}';
+            var horario = '{"Monday":{"entrada":"' + $("#LHin").val() + ($("#LHin").val()!="Bloqueado" && $("#LHin").val()!="Libre" ? (":" + $("#LMin").val()) : "" ) +
+                '","salida":"' + $("#LHout").val() + ($("#LHout").val()!="Bloqueado" && $("#LHout").val()!="Libre"?(":" + $("#LMout").val()) : "" ) + '"},' +
+                '"Tuesday":{"entrada":"' + $("#MHin").val() + ($("#MHin").val()!="Bloqueado" && $("#MHin").val()!="Libre" ? (":" + $("#MMin").val()) : "" ) +
+                '","salida":"' + $("#MHout").val() + ($("#MHout").val()!="Bloqueado" && $("#MHout").val()!="Libre"?(":" + $("#MMout").val()) : "" ) + '"},' +
+                '"Wednesday":{"entrada":"' + $("#MiHin").val() + ($("#MiHin").val()!="Bloqueado" && $("#MiHin").val()!="Libre" ? (":" + $("#MiMin").val()) : "" )+
+                '","salida":"' + $("#MiHout").val() + ($("#MiHout").val()!="Bloqueado" && $("#MiHout").val()!="Libre"?(":" + $("#MiMout").val()) : "" ) + '"},' +
+                '"Thursday":{"entrada":"' + $("#JHin").val() + ($("#JHin").val()!="Bloqueado" && $("#JHin").val()!="Libre" ? (":" + $("#JMin").val()) : "" ) +
+                '","salida":"' + $("#JHout").val() + ($("#JHout").val()!="Bloqueado" && $("#JHout").val()!="Libre"?(":" + $("#JMout").val()) : "" ) + '"},' +
+                '"Friday":{"entrada":"' + $("#VHin").val() + ($("#VHin").val()!="Bloqueado" && $("#VHin").val()!="Libre" ? (":" + $("#VMin").val()) : "" ) +
+                '","salida":"' + $("#VHout").val() + ($("#VHout").val()!="Bloqueado" && $("#VHout").val()!="Libre"?(":" + $("#VMout").val()) : "" ) + '"},' +
+                '"Saturday":{"entrada":"' + $("#SHin").val() + ($("#SHin").val()!="Bloqueado" && $("#SHin").val()!="Libre" ? (":" + $("#SMin").val()) : "" ) +
+                '","salida":"' + $("#SHout").val() + ($("#SHout").val()!="Bloqueado" && $("#SHout").val()!="Libre"?(":" + $("#SMout").val()) : "" ) + '"},' +
+                '"Sunday":{"entrada":"' + $("#DHin").val() + ($("#DHin").val()!="Bloqueado" && $("#DHin").val()!="Libre" ? (":" + $("#DMin").val()) : "" ) +
+                '","salida":"' + $("#DHout").val() + ($("#DHout").val()!="Bloqueado" && $("#DHout").val()!="Libre"?(":" + $("#DMout").val()) : "" ) + '"}}';
 
             console.log("Parametros " + parametros)
             if (parametros != "") {
