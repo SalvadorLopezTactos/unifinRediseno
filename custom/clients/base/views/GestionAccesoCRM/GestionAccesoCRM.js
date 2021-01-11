@@ -36,20 +36,22 @@
         this.loadView = false;
         if (app.user.attributes.agente_telefonico_c == 1) {
             this.loadView = true;
-            var horas = ['Libre', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+            var horas = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
             var minutos = [00, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
             var list_horas = '<option value="Bloqueado" selected >Bloqueado</option>';
+            list_horas += '<option value="Libre" >Libre</option>';
+
             //var list_horas = '';
 
             for (var i = 0; i < horas.length; i++) {
-                list_horas += '<option value="' + horas[i] + '">' + horas[i] + '</option>';
+                list_horas += '<option value=' + horas[i] + '>' + horas[i] + '</option>';
             }
             this.Horas = list_horas;
 
             var list_minutos = '<option value=""  selected hidden>Min</option>';
             //var list_minutos = '';
             for (var j = 0; j < minutos.length; j++) {
-                list_minutos += '<option value="' + minutos[j] + '">' + minutos[j] + '</option>';
+                list_minutos += '<option value=' + minutos[j] + '>' + minutos[j] + '</option>';
             }
             this.Minutos = list_minutos;
 
@@ -131,54 +133,63 @@
             });
         }
 
+        var respuesta = this.validaSetHorario();
+        if (respuesta == "") {
+            var parametros = context.seleccionados;
+            var horario = '{"Monday":{"entrada":"' + $("#LHin").val() + ($("#LMin").val() != "" ? (":" + $("#LMin").val()) : "") +
+                '","salida":"' + $("#LHout").val() + ($("#LMout").val() != "" ? (":" + $("#LMout").val()) : "") + '"},' +
+                '"Tuesday":{"entrada":"' + $("#MHin").val() + ($("#MMin").val() != "" ? (":" + $("#MMin").val()) : "") +
+                '","salida":"' + $("#MHout").val() + ($("#MMout").val() != "" ? (":" + $("#MMout").val()) : "") + '"},' +
+                '"Wednesday":{"entrada":"' + $("#MiHin").val() + ($("#MiMin").val() != "" ? (":" + $("#MiMin").val()) : "")
+                + '","salida":"' + $("#MiHout").val() + ($("#MiMout").val() != "" ? (":" + $("#MiMout").val()) : "") + '"},' +
+                '"Thursday":{"entrada":"' + $("#JHin").val() + ($("#JMin").val() != "" ? (":" + $("#JMin").val()) : "") +
+                '","salida":"' + $("#JHout").val() + ($("#JMout").val() != "" ? (":" + $("#JMout").val()) : "") + '"},' +
+                '"Friday":{"entrada":"' + $("#VHin").val() + ($("#VMin").val() != "" ? (":" + $("#VMin").val()) : "") +
+                '","salida":"' + $("#VHout").val() + ($("#VMout").val() != "" ? (":" + $("#VMout").val()) : "") + '"},' +
+                '"Saturday":{"entrada":"' + $("#SHin").val() + ($("#SMin").val() != "" ? (":" + $("#SMin").val()) : "") +
+                '","salida":"' + $("#SHout").val() + ($("#SMout").val() != "" ? (":" + $("#SMout").val()) : "") + '"},' +
+                '"Sunday":{"entrada":"' + $("#DHin").val() + ($("#DMin").val() != "" ? (":" + $("#DMin").val()) : "") +
+                '","salida":"' + $("#DHout").val() + ($("#DMout").val() != "" ? (":" + $("#DMout").val()) : "") + '"}}';
 
-        var parametros = context.seleccionados;
-        var horario = '{"Monday":{"entrada":"' + $("#LHin").val() + ($("#LMin").val() != "" ? (":" + $("#LMin").val()) : "") +
-            '","salida":"' + $("#LHout").val() + ($("#LMout").val() != "" ? (":" + $("#LMout").val()) : "") + '"},' +
-            '"Tuesday":{"entrada":"' + $("#MHin").val() + ($("#MMin").val() != "" ? (":" + $("#MMin").val()) : "") +
-            '","salida":"' + $("#MHout").val() + ($("#MMout").val() != "" ? (":" + $("#MMout").val()) : "") + '"},' +
-            '"Wednesday":{"entrada":"' + $("#MiHin").val() + ($("#MiMin").val() != "" ? (":" + $("#MiMin").val()) : "")
-            + '","salida":"' + $("#MiHout").val() + ($("#MiMout").val() != "" ? (":" + $("#MiMout").val()) : "") + '"},' +
-            '"Thursday":{"entrada":"' + $("#JHin").val() + ($("#JMin").val() != "" ? (":" + $("#JMin").val()) : "") +
-            '","salida":"' + $("#JHout").val() + ($("#JMout").val() != "" ? (":" + $("#JMout").val()) : "") + '"},' +
-            '"Friday":{"entrada":"' + $("#VHin").val() + ($("#VMin").val() != "" ? (":" + $("#VMin").val()) : "") +
-            '","salida":"' + $("#VHout").val() + ($("#VMout").val() != "" ? (":" + $("#VMout").val()) : "") + '"},' +
-            '"Saturday":{"entrada":"' + $("#SHin").val() + ($("#SMin").val() != "" ? (":" + $("#SMin").val()) : "") +
-            '","salida":"' + $("#SHout").val() + ($("#SMout").val() != "" ? (":" + $("#SMout").val()) : "") + '"},' +
-            '"Sunday":{"entrada":"' + $("#DHin").val() + ($("#DMin").val() != "" ? (":" + $("#DMin").val()) : "") +
-            '","salida":"' + $("#DHout").val() + ($("#DMout").val() != "" ? (":" + $("#DMout").val()) : "") + '"}}';
+            console.log("Parametros " + parametros)
+            if (parametros != "") {
+                var Params = {
+                    'seleccionados': parametros,
+                    'horario': horario,
+                    'excluir': false
+                };
+                app.alert.show('Actualizando', {
+                    level: 'process',
+                    title: 'Actualizando...'
+                });
+                var dnbProfileUrl = app.api.buildURL("updateAsesores", '', {}, {});
+                app.api.call("create", dnbProfileUrl, {data: Params}, {
+                    success: _.bind(function (data) {
+                        app.alert.dismiss('Actualizando');
+                        console.log(data);
+                        if (data) {
+                            this.closeModal();
+                            this.record_getAgente();
+                        }
 
-        console.log("Parametros " + parametros)
-        if (parametros != "") {
-            var Params = {
-                'seleccionados': parametros,
-                'horario': horario,
-                'excluir': false
-            };
-            app.alert.show('Actualizando', {
-                level: 'process',
-                title: 'Actualizando...'
+                    }, this)
+                });
+
+            }
+            else {
+                app.alert.show('Selecciona Asesor', {
+                    level: 'error',
+                    title: 'Selecciona un Asesor...'
+                });
+            }
+        } else {
+            app.alert.show("Error en Horario", {
+                level: "error",
+                title: "La hora de Salida no puede ser menor  que la hora de entrada: <br>" + respuesta,
+                autoClose: false
             });
-            var dnbProfileUrl = app.api.buildURL("updateAsesores", '', {}, {});
-            app.api.call("create", dnbProfileUrl, {data: Params}, {
-                success: _.bind(function (data) {
-                    app.alert.dismiss('Actualizando');
-                    console.log(data);
-                    if (data) {
-                        this.closeModal();
-                        this.record_getAgente();
-                    }
-
-                }, this)
-            });
-
         }
-        else {
-            app.alert.show('Selecciona Asesor', {
-                level: 'warning',
-                title: 'Selecciona un Asesor...'
-            });
-        }
+
 
     },
     excluirHorarios: function () {
@@ -490,5 +501,76 @@
             });
         }
     },
+
+    validaSetHorario: function () {
+
+        var FLin = "2021/01/01 " + $("#LHin").val() + ":" + ($("#LMin").val() == "" ? '00' : $("#LMin").val()) + ":00";
+        var FLout = "2021/01/01 " + $("#LHout").val() + ":" + ($("#LMout").val() == "" ? '00' : $("#LMout").val()) + ":00";
+        var FMin = "2021/01/01 " + $("#MHin").val() + ":" + ($("#MMin").val() == "" ? '00' : $("#MMin").val()) + ":00";
+        var FMout = "2021/01/01 " + $("#MHout").val() + ":" + ($("#MMout").val() == "" ? '00' : $("#MMout").val()) + ":00";
+        var FMiin = "2021/01/01 " + $("#MiHin").val() + ":" + ($("#MiMin").val() == "" ? '00' : $("#MiMin").val()) + ":00";
+        var FMiout = "2021/01/01 " + $("#MiHout").val() + ":" + ($("#MiMout").val() == "" ? '00' : $("#MiMout").val()) + ":00";
+        var FJin = "2021/01/01 " + $("#JHin").val() + ":" + ($("#JMin").val() == "" ? '00' : $("#JMin").val()) + ":00";
+        var FJout = "2021/01/01 " + $("#JHout").val() + ":" + ($("#JMout").val() == "" ? '00' : $("#JMout").val()) + ":00";
+        var FVin = "2021/01/01 " + $("#VHin").val() + ":" + ($("#VMin").val() == "" ? '00' : $("#VMin").val()) + ":00";
+        var FVout = "2021/01/01 " + $("#VHout").val() + ":" + ($("#VMout").val() == "" ? '00' : $("#VMout").val()) + ":00";
+        var FSin = "2021/01/01 " + $("#SHin").val() + ":" + ($("#SMin").val() == "" ? '00' : $("#SMin").val()) + ":00";
+        var FSout = "2021/01/01 " + $("#SHout").val() + ":" + ($("#SMout").val() == "" ? '00' : $("#SMout").val()) + ":00";
+        var FDin = "2021/01/01 " + $("#DHin").val() + ":" + ($("#DMin").val() == "" ? '00' : $("#DMin").val()) + ":00";
+        var FDout = "2021/01/01 " + $("#DHout").val() + ":" + ($("#DMout").val() == "" ? '00' : $("#DMout").val()) + ":00";
+
+
+        var errores = "";
+        if (($("#LHin").val() != "Bloqueado" && $("#LHout").val() != "Bloqueado") && ($("#LHin").val() != "Libre" && $("#LHout").val() != "Libre")) {
+            var Lin = (new Date(FLin).getTime() / 1000);
+            var Lout = (new Date(FLout).getTime() / 1000);
+            if (Lin > Lout) {
+                errores = errores + '<b>- Lunes<br></b>';
+            }
+        }
+        if (($("#MHin").val() != "Bloqueado" && $("#MHout").val() != "Bloqueado") && ($("#MHin").val() != "Libre" && $("#MHout").val() != "Libre")) {
+            var Min = (new Date(FMin).getTime() / 1000);
+            var Mout = (new Date(FMout).getTime() / 1000);
+            if (Min > Mout) {
+                errores = errores + '<b>-Martes<br></b>';
+            }
+        }
+        if (($("#MiHin").val() != "Bloqueado" && $("#MiHout").val() != "Bloqueado") && ($("#MiHin").val() != "Libre" && $("#MiHout").val() != "Libre")) {
+            var Miin = (new Date(FMiin).getTime() / 1000);
+            var Miout = (new Date(FMiout).getTime() / 1000);
+            if (Miin > Miout) {
+                errores = errores + '<b>-Miercoles<br></b>';
+            }
+        }
+        if (($("#JHin").val() != "Bloqueado" && $("#JHout").val() != "Bloqueado") && ($("#JHin").val() != "Libre" && $("#JHout").val() != "Libre")) {
+            var Jin = (new Date(FJin).getTime() / 1000);
+            var Jout = (new Date(FJout).getTime() / 1000);
+            if (Jin > Jout) {
+                errores = errores + '<b>-Jueves<br></b>';
+            }
+        }
+        if (($("#VHin").val() != "Bloqueado" && $("#VHout").val() != "Bloqueado") && ($("#VHin").val() != "Libre" && $("#VHout").val() != "Libre")) {
+            var Vin = (new Date(FVin).getTime() / 1000);
+            var Vout = (new Date(FVout).getTime() / 1000);
+            if (Vin > Vout) {
+                errores = errores + '<b>-Viernes<br></b>';
+            }
+        }
+        if (($("#SHin").val() != "Bloqueado" && $("#SHout").val() != "Bloqueado") && ($("#SHin").val() != "Libre" && $("#SHout").val() != "Libre")) {
+            var Sin = (new Date(FSin).getTime() / 1000);
+            var Sout = (new Date(FSout).getTime() / 1000);
+            if (Sin > Sout) {
+                errores = errores + '<b>-Sabado<br></b>';
+            }
+        }
+        if (($("#DHin").val() != "Bloqueado" && $("#DHout").val() != "Bloqueado") && ($("#DHin").val() != "Libre" && $("#DHout").val() != "Libre")) {
+            var Din = (new Date(FDin).getTime() / 1000);
+            var Dout = (new Date(FDout).getTime() / 1000);
+            if (Din > Dout) {
+                errores = errores + '<b>-Domingo<br></b>';
+            }
+        }
+        return errores;
+    }
 
 })
