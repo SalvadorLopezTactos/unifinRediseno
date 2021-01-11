@@ -96,6 +96,9 @@
             self_modal_get.dependenciasNV();
         });
         self_modal_get.dependenciasNV();
+
+        //Jquery para que no se cierre el modal con ESC o al dar clic afuera del modal
+        $('#ModalNoViableCuentas').modal({backdrop: 'static', keyboard: false});
     },
 
     dependenciasNV: function () {
@@ -162,16 +165,16 @@
              $('#condFinancieras').css('border-color', 'red');
              emptynoviable += 1;
         }
-        if ($("#RazonNoViable").val() == "3" && $("#comp_quien").val() == "" && $("#comp_porque").val() == "") {
+        if ($("#RazonNoViable").val() == "3" && $('#comp_quien').val().trim() == "" && $('#comp_porque').val().trim() == "") {
             $('#comp_quien').css('border-color', 'red');
             $('#comp_porque').css('border-color', 'red');
             emptynoviable += 1;
         }
-        if ($("#RazonNoViable").val() == "3" && $("#comp_quien").val() == "" && $("#comp_porque").val() != "") {
+        if ($("#RazonNoViable").val() == "3" && $('#comp_quien').val().trim() == "" && $('#comp_porque').val().trim() != "") {
             $('#comp_quien').css('border-color', 'red');
             emptynoviable += 1;
         }
-        if ($("#RazonNoViable").val() == "3" && $("#comp_quien").val() != "" && $("#comp_porque").val() == "") {
+        if ($("#RazonNoViable").val() == "3" && $('#comp_porque').val().trim() == "" && $('#comp_quien').val().trim() != "") {
             $('#comp_porque').css('border-color', 'red');
             emptynoviable += 1;
         }
