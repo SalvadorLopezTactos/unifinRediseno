@@ -36,6 +36,12 @@
         
         idCuentaAplazado = $(events.currentTarget).attr('title');
 
+        app.alert.show('go-to-presolicitud-aplazado', {
+            level: 'info',
+            title: 'Cuenta con el resto del día en curso, para realizar una presolicitud',
+            autoClose: false
+        });
+
         app.alert.show('sol-pc-aplazado', {
             level: 'process',
             title: 'Cargando...',
