@@ -2618,19 +2618,17 @@
     RequeridosProveedorRecursos: function (fields, errors, callback) {
         var RequeridosProvRec = "";
         if (this.model.get('tipo_relacion_c').includes('Proveedor de Recursos L') || this.model.get('tipo_relacion_c').includes('Proveedor de Recursos F') || this.model.get('tipo_relacion_c').includes('Proveedor de Recursos CA')) {
-
             if (this.model.get('tipodepersona_c') == "Persona Fisica" || this.model.get('tipodepersona_c') == "Persona Fisica con Actividad Empresarial") {
-
-                /*if (this.model.get('primernombre_c') == "") {
-                 RequeridosProvRec = RequeridosProvRec + '<b>-Nombre<br></b>';
-                 }
-                 if (this.model.get('apellidopaterno_c') == "") {
-                 RequeridosProvRec = RequeridosProvRec + '<b>-Apellido Paterno<br></b>';
-                 }*/
+              /*if (this.model.get('primernombre_c') == "") {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Nombre<br></b>';
+                }
+                if (this.model.get('apellidopaterno_c') == "") {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Apellido Paterno<br></b>';
+                }
                 if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Apellido Materno<br></b>';
                     $('[name=apellidomaterno_c]').css('border-color', 'red');
-                }
+                }*/
                 if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Fecha de Nacimiento<br></b>';
                     $('[name=fechadenacimiento_c]').css('border-color', 'red');
@@ -2639,11 +2637,25 @@
                     RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
                     $('[data-name=nacionalidad_c]').find('.select2-choice').css('border-color', 'red');
                 }
-                //Validacion Actividad Economica custom
-                if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == undefined) {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
-                    $('.list_ae').find('.select2-choice').css('border-color', 'red');
-                    // $('[data-name=tct_macro_sector_ddw_c]').find('.select2-choice').css('border-color', 'red');
+                if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
+                    $('[name=rfc_c]').css('border-color', 'red');
+                }
+                if (this.model.get('tct_pais_expide_rfc_c') == "" || this.model.get('tct_pais_expide_rfc_c') == undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-País que expide el RFC o equivalente<br></b>';
+                    $('[data-name=tct_pais_expide_rfc_c]').find('.select2-choice').css('border-color', 'red');
+                }
+                if (this.model.get('curp_c') == "" || this.model.get('curp_c') == undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-CURP<br></b>';
+                    $('[name=curp_c]').css('border-color', 'red');
+                }
+                if (this.model.get('ctpldnoseriefiel_c') == "" || this.model.get('ctpldnoseriefiel_c') == undefined) {
+                      RequeridosProvRec = RequeridosProvRec + '<b>-No. serie FIEL<br></b>';
+                    $('[name=ctpldnoseriefiel_c]').css('border-color', 'red');
+                }
+                if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Profesión<br></b>';
+                    $('[data-name=profesion_c]').find('.select2-choice').css('border-color', 'red');
                 }
                 //Requerido Subsector custom
                 // if ($('.list_sse').select2('val') == "") {
@@ -2673,17 +2685,15 @@
                     }
                 }
                 if (direcciones == 0) {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Dirección Particular<br></b>';
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Dirección<br></b>';
                     $('.direcciondashlet').css('border-color', 'red');
-
                 }
-                if ((this.model.get('rfc_c') == undefined || this.model.get('rfc_c') == "") && (this.model.get('curp_c') == "" || this.model.get('curp_c') == undefined) && (this.model.get('ctpldnoseriefiel_c') == "" || this.model.get('ctpldnoseriefiel_c') == undefined)) {
+                /*if ((this.model.get('rfc_c') == undefined || this.model.get('rfc_c') == "") && (this.model.get('curp_c') == "" || this.model.get('curp_c') == undefined) && (this.model.get('ctpldnoseriefiel_c') == "" || this.model.get('ctpldnoseriefiel_c') == undefined)) {
                     RequeridosProvRec = RequeridosProvRec + '<b><br>Al menos la captura de alguno de estos campos:<br><br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br><br></b>';
                     $('[name=rfc_c]').css('border-color', 'red');
                     $('[name=curp_c]').css('border-color', 'red');
                     $('[name=ctpldnoseriefiel_c]').css('border-color', 'red');
-                }
-
+                }*/
                 if (RequeridosProvRec != "") {
                     app.alert.show("Campos faltantes en cuenta", {
                         level: "error",
@@ -2692,15 +2702,15 @@
                     });
                     errors['faltantescuenta'] = errors['faltantescuenta'] || {};
                     errors['faltantescuenta'].required = true;
-
                 }
                 callback(null, fields, errors);
             }
 
             if (this.model.get('tipodepersona_c') == "Persona Moral") {
-                /*if (this.model.get('razonsocial_c') == "") {
-                 RequeridosProvRec = RequeridosProvRec + '<b>-Denominación o Razón Social<br></b>';
-                 }*/
+                if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Fecha Constitutiva<br></b>';
+                    $('[name=fechaconstitutiva_c]').css('border-color', 'red');
+                }
                 if (this.model.get('nacionalidad_c') == "0" || this.model.get('nacionalidad_c') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
                     $('[data-name=nacionalidad_c]').find('.select2-choice').css('border-color', 'red');
@@ -2708,6 +2718,18 @@
                 if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
                     $('[name=rfc_c]').css('border-color', 'red');
+                }
+                if (this.model.get('tct_pais_expide_rfc_c') == "" || this.model.get('tct_pais_expide_rfc_c') == undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-País que expide el RFC o equivalente<br></b>';
+                    $('[data-name=tct_pais_expide_rfc_c]').find('.select2-choice').css('border-color', 'red');
+                }
+                if (this.model.get('ctpldnoseriefiel_c') == "" || this.model.get('ctpldnoseriefiel_c') == undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-No. serie FIEL<br></b>';
+                    $('[name=ctpldnoseriefiel_c]').css('border-color', 'red');
+                }
+                if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
+                    $('.list_ae').find('.select2-choice').css('border-color', 'red');
                 }
                 var direccionesm = 0;
                 var tipodireccion = this.oDirecciones.direccion;
@@ -2718,13 +2740,10 @@
                         }
                     }
                 }
-
                 if (tipodireccion.length == 0 || direccionesm == tipodireccion.length) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Domicilio<br></b>';
                     $('.direcciondashlet').css('border-color', 'red');
-
                 }
-
                 if (RequeridosProvRec != "") {
                     app.alert.show("Campos faltantes en cuenta", {
                         level: "error",
@@ -2733,14 +2752,12 @@
                     });
                     errors['errorpersonamoral'] = errors['errorpersonamoral'] || {};
                     errors['errorpersonamoral'].required = true;
-
                 }
                 callback(null, fields, errors);
             }
         } else {
             callback(null, fields, errors);
         }
-
     },
 
     quitaanos: function () {
