@@ -605,8 +605,9 @@ array (
               ),
               13 => 
               array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
+                'type' => 'button',
+                'name' => 'generar_rfc_c',
+                'label' => 'LBL_GENERAR_RFC',
               ),
               14 => 
               array (

@@ -232,7 +232,9 @@
 
         //Validacion para mostrar chk para cuentas homonimas
         this.model.on('sync', this.homonimo, this);
-
+        
+        //Oculta Botón Generar RFC
+        this.model.on('sync', this.ocultaGeneraRFC, this);
 
         //this.model.on('sync', this.get_phones, this);
         //Recupera datos para custom fields
@@ -293,7 +295,6 @@
         this.model.addValidationTask('FleetUP', _.bind(this.requeridosFleetUP, this));
         this.model.addValidationTask('UniclickUP', _.bind(this.requeridosUniclickUP, this));
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
-
     },
 
     /** Asignacion modal */
@@ -1163,8 +1164,8 @@
         }
 
         //
-		this.$("div.record-label[data-name='rfc_qr']").attr('style', 'pointer-events:none;');
-		this.$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
+		    this.$("div.record-label[data-name='rfc_qr']").attr('style', 'pointer-events:none;');
+		    this.$("div.record-label[data-name='rfc_qr']").attr('style', 'display:none;');
 
         // if (app.user.attributes.multilinea_c == 0 || app.user.attributes.multilinea_c == "") {
         //     $('div[data-name=multilinea_c]').css("pointer-events", "none");
@@ -1176,8 +1177,6 @@
         this.$("div[data-name='subsectoreconomico_c']").hide();
         this.$("div[data-name='actividadeconomica_c']").hide();
         this.$(".record-cell[data-name='blank_space']").hide();
-
-
     },
 
     editClicked: function () {
@@ -1191,6 +1190,7 @@
         var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
         if (accesoFiscal == 0) {
           this.$('div[data-name=rfc_c]').css("pointer-events", "none");
+          $('[data-name="generar_rfc_c"]').hide();
         }
 		contexto_cuenta.cambioEdit=1;
 	},
@@ -4567,8 +4567,8 @@
         } else {
             this.$('[data-name="generar_rfc_c"]').attr('style', 'pointer-events:block;');
         }
-
     },
+    
     proveedorRecursos: function (fields, errors, callback) {
         if ($('.campo4ddw-ap').select2('val') == "2" || $('.campo4ddw-ca').select2('val') == "2" || $('.campo4ddw-ff').select2('val') == "2" || $('.campo4ddw-cs').select2('val') == "2" || $('.campo10ddw-ce').select2('val') == "2") {
 
@@ -6087,6 +6087,15 @@
         }
 
         callback(null, fields, errors);
+    },
+
+    ocultaGeneraRFC: function () {
+        //Oculta Botón Generar RFC
+        var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
+        if (accesoFiscal == 0) {
+          this.$('div[data-name=rfc_c]').css("pointer-events", "none");
+          this.$('div[data-name="generar_rfc_c"]').hide();
+        }
     },
 
     /* Valida RFC con servicio de revisión del padron de contribuyentes */
