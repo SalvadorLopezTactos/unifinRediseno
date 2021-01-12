@@ -532,42 +532,42 @@
             var Min = (new Date(FMin).getTime() / 1000);
             var Mout = (new Date(FMout).getTime() / 1000);
             if (Min > Mout) {
-                errores = errores + '<b>-Martes<br></b>';
+                errores = errores + '<b>- Martes<br></b>';
             }
         }
         if (($("#MiHin").val() != "Bloqueado" && $("#MiHout").val() != "Bloqueado") && ($("#MiHin").val() != "Libre" && $("#MiHout").val() != "Libre")) {
             var Miin = (new Date(FMiin).getTime() / 1000);
             var Miout = (new Date(FMiout).getTime() / 1000);
             if (Miin > Miout) {
-                errores = errores + '<b>-Miercoles<br></b>';
+                errores = errores + '<b>- Miércoles<br></b>';
             }
         }
         if (($("#JHin").val() != "Bloqueado" && $("#JHout").val() != "Bloqueado") && ($("#JHin").val() != "Libre" && $("#JHout").val() != "Libre")) {
             var Jin = (new Date(FJin).getTime() / 1000);
             var Jout = (new Date(FJout).getTime() / 1000);
             if (Jin > Jout) {
-                errores = errores + '<b>-Jueves<br></b>';
+                errores = errores + '<b>- Jueves<br></b>';
             }
         }
         if (($("#VHin").val() != "Bloqueado" && $("#VHout").val() != "Bloqueado") && ($("#VHin").val() != "Libre" && $("#VHout").val() != "Libre")) {
             var Vin = (new Date(FVin).getTime() / 1000);
             var Vout = (new Date(FVout).getTime() / 1000);
             if (Vin > Vout) {
-                errores = errores + '<b>-Viernes<br></b>';
+                errores = errores + '<b>- Viernes<br></b>';
             }
         }
         if (($("#SHin").val() != "Bloqueado" && $("#SHout").val() != "Bloqueado") && ($("#SHin").val() != "Libre" && $("#SHout").val() != "Libre")) {
             var Sin = (new Date(FSin).getTime() / 1000);
             var Sout = (new Date(FSout).getTime() / 1000);
             if (Sin > Sout) {
-                errores = errores + '<b>-Sabado<br></b>';
+                errores = errores + '<b>- Sábado<br></b>';
             }
         }
         if (($("#DHin").val() != "Bloqueado" && $("#DHout").val() != "Bloqueado") && ($("#DHin").val() != "Libre" && $("#DHout").val() != "Libre")) {
             var Din = (new Date(FDin).getTime() / 1000);
             var Dout = (new Date(FDout).getTime() / 1000);
             if (Din > Dout) {
-                errores = errores + '<b>-Domingo<br></b>';
+                errores = errores + '<b>- Domingo<br></b>';
             }
         }
         return errores;
