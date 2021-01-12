@@ -319,6 +319,7 @@
         var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
         if (accesoFiscal == 0) {
           $('div[data-name=rfc_c]').css("pointer-events", "none");
+          $('[data-name="generar_rfc_c"]').hide();
         }
     },
 
