@@ -447,7 +447,12 @@
         this.$("div[data-name='actividadeconomica_c']").hide();
         this.$(".record-cell[data-name='blank_space']").hide();
         this.$(".record-cell[data-name='blank_space']").hide();
-
+        //Oculta Botón Generar RFC
+        var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
+        if (accesoFiscal == 0) {
+          this.$('div[data-name=rfc_c]').css("pointer-events", "none");
+          this.$('div[data-name="generar_rfc_c"]').hide();
+        }
     },
 
     _ActualizaEtiquetas: function () {
