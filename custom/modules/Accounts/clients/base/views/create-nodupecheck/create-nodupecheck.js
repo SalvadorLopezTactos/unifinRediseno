@@ -1204,7 +1204,6 @@
         if (this.model.get('tipo_registro_cuenta_c') == '4') {
             var relaciones = this.model.get('tipo_relacion_c');
             relaciones = relaciones.toString();
-
             relaciones = relaciones.replace(/Referencia Cliente/g, "");
             relaciones = relaciones.replace(/Referencia Proveedor/g, "");
             relaciones = relaciones.replace(/Propietario Real/g, "");
@@ -1216,16 +1215,14 @@
             relaciones = relaciones.replace(/^/g, "");
             relaciones = relaciones.replace(/,/g, "");
             relaciones = relaciones.replace(/ /g, "");
-
-            //            if (relaciones != "") {
-            if ((this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null) && this.model.get('tipodepersona_c') != 'Persona Moral') {
-                errors['estadocivil_c'] = errors['estadocivil_c'] || {};
-                errors['estadocivil_c'].required = true;
-            }
-            //            }
+/*          if (relaciones != "") {
+              if ((this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null) && this.model.get('tipodepersona_c') != 'Persona Moral') {
+                  errors['estadocivil_c'] = errors['estadocivil_c'] || {};
+                  errors['estadocivil_c'].required = true;
+              }
+            }*/
         }
         callback(null, fields, errors);
-
     },
 
     valida_requeridos: function (fields, errors, callback) {
