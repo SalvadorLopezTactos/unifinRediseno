@@ -731,16 +731,9 @@
 		var held = 0;
 		if ($.isEmptyObject(errors)&& this.model.get('parent_id') != "" && this.model.get('parent_type') == "Accounts" && this.model.get('status')=="Held") {
 			
-			app.api.call("read", app.api.buildURL("Accounts/" + this.model.get('parent_id') + "/link/calls", null, null, {
-				fields: "status",				
-			}), null, {
-            success: _.bind(function (data) {
-				for (var i = 0; i < data.records.length; i++) {
-					if(data.records[i].status == 'Held' && data.records[i].id != idcall){
-						held ++;
-					}
-				}
-				if (held > 0) {
+			app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + this.model.get('parent_id')), null, {
+                success: _.bind(function (data) {				
+				if (data > 0) {
 					// Cancelar - no esta interesado, NO viable, NO interesado- cita forada,Cancelada por el prospecto no le interesa
 					/*************************************************/
 					if (Modernizr.touch) {

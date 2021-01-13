@@ -1,0 +1,43 @@
+<!--
+
+-->
+<!-- Campo para desplegar Lead Management en minuta:Edición -->
+<div style="border: 2px solid #055993;border-radius: 12px;padding:10px;">
+  <!-- Table list-->
+  <div class="list-view">
+    <table id="tableReferencias" class="table table-striped">
+      <thead>
+        <tr bgcolor="#0679c8" style="color:#fff">
+          <th style='text-align:center'>Lead Management</th></tr>
+      </thead>
+      <tbody>
+		<tr><td> 
+			<div style="display: inline-flex;padding: 5px; ">
+            	<label  style=" font-weight:bold;font-size: 15px; color: black; padding: 5px 5px;">Seleccione la opción deseada:</label>
+		    </div>
+		</td></tr>
+			
+			<tr >
+        	<td>
+        		<div class="MotivoCancelacionLead" >
+					<div class="motivo_cancelacion_Cuenta" id="motivo_cancelacion_Cuenta" style="padding: 5px;">
+			    		Motivo de Cancelación:&nbsp;&nbsp;&nbsp;
+			      		<select name="motivocancelacionCuenta" id="motivocancelacionCuenta" class="select2">
+        	       			{{{motivo_list}}}
+        	    		</select>
+					</div>
+					<br>
+					<div class="submotivo_cancelacion" id="submotivo_cancelacion" style="display: none; padding: 5px;">
+        	    		Submotivo de Cancelación: &nbsp;&nbsp;&nbsp;
+			      		<select name="submotivocancelacion" id="submotivocancelacion" class="select2">
+        	       			{{{submotivo_list}}}
+        	    		</select>
+					</div>
+        		</div>
+        	</td>
+        	</tr>
+	
+      </tbody>
+    </table>
+</div>
+
