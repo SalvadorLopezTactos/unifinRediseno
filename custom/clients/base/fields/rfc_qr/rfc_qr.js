@@ -417,9 +417,12 @@
                           if(duplicado == 8) duplicados = 1;
                           if(duplicado == 8 && cDireccionFiscal == 1) nada = 1;
 													if(duplicado == 8 && cDireccionFiscal == 0) {
+                            var bloqueado = 1;
+                            var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
+                            if (accesoFiscal > 0) bloqueado = 0;
 														// Indicador
 														direccion[key].indicadorSeleccionados = direccion[key].indicadorSeleccionados + ',^2^';
-														direccion[key].bloqueado = '1';
+														direccion[key].bloqueado = bloqueado;
 														contexto_cuenta.cambio_previo_mail = '3';
 														//contexto_cuenta.cambio_previo_mail = '1';
 														var indicador = direccion[key].indicadorSeleccionados;
@@ -590,13 +593,16 @@
     																	"id":"",
     																	"direccionCompleta":""
     																};
+                                    var bloqueado = 1;
+                                    var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
+                                    if (accesoFiscal > 0) bloqueado = 0;
     																nuevaDireccion.secuencia = secuencia;
     																nuevaDireccion.principal = "1";
     																nuevaDireccion.tipodedireccion = "1";
     																nuevaDireccion.tipoSeleccionados = '^1^';
     																nuevaDireccion.indicador = "2";
     																nuevaDireccion.indicadorSeleccionados = '^2^';
-    																nuevaDireccion.bloqueado = '1';
+    																nuevaDireccion.bloqueado = bloqueado;
     																nuevaDireccion.valCodigoPostal = CP;
     																nuevaDireccion.postal = data.idCP;
     																nuevaDireccion.calle = Calle;
@@ -688,13 +694,16 @@
 																		"id":"",
 																		"direccionCompleta":""
 																	};
+                                  var bloqueado = 1;
+                                  var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
+                                  if (accesoFiscal > 0) bloqueado = 0;
 																	nuevaDireccion.secuencia = "1";
 																	nuevaDireccion.principal = "1";
 																	nuevaDireccion.tipodedireccion = "1";
 																	nuevaDireccion.tipoSeleccionados = '^1^';
 																	nuevaDireccion.indicador = "2";
 																	nuevaDireccion.indicadorSeleccionados = '^2^';
-																	nuevaDireccion.bloqueado = '1';
+																	nuevaDireccion.bloqueado = bloqueado;
 																	nuevaDireccion.valCodigoPostal = CP;
 																	nuevaDireccion.postal = data.idCP;
 																	nuevaDireccion.calle = Calle;

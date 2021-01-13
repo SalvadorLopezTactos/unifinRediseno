@@ -28,7 +28,7 @@
         $(document).ready(function () {
             window.bandera = 1;
         });
-		
+
 		this.idAccount=options.context.attributes.idAccount;
 		this.idNameAccount=options.context.attributes.idNameAccount;
 		if(this.idAccount!= undefined || this.idAccount!= null){
@@ -164,6 +164,8 @@
        // this.Updt_OptionProdFinan(); # se comenta para hacer listas dependiente
        this.model.on("change:negocio_c", _.bind(this.Updt_OptionProdFinan, this));
         this.model.on('change:negocio_c', this.verificaOperacionProspecto, this);
+
+        this.adminUserCartera();
 
     },
 
@@ -402,7 +404,29 @@
         $('[data-name="vobo_descripcion_txa_c"]').hide();
         $('[data-name="director_notificado_c"]').hide();
         this.$(".record-cell[data-name='blank_space']").hide();
+
+        // Visualiza el campo check de Administracion de cartera del usuario
+        $('[data-name="admin_cartera_c"]').attr('style', 'pointer-events:none');
+
+        if (this.model.get('admin_cartera_c') == true && app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
+            //Bloquea campos de monto cuando es Administrador de cartera
+            $('[data-name="monto_c"]').attr('style', 'pointer-events:none'); //Monto de línea
+            $('[data-name="amount"]').attr('style', 'pointer-events:none'); //Monto a operar
+            $('[data-name="ca_pago_mensual_c"]').attr('style', 'pointer-events:none'); //Pago mensual
+            $('[data-name="ca_importe_enganche_c"]').attr('style', 'pointer-events:none'); //Pago unico
+            $('[data-name="porciento_ri_c"]').attr('style', 'pointer-events:none'); //% Pago unico
+        }
+        
     },
+
+    adminUserCartera: function () {
+        //Valida si el usuario es Administrador de cartera y que el servicio este activo en el config_override
+        if (app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
+            this.model.set('admin_cartera_c', true);
+        }
+    },
+
+
     /*
     *Victor Martinez Lopez
     * Valida que no se pueda crear un producto factoraje para personas fisicas
@@ -470,7 +494,7 @@
     },
 
     _ValidateAmount: function (fields, errors, callback) {
-        if (parseFloat(this.model.get('monto_c')) <= 0 && this.model.get('producto_financiero_c') != 40) {
+        if (parseFloat(this.model.get('monto_c')) <= 0 && this.model.get('producto_financiero_c') != 40 && this.model.get('admin_cartera_c') != true) {
             errors['monto_c'] = errors['monto_c'] || {};
             errors['monto_c'].required = true;
 
@@ -1306,6 +1330,11 @@
         $('[data-name="picture"]').show();
         $('[data-name="tct_numero_vehiculos_c"]').show();
 
+        //Se visualiza campo de Administrador cartera solo si el usuario tiene activo el check
+        if (app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
+            $('[data-name="admin_cartera_c"]').show();
+        }
+
         /**Muestra campos de area Beneficiada y Subyacente **/
         /* $('[data-name="estado_benef_c"]').show();
          $('[data-name="municipio_benef_c"]').show();
@@ -1845,7 +1874,7 @@
     },
 
     setValidacionComercial: function (fields, errors, callback) {
-        if (this.model.get('tipo_producto_c') == 1 && this.model.get('negocio_c') == 5 && (this.model.get('producto_financiero_c') == "" || this.model.get('producto_financiero_c') == "0") && this.model.get('tct_etapa_ddw_c') == "SI" && $.isEmptyObject(errors)) {
+        if (this.model.get('tipo_producto_c') == 1 && (this.model.get('negocio_c') == 5 || this.model.get('negocio_c') == 3) && (this.model.get('producto_financiero_c') == "" || this.model.get('producto_financiero_c') == "0") && this.model.get('tct_etapa_ddw_c') == "SI" && $.isEmptyObject(errors)) {
             var operacion = this.model.get('tipo_de_operacion_c');
             var producto = this.model.get('tipo_producto_c');
             var etapa = this.model.get('tct_etapa_ddw_c');

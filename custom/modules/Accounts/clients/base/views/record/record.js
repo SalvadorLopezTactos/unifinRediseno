@@ -238,7 +238,7 @@
         //Recupera datos para custom fields
 
         this.get_uni_productos();
-		this.get_phones();
+		    this.get_phones();
         this.get_addresses();
         this.get_v360();
 
@@ -272,11 +272,12 @@
         this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'checkInVentas';
 
 
-        this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
+        
         // this.model.addValidationTask('LeasingNV', _.bind(this.requeridosleasingnv, this));
         // this.model.addValidationTask('FactorajeNV', _.bind(this.requeridosfacnv, this));
         // this.model.addValidationTask('CreditAutoNV', _.bind(this.requeridoscanv, this));
         this.model.addValidationTask('proveedorDeRecursos', _.bind(this.proveedorRecursos, this));
+        this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
         this.model.addValidationTask('valida_direcciones_de_relaciones_PR', _.bind(this.direccionesparticularPR, this));
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('Guarda_campos_auto_potencial', _.bind(this.savepotauto, this));
@@ -379,6 +380,9 @@
     saveProdPLD: function (fields, errors, callback) {
 
         if (this.model.get('tipo_registro_cuenta_c') != '') {
+             //Valida cambios
+             if ($.isEmptyObject(errors) && (this.inlineEditMode == false || (this.inlineEditMode && typeof ($('.campo4ddw-cs').select2('val')) == "string"))) {
+
             // Actualizar modelo de this.ProductosPLD
             // this.ProductosPLD.arrendamientoPuro.campo1 = $('.campo1txt-ap').val();
             if (this.ProductosPLD != null && typeof (this.$('.campo4ddw-cs').select2('val')) == "string") {
@@ -437,10 +441,21 @@
                 this.ProductosPLD.creditoSimple.campo14 = this.$('.campo14chk-cs')[0].checked;
                 this.ProductosPLD.creditoSimple.campo20 = this.$('.campo20ddw-cs').select2('val');
                 this.ProductosPLD.creditoSimple.campo6 = this.$('.campo6ddw-cs').select2('val');
-            }
+                //Campos Credito Revolvente
+                this.ProductosPLD.creditoRevolvente.campo1=this.$('.campo1int-ce').val();
+                this.ProductosPLD.creditoRevolvente.campo2=this.$('.campo2dec-ce').val().replace(/,/gi, "");
+                this.ProductosPLD.creditoRevolvente.campo3=this.$('.campo3ddw-ce').select2('val').toString();
+                this.ProductosPLD.creditoRevolvente.campo5=this.$('.campo5ddw-ce').select2('val');
+                this.ProductosPLD.creditoRevolvente.campo6=this.$('.campo6ddw-ce').select2('val');
+                this.ProductosPLD.creditoRevolvente.campo7=this.$('.campo7ddw-ce').select2('val').toString();
+                this.ProductosPLD.creditoRevolvente.campo8=this.$('.campo8ddw-ce').select2('val');
+                this.ProductosPLD.creditoRevolvente.campo9=this.$('.campo9rel-ce').select2('val');
+                this.ProductosPLD.creditoRevolvente.campo9_id=this.$('.campo9rel-ce').select2('val');
+                this.ProductosPLD.creditoRevolvente.campo10=this.$('.campo10ddw-ce').select2('val');
+                this.ProductosPLD.creditoRevolvente.campo11=this.$('.campo11rel-ce').select2('val');
+                this.ProductosPLD.creditoRevolvente.campo11_id=this.$('.campo11rel-ce').select2('val');
 
-            //Valida cambios
-            if ($.isEmptyObject(errors) && (this.inlineEditMode == false || (this.inlineEditMode && typeof ($('.campo4ddw-cs').select2('val')) == "string"))) {
+            }
                 //var obj_pld_old=JSON.stringify(this.model.get('accounts_tct_pld_1'));
                 //var obj_pld_new=JSON.stringify(this.ProductosPLD);
                 app.api.call('create', app.api.buildURL('SavePLD'), this.ProductosPLD, {
@@ -1065,7 +1080,7 @@
         //campo Pais que expide el RFC nace oculto.
         // $('[data-name=tct_pais_expide_rfc_c]').hide();
         // $('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
-        //$('[data-name=tct_nuevo_pld_c]').hide(); //Oculta campo tct_nuevo_pld_c
+        $('[data-name=tct_nuevo_pld_c]').hide(); //Oculta campo tct_nuevo_pld_c
         //Oculta la etiqueta del campo PLD
         this.$('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
         //Oculta nombre de campo Potencial_Autos
@@ -3995,6 +4010,7 @@
         var faltantesFF = "";
         var faltantesCA = "";
         var faltantesCS = "";
+        var faltantesCR = "";
 
         //Valida requeridos a partir de Prospecto Interesado
         var tipoCuenta = this.model.get('tipo_registro_cuenta_c');
@@ -4175,6 +4191,65 @@
                  $('.campo6ddw-ca').find('.select2-choice').css('border-color','');
                  }*/
             }
+            //Validacion campos faltantes de Credito Revolvente
+            /*if (App.user.attributes.tipodeproducto_c == '8') {
+                //Pregunta: campo1int-ce
+                if($('.campo1int-ce').val() == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
+                 $('.campo1int-ce').css('border-color', 'red');
+                 faltantesCR = faltantesCR + '<b>- '+$('.campo1int-ce')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo1int-ce').css('border-color', '');
+                 }
+                //Pregunta: campo2dec-ce
+                if($('.campo2dec-ce').val() == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
+                 $('.campo2dec-ce').css('border-color', 'red');
+                 faltantesCR = faltantesCR + '<b>- '+$('.campo2dec-ce')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo2dec-ce').css('border-color', '');
+                 }
+                //Pregunta: campo3ddw-ce
+                if($('.campo3ddw-ce').select2('val') == ''){
+                 $('.campo3ddw-ce').find('.select2-choice').css('border-color','red');
+                 faltantesCR = faltantesCR + '<b>- '+$('select.campo3ddw-ce')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo3ddw-ce').find('.select2-choice').css('border-color','');
+                 }
+                //Pregunta: campo5ddw-ce
+                if($('.campo5ddw-ce').select2('val') == ''){
+                 $('.campo5ddw-ce').find('.select2-choice').css('border-color','red');
+                 faltantesCR = faltantesCR + '<b>- '+$('select.campo5ddw-ce')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo5ddw-ce').find('.select2-choice').css('border-color','');
+                 }
+                 //Pregunta: campo6ddw-ce
+                 if($('.campo6ddw-ce').select2('val') == ''){
+                 $('.campo6ddw-ce').find('.select2-choice').css('border-color','red');
+                 faltantesCR = faltantesCR + '<b>- '+$('select.campo6ddw-ce')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo6ddw-ce').find('.select2-choice').css('border-color','');
+                 }
+                 //Pregunta: campo7ddw-ce
+                 if($('.campo7ddw-ce').select2('val') == ''){
+                 $('.campo7ddw-ce').find('.select2-choice').css('border-color','red');
+                 faltantesCR = faltantesCR + '<b>- '+$('select.campo7ddw-ce')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo7ddw-ce').find('.select2-choice').css('border-color','');
+                 }
+                 //Pregunta: campo8ddw-ce
+                 if($('.campo8ddw-ce').select2('val') == ''){
+                 $('.campo8ddw-ce').find('.select2-choice').css('border-color','red');
+                 faltantesCR = faltantesCR + '<b>- '+$('select.campo8ddw-ce')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo8ddw-ce').find('.select2-choice').css('border-color','');
+                 }
+                 //Pregunta: campo10ddw-ce
+                 if($('.campo10ddw-ce').select2('val') == ''){
+                 $('.campo10ddw-ce').find('.select2-choice').css('border-color','red');
+                 faltantesCR = faltantesCR + '<b>- '+$('select.campo10ddw-ce')[0].getAttribute('data-name')+'<br></b>';
+                 }else{
+                 $('.campo10ddw-ce').find('.select2-choice').css('border-color','');
+                 }
+            }*/
             if ($('.campo2ddw-cs').select2('val') == "2" && $('.campo3rel-cs').select2('val') == "") {
                 $('.campo3rel-cs').find('.select2-choice').css('border-color', 'red');
                 faltantesCS = faltantesCS + '<b>- ' + $('.campo2ddw-cs')[1].getAttribute('data-name') + '<br></b>';
@@ -4213,6 +4288,14 @@
                 app.alert.show("faltantesCA", {
                     level: "error",
                     title: "PLD Crédito automotriz - Faltan las siguientes preguntas por contestar: <br>" + faltantesCA
+                });
+            }
+            if (faltantesCR != "") {
+                errors['PreguntasCR'] = "";
+                errors['PreguntasCR'].required = true;
+                app.alert.show("faltantesCR", {
+                    level: "error",
+                    title: "PLD Crédito Revolvente - Faltan las siguientes preguntas por contestar: <br>" + faltantesCR
                 });
             }
         }
@@ -4487,7 +4570,7 @@
 
     },
     proveedorRecursos: function (fields, errors, callback) {
-        if ($('.campo4ddw-ap').select2('val') == "2" || $('.campo4ddw-ca').select2('val') == "2" || $('.campo4ddw-ff').select2('val') == "2" || $('.campo4ddw-cs').select2('val') == "2") {
+        if ($('.campo4ddw-ap').select2('val') == "2" || $('.campo4ddw-ca').select2('val') == "2" || $('.campo4ddw-ff').select2('val') == "2" || $('.campo4ddw-cs').select2('val') == "2" || $('.campo10ddw-ce').select2('val') == "2") {
 
             var apicall = app.api.buildURL('Rel_Relaciones?filter[0][rel_relaciones_accounts_1accounts_ida][$equals]=' + this.model.get("id"), null);
             app.api.call('GET', apicall, {}, {
@@ -4497,6 +4580,7 @@
                     var relacionca = 0;
                     var relacionff = 0;
                     var relacioncs = 0;
+                    var relacioncr =0;
                     var productos = "";
                     if (data.records.length > 0) {
                         for (var l = 0; l < data.records.length; l++) {
@@ -4527,6 +4611,13 @@
 
                                 if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CS')) {
                                     relacioncs++;
+                                }
+                            }
+                            //Credito Envolvente
+                            if (App.user.attributes.productos_c.includes(8) && $('.campo10ddw-ce').select2('val') == "2") {
+
+                                if (data.records[l].relaciones_activas.includes('Proveedor de Recursos CR')) {
+                                    relacioncr++;
                                 }
                             }
                         }
@@ -4568,6 +4659,15 @@
                         errors['error_FPR'].required = true;
                     } else {
                         $('.campo4ddw-cs').find('.select2-choice').css('border-color', '');
+                    }
+                    //Validacion Credito revolvente
+                    if (relacioncr == 0 && $('.campo10ddw-ce').select2('val') == "2") {
+                        $('.campo10ddw-ce').find('.select2-choice').css('border-color', 'red');
+                        productos = productos + '<b>Crédito Revolvente</b><br>';
+                        errors['error_CR'] = errors['error_FPR'] || {};
+                        errors['error_CR'].required = true;
+                    } else {
+                        $('.campo10ddw-ce').find('.select2-choice').css('border-color', '');
                     }
                     if (productos != "") {
                         app.alert.show("Faltante Relacion Proveedor de Recursos", {
@@ -4753,7 +4853,9 @@
                         var secuencia = data.records[i].secuencia;
                         var idDireccion = data.records[i].id;
                         var direccionCompleta = data.records[i].name;
-						var bloqueado = (indicadorSeleccionados.indexOf('2') != -1) ? 1 : 0;
+						            var bloqueado = (indicadorSeleccionados.indexOf('2') != -1) ? 1 : 0;
+                        var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
+                        if (accesoFiscal > 0) bloqueado = 0;
 
                         //Parsea a objeto direccion
                         var direccion = {
@@ -4793,7 +4895,7 @@
                             "secuencia": secuencia,
                             "id": idDireccion,
                             "direccionCompleta": direccionCompleta,
-							"bloqueado": bloqueado
+							              "bloqueado": bloqueado
                         };
 
                         //Agregar dirección
@@ -4962,6 +5064,10 @@
                     //CA
                     if (App.user.attributes.tipodeproducto_c == '3') {
                         contexto_cuenta.ProductosPLD.creditoAutomotriz.visible = 'block';
+                    }
+                    //CR
+                    if (App.user.attributes.tipodeproducto_c == '8') {
+                        contexto_cuenta.ProductosPLD.creditoRevolvente.visible = 'block';
                     }
                     //Genera objeto con valores previos para control de cancelar
                     contexto_cuenta.prev_ProductosPLD = app.utils.deepCopy(contexto_cuenta.ProductosPLD);

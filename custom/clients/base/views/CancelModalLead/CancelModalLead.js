@@ -81,9 +81,18 @@
 
                 }, self_modal_get)
             });
-        }
-        self_modal_get.closeModal();
+            self_modal_get.closeModal();
+        
+        } else {
 
+            $('#motivocancelacion').css('border-color', 'red');
+            
+            app.alert.show("alert-motivo-cancel-modal", {
+                level: "error",
+                title: "Debe seleccionar motivo de Cancelación de Lead.",
+                autoClose: false
+            });
+        }
     },
 
     closeModal: function () {
@@ -95,5 +104,11 @@
         $('.modal').modal('hide');
         $('.modal').remove();
         $('.modal-backdrop').remove();
+    },
+
+    _render: function () {
+        this._super("_render");
+        //Jquery para que no se cierre el modal con ESC o al dar clic afuera del modal
+        $('#CancelModalLead').modal({backdrop: 'static', keyboard: false});
     },
 })

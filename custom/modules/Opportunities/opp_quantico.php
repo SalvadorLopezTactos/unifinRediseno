@@ -32,6 +32,9 @@ class IntegracionQuantico
                 $tipoPersona="3";
             }
 
+            //Se define URL
+            $host=$sugar_config['quantico_url_base'] . '/CreditRequestIntegration/rest/CreditRequestApi/PostRegister';
+
             $body = array(
                 "RequestId" => $bean->idsolicitud_c,
                 "ProcessId" => $bean->id_process_c,
@@ -53,14 +56,17 @@ class IntegracionQuantico
                 "BackOfficeName" =>$app_list_strings['usuario_bo_0'][str_replace("^","",$arrayBo[0])]
             );
             $callApi = new UnifinAPI();
-            $resultado = $callApi->postQuantico($body, $auth_encode);
+            $resultado = $callApi->postQuantico($host,$body,$auth_encode);
             $GLOBALS['log']->fatal('Resultado: PEticion Quantico integracion ' . json_encode($resultado));
+
             if ($resultado['Success']) {
                 $GLOBALS['log']->fatal('Ha realizado correctamente');
                 $query = "UPDATE opportunities_cstm
-                              SET quantico_id_c ='" . $resultado['ErrorMessage'] . "'
-                              WHERE id_c = '" . $bean->id . "'";
+                              SET quantico_id_c ='{$resultado['ErrorMessage']}'
+                              WHERE id_c = '{$bean->id}'";
                 $queryResult = $db->query($query);
+                $bean->quantico_id_c=$resultado['ErrorMessage'];
+
             } else {
                 $GLOBALS['log']->fatal("Error al procesar la solicitud a Quantico, verifique información");
             }
@@ -68,6 +74,81 @@ class IntegracionQuantico
         }
 
 
+    }
+
+    public function QuanticoUpdate($bean = null, $event = null, $args = null)
+    {
+        $GLOBALS['log']->fatal('Inicia QuanticoUpdate');
+        global $sugar_config, $db,$app_list_strings,$current_user;
+        $user = $sugar_config['quantico_usr'];
+        $pwd = $sugar_config['quantico_psw'];
+        $auth_encode = base64_encode($user . ':' . $pwd);
+        
+        if ($bean->idsolicitud_c != "" && $bean->quantico_id_c != "" && $bean->cancelado_quantico_c=="" && $bean->tct_oportunidad_perdida_chk_c) {
+            $GLOBALS['log']->fatal('Inicia QuanticoUpdate');
+            //Se genera mensaje mediante las opciones de cancelacion
+            $mensaje="";
+            if($bean->tct_razon_op_perdida_ddw_c!=""){
+                switch ($bean->tct_razon_op_perdida_ddw_c) {
+                    case 'P':
+                        $mensaje = "El motivo de cancelación es el precio.";
+                        break;
+                    case 'C':
+                        $mensaje = "El motivo de cancelación se debe a que la empresa" .$bean->tct_competencia_quien_txf_c ." ".$bean->tct_competencia_porque_txf_c;
+                        break;
+                    case 'NPR':
+                        $mensaje = "No se cuenta con el producto ".$bean->tct_sin_prod_financiero_ddw_c;
+                        break;
+                    case 'PRP':
+                        $mensaje = "Se pagó con recursos propios.";
+                        break;
+                    case 'ANF':
+                        $mensaje = "Debido a activos no financiables.";
+                        break;
+                    case 'CDN':
+                        $mensaje = "El cliente decide no comprar el activo.";
+                        break;
+                    case 'CNC':
+                        $mensaje = "El cliente decide no ccompletó el expediente.";
+                        break;
+                    case 'TR':
+                        $mensaje = "Debido al tiempo de respuesta.";
+                        break;  
+                    case 'DI':
+                        $mensaje = "Debido datos incorrectos/duplicidad.";
+                        break;  
+                    case '10':
+                        $mensaje = "Debido que no cumple con el scoring comercial.";
+                        break;            
+                    default:
+                        $mensaje;
+                }
+            }
+
+            //Se define URL
+            $host=$sugar_config['quantico_url_base'] . '/CreditRequestIntegration/rest/CreditRequestApi/CancelCreditRequest';
+
+            $body = array(
+                "RequestNumber" => $bean->idsolicitud_c,
+                "UserComercialId" => $current_user->id_active_directory_c,
+                "Comment" => $mensaje
+            );
+            $callApi = new UnifinAPI();
+            $resultado = $callApi->postQuantico($host,$body,$auth_encode);
+            $GLOBALS['log']->fatal('Resultado: Actualizacion Quantico ' . json_encode($resultado));
+
+            if ($resultado['Success']) {
+                $GLOBALS['log']->fatal('Actualización Correcta');
+                $query = "UPDATE opportunities_cstm
+                              SET cancelado_quantico_c ='{$resultado['ErrorMessage']}'
+                              WHERE id_c = '{$bean->id}'";
+                $queryResult = $db->query($query);
+                
+            } else {
+                $GLOBALS['log']->fatal("Error al actualizar a Quantico");
+            }
+        }
+        $GLOBALS['log']->fatal('Finaliza QuanticoUpdate');
     }
 
 }

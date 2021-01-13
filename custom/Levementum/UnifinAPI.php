@@ -1389,6 +1389,7 @@ SQL;
     public function obtenSolicitudCredito($opportunidad)
     {
         global $current_user;
+        global $sugar_config;
         try {
             //Variables para factoraje, listas:
             $tipo_tasa_list[1] = "FIJA";
@@ -1499,9 +1500,9 @@ SQL;
                 $opportunidad['id_activo_c'] = $idActivoPrincipal;
                 $opportunidad['index_activo_c'] = $indexActivoPrincipal;
 
-                if (empty($opportunidad->multiactivo_c)) {
+                /*if (empty($opportunidad->multiactivo_c)) {
                     $indexActivoPrincipal = null;
-                }
+                }*/
 
                 array_shift($lista);
                 //$GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : lista sin 1 " . print_r($lista, true));
@@ -1613,6 +1614,11 @@ SQL;
                 "idProductoFinanciero" => $productoFinancieroId
 
             );
+            //Se valida si el Administrador de Cartera esta activo en el config y a nivel de solicitud/usuario
+            if ($opportunidad['admin_cartera_c'] == 1 && $sugar_config['service_admin_cartera'] == true) {
+                $fields['admin_cartera_active'] = true;
+            }
+
             //Si la Solicitud es de Credito SOS recalcula el valor del campo Riesgo a "Mayor".
             //          if ($opportunidad['tipo_producto_c']=="SOS"){  # PREGUNTAR SI SE CAMBIA POR PRODUCTO FINANCIERO
             if ($opportunidad['tipo_producto_c'] == "CREDITO SIMPLE" && $opportunidad['producto_financiero_c'] == 40) {
@@ -1728,7 +1734,9 @@ SQL;
 
             if( $opportunidad['tipo_producto_c'] == "LEASING" && $opportunidad['negocio_c'] == '3')
             {
-                $fields['arrendamientoEstructurado']= "1";
+                $fields['arrendamientoEstructurado']= true;
+            }else{
+              $fields['arrendamientoEstructurado']= false;
             }
 
             //CVV - 29/03/2016 - Si el proceso es para un BO se elimina el item de promotor y se agrega el grupo de asignación
@@ -2303,23 +2311,22 @@ SQL;
 
     }
 
-    public function postQuantico($bodyJson,$auth)
+    public function postQuantico($host,$body,$auth_encode)
     {
-        global $sugar_config;
         try {
-            $host=$sugar_config['quantico_url_base'] . '/CreditRequestIntegration/rest/CreditRequestApi/PostRegister';
-            $fields_string = json_encode($bodyJson);
+            $url = $host;
+            $fields_string = json_encode($body);
             $GLOBALS['log']->fatal('Entra Funcion postQuantico');
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_URL, $host);
+            curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
             curl_setopt($ch, CURLINFO_HEADER_OUT, 1);
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                     'Content-Type: application/json',
-                    'Authorization: Basic ' . $auth)
+                    'Authorization: Basic ' . $auth_encode)
             );
             $result = curl_exec($ch);
             $curl_info = curl_getinfo($ch);

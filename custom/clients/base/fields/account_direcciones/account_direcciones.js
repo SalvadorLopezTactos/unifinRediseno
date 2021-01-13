@@ -63,8 +63,8 @@
         this.def.listMapIndicador = App.lang.getAppListStrings('dir_indicador_map_list');
         this.def.listIndicador = App.lang.getAppListStrings('dir_indicador_unique_list');
         //Valida perfil de usuario para ocultar dirección fiscal
-        var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
-        if (accesoFiscal == 0) {
+        this.accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
+        if (this.accesoFiscal == 0) {
           var auxindicador = new Object();
           for (var [key, value] of Object.entries(this.def.listIndicador)) {
             if(key != "2"){
@@ -73,18 +73,16 @@
           }
           this.def.listIndicador = auxindicador;
         }
-
+        if (this.accesoFiscal > 0) this.bloqueado = 0;
         //Declaración de validation Tasks
         this.model.addValidationTask('check_multiple_fiscal', _.bind(this._doValidateDireccionIndicador, this));
 
         //Declaración de modelo para nueva dirección
         this.nuevaDireccion = this.limpiaNuevaDireccion();
-
     },
 
     _render: function () {
         this._super("_render");
-
     },
 
     getInfoAboutCP: function (evt) {
@@ -1308,7 +1306,7 @@
             "secuencia":"",
             "id":"",
             "direccionCompleta":"",
-			"bloqueado":""
+			      "bloqueado":""
         };
         return nuevaDireccion;
 
@@ -1397,17 +1395,16 @@
             }
         }
 
-		//Actualiza modelo
-			this.oDirecciones.direccion[index].indicadorSeleccionados = "";
-			this.oDirecciones.direccion[index].indicadorSeleccionados = '^'+indicadorSeleccionados.replace(/,/gi, "^,^")+'^';
-
-		var res = indicadorSeleccionados.split(",");
-		var bloqueado = (res.indexOf('2')!=-1) ? 1 : 0;
-		this.oDirecciones.direccion[index].bloqueado = bloqueado;
-		this.render();
-
-		document.getElementsByClassName("multi1_n_existing")[index].focus();
-		document.getElementsByClassName("postalInputTempExisting")[index].focus();
+    		//Actualiza modelo
+  			this.oDirecciones.direccion[index].indicadorSeleccionados = "";
+  			this.oDirecciones.direccion[index].indicadorSeleccionados = '^'+indicadorSeleccionados.replace(/,/gi, "^,^")+'^';
+    		var res = indicadorSeleccionados.split(",");
+    		var bloqueado = (res.indexOf('2')!=-1) ? 1 : 0;
+        if (this.accesoFiscal > 0) bloqueado = 0;
+    		this.oDirecciones.direccion[index].bloqueado = bloqueado;
+    		this.render();
+    		document.getElementsByClassName("multi1_n_existing")[index].focus();
+    		document.getElementsByClassName("postalInputTempExisting")[index].focus();
         //Actualiza modelo
         //this.oDirecciones.direccion[index].indicadorSeleccionados = "";
         //this.oDirecciones.direccion[index].indicadorSeleccionados = '^'+indicadorSeleccionados.replace(/,/gi, "^,^")+'^';
