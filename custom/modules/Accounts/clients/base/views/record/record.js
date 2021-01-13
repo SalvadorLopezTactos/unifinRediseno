@@ -5060,10 +5060,6 @@
                     if (App.user.attributes.tipodeproducto_c == '3') {
                         contexto_cuenta.ProductosPLD.creditoAutomotriz.visible = 'block';
                     }
-                    //CR
-                    if (App.user.attributes.tipodeproducto_c == '8') {
-                        contexto_cuenta.ProductosPLD.creditoRevolvente.visible = 'block';
-                    }
                     //Genera objeto con valores previos para control de cancelar
                     contexto_cuenta.prev_ProductosPLD = app.utils.deepCopy(contexto_cuenta.ProductosPLD);
                     pld.ProductosPLD = contexto_cuenta.ProductosPLD;
