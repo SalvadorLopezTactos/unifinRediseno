@@ -187,7 +187,7 @@
 			urla = urla.substring(0,urla.indexOf('#'))
 			app.alert.show("Creación Solicitud", {
 				level: "info",
-				title: "Se redirigió a la vista de creación de solicitudes.",
+				title: "Se redirigió a la vista de creación de solicitudes.<br> Cuenta con lo que resta del día en curso para registrar una pre solicitud",
 				autoClose: false
 			});
 			

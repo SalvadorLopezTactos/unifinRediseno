@@ -268,6 +268,44 @@ array (
           array (
             'newTab' => false,
             'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL8',
+            'label' => 'LBL_RECORDVIEW_PANEL8',
+            'columns' => 2,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'minuta_lead_management_lead',
+                'studio' => 'visible',
+                'label' => 'minuta_lead_management_lead',
+                'span' => 12,
+              ),
+            ),
+          ),
+          8 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL7',
+            'label' => 'LBL_RECORDVIEW_PANEL7',
+            'columns' => 2,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'minuta_lead_management',
+                'studio' => 'visible',
+                'label' => 'minuta_lead_management',
+                'span' => 12,
+              ),
+            ),
+          ),
+          9 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
             'name' => 'LBL_RECORDVIEW_PANEL5',
             'label' => 'LBL_RECORDVIEW_PANEL5',
             'columns' => 2,
@@ -284,7 +322,7 @@ array (
               ),
             ),
           ),
-          8 => 
+          10 => 
           array (
             'newTab' => false,
             'panelDefault' => 'expanded',
