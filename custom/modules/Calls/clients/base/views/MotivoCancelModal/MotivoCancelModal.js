@@ -107,7 +107,7 @@
 
     _render: function () {
         this._super("_render");
-
+        $('#MotivoCancelModal').modal({backdrop: 'static', keyboard: false});
         $('.record').attr('style', 'pointer-events:none');
         $('.dashboard').attr('style', 'pointer-events:none');
         $('.navbar').attr('style', 'pointer-events:none');

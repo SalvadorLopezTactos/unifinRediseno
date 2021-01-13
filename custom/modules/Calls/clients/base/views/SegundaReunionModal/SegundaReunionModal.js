@@ -102,6 +102,8 @@
             self_modal_get.dependenciasNV();
         });
         self_modal_get.dependenciasNV();
+
+        $('#SegundaReunionlModal').modal({backdrop: 'static', keyboard: false});
     },
 	
 	closeModal: function () {
