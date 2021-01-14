@@ -31,8 +31,6 @@
         'change .ciudadExisting': 'updateValueCiudadDE',     //Actualiza ciudad a modelo
         'click .principal': 'updatePrincipalDE',     //Actualiza principal a modelo
         'click .inactivo': 'updateInactivoDE',     //Actualiza inactivo a modelo
-
-
     },
 
     initialize: function (options) {
@@ -64,7 +62,16 @@
         this.def.listIndicador = App.lang.getAppListStrings('dir_indicador_unique_list');
         //Valida perfil de usuario para ocultar dirección fiscal
         this.accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
-        if (this.accesoFiscal == 0) {
+        if (this.accesoFiscal > 0) this.bloqueado = 0;
+        //Declaración de validation Tasks
+        this.model.addValidationTask('check_multiple_fiscal', _.bind(this._doValidateDireccionIndicador, this));
+        //Declaración de modelo para nueva dirección
+        this.nuevaDireccion = this.limpiaNuevaDireccion();
+    },
+
+    _render: function () {
+        this._super("_render");
+        if (this.accesoFiscal == 0 && this.model.get('tipo_registro_cuenta_c') != 4) {
           var auxindicador = new Object();
           for (var [key, value] of Object.entries(this.def.listIndicador)) {
             if(key != "2"){
@@ -72,17 +79,12 @@
             }
           }
           this.def.listIndicador = auxindicador;
+          this.nuevaDireccion.listIndicador = this.def.listIndicador;
         }
-        if (this.accesoFiscal > 0) this.bloqueado = 0;
-        //Declaración de validation Tasks
-        this.model.addValidationTask('check_multiple_fiscal', _.bind(this._doValidateDireccionIndicador, this));
-
-        //Declaración de modelo para nueva dirección
-        this.nuevaDireccion = this.limpiaNuevaDireccion();
-    },
-
-    _render: function () {
-        this._super("_render");
+        else {
+          this.def.listIndicador = App.lang.getAppListStrings('dir_indicador_unique_list');
+          this.nuevaDireccion.listIndicador = this.def.listIndicador;
+        }
     },
 
     getInfoAboutCP: function (evt) {
@@ -1268,7 +1270,6 @@
 
     limpiaNuevaDireccion: function(){
         //Declaración de modelo para nueva dirección
-
         var nuevaDireccion = {
             "tipodedireccion":"",
             "listTipo":this.def.listTipo,
