@@ -732,8 +732,9 @@
 		if ($.isEmptyObject(errors)&& this.model.get('parent_id') != "" && this.model.get('parent_type') == "Accounts" && this.model.get('status')=="Held") {
 			
 			app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + this.model.get('parent_id')), null, {
-                success: _.bind(function (data) {				
-				if (data > 0) {
+                success: _.bind(function (data) {
+                obj = JSON.parse(data);                
+				if ( obj.total > 0) {
 					// Cancelar - no esta interesado, NO viable, NO interesado- cita forada,Cancelada por el prospecto no le interesa
 					/*************************************************/
 					if (Modernizr.touch) {

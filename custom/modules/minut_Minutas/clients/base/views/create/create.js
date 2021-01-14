@@ -328,18 +328,18 @@
                                         });
                                         
                                         
-                                    //modelo.save();
-                                    modelo.save([],{
-                                        dataType:"text",
-                                        complete:function() {
-                                            //app.router.navigate(module_name , {trigger: true});
-                                            $('a[name=new_minuta]').hide()
-                                            SUGAR.App.controller.context.reloadData({});
-                                            $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
-                                            $('[data-name="assigned_user_name"]').removeAttr("style");
-                                        }
-                                    });                                    
-                                    callback(null, fields, errors);
+                                        //modelo.save();
+                                        modelo.save([],{
+                                            dataType:"text",
+                                            complete:function() {
+                                                //app.router.navigate(module_name , {trigger: true});
+                                                $('a[name=new_minuta]').hide()
+                                                SUGAR.App.controller.context.reloadData({});
+                                                $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                                $('[data-name="assigned_user_name"]').removeAttr("style");
+                                            }
+                                        });                                    
+                                        callback(null, fields, errors);
                                    
                                     }
                                 }
@@ -392,16 +392,14 @@
                                         // Se cerró una venta
                                         // Se procede a generar expediente
                                         // Está interesado solicita cotización para proceder
-                                        modelLead.set('subtipo_registro_c', "4");
-                                        modelLead.save();
                                         var filter_arguments = {
                                             "id": parent_id_acc
                                         };
                                         app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
                                             success: _.bind(function (data) {
                                                 console.log(data);
-                                                app.alert.dismiss('upload');
-                                                app.controller.context.reloadData({});
+                                                //app.alert.dismiss('upload');
+                                                //app.controller.context.reloadData({});
                                                 if (data.idCuenta === "") {
                                                     app.alert.show("Conversión", {
                                                         level: "error",
@@ -417,7 +415,20 @@
                                                         messages: data.mensaje,
                                                         autoClose: false
                                                     });
+                                                    modelLead.set('subtipo_registro_c', "4");
+                                                    modelLead.save();
                                                     //this._disableActionsSubpanel();
+                                                    //modelo.save();
+                                                    modelo.save([],{
+                                                        dataType:"text",
+                                                        complete:function() {
+                                                            //app.router.navigate(module_name , {trigger: true});
+                                                            $('a[name=new_minuta]').hide()
+                                                            SUGAR.App.controller.context.reloadData({});
+                                                            $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                                            $('[data-name="assigned_user_name"]').removeAttr("style");
+                                                        }
+                                                    }); 
                                                 }
                                             }, this),
                                             failure: _.bind(function (data) {
@@ -428,29 +439,40 @@
                                             error: _.bind(function (data) {
                                                 errors['status'] = errors['status'] || {};
                                                 errors['status'].required = true;
-                                                app.alert.dismiss('upload');                                            }, this)
+                                                app.alert.dismiss('upload');                                            
+                                            }, this)
                                         });
                                     }else if(self.model.get('resultado_c')=='3'){
                                         modelLead.set('subtipo_registro_c', "2");
                                         modelLead.set('status_management_c', "2");
                                         modelLead.save();
-                                        modelo.save();
+                                         //modelo.save();
+                                        modelo.save([],{
+                                        dataType:"text",
+                                        complete:function() {
+                                                //app.router.navigate(module_name , {trigger: true});
+                                                $('a[name=new_minuta]').hide()
+                                                SUGAR.App.controller.context.reloadData({});
+                                                $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                                $('[data-name="assigned_user_name"]').removeAttr("style");
+                                            }
+                                        });    
                                     }else{
                                         modelLead.set('subtipo_registro_c', "2");
                                         modelLead.save();
-                                        modelo.save();
+                                        //modelo.save();
+                                        modelo.save([],{
+                                            dataType:"text",
+                                            complete:function() {
+                                                    //app.router.navigate(module_name , {trigger: true});
+                                                    $('a[name=new_minuta]').hide()
+                                                    SUGAR.App.controller.context.reloadData({});
+                                                    $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                                    $('[data-name="assigned_user_name"]').removeAttr("style");
+                                                }
+                                            }); 
                                     }
-                                    //modelo.save();
-                                    modelo.save([],{
-                                        dataType:"text",
-                                        complete:function() {
-                                            //app.router.navigate(module_name , {trigger: true});
-                                            $('a[name=new_minuta]').hide()
-                                            SUGAR.App.controller.context.reloadData({});
-                                            $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
-                                            $('[data-name="assigned_user_name"]').removeAttr("style");
-                                        }
-                                    });                                    
+                                                                   
                                     callback(null, fields, errors);
                                 }else{
                                     callback(null, fields, errors);
@@ -1066,7 +1088,8 @@
                 }else{
                     app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + parent_id_acc), null, {
                         success: _.bind(function (data) {
-                            if(parent_type1== "Accounts" && data > 0){
+                            obj = JSON.parse(data);
+                            if(parent_type1== "Accounts" && obj.total > 0){
                                 if( this.model.get('resultado_c') != "" ){
                                     $('[data-panelname="LBL_RECORDVIEW_PANEL7"]').removeClass('hide');
                                     self.render();
@@ -1104,8 +1127,8 @@
                     //console.log(parent_id_acc);
                     app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + parent_id_acc), null, {
                         success: _.bind(function (data) {
-                            console.log('Data: '+data);
-                            if(data > 0){
+                            obj = JSON.parse(data);
+                            if(dobj.total > 0){
                                 //$('[data-panelname="LBL_RECORDVIEW_PANEL4"]').removeClass('hide');
                                 self.tipo_account = true;
                                 //self.render();
