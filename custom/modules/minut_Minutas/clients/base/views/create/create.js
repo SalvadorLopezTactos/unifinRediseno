@@ -472,8 +472,6 @@
                                                 }
                                             }); 
                                     }
-                                                                   
-                                    callback(null, fields, errors);
                                 }else{
                                     callback(null, fields, errors);
                                 }
