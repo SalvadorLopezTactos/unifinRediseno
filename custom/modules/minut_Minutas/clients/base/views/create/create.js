@@ -328,18 +328,18 @@
                                         });
                                         
                                         
-                                    //modelo.save();
-                                    modelo.save([],{
-                                        dataType:"text",
-                                        complete:function() {
-                                            //app.router.navigate(module_name , {trigger: true});
-                                            $('a[name=new_minuta]').hide()
-                                            SUGAR.App.controller.context.reloadData({});
-                                            $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
-                                            $('[data-name="assigned_user_name"]').removeAttr("style");
-                                        }
-                                    });                                    
-                                    callback(null, fields, errors);
+                                        //modelo.save();
+                                        modelo.save([],{
+                                            dataType:"text",
+                                            complete:function() {
+                                                //app.router.navigate(module_name , {trigger: true});
+                                                $('a[name=new_minuta]').hide()
+                                                SUGAR.App.controller.context.reloadData({});
+                                                $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                                $('[data-name="assigned_user_name"]').removeAttr("style");
+                                            }
+                                        });                                    
+                                        callback(null, fields, errors);
                                    
                                     }
                                 }
@@ -418,6 +418,17 @@
                                                         autoClose: false
                                                     });
                                                     //this._disableActionsSubpanel();
+                                                    //modelo.save();
+                                                    modelo.save([],{
+                                                        dataType:"text",
+                                                        complete:function() {
+                                                            //app.router.navigate(module_name , {trigger: true});
+                                                            $('a[name=new_minuta]').hide()
+                                                            SUGAR.App.controller.context.reloadData({});
+                                                            $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                                            $('[data-name="assigned_user_name"]').removeAttr("style");
+                                                        }
+                                                    }); 
                                                 }
                                             }, this),
                                             failure: _.bind(function (data) {
@@ -434,23 +445,33 @@
                                         modelLead.set('subtipo_registro_c', "2");
                                         modelLead.set('status_management_c', "2");
                                         modelLead.save();
-                                        modelo.save();
+                                         //modelo.save();
+                                        modelo.save([],{
+                                        dataType:"text",
+                                        complete:function() {
+                                                //app.router.navigate(module_name , {trigger: true});
+                                                $('a[name=new_minuta]').hide()
+                                                SUGAR.App.controller.context.reloadData({});
+                                                $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                                $('[data-name="assigned_user_name"]').removeAttr("style");
+                                            }
+                                        });    
                                     }else{
                                         modelLead.set('subtipo_registro_c', "2");
                                         modelLead.save();
-                                        modelo.save();
+                                        //modelo.save();
+                                        modelo.save([],{
+                                            dataType:"text",
+                                            complete:function() {
+                                                    //app.router.navigate(module_name , {trigger: true});
+                                                    $('a[name=new_minuta]').hide()
+                                                    SUGAR.App.controller.context.reloadData({});
+                                                    $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                                    $('[data-name="assigned_user_name"]').removeAttr("style");
+                                                }
+                                            }); 
                                     }
-                                    //modelo.save();
-                                    modelo.save([],{
-                                        dataType:"text",
-                                        complete:function() {
-                                            //app.router.navigate(module_name , {trigger: true});
-                                            $('a[name=new_minuta]').hide()
-                                            SUGAR.App.controller.context.reloadData({});
-                                            $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
-                                            $('[data-name="assigned_user_name"]').removeAttr("style");
-                                        }
-                                    });                                    
+                                                                   
                                     callback(null, fields, errors);
                                 }else{
                                     callback(null, fields, errors);
