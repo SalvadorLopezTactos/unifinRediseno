@@ -16,3 +16,5 @@ $mod_strings['LBL_DOCUMENTOS'] = 'Documentos';
 $mod_strings['LBL_RECORDVIEW_PANEL5'] = 'Nueva Reunión/Llamada';
 $mod_strings['LBL_TCT_COMMENTS_REL_TXA'] = 'Comentarios relevantes de la reunión';
 $mod_strings['LBL_RECORDVIEW_PANEL6'] = 'Referencias';
+$mod_strings['LBL_RECORDVIEW_PANEL8'] = 'Lead Management';
+$mod_strings['LBL_RECORDVIEW_PANEL7'] = 'Lead Management';
