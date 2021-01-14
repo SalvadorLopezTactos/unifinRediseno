@@ -67,23 +67,27 @@
         this.model.addValidationTask('check_multiple_fiscal', _.bind(this._doValidateDireccionIndicador, this));
         //Declaración de modelo para nueva dirección
         this.nuevaDireccion = this.limpiaNuevaDireccion();
+        this.cont_render = 0;
     },
 
     _render: function () {
         this._super("_render");
-        if (this.accesoFiscal == 0 && this.model.get('tipo_registro_cuenta_c') != 4) {
+        if (this.accesoFiscal == 0 && this.model.get('tipo_registro_cuenta_c') != 4 && this.cont_render == 0) {
           var auxindicador = new Object();
           for (var [key, value] of Object.entries(this.def.listIndicador)) {
             if(key != "2"){
               auxindicador[key]  = value;
             }
           }
+          this.cont_render = 1;
           this.def.listIndicador = auxindicador;
           this.nuevaDireccion.listIndicador = this.def.listIndicador;
+          this.render();
         }
         else {
           this.def.listIndicador = App.lang.getAppListStrings('dir_indicador_unique_list');
           this.nuevaDireccion.listIndicador = this.def.listIndicador;
+          this.cont_render = 0;
         }
     },
 
