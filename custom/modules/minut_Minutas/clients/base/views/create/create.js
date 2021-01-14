@@ -392,16 +392,14 @@
                                         // Se cerró una venta
                                         // Se procede a generar expediente
                                         // Está interesado solicita cotización para proceder
-                                        modelLead.set('subtipo_registro_c', "4");
-                                        modelLead.save();
                                         var filter_arguments = {
                                             "id": parent_id_acc
                                         };
                                         app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
                                             success: _.bind(function (data) {
                                                 console.log(data);
-                                                app.alert.dismiss('upload');
-                                                app.controller.context.reloadData({});
+                                                //app.alert.dismiss('upload');
+                                                //app.controller.context.reloadData({});
                                                 if (data.idCuenta === "") {
                                                     app.alert.show("Conversión", {
                                                         level: "error",
@@ -417,6 +415,8 @@
                                                         messages: data.mensaje,
                                                         autoClose: false
                                                     });
+                                                    modelLead.set('subtipo_registro_c', "4");
+                                                    modelLead.save();
                                                     //this._disableActionsSubpanel();
                                                     //modelo.save();
                                                     modelo.save([],{
