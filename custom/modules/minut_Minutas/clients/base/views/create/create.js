@@ -439,7 +439,8 @@
                                             error: _.bind(function (data) {
                                                 errors['status'] = errors['status'] || {};
                                                 errors['status'].required = true;
-                                                app.alert.dismiss('upload');                                            }, this)
+                                                app.alert.dismiss('upload');                                            
+                                            }, this)
                                         });
                                     }else if(self.model.get('resultado_c')=='3'){
                                         modelLead.set('subtipo_registro_c', "2");
