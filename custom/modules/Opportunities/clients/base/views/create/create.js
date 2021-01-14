@@ -1533,7 +1533,7 @@
     */
    _contactoPrevio: function () {
         
-        app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + this.model.get('parent_id')), null, {
+        app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + self.model.attributes.account_id), null, {
             success: _.bind(function (data) {
                 obj = JSON.parse(data);                
                 if ( obj.total_account == 0) {
