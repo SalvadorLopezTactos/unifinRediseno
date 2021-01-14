@@ -1087,7 +1087,8 @@
                 }else{
                     app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + parent_id_acc), null, {
                         success: _.bind(function (data) {
-                            if(parent_type1== "Accounts" && data > 0){
+                            obj = JSON.parse(data);
+                            if(parent_type1== "Accounts" && obj.total > 0){
                                 if( this.model.get('resultado_c') != "" ){
                                     $('[data-panelname="LBL_RECORDVIEW_PANEL7"]').removeClass('hide');
                                     self.render();
@@ -1125,8 +1126,8 @@
                     //console.log(parent_id_acc);
                     app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + parent_id_acc), null, {
                         success: _.bind(function (data) {
-                            console.log('Data: '+data);
-                            if(data > 0){
+                            obj = JSON.parse(data);
+                            if(dobj.total > 0){
                                 //$('[data-panelname="LBL_RECORDVIEW_PANEL4"]').removeClass('hide');
                                 self.tipo_account = true;
                                 //self.render();
