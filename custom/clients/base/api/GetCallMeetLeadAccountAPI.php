@@ -37,7 +37,22 @@ class GetCallMeetLeadAccountAPI extends SugarApi
         //$GLOBALS['log']->fatal('id cliente: '. $id_cliente);
         $GLOBALS['log']->fatal('>>>>>>>Entro Encuentra llamadas reuniones Cuentas  y Lead'. $id_cliente);//------------------------------------
         //------------------------------------
-        
+        $query = "select call_account + meet_account as total from 
+        (select count(parent_id) call_account from calls where status = 'Held' 
+            and deleted = 0  and parent_id= '{$id_cliente}') as callac ,
+        (select count(parent_id) meet_account from meetings where status = 'Held' and deleted = 0  
+            and parent_id= '{$id_cliente}') as meeac";
+
+        //$GLOBALS['log']->fatal('qUERY: ',$query);//----------------------
+        $results = $GLOBALS['db']->query($query);
+        while($row = $GLOBALS['db']->fetchByAssoc($results) ){
+            //Use $row['id'] to grab the id fields value
+            $total = $row['total'];
+        }
+        $GLOBALS['log']->fatal('Total accounts: ',$total);//----------------------
+
+        $salida->total_account = $total;
+
         $query = "select call_account + call_lead + meet_account + meet_lead as total from 
         (select count(parent_id) call_account from calls where status = 'Held' 
             and deleted = 0  and parent_id= '{$id_cliente}') as callac ,
@@ -58,9 +73,12 @@ class GetCallMeetLeadAccountAPI extends SugarApi
             //Use $row['id'] to grab the id fields value
             $total = $row['total'];
         }
-
         $GLOBALS['log']->fatal('Total comunicación: ',$total);//----------------------
-        return $total;
+
+        $salida->total = $total;
+
+        $myJSON = json_encode($salida);
+        return $myJSON;
         //return $id_cliente;
     }
 }
