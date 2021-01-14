@@ -449,7 +449,7 @@
         this.$(".record-cell[data-name='blank_space']").hide();
         //Oculta Botón Generar RFC
         var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
-        if (accesoFiscal == 0) {
+        if (accesoFiscal == 0 && this.model.get('tipo_registro_cuenta_c') != '4') {
           this.$('div[data-name=rfc_c]').css("pointer-events", "none");
           this.$('div[data-name="generar_rfc_c"]').hide();
         }
