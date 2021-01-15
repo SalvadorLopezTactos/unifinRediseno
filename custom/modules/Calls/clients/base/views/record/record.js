@@ -632,6 +632,7 @@
 			var lead = app.data.createBean('Leads', {id:this.model.get('parent_id')});
 			lead.fetch({
 			    success: _.bind(function (model) {
+                    var puesto_usuario=App.user.attributes.puestousuario_c;
                 if(model.get('subtipo_registro_c')=='1'){
                     if(this.model.get('tct_resultado_llamada_ddw_c')=='Ilocalizable' || this.model.get('tct_resultado_llamada_ddw_c')=='No_esta_Interesado' || this.model.get('tct_resultado_llamada_ddw_c')=='Fuera_de_Perfil'){
                         model.set('lead_cancelado_c', true);
@@ -668,7 +669,7 @@
                         this.layout.trigger("app:view:MotivoCancelModal");
                         /**************************************/
                         callback(null, fields, errors);
-                    }else if(this.model.get('tct_resultado_llamada_ddw_c')=='Checklist_expediente' ){
+                    }else if(this.model.get('tct_resultado_llamada_ddw_c')=='Checklist_expediente' && puesto_usuario!="27" && puesto_usuario!="31"){
                         var filter_arguments = {
                             "id": this.model.get('parent_id')
                         };

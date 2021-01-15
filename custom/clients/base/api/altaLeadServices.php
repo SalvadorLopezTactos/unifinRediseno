@@ -235,8 +235,8 @@ GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
         } else {
 
             if ($data_result['lead']['status'] == 200 && $data_result['asociados'][0]['status'] == 200) {
-                $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
-                $new_assigned_user = $users[$new_indice];
+               // $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
+               // $new_assigned_user = $users[$new_indice];
                 $id_lead = $data_result['lead']['id'];
                 $id_lead_asociado = $data_result['asociados'][0]['id'];
 
@@ -247,19 +247,24 @@ GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
                 $update_assigne_user_asociado = "UPDATE leads SET  assigned_user_id ='$new_assigned_user'  WHERE id ='$id_lead_asociado' ";
                 $db->query($update_assigne_user_asociado);
 
-                $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
-                $db->query($update_assigne_user);
+                if ( $new_indice > -1 ) {
+                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
+                    $db->query($update_assigne_user);
+                }
+
             } elseif ($data_result['lead']['status'] == 200) {
 
-                $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
-                $new_assigned_user = $users[$new_indice];
+               // $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
+                //$new_assigned_user = $users[$new_indice];
                 $id_lead = $data_result['lead']['id'];
 
                 $update_assigne_user = "UPDATE leads SET  assigned_user_id ='$new_assigned_user'  WHERE id ='$id_lead' ";
                 $db->query($update_assigne_user);
 
-                $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
-                $db->query($update_assigne_user);
+                if ( $new_indice > -1 ) {
+                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
+                    $db->query($update_assigne_user);
+                }
             } elseif (($data_result['lead']['status'] == 503 && $data_result['lead']['modulo'] == 'Leads') && $data_result['asociados'][0]['status'] == 200) {
 
                 $id_lead = $data_result['lead']['id'];

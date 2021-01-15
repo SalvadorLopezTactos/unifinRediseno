@@ -794,7 +794,7 @@ extendsFrom: 'RecordView',
                                     if (data.fechadenacimiento_c == "") {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-Fecha de Nacimiento<br></b>';
                                     }
-                                    if (data.nacionalidad_c == "") {
+                                    if (data.nacionalidad_c == "0") {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
                                     }
                                     if (data.rfc_c == "") {
@@ -920,7 +920,7 @@ extendsFrom: 'RecordView',
                                     if (data.fechadenacimiento_c == "") {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-Fecha de Nacimiento<br></b>';
                                     }
-                                    if (data.nacionalidad_c == "") {
+                                    if (data.nacionalidad_c == "0") {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
                                     }
                                     if (data.rfc_c == "") {
@@ -956,7 +956,7 @@ extendsFrom: 'RecordView',
                                     if (data.razonsocial_c == "") {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-Denominación o Razón Social<br></b>';
                                     }
-                                    if (data.nacionalidad_c == "") {
+                                    if (data.nacionalidad_c == "0") {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
                                     }
                                     if (data.rfc_c == "") {

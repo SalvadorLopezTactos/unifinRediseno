@@ -34,10 +34,13 @@ class IntegracionQuantico
 
             //Se define URL
             $host=$sugar_config['quantico_url_base'] . '/CreditRequestIntegration/rest/CreditRequestApi/PostRegister';
+            $beanUser = BeanFactory::retrieveBean('Users', $bean->assigned_user_id);
+            $idActiveDirectory=$beanUser->id_active_directory_c;
 
             $body = array(
                 "RequestId" => $bean->idsolicitud_c,
                 "ProcessId" => $bean->id_process_c,
+                "OpportunitiesId" => $bean->id,
                 "ClientId" => $bean->account_id,
                 "ClientName" => $bean->account_name,
                 "ProductId" => $bean->producto_financiero_c,
@@ -47,7 +50,7 @@ class IntegracionQuantico
                 "CurrencyTypeId" => "1",
                 "RequestAmount" => $bean->monto_c,
                 "IncreaseAmount" => "0",
-                "AdviserId" => $bean->assigned_user_id,
+                "AdviserId" => $idActiveDirectory,
                 "AdviserName" => $bean->assigned_user_name,
                 //"SinglePaymentPercentage"=>$bean->porciento_ri_c,
                 "SinglePaymentPercentage" => '0',
@@ -55,6 +58,7 @@ class IntegracionQuantico
                 "BackOfficeId" => str_replace("^","", $arrayBo[0]),
                 "BackOfficeName" =>$app_list_strings['usuario_bo_0'][str_replace("^","",$arrayBo[0])]
             );
+            $GLOBALS['log']->fatal('Body Quantico integracion ' . json_encode($body));
             $callApi = new UnifinAPI();
             $resultado = $callApi->postQuantico($host,$body,$auth_encode);
             $GLOBALS['log']->fatal('Resultado: PEticion Quantico integracion ' . json_encode($resultado));
