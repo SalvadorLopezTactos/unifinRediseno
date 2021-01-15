@@ -382,6 +382,16 @@
                                             messages: 'Lead Cancelado',
                                             autoClose: true
                                         });
+                                        modelo.save([],{
+                                            dataType:"text",
+                                            complete:function() {
+                                                //app.router.navigate(module_name , {trigger: true});
+                                                $('a[name=new_minuta]').hide()
+                                                SUGAR.App.controller.context.reloadData({});
+                                                $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                                $('[data-name="assigned_user_name"]').removeAttr("style");
+                                            }
+                                        });
                                     
                                     }else if(self.model.get('resultado_c')=='4' ||self.model.get('resultado_c')=='5' || self.model.get('resultado_c')=='19' 
                                     || self.model.get('resultado_c')=='6' || self.model.get('resultado_c')=='7' || self.model.get('resultado_c')=='23'){
@@ -409,13 +419,16 @@
                                                     errors['status'] = errors['status'] || {};
                                                     errors['status'].required = true;
                                                     callback(null, fields, errors);
-                                                } else {
+                                                } else { 
+
                                                     app.alert.show("Conversión", {
                                                         level: "success",
                                                         messages: data.mensaje,
                                                         autoClose: false
                                                     });
+
                                                     modelLead.set('subtipo_registro_c', "4");
+                                                    modelLead.set('account_id',data.idCuenta);
                                                     modelLead.save();
                                                     //this._disableActionsSubpanel();
                                                     //modelo.save();
@@ -428,7 +441,7 @@
                                                             $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
                                                             $('[data-name="assigned_user_name"]').removeAttr("style");
                                                         }
-                                                    }); 
+                                                    });                                                     
                                                 }
                                             }, this),
                                             failure: _.bind(function (data) {
