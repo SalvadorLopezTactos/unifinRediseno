@@ -382,16 +382,18 @@
                                             messages: 'Lead Cancelado',
                                             autoClose: true
                                         });
-                                        modelo.save([],{
-                                            dataType:"text",
-                                            complete:function() {
-                                                //app.router.navigate(module_name , {trigger: true});
-                                                $('a[name=new_minuta]').hide()
-                                                SUGAR.App.controller.context.reloadData({});
-                                                $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
-                                                $('[data-name="assigned_user_name"]').removeAttr("style");
-                                            }
-                                        });
+
+                                        modelo.save();
+                                        //modelo.save([],{
+                                        //    dataType:"text",
+                                        //    complete:function() {
+                                        //        //app.router.navigate(module_name , {trigger: true});
+                                        //        $('a[name=new_minuta]').hide()
+                                        //        SUGAR.App.controller.context.reloadData({});
+                                        //        $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                        //        $('[data-name="assigned_user_name"]').removeAttr("style");
+                                        //    }
+                                        //});
                                     
                                     }else if(self.model.get('resultado_c')=='4' ||self.model.get('resultado_c')=='5' || self.model.get('resultado_c')=='19' 
                                     || self.model.get('resultado_c')=='6' || self.model.get('resultado_c')=='7' || self.model.get('resultado_c')=='23'){
@@ -456,34 +458,33 @@
                                             }, this)
                                         });
                                     }else if(self.model.get('resultado_c')=='3'){
+                                        modelo.save();
                                         modelLead.set('subtipo_registro_c', "2");
                                         modelLead.set('status_management_c', "2");
-                                        modelLead.save();
-                                         //modelo.save();
-                                        modelo.save([],{
-                                        dataType:"text",
-                                        complete:function() {
-                                                //app.router.navigate(module_name , {trigger: true});
-                                                $('a[name=new_minuta]').hide()
-                                                SUGAR.App.controller.context.reloadData({});
-                                                $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
-                                                $('[data-name="assigned_user_name"]').removeAttr("style");
-                                            }
-                                        });    
+                                        modelLead.save();                                        
+                                        //modelo.save([],{
+                                        //dataType:"text",
+                                        //complete:function() {
+                                        //        //app.router.navigate(module_name , {trigger: true});
+                                        //        $('a[name=new_minuta]').hide()
+                                        //        SUGAR.App.controller.context.reloadData({});
+                                        //        $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                        //        $('[data-name="assigned_user_name"]').removeAttr("style");
+                                        //    }
+                                        //});    
                                     }else{
+                                        modelo.save();
                                         modelLead.set('subtipo_registro_c', "2");
                                         modelLead.save();
-                                        //modelo.save();
-                                        modelo.save([],{
-                                            dataType:"text",
-                                            complete:function() {
-                                                    //app.router.navigate(module_name , {trigger: true});
-                                                    $('a[name=new_minuta]').hide()
-                                                    SUGAR.App.controller.context.reloadData({});
-                                                    $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
-                                                    $('[data-name="assigned_user_name"]').removeAttr("style");
-                                                }
-                                            }); 
+                                        //    dataType:"text",
+                                        //    complete:function() {
+                                        //            //app.router.navigate(module_name , {trigger: true});
+                                        //            $('a[name=new_minuta]').hide()
+                                        //            SUGAR.App.controller.context.reloadData({});
+                                        //            $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                        //            $('[data-name="assigned_user_name"]').removeAttr("style");
+                                        //        }
+                                        //    }); 
                                     }                            
                                     //callback(null, fields, errors);
                                 }else{
