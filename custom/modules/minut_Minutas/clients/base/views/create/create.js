@@ -458,10 +458,11 @@
                                             }, this)
                                         });
                                     }else if(self.model.get('resultado_c')=='3'){
-                                        modelo.save();
+                                        
                                         modelLead.set('subtipo_registro_c', "2");
                                         modelLead.set('status_management_c', "2");
                                         modelLead.save();                                        
+                                        modelo.save();
                                         //modelo.save([],{
                                         //dataType:"text",
                                         //complete:function() {
@@ -472,10 +473,10 @@
                                         //        $('[data-name="assigned_user_name"]').removeAttr("style");
                                         //    }
                                         //});    
-                                    }else{
-                                        modelo.save();
+                                    }else{                                        
                                         modelLead.set('subtipo_registro_c', "2");
                                         modelLead.save();
+                                        modelo.save();
                                         //    dataType:"text",
                                         //    complete:function() {
                                         //            //app.router.navigate(module_name , {trigger: true});
