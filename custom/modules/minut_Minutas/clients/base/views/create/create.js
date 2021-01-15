@@ -471,11 +471,12 @@
                                                     $('[data-name="assigned_user_name"]').removeAttr("style");
                                                 }
                                             }); 
-                                    }
+                                    }                            
+                                    //callback(null, fields, errors);
                                 }else{
                                     callback(null, fields, errors);
                                 }
-                                //callback(null, fields, errors);				   
+                                callback(null, fields, errors);
                             }, this)
                             });
                         }
