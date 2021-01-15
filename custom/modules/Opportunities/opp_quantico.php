@@ -143,7 +143,7 @@ class IntegracionQuantico
                               SET cancelado_quantico_c ='{$resultado['ErrorMessage']}'
                               WHERE id_c = '{$bean->id}'";
                 $queryResult = $db->query($query);
-                
+                $bean->cancelado_quantico_c=$resultado['ErrorMessage'];
             } else {
                 $GLOBALS['log']->fatal("Error al actualizar a Quantico");
             }
