@@ -60,12 +60,12 @@ and lc.subtipo_registro_c not in('4','3') and l.deleted=0";//4 - Convertido, 3 -
 INNER JOIN accounts_cstm ac on ac.id_c = a.id
 INNER JOIN accounts_uni_productos_1_c aup on aup.accounts_uni_productos_1accounts_ida = ac.id_c
 INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb
+and up.tipo_producto = '1'
 INNER JOIN uni_productos_cstm upc on upc.id_c = up.id
+and (upc.status_management_c IS NULL OR upc.status_management_c = '1')
 WHERE ac.tipo_registro_cuenta_c = '2'
 and ac.subtipo_registro_cuenta_c IN ('2','7','8')
 and ac.user_id_c = '{$id_user}'
-and up.tipo_producto = '1'
-and upc.status_management_c IS NULL OR upc.status_management_c = '1'
 and a.deleted = 0 and up.deleted = 0";
     //tipo_registro_cuenta_c 2 - Prospecto , subtipo_registro_cuenta_c=2 - Contactado,7-Interesado, 8 - Integración de Expediente
 
