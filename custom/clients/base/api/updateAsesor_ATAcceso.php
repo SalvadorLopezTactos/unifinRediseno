@@ -24,22 +24,59 @@ class updateAsesor_ATAcceso extends SugarApi
 
     public function updateAgentesTele($api, $args)
     {
+        $records = $args['data']['seleccionados'];
+        $nuevoHorario = $args['data']['horario'];
+        //$GLOBALS['log']->fatal("Usuarios " . print_r($nuevoHorario, true));
+        //$GLOBALS['log']->fatal("Records  " . count($args['data']['seleccionados']));
+
+        for ($i = 0; $i < count($records); $i++) {
+            //$GLOBALS['log']->fatal("Records  " . $records[$i]);
+            $idUser = $records[$i];
+            $user = BeanFactory::getBean('Users', $idUser, array('disable_row_level_security' => true));
+            $arrNHorario = json_decode($nuevoHorario, true);
+            $hAnterior = json_decode($user->access_hours_c, true);
+            if (!$args['data']['excluir']) {
+                if ($hAnterior != "") {
+                    //$GLOBALS['log']->fatal("antes del update " . print_r($hAnterior, true));
+                    foreach ($arrNHorario as $index => $item) {
+                        $row_update = $arrNHorario[$index]['update'];
+                        //$GLOBALS['log']->fatal("Horario nuevo index  " . $index);
+                        //$GLOBALS['log']->fatal("Horario nuevo update  " . $arrNHorario[$index]['update']);
+
+                        if ($row_update == "true") {
+                            //$GLOBALS['log']->fatal("Actualizado ");
+                            $hAnterior[$index]['entrada'] = $arrNHorario[$index]['entrada'];
+                            $hAnterior[$index]['salida'] = $arrNHorario[$index]['salida'];
+                        }
+                    }
+                    //$GLOBALS['log']->fatal("despues del update " . print_r($hAnterior, true));
+
+                    $jsonhorario = json_encode($hAnterior, true);
+                    $this->updateQuery($jsonhorario, $idUser);
+
+                } else {
+                    $this->updateQuery($nuevoHorario, $idUser);
+                }
+            } else {
+                $this->updateQuery($nuevoHorario, $idUser);
+            }
+        }
+        return true;
+    }
+
+    public function updateQuery($nuevoHorario, $id)
+    {
         global $db;
-        $records = "'" . join("','", $args['data']['seleccionados']) . "'";
-        $nuevoHorario =  !$args['data']['excluir']? $args['data']['horario']:"";
+        try {
+            $Query = "UPDATE users_cstm
+ SET access_hours_c ='{$nuevoHorario}'
+ WHERE id_c = '{$id}'";
+            $result = $GLOBALS['db']->query($Query);
+        } catch (Exception $e) {
+            $GLOBALS['log']->fatal("Error Actualizando  " . $e);
+        }
 
-        //$GLOBALS['log']->fatal("Records  " . $records);
-        //$GLOBALS['log']->fatal("Usuarios " . print_r($nuevoHorario,true));
 
-
-        $Query = "UPDATE users_cstm
-SET access_hours_c ='{$nuevoHorario}'
-WHERE id_c IN ($records)";
-        $result = $GLOBALS['db']->query($Query);
-        $GLOBALS['log']->fatal("Usuarios " . $Query);
-        $GLOBALS['log']->fatal("Usuarios " . $result);
-
-        return $result;
     }
 
 

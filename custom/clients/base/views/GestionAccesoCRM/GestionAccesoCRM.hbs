@@ -25,40 +25,109 @@
 
     .SetHorario th {
         padding: 5px;
-        width: 75px;
+        /*width: 75px;*/
         background-color: #22608c;
     }
 
     .SetHorario td {
         padding: 5px;
-        width: 75px;
+        /*width: 75px;*/
         background-color: #f6f8f9;
     }
 
     .modal {
         position: fixed;
         top: 15%;
-        left: 21%;
+        left: 13%;
         z-index: 1050;
         width: 560px;
         margin-left: -280px;
-        background-color: #6c6c6cbd;
+        background-color: rgba(111, 112, 113, 0.67);
         background-clip: padding-box;
         outline: none;
     }
+
     select {
         width: 75px;
         border: 1px solid #f6f6f6;
         background-color: #fff;
     }
-    .dia
-    {
+
+    .dia {
         background: #1a74c2;
         color: white;
 
     }
 
+    .close {
+        float: right;
+        font-size: 30px;
+        font-weight: bold;
+        line-height: 18px;
+        color: rgb(255, 0, 11);
+        text-shadow: rgb(255 255 255) 0px 1px 0px;
+        opacity: unset;
+    }
+
+    #checkboxes label {
+        display: inline-flex;
+        padding: 5px;
+    }
+
+    [data-tip] {
+        position: relative;
+
+    }
+
+    [data-tip]:before {
+        content: '';
+        /* hides the tooltip when not hovered */
+        display: none;
+        content: '';
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid #8e8e8e;
+        position: absolute;
+        top: 30px;
+        left: 35px;
+        z-index: 8;
+        font-size: 0;
+        line-height: 0;
+        width: 0;
+        height: 0;
+    }
+
+    [data-tip]:after {
+        display: none;
+        content: attr(data-tip);
+        position: absolute;
+        top: 35px;
+        left: 0px;
+        padding: 5px 8px;
+        background: #8e8e8e;
+        color: #fff;
+        z-index: 9;
+        font-size: 0.75em;
+        height: 18px;
+        line-height: 18px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        white-space: nowrap;
+        word-wrap: normal;
+    }
+
+    [data-tip]:hover:before,
+    [data-tip]:hover:after {
+        display: block;
+    }
+
+    .form-control {
+        width: 115px;
+    }
+
 </style>
+
 <div class="container">
     <h2 id="titulo" align="left"><b>Gestión de acceso a CRM</b></h2>
     <br>
@@ -172,236 +241,278 @@
                 {{str "LBL_NO_DATA_AVAILABLE"}}
             </div>
         {{/if}}
+
+
     </div>
     <textarea style="display: none" id="crossSeleccionados" value=""></textarea>
 
-    <div id="myModal" class="row-fluid" style="display:none; width: 55%">
+    <div id="myModal" class="row-fluid" style="display:none; ">
         <div class="modal " style="width:97%">
             <!-- Modal content -->
             <div class="modal-content">
                 <!-- Modal header -->
                 <div class="modal-header" style="color: white;">
-                    <span class="close closeModalHorarios" style="color: white"><b>&times;</b></span>
+                    <span class="close closeModalHorarios"><b>X</b></span>
                     <h3><b>Actualizar Horario Agentes</b></h3>
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
                     <!--Table-->
-                    <table class="SetHorario " style="width: 27%; margin-bottom: 15px; margin-left: 40%">
+                    <table class="SetHorario " style="width: 55%; margin-bottom: 15px; margin-left: 15%">
                         <!--Table head-->
                         <thead>
-                        <tr style="color: white; text-align: center">
+                        <tr style="color: white; text-align: justify">
                             <th>Día Semana</th>
-                            <th colspan="2">Hora Inicio</th>
-                            <th colspan="2">Hora Salida</th>
-                        </tr>
-                        <tr style="text-align: center">
-                            <td style="background: #0d75b994"></td>
-                            <td>Horas</td>
-                            <td>Minutos</td>
-                            <td>Horas</td>
-                            <td>Minutos</td>
+                            <th>Acciones</th>
+                            <th>Hora Inicio</th>
+                            <th>Hora Salida</th>
+                            <th>Actualizar</th>
                         </tr>
                         </thead>
                         <!--Table head-->
                         <!--Table body-->
                         <tbody>
+                        <!-- Lunes -->
                         <tr>
                             <td class="dia" style="text-align: justify; background: #0d75b994"><b>Lunes</b></td>
-                            <td >
-                                <select class="select2 inherit-width  " id="LHin" data-name=""
-                                        data-placeholder="Horas" data-toggle="tooltip" title="">
-                                    {{{Horas}}}
-                                </select>
+                            <td class="dia" style="text-align: justify; ">
+                                <div id="checkboxesL">
+                                    <input type="checkbox" id="bloqueadoL" {{#if data.bloqL}} checked{{/if}}
+                                           data-tip="Bloquear: Se bloqueará el acceso a CRM durante todo el día"/>
+                                    <i class="fa fa-lock" style="padding-left: 2px"></i>
+                                    <input type="checkbox" id="libreL" {{#if data.libL}} checked{{/if}}
+                                           data-tip="Libre: Se permitirá el acceso a CRM durante todo el día"/>
+                                    <i class="fa fa-unlock" style="padding-left: 2px"> </i>
+                                    <input type="checkbox" id="definirL" {{#if data.defL}} checked{{/if}}
+                                           data-tip="Definir: Se definirá un horario para el acceso a CRM"/><i
+                                        class="fa  fa-clock-o" style="padding-left: 2px"></i>
+                                </div>
                             </td>
                             <td>
-                                <select class="select2 inherit-width " id="LMin" data-name=""
-                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
-                                    {{{Minutos}}}
-                                </select>
-                            </td>
-                            <td >
-                                <select class="select2 inherit-width  " id="LHout" data-name=""
-                                        data-placeholder="Horas" data-toggle="tooltip" title="">
-                                    {{{Horas}}}
-                                </select>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
+                                       disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.lhin}}"
+                                       id="LHin">
                             </td>
                             <td>
-                                <select class="select2 inherit-width " id="LMout" data-name=""
-                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
-                                    {{{Minutos}}}
-                                </select>
+                                <div class="form-group row">
+                                    <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
+                                           disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.lhout}}"
+                                           id="LHout">
+                                </div>
+                            </td>
+                            <td>
+                                <input type="checkbox" class="radio " id="updateL" value="1"
+                                       data-tip="¿Actualizar día?"/>
                             </td>
                         </tr>
+                        <!-- Martes -->
                         <tr>
                             <td class="dia" style="text-align: justify; background: #0d75b994"><b>Martes</b></td>
-                            <td >
-                                <select class="select2 inherit-width  " id="MHin" data-name=""
-                                        data-placeholder="Horas" data-toggle="tooltip" title="">
-                                    {{{Horas}}}
-                                </select>
+                            <td class="dia" style="text-align: justify; ">
+                                <div id="checkboxesM">
+                                    <input type="checkbox" id="bloqueadoM" {{#if bloqM}}checked{{/if}}
+                                           data-tip="Bloquear: Se bloqueará el acceso a CRM durante todo el día"/>
+                                    <i class="fa fa-lock" style="padding-left: 2px"></i>
+                                    <input type="checkbox" id="libreM" {{#if libM}}checked{{/if}}
+                                           data-tip="Libre: Se permitirá el acceso a CRM durante todo el día"/>
+                                    <i class="fa fa-unlock" style="padding-left: 2px"> </i>
+                                    <input type="checkbox" id="definirM" {{#if defM}}checked{{/if}}
+                                           data-tip="Definir: Se definirá un horario para el acceso a CRM"/>
+                                    <i class="fa fa-clock-o" style="padding-left: 2px; "></i>
+                                </div>
                             </td>
                             <td>
-                                <select class="select2 inherit-width " id="MMin" data-name=""
-                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
-                                    {{{Minutos}}}
-                                </select>
-                            </td>
-                            <td >
-                                <select class="select2 inherit-width  " id="MHout" data-name=""
-                                        data-placeholder="Horas" data-toggle="tooltip" title="">
-                                    {{{Horas}}}
-                                </select>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if bloqM}}
+                                       disabled {{/if}} {{#if libM}} disabled {{/if}} step="" value="{{mhin}}"
+                                       id="MHin">
                             </td>
                             <td>
-                                <select class="select2 inherit-width " id="MMout" data-name=""
-                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
-                                    {{{Minutos}}}
-                                </select>
+                                <div class="form-group row">
+                                    <input class="form-control" type="time" min="00:01" max="23:59" {{#if bloqM}}
+                                           disabled {{/if}} {{#if libM}} disabled {{/if}} step="" value="{{mhout}}"
+                                           id="MHout">
+                                </div>
+                            </td>
+                            <td>
+                                <input type="checkbox" class="radio " value="1" id="updateM"
+                                       data-tip="¿Actualizar día?"/>
                             </td>
                         </tr>
+                        <!-- Miercoles -->
                         <tr>
                             <td class="dia" style="text-align: justify; background: #0d75b994"><b>Miércoles</b></td>
-                            <td >
-                                <select class="select2 inherit-width  " id="MiHin" data-name=""
-                                        data-placeholder="Horas" data-toggle="tooltip" title="">
-                                    {{{Horas}}}
-                                </select>
+                            <td class="dia" style="text-align: justify; ">
+                                <div id="checkboxesMi">
+                                    <input type="checkbox" id="bloqueadoMi" {{#if bloqMi}}checked{{/if}}
+                                           data-tip="Bloquear: Se bloqueará el acceso a CRM durante todo el día"/>
+                                    <i class="fa fa-lock" style="padding-left: 2px"></i>
+                                    <input type="checkbox" id="libreMi" {{#if libMi}}checked{{/if}}
+                                           data-tip="Libre: Se permitirá el acceso a CRM durante todo el día"/>
+                                    <i class="fa fa-unlock" style="padding-left: 2px"> </i>
+                                    <input type="checkbox" id="definirMi" {{#if defMi}}checked{{/if}}
+                                           data-tip="Definir: Se definirá un horario para el acceso a CRM"/>
+                                    <i class="fa fa-clock-o" style="padding-left: 2px; "></i>
+                                </div>
                             </td>
                             <td>
-                                <select class="select2 inherit-width " id="MiMin" data-name=""
-                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
-                                    {{{Minutos}}}
-                                </select>
-                            </td>
-                            <td >
-                                <select class="select2 inherit-width  " id="MiHout" data-name=""
-                                        data-placeholder="Horas" data-toggle="tooltip" title="">
-                                    {{{Horas}}}
-                                </select>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if bloqMi}}
+                                       disabled {{/if}} {{#if libMi}} disabled {{/if}} step="" value="{{mihin}}"
+                                       id="MiHin">
                             </td>
                             <td>
-                                <select class="select2 inherit-width " id="MiMout" data-name=""
-                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
-                                    {{{Minutos}}}
-                                </select>
+                                <div class="form-group row">
+                                    <input class="form-control" type="time" min="00:01" max="23:59" {{#if bloqMi}}
+                                           disabled {{/if}} {{#if libMi}} disabled {{/if}} step="" value="{{mihout}}"
+                                           id="MiHout">
+                                </div>
+                            </td>
+                            <td>
+                                <input type="checkbox" class="radio " value="1" id="updateMi"
+                                       data-tip="¿Actualizar día?"/>
                             </td>
                         </tr>
+                        <!-- Jueves -->
                         <tr>
                             <td class="dia" style="text-align: justify; background: #0d75b994"><b>Jueves</b></td>
-                            <td >
-                                <select class="select2 inherit-width  " id="JHin" data-name=""
-                                        data-placeholder="Horas" data-toggle="tooltip" title="">
-                                    {{{Horas}}}
-                                </select>
+                            <td class="dia" style="text-align: justify; ">
+                                <div id="checkboxesJ">
+                                    <input type="checkbox" id="bloqueadoJ" {{#if bloqJ}}checked{{/if}}
+                                           data-tip="Bloquear: Se bloqueará el acceso a CRM durante todo el día"/>
+                                    <i class="fa fa-lock" style="padding-left: 2px"></i>
+                                    <input type="checkbox" id="libreJ" {{#if libJ}}checked{{/if}}
+                                           data-tip="Libre: Se permitirá el acceso a CRM durante todo el día"/>
+                                    <i class="fa fa-unlock" style="padding-left: 2px"> </i>
+                                    <input type="checkbox" id="definirJ" {{#if
+                                            defJ}} checked{{/if}}data-tip="Definir: Se definirá un horario para el acceso a CRM"/>
+                                    <i class="fa fa-clock-o" style="padding-left: 2px; "></i>
+                                </div>
                             </td>
                             <td>
-                                <select class="select2 inherit-width " id="JMin" data-name=""
-                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
-                                    {{{Minutos}}}
-                                </select>
-                            </td>
-                            <td >
-                                <select class="select2 inherit-width  " id="JHout" data-name=""
-                                        data-placeholder="Horas" data-toggle="tooltip" title="">
-                                    {{{Horas}}}
-                                </select>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if bloqJ}}
+                                       disabled {{/if}} {{#if libJ}} disabled {{/if}} step="" value="{{jhin}}"
+                                       id="JHin">
                             </td>
                             <td>
-                                <select class="select2 inherit-width " id="JMout" data-name=""
-                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
-                                    {{{Minutos}}}
-                                </select>
+                                <div class="form-group row">
+                                    <input class="form-control" type="time" min="00:01" max="23:59" {{#if bloqJ}}
+                                           disabled {{/if}} {{#if libJ}} disabled {{/if}} step="" value="{{jhout}}"
+                                           id="JHout">
+                                </div>
+                            </td>
+                            <td>
+                                <input type="checkbox" class="radio " value="1" id="updateJ"
+                                       data-tip="¿Actualizar día?"/>
                             </td>
                         </tr>
+                        <!-- Viernes -->
                         <tr>
                             <td class="dia" style="text-align: justify; background: #0d75b994"><b>Viernes</b></td>
-                            <td >
-                                <select class="select2 inherit-width  " id="VHin" data-name=""
-                                        data-placeholder="Horas" data-toggle="tooltip" title="">
-                                    {{{Horas}}}
-                                </select>
+                            <td class="dia" style="text-align: justify; ">
+                                <div id="checkboxesV">
+                                    <input type="checkbox" id="bloqueadoV" {{#if bloqV}}checked{{/if}}
+                                           data-tip="Bloquear: Se bloqueará el acceso a CRM durante todo el día"/>
+                                    <i class="fa fa-lock" style="padding-left: 2px"></i>
+                                    <input type="checkbox" id="libreV" {{#if
+                                            libV}} checked{{/if}}data-tip="Libre: Se permitirá el acceso a CRM durante todo el día"/>
+                                    <i class="fa fa-unlock" style="padding-left: 2px"> </i>
+                                    <input type="checkbox" id="definirV"  {{#if
+                                            defV}} checked{{/if}}data-tip="Definir: Se definirá un horario para el acceso a CRM"/>
+                                    <i class="fa fa-clock-o" style="padding-left: 2px; "></i>
+                                </div>
                             </td>
                             <td>
-                                <select class="select2 inherit-width " id="VMin" data-name=""
-                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
-                                    {{{Minutos}}}
-                                </select>
-                            </td>
-                            <td >
-                                <select class="select2 inherit-width  " id="VHout" data-name=""
-                                        data-placeholder="Horas" data-toggle="tooltip" title="">
-                                    {{{Horas}}}
-                                </select>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if bloqV}}
+                                       disabled {{/if}} {{#if libV}} disabled {{/if}} step="" value="{{vhin}}"
+                                       id="VHin">
                             </td>
                             <td>
-                                <select class="select2 inherit-width " id="VMout" data-name=""
-                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
-                                    {{{Minutos}}}
-                                </select>
+                                <div class="form-group row">
+                                    <input class="form-control" type="time" min="00:01" max="23:59" {{#if bloqV}}
+                                           disabled {{/if}} {{#if libV}} disabled {{/if}} step="" value="{{vhout}}"
+                                           id="VHout">
+                                </div>
+                            </td>
+                            <td>
+                                <input type="checkbox" class="radio " value="1" id="updateV"
+                                       data-tip="¿Actualizar día?"/>
                             </td>
                         </tr>
+                        <!-- Sabado -->
                         <tr>
                             <td class="dia" style="text-align: justify; background: #0d75b994"><b>Sábado</b></td>
-                            <td >
-                                <select class="select2 inherit-width  " id="SHin" data-name=""
-                                        data-placeholder="Horas" data-toggle="tooltip" title="">
-                                    {{{Horas}}}
-                                </select>
+                            <td class="dia" style="text-align: justify; ">
+                                <div id="checkboxesS">
+                                    <input type="checkbox" id="bloqueadoS" {{#if
+                                            bloqS}} checked{{/if}}data-tip="Bloquear: Se bloqueará el acceso a CRM durante todo el día"/>
+                                    <i class="fa fa-lock" style="padding-left: 2px"></i>
+                                    <input type="checkbox" id="libreS" {{#if
+                                            libS}} checked{{/if}}data-tip="Libre: Se permitirá el acceso a CRM durante todo el día"/>
+                                    <i class="fa fa-unlock" style="padding-left: 2px"> </i>
+                                    <input type="checkbox" id="definirS" {{#if
+                                            defS}} checked{{/if}}data-tip="Definir: Se definirá un horario para el acceso a CRM"/>
+                                    <i class="fa fa-clock-o" style="padding-left: 2px; "></i>
+                                </div>
                             </td>
                             <td>
-                                <select class="select2 inherit-width " id="SMin" data-name=""
-                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
-                                    {{{Minutos}}}
-                                </select>
-                            </td>
-                            <td >
-                                <select class="select2 inherit-width  " id="SHout" data-name=""
-                                        data-placeholder="Horas" data-toggle="tooltip" title="">
-                                    {{{Horas}}}
-                                </select>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if bloqS}}
+                                       disabled {{/if}} {{#if libS}} disabled {{/if}} step="" value="{{shin}}"
+                                       id="SHin">
                             </td>
                             <td>
-                                <select class="select2 inherit-width " id="SMout" data-name=""
-                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
-                                    {{{Minutos}}}
-                                </select>
+                                <div class="form-group row">
+                                    <input class="form-control" type="time" min="00:01" max="23:59" {{#if bloqS}}
+                                           disabled {{/if}} {{#if libS}} disabled {{/if}} step="" value="{{Shout}}"
+                                           id="SHout">
+                                </div>
+                            </td>
+                            <td>
+                                <input type="checkbox" class="radio " value="1" id="updateS"
+                                       data-tip="¿Actualizar día?"/>
                             </td>
                         </tr>
+                        <!-- Domingo -->
                         <tr>
                             <td class="dia" style="text-align: justify; background: #0d75b994"><b>Domingo</b></td>
-                            <td >
-                                <select class="select2 inherit-width  " id="DHin" data-name=""
-                                        data-placeholder="Horas" data-toggle="tooltip" title="">
-                                    {{{Horas}}}
-                                </select>
+                            <td class="dia" style="text-align: justify; ">
+                                <div id="checkboxesD">
+                                    <input type="checkbox" id="bloqueadoD" {{#if
+                                            bloqD}} checked{{/if}}data-tip="Bloquear: Se bloqueará el acceso a CRM durante todo el día"/>
+                                    <i class="fa fa-lock" style="padding-left: 2px"></i>
+                                    <input type="checkbox" id="libreD" {{#if
+                                            libD}} checked{{/if}}data-tip="Libre: Se permitirá el acceso a CRM durante todo el día"/>
+                                    <i class="fa fa-unlock" style="padding-left: 2px"> </i>
+                                    <input type="checkbox" id="definirD" {{#if defD}}checked{{/if}}
+                                           data-tip="Definir: Se definirá un horario para el acceso a CRM"/>
+                                    <i class="fa fa-clock-o" style="padding-left: 2px; "></i>
+                                </div>
                             </td>
                             <td>
-                                <select class="select2 inherit-width " id="DMin" data-name=""
-                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
-                                    {{{Minutos}}}
-                                </select>
-                            </td>
-                            <td >
-                                <select class="select2 inherit-width  " id="DHout" data-name=""
-                                        data-placeholder="Horas" data-toggle="tooltip" title="">
-                                    {{{Horas}}}
-                                </select>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if bloqD}}
+                                       disabled {{/if}} {{#if libD}} disabled {{/if}} step="" value="{{dhin}}"
+                                       id="DHin">
                             </td>
                             <td>
-                                <select class="select2 inherit-width " id="DMout" data-name=""
-                                        data-placeholder="Minutos" data-toggle="tooltip" title="">
-                                    {{{Minutos}}}
-                                </select>
+                                <div class="form-group row">
+                                    <input class="form-control" type="time" min="00:01" max="23:59" {{#if bloqD}}
+                                           disabled {{/if}} {{#if libD}} disabled {{/if}} step="" value="{{dhout}}"
+                                           id="DHout">
+                                </div>
+                            </td>
+                            <td>
+                                <input type="checkbox" class="radio " value="1" id="updateD"
+                                       data-tip="¿Actualizar día?"/>
                             </td>
                         </tr>
+
                         <tr>
-                            <td colspan="2"><a class="btn fa fa-ban ExcluirHorario" style="background: #0e90d2; color: #ffffff;">
+                            <td colspan="2"><a class="btn fa fa-ban ExcluirHorario"
+                                               style="background: #0e90d2; color: #ffffff;">
                                 Excluir de Horario</a></td>
                             <td colspan="1"></td>
-                            <td colspan="2"><a class="btn fa fa-save UpdateHorario" style="background: #0e90d2; color: #ffffff;">
+                            <td colspan="2"><a class="btn fa fa-save UpdateHorario"
+                                               style="background: #0e90d2; color: #ffffff;">
                                 Actualizar Horario</a></td>
-                        </tr>-->
+                        </tr>
                         </tbody>
                         <!--Table body-->
                     </table>
