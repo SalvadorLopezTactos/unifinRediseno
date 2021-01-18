@@ -142,7 +142,7 @@
 
     checkCreateRecord:function(fields, errors, callback){
 
-        if(this.total_asignados>=20){
+        if(this.total_asignados>20){
 
             app.alert.show("error_create_leads", {
                 level: "error",
