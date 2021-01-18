@@ -17,6 +17,35 @@
         'change #filtroNombre': 'checkTextOnly',
         'change #filtroApellido': 'checkTextOnly',
 
+        /* Lunes */
+        'click #bloqueadoL': 'bloquea_HLunes',
+        'click #libreL': 'libre_HLunes',
+        'click #definirL': 'definir_HLunes',
+        /* Martes */
+        'click #bloqueadoM': 'bloquea_HMartes',
+        'click #libreM': 'libre_HMartes',
+        'click #definirM': 'definir_HMartes',
+        /* Miercoles */
+        'click #bloqueadoMi': 'bloquea_HMiercoles',
+        'click #libreMi': 'libre_HMiercoles',
+        'click #definirMi': 'definir_HMiercoles',
+        /* Jueves */
+        'click #bloqueadoJ': 'bloquea_HJueves',
+        'click #libreJ': 'libre_HJueves',
+        'click #definirJ': 'definir_HJueves',
+        /* Viernes */
+        'click #bloqueadoV': 'bloquea_HViernes',
+        'click #libreV': 'libre_HViernes',
+        'click #definirV': 'definir_HViernes',
+        /* Sabado */
+        'click #bloqueadoS': 'bloquea_HSabado',
+        'click #libreS': 'libre_HSabado',
+        'click #definirS': 'definir_HSabado',
+        /* Domingo */
+        'click #bloqueadoD': 'bloquea_HDomingo',
+        'click #libreD': 'libre_HDomingo',
+        'click #definirD': 'definir_HDomingo',
+
     },
 
     agentes: [],
@@ -29,6 +58,19 @@
     flagSeleccionados: 0,
     Horas: null,
     Minutos: null,
+    /* variables Lunes */
+    bloqL: "",
+    libL: "",
+    defL: "",
+    lhin: "",
+    lhout: "",
+    /* variables Martes */
+    bloqM: "",
+    libM: "",
+    defM: "",
+    mhin: "",
+    mhout: "",
+    data: [],
 
     initialize: function (options) {
         this._super("initialize", [options]);
@@ -36,24 +78,6 @@
         this.loadView = false;
         if (app.user.attributes.agente_telefonico_c == 1) {
             this.loadView = true;
-            var horas = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
-            var minutos = [00, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
-            var list_horas = '<option value="Bloqueado" selected >Bloqueado</option>';
-            list_horas += '<option value="Libre" >Libre</option>';
-
-            //var list_horas = '';
-
-            for (var i = 0; i < horas.length; i++) {
-                list_horas += '<option value=' + horas[i] + '>' + horas[i] + '</option>';
-            }
-            this.Horas = list_horas;
-
-            var list_minutos = '<option value="00"  selected hidden>Min</option>';
-            //var list_minutos = '';
-            for (var j = 0; j < minutos.length; j++) {
-                list_minutos += '<option value=' + minutos[j] + '>' + minutos[j] + '</option>';
-            }
-            this.Minutos = list_minutos;
 
         }
         else {
@@ -66,135 +90,9 @@
     },
 
     showModal: function () {
-        var modal = $('#myModal');
-        if (modal) {
-            modal.show();
-        }
-    },
-
-    closeModal: function () {
-        console.log("closeModal - clic");
-        var modal = $('#myModal');
-        if (modal) {
-            modal.hide();
-        }
-    },
-
-    updateHorarios: function () {
-
-        console.log("Seleccionados");
-        var crossSeleccionados = $("#crossSeleccionados").val();
         context = this;
-        if (this.flagSeleccionados == 1 && $('#btn_STodo').is(":checked")) {
-            $('#btn_STodo').attr('btnstate', 'On');
-            var context = this;
-            $('.selected').each(function (index, value) {
-                if (context.persistNoSeleccionados != undefined && context.persistNoSeleccionados.length > 0) {
-                    if (context.persistNoSeleccionados.includes($(this).attr('value'))) {
-                        $(value).prop("checked", false)
-                    } else {
-                        $(value).prop("checked", true);
-                    }
-                } else {
-                    $(value).prop("checked", true);
-                }
-            });
-        }
-
-        if (crossSeleccionados != "" && crossSeleccionados != '[]') {
-            this.seleccionados = JSON.parse(crossSeleccionados);
-            //Validar que los nuevos checks seleccionados no existen en crossSeleccionados
-            $('.selected').each(function (index, value) {
-                if ($(value).is(":checked") && context.flagSeleccionados == 1) {
-                    if (!context.seleccionados.includes(value.value) && value.value != 0) {
-                        context.seleccionados.push(value.value)
-                    }
-
-                }
-            });
-            $("#crossSeleccionados").val(JSON.stringify(this.seleccionados));
-
-            $(this.seleccionados).each(function (index, selected) {
-                $('.selected').each(function (index, value) {
-
-                    if (selected == value.value) {
-                        $(value).prop("checked", true);
-                    }
-
-                });
-
-            });
-        }
-        else {
-            $('.selected').each(function (index, value) {
-                if ($(value).is(":checked")) {
-                    context.seleccionados.push(value.value);
-                }
-            });
-        }
-
-        var respuesta = this.validaSetHorario();
-        if (respuesta == "") {
-            var parametros = context.seleccionados;
-            var horario = '{"Monday":{"entrada":"' + $("#LHin").val() + ($("#LHin").val()!="Bloqueado" && $("#LHin").val()!="Libre" ? (":" + $("#LMin").val()) : "" ) +
-                '","salida":"' + $("#LHout").val() + ($("#LHout").val()!="Bloqueado" && $("#LHout").val()!="Libre"?(":" + $("#LMout").val()) : "" ) + '"},' +
-                '"Tuesday":{"entrada":"' + $("#MHin").val() + ($("#MHin").val()!="Bloqueado" && $("#MHin").val()!="Libre" ? (":" + $("#MMin").val()) : "" ) +
-                '","salida":"' + $("#MHout").val() + ($("#MHout").val()!="Bloqueado" && $("#MHout").val()!="Libre"?(":" + $("#MMout").val()) : "" ) + '"},' +
-                '"Wednesday":{"entrada":"' + $("#MiHin").val() + ($("#MiHin").val()!="Bloqueado" && $("#MiHin").val()!="Libre" ? (":" + $("#MiMin").val()) : "" )+
-                '","salida":"' + $("#MiHout").val() + ($("#MiHout").val()!="Bloqueado" && $("#MiHout").val()!="Libre"?(":" + $("#MiMout").val()) : "" ) + '"},' +
-                '"Thursday":{"entrada":"' + $("#JHin").val() + ($("#JHin").val()!="Bloqueado" && $("#JHin").val()!="Libre" ? (":" + $("#JMin").val()) : "" ) +
-                '","salida":"' + $("#JHout").val() + ($("#JHout").val()!="Bloqueado" && $("#JHout").val()!="Libre"?(":" + $("#JMout").val()) : "" ) + '"},' +
-                '"Friday":{"entrada":"' + $("#VHin").val() + ($("#VHin").val()!="Bloqueado" && $("#VHin").val()!="Libre" ? (":" + $("#VMin").val()) : "" ) +
-                '","salida":"' + $("#VHout").val() + ($("#VHout").val()!="Bloqueado" && $("#VHout").val()!="Libre"?(":" + $("#VMout").val()) : "" ) + '"},' +
-                '"Saturday":{"entrada":"' + $("#SHin").val() + ($("#SHin").val()!="Bloqueado" && $("#SHin").val()!="Libre" ? (":" + $("#SMin").val()) : "" ) +
-                '","salida":"' + $("#SHout").val() + ($("#SHout").val()!="Bloqueado" && $("#SHout").val()!="Libre"?(":" + $("#SMout").val()) : "" ) + '"},' +
-                '"Sunday":{"entrada":"' + $("#DHin").val() + ($("#DHin").val()!="Bloqueado" && $("#DHin").val()!="Libre" ? (":" + $("#DMin").val()) : "" ) +
-                '","salida":"' + $("#DHout").val() + ($("#DHout").val()!="Bloqueado" && $("#DHout").val()!="Libre"?(":" + $("#DMout").val()) : "" ) + '"}}';
-
-            console.log("Parametros " + parametros)
-            if (parametros != "") {
-                var Params = {
-                    'seleccionados': parametros,
-                    'horario': horario,
-                    'excluir': false
-                };
-                app.alert.show('Actualizando', {
-                    level: 'process',
-                    title: 'Actualizando...'
-                });
-                var dnbProfileUrl = app.api.buildURL("updateAsesores", '', {}, {});
-                app.api.call("create", dnbProfileUrl, {data: Params}, {
-                    success: _.bind(function (data) {
-                        app.alert.dismiss('Actualizando');
-                        console.log(data);
-                        if (data) {
-                            this.closeModal();
-                            this.record_getAgente();
-                        }
-
-                    }, this)
-                });
-
-            }
-            else {
-                app.alert.show('Selecciona Asesor', {
-                    level: 'error',
-                    title: 'Selecciona un Asesor...'
-                });
-            }
-        } else {
-            app.alert.show("Error en Horario", {
-                level: "error",
-                title: "La hora de Salida no puede ser menor  que la hora de entrada: <br>" + respuesta,
-                autoClose: false
-            });
-        }
-
-
-    },
-    excluirHorarios: function () {
+        //console.log("Seleccionados");
         var crossSeleccionados = $("#crossSeleccionados").val();
-        context = this;
         if (this.flagSeleccionados == 1 && $('#btn_STodo').is(":checked")) {
             $('#btn_STodo').attr('btnstate', 'On');
             var context = this;
@@ -244,37 +142,227 @@
         }
 
         var parametros = context.seleccionados;
+        var agentesTel = context.agentes;
+        //console.log("Parametros " + parametros);
         if (parametros != "") {
-            var Params = {
-                'seleccionados': parametros,
-                'horario': "",
-                'excluir': true
-            };
-            app.alert.show('Actualizando', {
-                level: 'process',
-                title: 'Actualizando...'
-            });
-            var dnbProfileUrl = app.api.buildURL("updateAsesores", '', {}, {});
-            app.api.call("create", dnbProfileUrl, {data: Params}, {
-                success: _.bind(function (data) {
-                    app.alert.dismiss('Actualizando');
-                    console.log(data);
-                    if (data) {
-                        this.closeModal();
-                        this.record_getAgente();
+            var modal = $('#myModal');
+            if (modal) {
+                modal.show();
+            }
+            if (parametros.length == 1) {
+
+                Object.keys(agentesTel).forEach(function (key) {
+                    //console.log("id agente tele " + agentesTel[key].id);
+                    if (parametros[0] == agentesTel[key].id) {
+                        if (agentesTel[key].access_hours_c != "") {
+                            //console.log("id agente tele " + agentesTel[key].id);
+                            var lin = agentesTel[key].access_hours_c.Monday.entrada;
+                            var lout = agentesTel[key].access_hours_c.Monday.salida;
+                            var min = agentesTel[key].access_hours_c.Tuesday.entrada;
+                            var mout = agentesTel[key].access_hours_c.Tuesday.salida;
+                            var miin = agentesTel[key].access_hours_c.Wednesday.entrada;
+                            var miout = agentesTel[key].access_hours_c.Wednesday.salida;
+                            var jin = agentesTel[key].access_hours_c.Thursday.entrada;
+                            var jout = agentesTel[key].access_hours_c.Thursday.salida;
+                            var vin = agentesTel[key].access_hours_c.Friday.entrada;
+                            var vout = agentesTel[key].access_hours_c.Friday.salida;
+                            var sin = agentesTel[key].access_hours_c.Saturday.entrada;
+                            var sout = agentesTel[key].access_hours_c.Saturday.salida;
+                            var din = agentesTel[key].access_hours_c.Sunday.entrada;
+                            var dout = agentesTel[key].access_hours_c.Sunday.salida;
+                            context.cargaDatos(lin, lout, min, mout, miin, miout, jin, jout, vin, vout, sin, sout, din, dout);
+                        }
+                        else {
+                            context.naceBloqueado();
+                        }
                     }
-
-                }, this)
-            });
-
+                });
+            }
+            else {
+                context.naceBloqueado();
+            }
         }
         else {
-            app.alert.show('Selecciona Asesor', {
-                level: 'warning',
-                title: 'Selecciona un Asesor...'
+            app.alert.show('Selecciona un Asesor', {
+                level: 'error',
+                title: 'Selecciona al menos un Asesor...'
             });
         }
     },
+
+    naceBloqueado:function () {
+
+        /* Nace como bloqueado */
+        $("#bloqueadoL").prop("checked", true);
+        $("#LHin").attr("disabled", true);
+        $("#LHout").attr("disabled", true);
+        $("#bloqueadoM").prop("checked", true);
+        $("#MHin").attr("disabled", true);
+        $("#MHout").attr("disabled", true);
+        $("#bloqueadoMi").prop("checked", true);
+        $("#MiHin").attr("disabled", true);
+        $("#MiHout").attr("disabled", true);
+        $("#bloqueadoJ").prop("checked", true);
+        $("#JHin").attr("disabled", true);
+        $("#JHout").attr("disabled", true);
+        $("#bloqueadoV").prop("checked", true);
+        $("#VHin").attr("disabled", true);
+        $("#VHout").attr("disabled", true);
+        $("#bloqueadoS").prop("checked", true);
+        $("#SHin").attr("disabled", true);
+        $("#SHout").attr("disabled", true);
+        $("#bloqueadoD").prop("checked", true);
+        $("#DHin").attr("disabled", true);
+        $("#DHout").attr("disabled", true);
+    },
+    closeModal: function () {
+  //      console.log("closeModal - clic");
+        var modal = $('#myModal');
+        if (modal) {
+            modal.hide();
+        }
+        this.seleccionados = [];
+        $("#crossSeleccionados").val("");
+
+    },
+
+    updateHorarios: function () {
+        context = this;
+        if ($('#updateL').is(":checked") || $('#updateM').is(":checked") || $('#updateMi').is(":checked")
+            || $('#updateJ').is(":checked") || $('#updateV').is(":checked") || $('#updateS').is(":checked")
+            || $('#updateD').is(":checked")) {
+            var respuesta = this.validaSetHorario();
+            if (respuesta == "") {
+                var parametros = context.seleccionados;
+                var horario = '{"Monday":{"entrada":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#LHin").val())) +
+                    '","salida":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#LHout").val())) + '","update":"' + $('#updateL').is(":checked") + '"},' +
+                    '"Tuesday":{"entrada":"' + ($('#bloqueadoM').is(":checked") ? "Bloqueado" : ($('#libreM').is(":checked") ? "Libre" : $("#MHin").val())) +
+                    '","salida":"' + ($('#bloqueadoM').is(":checked") ? "Bloqueado" : ($('#libreM').is(":checked") ? "Libre" : $("#MHout").val())) + '","update":"' + $('#updateM').is(":checked") + '"},' +
+                    '"Wednesday":{"entrada":"' + ($('#bloqueadoMi').is(":checked") ? "Bloqueado" : ($('#libreMi').is(":checked") ? "Libre" : $("#MiHin").val())) +
+                    '","salida":"' + ($('#bloqueadoMi').is(":checked") ? "Bloqueado" : ($('#libreMi').is(":checked") ? "Libre" : $("#MiHout").val())) + '","update":"' + $('#updateMi').is(":checked") + '"},' +
+                    '"Thursday":{"entrada":"' + ($('#bloqueadoJ').is(":checked") ? "Bloqueado" : ($('#libreJ').is(":checked") ? "Libre" : $("#JHin").val())) +
+                    '","salida":"' + ($('#bloqueadoJ').is(":checked") ? "Bloqueado" : ($('#libreJ').is(":checked") ? "Libre" : $("#JHout").val())) + '","update":"' + $('#updateJ').is(":checked") + '"},' +
+                    '"Friday":{"entrada":"' + ($('#bloqueadoV').is(":checked") ? "Bloqueado" : ($('#libreV').is(":checked") ? "Libre" : $("#VHin").val())) +
+                    '","salida":"' + ($('#bloqueadoV').is(":checked") ? "Bloqueado" : ($('#libreV').is(":checked") ? "Libre" : $("#VHout").val())) + '","update":"' + $('#updateV').is(":checked") + '"},' +
+                    '"Saturday":{"entrada":"' + ($('#bloqueadoS').is(":checked") ? "Bloqueado" : ($('#libreS').is(":checked") ? "Libre" : $("#SHin").val())) +
+                    '","salida":"' + ($('#bloqueadoS').is(":checked") ? "Bloqueado" : ($('#libreS').is(":checked") ? "Libre" : $("#SHout").val())) + '","update":"' + $('#updateS').is(":checked") + '"},' +
+                    '"Sunday":{"entrada":"' + ($('#bloqueadoD').is(":checked") ? "Bloqueado" : ($('#libreD').is(":checked") ? "Libre" : $("#DHin").val())) +
+                    '","salida":"' + ($('#bloqueadoD').is(":checked") ? "Bloqueado" : ($('#libreD').is(":checked") ? "Libre" : $("#DHout").val())) + '","update":"' + $('#updateD').is(":checked") + '"}}';
+
+              //  console.log("Parametros " + parametros);
+              //  console.log("Horario " + horario)
+                var Params = {
+                    'seleccionados': parametros,
+                    'horario': horario,
+                    'excluir': false
+                };
+                app.alert.show('Actualizando', {
+                    level: 'process',
+                    title: 'Actualizando...'
+                });
+                var dnbProfileUrl = app.api.buildURL("updateAsesores", '', {}, {});
+                app.api.call("create", dnbProfileUrl, {data: Params}, {
+                    success: _.bind(function (data) {
+                        app.alert.dismiss('Actualizando');
+                       // console.log(data);
+                        if (data) {
+                            this.closeModal();
+                            this.record_getAgente();
+                        }
+
+                    }, this)
+                });
+
+            } else {
+                app.alert.show("Error en Horario", {
+                    level: "error",
+                    title: "La hora de Salida no puede ser menor  que la hora de entrada: <br>" + respuesta,
+                    autoClose: false
+                });
+            }
+        }
+        else {
+            app.alert.show("Nada para Actualizar", {
+                level: "info",
+                title: "Nada por Actualizar ",
+                autoClose: false
+            });
+        }
+    },
+
+    excluirHorarios: function () {
+        var crossSeleccionados = $("#crossSeleccionados").val();
+        context = this;
+        if (this.flagSeleccionados == 1 && $('#btn_STodo').is(":checked")) {
+            $('#btn_STodo').attr('btnstate', 'On');
+            var context = this;
+            $('.selected').each(function (index, value) {
+                if (context.persistNoSeleccionados != undefined && context.persistNoSeleccionados.length > 0) {
+                    if (context.persistNoSeleccionados.includes($(this).attr('value'))) {
+                        $(value).prop("checked", false)
+                    } else {
+                        $(value).prop("checked", true);
+                    }
+                } else {
+                    $(value).prop("checked", true);
+                }
+            });
+        }
+
+        if (crossSeleccionados != "" && crossSeleccionados != '[]') {
+            this.seleccionados = JSON.parse(crossSeleccionados);
+            //Validar que los nuevos checks seleccionados no existen en crossSeleccionados
+            $('.selected').each(function (index, value) {
+                if ($(value).is(":checked") && context.flagSeleccionados == 1) {
+                    if (!context.seleccionados.includes(value.value) && value.value != 0) {
+                        context.seleccionados.push(value.value)
+                    }
+
+                }
+            });
+            $("#crossSeleccionados").val(JSON.stringify(this.seleccionados));
+            $(this.seleccionados).each(function (index, selected) {
+                $('.selected').each(function (index, value) {
+                    if (selected == value.value) {
+                        $(value).prop("checked", true);
+                    }
+                });
+
+            });
+        }
+        else {
+            $('.selected').each(function (index, value) {
+                if ($(value).is(":checked")) {
+                    context.seleccionados.push(value.value);
+                }
+            });
+        }
+
+        var parametros = context.seleccionados;
+        var Params = {
+            'seleccionados': parametros,
+            'horario': "",
+            'excluir': true
+        };
+        app.alert.show('Actualizando', {
+            level: 'process',
+            title: 'Actualizando...'
+        });
+        var dnbProfileUrl = app.api.buildURL("updateAsesores", '', {}, {});
+        app.api.call("create", dnbProfileUrl, {data: Params}, {
+            success: _.bind(function (data) {
+                app.alert.dismiss('Actualizando');
+                //console.log(data);
+                if (data) {
+                    this.closeModal();
+                    this.record_getAgente();
+                }
+
+            }, this)
+        });
+
+    },
+
     record_getAgente: function (aux) {
         app.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
 
@@ -322,20 +410,20 @@
                 var count = Object.keys(data.records).length;
                 if (count > 20) {
                     for (var i = 0; i < 20; i++) {
-                        data.records[i].access_hours_c = data.records[i].access_hours_c != "" ? JSON.parse(data.records[i].access_hours_c) : "00:00";
+                        data.records[i].access_hours_c = data.records[i].access_hours_c != "" ? JSON.parse(data.records[i].access_hours_c) : "";
                         this.agentes.push(data.records[i]);
                     }
                 }
                 else {
                     for (var i = 0; i < count; i++) {
-                        data.records[i].access_hours_c = data.records[i].access_hours_c != "" ? JSON.parse(data.records[i].access_hours_c) : "00:00";
+                        data.records[i].access_hours_c = data.records[i].access_hours_c != "" ? JSON.parse(data.records[i].access_hours_c) : "";
                         this.agentes.push(data.records[i]);
                     }
                     //this.agentes = data.records;
                 }
 
-                console.log(this.agentes);
-                console.log("existen registros" + count);
+                //console.log(this.agentes);
+                //console.log("existen registros" + count);
                 self.total_page = 20;
                 self.total_page_all = count;
                 this.loadView = true;
@@ -369,7 +457,7 @@
 
                 $("#filtroNombre").val(nombres);
                 $("#filtroApellido").val(apellidos);
-
+                //console.log("despues de rende" + this.agentes);
             }, this)
         });
 
@@ -504,66 +592,66 @@
 
     validaSetHorario: function () {
 
-        var FLin = "2021/01/01 " + $("#LHin").val() + ":" + ($("#LMin").val() == "" ? '00' : $("#LMin").val()) + ":00";
-        var FLout = "2021/01/01 " + $("#LHout").val() + ":" + ($("#LMout").val() == "" ? '00' : $("#LMout").val()) + ":00";
-        var FMin = "2021/01/01 " + $("#MHin").val() + ":" + ($("#MMin").val() == "" ? '00' : $("#MMin").val()) + ":00";
-        var FMout = "2021/01/01 " + $("#MHout").val() + ":" + ($("#MMout").val() == "" ? '00' : $("#MMout").val()) + ":00";
-        var FMiin = "2021/01/01 " + $("#MiHin").val() + ":" + ($("#MiMin").val() == "" ? '00' : $("#MiMin").val()) + ":00";
-        var FMiout = "2021/01/01 " + $("#MiHout").val() + ":" + ($("#MiMout").val() == "" ? '00' : $("#MiMout").val()) + ":00";
-        var FJin = "2021/01/01 " + $("#JHin").val() + ":" + ($("#JMin").val() == "" ? '00' : $("#JMin").val()) + ":00";
-        var FJout = "2021/01/01 " + $("#JHout").val() + ":" + ($("#JMout").val() == "" ? '00' : $("#JMout").val()) + ":00";
-        var FVin = "2021/01/01 " + $("#VHin").val() + ":" + ($("#VMin").val() == "" ? '00' : $("#VMin").val()) + ":00";
-        var FVout = "2021/01/01 " + $("#VHout").val() + ":" + ($("#VMout").val() == "" ? '00' : $("#VMout").val()) + ":00";
-        var FSin = "2021/01/01 " + $("#SHin").val() + ":" + ($("#SMin").val() == "" ? '00' : $("#SMin").val()) + ":00";
-        var FSout = "2021/01/01 " + $("#SHout").val() + ":" + ($("#SMout").val() == "" ? '00' : $("#SMout").val()) + ":00";
-        var FDin = "2021/01/01 " + $("#DHin").val() + ":" + ($("#DMin").val() == "" ? '00' : $("#DMin").val()) + ":00";
-        var FDout = "2021/01/01 " + $("#DHout").val() + ":" + ($("#DMout").val() == "" ? '00' : $("#DMout").val()) + ":00";
+        var FLin = "2021/01/01 " + $("#LHin").val();
+        var FLout = "2021/01/01 " + $("#LHout").val();
+        var FMin = "2021/01/01 " + $("#MHin").val();
+        var FMout = "2021/01/01 " + $("#MHout").val();
+        var FMiin = "2021/01/01 " + $("#MiHin").val();
+        var FMiout = "2021/01/01 " + $("#MiHout").val();
+        var FJin = "2021/01/01 " + $("#JHin").val();
+        var FJout = "2021/01/01 " + $("#JHout").val();
+        var FVin = "2021/01/01 " + $("#VHin").val();
+        var FVout = "2021/01/01 " + $("#VHout").val();
+        var FSin = "2021/01/01 " + $("#SHin").val();
+        var FSout = "2021/01/01 " + $("#SHout").val();
+        var FDin = "2021/01/01 " + $("#DHin").val();
+        var FDout = "2021/01/01 " + $("#DHout").val();
 
 
         var errores = "";
-        if (($("#LHin").val() != "Bloqueado" && $("#LHout").val() != "Bloqueado") && ($("#LHin").val() != "Libre" && $("#LHout").val() != "Libre")) {
+        if (!$('#bloqueadoL').is(":checked") && !$('#libreL').is(":checked") && $('#definirL').is(":checked")) {
             var Lin = (new Date(FLin).getTime() / 1000);
             var Lout = (new Date(FLout).getTime() / 1000);
             if (Lin > Lout) {
                 errores = errores + '<b>- Lunes<br></b>';
             }
         }
-        if (($("#MHin").val() != "Bloqueado" && $("#MHout").val() != "Bloqueado") && ($("#MHin").val() != "Libre" && $("#MHout").val() != "Libre")) {
+        if (!$('#bloqueadoM').is(":checked") && !$('#libreM').is(":checked") && $('#definirM').is(":checked")) {
             var Min = (new Date(FMin).getTime() / 1000);
             var Mout = (new Date(FMout).getTime() / 1000);
             if (Min > Mout) {
                 errores = errores + '<b>- Martes<br></b>';
             }
         }
-        if (($("#MiHin").val() != "Bloqueado" && $("#MiHout").val() != "Bloqueado") && ($("#MiHin").val() != "Libre" && $("#MiHout").val() != "Libre")) {
+        if (!$('#bloqueadoMi').is(":checked") && !$('#libreMi').is(":checked") && $('#definirMi').is(":checked")) {
             var Miin = (new Date(FMiin).getTime() / 1000);
             var Miout = (new Date(FMiout).getTime() / 1000);
             if (Miin > Miout) {
                 errores = errores + '<b>- Miércoles<br></b>';
             }
         }
-        if (($("#JHin").val() != "Bloqueado" && $("#JHout").val() != "Bloqueado") && ($("#JHin").val() != "Libre" && $("#JHout").val() != "Libre")) {
+        if (!$('#bloqueadoJ').is(":checked") && !$('#libreJ').is(":checked") && $('#definirJ').is(":checked")) {
             var Jin = (new Date(FJin).getTime() / 1000);
             var Jout = (new Date(FJout).getTime() / 1000);
             if (Jin > Jout) {
                 errores = errores + '<b>- Jueves<br></b>';
             }
         }
-        if (($("#VHin").val() != "Bloqueado" && $("#VHout").val() != "Bloqueado") && ($("#VHin").val() != "Libre" && $("#VHout").val() != "Libre")) {
+        if (!$('#bloqueadoV').is(":checked") && !$('#libreV').is(":checked") && $('#definirV').is(":checked")) {
             var Vin = (new Date(FVin).getTime() / 1000);
             var Vout = (new Date(FVout).getTime() / 1000);
             if (Vin > Vout) {
                 errores = errores + '<b>- Viernes<br></b>';
             }
         }
-        if (($("#SHin").val() != "Bloqueado" && $("#SHout").val() != "Bloqueado") && ($("#SHin").val() != "Libre" && $("#SHout").val() != "Libre")) {
+        if (!$('#bloqueadoS').is(":checked") && !$('#libreS').is(":checked") && $('#definirS').is(":checked")) {
             var Sin = (new Date(FSin).getTime() / 1000);
             var Sout = (new Date(FSout).getTime() / 1000);
             if (Sin > Sout) {
                 errores = errores + '<b>- Sábado<br></b>';
             }
         }
-        if (($("#DHin").val() != "Bloqueado" && $("#DHout").val() != "Bloqueado") && ($("#DHin").val() != "Libre" && $("#DHout").val() != "Libre")) {
+        if (!$('#bloqueadoD').is(":checked") && !$('#libreD').is(":checked") && $('#definirD').is(":checked")) {
             var Din = (new Date(FDin).getTime() / 1000);
             var Dout = (new Date(FDout).getTime() / 1000);
             if (Din > Dout) {
@@ -571,6 +659,351 @@
             }
         }
         return errores;
-    }
+    },
+
+    cargaDatos: function (Lin, Lout, Min, Mout, Miin, Miout, Jin, Jout, Vin, Vout, Sin, Sout, Din, Dout) {
+        if (Lin == "Bloqueado") {
+            $("#bloqueadoL").prop("checked", true);
+            $("#LHin").attr("disabled", true);
+            $("#LHout").attr("disabled", true);
+        } else if (Lin == "Libre") {
+            $("#libreL").prop("checked", true);
+            $("#LHin").attr("disabled", true);
+            $("#LHout").attr("disabled", true);
+        }
+        else {
+            $("#definirL").prop("checked", true);
+            $("#LHin").val(Lin);
+            $("#LHout").val(Lout);
+        }
+
+        if (Min == "Bloqueado") {
+            $("#bloqueadoM").prop("checked", true);
+            $("#MHin").attr("disabled", true);
+            $("#MHout").attr("disabled", true);
+        } else if (Min == "Libre") {
+            $("#libreM").prop("checked", true);
+            $("#MHin").attr("disabled", true);
+            $("#MHout").attr("disabled", true);
+        }
+        else {
+            $("#definirM").prop("checked", true);
+            $("#MHin").val(Min);
+            $("#MHout").val(Mout);
+        }
+
+        if (Miin == "Bloqueado") {
+            $("#bloqueadoMi").prop("checked", true);
+            $("#MiHin").attr("disabled", true);
+            $("#MiHout").attr("disabled", true);
+        } else if (Miin == "Libre") {
+            $("#libreMi").prop("checked", true);
+            $("#MiHin").attr("disabled", true);
+            $("#MiHout").attr("disabled", true);
+        }
+        else {
+            $("#definirMi").prop("checked", true);
+            $("#MiHin").val(Miin);
+            $("#MiHout").val(Miout);
+        }
+
+        if (Jin == "Bloqueado") {
+            $("#bloqueadoJ").prop("checked", true);
+            $("#JHin").attr("disabled", true);
+            $("#JHout").attr("disabled", true);
+        } else if (Jin == "Libre") {
+            $("#libreJ").prop("checked", true);
+            $("#JHin").attr("disabled", true);
+            $("#JHout").attr("disabled", true);
+        }
+        else {
+            $("#definirJ").prop("checked", true);
+            $("#JHin").val(Jin);
+            $("#JHout").val(Jout);
+        }
+
+        if (Vin == "Bloqueado") {
+            $("#bloqueadoV").prop("checked", true);
+            $("#VHin").attr("disabled", true);
+            $("#VHout").attr("disabled", true);
+        } else if (Vin == "Libre") {
+            $("#libreV").prop("checked", true);
+            $("#VHin").attr("disabled", true);
+            $("#VHout").attr("disabled", true);
+        }
+        else {
+            $("#definirV").prop("checked", true);
+            $("#VHin").val(Vin);
+            $("#VHout").val(Vout);
+        }
+
+        if (Sin == "Bloqueado") {
+            $("#bloqueadoS").prop("checked", true);
+            $("#SHin").attr("disabled", true);
+            $("#SHout").attr("disabled", true);
+        } else if (Sin == "Libre") {
+            $("#libreS").prop("checked", true);
+            $("#SHin").attr("disabled", true);
+            $("#SHout").attr("disabled", true);
+        }
+        else {
+            $("#definirS").prop("checked", true);
+            $("#SHin").val(Sin);
+            $("#SHout").val(Sout);
+        }
+
+        if (Din == "Bloqueado") {
+            $("#bloqueadoD").prop("checked", true);
+            $("#DHin").attr("disabled", true);
+            $("#DHout").attr("disabled", true);
+        } else if (Din == "Libre") {
+            $("#libreD").prop("checked", true);
+            $("#DHin").attr("disabled", true);
+            $("#DHout").attr("disabled", true);
+        }
+        else {
+            $("#definirD").prop("checked", true);
+            $("#DHin").val(Din);
+            $("#DHout").val(Dout);
+        }
+    },
+
+    bloquea_HLunes: function () {
+        if ($('#bloqueadoL').is(":checked")) {
+            $("#LHin").attr("disabled", true);
+            $("#LHout").attr("disabled", true);
+            $("#libreL").prop('checked', false);
+            $("#definirL").prop('checked', false);
+        }
+        if (!$('#bloqueadoL').is(":checked") && !$('#libreL').is(":checked") && !$('#definirL').is(":checked")) {
+            $("#bloqueadoL").prop('checked', true);
+        }
+    },
+    libre_HLunes: function () {
+        if ($('#libreL').is(":checked")) {
+            $("#LHin").attr("disabled", true);
+            $("#LHout").attr("disabled", true);
+            $("#bloqueadoL").prop('checked', false);
+            $("#definirL").prop('checked', false);
+        }
+        if (!$('#bloqueadoL').is(":checked") && !$('#libreL').is(":checked") && !$('#definirL').is(":checked")) {
+            $("#libreL").prop('checked', true);
+        }
+    },
+    definir_HLunes: function () {
+        if ($('#definirL').is(":checked")) {
+            $("#LHin").attr("disabled", false);
+            $("#LHout").attr("disabled", false);
+            $("#bloqueadoL").prop('checked', false);
+            $("#libreL").prop('checked', false);
+        }
+        if (!$('#bloqueadoL').is(":checked") && !$('#libreL').is(":checked") && !$('#definirL').is(":checked")) {
+            $("#definirL").prop('checked', true);
+        }
+    },
+
+    bloquea_HMartes: function () {
+        if ($('#bloqueadoM').is(":checked")) {
+            $("#MHin").attr("disabled", true);
+            $("#MHout").attr("disabled", true);
+            $("#libreM").prop('checked', false);
+            $("#definirM").prop('checked', false);
+        }
+        if (!$('#bloqueadoM').is(":checked") && !$('#libreM').is(":checked") && !$('#definirM').is(":checked")) {
+            $("#bloqueadoM").prop('checked', true);
+        }
+    },
+    libre_HMartes: function () {
+        if ($('#libreM').is(":checked")) {
+            $("#MHin").attr("disabled", true);
+            $("#MHout").attr("disabled", true);
+            $("#bloqueadoM").prop('checked', false);
+            $("#definirM").prop('checked', false);
+        }
+        if (!$('#bloqueadoM').is(":checked") && !$('#libreM').is(":checked") && !$('#definirM').is(":checked")) {
+            $("#libreM").prop('checked', true);
+        }
+    },
+    definir_HMartes: function () {
+        if ($('#definirM').is(":checked")) {
+            $("#MHin").attr("disabled", false);
+            $("#MHout").attr("disabled", false);
+            $("#bloqueadoM").prop('checked', false);
+            $("#libreM").prop('checked', false);
+        }
+        if (!$('#bloqueadoM').is(":checked") && !$('#libreM').is(":checked") && !$('#definirM').is(":checked")) {
+            $("#definirM").prop('checked', true);
+        }
+    },
+
+    bloquea_HMiercoles: function () {
+        if ($('#bloqueadoMi').is(":checked")) {
+            $("#MiHin").attr("disabled", true);
+            $("#MiHout").attr("disabled", true);
+            $("#libreMi").prop('checked', false);
+            $("#definirMi").prop('checked', false);
+        }
+        if (!$('#bloqueadoMi').is(":checked") && !$('#libreMi').is(":checked") && !$('#definirMi').is(":checked")) {
+            $("#bloqueadoMi").prop('checked', true);
+        }
+    },
+    libre_HMiercoles: function () {
+        if ($('#libreMi').is(":checked")) {
+            $("#MiHin").attr("disabled", true);
+            $("#MiHout").attr("disabled", true);
+            $("#bloqueadoMi").prop('checked', false);
+            $("#definirMi").prop('checked', false);
+        }
+        if (!$('#bloqueadoMi').is(":checked") && !$('#libreMi').is(":checked") && !$('#definirMi').is(":checked")) {
+            $("#libreMi").prop('checked', true);
+        }
+    },
+    definir_HMiercoles: function () {
+        if ($('#definirMi').is(":checked")) {
+            $("#MiHin").attr("disabled", false);
+            $("#MiHout").attr("disabled", false);
+            $("#bloqueadoMi").prop('checked', false);
+            $("#libreMi").prop('checked', false);
+        }
+        if (!$('#bloqueadoMi').is(":checked") && !$('#libreMi').is(":checked") && !$('#definirMi').is(":checked")) {
+            $("#definirMi").prop('checked', true);
+        }
+    },
+
+    bloquea_HJueves: function () {
+        if ($('#bloqueadoJ').is(":checked")) {
+            $("#JHin").attr("disabled", true);
+            $("#JHout").attr("disabled", true);
+            $("#libreJ").prop('checked', false);
+            $("#definirJ").prop('checked', false);
+        }
+        if (!$('#bloqueadoJ').is(":checked") && !$('#libreJ').is(":checked") && !$('#definirJ').is(":checked")) {
+            $("#bloqueadoJ").prop('checked', true);
+        }
+    },
+    libre_HJueves: function () {
+        if ($('#libreJ').is(":checked")) {
+            $("#JHin").attr("disabled", true);
+            $("#JHout").attr("disabled", true);
+            $("#bloqueadoJ").prop('checked', false);
+            $("#definirJ").prop('checked', false);
+        }
+        if (!$('#bloqueadoJ').is(":checked") && !$('#libreJ').is(":checked") && !$('#definirJ').is(":checked")) {
+            $("#libreJ").prop('checked', true);
+        }
+    },
+    definir_HJueves: function () {
+        if ($('#definirJ').is(":checked")) {
+            $("#JHin").attr("disabled", false);
+            $("#JHout").attr("disabled", false);
+            $("#bloqueadoJ").prop('checked', false);
+            $("#libreJ").prop('checked', false);
+        }
+        if (!$('#bloqueadoJ').is(":checked") && !$('#libreJ').is(":checked") && !$('#definirJ').is(":checked")) {
+            $("#definirJ").prop('checked', true);
+        }
+    },
+
+    bloquea_HViernes: function () {
+        if ($('#bloqueadoV').is(":checked")) {
+            $("#VHin").attr("disabled", true);
+            $("#VHout").attr("disabled", true);
+            $("#libreV").prop('checked', false);
+            $("#definirV").prop('checked', false);
+        }
+        if (!$('#bloqueadoV').is(":checked") && !$('#libreV').is(":checked") && !$('#definirV').is(":checked")) {
+            $("#bloqueadoV").prop('checked', true);
+        }
+    },
+    libre_HViernes: function () {
+        if ($('#libreV').is(":checked")) {
+            $("#VHin").attr("disabled", true);
+            $("#VHout").attr("disabled", true);
+            $("#bloqueadoV").prop('checked', false);
+            $("#definirV").prop('checked', false);
+        }
+        if (!$('#bloqueadoV').is(":checked") && !$('#libreV').is(":checked") && !$('#definirV').is(":checked")) {
+            $("#libreV").prop('checked', true);
+        }
+    },
+    definir_HViernes: function () {
+        if ($('#definirV').is(":checked")) {
+            $("#VHin").attr("disabled", false);
+            $("#VHout").attr("disabled", false);
+            $("#bloqueadoV").prop('checked', false);
+            $("#libreV").prop('checked', false);
+        }
+        if (!$('#bloqueadoV').is(":checked") && !$('#libreV').is(":checked") && !$('#definirV').is(":checked")) {
+            $("#definirV").prop('checked', true);
+        }
+    },
+
+    bloquea_HSabado: function () {
+        if ($('#bloqueadoS').is(":checked")) {
+            $("#SHin").attr("disabled", true);
+            $("#SHout").attr("disabled", true);
+            $("#libreS").prop('checked', false);
+            $("#definirS").prop('checked', false);
+        }
+        if (!$('#bloqueadoS').is(":checked") && !$('#libreS').is(":checked") && !$('#definirS').is(":checked")) {
+            $("#bloqueadoS").prop('checked', true);
+        }
+    },
+    libre_HSabado: function () {
+        if ($('#libreS').is(":checked")) {
+            $("#SHin").attr("disabled", true);
+            $("#SHout").attr("disabled", true);
+            $("#bloqueadoS").prop('checked', false);
+            $("#definirS").prop('checked', false);
+        }
+        if (!$('#bloqueadoS').is(":checked") && !$('#libreS').is(":checked") && !$('#definirS').is(":checked")) {
+            $("#libreS").prop('checked', true);
+        }
+    },
+    definir_HSabado: function () {
+        if ($('#definirS').is(":checked")) {
+            $("#SHin").attr("disabled", false);
+            $("#SHout").attr("disabled", false);
+            $("#bloqueadoS").prop('checked', false);
+            $("#libreS").prop('checked', false);
+        }
+        if (!$('#bloqueadoS').is(":checked") && !$('#libreS').is(":checked") && !$('#definirS').is(":checked")) {
+            $("#definirS").prop('checked', true);
+        }
+    },
+
+    bloquea_HDomingo: function () {
+        if ($('#bloqueadoD').is(":checked")) {
+            $("#DHin").attr("disabled", true);
+            $("#DHout").attr("disabled", true);
+            $("#libreD").prop('checked', false);
+            $("#definirD").prop('checked', false);
+        }
+        if (!$('#bloqueadoD').is(":checked") && !$('#libreD').is(":checked") && !$('#definirD').is(":checked")) {
+            $("#bloqueadoD").prop('checked', true);
+        }
+    },
+    libre_HDomingo: function () {
+        if ($('#libreD').is(":checked")) {
+            $("#DHin").attr("disabled", true);
+            $("#DHout").attr("disabled", true);
+            $("#bloqueadoD").prop('checked', false);
+            $("#definirD").prop('checked', false);
+        }
+        if (!$('#bloqueadoD').is(":checked") && !$('#libreD').is(":checked") && !$('#definirD').is(":checked")) {
+            $("#libreD").prop('checked', true);
+        }
+    },
+    definir_HDomingo: function () {
+        if ($('#definirD').is(":checked")) {
+            $("#DHin").attr("disabled", false);
+            $("#DHout").attr("disabled", false);
+            $("#bloqueadoD").prop('checked', false);
+            $("#libreD").prop('checked', false);
+        }
+        if (!$('#bloqueadoD').is(":checked") && !$('#libreD').is(":checked") && !$('#definirD').is(":checked")) {
+            $("#definirD").prop('checked', true);
+        }
+    },
 
 })
