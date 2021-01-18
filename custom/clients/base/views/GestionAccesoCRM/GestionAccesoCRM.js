@@ -185,7 +185,7 @@
         else {
             app.alert.show('Selecciona un Asesor', {
                 level: 'error',
-                title: 'Selecciona almenos un Asesor...'
+                title: 'Selecciona al menos un Asesor...'
             });
         }
     },
