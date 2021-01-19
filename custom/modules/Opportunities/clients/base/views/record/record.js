@@ -618,9 +618,11 @@
             this.model.set('admin_cartera_c', false);
             this.model.set('tipo_sol_admin_cartera_c', "");
             this.model.set('producto_origen_vencido_c', "");
+            this.model.set('cartera_dias_vencido_c', "0");
             $('[data-name="admin_cartera_c"]').hide();
             $('[data-name="tipo_sol_admin_cartera_c"]').hide();
             $('[data-name="producto_origen_vencido_c"]').hide();
+            $('[data-name="cartera_dias_vencido_c"]').hide();
         }
 
     },
@@ -3218,9 +3220,11 @@
             this.model.set('admin_cartera_c', false);
             this.model.set('tipo_sol_admin_cartera_c', "");
             this.model.set('producto_origen_vencido_c', "");
+            this.model.set('cartera_dias_vencido_c', "0");
             $('[data-name="admin_cartera_c"]').hide();
             $('[data-name="tipo_sol_admin_cartera_c"]').hide();
             $('[data-name="producto_origen_vencido_c"]').hide();
+            $('[data-name="cartera_dias_vencido_c"]').hide();
         }
     },
 
@@ -3239,6 +3243,13 @@
             reqAdminCartera = reqAdminCartera + '<b>' + app.lang.get("LBL_PRODUCTO_ORIGEN_VENCIDO_C", "Opportunities") + '</b><br>';
             errors['producto_origen_vencido_c'] = errors['producto_origen_vencido_c'] || {};
             errors['producto_origen_vencido_c'].required = true;
+        }
+
+        if (this.model.get('admin_cartera_c') == true && typeof(this.model.get('cartera_dias_vencido_c')) != "number") {
+            
+            reqAdminCartera = reqAdminCartera + '<b>' + app.lang.get("LBL_CARTERA_DIAS_VENCIDO", "Opportunities") + '</b><br>';
+            errors['cartera_dias_vencido_c'] = errors['cartera_dias_vencido_c'] || {};
+            errors['cartera_dias_vencido_c'].required = true;
         }
 
         if (reqAdminCartera) {
