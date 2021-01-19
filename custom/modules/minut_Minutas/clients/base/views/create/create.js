@@ -350,16 +350,36 @@
                     }else if(parent_meet == "Leads"){
                         var keyselect = null;		
                         keyselect = this.$('#motivocancelacionCuenta').val();
+                        var subkeysqlct = this.$('#submotivocancelacion').val();
                         if((keyselect == "" || keyselect == null) && 
                         (self.model.get('resultado_c')=='2' ||self.model.get('resultado_c')=='18' || self.model.get('resultado_c')=='21' || self.model.get('resultado_c')=='25'))
                         {
                             app.alert.show("Motivo de Cancelación", {
                                 level: "error",
-                                title: "Debe seleccionar el motivo cancelación.",
+                                title: "Debe seleccionar el motivo cancelación para Lead Management.",
                                 autoClose: false
                             });
-                            errors['MotivoCancelacion'] = errors['MotivoCancelacion'] || {};
-                            errors['MotivoCancelacion'].required = true;
+                            $('#motivocancelacionCuenta').css('border-color', '#bb0e1b');
+                            $('#motivo_cancelacion_Cuenta').css('color', '#bb0e1b');
+                            $('#MotivoCancelacionLead').focus();
+                            errors['motivocancelacionCuenta'] = errors['motivocancelacionCuenta'] || {};
+                            errors['motivocancelacionCuenta'].required = true;
+                            callback(null, fields, errors);
+                        }else if((keyselect == "2" || MotCancelacion == "5" ) && (subkeysqlct == '' || subkeysqlct == null) &&
+                        (self.model.get('resultado_c')=='2' ||self.model.get('resultado_c')=='18' || self.model.get('resultado_c')=='21' || self.model.get('resultado_c')=='25'))
+                        {
+                            app.alert.show("Submotivo de Cancelación", {
+                                level: "error",
+                                title: "Debe seleccionar el submotivo cancelación para Lead Management.",
+                                autoClose: false
+                            });
+                            $('#motivocancelacionCuenta').css('border-color', '');
+                            $('#motivo_cancelacion_Cuenta').css('color', 'black');
+                            $('#submotivocancelacion').css('border-color', '#bb0e1b');
+                            $('#submotivo_cancelacion').css('border-color', '#bb0e1b');
+                            $('#submotivo_cancelacion').css('color', '#bb0e1b');
+                            errors['submotivocancelacion'] = errors['submotivocancelacion'] || {};
+                            errors['submotivocancelacion'].required = true;
                             callback(null, fields, errors);
                         }else{
                             var lead = app.data.createBean('Leads', {id:parent_id_acc});
