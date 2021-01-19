@@ -365,12 +365,12 @@
     },
 
     record_getAgente: function (aux) {
-        var nombres = ($("#filtroNombre").val()).trim() == "" ? ($("#filtroNombre").val()).trim() : $("#filtroNombre").val();
-        var apellidos = ($("#filtroApellido").val()).trim() == "" ? ($("#filtroApellido").val()).trim() : $("#filtroApellido").val();
+        var nombres = $("#filtroNombre").val();
+        var apellidos = $("#filtroApellido").val();
         var subpuesto = $("#filtroSubPuesto").val();
 
         var fullname = nombres + apellidos;
-        if (fullname != "" || subpuesto != "") {
+        if ((!/^\s+$/.test(nombres) && !/^\s+$/.test(apellidos) ) || subpuesto != "") {
             app.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
 
             if (aux != "ok") {
@@ -487,7 +487,7 @@
         else {
             app.alert.show('Sin valor', {
                 level: 'info',
-                title: 'Sin información para realizar búsqueda',
+                title: 'Existen valores de búsqueda no validos',
                 autoClose: true
             });
         }
