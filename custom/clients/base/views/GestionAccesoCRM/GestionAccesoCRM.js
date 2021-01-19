@@ -370,7 +370,7 @@
         var subpuesto = $("#filtroSubPuesto").val();
 
         var fullname = nombres + apellidos;
-        if (fullname != "" || subpuesto != " ") {
+        if (fullname != "" || subpuesto != "") {
             app.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
 
             if (aux != "ok") {
