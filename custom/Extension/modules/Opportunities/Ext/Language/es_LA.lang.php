@@ -225,3 +225,4 @@ $mod_strings['LBL_ADMIN_CARTERA_C'] = 'Creado por administración de cartera';
 $mod_strings['LBL_TIPO_SOL_ADMIN_CARTERA_C'] = 'Tipo de solicitud Administración de cartera';
 $mod_strings['LBL_PRODUCTO_ORIGEN_VENCIDO_C'] = 'Producto origen vencido';
 $mod_strings['LBL_CANCELADO_QUANTICO'] = 'Cancelado Quantico';
+$mod_strings['LBL_CARTERA_DIAS_VENCIDO'] = 'Número de días en cartera vencida';
