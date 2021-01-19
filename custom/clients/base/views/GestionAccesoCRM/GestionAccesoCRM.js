@@ -407,6 +407,7 @@
                         "nombre_completo_c": {
                             "$contains": nombres + " " + apellidos
                         },
+                        "status":"Active",
                         "puestousuario_c": 27,
                         "subpuesto_c": subpuesto
                     }
@@ -418,6 +419,7 @@
                         "nombre_completo_c": {
                             "$contains": nombres + " " + apellidos
                         },
+                        "status":"Active",
                         "puestousuario_c": 27,
                     }
                 ];
