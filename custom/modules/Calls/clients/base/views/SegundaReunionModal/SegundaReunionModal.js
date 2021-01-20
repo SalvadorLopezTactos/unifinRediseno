@@ -256,7 +256,7 @@
 	        if (emptynoviable > 0) {
 	            app.alert.show("Falta-campos-no-viable", {
 	                level: "error",
-	                title: 'Debe seleccionar los campos faltantes de No viable.',
+	                title: 'Debe seleccionar los campos faltantes para cancelación',
 	                autoClose: false
 	            });
 	        }
@@ -330,7 +330,9 @@
 					}
 				});
 				smeet.closeModal();
-			}else{
+			}
+			/*
+			else{
 				$('#RazonNoViable').css('border-color', 'red');
 				app.alert.show("Motivo de Cancelación", {
 				level: "error",
@@ -338,6 +340,7 @@
 				autoClose: false
 			});				
 			}
+			*/
 		}
     },
     /**Custom method to dispose the view*/
