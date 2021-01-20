@@ -40,11 +40,14 @@
           funcion: Validar acceso para creación de solicitudes. No debe permitir crear solicitudes si usuario tiene rol: "Gestión Comercial"
         */
         this.on('render', this._rolnocreacion, this);
-        /*
+
+           /*
           EJC_14/01/2021
           funcion: Valida tener alguna comunicación previa, llamada o reunión"
         */
-       this.on('render', this._contactoPrevio, this);
+       this.model.addValidationTask('contacto_previo',  _.bind(this._contactoPrevio, this));
+       
+
         this.model.addValidationTask('buscaDuplicados', _.bind(this.buscaDuplicados, this));
         this.model.addValidationTask('valida_direc_indicador', _.bind(this.valida_direc_indicador, this));
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
@@ -170,6 +173,7 @@
        this.model.on("change:negocio_c", _.bind(this.Updt_OptionProdFinan, this));
         this.model.on('change:negocio_c', this.verificaOperacionProspecto, this);
 
+      
         this.adminUserCartera();
 
     },
@@ -1531,22 +1535,30 @@
       Author: EJC 2021/01/14
       funcion: Valida comunicación previa llamada o reunión nivel cuentas"
     */
-   _contactoPrevio: function () {
+   _contactoPrevio: function (fields, errors, callback) {
         
-        app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + self.model.attributes.account_id), null, {
-            success: _.bind(function (data) {
-                obj = JSON.parse(data);                
-                if ( obj.total_account == 0) {
-                    app.alert.show("Sin comunicación previa", {
-                        level: "error",
-                        title: "No puede generar una Solicitud ya que no se tiene una llamada o reunión previa.",
-                        autoClose: false,
-                        return: false,
-                    });
-                    app.drawer.closeImmediately();
-                }
-		    }, this)
-		});                    
+        if(this.model.get('tipo_producto_c') == '1'){
+           app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + this.model.get('account_id')), null, {
+                success: _.bind(function (data) {
+                    obj = JSON.parse(data);                
+                    if ( obj.total_account == 0) {
+                        app.alert.show("Sin comunicación previa", {
+                            level: "error",
+                            title: "No puede generar una Solicitud ya que no se tiene una llamada o reunión previa.",
+                            autoClose: false,
+                            return: false,
+                        });
+                        app.drawer.closeImmediately();
+                    }else{
+                        callback(null, fields, errors);
+                    }
+                }, this)
+               
+	    	});                     
+        }else{
+            callback(null, fields, errors);
+        }
+        
     },
 
     /*@Jesus Carrillo

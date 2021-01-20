@@ -2,6 +2,8 @@
 
     extendsFrom: 'CreateView',
 
+    total_asignados:null,
+
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
@@ -19,10 +21,12 @@
         this.model.addValidationTask('check_longDupTel', _.bind(this.validaLongDupTel, this));
         this.model.addValidationTask('check_TextOnly', _.bind(this.checkTextOnly, this));
         this.model.addValidationTask('change:email', _.bind(this.expmail, this));
+        this.model.addValidationTask('checkCreateRecord', _.bind(this.checkCreateRecord, this));
         this.events['keydown [name=ventas_anuales_c]'] = 'checkInVentas';
         this.on('render', this._hidechkLeadCancelado, this);
         this.model.on('change:name_c', this.cleanName, this);
         this.model.on("change:regimen_fiscal_c", _.bind(this._cleanRegFiscal, this));
+        this.getRegistrosAsignados();
     },
 
     delegateButtonEvents: function() {
@@ -134,6 +138,24 @@
         }
 
         callback(null, fields, errors);
+    },
+
+    checkCreateRecord:function(fields, errors, callback){
+
+        if(this.total_asignados>20){
+
+            app.alert.show("error_create_leads", {
+                level: "error",
+                messages: 'No es posible crear Lead ya que tiene asignado el límite máximo de registros<br>Para crear registro, por favor atienda alguno de los registros que tiene asignado',
+                autoClose: false
+            });
+
+            errors['no_create_lead'] = errors['no_create_lead'] || {};
+            errors['no_create_lead'].required = true;
+        }
+
+        callback(null, fields, errors);
+
     },
 
     checkTextOnly: function (fields, errors, callback) {
@@ -553,7 +575,30 @@
         }
     },
 
-     cancel: function () {
+    /*
+    Función ejecutada para saber si la información se debe de mostrar
+    */
+    getRegistrosAsignados:function(){
+
+        var id_user=App.user.attributes.id;
+        App.alert.show('obtieneAsignados', {
+                    level: 'process',
+                    title: 'Cargando',
+                });
+
+        app.api.call('GET', app.api.buildURL('GetRegistrosAsignadosForProtocolo/' + id_user), null, {
+            success: function (data) {
+                App.alert.dismiss('obtieneAsignados');
+                self.total_asignados=data.total_asignados;
+            },
+            error: function (e) {
+                throw e;
+            }
+        });
+
+    },
+
+    cancel: function () {
         //Validación para obligar a registrar Lead a través de Protocolo al asesor firmado
         //necesariamente se agrega 'else' para que en una creación natural, el botón cancel siga con el funcionamiento natural
         if(this.fromProtocolo=='1'){

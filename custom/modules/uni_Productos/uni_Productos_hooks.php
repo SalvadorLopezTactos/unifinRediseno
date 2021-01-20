@@ -19,6 +19,8 @@ class uni_Productos_hooks
             if (!empty($opps)) {
               foreach ($opps as $opp) {
                 $GLOBALS['log']->fatal('---Cancelando Opportunidad: '.$opp->name.' '.$opp->id.'---');
+                $opp->tct_oportunidad_perdida_chk_c=1;
+                $opp->tct_razon_op_perdida_ddw_c='TR';//TIEMPO DE RESPUESTA
                 $opp->estatus_c='K';
                 $opp->save();
               }

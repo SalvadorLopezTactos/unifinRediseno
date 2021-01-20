@@ -350,16 +350,36 @@
                     }else if(parent_meet == "Leads"){
                         var keyselect = null;		
                         keyselect = this.$('#motivocancelacionCuenta').val();
+                        var subkeysqlct = this.$('#submotivocancelacion').val();
                         if((keyselect == "" || keyselect == null) && 
                         (self.model.get('resultado_c')=='2' ||self.model.get('resultado_c')=='18' || self.model.get('resultado_c')=='21' || self.model.get('resultado_c')=='25'))
                         {
                             app.alert.show("Motivo de Cancelación", {
                                 level: "error",
-                                title: "Debe seleccionar el motivo cancelación.",
+                                title: "Debe seleccionar el motivo cancelación para Lead Management.",
                                 autoClose: false
                             });
-                            errors['MotivoCancelacion'] = errors['MotivoCancelacion'] || {};
-                            errors['MotivoCancelacion'].required = true;
+                            $('#motivocancelacionCuenta').css('border-color', '#bb0e1b');
+                            $('#motivo_cancelacion_Cuenta').css('color', '#bb0e1b');
+                            $('#MotivoCancelacionLead').focus();
+                            errors['motivocancelacionCuenta'] = errors['motivocancelacionCuenta'] || {};
+                            errors['motivocancelacionCuenta'].required = true;
+                            callback(null, fields, errors);
+                        }else if((keyselect == "2" || MotCancelacion == "5" ) && (subkeysqlct == '' || subkeysqlct == null) &&
+                        (self.model.get('resultado_c')=='2' ||self.model.get('resultado_c')=='18' || self.model.get('resultado_c')=='21' || self.model.get('resultado_c')=='25'))
+                        {
+                            app.alert.show("Submotivo de Cancelación", {
+                                level: "error",
+                                title: "Debe seleccionar el submotivo cancelación para Lead Management.",
+                                autoClose: false
+                            });
+                            $('#motivocancelacionCuenta').css('border-color', '');
+                            $('#motivo_cancelacion_Cuenta').css('color', 'black');
+                            $('#submotivocancelacion').css('border-color', '#bb0e1b');
+                            $('#submotivo_cancelacion').css('border-color', '#bb0e1b');
+                            $('#submotivo_cancelacion').css('color', '#bb0e1b');
+                            errors['submotivocancelacion'] = errors['submotivocancelacion'] || {};
+                            errors['submotivocancelacion'].required = true;
                             callback(null, fields, errors);
                         }else{
                             var lead = app.data.createBean('Leads', {id:parent_id_acc});
@@ -382,6 +402,18 @@
                                             messages: 'Lead Cancelado',
                                             autoClose: true
                                         });
+
+                                        modelo.save();
+                                        //modelo.save([],{
+                                        //    dataType:"text",
+                                        //    complete:function() {
+                                        //        //app.router.navigate(module_name , {trigger: true});
+                                        //        $('a[name=new_minuta]').hide()
+                                        //        SUGAR.App.controller.context.reloadData({});
+                                        //        $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                        //        $('[data-name="assigned_user_name"]').removeAttr("style");
+                                        //    }
+                                        //});
                                     
                                     }else if(self.model.get('resultado_c')=='4' ||self.model.get('resultado_c')=='5' || self.model.get('resultado_c')=='19' 
                                     || self.model.get('resultado_c')=='6' || self.model.get('resultado_c')=='7' || self.model.get('resultado_c')=='23'){
@@ -409,13 +441,16 @@
                                                     errors['status'] = errors['status'] || {};
                                                     errors['status'].required = true;
                                                     callback(null, fields, errors);
-                                                } else {
+                                                } else { 
+
                                                     app.alert.show("Conversión", {
                                                         level: "success",
                                                         messages: data.mensaje,
                                                         autoClose: false
                                                     });
+
                                                     modelLead.set('subtipo_registro_c', "4");
+                                                    modelLead.set('account_id',data.idCuenta);
                                                     modelLead.save();
                                                     //this._disableActionsSubpanel();
                                                     //modelo.save();
@@ -428,7 +463,7 @@
                                                             $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
                                                             $('[data-name="assigned_user_name"]').removeAttr("style");
                                                         }
-                                                    }); 
+                                                    });                                                     
                                                 }
                                             }, this),
                                             failure: _.bind(function (data) {
@@ -443,41 +478,40 @@
                                             }, this)
                                         });
                                     }else if(self.model.get('resultado_c')=='3'){
+                                        
                                         modelLead.set('subtipo_registro_c', "2");
                                         modelLead.set('status_management_c', "2");
-                                        modelLead.save();
-                                         //modelo.save();
-                                        modelo.save([],{
-                                        dataType:"text",
-                                        complete:function() {
-                                                //app.router.navigate(module_name , {trigger: true});
-                                                $('a[name=new_minuta]').hide()
-                                                SUGAR.App.controller.context.reloadData({});
-                                                $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
-                                                $('[data-name="assigned_user_name"]').removeAttr("style");
-                                            }
-                                        });    
-                                    }else{
+                                        modelLead.save();                                        
+                                        modelo.save();
+                                        //modelo.save([],{
+                                        //dataType:"text",
+                                        //complete:function() {
+                                        //        //app.router.navigate(module_name , {trigger: true});
+                                        //        $('a[name=new_minuta]').hide()
+                                        //        SUGAR.App.controller.context.reloadData({});
+                                        //        $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                        //        $('[data-name="assigned_user_name"]').removeAttr("style");
+                                        //    }
+                                        //});    
+                                    }else{                                        
                                         modelLead.set('subtipo_registro_c', "2");
                                         modelLead.save();
-                                        //modelo.save();
-                                        modelo.save([],{
-                                            dataType:"text",
-                                            complete:function() {
-                                                    //app.router.navigate(module_name , {trigger: true});
-                                                    $('a[name=new_minuta]').hide()
-                                                    SUGAR.App.controller.context.reloadData({});
-                                                    $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
-                                                    $('[data-name="assigned_user_name"]').removeAttr("style");
-                                                }
-                                            }); 
-                                    }
-                                                                   
-                                    callback(null, fields, errors);
+                                        modelo.save();
+                                        //    dataType:"text",
+                                        //    complete:function() {
+                                        //            //app.router.navigate(module_name , {trigger: true});
+                                        //            $('a[name=new_minuta]').hide()
+                                        //            SUGAR.App.controller.context.reloadData({});
+                                        //            $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                        //            $('[data-name="assigned_user_name"]').removeAttr("style");
+                                        //        }
+                                        //    }); 
+                                    }                            
+                                    //callback(null, fields, errors);
                                 }else{
                                     callback(null, fields, errors);
                                 }
-                                //callback(null, fields, errors);				   
+                                callback(null, fields, errors);
                             }, this)
                             });
                         }
