@@ -4,6 +4,7 @@
     events: {
         'click #btnNoViableActivo': 'noViableActivo',
         'click #btnAplazarPIActivo': 'AplazarProductoPIActivo',
+        'click #btnProspIntExpActivo': 'ConvertirProspIntExpActivo',
     },
 
     dataAccSolicitudesActivo: [],
@@ -103,5 +104,14 @@
                 }
             });
         }
+    },
+
+    ConvertirProspIntExpActivo: function () {
+
+        app.alert.show('go-to-prospintexp-activo', {
+            level: 'info',
+            title: 'Cuenta con el resto del día en curso, para completar el activo, Scoring Comercial y asignación de Back Office para pasar a Prospecto en Integración de Expediente',
+            autoClose: false
+        });
     },
 })

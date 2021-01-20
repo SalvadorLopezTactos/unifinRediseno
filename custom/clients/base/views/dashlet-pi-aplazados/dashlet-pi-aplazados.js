@@ -3,6 +3,7 @@
 
     events: {
         'click #btnNoViableAplazados': 'noViableAplazados',
+        'click #btnProspIntExpAplazado': 'ConvertirProspIntExpAplazado',
     },
 
     dataAccSolicitudesAplazados:[],
@@ -51,5 +52,14 @@
 
         }
         this.layout.trigger("app:view:ModalNoViableCuentas");
+    },
+
+    ConvertirProspIntExpAplazado: function () {
+
+        app.alert.show('go-to-prospintexp-aplazado', {
+            level: 'info',
+            title: 'Cuenta con el resto del día en curso, para completar el activo, Scoring Comercial y asignación de Back Office para pasar a Prospecto en Integración de Expediente',
+            autoClose: false
+        });
     },
 })
