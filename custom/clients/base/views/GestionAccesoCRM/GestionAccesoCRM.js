@@ -370,7 +370,7 @@
         var subpuesto = $("#filtroSubPuesto").val();
 
         var fullname = nombres + apellidos;
-        if ((!/^\s+$/.test(nombres) && !/^\s+$/.test(apellidos) ) || subpuesto != "") {
+        if (!/^\s+$/.test(nombres) && !/^\s+$/.test(apellidos)) {
             app.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
 
             if (aux != "ok") {
@@ -407,7 +407,7 @@
                         "nombre_completo_c": {
                             "$contains": nombres + " " + apellidos
                         },
-                        "status":"Active",
+                        "status": "Active",
                         "puestousuario_c": 27,
                         "subpuesto_c": subpuesto
                     }
@@ -419,7 +419,7 @@
                         "nombre_completo_c": {
                             "$contains": nombres + " " + apellidos
                         },
-                        "status":"Active",
+                        "status": "Active",
                         "puestousuario_c": 27,
                     }
                 ];
