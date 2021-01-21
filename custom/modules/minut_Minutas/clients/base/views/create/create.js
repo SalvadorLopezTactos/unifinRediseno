@@ -365,7 +365,7 @@
                             errors['motivocancelacionCuenta'] = errors['motivocancelacionCuenta'] || {};
                             errors['motivocancelacionCuenta'].required = true;
                             callback(null, fields, errors);
-                        }else if((keyselect == "2" || MotCancelacion == "5" ) && (subkeysqlct == '' || subkeysqlct == null) &&
+                        }else if((keyselect == "2" || keyselect == "5" ) && (subkeysqlct == '' || subkeysqlct == null) &&
                         (self.model.get('resultado_c')=='2' ||self.model.get('resultado_c')=='18' || self.model.get('resultado_c')=='21' || self.model.get('resultado_c')=='25'))
                         {
                             app.alert.show("Submotivo de Cancelación", {
@@ -404,6 +404,7 @@
                                         });
 
                                         modelo.save();
+                                        callback(null, fields, errors);
                                         //modelo.save([],{
                                         //    dataType:"text",
                                         //    complete:function() {
@@ -415,7 +416,7 @@
                                         //    }
                                         //});
                                     
-                                    }else if(self.model.get('resultado_c')=='4' ||self.model.get('resultado_c')=='5' || self.model.get('resultado_c')=='19' 
+                                    }else if(self.model.get('resultado_c')=='4' ||self.model.get('resultado_c')=='5' || self.model.get('resultado_c')=='19' || self.model.get('resultado_c')=='20' 
                                     || self.model.get('resultado_c')=='6' || self.model.get('resultado_c')=='7' || self.model.get('resultado_c')=='23'){
                                         // Está Interesado. Se procede a generar expediente
                                         // Está Interesado. Se agendó otra visita
@@ -438,8 +439,8 @@
                                                         messages: data.mensaje,
                                                         autoClose: false
                                                     });
-                                                    errors['status'] = errors['status'] || {};
-                                                    errors['status'].required = true;
+                                                    errors['conversion'] = errors['conversion'] || {};
+                                                    errors['conversion'].required = true;
                                                     callback(null, fields, errors);
                                                 } else { 
 
@@ -463,19 +464,24 @@
                                                             $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
                                                             $('[data-name="assigned_user_name"]').removeAttr("style");
                                                         }
-                                                    });                                                     
+                                                    });
+                                                    callback(null, fields, errors);                                                                                                         
                                                 }
+                                                //callback(null, fields, errors);
                                             }, this),
                                             failure: _.bind(function (data) {
                                                 app.alert.dismiss('upload');
                                                 errors['status'] = errors['status'] || {};
                                                 errors['status'].required = true;
+                                                callback(null, fields, errors);
                                             }, this),
                                             error: _.bind(function (data) {
                                                 errors['status'] = errors['status'] || {};
                                                 errors['status'].required = true;
-                                                app.alert.dismiss('upload');                                            
-                                            }, this)
+                                                app.alert.dismiss('upload');
+                                                callback(null, fields, errors);                                         
+                                            }, this),
+                                            
                                         });
                                     }else if(self.model.get('resultado_c')=='3'){
                                         
@@ -483,6 +489,7 @@
                                         modelLead.set('status_management_c', "2");
                                         modelLead.save();                                        
                                         modelo.save();
+                                        callback(null, fields, errors);
                                         //modelo.save([],{
                                         //dataType:"text",
                                         //complete:function() {
@@ -497,6 +504,7 @@
                                         modelLead.set('subtipo_registro_c', "2");
                                         modelLead.save();
                                         modelo.save();
+                                        callback(null, fields, errors);
                                         //    dataType:"text",
                                         //    complete:function() {
                                         //            //app.router.navigate(module_name , {trigger: true});
@@ -511,12 +519,10 @@
                                 }else{
                                     callback(null, fields, errors);
                                 }
-                                callback(null, fields, errors);
+                                //callback(null, fields, errors);
                             }, this)
                             });
                         }
-                    }else{
-                        callback(null, fields, errors);
                     }
                     //callback(null, fields, errors);
                 }, this)
