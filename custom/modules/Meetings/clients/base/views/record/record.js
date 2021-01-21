@@ -171,12 +171,12 @@
                     model: model
                 },
             },
-            function(variable){
-                //alert('Drawer Cerrado');
-                location.reload();
-                //self.MotivoCanc_flag = 1;
-                //self.render();
-            }
+          function(variable){
+              //alert('Drawer Cerrado');
+              location.reload();
+              //self.MotivoCanc_flag = 1;
+              //self.render();
+          }
         );
         //}
     },

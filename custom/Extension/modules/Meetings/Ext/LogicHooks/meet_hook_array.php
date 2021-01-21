@@ -83,7 +83,7 @@ $hook_array['after_save'][] = Array(
     'Integration_Mobile',
     'envia_graph'
 );
-
+/*
 $hook_array['after_save'][] = Array(
     6,
     'Convierte Lead',
@@ -91,3 +91,4 @@ $hook_array['after_save'][] = Array(
     'Meetings_Hooks',
     'ConvierteLead'
 );
+*/
