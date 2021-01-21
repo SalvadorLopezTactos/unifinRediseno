@@ -65,7 +65,7 @@ class Seguros_SF
           }
         }
         //Prospecto
-        if($bean->etapa == 1 && !$bean->id_salesforce && !$bean->seguro_uni2_c)
+        if($bean->fetched_row['etapa'] != $bean->etapa && $bean->etapa == 1 && !$bean->id_salesforce && !$bean->seguro_uni2_c)
         {
           global $db;
           $token = $this->getToken();
@@ -167,7 +167,7 @@ class Seguros_SF
           }
         }
         //Cotizando
-        if($bean->etapa == 2 && !$bean->seguro_uni2_c)
+        if($bean->fetched_row['etapa'] != $bean->etapa && $bean->etapa == 2 && !$bean->seguro_uni2_c)
         {
           $token = $this->getToken();
           if($token)
@@ -208,7 +208,7 @@ class Seguros_SF
           }
         }
         //Cotizado
-        if($bean->etapa == 4 && $bean->tipo_registro_sf_c == 1 && !$bean->seguro_uni2_c)
+        if($bean->fetched_row['etapa'] != $bean->etapa && $bean->etapa == 4 && $bean->tipo_registro_sf_c == 1 && !$bean->seguro_uni2_c)
         {
           $token = $this->getToken();
           if($token)
@@ -239,7 +239,7 @@ class Seguros_SF
           }            
         }
         //No Cotizado
-        if($bean->etapa == 5 && $bean->tipo_registro_sf_c == 1 && !$bean->seguro_uni2_c)
+        if($bean->fetched_row['etapa'] != $bean->etapa && $bean->etapa == 5 && $bean->tipo_registro_sf_c == 1 && !$bean->seguro_uni2_c)
         {
           $token = $this->getToken();
           if($token)
@@ -272,7 +272,7 @@ class Seguros_SF
           }
         }
         //Presentación
-        if($bean->etapa == 6 && !$bean->seguro_uni2_c)
+        if($bean->fetched_row['etapa'] != $bean->etapa && $bean->etapa == 6 && !$bean->seguro_uni2_c)
         {
           $token = $this->getToken();
           if($token)
@@ -303,7 +303,7 @@ class Seguros_SF
           }
         }
         //Re-negociación
-        if($bean->etapa == 7 && !$bean->seguro_uni2_c)
+        if($bean->fetched_row['etapa'] != $bean->etapa && $bean->etapa == 7 && !$bean->seguro_uni2_c)
         {
           $token = $this->getToken();
           if($token)
@@ -336,7 +336,7 @@ class Seguros_SF
           }
         }
         //Ganada
-        if($bean->etapa == 9 && !$bean->seguro_uni2_c)
+        if($bean->fetched_row['etapa'] != $bean->etapa && $bean->etapa == 9 && !$bean->seguro_uni2_c)
         {
           $token = $this->getToken();
           if($token)
@@ -387,7 +387,7 @@ class Seguros_SF
           }
         }
         //No Ganada
-        if($bean->etapa == 10 && !$bean->seguro_uni2_c)
+        if($bean->fetched_row['etapa'] != $bean->etapa && $bean->etapa == 10 && !$bean->seguro_uni2_c)
         {
           $token = $this->getToken();
           if($token)
@@ -425,7 +425,7 @@ class Seguros_SF
           }
         }
         //Solicitud de Cotización
-        if($bean->etapa == 11 && !$bean->seguro_uni2_c)
+        if($bean->fetched_row['etapa'] != $bean->etapa && $bean->etapa == 11 && !$bean->seguro_uni2_c)
         {
           $token = $this->getToken();
           if($token)
