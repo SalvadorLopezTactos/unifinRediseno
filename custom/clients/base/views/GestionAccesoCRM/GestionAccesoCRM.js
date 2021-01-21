@@ -71,6 +71,7 @@
     mhin: "",
     mhout: "",
     data: [],
+    subpuesto_list: null,
 
     initialize: function (options) {
         this._super("initialize", [options]);
@@ -78,7 +79,7 @@
         this.loadView = false;
         if (app.user.attributes.agente_telefonico_c == 1) {
             this.loadView = true;
-
+            this.subpuesto_list = app.lang.getAppListStrings('subpuesto_list');
         }
         else {
             var route = app.router.buildRoute(this.module, null, '');
@@ -190,7 +191,7 @@
         }
     },
 
-    naceBloqueado:function () {
+    naceBloqueado: function () {
 
         /* Nace como bloqueado */
         $("#bloqueadoL").prop("checked", true);
@@ -216,7 +217,7 @@
         $("#DHout").attr("disabled", true);
     },
     closeModal: function () {
-  //      console.log("closeModal - clic");
+        //      console.log("closeModal - clic");
         var modal = $('#myModal');
         if (modal) {
             modal.hide();
@@ -249,8 +250,8 @@
                     '"Sunday":{"entrada":"' + ($('#bloqueadoD').is(":checked") ? "Bloqueado" : ($('#libreD').is(":checked") ? "Libre" : $("#DHin").val())) +
                     '","salida":"' + ($('#bloqueadoD').is(":checked") ? "Bloqueado" : ($('#libreD').is(":checked") ? "Libre" : $("#DHout").val())) + '","update":"' + $('#updateD').is(":checked") + '"}}';
 
-              //  console.log("Parametros " + parametros);
-              //  console.log("Horario " + horario)
+                //  console.log("Parametros " + parametros);
+                //  console.log("Horario " + horario)
                 var Params = {
                     'seleccionados': parametros,
                     'horario': horario,
@@ -264,7 +265,7 @@
                 app.api.call("create", dnbProfileUrl, {data: Params}, {
                     success: _.bind(function (data) {
                         app.alert.dismiss('Actualizando');
-                       // console.log(data);
+                        // console.log(data);
                         if (data) {
                             this.closeModal();
                             this.record_getAgente();
@@ -364,102 +365,132 @@
     },
 
     record_getAgente: function (aux) {
-        app.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
-
-        if (aux != "ok") {
-            var from_set = 0;
-            var to_set = 20;
-            var current_set = $("#offset_value").html();
-            var from_set_num = parseInt(from_set);
-        }
-        else {
-            var from_set = $("#offset_value").attr("from_set");
-            var to_set = $("#offset_value").attr("to_set");
-            var current_set = $("#offset_value").html();
-            var from_set_num = parseInt(from_set);
-        }
-        if (isNaN(from_set_num)) {
-            from_set_num = 0;
-        }
-
         var nombres = $("#filtroNombre").val();
         var apellidos = $("#filtroApellido").val();
+        var subpuesto = $("#filtroSubPuesto").val();
 
-        var filter_arguments =
-            {
-                "fields": [
-                    "nombre_completo_c",
-                    "puestousuario_c",
-                    "access_hours_c"
-                ],
-                "next_offset": -1,
-                "max_num": -1,
-                "offset": from_set_num,
-                "filter": [
+        var fullname = nombres + apellidos;
+        if ((!/^\s+$/.test(nombres) && !/^\s+$/.test(apellidos) ) || subpuesto != "") {
+            app.alert.show('upload', {level: 'process', title: 'LBL_LOADING', autoclose: false});
+
+            if (aux != "ok") {
+                var from_set = 0;
+                var to_set = 20;
+                var current_set = $("#offset_value").html();
+                var from_set_num = parseInt(from_set);
+            }
+            else {
+                var from_set = $("#offset_value").attr("from_set");
+                var to_set = $("#offset_value").attr("to_set");
+                var current_set = $("#offset_value").html();
+                var from_set_num = parseInt(from_set);
+            }
+            if (isNaN(from_set_num)) {
+                from_set_num = 0;
+            }
+
+            var filter_arguments =
+                {
+                    "fields": [
+                        "nombre_completo_c",
+                        "puestousuario_c",
+                        "access_hours_c"
+                    ],
+                    "next_offset": -1,
+                    "max_num": -1,
+                    "offset": from_set_num,
+                };
+
+            if (subpuesto != "") {
+                filter_arguments["filter"] = [
                     {
                         "nombre_completo_c": {
                             "$contains": nombres + " " + apellidos
                         },
-                        "puestousuario_c": 27
+                        "status":"Active",
+                        "puestousuario_c": 27,
+                        "subpuesto_c": subpuesto
                     }
-                ]
-            };
-        this.agentes = [];
-        app.api.call("read", app.api.buildURL("Users", null, null, filter_arguments), null, {
-            success: _.bind(function (data) {
-                var count = Object.keys(data.records).length;
-                if (count > 20) {
-                    for (var i = 0; i < 20; i++) {
-                        data.records[i].access_hours_c = data.records[i].access_hours_c != "" ? JSON.parse(data.records[i].access_hours_c) : "";
-                        this.agentes.push(data.records[i]);
+                ];
+            }
+            else {
+                filter_arguments["filter"] = [
+                    {
+                        "nombre_completo_c": {
+                            "$contains": nombres + " " + apellidos
+                        },
+                        "status":"Active",
+                        "puestousuario_c": 27,
                     }
-                }
-                else {
-                    for (var i = 0; i < count; i++) {
-                        data.records[i].access_hours_c = data.records[i].access_hours_c != "" ? JSON.parse(data.records[i].access_hours_c) : "";
-                        this.agentes.push(data.records[i]);
+                ];
+            }
+
+            this.agentes = [];
+            app.api.call("read", app.api.buildURL("Users", null, null, filter_arguments), null, {
+                success: _.bind(function (data) {
+                    var count = Object.keys(data.records).length;
+                    if (count > 20) {
+                        for (var i = 0; i < 20; i++) {
+                            data.records[i].access_hours_c = data.records[i].access_hours_c != "" ? JSON.parse(data.records[i].access_hours_c) : "";
+                            this.agentes.push(data.records[i]);
+                        }
                     }
-                    //this.agentes = data.records;
-                }
+                    else {
+                        for (var i = 0; i < count; i++) {
+                            data.records[i].access_hours_c = data.records[i].access_hours_c != "" ? JSON.parse(data.records[i].access_hours_c) : "";
+                            this.agentes.push(data.records[i]);
+                        }
+                        //this.agentes = data.records;
+                    }
 
-                //console.log(this.agentes);
-                //console.log("existen registros" + count);
-                self.total_page = 20;
-                self.total_page_all = count;
-                this.loadView = true;
-                this.render();
-                app.alert.dismiss('upload');
-
-                if (to_set > self.total_page_all) {
-                    to_set = self.total_page_all;
-                } else {
-                    to_set = from_set_num + self.total_page;
-                }
-
-                current_set = (parseInt(from_set) + 1) + " a " + to_set + " de " + self.total_page_all;
-                if (_.isEmpty(from_set)) {
-                    from_set = 0;
-                    to_set = 20;
+                    //console.log(this.agentes);
+                    //console.log("existen registros" + count);
+                    self.total_page = 20;
+                    self.total_page_all = count;
+                    this.loadView = true;
+                    this.render();
+                    app.alert.dismiss('upload');
 
                     if (to_set > self.total_page_all) {
                         to_set = self.total_page_all;
+                    } else {
+                        to_set = from_set_num + self.total_page;
                     }
 
                     current_set = (parseInt(from_set) + 1) + " a " + to_set + " de " + self.total_page_all;
-                }
-                $("#offset_value").html(current_set);
-                $("#offset_value").attr("from_set", from_set);
-                $("#offset_value").attr("to_set", to_set);
+                    if (_.isEmpty(from_set)) {
+                        from_set = 0;
+                        to_set = 20;
 
-                if (to_set == self.total_page_all) {
-                    $("#next_offset").attr('style', 'pointer-events:none')
-                }
+                        if (to_set > self.total_page_all) {
+                            to_set = self.total_page_all;
+                        }
 
-                $("#filtroNombre").val(nombres);
-                $("#filtroApellido").val(apellidos);
-                //console.log("despues de rende" + this.agentes);
-            }, this)
-        });
+                        current_set = (parseInt(from_set) + 1) + " a " + to_set + " de " + self.total_page_all;
+                    }
+                    $("#offset_value").html(current_set);
+                    $("#offset_value").attr("from_set", from_set);
+                    $("#offset_value").attr("to_set", to_set);
+
+                    if (to_set == self.total_page_all) {
+                        $("#next_offset").attr('style', 'pointer-events:none')
+                    }
+
+                    $("#filtroNombre").val(nombres);
+                    $("#filtroApellido").val(apellidos);
+                    $("#filtroSubPuesto").val(subpuesto);
+
+                    //console.log("despues de rende" + this.agentes);
+                }, this)
+            });
+        }
+        else {
+            app.alert.show('Sin valor', {
+                level: 'info',
+                title: 'Existen valores de búsqueda no validos',
+                autoClose: true
+            });
+        }
 
     },
 
