@@ -49,6 +49,14 @@ class NotificacionDirector
 
             $correo_director="";
 
+            //obtiene el id del asesor RM
+            $idasesorRM=$bean->asesor_rm_c;
+
+            $beanAsesorRM = BeanFactory::retrieveBean('Users', $idasesorRM);
+            if(!empty($beanAsesor_RM)){
+                $correo_rm=$beanAsesor_RM->email1;
+                $nombre_rm=$beanAsesor_RM->full_name;
+            }
             //Obteniendo correo de director Leasing
             $beanDirector = BeanFactory::retrieveBean('Users', $idDirector);
             if(!empty($beanDirector)){
@@ -270,7 +278,6 @@ SQL;
             $nombreCuenta=$bean->account_name;
             $idSolicitud=$bean->id;
             $linkSolicitud=$urlSugar.$idSolicitud;
-
             $correo_asesor="";
 
             $equipoPrincipal="";
@@ -283,7 +290,7 @@ SQL;
                 $nombreAsesor=$beanAsesor->full_name;
                 $equipoPrincipal=$beanAsesor->equipo_c;
             }
-
+            
             if($correo_asesor!=""){
                 $GLOBALS['log']->fatal("Correo Director Leasing : ".$correo_asesor);
                 if($equipoPrincipal!="" && $equipoPrincipal!="Equipo 0"){
@@ -319,7 +326,16 @@ SQL;
                 //$estatusString=$app_list_strings['estatus_c_operacion_list'][$estatus];
                 $estatusString="Autorizada";
 
-                $cuerpoCorreo= $this->estableceCuerpoNotificacionAsesor($nombreAsesor,$nombreCuenta,$estatusString,$linkSolicitud);
+                $cuerpoCorreo= $this->estableceCuerpoNotificacionAsesor($nombreAsesor,$nombreCuenta,$estatusString,$linkSolicitud,$nombreAsesorRM);
+
+                //Manda ejecutar funcion para envio de notificacion a asesor RM 1.-Genera cuerpo de correo 2.- Envia notificacion al director de la solicitud
+                $GLOBALS['log']->fatal("Crea cuerpo de notificacion a Asesor RM");
+
+                $cuerpoCorreoRM= $this->NotificacionRM($nombre_rm,$nombreCuenta,$linkSolicitud,$nombreDirector);
+
+                $GLOBALS['log']->fatal('Envia notificacion a '.$nombre_rm.','.$idasesorRM.'con correo '.$correo_rm);
+                
+                $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreoRM,$correo_rm,$nombre_rm,array(),$users_bo_emails,$idasesorRM,$recordid);
 
                 $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION (ESTATUS AUTORIZADA) A ASESOR ASIGNADO DE SOLICITUD ".$correo_asesor);
 
@@ -339,11 +355,11 @@ SQL;
     }
 
 
-    public function estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion){
+    public function estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion,$nombreAsesorRM){
 
 
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreDirector . '</b>
-      <br><br>Se le informa que se ha generado una solicitud de Leasing para la cuenta: <b>'. $nombreCuenta.'</b> y se solicita su VoBo.
+      <br><br>Se le informa que se ha generado una solicitud de Leasing para la cuenta: <b>'. $nombreCuenta.'</b> y se solicita su aprobación y validación de participación del asesor RM'.$nombreAsesorRM.'
       <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
       <br><br>Se adjunta documento con scoring comercial
       <br><br>Comentarios de asesor:<br>'.$descripcion.'
@@ -470,4 +486,22 @@ SQL;
 
     }
 
+    public function NotificacionRM($nombre_rm,$nombreCuenta,$linkSolicitud,$nombreDirector){
+
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $$nombre_rm . '</b>
+      <br><br>Se le informa que ha sido validada su participación en la solicitud: ' .$NombreSolicitud .', por el director: '.$NombreDirector.'
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Atentamente Unifin
+
+
+      <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
+      <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+       Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+       Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+       No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+       Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br /> </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a> </span><u></u><u></u></p>';
+
+        return $mailHTML;
+
+    }
 }

@@ -245,12 +245,15 @@
         if (this.model.get('tipo_producto_c') != undefined) {
             if (this.model.get('tipo_producto_c') != '1' && this.model.get('negocio_c') != '5' && this.model.get('producto_financiero_c') != '' && this.model.get('producto_financiero_c') != '0') { //Tipo 1 = LEASING
                 $('[data-type="opportunities_directores"]').hide();
+                $('[data-type="asesor_rm_c"]').hide();
             } else {
                 if (banderaExcluye.check.includes(1)) {
                     $('[data-type="opportunities_directores"]').hide();
+                    $('[data-type="asesor_rm_c"]').hide();
                 }
                 else {
                     $('[data-type="opportunities_directores"]').show();
+                    $('[data-type="asesor_rm_c"]').show();
                 }
             }
         }
@@ -3164,13 +3167,13 @@
                 $('[data-name="opportunities_directores"]').hide();
                 $('[data-name="vobo_descripcion_txa_c"]').hide();
                 $('[data-name="doc_scoring_chk_c"]').hide();
-
+                $('[data-name="asesor_rm_c"]').hide();
             } else {
-
                 if (this.model.get('director_notificado_c') || this.model.get('estatus_c') == 'K' || this.model.get('estatus_c') == 'R' || this.model.get('estatus_c') == 'N') {
                     $('[data-name="opportunities_directores"]').attr('style', 'pointer-events:none');
                     $('[data-name="vobo_descripcion_txa_c"]').attr('style', 'pointer-events:none');
                     $('[data-name="doc_scoring_chk_c"]').attr('style', 'pointer-events:none');
+                    $('[data-name="asesor_rm_c"]').attr('style', 'pointer-events:none');
                 }
 
             }

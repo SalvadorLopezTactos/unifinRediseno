@@ -254,8 +254,9 @@ array (
               ),
               8 => 
               array (
-                'name' => 'vobo_dir_c',
-                'label' => 'LBL_VOBO_DIR',
+                'name' => 'asesor_rm_c',
+                'studio' => 'visible',
+                'label' => 'LBL_ASESOR_RM',
               ),
               9 => 
               array (
@@ -773,6 +774,14 @@ array (
               array (
                 'name' => 'operacion_curso_chk_c',
                 'label' => 'LBL_OPERACION_CURSO_CHK',
+              ),
+              94 => 
+              array (
+                'name' => 'vobo_dir_c',
+                'label' => 'LBL_VOBO_DIR',
+              ),
+              95 => 
+              array (
               ),
             ),
           ),

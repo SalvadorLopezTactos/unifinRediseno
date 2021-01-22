@@ -226,3 +226,5 @@ $mod_strings['LBL_TIPO_SOL_ADMIN_CARTERA_C'] = 'Tipo de solicitud Administració
 $mod_strings['LBL_PRODUCTO_ORIGEN_VENCIDO_C'] = 'Producto origen vencido';
 $mod_strings['LBL_CANCELADO_QUANTICO'] = 'Cancelado Quantico';
 $mod_strings['LBL_CARTERA_DIAS_VENCIDO'] = 'Número de días en cartera vencida';
+$mod_strings['LBL_ASESOR_RM_USER_ID'] = 'Asesor RM que participó en Operación (relacionado Usuario ID)';
+$mod_strings['LBL_ASESOR_RM'] = 'Asesor RM que participó en Operación';
