@@ -141,7 +141,7 @@ class IntegracionQuantico
             $resultado = $callApi->postQuantico($host,$body,$auth_encode);
             $GLOBALS['log']->fatal('Resultado: Actualizacion Quantico ' . json_encode($resultado));
 
-            if ($resultado['Success'] &&$resultado['ErrorMessage']=="") {
+            if ($resultado['Success'] && $resultado['ErrorMessage']=="") {
                 $GLOBALS['log']->fatal('Actualización Correcta');
                 $query = "UPDATE opportunities_cstm
                               SET cancelado_quantico_c ='Actualización Correcta de Quantico.'
