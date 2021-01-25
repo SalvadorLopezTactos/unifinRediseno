@@ -43,3 +43,5 @@ $mod_strings['LBL_RESPONSABLE_OFICINA_CHK'] = 'Responsable de Oficina';
 $mod_strings['LBL_EXCLUIR_PRECALIFICA'] = 'Excluir pre-calificación';
 $mod_strings['LBL_ACCESS_HOURS_C'] = 'Horario de Acceso CRM';
 $mod_strings['LBL_ADMIN_CARTERA_C'] = 'Administración de cartera';
+$mod_strings['LBL_RESET_LEAD_CANCEL'] = 'Restablecer Leads Cancelado';
+$mod_strings['LBL_RESET_LEADCANCEL_C'] = 'Restablecer Leads Cancelados';

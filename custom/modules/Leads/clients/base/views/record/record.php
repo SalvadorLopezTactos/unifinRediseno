@@ -68,6 +68,16 @@ array (
                 'event' => 'button:convert_Lead_to_Accounts:click',
                 'class' => 'btn_convertLeads',
               ),
+              4 =>
+              array (
+                'name' => 'reset_lead',
+                'type' => 'rowaction',
+                'label' => 'Restablecer Lead',
+                'acl_action' => 'view',
+                'event' => 'button:reset_lead:click',
+                'class' => 'btn_resetLeads',
+
+              ),
             ),
           ),
           3 => 

@@ -196,7 +196,12 @@
                                     level: "error",
                                     title: "Debe seleccionar alguna opción de Lead Management para continuar.",
                                     autoClose: false
-                                });
+                                });                                
+                                //$('[data-panelname="LBL_RECORDVIEW_PANEL7"]').children().eq(1).removeAttr("style");
+                                $('#opciones').css('color', '#bb0e1b');
+                                $('#opciones').css('border-style', 'solid');
+                                $('#opciones').css('border-color', '#bb0e1b');
+                                
                                 errors['MotivoCancelacion'] = errors['MotivoCancelacion'] || {};
                                 errors['MotivoCancelacion'].required = true;
                                 callback(null, fields, errors);
@@ -246,101 +251,151 @@
                                     if(keyselect == "0" || keyselect == "" || keyselect == null){
                                         app.alert.show("Motivo de Cancelación", {
                                         level: "error",
-                                        title: "Debe seleccionar motivo de Cancelación de Lead.",
+                                        title: "Debe seleccionar Razón No Viable para Lead Management.",
                                         autoClose: false
                                         });
-                                        errors['MotivoCancelacion'] = errors['MotivoCancelacion'] || {};
-                                        errors['MotivoCancelacion'].required = true;
+                                        $('#opciones').css('color', 'black');
+                                        $('#opciones').css('border-style', 'none');
+                                        //$('[data-panelname="LBL_RECORDVIEW_PANEL7"]').children().eq(1).removeAttr("style");
+                                        $('#RazonNoViable').css('border-color', '#bb0e1b');
+                                        $('#razon_noviable').css('color', '#bb0e1b');
+                                        errors['razon_noviable'] = errors['razon_noviable'] || {};
+                                        errors['razon_noviable'].required = true;                                        
                                         callback(null, fields, errors);
                                     }else if(keyselect != "" && keyselect != null && keyselect != "0"){
+                                        var emptynoviable = 0;
+                                        $('#razon_noviable').css('color', 'black');
+                                        $('#RazonNoViable').css('border-color', '');
                                         /***********************************************/
-                                        //Valor de la lista de Razon no viable
-                                        if ($("#RazonNoViable").val() != "" && $("#RazonNoViable").val() != "0" && $("#RazonNoViable").val() != undefined && $("#RazonNoViable").val() != null) {
-                                            var KeyRazonNV = $("#RazonNoViable").val();
-                                            console.log("KeyRazonNV "+KeyRazonNV);
-                                        }
                                         //Se obtiene los valores de los campos seleccionados en el modal
-                                        if ($("#FueradePerfil").val() != "" && $("#FueradePerfil").val() != "0" && $("#FueradePerfil").val() != undefined && $("#FueradePerfil").val() != null) {
-                                            var keyfueradePerfil = $("#FueradePerfil").val();
-                                            console.log("keyfueradePerfil "+keyfueradePerfil);
+                                        if ($("#RazonNoViable").val() == "" || $("#RazonNoViable").val() == "0") {
+                                            $('#RazonNoViable').css('border-color', 'red');
+                                            emptynoviable += 1;
                                         }
-                                        if ($("#condFinancieras").val() != "" && $("#condFinancieras").val() != "0" && $("#condFinancieras").val() != undefined && $("#condFinancieras").val() != null) {
-                                            var keycondFinancieras = $("#condFinancieras").val();
-                                            console.log("keycondFinancieras "+keycondFinancieras);
+                                        if ($("#RazonNoViable").val() == "1" && ($("#FueradePerfil").val() == "" || $("#FueradePerfil").val() == "0")) {
+                                            $('#FueradePerfil').css('border-color', 'red');
+                                            emptynoviable += 1;
                                         }
-                                        if ($("#comp_quien").val() != "" && $("#comp_quien").val() != undefined && $("#comp_quien").val() != null) {
-                                            var txtcomp_quien = $("#comp_quien").val();
-                                            console.log("txtcomp_quien "+txtcomp_quien);
+                                        if ($("#RazonNoViable").val() == "2" && ($("#condFinancieras").val() == "" || $("#condFinancieras").val() == "0")) {
+                                             $('#condFinancieras').css('border-color', 'red');
+                                             emptynoviable += 1;
                                         }
-                                        if ($("#comp_porque").val() != "" && $("#comp_porque").val() != undefined && $("#comp_porque").val() != null) {
-                                            var txtcomp_porque = $("#comp_porque").val();
-                                            console.log("txtcomp_porque "+txtcomp_porque);
+                                        if ($("#RazonNoViable").val() == "3" && $('#comp_quien').val().trim() == "" && $('#comp_porque').val().trim() == "") {
+                                            $('#comp_quien').css('border-color', 'red');
+                                            $('#comp_porque').css('border-color', 'red');
+                                            emptynoviable += 1;
                                         }
-                                        if ($("#noProducto").val() != "" && $("#noProducto").val() != "0" && $("#noProducto").val() != undefined && $("#noProducto").val() != null) {
-                                            var keynoProducto = $("#noProducto").val();
-                                            console.log("keynoProducto "+keynoProducto);
+                                        if ($("#RazonNoViable").val() == "3" && $('#comp_quien').val().trim() == "" && $('#comp_porque').val().trim() != "") {
+                                            $('#comp_quien').css('border-color', 'red');
+                                            emptynoviable += 1;
                                         }
-                                        if ($("#otroProducto").val() != "" && $("#otroProducto").val() != undefined && $("#otroProducto").val() != null) {
-                                            var txtotroProducto = $("#otroProducto").val();
-                                            console.log("txtotroProducto "+txtotroProducto);
+                                        if ($("#RazonNoViable").val() == "3" && $('#comp_porque').val().trim() == "" && $('#comp_quien').val().trim() != "") {
+                                            $('#comp_porque').css('border-color', 'red');
+                                            emptynoviable += 1;
                                         }
-                                        if ($("#noInteresado").val() != "" && $("#noInteresado").val() != "0" && $("#noInteresado").val() != undefined && $("#noInteresado").val() != null) {
-                                            var keynoInteresado = $("#noInteresado").val();
-                                            console.log("keynoInteresado "+keynoInteresado);
+                                        if ($("#RazonNoViable").val() == "4" && ($("#noProducto").val() == "" || $("#noProducto").val() == "0")) {
+                                            $('#noProducto').css('border-color', 'red');
+                                            emptynoviable += 1;
                                         }
-                                        /*********************************************************/
-                                        app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + parent_id_acc), null, {
-                                            success: function (data) {
-                                                Productos = data;
-                                                ResumenProductos = [];
-                                                _.each(Productos, function (value, key) {
-                                                    var tipoProducto = Productos[key].tipo_producto;
-                                                    if(tipoProducto == userprodprin){
-                                                        idProdM = Productos[key].id;
-                                                        var producto = app.data.createBean('uni_Productos', {id:idProdM});
-                                                        producto.fetch({
-                                                            success: _.bind(function (model) {
-                                                                model.set('no_viable', true); //CHECK NO VIABLE
-                                                                model.set('status_management_c', '3'); //ESTATUS PRODUCTO CANCELADO
-                                                                model.set('no_viable_razon', KeyRazonNV); //RAZON NO VIABLE
-                                                                model.set('no_viable_razon_fp', keyfueradePerfil); //FUERA DE PERFIL
-                                                                model.set('no_viable_razon_cf', keycondFinancieras); //CONDICIONES FINANCIERAS
-                                                                model.set('no_viable_quien', txtcomp_quien); //YA ESTA CON LA COMPETENCIA - ¿QUIEN? TEXTO
-                                                                model.set('no_viable_porque', txtcomp_porque); //YA ESTA CON LA COMPETENCIA -¿POR QUE? TEXTO
-                                                                model.set('no_viable_producto', keynoProducto); //NO TENEMOS EL PRODUCTO - ¿QUE PRODUCTO?
-                                                                model.set('no_viable_otro_c', txtotroProducto); //NO TENEMOS EL PRODUCTO - ¿QUE PRODUCTO? TEXTO
-                                                                model.set('no_viable_razon_ni', keynoInteresado); //NO SE ENCUENTRA INTERESADO
-                                                                model.save();
-                                                                
-                                                                app.alert.show('message-id', {
-                                                                    level: 'success',
-                                                                    messages: 'Cuenta Cancelada',
-                                                                    autoClose: true
-                                                                });
-                                                            }, this)
-                                                        });
-                                                    }
-                                                });
-                                            },
-                                            error: function (e) {
-                                                throw e;
-                                            }
-                                        });
+                                        if ($("#RazonNoViable").val() == "4" && $("#noProducto").val() == "4" && $("#otroProducto").val() == "") {
+                                            $('#otroProducto').css('border-color', 'red');
+                                            emptynoviable += 1;
+                                        }
+                                        if ($("#RazonNoViable").val() == "7" && ($("#noInteresado").val() == "" || $("#noInteresado").val() == "0")) {
+                                            $('#noInteresado').css('border-color', 'red');
+                                            emptynoviable += 1;
+                                        }
+
+                                        if (emptynoviable > 0) {
+                                            app.alert.show("Falta-campos-no-viable", {
+                                                level: "error",
+                                                title: 'Debe seleccionar los campos faltantes para cancelación',
+                                                autoClose: false
+                                            });
+                                            errors['MotivoCancelacion'] = errors['MotivoCancelacion'] || {};
+                                            errors['MotivoCancelacion'].required = true;
+                                            callback(null, fields, errors);
+                                        }else{
+                                            /*********************************************************/
+                                            //Valor de la lista de Razon no viable
+	                                         if ($("#RazonNoViable").val() != "" || $("#RazonNoViable").val() != "0") {
+	                                             var KeyRazonNV = $("#RazonNoViable").val();
+	                                         }
+	                                         //Se obtiene los valores de los campos seleccionados en el modal
+	                                         if ($("#FueradePerfil").val() != "" || $("#FueradePerfil").val() != "0") {
+	                                             var keyfueradePerfil = $("#FueradePerfil").val();
+	                                         }
+	                                         if ($("#condFinancieras").val() != "" || $("#condFinancieras").val() != "0") {
+	                                              var keycondFinancieras = $("#condFinancieras").val();
+	                                         }
+	                                         if ($("#comp_quien").val() != "") {
+	                                             var txtcomp_quien = $("#comp_quien").val();
+	                                         }
+	                                         if ($("#comp_porque").val() != "") {
+	                                             var txtcomp_porque = $("#comp_porque").val();
+	                                         }
+	                                         if ($("#noProducto").val() != "" || $("#noProducto").val() != "0") {
+	                                             var keynoProducto = $("#noProducto").val();
+	                                         }
+	                                         if ($("#otroProducto").val() != "") {
+	                                             var txtotroProducto = $("#otroProducto").val();
+	                                         }
+	                                         if ($("#noInteresado").val() != "" || $("#noInteresado").val() != "0") {
+	                                             var keynoInteresado = $("#noInteresado").val();
+	                                         }
+		                                    keyselect = this.$('#RazonNoViable').val();
+                                            app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + parent_id_acc), null, {
+                                                success: function (data) {
+                                                    Productos = data;
+                                                    ResumenProductos = [];
+                                                    _.each(Productos, function (value, key) {
+                                                        var tipoProducto = Productos[key].tipo_producto;
+                                                        if(tipoProducto == userprodprin){
+                                                            idProdM = Productos[key].id;
+                                                            var producto = app.data.createBean('uni_Productos', {id:idProdM});
+                                                            producto.fetch({
+                                                                success: _.bind(function (model) {
+                                                                    model.set('no_viable', true); //CHECK NO VIABLE
+                                                                    model.set('status_management_c', '3'); //ESTATUS PRODUCTO CANCELADO
+                                                                    model.set('no_viable_razon', KeyRazonNV); //RAZON NO VIABLE
+                                                                    model.set('no_viable_razon_fp', keyfueradePerfil); //FUERA DE PERFIL
+                                                                    model.set('no_viable_razon_cf', keycondFinancieras); //CONDICIONES FINANCIERAS
+                                                                    model.set('no_viable_quien', txtcomp_quien); //YA ESTA CON LA COMPETENCIA - ¿QUIEN? TEXTO
+                                                                    model.set('no_viable_porque', txtcomp_porque); //YA ESTA CON LA COMPETENCIA -¿POR QUE? TEXTO
+                                                                    model.set('no_viable_producto', keynoProducto); //NO TENEMOS EL PRODUCTO - ¿QUE PRODUCTO?
+                                                                    model.set('no_viable_otro_c', txtotroProducto); //NO TENEMOS EL PRODUCTO - ¿QUE PRODUCTO? TEXTO
+                                                                    model.set('no_viable_razon_ni', keynoInteresado); //NO SE ENCUENTRA INTERESADO
+                                                                    model.save();
+
+                                                                    app.alert.show('message-id', {
+                                                                        level: 'success',
+                                                                        messages: 'Cuenta Cancelada',
+                                                                        autoClose: true
+                                                                    });
+
+                                                                    //modelo.save();
+                                            modelo.save([],{
+                                                dataType:"text",
+                                                complete:function() {
+                                                    //app.router.navigate(module_name , {trigger: true});
+                                                    $('a[name=new_minuta]').hide()
+                                                    SUGAR.App.controller.context.reloadData({});
+                                                    $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                                    $('[data-name="assigned_user_name"]').removeAttr("style");
+                                                }
+                                            });
+                                            callback(null, fields, errors);
+                                                                }, this)
+                                                            });
+                                                        }
+                                                    });
+                                                },
+                                                error: function (e) {
+                                                    throw e;
+                                                }
+                                            });                                  
                                         
-                                        
-                                        //modelo.save();
-                                        modelo.save([],{
-                                            dataType:"text",
-                                            complete:function() {
-                                                //app.router.navigate(module_name , {trigger: true});
-                                                $('a[name=new_minuta]').hide()
-                                                SUGAR.App.controller.context.reloadData({});
-                                                $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
-                                                $('[data-name="assigned_user_name"]').removeAttr("style");
-                                            }
-                                        });                                    
-                                        callback(null, fields, errors);
-                                   
+                                        }                            
                                     }
                                 }
                                 
@@ -362,6 +417,7 @@
                             $('#motivocancelacionCuenta').css('border-color', '#bb0e1b');
                             $('#motivo_cancelacion_Cuenta').css('color', '#bb0e1b');
                             $('#MotivoCancelacionLead').focus();
+                            $('[data-panelname="LBL_RECORDVIEW_PANEL8"]').children().eq(1).removeAttr("style");
                             errors['motivocancelacionCuenta'] = errors['motivocancelacionCuenta'] || {};
                             errors['motivocancelacionCuenta'].required = true;
                             callback(null, fields, errors);
@@ -378,6 +434,7 @@
                             $('#submotivocancelacion').css('border-color', '#bb0e1b');
                             $('#submotivo_cancelacion').css('border-color', '#bb0e1b');
                             $('#submotivo_cancelacion').css('color', '#bb0e1b');
+                            $('[data-panelname="LBL_RECORDVIEW_PANEL8"]').children().eq(1).removeAttr("style");
                             errors['submotivocancelacion'] = errors['submotivocancelacion'] || {};
                             errors['submotivocancelacion'].required = true;
                             callback(null, fields, errors);

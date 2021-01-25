@@ -45,7 +45,7 @@
           EJC_14/01/2021
           funcion: Valida tener alguna comunicación previa, llamada o reunión"
         */
-       this.model.addValidationTask('contacto_previo',  _.bind(this._contactoPrevio, this));
+       this.model.addValidationTask('contacto_previo',  _.bind(this.ContactoPrevio, this));
        
 
         this.model.addValidationTask('buscaDuplicados', _.bind(this.buscaDuplicados, this));
@@ -1535,7 +1535,7 @@
       Author: EJC 2021/01/14
       funcion: Valida comunicación previa llamada o reunión nivel cuentas"
     */
-   _contactoPrevio: function (fields, errors, callback) {
+   ContactoPrevio: function (fields, errors, callback) {
         
         if(this.model.get('tipo_producto_c') == '1'){
            app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + this.model.get('account_id')), null, {
