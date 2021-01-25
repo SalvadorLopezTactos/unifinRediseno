@@ -25,6 +25,10 @@
         this.context.on('button:llamada_work:click', this.llamar_trabajo, this);
         this.context.on('button:edit_button:click', this.noLlamar, this);
         this.model.on('sync', this.siNumero, this);
+        this.context.on('button:reset_lead:click', this.reset_lead, this);
+        this.model.on('sync', this._hideBtnReset, this);
+
+
     },
 
     _disableActionsSubpanel: function () {
@@ -720,4 +724,33 @@
       $('.llamada_home').hide();
       $('.llamada_work').hide();
     },
+
+    _hideBtnReset: function () {
+        var btnReset = this.getField("reset_lead");
+        var check_resetLead=app.user.attributes.reset_leadcancel_c;
+
+        if (btnReset) {
+            btnReset.listenTo(btnReset, "render", function () {
+
+                if (this.model.get('subtipo_registro_c') == '3' && check_resetLead) {
+                    btnReset.show();
+                } else {
+                    btnReset.hide();
+                }
+            });
+        }
+    },
+
+    reset_lead: function () {
+        reset = this;
+        var id = this.model.get('id');
+        reset.model.set("subtipo_registro_c", "1");
+        reset.model.set("lead_cancelado_c", false);
+        reset.model.set("motivo_cancelacion_c", "");
+        reset.model.save();
+
+    },
+
+
+
 })
