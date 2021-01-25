@@ -57,8 +57,8 @@ class GetCuentasExpediente extends SugarApi
                    and tipo_producto = '1'
                 and a.deleted = 0 and up.deleted = 0 
                 ) as DATOS_EXP
-                 where ( DATOS_EXP.val_dias=20 and DATOS_EXP.monto > 10000000) OR
-                  ( DATOS_EXP.val_dias=10 and (DATOS_EXP.monto > 10000000 and monto <= DATOS_EXP.monto > 0))";
+                where ( DATOS_EXP.val_dias=20 and DATOS_EXP.monto > 10000000) OR
+                ( DATOS_EXP.val_dias=10 and (DATOS_EXP.monto <= 10000000 and DATOS_EXP.monto > 0))";
               // $GLOBALS['log']->fatal('query',$query);
                 $result = $GLOBALS['db']->query($query);
 				
