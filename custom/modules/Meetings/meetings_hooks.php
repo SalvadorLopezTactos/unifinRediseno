@@ -673,8 +673,14 @@ class Meetings_Hooks
     function ConvierteLead($bean, $event, $arguments)
     {
  			$parent_id = $bean->parent_id;
- 			$parentType = $bean->parent_type;
+      $parentType = $bean->parent_type;
+
+      $GLOBALS['log']->fatal('Estatus: ' .$bean->status);
+      $GLOBALS['log']->fatal(' $parentType: ' . $parentType);
+      $GLOBALS['log']->fatal(' $resultado_c: ' . $bean->resultado_c);
+
 		  if($bean->status == "Held" && $parentType == 'Leads') {
+        $GLOBALS['log']->fatal('Entro conversión');
         require_once("custom/clients/base/api/check_duplicateAccounts.php");
         $filter_arguments = array("id" => $parent_id);
         $callApi = new check_duplicateAccounts();        
