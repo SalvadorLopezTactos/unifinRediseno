@@ -267,65 +267,43 @@
                                         $('#razon_noviable').css('color', 'black');
                                         $('#RazonNoViable').css('border-color', '');
                                         /***********************************************/
-                                        //Valor de la lista de Razon no viable
-                                        if ($("#RazonNoViable").val() != "" && $("#RazonNoViable").val() != "0" && $("#RazonNoViable").val() != undefined && $("#RazonNoViable").val() != null) {
-                                            var KeyRazonNV = $("#RazonNoViable").val();
-                                            $('#RazonNoViable').css('border-style', 'solid');
-                                            $('#RazonNoViable').css('border-color', '#bb0e1b');
-                                            $('#razon_noviable').css('color', '#bb0e1b');
-                                            emptynoviable += 1;
-                                            //console.log("KeyRazonNV "+KeyRazonNV);
-                                        }
                                         //Se obtiene los valores de los campos seleccionados en el modal
-                                        if ($("#FueradePerfil").val() != "" && $("#FueradePerfil").val() != "0" && $("#FueradePerfil").val() != undefined && $("#FueradePerfil").val() != null) {
-                                            var keyfueradePerfil = $("#FueradePerfil").val();
-                                            $('#FueradePerfil').css('border-color', '#bb0e1b');
-                                            $('#fuera_perfil').css('color', '#bb0e1b');
+                                        if ($("#RazonNoViable").val() == "" || $("#RazonNoViable").val() == "0") {
+                                            $('#RazonNoViable').css('border-color', 'red');
                                             emptynoviable += 1;
-                                            //console.log("keyfueradePerfil "+keyfueradePerfil);
                                         }
-                                        if ($("#condFinancieras").val() != "" && $("#condFinancieras").val() != "0" && $("#condFinancieras").val() != undefined && $("#condFinancieras").val() != null) {
-                                            var keycondFinancieras = $("#condFinancieras").val();
-                                            $('#condFinancieras').css('border-color', '#bb0e1b');
-                                            $('#cond_financieras').css('color', '#bb0e1b');
-	                                        emptynoviable += 1;
-                                            //console.log("keycondFinancieras "+keycondFinancieras);
-                                        }
-                                        if ($("#comp_quien").val() != "" && $("#comp_quien").val() != undefined && $("#comp_quien").val() != null) {
-                                            var txtcomp_quien = $("#comp_quien").val();
-                                            $('#comp_quien').css('border-color', '#bb0e1b');
-                                            $('#competencia_quien').css('color', '#bb0e1b');
+                                        if ($("#RazonNoViable").val() == "1" && ($("#FueradePerfil").val() == "" || $("#FueradePerfil").val() == "0")) {
+                                            $('#FueradePerfil').css('border-color', 'red');
                                             emptynoviable += 1;
-                                            //console.log("txtcomp_quien "+txtcomp_quien);
                                         }
-                                        if ($("#comp_porque").val() != "" && $("#comp_porque").val() != undefined && $("#comp_porque").val() != null) {
-                                            var txtcomp_porque = $("#comp_porque").val();
-                                            $('#comp_porque').css('border-color', '#bb0e1b');
-                                            $('#competencia_porque').css('color', '#bb0e1b');
-                                            emptynoviable += 1;
-                                            //console.log("txtcomp_porque "+txtcomp_porque);
+                                        if ($("#RazonNoViable").val() == "2" && ($("#condFinancieras").val() == "" || $("#condFinancieras").val() == "0")) {
+                                             $('#condFinancieras').css('border-color', 'red');
+                                             emptynoviable += 1;
                                         }
-                                        if ($("#noProducto").val() != "" && $("#noProducto").val() != "0" && $("#noProducto").val() != undefined && $("#noProducto").val() != null) {
-                                            var keynoProducto = $("#noProducto").val();
-                                            $('#noProducto').css('border-color', '#bb0e1b');
-                                            $('#no_product').css('color', '#bb0e1b');
+                                        if ($("#RazonNoViable").val() == "3" && $('#comp_quien').val().trim() == "" && $('#comp_porque').val().trim() == "") {
+                                            $('#comp_quien').css('border-color', 'red');
+                                            $('#comp_porque').css('border-color', 'red');
                                             emptynoviable += 1;
-                                            //console.log("keynoProducto "+keynoProducto);
                                         }
-                                        if ($("#otroProducto").val() != "" && $("#otroProducto").val() != undefined && $("#otroProducto").val() != null) {
-                                            var txtotroProducto = $("#otroProducto").val();
-                                            $('#otroProducto').css('border-color', '#bb0e1b');
-                                            $('#otro_producto').css('color', '#bb0e1b');
+                                        if ($("#RazonNoViable").val() == "3" && $('#comp_quien').val().trim() == "" && $('#comp_porque').val().trim() != "") {
+                                            $('#comp_quien').css('border-color', 'red');
                                             emptynoviable += 1;
-                                            //console.log("txtotroProducto "+txtotroProducto);
                                         }
-                                        if ($("#noInteresado").val() != "" && $("#noInteresado").val() != "0" && $("#noInteresado").val() != undefined && $("#noInteresado").val() != null) {
-                                            var keynoInteresado = $("#noInteresado").val();
-                                            $('#noInteresado').css('border-style', 'solid');
-                                            $('#noInteresado').css('border-color', '#bb0e1b');
-                                            $('#no_interesado').css('color', '#bb0e1b');
+                                        if ($("#RazonNoViable").val() == "3" && $('#comp_porque').val().trim() == "" && $('#comp_quien').val().trim() != "") {
+                                            $('#comp_porque').css('border-color', 'red');
                                             emptynoviable += 1;
-                                            //console.log("keynoInteresado "+keynoInteresado);
+                                        }
+                                        if ($("#RazonNoViable").val() == "4" && ($("#noProducto").val() == "" || $("#noProducto").val() == "0")) {
+                                            $('#noProducto').css('border-color', 'red');
+                                            emptynoviable += 1;
+                                        }
+                                        if ($("#RazonNoViable").val() == "4" && $("#noProducto").val() == "4" && $("#otroProducto").val() == "") {
+                                            $('#otroProducto').css('border-color', 'red');
+                                            emptynoviable += 1;
+                                        }
+                                        if ($("#RazonNoViable").val() == "7" && ($("#noInteresado").val() == "" || $("#noInteresado").val() == "0")) {
+                                            $('#noInteresado').css('border-color', 'red');
+                                            emptynoviable += 1;
                                         }
 
                                         if (emptynoviable > 0) {
@@ -339,6 +317,33 @@
                                             callback(null, fields, errors);
                                         }else{
                                             /*********************************************************/
+                                            //Valor de la lista de Razon no viable
+	                                         if ($("#RazonNoViable").val() != "" || $("#RazonNoViable").val() != "0") {
+	                                             var KeyRazonNV = $("#RazonNoViable").val();
+	                                         }
+	                                         //Se obtiene los valores de los campos seleccionados en el modal
+	                                         if ($("#FueradePerfil").val() != "" || $("#FueradePerfil").val() != "0") {
+	                                             var keyfueradePerfil = $("#FueradePerfil").val();
+	                                         }
+	                                         if ($("#condFinancieras").val() != "" || $("#condFinancieras").val() != "0") {
+	                                              var keycondFinancieras = $("#condFinancieras").val();
+	                                         }
+	                                         if ($("#comp_quien").val() != "") {
+	                                             var txtcomp_quien = $("#comp_quien").val();
+	                                         }
+	                                         if ($("#comp_porque").val() != "") {
+	                                             var txtcomp_porque = $("#comp_porque").val();
+	                                         }
+	                                         if ($("#noProducto").val() != "" || $("#noProducto").val() != "0") {
+	                                             var keynoProducto = $("#noProducto").val();
+	                                         }
+	                                         if ($("#otroProducto").val() != "") {
+	                                             var txtotroProducto = $("#otroProducto").val();
+	                                         }
+	                                         if ($("#noInteresado").val() != "" || $("#noInteresado").val() != "0") {
+	                                             var keynoInteresado = $("#noInteresado").val();
+	                                         }
+		                                    keyselect = this.$('#RazonNoViable').val();
                                             app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + parent_id_acc), null, {
                                                 success: function (data) {
                                                     Productos = data;
