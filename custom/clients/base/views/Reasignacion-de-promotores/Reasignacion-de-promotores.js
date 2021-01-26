@@ -501,6 +501,7 @@
     },
 
     reAsignarCuentas: function(){
+        self=this;
         var reAssignarA = this.model.get('asignar_a_promotor_id');
         var promoActual = this.model.get('users_accounts_1users_ida');
 
@@ -517,51 +518,78 @@
             this.seleccionados=this.full_cuentas;
         }
         if(!_.isEmpty(reAssignarA)) {
-            var parametros = this.seleccionados;
-            var producto_seleccionado = $("#Productos").val();
-            if(!_.isEmpty(parametros)) {
-                var Params = {
-                    'optBl':radioBl,
-                    'seleccionados': parametros,
-                    'reAssignado': reAssignarA,
-                    'producto_seleccionado': producto_seleccionado,
-                    'promoActual': promoActual,
-                };
-                app.alert.show('reasignando', {
+
+            //Comprobando que el asesor seleccionado destino, no tengo más de 20 registros asignados a el
+            var id_user=reAssignarA;
+            App.alert.show('obtieneAsignados', {
                     level: 'process',
-                    title: 'Cargando...'
-                });
-                var dnbProfileUrl = app.api.buildURL("reAsignarCuentas", '', {}, {});
-                app.api.call("create", dnbProfileUrl, {data: Params}, {
-                    success: _.bind(function (data) {
-                        console.log(typeof data);
-                        if(data){
-                            app.alert.dismiss('reasignando');
-                            this.cuentas = [];
-                            this.seleccionados = [];
-                            this.render();
-                            $('#successful').show();
-                            this.model.set("users_accounts_1users_ida","");
-                            this.model.set("users_accounts_1_name","");
-                            this.model.set("asignar_a_promotor_id","");
-                            this.model.set("asignar_a_promotor","");
+                    title: 'Cargando',
+            });
+
+            app.api.call('GET', app.api.buildURL('GetRegistrosAsignadosForProtocolo/' + id_user), null, {
+                success: function (data) {
+                    App.alert.dismiss('obtieneAsignados');
+                    if(data.total_asignados>=20 && (data.puesto=='2' || data.puesto=='5')){
+                        var alertOptions = {
+                            title: "No es posible reasignar al asesor seleccionado ya que cuenta con más de 20 registros asignados<br>Para continuar es necesario atender alguno de sus registros asignados",
+                            level: "error"
+                        };
+                        app.alert.show('validation', alertOptions);
+
+                    }else{
+                        var parametros = self.seleccionados;
+                        var producto_seleccionado = $("#Productos").val();
+                        if(!_.isEmpty(parametros)) {
+                            var Params = {
+                                'optBl':radioBl,
+                                'seleccionados': parametros,
+                                'reAssignado': reAssignarA,
+                                'producto_seleccionado': producto_seleccionado,
+                                'promoActual': promoActual,
+                            };
+                            app.alert.show('reasignando', {
+                                level: 'process',
+                                title: 'Cargando...'
+                            });
+                            var dnbProfileUrl = app.api.buildURL("reAsignarCuentas", '', {}, {});
+                            app.api.call("create", dnbProfileUrl, {data: Params}, {
+                                success: _.bind(function (data) {
+                                    console.log(typeof data);
+                                    if(data){
+                                        app.alert.dismiss('reasignando');
+                                        self.cuentas = [];
+                                        self.seleccionados = [];
+                                        self.render();
+                                        $('#successful').show();
+                                        self.model.set("users_accounts_1users_ida","");
+                                        self.model.set("users_accounts_1_name","");
+                                        self.model.set("asignar_a_promotor_id","");
+                                        self.model.set("asignar_a_promotor","");
+                                    }else{
+                                        app.alert.dismiss('reasignando');
+                                        var alertOptions = {
+                                            title: "El tipo de producto entre el asesor actual y reasignado debe ser el mismo",
+                                            level: "error"
+                                        };
+                                        app.alert.show('validation', alertOptions);
+                                    }
+                                }, this)
+                            });
                         }else{
-                            app.alert.dismiss('reasignando');
                             var alertOptions = {
-                                title: "El tipo de producto entre el asesor actual y reasignado debe ser el mismo",
+                                title: "No hay clientes seleccionados para reasignar",
                                 level: "error"
                             };
                             app.alert.show('validation', alertOptions);
                         }
-                    }, this)
-                });
-            }else{
-                var alertOptions = {
-                    title: "No hay clientes seleccionados para reasignar",
-                    level: "error"
-                };
-                app.alert.show('validation', alertOptions);
-            }
+                    }
+                },
+                error: function (e) {
+                    throw e;
+                }
+            });
+
+            
         }else{
             var alertOptions = {
                 title: "Por favor, seleccione un asesor Destino",

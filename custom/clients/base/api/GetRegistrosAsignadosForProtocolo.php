@@ -77,7 +77,12 @@ and a.deleted = 0 and up.deleted = 0";
 
         $total_registros=$total_leads+$total_cuentas;
 
-        return array('total_asignados'=>$total_registros);
+        //Se agrega a la respuesta el puesto del usuario
+        $usuario_asesor = BeanFactory::retrieveBean('Users', $id_user, array('disable_row_level_security' => true));
+        $puesto_asesor=$usuario_asesor->puestousuario_c;
+
+
+        return array('total_asignados'=>$total_registros,'puesto'=>$puesto_asesor);
 
     }
 
