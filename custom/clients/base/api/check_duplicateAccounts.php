@@ -257,7 +257,8 @@ SITE;
                         $objRegistrosAsignados= GetRegistrosAsignadosForProtocolo::getRecordsAssign("",$args);
                         $total_asignados=$objRegistrosAsignados['total_asignados'];
 
-                        if($total_asignados>=20 && ($puesto_asesor=='2' || $puesto_asesor=='5')){ //2-Director Leasing, 5-Asesor Leasing
+                        //if($total_asignados>=20 && ($puesto_asesor=='2' || $puesto_asesor=='5')){ //2-Director Leasing, 5-Asesor Leasing
+                        if($total_asignados>=20){ //2-Director Leasing, 5-Asesor Leasing
                             $procede['status'] = "notForAsignados";
                             $procede['data'] = array();
 
@@ -329,7 +330,8 @@ SITE;
                         $objRegistrosAsignados= GetRegistrosAsignadosForProtocolo::getRecordsAssign("",$args);
                         $total_asignados=$objRegistrosAsignados['total_asignados'];
 
-                        if($total_asignados>=20 && ($puesto_asesor=='2' || $puesto_asesor=='5')){
+                        //if($total_asignados>=20 && ($puesto_asesor=='2' || $puesto_asesor=='5')){
+                        if($total_asignados>=20){
                             $procede['status'] = "notForAsignados";
                             $procede['data'] = array();
 
