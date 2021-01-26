@@ -238,7 +238,7 @@
                                                 create: true,
                                                 layout: 'create',
                                                 module: 'Opportunities',
-                                                idAccount: idCuenta,
+                                                idAccount: parent_id_acc,
                                                 idNameAccount: data.name
                                             };
                                             app.controller.loadView(objOpp);
@@ -371,22 +371,22 @@
                                                                         level: 'success',
                                                                         messages: 'Cuenta Cancelada',
                                                                         autoClose: true
-                                                                    });
-
-                                                                    //modelo.save();
-                                            modelo.save([],{
-                                                dataType:"text",
-                                                complete:function() {
-                                                    //app.router.navigate(module_name , {trigger: true});
-                                                    $('a[name=new_minuta]').hide()
-                                                    SUGAR.App.controller.context.reloadData({});
-                                                    $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
-                                                    $('[data-name="assigned_user_name"]').removeAttr("style");
-                                                }
-                                            });
-                                            callback(null, fields, errors);
+                                                                    });                                           
+                                                                    
                                                                 }, this)
                                                             });
+                                                                                     //modelo.save();
+                                                            modelo.save([],{
+                                                                dataType:"text",
+                                                                complete:function() {
+                                                                    //app.router.navigate(module_name , {trigger: true});
+                                                                    $('a[name=new_minuta]').hide()
+                                                                    SUGAR.App.controller.context.reloadData({});
+                                                                    $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                                                    $('[data-name="assigned_user_name"]').removeAttr("style");
+                                                                }
+                                                            });
+                                                            callback(null, fields, errors);
                                                         }
                                                     });
                                                 },
