@@ -2,26 +2,27 @@
     plugins: ['Dashlet'],
 
     events: {
-        'click #btnNoViableActivo': 'noViableActivo',
+        'click #btnNoViableExpActivo': 'noViableExpActivo',
+        'click #btnCompExpActivo': 'CompExpedienteActivo',
     },
 
-    dataCuentas:[],
+    dataCuentasExpActivo:[],
 
     initialize: function (options) {
         this._super("initialize", [options]);
-        cuentas_exp = this;
-        this.cuentasProspectInteresadoActivo();
+        cuentas_exp_activo = this;
+        this.cuentasExpProspectInteresadoActivo();
     },
 
 
-    cuentasProspectInteresadoActivo: function () {
-		estActivo = "1";
-        app.api.call('GET', app.api.buildURL('GetCuentasExpediente/'+ estActivo), null, {
+    cuentasExpProspectInteresadoActivo: function () {
+		estActivoExp = "1";
+        app.api.call('GET', app.api.buildURL('GetCuentasExpediente/'+ estActivoExp), null, {
             success: function (data) {
 				console.log(data);
-                cuentas_exp.dataCuentas = data.records;
+                cuentas_exp_activo.dataCuentasExpActivo = data.records;
                 // console.log(self_solpi.dataAccSolicitudes);
-                cuentas_exp.render();
+                cuentas_exp_activo.render();
             },
             error: function (e) {
                 throw e;
@@ -29,9 +30,9 @@
         });
     },
 
-    noViableActivo: function (events) {
+    noViableExpActivo: function (events) {
 
-        btnIdCuentaActivo = $(events.currentTarget).attr('title');
+        btnIdCuentaExpActivo = $(events.currentTarget).attr('title');
         
         var quickCreateView = null;
         if (!quickCreateView) {
@@ -41,7 +42,7 @@
                 name: 'ModalNoViableCuentas',
                 layout: this.layout,
                 module: 'Accounts',
-                contextIdCuenta: btnIdCuentaActivo
+                contextIdCuenta: btnIdCuentaExpActivo
             });
 
             this.layout._components.push(quickCreateView);
@@ -49,5 +50,14 @@
 
         }
         this.layout.trigger("app:view:ModalNoViableCuentas");
+    },
+
+    CompExpedienteActivo: function () {
+
+        app.alert.show('go-to-compexp-activo', {
+            level: 'info',
+            title: 'Cuenta con el resto del día en curso, para completar el Expediente.',
+            autoClose: false
+        });
     },
 })
