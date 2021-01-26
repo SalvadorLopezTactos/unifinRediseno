@@ -748,6 +748,7 @@
         reset.model.set("lead_cancelado_c", false);
         reset.model.set("motivo_cancelacion_c", "");
         reset.model.save();
+        this._render();
 
     },
 
