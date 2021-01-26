@@ -86,6 +86,10 @@ SITE;
                     if ($requeridos != "") {
                         $msj_reunion = "Hace falta completar la siguiente información para convertir un <b>Lead: </b><br>" . $requeridos . "<br>";
                     }
+                    if($responsMeeting['status'] == "notForAsignados"){
+                        $msj_reunion="No es posible generar la conversión pues el Asesor asignado a la Reunión/Llamada ya cuenta con más de 20 registros Asignados<br>Para continuar es necesario atender alguno de sus registros asignados";
+
+                    }
                     if ($responsMeeting['status'] == "stop" || $responsMeeting['vacio'] ) {
                         $msj_reunion .= <<<SITE
                         El proceso no puede continuar. Falta al menos una <b>Reunión/Llamada Planificada o Realizada asignada a un Asesor.</b>
@@ -244,44 +248,59 @@ SITE;
 
                     if ($meeting->status != "Not Held") {
 
-                        $procede['status'] = "continue";
-                        $sqlUser = new SugarQuery();
-                        $sqlUser->select(array('id', 'puestousuario_c', 'tipodeproducto_c'));
-                        $sqlUser->from(BeanFactory::newBean('Users'));
-                        $sqlUser->where()->equals('id', $meeting->assigned_user_id);
-                        //$sqlUser->where()->notEquals('puestousuario_c', "");
-                        $sqlResult = $sqlUser->execute();
+                        //Comprobando que el usuario asignado a la reunión tenga menos de 20 registros asignados
+                        //Obteniendo puesto del usuario asignado a la reunión
+                        $usuario_asesor = BeanFactory::retrieveBean('Users', $meeting->assigned_user_id, array('disable_row_level_security' => true));
+                        $puesto_asesor=$usuario_asesor->puestousuario_c;
+                        
+                        $args=array('id_user'=>$meeting->assigned_user_id);
+                        $objRegistrosAsignados= GetRegistrosAsignadosForProtocolo::getRecordsAssign("",$args);
+                        $total_asignados=$objRegistrosAsignados['total_asignados'];
 
-                        $productos = $sqlResult[0]['tipodeproducto_c'];
-                        $puesto = $sqlResult[0]['puestousuario_c'];
+                        if($total_asignados>=20 && ($puesto_asesor=='2' || $puesto_asesor=='5')){ //2-Director Leasing, 5-Asesor Leasing
+                            $procede['status'] = "notForAsignados";
+                            $procede['data'] = array();
 
-                        // agregar que discrimine agente telefonico y cordinar de centro de prospeccion  27 y 31
-                        if ($productos == '1' && ($puesto != "27" && $puesto != "31")) {
+                        }else{
+                            $procede['status'] = "continue";
+                            $sqlUser = new SugarQuery();
+                            $sqlUser->select(array('id', 'puestousuario_c', 'tipodeproducto_c'));
+                            $sqlUser->from(BeanFactory::newBean('Users'));
+                            $sqlUser->where()->equals('id', $meeting->assigned_user_id);
+                            //$sqlUser->where()->notEquals('puestousuario_c', "");
+                            $sqlResult = $sqlUser->execute();
 
-                            $procede['data']['LEASING'] = $meeting->assigned_user_id;
+                            $productos = $sqlResult[0]['tipodeproducto_c'];
+                            $puesto = $sqlResult[0]['puestousuario_c'];
+
+                            // agregar que discrimine agente telefonico y cordinar de centro de prospeccion  27 y 31
+                            if ($productos == '1' && ($puesto != "27" && $puesto != "31")) {
+
+                                $procede['data']['LEASING'] = $meeting->assigned_user_id;
+                            }
+                            if ($productos == '3' && ($puesto != "27" && $puesto != "31")) {
+
+                                $procede['data']['CREDITO AUTOMOTRIZ'] = $meeting->assigned_user_id;
+                            }
+                            if ($productos == '4' && ($puesto != "27" && $puesto != "31")) {
+
+                                $procede['data']['FACTORAJE'] = $meeting->assigned_user_id;
+                            }
+                            if ($productos == '6' && ($puesto != "27" && $puesto != "31")) {
+
+                                $procede['data']['FLEET'] = $meeting->assigned_user_id;
+                            }
+                            if ($productos == '8') {
+
+                                $procede['data']['UNICLICK'] = $meeting->assigned_user_id;
+                            }
+                            if ($productos == '9') {
+
+                                $procede['data']['UNILEASE'] = $meeting->assigned_user_id;
+                            }
+
+                            $procede['vacio']=empty($procede['data'])?true:false;
                         }
-                        if ($productos == '3' && ($puesto != "27" && $puesto != "31")) {
-
-                            $procede['data']['CREDITO AUTOMOTRIZ'] = $meeting->assigned_user_id;
-                        }
-                        if ($productos == '4' && ($puesto != "27" && $puesto != "31")) {
-
-                            $procede['data']['FACTORAJE'] = $meeting->assigned_user_id;
-                        }
-                        if ($productos == '6' && ($puesto != "27" && $puesto != "31")) {
-
-                            $procede['data']['FLEET'] = $meeting->assigned_user_id;
-                        }
-                        if ($productos == '8') {
-
-                            $procede['data']['UNICLICK'] = $meeting->assigned_user_id;
-                        }
-                        if ($productos == '9') {
-
-                            $procede['data']['UNILEASE'] = $meeting->assigned_user_id;
-                        }
-
-                        $procede['vacio']=empty($procede['data'])?true:false;
 
                     }
                 }
@@ -302,44 +321,60 @@ SITE;
 
                     if ($meeting->status != "Not Held") {
 
-                        $procede['status'] = "continue";
-                        $sqlUser = new SugarQuery();
-                        $sqlUser->select(array('id', 'puestousuario_c', 'tipodeproducto_c'));
-                        $sqlUser->from(BeanFactory::newBean('Users'));
-                        $sqlUser->where()->equals('id', $meeting->assigned_user_id);
-                        //$sqlUser->where()->notEquals('puestousuario_c', "");
-                        $sqlResult = $sqlUser->execute();
+                        //Comprobando que el usuario asignado a la reunión tenga menos de 20 registros asignados
+                        $usuario_asesor = BeanFactory::retrieveBean('Users', $meeting->assigned_user_id, array('disable_row_level_security' => true));
+                        $puesto_asesor=$usuario_asesor->puestousuario_c;
 
-                        $productos = $sqlResult[0]['tipodeproducto_c'];
-                        $puesto = $sqlResult[0]['puestousuario_c'];
+                        $args=array('id_user'=>$meeting->assigned_user_id);
+                        $objRegistrosAsignados= GetRegistrosAsignadosForProtocolo::getRecordsAssign("",$args);
+                        $total_asignados=$objRegistrosAsignados['total_asignados'];
 
-                        // agregar que discrimine agente telefonico y cordinar de centro de prospeccion  27 y 31
-                        if ($productos == '1' && ($puesto != "27" && $puesto != "31")) {
+                        if($total_asignados>=20 && ($puesto_asesor=='2' || $puesto_asesor=='5')){
+                            $procede['status'] = "notForAsignados";
+                            $procede['data'] = array();
 
-                            $procede['data']['LEASING'] = $meeting->assigned_user_id;
+                        }else{
+
+                            $procede['status'] = "continue";
+                            $sqlUser = new SugarQuery();
+                            $sqlUser->select(array('id', 'puestousuario_c', 'tipodeproducto_c'));
+                            $sqlUser->from(BeanFactory::newBean('Users'));
+                            $sqlUser->where()->equals('id', $meeting->assigned_user_id);
+                            //$sqlUser->where()->notEquals('puestousuario_c', "");
+                            $sqlResult = $sqlUser->execute();
+
+                            $productos = $sqlResult[0]['tipodeproducto_c'];
+                            $puesto = $sqlResult[0]['puestousuario_c'];
+
+                            // agregar que discrimine agente telefonico y cordinar de centro de prospeccion  27 y 31
+                            if ($productos == '1' && ($puesto != "27" && $puesto != "31")) {
+
+                                $procede['data']['LEASING'] = $meeting->assigned_user_id;
+                            }
+                            if ($productos == '3' && ($puesto != "27" && $puesto != "31")) {
+
+                                $procede['data']['CREDITO AUTOMOTRIZ'] = $meeting->assigned_user_id;
+                            }
+                            if ($productos == '4' && ($puesto != "27" && $puesto != "31")) {
+
+                                $procede['data']['FACTORAJE'] = $meeting->assigned_user_id;
+                            }
+                            if ($productos == '6' && ($puesto != "27" && $puesto != "31")) {
+
+                                $procede['data']['FLEET'] = $meeting->assigned_user_id;
+                            }
+                            if ($productos == '8') {
+
+                                $procede['data']['UNICLICK'] = $meeting->assigned_user_id;
+                            }
+                            if ($productos == '9') {
+
+                                $procede['data']['UNILEASE'] = $meeting->assigned_user_id;
+                            }
+
+                            $procede['vacio']=empty($procede['data'])?true:false;
+
                         }
-                        if ($productos == '3' && ($puesto != "27" && $puesto != "31")) {
-
-                            $procede['data']['CREDITO AUTOMOTRIZ'] = $meeting->assigned_user_id;
-                        }
-                        if ($productos == '4' && ($puesto != "27" && $puesto != "31")) {
-
-                            $procede['data']['FACTORAJE'] = $meeting->assigned_user_id;
-                        }
-                        if ($productos == '6' && ($puesto != "27" && $puesto != "31")) {
-
-                            $procede['data']['FLEET'] = $meeting->assigned_user_id;
-                        }
-                        if ($productos == '8') {
-
-                            $procede['data']['UNICLICK'] = $meeting->assigned_user_id;
-                        }
-                        if ($productos == '9') {
-
-                            $procede['data']['UNILEASE'] = $meeting->assigned_user_id;
-                        }
-
-                        $procede['vacio']=empty($procede['data'])?true:false;
 
                     }
                 }
