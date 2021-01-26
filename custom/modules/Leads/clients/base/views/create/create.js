@@ -141,8 +141,12 @@
     },
 
     checkCreateRecord:function(fields, errors, callback){
+        //Obteniendo el puesto del usuario
+        //Se restringe creación de Leads cuando ya se tienen más de 20 registros asignados a los usuarios 
+        //Asesor Leasing:2, Director Leasing:5
+        var puesto=App.user.attributes.puestousuario_c;
 
-        if(this.total_asignados>20){
+        if(this.total_asignados>20 && (puesto=='2' || puesto=='5')){
 
             app.alert.show("error_create_leads", {
                 level: "error",
