@@ -2,26 +2,27 @@
     plugins: ['Dashlet'],
 
     events: {
-        'click #btnNoViableActivo': 'noViableActivo',
+        'click #btnNoViableExpAplazado': 'noViableExpActivo',
+        'click #btnCompExpAplazado': 'CompExpedienteAplazado',
     },
 
-    dataCuentas:[],
+    dataCuentasExpAplazado:[],
 
     initialize: function (options) {
         this._super("initialize", [options]);
-        cuentas_exp = this;
-        this.cuentasProspectInteresadoActivo();
+        cuentas_exp_aplazado = this;
+        this.cuentasProspectInteresadoExpAplazado();
     },
 
 
-    cuentasProspectInteresadoActivo: function () {
-		estActivo = "2";
-        app.api.call('GET', app.api.buildURL('GetCuentasExpediente/'+ estActivo), null, {
+    cuentasProspectInteresadoExpAplazado: function () {
+		estExpAplazado = "2";
+        app.api.call('GET', app.api.buildURL('GetCuentasExpediente/'+ estExpAplazado), null, {
             success: function (data) {
 				console.log(data);
-                cuentas_exp.dataCuentas = data.records;
+                cuentas_exp_aplazado.dataCuentasExpAplazado = data.records;
                 // console.log(self_solpi.dataAccSolicitudes);
-                cuentas_exp.render();
+                cuentas_exp_aplazado.render();
             },
             error: function (e) {
                 throw e;
@@ -29,9 +30,9 @@
         });
     },
 
-    noViableActivo: function (events) {
+    noViableExpActivo: function (events) {
 
-        btnIdCuentaActivo = $(events.currentTarget).attr('title');
+        btnIdCuentaExpAplazado = $(events.currentTarget).attr('title');
         
         var quickCreateView = null;
         if (!quickCreateView) {
@@ -41,7 +42,7 @@
                 name: 'ModalNoViableCuentas',
                 layout: this.layout,
                 module: 'Accounts',
-                contextIdCuenta: btnIdCuentaActivo
+                contextIdCuenta: btnIdCuentaExpAplazado
             });
 
             this.layout._components.push(quickCreateView);
@@ -49,5 +50,14 @@
 
         }
         this.layout.trigger("app:view:ModalNoViableCuentas");
+    },
+
+    CompExpedienteAplazado: function () {
+
+        app.alert.show('go-to-compexp-aplazado', {
+            level: 'info',
+            title: 'Cuenta con el resto del día en curso, para completar el Expediente.',
+            autoClose: false
+        });
     },
 })
