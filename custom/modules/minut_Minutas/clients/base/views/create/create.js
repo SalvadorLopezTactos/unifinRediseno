@@ -580,6 +580,18 @@
                             }, this)
                             });
                         }
+                    }else{
+                        modelo.save([],{
+                        dataType:"text",
+                        complete:function() {
+                                //app.router.navigate(module_name , {trigger: true});
+                                $('a[name=new_minuta]').hide()
+                                SUGAR.App.controller.context.reloadData({});
+                                $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                $('[data-name="assigned_user_name"]').removeAttr("style");
+                            }
+                        });
+                        callback(null, fields, errors);
                     }
                     //callback(null, fields, errors);
                 }, this)
