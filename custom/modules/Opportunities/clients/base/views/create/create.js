@@ -765,6 +765,12 @@
                     id_promotor = modelo.get('user_id_c');
                     name_promotor = modelo.attributes.promotorleasing_c;
                 }
+                //Agrega asesor solo con privilegios de Admin Cartera
+                if (this.model.get('admin_cartera_c') == true && app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
+                    
+                    id_promotor = app.user.id;
+                    name_promotor = app.user.attributes.full_name;
+                }
 
                 this.model.set("assigned_user_id", id_promotor);
                 this.model.set("assigned_user_name", name_promotor);
