@@ -3231,21 +3231,24 @@
     validaUserCartera: function (fields, errors, callback) {
         var reqAdminCartera = "";
 
-        if (this.model.get('admin_cartera_c') == true && this.model.get('tipo_sol_admin_cartera_c') == "") {
+        if (this.model.get('admin_cartera_c') == true && this.model.get('tipo_sol_admin_cartera_c') == "" && 
+            this.model.get('estatus_c') != 'K' && this.model.get('tct_oportunidad_perdida_chk_c') != true) {
             
             reqAdminCartera = reqAdminCartera + '<b>' + app.lang.get("LBL_TIPO_SOL_ADMIN_CARTERA_C", "Opportunities") + '</b><br>';
             errors['tipo_sol_admin_cartera_c'] = errors['tipo_sol_admin_cartera_c'] || {};
             errors['tipo_sol_admin_cartera_c'].required = true;
         }
 
-        if (this.model.get('admin_cartera_c') == true && this.model.get('producto_origen_vencido_c') == "") {
+        if (this.model.get('admin_cartera_c') == true && this.model.get('producto_origen_vencido_c') == "" && 
+            this.model.get('estatus_c') != 'K' && this.model.get('tct_oportunidad_perdida_chk_c') != true) {
             
             reqAdminCartera = reqAdminCartera + '<b>' + app.lang.get("LBL_PRODUCTO_ORIGEN_VENCIDO_C", "Opportunities") + '</b><br>';
             errors['producto_origen_vencido_c'] = errors['producto_origen_vencido_c'] || {};
             errors['producto_origen_vencido_c'].required = true;
         }
 
-        if (this.model.get('admin_cartera_c') == true && typeof(this.model.get('cartera_dias_vencido_c')) != "number") {
+        if (this.model.get('admin_cartera_c') == true && typeof(this.model.get('cartera_dias_vencido_c')) != "number" &&
+            this.model.get('estatus_c') != 'K' && this.model.get('tct_oportunidad_perdida_chk_c') != true) {
             
             reqAdminCartera = reqAdminCartera + '<b>' + app.lang.get("LBL_CARTERA_DIAS_VENCIDO", "Opportunities") + '</b><br>';
             errors['cartera_dias_vencido_c'] = errors['cartera_dias_vencido_c'] || {};
