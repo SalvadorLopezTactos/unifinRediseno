@@ -1614,7 +1614,7 @@ SQL;
                 "idProductoFinanciero" => $productoFinancieroId
 
             );
-            
+
             //Si la Solicitud es de Credito SOS recalcula el valor del campo Riesgo a "Mayor".
             //          if ($opportunidad['tipo_producto_c']=="SOS"){  # PREGUNTAR SI SE CAMBIA POR PRODUCTO FINANCIERO
             if ($opportunidad['tipo_producto_c'] == "CREDITO SIMPLE" && $opportunidad['producto_financiero_c'] == 40) {
@@ -1756,7 +1756,8 @@ SQL;
                     $fields['montoRiesgoEmpresarial'] = $opportunidad['monto_gpo_emp_c'];
                     $fields['tipoSolicitud'] = $opportunidad['tipo_sol_admin_cartera_c'];
                     $fields['diasVencido'] = $opportunidad['cartera_dias_vencido_c'];
-            
+                    $fields['rentaInicial'] = empty($fields['rentaInicial']) ? 0 : $fields['rentaInicial'];
+
                 } else {
                     $fields['operacionEspecial'] = false;
                     $fields['montoRiesgoEmpresarial'] = 0;
