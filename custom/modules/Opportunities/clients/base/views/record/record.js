@@ -2444,7 +2444,7 @@
         }
 
         if ((this.model.get('tipo_operacion_c') == '1' || this.model.get('tipo_producto_c') == '9') && this.model.get('tipo_de_operacion_c') == 'RATIFICACION_INCREMENTO') {
-            this.$("div.record-label[data-name='monto_c']").text("Monto del incremento");
+            this.$("div.record-label[data-name='monto_c']").text("Monto después de ratificación/incremento");
         }
         if (this.model.get('tipo_producto_c') == '1' || this.model.get('tipo_producto_c') == '9') {
             this.$("div.record-label[data-name='ca_importe_enganche_c']").text("Pago Único");
@@ -2640,7 +2640,7 @@
                     montoTotalGpoEmp = data['montoTotalGpoEmp'];
                     numCuentasGpoEmp = data['numCuentasGpoEmp'];
 
-                    if (self.model.get('estatus_c') != 'N' && checkRI != true) {
+                    if (self.model.get('estatus_c') != 'N' && checkRI != true && self.model.get('tipo_de_operacion_c')!='RATIFICACION_INCREMENTO') {
                         montoTotalGpoEmp = parseInt(montoTotalGpoEmp) + parseInt(self.model.get('monto_c'));
 
                     } else if (self.model.get('estatus_c') == 'N' && checkRI == true) {
@@ -2648,8 +2648,10 @@
                         montoTotalGpoEmp = parseInt(montoTotalGpoEmp) + parseInt(self.model.get('monto_ratificacion_increment_c'));
 
                     }
-
-                    if (montoTotalGpoEmp != '' && montoTotalGpoEmp != null && montoTotalGpoEmp != 0 && numCuentasGpoEmp > 1) {
+                    if (self.model.get('estatus_c') != 'N' && self.model.get('tipo_de_operacion_c')=='RATIFICACION_INCREMENTO') {
+                        montoTotalGpoEmp = parseInt(montoTotalGpoEmp) + parseInt(self.model.get('monto_ratificacion_increment_c'));
+                    }
+                    if (montoTotalGpoEmp != '' && montoTotalGpoEmp != null && montoTotalGpoEmp != 0) {
                         //Setea el monto total de grupo empresarial en el campo monto_gpo_emp_c
                         console.log("montoTotalGpoEmp " + montoTotalGpoEmp);
                         self.model.set('monto_gpo_emp_c', montoTotalGpoEmp);
@@ -3221,12 +3223,14 @@
 
             //this.model.set('admin_cartera_c', true);
             if (this.model.get('estatus_c')=='N') {
-              $('[data-name="monto_ratificacion_increment_c"]').attr('style', 'pointer-events:none'); //% Pago unico
               $('[data-name="admin_cartera_c"]').attr('style', 'pointer-events:none');
               $('[data-name="tipo_sol_admin_cartera_c"]').attr('style', 'pointer-events:none');
               $('[data-name="producto_origen_vencido_c"]').attr('style', 'pointer-events:none');
               $('[data-name="cartera_dias_vencido_c"]').attr('style', 'pointer-events:none');
             }
+            $('[data-name="monto_ratificacion_increment_c"]').attr('style', 'pointer-events:none');
+            $('[data-name="monto_c"]').attr('style', 'pointer-events:none');
+            $('[data-name="amount"]').attr('style', 'pointer-events:none');
             // $('[data-name="admin_cartera_c"]').show();
             // $('[data-name="tipo_sol_admin_cartera_c"]').show();
             // $('[data-name="producto_origen_vencido_c"]').show();
