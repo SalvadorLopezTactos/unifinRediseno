@@ -163,7 +163,7 @@
         smeet = this;
 
         var puesto_usuario=App.user.attributes.puestousuario_c;
-        var leasingPuestos = ['1','2','3','4','5','6','20','33',,'44','55'];
+        var leasingPuestos = ['1','2','3','4','5','6','20','33','44','55'];
                     
         if (Object.keys(errors).length == 0) {
           try {

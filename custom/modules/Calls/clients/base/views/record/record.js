@@ -628,7 +628,7 @@
 
 	ConfirmCancelar: function(fields, errors, callback) {
         var puesto_usuario=App.user.attributes.puestousuario_c;
-        var leasingPuestos = ['1','2','3','4','5','6','20','33',,'44','55'];
+        var leasingPuestos = ['1','2','3','4','5','6','20','33','44','55'];
 		if ($.isEmptyObject(errors)&& this.model.get('parent_id') != "" && this.model.get('parent_type') == "Leads" && this.model.get('status')=="Held" && leasingPuestos.includes( puesto_usuario )) {
 			var lead = app.data.createBean('Leads', {id:this.model.get('parent_id')});
 			lead.fetch({
@@ -732,7 +732,7 @@
 		var idcall =  this.model.get('id');
         var held = 0;
         var puesto_usuario=App.user.attributes.puestousuario_c;
-        var leasingPuestos = ['1','2','3','4','5','6','20','33',,'44','55'];
+        var leasingPuestos = ['1','2','3','4','5','6','20','33','44','55'];
 		
 		if ($.isEmptyObject(errors)&& this.model.get('parent_id') != "" && this.model.get('parent_type') == "Accounts" && this.model.get('status')=="Held" && leasingPuestos.includes( puesto_usuario )) {
 			
