@@ -9,6 +9,8 @@
     parent_type_true:true,
     tipo_lead:false,
     tipo_account:false,
+    puesto_usuario:"",
+    leasingPuestos: null,
 
     initialize: function (options) {
         //this.plugins = _.union(this.plugins || [], ['AddAsInvitee', 'ReminderTimeDefaults']);
@@ -33,6 +35,10 @@
         this.context.on('button:survey_minuta:click', this.open_survey_minuta, this);
 
         this.model.on("change:resultado_c", this.changeColorSurveyButton, this);
+
+        
+        this.puesto_usuario=App.user.attributes.puestousuario_c;
+        this.leasingPuestos = ['1','2','3','4','5','6','20','33','44','55'];
 
         var idUser = this.context.parent.attributes.model.attributes.created_by;
         var url = app.api.buildURL("Users/"+idUser, '', {}, {});
@@ -156,6 +162,9 @@
         var userprodprin = App.user.attributes.tipodeproducto_c;
         smeet = this;
 
+        var puesto_usuario=App.user.attributes.puestousuario_c;
+        var leasingPuestos = ['1','2','3','4','5','6','20','33','44','55'];
+                    
         if (Object.keys(errors).length == 0) {
           try {
             self=this;
@@ -187,7 +196,7 @@
                     
                     var parent_meet = modelo.get('parent_type');
                     var parent_id_acc = modelo.get('parent_id');
-                    if(parent_meet == "Accounts"){
+                    if(parent_meet == "Accounts"  &&  this.leasingPuestos.includes(  this.puesto_usuario )){
                         var account = app.data.createBean('Accounts', {id:parent_id_acc});
 			            account.fetch({
 			            success: _.bind(function (modelAcconut) {
@@ -402,7 +411,7 @@
                             }                           
                          }, this)
                         });
-                    }else if(parent_meet == "Leads"){
+                    }else if(parent_meet == "Leads"  &&  this.leasingPuestos.includes(  this.puesto_usuario ) ){
                         var keyselect = null;		
                         keyselect = this.$('#motivocancelacionCuenta').val();
                         var subkeysqlct = this.$('#submotivocancelacion').val();
@@ -1172,6 +1181,7 @@
     },
 
     changeColorSurveyButton:function (evt) {
+
        
         if(this.flagPuesto && this.model.get('resultado_c') != "22" && this.model.get('resultado_c') != "24" && this.model.get('resultado_c') != "25" && this.model.get('resultado_c') != ""){
             $('[name="survey_minuta"]').addClass('btn-success');
@@ -1180,40 +1190,43 @@
             $('[name="survey_minuta"]').removeClass('btn-success');
         }
 
-        var moduleid = app.data.createBean('Meetings',{id:this.model.get('minut_minutas_meetingsmeetings_idb')});
-        moduleid.fetch({
-            success:_.bind(function(modelo){
-                var parent_type1 = modelo.get('parent_type');
-                parent_id_acc = modelo.get('parent_id');
-                /*********************************** */
-                //console.log(parent_id_acc);
-                if(parent_type1== "Leads"){
-                    if(self.model.get('resultado_c')=='2' ||self.model.get('resultado_c')=='18' || self.model.get('resultado_c')=='21' || self.model.get('resultado_c')=='25'){
-                        $('[data-panelname="LBL_RECORDVIEW_PANEL8"]').removeClass('hide');
-                        
+        if( this.leasingPuestos.includes( this.puesto_usuario )){
+            var moduleid = app.data.createBean('Meetings',{id:this.model.get('minut_minutas_meetingsmeetings_idb')});
+            moduleid.fetch({
+                success:_.bind(function(modelo){
+                    var parent_type1 = modelo.get('parent_type');
+                    parent_id_acc = modelo.get('parent_id');
+                    /*********************************** */
+                    //console.log(parent_id_acc);
+                    if(parent_type1== "Leads"){
+                        if(self.model.get('resultado_c')=='2' ||self.model.get('resultado_c')=='18' || self.model.get('resultado_c')=='21' || self.model.get('resultado_c')=='25'){
+                            $('[data-panelname="LBL_RECORDVIEW_PANEL8"]').removeClass('hide');
+
+                        }else{
+                            $('[data-panelname="LBL_RECORDVIEW_PANEL8"]').addClass('hide');
+
+                        }
                     }else{
-                        $('[data-panelname="LBL_RECORDVIEW_PANEL8"]').addClass('hide');
-                        
-                    }
-                }else{
-                    app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + parent_id_acc), null, {
-                        success: _.bind(function (data) {
-                            obj = JSON.parse(data);
-                            if(parent_type1== "Accounts" && obj.total > 0){
-                                if( this.model.get('resultado_c') != "" ){
-                                    $('[data-panelname="LBL_RECORDVIEW_PANEL7"]').removeClass('hide');
-                                    self.render();
-                                }else{
-                                    $('[data-panelname="LBL_RECORDVIEW_PANEL7"]').addClass('hide');
-                                    self.render();
+                        app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + parent_id_acc), null, {
+                            success: _.bind(function (data) {
+                                obj = JSON.parse(data);
+                                if(parent_type1== "Accounts" && obj.total > 0){
+                                    if( this.model.get('resultado_c') != "" ){
+                                        $('[data-panelname="LBL_RECORDVIEW_PANEL7"]').removeClass('hide');
+                                        self.render();
+                                    }else{
+                                        $('[data-panelname="LBL_RECORDVIEW_PANEL7"]').addClass('hide');
+                                        self.render();
+                                    }
+                                
                                 }
-                            
-                            }
-                        }, this),
-                    }); 
-                }
-            }, this)
-        });
+                            }, this),
+                        }); 
+                    }
+                }, this)
+            });
+        }
+        
     },
 
     padre:function(){

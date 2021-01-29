@@ -627,13 +627,14 @@
 	},
 
 	ConfirmCancelar: function(fields, errors, callback) {
-				
-		if ($.isEmptyObject(errors)&& this.model.get('parent_id') != "" && this.model.get('parent_type') == "Leads" && this.model.get('status')=="Held") {
+        var puesto_usuario=App.user.attributes.puestousuario_c;
+        var leasingPuestos = ['1','2','3','4','5','6','20','33','44','55'];
+		if ($.isEmptyObject(errors)&& this.model.get('parent_id') != "" && this.model.get('parent_type') == "Leads" && this.model.get('status')=="Held" && leasingPuestos.includes( puesto_usuario )) {
 			var lead = app.data.createBean('Leads', {id:this.model.get('parent_id')});
 			lead.fetch({
 			    success: _.bind(function (model) {
                     var puesto_usuario=App.user.attributes.puestousuario_c;
-                if(model.get('subtipo_registro_c')=='1'){
+                if(model.get('subtipo_registro_c')=='1' || model.get('subtipo_registro_c')=='2'){
                     if(this.model.get('tct_resultado_llamada_ddw_c')=='Ilocalizable' || this.model.get('tct_resultado_llamada_ddw_c')=='No_esta_Interesado' || this.model.get('tct_resultado_llamada_ddw_c')=='Fuera_de_Perfil'){
                         model.set('lead_cancelado_c', true);
                         model.save();
@@ -729,8 +730,11 @@
 	
 	SegundaReunion: function(fields, errors, callback) {
 		var idcall =  this.model.get('id');
-		var held = 0;
-		if ($.isEmptyObject(errors)&& this.model.get('parent_id') != "" && this.model.get('parent_type') == "Accounts" && this.model.get('status')=="Held") {
+        var held = 0;
+        var puesto_usuario=App.user.attributes.puestousuario_c;
+        var leasingPuestos = ['1','2','3','4','5','6','20','33','44','55'];
+		
+		if ($.isEmptyObject(errors)&& this.model.get('parent_id') != "" && this.model.get('parent_type') == "Accounts" && this.model.get('status')=="Held" && leasingPuestos.includes( puesto_usuario )) {
 			
 			app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + this.model.get('parent_id')), null, {
                 success: _.bind(function (data) {
