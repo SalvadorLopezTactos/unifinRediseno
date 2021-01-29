@@ -46,7 +46,7 @@
           funcion: Valida tener alguna comunicación previa, llamada o reunión"
         */
        this.model.addValidationTask('contacto_previo',  _.bind(this.ContactoPrevio, this));
-       
+
 
         this.model.addValidationTask('buscaDuplicados', _.bind(this.buscaDuplicados, this));
         this.model.addValidationTask('valida_direc_indicador', _.bind(this.valida_direc_indicador, this));
@@ -173,7 +173,7 @@
        this.model.on("change:negocio_c", _.bind(this.Updt_OptionProdFinan, this));
         this.model.on('change:negocio_c', this.verificaOperacionProspecto, this);
 
-      
+
         this.adminUserCartera();
 
     },
@@ -425,7 +425,7 @@
             $('[data-name="ca_importe_enganche_c"]').attr('style', 'pointer-events:none'); //Pago unico
             $('[data-name="porciento_ri_c"]').attr('style', 'pointer-events:none'); //% Pago unico
         }
-        
+
     },
 
     adminUserCartera: function () {
@@ -767,7 +767,7 @@
                 }
                 //Agrega asesor solo con privilegios de Admin Cartera
                 if (this.model.get('admin_cartera_c') == true && app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
-                    
+
                     id_promotor = app.user.id;
                     name_promotor = app.user.attributes.full_name;
                 }
@@ -1536,17 +1536,17 @@
             }
         }
     },
-    
+
     /*
       Author: EJC 2021/01/14
       funcion: Valida comunicación previa llamada o reunión nivel cuentas"
     */
    ContactoPrevio: function (fields, errors, callback) {
-        
+
         if(this.model.get('tipo_producto_c') == '1'){
            app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + this.model.get('account_id')), null, {
                 success: _.bind(function (data) {
-                    obj = JSON.parse(data);                
+                    obj = JSON.parse(data);
                     if ( obj.total_account == 0) {
                         app.alert.show("Sin comunicación previa", {
                             level: "error",
@@ -1559,12 +1559,12 @@
                         callback(null, fields, errors);
                     }
                 }, this)
-               
-	    	});                     
+
+	    	});
         }else{
             callback(null, fields, errors);
         }
-        
+
     },
 
     /*@Jesus Carrillo
