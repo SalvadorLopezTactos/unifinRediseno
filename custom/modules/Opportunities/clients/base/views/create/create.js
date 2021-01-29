@@ -45,7 +45,7 @@
           EJC_14/01/2021
           funcion: Valida tener alguna comunicación previa, llamada o reunión"
         */
-       //this.model.addValidationTask('contacto_previo',  _.bind(this.ContactoPrevio, this));
+       this.model.addValidationTask('contacto_previo',  _.bind(this.ContactoPrevio, this));
 
 
         this.model.addValidationTask('buscaDuplicados', _.bind(this.buscaDuplicados, this));
