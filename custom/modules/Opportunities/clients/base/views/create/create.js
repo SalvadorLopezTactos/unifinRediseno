@@ -746,6 +746,11 @@
                     default:
                         id_promotor = modelo.get('user_id_c');
                         name_promotor = modelo.attributes.promotorleasing_c;
+                        //seteo de asesor RM al campo asesor_rm_c
+                        id_RM= modelo.get('user_id8_c');
+                        name_promotorRM = modelo.attributes.promotorrm_c;
+                        this.model.set("user_id1_c", id_RM);
+                        this.model.set("asesor_rm_c", name_promotorRM);
                         break;
                 }
 
