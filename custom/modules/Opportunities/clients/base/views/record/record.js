@@ -105,6 +105,8 @@
         //this.model.on('sync', this.disable_panels_team, this);
         this.model.on('sync', this.getcfRI, this);
         this.model.on('sync', this.validaetiquetas, this);
+        //Funcion para solo habilitar edicion en campo asesor RM de la solicitud
+        this.model.on('sync', this.validaRM, this);
         this.model.on('change:ca_pago_mensual_c', this.validamontos, this);
         this.model.on('change:amount', this.validamontos, this);
         this.model.on('change:porciento_ri_c', this.validamontos, this);
@@ -144,6 +146,7 @@
         //Se agrega validationTask únicamente para mostrar mensaje de aviso para indicar notificación a director cuando check
         //de ratificacion_incremento_c se haya seleccionado
         this.model.addValidationTask('alertaDirectorNotificacion', _.bind(this.alertaDirectorNotificacion, this));
+        this.model.addValidationTask('ValidaAsesorRMSeleccionado', _.bind(this.validaAsesorRM, this));
         //Validación para poder autorizar o rechazar la pre-solicitud
         this.model.on('sync', this.autorizapre, this);
         this.model.on('change:estatus_c', this.refrescaPipeLine, this);
@@ -246,12 +249,15 @@
         if (this.model.get('tipo_producto_c') != undefined) {
             if (this.model.get('tipo_producto_c') != '1' && this.model.get('negocio_c') != '5' && this.model.get('producto_financiero_c') != '' && this.model.get('producto_financiero_c') != '0') { //Tipo 1 = LEASING
                 $('[data-type="opportunities_directores"]').hide();
+                $('[data-type="asesor_rm_c"]').hide();
             } else {
                 if (banderaExcluye.check.includes(1)) {
                     $('[data-type="opportunities_directores"]').hide();
+                    $('[data-type="asesor_rm_c"]').hide();
                 }
                 else {
                     $('[data-type="opportunities_directores"]').show();
+                    $('[data-type="asesor_rm_c"]').show();
                 }
             }
         }
@@ -3172,13 +3178,13 @@
                 $('[data-name="opportunities_directores"]').hide();
                 $('[data-name="vobo_descripcion_txa_c"]').hide();
                 $('[data-name="doc_scoring_chk_c"]').hide();
-
+                $('[data-name="asesor_rm_c"]').hide();
             } else {
-
                 if (this.model.get('director_notificado_c') || this.model.get('estatus_c') == 'K' || this.model.get('estatus_c') == 'R' || this.model.get('estatus_c') == 'N') {
                     $('[data-name="opportunities_directores"]').attr('style', 'pointer-events:none');
                     $('[data-name="vobo_descripcion_txa_c"]').attr('style', 'pointer-events:none');
                     $('[data-name="doc_scoring_chk_c"]').attr('style', 'pointer-events:none');
+                    $('[data-name="asesor_rm_c"]').attr('style', 'pointer-events:none');
                 }
 
             }
@@ -3284,6 +3290,44 @@
         }
 
         callback(null, fields, errors);
+    },
+    //Funcion para permitir la edicion del campo asesorRM solo si el usuario logueado es el asignado a la opp o el director de la misma.
+    validaRM: function () {
+        var infoDirector = this.model.get('director_solicitud_c');
+        if (infoDirector != null && infoDirector != "") {
+            var res = infoDirector.split(",");
+            this.directorSolicitudId = res[0];
+        }
+        if (this.model.get('assigned_user_id')!=App.user.attributes.id && App.user.attributes.id!= this.directorSolicitudId){
+            this.$('[data-name="asesor_rm_c"]').attr('style', 'pointer-events:none');
+        }
+    },
+
+    //Función para validar que el asesor RM sea realmente un asesor RM 
+    validaAsesorRM: function (fields, errors, callback) {
+        var asesorRM=this.model.get('user_id1_c');
+        if(asesorRM!=""){
+            app.api.call('GET', app.api.buildURL('Infouser/' + asesorRM), null, {
+                success: _.bind(function (data) {
+    
+                    if (data != "") {
+                        if (!data.productos_c.includes("^11^")) {
+                                app.alert.show("error_asesorRM", {
+                                    level: "error",
+                                    title: "El asesor RM seleccionado no posee el producto RM. Favor de verificar.",
+                                    autoClose: false
+                                });
+                                errors['error_asesorRM'] = errors['error_asesorRM'] || {};
+                                errors['error_asesorRM'].required = true;
+                        }
+                    }
+                    callback(null, fields, errors);
+                }, self),
+            });
+
+        }else{
+            callback(null, fields, errors);
+        }
     },
 
 })
