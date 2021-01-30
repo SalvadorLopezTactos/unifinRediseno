@@ -1614,23 +1614,6 @@ SQL;
                 "idProductoFinanciero" => $productoFinancieroId
 
             );
-            //Se valida si el Administrador de Cartera esta activo en el config y a nivel de solicitud/usuario
-            if ($sugar_config['service_admin_cartera'] == true){
-
-                if ($opportunidad['admin_cartera_c'] == 1) {
-
-                    $fields['operacionEspecial'] = true;
-                    $fields['montoRiesgoEmpresarial'] = $opportunidad['monto_gpo_emp_c'];
-                    $fields['tipoSolicitud'] = $opportunidad['tipo_sol_admin_cartera_c'];
-                    $fields['diasVencido'] = $opportunidad['cartera_dias_vencido_c'];
-            
-                } else {
-                    $fields['operacionEspecial'] = false;
-                    $fields['montoRiesgoEmpresarial'] = 0;
-                    $fields['tipoSolicitud'] = "";
-                    $fields['diasVencido'] = 0;
-                }
-            }
 
             //Si la Solicitud es de Credito SOS recalcula el valor del campo Riesgo a "Mayor".
             //          if ($opportunidad['tipo_producto_c']=="SOS"){  # PREGUNTAR SI SE CAMBIA POR PRODUCTO FINANCIERO
@@ -1762,6 +1745,25 @@ SQL;
             if ($opportunidad['tipo_de_operacion_c'] == "RATIFICACION_INCREMENTO") {
                 $fields['idLineaRelacionada'] = $opportunidad['id_linea_credito_c'];
                 $fields['montoIncremento'] = $opportunidad['monto_ratificacion_increment_c'];
+            }
+
+            //Se valida si el Administrador de Cartera esta activo en el config y a nivel de solicitud/usuario
+            if ($sugar_config['service_admin_cartera'] == true){
+
+                if ($opportunidad['admin_cartera_c'] == 1) {
+
+                    $fields['operacionEspecial'] = true;
+                    $fields['montoRiesgoEmpresarial'] = $opportunidad['monto_gpo_emp_c'];
+                    $fields['tipoSolicitud'] = $opportunidad['tipo_sol_admin_cartera_c'];
+                    $fields['diasVencido'] = $opportunidad['cartera_dias_vencido_c'];
+                    $fields['rentaInicial'] = empty($fields['rentaInicial']) ? 0 : $fields['rentaInicial'];
+
+                } else {
+                    $fields['operacionEspecial'] = false;
+                    $fields['montoRiesgoEmpresarial'] = 0;
+                    $fields['tipoSolicitud'] = "";
+                    $fields['diasVencido'] = 0;
+                }
             }
 
             $time_start = microtime(true);

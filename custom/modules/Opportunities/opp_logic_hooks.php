@@ -56,7 +56,7 @@ SQL;
                 $query = "select count(*) as total from opportunities a, opportunities_cstm b, accounts_opportunities c
      where a.id = b.id_c and a.id = c.opportunity_id and a.deleted = 0 and c.account_id = '$cliente'
      and b.tct_etapa_ddw_c = 'SI' and isnull(b.estatus_c) and b.tipo_producto_c = '$tipo' and b.producto_financiero_c='$FINACIERO'";
-              
+
                 $result = $db->query($query);
                 $row = $db->fetchByAssoc($result);
                 $count = $row['total'];
@@ -238,7 +238,7 @@ SQL;
         $generaSolicitud = ($bean->tipo_de_operacion_c == 'RATIFICACION_INCREMENTO' && $bean->tipo_producto_c == '1' && $response_exluye == 1) ? true : $generaSolicitud;
         $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && $bean->tipo_producto_c == '1' && $response_exluye == 1) ? true : $generaSolicitud;
         $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && $bean->producto_financiero_c!="0" &&$bean->producto_financiero_c!="") ? true : $generaSolicitud;
-
+        $generaSolicitud = ($args['isUpdate'] == 1 && $bean->admin_cartera_c) ? true : $generaSolicitud;
         /*$GLOBALS['log']->fatal('valor Genera Solicitud JG: ' . $generaSolicitud);
         $GLOBALS['log']->fatal('Id process JG: ' . $bean->id_process_c);
         $GLOBALS['log']->fatal('Tipo operacion JG: ' . $bean->tipo_operacion_c);*/
@@ -339,7 +339,7 @@ SQL;
     {
 
         require_once("custom/clients/base/api/excluir_productos.php");
-        global $current_user;
+        global $current_user, $sugar_config;
         $args_uni_producto = [];
         $args_uni_producto['idCuenta'] = $bean->account_id;
         $args_uni_producto['Producto'] = $bean->tipo_producto_c;
@@ -476,6 +476,13 @@ SQL;
 
             $opp->negocio_c =  $bean->negocio_c;
             $opp->producto_financiero_c = $bean->producto_financiero_c;
+            //Validación de administración de cartera
+            if ($sugar_config['service_admin_cartera'] == true && $current_user->admin_cartera_c) {
+              $opp->admin_cartera_c=true;
+              $opp->assigned_user_id = $current_user->id;
+              $opp->tct_etapa_ddw_c = 'SI';
+              $opp->estatus_c = '';
+            }
 
             $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> Condiciones en nueva solicitud : " . print_r(count($opp->condiciones_financieras), 1));
             $id = $opp->save();

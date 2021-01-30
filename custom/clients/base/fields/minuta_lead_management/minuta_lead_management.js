@@ -137,6 +137,10 @@
         if (KeyRazonNV == "4") {
             $('#no_product').show();
         }
+        //NO TENEMOS EL PRODUCTO QUE REQUIERE
+        if (KeyRazonNV == "7") {
+            $('#no_interesado').show();
+        }
         //OPCION "OTRO" EN NO TENEMOS EL PRODUCTO QUE REQUIERE
         $('#noProducto').change(function (evt) {
             $('#otro_producto').hide();

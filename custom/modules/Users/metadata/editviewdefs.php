@@ -391,6 +391,15 @@ array (
             'label' => 'LBL_ADMIN_CARTERA_C',
           ),
         ),
+        11 => 
+        array (
+          0 => 
+          array (
+            'name' => 'reset_leadcancel_c',
+            'label' => 'LBL_RESET_LEADCANCEL_C',
+          ),
+          1 => '',
+        ),
       ),
     ),
   ),

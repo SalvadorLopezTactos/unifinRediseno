@@ -59,28 +59,51 @@ class check_duplicateAccounts extends SugarApi
                 if (($responsMeeting['status'] != "stop" && !empty($responsMeeting['data'])) && $requeridos == "") {
 
                     /** Creamos la Cuenta */
+                    //Obtener el puesto del usuario
+                    $idAsesor=$responsMeeting['data']['LEASING'];
+                    //Comprobando que el usuario asignado a la reunión tenga menos de 20 registros asignados
+                    //Obteniendo puesto del usuario asignado a la reunión
+                    $usuario_asesor = BeanFactory::retrieveBean('Users', $idAsesor, array('disable_row_level_security' => true));
+                    $puesto_asesor=$usuario_asesor->puestousuario_c;
+                        
+                    $args=array('id_user'=>$idAsesor);
+                    $objRegistrosAsignados= GetRegistrosAsignadosForProtocolo::getRecordsAssign("",$args);
+                    $total_asignados=$objRegistrosAsignados['total_asignados'];
 
-                    $bean_account = $this->createAccount($bean, $responsMeeting, false);
+                    $GLOBALS['log']->fatal("Total de asignados: " . $total_asignados. " Usuario: ".$usuario_asesor->user_name." Puesto: ".$puesto_asesor);
+                    
+                    if($total_asignados>=20 && ($puesto_asesor=='2' || $puesto_asesor=='5')){ //2-Director Leasing, 5-Asesor Leasing
+                        
+                        $msj_reunion="No es posible generar la conversión pues el Asesor asignado a la Reunión/Llamada ya cuenta con más de 20 registros Asignados<br>Para continuar es necesario atender alguno de sus registros asignados";
 
-                    if (!empty($bean_account->id)) {
-                        $resultadoRelaciones = $this->getContactAssoc($bean, $bean_account);
+                        $finish = array("idCuenta" => "", "mensaje" => $msj_reunion);
 
-                        // Cambiamos Estatus Leads tipo_registro_c    ----  subtipo_registro_c
-                        // $bean->tipo_registro_c = "";
-                        $bean->subtipo_registro_c = 4;
-                        $bean->account_id = $bean_account->id;
-                        $bean->account_name = $bean_account->name;
-                        $bean->save();
-                        // Re-asignamos las reuniones realizadas y planificadas de Leads a Cuentas
-                        $this->re_asign_meetings($bean, $bean_account->id);
+                    }else{
 
-                        $msj_succes = <<<SITE
-                        Conversión Completa <br>
-<b></b><a href="$url/#Accounts/$bean_account->id">$bean_account->name</a></b>
-SITE;
+                        $bean_account = $this->createAccount($bean, $responsMeeting, false);
 
-                        $finish = array("idCuenta" => $bean_account->id, "mensaje" => $msj_succes);
+                        if (!empty($bean_account->id)) {
+                            $resultadoRelaciones = $this->getContactAssoc($bean, $bean_account);
+
+                            // Cambiamos Estatus Leads tipo_registro_c    ----  subtipo_registro_c
+                            // $bean->tipo_registro_c = "";
+                            $bean->subtipo_registro_c = 4;
+                            $bean->account_id = $bean_account->id;
+                            $bean->account_name = $bean_account->name;
+                            $bean->save();
+                            // Re-asignamos las reuniones realizadas y planificadas de Leads a Cuentas
+                            $this->re_asign_meetings($bean, $bean_account->id);
+
+                            $msj_succes = <<<SITE
+                            Conversión Completa <br>
+    <b></b><a href="$url/#Accounts/$bean_account->id">$bean_account->name</a></b>
+    SITE;
+
+                            $finish = array("idCuenta" => $bean_account->id, "mensaje" => $msj_succes);
+                        }
+
                     }
+
                     // return array("idCuenta" => $bean_account->id, $resultadoRelaciones);
                 } else {
                     if ($requeridos != "") {
