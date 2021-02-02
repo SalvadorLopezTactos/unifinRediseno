@@ -670,7 +670,7 @@
                         this.layout.trigger("app:view:MotivoCancelModal");
                         /**************************************/
                         callback(null, fields, errors);
-                    }else if(this.model.get('tct_resultado_llamada_ddw_c')=='Checklist_expediente' && puesto_usuario!="27" && puesto_usuario!="31"){
+                    }else if(this.model.get('tct_resultado_llamada_ddw_c')=='Checklist_expediente' && puesto_usuario!="31"){
                         var filter_arguments = {
                             "id": this.model.get('parent_id')
                         };

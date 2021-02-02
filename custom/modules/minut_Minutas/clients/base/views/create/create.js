@@ -38,7 +38,7 @@
 
         
         this.puesto_usuario=App.user.attributes.puestousuario_c;
-        this.leasingPuestos = ['1','2','3','4','5','6','20','33','44','55'];
+        this.leasingPuestos = ['1','2','3','4','5','6','20','33','44','55','27'];
 
         var idUser = this.context.parent.attributes.model.attributes.created_by;
         var url = app.api.buildURL("Users/"+idUser, '', {}, {});
