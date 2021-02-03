@@ -275,8 +275,8 @@
     _render: function () {
         this._super("_render");
         $("div[data-name='relaciones_producto_c']").hide(); //Oculta el campo relaciones_producto_c donde se almacena el JSON
-        if (this.aux_bandera == 0) { //Bandera para que se ejecute la función de Tipo de producto
+        /*if (this.aux_bandera == 0) { //Bandera para que se ejecute la función de Tipo de producto
             $('.producto_list').trigger('change');
-        }
+        }*/
     },
 })
