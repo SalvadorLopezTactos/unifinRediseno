@@ -3184,7 +3184,6 @@
                     $('[data-name="opportunities_directores"]').attr('style', 'pointer-events:none');
                     $('[data-name="vobo_descripcion_txa_c"]').attr('style', 'pointer-events:none');
                     $('[data-name="doc_scoring_chk_c"]').attr('style', 'pointer-events:none');
-                    $('[data-name="asesor_rm_c"]').attr('style', 'pointer-events:none');
                 }
 
             }
