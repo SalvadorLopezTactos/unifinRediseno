@@ -52,8 +52,10 @@ class check_duplicateAccounts extends SugarApi
         if ($bean->subtipo_registro_c != "4") {
             if ($count == 0) {
 
-                $responsMeeting = $this->getMeetingsUser($bean);
 
+                $responsMeeting = $this->getMeetingsUser($bean);
+                $GLOBALS['log']->fatal("responsMeeting", $responsMeeting);
+                   
                 $requeridos = $this->validaRequeridos($bean);
 
                 if (($responsMeeting['status'] != "stop" && !empty($responsMeeting['data'])) && $requeridos == "") {
