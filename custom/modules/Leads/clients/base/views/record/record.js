@@ -728,11 +728,13 @@
     _hideBtnReset: function () {
         var btnReset = this.getField("reset_lead");
         var check_resetLead=app.user.attributes.reset_leadcancel_c;
+        var motivoCancel= this.model.get('motivo_cancelacion_c');
+
 
         if (btnReset) {
             btnReset.listenTo(btnReset, "render", function () {
 
-                if (this.model.get('subtipo_registro_c') == '3' && check_resetLead) {
+                if (this.model.get('subtipo_registro_c') == '3' && check_resetLead &&(motivoCancel=='3' || motivoCancel=='4' )) {
                     btnReset.show();
                 } else {
                     btnReset.hide();

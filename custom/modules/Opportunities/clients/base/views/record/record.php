@@ -254,8 +254,9 @@ array (
               ),
               8 => 
               array (
-                'name' => 'vobo_dir_c',
-                'label' => 'LBL_VOBO_DIR',
+                'name' => 'asesor_rm_c',
+                'studio' => 'visible',
+                'label' => 'LBL_ASESOR_RM',
               ),
               9 => 
               array (
@@ -420,13 +421,18 @@ array (
                   0 => 'currency_id',
                   1 => 'base_rate',
                 ),
-                'name' => 'monto_gpo_emp_c',
-                'label' => 'LBL_MONTO_GPO_EMP_C',
+                'name' => 'monto_ratificacion_increment_c',
+                'label' => 'LBL_MONTO_RATIFICACION_INCREMENT',
               ),
               33 => 
               array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
+                'related_fields' => 
+                array (
+                  0 => 'currency_id',
+                  1 => 'base_rate',
+                ),
+                'name' => 'monto_gpo_emp_c',
+                'label' => 'LBL_MONTO_GPO_EMP_C',
               ),
               34 => 
               array (
@@ -606,19 +612,14 @@ array (
               ),
               64 => 
               array (
-                'related_fields' => 
-                array (
-                  0 => 'currency_id',
-                  1 => 'base_rate',
-                ),
-                'name' => 'monto_ratificacion_increment_c',
-                'label' => 'LBL_MONTO_RATIFICACION_INCREMENT',
-              ),
-              65 => 
-              array (
                 'name' => 'plazo_ratificado_incremento_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PLAZO_RATIFICADO_INCREMENTO',
+              ),
+              65 => 
+              array (
+                'name' => 'blank_space',
+                'label' => 'LBL_BLANK_SPACE',
               ),
               66 => 
               array (
@@ -773,6 +774,14 @@ array (
               array (
                 'name' => 'operacion_curso_chk_c',
                 'label' => 'LBL_OPERACION_CURSO_CHK',
+              ),
+              94 => 
+              array (
+                'name' => 'vobo_dir_c',
+                'label' => 'LBL_VOBO_DIR',
+              ),
+              95 => 
+              array (
               ),
             ),
           ),

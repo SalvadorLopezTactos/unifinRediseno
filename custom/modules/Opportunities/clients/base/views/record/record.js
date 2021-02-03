@@ -105,6 +105,8 @@
         //this.model.on('sync', this.disable_panels_team, this);
         this.model.on('sync', this.getcfRI, this);
         this.model.on('sync', this.validaetiquetas, this);
+        //Funcion para solo habilitar edicion en campo asesor RM de la solicitud
+        this.model.on('sync', this.validaRM, this);
         this.model.on('change:ca_pago_mensual_c', this.validamontos, this);
         this.model.on('change:amount', this.validamontos, this);
         this.model.on('change:porciento_ri_c', this.validamontos, this);
@@ -144,11 +146,13 @@
         //Se agrega validationTask únicamente para mostrar mensaje de aviso para indicar notificación a director cuando check
         //de ratificacion_incremento_c se haya seleccionado
         this.model.addValidationTask('alertaDirectorNotificacion', _.bind(this.alertaDirectorNotificacion, this));
+        this.model.addValidationTask('ValidaAsesorRMSeleccionado', _.bind(this.validaAsesorRM, this));
         //Validación para poder autorizar o rechazar la pre-solicitud
         this.model.on('sync', this.autorizapre, this);
         this.model.on('change:estatus_c', this.refrescaPipeLine, this);
-        this.model.on("change:admin_cartera_c", _.bind(this.adminUserCartera, this));
-        this.adminUserCartera();
+        //this.model.on("change:admin_cartera_c", _.bind(this.adminUserCartera, this));
+        this.model.on('sync', this.adminUserCartera, this);
+        //this.adminUserCartera();
     },
 
     fulminantcolor: function () {
@@ -245,12 +249,15 @@
         if (this.model.get('tipo_producto_c') != undefined) {
             if (this.model.get('tipo_producto_c') != '1' && this.model.get('negocio_c') != '5' && this.model.get('producto_financiero_c') != '' && this.model.get('producto_financiero_c') != '0') { //Tipo 1 = LEASING
                 $('[data-type="opportunities_directores"]').hide();
+                $('[data-type="asesor_rm_c"]').hide();
             } else {
                 if (banderaExcluye.check.includes(1)) {
                     $('[data-type="opportunities_directores"]').hide();
+                    $('[data-type="asesor_rm_c"]').hide();
                 }
                 else {
                     $('[data-type="opportunities_directores"]').show();
+                    $('[data-type="asesor_rm_c"]').show();
                 }
             }
         }
@@ -606,24 +613,29 @@
         // Visualiza y oculta el campo check y sus dependencias de Administracion de cartera del usuario
         $('[data-name="admin_cartera_c"]').attr('style', 'pointer-events:none');
 
-        if (this.model.get('admin_cartera_c') == true && app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
+        /*if (this.model.get('admin_cartera_c') == true && app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
             //Bloquea campos de monto cuando es Administrador de cartera
             $('[data-name="monto_c"]').attr('style', 'pointer-events:none'); //Monto de línea
             $('[data-name="amount"]').attr('style', 'pointer-events:none'); //Monto a operar
             $('[data-name="ca_pago_mensual_c"]').attr('style', 'pointer-events:none'); //Pago mensual
             $('[data-name="ca_importe_enganche_c"]').attr('style', 'pointer-events:none'); //Pago unico
             $('[data-name="porciento_ri_c"]').attr('style', 'pointer-events:none'); //% Pago unico
-        
+            $('[data-name="monto_ratificacion_increment_c"]').attr('style', 'pointer-events:none'); //% Pago unico
+            $('[data-name="admin_cartera_c"]').show();
+            $('[data-name="tipo_sol_admin_cartera_c"]').show();
+            $('[data-name="producto_origen_vencido_c"]').show();
+            $('[data-name="cartera_dias_vencido_c"]').show();
+
         } else {
-            this.model.set('admin_cartera_c', false);
-            this.model.set('tipo_sol_admin_cartera_c', "");
-            this.model.set('producto_origen_vencido_c', "");
-            this.model.set('cartera_dias_vencido_c', "0");
+            // this.model.set('admin_cartera_c', false);
+            // this.model.set('tipo_sol_admin_cartera_c', "");
+            // this.model.set('producto_origen_vencido_c', "");
+            // this.model.set('cartera_dias_vencido_c', "0");
             $('[data-name="admin_cartera_c"]').hide();
             $('[data-name="tipo_sol_admin_cartera_c"]').hide();
             $('[data-name="producto_origen_vencido_c"]').hide();
             $('[data-name="cartera_dias_vencido_c"]').hide();
-        }
+        }*/
 
     },
 
@@ -1059,20 +1071,20 @@
                 errors['monto_c'].required = true;
             }
 
-            if (parseFloat(this.model.get('amount')) <= 0 && this.model.get('tipo_operacion_c') == '1' && this.model.get('tipo_producto_c') != "7" && 
+            if (parseFloat(this.model.get('amount')) <= 0 && this.model.get('tipo_operacion_c') == '1' && this.model.get('tipo_producto_c') != "7" &&
                 this.model.get('admin_cartera_c') != true) {
                 errors['amount'] = errors['amount'] || {};
                 errors['amount'].required = true;
             }
 
-            if (parseFloat(this.model.get('ca_pago_mensual_c')) <= 0 && this.model.get('tipo_producto_c') != "6" && this.model.get('tipo_producto_c') != "7" && 
+            if (parseFloat(this.model.get('ca_pago_mensual_c')) <= 0 && this.model.get('tipo_producto_c') != "6" && this.model.get('tipo_producto_c') != "7" &&
                 this.model.get('producto_financiero_c') != "43" && this.model.get('admin_cartera_c') != true) {
                 errors['ca_pago_mensual_c'] = errors['ca_pago_mensual_c'] || {};
                 errors['ca_pago_mensual_c'].required = true;
             }
 
             if (this.model.get('tct_etapa_ddw_c') == 'SI') {
-                if (parseFloat(this.model.get('ca_importe_enganche_c')) <= 0 && (this.model.get('tipo_producto_c') == "1" || this.model.get('tipo_producto_c') == "9") && 
+                if (parseFloat(this.model.get('ca_importe_enganche_c')) <= 0 && (this.model.get('tipo_producto_c') == "1" || this.model.get('tipo_producto_c') == "9") &&
                     this.model.get('admin_cartera_c') != true) {
                     errors['ca_importe_enganche_c'] = errors['ca_importe_enganche_c'] || {};
                     errors['ca_importe_enganche_c'].required = true;
@@ -1085,7 +1097,7 @@
 
                 }
 
-                if ((parseFloat(this.model.get('porciento_ri_c')) <= 0 || this.model.get('porciento_ri_c') == "") && (this.model.get('tipo_producto_c') == "1" || this.model.get('tipo_producto_c') == "9") && 
+                if ((parseFloat(this.model.get('porciento_ri_c')) <= 0 || this.model.get('porciento_ri_c') == "") && (this.model.get('tipo_producto_c') == "1" || this.model.get('tipo_producto_c') == "9") &&
                     this.model.get('admin_cartera_c') != true) {
                     errors['porciento_ri_c'] = errors['porciento_ri_c'] || {};
                     errors['porciento_ri_c'].required = true;
@@ -2060,7 +2072,7 @@
     },
 
     validapagounico: function (fields, errors, callback) {
-        if (this.model.get('porciento_ri_c') != "" && this.model.get('porciento_ri_c') != undefined && (Number(this.model.get('porciento_ri_c')) <= 0 || Number(this.model.get('porciento_ri_c')) > 100.00) && 
+        if (this.model.get('porciento_ri_c') != "" && this.model.get('porciento_ri_c') != undefined && (Number(this.model.get('porciento_ri_c')) <= 0 || Number(this.model.get('porciento_ri_c')) > 100.00) &&
             this.model.get('admin_cartera_c') != true) {
 
             if (parseFloat(this.model.get('porciento_ri_c')) <= 0.0000) {
@@ -2438,7 +2450,7 @@
         }
 
         if ((this.model.get('tipo_operacion_c') == '1' || this.model.get('tipo_producto_c') == '9') && this.model.get('tipo_de_operacion_c') == 'RATIFICACION_INCREMENTO') {
-            this.$("div.record-label[data-name='monto_c']").text("Monto del incremento");
+            this.$("div.record-label[data-name='monto_c']").text("Monto después de ratificación/incremento");
         }
         if (this.model.get('tipo_producto_c') == '1' || this.model.get('tipo_producto_c') == '9') {
             this.$("div.record-label[data-name='ca_importe_enganche_c']").text("Pago Único");
@@ -2634,7 +2646,7 @@
                     montoTotalGpoEmp = data['montoTotalGpoEmp'];
                     numCuentasGpoEmp = data['numCuentasGpoEmp'];
 
-                    if (self.model.get('estatus_c') != 'N' && checkRI != true) {
+                    if (self.model.get('estatus_c') != 'N' && checkRI != true && self.model.get('tipo_de_operacion_c')!='RATIFICACION_INCREMENTO') {
                         montoTotalGpoEmp = parseInt(montoTotalGpoEmp) + parseInt(self.model.get('monto_c'));
 
                     } else if (self.model.get('estatus_c') == 'N' && checkRI == true) {
@@ -2642,8 +2654,10 @@
                         montoTotalGpoEmp = parseInt(montoTotalGpoEmp) + parseInt(self.model.get('monto_ratificacion_increment_c'));
 
                     }
-
-                    if (montoTotalGpoEmp != '' && montoTotalGpoEmp != null && montoTotalGpoEmp != 0 && numCuentasGpoEmp > 1) {
+                    if (self.model.get('estatus_c') != 'N' && self.model.get('tipo_de_operacion_c')=='RATIFICACION_INCREMENTO') {
+                        montoTotalGpoEmp = parseInt(montoTotalGpoEmp) + parseInt(self.model.get('monto_ratificacion_increment_c'));
+                    }
+                    if (montoTotalGpoEmp != '' && montoTotalGpoEmp != null && montoTotalGpoEmp != 0) {
                         //Setea el monto total de grupo empresarial en el campo monto_gpo_emp_c
                         console.log("montoTotalGpoEmp " + montoTotalGpoEmp);
                         self.model.set('monto_gpo_emp_c', montoTotalGpoEmp);
@@ -2682,8 +2696,8 @@
         var status = this.model.get('estatus_c');
 
         //if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA") {
-        if (producto == 1 && (negocio == 5 ||negocio == 3) && (producto_financiero == 0 || producto_financiero == "") && 
-            (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0) && status != "K" && operacion == "LINEA_NUEVA") && this.model.get('admin_cartera_c') != true) {
+        if (producto == 1 && (negocio == 5 ||negocio == 3) && (producto_financiero == 0 || producto_financiero == "") &&
+            (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0) && status != "K" && status != "N" && operacion == "LINEA_NUEVA") && this.model.get('admin_cartera_c') != true) {
             app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
                 success: function (data) {
                     if (data.records.length == 0) {
@@ -2713,7 +2727,7 @@
         var chk = this.model.get('ratificacion_incremento_c');
         var status = this.model.get('estatus_c');
         if (chk != true && status != "K") {
-            if ((check == false || check == undefined) && producto == 1 && (negocio == 5 || negocio == 3) && (producto_financiero == 0 || producto_financiero == "") && 
+            if ((check == false || check == undefined) && producto == 1 && (negocio == 5 || negocio == 3) && (producto_financiero == 0 || producto_financiero == "") &&
                 (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0)) && this.model.get('admin_cartera_c') != true) {
                 //if ((check == false || check == undefined) && producto == 1 && operacion == 'LINEA_NUEVA' && banderaExcluye.check.includes(0)) {
                 app.alert.show("Error_vobo", {
@@ -3145,7 +3159,7 @@
     alertaDirectorNotificacion: function (fields, errors, callback) {
 
         if (this.model.get('ratificacion_incremento_c') == true && this.model.get('tipo_producto_c') == '1' && this.model.get('tipo_de_operacion_c') != 'RATIFICACION_INCREMENTO' && Object.keys(errors).length == 0
-            && (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0))) {
+            && (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0)) && this.model.get('estatus_c') != "K" && this.model.get('estatus_c') != "N" && this.model.get('admin_cartera_c') != true) {
             app.alert.show("alert_director_ratificacion", {
                 level: "info",
                 title: "Se debe de enviar la notificación para VoBo del director dentro de la solicitud generada para Ratificación/Incremento",
@@ -3164,9 +3178,8 @@
                 $('[data-name="opportunities_directores"]').hide();
                 $('[data-name="vobo_descripcion_txa_c"]').hide();
                 $('[data-name="doc_scoring_chk_c"]').hide();
-
+                $('[data-name="asesor_rm_c"]').hide();
             } else {
-
                 if (this.model.get('director_notificado_c') || this.model.get('estatus_c') == 'K' || this.model.get('estatus_c') == 'R' || this.model.get('estatus_c') == 'N') {
                     $('[data-name="opportunities_directores"]').attr('style', 'pointer-events:none');
                     $('[data-name="vobo_descripcion_txa_c"]').attr('style', 'pointer-events:none');
@@ -3213,14 +3226,26 @@
 
         if (app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
 
-            this.model.set('admin_cartera_c', true);
-
+            //this.model.set('admin_cartera_c', true);
+            if (this.model.get('estatus_c')=='N') {
+              $('[data-name="admin_cartera_c"]').attr('style', 'pointer-events:none');
+              $('[data-name="tipo_sol_admin_cartera_c"]').attr('style', 'pointer-events:none');
+              $('[data-name="producto_origen_vencido_c"]').attr('style', 'pointer-events:none');
+              $('[data-name="cartera_dias_vencido_c"]').attr('style', 'pointer-events:none');
+            }
+            $('[data-name="monto_ratificacion_increment_c"]').attr('style', 'pointer-events:none');
+            $('[data-name="monto_c"]').attr('style', 'pointer-events:none');
+            $('[data-name="amount"]').attr('style', 'pointer-events:none');
+            // $('[data-name="admin_cartera_c"]').show();
+            // $('[data-name="tipo_sol_admin_cartera_c"]').show();
+            // $('[data-name="producto_origen_vencido_c"]').show();
+            // $('[data-name="cartera_dias_vencido_c"]').show();
         } else {
-            
-            this.model.set('admin_cartera_c', false);
-            this.model.set('tipo_sol_admin_cartera_c', "");
-            this.model.set('producto_origen_vencido_c', "");
-            this.model.set('cartera_dias_vencido_c', "0");
+
+            // this.model.set('admin_cartera_c', false);
+            // this.model.set('tipo_sol_admin_cartera_c', "");
+            // this.model.set('producto_origen_vencido_c', "");
+            // this.model.set('cartera_dias_vencido_c', "0");
             $('[data-name="admin_cartera_c"]').hide();
             $('[data-name="tipo_sol_admin_cartera_c"]').hide();
             $('[data-name="producto_origen_vencido_c"]').hide();
@@ -3231,22 +3256,25 @@
     validaUserCartera: function (fields, errors, callback) {
         var reqAdminCartera = "";
 
-        if (this.model.get('admin_cartera_c') == true && this.model.get('tipo_sol_admin_cartera_c') == "") {
-            
+        if (this.model.get('admin_cartera_c') == true && this.model.get('tipo_sol_admin_cartera_c') == "" &&
+            this.model.get('estatus_c') != 'K' && this.model.get('tct_oportunidad_perdida_chk_c') != true) {
+
             reqAdminCartera = reqAdminCartera + '<b>' + app.lang.get("LBL_TIPO_SOL_ADMIN_CARTERA_C", "Opportunities") + '</b><br>';
             errors['tipo_sol_admin_cartera_c'] = errors['tipo_sol_admin_cartera_c'] || {};
             errors['tipo_sol_admin_cartera_c'].required = true;
         }
 
-        if (this.model.get('admin_cartera_c') == true && this.model.get('producto_origen_vencido_c') == "") {
-            
+        if (this.model.get('admin_cartera_c') == true && this.model.get('producto_origen_vencido_c') == "" &&
+            this.model.get('estatus_c') != 'K' && this.model.get('tct_oportunidad_perdida_chk_c') != true) {
+
             reqAdminCartera = reqAdminCartera + '<b>' + app.lang.get("LBL_PRODUCTO_ORIGEN_VENCIDO_C", "Opportunities") + '</b><br>';
             errors['producto_origen_vencido_c'] = errors['producto_origen_vencido_c'] || {};
             errors['producto_origen_vencido_c'].required = true;
         }
 
-        if (this.model.get('admin_cartera_c') == true && typeof(this.model.get('cartera_dias_vencido_c')) != "number") {
-            
+        if (this.model.get('admin_cartera_c') == true && typeof(this.model.get('cartera_dias_vencido_c')) != "number" &&
+            this.model.get('estatus_c') != 'K' && this.model.get('tct_oportunidad_perdida_chk_c') != true) {
+
             reqAdminCartera = reqAdminCartera + '<b>' + app.lang.get("LBL_CARTERA_DIAS_VENCIDO", "Opportunities") + '</b><br>';
             errors['cartera_dias_vencido_c'] = errors['cartera_dias_vencido_c'] || {};
             errors['cartera_dias_vencido_c'].required = true;
@@ -3261,6 +3289,46 @@
         }
 
         callback(null, fields, errors);
+    },
+    //Funcion para permitir la edicion del campo asesorRM solo si el usuario logueado es el asignado a la opp o el director de la misma.
+    validaRM: function () {
+        //Bloquea campo
+        this.$('[data-name="asesor_rm_c"]').attr('style', 'pointer-events:none');
+        var infoDirector = this.model.get('director_solicitud_c');
+        if (infoDirector != null && infoDirector != "") {
+            var res = infoDirector.split(",");
+            this.directorSolicitudId = res[0];
+        }
+        if (this.model.get('assigned_user_id')==App.user.attributes.id || App.user.attributes.id== this.directorSolicitudId){
+            this.$('[data-name="asesor_rm_c"]').attr('style', 'pointer-events:block');
+        }
+    },
+
+    //Función para validar que el asesor RM sea realmente un asesor RM 
+    validaAsesorRM: function (fields, errors, callback) {
+        var asesorRM=this.model.get('user_id1_c');
+        if(asesorRM!=""){
+            app.api.call('GET', app.api.buildURL('Infouser/' + asesorRM), null, {
+                success: _.bind(function (data) {
+    
+                    if (data != "") {
+                        if (!data.productos_c.includes("^11^")&& data.user_name!="SinGestor") {
+                                app.alert.show("error_asesorRM", {
+                                    level: "error",
+                                    title: "El asesor RM seleccionado no posee el producto RM. Favor de verificar.",
+                                    autoClose: false
+                                });
+                                errors['error_asesorRM'] = errors['error_asesorRM'] || {};
+                                errors['error_asesorRM'].required = true;
+                        }
+                    }
+                    callback(null, fields, errors);
+                }, self),
+            });
+
+        }else{
+            callback(null, fields, errors);
+        }
     },
 
 })

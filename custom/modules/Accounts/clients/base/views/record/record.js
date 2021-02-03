@@ -1951,9 +1951,9 @@
         if (Oproductos.productos.tct_tipo_l_txf_c == "Prospecto" && Oproductos.productos.tct_subtipo_l_txf_c == "Contactado") {
             totalProspectoG++;
             if (productousuario.includes('1') && App.user.id == this.model.get('user_id_c')) {
-                api_params["tct_tipo_l_txf_c"] = "Lead";
-                api_params["tct_subtipo_l_txf_c"] = "En Calificacion";
-                api_params["tct_tipo_cuenta_l_c"] = "LEAD EN CALIFICACIÓN";
+                api_params["tct_tipo_l_txf_c"] = "Prospecto";
+                api_params["tct_subtipo_l_txf_c"] = "Sin Contactar";
+                api_params["tct_tipo_cuenta_l_c"] = "PROSPECTO SIN CONTACTAR";
                 totalProspecto++;
             }
         }
@@ -1962,9 +1962,9 @@
             totalProspectoG++;
             if (productousuario.includes('4') && App.user.id == this.model.get('user_id1_c')) {
                 totalProspecto++;
-                api_params["tct_tipo_f_txf_c"] = "Lead";
-                api_params["tct_subtipo_f_txf_c"] = "En Calificación";
-                api_params["tct_tipo_cuenta_f_c"] = "LEAD EN CALIFICACIÓN";
+                api_params["tct_tipo_f_txf_c"] = "Prospecto";
+                api_params["tct_subtipo_f_txf_c"] = "Sin Contactar";
+                api_params["tct_tipo_cuenta_f_c"] = "PROSPECTO SIN CONTACTAR";
             }
 
         }
@@ -1973,9 +1973,9 @@
             totalProspectoG++;
             if (productousuario.includes('3') && App.user.id == this.model.get('user_id2_c')) {
                 totalProspecto++;
-                api_params["tct_tipo_ca_txf_c"] = "Lead";
-                api_params["tct_subtipo_ca_txf_c"] = "En Calificacion";
-                api_params["tct_tipo_cuenta_ca_c"] = "LEAD EN CALIFICACIÓN";
+                api_params["tct_tipo_ca_txf_c"] = "Prospecto";
+                api_params["tct_subtipo_ca_txf_c"] = "Sin Contactar";
+                api_params["tct_tipo_cuenta_ca_c"] = "PROSPECTO SIN CONTACTAR";
             }
         }
         //Fleet
@@ -1983,17 +1983,17 @@
             totalProspectoG++;
             if (productousuario.includes('6') && App.user.id == this.model.get('user_id6_c')) {
                 totalProspecto++;
-                api_params["tct_tipo_fl_txf_c"] = "Lead";
-                api_params["tct_subtipo_fl_txf_c"] = "En Calificación";
-                api_params["tct_tipo_cuenta_fl_c"] = "LEAD EN CALIFICACIÓN";
+                api_params["tct_tipo_fl_txf_c"] = "Prospecto";
+                api_params["tct_subtipo_fl_txf_c"] = "Sin Contactar";
+                api_params["tct_tipo_cuenta_fl_c"] = "PROSPECTO SIN CONTACTAR";
             }
         }
         if (this.model.get("tipo_registro_cuenta_c") == "2" && this.model.get("subtipo_registro_cuenta_c") == "2" && totalProspecto == totalProspectoG) {
             //Al entrar en esta condicion significa que solo hay un campo como Prospecto, lo cual puede cambiar de Prospecto a lead
-            v360.ResumenCliente.general_cliente.tipo = "LEAD EN CALIFICACIÓN";
-            this.model.set("tipo_registro_cuenta_c", "1");
-            this.model.set("subtipo_registro_cuenta_c", "5");
-            this.model.set("tct_tipo_subtipo_txf_c", "LEAD EN CALIFICACIÓN");
+            v360.ResumenCliente.general_cliente.tipo = "PROSPECTO SIN CONTACTAR";
+            this.model.set("tipo_registro_cuenta_c", "2");
+            this.model.set("subtipo_registro_cuenta_c", "1");
+            this.model.set("tct_tipo_subtipo_txf_c", "PROSPECTO SIN CONTACTAR");
             this.model.set("tct_prospecto_contactado_chk_c", false);
             //this.model.set("show_panel_c",0);
             this.model.save();
@@ -2213,29 +2213,29 @@
             if (productousuario.includes('1') && Oproductos.productos.tct_tipo_l_txf_c == "Lead") {
                 if (App.user.id == this.model.get('user_id_c')) {
                     api_params["tct_tipo_l_txf_c"] = "Prospecto";
-                    api_params["tct_subtipo_l_txf_c"] = "Contactado";
-                    api_params["tct_tipo_cuenta_l_c"] = "PROSPECTO CONTACTADO";
+                    api_params["tct_subtipo_l_txf_c"] = "Sin Contactar";
+                    api_params["tct_tipo_cuenta_l_c"] = "PROSPECTO SIN CONTACTAR";
                 }
             }
             if (productousuario.includes('3') && Oproductos.productos.tct_tipo_ca_txf_c == "Lead") {
                 if (App.user.id == this.model.get('user_id2_c')) {
                     api_params["tct_tipo_ca_txf_c"] = "Prospecto";
-                    api_params["tct_subtipo_ca_txf_c"] = "Contactado";
-                    api_params["tct_tipo_cuenta_ca_c"] = "PROSPECTO CONTACTADO";
+                    api_params["tct_subtipo_ca_txf_c"] = "Sin Contactar";
+                    api_params["tct_tipo_cuenta_ca_c"] = "PROSPECTO SIN CONTACTAR";
                 }
             }
             if (productousuario.includes('4') && Oproductos.productos.tct_tipo_f_txf_c == "Lead") {
                 if (App.user.id == this.model.get('user_id1_c')) {
                     api_params["tct_tipo_f_txf_c"] = "Prospecto";
-                    api_params["tct_subtipo_f_txf_c"] = "Contactado";
-                    api_params["tct_tipo_cuenta_f_c"] = "PROSPECTO CONTACTADO";
+                    api_params["tct_subtipo_f_txf_c"] = "Sin Contactar";
+                    api_params["tct_tipo_cuenta_f_c"] = "PROSPECTO SIN CONTACTAR";
                 }
             }
             if (productousuario.includes('6') && Oproductos.productos.tct_tipo_fl_txf_c == "Lead") {
                 if (App.user.id == this.model.get('user_id6_c')) {
                     api_params["tct_tipo_fl_txf_c"] = "Prospecto";
-                    api_params["tct_subtipo_fl_txf_c"] = "Contactado";
-                    api_params["tct_tipo_cuenta_fl_c"] = "PROSPECTO CONTACTADO";
+                    api_params["tct_subtipo_fl_txf_c"] = "Sin Contactar";
+                    api_params["tct_tipo_cuenta_fl_c"] = "PROSPECTO SIN CONTACTAR";
                 }
             }
             if (api_params != undefined) {
@@ -2252,7 +2252,7 @@
                             messages: 'Cambio realizado',
                         });
                         //Actualiza modelo vista v360
-                        v360.ResumenCliente.general_cliente.tipo = "PROSPECTO CONTACTADO";
+                        v360.ResumenCliente.general_cliente.tipo = "PROSPECTO SIN CONTACTAR";
                         v360.ResumenCliente.leasing.tipo_cuenta = data.tct_tipo_cuenta_l_c;
                         v360.ResumenCliente.factoring.tipo_cuenta = data.tct_tipo_cuenta_f_c;
                         v360.ResumenCliente.credito_auto.tipo_cuenta = data.tct_tipo_cuenta_ca_c;
@@ -2575,9 +2575,9 @@
                     }
 
                     if (this.model.get("tipo_registro_cuenta_c") == "4" || this.model.get('tipo_registro_cuenta_c') == "5") {
-                        v360.ResumenCliente.general_cliente.tipo = "PROSPECTO CONTACTADO";
+                        v360.ResumenCliente.general_cliente.tipo = "PROSPECTO SIN CONTACTAR";
                         this.model.set("tipo_registro_cuenta_c", "2");
-                        this.model.set("subtipo_registro_cuenta_list", "2");
+                        this.model.set("subtipo_registro_cuenta_list", "1");
                         this.model.set("show_panel_c", 1);
                         this.model.save();
                     }
@@ -2590,12 +2590,12 @@
                 if (App.user.id == this.model.get('user_id_c')) {
                     tipo_producto = 1;
                     api_params["tct_tipo_l_txf_c"] = "Prospecto";
-                    api_params["tct_subtipo_l_txf_c"] = "Contactado";
-                    api_params["tct_tipo_cuenta_l_c"] = "PROSPECTO CONTACTADO";
+                    api_params["tct_subtipo_l_txf_c"] = "Sin Contactar";
+                    api_params["tct_tipo_cuenta_l_c"] = "PROSPECTO SIN CONTACTAR";
                     Oproductos.productos.tct_tipo_cuenta_l_c = '2';
-                    Oproductos.productos.tct_subtipo_l_txf_c = '2';
+                    Oproductos.productos.tct_subtipo_l_txf_c = '1';
                     v360.ResumenCliente.leasing.tipo_cuenta = '2';
-                    v360.ResumenCliente.leasing.subtipo_cuenta = '2';
+                    v360.ResumenCliente.leasing.subtipo_cuenta = '1';
                 }
 
             }
@@ -2603,48 +2603,48 @@
                 if (App.user.id == this.model.get('user_id2_c')) {
                     tipo_producto = 3;
                     api_params["tct_tipo_ca_txf_c"] = "Prospecto";
-                    api_params["tct_subtipo_ca_txf_c"] = "Contactado";
-                    api_params["tct_tipo_cuenta_ca_c"] = "PROSPECTO CONTACTADO";
+                    api_params["tct_subtipo_ca_txf_c"] = "Sin Contactar";
+                    api_params["tct_tipo_cuenta_ca_c"] = "PROSPECTO SIN CONTACTAR";
                     Oproductos.productos.tct_tipo_cuenta_ca_c = '2';
-                    Oproductos.productos.tct_subtipo_ca_txf_c = '2';
+                    Oproductos.productos.tct_subtipo_ca_txf_c = '1';
                     v360.ResumenCliente.credito_auto.tipo_cuenta = '2';
-                    v360.ResumenCliente.credito_auto.subtipo_cuenta = '2';
+                    v360.ResumenCliente.credito_auto.subtipo_cuenta = '1';
                 }
             }
             if ((Oproductos.productos.tct_tipo_cuenta_f_c == "4" || Oproductos.productos.tct_tipo_cuenta_f_c == "5") && productousuario.includes('4')) {
                 if (App.user.id == this.model.get('user_id1_c')) {
                     tipo_producto = 4;
                     api_params["tct_tipo_f_txf_c"] = "Prospecto";
-                    api_params["tct_subtipo_f_txf_c"] = "Contactado";
-                    api_params["tct_tipo_cuenta_f_c"] = "PROSPECTO CONTACTADO";
+                    api_params["tct_subtipo_f_txf_c"] = "Sin Contactar";
+                    api_params["tct_tipo_cuenta_f_c"] = "PROSPECTO SIN CONTACTAR";
                     Oproductos.productos.tct_tipo_cuenta_f_c = '2';
-                    Oproductos.productos.tct_subtipo_f_txf_c = '2';
+                    Oproductos.productos.tct_subtipo_f_txf_c = '1';
                     v360.ResumenCliente.factoring.tipo_cuenta = '2';
-                    v360.ResumenCliente.factoring.subtipo_cuenta = '2';
+                    v360.ResumenCliente.factoring.subtipo_cuenta = '1';
                 }
             }
             if ((Oproductos.productos.tct_tipo_cuenta_fl_c == "4" || Oproductos.productos.tct_tipo_cuenta_fl_c == "5") && productousuario.includes('6')) {
                 if (App.user.id == this.model.get('user_id6_c')) {
                     tipo_producto = 6;
                     api_params["tct_tipo_fl_txf_c"] = "Prospecto";
-                    api_params["tct_subtipo_fl_txf_c"] = "Contactado";
-                    api_params["tct_tipo_cuenta_fl_c"] = "PROSPECTO CONTACTADO";
+                    api_params["tct_subtipo_fl_txf_c"] = "Sin Contactar";
+                    api_params["tct_tipo_cuenta_fl_c"] = "PROSPECTO SIN CONTACTAR";
                     Oproductos.productos.tct_tipo_cuenta_fl_c = '2';
-                    Oproductos.productos.tct_subtipo_fl_txf_c = '2';
+                    Oproductos.productos.tct_subtipo_fl_txf_c = '1';
                     v360.ResumenCliente.fleet.tipo_cuenta = '2';
-                    v360.ResumenCliente.fleet.subtipo_cuenta = '2';
+                    v360.ResumenCliente.fleet.subtipo_cuenta = '1';
                 }
             }
             if ((Oproductos.productos.tct_tipo_cuenta_uc_c == "4" || Oproductos.productos.tct_tipo_cuenta_uc_c == "5") && productousuario.includes('8')) {
                 if (App.user.id == this.model.get('user_id7_c')) {
                     tipo_producto = 8;
                     api_params["tct_tipo_uc_txf_c"] = "Prospecto";
-                    api_params["tct_subtipo_uc_txf_c"] = "Contactado";
-                    api_params["tct_tipo_cuenta_uc_c"] = "PROSPECTO CONTACTADO";
+                    api_params["tct_subtipo_uc_txf_c"] = "Sin Contactar";
+                    api_params["tct_tipo_cuenta_uc_c"] = "PROSPECTO SIN CONTACTAR";
                     Oproductos.productos.tct_tipo_cuenta_uc_c = '2';
-                    Oproductos.productos.tct_subtipo_uc_txf_c = '2';
+                    Oproductos.productos.tct_subtipo_uc_txf_c = '1';
                     v360.ResumenCliente.uniclick.tipo_cuenta = '2';
-                    v360.ResumenCliente.uniclick.subtipo_cuenta = '2';
+                    v360.ResumenCliente.uniclick.subtipo_cuenta = '1';
                 }
             }
             // Actualiza Productos
@@ -2658,8 +2658,8 @@
                 if (idprod) {
                     var params = {};
                     params["tipo_cuenta"] = "2";
-                    params["subtipo_cuenta"] = "2";
-                    params["tipo_subtipo_cuenta"] = "PROSPECTO CONTACTADO";
+                    params["subtipo_cuenta"] = "1";
+                    params["tipo_subtipo_cuenta"] = "PROSPECTO SIN CONTACTAR";
                     var uni = app.api.buildURL('uni_Productos/' + idprod, null, null);
                     app.api.call('update', uni, params, {
                         success: _.bind(function (data) {
