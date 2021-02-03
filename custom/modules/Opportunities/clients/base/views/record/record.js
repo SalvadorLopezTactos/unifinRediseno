@@ -3293,13 +3293,15 @@
     },
     //Funcion para permitir la edicion del campo asesorRM solo si el usuario logueado es el asignado a la opp o el director de la misma.
     validaRM: function () {
+        //Bloquea campo
+        this.$('[data-name="asesor_rm_c"]').attr('style', 'pointer-events:none');
         var infoDirector = this.model.get('director_solicitud_c');
         if (infoDirector != null && infoDirector != "") {
             var res = infoDirector.split(",");
             this.directorSolicitudId = res[0];
         }
-        if (this.model.get('assigned_user_id')!=App.user.attributes.id && App.user.attributes.id!= this.directorSolicitudId){
-            this.$('[data-name="asesor_rm_c"]').attr('style', 'pointer-events:none');
+        if (this.model.get('assigned_user_id')==App.user.attributes.id || App.user.attributes.id== this.directorSolicitudId){
+            this.$('[data-name="asesor_rm_c"]').attr('style', 'pointer-events:block');
         }
     },
 
