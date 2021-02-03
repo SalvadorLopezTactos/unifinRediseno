@@ -2780,11 +2780,20 @@
         this.model.save(null, {
             success: function (model, response) {
                 App.alert.dismiss('autorizaSol');
-                App.alert.show("autorizacion_director_ok", {
-                    level: "success",
-                    messages: "<br>La presolicitud fue autorizada corectamente.",
-                    autoClose: false
-                });
+                if(tct_opp_estatus_c == '2'){
+                    App.alert.show("autorizacion_director_ok", {
+                        level: "warning",
+                        messages: "<br>La presolicitud no pudo concluir de forma satisfactoria.",
+                        autoClose: false
+                    });
+                }else{
+                    App.alert.show("autorizacion_director_ok", {
+                        level: "success",
+                        messages: "<br>La presolicitud fue autorizada corectamente.",
+                        autoClose: false
+                    });
+                }
+                
             }, error: function (model, response) {
                 $('[name="vobo_leasing"]').attr('style', 'pointer-events:block');
                 $('[name="rechazo_leasing"]').attr('style', 'pointer-events:block');
