@@ -3,7 +3,7 @@
     pais_list: null,
     estatus_list: null,
     newWhatsapp: 0,
-    newArray: [], 
+    newArray: [],
 
     events: {
         'keydown .existingTelephono': 'keyDownNewExtension',
@@ -54,44 +54,44 @@
         this._super("_render");
         this.$("div.record-label[data-name='account_telefonos']").attr('style', 'display:none;');
         $('#nuevo').hide();
-        if(this.action == 'edit' && this.oTelefonos) {
-          for(var i = 0; i < this.oTelefonos.telefono.length; i++) {
-            if(this.oTelefonos.telefono[i].tipotelefono == 3 || this.oTelefonos.telefono[i].tipotelefono == 4) { 
-              document.getElementsByClassName('whatsapp-tel')[i].style.visibility = '';
-            } else {
-              document.getElementsByClassName('whatsapp-tel')[i].style.visibility = 'hidden';
+        if (this.action == 'edit' && this.oTelefonos) {
+            for (var i = 0; i < this.oTelefonos.telefono.length; i++) {
+                if (this.oTelefonos.telefono[i].tipotelefono == 3 || this.oTelefonos.telefono[i].tipotelefono == 4) {
+                    document.getElementsByClassName('whatsapp-tel')[i].style.visibility = '';
+                } else {
+                    document.getElementsByClassName('whatsapp-tel')[i].style.visibility = 'hidden';
+                }
             }
-          }
         }
-        if(this.newArray.length > 0) {
-          this.$('.newTipotelefono').select2('val',this.newArray[0]);
-          this.$('.newPais').select2('val',this.newArray[1]);
-          this.$('.newEstatus').select2('val',this.newArray[2]);
-          this.$('.newTelefono').val(this.newArray[3]);
-          this.$('.newExtension').val(this.newArray[4]);
-          this.newWhatsapp = this.newArray[5];
-          $('#nuevo').show();
-          this.newArray = [];
+        if (this.newArray.length > 0) {
+            this.$('.newTipotelefono').select2('val', this.newArray[0]);
+            this.$('.newPais').select2('val', this.newArray[1]);
+            this.$('.newEstatus').select2('val', this.newArray[2]);
+            this.$('.newTelefono').val(this.newArray[3]);
+            this.$('.newExtension').val(this.newArray[4]);
+            this.newWhatsapp = this.newArray[5];
+            $('#nuevo').show();
+            this.newArray = [];
         }
     },
 
     keyDownNewExtension: function (evt) {
         if (!evt) return;
-        if(!this.checkNumOnly(evt)){
+        if (!this.checkNumOnly(evt)) {
             return false;
         }
     },
 
     //UNI349 Control Telefonos - En el campo teléfono, extensión no se debe permitir caracteres diferentes a numéricos
-    checkNumOnly:function(evt){
-        if($.inArray(evt.keyCode,[110,188,190,45,33,36,46,35,34,8,9,20,16,17,37,40,39,38,16,49,50,51,52,53,54,55,56,57,48,96,97,98,99,100,101,102,103,104,105]) < 0) {
+    checkNumOnly: function (evt) {
+        if ($.inArray(evt.keyCode, [110, 188, 190, 45, 33, 36, 46, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 16, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105]) < 0) {
             app.alert.show("Caracter Invalido", {
                 level: "error",
                 title: "Solo n\u00FAmeros son permitidos en este campo.",
                 autoClose: true
             });
             return false;
-        }else{
+        } else {
             return true;
         }
     },
@@ -121,10 +121,10 @@
             this.oTelefonos = contexto_cuenta.oTelefonos;
         }
         //Estableciendo el color de borde original en cada campo en telefonos
-        $('.newTipotelefono').find('.select2-choice').css('border-color','');
-        $('.newPais').find('.select2-choice').css('border-color','');
-        $('.newEstatus').find('.select2-choice').css('border-color','');
-        $('.newTipotelefono').find('.select2-choice').css('border-color','');
+        $('.newTipotelefono').find('.select2-choice').css('border-color', '');
+        $('.newPais').find('.select2-choice').css('border-color', '');
+        $('.newEstatus').find('.select2-choice').css('border-color', '');
+        $('.newTipotelefono').find('.select2-choice').css('border-color', '');
         this.$('.newTelefono').css('border-color', '');
         this.$('.newTelefono').css('border-color', '');
 
@@ -135,35 +135,35 @@
         var valor4 = this.$('.newTelefono').val();
         var valor5 = this.$('.newExtension').val();
         var valor6 = this.newWhatsapp;
-        var sec=this.oTelefonos.telefono.length+1;
+        var sec = this.oTelefonos.telefono.length + 1;
 
         var telefono = {
-            "name":valor4,
+            "name": valor4,
             "tipotelefono": valor1,
             "pais": valor2,
             "estatus": valor3,
             "extension": valor5,
             "telefono": valor4,
             "whatsapp_c": valor6,
-            "principal":1,
-            "secuencia":sec,
+            "principal": 1,
+            "secuencia": sec,
             "id_cuenta": this.model.get('account_id_c')
         };
 
         this.newWhatsapp = 0;
-        
+
         //Valida campos requeridos
         var faltantes = 0;
         if (valor1 == '') {
-            $('.newTipotelefono').find('.select2-choice').css('border-color','red');
+            $('.newTipotelefono').find('.select2-choice').css('border-color', 'red');
             faltantes++;
         }
-        if (valor2 == '' ) {
-            $('.newPais').find('.select2-choice').css('border-color','red');
+        if (valor2 == '') {
+            $('.newPais').find('.select2-choice').css('border-color', 'red');
             faltantes++;
         }
         if (valor3 == '') {
-            $('.newEstatus').find('.select2-choice').css('border-color','red');
+            $('.newEstatus').find('.select2-choice').css('border-color', 'red');
             app.alert.show('error_campo_telefono', {
                 level: 'error',
                 autoClose: true,
@@ -191,16 +191,16 @@
                 msjError += '<br><b>Solo números son permitidos</b>';
             }
             //Valida longitud
-            if (valor4.length<8) {
+            if (valor4.length < 8) {
                 faltantes++;
                 msjError += '<br><b>Debe contener 8 o más dígitos</b>';
             }
 
             //Valida números repetidos
-            if(valor4.length > 1){
+            if (valor4.length > 1) {
                 var repetido = true;
                 for (var iValor4 = 0; iValor4 < valor4.length; iValor4++) {
-                  repetido = (valor4[0] != valor4[iValor4]) ? false : repetido;
+                    repetido = (valor4[0] != valor4[iValor4]) ? false : repetido;
                 }
                 if (repetido) {
                     faltantes++;
@@ -209,29 +209,29 @@
             }
 
             //Muestra errores
-            if(msjError!= ""){
+            if (msjError != "") {
                 $('.newTelefono').css('border-color', 'red');
                 app.alert.show('phone_add_error', {
                     level: 'error',
                     autoClose: true,
-                    messages: 'No se puede agregar el número:'+ msjError
+                    messages: 'No se puede agregar el número:' + msjError
                 });
             }
 
         }
         if (faltantes == 0) {
-            if (this.oTelefonos.telefono.length >=1) {
-                var duplicados= false;
-                this.oTelefonos.telefono.forEach(function(element) {
+            if (this.oTelefonos.telefono.length >= 1) {
+                var duplicados = false;
+                this.oTelefonos.telefono.forEach(function (element) {
                     var iteracion = element.telefono;
-                    iteracion = iteracion.replace(/\s+/gi,'');
+                    iteracion = iteracion.replace(/\s+/gi, '');
 
                     var ntelefonico = this.$('.newTelefono').val().trim();
                     if (iteracion == ntelefonico) {
                         duplicados = true;
                     }
                 });
-                if(duplicados== true){
+                if (duplicados == true) {
                     this.$('.newTelefono').val("");
                     app.alert.show('Numero_duplicado', {
                         level: 'error',
@@ -239,12 +239,12 @@
                         messages: "No se puede agregar el número: <br> <b>Ya ha sido registrado.</b>"
                     });
                 }
-                else{
-                    telefono.principal=0;
+                else {
+                    telefono.principal = 0;
                     this.oTelefonos.telefono.push(telefono);
                     this.render();
                 }
-            }else{
+            } else {
                 //Actualiza estado como activo
                 telefono.estatus = 'Activo';
                 this.oTelefonos.telefono.push(telefono);
@@ -258,129 +258,179 @@
         if (!evt) return;
         var $input = this.$(evt.currentTarget);
 
-        var tel_client=$input.closest("tr").find("td").eq(1).html();
-        var tel_usr=app.user.attributes.ext_c;
-        //var urlSugar="http://{$_SERVER['SERVER_NAME']}/unifin"; //////Activar esta variable
+        var tel_client = $input.closest("tr").find("td").eq(1).html();
+        var tel_usr = app.user.attributes.ext_c;
+        var puesto_usuario = app.user.attributes.puestousuario_c;
 
+        //AGENTE TELEFONICO - COORDINADOR DE CENTRO DE PROSPECCION
+        if (puesto_usuario == "27" || puesto_usuario == "31") { 
+            /***********************************VICIDIAL***************************************/            
+            vicidial = app.config.vicidial + '?exten=SIP/' + tel_usr + '&number=' + tel_client;
+            _.extend(this, vicidial);
 
-        /*if(this.multiSearchOr($input.closest("tr").find("td").eq(0).html(),["CELULAR"])=='1'){
-             issabel='custom/Levementum/call_unifin.php?numero=044'+tel_client+'&userexten='+tel_usr;
-        }else {
-            issabel = 'custom/Levementum/call_unifin.php?numero=' + tel_client + '&userexten=' + tel_usr;
-        }*/
-        issabel = 'custom/Levementum/call_unifin.php?numero=' + tel_client + '&userexten=' + tel_usr;
-
-        _.extend(this, issabel);
-
-        if(tel_usr!='' || tel_usr!=null){
-            if(tel_client!='' || tel_client!=null){
-                context=this;
-                app.alert.show('do-call', {
-                    level: 'confirmation',
-                    messages: '¿Realmente quieres realizar la llamada? <br><br><b>NOTA: La marcaci\u00F3n se realizar\u00E1 tal cual el n\u00FAmero est\u00E1 registrado</b>',
-                    autoClose: false,
-                    onConfirm: function(){
-                        context.createcall(context.resultCallback);
-                    },
-                });
-            }else{
-                app.alert.show('error_tel_client', {
+            if (tel_usr != '' || tel_usr != null) {
+                if (tel_client != '' || tel_client != null) {
+                    context = this;
+                    app.alert.show('do-call-vicidial', {
+                        level: 'confirmation',
+                        messages: '¿Realmente quieres realizar la llamada? <br><br><b>NOTA: La marcaci\u00F3n se realizar\u00E1 tal cual el n\u00FAmero est\u00E1 registrado</b>',
+                        autoClose: false,
+                        onConfirm: function () {
+                            context.createcall(context.resultCallback);
+                        },
+                    });
+                } else {
+                    app.alert.show('error_tel_client-vicidial', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'El cliente al que quieres llamar no tiene <b>N\u00FAmero telefonico</b>.'
+                    });
+                }
+            } else {
+                app.alert.show('error_tel_usr-vicidial', {
                     level: 'error',
                     autoClose: true,
-                    messages: 'El cliente al que quieres llamar no tiene <b>N\u00FAmero telefonico</b>.'
+                    messages: 'El usuario con el que estas logueado no tiene <b>Extensi\u00F3n</b>.'
                 });
             }
-        }else {
-            app.alert.show('error_tel_usr', {
-                level: 'error',
-                autoClose: true,
-                messages: 'El usuario con el que estas logueado no tiene <b>Extensi\u00F3n</b>.'
-            });
+
+        } else {
+            /**********************************ISSABEL***************************************/
+
+            //var urlSugar="http://{$_SERVER['SERVER_NAME']}/unifin"; //////Activar esta variable
+            /*if(this.multiSearchOr($input.closest("tr").find("td").eq(0).html(),["CELULAR"])=='1'){
+                 issabel='custom/Levementum/call_unifin.php?numero=044'+tel_client+'&userexten='+tel_usr;
+            }else {
+                issabel = 'custom/Levementum/call_unifin.php?numero=' + tel_client + '&userexten=' + tel_usr;
+            }*/
+            issabel = 'custom/Levementum/call_unifin.php?numero=' + tel_client + '&userexten=' + tel_usr;
+            _.extend(this, issabel);
+
+            if (tel_usr != '' || tel_usr != null) {
+                if (tel_client != '' || tel_client != null) {
+                    context = this;
+                    app.alert.show('do-call', {
+                        level: 'confirmation',
+                        messages: '¿Realmente quieres realizar la llamada? <br><br><b>NOTA: La marcaci\u00F3n se realizar\u00E1 tal cual el n\u00FAmero est\u00E1 registrado</b>',
+                        autoClose: false,
+                        onConfirm: function () {
+                            context.createcall(context.resultCallback);
+                        },
+                    });
+                } else {
+                    app.alert.show('error_tel_client', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'El cliente al que quieres llamar no tiene <b>N\u00FAmero telefonico</b>.'
+                    });
+                }
+            } else {
+                app.alert.show('error_tel_usr', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: 'El usuario con el que estas logueado no tiene <b>Extensi\u00F3n</b>.'
+                });
+            }
         }
     },
 
     createcall: function (callback) {
-        self=this;
-        var id_call='';
-        var name_client=this.model.get('name');
-        var id_client=this.model.get('id');
-        var modulo='Accounts';
-        var Params=[id_client,name_client,modulo];
-        app.api.call('create', app.api.buildURL('createcall'),{data: Params}, {
+        self = this;
+        var id_call = '';
+        var name_client = this.model.get('name');
+        var id_client = this.model.get('id');
+        var modulo = 'Accounts';
+        var Params = [id_client, name_client, modulo];
+        app.api.call('create', app.api.buildURL('createcall'), { data: Params }, {
             success: _.bind(function (data) {
-                id_call=data;
-                console.log('Llamada creada, id: '+id_call);
+                id_call = data;
+                console.log('Llamada creada, id: ' + id_call);
                 app.alert.show('message-to', {
                     level: 'info',
-                    messages: 'Usted esta llamando a '+name_client,
+                    messages: 'Usted esta llamando a ' + name_client,
                     autoClose: true
                 });
-                callback(id_call,self);
+                callback(id_call, self);
             }, this),
         });
     },
 
-    resultCallback:function(id_call,context) {
-        self=context;
-        issabel+='&id_call='+id_call;
-        console.log('Issabel_link:'+issabel);
-        $.ajax({
-            cache:false,
-            type: "get",
-            url: issabel,
-        });
+    resultCallback: function (id_call, context) {
+        self = context;
+        var puesto_usuario = app.user.attributes.puestousuario_c;
+        
+        //AGENTE TELEFONICO - COORDINADOR DE CENTRO DE PROSPECCION
+        if (puesto_usuario == "27" || puesto_usuario == "31") {
+            /*******************VICIDIAL********************/
+            vicidial += '&id_call=' + id_call;
+            console.log('VICIDIAL_LINK:' + vicidial);
+            $.ajax({
+                cache: false,
+                type: "get",
+                url: vicidial,
+            });
 
+        } else {
+            /*******************ISSABEL********************/
+            issabel += '&id_call=' + id_call;
+            console.log('ISSABEL_LINK:' + issabel);
+            $.ajax({
+                cache: false,
+                type: "get",
+                url: issabel,
+            });
+        }
     },
 
-    updatePrincipal: function(evt) {
-          var inputs = this.$('.principal'),
-              input = this.$(evt.currentTarget),
-              index = inputs.index(input);
-          if (this.oTelefonos.telefono[index].principal == 0) {
-              if (this.oTelefonos.telefono[index].estatus == "Activo") {
-                  for (var i = 0; i < this.oTelefonos.telefono.length; i++) {
-                      this.oTelefonos.telefono[i].principal = 0;
-                  }
-                  this.oTelefonos.telefono[index].principal = 1;
-              }else{
-                  //No puede marcar como principal teléfono inactivo
-                  app.alert.show('no_principal', {
-                      level: 'warning',
-                      messages: 'No se puede tener un teléfono inactivo como principal',
-                      autoClose: true
-                  });
-              }
-          }
-          this.render();
+    updatePrincipal: function (evt) {
+        var inputs = this.$('.principal'),
+            input = this.$(evt.currentTarget),
+            index = inputs.index(input);
+        if (this.oTelefonos.telefono[index].principal == 0) {
+            if (this.oTelefonos.telefono[index].estatus == "Activo") {
+                for (var i = 0; i < this.oTelefonos.telefono.length; i++) {
+                    this.oTelefonos.telefono[i].principal = 0;
+                }
+                this.oTelefonos.telefono[index].principal = 1;
+            } else {
+                //No puede marcar como principal teléfono inactivo
+                app.alert.show('no_principal', {
+                    level: 'warning',
+                    messages: 'No se puede tener un teléfono inactivo como principal',
+                    autoClose: true
+                });
+            }
+        }
+        this.render();
     },
 
-    updateTipotelefonot: function(evt) {
+    updateTipotelefonot: function (evt) {
         var inputs = this.$('[data-field="campo1tel"].Tipotelefonot'),
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
         var tipo = input.val();
         this.oTelefonos.telefono[index].tipotelefono = tipo;
-        if(tipo == 3 || tipo == 4) {
-          document.getElementsByClassName('whatsapp-tel')[index].style.visibility = '';
+        if (tipo == 3 || tipo == 4) {
+            document.getElementsByClassName('whatsapp-tel')[index].style.visibility = '';
         } else {
-          document.getElementsByClassName('whatsapp-tel')[index].style.visibility = 'hidden';
+            document.getElementsByClassName('whatsapp-tel')[index].style.visibility = 'hidden';
         }
     },
 
-    updateNewTipo: function(evt) {
+    updateNewTipo: function (evt) {
         var inputs = this.$('[data-field="campo1tel"].newTipotelefono'),
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
         var tipo = input.val();
-        if(tipo == 3 || tipo == 4) {
-          document.getElementsByClassName('newwhatsapp-tel')[index].style.visibility = '';
-          $('#nuevo').show();
+        if (tipo == 3 || tipo == 4) {
+            document.getElementsByClassName('newwhatsapp-tel')[index].style.visibility = '';
+            $('#nuevo').show();
         } else {
-          document.getElementsByClassName('newwhatsapp-tel')[index].style.visibility = 'hidden';
+            document.getElementsByClassName('newwhatsapp-tel')[index].style.visibility = 'hidden';
         }
     },
 
-    updatePaist: function(evt) {
+    updatePaist: function (evt) {
         var inputs = this.$('[data-field="campo2tel"].Paist'),
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
@@ -389,7 +439,7 @@
         //this.render();
     },
 
-    updateEstatust: function(evt) {
+    updateEstatust: function (evt) {
         var inputs = this.$('[data-field="campo3tel"].Estatust'),
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
@@ -402,13 +452,13 @@
                 messages: 'No se puede tener un teléfono inactivo como principal',
                 autoClose: true
             });
-        }else{
+        } else {
             this.oTelefonos.telefono[index].estatus = estatus;
         }
         this.render();
     },
 
-    updateExtensiont: function(evt) {
+    updateExtensiont: function (evt) {
         var inputs = this.$('.Extensiont'),
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
@@ -417,7 +467,7 @@
         //this.render();
     },
 
-    updateTelefonot: function(evt) {
+    updateTelefonot: function (evt) {
         var inputs = this.$('.Telefonot'),
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
@@ -438,23 +488,23 @@
         //this.render();
     },
 
-    updateWhatsapp: function(evt) {
-          var inputs = this.$('.Whatsappt'),
-              input = this.$(evt.currentTarget),
-              index = inputs.index(input);
-          if(this.oTelefonos.telefono[index].whatsapp_c) {
-              this.oTelefonos.telefono[index].whatsapp_c = 0;
-          }else{
-              this.oTelefonos.telefono[index].whatsapp_c = 1;
-          }
-          this.render();
+    updateWhatsapp: function (evt) {
+        var inputs = this.$('.Whatsappt'),
+            input = this.$(evt.currentTarget),
+            index = inputs.index(input);
+        if (this.oTelefonos.telefono[index].whatsapp_c) {
+            this.oTelefonos.telefono[index].whatsapp_c = 0;
+        } else {
+            this.oTelefonos.telefono[index].whatsapp_c = 1;
+        }
+        this.render();
     },
 
-    updateNewWhatsapp: function(evt) {
-        if(this.newWhatsapp) {
-          this.newWhatsapp = 0;
-        }else{
-          this.newWhatsapp = 1;
+    updateNewWhatsapp: function (evt) {
+        if (this.newWhatsapp) {
+            this.newWhatsapp = 0;
+        } else {
+            this.newWhatsapp = 1;
         }
         this.newArray.push(this.$('.newTipotelefono').select2('val'));
         this.newArray.push(this.$('.newPais').select2('val'));
