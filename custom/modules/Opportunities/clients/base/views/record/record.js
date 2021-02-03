@@ -3311,7 +3311,7 @@
                 success: _.bind(function (data) {
     
                     if (data != "") {
-                        if (!data.productos_c.includes("^11^")) {
+                        if (!data.productos_c.includes("^11^")&& data.user_name!="SinGestor") {
                                 app.alert.show("error_asesorRM", {
                                     level: "error",
                                     title: "El asesor RM seleccionado no posee el producto RM. Favor de verificar.",
