@@ -159,6 +159,7 @@ SITE;
             $bean_account->user_id1_c = "569246c7-da62-4664-ef2a-5628f649537e";
             $bean_account->user_id2_c = "569246c7-da62-4664-ef2a-5628f649537e";
             $bean_account->user_id6_c = "569246c7-da62-4664-ef2a-5628f649537e";
+            $bean_account->user_id8_c = "569246c7-da62-4664-ef2a-5628f649537e";
         } else {
             $bean_account->subtipo_registro_cuenta_c = "2"; // Contactado - 2
             $bean_account->tipo_registro_cuenta_c = "2"; //Prospecto - 2
@@ -209,6 +210,7 @@ SITE;
             $bean_account->user_id1_c = empty($idMeetings['data']['FACTORAJE']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['FACTORAJE'];
             $bean_account->user_id2_c = empty($idMeetings['data']['CREDITO AUTOMOTRIZ']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['CREDITO AUTOMOTRIZ'];
             $bean_account->user_id6_c = empty($idMeetings['data']['FLEET']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['FLEET'];
+            $bean_account->user_id8_c = empty($idMeetings['data']['RM']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['RM'];
 
             if(empty($idMeetings['data']['UNICLICK']) && empty($idMeetings['data']['UNILEASE'])){
 
