@@ -2780,7 +2780,7 @@
         this.model.save(null, {
             success: function (model, response) {
                 App.alert.dismiss('autorizaSol');
-                if(tct_opp_estatus_c == '2'){
+                if(this.model.attributes.tct_opp_estatus_c == '2'){
                     App.alert.show("autorizacion_director_ok", {
                         level: "warning",
                         messages: "<br>La presolicitud no pudo concluir de forma satisfactoria.",
