@@ -2869,6 +2869,7 @@
         pipeopp.render();
         //Ejecuta funcion para actualizar pipeline
         pipeopp.pipelineopp();
+        this.autorizapre();
     },
 
     showSubpanels: function () {
@@ -3329,6 +3330,14 @@
         }else{
             callback(null, fields, errors);
         }
+    },
+
+    botonesDir: function () {
+        var check = this.model.get('vobo_dir_c');
+        if (!check) {
+            $('[name="vobo_leasing"]').hide();
+        $('[name="rechazo_leasing"]').hide();
+        }     
     },
 
 })
