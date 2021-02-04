@@ -385,7 +385,8 @@ SQL;
 
                     //Actualizar el usuario RM a la cuenta 
                     if(!empty($bean->user_id1_c)){
-                        $query_actualiza = "UPDATE accounts_cstm SET user_id8_c='{$bean->user_id1_c}' WHERE user_id8_c!='{$bean->user_id1_c}'";
+                        $GLOBALS['log']->fatal("Actualiza Asesor RM en la Cuenta ".$bean->account_name. 'con valor '.$user_id1_c);
+                        $query_actualiza = "UPDATE accounts_cstm SET user_id8_c='{$bean->user_id1_c}' WHERE user_id8_c!='{$bean->user_id1_c}' and id_c='{$bean->account_id}'";
                         $result_actualiza = $db->query($query_actualiza);
                     }
                  }               
