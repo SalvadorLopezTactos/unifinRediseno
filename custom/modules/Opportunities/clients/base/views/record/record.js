@@ -2697,7 +2697,7 @@
 
         //if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA") {
         if (producto == 1 && (negocio == 5 ||negocio == 3) && (producto_financiero == 0 || producto_financiero == "") &&
-            (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0) && status != "K" && status != "N" && operacion == "LINEA_NUEVA") && this.model.get('admin_cartera_c') != true) {
+            (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0) && status != "K" && status != "N" && (operacion=="RATIFICACION_INCREMENTO" || operacion == "LINEA_NUEVA")) && this.model.get('admin_cartera_c') != true) {
             app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
                 success: function (data) {
                     if (data.records.length == 0) {
@@ -3299,7 +3299,7 @@
             var res = infoDirector.split(",");
             this.directorSolicitudId = res[0];
         }
-        if (this.model.get('assigned_user_id')==App.user.attributes.id || App.user.attributes.id== this.directorSolicitudId){
+        if (this.model.get('assigned_user_id')==App.user.attributes.id || App.user.attributes.id== this.directorSolicitudId && this.model.get('estatus_c')!="N" || this.model.get('estatus_c')!="K"){
             this.$('[data-name="asesor_rm_c"]').attr('style', 'pointer-events:block');
         }
     },
