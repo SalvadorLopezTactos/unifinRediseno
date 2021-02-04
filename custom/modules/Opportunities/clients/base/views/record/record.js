@@ -3299,7 +3299,7 @@
             var res = infoDirector.split(",");
             this.directorSolicitudId = res[0];
         }
-        if ((this.model.get('assigned_user_id')==App.user.attributes.id || App.user.attributes.id== this.directorSolicitudId) && (this.model.get('estatus_c')!="N" && this.model.get('estatus_c')!="K")){
+        if ((this.model.get('assigned_user_id')==App.user.attributes.id || App.user.attributes.id== this.directorSolicitudId) && this.model.get('tct_etapa_ddw_c')=="SI"){
             this.$('[data-name="asesor_rm_c"]').attr('style', 'pointer-events:block');
         }
     },
