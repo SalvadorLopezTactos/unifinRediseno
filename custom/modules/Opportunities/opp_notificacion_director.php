@@ -384,7 +384,7 @@ SQL;
                     $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreoRM,$correo_rm,$nombre_rm,array(),$mailbossRM,$bean->user_id1_c,$bean->id);
 
                     //Actualizar el usuario RM a la cuenta 
-                    if(empty($bean->fetched_row['user_id1_c'])){
+                    if(!empty($bean->user_id1_c)){
                         $GLOBALS['log']->fatal("Actualiza Asesor RM en la Cuenta ".$bean->account_name. 'con valor '.$bean->user_id1_c);
                         $queryUpdateRM = "UPDATE accounts_cstm SET user_id8_c='{$bean->user_id1_c}' WHERE id_c='{$bean->account_id}';";
                         $GLOBALS['log']->fatal($query_actualiza);
