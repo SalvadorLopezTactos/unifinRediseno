@@ -2878,6 +2878,7 @@
         pipeopp.render();
         //Ejecuta funcion para actualizar pipeline
         pipeopp.pipelineopp();
+        this.autorizapre();
     },
 
     showSubpanels: function () {
@@ -3339,5 +3340,4 @@
             callback(null, fields, errors);
         }
     },
-
 })
