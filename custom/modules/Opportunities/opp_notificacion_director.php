@@ -387,7 +387,7 @@ SQL;
                     if(!empty($bean->user_id1_c)){
                         $GLOBALS['log']->fatal("Actualiza Asesor RM en la Cuenta ".$bean->account_name. 'con valor '.$bean->user_id1_c);
                         $queryUpdateRM = "UPDATE accounts_cstm SET user_id8_c='{$bean->user_id1_c}' WHERE id_c='{$bean->account_id}';";
-                        $GLOBALS['log']->fatal($query_actualiza);
+                        $GLOBALS['log']->fatal($queryUpdateRM);
                         $ExecuteRMUpdate = $db->query($queryUpdateRM);
                     }
                  }               
@@ -457,7 +457,7 @@ SQL;
         $insert = '';
         $hoy = date("Y-m-d H:i:s");
         $cc ='';
-
+        $GLOBALS['log']->fatal("Correo Jefe RM :".print_r($recipients,true));
         try{
             $mailer = MailerFactory::getSystemDefaultMailer();
             $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
