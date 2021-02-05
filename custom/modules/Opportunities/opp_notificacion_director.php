@@ -385,13 +385,13 @@ AND t3.id ={$bean->reports_to_id}'";
                             if (!empty($row['email_address'])) {
                                 $full_name="'{$row['first_name']}' '{$row['last_name']}'";
                                 $mailBoss="'{$row['email_address']}";
-                                $GLOBALS['log']->fatal("Correo del Boss RM a notificar :".$row['email_address'].' y con nombre completo :'.$full_name);
+                                $GLOBALS['log']->fatal("Correo del Boss RM a notificar :".$mailBoss.' y con nombre completo :'.$full_name);
                                 array_push($mailbossRM,array('correo'=>$mailBoss,"nombre"=>$full_name));
                             }
                         }
                     }    
                     $GLOBALS['log']->fatal("Notificacion a Asesor RM con nombre: ".$nombre_rm. ' y correo :' .$correo_rm);
-                    $GLOBALS['log']->fatal("Valores de Jefe  RM: ".json_encode($mailbossRM));
+                    $GLOBALS['log']->fatal("Notificacion a JEFE RM con nombre: ".print_r($mailbossRM,true));
                     $cuerpoCorreoRM= $this->NotificacionRM($nombre_rm,$oppName,$linkSolicitud,$nombreDirector);
                     $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreoRM,$correo_rm,$nombre_rm,array(),$mailbossRM,$bean->user_id1_c,$bean->id);
                     
