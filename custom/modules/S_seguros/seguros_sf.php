@@ -86,6 +86,7 @@ class Seguros_SF
             $referenciador = $db->fetchByAssoc($resultUsuario);
             if($bean->tipo_referenciador == 1) $referenciadorCuenta = $referenciador['nombre_completo_c']." ".$bean->region;
             if($bean->tipo_referenciador == 2) $referenciadorCuenta = $referenciador['nombre_completo_c']." ".$bean->departamento_c;
+            if($bean->tipo_referenciador == 3) $referenciadorCuenta = $app_list_strings['ejecutivo_c_list'][$bean->ejecutivo_c];
             $stageName = $app_list_strings['etapa_seguros_list'][$bean->etapa];
             $closeDate = $bean->fecha_cierre_c;
             $closeDate = date("d/m/Y", strtotime($closeDate));
