@@ -374,15 +374,27 @@ SQL;
                     //OBTIENE CORREO DEL JEFE DEL ASESOR RM
                     $mailbossRM=array();  
                     if (!empty($bean->reports_to_id)){
-                        $bossRM = BeanFactory::retrieveBean('Users', $bean->reports_to_id); 
-                        if(!empty($bossRM->email1)){
-                            array_push($mailbossRM,array('correo'=>$bossRM->email1,"nombre"=>$bossRM->full_name));
+                        $queryBoss="SELECT t1.email_address, t3.first_name,t3.last_name
+FROM email_addresses t1
+INNER JOIN email_addr_bean_rel t2 ON t2.email_address_id = t1.id AND t2.primary_address=1 AND t2.deleted=0
+INNER JOIN users t3 ON t3.id = t2.bean_id AND t2.bean_module='Users'
+WHERE t1.deleted = 0
+AND t3.id ={$bean->reports_to_id}'";
+                        $queryResult = $db->query($queryBoss);
+                        while ($row = $db->fetchByAssoc($queryResult)) {
+                            if (!empty($row['email_address'])) {
+                                $full_name="'{$row['first_name']}' '{$row['last_name']}'";
+                                $mailBoss="'{$row['email_address']}";
+                                $GLOBALS['log']->fatal("Correo del Boss RM a notificar :".$row['email_address'].' y con nombre completo :'.$full_name);
+                                array_push($mailbossRM,array('correo'=>$mailBoss,"nombre"=>$full_name));
+                            }
                         }
                     }    
                     $GLOBALS['log']->fatal("Notificacion a Asesor RM con nombre: ".$nombre_rm. ' y correo :' .$correo_rm);
+                    $GLOBALS['log']->fatal("Valores de Jefe  RM: ".json_encode($mailbossRM));
                     $cuerpoCorreoRM= $this->NotificacionRM($nombre_rm,$oppName,$linkSolicitud,$nombreDirector);
                     $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreoRM,$correo_rm,$nombre_rm,array(),$mailbossRM,$bean->user_id1_c,$bean->id);
-
+                    
                     //Actualizar el usuario RM a la cuenta 
                     if(!empty($bean->user_id1_c)){
                         $GLOBALS['log']->fatal("Actualiza Asesor RM en la Cuenta ".$bean->account_name. 'con valor '.$bean->user_id1_c);
