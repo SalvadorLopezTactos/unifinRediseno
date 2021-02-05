@@ -375,12 +375,12 @@ SQL;
                     $mailbossRM=array();
                     $GLOBALS['log']->fatal("Obtiene nombre y correo del AsesorRM y realiza consulta para obtener datos del Jefe RM");
                     if (!empty($beanAsesorRM->reports_to_id)){
-                    $queryBoss="SELECT t1.email_address, t3.first_name,t3.last_name
-                    FROM email_addresses t1
-                    INNER JOIN email_addr_bean_rel t2 ON t2.email_address_id = t1.id AND t2.primary_address=1 AND t2.deleted=0
-                    INNER JOIN users t3 ON t3.id = t2.bean_id AND t2.bean_module='Users'
-                    WHERE t1.deleted = 0
-                    AND t3.id ={$beanAsesorRM->reports_to_id}'";
+$queryBoss="SELECT t1.email_address, t3.first_name,t3.last_name
+FROM email_addresses t1
+INNER JOIN email_addr_bean_rel t2 ON t2.email_address_id = t1.id AND t2.primary_address=1 AND t2.deleted=0
+INNER JOIN users t3 ON t3.id = t2.bean_id AND t2.bean_module='Users'
+WHERE t1.deleted = 0
+AND t3.id ='{$beanAsesorRM->reports_to_id}'";
                         $queryResult = $db->query($queryBoss);
                         while ($row = $db->fetchByAssoc($queryResult)) {
                             if (!empty($row['email_address'])) {
