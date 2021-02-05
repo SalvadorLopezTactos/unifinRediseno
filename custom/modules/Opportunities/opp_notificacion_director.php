@@ -383,8 +383,8 @@ AND t3.id ={$bean->reports_to_id}'";
                         $queryResult = $db->query($queryBoss);
                         while ($row = $db->fetchByAssoc($queryResult)) {
                             if (!empty($row['email_address'])) {
-                                $full_name="'{$row['first_name']}' '{$row['last_name']}'";
-                                $mailBoss="'{$row['email_address']}";
+                                $full_name=$row['first_name'].' '.$row['last_name'];
+                                $mailBoss=$row['email_address'];
                                 $GLOBALS['log']->fatal("Correo del Boss RM a notificar :".$mailBoss.' y con nombre completo :'.$full_name);
                                 array_push($mailbossRM,array('correo'=>$mailBoss,"nombre"=>$full_name));
                             }
