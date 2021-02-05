@@ -263,7 +263,7 @@
 						if(Regimen == "Régimen de las Personas Físicas con Actividades Empresariales y Profesionales") Regimen = "Persona Fisica con Actividad Empresarial";
 						if(Estado == "MEXICO") Estado = "ESTADO DE MEXICO";
 						if(Regimen == "Persona Moral") {
-							var Denominacion = data[0]["Denominación o Razón Social"];
+							var Denominacion = data[0]["Denominación o Razón Social"]+" "+data[0]["Régimen de capital"];
 							var Constitucion = data[0]["Fecha de constitución"];
 							Completo = Denominacion;
 							Constitucion = Constitucion.substring(6, 10) + "-" + Constitucion.substring(3, 5) + "-" + Constitucion.substring(0, 2);
