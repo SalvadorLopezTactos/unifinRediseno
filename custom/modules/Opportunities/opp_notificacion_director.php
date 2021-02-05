@@ -367,26 +367,29 @@ SQL;
                 $nombreDirector=$infoDirectorSplit[1];
                  //obtiene el id del asesor RM
                  $beanAsesorRM = BeanFactory::retrieveBean('Users', $bean->user_id1_c);
-                 
+
                  if(!empty($beanAsesorRM)){
                      $correo_rm=$beanAsesorRM->email1;
                      $nombre_rm=$beanAsesorRM->full_name;
                     //OBTIENE CORREO DEL JEFE DEL ASESOR RM
-                    $mailbossRM=array();  
-                    if (!empty($bean->reports_to_id)){
-                        $queryBoss="SELECT t1.email_address, t3.first_name,t3.last_name
-FROM email_addresses t1
-INNER JOIN email_addr_bean_rel t2 ON t2.email_address_id = t1.id AND t2.primary_address=1 AND t2.deleted=0
-INNER JOIN users t3 ON t3.id = t2.bean_id AND t2.bean_module='Users'
-WHERE t1.deleted = 0
-AND t3.id ={$bean->reports_to_id}'";
+                    $mailbossRM=array();
+                    $GLOBALS['log']->fatal("Obtiene nombre y correo del AsesorRM y realiza consulta para obtener datos del Jefe RM");
+                    if (!empty($beanAsesorRM->reports_to_id)){
+                    $queryBoss="SELECT t1.email_address, t3.first_name,t3.last_name
+                    FROM email_addresses t1
+                    INNER JOIN email_addr_bean_rel t2 ON t2.email_address_id = t1.id AND t2.primary_address=1 AND t2.deleted=0
+                    INNER JOIN users t3 ON t3.id = t2.bean_id AND t2.bean_module='Users'
+                    WHERE t1.deleted = 0
+                    AND t3.id ={$beanAsesorRM->reports_to_id}'";
                         $queryResult = $db->query($queryBoss);
                         while ($row = $db->fetchByAssoc($queryResult)) {
                             if (!empty($row['email_address'])) {
+                                $GLOBALS['log']->fatal("Recupera valores de full name y correo del boss RM.");
                                 $full_name=$row['first_name'].' '.$row['last_name'];
                                 $mailBoss=$row['email_address'];
                                 $GLOBALS['log']->fatal("Correo del Boss RM a notificar :".$mailBoss.' y con nombre completo :'.$full_name);
                                 array_push($mailbossRM,array('correo'=>$mailBoss,"nombre"=>$full_name));
+
                             }
                         }
                     }    
