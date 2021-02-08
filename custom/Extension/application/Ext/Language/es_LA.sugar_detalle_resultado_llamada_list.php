@@ -1,0 +1,21 @@
+<?php
+ // created: 2021-02-05 07:53:50
+
+$app_list_strings['detalle_resultado_llamada_list']=array (
+  '' => '',
+  1 => 'BUSCA OTRO PRODUCTO',
+  2 => 'PRECIO ALTO',
+  3 => 'YA ESTÁ CON LA COMPETENCIA',
+  4 => 'NO CUMPLE ANTIGÜEDAD',
+  5 => 'NO CUMPLE VENTAS',
+  6 => 'RÉGIMEN FISCAL NO VIABLE',
+  7 => 'REGIÓN DE ALTA INSEGURIDAD',
+  8 => 'SECTOR VETADO',
+  9 => 'SEGUIMIENTO PERSONA CLAVE',
+  10 => 'SEGUIMIENTO PERSONA NO CLAVE',
+  11 => 'DATOS INCORRECTOS',
+  12 => 'NO CONTESTA',
+  13 => 'NO ENLAZA',
+  14 => 'OCUPADO',
+  15 => 'YA NO EXISTE',
+);
