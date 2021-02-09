@@ -317,7 +317,7 @@
         //Ocultar panel Analizate
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
-
+        this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
         //Limpia los campos dependientes de Origen y Detalle Origen
         this.model.on('change:origen_cuenta_c', this._cleanDependenciesOrigen, this);
         this.model.on('change:detalle_origen_c', this._cleanDependencies, this);
@@ -452,6 +452,9 @@
         if (accesoFiscal == 0 && this.model.get('tipo_registro_cuenta_c') != '4') {
           this.$('div[data-name=rfc_c]').css("pointer-events", "none");
           this.$('div[data-name="generar_rfc_c"]').hide();
+        }
+        if (App.user.attributes.puestousuario_c != 32 && App.user.attributes.puestousuario_c != 47) {
+          this.$('div[data-name=tipo_proveedor_compras_c]').css("pointer-events", "none");
         }
     },
 
@@ -2220,5 +2223,18 @@
             this.model.set('tct_origen_ag_tel_rel_c', ''); //Se elimina Agente Telefonico Vista
             this.model.set('user_id3_c', '');  //Se elimina Agente Telefonico DB
         }
+    },
+
+    tipoProveedor: function (fields, errors, callback) {
+        if (!this.model.get('tipo_proveedor_compras_c') && (App.user.attributes.puestousuario_c == 32 || App.user.attributes.puestousuario_c != 47)) {
+            app.alert.show("tipo_proveedor_compras_c", {
+                level: "error",
+                title: 'Hace falta seleccionar un valor para el campo Tipo proveedor compras',
+                autoClose: false
+            });
+            errors['tipo_proveedor_compras_c'] = errors['tipo_proveedor_compras_c'] || {};
+            errors['tipo_proveedor_compras_c'].required = true;
+        }
+        callback(null, fields, errors);
     },
 })
