@@ -1,5 +1,5 @@
 <?php
- // created: 2020-12-02 22:44:53
+ // created: 2021-02-09 11:31:39
 $dictionary['Lead']['fields']['origen_c']['labelValue']='Origen';
 $dictionary['Lead']['fields']['origen_c']['dependency']='';
 $dictionary['Lead']['fields']['origen_c']['visibility_grid']=array (
@@ -12,6 +12,7 @@ $dictionary['Lead']['fields']['origen_c']['visibility_grid']=array (
       1 => '1',
       2 => '2',
       3 => '3',
+      4 => '12',
     ),
     2 => 
     array (
