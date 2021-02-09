@@ -1560,8 +1560,8 @@ where rfc_c = '{$bean->rfc_c}' and
     public function estableceCuerpoCorreoErrorMambu($contenidoPeticion,$contenidoError){
 
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>Estimado usuario</b><br> 
-        Se le informa que se ha producido un error en la petición hacia Mambú, el cual se detalla de la siguiente forma:<br>'.$contenidoError.'
-      <br><br>En donde la petición enviada fue la siguiente'.json_encode($contenidoPeticion).'
+        Se le informa que se ha producido un error en la petición hacia Mambú, el cual se detalla de la siguiente forma:<br>'.json_encode($contenidoError).'
+      <br><br>En donde la petición enviada fue la siguiente:<br><br>'.json_encode($contenidoPeticion).'
       <br><br>Atentamente Unifin</font></p>
       <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
 
