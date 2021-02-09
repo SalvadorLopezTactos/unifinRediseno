@@ -1,6 +1,7 @@
 <?php
- // created: 2020-01-02 23:49:39
+ // created: 2021-02-09 11:24:45
 $dictionary['Lead']['fields']['submotivo_cancelacion_c']['labelValue']='Submotivo Cancelación';
+$dictionary['Lead']['fields']['submotivo_cancelacion_c']['dependency']='';
 $dictionary['Lead']['fields']['submotivo_cancelacion_c']['visibility_grid']=array (
   'trigger' => 'motivo_cancelacion_c',
   'values' => 

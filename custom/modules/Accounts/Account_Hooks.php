@@ -1501,11 +1501,16 @@ where rfc_c = '{$bean->rfc_c}' and
             }else{
                 //Mandar notificación a emails de la lista de studio
                 global $app_list_strings;
+                $cuentas_email=array();
                 $lista_correos = $app_list_strings['emails_error_mambu_list'];
-                $cuenta_email=$lista_correos['1'];
+                //Recorriendo lista de emails
+                foreach ($lista_correos as $key => $value) {
+                    array_push($cuentas_email,$lista_correos[$key]);
+                }
+                //$cuenta_email=$lista_correos['1'];
                 $bodyEmail=$this->estableceCuerpoCorreoErrorMambu($body,$resultado);
                 //Enviando correo
-                $this->enviarNotificacionErrorMambu("Notificación: Petición hacia Mambú generada sin éxito",$bodyEmail,$cuenta_email,"Admin");
+                $this->enviarNotificacionErrorMambu("Notificación: Petición hacia Mambú generada sin éxito",$bodyEmail,$cuentas_email,"Admin");
             }
             //Obtener solicitudes
             if ($bean->load_relationship('opportunities')) {
@@ -1524,7 +1529,7 @@ where rfc_c = '{$bean->rfc_c}' and
         }
     }
 
-    public function enviarNotificacionErrorMambu($asunto,$cuerpoCorreo,$correo,$nombreUsuario){
+    public function enviarNotificacionErrorMambu($asunto,$cuerpoCorreo,$correos,$nombreUsuario){
         //Enviando correo a asesor origen
         $GLOBALS['log']->fatal("ENVIANDO CORREO DE ERROR MAMBU A :".$correo);
         $insert = '';
@@ -1536,7 +1541,11 @@ where rfc_c = '{$bean->rfc_c}' and
             $body = trim($cuerpoCorreo);
             $mailer->setHtmlBody($body);
             $mailer->clearRecipients();
-            $mailer->addRecipientsTo(new EmailIdentity($correo, $nombreUsuario));
+            for ($i=0; $i < count($correos); $i++) {
+                $GLOBALS['log']->fatal("AGREGANDO CORREOS DESTINATARIOS: ".$correos[$i]);
+                $mailer->addRecipientsTo(new EmailIdentity($correos[$i], $nombreUsuario));
+            }
+            //$mailer->addRecipientsTo(new EmailIdentity($correo, $nombreUsuario));
             $result = $mailer->send();
 
         } catch (Exception $e){
