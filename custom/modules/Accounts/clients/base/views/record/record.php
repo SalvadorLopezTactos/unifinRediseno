@@ -685,85 +685,70 @@ array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',
               ),
-              28 => 'website',
-              29 => 
-              array (
-                'name' => 'no_website_c',
-                'label' => 'LBL_NO_WEBSITE',
-              ),
-              30 => 
-              array (
-                'name' => 'facebook',
-                'comment' => 'The facebook name of the company',
-                'label' => 'LBL_FACEBOOK',
-              ),
-              31 => 
-              array (
-                'name' => 'linkedin_c',
-                'label' => 'LBL_LINKEDIN',
-              ),
-              32 => 'twitter',
-              33 => 
+              28 => 
               array (
                 'name' => 'referenciabancaria_c',
                 'label' => 'LBL_REFERENCIABANCARIA',
               ),
-              34 => 
+              29 => 
+              array (
+              ),
+              30 => 
               array (
                 'name' => 'tipo_relacion_c',
                 'label' => 'LBL_TIPO_RELACION',
               ),
-              35 => 
+              31 => 
               array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',
               ),
-              36 => 
+              32 => 
               array (
                 'name' => 'reus_c',
                 'label' => 'LBL_REUS',
               ),
-              37 => 
+              33 => 
               array (
                 'name' => 'referencia_bancaria_c',
                 'label' => 'LBL_REFERENCIA_BANCARIA_C',
               ),
-              38 => 
+              34 => 
               array (
                 'name' => 'tct_prospecto_contactado_chk_c',
                 'label' => 'LBL_TCT_PROSPECTO_CONTACTADO_CHK',
               ),
-              39 => 
+              35 => 
               array (
                 'name' => 'show_panel_c',
                 'label' => 'LBL_SHOW_PANEL',
               ),
-              40 => 
+              36 => 
               array (
                 'name' => 'apoderado_nombre_c',
                 'label' => 'LBL_APODERADO_NOMBRE_C',
               ),
-              41 => 
+              37 => 
               array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',
               ),
-              42 => 
+              38 => 
               array (
                 'name' => 'apoderado_apaterno_c',
                 'label' => 'LBL_APODERADO_APATERNO_C',
               ),
-              43 => 
+              39 => 
               array (
                 'name' => 'apoderado_amaterno_c',
                 'label' => 'LBL_APODERADO_AMATERNO_C',
               ),
-              44 => 
+              40 => 
               array (
                 'name' => 'cuenta_especial_c',
                 'label' => 'LBL_CUENTA_ESPECIAL',
               ),
-              45 => 
+              41 => 
               array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',
@@ -773,7 +758,43 @@ array (
           7 => 
           array (
             'newTab' => false,
-            'panelDefault' => 'expanded',
+            'panelDefault' => 'collapsed',
+            'name' => 'LBL_RECORDVIEW_PANEL23',
+            'label' => 'LBL_RECORDVIEW_PANEL23',
+            'columns' => 2,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 'website',
+              1 => 
+              array (
+                'name' => 'no_website_c',
+                'label' => 'LBL_NO_WEBSITE',
+              ),
+              2 => 
+              array (
+                'name' => 'facebook',
+                'comment' => 'The facebook name of the company',
+                'label' => 'LBL_FACEBOOK',
+              ),
+              3 => 
+              array (
+                'name' => 'linkedin_c',
+                'label' => 'LBL_LINKEDIN',
+              ),
+              4 => 
+              array (
+                'name' => 'twitter',
+              ),
+              5 => 
+              array (
+              ),
+            ),
+          ),
+          8 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'collapsed',
             'name' => 'LBL_RECORDVIEW_PANEL22',
             'label' => 'LBL_RECORDVIEW_PANEL22',
             'columns' => 2,
@@ -812,7 +833,7 @@ array (
               ),
             ),
           ),
-          8 => 
+          9 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -854,7 +875,7 @@ array (
               ),
             ),
           ),
-          9 => 
+          10 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -960,7 +981,7 @@ array (
               ),
             ),
           ),
-          10 => 
+          11 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1039,7 +1060,7 @@ array (
               ),
             ),
           ),
-          11 => 
+          12 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1103,7 +1124,7 @@ array (
               ),
             ),
           ),
-          12 => 
+          13 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1123,7 +1144,7 @@ array (
               ),
             ),
           ),
-          13 => 
+          14 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1143,7 +1164,7 @@ array (
               ),
             ),
           ),
-          14 => 
+          15 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1163,7 +1184,7 @@ array (
               ),
             ),
           ),
-          15 => 
+          16 => 
           array (
             'newTab' => true,
             'panelDefault' => 'expanded',
@@ -1230,7 +1251,7 @@ array (
               ),
             ),
           ),
-          16 => 
+          17 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1273,7 +1294,7 @@ array (
               ),
             ),
           ),
-          17 => 
+          18 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1326,7 +1347,7 @@ array (
               ),
             ),
           ),
-          18 => 
+          19 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1389,7 +1410,7 @@ array (
               ),
             ),
           ),
-          19 => 
+          20 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1442,7 +1463,7 @@ array (
               ),
             ),
           ),
-          20 => 
+          21 => 
           array (
             'newTab' => true,
             'panelDefault' => 'expanded',
