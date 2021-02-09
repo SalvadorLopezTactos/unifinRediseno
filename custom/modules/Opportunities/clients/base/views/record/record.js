@@ -2794,16 +2794,23 @@
                               
                                         var textmsg = '';
                                         var tipom = "";
-                                        if( Productos[key].no_viable == true || self.model.attributes.estatus_c == "K" ){
-                                            textmsg = '<br>La presolicitud no pudo ser autorizada.';
-                                            tipom = "warning";
-                                        }else{
-                                            textmsg = '<br>La presolicitud fue autorizada corectamente.';
-                                            tipom = "success";
-                                        }
+                                        
                                         /****************************************/
                                         self.model.save(null, {
                                             success: function (model, response) {
+                                                if( Productos[key].no_viable == true ){
+                                                    textmsg = '<br>La presolicitud no pudo ser autorizada, ya que la cuenta se encuentra cancelada para el producto <b>Leasing</b>.';
+                                                    tipom = "warning";
+                                                }else{
+                                                    if( self.model.attributes.estatus_c == "K" ){
+                                                        textmsg = '<br>La presolicitud no pudo ser autorizada.';
+                                                        tipom = "warning";
+                                                    }else{
+                                                        textmsg = '<br>La presolicitud fue autorizada corectamente.';
+                                                        tipom = "success";
+                                                    }
+                                                }
+
                                                 App.alert.dismiss('autorizaSol');
                                                     App.alert.show("autorizacion_director_ok", {
                                                         level: tipom,
