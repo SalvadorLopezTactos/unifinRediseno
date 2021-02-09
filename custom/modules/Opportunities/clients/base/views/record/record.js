@@ -2697,7 +2697,7 @@
 
         //if(producto==1 && this.model.get('tct_etapa_ddw_c')=="SI" && operacion=="LINEA_NUEVA") {
         if (producto == 1 && (negocio == 5 ||negocio == 3) && (producto_financiero == 0 || producto_financiero == "") &&
-            (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0) && status != "K" && status != "N" && operacion == "LINEA_NUEVA") && this.model.get('admin_cartera_c') != true) {
+            (banderaExcluye.check.length == 0 || banderaExcluye.check.includes(0) && status != "K" && status != "N" && (operacion=="RATIFICACION_INCREMENTO" || operacion == "LINEA_NUEVA")) && this.model.get('admin_cartera_c') != true) {
             app.api.call('GET', app.api.buildURL("Opportunities/" + id + "/link/opportunities_documents_1?filter[0][tipo_documento_c][$equals]=3"), null, {
                 success: function (data) {
                     if (data.records.length == 0) {
@@ -2741,6 +2741,7 @@
     },
 
     authsol: function () {
+
         this.model.set("vobo_dir_c", true);
         solicitud_cf.model.set('condiciones_financieras', solicitud_cf.oFinanciera.condicion);
         $('[name="vobo_leasing"]').attr('style', 'pointer-events:none');
@@ -2777,19 +2778,56 @@
         var fecha = yyyy + '-' + mm + '-' + dd + 'T' + hour + ':' + min + ':' + secs + '-0' + zona + ':00';
         this.model.set("fecha_validacion_c", fecha);
         //this.model.save(),
-        this.model.save(null, {
-            success: function (model, response) {
-                App.alert.dismiss('autorizaSol');
-                App.alert.show("autorizacion_director_ok", {
-                    level: "success",
-                    messages: "<br>La presolicitud fue autorizada corectamente.",
-                    autoClose: false
-                });
-            }, error: function (model, response) {
-                $('[name="vobo_leasing"]').attr('style', 'pointer-events:block');
-                $('[name="rechazo_leasing"]').attr('style', 'pointer-events:block');
-            }
-        });
+       
+        var userprodprin = this.model.get('tipo_producto_c');
+        app.api.call('GET', app.api.buildURL('Accounts/' + this.model.get('account_id')), null, {
+            success: _.bind(function (cuenta) {
+
+                app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + cuenta.id), null, {
+                    success: function (data) {
+                        Productos = data;
+                        ResumenProductos = [];
+                        _.each(Productos, function (value, key) {
+                            var tipoProducto = Productos[key].tipo_producto;
+                            if(tipoProducto == userprodprin){
+                                idProdM = Productos[key].id;
+                              
+                                        var textmsg = '';
+                                        var tipom = "";
+                                        if( Productos[key].no_viable == true || self.model.attributes.estatus_c == "K" ){
+                                            textmsg = '<br>La presolicitud no pudo ser autorizada.';
+                                            tipom = "warning";
+                                        }else{
+                                            textmsg = '<br>La presolicitud fue autorizada corectamente.';
+                                            tipom = "success";
+                                        }
+                                        /****************************************/
+                                        self.model.save(null, {
+                                            success: function (model, response) {
+                                                App.alert.dismiss('autorizaSol');
+                                                    App.alert.show("autorizacion_director_ok", {
+                                                        level: tipom,
+                                                        messages: textmsg,
+                                                        autoClose: false
+                                                    });
+                                            }, error: function (model, response) {
+                                                $('[name="vobo_leasing"]').attr('style', 'pointer-events:block');
+                                                $('[name="rechazo_leasing"]').attr('style', 'pointer-events:block');
+                                            }
+                                        });
+                                        /****************************************/
+                                                        
+                            }
+                        });
+                    },
+                        error: function (e) {
+                            throw e;
+                        }
+                    });  
+
+            }, self),
+        });                
+        
     },
     noauthsol: function () {
         this.model.set("vobo_dir_c", false);
@@ -2869,6 +2907,7 @@
         pipeopp.render();
         //Ejecuta funcion para actualizar pipeline
         pipeopp.pipelineopp();
+        this.autorizapre();
     },
 
     showSubpanels: function () {
@@ -3184,7 +3223,6 @@
                     $('[data-name="opportunities_directores"]').attr('style', 'pointer-events:none');
                     $('[data-name="vobo_descripcion_txa_c"]').attr('style', 'pointer-events:none');
                     $('[data-name="doc_scoring_chk_c"]').attr('style', 'pointer-events:none');
-                    $('[data-name="asesor_rm_c"]').attr('style', 'pointer-events:none');
                 }
 
             }
@@ -3293,13 +3331,15 @@
     },
     //Funcion para permitir la edicion del campo asesorRM solo si el usuario logueado es el asignado a la opp o el director de la misma.
     validaRM: function () {
+        //Bloquea campo
+        this.$('[data-name="asesor_rm_c"]').attr('style', 'pointer-events:none');
         var infoDirector = this.model.get('director_solicitud_c');
         if (infoDirector != null && infoDirector != "") {
             var res = infoDirector.split(",");
             this.directorSolicitudId = res[0];
         }
-        if (this.model.get('assigned_user_id')!=App.user.attributes.id && App.user.attributes.id!= this.directorSolicitudId){
-            this.$('[data-name="asesor_rm_c"]').attr('style', 'pointer-events:none');
+        if ((this.model.get('assigned_user_id')==App.user.attributes.id || App.user.attributes.id== this.directorSolicitudId) && this.model.get('tct_etapa_ddw_c')=="SI"){
+            this.$('[data-name="asesor_rm_c"]').attr('style', 'pointer-events:block');
         }
     },
 
@@ -3311,7 +3351,7 @@
                 success: _.bind(function (data) {
     
                     if (data != "") {
-                        if (!data.productos_c.includes("^11^")) {
+                        if (!data.productos_c.includes("^11^")&& data.user_name!="SinGestor") {
                                 app.alert.show("error_asesorRM", {
                                     level: "error",
                                     title: "El asesor RM seleccionado no posee el producto RM. Favor de verificar.",
@@ -3329,5 +3369,4 @@
             callback(null, fields, errors);
         }
     },
-
 })

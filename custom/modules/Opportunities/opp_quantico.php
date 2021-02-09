@@ -15,8 +15,7 @@ class IntegracionQuantico
         $pwd = $sugar_config['quantico_psw'];
         $auth_encode = base64_encode($user . ':' . $pwd);
         $arrayBo = explode(',', $bean->usuario_bo_c);
-        if ($bean->idsolicitud_c != "" && $bean->id_process_c != "" && ($bean->tipo_producto_c == "1" || $bean->tipo_producto_c == "3"
-                || $bean->tipo_producto_c == "4") && $bean->quantico_id_c == "") {
+        if ($bean->idsolicitud_c != "" && $bean->id_process_c != "" && $bean->quantico_id_c == "") {
             $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id, array('disable_row_level_security' => true));
 
             if($beanCuenta->tipodepersona_c=='Persona Fisica')

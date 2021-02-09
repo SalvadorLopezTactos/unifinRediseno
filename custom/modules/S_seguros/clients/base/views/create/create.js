@@ -6,6 +6,7 @@
         this._super("initialize", [options]);
         this.model.on("change:referenciador",this.addRegion, this);
         this.model.on("change:empleados_c",this.adDepartment, this);
+        this.model.on("change:tipo_cuenta_c",this.setTipo, this);
         this.model.addValidationTask('fecha_req', _.bind(this.validaFecha, this));
         this.model.addValidationTask('fecha_cierre_c', _.bind(this.fechaCierre, this));
         this.model.addValidationTask('referenciador', _.bind(this.validauser, this));
@@ -21,6 +22,12 @@
         this.$('div[data-name=seguro_pipeline]').hide();
         //Oculta campo Notificar KAM
         this.$('[data-name=notifica_kam_c]').hide();
+    },
+
+    setTipo: function() {
+        //Pone el tipo de cliente
+        this.model.set('tipo_cliente_c', 1);
+        if(this.model.get('tipo_cuenta_c') == 3) this.model.set('tipo_cliente_c', 2);
     },
 
     addRegion: function() {

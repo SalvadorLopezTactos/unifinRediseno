@@ -7,6 +7,7 @@
         this.model.on('change:etapa', this.refrescaPipeLine, this);
         this.model.on("change:referenciador",this.addRegion, this);
         this.model.on("change:empleados_c",this.adDepartment, this);
+        this.model.on("change:tipo_cuenta_c",this.setTipo, this);
         this.model.addValidationTask('fecha_req', _.bind(this.validaFecha, this));
         this.model.addValidationTask('referenciado', _.bind(this.validauser, this));
         this.model.addValidationTask('Requeridos_c', _.bind(this.valida_Req, this));
@@ -24,6 +25,12 @@
         $("div.record-label[data-name='seguro_pipeline']").attr('style', 'display:none;');
         //Desabilita edicion campo pipeline
         this.noEditFields.push('seguro_pipeline');
+    },
+
+    setTipo: function() {
+        //Pone el tipo de cliente
+        this.model.set('tipo_cliente_c', 1);
+        if(this.model.get('tipo_cuenta_c') == 3) this.model.set('tipo_cliente_c', 2);
     },
 
     roFunction: function() {
