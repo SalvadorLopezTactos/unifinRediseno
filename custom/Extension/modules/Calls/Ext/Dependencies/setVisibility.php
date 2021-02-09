@@ -1,5 +1,6 @@
 <?php
 
+
 $dependencies['Accounts']['detalle_resultado_c_Visibility'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
