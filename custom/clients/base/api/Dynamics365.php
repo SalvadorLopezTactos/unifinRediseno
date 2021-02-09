@@ -263,7 +263,7 @@ class Dynamics365 extends SugarApi
 
           //$hostVendor=$resource."/api/services/TT_ProveedorServicesGrp/TT_ProveedorServices/createVendor";
           $hostVendor=$resource.$url_endpoint;
-          $GLOBALS['log']->fatal('Request Dynamics: Alta proveedor/Cliente');
+          $GLOBALS['log']->fatal('Request Dynamics: Alta Proveedor/Cliente, host: '.$hostVendor);
           $GLOBALS['log']->fatal(json_encode($argsVendor));
           $responseCreate=$this->postDynamics($hostVendor,$token,$argsVendor);
           //$GLOBALS['log']->fatal('Response: '. $responseCreate);
