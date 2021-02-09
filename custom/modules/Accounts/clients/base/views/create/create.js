@@ -321,6 +321,9 @@
           $('div[data-name=rfc_c]').css("pointer-events", "none");
           $('[data-name="generar_rfc_c"]').hide();
         }
+        if (App.user.attributes.puestousuario_c != 32 && App.user.attributes.puestousuario_c != 47) {
+          this.$('div[data-name=tipo_proveedor_compras_c]').css("pointer-events", "none");
+        }
     },
 
     initialize: function (options) {
@@ -626,7 +629,7 @@
         //Ocultar panel Analizate
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
-
+        this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
     },
 
     /** BEGIN CUSTOMIZATION:
@@ -3171,6 +3174,19 @@
             errors['actividadeconomica_c'].required = true;
         }
 
+        callback(null, fields, errors);
+    },
+
+    tipoProveedor: function (fields, errors, callback) {
+        if (!this.model.get('tipo_proveedor_compras_c') && (App.user.attributes.puestousuario_c == 32 || App.user.attributes.puestousuario_c == 47)) {
+            app.alert.show("tipo_proveedor_compras_c", {
+                level: "error",
+                title: 'Hace falta seleccionar un valor para el campo Tipo proveedor compras',
+                autoClose: false
+            });
+            errors['tipo_proveedor_compras_c'] = errors['tipo_proveedor_compras_c'] || {};
+            errors['tipo_proveedor_compras_c'].required = true;
+        }
         callback(null, fields, errors);
     },
 

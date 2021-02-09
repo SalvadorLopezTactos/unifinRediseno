@@ -295,6 +295,7 @@
         this.model.addValidationTask('FleetUP', _.bind(this.requeridosFleetUP, this));
         this.model.addValidationTask('UniclickUP', _.bind(this.requeridosUniclickUP, this));
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
+        this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
     },
 
     /** Asignacion modal */
@@ -1063,6 +1064,9 @@
         //Oculta menú lateral para relaciones
         $('[data-subpanel-link="rel_relaciones_accounts_1"]').find(".dropdown-toggle").hide();
 
+        if (App.user.attributes.puestousuario_c != 32 && App.user.attributes.puestousuario_c != 47) {
+          self.noEditFields.push('tipo_proveedor_compras_c');
+        }
         this._super('_renderHtml');
     },
 
@@ -6092,6 +6096,19 @@
           this.$('div[data-name=rfc_c]').css("pointer-events", "none");
           this.$('div[data-name="generar_rfc_c"]').hide();
         }
+    },
+
+    tipoProveedor: function (fields, errors, callback) {
+        if (!this.model.get('tipo_proveedor_compras_c') && (App.user.attributes.puestousuario_c == 32 || App.user.attributes.puestousuario_c == 47)) {
+            app.alert.show("tipo_proveedor_compras_c", {
+                level: "error",
+                title: 'Hace falta seleccionar un valor para el campo Tipo proveedor compras',
+                autoClose: false
+            });
+            errors['tipo_proveedor_compras_c'] = errors['tipo_proveedor_compras_c'] || {};
+            errors['tipo_proveedor_compras_c'].required = true;
+        }
+        callback(null, fields, errors);
     },
 
     /* Valida RFC con servicio de revisión del padron de contribuyentes */

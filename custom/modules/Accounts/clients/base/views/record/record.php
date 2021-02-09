@@ -720,70 +720,50 @@ array (
               ),
               36 => 
               array (
-                'name' => 'tipo_proveedor_c',
-                'label' => 'LBL_TIPO_PROVEEDOR',
-              ),
-              37 => 
-              array (
-                'name' => 'alta_proveedor_c',
-                'label' => 'LBL_ALTA_PROVEEDOR_C',
-              ),
-              38 => 
-              array (
-                'name' => 'iva_c',
-                'label' => 'LBL_IVA',
-              ),
-              39 => 
-              array (
-                'name' => 'es_referenciador_c',
-                'label' => 'LBL_ES_REFERENCIADOR_C',
-              ),
-              40 => 
-              array (
                 'name' => 'reus_c',
                 'label' => 'LBL_REUS',
               ),
-              41 => 
+              37 => 
               array (
                 'name' => 'referencia_bancaria_c',
                 'label' => 'LBL_REFERENCIA_BANCARIA_C',
               ),
-              42 => 
+              38 => 
               array (
                 'name' => 'tct_prospecto_contactado_chk_c',
                 'label' => 'LBL_TCT_PROSPECTO_CONTACTADO_CHK',
               ),
-              43 => 
+              39 => 
               array (
                 'name' => 'show_panel_c',
                 'label' => 'LBL_SHOW_PANEL',
               ),
-              44 => 
+              40 => 
               array (
                 'name' => 'apoderado_nombre_c',
                 'label' => 'LBL_APODERADO_NOMBRE_C',
               ),
-              45 => 
+              41 => 
               array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',
               ),
-              46 => 
+              42 => 
               array (
                 'name' => 'apoderado_apaterno_c',
                 'label' => 'LBL_APODERADO_APATERNO_C',
               ),
-              47 => 
+              43 => 
               array (
                 'name' => 'apoderado_amaterno_c',
                 'label' => 'LBL_APODERADO_AMATERNO_C',
               ),
-              48 => 
+              44 => 
               array (
                 'name' => 'cuenta_especial_c',
                 'label' => 'LBL_CUENTA_ESPECIAL',
               ),
-              49 => 
+              45 => 
               array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',
@@ -791,6 +771,48 @@ array (
             ),
           ),
           7 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL22',
+            'label' => 'LBL_RECORDVIEW_PANEL22',
+            'columns' => 2,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'tipo_proveedor_compras_c',
+                'label' => 'LBL_TIPO_PROVEEDOR_COMPRAS',
+              ),
+              1 => 
+              array (
+                'name' => 'blank_space',
+                'label' => 'LBL_BLANK_SPACE',
+              ),
+              2 => 
+              array (
+                'name' => 'tipo_proveedor_c',
+                'label' => 'LBL_TIPO_PROVEEDOR',
+              ),
+              3 => 
+              array (
+                'name' => 'alta_proveedor_c',
+                'label' => 'LBL_ALTA_PROVEEDOR_C',
+              ),
+              4 => 
+              array (
+                'name' => 'iva_c',
+                'label' => 'LBL_IVA',
+              ),
+              5 => 
+              array (
+                'name' => 'es_referenciador_c',
+                'label' => 'LBL_ES_REFERENCIADOR_C',
+              ),
+            ),
+          ),
+          8 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -832,7 +854,7 @@ array (
               ),
             ),
           ),
-          8 => 
+          9 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -938,7 +960,7 @@ array (
               ),
             ),
           ),
-          9 => 
+          10 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1017,7 +1039,7 @@ array (
               ),
             ),
           ),
-          10 => 
+          11 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1081,7 +1103,7 @@ array (
               ),
             ),
           ),
-          11 => 
+          12 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1101,7 +1123,7 @@ array (
               ),
             ),
           ),
-          12 => 
+          13 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1121,7 +1143,7 @@ array (
               ),
             ),
           ),
-          13 => 
+          14 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1141,7 +1163,7 @@ array (
               ),
             ),
           ),
-          14 => 
+          15 => 
           array (
             'newTab' => true,
             'panelDefault' => 'expanded',
@@ -1208,7 +1230,7 @@ array (
               ),
             ),
           ),
-          15 => 
+          16 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1251,7 +1273,7 @@ array (
               ),
             ),
           ),
-          16 => 
+          17 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1304,7 +1326,7 @@ array (
               ),
             ),
           ),
-          17 => 
+          18 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1367,7 +1389,7 @@ array (
               ),
             ),
           ),
-          18 => 
+          19 => 
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -1420,7 +1442,7 @@ array (
               ),
             ),
           ),
-          19 => 
+          20 => 
           array (
             'newTab' => true,
             'panelDefault' => 'expanded',
