@@ -1583,7 +1583,7 @@ SQL;
 
             $host = 'http://' . $GLOBALS['bpm_url'] . '/uni2/rest/bpm/iniciar-proceso';
 
-            $monto = ($opportunidad['monto_gpo_emp_c'] != 0) ? $opportunidad['monto_gpo_emp_c'] : $opportunidad['monto_c'];
+            $monto = $opportunidad['monto_c'];//($opportunidad['monto_gpo_emp_c'] != 0) ? $opportunidad['monto_gpo_emp_c'] : $opportunidad['monto_c'];
             $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : TIPO_PRODUCTO " . $opportunidad['tipo_producto_c']);
             $productoFinancieroId = ($opportunidad['producto_financiero_c'] == 0 || $opportunidad['producto_financiero_c'] == 41 || $opportunidad['producto_financiero_c'] == 42) ? "" : $opportunidad['producto_financiero_c'];
             //CVV - 29/03/2016 - Se crea el arreglo con los campos que aplican para todos los productos
@@ -1745,6 +1745,8 @@ SQL;
             if ($opportunidad['tipo_de_operacion_c'] == "RATIFICACION_INCREMENTO") {
                 $fields['idLineaRelacionada'] = $opportunidad['id_linea_credito_c'];
                 $fields['montoIncremento'] = $opportunidad['monto_ratificacion_increment_c'];
+                $fields['montoPropuesta'] = $opportunidad['monto_gpo_emp_c'];
+                $fields['montoAOperar'] = $opportunidad['monto_gpo_emp_c'];
             }
 
             //Se valida si el Administrador de Cartera esta activo en el config y a nivel de solicitud/usuario
@@ -1761,7 +1763,7 @@ SQL;
                 } else {
                     $fields['operacionEspecial'] = false;
                     $fields['montoRiesgoEmpresarial'] = 0;
-                    $fields['tipoSolicitud'] = "";
+                    $fields['tipoSolicitud'] = 0;
                     $fields['diasVencido'] = 0;
                 }
             }
