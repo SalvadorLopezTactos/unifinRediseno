@@ -21,6 +21,7 @@ $mod_strings['LBL_TCT_CALL_FROM_ISSABEL_C'] = 'Llamada realizada desde issabel';
 $mod_strings['LBL_CALL_MEETING'] = 'Reunión / Llamada';
 $mod_strings['LBL_TCT_PARENT_CALL_ID_TXF'] = 'ID Llamada padre';
 $mod_strings['LBL_PRODUCTO_C'] = 'Producto';
+$mod_strings['LBL_PERSONA_RELACION_C'] = 'id Persona Relacion Llamada';
 $mod_strings['LBL_DETALLE_RESULTADO'] = 'Detalle';
 $mod_strings['LBL_CUENTA_EXISTENTE_ACCOUNT_ID'] = 'Razón social existente (relacionado Cuenta ID)';
 $mod_strings['LBL_CUENTA_EXISTENTE'] = 'Razón social existente';
