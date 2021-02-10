@@ -341,6 +341,6 @@ $mod_strings['LBL_RECORDVIEW_PANEL21'] = 'Clasificación Sectorial';
 $mod_strings['LBL_CONTROL_DYNAMICS_365_C'] = 'Control Dynamics 365';
 $mod_strings['LBL_CONTROL_CPP_CHK'] = 'Control Cuentas por pagar';
 $mod_strings['LBL_ID_CPP_365_CHK'] = 'ID Cuentas por pagar 365';
-$mod_strings['LBL_TIPO_PROVEEDOR_COMPRAS'] = 'Tipo proveedor compras';
+$mod_strings['LBL_TIPO_PROVEEDOR_COMPRAS'] = 'Tipo de proveedor compras';
 $mod_strings['LBL_RECORDVIEW_PANEL22'] = 'Proveedor';
 $mod_strings['LBL_RECORDVIEW_PANEL23'] = 'Página Web y Redes Sociales';
