@@ -796,21 +796,21 @@
     getPersonas: function () {
         var idCuenta = selfPerson.model.get('parent_id');
 
-        app.api.call('GET', app.api.buildURL('Accounts/' + idCuenta + '/link/rel_relaciones_accounts_1'), null, {
+        app.api.call('GET', app.api.buildURL('GetRelRelaciones/' + idCuenta), null, {
             success: function (data) {
                 //console.log(data.records);
                 var idpersonas = selfPerson.model.get('persona_relacion_c');
                 var arrayPersonas = [];
                 var isSelect = false;
-                for (var i = 0; i < data.records.length; i++) {
+                for (var i = 0; i < data.length; i++) {
 
-                    if (idpersonas != "" && idpersonas == data.records[i]['id']) {
+                    if (idpersonas != "" && idpersonas == data[i]['id']) {
                         isSelect = true;
-                        selfPerson.seleccionado=data.records[i]['name'];
+                        selfPerson.seleccionado=data[i]['name'];
                     }
                     arrayPersonas.push({
-                        "id": data.records[i]['id'],
-                        "name": data.records[i]['name'],
+                        "id": data[i]['id'],
+                        "name": data[i]['name'],
                         "select": isSelect
                     });
                 }

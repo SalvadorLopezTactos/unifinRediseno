@@ -1,6 +1,6 @@
 ({
     extendsFrom: 'CreateView',
-    personasRelData_list:null,
+    personasRelData_list: null,
     initialize: function (options) {
         this.plugins = _.union(this.plugins || [], ['AddAsInvitee', 'ReminderTimeDefaults']);
         self = this;
@@ -62,6 +62,7 @@
         this.hide_subpanel();
         this.disabledates();
         this.getPersonas();
+        this.hidePErsonaEdit();
     },
 
     /* @Jesus Carrillo
@@ -190,7 +191,7 @@
                 autoClose: false
             });
             $('[data-name="calls_persona_relacion"]').find('.select2-choice').css('border-color', 'red');
-            errors['calls_persona_relaccion'] ="Persona con quien se atiende la llamada";
+            errors['calls_persona_relaccion'] = "Persona con quien se atiende la llamada";
             errors['calls_persona_relaccion'].required = true;
         }
         callback(null, fields, errors);
@@ -198,32 +199,34 @@
 
     getPersonas: function () {
         var idCuenta = selfPerson.model.get('parent_id');
+        var tipoCuenta = selfPerson.model.attributes.parent.tipodepersona_c;
+        if (tipoCuenta == 'Persona Moral') {
+            app.api.call('GET', app.api.buildURL('GetRelRelaciones/' + idCuenta), null, {
+                success: function (data) {
+                    var idpersonas = selfPerson.model.get('persona_relacion_c');
+                    var arrayPersonas = [];
+                    var isSelect = false;
+                    for (var i = 0; i < data.length; i++) {
 
-        app.api.call('GET', app.api.buildURL('Accounts/' + idCuenta + '/link/rel_relaciones_accounts_1'), null, {
-            success: function (data) {
-                //console.log(data.records);
-                var idpersonas = selfPerson.model.get('persona_relacion_c');
-                var arrayPersonas = [];
-                var isSelect = false;
-                for (var i = 0; i < data.records.length; i++) {
-
-                    if (idpersonas != "" && idpersonas == data.records[i]['id']) {
-                        isSelect = true;
+                        if (idpersonas != "" && idpersonas == data[i]['id']) {
+                            isSelect = true;
+                        }
+                        arrayPersonas.push({
+                            "id": data[i]['id'],
+                            "name": data[i]['name'],
+                            "select": isSelect
+                        });
                     }
-                    arrayPersonas.push({
-                        "id": data.records[i]['id'],
-                        "name": data.records[i]['name'],
-                        "select": isSelect
-                    });
+                    //console.log(arrayPersonas);
+                    selfPerson.personasRelData_list = arrayPersonas;
+                    selfPerson.render();
+                },
+                error: function (e) {
+                    console.log(e);
                 }
-                console.log(arrayPersonas);
-                selfPerson.personasRelData_list = arrayPersonas;
-                selfPerson.render();
-            },
-            error: function (e) {
-                console.log(e);
-            }
-        });
+            });
+        }
+
     },
 
     hidePErsonaEdit: function () {
@@ -251,10 +254,8 @@
         else {
             $('.divPersonasRel').hide();
             $('[data-name="persona_relacion_c"]').hide()
-
             //$('[data-name="calls_persona_relacion"]').addClass('hide');
         }
-
     },
 
 })
