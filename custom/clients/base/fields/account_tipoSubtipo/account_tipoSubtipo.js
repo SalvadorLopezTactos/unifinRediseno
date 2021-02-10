@@ -129,20 +129,20 @@
         }
 
         if (tipoCuenta == 4) {
-            $("#cell1").html("Persona");
-            $("#cell2").addClass('ocult');
+            $("#cell2").html("Persona");
+            $("#cell1").addClass('ocult');
             $("#cell3").addClass('ocult');
-            $('#cell1').addClass('current');
-            $('#cell1').addClass('done');
+            $('#cell2').addClass('current');
+            $('#cell2').addClass('done');
             $(".container2").hide();
         }
-        if (tipoCuenta == 5) {
 
-            $("#cell1").html("Proveedor");
-            $("#cell2").addClass('ocult');
+        if (tipoCuenta == 5) {
+            $("#cell2").html("Proveedor");
+            $("#cell1").addClass('ocult');
             $("#cell3").addClass('ocult');
-            $('#cell1').addClass('current');
-            $('#cell1').addClass('done');
+            $('#cell2').addClass('current');
+            $('#cell2').addClass('done');
             $(".container2").hide();
         }
         $('[data-name="tipo_registro_cuenta_c"]').hide();

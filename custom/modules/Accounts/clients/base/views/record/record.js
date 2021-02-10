@@ -6102,7 +6102,7 @@
         if (!this.model.get('tipo_proveedor_compras_c') && (App.user.attributes.puestousuario_c == 32 || App.user.attributes.puestousuario_c == 47)) {
             app.alert.show("tipo_proveedor_compras_c", {
                 level: "error",
-                title: 'Hace falta seleccionar un valor para el campo Tipo proveedor compras',
+                title: 'Hace falta seleccionar un valor para el campo Tipo de proveedor compras',
                 autoClose: false
             });
             errors['tipo_proveedor_compras_c'] = errors['tipo_proveedor_compras_c'] || {};
