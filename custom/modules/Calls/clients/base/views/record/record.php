@@ -389,7 +389,7 @@ array (
                 'name' => 'calls_persona_relacion',
                 'label' => 'Persona con quien se atiende la llamada',
                 'studio' => 'visible',
-                'dismiss_label' => true,
+                //'dismiss_label' => true,
 
               ),
 

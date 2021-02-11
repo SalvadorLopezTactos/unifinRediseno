@@ -40,9 +40,13 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
                 $row = $db->fetchByAssoc($result);
                 $idUsrCalls = $row['account_id1_c'];
                 $nameUsrCalls = $row['nombre_comercial_c'];
+                $nameParentCalls = $bean->parent_name;
+
             } else {
                 $idUsrCalls = $bean->assigned_user_id;
                 $nameUsrCalls = $bean->assigned_user_name;
+                $nameParentCalls = $bean->parent_name;
+
             }
 
             //$usr_email = $beanAccount->email1!=""?1:0;
@@ -111,10 +115,10 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
               '0',
               '0',
               '0',
-              'Accounts',
-              '{$idParentCalls}',
+              'Calls',
+              '{$idCall}',
               'Users',
-              '{$idUsrCalls}',
+              '{$bean->assigned_user_id}',
               '1',
               '1',
               '{$submission_type}',
@@ -146,7 +150,7 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
                 //Regresa url en base64
                 $GLOBALS['log']->fatal('Respuesta Encuesta Calls' . $stringBase64);
 
-                $this->sendEmailSurvey($nameUsrCalls,$bean->assigned_user_name,$beanAccount->email1,$stringBase64);
+                $this->sendEmailSurvey($nameParentCalls,$bean->assigned_user_name,$beanAccount->email1,$stringBase64);
 
             }
 

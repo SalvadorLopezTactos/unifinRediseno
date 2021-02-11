@@ -4,12 +4,12 @@
 </script>
 
 <div class="divPersonasRel">
-    <div class="record-label">Persona con quien se atiende la llamada </div>
+
     <select class="select2" id="personasRel" data-name="personasRel"
             data-placeholder="" data-toggle="tooltip" title="" style="width: 100%">
         <option value="" > </option>
         {{#each personasRelData_list}}
-            <option value="{{id}}" {{#if selected}} selected{{/if}}> {{name}}</option>
+            <option value="{{id}}" {{#if select}} selected{{/if}}> {{name}}</option>
         {{/each}}
 
     </select>
