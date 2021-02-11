@@ -1745,8 +1745,9 @@ SQL;
             if ($opportunidad['tipo_de_operacion_c'] == "RATIFICACION_INCREMENTO") {
                 $fields['idLineaRelacionada'] = $opportunidad['id_linea_credito_c'];
                 $fields['montoIncremento'] = $opportunidad['monto_ratificacion_increment_c'];
+                /* PEndiente por funcionalidad uni2
                 $fields['montoPropuesta'] = $opportunidad['monto_gpo_emp_c'];
-                $fields['montoAOperar'] = $opportunidad['monto_gpo_emp_c'];
+                $fields['montoAOperar'] = $opportunidad['monto_gpo_emp_c'];*/
             }
 
             //Se valida si el Administrador de Cartera esta activo en el config y a nivel de solicitud/usuario
