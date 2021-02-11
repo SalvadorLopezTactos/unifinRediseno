@@ -14,6 +14,7 @@
         this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicialCall, this));
         this.model.addValidationTask('rqueridoPErsona', _.bind(this.reqPersona, this));
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
+        this.on('render', this.hidePErsonaEdit, this);
 
 
     },
