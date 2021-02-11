@@ -806,7 +806,7 @@
 
                     if (idpersonas != "" && idpersonas == data[i]['id']) {
                         isSelect = true;
-                        selfPerson.seleccionado=data[i]['name'];
+                        self.seleccionado=data[i]['name'];
                     }
                     arrayPersonas.push({
                         "id": data[i]['id'],
