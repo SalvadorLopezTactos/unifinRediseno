@@ -1297,6 +1297,7 @@
         $('[data-name="assigned_user_name"]').show();
         $('[data-name="picture"]').show();
         $('[data-name="tct_numero_vehiculos_c"]').show();
+        $('[data-name="lic_licitaciones_opportunities_1_name"]').show();
 
         /**Muestra campos de area Beneficiada y Subyacente **/
         /* $('[data-name="estado_benef_c"]').show();
