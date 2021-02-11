@@ -993,5 +993,21 @@ $dependencies['Opportunities']['condiciones_financieras_readonly'] = array(
        ),
    ),
 );
+//Campo Relacionado de Licitaciones
+$dependencies['Opportunities']['lic_licitaciones_opportunities_1_name_readonly'] = array(
+    'hooks' => array("edit"),
+    'trigger' => 'true',
+    'triggerFields' => array('lic_licitaciones_opportunities_1_name'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'lic_licitaciones_opportunities_1_name',
+                'value' => 'true',
+            ),
+        ),
+    ),
+ );
 
 //////////***************************   END: READ ONLY   ******************************////////////////////////////

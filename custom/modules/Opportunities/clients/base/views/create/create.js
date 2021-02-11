@@ -1352,6 +1352,7 @@
         $('[data-name="assigned_user_name"]').show();
         $('[data-name="picture"]').show();
         $('[data-name="tct_numero_vehiculos_c"]').show();
+        $('[data-name="lic_licitaciones_opportunities_1_name"]').show();
 
         //Se visualiza campo de Administrador cartera solo si el usuario tiene activo el check
         if (app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
