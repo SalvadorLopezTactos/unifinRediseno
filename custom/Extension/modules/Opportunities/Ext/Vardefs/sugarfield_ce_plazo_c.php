@@ -1,5 +1,5 @@
 <?php
- // created: 2020-11-24 09:49:55
+ // created: 2020-12-15 17:43:31
 $dictionary['Opportunity']['fields']['ce_plazo_c']['labelValue']='Plazo';
 $dictionary['Opportunity']['fields']['ce_plazo_c']['full_text_search']=array (
   'enabled' => '0',

@@ -68,6 +68,16 @@ array (
                 'event' => 'button:convert_Lead_to_Accounts:click',
                 'class' => 'btn_convertLeads',
               ),
+              4 =>
+              array (
+                'name' => 'reset_lead',
+                'type' => 'rowaction',
+                'label' => 'Restablecer Lead',
+                'acl_action' => 'view',
+                'event' => 'button:reset_lead:click',
+                'class' => 'btn_resetLeads',
+
+              ),
             ),
           ),
           3 => 
@@ -380,6 +390,16 @@ array (
                 'name' => 'account_to_lead',
                 'label' => 'LBL_ACCOUNT',
                 'readonly' => true,
+              ),
+              36 => 
+              array (
+                'name' => 'status_management_c',
+                'label' => 'LBL_STATUS_MANAGEMENT',
+              ),
+              37 => 
+              array (
+                'name' => 'fecha_asignacion_c',
+                'label' => 'LBL_FECHA_ASIGNACION_C',
               ),
             ),
           ),

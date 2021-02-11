@@ -6,28 +6,21 @@
         options.def = options.def || {};
         this._super('initialize', [options]);
         this.model.on('sync', this.tipoSubtipo_vista, this);
-
-
     },
 
     tipoSubtipo_vista: function () {
         // tipo_registro_cuenta_c
         //Y subtipo_registro_cuenta_c
-
         var tipoCuenta = this.model.get('tipo_registro_cuenta_c')
         var subtipoCuenta = this.model.get('subtipo_registro_cuenta_c')
-
         console.log(tipoCuenta);
         console.log(subtipoCuenta);
-
         if (tipoCuenta == 1) {
             $("#cell1").html("Lead");
             $("#cell2").html("Prospecto");
             $("#cell3").html("Cliente");
             $('#cell1').addClass('current');
-
             if (subtipoCuenta == 5) {
-
                 $("#ST1").removeClass('ocult');
                 $('#ST1').addClass('success');
                 $("#ST1").html("En Calificación");
@@ -37,7 +30,6 @@
                 $('#ST1').addClass('alerta');
                 $("#ST1").html("No Viable");
             }
-
         }
 
         if (tipoCuenta == 2) {
@@ -46,9 +38,12 @@
             $("#cell3").html("Cliente");
             $('#cell2').addClass('current');
             $('#cell1').addClass('done');
-
+            if (subtipoCuenta == 1) {
+                $("#ST2").removeClass('ocult');
+                $('#ST2').addClass('success');
+                $("#ST2").html("Sin Contactar");
+            }
             if (subtipoCuenta == 2) {
-
                 $("#ST2").removeClass('ocult');
                 $('#ST2').addClass('success');
                 $("#ST2").html("Contactado");
@@ -73,17 +68,14 @@
                 $('#ST2').addClass('error');
                 $("#ST2").html("Rechazado");
             }
-
         }
 
         if (tipoCuenta == 3) {
             $("#cell1").html("Lead");
             $("#cell2").html("Prospecto");
             $("#cell3").html("Cliente");
-
             $('#cell3').addClass('current');
             $('#cell2').addClass('done');
-
             if (subtipoCuenta == 11) {
                 $("#ST3").removeClass('ocult');
                 $('#ST3').addClass('success');
@@ -137,32 +129,27 @@
         }
 
         if (tipoCuenta == 4) {
-
-            $("#cell1").html("Persona");
-            $("#cell2").addClass('ocult');
+            $("#cell2").html("Persona");
+            $("#cell1").addClass('ocult');
             $("#cell3").addClass('ocult');
-            $('#cell1').addClass('current');
-            $('#cell1').addClass('done');
+            $('#cell2').addClass('current');
+            $('#cell2').addClass('done');
             $(".container2").hide();
         }
+
         if (tipoCuenta == 5) {
-
-            $("#cell1").html("Proveedor");
-            $("#cell2").addClass('ocult');
+            $("#cell2").html("Proveedor");
+            $("#cell1").addClass('ocult');
             $("#cell3").addClass('ocult');
-            $('#cell1').addClass('current');
-            $('#cell1').addClass('done');
+            $('#cell2').addClass('current');
+            $('#cell2').addClass('done');
             $(".container2").hide();
         }
-
         $('[data-name="tipo_registro_cuenta_c"]').hide();
         $('[data-name="subtipo_registro_cuenta_c"]').hide();
-
     },
 
     _render: function () {
         this._super("_render");
-
-
     }
 })

@@ -15,3 +15,11 @@ $hook_array['after_save'][] = Array(
     'callLead_class',
     'ProspectoContactado'
 );
+
+$hook_array['after_save'][] = Array(
+    4,
+    'Convertir Lead',
+    'custom/modules/Calls/callLead_class.php',
+    'callLead_class',
+    'ConvierteLead'
+);

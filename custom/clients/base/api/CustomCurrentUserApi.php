@@ -20,6 +20,7 @@ class CustomCurrentUserApi extends CurrentUserApi
     public function retrieveCurrentUser(ServiceBase $api, array $args)
     {
         $current_user = $this->getUserBean();
+        global $sugar_config;
 
         $userArray = parent::retrieveCurrentUser($api, $args);
         $userArray['current_user']['cac_c'] = $current_user->cac_c;
@@ -45,13 +46,18 @@ class CustomCurrentUserApi extends CurrentUserApi
         $userArray['current_user']['tct_no_contactar_chk_c'] = $current_user->tct_no_contactar_chk_c;
         $userArray['current_user']['agente_telefonico_c'] = $current_user->agente_telefonico_c;
         $userArray['current_user']['deudor_factoraje_c'] = $current_user->deudor_factoraje_c;
-		$userArray['current_user']['id_active_directory_c'] = $current_user->id_active_directory_c;
+		    $userArray['current_user']['id_active_directory_c'] = $current_user->id_active_directory_c;
         $userArray['current_user']['cuenta_especial_c'] = $current_user->cuenta_especial_c;
         $userArray['current_user']['depurar_leads_c'] = $current_user->depurar_leads_c;
         $userArray['current_user']['tct_cancelar_ref_cruzada_chk_c'] = $current_user->tct_cancelar_ref_cruzada_chk_c;
         $userArray['current_user']['multilinea_c'] = $current_user->multilinea_c;
         $userArray['current_user']['responsable_oficina_chk_c'] = $current_user->responsable_oficina_chk_c;
         $userArray['current_user']['excluir_precalifica_c'] = $current_user->excluir_precalifica_c;
+        $userArray['current_user']['admin_cartera_c'] = $current_user->admin_cartera_c;
+        $userArray['current_user']['config_admin_cartera'] = $sugar_config['service_admin_cartera'];
+        $userArray['current_user']['access_hours_c'] = $current_user->access_hours_c;
+        $userArray['current_user']['reset_leadcancel_c'] = $current_user->reset_leadcancel_c;
+
 
         return $userArray;
     }

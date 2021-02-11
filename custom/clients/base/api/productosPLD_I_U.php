@@ -145,6 +145,20 @@ class productosPLD_I_U extends SugarApi
                     'campo6' => '',
                     'campo6_label' => '',
                 ),
+            'creditoRevolvente' =>
+                array(
+                    'id_pld' => '',
+                    'tipoProducto' => 'CR',
+                    'campo1' => '',
+                    'campo2' => '',
+                    'campo3' => '',
+                    'campo5' => '',
+                    'campo6' => '',
+                    'campo7' => '',
+                    'campo8' => '',
+                    'campo9' => '',
+                    'campo10' => '',
+                ),
 
         );
 
@@ -232,7 +246,19 @@ class productosPLD_I_U extends SugarApi
                         $productosPLD['creditoSimple']['campo6'] = $value->tct_pld_campo6_ddw;
 
                         break;
-
+                    case "CR":
+                            $productosPLD['creditoRevolvente']['id_pld'] = $value->id;
+                            $productosPLD['creditoRevolvente']['campo1'] = $value->tct_pld_campo22_int;
+                            $productosPLD['creditoRevolvente']['campo2'] = $value->tct_pld_campo23_dec;
+                            $productosPLD['creditoRevolvente']['campo3'] = $value->tct_pld_campo16_ddw;
+                            $productosPLD['creditoRevolvente']['campo5'] = $value->tct_pld_campo20_ddw;
+                            $productosPLD['creditoRevolvente']['campo6'] = $value->tct_pld_campo6_ddw;
+                            $productosPLD['creditoRevolvente']['campo7'] = $value->tct_pld_campo28_ddw_c;
+                            $productosPLD['creditoRevolvente']['campo8'] = $value->tct_pld_campo2_ddw;
+                            $productosPLD['creditoRevolvente']['campo9'] = $value->tct_pld_campo3_rel;
+                            $productosPLD['creditoRevolvente']['campo9_id'] = $value->account_id_c;
+                            $productosPLD['creditoRevolvente']['campo10'] = $value->tct_pld_campo4_ddw;
+                            break;   
                 }
             }
         }
@@ -386,6 +412,36 @@ class productosPLD_I_U extends SugarApi
         //Guardar registro
         $pldCS->save();
         $productosPLD['creditoSimple']['id_pld'] = $pldCS->id;
+
+        ########################
+        // Crédito Envolvente :CE
+        ########################
+        if ($productosPLD['creditoRevolvente']['id_pld']) {
+            //Actualiza registro
+            $pldCE = BeanFactory::getBean($modulo,$productosPLD['creditoRevolvente']['id_pld']);
+        }else {
+            //Inserta registro
+            $pldCE = BeanFactory::newBean($modulo);
+        }
+        //Agregar valores a campo
+        $idCuenta = $productosPLD['id_cuenta'];
+        $pldCE->accounts_tct_pld_1accounts_ida = $idCuenta;
+        $pldCE->tct_pld_campo22_int = $productosPLD['creditoRevolvente']['campo1'];
+        $pldCE->tct_pld_campo23_dec = $productosPLD['creditoRevolvente']['campo2'];
+        $pldCE->tct_pld_campo16_ddw = (!empty($productosPLD['creditoRevolvente']['campo3']))? "^" . str_replace(",","^,^",$productosPLD['creditoRevolvente']['campo3']) . "^" : "";
+        $pldCE->tct_pld_campo20_ddw = $productosPLD['creditoRevolvente']['campo5'];
+        $pldCE->tct_pld_campo6_ddw = $productosPLD['creditoRevolvente']['campo6'];
+        $pldCE->tct_pld_campo28_ddw_c = (!empty($productosPLD['creditoRevolvente']['campo7']))? "^" . str_replace(",","^,^",$productosPLD['creditoRevolvente']['campo7']) . "^" : "";
+        $pldCE->tct_pld_campo2_ddw = $productosPLD['creditoRevolvente']['campo8'];
+        $pldCE->tct_pld_campo3_rel = $productosPLD['creditoRevolvente']['campo9'];
+        $pldCE->account_id_c = $productosPLD['creditoRevolvente']['campo9_id'];
+        $pldCE->tct_pld_campo4_ddw = $productosPLD['creditoRevolvente']['campo10'];
+        $pldCE->name = "Crédito Revolvente";
+        $pldCE->description = $productosPLD['creditoRevolvente']['tipoProducto'];
+
+        //Guardar registro
+        $pldCE->save();
+        $productosPLD['creditoRevolvente']['id_pld'] = $pldCE->id;
 
 
         //Regresar respuesta

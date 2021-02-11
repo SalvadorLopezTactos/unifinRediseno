@@ -31,6 +31,8 @@ class customGetOpportunities extends SugarApi
         $accountId = $args['data']['account_id'];
         $prouctId = $args['data']['tipo_producto_c'];
         $producto = $args['data']['producto_financiero_c'];
+        $negocio = $args['data']['negocio_c'];
+
         $duplicado = 0;
         $mensaje = "";
 
@@ -49,7 +51,8 @@ FROM opportunities_cstm op_cstm
        AND uni.tipo_producto = '{$prouctId}'
   INNER JOIN uni_productos_cstm uni_cstm
     ON uni_cstm.id_c = uni.id
-WHERE op_rel.account_id = '{$accountId}' AND op_cstm.tipo_producto_c = '{$prouctId}' AND op_cstm.producto_financiero_c = '{$producto}' AND op_rel.deleted = 0";
+WHERE op_rel.account_id = '{$accountId}' AND op_cstm.tipo_producto_c = '{$prouctId}' AND  op_cstm.negocio_c='{$negocio}'
+ AND op_cstm.producto_financiero_c = '{$producto}' AND op_rel.deleted = 0";
 
         $result = $db->query($queryData);
 

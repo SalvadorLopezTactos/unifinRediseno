@@ -56,7 +56,7 @@ SQL;
                 $query = "select count(*) as total from opportunities a, opportunities_cstm b, accounts_opportunities c
      where a.id = b.id_c and a.id = c.opportunity_id and a.deleted = 0 and c.account_id = '$cliente'
      and b.tct_etapa_ddw_c = 'SI' and isnull(b.estatus_c) and b.tipo_producto_c = '$tipo' and b.producto_financiero_c='$FINACIERO'";
-              
+
                 $result = $db->query($query);
                 $row = $db->fetchByAssoc($result);
                 $count = $row['total'];
@@ -131,16 +131,17 @@ SQL;
         }
         //Establece nombre para pre-solicitud Uniclick por Anfexi
         $available_financiero=array("39","41","50","49","48","51");
-        if (!empty($bean->idsolicitud_c) && $bean->tipo_operacion_c == 1 && in_array($bean->producto_financiero ,$available_financiero) && $bean->tct_etapa_ddw_c == 'SI') {
+        if (!empty($bean->idsolicitud_c) && $bean->tipo_operacion_c == 1 && in_array($bean->producto_financiero_c ,$available_financiero) && $bean->tct_etapa_ddw_c == 'SI') {
             $bean->name = "PRE - SOLICITUD " . $numeroDeFolio . " - " . $beanCuenta->name;
-        } elseif (in_array($bean->producto_financiero ,$available_financiero) && $bean->tct_etapa_ddw_c == 'CL') {
+        } elseif (in_array($bean->producto_financiero_c ,$available_financiero) && $bean->tct_etapa_ddw_c == 'CL') {
             $bean->name = "LC " . $bean->id_linea_credito_c . " - " . $beanCuenta->name;
         }
         /* @Jesus Carrillo
          * Convertir a prospecto  interesado , si la cuenta inicial es prospecto
          */
         //$beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
-        if (($beanCuenta->tipo_registro_cuenta_c == '2' && $beanCuenta->subtipo_registro_cuenta_c == '2') || ($beanCuenta->tipo_registro_cuenta_c == '1' && $bean->tipo_producto_c == '8')) { // Prospecto - 2  // Contactado - 2
+        if (($beanCuenta->tipo_registro_cuenta_c == '2' && $beanCuenta->subtipo_registro_cuenta_c == '2') || ($beanCuenta->tipo_registro_cuenta_c == '1'
+                && in_array($bean->producto_financiero_c ,$available_financiero))) { // Prospecto - 2  // Contactado - 2
             $beanCuenta->tipo_registro_cuenta_c = '2'; //Interesado - 7
             $beanCuenta->subtipo_registro_cuenta_c = '7'; //Interesado - 7
             $beanCuenta->save();
@@ -230,6 +231,14 @@ SQL;
         //$GLOBALS['log']->fatal('Etapa ddw ' . $bean->tct_etapa_ddw_c);
         $GLOBALS['log']->fatal('Respuesta Excluyeprecalif: ' . $response_exluye);
 
+        $query = "select ap.accounts_uni_productos_1accounts_ida account_id, up.id producto_id, up.tipo_producto, up.no_viable
+        from accounts_uni_productos_1_c ap
+       join uni_productos up on ap.accounts_uni_productos_1uni_productos_idb = up.id
+       where accounts_uni_productos_1accounts_ida = '{$bean->account_id}'
+       and up.tipo_producto = '{$bean->tipo_producto_c}'";
+       $queryResult = $db->query($query);
+       $row = $bean->db->fetchByAssoc($queryResult);
+
         $generaSolicitud = false;
         $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && $bean->tipo_producto_c != '6' && $bean->tipo_producto_c != '1') ? true : $generaSolicitud;
         $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && $bean->tipo_producto_c == '1' && $bean->vobo_dir_c == true) ? true : $generaSolicitud;
@@ -237,7 +246,8 @@ SQL;
         $generaSolicitud = ($bean->tipo_de_operacion_c == 'RATIFICACION_INCREMENTO' && $bean->tipo_producto_c == '1' && $response_exluye == 1) ? true : $generaSolicitud;
         $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && $bean->tipo_producto_c == '1' && $response_exluye == 1) ? true : $generaSolicitud;
         $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && $bean->producto_financiero_c!="0" &&$bean->producto_financiero_c!="") ? true : $generaSolicitud;
-
+        $generaSolicitud = ($args['isUpdate'] == 1 && $bean->admin_cartera_c) ? true : $generaSolicitud;
+        $generaSolicitud = ($args['isUpdate'] == 1 && $row['no_viable'] == '0') ? $generaSolicitud : false;
         /*$GLOBALS['log']->fatal('valor Genera Solicitud JG: ' . $generaSolicitud);
         $GLOBALS['log']->fatal('Id process JG: ' . $bean->id_process_c);
         $GLOBALS['log']->fatal('Tipo operacion JG: ' . $bean->tipo_operacion_c);*/
@@ -259,7 +269,7 @@ SQL;
     oppc.ri_ca_tasa_c, oppc.ri_deposito_garantia_c, oppc.ri_porcentaje_ca_c, oppc.ri_porcentaje_renta_inicial_c, oppc.ri_vrc_c,
     oppc.ri_vri_c, oppc.monto_ratificacion_increment_c, oppc.plazo_ratificado_incremento_c, oppc.ri_usuario_bo_c, oppc.instrumento_c, oppc.puntos_sobre_tasa_c, oppc.tipo_tasa_ordinario_c,
     oppc.tipo_tasa_moratorio_c, oppc.instrumento_moratorio_c, oppc.factor_moratorio_c, oppc.cartera_descontar_c, oppc.puntos_tasa_moratorio_c, oppc.tasa_fija_ordinario_c, oppc.tasa_fija_moratorio_c,
-    oppc.plan_financiero_c,oppc.producto_financiero_c
+    oppc.plan_financiero_c,oppc.producto_financiero_c,oppc.negocio_c,oppc.admin_cartera_c, oppc.monto_gpo_emp_c, oppc.tipo_sol_admin_cartera_c, oppc.cartera_dias_vencido_c
 				FROM
 					accounts_opportunities aop
 					INNER join
@@ -291,9 +301,9 @@ SQL;
                 }
                 $row = $bean->db->fetchByAssoc($queryResult);
                 //En caso de obtener Producto Unilease, se manda la petición como si fuera Producto Leasing id=1
-                if ($row['tipo_producto_c'] == '9') {
+                /*if ($row['tipo_producto_c'] == '9') {
                     $row['tipo_producto_c'] = '1';
-                }
+                }*/
                 $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : ** JSR ** DATOS DE LA OPERACION " . print_r($row, true));
                 $callApi = new UnifinAPI();
                 $solicitudCreditoResultado = $callApi->obtenSolicitudCredito($row);
@@ -315,7 +325,8 @@ SQL;
                         //Manda a llamar a la funcion solicitudSOS para la generacion de la copia de la linea SOS con Leasing
                         OpportunityLogic::solicitudSOS($bean);
                     }
-                    if ($bean->id_process_c != 0 && $bean->id_process_c != null && $bean->id_process_c != "-1" && $bean->id_process_c != "" && $bean->tipo_producto_c != 4) {
+                    if ($bean->id_process_c != 0 && $bean->id_process_c != null && $bean->id_process_c != "-1" && $bean->id_process_c != ""
+                        && $bean->tipo_producto_c != 4) {
                         $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . "  <" . $current_user->user_name . "> : Despues de generar Process debe actualizarse la lista de condiciones financieras ");
                         $callApi->actualizaSolicitudCredito($bean);
                     }
@@ -337,7 +348,7 @@ SQL;
     {
 
         require_once("custom/clients/base/api/excluir_productos.php");
-        global $current_user;
+        global $current_user, $sugar_config;
         $args_uni_producto = [];
         $args_uni_producto['idCuenta'] = $bean->account_id;
         $args_uni_producto['Producto'] = $bean->tipo_producto_c;
@@ -471,6 +482,17 @@ SQL;
             }
 
             $opp->condiciones_financieras = $c_financieras;
+
+            $opp->negocio_c =  $bean->negocio_c;
+            $opp->producto_financiero_c = $bean->producto_financiero_c;
+            //Validación de administración de cartera
+            if ($sugar_config['service_admin_cartera'] == true && $current_user->admin_cartera_c) {
+              $opp->admin_cartera_c=true;
+              $opp->assigned_user_id = $current_user->id;
+              $opp->tct_etapa_ddw_c = 'SI';
+              $opp->estatus_c = '';
+            }
+
             $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> Condiciones en nueva solicitud : " . print_r(count($opp->condiciones_financieras), 1));
             $id = $opp->save();
 
@@ -1058,14 +1080,18 @@ SQL;
         //Evalua cambio en etapa o subetapa
         if ($bean->fetched_row['estatus_c'] != $subetapa || $bean->fetched_row['tct_etapa_ddw_c'] != $etapa) {
             //Actualiza producto uniclick
-            if($bean->producto_financiero_c == '39' || $bean->producto_financiero_c == '41' || $bean->producto_financiero_c == '48' || $bean->producto_financiero_c == '49' || $bean->producto_financiero_c == '50' || $bean->producto_financiero_c == '51') $producto = 8;
-            //($tipo=null, $subtipo=null, $idCuenta=null, $tipoProducto=null)
-            //Actualiza en Solicitud Inicial y actualiza campos con valor Prospecto Interesado: 2,7
-            $GLOBALS['log']->fatal('Actualiza tipo de Cuenta para producto: ' . $producto);
-            if($bean->negocio_c==10)
+            $available_financiero=array("39","41","50","49","48","51");
+            if(in_array($bean->producto_financiero_c ,$available_financiero))
             {
                 $producto=8;
             }
+            //($tipo=null, $subtipo=null, $idCuenta=null, $tipoProducto=null)
+            //Actualiza en Solicitud Inicial y actualiza campos con valor Prospecto Interesado: 2,7
+            $GLOBALS['log']->fatal('Actualiza tipo de Cuenta para producto: ' . $producto);
+           /* if($bean->negocio_c==10)
+            {
+                $producto=8;
+            }*/
             if ($etapa == "SI" && $bean->fetched_row['tct_etapa_ddw_c'] != $etapa) {
                 $GLOBALS['log']->fatal('Prospecto Interesado');
                 $this->actualizaTipoCuenta('2', '7', $cliente, $producto);

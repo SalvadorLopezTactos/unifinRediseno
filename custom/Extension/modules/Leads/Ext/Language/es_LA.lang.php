@@ -95,3 +95,5 @@ $mod_strings['LBL_CONTACTO_EMAIL_C'] = 'Email Contacto';
 $mod_strings['LBL_CONTACTO_APELLIDOP_C'] = 'Apellido Paterno Contacto';
 $mod_strings['LBL_CONTACTO_TELEFONO_C'] = 'Teléfono Contacto';
 $mod_strings['LBL_PROSPECCION_PROPIA'] = 'Prospección propia';
+$mod_strings['LBL_STATUS_MANAGEMENT'] = 'Estatus por Producto';
+$mod_strings['LBL_FECHA_ASIGNACION_C'] = 'Fecha de asignación';

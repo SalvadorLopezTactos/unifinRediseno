@@ -317,7 +317,7 @@
         //Ocultar panel Analizate
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
-
+        this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
         //Limpia los campos dependientes de Origen y Detalle Origen
         this.model.on('change:origen_cuenta_c', this._cleanDependenciesOrigen, this);
         this.model.on('change:detalle_origen_c', this._cleanDependencies, this);
@@ -447,7 +447,15 @@
         this.$("div[data-name='actividadeconomica_c']").hide();
         this.$(".record-cell[data-name='blank_space']").hide();
         this.$(".record-cell[data-name='blank_space']").hide();
-
+        //Oculta Botón Generar RFC
+        var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
+        if (accesoFiscal == 0 && this.model.get('tipo_registro_cuenta_c') != '4') {
+          this.$('div[data-name=rfc_c]').css("pointer-events", "none");
+          this.$('div[data-name="generar_rfc_c"]').hide();
+        }
+        if (App.user.attributes.puestousuario_c != 32 && App.user.attributes.puestousuario_c != 47) {
+          this.$('div[data-name=tipo_proveedor_compras_c]').css("pointer-events", "none");
+        }
     },
 
     _ActualizaEtiquetas: function () {
@@ -1199,7 +1207,6 @@
         if (this.model.get('tipo_registro_cuenta_c') == '4') {
             var relaciones = this.model.get('tipo_relacion_c');
             relaciones = relaciones.toString();
-
             relaciones = relaciones.replace(/Referencia Cliente/g, "");
             relaciones = relaciones.replace(/Referencia Proveedor/g, "");
             relaciones = relaciones.replace(/Propietario Real/g, "");
@@ -1211,16 +1218,14 @@
             relaciones = relaciones.replace(/^/g, "");
             relaciones = relaciones.replace(/,/g, "");
             relaciones = relaciones.replace(/ /g, "");
-
-            //            if (relaciones != "") {
-            if ((this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null) && this.model.get('tipodepersona_c') != 'Persona Moral') {
-                errors['estadocivil_c'] = errors['estadocivil_c'] || {};
-                errors['estadocivil_c'].required = true;
-            }
-            //            }
+/*          if (relaciones != "") {
+              if ((this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null) && this.model.get('tipodepersona_c') != 'Persona Moral') {
+                  errors['estadocivil_c'] = errors['estadocivil_c'] || {};
+                  errors['estadocivil_c'].required = true;
+              }
+            }*/
         }
         callback(null, fields, errors);
-
     },
 
     valida_requeridos: function (fields, errors, callback) {
@@ -1570,11 +1575,11 @@
                 }
                 if (this.model.get('apellidopaterno_c') == "") {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Apellido Paterno<br></b>';
-                }*/
+                }
                 if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Apellido Materno<br></b>';
                     $('[name=apellidomaterno_c]').css('border-color', 'red');
-                }
+                }*/
                 if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Fecha de Nacimiento<br></b>';
                     $('[name=fechadenacimiento_c]').css('border-color', 'red');
@@ -1583,11 +1588,25 @@
                     RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
                     $('[data-name=nacionalidad_c]').find('.select2-choice').css('border-color', 'red');
                 }
-                //Validacion Actividad Economica custom
-                if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == undefined) {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
-                    // $('.campoAE').find('.record-label').css('color', 'red');
-                    // $('.list_ae').find('.select2-choice').css('border-color', 'red');                    
+                if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
+                    $('[name=rfc_c]').css('border-color', 'red');
+                }
+                if (this.model.get('tct_pais_expide_rfc_c') == "" || this.model.get('tct_pais_expide_rfc_c') == undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-País que expide el RFC o equivalente<br></b>';
+                    $('[data-name=tct_pais_expide_rfc_c]').find('.select2-choice').css('border-color', 'red');
+                }
+                if (this.model.get('curp_c') == "" || this.model.get('curp_c') == undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-CURP<br></b>';
+                    $('[name=curp_c]').css('border-color', 'red');
+                }
+                if (this.model.get('ctpldnoseriefiel_c') == "" || this.model.get('ctpldnoseriefiel_c') == undefined) {
+                      RequeridosProvRec = RequeridosProvRec + '<b>-No. serie FIEL<br></b>';
+                    $('[name=ctpldnoseriefiel_c]').css('border-color', 'red');
+                }
+                if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Profesión<br></b>';
+                    $('[data-name=profesion_c]').find('.select2-choice').css('border-color', 'red');
                 }
                 //Requerido Subsector custom
                 // if ($('.list_sse').select2('val') == "") {
@@ -1607,7 +1626,6 @@
                 //     // $('.campoMS').find('.record-label').css('color', 'red');
                 //     // $('.list_ms').find('.select2-choice').css('border-color', 'red');
                 // }
-
                 var direcciones = 0;
                 var tipodireccion = this.oDirecciones.direccion;
                 if (tipodireccion.length > 0) {
@@ -1618,17 +1636,15 @@
                     }
                 }
                 if (direcciones == 0) {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Dirección Particular<br></b>';
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Dirección<br></b>';
                     $('.direcciondashlet').css('border-color', 'red');
-
                 }
-                if ((this.model.get('rfc_c') == undefined || this.model.get('rfc_c') == "") && (this.model.get('curp_c') == "" || this.model.get('curp_c') == undefined) && (this.model.get('ctpldnoseriefiel_c') == "" || this.model.get('ctpldnoseriefiel_c') == undefined)) {
+/*                if ((this.model.get('rfc_c') == undefined || this.model.get('rfc_c') == "") && (this.model.get('curp_c') == "" || this.model.get('curp_c') == undefined) && (this.model.get('ctpldnoseriefiel_c') == "" || this.model.get('ctpldnoseriefiel_c') == undefined)) {
                     RequeridosProvRec = RequeridosProvRec + '<b><br>Al menos la captura de alguno de estos campos:<br><br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br><br></b>';
                     $('[name=rfc_c]').css('border-color', 'red');
                     $('[name=curp_c]').css('border-color', 'red');
                     $('[name=ctpldnoseriefiel_c]').css('border-color', 'red');
-                }
-
+                }*/
                 if (RequeridosProvRec != "") {
                     app.alert.show("Campos faltantes en cuenta", {
                         level: "error",
@@ -1637,15 +1653,15 @@
                     });
                     errors['faltantescuenta'] = errors['faltantescuenta'] || {};
                     errors['faltantescuenta'].required = true;
-
                 }
                 callback(null, fields, errors);
             }
 
             if (this.model.get('tipodepersona_c') == "Persona Moral") {
-                /*if (this.model.get('razonsocial_c') == "") {
-                    RequeridosProvRec = RequeridosProvRec + '<b>-Denominación o Razón Social<br></b>';
-                }*/
+                if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Fecha Constitutiva<br></b>';
+                    $('[name=fechaconstitutiva_c]').css('border-color', 'red');
+                }
                 if (this.model.get('nacionalidad_c') == "0" || this.model.get('nacionalidad_c') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
                     $('[data-name=nacionalidad_c]').find('.select2-choice').css('border-color', 'red');
@@ -1653,6 +1669,18 @@
                 if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == undefined) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
                     $('[name=rfc_c]').css('border-color', 'red');
+                }
+                if (this.model.get('tct_pais_expide_rfc_c') == "" || this.model.get('tct_pais_expide_rfc_c') == undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-País que expide el RFC o equivalente<br></b>';
+                    $('[data-name=tct_pais_expide_rfc_c]').find('.select2-choice').css('border-color', 'red');
+                }
+                if (this.model.get('ctpldnoseriefiel_c') == "" || this.model.get('ctpldnoseriefiel_c') == undefined) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-No. serie FIEL<br></b>';
+                    $('[name=ctpldnoseriefiel_c]').css('border-color', 'red');
+                }
+                if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae').select2('val') == null) {
+                    RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
+                    $('.list_ae').find('.select2-choice').css('border-color', 'red');
                 }
                 var direccionesm = 0;
                 var tipodireccion = this.oDirecciones.direccion;
@@ -1662,9 +1690,7 @@
                 if (direccionesm == 0) {
                     RequeridosProvRec = RequeridosProvRec + '<b>-Domicilio<br></b>';
                     $('.direcciondashlet').css('border-color', 'red');
-
                 }
-
                 if (RequeridosProvRec != "") {
                     app.alert.show("Campos faltantes en cuenta", {
                         level: "error",
@@ -1673,14 +1699,12 @@
                     });
                     errors['errorpersonamoral'] = errors['errorpersonamoral'] || {};
                     errors['errorpersonamoral'].required = true;
-
                 }
                 callback(null, fields, errors);
             }
         } else {
             callback(null, fields, errors);
         }
-
     },
 
     setButtonStates: function (state) {
@@ -2199,5 +2223,18 @@
             this.model.set('tct_origen_ag_tel_rel_c', ''); //Se elimina Agente Telefonico Vista
             this.model.set('user_id3_c', '');  //Se elimina Agente Telefonico DB
         }
+    },
+
+    tipoProveedor: function (fields, errors, callback) {
+        if (!this.model.get('tipo_proveedor_compras_c') && (App.user.attributes.puestousuario_c == 32 || App.user.attributes.puestousuario_c != 47)) {
+            app.alert.show("tipo_proveedor_compras_c", {
+                level: "error",
+                title: 'Hace falta seleccionar un valor para el campo Tipo de proveedor compras',
+                autoClose: false
+            });
+            errors['tipo_proveedor_compras_c'] = errors['tipo_proveedor_compras_c'] || {};
+            errors['tipo_proveedor_compras_c'].required = true;
+        }
+        callback(null, fields, errors);
     },
 })

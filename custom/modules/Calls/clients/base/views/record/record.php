@@ -374,39 +374,63 @@ array (
               ),
               14 => 
               array (
+                'name' => 'detalle_resultado_c',
+                'label' => 'LBL_DETALLE_RESULTADO',
+              ),
+              15 => 
+              array (
+                'name' => 'cuenta_existente_c',
+                'studio' => 'visible',
+                'label' => 'LBL_CUENTA_EXISTENTE',
+              ),
+              16 =>
+              array (
+                'name' => 'calls_persona_relacion',
+                'label' => 'Persona con quien se atiende la llamada',
+                'studio' => 'visible',
+                //'dismiss_label' => true,
+
+              ),
+              17 =>
+              array (
+                'name' => 'persona_relacion_c',
+                'label' => 'LBL_PERSONA_RELACION_C',
+              ),
+              18 =>
+              array (
                 'name' => 'calls_meeting_call',
                 'studio' => 'visible',
                 'label' => 'calls_meeting_call',
                 'span' => 12,
               ),
-              15 => 
+              19 =>
               array (
                 'name' => 'tct_calificacion_conferencia_c',
                 'label' => 'LBL_TCT_CALIFICACION_CONFERENCIA',
               ),
-              16 => 
+              20 =>
               array (
                 'name' => 'tct_conferencia_fecha_dat_c',
                 'label' => 'LBL_TCT_CONFERENCIA_FECHA_DAT',
               ),
-              17 => 
+              21 => 
               array (
                 'name' => 'tct_motivo_ilocalizable_ddw_c',
                 'label' => 'LBL_TCT_MOTIVO_ILOCALIZABLE_DDW',
                 'span' => 12,
               ),
-              18 => 
+              22 =>
               array (
                 'name' => 'tct_fecha_seguimiento_dat_c',
                 'label' => 'LBL_TCT_FECHA_SEGUIMIENTO_DAT',
                 'span' => 12,
               ),
-              19 => 
+              23 => 
               array (
                 'name' => 'tct_motivo_desinteres_ddw_c',
                 'label' => 'LBL_TCT_MOTIVO_DESINTERES_DDW',
               ),
-              20 => 
+              24 => 
               array (
                 'name' => 'lic_licitaciones_calls_1_name',
               ),

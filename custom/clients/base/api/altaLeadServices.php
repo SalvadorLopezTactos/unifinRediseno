@@ -48,56 +48,56 @@ class altaLeadServices extends SugarApi
             } else {
                 /** PErsona Moral */
 
-              //  if (count($args['asociados']) > 0) {
+                //  if (count($args['asociados']) > 0) {
 
-                    $obj_leads['lead'] = $this->sec_validacion($obj_leads['lead']);
+                $obj_leads['lead'] = $this->sec_validacion($obj_leads['lead']);
 
-                    /** Inicia Proceso validación Lead hijo  solo si el regimen fiscal es Moral*/
+                /** Inicia Proceso validación Lead hijo  solo si el regimen fiscal es Moral*/
 
-                    /*for ($i = 0; $i < count($obj_leads['asociados']); $i++) {
-                        $obj_leads['asociados'][$i] = $this->sec_validacion($obj_leads['asociados'][$i]);
-                    }*/
+                /*for ($i = 0; $i < count($obj_leads['asociados']); $i++) {
+                    $obj_leads['asociados'][$i] = $this->sec_validacion($obj_leads['asociados'][$i]);
+                }*/
 
-                    /** Validamos que ambos leads esten con estatus 200  */ # pendiente de validación OB001
-
-
-                    /*if ($obj_leads['asociados'][0]['requeridos'] == 'success' && $obj_leads['asociados'][0]['formato_texto'] == 'success'
-                        && $obj_leads['asociados'][0]['formato_telefenos'] == 'success' && $obj_leads['asociados'][0]['formato_correo'] == 'success'
-                    ) {*/
-                        /** Proceso de Guardado */
-
-                        $response_Services['lead'] = $this->insert_Leads_Asociados($obj_leads['lead'], "");
-
-                        /*if (!empty($response_Services['lead']['id']) && $response_Services['lead']['modulo'] == 'Leads') {
-
-                            for ($i = 0; $i < count($obj_leads['asociados']); $i++) {
-                                $response_Services['asociados'][$i] = $this->insert_Leads_Asociados($obj_leads['asociados'][$i], $response_Services['lead']['id']);
-                            }
-                        }*/
-                        // Actualizamos el campo asignado a de cada registro nuevo
-                        $this->get_asignado($response_Services, "3");
-                  /*  } else {
-
-                        $GLOBALS['log']->fatal(print_r($obj_leads, true));
-
-                        if ($obj_leads['lead']['requeridos'])
-                            $response_Services ["lead"] = $this->estatus(422, 'Información incompleta', '', "", "Error en Asociado");
-
-                        $response_Services ["asociados"][0] = $this->estatus(422, 'Información incompleta', '', "", $obj_leads['asociados'][0]['requeridos_error']);
+                /** Validamos que ambos leads esten con estatus 200  */ # pendiente de validación OB001
 
 
-                        if ($obj_leads['asociados'][0]['requeridos'] != 'success' || $obj_leads['asociados'][0]['formato_texto'] != 'success'
-                            || $obj_leads['asociados'][0]['formato_telefenos'] != 'success' || $obj_leads['asociados'][0]['formato_correo'] != 'success'
-                        ) {
-                            $arrayErrores = array();
-                            $obj_leads['asociados'][0]['requeridos'] == 'fail' ? array_push($arrayErrores, $obj_leads['asociados'][0]['requeridos_error']) : "";
-                            $obj_leads['asociados'][0]['formato_texto'] == 'fail' ? array_push($arrayErrores, $obj_leads['asociados'][0]['formato_texto_error']) : "";
-                            $obj_leads['asociados'][0]['formato_telefenos'] == 'fail' ? array_push($arrayErrores, 'Telefono') : "";
-                            $obj_leads['asociados'][0]['formato_correo'] == 'fail' ? array_push($arrayErrores, 'Correo') : "";
+                /*if ($obj_leads['asociados'][0]['requeridos'] == 'success' && $obj_leads['asociados'][0]['formato_texto'] == 'success'
+                    && $obj_leads['asociados'][0]['formato_telefenos'] == 'success' && $obj_leads['asociados'][0]['formato_correo'] == 'success'
+                ) {*/
+                /** Proceso de Guardado */
 
-                            $response_Services ["asociados"][0] = $this->estatus(424, 'Error de información', '', "", $arrayErrores);
-                        }
-                    }*/
+                $response_Services['lead'] = $this->insert_Leads_Asociados($obj_leads['lead'], "");
+
+                /*if (!empty($response_Services['lead']['id']) && $response_Services['lead']['modulo'] == 'Leads') {
+
+                    for ($i = 0; $i < count($obj_leads['asociados']); $i++) {
+                        $response_Services['asociados'][$i] = $this->insert_Leads_Asociados($obj_leads['asociados'][$i], $response_Services['lead']['id']);
+                    }
+                }*/
+                // Actualizamos el campo asignado a de cada registro nuevo
+                $this->get_asignado($response_Services, "3");
+                /*  } else {
+
+                      $GLOBALS['log']->fatal(print_r($obj_leads, true));
+
+                      if ($obj_leads['lead']['requeridos'])
+                          $response_Services ["lead"] = $this->estatus(422, 'Información incompleta', '', "", "Error en Asociado");
+
+                      $response_Services ["asociados"][0] = $this->estatus(422, 'Información incompleta', '', "", $obj_leads['asociados'][0]['requeridos_error']);
+
+
+                      if ($obj_leads['asociados'][0]['requeridos'] != 'success' || $obj_leads['asociados'][0]['formato_texto'] != 'success'
+                          || $obj_leads['asociados'][0]['formato_telefenos'] != 'success' || $obj_leads['asociados'][0]['formato_correo'] != 'success'
+                      ) {
+                          $arrayErrores = array();
+                          $obj_leads['asociados'][0]['requeridos'] == 'fail' ? array_push($arrayErrores, $obj_leads['asociados'][0]['requeridos_error']) : "";
+                          $obj_leads['asociados'][0]['formato_texto'] == 'fail' ? array_push($arrayErrores, $obj_leads['asociados'][0]['formato_texto_error']) : "";
+                          $obj_leads['asociados'][0]['formato_telefenos'] == 'fail' ? array_push($arrayErrores, 'Telefono') : "";
+                          $obj_leads['asociados'][0]['formato_correo'] == 'fail' ? array_push($arrayErrores, 'Correo') : "";
+
+                          $response_Services ["asociados"][0] = $this->estatus(424, 'Error de información', '', "", $arrayErrores);
+                      }
+                  }*/
 
                 /*} else {
                     $response_Services ["lead"] = $this->estatus(422, 'Debe contenener al menos un contacto asociado', '', "", "");
@@ -149,43 +149,94 @@ class altaLeadServices extends SugarApi
 
     public function get_asignado($data_result, $regimenFiscal)
     {
-
         global $db;
+        $users = [];
+        /* Obetenemos el id del usuario de grupo de 9.- MKT*/
+        $QueryId = "SELECT id from users
+WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
+        $queryResultId = $db->query($QueryId);
+        $row = $db->fetchByAssoc($queryResultId);
+        $idMKT = $row['id'];
 
+        /* Obtiene  el dia y la hora actual*/
+        $queryFEcha = "SELECT date_format(NOW(),'%W %H %i') AS Fecha,UTC_TIMESTAMP()";
+        $queryResult = $db->query($queryFEcha);
+        $row = $db->fetchByAssoc($queryResult);
+        $date_Hoy = $row['Fecha'];
+        $array_date = explode(" ", $date_Hoy);
+        $dia_semana = $array_date[0];
+        $horaDia = $array_date[1] . ":" . $array_date[2];
+        $dateInput = date('H:i', strtotime($horaDia));
+
+        /* Obtiene el ultimo  usuario asignado y registrado en el config*/
         $query = "Select value from config  where name='last_assigned_user' ";
         $result = $db->query($query);
         $row = $db->fetchByAssoc($result);
         $last_indice = $row['value'];
 
-        $query_asesores = "SELECT id,date_entered from users u INNER JOIN users_cstm uc ON uc.id_c=u.id
-        where puestousuario_c='27' AND subpuesto_c='3' ORDER BY date_entered ASC ";
+        $query_asesores = "SELECT
+  user.id,
+  user.date_entered,
+  count(lead.assigned_user_id) AS total_asignados,
+  uc.access_hours_c
+FROM users user
+  INNER JOIN users_cstm uc
+    ON uc.id_c = user.id
+  INNER JOIN leads lead
+    ON lead.assigned_user_id = user.id
+where puestousuario_c='27' AND subpuesto_c='3'
+GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
         $result_usr = $db->query($query_asesores);
         //$usuarios=;
         while ($row = $db->fetchByAssoc($result_usr)) {
-            //Obtiene fecha de inicio de reunión
-            $users[] = $row['id'];
-        }
+            $hours = json_decode($row['access_hours_c'], true);
+            $hoursIn = !empty($hours) ? $hours[$dia_semana]['entrada'] : "";
+            $hoursOut = !empty($hours) ? $hours[$dia_semana]['salida'] : "";
+            if ($hoursIn != "" && $hoursOut != "") {
+                if (($hoursIn != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursOut != "Libre")) {
+                    $enable = $this->accessHours($hoursIn, $hoursOut, $dateInput);
+                    if ($enable) {
+                        $users[] = $row['id'];
+                    }
+                } elseif ($hoursIn == "Libre" && $hoursOut == "Libre") {
+                    $users[] = $row['id'];
+                }
+            } /*else {
+                $users[] = $row['id'];
+            }*/
 
+        }
+        //$GLOBALS['log']->fatal("Usuarios MKT en servicio alta Leads  " . print_r($users, true));
+
+        if (count($users) > 0) {
+            $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
+            $new_assigned_user = $users[$new_indice];
+        } else {
+            /* No existen usuarios disponibles y se asigna a  9.- MKT " */
+            $new_assigned_user = $idMKT;
+
+        }
 
         if ($regimenFiscal != "3") {
 
             if ($data_result['lead']['status'] == 200) {
-                $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
 
-                $new_assigned_user = $users[$new_indice];
                 $id_lead = $data_result['lead']['id'];
 
                 $update_assigne_user = "UPDATE leads SET  assigned_user_id ='$new_assigned_user'  WHERE id ='$id_lead' ";
                 $db->query($update_assigne_user);
+                $GLOBALS['log']->fatal("Usuarios MKT en servicio alta Indice  " . $new_indice);
 
-                $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
-                $db->query($update_assigne_user);
+                if ( $new_indice > -1 ) {
+                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
+                    $db->query($update_assigne_user);
+                }
             }
         } else {
 
             if ($data_result['lead']['status'] == 200 && $data_result['asociados'][0]['status'] == 200) {
-                $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
-                $new_assigned_user = $users[$new_indice];
+               // $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
+               // $new_assigned_user = $users[$new_indice];
                 $id_lead = $data_result['lead']['id'];
                 $id_lead_asociado = $data_result['asociados'][0]['id'];
 
@@ -196,19 +247,24 @@ class altaLeadServices extends SugarApi
                 $update_assigne_user_asociado = "UPDATE leads SET  assigned_user_id ='$new_assigned_user'  WHERE id ='$id_lead_asociado' ";
                 $db->query($update_assigne_user_asociado);
 
-                $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
-                $db->query($update_assigne_user);
+                if ( $new_indice > -1 ) {
+                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
+                    $db->query($update_assigne_user);
+                }
+
             } elseif ($data_result['lead']['status'] == 200) {
 
-                $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
-                $new_assigned_user = $users[$new_indice];
+               // $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
+                //$new_assigned_user = $users[$new_indice];
                 $id_lead = $data_result['lead']['id'];
 
                 $update_assigne_user = "UPDATE leads SET  assigned_user_id ='$new_assigned_user'  WHERE id ='$id_lead' ";
                 $db->query($update_assigne_user);
 
-                $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
-                $db->query($update_assigne_user);
+                if ( $new_indice > -1 ) {
+                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
+                    $db->query($update_assigne_user);
+                }
             } elseif (($data_result['lead']['status'] == 503 && $data_result['lead']['modulo'] == 'Leads') && $data_result['asociados'][0]['status'] == 200) {
 
                 $id_lead = $data_result['lead']['id'];
@@ -225,7 +281,6 @@ class altaLeadServices extends SugarApi
             }
 
         }
-
 
     }
 
@@ -519,7 +574,7 @@ class altaLeadServices extends SugarApi
     public function validaTextCampos($data)
     {
 
-        $campos_lead = ["nombre_c", "apellido_paterno_c", "apellido_materno_c","contacto_nombre_c","contacto_apellidop_c","contacto_apellidom_c"];
+        $campos_lead = ["nombre_c", "apellido_paterno_c", "apellido_materno_c", "contacto_nombre_c", "contacto_apellidop_c", "contacto_apellidom_c"];
         $error_campo = [];
         $expresion = "/^[a-zA-ZÀ-ÿ\s]*$/";
 
@@ -558,7 +613,7 @@ class altaLeadServices extends SugarApi
 
     public function validaTelefonos($data)
     {
-        $telefonos_lead = ["phone_mobile", "phone_home", "phone_work","contacto_telefono_c"];
+        $telefonos_lead = ["phone_mobile", "phone_home", "phone_work", "contacto_telefono_c"];
         $expresionTelefono = "/^[0-9]{8,13}$/";
         $error_telefonos = [];
 
@@ -784,5 +839,16 @@ class altaLeadServices extends SugarApi
         }
     }
 
+    public function accessHours($from, $to, $login)
+    {
+        $GLOBALS['log']->fatal('FRom ' . $from . "  " . $to . "  " . $login);
+        $dateFrom = date("H:i", strtotime($from));
+        $dateTo = date("H:i", strtotime($to));
+        $dateLogin = date("H:i", strtotime($login));
+        /*        $GLOBALS['log']->fatal('FRom ' . $dateFrom);
+                $GLOBALS['log']->fatal('To ' . $dateTo);
+                $GLOBALS['log']->fatal('Login ' . $dateLogin);*/
 
+        return ($dateFrom <= $dateLogin && $dateLogin <= $dateTo);
+    }
 }

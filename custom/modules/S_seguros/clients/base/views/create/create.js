@@ -6,10 +6,12 @@
         this._super("initialize", [options]);
         this.model.on("change:referenciador",this.addRegion, this);
         this.model.on("change:empleados_c",this.adDepartment, this);
+        this.model.on("change:tipo_cuenta_c",this.setTipo, this);
         this.model.addValidationTask('fecha_req', _.bind(this.validaFecha, this));
         this.model.addValidationTask('fecha_cierre_c', _.bind(this.fechaCierre, this));
         this.model.addValidationTask('referenciador', _.bind(this.validauser, this));
         this.model.addValidationTask('Requeridos_c', _.bind(this.valida_Req, this));
+        this.model.addValidationTask('Notifica', _.bind(this.notifica, this));
     },
 
     _render: function() {
@@ -20,6 +22,12 @@
         this.$('div[data-name=seguro_pipeline]').hide();
         //Oculta campo Notificar KAM
         this.$('[data-name=notifica_kam_c]').hide();
+    },
+
+    setTipo: function() {
+        //Pone el tipo de cliente
+        this.model.set('tipo_cliente_c', 1);
+        if(this.model.get('tipo_cuenta_c') == 3) this.model.set('tipo_cliente_c', 2);
     },
 
     addRegion: function() {
@@ -143,5 +151,16 @@
               throw e;
             }
         });
+    },
+
+    notifica: function (fields, errors, callback) {
+        if (this.model.get('etapa') == 1 || this.model.get('etapa') == 2) {
+            app.alert.show("Notifica", {
+                level: "info",
+                messages: "Favor de Integrar la documentación/Información mínima requerida para determinar las condiciones del seguro a cotizar, tales como: Carátula de póliza actual, términos y condiciones, reporte de siniestralidad, listados de asegurados o bienes por asegurar, ubicaciones del bien, otros",
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
     },
 })
