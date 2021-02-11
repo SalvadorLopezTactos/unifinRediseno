@@ -35,8 +35,10 @@
 
     	app.api.call('GET', app.api.buildURL('GetRegistrosAsignadosForProtocolo/' + id_user), null, {
             success: function (data) {
-            	App.alert.dismiss('obtieneAsignados');
-            	if(data.total_asignados>0){ //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
+                App.alert.dismiss('obtieneAsignados');
+                var maximo_registros_list=App.lang.getAppListStrings('limite_maximo_asignados_list');
+                var maximo_registros=parseInt(maximo_registros_list["1"]);
+            	if(data.total_asignados<=maximo_registros){ //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
             		self.viewEnable='1';
             		self.getLeadsAplazadosCancelados();
             	}else{
