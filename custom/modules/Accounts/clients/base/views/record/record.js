@@ -232,7 +232,7 @@
 
         //Validacion para mostrar chk para cuentas homonimas
         this.model.on('sync', this.homonimo, this);
-        
+
         //Oculta Botón Generar RFC
         this.model.on('sync', this.ocultaGeneraRFC, this);
 
@@ -274,7 +274,7 @@
         this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'checkInVentas';
 
 
-        
+
         // this.model.addValidationTask('LeasingNV', _.bind(this.requeridosleasingnv, this));
         // this.model.addValidationTask('FactorajeNV', _.bind(this.requeridosfacnv, this));
         // this.model.addValidationTask('CreditAutoNV', _.bind(this.requeridoscanv, this));
@@ -4573,7 +4573,7 @@
             this.$('[data-name="generar_rfc_c"]').attr('style', 'pointer-events:block;');
         }
     },
-    
+
     proveedorRecursos: function (fields, errors, callback) {
         if ($('.campo4ddw-ap').select2('val') == "2" || $('.campo4ddw-ca').select2('val') == "2" || $('.campo4ddw-ff').select2('val') == "2" || $('.campo4ddw-cs').select2('val') == "2" || $('.campo10ddw-ce').select2('val') == "2") {
 
@@ -6100,7 +6100,7 @@
     },
 
     tipoProveedor: function (fields, errors, callback) {
-        if (!this.model.get('tipo_proveedor_compras_c') && (App.user.attributes.puestousuario_c == 32 || App.user.attributes.puestousuario_c == 47)) {
+        if ((this.model.get('esproveedor_c') || this.model.get('tipo_registro_cuenta_c') == '5') && (App.user.attributes.puestousuario_c == 32 || App.user.attributes.puestousuario_c == 47) && (this.model.get('tipo_proveedor_compras_c') == null || this.model.get('tipo_proveedor_compras_c') == '') ) {
             app.alert.show("tipo_proveedor_compras_c", {
                 level: "error",
                 title: 'Hace falta seleccionar un valor para el campo Tipo de proveedor compras',
