@@ -51,10 +51,15 @@
     _render: function (options) {
         this._super("_render");
         this.enableparentname();
+        this.getPersonas();
     },
 
     handleCancel: function () {
         this._super("handleCancel");
+        if(self.model.get('persona_relacion_c')!="")
+        {
+            self.model.set('calls_persona_relacion','Muestra')
+        }
     },
 
     bloqueaTodo: function () {
@@ -158,7 +163,6 @@
         this._super("cancelClicked");
 
         this.$('[data-name="parent_name"]').attr('style', '');
-
         this.setButtonStates(this.STATE.VIEW);
         this.action = 'detail';
         this.handleCancel();
@@ -795,7 +799,7 @@
 
     getPersonas: function () {
         var idCuenta = selfPerson.model.get('parent_id');
-
+        nombreSelect="";
         app.api.call('GET', app.api.buildURL('GetRelRelaciones/' + idCuenta), null, {
             success: function (data) {
                 //console.log(data.records);
@@ -806,7 +810,10 @@
 
                     if (idpersonas != "" && idpersonas == data[i]['id']) {
                         isSelect = true;
-                        self.seleccionado=data[i]['name'];
+                        nombreSelect=data[i]['name'];
+                    }else
+                    {
+                        isSelect = false;
                     }
                     arrayPersonas.push({
                         "id": data[i]['id'],
@@ -815,8 +822,13 @@
                     });
                 }
                 console.log(arrayPersonas);
+                selfPerson.seleccionado=nombreSelect;
                 selfPerson.personasRelData_list = arrayPersonas;
                 selfPerson.render();
+                if(idpersonas!="")
+                {
+                    selfPerson.model.set('calls_persona_relacion','nombreSelect')
+                }
             },
             error: function (e) {
                 console.log(e);
@@ -841,8 +853,7 @@
                     console.log(data);
 
                    if (arrayPuestos.includes(puesto_usr) && data.tipodepersona_c == 'Persona Moral') {
-                        $('.divPersonasRel').show();
-                        $('[data-name="persona_relacion_c"]').hide()
+                       person.$('[data-name="persona_relacion_c"]').hide()
                         // Valida si el usuario firmado pertenece a la cuenta o a la llamada
                         var idUsrFirmado = app.user.attributes.id;
                         var idUsrLeading = data.user_id_c;
@@ -852,9 +863,8 @@
                         }
                     }
                     else {
-                        $('.divPersonasRel').hide();
-                        $('[data-name="persona_relacion_c"]').hide()
-                        //$('[data-name="calls_persona_relacion"]').addClass('hide');
+                       person.$('[data-name="calls_persona_relacion"]').hide()
+                       person.$('[data-name="persona_relacion_c"]').hide()
                     }
                 },
                 error: function (e) {
