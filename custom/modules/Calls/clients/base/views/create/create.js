@@ -242,8 +242,8 @@
         var parentModule = person.model.get('parent_type');
 
         if (arrayPuestos.includes(puesto_usr) && tipoCuenta == 'Persona Moral' && parentModule == 'Accounts') {
-            $('.divPersonasRel').show();
-            $('[data-name="persona_relacion_c"]').hide()
+           // $('.divPersonasRel').show();
+            person.$('[data-name="persona_relacion_c"]').hide()
             // Valida si el usuario firmado pertenece a la cuenta o a la llamada
             var idUsrFirmado = App.user.attributes.id;
             var idUsrLeading = person.model.attributes.parent.user_id_c;
@@ -253,8 +253,8 @@
             }
         }
         else {
-            $('.divPersonasRel').hide();
-            $('[data-name="persona_relacion_c"]').hide()
+            person.$('[data-name="calls_persona_relacion"]').hide()
+            person.$('[data-name="persona_relacion_c"]').hide()
             //$('[data-name="calls_persona_relacion"]').addClass('hide');
         }
     },
