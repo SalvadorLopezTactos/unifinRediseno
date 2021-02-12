@@ -362,7 +362,7 @@
         //AGENTE TELEFONICO - COORDINADOR DE CENTRO DE PROSPECCION
         if (puesto_usuario == "27" || puesto_usuario == "31") {
             /*******************VICIDIAL********************/
-            vicidial += '&id_call=' + id_call;
+            vicidial += '&leadid=' + id_call;
             console.log('VICIDIAL_LINK:' + vicidial);
             $.ajax({
                 cache: false,
