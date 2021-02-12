@@ -433,6 +433,7 @@ array (
               24 => 
               array (
                 'name' => 'lic_licitaciones_calls_1_name',
+                'readonly' => true,
               ),
             ),
           ),
