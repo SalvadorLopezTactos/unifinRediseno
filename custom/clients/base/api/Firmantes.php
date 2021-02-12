@@ -47,16 +47,16 @@ class Firmantes extends SugarApi
             $query = <<<SQL
 select acc.id GUID, acc.name Nombre, cs.tipodepersona_c Regimen, rel.relaciones_activas Relaciones
 from rel_relaciones_accounts_c rel_acc
-INNER JOIN rel_relaciones rel ON rel_acc.rel_relaciones_accountsrel_relaciones_idb = rel.id
+INNER JOIN rel_relaciones rel ON rel_acc.rel_relaciones_accountsrel_relaciones_idb = rel.id and rel.deleted=0
 INNER JOIN rel_relaciones_cstm rel_cs ON rel_cs.id_c = rel.id
-INNER JOIN Accounts acc ON acc.id = rel_cs.account_id1_c
+INNER JOIN Accounts acc ON acc.id = rel_cs.account_id1_c and acc.deleted=0
 INNER JOIN Accounts_cstm cs ON acc.id = cs.id_c
-WHERE rel_acc.rel_relaciones_accountsaccounts_ida = '{$idPersona}'
+WHERE rel_acc.rel_relaciones_accountsaccounts_ida = '{$idPersona}' and rel_acc.deleted=0
 SQL;
             if($all == 1){
-                $query .= "AND relaciones_activas not in ('^Conyuge^','^Contacto^','^Directivo^','^Referencia^','^Referencia Personal^','^Referencia Cliente^','^Accionista^','^Referencia Proveedor^')";
+                $query .= " AND relaciones_activas not in ('^Conyuge^','^Contacto^','^Directivo^','^Referencia^','^Referencia Personal^','^Referencia Cliente^','^Accionista^','^Referencia Proveedor^')";
             }else{
-                $query .= "AND relaciones_activas like '%^Representante^%' AND acc.id <> '{$idPersona}'";
+                $query .= " AND relaciones_activas like '%^Representante^%' AND acc.id <> '{$idPersona}'";
             }
 
             $Rows = $db->query($query);
