@@ -41,8 +41,8 @@ array_push($job_strings, 'audios_leads');
             $GLOBALS['log']->fatal('CONEXIÓN SFTP EXITOSA');
             //Variables año, mes dia
             $anio=date("Y");
-            $mes='11';//date("n")'';
-            $dia='19';
+            $mes=date("m");
+            $dia=date("d");
             $ruta=$route.'/'.$anio.'/'.$mes.'/'.$dia;
             $directorio=$sftp->nlist($ruta);
             $GLOBALS['log']->fatal($anio);
