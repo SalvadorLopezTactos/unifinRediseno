@@ -359,6 +359,7 @@ array (
               16 => 
               array (
                 'name' => 'lic_licitaciones_meetings_1_name',
+                'readonly' => true,
               ),
             ),
           ),
