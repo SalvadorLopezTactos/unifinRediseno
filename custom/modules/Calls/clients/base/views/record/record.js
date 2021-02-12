@@ -779,61 +779,67 @@
     },
 
     reqPersona: function (fields, errors, callback) {
+        var idCuenta = person.model.get('parent_id');
+        var parentModule = person.model.get('parent_type');
+        if(idCuenta!=undefined && idCuenta!="" && parentModule !=undefined && parentModule == 'Accounts'){
+            var idUsrFirmado = App.user.attributes.id;
+            var tipoCuenta = person.model.attributes.parent.tipodepersona_c;
+            var idUsrAsignado = person.model.get('assigned_user_id');
 
-        var idUsrFirmado = App.user.attributes.id;
-        var tipoCuenta = person.model.attributes.parent.tipodepersona_c;
-        var idUsrAsignado = person.model.get('assigned_user_id');
-
-        if (idUsrFirmado == idUsrAsignado && tipoCuenta == 'Persona Moral' && this.model.get('persona_relacion_c') == "") {
-            app.alert.show("Falta Persona", {
-                level: "error",
-                title: "Hace falta completar la siguiente información  : <br> Persona con quien se atiende la llamada",
-                autoClose: false
-            });
-            $('[data-name="calls_persona_relacion"]').find('.select2-choice').css('border-color', 'red');
-            errors['calls_persona_relaccion'] = errors['calls_persona_relaccion'] || {};
-            errors['calls_persona_relaccion'].custom_message1 = true;
+            if (idUsrFirmado == idUsrAsignado && tipoCuenta == 'Persona Moral' && this.model.get('persona_relacion_c') == "") {
+                app.alert.show("Falta Persona", {
+                    level: "error",
+                    title: "Hace falta completar la siguiente información  : <br> Persona con quien se atiende la llamada",
+                    autoClose: false
+                });
+                $('[data-name="calls_persona_relacion"]').find('.select2-choice').css('border-color', 'red');
+                errors['calls_persona_relaccion'] = errors['calls_persona_relaccion'] || {};
+                errors['calls_persona_relaccion'].custom_message1 = true;
+            }
         }
         callback(null, fields, errors);
     },
 
     getPersonas: function () {
-        var idCuenta = selfPerson.model.get('parent_id');
         nombreSelect="";
-        app.api.call('GET', app.api.buildURL('GetRelRelaciones/' + idCuenta), null, {
-            success: function (data) {
-                //console.log(data.records);
-                var idpersonas = selfPerson.model.get('persona_relacion_c');
-                var arrayPersonas = [];
-                var isSelect = false;
-                for (var i = 0; i < data.length; i++) {
+        var idCuenta = selfPerson.model.get('parent_id');
+        var parentModule = selfPerson.model.get('parent_type');
+        if(idCuenta!=undefined && idCuenta!="" && parentModule !=undefined && parentModule == 'Accounts'){
+            app.api.call('GET', app.api.buildURL('GetRelRelaciones/' + idCuenta), null, {
+                success: function (data) {
+                    //console.log(data.records);
+                    var idpersonas = selfPerson.model.get('persona_relacion_c');
+                    var arrayPersonas = [];
+                    var isSelect = false;
+                    for (var i = 0; i < data.length; i++) {
 
-                    if (idpersonas != "" && idpersonas == data[i]['id']) {
-                        isSelect = true;
-                        nombreSelect=data[i]['name'];
-                    }else
-                    {
-                        isSelect = false;
+                        if (idpersonas != "" && idpersonas == data[i]['id']) {
+                            isSelect = true;
+                            nombreSelect=data[i]['name'];
+                        }else
+                        {
+                            isSelect = false;
+                        }
+                        arrayPersonas.push({
+                            "id": data[i]['id'],
+                            "name": data[i]['name'],
+                            "select": isSelect
+                        });
                     }
-                    arrayPersonas.push({
-                        "id": data[i]['id'],
-                        "name": data[i]['name'],
-                        "select": isSelect
-                    });
+                    console.log(arrayPersonas);
+                    selfPerson.seleccionado=nombreSelect;
+                    selfPerson.personasRelData_list = arrayPersonas;
+                    selfPerson.render();
+                    if(idpersonas!="")
+                    {
+                        selfPerson.model.set('calls_persona_relacion','nombreSelect')
+                    }
+                },
+                error: function (e) {
+                    console.log(e);
                 }
-                console.log(arrayPersonas);
-                selfPerson.seleccionado=nombreSelect;
-                selfPerson.personasRelData_list = arrayPersonas;
-                selfPerson.render();
-                if(idpersonas!="")
-                {
-                    selfPerson.model.set('calls_persona_relacion','nombreSelect')
-                }
-            },
-            error: function (e) {
-                console.log(e);
-            }
-        });
+            });
+        }
     },
 
     hidePErsonaEdit: function () {
@@ -863,8 +869,8 @@
                         }
                     }
                     else {
-                       person.$('[data-name="calls_persona_relacion"]').hide()
-                       person.$('[data-name="persona_relacion_c"]').hide()
+                       person.$('[data-name="calls_persona_relacion"]').hide();
+                       person.$('[data-name="persona_relacion_c"]').hide();
                     }
                 },
                 error: function (e) {
@@ -872,8 +878,8 @@
                 }
             });
         } else {
-            $('.divPersonasRel').hide();
-            $('[data-name="persona_relacion_c"]').hide()
+            $person.$('[data-name="calls_persona_relacion"]').hide();
+            person.$('[data-name="persona_relacion_c"]').hide();
         }
 
 
