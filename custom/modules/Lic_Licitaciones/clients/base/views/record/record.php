@@ -150,11 +150,6 @@ array (
               ),
             ),
           ),
-          3 => 
-          array (
-            'name' => 'sidebar_toggle',
-            'type' => 'sidebartoggle',
-          ),
         ),
         'panels' => 
         array (
