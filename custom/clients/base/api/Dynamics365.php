@@ -87,6 +87,8 @@ class Dynamics365 extends SugarApi
             $body_elements["DataAreaId"]="UFIN";
             $body_elements["CUSTOMERACCOUNTNUMBER"]=$beanCuenta->idcliente_c;
             $body_elements["COMPANYTYPE"]=($beanCuenta->pais_nacimiento_c=='2') ? "LegalPerson" : "ForeignCompany";
+            $body_elements["CURRENCYCODE"]="MXN";
+            $body_elements["LANGUAGEID"]="es-MX";
 
             if($regimen_fiscal!='Persona Moral'){
                 //Se arma petición para enviar proveedor de Persona Física o PFAE
@@ -107,7 +109,7 @@ class Dynamics365 extends SugarApi
             foreach ($beanCuenta->accounts_dire_direccion_1->getBeans() as $a_direccion) {
                 if (!empty($a_direccion->calle)) {
                     //Arma petición para enviar dirección
-                    $body_elements["ADDRESSCITY"]="PRINCIPAL";
+                    $body_elements["ADDRESSCITY"]=$a_direccion->dire_direccion_dire_ciudad_name;
                     $body_elements["ADDRESSCOUNTRYREGIONID"]="MEX";
                     $body_elements["ADDRESSCOUNTYID"]=$a_direccion->dire_direccion_dire_colonia_name;
                     $body_elements["ADDRESSDESCRIPTION"]="PRINCIPAL";
