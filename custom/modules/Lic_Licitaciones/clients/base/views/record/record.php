@@ -266,9 +266,13 @@ array (
               ),
               12 => 
               array (
+                'name' => 'resultado_licitacion_c',
+                'label' => 'LBL_RESULTADO_LICITACION',
+              ),
+              13 => 
+              array (
                 'name' => 'razon_no_viable_c',
                 'label' => 'LBL_RAZON_NO_VIABLE',
-                'span' => 12,
               ),
             ),
           ),
