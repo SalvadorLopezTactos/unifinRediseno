@@ -47,10 +47,10 @@
     CreaCall:function(){
         var model=App.data.createBean('Calls');
         var name=this.model.get('name');
-        model.set('lic_licitaciones_calls_1_name', this.model.get('lic_licitaciones_accounts_name'));
+        model.set('lic_licitaciones_calls_1_name', this.model.get('name'));
         model.set('parent_id', this.model.get('lic_licitaciones_accountsaccounts_ida'));
+        model.set('parent_name', this.model.get('lic_licitaciones_accounts_name'));
         model.set('lic_licitaciones_calls_1lic_licitaciones_ida',this.model.get('id'));
-        model.set('lic_licitaciones_calls_1',this.model.get('name'));
         model.set('name',"Llamada"+" "+name);
         app.drawer.open({
               layout: 'create',
