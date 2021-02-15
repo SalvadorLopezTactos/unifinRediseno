@@ -1,5 +1,5 @@
 <?php
- // created: 2020-07-20 14:15:40
+ // created: 2021-02-15 12:11:01
 
 $app_list_strings['subramos_list']=array (
   '' => '',
@@ -152,4 +152,5 @@ $app_list_strings['subramos_list']=array (
   147 => 'MASIVOS AUTOS',
   148 => 'MASIVOS HOGAR',
   149 => 'MASIVOS VIDA',
+  150 => 'HOGAR',
 );
