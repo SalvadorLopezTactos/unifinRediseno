@@ -28,7 +28,8 @@
         var model=App.data.createBean('Meetings');
         var name=this.model.get('name');
         //model.set('account_id_c', this.model.get('parent_id'));
-        model.set('parent_id', this.model.get('lic_licitaciones_accounts_name'));
+        model.set('parent_name', this.model.get('lic_licitaciones_accounts_name'));
+        model.set('parent_id', this.model.get('lic_licitaciones_accountsaccounts_ida'));
         model.set('lic_licitaciones_meetings_1lic_licitaciones_ida',this.model.get('id'));
         model.set('lic_licitaciones_meetings_1_name',this.model.get('name'));
         model.set('name',"Reunión"+" "+name);
@@ -47,7 +48,9 @@
         var model=App.data.createBean('Calls');
         var name=this.model.get('name');
         //model.set('account_id_c', this.model.get('parent_id'));
-        model.set('parent_id', this.model.get('lic_licitaciones_accounts_name'));
+        model.set('parent_type', 'Calls');
+        model.set('parent_name', this.model.get('lic_licitaciones_accounts_name'));
+        model.set('parent_id', this.model.get('lic_licitaciones_accountsaccounts_ida'));
         model.set('lic_licitaciones_calls_1lic_licitaciones_ida',this.model.get('id'));
         model.set('lic_licitaciones_calls_1',this.model.get('name'));
         model.set('name',"Llamada"+" "+name);
