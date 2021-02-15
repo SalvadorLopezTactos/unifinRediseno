@@ -186,8 +186,14 @@
             var idUsrFirmado = App.user.attributes.id;
             var tipoCuenta = person.model.attributes.parent.tipodepersona_c;
             var idUsrAsignado = person.model.get('assigned_user_id');
+            var puestosDispo = app.lang.getAppListStrings('puestos_llamadas_list');
+            var arrayPuestos = [];
+            Object.keys(puestosDispo).forEach(function (key) {
+                arrayPuestos.push(Number(key));
+            });
+            var puesto_usr = Number(app.user.attributes.puestousuario_c);
 
-            if (idUsrFirmado == idUsrAsignado && tipoCuenta == 'Persona Moral' && (this.model.get('persona_relacion_c') == "" || this.model.get('persona_relacion_c') == undefined)) {
+            if (arrayPuestos.includes(puesto_usr) && idUsrFirmado == idUsrAsignado && tipoCuenta == 'Persona Moral' && (this.model.get('persona_relacion_c') == "" || this.model.get('persona_relacion_c') == undefined)) {
                 app.alert.show("Falta Persona", {
                     level: "error",
                     title: "Hace falta completar la siguiente información  : <br> Persona con quien se atiende la llamada",
