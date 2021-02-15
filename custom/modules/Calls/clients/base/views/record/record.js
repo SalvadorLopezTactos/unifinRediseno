@@ -4,6 +4,7 @@
     fechaInicioTemp: "",
     personasRelData_list: null,
     seleccionado:null,
+    TipoDePersona:"",
     events: {
         'click .record-edit-link-wrapper': 'handleEdit',
     },
@@ -783,7 +784,7 @@
         var parentModule = person.model.get('parent_type');
         if(idCuenta!=undefined && idCuenta!="" && parentModule !=undefined && parentModule == 'Accounts'){
             var idUsrFirmado = App.user.attributes.id;
-            var tipoCuenta = person.model.attributes.parent.tipodepersona_c;
+            var tipoCuenta = person.TipoDePersona;
             var idUsrAsignado = person.model.get('assigned_user_id');
             var puestosDispo = app.lang.getAppListStrings('puestos_llamadas_list');
             var arrayPuestos = [];
@@ -795,7 +796,7 @@
             if (arrayPuestos.includes(puesto_usr) && idUsrFirmado == idUsrAsignado && tipoCuenta == 'Persona Moral' && this.model.get('persona_relacion_c') == "") {
                 app.alert.show("Falta Persona", {
                     level: "error",
-                    title: "Hace falta completar la siguiente información  : <br> Persona con quien se atiende la llamada",
+                    title: "Hace falta completar la siguiente información: <br> Persona con quien se atiende la llamada. <br> Nota: Si no cuenta con algún registro, favor de agregar uno en el módulo de RELACIÓN.",
                     autoClose: false
                 });
                 $('[data-name="calls_persona_relacion"]').find('.select2-choice').css('border-color', 'red');
@@ -863,7 +864,7 @@
             app.api.call("read", app.api.buildURL("Accounts/" + parentiD, null, null, {}), null, {
                 success: function (data) {
                     console.log(data);
-
+                    person.TipoDePersona=data.tipodepersona_c;
                    if (arrayPuestos.includes(puesto_usr) && data.tipodepersona_c == 'Persona Moral') {
                        person.$('[data-name="persona_relacion_c"]').hide()
                         // Valida si el usuario firmado pertenece a la cuenta o a la llamada
