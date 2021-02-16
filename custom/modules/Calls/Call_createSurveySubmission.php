@@ -24,14 +24,14 @@ class Call_createSurveySubmission
             $beanAccount = BeanFactory::getBean('Accounts', $idParentCalls, array('disable_row_level_security' => true));
 
             if ($beanAccount->tipodepersona_c == 'Persona Moral') {
-                $queryP = "select t2.account_id1_c,ac.nombre_comercial_c,t1.relaciones_activas
+                $queryP = "select t2.account_id1_c,ac.name,t1.relaciones_activas
 FROM rel_relaciones_accounts_1_c rel
   INNER JOIN rel_relaciones t1
     ON t1.id=rel.rel_relaciones_accounts_1rel_relaciones_idb
   INNER JOIN rel_relaciones_cstm t2
     ON t2.id_c=t1.id
-  INNER join accounts_cstm ac
-  ON ac.id_c=t2.account_id1_c
+  INNER join accounts ac
+  ON ac.id=t2.account_id1_c
 WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
       AND t2.account_id1_c='{$idPersonaCalls}'
       AND t1.relaciones_activas LIKE '%^Negocios^%'";
@@ -39,7 +39,7 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
                 $result = $db->query($queryP);
                 $row = $db->fetchByAssoc($result);
                 $idUsrCalls = $row['account_id1_c'];
-                $nameUsrCalls = $row['nombre_comercial_c'];
+                $nameUsrCalls = $row['name'];
                 $nameParentCalls = $bean->parent_name;
 
             } else {
