@@ -885,7 +885,7 @@
                 }
             });
         } else {
-            $person.$('[data-name="calls_persona_relacion"]').hide();
+            person.$('[data-name="calls_persona_relacion"]').hide();
             person.$('[data-name="persona_relacion_c"]').hide();
         }
 
