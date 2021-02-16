@@ -41,7 +41,8 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
                 $idUsrCalls = $row['account_id1_c'];
                 $nameUsrCalls = $row['name'];
                 $nameParentCalls = $bean->parent_name;
-
+                $beanPersona = BeanFactory::getBean('Accounts', $idPersonaCalls, array('disable_row_level_security' => true));
+                $emailPersona=$beanPersona->email1;
             } else {
                 $idUsrCalls = $bean->assigned_user_id;
                 $nameUsrCalls = $bean->assigned_user_name;
@@ -145,12 +146,13 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
                     $resultInsertSS = $db->query($insertSS);
                 }
                 //Genera encode Base 64 de url
-                $urlSurvey = $idEncuesta . "&ctype=Accounts&cid=" . $idUsrCalls . "&sub_id=" . $idSubmission;
+                $urlSurvey = $idEncuesta . "&ctype=User&cid=" . $idUsrCalls . "&sub_id=" . $idSubmission;
                 $stringBase64 = base64_encode($urlSurvey);
                 //Regresa url en base64
                 $GLOBALS['log']->fatal('Respuesta Encuesta Calls' . $stringBase64);
 
-                $this->sendEmailSurvey($nameParentCalls,$bean->assigned_user_name,$beanAccount->email1,$stringBase64);
+                $correo=$beanAccount->tipodepersona_c == 'Persona Moral'?$emailPersona:$beanAccount->email1;
+                $this->sendEmailSurvey($nameParentCalls,$bean->assigned_user_name,$correo,$stringBase64);
 
             }
 
