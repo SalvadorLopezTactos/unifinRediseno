@@ -7,6 +7,7 @@
  */
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 require_once('include/utils.php');
+
 class Call_createSurveySubmission
 {
     function createSurveySubmissionCalls($bean, $event, $arguments)
@@ -68,7 +69,9 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
             }
             $GLOBALS['log']->fatal('TCT - urlSurvey: ' . $idUsrCalls . "  " . $nameUsrCalls);
 
-            if (!empty($idUsrCalls) && !empty($nameUsrCalls)) {
+            $respuest = $this->existeEncuestaTrimestre($beanAccount->tipodepersona_c, $idUsrCalls);
+
+            if (!empty($idUsrCalls) && !empty($nameUsrCalls) && $respuest) {
                 if (empty($idSubmission) || $idSubmission == "") {
                     //Ejecuta proceso para insertar registro
                     $idSubmission = create_guid();
@@ -149,7 +152,7 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
                 $urlSurvey = $idEncuesta . "&ctype=Users&cid=" . $idUsrCalls . "&sub_id=" . $idSubmission;
                 $stringBase64 = base64_encode($urlSurvey);
                 //Regresa url en base64
-                $GLOBALS['log']->fatal('Respuesta Encuesta Calls' . $stringBase64 . " current ".$current_user->id . " name ".$current_user->name);
+                $GLOBALS['log']->fatal('Respuesta Encuesta Calls' . $stringBase64 . " current " . $current_user->id . " name " . $current_user->name);
 
                 $correo = $beanAccount->tipodepersona_c == 'Persona Moral' ? $emailPersona : $beanAccount->email1;
                 $this->sendEmailSurvey($nameParentCalls, $bean->assigned_user_name, $correo, $stringBase64);
@@ -157,6 +160,7 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
             }
         }
     }
+
     /*
    * Función para ejecutar envío de correo electrónico: Encuesta: Satisfaccion cliente- Llamada
   */
@@ -220,6 +224,96 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
                     break;
             }
         }
+    }
+
+    function existeEncuestaTrimestre($tipoRegimen, $usuario, $idCuenta)
+    {
+        global $db;
+        $dateStrHoy = date();
+        $anoHoy = date("Y");
+        $month = date("n", strtotime($dateStrHoy));
+        $hoyTrimestres = ceil($month / 3);
+
+        $GLOBALS['log']->fatal('Trimestre hoy ' . $hoyTrimestres);
+        $GLOBALS['log']->fatal('Año hoy ' . $anoHoy);
+
+        if ($tipoRegimen == 'Persona Moral') {
+            $sentencia = "AND calls_cstm.persona_relacion_c='{$usuario}'";
+        } else {
+            $sentencia = "AND user_creador.id='{$usuario}'";
+        }
+        $queryEncuesta = "SELECT
+  CONVERT_TZ(submission.submission_date, '+00:00', @@global.time_zone) FechaRespuesta,
+  accounts.id                                                          IdCRMCliente,
+  accounts_cstm.tipodepersona_c                                        'Tipo de Cliente',
+  submission.name                                                      'Nombre Persona Relacionada',
+  calls_cstm.persona_relacion_c                                        'Id CRM Personas Relacionada',
+  concat(user_creador.first_name, ' ', user_creador.last_name)         'Nombre Asesor',
+  user_creador.id                                                      'Id CRM Asesor'
+
+FROM bc_survey_submit_answer_calculation surveyCalculation
+  INNER JOIN bc_survey survey
+    ON survey.id = surveyCalculation.sent_survey_id
+       AND survey.deleted = 0
+  INNER JOIN bc_survey_submission submission
+    ON submission.id = surveyCalculation.submission_id
+       AND submission.deleted = 0
+  INNER JOIN bc_survey_questions question
+    ON question.id = surveyCalculation.question_id
+       AND question.deleted = 0
+  LEFT JOIN bc_survey_answers answer
+    ON answer.id = surveyCalculation.submit_answer_id
+       AND answer.deleted = 0
+  LEFT JOIN calls
+    ON calls.id = submission.parent_id
+       AND calls.deleted = 0
+  LEFT JOIN calls_cstm
+    ON calls_cstm.id_c = calls.id
+  LEFT JOIN accounts
+    ON accounts.id = calls.parent_id
+       AND calls.parent_type = 'Accounts'
+       AND accounts.deleted = 0
+  INNER JOIN accounts_cstm
+    ON accounts_cstm.id_c = accounts.id
+  INNER JOIN users_cstm
+    ON users_cstm.id_c = submission.target_parent_id
+  INNER JOIN users user_creador
+    ON user_creador.id = calls.created_by
+WHERE
+  survey.name = 'ENCUESTA DE SEGUIMIENTO'
+  AND submission.parent_type = 'Calls'
+    AND accounts.id='{$idCuenta}'";
+        $orderBy = "GROUP BY  submission.name, submission.id, calls.name, accounts.name, submission.submission_date ORDER BY  submission.submission_date DESC LIMIT 1";
+
+        $consulta = $queryEncuesta . $sentencia . $orderBy;
+        $GLOBALS['log']->fatal('Cosnulta query encuestas ' . $consulta);
+        $Result = $db->query($consulta);
+        while ($row = $db->fetchByAssoc($Result)) {
+            $GLOBALS['log']->fatal('Row consulta ' . $row);
+            $GLOBALS['log']->fatal('Row consulta ' . $row['FechaRespuesta']);
+            $fechaEncuesta = $row['FechaRespuesta'];
+        }
+        $dateEncuesta = $fechaEncuesta;
+        $monthEncuesta = date("n", strtotime($dateEncuesta));
+        $TrimestresEncuesta = ceil($monthEncuesta / 3);
+        $anoEncuesta = date("Y", $dateEncuesta);
+
+        $GLOBALS['log']->fatal('Trimestre encuesta ' . $TrimestresEncuesta);
+        $GLOBALS['log']->fatal('Año encuesta ' . $anoEncuesta);
+        $bandera = false;
+
+        if ($hoyTrimestres == $TrimestresEncuesta) {
+
+            if ($anoHoy == $anoEncuesta) {
+                $bandera = false;
+            } else {
+                $bandera = true;
+            }
+        } else {
+            $bandera = true;
+        }
+
+        return $bandera;
     }
 }
 
