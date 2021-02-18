@@ -6,7 +6,7 @@
  * Time: 08:35 PM
  */
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
+require_once('include/utils.php');
 class Call_createSurveySubmission
 {
     function createSurveySubmissionCalls($bean, $event, $arguments)
@@ -40,9 +40,9 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
                 $row = $db->fetchByAssoc($result);
                 $idUsrCalls = $row['account_id1_c'];
                 $nameUsrCalls = $row['name'];
-                $nameParentCalls = $bean->parent_name;
                 $beanPersona = BeanFactory::getBean('Accounts', $idPersonaCalls, array('disable_row_level_security' => true));
-                $emailPersona=$beanPersona->email1;
+                $nameParentCalls = $beanPersona->name;
+                $emailPersona = $beanPersona->email1;
             } else {
                 $idUsrCalls = $bean->assigned_user_id;
                 $nameUsrCalls = $bean->assigned_user_name;
@@ -66,7 +66,7 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
             foreach ($stmt->fetchAll() as $row) {
                 $idSubmission = $row['id'];
             }
-            $GLOBALS['log']->fatal('TCT - urlSurvey: '. $idUsrCalls . "  " .$nameUsrCalls);
+            $GLOBALS['log']->fatal('TCT - urlSurvey: ' . $idUsrCalls . "  " . $nameUsrCalls);
 
             if (!empty($idUsrCalls) && !empty($nameUsrCalls)) {
                 if (empty($idSubmission) || $idSubmission == "") {
@@ -95,7 +95,7 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
                mail_status)
             VALUES
             ( '{$idSubmission}',
-              '{$nameUsrCalls}',
+              '{$nameUsrCalls}', 
               utc_timestamp(),
               utc_timestamp(),
               '{$idUsrCalls}',
@@ -146,25 +146,21 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
                     $resultInsertSS = $db->query($insertSS);
                 }
                 //Genera encode Base 64 de url
-                $urlSurvey = $idEncuesta . "&ctype=User&cid=" . $idUsrCalls . "&sub_id=" . $idSubmission;
+                $urlSurvey = $idEncuesta . "&ctype=Users&cid=" . $idUsrCalls . "&sub_id=" . $idSubmission;
                 $stringBase64 = base64_encode($urlSurvey);
                 //Regresa url en base64
-                $GLOBALS['log']->fatal('Respuesta Encuesta Calls' . $stringBase64);
+                $GLOBALS['log']->fatal('Respuesta Encuesta Calls' . $stringBase64 . " current ".$current_user->id . " name ".$current_user->name);
 
-                $correo=$beanAccount->tipodepersona_c == 'Persona Moral'?$emailPersona:$beanAccount->email1;
-                $this->sendEmailSurvey($nameParentCalls,$bean->assigned_user_name,$correo,$stringBase64);
+                $correo = $beanAccount->tipodepersona_c == 'Persona Moral' ? $emailPersona : $beanAccount->email1;
+                $this->sendEmailSurvey($nameParentCalls, $bean->assigned_user_name, $correo, $stringBase64);
 
             }
-
-
         }
-
     }
-
     /*
    * Función para ejecutar envío de correo electrónico: Encuesta: Satisfaccion cliente- Llamada
   */
-    function sendEmailSurvey($nombrePersona,$Asesor,$email,$stringBase64)
+    function sendEmailSurvey($nombrePersona, $Asesor, $email, $stringBase64)
     {
         //Recupera site_url
         global $sugar_config;
@@ -176,12 +172,21 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
         //Establece parámetros de envío
         $timedate = new TimeDate();
         $mailSubject = "Encuesta de satisfacción";
-        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">HOLA! <b>'. $nombrePersona .'</b>
-      <br><br>Recientemente recibiste una llamada de seguimiento por parte del asesor <b>'.$Asesor.'</b> y nos gustaría conocer tu opinión acerca del servicio que has recibido.</font></p>
-      <center><a href="'. $urlSurvey .'">Comenzar la encuesta</a><center>';
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">HOLA! <b>' . $nombrePersona . '</b>
+      <br><br>Recientemente recibiste una llamada de seguimiento por parte del asesor <b>' . $Asesor . '</b> y nos gustaría conocer tu opinión acerca del servicio que has recibido.
+      <center>Te invitamos a contestar la siguiente encuesta(<a href="' . $urlSurvey . '">comenzar</a>).</center></font></p>
+      <br><br>Atentamente Unifin</font></p>
+      <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
+
+      <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
+      <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: "Arial",sans-serif; color: #212121;">
+       Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+       Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+       No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+       Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: "Arial",sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: "Arial",sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br /> </span><span style="font-size: 7.5pt; font-family: "Arial",sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a> </span><u></u><u></u></p>';
         $mailTo = array(
             0 => array(
-                'name' => $nombrePersona ,
+                'name' => $nombrePersona,
                 'email' => $email,
             )
         );
@@ -217,3 +222,4 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
         }
     }
 }
+
