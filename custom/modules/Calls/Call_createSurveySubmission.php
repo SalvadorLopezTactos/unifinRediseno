@@ -69,7 +69,7 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
             }
             $GLOBALS['log']->fatal('TCT - urlSurvey: ' . $idUsrCalls . "  " . $nameUsrCalls);
 
-            $respuest = $this->existeEncuestaTrimestre($beanAccount->tipodepersona_c, $idUsrCalls);
+            $respuest = $this->existeEncuestaTrimestre($beanAccount->tipodepersona_c, $idUsrCalls,$beanAccount->id);
 
             if (!empty($idUsrCalls) && !empty($nameUsrCalls) && $respuest) {
                 if (empty($idSubmission) || $idSubmission == "") {
@@ -229,7 +229,7 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
     function existeEncuestaTrimestre($tipoRegimen, $usuario, $idCuenta)
     {
         global $db;
-        $dateStrHoy = date();
+        $dateStrHoy = date('Y-m-d H:i:s');
         $anoHoy = date("Y");
         $month = date("n", strtotime($dateStrHoy));
         $hoyTrimestres = ceil($month / 3);
@@ -258,12 +258,6 @@ FROM bc_survey_submit_answer_calculation surveyCalculation
   INNER JOIN bc_survey_submission submission
     ON submission.id = surveyCalculation.submission_id
        AND submission.deleted = 0
-  INNER JOIN bc_survey_questions question
-    ON question.id = surveyCalculation.question_id
-       AND question.deleted = 0
-  LEFT JOIN bc_survey_answers answer
-    ON answer.id = surveyCalculation.submit_answer_id
-       AND answer.deleted = 0
   LEFT JOIN calls
     ON calls.id = submission.parent_id
        AND calls.deleted = 0
@@ -286,20 +280,20 @@ WHERE
         $orderBy = "GROUP BY  submission.name, submission.id, calls.name, accounts.name, submission.submission_date ORDER BY  submission.submission_date DESC LIMIT 1";
 
         $consulta = $queryEncuesta . $sentencia . $orderBy;
-        $GLOBALS['log']->fatal('Cosnulta query encuestas ' . $consulta);
+        //$GLOBALS['log']->fatal('Cosnulta query encuestas ' . $consulta);
         $Result = $db->query($consulta);
         while ($row = $db->fetchByAssoc($Result)) {
-            $GLOBALS['log']->fatal('Row consulta ' . $row);
-            $GLOBALS['log']->fatal('Row consulta ' . $row['FechaRespuesta']);
+            //$GLOBALS['log']->fatal('Row consulta ' . $row);
+            //$GLOBALS['log']->fatal('Row consulta ' . $row['FechaRespuesta']);
             $fechaEncuesta = $row['FechaRespuesta'];
         }
         $dateEncuesta = $fechaEncuesta;
         $monthEncuesta = date("n", strtotime($dateEncuesta));
         $TrimestresEncuesta = ceil($monthEncuesta / 3);
-        $anoEncuesta = date("Y", $dateEncuesta);
+        $anoEncuesta = date("Y", strtotime($dateEncuesta));
 
-        $GLOBALS['log']->fatal('Trimestre encuesta ' . $TrimestresEncuesta);
-        $GLOBALS['log']->fatal('Año encuesta ' . $anoEncuesta);
+        //$GLOBALS['log']->fatal('Trimestre encuesta ' . $TrimestresEncuesta);
+        //$GLOBALS['log']->fatal('Año encuesta ' . $anoEncuesta);
         $bandera = false;
 
         if ($hoyTrimestres == $TrimestresEncuesta) {
@@ -312,7 +306,6 @@ WHERE
         } else {
             $bandera = true;
         }
-
         return $bandera;
     }
 }
