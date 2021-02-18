@@ -1288,7 +1288,8 @@
                 'arrendamientoPuro': {},
                 'factorajeFinanciero': {},
                 'creditoAutomotriz': {},
-                'creditoSimple': {}
+                'creditoSimple': {},
+                'creditoRevolvente': {}
             };
             // ProductosPLD.arrendamientoPuro.campo1 = this.$('.campo1txt-ap').val();
             ProductosPLD.arrendamientoPuro.campo2 = this.$('.campo2ddw-ap').select2('val');
@@ -1344,6 +1345,19 @@
             ProductosPLD.creditoSimple.campo14 = this.$('.campo14chk-cs')[0].checked;
             ProductosPLD.creditoSimple.campo20 = this.$('.campo20ddw-cs').select2('val');
             ProductosPLD.creditoSimple.campo6 = this.$('.campo6ddw-cs').select2('val');
+            //Campos Credito Revolvente
+            ProductosPLD.creditoRevolvente.campo1=$('.campo1int-ce').val();
+            ProductosPLD.creditoRevolvente.campo2=$('.campo2dec-ce').val().replace(/,/gi, "");
+            ProductosPLD.creditoRevolvente.campo3=$('.campo3ddw-ce').select2('val').toString();
+            ProductosPLD.creditoRevolvente.campo5=$('.campo5ddw-ce').select2('val');
+            ProductosPLD.creditoRevolvente.campo6=$('.campo6ddw-ce').select2('val');
+            ProductosPLD.creditoRevolvente.campo7=$('.campo7ddw-ce').select2('val').toString();
+            ProductosPLD.creditoRevolvente.campo8=$('.campo8ddw-ce').select2('val');
+            ProductosPLD.creditoRevolvente.campo9=$('.campo9rel-ce').select2('val');
+            ProductosPLD.creditoRevolvente.campo9_id=$('.campo9rel-ce').select2('val');
+            ProductosPLD.creditoRevolvente.campo10=$('.campo10ddw-ce').select2('val');
+            ProductosPLD.creditoRevolvente.campo11=$('.campo11rel-ce').select2('val');
+            ProductosPLD.creditoRevolvente.campo11_id=$('.campo11rel-ce').select2('val');
 
             if ($.isEmptyObject(errors)) {
                 contexto_cuenta.ProductosPLD = pld.formatDetailPLD(ProductosPLD);
