@@ -34,7 +34,8 @@ class Ref_Cruzadas_Hooks
         //Validando que el Asesor referenciado no sea un 9-
         //correos_cancelacion_vta_cruzada_list
         $array_vta_cruzada_mail = $GLOBALS['app_list_strings']['correos_cancelacion_vta_cruzada_list'];
-        $GLOBALS['log']->fatal('correo_current_user',$array_vta_cruzada_mail);
+        $idCarloS = $array_vta_cruzada_mail['1'];
+        $GLOBALS['log']->fatal('correo_current_user',$idCarloS);
         //$idCarloS='a951c644-c43b-11e9-9e17-00155d96730d';
         /*usuario_producto*/
         $idAsesorRef=$bean->user_id_c;
