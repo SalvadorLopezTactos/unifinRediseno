@@ -9,3 +9,7 @@ $mod_strings['LBL_DATE_ENTERED'] = 'Fecha Alta*';
 $mod_strings['LBL_ASSIGNED_TO_NAME'] = 'Asesor Origen';
 $mod_strings['LBL_PRIMER_FECHA_ANEXO'] = 'Fecha primer anexo activado';
 $mod_strings['LBL_ULTIMA_FECHA_ANEXO'] = 'Fecha último anexo activado';
+$mod_strings['LBL_VALIDADO_POR_USER_ID'] = ' Validado por (relacionado Usuario ID)';
+$mod_strings['LBL_VALIDADO_POR'] = ' Validado por';
+$mod_strings['LBL_FECHA_VALIDACION'] = 'Fecha de validación';
+$mod_strings['LBL_ACCION_VALIDACION'] = 'Acción de validación';

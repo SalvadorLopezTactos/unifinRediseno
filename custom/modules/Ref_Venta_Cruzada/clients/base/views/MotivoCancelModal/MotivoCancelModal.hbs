@@ -1,0 +1,117 @@
+<style>
+
+    .modal-header_cstm h3 {
+        font-size: 16px;
+        font-weight: normal;
+		justify-content: center;
+		align-items: center;
+    }
+
+	.modal-header_cstm {
+        background: #fff7ad;
+        color: #866500;
+        padding: 1px;
+		justify-content: center;
+		align-items: center;
+		border-color: #ffd132;
+		text-align: center;
+		height: 48px;
+    }
+
+    .modal-body_cstm {
+        padding: 18px 40px 16px;
+		font-size: 14px;
+		display: block;
+    }
+
+    .fa-book {
+        color: #866500;
+    }
+
+    .modal_cstm {
+        position: absolute;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        top: 0;
+        overflow: auto;
+		border-color: #ffd132;
+		color: #555;
+        display: block;
+		width: auto;
+		height: auto;
+		 overflow: hidden;
+    }
+
+    .modal-backdrop {
+        /* bug fix - no overlay */
+        display: flex;
+    }
+
+    .form-horizontal {
+        display: inline-block;
+    }
+
+    .select_cstm {
+        margin: 1px 0px 1px 1px !important;
+		border-color: #ffd132;
+    }
+	
+	.modal-footer_cstm {
+		border-top: 1px solid #ffd132;
+        background: #fff7ad;
+        color: #555;
+        padding: 1px;
+		justify-content: center;
+		border-color: #ffd132;
+		width: 100%;
+		height: 35px;
+		justify-content: center;
+		
+    }
+	
+	.btn-esn{
+		text-align: center;
+		display: inline-block !important;
+		padding: 1px 1px;
+		margin: 0;
+		width: 50%;
+		color: #555;
+		font-size: 13px;
+		background: #faf8f7;
+		height: 100%;
+	}
+
+</style>
+
+<div class=" modal modal_cstm " id="MotivoCancelModal" tabindex="-1" role="dialog">
+    <div class="modal-header_cstm">
+        <h3><b><i class="fa fa-book" style="padding: 3px; "></i>Venta Cruzada</b></h3>
+    </div>
+	<div class="modal-body_cstm">
+		<div style="display: inline-flex;padding: 5px; ">
+            <label for="" style=" font-weight:bold;font-size: 15px; color: black; padding: 5px 5px;">Datos de rechazo:</label>
+		</div><br>
+		
+		<div class="avance" id="avance" style="display: inline-flex;padding: 5px;">
+			¿Había un avance previo con el cliente?:&nbsp;
+			<select name="avanceprevio" id="avanceprevio" class="select2 select_cstm">
+                {{{avance_list}}}
+            </select>
+		</div>
+        <div class="motivos" id="motivos" style="display: inline-flex;padding: 5px;">
+			Motivo de Rechazo:&nbsp;
+			<select name="motivorechazo" id="motivorechazo" class="select2 select_cstm">
+                {{{motivo_list}}}
+            </select>
+		</div>
+        <div class="descmotivos" id="descmotivos" style="display: inline-flex;padding: 5px;">
+			Explicación de Rechazo:&nbsp;
+			<textarea name="descrechazo" id="descrechazo" value=""></textarea>
+		</div>
+       
+    </div>
+    <div class="modal-footer_cstm" style="display: inline-flex;">
+		<button class="span6 btn btn-esn" id="btn-asigna">Aceptar</button>
+    </div>
+	 
+</div>

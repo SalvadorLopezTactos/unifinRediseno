@@ -7,6 +7,10 @@
         
 		this._super("initialize", [options]);
         this.model.on('sync', this.hideShowCancelar, this);
+		this.model.on('sync', this.hideShowUniclick, this);
+
+		this.context.on('button:aceptar_vta_cruzada:click', this.aceptar_vta_cruzada, this);
+        this.context.on('button:cancelar_vta_cruzada:click', this.rechazar_vta_cruzada, this);
 
     },
 	
@@ -45,7 +49,7 @@
 		var status=this.model.get('estatus');
 		var productoRef=this.model.get('producto_referenciado');
 
-		if(puedeCancelar && productoRef == productoUsuario && status=='1'){
+		if((puedeCancelar && productoRef == productoUsuario && status=='1')){
             $('span[data-fieldname="cancelado"]').find('input').removeAttr('disabled');
             $('[data-name="cancelado"]').attr('style',"pointer-events:block")
 
@@ -102,14 +106,108 @@
         
 		
         if (campos) {
+			
             app.alert.show("Campos Requeridos", {
                 level: "error",
                 messages: "Hace falta completar la siguiente información para guardar una <b>Referencia Venta Cruzada: </b><br>" + campos,
                 autoClose: false
             });
-        }
+        }else{
+			this.model.set('estatus',"3");
+		}
 
         callback(null, fields, errors);
     },
+	aceptar_vta_cruzada: function () {
+		
+		$('[name="aceptar_vta_cruzada"]').attr('style', 'pointer-events:none');
+        $('[name="cancelar_vta_cruzada"]').attr('style', 'pointer-events:none');
+        App.alert.show('autorizaSol', {
+            level: 'process',
+            title: 'Autorizando, por favor espere.',
+        });
+		
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth() + 1; //January is 0!
+		var yyyy = today.getFullYear();
+		if (dd < 10) {
+			dd = '0' + dd
+		}
+		if (mm < 10) {
+			mm = '0' + mm
+		}
+		today = yyyy + '-' + mm + '-' + dd;
+		
+		this.model.set('estatus',"1");
+		this.model.set('user_id3_c',App.user.id );
+		this.model.set('fecha_validacion_c',today);
+		this.model.set('accion_validacion_c',"1");
+		this.model.save(null, {
+            success: function (model, response) {
+                App.alert.dismiss('autorizaSol');
+                App.alert.show("autorizacion_director_ok", {
+                    level: "success",
+                    messages: "La solicitud de venta cruzada fue aprobada.",
+                    autoClose: false
+                });
+				location.reload();
+            }, error: function (model, response) {
+                $('[name="aceptar_vta_cruzada"]').attr('style', 'pointer-events:block');
+                $('[name="cancelar_vta_cruzada"]').attr('style', 'pointer-events:block');
+            }
+        });
+	},
+
+	rechazar_vta_cruzada: function () {
+        
+		$('[name="aceptar_vta_cruzada"]').attr('style', 'pointer-events:none');
+        $('[name="cancelar_vta_cruzada"]').attr('style', 'pointer-events:none');
+		var campos = "";  
+		
+		 /*************************************************/
+		 if (Modernizr.touch) {
+			app.$contentEl.addClass('content-overflow-visible');
+		}
+		/**check whether the view already exists in the layout.
+		 * If not we will create a new view and will add to the components list of the record layout
+		 * */
+
+			//var quickCreateView = this.layout.getComponent('MotivoCancelModal');
+		var quickCreateView = null;
+		if (!quickCreateView) {
+			/** Create a new view object */
+			quickCreateView = app.view.createView({
+				context: this.context,
+				name: 'MotivoCancelModal',
+				layout: this.layout,
+				module: 'Ref_Venta_Cruzada'
+			});
+			/** add the new view to the components list of the record layout*/
+			this.layout._components.push(quickCreateView);
+			this.layout.$el.append(quickCreateView.$el);
+		}
+		/**triggers an event to show the pop up quick create view*/
+		this.layout.trigger("app:view:MotivoCancelModal");
+	},
 	
+	hideShowUniclick:function(){
+		
+		var puedeCancelar = App.user.get('valida_vta_cruzada_c');
+		var productoUsuario = App.user.get('tipodeproducto_c');
+		var status=this.model.get('estatus');
+		var productoRef=this.model.get('producto_referenciado');
+
+		if( puedeCancelar && status=='6' && (productoRef == '8' || productoRef == '9')){
+            $('[name="aceptar_vta_cruzada"]').removeClass('hidden');
+            $('[name="cancelar_vta_cruzada"]').removeClass('hidden');
+            $('[name="aceptar_vta_cruzada"]').show();
+            $('[name="cancelar_vta_cruzada"]').show();
+
+		}
+
+        this.setEtiquetasFechas(productoRef);
+
+	},
+
 })
