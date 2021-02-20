@@ -156,7 +156,7 @@
         dataPLD['creditoSimple']['campo20_label'] = pld.campo20_list[dataPLD['creditoSimple']['campo20']];
         dataPLD['creditoSimple']['campo6_label'] = pld.campo6_list[dataPLD['creditoSimple']['campo6']];
 
-        //data Credito Envolvente
+        //data Credito Revolvente
         var auxCampo3=dataPLD['creditoRevolvente']['campo3'].replace(/\^/g,"");
         var arrayCampo3=auxCampo3.split(",");
         var arrTemp=[];
@@ -170,14 +170,17 @@
         dataPLD['creditoRevolvente']['campo8_label'] = pld.campo2_list[dataPLD['creditoRevolvente']['campo8']];
         dataPLD['creditoRevolvente']['campo10_label'] = pld.campo4_list[dataPLD['creditoRevolvente']['campo10']];
 
-        var auxCampo7=dataPLD['creditoRevolvente']['campo7'].replace(/\^/g,"");
-        var arrayCampo7=auxCampo7.split(",");
-        var arrTemp=[];
-        for(var i=0;i<arrayCampo7.length;i++)
-        {
-            arrTemp.push(pld.campo7_list[arrayCampo7[i]]);
+        if (dataPLD['creditoRevolvente']['campo7'] != "" && dataPLD['creditoRevolvente']['campo7'] != null){
+            var auxCampo7=dataPLD['creditoRevolvente']['campo7'].replace(/\^/g,"");
+            var arrayCampo7=auxCampo7.split(",");
+            var arrTemp=[];
+            for(var i=0;i<arrayCampo7.length;i++)
+            {
+                arrTemp.push(pld.campo7_list[arrayCampo7[i]]);
+            }
+            dataPLD['creditoRevolvente']['campo7_label'] =arrTemp.join();
         }
-        dataPLD['creditoRevolvente']['campo7_label'] =arrTemp.join();
+        
         return dataPLD;
     },
 

@@ -1929,7 +1929,7 @@
         // this.context.on('button:save_button:click', this.borraTel, this);
         //this.context.on('button:prospecto_contactado:click',this.validaContactado, this);  //se añade validación para validar campos al convertir prospecto contactado.
         this.context.on('button:convierte_lead:click', this.validalead, this);
-        this.context.on('button:dynamics_button:click', this.requestDynamics, this);
+        //this.context.on('button:dynamics_button:click', this.requestDynamics, this);
 
 
     },
@@ -2723,6 +2723,7 @@
                     app.alert.dismiss('infoDynamics');
                     if(data !=null){
                         self.model.set('control_dynamics_365_c',data[0]);
+                        self.model.set('id_cpp_365_chk_c',data[1]);
                     }
                 }, this),
                 error: _.bind(function (response) {

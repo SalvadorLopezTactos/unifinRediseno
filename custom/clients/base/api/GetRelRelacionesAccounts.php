@@ -29,14 +29,14 @@ class GetRelRelacionesAccounts extends SugarApi
         global $db;
         $id_account = $args['id_account'];
 
-        $query = "select t2.account_id1_c as cuenta, ac.nombre_comercial_c as nombre
+        $query = "select t2.account_id1_c as cuenta, ac.name as nombre
 FROM rel_relaciones_accounts_1_c rel
   INNER JOIN rel_relaciones t1
     ON t1.id=rel.rel_relaciones_accounts_1rel_relaciones_idb
   INNER JOIN rel_relaciones_cstm t2
     ON t2.id_c=t1.id
-  INNER join accounts_cstm ac
- ON ac.id_c=t2.account_id1_c
+  INNER join accounts ac
+ ON ac.id=t2.account_id1_c
 WHERE rel.rel_relaciones_accounts_1accounts_ida='{$id_account}'";
 
         $result = $db->query($query);

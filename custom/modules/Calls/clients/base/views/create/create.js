@@ -184,13 +184,19 @@
         var parentModule = person.model.get('parent_type');
         if(idCuenta!=undefined && idCuenta!="" && parentModule !=undefined && parentModule == 'Accounts'){
             var idUsrFirmado = App.user.attributes.id;
-            var tipoCuenta = person.model.attributes.parent.tipodepersona_c;
+            var tipoCuenta = person.model.attributes.parent!=undefined?person.model.attributes.parent.tipodepersona_c:"";
             var idUsrAsignado = person.model.get('assigned_user_id');
+            var puestosDispo = app.lang.getAppListStrings('puestos_llamadas_list');
+            var arrayPuestos = [];
+            Object.keys(puestosDispo).forEach(function (key) {
+                arrayPuestos.push(Number(key));
+            });
+            var puesto_usr = Number(app.user.attributes.puestousuario_c);
 
-            if (idUsrFirmado == idUsrAsignado && tipoCuenta == 'Persona Moral' && (this.model.get('persona_relacion_c') == "" || this.model.get('persona_relacion_c') == undefined)) {
+            if (arrayPuestos.includes(puesto_usr) && idUsrFirmado == idUsrAsignado && tipoCuenta == 'Persona Moral' && (this.model.get('persona_relacion_c') == "" || this.model.get('persona_relacion_c') == undefined)) {
                 app.alert.show("Falta Persona", {
                     level: "error",
-                    title: "Hace falta completar la siguiente información  : <br> Persona con quien se atiende la llamada",
+                    title: "Hace falta completar la siguiente información: <br> Persona con quien se atiende la llamada. <br> Nota: Si no cuenta con algún registro, favor de agregar uno en el módulo de RELACIÓN.",
                     autoClose: false
                 });
                 $('[data-name="calls_persona_relacion"]').find('.select2-choice').css('border-color', 'red');
@@ -205,7 +211,7 @@
         var idCuenta = selfPerson.model.get('parent_id');
         var parentModule = selfPerson.model.get('parent_type');
         if(idCuenta!=undefined && idCuenta!="" && parentModule !=undefined && parentModule == 'Accounts'){
-            var tipoCuenta = selfPerson.model.attributes.parent.tipodepersona_c;
+            var tipoCuenta = selfPerson.model.attributes.parent!=undefined?selfPerson.model.attributes.parent.tipodepersona_c:"";
             if (tipoCuenta == 'Persona Moral') {
                 app.api.call('GET', app.api.buildURL('GetRelRelaciones/' + idCuenta), null, {
                     success: function (data) {
@@ -247,7 +253,7 @@
                 arrayPuestos.push(Number(key));
             });
             var puesto_usr = Number(app.user.attributes.puestousuario_c);
-            var tipoCuenta = person.model.attributes.parent.tipodepersona_c;
+            var tipoCuenta = person.model.attributes.parent!=undefined?person.model.attributes.parent.tipodepersona_c:"";
 
             if (arrayPuestos.includes(puesto_usr) && tipoCuenta == 'Persona Moral' && parentModule == 'Accounts') {
                 // $('.divPersonasRel').show();

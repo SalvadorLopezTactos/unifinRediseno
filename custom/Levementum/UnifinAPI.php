@@ -341,7 +341,7 @@ class UnifinAPI
                 if ($cliente['UNI2_CTE_030_InsertaClienteCompletoResult']['bResultado'] == true) {
                     //Actualizamos el registro a tipo Cliente
                     $tipo_registro = (($objecto->tipo_registro_cuenta_c == '1' || $objecto->tipo_registro_cuenta_c == '4' || $objecto->tipo_registro_cuenta_c == '5') ? $objecto->tipo_registro_cuenta_c : '3');
-                    $objecto->tipo_registro_cuenta_c = $tipo_registro;
+                    //$objecto->tipo_registro_cuenta_c = $tipo_registro;
                     $objecto->sincronizado_unics_c = '1';
                     global $db;
                     //$query = " UPDATE accounts_cstm SET tipo_registro_cuenta_c = '$tipo_registro', sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
