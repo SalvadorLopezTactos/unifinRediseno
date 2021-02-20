@@ -34,6 +34,7 @@ class IntegracionQuantico
             $idActiveDirectory = $beanUser->id_active_directory_c;
             $RequestAmount = $bean->tipo_de_operacion_c=="RATIFICACION_INCREMENTO"?0:$bean->monto_c;
             $IncreaseAmount = $bean->tipo_de_operacion_c=="RATIFICACION_INCREMENTO"?$bean->monto_ratificacion_increment_c:0;
+            $CreditLineId = $bean->tipo_de_operacion_c=="RATIFICACION_INCREMENTO"?$bean->id_linea_credito_c:0;
 
 
             $body = array(
@@ -51,9 +52,9 @@ class IntegracionQuantico
                 "IncreaseAmount" => $IncreaseAmount,
                 "AdviserId" => $idActiveDirectory,
                 "AdviserName" => $bean->assigned_user_name,
-                //"SinglePaymentPercentage"=>$bean->porciento_ri_c,
-                "SinglePaymentPercentage" => '0',
-                "CreditLineId" => '0',
+                "SinglePaymentPercentage"=>$bean->porciento_ri_c,
+                //"SinglePaymentPercentage" => $CreditLineId,
+                "CreditLineId" => $CreditLineId,
                 "BackOfficeId" => str_replace("^", "", $arrayBo[0]),
                 "BackOfficeName" => $app_list_strings['usuario_bo_0'][str_replace("^", "", $arrayBo[0])]
             );
