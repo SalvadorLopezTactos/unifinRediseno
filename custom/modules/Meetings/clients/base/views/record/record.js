@@ -5,6 +5,7 @@
     estadoOriginal: "",
     parentIdOriginal: "",
     invitados: "",
+    MotivoCanc_flag: 0,
 
     initialize: function (options) {
         self = this;
@@ -55,6 +56,7 @@
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
         this.model.addValidationTask('valida_usuarios_vetados',_.bind(this.valida_usuarios_vetados, this));
         this.model.on('sync',this.enableparentname,this);
+        
     },
 
     _render: function (options) {
@@ -79,6 +81,7 @@
         });
         //Desabilita edición del campo Producto
         $('div[data-name=productos_c]').css("pointer-events", "none");
+        
     },
 
     /**
@@ -133,7 +136,7 @@
             }
     },
     CreaMinuta:function(){
-
+        var meetself = this;
         /*if($('.objetivoSelect').length<=0){
             app.alert.show("Objetivo vacio",{
                     level: "error",
@@ -156,6 +159,10 @@
         model.set('minut_minutas_meetingsmeetings_idb',this.model.get('id'));
         model.set('minut_minutas_meetings_name',this.model.get('name'));
         model.set('name',"Minuta"+" "+startDateText+" "+objetivo[this.model.get('objetivo_c')]);
+
+        var parent_meet = this.model.get('parent_type');
+        var parent_id_acc = this.model.get('parent_id');
+
         app.drawer.open({
               layout: 'create',
               context: {
@@ -164,11 +171,12 @@
                     model: model
                 },
             },
-            function(){
-            //alert('Drawer Cerrado');
-                location.reload();
-
-            }
+          function(variable){
+              //alert('Drawer Cerrado');
+              location.reload();
+              //self.MotivoCanc_flag = 1;
+              //self.render();
+          }
         );
         //}
     },
@@ -829,4 +837,5 @@
             this.invitados+=this.model.attributes.invitees.models[i].id + ',';
         }
     },
+
 })

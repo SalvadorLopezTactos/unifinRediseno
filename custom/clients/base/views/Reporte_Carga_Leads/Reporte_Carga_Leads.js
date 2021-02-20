@@ -82,7 +82,7 @@
                 success: _.bind(function (data) {
 
                     for (var i = 0; i < data.Leads.length; i++) {
-                        if (data.Leads[i].regimen_fiscal_c != 'Persona Moral') {
+                        if (data.Leads[i].regimen_fiscal_c != '3') {
                             data.Leads[i].isFisica = true;
                         }
                         else {

@@ -182,19 +182,6 @@ array (
               ),
               2 => 
               array (
-              ),
-              3 => 
-              array (
-                'name' => 'tipo',
-                'label' => 'LBL_TIPO',
-              ),
-              4 => 
-              array (
-                'name' => 'tipo_registro_sf_c',
-                'label' => 'LBL_TIPO_REGISTRO_SF',
-              ),
-              5 => 
-              array (
                 'name' => 'date_entered_by',
                 'readonly' => true,
                 'inline' => true,
@@ -216,6 +203,21 @@ array (
                     'name' => 'created_by_name',
                   ),
                 ),
+              ),
+              3 => 
+              array (
+                'name' => 'tipo',
+                'label' => 'LBL_TIPO',
+              ),
+              4 => 
+              array (
+                'name' => 'tipo_registro_sf_c',
+                'label' => 'LBL_TIPO_REGISTRO_SF',
+              ),
+              5 => 
+              array (
+                'name' => 'tipo_venta_c',
+                'label' => 'LBL_TIPO_VENTA',
               ),
               6 => 
               array (
@@ -573,6 +575,14 @@ array (
                 'name' => 'fecha_fin_c',
                 'label' => 'LBL_FECHA_FIN_C',
               ),
+              10 => 
+              array (
+                'name' => 'participa_kam_c',
+                'label' => 'LBL_PARTICIPA_KAM',
+              ),
+              11 => 
+              array (
+              ),
             ),
           ),
           5 => 
@@ -589,10 +599,16 @@ array (
             array (
               0 => 
               array (
-                'name' => 'description',
+                'name' => 'tipo_cliente_c',
+                'label' => 'LBL_TIPO_CLIENTE',
                 'span' => 12,
               ),
               1 => 
+              array (
+                'name' => 'description',
+                'span' => 12,
+              ),
+              2 => 
               array (
                 'name' => 'date_modified_by',
                 'readonly' => true,
@@ -616,6 +632,18 @@ array (
                   ),
                 ),
                 'span' => 12,
+              ),
+              3 => 
+              array (
+                'name' => 'producto_c',
+                'label' => 'LBL_PRODUCTO',
+                'readonly' => true,
+              ),
+              4 => 
+              array (
+                'name' => 'id_disposicion_c',
+                'label' => 'LBL_ID_DISPOSICION',
+                'readonly' => true,
               ),
             ),
           ),

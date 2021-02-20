@@ -18,6 +18,8 @@
     multiProducto: null,
     productos: null,
     multilinea_prod: null,
+    exist_PRodFinanciero:false,
+
     initialize: function (options) {
         self = this;
         window.bandera = 0;
@@ -27,11 +29,25 @@
             window.bandera = 1;
         });
 
+		this.idAccount=options.context.attributes.idAccount;
+		this.idNameAccount=options.context.attributes.idNameAccount;
+		if(this.idAccount!= undefined || this.idAccount!= null){
+			this.model.set('account_id',this.idAccount);
+			this.model.set('account_name',this.idNameAccount);
+		}
         /*
           Author: Adrian Arauz 2018-08-28
           funcion: Validar acceso para creación de solicitudes. No debe permitir crear solicitudes si usuario tiene rol: "Gestión Comercial"
         */
         this.on('render', this._rolnocreacion, this);
+
+           /*
+          EJC_14/01/2021
+          funcion: Valida tener alguna comunicación previa, llamada o reunión"
+        */
+       this.model.addValidationTask('contacto_previo',  _.bind(this.ContactoPrevio, this));
+
+
         this.model.addValidationTask('buscaDuplicados', _.bind(this.buscaDuplicados, this));
         this.model.addValidationTask('valida_direc_indicador', _.bind(this.valida_direc_indicador, this));
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
@@ -72,6 +88,7 @@
         this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinanceras, this));
         this.model.addValidationTask('setRequiredAforoTipoFactoraje', _.bind(this.setRequiredAforoTipoFactoraje, this));
         //this.model.addValidationTask('check_requeridos', _.bind(this.validaDatosRequeridos, this));
+        this.model.addValidationTask('producto_financiero_c', _.bind(this.reqPrpductoFinanciero, this));
 
         /*
         * @author F. Javier G. Solar
@@ -136,7 +153,7 @@
         //this.getCurrentYearMonth("loading");
         //this.model.on("change:anio_c", _.bind(this.getCurrentYearMonth, this));
         //Evento para el campo monto cuando la solicitud es Credito SOS
-        this.model.on("change:tipo_producto_c", _.bind(this.bloqueamonto, this));
+        this.model.on("change:negocio_c", _.bind(this.bloqueamonto, this));
         this.model.on("change:account_id", _.bind(this.cuenta_asociada, this));
         //Funcion para obtener las oportunidades de leasing de la cuenta asi como valida la lista de productos
         this.set_lista_productos();
@@ -151,9 +168,39 @@
         this.showfieldBenef();
         this.showfieldSuby();
         this.model.addValidationTask('benef_req', _.bind(this.reqBenfArea, this));
+       // this.model.on("change:producto_financiero_c", _.bind(this.producto_financiero, this));
+       // this.Updt_OptionProdFinan(); # se comenta para hacer listas dependiente
+       this.model.on("change:negocio_c", _.bind(this.Updt_OptionProdFinan, this));
+        this.model.on('change:negocio_c', this.verificaOperacionProspecto, this);
 
+
+        this.adminUserCartera();
 
     },
+
+   /* producto_financiero: function () {
+        if(this.model.get('producto_financiero_c') == 43) {
+          $('[data-name="ce_destino_c"]').show();
+          $('[data-name="ce_tasa_c"]').show();
+          $('[data-name="ce_plazo_c"]').show();
+          $('[data-name="ce_moneda_c"]').show();
+          $('[data-name="ce_cambio_c"]').show();
+          $('[data-name="ce_apertura_c"]').show();
+          $('[data-name="ce_comentarios_c"]').show();
+          $('[data-name="credito_estructurado"]').show();
+        }
+        else
+        {
+          $('[data-name="ce_destino_c"]').hide();
+          $('[data-name="ce_tasa_c"]').hide();
+          $('[data-name="ce_plazo_c"]').hide();
+          $('[data-name="ce_moneda_c"]').hide();
+          $('[data-name="ce_cambio_c"]').hide();
+          $('[data-name="ce_apertura_c"]').hide();
+          $('[data-name="ce_comentarios_c"]').hide();
+          $('[data-name="credito_estructurado"]').hide();
+        }
+    },*/
 
     _render: function () {
         this._super("_render");
@@ -359,14 +406,36 @@
         }
         //Oculta etiqueta del campo custom pipeline_opp
         $("div.record-label[data-name='pipeline_opp']").attr('style', 'display:none;');
-        $('[data-name="tct_etapa_ddw_c"]').attr('style','pointer-events:none');
-        $('[data-name="estatus_c"]').attr('style','pointer-events:none');
+        $('[data-name="tct_etapa_ddw_c"]').attr('style', 'pointer-events:none');
+        $('[data-name="estatus_c"]').attr('style', 'pointer-events:none');
 
         //Oculta campo de solicitud para Vobo
         $('[data-name="vobo_descripcion_txa_c"]').hide();
         $('[data-name="director_notificado_c"]').hide();
+        this.$(".record-cell[data-name='blank_space']").hide();
+
+        // Visualiza el campo check de Administracion de cartera del usuario
+        $('[data-name="admin_cartera_c"]').attr('style', 'pointer-events:none');
+
+        if (this.model.get('admin_cartera_c') == true && app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
+            //Bloquea campos de monto cuando es Administrador de cartera
+            $('[data-name="monto_c"]').attr('style', 'pointer-events:none'); //Monto de línea
+            $('[data-name="amount"]').attr('style', 'pointer-events:none'); //Monto a operar
+            $('[data-name="ca_pago_mensual_c"]').attr('style', 'pointer-events:none'); //Pago mensual
+            $('[data-name="ca_importe_enganche_c"]').attr('style', 'pointer-events:none'); //Pago unico
+            $('[data-name="porciento_ri_c"]').attr('style', 'pointer-events:none'); //% Pago unico
+        }
 
     },
+
+    adminUserCartera: function () {
+        //Valida si el usuario es Administrador de cartera y que el servicio este activo en el config_override
+        if (app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
+            this.model.set('admin_cartera_c', true);
+        }
+    },
+
+
     /*
     *Victor Martinez Lopez
     * Valida que no se pueda crear un producto factoraje para personas fisicas
@@ -434,7 +503,7 @@
     },
 
     _ValidateAmount: function (fields, errors, callback) {
-        if (parseFloat(this.model.get('monto_c')) <= 0 && this.model.get('tipo_producto_c') != 7) {
+        if (parseFloat(this.model.get('monto_c')) <= 0 && this.model.get('producto_financiero_c') != 40 && this.model.get('admin_cartera_c') != true) {
             errors['monto_c'] = errors['monto_c'] || {};
             errors['monto_c'].required = true;
 
@@ -555,9 +624,14 @@
     buscaDuplicados: function (fields, errors, callback) {
         var cliente = this.model.get('account_id');
         var tipo = this.model.get('tipo_producto_c');
+        var producto = this.model.get('producto_financiero_c');
+        var negocio = this.model.get('negocio_c');
+
         var args = {
             'account_id': cliente,
-            'tipo_producto_c': tipo
+            'tipo_producto_c': tipo,
+            'producto_financiero_c': producto,
+            'negocio_c': negocio
         };
         var opportunities = app.api.buildURL("getOpportunities", '', {}, {});
         app.api.call("create", opportunities, {data: args}, {
@@ -653,25 +727,63 @@
                 var producto = parseInt(this.model.get('tipo_producto_c'));
                 switch (producto) {
                     case 3:
-                        id:promotor = modelo.get('user_id2_c');
+                        id_promotor = modelo.get('user_id2_c');
+                        name_promotor = modelo.attributes.promotorcredit_c;
                         break;
                     case 4:
-                        id:promotor = modelo.get('user_id1_c');
+                        id_promotor = modelo.get('user_id1_c');
+                        name_promotor = modelo.attributes.promotorfactoraje_c;
                         break;
                     case 6:
-                        id:promotor = modelo.get('user_id6_c');
+                        id_promotor = modelo.get('user_id6_c');
+                        name_promotor = modelo.attributes.promotorfleet_c;
                         break;
                     case 8:
-                        id:promotor = modelo.get('user_id7_c');
+                        id_promotor = modelo.get('user_id7_c');
+                        name_promotor = modelo.attributes.promotoruniclick_c;
                         break;
                     case 9:
-                        id:promotor = modelo.get('user_id7_c');
+                        id_promotor = modelo.get('user_id7_c');
+                        name_promotor = modelo.attributes.promotoruniclick_c;
                         break;
                     default:
-                        id:promotor = modelo.get('user_id_c');
+                        id_promotor = modelo.get('user_id_c');
+                        name_promotor = modelo.attributes.promotorleasing_c;
+                        //seteo de asesor RM al campo asesor_rm_c
+                        id_RM= modelo.get('user_id8_c');
+                        name_promotorRM = modelo.attributes.promotorrm_c;
+                        this.model.set("user_id1_c", id_RM);
+                        this.model.set("asesor_rm_c", name_promotorRM);
                         break;
                 }
-                var usuario = app.data.createBean('Users', {id: promotor});
+
+                if( parseInt(this.model.get('negocio_c'))==10)
+                {
+                    id_promotor = modelo.get('user_id7_c');
+                    name_promotor = modelo.attributes.promotoruniclick_c;
+                }
+                if( parseInt(this.model.get('producto_financiero_c'))==43)
+                {
+                    id_promotor = app.user.id;
+                    name_promotor = app.user.attributes.full_name;
+
+                }
+                if( parseInt(this.model.get('producto_financiero_c'))==40)
+                {
+                    id_promotor = modelo.get('user_id_c');
+                    name_promotor = modelo.attributes.promotorleasing_c;
+                }
+                //Agrega asesor solo con privilegios de Admin Cartera
+                if (this.model.get('admin_cartera_c') == true && app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
+
+                    id_promotor = app.user.id;
+                    name_promotor = app.user.attributes.full_name;
+                }
+
+                this.model.set("assigned_user_id", id_promotor);
+                this.model.set("assigned_user_name", name_promotor);
+
+                /*var usuario = app.data.createBean('Users', {id: promotor});
                 usuario.fetch({
                     success: _.bind(function (data) {
                         if (data.get('id') != undefined) {
@@ -680,7 +792,7 @@
                         }
                     }, this)
                 });
-
+*/
                 //Verificamos la lista a mostrar:
                 this.tipo = modelo.get('tipo_registro_cuenta_c');
                 //console.log("Registro: " + modelo.get('tipo_registro_c'));
@@ -755,6 +867,7 @@
     },
 
     _ActualizaEtiquetas: function () {
+        self.model.set('negocio_c','0');
         if (this.model.get('tipo_producto_c') == '4') {
             this.$("div.record-label[data-name='plazo_c']").text("Plazo máximo en d\u00EDas");
             this.$("div.record-label[data-name='porcentaje_ca_c']").text("Comisi\u00F3n");
@@ -1067,12 +1180,12 @@
     },
 
     setRequiredAforoTipoFactoraje: function (fields, errors, callback) {
-        if(this.model.get('tipo_producto_c')=='4' && this.model.get('tct_oportunidad_perdida_chk_c')==false && $('[data-name="f_tipo_factoraje_c"]').is(':visible')){
+        if (this.model.get('tipo_producto_c') == '4' && this.model.get('tct_oportunidad_perdida_chk_c') == false && $('[data-name="f_tipo_factoraje_c"]').is(':visible')) {
             errors['f_tipo_factoraje_c'] = errors['f_tipo_factoraje_c'] || {};
             errors['f_tipo_factoraje_c'].required = true;
         }
 
-        if(this.model.get('tipo_producto_c')=='4' && this.model.get('tct_oportunidad_perdida_chk_c')==false && $('[data-name="f_aforo_c"]').is(':visible')){
+        if (this.model.get('tipo_producto_c') == '4' && this.model.get('tct_oportunidad_perdida_chk_c') == false && $('[data-name="f_aforo_c"]').is(':visible')) {
             errors['f_aforo_c'] = errors['f_aforo_c'] || {};
             errors['f_aforo_c'].required = true;
         }
@@ -1159,43 +1272,50 @@
         var tipo_registro;
         //id de la Persona asociada
         var id_person = this.model.get('account_id');
-        //Recupera productos asociados
-        if (id_person && id_person != '' && id_person.length > 0) {
-            app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + id_person), null, {
-                success: _.bind(function (data) {
-                    if (data != null) {
-                        //Procesa registros
-                        Productos = data;
-                        var tipoCuentaLabel = app.lang.getAppListStrings('tipo_registro_cuenta_list');
-                        var tipoCuenta = "";
-                        var tipoProducto = this.model.get('tipo_producto_c');
-                        _.each(Productos, function (value, key) {
-                            var tipoProductoIterado = Productos[key].tipo_producto;
-                            if (tipoProducto == tipoProductoIterado) {
-                                tipoCuenta = Productos[key].tipo_cuenta;
-                            }
+        // Valida que sea diferente de Credito simple
+        if(this.model.get('tipo_producto_c')!='2')
+        {
+            //Recupera productos asociados
+            if (id_person && id_person != '' && id_person.length > 0 ) {
+                app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + id_person), null, {
+                    success: _.bind(function (data) {
+                        if (data != null) {
+                            //Procesa registros
+                            Productos = data;
+                            var tipoCuentaLabel = app.lang.getAppListStrings('tipo_registro_cuenta_list');
+                            var tipoCuenta = "";
+                            var tipoProducto = this.model.get('tipo_producto_c');
+                            _.each(Productos, function (value, key) {
+                                var tipoProductoIterado = Productos[key].tipo_producto;
+                                if (tipoProducto == tipoProductoIterado) {
+                                    tipoCuenta = Productos[key].tipo_cuenta;
+                                }
 
-                        });
+                            });
                         if (tipoCuenta != "2" && tipoCuenta != "3") {
                             app.alert.show("Cliente no v\u00E1lido", {
-                                level: "error",
-                                title: "No se puede asociar la operaci\u00F3n a una Cuenta de tipo: " + tipoCuentaLabel[tipoCuenta],
-                                autoClose: false
-                            });
+                                    level: "error",
+                                    title: "No se puede asociar la operaci\u00F3n a una Cuenta de tipo: " + tipoCuentaLabel[tipoCuenta],
+                                    autoClose: false
+                                });
 
-                            app.error.errorName2Keys['custom_message1'] = 'La cuenta asociada debe ser tipo Cliente o Prospecto';
-                            errors['account_name_5'] = errors['account_name_5'] || {};
-                            errors['account_name_5'].custom_message1 = true;
+                                app.error.errorName2Keys['custom_message1'] = 'La cuenta asociada debe ser tipo Cliente o Prospecto';
+                                errors['account_name_5'] = errors['account_name_5'] || {};
+                                errors['account_name_5'].custom_message1 = true;
+                            }
                         }
-                    }
-                    callback(null, fields, errors);
-                }, self),
-            });
-        } else {
-            app.error.errorName2Keys['custom_message1'] = 'La persona asociada debe ser tipo Cliente o Prospecto';
-            errors['account_name_6'] = errors['account_name_6'] || {};
-            errors['account_name_6'].custom_message1 = true;
-            errors['account_name_6'].required = true;
+                        callback(null, fields, errors);
+                    }, self),
+                });
+            } else {
+                app.error.errorName2Keys['custom_message1'] = 'La persona asociada debe ser tipo Cliente o Prospecto';
+                errors['account_name_6'] = errors['account_name_6'] || {};
+                errors['account_name_6'].custom_message1 = true;
+                errors['account_name_6'].required = true;
+                callback(null, fields, errors);
+            }
+        }
+        else {
             callback(null, fields, errors);
         }
     },
@@ -1226,24 +1346,36 @@
         $('[data-name="idsolicitud_c"]').show();
         $('[data-name="account_name"]').show();
         $('[data-name="tipo_producto_c"]').show();
+       // $('[data-name="producto_financiero_c"]').show();
+        $('[data-name="negocio_c"]').show();
         $('[data-name="monto_c"]').show();
         $('[data-name="assigned_user_name"]').show();
         $('[data-name="picture"]').show();
         $('[data-name="tct_numero_vehiculos_c"]').show();
+        $('[data-name="lic_licitaciones_opportunities_1_name"]').show();
+
+        //Se visualiza campo de Administrador cartera solo si el usuario tiene activo el check
+        if (app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
+            $('[data-name="admin_cartera_c"]').show();
+        }
 
         /**Muestra campos de area Beneficiada y Subyacente **/
-       /* $('[data-name="estado_benef_c"]').show();
-        $('[data-name="municipio_benef_c"]').show();
-        $('[data-name="ent_gob_benef_c"]').show();
-        $('[data-name="cuenta_benef_c"]').show();
-        $('[data-name="emp_no_reg_benef_c"]').show();
-        $('[data-name="estado_suby_c"]').show();
-        $('[data-name="municipio_suby_c"]').show();
-        $('[data-name="ent_gob_suby_c"]').show();
-        $('[data-name="otro_suby_c"]').show();*/
-               //Ocultando el panel de Oportunidad perdida
+        /* $('[data-name="estado_benef_c"]').show();
+         $('[data-name="municipio_benef_c"]').show();
+         $('[data-name="ent_gob_benef_c"]').show();
+         $('[data-name="cuenta_benef_c"]').show();
+         $('[data-name="emp_no_reg_benef_c"]').show();
+         $('[data-name="estado_suby_c"]').show();
+         $('[data-name="municipio_suby_c"]').show();
+         $('[data-name="ent_gob_suby_c"]').show();
+         $('[data-name="otro_suby_c"]').show();*/
+        //Ocultando el panel de Oportunidad perdida
         $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
-
+        $("div[data-name='seguro_desempleo_c']").remove();
+        $("div[data-name='porciento_ri_c']").remove();
+        $('div[data-panelname="LBL_RECORDVIEW_PANEL2"]').addClass('hide');
+        $('div[data-panelname="LBL_RECORDVIEW_PANEL3"]').addClass('hide');
+        $('div[data-panelname="LBL_RECORDVIEW_PANEL4"]').addClass('hide');
 
     },
 
@@ -1412,6 +1544,36 @@
                 }
             }
         }
+    },
+
+    /*
+      Author: EJC 2021/01/14
+      funcion: Valida comunicación previa llamada o reunión nivel cuentas"
+    */
+   ContactoPrevio: function (fields, errors, callback) {
+
+        if(this.model.get('tipo_producto_c') == '1'){
+           app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + this.model.get('account_id')), null, {
+                success: _.bind(function (data) {
+                    obj = JSON.parse(data);
+                    if ( obj.total_account == 0) {
+                        app.alert.show("Sin comunicación previa", {
+                            level: "error",
+                            title: "No puede generar una Solicitud ya que no se tiene una llamada o reunión previa.",
+                            autoClose: false,
+                            return: false,
+                        });
+                        app.drawer.closeImmediately();
+                    }else{
+                        callback(null, fields, errors);
+                    }
+                }, this)
+
+	    	});
+        }else{
+            callback(null, fields, errors);
+        }
+
     },
 
     /*@Jesus Carrillo
@@ -1586,60 +1748,60 @@
             }
         }
 
-        //Eliminar los productos CS, CA y Linea de Credito de la Lista
+        //Eliminar los productos Unilease, Credito sos Lista
         Object.keys(op2).forEach(function (key) {
-            if (key == 2 || key == 5 || key == 3) {
+            if (key == 9 || key == 7 || key == "0" || key == 8) {
                 delete op2[key];
             }
         });
         this.model.fields['tipo_producto_c'].options = op2;
-      
-        var i=0;
+
+        var i = 0;
         for (var prop in op2) {
-            if(prop==4 && i==0){ //Se valida i=0 para comprobar la primera posición, equivalente a op2[0]
+            if (prop == 4 && i == 0) { //Se valida i=0 para comprobar la primera posición, equivalente a op2[0]
                 this.model.set('tipo_producto_c', '4');
-            }else if (prop == 1 && i==0) {
-              
+            } else if (prop == 1 && i == 0) {
+
                 //Solo hacer set al modelo, cuando en las opciones del campo se tenga el producto s setear
-                if(this.model.fields['tipo_producto_c'].options[prop]!=undefined){
+                if (this.model.fields['tipo_producto_c'].options[prop] != undefined) {
                     this.model.set('tipo_producto_c', '1');
                 }
                 //Solo agregar el producto 7 CRÉDITO SOS, cuando éste valor se encuentre en la lista de opciones del campo
-                if(7 in this.model.fields['tipo_producto_c'].options){
+                if (7 in this.model.fields['tipo_producto_c'].options) {
                     this.model.set('tipo_producto_c', '7');
                 }
                 //console.log("LEASING");
-            } else if (prop == 3 && i==0) {
+            } else if (prop == 3 && i == 0) {
                 this.model.set('tipo_producto_c', '3');
                 //console.log("AUTMOTRIZ");
-            } else if (prop == 2 && i==0) {
+            } else if (prop == 2 && i == 0) {
                 this.model.set('tipo_producto_c', '3');
                 //console.log("3");
             }
-            else if (prop == 5 && i==0) {
+            else if (prop == 5 && i == 0) {
                 this.model.set('tipo_producto_c', '5');
                 //console.log("5");
             }
-            else if (prop == 6 && i==0) {
+            else if (prop == 6 && i == 0) {
                 this.model.set('tipo_producto_c', '6');
                 //console.log("5");
             }
-            else if (prop == 8 && i==0) {//Uniclick
+            else if (prop == 8 && i == 0) {//Uniclick
 
-                if(8 in this.model.fields['tipo_producto_c'].options){
+                if (8 in this.model.fields['tipo_producto_c'].options) {
                     this.model.set('tipo_producto_c', '8');
                 }
 
-                if(9 in this.model.fields['tipo_producto_c'].options){
+                if (9 in this.model.fields['tipo_producto_c'].options) {
                     this.model.set('tipo_producto_c', '9');
                 }
             }
-            else if (prop == 9 && i==0) {//Unilease
-                if(8 in this.model.fields['tipo_producto_c'].options){
+            else if (prop == 9 && i == 0) {//Unilease
+                if (8 in this.model.fields['tipo_producto_c'].options) {
                     this.model.set('tipo_producto_c', '8');
                 }
 
-                if(9 in this.model.fields['tipo_producto_c'].options){
+                if (9 in this.model.fields['tipo_producto_c'].options) {
                     this.model.set('tipo_producto_c', '9');
                 }
 
@@ -1714,7 +1876,7 @@
     },
 
     bloqueamonto: function () {
-        if (this.model.get('tipo_producto_c') == 7) {
+        if (this.model.get('negocio_c') == '2') {
             $('[name="monto_c"]').prop("disabled", true);
             this.model.set('monto_c', 0);
             this.model.set('tct_etapa_ddw_c', "P");
@@ -1724,7 +1886,6 @@
             this.model.set('tct_etapa_ddw_c', "SI");
             this.model.set('estatus_c', "");
         }
-
     },
     //Evento para ejecutar la
     cuenta_asociada: function () {
@@ -1766,29 +1927,29 @@
         }
     },
 
-    setValidacionComercial: function (fields, errors, callback){
-        if(this.model.get('tipo_producto_c')==1 && this.model.get('tct_etapa_ddw_c')=="SI" && $.isEmptyObject(errors)){
-            var operacion=this.model.get('tipo_de_operacion_c');
-            var producto= this.model.get('tipo_producto_c');
-            var etapa= this.model.get('tct_etapa_ddw_c');
-            var status= this.model.get('estatus_c');
-            var cuenta=this.model.get('account_id');
+    setValidacionComercial: function (fields, errors, callback) {
+        if (this.model.get('tipo_producto_c') == 1 && (this.model.get('negocio_c') == 5 || this.model.get('negocio_c') == 3) && (this.model.get('producto_financiero_c') == "" || this.model.get('producto_financiero_c') == "0") && this.model.get('tct_etapa_ddw_c') == "SI" && $.isEmptyObject(errors)) {
+            var operacion = this.model.get('tipo_de_operacion_c');
+            var producto = this.model.get('tipo_producto_c');
+            var etapa = this.model.get('tct_etapa_ddw_c');
+            var status = this.model.get('estatus_c');
+            var cuenta = this.model.get('account_id');
 
-            if (producto== "1" && operacion == 'LINEA_NUEVA' && etapa=="SI" && status!='K'){
+            if (producto == "1" && operacion == 'LINEA_NUEVA' && etapa == "SI" && status != 'K') {
                 app.api.call('GET', app.api.buildURL('productoExcluye/' + cuenta + "/" + producto), null, {
                     success: _.bind(function (data) {
-                        if(data=='1'){
+                        if (data == '1') {
                             console.log('Recupera check excluye');
-                        }else{
+                        } else {
                             this.model.set('estatus_c', "1");
                         }
                         callback(null, fields, errors);
                     }, self),
                 });
-            }else{
+            } else {
                 callback(null, fields, errors);
             }
-        }else{
+        } else {
             callback(null, fields, errors);
         }
     },
@@ -2026,4 +2187,54 @@
 
     },
 
+    Updt_OptionProdFinan: function () {
+        self.model.set('producto_financiero_c','0');
+        /** Recuperamos los productos financieros activo**/
+        if (this.model.get('tipo_producto_c') != "" && this.model.get('negocio_c') != "") {
+            var tipo_producto = this.model.get('tipo_producto_c');
+            var tipo_negocio = this.model.get('negocio_c');
+
+            app.api.call("read", app.api.buildURL("GetProductosFinancieros/" + tipo_producto, null, null, {}), null, {
+                success: _.bind(function (data) {
+                    var temp_array = [];
+                    if (data != "") {
+                        for (var i = 0; i < data.length; i++) {
+                            if (data[i].disponible_seleccion == 1 && data[i].negocio== tipo_negocio) {
+                                temp_array.push(data[i].producto_financiero);
+                            }
+                        }
+                        var optionsProdFinan = app.lang.getAppListStrings('producto_financiero_list');
+                        Object.keys(optionsProdFinan).forEach(function (key) {
+                            if (!temp_array.includes(key)) {
+                                delete optionsProdFinan[key];
+                            }
+                        });
+                        self.model.fields['producto_financiero_c'].options = optionsProdFinan;
+                        self.render();
+                        if (temp_array != "") {
+                            $('[data-name="producto_financiero_c"]').show();
+                         self.exist_PRodFinanciero=true;
+                        }
+                        else {
+                            $('[data-name="producto_financiero_c"]').hide();
+                            self.exist_PRodFinanciero=false;
+                        }
+                    }
+                    else {
+                        $('[data-name="producto_financiero_c"]').hide();
+                    }
+                }, self),
+            });
+        }
+    },
+
+    reqPrpductoFinanciero: function (fields, errors, callback) {
+        var productofinan = this.model.get('producto_financiero_c');
+
+        if (this.exist_PRodFinanciero   && productofinan == "0") {
+            errors['producto_financiero_c'] = errors['producto_financiero_c'] || {};
+            errors['producto_financiero_c'].required = true;
+        }
+        callback(null, fields, errors);
+    },
 })

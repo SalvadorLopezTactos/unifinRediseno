@@ -1,0 +1,61 @@
+<?php
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+$mod_strings = array (
+  'LBL_TEAM' => 'Équipes',
+  'LBL_TEAMS' => 'Équipes',
+  'LBL_TEAM_ID' => 'Équipe (ID)',
+  'LBL_ASSIGNED_TO_ID' => 'ID utilisateur assigné',
+  'LBL_ASSIGNED_TO_NAME' => 'Assigné à',
+  'LBL_TAGS_LINK' => 'Tags',
+  'LBL_TAGS' => 'Tags',
+  'LBL_ID' => 'ID',
+  'LBL_DATE_ENTERED' => 'Date de création',
+  'LBL_DATE_MODIFIED' => 'Date de modification',
+  'LBL_MODIFIED' => 'Modifié par',
+  'LBL_MODIFIED_ID' => 'Modifié par (ID)',
+  'LBL_MODIFIED_NAME' => 'Modifié par Nom',
+  'LBL_CREATED' => 'Créé par',
+  'LBL_CREATED_ID' => 'Créé par (ID)',
+  'LBL_DOC_OWNER' => 'Propriétaire du document',
+  'LBL_USER_FAVORITES' => 'Favoris pour les utilisateurs suivants',
+  'LBL_DESCRIPTION' => 'Description',
+  'LBL_DELETED' => 'Supprimé',
+  'LBL_NAME' => 'Nom',
+  'LBL_CREATED_USER' => 'Créé par',
+  'LBL_MODIFIED_USER' => 'Modifié par',
+  'LBL_LIST_NAME' => 'Nom',
+  'LBL_EDIT_BUTTON' => 'Éditer',
+  'LBL_REMOVE' => 'Supprimer',
+  'LBL_EXPORT_MODIFIED_BY_NAME' => 'Modifié par Nom',
+  'LBL_COMMENTLOG' => 'Comment Log',
+  'LBL_LIST_FORM_TITLE' => 'Estructura de Productos Catalogue',
+  'LBL_MODULE_NAME' => 'Estructura de Productos',
+  'LBL_MODULE_TITLE' => 'Estructura de Productos',
+  'LBL_MODULE_NAME_SINGULAR' => 'Estructura de Producto',
+  'LBL_HOMEPAGE_TITLE' => 'Mes Estructura de Productos',
+  'LNK_NEW_RECORD' => 'Créer Estructura de Producto',
+  'LNK_LIST' => 'Afficher Estructura de Productos',
+  'LNK_IMPORT_PROD_ESTRUCTURA_PRODUCTOS' => 'Importar Estructura de Productos',
+  'LBL_SEARCH_FORM_TITLE' => 'Recherche Estructura de Producto',
+  'LBL_HISTORY_SUBPANEL_TITLE' => 'Historique',
+  'LBL_ACTIVITIES_SUBPANEL_TITLE' => 'Activités',
+  'LBL_PROD_ESTRUCTURA_PRODUCTOS_SUBPANEL_TITLE' => 'Estructura de Productos',
+  'LBL_NEW_FORM_TITLE' => 'Nouveau Estructura de Producto',
+  'LNK_IMPORT_VCARD' => 'Importar Estructura de Producto vCard',
+  'LBL_IMPORT' => 'Importar Estructura de Productos',
+  'LBL_IMPORT_VCARDTEXT' => 'Automatically create a new Estructura de Producto record by importing a vCard from your file system.',
+  'LBL_TIPO_PRODUCTO' => 'Tipo de Producto',
+  'LBL_NEGOCIO' => 'Negocio',
+  'LBL_PRODUCTO_FINANCIERO' => 'Producto Financiero',
+  'LBL_EMPRESA' => 'Empresa',
+  'LBL_DISPONIBLE_SELECCION' => 'Disponible para Selección',
+);

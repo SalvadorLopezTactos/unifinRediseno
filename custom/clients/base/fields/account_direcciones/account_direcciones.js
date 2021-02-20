@@ -31,7 +31,6 @@
         'change .ciudadExisting': 'updateValueCiudadDE',     //Actualiza ciudad a modelo
         'click .principal': 'updatePrincipalDE',     //Actualiza principal a modelo
         'click .inactivo': 'updateInactivoDE',     //Actualiza inactivo a modelo
-
     },
 
     initialize: function (options) {
@@ -40,7 +39,7 @@
         options.def = options.def || {};
         cont_dir = this;
         this._super('initialize', [options]);
-
+        this.principal = 1;
         //Declaración de variables
         this.paises_list = {};
         this.estados_list = [];
@@ -61,17 +60,35 @@
         this.def.listTipo = App.lang.getAppListStrings('dir_tipo_unique_list');
         this.def.listMapIndicador = App.lang.getAppListStrings('dir_indicador_map_list');
         this.def.listIndicador = App.lang.getAppListStrings('dir_indicador_unique_list');
-
+        //Valida perfil de usuario para ocultar dirección fiscal
+        this.accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
+        if (this.accesoFiscal > 0) this.bloqueado = 0;
         //Declaración de validation Tasks
         this.model.addValidationTask('check_multiple_fiscal', _.bind(this._doValidateDireccionIndicador, this));
-
         //Declaración de modelo para nueva dirección
         this.nuevaDireccion = this.limpiaNuevaDireccion();
-
+        this.cont_render = 0;
     },
 
     _render: function () {
         this._super("_render");
+        if (this.accesoFiscal == 0 && this.model.get('tipo_registro_cuenta_c') != 4 && this.cont_render == 0) {
+          var auxindicador = new Object();
+          for (var [key, value] of Object.entries(this.def.listIndicador)) {
+            if(key != "2"){
+              auxindicador[key]  = value;
+            }
+          }
+          this.cont_render = 1;
+          this.def.listIndicador = auxindicador;
+          this.nuevaDireccion.listIndicador = this.def.listIndicador;
+          this.render();
+        }
+        else {
+          this.def.listIndicador = App.lang.getAppListStrings('dir_indicador_unique_list');
+          this.nuevaDireccion.listIndicador = this.def.listIndicador;
+          this.cont_render = 0;
+        }
     },
 
     getInfoAboutCP: function (evt) {
@@ -603,7 +620,7 @@
         } else {
             this.$('.newNumExt').css('border-color', '');
         }
-		
+
 		if (this.nuevaDireccion.inactivo == "0" ) {
             errorMsg += '<br><b>Número Exterior</b>';
             dirError = true;
@@ -785,8 +802,12 @@
               this.nuevaDireccion.indicador = key;
             }
         }
-        //Actualiza modelo
-        this.nuevaDireccion.indicadorSeleccionados = '^'+indicadorSeleccionados.replace(/,/gi, "^,^")+'^';
+
+		var res = indicadorSeleccionados.split(",");
+
+			//Actualiza modelo
+			this.nuevaDireccion.indicadorSeleccionados = '^'+indicadorSeleccionados.replace(/,/gi, "^,^")+'^';
+
     },
 
     _getTipoDireccion: function (idSelected, valuesSelected) {
@@ -1212,6 +1233,7 @@
     updateValueCalle: function(evt) {
         //Recupera valor
         calle = this.$('.newCalle').val();
+		calle = calle.toUpperCase();
         //Limipa borde
         this.$('.newCalle').css('border-color', '');
         //Actualiza modelo
@@ -1221,6 +1243,7 @@
     updateValueNumExt: function(evt) {
         //Recupera valor
         numExt = this.$('.newNumExt').val();
+		numExt = numExt.toUpperCase();
         //Limpia borde
         this.$('.newNumExt').css('border-color', '');
         //Actualiza modelo
@@ -1230,6 +1253,7 @@
     updateValueNumInt: function(evt) {
         //Recupera valor
         numInt = this.$('.newNumInt').val();
+		numInt = numInt.toUpperCase();
         //Actualiza modelo
         this.nuevaDireccion.numint = numInt;
     },
@@ -1286,7 +1310,8 @@
             "inactivo":"",
             "secuencia":"",
             "id":"",
-            "direccionCompleta":""
+            "direccionCompleta":"",
+			      "bloqueado":""
         };
         return nuevaDireccion;
 
@@ -1299,6 +1324,7 @@
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
         var calle = input.val();
+		calle = calle.toUpperCase();
         //Actualiza modelo
         this.oDirecciones.direccion[index].calle = calle;
     },
@@ -1309,6 +1335,7 @@
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
         var numExt = input.val();
+		numExt = numExt.toUpperCase();
         //Actualiza modelo
         this.oDirecciones.direccion[index].numext = numExt;
     },
@@ -1323,6 +1350,7 @@
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
         var numInt = input.val();
+		numInt = numInt.toUpperCase();
         //Actualiza modelo
         this.oDirecciones.direccion[index].numint = numInt;
     },
@@ -1371,9 +1399,20 @@
               this.oDirecciones.direccion[index].indicador = key;
             }
         }
+
+    		//Actualiza modelo
+  			this.oDirecciones.direccion[index].indicadorSeleccionados = "";
+  			this.oDirecciones.direccion[index].indicadorSeleccionados = '^'+indicadorSeleccionados.replace(/,/gi, "^,^")+'^';
+    		var res = indicadorSeleccionados.split(",");
+    		var bloqueado = (res.indexOf('2')!=-1) ? 1 : 0;
+        if (this.accesoFiscal > 0) bloqueado = 0;
+    		this.oDirecciones.direccion[index].bloqueado = bloqueado;
+    		this.render();
+    		document.getElementsByClassName("multi1_n_existing")[index].focus();
+    		document.getElementsByClassName("postalInputTempExisting")[index].focus();
         //Actualiza modelo
-        this.oDirecciones.direccion[index].indicadorSeleccionados = "";
-        this.oDirecciones.direccion[index].indicadorSeleccionados = '^'+indicadorSeleccionados.replace(/,/gi, "^,^")+'^';
+        //this.oDirecciones.direccion[index].indicadorSeleccionados = "";
+        //this.oDirecciones.direccion[index].indicadorSeleccionados = '^'+indicadorSeleccionados.replace(/,/gi, "^,^")+'^';
     },
 
     /**
@@ -1436,4 +1475,5 @@
           }
           this.render();
     },
+
 })

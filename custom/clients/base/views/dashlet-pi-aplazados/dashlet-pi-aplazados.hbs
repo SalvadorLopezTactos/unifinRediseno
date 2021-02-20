@@ -1,0 +1,21 @@
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <td><b>Nombre Cuenta</b></td>            
+            <td><b>Nombre Solicitud</b></td>            
+            <td><b>Acciones</b></td>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each dataAccSolicitudesAplazados}}
+        <tr>
+            <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
+            <td><a href="#Opportunities/{{idOpp}}" id="idLeads" target="_blank">{{oppNombre}}</a></td>
+            <td>
+                <button class="btn btn btnNoViableAplazados" id="btnNoViableAplazados" type="submit" title="{{idCuenta}}">Establecer No viable</button>
+                <a href="#Opportunities/{{idOpp}}" style="margin-top: 2px;" id="btnProspIntExpAplazado" target="_blank" class="btn" rel="tooltip">Convertir a prospecto integración de expediente</a>
+            </td>  
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

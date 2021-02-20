@@ -201,7 +201,7 @@ SQL;
                 $telefono->assigned_user_id = $bean->assigned_user_id;
                 $telefono->team_set_id = $bean->team_set_id;
                 $telefono->team_id = $bean->team_id;
-                $telefono->whatsapp_c = ($a_telefono['tipotelefono']==3 || $a_telefono['tipotelefono']==4) && $a_telefono['whatsapp_c'] == 1 ? 1 : 0;
+                $telefono->whatsapp_c = ($a_telefono['tipotelefono'] == 3 || $a_telefono['tipotelefono'] == 4) && $a_telefono['whatsapp_c'] == 1 ? 1 : 0;
                 $current_id_list[] = $telefono->save();
             }
             //retrieve all related records
@@ -683,18 +683,18 @@ SQL;
 
     public function textToUppperCase($bean = null, $event = null, $args = null)
     {
-      if ($_REQUEST['module'] != 'Import') {
-        foreach ($bean as $field => $value) {
-          if ($bean->field_defs[$field]['type'] == 'varchar' && $field != 'encodedkey_mambu_c' && $field != 'path_img_qr_c' && $field != 'salesforce_id_c') {
-               $value = mb_strtoupper($value, "UTF-8");
-               $bean->$field = $value;
-          }
-          if ($bean->field_defs[$field]['name'] == 'name') {
-               $value = mb_strtoupper($value, "UTF-8");
-               $bean->$field = $value;
-          }
+        if ($_REQUEST['module'] != 'Import') {
+            foreach ($bean as $field => $value) {
+                if ($bean->field_defs[$field]['type'] == 'varchar' && $field != 'encodedkey_mambu_c' && $field != 'path_img_qr_c' && $field != 'salesforce_id_c') {
+                    $value = mb_strtoupper($value, "UTF-8");
+                    $bean->$field = $value;
+                }
+                if ($bean->field_defs[$field]['name'] == 'name') {
+                    $value = mb_strtoupper($value, "UTF-8");
+                    $bean->$field = $value;
+                }
+            }
         }
-      }
     }
 
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/19/2015 Description: Logic hook to call WS Actualiza persona en UNICS*/
@@ -1253,8 +1253,8 @@ where rfc_c = '{$bean->rfc_c}' and
             $beanprod = null;
 
             $module = 'uni_Productos';
-            $key_productos = array('1', '4', '3', '6', '8', '7', '9', '10');
-            $name_productos = array('-LEASING', '-FACTORAJE', '-CRÉDITO AUTOMOTRIZ', '-FLEET', '-UNICLICK', '-CRÉDITO SOS', '-UNILEASE', '-SEGUROS');
+            $key_productos = array('1', '4', '3', '6', '8', '10');
+            $name_productos = array('-LEASING', '-FACTORAJE', '-CRÉDITO AUTOMOTRIZ', '-FLEET', '-UNICLICK', '-SEGUROS');
             $count = count($name_productos);
             $current_prod = null;
             $fechaAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
@@ -1312,6 +1312,12 @@ where rfc_c = '{$bean->rfc_c}' and
                         break;
                     case '10': //Seguros
                         $beanprod->assigned_user_id = '1';
+                        break;
+                    case '2': //Credito Simple
+                        $beanprod->assigned_user_id = $bean->user_id_c;
+                        break;
+                    case '12': //Credito Revolvente
+                        $beanprod->assigned_user_id = $bean->user_id7_c;
                         break;
                 }
                 //Guarda registro y vincula a cuenta
@@ -1388,6 +1394,8 @@ where rfc_c = '{$bean->rfc_c}' and
 
     public function set_account_mambu($bean = null, $event = null, $args = null)
     {
+        $GLOBALS['log']->fatal('--------------MAMBU INICIA-----------------');
+
         global $sugar_config, $app_list_strings;
         $bank = $app_list_strings['banco_list'];
         //Cliente con Línea Vigente: 3,18
@@ -1449,6 +1457,40 @@ where rfc_c = '{$bean->rfc_c}' and
             if (count($array_cta_bancaria) > 0) {
                 $body['_cuentas_bancarias_clientes'] = $array_cta_bancaria;
             }
+            //Obtener solicitudes par identificar si existe alguna con Unifactor
+            $es_unificator = false;
+            if ($bean->load_relationship('opportunities')) {
+                //Fetch related beans
+                $solicitudesFinan = $bean->opportunities->getBeans();
+                if (!empty($solicitudesFinan)) {
+                    foreach ($solicitudesFinan as $sfinan) {
+                        if ($sfinan->producto_financiero_c == '50') {
+                            $es_unificator = true;
+                        }
+                    }
+                }
+            }
+
+            if ($es_unificator) {
+                $body_relacionados = array();
+                if ($bean->load_relationship('rel_relaciones_accounts')) {
+                    //Fetch related beans
+                    $relaciones = $bean->rel_relaciones_accounts->getBeans();
+                    if (!empty($relaciones)) {
+                        foreach ($relaciones as $rel) {
+                            $beanCuentaEmail = BeanFactory::retrieveBean('Accounts', $rel->account_id1_c, array('disable_row_level_security' => true));
+                            $item_relacionado=array(
+                                "_guid_relacionado_cl"=> $rel->account_id1_c,
+                                "_correo_relacionado_cl" => $beanCuentaEmail->email1,
+                                "_nombre_relacionado_cl" =>$rel->name,
+                                "_figura_relacionado_cl" => str_replace("^","",$rel->relaciones_activas)
+                            );
+                            array_push($body_relacionados,$item_relacionado);
+                        }
+                    }
+                }
+                $body['_relacionados_cliente'] = $body_relacionados;
+            }
             $GLOBALS['log']->fatal(json_encode($body));
             $callApi = new UnifinAPI();
             $resultado = $callApi->postMambu($url, $body, $auth_encode);
@@ -1456,21 +1498,91 @@ where rfc_c = '{$bean->rfc_c}' and
             $GLOBALS['log']->fatal($resultado);
             if (!empty($resultado['encodedKey'])) {
                 $bean->encodedkey_mambu_c = $resultado['encodedKey'];
+            }else{
+                //Mandar notificación a emails de la lista de studio
+                global $app_list_strings;
+                $cuentas_email=array();
+                $lista_correos = $app_list_strings['emails_error_mambu_list'];
+                //Recorriendo lista de emails
+                foreach ($lista_correos as $key => $value) {
+                    array_push($cuentas_email,$lista_correos[$key]);
+                }
+                //$cuenta_email=$lista_correos['1'];
+                $bodyEmail=$this->estableceCuerpoCorreoErrorMambu($body,$resultado);
+                //Enviando correo
+                $this->enviarNotificacionErrorMambu("Notificación: Petición hacia Mambú generada sin éxito",$bodyEmail,$cuentas_email,"Admin");
             }
             //Obtener solicitudes
             if ($bean->load_relationship('opportunities')) {
                 //Fetch related beans
                 $solicitudes = $bean->opportunities->getBeans();
                 if (!empty($solicitudes)) {
+                    $available_financiero=array("39","41","50","49","48","51");
                     foreach ($solicitudes as $sol) {
                         //Disparar integración hacia mambú de solicitudes para estatus AUTORIZADA
-                        if ($sol->tipo_producto_c == '8' && $sol->tct_id_mambu_c == "" && $sol->estatus_c == 'N') {
+                        if (in_array($sol->producto_financiero_c,$available_financiero ) && $sol->tct_id_mambu_c == "" && $sol->estatus_c == 'N') {## cambiar por pPF
                             $sol->save();
                         }
                     }
                 }
             }
         }
+    }
+
+    public function enviarNotificacionErrorMambu($asunto,$cuerpoCorreo,$correos,$nombreUsuario){
+        //Enviando correo a asesor origen
+        $GLOBALS['log']->fatal("ENVIANDO CORREO DE ERROR MAMBU A :".$correo);
+        $insert = '';
+        $hoy = date("Y-m-d H:i:s");
+        try{
+            $mailer = MailerFactory::getSystemDefaultMailer();
+            $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+            $mailer->setSubject($asunto);
+            $body = trim($cuerpoCorreo);
+            $mailer->setHtmlBody($body);
+            $mailer->clearRecipients();
+            for ($i=0; $i < count($correos); $i++) {
+                $GLOBALS['log']->fatal("AGREGANDO CORREOS DESTINATARIOS: ".$correos[$i]);
+                $mailer->addRecipientsTo(new EmailIdentity($correos[$i], $nombreUsuario));
+            }
+            //$mailer->addRecipientsTo(new EmailIdentity($correo, $nombreUsuario));
+            $result = $mailer->send();
+
+        } catch (Exception $e){
+            $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email ".$nombreUsuario);
+            $GLOBALS['log']->fatal("Exception ".$e);
+
+        } catch (MailerException $me) {
+            $message = $me->getMessage();
+            switch ($me->getCode()) {
+                case \MailerException::FailedToConnectToRemoteServer:
+                    $GLOBALS["log"]->fatal("BeanUpdatesMailer :: error sending email, system smtp server is not set");
+                    break;
+                default:
+                    $GLOBALS["log"]->fatal("BeanUpdatesMailer :: error sending e-mail (method: {$mailTransmissionProtocol}), (error: {$message})");
+                    break;
+            }
+        }
+
+    }
+
+    public function estableceCuerpoCorreoErrorMambu($contenidoPeticion,$contenidoError){
+
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>Estimado usuario</b><br> 
+        Se le informa que se ha producido un error en la petición hacia Mambú, el cual se detalla de la siguiente forma:<br><br>'.json_encode($contenidoError).'
+      <br><br>En donde la petición enviada fue la siguiente:<br><br>'.json_encode($contenidoPeticion).'
+      <br><br>Atentamente Unifin</font></p>
+      <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
+
+      <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
+      <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+       Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+       Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+       No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+       Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br /> </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a> </span><u></u><u></u></p>';
+
+        return $mailHTML;
+
     }
 
     /******Funcion para guardar los valores del campo Puesto al campo de Puesto_Descriptivo*****/
@@ -1736,22 +1848,22 @@ where rfc_c = '{$bean->rfc_c}' and
 
         if (($txt_empleados > 0) && (!empty($txt_empleados))) {
 
-            if (($txt_empleados > 0) && ($txt_empleados <=10)) {
+            if (($txt_empleados > 0) && ($txt_empleados <= 10)) {
                 $bean_account->empleados_c = '0a10';
             }
-            if (($txt_empleados > 10) && ($txt_empleados <=50)) {
+            if (($txt_empleados > 10) && ($txt_empleados <= 50)) {
                 $bean_account->empleados_c = '11a50';
             }
-            if (($txt_empleados > 50) && ($txt_empleados <=100)) {
+            if (($txt_empleados > 50) && ($txt_empleados <= 100)) {
                 $bean_account->empleados_c = '51a100';
             }
-            if (($txt_empleados > 100) && ($txt_empleados <=250)) {
+            if (($txt_empleados > 100) && ($txt_empleados <= 250)) {
                 $bean_account->empleados_c = '101a250';
             }
-            if (($txt_empleados > 250) && ($txt_empleados <=500)) {
+            if (($txt_empleados > 250) && ($txt_empleados <= 500)) {
                 $bean_account->empleados_c = '251a500';
             }
-            if (($txt_empleados > 500) && ($txt_empleados <=1000)) {
+            if (($txt_empleados > 500) && ($txt_empleados <= 1000)) {
                 $bean_account->empleados_c = '501a1000';
             }
             if ($txt_empleados > 1000) {

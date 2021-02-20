@@ -1,5 +1,5 @@
 <?php
-// created: 2020-05-16 02:25:41
+// created: 2021-01-18 16:46:00
 $searchFields['Opportunities'] = array (
   'name' => 
   array (
@@ -210,6 +210,10 @@ $searchFields['Opportunities'] = array (
     'query_type' => 'default',
   ),
   'closed_revenue_line_items' => 
+  array (
+    'query_type' => 'default',
+  ),
+  'credito_estructurado' => 
   array (
     'query_type' => 'default',
   ),

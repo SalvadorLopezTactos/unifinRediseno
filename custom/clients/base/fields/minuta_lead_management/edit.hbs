@@ -1,0 +1,80 @@
+<!--
+
+-->
+<!-- Campo para desplegar Lead Management en minuta:Edición -->
+<div style="border: 2px solid #055993;border-radius: 12px;padding:10px;">
+  <!-- Table list-->
+  <div class="list-view">
+    <table id="tableReferencias" class="table table-striped">
+      <thead>
+        <tr bgcolor="#0679c8" style="color:#fff">
+          <th style='text-align:center'>Lead Management</th></tr>
+      </thead>
+      <tbody>
+		<tr><td> 
+			<div style="display: inline-flex;padding: 5px; ">
+            	<label  style=" font-weight:bold;font-size: 15px; color: black; padding: 5px 5px;">Seleccione la opción deseada:</label>
+		    </div>
+		</td></tr>
+	
+			<tr>
+        	<td>
+        	<div class="SegundaReunion" >
+			    <div class="opciones" id="opciones" style="padding: 5px;">
+			      	<input class="presolicitud" id="presolicitud" type="radio" value="presolicitud" name="me_option">&nbsp;&nbsp;Registrar presolicitud
+			      	<br><br>
+			      	<input class="cancelado" id="cancelado" type="radio" value="cancelado" name="me_option">&nbsp;&nbsp;Cancelar Cuenta
+			    </div>
+			      <br><br>
+			    <div class="motivos" id="motivos" style="display: none; padding: 5px;">
+			      	<div class="razon_noviable" id="razon_noviable" style="display:inline-block;padding: 5px;">
+			      		Razón No Viable:&nbsp;
+			      		<select name="RazonNoViable" id="RazonNoViable" class="select2">
+			      			{{{razon_nv_list}}}
+			      		</select>
+			      	</div>
+			      	<div class="fuera_perfil" id="fuera_perfil" style="display: none; padding: 5px;" >
+			      		Fuera de Perfil:&nbsp;
+			      		<select name="FueradePerfil" id="FueradePerfil" class="select2">
+			      			{{{fuera_perfil_list}}}
+			      		</select>
+			      	</div>
+			      	<div class="cond_financieras" id="cond_financieras" style="display: none; padding: 5px;">
+			      		Condiciones Financieras:&nbsp;
+			      		<select name="condFinancieras" id="condFinancieras" class="select2">
+			      			{{{condiciones_financieras_list}}}
+			      		</select>
+			      	</div>
+			      	<div class="competencia_quien" id="competencia_quien" style="display: none; padding: 5px;">
+			      		¿Quién?:&nbsp;
+			      		<input type="text" class="comp_quien" id="comp_quien" data-field="comp_quien" />
+			      	</div>
+			      	<div class="competencia_porque" id="competencia_porque" style="display: none; padding: 5px;">
+			      		¿Por qué?:&nbsp;
+			      		<input type="text" class="comp_porque" id="comp_porque" data-field="comp_porque" />
+			      	</div>
+			      	<div class="no_product" id="no_product" style="display: none; padding: 5px;">
+			      		¿Qué producto?:&nbsp;
+			      		<select name="noProducto" id="noProducto" class="select2">
+			      			{{{no_producto_list}}}
+			      		</select>
+			      	</div>
+			      	<div class="otro_producto" id="otro_producto" style="display: none; padding: 5px;" >
+			      		Otro producto:&nbsp;
+			      		<input type="text" class="otroProducto" id="otroProducto" data-field="otroProducto" />
+			      	</div>
+			        <div class="no_interesado" id="no_interesado" style="display: none; padding: 5px;">
+			        	No se encuentra interesado:&nbsp;
+			        	<select name="noInteresado" id="noInteresado" class="select2">
+			        		{{{no_interesado_list}}}
+			        	</select>
+			        </div>
+			    </div>
+        	</div>
+        	</td>
+        	</tr>
+
+      </tbody>
+    </table>
+</div>
+

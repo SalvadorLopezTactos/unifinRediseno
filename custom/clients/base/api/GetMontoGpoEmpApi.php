@@ -36,7 +36,7 @@ class GetMontoGpoEmpApi extends SugarApi
             $result1 = $GLOBALS['db']->query($query1);
             $num_rows = $result1->num_rows;
             $resultApi['numCuentasGpoEmp'] = $num_rows;
-            
+
             $query = "SELECT a.parent_id,a.name,ap.account_id,opp.id,opp.name,oppc.tipo_producto_c,oppc.monto_c as monto
             from accounts a
             inner join accounts_cstm ac on a.id = ac.id_c
@@ -44,7 +44,8 @@ class GetMontoGpoEmpApi extends SugarApi
             inner join opportunities opp on opp.id = ap.opportunity_id AND opp.deleted=0
             inner join opportunities_cstm oppc on oppc.id_c = opp.id
             where (a.id = '{$parentID}' or a.parent_id = '{$parentID}')
-            and oppc.estatus_c = 'N'";
+            and oppc.estatus_c = 'N'
+            and oppc.tipo_operacion_c = '2' -- Línea de crédito";
             // $GLOBALS['log']->fatal("query ".$query);
             $result = $GLOBALS['db']->query($query);
 

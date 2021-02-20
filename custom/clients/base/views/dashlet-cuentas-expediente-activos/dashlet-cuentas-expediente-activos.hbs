@@ -1,0 +1,31 @@
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <td><b>Nombre Cuenta</b></td>
+            <td><b>Tipo</b></td>
+            <td><b>Subtipo</b></td>
+            <td><b>Monto</b></td>
+			<td><b>Fecha Asignación</b></td>
+			<td><b>Etapa</b></td>
+            <td><b>Estatus Producto</b></td>
+            <td><b>Acciones</b></td>			
+        </tr>
+    </thead>
+    <tbody>
+        {{#each dataCuentasExpActivo}}
+        <tr>
+            <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
+            <td>{{#if tipoCuenta}}{{getUnifinListValue 'tipo_registro_cuenta_list' tipoCuenta}}{{/if}}</td>
+            <td>{{#if subtipoCuenta}}{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipoCuenta}}{{/if}}</td>
+			<td>{{Monto}}</td>
+			<td>{{fecha_asignacion}}</td>
+			<td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>
+            <td>{{#if EstatusProducto}}{{getUnifinListValue 'status_management_list' EstatusProducto}}{{/if}}</td>
+            <td>
+                <button class="btn btn btnNoViableExpActivo" id="btnNoViableExpActivo" type="submit" title="{{idCuenta}}">Establecer No viable</button>
+                <a href="#Accounts/{{idCuenta}}" id="btnCompExpActivo" style="margin-top: 2px;" target="_blank" class="btn" rel="tooltip">Completar Expediente</a>
+            </td>  
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

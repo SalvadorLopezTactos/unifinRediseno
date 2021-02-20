@@ -207,13 +207,14 @@ class ResumenClienteAPI extends SugarApi
         );
         //Clasificacion Sectorial INEGI
         $arr_principal['inegi'] = array(
-            "inegi_rama" => "",
-            "inegi_subrama" => "",
-            "inegi_sector" => "",
-            "inegi_subsector" => "",
             "inegi_clase" => "",
-            "inegi_descripcion" => "",
+            "inegi_subrama" => "",
+            "inegi_rama" => "",
+            "inegi_subsector" => "",
+            "inegi_sector" => "",
+            "inegi_macro" => "",            
             "inegi_acualiza_uni2" => ""
+            // "inegi_descripcion" => "",
         );
 
         //String operaciones
@@ -296,7 +297,7 @@ class ResumenClienteAPI extends SugarApi
                     //Agrega Operaciones asociadas
                     $operaciones_ids .= ",'$opps->id'";
                     //Control para leasing
-                    if ($opps->tipo_producto_c == 1) {
+                    if ($opps->tipo_producto_c == 1 && $opps->negocio_c == 5 && ($opps->producto_financiero_c == 0 || $opps->producto_financiero_c == "")) {
                         $linea_aut_leasing += $opps->monto_c;
                         $linea_disp_leasing += $opps->amount;
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
@@ -331,7 +332,7 @@ class ResumenClienteAPI extends SugarApi
                     }
 
                     //Control para factoring
-                    if ($opps->tipo_producto_c == 4) {
+                    if ($opps->tipo_producto_c == 4 && $opps->negocio_c == 4 && ($opps->producto_financiero_c == 0 || $opps->producto_financiero_c == "")) {
                         $linea_aut_factoring += $opps->monto_c;
                         $linea_disp_factoring += $opps->amount;
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
@@ -399,7 +400,7 @@ class ResumenClienteAPI extends SugarApi
                     }
 
                     // Control para crédito sos
-                    if ($opps->tipo_producto_c == 7) {
+                    if ($opps->producto_financiero_c == 40) {
                         $linea_aut_sos += $opps->monto_c;
                         $linea_disp_sos += $opps->amount;
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
@@ -425,7 +426,7 @@ class ResumenClienteAPI extends SugarApi
                     }
 
                     //control para Uniclick
-                    if ($opps->tipo_producto_c == 8 && $opps->estatus_c != 'K') {
+                    if ($opps->negocio_c == 10 && $opps->estatus_c != 'K') {
                         $linea_aprox_uniclick += $opps->monto_c;
     					          $linea_disp_sos += $opps->amount;
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
@@ -448,7 +449,7 @@ class ResumenClienteAPI extends SugarApi
                     }
 
                     //Control para Unilease
-                    if ($opps->tipo_producto_c == 9 && $opps->estatus_c != 'K') {
+                    if ($opps->producto_financiero_c == 41 && $opps->estatus_c != 'K') {
                         $linea_aprox_unilease += $opps->monto_c;
                         $linea_disp_sos += $opps->amount;
                         /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
@@ -750,13 +751,14 @@ class ResumenClienteAPI extends SugarApi
                 $arr_principal['unilease']['fecha_pago']= $beanResumen->cauto_fecha_pago;
 
                 //Recupera Clasificación Sectorial INEGI
-                $arr_principal['inegi']['inegi_rama'] = $beanResumen->inegi_rama_c;
-                $arr_principal['inegi']['inegi_subrama'] = $beanResumen->inegi_subrama_c;
-                $arr_principal['inegi']['inegi_sector'] = $beanResumen->inegi_sector_c;
-                $arr_principal['inegi']['inegi_subsector'] = $beanResumen->inegi_subsector_c;
                 $arr_principal['inegi']['inegi_clase'] = $beanResumen->inegi_clase_c;
-                $arr_principal['inegi']['inegi_descripcion'] = $beanResumen->inegi_descripcion_c;
+                $arr_principal['inegi']['inegi_subrama'] = $beanResumen->inegi_subrama_c;
+                $arr_principal['inegi']['inegi_rama'] = $beanResumen->inegi_rama_c;
+                $arr_principal['inegi']['inegi_subsector'] = $beanResumen->inegi_subsector_c;
+                $arr_principal['inegi']['inegi_sector'] = $beanResumen->inegi_sector_c;
+                $arr_principal['inegi']['inegi_macro'] = $beanResumen->inegi_macro_c;
                 $arr_principal['inegi']['inegi_acualiza_uni2'] = $beanResumen->inegi_acualiza_uni2_c;
+                // $arr_principal['inegi']['inegi_descripcion'] = $beanResumen->inegi_descripcion_c;
             }
         }
 

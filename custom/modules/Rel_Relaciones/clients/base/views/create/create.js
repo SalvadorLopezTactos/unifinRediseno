@@ -621,15 +621,15 @@
                                     if (data.nacionalidad_c == "") {
                                         RequeridosPR = RequeridosPR + '<b>Nacionalidad<br></b>';
                                     }
-                                    if (data.tct_macro_sector_ddw_c == "") {
-                                        RequeridosPR = RequeridosPR + '<b>Macro Sector<br></b>';
-                                    }
-                                    if (data.sectoreconomico_c == "") {
-                                        RequeridosPR = RequeridosPR + '<b>Sector Económico<br></b>';
-                                    }
-                                    if (data.subsectoreconomico_c == "") {
-                                        RequeridosPR = RequeridosPR + '<b>Subsector Económico<br></b>';
-                                    }
+                                    // if (data.tct_macro_sector_ddw_c == "") {
+                                    //     RequeridosPR = RequeridosPR + '<b>Macro Sector<br></b>';
+                                    // }
+                                    // if (data.sectoreconomico_c == "") {
+                                    //     RequeridosPR = RequeridosPR + '<b>Sector Económico<br></b>';
+                                    // }
+                                    // if (data.subsectoreconomico_c == "") {
+                                    //     RequeridosPR = RequeridosPR + '<b>Subsector Económico<br></b>';
+                                    // }
                                     if (data.actividadeconomica_c == "") {
                                         RequeridosPR = RequeridosPR + '<b>Actividad Económica<br></b>';
                                     }
@@ -768,18 +768,18 @@
                         if (data.nacionalidad_c == "") {
                             Requeridoschange = Requeridoschange + '<b>Nacionalidad<br></b>';
                         }
-                        if (data.tct_macro_sector_ddw_c == "") {
-                            Requeridoschange = Requeridoschange + '<b>Macro Sector<br></b>';
-                        }
-                        if (data.sectoreconomico_c == "") {
-                            Requeridoschange = Requeridoschange + '<b>Sector Económico<br></b>';
-                        }
-                        if (data.sectoreconomico_c == "") {
-                            Requeridoschange = Requeridoschange + '<b>Sector Económico<br></b>';
-                        }
-                        if (data.subsectoreconomico_c == "") {
-                            Requeridoschange = Requeridoschange + '<b>Subsector Económico<br></b>';
-                        }
+                        // if (data.tct_macro_sector_ddw_c == "") {
+                        //     Requeridoschange = Requeridoschange + '<b>Macro Sector<br></b>';
+                        // }
+                        // if (data.sectoreconomico_c == "") {
+                        //     Requeridoschange = Requeridoschange + '<b>Sector Económico<br></b>';
+                        // }
+                        // if (data.sectoreconomico_c == "") {
+                        //     Requeridoschange = Requeridoschange + '<b>Sector Económico<br></b>';
+                        // }
+                        // if (data.subsectoreconomico_c == "") {
+                        //     Requeridoschange = Requeridoschange + '<b>Subsector Económico<br></b>';
+                        // }
                         if (data.actividadeconomica_c == "") {
                             Requeridoschange = Requeridoschange + '<b>Actividad Económica<br></b>';
                         }
@@ -862,7 +862,8 @@
             errors['faltantescuenta'].required = true;
             callback(null, fields, errors);
         }else{
-            if (this.model.get('relaciones_activas').includes('Proveedor de Recursos L') || this.model.get('relaciones_activas').includes('Proveedor de Recursos F') || this.model.get('relaciones_activas').includes('Proveedor de Recursos CA') && this.model.get("relacion_c").trim()!= "") {
+            if (this.model.get('relaciones_activas').includes('Proveedor de Recursos L') || this.model.get('relaciones_activas').includes('Proveedor de Recursos F') 
+            || this.model.get('relaciones_activas').includes('Proveedor de Recursos CA') || this.model.get('relaciones_activas').includes('Proveedor de Recursos CR') && this.model.get("relacion_c").trim()!= "") {
 
                 app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("rel_relaciones_accounts_1accounts_ida")), null, {
                     success: _.bind(function (data) {
@@ -884,41 +885,38 @@
                                         if (data.fechadenacimiento_c == "") {
                                             RequeridosProvRec = RequeridosProvRec + '<b>-Fecha de Nacimiento<br></b>';
                                         }
-                                        if (data.nacionalidad_c == "") {
+                                        if (data.nacionalidad_c == "0") {
                                             RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
                                         }
-                                        if (data.tct_macro_sector_ddw_c == "") {
-                                            RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
+                                        if (data.rfc_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
                                         }
-                                        if (data.sectoreconomico_c == "") {
-                                            RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
+                                        if (data.tct_pais_expide_rfc_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-País que expide el RFC o equivalente<br></b>';
                                         }
-                                        if (data.subsectoreconomico_c == "") {
-                                            RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';
+                                        if (data.curp_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-CURP<br></b>';
                                         }
-                                        if (data.actividadeconomica_c == "") {
-                                            RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
+                                        if (data.profesion_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-Profesión<br></b>';
                                         }
-                                        if(data.rfc_c == "" && data.curp_c == "" && data.ctpldnoseriefiel_c == "" ){
-                                            RequeridosProvRec = RequeridosProvRec + '<b><br>Al menos la captura de alguno de estos campos:<br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br></b>';
+                                        if (data.ctpldnoseriefiel_c == "" ) {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-No. Serie FIEL<br></b>';
                                         }
-                                        if (data.tipo_registro_cuenta_c!= '4') {
-                                            app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
+                                        app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                                 success: _.bind(function (data) {
-
                                                     var flag_inactivo =0;
                                                     for(var i=0;i<data.records.length;i++){
                                                         if(data.records[i].inactivo==true){
                                                             flag_inactivo++;
                                                         }   
                                                     }
-
                                                     if (data.records.length <= flag_inactivo) {
-                                                        for (var d = 0; d < data.records.length; d++) {
-                                                            if (!data.records[d].tipodedireccion.includes("1") && !data.records[d].tipodedireccion.includes("3") && !data.records[d].tipodedireccion.includes("5") && !data.records[d].tipodedireccion.includes("7")) {
-                                                                RequeridosProvRec = RequeridosProvRec + '<b>-Dirección Particular<br></b>';
-                                                            }
-                                                        }
+                                                        //for (var d = 0; d < data.records.length; d++) {
+                                                            //if (!data.records[d].tipodedireccion.includes("1") && !data.records[d].tipodedireccion.includes("3") && !data.records[d].tipodedireccion.includes("5") && !data.records[d].tipodedireccion.includes("7")) {
+                                                                RequeridosProvRec = RequeridosProvRec + '<b>-Dirección<br></b>';
+                                                            //}
+                                                        //}
                                                     }
                                                     if (RequeridosProvRec != "") {
                                                         app.alert.show("Campos faltantes en cuenta", {
@@ -928,14 +926,10 @@
                                                         });
                                                         errors['faltantescuenta'] = errors['faltantescuenta'] || {};
                                                         errors['faltantescuenta'].required = true;
-
                                                     }
                                                     callback(null, fields, errors);
                                                 }, this)
-                                            });
-                                        }else{
-                                            callback(null, fields, errors);
-                                        }
+                                        });
                                     }else {
                                         if (data.razonsocial_c == "") {
                                             RequeridosProvRec = RequeridosProvRec + '<b>-Denominación o Razón Social<br></b>';
@@ -952,17 +946,23 @@
                                         if (data.rfc_c == "") {
                                             RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
                                         }
-                                        if (data.tipo_registro_cuenta_c!= '4') {
-                                            app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
-                                                success: _.bind(function (data) {
-                                                    
+                                        if (data.tct_pais_expide_rfc_c == "") {
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-País que expide el RFC o equivalente<br></b>';
+                                        }
+                                        if (data.ctpldnoseriefiel_c == "" ){
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-No. Serie FIEL<br></b>';
+                                        }
+                                        if (data.actividadeconomica_c == "" ){
+                                            RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
+                                        }
+                                        app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
+                                                success: _.bind(function (data) {                                                    
                                                     var flag_inactivo =0;
                                                     for(var i=0;i<data.records.length;i++){
                                                         if(data.records[i].inactivo==true){
                                                             flag_inactivo++;
-                                                        }   
+                                                        }
                                                     }
-
                                                     if (data.records.length <= flag_inactivo) {
                                                         RequeridosProvRec = RequeridosProvRec + '<b>-Domicilio<br></b>';
                                                     }
@@ -974,32 +974,26 @@
                                                         });
                                                         errors['errorpersonamoral'] = errors['errorpersonamoral'] || {};
                                                         errors['errorpersonamoral'].required = true;
-
                                                     }
                                                     callback(null, fields, errors);
                                                 }, this)
-                                            });
-                                        }else{
-                                            callback(null, fields, errors);
-                                        }
+                                        });
                                     }
                                 }, this)
                             });
-
-
                         }
                     }, this)
                 });
-            }else {
+            } else {
                 callback(null, fields, errors);
             }
         }
-
     },
 
     validaProveedorRecursoschange: function (){
         var RequeridosProvRec = "";
-        if ((this.model.get('relaciones_activas').includes('Proveedor de Recursos L') || this.model.get('relaciones_activas').includes('Proveedor de Recursos F') || this.model.get('relaciones_activas').includes('Proveedor de Recursos CA')) && this.model.get("relacion_c").trim()!= "") {
+        if ((this.model.get('relaciones_activas').includes('Proveedor de Recursos L') || this.model.get('relaciones_activas').includes('Proveedor de Recursos F') || 
+            this.model.get('relaciones_activas').includes('Proveedor de Recursos CA')) || this.model.get('relaciones_activas').includes('Proveedor de Recursos CR') && this.model.get("relacion_c").trim()!= "") {
 
             app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("rel_relaciones_accounts_1accounts_ida")), null, {
                 success: _.bind(function (data) {
@@ -1021,33 +1015,32 @@
                                     if (data.fechadenacimiento_c == "") {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-Fecha de Nacimiento<br></b>';
                                     }
-                                    if (data.nacionalidad_c == "") {
+                                    if (data.nacionalidad_c == "0") {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
                                     }
-                                    if (data.tct_macro_sector_ddw_c == "") {
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-Macro Sector<br></b>';
+                                    if (data.rfc_c == "") {
+                                        RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
                                     }
-                                    if (data.sectoreconomico_c == "") {
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-Sector Económico<br></b>';
+                                    if (data.tct_pais_expide_rfc_c == "") {
+                                        RequeridosProvRec = RequeridosProvRec + '<b>-País que expide el RFC o equivalente<br></b>';
                                     }
-                                    if (data.subsectoreconomico_c == "") {
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-Subsector Económico<br></b>';
+                                    if (data.curp_c == "") {
+                                        RequeridosProvRec = RequeridosProvRec + '<b>-CURP<br></b>';
                                     }
-                                    if (data.actividadeconomica_c == "") {
-                                        RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
+                                    if (data.profesion_c == "") {
+                                        RequeridosProvRec = RequeridosProvRec + '<b>-Profesión<br></b>';
                                     }
-                                    if(data.rfc_c == "" && data.curp_c == "" && data.ctpldnoseriefiel_c == "" ){
-                                        RequeridosProvRec = RequeridosProvRec + '<b><br>Al menos la captura de alguno de estos campos:<br>-RFC<br>-CURP<br>-Firma Electrónica Avanzada<br></b>';
+                                    if (data.ctpldnoseriefiel_c == "" ) {
+                                        RequeridosProvRec = RequeridosProvRec + '<b>-No. Serie FIEL<br></b>';
                                     }
-                                    if (data.tipo_registro_cuenta_c!= '4') {
-                                        app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
+                                    app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                             success: _.bind(function (data) {
                                                 if (data.records.length > 0) {
-                                                    for (var d = 0; d < data.records.length; d++) {
-                                                        if (!data.records[d].tipodedireccion.includes("1") && !data.records[d].tipodedireccion.includes("3") && !data.records[d].tipodedireccion.includes("5") && !data.records[d].tipodedireccion.includes("7")) {
-                                                            RequeridosProvRec = RequeridosProvRec + '<b>-Dirección Particular<br></b>';
-                                                        }
-                                                    }
+                                                    //for (var d = 0; d < data.records.length; d++) {
+                                                        //if (!data.records[d].tipodedireccion.includes("1") && !data.records[d].tipodedireccion.includes("3") && !data.records[d].tipodedireccion.includes("5") && !data.records[d].tipodedireccion.includes("7")) {
+                                                            RequeridosProvRec = RequeridosProvRec + '<b>-Dirección<br></b>';
+                                                        //}
+                                                    //}
                                                 }
                                                 if (RequeridosProvRec != "") {
                                                     app.alert.show("Campos faltantes en cuenta", {
@@ -1056,24 +1049,29 @@
                                                         autoClose: false
                                                     });
                                                 }
-                                                Relacionaccionistareturn;
+                                                return;
                                             }, this)
                                         });
-                                    }else{
-                                        return;
-                                    }
                                 }else {
                                     if (data.razonsocial_c == "") {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-Denominación o Razón Social<br></b>';
                                     }
-                                    if (data.nacionalidad_c == "") {
+                                    if (data.nacionalidad_c == "0") {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-Nacionalidad<br></b>';
                                     }
                                     if (data.rfc_c == "") {
                                         RequeridosProvRec = RequeridosProvRec + '<b>-RFC<br></b>';
                                     }
-                                    if (data.tipo_registro_cuenta_c!= '4') {
-                                        app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
+                                    if (data.tct_pais_expide_rfc_c == "") {
+                                        RequeridosProvRec = RequeridosProvRec + '<b>-País que expide el RFC o equivalente<br></b>';
+                                    }
+                                    if (data.ctpldnoseriefiel_c == "" ){
+                                        RequeridosProvRec = RequeridosProvRec + '<b>-No. Serie FIEL<br></b>';
+                                    }
+                                    if (data.actividadeconomica_c == "" ){
+                                        RequeridosProvRec = RequeridosProvRec + '<b>-Actividad Económica<br></b>';
+                                    }
+                                    app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                             success: _.bind(function (data) {
                                                 if (data.records <= 0) {
                                                     RequeridosProvRec = RequeridosProvRec + '<b>-Domicilio<br></b>';
@@ -1084,14 +1082,10 @@
                                                         messages: 'Hace falta completar la siguiente información en la cuenta ' + '<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c') + '  </a>' + 'para una relación tipo <b>Proveedor de Recursos</b>:<br> ' + RequeridosProvRec,
                                                         autoClose: false
                                                     });
-
                                                 }
                                                 return;
                                             }, this)
-                                        });
-                                    }else{
-                                        return;
-                                    }
+                                    });
                                 }
                             }, this)
                         });
@@ -1100,6 +1094,7 @@
             });
         }
     },
+
     //Funcion para validar campos requeridos de relacion tipo Aval, Accionista y Representante
     validaRelacionesChange: function (){
         var requests=[];
@@ -1189,12 +1184,12 @@
                                 }
                                 //Validación PFAE
                                 if (data[0].contents.tipodepersona_c != "Persona Fisica") {
-                                  if (data[0].contents.sectoreconomico_c == "") {
-                                      faltantes.push('Sector Económico');
-                                  }
-                                  if (data[0].contents.subsectoreconomico_c == "") {
-                                      faltantes.push('Sub Sector Económico');
-                                  }
+                                //   if (data[0].contents.sectoreconomico_c == "") {
+                                //       faltantes.push('Sector Económico');
+                                //   }
+                                //   if (data[0].contents.subsectoreconomico_c == "") {
+                                //       faltantes.push('Sub Sector Económico');
+                                //   }
                                   if (data[0].contents.actividadeconomica_c == "") {
                                       faltantes.push('Actividad Económica');
                                   }
@@ -1209,18 +1204,18 @@
                                 if (data[0].contents.fechaconstitutiva_c == "") {
                                     faltantes.push('Fecha Constitutiva');
                                 }
-                                if (data[0].contents.sectoreconomico_c == "") {
-                                    faltantes.push('Sector Económico');
-                                }
+                                // if (data[0].contents.sectoreconomico_c == "") {
+                                //     faltantes.push('Sector Económico');
+                                // }
                                 if (data[0].contents.actividadeconomica_c == "") {
                                     faltantes.push('Actividad Económica');
                                 }
-                                if (data[0].contents.subsectoreconomico_c == "") {
-                                    faltantes.push('Sub Sector Económico');
-                                }
-                                if (data[0].contents.subsectoreconomico_c == "") {
-                                    faltantes.push('Sub Sector Económico');
-                                }
+                                // if (data[0].contents.subsectoreconomico_c == "") {
+                                //     faltantes.push('Sub Sector Económico');
+                                // }
+                                // if (data[0].contents.subsectoreconomico_c == "") {
+                                //     faltantes.push('Sub Sector Económico');
+                                // }
                                 if (data[0].contents.pais_nacimiento_c == "") {
                                     faltantes.push('País de Constitución');
                                 }
@@ -1457,12 +1452,12 @@
                                 }
                                 //Validación PFAE
                                 if (data[0].contents.tipodepersona_c != "Persona Fisica") {
-                                  if (data[0].contents.sectoreconomico_c == "") {
-                                      faltantes.push('Sector Económico');
-                                  }
-                                  if (data[0].contents.subsectoreconomico_c == "") {
-                                      faltantes.push('Sub Sector Económico');
-                                  }
+                                //   if (data[0].contents.sectoreconomico_c == "") {
+                                //       faltantes.push('Sector Económico');
+                                //   }
+                                //   if (data[0].contents.subsectoreconomico_c == "") {
+                                //       faltantes.push('Sub Sector Económico');
+                                //   }
                                   if (data[0].contents.actividadeconomica_c == "") {
                                       faltantes.push('Actividad Económica');
                                   }
@@ -1480,15 +1475,15 @@
                                 if (data[0].contents.fechaconstitutiva_c == "") {
                                     faltantes.push('Fecha Constitutiva');
                                 }
-                                if (data[0].contents.sectoreconomico_c == "") {
-                                    faltantes.push('Sector Económico');
-                                }
+                                // if (data[0].contents.sectoreconomico_c == "") {
+                                //     faltantes.push('Sector Económico');
+                                // }
                                 if (data[0].contents.actividadeconomica_c == "") {
                                     faltantes.push('Actividad Económica');
                                 }
-                                if (data[0].contents.subsectoreconomico_c == "") {
-                                    faltantes.push('Sub Sector Económico');
-                                }
+                                // if (data[0].contents.subsectoreconomico_c == "") {
+                                //     faltantes.push('Sub Sector Económico');
+                                // }
                                 if (data[0].contents.pais_nacimiento_c == "") {
                                     faltantes.push('País de Constitución');
                                 }
@@ -1586,9 +1581,9 @@
                                   if (data[0].contents.nombre_comercial_c == "") {
                                       faltantes.push('Nombre Comercial');
                                   }
-                                  if (data[0].contents.subsectoreconomico_c == "") {
-                                      faltantes.push('Sub Sector Económico');
-                                  }
+                                //   if (data[0].contents.subsectoreconomico_c == "") {
+                                //       faltantes.push('Sub Sector Económico');
+                                //   }
                                   if (data[0].contents.actividadeconomica_c == "") {
                                       faltantes.push('Actividad Económica');
                                   }
@@ -1609,9 +1604,9 @@
                                 if (data[0].contents.actividadeconomica_c == "") {
                                     faltantes.push('Actividad Económica');
                                 }
-                                if (data[0].contents.subsectoreconomico_c == "") {
-                                    faltantes.push('Sub Sector Económico');
-                                }
+                                // if (data[0].contents.subsectoreconomico_c == "") {
+                                //     faltantes.push('Sub Sector Económico');
+                                // }
                                 if (data[0].contents.pais_nacimiento_c == "") {
                                     faltantes.push('País de Constitución');
                                 }
@@ -1786,12 +1781,12 @@
                                   if (data[0].contents.nombre_comercial_c == "") {
                                       faltantes.push('Nombre Comercial');
                                   }
-                                  if (data[0].contents.sectoreconomico_c == "") {
-                                      faltantes.push('Sector Económico');
-                                  }
-                                  if (data[0].contents.subsectoreconomico_c == "") {
-                                      faltantes.push('Sub Sector Económico');
-                                  }
+                                //   if (data[0].contents.sectoreconomico_c == "") {
+                                //       faltantes.push('Sector Económico');
+                                //   }
+                                //   if (data[0].contents.subsectoreconomico_c == "") {
+                                //       faltantes.push('Sub Sector Económico');
+                                //   }
                                   if (data[0].contents.actividadeconomica_c == "") {
                                       faltantes.push('Actividad Económica');
                                   }
@@ -1812,12 +1807,12 @@
                                 if (data[0].contents.actividadeconomica_c == "") {
                                     faltantes.push('Actividad Económica');
                                 }
-                                if (data[0].contents.sectoreconomico_c == "") {
-                                    faltantes.push('Sector Económico');
-                                }
-                                if (data[0].contents.subsectoreconomico_c == "") {
-                                    faltantes.push('Sub Sector Económico');
-                                }
+                                // if (data[0].contents.sectoreconomico_c == "") {
+                                //     faltantes.push('Sector Económico');
+                                // }
+                                // if (data[0].contents.subsectoreconomico_c == "") {
+                                //     faltantes.push('Sub Sector Económico');
+                                // }
                                 if (data[0].contents.pais_nacimiento_c == "") {
                                     faltantes.push('País de Constitución');
                                 }

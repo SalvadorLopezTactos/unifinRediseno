@@ -11,7 +11,7 @@ class NotificacionDirector
         global $db;
 
         if($bean->director_solicitud_c!="" && $bean->director_solicitud_c!=null && $bean->director_notificado_c==0 && $bean->doc_scoring_chk_c==1){
-
+            $GLOBALS['log']->fatal("Inicia proceso de notificacion_director");
             $documento="";
             $extensionArchivo="";
             $documentos=array();
@@ -55,6 +55,13 @@ class NotificacionDirector
                 $correo_director=$beanDirector->email1;
                 $nombreDirector=$beanDirector->full_name;
             }
+            //Se obtiene el correo y nombre del asesorRM
+            $beanAsesorRM = BeanFactory::retrieveBean('Users', $bean->user_id1_c);
+            if(!empty($beanAsesorRM)){
+                $correo_rm=$beanAsesorRM->email1;
+                $nombre_rm=$beanAsesorRM->full_name;
+            }    
+            $GLOBALS['log']->fatal("Director de la solicitud con nombre: ".$nombreDirector. 'y correo :' .$correo_director);
 
             $urlSugarDoc=$GLOBALS['sugar_config']['site_url'].'/#Documents/';
 
@@ -105,9 +112,9 @@ class NotificacionDirector
                 if($region_asignado!=""){
                     //PUESTO USUARIO DIRECTOR REGIONAL LEASING =33
                     $queryDirectorRegional=<<<SQL
- SELECT id,puestousuario_c, u.status,u.user_name,uc.region_c FROM users u INNER JOIN  users_cstm uc
- ON u.id=uc.id_c WHERE uc.puestousuario_c='33' AND u.status='Active' and uc.region_c='{$region_asignado}' and u.deleted=0;
-SQL;
+                    SELECT id,puestousuario_c, u.status,u.user_name,uc.region_c FROM users u INNER JOIN  users_cstm uc
+                    ON u.id=uc.id_c WHERE uc.puestousuario_c='33' AND u.status='Active' and uc.region_c='{$region_asignado}' and u.deleted=0;
+                    SQL;
                     $queryResult = $db->query($queryDirectorRegional);
                     if($queryResult->num_rows>0){
                         while ($row = $db->fetchByAssoc($queryResult)) {
@@ -127,10 +134,9 @@ SQL;
                 }
 
                 if(count($rutasAdjuntos)>0){
-                    $cuerpoCorreo= $this->estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion);
+                    $cuerpoCorreo= $this->estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion,$nombre_rm);
 
                     $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION A DIRECTOR DE SOLICITUD ".$correo_director);
-
                     //Enviando correo a director de solicitud con copia  a director regional leasing
                     $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreo,$correo_director,$nombreDirector,$rutasAdjuntos,$array_user_regional,$current_user->id, $idSolicitud);
 
@@ -165,7 +171,7 @@ SQL;
             }
 
         }
-
+        $GLOBALS['log']->fatal("Termina proceso de notificacion_director");
     }
 
     function notificaEstatusAsesor($bean, $event, $arguments){
@@ -185,7 +191,7 @@ SQL;
             $infoDirectorSplit=explode(",", $infoDirector);
             $idDirector=$infoDirectorSplit[0];
         }
-
+        $GLOBALS['log']->fatal("Evalua sea Vobo o Cancelada");
         if($estatus=='K' && $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){//Solicitud cancelada
             $GLOBALS['log']->fatal("Condicion 1, estatus K");
             //Comprobando el fetched_row
@@ -257,11 +263,35 @@ SQL;
 
                 $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,array(),$users_bo_emails,$userid,$recordid);
 
+                $oppName=$bean->name;
+                $infoDirector=$bean->director_solicitud_c;
+                $infoDirectorSplit=explode(",", $infoDirector);
+                $nombreDirector=$infoDirectorSplit[1];
+                 //obtiene el id del asesor RM Para Cancelacion
+                 $beanAsesorRM = BeanFactory::retrieveBean('Users', $bean->user_id1_c);
+                 $GLOBALS['log']->fatal("Evalua datos para informar al jefe RM");
+                 if(!empty($beanAsesorRM)){
+                     $correo_rm=$beanAsesorRM->email1;
+                     $nombre_rm=$beanAsesorRM->full_name;
+                    //OBTIENE CORREO DEL JEFE DEL ASESOR RM
+                    $mailbossRM=array();  
+                    if (!empty($beanAsesorRM->reports_to_id)){
+                        $bossRM = BeanFactory::retrieveBean('Users', $beanAsesorRM->reports_to_id); 
+                        if(!empty($bossRM->email1)){
+                            $jefeRM_mail=$bossRM->email1;
+                            $jefeRM_name=$bossRM->full_name;
+
+                            $GLOBALS['log']->fatal("Notificacion a Jefe Asesor RM con nombre: ".$jefeRM_name. ' y correo :' .$jefeRM_mail);
+                            $cuerpoCorreoBossRM= $this->NotificaDirectorRM($nombre_rm,$oppName,$linkSolicitud,$nombreDirector,$jefeRM_name);
+                            $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreoBossRM,$jefeRM_mail,$jefeRM_name,array(),$mailbossRM,$bean->user_id1_c,$bean->id);
+                        }
+                    } 
+                }   
             }else{
                 $GLOBALS['log']->fatal("ASESOR LEASING ".$nombreAsesor." NO TIENE EMAIL");
             }
 
-        }elseif($estatus=='PE' && $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){ //Solicitud Aprobada
+        }elseif(/*$estatus=='PE'&&*/ $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){ //Solicitud Aprobada
 
             //Enviar notificación al asesor asignado
             $GLOBALS['log']->fatal("Entra condicion 2, enviar notificacion al Director asignado (estatus PE)");
@@ -270,7 +300,6 @@ SQL;
             $nombreCuenta=$bean->account_name;
             $idSolicitud=$bean->id;
             $linkSolicitud=$urlSugar.$idSolicitud;
-
             $correo_asesor="";
 
             $equipoPrincipal="";
@@ -283,7 +312,7 @@ SQL;
                 $nombreAsesor=$beanAsesor->full_name;
                 $equipoPrincipal=$beanAsesor->equipo_c;
             }
-
+            
             if($correo_asesor!=""){
                 $GLOBALS['log']->fatal("Correo Director Leasing : ".$correo_asesor);
                 if($equipoPrincipal!="" && $equipoPrincipal!="Equipo 0"){
@@ -319,7 +348,7 @@ SQL;
                 //$estatusString=$app_list_strings['estatus_c_operacion_list'][$estatus];
                 $estatusString="Autorizada";
 
-                $cuerpoCorreo= $this->estableceCuerpoNotificacionAsesor($nombreAsesor,$nombreCuenta,$estatusString,$linkSolicitud);
+                $cuerpoCorreo= $this->estableceCuerpoNotificacionAsesor($nombreAsesor,$nombreCuenta,$estatusString,$linkSolicitud,$nombre_rm);
 
                 $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION (ESTATUS AUTORIZADA) A ASESOR ASIGNADO DE SOLICITUD ".$correo_asesor);
 
@@ -330,20 +359,310 @@ SQL;
 
                 $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreo,$correo_asesor,$nombreAsesor,array(),$users_bo_emails,$userid,$recordid);
 
+                //Manda ejecutar funcion para envio de notificacion a asesor RM 1.-Genera cuerpo de correo 2.- Envia notificacion al director de la solicitud
+                $GLOBALS['log']->fatal("Crea cuerpo de notificacion a Asesor RM");
+                $oppName=$bean->name;
+                $infoDirector=$bean->director_solicitud_c;
+                $infoDirectorSplit=explode(",", $infoDirector);
+                $nombreDirector=$infoDirectorSplit[1];
+                 //obtiene el id del asesor RM
+                 $beanAsesorRM = BeanFactory::retrieveBean('Users', $bean->user_id1_c);
+
+                 if(!empty($beanAsesorRM)){
+                     $correo_rm=$beanAsesorRM->email1;
+                     $nombre_rm=$beanAsesorRM->full_name;
+                    //OBTIENE CORREO DEL JEFE DEL ASESOR RM
+                    $mailbossRM=array();
+                    $GLOBALS['log']->fatal("Obtiene nombre y correo del AsesorRM y realiza consulta para obtener datos del Jefe RM");
+                    if (!empty($beanAsesorRM->reports_to_id)){
+                        $queryBoss="SELECT t1.email_address, t3.first_name,t3.last_name
+                        FROM email_addresses t1
+                        INNER JOIN email_addr_bean_rel t2 ON t2.email_address_id = t1.id AND t2.primary_address=1 AND t2.deleted=0
+                        INNER JOIN users t3 ON t3.id = t2.bean_id AND t2.bean_module='Users'
+                        WHERE t1.deleted = 0
+                        AND t3.id ='{$beanAsesorRM->reports_to_id}'";
+                        $queryResult = $db->query($queryBoss);
+                        while ($row = $db->fetchByAssoc($queryResult)) {
+                            if (!empty($row['email_address'])) {
+                                $GLOBALS['log']->fatal("Recupera valores de full name y correo del boss RM.");
+                                $full_name=$row['first_name'].' '.$row['last_name'];
+                                $mailBoss=$row['email_address'];
+                                $GLOBALS['log']->fatal("Correo del Boss RM a notificar :".$mailBoss.' y con nombre completo :'.$full_name);
+                                array_push($mailbossRM,array('correo'=>$mailBoss,"nombre"=>$full_name));
+
+                            }
+                        }
+                    }    
+                    $GLOBALS['log']->fatal("Notificacion a Asesor RM con nombre: ".$nombre_rm. ' y correo :' .$correo_rm);
+                    $GLOBALS['log']->fatal("Notificacion a JEFE RM con nombre: ".print_r($mailbossRM,true));
+                    $cuerpoCorreoRM= $this->NotificacionRM($nombre_rm,$oppName,$linkSolicitud,$nombreDirector);
+                    $this->enviarNotificacionDirector("Solicitud {$estatusString} {$bean->name}",$cuerpoCorreoRM,$correo_rm,$nombre_rm,array(),$mailbossRM,$bean->user_id1_c,$bean->id);
+                 } 
             }else{
                 $GLOBALS['log']->fatal("ASESOR LEASING ".$nombreAsesor." NO TIENE EMAIL");
             }
-
+            $GLOBALS['log']->fatal("Finaliza notificaEstatusAsesor");
         }
 
     }
 
+    function notificaParticipacionRM($bean,$event,$arguments){
+        if ($bean->director_notificado_c==0 && $bean->doc_scoring_chk_c==1 && $bean->vobo_dir_c==1 && $bean->estatus=='PE' && $bean->tipo_producto_c="1"){
+            //Notificacion 1.-
+            //Validacion para enviar notificacion al asesor RM asignado a la opp
+            //obtiene el bean de la cuenta y el valor del asesor RM
+            $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
+            $asesorRMacc= $beanCuenta->user_id8_c;
+            //Valor de  usuario 9 - Sin Gestor
+            $Valor= "569246c7-da62-4664-ef2a-5628f649537e";
+            $reports_to_id="";
+            if($asesorRMacc==$bean->user_id1_c && $asesorRMacc!=$Valor && ($bean->user_id1_c!=$Valor || !empty($bean->user_id1_c))){
+                //Recupera informacion y jefe RM del asesor RM de la cuenta
+                $queryasesor="SELECT t1.email_address, t3.first_name,t3.last_name,t3.reports_to_id
+                FROM email_addresses t1
+                INNER JOIN email_addr_bean_rel t2 ON t2.email_address_id = t1.id AND t2.primary_address=1 AND t2.deleted=0
+                INNER JOIN users t3 ON t3.id = t2.bean_id AND t2.bean_module='Users'
+                WHERE t1.deleted = 0
+                AND t3.id ='{$asesorRMacc}'";
+                $queryResult = $db->query($queryasesor);
+                while ($row = $db->fetchByAssoc($queryResult)) {
+                    if (!empty($row['email_address'])) {
+                    $NombreRMacc=$row['first_name'].' '.$row['last_name'];
+                    $CorreoRMAcc=$row['email_address'];
+                    $reports_to_id=$row['reports_to_id'];
+                    }
+                }
+                $mailbossRM_acc=array();
+                if(!empty($reports_to_id)){
+                    //OBTIENE CORREO DEL JEFE DEL ASESOR RM
+                    $GLOBALS['log']->fatal("Obtiene nombre y correo del JEFE RM de la cuenta");
+                    //Ejecuta consulta para traer datos del jefe RM de la cuenta
+                    $queryBoss="SELECT t1.email_address, t3.first_name,t3.last_name
+                    FROM email_addresses t1
+                    INNER JOIN email_addr_bean_rel t2 ON t2.email_address_id = t1.id AND t2.primary_address=1 AND t2.deleted=0
+                    INNER JOIN users t3 ON t3.id = t2.bean_id AND t2.bean_module='Users'
+                    WHERE t1.deleted = 0
+                    AND t3.id ='{$reports_to_id}'";
+                    $queryResult = $db->query($queryBoss);
+                    while ($row = $db->fetchByAssoc($queryResult)) {
+                        if (!empty($row['email_address'])) {
+                        $GLOBALS['log']->fatal("Recupera valores de full name y correo del boss RM.");
+                        $full_name=$row['first_name'].' '.$row['last_name'];
+                        $mailBoss=$row['email_address'];
+                        $GLOBALS['log']->fatal("Correo del Boss RM a notificar :".$mailBoss.' y con nombre completo :'.$full_name);
+                        array_push($mailbossRM_acc,array('correo'=>$mailBoss,"nombre"=>$full_name));
+                        
+                        }
+                    }
+                } 
+                //Setea a Marco Antonio Flores
+                $BossRM = $app_list_strings['JefeRM_list'];
+                foreach ($BossRM as $nombre => $correo) {
+                    //Acción para agregar en arreglo
+                    array_push($mailbossRM_acc,array('correo'=>$correo,"nombre"=>$nombre));
+                }
+                if (!empty($CorreoRMAcc)){
+                    //Envia notificacion al RM y jefe RM de la cuenta previo
+                    $cuerpoCorreonotifRM= $this->NotificaRM1($NombreRMacc,$oppName,$linkSolicitud,$nombreDirector,$full_name);
+                    $this->enviarNotificacionDirector("Solicitud autorizada {$bean->name}",$cuerpoCorreonotifRM,$mailBoss,$full_name,array(),$mailbossRM_acc,$bean->user_id1_c,$bean->id);
+                }
+            }             
 
-    public function estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion){
+
+        //Notificacion 2.-
+		//Valida que el RM en la opp sea vacio o 9 - sin Gestor
+		if ($bean->user_id1_c=="" || $bean->user_id1_c==$Valor) {
+            //obtiene el id del asesor RM
+            $beanAsesorRM = BeanFactory::retrieveBean('Users', $bean->user_id1_c);
+            $mailbossesRM_acc=array();
+            //Valor de  usuario 9 - Sin Gestor
+            $Valor= "569246c7-da62-4664-ef2a-5628f649537e";
+			//El valor es el 9- sin Gestor, se opta por traer el RM de la cuenta
+			$beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
+	        $accountRM= $beanCuenta->user_id8_c;
+	        $reports_to_id="";
+	        //Validamos que la cuenta no tenga 9.- Sin gestor, de no ser asi, se obtiene a su jefe para notifiacion
+	        if ($accountRM !="" && $accountRM!=$Valor){
+	        	//Recupera informacion del RM de la cuenta y su jefe
+	                $queryasesorRM="SELECT t1.email_address, t3.first_name,t3.last_name,t3.reports_to_id
+	                FROM email_addresses t1
+	                INNER JOIN email_addr_bean_rel t2 ON t2.email_address_id = t1.id AND t2.primary_address=1 AND t2.deleted=0
+	                INNER JOIN users t3 ON t3.id = t2.bean_id AND t2.bean_module='Users'
+	                WHERE t1.deleted = 0
+	                AND t3.id ='{$accountRM}'";
+	                $queryResult = $db->query($queryasesorRM);
+	                while ($row = $db->fetchByAssoc($queryResult)) {
+	                    if (!empty($row['reports_to_id'])) {
+	                    $reports_to_id=$row['reports_to_id'];
+	                    }
+	                }   
+	                //Ejecuta segunda consulta para traer el nombre completo y correo del jefe RM de la cuenta
+	                $queryBoss="SELECT t1.email_address, t3.first_name,t3.last_name
+	                FROM email_addresses t1
+	                INNER JOIN email_addr_bean_rel t2 ON t2.email_address_id = t1.id AND t2.primary_address=1 AND t2.deleted=0
+	                INNER JOIN users t3 ON t3.id = t2.bean_id AND t2.bean_module='Users'
+	                WHERE t1.deleted = 0
+	                AND t3.id ='{$reports_to_id}'";
+	                $queryResult = $db->query($queryBoss);
+	                while ($row = $db->fetchByAssoc($queryResult)) {
+	                    if (!empty($row['email_address'])) {
+		                    $GLOBALS['log']->fatal("Recupera valores de full name y correo del boss RM de la cuenta asi como setea a Marco Antonio Flores");
+		                    $full_name=$row['first_name'].' '.$row['last_name'];
+		                    $mailBoss=$row['email_address'];
+		                    $GLOBALS['log']->fatal("Correo del jefe RM de la Cuenta :".$mailBoss.' y con nombre completo :'.$full_name);
+		                    array_push($mailbossRM_acc,array('correo'=>$mailBoss,"nombre"=>$full_name));
+		                    //Setea a Marco Antonio Flores
+		                    $BossRM = $app_list_strings['JefeRM_list'];
+								foreach ($BossRM as $nombre => $correo) {
+									//Acción para agregar en arreglo
+									array_push($mailbossRM_acc,array('correo'=>$correo,"nombre"=>$nombre));
+								}
+	                    }
+	        		}
+	    	//Ejecuta funciones para envio de notificacion
+	        $GLOBALS['log']->fatal("Notificacion a JEFE RM con nombre: ".print_r($mailbossRM,true));
+	        $CorreoRMAccount= $this->NotificaRM2($nombre_rm,$oppName,$linkSolicitud,$nombreDirector);
+	        $this->enviarNotificacionDirector("Sin participación de RM {$bean->name}",$CorreoRMAccount,$mailBoss,$full_name,array(),$mailbossRM,$bean->user_id1_c,$bean->id); 
+	    	}
+	}
+
+        //Notificacion 3.-
+        //Valida que el RM en la opp sea vacio o 9 - sin Gestor
+        if ($bean->user_id1_c!="" || $bean->user_id1_c!=$Valor) {
+                //obtiene el id del asesor RM
+            $beanAsesorRM = BeanFactory::retrieveBean('Users', $bean->user_id1_c);
+            //Valor de  usuario 9 - Sin Gestor
+            $Valor= "569246c7-da62-4664-ef2a-5628f649537e";
+            $mailbossesRM_acc=array();
+            //El valor es el 9- sin Gestor, se opta por traer el RM de la cuenta
+            $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
+            $accountRM= $beanCuenta->user_id8_c;
+            $reports_to_id="";
+            //Validamos que la cuenta no tenga 9.- Sin gestor pero que sea diferente al RM de la opp
+            if ($accountRM!=$Valor && $accountRM!=$bean->user_id1_c){
+                //Recupera informacion del RM de la cuenta y su jefe
+                    $queryasesorRM="SELECT t1.email_address, t3.first_name,t3.last_name,t3.reports_to_id
+                    FROM email_addresses t1
+                    INNER JOIN email_addr_bean_rel t2 ON t2.email_address_id = t1.id AND t2.primary_address=1 AND t2.deleted=0
+                    INNER JOIN users t3 ON t3.id = t2.bean_id AND t2.bean_module='Users'
+                    WHERE t1.deleted = 0
+                    AND t3.id ='{$accountRM}'";
+                    $queryResult = $db->query($queryasesorRM);
+                    while ($row = $db->fetchByAssoc($queryResult)) {
+                        if (!empty($row['reports_to_id'])) {
+                        $reports_to_id=$row['reports_to_id'];
+                        $asesorAccount=$row['first_name'].' '.$row['last_name'];
+                        $mailasesorAcccount=$row['email_address'];
+                        }
+                    }   
+                    //Ejecuta segunda consulta para traer el nombre completo y correo del jefe RM de la cuenta
+                    $queryBoss="SELECT t1.email_address, t3.first_name,t3.last_name
+                    FROM email_addresses t1
+                    INNER JOIN email_addr_bean_rel t2 ON t2.email_address_id = t1.id AND t2.primary_address=1 AND t2.deleted=0
+                    INNER JOIN users t3 ON t3.id = t2.bean_id AND t2.bean_module='Users'
+                    WHERE t1.deleted = 0
+                    AND t3.id ='{$reports_to_id}'";
+                    $queryResult = $db->query($queryBoss);
+                    while ($row = $db->fetchByAssoc($queryResult)) {
+                        if (!empty($row['email_address'])) {
+                            $GLOBALS['log']->fatal("Recupera valores de full name y correo del boss RM de la cuenta asi como setea a Marco Antonio Flores");
+                            $full_nameBossAcc=$row['first_name'].' '.$row['last_name'];
+                            $mailBossAcc=$row['email_address'];
+                            $GLOBALS['log']->fatal("Correo del jefe RM de la Cuenta :".$mailBoss.' y con nombre completo :'.$full_name);
+                            array_push($mailbossesRM_acc,array('correo'=>$mailBossAcc,"nombre"=>$full_nameBossAcc));
+                            //Setea a Marco Antonio Flores
+                            $BossRM = $app_list_strings['JefeRM_list'];
+                                foreach ($BossRM as $nombre => $correo) {
+                                    //Acción para agregar en arreglo
+                                    array_push($mailbossRM_acc,array('correo'=>$correo,"nombre"=>$nombre));
+                                }
+                        }
+                    }
+                    //Se obtiene informacion del RM de la OPP asi como su jefe para añadirse en el $mailbossRM_acc
+                    //Recupera informacion del RM de la cuenta y su jefe
+                    $reports_to_id2="";
+                    $queryasesorRM="SELECT t1.email_address, t3.first_name,t3.last_name,t3.reports_to_id
+                    FROM email_addresses t1
+                    INNER JOIN email_addr_bean_rel t2 ON t2.email_address_id = t1.id AND t2.primary_address=1 AND t2.deleted=0
+                    INNER JOIN users t3 ON t3.id = t2.bean_id AND t2.bean_module='Users'
+                    WHERE t1.deleted = 0
+                    AND t3.id ='{$bean->user_id1_c}'";
+                    $queryResult = $db->query($queryasesorRM);
+                    while ($row = $db->fetchByAssoc($queryResult)) {
+                        if (!empty($row['reports_to_id'])) {
+                        $reports_to_id2=$row['reports_to_id'];
+                        $asesorRMn=$row['first_name'].' '.$row['last_name'];
+                        $mailasesorRMn=$row['email_address'];
+                        array_push($mailbossRM_acc,array('correo'=>$mailasesorRMn,"nombre"=>$asesorRMn));
+                        }
+                    }
+                    //Ejecuta segunda consulta para traer el nombre completo y correo del jefe RM de la Opp
+                    $queryBoss="SELECT t1.email_address, t3.first_name,t3.last_name
+                    FROM email_addresses t1
+                    INNER JOIN email_addr_bean_rel t2 ON t2.email_address_id = t1.id AND t2.primary_address=1 AND t2.deleted=0
+                    INNER JOIN users t3 ON t3.id = t2.bean_id AND t2.bean_module='Users'
+                    WHERE t1.deleted = 0
+                    AND t3.id ='{$reports_to_id2}'";
+                    $queryResult = $db->query($queryBoss);
+                    while ($row = $db->fetchByAssoc($queryResult)) {
+                        if (!empty($row['email_address'])) {
+                            $GLOBALS['log']->fatal("Recupera valores de full name y correo del boss RM de la opp asi como setea a Marco Antonio Flores");
+                            $full_nameBossOpp=$row['first_name'].' '.$row['last_name'];
+                            $mailBossOpp=$row['email_address'];
+                            $GLOBALS['log']->fatal("Correo del jefe RM de la Cuenta :".$mailBoss.' y con nombre completo :'.$full_name);
+                            array_push($mailbossesRM_acc,array('correo'=>$mailBossOpp,"nombre"=>$full_nameBossOpp));
+                            //Setea a Marco Antonio Flores
+                            $BossRM = $app_list_strings['JefeRM_list'];
+                                foreach ($BossRM as $nombre => $correo) {
+                                    //Acción para agregar en arreglo
+                                    array_push($mailbossRM_acc,array('correo'=>$correo,"nombre"=>$nombre));
+                                }
+                        }
+                    }   
+                    //Obtener finalmente, info del director de la opp
+                    $infoDirector=$bean->director_solicitud_c;
+                    $infoDirectorSplit=explode(",", $infoDirector);
+                    $IdDirector=$infoDirectorSplit[0];
+                    $reports_to_id3="";
+                    $queryasesorRM="SELECT t1.email_address, t3.first_name,t3.last_name,
+                    FROM email_addresses t1
+                    INNER JOIN email_addr_bean_rel t2 ON t2.email_address_id = t1.id AND t2.primary_address=1 AND t2.deleted=0
+                    INNER JOIN users t3 ON t3.id = t2.bean_id AND t2.bean_module='Users'
+                    WHERE t1.deleted = 0
+                    AND t3.id ='{$IdDirector}'";
+                    $queryResult = $db->query($queryasesorRM);
+                    while ($row = $db->fetchByAssoc($queryResult)) {
+                        if (!empty($row['reports_to_id'])) {
+                        $reports_to_id3=$row['reports_to_id'];
+                        $DirectorFullname=$row['first_name'].' '.$row['last_name'];
+                        $mailDirector=$row['email_address'];
+                        }
+                    }
+
+                //Ejecuta funciones para envio de notificacion al Asesor y Jefe RM de la Cuenta
+                $GLOBALS['log']->fatal("Notificacion a JEFE RM con nombre: ".print_r($mailbossRM,true));
+                $CorreoRMAccount= $this->NotificaRM3($asesorAccount,$oppName,$linkSolicitud,$nombreDirector,$asesorRMn);
+                $this->enviarNotificacionDirector("Cambio de asesor RM en:  {$bean->name}",$DirectorFullname,$mailDirector,$full_name,array(),$mailbossRM_acc,$bean->user_id1_c,$bean->id);
+
+                //Actualizar el usuario RM a la cuenta 
+                if(!empty($bean->user_id1_c) && $bean->user_id1_c!=$Valor){
+                    $GLOBALS['log']->fatal("Actualiza Asesor RM en la Cuenta ".$bean->account_name. 'con valor '.$bean->user_id1_c);
+                    $queryUpdateRM = "UPDATE accounts_cstm SET user_id8_c='{$bean->user_id1_c}' WHERE id_c='{$bean->account_id}';";
+                    $GLOBALS['log']->fatal($queryUpdateRM);
+                    $ExecuteRMUpdate = $db->query($queryUpdateRM);
+                }
+            }
+        }  
+           
+    }
+}
+
+
+    public function estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion,$nombre_rm=null){
 
 
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreDirector . '</b>
-      <br><br>Se le informa que se ha generado una solicitud de Leasing para la cuenta: <b>'. $nombreCuenta.'</b> y se solicita su VoBo.
+      <br><br>Se le informa que se ha generado una solicitud de Leasing para la cuenta: <b>'. $nombreCuenta.'</b> y se solicita su aprobación y validación de participación del asesor RM '.$nombre_rm.'
       <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
       <br><br>Se adjunta documento con scoring comercial
       <br><br>Comentarios de asesor:<br>'.$descripcion.'
@@ -392,10 +711,11 @@ SQL;
 
     public function enviarNotificacionDirector($asunto,$cuerpoCorreo,$correoDirector,$nombreDirector,$adjuntos=array(),$recipients=array() , $userid,$recordid){
         //Enviando correo a asesor origen
+        $GLOBALS['log']->fatal("ENVIA A :".$correoDirector.', '.$nombreDirector);
         $insert = '';
         $hoy = date("Y-m-d H:i:s");
         $cc ='';
-
+        $GLOBALS['log']->fatal("Correo Jefe RM :".print_r($recipients,true));
         try{
             $mailer = MailerFactory::getSystemDefaultMailer();
             $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
@@ -413,9 +733,8 @@ SQL;
             }
 
             /*Se agregan como copia oculta Correos de Wendy Reyes y Cristian Carral*/
-            $mailer->addRecipientsBcc(new EmailIdentity('wendy.reyes@unifin.com.mx', 'Wendy Reyes Peralta'));
             $mailer->addRecipientsBcc(new EmailIdentity('ccarral@unifin.com.mx', 'Cristian Carral'));
-            $mailcco = 'wendy.reyes@unifin.com.mx,ccarral@unifin.com.mx';
+            $mailcco = 'ccarral@unifin.com.mx';
 
             //Añadiendo múltiples adjuntos
             $GLOBALS['log']->fatal("ADJUNTOS TIENE: ".count($adjuntos)." ELEMENTOS");
@@ -430,18 +749,18 @@ SQL;
             //$GLOBALS['log']->fatal('mailer',$mailer);
 
             if($correoDirector != ''){
-                $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,description) 
+                $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,description)
                 VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$correoDirector}', '{$asunto}','TO', 'Solicitudes','OK', 'Correo exitosamente enviado')";
             }
             //$GLOBALS['log']->fatal($insert);
             $GLOBALS['db']->query($insert);
             if($cc !=''){
-                $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,description) 
+                $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,description)
                 VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$cc}', '{$asunto}','CC', 'Solicitudes','OK','Correo exitosamente enviado')";
                 $GLOBALS['db']->query($insert);
             }
 
-            $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,description) 
+            $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,description)
             VALUES (uuid() , '{$userid}' , '{$recordid}', '{$hoy}','{$mailcco}', '{$asunto}','CCO', 'Solicitudes','OK','Correo exitosamente enviado')";
             $GLOBALS['db']->query($insert);
 
@@ -471,4 +790,103 @@ SQL;
 
     }
 
+    public function NotificacionRM($nombre_rm,$oppName,$linkSolicitud,$nombreDirector){
+        
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombre_rm . '</b>
+      <br><br>Se le informa que ha sido validada su participación en la solicitud: ' .$oppName .', por el director: '.$nombreDirector.'
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Atentamente Unifin
+
+
+      <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
+      <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+       Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+       Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+       No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+       Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br /> </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a> </span><u></u><u></u></p>';
+
+        $GLOBALS['log']->fatal("Inicia NotificacionRM envio de mensaje a AsesoRM ".$mailHTML);
+        return $mailHTML;
+
+    }
+
+    public function NotificaDirectorRM($nombre_rm,$oppName,$linkSolicitud,$nombreDirector,$jefe_rm){
+        
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $jefe_rm . '</b>
+      <br><br>Se le informa que ha sido rechazada la participación del asesor ' .$nombre_rm .', para la solicitud: '.$oppName.', por el director: '.$nombreDirector.'
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Atentamente Unifin
+
+
+      <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
+      <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+       Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+       Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+       No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+       Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br /> </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a> </span><u></u><u></u></p>';
+
+        $GLOBALS['log']->fatal("Inicia NotificacionRM envio de mensaje a AsesoRM ".$mailHTML);
+        return $mailHTML;
+
+    }
+
+    public function NotificaRM1($nombre_rm,$oppName,$linkSolicitud,$nombreDirector,$jefe_rm){
+        
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' '</b>
+      <br><br>Se le informa que el director ' .$nombreDirector .'ha confirmado que el asesor RM '.$nombre_rm.'tuvo participación en la operación ligada a la solicitud '.$nombreDirector.'
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Atentamente Unifin
+
+
+      <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
+      <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+       Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+       Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+       No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+       Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br /> </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a> </span><u></u><u></u></p>';
+
+        $GLOBALS['log']->fatal("Inicia NotificacionRM envio de mensaje a AsesoRM ".$mailHTML);
+        return $mailHTML;
+
+    }
+
+    public function NotificaRM2($nombre_rm,$oppName,$linkSolicitud,$nombreDirector,$jefe_rm){
+        
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' '</b>
+      <br><br>Se le informa que el director ' .$nombreDirector .'ha confirmado que el asesor RM '.$nombre_rm.'tuvo participación en la operación ligada a la solicitud '.$nombreDirector.'
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Atentamente Unifin
+
+
+      <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
+      <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+       Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+       Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+       No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+       Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br /> </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a> </span><u></u><u></u></p>';
+
+        $GLOBALS['log']->fatal("Inicia NotificacionRM envio de mensaje a AsesoRM ".$mailHTML);
+        return $mailHTML;
+
+    }
+
+    public function NotificaRM3($asesorAccount,$oppName,$linkSolicitud,$nombreDirector,$asesorRMn){
+        
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' '</b>
+      <br><br>Se le informa que el director ' .$nombreDirector .' ha confirmado que el asesor RM'.$asesorRMn.' participó en la operación ligada a la solicitud:'.$oppName.', en lugar del asesor RM ' .$asesorAccount.' asociado originalmente a la operación. 
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Atentamente Unifin
+
+
+      <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
+      <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+       Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+       Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+       No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+       Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br /> </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a> </span><u></u><u></u></p>';
+
+        $GLOBALS['log']->fatal("Inicia NotificacionRM envio de mensaje a AsesoRM ".$mailHTML);
+        return $mailHTML;
+
+    }
 }

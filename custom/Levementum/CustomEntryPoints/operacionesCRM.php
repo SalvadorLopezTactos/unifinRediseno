@@ -19,12 +19,20 @@ $host=$url."//Database/rest/Security/CreateToken?ObjectGuid=".$objectGuid;
 
 $resultado=callPostAPI("POST",$host,"");
 $token=$resultado['Token'];
-echo '<!DOCTYPE html>
+echo '<script type="text/javascript">
+    window.onload = function () {
+        if(document.getElementById("linkGestionFirmas")!=null){
+
+            document.getElementById("linkGestionFirmas").click();
+
+        }
+    };
+</script>
+<!DOCTYPE html>
 <html>
 <body>
 
-<iframe src="'.$url.'/OperacionesCRM/?token='.$token.'" style="width:100%;height: 100%;position: absolute;"></iframe>
-
+<a href="'.$url.'/OperacionesCRM/?token='.$token.'" target="_blank" id="linkGestionFirmas">Dirigirse a Gestión de firmas</a>
 </body>
 </html>';
 function callPostAPI($method, $url, $data){

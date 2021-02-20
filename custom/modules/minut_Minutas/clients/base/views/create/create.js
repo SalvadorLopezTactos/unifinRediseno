@@ -5,12 +5,21 @@
     longitude:0,
     urlEncuesta: null,
     flagPuesto:false,
-
+    parent_type:"",
+    parent_type_true:true,
+    tipo_lead:false,
+    tipo_account:false,
+    puesto_usuario:"",
+    leasingPuestos: null,
 
     initialize: function (options) {
         //this.plugins = _.union(this.plugins || [], ['AddAsInvitee', 'ReminderTimeDefaults']);
         self = this;
         this._super("initialize", [options]);
+
+        this.padre();
+        this.Lead_Account_options();
+
         this.model.addValidationTask('checkcompromisos', _.bind(this.checkcompromisos, this));
         this.model.addValidationTask('validaFecha', _.bind(this.validaFechaReunion, this));
         this.model.addValidationTask('validaEncuesta', _.bind(this.validaEncuesta, this));
@@ -19,13 +28,17 @@
         //this.model.addValidationTask('validaObjetivosmarcados', _.bind(this.validaObjetivosmarcados,this));
         this.model.addValidationTask('save_Reuunion_Llamada',_.bind(this.saveReuionLlamada, this));
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
-        //Mantener como último VT a savestatusandlocation
+        //Mantener como último VT a savestatusandlocation      
         this.model.addValidationTask('save_meetings_status_and_location', _.bind(this.savestatusandlocation, this));
         this.context.on('button:view_document:click', this.view_document, this);
         //Evento para contestar encuesta
         this.context.on('button:survey_minuta:click', this.open_survey_minuta, this);
 
         this.model.on("change:resultado_c", this.changeColorSurveyButton, this);
+
+        
+        this.puesto_usuario=App.user.attributes.puestousuario_c;
+        this.leasingPuestos = ['1','2','3','4','5','6','20','33','44','55','27'];
 
         var idUser = this.context.parent.attributes.model.attributes.created_by;
         var url = app.api.buildURL("Users/"+idUser, '', {}, {});
@@ -69,6 +82,10 @@
         this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(0).removeClass('panel-inactive');
         this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(0).addClass('panel-active');
         this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(1).attr("style","display:block");
+       
+        //Oculta panel con campos de lead
+        $('[data-panelname="LBL_RECORDVIEW_PANEL7"]').addClass('hide');
+        $('[data-panelname="LBL_RECORDVIEW_PANEL8"]').addClass('hide');
     },
 
     /* F. Javier G. Solar 9-10-2018
@@ -131,12 +148,24 @@
         }
         callback(null, fields, errors);
     },
+
     /*Actualiza el estado de la reunion además de guardar fecha y lugar de Check-Out
     *Victor Martínez 23-10-2018
     */
     savestatusandlocation:function(fields, errors, callback){
+        var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
+        var userprodprin = App.user.attributes.tipodeproducto_c;
+        var keyselect = null;
+		var idProdM='';
+        var idCuenta = this.model.get('parent_id');
+        var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
+        var userprodprin = App.user.attributes.tipodeproducto_c;
+        smeet = this;
 
-      if (Object.keys(errors).length == 0) {
+        var puesto_usuario=App.user.attributes.puestousuario_c;
+        var leasingPuestos = ['1','2','3','4','5','6','20','33','44','55'];
+                    
+        if (Object.keys(errors).length == 0) {
           try {
             self=this;
             if(navigator.geolocation){
@@ -164,23 +193,426 @@
                     modelo.set('check_out_longitude_c',self.longitude);
                     modelo.set('check_out_platform_c', self.GetPlatform());
                     modelo.set('resultado_c', self.model.get('resultado_c'));
-                    modelo.save([],{
+                    
+                    var parent_meet = modelo.get('parent_type');
+                    var parent_id_acc = modelo.get('parent_id');
+                    if(parent_meet == "Accounts"  &&  this.leasingPuestos.includes(  this.puesto_usuario )){
+                        var account = app.data.createBean('Accounts', {id:parent_id_acc});
+			            account.fetch({
+			            success: _.bind(function (modelAcconut) {
+                            if(this.$('#cancelado')[0].checked != true &&  this.$('#presolicitud')[0].checked != true){
+                                app.alert.show("Motivo de Cancelación", {
+                                    level: "error",
+                                    title: "Debe seleccionar alguna opción de Lead Management para continuar.",
+                                    autoClose: false
+                                });                                
+                                //$('[data-panelname="LBL_RECORDVIEW_PANEL7"]').children().eq(1).removeAttr("style");
+                                $('#opciones').css('color', '#bb0e1b');
+                                $('#opciones').css('border-style', 'solid');
+                                $('#opciones').css('border-color', '#bb0e1b');
+                                
+                                errors['MotivoCancelacion'] = errors['MotivoCancelacion'] || {};
+                                errors['MotivoCancelacion'].required = true;
+                                callback(null, fields, errors);
+                            }else{
+                                if(this.$('#presolicitud')[0].checked == true){
+                                    //modelo.save();
+                                    modelo.save([],{
+                                        dataType:"text",
+                                        complete:function() {
+                                            //app.router.navigate(module_name , {trigger: true});
+                                            $('a[name=new_minuta]').hide()
+                                            SUGAR.App.controller.context.reloadData({});
+                                            $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                            $('[data-name="assigned_user_name"]').removeAttr("style");
+                                        }
+                                    });                                    
+                                    callback(null, fields, errors);
+
+                                    var urla = window.location.href;
+                                    urla = urla.substring(0,urla.indexOf('#'))
+                                    app.alert.show("Creación Solicitud", {
+                                        level: "info",
+                                        title: "Se redirigió a la vista de creación de solicitudes.<br> Cuenta con lo que resta del día en curso para registrar una pre solicitud",
+                                        autoClose: false
+                                    });
+                        
+                                    app.api.call("read", app.api.buildURL("Accounts/"+parent_id_acc, null, null, {
+                                        fields: "name",
+                                    }), null, {
+                                        success: _.bind(function (data) {
+                                            var objOpp = {
+                                                action: 'edit',
+                                                copy: true,
+                                                create: true,
+                                                layout: 'create',
+                                                module: 'Opportunities',
+                                                idAccount: parent_id_acc,
+                                                idNameAccount: data.name
+                                            };
+                                            app.controller.loadView(objOpp);
+                                            // update the browser URL with the proper
+                                            app.router.navigate('#Opportunities/create', {trigger: false});
+                                        }, this)
+                                    });			
+                                }else if(this.$('#cancelado')[0].checked == true){
+                                    keyselect = this.$('#RazonNoViable').val();
+                                    if(keyselect == "0" || keyselect == "" || keyselect == null){
+                                        app.alert.show("Motivo de Cancelación", {
+                                        level: "error",
+                                        title: "Debe seleccionar Razón No Viable para Lead Management.",
+                                        autoClose: false
+                                        });
+                                        $('#opciones').css('color', 'black');
+                                        $('#opciones').css('border-style', 'none');
+                                        //$('[data-panelname="LBL_RECORDVIEW_PANEL7"]').children().eq(1).removeAttr("style");
+                                        $('#RazonNoViable').css('border-color', '#bb0e1b');
+                                        $('#razon_noviable').css('color', '#bb0e1b');
+                                        errors['razon_noviable'] = errors['razon_noviable'] || {};
+                                        errors['razon_noviable'].required = true;                                        
+                                        callback(null, fields, errors);
+                                    }else if(keyselect != "" && keyselect != null && keyselect != "0"){
+                                        var emptynoviable = 0;
+                                        $('#razon_noviable').css('color', 'black');
+                                        $('#RazonNoViable').css('border-color', '');
+                                        /***********************************************/
+                                        //Se obtiene los valores de los campos seleccionados en el modal
+                                        if ($("#RazonNoViable").val() == "" || $("#RazonNoViable").val() == "0") {
+                                            $('#RazonNoViable').css('border-color', 'red');
+                                            emptynoviable += 1;
+                                        }
+                                        if ($("#RazonNoViable").val() == "1" && ($("#FueradePerfil").val() == "" || $("#FueradePerfil").val() == "0")) {
+                                            $('#FueradePerfil').css('border-color', 'red');
+                                            emptynoviable += 1;
+                                        }
+                                        if ($("#RazonNoViable").val() == "2" && ($("#condFinancieras").val() == "" || $("#condFinancieras").val() == "0")) {
+                                             $('#condFinancieras').css('border-color', 'red');
+                                             emptynoviable += 1;
+                                        }
+                                        if ($("#RazonNoViable").val() == "3" && $('#comp_quien').val().trim() == "" && $('#comp_porque').val().trim() == "") {
+                                            $('#comp_quien').css('border-color', 'red');
+                                            $('#comp_porque').css('border-color', 'red');
+                                            emptynoviable += 1;
+                                        }
+                                        if ($("#RazonNoViable").val() == "3" && $('#comp_quien').val().trim() == "" && $('#comp_porque').val().trim() != "") {
+                                            $('#comp_quien').css('border-color', 'red');
+                                            emptynoviable += 1;
+                                        }
+                                        if ($("#RazonNoViable").val() == "3" && $('#comp_porque').val().trim() == "" && $('#comp_quien').val().trim() != "") {
+                                            $('#comp_porque').css('border-color', 'red');
+                                            emptynoviable += 1;
+                                        }
+                                        if ($("#RazonNoViable").val() == "4" && ($("#noProducto").val() == "" || $("#noProducto").val() == "0")) {
+                                            $('#noProducto').css('border-color', 'red');
+                                            emptynoviable += 1;
+                                        }
+                                        if ($("#RazonNoViable").val() == "4" && $("#noProducto").val() == "4" && $("#otroProducto").val() == "") {
+                                            $('#otroProducto').css('border-color', 'red');
+                                            emptynoviable += 1;
+                                        }
+                                        if ($("#RazonNoViable").val() == "7" && ($("#noInteresado").val() == "" || $("#noInteresado").val() == "0")) {
+                                            $('#noInteresado').css('border-color', 'red');
+                                            emptynoviable += 1;
+                                        }
+
+                                        if (emptynoviable > 0) {
+                                            app.alert.show("Falta-campos-no-viable", {
+                                                level: "error",
+                                                title: 'Debe seleccionar los campos faltantes para cancelación',
+                                                autoClose: false
+                                            });
+                                            errors['MotivoCancelacion'] = errors['MotivoCancelacion'] || {};
+                                            errors['MotivoCancelacion'].required = true;
+                                            callback(null, fields, errors);
+                                        }else{
+                                            /*********************************************************/
+                                            //Valor de la lista de Razon no viable
+	                                         if ($("#RazonNoViable").val() != "" || $("#RazonNoViable").val() != "0") {
+	                                             var KeyRazonNV = $("#RazonNoViable").val();
+	                                         }
+	                                         //Se obtiene los valores de los campos seleccionados en el modal
+	                                         if ($("#FueradePerfil").val() != "" || $("#FueradePerfil").val() != "0") {
+	                                             var keyfueradePerfil = $("#FueradePerfil").val();
+	                                         }
+	                                         if ($("#condFinancieras").val() != "" || $("#condFinancieras").val() != "0") {
+	                                              var keycondFinancieras = $("#condFinancieras").val();
+	                                         }
+	                                         if ($("#comp_quien").val() != "") {
+	                                             var txtcomp_quien = $("#comp_quien").val();
+	                                         }
+	                                         if ($("#comp_porque").val() != "") {
+	                                             var txtcomp_porque = $("#comp_porque").val();
+	                                         }
+	                                         if ($("#noProducto").val() != "" || $("#noProducto").val() != "0") {
+	                                             var keynoProducto = $("#noProducto").val();
+	                                         }
+	                                         if ($("#otroProducto").val() != "") {
+	                                             var txtotroProducto = $("#otroProducto").val();
+	                                         }
+	                                         if ($("#noInteresado").val() != "" || $("#noInteresado").val() != "0") {
+	                                             var keynoInteresado = $("#noInteresado").val();
+	                                         }
+		                                    keyselect = this.$('#RazonNoViable').val();
+                                            app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + parent_id_acc), null, {
+                                                success: function (data) {
+                                                    Productos = data;
+                                                    ResumenProductos = [];
+                                                    _.each(Productos, function (value, key) {
+                                                        var tipoProducto = Productos[key].tipo_producto;
+                                                        if(tipoProducto == userprodprin){
+                                                            idProdM = Productos[key].id;
+                                                            var producto = app.data.createBean('uni_Productos', {id:idProdM});
+                                                            producto.fetch({
+                                                                success: _.bind(function (model) {
+                                                                    model.set('no_viable', true); //CHECK NO VIABLE
+                                                                    model.set('status_management_c', '3'); //ESTATUS PRODUCTO CANCELADO
+                                                                    model.set('no_viable_razon', KeyRazonNV); //RAZON NO VIABLE
+                                                                    model.set('no_viable_razon_fp', keyfueradePerfil); //FUERA DE PERFIL
+                                                                    model.set('no_viable_razon_cf', keycondFinancieras); //CONDICIONES FINANCIERAS
+                                                                    model.set('no_viable_quien', txtcomp_quien); //YA ESTA CON LA COMPETENCIA - ¿QUIEN? TEXTO
+                                                                    model.set('no_viable_porque', txtcomp_porque); //YA ESTA CON LA COMPETENCIA -¿POR QUE? TEXTO
+                                                                    model.set('no_viable_producto', keynoProducto); //NO TENEMOS EL PRODUCTO - ¿QUE PRODUCTO?
+                                                                    model.set('no_viable_otro_c', txtotroProducto); //NO TENEMOS EL PRODUCTO - ¿QUE PRODUCTO? TEXTO
+                                                                    model.set('no_viable_razon_ni', keynoInteresado); //NO SE ENCUENTRA INTERESADO
+                                                                    model.save();
+
+                                                                    app.alert.show('message-id', {
+                                                                        level: 'success',
+                                                                        messages: 'Cuenta Cancelada',
+                                                                        autoClose: true
+                                                                    });                                           
+                                                                    
+                                                                }, this)
+                                                            });
+                                                                                     //modelo.save();
+                                                            modelo.save([],{
+                                                                dataType:"text",
+                                                                complete:function() {
+                                                                    //app.router.navigate(module_name , {trigger: true});
+                                                                    $('a[name=new_minuta]').hide()
+                                                                    SUGAR.App.controller.context.reloadData({});
+                                                                    $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                                                    $('[data-name="assigned_user_name"]').removeAttr("style");
+                                                                }
+                                                            });
+                                                            callback(null, fields, errors);
+                                                        }
+                                                    });
+                                                },
+                                                error: function (e) {
+                                                    throw e;
+                                                }
+                                            });                                  
+                                        
+                                        }                            
+                                    }
+                                }
+                                
+                            }                           
+                         }, this)
+                        });
+                    }else if(parent_meet == "Leads"  &&  this.leasingPuestos.includes(  this.puesto_usuario ) ){
+                        var keyselect = null;		
+                        keyselect = this.$('#motivocancelacionCuenta').val();
+                        var subkeysqlct = this.$('#submotivocancelacion').val();
+                        if((keyselect == "" || keyselect == null) && 
+                        (self.model.get('resultado_c')=='2' ||self.model.get('resultado_c')=='18' || self.model.get('resultado_c')=='21' || self.model.get('resultado_c')=='25'))
+                        {
+                            app.alert.show("Motivo de Cancelación", {
+                                level: "error",
+                                title: "Debe seleccionar el motivo cancelación para Lead Management.",
+                                autoClose: false
+                            });
+                            $('#motivocancelacionCuenta').css('border-color', '#bb0e1b');
+                            $('#motivo_cancelacion_Cuenta').css('color', '#bb0e1b');
+                            $('#MotivoCancelacionLead').focus();
+                            $('[data-panelname="LBL_RECORDVIEW_PANEL8"]').children().eq(1).removeAttr("style");
+                            errors['motivocancelacionCuenta'] = errors['motivocancelacionCuenta'] || {};
+                            errors['motivocancelacionCuenta'].required = true;
+                            callback(null, fields, errors);
+                        }else if((keyselect == "2" || keyselect == "5" ) && (subkeysqlct == '' || subkeysqlct == null) &&
+                        (self.model.get('resultado_c')=='2' ||self.model.get('resultado_c')=='18' || self.model.get('resultado_c')=='21' || self.model.get('resultado_c')=='25'))
+                        {
+                            app.alert.show("Submotivo de Cancelación", {
+                                level: "error",
+                                title: "Debe seleccionar el submotivo cancelación para Lead Management.",
+                                autoClose: false
+                            });
+                            $('#motivocancelacionCuenta').css('border-color', '');
+                            $('#motivo_cancelacion_Cuenta').css('color', 'black');
+                            $('#submotivocancelacion').css('border-color', '#bb0e1b');
+                            $('#submotivo_cancelacion').css('border-color', '#bb0e1b');
+                            $('#submotivo_cancelacion').css('color', '#bb0e1b');
+                            $('[data-panelname="LBL_RECORDVIEW_PANEL8"]').children().eq(1).removeAttr("style");
+                            errors['submotivocancelacion'] = errors['submotivocancelacion'] || {};
+                            errors['submotivocancelacion'].required = true;
+                            callback(null, fields, errors);
+                        }else{
+                            var lead = app.data.createBean('Leads', {id:parent_id_acc});
+			                lead.fetch({
+			                success: _.bind(function (modelLead) {
+                                if(modelLead.get('subtipo_registro_c')=='1' || modelLead.get('subtipo_registro_c')=='2'){
+                                    if(self.model.get('resultado_c')=='2' ||self.model.get('resultado_c')=='18' || self.model.get('resultado_c')=='21' || self.model.get('resultado_c')=='25'){
+                                        //NO esta interesado
+                                        //No viable
+                                        //No interezado, cita forzada
+                                        //Cancelada por el prospecto, no le interesa
+                                        modelLead.set('motivo_cancelacion_c',this.$('#motivocancelacionCuenta').val());
+                                        modelLead.set('submotivo_cancelacion_c',this.$('#submotivocancelacion').val());
+                                        modelLead.set('subtipo_registro_c', "3");
+                                        modelLead.set('lead_cancelado_c', true);
+                                        modelLead.save();
+                                        
+                                        app.alert.show('message-id', {
+                                            level: 'success',
+                                            messages: 'Lead Cancelado',
+                                            autoClose: true
+                                        });
+
+                                        modelo.save();
+                                        callback(null, fields, errors);
+                                        //modelo.save([],{
+                                        //    dataType:"text",
+                                        //    complete:function() {
+                                        //        //app.router.navigate(module_name , {trigger: true});
+                                        //        $('a[name=new_minuta]').hide()
+                                        //        SUGAR.App.controller.context.reloadData({});
+                                        //        $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                        //        $('[data-name="assigned_user_name"]').removeAttr("style");
+                                        //    }
+                                        //});
+                                    
+                                    }else if(self.model.get('resultado_c')=='4' ||self.model.get('resultado_c')=='5' || self.model.get('resultado_c')=='19' || self.model.get('resultado_c')=='20' 
+                                    || self.model.get('resultado_c')=='6' || self.model.get('resultado_c')=='7' || self.model.get('resultado_c')=='23'){
+                                        // Está Interesado. Se procede a generar expediente
+                                        // Está Interesado. Se agendó otra visita
+                                        // Está interesado. Se agendó otra llamada
+                                        // Está Interesado. Se recogió información
+                                        // Se cerró una venta
+                                        // Se procede a generar expediente
+                                        // Está interesado solicita cotización para proceder
+                                        var filter_arguments = {
+                                            "id": parent_id_acc
+                                        };
+                                        app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
+                                            success: _.bind(function (data) {
+                                                console.log(data);
+                                                //app.alert.dismiss('upload');
+                                                //app.controller.context.reloadData({});
+                                                if (data.idCuenta === "") {
+                                                    app.alert.show("Conversión", {
+                                                        level: "error",
+                                                        messages: data.mensaje,
+                                                        autoClose: false
+                                                    });
+                                                    errors['conversion'] = errors['conversion'] || {};
+                                                    errors['conversion'].required = true;
+                                                    callback(null, fields, errors);
+                                                } else { 
+
+                                                    app.alert.show("Conversión", {
+                                                        level: "success",
+                                                        messages: data.mensaje,
+                                                        autoClose: false
+                                                    });
+
+                                                    modelLead.set('subtipo_registro_c', "4");
+                                                    modelLead.set('account_id',data.idCuenta);
+                                                    modelLead.save();
+                                                    //this._disableActionsSubpanel();
+                                                    //modelo.save();
+                                                    modelo.save([],{
+                                                        dataType:"text",
+                                                        complete:function() {
+                                                            //app.router.navigate(module_name , {trigger: true});
+                                                            $('a[name=new_minuta]').hide()
+                                                            SUGAR.App.controller.context.reloadData({});
+                                                            $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                                            $('[data-name="assigned_user_name"]').removeAttr("style");
+                                                        }
+                                                    });
+                                                    callback(null, fields, errors);                                                                                                         
+                                                }
+                                                //callback(null, fields, errors);
+                                            }, this),
+                                            failure: _.bind(function (data) {
+                                                app.alert.dismiss('upload');
+                                                errors['status'] = errors['status'] || {};
+                                                errors['status'].required = true;
+                                                callback(null, fields, errors);
+                                            }, this),
+                                            error: _.bind(function (data) {
+                                                errors['status'] = errors['status'] || {};
+                                                errors['status'].required = true;
+                                                app.alert.dismiss('upload');
+                                                callback(null, fields, errors);                                         
+                                            }, this),
+                                            
+                                        });
+                                    }else if(self.model.get('resultado_c')=='3'){
+                                        
+                                        modelLead.set('subtipo_registro_c', "2");
+                                        modelLead.set('status_management_c', "2");
+                                        modelLead.save();                                        
+                                        modelo.save();
+                                        callback(null, fields, errors);
+                                        //modelo.save([],{
+                                        //dataType:"text",
+                                        //complete:function() {
+                                        //        //app.router.navigate(module_name , {trigger: true});
+                                        //        $('a[name=new_minuta]').hide()
+                                        //        SUGAR.App.controller.context.reloadData({});
+                                        //        $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                        //        $('[data-name="assigned_user_name"]').removeAttr("style");
+                                        //    }
+                                        //});    
+                                    }else{                                        
+                                        modelLead.set('subtipo_registro_c', "2");
+                                        modelLead.save();
+                                        modelo.save();
+                                        callback(null, fields, errors);
+                                        //    dataType:"text",
+                                        //    complete:function() {
+                                        //            //app.router.navigate(module_name , {trigger: true});
+                                        //            $('a[name=new_minuta]').hide()
+                                        //            SUGAR.App.controller.context.reloadData({});
+                                        //            $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                        //            $('[data-name="assigned_user_name"]').removeAttr("style");
+                                        //        }
+                                        //    }); 
+                                    }                            
+                                    //callback(null, fields, errors);
+                                }else{
+                                    callback(null, fields, errors);
+                                }
+                                //callback(null, fields, errors);
+                            }, this)
+                            });
+                        }
+                    }else{
+                        
+                        modelo.save([],{
                         dataType:"text",
                         complete:function() {
-                            //app.router.navigate(module_name , {trigger: true});
-                            $('a[name=new_minuta]').hide()
-                            SUGAR.App.controller.context.reloadData({});
-                            $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
-                            $('[data-name="assigned_user_name"]').removeAttr("style");
-                        }
-                    });
+                                //app.router.navigate(module_name , {trigger: true});
+                                $('a[name=new_minuta]').hide()
+                                SUGAR.App.controller.context.reloadData({});
+                                $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                $('[data-name="assigned_user_name"]').removeAttr("style");
+                            }
+                        });
+                        callback(null, fields, errors);
+                    }
+                    //callback(null, fields, errors);
                 }, this)
             });
           } catch (e) {
               console.log("Error: al recuperar ubicación para unifin proceso")
           }
+      }else{
+         callback(null,fields,errors); 
       }
-      callback(null,fields,errors);
+      
     },
 
     showPosition:function(position) {
@@ -749,6 +1181,8 @@
     },
 
     changeColorSurveyButton:function (evt) {
+
+       
         if(this.flagPuesto && this.model.get('resultado_c') != "22" && this.model.get('resultado_c') != "24" && this.model.get('resultado_c') != "25" && this.model.get('resultado_c') != ""){
             $('[name="survey_minuta"]').addClass('btn-success');
 
@@ -756,6 +1190,87 @@
             $('[name="survey_minuta"]').removeClass('btn-success');
         }
 
+        if( this.leasingPuestos.includes( this.puesto_usuario )){
+            var moduleid = app.data.createBean('Meetings',{id:this.model.get('minut_minutas_meetingsmeetings_idb')});
+            moduleid.fetch({
+                success:_.bind(function(modelo){
+                    var parent_type1 = modelo.get('parent_type');
+                    parent_id_acc = modelo.get('parent_id');
+                    /*********************************** */
+                    //console.log(parent_id_acc);
+                    if(parent_type1== "Leads"){
+                        if(self.model.get('resultado_c')=='2' ||self.model.get('resultado_c')=='18' || self.model.get('resultado_c')=='21' || self.model.get('resultado_c')=='25'){
+                            $('[data-panelname="LBL_RECORDVIEW_PANEL8"]').removeClass('hide');
+
+                        }else{
+                            $('[data-panelname="LBL_RECORDVIEW_PANEL8"]').addClass('hide');
+
+                        }
+                    }else{
+                        app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + parent_id_acc), null, {
+                            success: _.bind(function (data) {
+                                obj = JSON.parse(data);
+                                if(parent_type1== "Accounts" && obj.total > 0){
+                                    if( this.model.get('resultado_c') != "" ){
+                                        $('[data-panelname="LBL_RECORDVIEW_PANEL7"]').removeClass('hide');
+                                        self.render();
+                                    }else{
+                                        $('[data-panelname="LBL_RECORDVIEW_PANEL7"]').addClass('hide');
+                                        self.render();
+                                    }
+                                
+                                }
+                            }, this),
+                        }); 
+                    }
+                }, this)
+            });
+        }
+        
+    },
+
+    padre:function(){
+        var moduleid = app.data.createBean('Meetings',{id:this.model.get('minut_minutas_meetingsmeetings_idb')});
+        moduleid.fetch({
+            success:_.bind(function(modelo){
+                self.parent_type = modelo.get('parent_type');
+            }, this)
+        });
+    },
+
+    Lead_Account_options: function(){
+        /**************************************** */
+        var moduleid = app.data.createBean('Meetings',{id:this.model.get('minut_minutas_meetingsmeetings_idb')});
+        moduleid.fetch({
+            success:_.bind(function(modelo){
+                parent_meet = modelo.get('parent_type');
+                parent_id_acc = modelo.get('parent_id');
+                if(parent_id_acc != "" && parent_meet == "Accounts"){
+                    /*********************************** */
+                    //console.log(parent_id_acc);
+                    app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + parent_id_acc), null, {
+                        success: _.bind(function (data) {
+                            obj = JSON.parse(data);
+                            if(dobj.total > 0){
+                                //$('[data-panelname="LBL_RECORDVIEW_PANEL4"]').removeClass('hide');
+                                self.tipo_account = true;
+                                //self.render();
+                            }
+                            //else{
+                            //    $('[data-panelname="LBL_RECORDVIEW_PANEL4"]').addClass('hide');
+                            //}                
+                        }, this),
+                    });                    
+                    /**************************************** */
+                   // $("div.record-label[data-name='MotivoCancelacion']").attr('style', 'display:none;');
+                    
+                }else if(parent_id_acc != "" && parent_meet == "Leads"){
+                    //$("div.record-label[data-name='SegundaReunion']").attr('style', 'display:none;');
+                    self.tipo_lead = true;
+                    //self.render();
+                }
+            }, this)
+        });
     },
 
     /*

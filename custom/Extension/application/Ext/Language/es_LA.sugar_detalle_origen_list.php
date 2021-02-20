@@ -1,5 +1,5 @@
 <?php
- // created: 2020-05-04 15:00:22
+ // created: 2021-02-09 11:40:41
 
 $app_list_strings['detalle_origen_list']=array (
   '' => '',
@@ -14,4 +14,30 @@ $app_list_strings['detalle_origen_list']=array (
   9 => 'Offline',
   10 => 'Cartera Asesores',
   11 => 'Recomendación',
+  12 => 'SOC',
+  13 => 'Creditaria',
+  14 => 'Kredi',
+  15 => 'Distrito Pyme',
+  16 => 'Lendinc',
+  17 => 'Nomilinea',
+  18 => 'Edenred',
+  19 => 'Pedidos',
+  20 => 'Contpaqi',
+  21 => 'Busca tu Credito',
+  22 => 'Transid',
+  23 => 'Leadgenios',
+  24 => 'Coru',
+  25 => 'Dell',
+  26 => 'Klu',
+  27 => 'Evva',
+  28 => 'Comparatodos',
+  29 => 'Cotizator',
+  30 => 'ikiwi',
+  31 => 'VLL',
+  32 => 'Bzpay',
+  33 => 'fiizy',
+  34 => 'Contalink',
+  35 => 'Qualtrium',
+  36 => 'Worky',
+  37 => 'El20',
 );

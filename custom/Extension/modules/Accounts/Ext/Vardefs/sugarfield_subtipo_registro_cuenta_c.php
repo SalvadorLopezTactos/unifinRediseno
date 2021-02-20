@@ -1,8 +1,7 @@
 <?php
- // created: 2020-05-15 08:27:22
+ // created: 2021-01-29 12:47:26
 $dictionary['Account']['fields']['subtipo_registro_cuenta_c']['labelValue']='Subtipo de Cuenta';
 $dictionary['Account']['fields']['subtipo_registro_cuenta_c']['dependency']='';
-$dictionary['Account']['fields']['subtipo_registro_cuenta_c']['readonly']=true;
 $dictionary['Account']['fields']['subtipo_registro_cuenta_c']['visibility_grid']=array (
   'trigger' => 'tipo_registro_cuenta_c',
   'values' => 
@@ -14,11 +13,12 @@ $dictionary['Account']['fields']['subtipo_registro_cuenta_c']['visibility_grid']
     ),
     2 => 
     array (
-      0 => '2',
-      1 => '7',
-      2 => '8',
-      3 => '9',
-      4 => '10',
+      0 => '1',
+      1 => '2',
+      2 => '7',
+      3 => '8',
+      4 => '9',
+      5 => '10',
     ),
     3 => 
     array (

@@ -8,3 +8,4 @@ $mod_strings['LBL_CANAL'] = 'Canal';
 $mod_strings['LBL_MULTILINEA_C'] = 'Multilínea';
 $mod_strings['LBL_EXCLUIR_PRECALIF_STREET'] = 'Excluye Precalifiación Street';
 $mod_strings['LBL_EXCLU_PRECALIF'] = 'Excluye Pre-Califiación';
+$mod_strings['LBL_STATUS_MANAGEMENT'] = 'Estatus por Producto';

@@ -1,5 +1,5 @@
 <?php
- // created: 2020-04-30 18:04:15
+ // created: 2020-12-15 11:21:02
 
 $app_list_strings['tipo_registro_cuenta_list']=array (
   '' => '',

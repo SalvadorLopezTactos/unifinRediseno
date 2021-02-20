@@ -48,70 +48,67 @@ class altaLeadServices extends SugarApi
             } else {
                 /** PErsona Moral */
 
-                if (count($args['asociados']) > 0) {
+                //  if (count($args['asociados']) > 0) {
 
-                    $obj_leads['lead'] = $this->sec_validacion($obj_leads['lead']);
+                $obj_leads['lead'] = $this->sec_validacion($obj_leads['lead']);
 
-                    /** Inicia Proceso validación Lead hijo  solo si el regimen fiscal es Moral*/
+                /** Inicia Proceso validación Lead hijo  solo si el regimen fiscal es Moral*/
+
+                /*for ($i = 0; $i < count($obj_leads['asociados']); $i++) {
+                    $obj_leads['asociados'][$i] = $this->sec_validacion($obj_leads['asociados'][$i]);
+                }*/
+
+                /** Validamos que ambos leads esten con estatus 200  */ # pendiente de validación OB001
+
+
+                /*if ($obj_leads['asociados'][0]['requeridos'] == 'success' && $obj_leads['asociados'][0]['formato_texto'] == 'success'
+                    && $obj_leads['asociados'][0]['formato_telefenos'] == 'success' && $obj_leads['asociados'][0]['formato_correo'] == 'success'
+                ) {*/
+                /** Proceso de Guardado */
+
+                $response_Services['lead'] = $this->insert_Leads_Asociados($obj_leads['lead'], "");
+
+                /*if (!empty($response_Services['lead']['id']) && $response_Services['lead']['modulo'] == 'Leads') {
 
                     for ($i = 0; $i < count($obj_leads['asociados']); $i++) {
-                        $obj_leads['asociados'][$i] = $this->sec_validacion($obj_leads['asociados'][$i]);
+                        $response_Services['asociados'][$i] = $this->insert_Leads_Asociados($obj_leads['asociados'][$i], $response_Services['lead']['id']);
                     }
+                }*/
+                // Actualizamos el campo asignado a de cada registro nuevo
+                $this->get_asignado($response_Services, "3");
+                /*  } else {
 
-                    /** Validamos que ambos leads esten con estatus 200  */ # pendiente de validación OB001
+                      $GLOBALS['log']->fatal(print_r($obj_leads, true));
 
+                      if ($obj_leads['lead']['requeridos'])
+                          $response_Services ["lead"] = $this->estatus(422, 'Información incompleta', '', "", "Error en Asociado");
 
-                    if ($obj_leads['asociados'][0]['requeridos'] == 'success' && $obj_leads['asociados'][0]['formato_texto'] == 'success'
-                        && $obj_leads['asociados'][0]['formato_telefenos'] == 'success' && $obj_leads['asociados'][0]['formato_correo'] == 'success'
-                    ) {
-                        /** Proceso de Guardado */
-
-                        $response_Services['lead'] = $this->insert_Leads_Asociados($obj_leads['lead'], "");
-
-                        if (!empty($response_Services['lead']['id']) && $response_Services['lead']['modulo'] == 'Leads') {
-
-                            for ($i = 0; $i < count($obj_leads['asociados']); $i++) {
-                                $response_Services['asociados'][$i] = $this->insert_Leads_Asociados($obj_leads['asociados'][$i], $response_Services['lead']['id']);
-                            }
-                        }
-                        // Actualizamos el campo asignado a de cada registro nuevo
-                        $this->get_asignado($response_Services, "3");
-                    }
-                    else {
-
-                        $GLOBALS['log']->fatal(print_r($obj_leads, true));
-
-                        if($obj_leads['lead']['requeridos'])
-                        $response_Services ["lead"] = $this->estatus(422, 'Información incompleta', '', "", "Error en Asociado");
-
-                        $response_Services ["asociados"][0] = $this->estatus(422, 'Información incompleta', '', "", $obj_leads['asociados'][0]['requeridos_error']);
+                      $response_Services ["asociados"][0] = $this->estatus(422, 'Información incompleta', '', "", $obj_leads['asociados'][0]['requeridos_error']);
 
 
+                      if ($obj_leads['asociados'][0]['requeridos'] != 'success' || $obj_leads['asociados'][0]['formato_texto'] != 'success'
+                          || $obj_leads['asociados'][0]['formato_telefenos'] != 'success' || $obj_leads['asociados'][0]['formato_correo'] != 'success'
+                      ) {
+                          $arrayErrores = array();
+                          $obj_leads['asociados'][0]['requeridos'] == 'fail' ? array_push($arrayErrores, $obj_leads['asociados'][0]['requeridos_error']) : "";
+                          $obj_leads['asociados'][0]['formato_texto'] == 'fail' ? array_push($arrayErrores, $obj_leads['asociados'][0]['formato_texto_error']) : "";
+                          $obj_leads['asociados'][0]['formato_telefenos'] == 'fail' ? array_push($arrayErrores, 'Telefono') : "";
+                          $obj_leads['asociados'][0]['formato_correo'] == 'fail' ? array_push($arrayErrores, 'Correo') : "";
 
+                          $response_Services ["asociados"][0] = $this->estatus(424, 'Error de información', '', "", $arrayErrores);
+                      }
+                  }*/
 
-                        if ($obj_leads['asociados'][0]['requeridos'] != 'success' || $obj_leads['asociados'][0]['formato_texto'] != 'success'
-                            || $obj_leads['asociados'][0]['formato_telefenos'] != 'success' || $obj_leads['asociados'][0]['formato_correo'] != 'success'
-                        ) {
-                            $arrayErrores = array();
-                            $obj_leads['asociados'][0]['requeridos'] == 'fail' ? array_push($arrayErrores, $obj_leads['asociados'][0]['requeridos_error']) : "";
-                            $obj_leads['asociados'][0]['formato_texto'] == 'fail' ? array_push($arrayErrores, $obj_leads['asociados'][0]['formato_texto_error']) : "";
-                            $obj_leads['asociados'][0]['formato_telefenos'] == 'fail' ? array_push($arrayErrores, 'Telefono') : "";
-                            $obj_leads['asociados'][0]['formato_correo'] == 'fail' ? array_push($arrayErrores, 'Correo') : "";
-
-                            $response_Services ["asociados"][0] = $this->estatus(424, 'Error de información', '', "", $arrayErrores);
-                        }
-                    }
-
-                } else {
-                    $response_Services ["lead"] = $this->estatus(422, 'Debe contenener al menos un contacto asociado', '', "","");
-                }
+                /*} else {
+                    $response_Services ["lead"] = $this->estatus(422, 'Debe contenener al menos un contacto asociado', '', "", "");
+                }*/
 
             }
         } else {
-            $response_Services ["lead"] = $this->estatus(422, 'Información incompleta', '', "","");
+            $response_Services ["lead"] = $this->estatus(422, 'Información incompleta', '', "", "");
         }
 
-        $GLOBALS['log']->fatal(print_r($response_Services, true));
+        //$GLOBALS['log']->fatal(print_r($response_Services, true));
 
         return $response_Services;
     }
@@ -147,49 +144,99 @@ class altaLeadServices extends SugarApi
         !empty($lead_paso6) ? $obj_leads['duplicados_en_cuentas'] = $lead_paso6 : $obj_leads['duplicados_en_cuentas'] = "";
 
         $this->enviacorreo($lead_paso5, $lead_paso6);
-
         return $obj_leads;
     }
 
     public function get_asignado($data_result, $regimenFiscal)
     {
-
         global $db;
+        $users = [];
+        /* Obetenemos el id del usuario de grupo de 9.- MKT*/
+        $QueryId = "SELECT id from users
+WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
+        $queryResultId = $db->query($QueryId);
+        $row = $db->fetchByAssoc($queryResultId);
+        $idMKT = $row['id'];
 
+        /* Obtiene  el dia y la hora actual*/
+        $queryFEcha = "SELECT date_format(NOW(),'%W %H %i') AS Fecha,UTC_TIMESTAMP()";
+        $queryResult = $db->query($queryFEcha);
+        $row = $db->fetchByAssoc($queryResult);
+        $date_Hoy = $row['Fecha'];
+        $array_date = explode(" ", $date_Hoy);
+        $dia_semana = $array_date[0];
+        $horaDia = $array_date[1] . ":" . $array_date[2];
+        $dateInput = date('H:i', strtotime($horaDia));
+
+        /* Obtiene el ultimo  usuario asignado y registrado en el config*/
         $query = "Select value from config  where name='last_assigned_user' ";
         $result = $db->query($query);
         $row = $db->fetchByAssoc($result);
         $last_indice = $row['value'];
 
-        $query_asesores = "SELECT id,date_entered from users u INNER JOIN users_cstm uc ON uc.id_c=u.id
-        where puestousuario_c='27' AND subpuesto_c='3' ORDER BY date_entered ASC ";
+        $query_asesores = "SELECT
+  user.id,
+  user.date_entered,
+  count(lead.assigned_user_id) AS total_asignados,
+  uc.access_hours_c
+FROM users user
+  INNER JOIN users_cstm uc
+    ON uc.id_c = user.id
+  INNER JOIN leads lead
+    ON lead.assigned_user_id = user.id
+where puestousuario_c='27' AND subpuesto_c='3'
+GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
         $result_usr = $db->query($query_asesores);
         //$usuarios=;
         while ($row = $db->fetchByAssoc($result_usr)) {
-            //Obtiene fecha de inicio de reunión
-            $users[] = $row['id'];
-        }
+            $hours = json_decode($row['access_hours_c'], true);
+            $hoursIn = !empty($hours) ? $hours[$dia_semana]['entrada'] : "";
+            $hoursOut = !empty($hours) ? $hours[$dia_semana]['salida'] : "";
+            if ($hoursIn != "" && $hoursOut != "") {
+                if (($hoursIn != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursOut != "Libre")) {
+                    $enable = $this->accessHours($hoursIn, $hoursOut, $dateInput);
+                    if ($enable) {
+                        $users[] = $row['id'];
+                    }
+                } elseif ($hoursIn == "Libre" && $hoursOut == "Libre") {
+                    $users[] = $row['id'];
+                }
+            } /*else {
+                $users[] = $row['id'];
+            }*/
 
+        }
+        //$GLOBALS['log']->fatal("Usuarios MKT en servicio alta Leads  " . print_r($users, true));
+
+        if (count($users) > 0) {
+            $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
+            $new_assigned_user = $users[$new_indice];
+        } else {
+            /* No existen usuarios disponibles y se asigna a  9.- MKT " */
+            $new_assigned_user = $idMKT;
+
+        }
 
         if ($regimenFiscal != "3") {
 
             if ($data_result['lead']['status'] == 200) {
-                $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
 
-                $new_assigned_user = $users[$new_indice];
                 $id_lead = $data_result['lead']['id'];
 
                 $update_assigne_user = "UPDATE leads SET  assigned_user_id ='$new_assigned_user'  WHERE id ='$id_lead' ";
                 $db->query($update_assigne_user);
+                $GLOBALS['log']->fatal("Usuarios MKT en servicio alta Indice  " . $new_indice);
 
-                $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
-                $db->query($update_assigne_user);
+                if ( $new_indice > -1 ) {
+                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
+                    $db->query($update_assigne_user);
+                }
             }
         } else {
 
             if ($data_result['lead']['status'] == 200 && $data_result['asociados'][0]['status'] == 200) {
-                $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
-                $new_assigned_user = $users[$new_indice];
+               // $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
+               // $new_assigned_user = $users[$new_indice];
                 $id_lead = $data_result['lead']['id'];
                 $id_lead_asociado = $data_result['asociados'][0]['id'];
 
@@ -200,19 +247,24 @@ class altaLeadServices extends SugarApi
                 $update_assigne_user_asociado = "UPDATE leads SET  assigned_user_id ='$new_assigned_user'  WHERE id ='$id_lead_asociado' ";
                 $db->query($update_assigne_user_asociado);
 
-                $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
-                $db->query($update_assigne_user);
+                if ( $new_indice > -1 ) {
+                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
+                    $db->query($update_assigne_user);
+                }
+
             } elseif ($data_result['lead']['status'] == 200) {
 
-                $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
-                $new_assigned_user = $users[$new_indice];
+               // $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
+                //$new_assigned_user = $users[$new_indice];
                 $id_lead = $data_result['lead']['id'];
 
                 $update_assigne_user = "UPDATE leads SET  assigned_user_id ='$new_assigned_user'  WHERE id ='$id_lead' ";
                 $db->query($update_assigne_user);
 
-                $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
-                $db->query($update_assigne_user);
+                if ( $new_indice > -1 ) {
+                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
+                    $db->query($update_assigne_user);
+                }
             } elseif (($data_result['lead']['status'] == 503 && $data_result['lead']['modulo'] == 'Leads') && $data_result['asociados'][0]['status'] == 200) {
 
                 $id_lead = $data_result['lead']['id'];
@@ -229,7 +281,6 @@ class altaLeadServices extends SugarApi
             }
 
         }
-
 
     }
 
@@ -253,11 +304,11 @@ class altaLeadServices extends SugarApi
 
                             $this->crea_relacion($parent_id, $id_lead);
                         }
-                        $response = $this->estatus(200, 'Alta de Leads exitoso', $id_lead, "Leads","");
+                        $response = $this->estatus(200, 'Alta de Leads exitoso', $id_lead, "Leads", "");
 
                     } else {
                         $arrayErrores = array();
-                        $lead_asociado['formato_texto'] == 'fail' ? $arrayErrores=$lead_asociado['formato_texto_error'] : "";
+                        $lead_asociado['formato_texto'] == 'fail' ? $arrayErrores = $lead_asociado['formato_texto_error'] : "";
                         $lead_asociado['formato_telefenos'] == 'fail' ? array_push($arrayErrores, 'Telefono') : "";
                         $lead_asociado['formato_correo'] == 'fail' ? array_push($arrayErrores, 'Correo') : "";
 
@@ -275,10 +326,10 @@ class altaLeadServices extends SugarApi
 
                     $this->crea_relacion($parent_id, $lead_asociado['duplicados_en_leads']);
                 }
-                $response = $this->estatus(503, 'Lead existente en Cuentas/Leads', $lead_asociado['duplicados_en_leads'], "Leads","");
+                $response = $this->estatus(503, 'Lead existente en Cuentas/Leads', $lead_asociado['duplicados_en_leads'], "Leads", "");
             }
         } else {
-            $response = $this->estatus(503, 'Lead existente en Cuentas/Leads', $lead_asociado['duplicados_en_cuentas'], "Cuentas");
+            $response = $this->estatus(503, 'Lead existente en Cuentas/Leads', $lead_asociado['duplicados_en_cuentas'], "Cuentas", "");
         }
 
 
@@ -426,7 +477,7 @@ class altaLeadServices extends SugarApi
                 $bean_Lead->punto_contacto_c = $dataOrigen['punto_contacto_c'];
                 break;
         }*/
-        $bean_Lead->punto_contacto_c= $punto_contacto;
+        $bean_Lead->punto_contacto_c = $punto_contacto;
 
         $bean_Lead->origen_ag_tel_c = $dataOrigen['origen_ag_tel_c'];
         $bean_Lead->promotor_c = $dataOrigen['promotor_c'];
@@ -439,7 +490,7 @@ class altaLeadServices extends SugarApi
         $bean_Lead->phone_mobile = $dataOrigen['phone_mobile'];
         $bean_Lead->phone_home = $dataOrigen['phone_home'];
         $bean_Lead->phone_work = $dataOrigen['phone_work'];
-        $bean_Lead->detalle_plataforma_c = $dataOrigen['detalle_plataforma'];
+        $bean_Lead->detalle_plataforma_c = $dataOrigen['GLID'];
         $bean_Lead->assigned_user_id = $dataOrigen['assigned_user_id'];
         $bean_Lead->id_landing_c = $dataOrigen['id_landing_c'];
         $bean_Lead->lead_source_c = $dataOrigen['lead_source_c'];
@@ -448,6 +499,12 @@ class altaLeadServices extends SugarApi
         $bean_Lead->keyword_c = $dataOrigen['keyword_c'];
         $bean_Lead->campana_c = $dataOrigen['campana_c'];
         $bean_Lead->compania_c = $dataOrigen['compania_c'];
+        /** Seccion de Contacto **/
+        $bean_Lead->contacto_nombre_c = $dataOrigen['contacto_nombre_c'];
+        $bean_Lead->contacto_apellidop_c = $dataOrigen['contacto_apellidop_c'];
+        $bean_Lead->contacto_apellidom_c = $dataOrigen['contacto_apellidom_c'];
+        $bean_Lead->contacto_telefono_c = $dataOrigen['contacto_telefono_c'];
+        $bean_Lead->contacto_email_c = $dataOrigen['contacto_email_c'];
 
         # falta obtener el asignado a
 
@@ -517,7 +574,7 @@ class altaLeadServices extends SugarApi
     public function validaTextCampos($data)
     {
 
-        $campos_lead = ["nombre_c", "apellido_paterno_c", "apellido_materno_c"];
+        $campos_lead = ["nombre_c", "apellido_paterno_c", "apellido_materno_c", "contacto_nombre_c", "contacto_apellidop_c", "contacto_apellidom_c"];
         $error_campo = [];
         $expresion = "/^[a-zA-ZÀ-ÿ\s]*$/";
 
@@ -542,7 +599,13 @@ class altaLeadServices extends SugarApi
 
         if (!empty($data['email'])) {
             if (!preg_match($expresionCorreo, $data['email'])) {
+
                 array_push($error_campo, 'email');
+            }
+        }
+        if (!empty($data['contacto_email_c'])) {
+            if (!preg_match($expresionCorreo, $data['contacto_email_c'])) {
+                array_push($error_campo, 'contacto_email_c');
             }
         }
         return $error_campo;
@@ -550,7 +613,7 @@ class altaLeadServices extends SugarApi
 
     public function validaTelefonos($data)
     {
-        $telefonos_lead = ["phone_mobile", "phone_home", "phone_work"];
+        $telefonos_lead = ["phone_mobile", "phone_home", "phone_work", "contacto_telefono_c"];
         $expresionTelefono = "/^[0-9]{8,13}$/";
         $error_telefonos = [];
 
@@ -718,13 +781,11 @@ class altaLeadServices extends SugarApi
         $cliente = '';
 
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Estimado(a) <b> user1 .</b>
-						<br><br>Tu Cliente/Prospecto cliente1 ha dejado sus datos como Lead en una campaña digital. 
+						<br><br>Tu Cliente/Prospecto cliente1 ha dejado sus datos como Lead en una campaña digital.
 						<br><br>Favor de contactarlo para dar el seguimiento adecuado.
 						<br><br>Si tienes alguna duda contacta a:
 						<br><br>Equipo CRM
 						<br>Inteligencia de Negocios<br>T: (55) 5249.5800 Ext.5737 y 5677';
-
-        $GLOBALS['log']->fatal('account:' . $idaccount . ' lead:' . $idlead);
 
         if ($idaccount != null || $idaccount != '') {
             $beanaccount = BeanFactory::retrieveBean('Accounts', $idaccount);
@@ -739,7 +800,7 @@ class altaLeadServices extends SugarApi
                     $correo = $usuario->email1;
                     $user1 = $usuario->nombre_completo_c;
 
-                    if ($user_name != 'SinGestor') {
+                    if ($user_name != 'SinGestor' && !empty($correo)) {
                         $GLOBALS['log']->fatal('cliente' . $cliente . ' usuario' . $user1 . ' correo' . $correo);
                         $mailHTML = str_replace('user1', $user1, $mailHTML);
                         $mailHTML = str_replace('cliente1', $cliente, $mailHTML);
@@ -752,37 +813,42 @@ class altaLeadServices extends SugarApi
                         $mailer->clearRecipients();
                         $mailer->addRecipientsTo(new EmailIdentity($correo, $usuario->first_name . ' ' . $usuario->last_name));
                         $result = $mailer->send();
-                        //$GLOBALS['log']->fatal($mailHTML);
                     }
                 }
             }
         } else if ($idlead != null && ($idaccount == null || $idaccount == '')) {
-            $GLOBALS['log']->fatal('ENvío mail Lead');
 
-            $beanlead = BeanFactory::retrieveBean('Leads', $idlead,array('disable_row_level_security' => true));
+            $beanlead = BeanFactory::retrieveBean('Leads', $idlead, array('disable_row_level_security' => true));
             $cliente = $beanlead->name;
-            $usuario = BeanFactory::retrieveBean('Users', $beanlead->assigned_user_id,array('disable_row_level_security' => true));
+            $usuario = BeanFactory::retrieveBean('Users', $beanlead->assigned_user_id, array('disable_row_level_security' => true));
+
             $correo = $usuario->email1;
             $user1 = $usuario->nombre_completo_c;
-
             $mailHTML = str_replace('user1', $user1, $mailHTML);
             $mailHTML = str_replace('cliente1', $cliente, $mailHTML);
-
-            //$GLOBALS['log']->fatal('cliente'.$cliente. ' usuario'.$user.' correo'.$correo);
-
-            $mailer = MailerFactory::getSystemDefaultMailer();
-            $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
-            $mailer->setSubject('Seguimiento de Campaña Digital a Cliente/Prospecto ' . $cliente . '.');
-            $body = trim($mailHTML);
-            $mailer->setHtmlBody($body);
-            $mailer->clearRecipients();
-            $mailer->addRecipientsTo(new EmailIdentity($correo, $usuario->first_name . ' ' . $usuario->last_name));
-            $result = $mailer->send();
-            $GLOBALS['log']->fatal($result);
+            if (!empty($correo)) {
+                $mailer = MailerFactory::getSystemDefaultMailer();
+                $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+                $mailer->setSubject('Seguimiento de Campaña Digital a Cliente/Prospecto ' . $cliente . '.');
+                $body = trim($mailHTML);
+                $mailer->setHtmlBody($body);
+                $mailer->clearRecipients();
+                $mailer->addRecipientsTo(new EmailIdentity($correo, $usuario->first_name . ' ' . $usuario->last_name));
+                $result = $mailer->send();
+            }
         }
     }
 
+    public function accessHours($from, $to, $login)
+    {
+        $GLOBALS['log']->fatal('FRom ' . $from . "  " . $to . "  " . $login);
+        $dateFrom = date("H:i", strtotime($from));
+        $dateTo = date("H:i", strtotime($to));
+        $dateLogin = date("H:i", strtotime($login));
+        /*        $GLOBALS['log']->fatal('FRom ' . $dateFrom);
+                $GLOBALS['log']->fatal('To ' . $dateTo);
+                $GLOBALS['log']->fatal('Login ' . $dateLogin);*/
 
+        return ($dateFrom <= $dateLogin && $dateLogin <= $dateTo);
+    }
 }
-
-

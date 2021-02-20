@@ -1,0 +1,17 @@
+<script>
+    var $select = $('select.select2');
+    $select.select2();
+</script>
+
+<div class="divPersonasRel">
+
+    <select class="select2" id="personasRel" data-name="personasRel"
+            data-placeholder="" data-toggle="tooltip" title="" style="width: 100%">
+        <option value="" > </option>
+        {{#each personasRelData_list}}
+            <option value="{{id}}" {{#if select}} selected{{/if}}> {{name}}</option>
+        {{/each}}
+
+    </select>
+</div>
+

@@ -2,9 +2,12 @@
 
     extendsFrom: 'CreateView',
 
+    total_asignados:null,
+
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
+        this.fromProtocolo=options.context.attributes.dataFromProtocolo;
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos, this));
         this.model.on('sync', this._readonlyFields, this);
         this.model.on("change:lead_cancelado_c", _.bind(this._subMotivoCancelacion, this));
@@ -18,10 +21,17 @@
         this.model.addValidationTask('check_longDupTel', _.bind(this.validaLongDupTel, this));
         this.model.addValidationTask('check_TextOnly', _.bind(this.checkTextOnly, this));
         this.model.addValidationTask('change:email', _.bind(this.expmail, this));
+        this.model.addValidationTask('checkCreateRecord', _.bind(this.checkCreateRecord, this));
         this.events['keydown [name=ventas_anuales_c]'] = 'checkInVentas';
         this.on('render', this._hidechkLeadCancelado, this);
         this.model.on('change:name_c', this.cleanName, this);
         this.model.on("change:regimen_fiscal_c", _.bind(this._cleanRegFiscal, this));
+        this.getRegistrosAsignados();
+    },
+
+    delegateButtonEvents: function() {
+        this._super("delegateButtonEvents");
+        this.context.on('button:cancel_button:click', this.cancel, this);
     },
 
     _cleanRegFiscal: function () {
@@ -128,6 +138,28 @@
         }
 
         callback(null, fields, errors);
+    },
+
+    checkCreateRecord:function(fields, errors, callback){
+        //Obteniendo el puesto del usuario
+        //Se restringe creación de Leads cuando ya se tienen más de 20 registros asignados a los usuarios 
+        //Asesor Leasing:2, Director Leasing:5
+        var puesto=App.user.attributes.puestousuario_c;
+
+        if(this.total_asignados>20 && (puesto=='2' || puesto=='5')){
+
+            app.alert.show("error_create_leads", {
+                level: "error",
+                messages: 'No es posible crear Lead ya que tiene asignado el límite máximo de registros<br>Para crear registro, por favor atienda alguno de los registros que tiene asignado',
+                autoClose: false
+            });
+
+            errors['no_create_lead'] = errors['no_create_lead'] || {};
+            errors['no_create_lead'].required = true;
+        }
+
+        callback(null, fields, errors);
+
     },
 
     checkTextOnly: function (fields, errors, callback) {
@@ -547,7 +579,50 @@
         }
     },
 
+    /*
+    Función ejecutada para saber si la información se debe de mostrar
+    */
+    getRegistrosAsignados:function(){
+
+        var id_user=App.user.attributes.id;
+        App.alert.show('obtieneAsignados', {
+                    level: 'process',
+                    title: 'Cargando',
+                });
+
+        app.api.call('GET', app.api.buildURL('GetRegistrosAsignadosForProtocolo/' + id_user), null, {
+            success: function (data) {
+                App.alert.dismiss('obtieneAsignados');
+                self.total_asignados=data.total_asignados;
+            },
+            error: function (e) {
+                throw e;
+            }
+        });
+
+    },
+
+    cancel: function () {
+        //Validación para obligar a registrar Lead a través de Protocolo al asesor firmado
+        //necesariamente se agrega 'else' para que en una creación natural, el botón cancel siga con el funcionamiento natural
+        if(this.fromProtocolo=='1'){
+            app.alert.show("requiredSetLead", {
+                level: "warning",
+                title: "Es necesario que complete el registro de Lead",
+                autoClose: false
+            });
+
+            // update the browser URL with the proper
+            app.router.navigate('#Home', {trigger: true});
+
+        }else{
+            this._super("cancel");
+        }
+        
+    },
+
     _render: function (options) {
         this._super("_render");
+        this.$(".record-cell[data-name='blank_space']").hide();
     }
 })
