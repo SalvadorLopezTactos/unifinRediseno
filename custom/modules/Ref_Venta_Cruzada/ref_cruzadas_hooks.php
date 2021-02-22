@@ -107,7 +107,7 @@ class Ref_Cruzadas_Hooks
                         $id_user_uniclick = $beanU->id;
                         $correo_acpeta_uniclick=$beanU->email1;
                         $nombre_acepta_uniclick=$beanU->full_name;     
-
+                        //$GLOBALS['log']->fatal("--".$nombre_acepta_uniclick." -- ".$correo_acpeta_uniclick);
                         // Referencia uniclick avizo para aprobación
                         if($status == '6'){
                             $GLOBALS['log']->fatal("ENVIANDO CORREO PARA APROBACION UNICLICK A ASESOR ORIGEN CON EMAIL ".$correo_acpeta_uniclick);
@@ -124,18 +124,18 @@ class Ref_Cruzadas_Hooks
                                 $cuerpoCorreo= $this->estableceCuerpoNotificacionUniclickRespondido($nombre_acepta_uniclick,$nombreCuenta,$linkReferencia,'Aceptada');
 
                                 //Enviando correo a asesor origen
-                                $this->enviarNotificacionReferencia("Validación de referencia de venta cruzada Uniclick",$cuerpoCorreo,$correo_acpeta_uniclick,$nombre_acepta_uniclick);
+                                $this->enviarNotificacionReferencia("Referencia Aprobada Uniclick",$cuerpoCorreo,$correo_acpeta_uniclick,$nombre_acepta_uniclick);
                             }          
 
                         }
                         //Referencia uniclick cancelada
                         if($status =='3'){
                             if($id_current_user != $id_user_uniclick){
-                                $GLOBALS['log']->fatal("ENVIANDO CORREO REFERENCIA VÁLIDA-cancelada UNICLICK A ASESOR ORIGEN CON EMAIL ".$correo_acpeta_uniclick);
+                                $GLOBALS['log']->fatal("ENVIANDO CORREO REFERENCIA VÁLIDA-CANCELADA UNICLICK A ASESOR ORIGEN CON EMAIL ".$correo_acpeta_uniclick);
                                 $cuerpoCorreo= $this->estableceCuerpoNotificacionUniclickRespondido($nombre_acepta_uniclick,$nombreCuenta,$linkReferencia,'Rechazada');
 
                                 //Enviando correo a asesor origen
-                                $this->enviarNotificacionReferencia("Nueva referencia válida",$cuerpoCorreo,$correo_asesor_origen,$nombreAsesorOrigen);
+                                $this->enviarNotificacionReferencia("Referencia Cancelada Uniclick",$cuerpoCorreo,$correo_asesor_origen,$nombreAsesorOrigen);
                             }                            
                         }
                     }
@@ -148,7 +148,7 @@ class Ref_Cruzadas_Hooks
             }
         }
 
-        if($status=='1'){//Referenca válida
+        if($status=='1' && ($producto_ref != '8' && $producto_ref != '9') ){//Referenca válida
             //Envio de notificacion a asesor origen
             if($correo_asesor_origen!=""){
 
@@ -194,7 +194,7 @@ class Ref_Cruzadas_Hooks
 
         }
 
-        if($status=='3'){//Referenca cancelada
+        if($status=='3' && ($producto_ref != '8' && $producto_ref != '9')){//Referenca cancelada
             //Envio de notificacion a asesor origen
             if($correo_asesor_origen!=""){
 

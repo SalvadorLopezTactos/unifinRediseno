@@ -35,9 +35,9 @@ class ExistentesVentasCruzadas_class
 			}else{
 				$query = $query . "and ref.estatus = '1'";
 			}
-			$GLOBALS['log']->fatal('query',$query);
+			//$GLOBALS['log']->fatal('query',$query);
 			$results = $GLOBALS['db']->query($query);
-			$GLOBALS['log']->fatal('results',$results);
+			//$GLOBALS['log']->fatal('results',$results);
 			//$GLOBALS['log']->fatal('results_num',$results->num_rows);
 			
 			if($results->num_rows > 0){
