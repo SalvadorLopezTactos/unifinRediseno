@@ -23,8 +23,7 @@ class ExistentesVentasCruzadas_class
 					$parentBean = current($relatedBeans);
 					$id_cuenta = $parentBean->id;
 				}
-			}
-			
+			}			
 			//$parent_id=$bean->parent_id;
 			$query = "select ref.name from Ref_Venta_Cruzada as ref
 			join accounts_ref_venta_cruzada_1_c as aref on aref.accounts_ref_venta_cruzada_1ref_venta_cruzada_idb = ref.id
@@ -50,5 +49,7 @@ class ExistentesVentasCruzadas_class
 		
 	}
 }
+
+
 
 ?>

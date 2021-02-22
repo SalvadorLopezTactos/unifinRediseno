@@ -70,3 +70,4 @@ $searchFields['Ref_Venta_Cruzada'] = array (
     'is_date_field' => true,
   ),
 );
+

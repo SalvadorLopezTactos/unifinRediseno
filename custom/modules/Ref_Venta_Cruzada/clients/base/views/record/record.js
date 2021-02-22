@@ -102,11 +102,9 @@
 				errors['explicacion_rechazo'] = errors['explicacion_rechazo'] || {};
 				errors['explicacion_rechazo'].required = true;
 			}
-        }
-        
+        }        
 		
-        if (campos) {
-			
+        if (campos) {	
             app.alert.show("Campos Requeridos", {
                 level: "error",
                 messages: "Hace falta completar la siguiente información para guardar una <b>Referencia Venta Cruzada: </b><br>" + campos,
@@ -203,7 +201,6 @@
             $('[name="cancelar_vta_cruzada"]').removeClass('hidden');
             $('[name="aceptar_vta_cruzada"]').show();
             $('[name="cancelar_vta_cruzada"]').show();
-
 		}
 
         this.setEtiquetasFechas(productoRef);

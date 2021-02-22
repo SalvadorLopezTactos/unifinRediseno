@@ -35,7 +35,7 @@ class Ref_Cruzadas_Hooks
         //correos_cancelacion_vta_cruzada_list
         $array_vta_cruzada_mail = $GLOBALS['app_list_strings']['correos_cancelacion_vta_cruzada_list'];
         $idCarloS = $array_vta_cruzada_mail['1'];
-        $GLOBALS['log']->fatal('correo_current_user',$idCarloS);
+        //$GLOBALS['log']->fatal('correo_current_user',$idCarloS);
         //$idCarloS='a951c644-c43b-11e9-9e17-00155d96730d';
         /*usuario_producto*/
         $idAsesorRef=$bean->user_id_c;
@@ -56,15 +56,12 @@ class Ref_Cruzadas_Hooks
                     $nombreAsesorRef=$beanAsesorRF->full_name;
                 }
             }else{
-
                 $beanAsesorRF = BeanFactory::retrieveBean('Users', $idAsesorRef);
                 if(!empty($beanAsesorRF)){
                     $correo_asesor_ref=$beanAsesorRF->email1;
                     $nombreAsesorRef=$beanAsesorRF->full_name;
                 }
-
             }
-
         }
 
         $idAsesorRM=$bean->user_id1_c;/*Validar que no sea null*/
@@ -323,8 +320,5 @@ class Ref_Cruzadas_Hooks
             $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email ".$correoAsesor);
             $GLOBALS['log']->fatal("Exception ".$e);
         }
-
-
     }
-
 }

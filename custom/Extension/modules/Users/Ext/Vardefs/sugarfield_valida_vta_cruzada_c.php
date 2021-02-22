@@ -4,4 +4,5 @@ $dictionary['User']['fields']['valida_vta_cruzada_c']['labelValue']='Validación
 $dictionary['User']['fields']['valida_vta_cruzada_c']['enforced']='';
 $dictionary['User']['fields']['valida_vta_cruzada_c']['dependency']='';
 
+
  ?>
