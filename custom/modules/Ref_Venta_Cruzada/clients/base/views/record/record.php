@@ -13,6 +13,30 @@ array (
           0 => 
           array (
             'type' => 'button',
+            'name' => 'aceptar_vta_cruzada',
+            'label' => 'Aceptar',
+            'css_class' => 'btn-success hidden',
+            'showOn' => 'view',
+            'events' => 
+            array (
+              'click' => 'button:aceptar_vta_cruzada:click',
+            ),
+          ),
+          1 => 
+          array (
+            'type' => 'button',
+            'name' => 'cancelar_vta_cruzada',
+            'label' => 'Rechazar',
+            'css_class' => 'btn-danger hidden',
+            'showOn' => 'view',
+            'events' => 
+            array (
+              'click' => 'button:cancelar_vta_cruzada:click',
+            ),
+          ),
+          2 => 
+          array (
+            'type' => 'button',
             'name' => 'cancel_button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
@@ -22,7 +46,7 @@ array (
               'click' => 'button:cancel_button:click',
             ),
           ),
-          1 => 
+          3 => 
           array (
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
@@ -32,7 +56,7 @@ array (
             'showOn' => 'edit',
             'acl_action' => 'edit',
           ),
-          2 => 
+          4 => 
           array (
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
@@ -114,7 +138,7 @@ array (
               ),
             ),
           ),
-          3 => 
+          5 => 
           array (
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
