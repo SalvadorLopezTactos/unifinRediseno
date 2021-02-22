@@ -124,7 +124,7 @@ class Ref_Cruzadas_Hooks
                                 $cuerpoCorreo= $this->estableceCuerpoNotificacionUniclickRespondido($nombre_acepta_uniclick,$nombreCuenta,$linkReferencia,'Aceptada');
 
                                 //Enviando correo a asesor origen
-                                $this->enviarNotificacionReferencia("Validación de referencia de venta cruzada Uniclick",$cuerpoCorreo,$correo_acpeta_uniclick,$nombre_acepta_uniclick);
+                                $this->enviarNotificacionReferencia("Referencia Aprobada Uniclick",$cuerpoCorreo,$correo_acpeta_uniclick,$nombre_acepta_uniclick);
                             }          
 
                         }
@@ -135,7 +135,7 @@ class Ref_Cruzadas_Hooks
                                 $cuerpoCorreo= $this->estableceCuerpoNotificacionUniclickRespondido($nombre_acepta_uniclick,$nombreCuenta,$linkReferencia,'Rechazada');
 
                                 //Enviando correo a asesor origen
-                                $this->enviarNotificacionReferencia("Nueva referencia válida",$cuerpoCorreo,$correo_asesor_origen,$nombreAsesorOrigen);
+                                $this->enviarNotificacionReferencia("Referencia Cancelada Uniclick",$cuerpoCorreo,$correo_asesor_origen,$nombreAsesorOrigen);
                             }                            
                         }
                     }
@@ -148,7 +148,7 @@ class Ref_Cruzadas_Hooks
             }
         }
 
-        if($status=='1'){//Referenca válida
+        if($status=='1' && ($producto_ref && '8' && $producto_ref && '9') ){//Referenca válida
             //Envio de notificacion a asesor origen
             if($correo_asesor_origen!=""){
 
@@ -194,7 +194,7 @@ class Ref_Cruzadas_Hooks
 
         }
 
-        if($status=='3'){//Referenca cancelada
+        if($status=='3' && ($producto_ref && '8' && $producto_ref && '9')){//Referenca cancelada
             //Envio de notificacion a asesor origen
             if($correo_asesor_origen!=""){
 
