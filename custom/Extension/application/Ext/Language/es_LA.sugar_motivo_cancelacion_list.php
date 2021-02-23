@@ -6,6 +6,6 @@ $app_list_strings['motivo_cancelacion_list']=array (
   1 => 'Ya es cliente UNIFIN',
   2 => 'No es perfil',
   3 => 'Ilocalizable',
-  4 => 'Datos incorrectos',
+  4 => 'La empresa ya no existe',
   5 => 'Si es perfil, no está interesado',
 );
