@@ -119,7 +119,22 @@ $dependencies['Calls']['readOnly_Held_NotHeld'] = array
                 'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
             ),
         ),
-
+        //evento_campana_c
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'evento_campana_c',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
+            ),
+        ),
+        //campana_rel_c
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'campana_rel_c',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
+            ),
+        ),
     ),
     'notActions' => array(),
 

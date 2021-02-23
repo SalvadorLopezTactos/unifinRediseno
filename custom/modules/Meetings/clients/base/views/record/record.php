@@ -340,26 +340,40 @@ array (
               ),
               12 => 
               array (
+                'name' => 'evento_campana_c',
+                'label' => 'LBL_EVENTO_CAMPANA',
+              ),
+              13 => 
+              array (
+                'name' => 'campana_rel_c',
+                'studio' => 'visible',
+                'label' => 'LBL_CAMPANA_REL',
+              ),
+              14 => 
+              array (
                 'name' => 'objetivo_c',
                 'label' => 'LBL_OBJETIVO_C',
               ),
-              13 => 
+              15 => 
               array (
                 'name' => 'resultado_c',
                 'label' => 'LBL_RESULTADO_C',
               ),
-              14 => 
+              16 => 
               array (
                 'name' => 'referenciada_c',
                 'label' => 'LBL_REFERENCIADA_C',
               ),
-              15 => 
+              17 => 
               array (
               ),
-              16 => 
+              18 => 
               array (
                 'name' => 'lic_licitaciones_meetings_1_name',
                 'readonly' => true,
+              ),
+              19 => 
+              array (
               ),
             ),
           ),
