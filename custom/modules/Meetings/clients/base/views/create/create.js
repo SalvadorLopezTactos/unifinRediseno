@@ -1,9 +1,10 @@
-
 ({
-
     extendsFrom: 'CreateView',
 
     initialize: function (options) {
+      	var createViewEvents = {};
+        createViewEvents['focus [data-name=campana_rel_c]'] = 'abre';
+	      this.events = _.extend({}, this.events, createViewEvents);
         this.plugins = _.union(this.plugins || [], ['AddAsInvitee', 'ReminderTimeDefaults']);
         self = this;
         this._super("initialize", [options]);
@@ -17,8 +18,11 @@
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
         this.model.addValidationTask('valida_usuarios_vetados',_.bind(this.valida_usuarios_vetados, this));
         this.model.addValidationTask('Valida_producto_usuario',_.bind(this.productoReunion, this));
-
         this.on('render', this.disablestatus, this);
+    },
+
+    abre: function () {
+      window.abre = 1;
     },
 
     _render: function () {
@@ -43,6 +47,10 @@
 
         //Función para ocultar o mostrar el campo Producto
         this.campoproducto();
+        //Oculta campo de Campaña
+        if (App.user.attributes.puestousuario_c != '27' && App.user.attributes.puestousuario_c != '31') {
+            this.$('div[data-name="evento_campana_c"]').hide();
+        }
     },
 
     /*Valida que por lo menos exita un objetivo específico a su vez expande el panel*/

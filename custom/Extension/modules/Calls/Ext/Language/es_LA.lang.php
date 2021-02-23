@@ -25,3 +25,6 @@ $mod_strings['LBL_PERSONA_RELACION_C'] = 'id Persona Relacion Llamada';
 $mod_strings['LBL_DETALLE_RESULTADO'] = 'Detalle';
 $mod_strings['LBL_CUENTA_EXISTENTE_ACCOUNT_ID'] = 'Razón social existente (relacionado Cuenta ID)';
 $mod_strings['LBL_CUENTA_EXISTENTE'] = 'Razón social existente';
+$mod_strings['LBL_EVENTO_CAMPANA'] = 'Evento/Campaña';
+$mod_strings['LBL_CAMPANA_REL_CAMPAIGN_ID'] = 'Evento/Campaña Relacionada (relacionado Campaña ID)';
+$mod_strings['LBL_CAMPANA_REL'] = 'Evento/Campaña Relacionada';

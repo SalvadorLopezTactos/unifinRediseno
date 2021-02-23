@@ -10,6 +10,9 @@
     },
 
     initialize: function (options) {
+      	var createViewEvents = {};
+        createViewEvents['focus [data-name=campana_rel_c]'] = 'abre';
+	      this.events = _.extend({}, this.events, createViewEvents);
         self = this;
         this._super("initialize", [options]);
         this.on('render', this.disableparentsfields, this);
@@ -38,6 +41,7 @@
         this.model.on('sync', this.disableFieldsTime, this);
         this.model.on('sync', this.getPersonas, this);
         this.model.on('sync', this.hidePErsonaEdit, this);
+        this.model.on('sync', this.campanas, this);
 
         this.model.addValidationTask('resultCallReq', _.bind(this.resultCallRequerido, this));
         this.events['click a[name=edit_button]'] = 'fechascallsymeet';
@@ -46,9 +50,23 @@
         /***********  Lead Management  *************/
         this.model.addValidationTask('lead_management', _.bind(this.ConfirmCancelar, this));  //OnConfirm cancelar LEad-PRospecto contactado
         this.model.addValidationTask('lmanage_seg_reun', _.bind(this.SegundaReunion, this));  //OnConfirm cancelar Cuenta segunda llamada
-
     },
 
+    abre: function () {
+      window.abre = 1;
+    },
+
+    campanas: function()
+    {
+      if (App.user.attributes.puestousuario_c != '27' && App.user.attributes.puestousuario_c != '31') {
+        this.$('div[data-name="evento_campana_c"]').hide();
+        this.$('div[data-name="campana_rel_c"]').hide();
+      }
+      if (this.model.get('status') == 'Held' || this.model.get('status') == 'Not Held') {
+        this.$('.record-edit-link-wrapper[data-name=campana_rel_c]').remove();
+      }
+    },
+    
     _render: function (options) {
         this._super("_render");
         this.enableparentname();
@@ -888,8 +906,5 @@
             person.$('[data-name="calls_persona_relacion"]').hide();
             person.$('[data-name="persona_relacion_c"]').hide();
         }
-
-
     },
-
 })

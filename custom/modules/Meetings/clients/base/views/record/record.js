@@ -8,6 +8,9 @@
     MotivoCanc_flag: 0,
 
     initialize: function (options) {
+      	var createViewEvents = {};
+        createViewEvents['focus [data-name=campana_rel_c]'] = 'abre';
+	      this.events = _.extend({}, this.events, createViewEvents);
         self = this;
         this._super("initialize", [options]);
         this.events['click a[name=parent_name]'] = 'handleEdit';
@@ -56,9 +59,24 @@
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
         this.model.addValidationTask('valida_usuarios_vetados',_.bind(this.valida_usuarios_vetados, this));
         this.model.on('sync',this.enableparentname,this);
-        
+        this.model.on('sync', this.campanas, this);
     },
 
+    abre: function () {
+      window.abre = 1;
+    },
+
+    campanas: function()
+    {
+      if (App.user.attributes.puestousuario_c != '27' && App.user.attributes.puestousuario_c != '31') {
+        this.$('div[data-name="evento_campana_c"]').hide();
+        this.$('div[data-name="campana_rel_c"]').hide();
+      }
+      if (this.model.get('status') == 'Held' || this.model.get('status') == 'Not Held') {
+        this.$('.record-edit-link-wrapper[data-name=campana_rel_c]').remove();
+      }
+    },
+    
     _render: function (options) {
         this._super("_render");
         reunion = this;
