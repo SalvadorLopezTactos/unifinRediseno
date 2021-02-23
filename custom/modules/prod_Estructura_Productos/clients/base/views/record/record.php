@@ -193,18 +193,18 @@ array (
               ),
               1 => 
               array (
-                'name' => 'producto_financiero',
-                'label' => 'LBL_PRODUCTO_FINANCIERO',
+                'name' => 'negocio',
+                'label' => 'LBL_NEGOCIO',
               ),
               2 => 
               array (
-                'name' => 'empresa',
-                'label' => 'LBL_EMPRESA',
+                'name' => 'producto_financiero',
+                'label' => 'LBL_PRODUCTO_FINANCIERO',
               ),
               3 => 
               array (
-                'name' => 'negocio',
-                'label' => 'LBL_NEGOCIO',
+                'name' => 'empresa',
+                'label' => 'LBL_EMPRESA',
               ),
               4 => 
               array (
