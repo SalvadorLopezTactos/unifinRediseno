@@ -38,7 +38,15 @@
 			//Oculta Check ayuda
 			this.$('[data-name=ayuda_asesor_cp_c]').hide(); 
         }
+
+        this.isAyudaVisible();
         
+    },
+
+    isAyudaVisible:function(){
+        if(this.model.get('parent_type')=="Leads"){
+            this.$('[data-name=ayuda_asesor_cp_c]').hide(); 
+        }
     },
 
     valida_cuenta_no_contactar:function (fields, errors, callback) {
