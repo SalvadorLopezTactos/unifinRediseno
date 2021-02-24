@@ -566,11 +566,12 @@ class NotificacionDirector
 	        }
             //Notificacion 3.-
             //Valida que el RM en la opp sea vacio o 9 - sin Gestor
-            $Valor= "569246c7-da62-4664-ef2a-5628f649537e";
-            if ($bean->user_id1_c!="" || $bean->user_id1_c!=$Valor) {
+            if ($bean->user_id1_c!="" && $bean->user_id1_c!=$Valor) {
                 $GLOBALS['log']->fatal("Inicia Notificacion 3 RM");
                     //obtiene el id del asesor RM
                 $beanAsesorRM = BeanFactory::retrieveBean('Users', $bean->user_id1_c);
+                //Valor de  usuario 9 - Sin Gestor
+                $Valor= "569246c7-da62-4664-ef2a-5628f649537e";
                 $mailbossesRM_acc=array();
                 //El valor es el 9- sin Gestor, se opta por traer el RM de la cuenta
                 $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
