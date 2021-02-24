@@ -45,6 +45,15 @@ class ExistentesVentasCruzadas_class
 				throw new SugarApiExceptionInvalidParameter("El producto seleccionado, tiene una referencia activa");
 			}else{
 				$bean->estatus = '1';
+
+					$bean->load_relationship('teams');
+					$equipoPrincipal = '1';
+					//Add the teams
+					$bean->teams->add(
+						array(
+							$equipoPrincipal
+						)
+					);
 			}
 		}
 		

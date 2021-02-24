@@ -116,24 +116,7 @@ class VentasCruzadas_class
 		
 		if($no_valido == 1){
 			$bean->estatus = '2';
-		}else{
-			$usuarioAsignado = BeanFactory::getBean('Users', $bean->assigned_user_id);
-			$equipoPrincipal = $usuarioAsignado->equipo_c;
-			//$GLOBALS['log']->fatal('est',$bean->estatus);
-			//Agrega teams de BO
-			if($equipoPrincipal != null && $equipoPrincipal != '' && $equipoPrincipal != '0'){
-				
-				$bean->load_relationship('teams');
-
-				//Add the teams
-				$bean->teams->add(
-					array(
-						$equipoPrincipal
-					)
-				);
-			}
 		}
-
 		
 		if($bean->cancelado == true){
 			$bean->estatus = '3';
