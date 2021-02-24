@@ -145,7 +145,7 @@ $hook_array['after_save'][] = Array(
 
 $hook_array['after_save'][] = Array(
     16,
-    'Envío de Notificaciones a Asesores RM (Cuenta/Opps)',
+    'Envío de Notificaciones a Asesores RM (Cuenta/Opps) ',
     'custom/modules/Opportunities/opp_notificacion_director.php',
     'NotificacionDirector', // name of the class
     'notificaParticipacionRM'
