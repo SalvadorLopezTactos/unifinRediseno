@@ -566,7 +566,7 @@ class NotificacionDirector
 	        }
             //Notificacion 3.-
             //Valida que el RM en la opp sea vacio o 9 - sin Gestor
-            if ($bean->user_id1_c!="" || $bean->user_id1_c!=$Valor) {
+            if ($bean->user_id1_c!="" && $bean->user_id1_c!=$Valor) {
                 $GLOBALS['log']->fatal("Inicia Notificacion 3 RM");
                     //obtiene el id del asesor RM
                 $beanAsesorRM = BeanFactory::retrieveBean('Users', $bean->user_id1_c);
