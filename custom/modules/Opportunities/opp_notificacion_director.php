@@ -491,6 +491,7 @@ class NotificacionDirector
                     $idDirector=$infoDirectorSplit[0];
                     $nombreDirector=$infoDirectorSplit[1];
                     $oppName=$bean->name;
+                    $GLOBALS['log']->fatal("Arreglo de RM's : ".json_encode($mailbossRM_acc));
                     //Envia notificacion al RM y jefe RM de la cuenta previo
                     $cuerpoCorreonotifRM= $this->NotificaRM1($NombreRMacc,$oppName,$linkSolicitud,$nombreDirector);
                     $this->enviarNotificacionDirector("Solicitud autorizada {$bean->name}",$cuerpoCorreonotifRM,$mailBoss,$full_name,array(),$mailbossRM_acc,$bean->user_id1_c,$bean->id);
