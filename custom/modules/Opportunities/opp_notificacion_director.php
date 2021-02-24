@@ -503,7 +503,7 @@ class NotificacionDirector
                 $GLOBALS['log']->fatal("Inicia Notificacion 2 RM");
                 //obtiene el id del asesor RM
                 $beanAsesorRM = BeanFactory::retrieveBean('Users', $bean->user_id1_c);
-                $mailbossesRM_acc=array();
+                $mailbossRM_acc=array();
                 //El valor es el 9- sin Gestor, se opta por traer el RM de la cuenta
                 $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
                 $accountRM= $beanCuenta->user_id8_c;
@@ -560,7 +560,7 @@ class NotificacionDirector
                 //Ejecuta funciones para envio de notificacion
                 $GLOBALS['log']->fatal("Envia Notificacion 2 al RM y jefe RM de la cuenta :".$NombreRMacc .' con jefe ' .$full_name);
                 $CorreoRMAccount= $this->NotificaRM2($NombreRMacc,$oppName,$linkSolicitud,$nombreDirector);
-                $this->enviarNotificacionDirector("Sin participación de RM {$bean->name}",$CorreoRMAccount,$mailBoss,$full_name,array(),$mailbossRM,$bean->user_id1_c,$bean->id); 
+                $this->enviarNotificacionDirector("Sin participación de RM {$bean->name}",$CorreoRMAccount,$mailBoss,$full_name,array(),$mailbossRM_acc,$bean->user_id1_c,$bean->id); 
                 $GLOBALS['log']->fatal("Termina Notificacion 2 RM");
                 }
 	        }
