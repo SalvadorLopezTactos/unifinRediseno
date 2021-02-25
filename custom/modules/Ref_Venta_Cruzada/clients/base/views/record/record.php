@@ -14,7 +14,7 @@ array (
           array (
             'type' => 'button',
             'name' => 'aceptar_vta_cruzada',
-            'label' => 'Aceptar',
+            'label' => 'Autorizar',
             'css_class' => 'btn-success hidden',
             'showOn' => 'view',
             'events' => 
