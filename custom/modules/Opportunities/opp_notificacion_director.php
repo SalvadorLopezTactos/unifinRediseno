@@ -286,7 +286,7 @@ class NotificacionDirector
                 $GLOBALS['log']->fatal("ASESOR LEASING ".$nombreAsesor." NO TIENE EMAIL");
             }
 
-        }elseif(/*$estatus=='PE'&&*/ $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){ //Solicitud Aprobada
+        }elseif(estatus=='PE'&& $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){ //Solicitud Aprobada
 
             //Enviar notificación al asesor asignado
             $GLOBALS['log']->fatal("Entra condicion 2, enviar notificacion al Director asignado (estatus PE)");
@@ -421,7 +421,6 @@ class NotificacionDirector
             //Notificacion 1.-
             //Validacion para enviar notificacion al asesor RM asignado a la opp
             //obtiene el bean de la cuenta y el valor del asesor RM
-            
             $GLOBALS['log']->fatal("Inicia Notificacion 1 RM");
             $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
             $asesorRMacc= $beanCuenta->user_id8_c;
@@ -477,7 +476,6 @@ class NotificacionDirector
                 foreach ($BossRM as $nombre => $correo) {
                     //Acción para agregar en arreglo
                     array_push($mailbossRM_acc,array('correo'=>$correo,"nombre"=>$nombre));
-                    $GLOBALS['log']->fatal("Datos de Marco Antonio Flores :".$correo);
                 }
                 
                 if (!empty($CorreoRMAcc)){
@@ -491,10 +489,10 @@ class NotificacionDirector
                     $idDirector=$infoDirectorSplit[0];
                     $nombreDirector=$infoDirectorSplit[1];
                     $oppName=$bean->name;
-                    $GLOBALS['log']->fatal("Arreglo de RM's : ".json_encode($mailbossRM_acc));
+                    $GLOBALS['log']->fatal("Notificacion1 == Arreglo de RM's : ".json_encode($mailbossRM_acc));
                     //Envia notificacion al RM y jefe RM de la cuenta previo
                     $cuerpoCorreonotifRM= $this->NotificaRM1($NombreRMacc,$oppName,$linkSolicitud,$nombreDirector);
-                    $this->enviarNotificacionDirector("Solicitud autorizada {$bean->name}",$cuerpoCorreonotifRM,$mailBoss,$full_name,array(),$mailbossRM_acc,$bean->user_id1_c,$bean->id);
+                    $this->enviarNotificacionDirector("Solicitud autorizada {$bean->name}",$cuerpoCorreonotifRM,$CorreoRMAcc,$NombreRMacc,array(),$mailbossRM_acc,$bean->user_id1_c,$bean->id);
                 }
                 $GLOBALS['log']->fatal("Termina Notificacion 1 RM");
             }             
@@ -676,9 +674,9 @@ class NotificacionDirector
                             $mailDirector=$row['email_address'];
                             }
                         }
-                        $GLOBALS['log']->fatal("Director de la OPP: " .$DirectorFullname.' con correo: ' .$mailDirector);
-                        $GLOBALS['log']->fatal("Arreglo de RM's : ".json_encode($mailbossesRM_acc));
-                        //Se declaran parametros extras (url y director OPP)
+                    $GLOBALS['log']->fatal("Director de la OPP: " .$DirectorFullname.' con correo: ' .$mailDirector);
+                    $GLOBALS['log']->fatal("Arreglo de RM's : ".json_encode($mailbossesRM_acc));
+                    //Se declaran parametros extras (url y director OPP)
                     $urlSugar=$GLOBALS['sugar_config']['site_url'].'/#Opportunities/';
                     $idSolicitud=$bean->id;
                     $linkSolicitud=$urlSugar.$idSolicitud;
@@ -691,7 +689,7 @@ class NotificacionDirector
                     //Actualizar el usuario RM a la cuenta 
                     if(!empty($bean->user_id1_c)){
                         $GLOBALS['log']->fatal("Actualiza Asesor RM en la Cuenta ".$bean->account_name. 'con valor '.$bean->user_id1_c);
-                        $queryUpdateRM = "UPDATE accounts_cstm SET user_id8_c='{$bean->user_id1_c}' WHERE id_c='{$bean->account_id}';";
+                        $queryUpdateRM = "UPDATE accounts_cstm SET user_id8_c='$bean->user_id1_c' WHERE id_c='$bean->account_id'";
                         $GLOBALS['log']->fatal($queryUpdateRM);
                         $ExecuteRMUpdate = $db->query($queryUpdateRM);
                     }
