@@ -44,9 +44,12 @@ AND telefono.deleted=0";
                 if ($existPrincipal) {
                     $bean->principal = 0;
                 }
-            } /*else {
-                $bean->deleted = 1;
-            }*/
+            } else {
+                if ($existPrincipal) {
+                    $bean->principal = 0;
+                }
+                    //$bean->deleted = 1;
+            }
             //$GLOBALS['log']->fatal('>>>>VALORES FINALES ' . $bean->telefono . " -- " . $bean->principal . " -- " . $bean->deleted);
         }
     }
