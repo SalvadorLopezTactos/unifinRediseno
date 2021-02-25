@@ -869,7 +869,7 @@ class NotificacionDirector
         
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b></b>
       <br><br>Se le informa que el director ' .$nombreDirector .' ha confirmado que el asesor RM '.$nombre_rm.' tuvo participación en la operación ligada a la solicitud '.$oppName.'
-      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">clic aquí</a>
       <br><br>Atentamente Unifin
 
       <br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/blog/wp-content/uploads/2021/01/UNIFIN_centrado_Poder2.png"></span></p>
@@ -889,7 +889,7 @@ class NotificacionDirector
         
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b></b>
       <br><br>Se le informa que el director ' .$nombreDirector .' ha confirmado que el asesor RM '.$NombreRMacc.' no tuvo participación en la operación ligada a la solicitud '.$oppName.'
-      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">clic aquí</a>
       <br><br>Atentamente Unifin
 
       <br><p class="imagen"><img border="0"  id="bannerUnifin" src="https://www.unifin.com.mx/blog/wp-content/uploads/2021/01/UNIFIN_centrado_Poder2.png"></span></p>
@@ -909,7 +909,7 @@ class NotificacionDirector
         
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b></b>
       <br><br>Se le informa que el director ' .$nombreDirector .' ha confirmado que el asesor RM '.$asesorRMn.' participó en la operación ligada a la solicitud: '.$oppName.', en lugar del asesor RM ' .$asesorAccount.' asociado originalmente a la operación. 
-      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">clic aquí</a>
       <br><br>Atentamente Unifin
 
       <br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/blog/wp-content/uploads/2021/01/UNIFIN_centrado_Poder2.png"></span></p>
