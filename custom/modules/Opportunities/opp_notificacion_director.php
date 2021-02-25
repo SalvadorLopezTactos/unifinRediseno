@@ -705,7 +705,7 @@ class NotificacionDirector
 
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreDirector . '</b>
       <br><br>Se le informa que se ha generado una solicitud de Leasing para la cuenta: <b>'. $nombreCuenta.'</b> y se solicita su aprobación y validación de participación del asesor RM '.$nombre_rm.'
-      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">clic aquí</a>
       <br><br>Se adjunta documento con scoring comercial
       <br><br>Comentarios de asesor:<br>'.$descripcion.'
       <br><br>Atentamente Unifin</font></p>
@@ -735,7 +735,7 @@ class NotificacionDirector
 
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreAsesor . '</b>'.
             $mensaje.'
-      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">clic aquí</a>
       <br><br>Atentamente Unifin</font></p>
       <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
       <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
@@ -834,7 +834,7 @@ class NotificacionDirector
         
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombre_rm . '</b>
       <br><br>Se le informa que ha sido validada su participación en la solicitud: ' .$oppName .', por el director: '.$nombreDirector.'
-      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">clic aquí</a>
       <br><br>Atentamente Unifin
       <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
       <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
@@ -852,7 +852,7 @@ class NotificacionDirector
         
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $jefe_rm . '</b>
       <br><br>Se le informa que ha sido rechazada la participación del asesor ' .$nombre_rm .', para la solicitud: '.$oppName.', por el director: '.$nombreDirector.'
-      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">clic aquí</a>
       <br><br>Atentamente Unifin
       <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
       <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
