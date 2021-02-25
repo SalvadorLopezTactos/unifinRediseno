@@ -124,7 +124,7 @@ class Ref_Cruzadas_Hooks
                                 $cuerpoCorreo= $this->estableceCuerpoNotificacionUniclickRespondido($nombre_acepta_uniclick,$nombreCuenta,$linkReferencia,'Aceptada','');
 
                                 //Enviando correo a asesor origen
-                                $this->enviarNotificacionReferencia("Referencia Aprobada Uniclick",$cuerpoCorreo,$correo_acpeta_uniclick,$nombre_acepta_uniclick);
+                                $this->enviarNotificacionReferencia("Nueva referencia válida",$cuerpoCorreo,$correo_acpeta_uniclick,$nombre_acepta_uniclick);
                             }          
 
                         }
@@ -135,7 +135,7 @@ class Ref_Cruzadas_Hooks
                                 $cuerpoCorreo= $this->estableceCuerpoNotificacionUniclickRespondido($nombre_acepta_uniclick,$nombreCuenta,$linkReferencia,'Rechazada',$explicacionRechazo);
 
                                 //Enviando correo a asesor origen
-                                $this->enviarNotificacionReferencia("Referencia Cancelada Uniclick",$cuerpoCorreo,$correo_asesor_origen,$nombreAsesorOrigen);
+                                $this->enviarNotificacionReferencia("Referencia cancelada",$cuerpoCorreo,$correo_asesor_origen,$nombreAsesorOrigen);
                             }                            
                         }
                     }
@@ -148,7 +148,8 @@ class Ref_Cruzadas_Hooks
             }
         }
 
-        if($status=='1' && ($producto_ref != '8' && $producto_ref != '9') ){//Referenca válida
+        if( $status == '1'){
+            //Referenca válida
             //Envio de notificacion a asesor origen
             if($correo_asesor_origen!=""){
 
@@ -290,10 +291,12 @@ class Ref_Cruzadas_Hooks
   
       public function estableceCuerpoNotificacionUniclickRespondido($nombre,$nombreCuenta,$linkReferencia,$tipo,$explicacionRechazo){
           $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombre . '</b>
-          <br>Se le informa que la referencia de venta cruzada fue respondida <b>'. $tipo .'</b> para la cuenta:'. $nombreCuenta.'
-	  if($tipo == 'Rechazada'){
-	  	<br>El motivo de rechazo es: '. $explicacionRechazo.'
-	  }	  
+          <br>Se le informa que la referencia de venta cruzada fue respondida <b>'. $tipo .'</b> para la cuenta:'. $nombreCuenta.'';
+
+          if($tipo == 'Rechazada'){
+            $mailHTML = $mailHTML.'<br>El motivo de rechazo es: '. $explicacionRechazo.'';
+          }	 
+          $mailHTML = $mailHTML.'
           <br><br>Para ver el detalle de la referencia y autorizar o rechazar la solicitud dé <a id="downloadErrors" href="'. $linkReferencia.'">Da Click Aquí</a>
           <br><br>Atentamente Unifin</font></p>
           <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
