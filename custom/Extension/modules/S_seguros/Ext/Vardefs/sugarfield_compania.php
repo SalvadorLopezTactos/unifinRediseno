@@ -1,5 +1,5 @@
 <?php
- // created: 2020-07-20 15:27:36
+ // created: 2021-02-25 10:31:59
 $dictionary['S_seguros']['fields']['compania']['default']='';
 
  ?>

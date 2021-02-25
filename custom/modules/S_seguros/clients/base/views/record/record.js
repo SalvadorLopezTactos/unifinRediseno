@@ -25,6 +25,8 @@
         $("div.record-label[data-name='seguro_pipeline']").attr('style', 'display:none;');
         //Desabilita edicion campo pipeline
         this.noEditFields.push('seguro_pipeline');
+        //Oculta campo UNI2
+        this.$('[data-name=seguro_uni2_c]').hide();
     },
 
     setTipo: function() {
@@ -44,7 +46,7 @@
          	},this);
      			this.noEditFields.push('prima_objetivo');
           this.$("[data-name='prima_objetivo']").attr('style', 'pointer-events:none;');
-      	}        
+      	}
     },
         
     addRegion: function() {
