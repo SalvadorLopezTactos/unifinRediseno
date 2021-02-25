@@ -194,7 +194,7 @@ class Ref_Cruzadas_Hooks
 
         }
 
-        if($status=='3' && ($producto_ref != '8' && $producto_ref != '9')){//Referenca cancelada
+        if($status=='3'){//Referenca cancelada
             //Envio de notificacion a asesor origen
             if($correo_asesor_origen!=""){
 
