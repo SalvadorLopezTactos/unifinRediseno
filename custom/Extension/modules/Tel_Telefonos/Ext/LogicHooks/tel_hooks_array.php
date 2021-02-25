@@ -42,3 +42,11 @@ $hook_array['after_save'][] = array(
     'Tel_Hooks',
     'insertaComunicaciónUNICS'
 );
+
+$hook_array['before_save'][] = array(
+    5,
+    'Valida Telefonos duplicado y marcados como principal ',
+    'custom/modules/Tel_Telefonos/TelDuplicados_Hooks.php',
+    'TelDuplicados_Hooks',
+    'validaTelDuplicados'
+);
