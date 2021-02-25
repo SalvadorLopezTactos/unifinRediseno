@@ -275,7 +275,7 @@ class Ref_Cruzadas_Hooks
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombre . '</b>
         <br>Se le informa que se ha generado una referencia de venta cruzada para la cuenta:'. $nombreCuenta.'
         <br>La necesidad del cliente es: '. $necesidadCliente.'
-        <br><br>Para ver el detalle de la referencia y autorizar o rechazar la solicitud dé <a id="downloadErrors" href="'. $linkReferencia.'">Da Click Aquí</a>
+        <br><br>Para ver el detalle de la referencia y autorizar o rechazar la solicitud dar <a id="downloadErrors" href="'. $linkReferencia.'">Click Aquí</a>
         <br><br>Atentamente Unifin</font></p>
         <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
         <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
@@ -297,7 +297,7 @@ class Ref_Cruzadas_Hooks
             $mailHTML = $mailHTML.'<br>El motivo de rechazo es: '. $explicacionRechazo.'';
           }	 
           $mailHTML = $mailHTML.'
-          <br><br>Para ver el detalle de la referencia y autorizar o rechazar la solicitud dé <a id="downloadErrors" href="'. $linkReferencia.'">Da Click Aquí</a>
+          <br><br>Para ver el detalle de la referencia dar <a id="downloadErrors" href="'. $linkReferencia.'">Click Aquí</a>
           <br><br>Atentamente Unifin</font></p>
           <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
     
