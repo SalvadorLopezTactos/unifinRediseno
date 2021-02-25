@@ -582,6 +582,8 @@ array (
               ),
               11 => 
               array (
+                'name' => 'seguro_uni2_c',
+                'label' => 'LBL_SEGURO_UNI2',
               ),
             ),
           ),

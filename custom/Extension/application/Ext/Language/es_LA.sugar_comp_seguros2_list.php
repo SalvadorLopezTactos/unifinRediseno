@@ -1,7 +1,7 @@
 <?php
- // created: 2021-02-25 09:44:32
+ // created: 2021-02-25 09:57:30
 
-$app_list_strings['comp_seguros_list']=array (
+$app_list_strings['comp_seguros2_list']=array (
   '' => '',
   1 => 'RELIANCE GENERAL INSURANCE',
   2 => 'THIRD PARTY ADMINISTRATOR SAPI DE CV (TPA)',
@@ -697,4 +697,5 @@ $app_list_strings['comp_seguros_list']=array (
   692 => 'AFIANZADORA FIDUCIA, S.A. DE C.V.',
   693 => 'AFIANZADORA PUNTO ASERTA, S.A.',
   694 => 'ZURICH FIANZAS MEXICO S.A. DE C.V.',
+  695 => 'SPP INSTITUCIÓN DE SEGUROS, SA DE CV',
 );
