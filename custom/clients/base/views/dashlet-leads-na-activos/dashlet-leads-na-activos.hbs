@@ -1,8 +1,20 @@
+<style>
+
+    .enTiempo {
+        color: green;
+    }
+    .atrasado {
+        color: #ffd700;
+    }
+
+</style>
+
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
             <td><b>Nombre</b></td>
             <td><b>Subtipo de Lead</b></td>
+            <td><b>Semáforo</b></td>
             <td><b>Acciones</b></td>
         </tr>
     </thead>
@@ -11,6 +23,7 @@
         <tr>
             <td><a href="#Leads/{{idLead}}" target="_blank">{{nombre}}</a></td>
             <td>{{#if subtipo}}{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo}}{{/if}}</td>
+            <td>{{#if semaforo}}<b class="enTiempo">En tiempo</b>{{else}}<b class="atrasado">Atrasado</b>{{/if}}</td>
             <td>
                 <button class="btn btn btnCancelActivo" id="btnCancelActivo" type="submit" title="{{idLead}}">Cancelar</button>
                 <a href="#Leads/{{idLead}}" id="btnProspectoActivo" target="_blank" class="btn" rel="tooltip">Establecer Prospecto Contactado</a>

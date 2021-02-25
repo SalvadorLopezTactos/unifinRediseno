@@ -17,7 +17,7 @@
 
 
     cuentasProspectInteresadoActivo: function () {
-        //API para obtener los Leads sin contactar con estatus Activo
+        //API para obtener los Leads sin contactar con estatus Activo - DASHLET: SOLICITUDES SIN PROCESO
         estActivo = "1";
 
         app.api.call('GET', app.api.buildURL('GetLeadsProspectoInteresado/' + estActivo), null, {
@@ -25,6 +25,10 @@
 
                 self_pi_activos.dataAccSolicitudesActivo = data.records;
                 // console.log(self_solpi.dataAccSolicitudes);
+                _.each(self_pi_activos.dataAccSolicitudesActivo, function (value, key) {
+                    self_pi_activos.dataAccSolicitudesActivo[key]['semaforo'] = (self_pi_activos.dataAccSolicitudesActivo[key]['semaforo'] == "1") ? true : false;
+                }),
+                
                 self_pi_activos.render();
             },
             error: function (e) {
