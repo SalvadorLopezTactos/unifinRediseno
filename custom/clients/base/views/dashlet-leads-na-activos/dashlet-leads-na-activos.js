@@ -25,6 +25,10 @@
 
                 self_lead_activo.dataLeadActivos = data.records;
 
+                _.each(self_lead_activo.dataLeadActivos, function (value, key) {
+                    self_lead_activo.dataLeadActivos[key]['semaforo'] = (self_lead_activo.dataLeadActivos[key]['semaforo'] == "1") ? true : false;
+                }),
+
                 self_lead_activo.render();
             },
             error: function (e) {
