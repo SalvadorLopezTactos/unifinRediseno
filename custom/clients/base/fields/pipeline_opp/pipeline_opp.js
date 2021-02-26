@@ -34,7 +34,7 @@
                     $("#SE1").html("En validación comercial");
                 }
             }
-            
+
 
             //Valida si tiene subetapa "cancelada"
             if (subetapa=="K"){
@@ -67,6 +67,16 @@
                 $("#SE2").removeClass('ocult');
                 $('#SE2').addClass('error');
                 $("#SE2").html("Cancelada");
+            }
+            if(subetapa=="BO"){
+                $("#SE2").removeClass('ocult');
+                $('#SE2').addClass('success');
+                $("#SE2").html("Validación BO Crédito");
+            }
+            if(subetapa=="DB"){
+                $("#SE2").removeClass('ocult');
+                $('#SE2').addClass('alerta');
+                $("#SE2").html("Devuelta BO Crédito");
             }
         }
         if (etapa=="C"){

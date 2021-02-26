@@ -247,7 +247,7 @@ SQL;
         $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && $bean->tipo_producto_c == '1' && $response_exluye == 1) ? true : $generaSolicitud;
         $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && $bean->producto_financiero_c!="0" &&$bean->producto_financiero_c!="") ? true : $generaSolicitud;
         $generaSolicitud = ($args['isUpdate'] == 1 && $bean->admin_cartera_c) ? true : $generaSolicitud;
-        $generaSolicitud = ($args['isUpdate'] == 1 && $row['no_viable'] == '0') ? $generaSolicitud : false;
+        $generaSolicitud = ($args['isUpdate'] == 1 && $row['no_viable'] == '1') ? false: $generaSolicitud;
         /*$GLOBALS['log']->fatal('valor Genera Solicitud JG: ' . $generaSolicitud);
         $GLOBALS['log']->fatal('Id process JG: ' . $bean->id_process_c);
         $GLOBALS['log']->fatal('Tipo operacion JG: ' . $bean->tipo_operacion_c);*/

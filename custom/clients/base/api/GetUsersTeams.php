@@ -58,7 +58,7 @@ class GetUsersTeams extends SugarApi
         $idCuenta = $args['id_cuenta'];
         $Modulo = $args['modulo'];
         $beanModule = BeanFactory::getBean($Modulo, $idCuenta);
-        global $current_user;
+        global $current_user,$app_list_strings;
 
         $usuarioLog = $current_user->id;
         $flag = false;
@@ -132,7 +132,28 @@ class GetUsersTeams extends SugarApi
         if ($current_user->is_admin == true) {
           $flag = true;
         }
-        
+
+        //Valida Rol full access
+        //$GLOBALS['log']->fatal('consulta rol GetUserBoss');
+        if ($app_list_strings['full_access_accounts_list'] != "" && $flag == false) {
+            $queryR = "Select R.id, R.name
+               from acl_roles R
+               left join acl_roles_users RU
+               on  RU.role_id=R.id
+               Where RU.user_id='{$current_user->id}' and RU.deleted=0";
+
+            //$GLOBALS['log']->fatal($queryR);
+            $list = $app_list_strings['full_access_accounts_list'];
+            $result = $GLOBALS['db']->query($queryR);
+            while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
+                foreach ($list as $newList) {
+                    if ($row['name'] == $newList) {
+                        $flag = true;
+                    }
+                }
+            }
+        }
+
         return $flag;
 
     }
