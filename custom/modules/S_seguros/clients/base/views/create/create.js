@@ -22,6 +22,8 @@
         this.$('div[data-name=seguro_pipeline]').hide();
         //Oculta campo Notificar KAM
         this.$('[data-name=notifica_kam_c]').hide();
+        //Oculta campos UNI2
+        this.$('[data-name=seguro_uni2_c]').hide();
     },
 
     setTipo: function() {

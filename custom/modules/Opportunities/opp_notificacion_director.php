@@ -286,7 +286,7 @@ class NotificacionDirector
                 $GLOBALS['log']->fatal("ASESOR LEASING ".$nombreAsesor." NO TIENE EMAIL");
             }
 
-        }elseif(/*$estatus=='PE'&&*/ $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){ //Solicitud Aprobada
+        }elseif(estatus=='PE'&& $bean->assigned_user_id!="" && $current_user->id==$idDirector && $producto=='1'){ //Solicitud Aprobada
 
             //Enviar notificación al asesor asignado
             $GLOBALS['log']->fatal("Entra condicion 2, enviar notificacion al Director asignado (estatus PE)");
@@ -421,7 +421,6 @@ class NotificacionDirector
             //Notificacion 1.-
             //Validacion para enviar notificacion al asesor RM asignado a la opp
             //obtiene el bean de la cuenta y el valor del asesor RM
-            
             $GLOBALS['log']->fatal("Inicia Notificacion 1 RM");
             $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
             $asesorRMacc= $beanCuenta->user_id8_c;
@@ -477,7 +476,6 @@ class NotificacionDirector
                 foreach ($BossRM as $nombre => $correo) {
                     //Acción para agregar en arreglo
                     array_push($mailbossRM_acc,array('correo'=>$correo,"nombre"=>$nombre));
-                    $GLOBALS['log']->fatal("Datos de Marco Antonio Flores :".$correo);
                 }
                 
                 if (!empty($CorreoRMAcc)){
@@ -491,9 +489,10 @@ class NotificacionDirector
                     $idDirector=$infoDirectorSplit[0];
                     $nombreDirector=$infoDirectorSplit[1];
                     $oppName=$bean->name;
+                    $GLOBALS['log']->fatal("Notificacion1 == Arreglo de RM's : ".json_encode($mailbossRM_acc));
                     //Envia notificacion al RM y jefe RM de la cuenta previo
                     $cuerpoCorreonotifRM= $this->NotificaRM1($NombreRMacc,$oppName,$linkSolicitud,$nombreDirector);
-                    $this->enviarNotificacionDirector("Solicitud autorizada {$bean->name}",$cuerpoCorreonotifRM,$mailBoss,$full_name,array(),$mailbossRM_acc,$bean->user_id1_c,$bean->id);
+                    $this->enviarNotificacionDirector("Solicitud autorizada {$bean->name}",$cuerpoCorreonotifRM,$CorreoRMAcc,$NombreRMacc,array(),$mailbossRM_acc,$bean->user_id1_c,$bean->id);
                 }
                 $GLOBALS['log']->fatal("Termina Notificacion 1 RM");
             }             
@@ -503,7 +502,7 @@ class NotificacionDirector
                 $GLOBALS['log']->fatal("Inicia Notificacion 2 RM");
                 //obtiene el id del asesor RM
                 $beanAsesorRM = BeanFactory::retrieveBean('Users', $bean->user_id1_c);
-                $mailbossesRM_acc=array();
+                $mailbossRM_acc=array();
                 //El valor es el 9- sin Gestor, se opta por traer el RM de la cuenta
                 $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
                 $accountRM= $beanCuenta->user_id8_c;
@@ -560,7 +559,7 @@ class NotificacionDirector
                 //Ejecuta funciones para envio de notificacion
                 $GLOBALS['log']->fatal("Envia Notificacion 2 al RM y jefe RM de la cuenta :".$NombreRMacc .' con jefe ' .$full_name);
                 $CorreoRMAccount= $this->NotificaRM2($NombreRMacc,$oppName,$linkSolicitud,$nombreDirector);
-                $this->enviarNotificacionDirector("Sin participación de RM {$bean->name}",$CorreoRMAccount,$mailBoss,$full_name,array(),$mailbossRM,$bean->user_id1_c,$bean->id); 
+                $this->enviarNotificacionDirector("Sin participación de RM {$bean->name}",$CorreoRMAccount,$mailBoss,$full_name,array(),$mailbossRM_acc,$bean->user_id1_c,$bean->id); 
                 $GLOBALS['log']->fatal("Termina Notificacion 2 RM");
                 }
 	        }
@@ -675,9 +674,9 @@ class NotificacionDirector
                             $mailDirector=$row['email_address'];
                             }
                         }
-                        $GLOBALS['log']->fatal("Director de la OPP: " .$DirectorFullname.' con correo: ' .$mailDirector);
-                        $GLOBALS['log']->fatal("Arreglo de RM's : ".json_encode($mailbossesRM_acc));
-                        //Se declaran parametros extras (url y director OPP)
+                    $GLOBALS['log']->fatal("Director de la OPP: " .$DirectorFullname.' con correo: ' .$mailDirector);
+                    $GLOBALS['log']->fatal("Arreglo de RM's : ".json_encode($mailbossesRM_acc));
+                    //Se declaran parametros extras (url y director OPP)
                     $urlSugar=$GLOBALS['sugar_config']['site_url'].'/#Opportunities/';
                     $idSolicitud=$bean->id;
                     $linkSolicitud=$urlSugar.$idSolicitud;
@@ -690,7 +689,7 @@ class NotificacionDirector
                     //Actualizar el usuario RM a la cuenta 
                     if(!empty($bean->user_id1_c)){
                         $GLOBALS['log']->fatal("Actualiza Asesor RM en la Cuenta ".$bean->account_name. 'con valor '.$bean->user_id1_c);
-                        $queryUpdateRM = "UPDATE accounts_cstm SET user_id8_c='{$bean->user_id1_c}' WHERE id_c='{$bean->account_id}';";
+                        $queryUpdateRM = "UPDATE accounts_cstm SET user_id8_c='$bean->user_id1_c' WHERE id_c='$bean->account_id'";
                         $GLOBALS['log']->fatal($queryUpdateRM);
                         $ExecuteRMUpdate = $db->query($queryUpdateRM);
                     }
@@ -706,7 +705,7 @@ class NotificacionDirector
 
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreDirector . '</b>
       <br><br>Se le informa que se ha generado una solicitud de Leasing para la cuenta: <b>'. $nombreCuenta.'</b> y se solicita su aprobación y validación de participación del asesor RM '.$nombre_rm.'
-      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">clic aquí</a>
       <br><br>Se adjunta documento con scoring comercial
       <br><br>Comentarios de asesor:<br>'.$descripcion.'
       <br><br>Atentamente Unifin</font></p>
@@ -736,7 +735,7 @@ class NotificacionDirector
 
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreAsesor . '</b>'.
             $mensaje.'
-      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">clic aquí</a>
       <br><br>Atentamente Unifin</font></p>
       <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
       <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
@@ -835,7 +834,7 @@ class NotificacionDirector
         
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombre_rm . '</b>
       <br><br>Se le informa que ha sido validada su participación en la solicitud: ' .$oppName .', por el director: '.$nombreDirector.'
-      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">clic aquí</a>
       <br><br>Atentamente Unifin
       <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
       <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
@@ -853,7 +852,7 @@ class NotificacionDirector
         
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $jefe_rm . '</b>
       <br><br>Se le informa que ha sido rechazada la participación del asesor ' .$nombre_rm .', para la solicitud: '.$oppName.', por el director: '.$nombreDirector.'
-      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">clic aquí</a>
       <br><br>Atentamente Unifin
       <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
       <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
@@ -870,7 +869,7 @@ class NotificacionDirector
         
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b></b>
       <br><br>Se le informa que el director ' .$nombreDirector .' ha confirmado que el asesor RM '.$nombre_rm.' tuvo participación en la operación ligada a la solicitud '.$oppName.'
-      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">clic aquí</a>
       <br><br>Atentamente Unifin
 
       <br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/blog/wp-content/uploads/2021/01/UNIFIN_centrado_Poder2.png"></span></p>
@@ -890,7 +889,7 @@ class NotificacionDirector
         
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b></b>
       <br><br>Se le informa que el director ' .$nombreDirector .' ha confirmado que el asesor RM '.$NombreRMacc.' no tuvo participación en la operación ligada a la solicitud '.$oppName.'
-      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">clic aquí</a>
       <br><br>Atentamente Unifin
 
       <br><p class="imagen"><img border="0"  id="bannerUnifin" src="https://www.unifin.com.mx/blog/wp-content/uploads/2021/01/UNIFIN_centrado_Poder2.png"></span></p>
@@ -910,7 +909,7 @@ class NotificacionDirector
         
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b></b>
       <br><br>Se le informa que el director ' .$nombreDirector .' ha confirmado que el asesor RM '.$asesorRMn.' participó en la operación ligada a la solicitud: '.$oppName.', en lugar del asesor RM ' .$asesorAccount.' asociado originalmente a la operación. 
-      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">click aquí</a>
+      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">clic aquí</a>
       <br><br>Atentamente Unifin
 
       <br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/blog/wp-content/uploads/2021/01/UNIFIN_centrado_Poder2.png"></span></p>

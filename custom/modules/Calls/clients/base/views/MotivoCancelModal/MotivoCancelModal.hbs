@@ -83,6 +83,11 @@
 
 </style>
 
+<script>
+    var $select = $('select.select2');
+    $select.select2();
+</script>
+
 <div class=" modal modal_cstm " id="MotivoCancelModal" tabindex="-1" role="dialog">
     <div class="modal-header_cstm">
         <h3><b><i class="fa fa-book" style="padding: 3px; "></i>Lead Management</b></h3>
@@ -94,8 +99,14 @@
 		
 		<div class="motivos" id="motivos" style="display: inline-flex;padding: 5px;">
 			Motivo de Cancelación:&nbsp;
-			<select name="motivocancelacion" id="motivocancelacion" class="select2 select_cstm">
+			<select name="motivocancelacion" id="motivocancelacion" class="select2" style="width:353px;">
                 {{{motivo_list}}}
+            </select>
+		</div>
+        <div class="submotivos" id="submotivos" style="padding: 5px;">
+			Submotivo de Cancelación:&nbsp;
+			<select name="submotivocancelacion" id="submotivocancelacion" class="select2" style="width:324px;">
+                {{{submotivo_list}}}
             </select>
 		</div>
     </div>

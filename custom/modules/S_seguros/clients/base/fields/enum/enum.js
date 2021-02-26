@@ -108,6 +108,13 @@
             }
             self.items = newOptions;
         }
+        //Aseguradoras de UNI2
+        // LOS ID'S DE LA LISTA comp_seguros_list TIENEN QUE CONINCIDIR CON LOS ID'S DE LA LISTA aseguradoras_list QUE SON LOS ID'S DE LA LISTA DE SALESFORCE
+        // LA LISTA comp_seguros2_list ES EXCLUSIVA PARA UNI2 Y NO SE RELACIONA CON SALESFORCE
+        if ((self.name === 'compania' || self.name === 'aseguradora_c') && this.model.get('seguro_uni2_c')) {
+            var new_options = app.lang.getAppListStrings('comp_seguros2_list');
+            self.items = new_options;
+        }
         this._super('render');
     }
 })

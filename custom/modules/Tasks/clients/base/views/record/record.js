@@ -147,6 +147,8 @@
         var temp4=temp3.split('T');
         this.temp_duedate = temp4[0];
         _.extend(this,this.temp_duedate);
+
+        this.isAyudaVisible();
     },
 
     valida_cuenta_no_contactar:function (fields, errors, callback) {
@@ -215,6 +217,12 @@
 		if (App.user.attributes.puestousuario_c=='27'||App.user.attributes.puestousuario_c=='31') {
 			//Oculta Check ayuda
 			this.$('[data-name=ayuda_asesor_cp_c]').hide(); 
+        }
+    },
+
+    isAyudaVisible:function(){
+        if(this.model.get('parent_type')=="Leads"){
+            this.$('[data-name=ayuda_asesor_cp_c]').hide(); 
         }
     },
 	

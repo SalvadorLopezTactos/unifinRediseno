@@ -529,7 +529,9 @@
             app.api.call('GET', app.api.buildURL('GetRegistrosAsignadosForProtocolo/' + id_user), null, {
                 success: function (data) {
                     App.alert.dismiss('obtieneAsignados');
-                    if(data.total_asignados>=20 && (data.puesto=='2' || data.puesto=='5')){
+                    var maximo_registros_list=App.lang.getAppListStrings('limite_maximo_asignados_list');
+                    var maximo_registros=parseInt(maximo_registros_list["1"]);
+                    if(data.total_asignados>=maximo_registros && (data.puesto=='2' || data.puesto=='5')){
                         var alertOptions = {
                             title: "No es posible reasignar al asesor seleccionado ya que cuenta con más de 20 registros asignados<br>Para continuar es necesario atender alguno de sus registros asignados",
                             level: "error"

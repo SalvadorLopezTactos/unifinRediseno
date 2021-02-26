@@ -167,7 +167,7 @@
         this.showSubpanels();
         this.showfieldBenef();
         this.showfieldSuby();
-        this.model.addValidationTask('benef_req', _.bind(this.reqBenfArea, this));
+        //this.model.addValidationTask('benef_req', _.bind(this.reqBenfArea, this));
        // this.model.on("change:producto_financiero_c", _.bind(this.producto_financiero, this));
        // this.Updt_OptionProdFinan(); # se comenta para hacer listas dependiente
        this.model.on("change:negocio_c", _.bind(this.Updt_OptionProdFinan, this));

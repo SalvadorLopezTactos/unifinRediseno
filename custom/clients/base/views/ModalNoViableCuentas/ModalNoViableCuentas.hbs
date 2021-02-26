@@ -61,6 +61,11 @@
     }
 </style>
 
+<script>
+    var $select = $('select.select2');
+    $select.select2();
+</script>
+
 <div class=" modal modal_cstm " id="ModalNoViableCuentas" tabindex="-1">
     <div class="modal-header_cstm">
         <h3><b><i class="fa fa-book" style="padding: 3px; "></i>Solicitud No Viable</b></h3>
@@ -68,43 +73,43 @@
     <div class="modal-body_cstm">
         <div class="razon_noviable" id="razon_noviable" style="display:inline-block;padding: 5px;">
             Razón No Viable:&nbsp;
-            <select name="RazonNoViable" id="RazonNoViable" class="select2">
+            <select name="RazonNoViable" id="RazonNoViable" class="select2" style="width:300px;">
                 {{{razon_nv_list}}}
             </select>
         </div>
         <div class="fuera_perfil" id="fuera_perfil" style="padding: 5px;">
             Fuera de Perfil:&nbsp;
-            <select name="FueradePerfil" id="FueradePerfil" class="select2">
+            <select name="FueradePerfil" id="FueradePerfil" class="select2" style="width:311px;">
                 {{{fuera_perfil_list}}}
             </select>
         </div>
         <div class="cond_financieras" id="cond_financieras" style="padding: 5px;">
             Condiciones Financieras:&nbsp;
-            <select name="condFinancieras" id="condFinancieras" class="select2">
+            <select name="condFinancieras" id="condFinancieras" class="select2" style="width: 248px;">
                 {{{condiciones_financieras_list}}}
             </select>
         </div>
         <div class="competencia_quien" id="competencia_quien" style="padding: 5px;">
             ¿Quién?:&nbsp;
-            <input type="text" class="comp_quien" id="comp_quien" data-field="comp_quien" />
+            <input type="text" class="comp_quien" id="comp_quien" data-field="comp_quien" style="width: 340px;" />
         </div>
         <div class="competencia_porque" id="competencia_porque" style="padding: 5px;">
             ¿Por qué?:&nbsp;
-            <input type="text" class="comp_porque" id="comp_porque" data-field="comp_porque" />
+            <input type="text" class="comp_porque" id="comp_porque" data-field="comp_porque" style="width: 329px;" />
         </div>
         <div class="no_product" id="no_product" style="padding: 5px;">
             ¿Qué producto?:&nbsp;
-            <select name="noProducto" id="noProducto" class="select2">
+            <select name="noProducto" id="noProducto" class="select2" style="width:303px;">
                 {{{no_producto_list}}}
             </select>
         </div>
         <div class="otro_producto" id="otro_producto" style="padding: 5px;">
             ¿Qué producto?:&nbsp;
-            <input type="text" class="otroProducto" id="otroProducto" data-field="otroProducto" />
+            <input type="text" class="otroProducto" id="otroProducto" data-field="otroProducto" style="width: 289px;"/>
         </div>
         <div class="no_interesado" id="no_interesado" style="padding: 5px;">
             No se encuentra interesado:&nbsp;
-            <select name="noInteresado" id="noInteresado" class="select2">
+            <select name="noInteresado" id="noInteresado" class="select2" style="width: 224px;">
                 {{{no_interesado_list}}}
             </select>
         </div>
