@@ -148,22 +148,35 @@
     aceptarModal: function () {
 
         self_prodnv = this;
+
+        var KeyRazonNV = $("#RazonNoViable").val();
+        var keyfueradePerfil = $("#FueradePerfil").val();
+        var keycondFinancieras = $("#condFinancieras").val();
+        var txtcomp_quien = $("#comp_quien").val();
+        var txtcomp_porque = $("#comp_porque").val();
+        var keynoProducto = $("#noProducto").val();
+        var txtotroProducto = $("#otroProducto").val();
+        var keynoInteresado = $("#noInteresado").val();
+
         var idProdM = '';
         var usertipoproducto = App.user.attributes.tipodeproducto_c; //Tipo de producto que tiene el usuario
         var emptynoviable = 0;
         
         ////////////////////////////VALIDACION DE CAMPOS REQUERIDOS EN EL MODAL//////////////////////////
         if ($("#RazonNoViable").val() == "" || $("#RazonNoViable").val() == "0") {
-            $('#RazonNoViable').css('border-color', 'red');
+            // $('#RazonNoViable').css('border-color', 'red');
+            $('#razon_noviable').find('.select2-choice').css('border-color', 'red');
             emptynoviable += 1;
         }
         if ($("#RazonNoViable").val() == "1" && ($("#FueradePerfil").val() == "" || $("#FueradePerfil").val() == "0")) {
-            $('#FueradePerfil').css('border-color', 'red');
+            // $('#FueradePerfil').css('border-color', 'red');
+            $('#fuera_perfil').find('.select2-choice').css('border-color', 'red');
             emptynoviable += 1;
         }
         if ($("#RazonNoViable").val() == "2" && ($("#condFinancieras").val() == "" || $("#condFinancieras").val() == "0")) {
-             $('#condFinancieras').css('border-color', 'red');
-             emptynoviable += 1;
+            //  $('#condFinancieras').css('border-color', 'red');
+            $('#cond_financieras').find('.select2-choice').css('border-color', 'red');
+            emptynoviable += 1;
         }
         if ($("#RazonNoViable").val() == "3" && $('#comp_quien').val().trim() == "" && $('#comp_porque').val().trim() == "") {
             $('#comp_quien').css('border-color', 'red');
@@ -179,7 +192,8 @@
             emptynoviable += 1;
         }
         if ($("#RazonNoViable").val() == "4" && ($("#noProducto").val() == "" || $("#noProducto").val() == "0")) {
-            $('#noProducto').css('border-color', 'red');
+            // $('#noProducto').css('border-color', 'red');
+            $('#no_product').find('.select2-choice').css('border-color', 'red');
             emptynoviable += 1;
         }
         if ($("#RazonNoViable").val() == "4" && $("#noProducto").val() == "4" && $("#otroProducto").val() == "") {
@@ -187,7 +201,8 @@
             emptynoviable += 1;
         }
         if ($("#RazonNoViable").val() == "7" && ($("#noInteresado").val() == "" || $("#noInteresado").val() == "0")) {
-            $('#noInteresado').css('border-color', 'red');
+            // $('#noInteresado').css('border-color', 'red');
+            $('#no_interesado').find('.select2-choice').css('border-color', 'red');
             emptynoviable += 1;
         }
         if (emptynoviable > 0) {
@@ -196,34 +211,6 @@
                 title: 'Debe seleccionar los campos faltantes de No viable.',
                 autoClose: false
             });
-        }
-
-        /////////////////////////////VALIDACION DE VALORES QUE NO SE VAYAN VACIOS//////////////////////////////////
-        //Valor de la lista de Razon no viable
-        if ($("#RazonNoViable").val() != "" || $("#RazonNoViable").val() != "0") {
-            var KeyRazonNV = $("#RazonNoViable").val();
-        }
-        //Se obtiene los valores de los campos seleccionados en el modal
-        if ($("#FueradePerfil").val() != "" || $("#FueradePerfil").val() != "0") {
-            var keyfueradePerfil = $("#FueradePerfil").val();
-        }
-        if ($("#condFinancieras").val() != "" || $("#condFinancieras").val() != "0") {
-             var keycondFinancieras = $("#condFinancieras").val();
-        }
-        if ($("#comp_quien").val() != "") {
-            var txtcomp_quien = $("#comp_quien").val();
-        }
-        if ($("#comp_porque").val() != "") {
-            var txtcomp_porque = $("#comp_porque").val();
-        }
-        if ($("#noProducto").val() != "" || $("#noProducto").val() != "0") {
-            var keynoProducto = $("#noProducto").val();
-        }
-        if ($("#otroProducto").val() != "") {
-            var txtotroProducto = $("#otroProducto").val();
-        }
-        if ($("#noInteresado").val() != "" || $("#noInteresado").val() != "0") {
-            var keynoInteresado = $("#noInteresado").val();
         }
 
         if (contextIdCuentas != "" && emptynoviable == 0) {

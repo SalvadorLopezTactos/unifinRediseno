@@ -16,12 +16,17 @@
 
 
     cuentasExpProspectInteresadoActivo: function () {
+        //DASHLET: PROSPECTO EN INTEGRACION DE EXPEDIENTE
 		estActivoExp = "1";
         app.api.call('GET', app.api.buildURL('GetCuentasExpediente/'+ estActivoExp), null, {
             success: function (data) {
 				console.log(data);
                 cuentas_exp_activo.dataCuentasExpActivo = data.records;
                 // console.log(self_solpi.dataAccSolicitudes);
+                _.each(cuentas_exp_activo.dataCuentasExpActivo, function (value, key) {
+                    cuentas_exp_activo.dataCuentasExpActivo[key]['semaforo'] = (cuentas_exp_activo.dataCuentasExpActivo[key]['semaforo'] == "1") ? true : false;
+                }),
+
                 cuentas_exp_activo.render();
             },
             error: function (e) {

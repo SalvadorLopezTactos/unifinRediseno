@@ -1,5 +1,5 @@
 <?php
- // created: 2021-02-09 11:22:40
+ // created: 2021-02-22 18:37:02
 
 $app_list_strings['submotivo_cancelacion_list']=array (
   '' => '',
@@ -10,4 +10,8 @@ $app_list_strings['submotivo_cancelacion_list']=array (
   5 => 'Ya contrató con otra empresa',
   6 => 'No usa arrendamiento',
   7 => 'No lo necesita por el momento',
+  8 => 'Giro / Industria no perfil',
+  9 => 'Datos de contacto no existentes o incorrectos',
+  10 => 'No se pudo contactar al tomador de decisión',
+  11 => 'No le interesa recibir información de UNIFIN',
 );

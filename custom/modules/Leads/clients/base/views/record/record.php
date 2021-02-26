@@ -68,7 +68,7 @@ array (
                 'event' => 'button:convert_Lead_to_Accounts:click',
                 'class' => 'btn_convertLeads',
               ),
-              4 =>
+              4 => 
               array (
                 'name' => 'reset_lead',
                 'type' => 'rowaction',
@@ -76,7 +76,6 @@ array (
                 'acl_action' => 'view',
                 'event' => 'button:reset_lead:click',
                 'class' => 'btn_resetLeads',
-
               ),
             ),
           ),
@@ -354,6 +353,8 @@ array (
               ),
               28 => 
               array (
+                'name' => 'oficina_c',
+                'label' => 'LBL_OFICINA',
               ),
               29 => 
               array (
