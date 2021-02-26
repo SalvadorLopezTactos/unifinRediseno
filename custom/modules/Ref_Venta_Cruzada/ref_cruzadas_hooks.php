@@ -69,8 +69,8 @@ class Ref_Cruzadas_Hooks
                 }
             }
         }
-        $GLOBALS['log']->fatal('correo_asesor_ref', $correo_asesor_ref);
-        $GLOBALS['log']->fatal('nombreAsesorRef', $nombreAsesorRef);
+        //$GLOBALS['log']->fatal('correo_asesor_ref', $correo_asesor_ref);
+        //$GLOBALS['log']->fatal('nombreAsesorRef', $nombreAsesorRef);
 
         $idAsesorRM = $bean->user_id1_c;/*Validar que no sea null*/
         $nombreAsesorRM = $bean->usuario_rm;
@@ -133,7 +133,7 @@ class Ref_Cruzadas_Hooks
                             }
                         }
                         //Referencia uniclick cancelada
-                        if ($status == '3') {
+                        /*if ($status == '3') {
                             if ($id_current_user != $id_user_uniclick) {
                                 $GLOBALS['log']->fatal("ENVIANDO CORREO REFERENCIA VÁLIDA-CANCELADA UNICLICK A ASESOR ORIGEN CON EMAIL " . $correo_acpeta_uniclick);
                                 $cuerpoCorreo = $this->estableceCuerpoNotificacionUniclickRespondido($nombre_acepta_uniclick, $nombreCuenta, $linkReferencia, 'Rechazada', $explicacionRechazo);
@@ -141,7 +141,7 @@ class Ref_Cruzadas_Hooks
                                 //Enviando correo a asesor origen
                                 $this->enviarNotificacionReferencia("Referencia cancelada", $cuerpoCorreo, $correo_asesor_origen, $nombreAsesorOrigen);
                             }
-                        }
+                        }*/
                     }
                 }
             } else {
