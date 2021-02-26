@@ -13,6 +13,8 @@ $dictionary['Ref_Venta_Cruzada']['fields']['producto_referenciado']['visibility_
       2 => '3',
       3 => '4',
       4 => '7',
+      5 => '8',
+      6 => '9',
     ),
     2 => 
     array (
@@ -21,6 +23,8 @@ $dictionary['Ref_Venta_Cruzada']['fields']['producto_referenciado']['visibility_
       2 => '3',
       3 => '4',
       4 => '7',
+      5 => '8',
+      6 => '9',
     ),
     3 => 
     array (
@@ -29,6 +33,8 @@ $dictionary['Ref_Venta_Cruzada']['fields']['producto_referenciado']['visibility_
       2 => '2',
       3 => '4',
       4 => '7',
+      5 => '8',
+      6 => '9',
     ),
     4 => 
     array (
@@ -37,6 +43,8 @@ $dictionary['Ref_Venta_Cruzada']['fields']['producto_referenciado']['visibility_
       2 => '3',
       3 => '2',
       4 => '7',
+      5 => '8',
+      6 => '9',
     ),
     5 => 
     array (
@@ -51,6 +59,8 @@ $dictionary['Ref_Venta_Cruzada']['fields']['producto_referenciado']['visibility_
       2 => '3',
       3 => '2',
       4 => '4',
+      5 => '8',
+      6 => '9',
     ),
     8 => 
     array (
@@ -68,10 +78,14 @@ $dictionary['Ref_Venta_Cruzada']['fields']['producto_referenciado']['visibility_
     11 => 
     array (
     ),
+    12 => 
+    array (
+    ),
     '' => 
     array (
     ),
   ),
 );
+
 
  ?>

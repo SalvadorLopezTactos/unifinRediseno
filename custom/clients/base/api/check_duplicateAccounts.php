@@ -41,6 +41,7 @@ class check_duplicateAccounts extends SugarApi
         $responseLEads = array();
         $finish = array();
         global $sugar_config;
+        global $app_list_strings;
         $url = $sugar_config['site_url'];
         /**
          * Validamos que el Lead no exista en Cuentas
@@ -72,10 +73,14 @@ class check_duplicateAccounts extends SugarApi
                     $total_asignados=$objRegistrosAsignados['total_asignados'];
 
                     $GLOBALS['log']->fatal("Total de asignados: " . $total_asignados. " Usuario: ".$usuario_asesor->user_name." Puesto: ".$puesto_asesor);
+
+                    //Obteniendo número máximo de registros asignados que puede tener un asesor
+                    $max_registros_list = $app_list_strings['limite_maximo_asignados_list'];
+                    $max_registros=intval($max_registros_list['1']);
                     
-                    if($total_asignados>=20 && ($puesto_asesor=='2' || $puesto_asesor=='5')){ //2-Director Leasing, 5-Asesor Leasing
+                    if($total_asignados>=$max_registros && ($puesto_asesor=='2' || $puesto_asesor=='5')){ //2-Director Leasing, 5-Asesor Leasing
                         
-                        $msj_reunion="No es posible generar la conversión pues el Asesor asignado a la Reunión/Llamada ya cuenta con más de 20 registros Asignados<br>Para continuar es necesario atender alguno de sus registros asignados";
+                        $msj_reunion="No es posible generar la conversión pues el Asesor asignado a la Reunión/Llamada ya cuenta con más de ".$max_registros." registros Asignados<br>Para continuar es necesario atender alguno de sus registros asignados";
 
                         $finish = array("idCuenta" => "", "mensaje" => $msj_reunion);
 

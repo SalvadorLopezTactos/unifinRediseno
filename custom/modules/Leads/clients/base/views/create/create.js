@@ -145,8 +145,10 @@
         //Se restringe creación de Leads cuando ya se tienen más de 20 registros asignados a los usuarios 
         //Asesor Leasing:2, Director Leasing:5
         var puesto=App.user.attributes.puestousuario_c;
+        var maximo_registros_list=App.lang.getAppListStrings('limite_maximo_asignados_list');
+        var maximo_registros=parseInt(maximo_registros_list["1"]);
 
-        if(this.total_asignados>20 && (puesto=='2' || puesto=='5')){
+        if(this.total_asignados>maximo_registros && (puesto=='2' || puesto=='5')){
 
             app.alert.show("error_create_leads", {
                 level: "error",

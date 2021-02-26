@@ -2,6 +2,9 @@
     extendsFrom: 'CreateView',
     personasRelData_list: null,
     initialize: function (options) {
+      	var createViewEvents = {};
+        createViewEvents['focus [data-name=campana_rel_c]'] = 'abre';
+	      this.events = _.extend({}, this.events, createViewEvents);
         this.plugins = _.union(this.plugins || [], ['AddAsInvitee', 'ReminderTimeDefaults']);
         self = this;
         this._super("initialize", [options]);
@@ -15,8 +18,10 @@
         this.model.addValidationTask('rqueridoPErsona', _.bind(this.reqPersona, this));
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         this.on('render', this.hidePErsonaEdit, this);
+    },
 
-
+    abre: function () {
+      window.abre = 1;
     },
 
     /* @F. Javier G. Solar
@@ -81,6 +86,7 @@
     disabledates: function () {
         console.log(App.user.attributes.puestousuario_c);
         if (App.user.attributes.puestousuario_c != '27' && App.user.attributes.puestousuario_c != '31') {
+            this.$('div[data-name="evento_campana_c"]').hide();
             this.$('div[data-name="tct_fecha_cita_dat_c"]').hide();
             $('div[data-name="tct_usuario_cita_rel_c"]').hide();
             console.log('SE ocultaron');

@@ -35,8 +35,10 @@
 
     	app.api.call('GET', app.api.buildURL('GetRegistrosAsignadosForProtocolo/' + id_user), null, {
             success: function (data) {
-            	App.alert.dismiss('obtieneAsignados');
-            	if(data.total_asignados>0){ //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
+                App.alert.dismiss('obtieneAsignados');
+                var maximo_registros_list=App.lang.getAppListStrings('limite_maximo_asignados_list');
+                var maximo_registros=parseInt(maximo_registros_list["1"]);
+            	if(data.total_asignados<=maximo_registros){ //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
             		self.viewEnable='1';
             		self.getLeadsAplazadosCancelados();
             	}else{
@@ -139,13 +141,17 @@
     			});
 
     			//Se obtiene valor de una lista, para que el nombre del archivo de carga sea dinámico
-    			var nombre_archivo=App.lang.getAppListStrings('nombre_archivo_protocolo_leads_list')[1];
+                var nombre_archivo=App.lang.getAppListStrings('nombre_archivo_protocolo_leads_list')[1];
+                var equipo_usuario_logueado=App.user.attributes.equipo_c;
 
     			app.api.call("read", app.api.buildURL("Leads/", null, null, {
                     "filter": [
                         {
                         	"nombre_de_cargar_c": {
                         		"$equals":nombre_archivo
+                            },
+                            "oficina_c":{
+                                "$in":[equipo_usuario_logueado]
                             }
                         }
                     ]

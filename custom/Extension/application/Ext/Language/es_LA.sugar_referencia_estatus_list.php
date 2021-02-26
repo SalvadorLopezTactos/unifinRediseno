@@ -7,5 +7,6 @@ $app_list_strings['referencia_estatus_list']=array (
   3 => 'Cancelada',
   4 => 'Exitosa',
   5 => 'Expirada',
+  6 => 'Pendiente de Aprobación',
   '' => '',
 );

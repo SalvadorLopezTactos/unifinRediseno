@@ -63,6 +63,7 @@ $app_list_strings['siniestralidad_list'][2] = 'No hay Siniestralidad';
 $app_list_strings['siniestralidad_list'][3] = 'La siniestralidad ya existe';
 $app_list_strings['siniestralidad_list'][''] = '';
 $app_list_strings['form_pago_list'][''] = '';
+$app_list_strings['comp_seguros2_list'][''] = '';
 
 ?>
 <?php
@@ -127,5 +128,6 @@ $app_list_strings['siniestralidad_list'][2] = 'No hay Siniestralidad';
 $app_list_strings['siniestralidad_list'][3] = 'La siniestralidad ya existe';
 $app_list_strings['siniestralidad_list'][''] = '';
 $app_list_strings['form_pago_list'][''] = '';
+$app_list_strings['comp_seguros2_list'][''] = '';
 
 ?>

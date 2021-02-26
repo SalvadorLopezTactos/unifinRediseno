@@ -17,7 +17,7 @@
 
 
     cuentasProspectContactadoActivo: function () {
-        //API para obtener los Cuentas prospecto contactado sin solicitudes
+        //API para obtener los Cuentas prospecto contactado sin solicitudes DASHLET: PROSPECTOS SIN SOLICITUD
         estPCActivo = "1";
 
         app.api.call('GET', app.api.buildURL('GetAccountProspectoContactado/' + estPCActivo), null, {
@@ -25,6 +25,10 @@
 
                 self_pc_activos.dataAcProspectoContactadoActivo = data.records;
 
+                _.each(self_pc_activos.dataAcProspectoContactadoActivo, function (value, key) {
+                    self_pc_activos.dataAcProspectoContactadoActivo[key]['semaforo'] = (self_pc_activos.dataAcProspectoContactadoActivo[key]['semaforo'] == "1") ? true : false;
+                }),
+                
                 self_pc_activos.render();
             },
             error: function (e) {
