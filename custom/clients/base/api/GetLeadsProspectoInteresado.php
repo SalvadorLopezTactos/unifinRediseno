@@ -47,8 +47,12 @@ class GetLeadsProspectoInteresado extends SugarApi
                 WHERE ac.tipo_registro_cuenta_c = '2' and ac.subtipo_registro_cuenta_c = '7' and ac.user_id_c= '{$id_user}'
                 and oppcstm.tct_etapa_ddw_c = 'SI' 
                 and up.tipo_producto = '1' and oppcstm.tipo_producto_c = '1'
-                and upc.status_management_c = '{$statusProduct}'";
+                and upc.status_management_c = '{$statusProduct}' ";
 
+                if ($statusProduct == 2) {
+                    $query = $query . "and opp.date_entered < DATE_SUB(now(), INTERVAL 5 DAY)";
+                }
+                // $GLOBALS['log']->fatal('query pi '. $query);
                 $result = $GLOBALS['db']->query($query);
 
                 while ($row = $GLOBALS['db']->fetchByAssoc($result)) {

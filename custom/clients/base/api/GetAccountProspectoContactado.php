@@ -46,12 +46,16 @@ class GetAccountProspectoContactado extends SugarApi
                 and ac.subtipo_registro_cuenta_c = '2' 
                 and ac.user_id_c = '{$id_user}'
                 and up.tipo_producto = '1'
-                and upc.status_management_c = '{$estadoProducto}'";
+                and upc.status_management_c = '{$estadoProducto}' ";
+
+                if ($estadoProducto == 2) {
+                    $query = $query . "and upc.fecha_asignacion_c < DATE_SUB(now(), INTERVAL 5 DAY)";
+                }
 
                 $result = $GLOBALS['db']->query($query);
 
                 while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
-                    
+
                     $records_in['records'][] = array(
                         'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 'tipoCuenta' => $row['tipoCuenta'],
                         'subtipoCuenta' => $row['subtipoCuenta'], 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $row['semaforo']
@@ -65,7 +69,7 @@ class GetAccountProspectoContactado extends SugarApi
             }
 
             return $records_in;
-
+            
         } catch (Exception $e) {
 
             $GLOBALS['log']->fatal("Error: " . $e->getMessage());
