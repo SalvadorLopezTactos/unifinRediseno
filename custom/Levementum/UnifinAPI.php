@@ -341,7 +341,7 @@ class UnifinAPI
                 if ($cliente['UNI2_CTE_030_InsertaClienteCompletoResult']['bResultado'] == true) {
                     //Actualizamos el registro a tipo Cliente
                     $tipo_registro = (($objecto->tipo_registro_cuenta_c == '1' || $objecto->tipo_registro_cuenta_c == '4' || $objecto->tipo_registro_cuenta_c == '5') ? $objecto->tipo_registro_cuenta_c : '3');
-                    $objecto->tipo_registro_cuenta_c = $tipo_registro;
+                    //$objecto->tipo_registro_cuenta_c = $tipo_registro;
                     $objecto->sincronizado_unics_c = '1';
                     global $db;
                     //$query = " UPDATE accounts_cstm SET tipo_registro_cuenta_c = '$tipo_registro', sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
@@ -1745,8 +1745,9 @@ SQL;
             if ($opportunidad['tipo_de_operacion_c'] == "RATIFICACION_INCREMENTO") {
                 $fields['idLineaRelacionada'] = $opportunidad['id_linea_credito_c'];
                 $fields['montoIncremento'] = $opportunidad['monto_ratificacion_increment_c'];
+                /* PEndiente por funcionalidad uni2
                 $fields['montoPropuesta'] = $opportunidad['monto_gpo_emp_c'];
-                $fields['montoAOperar'] = $opportunidad['monto_gpo_emp_c'];
+                $fields['montoAOperar'] = $opportunidad['monto_gpo_emp_c'];*/
             }
 
             //Se valida si el Administrador de Cartera esta activo en el config y a nivel de solicitud/usuario

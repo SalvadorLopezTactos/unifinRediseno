@@ -1,5 +1,5 @@
 <?php
- // created: 2021-02-09 11:24:45
+ // created: 2021-02-22 18:39:42
 $dictionary['Lead']['fields']['submotivo_cancelacion_c']['labelValue']='Submotivo Cancelación';
 $dictionary['Lead']['fields']['submotivo_cancelacion_c']['dependency']='';
 $dictionary['Lead']['fields']['submotivo_cancelacion_c']['visibility_grid']=array (
@@ -15,9 +15,13 @@ $dictionary['Lead']['fields']['submotivo_cancelacion_c']['visibility_grid']=arra
       1 => '2',
       2 => '3',
       3 => '4',
+      4 => '8',
     ),
     3 => 
     array (
+      0 => '9',
+      1 => '10',
+      2 => '11',
     ),
     4 => 
     array (

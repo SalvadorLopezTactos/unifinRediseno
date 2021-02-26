@@ -343,19 +343,6 @@ array (
         array (
           0 => 
           array (
-            'name' => 'tct_cancelar_ref_cruzada_chk_c',
-            'label' => 'LBL_TCT_CANCELAR_REF_CRUZADA_CHK',
-          ),
-          1 => 
-          array (
-            'name' => 'multilinea_c',
-            'label' => 'LBL_MULTILINEA_C',
-          ),
-        ),
-        8 => 
-        array (
-          0 => 
-          array (
             'name' => 'notifica_fiscal_c',
             'label' => 'LBL_NOTIFICA_FISCAL',
           ),
@@ -365,7 +352,7 @@ array (
             'label' => 'LBL_RESPONSABLE_OFICINA_CHK',
           ),
         ),
-        9 => 
+        8 => 
         array (
           0 => 
           array (
@@ -382,7 +369,7 @@ array (
             'customCode' => '{if $IS_ADMIN}{$LICENSE_TYPE_DROPDOWN}{else}{$LICENSE_TYPE_READONLY}{/if}',
           ),
         ),
-        10 => 
+        9 => 
         array (
           0 => 'business_center_name',
           1 => 
@@ -391,14 +378,31 @@ array (
             'label' => 'LBL_ADMIN_CARTERA_C',
           ),
         ),
-        11 => 
+        10 => 
         array (
           0 => 
           array (
             'name' => 'reset_leadcancel_c',
             'label' => 'LBL_RESET_LEADCANCEL_C',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'multilinea_c',
+            'label' => 'LBL_MULTILINEA_C',
+          ),
+        ),
+        11 => 
+        array (
+          0 => 
+          array (
+            'name' => 'tct_cancelar_ref_cruzada_chk_c',
+            'label' => 'LBL_TCT_CANCELAR_REF_CRUZADA_CHK',
+          ),
+          1 => 
+          array (
+            'name' => 'valida_vta_cruzada_c',
+            'label' => 'LBL_VALIDA_VTA_CRUZADA',
+          ),
         ),
       ),
     ),

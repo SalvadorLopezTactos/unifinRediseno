@@ -7,9 +7,9 @@ class ExistentesVentasCruzadas_class
 
     function BuscarExistentes($bean, $event, $arguments)
     {
-		//$GLOBALS['log']->fatal('bean',$bean);
-		if($bean->estatus == '' || $bean->estatus == null){
-			
+		//$GLOBALS['log']->fatal('bean',$bean->estatus);
+		if( !$arguments['isUpdate'] ){
+		
 			if ($bean->load_relationship('accounts_ref_venta_cruzada_1')) {
 				//Fetch related beans
 				$relatedBeans = $bean->accounts_ref_venta_cruzada_1->getBeans();
@@ -29,8 +29,12 @@ class ExistentesVentasCruzadas_class
 			$query = "select ref.name from Ref_Venta_Cruzada as ref
 			join accounts_ref_venta_cruzada_1_c as aref on aref.accounts_ref_venta_cruzada_1ref_venta_cruzada_idb = ref.id
 			where aref.accounts_ref_venta_cruzada_1accounts_ida = '".$id_cuenta."' 
-			and ref.producto_referenciado = '".$bean->producto_referenciado."' and ref.estatus = 1 and ref.deleted = 0";
-			
+			and ref.producto_referenciado = '".$bean->producto_referenciado."' and ref.deleted = 0 ";
+			if($bean->producto_referenciado == '9' || $bean->producto_referenciado == '8'){
+				$query = $query . "and (ref.estatus = '1' or ref.estatus = '6')";
+			}else{
+				$query = $query . "and ref.estatus = '1'";
+			}
 			//$GLOBALS['log']->fatal('query',$query);
 			$results = $GLOBALS['db']->query($query);
 			//$GLOBALS['log']->fatal('results',$results);
@@ -41,27 +45,18 @@ class ExistentesVentasCruzadas_class
 				throw new SugarApiExceptionInvalidParameter("El producto seleccionado, tiene una referencia activa");
 			}else{
 				$bean->estatus = '1';
-				$usuarioAsignado = BeanFactory::getBean('Users', $bean->assigned_user_id);
-				$equipoPrincipal = $usuarioAsignado->equipo_c;
-				//$GLOBALS['log']->fatal('est',$bean->estatus);
-				//Agrega teams de BO
-				if($equipoPrincipal != null && $equipoPrincipal != '' && $equipoPrincipal != '0'){
-					
-					$bean->load_relationship('teams');
 
+					$bean->load_relationship('teams');
+					$equipoPrincipal = '1';
 					//Add the teams
 					$bean->teams->add(
 						array(
 							$equipoPrincipal
 						)
 					);
-				}
 			}
 		}
 		
-		if($bean->cancelado == true){
-			$bean->estatus = '3';
-		}
 	}
 }
 

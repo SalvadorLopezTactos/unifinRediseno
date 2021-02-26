@@ -3178,7 +3178,7 @@
     },
 
     tipoProveedor: function (fields, errors, callback) {
-        if (!this.model.get('tipo_proveedor_compras_c') && (App.user.attributes.puestousuario_c == 32 || App.user.attributes.puestousuario_c == 47)) {
+        if ((this.model.get('esproveedor_c') || this.model.get('tipo_registro_cuenta_c') == '5') && (App.user.attributes.puestousuario_c == 32 || App.user.attributes.puestousuario_c == 47) && (this.model.get('tipo_proveedor_compras_c') == null || this.model.get('tipo_proveedor_compras_c') == '') ) {
             app.alert.show("tipo_proveedor_compras_c", {
                 level: "error",
                 title: 'Hace falta seleccionar un valor para el campo Tipo de proveedor compras',

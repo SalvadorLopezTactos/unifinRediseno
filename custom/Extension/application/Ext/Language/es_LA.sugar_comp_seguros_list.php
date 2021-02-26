@@ -1,5 +1,5 @@
 <?php
- // created: 2020-07-20 15:27:16
+ // created: 2021-02-25 09:44:32
 
 $app_list_strings['comp_seguros_list']=array (
   '' => '',

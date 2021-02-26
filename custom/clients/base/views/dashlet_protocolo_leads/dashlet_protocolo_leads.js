@@ -141,13 +141,17 @@
     			});
 
     			//Se obtiene valor de una lista, para que el nombre del archivo de carga sea dinámico
-    			var nombre_archivo=App.lang.getAppListStrings('nombre_archivo_protocolo_leads_list')[1];
+                var nombre_archivo=App.lang.getAppListStrings('nombre_archivo_protocolo_leads_list')[1];
+                var equipo_usuario_logueado=App.user.attributes.equipo_c;
 
     			app.api.call("read", app.api.buildURL("Leads/", null, null, {
                     "filter": [
                         {
                         	"nombre_de_cargar_c": {
                         		"$equals":nombre_archivo
+                            },
+                            "oficina_c":{
+                                "$in":[equipo_usuario_logueado]
                             }
                         }
                     ]

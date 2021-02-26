@@ -87,6 +87,8 @@ class Dynamics365 extends SugarApi
             $body_elements["DataAreaId"]="UFIN";
             $body_elements["CUSTOMERACCOUNTNUMBER"]=$beanCuenta->idcliente_c;
             $body_elements["COMPANYTYPE"]=($beanCuenta->pais_nacimiento_c=='2') ? "LegalPerson" : "ForeignCompany";
+            $body_elements["CURRENCYCODE"]="MXN";
+            $body_elements["LANGUAGEID"]="es-MX";
 
             if($regimen_fiscal!='Persona Moral'){
                 //Se arma petición para enviar proveedor de Persona Física o PFAE
@@ -107,7 +109,7 @@ class Dynamics365 extends SugarApi
             foreach ($beanCuenta->accounts_dire_direccion_1->getBeans() as $a_direccion) {
                 if (!empty($a_direccion->calle)) {
                     //Arma petición para enviar dirección
-                    $body_elements["ADDRESSCITY"]="PRINCIPAL";
+                    $body_elements["ADDRESSCITY"]=$a_direccion->dire_direccion_dire_ciudad_name;
                     $body_elements["ADDRESSCOUNTRYREGIONID"]="MEX";
                     $body_elements["ADDRESSCOUNTYID"]=$a_direccion->dire_direccion_dire_colonia_name;
                     $body_elements["ADDRESSDESCRIPTION"]="PRINCIPAL";
@@ -275,6 +277,7 @@ class Dynamics365 extends SugarApi
         array_push($responseFull, $responseDynamics);
 
         //Llamada a api para Cuentas por pagar, solo se ejecuta la primera vez
+        $GLOBALS['log']->fatal("VALOR DE BANDERA CPP: ".$beanCuenta->control_cpp_chk_c);
         if(!$beanCuenta->control_cpp_chk_c){
             $GLOBALS['log']->fatal("Request cuentas por pagar: url: ".$urlCPP." idProveedor: ".$beanCuenta->idcliente_c);
             $responseCPP=$this->postCPP("http://172.26.1.84:9011/proveedores/EnvioCuentasPorPagar365",$beanCuenta->idcliente_c);
@@ -286,7 +289,10 @@ class Dynamics365 extends SugarApi
                 $codigo=$responseCPP->resultCode;
                 if($codigo==1){
                     $GLOBALS['log']->fatal("Proveedor ya registrado");
-                    array_push($responseFull, "");
+                    array_push($responseFull, $responseCPP->errores[0]);
+
+                    $queryUpdate="UPDATE accounts_cstm SET control_cpp_chk_c = '1', id_cpp_365_chk_c='{$responseCPP->errores[0]}' WHERE id_c = '{$beanCuenta->id}'";
+                    $queryResult = $db->query($queryUpdate);
                 }else{
                     $GLOBALS['log']->fatal('Proveedor creado (Cuentas por pagar): '.$responseCPP->data->idProveedor365);
                     array_push($responseFull, $responseCPP->data->idProveedor365);

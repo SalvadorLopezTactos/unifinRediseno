@@ -13,6 +13,42 @@ array (
           0 => 
           array (
             'type' => 'button',
+            'name' => 'create_meet',
+            'label' => '+ Reunión',
+            'css_class' => 'btn-danger',
+            'showOn' => 'view',
+            'events' => 
+            array (
+              'click' => 'button:btn_meet_button:click',
+            ),
+          ),
+          1 => 
+          array (
+            'type' => 'button',
+            'name' => 'create_call',
+            'label' => '+ Llamada',
+            'css_class' => 'btn-success',
+            'showOn' => 'view',
+            'events' => 
+            array (
+              'click' => 'button:btn_call_button:click',
+            ),
+          ),
+          2 => 
+          array (
+            'type' => 'button',
+            'name' => 'create_pre',
+            'label' => '+ Pre-solicitud',
+            'css_class' => 'btn',
+            'showOn' => 'view',
+            'events' => 
+            array (
+              'click' => 'button:btn_pre_button:click',
+            ),
+          ),
+          3 => 
+          array (
+            'type' => 'button',
             'name' => 'cancel_button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
@@ -22,7 +58,7 @@ array (
               'click' => 'button:cancel_button:click',
             ),
           ),
-          1 => 
+          4 => 
           array (
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
@@ -32,7 +68,7 @@ array (
             'showOn' => 'edit',
             'acl_action' => 'edit',
           ),
-          2 => 
+          5 => 
           array (
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
@@ -113,11 +149,6 @@ array (
                 'acl_action' => 'delete',
               ),
             ),
-          ),
-          3 => 
-          array (
-            'name' => 'sidebar_toggle',
-            'type' => 'sidebartoggle',
           ),
         ),
         'panels' => 
@@ -231,9 +262,17 @@ array (
               11 => 
               array (
                 'name' => 'assigned_user_name',
+                'span' => 12,
               ),
               12 => 
               array (
+                'name' => 'resultado_licitacion_c',
+                'label' => 'LBL_RESULTADO_LICITACION',
+              ),
+              13 => 
+              array (
+                'name' => 'razon_no_viable_c',
+                'label' => 'LBL_RAZON_NO_VIABLE',
               ),
             ),
           ),

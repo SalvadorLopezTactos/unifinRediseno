@@ -1,3 +1,14 @@
+<style>
+
+    .enTiempo {
+        color: green;
+    }
+    .atrasado {
+        color: #ffd700;
+    }
+
+</style>
+
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
@@ -7,6 +18,7 @@
             <td><b>Nombre Solicitud</b></td>
             <td><b>Etapa</b></td>
             <td><b>Estatus Producto</b></td>
+            <td><b>Semáforo</b></td>
             <td><b>Acciones</b></td>
         </tr>
     </thead>
@@ -19,6 +31,7 @@
             <td><a href="#Opportunities/{{idOpp}}" id="idOpp" target="_blank">{{oppNombre}}</a></td>
             <td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>
             <td>{{#if EstatusProducto}}{{getUnifinListValue 'status_management_list' EstatusProducto}}{{/if}}</td>
+            <td>{{#if semaforo}}<b class="enTiempo">En tiempo</b>{{else}}<b class="atrasado">Atrasado</b>{{/if}}</td>
             <td>
                 <button class="btn btn btnNoViableActivo" id="btnNoViableActivo" type="submit" title="{{idCuenta}}">Establecer No viable</button>
                 <a href="#Opportunities/{{idOpp}}" style="margin-top: 3px;" id="btnProspIntExpActivo" target="_blank" class="btn" rel="tooltip">Convertir a prospecto integración de expediente</a>

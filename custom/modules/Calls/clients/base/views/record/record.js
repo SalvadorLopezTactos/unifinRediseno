@@ -4,11 +4,15 @@
     fechaInicioTemp: "",
     personasRelData_list: null,
     seleccionado:null,
+    TipoDePersona:"",
     events: {
         'click .record-edit-link-wrapper': 'handleEdit',
     },
 
     initialize: function (options) {
+      	var createViewEvents = {};
+        createViewEvents['focus [data-name=campana_rel_c]'] = 'abre';
+	      this.events = _.extend({}, this.events, createViewEvents);
         self = this;
         this._super("initialize", [options]);
         this.on('render', this.disableparentsfields, this);
@@ -37,6 +41,7 @@
         this.model.on('sync', this.disableFieldsTime, this);
         this.model.on('sync', this.getPersonas, this);
         this.model.on('sync', this.hidePErsonaEdit, this);
+        this.model.on('sync', this.campanas, this);
 
         this.model.addValidationTask('resultCallReq', _.bind(this.resultCallRequerido, this));
         this.events['click a[name=edit_button]'] = 'fechascallsymeet';
@@ -45,16 +50,35 @@
         /***********  Lead Management  *************/
         this.model.addValidationTask('lead_management', _.bind(this.ConfirmCancelar, this));  //OnConfirm cancelar LEad-PRospecto contactado
         this.model.addValidationTask('lmanage_seg_reun', _.bind(this.SegundaReunion, this));  //OnConfirm cancelar Cuenta segunda llamada
-
     },
 
+    abre: function () {
+      window.abre = 1;
+    },
+
+    campanas: function()
+    {
+      if (App.user.attributes.puestousuario_c != '27' && App.user.attributes.puestousuario_c != '31') {
+        this.$('div[data-name="evento_campana_c"]').hide();
+        this.$('div[data-name="campana_rel_c"]').hide();
+      }
+      if (this.model.get('status') == 'Held' || this.model.get('status') == 'Not Held') {
+        this.$('.record-edit-link-wrapper[data-name=campana_rel_c]').remove();
+      }
+    },
+    
     _render: function (options) {
         this._super("_render");
         this.enableparentname();
+        this.getPersonas();
     },
 
     handleCancel: function () {
         this._super("handleCancel");
+        if(self.model.get('persona_relacion_c')!="")
+        {
+            self.model.set('calls_persona_relacion','Muestra')
+        }
     },
 
     bloqueaTodo: function () {
@@ -158,7 +182,6 @@
         this._super("cancelClicked");
 
         this.$('[data-name="parent_name"]').attr('style', '');
-
         this.setButtonStates(this.STATE.VIEW);
         this.action = 'detail';
         this.handleCancel();
@@ -775,53 +798,73 @@
     },
 
     reqPersona: function (fields, errors, callback) {
-
-        var idUsrFirmado = App.user.attributes.id;
-        var tipoCuenta = person.model.attributes.parent.tipodepersona_c;
-        var idUsrAsignado = person.model.get('assigned_user_id');
-
-        if (idUsrFirmado == idUsrAsignado && tipoCuenta == 'Persona Moral' && this.model.get('persona_relacion_c') == "") {
-            app.alert.show("Falta Persona", {
-                level: "error",
-                title: "Hace falta completar la siguiente información  : <br> Persona con quien se atiende la llamada",
-                autoClose: false
+        var idCuenta = person.model.get('parent_id');
+        var parentModule = person.model.get('parent_type');
+        if(idCuenta!=undefined && idCuenta!="" && parentModule !=undefined && parentModule == 'Accounts'){
+            var idUsrFirmado = App.user.attributes.id;
+            var tipoCuenta = person.TipoDePersona;
+            var idUsrAsignado = person.model.get('assigned_user_id');
+            var puestosDispo = app.lang.getAppListStrings('puestos_llamadas_list');
+            var arrayPuestos = [];
+            Object.keys(puestosDispo).forEach(function (key) {
+                arrayPuestos.push(Number(key));
             });
-            $('[data-name="calls_persona_relacion"]').find('.select2-choice').css('border-color', 'red');
-            errors['calls_persona_relaccion'] = errors['calls_persona_relaccion'] || {};
-            errors['calls_persona_relaccion'].custom_message1 = true;
+            var puesto_usr = Number(app.user.attributes.puestousuario_c);
+
+            if (arrayPuestos.includes(puesto_usr) && idUsrFirmado == idUsrAsignado && tipoCuenta == 'Persona Moral' && this.model.get('persona_relacion_c') == "") {
+                app.alert.show("Falta Persona", {
+                    level: "error",
+                    title: "Hace falta completar la siguiente información: <br> Persona con quien se atiende la llamada. <br> Nota: Si no cuenta con algún registro, favor de agregar uno en el módulo de RELACIÓN.",
+                    autoClose: false
+                });
+                $('[data-name="calls_persona_relacion"]').find('.select2-choice').css('border-color', 'red');
+                errors['calls_persona_relaccion'] = errors['calls_persona_relaccion'] || {};
+                errors['calls_persona_relaccion'].custom_message1 = true;
+            }
         }
         callback(null, fields, errors);
     },
 
     getPersonas: function () {
+        nombreSelect="";
         var idCuenta = selfPerson.model.get('parent_id');
+        var parentModule = selfPerson.model.get('parent_type');
+        if(idCuenta!=undefined && idCuenta!="" && parentModule !=undefined && parentModule == 'Accounts'){
+            app.api.call('GET', app.api.buildURL('GetRelRelaciones/' + idCuenta), null, {
+                success: function (data) {
+                    //console.log(data.records);
+                    var idpersonas = selfPerson.model.get('persona_relacion_c');
+                    var arrayPersonas = [];
+                    var isSelect = false;
+                    for (var i = 0; i < data.length; i++) {
 
-        app.api.call('GET', app.api.buildURL('GetRelRelaciones/' + idCuenta), null, {
-            success: function (data) {
-                //console.log(data.records);
-                var idpersonas = selfPerson.model.get('persona_relacion_c');
-                var arrayPersonas = [];
-                var isSelect = false;
-                for (var i = 0; i < data.length; i++) {
-
-                    if (idpersonas != "" && idpersonas == data[i]['id']) {
-                        isSelect = true;
-                        self.seleccionado=data[i]['name'];
+                        if (idpersonas != "" && idpersonas == data[i]['id']) {
+                            isSelect = true;
+                            nombreSelect=data[i]['name'];
+                        }else
+                        {
+                            isSelect = false;
+                        }
+                        arrayPersonas.push({
+                            "id": data[i]['id'],
+                            "name": data[i]['name'],
+                            "select": isSelect
+                        });
                     }
-                    arrayPersonas.push({
-                        "id": data[i]['id'],
-                        "name": data[i]['name'],
-                        "select": isSelect
-                    });
+                    console.log(arrayPersonas);
+                    selfPerson.seleccionado=nombreSelect;
+                    selfPerson.personasRelData_list = arrayPersonas;
+                    selfPerson.render();
+                    if(idpersonas!="")
+                    {
+                        selfPerson.model.set('calls_persona_relacion','nombreSelect')
+                    }
+                },
+                error: function (e) {
+                    console.log(e);
                 }
-                console.log(arrayPersonas);
-                selfPerson.personasRelData_list = arrayPersonas;
-                selfPerson.render();
-            },
-            error: function (e) {
-                console.log(e);
-            }
-        });
+            });
+        }
     },
 
     hidePErsonaEdit: function () {
@@ -839,10 +882,9 @@
             app.api.call("read", app.api.buildURL("Accounts/" + parentiD, null, null, {}), null, {
                 success: function (data) {
                     console.log(data);
-
+                    person.TipoDePersona=data.tipodepersona_c;
                    if (arrayPuestos.includes(puesto_usr) && data.tipodepersona_c == 'Persona Moral') {
-                        $('.divPersonasRel').show();
-                        $('[data-name="persona_relacion_c"]').hide()
+                       person.$('[data-name="persona_relacion_c"]').hide()
                         // Valida si el usuario firmado pertenece a la cuenta o a la llamada
                         var idUsrFirmado = app.user.attributes.id;
                         var idUsrLeading = data.user_id_c;
@@ -852,9 +894,8 @@
                         }
                     }
                     else {
-                        $('.divPersonasRel').hide();
-                        $('[data-name="persona_relacion_c"]').hide()
-                        //$('[data-name="calls_persona_relacion"]').addClass('hide');
+                       person.$('[data-name="calls_persona_relacion"]').hide();
+                       person.$('[data-name="persona_relacion_c"]').hide();
                     }
                 },
                 error: function (e) {
@@ -862,11 +903,8 @@
                 }
             });
         } else {
-            $('.divPersonasRel').hide();
-            $('[data-name="persona_relacion_c"]').hide()
+            person.$('[data-name="calls_persona_relacion"]').hide();
+            person.$('[data-name="persona_relacion_c"]').hide();
         }
-
-
     },
-
 })

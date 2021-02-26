@@ -145,6 +145,22 @@ $dependencies['Meetings']['readOnly'] = array
                 'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
             ),
         ),
+        //evento_campana_c
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'evento_campana_c',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
+            ),
+        ),
+        //campana_rel_c
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'campana_rel_c',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
+            ),
+        ),
     ),
     'notActions' => array(),
 );

@@ -777,10 +777,18 @@ array (
               ),
               94 => 
               array (
+                'name' => 'lic_licitaciones_opportunities_1_name',
+                'label' => 'LBL_LIC_LICITACIONES_OPPORTUNITIES_1_FROM_LIC_LICITACIONES_TITLE',
+              ),
+              95 => 
+              array (
+              ),
+              96 => 
+              array (
                 'name' => 'vobo_dir_c',
                 'label' => 'LBL_VOBO_DIR',
               ),
-              95 => 
+              97 => 
               array (
               ),
             ),
