@@ -69,8 +69,8 @@ class Ref_Cruzadas_Hooks
                 }
             }
         }
-        $GLOBALS['log']->fatal('correo_asesor_ref', $correo_asesor_ref);
-        $GLOBALS['log']->fatal('nombreAsesorRef', $nombreAsesorRef);
+        //$GLOBALS['log']->fatal('correo_asesor_ref', $correo_asesor_ref);
+        //$GLOBALS['log']->fatal('nombreAsesorRef', $nombreAsesorRef);
 
         $idAsesorRM = $bean->user_id1_c;/*Validar que no sea null*/
         $nombreAsesorRM = $bean->usuario_rm;
