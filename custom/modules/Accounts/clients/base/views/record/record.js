@@ -3565,7 +3565,9 @@
             var indices = [];
             for (var i = 0; i < telefono.length; i++) {
                 for (var j = 0; j < telefono.length; j++) {
-                    if (telefono[j].telefono == telefono[i].telefono && i != j) {
+                    var tel1=telefono[j].telefono.replace(/ /gi, "");
+                    var tel2=telefono[i].telefono.replace(/ /gi, "");
+                    if (tel1 == tel2 && i != j) {
                         coincidencia++;
                         indices.push(i);
                         indices.push(j);
