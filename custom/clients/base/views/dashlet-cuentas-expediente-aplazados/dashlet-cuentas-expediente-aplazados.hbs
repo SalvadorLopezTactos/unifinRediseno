@@ -13,8 +13,6 @@
         {{#each dataCuentasExpAplazado}}
         <tr>
             <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
-            <td>{{#if tipoCuenta}}{{getUnifinListValue 'tipo_registro_cuenta_list' tipoCuenta}}{{/if}}</td>
-            <td>{{#if subtipoCuenta}}{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipoCuenta}}{{/if}}</td>
 			<td>{{Monto}}</td>
 			<td>{{fecha_asignacion}}</td>
 			<td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>
