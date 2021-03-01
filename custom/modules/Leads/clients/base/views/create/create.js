@@ -27,6 +27,7 @@
         this.model.on('change:name_c', this.cleanName, this);
         this.model.on("change:regimen_fiscal_c", _.bind(this._cleanRegFiscal, this));
         this.getRegistrosAsignados();
+        this.fechaAsignacion();
     },
 
     delegateButtonEvents: function() {
@@ -624,5 +625,27 @@
     _render: function (options) {
         this._super("_render");
         this.$(".record-cell[data-name='blank_space']").hide();
-    }
+    },
+
+    fechaAsignacion: function () {
+
+        //Asigna fecha de asignacion con los puestos de Asesor Leasing:2 y Director Leasing:5
+        var puestoUsuario = App.user.attributes.puestousuario_c;
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+        today = yyyy + '-' + mm + '-' + dd;
+    
+        if (puestoUsuario == '2' || puestoUsuario == '5') {
+            this.model.set('fecha_asignacion_c',today);
+        }
+    },
 })
