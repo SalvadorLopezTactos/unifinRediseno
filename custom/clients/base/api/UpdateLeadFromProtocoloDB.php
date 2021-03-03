@@ -46,7 +46,18 @@ class UpdateLeadFromProtocoloDB extends SugarApi
         $id_lead=$args['id_lead'];
         $id_usuario=$args['id_usuario'];
 
-        $queryAsignado = "UPDATE leads SET assigned_user_id='{$id_usuario}' WHERE id='{$id_lead}'";
+        //Obtiene información del usuario para establecer correctamente los campos de equipos para que éste tenga permiso de verlo
+        $queryUser = "SELECT default_team,team_set_id FROM users WHERE id='{$id_usuario}'";
+        
+        $resultUser = $db->query($queryUser);
+        $team_id="";
+        $team_set_id="";
+        while($row = $db->fetchByAssoc($resultUser)){
+            $team_id=$row['default_team'];
+            $team_set_id=$row['team_set_id'];
+        }
+
+        $queryAsignado = "UPDATE leads SET assigned_user_id='{$id_usuario}',team_id='{$team_id}',team_set_id='{$team_set_id}' WHERE id='{$id_lead}'";
         $result = $db->query($queryAsignado);
         
         $queryArchivoCarga = "UPDATE leads_cstm SET nombre_de_cargar_c='' WHERE id_c='{$id_lead}'";
