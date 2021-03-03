@@ -140,7 +140,7 @@ class Ref_Cruzadas_Hooks
                                 $cuerpoCorreo = $this->estableceCuerpoNotificacionUniclickRespondido($nombre_acepta_uniclick, $nombre_current_user, $nombreCuenta, $linkReferencia, 'Rechazada', $explicacionRechazo);
 
                                 //Enviando correo a asesor origen
-                                $this->enviarNotificacionReferencia("Referencia cancelada", $cuerpoCorreo, $correo_asesor_origen, $nombreAsesorOrigen);
+                                $this->enviarNotificacionReferencia("Referencia rechazada", $cuerpoCorreo, $correo_acpeta_uniclick, $nombre_acepta_uniclick);
                             }
                         }
                     }
@@ -285,10 +285,10 @@ class Ref_Cruzadas_Hooks
     public function estableceCuerpoNotificacionUniclickRespondido($nombre, $nombreCont , $nombreCuenta, $linkReferencia, $tipo, $explicacionRechazo)
     {
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombre . '</b>
-          <br>Se le informa que la referencia de venta cruzada fue  <b>' . $tipo . '</b> por '. $nombreCont .' para la cuenta:' . $nombreCuenta . '';
+          <br>Se le informa que la referencia de venta cruzada fue  <b>' . $tipo . '</b> por '. $nombreCont .' para la cuenta:' . $nombreCuenta . ' ';
 
         if ($tipo == 'Rechazada') {
-            $mailHTML = $mailHTML . '<br>El motivo de rechazo es: ' . $explicacionRechazo . '';
+            $mailHTML = $mailHTML . '<br>El motivo de rechazo es: ' . $explicacionRechazo . ' ';
         }
         $mailHTML = $mailHTML . '
           <br><br>Para ver el detalle de la referencia dar <a id="downloadErrors" href="' . $linkReferencia . '">Click Aquí</a>
