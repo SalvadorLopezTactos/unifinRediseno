@@ -1,5 +1,5 @@
 <?php
-// created: 2020-01-06 15:47:00
+// created: 2021-02-26 11:00:50
 $viewdefs['Leads']['base']['filter']['default'] = array (
   'default_filter' => 'all_records',
   'fields' => 
@@ -8,6 +8,15 @@ $viewdefs['Leads']['base']['filter']['default'] = array (
     array (
     ),
     'account_name' => 
+    array (
+    ),
+    'tipo_registro_c' => 
+    array (
+    ),
+    'subtipo_registro_c' => 
+    array (
+    ),
+    'regimen_fiscal_c' => 
     array (
     ),
     'lead_source' => 
@@ -89,6 +98,9 @@ $viewdefs['Leads']['base']['filter']['default'] = array (
     array (
     ),
     'date_modified' => 
+    array (
+    ),
+    'nombre_de_cargar_c' => 
     array (
     ),
     'tag' => 
