@@ -144,18 +144,7 @@
                 var nombre_archivo=App.lang.getAppListStrings('nombre_archivo_protocolo_leads_list')[1];
                 var equipo_usuario_logueado=App.user.attributes.equipo_c;
 
-    			app.api.call("read", app.api.buildURL("Leads/", null, null, {
-                    "filter": [
-                        {
-                        	"nombre_de_cargar_c": {
-                        		"$equals":nombre_archivo
-                            },
-                            "oficina_c":{
-                                "$in":[equipo_usuario_logueado]
-                            }
-                        }
-                    ]
-                }), null, {
+    			app.api.call("read", app.api.buildURL("FilterLeadsToDB/"+nombre_archivo+"/"+equipo_usuario_logueado, null, null,null), null, {
                     success: _.bind(function (data) {
 
                     	if(data.records.length>0){
