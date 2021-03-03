@@ -30,7 +30,7 @@ class Ref_Cruzadas_Hooks
         // $GLOBALS['log']->fatal('idAsesorOrigen', $correo_asesor_origen);
         global $current_user;
         //$correo_current_user=$current_user->email1;
-        //$nombre_current_user=$current_user->full_name;
+        $nombre_current_user=$current_user->full_name;
         $id_current_user = $current_user->id;
         //$GLOBALS['log']->fatal('correo_current_user',$id_current_user);
         //Validando que el Asesor referenciado no sea un 9-
@@ -124,24 +124,25 @@ class Ref_Cruzadas_Hooks
 
                         //Referencia uniclick aviso de aprobado
                         if ($status == '1') {
-                            if ($id_current_user != $id_user_uniclick) {
+                            
+                            if ($id_current_user != $id_user_uniclick) { 
                                 $GLOBALS['log']->fatal("ENVIANDO CORREO REFERENCIA VÁLIDA-APROBADA UNICLICK A ASESOR ORIGEN CON EMAIL " . $correo_acpeta_uniclick);
-                                $cuerpoCorreo = $this->estableceCuerpoNotificacionUniclickRespondido($nombre_acepta_uniclick, $nombreCuenta, $linkReferencia, 'Aceptada', '');
+                                $cuerpoCorreo = $this->estableceCuerpoNotificacionUniclickRespondido($nombre_acepta_uniclick, $nombre_current_user, $nombreCuenta, $linkReferencia, 'Aceptada', '');
 
                                 //Enviando correo a asesor origen
                                 $this->enviarNotificacionReferencia("Nueva referencia válida", $cuerpoCorreo, $correo_acpeta_uniclick, $nombre_acepta_uniclick);
                             }
                         }
                         //Referencia uniclick cancelada
-                        /*if ($status == '3') {
+                        if ($status == '3') {
                             if ($id_current_user != $id_user_uniclick) {
                                 $GLOBALS['log']->fatal("ENVIANDO CORREO REFERENCIA VÁLIDA-CANCELADA UNICLICK A ASESOR ORIGEN CON EMAIL " . $correo_acpeta_uniclick);
-                                $cuerpoCorreo = $this->estableceCuerpoNotificacionUniclickRespondido($nombre_acepta_uniclick, $nombreCuenta, $linkReferencia, 'Rechazada', $explicacionRechazo);
+                                $cuerpoCorreo = $this->estableceCuerpoNotificacionUniclickRespondido($nombre_acepta_uniclick, $nombre_current_user, $nombreCuenta, $linkReferencia, 'Rechazada', $explicacionRechazo);
 
                                 //Enviando correo a asesor origen
                                 $this->enviarNotificacionReferencia("Referencia cancelada", $cuerpoCorreo, $correo_asesor_origen, $nombreAsesorOrigen);
                             }
-                        }*/
+                        }
                     }
                 }
             } else {
@@ -281,10 +282,10 @@ class Ref_Cruzadas_Hooks
         return $mailHTML;
     }
 
-    public function estableceCuerpoNotificacionUniclickRespondido($nombre, $nombreCuenta, $linkReferencia, $tipo, $explicacionRechazo)
+    public function estableceCuerpoNotificacionUniclickRespondido($nombre, $nombreCont , $nombreCuenta, $linkReferencia, $tipo, $explicacionRechazo)
     {
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombre . '</b>
-          <br>Se le informa que la referencia de venta cruzada fue respondida <b>' . $tipo . '</b> para la cuenta:' . $nombreCuenta . '';
+          <br>Se le informa que la referencia de venta cruzada fue  <b>' . $tipo . '</b> por '. $nombreCont .' para la cuenta:' . $nombreCuenta . '';
 
         if ($tipo == 'Rechazada') {
             $mailHTML = $mailHTML . '<br>El motivo de rechazo es: ' . $explicacionRechazo . '';
