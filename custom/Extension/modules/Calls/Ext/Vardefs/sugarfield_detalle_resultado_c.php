@@ -1,8 +1,7 @@
 <?php
- // created: 2021-02-10 00:40:09
+ // created: 2021-03-03 15:40:37
 $dictionary['Call']['fields']['detalle_resultado_c']['labelValue']='Detalle';
 $dictionary['Call']['fields']['detalle_resultado_c']['dependency']='';
-$dictionary['Call']['fields']['detalle_resultado_c']['required'] = true;
 $dictionary['Call']['fields']['detalle_resultado_c']['visibility_grid']=array (
   'trigger' => 'tct_resultado_llamada_ddw_c',
   'values' => 
@@ -47,8 +46,8 @@ $dictionary['Call']['fields']['detalle_resultado_c']['visibility_grid']=array (
     'Llamada_servicio' => 
     array (
       0 => '',
-      1 => '9',
-      2 => '10',
+      1 => '16',
+      2 => '17',
     ),
     'Razon_Social' => 
     array (

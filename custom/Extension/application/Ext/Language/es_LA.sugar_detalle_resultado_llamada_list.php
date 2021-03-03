@@ -1,5 +1,5 @@
 <?php
- // created: 2021-02-05 07:53:50
+ // created: 2021-03-03 15:34:35
 
 $app_list_strings['detalle_resultado_llamada_list']=array (
   '' => '',
@@ -18,4 +18,6 @@ $app_list_strings['detalle_resultado_llamada_list']=array (
   13 => 'NO ENLAZA',
   14 => 'OCUPADO',
   15 => 'YA NO EXISTE',
+  16 => 'SEGUIMIENTO A SOLICITUD DEL CLIENTE O RESOLUCIÓN DE PROBLEMA',
+  17 => 'SEGUIMIENTO A PROCESO DE CONTRATACIÓN',
 );
