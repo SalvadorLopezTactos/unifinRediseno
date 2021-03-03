@@ -148,24 +148,21 @@
                     success: _.bind(function (data) {
 
                     	if(data.records.length>0){
-	                    	var url = app.api.buildURL('Leads/' + data.records[0].id, null, null);
-                    		var api_params = {};
-		    				api_params['assigned_user_id']=App.user.get('id');
-		    				api_params['assigned_user_name']=App.user.get('full_name');
-		    				//Se modifica nombre de carga para evitar obtener nuevamente el registro ya asignado
-		    				api_params['nombre_de_cargar_c']="";
-
-	    					app.api.call('update', url, api_params, {
-	    						success: _.bind(function (data) {
-	    							app.alert.dismiss('asignaFromDB');
+                            //Actualizar lead desde potocolo, se hace desde api custom, para saltarse la seguridad de equipo
+                            //y no se genere error al obtener registros que no estén asignados al asesor
+                            var idLead=data.records[0].id;
+                            var id_usuario=App.user.get('id');
+                            app.api.call("read",app.api.buildURL("UpdateLeadFromProtocolo/"+idLead+"/"+id_usuario, null, null,null),null,{
+                                success: _.bind(function (data) {
+                                    app.alert.dismiss('asignaFromDB');
 	    							var mensaje='Se ha asignado el registro: '+'<a href="#Leads/'+data.id+'">'+data.name+'</a>';
 
 	    							app.alert.show('assignFromDB', {
 		    							level: 'success',
 		    							messages: mensaje,
 		                    		});
-	                			})
-	            			});
+                                }, this)
+                            })
             			}else{
 
             				app.alert.show('sinRegistrosDB', {
