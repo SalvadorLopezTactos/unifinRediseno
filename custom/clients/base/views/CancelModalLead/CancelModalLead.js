@@ -8,18 +8,18 @@
     fallbackFieldTemplate: 'edit',
     context_Lead: null,
     motivo_list: null,
-    submotivo_list: null,
+    submotivo_list_2: null,
+    submotivo_list_3: null,
+    submotivo_list_5: null,
 
     events: {
         'click #btn-cancela': 'closeModal',
         'click #btn-aceptar': 'aceptarModal',
-        'change #motivocancelacion': 'dependenciasMSC',
     },    
 
     initialize: function (options) {
         self_modal_ms = this;
         contextIdLead = options.contextIdLead;
-        this.showSubmotivo = 0;
 
         app.view.View.prototype.initialize.call(this, options);
         if (this.layout) {
@@ -34,13 +34,50 @@
                 _.each(motivos, function (value, key) {
                     list_html_mc += '<option value="' + key + '">' + motivos[key] + '</option>';
                 });
-                self_modal_ms.motivo_list = list_html_mc;               
+                self_modal_ms.motivo_list = list_html_mc;
+
+                //SUBMOTIVO - NO ES PERFIL
+                var submotivos = App.lang.getAppListStrings('submotivo_cancelacion_list');
+                var list_smc = '<option value=""></option>';
+                _.each(submotivos, function (value, key) {
+
+                    if (key == 1 || key == 2 || key == 3 || key == 4 || key == 8) {
+                        // console.log(key);
+                        list_smc += '<option value="' + key + '">' + submotivos[key] + '</option>';
+                    }
+                });
+                self_modal_ms.submotivo_list_2 = list_smc; 
+
+                //SUBMOTIVO - ILOCALIZABLE 
+                var submotivos = App.lang.getAppListStrings('submotivo_cancelacion_list');
+                var list_smc = '<option value=""></option>';
+                _.each(submotivos, function (value, key) {              
+
+                    if (key == 9 || key == 10 || key == 11) {
+                        // console.log(key);                
+                        list_smc += '<option value="' + key + '">' + submotivos[key] + '</option>';
+                    }
+                });            
+                self_modal_ms.submotivo_list_3 = list_smc;
+
+                //SUBMOTIVO - SI ES PERFIL, NO ESTA INTERESADO
+                var submotivos = App.lang.getAppListStrings('submotivo_cancelacion_list');
+                var list_smc = '<option value=""></option>';
+                _.each(submotivos, function (value, key) {              
+
+                    if (key == 5 || key == 6 || key == 7) {
+                        // console.log(key);                
+                        list_smc += '<option value="' + key + '">' + submotivos[key] + '</option>';
+                    }
+                });            
+                self_modal_ms.submotivo_list_5 = list_smc;   
 
                 self_modal_ms.context_Lead = options;
                 self_modal_ms.render();
+                //Jquery para que no se cierre el modal con ESC o al dar clic afuera del modal
                 this.$('.modal').modal({
-                    backdrop: '',
-                    // keyboard: true,
+                    backdrop: 'static',
+                    keyboard: false,
                     // focus: true
                 });
                 this.$('.modal').modal('show');
@@ -58,95 +95,65 @@
 
     _render: function () {
         this._super("_render");
-        //Muesta el campo de Submotivo
-        if (this.showSubmotivo == 1) {
-            $('#submotivos').show();            
-        } else {
-            $('#submotivos').hide();
-        }
-        //Jquery para que no se cierre el modal con ESC o al dar clic afuera del modal
-        // $('#CancelModalLead').modal({ backdrop: 'static', keyboard: false });        
+
+        $('#motivocancelacion').change(function (evt) {
+            self_modal_ms.dependenciasMSC();
+        });
+        self_modal_ms.dependenciasMSC();        
     },
 
     dependenciasMSC: function () {
-        
-        var setMotivo = $("#motivocancelacion").val(); //Guarda el valor de Motivo de Cancelación 
-        
-        //YA ES CLIENTE UNIFIN - LA EMPRESA YA NO EXISTE
-        if ($("#motivocancelacion").val() == "1" || $("#motivocancelacion").val() == "4") {
-            this.showSubmotivo = 0;
-        }
-        //NO ES PERFIL
-        if ($("#motivocancelacion").val() == "2") {            
-            this.showSubmotivo = 1;
-            //Lista desplegable dependiente del Motivo de Cancelación
-            var submotivos = App.lang.getAppListStrings('submotivo_cancelacion_list');
-            var list_smc = '<option value=""></option>';
-            _.each(submotivos, function (value, key) {
 
-                if (key == 1 || key == 2 || key == 3 || key == 4 || key == 8) {
-                    // console.log(key);
-                    list_smc += '<option value="' + key + '">' + submotivos[key] + '</option>';
-                }
-            });
-            self_modal_ms.submotivo_list = list_smc;            
+        $('#submotivos2').hide();
+        $('#submotivos3').hide();
+        $('#submotivos5').hide();        
+        
+        //NO ES PERFIL
+        if ($("#motivocancelacion").val() == "2") {
+            $('#submotivos2').show();                      
         }
         //ILOCALIZABLE
         if ($("#motivocancelacion").val() == "3") {
-            this.showSubmotivo = 1;
-            //Lista desplegable dependiente del Motivo de Cancelación
-            var submotivos = App.lang.getAppListStrings('submotivo_cancelacion_list');
-            var list_smc = '<option value=""></option>';
-            _.each(submotivos, function (value, key) {              
-
-                if (key == 9 || key == 10 || key == 11) {
-                    // console.log(key);                
-                    list_smc += '<option value="' + key + '">' + submotivos[key] + '</option>';
-                }
-            });            
-            self_modal_ms.submotivo_list = list_smc;
+            $('#submotivos3').show();
         }
         //SI ES PERFIL, NO ESTA INTERESADO
         if ($("#motivocancelacion").val() == "5") {
-            this.showSubmotivo = 1;
-            //Lista desplegable dependiente del Motivo de Cancelación
-            var submotivos = App.lang.getAppListStrings('submotivo_cancelacion_list');
-            var list_smc = '<option value=""></option>';
-            _.each(submotivos, function (value, key) {              
-
-                if (key == 5 || key == 6 || key == 7) {
-                    // console.log(key);                
-                    list_smc += '<option value="' + key + '">' + submotivos[key] + '</option>';
-                }
-            });            
-            self_modal_ms.submotivo_list = list_smc;            
+            $('#submotivos5').show();          
         }
-
-        self_modal_ms.render();
-        $("#motivocancelacion").select2('val', setMotivo); //Setea el valor de Motivo de Cancelación para que no lo quite el render
     },
 
     aceptarModal: function () {
 
         var KeyMotivoCancel = $("#motivocancelacion").val();
-        var KeySubmotivoCancel = $("#submotivocancelacion").val();
+        var KeySubmotivoCancel = "";
         var emptyMotivoSubmotivo = 0;
+
+        //SE OBTIENE EL VALOR DEL SUBMOTIVO
+        if ($("#motivocancelacion").val() == "2" && $("#submotivocancelacion2").val() != "") {
+            KeySubmotivoCancel = $("#submotivocancelacion2").val();
+        }
+        if ($("#motivocancelacion").val() == "3" && $("#submotivocancelacion3").val() != "") {
+            KeySubmotivoCancel = $("#submotivocancelacion3").val();
+        }
+        if ($("#motivocancelacion").val() == "5" && $("#submotivocancelacion5").val() != "") {
+            KeySubmotivoCancel = $("#submotivocancelacion5").val();
+        }
 
         ////VALIDACION DE CAMPOS REQUERIDOS EN EL MODAL-MOTIVO DE CANCELACION////
         if ($("#motivocancelacion").val() == "") {
             $('#motivos').find('.select2-choice').css('border-color', 'red');
             emptyMotivoSubmotivo += 1;
         }
-        if ($("#motivocancelacion").val() == "2" && $("#submotivocancelacion").val() == "") {
-            $('#submotivos').find('.select2-choice').css('border-color', 'red');
+        if ($("#motivocancelacion").val() == "2" && $("#submotivocancelacion2").val() == "") {
+            $('#submotivos2').find('.select2-choice').css('border-color', 'red');
             emptyMotivoSubmotivo += 1;
         }
-        if ($("#motivocancelacion").val() == "3" && $("#submotivocancelacion").val() == "") {
-            $('#submotivos').find('.select2-choice').css('border-color', 'red');
+        if ($("#motivocancelacion").val() == "3" && $("#submotivocancelacion3").val() == "") {
+            $('#submotivos3').find('.select2-choice').css('border-color', 'red');
             emptyMotivoSubmotivo += 1;
         }
-        if ($("#motivocancelacion").val() == "5" && $("#submotivocancelacion").val() == "") {
-            $('#submotivos').find('.select2-choice').css('border-color', 'red');
+        if ($("#motivocancelacion").val() == "5" && $("#submotivocancelacion5").val() == "") {
+            $('#submotivos5').find('.select2-choice').css('border-color', 'red');
             emptyMotivoSubmotivo += 1;
         }
 
