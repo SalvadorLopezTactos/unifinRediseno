@@ -705,7 +705,7 @@ class NotificacionDirector
     public function estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion,$nombre_rm=null,$idRM,$Valor){
 
         if ($idRM!=$Valor && !empty($nombre_rm)){      
-            $mensaje='<br><br>Se le informa que se ha generado una solicitud de Leasing para la cuenta: <b>'. $nombreCuenta.'</b> y se solicita su aprobación y validación de participación del asesor RM <b>'.$nombre_rm.'.</b>';  
+            $mensaje='<br><br>Se le informa que se ha generado una solicitud de Leasing para la cuenta: <b>'. $nombreCuenta.'</b> ; se solicita su aprobación y validación de participación del asesor RM <b>'.$nombre_rm.'.</b>';  
         }else{
             $mensaje='<br><br>Se le informa que se ha generado una solicitud de Leasing para la cuenta: <b>'. $nombreCuenta.'</b> y se solicita su aprobación.'; 
         }
