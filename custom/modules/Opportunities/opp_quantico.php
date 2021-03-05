@@ -36,28 +36,56 @@ class IntegracionQuantico
             $IncreaseAmount = $bean->tipo_de_operacion_c=="RATIFICACION_INCREMENTO"?$bean->monto_ratificacion_increment_c:0;
             $CreditLineId = $bean->tipo_de_operacion_c=="RATIFICACION_INCREMENTO"?$bean->id_linea_credito_c:0;
 
-
-            $body = array(
-                "RequestId" => $bean->idsolicitud_c,
-                "ProcessId" => $bean->id_process_c,
-                "OpportunitiesId" => $bean->id,
-                "ClientId" => $bean->account_id,
-                "ClientName" => $bean->account_name,
-                "ProductId" => $bean->producto_financiero_c,
-                "RequestTypeId" => $bean->tipo_de_operacion_c,
-                "PersonTypeId" => $tipoPersona,
-                "ProductTypeId" => $bean->tipo_producto_c,
-                "CurrencyTypeId" => "1",
-                "RequestAmount" => $RequestAmount,
-                "IncreaseAmount" => $IncreaseAmount,
-                "AdviserId" => $idActiveDirectory,
-                "AdviserName" => $bean->assigned_user_name,
-                "SinglePaymentPercentage"=>$bean->porciento_ri_c,
-                //"SinglePaymentPercentage" => $CreditLineId,
-                "CreditLineId" => $CreditLineId,
-                "BackOfficeId" => str_replace("^", "", $arrayBo[0]),
-                "BackOfficeName" => $app_list_strings['usuario_bo_0'][str_replace("^", "", $arrayBo[0])]
-            );
+			//Administración de Cartera
+			if($bean->admin_cartera_c) {
+				$body = array(
+					"RequestId" => $bean->idsolicitud_c,
+					"ProcessId" => $bean->id_process_c,
+					"OpportunitiesId" => $bean->id,
+					"ClientId" => $bean->account_id,
+					"ClientName" => $bean->account_name,
+					"ProductId" => $bean->producto_financiero_c,
+					"RequestTypeId" => $bean->tipo_de_operacion_c,
+					"PersonTypeId" => $tipoPersona,
+					"ProductTypeId" => $bean->tipo_producto_c,
+					"CurrencyTypeId" => "1",
+					"RequestAmount" => $RequestAmount,
+					"IncreaseAmount" => $IncreaseAmount,
+					"AdviserId" => $idActiveDirectory,
+					"AdviserName" => $bean->assigned_user_name,
+					"SinglePaymentPercentage"=>$bean->porciento_ri_c,
+					"CreditLineId" => $CreditLineId,
+					"BackOfficeId" => str_replace("^", "", $arrayBo[0]),
+					"BackOfficeName" => $app_list_strings['usuario_bo_0'][str_replace("^", "", $arrayBo[0])],
+					"ProductOriginPortfolioId" => $bean->producto_origen_vencido_c,
+					"RequestTypePortfolioId" => $bean->tipo_sol_admin_cartera_c,
+					"BusinessAmount" => $bean->monto_gpo_emp_c,
+					"NumberDaysoverduePortfolio" => $bean->cartera_dias_vencido_c
+				);
+			}
+			else {				
+				$body = array(
+					"RequestId" => $bean->idsolicitud_c,
+					"ProcessId" => $bean->id_process_c,
+					"OpportunitiesId" => $bean->id,
+					"ClientId" => $bean->account_id,
+					"ClientName" => $bean->account_name,
+					"ProductId" => $bean->producto_financiero_c,
+					"RequestTypeId" => $bean->tipo_de_operacion_c,
+					"PersonTypeId" => $tipoPersona,
+					"ProductTypeId" => $bean->tipo_producto_c,
+					"CurrencyTypeId" => "1",
+					"RequestAmount" => $RequestAmount,
+					"IncreaseAmount" => $IncreaseAmount,
+					"AdviserId" => $idActiveDirectory,
+					"AdviserName" => $bean->assigned_user_name,
+					"SinglePaymentPercentage"=>$bean->porciento_ri_c,
+					//"SinglePaymentPercentage" => $CreditLineId,
+					"CreditLineId" => $CreditLineId,
+					"BackOfficeId" => str_replace("^", "", $arrayBo[0]),
+					"BackOfficeName" => $app_list_strings['usuario_bo_0'][str_replace("^", "", $arrayBo[0])]
+				);
+			}
             $GLOBALS['log']->fatal('Body Quantico integracion ' . json_encode($body));
             $callApi = new UnifinAPI();
             $resultado = $callApi->postQuantico($host, $body, $auth_encode);
