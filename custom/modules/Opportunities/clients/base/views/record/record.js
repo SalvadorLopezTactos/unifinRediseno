@@ -754,9 +754,9 @@
         if (usuarioProducto == "CA") {
             producto = "Crédito Automotriz";
         }*/
-        producto = (usuarioProducto == "1") ? "Arrendamiento Puro" : "";
-        producto = (usuarioProducto == "4") ? "Factoraje Financiero" : "";
-        producto = (usuarioProducto == "3") ? "Crédito Automotriz" : "";
+        producto = (usuarioProducto == "1") ? "Arrendamiento Puro" : producto;
+        producto = (usuarioProducto == "4") ? "Factoraje Financiero" : producto;
+        producto = (usuarioProducto == "3") ? "Crédito Automotriz" : producto;
        
         //Recupera cuenta asociada
         var producto_financiero = this.model.get('producto_financiero_c');
