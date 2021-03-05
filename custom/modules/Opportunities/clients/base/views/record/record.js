@@ -745,7 +745,11 @@
         var usuarioProducto = this.model.get('tipo_producto_c');
         var producto = "";
 
-        /*if (usuarioProducto == "AP") {
+        usuarioProducto = (usuarioProducto == "1") ? "AP" : usuarioProducto;
+        usuarioProducto = (usuarioProducto == "4") ? "FF" : usuarioProducto;
+        usuarioProducto = (usuarioProducto == "3") ? "CA" : usuarioProducto;
+
+        if (usuarioProducto == "AP") {
             producto = "Arrendamiento Puro";
         }
         if (usuarioProducto == "FF") {
@@ -753,10 +757,7 @@
         }
         if (usuarioProducto == "CA") {
             producto = "Crédito Automotriz";
-        }*/
-        producto = (usuarioProducto == "1") ? "Arrendamiento Puro" : producto;
-        producto = (usuarioProducto == "4") ? "Factoraje Financiero" : producto;
-        producto = (usuarioProducto == "3") ? "Crédito Automotriz" : producto;
+        }
        
         //Recupera cuenta asociada
         var producto_financiero = this.model.get('producto_financiero_c');
