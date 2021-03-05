@@ -21,6 +21,8 @@
         //Habilita el campo parent_name cuando esta vacio y lo deshabilta cuando ya tiene una cuenta
         this.model.on('sync', this.enableparentname, this);
         this.model.on('sync', this.cambioFecha, this);
+        this.model.on('sync', this.enableFieldsEmpty, this);
+        this.enableFieldsEmpty();
 
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial2Call, this));
@@ -71,6 +73,7 @@
         this._super("_render");
         this.enableparentname();
         this.getPersonas();
+        this.enableFieldsEmpty();
     },
 
     handleCancel: function () {
@@ -905,6 +908,58 @@
         } else {
             person.$('[data-name="calls_persona_relacion"]').hide();
             person.$('[data-name="persona_relacion_c"]').hide();
+        }
+    },
+
+    enableFieldsEmpty: function () {
+
+        if (this.model.get('status') == "Held") {  //ESTATUS DE LA LLAMADA REALIZADA
+
+            //SE HABILITA EL CAMPO DE RESULTADO DE LA LLAMADA
+            if (this.model.get('tct_resultado_llamada_ddw_c') != "") {
+                
+                self.noEditFields.push('tct_resultado_llamada_ddw_c');
+                self.$('[data-name="tct_resultado_llamada_ddw_c"]').attr('style', 'pointer-events:none;');
+                
+            } else {
+                
+                fieldRLL = this.getField('tct_resultado_llamada_ddw_c');
+                this.inlineEditMode = true;
+                this.setButtonStates(this.STATE.EDIT);
+                this.toggleField(fieldRLL);
+            }
+            //VALIDA CUANDO ES PUESTO DE USUARIO 27 - "AGENTE TELEFONICO" Ó 31 - "COORDINADOR DE CENTRO DE PROSPECCIONES"
+            if (App.user.attributes.puestousuario_c == '27' || App.user.attributes.puestousuario_c == '31') {
+
+                //SE HABILITA EL CAMPO DE EVENTO / CAMPAÑA
+                if (this.model.get('evento_campana_c') != "") {
+                    
+                    self.noEditFields.push('evento_campana_c');
+                    self.$('[data-name="evento_campana_c"]').attr('style', 'pointer-events:none;');
+                
+                } else {
+                    
+                    fieldEC = this.getField('evento_campana_c');
+                    this.inlineEditMode = true;
+                    this.setButtonStates(this.STATE.EDIT);
+                    this.toggleField(fieldEC);
+                }
+                //SE HABILITA CAMPO REL EVENTO / CAMPAÑA
+                if (this.model.get('campana_rel_c') != "") {
+                    
+                    self.noEditFields.push('campana_rel_c');
+                    self.$('[data-name="campana_rel_c"]').attr('style', 'pointer-events:none;');
+                    
+                }else {
+
+                    this.model.set('evento_campana_c', true);
+
+                    fieldCR = this.getField('campana_rel_c');
+                    this.inlineEditMode = true;
+                    this.setButtonStates(this.STATE.EDIT);
+                    this.toggleField(fieldCR);
+                }
+            }
         }
     },
 })
