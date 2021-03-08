@@ -1,5 +1,5 @@
 <?php
- // created: 2019-06-26 13:10:58
+ // created: 2021-03-08 18:33:46
 $dictionary['Rel_Relaciones']['fields']['relaciones_activas']['required']=true;
 $dictionary['Rel_Relaciones']['fields']['relaciones_activas']['default']='';
 
