@@ -16,8 +16,8 @@ class validaAccountsPLD extends SugarApi
             'POST_validaPLD' => array(
                 'reqType' => 'POST',
                 'noLoginRequired' => false,
-                'path' => array('Accounts','validaPLD'),
-                'pathVars' => array('',''),
+                'path' => array('Accounts', 'validaPLD'),
+                'pathVars' => array('', ''),
                 'method' => 'secuencia_validaPLD',
                 'shortHelp' => 'Alta de Lead a través de diferentes servicios',
             ),
@@ -117,13 +117,21 @@ class validaAccountsPLD extends SugarApi
     public function validaDatosCuenta($beanAccount, $nacionalidad, $producto, $tipodePersona)
     {
         global $db;
+        if ($tipodePersona != 'PM') {
+            $qorder = "ORDER BY id_pf_pfae ASC";
+        } else {
+            $qorder = "ORDER BY id_pm ASC";
+
+        }
 
         $query = "SELECT * from require_pld_service
 WHERE seccion='CUENTA'
 AND residencia like '%{$nacionalidad}%'
 AND producto like '%{$producto}%'
 AND tipo_persona LIKE '%{$tipodePersona}%'
-AND deleted=0";
+AND deleted=0 ".$qorder;
+
+
         $result_cuenta = $db->query($query);
         $faltantes = [];
         $requeridos = $result_cuenta->num_rows;
@@ -223,13 +231,18 @@ WHERE rel.accounts_dire_direccion_1accounts_ida='{$idcuenta}'
     public function validaPldCS($beanAccount, $nacionalidad, $producto, $tipodePersona)
     {
         global $db;
+        if ($tipodePersona != 'PM') {
+            $qorder = "ORDER BY id_pf_pfae ASC";
+        } else {
+            $qorder = "ORDER BY id_pm ASC";
 
+        }
         $query = "SELECT * from require_pld_service
 WHERE seccion='PLD - Crédito Simple'
       AND residencia like '%{$nacionalidad}%'
       AND producto like '%{$producto}%'
       AND tipo_persona LIKE '%{$tipodePersona}%'
-      AND deleted=0";
+      AND deleted=0 ".$qorder;
 
         $result_cuenta = $db->query($query);
         $faltantes = [];
@@ -251,13 +264,18 @@ WHERE seccion='PLD - Crédito Simple'
     public function validaPldCR($beanAccount, $nacionalidad, $producto, $tipodePersona)
     {
         global $db;
+        if ($tipodePersona != 'PM') {
+            $qorder = "ORDER BY id_pf_pfae ASC";
+        } else {
+            $qorder = "ORDER BY id_pm ASC";
 
+        }
         $query = "SELECT * from require_pld_service
 WHERE seccion='PLD - Crédito Revolvente (Unirevolving/Unicard)'
       AND residencia like '%{$nacionalidad}%'
       AND producto like '%{$producto}%'
       AND tipo_persona LIKE '%{$tipodePersona}%'
-      AND deleted=0";
+      AND deleted=0 ".$qorder;
         $result_cuenta = $db->query($query);
         $faltantes = [];
         $requeridos = $result_cuenta->num_rows;
