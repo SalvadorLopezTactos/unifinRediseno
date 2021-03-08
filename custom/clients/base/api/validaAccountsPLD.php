@@ -16,8 +16,8 @@ class validaAccountsPLD extends SugarApi
             'POST_validaPLD' => array(
                 'reqType' => 'POST',
                 'noLoginRequired' => false,
-                'path' => array('validaPLD'),
-                'pathVars' => array(''),
+                'path' => array('Accounts','validaPLD'),
+                'pathVars' => array('',''),
                 'method' => 'secuencia_validaPLD',
                 'shortHelp' => 'Alta de Lead a través de diferentes servicios',
             ),
