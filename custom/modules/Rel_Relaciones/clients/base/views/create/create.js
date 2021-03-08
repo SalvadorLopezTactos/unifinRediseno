@@ -1364,7 +1364,7 @@
         request.url="";
         request.method="GET";
 
-        if ((this.model.get('relaciones_activas').includes('Garante') || this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Conyuge') || this.model.get('relaciones_activas').includes('Fiador') || this.model.get('relaciones_activas').includes('Contacto') || this.model.get('relaciones_activas').includes('Accionista') || this.model.get('relaciones_activas').includes('Representante') || this.model.get('relaciones_activas').includes('Coacreditado') || this.model.get('relaciones_activas').includes('Depositario') || this.model.get('relaciones_activas').includes('Directivo') || this.model.get('relaciones_activas').includes('Referencia') || this.model.get('relaciones_activas').includes('Obligado solidario') || this.model.get('relaciones_activas').includes('Firmantes VR')) && this.model.get("relacion_c").trim()!= "" && Cuenta != "") {
+        if ((this.model.get('relaciones_activas').includes('Garante') || this.model.get('relaciones_activas').includes('Tarjetahabiente') || this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Conyuge') || this.model.get('relaciones_activas').includes('Fiador') || this.model.get('relaciones_activas').includes('Contacto') || this.model.get('relaciones_activas').includes('Accionista') || this.model.get('relaciones_activas').includes('Representante') || this.model.get('relaciones_activas').includes('Coacreditado') || this.model.get('relaciones_activas').includes('Depositario') || this.model.get('relaciones_activas').includes('Directivo') || this.model.get('relaciones_activas').includes('Referencia') || this.model.get('relaciones_activas').includes('Obligado solidario') || this.model.get('relaciones_activas').includes('Firmantes VR')) && this.model.get("relacion_c").trim()!= "" && Cuenta != "") {
             var requestA = app.utils.deepCopy(request);
             var url = app.api.buildURL("Accounts/" + Cuenta);
             requestA.url = url.substring(4);
@@ -2050,6 +2050,35 @@
 							if ( recursos == 0) {
 								faltantes.push('PLD-¿Los recursos son propios o los recursos son de un tercero?');
 							}
+                        }
+
+                        //Valida Relación: Tarjetahabiente
+                        if (this.model.get('relaciones_activas').includes('Tarjetahabiente')){
+							relacionesActivas.push("Tarjetahabiente");
+						
+							if (data[0].contents.tipodepersona_c != "Persona Moral") {
+                                if (data[0].contents.primernombre_c == "") {
+									faltantes.push('Nombre');
+								}
+								if (data[0].contents.apellidopaterno_c == "") {
+									faltantes.push('Apellido Paterno');
+								}
+								if (data[0].contents.apellidomaterno_c == "") {
+									faltantes.push('Apellido Materno');
+								}
+                                if (data[0].contents.fechadenacimiento_c == "") {
+									faltantes.push('Fecha de Nacimiento');
+								}                             
+								if (data[0].contents.nacionalidad_c == "" || data[0].contents.nacionalidad_c == "0") {
+                                    faltantes.push('Nacionalidad');
+                                }
+								if (data[0].contents.rfc_c == "") {
+                                    faltantes.push('RFC');
+                                }
+                              
+							}else{
+                                faltantes.push('Una persona moral no puede ser Tarjetahabiente'); 
+                            }
                         }
                     }
                 
