@@ -86,23 +86,32 @@ class Dynamics365 extends SugarApi
             $body_elements=array();
             $body_elements["DataAreaId"]="UFIN";
             $body_elements["CUSTOMERACCOUNTNUMBER"]=$beanCuenta->idcliente_c;
-            $body_elements["COMPANYTYPE"]=($beanCuenta->pais_nacimiento_c=='2') ? "LegalPerson" : "ForeignCompany";
+            //$body_elements["COMPANYTYPE"]=($beanCuenta->pais_nacimiento_c=='2') ? "LegalPerson" : "ForeignCompany";
             $body_elements["CURRENCYCODE"]="MXN";
             $body_elements["LANGUAGEID"]="es-MX";
 
             if($regimen_fiscal!='Persona Moral'){
                 //Se arma petición para enviar proveedor de Persona Física o PFAE
+                $body_elements["CUSTOMERPARTYTYPE"]="Person";
+                $body_elements["COMPANYTYPE"]=($beanCuenta->pais_nacimiento_c=='2') ? "LegalPerson" : "ForeignCompany";
                 $body_elements["PERSONFIRSTNAME"]=$beanCuenta->primernombre_c;
                 $body_elements["PERSONLASTNAME"]=$beanCuenta->apellidopaterno_c." ".$beanCuenta->apellidomaterno_c;
                 $body_elements["PERSONMIDDLENAME"]="";
             }else{
+                /*
                 $body_elements["PERSONFIRSTNAME"]=$beanCuenta->razonsocial_c;
                 $body_elements["PERSONLASTNAME"]="";
                 $body_elements["PERSONMIDDLENAME"]="";
+                */
+
+                $body_elements["CUSTOMERPARTYTYPE"]="Organization";
+                $body_elements["COMPANYTYPE"]=($beanCuenta->pais_nacimiento_c=='2') ? "LegalEntity" : "ForeignCompany";
+                $body_elements["CUSTOMERORGANIZATIONNAME"]=$beanCuenta->razonsocial_c;
+                $body_elements["CUSTOMERSEARCHNAME"]=$beanCuenta->razonsocial_c;
+
             }
             $body_elements["RFCFEDERALTAXNUMBER"]=$beanCuenta->rfc_c;
             $body_elements["CUSTOMERGROUPID"]="CLIENTES";
-            $body_elements["CUSTOMERPARTYTYPE"]="Person";
 
             //Recupera dirección
             $beanCuenta->load_relationship('accounts_dire_direccion_1');
