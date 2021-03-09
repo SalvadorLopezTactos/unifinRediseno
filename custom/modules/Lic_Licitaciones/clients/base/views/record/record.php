@@ -274,6 +274,16 @@ array (
                 'name' => 'razon_no_viable_c',
                 'label' => 'LBL_RAZON_NO_VIABLE',
               ),
+              14 => 
+              array (
+                'name' => 'codigo_contrato_c',
+                'label' => 'LBL_CODIGO_CONTRATO',
+              ),
+              15 => 
+              array (
+                'name' => 'url_contrato_c',
+                'label' => 'LBL_URL_CONTRATO',
+              ),
             ),
           ),
         ),
