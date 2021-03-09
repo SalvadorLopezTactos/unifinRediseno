@@ -28,6 +28,7 @@
         this.model.on("change:regimen_fiscal_c", _.bind(this._cleanRegFiscal, this));
         this.getRegistrosAsignados();
         this.fechaAsignacion();
+        this.model.on("change:leads_leads_1_right", _.bind(this._checkContactoAsociado, this));
     },
 
     delegateButtonEvents: function() {
@@ -627,6 +628,7 @@
     _render: function (options) {
         this._super("_render");
         this.$(".record-cell[data-name='blank_space']").hide();
+        $('[data-name="contacto_asociado_c"]').attr('style', 'pointer-events:none');
     },
 
     fechaAsignacion: function () {
@@ -648,6 +650,18 @@
     
         if (puestoUsuario == '2' || puestoUsuario == '5') {
             this.model.set('fecha_asignacion_c',today);
+        }
+    },
+
+    _checkContactoAsociado: function() {
+
+        if (this.model.get("leads_leads_1_right").id != "" && this.model.get("leads_leads_1_right").id != undefined) {
+            // console.log("Activa check Contacto asociado create");
+            this.model.set('contacto_asociado_c', true);
+        
+        } else {
+            // console.log("Desactiva check Contacto asociado create");
+            this.model.set('contacto_asociado_c', false);
         }
     },
 })
