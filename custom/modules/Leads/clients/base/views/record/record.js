@@ -27,8 +27,7 @@
         this.model.on('sync', this.siNumero, this);
         this.context.on('button:reset_lead:click', this.reset_lead, this);
         this.model.on('sync', this._hideBtnReset, this);
-
-
+        this.model.on("change:leads_leads_1_right", _.bind(this._checkContactoAsociado, this));
     },
 
     _disableActionsSubpanel: function () {
@@ -538,7 +537,7 @@
     _render: function (options) {
         this._super("_render");
         this.$(".record-cell[data-name='blank_space']").hide();
-
+        $('[data-name="contacto_asociado_c"]').attr('style', 'pointer-events:none');
     },
 
     convert_Lead_to_Accounts: function () {
@@ -754,6 +753,15 @@
 
     },
 
+    _checkContactoAsociado: function() {
 
-
+        if (this.model.get("leads_leads_1_right").id != "" && this.model.get("leads_leads_1_right").id != null) {
+            // console.log("Activa check Contacto asociado");
+            this.model.set('contacto_asociado_c', true);
+        
+        } else {
+            // console.log("Desactiva check Contacto asociado");
+            this.model.set('contacto_asociado_c', false);
+        }
+    },
 })
