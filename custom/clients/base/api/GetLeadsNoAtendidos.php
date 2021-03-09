@@ -37,6 +37,7 @@ class GetLeadsNoAtendidos extends SugarApi
                 WHERE l.assigned_user_id = '{$id_user}' 
                 AND lc.subtipo_registro_c = 1
                 AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c = null)
+                AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c = null)
                 AND lc.fecha_asignacion_c < DATE_SUB(now(), INTERVAL 10 DAY)
                 UNION
                 SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus, 0 as semaforo
@@ -47,6 +48,7 @@ class GetLeadsNoAtendidos extends SugarApi
                 WHERE l.assigned_user_id = '{$id_user}' 
                 AND lc.subtipo_registro_c = 2
                 AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c = null)
+                AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c = null)
                 AND c.date_end < DATE_SUB(now(), INTERVAL 10 DAY)
                 UNION 
                 SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus, 0 as semaforo
@@ -57,6 +59,7 @@ class GetLeadsNoAtendidos extends SugarApi
                 WHERE l.assigned_user_id = '{$id_user}' 
                 AND lc.subtipo_registro_c = 2
                 AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c = null)
+                AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c = null)
                 AND m.date_end < DATE_SUB(now(), INTERVAL 10 DAY) ";
 
 
@@ -69,6 +72,7 @@ class GetLeadsNoAtendidos extends SugarApi
                     WHERE l.assigned_user_id = '{$id_user}' 
                     AND lc.subtipo_registro_c = 1
                     AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c = null)
+                    AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c = null)
                     AND lc.fecha_asignacion_c > DATE_SUB(now(), INTERVAL 10 DAY)
                     UNION
                     SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus, 1 as semaforo
@@ -79,6 +83,7 @@ class GetLeadsNoAtendidos extends SugarApi
                     WHERE l.assigned_user_id = '{$id_user}' 
                     AND lc.subtipo_registro_c = 2
                     AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c = null)
+                    AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c = null)
                     AND c.date_end > DATE_SUB(now(), INTERVAL 10 DAY)
                     UNION 
                     SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus, 1 as semaforo
@@ -89,6 +94,7 @@ class GetLeadsNoAtendidos extends SugarApi
                     WHERE l.assigned_user_id = '{$id_user}' 
                     AND lc.subtipo_registro_c = 2
                     AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c = null)
+                    AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c = null)
                     AND m.date_end > DATE_SUB(now(), INTERVAL 10 DAY)";
                 }
 
