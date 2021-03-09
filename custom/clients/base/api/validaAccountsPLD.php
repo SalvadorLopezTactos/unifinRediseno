@@ -192,7 +192,7 @@ AND telefono.deleted=0";
   INNER JOIN dire_direccion direccion
     ON direccion.id=rel.accounts_dire_direccion_1dire_direccion_idb
 WHERE rel.accounts_dire_direccion_1accounts_ida='{$idcuenta}'
-    AND direccion.tipodedireccion LIKE '^1^'
+     AND direccion.tipodedireccion IN ('^1^','^3^','^5^','^7^')
     AND rel.deleted=0
     AND direccion.deleted=0;";
         $result_dir = $db->query($queryDir);
@@ -237,6 +237,18 @@ WHERE rel.accounts_dire_direccion_1accounts_ida='{$idcuenta}'
             $qorder = "ORDER BY id_pm ASC";
 
         }
+
+        $qIdPLD="select pld.id as idpld FROM  accounts_tct_pld_1_c rel
+INNER join  tct_pld pld
+  ON pld.id=rel.accounts_tct_pld_1tct_pld_idb
+WHERE rel.accounts_tct_pld_1accounts_ida='{$beanAccount->id}'
+AND description='CS'
+AND pld.deleted=0";
+        $result_idpld = $db->query($qIdPLD);
+        $row = $db->fetchByAssoc($result_idpld);
+        $pld_id = $row['idpld'];
+        $beanPLD = BeanFactory::getBean('tct_PLD', $pld_id, array('disable_row_level_security' => true));
+
         $query = "SELECT * from require_pld_service
 WHERE seccion='PLD - Crédito Simple'
       AND residencia like '%{$nacionalidad}%'
@@ -252,7 +264,7 @@ WHERE seccion='PLD - Crédito Simple'
                 $campo = $row['campo_db'];
                 $numCriterio = $tipodePersona != 'PM' ? $row['id_pf_pfae'] : $row['id_pm'];
                 $descripcion = $row['campo_descripcion'];
-                if (empty($beanAccount->{$campo})) {
+                if (empty($beanPLD->{$campo})) {
                     array_push($faltantes, array("criterio" => "{$numCriterio}", "descripcion" => "{$descripcion}"));
                 }
             }
@@ -270,6 +282,17 @@ WHERE seccion='PLD - Crédito Simple'
             $qorder = "ORDER BY id_pm ASC";
 
         }
+        $qIdPLD="select pld.id as idpld FROM  accounts_tct_pld_1_c rel
+INNER join  tct_pld pld
+  ON pld.id=rel.accounts_tct_pld_1tct_pld_idb
+WHERE rel.accounts_tct_pld_1accounts_ida='{$beanAccount->id}'
+AND description='CR'
+AND pld.deleted=0";
+        $result_idpld = $db->query($qIdPLD);
+        $row = $db->fetchByAssoc($result_idpld);
+        $pld_id = $row['idpld'];
+        $beanPLD = BeanFactory::getBean('tct_PLD', $pld_id, array('disable_row_level_security' => true));
+
         $query = "SELECT * from require_pld_service
 WHERE seccion='PLD - Crédito Revolvente (Unirevolving/Unicard)'
       AND residencia like '%{$nacionalidad}%'
@@ -284,7 +307,7 @@ WHERE seccion='PLD - Crédito Revolvente (Unirevolving/Unicard)'
                 $campo = $row['campo_db'];
                 $numCriterio = $tipodePersona != 'PM' ? $row['id_pf_pfae'] : $row['id_pm'];
                 $descripcion = $row['campo_descripcion'];
-                if (empty($beanAccount->{$campo})) {
+                if (empty($beanPLD->{$campo})) {
                     array_push($faltantes, array("criterio" => "{$numCriterio}", "descripcion" => "{$descripcion}"));
                 }
             }
