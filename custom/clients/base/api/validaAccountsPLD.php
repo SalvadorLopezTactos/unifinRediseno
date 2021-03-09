@@ -192,7 +192,7 @@ AND telefono.deleted=0";
   INNER JOIN dire_direccion direccion
     ON direccion.id=rel.accounts_dire_direccion_1dire_direccion_idb
 WHERE rel.accounts_dire_direccion_1accounts_ida='{$idcuenta}'
-    AND direccion.tipodedireccion LIKE '^1^'
+     AND direccion.tipodedireccion IN ('^1^','^3^','^5^','^7^')
     AND rel.deleted=0
     AND direccion.deleted=0;";
         $result_dir = $db->query($queryDir);
