@@ -1945,6 +1945,34 @@ extendsFrom: 'RecordView',
 								faltantes.push('PLD-¿Los recursos son propios o los recursos son de un tercero?');
 							}
                         }
+                        //Valida Relación: Tarjetahabiente
+                        if (this.model.get('relaciones_activas').includes('Tarjetahabiente')){
+							relacionesActivas.push("Tarjetahabiente");
+						
+							if (data[0].contents.tipodepersona_c != "Persona Moral") {
+                                if (data[0].contents.primernombre_c == "") {
+									faltantes.push('Nombre');
+								}
+								if (data[0].contents.apellidopaterno_c == "") {
+									faltantes.push('Apellido Paterno');
+								}
+								if (data[0].contents.apellidomaterno_c == "") {
+									faltantes.push('Apellido Materno');
+								}
+                                if (data[0].contents.fechadenacimiento_c == "") {
+									faltantes.push('Fecha de Nacimiento');
+								}                             
+								if (data[0].contents.nacionalidad_c == "" || data[0].contents.nacionalidad_c == "0") {
+                                    faltantes.push('Nacionalidad');
+                                }
+								if (data[0].contents.rfc_c == "") {
+                                    faltantes.push('RFC');
+                                }
+                              
+							}else{
+                                faltantes.push('Una persona moral no puede ser Tarjetahabiente'); 
+                            }
+                        }
                     }
                     if (faltantes.length >  0) {
                         faltantes=faltantes.filter((item, i, ar) => ar.indexOf(item) == i);
