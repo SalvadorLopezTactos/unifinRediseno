@@ -816,12 +816,14 @@
                                         }
                                     }
                                 } else {
+                                    faltaPld = " <b>- Producto " + producto + "</b><br>";
                                     errors['accounts_pld'] = errors['accounts_pld'] || {};
                                     errors['accounts_pld'].required = true;
                                     self.mensajes("valida_pld", "Hace falta completar la siguiente información en la pestaña <b>PLD</b> de la <b>Cuenta:</b><br>" + faltaPld + faltantes, "error");
                                     callback(null, fields, errors);
                                 }
                             } else {
+                                faltaPld = " <b>- Producto " + producto + "</b><br>";
                                 errors['accounts_pld'] = errors['accounts_pld'] || {};
                                 errors['accounts_pld'].required = true;
                                 self.mensajes("valida_pld", "Hace falta completar la siguiente información en la pestaña <b>PLD</b> de la <b>Cuenta:</b><br>" + faltaPld + faltantes, "error");
