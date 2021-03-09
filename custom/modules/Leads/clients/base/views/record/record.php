@@ -402,6 +402,16 @@ array (
                 'name' => 'fecha_asignacion_c',
                 'label' => 'LBL_FECHA_ASIGNACION_C',
               ),
+              38 => 
+              array (
+                'name' => 'contacto_asociado_c',
+                'label' => 'LBL_CONTACTO_ASOCIADO_C',
+              ),
+              39 => 
+              array (
+                'name' => 'leads_leads_1_name',
+                'label' => 'LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE',
+              ),
             ),
           ),
           2 => 
