@@ -74,6 +74,10 @@
         this.enableparentname();
         this.getPersonas();
         this.enableFieldsEmpty();
+
+        if (App.user.attributes.puestousuario_c == '27' || App.user.attributes.puestousuario_c == '31') {
+            this.model.on('change:evento_campana_c', this._enableFieldCampRel, this);
+        }
     },
 
     handleCancel: function () {
@@ -944,15 +948,23 @@
                     this.setButtonStates(this.STATE.EDIT);
                     this.toggleField(fieldEC);
                 }
-                //SE HABILITA CAMPO REL EVENTO / CAMPAÑA
+            }
+        }
+    },
+
+    _enableFieldCampRel: function () {
+
+        if (this.model.get('status') == "Held") { 
+
+            if (App.user.attributes.puestousuario_c == '27' || App.user.attributes.puestousuario_c == '31') {
+
+                //SE HABILITA CAMPO RELACION EVENTO / CAMPAÑA
                 if (this.model.get('campana_rel_c') != "") {
                     
                     self.noEditFields.push('campana_rel_c');
                     self.$('[data-name="campana_rel_c"]').attr('style', 'pointer-events:none;');
                     
-                }else {
-
-                    this.model.set('evento_campana_c', true);
+                } else {
 
                     fieldCR = this.getField('campana_rel_c');
                     this.inlineEditMode = true;
