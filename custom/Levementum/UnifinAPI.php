@@ -1617,7 +1617,7 @@ SQL;
 
             //Si la Solicitud es de Credito SOS recalcula el valor del campo Riesgo a "Mayor".
             //          if ($opportunidad['tipo_producto_c']=="SOS"){  # PREGUNTAR SI SE CAMBIA POR PRODUCTO FINANCIERO
-            if ($opportunidad['tipo_producto_c'] == "CREDITO SIMPLE" && $opportunidad['producto_financiero_c'] == 40) {
+            if (($opportunidad['tipo_producto_c'] == "CREDITO SIMPLE" && $opportunidad['producto_financiero_c'] == 40) || $opportunidad['negocio_c'] == '11') {
                 //Setea valores constantes para la invocación de IniciaProceso
                 //$GLOBALS['log']->fatal("Setea valores de la solicitud SOS");
                 $fields['riesgoPersona'] = "MY";
