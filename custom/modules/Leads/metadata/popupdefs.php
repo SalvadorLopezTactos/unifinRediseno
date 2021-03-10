@@ -16,6 +16,7 @@ $popupMeta = array (
   'subtipo_registro_c' => 'leads_cstm.subtipo_registro_c',
   'nombre_de_cargar_c' => 'leads_cstm.nombre_de_cargar_c',
   'assigned_user_name' => 'leads.assigned_user_name',
+  'contacto_asociado_c' => 'leads_cstm.contacto_asociado_c',
 ),
     'searchInputs' => array (
   2 => 'lead_source',
@@ -30,6 +31,7 @@ $popupMeta = array (
   11 => 'subtipo_registro_c',
   12 => 'nombre_de_cargar_c',
   13 => 'assigned_user_name',
+  14 => 'contacto_asociado_c',
 ),
     'searchdefs' => array (
   'name' => 
@@ -106,7 +108,7 @@ $popupMeta = array (
     ),
     'label' => 'LBL_ASSIGNED_TO',
     'id' => 'ASSIGNED_USER_ID',
-    'width' => 10,
+    'width' => '10',
     'name' => 'assigned_user_name',
   ),
   'assigned_user_id' => 
@@ -123,6 +125,13 @@ $popupMeta = array (
       ),
     ),
     'width' => '10',
+  ),
+  'contacto_asociado_c' => 
+  array (
+    'type' => 'bool',
+    'label' => 'LBL_CONTACTO_ASOCIADO_C',
+    'width' => 10,
+    'name' => 'contacto_asociado_c',
   ),
 ),
     'listviewdefs' => array (
@@ -184,6 +193,14 @@ $popupMeta = array (
     'label' => 'LBL_NOMBRE_DE_CARGAR',
     'width' => 10,
     'default' => true,
+    'name' => 'nombre_de_cargar_c',
+  ),
+  'CONTACTO_ASOCIADO_C' => 
+  array (
+    'type' => 'bool',
+    'default' => true,
+    'label' => 'LBL_CONTACTO_ASOCIADO_C',
+    'width' => 10,
   ),
 ),
 );
