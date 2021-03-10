@@ -30,28 +30,28 @@ class GetCuentasExpediente extends SugarApi
             if ($statusProduct != 3) {
 
                 $query = "SELECT idCuenta,nombreCuenta,tipoCuenta,subtipoCuenta,idOpp,oppNombre,oppEtapa,
-                fecha_asignacion_c, monto, tipo_producto, EstatusProducto, val_dias_20,val_dias_10,
-                CASE WHEN DATOS_EXP.val_dias_20 = 20 and DATOS_EXP.monto > 10000000 THEN 0
-                WHEN DATOS_EXP.val_dias_20 = -20 and DATOS_EXP.monto > 10000000 THEN 1 
-                WHEN DATOS_EXP.val_dias_10 = 10 and (DATOS_EXP.monto <= 10000000 and DATOS_EXP.monto > 0) THEN 0
-                WHEN DATOS_EXP.val_dias_10 = -10 and (DATOS_EXP.monto <= 10000000 and DATOS_EXP.monto > 0) THEN 1
-                END AS semaforo
-                FROM (
-                    SELECT a.id as idCuenta, a.name as nombreCuenta, a.assigned_user_id accountassigned, ac.user_id_c,  
+				monto,  fecha_asignacion, tipo_producto, EstatusProducto, val_dias_20,val_dias_10,
+				CASE WHEN DATOS_EXP.val_dias_20 = 20 and DATOS_EXP.monto > 10000000 THEN 0
+				WHEN DATOS_EXP.val_dias_20 = -20 and DATOS_EXP.monto > 10000000 THEN 1 
+				WHEN DATOS_EXP.val_dias_10 = 10 and (DATOS_EXP.monto <= 10000000 ) THEN 0
+				WHEN DATOS_EXP.val_dias_10 = -10 and (DATOS_EXP.monto <= 10000000) THEN 1
+				END AS semaforo
+				FROM (
+					SELECT a.id as idCuenta, a.name as nombreCuenta, a.assigned_user_id accountassigned, ac.user_id_c,  
 					opp.id as idOpp, opp.name as oppNombre, opp.id,  ac.tipo_registro_c, ac.subtipo_cuenta_c, 
 					ac.tipo_registro_cuenta_c as tipoCuenta, ac.subtipo_registro_cuenta_c as subtipoCuenta,
-					opp.date_entered, opp.assigned_user_id oppassigned, oppcstm.tct_etapa_ddw_c,
-					oppcstm.tct_estapa_subetapa_txf_c as oppEtapa, up.name nameOpp , upc.fecha_asignacion_c , 
+					opp.date_entered, opp.assigned_user_id oppassigned, oppcstm.tct_etapa_ddw_c, oppcstm.estatus_c,
+					oppcstm.tct_estapa_subetapa_txf_c as oppEtapa, up.name nameOpp , auditop.date_created as fecha_asignacion,
 					opp.amount as monto, up.tipo_producto, upc.status_management_c as EstatusProducto,
 					DATE_FORMAT(DATE_SUB(now(), INTERVAL 20 DAY), '%Y-%m-%d ')  as veinte, 
 					DATE_FORMAT(DATE_SUB(now(), INTERVAL 10 DAY), '%Y-%m-%d ')  as diez,
-					CASE WHEN upc.fecha_asignacion_c <  DATE_FORMAT(DATE_SUB(now(), INTERVAL 20 DAY), '%Y-%m-%d ') THEN '20'
-						WHEN upc.fecha_asignacion_c >  DATE_FORMAT(DATE_SUB(now(), INTERVAL 20 DAY), '%Y-%m-%d ') THEN '-20'
-						END AS val_dias_20,
-					CASE WHEN upc.fecha_asignacion_c < DATE_FORMAT(DATE_SUB(now(), INTERVAL 10 DAY), '%Y-%m-%d ') THEN '10'
-						WHEN upc.fecha_asignacion_c > DATE_FORMAT(DATE_SUB(now(), INTERVAL 10 DAY), '%Y-%m-%d ') THEN '-10'
-						END AS val_dias_10  
-					FROM accounts a
+					CASE WHEN auditop.date_created <  DATE_FORMAT(DATE_SUB(now(), INTERVAL 20 DAY), '%Y-%m-%d ') THEN '20'
+					WHEN auditop.date_created >  DATE_FORMAT(DATE_SUB(now(), INTERVAL 20 DAY), '%Y-%m-%d ') THEN '-20'
+					END AS val_dias_20,
+					CASE WHEN auditop.date_created < DATE_FORMAT(DATE_SUB(now(), INTERVAL 10 DAY), '%Y-%m-%d ') THEN '10'
+					WHEN auditop.date_created > DATE_FORMAT(DATE_SUB(now(), INTERVAL 10 DAY), '%Y-%m-%d ') THEN '-10'
+					END AS val_dias_10  
+					FROM accounts a 
 					INNER JOIN accounts_cstm ac on ac.id_c = a.id
                     INNER JOIN accounts_opportunities app on app.account_id = ac.id_c
                     INNER JOIN opportunities opp on opp.id = app.opportunity_id
@@ -59,10 +59,14 @@ class GetCuentasExpediente extends SugarApi
                     INNER JOIN accounts_uni_productos_1_c aup on aup.accounts_uni_productos_1accounts_ida = ac.id_c
                     INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb
                     INNER JOIN uni_productos_cstm upc on upc.id_c = up.id
+					INNER JOIN opportunities_audit auditop on auditop.parent_id = opp.id
                     WHERE  ac.tipo_registro_cuenta_c = '2' and ac.subtipo_registro_cuenta_c = '8'
                     and ac.user_id_c=  '{$id_user}'
                     and upc.status_management_c = '{$statusProduct}'
                     and tipo_producto = '1'
+					and auditop.field_name='estatus_c'
+					and auditop.after_value_string='PE'
+					and oppcstm.estatus_c <> 'K'
                     and a.deleted = 0 and up.deleted = 0 
                 ) as DATOS_EXP ";
 
@@ -79,7 +83,7 @@ class GetCuentasExpediente extends SugarApi
                         'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 'tipoCuenta' => $row['tipoCuenta'],
                         'subtipoCuenta' => $row['subtipoCuenta'], 'idOpp' => $row['idOpp'], 'oppNombre' => $row['oppNombre'],
                         'oppEtapa' => $row['oppEtapa'], 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $row['semaforo'],
-                        'fecha_asignacion' => $row['fecha_asignacion_c'], 'Monto' => '$ ' . round($row['monto'], 2)
+                        'fecha_asignacion' => $row['fecha_asignacion'], 'Monto' => '$ ' . round($row['monto'], 2)
                     );
                 }
 
