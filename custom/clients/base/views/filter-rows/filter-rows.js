@@ -60,15 +60,18 @@
     },400),
 
     Filtro: _.debounce(function()  {
+        var filtroArray = [5,11,16,27,53,54];
         var puestoUsr=App.user.attributes.puestousuario_c;
-        if(puestoUsr == 27){
+		puestoUsr = parseInt(puestoUsr, 10);
+        var resultado=filtroArray.indexOf(puestoUsr);
+        if(resultado != -1){
             $('div.filter-definition-container').find('.filter-body').eq(0).find('.controls.span4').css("pointer-events", "none");
-	    $('div.filter-definition-container').find('.filter-body').eq(1).find('.controls.span4').css("pointer-events", "none");
-	    $('div.filter-definition-container').find('.filter-body').eq(2).find('.controls.span4').css("pointer-events", "none");
+			$('div.filter-definition-container').find('.filter-body').eq(1).find('.controls.span4').css("pointer-events", "none");
+			$('div.filter-definition-container').find('.filter-body').eq(2).find('.controls.span4').css("pointer-events", "none");
             $(".controls.span6").css("pointer-events", "none");
             $('div.filter-definition-container').find('.filter-body').eq(0).find('[data-action=remove]').hide();
-	    $('div.filter-definition-container').find('.filter-body').eq(1).find('[data-action=remove]').hide();
-	    $('div.filter-definition-container').find('.filter-body').eq(2).find('[data-action=remove]').hide();
+			$('div.filter-definition-container').find('.filter-body').eq(1).find('[data-action=remove]').hide();
+			$('div.filter-definition-container').find('.filter-body').eq(2).find('[data-action=remove]').hide();
             $("[data-action=filter-reset]").hide();
             $("[data-action=filter-delete]").hide();
         }
