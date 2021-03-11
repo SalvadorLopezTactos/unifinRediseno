@@ -49,6 +49,7 @@ class GetRegistrosAsignadosForProtocolo extends SugarApi
         //Query para obtener el número de leads asignados al usuario actual
         $query = "SELECT count(l.id) as total_leads FROM leads l inner JOIN leads_cstm lc on l.id=lc.id_c 
 WHERE l.assigned_user_id='{$id_user}'
+and lc.contacto_asociado_c=0
 and lc.subtipo_registro_c not in('4','3') and l.deleted=0";//4 - Convertido, 3 - Cancelado
         $result = $db->query($query);
 

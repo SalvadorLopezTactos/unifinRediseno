@@ -41,6 +41,7 @@ class ReassignRecordsForProtocolo
                         //Todo: ¿A qué usuario se asigna provisionalmente?
                         $beanLead->oficina_c=$oficina;
                         $beanLead->nombre_de_cargar_c=$valor_doc_carga;
+                        $beanLead->subtipo_registro_c='1';
                         $beanLead->assigned_user_id="569246c7-da62-4664-ef2a-5628f649537e";//Usuario 9 - Sin Gestor
                         $beanLead->assigned_user_name="9 - Sin Gestor";//Usuario 9 - Sin Gestor
                         $beanLead->save();
