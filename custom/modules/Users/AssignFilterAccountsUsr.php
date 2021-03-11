@@ -204,8 +204,8 @@ select uuid(),
        u.default_team as team_id,
        u.team_set_id as team_set_id,
        null assigned_user_id,  
-       concat('[{\"assigned_user_id\":{\"\$in\":[\"$idUsuario\"]}},{\"contacto_asociado_c\":{\"\$equals\":\"1\"}}]') as filter_definition,
-       concat('[{\"assigned_user_id\":{\"\$in\":[\"$idUsuario\"]}},{\"contacto_asociado_c\":{\"\$equals\":\"1\"}}]') as filter_template,
+       concat('[{\"assigned_user_id\":{\"\$in\":[\"$idUsuario\"]}},{\"contacto_asociado_c\":{\"\$equals\":\"0\"}}]') as filter_definition,
+       concat('[{\"assigned_user_id\":{\"\$in\":[\"$idUsuario\"]}},{\"contacto_asociado_c\":{\"\$equals\":\"0\"}}]') as filter_template,
        'Leads' as module_name,
        null as acl_team_set_id
 from users u, users_cstm uc
@@ -253,7 +253,7 @@ and u.status = 'Active'";
     {
         $banderaDelete = true;
         $queryDelete = "DELETE FROM filters
-            WHERE id = '{$usuario->id}'";
+            WHERE id = '{$usuario->id}' OR (created_by = '{$usuario->id}' AND name = 'Mis Leads')";
         try {
             $queryResultDelete = $GLOBALS['db']->query($queryDelete);
         } catch (Exception $e) {
