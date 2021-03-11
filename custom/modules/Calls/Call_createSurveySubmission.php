@@ -175,13 +175,14 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
 
         //Establece parámetros de envío
         $timedate = new TimeDate();
-        $mailSubject = "Encuesta de satisfacción";
-        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">HOLA! <b>' . $nombrePersona . '</b>
-      <br><br>Recientemente recibiste una llamada de seguimiento por parte del asesor <b>' . $Asesor . '</b> y nos gustaría conocer tu opinión acerca del servicio que has recibido.
-      <center>Te invitamos a contestar la siguiente encuesta(<a href="' . $urlSurvey . '">comenzar</a>).</center></font></p>
-      <br><br>Atentamente Unifin</font></p>
-      <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
-
+        $mailSubject = "¡TU OPINIÓN ES IMPORTANTE!";
+        $mailHTML = '<p align="center" class="imagen"><img border="0" style="width:135px;height:103px" id="logoUnifin" src="https://www.unifin.com.mx/img/logo.png"></span></p><br>
+<p align="center" style="font-size: 14pt; font-family: "Arial",sans-serif;"><font face="Arial" color="#032258">Estimado: <b>' . $nombrePersona . '</b>
+      <br><br>Recientemente recibiste una llamada de seguimiento por parte del asesor <b>' . $Asesor . '</b>, nos gustaría conocer tu opinión acerca del servicio que has recibido.
+      <center>Te invitamos a contestar la siguiente encuesta.<br><br>
+      <input type="button" style="background-color:#032258;color:#fff;height: 35px; border-radius: 10px;" onclick="location.href=' . $urlSurvey . '" value="Comenzar la encuesta" />
+ </center></font></p>
+   
       <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
       <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: "Arial",sans-serif; color: #212121;">
        Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
