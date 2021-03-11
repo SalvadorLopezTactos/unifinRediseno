@@ -180,9 +180,8 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
 <p align="center" style="font-size: 14pt; font-family: "Arial",sans-serif;"><font face="Arial" color="#032258">Estimado: <b>' . $nombrePersona . '</b>
       <br><br>Recientemente recibiste una llamada de seguimiento por parte del asesor <b>' . $Asesor . '</b>, nos gustaría conocer tu opinión acerca del servicio que has recibido.
       <center>Te invitamos a contestar la siguiente encuesta.<br><br>
-      <input type="button" style="background-color:#032258;color:#fff;height: 35px; border-radius: 10px;" onclick="location.href=' . $urlSurvey . '" value="Comenzar la encuesta" />
- </center></font></p>
-   
+      <button style="background-color:#032258;color:#fff;height: 35px;border-radius: 10px;"><a s href="'.$urlSurvey.'"color:#fff ;">Comenzar la encuesta</a></button>
+      </center></font></p>   
       <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
       <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: "Arial",sans-serif; color: #212121;">
        Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
