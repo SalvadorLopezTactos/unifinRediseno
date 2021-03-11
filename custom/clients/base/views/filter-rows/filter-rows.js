@@ -36,35 +36,46 @@
             if (filterName == 'Mis Cuentas') {
                 this.Test();
             }
-
-
-
+	}
+        if (this.moduleName == 'Leads') {
+            var filterName = this.context.editingFilter.get('name');
+            if (filterName == 'Mis Leads') {
+                this.Filtro();
+            }
         }
     }, 100, true),
 
-
-
-
     Test: _.debounce(function()  {
-
-
         filtroPromotorArray = [5,11,16,4,10,15,3,9,2,8,14,1,7,13,6,12,17,33];
         var puestoUsr=App.user.attributes.puestousuario_c;
-         puestoUsr = parseInt(puestoUsr, 10);
+        puestoUsr = parseInt(puestoUsr, 10);
         var resultado=filtroPromotorArray.indexOf(puestoUsr);
-
-            if(resultado != -1){
-
+        if(resultado != -1){
             $('div.filter-definition-container').find('.filter-body').eq(0).find('.controls.span4').css("pointer-events", "none");
             $(".controls.span6").css("pointer-events", "none");
             $('div.filter-definition-container').find('.filter-body').eq(0).find('[data-action=remove]').hide();
             $("[data-action=filter-reset]").hide();
             $("[data-action=filter-delete]").hide();
-
         }
-
     },400),
 
+    Filtro: _.debounce(function()  {
+        var filtroArray = [5,11,16,27,53,54];
+        var puestoUsr=App.user.attributes.puestousuario_c;
+		puestoUsr = parseInt(puestoUsr, 10);
+        var resultado=filtroArray.indexOf(puestoUsr);
+        if(resultado != -1){
+            $('div.filter-definition-container').find('.filter-body').eq(0).find('.controls.span4').css("pointer-events", "none");
+			$('div.filter-definition-container').find('.filter-body').eq(1).find('.controls.span4').css("pointer-events", "none");
+			$('div.filter-definition-container').find('.filter-body').eq(2).find('.controls.span4').css("pointer-events", "none");
+            $(".controls.span6").css("pointer-events", "none");
+            $('div.filter-definition-container').find('.filter-body').eq(0).find('[data-action=remove]').hide();
+			$('div.filter-definition-container').find('.filter-body').eq(1).find('[data-action=remove]').hide();
+			$('div.filter-definition-container').find('.filter-body').eq(2).find('[data-action=remove]').hide();
+            $("[data-action=filter-reset]").hide();
+            $("[data-action=filter-delete]").hide();
+        }
+    },400),
 
 /*    populateRow: function (rowObj) {
         var $row = this.addRow(), moduleMeta = app.metadata.getModule(this.layout.currentModule),

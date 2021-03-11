@@ -98,3 +98,4 @@ $mod_strings['LBL_PROSPECCION_PROPIA'] = 'Prospección propia';
 $mod_strings['LBL_STATUS_MANAGEMENT'] = 'Estatus por Producto';
 $mod_strings['LBL_FECHA_ASIGNACION_C'] = 'Fecha de asignación';
 $mod_strings['LBL_OFICINA'] = 'Oficina';
+$mod_strings['LBL_CONTACTO_ASOCIADO_C'] = 'Contacto asociado';

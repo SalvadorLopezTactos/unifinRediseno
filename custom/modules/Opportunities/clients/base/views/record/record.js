@@ -740,8 +740,14 @@
         tipoProdArr['1'] = 'AP';
         tipoProdArr['4'] = 'FF';
         tipoProdArr['3'] = 'CA';
-        var usuarioProducto = tipoProdArr[App.user.attributes.tipodeproducto_c];
+        
+        //var usuarioProducto = tipoProdArr[App.user.attributes.tipodeproducto_c];
+        var usuarioProducto = this.model.get('tipo_producto_c');
         var producto = "";
+
+        usuarioProducto = (usuarioProducto == "1") ? "AP" : usuarioProducto;
+        usuarioProducto = (usuarioProducto == "4") ? "FF" : usuarioProducto;
+        usuarioProducto = (usuarioProducto == "3") ? "CA" : usuarioProducto;
 
         if (usuarioProducto == "AP") {
             producto = "Arrendamiento Puro";
@@ -752,6 +758,7 @@
         if (usuarioProducto == "CA") {
             producto = "Crédito Automotriz";
         }
+       
         //Recupera cuenta asociada
         var producto_financiero = this.model.get('producto_financiero_c');
         var cuentaId = this.model.get('account_id');
@@ -809,12 +816,14 @@
                                         }
                                     }
                                 } else {
+                                    faltaPld = " <b>- Producto " + producto + "</b><br>";
                                     errors['accounts_pld'] = errors['accounts_pld'] || {};
                                     errors['accounts_pld'].required = true;
                                     self.mensajes("valida_pld", "Hace falta completar la siguiente información en la pestaña <b>PLD</b> de la <b>Cuenta:</b><br>" + faltaPld + faltantes, "error");
                                     callback(null, fields, errors);
                                 }
                             } else {
+                                faltaPld = " <b>- Producto " + producto + "</b><br>";
                                 errors['accounts_pld'] = errors['accounts_pld'] || {};
                                 errors['accounts_pld'].required = true;
                                 self.mensajes("valida_pld", "Hace falta completar la siguiente información en la pestaña <b>PLD</b> de la <b>Cuenta:</b><br>" + faltaPld + faltantes, "error");

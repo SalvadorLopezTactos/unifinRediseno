@@ -41,7 +41,7 @@ class GetCuentasExpediente extends SugarApi
 					opp.id as idOpp, opp.name as oppNombre, opp.id,  ac.tipo_registro_c, ac.subtipo_cuenta_c, 
 					ac.tipo_registro_cuenta_c as tipoCuenta, ac.subtipo_registro_cuenta_c as subtipoCuenta,
 					opp.date_entered, opp.assigned_user_id oppassigned, oppcstm.tct_etapa_ddw_c, oppcstm.estatus_c,
-					oppcstm.tct_estapa_subetapa_txf_c as oppEtapa, up.name nameOpp , auditop.date_created as fecha_asignacion,
+					oppcstm.tct_estapa_subetapa_txf_c as oppEtapa, up.name nameOpp, DATE_FORMAT( auditop.date_created, '%Y-%m-%d ') as fecha_asignacion,
 					opp.amount as monto, up.tipo_producto, upc.status_management_c as EstatusProducto,
 					DATE_FORMAT(DATE_SUB(now(), INTERVAL 20 DAY), '%Y-%m-%d ')  as veinte, 
 					DATE_FORMAT(DATE_SUB(now(), INTERVAL 10 DAY), '%Y-%m-%d ')  as diez,

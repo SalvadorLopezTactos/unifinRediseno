@@ -5,86 +5,8 @@ array (
   array (
     'view' => 
     array (
-      'record' => 
+      'preview' => 
       array (
-        'buttons' => 
-        array (
-          0 => 
-          array (
-            'type' => 'button',
-            'name' => 'cancel_button',
-            'label' => 'LBL_CANCEL_BUTTON_LABEL',
-            'css_class' => 'btn-invisible btn-link',
-            'showOn' => 'edit',
-          ),
-          1 => 
-          array (
-            'type' => 'rowaction',
-            'event' => 'button:save_button:click',
-            'name' => 'save_button',
-            'label' => 'LBL_SAVE_BUTTON_LABEL',
-            'css_class' => 'btn btn-primary',
-            'showOn' => 'edit',
-            'acl_action' => 'edit',
-          ),
-          2 => 
-          array (
-            'type' => 'actiondropdown',
-            'name' => 'main_dropdown',
-            'primary' => true,
-            'showOn' => 'view',
-            'buttons' => 
-            array (
-              0 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:edit_button:click',
-                'name' => 'edit_button',
-                'label' => 'LBL_EDIT_BUTTON_LABEL',
-                'acl_action' => 'edit',
-              ),
-              1 => 
-              array (
-                'name' => 'send_survey',
-                'type' => 'rowaction',
-                'label' => 'Send Survey',
-                'acl_action' => 'send_survey',
-                'event' => 'button:send_survey:click',
-              ),
-              2 => 
-              array (
-                'name' => 'send_poll',
-                'type' => 'rowaction',
-                'label' => 'Send Poll',
-                'acl_action' => 'send_poll',
-                'event' => 'button:send_poll:click',
-              ),
-              3 => 
-              array (
-                'name' => 'convert_Leads_button',
-                'type' => 'rowaction',
-                'label' => 'LBL_CONVERT_LEADS_BUTTON_LABEL',
-                'acl_action' => 'view',
-                'event' => 'button:convert_Lead_to_Accounts:click',
-                'class' => 'btn_convertLeads',
-              ),
-              4 => 
-              array (
-                'name' => 'reset_lead',
-                'type' => 'rowaction',
-                'label' => 'Restablecer Lead',
-                'acl_action' => 'view',
-                'event' => 'button:reset_lead:click',
-                'class' => 'btn_resetLeads',
-              ),
-            ),
-          ),
-          3 => 
-          array (
-            'name' => 'sidebar_toggle',
-            'type' => 'sidebartoggle',
-          ),
-        ),
         'panels' => 
         array (
           0 => 
@@ -100,15 +22,6 @@ array (
                 'size' => 'large',
                 'readonly' => true,
                 'dismiss_label' => true,
-              ),
-              1 => 
-              array (
-                'type' => 'favorite',
-              ),
-              2 => 
-              array (
-                'type' => 'follow',
-                'readonly' => true,
               ),
               3 => 
               array (
@@ -402,16 +315,6 @@ array (
                 'name' => 'fecha_asignacion_c',
                 'label' => 'LBL_FECHA_ASIGNACION_C',
               ),
-              38 => 
-              array (
-                'name' => 'contacto_asociado_c',
-                'label' => 'LBL_CONTACTO_ASOCIADO_C',
-              ),
-              39 => 
-              array (
-                'name' => 'leads_leads_1_name',
-                'label' => 'LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE',
-              ),
             ),
           ),
           2 => 
@@ -498,7 +401,7 @@ array (
         ),
         'templateMeta' => 
         array (
-          'useTabs' => true,
+          'maxColumns' => 1,
         ),
       ),
     ),

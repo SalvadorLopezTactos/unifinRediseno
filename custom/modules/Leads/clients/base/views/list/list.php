@@ -70,25 +70,32 @@ array (
               ),
               7 => 
               array (
+                'name' => 'contacto_asociado_c',
+                'label' => 'LBL_CONTACTO_ASOCIADO_C',
+                'enabled' => true,
+                'default' => true,
+              ),
+              8 => 
+              array (
                 'name' => 'date_modified',
                 'enabled' => true,
                 'default' => false,
               ),
-              8 => 
+              9 => 
               array (
                 'name' => 'phone_work',
                 'label' => 'LBL_LIST_PHONE',
                 'enabled' => true,
                 'default' => false,
               ),
-              9 => 
+              10 => 
               array (
                 'name' => 'email',
                 'label' => 'LBL_LIST_EMAIL_ADDRESS',
                 'enabled' => true,
                 'default' => false,
               ),
-              10 => 
+              11 => 
               array (
                 'name' => 'status',
                 'label' => 'LBL_LIST_STATUS',
