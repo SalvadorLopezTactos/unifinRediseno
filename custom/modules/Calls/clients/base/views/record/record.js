@@ -74,6 +74,8 @@
         this.enableparentname();
         this.getPersonas();
         this.enableFieldsEmpty();
+        this.model.on('change:tct_resultado_llamada_ddw_c', this._enableDepRCall, this);
+        this._enableDepRCall();
 
         if (App.user.attributes.puestousuario_c == '27' || App.user.attributes.puestousuario_c == '31') {
             this.model.on('change:evento_campana_c', this._enableFieldCampRel, this);
@@ -973,5 +975,121 @@
                 }
             }
         }
+    },
+
+    _enableDepRCall: function () {
+
+        if (this.model.get('status') == "Held") { //Llamada con estatus Realizada
+
+            if (this.model.get('tct_resultado_llamada_ddw_c') == "Ilocalizable") {
+
+                if (this.model.get('detalle_resultado_c') != "") {
+                    self.noEditFields.push('detalle_resultado_c');
+                    self.$('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
+                
+                } else {
+                    
+                    fieldDR1 = this.getField('detalle_resultado_c');
+                    this.inlineEditMode = true;
+                    this.setButtonStates(this.STATE.EDIT);
+                    this.toggleField(fieldDR1);
+                }
+
+                if (this.model.get('tct_motivo_ilocalizable_ddw_c') != "") {
+                    
+                    self.noEditFields.push('tct_motivo_ilocalizable_ddw_c');
+                    self.$('[data-name="tct_motivo_ilocalizable_ddw_c"]').attr('style', 'pointer-events:none;');
+                    
+                } else {
+                    
+                    fieldMI1 = this.getField('tct_motivo_ilocalizable_ddw_c');
+                    this.inlineEditMode = true;
+                    this.setButtonStates(this.STATE.EDIT);
+                    this.toggleField(fieldMI1);
+                }
+            } 
+            
+            if (this.model.get('tct_resultado_llamada_ddw_c') == "No_esta_Interesado") {
+
+                if (this.model.get('detalle_resultado_c') != "") {
+                    self.noEditFields.push('detalle_resultado_c');
+                    self.$('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
+                
+                }else {
+                    
+                    fieldDR2 = this.getField('detalle_resultado_c');
+                    this.inlineEditMode = true;
+                    this.setButtonStates(this.STATE.EDIT);
+                    this.toggleField(fieldDR2);
+                }                
+                if (this.model.get('tct_motivo_desinteres_ddw_c') != "") {
+                    
+                    self.noEditFields.push('tct_motivo_desinteres_ddw_c');
+                    self.$('[data-name="tct_motivo_desinteres_ddw_c"]').attr('style', 'pointer-events:none;');
+                    
+                } else {
+                    
+                    fieldMD1 = this.getField('tct_motivo_desinteres_ddw_c');
+                    this.inlineEditMode = true;
+                    this.setButtonStates(this.STATE.EDIT);
+                    this.toggleField(fieldMD1);
+                }
+            } 
+            
+            if (this.model.get('tct_resultado_llamada_ddw_c') == "Fuera_de_Perfil") {
+
+                if (this.model.get('detalle_resultado_c') != "") {
+                    self.noEditFields.push('detalle_resultado_c');
+                    self.$('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
+                
+                } else {
+                    
+                    fieldDR3 = this.getField('detalle_resultado_c');
+                    this.inlineEditMode = true;
+                    this.setButtonStates(this.STATE.EDIT);
+                    this.toggleField(fieldDR3);
+                }
+            } 
+
+            if (this.model.get('tct_resultado_llamada_ddw_c') == "Llamada_servicio") {
+
+                if (this.model.get('detalle_resultado_c') != "") {
+                    self.noEditFields.push('detalle_resultado_c');
+                    self.$('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
+                
+                } else {
+                    
+                    fieldDR4 = this.getField('detalle_resultado_c');
+                    this.inlineEditMode = true;
+                    this.setButtonStates(this.STATE.EDIT);
+                    this.toggleField(fieldDR4);
+                }
+            } 
+
+            if (this.model.get('tct_resultado_llamada_ddw_c') == "Razon_Social") {
+                
+                if (this.model.get('cuenta_existente_c') != "") {
+                    self.noEditFields.push('cuenta_existente_c');
+                    self.$('[data-name="cuenta_existente_c"]').attr('style', 'pointer-events:none;');
+                
+                } else {
+                    
+                    fieldCE1 = this.getField('cuenta_existente_c');
+                    this.inlineEditMode = true;
+                    this.setButtonStates(this.STATE.EDIT);
+                    this.toggleField(fieldCE1);
+                }
+            } 
+
+            if (this.model.get('tct_resultado_llamada_ddw_c') == "Cita" || this.model.get('tct_resultado_llamada_ddw_c') == "Nueva_llamada") {
+                
+                fieldCMC1 = this.getField('calls_meeting_call');
+                this.inlineEditMode = true;
+                this.setButtonStates(this.STATE.EDIT);
+                this.toggleField(fieldCMC1);
+                self.$('[data-name="calls_meeting_call"]').show();
+                self.$("div.record-label[data-name='calls_meeting_call']").attr('style', 'display:none;');
+            } 
+        }        
     },
 })
