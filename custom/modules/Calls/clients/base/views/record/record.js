@@ -930,9 +930,11 @@
             } else {
                 
                 fieldRLL = this.getField('tct_resultado_llamada_ddw_c');
-                this.inlineEditMode = true;
-                this.setButtonStates(this.STATE.EDIT);
-                this.toggleField(fieldRLL);
+                if (fieldRLL.action == 'detail') {
+                    this.inlineEditMode = true;
+                    this.setButtonStates(this.STATE.EDIT);
+                    this.toggleField(fieldRLL);
+                }
             }
             //VALIDA CUANDO ES PUESTO DE USUARIO 27 - "AGENTE TELEFONICO" Ó 31 - "COORDINADOR DE CENTRO DE PROSPECCIONES"
             if (App.user.attributes.puestousuario_c == '27' || App.user.attributes.puestousuario_c == '31') {
@@ -946,9 +948,11 @@
                 } else {
                     
                     fieldEC = this.getField('evento_campana_c');
-                    this.inlineEditMode = true;
-                    this.setButtonStates(this.STATE.EDIT);
-                    this.toggleField(fieldEC);
+                    if (fieldEC.action == 'detail') {
+                        this.inlineEditMode = true;
+                        this.setButtonStates(this.STATE.EDIT);
+                        this.toggleField(fieldEC);
+                    }
                 }
             }
         }
@@ -969,9 +973,11 @@
                 } else {
 
                     fieldCR = this.getField('campana_rel_c');
-                    this.inlineEditMode = true;
-                    this.setButtonStates(this.STATE.EDIT);
-                    this.toggleField(fieldCR);
+                    if (fieldCR.action == 'detail') {
+                        this.inlineEditMode = true;
+                        this.setButtonStates(this.STATE.EDIT);
+                        this.toggleField(fieldCR);
+                    }
                 }
             }
         }
@@ -990,9 +996,11 @@
                 } else {
                     
                     fieldDR1 = this.getField('detalle_resultado_c');
-                    this.inlineEditMode = true;
-                    this.setButtonStates(this.STATE.EDIT);
-                    this.toggleField(fieldDR1);
+                    if (fieldDR1.action == 'detail') {
+                        this.inlineEditMode = true;
+                        this.setButtonStates(this.STATE.EDIT);
+                        this.toggleField(fieldDR1);
+                    }                   
                 }
 
                 if (this.model.get('tct_motivo_ilocalizable_ddw_c') != "") {
@@ -1003,9 +1011,11 @@
                 } else {
                     
                     fieldMI1 = this.getField('tct_motivo_ilocalizable_ddw_c');
-                    this.inlineEditMode = true;
-                    this.setButtonStates(this.STATE.EDIT);
-                    this.toggleField(fieldMI1);
+                    if (fieldMI1.action == 'detail') {
+                        this.inlineEditMode = true;
+                        this.setButtonStates(this.STATE.EDIT);
+                        this.toggleField(fieldMI1);
+                    }
                 }
             } 
             
@@ -1018,9 +1028,11 @@
                 }else {
                     
                     fieldDR2 = this.getField('detalle_resultado_c');
-                    this.inlineEditMode = true;
-                    this.setButtonStates(this.STATE.EDIT);
-                    this.toggleField(fieldDR2);
+                    if (fieldDR2.action == 'detail') {
+                        this.inlineEditMode = true;
+                        this.setButtonStates(this.STATE.EDIT);
+                        this.toggleField(fieldDR2);
+                    }
                 }                
                 if (this.model.get('tct_motivo_desinteres_ddw_c') != "") {
                     
@@ -1030,9 +1042,11 @@
                 } else {
                     
                     fieldMD1 = this.getField('tct_motivo_desinteres_ddw_c');
-                    this.inlineEditMode = true;
-                    this.setButtonStates(this.STATE.EDIT);
-                    this.toggleField(fieldMD1);
+                    if (fieldMD1.action == 'detail') {
+                        this.inlineEditMode = true;
+                        this.setButtonStates(this.STATE.EDIT);
+                        this.toggleField(fieldMD1);
+                    }
                 }
             } 
             
@@ -1045,9 +1059,11 @@
                 } else {
                     
                     fieldDR3 = this.getField('detalle_resultado_c');
-                    this.inlineEditMode = true;
-                    this.setButtonStates(this.STATE.EDIT);
-                    this.toggleField(fieldDR3);
+                    if (fieldDR3.action == 'detail') {
+                        this.inlineEditMode = true;
+                        this.setButtonStates(this.STATE.EDIT);
+                        this.toggleField(fieldDR3);
+                    }
                 }
             } 
 
@@ -1060,9 +1076,11 @@
                 } else {
                     
                     fieldDR4 = this.getField('detalle_resultado_c');
-                    this.inlineEditMode = true;
-                    this.setButtonStates(this.STATE.EDIT);
-                    this.toggleField(fieldDR4);
+                    if (fieldDR4.action == 'detail') {
+                        this.inlineEditMode = true;
+                        this.setButtonStates(this.STATE.EDIT);
+                        this.toggleField(fieldDR4);
+                    }
                 }
             } 
 
@@ -1075,18 +1093,22 @@
                 } else {
                     
                     fieldCE1 = this.getField('cuenta_existente_c');
-                    this.inlineEditMode = true;
-                    this.setButtonStates(this.STATE.EDIT);
-                    this.toggleField(fieldCE1);
+                    if (fieldCE1.action == 'detail') {
+                        this.inlineEditMode = true;
+                        this.setButtonStates(this.STATE.EDIT);
+                        this.toggleField(fieldCE1);
+                    }
                 }
             } 
 
             if (this.model.get('tct_resultado_llamada_ddw_c') == "Cita" || this.model.get('tct_resultado_llamada_ddw_c') == "Nueva_llamada") {
                 
                 fieldCMC1 = this.getField('calls_meeting_call');
-                this.inlineEditMode = true;
-                this.setButtonStates(this.STATE.EDIT);
-                this.toggleField(fieldCMC1);
+                if (fieldCMC1.action == 'detail') {
+                    this.inlineEditMode = true;
+                    this.setButtonStates(this.STATE.EDIT);
+                    this.toggleField(fieldCMC1);
+                }
                 self.$('[data-name="calls_meeting_call"]').show();
                 self.$("div.record-label[data-name='calls_meeting_call']").attr('style', 'display:none;');
             } 
