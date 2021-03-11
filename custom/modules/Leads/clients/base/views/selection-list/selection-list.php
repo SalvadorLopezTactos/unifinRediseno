@@ -67,33 +67,40 @@ array (
               ),
               7 => 
               array (
+                'name' => 'contacto_asociado_c',
+                'label' => 'LBL_CONTACTO_ASOCIADO_C',
+                'enabled' => true,
+                'default' => true,
+              ),
+              8 => 
+              array (
                 'name' => 'status',
                 'label' => 'LBL_LIST_STATUS',
                 'enabled' => true,
                 'default' => false,
               ),
-              8 => 
+              9 => 
               array (
                 'name' => 'nombre_empresa_c',
                 'label' => 'LBL_NOMBRE_EMPRESA',
                 'enabled' => true,
                 'default' => false,
               ),
-              9 => 
+              10 => 
               array (
                 'name' => 'nombre_c',
                 'label' => 'LBL_NOMBRE',
                 'enabled' => true,
                 'default' => false,
               ),
-              10 => 
+              11 => 
               array (
                 'name' => 'apellido_paterno_c',
                 'label' => 'LBL_APELLIDO_PATERNO_C',
                 'enabled' => true,
                 'default' => false,
               ),
-              11 => 
+              12 => 
               array (
                 'name' => 'account_name',
                 'label' => 'LBL_LIST_ACCOUNT_NAME',
@@ -105,21 +112,21 @@ array (
                   1 => 'converted',
                 ),
               ),
-              12 => 
+              13 => 
               array (
                 'name' => 'phone_work',
                 'label' => 'LBL_LIST_PHONE',
                 'enabled' => true,
                 'default' => false,
               ),
-              13 => 
+              14 => 
               array (
                 'name' => 'apellido_materno_c',
                 'label' => 'LBL_APELLIDO_MATERNO_C',
                 'enabled' => true,
                 'default' => false,
               ),
-              14 => 
+              15 => 
               array (
                 'name' => 'name',
                 'type' => 'fullname',
@@ -134,7 +141,7 @@ array (
                 'enabled' => true,
                 'default' => false,
               ),
-              15 => 
+              16 => 
               array (
                 'name' => 'email',
                 'label' => 'LBL_LIST_EMAIL_ADDRESS',
