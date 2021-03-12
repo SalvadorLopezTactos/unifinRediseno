@@ -376,18 +376,11 @@ array (
                 'name' => 'campana_rel_c',
                 'studio' => 'visible',
                 'label' => 'LBL_CAMPANA_REL',
-/*                'initial_filter' => 'FilterCampana',
-                'initial_filter_label' => 'Activas',
-                'filter_populate' => array(
-                  'start_date' => '2021-02-21',
-                  'end_date' => '2021-02-21',
-                ),*/
               ),
               15 => 
               array (
                 'name' => 'tct_resultado_llamada_ddw_c',
                 'label' => 'LBL_TCT_RESULTADO_LLAMADA_DDW',
-                'span' => 12,
               ),
               16 => 
               array (
@@ -402,52 +395,44 @@ array (
               ),
               18 => 
               array (
+              ),
+              19 => 
+              array (
                 'name' => 'calls_persona_relacion',
                 'label' => 'Persona con quien se atiende la llamada',
                 'studio' => 'visible',
               ),
-              19 => 
+              20 => 
               array (
                 'name' => 'persona_relacion_c',
                 'label' => 'LBL_PERSONA_RELACION_C',
               ),
-              20 => 
+              21 => 
               array (
                 'name' => 'calls_meeting_call',
                 'studio' => 'visible',
                 'label' => 'calls_meeting_call',
                 'span' => 12,
               ),
-              21 => 
+              22 => 
               array (
                 'name' => 'tct_calificacion_conferencia_c',
                 'label' => 'LBL_TCT_CALIFICACION_CONFERENCIA',
               ),
-              22 => 
+              23 => 
               array (
                 'name' => 'tct_conferencia_fecha_dat_c',
                 'label' => 'LBL_TCT_CONFERENCIA_FECHA_DAT',
-              ),
-              23 => 
-              array (
-                'name' => 'tct_motivo_ilocalizable_ddw_c',
-                'label' => 'LBL_TCT_MOTIVO_ILOCALIZABLE_DDW',
-                'span' => 12,
               ),
               24 => 
               array (
                 'name' => 'tct_fecha_seguimiento_dat_c',
                 'label' => 'LBL_TCT_FECHA_SEGUIMIENTO_DAT',
-                'span' => 12,
               ),
               25 => 
               array (
-                'name' => 'tct_motivo_desinteres_ddw_c',
-                'label' => 'LBL_TCT_MOTIVO_DESINTERES_DDW',
-              ),
-              26 => 
-              array (
                 'name' => 'lic_licitaciones_calls_1_name',
+                'label' => 'LBL_LIC_LICITACIONES_CALLS_1_FROM_LIC_LICITACIONES_TITLE',
                 'readonly' => true,
               ),
             ),
