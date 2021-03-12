@@ -10,12 +10,13 @@ class IntegracionQuantico
 {
     public function QuanticoIntegracion($bean = null, $event = null, $args = null)
     {
-        global $sugar_config, $db, $app_list_strings;
+        global $sugar_config, $db, $app_list_strings,$current_user;
         $user = $sugar_config['quantico_usr'];
         $pwd = $sugar_config['quantico_psw'];
         $auth_encode = base64_encode($user . ':' . $pwd);
         $arrayBo = explode(',', $bean->usuario_bo_c);
         if ($bean->idsolicitud_c != "" && $bean->id_process_c != "" && $bean->quantico_id_c == "") {
+            $GLOBALS['log']->fatal("Inicia QuanticoIntegracion");
             $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id, array('disable_row_level_security' => true));
 
             if ($beanCuenta->tipodepersona_c == 'Persona Fisica') {
@@ -36,61 +37,52 @@ class IntegracionQuantico
             $IncreaseAmount = $bean->tipo_de_operacion_c=="RATIFICACION_INCREMENTO"?$bean->monto_ratificacion_increment_c:0;
             $CreditLineId = $bean->tipo_de_operacion_c=="RATIFICACION_INCREMENTO"?$bean->id_linea_credito_c:0;
 
-			//Administración de Cartera
-			if($bean->admin_cartera_c) {
-				$body = array(
-					"RequestId" => $bean->idsolicitud_c,
-					"ProcessId" => $bean->id_process_c,
-					"OpportunitiesId" => $bean->id,
-					"ClientId" => $bean->account_id,
-					"ClientName" => $bean->account_name,
-					"ProductId" => $bean->producto_financiero_c,
-					"RequestTypeId" => $bean->tipo_de_operacion_c,
-					"PersonTypeId" => $tipoPersona,
-					"ProductTypeId" => $bean->tipo_producto_c,
-					"CurrencyTypeId" => "1",
-					"RequestAmount" => $RequestAmount,
-					"IncreaseAmount" => $IncreaseAmount,
-					"AdviserId" => $idActiveDirectory,
-					"AdviserName" => $bean->assigned_user_name,
-					"SinglePaymentPercentage"=>$bean->porciento_ri_c,
-					"CreditLineId" => $CreditLineId,
-					"BackOfficeId" => str_replace("^", "", $arrayBo[0]),
-					"BackOfficeName" => $app_list_strings['usuario_bo_0'][str_replace("^", "", $arrayBo[0])],
-					"ProductOriginPortfolioId" => $bean->producto_origen_vencido_c,
-					"RequestTypePortfolioId" => $bean->tipo_sol_admin_cartera_c,
-					"BusinessAmount" => $bean->monto_gpo_emp_c,
-					"NumberDaysoverduePortfolio" => $bean->cartera_dias_vencido_c
-				);
-			}
-			else {				
-				$body = array(
-					"RequestId" => $bean->idsolicitud_c,
-					"ProcessId" => $bean->id_process_c,
-					"OpportunitiesId" => $bean->id,
-					"ClientId" => $bean->account_id,
-					"ClientName" => $bean->account_name,
-					"ProductId" => $bean->producto_financiero_c,
-					"RequestTypeId" => $bean->tipo_de_operacion_c,
-					"PersonTypeId" => $tipoPersona,
-					"ProductTypeId" => $bean->tipo_producto_c,
-					"CurrencyTypeId" => "1",
-					"RequestAmount" => $RequestAmount,
-					"IncreaseAmount" => $IncreaseAmount,
-					"AdviserId" => $idActiveDirectory,
-					"AdviserName" => $bean->assigned_user_name,
-					"SinglePaymentPercentage"=>$bean->porciento_ri_c,
-					//"SinglePaymentPercentage" => $CreditLineId,
-					"CreditLineId" => $CreditLineId,
-					"BackOfficeId" => str_replace("^", "", $arrayBo[0]),
-					"BackOfficeName" => $app_list_strings['usuario_bo_0'][str_replace("^", "", $arrayBo[0])]
-				);
-			}
+            //Recupera el equipo del assigned_user de la opp
+            $asignado=$bean->assigned_user_id;
+            $valorEquipo="";
+            $GLOBALS['log']->fatal("Realiza consulta para obtener el equipo del assigned_user_id");
+            $queryasesor="SELECT equipo_c from users_cstm where id_c='$asignado' limit 1";
+                $GLOBALS['log']->fatal("Ejecuta consulta" .print_r($queryasesor, true));
+                $queryResult = $db->getOne($queryasesor);
+                $valorEquipo=$queryResult;
+                
+            //Declaracion de Body
+            $body = array(
+                "RequestId" => $bean->idsolicitud_c,
+                "ProcessId" => $bean->id_process_c,
+                "OpportunitiesId" => $bean->id,
+                "ClientId" => $bean->account_id,
+                "ClientName" => $bean->account_name,
+                "ProductId" => $bean->producto_financiero_c,
+                "RequestTypeId" => $bean->tipo_de_operacion_c,
+                "PersonTypeId" => $tipoPersona,
+                "ProductTypeId" => $bean->tipo_producto_c,
+                "CurrencyTypeId" => "1",
+                "RequestAmount" => $RequestAmount,
+                "IncreaseAmount" => $IncreaseAmount,
+                "AdviserId" => $idActiveDirectory,
+                "AdviserName" => $bean->assigned_user_name,
+                "SinglePaymentPercentage"=>$bean->porciento_ri_c,
+                //"SinglePaymentPercentage" => $CreditLineId,
+                "CreditLineId" => $CreditLineId,
+                "BackOfficeId" => str_replace("^", "", $arrayBo[0]),
+                "BackOfficeName" => $app_list_strings['usuario_bo_0'][str_replace("^", "", $arrayBo[0])],
+                "businessGroup"=>$bean->negocio_c,
+                "teamName"=>$valorEquipo
+            );
+
+            $GLOBALS['log']->fatal("BODY a enviar :".json_encode($body));
+			//Valida si se tiene Administración de Cartera y se añaden campos extras al body
+			if($bean->admin_cartera_c==1) {
+                $body["ProductOriginPortfolioId"] = $bean->producto_origen_vencido_c;
+                $body["RequestTypePortfolioId"] = $bean->tipo_sol_admin_cartera_c;
+                $body["BusinessAmount"] = $bean->monto_gpo_emp_c;
+                $body["NumberDaysoverduePortfolio"] = $bean->cartera_dias_vencido_c;
+			}		
             $GLOBALS['log']->fatal('Body Quantico integracion ' . json_encode($body));
             $callApi = new UnifinAPI();
             $resultado = $callApi->postQuantico($host, $body, $auth_encode);
-            $GLOBALS['log']->fatal('Resultado: PEticion Quantico integracion ' . json_encode($resultado));
-
+            $GLOBALS['log']->fatal('Resultado: Peticion Quantico integracion ' . json_encode($resultado));
             if ($resultado['Success']) {
                 $GLOBALS['log']->fatal('Ha realizado correctamente');
                 $query = "UPDATE opportunities_cstm
@@ -98,14 +90,11 @@ class IntegracionQuantico
                               WHERE id_c = '{$bean->id}'";
                 $queryResult = $db->query($query);
                 $bean->quantico_id_c = $resultado['ErrorMessage'];
-
             } else {
                 $GLOBALS['log']->fatal("Error al procesar la solicitud a Quantico, verifique información");
             }
-
         }
-
-
+        $GLOBALS['log']->fatal("Termina QuanticoIntegracion");
     }
 
     public function QuanticoUpdate($bean = null, $event = null, $args = null)
