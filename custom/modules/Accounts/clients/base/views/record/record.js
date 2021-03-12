@@ -4862,6 +4862,7 @@
                         var direccionCompleta = data.records[i].name;
 						            var bloqueado = (indicadorSeleccionados.indexOf('2') != -1) ? 1 : 0;
                         var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
+                        bloqueado = (self.model.get('tipo_registro_cuenta_c') == 4 || self.model.get('subtipo_registro_cuenta_c') == '')? 0: bloqueado;
                         if (accesoFiscal > 0) bloqueado = 0;
 
                         //Parsea a objeto direccion
