@@ -80,9 +80,11 @@
             }
           }
           try {
-            if (this.oDirecciones.direccion != undefined) {
-              for (var indexDir = 0; indexDir < this.oDirecciones.direccion.length; indexDir++) {
-                this.oDirecciones.direccion[indexDir].bloqueado=1;
+            if (this.oDirecciones != undefined) {
+              if (this.oDirecciones.direccion != undefined) {
+                for (var indexDir = 0; indexDir < this.oDirecciones.direccion.length; indexDir++) {
+                  this.oDirecciones.direccion[indexDir].bloqueado=1;
+                }
               }
             }
           } catch (e) {
