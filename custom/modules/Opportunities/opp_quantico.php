@@ -70,8 +70,6 @@ class IntegracionQuantico
                 "businessGroup"=>$bean->negocio_c,
                 "teamName"=>$valorEquipo
             );
-
-            $GLOBALS['log']->fatal("BODY a enviar :".json_encode($body));
 			//Valida si se tiene Administración de Cartera y se añaden campos extras al body
 			if($bean->admin_cartera_c==1) {
                 $body["ProductOriginPortfolioId"] = $bean->producto_origen_vencido_c;
