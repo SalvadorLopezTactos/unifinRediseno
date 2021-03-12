@@ -376,12 +376,6 @@ array (
                 'name' => 'campana_rel_c',
                 'studio' => 'visible',
                 'label' => 'LBL_CAMPANA_REL',
-/*                'initial_filter' => 'FilterCampana',
-                'initial_filter_label' => 'Activas',
-                'filter_populate' => array(
-                  'start_date' => '2021-02-21',
-                  'end_date' => '2021-02-21',
-                ),*/
               ),
               15 => 
               array (
@@ -430,25 +424,15 @@ array (
               ),
               23 => 
               array (
-                'name' => 'tct_motivo_ilocalizable_ddw_c',
-                'label' => 'LBL_TCT_MOTIVO_ILOCALIZABLE_DDW',
-                'span' => 12,
-              ),
-              24 => 
-              array (
                 'name' => 'tct_fecha_seguimiento_dat_c',
                 'label' => 'LBL_TCT_FECHA_SEGUIMIENTO_DAT',
                 'span' => 12,
               ),
-              25 => 
-              array (
-                'name' => 'tct_motivo_desinteres_ddw_c',
-                'label' => 'LBL_TCT_MOTIVO_DESINTERES_DDW',
-              ),
-              26 => 
+              24 => 
               array (
                 'name' => 'lic_licitaciones_calls_1_name',
                 'readonly' => true,
+                'span' => 12,
               ),
             ),
           ),
