@@ -79,6 +79,15 @@
               auxindicador[key]  = value;
             }
           }
+          try {
+            if (this.oDirecciones.direccion != undefined) {
+              for (var indexDir = 0; indexDir < this.oDirecciones.direccion.length; indexDir++) {
+                this.oDirecciones.direccion[indexDir].bloqueado=1;
+              }
+            }
+          } catch (e) {
+            console.log(e);
+          }
           this.cont_render = 1;
           this.def.listIndicador = auxindicador;
           this.nuevaDireccion.listIndicador = this.def.listIndicador;
@@ -1405,7 +1414,7 @@
   			this.oDirecciones.direccion[index].indicadorSeleccionados = '^'+indicadorSeleccionados.replace(/,/gi, "^,^")+'^';
     		var res = indicadorSeleccionados.split(",");
     		var bloqueado = (res.indexOf('2')!=-1) ? 1 : 0;
-        if (this.accesoFiscal > 0) bloqueado = 0;
+        bloqueado = (this.accesoFiscal > 0 || this.model.get('tipo_registro_cuenta_c')==4 || this.model.get('tipo_registro_cuenta_c')==5 ) ? 0 : bloqueado;
     		this.oDirecciones.direccion[index].bloqueado = bloqueado;
     		this.render();
     		document.getElementsByClassName("multi1_n_existing")[index].focus();
