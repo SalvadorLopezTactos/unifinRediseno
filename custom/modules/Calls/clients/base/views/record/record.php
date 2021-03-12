@@ -428,7 +428,12 @@ array (
               array (
                 'name' => 'tct_fecha_seguimiento_dat_c',
                 'label' => 'LBL_TCT_FECHA_SEGUIMIENTO_DAT',
-                'span' => 12,
+              ),
+              25 => 
+              array (
+                'name' => 'lic_licitaciones_calls_1_name',
+                'label' => 'LBL_LIC_LICITACIONES_CALLS_1_FROM_LIC_LICITACIONES_TITLE',
+                'readonly' => true,
               ),
             ),
           ),
