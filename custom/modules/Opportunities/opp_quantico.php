@@ -10,7 +10,7 @@ class IntegracionQuantico
 {
     public function QuanticoIntegracion($bean = null, $event = null, $args = null)
     {
-        global $sugar_config, $db, $app_list_strings,$current_user;
+        global $sugar_config, $db, $app_list_strings;
         $user = $sugar_config['quantico_usr'];
         $pwd = $sugar_config['quantico_psw'];
         $auth_encode = base64_encode($user . ':' . $pwd);
