@@ -434,6 +434,7 @@ array (
                 'name' => 'lic_licitaciones_calls_1_name',
                 'label' => 'LBL_LIC_LICITACIONES_CALLS_1_FROM_LIC_LICITACIONES_TITLE',
                 'readonly' => true,
+                'span' => 12,
               ),
             ),
           ),

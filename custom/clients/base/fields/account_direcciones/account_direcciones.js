@@ -79,10 +79,15 @@
               auxindicador[key]  = value;
             }
           }
+          //Permite edición para personas
           try {
-            if (this.oDirecciones.direccion != undefined) {
-              for (var indexDir = 0; indexDir < this.oDirecciones.direccion.length; indexDir++) {
-                this.oDirecciones.direccion[indexDir].bloqueado=1;
+            if (this.oDirecciones != undefined) {
+              if (this.oDirecciones.direccion != undefined) {
+                for (var indexDir = 0; indexDir < this.oDirecciones.direccion.length; indexDir++) {
+                  if(this.oDirecciones.direccion[indexDir].indicadorSeleccionados.includes('^2^')){
+                    this.oDirecciones.direccion[indexDir].bloqueado=1;
+                  }
+                }
               }
             }
           } catch (e) {
@@ -240,6 +245,7 @@
         var inputs = this.$('.postalInputTempExisting'),
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
+        cont_dir.indexForEstado=inputs.index(input);
         var cp = input.val();
         var str_length = cp.length;
         //Valida formato
@@ -277,6 +283,7 @@
 
                         //Agrega valores recuperados a modelo
                         if (data.idCP) {
+                            cont_dir.idEstadoGlobal=data.idEstado;
                             //recupera info
                             cont_dir.oDirecciones.direccion[index].valCodigoPostal = cp;
                             cont_dir.oDirecciones.direccion[index].postal = data.idCP;

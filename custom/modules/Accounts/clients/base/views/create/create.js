@@ -1240,7 +1240,7 @@
      },*/
 
     _doValidateDireccion: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_cuenta_c') == "3" || this.model.get('tipo_registro_cuenta_c') == "5" || this.model.get('tipo_registro_cuenta_c') == "2" || this.model.get('esproveedor_c') == true) {
+        if (this.model.get('tipo_registro_cuenta_c') == "3" || this.model.get('tipo_registro_cuenta_c') == "5" || (this.model.get('tipo_registro_cuenta_c') == "2" && this.model.get('subtipo_registro_cuenta_c')!="1" ) || this.model.get('esproveedor_c') == true) {
             if (_.isEmpty(this.oDirecciones.direccion)) {
                 //errors[$(".addDireccion")] = errors['account_direcciones'] || {};
                 //errors[$(".addDireccion")].required = true;
