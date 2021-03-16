@@ -100,13 +100,13 @@ SQL;
 
     public function crearURLOriginacion($bean = null, $event = null, $args = null)
     {
-        global $db, $sugar_config;
+        global $db, $sugar_config, $current_user;
         $id_assigned = $bean->assigned_user_id;
         $beanU = BeanFactory::retrieveBean('Users', $id_assigned, array('disable_row_level_security' => true));
         if ($beanU->puestousuario_c == 53 && empty($bean->url_originacion_c)) {
             $correo_del_empleado = $beanU->email1;
-            //$url = $sugar_config['site_UniOn']."/api/employee/?email={$correo_del_empleado}";
-            $url = $sugar_config['site_UniOn'] . "/api/employee/?email=jne@uniclick.mx";
+            $url = $sugar_config['site_UniOn'] . "/api/employee/?email={$correo_del_empleado}";
+            //$url = $sugar_config['site_UniOn'] . "/api/employee/?email=jne@uniclick.mx";
 
             $token = $sugar_config['token_UniOn'];
             $GLOBALS['log']->fatal("correo " . $correo_del_empleado);
@@ -121,8 +121,13 @@ SQL;
                         "Content-type: application/json"));
                 $json_response = curl_exec($curl);
                 curl_close($curl);
-                $response = json_decode($json_response, true);
-                $GLOBALS['log']->fatal("Respuesta Union " . print_r($response, true));
+            } catch (Exception $e) {
+                error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error: " . $e->getMessage());
+                $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
+            }
+            $response = json_decode($json_response, true);
+            $GLOBALS['log']->fatal("Respuesta Union " . print_r($response, true));
+            if (!empty($response)) {
                 foreach ($response as $key => $value) {
                     $GLOBALS['log']->fatal("Key  " . $key);
                     $GLOBALS['log']->fatal("Value " . $value);
@@ -133,12 +138,8 @@ SQL;
                         $queryResult = $db->query($update);
                     } else {
                         $GLOBALS['log']->fatal("Error al solicitar código de originación  " . $value);
-
                     }
                 }
-            } catch (Exception $e) {
-                error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error: " . $e->getMessage());
-                $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
             }
         }
     }
