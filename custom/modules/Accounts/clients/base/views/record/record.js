@@ -5095,6 +5095,9 @@
             this.model.set('account_telefonos', this.oTelefonos.telefono);
 
             //Direcciones
+            if(cont_dir.indexForEstado!=undefined && cont_dir.idEstadoGlobal!=undefined){
+                this.oDirecciones.direccion[cont_dir.indexForEstado].estado=cont_dir.idEstadoGlobal;
+            }
             this.prev_oDirecciones.prev_direccion = app.utils.deepCopy(this.oDirecciones.direccion);
             this.model.set('account_direcciones', this.oDirecciones.direccion);
         }
