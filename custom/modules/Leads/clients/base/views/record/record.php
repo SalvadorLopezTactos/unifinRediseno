@@ -404,10 +404,19 @@ array (
               ),
               38 => 
               array (
+                'name' => 'url_originacion_c',
+                'label' => 'LBL_URL_ORIGINACION_C',
+                  'readonly' => true,
+              ),
+              39 => 
+              array (
+              ),
+              40 => 
+              array (
                 'name' => 'contacto_asociado_c',
                 'label' => 'LBL_CONTACTO_ASOCIADO_C',
               ),
-              39 => 
+              41 => 
               array (
                 'name' => 'leads_leads_1_name',
                 'label' => 'LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE',
