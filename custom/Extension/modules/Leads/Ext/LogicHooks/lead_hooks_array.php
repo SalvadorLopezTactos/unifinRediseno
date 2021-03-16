@@ -20,3 +20,11 @@ $hook_array['after_save'][] = Array(
     'checkCancelado',
     'subTipoCancelado'
 );
+
+$hook_array['after_save'][] = Array(
+    5,
+    'crear URL de Originación',
+    'custom/modules/Leads/Lead_Hooks.php',
+    'Lead_Hooks',
+    'crearURLOriginacion'
+);
