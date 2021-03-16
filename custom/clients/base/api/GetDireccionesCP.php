@@ -111,6 +111,9 @@ WHERE cp.name = '{$cp}'";
 
             $idEstado=$row['idEstado'];
             $nameEstado = $row['nameEstado'];
+            if($pos==0){
+              $arrPadre['idEstado']=$row['idEstado'];
+            }
 
             $idColonia=$row['idColonia'];
             $nameColonia = $row['nameColonia'];
