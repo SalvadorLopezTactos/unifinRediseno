@@ -67,8 +67,8 @@ class IntegracionQuantico
                 "CreditLineId" => $CreditLineId,
                 "BackOfficeId" => str_replace("^", "", $arrayBo[0]),
                 "BackOfficeName" => $app_list_strings['usuario_bo_0'][str_replace("^", "", $arrayBo[0])],
-                "businessGroup"=>$bean->negocio_c,
-                "teamName"=>$valorEquipo
+                "BusinessGroupId"=>$bean->negocio_c,
+                "TeamId"=>$valorEquipo
             );
 			//Valida si se tiene Administración de Cartera y se añaden campos extras al body
 			if($bean->admin_cartera_c==1) {
