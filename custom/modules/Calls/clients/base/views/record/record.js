@@ -762,45 +762,55 @@
         var held = 0;
         var puesto_usuario = App.user.attributes.puestousuario_c;
         var leasingPuestos = ['1', '2', '3', '4', '5', '6', '20', '33', '44', '55'];
-
-        if ($.isEmptyObject(errors) && this.model.get('parent_id') != "" && this.model.get('parent_type') == "Accounts" && this.model.get('status') == "Held" && leasingPuestos.includes(puesto_usuario)) {
-
-            app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + this.model.get('parent_id')), null, {
+        var parent_id_acc = this.model.get('parent_id') ;
+        
+        //Llamada_servicio
+        if ($.isEmptyObject(errors) && parent_id_acc != "" && this.model.get('parent_type') == "Accounts" && this.model.get('status') == "Held" && this.model.get('tct_resultado_llamada_ddw_c') != 'Llamada_servicio' && leasingPuestos.includes(puesto_usuario)) {
+            //this.model.get('tipo_registro_cuenta_c') == "Cliente"
+            app.api.call("read", app.api.buildURL("Accounts/"+parent_id_acc, null, null, {
+                fields: "tipo_registro_cuenta_c",
+            }), null, {
                 success: _.bind(function (data) {
-                    obj = JSON.parse(data);
-                    if (obj.total > 0) {
-                        // Cancelar - no esta interesado, NO viable, NO interesado- cita forada,Cancelada por el prospecto no le interesa
-                        /*************************************************/
-                        if (Modernizr.touch) {
-                            app.$contentEl.addClass('content-overflow-visible');
-                        }
-                        /**check whether the view already exists in the layout.
-                         * If not we will create a new view and will add to the components list of the record layout
-                         * */
-
-                            //var quickCreateView = this.layout.getComponent('MotivoCancelModal');
-                        var quickCreateView = null;
-                        if (!quickCreateView) {
-                            /** Create a new view object */
-                            quickCreateView = app.view.createView({
-                                context: this.context,
-                                name: 'SegundaReunionModal',
-                                layout: this.layout,
-                                module: 'Calls'
-                            });
-                            /** add the new view to the components list of the record layout*/
-                            this.layout._components.push(quickCreateView);
-                            this.layout.$el.append(quickCreateView.$el);
-                        }
-                        /**triggers an event to show the pop up quick create view*/
-                        this.layout.trigger("app:view:SegundaReunionModal");
-                        /**************************************/
-                        callback(null, fields, errors);
-                    } else {
-                        callback(null, fields, errors);
-                    }
+                    if(data.tipo_registro_cuenta_c == '1' || data.tipo_registro_cuenta_c == '2'){
+                        app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + parent_id_acc), null, {
+                            success: _.bind(function (data) {
+                                obj = JSON.parse(data);
+                                if (obj.total > 0) {
+                                    // Cancelar - no esta interesado, NO viable, NO interesado- cita forada,Cancelada por el prospecto no le interesa
+                                    /*************************************************/
+                                    if (Modernizr.touch) {
+                                        app.$contentEl.addClass('content-overflow-visible');
+                                    }
+                                    /**check whether the view already exists in the layout.
+                                     * If not we will create a new view and will add to the components list of the record layout
+                                     * */
+            
+                                        //var quickCreateView = this.layout.getComponent('MotivoCancelModal');
+                                    var quickCreateView = null;
+                                    if (!quickCreateView) {
+                                        /** Create a new view object */
+                                        quickCreateView = app.view.createView({
+                                            context: this.context,
+                                            name: 'SegundaReunionModal',
+                                            layout: this.layout,
+                                            module: 'Calls'
+                                        });
+                                        /** add the new view to the components list of the record layout*/
+                                        this.layout._components.push(quickCreateView);
+                                        this.layout.$el.append(quickCreateView.$el);
+                                    }
+                                    /**triggers an event to show the pop up quick create view*/
+                                    this.layout.trigger("app:view:SegundaReunionModal");
+                                    /**************************************/
+                                    callback(null, fields, errors);
+                                } else {
+                                    callback(null, fields, errors);
+                                }
+                            }, this)
+                        });
+                    }                    
                 }, this)
-            });
+            });	
         } else {
             callback(null, fields, errors);
         }
