@@ -245,7 +245,6 @@
         var inputs = this.$('.postalInputTempExisting'),
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
-        cont_dir.indexForEstado=inputs.index(input);
         var cp = input.val();
         var str_length = cp.length;
         //Valida formato
@@ -283,7 +282,6 @@
 
                         //Agrega valores recuperados a modelo
                         if (data.idCP) {
-                            cont_dir.idEstadoGlobal=data.idEstado;
                             //recupera info
                             cont_dir.oDirecciones.direccion[index].valCodigoPostal = cp;
                             cont_dir.oDirecciones.direccion[index].postal = data.idCP;
