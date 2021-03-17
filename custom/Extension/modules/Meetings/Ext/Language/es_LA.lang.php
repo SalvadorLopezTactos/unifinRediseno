@@ -45,3 +45,7 @@ $mod_strings['LBL_PRODUCTOS_C'] = 'Producto';
 $mod_strings['LBL_EVENTO_CAMPANA'] = 'Evento/Campaña';
 $mod_strings['LBL_CAMPANA_REL_CAMPAIGN_ID'] = 'Evento/Campaña Relacionada (relacionado Campaña ID)';
 $mod_strings['LBL_CAMPANA_REL'] = 'Evento/Campaña Relacionada';
+$mod_strings['LBL_TIPO_CITA'] = 'Tipo de Cita';
+$mod_strings['LBL_PUESTO_CREADO'] = 'Puesto Asesor de Creación';
+$mod_strings['LBL_PUESTO_ASIGNADO'] = 'Puesto Asesor Asignado';
+$mod_strings['LBL_INVITADOS'] = 'Invitados';

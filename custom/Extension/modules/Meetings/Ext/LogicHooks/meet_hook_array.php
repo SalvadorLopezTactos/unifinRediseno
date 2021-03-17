@@ -6,6 +6,15 @@
      * Modified: AF. 2019/05/06
      */
 
+//Llena campos para el Centro de Prospección
+$hook_array['before_save'][] = Array(
+    1,
+    'Llena campos para el Centro de Prospección',
+    'custom/modules/Meetings/meetings_hooks.php',
+    'Meetings_Hooks', // name of the class
+    'llenaCCP' // name of the function
+);
+
 //Crea nuevas reuniones para los invitados
 $hook_array['after_relationship_add'][] = Array(
     1,
