@@ -43,6 +43,7 @@
         this.model.on('sync', this.hidePErsonaEdit, this);
         this.model.on('sync', this.campanas, this);
         this.model.on('sync', this._disableDepResultCall, this);
+        this.model.on('change:evento_campana_c', this.enableRelECamp, this);
 
         this.model.addValidationTask('resultCallReq', _.bind(this.resultCallRequerido, this));
         this.events['click a[name=edit_button]'] = 'fechascallsymeet';
@@ -63,7 +64,7 @@
         this.$('div[data-name="evento_campana_c"]').hide();
         this.$('div[data-name="campana_rel_c"]').hide();
       }
-      if (this.model.get('status') == 'Not Held' || (this.model.get('status') == 'Held' && this.model.get('tct_resultado_llamada_ddw_c') != "" && this.model.get('evento_campana_c') != "")) {
+      if (this.model.get('status') == 'Not Held' || (this.model.get('status') == 'Held' && this.model.get('evento_campana_c') != "")) {
         this.$('.record-edit-link-wrapper[data-name=campana_rel_c]').remove();
       }
     },
@@ -168,7 +169,7 @@
     editClicked: function () {
         this._super("editClicked");
 
-        if (this.model.get('status') == 'Not Held' || (this.model.get('status') == 'Held' && this.model.get('tct_resultado_llamada_ddw_c') != "" && this.model.get('evento_campana_c') != "")) {
+        if (this.model.get('status') == 'Not Held' || (this.model.get('status') == 'Held' && this.model.get('tct_resultado_llamada_ddw_c') != "")) {
             this.setButtonStates(this.STATE.VIEW);
             this.action = 'detail';
             this.toggleEdit(false);
@@ -212,7 +213,7 @@
     disableFieldCallMeeting: function () {
 
         //Reemplazo de etiqueta
-        if (this.model.get('status') == 'Not Held' || (this.model.get('status') == 'Held' && this.model.get('tct_resultado_llamada_ddw_c') != "" && this.model.get('evento_campana_c') != "")) {
+        if (this.model.get('status') == 'Not Held' || (this.model.get('status') == 'Held' && this.model.get('tct_resultado_llamada_ddw_c') != "")) {
             //Establecer como solo lectura el campo custom para creación de Reuniones o llamadas
 
             //Se remueve la clase record-edit-link-wrapper para evitar que se muestre el template edit del campo custom
@@ -914,52 +915,54 @@
         }
     },
 
+    enableRelECamp: function () {
+
+        if (App.user.attributes.puestousuario_c == '27' || App.user.attributes.puestousuario_c == '31') {
+            //Check Evento campaña, habilita relacion evento campaña
+            if (this.model.get('evento_campana_c') == true && this.model.get('campana_rel_c') == "") {                        
+                fieldERC = this.getField('campana_rel_c');
+                if (fieldERC.action == 'disabled') {
+                    this.inlineEditMode = true;
+                    this.setButtonStates(this.STATE.EDIT);
+                    this.toggleField(fieldERC);
+                }
+            }
+        }
+    },
+
     _disableDepResultCall: function () {
         //Campos de solo lectura para Resultado de Llamadas y sus dependencias y Evento campaña
         if (this.model.get('status') == "Held") { //Llamada con estatus Realizada
-
             //VALIDA CUANDO ES PUESTO DE USUARIO 27 - "AGENTE TELEFONICO" Ó 31 - "COORDINADOR DE CENTRO DE PROSPECCIONES"
             if (App.user.attributes.puestousuario_c == '27' || App.user.attributes.puestousuario_c == '31') {
                 //Check Evento campaña
                 if (this.model.get('evento_campana_c') != "") {                        
-                    this.noEditFields.push('evento_campana_c');
-                    this.$('[data-name="evento_campana_c"]').attr('style', 'pointer-events:none;');                
+                    $('[data-name="evento_campana_c"]').attr('style', 'pointer-events:none;');                
                 }
             }
             //Resultado de la llamada
             if (this.model.get('tct_resultado_llamada_ddw_c') != "") {
-                this.noEditFields.push('tct_resultado_llamada_ddw_c');
-                this.$('[data-name="tct_resultado_llamada_ddw_c"]').attr('style', 'pointer-events:none;');
+                $('[data-name="tct_resultado_llamada_ddw_c"]').attr('style', 'pointer-events:none;');
             }
-            if (this.model.get('tct_resultado_llamada_ddw_c') == "Ilocalizable") {
-                if (this.model.get('detalle_resultado_c') != "") {
-                    this.noEditFields.push('detalle_resultado_c');
-                    this.$('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
-                } 
+            if (this.model.get('tct_resultado_llamada_ddw_c') == "Ilocalizable" && this.model.get('detalle_resultado_c') != "") {
+                
+                $('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
             }             
-            if (this.model.get('tct_resultado_llamada_ddw_c') == "No_esta_Interesado") {
-                if (this.model.get('detalle_resultado_c') != "") {
-                    this.noEditFields.push('detalle_resultado_c');
-                    this.$('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
-                }              
+            if (this.model.get('tct_resultado_llamada_ddw_c') == "No_esta_Interesado" && this.model.get('detalle_resultado_c') != "") {
+                
+                $('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
             }             
-            if (this.model.get('tct_resultado_llamada_ddw_c') == "Fuera_de_Perfil") {
-                if (this.model.get('detalle_resultado_c') != "") {
-                    this.noEditFields.push('detalle_resultado_c');
-                    this.$('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
-                } 
+            if (this.model.get('tct_resultado_llamada_ddw_c') == "Fuera_de_Perfil" && this.model.get('detalle_resultado_c') != "") {
+                
+                $('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
             }
-            if (this.model.get('tct_resultado_llamada_ddw_c') == "Llamada_servicio") {
-                if (this.model.get('detalle_resultado_c') != "") {
-                    this.noEditFields.push('detalle_resultado_c');
-                    this.$('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
-                } 
+            if (this.model.get('tct_resultado_llamada_ddw_c') == "Llamada_servicio" && this.model.get('detalle_resultado_c') != "") {
+                
+                $('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
             } 
-            if (this.model.get('tct_resultado_llamada_ddw_c') == "Razon_Social") {
-                if (this.model.get('cuenta_existente_c') != "") {
-                    this.noEditFields.push('cuenta_existente_c');
-                    this.$('[data-name="cuenta_existente_c"]').attr('style', 'pointer-events:none;');
-                } 
+            if (this.model.get('tct_resultado_llamada_ddw_c') == "Razon_Social" && this.model.get('cuenta_existente_c') != "") {
+                
+                $('[data-name="cuenta_existente_c"]').attr('style', 'pointer-events:none;');
             } 
         }        
     },
