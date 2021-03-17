@@ -64,7 +64,7 @@
         this.$('div[data-name="evento_campana_c"]').hide();
         this.$('div[data-name="campana_rel_c"]').hide();
       }
-      if (this.model.get('status') == 'Not Held' || (this.model.get('status') == 'Held' && this.model.get('tct_resultado_llamada_ddw_c') != "" && this.model.get('evento_campana_c') != "")) {
+      if (this.model.get('status') == 'Not Held' || (this.model.get('status') == 'Held' && this.model.get('evento_campana_c') != "")) {
         this.$('.record-edit-link-wrapper[data-name=campana_rel_c]').remove();
       }
     },
@@ -169,7 +169,7 @@
     editClicked: function () {
         this._super("editClicked");
 
-        if (this.model.get('status') == 'Not Held' || (this.model.get('status') == 'Held' && this.model.get('tct_resultado_llamada_ddw_c') != "" && this.model.get('evento_campana_c') != "")) {
+        if (this.model.get('status') == 'Not Held' || (this.model.get('status') == 'Held' && this.model.get('tct_resultado_llamada_ddw_c') != "")) {
             this.setButtonStates(this.STATE.VIEW);
             this.action = 'detail';
             this.toggleEdit(false);
@@ -213,7 +213,7 @@
     disableFieldCallMeeting: function () {
 
         //Reemplazo de etiqueta
-        if (this.model.get('status') == 'Not Held' || (this.model.get('status') == 'Held' && this.model.get('tct_resultado_llamada_ddw_c') != "" && this.model.get('evento_campana_c') != "")) {
+        if (this.model.get('status') == 'Not Held' || (this.model.get('status') == 'Held' && this.model.get('tct_resultado_llamada_ddw_c') != "")) {
             //Establecer como solo lectura el campo custom para creación de Reuniones o llamadas
 
             //Se remueve la clase record-edit-link-wrapper para evitar que se muestre el template edit del campo custom
