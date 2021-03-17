@@ -2762,43 +2762,43 @@ function getMultiselectHTML($skip_logicArrForAll, $queArr = array(), $submittedA
                     if ($answer < 7) {
                         if ($submittedAns == $answer) {
                             if ($is_skipp == 1) {
-                                $html .= "<th><div onclick='applyNPSSelectedColor(this); skipp_logic_question(this,$ans_detail);' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#a1cbff'>" . $answer . "</div></th>";
+                                $html .= "<th><div onclick='applyNPSSelectedColor(this); skipp_logic_question(this,$ans_detail);' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#ffffff'>" . $answer . "</div></th>";
                             } else {
-                                $html .= "<th><div  onclick='applyNPSSelectedColor(this);' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#a1cbff'>" . $answer . "</div></th>";
+                                $html .= "<th><div  onclick='applyNPSSelectedColor(this);' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#ffffff'>" . $answer . "</div></th>";
                             }
                         } else {
                             if ($is_skipp == 1) {
-                                $html .= "<th><div onclick='applyNPSSelectedColor(this); skipp_logic_question(this,$ans_detail);' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#ff5353'>" . $answer . "</div></th>";
+                                $html .= "<th><div onclick='applyNPSSelectedColor(this); skipp_logic_question(this,$ans_detail);' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#ffffff'>" . $answer . "</div></th>";
                             } else {
-                                $html .= "<th><div onclick='applyNPSSelectedColor(this);' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#ff5353'>" . $answer . "</div></th>";
+                                $html .= "<th><div onclick='applyNPSSelectedColor(this);' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#ffffff'>" . $answer . "</div></th>";
                             }
                         }
                     } else if ($answer >= 7 && $answer < 9) {
                         if ($submittedAns == $answer) {
                             if ($is_skipp == 1) {
-                                $html .= "<th><div onclick='applyNPSSelectedColor(this); skipp_logic_question(this,$ans_detail);' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#a1cbff'>" . $answer . "</div></th>";
+                                $html .= "<th><div onclick='applyNPSSelectedColor(this); skipp_logic_question(this,$ans_detail);' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#ffffff'>" . $answer . "</div></th>";
                             } else {
-                                $html .= "<th><div onclick='applyNPSSelectedColor(this);' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#a1cbff'>" . $answer . "</div></th>";
+                                $html .= "<th><div onclick='applyNPSSelectedColor(this);' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#ffffff'>" . $answer . "</div></th>";
                             }
                         } else {
                             if ($is_skipp == 1) {
-                                $html .= "<th><div onclick='applyNPSSelectedColor(this); skipp_logic_question(this,$ans_detail);' class='score_pannel' id='$ans_id' value='$answer'style='background-color:#e9e817'>" . $answer . "</div></th>";
+                                $html .= "<th><div onclick='applyNPSSelectedColor(this); skipp_logic_question(this,$ans_detail);' class='score_pannel' id='$ans_id' value='$answer'style='background-color:#ffffff'>" . $answer . "</div></th>";
                             } else {
-                                $html .= "<th><div  onclick='applyNPSSelectedColor(this);' class='score_pannel' id='$ans_id' value='$answer'style='background-color:#e9e817'>" . $answer . "</div></th>";
+                                $html .= "<th><div  onclick='applyNPSSelectedColor(this);' class='score_pannel' id='$ans_id' value='$answer'style='background-color:#ffffff'>" . $answer . "</div></th>";
                             }
                         }
                     } else if ($answer >= 9 && $answer <= 10) {
                         if ($submittedAns == $answer) {
                             if ($is_skipp == 1) {
-                                $html .= "<th><div onclick='applyNPSSelectedColor(this); skipp_logic_question(this,$ans_detail);' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#a1cbff'>" . $answer . "</div></th>";
+                                $html .= "<th><div onclick='applyNPSSelectedColor(this); skipp_logic_question(this,$ans_detail);' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#ffffff'>" . $answer . "</div></th>";
                             } else {
-                                $html .= "<th><div  onclick='applyNPSSelectedColor(this);' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#a1cbff'>" . $answer . "</div></th>";
+                                $html .= "<th><div  onclick='applyNPSSelectedColor(this);' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#ffffff'>" . $answer . "</div></th>";
                             }
                         } else {
                             if ($is_skipp == 1) {
-                                $html .= "<th><div onclick='applyNPSSelectedColor(this); skipp_logic_question(this,$ans_detail);' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#92d51a'>" . $answer . "</div></th>";
+                                $html .= "<th><div onclick='applyNPSSelectedColor(this); skipp_logic_question(this,$ans_detail);' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#ffffff'>" . $answer . "</div></th>";
                             } else {
-                                $html .= "<th><div onclick='applyNPSSelectedColor(this);'  class='score_pannel' id='$ans_id' value='$answer' style='background-color:#92d51a'>" . $answer . "</div></th>";
+                                $html .= "<th><div onclick='applyNPSSelectedColor(this);'  class='score_pannel' id='$ans_id' value='$answer' style='background-color:#ffffff'>" . $answer . "</div></th>";
                             }
                         }
                     }
@@ -2812,7 +2812,7 @@ function getMultiselectHTML($skip_logicArrForAll, $queArr = array(), $submittedA
                         </table>";
             $html .= '<div class="score_pannel_result"> 
                         <span class="equal">' . $left . '</span> 
-                        <span class="equal" style="text-align:right">' . $right . '</span>
+                        <span class="equal" style="text-align:right; width: 50%">' . $right . '</span>
                     </div></div>';
 
             if (!empty($submittedAns[0])) {
@@ -4283,19 +4283,19 @@ if (isset($_REQUEST['btnsend']) && $_REQUEST['btnsend'] != '' && empty($msg1)) {
                                         for ($nps_values = 0; $nps_values <= 10; $nps_values++) {
                                             if ($nps_values >= 0 && $nps_values < 7) {
                                                 if ((int) $answer_value === $nps_values && !empty($answer_value)) {
-                                                    $html .= "<th style='background-color:#a1cbff;border:2px solid black;height:30px;width:20px;'>{$nps_values}</th> ";
+                                                    $html .= "<th style='background-color:#ffffff;border:2px solid black;height:30px;width:20px;'>{$nps_values}</th> ";
                                                 } else {
-                                                    $html .= "<th style='background-color:#ff5353;height:30px;width:20px;'>{$nps_values}</th> ";
+                                                    $html .= "<th style='background-color:#ffffff;height:30px;width:20px;'>{$nps_values}</th> ";
                                                 }
                                             } else if ($nps_values > 6 && $nps_values < 9) {
                                                 if ((int) $answer_value === $nps_values && !empty($answer_value)) {
-                                                    $html .= "<th style='background-color:#a1cbff;border:2px solid black;height:30px;width:20px;'>{$nps_values}</th>";
+                                                    $html .= "<th style='background-color:#ffffff;border:2px solid black;height:30px;width:20px;'>{$nps_values}</th>";
                                                 } else {
-                                                    $html .= "<th style='background-color:#e9e817;height:30px;width:20px;'>{$nps_values}</th>";
+                                                    $html .= "<th style='background-color:#ffffff;height:30px;width:20px;'>{$nps_values}</th>";
                                                 }
                                             } else if ((int) $nps_values >= 8 && $nps_values < 11) {
                                                 if ($answer_value === $nps_values && !empty($answer_value)) {
-                                                    $html .= "<th  style='background-color:#a1cbff;border:2px solid black;height:30px;width:20px;'>{$nps_values}</th>";
+                                                    $html .= "<th  style='background-color:#ffffff;border:2px solid black;height:30px;width:20px;'>{$nps_values}</th>";
                                                 } else {
                                                     $html .= "<th style='background-color:#92d51a;height:30px;width:20px;'> {$nps_values}</th>";
                                                 }
@@ -5202,11 +5202,11 @@ $('.bx-viewport').addClass('survey-form-height');
                 if (selected_id != previous_nps_selected_id_hidden && selected_value != selected_nps_value_hidden) {
                     $('#' + selected_id).css('background-color', '#a1cbff');
                     if (selected_nps_value_hidden < 7) {
-                        $('#' + previous_nps_selected_id_hidden).css('background-color', '#ff5353');
+                        $('#' + previous_nps_selected_id_hidden).css('background-color', '#ffffff');
                     } else if (selected_nps_value_hidden >= 7 && selected_nps_value_hidden <= 8) {
-                        $('#' + previous_nps_selected_id_hidden).css('background-color', '#e9e817');
+                        $('#' + previous_nps_selected_id_hidden).css('background-color', '#ffffff');
                     } else if (selected_nps_value_hidden > 8 && selected_nps_value_hidden <= 10) {
-                        $('#' + previous_nps_selected_id_hidden).css('background-color', '#92d51a');
+                        $('#' + previous_nps_selected_id_hidden).css('background-color', '#ffffff');
                     }
                     $('#previous_nps_selected_id_hidden_' + split_que_id[0]).val(selected_id);
 
@@ -5243,11 +5243,11 @@ $('.bx-viewport').addClass('survey-form-height');
                                         var npsSelID = $('#' + queId + '_div').find('.nps_hidden_selected_values_id').val();
                                         var npsSelVal = $('#' + queId + '_div').find('.nps_hidden_selected_values').val();
                                         if (npsSelID != '') {
-                                            var bgcolor = '#ff5353';
+                                            var bgcolor = '#ffffff';
                                             if (npsSelVal > 6 && npsSelVal <= 8) {
-                                                bgcolor = '#e9e817';
+                                                bgcolor = '#ffffff';
                                             } else if (npsSelVal > 8 && npsSelVal <= 10) {
-                                                bgcolor = '#92d51a';
+                                                bgcolor = '#ffffff';
                                             }
                                             $('#' + queId + '_div').find('#' + npsSelID).css('background-color', bgcolor);
                                             $('#' + queId + '_div').find('.nps_hidden_selected_values_id').val('');
