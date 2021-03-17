@@ -891,11 +891,11 @@ function getMultiselectHTML($queArr, $list_lang_detail, $richtextContent) {
             foreach ($answers as $ans) {
                 foreach ($ans as $ans_id => $answer) {
                     if ($answer < 7) {
-                        $html .= "<th><div onclick='applyNPSSelectedColor(this)' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#ff5353'>" . $answer . "</div></th>";
+                        $html .= "<th><div onclick='applyNPSSelectedColor(this)' class='score_pannel' id='$ans_id' value='$answer' style='background-color:#ffffff'>" . $answer . "</div></th>";
                     } else if ($answer >= 7 && $answer < 9) {
-                        $html .= "<th><div class='score_pannel' onclick='applyNPSSelectedColor(this)' id='$ans_id' value='$answer'style='background-color:#e9e817'>" . $answer . "</div></th>";
+                        $html .= "<th><div class='score_pannel' onclick='applyNPSSelectedColor(this)' id='$ans_id' value='$answer'style='background-color:#ffffff'>" . $answer . "</div></th>";
                     } else if ($answer >= 9 && $answer <= 10) {
-                        $html .= "<th><div  class='score_pannel' onclick='applyNPSSelectedColor(this)' id='$ans_id' value='$answer' style='background-color:#92d51a'>" . $answer . "</div></th>";
+                        $html .= "<th><div  class='score_pannel' onclick='applyNPSSelectedColor(this)' id='$ans_id' value='$answer' style='background-color:#ffffff'>" . $answer . "</div></th>";
                     }
                 }
             }

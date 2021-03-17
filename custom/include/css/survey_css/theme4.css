@@ -9,7 +9,7 @@ body {
 }
 
 .bg{
-    background:#000 url(../../survey-img/theme-4-bg.jpg) no-repeat;
+   /* background:#000 url(../../survey-img/theme-4-bg.jpg) no-repeat;*/
     color: #777777;
     background-size: 100% 100% !important;
     background-repeat: no-repeat;
@@ -159,8 +159,8 @@ body {
     background: #fff;
     border-radius: 0px;
     margin: 30px auto;
-    float: left;
-    left: 57px;
+   /* float: left;
+    left: 57px;*/
     box-shadow: 0 0 15px #000;
 }
 
@@ -483,14 +483,23 @@ body {
     max-width: 750px;
 }
 
-.survey_tmp_matrix tbody .row th,
-.survey_tmp_matrix tbody .row td{
+.survey_tmp_matrix tbody .row th{
     padding: 5px 10px;
     text-align: center;
     white-space: nowrap;
     display: table-cell !important;
     /*word-wrap:normal;*/
     /*display: block;*/
+}
+
+.survey_tmp_matrix tbody .row td{
+    padding: 5px 10px;
+    text-align: center;
+    white-space: nowrap;
+    display: table-cell !important;
+/*word-wrap:normal;*/
+/*display: block;*/
+   /* width: 15%;*/
 }
 
 .survey_tmp_matrix tbody .row{
