@@ -7,11 +7,10 @@ $puestouser = $current_user->puestousuario_c;
  AF - 2018/09/14
  Bloquea campos cuando estado es; Realizada o No realizada
 */
-$dependencies['Calls']['readOnly_Held_NotHeld'] = array
-(
+$dependencies['Calls']['readOnly_Held_NotHeld'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('created_by','description','status'),
+    'triggerFields' => array('created_by', 'description', 'status'),
     'onload' => true,
     'actions' => array(
         //Botón Editar
@@ -20,7 +19,8 @@ $dependencies['Calls']['readOnly_Held_NotHeld'] = array
             'params' => array(
                 'target' => 'edit_button',
                 'label' => 'LBL_EDIT_BUTTON_LABEL',
-                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
+                // 'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
+                'value' => 'or(equal($status,"Not Held"),and(equal($status,"Held"),not(equal($tct_resultado_llamada_ddw_c,"")),not(equal($evento_campana_c,""))))',
             ),
         ),
         //Asunto
@@ -147,7 +147,7 @@ $dependencies['Calls']['ResultadoCalls'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
     //Optional, the trigger for the dependency. Defaults to 'true'.
-    'triggerFields' => array('tct_resultado_llamada_ddw_c','id','tct_conferencia_chk_c'),
+    'triggerFields' => array('tct_resultado_llamada_ddw_c', 'id', 'tct_conferencia_chk_c'),
     'onload' => true,
     //Actions is a list of actions to fire when the trigger is true
     // You could list multiple fields here each in their own array under 'actions'
@@ -163,19 +163,19 @@ $dependencies['Calls']['ResultadoCalls'] = array(
     ),
 );
 $dependencies['Calls']['MotivoIlocalizable'] = array(
-        'hooks' => array("all"),
-        'triggerFields' => array('tct_resultado_llamada_ddw_c','status','id'),
-        'onload' => true,
-        //Actions is a list of actions to fire when the trigger is true
-        'actions' => array(
-            array(
-                'name' => 'SetVisibility',
-                'params' => array(
-                    'target' => 'tct_motivo_ilocalizable_ddw_c',
-                    'value' => 'equal($tct_resultado_llamada_ddw_c,"Ilocalizable")',
-                ),
+    'hooks' => array("all"),
+    'triggerFields' => array('tct_resultado_llamada_ddw_c', 'status', 'id'),
+    'onload' => true,
+    //Actions is a list of actions to fire when the trigger is true
+    'actions' => array(
+        array(
+            'name' => 'SetVisibility',
+            'params' => array(
+                'target' => 'tct_motivo_ilocalizable_ddw_c',
+                'value' => 'equal($tct_resultado_llamada_ddw_c,"Ilocalizable")',
             ),
-            /*array(
+        ),
+        /*array(
                 'name' => 'ReadOnly',
                 //The parameters passed in will depend on the action type set in 'name'
                 'params' => array(
@@ -183,11 +183,11 @@ $dependencies['Calls']['MotivoIlocalizable'] = array(
                     'value' => 'and(not(equal($id,"")),not(equal($tct_resultado_llamada_ddw_c,"")),not(equal($status,"Planned")))',
                 ),
             ),*/
-        ),
-    );
+    ),
+);
 $dependencies['Calls']['MotivoDesinteres'] = array(
     'hooks' => array("all"),
-    'triggerFields' => array('tct_resultado_llamada_ddw_c','status','id'),
+    'triggerFields' => array('tct_resultado_llamada_ddw_c', 'status', 'id'),
     'onload' => true,
     //Actions is a list of actions to fire when the trigger is true
     'actions' => array(
@@ -210,7 +210,7 @@ $dependencies['Calls']['MotivoDesinteres'] = array(
 );
 $dependencies['Calls']['FechaCita'] = array(
     'hooks' => array("all"),
-    'triggerFields' => array('tct_resultado_llamada_ddw_c','status','id'),
+    'triggerFields' => array('tct_resultado_llamada_ddw_c', 'status', 'id'),
     'onload' => true,
     //Actions is a list of actions to fire when the trigger is true
     'actions' => array(
@@ -218,7 +218,7 @@ $dependencies['Calls']['FechaCita'] = array(
             'name' => 'SetVisibility',
             'params' => array(
                 'target' => 'tct_fecha_cita_dat_c',
-                'value' => 'and(equal($tct_resultado_llamada_ddw_c,"Cita"),or(equal('.$puestouser.',"27"),equal('.$puestouser.',"31")))',
+                'value' => 'and(equal($tct_resultado_llamada_ddw_c,"Cita"),or(equal(' . $puestouser . ',"27"),equal(' . $puestouser . ',"31")))',
             ),
         ),
         /*array(
@@ -233,7 +233,7 @@ $dependencies['Calls']['FechaCita'] = array(
 );
 $dependencies['Calls']['FechaSeguimiento'] = array(
     'hooks' => array("all"),
-    'triggerFields' => array('tct_resultado_llamada_ddw_c','status','id'),
+    'triggerFields' => array('tct_resultado_llamada_ddw_c', 'status', 'id'),
     'onload' => true,
     //Actions is a list of actions to fire when the trigger is true
     'actions' => array(
@@ -256,7 +256,7 @@ $dependencies['Calls']['FechaSeguimiento'] = array(
 );
 $dependencies['Calls']['UsuarioCita'] = array(
     'hooks' => array("all"),
-    'triggerFields' => array('tct_resultado_llamada_ddw_c','status','id'),
+    'triggerFields' => array('tct_resultado_llamada_ddw_c', 'status', 'id'),
     'onload' => true,
     //Actions is a list of actions to fire when the trigger is true
     'actions' => array(
@@ -264,7 +264,7 @@ $dependencies['Calls']['UsuarioCita'] = array(
             'name' => 'SetVisibility',
             'params' => array(
                 'target' => 'tct_usuario_cita_rel_c',
-                'value' => 'and(equal($tct_resultado_llamada_ddw_c,"Cita"),or(equal('.$puestouser.',27),equal('.$puestouser.',31)))',
+                'value' => 'and(equal($tct_resultado_llamada_ddw_c,"Cita"),or(equal(' . $puestouser . ',27),equal(' . $puestouser . ',31)))',
             ),
         ),
         /*array(
