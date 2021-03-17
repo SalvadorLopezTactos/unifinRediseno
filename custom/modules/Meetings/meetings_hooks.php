@@ -12,6 +12,20 @@ require_once('custom/clients/base/api/EncuestaMinuta.php');
 
 class Meetings_Hooks
 {
+	//Llena campos para el Centro de Prospección
+    function llenaCCP($bean, $event, $arguments)
+    {
+		if(empty($bean->fetched_row['id'])) {
+			$beanUser=BeanFactory::getBean('Users', $bean->created_by);
+			$bean->puesto_creado_c = $beanUser->puestousuario_c;
+			$beanUser=BeanFactory::getBean('Users', $bean->assigned_user_id);
+			$bean->puesto_asignado_c = $beanUser->puestousuario_c;
+			$bean->tipo_cita_c = 1;
+			if($bean->invitados_c > 3 && $bean->puesto_creado_c == 27) $bean->tipo_cita_c = 2;
+			$bean->invitados_c = 1;
+		}
+	}
+
   /*
    * Agregar Invitados
    * Función que genera nuevas reuniones para usuarios invitados
@@ -343,7 +357,11 @@ class Meetings_Hooks
         'check_out_time_c',
         'check_in_platform_c',
         'check_out_platform_c',
-        'productos_c'
+        'productos_c',
+		'puesto_creado_c',
+		'puesto_asignado_c',
+		'tipo_cita_c',
+		'invitados_c'
       );
       //Iteración de campos por copiar
       foreach($bean->field_defs as $def)

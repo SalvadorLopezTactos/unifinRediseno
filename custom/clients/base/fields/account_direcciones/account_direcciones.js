@@ -245,7 +245,6 @@
         var inputs = this.$('.postalInputTempExisting'),
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
-        cont_dir.indexForEstado=inputs.index(input);
         var cp = input.val();
         var str_length = cp.length;
         //Valida formato
@@ -283,7 +282,6 @@
 
                         //Agrega valores recuperados a modelo
                         if (data.idCP) {
-                            cont_dir.idEstadoGlobal=data.idEstado;
                             //recupera info
                             cont_dir.oDirecciones.direccion[index].valCodigoPostal = cp;
                             cont_dir.oDirecciones.direccion[index].postal = data.idCP;
@@ -349,11 +347,14 @@
                             //Ejecuta filtro por dependencia de País
                             cont_dir.oDirecciones.direccion[index].pais = (Object.keys(cont_dir.oDirecciones.direccion[index].listPais)[0] != undefined) ? Object.keys(cont_dir.oDirecciones.direccion[index].listPais)[0] : "";
                             evt.index = index;
+
                             evt.idPais=cont_dir.oDirecciones.direccion[index].pais;
-                            evt.idEstado=cont_dir.oDirecciones.direccion[index].estado;
-                            evt.idMunicipio=cont_dir.oDirecciones.direccion[index].municipio;
                             cont_dir.populateEdoByPaisDE(evt);
+
+                            evt.idEstado=cont_dir.oDirecciones.direccion[index].estado;
                             cont_dir.populateCiudadesByEstadoDE(evt);
+                            
+                            evt.idMunicipio=cont_dir.oDirecciones.direccion[index].municipio;
                             cont_dir.populateColoniasByMunicipioDE(evt);
                         }else {
                             app.alert.show('cp_not_found', {

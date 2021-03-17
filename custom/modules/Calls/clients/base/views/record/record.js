@@ -21,8 +21,6 @@
         //Habilita el campo parent_name cuando esta vacio y lo deshabilta cuando ya tiene una cuenta
         this.model.on('sync', this.enableparentname, this);
         this.model.on('sync', this.cambioFecha, this);
-        this.model.on('sync', this.enableFieldsEmpty, this);
-        this.enableFieldsEmpty();
 
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial2Call, this));
@@ -44,6 +42,7 @@
         this.model.on('sync', this.getPersonas, this);
         this.model.on('sync', this.hidePErsonaEdit, this);
         this.model.on('sync', this.campanas, this);
+        this.model.on('sync', this._disableDepResultCall, this);
 
         this.model.addValidationTask('resultCallReq', _.bind(this.resultCallRequerido, this));
         this.events['click a[name=edit_button]'] = 'fechascallsymeet';
@@ -64,7 +63,7 @@
         this.$('div[data-name="evento_campana_c"]').hide();
         this.$('div[data-name="campana_rel_c"]').hide();
       }
-      if (this.model.get('status') == 'Held' || this.model.get('status') == 'Not Held') {
+      if (this.model.get('status') == 'Not Held' || (this.model.get('status') == 'Held' && this.model.get('tct_resultado_llamada_ddw_c') != "" && this.model.get('evento_campana_c') != "")) {
         this.$('.record-edit-link-wrapper[data-name=campana_rel_c]').remove();
       }
     },
@@ -73,13 +72,7 @@
         this._super("_render");
         this.enableparentname();
         this.getPersonas();
-        this.enableFieldsEmpty();
-        this.model.on('change:tct_resultado_llamada_ddw_c', this._enableDepRCall, this);
-        this._enableDepRCall();
-
-        if (App.user.attributes.puestousuario_c == '27' || App.user.attributes.puestousuario_c == '31') {
-            this.model.on('change:evento_campana_c', this._enableFieldCampRel, this);
-        }
+        this._disableDepResultCall();
     },
 
     handleCancel: function () {
@@ -90,19 +83,18 @@
         }
     },
 
-    bloqueaTodo: function () {
-        //this._super("_renderHtml");
-        var self = this;
+    // bloqueaTodo: function () {
+    //     //this._super("_renderHtml");
+    //     var self = this;
 
-        if (this.model.get('status') == 'Held' || this.model.get('status') == 'Not Held') {
+    //     if (this.model.get('status') == 'Held' || this.model.get('status') == 'Not Held') {
 
-            _.each(this.model.fields, function (field) {
-                self.noEditFields.push(field.name);
-            }, self);
+    //         _.each(this.model.fields, function (field) {
+    //             self.noEditFields.push(field.name);
+    //         }, self);
 
-        }
-
-    },
+    //     }
+    // },
 
     resultCallRequerido: function (fields, errors, callback) {
         if (this.model.get('status') == 'Held' || this.model.get('status') == 'Not Held') {
@@ -176,14 +168,12 @@
     editClicked: function () {
         this._super("editClicked");
 
-        if (this.model.get('status') == 'Held' || this.model.get('status') == 'Not Held') {
+        if (this.model.get('status') == 'Not Held' || (this.model.get('status') == 'Held' && this.model.get('tct_resultado_llamada_ddw_c') != "" && this.model.get('evento_campana_c') != "")) {
             this.setButtonStates(this.STATE.VIEW);
             this.action = 'detail';
             this.toggleEdit(false);
             this.setRoute('');
-
         }
-
     },
 
     cancelClicked: function () {
@@ -222,8 +212,7 @@
     disableFieldCallMeeting: function () {
 
         //Reemplazo de etiqueta
-
-        if (this.model.get('status') == 'Held' || this.model.get('status') == 'Not Held') {
+        if (this.model.get('status') == 'Not Held' || (this.model.get('status') == 'Held' && this.model.get('tct_resultado_llamada_ddw_c') != "" && this.model.get('evento_campana_c') != "")) {
             //Establecer como solo lectura el campo custom para creación de Reuniones o llamadas
 
             //Se remueve la clase record-edit-link-wrapper para evitar que se muestre el template edit del campo custom
@@ -237,7 +226,6 @@
         if (this.model.get('tct_resultado_llamada_ddw_c') == "Cita" || this.model.get('tct_resultado_llamada_ddw_c') == "Nueva_llamada") {
 
             this.noEditFields.push('tct_resultado_llamada_ddw_c');
-
         }
     },
 
@@ -301,12 +289,9 @@
         Oculta los campos relacionados
     */
     disableparentsfields: function () {
-
         //this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;');
-
         //Elimina �cono de l�piz para editar parent_name
         $('[data-name="parent_name"]').find('.fa-pencil').remove();
-
     },
 
     /*Victor Martinez Lopez
@@ -762,45 +747,57 @@
         var held = 0;
         var puesto_usuario = App.user.attributes.puestousuario_c;
         var leasingPuestos = ['1', '2', '3', '4', '5', '6', '20', '33', '44', '55'];
-
-        if ($.isEmptyObject(errors) && this.model.get('parent_id') != "" && this.model.get('parent_type') == "Accounts" && this.model.get('status') == "Held" && leasingPuestos.includes(puesto_usuario)) {
-
-            app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + this.model.get('parent_id')), null, {
+        var parent_id_acc = this.model.get('parent_id') ;
+        
+        //Llamada_servicio
+        if ($.isEmptyObject(errors) && parent_id_acc != "" && this.model.get('parent_type') == "Accounts" && this.model.get('status') == "Held" && this.model.get('tct_resultado_llamada_ddw_c') != 'Llamada_servicio' && leasingPuestos.includes(puesto_usuario)) {
+            //this.model.get('tipo_registro_cuenta_c') == "Cliente"
+            app.api.call("read", app.api.buildURL("Accounts/"+parent_id_acc, null, null, {
+                fields: "tipo_registro_cuenta_c",
+            }), null, {
                 success: _.bind(function (data) {
-                    obj = JSON.parse(data);
-                    if (obj.total > 0) {
-                        // Cancelar - no esta interesado, NO viable, NO interesado- cita forada,Cancelada por el prospecto no le interesa
-                        /*************************************************/
-                        if (Modernizr.touch) {
-                            app.$contentEl.addClass('content-overflow-visible');
-                        }
-                        /**check whether the view already exists in the layout.
-                         * If not we will create a new view and will add to the components list of the record layout
-                         * */
-
-                            //var quickCreateView = this.layout.getComponent('MotivoCancelModal');
-                        var quickCreateView = null;
-                        if (!quickCreateView) {
-                            /** Create a new view object */
-                            quickCreateView = app.view.createView({
-                                context: this.context,
-                                name: 'SegundaReunionModal',
-                                layout: this.layout,
-                                module: 'Calls'
-                            });
-                            /** add the new view to the components list of the record layout*/
-                            this.layout._components.push(quickCreateView);
-                            this.layout.$el.append(quickCreateView.$el);
-                        }
-                        /**triggers an event to show the pop up quick create view*/
-                        this.layout.trigger("app:view:SegundaReunionModal");
-                        /**************************************/
-                        callback(null, fields, errors);
+                    if(data.tipo_registro_cuenta_c == '1' || data.tipo_registro_cuenta_c == '2'){
+                        app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + parent_id_acc), null, {
+                            success: _.bind(function (data) {
+                                obj = JSON.parse(data);
+                                if (obj.total > 0) {
+                                    // Cancelar - no esta interesado, NO viable, NO interesado- cita forada,Cancelada por el prospecto no le interesa
+                                    /*************************************************/
+                                    if (Modernizr.touch) {
+                                        app.$contentEl.addClass('content-overflow-visible');
+                                    }
+                                    /**check whether the view already exists in the layout.
+                                     * If not we will create a new view and will add to the components list of the record layout
+                                     * */
+            
+                                        //var quickCreateView = this.layout.getComponent('MotivoCancelModal');
+                                    var quickCreateView = null;
+                                    if (!quickCreateView) {
+                                        /** Create a new view object */
+                                        quickCreateView = app.view.createView({
+                                            context: this.context,
+                                            name: 'SegundaReunionModal',
+                                            layout: this.layout,
+                                            module: 'Calls'
+                                        });
+                                        /** add the new view to the components list of the record layout*/
+                                        this.layout._components.push(quickCreateView);
+                                        this.layout.$el.append(quickCreateView.$el);
+                                    }
+                                    /**triggers an event to show the pop up quick create view*/
+                                    this.layout.trigger("app:view:SegundaReunionModal");
+                                    /**************************************/
+                                    callback(null, fields, errors);
+                                } else {
+                                    callback(null, fields, errors);
+                                }
+                            }, this)
+                        });
                     } else {
                         callback(null, fields, errors);
-                    }
+                    }                    
                 }, this)
-            });
+            });	
         } else {
             callback(null, fields, errors);
         }
@@ -917,200 +914,52 @@
         }
     },
 
-    enableFieldsEmpty: function () {
-
-        if (this.model.get('status') == "Held") {  //ESTATUS DE LA LLAMADA REALIZADA
-
-            //SE HABILITA EL CAMPO DE RESULTADO DE LA LLAMADA
-            if (this.model.get('tct_resultado_llamada_ddw_c') != "") {
-                
-                self.noEditFields.push('tct_resultado_llamada_ddw_c');
-                self.$('[data-name="tct_resultado_llamada_ddw_c"]').attr('style', 'pointer-events:none;');
-                
-            } else {
-                
-                fieldRLL = this.getField('tct_resultado_llamada_ddw_c');
-                if (fieldRLL.action == 'detail') {
-                    this.inlineEditMode = true;
-                    this.setButtonStates(this.STATE.EDIT);
-                    this.toggleField(fieldRLL);
-                }
-            }
-            //VALIDA CUANDO ES PUESTO DE USUARIO 27 - "AGENTE TELEFONICO" Ó 31 - "COORDINADOR DE CENTRO DE PROSPECCIONES"
-            if (App.user.attributes.puestousuario_c == '27' || App.user.attributes.puestousuario_c == '31') {
-
-                //SE HABILITA EL CAMPO DE EVENTO / CAMPAÑA
-                if (this.model.get('evento_campana_c') != "") {
-                    
-                    self.noEditFields.push('evento_campana_c');
-                    self.$('[data-name="evento_campana_c"]').attr('style', 'pointer-events:none;');
-                
-                } else {
-                    
-                    fieldEC = this.getField('evento_campana_c');
-                    if (fieldEC.action == 'detail') {
-                        this.inlineEditMode = true;
-                        this.setButtonStates(this.STATE.EDIT);
-                        this.toggleField(fieldEC);
-                    }
-                }
-            }
-        }
-    },
-
-    _enableFieldCampRel: function () {
-
-        if (this.model.get('status') == "Held") { 
-
-            if (App.user.attributes.puestousuario_c == '27' || App.user.attributes.puestousuario_c == '31') {
-
-                //SE HABILITA CAMPO RELACION EVENTO / CAMPAÑA
-                if (this.model.get('campana_rel_c') != "") {
-                    
-                    self.noEditFields.push('campana_rel_c');
-                    self.$('[data-name="campana_rel_c"]').attr('style', 'pointer-events:none;');
-                    
-                } else {
-
-                    fieldCR = this.getField('campana_rel_c');
-                    if (fieldCR.action == 'detail') {
-                        this.inlineEditMode = true;
-                        this.setButtonStates(this.STATE.EDIT);
-                        this.toggleField(fieldCR);
-                    }
-                }
-            }
-        }
-    },
-
-    _enableDepRCall: function () {
-
+    _disableDepResultCall: function () {
+        //Campos de solo lectura para Resultado de Llamadas y sus dependencias y Evento campaña
         if (this.model.get('status') == "Held") { //Llamada con estatus Realizada
 
+            //VALIDA CUANDO ES PUESTO DE USUARIO 27 - "AGENTE TELEFONICO" Ó 31 - "COORDINADOR DE CENTRO DE PROSPECCIONES"
+            if (App.user.attributes.puestousuario_c == '27' || App.user.attributes.puestousuario_c == '31') {
+                //Check Evento campaña
+                if (this.model.get('evento_campana_c') != "") {                        
+                    this.noEditFields.push('evento_campana_c');
+                    this.$('[data-name="evento_campana_c"]').attr('style', 'pointer-events:none;');                
+                }
+            }
+            //Resultado de la llamada
+            if (this.model.get('tct_resultado_llamada_ddw_c') != "") {
+                this.noEditFields.push('tct_resultado_llamada_ddw_c');
+                this.$('[data-name="tct_resultado_llamada_ddw_c"]').attr('style', 'pointer-events:none;');
+            }
             if (this.model.get('tct_resultado_llamada_ddw_c') == "Ilocalizable") {
-
                 if (this.model.get('detalle_resultado_c') != "") {
-                    self.noEditFields.push('detalle_resultado_c');
-                    self.$('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
-                
-                } else {
-                    
-                    fieldDR1 = this.getField('detalle_resultado_c');
-                    if (fieldDR1.action == 'detail') {
-                        this.inlineEditMode = true;
-                        this.setButtonStates(this.STATE.EDIT);
-                        this.toggleField(fieldDR1);
-                    }                   
-                }
-
-                if (this.model.get('tct_motivo_ilocalizable_ddw_c') != "") {
-                    
-                    self.noEditFields.push('tct_motivo_ilocalizable_ddw_c');
-                    self.$('[data-name="tct_motivo_ilocalizable_ddw_c"]').attr('style', 'pointer-events:none;');
-                    
-                } else {
-                    
-                    fieldMI1 = this.getField('tct_motivo_ilocalizable_ddw_c');
-                    if (fieldMI1.action == 'detail') {
-                        this.inlineEditMode = true;
-                        this.setButtonStates(this.STATE.EDIT);
-                        this.toggleField(fieldMI1);
-                    }
-                }
-            } 
-            
+                    this.noEditFields.push('detalle_resultado_c');
+                    this.$('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
+                } 
+            }             
             if (this.model.get('tct_resultado_llamada_ddw_c') == "No_esta_Interesado") {
-
                 if (this.model.get('detalle_resultado_c') != "") {
-                    self.noEditFields.push('detalle_resultado_c');
-                    self.$('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
-                
-                }else {
-                    
-                    fieldDR2 = this.getField('detalle_resultado_c');
-                    if (fieldDR2.action == 'detail') {
-                        this.inlineEditMode = true;
-                        this.setButtonStates(this.STATE.EDIT);
-                        this.toggleField(fieldDR2);
-                    }
-                }                
-                if (this.model.get('tct_motivo_desinteres_ddw_c') != "") {
-                    
-                    self.noEditFields.push('tct_motivo_desinteres_ddw_c');
-                    self.$('[data-name="tct_motivo_desinteres_ddw_c"]').attr('style', 'pointer-events:none;');
-                    
-                } else {
-                    
-                    fieldMD1 = this.getField('tct_motivo_desinteres_ddw_c');
-                    if (fieldMD1.action == 'detail') {
-                        this.inlineEditMode = true;
-                        this.setButtonStates(this.STATE.EDIT);
-                        this.toggleField(fieldMD1);
-                    }
-                }
-            } 
-            
+                    this.noEditFields.push('detalle_resultado_c');
+                    this.$('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
+                }              
+            }             
             if (this.model.get('tct_resultado_llamada_ddw_c') == "Fuera_de_Perfil") {
-
                 if (this.model.get('detalle_resultado_c') != "") {
-                    self.noEditFields.push('detalle_resultado_c');
-                    self.$('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
-                
-                } else {
-                    
-                    fieldDR3 = this.getField('detalle_resultado_c');
-                    if (fieldDR3.action == 'detail') {
-                        this.inlineEditMode = true;
-                        this.setButtonStates(this.STATE.EDIT);
-                        this.toggleField(fieldDR3);
-                    }
-                }
-            } 
-
+                    this.noEditFields.push('detalle_resultado_c');
+                    this.$('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
+                } 
+            }
             if (this.model.get('tct_resultado_llamada_ddw_c') == "Llamada_servicio") {
-
                 if (this.model.get('detalle_resultado_c') != "") {
-                    self.noEditFields.push('detalle_resultado_c');
-                    self.$('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
-                
-                } else {
-                    
-                    fieldDR4 = this.getField('detalle_resultado_c');
-                    if (fieldDR4.action == 'detail') {
-                        this.inlineEditMode = true;
-                        this.setButtonStates(this.STATE.EDIT);
-                        this.toggleField(fieldDR4);
-                    }
-                }
+                    this.noEditFields.push('detalle_resultado_c');
+                    this.$('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
+                } 
             } 
-
             if (this.model.get('tct_resultado_llamada_ddw_c') == "Razon_Social") {
-                
                 if (this.model.get('cuenta_existente_c') != "") {
-                    self.noEditFields.push('cuenta_existente_c');
-                    self.$('[data-name="cuenta_existente_c"]').attr('style', 'pointer-events:none;');
-                
-                } else {
-                    
-                    fieldCE1 = this.getField('cuenta_existente_c');
-                    if (fieldCE1.action == 'detail') {
-                        this.inlineEditMode = true;
-                        this.setButtonStates(this.STATE.EDIT);
-                        this.toggleField(fieldCE1);
-                    }
-                }
-            } 
-
-            if (this.model.get('tct_resultado_llamada_ddw_c') == "Cita" || this.model.get('tct_resultado_llamada_ddw_c') == "Nueva_llamada") {
-                
-                fieldCMC1 = this.getField('calls_meeting_call');
-                if (fieldCMC1.action == 'detail') {
-                    this.inlineEditMode = true;
-                    this.setButtonStates(this.STATE.EDIT);
-                    this.toggleField(fieldCMC1);
-                }
-                self.$('[data-name="calls_meeting_call"]').show();
-                self.$("div.record-label[data-name='calls_meeting_call']").attr('style', 'display:none;');
+                    this.noEditFields.push('cuenta_existente_c');
+                    this.$('[data-name="cuenta_existente_c"]').attr('style', 'pointer-events:none;');
+                } 
             } 
         }        
     },
