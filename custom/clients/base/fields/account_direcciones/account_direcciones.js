@@ -347,11 +347,14 @@
                             //Ejecuta filtro por dependencia de País
                             cont_dir.oDirecciones.direccion[index].pais = (Object.keys(cont_dir.oDirecciones.direccion[index].listPais)[0] != undefined) ? Object.keys(cont_dir.oDirecciones.direccion[index].listPais)[0] : "";
                             evt.index = index;
+
                             evt.idPais=cont_dir.oDirecciones.direccion[index].pais;
-                            evt.idEstado=cont_dir.oDirecciones.direccion[index].estado;
-                            evt.idMunicipio=cont_dir.oDirecciones.direccion[index].municipio;
                             cont_dir.populateEdoByPaisDE(evt);
+
+                            evt.idEstado=cont_dir.oDirecciones.direccion[index].estado;
                             cont_dir.populateCiudadesByEstadoDE(evt);
+                            
+                            evt.idMunicipio=cont_dir.oDirecciones.direccion[index].municipio;
                             cont_dir.populateColoniasByMunicipioDE(evt);
                         }else {
                             app.alert.show('cp_not_found', {
