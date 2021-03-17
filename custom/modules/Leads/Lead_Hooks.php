@@ -100,6 +100,7 @@ SQL;
 
     public function crearURLOriginacion($bean = null, $event = null, $args = null)
     {
+        $GLOBALS['log']->fatal("Realiza proceso UniON " );
         global $db, $sugar_config, $current_user;
         $id_assigned = $bean->assigned_user_id;
         $beanU = BeanFactory::retrieveBean('Users', $id_assigned, array('disable_row_level_security' => true));
@@ -108,11 +109,9 @@ SQL;
         if ($beanU->puestousuario_c == 53 && empty($bean->url_originacion_c) && !empty($correo_del_empleado)) {
             $url = $sugar_config['site_UniOn'] . "/api/employee/?email={$correo_del_empleado}";
             //$url = $sugar_config['site_UniOn'] . "/api/employee/?email=jne@uniclick.mx";
-
             $token = $sugar_config['token_UniOn'];
-            $GLOBALS['log']->fatal("correo " . $correo_del_empleado);
-            $GLOBALS['log']->fatal("url " . $url, true);
-            $GLOBALS['log']->fatal("token " . $token);
+            $Union = $sugar_config['UniOn'];
+
             try {
                 $curl = curl_init($url);
                 curl_setopt($curl, CURLOPT_HEADER, false);
@@ -123,13 +122,13 @@ SQL;
                 $json_response = curl_exec($curl);
                 curl_close($curl);
                 $response = json_decode($json_response, true);
-                $GLOBALS['log']->fatal("Respuesta Union " . print_r($response, true));
+                //$GLOBALS['log']->fatal("Respuesta Union " . print_r($response, true));
                 if ($response) {
                     foreach ($response as $key => $value) {
-                        $GLOBALS['log']->fatal("Key  " . $key);
-                        $GLOBALS['log']->fatal("Value " . $value);
+                        //$GLOBALS['log']->fatal("Key  " . $key);
+                        //$GLOBALS['log']->fatal("Value " . $value);
                         if ($key == "code" && $value != "") {
-                            $url_originacion = "uniclick.com.mx/{$value}/?id_lead={$bean->id}";
+                            $url_originacion = "{$Union}/{$value}/?id_lead={$bean->id}";
                             $update = "UPDATE leads_cstm SET url_originacion_c='$url_originacion' WHERE id_c='{$bean->id}'";
                             $queryResult = $db->query($update);
                         } else {
