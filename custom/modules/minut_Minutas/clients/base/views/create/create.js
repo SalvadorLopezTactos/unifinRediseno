@@ -28,7 +28,7 @@
         //this.model.addValidationTask('validaObjetivosmarcados', _.bind(this.validaObjetivosmarcados,this));
         this.model.addValidationTask('save_Reuunion_Llamada',_.bind(this.saveReuionLlamada, this));
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
-        //Mantener como último VT a savestatusandlocation      
+        //Mantener como último VT a savestatusandlocation
         this.model.addValidationTask('save_meetings_status_and_location', _.bind(this.savestatusandlocation, this));
         this.context.on('button:view_document:click', this.view_document, this);
         //Evento para contestar encuesta
@@ -36,10 +36,10 @@
 
         this.model.on("change:resultado_c", this.changeColorSurveyButton, this);
 
-        
+
         this.puesto_usuario=App.user.attributes.puestousuario_c;
         this.leasingPuestos = ['1','2','3','4','5','6','20','33','44','55','27'];
-        
+
         this.sin_accion = ['9','10','11','12','13','14','15','16','17','22','24'];
 
         var idUser = this.context.parent.attributes.model.attributes.created_by;
@@ -84,7 +84,7 @@
         this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(0).removeClass('panel-inactive');
         this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(0).addClass('panel-active');
         this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(1).attr("style","display:block");
-       
+
         //Oculta panel con campos de lead
         $('[data-panelname="LBL_RECORDVIEW_PANEL7"]').addClass('hide');
         $('[data-panelname="LBL_RECORDVIEW_PANEL8"]').addClass('hide');
@@ -158,7 +158,7 @@
         var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
         var userprodprin = App.user.attributes.tipodeproducto_c;
         var keyselect = null;
-		var idProdM='';
+		    var idProdM='';
         var idCuenta = this.model.get('parent_id');
         var userprod = (app.user.attributes.productos_c).replace(/\^/g, "");
         var userprodprin = App.user.attributes.tipodeproducto_c;
@@ -166,7 +166,7 @@
 
         var puesto_usuario=App.user.attributes.puestousuario_c;
         var leasingPuestos = ['1','2','3','4','5','6','20','33','44','55'];
-                    
+
         if (Object.keys(errors).length == 0) {
           try {
             self=this;
@@ -195,20 +195,20 @@
                     modelo.set('check_out_longitude_c',self.longitude);
                     modelo.set('check_out_platform_c', self.GetPlatform());
                     modelo.set('resultado_c', self.model.get('resultado_c'));
-                    
+
                     var parent_meet = modelo.get('parent_type');
                     var parent_id_acc = modelo.get('parent_id');
                     if(parent_meet == "Accounts"  &&  this.leasingPuestos.includes(  this.puesto_usuario ) && !(this.sin_accion.includes( self.model.get('resultado_c'))) ){
-                        var account = app.data.createBean('Accounts', {id:parent_id_acc});
-			            account.fetch({
-			             success: _.bind(function (modelAcconut) {
-                            if(modelAcconut.attributes.tipo_registro_cuenta_c == '1' || modelAcconut.attributes.tipo_registro_cuenta_c == '2'){
+                    var account = app.data.createBean('Accounts', {id:parent_id_acc});
+			              account.fetch({
+			              success: _.bind(function (modelAcconut) {
+                            if(modelAcconut.attributes.tipo_registro_cuenta_c == '2' && (modelAcconut.attributes.subtipo_registro_cuenta_c == '1' || modelAcconut.attributes.subtipo_registro_cuenta_c == '2')) {
                                 if(this.$('#cancelado')[0].checked != true &&  this.$('#presolicitud')[0].checked != true){
                                     app.alert.show("Motivo de Cancelación", {
                                         level: "error",
                                         title: "Debe seleccionar alguna opción de Lead Management para continuar.",
                                         autoClose: false
-                                    });                                
+                                    });
                                     //$('[data-panelname="LBL_RECORDVIEW_PANEL7"]').children().eq(1).removeAttr("style");
                                     $('#opciones').css('color', '#bb0e1b');
                                     $('#opciones').css('border-style', 'solid');
@@ -229,7 +229,7 @@
                                                 $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
                                                 $('[data-name="assigned_user_name"]').removeAttr("style");
                                             }
-                                        });                                    
+                                        });
                                         callback(null, fields, errors);
 
                                         var urla = window.location.href;
@@ -239,7 +239,7 @@
                                             title: "Se redirigió a la vista de creación de solicitudes.<br> Cuenta con lo que resta del día en curso para registrar una pre solicitud",
                                             autoClose: false
                                         });
-                                    
+
                                         app.api.call("read", app.api.buildURL("Accounts/"+parent_id_acc, null, null, {
                                             fields: "name",
                                         }), null, {
@@ -257,7 +257,7 @@
                                                 // update the browser URL with the proper
                                                 app.router.navigate('#Opportunities/create', {trigger: false});
                                             }, this)
-                                        });			
+                                        });
                                     }else if(this.$('#cancelado')[0].checked == true){
                                         keyselect = this.$('#RazonNoViable').val();
                                         if(keyselect == "0" || keyselect == "" || keyselect == null){
@@ -272,7 +272,7 @@
                                             $('#RazonNoViable').css('border-color', '#bb0e1b');
                                             $('#razon_noviable').css('color', '#bb0e1b');
                                             errors['razon_noviable'] = errors['razon_noviable'] || {};
-                                            errors['razon_noviable'].required = true;                                        
+                                            errors['razon_noviable'].required = true;
                                             callback(null, fields, errors);
                                         }else if(keyselect != "" && keyselect != null && keyselect != "0"){
                                             var emptynoviable = 0;
@@ -383,7 +383,7 @@
                                                                             level: 'success',
                                                                             messages: 'Cuenta Cancelada',
                                                                             autoClose: true
-                                                                        });                                           
+                                                                        });
 
                                                                     }, this)
                                                                 });
@@ -405,23 +405,23 @@
                                                     error: function (e) {
                                                         throw e;
                                                     }
-                                                });                                  
-                                            
-                                            }                            
+                                                });
+
+                                            }
                                         }
                                     }
 
                                 }
                             }else{
                                 callback(null, fields, errors);
-                            }                           
+                            }
                           }, this)
                         });
                     }else if(parent_meet == "Leads"  &&  this.leasingPuestos.includes(  this.puesto_usuario ) ){
-                        var keyselect = null;		
+                        var keyselect = null;
                         keyselect = this.$('#motivocancelacionCuenta').val();
                         var subkeysqlct = this.$('#submotivocancelacion').val();
-                        if((keyselect == "" || keyselect == null) && 
+                        if((keyselect == "" || keyselect == null) &&
                         (self.model.get('resultado_c')=='2' ||self.model.get('resultado_c')=='18' || self.model.get('resultado_c')=='21' || self.model.get('resultado_c')=='25'))
                         {
                             app.alert.show("Motivo de Cancelación", {
@@ -468,7 +468,7 @@
                                         modelLead.set('subtipo_registro_c', "3");
                                         modelLead.set('lead_cancelado_c', true);
                                         modelLead.save();
-                                        
+
                                         app.alert.show('message-id', {
                                             level: 'success',
                                             messages: 'Lead Cancelado',
@@ -487,8 +487,8 @@
                                         //        $('[data-name="assigned_user_name"]').removeAttr("style");
                                         //    }
                                         //});
-                                    
-                                    }else if(self.model.get('resultado_c')=='4' ||self.model.get('resultado_c')=='5' || self.model.get('resultado_c')=='19' || self.model.get('resultado_c')=='20' 
+
+                                    }else if(self.model.get('resultado_c')=='4' ||self.model.get('resultado_c')=='5' || self.model.get('resultado_c')=='19' || self.model.get('resultado_c')=='20'
                                     || self.model.get('resultado_c')=='6' || self.model.get('resultado_c')=='7' || self.model.get('resultado_c')=='23'){
                                         // Está Interesado. Se procede a generar expediente
                                         // Está Interesado. Se agendó otra visita
@@ -514,7 +514,7 @@
                                                     errors['conversion'] = errors['conversion'] || {};
                                                     errors['conversion'].required = true;
                                                     callback(null, fields, errors);
-                                                } else { 
+                                                } else {
 
                                                     app.alert.show("Conversión", {
                                                         level: "success",
@@ -537,7 +537,7 @@
                                                             $('[data-name="assigned_user_name"]').removeAttr("style");
                                                         }
                                                     });
-                                                    callback(null, fields, errors);                                                                                                         
+                                                    callback(null, fields, errors);
                                                 }
                                                 //callback(null, fields, errors);
                                             }, this),
@@ -551,15 +551,15 @@
                                                 errors['status'] = errors['status'] || {};
                                                 errors['status'].required = true;
                                                 app.alert.dismiss('upload');
-                                                callback(null, fields, errors);                                         
+                                                callback(null, fields, errors);
                                             }, this),
-                                            
+
                                         });
                                     }else if(self.model.get('resultado_c')=='3'){
-                                        
+
                                         modelLead.set('subtipo_registro_c', "2");
                                         modelLead.set('status_management_c', "2");
-                                        modelLead.save();                                        
+                                        modelLead.save();
                                         modelo.save();
                                         callback(null, fields, errors);
                                         //modelo.save([],{
@@ -571,8 +571,8 @@
                                         //        $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
                                         //        $('[data-name="assigned_user_name"]').removeAttr("style");
                                         //    }
-                                        //});    
-                                    }else{                                        
+                                        //});
+                                    }else{
                                         modelLead.set('subtipo_registro_c', "2");
                                         modelLead.save();
                                         modelo.save();
@@ -585,8 +585,8 @@
                                         //            $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
                                         //            $('[data-name="assigned_user_name"]').removeAttr("style");
                                         //        }
-                                        //    }); 
-                                    }                            
+                                        //    });
+                                    }
                                     //callback(null, fields, errors);
                                 }else{
                                     callback(null, fields, errors);
@@ -596,7 +596,7 @@
                             });
                         }
                     }else{
-                        
+
                         modelo.save([],{
                         dataType:"text",
                         complete:function() {
@@ -616,9 +616,9 @@
               console.log("Error: al recuperar ubicación para unifin proceso")
           }
       }else{
-         callback(null,fields,errors); 
+         callback(null,fields,errors);
       }
-      
+
     },
 
     showPosition:function(position) {
@@ -1187,7 +1187,7 @@
     },
 
     changeColorSurveyButton:function (evt) {
-        
+
         if(this.flagPuesto && this.model.get('resultado_c') != "22" && this.model.get('resultado_c') != "24" && this.model.get('resultado_c') != "25" && this.model.get('resultado_c') != ""){
             $('[name="survey_minuta"]').addClass('btn-success');
 
@@ -1214,7 +1214,7 @@
                     }else{
 
                         if( !(this.sin_accion.includes( self.model.get('resultado_c'))) ){
-                        
+
                             app.api.call("read", app.api.buildURL("Accounts/"+parent_id_acc, null, null, {
                                 fields: "tipo_registro_cuenta_c",
                             }), null, {
@@ -1233,16 +1233,16 @@
                                                     }
                                                 }
                                             }, this),
-                                        }); 
+                                        });
                                     }
                                 }, this)
-                            });	
+                            });
                         }
                     }
                 }, this)
             });
         }
-        
+
     },
 
     padre:function(){
@@ -1267,19 +1267,19 @@
                     app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + parent_id_acc), null, {
                         success: _.bind(function (data) {
                             obj = JSON.parse(data);
-                            if(dobj.total > 0){
+                            if(obj.total > 0){
                                 //$('[data-panelname="LBL_RECORDVIEW_PANEL4"]').removeClass('hide');
                                 self.tipo_account = true;
                                 //self.render();
                             }
                             //else{
                             //    $('[data-panelname="LBL_RECORDVIEW_PANEL4"]').addClass('hide');
-                            //}                
+                            //}
                         }, this),
-                    });                    
+                    });
                     /**************************************** */
                    // $("div.record-label[data-name='MotivoCancelacion']").attr('style', 'display:none;');
-                    
+
                 }else if(parent_id_acc != "" && parent_meet == "Leads"){
                     //$("div.record-label[data-name='SegundaReunion']").attr('style', 'display:none;');
                     self.tipo_lead = true;

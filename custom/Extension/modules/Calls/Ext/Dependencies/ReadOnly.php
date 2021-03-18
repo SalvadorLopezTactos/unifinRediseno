@@ -20,7 +20,7 @@ $dependencies['Calls']['readOnly_Held_NotHeld'] = array(
                 'target' => 'edit_button',
                 'label' => 'LBL_EDIT_BUTTON_LABEL',
                 // 'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
-                'value' => 'or(equal($status,"Not Held"),and(equal($status,"Held"),not(equal($tct_resultado_llamada_ddw_c,"")),not(equal($evento_campana_c,""))))',
+                'value' => 'or(equal($status,"Not Held"),and(equal($status,"Held"),not(equal($tct_resultado_llamada_ddw_c,""))))',
             ),
         ),
         //Asunto
@@ -135,6 +135,41 @@ $dependencies['Calls']['readOnly_Held_NotHeld'] = array(
         //         'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
         //     ),
         // ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'date_entered_by',
+                'value' => 'or(equal($status,"Planned"),equal($status,"Held"),equal($status,"Not Held"))',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'date_modified_by',
+                'value' => 'or(equal($status,"Planned"),equal($status,"Held"),equal($status,"Not Held"))',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'lic_licitaciones_calls_1_name',
+                'value' => 'or(equal($status,"Planned"),equal($status,"Held"),equal($status,"Not Held"))',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'assigned_user_name',
+                'value' => 'not(equal($assigned_user_name,""))',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'producto_c',
+                'value' => 'not(equal($producto_c,""))',
+            ),
+        ),
     ),
     'notActions' => array(),
 

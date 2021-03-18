@@ -992,10 +992,11 @@ fieldset[disabled] .form-group.form-md-line-input .form-control {
 .nps_submission_table{
     // border: 1px solid #000 ;
     border-collapse: collapse;
+    background: #fff;
 }
 
 /*06-10-2018*/
 .score_pannel_wrapper { display: inline-block; }
 .score_pannel_wrapper .score_pannel_result {width: 450px; max-width: 100%;}
-.score_pannel_result span.equal { /*width: 50%;*/ display: inline-block;}
+.score_pannel_result span.equal { width: 50%; display: inline-block;}
 

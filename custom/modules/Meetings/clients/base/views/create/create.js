@@ -18,6 +18,7 @@
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
         this.model.addValidationTask('valida_usuarios_vetados',_.bind(this.valida_usuarios_vetados, this));
         this.model.addValidationTask('Valida_producto_usuario',_.bind(this.productoReunion, this));
+		this.model.addValidationTask('llenaCCP',_.bind(this.llenaCCP, this));
         this.on('render', this.disablestatus, this);
     },
 
@@ -361,5 +362,15 @@
             this.model.set("productos_c","");
         }*/
         callback(null, fields, errors);
+    },
+
+    llenaCCP:function (fields, errors, callback) {
+        var invitadosObject = this.model.get('invitees')._byId;
+        var count = 0;
+        Object.keys(invitadosObject).forEach(function(key) {
+           count = count + 1;
+        });
+		this.model.set('invitados_c',count);
+		callback(null, fields, errors);
     },
 })
