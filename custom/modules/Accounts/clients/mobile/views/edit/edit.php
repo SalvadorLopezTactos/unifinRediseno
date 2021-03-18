@@ -37,6 +37,7 @@ $viewdefs['Accounts']['mobile']['view']['edit'] = array (
         array (
           'name' => 'subtipo_registro_cuenta_c',
           'label' => 'LBL_SUBTIPO_REGISTRO_CUENTA',
+          'readonly' => true,
         ),
         2 => 
         array (
