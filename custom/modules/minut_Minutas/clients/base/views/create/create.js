@@ -216,6 +216,7 @@
 
                                     errors['MotivoCancelacion'] = errors['MotivoCancelacion'] || {};
                                     errors['MotivoCancelacion'].required = true;
+                                    $('[data-panelname="LBL_RECORDVIEW_PANEL7"]').removeClass('hide');
                                     callback(null, fields, errors);
                                 }else{
                                     if(this.$('#presolicitud')[0].checked == true){
