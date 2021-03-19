@@ -365,12 +365,12 @@
     },
 
     llenaCCP:function (fields, errors, callback) {
-        var invitadosObject = this.model.get('invitees')._byId;
-        var count = 0;
-        Object.keys(invitadosObject).forEach(function(key) {
-           count = count + 1;
+        var invitados = this.model.get('invitees')._byId;
+        var cuenta = 0;
+        Object.keys(invitados).forEach(function(key) {
+			if(invitados[key].link.name == 'users') cuenta = cuenta + 1;
         });
-		this.model.set('invitados_c',count);
+		this.model.set('invitados_c',cuenta);
 		callback(null, fields, errors);
     },
 })
