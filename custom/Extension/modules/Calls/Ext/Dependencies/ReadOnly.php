@@ -135,41 +135,6 @@ $dependencies['Calls']['readOnly_Held_NotHeld'] = array(
         //         'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
         //     ),
         // ),
-        array(
-            'name' => 'ReadOnly',
-            'params' => array(
-                'target' => 'date_entered_by',
-                'value' => 'or(equal($status,"Planned"),equal($status,"Held"),equal($status,"Not Held"))',
-            ),
-        ),
-        array(
-            'name' => 'ReadOnly',
-            'params' => array(
-                'target' => 'date_modified_by',
-                'value' => 'or(equal($status,"Planned"),equal($status,"Held"),equal($status,"Not Held"))',
-            ),
-        ),
-        array(
-            'name' => 'ReadOnly',
-            'params' => array(
-                'target' => 'lic_licitaciones_calls_1_name',
-                'value' => 'or(equal($status,"Planned"),equal($status,"Held"),equal($status,"Not Held"))',
-            ),
-        ),
-        array(
-            'name' => 'ReadOnly',
-            'params' => array(
-                'target' => 'assigned_user_name',
-                'value' => 'not(equal($assigned_user_name,""))',
-            ),
-        ),
-        array(
-            'name' => 'ReadOnly',
-            'params' => array(
-                'target' => 'producto_c',
-                'value' => 'not(equal($producto_c,""))',
-            ),
-        ),
     ),
     'notActions' => array(),
 

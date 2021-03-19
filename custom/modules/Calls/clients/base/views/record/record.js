@@ -46,12 +46,14 @@
         this.model.on('change:evento_campana_c', this.enableRelECamp, this);
 
         this.model.addValidationTask('resultCallReq', _.bind(this.resultCallRequerido, this));
-        this.events['click a[name=edit_button]'] = 'fechascallsymeet';
+        // this.events['click a[name=edit_button]'] = 'fechascallsymeet';
         this.model.addValidationTask('rqueridoPErsona', _.bind(this.reqPersona, this));
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         /***********  Lead Management  *************/
         this.model.addValidationTask('lead_management', _.bind(this.ConfirmCancelar, this));  //OnConfirm cancelar LEad-PRospecto contactado
         this.model.addValidationTask('lmanage_seg_reun', _.bind(this.SegundaReunion, this));  //OnConfirm cancelar Cuenta segunda llamada
+
+        this.model.on('sync', this._readOnlyDateSE, this);
     },
 
     abre: function () {
@@ -74,13 +76,14 @@
         this.enableparentname();
         this.getPersonas();
         this._disableDepResultCall();
+        this._readOnlyDateSE();
     },
 
     handleCancel: function () {
         this._super("handleCancel");
         if(self.model.get('persona_relacion_c')!="")
         {
-            self.model.set('calls_persona_relacion','Muestra')
+            self.model.set('calls_persona_relacion','Muestra');
         }
     },
 
@@ -160,10 +163,7 @@
                 this.toggleViewButtons(true);
                 this.adjustHeaderpaneFields();
             }
-
         }
-
-
     },
 
     editClicked: function () {
@@ -445,7 +445,7 @@
                         });
 
                         //Bloquear el registro completo y mostrar alerta
-                        $('.record').attr('style', 'pointer-events:none')
+                        $('.record').attr('style', 'pointer-events:none');
                     }
                 }, this)
             });
@@ -482,14 +482,14 @@
         }
     },
 
-    fechascallsymeet: function () {
-        if (this.model.get('status') == 'Held' || this.model.get('status') == 'Not Held') {
-            var self = this;
-            self.noEditFields.push('date_start');
-            self.noEditFields.push('date_end');
-            self.render();
-        }
-    },
+    // fechascallsymeet: function () {
+    //     if (this.model.get('status') == 'Held' || this.model.get('status') == 'Not Held') {
+    //         var self = this;
+    //         self.noEditFields.push('date_start');
+    //         self.noEditFields.push('date_end');
+    //         self.render();
+    //     }
+    // },
 
     valida_requeridos: function (fields, errors, callback) {
         var campos = "";
@@ -864,7 +864,7 @@
                     selfPerson.render();
                     if(idpersonas!="")
                     {
-                        selfPerson.model.set('calls_persona_relacion','nombreSelect')
+                        selfPerson.model.set('calls_persona_relacion','nombreSelect');
                     }
                 },
                 error: function (e) {
@@ -965,5 +965,13 @@
                 $('[data-name="cuenta_existente_c"]').attr('style', 'pointer-events:none;');
             } 
         }        
+    },
+
+    _readOnlyDateSE: function () {
+        //Campos de solo lectura fecha de Inicio y fecha Fin en estatus Realizada y Cancelada
+        if (this.model.get('status') == 'Held' || this.model.get('status') == 'Not Held') {
+            
+            $(".record-cell[data-type='duration']").attr('style','pointer-events:none');
+        }
     },
 })
