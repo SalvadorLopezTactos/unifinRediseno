@@ -28,9 +28,9 @@ class GetAccountProspectoContactado extends SugarApi
             $records_in = [];
 
             if ($estadoProducto != 3) {
-
-                $query = "SELECT a.id as idCuenta, a.name as nombreCuenta, a.assigned_user_id, ac.user_id_c, ac.tipo_registro_c, ac.subtipo_cuenta_c,
-                ac.tipo_registro_cuenta_c as tipoCuenta, ac.subtipo_registro_cuenta_c as subtipoCuenta,
+                //DASHLET PROSPECTO SIN SOLICITUD
+                $query = "SELECT a.id as idCuenta, a.name as nombreCuenta, a.assigned_user_id, ac.user_id_c, 
+                up.tipo_cuenta as tipoCuenta, up.subtipo_cuenta as subtipoCuenta,
                 up.name, upc.status_management_c as EstatusProducto, up.tipo_producto,
                 CASE WHEN upc.fecha_asignacion_c < DATE_SUB(now(), INTERVAL 5 DAY) THEN 0
                 WHEN upc.fecha_asignacion_c > DATE_SUB(now(), INTERVAL 5 DAY) THEN 1
@@ -42,8 +42,8 @@ class GetAccountProspectoContactado extends SugarApi
                 INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb and up.deleted = 0
                 INNER JOIN uni_productos_cstm upc on upc.id_c = up.id
                 WHERE app.id IS NULL
-                and ac.tipo_registro_cuenta_c = '2'
-                and ac.subtipo_registro_cuenta_c in ('1','2')
+                and up.tipo_cuenta = '2'
+                and up.subtipo_cuenta in ('1','2')
                 and ac.user_id_c = '{$id_user}'
                 and up.tipo_producto = '1'
                 and upc.status_management_c = '{$estadoProducto}' ";
