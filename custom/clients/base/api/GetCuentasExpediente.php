@@ -38,8 +38,9 @@ class GetCuentasExpediente extends SugarApi
 				END AS semaforo
 				FROM (
 					SELECT a.id as idCuenta, a.name as nombreCuenta, a.assigned_user_id accountassigned, ac.user_id_c,  
-					opp.id as idOpp, opp.name as oppNombre, opp.id,  ac.tipo_registro_c, ac.subtipo_cuenta_c, 
-					ac.tipo_registro_cuenta_c as tipoCuenta, ac.subtipo_registro_cuenta_c as subtipoCuenta,
+					opp.id as idOpp, opp.name as oppNombre, opp.id,  ac.tipo_registro_c, 
+                    -- ac.subtipo_cuenta_c, ac.tipo_registro_cuenta_c as tipoCuenta, ac.subtipo_registro_cuenta_c as subtipoCuenta,
+                    up.tipo_cuenta as tipoCuenta, up.subtipo_cuenta as subtipoCuenta, up.tipo_subtipo_cuenta,
 					opp.date_entered, opp.assigned_user_id oppassigned, oppcstm.tct_etapa_ddw_c, oppcstm.estatus_c,
 					oppcstm.tct_estapa_subetapa_txf_c as oppEtapa, up.name nameOpp, DATE_FORMAT( auditop.date_created, '%Y-%m-%d ') as fecha_asignacion,
 					opp.amount as monto, up.tipo_producto, upc.status_management_c as EstatusProducto,
@@ -60,7 +61,8 @@ class GetCuentasExpediente extends SugarApi
                     INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb
                     INNER JOIN uni_productos_cstm upc on upc.id_c = up.id
 					INNER JOIN opportunities_audit auditop on auditop.parent_id = opp.id
-                    WHERE  ac.tipo_registro_cuenta_c = '2' and ac.subtipo_registro_cuenta_c = '8'
+                    WHERE  -- ac.tipo_registro_cuenta_c = '2' -- and ac.subtipo_registro_cuenta_c = '8'
+                    up.tipo_cuenta = '2' and  up.subtipo_cuenta = '8'
                     and ac.user_id_c=  '{$id_user}'
                     and upc.status_management_c = '{$statusProduct}'
                     and tipo_producto = '1'
