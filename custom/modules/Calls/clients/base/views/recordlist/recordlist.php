@@ -67,27 +67,27 @@ $viewdefs['Calls']['base']['view']['recordlist'] = array(
                 'name' => 'join_button',
                 'acl_action' => 'view',
             ),
-           /* array(
+            array(
                 'type' => 'rowaction',
                 'name' => 'edit_button',
                 'icon' => 'fa-pencil',
                 'label' => 'LBL_EDIT_BUTTON',
                 'event' => 'list:editrow:fire',
                 'acl_action' => 'edit',
-            ),*/
+            ),
             array(
                 'type' => 'follow',
                 'name' => 'follow_button',
                 'event' => 'list:follow:fire',
                 'acl_action' => 'view',
             ),
-            /*array(
+            array(
                 'type' => 'rowaction',
                 'icon' => 'fa-trash-o',
                 'event' => 'list:deleterow:fire',
                 'label' => 'LBL_DELETE_BUTTON',
                 'acl_action' => 'delete',
-            ),*/
+            ),
             array(
                 'type' => 'deleterecurrencesbutton',
                 'name' => 'delete_recurrence_button',

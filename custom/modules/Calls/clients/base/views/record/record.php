@@ -92,7 +92,7 @@ array (
               array (
                 'type' => 'divider',
               ),
-              /*8 =>
+              8 =>
               array (
                 'type' => 'rowaction',
                 'event' => 'button:delete_button:click',
@@ -106,7 +106,7 @@ array (
                 'name' => 'delete_recurrence_button',
                 'label' => 'LBL_REMOVE_ALL_RECURRENCES',
                 'acl_action' => 'delete',
-              ),*/
+              ),
             ),
           ),
           3 => 
