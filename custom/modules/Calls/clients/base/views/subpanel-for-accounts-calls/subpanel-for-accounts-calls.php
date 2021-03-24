@@ -92,12 +92,12 @@ $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
         'icon' => 'fa-eye',
         'acl_action' => 'view',
       ),
-     /* 2 =>
+      2 =>
       array (
         'type' => 'unlink-action',
         'icon' => 'fa-chain-broken',
         'label' => 'LBL_UNLINK_BUTTON',
-      ),*/
+      ),
     ),
   ),
   'type' => 'subpanel-list',
