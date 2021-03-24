@@ -136,16 +136,16 @@ array (
                 'acl_action' => 'view',
                 'class' => 'jcmx1',
               ),
+              // 12 => 
+              // array (
+              //   'type' => 'rowaction',
+              //   'event' => 'button:conversion_cliente_uniclick:click',
+              //   'name' => 'clienteuniclick',
+              //   'label' => 'Conversión Cliente Uniclick',
+              //   'acl_action' => 'view',
+              //   'class' => 'jcmx1',
+              // ),
               12 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:conversion_cliente_uniclick:click',
-                'name' => 'clienteuniclick',
-                'label' => 'Conversión Cliente Uniclick',
-                'acl_action' => 'view',
-                'class' => 'jcmx1',
-              ),
-              13 => 
               array (
                 'name' => 'send_survey',
                 'type' => 'rowaction',
@@ -153,7 +153,7 @@ array (
                 'acl_action' => 'send_survey',
                 'event' => 'button:send_survey:click',
               ),
-              14 => 
+              13 => 
               array (
                 'name' => 'send_poll',
                 'type' => 'rowaction',
@@ -161,14 +161,14 @@ array (
                 'acl_action' => 'send_poll',
                 'event' => 'button:send_poll:click',
               ),
-              15 => 
+              14 => 
               array (
                 'name' => 'get_account_asesor',
                 'type' => 'rowaction',
                 'label' => 'Quiero esta Cuenta',
                 'event' => 'button:get_account_asesor:click',
               ),
-              16 => 
+              15 => 
               array (
                 'name' => 'send_account_asesor',
                 'type' => 'rowaction',

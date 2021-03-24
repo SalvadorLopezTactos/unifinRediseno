@@ -1,5 +1,5 @@
 <?php
- // created: 2021-01-06 19:08:08
+ // created: 2021-03-22 16:47:40
 $dictionary['S_seguros']['fields']['ejecutivo_c']['labelValue']='Ejecutivo Asignado o KAM';
 $dictionary['S_seguros']['fields']['ejecutivo_c']['dependency']='';
 $dictionary['S_seguros']['fields']['ejecutivo_c']['visibility_grid']=array (

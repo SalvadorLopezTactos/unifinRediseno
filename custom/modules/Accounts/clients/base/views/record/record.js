@@ -1357,7 +1357,7 @@
         var myField = this.getField("regresalead");
         var myField1 = this.getField("prospectocontactado");
         var myField2 = this.getField("conviertelead");
-        var myField3 = this.getField("clienteuniclick");
+        // var myField3 = this.getField("clienteuniclick");
         if (myField) {
             myField.listenTo(myField, "render", function () {
                 var leasingprod = Oproductos.productos.tct_tipo_cuenta_l_c;
@@ -1440,21 +1440,21 @@
                 }
             });
         }
-        if (myField3) {
-            myField3.listenTo(myField3, "render", function () {
-                var conversioncUC = App.user.attributes.tct_alta_credito_simple_chk_c;
-                var userprod = App.user.attributes.productos_c;
-                var logueado = App.user.id;
-                var uniclickval = Oproductos.productos.tct_tipo_cuenta_uc_c;
-                var asesorUC = this.model.get('user_id7_c');
-                myField3.hide();
-                if ((uniclickval != "3" && userprod.includes('8') && asesorUC == logueado && conversioncUC == 1)) {
-                    myField3.show();
-                } else {
-                    myField3.hide();
-                }
-            });
-        }
+        // if (myField3) {
+        //     myField3.listenTo(myField3, "render", function () {
+        //         var conversioncUC = App.user.attributes.tct_alta_credito_simple_chk_c;
+        //         var userprod = App.user.attributes.productos_c;
+        //         var logueado = App.user.id;
+        //         var uniclickval = Oproductos.productos.tct_tipo_cuenta_uc_c;
+        //         var asesorUC = this.model.get('user_id7_c');
+        //         myField3.hide();
+        //         if ((uniclickval != "3" && userprod.includes('8') && asesorUC == logueado && conversioncUC == 1)) {
+        //             myField3.show();
+        //         } else {
+        //             myField3.hide();
+        //         }
+        //     });
+        // }
     },
 
     hideButton_Conversion_change: function () {
@@ -1480,7 +1480,7 @@
         $('[name="regresalead"]').hide();
         $('[name="prospectocontactado"]').hide();
         $('[name="conviertelead"]').hide();
-        $('[name="clienteuniclick"]').hide();
+        // $('[name="clienteuniclick"]').hide();
 
         //Evaluación para mostrar botones
         /*
@@ -1522,12 +1522,12 @@
          * Convertir Cliente Uniclick
          * tipo_registro_cuenta_c = Lead
          */
-        if ((uniclickval != "3" && userprod.includes('8') && asesorUC == logueado && conversioncUC == 1)) {
-            $('[name="regresalead"]').hide();
-            $('[name="clienteuniclick"]').show();
-            $('[name="conviertelead"]').hide();
-            $('[name="prospectocontactado"]').hide();
-        }
+        // if ((uniclickval != "3" && userprod.includes('8') && asesorUC == logueado && conversioncUC == 1)) {
+        //     $('[name="regresalead"]').hide();
+        //     $('[name="clienteuniclick"]').show();
+        //     $('[name="conviertelead"]').hide();
+        //     $('[name="prospectocontactado"]').hide();
+        // }
     },
 
     /* @author F. Javier Garcia S. 10/07/2018
@@ -1924,7 +1924,7 @@
         this.context.on('button:Historial_cotizaciones_button:click', this.historialCotizacionesClicked, this);
         this.context.on('button:regresa_lead:click', this.regresa_leadClicked, this);
         this.context.on('button:prospecto_contactado:click', this.prospectocontactadoClicked, this);
-        this.context.on('button:conversion_cliente_uniclick:click', this.clienteuniclickClicked, this);
+        // this.context.on('button:conversion_cliente_uniclick:click', this.clienteuniclickClicked, this);
         this.context.on('button:cancel_button:click', this.handleCancel, this);
         // this.context.on('button:save_button:click', this.borraTel, this);
         //this.context.on('button:prospecto_contactado:click',this.validaContactado, this);  //se añade validación para validar campos al convertir prospecto contactado.
@@ -5379,156 +5379,157 @@
         }
         callback(null, fields, errors);
     },
-    clienteuniclickClicked: function () {
-        App.alert.show('convierte_Cliente_uniclick', {
-            level: 'process',
-            title: 'Convirtiendo cuenta, por favor espere',
-        });
-        var necesarios = "";
 
-        if (this.model.get('origen_cuenta_c') == "" || this.model.get('origen_cuenta_c') == null) {
-            necesarios = necesarios + '<b>Origen<br></b>';
-        }
-        if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null) {
-            necesarios = necesarios + '<b>RFC<br></b>';
-        }
-        //Requerido Actividad Economica - antes macro sector
-        if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
-            necesarios = necesarios + '<b>Actividad Económica<br></b>';
-        }
-        //Requerido Sector Económico custom
-        // if ($('.list_se').select2('val') == "" || $('.list_se')[0].innerText.trim() == "" || $('.list_se').select2('val') == null) {
-        //     necesarios = necesarios + '<b>Sector Económico<br></b>';
-        // }
-        if (this.model.get('ventas_anuales_c') == "" || this.model.get('ventas_anuales_c') == null) {
-            necesarios = necesarios + '<b>Ventas Anuales<br></b>';
-        }
-        if (this.model.get('activo_fijo_c') == "" || this.model.get('activo_fijo_c') == null) {
-            necesarios = necesarios + '<b>Activo Fijo<br></b>';
-        }
-        if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.oTelefonos.telefono)) {
-            necesarios = necesarios + '<b>Al menos un correo electr\u00F3nico o un tel\u00E9fono<br></b>';
-        }
-        if (_.isEmpty(this.oDirecciones.direccion)) {
-            necesarios = necesarios + '<b>Dirección<br></b>';
-        } else {
-            var direcciones = 0;
-            var tipodireccion = this.oDirecciones.direccion;
-            if (tipodireccion.length > 0) {
-                for (var i = 0; i < tipodireccion.length; i++) {
-                    if (tipodireccion[i].inactivo == 1) {
-                        direcciones++;
-                    }
-                }
-            }
-            if (direcciones == tipodireccion.length) {
-                necesarios = necesarios + '<b>Dirección<br></b>';
-            }
-        }
-        if (this.model.get('tipodepersona_c') != "Persona Moral") {
-            if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
-                necesarios = necesarios + '<b>Primer Nombre</b><br>';
-            }
-            if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
-                necesarios = necesarios + '<b>Apellido Paterno</b><br>';
-            }
-            if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == null) {
-                necesarios = necesarios + '<b>Apellido Materno</b><br>';
-            }
-            if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
-                necesarios = necesarios + '<b>Fecha de Nacimiento<br></b>';
-            }
-            if (this.model.get('genero_c') == "" || this.model.get('genero_c') == null) {
-                necesarios = necesarios + '<b>G\u00E9nero</b><br>';
-            }
-            if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
-                necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
-            }
-            if (this.model.get('ifepasaporte_c') == "" || this.model.get('ifepasaporte_c') == null) {
-                necesarios = necesarios + '<b>IFE/Pasaporte<br></b>';
-            }
-            if (this.model.get('curp_c') == "" || this.model.get('curp_c') == null) {
-                necesarios = necesarios + '<b>Curp<br></b>';
-            }
-            if (this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null) {
-                necesarios = necesarios + '<b>Estado Civil<br></b>';
-            }
-            if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == null) {
-                necesarios = necesarios + '<b>Profesión<br></b>';
-            }
-        } else {
-            if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
-                necesarios = necesarios + '<b>Razón Social<br></b>';
-            }
-            if (this.model.get('nombre_comercial_c') == "" || this.model.get('nombre_comercial_c') == null) {
-                necesarios = necesarios + '<b>Nombre Comercial<br></b>';
-            }
-            if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
-                necesarios = necesarios + '<b>Fecha Constitutiva<br></b>';
-            }
-            if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
-                necesarios = necesarios + '<b>Pa\u00EDs de Constitución</b><br>';
-            }
-        }
-        if (necesarios != "") {
-            app.alert.dismiss('convierte_Cliente_uniclick');
-            app.alert.show("Campos Faltantes", {
-                level: "error",
-                title: "Faltan los siguientes campos para poder convertir la cuenta a Cliente: <br><br>" + necesarios,
-                autoClose: false
-            });
-            return;
-        } else {
-            if (Oproductos.productos.tipo_registro_uc != '3') {
-                var productousuario = App.user.attributes.productos_c;
+    // clienteuniclickClicked: function () {
+    //     App.alert.show('convierte_Cliente_uniclick', {
+    //         level: 'process',
+    //         title: 'Convirtiendo cuenta, por favor espere',
+    //     });
+    //     var necesarios = "";
 
-                // Actualiza Cuenta
-                if (this.model.get('tipo_registro_cuenta_c') != "3") {
-                    this.model.set("tipo_registro_cuenta_c", "3");
-                    this.model.set("subtipo_registro_cuenta_c", "18");
-                    this.model.set("tct_tipo_subtipo_txf_c", "CLIENTE CON LÍNEA VIGENTE");
-                    Oproductos.productos.tct_tipo_cuenta_uc_c = '3';
-                    Oproductos.productos.tct_subtipo_uc_txf_c = '18';
-                    this.model.save();
+    //     if (this.model.get('origen_cuenta_c') == "" || this.model.get('origen_cuenta_c') == null) {
+    //         necesarios = necesarios + '<b>Origen<br></b>';
+    //     }
+    //     if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null) {
+    //         necesarios = necesarios + '<b>RFC<br></b>';
+    //     }
+    //     //Requerido Actividad Economica - antes macro sector
+    //     if ($('.list_ae').select2('val') == "0" || $('.list_ae').select2('val') == "" || $('.list_ae')[0].innerText.trim() == "" || $('.list_ae').select2('val') == null) {
+    //         necesarios = necesarios + '<b>Actividad Económica<br></b>';
+    //     }
+    //     //Requerido Sector Económico custom
+    //     // if ($('.list_se').select2('val') == "" || $('.list_se')[0].innerText.trim() == "" || $('.list_se').select2('val') == null) {
+    //     //     necesarios = necesarios + '<b>Sector Económico<br></b>';
+    //     // }
+    //     if (this.model.get('ventas_anuales_c') == "" || this.model.get('ventas_anuales_c') == null) {
+    //         necesarios = necesarios + '<b>Ventas Anuales<br></b>';
+    //     }
+    //     if (this.model.get('activo_fijo_c') == "" || this.model.get('activo_fijo_c') == null) {
+    //         necesarios = necesarios + '<b>Activo Fijo<br></b>';
+    //     }
+    //     if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.oTelefonos.telefono)) {
+    //         necesarios = necesarios + '<b>Al menos un correo electr\u00F3nico o un tel\u00E9fono<br></b>';
+    //     }
+    //     if (_.isEmpty(this.oDirecciones.direccion)) {
+    //         necesarios = necesarios + '<b>Dirección<br></b>';
+    //     } else {
+    //         var direcciones = 0;
+    //         var tipodireccion = this.oDirecciones.direccion;
+    //         if (tipodireccion.length > 0) {
+    //             for (var i = 0; i < tipodireccion.length; i++) {
+    //                 if (tipodireccion[i].inactivo == 1) {
+    //                     direcciones++;
+    //                 }
+    //             }
+    //         }
+    //         if (direcciones == tipodireccion.length) {
+    //             necesarios = necesarios + '<b>Dirección<br></b>';
+    //         }
+    //     }
+    //     if (this.model.get('tipodepersona_c') != "Persona Moral") {
+    //         if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
+    //             necesarios = necesarios + '<b>Primer Nombre</b><br>';
+    //         }
+    //         if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
+    //             necesarios = necesarios + '<b>Apellido Paterno</b><br>';
+    //         }
+    //         if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == null) {
+    //             necesarios = necesarios + '<b>Apellido Materno</b><br>';
+    //         }
+    //         if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
+    //             necesarios = necesarios + '<b>Fecha de Nacimiento<br></b>';
+    //         }
+    //         if (this.model.get('genero_c') == "" || this.model.get('genero_c') == null) {
+    //             necesarios = necesarios + '<b>G\u00E9nero</b><br>';
+    //         }
+    //         if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
+    //             necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
+    //         }
+    //         if (this.model.get('ifepasaporte_c') == "" || this.model.get('ifepasaporte_c') == null) {
+    //             necesarios = necesarios + '<b>IFE/Pasaporte<br></b>';
+    //         }
+    //         if (this.model.get('curp_c') == "" || this.model.get('curp_c') == null) {
+    //             necesarios = necesarios + '<b>Curp<br></b>';
+    //         }
+    //         if (this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null) {
+    //             necesarios = necesarios + '<b>Estado Civil<br></b>';
+    //         }
+    //         if (this.model.get('profesion_c') == "" || this.model.get('profesion_c') == null) {
+    //             necesarios = necesarios + '<b>Profesión<br></b>';
+    //         }
+    //     } else {
+    //         if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
+    //             necesarios = necesarios + '<b>Razón Social<br></b>';
+    //         }
+    //         if (this.model.get('nombre_comercial_c') == "" || this.model.get('nombre_comercial_c') == null) {
+    //             necesarios = necesarios + '<b>Nombre Comercial<br></b>';
+    //         }
+    //         if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
+    //             necesarios = necesarios + '<b>Fecha Constitutiva<br></b>';
+    //         }
+    //         if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
+    //             necesarios = necesarios + '<b>Pa\u00EDs de Constitución</b><br>';
+    //         }
+    //     }
+    //     if (necesarios != "") {
+    //         app.alert.dismiss('convierte_Cliente_uniclick');
+    //         app.alert.show("Campos Faltantes", {
+    //             level: "error",
+    //             title: "Faltan los siguientes campos para poder convertir la cuenta a Cliente: <br><br>" + necesarios,
+    //             autoClose: false
+    //         });
+    //         return;
+    //     } else {
+    //         if (Oproductos.productos.tipo_registro_uc != '3') {
+    //             var productousuario = App.user.attributes.productos_c;
 
-                }
-                // Actualiza Productos
-                _.each(Productos, function (value, key) {
-                    var idprod = '';
-                    if (app.user.id == this.model.get('user_id7_c') && Productos[key].tipo_producto == 8) {
-                        idprod = Productos[key].id;
-                    }
-                    if (idprod) {
-                        var params = {};
-                        params["tipo_cuenta"] = "3";
-                        params["subtipo_cuenta"] = "18";
-                        params["tipo_subtipo_cuenta"] = "CLIENTE CON LÍNEA VIGENTE";
-                        var uni = app.api.buildURL('uni_Productos/' + idprod, null, null);
-                        app.api.call('update', uni, params, {
-                            success: _.bind(function (data) {
-                                v360.ResumenCliente.uniclick.tipo_cuenta = '3';
-                                v360.ResumenCliente.uniclick.subtipo_cuenta = '18';
-                                v360.ResumenCliente.general_cliente.tipo = 'CLIENTE CON LÍNEA VIGENTE';
-                                app.alert.dismiss('convierte_Cliente_uniclick');
-                                app.alert.show('errorAlert', {
-                                    level: 'success',
-                                    messages: "Se ha realizado la conversión correctamente.",
-                                });
+    //             // Actualiza Cuenta
+    //             if (this.model.get('tipo_registro_cuenta_c') != "3") {
+    //                 this.model.set("tipo_registro_cuenta_c", "3");
+    //                 this.model.set("subtipo_registro_cuenta_c", "18");
+    //                 this.model.set("tct_tipo_subtipo_txf_c", "CLIENTE CON LÍNEA VIGENTE");
+    //                 Oproductos.productos.tct_tipo_cuenta_uc_c = '3';
+    //                 Oproductos.productos.tct_subtipo_uc_txf_c = '18';
+    //                 this.model.save();
 
-                                v360.render();
-                                Oproductos.render();
-                                //Deja activa la pestaña de la vista360
-                                $('li.tab.LBL_RECORDVIEW_PANEL8').removeAttr("style");
-                                $("#recordTab>li.tab").removeClass('active');
-                                $('li.tab.LBL_RECORDVIEW_PANEL8').addClass("active");
-                            })
-                        });
-                    }
-                }, this);
+    //             }
+    //             // Actualiza Productos
+    //             _.each(Productos, function (value, key) {
+    //                 var idprod = '';
+    //                 if (app.user.id == this.model.get('user_id7_c') && Productos[key].tipo_producto == 8) {
+    //                     idprod = Productos[key].id;
+    //                 }
+    //                 if (idprod) {
+    //                     var params = {};
+    //                     params["tipo_cuenta"] = "3";
+    //                     params["subtipo_cuenta"] = "18";
+    //                     params["tipo_subtipo_cuenta"] = "CLIENTE CON LÍNEA VIGENTE";
+    //                     var uni = app.api.buildURL('uni_Productos/' + idprod, null, null);
+    //                     app.api.call('update', uni, params, {
+    //                         success: _.bind(function (data) {
+    //                             v360.ResumenCliente.uniclick.tipo_cuenta = '3';
+    //                             v360.ResumenCliente.uniclick.subtipo_cuenta = '18';
+    //                             v360.ResumenCliente.general_cliente.tipo = 'CLIENTE CON LÍNEA VIGENTE';
+    //                             app.alert.dismiss('convierte_Cliente_uniclick');
+    //                             app.alert.show('errorAlert', {
+    //                                 level: 'success',
+    //                                 messages: "Se ha realizado la conversión correctamente.",
+    //                             });
 
-            }
-        }
-    },
+    //                             v360.render();
+    //                             Oproductos.render();
+    //                             //Deja activa la pestaña de la vista360
+    //                             $('li.tab.LBL_RECORDVIEW_PANEL8').removeAttr("style");
+    //                             $("#recordTab>li.tab").removeClass('active');
+    //                             $('li.tab.LBL_RECORDVIEW_PANEL8').addClass("active");
+    //                         })
+    //                     });
+    //                 }
+    //             }, this);
+
+    //         }
+    //     }
+    // },
 
     get_analizate: function () {
         //Extiende This

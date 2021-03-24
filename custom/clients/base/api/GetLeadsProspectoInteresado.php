@@ -28,9 +28,9 @@ class GetLeadsProspectoInteresado extends SugarApi
             $records_in = [];
 
             if ($statusProduct != 3) {
-
-                $query = "SELECT a.id as idCuenta, a.name as nombreCuenta, a.assigned_user_id, ac.user_id_c, ac.tipo_registro_c, ac.subtipo_cuenta_c,
-                ac.tipo_registro_cuenta_c as tipoCuenta, ac.subtipo_registro_cuenta_c as subtipoCuenta, opp.id as idOpp, opp.name as oppNombre,
+                //DASHLET SOLICITUDES SIN PROCESO
+                $query = "SELECT a.id as idCuenta, a.name as nombreCuenta, a.assigned_user_id, ac.user_id_c,
+                up.tipo_cuenta as tipoCuenta, up.subtipo_cuenta as subtipoCuenta, opp.id as idOpp, opp.name as oppNombre,
                 opp.date_entered, opp.assigned_user_id, oppcstm.tct_etapa_ddw_c, oppcstm.tct_estapa_subetapa_txf_c as oppEtapa,
                 up.name, upc.status_management_c as EstatusProducto, up.tipo_producto, oppcstm.tipo_producto_c,
                 CASE WHEN opp.date_entered < DATE_SUB(now(), INTERVAL 5 DAY) THEN 0
@@ -44,8 +44,8 @@ class GetLeadsProspectoInteresado extends SugarApi
                 INNER JOIN accounts_uni_productos_1_c aup on aup.accounts_uni_productos_1accounts_ida = ac.id_c
                 INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb and up.deleted = 0
                 INNER JOIN uni_productos_cstm upc on upc.id_c = up.id
-                WHERE ac.tipo_registro_cuenta_c = '2'
-                and ac.subtipo_registro_cuenta_c in ('7','10')
+                WHERE up.tipo_cuenta = '2'
+                and up.subtipo_cuenta in ('7','10')
                 and ac.user_id_c= '{$id_user}'
                 and oppcstm.tct_etapa_ddw_c = 'SI'
                 and oppcstm.estatus_c != 'K'
