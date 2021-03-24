@@ -813,12 +813,13 @@
             var idUsrAsignado = person.model.get('assigned_user_id');
             var puestosDispo = app.lang.getAppListStrings('puestos_llamadas_list');
             var arrayPuestos = [];
+            var status=person.model.get('status');
             Object.keys(puestosDispo).forEach(function (key) {
                 arrayPuestos.push(Number(key));
             });
             var puesto_usr = Number(app.user.attributes.puestousuario_c);
 
-            if (arrayPuestos.includes(puesto_usr) && idUsrFirmado == idUsrAsignado && tipoCuenta == 'Persona Moral' && this.model.get('persona_relacion_c') == "") {
+            if (arrayPuestos.includes(puesto_usr) && status=='Held'  && idUsrFirmado == idUsrAsignado && tipoCuenta == 'Persona Moral' && this.model.get('persona_relacion_c') == "") {
                 app.alert.show("Falta Persona", {
                     level: "error",
                     title: "Hace falta completar la siguiente información: <br> Persona con quien se atiende la llamada. <br> Nota: Si no cuenta con algún registro, favor de agregar uno en el módulo de RELACIÓN.",
@@ -896,7 +897,7 @@
                         var idUsrFirmado = app.user.attributes.id;
                         var idUsrLeading = data.user_id_c;
                         var idUsrAsignado = person.model.get('assigned_user_id');
-                        if (idUsrFirmado != idUsrAsignado || idUsrFirmado != idUsrLeading) {
+                        if (idUsrFirmado != idUsrAsignado ) {
                             $('[data-name="calls_persona_relacion"]').attr('style', 'pointer-events:none')
                         }
                     }
