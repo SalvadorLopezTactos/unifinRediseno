@@ -15,7 +15,7 @@
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         this.model.on("change:tct_conferencia_chk_c", _.bind(this.ocultaConferencia, this));
         this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicialCall, this));
-        this.model.addValidationTask('rqueridoPErsona', _.bind(this.reqPersona, this));
+        //this.model.addValidationTask('rqueridoPErsona', _.bind(this.reqPersona, this));
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         this.on('render', this.hidePErsonaEdit, this);
     },
@@ -265,12 +265,12 @@
                 // $('.divPersonasRel').show();
                 person.$('[data-name="persona_relacion_c"]').hide()
                 // Valida si el usuario firmado pertenece a la cuenta o a la llamada
-                var idUsrFirmado = App.user.attributes.id;
+               /* var idUsrFirmado = App.user.attributes.id;
                 var idUsrLeading = person.model.attributes.parent.user_id_c;
                 var idUsrAsignado = person.model.get('assigned_user_id');
                 if (idUsrFirmado != idUsrAsignado || idUsrFirmado != idUsrLeading) {
                     $('[data-name="calls_persona_relacion"]').attr('style', 'pointer-events:none')
-                }
+                }*/
             }
             else {
                 person.$('[data-name="calls_persona_relacion"]').hide();
