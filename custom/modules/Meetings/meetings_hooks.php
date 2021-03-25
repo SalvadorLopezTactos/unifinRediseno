@@ -598,10 +598,11 @@ class Meetings_Hooks
                 $relateProducts = $beanAccount->accounts_uni_productos_1->getBeans($beanAccount->id,array('disable_row_level_security' => true));
                 foreach ($relateProducts as $product) {
                     $tipoCuenta = $product->tipo_cuenta;
+                    $subtipoCuenta = $product->subtipo_cuenta;
                     $tipoProducto = $product->tipo_producto;
                     switch ($tipoProducto) {
                         case '1': //Leasing
-                            if($beanAccount->user_id_c == $bean->assigned_user_id && ($tipoCuenta == '2' || $tipoCuenta == '')){
+                            if($beanAccount->user_id_c == $bean->assigned_user_id && (($tipoCuenta == '2' && $subtipoCuenta == '1') || ($tipoCuenta == '1' && $subtipoCuenta == '5'))) {
                                 $product->tipo_cuenta = '2';
                                 $product->subtipo_cuenta = '2';
                                 $product->tipo_subtipo_cuenta = 'PROSPECTO CONTACTADO';
@@ -609,7 +610,7 @@ class Meetings_Hooks
                             }
                             break;
                         case '3': //Credito-Automotriz
-                            if($beanAccount->user_id2_c == $bean->assigned_user_id && ($tipoCuenta == '2' || $tipoCuenta == '')){
+                            if($beanAccount->user_id2_c == $bean->assigned_user_id && (($tipoCuenta == '2' && $subtipoCuenta == '1') || ($tipoCuenta == '1' && $subtipoCuenta == '5'))) {
                                 $product->tipo_cuenta = '2';
                                 $product->subtipo_cuenta = '2';
                                 $product->tipo_subtipo_cuenta = 'PROSPECTO CONTACTADO';
@@ -617,7 +618,7 @@ class Meetings_Hooks
                             }
                             break;
                         case '4': //Factoraje
-                            if($beanAccount->user_id1_c == $bean->assigned_user_id && ($tipoCuenta == '2' || $tipoCuenta == '')){
+                            if($beanAccount->user_id1_c == $bean->assigned_user_id && (($tipoCuenta == '2' && $subtipoCuenta == '1') || ($tipoCuenta == '1' && $subtipoCuenta == '5'))) {
                                 $product->tipo_cuenta = '2';
                                 $product->subtipo_cuenta = '2';
                                 $product->tipo_subtipo_cuenta = 'PROSPECTO CONTACTADO';
@@ -625,7 +626,7 @@ class Meetings_Hooks
                             }
                             break;
                         case '6': //Fleet
-                            if($beanAccount->user_id6_c == $bean->assigned_user_id && ($tipoCuenta == '2' || $tipoCuenta == '')){
+                            if($beanAccount->user_id6_c == $bean->assigned_user_id && (($tipoCuenta == '2' && $subtipoCuenta == '1') || ($tipoCuenta == '1' && $subtipoCuenta == '5'))) {
                                 $product->tipo_cuenta = '2';
                                 $product->subtipo_cuenta = '2';
                                 $product->tipo_subtipo_cuenta = 'PROSPECTO CONTACTADO';
@@ -633,7 +634,7 @@ class Meetings_Hooks
                             }
                             break;
                         case '7': //Credito SOS
-                            if($beanAccount->user_id_c == $bean->assigned_user_id && ($tipoCuenta == '2' || $tipoCuenta == '')){
+                            if($beanAccount->user_id_c == $bean->assigned_user_id && (($tipoCuenta == '2' && $subtipoCuenta == '1') || ($tipoCuenta == '1' && $subtipoCuenta == '5'))) {
                                 $product->tipo_cuenta = '2';
                                 $product->subtipo_cuenta = '2';
                                 $product->tipo_subtipo_cuenta = 'PROSPECTO CONTACTADO';
@@ -641,7 +642,7 @@ class Meetings_Hooks
                             }
                             break;
                         case '8': //Uniclick
-                            if($beanAccount->user_id7_c == $bean->assigned_user_id && ($tipoCuenta == '2' || $tipoCuenta == '')){
+                            if($beanAccount->user_id7_c == $bean->assigned_user_id && (($tipoCuenta == '2' && $subtipoCuenta == '1') || ($tipoCuenta == '1' && $subtipoCuenta == '5'))) {
                                 $product->tipo_cuenta = '2';
                                 $product->subtipo_cuenta = '2';
                                 $product->tipo_subtipo_cuenta = 'PROSPECTO CONTACTADO';
@@ -649,7 +650,7 @@ class Meetings_Hooks
                             }
                             break;
                         case '9': //Unilease
-                          if($beanAccount->user_id7_c == $bean->assigned_user_id && ($tipoCuenta == '2' || $tipoCuenta == '')){
+                          if($beanAccount->user_id7_c == $bean->assigned_user_id && (($tipoCuenta == '2' && $subtipoCuenta == '1') || ($tipoCuenta == '1' && $subtipoCuenta == '5'))) {
                               $product->tipo_cuenta = '2';
                               $product->subtipo_cuenta = '2';
                               $product->tipo_subtipo_cuenta = 'PROSPECTO CONTACTADO';
@@ -657,7 +658,7 @@ class Meetings_Hooks
                           }
                           break;
                         case '2': //Crédito Simple
-                            if($beanAccount->user_id_c == $bean->assigned_user_id && ($tipoCuenta == '2' || $tipoCuenta == '')){
+                            if($beanAccount->user_id_c == $bean->assigned_user_id && (($tipoCuenta == '2' && $subtipoCuenta == '1') || ($tipoCuenta == '1' && $subtipoCuenta == '5'))) {
                                 $product->tipo_cuenta = '2';
                                 $product->subtipo_cuenta = '2';
                                 $product->tipo_subtipo_cuenta = 'PROSPECTO CONTACTADO';
@@ -665,7 +666,7 @@ class Meetings_Hooks
                             }
                             break;
                         case '12': //Crédito Revolvente
-                            if($beanAccount->user_id7_c == $bean->assigned_user_id && ($tipoCuenta == '2' || $tipoCuenta == '')){
+                            if($beanAccount->user_id7_c == $bean->assigned_user_id && (($tipoCuenta == '2' && $subtipoCuenta == '1') || ($tipoCuenta == '1' && $subtipoCuenta == '5'))) {
                                 $product->tipo_cuenta = '2';
                                 $product->subtipo_cuenta = '2';
                                 $product->tipo_subtipo_cuenta = 'PROSPECTO CONTACTADO';
@@ -678,7 +679,8 @@ class Meetings_Hooks
                 }
             }
             //Actualiza Tipo y subtipo General: Prospecto Contactado
-            if($beanAccount->tipo_registro_cuenta_c == '2'){
+            //Sólo actualiza si Tipo y Subtipo de registro general es: Prospecto Sin Contactar o Lead en Calificación
+            if(($beanAccount->tipo_registro_cuenta_c == '2' && $beanAccount->subtipo_registro_cuenta_c == '1') || ($beanAccount->tipo_registro_cuenta_c == '1' && $beanAccount->subtipo_registro_cuenta_c == '5')){
                 $beanAccount->tipo_registro_cuenta_c = '2';
                 $beanAccount->subtipo_registro_cuenta_c = '2';
                 $beanAccount->tct_prospecto_contactado_chk_c = 1;
@@ -687,7 +689,7 @@ class Meetings_Hooks
           }
         }
 	  }
-     
+
     function ConvierteLead($bean, $event, $arguments)
     {
  			$parent_id = $bean->parent_id;
@@ -701,7 +703,7 @@ class Meetings_Hooks
         $GLOBALS['log']->fatal('Entro conversión');
         require_once("custom/clients/base/api/check_duplicateAccounts.php");
         $filter_arguments = array("id" => $parent_id);
-        $callApi = new check_duplicateAccounts();        
+        $callApi = new check_duplicateAccounts();
         $convert = $callApi->validation_process(null,$filter_arguments);
 		    $beanLead = BeanFactory::getBean('Leads', $parent_id);
    			$beanLead->description = $convert["mensaje"];
