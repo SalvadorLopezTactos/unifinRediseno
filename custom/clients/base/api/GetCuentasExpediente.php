@@ -68,7 +68,7 @@ class GetCuentasExpediente extends SugarApi
                     and tipo_producto = '1'
 					and auditop.field_name='estatus_c'
 					and auditop.after_value_string='PE'
-                    and oppcstm.tct_etapa_ddw_c = 'P'
+                    -- and oppcstm.tct_etapa_ddw_c = 'P'
 					and oppcstm.estatus_c <> 'K'
                     and a.deleted = 0 and up.deleted = 0 
                 ) as DATOS_EXP ";
