@@ -7,6 +7,7 @@
     clase_list: null,
     subrama_list: null,
     rama_list: null,
+    macro_cnbv_list: null,
 
     initialize: function (options) {
         //Inicializa campo custom
@@ -216,7 +217,7 @@
                         //Etiquetas de los campos CNBV para Input del HBS en edit
                         clasf_sectorial.ActividadEconomica.label_subsector = app.lang.getAppListStrings('subsector_list')[clasf_sectorial.ActividadEconomica.sse.id];
                         clasf_sectorial.ActividadEconomica.label_sector = app.lang.getAppListStrings('sector_list')[clasf_sectorial.ActividadEconomica.se.id];
-                        clasf_sectorial.ActividadEconomica.label_macro = app.lang.getAppListStrings('macro_list')[clasf_sectorial.ActividadEconomica.ms.id];
+                        clasf_sectorial.ActividadEconomica.label_macro = app.lang.getAppListStrings('macro_cnbv_list')[clasf_sectorial.ActividadEconomica.ms.id];
 
                         //Envia los valores de los campos de INEGI a la vista HBS
                         clasf_sectorial.ResumenCliente.inegi.inegi_clase = dataInegi['id_clase_inegi'];
@@ -270,6 +271,7 @@
         clasf_sectorial.subsector_list = app.lang.getAppListStrings('subsector_list');
         clasf_sectorial.sector_list = app.lang.getAppListStrings('sector_list');
         clasf_sectorial.macro_list = app.lang.getAppListStrings('macro_list');
+        clasf_sectorial.macro_cnbv_list = app.lang.getAppListStrings('macro_cnbv_list');
 
         //LISTAS INEGI
         clasf_sectorial.clase_list = app.lang.getAppListStrings('clase_list');
