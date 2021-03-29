@@ -20,11 +20,10 @@ class getDireccionCPQR extends SugarApi
             'retrieve' => array(
                 'reqType' => 'GET',
                 'noLoginRequired' => true,
-                'path' => array('DireccionesQR', '?', '?', '?', '?'),
-                'pathVars' => array('module', 'cp', 'indice', 'colonia_rfc', 'ciudad_rfc'),
+                'path' => array('DireccionesQR', '?', '?', '?', '?','?'),
+                'pathVars' => array('module', 'cp', 'indice', 'colonia_rfc', 'ciudad_rfc','entidad_rfc'),
                 'method' => 'getAddressByCPQR',
-                'shortHelp' => 'Método GET para obtener información relacionada al 
-                Código Postal.',
+                'shortHelp' => 'Método GET para obtener información relacionada al Código Postal.',
                 'longHelp' => 'y compara que la colonia y cuidad exista. En caso contrario la agrega como nueva',
             ),
 
@@ -37,20 +36,62 @@ class getDireccionCPQR extends SugarApi
         $colonia_QR = $args['colonia_rfc'];
         $cod_postal=$args['cp'];
         $ciudad_QR = $args['ciudad_rfc'];
+        $estado_QR = $args['entidad_rfc'];
         $call_api = new GetDireccionesCP();
+        //$GLOBALS['log']->fatal('args',$args);
         $resultado = $call_api->getAddressByCP($api, $args);
+        //$GLOBALS['log']->fatal('resultado',$resultado);
         $arr_colonias = $resultado['colonias'];
         $pais_id = intval(substr($resultado['idCP'], 0, 3));
         $estado_id = intval(substr($resultado['idCP'], 3, 3));
         $municipio_id = intval(substr($resultado['idCP'], 6, 3));
 
+        $arr_estado = $resultado['estados'];
+        $arr_municipio = $resultado['municipios'];        
+        
         $colonia_existe = false;
-        foreach ($arr_colonias as $colonia) {
-            if ($colonia['nameColonia'] == $colonia_QR) {
-                $colonia_existe = true;
-            }
-        }
+        $aux = null;
+        $arrin=null;
+        $auxindex = array_search($colonia_QR,$arr_colonias,false);
 
+
+        if( $auxindex != '-1'){
+            $arrin = array( $auxindex => $arr_colonias[$auxindex], );
+            $aux = array( 'colonias'=> $arrin);
+            $arr_colonias = $aux;
+            $colonia_existe = true;
+        }else{
+            foreach ($arr_colonias as $colonia) {
+                if ($colonia['nameColonia'] == $colonia_QR) {
+                    $colonia_existe = true;
+                }
+            }  
+        }        
+        unset($resultado['colonias']); 
+        $resultado = array_replace($resultado, $arr_colonias);        
+        
+        $auxindex = array_search($estado_QR,$arr_estado,false);
+        if( $auxindex != '-1'){
+            $arrin = array( $auxindex => $arr_estado[$auxindex], );
+            $aux = array( 'estados'=> $arrin);
+            $arr_estado = $aux;
+            $estado_id = $auxindex;
+        }
+        unset($resultado['estados']); 
+        $resultado = array_replace($resultado, $arr_estado);        
+        //$GLOBALS['log']->fatal('resultado',$resultado);
+        
+        $auxindex = array_search($ciudad_QR,$arr_municipio,false);
+        if( $auxindex != '-1'){
+            $arrin = array( $auxindex => $arr_municipio[$auxindex], );
+            $aux = array( 'municipios'=> $arrin);
+            $arr_municipio = $aux;
+            $municipio_id = $auxindex;
+        }
+        unset($resultado['municipios']); 
+        $resultado = array_replace($resultado, $arr_municipio);        
+        //$GLOBALS['log']->fatal('resultado',$resultado);
+       
         if(!$colonia_existe)
         {
             $result=$this->insertColonia($pais_id,$estado_id,$municipio_id,$cod_postal,$colonia_QR);
