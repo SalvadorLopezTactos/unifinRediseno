@@ -8,16 +8,21 @@
 
         //this.customPopulateMenu();
         var puesto_usuario=App.user.attributes.puestousuario_c;
+        var privilegio_cartera=App.user.attributes.admin_cartera_c;
 
         /*
         puesto 6 - BO Leasing, 12 - BO Factoraje, 17 - BO CA
         puesto 5 - Asesor Leasing, 11 - Asesor Factoraje, 16 - Asesor CA, 53 - Asesor Uniclick, 54 - Asesor RM
         */
+       /**
+        * Mostrar sección de menú Quántico cuando usuario tenga el provilegio especial de Admin de Cartera
+        */
         //Mostrar lista de tareas únicamente para los puestos mencionados arriba
         if(options.module=="Quantico"){
 
             if(puesto_usuario =="6" || puesto_usuario =="12" || puesto_usuario =="17" ||
-            puesto_usuario =="5" || puesto_usuario =="11" || puesto_usuario =="16" || puesto_usuario =="53" || puesto_usuario =="54"){
+            puesto_usuario =="5" || puesto_usuario =="11" || puesto_usuario =="16" || puesto_usuario =="53" || puesto_usuario =="54" ||
+            privilegio_cartera==1){
 
                 this.tienePuesto=true;
 
