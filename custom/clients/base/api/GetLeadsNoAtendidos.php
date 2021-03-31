@@ -31,76 +31,52 @@ class GetLeadsNoAtendidos extends SugarApi
             if ($estatusProduct != 3) {
 
                 //SEMAFORO 1 = EN TIEMPO - SEMAFORO 0 = ATRASADO
-                $query = "SELECT idLead, assigned_user_id, nombre, subtipo, estatus, max(semaforo) semaforo
+                $query = "SELECT idLead, nombre, subtipo, estatus, max(semaforo) semaforo
                 FROM (
-                SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus, 0 as semaforo
-                FROM leads l
-                INNER JOIN leads_cstm lc ON lc.id_c = l.id AND l.deleted = 0
-                WHERE l.assigned_user_id = '{$id_user}'
-                AND lc.subtipo_registro_c = 1
-                AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c = null)
-                AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c = null)
-                AND lc.fecha_asignacion_c < DATE_SUB(now(), INTERVAL 10 DAY)
-                UNION
-                SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus, 0 as semaforo
-                FROM leads l
-                INNER JOIN leads_cstm lc ON lc.id_c = l.id AND l.deleted = 0
-                INNER JOIN calls_leads cl on cl.lead_id = lc.id_c
-                inner join calls c on c.id = cl.call_id AND c.deleted = 0
-                WHERE l.assigned_user_id = '{$id_user}'
-                AND lc.subtipo_registro_c = 2
-                AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c = null)
-                AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c = null)
-                AND c.date_end < DATE_SUB(now(), INTERVAL 10 DAY)
-                UNION
-                SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus, 0 as semaforo
-                FROM leads l
-                INNER JOIN leads_cstm lc ON lc.id_c = l.id AND l.deleted = 0
-                inner join meetings_leads ml on ml.lead_id = lc.id_c
-                inner join meetings m on m.id = ml.meeting_id AND m.deleted = 0
-                WHERE l.assigned_user_id = '{$id_user}'
-                AND lc.subtipo_registro_c = 2
-                AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c = null)
-                AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c = null)
-                AND m.date_end < DATE_SUB(now(), INTERVAL 10 DAY) ";
-
-
-                if ($estatusProduct == 1) {
-
-                    $query = $query . "UNION
-                    SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus, 1 as semaforo
+                    SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus,
+                    CASE WHEN la.date_created < DATE_SUB(now(), INTERVAL 10 DAY) THEN 0 
+                    WHEN la.date_created > DATE_SUB(now(), INTERVAL 10 DAY) THEN 1
+                    END AS semaforo
                     FROM leads l
                     INNER JOIN leads_cstm lc ON lc.id_c = l.id AND l.deleted = 0
-                    WHERE l.assigned_user_id = '{$id_user}'
-                    AND lc.subtipo_registro_c = 1
-                    AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c = null)
-                    AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c = null)
-                    AND lc.fecha_asignacion_c > DATE_SUB(now(), INTERVAL 10 DAY)
+                    inner join leads_audit la on la.parent_id = l.id
+                    where la.field_name='assigned_user_id'
+                    and la.after_value_string = l.assigned_user_id
+                    AND l.assigned_user_id = '{$id_user}'
+                    AND  lc.subtipo_registro_c in (1,2)
+                    AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c is null)
+                    AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c is null)
+                            
                     UNION
-                    SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus, 1 as semaforo
+                    SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus,
+                    CASE WHEN c.date_end < DATE_SUB(now(), INTERVAL 10 DAY) THEN 0
+                    WHEN c.date_end > DATE_SUB(now(), INTERVAL 10 DAY) THEN 1
+                    END AS semaforo
                     FROM leads l
                     INNER JOIN leads_cstm lc ON lc.id_c = l.id AND l.deleted = 0
                     INNER JOIN calls_leads cl on cl.lead_id = lc.id_c
                     inner join calls c on c.id = cl.call_id AND c.deleted = 0
                     WHERE l.assigned_user_id = '{$id_user}'
-                    AND lc.subtipo_registro_c = 2
-                    AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c = null)
-                    AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c = null)
-                    AND c.date_end > DATE_SUB(now(), INTERVAL 10 DAY)
+                    AND lc.subtipo_registro_c in (1,2)
+                    AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c is null)
+                    AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c is null)
+                                
                     UNION
-                    SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus, 1 as semaforo
+                    SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus,
+                    CASE WHEN m.date_end < DATE_SUB(now(), INTERVAL 10 DAY) THEN 0
+                    WHEN m.date_end > DATE_SUB(now(), INTERVAL 10 DAY) THEN 1
+                    END AS semaforo
                     FROM leads l
                     INNER JOIN leads_cstm lc ON lc.id_c = l.id AND l.deleted = 0
                     inner join meetings_leads ml on ml.lead_id = lc.id_c
                     inner join meetings m on m.id = ml.meeting_id AND m.deleted = 0
                     WHERE l.assigned_user_id = '{$id_user}'
-                    AND lc.subtipo_registro_c = 2
-                    AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c = null)
-                    AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c = null)
-                    AND m.date_end > DATE_SUB(now(), INTERVAL 10 DAY)";
-                }
+                    AND lc.subtipo_registro_c in (1,2)
+                    AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c is null)
+                    AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c is null)
+                
+                ) tablaLeads group by idLead, nombre, subtipo, estatus";
 
-                $query = $query . ") tablaLeads group by idLead";
                 $result = $GLOBALS['db']->query($query);
 
                 while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
