@@ -1401,127 +1401,157 @@ where rfc_c = '{$bean->rfc_c}' and
         //Cliente con Línea Vigente: 3,18
         if ($bean->subtipo_registro_cuenta_c == '18' && $bean->tipo_registro_cuenta_c == '3' && /*$bean->fetched_row['subtipo_registro_cuenta_c']!='18' &&*/
             $bean->encodedkey_mambu_c == "") {
+                
             //variables para consumo de servicio
             $url = $sugar_config['url_mambu_gral'] . 'groups';
             $user = $sugar_config['user_mambu'];
             $pwd = $sugar_config['pwd_mambu'];
             $auth_encode = base64_encode($user . ':' . $pwd);
-            //variables para payload
-            $id_crm = $bean->id;
-            $nombre = '';
-            $nombreaccount = $bean->primernombre_c . ' ' . $bean->apellidopaterno_c . ' ' . $bean->apellidomaterno_c;
-            $razon_social = $bean->razonsocial_c;
-            $id_cliente_corto = $bean->idcliente_c;
-            //$id_cliente_corto='52597';
-            //Condicion para determinar el valor de $nombre en el caso de regimen fiscal
-            $nombre = $bean->tipodepersona_c != 'Persona Moral' ? $nombreaccount : $razon_social;
 
-            //Obteniendo referencias bancarias
-            $array_cta_bancaria = array();
-            if ($bean->load_relationship('cta_cuentas_bancarias_accounts')) {
-                $ctas_bancarias = $bean->cta_cuentas_bancarias_accounts->getBeans();
-                if (!empty($ctas_bancarias)) {
-                    foreach ($ctas_bancarias as $cta) {
-                        $domiciliacion = "";
-                        //Condicion para envio de domiciliacion
-                        $comparacion = strpos($cta->usos, "^1^");
-                        if ($comparacion === false) {
-                            $domiciliacion = "FALSE";
-                        } else {
-                            $domiciliacion = "TRUE";
-                        }
-                        $nombre_banco = $bank[$cta->banco];
-                        $new_cta_bancaria = array(
-                            "_nombre_banco_cliente" => $nombre_banco,
-                            "_domiciliacion" => $domiciliacion,
-                            "_guid_crm" => $cta->id
-                        );
-                        if ($cta->cuenta != "") {
-                            $new_cta_bancaria['_numero_cuenta_cliente'] = $cta->cuenta;
-                        }
-                        if ($cta->clabe != "") {
-                            $new_cta_bancaria['_clabe_interbancaria'] = $cta->clabe;
-                        }
-                        array_push($array_cta_bancaria, $new_cta_bancaria);
-                    }
-                }
-            }
-            $body = array(
-                "groupName" => $nombre,
-                "_referencias_crm" => array(
-                    "_id_crm" => $id_crm,
-                    "_id_cliente_corto" => $id_cliente_corto,
-                    "_ref_bancaria" => $bean->referencia_bancaria_c
+            //Se agrega validación para conocer si el Cliente ya existe en Mambu
+            $url_check_client=$sugar_config['url_mambu_gral'] . 'groups:search?detailsLevel=FULL';
+
+            $bodyCheckExists = array(
+                "filterCriteria" => array(
+                    array(
+                        "field"=>"_referencias_crm._id_crm",
+                        "operator"=>"EQUALS",
+                        "value"=> $bean->id
+                    )
                 ),
             );
-            if (count($array_cta_bancaria) > 0) {
-                $body['_cuentas_bancarias_clientes'] = $array_cta_bancaria;
-            }
-            //Obtener solicitudes par identificar si existe alguna con Unifactor
-            $es_unificator = false;
-            if ($bean->load_relationship('opportunities')) {
-                //Fetch related beans
-                $solicitudesFinan = $bean->opportunities->getBeans();
-                if (!empty($solicitudesFinan)) {
-                    foreach ($solicitudesFinan as $sfinan) {
-                        if ($sfinan->producto_financiero_c == '50') {
-                            $es_unificator = true;
-                        }
-                    }
-                }
-            }
 
-            if ($es_unificator) {
-                $body_relacionados = array();
-                if ($bean->load_relationship('rel_relaciones_accounts')) {
-                    //Fetch related beans
-                    $relaciones = $bean->rel_relaciones_accounts->getBeans();
-                    if (!empty($relaciones)) {
-                        foreach ($relaciones as $rel) {
-                            $beanCuentaEmail = BeanFactory::retrieveBean('Accounts', $rel->account_id1_c, array('disable_row_level_security' => true));
-                            $item_relacionado=array(
-                                "_guid_relacionado_cl"=> $rel->account_id1_c,
-                                "_correo_relacionado_cl" => $beanCuentaEmail->email1,
-                                "_nombre_relacionado_cl" =>$rel->name,
-                                "_figura_relacionado_cl" => str_replace("^","",$rel->relaciones_activas)
+            $GLOBALS['log']->fatal('--------------MAMBU COMPRUEBA EXISTENCIA DE CLIENTE-----------------');
+            $GLOBALS['log']->fatal(json_encode($bodyCheckExists));
+            $callApiCheck = new UnifinAPI();
+            $resultadoCheck = $callApiCheck->postMambu($url_check_client, $bodyCheckExists, $auth_encode);
+            $GLOBALS['log']->fatal('--------------MAMBU COMPRUEBA EXISTENCIA CLIENTE RESPONSE-----------------');
+            $GLOBALS['log']->fatal($resultadoCheck);
+            if (!empty($resultadoCheck['encodedKey'])) {
+                
+                $GLOBALS['log']->fatal('--------------MAMBU CLIENTE YA EXISTE EN MAMBU-----------------');
+                $bean->encodedkey_mambu_c = $resultadoCheck['encodedKey'];
+
+            }else {
+                $GLOBALS['log']->fatal('--------------MAMBU CLIENTE NO EXISTE EN MAMBU-----------------');
+                $GLOBALS['log']->fatal('--------------INICIA CREACIÓN DE CLIENTE EN MAMBU-----------------');
+                //variables para payload
+                $id_crm = $bean->id;
+                $nombre = '';
+                $nombreaccount = $bean->primernombre_c . ' ' . $bean->apellidopaterno_c . ' ' . $bean->apellidomaterno_c;
+                $razon_social = $bean->razonsocial_c;
+                $id_cliente_corto = $bean->idcliente_c;
+                //$id_cliente_corto='52597';
+                //Condicion para determinar el valor de $nombre en el caso de regimen fiscal
+                $nombre = $bean->tipodepersona_c != 'Persona Moral' ? $nombreaccount : $razon_social;
+
+                //Obteniendo referencias bancarias
+                $array_cta_bancaria = array();
+                if ($bean->load_relationship('cta_cuentas_bancarias_accounts')) {
+                    $ctas_bancarias = $bean->cta_cuentas_bancarias_accounts->getBeans();
+                    if (!empty($ctas_bancarias)) {
+                        foreach ($ctas_bancarias as $cta) {
+                            $domiciliacion = "";
+                            //Condicion para envio de domiciliacion
+                            $comparacion = strpos($cta->usos, "^1^");
+                            if ($comparacion === false) {
+                                $domiciliacion = "FALSE";
+                            } else {
+                                $domiciliacion = "TRUE";
+                            }
+                            $nombre_banco = $bank[$cta->banco];
+                            $new_cta_bancaria = array(
+                                "_nombre_banco_cliente" => $nombre_banco,
+                                "_domiciliacion" => $domiciliacion,
+                                "_guid_crm" => $cta->id
                             );
-                            array_push($body_relacionados,$item_relacionado);
+                            if ($cta->cuenta != "") {
+                                $new_cta_bancaria['_numero_cuenta_cliente'] = $cta->cuenta;
+                            }
+                            if ($cta->clabe != "") {
+                                $new_cta_bancaria['_clabe_interbancaria'] = $cta->clabe;
+                            }
+                            array_push($array_cta_bancaria, $new_cta_bancaria);
                         }
                     }
                 }
-                $body['_relacionados_cliente'] = $body_relacionados;
-            }
-            $GLOBALS['log']->fatal(json_encode($body));
-            $callApi = new UnifinAPI();
-            $resultado = $callApi->postMambu($url, $body, $auth_encode);
-            $GLOBALS['log']->fatal('--------------MAMBU RESPONSE-----------------');
-            $GLOBALS['log']->fatal($resultado);
-            if (!empty($resultado['encodedKey'])) {
-                $bean->encodedkey_mambu_c = $resultado['encodedKey'];
-            }else{
-                //Mandar notificación a emails de la lista de studio
-                global $app_list_strings;
-                $cuentas_email=array();
-                $lista_correos = $app_list_strings['emails_error_mambu_list'];
-                //Recorriendo lista de emails
-                foreach ($lista_correos as $key => $value) {
-                    array_push($cuentas_email,$lista_correos[$key]);
+                $body = array(
+                    "groupName" => $nombre,
+                    "_referencias_crm" => array(
+                        "_id_crm" => $id_crm,
+                        "_id_cliente_corto" => $id_cliente_corto,
+                        "_ref_bancaria" => $bean->referencia_bancaria_c
+                    ),
+                );
+                if (count($array_cta_bancaria) > 0) {
+                    $body['_cuentas_bancarias_clientes'] = $array_cta_bancaria;
                 }
-                //$cuenta_email=$lista_correos['1'];
-                $bodyEmail=$this->estableceCuerpoCorreoErrorMambu($body,$resultado);
-                //Enviando correo
-                $this->enviarNotificacionErrorMambu("Notificación: Petición hacia Mambú generada sin éxito",$bodyEmail,$cuentas_email,"Admin");
-            }
-            //Obtener solicitudes
-            if ($bean->load_relationship('opportunities')) {
-                //Fetch related beans
-                $solicitudes = $bean->opportunities->getBeans();
-                if (!empty($solicitudes)) {
-                    $available_financiero=array("39","41","50","49","48","51");
-                    foreach ($solicitudes as $sol) {
-                        //Disparar integración hacia mambú de solicitudes para estatus AUTORIZADA
-                        if (in_array($sol->producto_financiero_c,$available_financiero ) && $sol->tct_id_mambu_c == "" && $sol->estatus_c == 'N') {## cambiar por pPF
-                            $sol->save();
+                //Obtener solicitudes par identificar si existe alguna con Unifactor
+                $es_unificator = false;
+                if ($bean->load_relationship('opportunities')) {
+                    //Fetch related beans
+                    $solicitudesFinan = $bean->opportunities->getBeans();
+                    if (!empty($solicitudesFinan)) {
+                        foreach ($solicitudesFinan as $sfinan) {
+                            if ($sfinan->producto_financiero_c == '50') {
+                                $es_unificator = true;
+                            }
+                        }
+                    }
+                }
+
+                if ($es_unificator) {
+                    $body_relacionados = array();
+                    if ($bean->load_relationship('rel_relaciones_accounts')) {
+                        //Fetch related beans
+                        $relaciones = $bean->rel_relaciones_accounts->getBeans();
+                        if (!empty($relaciones)) {
+                            foreach ($relaciones as $rel) {
+                                $beanCuentaEmail = BeanFactory::retrieveBean('Accounts', $rel->account_id1_c, array('disable_row_level_security' => true));
+                                $item_relacionado=array(
+                                    "_guid_relacionado_cl"=> $rel->account_id1_c,
+                                    "_correo_relacionado_cl" => $beanCuentaEmail->email1,
+                                    "_nombre_relacionado_cl" =>$rel->name,
+                                    "_figura_relacionado_cl" => str_replace("^","",$rel->relaciones_activas)
+                                );
+                                array_push($body_relacionados,$item_relacionado);
+                            }
+                        }
+                    }
+                    $body['_relacionados_cliente'] = $body_relacionados;
+                }
+                $GLOBALS['log']->fatal(json_encode($body));
+                $callApi = new UnifinAPI();
+                $resultado = $callApi->postMambu($url, $body, $auth_encode);
+                $GLOBALS['log']->fatal('--------------MAMBU RESPONSE-----------------');
+                $GLOBALS['log']->fatal($resultado);
+                if (!empty($resultado['encodedKey'])) {
+                    $bean->encodedkey_mambu_c = $resultado['encodedKey'];
+                }else{
+                    //Mandar notificación a emails de la lista de studio
+                    global $app_list_strings;
+                    $cuentas_email=array();
+                    $lista_correos = $app_list_strings['emails_error_mambu_list'];
+                    //Recorriendo lista de emails
+                    foreach ($lista_correos as $key => $value) {
+                        array_push($cuentas_email,$lista_correos[$key]);
+                    }
+                    //$cuenta_email=$lista_correos['1'];
+                    $bodyEmail=$this->estableceCuerpoCorreoErrorMambu($body,$resultado);
+                    //Enviando correo
+                    $this->enviarNotificacionErrorMambu("Notificación: Petición hacia Mambú generada sin éxito",$bodyEmail,$cuentas_email,"Admin");
+                }
+                //Obtener solicitudes
+                if ($bean->load_relationship('opportunities')) {
+                    //Fetch related beans
+                    $solicitudes = $bean->opportunities->getBeans();
+                    if (!empty($solicitudes)) {
+                        $available_financiero=array("39","41","50","49","48","51");
+                        foreach ($solicitudes as $sol) {
+                            //Disparar integración hacia mambú de solicitudes para estatus AUTORIZADA
+                            if (in_array($sol->producto_financiero_c,$available_financiero ) && $sol->tct_id_mambu_c == "" && $sol->estatus_c == 'N') {## cambiar por pPF
+                                $sol->save();
+                            }
                         }
                     }
                 }
