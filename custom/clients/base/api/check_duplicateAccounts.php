@@ -169,7 +169,6 @@ SITE;
             $bean_account->subtipo_registro_cuenta_c = "2"; // Contactado - 2
             $bean_account->tipo_registro_cuenta_c = "2"; //Prospecto - 2
         }
-
         switch ($bean_Leads->regimen_fiscal_c) {
             case 1:
                 $bean_account->tipodepersona_c = "Persona Fisica";
@@ -184,7 +183,6 @@ SITE;
                 $bean_account->tipodepersona_c = $bean_Leads->regimen_fiscal_c;
                 break;
         }
-
         $bean_account->origen_cuenta_c = $bean_Leads->origen_c;
         $bean_account->detalle_origen_c = $bean_Leads->detalle_origen_c;
         $bean_account->prospeccion_propia_c = $bean_Leads->prospeccion_propia_c;
@@ -201,14 +199,13 @@ SITE;
         $bean_account->primernombre_c = $bean_Leads->nombre_c;
         $bean_account->apellidomaterno_c = $bean_Leads->apellido_materno_c;
         $bean_account->apellidopaterno_c = $bean_Leads->apellido_paterno_c;
-        $bean_account->tct_macro_sector_ddw_c = $bean_Leads->macrosector_c;
+        //$bean_account->tct_macro_sector_ddw_c = $bean_Leads->macrosector_c;
         $bean_account->ventas_anuales_c = $bean_Leads->ventas_anuales_c;
         $bean_account->potencial_cuenta_c = $bean_Leads->potencial_lead_c;
         $bean_account->zonageografica_c = $bean_Leads->zona_geografica_c;
         $bean_account->puesto_cuenta_c = $bean_Leads->puesto_c;
         $bean_account->email = $bean_Leads->email;
         $bean_account->clean_name = $bean_Leads->clean_name_c;
-
         // Asesores
         if ($idMeetings != null) {
             $bean_account->user_id_c = empty($idMeetings['data']['LEASING']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['LEASING'];
@@ -216,35 +213,30 @@ SITE;
             $bean_account->user_id2_c = empty($idMeetings['data']['CREDITO AUTOMOTRIZ']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['CREDITO AUTOMOTRIZ'];
             $bean_account->user_id6_c = empty($idMeetings['data']['FLEET']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['FLEET'];
             $bean_account->user_id8_c = empty($idMeetings['data']['RM']) ? "569246c7-da62-4664-ef2a-5628f649537e" : $idMeetings['data']['RM'];
-
             if(empty($idMeetings['data']['UNICLICK']) && empty($idMeetings['data']['UNILEASE'])){
-
                 $bean_account->user_id7_c ='569246c7-da62-4664-ef2a-5628f649537e';
-
             }else if(!empty($idMeetings['data']['UNICLICK'])){
-
                 $bean_account->user_id7_c=$idMeetings['data']['UNICLICK'];
-
             }else if(!empty($idMeetings['data']['UNILEASE'])){
-
                 $bean_account->user_id7_c=$idMeetings['data']['UNILEASE'];
             }
-
         }
-
         $bean_account->save();
+		//Campos PB
+		$bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen', $bean_account->id, array('disable_row_level_security' => true));
+		$bean_Resumen->pb_division_c = $bean_Leads->pb_division_c;
+		$bean_Resumen->pb_grupo_c = $bean_Leads->pb_grupo_c;
+		$bean_Resumen->pb_clase_c = $bean_Leads->pb_clase_c;
+		$bean_Resumen->save();
         // creamos las relaciones en telefono
         if (!empty($bean_Leads->phone_mobile)) {
             $this->create_phone($bean_account->id, $bean_Leads->phone_mobile, 3);
-
         }
         if (!empty($bean_Leads->phone_home)) {
             $this->create_phone($bean_account->id, $bean_Leads->phone_home, 1);
-
         }
         if (!empty($bean_Leads->phone_work)) {
             $this->create_phone($bean_account->id, $bean_Leads->phone_work, 2);
-
         }
         return $bean_account;
     }
@@ -417,7 +409,7 @@ SITE;
                     array_push($campos_req, 'nombre_c', 'apellido_paterno_c', 'puesto_c');
                 }
 
-                array_push($campos_req, 'macrosector_c', 'ventas_anuales_c', 'zona_geografica_c', 'email');
+                array_push($campos_req, 'ventas_anuales_c', 'zona_geografica_c', 'email');
 
                 break;
         }
