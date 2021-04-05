@@ -1427,10 +1427,10 @@ where rfc_c = '{$bean->rfc_c}' and
             $resultadoCheck = $callApiCheck->postMambu($url_check_client, $bodyCheckExists, $auth_encode);
             $GLOBALS['log']->fatal('--------------MAMBU COMPRUEBA EXISTENCIA CLIENTE RESPONSE-----------------');
             $GLOBALS['log']->fatal($resultadoCheck);
-            if (!empty($resultadoCheck['encodedKey'])) {
-                
+            if (!empty($resultadoCheck[0]['encodedKey'])) {
+
                 $GLOBALS['log']->fatal('--------------MAMBU CLIENTE YA EXISTE EN MAMBU-----------------');
-                $bean->encodedkey_mambu_c = $resultadoCheck['encodedKey'];
+                $bean->encodedkey_mambu_c = $resultadoCheck[0]['encodedKey'];
 
             }else {
                 $GLOBALS['log']->fatal('--------------MAMBU CLIENTE NO EXISTE EN MAMBU-----------------');
