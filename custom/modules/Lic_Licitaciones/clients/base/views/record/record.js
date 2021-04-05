@@ -12,6 +12,9 @@
         this.context.on('button:btn_pre_button:click', this.CreaPre,this);
         //Validacion para mostrar los botones +
         this.model.on('sync', this.ocultarBotones, this);
+        //Validacion para ocultar los botones de creacion de llamadas, reuniones desde la vista de subpanel
+        this.model.on('sync', this.ocultarQuickCreate, this);
+
         $('[name="create_meet"]').hide();
         $('[name="create_call"]').hide();
         $('[name="create_pre"]').hide();
@@ -132,6 +135,8 @@
 
     },
  
-    
+    ocultarQuickCreate:function (){
+        $('.subpanel-controls').addClass("hide");
+    },
    
 })
