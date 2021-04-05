@@ -248,11 +248,25 @@ array (
               ),
               18 => 
               array (
-                'name' => 'macrosector_c',
-                'label' => 'LBL_MACROSECTOR_C',
-                'span' => 12,
+                'name' => 'pb_division_c',
+                'label' => 'LBL_PB_DIVISION',
               ),
               19 => 
+              array (
+                'name' => 'pb_grupo_c',
+                'label' => 'LBL_PB_GRUPO',
+              ),
+              20 => 
+              array (
+                'name' => 'pb_clase_c',
+                'label' => 'LBL_PB_CLASE',
+              ),
+              21 => 
+              array (
+                'name' => 'macrosector_c',
+                'label' => 'LBL_MACROSECTOR_C',
+              ),
+              22 => 
               array (
                 'related_fields' => 
                 array (
@@ -262,7 +276,7 @@ array (
                 'name' => 'ventas_anuales_c',
                 'label' => 'LBL_VENTAS_ANUALES_C',
               ),
-              20 => 
+              23 => 
               array (
                 'related_fields' => 
                 array (
@@ -272,19 +286,19 @@ array (
                 'name' => 'potencial_lead_c',
                 'label' => 'LBL_POTENCIAL_LEAD',
               ),
-              21 => 
+              24 => 
               array (
                 'name' => 'zona_geografica_c',
                 'label' => 'LBL_ZONA_GEOGRAFICA_C',
               ),
-              22 => 
+              25 => 
               array (
               ),
-              23 => 
+              26 => 
               array (
                 'name' => 'email',
               ),
-              24 => 
+              27 => 
               array (
                 'name' => 'phone_mobile',
                 'label' => 'LBL_MOBILE_PHONE',
@@ -304,7 +318,7 @@ array (
                   ),
                 ),
               ),
-              25 => 
+              28 => 
               array (
                 'name' => 'phone_home',
                 'comment' => 'Home phone number of the contact',
@@ -325,7 +339,7 @@ array (
                   ),
                 ),
               ),
-              26 => 
+              29 => 
               array (
                 'name' => 'phone_work',
                 'label' => 'LBL_OFFICE_PHONE',
@@ -345,78 +359,78 @@ array (
                   ),
                 ),
               ),
-              27 => 
+              30 => 
               array (
                 'name' => 'detalle_plataforma_c',
                 'studio' => 'visible',
                 'label' => 'LBL_DETALLE_PLATAFORMA_C',
               ),
-              28 => 
+              31 => 
               array (
                 'name' => 'oficina_c',
                 'label' => 'LBL_OFICINA',
               ),
-              29 => 
+              32 => 
               array (
                 'name' => 'nombre_de_cargar_c',
                 'label' => 'LBL_NOMBRE_DE_CARGAR',
               ),
-              30 => 
+              33 => 
               array (
                 'name' => 'alianza_c',
                 'label' => 'LBL_ALIANZA_C',
               ),
-              31 => 
+              34 => 
               array (
                 'name' => 'lead_cancelado_c',
                 'label' => 'LBL_LEAD_CANCELADO_C',
               ),
-              32 => 
+              35 => 
               array (
                 'name' => 'motivo_cancelacion_c',
                 'label' => 'LBL_MOTIVO_CANCELACION_C',
               ),
-              33 => 
+              36 => 
               array (
                 'name' => 'submotivo_cancelacion_c',
                 'label' => 'LBL_SUBMOTIVO_CANCELACION_C',
                 'span' => 12,
               ),
-              34 => 
+              37 => 
               array (
                 'name' => 'assigned_user_name',
               ),
-              35 => 
+              38 => 
               array (
                 'name' => 'account_to_lead',
                 'label' => 'LBL_ACCOUNT',
                 'readonly' => true,
               ),
-              36 => 
+              39 => 
               array (
                 'name' => 'status_management_c',
                 'label' => 'LBL_STATUS_MANAGEMENT',
               ),
-              37 => 
+              40 => 
               array (
                 'name' => 'fecha_asignacion_c',
                 'label' => 'LBL_FECHA_ASIGNACION_C',
               ),
-              38 => 
+              41 => 
               array (
                 'name' => 'url_originacion_c',
                 'label' => 'LBL_URL_ORIGINACION_C',
-                  'readonly' => true,
+                'readonly' => true,
               ),
-              39 => 
+              42 => 
               array (
               ),
-              40 => 
+              43 => 
               array (
                 'name' => 'contacto_asociado_c',
                 'label' => 'LBL_CONTACTO_ASOCIADO_C',
               ),
-              41 => 
+              44 => 
               array (
                 'name' => 'leads_leads_1_name',
                 'label' => 'LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE',

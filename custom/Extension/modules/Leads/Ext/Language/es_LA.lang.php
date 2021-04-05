@@ -100,3 +100,6 @@ $mod_strings['LBL_FECHA_ASIGNACION_C'] = 'Fecha de asignación';
 $mod_strings['LBL_OFICINA'] = 'Oficina';
 $mod_strings['LBL_CONTACTO_ASOCIADO_C'] = 'Contacto asociado';
 $mod_strings['LBL_URL_ORIGINACION_C'] = 'URL de Originación';
+$mod_strings['LBL_PB_DIVISION'] = 'División';
+$mod_strings['LBL_PB_GRUPO'] = 'Grupo';
+$mod_strings['LBL_PB_CLASE'] = 'Clase';

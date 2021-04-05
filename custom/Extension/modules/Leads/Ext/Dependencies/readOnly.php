@@ -104,5 +104,33 @@ $dependencies['Leads']['readonly_fields'] = array(
                 'value' => 'true',
             ),
         ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'pb_division_c',
+                'value' => 'true',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'pb_grupo_c',
+                'value' => 'true',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'pb_clase_c',
+                'value' => 'true',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'macrosector_c',
+                'value' => 'not(equal($pb_clase_c,""))',
+            ),
+        ),
     ),
 );

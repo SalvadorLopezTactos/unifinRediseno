@@ -216,7 +216,12 @@ class ResumenClienteAPI extends SugarApi
             "inegi_acualiza_uni2" => ""
             // "inegi_descripcion" => "",
         );
-
+        //Clasificacion Sectorial PB
+        $arr_principal['pb'] = array(
+            "pb_division" => "",
+            "pb_grupo" => "",
+            "pb_clase" => ""
+        );
         //String operaciones
         $operaciones_ids = "'".$id_cliente."'";
 
@@ -238,7 +243,7 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['factoring']['promotor']=$beanPersona->promotorfactoraje_c;
             $arr_principal['credito_auto']['promotor']=$beanPersona->promotorcredit_c;
             $arr_principal['fleet']['promotor']=$beanPersona->promotorfleet_c;
-			      $arr_principal['credito_sos']['promotor']=$beanPersona->promotorleasing_c;
+			$arr_principal['credito_sos']['promotor']=$beanPersona->promotorleasing_c;
             $arr_principal['uniclick']['promotor']=$beanPersona->promotoruniclick_c;
             $arr_principal['unilease']['promotor']=$beanPersona->promotoruniclick_c;
             $arr_principal['rm']['promotor']=$beanPersona->promotorrm_c;
@@ -742,7 +747,7 @@ class ResumenClienteAPI extends SugarApi
                 //Recupera Crédito SOS
                 $arr_principal['credito_sos']['fecha_pago']=$beanResumen->sos_fecha_pago_c;
 
-				        //Recupera Uniclick
+				//Recupera Uniclick
                 // $arr_principal['uniclick']['tipo_cuenta']=$beanResumen->tct_tipo_cuenta_uc_c;
                 $arr_principal['uniclick']['fecha_pago']= $beanResumen->cauto_fecha_pago;
 
@@ -759,6 +764,11 @@ class ResumenClienteAPI extends SugarApi
                 $arr_principal['inegi']['inegi_macro'] = $beanResumen->inegi_macro_c;
                 $arr_principal['inegi']['inegi_acualiza_uni2'] = $beanResumen->inegi_acualiza_uni2_c;
                 // $arr_principal['inegi']['inegi_descripcion'] = $beanResumen->inegi_descripcion_c;
+
+                //Recupera Clasificación Sectorial PB
+                $arr_principal['pb']['pb_division'] = $beanResumen->pb_division_c;
+                $arr_principal['pb']['pb_grupo'] = $beanResumen->pb_grupo_c;
+                $arr_principal['pb']['pb_clase'] = $beanResumen->pb_clase_c;
             }
         }
 

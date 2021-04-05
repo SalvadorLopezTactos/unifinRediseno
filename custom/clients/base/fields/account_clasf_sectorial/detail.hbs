@@ -82,5 +82,32 @@
                 </div>
             </div>
         </tr>
+        <tr>
+			<div style="padding-top: 15px; padding-bottom: 10px;"><strong>Pitney Bowes</strong></div>
+            <div class="row-fluid">
+                <div class="campodiv span6">
+                    <label class="record-label" style="margin-left:0px">División</label>
+                    <label class="normal row-fluid select2 list_div" data-field="list_div">
+                        {{#if ResumenCliente.pb.pb_division}}{{getUnifinListValue 'pb_division_list' ResumenCliente.pb.pb_division}}{{/if}}
+                    </label>
+                </div>
+                <div class="campogrp span6">
+                    <label class="record-label" style="margin-left:0px">Grupo</label>
+                    <label class="normal row-fluid select2 list_grp" data-field="list_grp">
+                        {{#if ResumenCliente.pb.pb_grupo}}{{getUnifinListValue 'pb_grupo_list' ResumenCliente.pb.pb_grupo}}{{/if}}
+                    </label>
+                </div>
+            </div>
+        </tr>
+        <tr>
+            <div class="row-fluid" style="margin: 25px 0px 0px 0px;">
+                <div class="campocls span6">
+                    <label class="record-label" style="margin-left:0px">Clase</label>
+                    <label class="normal row-fluid select2 list_cls" data-field="list_cls">
+                        {{#if ResumenCliente.pb.pb_clase}}{{getUnifinListValue 'pb_clase_list' ResumenCliente.pb.pb_clase}}{{/if}}
+                    </label>
+                </div>
+            </div>
+        </tr>
     </table>
 </div>
