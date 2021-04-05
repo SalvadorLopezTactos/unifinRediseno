@@ -31,52 +31,52 @@ class GetCuentasExpediente extends SugarApi
 
                 $query = "SELECT idCuenta,nombreCuenta,tipoCuenta,subtipoCuenta,idOpp,oppNombre,oppEtapa,
 				monto,  fecha_asignacion, tipo_producto, EstatusProducto, val_dias_20,val_dias_10,
-				CASE WHEN DATOS_EXP.val_dias_20 = 20 and DATOS_EXP.monto > 10000000 THEN 0
-				WHEN DATOS_EXP.val_dias_20 = -20 and DATOS_EXP.monto > 10000000 THEN 1 
-				WHEN DATOS_EXP.val_dias_10 = 10 and (DATOS_EXP.monto <= 10000000 ) THEN 0
-				WHEN DATOS_EXP.val_dias_10 = -10 and (DATOS_EXP.monto <= 10000000) THEN 1
+				CASE WHEN solicitudes.val_dias_20 = 20 and solicitudes.monto > 10000000 THEN 0
+				WHEN solicitudes.val_dias_20 = -20 and solicitudes.monto > 10000000 THEN 1 
+				WHEN solicitudes.val_dias_10 = 10 and (solicitudes.monto <= 10000000 ) THEN 0
+				WHEN solicitudes.val_dias_10 = -10 and (solicitudes.monto <= 10000000) THEN 1
 				END AS semaforo
-				FROM (
-					SELECT a.id as idCuenta, a.name as nombreCuenta, a.assigned_user_id accountassigned, ac.user_id_c,  
-					opp.id as idOpp, opp.name as oppNombre, opp.id,  ac.tipo_registro_c, 
-                    -- ac.subtipo_cuenta_c, ac.tipo_registro_cuenta_c as tipoCuenta, ac.subtipo_registro_cuenta_c as subtipoCuenta,
-                    up.tipo_cuenta as tipoCuenta, up.subtipo_cuenta as subtipoCuenta, up.tipo_subtipo_cuenta,
-					opp.date_entered, opp.assigned_user_id oppassigned, oppcstm.tct_etapa_ddw_c, oppcstm.estatus_c,
-					oppcstm.tct_estapa_subetapa_txf_c as oppEtapa, up.name nameOpp, DATE_FORMAT( auditop.date_created, '%Y-%m-%d ') as fecha_asignacion,
-					opp.amount as monto, up.tipo_producto, upc.status_management_c as EstatusProducto,
-					DATE_FORMAT(DATE_SUB(now(), INTERVAL 20 DAY), '%Y-%m-%d ')  as veinte, 
-					DATE_FORMAT(DATE_SUB(now(), INTERVAL 10 DAY), '%Y-%m-%d ')  as diez,
-					CASE WHEN auditop.date_created <  DATE_FORMAT(DATE_SUB(now(), INTERVAL 20 DAY), '%Y-%m-%d ') THEN '20'
-					WHEN auditop.date_created >  DATE_FORMAT(DATE_SUB(now(), INTERVAL 20 DAY), '%Y-%m-%d ') THEN '-20'
-					END AS val_dias_20,
-					CASE WHEN auditop.date_created < DATE_FORMAT(DATE_SUB(now(), INTERVAL 10 DAY), '%Y-%m-%d ') THEN '10'
-					WHEN auditop.date_created > DATE_FORMAT(DATE_SUB(now(), INTERVAL 10 DAY), '%Y-%m-%d ') THEN '-10'
-					END AS val_dias_10  
-					FROM accounts a 
-					INNER JOIN accounts_cstm ac on ac.id_c = a.id
-                    INNER JOIN accounts_opportunities app on app.account_id = ac.id_c
-                    INNER JOIN opportunities opp on opp.id = app.opportunity_id
-                    INNER JOIN opportunities_cstm oppcstm on oppcstm.id_c = opp.id
-                    INNER JOIN accounts_uni_productos_1_c aup on aup.accounts_uni_productos_1accounts_ida = ac.id_c
-                    INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb
-                    INNER JOIN uni_productos_cstm upc on upc.id_c = up.id
-					INNER JOIN opportunities_audit auditop on auditop.parent_id = opp.id
-                    WHERE  -- ac.tipo_registro_cuenta_c = '2' -- and ac.subtipo_registro_cuenta_c = '8'
-                    up.tipo_cuenta = '2' and  up.subtipo_cuenta = '8'
-                    and ac.user_id_c=  '{$id_user}'
-                    and upc.status_management_c = '{$statusProduct}'
-                    and tipo_producto = '1'
-					and auditop.field_name='estatus_c'
-					and auditop.after_value_string='PE'
-                    -- and oppcstm.tct_etapa_ddw_c = 'P'
-					and oppcstm.estatus_c <> 'K'
-                    and a.deleted = 0 and up.deleted = 0 
-                ) as DATOS_EXP ";
+                    FROM (
+	                    SELECT a.id as idCuenta, a.name as nombreCuenta, ac.user_id_c, ac.tipo_registro_c, up.tipo_cuenta as tipoCuenta, 
+                        up.subtipo_cuenta as subtipoCuenta,up.name nameProd, up.tipo_producto, upc.status_management_c as EstatusProducto
+                        FROM accounts a
+                        INNER JOIN accounts_cstm ac on ac.id_c = a.id
+                        INNER JOIN accounts_uni_productos_1_c aup on aup.accounts_uni_productos_1accounts_ida = ac.id_c
+                        INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb
+                        INNER JOIN uni_productos_cstm upc on upc.id_c = up.id
+                        WHERE up.tipo_cuenta = '2' and  up.subtipo_cuenta in ('8','10')
+                        and ac.user_id_c = '{$id_user}' --'e33b00c0-7709-3bb4-a79d-5626cda71227' 
+                        and upc.status_management_c = '{$statusProduct}' --'2' 
+                        and tipo_producto = '1'
+                        and a.deleted = 0 and up.deleted = 0
+                    ) AS CUENTAS LEFT JOIN (
+                        SELECT app.account_id acc, opp.date_entered, TIMESTAMPDIFF(DAY, opp.date_entered, now()) as daypas,
+                        opp.id as idOpp, opp.name as oppNombre, oppcstm.tipo_producto_c, opp.assigned_user_id oppassigned, oppcstm.tct_etapa_ddw_c, oppcstm.estatus_c,
+                        oppcstm.tct_estapa_subetapa_txf_c as oppEtapa, DATE_FORMAT( auditop.date_created, '%Y-%m-%d ') as fecha_asignacion,
+                        opp.amount as monto,
+                        DATE_FORMAT(DATE_SUB(now(), INTERVAL 20 DAY), '%Y-%m-%d ')  as veinte,
+                        DATE_FORMAT(DATE_SUB(now(), INTERVAL 10 DAY), '%Y-%m-%d ')  as diez,
+                        CASE WHEN auditop.date_created <  DATE_FORMAT(DATE_SUB(now(), INTERVAL 20 DAY), '%Y-%m-%d ') THEN '20'
+                        WHEN auditop.date_created >  DATE_FORMAT(DATE_SUB(now(), INTERVAL 20 DAY), '%Y-%m-%d ') THEN '-20'
+                        END AS val_dias_20,
+                        CASE WHEN auditop.date_created < DATE_FORMAT(DATE_SUB(now(), INTERVAL 10 DAY), '%Y-%m-%d ') THEN '10'
+                        WHEN auditop.date_created > DATE_FORMAT(DATE_SUB(now(), INTERVAL 10 DAY), '%Y-%m-%d ') THEN '-10'
+                        END AS val_dias_10
+                        FROM accounts_opportunities app
+                        INNER JOIN opportunities opp on opp.id = app.opportunity_id
+                        INNER JOIN opportunities_cstm oppcstm on oppcstm.id_c = opp.id
+                        INNER JOIN opportunities_audit auditop on auditop.parent_id = opp.id
+                        WHERE  oppcstm.tipo_producto_c = '1'
+                         and auditop.field_name='estatus_c'
+					     and auditop.after_value_string='PE'
+                        group by app.account_id
+                        order by daypas
+                    ) as solicitudes
+                on cuentas.idCuenta = solicitudes.acc";
 
-                if ($statusProduct == 2) {
-
-                    $query = $query . "where ( DATOS_EXP.val_dias_20=20 and DATOS_EXP.monto > 10000000) OR
-                    ( DATOS_EXP.val_dias_10=10 and (DATOS_EXP.monto <= 10000000 and DATOS_EXP.monto > 0))";
+                if ($statusProduct == '2') {
+                    $query = $query . "where ( solicitudes.val_dias_20=20 and solicitudes.monto > 10000000) OR
+                    ( solicitudes.val_dias_10=10 and (solicitudes.monto <= 10000000 and solicitudes.monto > 0))";
                 }
                 // $GLOBALS['log']->fatal('query ce',$query);
                 $result = $GLOBALS['db']->query($query);
@@ -91,7 +91,6 @@ class GetCuentasExpediente extends SugarApi
                 }
 
             } else {
-
                 $records_in['status'] = '200';
                 $records_in['message'] = 'Validar que el estatus del Producto sea Activo o Aplazado';
             }
