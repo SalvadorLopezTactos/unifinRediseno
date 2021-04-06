@@ -29,7 +29,7 @@ class GetAccountProspectoContactado extends SugarApi
 
             if ($estadoProducto != 3) {
                 //DASHLET PROSPECTO SIN SOLICITUD
-                $query = "SELECT a.id as idCuenta, a.name as nombreCuenta, a.assigned_user_id, ac.user_id_c, 
+                $query = "SELECT a.id as idCuenta, a.name as nombreCuenta, a.assigned_user_id, ac.user_id_c,
                 up.tipo_cuenta as tipoCuenta, up.subtipo_cuenta as subtipoCuenta,
                 up.name, upc.status_management_c as EstatusProducto, up.tipo_producto,
                 CASE WHEN upc.fecha_asignacion_c < DATE_SUB(now(), INTERVAL 5 DAY) THEN 0
@@ -37,20 +37,19 @@ class GetAccountProspectoContactado extends SugarApi
                 END AS semaforo
                 FROM accounts a
                 INNER JOIN accounts_cstm ac on ac.id_c = a.id and a.deleted = 0
-                LEFT JOIN accounts_opportunities app on app.account_id = ac.id_c
-                INNER JOIN accounts_uni_productos_1_c aup on aup.accounts_uni_productos_1accounts_ida = ac.id_c
+                INNER JOIN accounts_uni_productos_1_c aup on aup.accounts_uni_productos_1accounts_ida = ac.id_c and aup.deleted = 0
                 INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb and up.deleted = 0
                 INNER JOIN uni_productos_cstm upc on upc.id_c = up.id
-                WHERE app.id IS NULL
-                and up.tipo_cuenta = '2'
+                WHERE
+                up.tipo_cuenta = '2'
                 and up.subtipo_cuenta in ('1','2')
                 and ac.user_id_c = '{$id_user}'
                 and up.tipo_producto = '1'
                 and upc.status_management_c = '{$estadoProducto}' ";
 
-                if ($estadoProducto == 2) {
+                /*if ($estadoProducto == 2) {
                     $query = $query . "and upc.fecha_asignacion_c < DATE_SUB(now(), INTERVAL 5 DAY)";
-                }
+                }*/
 
                 $result = $GLOBALS['db']->query($query);
 
