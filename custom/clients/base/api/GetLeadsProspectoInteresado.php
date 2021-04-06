@@ -48,7 +48,7 @@ class GetLeadsProspectoInteresado extends SugarApi
                   	WHERE
                   		up.tipo_cuenta = '2' and  up.subtipo_cuenta in ('7')
                   		and ac.user_id_c = '{$id_user}'
-                  		and upc.status_management_c = {$statusProduct}'
+                  		and upc.status_management_c = '{$statusProduct}'
                   		and tipo_producto = '1'
                   		and a.deleted = 0 and up.deleted = 0
                   	) AS cuentas
