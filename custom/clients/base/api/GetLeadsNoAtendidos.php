@@ -34,7 +34,7 @@ class GetLeadsNoAtendidos extends SugarApi
                 $query = "SELECT idLead, nombre, subtipo, estatus, max(semaforo) semaforo
                 FROM (
                     SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus,
-                    CASE WHEN la.date_created < DATE_SUB(now(), INTERVAL 10 DAY) THEN 0 
+                    CASE WHEN la.date_created < DATE_SUB(now(), INTERVAL 10 DAY) THEN 0
                     WHEN la.date_created > DATE_SUB(now(), INTERVAL 10 DAY) THEN 1
                     END AS semaforo
                     FROM leads l
@@ -46,7 +46,7 @@ class GetLeadsNoAtendidos extends SugarApi
                     AND  lc.subtipo_registro_c in (1,2)
                     AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c is null)
                     AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c is null)
-                            
+
                     UNION
                     SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus,
                     CASE WHEN c.date_end < DATE_SUB(now(), INTERVAL 10 DAY) THEN 0
@@ -60,7 +60,7 @@ class GetLeadsNoAtendidos extends SugarApi
                     AND lc.subtipo_registro_c in (1,2)
                     AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c is null)
                     AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c is null)
-                                
+
                     UNION
                     SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus,
                     CASE WHEN m.date_end < DATE_SUB(now(), INTERVAL 10 DAY) THEN 0
@@ -74,7 +74,7 @@ class GetLeadsNoAtendidos extends SugarApi
                     AND lc.subtipo_registro_c in (1,2)
                     AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c is null)
                     AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c is null)
-                
+
                 ) tablaLeads group by idLead, nombre, subtipo, estatus";
 
                 $result = $GLOBALS['db']->query($query);
