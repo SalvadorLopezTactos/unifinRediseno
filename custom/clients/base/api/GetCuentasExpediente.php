@@ -66,6 +66,12 @@ class GetCuentasExpediente extends SugarApi
                         INNER JOIN opportunities opp on opp.id = app.opportunity_id
                         INNER JOIN opportunities_cstm oppcstm on oppcstm.id_c = opp.id
                         INNER JOIN opportunities_audit auditop on auditop.parent_id = opp.id
+                        INNER JOIN (SELECT app.account_id uac, opp.id oppid, max(opp.date_modified) as dayb , min(TIMESTAMPDIFF(DAY, opp.date_modified, now())) as daypas
+                    			FROM accounts_opportunities app INNER JOIN opportunities opp on opp.id = app.opportunity_id
+                    			where  opp.assigned_user_id = '{$id_user}'
+                    			group by app.account_id order by app.account_id
+                    		) AS ultimos on ultimos.uac = app.account_id
+                    		and ultimos.dayb = opp.date_modified
                         WHERE  oppcstm.tipo_producto_c = '1'
                          and auditop.field_name='estatus_c'
 					     and auditop.after_value_string='PE'
