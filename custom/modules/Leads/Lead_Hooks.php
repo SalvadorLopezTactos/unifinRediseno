@@ -152,8 +152,6 @@ SELECT DISTINCT id_cnbv_macrosector FROM catalogo_clasificacion_sectorial_pb WHE
 SQL;
 			$queryResult = $db->query($query);
             $row = $db->fetchByAssoc($queryResult);
-			$GLOBALS['log']->fatal("id_cnbv_macrosector" . $row);
-			$GLOBALS['log']->fatal($row);
 			$bean->macrosector_c = $row['id_cnbv_macrosector'];
         }
     }
