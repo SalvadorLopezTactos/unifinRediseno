@@ -146,12 +146,14 @@ SQL;
     public function llenaMacro($bean=null, $event= null, $args= null){
         //Llena el campo de Macro Sector
 		global $db;
-		if(!empty($bean->pb_clase_c)){
+		if(!empty($bean->pb_grupo_c)){
 			$query = <<<SQL
-SELECT id_cnbv_macrosector FROM catalogo_clasificacion_sectorial_pb WHERE id_pb_clase = '{$bean->pb_clase_c}'
+SELECT DISTINCT id_cnbv_macrosector FROM catalogo_clasificacion_sectorial_pb WHERE id_pb_grupo = '{$bean->pb_grupo_c}'
 SQL;
 			$queryResult = $db->query($query);
             $row = $db->fetchByAssoc($queryResult);
+			$GLOBALS['log']->fatal("id_cnbv_macrosector" . $row);
+			$GLOBALS['log']->fatal($row);
 			$bean->macrosector_c = $row['id_cnbv_macrosector'];
         }
     }
