@@ -45,8 +45,8 @@ class GetCuentasExpediente extends SugarApi
                         INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb
                         INNER JOIN uni_productos_cstm upc on upc.id_c = up.id
                         WHERE up.tipo_cuenta = '2' and  up.subtipo_cuenta in ('8','10')
-                        and ac.user_id_c = '{$id_user}' --'e33b00c0-7709-3bb4-a79d-5626cda71227'
-                        and upc.status_management_c = '{$statusProduct}' --'2'
+                        and ac.user_id_c = '{$id_user}' -- 'e33b00c0-7709-3bb4-a79d-5626cda71227'
+                        and upc.status_management_c = '{$statusProduct}' -- '2'
                         and tipo_producto = '1'
                         and a.deleted = 0 and up.deleted = 0
                     ) AS CUENTAS LEFT JOIN (
