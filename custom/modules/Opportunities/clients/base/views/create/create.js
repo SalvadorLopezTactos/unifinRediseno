@@ -144,6 +144,7 @@
 
         this.model.on('change:tipo_producto_c', this._ActualizaEtiquetas, this);
 
+
         /*
          * @author Carlos Zaragoza Ortiz
          * @version 1
@@ -1890,11 +1891,78 @@
     //Evento para ejecutar la
     cuenta_asociada: function () {
         if (this.model.get('account_id') != "" && this.model.get('account_id') != undefined && window.bandera == 1) {
+            var account = app.data.createBean('Accounts', {id: this.model.get('account_id')});
+            account.fetch({
+            success: _.bind(function (modelo) {
+                    //Asignamos el promotor del producto para la operación
+                var producto = parseInt(this.model.get('tipo_producto_c'));
+                switch (producto) {
+                    case 3:
+                        id_promotor = modelo.get('user_id2_c');
+                        name_promotor = modelo.attributes.promotorcredit_c;
+                        break;
+                    case 4:
+                        id_promotor = modelo.get('user_id1_c');
+                        name_promotor = modelo.attributes.promotorfactoraje_c;
+                        break;
+                    case 6:
+                        id_promotor = modelo.get('user_id6_c');
+                        name_promotor = modelo.attributes.promotorfleet_c;
+                        break;
+                    case 8:
+                        id_promotor = modelo.get('user_id7_c');
+                        name_promotor = modelo.attributes.promotoruniclick_c;
+                        break;
+                    case 9:
+                        id_promotor = modelo.get('user_id7_c');
+                        name_promotor = modelo.attributes.promotoruniclick_c;
+                        break;
+                    default:
+                        id_promotor = modelo.get('user_id_c');
+                        name_promotor = modelo.attributes.promotorleasing_c;
+                        //seteo de asesor RM al campo asesor_rm_c
+                        id_RM= modelo.get('user_id8_c');
+                        name_promotorRM = modelo.attributes.promotorrm_c;
+                        this.model.set("user_id1_c", id_RM);
+                        this.model.set("asesor_rm_c", name_promotorRM);
+                        break;
+                }
+
+                if( parseInt(this.model.get('negocio_c'))==10)
+                {
+                    id_promotor = modelo.get('user_id7_c');
+                    name_promotor = modelo.attributes.promotoruniclick_c;
+                }
+                if( parseInt(this.model.get('producto_financiero_c'))==43)
+                {
+                    id_promotor = app.user.id;
+                    name_promotor = app.user.attributes.full_name;
+
+                }
+                if( parseInt(this.model.get('producto_financiero_c'))==40)
+                {
+                    id_promotor = modelo.get('user_id_c');
+                    name_promotor = modelo.attributes.promotorleasing_c;
+                }
+                //Agrega asesor solo con privilegios de Admin Cartera
+                if (this.model.get('admin_cartera_c') == true && app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
+
+                    id_promotor = app.user.id;
+                    name_promotor = app.user.attributes.full_name;
+                }
+
+                    this.model.set("assigned_user_id", id_promotor);
+                    this.model.set("assigned_user_name", name_promotor);
+
+                    this.render();
+                }, this)
+            });
+
             this.set_lista_productos();
             this.render();
         }
     },
-
+    
     showSubpanels: function () {
         if (typeof this.model.get('tipo_producto_c') != "undefined" && this.model.get('tipo_producto_c') != ""
             && typeof this.model.get('account_id') != "undefined" && this.model.get('account_id') != "") {
