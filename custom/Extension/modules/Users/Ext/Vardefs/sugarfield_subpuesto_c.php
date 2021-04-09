@@ -1,5 +1,5 @@
 <?php
- // created: 2020-03-04 16:46:55
+ // created: 2021-04-09 18:45:36
 $dictionary['User']['fields']['subpuesto_c']['labelValue']='Subpuesto Usuario';
 $dictionary['User']['fields']['subpuesto_c']['dependency']='';
 $dictionary['User']['fields']['subpuesto_c']['visibility_grid']=array (
@@ -90,6 +90,7 @@ $dictionary['User']['fields']['subpuesto_c']['visibility_grid']=array (
       1 => '1',
       2 => '2',
       3 => '3',
+      4 => '4',
     ),
     28 => 
     array (
@@ -167,6 +168,15 @@ $dictionary['User']['fields']['subpuesto_c']['visibility_grid']=array (
     array (
     ),
     53 => 
+    array (
+    ),
+    54 => 
+    array (
+    ),
+    55 => 
+    array (
+    ),
+    56 => 
     array (
     ),
     '' => 
