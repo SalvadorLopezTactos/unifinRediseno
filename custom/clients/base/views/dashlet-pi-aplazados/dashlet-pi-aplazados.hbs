@@ -1,8 +1,8 @@
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
     <thead>
         <tr>
-            <td><b>Nombre Cuenta</b></td>            
-            <td><b>Nombre Solicitud</b></td>            
+            <td><b>Nombre Cuenta</b></td>
+            <td><b>Nombre Solicitud</b></td>
             <td><b>Acciones</b></td>
         </tr>
     </thead>
@@ -14,7 +14,7 @@
             <td>
                 <button class="btn btn btnNoViableAplazados" id="btnNoViableAplazados" type="submit" title="{{idCuenta}}">Establecer No viable</button>
                 <a href="#Opportunities/{{idOpp}}" style="margin-top: 2px;" id="btnProspIntExpAplazado" target="_blank" class="btn" rel="tooltip">Convertir a prospecto integración de expediente</a>
-            </td>  
+            </td>
         </tr>
         {{/each}}
     </tbody>
