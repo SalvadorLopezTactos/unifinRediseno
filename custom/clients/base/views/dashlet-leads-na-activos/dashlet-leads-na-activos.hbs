@@ -9,7 +9,7 @@
 
 </style>
 
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
     <thead>
         <tr>
             <td><b>Nombre</b></td>
@@ -28,7 +28,7 @@
                 <button class="btn btn btnCancelActivo" id="btnCancelActivo" type="submit" title="{{idLead}}">Cancelar</button>
                 <a href="#Leads/{{idLead}}" id="btnProspectoActivo" target="_blank" class="btn" rel="tooltip">Establecer Prospecto Contactado</a>
                 <button class="btn btn btnAplazarActivo" id="btnAplazarActivo" type="submit" title="{{idLead}}">Aplazar</button>
-            </td>  
+            </td>
         </tr>
         {{/each}}
     </tbody>

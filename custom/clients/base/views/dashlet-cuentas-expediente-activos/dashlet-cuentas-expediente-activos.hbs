@@ -9,7 +9,7 @@
 
 </style>
 
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
     <thead>
         <tr>
             <td><b>Nombre Cuenta</b></td>
@@ -18,7 +18,7 @@
 			<td><b>Etapa</b></td>
             <td><b>Estatus Producto</b></td>
             <td><b>Semáforo</b></td>
-            <td><b>Acciones</b></td>			
+            <td><b>Acciones</b></td>
         </tr>
     </thead>
     <tbody>
@@ -34,7 +34,7 @@
                 <button class="btn btn btnNoViableExpActivo" id="btnNoViableExpActivo" type="submit" title="{{idCuenta}}">Establecer No viable</button>
                 <button class="btn btn btnAplazarExpActivo" style="margin-top: 2px;" id="btnAplazarExpActivo" type="submit" title="{{idCuenta}}">Aplazar</button>
                 <a href="#Accounts/{{idCuenta}}" id="btnCompExpActivo" style="margin-top: 2px;" target="_blank" class="btn" rel="tooltip">Completar Expediente</a>
-            </td>  
+            </td>
         </tr>
         {{/each}}
     </tbody>
