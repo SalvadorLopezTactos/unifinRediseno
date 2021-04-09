@@ -1,5 +1,5 @@
 <?php
- // created: 2021-02-22 18:37:02
+ // created: 2021-04-09 13:27:50
 
 $app_list_strings['submotivo_cancelacion_list']=array (
   '' => '',
@@ -14,4 +14,15 @@ $app_list_strings['submotivo_cancelacion_list']=array (
   9 => 'Datos de contacto no existentes o incorrectos',
   10 => 'No se pudo contactar al tomador de decisión',
   11 => 'No le interesa recibir información de UNIFIN',
+  12 => 'Solicita apoyo de gobierno',
+  13 => 'Busca empleo',
+  14 => 'Crédito Emprendedor',
+  15 => 'Información Alterada',
+  16 => 'Menor de edad',
+  17 => 'Préstamo Personal',
+  18 => 'Régimen Fiscal no viable',
+  19 => 'Solicita Crédito Hipotecario',
+  20 => 'Necesita monto que no ofrecemos',
+  21 => 'Tasa alta',
+  22 => 'Comisión por dispersión',
 );
