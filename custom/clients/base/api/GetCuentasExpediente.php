@@ -30,7 +30,7 @@ class GetCuentasExpediente extends SugarApi
             if ($statusProduct != 3) {
 
                 $query = "SELECT idCuenta,nombreCuenta,tipoCuenta,subtipoCuenta,idOpp,oppNombre,oppEtapa,
-				monto,  fecha_asignacion, tipo_producto, EstatusProducto, val_dias_20,val_dias_10,
+				monto,  fecha_asignacion,daypas, tipo_producto, EstatusProducto, val_dias_20,val_dias_10,
 				CASE WHEN solicitudes.val_dias_20 = 20 and solicitudes.monto > 10000000 THEN 0
 				WHEN solicitudes.val_dias_20 = -20 and solicitudes.monto > 10000000 THEN 1
 				WHEN solicitudes.val_dias_10 = 10 and (solicitudes.monto <= 10000000 ) THEN 0
@@ -45,40 +45,38 @@ class GetCuentasExpediente extends SugarApi
                         INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb
                         INNER JOIN uni_productos_cstm upc on upc.id_c = up.id
                         WHERE up.tipo_cuenta = '2' and  up.subtipo_cuenta in ('8','10')
-                        and ac.user_id_c = '{$id_user}' -- 'e33b00c0-7709-3bb4-a79d-5626cda71227'
+                        and ac.user_id_c = '{$id_user}'
                         and upc.status_management_c = '{$statusProduct}' -- '2'
                         and tipo_producto = '1'
                         and a.deleted = 0 and up.deleted = 0
                     ) AS CUENTAS LEFT JOIN (
                         SELECT app.account_id acc, opp.date_modified, TIMESTAMPDIFF(DAY, opp.date_modified, now()) as daypas,
                         opp.id as idOpp, opp.name as oppNombre, oppcstm.tipo_producto_c, opp.assigned_user_id oppassigned, oppcstm.tct_etapa_ddw_c, oppcstm.estatus_c,
-                        oppcstm.tct_estapa_subetapa_txf_c as oppEtapa, DATE_FORMAT( auditop.date_created, '%Y-%m-%d ') as fecha_asignacion,
+                        oppcstm.tct_estapa_subetapa_txf_c as oppEtapa, DATE_FORMAT( opp.date_modified, '%Y-%m-%d ') as fecha_asignacion,
                         opp.amount as monto,
                         DATE_FORMAT(DATE_SUB(now(), INTERVAL 20 DAY), '%Y-%m-%d ')  as veinte,
                         DATE_FORMAT(DATE_SUB(now(), INTERVAL 10 DAY), '%Y-%m-%d ')  as diez,
-                        CASE WHEN auditop.date_created <  DATE_FORMAT(DATE_SUB(now(), INTERVAL 20 DAY), '%Y-%m-%d ') THEN '20'
-                        WHEN auditop.date_created >  DATE_FORMAT(DATE_SUB(now(), INTERVAL 20 DAY), '%Y-%m-%d ') THEN '-20'
+                        CASE WHEN opp.date_modified <  DATE_FORMAT(DATE_SUB(now(), INTERVAL 20 DAY), '%Y-%m-%d ') THEN '20'
+                        WHEN opp.date_modified >  DATE_FORMAT(DATE_SUB(now(), INTERVAL 20 DAY), '%Y-%m-%d ') THEN '-20'
                         END AS val_dias_20,
-                        CASE WHEN auditop.date_created < DATE_FORMAT(DATE_SUB(now(), INTERVAL 10 DAY), '%Y-%m-%d ') THEN '10'
-                        WHEN auditop.date_created > DATE_FORMAT(DATE_SUB(now(), INTERVAL 10 DAY), '%Y-%m-%d ') THEN '-10'
+                        CASE WHEN opp.date_modified < DATE_FORMAT(DATE_SUB(now(), INTERVAL 10 DAY), '%Y-%m-%d ') THEN '10'
+                        WHEN opp.date_modified > DATE_FORMAT(DATE_SUB(now(), INTERVAL 10 DAY), '%Y-%m-%d ') THEN '-10'
                         END AS val_dias_10
                         FROM accounts_opportunities app
                         INNER JOIN opportunities opp on opp.id = app.opportunity_id
                         INNER JOIN opportunities_cstm oppcstm on oppcstm.id_c = opp.id
-                        INNER JOIN opportunities_audit auditop on auditop.parent_id = opp.id
-                        INNER JOIN (SELECT app.account_id uac, opp.id oppid, max(opp.date_modified) as dayb , min(TIMESTAMPDIFF(DAY, opp.date_modified, now())) as daypas
-                    			FROM accounts_opportunities app INNER JOIN opportunities opp on opp.id = app.opportunity_id
-                    			where  opp.assigned_user_id = '{$id_user}'
-                    			group by app.account_id order by app.account_id
-                    		) AS ultimos on ultimos.uac = app.account_id
-                    		and ultimos.dayb = opp.date_modified
-                        WHERE  oppcstm.tipo_producto_c = '1'
-                         and auditop.field_name='estatus_c'
-					     and auditop.after_value_string='PE'
+						INNER JOIN (
+		                	SELECT app.account_id uac, opp.id oppid, opp.name, max(opp.date_modified) as dayb , min(TIMESTAMPDIFF(DAY, opp.date_modified, now())) as daypas
+		                	FROM accounts_opportunities app INNER JOIN opportunities opp on opp.id = app.opportunity_id
+                            where  opp.assigned_user_id = '{$id_user}'
+                            group by app.account_id order by app.account_id
+                        ) AS ultimos on ultimos.uac = app.account_id and ultimos.dayb = opp.date_modified
+				        WHERE  oppcstm.tipo_producto_c = '1'
                         group by app.account_id
                         order by daypas
-                    ) as solicitudes
-                on cuentas.idCuenta = solicitudes.acc";
+			        ) as solicitudes
+	            on cuentas.idCuenta = solicitudes.acc
+                order by fecha_asignacion asc";
 
                 /*if ($statusProduct == '2') {
                     $query = $query . "where ( solicitudes.val_dias_20=20 and solicitudes.monto > 10000000) OR
