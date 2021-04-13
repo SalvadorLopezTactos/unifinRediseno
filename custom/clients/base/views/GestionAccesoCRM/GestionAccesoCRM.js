@@ -158,20 +158,34 @@
                         if (agentesTel[key].access_hours_c != "") {
                             //console.log("id agente tele " + agentesTel[key].id);
                             var lin = agentesTel[key].access_hours_c.Monday.entrada;
+                            var lcomida = agentesTel[key].access_hours_c.Monday.comida;
+                            var lregreso = agentesTel[key].access_hours_c.Monday.regreso;
                             var lout = agentesTel[key].access_hours_c.Monday.salida;
                             var min = agentesTel[key].access_hours_c.Tuesday.entrada;
+                            var mcomida = agentesTel[key].access_hours_c.Tuesday.comida;
+                            var mregreso = agentesTel[key].access_hours_c.Tuesday.regreso;
                             var mout = agentesTel[key].access_hours_c.Tuesday.salida;
                             var miin = agentesTel[key].access_hours_c.Wednesday.entrada;
+                            var micomida = agentesTel[key].access_hours_c.Wednesday.comida;
+                            var miregreso = agentesTel[key].access_hours_c.Wednesday.regreso;
                             var miout = agentesTel[key].access_hours_c.Wednesday.salida;
                             var jin = agentesTel[key].access_hours_c.Thursday.entrada;
+                            var jcomida = agentesTel[key].access_hours_c.Thursday.comida;
+                            var jregreso = agentesTel[key].access_hours_c.Thursday.regreso;
                             var jout = agentesTel[key].access_hours_c.Thursday.salida;
                             var vin = agentesTel[key].access_hours_c.Friday.entrada;
+                            var vcomida = agentesTel[key].access_hours_c.Friday.comida;
+                            var vregreso = agentesTel[key].access_hours_c.Friday.regreso;
                             var vout = agentesTel[key].access_hours_c.Friday.salida;
                             var sin = agentesTel[key].access_hours_c.Saturday.entrada;
+                            var scomida = agentesTel[key].access_hours_c.Saturday.comida;
+                            var sregreso = agentesTel[key].access_hours_c.Saturday.regreso;
                             var sout = agentesTel[key].access_hours_c.Saturday.salida;
                             var din = agentesTel[key].access_hours_c.Sunday.entrada;
+                            var dcomida = agentesTel[key].access_hours_c.Sunday.comida;
+                            var dregreso = agentesTel[key].access_hours_c.Sunday.regreso;
                             var dout = agentesTel[key].access_hours_c.Sunday.salida;
-                            context.cargaDatos(lin, lout, min, mout, miin, miout, jin, jout, vin, vout, sin, sout, din, dout);
+                            context.cargaDatos(lin, lcomida, lregreso, lout, min, mcomida, mregreso, mout, miin, micomida, miregreso, miout, jin, jcomida, jregreso, jout, vin, vcomida, vregreso, vout, sin, scomida, sregreso, sout, din, dcomida, dregreso, dout);
                         }
                         else {
                             context.naceBloqueado();
@@ -692,7 +706,7 @@
         return errores;
     },
 
-    cargaDatos: function (Lin, Lout, Min, Mout, Miin, Miout, Jin, Jout, Vin, Vout, Sin, Sout, Din, Dout) {
+    cargaDatos: function (Lin, Lcomida, Lregreso, Lout, Min, Mcomida, Mregreso, Mout, Miin, Micomida, Miregreso, Miout, Jin, Jcomida, Jregreso, Jout, Vin, Vcomida, Vregreso, Vout, Sin, Scomida, Sregreso, Sout, Din, Dcomida, Dregreso, Dout) {
         if (Lin == "Bloqueado") {
             $("#bloqueadoL").prop("checked", true);
             $("#LHin").attr("disabled", true);
@@ -706,6 +720,8 @@
             $("#definirL").prop("checked", true);
             $("#LHin").val(Lin);
             $("#LHout").val(Lout);
+            $("#LHin").val(Lcomida);
+            $("#LHout").val(Lregreso);
         }
 
         if (Min == "Bloqueado") {
