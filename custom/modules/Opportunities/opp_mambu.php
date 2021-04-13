@@ -23,10 +23,13 @@ class MambuLogic
         if(in_array($bean->producto_financiero_c ,$available_financiero) && $bean->estatus_c=="N" && $beanCuenta->encodedkey_mambu_c!="" && $bean->tct_id_mambu_c=="") {
             $GLOBALS['log']->fatal("Inicia MambuLogic para creacion de Linea de credito Mambu");
             //Declara variables globales para la peticion del servicio Mambu
-            $url=$sugar_config['url_mambu_gral'].'creditarrangements';
-            $user=$sugar_config['user_mambu'];
-            $pwd=$sugar_config['pwd_mambu'];
-            $auth_encode=base64_encode( $user.':'.$pwd );
+            //$url=$sugar_config['url_mambu_gral'].'creditarrangements';
+            //$user=$sugar_config['user_mambu'];
+            //$pwd=$sugar_config['pwd_mambu'];
+            //$auth_encode=base64_encode( $user.':'.$pwd );
+
+            $url=$sugar_config['url_mambu_uniclick'].'clientes/linea';
+            $apiKey=$sugar_config['apikey_mambu_uniclick'];
             //Transformacion campo date_entered (añade horas y -05:00)
             $timedate2 = new TimeDate();
             $datetime_startDate = $timedate2->fromDb($bean->date_entered);
@@ -39,6 +42,8 @@ class MambuLogic
             $fechaexp=$bean->vigencialinea_c."T12:00:00".$timezoneExp;
             //$GLOBALS['log']->fatal("Fecha linea de expiracion ".$fechaexp);
             $producto_financiero_c = $bean->producto_financiero_c;
+            
+            /*
             $body = array(
                     "amount"=> $bean->monto_c,
                     "notes"=> $bean->name,
@@ -54,11 +59,29 @@ class MambuLogic
                     "_productos"=> array(
                      $producto_financiero_c=>"TRUE"
                     )
+            );*/
+
+            $body = array(
+                "amount"=> $bean->monto_c,
+                "notes"=> $bean->name,
+                "holderKey"=> $beanCuenta->encodedkey_mambu_c,
+                "exposureLimitType"=> "APPROVED_AMOUNT",
+                "expireDate"=> $fechaexp,
+                "holderType"=> "GROUP",
+                "startDate"=> $fecha_creacion,
+                "_datos_linea_credito"=>array(
+                    "id_linea_credito"=> $bean->id_linea_credito_c,
+                    "monto_autorizado"=> $bean->amount
+                ),
+                "_productos"=> array(
+                    $producto_financiero_c=>"TRUE"
+                )
             );
             $GLOBALS['log']->fatal('Petición: Mambu interacion '. json_encode($body));
             //Llama a UnifinAPI para que realice el consumo de servicio a Mambu
             $callApi = new UnifinAPI();
-            $resultado = $callApi->postMambu($url,$body,$auth_encode);
+            //$resultado = $callApi->postMambu($url,$body,$auth_encode);
+            $resultado = $callApi->postMambuUniclick($url,$body,$apiKey);
             $GLOBALS['log']->fatal('Resultado: PEticion mambu integracion '. json_encode($resultado));
            if(!empty($resultado['encodedKey'])){
                $GLOBALS['log']->fatal('Ha realizado correctamente la linea de crédito a Mambu con la cuenta ' .$bean->name);
