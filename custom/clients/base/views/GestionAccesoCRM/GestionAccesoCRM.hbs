@@ -157,13 +157,13 @@
                     <tr style="background: #20608c; color: white;">
                         <th style="background: #f6f8f9;"></th>
                         <th style="background: #f6f8f9;"></th>
-                        <th colspan="2">Lunes</th>
-                        <th colspan="2">Martes</th>
-                        <th colspan="2">Miércoles</th>
-                        <th colspan="2">Jueves</th>
-                        <th colspan="2">Viernes</th>
-                        <th colspan="2">Sábado</th>
-                        <th colspan="2">Domingo</th>
+                        <th colspan="4">Lunes</th>
+                        <th colspan="4">Martes</th>
+                        <th colspan="4">Miércoles</th>
+                        <th colspan="4">Jueves</th>
+                        <th colspan="4">Viernes</th>
+                        <th colspan="4">Sábado</th>
+                        <th colspan="4">Domingo</th>
                     </tr>
                     <tr style="background: #0d75b994;">
                         <th width="5%">
@@ -172,18 +172,32 @@
                         </th>
                         <th style="padding: 2px">AGENTE</th>
                         <th style="padding: 2px">Inicio</th>
+                        <th style="padding: 2px">Comida</th>
+                        <th style="padding: 2px">Regreso</th>
                         <th style="padding: 2px">Salida</th>
                         <th style="padding: 2px">Inicio</th>
+                        <th style="padding: 2px">Comida</th>
+                        <th style="padding: 2px">Regreso</th>
                         <th style="padding: 2px">Salida</th>
                         <th style="padding: 2px">Inicio</th>
+                        <th style="padding: 2px">Comida</th>
+                        <th style="padding: 2px">Regreso</th>
                         <th style="padding: 2px">Salida</th>
                         <th style="padding: 2px">Inicio</th>
+                        <th style="padding: 2px">Comida</th>
+                        <th style="padding: 2px">Regreso</th>
                         <th style="padding: 2px">Salida</th>
                         <th style="padding: 2px">Inicio</th>
+                        <th style="padding: 2px">Comida</th>
+                        <th style="padding: 2px">Regreso</th>
                         <th style="padding: 2px">Salida</th>
                         <th style="padding: 2px">Inicio</th>
+                        <th style="padding: 2px">Comida</th>
+                        <th style="padding: 2px">Regreso</th>
                         <th style="padding: 2px">Salida</th>
                         <th style="padding: 2px">Inicio</th>
+                        <th style="padding: 2px">Comida</th>
+                        <th style="padding: 2px">Regreso</th>
                         <th style="padding: 2px">Salida</th>
                     </tr>
                     </thead>
@@ -212,6 +226,20 @@
                     <span sfuuid='880' class='list'>
                           <div>
                               <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{entrada}}</span>
+                          </div>
+                    </span>
+                                </td>
+                                <td>
+                    <span sfuuid='880' class='list'>
+                          <div>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{comida}}</span>
+                          </div>
+                    </span>
+                                </td>
+                                <td>
+                    <span sfuuid='880' class='list'>
+                          <div>
+                              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{regreso}}</span>
                           </div>
                     </span>
                                 </td>
@@ -274,6 +302,8 @@
                             <th>Día Semana</th>
                             <th>Acciones</th>
                             <th>Hora Inicio</th>
+                            <th>Comida</th>
+                            <th>Regreso Comida</th>
                             <th>Hora Salida</th>
                             <th>Actualizar</th>
                         </tr>
@@ -301,6 +331,16 @@
                                 <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
                                        disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.lhin}}"
                                        id="LHin">
+                            </td>
+                            <td>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
+                                       disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.lhcomida}}"
+                                       id="LHcomida">
+                            </td>
+                            <td>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
+                                       disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.lhregreso}}"
+                                       id="LHregreso">
                             </td>
                             <td>
                                 <div class="form-group row">
@@ -336,6 +376,16 @@
                                        id="MHin">
                             </td>
                             <td>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
+                                       disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.mhcomida}}"
+                                       id="MHcomida">
+                            </td>
+                            <td>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
+                                       disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.mhregreso}}"
+                                       id="MHregreso">
+                            </td>
+                            <td>
                                 <div class="form-group row">
                                     <input class="form-control" type="time" min="00:01" max="23:59" {{#if bloqM}}
                                            disabled {{/if}} {{#if libM}} disabled {{/if}} step="" value="{{mhout}}"
@@ -367,6 +417,16 @@
                                 <input class="form-control" type="time" min="00:01" max="23:59" {{#if bloqMi}}
                                        disabled {{/if}} {{#if libMi}} disabled {{/if}} step="" value="{{mihin}}"
                                        id="MiHin">
+                            </td>
+                            <td>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
+                                       disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.mihcomida}}"
+                                       id="MiHcomida">
+                            </td>
+                            <td>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
+                                       disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.mihregreso}}"
+                                       id="MiHregreso">
                             </td>
                             <td>
                                 <div class="form-group row">
@@ -402,6 +462,16 @@
                                        id="JHin">
                             </td>
                             <td>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
+                                       disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.jhcomida}}"
+                                       id="JHcomida">
+                            </td>
+                            <td>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
+                                       disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.jhregreso}}"
+                                       id="JHregreso">
+                            </td>
+                            <td>
                                 <div class="form-group row">
                                     <input class="form-control" type="time" min="00:01" max="23:59" {{#if bloqJ}}
                                            disabled {{/if}} {{#if libJ}} disabled {{/if}} step="" value="{{jhout}}"
@@ -433,6 +503,16 @@
                                 <input class="form-control" type="time" min="00:01" max="23:59" {{#if bloqV}}
                                        disabled {{/if}} {{#if libV}} disabled {{/if}} step="" value="{{vhin}}"
                                        id="VHin">
+                            </td>
+                            <td>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
+                                       disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.vhcomida}}"
+                                       id="VHcomida">
+                            </td>
+                            <td>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
+                                       disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.vhregreso}}"
+                                       id="VHregreso">
                             </td>
                             <td>
                                 <div class="form-group row">
@@ -468,6 +548,16 @@
                                        id="SHin">
                             </td>
                             <td>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
+                                       disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.shcomida}}"
+                                       id="SHcomida">
+                            </td>
+                            <td>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
+                                       disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.lhregreso}}"
+                                       id="SHregreso">
+                            </td>
+                            <td>
                                 <div class="form-group row">
                                     <input class="form-control" type="time" min="00:01" max="23:59" {{#if bloqS}}
                                            disabled {{/if}} {{#if libS}} disabled {{/if}} step="" value="{{Shout}}"
@@ -501,6 +591,16 @@
                                        id="DHin">
                             </td>
                             <td>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
+                                       disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.dhcomida}}"
+                                       id="DHcomida">
+                            </td>
+                            <td>
+                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
+                                       disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.dhregreso}}"
+                                       id="DHregreso">
+                            </td>
+                            <td>
                                 <div class="form-group row">
                                     <input class="form-control" type="time" min="00:01" max="23:59" {{#if bloqD}}
                                            disabled {{/if}} {{#if libD}} disabled {{/if}} step="" value="{{dhout}}"
@@ -517,7 +617,7 @@
                             <td colspan="2"><a class="btn fa fa-ban ExcluirHorario"
                                                style="background: #0e90d2; color: #ffffff;">
                                 Excluir de Horario</a></td>
-                            <td colspan="1"></td>
+                            <td colspan="3"></td>
                             <td colspan="2"><a class="btn fa fa-save UpdateHorario"
                                                style="background: #0e90d2; color: #ffffff;">
                                 Actualizar Horario</a></td>
