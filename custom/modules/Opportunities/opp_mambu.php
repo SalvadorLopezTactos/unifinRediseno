@@ -66,9 +66,9 @@ class MambuLogic
                 "notes"=> $bean->name,
                 "holderKey"=> $beanCuenta->encodedkey_mambu_c,
                 "exposureLimitType"=> "APPROVED_AMOUNT",
-                "expireDate"=> $fechaexp,
+                "expireDate"=> $bean->vigencialinea_c,
                 "holderType"=> "GROUP",
-                "startDate"=> $fecha_creacion,
+                "startDate"=> $bean->date_entered,
                 "_datos_linea_credito"=>array(
                     "id_linea_credito"=> $bean->id_linea_credito_c,
                     "monto_autorizado"=> $bean->amount
