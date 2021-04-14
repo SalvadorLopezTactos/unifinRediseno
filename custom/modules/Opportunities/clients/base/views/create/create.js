@@ -1951,10 +1951,10 @@
                     name_promotor = app.user.attributes.full_name;
                 }
 
-                    this.model.set("assigned_user_id", id_promotor);
-                    this.model.set("assigned_user_name", name_promotor);
+                this.model.set("assigned_user_id", id_promotor);
+                this.model.set("assigned_user_name", name_promotor);
 
-                    this.render();
+                self.render();
                 }, this)
             });
 
