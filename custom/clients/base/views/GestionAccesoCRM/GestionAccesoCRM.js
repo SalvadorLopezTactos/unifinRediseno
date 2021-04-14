@@ -250,18 +250,32 @@
             if (respuesta == "") {
                 var parametros = context.seleccionados;
                 var horario = '{"Monday":{"entrada":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#LHin").val())) +
-                    '","salida":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#LHout").val())) + '","update":"' + $('#updateL').is(":checked") + '"},' +
+                    '","comida":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#LHcomida").val())) +
+                    '","regreso":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#LHregreso").val())) +
+                    '"salida":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#LHout").val())) + '","update":"' + $('#updateL').is(":checked") + '"},' +
                     '"Tuesday":{"entrada":"' + ($('#bloqueadoM').is(":checked") ? "Bloqueado" : ($('#libreM').is(":checked") ? "Libre" : $("#MHin").val())) +
+                    '","comida":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#MHcomida").val())) +
+                    '","regreso":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#MHregreso").val())) +
                     '","salida":"' + ($('#bloqueadoM').is(":checked") ? "Bloqueado" : ($('#libreM').is(":checked") ? "Libre" : $("#MHout").val())) + '","update":"' + $('#updateM').is(":checked") + '"},' +
                     '"Wednesday":{"entrada":"' + ($('#bloqueadoMi').is(":checked") ? "Bloqueado" : ($('#libreMi').is(":checked") ? "Libre" : $("#MiHin").val())) +
+                    '","comida":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#MiHcomida").val())) +
+                    '","regreso":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#MiHregreso").val())) +
                     '","salida":"' + ($('#bloqueadoMi').is(":checked") ? "Bloqueado" : ($('#libreMi').is(":checked") ? "Libre" : $("#MiHout").val())) + '","update":"' + $('#updateMi').is(":checked") + '"},' +
                     '"Thursday":{"entrada":"' + ($('#bloqueadoJ').is(":checked") ? "Bloqueado" : ($('#libreJ').is(":checked") ? "Libre" : $("#JHin").val())) +
+                    '","comida":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#JHcomida").val())) +
+                    '","regreso":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#JHregreso").val())) +
                     '","salida":"' + ($('#bloqueadoJ').is(":checked") ? "Bloqueado" : ($('#libreJ').is(":checked") ? "Libre" : $("#JHout").val())) + '","update":"' + $('#updateJ').is(":checked") + '"},' +
                     '"Friday":{"entrada":"' + ($('#bloqueadoV').is(":checked") ? "Bloqueado" : ($('#libreV').is(":checked") ? "Libre" : $("#VHin").val())) +
+                    '","comida":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#VHcomida").val())) +
+                    '","regreso":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#VHregreso").val())) +
                     '","salida":"' + ($('#bloqueadoV').is(":checked") ? "Bloqueado" : ($('#libreV').is(":checked") ? "Libre" : $("#VHout").val())) + '","update":"' + $('#updateV').is(":checked") + '"},' +
                     '"Saturday":{"entrada":"' + ($('#bloqueadoS').is(":checked") ? "Bloqueado" : ($('#libreS').is(":checked") ? "Libre" : $("#SHin").val())) +
+                    '","comida":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#SHcomida").val())) +
+                    '","regreso":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#SHregreso").val())) +
                     '","salida":"' + ($('#bloqueadoS').is(":checked") ? "Bloqueado" : ($('#libreS').is(":checked") ? "Libre" : $("#SHout").val())) + '","update":"' + $('#updateS').is(":checked") + '"},' +
                     '"Sunday":{"entrada":"' + ($('#bloqueadoD').is(":checked") ? "Bloqueado" : ($('#libreD').is(":checked") ? "Libre" : $("#DHin").val())) +
+                    '","comida":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#DHcomida").val())) +
+                    '","regreso":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#DHregreso").val())) +
                     '","salida":"' + ($('#bloqueadoD').is(":checked") ? "Bloqueado" : ($('#libreD').is(":checked") ? "Libre" : $("#DHout").val())) + '","update":"' + $('#updateD').is(":checked") + '"}}';
 
                 //  console.log("Parametros " + parametros);
