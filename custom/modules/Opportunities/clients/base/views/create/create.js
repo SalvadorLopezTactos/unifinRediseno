@@ -1955,6 +1955,9 @@
                 this.model.set("assigned_user_name", name_promotor);
 
                 self.render();
+                this.model.set("assigned_user_id", id_promotor);
+                this.model.set("assigned_user_name", name_promotor);
+
                 }, this)
             });
 
