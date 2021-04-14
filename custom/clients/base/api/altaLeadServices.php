@@ -38,12 +38,15 @@ class altaLeadServices extends SugarApi
             /** Agregamos atributos a cada lead y asociado */
 
             $obj_leads = $this->agrega_atributos($args);
+			
+			// Obtiene Compañía
+			$compania_c = $args['lead']['compania_c'];
 
             if ($args['lead']['regimen_fiscal_c'] != '3') {
                 $obj_leads['lead'] = $this->sec_validacion($obj_leads['lead']);
                 $response_Services['lead'] = $this->insert_Leads_Asociados($obj_leads['lead'], "");
 // Actualizamos el campo asignado a de cada registro nuevo
-                $this->get_asignado($response_Services, "1");
+                $this->get_asignado($response_Services, "1", $compania_c);
 
             } else {
                 /** PErsona Moral */
@@ -75,7 +78,7 @@ class altaLeadServices extends SugarApi
                     }
                 }*/
                 // Actualizamos el campo asignado a de cada registro nuevo
-                $this->get_asignado($response_Services, "3");
+                $this->get_asignado($response_Services, "3", $compania_c);
                 /*  } else {
 
                       $GLOBALS['log']->fatal(print_r($obj_leads, true));
@@ -147,7 +150,7 @@ class altaLeadServices extends SugarApi
         return $obj_leads;
     }
 
-    public function get_asignado($data_result, $regimenFiscal)
+    public function get_asignado($data_result, $regimenFiscal, $compania_c)
     {
         global $db;
         $users = [];
@@ -173,6 +176,8 @@ WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
         $result = $db->query($query);
         $row = $db->fetchByAssoc($result);
         $last_indice = $row['value'];
+		if($compania_c == 1) $subpuesto_c = 3;
+		if($compania_c == 2) $subpuesto_c = 4;
 
         $query_asesores = "SELECT
   user.id,
@@ -184,18 +189,21 @@ FROM users user
     ON uc.id_c = user.id
   INNER JOIN leads lead
     ON lead.assigned_user_id = user.id
-where puestousuario_c='27' AND subpuesto_c='3'
+where puestousuario_c='27' AND subpuesto_c='$subpuesto_c'
 GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
+
         $result_usr = $db->query($query_asesores);
         //$usuarios=;
         while ($row = $db->fetchByAssoc($result_usr)) {
             $hours = json_decode($row['access_hours_c'], true);
             $hoursIn = !empty($hours) ? $hours[$dia_semana]['entrada'] : "";
+			$hoursComida = !empty($hours) ? $hours[$dia_semana]['comida'] : "";
+			$hoursRegreso = !empty($hours) ? $hours[$dia_semana]['regreso'] : "";
             $hoursOut = !empty($hours) ? $hours[$dia_semana]['salida'] : "";
-            if ($hoursIn != "" && $hoursOut != "") {
-                if (($hoursIn != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursOut != "Libre")) {
-                    $enable = $this->accessHours($hoursIn, $hoursOut, $dateInput);
-                    if ($enable) {
+            if ($hoursIn != "" && $hoursOut != "" && $hoursComida != "" && $hoursRegreso != "") {
+                if (($hoursIn != "Bloqueado" && $hoursComida != "Bloqueado" && $hoursRegreso != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursComida != "Libre" && $hoursRegreso != "Libre" && $hoursOut != "Libre")) {
+                    $enable = $this->accessHours($hoursIn, $hoursComida, $hoursRegreso, $hoursOut, $dateInput);
+					if ($enable) {
                         $users[] = $row['id'];
                     }
                 } elseif ($hoursIn == "Libre" && $hoursOut == "Libre") {
@@ -204,7 +212,6 @@ GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
             } /*else {
                 $users[] = $row['id'];
             }*/
-
         }
         //$GLOBALS['log']->fatal("Usuarios MKT en servicio alta Leads  " . print_r($users, true));
 
@@ -839,16 +846,15 @@ GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
         }
     }
 
-    public function accessHours($from, $to, $login)
+    public function accessHours($from, $eat, $return, $to, $login)
     {
-        $GLOBALS['log']->fatal('FRom ' . $from . "  " . $to . "  " . $login);
         $dateFrom = date("H:i", strtotime($from));
+		$dateEat = date("H:i", strtotime($eat));
+		$dateRet = date("H:i", strtotime($return));
         $dateTo = date("H:i", strtotime($to));
         $dateLogin = date("H:i", strtotime($login));
-        /*        $GLOBALS['log']->fatal('FRom ' . $dateFrom);
-                $GLOBALS['log']->fatal('To ' . $dateTo);
-                $GLOBALS['log']->fatal('Login ' . $dateLogin);*/
-
-        return ($dateFrom <= $dateLogin && $dateLogin <= $dateTo);
+		if($dateFrom <= $dateLogin && $dateLogin <= $dateTo) $enable = 1;
+		if($dateEat <= $dateLogin && $dateLogin <= $dateRet) $enable = 0;
+        return ($enable);
     }
 }
