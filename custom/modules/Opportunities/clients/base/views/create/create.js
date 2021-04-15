@@ -19,8 +19,6 @@
     productos: null,
     multilinea_prod: null,
     exist_PRodFinanciero:false,
-	id_promotor: null,
-	name_promotor: null,
 
     initialize: function (options) {
         self = this;
@@ -175,10 +173,7 @@
         // this.Updt_OptionProdFinan(); # se comenta para hacer listas dependiente
         this.model.on("change:negocio_c", _.bind(this.Updt_OptionProdFinan, this));
         this.model.on('change:negocio_c', this.verificaOperacionProspecto, this);
-		this.model.addValidationTask('validaAsesor', _.bind(this.validaAsesor, this));
-
         this.adminUserCartera();
-
     },
 
    /* producto_financiero: function () {
@@ -428,9 +423,6 @@
             $('[data-name="ca_importe_enganche_c"]').attr('style', 'pointer-events:none'); //Pago unico
             $('[data-name="porciento_ri_c"]').attr('style', 'pointer-events:none'); //% Pago unico
         }
-		// Coloca Asesor
-		this.model.set("assigned_user_id", this.id_promotor);
-        this.model.set("assigned_user_name", this.name_promotor);
     },
 
     adminUserCartera: function () {
@@ -784,11 +776,11 @@
                     id_promotor = app.user.id;
                     name_promotor = app.user.attributes.full_name;
                 }
-
-                this.model.set("assigned_user_id", id_promotor);
-                this.model.set("assigned_user_name", name_promotor);
-				this.id_promotor = id_promotor;
-				this.name_promotor = name_promotor;
+				if(id_promotor != undefined)
+				{
+					this.model.set("assigned_user_id", id_promotor);
+					this.model.set("assigned_user_name", name_promotor);
+				}
 
                 /*var usuario = app.data.createBean('Users', {id: promotor});
                 usuario.fetch({
@@ -1933,7 +1925,6 @@
                         this.model.set("asesor_rm_c", name_promotorRM);
                         break;
                 }
-
                 if( parseInt(this.model.get('negocio_c'))==10)
                 {
                     id_promotor = modelo.get('user_id7_c');
@@ -1943,7 +1934,6 @@
                 {
                     id_promotor = app.user.id;
                     name_promotor = app.user.attributes.full_name;
-
                 }
                 if( parseInt(this.model.get('producto_financiero_c'))==40)
                 {
@@ -1956,19 +1946,13 @@
                     id_promotor = app.user.id;
                     name_promotor = app.user.attributes.full_name;
                 }
-
                 this.model.set("assigned_user_id", id_promotor);
                 this.model.set("assigned_user_name", name_promotor);
-				this.id_promotor = id_promotor;
-				this.name_promotor = name_promotor;
-
                 self.render();
                 this.model.set("assigned_user_id", id_promotor);
                 this.model.set("assigned_user_name", name_promotor);
-
                 }, this)
             });
-
             this.set_lista_productos();
             this.render();
         }
@@ -2314,12 +2298,6 @@
             errors['producto_financiero_c'] = errors['producto_financiero_c'] || {};
             errors['producto_financiero_c'].required = true;
         }
-        callback(null, fields, errors);
-    },
-
-    validaAsesor: function (fields, errors, callback) {
-		this.model.set("assigned_user_id", this.id_promotor);
-        this.model.set("assigned_user_name", this.name_promotor);
         callback(null, fields, errors);
     },
 })
