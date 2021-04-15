@@ -324,7 +324,7 @@
                 });*/
                 app.alert.show("Error en Horario", {
                     level: "error",
-                    title: "No puede haber una hora mayor a la salida: <br>" + respuesta,
+                    title: "Se tiene un configuración de horas erronea para el día: <br>" + respuesta,
                     autoClose: false
                 });
             }
