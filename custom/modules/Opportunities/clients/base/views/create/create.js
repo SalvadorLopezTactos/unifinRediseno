@@ -19,6 +19,8 @@
     productos: null,
     multilinea_prod: null,
     exist_PRodFinanciero:false,
+	id_promotor: null,
+	name_promotor: null,
 
     initialize: function (options) {
         self = this;
@@ -45,7 +47,7 @@
           EJC_14/01/2021
           funcion: Valida tener alguna comunicación previa, llamada o reunión"
         */
-       this.model.addValidationTask('contacto_previo',  _.bind(this.ContactoPrevio, this));
+        this.model.addValidationTask('contacto_previo',  _.bind(this.ContactoPrevio, this));
 
 
         this.model.addValidationTask('buscaDuplicados', _.bind(this.buscaDuplicados, this));
@@ -169,11 +171,11 @@
         this.showfieldBenef();
         this.showfieldSuby();
         //this.model.addValidationTask('benef_req', _.bind(this.reqBenfArea, this));
-       // this.model.on("change:producto_financiero_c", _.bind(this.producto_financiero, this));
-       // this.Updt_OptionProdFinan(); # se comenta para hacer listas dependiente
-       this.model.on("change:negocio_c", _.bind(this.Updt_OptionProdFinan, this));
+        // this.model.on("change:producto_financiero_c", _.bind(this.producto_financiero, this));
+        // this.Updt_OptionProdFinan(); # se comenta para hacer listas dependiente
+        this.model.on("change:negocio_c", _.bind(this.Updt_OptionProdFinan, this));
         this.model.on('change:negocio_c', this.verificaOperacionProspecto, this);
-
+		this.model.addValidationTask('validaAsesor', _.bind(this.validaAsesor, this));
 
         this.adminUserCartera();
 
@@ -783,6 +785,8 @@
 
                 this.model.set("assigned_user_id", id_promotor);
                 this.model.set("assigned_user_name", name_promotor);
+				this.id_promotor = id_promotor;
+				this.name_promotor = name_promotor;
 
                 /*var usuario = app.data.createBean('Users', {id: promotor});
                 usuario.fetch({
@@ -1953,6 +1957,8 @@
 
                 this.model.set("assigned_user_id", id_promotor);
                 this.model.set("assigned_user_name", name_promotor);
+				this.id_promotor = id_promotor;
+				this.name_promotor = name_promotor;
 
                 self.render();
                 this.model.set("assigned_user_id", id_promotor);
@@ -2306,6 +2312,12 @@
             errors['producto_financiero_c'] = errors['producto_financiero_c'] || {};
             errors['producto_financiero_c'].required = true;
         }
+        callback(null, fields, errors);
+    },
+
+    validaAsesor: function (fields, errors, callback) {
+		this.model.set("assigned_user_id", this.id_promotor);
+        this.model.set("assigned_user_name", this.name_promotor);
         callback(null, fields, errors);
     },
 })
