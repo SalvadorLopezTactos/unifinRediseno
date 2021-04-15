@@ -91,12 +91,12 @@ class CstmOAuth2Api extends OAuth2Api
         
         $dateLogin = date("H:i", strtotime($login));
 
-        //$GLOBALS['log']->fatal('FRom ' . $dateFrom);
-        //$GLOBALS['log']->fatal('To ' . $dateTo);
-        //$GLOBALS['log']->fatal('comida ' . $dateComida);
-        //$GLOBALS['log']->fatal('regreso ' . $dateRegreso);
+        $GLOBALS['log']->fatal('FRom ' . $dateFrom);
+        $GLOBALS['log']->fatal('To ' . $dateTo);
+        $GLOBALS['log']->fatal('comida ' . $dateComida);
+        $GLOBALS['log']->fatal('regreso ' . $dateRegreso);
 
-        //$GLOBALS['log']->fatal('Login ' . $dateLogin);
+        $GLOBALS['log']->fatal('Login ' . $dateLogin);
 
         /*if ($dateFrom > $dateTo) {
             $dateTo->modify('+1 day');
