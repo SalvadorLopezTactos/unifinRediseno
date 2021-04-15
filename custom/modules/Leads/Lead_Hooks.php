@@ -154,5 +154,20 @@ SQL;
             $row = $db->fetchByAssoc($queryResult);
 			$bean->macrosector_c = $row['id_cnbv_macrosector'];
         }
+        //Manda a llamar función para llenar Subsector
+        $this->llenaSubsector($bean,$event,$args);
+    }
+
+    public function llenaSubsector($bean, $event, $args){
+        //Llena el campo de Subsector
+		global $db;
+		if(!empty($bean->pb_grupo_c)){
+			$query = <<<SQL
+SELECT DISTINCT id_cnbv_subsector FROM catalogo_clasificacion_sectorial_pb WHERE id_pb_grupo = '{$bean->pb_grupo_c}'
+SQL;
+            $queryResult = $db->query($query);
+            $row = $db->fetchByAssoc($queryResult);
+            $bean->subsector_c = $row['id_cnbv_subsector'];
+        }
     }
 }

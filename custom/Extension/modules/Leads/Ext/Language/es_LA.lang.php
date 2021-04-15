@@ -103,3 +103,4 @@ $mod_strings['LBL_URL_ORIGINACION_C'] = 'URL de Originación';
 $mod_strings['LBL_PB_DIVISION'] = 'División';
 $mod_strings['LBL_PB_GRUPO'] = 'Grupo';
 $mod_strings['LBL_PB_CLASE'] = 'Clase';
+$mod_strings['LBL_SUBSECTOR'] = 'Subsector';
