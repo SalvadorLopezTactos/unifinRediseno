@@ -34,11 +34,13 @@ class updateAsesor_ATAcceso extends SugarApi
             $idUser = $records[$i];
             $user = BeanFactory::getBean('Users', $idUser, array('disable_row_level_security' => true));
             $arrNHorario = json_decode($nuevoHorario, true);
+            //$GLOBALS['log']->fatal("antes del update json" , $arrNHorario);
             $hAnterior = json_decode($user->access_hours_c, true);
             if (!$args['data']['excluir']) {
                 if ($hAnterior != "") {
                     //$GLOBALS['log']->fatal("antes del update " . print_r($hAnterior, true));
                     foreach ($arrNHorario as $index => $item) {
+                        //$GLOBALS['log']->fatal("index" . $index);
                         $row_update = $arrNHorario[$index]['update'];
                         //$GLOBALS['log']->fatal("Horario nuevo index  " . $index);
                         //$GLOBALS['log']->fatal("Horario nuevo update  " . $arrNHorario[$index]['update']);
@@ -47,6 +49,9 @@ class updateAsesor_ATAcceso extends SugarApi
                             //$GLOBALS['log']->fatal("Actualizado ");
                             $hAnterior[$index]['entrada'] = $arrNHorario[$index]['entrada'];
                             $hAnterior[$index]['salida'] = $arrNHorario[$index]['salida'];
+                            /***************************************/
+                            $hAnterior[$index]['comida'] = $arrNHorario[$index]['comida'];
+                            $hAnterior[$index]['regreso'] = $arrNHorario[$index]['regreso'];                                
                         }
                     }
                     //$GLOBALS['log']->fatal("despues del update " . print_r($hAnterior, true));

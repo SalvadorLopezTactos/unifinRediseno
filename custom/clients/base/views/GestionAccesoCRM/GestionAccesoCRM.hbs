@@ -333,20 +333,24 @@
                                        id="LHin">
                             </td>
                             <td>
-                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
+                                <div class="form-group row">
+                                    <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
                                        disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.lhcomida}}"
                                        id="LHcomida">
-                            </td>
-                            <td>
-                                <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
-                                       disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.lhregreso}}"
-                                       id="LHregreso">
+                                </div>                                
                             </td>
                             <td>
                                 <div class="form-group row">
                                     <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
-                                           disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.lhout}}"
-                                           id="LHout">
+                                       disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.lhregreso}}"
+                                       id="LHregreso">
+                                </div>                                
+                            </td>
+                            <td>
+                                <div class="form-group row">
+                                    <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
+                                        disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.lhout}}"
+                                        id="LHout">
                                 </div>
                             </td>
                             <td>
