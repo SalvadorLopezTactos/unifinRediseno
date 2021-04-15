@@ -42,7 +42,7 @@ class MambuLogic
             $fechaexp=$bean->vigencialinea_c."T12:00:00".$timezoneExp;
             //$GLOBALS['log']->fatal("Fecha linea de expiracion ".$fechaexp);
             $producto_financiero_c = $bean->producto_financiero_c;
-            
+
             /*
             $body = array(
                     "amount"=> $bean->monto_c,
@@ -60,18 +60,21 @@ class MambuLogic
                      $producto_financiero_c=>"TRUE"
                     )
             );*/
+            //Revolvente
+            $revolvente = ($bean->revolvente_c) ? "TRUE" : "FALSE";
 
             $body = array(
                 "amount"=> $bean->monto_c,
                 "notes"=> $bean->name,
                 "holderKey"=> $beanCuenta->encodedkey_mambu_c,
                 "exposureLimitType"=> "APPROVED_AMOUNT",
-                "expireDate"=> $bean->vigencialinea_c,
+                "expireDate"=> $bean->vigencialinea_c .' 12:00:00',
                 "holderType"=> "GROUP",
                 "startDate"=> $bean->date_entered,
                 "_datos_linea_credito"=>array(
                     "id_linea_credito"=> $bean->id_linea_credito_c,
-                    "monto_autorizado"=> $bean->amount
+                    "monto_autorizado"=> $bean->amount,
+                    "_revolvente"=> $revolvente
                 ),
                 "_productos"=> array(
                     $producto_financiero_c=>"TRUE"
@@ -150,7 +153,7 @@ class MambuLogic
 
     public function estableceCuerpoCorreoErrorMambu($contenidoPeticion,$contenidoError){
 
-        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>Estimado usuario</b><br> 
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>Estimado usuario</b><br>
         Se le informa que se ha producido un error en la petición hacia Mambú, el cual se detalla de la siguiente forma:<br><br>'.json_encode($contenidoError).'
       <br><br>En donde la petición enviada fue la siguiente:<br><br>'.json_encode($contenidoPeticion).'
       <br><br>Atentamente Unifin</font></p>
