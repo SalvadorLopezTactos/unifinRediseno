@@ -31,19 +31,21 @@ class CstmOAuth2Api extends OAuth2Api
         $horaDia = $array_date[1] . ":" . $array_date[2];
         $dateInput = date('H:i', strtotime($horaDia));
 
-
+        //$GLOBALS['log']->fatal('Puesto ' . $current_user->puestousuario_c);
         if ($current_user->puestousuario_c == '27') {
             if ($current_user->access_hours_c != "") {
 
                 $horas = json_decode($current_user->access_hours_c, true);
                 $dateIn = $horas[$dia_semana]['entrada'];
                 $dateOut = $horas[$dia_semana]['salida'];
+                $dateComida = $horas[$dia_semana]['comida'];
+                $dateRegreso = $horas[$dia_semana]['regreso'];
 
                 if ($dateIn != "Libre" && $dateIn != "Bloqueado") {
                     $from = $dateIn;
                     $to = $dateOut;
                     $input = $dateInput;
-                    $response = $this->accessHours($dateIn, $dateOut, $input);
+                    $response = $this->accessHours($dateIn, $dateOut, $dateComida, $dateRegreso, $input);
                     $GLOBALS['log']->fatal('Resultado horario ' . $response);
                     if (!$response) {
                         $userArray = null;
@@ -74,24 +76,31 @@ class CstmOAuth2Api extends OAuth2Api
         return $userArray;
     }
 
-    public function accessHours($from, $to, $login)
+    public function accessHours($from, $to, $comida, $regreso, $login)
     {
-        $GLOBALS['log']->fatal('FRom ' . $from . "  " . $to . "  " . $login);
+        //$GLOBALS['log']->fatal('FRom ' . $from . "  " . $to . "  " . $login);
+        //$GLOBALS['log']->fatal('FRom ' . $comida . "  " . $regreso . "  " . $login);
 
         /*$dateFrom = DateTime::createFromFormat('!H:i', $from);
         $dateTo = DateTime::createFromFormat('!H:i', $to);
         $dateLogin = DateTime::createFromFormat("!H:i", $login);*/
         $dateFrom = date("H:i", strtotime($from));
         $dateTo = date("H:i", strtotime($to));
+        $dateComida = date("H:i", strtotime($comida));
+        $dateRegreso = date("H:i", strtotime($regreso));
+        
         $dateLogin = date("H:i", strtotime($login));
 
-        $GLOBALS['log']->fatal('FRom ' . $dateFrom);
-        $GLOBALS['log']->fatal('To ' . $dateTo);
-        $GLOBALS['log']->fatal('Login ' . $dateLogin);
+        //$GLOBALS['log']->fatal('FRom ' . $dateFrom);
+        //$GLOBALS['log']->fatal('To ' . $dateTo);
+        //$GLOBALS['log']->fatal('comida ' . $dateComida);
+        //$GLOBALS['log']->fatal('regreso ' . $dateRegreso);
+
+        //$GLOBALS['log']->fatal('Login ' . $dateLogin);
 
         /*if ($dateFrom > $dateTo) {
             $dateTo->modify('+1 day');
         }*/
-        return ($dateFrom <= $dateLogin && $dateLogin <= $dateTo) ;//|| ($dateFrom <= $dateLogin->modify('+1 day') && $dateLogin <= $dateTo);
+        return (($dateFrom <= $dateLogin && $dateLogin <= $dateComida) || ($dateRegreso <= $dateLogin && $dateLogin <= $dateTo) ) ;//|| ($dateFrom <= $dateLogin->modify('+1 day') && $dateLogin <= $dateTo);
     }
 }
