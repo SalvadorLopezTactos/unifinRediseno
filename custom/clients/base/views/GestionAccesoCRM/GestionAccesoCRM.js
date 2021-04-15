@@ -158,20 +158,34 @@
                         if (agentesTel[key].access_hours_c != "") {
                             //console.log("id agente tele " + agentesTel[key].id);
                             var lin = agentesTel[key].access_hours_c.Monday.entrada;
+                            var lcomida = agentesTel[key].access_hours_c.Monday.comida;
+                            var lregreso = agentesTel[key].access_hours_c.Monday.regreso;
                             var lout = agentesTel[key].access_hours_c.Monday.salida;
                             var min = agentesTel[key].access_hours_c.Tuesday.entrada;
+                            var mcomida = agentesTel[key].access_hours_c.Tuesday.comida;
+                            var mregreso = agentesTel[key].access_hours_c.Tuesday.regreso;
                             var mout = agentesTel[key].access_hours_c.Tuesday.salida;
                             var miin = agentesTel[key].access_hours_c.Wednesday.entrada;
+                            var micomida = agentesTel[key].access_hours_c.Wednesday.comida;
+                            var miregreso = agentesTel[key].access_hours_c.Wednesday.regreso;
                             var miout = agentesTel[key].access_hours_c.Wednesday.salida;
                             var jin = agentesTel[key].access_hours_c.Thursday.entrada;
+                            var jcomida = agentesTel[key].access_hours_c.Thursday.comida;
+                            var jregreso = agentesTel[key].access_hours_c.Thursday.regreso;
                             var jout = agentesTel[key].access_hours_c.Thursday.salida;
                             var vin = agentesTel[key].access_hours_c.Friday.entrada;
+                            var vcomida = agentesTel[key].access_hours_c.Friday.comida;
+                            var vregreso = agentesTel[key].access_hours_c.Friday.regreso;
                             var vout = agentesTel[key].access_hours_c.Friday.salida;
                             var sin = agentesTel[key].access_hours_c.Saturday.entrada;
+                            var scomida = agentesTel[key].access_hours_c.Saturday.comida;
+                            var sregreso = agentesTel[key].access_hours_c.Saturday.regreso;
                             var sout = agentesTel[key].access_hours_c.Saturday.salida;
                             var din = agentesTel[key].access_hours_c.Sunday.entrada;
+                            var dcomida = agentesTel[key].access_hours_c.Sunday.comida;
+                            var dregreso = agentesTel[key].access_hours_c.Sunday.regreso;
                             var dout = agentesTel[key].access_hours_c.Sunday.salida;
-                            context.cargaDatos(lin, lout, min, mout, miin, miout, jin, jout, vin, vout, sin, sout, din, dout);
+                            context.cargaDatos(lin, lcomida, lregreso, lout, min, mcomida, mregreso, mout, miin, micomida, miregreso, miout, jin, jcomida, jregreso, jout, vin, vcomida, vregreso, vout, sin, scomida, sregreso, sout, din, dcomida, dregreso, dout);
                         }
                         else {
                             context.naceBloqueado();
@@ -196,24 +210,38 @@
         /* Nace como bloqueado */
         $("#bloqueadoL").prop("checked", true);
         $("#LHin").attr("disabled", true);
+        $("#LHcomida").attr("disabled", true);
+        $("#LHregreso").attr("disabled", true);
         $("#LHout").attr("disabled", true);
         $("#bloqueadoM").prop("checked", true);
         $("#MHin").attr("disabled", true);
+        $("#MHcomida").attr("disabled", true);
+        $("#MHregreso").attr("disabled", true);
         $("#MHout").attr("disabled", true);
         $("#bloqueadoMi").prop("checked", true);
         $("#MiHin").attr("disabled", true);
+        $("#MiHcomida").attr("disabled", true);
+        $("#MiHregreso").attr("disabled", true);
         $("#MiHout").attr("disabled", true);
         $("#bloqueadoJ").prop("checked", true);
         $("#JHin").attr("disabled", true);
+        $("#JHcomida").attr("disabled", true);
+        $("#JHregreso").attr("disabled", true);
         $("#JHout").attr("disabled", true);
         $("#bloqueadoV").prop("checked", true);
         $("#VHin").attr("disabled", true);
+        $("#VHcomida").attr("disabled", true);
+        $("#VHregreso").attr("disabled", true);
         $("#VHout").attr("disabled", true);
         $("#bloqueadoS").prop("checked", true);
         $("#SHin").attr("disabled", true);
+        $("#SHcomida").attr("disabled", true);
+        $("#SHregreso").attr("disabled", true);
         $("#SHout").attr("disabled", true);
         $("#bloqueadoD").prop("checked", true);
         $("#DHin").attr("disabled", true);
+        $("#DHcomida").attr("disabled", true);
+        $("#DHregreso").attr("disabled", true);
         $("#DHout").attr("disabled", true);
     },
     closeModal: function () {
@@ -236,18 +264,32 @@
             if (respuesta == "") {
                 var parametros = context.seleccionados;
                 var horario = '{"Monday":{"entrada":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#LHin").val())) +
+                    '","comida":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#LHcomida").val())) +
+                    '","regreso":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#LHregreso").val())) +
                     '","salida":"' + ($('#bloqueadoL').is(":checked") ? "Bloqueado" : ($('#libreL').is(":checked") ? "Libre" : $("#LHout").val())) + '","update":"' + $('#updateL').is(":checked") + '"},' +
                     '"Tuesday":{"entrada":"' + ($('#bloqueadoM').is(":checked") ? "Bloqueado" : ($('#libreM').is(":checked") ? "Libre" : $("#MHin").val())) +
+                    '","comida":"' + ($('#bloqueadoM').is(":checked") ? "Bloqueado" : ($('#libreM').is(":checked") ? "Libre" : $("#MHcomida").val())) +
+                    '","regreso":"' + ($('#bloqueadoM').is(":checked") ? "Bloqueado" : ($('#libreM').is(":checked") ? "Libre" : $("#MHregreso").val())) +
                     '","salida":"' + ($('#bloqueadoM').is(":checked") ? "Bloqueado" : ($('#libreM').is(":checked") ? "Libre" : $("#MHout").val())) + '","update":"' + $('#updateM').is(":checked") + '"},' +
                     '"Wednesday":{"entrada":"' + ($('#bloqueadoMi').is(":checked") ? "Bloqueado" : ($('#libreMi').is(":checked") ? "Libre" : $("#MiHin").val())) +
+                    '","comida":"' + ($('#bloqueadoMi').is(":checked") ? "Bloqueado" : ($('#libreMi').is(":checked") ? "Libre" : $("#MiHcomida").val())) +
+                    '","regreso":"' + ($('#bloqueadoMi').is(":checked") ? "Bloqueado" : ($('#libreMi').is(":checked") ? "Libre" : $("#MiHregreso").val())) +
                     '","salida":"' + ($('#bloqueadoMi').is(":checked") ? "Bloqueado" : ($('#libreMi').is(":checked") ? "Libre" : $("#MiHout").val())) + '","update":"' + $('#updateMi').is(":checked") + '"},' +
                     '"Thursday":{"entrada":"' + ($('#bloqueadoJ').is(":checked") ? "Bloqueado" : ($('#libreJ').is(":checked") ? "Libre" : $("#JHin").val())) +
+                    '","comida":"' + ($('#bloqueadoJ').is(":checked") ? "Bloqueado" : ($('#libreJ').is(":checked") ? "Libre" : $("#JHcomida").val())) +
+                    '","regreso":"' + ($('#bloqueadoJ').is(":checked") ? "Bloqueado" : ($('#libreJ').is(":checked") ? "Libre" : $("#JHregreso").val())) +
                     '","salida":"' + ($('#bloqueadoJ').is(":checked") ? "Bloqueado" : ($('#libreJ').is(":checked") ? "Libre" : $("#JHout").val())) + '","update":"' + $('#updateJ').is(":checked") + '"},' +
                     '"Friday":{"entrada":"' + ($('#bloqueadoV').is(":checked") ? "Bloqueado" : ($('#libreV').is(":checked") ? "Libre" : $("#VHin").val())) +
+                    '","comida":"' + ($('#bloqueadoV').is(":checked") ? "Bloqueado" : ($('#libreV').is(":checked") ? "Libre" : $("#VHcomida").val())) +
+                    '","regreso":"' + ($('#bloqueadoV').is(":checked") ? "Bloqueado" : ($('#libreV').is(":checked") ? "Libre" : $("#VHregreso").val())) +
                     '","salida":"' + ($('#bloqueadoV').is(":checked") ? "Bloqueado" : ($('#libreV').is(":checked") ? "Libre" : $("#VHout").val())) + '","update":"' + $('#updateV').is(":checked") + '"},' +
                     '"Saturday":{"entrada":"' + ($('#bloqueadoS').is(":checked") ? "Bloqueado" : ($('#libreS').is(":checked") ? "Libre" : $("#SHin").val())) +
+                    '","comida":"' + ($('#bloqueadoS').is(":checked") ? "Bloqueado" : ($('#libreS').is(":checked") ? "Libre" : $("#SHcomida").val())) +
+                    '","regreso":"' + ($('#bloqueadoS').is(":checked") ? "Bloqueado" : ($('#libreS').is(":checked") ? "Libre" : $("#SHregreso").val())) +
                     '","salida":"' + ($('#bloqueadoS').is(":checked") ? "Bloqueado" : ($('#libreS').is(":checked") ? "Libre" : $("#SHout").val())) + '","update":"' + $('#updateS').is(":checked") + '"},' +
                     '"Sunday":{"entrada":"' + ($('#bloqueadoD').is(":checked") ? "Bloqueado" : ($('#libreD').is(":checked") ? "Libre" : $("#DHin").val())) +
+                    '","comida":"' + ($('#bloqueadoD').is(":checked") ? "Bloqueado" : ($('#libreD').is(":checked") ? "Libre" : $("#DHcomida").val())) +
+                    '","regreso":"' + ($('#bloqueadoD').is(":checked") ? "Bloqueado" : ($('#libreD').is(":checked") ? "Libre" : $("#DHregreso").val())) +
                     '","salida":"' + ($('#bloqueadoD').is(":checked") ? "Bloqueado" : ($('#libreD').is(":checked") ? "Libre" : $("#DHout").val())) + '","update":"' + $('#updateD').is(":checked") + '"}}';
 
                 //  console.log("Parametros " + parametros);
@@ -275,9 +317,14 @@
                 });
 
             } else {
-                app.alert.show("Error en Horario", {
+                /*app.alert.show("Error en Horario", {
                     level: "error",
                     title: "La hora de Salida no puede ser menor  que la hora de entrada: <br>" + respuesta,
+                    autoClose: false
+                });*/
+                app.alert.show("Error en Horario", {
+                    level: "error",
+                    title: "No puede haber una hora mayor a la salida: <br>" + respuesta,
                     autoClose: false
                 });
             }
@@ -624,178 +671,275 @@
     validaSetHorario: function () {
 
         var FLin = "2021/01/01 " + $("#LHin").val();
+        var FLcomida = "2021/01/01 " +  (($("#LHcomida").val() == "") ? "00:00" : $("#LHcomida").val());
+        var FLregreso = "2021/01/01 " + (($("#LHregreso").val() == "") ? "00:00" : $("#LHregreso").val());
         var FLout = "2021/01/01 " + $("#LHout").val();
         var FMin = "2021/01/01 " + $("#MHin").val();
+        var FMcomida = "2021/01/01 " + (($("#MHcomida").val() == "") ? "00:00" : $("#MHcomida").val());
+        var FMregreso = "2021/01/01 " + (($("#MHregreso").val() == "") ? "00:00" : $("#MHregreso").val());
         var FMout = "2021/01/01 " + $("#MHout").val();
         var FMiin = "2021/01/01 " + $("#MiHin").val();
+        var FMicomida = "2021/01/01 " + (($("#MiHcomida").val() == "") ? "00:00" : $("#MiHcomida").val());
+        var FMiregreso = "2021/01/01 " + (($("#MiHregreso").val() == "") ? "00:00" : $("#MiHregreso").val());
         var FMiout = "2021/01/01 " + $("#MiHout").val();
         var FJin = "2021/01/01 " + $("#JHin").val();
+        var FJcomida = "2021/01/01 " + (($("#JHcomida").val() == "") ? "00:00" : $("#JHcomida").val());
+        var FJregreso = "2021/01/01 " + (($("#JHregreso").val() == "") ? "00:00" : $("#JHregreso").val());
         var FJout = "2021/01/01 " + $("#JHout").val();
         var FVin = "2021/01/01 " + $("#VHin").val();
+        var FVcomida = "2021/01/01 " + (($("#VHcomida").val() == "") ? "00:00" : $("#VHcomida").val());
+        var FVregreso = "2021/01/01 " + (($("#VHregreso").val() == "") ? "00:00" : $("#VHregreso").val());
         var FVout = "2021/01/01 " + $("#VHout").val();
         var FSin = "2021/01/01 " + $("#SHin").val();
+        var FScomida = "2021/01/01 " + (($("#SHcomida").val() == "") ? "00:00" : $("#SHcomida").val());
+        var FSregreso = "2021/01/01 " + (($("#SHregreso").val() == "") ? "00:00" : $("#SHregreso").val());
         var FSout = "2021/01/01 " + $("#SHout").val();
         var FDin = "2021/01/01 " + $("#DHin").val();
+        var FDcomida = "2021/01/01 " + (($("#DHcomida").val() == "") ? "00:00" : $("#DHcomida").val());
+        var FDregreso = "2021/01/01 " + (($("#DHregreso").val() == "") ? "00:00" : $("#DHregreso").val());
         var FDout = "2021/01/01 " + $("#DHout").val();
-
 
         var errores = "";
         if (!$('#bloqueadoL').is(":checked") && !$('#libreL').is(":checked") && $('#definirL').is(":checked")) {
             var Lin = (new Date(FLin).getTime() / 1000);
             var Lout = (new Date(FLout).getTime() / 1000);
+            var Lcomida = (new Date(FLcomida).getTime() / 1000);
+            var Lregreso = (new Date(FLregreso).getTime() / 1000);
             if (Lin > Lout) {
                 errores = errores + '<b>- Lunes<br></b>';
-            }
+            }else if($("#LHcomida").val() != "" && $("#LHregreso").val() != ""){
+                if (Lin > Lcomida || Lin > Lregreso || Lcomida > Lregreso || Lcomida > Lout || Lregreso > Lout) {
+                    errores = errores + '<b>- Lunes<br></b>';
+                }
+            }            
         }
         if (!$('#bloqueadoM').is(":checked") && !$('#libreM').is(":checked") && $('#definirM').is(":checked")) {
             var Min = (new Date(FMin).getTime() / 1000);
             var Mout = (new Date(FMout).getTime() / 1000);
+            var Mcomida = (new Date(FMcomida).getTime() / 1000);
+            var Mregreso = (new Date(FMregreso).getTime() / 1000);
             if (Min > Mout) {
                 errores = errores + '<b>- Martes<br></b>';
+            }else if($("#MHcomida").val() != "" && $("#MHregreso").val() != ""){
+                if (Min > Mcomida || Min > Mregreso || Mcomida > Mregreso || Mcomida > Mout || Mregreso > Mout) {
+                    errores = errores + '<b>- Martes<br></b>';
+                }
             }
         }
         if (!$('#bloqueadoMi').is(":checked") && !$('#libreMi').is(":checked") && $('#definirMi').is(":checked")) {
             var Miin = (new Date(FMiin).getTime() / 1000);
             var Miout = (new Date(FMiout).getTime() / 1000);
-            if (Miin > Miout) {
+            var Micomida = (new Date(FMicomida).getTime() / 1000);
+            var Miregreso = (new Date(FMiregreso).getTime() / 1000);
+            if (Miin > Miout ) {
                 errores = errores + '<b>- Miércoles<br></b>';
+            }else if($("#MiHcomida").val() != "" && $("#MiHregreso").val() != ""){
+                if (Miin > Micomida || Miin > Miregreso || Micomida > Miregreso || Micomida > Miout || Miregreso > Miout) {
+                    errores = errores + '<b>- Miércoles<br></b>';
+                }
             }
         }
         if (!$('#bloqueadoJ').is(":checked") && !$('#libreJ').is(":checked") && $('#definirJ').is(":checked")) {
             var Jin = (new Date(FJin).getTime() / 1000);
             var Jout = (new Date(FJout).getTime() / 1000);
+            var Jcomida = (new Date(FJcomida).getTime() / 1000);
+            var Jregreso = (new Date(FJregreso).getTime() / 1000);
             if (Jin > Jout) {
                 errores = errores + '<b>- Jueves<br></b>';
+            }else if($("#JHcomida").val() != "" && $("#JHregreso").val() != ""){
+                if (Jin > Jcomida || Jin > Jregreso || Jcomida > Jregreso || Jcomida > Jout || Jregreso > Jout) {
+                    errores = errores + '<b>- Jueves<br></b>';
+                }
             }
         }
         if (!$('#bloqueadoV').is(":checked") && !$('#libreV').is(":checked") && $('#definirV').is(":checked")) {
             var Vin = (new Date(FVin).getTime() / 1000);
             var Vout = (new Date(FVout).getTime() / 1000);
+            var Vcomida = (new Date(FVcomida).getTime() / 1000);
+            var Vregreso = (new Date(FVregreso).getTime() / 1000);
             if (Vin > Vout) {
                 errores = errores + '<b>- Viernes<br></b>';
+            }else if($("#VHcomida").val() != "" && $("#VHregreso").val() != ""){
+                if (Vin > Vcomida || Vin > Vregreso || Vcomida > Vregreso || Vcomida > Vout || Vregreso > Vout) {
+                    errores = errores + '<b>- Viernes<br></b>';
+                }
             }
         }
         if (!$('#bloqueadoS').is(":checked") && !$('#libreS').is(":checked") && $('#definirS').is(":checked")) {
             var Sin = (new Date(FSin).getTime() / 1000);
             var Sout = (new Date(FSout).getTime() / 1000);
+            var Scomida = (new Date(FScomida).getTime() / 1000);
+            var Sregreso = (new Date(FSregreso).getTime() / 1000);
             if (Sin > Sout) {
                 errores = errores + '<b>- Sábado<br></b>';
+            }else if($("#SHcomida").val() != "" && $("#SHregreso").val() != ""){
+                if (Sin > Scomida || Sin > Sregreso || Scomida > Sregreso || Scomida > Sout || Sregreso > Sout) {
+                    errores = errores + '<b>- Sábado<br></b>';
+                }
             }
         }
         if (!$('#bloqueadoD').is(":checked") && !$('#libreD').is(":checked") && $('#definirD').is(":checked")) {
             var Din = (new Date(FDin).getTime() / 1000);
             var Dout = (new Date(FDout).getTime() / 1000);
+            var Dcomida = (new Date(FDcomida).getTime() / 1000);
+            var Dregreso = (new Date(FDregreso).getTime() / 1000);
             if (Din > Dout) {
                 errores = errores + '<b>- Domingo<br></b>';
+            }else if($("#DHcomida").val() != "" && $("#DHregreso").val() != ""){
+                if (Din > Dcomida || Din > Dregreso || Dcomida > Dregreso || Dcomida > Dout || Dregreso > Dout) {
+                    errores = errores + '<b>- Domingo<br></b>';
+                }
             }
         }
         return errores;
     },
 
-    cargaDatos: function (Lin, Lout, Min, Mout, Miin, Miout, Jin, Jout, Vin, Vout, Sin, Sout, Din, Dout) {
+    cargaDatos: function (Lin, Lcomida, Lregreso, Lout, Min, Mcomida, Mregreso, Mout, Miin, Micomida, Miregreso, Miout, Jin, Jcomida, Jregreso, Jout, Vin, Vcomida, Vregreso, Vout, Sin, Scomida, Sregreso, Sout, Din, Dcomida, Dregreso, Dout) {
         if (Lin == "Bloqueado") {
             $("#bloqueadoL").prop("checked", true);
             $("#LHin").attr("disabled", true);
             $("#LHout").attr("disabled", true);
+            $("#LHcomida").attr("disabled", true);
+            $("#LHregreso").attr("disabled", true);
         } else if (Lin == "Libre") {
             $("#libreL").prop("checked", true);
             $("#LHin").attr("disabled", true);
             $("#LHout").attr("disabled", true);
+            $("#LHcomida").attr("disabled", true);
+            $("#LHregreso").attr("disabled", true);
         }
         else {
             $("#definirL").prop("checked", true);
             $("#LHin").val(Lin);
             $("#LHout").val(Lout);
+            $("#LHcomida").val(Lcomida);
+            $("#LHregreso").val(Lregreso);
         }
 
         if (Min == "Bloqueado") {
             $("#bloqueadoM").prop("checked", true);
             $("#MHin").attr("disabled", true);
             $("#MHout").attr("disabled", true);
+            $("#MHcomida").attr("disabled", true);
+            $("#MHregreso").attr("disabled", true);
         } else if (Min == "Libre") {
             $("#libreM").prop("checked", true);
             $("#MHin").attr("disabled", true);
             $("#MHout").attr("disabled", true);
+            $("#MHcomida").attr("disabled", true);
+            $("#MHregreso").attr("disabled", true);
         }
         else {
             $("#definirM").prop("checked", true);
             $("#MHin").val(Min);
             $("#MHout").val(Mout);
+            $("#MHcomida").val(Mcomida);
+            $("#MHregreso").val(Mregreso);
         }
 
         if (Miin == "Bloqueado") {
             $("#bloqueadoMi").prop("checked", true);
             $("#MiHin").attr("disabled", true);
             $("#MiHout").attr("disabled", true);
+            $("#MiHcomida").attr("disabled", true);
+            $("#MiHregreso").attr("disabled", true);
         } else if (Miin == "Libre") {
             $("#libreMi").prop("checked", true);
             $("#MiHin").attr("disabled", true);
             $("#MiHout").attr("disabled", true);
+            $("#MiHcomida").attr("disabled", true);
+            $("#MiHregreso").attr("disabled", true);
         }
         else {
             $("#definirMi").prop("checked", true);
             $("#MiHin").val(Miin);
             $("#MiHout").val(Miout);
+            $("#MiHcomida").val(Micomida);
+            $("#MiHregreso").val(Miregreso);
         }
 
         if (Jin == "Bloqueado") {
             $("#bloqueadoJ").prop("checked", true);
             $("#JHin").attr("disabled", true);
             $("#JHout").attr("disabled", true);
+            $("#JHcomida").attr("disabled", true);
+            $("#JHregreso").attr("disabled", true);
         } else if (Jin == "Libre") {
             $("#libreJ").prop("checked", true);
             $("#JHin").attr("disabled", true);
             $("#JHout").attr("disabled", true);
+            $("#JHcomida").attr("disabled", true);
+            $("#JHregreso").attr("disabled", true);
         }
         else {
             $("#definirJ").prop("checked", true);
             $("#JHin").val(Jin);
             $("#JHout").val(Jout);
+            $("#JHcomida").val(Jcomida);
+            $("#JHregreso").val(Jregreso);
         }
 
         if (Vin == "Bloqueado") {
             $("#bloqueadoV").prop("checked", true);
             $("#VHin").attr("disabled", true);
             $("#VHout").attr("disabled", true);
+            $("#VHcomida").attr("disabled", true);
+            $("#VHregreso").attr("disabled", true);
         } else if (Vin == "Libre") {
             $("#libreV").prop("checked", true);
             $("#VHin").attr("disabled", true);
             $("#VHout").attr("disabled", true);
+            $("#VHcomida").attr("disabled", true);
+            $("#VHregreso").attr("disabled", true);
         }
         else {
             $("#definirV").prop("checked", true);
             $("#VHin").val(Vin);
             $("#VHout").val(Vout);
+            $("#VHcomida").val(Vcomida);
+            $("#VHregreso").val(Vregreso);
         }
 
         if (Sin == "Bloqueado") {
             $("#bloqueadoS").prop("checked", true);
             $("#SHin").attr("disabled", true);
             $("#SHout").attr("disabled", true);
+            $("#SHcomida").attr("disabled", true);
+            $("#SHregreso").attr("disabled", true);
         } else if (Sin == "Libre") {
             $("#libreS").prop("checked", true);
             $("#SHin").attr("disabled", true);
             $("#SHout").attr("disabled", true);
+            $("#SHcomida").attr("disabled", true);
+            $("#SHregreso").attr("disabled", true);
         }
         else {
             $("#definirS").prop("checked", true);
             $("#SHin").val(Sin);
             $("#SHout").val(Sout);
+            $("#SHcomida").val(Scomida);
+            $("#SHregreso").val(Sregreso);
         }
 
         if (Din == "Bloqueado") {
             $("#bloqueadoD").prop("checked", true);
             $("#DHin").attr("disabled", true);
             $("#DHout").attr("disabled", true);
+            $("#DHcomida").attr("disabled", true);
+            $("#DHregreso").attr("disabled", true);
         } else if (Din == "Libre") {
             $("#libreD").prop("checked", true);
             $("#DHin").attr("disabled", true);
             $("#DHout").attr("disabled", true);
+            $("#DHcomida").attr("disabled", true);
+            $("#DHregreso").attr("disabled", true);
         }
         else {
             $("#definirD").prop("checked", true);
             $("#DHin").val(Din);
             $("#DHout").val(Dout);
+            $("#DHcomida").val(Dcomida);
+            $("#DHregreso").val(Dregreso);
         }
     },
 
@@ -803,6 +947,8 @@
         if ($('#bloqueadoL').is(":checked")) {
             $("#LHin").attr("disabled", true);
             $("#LHout").attr("disabled", true);
+            $("#LHcomida").attr("disabled", true);
+            $("#LHregreso").attr("disabled", true);
             $("#libreL").prop('checked', false);
             $("#definirL").prop('checked', false);
         }
@@ -814,6 +960,8 @@
         if ($('#libreL').is(":checked")) {
             $("#LHin").attr("disabled", true);
             $("#LHout").attr("disabled", true);
+            $("#LHcomida").attr("disabled", true);
+            $("#LHregreso").attr("disabled", true);
             $("#bloqueadoL").prop('checked', false);
             $("#definirL").prop('checked', false);
         }
@@ -825,6 +973,8 @@
         if ($('#definirL').is(":checked")) {
             $("#LHin").attr("disabled", false);
             $("#LHout").attr("disabled", false);
+            $("#LHcomida").attr("disabled", false);
+            $("#LHregreso").attr("disabled", false);
             $("#bloqueadoL").prop('checked', false);
             $("#libreL").prop('checked', false);
         }
@@ -837,6 +987,8 @@
         if ($('#bloqueadoM').is(":checked")) {
             $("#MHin").attr("disabled", true);
             $("#MHout").attr("disabled", true);
+            $("#MHcomida").attr("disabled", true);
+            $("#MHregreso").attr("disabled", true);
             $("#libreM").prop('checked', false);
             $("#definirM").prop('checked', false);
         }
@@ -848,6 +1000,8 @@
         if ($('#libreM').is(":checked")) {
             $("#MHin").attr("disabled", true);
             $("#MHout").attr("disabled", true);
+            $("#MHcomida").attr("disabled", true);
+            $("#MHregreso").attr("disabled", true);
             $("#bloqueadoM").prop('checked', false);
             $("#definirM").prop('checked', false);
         }
@@ -859,6 +1013,8 @@
         if ($('#definirM').is(":checked")) {
             $("#MHin").attr("disabled", false);
             $("#MHout").attr("disabled", false);
+            $("#MHcomida").attr("disabled", false);
+            $("#MHregreso").attr("disabled", false);
             $("#bloqueadoM").prop('checked', false);
             $("#libreM").prop('checked', false);
         }
@@ -871,6 +1027,8 @@
         if ($('#bloqueadoMi').is(":checked")) {
             $("#MiHin").attr("disabled", true);
             $("#MiHout").attr("disabled", true);
+            $("#MiHcomida").attr("disabled", true);
+            $("#MiHregreso").attr("disabled", true);
             $("#libreMi").prop('checked', false);
             $("#definirMi").prop('checked', false);
         }
@@ -882,6 +1040,8 @@
         if ($('#libreMi').is(":checked")) {
             $("#MiHin").attr("disabled", true);
             $("#MiHout").attr("disabled", true);
+            $("#MiHcomida").attr("disabled", true);
+            $("#MiHregreso").attr("disabled", true);
             $("#bloqueadoMi").prop('checked', false);
             $("#definirMi").prop('checked', false);
         }
@@ -893,6 +1053,8 @@
         if ($('#definirMi').is(":checked")) {
             $("#MiHin").attr("disabled", false);
             $("#MiHout").attr("disabled", false);
+            $("#MiHcomida").attr("disabled", false);
+            $("#MiHregreso").attr("disabled", false);
             $("#bloqueadoMi").prop('checked', false);
             $("#libreMi").prop('checked', false);
         }
@@ -905,6 +1067,8 @@
         if ($('#bloqueadoJ').is(":checked")) {
             $("#JHin").attr("disabled", true);
             $("#JHout").attr("disabled", true);
+            $("#JHcomida").attr("disabled", true);
+            $("#JHregreso").attr("disabled", true);
             $("#libreJ").prop('checked', false);
             $("#definirJ").prop('checked', false);
         }
@@ -916,6 +1080,8 @@
         if ($('#libreJ').is(":checked")) {
             $("#JHin").attr("disabled", true);
             $("#JHout").attr("disabled", true);
+            $("#JHcomida").attr("disabled", true);
+            $("#JHregreso").attr("disabled", true);
             $("#bloqueadoJ").prop('checked', false);
             $("#definirJ").prop('checked', false);
         }
@@ -927,6 +1093,8 @@
         if ($('#definirJ').is(":checked")) {
             $("#JHin").attr("disabled", false);
             $("#JHout").attr("disabled", false);
+            $("#JHcomida").attr("disabled", false);
+            $("#JHregreso").attr("disabled", false);
             $("#bloqueadoJ").prop('checked', false);
             $("#libreJ").prop('checked', false);
         }
@@ -939,6 +1107,8 @@
         if ($('#bloqueadoV').is(":checked")) {
             $("#VHin").attr("disabled", true);
             $("#VHout").attr("disabled", true);
+            $("#VHcomida").attr("disabled", true);
+            $("#VHregreso").attr("disabled", true);
             $("#libreV").prop('checked', false);
             $("#definirV").prop('checked', false);
         }
@@ -950,6 +1120,8 @@
         if ($('#libreV').is(":checked")) {
             $("#VHin").attr("disabled", true);
             $("#VHout").attr("disabled", true);
+            $("#VHcomida").attr("disabled", true);
+            $("#VHregreso").attr("disabled", true);
             $("#bloqueadoV").prop('checked', false);
             $("#definirV").prop('checked', false);
         }
@@ -961,6 +1133,8 @@
         if ($('#definirV').is(":checked")) {
             $("#VHin").attr("disabled", false);
             $("#VHout").attr("disabled", false);
+            $("#VHcomida").attr("disabled", false);
+            $("#VHregreso").attr("disabled", false);
             $("#bloqueadoV").prop('checked', false);
             $("#libreV").prop('checked', false);
         }
@@ -973,6 +1147,8 @@
         if ($('#bloqueadoS').is(":checked")) {
             $("#SHin").attr("disabled", true);
             $("#SHout").attr("disabled", true);
+            $("#SHcomida").attr("disabled", true);
+            $("#SHregreso").attr("disabled", true);
             $("#libreS").prop('checked', false);
             $("#definirS").prop('checked', false);
         }
@@ -984,6 +1160,8 @@
         if ($('#libreS').is(":checked")) {
             $("#SHin").attr("disabled", true);
             $("#SHout").attr("disabled", true);
+            $("#SHcomida").attr("disabled", true);
+            $("#SHregreso").attr("disabled", true);
             $("#bloqueadoS").prop('checked', false);
             $("#definirS").prop('checked', false);
         }
@@ -995,6 +1173,8 @@
         if ($('#definirS').is(":checked")) {
             $("#SHin").attr("disabled", false);
             $("#SHout").attr("disabled", false);
+            $("#SHcomida").attr("disabled", false);
+            $("#SHregreso").attr("disabled", false);
             $("#bloqueadoS").prop('checked', false);
             $("#libreS").prop('checked', false);
         }
@@ -1007,6 +1187,8 @@
         if ($('#bloqueadoD').is(":checked")) {
             $("#DHin").attr("disabled", true);
             $("#DHout").attr("disabled", true);
+            $("#DHcomida").attr("disabled", true);
+            $("#DHregreso").attr("disabled", true);
             $("#libreD").prop('checked', false);
             $("#definirD").prop('checked', false);
         }
@@ -1018,6 +1200,8 @@
         if ($('#libreD').is(":checked")) {
             $("#DHin").attr("disabled", true);
             $("#DHout").attr("disabled", true);
+            $("#DHcomida").attr("disabled", true);
+            $("#DHregreso").attr("disabled", true);
             $("#bloqueadoD").prop('checked', false);
             $("#definirD").prop('checked', false);
         }
@@ -1029,6 +1213,8 @@
         if ($('#definirD').is(":checked")) {
             $("#DHin").attr("disabled", false);
             $("#DHout").attr("disabled", false);
+            $("#DHcomida").attr("disabled", false);
+            $("#DHregreso").attr("disabled", false);
             $("#bloqueadoD").prop('checked', false);
             $("#libreD").prop('checked', false);
         }
