@@ -428,7 +428,9 @@
             $('[data-name="ca_importe_enganche_c"]').attr('style', 'pointer-events:none'); //Pago unico
             $('[data-name="porciento_ri_c"]').attr('style', 'pointer-events:none'); //% Pago unico
         }
-
+		// Coloca Asesor
+		this.model.set("assigned_user_id", this.id_promotor);
+        this.model.set("assigned_user_name", this.name_promotor);
     },
 
     adminUserCartera: function () {
