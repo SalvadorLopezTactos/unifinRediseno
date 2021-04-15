@@ -40,14 +40,11 @@
           funcion: Validar acceso para creación de solicitudes. No debe permitir crear solicitudes si usuario tiene rol: "Gestión Comercial"
         */
         this.on('render', this._rolnocreacion, this);
-
-           /*
+		/*
           EJC_14/01/2021
           funcion: Valida tener alguna comunicación previa, llamada o reunión"
         */
         this.model.addValidationTask('contacto_previo',  _.bind(this.ContactoPrevio, this));
-
-
         this.model.addValidationTask('buscaDuplicados', _.bind(this.buscaDuplicados, this));
         this.model.addValidationTask('valida_direc_indicador', _.bind(this.valida_direc_indicador, this));
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
@@ -60,7 +57,6 @@
         //Ajuste Salvador Lopez <salvador.lopez@tactos.com.mx>
         //Validación para evitar asociar una Persona que no sea cliente
         this.model.addValidationTask('check_person_type', _.bind(this.personTypeCheck, this));
-
         this.model.on("change:porciento_ri_c", _.bind(this.calcularRI, this));
         this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
 
@@ -1550,8 +1546,7 @@
       funcion: Valida comunicación previa llamada o reunión nivel cuentas"
     */
    ContactoPrevio: function (fields, errors, callback) {
-
-        if(this.model.get('tipo_producto_c') == '1'){
+        if(this.model.get('tipo_producto_c') == '1' && this.model.get('account_id') != undefined){
            app.api.call('get', app.api.buildURL('getallcallmeetAccount/?id_Account=' + this.model.get('account_id')), null, {
                 success: _.bind(function (data) {
                     obj = JSON.parse(data);
@@ -1572,7 +1567,6 @@
         }else{
             callback(null, fields, errors);
         }
-
     },
 
     /*@Jesus Carrillo
