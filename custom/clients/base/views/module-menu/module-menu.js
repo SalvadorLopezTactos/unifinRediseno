@@ -19,7 +19,7 @@
         * Mostrar sección de menú Quántico cuando usuario tenga el provilegio especial de Admin de Cartera
         */
         //Mostrar lista de tareas únicamente para los puestos mencionados arriba
-        if(options.module=="Quantico"){
+        /*if(options.module=="Quantico"){
 
             if(puesto_usuario =="6" || puesto_usuario =="12" || puesto_usuario =="17" || puesto_usuario =="19" || 
             puesto_usuario =="5" || puesto_usuario =="11" || puesto_usuario =="16" || puesto_usuario =="53" || puesto_usuario =="54" ||
@@ -31,7 +31,7 @@
                 this.tienePuesto=false;
             }
 
-        }
+        }*/
 
     },
 
