@@ -1,0 +1,69 @@
+<style>
+
+    .enTiempo {
+        color: green;
+    }
+    .atrasado {
+        color: #ffd700;
+    }
+
+</style>
+<div>
+    <div>
+
+    </div>
+    <div>
+        
+<table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
+    <thead>
+        <tr>
+            <td><b>Nombre Cuenta</b></td>
+            <td><b>Monto</b></td>
+			<td><b>Fecha Asignación</b></td>
+			<td><b>Etapa</b></td>
+            <td><b>Estatus Producto</b></td>
+            <td><b>Semáforo</b></td>
+            <td><b>Acciones</b></td>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each dataCuentasExpActivo}}
+        <tr>
+            <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
+            <td>{{Monto}}</td>
+			<td>{{fecha_asignacion}}</td>
+			<td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>
+            <td>{{#if EstatusProducto}}{{getUnifinListValue 'status_management_list' EstatusProducto}}{{/if}}</td>
+            <td>{{#if semaforo}}<b class="enTiempo">En tiempo</b>{{else}}<b class="atrasado">Atrasado</b>{{/if}}</td>
+            <td>
+                <button class="btn btn btnNoViableExpActivo" id="btnNoViableExpActivo" type="submit" title="{{idCuenta}}">Establecer No viable</button>
+                <button class="btn btn btnAplazarExpActivo" style="margin-top: 2px;" id="btnAplazarExpActivo" type="submit" title="{{idCuenta}}">Aplazar</button>
+                <a href="#Accounts/{{idCuenta}}" id="btnCompExpActivo" style="margin-top: 2px;" target="_blank" class="btn" rel="tooltip">Completar Expediente</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+    </div>
+    <div>
+        <table border ="1">
+            <tr>
+                <td></td>
+                <td></td>
+		    </tr>
+            <tr>
+                <td></td>
+                <td></td>
+		    </tr>
+            <tr>
+                <td></td>
+                <td></td>
+		    </tr>
+            <tr>
+                <td></td>
+                <td></td>
+		    </tr>
+        </table>
+    </div>
+</div>
