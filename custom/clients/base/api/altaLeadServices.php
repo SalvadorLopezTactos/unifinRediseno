@@ -200,8 +200,8 @@ GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
 			$hoursComida = !empty($hours) ? $hours[$dia_semana]['comida'] : "";
 			$hoursRegreso = !empty($hours) ? $hours[$dia_semana]['regreso'] : "";
             $hoursOut = !empty($hours) ? $hours[$dia_semana]['salida'] : "";
-            if ($hoursIn != "" && $hoursOut != "" && $hoursComida != "" && $hoursRegreso != "") {
-                if (($hoursIn != "Bloqueado" && $hoursComida != "Bloqueado" && $hoursRegreso != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursComida != "Libre" && $hoursRegreso != "Libre" && $hoursOut != "Libre")) {
+            if ($hoursIn != "" && $hoursOut != "") {
+                if (($hoursIn != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursOut != "Libre")) {
                     $enable = $this->accessHours($hoursIn, $hoursComida, $hoursRegreso, $hoursOut, $dateInput);
 					if ($enable) {
                         $users[] = $row['id'];
@@ -221,7 +221,6 @@ GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
         } else {
             /* No existen usuarios disponibles y se asigna a  9.- MKT " */
             $new_assigned_user = $idMKT;
-
         }
 
         if ($regimenFiscal != "3") {
