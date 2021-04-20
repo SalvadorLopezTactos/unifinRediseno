@@ -77,8 +77,8 @@ GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
 		$hoursComida = !empty($hours) ? $hours[$dia_semana]['comida'] : "";
 		$hoursRegreso = !empty($hours) ? $hours[$dia_semana]['regreso'] : "";
         $hoursOut = !empty($hours) ? $hours[$dia_semana]['salida'] : "";
-        if ($hoursIn != "" && $hoursOut != "" && $hoursComida != "" && $hoursRegreso != "") {
-            if (($hoursIn != "Bloqueado" && $hoursComida != "Bloqueado" && $hoursRegreso != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursComida != "Libre" && $hoursRegreso != "Libre" && $hoursOut != "Libre")) {
+        if ($hoursIn != "" && $hoursOut != "") {
+            if (($hoursIn != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursOut != "Libre")) {
                 $enable = accessHours($hoursIn, $hoursComida, $hoursRegreso, $hoursOut, $dateInput);
                 if ($enable) {
                     $users[] = $row['id'];
@@ -92,7 +92,6 @@ GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
 
     if (count($users) > 0) {
         $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
-
         $new_assigned_user = $users[$new_indice];
     }
     return array("id" => $new_assigned_user, "indice" => $new_indice);
