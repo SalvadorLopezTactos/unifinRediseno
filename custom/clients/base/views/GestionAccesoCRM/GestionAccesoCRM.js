@@ -324,7 +324,7 @@
                 });*/
                 app.alert.show("Error en Horario", {
                     level: "error",
-                    title: "Se tiene un configuración de horas erronea para el día: <br>" + respuesta,
+                    title: "Se tiene un configuración de horas errónea para el día: <br>" + respuesta,
                     autoClose: false
                 });
             }
