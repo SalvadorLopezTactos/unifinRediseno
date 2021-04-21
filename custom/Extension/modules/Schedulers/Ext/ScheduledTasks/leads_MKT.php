@@ -22,7 +22,7 @@ WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
         $usrEnable = GetUserMKT($subpuesto_c);
         $indices = $usrEnable['indice'];
         if (!empty($usrEnable['id'])) {
-            $update_assigne_user = "UPDATE leads SET  assigned_user_id ='{$usrEnable['id']}'  WHERE id ='{$row['id']}' ";
+            $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='".$usrEnable['id']."' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$usrEnable['id']}'  WHERE l.id ='{$row['id']}' ";
             $db->query($update_assigne_user);
             if ($indices > -1) {
                 $update_assigne_user = "UPDATE config SET value = $indices  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
