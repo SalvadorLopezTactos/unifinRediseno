@@ -22,7 +22,7 @@ WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
         $usrEnable = GetUserMKT($subpuesto_c);
         $indices = $usrEnable['indice'];
         if (!empty($usrEnable['id'])) {
-            $update_assigne_user = "UPDATE leads SET  assigned_user_id ='{$usrEnable['id']}'  WHERE id ='{$row['id']}' ";
+            $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='".$usrEnable['id']."' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$usrEnable['id']}'  WHERE l.id ='{$row['id']}' ";
             $db->query($update_assigne_user);
             if ($indices > -1) {
                 $update_assigne_user = "UPDATE config SET value = $indices  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
@@ -67,7 +67,7 @@ FROM users user
     ON uc.id_c = user.id
   INNER JOIN leads lead
     ON lead.assigned_user_id = user.id
-where puestousuario_c='27' AND subpuesto_c='$subpuesto_c'
+where puestousuario_c='27' AND user.status = 'Active' AND subpuesto_c='$subpuesto_c'
 GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
     $result_usr = $db->query($query_asesores);
 
@@ -77,8 +77,8 @@ GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
 		$hoursComida = !empty($hours) ? $hours[$dia_semana]['comida'] : "";
 		$hoursRegreso = !empty($hours) ? $hours[$dia_semana]['regreso'] : "";
         $hoursOut = !empty($hours) ? $hours[$dia_semana]['salida'] : "";
-        if ($hoursIn != "" && $hoursOut != "" && $hoursComida != "" && $hoursRegreso != "") {
-            if (($hoursIn != "Bloqueado" && $hoursComida != "Bloqueado" && $hoursRegreso != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursComida != "Libre" && $hoursRegreso != "Libre" && $hoursOut != "Libre")) {
+        if ($hoursIn != "" && $hoursOut != "") {
+            if (($hoursIn != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursOut != "Libre")) {
                 $enable = accessHours($hoursIn, $hoursComida, $hoursRegreso, $hoursOut, $dateInput);
                 if ($enable) {
                     $users[] = $row['id'];
@@ -92,7 +92,6 @@ GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
 
     if (count($users) > 0) {
         $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
-
         $new_assigned_user = $users[$new_indice];
     }
     return array("id" => $new_assigned_user, "indice" => $new_indice);

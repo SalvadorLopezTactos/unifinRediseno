@@ -86,8 +86,9 @@ class CstmOAuth2Api extends OAuth2Api
         $dateLogin = DateTime::createFromFormat("!H:i", $login);*/
         $dateFrom = date("H:i", strtotime($from));
         $dateTo = date("H:i", strtotime($to));
-        $dateComida = date("H:i", strtotime($comida));
-        $dateRegreso = date("H:i", strtotime($regreso));
+        $respuesta = ($A == $B) ? "A es igual a B" : "A no es igual a B";
+        $dateComida = ($comida != "") ? date("H:i", strtotime($comida)) : "";
+        $dateRegreso = ($regreso != "") ? date("H:i", strtotime($regreso)) : "";
         
         $dateLogin = date("H:i", strtotime($login));
 
@@ -101,6 +102,16 @@ class CstmOAuth2Api extends OAuth2Api
         /*if ($dateFrom > $dateTo) {
             $dateTo->modify('+1 day');
         }*/
-        return (($dateFrom <= $dateLogin && $dateLogin <= $dateComida) || ($dateRegreso <= $dateLogin && $dateLogin <= $dateTo) ) ;//|| ($dateFrom <= $dateLogin->modify('+1 day') && $dateLogin <= $dateTo);
+        $salida = false;
+        if($dateComida != "" && $dateRegreso != ""){
+            if(($dateFrom <= $dateLogin && $dateLogin <= $dateComida) 
+            || ($dateRegreso <= $dateLogin && $dateLogin <= $dateTo) ){
+                $salida = true;
+            }
+        }else if($dateFrom <= $dateLogin && $dateLogin <= $dateTo){
+            $salida = true;
+        }
+
+        return $salida;//|| ($dateFrom <= $dateLogin->modify('+1 day') && $dateLogin <= $dateTo);
     }
 }
