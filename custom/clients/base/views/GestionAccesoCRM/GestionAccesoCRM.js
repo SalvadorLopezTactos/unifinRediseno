@@ -324,7 +324,7 @@
                 });*/
                 app.alert.show("Error en Horario", {
                     level: "error",
-                    title: "Se tiene un configuración de horas errónea para el día: <br>" + respuesta,
+                    title: "Se tiene un configuración de horas errónea.<br> " + respuesta,
                     autoClose: false
                 });
             }
@@ -700,95 +700,250 @@
         var FDout = "2021/01/01 " + $("#DHout").val();
 
         var errores = "";
+        var val = 0;
         if (!$('#bloqueadoL').is(":checked") && !$('#libreL').is(":checked") && $('#definirL').is(":checked")) {
             var Lin = (new Date(FLin).getTime() / 1000);
             var Lout = (new Date(FLout).getTime() / 1000);
             var Lcomida = (new Date(FLcomida).getTime() / 1000);
             var Lregreso = (new Date(FLregreso).getTime() / 1000);
             if (Lin > Lout) {
-                errores = errores + '<b>- Lunes<br></b>';
-            }else if($("#LHcomida").val() != "" && $("#LHregreso").val() != ""){
-                if (Lin > Lcomida || Lin > Lregreso || Lcomida > Lregreso || Lcomida > Lout || Lregreso > Lout) {
-                    errores = errores + '<b>- Lunes<br></b>';
+                errores = errores + 'Hora de Inicio es mayor a la Salida<br>';
+                val = 1;
+            }
+            if($("#LHcomida").val() != "" && $("#LHregreso").val() != ""){
+                if (Lin > Lcomida || Lin > Lregreso ) {
+                    errores = errores + 'Hora de inicio es mayor a las horas de comida<br>';
+                    val = 1;
                 }
-            }            
+                if (Lcomida > Lout || Lregreso > Lout) {
+                    errores = errores + 'Hora de salida es menor a las horas de comida<br>';
+                    val = 1;
+                }
+                if (Lcomida > Lregreso ) {
+                    errores = errores + 'Hora de comida es mayor a la de regreso<br>';
+                    val = 1;
+                }
+            }else if($("#LHcomida").val() != "" && $("#LHregreso").val() == ""){
+                errores = errores + 'Hora de regreso es necesario cuando se tiene hora de comida<br>';
+                val = 1;
+            }else if($("#LHcomida").val() == "" && $("#LHregreso").val() != ""){
+                errores = errores + 'Hora de comida es necesario cuando se tiene hora de regreso<br>';
+                val = 1;
+            }
+            if (val == 1) {
+                errores = errores + '<b>- Lunes<br></b>';
+            }
         }
+
+        val=0;
         if (!$('#bloqueadoM').is(":checked") && !$('#libreM').is(":checked") && $('#definirM').is(":checked")) {
             var Min = (new Date(FMin).getTime() / 1000);
             var Mout = (new Date(FMout).getTime() / 1000);
             var Mcomida = (new Date(FMcomida).getTime() / 1000);
             var Mregreso = (new Date(FMregreso).getTime() / 1000);
             if (Min > Mout) {
-                errores = errores + '<b>- Martes<br></b>';
-            }else if($("#MHcomida").val() != "" && $("#MHregreso").val() != ""){
-                if (Min > Mcomida || Min > Mregreso || Mcomida > Mregreso || Mcomida > Mout || Mregreso > Mout) {
-                    errores = errores + '<b>- Martes<br></b>';
+                errores = errores + 'Hora de Inicio es mayor a la Salida<br>';
+                val = 1;
+            }
+            if($("#MHcomida").val() != "" && $("#MHregreso").val() != ""){
+                if (Min > Mcomida || Min > Mregreso ) {
+                    errores = errores + 'Hora de inicio es mayor a las horas de comida<br>';
+                    val = 1;
                 }
+                if (Mcomida > Mout || Mregreso > Mout) {
+                    errores = errores + 'Hora de salida es menor a las horas de comida<br>';
+                    val = 1;
+                }
+                if (Mcomida > Mregreso ) {
+                    errores = errores + 'Hora de comida es mayor a la de regreso<br>';
+                    val = 1;
+                }
+            }else if($("#MHcomida").val() != "" && $("#MHregreso").val() == ""){
+                errores = errores + 'Hora de regreso es necesario cuando se tiene hora de comida<br>';
+                val = 1;
+            }else if($("#MHcomida").val() == "" && $("#MHregreso").val() != ""){
+                errores = errores + 'Hora de comida es necesario cuando se tiene hora de regreso<br>';
+                val = 1;
+            }
+            if (val == 1) {
+                errores = errores + '<b>- Martes<br></b>';
             }
         }
+
+        val = 0;
         if (!$('#bloqueadoMi').is(":checked") && !$('#libreMi').is(":checked") && $('#definirMi').is(":checked")) {
             var Miin = (new Date(FMiin).getTime() / 1000);
             var Miout = (new Date(FMiout).getTime() / 1000);
             var Micomida = (new Date(FMicomida).getTime() / 1000);
             var Miregreso = (new Date(FMiregreso).getTime() / 1000);
-            if (Miin > Miout ) {
-                errores = errores + '<b>- Miércoles<br></b>';
-            }else if($("#MiHcomida").val() != "" && $("#MiHregreso").val() != ""){
-                if (Miin > Micomida || Miin > Miregreso || Micomida > Miregreso || Micomida > Miout || Miregreso > Miout) {
-                    errores = errores + '<b>- Miércoles<br></b>';
+            
+            if (Miin > Miout) {
+                errores = errores + 'Hora de Inicio es mayor a la Salida<br>';
+                val = 1;
+            }
+            if($("#MiHcomida").val() != "" && $("#MiHregreso").val() != ""){
+                if (Miin > Micomida || Miin > Miregreso ) {
+                    errores = errores + 'Hora de inicio es mayor a las horas de comida<br>';
+                    val = 1;
                 }
+                if (Micomida > Miout || Miregreso > Miout) {
+                    errores = errores + 'Hora de salida es menor a las horas de comida<br>';
+                    val = 1;
+                }
+                if (Micomida > Miregreso ) {
+                    errores = errores + 'Hora de comida es mayor a la de regreso<br>';
+                    val = 1;
+                }
+            }else if($("#MiHcomida").val() != "" && $("#MiHregreso").val() == ""){
+                errores = errores + 'Hora de regreso es necesario cuando se tiene hora de comida<br>';
+                val = 1;
+            }else if($("#MiHcomida").val() == "" && $("#MiHregreso").val() != ""){
+                errores = errores + 'Hora de comida es necesario cuando se tiene hora de regreso<br>';
+                val = 1;
+            }
+            if (val == 1) {
+                errores = errores + '<b>- Míercoles<br></b>';
             }
         }
+        val=0;
         if (!$('#bloqueadoJ').is(":checked") && !$('#libreJ').is(":checked") && $('#definirJ').is(":checked")) {
             var Jin = (new Date(FJin).getTime() / 1000);
             var Jout = (new Date(FJout).getTime() / 1000);
             var Jcomida = (new Date(FJcomida).getTime() / 1000);
             var Jregreso = (new Date(FJregreso).getTime() / 1000);
             if (Jin > Jout) {
-                errores = errores + '<b>- Jueves<br></b>';
-            }else if($("#JHcomida").val() != "" && $("#JHregreso").val() != ""){
-                if (Jin > Jcomida || Jin > Jregreso || Jcomida > Jregreso || Jcomida > Jout || Jregreso > Jout) {
-                    errores = errores + '<b>- Jueves<br></b>';
+                errores = errores + 'Hora de Inicio es mayor a la Salida<br>';
+                val = 1;
+            }
+            if($("#JHcomida").val() != "" && $("#JHregreso").val() != ""){
+                if (Jin > Jcomida || Jin > Jregreso ) {
+                    errores = errores + 'Hora de inicio es mayor a las horas de comida<br>';
+                    val = 1;
                 }
+                if (Jcomida > Jout || Jregreso > Jout) {
+                    errores = errores + 'Hora de salida es menor a las horas de comida<br>';
+                    val = 1;
+                }
+                if (Jcomida > Jregreso ) {
+                    errores = errores + 'Hora de comida es mayor a la de regreso<br>';
+                    val = 1;
+                }
+            }else if($("#JHcomida").val() != "" && $("#JHregreso").val() == ""){
+                errores = errores + 'Hora de regreso es necesario cuando se tiene hora de comida<br>';
+                val = 1;
+            }else if($("#JHcomida").val() == "" && $("#JHregreso").val() != ""){
+                errores = errores + 'Hora de comida es necesario cuando se tiene hora de regreso<br>';
+                val = 1;
+            }
+            if (val == 1) {
+                errores = errores + '<b>- Jueves<br></b>';
             }
         }
+
+        val = 0;
         if (!$('#bloqueadoV').is(":checked") && !$('#libreV').is(":checked") && $('#definirV').is(":checked")) {
             var Vin = (new Date(FVin).getTime() / 1000);
             var Vout = (new Date(FVout).getTime() / 1000);
             var Vcomida = (new Date(FVcomida).getTime() / 1000);
             var Vregreso = (new Date(FVregreso).getTime() / 1000);
+            
             if (Vin > Vout) {
-                errores = errores + '<b>- Viernes<br></b>';
-            }else if($("#VHcomida").val() != "" && $("#VHregreso").val() != ""){
-                if (Vin > Vcomida || Vin > Vregreso || Vcomida > Vregreso || Vcomida > Vout || Vregreso > Vout) {
-                    errores = errores + '<b>- Viernes<br></b>';
+                errores = errores + 'Hora de Inicio es mayor a la Salida<br>';
+                val = 1;
+            }
+            if($("#VHcomida").val() != "" && $("#VHregreso").val() != ""){
+                if (Vin > Vcomida || Vin > Vregreso ) {
+                    errores = errores + 'Hora de inicio es mayor a las horas de comida<br>';
+                    val = 1;
                 }
+                if (Vcomida > Vout || Vregreso > Vout) {
+                    errores = errores + 'Hora de salida es menor a las horas de comida<br>';
+                    val = 1;
+                }
+                if (Vcomida > Vregreso ) {
+                    errores = errores + 'Hora de comida es mayor a la de regreso<br>';
+                    val = 1;
+                }
+            }else if($("#VHcomida").val() != "" && $("#VHregreso").val() == ""){
+                errores = errores + 'Hora de regreso es necesario cuando se tiene hora de comida<br>';
+                val = 1;
+            }else if($("#VHcomida").val() == "" && $("#VHregreso").val() != ""){
+                errores = errores + 'Hora de comida es necesario cuando se tiene hora de regreso<br>';
+                val = 1;
+            }
+            if (val == 1) {
+                errores = errores + '<b>- Viernes<br></b>';
             }
         }
+
+        val =0;
         if (!$('#bloqueadoS').is(":checked") && !$('#libreS').is(":checked") && $('#definirS').is(":checked")) {
             var Sin = (new Date(FSin).getTime() / 1000);
             var Sout = (new Date(FSout).getTime() / 1000);
             var Scomida = (new Date(FScomida).getTime() / 1000);
             var Sregreso = (new Date(FSregreso).getTime() / 1000);
+            
             if (Sin > Sout) {
-                errores = errores + '<b>- Sábado<br></b>';
-            }else if($("#SHcomida").val() != "" && $("#SHregreso").val() != ""){
-                if (Sin > Scomida || Sin > Sregreso || Scomida > Sregreso || Scomida > Sout || Sregreso > Sout) {
-                    errores = errores + '<b>- Sábado<br></b>';
+                errores = errores + 'Hora de Inicio es mayor a la Salida<br>';
+                val = 1;
+            }
+            if($("#SHcomida").val() != "" && $("#SHregreso").val() != ""){
+                if (Sin > Scomida || Sin > Sregreso ) {
+                    errores = errores + 'Hora de inicio es mayor a las horas de comida<br>';
+                    val = 1;
                 }
+                if (Scomida > Sout || Sregreso > Sout) {
+                    errores = errores + 'Hora de salida es menor a las horas de comida<br>';
+                    val = 1;
+                }
+                if (Scomida > Sregreso ) {
+                    errores = errores + 'Hora de comida es mayor a la de regreso<br>';
+                    val = 1;
+                }
+            }else if($("#SHcomida").val() != "" && $("#SHregreso").val() == ""){
+                errores = errores + 'Hora de regreso es necesario cuando se tiene hora de comida<br>';
+                val = 1;
+            }else if($("#SHcomida").val() == "" && $("#SHregreso").val() != ""){
+                errores = errores + 'Hora de comida es necesario cuando se tiene hora de regreso<br>';
+                val = 1;
+            }
+            if (val == 1) {
+                errores = errores + '<b>- Sábado<br></b>';
             }
         }
+
+        val = 0;
         if (!$('#bloqueadoD').is(":checked") && !$('#libreD').is(":checked") && $('#definirD').is(":checked")) {
             var Din = (new Date(FDin).getTime() / 1000);
             var Dout = (new Date(FDout).getTime() / 1000);
             var Dcomida = (new Date(FDcomida).getTime() / 1000);
             var Dregreso = (new Date(FDregreso).getTime() / 1000);
             if (Din > Dout) {
-                errores = errores + '<b>- Domingo<br></b>';
-            }else if($("#DHcomida").val() != "" && $("#DHregreso").val() != ""){
-                if (Din > Dcomida || Din > Dregreso || Dcomida > Dregreso || Dcomida > Dout || Dregreso > Dout) {
-                    errores = errores + '<b>- Domingo<br></b>';
+                errores = errores + 'Hora de Inicio es mayor a la Salida<br>';
+                val = 1;
+            }
+            if($("#DHcomida").val() != "" && $("#DHregreso").val() != ""){
+                if (Din > Dcomida || Din > Dregreso ) {
+                    errores = errores + 'Hora de inicio es mayor a las horas de comida<br>';
+                    val = 1;
                 }
+                if (Dcomida > Dout || Dregreso > Dout) {
+                    errores = errores + 'Hora de salida es menor a las horas de comida<br>';
+                    val = 1;
+                }
+                if (Dcomida > Dregreso ) {
+                    errores = errores + 'Hora de comida es mayor a la de regreso<br>';
+                    val = 1;
+                }
+            }else if($("#DHcomida").val() != "" && $("#DHregreso").val() == ""){
+                errores = errores + 'Hora de regreso es necesario cuando se tiene hora de comida<br>';
+                val = 1;
+            }else if($("#DHcomida").val() == "" && $("#DHregreso").val() != ""){
+                errores = errores + 'Hora de comida es necesario cuando se tiene hora de regreso<br>';
+                val = 1;
+            }
+            if (val == 1) {
+                errores = errores + '<b>- Domingo<br></b>';
             }
         }
         return errores;
