@@ -14,8 +14,7 @@ class Call_createSurveySubmission
     {
         global $db, $current_user, $app_list_strings;
 
-        if ($bean->status == "Held" && ($bean->tct_resultado_llamada_ddw_c == "Checklist_expediente" ||
-                ($bean->tct_resultado_llamada_ddw_c == "Llamada_servicio" && $bean->detalle_resultado_c == 9))) {
+        if ($bean->status == "Held" && ($bean->tct_resultado_llamada_ddw_c == "Checklist_expediente" || $bean->tct_resultado_llamada_ddw_c == "Llamada_servicio" )) {
 
             // variables
             $idCall = $bean->id;
@@ -90,7 +89,7 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
 
                     //Genera insert a tabla bc_survey_submission: Registro de envío de encuesta a destinatario
                     $insertS = "INSERT INTO bc_survey_submission
-            (id, name, date_entered, date_modified, modified_user_id, 
+            (id, name, date_entered, date_modified, modified_user_id,
             created_by, description, deleted, email_opened, survey_send, schedule_on, status, customer_name,
              resubmit, resubmit_counter, change_request, resend, resend_counter, recipient_as, base_score,
              obtained_score, score_percentage, parent_type, parent_id, target_parent_type, target_parent_id,
@@ -98,7 +97,7 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
                mail_status)
             VALUES
             ( '{$idSubmission}',
-              '{$nameUsrCalls}', 
+              '{$nameUsrCalls}',
               utc_timestamp(),
               utc_timestamp(),
               '{$idUsrCalls}',
@@ -136,7 +135,7 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
 
                     //Genera insert a tabla bc_survey_submission_bc_survey_c: Relación entre envío y encuesta
                     $insertSS = "INSERT INTO bc_survey_submission_bc_survey_c
-            (id, date_modified, deleted, bc_survey_submission_bc_surveybc_survey_ida, 
+            (id, date_modified, deleted, bc_survey_submission_bc_surveybc_survey_ida,
             bc_survey_submission_bc_surveybc_survey_submission_idb)
             VALUES
             ( UUID(),
@@ -181,7 +180,7 @@ WHERE rel.rel_relaciones_accounts_1accounts_ida='{$idParentCalls}'
       <br><br>Recientemente recibiste una llamada de seguimiento por parte del asesor <b>' . $Asesor . '</b>, nos gustaría conocer tu opinión acerca del servicio que has recibido.
       <center>Te invitamos a contestar la siguiente encuesta.<br><br>
       <button style="background-color:#fff;height: 35px;border-radius: 10px;"><a href="'.$urlSurvey.'"color:#032258;>Comenzar la encuesta</a></button>
-      </center></font></p>   
+      </center></font></p>
       <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
       <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: "Arial",sans-serif; color: #212121;">
        Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
@@ -309,4 +308,3 @@ WHERE
         return $bandera;
     }
 }
-
