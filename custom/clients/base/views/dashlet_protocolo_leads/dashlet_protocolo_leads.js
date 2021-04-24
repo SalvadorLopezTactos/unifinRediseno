@@ -140,22 +140,29 @@
     				title: 'Procesando',
     			});
 
-    			//Se obtiene valor de una lista, para que el nombre del archivo de carga sea dinámico
-                var nombre_archivo=App.lang.getAppListStrings('nombre_archivo_protocolo_leads_list')[1];
                 var equipo_usuario_logueado=App.user.attributes.equipo_c;
 
-    			app.api.call("read", app.api.buildURL("FilterLeadsToDB/"+nombre_archivo+"/"+equipo_usuario_logueado, null, null,null), null, {
+    			app.api.call("read", app.api.buildURL("FilterLeadsToDB/"+equipo_usuario_logueado, null, null,null), null, {
                     success: _.bind(function (data) {
 
                     	if(data.records.length>0){
                             //Actualizar lead desde potocolo, se hace desde api custom, para saltarse la seguridad de equipo
                             //y no se genere error al obtener registros que no estén asignados al asesor
-                            var idLead=data.records[0].id;
+                            var idRegistro=data.records[0].idRegistro;
+                            self.modulo=data.records[0].modulo;
                             var id_usuario=App.user.get('id');
-                            app.api.call("read",app.api.buildURL("UpdateLeadFromProtocolo/"+idLead+"/"+id_usuario, null, null,null),null,{
+                            
+                            app.api.call("read",app.api.buildURL("UpdateLeadFromProtocolo/"+idRegistro+"/"+id_usuario+"/"+self.modulo, null, null,null),null,{
                                 success: _.bind(function (data) {
+                                    var moduleLink="";
+                                    if(self.modulo=="Cuenta"){
+                                        moduleLink="Accounts"
+                                    }else{
+                                        moduleLink="Leads"
+                                    }
                                     app.alert.dismiss('asignaFromDB');
-	    							var mensaje='Se ha asignado el registro: '+'<a href="#Leads/'+data.id+'">'+data.name+'</a>';
+                                    var modulo
+	    							var mensaje='Se ha asignado el registro: '+'<a href="#'+moduleLink+'/'+data.id+'">'+data.name+'</a>';
 
 	    							app.alert.show('assignFromDB', {
 		    							level: 'success',
