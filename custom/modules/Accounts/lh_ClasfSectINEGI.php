@@ -5,23 +5,28 @@ class clase_ClasfSectorialINEGI
     function func_ClasfSectorialINEGI($bean, $event, $arguments)
     {
         $GLOBALS['log']->fatal("ACTUALIZA CLASIFICACION SECTORIAL INEGI");
-
         $idCuenta = $bean->id;
-        //Campo custom Clasificacion Sectorial
-        $clasfSectorial = $bean->account_clasf_sectorial;
-        // $GLOBALS['log']->fatal("ClasfSectorialCustom " . print_r($clasfSectorial, true));
-
-        if (!empty($clasfSectorial) && !empty($idCuenta)) {
-            // $GLOBALS['log']->fatal("INEGI " . $idCuenta);
-            $beanINEGI = BeanFactory::retrieveBean('tct02_Resumen', $idCuenta);
-            $beanINEGI->inegi_clase_c = $clasfSectorial['inegi_clase'];
-            $beanINEGI->inegi_subrama_c = $clasfSectorial['inegi_subrama'];
-            $beanINEGI->inegi_rama_c = $clasfSectorial['inegi_rama'];
-            $beanINEGI->inegi_subsector_c = $clasfSectorial['inegi_subsector'];
-            $beanINEGI->inegi_sector_c = $clasfSectorial['inegi_sector'];
-            $beanINEGI->inegi_macro_c = $clasfSectorial['inegi_macro'];
+        $actEco = $bean->actividadeconomica_c;
+        if (!empty($actEco) && !empty($idCuenta)) {
+            $GLOBALS['log']->fatal("INEGI: " . $idCuenta);
+			global $db;
+			$query = <<<SQL
+SELECT * FROM catalogo_clasificacion_sectorial WHERE id_actividad_economica_cnbv = '{$actEco}'
+SQL;
+			$queryResult = $db->query($query);
+			$row = $db->fetchByAssoc($queryResult);
+			$bean->subsectoreconomico_c = $row['id_subsector_economico_cnbv'];
+			$bean->sectoreconomico_c = $row['id_sector_economico_cnbv'];
+			$bean->tct_macro_sector_ddw_c = $row['id_macro_sector_cnbv'];
+			$beanINEGI = BeanFactory::retrieveBean('tct02_Resumen', $idCuenta);
+			$beanINEGI->inegi_clase_c = $row['id_clase_inegi'];
+			$beanINEGI->inegi_subrama_c = $row['id_subrama_inegi'];
+			$beanINEGI->inegi_rama_c = $row['id_rama_inegi'];
+			$beanINEGI->inegi_subsector_c = $row['id_subsector_inegi'];
+			$beanINEGI->inegi_sector_c = $row['id_sector_inegi'];
+			$beanINEGI->inegi_macro_c = $row['id_macro_inegi'];
             $beanINEGI->save();
-            // $GLOBALS['log']->fatal("FINALIZA HOOK CLASIFICACION SECTORIAL ");
+            $GLOBALS['log']->fatal("FINALIZA HOOK CLASIFICACION SECTORIAL ");
         }
     }
 }
