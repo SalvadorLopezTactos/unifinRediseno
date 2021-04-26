@@ -1,6 +1,6 @@
 <?php
- // created: 2021-04-14 17:13:39
-$dictionary['Lead']['fields']['subsector_c']['labelValue']='Subsector';
+ // created: 2021-04-17 00:18:33
+$dictionary['Lead']['fields']['subsector_c']['labelValue']='Subsector Económico';
 $dictionary['Lead']['fields']['subsector_c']['dependency']='';
 $dictionary['Lead']['fields']['subsector_c']['visibility_grid']='';
 

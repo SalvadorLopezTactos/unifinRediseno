@@ -221,12 +221,28 @@ SITE;
                 $bean_account->user_id7_c=$idMeetings['data']['UNILEASE'];
             }
         }
+		//Clasificación Sectorial
+		if (!empty($bean_Leads->actividad_economica_c)) {
+			$bean_account->actividadeconomica_c = $bean_Leads->actividad_economica_c;
+			$bean_account->sectoreconomico_c = $bean_Leads->sector_economico_c;
+			$bean_account->subsectoreconomico_c = $bean_Leads->subsector_c;
+			$bean_account->tct_macro_sector_ddw_c = $bean_Leads->macrosector_c;
+		}
         $bean_account->save();
 		//Campos PB
 		$bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen', $bean_account->id, array('disable_row_level_security' => true));
 		$bean_Resumen->pb_division_c = $bean_Leads->pb_division_c;
 		$bean_Resumen->pb_grupo_c = $bean_Leads->pb_grupo_c;
 		$bean_Resumen->pb_clase_c = $bean_Leads->pb_clase_c;
+		//Campos INEGI
+		if (!empty($bean_Leads->actividad_economica_c)) {
+			$bean_Resumen->inegi_clase_c = $bean_Leads->inegi_clase_c;
+			$bean_Resumen->inegi_rama_c = $bean_Leads->inegi_rama_c;
+			$bean_Resumen->inegi_subrama_c = $bean_Leads->inegi_subrama_c;
+			$bean_Resumen->inegi_sector_c = $bean_Leads->inegi_sector_c;
+			$bean_Resumen->inegi_subsector_c = $bean_Leads->inegi_subsector_c;
+			$bean_Resumen->inegi_macro_c = $bean_Leads->inegi_macro_c;
+		}
 		$bean_Resumen->save();
         // creamos las relaciones en telefono
         if (!empty($bean_Leads->phone_mobile)) {
