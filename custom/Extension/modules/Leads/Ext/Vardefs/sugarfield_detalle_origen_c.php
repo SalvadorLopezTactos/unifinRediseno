@@ -77,6 +77,12 @@ $dictionary['Lead']['fields']['detalle_origen_c']['visibility_grid']=array (
       24 => '35',
       25 => '36',
       26 => '37',
+      27 => '38',
+      28 => '39',
+      29 => '40',
+      30 => '41',
+      31 => '42',
+      32 => '43',
     ),
     '' => 
     array (

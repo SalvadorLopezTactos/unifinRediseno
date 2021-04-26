@@ -38,7 +38,7 @@ class altaLeadServices extends SugarApi
             /** Agregamos atributos a cada lead y asociado */
 
             $obj_leads = $this->agrega_atributos($args);
-			
+
 			// Obtiene Compañía
 			$compania_c = $args['lead']['compania_c'];
 
@@ -229,7 +229,7 @@ GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
 
                 $id_lead = $data_result['lead']['id'];
 
-                $update_assigne_user = "UPDATE leads SET  assigned_user_id ='$new_assigned_user'  WHERE id ='$id_lead' ";
+                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='".$new_assigned_user."' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead' ";
                 $db->query($update_assigne_user);
                 $GLOBALS['log']->fatal("Usuarios MKT en servicio alta Indice  " . $new_indice);
 
@@ -247,10 +247,10 @@ GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
                 $id_lead_asociado = $data_result['asociados'][0]['id'];
 
                 // Actualiza lead padre
-                $update_assigne_user = "UPDATE leads SET  assigned_user_id ='$new_assigned_user'  WHERE id ='$id_lead' ";
+                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='".$new_assigned_user."' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead'";
                 $db->query($update_assigne_user);
                 //Actualiza lead Hijo
-                $update_assigne_user_asociado = "UPDATE leads SET  assigned_user_id ='$new_assigned_user'  WHERE id ='$id_lead_asociado' ";
+                $update_assigne_user_asociado = "UPDATE leads l INNER JOIN users u on u.id='".$new_assigned_user."' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead_asociado' ";
                 $db->query($update_assigne_user_asociado);
 
                 if ( $new_indice > -1 ) {
@@ -264,7 +264,7 @@ GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
                 //$new_assigned_user = $users[$new_indice];
                 $id_lead = $data_result['lead']['id'];
 
-                $update_assigne_user = "UPDATE leads SET  assigned_user_id ='$new_assigned_user'  WHERE id ='$id_lead' ";
+                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='".$new_assigned_user."' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead' ";
                 $db->query($update_assigne_user);
 
                 if ( $new_indice > -1 ) {
@@ -281,7 +281,7 @@ GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
                 $row = $db->fetchByAssoc($result_existente);
                 $existente_asignado = $row['assigned_user_id'];
 
-                $update_assigne_user = "UPDATE leads SET  assigned_user_id ='$existente_asignado'  WHERE id ='$id_lead_asociado' ";
+                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='".$new_assigned_user."' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$existente_asignado'  WHERE l.id ='$id_lead_asociado' ";
                 $db->query($update_assigne_user);
 
             }
