@@ -72,3 +72,21 @@ $dependencies['Leads']['motivo_cancelacion_c'] = array(
         ),
     ),
 );
+
+/*******************NOMBRE EMPRESA*****************/
+$dependencies['Leads']['nombre_empresa_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('regimen_fiscal_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired', //Action type
+            'params' => array(
+                'target' => 'nombre_empresa_c',
+                'label'  => 'LBL_NOMBRE_EMPRESA',
+                'value'  => 'equal($regimen_fiscal_c, "3")',  //PERSONA MORAL
+            ),
+        ),
+    ),
+);

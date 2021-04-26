@@ -146,7 +146,7 @@ SQL;
     public function llenaMacro($bean=null, $event= null, $args= null){
         //Llena el campo de Macro Sector
 		global $db;
-		if(!empty($bean->pb_grupo_c)){
+		if(!empty($bean->pb_grupo_c) && empty($bean->actividad_economica_c)){
 			$query = <<<SQL
 SELECT DISTINCT id_cnbv_macrosector FROM catalogo_clasificacion_sectorial_pb WHERE id_pb_grupo = '{$bean->pb_grupo_c}'
 SQL;
@@ -156,18 +156,61 @@ SQL;
         }
         //Manda a llamar función para llenar Subsector
         $this->llenaSubsector($bean,$event,$args);
+		if(!empty($bean->actividad_economica_c) && empty($bean->sector_economico_c)) $this->llenaSectorial($bean,$event,$args);
+		if(!empty($bean->fetched_row['id']) && $bean->fetched_row['actividad_economica_c'] != $bean->actividad_economica_c && !empty($bean->actividad_economica_c)) $this->llenaSectorial($bean,$event,$args);
     }
 
     public function llenaSubsector($bean, $event, $args){
         //Llena el campo de Subsector
 		global $db;
-		if(!empty($bean->pb_grupo_c)){
+		if(!empty($bean->pb_grupo_c) && empty($bean->actividad_economica_c)){
 			$query = <<<SQL
 SELECT DISTINCT id_cnbv_subsector FROM catalogo_clasificacion_sectorial_pb WHERE id_pb_grupo = '{$bean->pb_grupo_c}'
 SQL;
             $queryResult = $db->query($query);
             $row = $db->fetchByAssoc($queryResult);
             $bean->subsector_c = $row['id_cnbv_subsector'];
+        }
+    }
+
+    public function llenaSectorial($bean, $event, $args){
+        //Llena el campos de clasificación sectorial
+		global $db;
+		$query = <<<SQL
+SELECT * FROM catalogo_clasificacion_sectorial WHERE id_actividad_economica_cnbv = '{$bean->actividad_economica_c}'
+SQL;
+        $queryResult = $db->query($query);
+        $row = $db->fetchByAssoc($queryResult);
+        $bean->subsector_c = $row['id_subsector_economico_cnbv'];
+		$bean->sector_economico_c = $row['id_sector_economico_cnbv'];
+		$bean->macrosector_c = $row['id_macro_sector_cnbv'];
+		$bean->inegi_clase_c = $row['id_clase_inegi'];
+		$bean->inegi_subrama_c = $row['id_subrama_inegi'];
+		$bean->inegi_rama_c = $row['id_rama_inegi'];
+		$bean->inegi_subsector_c = $row['id_subsector_inegi'];
+		$bean->inegi_sector_c = $row['id_sector_inegi'];
+		$bean->inegi_macro_c = $row['id_macro_inegi'];
+    }
+
+    public function validaCampos($bean = null, $event = null, $args = null){
+		//Valida campos requeridos en la importación
+        if($_REQUEST['module'] == 'Import') {
+		  if($bean->regimen_fiscal_c == '') sugar_die('El campo Régimen Fiscal es requerido');
+		  if($bean->nombre_de_cargar_c == '') sugar_die('El campo Nombre de la Carga es requerido');
+		  if($bean->origen_c == '') sugar_die('El campo Origen es requerido');
+		  if($bean->detalle_origen_c == '') sugar_die('El campo Detalle Origen es requerido');
+		  if($bean->oficina_c == '') sugar_die('El campo Oficina es requerido');
+		  if($bean->actividad_economica_c == '') sugar_die('El campo Actividad Económica es requerido');
+          if($bean->nombre_empresa_c == '' && $bean->regimen_fiscal_c == '3') sugar_die('El campo Nombre Empresa es requerido');
+		  if($bean->nombre_c == '' && $bean->regimen_fiscal_c != '3') sugar_die('El campo Nombre(s) es requerido');
+		  if($bean->apellido_paterno_c == '' && $bean->regimen_fiscal_c != '3') sugar_die('El campo Apellido Paterno es requerido');
+		  if($bean->apellido_materno_c == '' && $bean->regimen_fiscal_c != '3') sugar_die('El campo Apellido Materno es requerido');
+		  if($bean->phone_mobile == '' && $bean->phone_home == '' && $bean->phone_work == '' && $bean->regimen_fiscal_c != '3') sugar_die('Al menos un teléfono es requerido');
+		  if($bean->origen_busqueda_c == '' && $bean->detalle_origen_c == '1') sugar_die('El campo Base es requerido');
+		  if($bean->phone_work == '' && $bean->regimen_fiscal_c == '3') sugar_die('El campo Teléfono de Oficina es requerido');
+		  if($bean->leads_leads_1leads_ida == '' && $bean->regimen_fiscal_c == '3') sugar_die('El campo Contacto Asociado es requerido');
+		  if($bean->contacto_telefono_c == '' && $bean->regimen_fiscal_c == '3') sugar_die('El campo Teléfono Contacto es requerido');
+		  if($bean->oficina_c != '') $bean->assigned_user_id = '569246c7-da62-4664-ef2a-5628f649537e';
         }
     }
 }

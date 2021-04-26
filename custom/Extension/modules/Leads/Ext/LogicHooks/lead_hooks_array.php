@@ -14,7 +14,7 @@ $hook_array['after_save'][] = Array(
 );
 
 $hook_array['after_save'][] = Array(
-    4,
+    2,
     'hookleadcancelado',
     'custom/modules/Leads/lead_cancelado_class.php',
     'checkCancelado',
@@ -22,7 +22,7 @@ $hook_array['after_save'][] = Array(
 );
 
 $hook_array['after_save'][] = Array(
-    5,
+    3,
     'crear URL de Originación',
     'custom/modules/Leads/Lead_Hooks.php',
     'Lead_Hooks',
