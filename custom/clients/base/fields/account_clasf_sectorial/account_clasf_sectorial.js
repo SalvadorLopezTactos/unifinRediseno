@@ -8,6 +8,8 @@
     subrama_list: null,
     rama_list: null,
     macro_cnbv_list: null,
+    sector_cnbv_list: null,
+    subsector_cnbv_list: null,
 
     initialize: function (options) {
         //Inicializa campo custom
@@ -228,8 +230,8 @@
                         clasf_sectorial.ActividadEconomica.ms.id = dataInegi['id_macro_sector_cnbv'];
 
                         //Etiquetas de los campos CNBV para Input del HBS en edit
-                        clasf_sectorial.ActividadEconomica.label_subsector = app.lang.getAppListStrings('subsector_list')[clasf_sectorial.ActividadEconomica.sse.id];
-                        clasf_sectorial.ActividadEconomica.label_sector = app.lang.getAppListStrings('sector_list')[clasf_sectorial.ActividadEconomica.se.id];
+                        clasf_sectorial.ActividadEconomica.label_subsector = app.lang.getAppListStrings('subsector_cnbv_list')[clasf_sectorial.ActividadEconomica.sse.id];
+                        clasf_sectorial.ActividadEconomica.label_sector = app.lang.getAppListStrings('sector_cnbv_list')[clasf_sectorial.ActividadEconomica.se.id];
                         clasf_sectorial.ActividadEconomica.label_macro = app.lang.getAppListStrings('macro_cnbv_list')[clasf_sectorial.ActividadEconomica.ms.id];
 
                         //Envia los valores de los campos de INEGI a la vista HBS
@@ -281,8 +283,8 @@
     cargalistas: function () {
         //LISTAS CNBV
         clasf_sectorial.actividad_list = app.lang.getAppListStrings('actividad_list');
-        clasf_sectorial.subsector_list = app.lang.getAppListStrings('subsector_list');
-        clasf_sectorial.sector_list = app.lang.getAppListStrings('sector_list');
+        clasf_sectorial.subsector_cnbv_list = app.lang.getAppListStrings('subsector_cnbv_list');
+        clasf_sectorial.sector_cnbv_list = app.lang.getAppListStrings('sector_cnbv_list');
         clasf_sectorial.macro_list = app.lang.getAppListStrings('macro_list');
         clasf_sectorial.macro_cnbv_list = app.lang.getAppListStrings('macro_cnbv_list');
 
@@ -290,6 +292,8 @@
         clasf_sectorial.clase_list = app.lang.getAppListStrings('clase_list');
         clasf_sectorial.subrama_list = app.lang.getAppListStrings('subrama_list');
         clasf_sectorial.rama_list = app.lang.getAppListStrings('rama_list');
+        clasf_sectorial.subsector_list = app.lang.getAppListStrings('subsector_list');
+        clasf_sectorial.sector_list = app.lang.getAppListStrings('sector_list');
     },
 
     // MuestraCamposAE: function (evt) {
