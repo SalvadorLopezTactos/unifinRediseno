@@ -180,7 +180,6 @@ $app_list_strings['rama_list'] = array(
   '5179' => 'Otros servicios de telecomunicaciones',
   '5191' => 'Otros servicios de información',
   '5211' => 'Banca central',
-  '5211' => 'Instituciones de intermediación crediticia y financiera no bursátil',
   '5221' => 'Banca múltiple',
   '5222' => 'Instituciones financieras de fomento económico',
   '5223' => 'Uniones de crédito e instituciones de ahorro',
