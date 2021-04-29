@@ -1,5 +1,5 @@
 <?php
- // created: 2021-04-20 18:31:07
+ // created: 2021-04-21 20:38:15
 $dictionary['User']['fields']['region_c']['duplicate_merge_dom_value']=0;
 $dictionary['User']['fields']['region_c']['labelValue']='Región';
 $dictionary['User']['fields']['region_c']['full_text_search']=array (

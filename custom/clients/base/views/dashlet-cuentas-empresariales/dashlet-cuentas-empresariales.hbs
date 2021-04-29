@@ -7,253 +7,222 @@
         color: #ffd700;
     }
 
+    table.ex1 {
+      padding: 5px;
+    }
+
+    td.ex1 {
+      padding: 5px;
+    }
+
+    .table1.td{
+      align-content: center;
+      padding: 5px;
+      width:200px;
+    }
+
+    .table1{
+      padding: 5px;
+      margin-left: auto;
+      margin-right: auto;
+      align-content: center;
+    }
+
+    .resumen{
+      align-content: center;
+    }
+
+    .resumen.td{
+      align-content: center;
+      padding: 5px;
+      width:200px;
+    }
+
 </style>
 <div>
-    <div>
-
-    </div>
-    <div>
-        <table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
-            <thead>
+  <div class="ex1" width ="100%">
+    <table width ="800px" >
+      <br>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td width = "300px">
+          Equipos:&nbsp;
+	        <select name="equipos" id="equipos" class="select2" style="width:150px;">
+            {{{equipos_list}}}
+          </select>
+        </td>
+        <td width = "300px">
+          <button class="span3 btn" id="btn-actualiza" width = "50px">Actualizar</button>
+        </td>
+      </tr>
+    </table>
+    <br>
+  </div>
+  <div class = "resumen" width ="100%" align ="center">
+    <p>&nbsp;&nbsp;&nbsp;Resumen datos generales</p>
+    <table class="table1 table-bordered table-striped span4" style="overflow-x: scroll;" width = "100%">
+      <thead>
+        <tr >
+            <td rowspan ="2"><b>Etapa / Asesor</b></td>
+            <td colspan="3"><b>Activos</b></td>
+	    	    <td colspan="3"><b>Inactivos</b></td>
+        </tr>
+        <tr >
+            <td ><b>En tiempo</b></td>
+	    	    <td ><b>Atrasados</b></td>
+            <td ><b>Total</b></td>
+            <td ><b>En tiempo</b></td>
+	    	    <td ><b>Atrasados</b></td>
+            <td ><b>Total</b></td>
+        </tr>
+      </thead>
+      <thead>
+        <tr>
+          <td><b>TOTAL</b></td>
+          <td></td>
+	    	  <td></td>
+	    	  <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Integración Expediente</b></td>
+          <td></td>
+	        <td></td>
+	        <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        {{#each resumenExpediente}}
+          <tr>
+              <td>{{val1}}</td>
+              <td>{{val2}}</td>
+	            <td>{{val3}}</td>
+	            <td>{{val4}}</td>
+              <td>{{val5}}</td>
+              <td>{{val6}}</td>
+          </tr>
+        {{/each}}
+        <tr>
+          <td><b>Prospectos Interesados</b></td>
+          <td></td>
+	        <td></td>
+	        <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        {{#each resumenInteresados}}
+          <tr>
+              <td>{{val1}}</td>
+              <td>{{val2}}</td>
+	            <td>{{val3}}</td>
+	            <td>{{val4}}</td>
+              <td>{{val5}}</td>
+              <td>{{val6}}</td>
+          </tr>
+        {{/each}}
+        <tr>
+          <td><b>Prospectos Contactados</b></td>
+          <td></td>
+	        <td></td>
+	        <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        {{#each resumenContactados}}
+          <tr>
+              <td>{{val1}}</td>
+              <td>{{val2}}</td>
+	            <td>{{val3}}</td>
+	            <td>{{val4}}</td>
+              <td>{{val5}}</td>
+              <td>{{val6}}</td>
+          </tr>
+        {{/each}}
+        <tr>
+          <td><b>Leads</b></td>
+          <td></td>
+	        <td></td>
+	        <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        {{#each resumenLeads}}
+          <tr>
+              <td>{{val1}}</td>
+              <td>{{val2}}</td>
+	            <td>{{val3}}</td>
+	            <td>{{val4}}</td>
+              <td>{{val5}}</td>
+              <td>{{val6}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  <div>
+      <table width="100%" >
+        <tr>
+          <td width = "50%">
+            <p>Prospectos en integración de Expediente (Activos)</p>
+            <table class="table table-bordered table-striped span11" style="overflow-x: scroll;">
+              <thead>
                 <tr>
-                    <td><b>Nombre Cuenta</b></td>
-                    <td><b>Monto</b></td>
-	        		<td><b>Fecha Asignación</b></td>
-	        		<td><b>Etapa</b></td>
-                    <td><b>Estatus Producto</b></td>
+                  <td><b>Asesor</b></td>
+                  <td><b>Cuenta</b></td>
+                  <td><b>Monto</b></td>
+                  <td><b>Fecha Asignación</b></td>
+            			<td><b>Etapa</b></td>
+                  <td><b>Semáforo</b></td>
                 </tr>
-            </thead>
-            <tbody>
+              </thead>
+              <tbody>
                 {{#each dataCuentasExpActivo}}
                 <tr>
-                    <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
-                    <td>{{Monto}}</td>
-	        		<td>{{fecha_asignacion}}</td>
-	        		<td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>
-                    <td>{{#if EstatusProducto}}{{getUnifinListValue 'status_management_list' EstatusProducto}}{{/if}}</td>
+                  <td>{{asesor}}</td>
+                  <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
+                  <td>{{Monto}}</td>
+            			<td>{{fecha_asignacion}}</td>
+            			<td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>
+                  <td>{{#if semaforo}}<b class="enTiempo">En tiempo</b>{{else}}<b class="atrasado">Atrasado</b>{{/if}}</td>
                 </tr>
                 {{/each}}
-            </tbody>
-        </table>
-    </div>
-    <div>
-        <table border ="1" width = "100%">
-          <tr>
-             <td width = "50%">
-                <caption>Monthly savings</caption>
-                <table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
-                    <thead>
-                      <tr>
-                        <th><b>Nombre Cuenta</b></th>
-                        <th><b>Monto</b></th>
-	              		<th><b>Fecha Asignación</b></th>
-	               		<th><b>Etapa</b></th>
-                        <th><b>Estatus Producto</b></th>
-                        <th><b>Semáforo</b></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {{#each dataCuentasExpActivo}}
-                        <tr>
-                            <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
-                            <td>{{Monto}}</td>
-		                  	<td>{{fecha_asignacion}}</td>
-		                  	<td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>
-                            <td>{{#if EstatusProducto}}{{getUnifinListValue 'status_management_list' EstatusProducto}}{{/if}}</td>
-                            <td>{{#if semaforo}}<b class="enTiempo">En tiempo</b>{{else}}<b class="atrasado">Atrasado</b>{{/if}}</td>
-                        </tr>
-                     {{/each}}
-                    </tbody>
-                </table>
-              </td>
-              <td width = "50%">
-                <caption>Monthly savings</caption>
-                <table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
-                  <thead>
-                      <tr>
-                        <td><b>Nombre Cuenta</b></td>
-                        <td><b>Monto</b></td>
-			            <td><b>Fecha Asignación</b></td>
-			            <td><b>Etapa</b></td>
-                        <td><b>Estatus Producto</b></td>
-                      </tr>
-                  </thead>
-                  <tbody>
-                    {{#each dataCuentasExpActivo}}
+              </tbody>
+            </table>
+          </td>
+          <td width = "50%">
+              <p>Prospectos en integración de Expediente (Aplazados)</p>
+              <table class="table table-bordered table-striped span10" style="overflow-x: scroll;">
+                <thead>
                     <tr>
-                        <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
-                        <td>{{Monto}}</td>
-		            	<td>{{fecha_asignacion}}</td>
-		            	<td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>
-                        <td>{{#if EstatusProducto}}{{getUnifinListValue 'status_management_list' EstatusProducto}}{{/if}}</td>
+                      <td><b>Asesor</b></td>
+                      <td><b>Cuenta</b></td>
+                      <td><b>Monto</b></td>
+		                  <td><b>Fecha Asignación</b></td>
+		                  <td><b>Etapa</b></td>
                     </tr>
-                    {{/each}}
-                  </tbody>
-                </table>
-              </td>
-		    </tr>
-            <tr>
-              <td width = "50%">
-                <caption>Monthly savings</caption>
-                <table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
-                    <thead>
-                      <tr>
-                        <th><b>Nombre Cuenta</b></th>
-                        <th><b>Monto</b></th>
-	              		<th><b>Fecha Asignación</b></th>
-	               		<th><b>Etapa</b></th>
-                        <th><b>Estatus Producto</b></th>
-                        <th><b>Semáforo</b></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {{#each dataCuentasExpActivo}}
-                        <tr>
-                            <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
-                            <td>{{Monto}}</td>
-		                  	<td>{{fecha_asignacion}}</td>
-		                  	<td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>
-                            <td>{{#if EstatusProducto}}{{getUnifinListValue 'status_management_list' EstatusProducto}}{{/if}}</td>
-                            <td>{{#if semaforo}}<b class="enTiempo">En tiempo</b>{{else}}<b class="atrasado">Atrasado</b>{{/if}}</td>
-                        </tr>
-                     {{/each}}
-                    </tbody>
-                </table>
-              </td>
-              <td width = "50%">
-                <caption>Monthly savings</caption>
-                <table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
-                  <thead>
-                      <tr>
-                        <td><b>Nombre Cuenta</b></td>
-                        <td><b>Monto</b></td>
-			            <td><b>Fecha Asignación</b></td>
-			            <td><b>Etapa</b></td>
-                        <td><b>Estatus Producto</b></td>
-                      </tr>
-                  </thead>
-                  <tbody>
-                    {{#each dataCuentasExpActivo}}
-                    <tr>
-                        <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
-                        <td>{{Monto}}</td>
-		            	<td>{{fecha_asignacion}}</td>
-		            	<td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>
-                        <td>{{#if EstatusProducto}}{{getUnifinListValue 'status_management_list' EstatusProducto}}{{/if}}</td>
-                    </tr>
-                    {{/each}}
-                  </tbody>
-                </table>
-              </td>
-		    </tr>
-            <tr>
-             <td width = "50%">
-                <caption>Monthly savings</caption>
-                <table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
-                    <thead>
-                      <tr>
-                        <th><b>Nombre Cuenta</b></th>
-                        <th><b>Monto</b></th>
-	              		<th><b>Fecha Asignación</b></th>
-	               		<th><b>Etapa</b></th>
-                        <th><b>Estatus Producto</b></th>
-                        <th><b>Semáforo</b></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {{#each dataCuentasExpActivo}}
-                        <tr>
-                            <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
-                            <td>{{Monto}}</td>
-		                  	<td>{{fecha_asignacion}}</td>
-		                  	<td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>
-                            <td>{{#if EstatusProducto}}{{getUnifinListValue 'status_management_list' EstatusProducto}}{{/if}}</td>
-                            <td>{{#if semaforo}}<b class="enTiempo">En tiempo</b>{{else}}<b class="atrasado">Atrasado</b>{{/if}}</td>
-                        </tr>
-                     {{/each}}
-                    </tbody>
-                </table>
-              </td>
-              <td width = "50%">
-                <caption>Monthly savings</caption>
-                <table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
-                  <thead>
-                      <tr>
-                        <td><b>Nombre Cuenta</b></td>
-                        <td><b>Monto</b></td>
-			            <td><b>Fecha Asignación</b></td>
-			            <td><b>Etapa</b></td>
-                        <td><b>Estatus Producto</b></td>
-                      </tr>
-                  </thead>
-                  <tbody>
-                    {{#each dataCuentasExpActivo}}
-                    <tr>
-                        <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
-                        <td>{{Monto}}</td>
-		            	<td>{{fecha_asignacion}}</td>
-		            	<td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>
-                        <td>{{#if EstatusProducto}}{{getUnifinListValue 'status_management_list' EstatusProducto}}{{/if}}</td>
-                    </tr>
-                    {{/each}}
-                  </tbody>
-                </table>
-              </td>
-		    </tr>
-            <tr>
-             <td width = "50%">
-                <caption>Monthly savings</caption>
-                <table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
-                    <thead>
-                      <tr>
-                        <th><b>Nombre Cuenta</b></th>
-                        <th><b>Monto</b></th>
-	              		<th><b>Fecha Asignación</b></th>
-	               		<th><b>Etapa</b></th>
-                        <th><b>Estatus Producto</b></th>
-                        <th><b>Semáforo</b></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {{#each dataCuentasExpActivo}}
-                        <tr>
-                            <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
-                            <td>{{Monto}}</td>
-		                  	<td>{{fecha_asignacion}}</td>
-		                  	<td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>
-                            <td>{{#if EstatusProducto}}{{getUnifinListValue 'status_management_list' EstatusProducto}}{{/if}}</td>
-                            <td>{{#if semaforo}}<b class="enTiempo">En tiempo</b>{{else}}<b class="atrasado">Atrasado</b>{{/if}}</td>
-                        </tr>
-                     {{/each}}
-                    </tbody>
-                </table>
-              </td>
-              <td width = "50%">
-                <caption>Monthly savings</caption>
-                <table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
-                  <thead>
-                      <tr>
-                        <td><b>Nombre Cuenta</b></td>
-                        <td><b>Monto</b></td>
-			            <td><b>Fecha Asignación</b></td>
-			            <td><b>Etapa</b></td>
-                        <td><b>Estatus Producto</b></td>
-                      </tr>
-                  </thead>
-                  <tbody>
-                    {{#each dataCuentasExpActivo}}
-                    <tr>
-                        <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
-                        <td>{{Monto}}</td>
-		            	<td>{{fecha_asignacion}}</td>
-		            	<td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>
-                        <td>{{#if EstatusProducto}}{{getUnifinListValue 'status_management_list' EstatusProducto}}{{/if}}</td>
-                    </tr>
-                    {{/each}}
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                  {{#each dataCuentasExpAplazado}}
+                  <tr>
+                      <td>{{asesor}}</td>
+                      <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
+                      <td>{{Monto}}</td>
+	            	      <td>{{fecha_asignacion}}</td>
+	            	      <td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+          </td>
+	      </tr>
+    </table>
+  </div>
 </div>
