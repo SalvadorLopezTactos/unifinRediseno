@@ -69,6 +69,7 @@
                 
 				console.log(data);
                 datos.objprincipal = data;
+                var list_html_mc = '';
                 if(datos.objprincipal != undefined && datos.objprincipal.equipo.length > 0 ){
                     datos.var_equipo_list = datos.objprincipal.equipo;
 
@@ -77,6 +78,7 @@
                     });
                     datos.equipos_list = list_html_mc;
                     datos.cuentasEmpresariales();
+                    datos.render();
                 }
             },
             error: function (e) {
@@ -90,6 +92,7 @@
 				console.log(data);
                 datos.objdetalle = data;
                 datos.cuentasEmpresarialesDetalle();
+                datos.render();
             },
             error: function (e) {
                 console.log(e);
