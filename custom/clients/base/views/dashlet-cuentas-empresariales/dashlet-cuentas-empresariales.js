@@ -64,14 +64,17 @@
         */
          app.api.call('GET', app.api.buildURL('GetResumenProspecto/'+vari), null, {
             success: function (data) {
+                
 				console.log(data);
-                datos.objprincipal = data.records;
-                datos.var_equipo_list = datos.objprincipal.equipo;
+                datos.objprincipal = data;
+                if(datos.objprincipal.equipo != undefined && datos.objprincipal.equipo != null){
+                    datos.var_equipo_list = datos.objprincipal.equipo;
 
-                _.each(obj.equipo, function (value, key) {
-                    list_html_mc += '<option value="' + key + '">' + obj.equipo[key] + '</option>';
-                });
-                datos.equipos_list = list_html_mc;
+                    _.each(obj.equipo, function (value, key) {
+                        list_html_mc += '<option value="' + key + '">' + obj.equipo[key] + '</option>';
+                    });
+                    datos.equipos_list = list_html_mc;
+                }
             },
             error: function (e) {
                 console.log(e);
