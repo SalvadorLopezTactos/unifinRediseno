@@ -24,7 +24,7 @@ class GetResumenProspecto extends SugarApi
             global $current_user;
             $id_user = $current_user->id;
             $posicion_operativa = $current_user->posicion_operativa_c;
-            $GLOBALS['log']->fatal('posicion_operativa', $posicion_operativa);
+            //$GLOBALS['log']->fatal('posicion_operativa', $posicion_operativa);
             $tdirector = $args['tdirector'];
             $records = [];
             $records_exp = [];
@@ -37,9 +37,9 @@ class GetResumenProspecto extends SugarApi
         
             //$GLOBALS['log']->fatal('pos', $pos);
             list ($usuarios, $equip, $reg) = $this->getusuarios($id_user, $tdirector , $posicion_operativa);
-            $GLOBALS['log']->fatal('usuarios inicial', $usuarios);
-            $GLOBALS['log']->fatal('equipo inicial', $equip);
-            $GLOBALS['log']->fatal('region inicial', $reg);
+            //$GLOBALS['log']->fatal('usuarios inicial', $usuarios);
+            //$GLOBALS['log']->fatal('equipo inicial', $equip);
+            //$GLOBALS['log']->fatal('region inicial', $reg);
             $records_exp = $this->valores_expediente($tdirector,$usuarios);
             $records_int = $this->valores_interesados($tdirector,$usuarios);
             $records_cnt = $this->valores_contactados($tdirector,$usuarios);
@@ -49,22 +49,25 @@ class GetResumenProspecto extends SugarApi
             //$GLOBALS['log']->fatal('records_int', $records_int);
             //$GLOBALS['log']->fatal('records_cnt', $records_cnt);
             //$GLOBALS['log']->fatal('records_led', $records_led);
-            //$dataexp = [];
-            //$dataexp = $this->groupComplete($records_exp['records']);
+            
+            $dataexp = $this->groupComplete($records_exp['records']);
+            $dataint = $this->groupComplete($records_int['records']);
+            $datacnt = $this->groupComplete($records_cnt['records']);
+            $dataled = $this->groupComplete($records_led['records']);
 
-            $records_exp = array('expediente' => $records_exp);
-            $records_int = array('interesado' => $records_int);
-            $records_cnt = array('contatado' => $records_cnt);
-            $records_led = array('lead' => $records_led);
+            $records_exp = array('expediente' => $dataexp);
+            $records_int = array('interesado' => $dataint);
+            $records_cnt = array('contatado' => $datacnt);
+            $records_led = array('lead' => $dataled);
 
-            $GLOBALS['log']->fatal('dataexp', $dataexp);
-            $GLOBALS['log']->fatal('records_int', $records_int);
-            $GLOBALS['log']->fatal('records_cnt', $records_cnt);
-            $GLOBALS['log']->fatal('records_led', $records_led);
+            //$GLOBALS['log']->fatal('dataexp', $dataexp);
+            //$GLOBALS['log']->fatal('records_int', $records_int);
+            //$GLOBALS['log']->fatal('records_cnt', $records_cnt);
+            //$GLOBALS['log']->fatal('records_led', $records_led);
             //$records = array_merge($equipo, $region);
             $records = array_merge($equip, $reg,$records_exp, $records_int, $records_cnt , $records_led);
-            $GLOBALS['log']->fatal('records1', $records);
-          
+            //$GLOBALS['log']->fatal('records1', $records);
+            $GLOBALS['log']->fatal('records1-json', json_encode($records));
             return $records;
         
         } catch (Exception $e) {
@@ -74,46 +77,33 @@ class GetResumenProspecto extends SugarApi
     }
 
     function groupComplete($array){
-        $equipos = [];
-        $usuarios = [];
-        $estatus = [];
-        $semaforo = [];
-        $inactivo = [];
+        //$GLOBALS['log']->fatal('agrupador general',$array);
         $aux = $array;
 
-        foreach($array as $value){
-            array_push ($equipos , $value['equipo']);
-            array_push ($usuarios , $value['usuario']);
-            array_push ($estatus , $value['EstatusProducto']);
-            array_push ($inactivo , $value['inactivo']);
-            array_push ($semaforo , $value['semaforo']);
+        $aux = $this->groupArray($aux,'equipo', 'usuarios');
+        $aux2 = [];
+        $aux3 = [];
+        $aux4 = [];
+        $aux5 = [];
+        foreach ($aux as $key => $value) {
+            //$GLOBALS['log']->fatal('value-1', $value['usuarios']);
+            $aux2 = $this->groupArray($value['usuarios'],'usuario', 'datos');
+            //$GLOBALS['log']->fatal('aux2', $aux2);
+            foreach ($aux2 as $key1 => $value1) {
+                //$GLOBALS['log']->fatal('value-2', $value1['datos']);
+                $aux3 = $this->groupArray($value1['datos'],'inactivo', 'actinct');
+                //$GLOBALS['log']->fatal('aux3', $aux3);
+                $aux2[$key1]['datos'] = $aux3;
+            }
+            $aux[$key]['usuarios'] = $aux2;
         }
-        
-        $equipos = array_unique($equipos);
-        $usuarios = array_unique($usuarios);
-        $estatus = array_unique($estatus);
-        $inactivo = array_unique($inactivo);
-        $semaforo = array_unique($semaforo);
-
-        $GLOBALS['log']->fatal('equipos pba', $equipos);
-        $GLOBALS['log']->fatal('usuarios pba', $usuarios);
-        $GLOBALS['log']->fatal('estatus pba', $estatus);
-        $GLOBALS['log']->fatal('inactivo pba', $inactivo);
-        $GLOBALS['log']->fatal('semaforo pba', $semaforo);
-        //$aux = $this->groupArray($aux,'usuario','datos');
         //$GLOBALS['log']->fatal('data1', $aux);
-        /*foreach($productos as $producto => $detalles){
-        	foreach($detalles as $indice => $valor)
-        	{
-        		echo "<p> $indice:$valor </p>";
-        	}
-        }*/
-        
-        return null;
+        return $aux;
     }
 
     function groupArray($array,$groupkey,$newgroup){
-        $GLOBALS['log']->fatal('entro a agrupar '.$groupkey.' '.$newgroup);
+        //$GLOBALS['log']->fatal('entro a agrupar '.$groupkey.' '.$newgroup);
+        //$GLOBALS['log']->fatal('grouparray ',$array);
         if (count($array)>0){
      	    $keys = array_keys($array[0]);
      	    $removekey = array_search($groupkey, $keys);		

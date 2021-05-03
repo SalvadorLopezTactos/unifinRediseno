@@ -8,35 +8,41 @@
     }
 
     table.ex1 {
-      padding: 5px;
+      padding: 15px;
     }
 
-    td.ex1 {
-      padding: 5px;
+    .resumen.p{
+      font-size: 16px;
     }
-
-    .table1.td{
-      align-content: center;
-      padding: 5px;
-      width:200px;
-    }
-
     .table1{
-      padding: 5px;
+      padding: 15px;
+      width : 100%;
+      span: 5;
+      text-align: center;
+      font-size: 14px;
       margin-left: auto;
       margin-right: auto;
-      align-content: center;
     }
 
-    .resumen{
-      align-content: center;
+    .titulo1{
+      background-color: #1F618D;
+      color : white;
     }
 
-    .resumen.td{
-      align-content: center;
-      padding: 5px;
-      width:200px;
+    .titulo2{
+      background-color: #85C1E9;
+      width:650px;
     }
+
+    .titulo3{
+      background-color: #BFC9CA;
+    }
+
+    .user{
+      text-align: right;
+      width:1000px;
+    }
+
 
 </style>
 <div>
@@ -52,122 +58,128 @@
           </select>
         </td>
         <td width = "300px">
-          <button class="span3 btn" id="btn-actualiza" width = "50px">Actualizar</button>
+          <button class="span3 btn" name="btn-actualiza" id="btn-actualiza" width = "50px">Actualizar</button>
         </td>
       </tr>
     </table>
     <br>
   </div>
-  <div class = "resumen" width ="100%" align ="center">
-    <p>&nbsp;&nbsp;&nbsp;Resumen datos generales</p>
-    <table class="table1 table-bordered table-striped span4" style="overflow-x: scroll;" width = "100%">
+  <div class = "resumen" width ="100%" >
+    <p><b>Resumen datos generales </b></p>
+    <table class="table1 table-bordered table-striped span5" style="overflow-x: scroll;" >
       <thead>
         <tr >
-            <td rowspan ="2"><b>Etapa / Asesor</b></td>
-            <td colspan="3"><b>Activos</b></td>
-	    	    <td colspan="3"><b>Inactivos</b></td>
+            <td class="titulo1" rowspan ="2"><b>Etapa / Asesor</b></td>
+            <td class="titulo1" colspan="3"><b>Activos</b></td>
+	    	    <td class="titulo1" colspan="3"><b>Inactivos</b></td>
         </tr>
         <tr >
-            <td ><b>En tiempo</b></td>
-	    	    <td ><b>Atrasados</b></td>
-            <td ><b>Total</b></td>
-            <td ><b>En tiempo</b></td>
-	    	    <td ><b>Atrasados</b></td>
-            <td ><b>Total</b></td>
+            <td class="titulo1"><b>En tiempo</b></td>
+	    	    <td class="titulo1"><b>Atrasados</b></td>
+            <td class="titulo1"><b>Total</b></td>
+            <td class="titulo1"><b>Aplazados</b></td>
+	    	    <td class="titulo1"><b>Cancelados</b></td>
+            <td class="titulo1"><b>Total</b></td>
         </tr>
       </thead>
       <thead>
         <tr>
-          <td><b>TOTAL</b></td>
-          <td></td>
-	    	  <td></td>
-	    	  <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td class="titulo2"><b>TOTAL</b></td>
+            <td class="titulo2">{{totales.totalTiempo}}</td>
+	    	    <td class="titulo2">{{totales.totalAtrasado}}</td>
+	    	    <td class="titulo2">{{totales.totalActivo}}</td>
+            <td class="titulo2">{{totales.totalAplazado}}</td>
+            <td class="titulo2">{{totales.totalCancelado}}</td>
+            <td class="titulo2">{{totales.totalInactivo}}</td>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><b>Integración Expediente</b></td>
-          <td></td>
-	        <td></td>
-	        <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        {{#each resumenExpediente}}
+          <td class="titulo3"><b>Integración Expediente</b></td>
+            <td class="titulo3"><b>{{totalExpediente.Ttiempo}}</b></td>
+	          <td class="titulo3"><b>{{totalExpediente.TAtrasado}}</b></td>
+	          <td class="titulo3"><b>{{totalExpediente.TActivo}}</b></td>
+            <td class="titulo3"><b>{{totalExpediente.TAplazado}}</b></td>
+            <td class="titulo3"><b>{{totalExpediente.TCancelado}}</b></td>
+            <td class="titulo3"><b>{{totalExpediente.TInactivo}}</b></td>
+        </tr>       
+          {{#each resumenExpedientes}}
           <tr>
-              <td>{{val1}}</td>
-              <td>{{val2}}</td>
-	            <td>{{val3}}</td>
-	            <td>{{val4}}</td>
-              <td>{{val5}}</td>
-              <td>{{val6}}</td>
+              <td class ="user">{{nombre}}</td>
+              <td>{{tiempo}}</td>
+	            <td>{{atrasado}}</td>
+	            <td><b>{{total1}}</b></td>
+              <td>{{aplazados}}</td>
+              <td>{{Cancelados}}</td>
+              <td><b>{{total2}}</b></td>
           </tr>
         {{/each}}
         <tr>
-          <td><b>Prospectos Interesados</b></td>
-          <td></td>
-	        <td></td>
-	        <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td class="titulo3"><b>Prospectos Interesados</b></td>
+            <td class="titulo3"><b>{{totalInteresado.Ttiempo}}</b></td>
+	          <td class="titulo3"><b>{{totalInteresado.TAtrasado}}</b></td>
+	          <td class="titulo3"><b>{{totalInteresado.TActivo}}</b></td>
+            <td class="titulo3"><b>{{totalInteresado.TAplazado}}</b></td>
+            <td class="titulo3"><b>{{totalInteresado.TCancelado}}</b></td>
+            <td class="titulo3"><b>{{totalInteresado.TInactivo}}</b></td>
         </tr>
-        {{#each resumenInteresados}}
+          {{#each resumenInteresados}}
           <tr>
-              <td>{{val1}}</td>
-              <td>{{val2}}</td>
-	            <td>{{val3}}</td>
-	            <td>{{val4}}</td>
-              <td>{{val5}}</td>
-              <td>{{val6}}</td>
+              <td class ="user">{{nombre}}</td>
+              <td>{{tiempo}}</td>
+	            <td>{{atrasado}}</td>
+	            <td><b>{{total1}}</b></td>
+              <td>{{aplazados}}</td>
+              <td>{{Cancelados}}</td>
+              <td><b>{{total2}}</b></td>
           </tr>
-        {{/each}}
+          {{/each}}
         <tr>
-          <td><b>Prospectos Contactados</b></td>
-          <td></td>
-	        <td></td>
-	        <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td class="titulo3"><b>Prospectos Contactados</b></td>
+            <td class="titulo3"><b>{{totalContactado.Ttiempo}}</b></td>
+	          <td class="titulo3"><b>{{totalContactado.TAtrasado}}</b></td>
+	          <td class="titulo3"><b>{{totalContactado.TActivo}}</b></td>
+            <td class="titulo3"><b>{{totalContactado.TAplazado}}</b></td>
+            <td class="titulo3"><b>{{totalContactado.TCancelado}}</b></td>
+            <td class="titulo3"><b>{{totalContactado.TInactivo}}</b></td>
         </tr>
         {{#each resumenContactados}}
           <tr>
-              <td>{{val1}}</td>
-              <td>{{val2}}</td>
-	            <td>{{val3}}</td>
-	            <td>{{val4}}</td>
-              <td>{{val5}}</td>
-              <td>{{val6}}</td>
+              <td class ="user">{{nombre}}</td>
+              <td>{{tiempo}}</td>
+	            <td>{{atrasado}}</td>
+	            <td><b>{{total1}}</b></td>
+              <td>{{aplazados}}</td>
+              <td>{{Cancelados}}</td>
+              <td><b>{{total2}}</b></td>
           </tr>
         {{/each}}
         <tr>
-          <td><b>Leads</b></td>
-          <td></td>
-	        <td></td>
-	        <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td class="titulo3"><b>Leads</b></td>
+            <td class="titulo3"><b>{{totalLead.Ttiempo}}</b></td>
+	          <td class="titulo3"><b>{{totalLead.TAtrasado}}</b></td>
+	          <td class="titulo3"><b>{{totalLead.TActivo}}</b></td>
+            <td class="titulo3"><b>{{totalLead.TAplazado}}</b></td>
+            <td class="titulo3"><b>{{totalLead.TCancelado}}</b></td>
+            <td class="titulo3"><b>{{totalLead.TInactivo}}</b></td>
+        </tr>
         </tr>
         {{#each resumenLeads}}
           <tr>
-              <td>{{val1}}</td>
-              <td>{{val2}}</td>
-	            <td>{{val3}}</td>
-	            <td>{{val4}}</td>
-              <td>{{val5}}</td>
-              <td>{{val6}}</td>
+              <td class ="user">{{nombre}}</td>
+              <td>{{tiempo}}</td>
+	            <td>{{atrasado}}</td>
+	            <td><b>{{total1}}</b></td>
+              <td>{{aplazados}}</td>
+              <td>{{Cancelados}}</td>
+              <td><b>{{total2}}</b></td>
           </tr>
         {{/each}}
       </tbody>
     </table>
+    <br>
   </div>
-  <div>
+  <div class = "detalle" width = "100%">
       <table width="100%" >
         <tr>
           <td width = "50%">
@@ -223,6 +235,168 @@
               </table>
           </td>
 	      </tr>
+        <tr>
+          <td width = "50%">
+            <p>Prospectos Interesados (Activos)</p>
+            <table class="table table-bordered table-striped span11" style="overflow-x: scroll;">
+              <thead>
+                <tr>
+                    <td><b>Asesor</b></td>
+                    <td><b>Cuenta</b></td>
+                    <td><b>Monto</b></td>
+                    <td><b>Fecha Asignación</b></td>
+                    <td><b>Etapa</b></td>
+                    <td><b>Semáforo</b></td>
+                </tr>
+              </thead>
+              <tbody>
+                  {{#each dataAccSolicitudesActivo}}
+                  <tr>
+                    <td>{{asesor}}</td>
+                    <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
+                    <td>{{Monto}}</td>
+                    <td>{{fecha_asignacion}}</td>
+                    <td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>
+                    <td>{{#if semaforo}}<b class="enTiempo">En tiempo</b>{{else}}<b class="atrasado">Atrasado</b>{{/if}}</td>
+                  </tr>
+                  {{/each}}
+              </tbody>
+            </table>
+          </td>
+          <td width = "50%">
+            <p>Prospectos Interesados (Aplazados)</p>
+            <table class="table table-bordered table-striped span10" style="overflow-x: scroll;">
+              <thead>
+                  <tr>
+                    <td><b>Asesor</b></td>
+                    <td><b>Cuenta</b></td>
+                    <td><b>Monto</b></td>
+                    <td><b>Fecha Asignación</b></td>
+                    <td><b>Etapa</b></td>
+                  </tr>
+              </thead>
+              <tbody>
+                  {{#each dataAccSolicitudesAplazados}}
+                  <tr>
+                    <td>{{asesor}}</td>
+                    <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
+                    <td>{{Monto}}</td>
+                    <td>{{fecha_asignacion}}</td>
+                    <td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>
+                  </tr>
+                  {{/each}}
+              </tbody>
+            </table>
+          </td>
+	      </tr>
+      <tr>
+        <td width = "50%">
+          <p>Prospectos Contactados/Sin contactar (Activos)</p>
+          <table class="table table-bordered table-striped span11" style="overflow-x: scroll;">
+            <thead>
+              <tr>
+                <td><b>Asesor</b></td>
+                <td><b>Cuenta</b></td>
+                <td><b>Fecha Asignación</b></td>
+                <td><b>Tipo</b></td>
+                <td><b>Subtipo</b></td>
+                <td><b>Semáforo</b></td>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each dataAcProspectoContactadoActivo}}
+              <tr>
+                <td>{{asesor}}</td>
+                <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
+                <td>{{fecha_asignacion}}</td>
+                <td>{{#if tipoCuenta}}{{getUnifinListValue 'tipo_registro_cuenta_list' tipoCuenta}}{{/if}}</td>
+                <td>{{#if subtipoCuenta}}{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipoCuenta}}{{/if}}</td>
+                <td>{{#if semaforo}}<b class="enTiempo">En tiempo</b>{{else}}<b class="atrasado">Atrasado</b>{{/if}}</td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </td>
+        <td width = "50%">
+          <p>Prospectos Contactados/Sin contactar (Aplazados)</p>
+          <table class="table table-bordered table-striped span10" style="overflow-x: scroll;">
+            <thead>
+              <tr>
+                <td><b>Asesor</b></td>
+                <td><b>Cuenta</b></td>
+                <td><b>Fecha Asignación</b></td>
+                <td><b>Tipo</b></td>
+                <td><b>Subtipo</b></td>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each dataAcProspectoContactadoAplazado}}
+              <tr>
+                <td>{{asesor}}</td>
+                <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
+                <td>{{fecha_asignacion}}</td>
+                <td>{{#if tipoCuenta}}{{getUnifinListValue 'tipo_registro_cuenta_list' tipoCuenta}}{{/if}}</td>
+                <td>{{#if subtipoCuenta}}{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipoCuenta}}{{/if}}</td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+         </td>
+	    </tr>
+      <tr>
+      <td width = "50%">
+        <p>Leads Contactados/Sin contactar (Activos)</p>
+        <table class="table table-bordered table-striped span11" style="overflow-x: scroll;">
+          <thead>
+            <tr>
+              <td><b>Asesor</b></td>
+              <td><b>Lead</b></td>
+              <td><b>Fecha Asignación</b></td>
+              <td><b>Tipo Lead</b></td>
+              <td><b>Subtipo Lead</b></td>
+              <td><b>Semáforo</b></td>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each dataLeadActivos}}
+            <tr>
+              <td>{{asesor}}</td>
+              <td><a href="#Leads/{{idLead}}" target="_blank">{{nombre}}</a></td>
+              <td>{{fecha_asignacion}}</td>
+              <td>{{#if tipo}}{{getUnifinListValue 'tipo_registro_cuenta_list' tipo}}{{/if}}</td>
+              <td>{{#if subtipo}}{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo}}{{/if}}</td>
+              <td>{{#if semaforo}}<b class="enTiempo">En tiempo</b>{{else}}<b class="atrasado">Atrasado</b>{{/if}}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </td>
+      <td width = "50%">
+          <p>Leads Contactados/Sin contactar (Aplazados)</p>
+          <table class="table table-bordered table-striped span10" style="overflow-x: scroll;">
+            <thead>
+              <tr>
+                <td><b>Asesor</b></td>
+                <td><b>Lead</b></td>
+                <td><b>Fecha Asignación</b></td>
+                <td><b>Tipo Lead</b></td>
+                <td><b>Subtipo Lead</b></td>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each dataLeadAplazado}}
+              <tr>
+                <td>{{asesor}}</td>
+                <td><a href="#Leads/{{idLead}}" target="_blank">{{nombre}}</a></td>
+                <td>{{fecha_asignacion}}</td>
+                <td>{{#if tipo}}{{getUnifinListValue 'tipo_registro_cuenta_list' tipo}}{{/if}}</td>
+                <td>{{#if subtipo}}{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo}}{{/if}}</td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </td>
+	    </tr>
     </table>
   </div>
 </div>

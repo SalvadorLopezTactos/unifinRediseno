@@ -44,39 +44,40 @@ class GetDetalleLManagement extends SugarApi
             list ($usuarios, $equip, $reg) = $this->getusuarios($id_user, $tdirector , $posicion_operativa);
             
             $detalle_exp_activo     = $this->detalle_expediente($usuarios,'1');
-            $GLOBALS['log']->fatal('detalle_exp_activo', $detalle_exp_activo);
+            //$GLOBALS['log']->fatal('detalle_exp_activo', $detalle_exp_activo);
             $detalle_exp_aplazado   = $this->detalle_expediente($usuarios,'2');
-            $GLOBALS['log']->fatal('detalle_exp_aplazado', $detalle_exp_aplazado);
-            //$detalle_int_activo     = $this->detalle_interesado($usuarios,'1');
+            //$GLOBALS['log']->fatal('detalle_exp_aplazado', $detalle_exp_aplazado);
+            $detalle_int_activo     = $this->detalle_interesado($usuarios,'1');
             //$GLOBALS['log']->fatal('detalle_int_activo', $detalle_int_activo);
-            //$detalle_int_aplazado   = $this->detalle_interesado($usuarios,'2');
+            $detalle_int_aplazado   = $this->detalle_interesado($usuarios,'2');
             //$GLOBALS['log']->fatal('detalle_int_aplazado', $detalle_int_aplazado);
-            //$detalle_cnt_activo     = $this->detalle_contactado($usuarios,'1');
+            $detalle_cnt_activo     = $this->detalle_contactado($usuarios,'1');
             //$GLOBALS['log']->fatal('detalle_cnt_activo', $detalle_cnt_activo);
-            //$detalle_cnt_aplazado   = $this->detalle_contactado($usuarios,'2');
+            $detalle_cnt_aplazado   = $this->detalle_contactado($usuarios,'2');
             //$GLOBALS['log']->fatal('detalle_cnt_aplazado', $detalle_cnt_aplazado);
-            //$detalle_led_activo     = $this->detalle_lead($usuarios,'1');
+            $detalle_led_activo     = $this->detalle_lead($usuarios,'1');
             //$GLOBALS['log']->fatal('detalle_led_activo', $detalle_led_activo);
-            //$detalle_led_aplazado   = $this->detalle_lead($usuarios,'2');
+            $detalle_led_aplazado   = $this->detalle_lead($usuarios,'2');
             //$GLOBALS['log']->fatal('detalle_led_aplazado', $detalle_led_aplazado);
 
             $detalle_exp_activo     = array('expediente_activo' => $detalle_exp_activo);
             $detalle_exp_aplazado   = array('expediente_aplazado' => $detalle_exp_aplazado);
-            //$detalle_int_activo     = array('interesado_activo' => $detalle_int_activo);
-            //$detalle_int_aplazado   = array('interesado_aplazado' => $detalle_int_aplazado);
-            //$detalle_cnt_activo     = array('contactado_activo' => $detalle_cnt_activo);
-            //$detalle_cnt_aplazado   = array('contactado_aplazado' => $detalle_cnt_aplazado);
-            //$detalle_led_activo     = array('lead_activo' => $detalle_led_activo);
-            //$detalle_led_aplazado   = array('lead_aplazado' => $detalle_led_aplazado);
+            $detalle_int_activo     = array('interesado_activo' => $detalle_int_activo);
+            $detalle_int_aplazado   = array('interesado_aplazado' => $detalle_int_aplazado);
+            $detalle_cnt_activo     = array('contactado_activo' => $detalle_cnt_activo);
+            $detalle_cnt_aplazado   = array('contactado_aplazado' => $detalle_cnt_aplazado);
+            $detalle_led_activo     = array('lead_activo' => $detalle_led_activo);
+            $detalle_led_aplazado   = array('lead_aplazado' => $detalle_led_aplazado);
             
             $records = array_merge(
                 $detalle_exp_activo, $detalle_exp_aplazado
-                //,$detalle_int_activo,$detalle_int_aplazado
-               // ,$detalle_cnt_activo , $detalle_cnt_aplazado
-              //  ,$detalle_led_activo,$detalle_led_aplazado 
+                ,$detalle_int_activo,$detalle_int_aplazado
+                ,$detalle_cnt_activo , $detalle_cnt_aplazado
+              ,$detalle_led_activo,$detalle_led_aplazado 
             );
-            
-            $GLOBALS['log']->fatal('records2', $records);
+
+            $GLOBALS['log']->fatal('records2-json', json_encode($records));
+            //$GLOBALS['log']->fatal('records2', $records);
             return $records;
         } catch (Exception $e) {
 
@@ -157,7 +158,7 @@ class GetDetalleLManagement extends SugarApi
     public function detalle_expediente($usuarios,$statusProduct){
         //$GLOBALS['log']->fatal('usuarios detalle expediente',$usuarios);
 
-        $query = "SELECT idCuenta,nombreCuenta,tipoCuenta,usuario.asesor,subtipoCuenta,idOpp,oppNombre,oppEtapa,
+        $query = "SELECT idCuenta,nombreCuenta,tipoCuenta,usuario.asesor,usuario.equipo_c ,subtipoCuenta,idOpp,oppNombre,oppEtapa,
 		monto,  fecha_asignacion,daypas, tipo_producto, EstatusProducto, val_dias_20,val_dias_10,
 		CASE WHEN solicitudes.val_dias_20 = 20 and solicitudes.monto > 10000000 THEN 0
 		WHEN solicitudes.val_dias_20 = -20 and solicitudes.monto > 10000000 THEN 1
@@ -218,7 +219,8 @@ class GetDetalleLManagement extends SugarApi
         //$GLOBALS['log']->fatal('result', $result);
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
             $records_in['records'][] = array(
-                'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 'asesor' => $row['asesor'], 'tipoCuenta' => $row['tipoCuenta'],
+                'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 'asesor' => $row['asesor'],
+                'equipo' => $row['equipo_c'], 'tipoCuenta' => $row['tipoCuenta'],
                 'subtipoCuenta' => $row['subtipoCuenta'], 'idOpp' => $row['idOpp'], 'oppNombre' => $row['oppNombre'],
                 'oppEtapa' => $row['oppEtapa'], 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $row['semaforo'],
                 'fecha_asignacion' => $row['fecha_asignacion'], 'Monto' => '$ ' . round($row['monto'], 2)
@@ -231,9 +233,9 @@ class GetDetalleLManagement extends SugarApi
     public function detalle_interesado($usuarios,$statusProduct){
         //DASHLET SOLICITUDES SIN PROCESO
         $query = "SELECT
-        cuentas.id as idCuenta, cuentas.name as nombreCuenta, usuario.asesor, cuentas.assigned_user_id, cuentas.user_id_c,
+        cuentas.id as idCuenta, cuentas.name as nombreCuenta, usuario.asesor, usuario.equipo_c, cuentas.assigned_user_id, cuentas.user_id_c,
         cuentas.tipo_cuenta as tipoCuenta, cuentas.subtipo_cuenta as subtipoCuenta, solicitudes.idOpp as idOpp, solicitudes.oppNombre as oppNombre,
-        solicitudes.date_modified,solicitudes.monto, solicitudes.daypas, solicitudes.tct_etapa_ddw_c, solicitudes.tct_estapa_subetapa_txf_c as oppEtapa,
+        solicitudes.date_modified fecha_asignacion,solicitudes.monto, solicitudes.daypas, solicitudes.tct_etapa_ddw_c, solicitudes.tct_estapa_subetapa_txf_c as oppEtapa,
         cuentas.status_management_c as EstatusProducto, cuentas.tipo_producto, solicitudes.tipo_producto_c,
         CASE WHEN solicitudes.date_modified < DATE_SUB(now(), INTERVAL 5 DAY) THEN 0
         WHEN solicitudes.date_modified > DATE_SUB(now(), INTERVAL 5 DAY) THEN 1
@@ -282,16 +284,17 @@ class GetDetalleLManagement extends SugarApi
         /*if ($statusProduct == 2) {
             $query = $query . "and opp.date_entered < DATE_SUB(now(), INTERVAL 5 DAY)";
         }*/
-        // $GLOBALS['log']->fatal('query pi '. $query);
+        //$GLOBALS['log']->fatal('query pi '. $query);
         $result = $GLOBALS['db']->query($query);
 
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
 
             $records_in['records'][] = array(
-                'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 'asesor' => $row['asesor'], 'tipoCuenta' => $row['tipoCuenta'],
+                'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 
+                'asesor' => $row['asesor'],'equipo' => $row['equipo_c'], 'tipoCuenta' => $row['tipoCuenta'],
                 'subtipoCuenta' => $row['subtipoCuenta'], 'idOpp' => $row['idOpp'], 'oppNombre' => $row['oppNombre'],
                 'oppEtapa' => $row['oppEtapa'], 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $row['semaforo'],
-                'Monto' => '$ ' . round($row['monto'], 2)
+                'fecha_asignacion' => $row['fecha_asignacion'], 'Monto' => '$ ' . round($row['monto'], 2)
             );
         }
 
@@ -300,8 +303,8 @@ class GetDetalleLManagement extends SugarApi
 
     public function detalle_contactado($usuarios,$statusProduct){
 
-        $query = "SELECT a.id as idCuenta, a.name as nombreCuenta, usuario.asesor , a.assigned_user_id, ac.user_id_c,
-        up.tipo_cuenta as tipoCuenta, up.subtipo_cuenta as subtipoCuenta,
+        $query = "SELECT a.id as idCuenta, a.name as nombreCuenta, usuario.asesor ,usuario.equipo_c , a.assigned_user_id, ac.user_id_c,
+        up.tipo_cuenta as tipoCuenta, up.subtipo_cuenta as subtipoCuenta, upc.fecha_asignacion_c as fecha_asignacion,
         up.name, upc.status_management_c as EstatusProducto, up.tipo_producto,
         CASE WHEN upc.fecha_asignacion_c < DATE_SUB(now(), INTERVAL 5 DAY) THEN 0
         WHEN upc.fecha_asignacion_c > DATE_SUB(now(), INTERVAL 5 DAY) THEN 1
@@ -319,7 +322,7 @@ class GetDetalleLManagement extends SugarApi
         and ac.user_id_c in ({$usuarios})
         and up.tipo_producto = '1'
         and upc.status_management_c = '{$statusProduct}' 
-        limit 1 ";
+        limit 5 ";
         //$GLOBALS['log']->fatal('query cn '. $query);
         /*if ($estadoProducto == 2) {
             $query = $query . "and upc.fecha_asignacion_c < DATE_SUB(now(), INTERVAL 5 DAY)";
@@ -327,8 +330,10 @@ class GetDetalleLManagement extends SugarApi
          $result = $GLOBALS['db']->query($query);
          while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
          $records_in['records'][] = array(
-                'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 'asesor' => $row['asesor'], 'tipoCuenta' => $row['tipoCuenta'],
-                'subtipoCuenta' => $row['subtipoCuenta'], 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $row['semaforo']
+                'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 
+                'asesor' => $row['asesor'], 'equipo' => $row['equipo_c'], 'tipoCuenta' => $row['tipoCuenta'],
+                'subtipoCuenta' => $row['subtipoCuenta'], 'fecha_asignacion' => $row['fecha_asignacion'], 
+                'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $row['semaforo']
             );
         }
         return $records_in;
@@ -337,7 +342,7 @@ class GetDetalleLManagement extends SugarApi
 
     public function detalle_lead($usuarios,$statusProduct){
         //SEMAFORO 1 = EN TIEMPO - SEMAFORO 0 = ATRASADO
-        $query = "SELECT idLead, nombre,asesor, tipo , subtipo, fecha_asignacion,estatus, max(semaforo) semaforo
+        $query = "SELECT idLead, nombre,asesor, equipo_c, tipo , subtipo, fecha_asignacion,estatus, max(semaforo) semaforo
         FROM (
             SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, la.date_created as fecha_asignacion,
             lc.tipo_registro_c as tipo,lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus,
@@ -395,6 +400,7 @@ class GetDetalleLManagement extends SugarApi
 
             $records_in['records'][] = array(
             'idLead' => $row['idLead'], 'nombre' => $row['nombre'],
+            'asesor' => $row['asesor'], 'equipo' => $row['equipo_c'],
             'tipo' => $row['tipo'] , 'subtipo' => $row['subtipo'], 'estatus' => $row['estatus'], 
             'fecha_asignacion' => $row['fecha_asignacion'],'semaforo' => $row['semaforo']);
         }
