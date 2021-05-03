@@ -67,10 +67,10 @@
                 
 				console.log(data);
                 datos.objprincipal = data;
-                if(datos.objprincipal.equipo != undefined && datos.objprincipal.equipo != null){
+                if(datos.objprincipal != undefined && datos.objprincipal.equipo.length > 0 ){
                     datos.var_equipo_list = datos.objprincipal.equipo;
 
-                    _.each(obj.equipo, function (value, key) {
+                    _.each(datos.objprincipal.equipo, function (value, key) {
                         list_html_mc += '<option value="' + key + '">' + obj.equipo[key] + '</option>';
                     });
                     datos.equipos_list = list_html_mc;
@@ -85,7 +85,7 @@
         app.api.call('GET', app.api.buildURL('GetDetalleLManagement/'+vari), null, {
             success: function (data) {
 				console.log(data);
-                datos.objdetalle = data.records;
+                datos.objdetalle = data;
             },
             error: function (e) {
                 console.log(e);
