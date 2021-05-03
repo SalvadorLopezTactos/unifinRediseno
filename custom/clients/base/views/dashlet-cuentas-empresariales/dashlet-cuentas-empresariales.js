@@ -44,8 +44,8 @@
         
         this.restartTotales();
         this.cargaInicial();
-        this.cuentasEmpresariales();
-        this.cuentasEmpresarialesDetalle();
+        //this.cuentasEmpresariales();
+        //this.cuentasEmpresarialesDetalle();
     },
 
     cargaInicial: function () {
@@ -76,6 +76,7 @@
                         list_html_mc += '<option value="' + key + '">' + datos.objprincipal.equipo[key] + '</option>';
                     });
                     datos.equipos_list = list_html_mc;
+                    datos.cuentasEmpresariales();
                 }
             },
             error: function (e) {
@@ -88,6 +89,7 @@
             success: function (data) {
 				console.log(data);
                 datos.objdetalle = data;
+                datos.cuentasEmpresarialesDetalle();
             },
             error: function (e) {
                 console.log(e);
@@ -133,56 +135,58 @@
         }else{ 
             selecrquipo = datos.varselect
         }*/
-        datos.dataCuentasExpActivoCompleto = datos.objdetalle.expediente_activo != null ? datos.objdetalle.expediente_activo.records : null;
-        datos.dataCuentasExpAplazadoCompleto = datos.objdetalle.expediente_aplazado != null ? datos.objdetalle.expediente_aplazado.records : null;
-        datos.dataAccSolicitudesActivoCompleto = datos.objdetalle.interesado_activo != null ? datos.objdetalle.interesado_activo.records: null;
-        datos.dataAccSolicitudesAplazadosCompleto = datos.objdetalle.interesado_aplazado != null ? datos.objdetalle.interesado_aplazado.records: null;
-        datos.dataAcProspectoContactadoActivoCompleto = datos.objdetalle.contactado_activo != null ? datos.objdetalle.contactado_activo.records : null;
-        datos.dataAcProspectoContactadoAplazadoCompleto = datos.objdetalle.contactado_aplazado != null ? datos.objdetalle.contactado_aplazado.records : null;
-        datos.dataLeadActivosCompleto = datos.objdetalle.lead_activo != null ? datos.objdetalle.lead_activo.records : null;
-        datos.dataLeadAplazadoCompleto = datos.objdetalle.lead_aplazado != null ? datos.objdetalle.lead_aplazado.records : null;
+        if(datos.objdetalle != null){
+            datos.dataCuentasExpActivoCompleto = datos.objdetalle.expediente_activo != null ? datos.objdetalle.expediente_activo.records : null;
+            datos.dataCuentasExpAplazadoCompleto = datos.objdetalle.expediente_aplazado != null ? datos.objdetalle.expediente_aplazado.records : null;
+            datos.dataAccSolicitudesActivoCompleto = datos.objdetalle.interesado_activo != null ? datos.objdetalle.interesado_activo.records: null;
+            datos.dataAccSolicitudesAplazadosCompleto = datos.objdetalle.interesado_aplazado != null ? datos.objdetalle.interesado_aplazado.records: null;
+            datos.dataAcProspectoContactadoActivoCompleto = datos.objdetalle.contactado_activo != null ? datos.objdetalle.contactado_activo.records : null;
+            datos.dataAcProspectoContactadoAplazadoCompleto = datos.objdetalle.contactado_aplazado != null ? datos.objdetalle.contactado_aplazado.records : null;
+            datos.dataLeadActivosCompleto = datos.objdetalle.lead_activo != null ? datos.objdetalle.lead_activo.records : null;
+            datos.dataLeadAplazadoCompleto = datos.objdetalle.lead_aplazado != null ? datos.objdetalle.lead_aplazado.records : null;
 
-        if(datos.dataCuentasExpActivoCompleto != null){
-            datos.dataCuentasExpActivo = datos.dataCuentasExpActivoCompleto.filter(function(d1) {
-                return d1.equipo == selecrquipo;
-            });
+            if(datos.dataCuentasExpActivoCompleto != null){
+                datos.dataCuentasExpActivo = datos.dataCuentasExpActivoCompleto.filter(function(d1) {
+                    return d1.equipo == selecrquipo;
+                });
+            }
+            if(datos.dataCuentasExpAplazadoCompleto != null){
+                datos.dataCuentasExpAplazado = datos.dataCuentasExpAplazadoCompleto.filter(function(d1) {
+                    return d1.equipo == selecrquipo;
+                });
+            }
+            if(datos.dataAccSolicitudesActivoCompleto != null){
+                datos.dataAccSolicitudesActivo =  datos.dataAccSolicitudesActivoCompleto.filter(function(d1) {
+                    return d1.equipo == selecrquipo;
+                });
+            }
+            if(datos.dataAccSolicitudesAplazadosCompleto != null){
+                datos.dataAccSolicitudesAplazados =  datos.dataAccSolicitudesAplazadosCompleto.filter(function(d1) {
+                    return d1.equipo == selecrquipo;
+                });
+            }
+            if(datos.dataAcProspectoContactadoActivoCompleto != null){
+                datos.dataAcProspectoContactadoActivo =  datos.dataAcProspectoContactadoActivoCompleto.filter(function(d1) {
+                    return d1.equipo == selecrquipo;
+                });
+            }
+            if(datos.dataAcProspectoContactadoAplazadoCompleto != null){
+                datos.dataAcProspectoContactadoAplazado =  datos.dataAcProspectoContactadoAplazadoCompleto.filter(function(d1) {
+                    return d1.equipo == selecrquipo;
+                });
+            }
+            if(datos.dataLeadActivosCompleto != null){
+                datos.dataLeadActivos =  datos.dataLeadActivosCompleto.filter(function(d1) {
+                    return d1.equipo == selecrquipo;
+                });
+            }
+            if(datos.dataLeadAplazadoCompleto != null){
+                datos.dataLeadAplazado =  datos.dataLeadAplazadoCompleto.filter(function(d1) {
+                    return d1.equipo == selecrquipo;
+                });
+            }
+            //datos.render();
         }
-        if(datos.dataCuentasExpAplazadoCompleto != null){
-            datos.dataCuentasExpAplazado = datos.dataCuentasExpAplazadoCompleto.filter(function(d1) {
-                return d1.equipo == selecrquipo;
-            });
-        }
-        if(datos.dataAccSolicitudesActivoCompleto != null){
-            datos.dataAccSolicitudesActivo =  datos.dataAccSolicitudesActivoCompleto.filter(function(d1) {
-                return d1.equipo == selecrquipo;
-            });
-        }
-        if(datos.dataAccSolicitudesAplazadosCompleto != null){
-            datos.dataAccSolicitudesAplazados =  datos.dataAccSolicitudesAplazadosCompleto.filter(function(d1) {
-                return d1.equipo == selecrquipo;
-            });
-        }
-        if(datos.dataAcProspectoContactadoActivoCompleto != null){
-            datos.dataAcProspectoContactadoActivo =  datos.dataAcProspectoContactadoActivoCompleto.filter(function(d1) {
-                return d1.equipo == selecrquipo;
-            });
-        }
-        if(datos.dataAcProspectoContactadoAplazadoCompleto != null){
-            datos.dataAcProspectoContactadoAplazado =  datos.dataAcProspectoContactadoAplazadoCompleto.filter(function(d1) {
-                return d1.equipo == selecrquipo;
-            });
-        }
-        if(datos.dataLeadActivosCompleto != null){
-            datos.dataLeadActivos =  datos.dataLeadActivosCompleto.filter(function(d1) {
-                return d1.equipo == selecrquipo;
-            });
-        }
-        if(datos.dataLeadAplazadoCompleto != null){
-            datos.dataLeadAplazado =  datos.dataLeadAplazadoCompleto.filter(function(d1) {
-                return d1.equipo == selecrquipo;
-            });
-        }
-        //datos.render();
         
     },
 
@@ -409,8 +413,8 @@
         var teamselect = document.getElementById("equipos");
         teamselect.options[0].text;
         datos.varselect = "";
-        this.cuentasEmpresariales();
-        this.cuentasEmpresarialesDetalle();
+        //this.cuentasEmpresariales();
+        //this.cuentasEmpresarialesDetalle();
         datos.render();
     },
 })
