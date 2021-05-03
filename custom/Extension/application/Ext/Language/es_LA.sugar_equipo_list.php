@@ -1,5 +1,5 @@
 <?php
- // created: 2020-06-18 17:53:53
+ // created: 2021-04-19 23:07:02
 
 $app_list_strings['equipo_list']=array (
   0 => '',
@@ -11,6 +11,7 @@ $app_list_strings['equipo_list']=array (
   6 => '6',
   7 => '7',
   8 => '8',
+  9 => '9',
   'CA' => 'CA',
   'CA1' => 'CA1',
   'CA2' => 'CA2',
@@ -22,7 +23,6 @@ $app_list_strings['equipo_list']=array (
   'CASA' => 'CASA',
   'CHI' => 'CHI',
   'CNC' => 'CNC',
-  'Equipo 0' => '0',
   'EXP' => 'EXP',
   'F1' => 'F1',
   'F2' => 'F2',
@@ -38,7 +38,6 @@ $app_list_strings['equipo_list']=array (
   'PUE' => 'PUE',
   'QRO' => 'QRO',
   'QRO2' => 'QRO2',
-  'Sinequipo' => 'Sin equipo',
   'SLP' => 'SLP',
   'TIJ' => 'TIJ',
   'TOL' => 'TOL',
@@ -50,11 +49,12 @@ $app_list_strings['equipo_list']=array (
   'TOR' => 'TOR',
   'TMP' => 'TMP',
   'AGS' => 'AGS',
-  9 => '9',
   'VLLH' => 'VLLH',
   '4MOV' => '4MOV',
   'METRO' => 'METRO',
   'REGIONAL' => 'REGIONAL',
   'SOS' => 'SOS',
   'CS' => 'CS',
+  'NoAsignado' => 'No Asignado',
+  'GDL2' => 'GDL2',
 );

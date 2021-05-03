@@ -47,7 +47,7 @@ class GetLeadsProspectoInteresado extends SugarApi
                           INNER JOIN uni_productos_cstm upc on upc.id_c = up.id
                           WHERE
                           up.tipo_cuenta = '2' and  up.subtipo_cuenta in ('7')
-                          and ac.user_id_c = '{$id_user}' 
+                          and ac.user_id_c in '{$id_user}'
                           and upc.status_management_c = '{$statusProduct}'
                           and tipo_producto = '1'
                           and a.deleted = 0 and up.deleted = 0
@@ -63,12 +63,12 @@ class GetLeadsProspectoInteresado extends SugarApi
                         INNER JOIN (
                             SELECT app.account_id uac, opp.id oppid, opp.name, max(opp.date_modified) as dayb , min(TIMESTAMPDIFF(DAY, opp.date_modified, now())) as daypas
                             FROM accounts_opportunities app INNER JOIN opportunities opp on opp.id = app.opportunity_id
-                            where  opp.assigned_user_id = '{$id_user}' 
+                            where  opp.assigned_user_id in '{$id_user}'
                             group by app.account_id order by app.account_id
                         ) AS ultimos on ultimos.uac = app.account_id and ultimos.dayb = opp.date_modified
                     WHERE
                     oppcstm.tipo_producto_c = '1' 
-                    and opp.assigned_user_id = '{$id_user}' 
+                    and opp.assigned_user_id in '{$id_user}'
                     group by app.account_id
                     order by app.account_id
                     ) as solicitudes

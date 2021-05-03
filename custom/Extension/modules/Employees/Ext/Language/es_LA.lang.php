@@ -46,3 +46,5 @@ $mod_strings['LBL_ADMIN_CARTERA_C'] = 'Administración de cartera';
 $mod_strings['LBL_RESET_LEAD_CANCEL'] = 'Restablecer Leads Cancelado';
 $mod_strings['LBL_RESET_LEADCANCEL_C'] = 'Restablecer Leads Cancelados';
 $mod_strings['LBL_VALIDA_VTA_CRUZADA'] = 'Validación de referencia de venta cruzada';
+$mod_strings['LBL_POSICION_OPERATIVA'] = 'Posición Operativa';
+$mod_strings['LBL_REGION'] = 'Región';

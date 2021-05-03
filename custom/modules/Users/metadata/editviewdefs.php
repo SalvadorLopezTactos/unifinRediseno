@@ -216,7 +216,11 @@ array (
             'name' => 'id_active_directory_c',
             'label' => 'LBL_ID_ACTIVE_DIRECTORY_C',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'posicion_operativa_c',
+            'label' => 'LBL_POSICION_OPERATIVA',
+          ),
         ),
       ),
       'lbl_editview_panel1' => 
