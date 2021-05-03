@@ -21,7 +21,7 @@ class uni_Productos_sugar extends Basic {
     public $module_dir = 'uni_Productos';
     public $object_name = 'uni_Productos';
     public $table_name = 'uni_productos';
-    public $importable = false;
+    public $importable = true;
     public $team_id;
     public $team_set_id;
     public $acl_team_set_id;
@@ -90,4 +90,4 @@ class uni_Productos_sugar extends Basic {
         return false;
     }
     
-}
+}

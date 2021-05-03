@@ -27,4 +27,11 @@ $viewdefs[$moduleName]['base']['menu']['header'] = array(
         'acl_module' => $moduleName,
         'icon' => 'fa-bars',
     ),
-);
+    array(
+        'route' => "#bwc/index.php?module=Import&action=Step1&import_module=$moduleName&return_module=$moduleName&return_action=index",
+        'label' => 'LBL_IMPORT',
+        'acl_action' => 'import',
+        'acl_module' => $moduleName,
+        'icon' => 'icon-upload',
+    ),
+);
