@@ -67,7 +67,7 @@
                 
 				console.log(data);
                 datos.objprincipal = data;
-                if(datos.objprincipal.equipo != undefined && datos.objprincipal.equipo != null){
+                if(datos.objprincipal != undefined && datos.objprincipal.equipo.length > 0 ){
                     datos.var_equipo_list = datos.objprincipal.equipo;
 
                     _.each(obj.equipo, function (value, key) {
