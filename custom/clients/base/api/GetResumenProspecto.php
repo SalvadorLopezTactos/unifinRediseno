@@ -315,7 +315,7 @@ class GetResumenProspecto extends SugarApi
             $query = $query ." group by region_c ,equipo_c, inactivo ,EstatusProducto , semaforo
             order by equipo_c, EstatusProducto, semaforo";
         }
-        $GLOBALS['log']->fatal('query_expediente',$query);
+        //$GLOBALS['log']->fatal('query_expediente',$query);
         if($tdirector == "1"){
             $result = $GLOBALS['db']->query($query);
             //$GLOBALS['log']->fatal('result',$result);

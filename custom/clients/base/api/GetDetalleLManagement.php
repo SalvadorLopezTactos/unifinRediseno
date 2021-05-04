@@ -143,7 +143,7 @@ class GetDetalleLManagement extends SugarApi
             ) 
             order by equipo_c";
             
-            $result = $GLOBALS['db']->query($queryusuarios);
+            //$result = $GLOBALS['db']->query($queryusuarios);
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                 $usuariosin = $usuariosin. "'".$row['id'] . "',";
                 array_push($equipo,$row['equipo_c']);
@@ -212,8 +212,8 @@ class GetDetalleLManagement extends SugarApi
 	    on cuentas.idCuenta = solicitudes.acc,
         (select id, user_name,concat(first_name, ' ' ,last_name) asesor,equipo_c from users join users_cstm on users.id=users_cstm.id_c) as usuario
         where usuario.id = cuentas.user_id_c
-        order by fecha_asignacion asc";
-        $GLOBALS['log']->fatal('query exp',$query);
+        order by usuario.asesor , cuentas.nombreCuenta ";
+        //$GLOBALS['log']->fatal('query exp',$query);
         /*if ($statusProduct == '2') {
             $query = $query . "where ( solicitudes.val_dias_20=20 and solicitudes.monto > 10000000) OR
             ( solicitudes.val_dias_10=10 and (solicitudes.monto <= 10000000 and solicitudes.monto > 0))";
@@ -282,12 +282,12 @@ class GetDetalleLManagement extends SugarApi
         on cuentas.id = solicitudes.acc,
         (select id, user_name,concat(first_name, ' ' ,last_name) asesor,equipo_c from users join users_cstm on users.id=users_cstm.id_c) as usuario
         where usuario.id = cuentas.user_id_c
-        order by date_modified asc";
+        order by usuario.asesor , cuentas.name ";
 
         /*if ($statusProduct == 2) {
             $query = $query . "and opp.date_entered < DATE_SUB(now(), INTERVAL 5 DAY)";
         }*/
-        $GLOBALS['log']->fatal('query pi '. $query);
+        //$GLOBALS['log']->fatal('query pi '. $query);
         $result = $GLOBALS['db']->query($query);
 
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
@@ -324,7 +324,8 @@ class GetDetalleLManagement extends SugarApi
         and up.subtipo_cuenta in ('1','2')
         and ac.user_id_c in ({$usuarios})
         and up.tipo_producto = '1'
-        and upc.status_management_c = '{$statusProduct}'";
+        and upc.status_management_c = '{$statusProduct}'
+        order by usuario.asesor , a.name ";
         $GLOBALS['log']->fatal('query cn '. $query);
         /*if ($estadoProducto == 2) {
             $query = $query . "and upc.fecha_asignacion_c < DATE_SUB(now(), INTERVAL 5 DAY)";
@@ -392,7 +393,8 @@ class GetDetalleLManagement extends SugarApi
         (select id, user_name,concat(first_name, ' ' ,last_name) asesor,equipo_c from users join users_cstm on users.id=users_cstm.id_c) as usuario
         WHERE
         usuario.id = tablaLeads.assigned_user_id
-        group by idLead, nombre, subtipo, estatus ";
+        group by idLead, nombre, subtipo, estatus
+        order by asesor , nombre ";
         
         $GLOBALS['log']->fatal('query lead '. $query);
         $result = $GLOBALS['db']->query($query);
