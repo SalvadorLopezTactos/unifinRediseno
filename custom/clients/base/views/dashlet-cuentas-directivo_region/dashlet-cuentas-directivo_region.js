@@ -77,8 +77,10 @@
                 if(datos.objprincipal != undefined && datos.objprincipal.equipo != null){
                     datos.var_equipo_list = datos.objprincipal.equipo;
                     var list_html_mc = '';
-                    _.each(datos.objprincipal.equipo, function (value, key) {
-                        list_html_mc += '<option value="' + key + '">' + datos.objprincipal.equipo[key] + '</option>';
+                    datos.var_equipo_list = datos.objprincipal.region;
+            
+                    _.each(datos.objprincipal.region, function (value, key) {
+                        list_html_mc += '<option value="' + key + '">' + datos.objprincipal.region[key] + '</option>';
                     });
                     datos.equipos_list = list_html_mc;
                     datos.cuentasEmpresariales();
