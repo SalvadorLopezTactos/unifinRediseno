@@ -136,8 +136,16 @@ class GetDetalleLManagement extends SugarApi
                 where id_c in (
                     select id -- , user_name, puestousuario_c , posicion_operativa_c , region_c , equipo_c, reports_to_id 
                     from users join users_cstm on users.id = users_cstm.id_c where 
-                    region_c = (
-                        select region_c	from users_cstm where id_c = '{$id_user}'
+                    equipo_c in (
+                        -- select region_c	from users_cstm where id_c = 'c57e811e-b81a-cde4-d6b4-5626c9961772'
+                        select REPLACE(SUBSTRING_INDEX(SUBSTRING_INDEX(uc.equipos_c, ',', numbers.n), ',', -1),'^','') equipos
+						from
+						(select 1 n union all
+						select 2 union all select 3 union all
+						select 4 union all select 5) numbers INNER JOIN users_cstm uc
+						on CHAR_LENGTH(uc.equipos_c)
+						-CHAR_LENGTH(REPLACE(uc.equipos_c, ',', ''))>=numbers.n-1
+							where id_c = '{$id_user}'
                     )  and  posicion_operativa_c like '%1%'
                 )
             ) 
@@ -163,7 +171,7 @@ class GetDetalleLManagement extends SugarApi
     public function detalle_expediente($usuarios,$statusProduct){
         //$GLOBALS['log']->fatal('usuarios detalle expediente',$usuarios);
 
-        $query = "SELECT idCuenta,nombreCuenta,tipoCuenta,usuario.asesor,usuario.equipo_c ,subtipoCuenta,idOpp,oppNombre,oppEtapa,
+        $query = "SELECT idCuenta,nombreCuenta,tipoCuenta,usuario.asesor,usuario.equipo_c,usuario.region_c ,subtipoCuenta,idOpp,oppNombre,oppEtapa,
 		monto,  fecha_asignacion,daypas, tipo_producto, EstatusProducto, val_dias_20,val_dias_10,
 		CASE WHEN solicitudes.val_dias_20 = 20 and solicitudes.monto > 10000000 THEN 0
 		WHEN solicitudes.val_dias_20 = -20 and solicitudes.monto > 10000000 THEN 1
@@ -210,7 +218,7 @@ class GetDetalleLManagement extends SugarApi
                 order by daypas
 		    ) as solicitudes
 	    on cuentas.idCuenta = solicitudes.acc,
-        (select id, user_name,concat(first_name, ' ' ,last_name) asesor,equipo_c from users join users_cstm on users.id=users_cstm.id_c) as usuario
+        (select id, user_name,concat(first_name, ' ' ,last_name) asesor,equipo_c,region_c from users join users_cstm on users.id=users_cstm.id_c) as usuario
         where usuario.id = cuentas.user_id_c
         order by usuario.asesor , cuentas.nombreCuenta ";
         //$GLOBALS['log']->fatal('query exp',$query);
@@ -224,7 +232,7 @@ class GetDetalleLManagement extends SugarApi
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
             $records_in['records'][] = array(
                 'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 'asesor' => $row['asesor'],
-                'equipo' => $row['equipo_c'], 'tipoCuenta' => $row['tipoCuenta'],
+                'equipo' => $row['equipo_c'], 'region' =>$row['region_c'], 'tipoCuenta' => $row['tipoCuenta'],
                 'subtipoCuenta' => $row['subtipoCuenta'], 'idOpp' => $row['idOpp'], 'oppNombre' => $row['oppNombre'],
                 'oppEtapa' => $row['oppEtapa'], 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $row['semaforo'],
                 'fecha_asignacion' => $row['fecha_asignacion'], 'Monto' => '$ ' . round($row['monto'], 2)
@@ -237,7 +245,7 @@ class GetDetalleLManagement extends SugarApi
     public function detalle_interesado($usuarios,$statusProduct){
         //DASHLET SOLICITUDES SIN PROCESO
         $query = "SELECT
-        cuentas.id as idCuenta, cuentas.name as nombreCuenta, usuario.asesor, usuario.equipo_c, cuentas.assigned_user_id, cuentas.user_id_c,
+        cuentas.id as idCuenta, cuentas.name as nombreCuenta, usuario.asesor, usuario.equipo_c, usuario.region_c, cuentas.assigned_user_id, cuentas.user_id_c,
         cuentas.tipo_cuenta as tipoCuenta, cuentas.subtipo_cuenta as subtipoCuenta, solicitudes.idOpp as idOpp, solicitudes.oppNombre as oppNombre,
         solicitudes.date_modified fecha_asignacion,solicitudes.monto, solicitudes.daypas, solicitudes.tct_etapa_ddw_c, solicitudes.tct_estapa_subetapa_txf_c as oppEtapa,
         cuentas.status_management_c as EstatusProducto, cuentas.tipo_producto, solicitudes.tipo_producto_c,
@@ -280,7 +288,7 @@ class GetDetalleLManagement extends SugarApi
             order by app.account_id
             ) as solicitudes
         on cuentas.id = solicitudes.acc,
-        (select id, user_name,concat(first_name, ' ' ,last_name) asesor,equipo_c from users join users_cstm on users.id=users_cstm.id_c) as usuario
+        (select id, user_name,concat(first_name, ' ' ,last_name) asesor,equipo_c, region_c from users join users_cstm on users.id=users_cstm.id_c) as usuario
         where usuario.id = cuentas.user_id_c
         order by usuario.asesor , cuentas.name ";
 
@@ -294,7 +302,7 @@ class GetDetalleLManagement extends SugarApi
 
             $records_in['records'][] = array(
                 'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 
-                'asesor' => $row['asesor'],'equipo' => $row['equipo_c'], 'tipoCuenta' => $row['tipoCuenta'],
+                'asesor' => $row['asesor'],'equipo' => $row['equipo_c'], 'region' => $row['region_c'] , 'tipoCuenta' => $row['tipoCuenta'],
                 'subtipoCuenta' => $row['subtipoCuenta'], 'idOpp' => $row['idOpp'], 'oppNombre' => $row['oppNombre'],
                 'oppEtapa' => $row['oppEtapa'], 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $row['semaforo'],
                 'fecha_asignacion' => $row['fecha_asignacion'], 'Monto' => '$ ' . round($row['monto'], 2)
@@ -306,7 +314,7 @@ class GetDetalleLManagement extends SugarApi
 
     public function detalle_contactado($usuarios,$statusProduct){
 
-        $query = "SELECT a.id as idCuenta, a.name as nombreCuenta, usuario.asesor ,usuario.equipo_c , a.assigned_user_id, ac.user_id_c,
+        $query = "SELECT a.id as idCuenta, a.name as nombreCuenta, usuario.asesor ,usuario.equipo_c , usuario.region_c ,a.assigned_user_id, ac.user_id_c,
         up.tipo_cuenta as tipoCuenta, up.subtipo_cuenta as subtipoCuenta, upc.fecha_asignacion_c as fecha_asignacion,
         up.name, upc.status_management_c as EstatusProducto, up.tipo_producto,
         CASE WHEN upc.fecha_asignacion_c < DATE_SUB(now(), INTERVAL 5 DAY) THEN 0
@@ -317,7 +325,7 @@ class GetDetalleLManagement extends SugarApi
         INNER JOIN accounts_uni_productos_1_c aup on aup.accounts_uni_productos_1accounts_ida = ac.id_c and aup.deleted = 0
         INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb and up.deleted = 0
         INNER JOIN uni_productos_cstm upc on upc.id_c = up.id,
-        (select id, user_name,concat(first_name, ' ' ,last_name) asesor,equipo_c from users join users_cstm on users.id=users_cstm.id_c) as usuario
+        (select id, user_name,concat(first_name, ' ' ,last_name) asesor,equipo_c,region_c from users join users_cstm on users.id=users_cstm.id_c) as usuario
         WHERE
         usuario.id = ac.user_id_c
         and up.tipo_cuenta = '2'
@@ -334,7 +342,7 @@ class GetDetalleLManagement extends SugarApi
          while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
          $records_in['records'][] = array(
                 'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 
-                'asesor' => $row['asesor'], 'equipo' => $row['equipo_c'], 'tipoCuenta' => $row['tipoCuenta'],
+                'asesor' => $row['asesor'], 'equipo' => $row['equipo_c'], 'region' => $row['region_c'] , 'tipoCuenta' => $row['tipoCuenta'],
                 'subtipoCuenta' => $row['subtipoCuenta'], 'fecha_asignacion' => $row['fecha_asignacion'], 
                 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $row['semaforo']
             );
@@ -345,7 +353,7 @@ class GetDetalleLManagement extends SugarApi
 
     public function detalle_lead($usuarios,$statusProduct){
         //SEMAFORO 1 = EN TIEMPO - SEMAFORO 0 = ATRASADO
-        $query = "SELECT idLead, nombre,asesor, equipo_c, tipo , subtipo, fecha_asignacion,estatus, max(semaforo) semaforo
+        $query = "SELECT idLead, nombre,asesor, equipo_c, region_c ,tipo , subtipo, fecha_asignacion,estatus, max(semaforo) semaforo
         FROM (
             SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, la.date_created as fecha_asignacion,
             lc.tipo_registro_c as tipo,lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus,
@@ -390,7 +398,7 @@ class GetDetalleLManagement extends SugarApi
             AND (lc.status_management_c = '{$statusProduct}' or lc.status_management_c is null)
             AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c is null)
         ) tablaLeads ,
-        (select id, user_name,concat(first_name, ' ' ,last_name) asesor,equipo_c from users join users_cstm on users.id=users_cstm.id_c) as usuario
+        (select id, user_name,concat(first_name, ' ' ,last_name) asesor,equipo_c,region_c from users join users_cstm on users.id=users_cstm.id_c) as usuario
         WHERE
         usuario.id = tablaLeads.assigned_user_id
         group by idLead, nombre, subtipo, estatus
@@ -403,7 +411,7 @@ class GetDetalleLManagement extends SugarApi
 
             $records_in['records'][] = array(
             'idLead' => $row['idLead'], 'nombre' => $row['nombre'],
-            'asesor' => $row['asesor'], 'equipo' => $row['equipo_c'],
+            'asesor' => $row['asesor'], 'equipo' => $row['equipo_c'],'region' => $row['region_c'],
             'tipo' => $row['tipo'] , 'subtipo' => $row['subtipo'], 'estatus' => $row['estatus'], 
             'fecha_asignacion' => $row['fecha_asignacion'],'semaforo' => $row['semaforo']);
         }
