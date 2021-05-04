@@ -213,12 +213,20 @@ class GetResumenProspecto extends SugarApi
                 where id_c in (
                     select id -- , user_name, puestousuario_c , posicion_operativa_c , region_c , equipo_c, reports_to_id 
                     from users join users_cstm on users.id = users_cstm.id_c where 
-                    region_c = (
-                        select region_c	from users_cstm where id_c = '{$id_user}'
+                    equipo_c in (
+                        -- select region_c	from users_cstm where id_c = 'c57e811e-b81a-cde4-d6b4-5626c9961772'
+                        select REPLACE(SUBSTRING_INDEX(SUBSTRING_INDEX(uc.equipos_c, ',', numbers.n), ',', -1),'^','') equipos
+						from
+						(select 1 n union all
+						select 2 union all select 3 union all
+						select 4 union all select 5) numbers INNER JOIN users_cstm uc
+						on CHAR_LENGTH(uc.equipos_c)
+						-CHAR_LENGTH(REPLACE(uc.equipos_c, ',', ''))>=numbers.n-1
+							where id_c = '{$id_user}'
                     )  and  posicion_operativa_c like '%1%'
                 )
             ) 
-            order by equipo_c ";
+            order by equipo_c";
             $GLOBALS['log']->fatal('queryusuarios', $queryusuarios);
             $result = $GLOBALS['db']->query($queryusuarios);
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
