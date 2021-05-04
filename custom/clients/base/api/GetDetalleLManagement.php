@@ -24,8 +24,12 @@ class GetDetalleLManagement extends SugarApi
             global $current_user;
             $id_user = $current_user->id;
             $posicion_operativa = $current_user->posicion_operativa_c;
-            $GLOBALS['log']->fatal('posicion_operativa', $posicion_operativa);
             $tdirector = $args['tdirector'];
+            
+            $GLOBALS['log']->fatal('posicion_operativa', $posicion_operativa);
+            $GLOBALS['log']->fatal('id_user', $id_user,' - ',$current_user->user_name);
+            $GLOBALS['log']->fatal('tdirector', $tdirector);
+            
             $records = [];
             $records_exp = [];
             $records_int = [];
@@ -40,9 +44,10 @@ class GetDetalleLManagement extends SugarApi
             $equip = [];
             $reg = [];
         
-            //$GLOBALS['log']->fatal('pos', $pos);
             list ($usuarios, $equip, $reg) = $this->getusuarios($id_user, $tdirector , $posicion_operativa);
-            $GLOBALS['log']->fatal('usuarios', $usuarios);
+            //$GLOBALS['log']->fatal('usuarios', $usuarios);
+            //$GLOBALS['log']->fatal('equipo', $equipo);
+            //$GLOBALS['log']->fatal('reg', $reg);
             $detalle_exp_activo     = $this->detalle_expediente($usuarios,'1');
             //$GLOBALS['log']->fatal('detalle_exp_activo', $detalle_exp_activo);
             $detalle_exp_aplazado   = $this->detalle_expediente($usuarios,'2');
@@ -208,7 +213,7 @@ class GetDetalleLManagement extends SugarApi
         (select id, user_name,concat(first_name, ' ' ,last_name) asesor,equipo_c from users join users_cstm on users.id=users_cstm.id_c) as usuario
         where usuario.id = cuentas.user_id_c
         order by fecha_asignacion asc";
-        //$GLOBALS['log']->fatal('query exp',$query);
+        $GLOBALS['log']->fatal('query exp',$query);
         /*if ($statusProduct == '2') {
             $query = $query . "where ( solicitudes.val_dias_20=20 and solicitudes.monto > 10000000) OR
             ( solicitudes.val_dias_10=10 and (solicitudes.monto <= 10000000 and solicitudes.monto > 0))";
@@ -282,7 +287,7 @@ class GetDetalleLManagement extends SugarApi
         /*if ($statusProduct == 2) {
             $query = $query . "and opp.date_entered < DATE_SUB(now(), INTERVAL 5 DAY)";
         }*/
-        //$GLOBALS['log']->fatal('query pi '. $query);
+        $GLOBALS['log']->fatal('query pi '. $query);
         $result = $GLOBALS['db']->query($query);
 
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
@@ -320,7 +325,7 @@ class GetDetalleLManagement extends SugarApi
         and ac.user_id_c in ({$usuarios})
         and up.tipo_producto = '1'
         and upc.status_management_c = '{$statusProduct}'";
-        //$GLOBALS['log']->fatal('query cn '. $query);
+        $GLOBALS['log']->fatal('query cn '. $query);
         /*if ($estadoProducto == 2) {
             $query = $query . "and upc.fecha_asignacion_c < DATE_SUB(now(), INTERVAL 5 DAY)";
         }*/
@@ -389,7 +394,7 @@ class GetDetalleLManagement extends SugarApi
         usuario.id = tablaLeads.assigned_user_id
         group by idLead, nombre, subtipo, estatus ";
         
-        //$GLOBALS['log']->fatal('query lead '. $query);
+        $GLOBALS['log']->fatal('query lead '. $query);
         $result = $GLOBALS['db']->query($query);
 
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
