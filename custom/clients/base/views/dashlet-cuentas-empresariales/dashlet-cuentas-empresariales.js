@@ -70,7 +70,7 @@
 				console.log(data);
                 datos.objprincipal = data;
                 var list_html_mc = '';
-                if(datos.objprincipal != undefined && datos.objprincipal.equipo.length > 0 ){
+                if(datos.objprincipal != undefined && datos.objprincipal.equipo != null ){
                     datos.var_equipo_list = datos.objprincipal.equipo;
 
                     _.each(datos.objprincipal.equipo, function (value, key) {
@@ -86,7 +86,7 @@
                 throw e;
             }
         });
-
+        
         app.api.call('GET', app.api.buildURL('GetDetalleLManagement/'+vari), null, {
             success: function (data) {
 				console.log(data);
