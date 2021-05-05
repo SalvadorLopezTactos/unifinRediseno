@@ -76,3 +76,4 @@ $mod_strings['LBL_TIPO_OPERACION_C'] = 'Tipo de operación';
 $mod_strings['LBL_TIPO_C'] = 'Tipo';
 $mod_strings['LBL_MOTIVO_CANCELACION_C'] = 'Motivo de cancelación';
 $mod_strings['LBL_ETAPA_PRELIMINAR_C'] = 'Etapa inicio mes';
+$mod_strings['LBL_ESTADO_CANCELACION'] = 'Estado de cancelación';
