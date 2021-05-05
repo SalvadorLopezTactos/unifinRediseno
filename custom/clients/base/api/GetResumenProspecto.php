@@ -97,11 +97,11 @@ class GetResumenProspecto extends SugarApi
         $aux4 = [];
         $aux5 = [];
         foreach ($aux as $key => $value) {
-            $GLOBALS['log']->fatal('value-1', $value['equipos']);
+            //$GLOBALS['log']->fatal('value-1', $value['equipos']);
             $aux2 = $this->groupArray($value['equipos'],'equipo', 'datos');
-            $GLOBALS['log']->fatal('aux2', $aux2);
+            //$GLOBALS['log']->fatal('aux2', $aux2);
             foreach ($aux2 as $key1 => $value1) {
-                $GLOBALS['log']->fatal('value-2', $value1['datos']);
+                //$GLOBALS['log']->fatal('value-2', $value1['datos']);
                 $aux3 = $this->groupArray($value1['datos'],'inactivo', 'actinct');
                 //$GLOBALS['log']->fatal('aux3', $aux3);
                 $aux2[$key1]['datos'] = $aux3;

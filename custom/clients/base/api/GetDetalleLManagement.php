@@ -45,9 +45,9 @@ class GetDetalleLManagement extends SugarApi
             $reg = [];
         
             list ($usuarios, $equip, $reg) = $this->getusuarios($id_user, $tdirector , $posicion_operativa);
-            //$GLOBALS['log']->fatal('usuarios', $usuarios);
-            //$GLOBALS['log']->fatal('equipo', $equipo);
-            //$GLOBALS['log']->fatal('reg', $reg);
+            $GLOBALS['log']->fatal('usuarios', $usuarios);
+            $GLOBALS['log']->fatal('equipo', $equipo);
+            $GLOBALS['log']->fatal('reg', $reg);
             $detalle_exp_activo     = $this->detalle_expediente($usuarios,'1');
             //$GLOBALS['log']->fatal('detalle_exp_activo', $detalle_exp_activo);
             $detalle_exp_aplazado   = $this->detalle_expediente($usuarios,'2');
@@ -151,7 +151,7 @@ class GetDetalleLManagement extends SugarApi
             ) 
             order by equipo_c";
             
-            //$result = $GLOBALS['db']->query($queryusuarios);
+            $result = $GLOBALS['db']->query($queryusuarios);
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                 $usuariosin = $usuariosin. "'".$row['id'] . "',";
                 array_push($equipo,$row['equipo_c']);
