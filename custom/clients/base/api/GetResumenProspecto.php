@@ -26,6 +26,10 @@ class GetResumenProspecto extends SugarApi
             $posicion_operativa = $current_user->posicion_operativa_c;
             //$GLOBALS['log']->fatal('posicion_operativa', $posicion_operativa);
             $tdirector = $args['tdirector'];
+            $GLOBALS['log']->fatal('posicion_operativa', $posicion_operativa);
+            $GLOBALS['log']->fatal('id_user', $id_user,' - ',$current_user->user_name);
+            $GLOBALS['log']->fatal('tdirector', $tdirector);
+
             $records = [];
             $records_exp = [];
             $records_int = [];
@@ -35,11 +39,10 @@ class GetResumenProspecto extends SugarApi
             $equip = [];
             $reg = [];
         
-            //$GLOBALS['log']->fatal('pos', $pos);
             list ($usuarios, $equip, $reg) = $this->getusuarios($id_user, $tdirector , $posicion_operativa);
-            //$GLOBALS['log']->fatal('usuarios inicial', $usuarios);
-            //$GLOBALS['log']->fatal('equipo inicial', $equip);
-            //$GLOBALS['log']->fatal('region inicial', $reg);
+            $GLOBALS['log']->fatal('usuarios inicial', $usuarios);
+            $GLOBALS['log']->fatal('equipo inicial', $equip);
+            $GLOBALS['log']->fatal('region inicial', $reg);
             $records_exp = $this->valores_expediente($tdirector,$usuarios);
             $records_int = $this->valores_interesados($tdirector,$usuarios);
             $records_cnt = $this->valores_contactados($tdirector,$usuarios);
@@ -50,14 +53,22 @@ class GetResumenProspecto extends SugarApi
             //$GLOBALS['log']->fatal('records_cnt', $records_cnt);
             //$GLOBALS['log']->fatal('records_led', $records_led);
             
-            $dataexp = $this->groupComplete($records_exp['records']);
-            $dataint = $this->groupComplete($records_int['records']);
-            $datacnt = $this->groupComplete($records_cnt['records']);
-            $dataled = $this->groupComplete($records_led['records']);
-
+            if($tdirector == "1"){
+                $dataexp = $this->groupComplete($records_exp['records']);
+                $dataint = $this->groupComplete($records_int['records']);
+                $datacnt = $this->groupComplete($records_cnt['records']);
+                $dataled = $this->groupComplete($records_led['records']);
+            }
+            
+            if($tdirector == "2"){
+                $dataexp = $this->groupRegion($records_exp['records']);
+                $dataint = $this->groupRegion($records_int['records']);
+                $datacnt = $this->groupRegion($records_cnt['records']);
+                $dataled = $this->groupRegion($records_led['records']);
+            }
             $records_exp = array('expediente' => $dataexp);
             $records_int = array('interesado' => $dataint);
-            $records_cnt = array('contatado' => $datacnt);
+            $records_cnt = array('contactado' => $datacnt);
             $records_led = array('lead' => $dataled);
 
             //$GLOBALS['log']->fatal('dataexp', $dataexp);
@@ -74,6 +85,31 @@ class GetResumenProspecto extends SugarApi
 
             $GLOBALS['log']->fatal("Error: " . $e->getMessage());
         }
+    }
+
+    function groupRegion($array){
+        //$GLOBALS['log']->fatal('agrupador general',$array);
+        $aux = $array;
+
+        $aux = $this->groupArray($aux,'region', 'equipos');
+        $aux2 = [];
+        $aux3 = [];
+        $aux4 = [];
+        $aux5 = [];
+        foreach ($aux as $key => $value) {
+            $GLOBALS['log']->fatal('value-1', $value['equipos']);
+            $aux2 = $this->groupArray($value['equipos'],'equipo', 'datos');
+            $GLOBALS['log']->fatal('aux2', $aux2);
+            foreach ($aux2 as $key1 => $value1) {
+                $GLOBALS['log']->fatal('value-2', $value1['datos']);
+                $aux3 = $this->groupArray($value1['datos'],'inactivo', 'actinct');
+                //$GLOBALS['log']->fatal('aux3', $aux3);
+                $aux2[$key1]['datos'] = $aux3;
+            }
+            $aux[$key]['equipos'] = $aux2;
+        }
+        $GLOBALS['log']->fatal('data1', $aux);
+        return $aux;
     }
 
     function groupComplete($array){
@@ -162,7 +198,6 @@ class GetResumenProspecto extends SugarApi
         }
         
         $pos = strrpos($posicion_operativa, "2");
-        //$GLOBALS['log']->fatal('pos', $pos);
         
         if ($pos  != ''  && $tdirector == 2) { //valida usuario director regional
             $usuariosin ="";
@@ -178,13 +213,21 @@ class GetResumenProspecto extends SugarApi
                 where id_c in (
                     select id -- , user_name, puestousuario_c , posicion_operativa_c , region_c , equipo_c, reports_to_id 
                     from users join users_cstm on users.id = users_cstm.id_c where 
-                    region_c = (
-                        select region_c	from users_cstm where id_c = '{$id_user}'
+                    equipo_c in (
+                        -- select region_c	from users_cstm where id_c = 'c57e811e-b81a-cde4-d6b4-5626c9961772'
+                        select REPLACE(SUBSTRING_INDEX(SUBSTRING_INDEX(uc.equipos_c, ',', numbers.n), ',', -1),'^','') equipos
+						from
+						(select 1 n union all
+						select 2 union all select 3 union all
+						select 4 union all select 5) numbers INNER JOIN users_cstm uc
+						on CHAR_LENGTH(uc.equipos_c)
+						-CHAR_LENGTH(REPLACE(uc.equipos_c, ',', ''))>=numbers.n-1
+							where id_c = '{$id_user}'
                     )  and  posicion_operativa_c like '%1%'
                 )
             ) 
             order by equipo_c";
-
+            $GLOBALS['log']->fatal('queryusuarios', $queryusuarios);
             $result = $GLOBALS['db']->query($queryusuarios);
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                 $usuariosin = $usuariosin. "'".$row['id'] . "',";
@@ -211,6 +254,10 @@ class GetResumenProspecto extends SugarApi
         if($tdirector == "1"){
             $query = $query . "usuario.usuario, ";
         }
+        if($tdirector == "2"){
+            $query = $query . "usuario.region_c, ";
+        }
+
         $query = $query . "usuario.equipo_c ,count(cuentas.nombreCuenta) NumCuentas, producto.EstatusProducto
         -- , tipoCuenta,subtipoCuenta , val_dias_20,val_dias_10 , fecha_asignacion,daypas, tipo_producto, oppEtapa 
         ,CASE WHEN producto.EstatusProducto = 2 THEN 1
@@ -239,7 +286,7 @@ class GetResumenProspecto extends SugarApi
             and tipo_producto = '1'and  up.deleted = 0
             group by  aup.accounts_uni_productos_1accounts_ida , aup.accounts_uni_productos_1uni_productos_idb
         ) AS PRODUCTO,
-        (select id, user_name,concat(first_name, ' ' ,last_name) usuario,equipo_c from users join users_cstm on users.id=users_cstm.id_c) as usuario,
+        (select id, user_name,concat(first_name, ' ' ,last_name) usuario,equipo_c, region_c from users join users_cstm on users.id=users_cstm.id_c) as usuario,
             (SELECT app.account_id acc, opp.date_modified, TIMESTAMPDIFF(DAY, opp.date_modified, now()) as daypas,
             opp.id as idOpp, opp.name as oppNombre, oppcstm.tipo_producto_c, opp.assigned_user_id oppassigned, oppcstm.tct_etapa_ddw_c, oppcstm.estatus_c,
             oppcstm.tct_estapa_subetapa_txf_c as oppEtapa, DATE_FORMAT( opp.date_modified, '%Y-%m-%d ') as fecha_asignacion,
@@ -273,11 +320,10 @@ class GetResumenProspecto extends SugarApi
             order by user_name, EstatusProducto , semaforo";    
         }
         if($tdirector == "2"){
-            $query = $query ." group by equipo_c, inactivo ,EstatusProducto , semaforo
-            order by equipo_c, EstatusProducto, semaforo";    
+            $query = $query ." group by region_c ,equipo_c, inactivo ,EstatusProducto , semaforo
+            order by equipo_c, EstatusProducto, semaforo";
         }
-
-        //$GLOBALS['log']->fatal('query',$query);
+        //$GLOBALS['log']->fatal('query_expediente',$query);
         if($tdirector == "1"){
             $result = $GLOBALS['db']->query($query);
             //$GLOBALS['log']->fatal('result',$result);
@@ -295,7 +341,7 @@ class GetResumenProspecto extends SugarApi
             //$GLOBALS['log']->fatal('result',$result);
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                 $records_in['records'][] = array(
-                    'equipo' => $row['equipo_c'], 'conteo' => $row['NumCuentas'],
+                    'equipo' => $row['equipo_c'], 'region' => $row['region_c'], 'conteo' => $row['NumCuentas'],
                     'EstatusProducto' => $row['EstatusProducto'],
                     'inactivo' => $row['inactivo'] ,'semaforo' => $row['semaforo']
                 );
@@ -312,6 +358,9 @@ class GetResumenProspecto extends SugarApi
         $query = "SELECT ";
         if($tdirector == "1"){
             $query = $query . "usuario.usuario, ";
+        }
+        if($tdirector == "2"){
+            $query = $query . "usuario.region_c, ";
         }
         $query = $query . "usuario.equipo_c , count(cuentas.cuentas) NumCuentas -- , producto.tipo_cuenta, producto.subtipo_cuenta 
         , producto.EstatusProducto -- solicitudes.daypas , solicitudes.date_modified,
@@ -340,7 +389,7 @@ class GetResumenProspecto extends SugarApi
             and tipo_producto = '1'and  up.deleted = 0
             group by  aup.accounts_uni_productos_1accounts_ida , aup.accounts_uni_productos_1uni_productos_idb
         ) AS PRODUCTO,
-        (select id, user_name,concat(first_name, ' ' ,last_name) usuario , equipo_c from users join users_cstm on users.id=users_cstm.id_c) as usuario,
+        (select id, user_name,concat(first_name, ' ' ,last_name) usuario , equipo_c , region_c from users join users_cstm on users.id=users_cstm.id_c) as usuario,
             (SELECT app.account_id acc, opp.date_modified, TIMESTAMPDIFF(DAY, opp.date_modified, now()) as daypas,
                 opp.id as idOpp, opp.name as oppNombre, oppcstm.tipo_producto_c, opp.assigned_user_id oppassigned, 
                 oppcstm.tct_etapa_ddw_c, oppcstm.estatus_c,	oppcstm.tct_estapa_subetapa_txf_c, opp.amount as monto
@@ -368,19 +417,18 @@ class GetResumenProspecto extends SugarApi
             order by user_name, EstatusProducto , semaforo";    
         }
         if($tdirector == "2"){
-            $query = $query ." group by equipo_c, inactivo ,EstatusProducto , semaforo
-            order by equipo_c, EstatusProducto , semaforo";    
+            $query = $query ." group by region_c , equipo_c, inactivo ,EstatusProducto , semaforo
+            order by equipo_c, EstatusProducto , semaforo";
         }
 
-        //$GLOBALS['log']->fatal('query',$query);
+        $GLOBALS['log']->fatal('query_interesados',$query);
         if($tdirector == "1"){
             $result = $GLOBALS['db']->query($query);
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                 $records_in['records'][] = array(
-                    'usuario' => $row['usuario'], 'equipo' => $row['equipo_c'], 'conteo' => $row['NumCuentas'],
-                    'EstatusProducto' => $row['EstatusProducto'],
-                    'inactivo' => $row['inactivo'],
-                    'semaforo' => $row['semaforo']
+                    'usuario' => $row['usuario'], 'equipo' => $row['equipo_c'],
+                    'conteo' => $row['NumCuentas'], 'EstatusProducto' => $row['EstatusProducto'],
+                    'inactivo' => $row['inactivo'],'semaforo' => $row['semaforo']
                 );
             }
         }
@@ -389,9 +437,8 @@ class GetResumenProspecto extends SugarApi
             $result = $GLOBALS['db']->query($query);
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                 $records_in['records'][] = array(
-                    'equipo' => $row['equipo_c'], 'conteo' => $row['NumCuentas'],
-                    'EstatusProducto' => $row['EstatusProducto'],
-                    'semaforo' => $row['semaforo']
+                    'equipo' => $row['equipo_c'], 'region' => $row['region_c'], 'conteo' => $row['NumCuentas'],
+                    'EstatusProducto' => $row['EstatusProducto'],'semaforo' => $row['semaforo']
                 );
             }
         }
@@ -407,6 +454,9 @@ class GetResumenProspecto extends SugarApi
         if($tdirector == "1"){
             $query = $query . "usuario.usuario, ";
         }
+        if($tdirector == "2"){
+            $query = $query . "usuario.region_c, ";
+        }
         $query = $query . " usuario.equipo_c ,count(cuentas.cuentas) NumCuentas,
         -- producto.tipo_cuenta, producto.subtipo_cuenta ,
         producto.EstatusProducto
@@ -417,7 +467,6 @@ class GetResumenProspecto extends SugarApi
        ,CASE WHEN producto.daypas < 5 THEN 0
            WHEN producto.daypas > 5 THEN 1
            END AS semaforo
-       
        FROM 
        (	SELECT a.id, a.name cuentas, ac.user_id_c, ac.tipo_registro_c
            FROM accounts a
@@ -436,7 +485,7 @@ class GetResumenProspecto extends SugarApi
            and tipo_producto = '1'and  up.deleted = 0
            group by  aup.accounts_uni_productos_1accounts_ida , aup.accounts_uni_productos_1uni_productos_idb
        ) AS PRODUCTO,
-       (select id, user_name,concat(first_name, ' ' ,last_name) usuario ,equipo_c from users join users_cstm on users.id=users_cstm.id_c) as usuario
+       (select id, user_name,concat(first_name, ' ' ,last_name) usuario ,equipo_c, region_c from users join users_cstm on users.id=users_cstm.id_c) as usuario
        where cuentas.id = producto.accounts_uni_productos_1accounts_ida
        and cuentas.user_id_c = usuario.id";
 
@@ -445,17 +494,17 @@ class GetResumenProspecto extends SugarApi
             order by user_name, EstatusProducto, semaforo";    
         }
         if($tdirector == "2"){
-            $query = $query ." group by equipo_c,inactivo ,EstatusProducto , semaforo
-            order by equipo_c, EstatusProducto, semaforo";    
+            $query = $query ." group by region_c , equipo_c,inactivo ,EstatusProducto , semaforo
+            order by equipo_c, EstatusProducto, semaforo";
         }
 
-        //$GLOBALS['log']->fatal('query',$query);
+        $GLOBALS['log']->fatal('query_contactados',$query);
         if($tdirector == "1"){
             $result = $GLOBALS['db']->query($query);
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                 $records_in['records'][] = array(
-                    'usuario' => $row['usuario'], 'equipo' => $row['equipo_c'], 'conteo' => $row['NumCuentas'],
-                    'EstatusProducto' => $row['EstatusProducto'],
+                    'usuario' => $row['usuario'], 'equipo' => $row['equipo_c'], 
+                    'conteo' => $row['NumCuentas'], 'EstatusProducto' => $row['EstatusProducto'],
                     'inactivo' => $row['inactivo'],'semaforo' => $row['semaforo']
                 );
             }
@@ -465,7 +514,7 @@ class GetResumenProspecto extends SugarApi
             $result = $GLOBALS['db']->query($query);
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                 $records_in['records'][] = array(
-                    'equipo' => $row['equipo_c'], 'conteo' => $row['NumCuentas'],
+                    'equipo' => $row['equipo_c'],'region' => $row['region_c'], 'conteo' => $row['NumCuentas'],
                     'EstatusProducto' => $row['EstatusProducto'],
                     'inactivo' => $row['inactivo'],'semaforo' => $row['semaforo']
                 );
@@ -483,6 +532,9 @@ class GetResumenProspecto extends SugarApi
         $query = "SELECT ";
         if($tdirector == "1"){
             $query = $query . " usuario.usuario, ";
+        }
+        if($tdirector == "2"){
+            $query = $query . "usuario.region_c, ";
         }
         $query = $query . " usuario.equipo_c ,count(tablal.nombre) NumLeads,
         -- tablal.subtipo ,
@@ -510,7 +562,7 @@ class GetResumenProspecto extends SugarApi
                  group by la.after_value_string 
                  order by la.date_created ,la.after_value_string
               ) AS leaudit ON leaudit.after_value_string = le.assigned_user_id
-       ) AS tablal , (select id, user_name,concat(first_name, ' ' ,last_name) usuario,equipo_c from users join users_cstm on users.id=users_cstm.id_c) as usuario 
+       ) AS tablal , (select id, user_name,concat(first_name, ' ' ,last_name) usuario,equipo_c,region_c from users join users_cstm on users.id=users_cstm.id_c) as usuario 
        where tablal.assigned_user_id = usuario.id";
 
         if($tdirector == "1"){
@@ -518,10 +570,10 @@ class GetResumenProspecto extends SugarApi
             order by usuario.user_name ,tablal.estatus, tablal.semaforo";    
         }
         if($tdirector == "2"){
-            $query = $query ." group by usuario.equipo_c , inactivo, tablal.semaforo
+            $query = $query ." group by usuario.region_c , usuario.equipo_c , inactivo, tablal.semaforo
             order by usuario.equipo_c , tablal.estatus, tablal.semaforo";    
         }
-        //$GLOBALS['log']->fatal('query',$query);
+        $GLOBALS['log']->fatal('query_lead',$query);
       
         if($tdirector == "1"){
             $result = $GLOBALS['db']->query($query);
@@ -538,7 +590,7 @@ class GetResumenProspecto extends SugarApi
             $result = $GLOBALS['db']->query($query);
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                 $records_in['records'][] = array(
-                    'equipo' => $row['equipo_c'], 'conteo' => $row['NumLeads'],
+                    'equipo' => $row['equipo_c'], 'region' => $row['region_c'], 'conteo' => $row['NumLeads'],
                     'estatus' => $row['estatus'],'inactivo' => $row['inactivo'],
                     'semaforo' => $row['semaforo']
                 );
