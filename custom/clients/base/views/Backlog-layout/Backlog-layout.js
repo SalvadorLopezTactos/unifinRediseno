@@ -2239,7 +2239,7 @@
 				anio: anio,
 				motivo: app.lang.getAppListStrings('motivo_cancelacion_c_list')[motivo],
 				comentarios: $('#ComentarioCan').val(),
-				usuario: app.user.attributes.tct_id_uni2_txf_c
+				usuario: app.user.attributes.user_name
             };
 			app.api.call('create', app.api.buildURL("DisposicionesUni2"), Parame, {
                 success: _.bind(function (data) {
@@ -2286,8 +2286,18 @@
 									level:'error',
 									messages:error,
 									autoClose:true
-								})
+								});
 							}
+						});
+					}
+					else {
+						$('#btn-CanCancelar').prop('disabled',false);
+						$('#btn-GuardarCan').prop('disabled',false);
+						app.alert.dismiss('CancelAlert');
+						app.alert.show('errorAlertCancelar',{
+							level:'error',
+							messages:'No se realizó la solicitud de cancelación',
+							autoClose:true
 						});
 					}
 				},this),
