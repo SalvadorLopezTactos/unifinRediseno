@@ -1,14 +1,20 @@
 <table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
     <thead>
         <tr>
-            <td><b>Nombre Cuenta</b></td>
+            <td><b>Cuenta</b></td>
+            <td><b>Fecha asignación</b></td>
+            <td><b>Tipo</b></td>
+            <td><b>Subtipo</b></td>
             <td><b>Acciones</b></td>
         </tr>
     </thead>
     <tbody>
         {{#each dataAcProspectoContactadoAplazado}}
         <tr>
-            <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
+            <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{cuenta}}</a></td>
+            <td>{{#if fechaAsignacion}}{{fechaAsignacion}}{{/if}}</td>
+            <td>{{#if tipoCuenta}}{{getUnifinListValue 'tipo_registro_cuenta_list' tipoCuenta}}{{/if}}</td>
+            <td>{{#if subtipoCuenta}}{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipoCuenta}}{{/if}}</td>
             <td>
                 <button class="btn btn btnCancelPCAplazado" id="btnCancelPCAplazado" type="submit" title="{{idCuenta}}">Cancelar</button>
                 <button class="btn btn btnPresolicitudAplazado" id="btnPresolicitudAplazado" type="submit" title="{{idCuenta}}">Registrar presolicitud</button>

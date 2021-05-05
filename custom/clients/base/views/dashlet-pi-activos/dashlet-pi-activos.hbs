@@ -12,12 +12,10 @@
 <table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
     <thead>
         <tr>
-            <td><b>Nombre Cuenta</b></td>
-            <td><b>Tipo</b></td>
-            <td><b>Subtipo</b></td>
-            <td><b>Nombre Solicitud</b></td>
+            <td><b>Cuenta</b></td>
+            <td><b>Monto</b></td>
+            <td><b>Fecha asignación</b></td>
             <td><b>Etapa</b></td>
-            <td><b>Estatus Producto</b></td>
             <td><b>Semáforo</b></td>
             <td><b>Acciones</b></td>
         </tr>
@@ -26,11 +24,9 @@
         {{#each dataAccSolicitudesActivo}}
         <tr>
             <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
-            <td>{{#if tipoCuenta}}{{getUnifinListValue 'tipo_registro_cuenta_list' tipoCuenta}}{{/if}}</td>
-            <td>{{#if subtipoCuenta}}{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipoCuenta}}{{/if}}</td>
-            <td><a href="#Opportunities/{{idOpp}}" id="idOpp" target="_blank">{{oppNombre}}</a></td>
-            <td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>
-            <td>{{#if EstatusProducto}}{{getUnifinListValue 'status_management_list' EstatusProducto}}{{/if}}</td>
+            <td>{{#if monto}}{{monto}}{{/if}}</td>
+            <td>{{#if fechaAsignacion}}{{fechaAsignacion}}{{/if}}</td>
+            <td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>            
             <td>{{#if semaforo}}<b class="enTiempo">En tiempo</b>{{else}}<b class="atrasado">Atrasado</b>{{/if}}</td>
             <td>
                 <button class="btn btn btnNoViableActivo" id="btnNoViableActivo" type="submit" title="{{idCuenta}}">Establecer No viable</button>

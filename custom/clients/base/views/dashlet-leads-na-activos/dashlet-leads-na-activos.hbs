@@ -12,8 +12,10 @@
 <table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
     <thead>
         <tr>
-            <td><b>Nombre</b></td>
-            <td><b>Subtipo de Lead</b></td>
+            <td><b>Cuenta</b></td>
+            <td><b>Fecha asignación</b></td>
+            <td><b>Tipo</b></td>
+            <td><b>Subtipo</b></td>
             <td><b>Semáforo</b></td>
             <td><b>Acciones</b></td>
         </tr>
@@ -21,7 +23,9 @@
     <tbody>
         {{#each dataLeadActivos}}
         <tr>
-            <td><a href="#Leads/{{idLead}}" target="_blank">{{nombre}}</a></td>
+            <td><a href="#Leads/{{idLead}}" target="_blank">{{cuenta}}</a></td>
+            <td>{{#if fechaAsignacion}}{{fechaAsignacion}}{{/if}}</td>
+            <td>{{#if tipo}}{{getUnifinListValue 'tipo_registro_cuenta_list' tipo}}{{/if}}</td>
             <td>{{#if subtipo}}{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo}}{{/if}}</td>
             <td>{{#if semaforo}}<b class="enTiempo">En tiempo</b>{{else}}<b class="atrasado">Atrasado</b>{{/if}}</td>
             <td>

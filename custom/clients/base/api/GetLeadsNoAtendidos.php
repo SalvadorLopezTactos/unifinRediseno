@@ -31,9 +31,9 @@ class GetLeadsNoAtendidos extends SugarApi
             if ($estatusProduct != 3) {
 
                 //SEMAFORO 1 = EN TIEMPO - SEMAFORO 0 = ATRASADO
-                $query = "SELECT idLead, nombre, subtipo, estatus, max(semaforo) semaforo
+                $query = "SELECT idLead, cuenta, fechaAsignacion, tipo, subtipo, estatus, max(semaforo) semaforo
                 FROM (
-                    SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus,
+                    SELECT DISTINCT l.id as idLead, lc.name_c as cuenta, lc.fecha_asignacion_c as fechaAsignacion, lc.tipo_registro_c as tipo, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus,
                     CASE WHEN la.date_created < DATE_SUB(now(), INTERVAL 10 DAY) THEN 0
                     WHEN la.date_created > DATE_SUB(now(), INTERVAL 10 DAY) THEN 1
                     END AS semaforo
@@ -47,7 +47,7 @@ class GetLeadsNoAtendidos extends SugarApi
                     AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c is null)
                     AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c is null)
                     UNION
-                    SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus,
+                    SELECT DISTINCT l.id as idLead, lc.name_c as cuenta, lc.fecha_asignacion_c as fechaAsignacion, lc.tipo_registro_c as tipo, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus,
                     CASE WHEN c.date_end < DATE_SUB(now(), INTERVAL 10 DAY) THEN 0
                     WHEN c.date_end > DATE_SUB(now(), INTERVAL 10 DAY) THEN 1
                     END AS semaforo
@@ -60,7 +60,7 @@ class GetLeadsNoAtendidos extends SugarApi
                     AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c is null)
                     AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c is null)
                     UNION
-                    SELECT DISTINCT l.id as idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus,
+                    SELECT DISTINCT l.id as idLead, lc.name_c as cuenta, lc.fecha_asignacion_c as fechaAsignacion, lc.tipo_registro_c as tipo, lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus,
                     CASE WHEN m.date_end < DATE_SUB(now(), INTERVAL 10 DAY) THEN 0
                     WHEN m.date_end > DATE_SUB(now(), INTERVAL 10 DAY) THEN 1
                     END AS semaforo
@@ -72,13 +72,14 @@ class GetLeadsNoAtendidos extends SugarApi
                     AND lc.subtipo_registro_c in (1,2)
                     AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c is null)
                     AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c is null)
-                ) tablaLeads group by idLead, nombre, subtipo, estatus";
+                ) tablaLeads group by idLead, cuenta, fechaAsignacion, tipo, subtipo, estatus";
 
                 $result = $GLOBALS['db']->query($query);
 
                 while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
 
-                    $records_in['records'][] = array('idLead' => $row['idLead'], 'nombre' => $row['nombre'], 'subtipo' => $row['subtipo'], 'estatus' => $row['estatus'], 'semaforo' => $row['semaforo']);
+                    $records_in['records'][] = array('idLead' => $row['idLead'], 'cuenta' => $row['cuenta'], 'fechaAsignacion' => $row['fechaAsignacion'], 
+                    'tipo' => $row['tipo'], 'subtipo' => $row['subtipo'], 'estatus' => $row['estatus'], 'semaforo' => $row['semaforo']);
                 }
 
             } else {
