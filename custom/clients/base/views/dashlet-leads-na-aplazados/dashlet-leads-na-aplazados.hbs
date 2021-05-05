@@ -1,14 +1,20 @@
 <table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
     <thead>
         <tr>
-            <td><b>Nombre</b></td>
+            <td><b>Cuenta</b></td>
+            <td><b>Fecha asignación</b></td>
+            <td><b>Tipo</b></td>
+            <td><b>Subtipo</b></td>
             <td><b>Acciones</b></td>
         </tr>
     </thead>
     <tbody>
         {{#each dataLeadAplazado}}
         <tr>
-            <td><a href="#Leads/{{idLead}}" target="_blank">{{nombre}}</a></td>
+            <td><a href="#Leads/{{idLead}}" target="_blank">{{cuenta}}</a></td>
+            <td>{{#if fechaAsignacion}}{{fechaAsignacion}}{{/if}}</td>
+            <td>{{#if tipo}}{{getUnifinListValue 'tipo_registro_cuenta_list' tipo}}{{/if}}</td>
+            <td>{{#if subtipo}}{{getUnifinListValue 'subtipo_registro_cuenta_list' subtipo}}{{/if}}</td>
             <td>
                 <button class="btn btn btnCancel" id="btnCancelAplazado" type="submit" title="{{idLead}}">Cancelar</button>
                 <a href="#Leads/{{idLead}}" id="btnProspectoAplazado" target="_blank" class="btn" rel="tooltip">Establecer Prospecto Contactado</a>
