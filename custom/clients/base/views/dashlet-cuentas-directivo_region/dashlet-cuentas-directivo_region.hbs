@@ -187,6 +187,7 @@
             <table class="table table-bordered table-striped span11" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
               <thead>
                 <tr>
+                  <td><b>Equipo</b></td>
                   <td><b>Asesor</b></td>
                   <td><b>Cuenta</b></td>
                   <td><b>Monto</b></td>
@@ -198,6 +199,7 @@
               <tbody>
                 {{#each dataCuentasExpActivo}}
                 <tr>
+                  <td>{{equipo}}</td>
                   <td>{{asesor}}</td>
                   <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
                   <td>{{Monto}}</td>
@@ -214,6 +216,7 @@
               <table class="table table-bordered table-striped span10" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
                 <thead>
                     <tr>
+                      <td><b>Equipo</b></td>
                       <td><b>Asesor</b></td>
                       <td><b>Cuenta</b></td>
                       <td><b>Monto</b></td>
@@ -224,6 +227,7 @@
                 <tbody>
                   {{#each dataCuentasExpAplazado}}
                   <tr>
+                      <td>{{equipo}}</td>
                       <td>{{asesor}}</td>
                       <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
                       <td>{{Monto}}</td>
@@ -241,6 +245,7 @@
             <table class="table table-bordered table-striped span11" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
               <thead>
                 <tr>
+                    <td><b>Equipo</b></td>
                     <td><b>Asesor</b></td>
                     <td><b>Cuenta</b></td>
                     <td><b>Monto</b></td>
@@ -252,6 +257,7 @@
               <tbody>
                   {{#each dataAccSolicitudesActivo}}
                   <tr>
+                    <td>{{equipo}}</td>
                     <td>{{asesor}}</td>
                     <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
                     <td>{{Monto}}</td>
@@ -268,6 +274,7 @@
             <table class="table table-bordered table-striped span10" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
               <thead>
                   <tr>
+                    <td><b>Equipo</b></td>
                     <td><b>Asesor</b></td>
                     <td><b>Cuenta</b></td>
                     <td><b>Monto</b></td>
@@ -278,6 +285,7 @@
               <tbody>
                   {{#each dataAccSolicitudesAplazados}}
                   <tr>
+                    <td>{{equipo}}</td>
                     <td>{{asesor}}</td>
                     <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
                     <td>{{Monto}}</td>
@@ -295,6 +303,7 @@
           <table class="table table-bordered table-striped span11" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
             <thead>
               <tr>
+                <td><b>Equipo</b></td>
                 <td><b>Asesor</b></td>
                 <td><b>Cuenta</b></td>
                 <td><b>Fecha Asignación</b></td>
@@ -306,6 +315,7 @@
             <tbody>
               {{#each dataAcProspectoContactadoActivo}}
               <tr>
+                <td>{{equipo}}</td>
                 <td>{{asesor}}</td>
                 <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
                 <td>{{fecha_asignacion}}</td>
@@ -322,6 +332,7 @@
           <table class="table table-bordered table-striped span10" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
             <thead>
               <tr>
+                <td><b>Equipo</b></td>
                 <td><b>Asesor</b></td>
                 <td><b>Cuenta</b></td>
                 <td><b>Fecha Asignación</b></td>
@@ -332,6 +343,7 @@
             <tbody>
               {{#each dataAcProspectoContactadoAplazado}}
               <tr>
+                <td>{{equipo}}</td>
                 <td>{{asesor}}</td>
                 <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
                 <td>{{fecha_asignacion}}</td>
@@ -349,6 +361,7 @@
         <table class="table table-bordered table-striped span11" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
           <thead>
             <tr>
+              <td><b>Equipo</b></td>
               <td><b>Asesor</b></td>
               <td><b>Lead</b></td>
               <td><b>Fecha Asignación</b></td>
@@ -360,6 +373,7 @@
           <tbody>
             {{#each dataLeadActivos}}
             <tr>
+              <td>{{equipo}}</td>
               <td>{{asesor}}</td>
               <td><a href="#Leads/{{idLead}}" target="_blank">{{nombre}}</a></td>
               <td>{{fecha_asignacion}}</td>
@@ -376,6 +390,7 @@
           <table class="table table-bordered table-striped span10" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
             <thead>
               <tr>
+                <td><b>Equipo</b></td>
                 <td><b>Asesor</b></td>
                 <td><b>Lead</b></td>
                 <td><b>Fecha Asignación</b></td>
@@ -386,6 +401,7 @@
             <tbody>
               {{#each dataLeadAplazado}}
               <tr>
+                <td>{{equipo}}</td>
                 <td>{{asesor}}</td>
                 <td><a href="#Leads/{{idLead}}" target="_blank">{{nombre}}</a></td>
                 <td>{{fecha_asignacion}}</td>
