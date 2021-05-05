@@ -31,11 +31,11 @@ class DisposicionesUni2 extends SugarApi
         $num=$args['num'];
 		$mes=$args['mes'];
 		$anio=$args['anio'];
-        $host=$sugar_config['uni2'];
+        $host=$sugar_config['bpm_url'];
 		$ch = curl_init();
-        if($id == 1) $url = $host."disposiciones?backlog=".$num."&mes=".$mes."&anio=".$anio;
+        if($id == 1) $url = "http://".$host."/uni2/rest/backlog/disposiciones?backlog=".$num."&mes=".$mes."&anio=".$anio;
 		if($id == 2) {
-			$url = $host."cancelacion";
+			$url = "http://".$host."/uni2/rest/backlog/cancelacion";
 			$motivo = $args['motivo'];
 			$comentarios = $args['comentarios'];
 			$usuario = $args['usuario'];
