@@ -12,11 +12,10 @@
 <table class="table table-bordered table-striped span12" style="overflow-x: scroll;">
     <thead>
         <tr>
-            <td><b>Nombre Cuenta</b></td>
+            <td><b>Cuenta</b></td>
             <td><b>Monto</b></td>
 			<td><b>Fecha Asignación</b></td>
 			<td><b>Etapa</b></td>
-            <td><b>Estatus Producto</b></td>
             <td><b>Semáforo</b></td>
             <td><b>Acciones</b></td>
         </tr>
@@ -28,7 +27,6 @@
             <td>{{Monto}}</td>
 			<td>{{fecha_asignacion}}</td>
 			<td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>
-            <td>{{#if EstatusProducto}}{{getUnifinListValue 'status_management_list' EstatusProducto}}{{/if}}</td>
             <td>{{#if semaforo}}<b class="enTiempo">En tiempo</b>{{else}}<b class="atrasado">Atrasado</b>{{/if}}</td>
             <td>
                 <button class="btn btn btnNoViableExpActivo" id="btnNoViableExpActivo" type="submit" title="{{idCuenta}}">Establecer No viable</button>
