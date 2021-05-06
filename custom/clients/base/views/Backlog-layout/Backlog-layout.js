@@ -853,7 +853,7 @@
         this.anio_list_html_mover=lista_mes_anio['anio'];
         this.meses_list_html_mover=lista_mes_anio['mes'];
 		//Valida estado En Proceso de Cancelación
-		if (backlogEstatus == 'En Proceso de Cancelación') flagShowModal=false;		
+		if (backlogEstatus == 'En Proceso de Cancelación') flagShowModal=false;
         if (flagShowModal==true){
              self.render();
              var modalMover = $('#myModalMover');
@@ -1593,7 +1593,7 @@
             "comentarioNuevo":"",
         };
 		//Valida estado En Proceso de Cancelación
-		if (backlog.estado_cancelacion_c != 'En Proceso de Cancelación') {		
+		if (backlog.estado_cancelacion_c != 'En Proceso de Cancelación') {
 			self.render();
 			var modal = $('#myModal');
 			modal.show();
@@ -2232,15 +2232,15 @@
 		$('#btn-GuardarCan').prop('disabled',true);
 		if(this.disposiciones) {
 			//Cancela disposiciones en UNI2
-            var Parame = {
-				id: 2,
-                num: this.newCancelar.numBacklog,
-                mes: mes,
-				anio: anio,
-				motivo: app.lang.getAppListStrings('motivo_cancelacion_c_list')[motivo],
-				comentarios: $('#ComentarioCan').val(),
-				usuario: app.user.attributes.user_name
-            };
+      var Parame = {
+        id: 2,
+        num: this.newCancelar.numBacklog,
+        mes: this.newCancelar.mesBacklog,
+        anio: anio,
+        motivo: app.lang.getAppListStrings('motivo_cancelacion_c_list')[motivo],
+        comentarios: $('#ComentarioCan').val(),
+        usuario: app.user.attributes.user_name
+      };
 			app.api.call('create', app.api.buildURL("DisposicionesUni2"), Parame, {
                 success: _.bind(function (data) {
                     if(self.disposed) return;
@@ -2252,7 +2252,7 @@
 							'MotivoCancelacion':motivo,
 							'RentaReal':this.newCancelar.rentaInicialOriginal,
 							'Comentarios':comentarios,
-							'Mes':mes,
+							'Mes':this.newCancelar.mesBacklog,
 							'Anio':anio,
 							'MesAnterior':this.newCancelar.mesBacklog,
 							'AnioAnterior':this.newCancelar.anioBacklog,
@@ -2268,7 +2268,7 @@
 									delete self.backlogs.backlogs.MyBacklogs.linea[self.newCancelar.idBacklog];
 								}
 								else{
-									//Marcar como cancelado, pintar en rojo y status en cancelada
+									//Marcar como cancelado, pintar en amarillo y en proceso de cancelación
 									self.backlogs.backlogs.MyBacklogs.linea[self.newCancelar.idBacklog].color="#F6D96F";
 								}
 								$('#btn-CanCancelar').prop('disabled',false);
@@ -2733,7 +2733,7 @@
     },
 
 	//Funcion para consultar estado
-    consultarEstadoBLPC: function(e){    
+    consultarEstadoBLPC: function(e){
         var idBacklog=e.currentTarget.getAttribute('data-id');
         var backlog=App.utils.deepCopy(self.backlogs.backlogs.MyBacklogs.linea[idBacklog]);
         var numbacklog = backlog.numero_de_backlog;
@@ -2767,7 +2767,7 @@
                 var modal = $('#consultarEstadoModal');
                 modal.show();
             },this)
-        });        
+        });
     },
 
     cancelConsultarEstado:function(){
