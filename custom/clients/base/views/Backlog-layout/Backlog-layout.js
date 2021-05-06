@@ -1762,7 +1762,7 @@
         if (backlog.estatus_operacion_c != '1'){
            app.alert.show('Operacion Activa', {
                level: 'error',
-               messages: 'Unicamente pueden revivirse operaciones canceladas.',
+               messages: 'Únicamente pueden revivirse operaciones canceladas.',
                autoClose: false
             });
            return;
