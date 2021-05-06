@@ -595,81 +595,86 @@ SQL;
         $AnioAnterior = $args['data']['AnioAnterior'];
         $cam_competencia = $args['data']['Competencia'];
         $cam_producto = $args['data']['Producto'];
-		$estado = $args['data']['Estado'];
+		    $estado = $args['data']['Estado'];
         $monto_cancelado = $this->cleanNumber($monto_cancelado);
         $renta_cancelada = $this->cleanNumber($renta_cancelada);
 
         $backlog = BeanFactory::retrieveBean('lev_Backlog', $backlogId);
-        $backlog->description .= "\r\n" . $current_user->first_name . " " . $current_user->last_name . " - " . $todayDate . ": " . $comentarios_de_cancelacion;
+        //Valida si es en proceso de cancelación
+        if(!$estado){
+          $backlog->description .= "\r\n" . $current_user->first_name . " " . $current_user->last_name . " - " . $todayDate . ": " . $comentarios_de_cancelacion;
 
-        /* AF- 2018-10-24
-         *  Se modifica condición
-        //if($motivo_de_cancelacion != "Cliente no interesado" && $motivo_de_cancelacion != "No viable"){
-        */
-        if($motivo_de_cancelacion == '10'){
-            //Reevaluamos el tipo de operaci�n que tendra el nuevo BL
-            $currentYear = date("Y");
-            $currentDay = date("d");
-            $BacklogElaboracion = date("m") + 1;
+          /* AF- 2018-10-24
+           *  Se modifica condición
+          //if($motivo_de_cancelacion != "Cliente no interesado" && $motivo_de_cancelacion != "No viable"){
+          */
+          if($motivo_de_cancelacion == '10'){
+              //Reevaluamos el tipo de operaci�n que tendra el nuevo BL
+              $currentYear = date("Y");
+              $currentDay = date("d");
+              $BacklogElaboracion = date("m") + 1;
 
-            //Obtiene el Backlog en revisi�n
-            if($currentDay > 20){  //Si ya pasamos del dia 20 ya se esta planeando el BL de 2 meses naturales adelante
-                $BacklogElaboracion += 1;
-            }
-            if ($BacklogElaboracion > 12){  //Si resulta mayor a diciembre
-                $BacklogElaboracion = $BacklogElaboracion - 12;
-            }
+              //Obtiene el Backlog en revisi�n
+              if($currentDay > 20){  //Si ya pasamos del dia 20 ya se esta planeando el BL de 2 meses naturales adelante
+                  $BacklogElaboracion += 1;
+              }
+              if ($BacklogElaboracion > 12){  //Si resulta mayor a diciembre
+                  $BacklogElaboracion = $BacklogElaboracion - 12;
+              }
 
-            if ($anio <= $currentYear){
-                if ($mes == $BacklogElaboracion){
-                    $this->copiarBacklog($backlog, $mes, $anio, '2',  'Comprometida', $backlog->numero_de_backlog);
-                }else{
-                    $this->copiarBacklog($backlog, $mes, $anio, '3', 'Comprometida', $backlog->numero_de_backlog);
-                }
-            }else{
-                $this->copiarBacklog($backlog, $mes, $anio, '2',  'Comprometida', $backlog->numero_de_backlog);
-            }
+              if ($anio <= $currentYear){
+                  if ($mes == $BacklogElaboracion){
+                      $this->copiarBacklog($backlog, $mes, $anio, '2',  'Comprometida', $backlog->numero_de_backlog);
+                  }else{
+                      $this->copiarBacklog($backlog, $mes, $anio, '3', 'Comprometida', $backlog->numero_de_backlog);
+                  }
+              }else{
+                  $this->copiarBacklog($backlog, $mes, $anio, '2',  'Comprometida', $backlog->numero_de_backlog);
+              }
 
-            //$this->copiarBacklog($backlog, $mes, $anio, $backlog->tipo_de_operacion, $backlog->estatus_de_la_operacion, $backlog->numero_de_backlog);
+              //$this->copiarBacklog($backlog, $mes, $anio, $backlog->tipo_de_operacion, $backlog->estatus_de_la_operacion, $backlog->numero_de_backlog);
 
-            // Actualiza las cotizaciones de UNICS al nuevo Backlog
-            $host = 'http://'. $GLOBALS['unifin_url'] .'/Uni2WsUtilerias/WsRest/Uni2UtlServices.svc/Uni2/ActualizaMesBacklog';
-            $fields = array(
-                "backlogRequest" => array(
-                    "noBacklog" => intval($backlog->numero_de_backlog),
-                    "mesActual" => intval($MesAnterior),
-                    "anioActual" => intval($AnioAnterior),
-                    "mesNuevo" => intval($mes),
-                    "anioNuevo" => intval($anio)
-                )
-            );
+              // Actualiza las cotizaciones de UNICS al nuevo Backlog
+              $host = 'http://'. $GLOBALS['unifin_url'] .'/Uni2WsUtilerias/WsRest/Uni2UtlServices.svc/Uni2/ActualizaMesBacklog';
+              $fields = array(
+                  "backlogRequest" => array(
+                      "noBacklog" => intval($backlog->numero_de_backlog),
+                      "mesActual" => intval($MesAnterior),
+                      "anioActual" => intval($AnioAnterior),
+                      "mesNuevo" => intval($mes),
+                      "anioNuevo" => intval($anio)
+                  )
+              );
 
-            $callApi = new UnifinAPI();
-            $callApi->unifinPutCall($host,$fields);
+              $callApi = new UnifinAPI();
+              $callApi->unifinPutCall($host,$fields);
+          }
+
+          //Obtiene el Backlog en revisi�n
+          $currentDay = date("d");
+          $BacklogElaboracion = date("m") + 1;
+
+          if($currentDay > 20){  //Si ya pasamos del dia 20 ya se esta planeando el BL de 2 meses naturales adelante
+              $BacklogElaboracion += 1;
+          }
+
+          //SI el Backlog que se esta cancelando es del Backlog que se esta elaborando, entonces se marca domo Deleted.
+          if ($MesAnterior >= $BacklogElaboracion){
+              $backlog->deleted = 1;
+          }
+
+          $backlog->estatus_operacion_c = "1";
+          $backlog->monto_comprometido_cancelado = "-" . $monto_cancelado;
+          $backlog->renta_inicialcomp_can = "-" . $renta_cancelada;
+          $backlog->monto_real_logrado = 0;
+          $backlog->renta_inicial_real = 0;
+          $backlog->motivo_cancelacion_c = $motivo_de_cancelacion;
+          $backlog->tct_competencia_quien_txf_c = $cam_competencia;
+          $backlog->tct_que_producto_txf_c = $cam_producto;
+        }else{
+            $backlog->estado_cancelacion_c = $estado;
+            $backlog->estatus_operacion_c = "2";
         }
-
-        //Obtiene el Backlog en revisi�n
-        $currentDay = date("d");
-        $BacklogElaboracion = date("m") + 1;
-
-        if($currentDay > 20){  //Si ya pasamos del dia 20 ya se esta planeando el BL de 2 meses naturales adelante
-            $BacklogElaboracion += 1;
-        }
-
-        //SI el Backlog que se esta cancelando es del Backlog que se esta elaborando, entonces se marca domo Deleted.
-        if ($MesAnterior >= $BacklogElaboracion){
-            $backlog->deleted = 1;
-        }
-
-        if(!$estado) $backlog->estatus_operacion_c = "1";
-        $backlog->monto_comprometido_cancelado = "-" . $monto_cancelado;
-        $backlog->renta_inicialcomp_can = "-" . $renta_cancelada;
-        $backlog->monto_real_logrado = 0;
-        $backlog->renta_inicial_real = 0;
-        $backlog->motivo_cancelacion_c = $motivo_de_cancelacion;
-        $backlog->tct_competencia_quien_txf_c = $cam_competencia;
-        $backlog->tct_que_producto_txf_c = $cam_producto;
-		$backlog->estado_cancelacion_c = $estado;
         $backlog->save();
         return array($backlog->deleted,$backlog->id);
     }
