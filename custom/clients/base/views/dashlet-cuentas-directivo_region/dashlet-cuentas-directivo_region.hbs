@@ -10,9 +10,13 @@
     table.ex1 {
       padding: 15px;
     }
-
-    .resumen.p{
-      font-size: 16px;
+    p.titulop1{
+      font-size: 15px;
+      text-align: left;
+    }
+    p.titulop2{
+      font-size: 13px;
+      text-align: left;
     }
     .table1{
       padding: 15px;
@@ -31,7 +35,6 @@
 
     .titulo2{
       background-color: #85C1E9;
-      width:650px;
     }
 
     .titulo3{
@@ -40,7 +43,6 @@
 
     .user{
       text-align: right;
-      width:3000px;
     }
 
 
@@ -65,11 +67,11 @@
     <br>
   </div>
   <div class = "resumen" width ="100%" >
-    <p><b>Resumen datos generales </b></p>
-    <table class="table1 table-bordered table-striped span5" style="overflow-x: scroll;" >
+    <p class="titulop1"><b>Resumen datos generales</b></p>
+    <table class="table1 table-bordered table-striped " style="overflow-x: scroll;" >
       <thead>
         <tr >
-            <td class="titulo1" rowspan ="2" width="3000px"><b>Etapa / Equipo</b></td>
+            <td class="titulo1" rowspan ="2"><b>Etapa / Equipo</b></td>
             <td class="titulo1" colspan="3"><b>Activos</b></td>
 	    	    <td class="titulo1" colspan="3"><b>Inactivos</b></td>
         </tr>
@@ -84,7 +86,7 @@
       </thead>
       <thead>
         <tr>
-          <td class="titulo2"><b>TOTAL</b></td>
+          <td ><b>TOTAL</b></td>
             <td class="titulo2">{{totales.totalTiempo}}</td>
 	    	    <td class="titulo2">{{totales.totalAtrasado}}</td>
 	    	    <td class="titulo2">{{totales.totalActivo}}</td>
@@ -105,7 +107,7 @@
         </tr>       
           {{#each resumenExpedientes}}
           <tr>
-              <td>{{equipo}}</td>
+              <td class="user">{{equipo}}</td>
               <td>{{tiempo}}</td>
 	            <td>{{atrasado}}</td>
 	            <td><b>{{total1}}</b></td>
@@ -125,7 +127,7 @@
         </tr>
           {{#each resumenInteresados}}
           <tr>
-              <td>{{equipo}}</td>
+              <td class="user">{{equipo}}</td>
               <td>{{tiempo}}</td>
 	            <td>{{atrasado}}</td>
 	            <td><b>{{total1}}</b></td>
@@ -145,7 +147,7 @@
         </tr>
         {{#each resumenContactados}}
           <tr>
-              <td>{{equipo}}</td>
+              <td class="user">{{equipo}}</td>
               <td>{{tiempo}}</td>
 	            <td>{{atrasado}}</td>
 	            <td><b>{{total1}}</b></td>
@@ -166,7 +168,7 @@
         </tr>
         {{#each resumenLeads}}
           <tr>
-              <td>{{equipo}}</td>
+              <td class="user">{{equipo}}</td>
               <td>{{tiempo}}</td>
 	            <td>{{atrasado}}</td>
 	            <td><b>{{total1}}</b></td>
@@ -183,7 +185,7 @@
       <table width="100%" >
         <tr>
           <td width = "50%" style="vertical-align: top">
-            <p>Prospectos en integración de Expediente (Activos)</p>
+            <p class="titulop2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Prospectos en integración de Expediente (Activos)</b></p>
             <table class="table table-bordered table-striped span11" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
               <thead>
                 <tr>
@@ -199,7 +201,7 @@
               <tbody>
                 {{#each dataCuentasExpActivo}}
                 <tr>
-                  <td>{{equipo}}</td>
+                  <td class="user">{{equipo}}</td>
                   <td>{{asesor}}</td>
                   <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
                   <td>{{Monto}}</td>
@@ -212,7 +214,7 @@
             </table>
           </td>
           <td width = "50%" style="vertical-align: top">
-              <p>Prospectos en integración de Expediente (Aplazados)</p>
+              <p class="titulop2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Prospectos en integración de Expediente (Aplazados)</b></p>
               <table class="table table-bordered table-striped span10" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
                 <thead>
                     <tr>
@@ -227,7 +229,7 @@
                 <tbody>
                   {{#each dataCuentasExpAplazado}}
                   <tr>
-                      <td>{{equipo}}</td>
+                      <td class="user">{{equipo}}</td>
                       <td>{{asesor}}</td>
                       <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
                       <td>{{Monto}}</td>
@@ -241,7 +243,7 @@
 	      </tr>
         <tr>
           <td width = "50%" style="vertical-align: top">
-            <p>Prospectos Interesados (Activos)</p>
+            <p class="titulop2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Prospectos Interesados (Activos)</b></p>
             <table class="table table-bordered table-striped span11" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
               <thead>
                 <tr>
@@ -257,7 +259,7 @@
               <tbody>
                   {{#each dataAccSolicitudesActivo}}
                   <tr>
-                    <td>{{equipo}}</td>
+                    <td class="user">{{equipo}}</td>
                     <td>{{asesor}}</td>
                     <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
                     <td>{{Monto}}</td>
@@ -270,7 +272,7 @@
             </table>
           </td>
           <td width = "50%" style="vertical-align: top">
-            <p>Prospectos Interesados (Aplazados)</p>
+            <p class="titulop2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Prospectos Interesados (Aplazados)</b></p>
             <table class="table table-bordered table-striped span10" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
               <thead>
                   <tr>
@@ -285,7 +287,7 @@
               <tbody>
                   {{#each dataAccSolicitudesAplazados}}
                   <tr>
-                    <td>{{equipo}}</td>
+                    <td class="user">{{equipo}}</td>
                     <td>{{asesor}}</td>
                     <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
                     <td>{{Monto}}</td>
@@ -299,7 +301,7 @@
 	      </tr>
       <tr>
         <td width = "50%" style="vertical-align: top">
-          <p>Prospectos Contactados/Sin contactar (Activos)</p>
+          <p class="titulop2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Prospectos Contactados/Sin contactar (Activos)</b></p>
           <table class="table table-bordered table-striped span11" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
             <thead>
               <tr>
@@ -315,7 +317,7 @@
             <tbody>
               {{#each dataAcProspectoContactadoActivo}}
               <tr>
-                <td>{{equipo}}</td>
+                <td class="user">{{equipo}}</td>
                 <td>{{asesor}}</td>
                 <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
                 <td>{{fecha_asignacion}}</td>
@@ -328,7 +330,7 @@
           </table>
         </td>
         <td width = "50%" style="vertical-align: top">
-          <p>Prospectos Contactados/Sin contactar (Aplazados)</p>
+          <p class="titulop2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Prospectos Contactados/Sin contactar (Aplazados)</b></p>
           <table class="table table-bordered table-striped span10" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
             <thead>
               <tr>
@@ -343,7 +345,7 @@
             <tbody>
               {{#each dataAcProspectoContactadoAplazado}}
               <tr>
-                <td>{{equipo}}</td>
+                <td class="user">{{equipo}}</td>
                 <td>{{asesor}}</td>
                 <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
                 <td>{{fecha_asignacion}}</td>
@@ -357,7 +359,7 @@
 	    </tr>
       <tr>
       <td width = "50%" style="vertical-align: top">
-        <p>Leads Contactados/Sin contactar (Activos)</p>
+        <p class="titulop2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Leads Contactados/Sin contactar (Activos)</b></p>
         <table class="table table-bordered table-striped span11" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
           <thead>
             <tr>
@@ -373,7 +375,7 @@
           <tbody>
             {{#each dataLeadActivos}}
             <tr>
-              <td>{{equipo}}</td>
+              <td class="user">{{equipo}}</td>
               <td>{{asesor}}</td>
               <td><a href="#Leads/{{idLead}}" target="_blank">{{nombre}}</a></td>
               <td>{{fecha_asignacion}}</td>
@@ -386,7 +388,7 @@
         </table>
       </td>
       <td width = "50%" style="vertical-align: top">
-          <p>Leads Contactados/Sin contactar (Aplazados)</p>
+          <p class="titulop2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Leads Contactados/Sin contactar (Aplazados)</b></p>
           <table class="table table-bordered table-striped span10" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
             <thead>
               <tr>
@@ -401,7 +403,7 @@
             <tbody>
               {{#each dataLeadAplazado}}
               <tr>
-                <td>{{equipo}}</td>
+                <td class="user">{{equipo}}</td>
                 <td>{{asesor}}</td>
                 <td><a href="#Leads/{{idLead}}" target="_blank">{{nombre}}</a></td>
                 <td>{{fecha_asignacion}}</td>
