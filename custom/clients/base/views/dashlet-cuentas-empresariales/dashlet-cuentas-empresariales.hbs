@@ -10,9 +10,13 @@
     table.ex1 {
       padding: 15px;
     }
-
-    .resumen.p{
-      font-size: 16px;
+    p.titulop1{
+      font-size: 15px;
+      text-align: left;
+    }
+    p.titulop2{
+      font-size: 13px;
+      text-align: left;
     }
     .table1{
       padding: 15px;
@@ -31,7 +35,6 @@
 
     .titulo2{
       background-color: #85C1E9;
-      width:650px;
     }
 
     .titulo3{
@@ -40,7 +43,6 @@
 
     .user{
       text-align: right;
-      width:3000px;
     }
 
 
@@ -64,12 +66,12 @@
     </table>
     <br>
   </div>  
-  <div class = "resumen" width ="100%" >
-    <p><b>Resumen datos generales </b></p>
-    <table class="table1 table-bordered table-striped span5" style="overflow-x: scroll;" >
+  <div class="resumen" width ="100%" >
+    <p class="titulop1"><b>Resumen datos generales </b></p>
+    <table class="table1 table-bordered table-striped " style="overflow-x: scroll;" >
       <thead>
         <tr >
-            <td class="titulo1" rowspan ="2" width="3000px"><b>Etapa / Asesor</b></td>
+            <td class="titulo1" rowspan ="2" ><b>Etapa / Asesor</b></td>
             <td class="titulo1" colspan="3"><b>Activos</b></td>
 	    	    <td class="titulo1" colspan="3"><b>Inactivos</b></td>
         </tr>
@@ -84,7 +86,7 @@
       </thead>
       <thead>
         <tr>
-          <td ><b>TOTAL</b></td>
+          <td  ><b>TOTAL</b></td>
             <td class="titulo2">{{totales.totalTiempo}}</td>
 	    	    <td class="titulo2">{{totales.totalAtrasado}}</td>
 	    	    <td class="titulo2">{{totales.totalActivo}}</td>
@@ -183,7 +185,7 @@
       <table width="100%" >
         <tr>
           <td width = "50%" style="vertical-align: top">
-            <p>Prospectos en integración de Expediente (Activos)</p>
+            <p class="titulop2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Prospectos en integración de Expediente (Activos)</b></p>
             <table class="table table-bordered table-striped span11" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
               <thead>
                 <tr>
@@ -210,7 +212,7 @@
             </table>
           </td>
           <td width = "50%" style="vertical-align: top">
-              <p>Prospectos en integración de Expediente (Aplazados)</p>
+              <p class="titulop2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Prospectos en integración de Expediente (Aplazados)</b></p>
               <table class="table table-bordered table-striped span10" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
                 <thead>
                     <tr>
@@ -237,7 +239,7 @@
 	      </tr>
         <tr>
           <td width = "50%" style="vertical-align: top">
-            <p>Prospectos Interesados (Activos)</p>
+            <p class="titulop2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Prospectos Interesados (Activos)</b></p>
             <table class="table table-bordered table-striped span11" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
               <thead>
                 <tr>
@@ -264,7 +266,7 @@
             </table>
           </td>
           <td width = "50%" style="vertical-align: top">
-            <p>Prospectos Interesados (Aplazados)</p>
+            <p class="titulop2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Prospectos Interesados (Aplazados)</b></p>
             <table class="table table-bordered table-striped span10" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
               <thead>
                   <tr>
@@ -291,7 +293,7 @@
 	      </tr>
       <tr>
         <td width = "50%" style="vertical-align: top">
-          <p>Prospectos Contactados/Sin contactar (Activos)</p>
+          <p class="titulop2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Prospectos Contactados/Sin contactar (Activos)</b></p>
           <table class="table table-bordered table-striped span11" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
             <thead>
               <tr>
@@ -318,7 +320,7 @@
           </table>
         </td>
         <td width = "50%" style="vertical-align: top">
-          <p>Prospectos Contactados/Sin contactar (Aplazados)</p>
+          <p class="titulop2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Prospectos Contactados/Sin contactar (Aplazados)</b></p>
           <table class="table table-bordered table-striped span10" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
             <thead>
               <tr>
@@ -345,7 +347,7 @@
 	    </tr>
       <tr>
       <td width = "50%" style="vertical-align: top">
-        <p>Leads Contactados/Sin contactar (Activos)</p>
+        <p class="titulop2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Leads Contactados/Sin contactar (Activos)</b></p>
         <table class="table table-bordered table-striped span11" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
           <thead>
             <tr>
@@ -372,7 +374,7 @@
         </table>
       </td>
       <td width = "50%" style="vertical-align: top">
-          <p>Leads Contactados/Sin contactar (Aplazados)</p>
+          <p class="titulop2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Leads Contactados/Sin contactar (Aplazados)</b></p>
           <table class="table table-bordered table-striped span10" style="overflow-x: scroll;overflow-y: scroll;max-height: 300px;">
             <thead>
               <tr>
