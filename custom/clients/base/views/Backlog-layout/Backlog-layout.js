@@ -2232,15 +2232,15 @@
 		$('#btn-GuardarCan').prop('disabled',true);
 		if(this.disposiciones) {
 			//Cancela disposiciones en UNI2
-      var Parame = {
-        id: 2,
-        num: this.newCancelar.numBacklog,
-        mes: this.newCancelar.mesBacklog,
-        anio: anio,
-        motivo: app.lang.getAppListStrings('motivo_cancelacion_c_list')[motivo],
-        comentarios: $('#ComentarioCan').val(),
-        usuario: app.user.attributes.user_name
-      };
+			var Parame = {
+				id: 2,
+				num: this.newCancelar.numBacklog,
+				mes: this.newCancelar.mesBacklog,
+				anio: this.newCancelar.anioBacklog,
+				motivo: app.lang.getAppListStrings('motivo_cancelacion_c_list')[motivo],
+				comentarios: $('#ComentarioCan').val(),
+				usuario: app.user.attributes.user_name
+			};
 			app.api.call('create', app.api.buildURL("DisposicionesUni2"), Parame, {
                 success: _.bind(function (data) {
                     if(self.disposed) return;
