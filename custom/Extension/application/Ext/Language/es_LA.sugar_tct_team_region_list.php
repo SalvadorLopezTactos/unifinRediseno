@@ -1,5 +1,5 @@
 <?php
- // created: 2021-04-20 16:57:57
+ // created: 2021-05-06 21:16:55
 
 $app_list_strings['tct_team_region_list']=array (
   '' => '',
@@ -50,6 +50,6 @@ $app_list_strings['tct_team_region_list']=array (
   '4MOV' => 'EXPERIENCE',
   'METRO' => 'METROPOLITANA',
   'REGIONAL' => 'METROPOLITANA',
-  'No_Asignado' => 'No Asignado',
   'GDL2' => 'OCCIDENTE',
+  'No Asignado' => 'No Asignada',
 );
