@@ -1,5 +1,5 @@
 <?php
- // created: 2019-10-15 16:45:44
+ // created: 2021-05-07 01:56:07
 $dictionary['Opportunity']['fields']['tct_numero_vehiculos_c']['labelValue']='Número de vehículos';
 $dictionary['Opportunity']['fields']['tct_numero_vehiculos_c']['full_text_search']=array (
   'enabled' => '0',
@@ -7,6 +7,6 @@ $dictionary['Opportunity']['fields']['tct_numero_vehiculos_c']['full_text_search
   'searchable' => false,
 );
 $dictionary['Opportunity']['fields']['tct_numero_vehiculos_c']['enforced']='';
-$dictionary['Opportunity']['fields']['tct_numero_vehiculos_c']['dependency']='equal($tipo_producto_c,6)';
+$dictionary['Opportunity']['fields']['tct_numero_vehiculos_c']['dependency']='or(equal($tipo_producto_c,6),equal($tipo_producto_c,13))';
 
  ?>
