@@ -3338,7 +3338,7 @@
     //Función para validar que el asesor RM sea realmente un asesor RM 
     validaAsesorRM: function (fields, errors, callback) {
         var asesorRM=this.model.get('user_id1_c');
-        if(asesorRM!=""){
+        if(asesorRM!="" && this.model.get('tipo_producto_c')!='13'){
             app.api.call('GET', app.api.buildURL('Infouser/' + asesorRM), null, {
                 success: _.bind(function (data) {
     
