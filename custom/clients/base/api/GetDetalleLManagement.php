@@ -110,7 +110,7 @@ class GetDetalleLManagement extends SugarApi
         if ($pos != '' && $tdirector == 1) { //valida usuario director equipo
             $queryusuarios = "select id, user_name, puestousuario_c,equipo_c, region_c from users 
             join users_cstm on users.id = users_cstm.id_c where equipo_c in ({$tteams})
-             and puestousuario_c ='5' 
+             and puestousuario_c in ('1','2','3','4','5','6','20','33','44','55') 
             order by equipo_c";
             $GLOBALS['log']->fatal('queryusuarios', $queryusuarios);
             $result = $GLOBALS['db']->query($queryusuarios);
@@ -152,7 +152,8 @@ class GetDetalleLManagement extends SugarApi
             $salidaequipos = implode(",", $equiposf);
             $queryusuarios = "SELECT id, user_name, puestousuario_c,equipo_c,region_c from users 
             join users_cstm on users.id = users_cstm.id_c where equipo_c in 
-            ( {$salidaequipos} ) order by equipo_c";
+            ( {$salidaequipos} ) and puestousuario_c in ('1','2','3','4','5','6','20','33','44','55') 
+             order by equipo_c";
             $GLOBALS['log']->fatal('queryusuarios', $queryusuarios);
             $result = $GLOBALS['db']->query($queryusuarios);
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
