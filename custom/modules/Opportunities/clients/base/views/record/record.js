@@ -1086,7 +1086,7 @@
                 errors['amount'].required = true;
             }
 
-            if (parseFloat(this.model.get('ca_pago_mensual_c')) <= 0 && this.model.get('tipo_producto_c') != "6" && this.model.get('tipo_producto_c') != "7" &&
+            if (parseFloat(this.model.get('ca_pago_mensual_c')) <= 0 && this.model.get('tipo_producto_c') != "6" && this.model.get('tipo_producto_c') != "7" && this.model.get('tipo_producto_c') != "13" &&
                 this.model.get('producto_financiero_c') != "43" && this.model.get('admin_cartera_c') != true) {
                 errors['ca_pago_mensual_c'] = errors['ca_pago_mensual_c'] || {};
                 errors['ca_pago_mensual_c'].required = true;
@@ -1336,7 +1336,7 @@
 
     condicionesFinancierasCheck: function (fields, errors, callback) {
         if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
-            if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && this.model.get("producto_financiero_c") != 43) {
+            if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && this.model.get("producto_financiero_c") != 43 && this.model.get("tipo_producto_c") != 13) {
                 if (solicitud_cf.oFinanciera.condicion.length == 0) {
                     errors[$(".addCondicionFinanciera")] = errors['condiciones_financieras'] || {};
                     errors[$(".addCondicionFinanciera")].required = true;
