@@ -1267,8 +1267,8 @@
         var tipo_registro;
         //id de la Persona asociada
         var id_person = this.model.get('account_id');
-        // Valida que sea diferente de Credito simple
-        if(this.model.get('tipo_producto_c')!='2')
+        // Valida que sea diferente de Credito simple y de SERVICIOS
+        if(this.model.get('tipo_producto_c')!='2' && this.model.get('tipo_producto_c')!='13')
         {
             //Recupera productos asociados
             if (id_person && id_person != '' && id_person.length > 0 ) {
@@ -1727,12 +1727,10 @@
         var op = app.lang.getAppListStrings('tipo_producto_list');
         var op2 = {};
         var productos = App.user.attributes.productos_c;
-        var specialChars = "!$^,.";
-
+        
         //Establece el valor por default del user logueado
-        for (var i = 0; i < specialChars.length; i++) {
-            productos = productos.replace(new RegExp("\\" + specialChars[i], 'gi'), '');
-        }
+        productos=productos.replace(/\^/g,"");
+        productos= productos.split(",");
 
         //Itera la lista de productos para dejar solo los del usuario logueado
         for (id in productos) {

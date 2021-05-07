@@ -2112,7 +2112,7 @@
     },
 
     _Validavehiculo: function (fields, errors, callback) {
-        if (this.model.get('tct_numero_vehiculos_c') <= 0 && this.model.get('tipo_producto_c') == "6") {
+        if (this.model.get('tct_numero_vehiculos_c') <= 0 && (this.model.get('tipo_producto_c') == "6" || this.model.get('tipo_producto_c') == "13")) {
             errors['tct_numero_vehiculos_c'] = errors['tct_numero_vehiculos_c'] || {};
             errors['tct_numero_vehiculos_c'].required = true;
 
@@ -2484,7 +2484,7 @@
             this.$("div.record-label[data-name='porcentaje_renta_inicial_c']").text("Porcentaje Renta Inicial");
         }
         //Se agrega condición para ocultar campo que no pertenecen a Fleet
-        if (this.model.get('tipo_producto_c') == '6' || this.model.get('tipo_producto_c') == '7') {
+        if (this.model.get('tipo_producto_c') == '6' || this.model.get('tipo_producto_c') == '7' || this.model.get('tipo_producto_c') == '13') {
 
             //this.$("div.record-label[data-name='monto_c']").text("L\u00EDnea aproximada");
             //Se oculta Monto a Operar
@@ -2500,7 +2500,7 @@
             this.$('div[data-name=condiciones_financieras]').hide();
         }
         //Valida la solicitud que sea de tipo SOS y oculta campos
-        if (this.model.get('tipo_producto_c') == '7') {
+        if (this.model.get('tipo_producto_c') == '7' || this.model.get('tipo_producto_c') == '13') {
             this.$('div[data-name=condiciones_financieras]').hide();
             this.$('div[data-name=f_comentarios_generales_c]').hide();
             this.$('div[data-name="condiciones_financieras_incremento_ratificacion"]').hide();
