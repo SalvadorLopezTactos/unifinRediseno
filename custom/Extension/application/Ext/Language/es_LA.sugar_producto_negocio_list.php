@@ -1,5 +1,5 @@
 <?php
- // created: 2021-02-23 12:12:48
+ // created: 2021-05-06 16:04:56
 
 $app_list_strings['producto_negocio_list']=array (
   0 => '',
@@ -14,4 +14,5 @@ $app_list_strings['producto_negocio_list']=array (
   9 => 'UNILEASE',
   10 => 'UNICLICK',
   11 => 'CRÉDITO SIMPLE',
+  12 => 'FLEET',
 );

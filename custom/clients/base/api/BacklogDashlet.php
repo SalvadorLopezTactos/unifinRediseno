@@ -284,7 +284,8 @@ SQL;
 SELECT lb.*,blcs.*,IFNULL(blcs.monto_final_comprometido_c,0) AS monto_final_comprometido, IFNULL(blcs.ri_final_comprometida_c,0) AS ri_final_comprometida,
 a.name AS account_name, CONCAT(u.first_name, " " , u.last_name) AS promotor, lb.equipo AS equipo_c, o.id AS oportunityId,
 case when lb.description = '' then 'fa-comment-o' when lb.description is null then 'fa-comment-o' else 'fa-comment' end as comentado,
-case when blcs.estatus_operacion_c = '1' then '#FF6666'  when blcs.estatus_operacion_c = '2' then '#E5FFCC' else '#FFFFFF' end as color,
+case when blcs.estatus_operacion_c = '1' then '#FF6666' when blcs.estatus_operacion_c = '2' and (blcs.estado_cancelacion_c is null or blcs.estado_cancelacion_c = '3') then '#E5FFCC'
+when blcs.estatus_operacion_c = '2' and blcs.estado_cancelacion_c = '1' then '#F6D96F' else '#FFFFFF' end as color,
 case lb.equipo when '1' then 1 when '2' then 2 when '3' then 3 when '4' then 4 when '5' then 5 when '6' then 6 when '7' then 7 when '8' then 8 when '9' then 9
 when 'MTY' then 10 when 'HER' then 11 when 'CHI' then 12 when 'GDL' then 13 when 'QRO' then 14 when 'LEO' then 15
 when 'PUE' then 16 when 'VER' then 17  when 'CUN' then 18 when 'CAN' then 18 when 'MER' then 19 when 'TOL' then 20 when 'CASA' then 21 else 50 end AS ordenEquipo,
@@ -300,7 +301,7 @@ CASE WHEN blcs.estatus_operacion_c = '1' THEN 0 ELSE
   + CASE WHEN '{$etapa}' LIKE '%Rechazada%' THEN  monto_rechazado_c ELSE 0 END
   + CASE WHEN '{$etapa}' LIKE '%AutorizadaSinSolicitud%'  THEN  monto_sin_solicitud_c ELSE 0 END
   + CASE WHEN '{$etapa}' LIKE '%AutorizadaConSolicitud%' THEN  monto_con_solicitud_c  ELSE 0 END  END*/  END AS bl_actual,
-tasa_c, comision_c, dif_residuales_c, monto_pipeline_posterior_c, tct_conversion_c, motivo_rechazo_txf_c
+tasa_c, comision_c, dif_residuales_c, monto_pipeline_posterior_c, tct_conversion_c, motivo_rechazo_txf_c, estado_cancelacion_c
 FROM lev_backlog lb
 INNER JOIN lev_backlog_cstm blcs ON blcs.id_c = lb.id
 INNER JOIN accounts a ON a.id = lb.account_id_c AND a.deleted = 0
@@ -348,14 +349,12 @@ SQL;
             $query .= " AND blcs.etapa_c = '{$etapa}'";
         }
 
-        $estatus = array_filter($estatus);
         if(!empty($estatus)){
-            if(count($estatus) <= 1){
-                $estatus = "'" . implode("", $estatus). "'";
-            }else{
-                $estatus = "'" . implode("','", $estatus). "'";
-            }
-            $query .= " AND blcs.estatus_operacion_c IN ({$estatus})";
+			if($estatus == '3'){
+				$query .= " AND blcs.estado_cancelacion_c = '1'";
+			}else{
+				$query .= " AND blcs.estatus_operacion_c = {$estatus}";
+			}
         }
 
         if(!empty($equipo) && $equipo != "Todos"){
@@ -374,10 +373,11 @@ SQL;
 
         //Recupera listas de valores
         global $app_list_strings;
-
         $queryResult = $db->query($query);
         while ($row = $db->fetchByAssoc($queryResult)) {
             $response['linea'][$row['id']]['estatus_operacion_c'] = $app_list_strings['estatus_operacion_c_list'][$row['estatus_operacion_c']];
+			$response['linea'][$row['id']]['estado_cancelacion_c'] = $app_list_strings['estado_cancelacion_list'][$row['estado_cancelacion_c']];
+			if($row['estado_cancelacion_c'] == "1") $response['linea'][$row['id']]['estatus_operacion_c'] = $app_list_strings['estado_cancelacion_list'][$row['estado_cancelacion_c']];
             $response['linea'][$row['id']]['mesanio'] = substr ($this->matchListLabel($row['mes'], "mes_list"),0,3)."-".substr ($row['anio'],2,2);
             $response['linea'][$row['id']]['mes'] = substr ($this->matchListLabel($row['mes'], "mes_list"),0,3);
             $response['linea'][$row['id']]['equipo'] = $row['equipo_c'];
@@ -593,83 +593,88 @@ SQL;
 
         $MesAnterior = $args['data']['MesAnterior'];
         $AnioAnterior = $args['data']['AnioAnterior'];
-        $cam_competencia =$args['data']['Competencia'];
-        $cam_producto =$args['data']['Producto'];
-
-
+        $cam_competencia = $args['data']['Competencia'];
+        $cam_producto = $args['data']['Producto'];
+		    $estado = $args['data']['Estado'];
         $monto_cancelado = $this->cleanNumber($monto_cancelado);
         $renta_cancelada = $this->cleanNumber($renta_cancelada);
 
         $backlog = BeanFactory::retrieveBean('lev_Backlog', $backlogId);
-        $backlog->description .= "\r\n" . $current_user->first_name . " " . $current_user->last_name . " - " . $todayDate . ": " . $comentarios_de_cancelacion;
+        //Valida si es en proceso de cancelación
+        if(!$estado){
+          $backlog->description .= "\r\n" . $current_user->first_name . " " . $current_user->last_name . " - " . $todayDate . ": " . $comentarios_de_cancelacion;
 
-        /* AF- 2018-10-24
-         *  Se modifica condición
-        //if($motivo_de_cancelacion != "Cliente no interesado" && $motivo_de_cancelacion != "No viable"){
-        */
-        if($motivo_de_cancelacion == '10'){
-            //Reevaluamos el tipo de operaci�n que tendra el nuevo BL
-            $currentYear = date("Y");
-            $currentDay = date("d");
-            $BacklogElaboracion = date("m") + 1;
+          /* AF- 2018-10-24
+           *  Se modifica condición
+          //if($motivo_de_cancelacion != "Cliente no interesado" && $motivo_de_cancelacion != "No viable"){
+          */
+          if($motivo_de_cancelacion == '10'){
+              //Reevaluamos el tipo de operaci�n que tendra el nuevo BL
+              $currentYear = date("Y");
+              $currentDay = date("d");
+              $BacklogElaboracion = date("m") + 1;
 
-            //Obtiene el Backlog en revisi�n
-            if($currentDay > 20){  //Si ya pasamos del dia 20 ya se esta planeando el BL de 2 meses naturales adelante
-                $BacklogElaboracion += 1;
-            }
-            if ($BacklogElaboracion > 12){  //Si resulta mayor a diciembre
-                $BacklogElaboracion = $BacklogElaboracion - 12;
-            }
+              //Obtiene el Backlog en revisi�n
+              if($currentDay > 20){  //Si ya pasamos del dia 20 ya se esta planeando el BL de 2 meses naturales adelante
+                  $BacklogElaboracion += 1;
+              }
+              if ($BacklogElaboracion > 12){  //Si resulta mayor a diciembre
+                  $BacklogElaboracion = $BacklogElaboracion - 12;
+              }
 
-            if ($anio <= $currentYear){
-                if ($mes == $BacklogElaboracion){
-                    $this->copiarBacklog($backlog, $mes, $anio, '2',  'Comprometida', $backlog->numero_de_backlog);
-                }else{
-                    $this->copiarBacklog($backlog, $mes, $anio, '3', 'Comprometida', $backlog->numero_de_backlog);
-                }
-            }else{
-                $this->copiarBacklog($backlog, $mes, $anio, '2',  'Comprometida', $backlog->numero_de_backlog);
-            }
+              if ($anio <= $currentYear){
+                  if ($mes == $BacklogElaboracion){
+                      $this->copiarBacklog($backlog, $mes, $anio, '2',  'Comprometida', $backlog->numero_de_backlog);
+                  }else{
+                      $this->copiarBacklog($backlog, $mes, $anio, '3', 'Comprometida', $backlog->numero_de_backlog);
+                  }
+              }else{
+                  $this->copiarBacklog($backlog, $mes, $anio, '2',  'Comprometida', $backlog->numero_de_backlog);
+              }
 
-            //$this->copiarBacklog($backlog, $mes, $anio, $backlog->tipo_de_operacion, $backlog->estatus_de_la_operacion, $backlog->numero_de_backlog);
+              //$this->copiarBacklog($backlog, $mes, $anio, $backlog->tipo_de_operacion, $backlog->estatus_de_la_operacion, $backlog->numero_de_backlog);
 
-            // Actualiza las cotizaciones de UNICS al nuevo Backlog
-            $host = 'http://'. $GLOBALS['unifin_url'] .'/Uni2WsUtilerias/WsRest/Uni2UtlServices.svc/Uni2/ActualizaMesBacklog';
-            $fields = array(
-                "backlogRequest" => array(
-                    "noBacklog" => intval($backlog->numero_de_backlog),
-                    "mesActual" => intval($MesAnterior),
-                    "anioActual" => intval($AnioAnterior),
-                    "mesNuevo" => intval($mes),
-                    "anioNuevo" => intval($anio)
-                )
-            );
+              // Actualiza las cotizaciones de UNICS al nuevo Backlog
+              $host = 'http://'. $GLOBALS['unifin_url'] .'/Uni2WsUtilerias/WsRest/Uni2UtlServices.svc/Uni2/ActualizaMesBacklog';
+              $fields = array(
+                  "backlogRequest" => array(
+                      "noBacklog" => intval($backlog->numero_de_backlog),
+                      "mesActual" => intval($MesAnterior),
+                      "anioActual" => intval($AnioAnterior),
+                      "mesNuevo" => intval($mes),
+                      "anioNuevo" => intval($anio)
+                  )
+              );
 
-            $callApi = new UnifinAPI();
-            $callApi->unifinPutCall($host,$fields);
+              $callApi = new UnifinAPI();
+              $callApi->unifinPutCall($host,$fields);
+          }
+
+          //Obtiene el Backlog en revisi�n
+          $currentDay = date("d");
+          $BacklogElaboracion = date("m") + 1;
+
+          if($currentDay > 20){  //Si ya pasamos del dia 20 ya se esta planeando el BL de 2 meses naturales adelante
+              $BacklogElaboracion += 1;
+          }
+
+          //SI el Backlog que se esta cancelando es del Backlog que se esta elaborando, entonces se marca domo Deleted.
+          if ($MesAnterior >= $BacklogElaboracion){
+              $backlog->deleted = 1;
+          }
+
+          $backlog->estatus_operacion_c = "1";
+          $backlog->monto_comprometido_cancelado = "-" . $monto_cancelado;
+          $backlog->renta_inicialcomp_can = "-" . $renta_cancelada;
+          $backlog->monto_real_logrado = 0;
+          $backlog->renta_inicial_real = 0;
+          $backlog->motivo_cancelacion_c = $motivo_de_cancelacion;
+          $backlog->tct_competencia_quien_txf_c = $cam_competencia;
+          $backlog->tct_que_producto_txf_c = $cam_producto;
+        }else{
+            $backlog->estado_cancelacion_c = $estado;
+            $backlog->estatus_operacion_c = "2";
         }
-
-        //Obtiene el Backlog en revisi�n
-        $currentDay = date("d");
-        $BacklogElaboracion = date("m") + 1;
-
-        if($currentDay > 20){  //Si ya pasamos del dia 20 ya se esta planeando el BL de 2 meses naturales adelante
-            $BacklogElaboracion += 1;
-        }
-
-        //SI el Backlog que se esta cancelando es del Backlog que se esta elaborando, entonces se marca domo Deleted.
-        if ($MesAnterior >= $BacklogElaboracion){
-            $backlog->deleted = 1;
-        }
-
-        $backlog->estatus_operacion_c = "1";
-        $backlog->monto_comprometido_cancelado = "-" . $monto_cancelado;
-        $backlog->renta_inicialcomp_can = "-" . $renta_cancelada;
-        $backlog->monto_real_logrado = 0;
-        $backlog->renta_inicial_real = 0;
-        $backlog->motivo_cancelacion_c = $motivo_de_cancelacion;
-        $backlog->tct_competencia_quien_txf_c = $cam_competencia;
-        $backlog->tct_que_producto_txf_c = $cam_producto;
         $backlog->save();
         return array($backlog->deleted,$backlog->id);
     }
@@ -684,13 +689,14 @@ SQL;
         $anio = $args['data']['Anio'];
         $MesAnterior = $args['data']['MesAnterior'];
         $AnioAnterior = $args['data']['AnioAnterior'];
-
+		$estado = $args['data']['Estado'];
         $todayDate = date("n/j/Y", strtotime("now"));
 
         if($mes == $MesAnterior){
             //SI se esta reviviendo al mismo mes, solo actualiza el estatus a comprometida
             $backlog = BeanFactory::retrieveBean('lev_Backlog', $backlogId);
             $backlog->estatus_operacion_c = "2";
+			if($estado) $backlog->estado_cancelacion_c = "3";
             if ($comentarios != ""){
                 $backlog->description .= "\r\n" . $current_user->first_name . " " . $current_user->last_name . " - " . $todayDate . ": " . $comentarios;
             }

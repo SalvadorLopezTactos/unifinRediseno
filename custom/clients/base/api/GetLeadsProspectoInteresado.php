@@ -28,18 +28,18 @@ class GetLeadsProspectoInteresado extends SugarApi
             $records_in = [];
 
             if ($statusProduct != 3) {
-                //DASHLET SOLICITUDES SIN PROCESO
+                //DASHLET PROSPECTOS INTERESADOS
                 $query = "SELECT
-                cuentas.id as idCuenta, cuentas.name as nombreCuenta, cuentas.assigned_user_id, cuentas.user_id_c,
+                cuentas.id as idCuenta, cuentas.name as nombreCuenta, cuentas.assigned_user_id, cuentas.user_id_c, cuentas.fecha_asignacion_c as fechaAsignacion,
                 cuentas.tipo_cuenta as tipoCuenta, cuentas.subtipo_cuenta as subtipoCuenta, solicitudes.idOpp as idOpp, solicitudes.oppNombre as oppNombre,
-                solicitudes.date_modified, solicitudes.daypas, solicitudes.tct_etapa_ddw_c, solicitudes.tct_estapa_subetapa_txf_c as oppEtapa,
+                solicitudes.date_modified, solicitudes.daypas, solicitudes.tct_etapa_ddw_c, solicitudes.tct_estapa_subetapa_txf_c as oppEtapa, solicitudes.amount as monto,
                 cuentas.status_management_c as EstatusProducto, cuentas.tipo_producto, solicitudes.tipo_producto_c,
                 CASE WHEN solicitudes.date_modified < DATE_SUB(now(), INTERVAL 5 DAY) THEN 0
                 WHEN solicitudes.date_modified > DATE_SUB(now(), INTERVAL 5 DAY) THEN 1
                 END AS semaforo
                     FROM
                     (SELECT a.id, a.name ,a.assigned_user_id, ac.user_id_c, ac.tipo_registro_c, up.tipo_cuenta,
-                          up.subtipo_cuenta,up.name nameProd, up.tipo_producto, upc.status_management_c
+                          up.subtipo_cuenta,up.name nameProd, up.tipo_producto, upc.status_management_c, upc.fecha_asignacion_c
                           FROM accounts a
                           INNER JOIN accounts_cstm ac on ac.id_c = a.id
                           INNER JOIN accounts_uni_productos_1_c aup on aup.accounts_uni_productos_1accounts_ida = ac.id_c
@@ -47,7 +47,7 @@ class GetLeadsProspectoInteresado extends SugarApi
                           INNER JOIN uni_productos_cstm upc on upc.id_c = up.id
                           WHERE
                           up.tipo_cuenta = '2' and  up.subtipo_cuenta in ('7')
-                          and ac.user_id_c in '{$id_user}'
+                          and ac.user_id_c = '{$id_user}'
                           and upc.status_management_c = '{$statusProduct}'
                           and tipo_producto = '1'
                           and a.deleted = 0 and up.deleted = 0
@@ -63,12 +63,12 @@ class GetLeadsProspectoInteresado extends SugarApi
                         INNER JOIN (
                             SELECT app.account_id uac, opp.id oppid, opp.name, max(opp.date_modified) as dayb , min(TIMESTAMPDIFF(DAY, opp.date_modified, now())) as daypas
                             FROM accounts_opportunities app INNER JOIN opportunities opp on opp.id = app.opportunity_id
-                            where  opp.assigned_user_id in '{$id_user}'
+                            where  opp.assigned_user_id = '{$id_user}'
                             group by app.account_id order by app.account_id
                         ) AS ultimos on ultimos.uac = app.account_id and ultimos.dayb = opp.date_modified
                     WHERE
                     oppcstm.tipo_producto_c = '1' 
-                    and opp.assigned_user_id in '{$id_user}'
+                    and opp.assigned_user_id = '{$id_user}'
                     group by app.account_id
                     order by app.account_id
                     ) as solicitudes
@@ -84,9 +84,17 @@ class GetLeadsProspectoInteresado extends SugarApi
                 while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
 
                     $records_in['records'][] = array(
-                        'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 'tipoCuenta' => $row['tipoCuenta'],
-                        'subtipoCuenta' => $row['subtipoCuenta'], 'idOpp' => $row['idOpp'], 'oppNombre' => $row['oppNombre'],
-                        'oppEtapa' => $row['oppEtapa'], 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $row['semaforo']
+                        'idCuenta' => $row['idCuenta'], 
+                        'nombreCuenta' => $row['nombreCuenta'], 
+                        'monto' => $row['monto'], 
+                        'fechaAsignacion' => $row['fechaAsignacion'], 
+                        'tipoCuenta' => $row['tipoCuenta'],
+                        'subtipoCuenta' => $row['subtipoCuenta'], 
+                        'idOpp' => $row['idOpp'], 
+                        'oppNombre' => $row['oppNombre'],
+                        'oppEtapa' => $row['oppEtapa'], 
+                        'EstatusProducto' => $row['EstatusProducto'], 
+                        'semaforo' => $row['semaforo']
                     );
                 }
 

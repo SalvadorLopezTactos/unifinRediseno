@@ -28,8 +28,8 @@ class GetAccountProspectoContactado extends SugarApi
             $records_in = [];
 
             if ($estadoProducto != 3) {
-                //DASHLET PROSPECTO SIN SOLICITUD
-                $query = "SELECT a.id as idCuenta, a.name as nombreCuenta, a.assigned_user_id, ac.user_id_c,
+                //DASHLET PROSPECTO CONTACTADOS / SIN CONTACTAR 
+                $query = "SELECT a.id as idCuenta, a.name as cuenta, ac.user_id_c, upc.fecha_asignacion_c as fechaAsignacion,
                 up.tipo_cuenta as tipoCuenta, up.subtipo_cuenta as subtipoCuenta,
                 up.name, upc.status_management_c as EstatusProducto, up.tipo_producto,
                 CASE WHEN upc.fecha_asignacion_c < DATE_SUB(now(), INTERVAL 5 DAY) THEN 0
@@ -56,7 +56,7 @@ class GetAccountProspectoContactado extends SugarApi
                 while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
 
                     $records_in['records'][] = array(
-                        'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 'tipoCuenta' => $row['tipoCuenta'],
+                        'idCuenta' => $row['idCuenta'], 'cuenta' => $row['cuenta'], 'fechaAsignacion' => $row['fechaAsignacion'], 'tipoCuenta' => $row['tipoCuenta'],
                         'subtipoCuenta' => $row['subtipoCuenta'], 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $row['semaforo']
                     );
                 }

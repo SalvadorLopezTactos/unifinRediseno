@@ -1086,7 +1086,7 @@
                 errors['amount'].required = true;
             }
 
-            if (parseFloat(this.model.get('ca_pago_mensual_c')) <= 0 && this.model.get('tipo_producto_c') != "6" && this.model.get('tipo_producto_c') != "7" &&
+            if (parseFloat(this.model.get('ca_pago_mensual_c')) <= 0 && this.model.get('tipo_producto_c') != "6" && this.model.get('tipo_producto_c') != "7" && this.model.get('tipo_producto_c') != "13" &&
                 this.model.get('producto_financiero_c') != "43" && this.model.get('admin_cartera_c') != true) {
                 errors['ca_pago_mensual_c'] = errors['ca_pago_mensual_c'] || {};
                 errors['ca_pago_mensual_c'].required = true;
@@ -1336,7 +1336,7 @@
 
     condicionesFinancierasCheck: function (fields, errors, callback) {
         if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
-            if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && this.model.get("producto_financiero_c") != 43) {
+            if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && this.model.get("producto_financiero_c") != 43 && this.model.get("tipo_producto_c") != 13) {
                 if (solicitud_cf.oFinanciera.condicion.length == 0) {
                     errors[$(".addCondicionFinanciera")] = errors['condiciones_financieras'] || {};
                     errors[$(".addCondicionFinanciera")].required = true;
@@ -2112,7 +2112,7 @@
     },
 
     _Validavehiculo: function (fields, errors, callback) {
-        if (this.model.get('tct_numero_vehiculos_c') <= 0 && this.model.get('tipo_producto_c') == "6") {
+        if (this.model.get('tct_numero_vehiculos_c') <= 0 && (this.model.get('tipo_producto_c') == "6" || this.model.get('tipo_producto_c') == "13")) {
             errors['tct_numero_vehiculos_c'] = errors['tct_numero_vehiculos_c'] || {};
             errors['tct_numero_vehiculos_c'].required = true;
 
@@ -2484,7 +2484,7 @@
             this.$("div.record-label[data-name='porcentaje_renta_inicial_c']").text("Porcentaje Renta Inicial");
         }
         //Se agrega condición para ocultar campo que no pertenecen a Fleet
-        if (this.model.get('tipo_producto_c') == '6' || this.model.get('tipo_producto_c') == '7') {
+        if (this.model.get('tipo_producto_c') == '6' || this.model.get('tipo_producto_c') == '7' || this.model.get('tipo_producto_c') == '13') {
 
             //this.$("div.record-label[data-name='monto_c']").text("L\u00EDnea aproximada");
             //Se oculta Monto a Operar
@@ -2500,7 +2500,7 @@
             this.$('div[data-name=condiciones_financieras]').hide();
         }
         //Valida la solicitud que sea de tipo SOS y oculta campos
-        if (this.model.get('tipo_producto_c') == '7') {
+        if (this.model.get('tipo_producto_c') == '7' || this.model.get('tipo_producto_c') == '13') {
             this.$('div[data-name=condiciones_financieras]').hide();
             this.$('div[data-name=f_comentarios_generales_c]').hide();
             this.$('div[data-name="condiciones_financieras_incremento_ratificacion"]').hide();
@@ -3338,7 +3338,7 @@
     //Función para validar que el asesor RM sea realmente un asesor RM 
     validaAsesorRM: function (fields, errors, callback) {
         var asesorRM=this.model.get('user_id1_c');
-        if(asesorRM!=""){
+        if(asesorRM!="" && this.model.get('tipo_producto_c')!='13'){
             app.api.call('GET', app.api.buildURL('Infouser/' + asesorRM), null, {
                 success: _.bind(function (data) {
     

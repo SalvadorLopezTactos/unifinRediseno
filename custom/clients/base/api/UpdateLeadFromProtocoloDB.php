@@ -46,6 +46,10 @@ class UpdateLeadFromProtocoloDB extends SugarApi
         $id_lead=$args['id_lead'];
         $id_usuario=$args['id_usuario'];
         $modulo=$args['modulo'];
+        $GLOBALS['log']->fatal('---------Módulo para reasignación-----------');
+        $GLOBALS['log']->fatal($modulo);
+        $GLOBALS['log']->fatal($id_lead);
+
 
         $arreglo_response=array();
 
@@ -69,6 +73,9 @@ class UpdateLeadFromProtocoloDB extends SugarApi
             $resultLead = $db->query($queryLead);
             
             while($row = $db->fetchByAssoc($resultLead)){
+                $GLOBALS['log']->fatal('---------QUERY LEAD-----------');
+                $GLOBALS['log']->fatal($row['name_c']);
+
                 $arreglo_response['id']=$row['id_c'];
                 $arreglo_response['name']=$row['name_c'];
             }
@@ -115,12 +122,22 @@ class UpdateLeadFromProtocoloDB extends SugarApi
             $resultAcc = $db->query($queryAccount);
             
             while($row = $db->fetchByAssoc($resultAcc)){
+                $GLOBALS['log']->fatal('---------QUERY ACCOUNT-----------');
+                $GLOBALS['log']->fatal($row['tipodepersona_c']);
+
+                $GLOBALS['log']->fatal($row['primernombre_c']);
+                $GLOBALS['log']->fatal($row['apellidopaterno_c']);
+                $GLOBALS['log']->fatal($row['razonsocial_c']);
+
                 $nombre="";
-                if($row['tipodepersona_c']!='Persona moral'){
+                if($row['tipodepersona_c']!='Persona Moral'){
                     $nombre=$row['primernombre_c']." ".$row['apellidopaterno_c'];
                 }else{
                     $nombre=$row['razonsocial_c'];
                 }
+
+                $GLOBALS['log']->fatal("Nombre: ".$nombre);
+
                 $arreglo_response['id']=$row['id_c'];
                 $arreglo_response['name']=$nombre;
             }

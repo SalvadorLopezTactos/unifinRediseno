@@ -27,17 +27,17 @@ class GetProductosCuentas extends SugarApi
         /*****************SUBTIPO CUENTA = 2-Contactado or SUBTIPO CUENTA = 7-Interesado or TIPO CUENTA = 1-Lead**********/
         $query = "SELECT
         case
-            when up.tipo_producto = 1 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.tipo_cuenta = 1) then  
+            when up.tipo_producto = 1 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.subtipo_cuenta = 1) then
             1
-            when up.tipo_producto = 3 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.tipo_cuenta = 1) then
+            when up.tipo_producto = 3 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.subtipo_cuenta = 1) then
             1
-            when up.tipo_producto = 4 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.tipo_cuenta = 1) then
+            when up.tipo_producto = 4 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.subtipo_cuenta = 1) then
             1
-            when up.tipo_producto = 6 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.tipo_cuenta = 1) then
+            when up.tipo_producto = 6 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.subtipo_cuenta = 1) then
             1
-            when up.tipo_producto = 8 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.tipo_cuenta = 1) then
+            when up.tipo_producto = 8 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.subtipo_cuenta = 1) then
             1
-           
+
             else 0
         end 'visible_noviable', up.*, upc.*, concat(u.first_name,' ',u.last_name) as full_name
         FROM accounts a

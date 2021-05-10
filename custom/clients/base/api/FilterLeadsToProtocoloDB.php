@@ -55,6 +55,7 @@ class FilterLeadsToProtocoloDB extends SugarApi
              AND (length(ld.phone_mobile)>=10 or length(ld.phone_home)>=10 or length(ld.phone_work)>=10)
              where lc.oficina_c='{$oficina}' 
              AND l.assigned_user_id='569246c7-da62-4664-ef2a-5628f649537e' -- USUARIO 9 SN GESTOR
+             AND l.deleted=0
             group by l.id
             order by count(ld.id) DESC 
             LIMIT 5
@@ -76,6 +77,7 @@ class FilterLeadsToProtocoloDB extends SugarApi
             left join tel_telefonos t on t.id = at.accounts_tel_telefonos_1tel_telefonos_idb
             where
                 ac.user_id_c = '569246c7-da62-4664-ef2a-5628f649537e' -- USUARIO 9 SIN GESTOR del producto Leasing
+                and a.deleted=0
                 and p.tipo_cuenta = '2' -- Tipo Prospecto
                 and p.tipo_producto = '1' -- Producto Leasing
                 and pc.oficina_c ='{$oficina}'
