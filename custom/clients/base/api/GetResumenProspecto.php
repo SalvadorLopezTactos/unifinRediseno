@@ -228,6 +228,11 @@ class GetResumenProspecto extends SugarApi
             //$GLOBALS['log']->fatal('equiposf', $equiposf);
 
             $salidaequipos = implode(",", $equiposf);
+            $rest = substr($salidaequipos, -1);
+            if($rest == ','){
+                $salidaequipos = substr($casalidaequiposdena, 0, -1);
+            }
+            
             $queryusuarios = "SELECT id, user_name, puestousuario_c,equipo_c,region_c from users 
             join users_cstm on users.id = users_cstm.id_c where equipo_c in 
             ( {$salidaequipos} ) and puestousuario_c in ('1','2','3','4','5','6','20','33','44','55') 
