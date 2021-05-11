@@ -54,6 +54,7 @@
         this.model.addValidationTask('lmanage_seg_reun', _.bind(this.SegundaReunion, this));  //OnConfirm cancelar Cuenta segunda llamada
 
         this.model.on('sync', this._readOnlyDateSE, this);
+        this.model.on('sync', this.validaRelLeadCall, this);
     },
 
     abre: function () {
@@ -973,6 +974,32 @@
         if (this.model.get('status') == 'Held' || this.model.get('status') == 'Not Held') {
             
             $(".record-cell[data-type='duration']").attr('style','pointer-events:none');
+        }
+    },
+
+    validaRelLeadCall: function () {
+
+        if (this.model.get('parent_id') && this.model.get('parent_type') == "Leads") {
+            
+            var lead = app.data.createBean('Leads', {id: this.model.get('parent_id')});
+            lead.fetch({
+                success: _.bind(function (model) {
+
+                   if (model.get('subtipo_registro_c') == '3') {
+
+                        app.alert.show("lead-cancelado-call-record", {
+                            level: "error",
+                            title: "Lead Cancelado<br>",
+                            messages: "No se puede agregar / editar una relación con Lead Cancelado",
+                            autoClose: false
+                        });  
+                        
+                       //Bloquear el registro completo y mostrar alerta
+                       $('.record').attr('style', 'pointer-events:none');
+                    }
+                   
+                }, this)
+            });
         }
     },
 })

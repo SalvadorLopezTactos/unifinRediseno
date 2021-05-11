@@ -12,6 +12,7 @@
 		
 		this.model.on('change:ayuda_asesor_cp_c', this._ValoresPredetAsesor, this);
 		this.model.on('change:parent_name', this._ValoresPredetAsesor, this);
+        this.model.addValidationTask('validaRelLeadTask', _.bind(this.validaRelLeadTask, this));
 		
     },
 
@@ -196,5 +197,46 @@
         }else{
 			callback(null, fields, errors);
 		}        
+    },
+
+    validaRelLeadTask: function (fields, errors, callback) {
+        
+        if (this.model.get('parent_id') && this.model.get('parent_type') == "Leads") {
+            
+            var lead = app.data.createBean('Leads', {id: this.model.get('parent_id')});
+            lead.fetch({
+                success: _.bind(function (model) {
+
+                   if (model.get('subtipo_registro_c') == '3') {
+
+                        app.alert.show("lead-cancelado-task", {
+                            level: "error",
+                            title: "Lead Cancelado<br>",
+                            messages: "No se puede agregar una relación con Lead Cancelado",
+                            autoClose: false
+                        });
+
+                        //Cerrar vista de creación
+                        if (app.drawer.count()) {
+                            app.drawer.close(this.context);
+                            //Ocultar alertas excepto la que indica que no se pueden crear relacionados a Lead Cancelado
+                            var alertas = app.alert.getAll();
+                            for (var property in alertas) {
+                                if (property != 'lead-cancelado-task') {
+                                    app.alert.dismiss(property);
+                                }
+                            }
+                        } else {
+                            app.router.navigate(this.module, {trigger: true});
+                        }
+
+                    }
+                    callback(null, fields, errors);
+                }, this)
+            });
+        
+        } else {
+            callback(null, fields, errors);
+        }
     },
 })
