@@ -67,7 +67,7 @@
         });
         datos.equipos_list = list_html_mc;
         app.alert.dismiss('alert-actualiza');
-        datos.$('[data-name="btnactualiza"]').attr('style', 'pointer-events:none;');
+        //datos.document.getElementById("btnactualiza").disabled = false;
         */
                 
         app.api.call('GET', app.api.buildURL('GetResumenProspecto/'+vari), null, {
@@ -89,7 +89,7 @@
             error: function (e) {
                 console.log(e);
                 app.alert.dismiss('alert-actualiza');
-                datos.$('[data-name="btnactualiza"]').attr('style', 'pointer-events:none;');
+                //datos.document.getElementById("btnactualiza").disabled = false;
                 throw e;
             }
         });
@@ -100,14 +100,14 @@
                 datos.objdetalle = data;
                 datos.cuentasEmpresarialesDetalle();
                 app.alert.dismiss('alert-actualiza');
-                datos.$('[data-name="btnactualiza"]').attr('style', 'pointer-events:none;');
+                //datos.document.getElementById("btnactualiza").disabled = false;
                 datos.render();
                 
             },
             error: function (e) {
                 console.log(e);
                 app.alert.dismiss('alert-actualiza');
-                datos.$('[data-name="btnactualiza"]').attr('style', 'pointer-events:none;');
+                //datos.document.getElementById("btnactualiza").disabled = false;
                 throw e;
             }
         });
@@ -428,7 +428,7 @@
             level: 'process',
             title: 'Actualizando...',
         });
-        datos.$('[data-name="btnactualiza"]').attr('style', 'pointer-events:block;');
+        //datos.document.getElementById("btnactualiza").disabled = true;
         
         this.restartTotales();
         this.cargaInicial();
@@ -443,7 +443,7 @@
 
         setTimeout(function(){            
             this.recargaData();
-        }, 600000);
+        }, 300000);
     },
     
 })
