@@ -24,7 +24,7 @@
         */
         this.model.on('sync', this.fulminantcolor, this);
         this.model.on('sync', this.loadprevdate, this);
-
+        this.model.on('sync', this.validaRelLeadTask, this);
 
     },
 
@@ -288,4 +288,30 @@
 			callback(null, fields, errors);
 		}       
     },     
+
+    validaRelLeadTask: function () {
+
+        if (this.model.get('parent_id') && this.model.get('parent_type') == "Leads") {
+            
+            var lead = app.data.createBean('Leads', {id: this.model.get('parent_id')});
+            lead.fetch({
+                success: _.bind(function (model) {
+
+                   if (model.get('subtipo_registro_c') == '3') {
+
+                        app.alert.show("lead-cancelado-task-record", {
+                            level: "error",
+                            title: "Lead Cancelado<br>",
+                            messages: "No se puede agregar / editar una relación con Lead Cancelado",
+                            autoClose: false
+                        });  
+                        
+                       //Bloquear el registro completo y mostrar alerta
+                       $('.record').attr('style', 'pointer-events:none');
+                    }
+                   
+                }, this)
+            });
+        }
+    },
 })

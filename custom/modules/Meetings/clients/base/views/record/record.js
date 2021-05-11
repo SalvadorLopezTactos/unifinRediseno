@@ -60,6 +60,7 @@
         this.model.addValidationTask('valida_usuarios_vetados',_.bind(this.valida_usuarios_vetados, this));
         this.model.on('sync',this.enableparentname,this);
         this.model.on('sync', this.campanas, this);
+        this.model.on('sync', this.validaRelLeadMeet, this);
     },
 
     abre: function () {
@@ -853,6 +854,32 @@
     invitees:function(){
         for(var i=0;i<this.model.attributes.invitees.models.length;i++){
             this.invitados+=this.model.attributes.invitees.models[i].id + ',';
+        }
+    },
+
+    validaRelLeadMeet: function () {
+
+        if (this.model.get('parent_id') && this.model.get('parent_type') == "Leads") {
+            
+            var lead = app.data.createBean('Leads', {id: this.model.get('parent_id')});
+            lead.fetch({
+                success: _.bind(function (model) {
+
+                   if (model.get('subtipo_registro_c') == '3') {
+
+                        app.alert.show("lead-cancelado-meet-record", {
+                            level: "error",
+                            title: "Lead Cancelado<br>",
+                            messages: "No se puede agregar / editar una relación con Lead Cancelado",
+                            autoClose: false
+                        });  
+                        
+                       //Bloquear el registro completo y mostrar alerta
+                       $('.record').attr('style', 'pointer-events:none');
+                    }
+                   
+                }, this)
+            });
         }
     },
 
