@@ -400,6 +400,7 @@
                     self.$('[data-name=' + field.name + ']').attr('style', 'pointer-events:none;');
                 }
             });
+            this._disableActionsSubpanel();
         }
         /***************************READONLY PARA SUBTIPO DE LEAD CONVERTIDO**************************/
         if (this.model.get('subtipo_registro_c') == '4') {

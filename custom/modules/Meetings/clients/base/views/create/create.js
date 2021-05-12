@@ -20,6 +20,7 @@
         this.model.addValidationTask('Valida_producto_usuario',_.bind(this.productoReunion, this));
 		this.model.addValidationTask('llenaCCP',_.bind(this.llenaCCP, this));
         this.on('render', this.disablestatus, this);
+        this.model.addValidationTask('validaRelLeadMeet', _.bind(this.validaRelLeadMeet, this));
     },
 
     abre: function () {
@@ -372,5 +373,50 @@
         });
 		this.model.set('invitados_c',cuenta);
 		callback(null, fields, errors);
+    },
+
+    validaRelLeadMeet: function (fields, errors, callback) {
+        
+        if (this.model.get('parent_id') && this.model.get('parent_type') == "Leads") {
+            
+            var lead = app.data.createBean('Leads', {id: this.model.get('parent_id')});
+            lead.fetch({
+                success: _.bind(function (model) {
+
+                   if (model.get('subtipo_registro_c') == '3') {
+
+                        app.alert.show("lead-cancelado-meet", {
+                            level: "error",
+                            title: "Lead Cancelado<br>",
+                            messages: "No se puede agregar una relación con Lead Cancelado",
+                            autoClose: false
+                        });
+
+                        app.error.errorName2Keys['custom_message2'] = '';
+                        errors['cliente'] = errors['cliente'] || {};
+                        errors['cliente'].custom_message2 = true;
+
+                        //Cerrar vista de creación
+                        if (app.drawer.count()) {
+                            app.drawer.close(this.context);
+                            //Ocultar alertas excepto la que indica que no se pueden crear relacionados a Lead Cancelado
+                            var alertas = app.alert.getAll();
+                            for (var property in alertas) {
+                                if (property != 'lead-cancelado-meet') {
+                                    app.alert.dismiss(property);
+                                }
+                            }
+                        } else {
+                            app.router.navigate(this.module, {trigger: true});
+                        }
+
+                    }
+                    callback(null, fields, errors);
+                }, this)
+            });
+        
+        } else {
+            callback(null, fields, errors);
+        }
     },
 })

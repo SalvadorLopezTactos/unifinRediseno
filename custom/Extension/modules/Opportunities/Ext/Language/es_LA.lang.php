@@ -228,3 +228,4 @@ $mod_strings['LBL_CANCELADO_QUANTICO'] = 'Cancelado Quantico';
 $mod_strings['LBL_CARTERA_DIAS_VENCIDO'] = 'Número de días en cartera vencida';
 $mod_strings['LBL_ASESOR_RM_USER_ID'] = 'Asesor RM que participó en Operación (relacionado Usuario ID)';
 $mod_strings['LBL_ASESOR_RM'] = 'Asesor RM que participó en Operación';
+$mod_strings['LBL_FULL_SERVICE_C'] = 'Se requiere Full Service';

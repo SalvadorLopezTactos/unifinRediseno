@@ -52,7 +52,7 @@
 
     cargaInicial: function () {
         vari = "2";
-        app.alert.dismiss('alert-actualiza');
+       
         /*
         //data1 = '{"equipo":["7"],"region":["METRO 2","METROPOLITANA"],"expediente":[{"region":"METRO 2","equipo":"7","conteo":"82","EstatusProducto":"","inactivo":"0","semaforo":"0"}],"interesado":[],"contactado":[{"region":"METRO 2","equipo":"7","conteo":"34","EstatusProducto":null,"inactivo":"0","semaforo":"1"}],"lead":[]}';
         data1 = '{"equipo":{"0":"1","37":"6","54":"7"},"region":{"0":"METRO 1","6":"METROPOLITANA","20":"EXPERIENCE","37":"METRO 2","41":"METRO"},"expediente":[{"region":"METRO 1","equipos":[{"equipo":"1","datos":[{"inactivo":"0","actinct":[{"conteo":"236","EstatusProducto":null,"semaforo":"0"}]}]}]},{"region":"EXPERIENCE","equipos":[{"equipo":"1","datos":[{"inactivo":"0","actinct":[{"conteo":"60","EstatusProducto":null,"semaforo":"0"}]},{"inactivo":"1","actinct":[{"conteo":"2","EstatusProducto":"2","semaforo":"0"}]}]}]}],"contactado":[{"region":"EXPERIENCE","equipos":[{"equipo":"1","datos":[{"inactivo":"0","actinct":[{"conteo":"479","EstatusProducto":null,"semaforo":"1"},{"conteo":"29","EstatusProducto":"1","semaforo":"1"}]},{"inactivo":"1","actinct":[{"conteo":"4","EstatusProducto":"2","semaforo":"1"},{"conteo":"19","EstatusProducto":"3","semaforo":"1"}]}]}]}],"lead":[{"region":"EXPERIENCE","equipos":[{"equipo":"1","datos":[{"inactivo":"0","actinct":[{"conteo":"78","estatus":null,"semaforo":"0"}]},{"inactivo":"1","actinct":[{"conteo":"7","estatus":"2","semaforo":"0"}]}]}]},{"region":"METRO 1","equipos":[{"equipo":"1","datos":[{"inactivo":"0","actinct":[{"conteo":"501","estatus":null,"semaforo":"0"}]}]}]},{"region":"METRO","equipos":[{"equipo":"6","datos":[{"inactivo":"0","actinct":[{"conteo":"113","estatus":null,"semaforo":"0"}]}]}]}]}';
@@ -70,7 +70,9 @@
         datos.cuentasEmpresariales();
         datos.cuentasEmpresarialesDetalle();
         datos.render();
-        */
+        app.alert.dismiss('alert-actualiza');
+        //datos.document.getElementById("btnactualiza").disabled = false;
+		*/
         
         app.api.call('GET', app.api.buildURL('GetResumenProspecto/'+vari), null, {
             success: function (data) {
@@ -92,6 +94,8 @@
             },
             error: function (e) {
                 console.log(e);
+                app.alert.dismiss('alert-actualiza');
+                //datos.document.getElementById("btnactualiza").disabled = false;
                 throw e;
             }
         });
@@ -101,14 +105,18 @@
 				console.log(data);
                 datos.objdetalle = data;
                 datos.cuentasEmpresarialesDetalle();
+                app.alert.dismiss('alert-actualiza');
+                datos.$('[data-name="btnactualiza"]').attr('style', 'pointer-events:none;')
                 datos.render();
             },
             error: function (e) {
                 console.log(e);
+                app.alert.dismiss('alert-actualiza');
+                //datos.document.getElementById("btnactualiza").disabled = false;
                 throw e;
             }
         });
-        
+		
     },
 
     cuentasEmpresariales: function () {
@@ -417,14 +425,19 @@
         datos.resumenInteresados = [];
         datos.resumenContactados = [];
         datos.resumenLeads = [];
+        datos.objdetalle = null;
     },
 
     recargaData:function(){
+        app.alert.show('alert-actualiza', {
+            level: 'process',
+            title: 'Actualizando...',
+        });
+        //datos.document.getElementById("btnactualiza").disabled = true;
         this.restartTotales();
         this.cargaInicial();
         var teamselect = document.getElementById("equipos");
-        teamselect.options[0].text;
-        datos.varselect = "";
+		datos.varselect = "";
         //this.cuentasEmpresariales();
         //this.cuentasEmpresarialesDetalle();
         datos.render();
@@ -433,11 +446,7 @@
     time_recargadatos:function(){
 
         setTimeout(function(){
-            app.alert.show('alert-actualiza', {
-                level: 'process',
-                title: 'Actualizando...',
-            });
             this.recargaData();
-        }, 600000);
+        }, 300000);
     },
 })
