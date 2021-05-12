@@ -469,13 +469,11 @@
                                         modelLead.set('subtipo_registro_c', "3");
                                         modelLead.set('lead_cancelado_c', true);
                                         modelLead.save();
-
                                         app.alert.show('message-id', {
                                             level: 'success',
                                             messages: 'Lead Cancelado',
                                             autoClose: true
                                         });
-
                                         modelo.save();
                                         callback(null, fields, errors);
                                         //modelo.save([],{
@@ -488,7 +486,6 @@
                                         //        $('[data-name="assigned_user_name"]').removeAttr("style");
                                         //    }
                                         //});
-
                                     }else if(self.model.get('resultado_c')=='4' ||self.model.get('resultado_c')=='5' || self.model.get('resultado_c')=='19' || self.model.get('resultado_c')=='20'
                                     || self.model.get('resultado_c')=='6' || self.model.get('resultado_c')=='7' || self.model.get('resultado_c')=='23'){
                                         // Está Interesado. Se procede a generar expediente
@@ -501,7 +498,7 @@
                                         var filter_arguments = {
                                             "id": parent_id_acc
                                         };
-                                        app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
+/*                                        app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
                                             success: _.bind(function (data) {
                                                 console.log(data);
                                                 //app.alert.dismiss('upload');
@@ -516,13 +513,11 @@
                                                     errors['conversion'].required = true;
                                                     callback(null, fields, errors);
                                                 } else {
-
                                                     app.alert.show("Conversión", {
                                                         level: "success",
                                                         messages: data.mensaje,
                                                         autoClose: false
                                                     });
-
                                                     modelLead.set('subtipo_registro_c', "4");
                                                     modelLead.set('account_id',data.idCuenta);
                                                     modelLead.save();
@@ -554,10 +549,19 @@
                                                 app.alert.dismiss('upload');
                                                 callback(null, fields, errors);
                                             }, this),
-
+                                        });*/
+										modelo.save([],{
+                                            dataType:"text",
+                                            complete:function() {
+                                                //app.router.navigate(module_name , {trigger: true});
+                                                $('a[name=new_minuta]').hide()
+                                                SUGAR.App.controller.context.reloadData({});
+                                                $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                                                $('[data-name="assigned_user_name"]').removeAttr("style");
+                                            }
                                         });
+                                        callback(null, fields, errors);
                                     }else if(self.model.get('resultado_c')=='3'){
-
                                         modelLead.set('subtipo_registro_c', "2");
                                         modelLead.set('status_management_c', "2");
                                         modelLead.save();

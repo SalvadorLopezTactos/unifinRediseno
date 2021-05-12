@@ -2,3 +2,7 @@
 //THIS FILE IS AUTO GENERATED, DO NOT MODIFY
 $mod_strings['LBL_LEADS_LEADS_1_FROM_LEADS_R_TITLE'] = 'Contactos asociados';
 $mod_strings['LBL_LEADS_LEADS_1_FROM_LEADS_L_TITLE'] = 'Pre-prospectos';
+$mod_strings['LBL_TASKS_LEADS_1_FROM_TASKS_TITLE'] = 'Tareas';
+$mod_strings['LBL_TASKS_LEADS_1_FROM_LEADS_TITLE'] = 'Tareas';
+$mod_strings['LBL_NOTES_LEADS_1_FROM_NOTES_TITLE'] = 'Notas';
+$mod_strings['LBL_NOTES_LEADS_1_FROM_LEADS_TITLE'] = 'Notas';
