@@ -97,7 +97,7 @@ class check_duplicateAccounts extends SugarApi
                             $bean->account_id = $bean_account->id;
                             $bean->account_name = $bean_account->name;
                             $bean->save();
-                            // Re-asignamos las reuniones realizadas y planificadas de Leads a Cuentas
+                            // Re-asignamos reuniones, llamadas, tareas y notas de Leads a Cuentas
                             $this->re_asign_meetings($bean, $bean_account->id);
 
                             $msj_succes = <<<SITE
@@ -283,7 +283,7 @@ SITE;
                 
                 foreach ($relatedBeans as $meeting) {
 
-                    if ($meeting->status != "Not Held") {
+                    //if ($meeting->status != "Not Held") {
 
                         $procede['status'] = "continue";
                         $sqlUser = new SugarQuery();
@@ -328,7 +328,7 @@ SITE;
 
                         $procede['vacio']=empty($procede['data'])?true:false;
 
-                    }
+                    //}
                 }
             } else {
                 $procede['status'] = "stop";
@@ -345,7 +345,7 @@ SITE;
 
                 foreach ($relatedBeans as $meeting) {
 
-                    if ($meeting->status != "Not Held") {
+                    //if ($meeting->status != "Not Held") {
 
                         $procede['status'] = "continue";
                         $sqlUser = new SugarQuery();
@@ -390,7 +390,7 @@ SITE;
 
                         $procede['vacio']=empty($procede['data'])?true:false;
 
-                    }
+                    //}
                 }
             }
         }
@@ -461,38 +461,29 @@ SITE;
     public function getContactAssoc($beanLead, $bean_account)
     {
         $resultado = array("data" => array());
-
         if ($beanLead->load_relationship('leads_leads_1')) {
             $relatedBeans = $beanLead->leads_leads_1->getBeans();
-
             if (!empty($relatedBeans)) {
                 foreach ($relatedBeans as $lead) {
-
                     $result = $this->existLeadAccount($lead);
                     $count = count($result);
-
                     if ($count > 0) {
                         // $GLOBALS['log']->fatal("Si existe recupero el id  " . $result[0]['id'] . " y creamos la relacion");
-
                         $this->create_relationship($bean_account, $result[0]['id']);
                         array_push($resultado['data'], $result[0]['id']);
-
-
                     } else {
                         // $GLOBALS['log']->fatal("No existe el Contacto asociado en Cuentas hay que crearlo ");
                         $cuenta = $this->createAccount($lead, null, true);
                         if (!empty($cuenta->id)) {
+							$this->re_asign_meetings($lead, $cuenta->id);
                             $this->create_relationship($bean_account, $cuenta->id);
                             array_push($resultado['data'], $cuenta->id);
                             $lead->account_id = $cuenta->id;
                             $lead->account_name = $cuenta->name;
                         }
                     }
-
                     $lead->subtipo_registro_c = 4;
-
                     $lead->save();
-
                 }
             } else {
                 // no existen Asociados no se hace nada
@@ -500,7 +491,6 @@ SITE;
             }
         }
         // $GLOBALS['log']->fatal("Resultado de Relaciones " . print_r($resultado, true));
-
         return $resultado;
     }
 
@@ -508,7 +498,6 @@ SITE;
     {
         // rel_relaciones_accounts_1
         // $GLOBALS['log']->fatal("id Padre " . $id_parent->id . "  id hijo " . $idAccount);
-
         $bean_relacion = BeanFactory::newBean('Rel_Relaciones');
         $bean_relacion->rel_relaciones_accounts_1accounts_ida = $id_parent->id; // Cuenta padre
         $bean_relacion->rel_relaciones_accounts_1_name = $id_parent->name;
@@ -516,7 +505,6 @@ SITE;
         $bean_relacion->account_id1_c = $idAccount; // cuenta hijo
         $bean_relacion->tipodecontacto = "Promocion";
         $bean_relacion->save();
-
     }
 
     public function create_phone($idCuenta, $phone, $tipoTel)
@@ -526,32 +514,63 @@ SITE;
         $bean_relacionTel->name = $phone;
         $bean_relacionTel->telefono = $phone;
         $bean_relacionTel->tipotelefono = $tipoTel;
-
         $bean_relacionTel->tipotelefono = $tipoTel;
         $bean_relacionTel->tipotelefono = $tipoTel;
         $bean_relacionTel->estatus = "Activo";
         $bean_relacionTel->pais = 2;
         $bean_relacionTel->save();
-
     }
-
 
     public function re_asign_meetings($bean_LEad, $idCuenTa)
     {
+		//Reasigna Reuniones
         if ($bean_LEad->load_relationship('meetings')) {
             $relatedBeans = $bean_LEad->meetings->getBeans();
-
             if (!empty($relatedBeans)) {
                 foreach ($relatedBeans as $meeting) {
-                    if ($meeting->status != "Not Held") {
-                        $meeting->parent_type = "Accounts";
-                        $meeting->parent_id = $idCuenTa;
-                        $meeting->save();
-
-                    }
+					global $db;
+					$meetUpdate = "update meetings set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$meeting->id}'";
+					$updateResult = $db->query($meetUpdate);
+                }
+            }
+        }
+		$GLOBALS['log']->fatal("$idCuenTa: ".$idCuenTa);
+		//Reasigna Llamadas
+        if ($bean_LEad->load_relationship('calls')) {
+            $relatedBeans = $bean_LEad->calls->getBeans();
+            if (!empty($relatedBeans)) {
+                foreach ($relatedBeans as $call) {
+					global $db;
+					$meetUpdate = "update calls set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$call->id}'";
+					$updateResult = $db->query($meetUpdate);
+                }
+            }
+        }
+		//Reasigna Tareas
+        if ($bean_LEad->load_relationship('tasks')) {
+            $relatedBeans = $bean_LEad->tasks->getBeans();
+            if (!empty($relatedBeans)) {
+                foreach ($relatedBeans as $task) {
+					global $db;
+					$meetUpdate = "update tasks set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$task->id}'";
+					$updateResult = $db->query($meetUpdate);
+					$bean_LEad->load_relationship('tasks_leads_1');
+					$bean_LEad->tasks_leads_1->add($task->id);
+                }
+            }
+        }
+		//Reasigna Notas
+        if ($bean_LEad->load_relationship('notes')) {
+            $relatedBeans = $bean_LEad->notes->getBeans();
+            if (!empty($relatedBeans)) {
+                foreach ($relatedBeans as $note) {
+					global $db;
+					$meetUpdate = "update notes set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$note->id}'";
+					$updateResult = $db->query($meetUpdate);
+					$bean_LEad->load_relationship('notes_leads_1');
+					$bean_LEad->notes_leads_1->add($note->id);					
                 }
             }
         }
     }
-
 }
