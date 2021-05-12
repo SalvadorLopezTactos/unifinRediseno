@@ -306,8 +306,14 @@
                             autoClose: false
                         });  
                         
-                       //Bloquear el registro completo y mostrar alerta
-                       $('.record').attr('style', 'pointer-events:none');
+                        //Bloquear el registro completo y mostrar alerta
+                        $('.record').attr('style', 'pointer-events:none');
+                        $('.dropdown-toggle').attr('style', 'pointer-events:none');
+                        $('.record-edit-link-wrapper').remove();
+                        $('.fa-pencil').remove();
+
+                        var editButton = self.getField('edit_button');
+                        editButton.setDisabled(true);
                     }
                    
                 }, this)
