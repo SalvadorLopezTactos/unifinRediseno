@@ -2079,9 +2079,9 @@
                 };
 /*			    Params = {
 					id: 1,
-                    num: 11463,
+                    num: 29903,
                     mes: 5,
-					anio: 2019
+					anio: 2021
                 };*/
 				app.alert.show('uni2', {
 					level: 'process',
@@ -2093,23 +2093,39 @@
                         if (self.disposed) {
                             return;
                         }
+						var muestra = 1;
+						var estado = '';
 						this.disposiciones = '';
 						if(data) {
 							if (data.disposiciones.length > 0) {
 								for (var i = 0; i < data.disposiciones.length; i++) {
 									this.disposiciones = this.disposiciones + data.disposiciones[i].idDisposicion + ', ';
+									if(data.disposiciones[i].estatus == 'LIBERACION_PARCIAL' || data.disposiciones[i].estatus == 'ATIVACION_PARCIAL' || data.disposiciones[i].estatus == 'LIBERADA' || data.disposiciones[i].estatus == 'ACTIVA') {
+										muestra = 0;
+										estado = data.disposiciones[i].estatus;
+									}
 								}
 							}
 						}
 						this.render();
 						$('.Disposiciones').hide();
 						app.alert.dismiss('uni2');
-						var modal = $('#myModalCan');
-						modal.show();
-						if(this.disposiciones) $('.Disposiciones').show();
-						$('.Quien').hide();
-						$('.Producto').hide();
-						$('.FechaCancelar').hide();
+						if(muestra) {
+							var modal = $('#myModalCan');
+							modal.show();
+							if(this.disposiciones) $('.Disposiciones').show();
+							$('.Quien').hide();
+							$('.Producto').hide();
+							$('.FechaCancelar').hide();
+						}
+						else {
+                            app.alert.show('backlog_activo', {
+                                level: 'error',
+                                messages: 'No es posible cancelar el Backlog ya que alguna de las Disposiciones se encuentra en estatus '+estado,
+                                autoClose: false
+                            });
+                            return;							
+						}
                     },this)
                 });
             }
