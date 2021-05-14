@@ -3274,48 +3274,53 @@
 	//	self.rfc_antiguo = rfca;
 	//},
     validaRFC: function (fields, errors, callback) {
-        if (this.model.get('tipodepersona_c') != "" && this.model.get('tipodepersona_c') != "Persona Moral") {
-            //Obtiene valor de la fecha y resconstruye
-            var fecha= this.model.get('fechadenacimiento_c');
-            var convert= fecha.split('-');
-            var ano= convert[0];
-            ano= ano.substring(2);
-            var mes= convert[1];
-            var dia= convert[2];
-            var complete="";
-            complete=complete.concat(ano,mes,dia);
-            //ValidacionRFC
-            var rfc=this.model.get('rfc_c');
-            rfc= rfc.substring(4, 10);
-           
-            if (rfc!=complete) {
-                app.alert.show("Error_validacion_RFC", {
-                    level: "error",
-                    messages: 'La fecha no coincide con el RFC favor de corregir',
-                    autoClose: false
-                });
-            }
+        if (this.model.get('tipodepersona_c') != "Persona Moral") {
+            if (this.model.get('rfc_c')!=undefined && this.model.get('fechadenacimiento_c')!=undefined){
+                //Obtiene valor de la fecha y resconstruye
+                var fecha= this.model.get('fechadenacimiento_c');
+                var convert= fecha.split('-');
+                var ano= convert[0];
+                ano= ano.substring(2);
+                var mes= convert[1];
+                var dia= convert[2];
+                var complete="";
+                complete=complete.concat(ano,mes,dia);
+                //ValidacionRFC
+                var rfc=this.model.get('rfc_c');
+                rfc= rfc.substring(4, 10);
+            
+                if (rfc!=complete) {
+                    app.alert.show("Error_validacion_RFC", {
+                        level: "error",
+                        messages: 'La fecha no coincide con el RFC favor de corregir',
+                        autoClose: false
+                    });
+                }
+            } 
+            callback(null, fields, errors);   
         }else{
-            //Obtiene valor de la fecha y resconstruye
-            var fecha= this.model.get('fechaconstitutiva_c');
-            var convert= fecha.split('-');
-            var ano= convert[0];
-            ano= ano.substring(2);
-            var mes= convert[1];
-            var dia= convert[2];
-            var complete="";
-            complete=complete.concat(ano,mes,dia);
-            //ValidacionRFC
-            var rfc=this.model.get('rfc_c');
-            rfc= rfc.substring(3, 9);
-           
-            if (rfc!=complete) {
-                app.alert.show("Error_validacion_RFC_Moral", {
-                    level: "error",
-                    messages: 'La fecha no coincide con el RFC favor de corregir',
-                    autoClose: false
-                });
-            }
+            if (this.model.get('rfc_c')!=undefined && this.model.get('fechaconstitutiva_c')!=undefined){
+                //Obtiene valor de la fecha y resconstruye
+                var fecha= this.model.get('fechaconstitutiva_c');
+                var convert= fecha.split('-');
+                var ano= convert[0];
+                ano= ano.substring(2);
+                var mes= convert[1];
+                var dia= convert[2];
+                var complete="";
+                complete=complete.concat(ano,mes,dia);
+                //ValidacionRFC
+                var rfc=this.model.get('rfc_c');
+                rfc= rfc.substring(3, 9);
+            
+                if (rfc!=complete) {
+                    app.alert.show("Error_validacion_RFC_Moral", {
+                        level: "error",
+                        messages: 'La fecha no coincide con el RFC favor de corregir',
+                        autoClose: false
+                    });
+                }
+            }    
         }
         callback(null, fields, errors);
     },
