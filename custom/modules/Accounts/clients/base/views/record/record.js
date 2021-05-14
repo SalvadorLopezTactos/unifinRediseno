@@ -6182,6 +6182,8 @@
                         messages: 'La fecha no coincide con el RFC favor de corregir',
                         autoClose: false
                     });
+                    errors['Error_validacion_RFC'] = errors['Error_validacion_RFC'] || {};
+                    errors['Error_validacion_RFC'].required = true;
                 }
             }    
         }else{
@@ -6205,6 +6207,8 @@
                         messages: 'La fecha no coincide con el RFC favor de corregir',
                         autoClose: false
                     });
+                    errors['Error_validacion_RFC_Moral'] = errors['Error_validacion_RFC_Moral'] || {};
+                    errors['Error_validacion_RFC_Moral'].required = true;
                 }
             }    
         }
