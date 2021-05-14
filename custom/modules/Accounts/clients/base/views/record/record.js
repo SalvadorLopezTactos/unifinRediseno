@@ -6225,7 +6225,7 @@
                 }
             }    
         }else{
-            if (this.model.get('rfc_c')!="" && this.model.get('fechadenacimiento_c')!=""){
+            if (this.model.get('rfc_c')!="" && this.model.get('fechaconstitutiva_c')!=""){
                 //Obtiene valor de la fecha y resconstruye
                 var fecha= this.model.get('fechaconstitutiva_c');
                 var convert= fecha.split('-');

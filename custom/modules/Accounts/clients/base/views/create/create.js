@@ -3299,7 +3299,7 @@
             } 
             callback(null, fields, errors);   
         }else{
-            if (this.model.get('rfc_c')!=undefined && this.model.get('fechadenacimiento_c')!=undefined){
+            if (this.model.get('rfc_c')!=undefined && this.model.get('fechaconstitutiva_c')!=undefined){
                 //Obtiene valor de la fecha y resconstruye
                 var fecha= this.model.get('fechaconstitutiva_c');
                 var convert= fecha.split('-');
