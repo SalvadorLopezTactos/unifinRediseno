@@ -245,7 +245,7 @@
                                 }else{
                                     salidaarr['tiempo'] = (salidaarr['tiempo'] == undefined ? 0 : parseInt(salidaarr['tiempo'])) + 0;
                                 }
-                                if(auxarr[l].semaforo == 1){
+                                if(auxarr2[l].semaforo == 1){
                                     salidaarr['atrasado'] = (salidaarr['atrasado'] == undefined ? 0 : parseInt(salidaarr['atrasado'])) + parseInt(auxarr2[l].conteo);
                                     datos.totales['totalAtrasado'] = datos.totales['totalAtrasado'] + salidaarr['atrasado'] ;
                                     
@@ -430,8 +430,8 @@
         });
         //datos.document.getElementById("btnactualiza").disabled = true;
         
-        this.restartTotales();
-        this.cargaInicial();
+        datos.restartTotales();
+        datos.cargaInicial();
         var teamselect = document.getElementById("equipos");
         datos.varselect = "";
         //this.cuentasEmpresariales();
@@ -442,7 +442,7 @@
     time_recargadatos:function(){
 
         setTimeout(function(){            
-            this.recargaData();
+            datos.recargaData();
         }, 300000);
     },
     
