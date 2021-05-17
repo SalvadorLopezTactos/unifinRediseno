@@ -84,13 +84,16 @@
 				console.log(data);
                 datos.objprincipal = data;
                 
-                if(datos.objprincipal != undefined && datos.objprincipal.equipo != null){
-                    datos.var_equipo_list = datos.objprincipal.equipo;
+                if(datos.objprincipal != undefined && datos.objprincipal.region != null){
                     var list_html_mc = '';
                     datos.var_equipo_list = datos.objprincipal.region;
             
                     _.each(datos.objprincipal.region, function (value, key) {
-                        list_html_mc += '<option value="' + key + '">' + datos.objprincipal.region[key] + '</option>';
+                        if(datos.indexselect == key){
+                            list_html_mc += '<option value="' + key + '" selected>' + datos.objprincipal.region[key] + '</option>';
+                        }else{
+                            list_html_mc += '<option value="' + key + '">' + datos.objprincipal.region[key] + '</option>';
+                        }
                     });
                     datos.equipos_list = list_html_mc;
                     datos.cuentasEmpresariales();
@@ -432,16 +435,12 @@
         datos.resumenLeads = [];
     },
 
-    recargaData:function(){
-        
+    recargaData:function(){    
         //datos.document.getElementById("btnactualiza").disabled = true;
         datos.restartTotales();
         datos.cargaInicial();
-        datos.render();
-        datos.cuentasEmpresariales();
-        datos.cuentasEmpresarialesDetalle();
-        datos.render();
-        document.getElementById("equipos").value = datos.indexselect;
+        //datos.render();
+    
     },
 
     time_recargadatos:function(){
