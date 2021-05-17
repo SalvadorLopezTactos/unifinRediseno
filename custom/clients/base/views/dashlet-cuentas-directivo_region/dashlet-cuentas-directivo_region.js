@@ -437,11 +437,11 @@
         //datos.document.getElementById("btnactualiza").disabled = true;
         datos.restartTotales();
         datos.cargaInicial();
-        var teamselect = document.getElementById("equipos");
-		datos.varselect = "";
-        //this.cuentasEmpresariales();
-        //this.cuentasEmpresarialesDetalle();
         datos.render();
+        datos.cuentasEmpresariales();
+        datos.cuentasEmpresarialesDetalle();
+        datos.render();
+        document.getElementById("equipos").value = datos.indexselect;
     },
 
     time_recargadatos:function(){
