@@ -84,7 +84,11 @@
                     datos.var_equipo_list = datos.objprincipal.equipo;
                     var list_html_mc = '';
                     _.each(datos.objprincipal.equipo, function (value, key) {
-                        list_html_mc += '<option value="' + key + '">' + datos.objprincipal.equipo[key] + '</option>';
+                        if(datos.indexselect == key){
+                            list_html_mc += '<option value="' + key + '" selected>' + datos.objprincipal.equipo[key] + '</option>';
+                        }else{
+                            list_html_mc += '<option value="' + key + '">' + datos.objprincipal.equipo[key] + '</option>';
+                        }
                     });
 
                     datos.equipos_list = list_html_mc;
@@ -432,11 +436,7 @@
         //datos.document.getElementById("btnactualiza").disabled = true;
         datos.restartTotales();
         datos.cargaInicial();
-        datos.render();
-        datos.cuentasEmpresariales();
-        datos.cuentasEmpresarialesDetalle();
-        datos.render();
-        document.getElementById("equipos").value = datos.indexselect;
+        //datos.render();
     },
 
     time_recargadatos:function(){
