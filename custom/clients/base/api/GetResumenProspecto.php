@@ -603,7 +603,7 @@ class GetResumenProspecto extends SugarApi
                     INNER JOIN leads_cstm lc ON lc.id_c = l.id AND l.deleted = 0
                     inner join meetings_leads ml on ml.lead_id = lc.id_c
                     inner join meetings m on m.id = ml.meeting_id AND m.deleted = 0
-                    WHERE l.assigned_user_id = in ({$usuarios})
+                    WHERE l.assigned_user_id in ({$usuarios})
                     AND lc.subtipo_registro_c in (1,2)
                     -- AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c is null)
                     AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c is null)
