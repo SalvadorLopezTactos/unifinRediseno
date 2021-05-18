@@ -32,7 +32,7 @@ class GetLeadsProspectoInteresado extends SugarApi
                 $query = "SELECT
                 cuentas.id as idCuenta, cuentas.name as nombreCuenta, cuentas.assigned_user_id, cuentas.user_id_c, cuentas.fecha_asignacion_c as fechaAsignacion,
                 cuentas.tipo_cuenta as tipoCuenta, cuentas.subtipo_cuenta as subtipoCuenta, solicitudes.idOpp as idOpp, solicitudes.oppNombre as oppNombre,
-                solicitudes.date_modified, solicitudes.daypas, solicitudes.tct_etapa_ddw_c, solicitudes.tct_estapa_subetapa_txf_c as oppEtapa, solicitudes.amount as monto,
+                solicitudes.date_modified, solicitudes.daypas, solicitudes.tct_etapa_ddw_c, solicitudes.tct_estapa_subetapa_txf_c as oppEtapa, solicitudes.monto as monto,
                 cuentas.status_management_c as EstatusProducto, cuentas.tipo_producto, solicitudes.tipo_producto_c,
                 CASE WHEN solicitudes.date_modified < DATE_SUB(now(), INTERVAL 5 DAY) THEN 0
                 WHEN solicitudes.date_modified > DATE_SUB(now(), INTERVAL 5 DAY) THEN 1
@@ -78,7 +78,7 @@ class GetLeadsProspectoInteresado extends SugarApi
                 /*if ($statusProduct == 2) {
                     $query = $query . "and opp.date_entered < DATE_SUB(now(), INTERVAL 5 DAY)";
                 }*/
-                // $GLOBALS['log']->fatal('query pi '. $query);
+                //$GLOBALS['log']->fatal('query pi '. $query);
                 $result = $GLOBALS['db']->query($query);
 
                 while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
