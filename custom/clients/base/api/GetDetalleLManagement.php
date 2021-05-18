@@ -228,7 +228,7 @@ class GetDetalleLManagement extends SugarApi
 	    on cuentas.idCuenta = solicitudes.acc,
         (select id, user_name,concat(first_name, ' ' ,last_name) asesor,equipo_c,region_c from users join users_cstm on users.id=users_cstm.id_c) as usuario
         where usuario.id = cuentas.user_id_c
-        order by usuario.asesor , cuentas.nombreCuenta ";
+        order by usuario.asesor , fecha_asignacion , cuentas.nombreCuenta ";
         //$GLOBALS['log']->fatal('query exp',$query);
         /*if ($statusProduct == '2') {
             $query = $query . "where ( solicitudes.val_dias_20=20 and solicitudes.monto > 10000000) OR
@@ -298,7 +298,7 @@ class GetDetalleLManagement extends SugarApi
         on cuentas.id = solicitudes.acc,
         (select id, user_name,concat(first_name, ' ' ,last_name) asesor,equipo_c, region_c from users join users_cstm on users.id=users_cstm.id_c) as usuario
         where usuario.id = cuentas.user_id_c
-        order by usuario.asesor , cuentas.name ";
+        order by usuario.asesor , solicitudes.date_modified , cuentas.name ";
 
         /*if ($statusProduct == 2) {
             $query = $query . "and opp.date_entered < DATE_SUB(now(), INTERVAL 5 DAY)";
@@ -341,7 +341,7 @@ class GetDetalleLManagement extends SugarApi
         and ac.user_id_c in ({$usuarios})
         and up.tipo_producto = '1'
         and upc.status_management_c = '{$statusProduct}'
-        order by usuario.asesor , a.name ";
+        order by usuario.asesor , upc.fecha_asignacion_c, a.name ";
         $GLOBALS['log']->fatal('query cn '. $query);
         /*if ($estadoProducto == 2) {
             $query = $query . "and upc.fecha_asignacion_c < DATE_SUB(now(), INTERVAL 5 DAY)";
@@ -410,7 +410,7 @@ class GetDetalleLManagement extends SugarApi
         WHERE
         usuario.id = tablaLeads.assigned_user_id
         group by idLead, nombre, subtipo, estatus
-        order by asesor , nombre ";
+        order by asesor , fecha_asignacion , nombre ";
         
         $GLOBALS['log']->fatal('query lead '. $query);
         $result = $GLOBALS['db']->query($query);
