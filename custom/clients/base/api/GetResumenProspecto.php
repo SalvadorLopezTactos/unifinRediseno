@@ -546,41 +546,79 @@ class GetResumenProspecto extends SugarApi
         if($tdirector == "2"){
             $query = $query . "usuario.region_c, ";
         }
-        $query = $query . " usuario.equipo_c ,count(tablal.nombre) NumLeads,
-        -- tablal.subtipo ,
-        tablal.estatus, tablal.semaforo, 
-        CASE WHEN tablal.estatus = '2' THEN 1
-           WHEN tablal.estatus = '3' THEN 1
-           ELSE 0
-       END AS inactivo
-        FROM
-           (  SELECT le.idLead, le.assigned_user_id, le.nombre, le.subtipo, le.estatus,
-              CASE WHEN leaudit.date_created < DATE_SUB(now(), INTERVAL 10 DAY) THEN 0 
-              WHEN leaudit.date_created > DATE_SUB(now(), INTERVAL 10 DAY) THEN 1
-              END AS semaforo
-                FROM ( 
-                SELECT -- count(*) 
-                  DISTINCT(l.id) idLead, l.assigned_user_id, lc.name_c as nombre, lc.subtipo_registro_c as subtipo, 
-                      lc.status_management_c as estatus
-                  FROM leads l INNER JOIN leads_cstm lc ON lc.id_c = l.id AND l.deleted = 0
-                  AND lc.subtipo_registro_c in (1,2)
-                   AND l.assigned_user_id in ({$usuarios})
+        $query = $query . " usuario.equipo_c , count(cuenta) NumLeads, estatus, semaforo, inactivo
+        FROM 
+    	(SELECT idLead, assigned_user_id ,cuenta, fechaAsignacion, daypas, tipo, subtipo, estatus, max(semaforo) semaforo, inactivo
+            FROM (
+                SELECT DISTINCT l.id as idLead, l.assigned_user_id , lc.name_c as cuenta, la.date_created as fechaAsignacion,
+                TIMESTAMPDIFF(DAY, la.date_created, now()) as daypas, lc.tipo_registro_c as tipo, 
+                lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus,
+                CASE WHEN la.date_created < DATE_SUB(now(), INTERVAL 10 DAY) THEN 0
+                WHEN la.date_created > DATE_SUB(now(), INTERVAL 10 DAY) THEN 1
+                END AS semaforo,
+                CASE WHEN lc.status_management_c = '2' THEN 1
+				WHEN lc.status_management_c = '3' THEN 1
+				ELSE 0
+				END AS inactivo
+                FROM leads l
+                INNER JOIN leads_cstm lc ON lc.id_c = l.id AND l.deleted = 0
+                inner join leads_audit la on la.parent_id = l.id
+                where la.field_name='assigned_user_id'
+                and la.after_value_string = l.assigned_user_id
+                AND l.assigned_user_id in ({$usuarios})
+                AND  lc.subtipo_registro_c in (1,2)
+                -- AND (lc.status_management_c = '' or lc.status_management_c is null)
                 AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c is null)
-                ) AS le INNER JOIN 
-                (SELECT la.date_created,la.field_name, la.after_value_string FROM leads_audit la -- on la.parent_id = l.id
-                 where la.field_name='assigned_user_id'
-                 group by la.after_value_string 
-                 order by la.date_created ,la.after_value_string
-              ) AS leaudit ON leaudit.after_value_string = le.assigned_user_id
-       ) AS tablal , (select id, user_name,concat(first_name, ' ' ,last_name) usuario,equipo_c,region_c from users join users_cstm on users.id=users_cstm.id_c) as usuario 
-       where tablal.assigned_user_id = usuario.id";
+                UNION
+                    SELECT DISTINCT l.id as idLead, l.assigned_user_id ,lc.name_c as cuenta, c.date_end as fechaAsignacion, 
+                    TIMESTAMPDIFF(DAY, c.date_end, now()) as daypas,lc.tipo_registro_c as tipo, 
+                    lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus,
+                    CASE WHEN c.date_end < DATE_SUB(now(), INTERVAL 10 DAY) THEN 0
+                    WHEN c.date_end > DATE_SUB(now(), INTERVAL 10 DAY) THEN 1
+                    END AS semaforo,
+                    CASE WHEN lc.status_management_c = '2' THEN 1
+					WHEN lc.status_management_c = '3' THEN 1
+					ELSE 0
+                    END AS inactivo
+                    FROM leads l
+                    INNER JOIN leads_cstm lc ON lc.id_c = l.id AND l.deleted = 0
+                    INNER JOIN calls_leads cl on cl.lead_id = lc.id_c
+                    inner join calls c on c.id = cl.call_id AND c.deleted = 0
+                    WHERE l.assigned_user_id in ({$usuarios})
+                    AND lc.subtipo_registro_c in (1,2)
+                    -- AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c is null)
+                    AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c is null)
+                    UNION
+                    SELECT DISTINCT l.id as idLead, l.assigned_user_id , lc.name_c as cuenta, m.date_end as fechaAsignacion, 
+                    TIMESTAMPDIFF(DAY, m.date_end, now()) as daypas, lc.tipo_registro_c as tipo, 
+                    lc.subtipo_registro_c as subtipo, lc.status_management_c as estatus,
+                    CASE WHEN m.date_end < DATE_SUB(now(), INTERVAL 10 DAY) THEN 0
+                    WHEN m.date_end > DATE_SUB(now(), INTERVAL 10 DAY) THEN 1
+                    END AS semaforo,
+                    CASE WHEN lc.status_management_c = '2' THEN 1
+					WHEN lc.status_management_c = '3' THEN 1
+					ELSE 0
+                    END AS inactivo
+                    FROM leads l
+                    INNER JOIN leads_cstm lc ON lc.id_c = l.id AND l.deleted = 0
+                    inner join meetings_leads ml on ml.lead_id = lc.id_c
+                    inner join meetings m on m.id = ml.meeting_id AND m.deleted = 0
+                    WHERE l.assigned_user_id = in ({$usuarios})
+                    AND lc.subtipo_registro_c in (1,2)
+                    -- AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c is null)
+                    AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c is null)
+                ) tablaLeads 
+	group by idLead, cuenta, fechaAsignacion, tipo, subtipo, estatus
+	) AS tablal
+	, (select id, user_name,concat(first_name, ' ' ,last_name) usuario,equipo_c,region_c from users join users_cstm on users.id=users_cstm.id_c) as usuario 
+    where tablal.assigned_user_id = usuario.id ";
 
         if($tdirector == "1"){
-            $query = $query ." group by  usuario.usuario , inactivo , semaforo  , estatus 
-            order by usuario.usuario , inactivo , semaforo";    
+            $query = $query ." group by usuario.equipo_c , usuario.usuario , estatus , inactivo , semaforo 
+            order by usuario.usuario, inactivo, semaforo";    
         }
         if($tdirector == "2"){
-            $query = $query ." group by usuario.region_c , usuario.equipo_c , inactivo, semaforo, estatus
+            $query = $query ." group by usuario.region_c , usuario.equipo_c , estatus , inactivo, semaforo
             order by usuario.region_c , usuario.equipo_c , inactivo, semaforo";    
         }
         $GLOBALS['log']->fatal('query_lead',$query);
