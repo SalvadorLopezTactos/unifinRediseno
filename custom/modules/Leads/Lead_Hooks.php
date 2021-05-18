@@ -214,4 +214,59 @@ SQL;
 		  if($bean->oficina_c != '') $bean->assigned_user_id = '569246c7-da62-4664-ef2a-5628f649537e';
         }
     }
+
+    public function re_asign_meetings($bean, $event, $args)
+    {
+		if($bean->account_id) {
+			$idCuenTa = $bean->account_id;
+			//Reasigna Llamadas
+			if ($bean->load_relationship('calls')) {
+				$relatedBeans = $bean->calls->getBeans();
+				if (!empty($relatedBeans)) {
+					foreach ($relatedBeans as $call) {
+						global $db;
+						$meetUpdate = "update calls set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$call->id}'";
+						$updateResult = $db->query($meetUpdate);
+					}
+				}
+			}
+			//Reasigna Reuniones
+			if ($bean->load_relationship('meetings')) {
+				$relatedBeans = $bean->meetings->getBeans();
+				if (!empty($relatedBeans)) {
+					foreach ($relatedBeans as $meeting) {
+						global $db;
+						$meetUpdate = "update meetings set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$meeting->id}'";
+						$updateResult = $db->query($meetUpdate);
+					}
+				}
+			}
+			//Reasigna Tareas
+			if ($bean->load_relationship('tasks')) {
+				$relatedBeans = $bean->tasks->getBeans();
+				if (!empty($relatedBeans)) {
+					foreach ($relatedBeans as $task) {
+						global $db;
+						$meetUpdate = "update tasks set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$task->id}'";
+						$updateResult = $db->query($meetUpdate);
+						$bean->load_relationship('tasks_leads_1');
+						$bean->tasks_leads_1->add($task->id);
+					}
+				}
+			}
+			//Reasigna Notas
+			if ($bean->load_relationship('notes')) {
+				$relatedBeans = $bean->notes->getBeans();
+				if (!empty($relatedBeans)) {
+					foreach ($relatedBeans as $note) {
+						global $db;
+						$meetUpdate = "update notes set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$note->id}'";
+						$updateResult = $db->query($meetUpdate);
+						$bean->load_relationship('notes_leads_1');
+						$bean->notes_leads_1->add($note->id);					
+					}
+				}
+			}
+		}
+    }
 }

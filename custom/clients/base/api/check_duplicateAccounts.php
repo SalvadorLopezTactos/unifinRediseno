@@ -523,18 +523,6 @@ SITE;
 
     public function re_asign_meetings($bean_LEad, $idCuenTa)
     {
-		//Reasigna Reuniones
-        if ($bean_LEad->load_relationship('meetings')) {
-            $relatedBeans = $bean_LEad->meetings->getBeans();
-            if (!empty($relatedBeans)) {
-                foreach ($relatedBeans as $meeting) {
-					global $db;
-					$meetUpdate = "update meetings set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$meeting->id}'";
-					$updateResult = $db->query($meetUpdate);
-                }
-            }
-        }
-		$GLOBALS['log']->fatal("$idCuenTa: ".$idCuenTa);
 		//Reasigna Llamadas
         if ($bean_LEad->load_relationship('calls')) {
             $relatedBeans = $bean_LEad->calls->getBeans();
@@ -542,6 +530,17 @@ SITE;
                 foreach ($relatedBeans as $call) {
 					global $db;
 					$meetUpdate = "update calls set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$call->id}'";
+					$updateResult = $db->query($meetUpdate);
+                }
+            }
+        }
+		//Reasigna Reuniones
+        if ($bean_LEad->load_relationship('meetings')) {
+            $relatedBeans = $bean_LEad->meetings->getBeans();
+            if (!empty($relatedBeans)) {
+                foreach ($relatedBeans as $meeting) {
+					global $db;
+					$meetUpdate = "update meetings set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$meeting->id}'";
 					$updateResult = $db->query($meetUpdate);
                 }
             }
