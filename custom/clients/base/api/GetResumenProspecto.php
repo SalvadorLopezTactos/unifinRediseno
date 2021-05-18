@@ -590,7 +590,7 @@ class GetResumenProspecto extends SugarApi
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                 $records_in['records'][] = array(
                     'usuario' => $row['usuario'],  'equipo' => $row['equipo_c'], 'conteo' => $row['NumLeads'],
-                    'estatus' => $row['estatus'],'inactivo' => $row['inactivo'],
+                    'EstatusProducto' => $row['estatus'],'inactivo' => $row['inactivo'],
                     'semaforo' => $row['semaforo']
                 );
             }
@@ -601,7 +601,7 @@ class GetResumenProspecto extends SugarApi
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                 $records_in['records'][] = array(
                     'equipo' => $row['equipo_c'], 'region' => $row['region_c'], 'conteo' => $row['NumLeads'],
-                    'estatus' => $row['estatus'],'inactivo' => $row['inactivo'],
+                    'EstatusProducto' => $row['estatus'],'inactivo' => $row['inactivo'],
                     'semaforo' => $row['semaforo']
                 );
             }
