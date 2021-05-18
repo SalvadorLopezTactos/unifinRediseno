@@ -576,12 +576,12 @@ class GetResumenProspecto extends SugarApi
        where tablal.assigned_user_id = usuario.id";
 
         if($tdirector == "1"){
-            $query = $query ." group by usuario.user_name, inactivo, tablal.semaforo
-            order by usuario.user_name ,tablal.estatus, tablal.semaforo";    
+            $query = $query ." group by  usuario.usuario , inactivo , semaforo  , estatus 
+            order by usuario.usuario , inactivo , semaforo";    
         }
         if($tdirector == "2"){
-            $query = $query ." group by usuario.region_c , usuario.equipo_c , inactivo, tablal.semaforo
-            order by usuario.equipo_c , tablal.estatus, tablal.semaforo";    
+            $query = $query ." group by usuario.region_c , usuario.equipo_c , inactivo, semaforo, estatus
+            order by usuario.region_c , usuario.equipo_c , inactivo, semaforo";    
         }
         $GLOBALS['log']->fatal('query_lead',$query);
       
