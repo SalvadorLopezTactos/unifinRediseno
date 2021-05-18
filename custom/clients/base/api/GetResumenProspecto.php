@@ -378,8 +378,8 @@ class GetResumenProspecto extends SugarApi
         WHEN (producto.EstatusProducto = '3') THEN 1
         ELSE 0
         END AS inactivo
-        ,CASE WHEN (solicitudes.daypas < 5) THEN 0
-        WHEN (solicitudes.daypas > 5) THEN 1
+        ,CASE WHEN (solicitudes.daypas < 5) THEN 1
+        WHEN (solicitudes.daypas > 5) THEN 0
         END AS semaforo
          FROM 
         (	SELECT a.id, a.name cuentas, ac.user_id_c, ac.tipo_registro_c
@@ -474,8 +474,8 @@ class GetResumenProspecto extends SugarApi
            WHEN producto.EstatusProducto = '3' THEN 1
            ELSE 0
            END AS inactivo
-       ,CASE WHEN producto.daypas < 5 THEN 0
-           WHEN producto.daypas > 5 THEN 1
+       ,CASE WHEN producto.daypas < 5 THEN 1
+           WHEN producto.daypas > 5 THEN 0
            END AS semaforo
        FROM 
        (	SELECT a.id, a.name cuentas, ac.user_id_c, ac.tipo_registro_c
