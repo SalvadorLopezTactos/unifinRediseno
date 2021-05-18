@@ -100,15 +100,15 @@ class GetResumenProspecto extends SugarApi
             //$GLOBALS['log']->fatal('value-1', $value['equipos']);
             $aux2 = $this->groupArray($value['equipos'],'equipo', 'datos');
             //$GLOBALS['log']->fatal('aux2', $aux2);
-            foreach ($aux2 as $key1 => $value1) {
+            /*foreach ($aux2 as $key1 => $value1) {
                 //$GLOBALS['log']->fatal('value-2', $value1['datos']);
                 $aux3 = $this->groupArray($value1['datos'],'inactivo', 'actinct');
                 //$GLOBALS['log']->fatal('aux3', $aux3);
                 $aux2[$key1]['datos'] = $aux3;
-            }
+            }*/
             $aux[$key]['equipos'] = $aux2;
         }
-        //$GLOBALS['log']->fatal('data1', $aux);
+        $GLOBALS['log']->fatal('data1', $aux);
         return $aux;
     }
 
@@ -125,15 +125,15 @@ class GetResumenProspecto extends SugarApi
             //$GLOBALS['log']->fatal('value-1', $value['usuarios']);
             $aux2 = $this->groupArray($value['usuarios'],'usuario', 'datos');
             //$GLOBALS['log']->fatal('aux2', $aux2);
-            foreach ($aux2 as $key1 => $value1) {
+            //foreach ($aux2 as $key1 => $value1) {
                 //$GLOBALS['log']->fatal('value-2', $value1['datos']);
-                $aux3 = $this->groupArray($value1['datos'],'inactivo', 'actinct');
+                //$aux3 = $this->groupArray($value1['datos'],'inactivo', 'actinct');
                 //$GLOBALS['log']->fatal('aux3', $aux3);
-                $aux2[$key1]['datos'] = $aux3;
-            }
+                //$aux2[$key1]['datos'] = $aux3;
+            //}
             $aux[$key]['usuarios'] = $aux2;
         }
-        //$GLOBALS['log']->fatal('data1', $aux);
+        $GLOBALS['log']->fatal('data1', $aux);
         return $aux;
     }
 
@@ -292,7 +292,7 @@ class GetResumenProspecto extends SugarApi
             INNER JOIN uni_productos_cstm upc on upc.id_c = up.id
             INNER JOIN accounts_uni_productos_1_c aup on up.id = aup.accounts_uni_productos_1uni_productos_idb
             WHERE -- up.tipo_cuenta in ('2') or  up.subtipo_cuenta in ('1','2','7','8','10')
-              up.tipo_cuenta = '2' and up.subtipo_cuenta in ('1','2')
+            up.tipo_cuenta = '2' and  up.subtipo_cuenta in ('8','10')
             and tipo_producto = '1'and  up.deleted = 0
             group by  aup.accounts_uni_productos_1accounts_ida , aup.accounts_uni_productos_1uni_productos_idb
         ) AS PRODUCTO,
