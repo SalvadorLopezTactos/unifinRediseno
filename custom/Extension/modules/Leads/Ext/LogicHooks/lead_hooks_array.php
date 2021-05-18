@@ -28,3 +28,11 @@ $hook_array['after_save'][] = Array(
     'Lead_Hooks',
     'crearURLOriginacion'
 );
+
+$hook_array['after_save'][] = Array(
+    4,
+    'Convierte a Cuenta',
+    'custom/modules/Leads/Lead_Hooks.php',
+    'Lead_Hooks',
+    're_asign_meetings'
+);
