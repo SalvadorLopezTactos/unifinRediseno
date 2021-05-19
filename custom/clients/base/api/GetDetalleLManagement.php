@@ -238,11 +238,12 @@ class GetDetalleLManagement extends SugarApi
         $result = $GLOBALS['db']->query($query);
         //$GLOBALS['log']->fatal('result', $result);
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
+            $semaforoBool = ($row['semaforo']==1)?true:false;
             $records_in['records'][] = array(
                 'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 'asesor' => $row['asesor'],
                 'equipo' => $row['equipo_c'], 'region' =>$row['region_c'], 'tipoCuenta' => $row['tipoCuenta'],
                 'subtipoCuenta' => $row['subtipoCuenta'], 'idOpp' => $row['idOpp'], 'oppNombre' => $row['oppNombre'],
-                'oppEtapa' => $row['oppEtapa'], 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $row['semaforo'],
+                'oppEtapa' => $row['oppEtapa'], 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $semaforoBool,
                 'fecha_asignacion' => $row['fecha_asignacion'], 'Monto' => '$ ' . round($row['monto'], 2)
             );
         }
@@ -307,12 +308,12 @@ class GetDetalleLManagement extends SugarApi
         $result = $GLOBALS['db']->query($query);
 
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
-
+            $semaforoBool = ($row['semaforo']==1)?true:false;
             $records_in['records'][] = array(
                 'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 
                 'asesor' => $row['asesor'],'equipo' => $row['equipo_c'], 'region' => $row['region_c'] , 'tipoCuenta' => $row['tipoCuenta'],
                 'subtipoCuenta' => $row['subtipoCuenta'], 'idOpp' => $row['idOpp'], 'oppNombre' => $row['oppNombre'],
-                'oppEtapa' => $row['oppEtapa'], 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $row['semaforo'],
+                'oppEtapa' => $row['oppEtapa'], 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $semaforoBool,
                 'fecha_asignacion' => $row['fecha_asignacion'], 'Monto' => '$ ' . round($row['monto'], 2)
             );
         }
@@ -348,11 +349,12 @@ class GetDetalleLManagement extends SugarApi
         }*/
          $result = $GLOBALS['db']->query($query);
          while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
+            $semaforoBool = ($row['semaforo']==1)?true:false;
          $records_in['records'][] = array(
                 'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 
                 'asesor' => $row['asesor'], 'equipo' => $row['equipo_c'], 'region' => $row['region_c'] , 'tipoCuenta' => $row['tipoCuenta'],
                 'subtipoCuenta' => $row['subtipoCuenta'], 'fecha_asignacion' => $row['fecha_asignacion'], 
-                'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $row['semaforo']
+                'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $semaforoBool
             );
         }
         return $records_in;
@@ -416,12 +418,12 @@ class GetDetalleLManagement extends SugarApi
         $result = $GLOBALS['db']->query($query);
 
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
-
+            $semaforoBool = ($row['semaforo']==1)?true:false;
             $records_in['records'][] = array(
             'idLead' => $row['idLead'], 'nombre' => $row['nombre'],
             'asesor' => $row['asesor'], 'equipo' => $row['equipo_c'],'region' => $row['region_c'],
             'tipo' => $row['tipo'] , 'subtipo' => $row['subtipo'], 'estatus' => $row['estatus'], 
-            'fecha_asignacion' => $row['fecha_asignacion'],'semaforo' => $row['semaforo']);
+            'fecha_asignacion' => $row['fecha_asignacion'],'semaforo' => $semaforoBool);
         }
         
         return $records_in;

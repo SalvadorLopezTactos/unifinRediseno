@@ -608,7 +608,7 @@ class GetResumenProspecto extends SugarApi
                     -- AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c is null)
                     AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c is null)
                 ) tablaLeads 
-	group by idLead, cuenta, fechaAsignacion, tipo, subtipo, estatus
+	group by idLead, cuenta, tipo, subtipo, estatus
 	) AS tablal
 	, (select id, user_name,concat(first_name, ' ' ,last_name) usuario,equipo_c,region_c from users join users_cstm on users.id=users_cstm.id_c) as usuario 
     where tablal.assigned_user_id = usuario.id ";
