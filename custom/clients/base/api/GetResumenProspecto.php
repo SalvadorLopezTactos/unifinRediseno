@@ -317,14 +317,14 @@ class GetResumenProspecto extends SugarApi
                 SELECT app.account_id uac, opp.id oppid, opp.name, max(opp.date_modified) as dayb , min(TIMESTAMPDIFF(DAY, opp.date_modified, now())) as daypas
                 FROM accounts_opportunities app INNER JOIN opportunities opp on opp.id = app.opportunity_id
                 where  opp.assigned_user_id in ({$usuarios})
+                and oppcstm.tipo_producto_c = '1'
             group by app.account_id order by app.account_id
             ) AS ultimos on ultimos.uac = app.account_id and ultimos.dayb = opp.date_modified
-            WHERE  oppcstm.tipo_producto_c = '1'
             group by app.account_id
             order by daypas
             ) as solicitudes
         ON cuentas.id = solicitudes.acc";
-        
+
         if($tdirector == "1"){
             $query = $query ." group by user_name,  inactivo ,EstatusProducto , semaforo
             order by user_name, EstatusProducto , semaforo";    
