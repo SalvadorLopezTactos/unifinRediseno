@@ -285,7 +285,7 @@ class GetResumenProspecto extends SugarApi
             INNER JOIN accounts_cstm ac on ac.id_c = a.id
             WHERE ac.user_id_c in ({$usuarios}) and a.deleted = 0 
            -- group by ac.user_id_c
-        ) AS CUENTAS , 
+        ) AS CUENTAS INNER JOIN   
         (	SELECT aup.accounts_uni_productos_1accounts_ida , aup.accounts_uni_productos_1uni_productos_idb ,
             up.tipo_cuenta tipoCuenta, up.subtipo_cuenta subtipoCuenta,up.name nameProd, up.tipo_producto , upc.status_management_c EstatusProducto
             FROM uni_productos up
@@ -295,9 +295,10 @@ class GetResumenProspecto extends SugarApi
             up.tipo_cuenta = '2' and  up.subtipo_cuenta in ('8','10')
             and tipo_producto = '1'and  up.deleted = 0
             group by  aup.accounts_uni_productos_1accounts_ida , aup.accounts_uni_productos_1uni_productos_idb
-        ) AS PRODUCTO,
-        (select id, user_name,concat(first_name, ' ' ,last_name) usuario,equipo_c, region_c from users join users_cstm on users.id=users_cstm.id_c) as usuario,
-            (SELECT app.account_id acc, opp.date_modified, TIMESTAMPDIFF(DAY, opp.date_modified, now()) as daypas,
+        ) AS PRODUCTO on CUENTAS.id = PRODUCTO.producto.accounts_uni_productos_1accounts_ida
+        INNER JOIN (select id, user_name,concat(first_name, ' ' ,last_name) usuario,equipo_c, region_c from users join users_cstm on users.id=users_cstm.id_c) as usuario
+        ON cuentas.user_id_c = usuario.id 
+        LEFT JOIN (SELECT app.account_id acc, opp.date_modified, TIMESTAMPDIFF(DAY, opp.date_modified, now()) as daypas,
             opp.id as idOpp, opp.name as oppNombre, oppcstm.tipo_producto_c, opp.assigned_user_id oppassigned, oppcstm.tct_etapa_ddw_c, oppcstm.estatus_c,
             oppcstm.tct_estapa_subetapa_txf_c as oppEtapa, DATE_FORMAT( opp.date_modified, '%Y-%m-%d ') as fecha_asignacion,
             opp.amount as monto,
@@ -322,9 +323,8 @@ class GetResumenProspecto extends SugarApi
             group by app.account_id
             order by daypas
             ) as solicitudes
-        where cuentas.id = producto.accounts_uni_productos_1accounts_ida
-        and cuentas.user_id_c = usuario.id 
-        and cuentas.id = solicitudes.acc";
+        ON cuentas.id = solicitudes.acc";
+        
         if($tdirector == "1"){
             $query = $query ." group by user_name,  inactivo ,EstatusProducto , semaforo
             order by user_name, EstatusProducto , semaforo";    
