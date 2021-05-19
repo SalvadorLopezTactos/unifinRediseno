@@ -315,9 +315,11 @@ class GetResumenProspecto extends SugarApi
             INNER JOIN opportunities_cstm oppcstm on oppcstm.id_c = opp.id
             INNER JOIN (
                 SELECT app.account_id uac, opp.id oppid, opp.name, max(opp.date_modified) as dayb , min(TIMESTAMPDIFF(DAY, opp.date_modified, now())) as daypas
-                FROM accounts_opportunities app INNER JOIN opportunities opp on opp.id = app.opportunity_id
+                FROM accounts_opportunities app 
+                INNER JOIN opportunities opp on opp.id = app.opportunity_id
+				INNER JOIN opportunities_cstm opc on opp.id = opc.id_c
                 where  opp.assigned_user_id in ({$usuarios})
-                and oppcstm.tipo_producto_c = '1'
+                and opc.tipo_producto_c = '1'
             group by app.account_id order by app.account_id
             ) AS ultimos on ultimos.uac = app.account_id and ultimos.dayb = opp.date_modified
             group by app.account_id
