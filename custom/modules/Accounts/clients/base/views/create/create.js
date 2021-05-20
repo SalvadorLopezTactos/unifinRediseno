@@ -3260,7 +3260,7 @@
 	//},
     validaRFC: function (fields, errors, callback) {
         if (this.model.get('tipodepersona_c') != "Persona Moral") {
-            if ((this.model.get('rfc_c')!=undefined && this.model.get('rfc_c')!="") && (this.model.get('fechadenacimiento_c')!=undefined && this.model.get('fechadenacimiento_c')!="")){
+            if ((this.model.get('rfc_c')!=undefined && this.model.get('rfc_c')!="") && this.model.get('rfc_c') != 'XXXX010101XXX' && (this.model.get('fechadenacimiento_c')!=undefined && this.model.get('fechadenacimiento_c')!="")){
                 //Obtiene valor de la fecha y resconstruye
                 var fecha= this.model.get('fechadenacimiento_c');
                 var convert= fecha.split('-');
@@ -3285,7 +3285,7 @@
                 }
             } 
         }else{
-            if ((this.model.get('rfc_c')!=undefined && this.model.get('rfc_c')!="") && (this.model.get('fechaconstitutiva_c')!=undefined && this.model.get('fechaconstitutiva_c')!="")){
+            if ((this.model.get('rfc_c')!=undefined && this.model.get('rfc_c')!="") && this.model.get('rfc_c') != 'XXX010101XXX' && (this.model.get('fechaconstitutiva_c')!=undefined && this.model.get('fechaconstitutiva_c')!="")){
                 //Obtiene valor de la fecha y resconstruye
                 var fecha= this.model.get('fechaconstitutiva_c');
                 var convert= fecha.split('-');
