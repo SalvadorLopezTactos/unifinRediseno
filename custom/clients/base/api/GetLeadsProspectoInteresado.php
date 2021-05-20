@@ -73,7 +73,7 @@ class GetLeadsProspectoInteresado extends SugarApi
                     order by app.account_id
                     ) as solicitudes
                 on cuentas.id = solicitudes.acc
-                order by date_modified asc";
+                order by cuentas.name asc";
 
                 /*if ($statusProduct == 2) {
                     $query = $query . "and opp.date_entered < DATE_SUB(now(), INTERVAL 5 DAY)";

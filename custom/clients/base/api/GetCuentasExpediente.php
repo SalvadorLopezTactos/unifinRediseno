@@ -76,7 +76,7 @@ class GetCuentasExpediente extends SugarApi
                         order by daypas
 			        ) as solicitudes
 	            on cuentas.idCuenta = solicitudes.acc
-                order by fecha_asignacion asc";
+                order by nombreCuenta asc";
 
                 /*if ($statusProduct == '2') {
                     $query = $query . "where ( solicitudes.val_dias_20=20 and solicitudes.monto > 10000000) OR
