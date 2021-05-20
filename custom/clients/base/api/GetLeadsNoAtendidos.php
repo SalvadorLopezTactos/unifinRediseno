@@ -43,7 +43,7 @@ class GetLeadsNoAtendidos extends SugarApi
                     where la.field_name='assigned_user_id'
                     and la.after_value_string = l.assigned_user_id
                     AND l.assigned_user_id = '{$id_user}'
-                    AND  lc.subtipo_registro_c in (1,2)
+                    AND  lc.subtipo_registro_c in (1,2,3)
                     AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c is null)
                     AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c is null)
                     UNION
@@ -56,7 +56,7 @@ class GetLeadsNoAtendidos extends SugarApi
                     INNER JOIN calls_leads cl on cl.lead_id = lc.id_c
                     inner join calls c on c.id = cl.call_id AND c.deleted = 0
                     WHERE l.assigned_user_id = '{$id_user}'
-                    AND lc.subtipo_registro_c in (1,2)
+                    AND lc.subtipo_registro_c in (1,2,3)
                     AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c is null)
                     AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c is null)
                     UNION
@@ -69,7 +69,7 @@ class GetLeadsNoAtendidos extends SugarApi
                     inner join meetings_leads ml on ml.lead_id = lc.id_c
                     inner join meetings m on m.id = ml.meeting_id AND m.deleted = 0
                     WHERE l.assigned_user_id = '{$id_user}'
-                    AND lc.subtipo_registro_c in (1,2)
+                    AND lc.subtipo_registro_c in (1,2,3)
                     AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c is null)
                     AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c is null)
                 ) tablaLeads group by idLead, cuenta, fechaAsignacion, tipo, subtipo, estatus";

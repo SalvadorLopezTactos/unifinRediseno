@@ -449,8 +449,9 @@ class GetResumenProspecto extends SugarApi
             $result = $GLOBALS['db']->query($query);
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                 $records_in['records'][] = array(
-                    'equipo' => $row['equipo_c'], 'region' => $row['region_c'], 'conteo' => $row['NumCuentas'],
-                    'EstatusProducto' => $row['EstatusProducto'],'semaforo' => $row['semaforo']
+                    'equipo' => $row['equipo_c'], 'region' => $row['region_c'], 
+                    'conteo' => $row['NumCuentas'],'EstatusProducto' => $row['EstatusProducto'],
+                    'inactivo' => $row['inactivo'], 'semaforo' => $row['semaforo']
                 );
             }
         }
