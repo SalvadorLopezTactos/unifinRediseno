@@ -45,7 +45,8 @@ class GetAccountProspectoContactado extends SugarApi
                 and up.subtipo_cuenta in ('1','2')
                 and ac.user_id_c = '{$id_user}'
                 and up.tipo_producto = '1'
-                and upc.status_management_c = '{$estadoProducto}' ";
+                and upc.status_management_c = '{$estadoProducto}'
+                order by a.name asc ";
 
                 /*if ($estadoProducto == 2) {
                     $query = $query . "and upc.fecha_asignacion_c < DATE_SUB(now(), INTERVAL 5 DAY)";

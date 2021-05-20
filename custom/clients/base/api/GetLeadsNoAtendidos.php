@@ -72,7 +72,8 @@ class GetLeadsNoAtendidos extends SugarApi
                     AND lc.subtipo_registro_c in (1,2,3)
                     AND (lc.status_management_c = '{$estatusProduct}' or lc.status_management_c is null)
                     AND (lc.contacto_asociado_c = 0 or lc.contacto_asociado_c is null)
-                ) tablaLeads group by idLead, cuenta, fechaAsignacion, tipo, subtipo, estatus";
+                ) tablaLeads group by idLead, cuenta, fechaAsignacion, tipo, subtipo, estatus
+                order by cuenta asc";
 
                 $result = $GLOBALS['db']->query($query);
 
