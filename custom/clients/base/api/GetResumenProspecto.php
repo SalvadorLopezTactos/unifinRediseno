@@ -328,7 +328,7 @@ class GetResumenProspecto extends SugarApi
         ON cuentas.id = solicitudes.acc";
 
         if($tdirector == "1"){
-            $query = $query ." group by user_name,  inactivo ,EstatusProducto , semaforo
+            $query = $query ." group by equipo_c, user_name,  inactivo ,EstatusProducto , semaforo
             order by user_name, EstatusProducto , semaforo";    
         }
         if($tdirector == "2"){
@@ -425,7 +425,7 @@ class GetResumenProspecto extends SugarApi
         and cuentas.id = solicitudes.acc";
 
         if($tdirector == "1"){
-            $query = $query ." group by user_name, inactivo ,EstatusProducto , semaforo
+            $query = $query ." group by equipo_c , user_name, inactivo ,EstatusProducto , semaforo
             order by user_name, EstatusProducto , semaforo";    
         }
         if($tdirector == "2"){
@@ -503,7 +503,7 @@ class GetResumenProspecto extends SugarApi
        and cuentas.user_id_c = usuario.id";
 
         if($tdirector == "1"){
-            $query = $query ." group by equipo_c, inactivo ,EstatusProducto , semaforo
+            $query = $query ." group by equipo_c,user_name, inactivo ,EstatusProducto , semaforo
             order by user_name, EstatusProducto, semaforo";    
         }
         if($tdirector == "2"){
