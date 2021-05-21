@@ -18,7 +18,7 @@
         if($con) {
             $GLOBALS['log']->fatal('Conexion Exitosa');//-----------------------------------
 
-            $query2 = 'select * from calls_cstm where tct_call_issabel_c=1';
+            $query2 = 'select * from calls c, calls_cstm cc where c.id = cc.id_c and c.deleted = 0 and c.status = "Planned" and cc.tct_call_issabel_c=1';
             $result2 = $GLOBALS['db']->query($query2);
 
             while ($row2 = $GLOBALS['db']->fetchByAssoc($result2)) {
