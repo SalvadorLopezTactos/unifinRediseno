@@ -42,11 +42,14 @@ class altaLeadServices extends SugarApi
 			// Obtiene Compañía
 			$compania_c = $args['lead']['compania_c'];
 
+            // Obtiene id_landing
+			$id_landing_c = $args['lead']['id_landing_c'];
+
             if ($args['lead']['regimen_fiscal_c'] != '3') {
                 $obj_leads['lead'] = $this->sec_validacion($obj_leads['lead']);
                 $response_Services['lead'] = $this->insert_Leads_Asociados($obj_leads['lead'], "");
 // Actualizamos el campo asignado a de cada registro nuevo
-                $this->get_asignado($response_Services, "1", $compania_c);
+                $this->get_asignado($response_Services, "1", $compania_c , $id_landing_c);
 
             } else {
                 /** PErsona Moral */
@@ -78,7 +81,7 @@ class altaLeadServices extends SugarApi
                     }
                 }*/
                 // Actualizamos el campo asignado a de cada registro nuevo
-                $this->get_asignado($response_Services, "3", $compania_c);
+                $this->get_asignado($response_Services, "3", $compania_c , $id_landing_c);
                 /*  } else {
 
                       $GLOBALS['log']->fatal(print_r($obj_leads, true));
@@ -150,13 +153,13 @@ class altaLeadServices extends SugarApi
         return $obj_leads;
     }
 
-    public function get_asignado($data_result, $regimenFiscal, $compania_c)
+    public function get_asignado($data_result, $regimenFiscal, $compania_c , $id_landing_c)
     {
         global $db;
         $users = [];
         /* Obetenemos el id del usuario de grupo de 9.- MKT*/
         $QueryId = "SELECT id from users
-WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
+            WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
         $queryResultId = $db->query($QueryId);
         $row = $db->fetchByAssoc($queryResultId);
         $idMKT = $row['id'];
@@ -178,6 +181,7 @@ WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
         $last_indice = $row['value'];
 		if($compania_c == 1) $subpuesto_c = 3;
 		if($compania_c == 2) $subpuesto_c = 4;
+        if( strpos(strtoupper($id_landing_c), 'INSURANCE') !== false) $subpuesto_c = 5;        
 
         $query_asesores = "SELECT
   user.id,
@@ -191,8 +195,8 @@ FROM users user
     ON lead.assigned_user_id = user.id
 where puestousuario_c='27' AND user.status = 'Active' AND subpuesto_c='$subpuesto_c'
 GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
-
-        $result_usr = $db->query($query_asesores);
+            
+            $result_usr = $db->query($query_asesores);
         //$usuarios=;
         while ($row = $db->fetchByAssoc($result_usr)) {
             $hours = json_decode($row['access_hours_c'], true);

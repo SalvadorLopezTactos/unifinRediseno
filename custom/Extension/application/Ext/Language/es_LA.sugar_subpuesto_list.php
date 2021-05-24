@@ -1,5 +1,5 @@
 <?php
- // created: 2021-04-09 18:45:15
+ // created: 2021-05-24 21:49:56
 
 $app_list_strings['subpuesto_list']=array (
   '' => '',
@@ -7,4 +7,5 @@ $app_list_strings['subpuesto_list']=array (
   2 => 'COORDINADOR',
   3 => 'INBOUND UNIFIN',
   4 => 'INBOUND UNICLICK',
+  5 => 'INBOUND INSURANCE',
 );

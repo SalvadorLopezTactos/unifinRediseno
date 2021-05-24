@@ -17,8 +17,12 @@ WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
     while ($row = $GLOBALS['db']->fetchByAssoc($ResultLeads)) {
 		// Obtiene Compañía
 		$compania_c = $row['compania'];
-		if($compania_c == 1) $subpuesto_c = 3;
+        // Obtiene id_landing
+		$id_landing_c = $args['lead']['id_landing_c'];
+		
+        if($compania_c == 1) $subpuesto_c = 3;
 		if($compania_c == 2) $subpuesto_c = 4;
+        if( strpos(strtoupper($id_landing_c), 'INSURANCE') !== false) $subpuesto_c = 5;  
         $usrEnable = GetUserMKT($subpuesto_c);
         $indices = $usrEnable['indice'];
         if (!empty($usrEnable['id'])) {
