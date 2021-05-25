@@ -15,10 +15,8 @@
 
     initialize: function(options){
         this._super("initialize", [options]);
-
         this.tipo_cuenta = App.lang.getAppListStrings('tipo_registro_cuenta_list');
         delete this.tipo_cuenta[1];
-
         this.loadView = false;
         if(app.user.attributes.tct_no_contactar_chk_c=='1'){
             this.loadView = true;
@@ -27,9 +25,7 @@
             var route = app.router.buildRoute(this.module, null, '');
             app.router.navigate(route, {trigger: true});
         }
-
         this.ids_cuentas=[];
-
     },
 
     _render: function () {
