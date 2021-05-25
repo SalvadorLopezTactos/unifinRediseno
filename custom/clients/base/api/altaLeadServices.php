@@ -179,9 +179,13 @@ class altaLeadServices extends SugarApi
         $result = $db->query($query);
         $row = $db->fetchByAssoc($result);
         $last_indice = $row['value'];
-		if($compania_c == 1) $subpuesto_c = 3;
-		if($compania_c == 2) $subpuesto_c = 4;
-        if( strpos(strtoupper($id_landing_c), 'INSURANCE') !== false) $subpuesto_c = 5;        
+		
+        if( strpos(strtoupper($id_landing_c), 'INSURANCE') !== false){
+            $subpuesto_c = 5;
+        }else{
+            if($compania_c == 1) $subpuesto_c = 3;
+		    if($compania_c == 2) $subpuesto_c = 4;
+        }
 
         $query_asesores = "SELECT
   user.id,
