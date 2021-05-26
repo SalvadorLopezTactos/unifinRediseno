@@ -42,6 +42,7 @@ class check_duplicateAccounts extends SugarApi
         $finish = array();
         global $sugar_config;
         global $app_list_strings;
+        global $current_user;
         $url = $sugar_config['site_url'];
         /**
          * Validamos que el Lead no exista en Cuentas
@@ -77,6 +78,12 @@ class check_duplicateAccounts extends SugarApi
                     //Obteniendo número máximo de registros asignados que puede tener un asesor
                     $max_registros_list = $app_list_strings['limite_maximo_asignados_list'];
                     $max_registros=intval($max_registros_list['1']);
+
+                    //Se manipula el $total_asignados para que el usuario logueado si tenga posibilidad de convertir
+                    //en el caso de que se encuentre asignado al bean del Lead y evitar mostrar la restricción sobre el límite máximo de asignados
+                    if($current_user->id == $bean->assigned_user_id){
+                        $total_asignados=0;
+                    }
                     
                     if($total_asignados>=$max_registros && ($puesto_asesor=='2' || $puesto_asesor=='5')){ //2-Director Leasing, 5-Asesor Leasing
                         
