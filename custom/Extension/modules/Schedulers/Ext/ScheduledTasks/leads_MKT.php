@@ -12,13 +12,13 @@ WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
     $row = $db->fetchByAssoc($queryResultId);
     $idMKT = $row['id'];
     /** Buscamos los Leads que tengan asignados el usuario de grupo 9.- MKT */
-    $getLeads = "select a.id id, b.compania_c compania from leads a, leads_cstm b where a.id = b.id_c and a.assigned_user_id='{$idMKT}'";
+    $getLeads = "select a.id id, b.compania_c compania , b.id_landing_c id_landing_c from leads a, leads_cstm b where a.id = b.id_c and a.assigned_user_id='{$idMKT}'";
     $ResultLeads = $db->query($getLeads);
     while ($row = $GLOBALS['db']->fetchByAssoc($ResultLeads)) {
 		// Obtiene Compañía
 		$compania_c = $row['compania'];
         // Obtiene id_landing
-		$id_landing_c = $args['lead']['id_landing_c'];
+		$id_landing_c = $row['id_landing_c'];
 		
         if( strpos(strtoupper($id_landing_c), 'INSURANCE') !== false){
             $subpuesto_c = 5;  
