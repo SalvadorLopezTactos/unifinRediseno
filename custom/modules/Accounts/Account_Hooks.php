@@ -1272,8 +1272,8 @@ where rfc_c = '{$bean->rfc_c}' and
                 $beanprod->name = $bean->name . $name_productos[$i];
                 $beanprod->tipo_producto = $key_productos[$i];
                 $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
-                $beanprod->tipo_cuenta = empty($bean->tipo_registro_cuenta_c) ? '1' : $bean->tipo_registro_cuenta_c;
-                $beanprod->subtipo_cuenta = (empty($bean->subtipo_registro_cuenta_c) && $beanprod->tipo_cuenta == '1') ? '5' : $bean->subtipo_registro_cuenta_c;
+                $beanprod->tipo_cuenta = empty($bean->tipo_registro_cuenta_c) ? '2' : $bean->tipo_registro_cuenta_c;
+                $beanprod->subtipo_cuenta = (empty($bean->subtipo_registro_cuenta_c) && $beanprod->tipo_cuenta == '2') ? '1' : $bean->subtipo_registro_cuenta_c;
                 $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo));
                 //Caso especial: Alta portal CA
                 if ($beanprod->tipo_producto == '3' && empty($bean->id_uniclick_c) && $bean->tipo_registro_cuenta_c != '4' && $bean->tipo_registro_cuenta_c != '5' && $GLOBALS['service']->platform != 'base' && $GLOBALS['service']->platform != 'mobile') {
@@ -1401,7 +1401,7 @@ where rfc_c = '{$bean->rfc_c}' and
         //Cliente con Línea Vigente: 3,18
         if ($bean->subtipo_registro_cuenta_c == '18' && $bean->tipo_registro_cuenta_c == '3' && /*$bean->fetched_row['subtipo_registro_cuenta_c']!='18' &&*/
             $bean->encodedkey_mambu_c == "") {
-                
+
             //variables para consumo de servicio
             $url = $sugar_config['url_mambu_gral'] . 'groups';
             $user = $sugar_config['user_mambu'];
@@ -1598,7 +1598,7 @@ where rfc_c = '{$bean->rfc_c}' and
 
     public function estableceCuerpoCorreoErrorMambu($contenidoPeticion,$contenidoError){
 
-        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>Estimado usuario</b><br> 
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>Estimado usuario</b><br>
         Se le informa que se ha producido un error en la petición hacia Mambú, el cual se detalla de la siguiente forma:<br><br>'.json_encode($contenidoError).'
       <br><br>En donde la petición enviada fue la siguiente:<br><br>'.json_encode($contenidoPeticion).'
       <br><br>Atentamente Unifin</font></p>

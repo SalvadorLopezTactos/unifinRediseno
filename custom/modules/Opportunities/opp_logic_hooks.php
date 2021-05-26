@@ -1221,7 +1221,7 @@ function actualizaTipoCuenta($tipo=null, $subtipo=null, $idCuenta=null, $tipoPro
                     $tipoSubtipo = mb_strtoupper(trim($tipoList[$tipo].' '.$subtipoList[$subtipo]),'UTF-8');
                     //Itera productos recuperados
                     foreach ($relateProducts as $product) {
-                        if ($tipoProducto == $product->tipo_producto && (($product->tipo_cuenta!='3' && $product->subtipo_cuenta!=$subtipo ) || ($subtipo=='18')) ) {
+                        if ($tipoProducto == $product->tipo_producto && ($product->tipo_cuenta!='3' && $product->subtipo_cuenta!=$subtipo ) ) {
                             //Actualiza tipo y subtipo de producto
                             $product->tipo_cuenta = $tipo;
                             $product->subtipo_cuenta = $subtipo;
