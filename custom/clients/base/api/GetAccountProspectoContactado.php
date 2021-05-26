@@ -29,13 +29,14 @@ class GetAccountProspectoContactado extends SugarApi
 
             if ($estadoProducto != 3) {
                 //DASHLET PROSPECTO CONTACTADOS / SIN CONTACTAR 
-                $query = "SELECT a.id as idCuenta, a.name as cuenta, ac.user_id_c, upc.fecha_asignacion_c as fechaAsignacion,
+                $query = "SELECT a.id as idCuenta, a.name as cuenta,aGpo.id as idEmpresarial, aGpo.name as gpoEmpresarial,ac.user_id_c, upc.fecha_asignacion_c as fechaAsignacion,
                 up.tipo_cuenta as tipoCuenta, up.subtipo_cuenta as subtipoCuenta,
                 up.name, upc.status_management_c as EstatusProducto, up.tipo_producto,
                 CASE WHEN upc.fecha_asignacion_c < DATE_SUB(now(), INTERVAL 5 DAY) THEN 0
                 WHEN upc.fecha_asignacion_c > DATE_SUB(now(), INTERVAL 5 DAY) THEN 1
                 END AS semaforo
                 FROM accounts a
+                LEFT JOIN accounts aGpo on a.parent_id=aGpo.id
                 INNER JOIN accounts_cstm ac on ac.id_c = a.id and a.deleted = 0
                 INNER JOIN accounts_uni_productos_1_c aup on aup.accounts_uni_productos_1accounts_ida = ac.id_c and aup.deleted = 0
                 INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb and up.deleted = 0
