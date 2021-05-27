@@ -179,7 +179,7 @@ class GetDetalleLManagement extends SugarApi
     public function detalle_expediente($usuarios,$statusProduct){
         //$GLOBALS['log']->fatal('usuarios detalle expediente',$usuarios);
 
-        $query = "SELECT idCuenta,nombreCuenta,tipoCuenta,usuario.asesor,usuario.equipo_c,usuario.region_c ,subtipoCuenta,idOpp,oppNombre,oppEtapa,
+        $query = "SELECT idCuenta,nombreCuenta, cuentas.idEmpresarial, cuentas.gpoEmpresarial, tipoCuenta,usuario.asesor,usuario.equipo_c,usuario.region_c ,subtipoCuenta,idOpp,oppNombre,oppEtapa,
 		monto,  fecha_asignacion,daypas, tipo_producto, EstatusProducto, val_dias_20,val_dias_10,
 		CASE WHEN solicitudes.val_dias_20 = 20 and solicitudes.monto > 10000000 THEN 0
 		WHEN solicitudes.val_dias_20 = -20 and solicitudes.monto > 10000000 THEN 1
@@ -187,9 +187,10 @@ class GetDetalleLManagement extends SugarApi
 		WHEN solicitudes.val_dias_10 = -10 and (solicitudes.monto <= 10000000) THEN 1
 		END AS semaforo
             FROM (
-	            SELECT a.id as idCuenta, a.name as nombreCuenta, ac.user_id_c, ac.tipo_registro_c, up.tipo_cuenta as tipoCuenta,
+	            SELECT a.id as idCuenta, a.name as nombreCuenta,aGpo.id as idEmpresarial, aGpo.name as gpoEmpresarial, ac.user_id_c, ac.tipo_registro_c, up.tipo_cuenta as tipoCuenta,
                 up.subtipo_cuenta as subtipoCuenta,up.name nameProd, up.tipo_producto, upc.status_management_c as EstatusProducto
                 FROM accounts a
+                LEFT JOIN accounts aGpo on a.parent_id=aGpo.id
                 INNER JOIN accounts_cstm ac on ac.id_c = a.id
                 INNER JOIN accounts_uni_productos_1_c aup on aup.accounts_uni_productos_1accounts_ida = ac.id_c
                 INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb
@@ -199,7 +200,7 @@ class GetDetalleLManagement extends SugarApi
                 and upc.status_management_c = '{$statusProduct}' -- '2'
                 and tipo_producto = '1'
                 and a.deleted = 0 and up.deleted = 0
-            ) AS CUENTAS LEFT JOIN (
+            ) AS cuentas LEFT JOIN (
                 SELECT app.account_id acc, opp.date_modified, TIMESTAMPDIFF(DAY, opp.date_modified, now()) as daypas,
                 opp.id as idOpp, opp.name as oppNombre, oppcstm.tipo_producto_c, opp.assigned_user_id oppassigned, oppcstm.tct_etapa_ddw_c, oppcstm.estatus_c,
                 oppcstm.tct_estapa_subetapa_txf_c as oppEtapa, DATE_FORMAT( opp.date_modified, '%Y-%m-%d ') as fecha_asignacion,
@@ -240,7 +241,7 @@ class GetDetalleLManagement extends SugarApi
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
             $semaforoBool = ($row['semaforo']==1)?true:false;
             $records_in['records'][] = array(
-                'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 'asesor' => $row['asesor'],
+                'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'],'idEmpresarial'=>$row['idEmpresarial'],'gpoEmpresarial'=>$row['gpoEmpresarial'], 'asesor' => $row['asesor'],
                 'equipo' => $row['equipo_c'], 'region' =>$row['region_c'], 'tipoCuenta' => $row['tipoCuenta'],
                 'subtipoCuenta' => $row['subtipoCuenta'], 'idOpp' => $row['idOpp'], 'oppNombre' => $row['oppNombre'],
                 'oppEtapa' => $row['oppEtapa'], 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $semaforoBool,
@@ -255,16 +256,17 @@ class GetDetalleLManagement extends SugarApi
         //DASHLET SOLICITUDES SIN PROCESO
         $query = "SELECT
         cuentas.id as idCuenta, cuentas.name as nombreCuenta, usuario.asesor, usuario.equipo_c, usuario.region_c, cuentas.assigned_user_id, cuentas.user_id_c,
-        cuentas.tipo_cuenta as tipoCuenta, cuentas.subtipo_cuenta as subtipoCuenta, solicitudes.idOpp as idOpp, solicitudes.oppNombre as oppNombre,
+        cuentas.tipo_cuenta as tipoCuenta, cuentas.subtipo_cuenta as subtipoCuenta, cuentas.idEmpresarial, cuentas.gpoEmpresarial, solicitudes.idOpp as idOpp, solicitudes.oppNombre as oppNombre,
         solicitudes.date_modified fecha_asignacion,solicitudes.monto, solicitudes.daypas, solicitudes.tct_etapa_ddw_c, solicitudes.tct_estapa_subetapa_txf_c as oppEtapa,
         cuentas.status_management_c as EstatusProducto, cuentas.tipo_producto, solicitudes.tipo_producto_c,
         CASE WHEN solicitudes.date_modified < DATE_SUB(now(), INTERVAL 5 DAY) THEN 0
         WHEN solicitudes.date_modified > DATE_SUB(now(), INTERVAL 5 DAY) THEN 1
         END AS semaforo
             FROM
-            (SELECT a.id, a.name ,a.assigned_user_id, ac.user_id_c, ac.tipo_registro_c, up.tipo_cuenta,
+            (SELECT a.id, a.name ,a.assigned_user_id, aGpo.id as idEmpresarial, aGpo.name as gpoEmpresarial, ac.user_id_c, ac.tipo_registro_c, up.tipo_cuenta,
                   up.subtipo_cuenta,up.name nameProd, up.tipo_producto, upc.status_management_c
                   FROM accounts a
+                  LEFT JOIN accounts aGpo on a.parent_id=aGpo.id
                   INNER JOIN accounts_cstm ac on ac.id_c = a.id
                   INNER JOIN accounts_uni_productos_1_c aup on aup.accounts_uni_productos_1accounts_ida = ac.id_c
                   INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb
@@ -310,7 +312,7 @@ class GetDetalleLManagement extends SugarApi
         while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
             $semaforoBool = ($row['semaforo']==1)?true:false;
             $records_in['records'][] = array(
-                'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 
+                'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'],'idEmpresarial' => $row['idEmpresarial'],'gpoEmpresarial' => $row['gpoEmpresarial'],
                 'asesor' => $row['asesor'],'equipo' => $row['equipo_c'], 'region' => $row['region_c'] , 'tipoCuenta' => $row['tipoCuenta'],
                 'subtipoCuenta' => $row['subtipoCuenta'], 'idOpp' => $row['idOpp'], 'oppNombre' => $row['oppNombre'],
                 'oppEtapa' => $row['oppEtapa'], 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $semaforoBool,
@@ -323,13 +325,14 @@ class GetDetalleLManagement extends SugarApi
 
     public function detalle_contactado($usuarios,$statusProduct){
 
-        $query = "SELECT a.id as idCuenta, a.name as nombreCuenta, usuario.asesor ,usuario.equipo_c , usuario.region_c ,a.assigned_user_id, ac.user_id_c,
+        $query = "SELECT a.id as idCuenta, a.name as nombreCuenta,aGpo.id as idEmpresarial, aGpo.name as gpoEmpresarial, usuario.asesor ,usuario.equipo_c , usuario.region_c ,a.assigned_user_id, ac.user_id_c,
         up.tipo_cuenta as tipoCuenta, up.subtipo_cuenta as subtipoCuenta, upc.fecha_asignacion_c as fecha_asignacion,
         up.name, upc.status_management_c as EstatusProducto, up.tipo_producto,
         CASE WHEN upc.fecha_asignacion_c < DATE_SUB(now(), INTERVAL 5 DAY) THEN 0
         WHEN upc.fecha_asignacion_c > DATE_SUB(now(), INTERVAL 5 DAY) THEN 1
         END AS semaforo
         FROM accounts a
+        LEFT JOIN accounts aGpo on a.parent_id=aGpo.id
         INNER JOIN accounts_cstm ac on ac.id_c = a.id and a.deleted = 0
         INNER JOIN accounts_uni_productos_1_c aup on aup.accounts_uni_productos_1accounts_ida = ac.id_c and aup.deleted = 0
         INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb and up.deleted = 0
@@ -351,7 +354,7 @@ class GetDetalleLManagement extends SugarApi
          while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
             $semaforoBool = ($row['semaforo']==1)?true:false;
          $records_in['records'][] = array(
-                'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 
+                'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'],'idEmpresarial' => $row['idEmpresarial'],'gpoEmpresarial'=>$row['gpoEmpresarial'],
                 'asesor' => $row['asesor'], 'equipo' => $row['equipo_c'], 'region' => $row['region_c'] , 'tipoCuenta' => $row['tipoCuenta'],
                 'subtipoCuenta' => $row['subtipoCuenta'], 'fecha_asignacion' => $row['fecha_asignacion'], 
                 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $semaforoBool
