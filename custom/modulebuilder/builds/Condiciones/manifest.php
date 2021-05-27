@@ -29,9 +29,9 @@ $manifest = array (
   'icon' => '',
   'is_uninstallable' => true,
   'name' => 'Condiciones',
-  'published_date' => '2021-05-25 18:58:17',
+  'published_date' => '2021-05-27 17:56:41',
   'type' => 'module',
-  'version' => 1621969098,
+  'version' => 1622138201,
   'remove_tables' => 'prompt',
 );
 

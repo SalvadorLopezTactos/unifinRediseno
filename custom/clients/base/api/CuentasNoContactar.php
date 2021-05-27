@@ -57,36 +57,37 @@ class CuentasNoContactar extends SugarApi
 
 
             $total_rows = <<<SQL
-SELECT id, name, tipodepersona_c, tipo_registro_cuenta_c, idcliente_c,tct_no_contactar_chk_c FROM accounts
+SELECT id, name, tipodepersona_c, tipo_registro_cuenta_c, idcliente_c, tct_no_contactar_chk_c, bloqueo_credito_c, bloqueo_cumple_c FROM accounts
 INNER JOIN accounts_cstm ON accounts_cstm.id_c = accounts.id
+INNER JOIN tct02_resumen_cstm ON tct02_resumen_cstm.id_c = accounts.id
 SQL;
             if ($user_id == "undefined") {
                 $total_rows .= " WHERE tipo_registro_cuenta_c IN({$tipos_query}) AND deleted =0";
             } else {
                 $total_rows .= " WHERE tipo_registro_cuenta_c IN({$tipos_query})
-AND (user_id_c='{$user_id}' OR user_id1_c='{$user_id}' OR user_id2_c='{$user_id}' OR user_id6_c='{$user_id}')
- AND deleted =0";
+AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id}' OR accounts_cstm.user_id2_c='{$user_id}' OR accounts_cstm.user_id6_c='{$user_id}')
+ AND deleted=0";
             }
             if (!empty($filtroCliente)) {
                 $total_rows .= " AND name LIKE '%{$filtroCliente}%' ";
             }
             $totalResult = $db->query($total_rows);
-
             $response['total'] = $totalResult->num_rows;
             while ($row = $db->fetchByAssoc($totalResult)) {
                 $response['full_cuentas'][] = $row['id'];
             }
 
             $query = <<<SQL
-SELECT id, name, tipodepersona_c, tipo_registro_cuenta_c, rfc_c, idcliente_c,tct_no_contactar_chk_c FROM accounts
+SELECT id, name, tipodepersona_c, tipo_registro_cuenta_c, rfc_c, idcliente_c, tct_no_contactar_chk_c, bloqueo_credito_c, bloqueo_cumple_c FROM accounts
 INNER JOIN accounts_cstm ON accounts_cstm.id_c = accounts.id
+INNER JOIN tct02_resumen_cstm ON tct02_resumen_cstm.id_c = accounts.id
 SQL;
             if ($user_id == "undefined") {
                 $query .= " WHERE tipo_registro_cuenta_c IN({$tipos_query}) AND deleted =0";
             } else {
                 $query .= " WHERE tipo_registro_cuenta_c IN({$tipos_query})
-AND (user_id_c='{$user_id}' OR user_id1_c='{$user_id}' OR user_id2_c='{$user_id}' OR user_id6_c='{$user_id}')
- AND deleted =0";
+AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id}' OR accounts_cstm.user_id2_c='{$user_id}' OR accounts_cstm.user_id6_c='{$user_id}')
+ AND deleted=0";
             }
 
             if (!empty($filtroCliente)) {
@@ -131,7 +132,7 @@ AND (user_id_c='{$user_id}' OR user_id1_c='{$user_id}' OR user_id2_c='{$user_id}
                 }else{
                     $account->tct_no_contactar_chk_c = 1;
                 }
-
+/*
                 //Leasing
                 $account->user_id_c = $id_user_assing;
                 //Crédito Automotriz
@@ -142,7 +143,7 @@ AND (user_id_c='{$user_id}' OR user_id1_c='{$user_id}' OR user_id2_c='{$user_id}
                 $account->user_id6_c = $id_user_assing;
                 //Uniclick
                 $account->user_id7_c = $id_user_assing;
-
+*/
                 $account->save();
 
                 array_push($cuentas_resumen['actualizados'],$cuentas[$i]);
