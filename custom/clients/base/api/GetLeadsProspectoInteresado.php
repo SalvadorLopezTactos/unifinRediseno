@@ -31,16 +31,17 @@ class GetLeadsProspectoInteresado extends SugarApi
                 //DASHLET PROSPECTOS INTERESADOS
                 $query = "SELECT
                 cuentas.id as idCuenta, cuentas.name as nombreCuenta, cuentas.assigned_user_id, cuentas.user_id_c, cuentas.fecha_asignacion_c as fechaAsignacion,
-                cuentas.tipo_cuenta as tipoCuenta, cuentas.subtipo_cuenta as subtipoCuenta, solicitudes.idOpp as idOpp, solicitudes.oppNombre as oppNombre,
+                cuentas.tipo_cuenta as tipoCuenta, cuentas.subtipo_cuenta as subtipoCuenta, cuentas.idEmpresarial,cuentas.gpoEmpresarial, solicitudes.idOpp as idOpp, solicitudes.oppNombre as oppNombre,
                 solicitudes.date_modified, solicitudes.daypas, solicitudes.tct_etapa_ddw_c, solicitudes.tct_estapa_subetapa_txf_c as oppEtapa, solicitudes.monto as monto,
                 cuentas.status_management_c as EstatusProducto, cuentas.tipo_producto, solicitudes.tipo_producto_c,
                 CASE WHEN solicitudes.date_modified < DATE_SUB(now(), INTERVAL 5 DAY) THEN 0
                 WHEN solicitudes.date_modified > DATE_SUB(now(), INTERVAL 5 DAY) THEN 1
                 END AS semaforo
                     FROM
-                    (SELECT a.id, a.name ,a.assigned_user_id, ac.user_id_c, ac.tipo_registro_c, up.tipo_cuenta,
+                    (SELECT a.id, a.name ,a.assigned_user_id,aGpo.id as idEmpresarial, aGpo.name as gpoEmpresarial,ac.user_id_c, ac.tipo_registro_c, up.tipo_cuenta,
                           up.subtipo_cuenta,up.name nameProd, up.tipo_producto, upc.status_management_c, upc.fecha_asignacion_c
                           FROM accounts a
+                          LEFT JOIN accounts aGpo on a.parent_id=aGpo.id
                           INNER JOIN accounts_cstm ac on ac.id_c = a.id
                           INNER JOIN accounts_uni_productos_1_c aup on aup.accounts_uni_productos_1accounts_ida = ac.id_c
                           INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb
@@ -86,6 +87,8 @@ class GetLeadsProspectoInteresado extends SugarApi
                     $records_in['records'][] = array(
                         'idCuenta' => $row['idCuenta'], 
                         'nombreCuenta' => $row['nombreCuenta'], 
+                        'idEmpresarial' => $row['idEmpresarial'],
+                        'gpoEmpresarial' => $row['gpoEmpresarial'],
                         'monto' => $row['monto'], 
                         'fechaAsignacion' => $row['fechaAsignacion'], 
                         'tipoCuenta' => $row['tipoCuenta'],
