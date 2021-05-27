@@ -13,6 +13,7 @@
     <thead>
         <tr>
             <td><b>Cuenta</b></td>
+            <td><b>Grupo Empresarial</b></td>
             <td><b>Monto</b></td>
             <td><b>Fecha asignación</b></td>
             <td><b>Etapa</b></td>
@@ -24,6 +25,7 @@
         {{#each dataAccSolicitudesActivo}}
         <tr>
             <td><a href="#Accounts/{{idCuenta}}" target="_blank">{{nombreCuenta}}</a></td>
+            <td>EL GRUPO EMPRESARIAL</td>
             <td>{{#if monto}}{{monto}}{{/if}}</td>
             <td>{{#if fechaAsignacion}}{{fechaAsignacion}}{{/if}}</td>
             <td>{{#if oppEtapa}}{{oppEtapa}}{{/if}}</td>            
