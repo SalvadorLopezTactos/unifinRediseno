@@ -58,7 +58,7 @@ class GetAccountProspectoContactado extends SugarApi
                 while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
 
                     $records_in['records'][] = array(
-                        'idCuenta' => $row['idCuenta'], 'cuenta' => $row['cuenta'], 'fechaAsignacion' => $row['fechaAsignacion'], 'tipoCuenta' => $row['tipoCuenta'],
+                        'idCuenta' => $row['idCuenta'], 'cuenta' => $row['cuenta'],'idEmpresarial' => $row['idEmpresarial'],'gpoEmpresarial'=>$row['gpoEmpresarial'], 'fechaAsignacion' => $row['fechaAsignacion'], 'tipoCuenta' => $row['tipoCuenta'],
                         'subtipoCuenta' => $row['subtipoCuenta'], 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $row['semaforo']
                     );
                 }
