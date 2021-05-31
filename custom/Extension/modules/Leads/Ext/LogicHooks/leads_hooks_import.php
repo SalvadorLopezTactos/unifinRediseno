@@ -31,6 +31,13 @@ $hook_array['before_save'][] = Array(
 
 $hook_array['before_save'][] = Array(
     4,
+    'hookleadcancelado',
+    'custom/modules/Leads/lead_cancelado_class.php',
+    'checkCancelado',
+    'subTipoCancelado'
+);
+$hook_array['before_save'][] = Array(
+    5,
     'Se eliminan los espacios superiores a uno en los campos principales de la Cuenta',
     'custom/modules/Leads/leads_validateString.php',
     'leads_validateString',
@@ -38,7 +45,7 @@ $hook_array['before_save'][] = Array(
 );
 
 $hook_array['before_save'][] = Array(
-    5,
+    6,
     'Se cambia puesto a Otro si viene vacio',
     'custom/modules/Leads/Lead_Hooks.php',
     'Lead_Hooks',
@@ -46,7 +53,7 @@ $hook_array['before_save'][] = Array(
 );
 
 $hook_array['before_save'][] = Array(
-    6,
+    7,
     'Se llena Macro Sector',
     'custom/modules/Leads/Lead_Hooks.php',
     'Lead_Hooks',
