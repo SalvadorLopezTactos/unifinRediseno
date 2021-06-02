@@ -17,6 +17,7 @@
         this._super("initialize", [options]);
         self=this;
         this.viewEnable=false;
+        this.numero_registros=0;
         this.getRegistrosAsignados();
 
         //this.getLeadsAplazadosCancelados();
@@ -38,6 +39,7 @@
                 App.alert.dismiss('obtieneAsignados');
                 var maximo_registros_list=App.lang.getAppListStrings('limite_maximo_asignados_list');
                 var maximo_registros=parseInt(maximo_registros_list["1"]);
+                self.numero_registros=data.total_asignados;
             	if(data.total_asignados<=maximo_registros){ //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
             		self.viewEnable='1';
             		self.getLeadsAplazadosCancelados();
