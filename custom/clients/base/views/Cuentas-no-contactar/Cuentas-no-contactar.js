@@ -7,8 +7,10 @@
         'click #next_offset': 'nextOffset',
         'click #previous_offset': 'previousOffset',
         'change .selected': 'selectedCheckbox',
-        'click #btn_no_contactar':'btnNoContactar',
-        'click #btn_read_csv':'procesarCSV'
+        'click #btn_no_contactar': 'btnNoContactar',
+        'click #btn_read_csv': 'procesarCSV',
+		'change #razon': 'buscaMotivo',
+		'change #motivo': 'buscaValida'
     },
 
     ids_cuentas:[],
@@ -17,29 +19,24 @@
         this._super("initialize", [options]);
         this.tipo_cuenta = app.lang.getAppListStrings('tipo_registro_cuenta_list');
 		this.condicion_list = app.lang.getAppListStrings('condicion_cliente_list');
-		console.log(this.condicion_list);
         delete this.tipo_cuenta[1];
         this.loadView = false;
         if(app.user.attributes.tct_no_contactar_chk_c=='1' || app.user.attributes.bloqueo_credito_c=='1' || app.user.attributes.bloqueo_cumple_c=='1'){
-            if(app.user.attributes.tct_no_contactar_chk_c=='1') {
-				this.bloqueo_credito_c=1;
-				this.bloqueo_cumple_c=1;
-			}
-            if(app.user.attributes.bloqueo_credito_c=='1') {
-				this.tct_no_contactar_chk_c=1;
-				this.bloqueo_cumple_c=1;
-			}
-            if(app.user.attributes.bloqueo_cumple_c=='1') {
-				this.tct_no_contactar_chk_c=1;
-				this.bloqueo_credito_c=1;
-			}
 			this.loadView = true;
-            this.render();
         }else{
             var route = app.router.buildRoute(this.module, null, '');
             app.router.navigate(route, {trigger: true});
         }
+		this.selected = "";
         this.ids_cuentas=[];
+		this.Parame = {
+            "condicion":"",
+            "razon":"",
+			"motivo":"",
+			"detalle":"",
+			"ingesta":"",
+			"valida":""
+        };
     },
 
     _render: function () {
@@ -58,7 +55,46 @@
         this.$("#tipo_de_cuenta").select2('val', tipos_cuenta);
     },
 
-    buscarCuentasNoContactar:function () {
+    condiciones:function () {
+        if(app.user.attributes.tct_no_contactar_chk_c=='1' || app.user.attributes.bloqueo_credito_c=='1' || app.user.attributes.bloqueo_cumple_c=='1'){
+            if(app.user.attributes.tct_no_contactar_chk_c=='1') {
+				this.condicion=1;
+				this.bloqueo_credito_c=1;
+				this.bloqueo_cumple_c=1;
+			}
+            if(app.user.attributes.bloqueo_credito_c=='1') {
+				this.condicion=2;
+				this.tct_no_contactar_chk_c=1;
+				this.bloqueo_cumple_c=1;
+			}
+            if(app.user.attributes.bloqueo_cumple_c=='1') {
+				this.condicion=3;
+				this.tct_no_contactar_chk_c=1;
+				this.bloqueo_credito_c=1;
+			}
+			//Busca valores
+			var strUrl = 'tct4_Condiciones?filter[][condicion]='+this.condicion;
+			app.api.call("GET", app.api.buildURL(strUrl), null, {
+				success: _.bind(function (data) {
+					if(data.records.length > 0) {
+						this.data = data;
+						document.getElementById("condicion").value = this.condicion;
+						for(var i = 0; i < data.records.length; i++) {
+							document.getElementById("razon").options[i]=new Option(app.lang.getAppListStrings('razon_list')[data.records[i].razon],data.records[i].razon);
+						}
+						if(data.records.length > 1) {
+							document.getElementById("razon").options[i]=new Option('','');
+							document.getElementById("razon").value = "";
+						}
+						document.getElementById("ingesta").options[0]=new Option(app.user.attributes.full_name,app.user.attributes.id);
+						if(data.records.length == 1) this.buscaMotivo();
+					}
+				}, this)
+			});
+        }
+	},
+	
+	buscarCuentasNoContactar:function () {
         //Inicializar arreglo de cuentas cada que se busca por un filtro, para evitar actualizar cuentas que anteriormente se seleccionaron
         this.ids_cuentas=[];
         var assigneUsr = this.model.get('users_accounts_1users_ida');
@@ -101,8 +137,6 @@
             $('#processing').show();
             app.api.call("read", app.api.buildURL("CuentasNoContactar/" + assigneUsr, null, null, {}), null, {
                 success: _.bind(function (data) {
-                    console.log(typeof data);
-                    console.log(data);
                     if (data.total <= 0) {
                         var nombre_usuario=$('input[name="users_accounts_1_name"]').parent().find('div.ellipsis_inline').attr('title');
                         var alertOptions = {
@@ -121,12 +155,13 @@
                             if(this.cuentas[i].tct_no_contactar_chk_c==0) this.cuentas[i].tct_no_contactar_chk_c=null;
 							if(this.cuentas[i].bloqueo_credito_c==0) this.cuentas[i].bloqueo_credito_c=null;
 							if(this.cuentas[i].bloqueo_cumple_c==0) this.cuentas[i].bloqueo_cumple_c=null;
-                        }
+						}
                     }
                     this.total = data.total;
                     this.total_cuentas = data.total_cuentas;
                     //Se obtiene valor de Tipo de Cuenta, para que persista al aplicar render
                     var valores=$("#tipo_de_cuenta").select2('val');
+					this.condiciones();
                     this.render();
                     $("#tipo_de_cuenta").select2('val',valores);
                     if(to_set > this.total){
@@ -147,6 +182,8 @@
                     $("#offset_value").attr("from_set", from_set);
                     $("#offset_value").attr("to_set", to_set);
                     $("#filtroCliente").val(filtroCliente);
+					document.getElementById("condicion").disabled=true;
+					document.getElementById("ingesta").disabled=true;
                 }, this)
             });
         }else{
@@ -164,17 +201,14 @@
         var next_from_set = parseInt(from_set) + 20;
         var to_set = $("#offset_value").attr("to_set");
         var next_to_set = parseInt(to_set) + 20;
-
         if(next_to_set > this.total){
             next_to_set = this.total;
-
             if(from_set > 0){
                 next_from_set = from_set;
             }else{
                 next_from_set = next_from_set;
             }
         }
-
         $("#offset_value").html(current_set);
         $("#offset_value").attr("from_set", next_from_set);
         $("#offset_value").attr("to_set", next_to_set);
@@ -187,21 +221,121 @@
         var next_from_set = parseInt(from_set) - 20;
         var to_set = $("#offset_value").attr("to_set");
         var next_to_set = parseInt(to_set) - 20;
-
         if(next_from_set < 0){
             next_from_set = 0;
             next_to_set = 20;
         }
-
         $("#offset_value").html(current_set);
         $("#offset_value").attr("from_set", next_from_set);
         $("#offset_value").attr("to_set", next_to_set);
         this.buscarCuentasNoContactar();
     },
 
+    buscaMotivo:function (e) {
+		var contador = 0;
+		document.getElementById("motivo").options.length=0;
+		for(var i = 0; i < this.data.records.length; i++) {
+			if($("#razon").val() == this.data.records[i].razon && this.data.records[i].motivo) {
+				document.getElementById("motivo").options[i]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[this.data.records[i].motivo],this.data.records[i].motivo);
+				this.detalle = this.data.records[i].detalle;
+				contador++;
+			}
+		}
+		if(contador < 2) {
+			document.getElementById("valida").options.length=0;
+			for(var i = 0; i < this.data.records.length; i++) {
+				if($("#razon").val() == this.data.records[i].razon) {
+					this.detalle = this.data.records[i].detalle;
+					app.api.call("read", app.api.buildURL("Teams/" + this.data.records[i].user_id_c + "/link/users", null, null, {}), null, {
+						success: _.bind(function (data1) {
+							if (data1.records) {
+								for (var j = 0; j < data1.records.length; j++) {
+									document.getElementById("valida").options[j]=new Option(data1.records[j].full_name,data1.records[j].id);
+								}
+							}
+						}, this)
+					});
+				}
+			}
+		}
+    },
+	
+    buscaValida:function (e) {
+		document.getElementById("valida").options.length=0;
+		for(var i = 0; i < this.data.records.length; i++) {
+			if($("#motivo").val() == this.data.records[i].motivo) {
+				this.detalle = this.data.records[i].detalle;
+				app.api.call("read", app.api.buildURL("Teams/" + this.data.records[i].user_id_c + "/link/users", null, null, {}), null, {
+					success: _.bind(function (data1) {
+						if (data1.records) {
+							for (var j = 0; j < data1.records.length; j++) {
+								document.getElementById("valida").options[j]=new Option(data1.records[j].full_name,data1.records[j].id);
+							}
+						}
+					}, this)
+				});
+			}
+		}
+    },
+
     selectedCheckbox:function (e) {
+		var $input = this.$(e.currentTarget);
+        this.selected = $($input).attr('name');
         var id_cuenta=$(e.currentTarget).val();
         var indexFind=this.ids_cuentas.indexOf(id_cuenta);
+		//Busca datos de la cuenta seleccionada
+		app.api.call("read", app.api.buildURL("tct02_Resumen/" + id_cuenta, null, null, {}), null, {
+			success: _.bind(function (data) {
+				if (data.condicion_cliente_c) {
+					document.getElementById("condicion").value=data.condicion_cliente_c;
+					document.getElementById("razon").options[0]=new Option(app.lang.getAppListStrings('razon_list')[data.razon_c],data.razon_c);
+					document.getElementById("razon").value=data.razon_c;
+					document.getElementById("razon").disabled=true;
+					document.getElementById("motivo").options[0]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[data.motivo_c],data.motivo_c);
+					document.getElementById("motivo").value=data.motivo_c;
+					document.getElementById("motivo").disabled=true;
+					document.getElementById("detalle").value = data.detalle_c;
+					document.getElementById("detalle").disabled=true;
+					app.api.call("read", app.api.buildURL("Users/" + data.user_id_c, null, null, {}), null, {
+						success: _.bind(function (data1) {
+							if (data1.full_name) {
+								document.getElementById("ingesta").options[0]=new Option(data1.full_name,data1.id);
+								document.getElementById("ingesta").value = data1.id;
+							}
+						}, this)
+					});
+					app.api.call("read", app.api.buildURL("Users/" + data.user_id1_c, null, null, {}), null, {
+						success: _.bind(function (data2) {
+							if (data2.full_name) {
+								document.getElementById("valida").options[0]=new Option(data2.full_name,data2.id);
+								document.getElementById("valida").value = data2.id;
+								document.getElementById("valida").disabled=true;
+							}
+						}, this)
+					});
+				} else {
+					document.getElementById("condicion").value = this.condicion;
+					document.getElementById("razon").options.length=0;
+					for(var i = 0; i < this.data.records.length; i++) {
+						document.getElementById("razon").options[i]=new Option(app.lang.getAppListStrings('razon_list')[this.data.records[i].razon],this.data.records[i].razon);
+					}
+					if(this.data.records.length > 1) {
+						document.getElementById("razon").options[i]=new Option('','');
+						document.getElementById("razon").value = "";
+					}
+					document.getElementById("razon").disabled=false;
+					document.getElementById("ingesta").options.length=0;
+					document.getElementById("ingesta").options[0]=new Option(app.user.attributes.full_name,app.user.attributes.id);
+					document.getElementById("motivo").options.length=0;
+					document.getElementById("valida").options.length=0;
+					if(this.data.records.length == 1) this.buscaMotivo();
+					document.getElementById("detalle").value = "";
+					document.getElementById("motivo").disabled=false;
+					document.getElementById("detalle").disabled=false;
+					document.getElementById("valida").disabled=false;
+				}
+			}, this)
+		});
         //Antes de agregar al arreglo, comprobar que existe, en caso positivo, se elimina
         if(this.ids_cuentas.length > 0 && indexFind != -1){
             this.ids_cuentas.splice(indexFind,1);
@@ -218,24 +352,66 @@
     },
 
     btnNoContactar:function(){
-        $('#btn_no_contactar').eq(0).addClass('disabled')
-        $('#btn_no_contactar').attr('style','pointer-events:none');
-        var Params = {
-            'cuentas':this.ids_cuentas
-        };
-        var urlNoContactar = app.api.buildURL("ActualizarCuentasNoContactar", '', {}, {});
-        $('#successful').hide();
-        $('#processing').show();
-        app.api.call("create", urlNoContactar, {data: Params}, {
-            success: _.bind(function (data) {
-                 $('#processing').hide();
-                 this.render();
-                 $('.cuentasContainer').hide();
-                 $('#successful').show();
-                 $('#btn_no_contactar').eq(0).removeClass('disabled')
-                 $('#btn_no_contactar').attr('style','');                 
-            }, this)
-        });
+		var contador = 0;
+		var errorMsg = '';
+        if($("#razon").val() == "") {
+			contador++;
+            errorMsg += '<br><b>Razón</b>';
+            $('#razon').css('border-color', 'red');
+        } else {
+            $('#razon').css('border-color', '');
+        }
+        if($("#valida").val() == "" || $("#valida").val() == null) {
+			contador++;
+            errorMsg += '<br><b>Responsable Validación</b>';
+            $('#valida').css('border-color', 'red');
+        } else {
+            $('#valida').css('border-color', '');
+        }
+        if($("#detalle").val() == "" && this.detalle) {
+			contador++;
+            errorMsg += '<br><b>Detalle</b>';
+            $('#detalle').css('border-color', 'red');
+        } else {
+            $('#detalle').css('border-color', '');
+        }
+        if(contador>=1) {
+            errorMsg = 'Hace falta completar la siguiente información para poder continuar</b>:' + errorMsg;
+            app.alert.show('error', {
+                level: 'error',
+                autoClose: false,
+                messages: errorMsg
+            });
+        } else {
+			$('#btn_no_contactar').eq(0).addClass('disabled')
+			$('#btn_no_contactar').attr('style','pointer-events:none');
+			this.Parame = {
+				"condicion":$("#condicion").val(),
+				"razon":$("#razon").val(),
+				"motivo":$("#motivo").val(),
+				"detalle":$("#detalle").val(),
+				"ingesta":$("#ingesta").val(),
+				"valida":$("#valida").val()
+			};
+			var Params = {
+				'cuentas':this.ids_cuentas,
+				'parame':this.Parame,
+				'selected':this.selected
+			};
+			$('#successful').hide();
+			$('#processing').show();
+			var urlNoContactar = app.api.buildURL("ActualizarCuentasNoContactar", '', {}, {});
+			app.api.call("create", urlNoContactar, {data: Params}, {
+				success: _.bind(function (data) {
+					 $('#processing').hide();
+					 this.render();
+					 $('.cuentasContainer').hide();
+					 $('#successful').show();
+					 $('#btn_no_contactar').eq(0).removeClass('disabled')
+					 $('#btn_no_contactar').attr('style','');                 
+				}, this)
+			});
+		}
     },
 
     procesarCSV:function () {
