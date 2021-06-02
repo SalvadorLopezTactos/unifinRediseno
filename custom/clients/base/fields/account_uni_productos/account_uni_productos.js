@@ -124,6 +124,9 @@
 
     _render: function () {
         this._super("_render");
+        
+        this.$("div.record-label[data-name='accounts_uni_productos']").attr('style', 'display:none;');
+        
         $("span.normal[data-fieldname='account_uni_productos']").find('.row-fluid > .record-label').attr('style', 'display:none;');
         //campo custom account_uni_productos
         this.cargalistas(); //funcion de cargar listas
@@ -246,6 +249,7 @@
                 $('.l_nv_razon').show(); //MUESTRA - CLASE Razón de Lead no viable LEASING
             }
         }
+        
     },
     //FUNCION DE PRODUCTO LEASING PARA LAS DEPENDENCIAS DE LOS CAMPOS
     dependenciasLeasing: function () {
@@ -295,6 +299,15 @@
                 $('.l_nv_razon_ni').hide(); //LISTA Razón No se encuentra interesado
                 $('.list_l_nv_razon_ni').select2('val', ""); //LISTA Razón No se encuentra interesado
             }
+        }
+
+        if ($('.list_l_estatus_lm option:selected').text() == "Sin Oportunidad" || $('.list_l_estatus_lm option:selected').text() == "No interesado") {
+            $('.l_nv_razon_ni').show();
+            $('.l_nv_razon_ni').show();
+            $('.l_nv_razon_ni').show();
+            $('.l_nv_razon_ni').show();
+            $('.l_nv_razon_ni').show();
+            $('.l_nv_razon_ni').show();
         }
     },
 
@@ -650,8 +663,8 @@
                         cont_uni_p.ResumenProductos.leasing.no_viable_razon_cf = $('.list_l_nv_razon_cf').select2('val'); //lista Condiciones Financieras Leasing
                         cont_uni_p.ResumenProductos.leasing.no_viable_otro_c = $('.txt_l_nv_otro').val().trim(); //texto ¿Qué producto? Leasing
                         cont_uni_p.ResumenProductos.leasing.no_viable_razon_ni = $('.list_l_nv_razon_ni').select2('val'); //lista Razón No se encuentra interesado Leasing
-                        this.tipoProducto.leasing = cont_uni_p.ResumenProductos.leasing;
                     }
+
                 }
                 //Mapea los campos del modulo UNI PRODUCTOS con producto FACTORAJE en el objeto cont_uni_p.leadNoViable
                 if ($('.chk_f_nv')[0] != undefined) {
@@ -920,7 +933,9 @@
         cont_uni_p.razones_cf_list = app.lang.getAppListStrings('razones_cf_list');
         cont_uni_p.tct_razon_ni_l_ddw_c_list = app.lang.getAppListStrings('tct_razon_ni_l_ddw_c_list');
         cont_uni_p.canales_ddw_list = app.lang.getAppListStrings('canal_list');
-
+        cont_uni_p.status_management_list = app.lang.getAppListStrings('status_management_list');
+        cont_uni_p.razon_list = app.lang.getAppListStrings('razon_list');
+        cont_uni_p.motivo_bloqueo_list = app.lang.getAppListStrings('motivo_bloqueo_list');
     },
 
     //Funcion que acepta solo letras (a-z), puntos(.) y comas(,)

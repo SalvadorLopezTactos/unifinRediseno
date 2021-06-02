@@ -51,9 +51,9 @@ class LeadNV_hook
             $beanNV->tct_razon_cf_ca_ddw_c = $leadNoViale['razoncfca'];
             $beanNV->tct_razon_ni_ca_ddw_c = $leadNoViale['razonnica'];
             $beanNV->tct_que_producto_ca_txf_c = $leadNoViale['queprodca'];
-            $beanNV->user_id_c= $leadNoViale['PromotorLeasing'];
-            $beanNV->user_id1_c= $leadNoViale['PromotorFactoraje'];
-            $beanNV->user_id2_c= $leadNoViale['PromotorCreditA'];
+            //$beanNV->user_id_c= $leadNoViale['PromotorLeasing'];
+            //$beanNV->user_id1_c= $leadNoViale['PromotorFactoraje'];
+            //$beanNV->user_id2_c= $leadNoViale['PromotorCreditA'];
             $beanNV->name = $bean->name;
             $beanNV->save();
             // $GLOBALS['log']->fatal("Termina de guardar datos de Lead no Viable");

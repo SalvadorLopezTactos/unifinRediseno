@@ -5583,6 +5583,7 @@
                     Productos[key]['no_viable'] = (Productos[key]['no_viable'] != "0") ? true : false;
                     Productos[key]['multilinea_c'] = (Productos[key]['multilinea_c'] == "1") ? true : false;
                     Productos[key]['exclu_precalif_c'] = (Productos[key]['exclu_precalif_c'] == "1") ? true : false;
+                    Productos[key]['visible_sinoportunidad'] = (Productos[key]['status_management_c'] == "4" || Productos[key]['status_management_c'] == "5") ? true : false;
 
                     switch (tipoProducto) {
                         case "1": //Leasing
