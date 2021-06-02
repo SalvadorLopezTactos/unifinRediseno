@@ -286,34 +286,104 @@
 		//Busca datos de la cuenta seleccionada
 		app.api.call("read", app.api.buildURL("tct02_Resumen/" + id_cuenta, null, null, {}), null, {
 			success: _.bind(function (data) {
-				if (data.condicion_cliente_c) {
-					document.getElementById("condicion").value=data.condicion_cliente_c;
-					document.getElementById("razon").options[0]=new Option(app.lang.getAppListStrings('razon_list')[data.razon_c],data.razon_c);
-					document.getElementById("razon").value=data.razon_c;
-					document.getElementById("razon").disabled=true;
-					document.getElementById("motivo").options[0]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[data.motivo_c],data.motivo_c);
-					document.getElementById("motivo").value=data.motivo_c;
-					document.getElementById("motivo").disabled=true;
-					document.getElementById("detalle").value = data.detalle_c;
-					document.getElementById("detalle").disabled=true;
-					app.api.call("read", app.api.buildURL("Users/" + data.user_id_c, null, null, {}), null, {
-						success: _.bind(function (data1) {
-							if (data1.full_name) {
-								document.getElementById("ingesta").options[0]=new Option(data1.full_name,data1.id);
-								document.getElementById("ingesta").value = data1.id;
-							}
-						}, this)
-					});
-					app.api.call("read", app.api.buildURL("Users/" + data.user_id1_c, null, null, {}), null, {
-						success: _.bind(function (data2) {
-							if (data2.full_name) {
-								document.getElementById("valida").options[0]=new Option(data2.full_name,data2.id);
-								document.getElementById("valida").value = data2.id;
-								document.getElementById("valida").disabled=true;
-							}
-						}, this)
-					});
-				} else {
+				var limpia = false;
+				if(this.selected == "selected1") {
+					if(data.condicion_cliente_c) {
+						document.getElementById("condicion").value=data.condicion_cliente_c;
+						document.getElementById("razon").options[0]=new Option(app.lang.getAppListStrings('razon_list')[data.razon_c],data.razon_c);
+						document.getElementById("razon").value=data.razon_c;
+						document.getElementById("razon").disabled=true;
+						document.getElementById("motivo").options[0]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[data.motivo_c],data.motivo_c);
+						document.getElementById("motivo").value=data.motivo_c;
+						document.getElementById("motivo").disabled=true;
+						document.getElementById("detalle").value = data.detalle_c;
+						document.getElementById("detalle").disabled=true;
+						app.api.call("read", app.api.buildURL("Users/" + data.user_id_c, null, null, {}), null, {
+							success: _.bind(function (data1) {
+								if (data1.full_name) {
+									document.getElementById("ingesta").options[0]=new Option(data1.full_name,data1.id);
+									document.getElementById("ingesta").value = data1.id;
+								}
+							}, this)
+						});
+						app.api.call("read", app.api.buildURL("Users/" + data.user_id1_c, null, null, {}), null, {
+							success: _.bind(function (data2) {
+								if (data2.full_name) {
+									document.getElementById("valida").options[0]=new Option(data2.full_name,data2.id);
+									document.getElementById("valida").value = data2.id;
+									document.getElementById("valida").disabled=true;
+								}
+							}, this)
+						});
+					} else {
+						limpia = true;
+					}
+				}
+				if(this.selected == "selected2") {
+					if(data.condicion2_c) {
+						document.getElementById("condicion").value=data.condicion2_c;
+						document.getElementById("razon").options[0]=new Option(app.lang.getAppListStrings('razon_list')[data.razon2_c],data.razon2_c);
+						document.getElementById("razon").value=data.razon2_c;
+						document.getElementById("razon").disabled=true;
+						document.getElementById("motivo").options[0]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[data.motivo2_c],data.motivo2_c);
+						document.getElementById("motivo").value=data.motivo2_c;
+						document.getElementById("motivo").disabled=true;
+						document.getElementById("detalle").value = data.detalle2_c;
+						document.getElementById("detalle").disabled=true;
+						app.api.call("read", app.api.buildURL("Users/" + data.user_id2_c, null, null, {}), null, {
+							success: _.bind(function (data3) {
+								if (data3.full_name) {
+									document.getElementById("ingesta").options[0]=new Option(data3.full_name,data3.id);
+									document.getElementById("ingesta").value = data3.id;
+								}
+							}, this)
+						});
+						app.api.call("read", app.api.buildURL("Users/" + data.user_id3_c, null, null, {}), null, {
+							success: _.bind(function (data4) {
+								if (data4.full_name) {
+									document.getElementById("valida").options[0]=new Option(data4.full_name,data4.id);
+									document.getElementById("valida").value = data4.id;
+									document.getElementById("valida").disabled=true;
+								}
+							}, this)
+						});
+					} else {
+						limpia = true;
+					}
+				}
+				if(this.selected == "selected3") {
+					if(data.condicion3_c) {
+						document.getElementById("condicion").value=data.condicion3_c;
+						document.getElementById("razon").options[0]=new Option(app.lang.getAppListStrings('razon_list')[data.razon3_c],data.razon3_c);
+						document.getElementById("razon").value=data.razon3_c;
+						document.getElementById("razon").disabled=true;
+						document.getElementById("motivo").options[0]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[data.motivo3_c],data.motivo3_c);
+						document.getElementById("motivo").value=data.motivo3_c;
+						document.getElementById("motivo").disabled=true;
+						document.getElementById("detalle").value = data.detalle3_c;
+						document.getElementById("detalle").disabled=true;
+						app.api.call("read", app.api.buildURL("Users/" + data.user_id4_c, null, null, {}), null, {
+							success: _.bind(function (data5) {
+								if (data5.full_name) {
+									document.getElementById("ingesta").options[0]=new Option(data5.full_name,data5.id);
+									document.getElementById("ingesta").value = data5.id;
+								}
+							}, this)
+						});
+						app.api.call("read", app.api.buildURL("Users/" + data.user_id5_c, null, null, {}), null, {
+							success: _.bind(function (data6) {
+								if (data6.full_name) {
+									document.getElementById("valida").options[0]=new Option(data6.full_name,data6.id);
+									document.getElementById("valida").value = data6.id;
+									document.getElementById("valida").disabled=true;
+								}
+							}, this)
+						});
+					} else {
+						limpia = true;
+					}
+				}
+				if(limpia) {
 					document.getElementById("condicion").value = this.condicion;
 					document.getElementById("razon").options.length=0;
 					for(var i = 0; i < this.data.records.length; i++) {

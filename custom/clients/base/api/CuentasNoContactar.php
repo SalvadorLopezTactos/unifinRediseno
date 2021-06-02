@@ -109,23 +109,24 @@ AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id
     public function updateCuentasNoContactar($api, $args)
     {
         global $db, $current_user;
-        //Obtener los ids de las Cuentas a actualizar
         $cuentas = $args['data']['cuentas'];
-		//Obtener parametros
 		$parame = $args['data']['parame'];
 		$selected = $args['data']['selected'];
         $cuentas_resumen['actualizados']=array();
         $cuentas_resumen['no_actualizados']=array();
         $IntValue = new DropdownValuesHelper();
         $callApi = new UnifinAPI();
+		$bloqueo = 0;
         for ($i = 0; $i < count($cuentas); $i++) {
 			$account = BeanFactory::getBean('Accounts', trim($cuentas[$i]), array('disable_row_level_security' => true));
 			if ($account->id != null) {
+				$cuenta = $account->name;
 				if(trim($selected) == "selected1") {
 					if($account->fetched_row['tct_no_contactar_chk_c']==1){
 						$account->tct_no_contactar_chk_c = 0;
 					}else{
 						$account->tct_no_contactar_chk_c = 1;
+						$bloqueo = 1;
 					}
 					$account->save();
 				}
@@ -136,6 +137,7 @@ AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id
 							$resumen->bloqueo_credito_c = 0;
 						}else{
 							$resumen->bloqueo_credito_c = 1;
+							$bloqueo = 1;
 						}
 					}
 					if(trim($selected) == "selected3") {
@@ -143,15 +145,46 @@ AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id
 							$resumen->bloqueo_cumple_c = 0;
 						}else{
 							$resumen->bloqueo_cumple_c = 1;
+							$bloqueo = 1;
 						}
 					}
-					$resumen->condicion_cliente_c = $parame["condicion"];
-					$resumen->razon_c = $parame["razon"];
-					$resumen->motivo_c = $parame["motivo"];
-					$resumen->detalle_c = $parame["detalle"];
-					$resumen->user_id_c = $parame["ingesta"];
-					$resumen->user_id1_c = $parame["valida"];
-					$resumen->save();
+					if($bloqueo) {
+						$resumen->condicion_cliente_c = $parame["condicion"];
+						$resumen->razon_c = $parame["razon"];
+						$resumen->motivo_c = $parame["motivo"];
+						$resumen->detalle_c = $parame["detalle"];
+						$resumen->user_id_c = $parame["ingesta"];
+						$resumen->user_id1_c = $parame["valida"];
+						$resumen->save();
+						//Notifica bloqueo al Resposable de validación
+						global $app_list_strings;
+						require_once 'include/SugarPHPMailer.php';
+						require_once 'modules/Administration/Administration.php';
+						$ingesta = BeanFactory::retrieveBean('Users', $parame["ingesta"]);
+						$valida = BeanFactory::retrieveBean('Users', $parame["valida"]);
+						$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Hola <b>'.$valida->nombre_completo_c.'</b>
+						<br><br>Se le informa que la cuenta <b>'.$cuenta.'</b> ha sido bloqueada por <b>'.$ingesta->nombre_completo_c.'</b>
+						<br><br>La razón de bloqueo es: <b>'.$app_list_strings['razon_list'][$parame["razon"]].'</b>
+						<br><br>y el detalle: <b>'.$parame["detalle"].'</b>
+						<br><br>Se requiere de su aprobación para bloquear definitivamente la cuenta.
+						<br><br>Saludos.</font></p>';
+						$mailer = MailerFactory::getSystemDefaultMailer();
+						$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+						$mailer->setSubject('Cuenta '.$cuenta.' bloqueada por '.$ingesta->nombre_completo_c);
+						$body = trim($mailHTML);
+						$mailer->setHtmlBody($body);
+						$mailer->clearRecipients();
+						$mailer->addRecipientsTo(new EmailIdentity($valida->email1, $valida->first_name . ' ' . $valida->last_name));
+						$result = $mailer->send();
+					}else{
+						$resumen->condicion_cliente_c = "";
+						$resumen->razon_c = "";
+						$resumen->motivo_c = "";
+						$resumen->detalle_c = "";
+						$resumen->user_id_c = "";
+						$resumen->user_id1_c = "";
+						$resumen->save();
+					}
 				}
                 array_push($cuentas_resumen['actualizados'],$cuentas[$i]);
             }else{
