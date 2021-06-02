@@ -57,36 +57,37 @@ class CuentasNoContactar extends SugarApi
 
 
             $total_rows = <<<SQL
-SELECT id, name, tipodepersona_c, tipo_registro_cuenta_c, idcliente_c,tct_no_contactar_chk_c FROM accounts
+SELECT id, name, tipodepersona_c, tipo_registro_cuenta_c, idcliente_c, tct_no_contactar_chk_c, bloqueo_credito_c, bloqueo_cumple_c FROM accounts
 INNER JOIN accounts_cstm ON accounts_cstm.id_c = accounts.id
+INNER JOIN tct02_resumen_cstm ON tct02_resumen_cstm.id_c = accounts.id
 SQL;
             if ($user_id == "undefined") {
                 $total_rows .= " WHERE tipo_registro_cuenta_c IN({$tipos_query}) AND deleted =0";
             } else {
                 $total_rows .= " WHERE tipo_registro_cuenta_c IN({$tipos_query})
-AND (user_id_c='{$user_id}' OR user_id1_c='{$user_id}' OR user_id2_c='{$user_id}' OR user_id6_c='{$user_id}')
- AND deleted =0";
+AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id}' OR accounts_cstm.user_id2_c='{$user_id}' OR accounts_cstm.user_id6_c='{$user_id}')
+ AND deleted=0";
             }
             if (!empty($filtroCliente)) {
                 $total_rows .= " AND name LIKE '%{$filtroCliente}%' ";
             }
             $totalResult = $db->query($total_rows);
-
             $response['total'] = $totalResult->num_rows;
             while ($row = $db->fetchByAssoc($totalResult)) {
                 $response['full_cuentas'][] = $row['id'];
             }
 
             $query = <<<SQL
-SELECT id, name, tipodepersona_c, tipo_registro_cuenta_c, rfc_c, idcliente_c,tct_no_contactar_chk_c FROM accounts
+SELECT id, name, tipodepersona_c, tipo_registro_cuenta_c, rfc_c, idcliente_c, tct_no_contactar_chk_c, bloqueo_credito_c, bloqueo_cumple_c FROM accounts
 INNER JOIN accounts_cstm ON accounts_cstm.id_c = accounts.id
+INNER JOIN tct02_resumen_cstm ON tct02_resumen_cstm.id_c = accounts.id
 SQL;
             if ($user_id == "undefined") {
                 $query .= " WHERE tipo_registro_cuenta_c IN({$tipos_query}) AND deleted =0";
             } else {
                 $query .= " WHERE tipo_registro_cuenta_c IN({$tipos_query})
-AND (user_id_c='{$user_id}' OR user_id1_c='{$user_id}' OR user_id2_c='{$user_id}' OR user_id6_c='{$user_id}')
- AND deleted =0";
+AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id}' OR accounts_cstm.user_id2_c='{$user_id}' OR accounts_cstm.user_id6_c='{$user_id}')
+ AND deleted=0";
             }
 
             if (!empty($filtroCliente)) {
@@ -107,113 +108,56 @@ AND (user_id_c='{$user_id}' OR user_id1_c='{$user_id}' OR user_id2_c='{$user_id}
 
     public function updateCuentasNoContactar($api, $args)
     {
-
         global $db, $current_user;
-
         //Obtener los ids de las Cuentas a actualizar
         $cuentas = $args['data']['cuentas'];
+		//Obtener parametros
+		$parame = $args['data']['parame'];
+		$selected = $args['data']['selected'];
         $cuentas_resumen['actualizados']=array();
         $cuentas_resumen['no_actualizados']=array();
-        //Obtener id de usuario 9 - Bloqueado
-        $id_user_assing = '36af9462-37e6-11ea-baed-a44e314beb18';
-
-
         $IntValue = new DropdownValuesHelper();
         $callApi = new UnifinAPI();
-
         for ($i = 0; $i < count($cuentas); $i++) {
-
-            $account = BeanFactory::getBean('Accounts', trim($cuentas[$i]), array('disable_row_level_security' => true));
-            if ($account->id != null) {
-                
-                if($account->fetched_row['tct_no_contactar_chk_c']==1){
-                    $account->tct_no_contactar_chk_c = 0;
-                }else{
-                    $account->tct_no_contactar_chk_c = 1;
-                }
-
-                //Leasing
-                $account->user_id_c = $id_user_assing;
-                //Crédito Automotriz
-                $account->user_id2_c = $id_user_assing;
-                //Factoraje
-                $account->user_id1_c = $id_user_assing;
-                //Fleet
-                $account->user_id6_c = $id_user_assing;
-                //Uniclick
-                $account->user_id7_c = $id_user_assing;
-
-                $account->save();
-
+			$account = BeanFactory::getBean('Accounts', trim($cuentas[$i]), array('disable_row_level_security' => true));
+			if ($account->id != null) {
+				if(trim($selected) == "selected1") {
+					if($account->fetched_row['tct_no_contactar_chk_c']==1){
+						$account->tct_no_contactar_chk_c = 0;
+					}else{
+						$account->tct_no_contactar_chk_c = 1;
+					}
+					$account->save();
+				}
+				$resumen = BeanFactory::getBean('tct02_Resumen', trim($cuentas[$i]), array('disable_row_level_security' => true));
+				if ($resumen->id != null) {
+					if(trim($selected) == "selected2") {
+						if($resumen->fetched_row['bloqueo_credito_c']==1){
+							$resumen->bloqueo_credito_c = 0;
+						}else{
+							$resumen->bloqueo_credito_c = 1;
+						}
+					}
+					if(trim($selected) == "selected3") {
+						if($resumen->fetched_row['bloqueo_cumple_c']==1){
+							$resumen->bloqueo_cumple_c = 0;
+						}else{
+							$resumen->bloqueo_cumple_c = 1;
+						}
+					}
+					$resumen->condicion_cliente_c = $parame["condicion"];
+					$resumen->razon_c = $parame["razon"];
+					$resumen->motivo_c = $parame["motivo"];
+					$resumen->detalle_c = $parame["detalle"];
+					$resumen->user_id_c = $parame["ingesta"];
+					$resumen->user_id1_c = $parame["valida"];
+					$resumen->save();
+				}
                 array_push($cuentas_resumen['actualizados'],$cuentas[$i]);
-
-                /*Actualizar solicitudes*/
-                $query = <<<SQL
-UPDATE opportunities
-INNER JOIN accounts_opportunities ON accounts_opportunities.opportunity_id = opportunities.id AND accounts_opportunities.deleted = 0
-INNER JOIN accounts ON accounts.id = accounts_opportunities.account_id AND accounts.deleted = 0
-INNER JOIN opportunities_cstm cs ON opportunities.id = cs.id_c
-SET opportunities.assigned_user_id = '{$id_user_assing}'
-WHERE accounts.id = '{$cuentas[$i]}'
-SQL;
-                $queryResult = $db->query($query);
-
-                /*Actualizar backlogs*/
-
-                //Meses siguientes
-                //$condicion=" AND ((b.anio = year(NOW()) and b.mes > month(NOW())) OR b.anio > year(NOW()))";
-                //Mes actual y siguientes
-                $condicion = " AND ((b.anio = year(NOW()) and b.mes >= month(NOW())) OR b.anio > year(NOW()))";
-                $bl_cuenta = "SELECT b.id, b.mes,b.description
-  FROM
-      lev_backlog b
-  WHERE
-      b.account_id_c = '{$cuentas[$i]}'" . $condicion . "
-          AND deleted = 0;";
-
-                $result_bl_cuentas = $db->query($bl_cuenta);
-
-                if ($result_bl_cuentas->num_rows > 0 && $result_bl_cuentas != null) {
-
-                    while ($row = $db->fetchByAssoc($result_bl_cuentas)) {
-
-                        $bl = BeanFactory::retrieveBean("lev_Backlog", $row['id']);
-                        if ($bl != null) {
-                            $bl->assigned_user_id = $id_user_assing;
-                            //$bl->description=$row['description']. ' \n UNI2CRM - '. $hoy.'/'. $mes_actual.'/'. $anio_actual. ': BL Reasignado a promotor '. $IntValue->getUserName($reAsignado);
-                            $bl->save();
-                        }
-                    }
-
-                }
-
-                $query = <<<SQL
-select CASE WHEN idcliente_c > 0 THEN idcliente_c ELSE 0 END idCliente from accounts_cstm where id_c = '{$cuentas[$i]}'
-SQL;
-                $idCliente = $db->getone($query);
-
-                if (intval($idCliente) > 0) {
-                    $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> :  Se sincronizaran promtores con UNICS ");
-                    $hostLeasing = "http://" . $GLOBALS['unifin_url'] . "/Uni2WsClnt/WsRest/Uni2ClntService.svc/Uni2/AsignaPromotor?idCliente=" . $idCliente . "&usuarioPromotorLeasing=" . $IntValue->getUserName($id_user_assing) . "&usuarioDominio=" . $current_user->user_name;;
-                    $callApi->unifingetCall($hostLeasing);
-                    $hostFactoraje = "http://" . $GLOBALS['unifin_url'] . "/Uni2WsClnt/WsRest/Uni2ClntService.svc/Uni2/AsignaPromotor?idCliente=" . $idCliente . "&usuarioPromotorFactoring=" . $IntValue->getUserName($id_user_assing) . "&usuarioDominio=" . $current_user->user_name;;
-                    $callApi->unifingetCall($hostFactoraje);
-                    $hostCA = "http://" . $GLOBALS['unifin_url'] . "/Uni2WsClnt/WsRest/Uni2ClntService.svc/Uni2/AsignaPromotor?idCliente=" . $idCliente . "&usuarioPromotorCredit=" . $IntValue->getUserName($id_user_assing) . "&usuarioDominio=" . $current_user->user_name;
-                    $callApi->unifingetCall($hostCA);
-
-                } else {
-                    $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> :  La persona a reasignar no cuenta con IdCliente: " . print_r($idCliente, 1));
-                }
             }else{
-
                 if($cuentas[$i]) array_push($cuentas_resumen['no_actualizados'],$cuentas[$i]);
-
             }
-
-
         }//for
-
         return $cuentas_resumen;
-
     }
 }

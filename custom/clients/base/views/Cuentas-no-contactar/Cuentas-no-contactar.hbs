@@ -94,18 +94,34 @@
     {{#if cuentas}}
         <div class="cuentasContainer tcenter">
             <table class="cuentas" align="center" border="1">
-            <tr>
-                <th width="10%">NO CONTACTAR</th>
-                <th width="10%">TIPO</th>
-                <th width="70%">NOMBRE</th>
-                <th width="10%">ID</th>
-            </tr>
-        {{#each cuentas}}
+				<tr>
+					<th width="10%">BLOQUEADO CARTERA</th>
+					<th width="10%">BLOQUEADO CRÉDITO</th>
+					<th width="10%">BLOQUEADO CUMPLIMIENTO</th>
+					<th width="10%">TIPO</th>
+					<th width="50%">NOMBRE</th>
+					<th width="10%">ID</th>
+				</tr>
+				{{#each cuentas}}
                 <tr class='single'>
                     <td>
                     <span sfuuid='880' class='list'>
                           <div class='ellipsis_inline' data-placement='bottom'>
-                            <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'><input type="checkbox" name="selected" value="{{id}}" class="selected" {{#if tct_no_contactar_chk_c}}checked{{/if}}/></span>
+                            <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'><input type="checkbox" name="selected1" value="{{id}}" class="selected" {{#if tct_no_contactar_chk_c}}checked{{/if}} {{#if bloqueo_credito_c}}disabled{{/if}} {{#if bloqueo_cumple_c}}disabled{{/if}} {{#if ../this.tct_no_contactar_chk_c}}disabled{{/if}}/></span>
+                          </div>
+                    </span>
+                    </td>
+                    <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                            <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'><input type="checkbox" name="selected2" value="{{id}}" class="selected" {{#if bloqueo_credito_c}}checked{{/if}} {{#if tct_no_contactar_chk_c}}disabled{{/if}} {{#if bloqueo_cumple_c}}disabled{{/if}} {{#if ../this.bloqueo_credito_c}}disabled{{/if}}/></span>
+                          </div>
+                    </span>
+                    </td>
+                    <td>
+                    <span sfuuid='880' class='list'>
+                          <div class='ellipsis_inline' data-placement='bottom'>
+                            <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'><input type="checkbox" name="selected3" value="{{id}}" class="selected" {{#if bloqueo_cumple_c}}checked{{/if}} {{#if tct_no_contactar_chk_c}}disabled{{/if}} {{#if bloqueo_credito_c}}disabled{{/if}} {{#if ../this.bloqueo_cumple_c}}disabled{{/if}}/></span>
                           </div>
                     </span>
                     </td>
@@ -131,36 +147,105 @@
                     </span>
                     </td>
                 </tr>
-        {{/each}}
-            <tr>
-                <td colspan="3"></td>
-                <td>
-                    <div class="btn-group">
-                        <a class="btn fa fa-caret-left" id="previous_offset"></a>
-                        <a class="btn disabled" id="offset_value" from_set="" to_set="" total="{{../this.total}}" ></a>
-                        <a class="btn fa fa-caret-right" id="next_offset"></a>
-                    </div>
-                </td>
-            </tr>
-        </table>
-        <br>
-        <table class="cuentas" style="background-color:#f7f8f9;" align="center" border="0">
-            <tbody>
-            <tr>
-                <th width="10%"></th>
-                <th width="10%"></th>
-                <th width="70%"></th>
-                <th width="10%"></th>
-            </tr>
-            <tr>
-                <td colspan="3"></td>
-                <td>
-                    <input type="button" value="Guardar cambios" id="btn_no_contactar" class="btn btn-success disabled" style="pointer-events:none;">
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+				{{/each}}
+				<tr>
+					<td colspan="5"></td>
+					<td>
+						<div class="btn-group">
+							<a class="btn fa fa-caret-left" id="previous_offset"></a>
+							<a class="btn disabled" id="offset_value" from_set="" to_set="" total="{{../this.total}}" ></a>
+							<a class="btn fa fa-caret-right" id="next_offset"></a>
+						</div>
+					</td>
+				</tr>
+			</table>
+			<br>
+			<div style="border:solid;margin-left:65px;margin-right:65px;height:15px;display:table;width:90%;">
+				<div class="span3 record row-fluid panel_body tleft">
+					<div class="span1 record-cell">
+						<div class="record-label"><b>Condición:</b></div>
+					</div>
+					<div class="span10 record-cell">
+						<select id="condicion" class="span4">
+							{{#each condicion_list}}
+								<option value="{{@key}}" {{ifSelected @key ../condicion}}>{{this}}</option>
+							{{/each}}
+						</select>
+					</div>
+				</div>
+				<div class="span3 record row-fluid panel_body tleft">
+					<div class="span1 record-cell">
+						<div class="record-label">Razón:</div>
+					</div>
+					<div class="span5 record-cell">
+						<select id="razon" class="span8">
+							{{#each razon_list}}
+								<option value="{{@key}}" {{ifSelected @key ../razon}}>{{this}}</option>
+							{{/each}}
+						</select>
+					</div>
+					<div class="span1 record-cell">
+						<div class="record-label">Motivo:</div>
+					</div>
+					<div class="span4 record-cell">					
+						<select id="motivo" class="span10">
+							{{#each motivo_list}}
+								<option value="{{@key}}" {{ifSelected @key ../motivo}}>{{this}}</option>
+							{{/each}}
+						</select>				
+					</div>
+				</div>
+				<div class="span3 record row-fluid panel_body tleft">
+					<div class="span1 record-cell">
+						<div class="record-label">Detalle:</div>
+					</div>
+					<div class="span10 record-cell">
+						<textarea cols="12" name="detalle" id="detalle" class="form-control" style="margin: 1px; width: 93.5%; height: 61px; resize:none;"></textarea>
+					</div>
+				</div>
+				<div class="span3 record row-fluid panel_body tleft">
+					<div class="span1 record-cell">
+						<div class="record-label">Responsable Ingesta:</div>
+					</div>
+					<div class="span5 record-cell">
+						<select id="ingesta" class="span8">
+							{{#each ingesta_list}}
+								<option value="{{@key}}" {{ifSelected @key ../ingesta}}>{{this}}</option>
+							{{/each}}
+						</select>
+					</div>
+					<div class="span1 record-cell">
+						<div class="record-label">Responsable Validación:</div>
+					</div>
+					<div class="span4 record-cell">					
+						<select id="valida" class="span10">
+							{{#each valida_list}}
+								<option value="{{@key}}" {{ifSelected @key ../valida}}>{{this}}</option>
+							{{/each}}
+						</select>				
+					</div>
+				</div>
+			</div>
+			<br>
+			<table class="cuentas" style="background-color:#f7f8f9;" align="center" border="0">
+				<tbody>
+				<tr>
+					<th width="10%"></th>
+					<th width="10%"></th>
+					<th width="10%"></th>
+					<th width="10%"></th>
+					<th width="50%"></th>
+					<th width="10%"></th>
+				</tr>
+				<tr>
+					<td colspan="5"></td>
+					<td>
+						<input type="button" value="Guardar cambios" id="btn_no_contactar" class="btn btn-success disabled" style="pointer-events:none;">
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
     {{/if}}
 	    <!-- Subir CSV -->
         <br>
