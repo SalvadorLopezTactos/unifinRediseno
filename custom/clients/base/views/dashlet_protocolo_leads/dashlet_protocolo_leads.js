@@ -77,12 +77,11 @@
                 var mm = today.getMonth() + 1;
                 var yyyy = today.getFullYear();
                 var hora = today.getHours();
-                var minuto = today.getMinutes();
                 
                 if (daySum < 10) { daySum = '0' + daySum }
                 if (mm < 10) { mm = '0' + mm }
                 
-                todayFormat = yyyy + '-' + mm + '-' + daySum + "T" + hora + ":" + minuto + ":" + "00";
+                todayFormat = yyyy + '-' + mm + '-' + daySum + "T" + hora + ":" + "00" + ":" + "00";
                 
                 var todayISO = new Date(todayFormat);
                 var fechaFin = todayISO.toISOString(); //Formto toISOString para fecha date_time
