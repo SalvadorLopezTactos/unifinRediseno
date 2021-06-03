@@ -29,6 +29,14 @@
 	<script>
 		var $select2 = this.$('.cuentasContainer').find('select.select2');
 		$select2.select2();
+
+        this.$('[data-field="oficinas_atiende_id"].updateOA').select2({
+            width:'100%',
+            minimumResultsForSearch:7,
+            closeOnSelect: false, 
+            containerCssClass: 'select2-choices-pills-close'
+        });
+
 	</script>	
 	<div><p></p></div>
     <div class="container">
@@ -118,6 +126,9 @@
 						<td class="span4">
 							<label class="record-label" style="font-weight:bold; text-align:center">EQUIPO</label>
 						</td>
+                        <td class="span4">
+							<label class="record-label" style="font-weight:bold; text-align:center">OFICINAS ATIENDE</label>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -139,6 +150,13 @@
 							<select class="equipos select2 updateeqp" style="width: 100%;" data-field="equipo_id">
 								{{#each ../lista_equipo}}
 									<option value="{{@key}}" {{ifSelected @key ../equipo_c}}>{{this}}</option>
+								{{/each}}
+							</select>
+						</td>
+                        <td class="span4">
+							<select class="oficinas_atiende select2 updateOA" multiple="multiple" style="width: 100%;" data-field="oficinas_atiende_id">
+								{{#each ../lista_equipo}}
+									<option value="{{@key}}" {{ifMSelected @key ../equipos_c}}>{{this}}</option>
 								{{/each}}
 							</select>
 						</td>

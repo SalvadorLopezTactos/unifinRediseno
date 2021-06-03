@@ -11,12 +11,12 @@
 
     },
 
-    registros:[],
+    registros: [],
 
     initialize: function (options) {
         this._super("initialize", [options]);
-        self=this;
-        this.viewEnable=false;
+        self = this;
+        this.viewEnable = false;
         this.getRegistrosAsignados();
 
         //this.getLeadsAplazadosCancelados();
@@ -25,26 +25,26 @@
     /*
     Función ejecutada para saber si la información se debe de mostrar
     */
-    getRegistrosAsignados:function(){
+    getRegistrosAsignados: function () {
 
-    	var id_user=App.user.attributes.id;
-    	App.alert.show('obtieneAsignados', {
-    				level: 'process',
-    				title: 'Cargando',
-    			});
+        var id_user = App.user.attributes.id;
+        App.alert.show('obtieneAsignados', {
+            level: 'process',
+            title: 'Cargando',
+        });
 
-    	app.api.call('GET', app.api.buildURL('GetRegistrosAsignadosForProtocolo/' + id_user), null, {
+        app.api.call('GET', app.api.buildURL('GetRegistrosAsignadosForProtocolo/' + id_user), null, {
             success: function (data) {
                 App.alert.dismiss('obtieneAsignados');
-                var maximo_registros_list=App.lang.getAppListStrings('limite_maximo_asignados_list');
-                var maximo_registros=parseInt(maximo_registros_list["1"]);
-            	if(data.total_asignados<=maximo_registros){ //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
-            		self.viewEnable='1';
-            		self.getLeadsAplazadosCancelados();
-            	}else{
-            		self.viewEnable=false;
-            		self.render();
-            	}
+                var maximo_registros_list = App.lang.getAppListStrings('limite_maximo_asignados_list');
+                var maximo_registros = parseInt(maximo_registros_list["1"]);
+                if (data.total_asignados <= maximo_registros) { //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
+                    self.viewEnable = '1';
+                    self.getLeadsAplazadosCancelados();
+                } else {
+                    self.viewEnable = false;
+                    self.render();
+                }
             },
             error: function (e) {
                 throw e;
@@ -55,289 +55,304 @@
 
     asignarCP: function (evt) {
 
-    	app.alert.show('navigateToNotificationCP', {
-    		level: 'confirmation',
-    		messages: 'Se notificará a Asesor Telefónico para que se le asigne un nuevo Lead',
-    		autoClose: false,
-    		onConfirm: function(){
-    			App.alert.show('asignaLeadCP', {
-    				level: 'process',
-    				title: 'Procesando',
-    			});
+        app.alert.show('navigateToNotificationCP', {
+            level: 'confirmation',
+            messages: 'Se notificará al Asesor Telefónico para que se le asigne un nuevo Lead',
+            autoClose: false,
+            onConfirm: function () {
+                App.alert.show('asignaLeadCP', {
+                    level: 'process',
+                    title: 'Procesando',
+                });
 
-    			//Obtener los agentes telefónicos disponibles para generarle el registro de tarea
-    			app.api.call("read", app.api.buildURL("GetSiguienteAgenteTel", null, null, {}), null, {
+                var idAgente = App.user.attributes.id; //ID usuario logeado
+                
+                var today = new Date();
+                var n = 6;
+                var day = today.getDay();
+                var daySum = today.getDate() + n + (day === 6 ? 2 : +!day) + (Math.floor((n - 1 + (day % 6 || 1)) / 5) * 2); //Suma 6 días habiles posteriores a fecha de inicio
+                var mm = today.getMonth() + 1;
+                var yyyy = today.getFullYear();
+                var hora = today.getHours();
+                var minuto = today.getMinutes();
+                var segundo = today.getSeconds();
+                
+                if (daySum < 10) { daySum = '0' + daySum }
+                if (mm < 10) { mm = '0' + mm }
+                todayFormat = yyyy + '-' + mm + '-' + daySum + "T" + hora + ":" + minuto + ":" + segundo;
+                
+                var todayISO = new Date(todayFormat);
+                var fechaFin = todayISO.toISOString(); //Formto toISOString para fecha date_time
+
+                //Obtener los agentes telefónicos disponibles para generarle el registro de tarea
+                // app.api.call("read", app.api.buildURL("GetSiguienteAgenteTel", null, null, {}), null, {
+                app.api.call('GET', app.api.buildURL('GetAgenteCP/' + idAgente), null, {
                     success: _.bind(function (data) {
-                        if(data!=""){
-                        	var idAsesor=data;
-                        	var usuario=App.user.get('full_name');
-                        	var date= new Date();
-                        	var fechaString=date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+" 05:00:00";
+                        if (data != "") {
+                            var idAsesor = data;
+                            var usuario = App.user.get('full_name');
+                            var jsonDate = (new Date()).toJSON();
+                            
+                            var bodyTask = {
+                                "name": "Solicitud de asignación de Lead - (Lead Management)",
+                                "date_start": jsonDate,
+                                "date_due": fechaFin,
+                                "priority": "High",
+                                "status":"Not Started",
+                                "assigned_user_id": idAsesor,
+                                "description": "Se solicita la asignación de Lead para asesor " + usuario
+                            };
 
-                        	var jsonDate = (new Date()).toJSON();
+                            app.api.call("create", app.api.buildURL("Tasks", null, null, bodyTask), null, {
+                                success: _.bind(function (data) {
+                                    console.log("TAREA CREADA CORRECTAMENTE AL ASESOR");
+                                    App.alert.dismiss('asignaLeadCP');
+                                    app.alert.show('taskCreteSuccess', {
+                                        level: 'success',
+                                        messages: 'Proceso completo<br>El agente encargado de gestionar la asignación es: ' + data.assigned_user_name,
+                                        autoClose: false
+                                    });
 
-                        	var bodyTask={
-                        		"name":"Asignar Lead a "+usuario,
-                        		"priority":"High",
-                        		"assigned_user_id":idAsesor,
-                        		"date_start": jsonDate
-                        	};
-
-                        	app.api.call("create", app.api.buildURL("Tasks", null, null, bodyTask), null, {
-                        		success: _.bind(function (data) {
-                        			console.log("TAREA CREADA CORRECTAMENTE AL ASESOR");
-                        			App.alert.dismiss('asignaLeadCP');
-                        			app.alert.show('taskCreteSuccess', {
-                        				level: 'success',
-                        				messages: 'Proceso completo<br>El agente encargado de gestionar la asignación es: '+data.assigned_user_name,
-                        				autoClose: false
-                        			});
-
-                        		},this)});
-
+                                }, this)
+                            });
                         }
                     }, this)
                 });
-
-
-    		
-    		},
-    		onCancel: function(){
-    			
-    		}
-    	});
+            },
+            onCancel: function () {}
+        });
     },
 
-    asignarPorAsesor:function(evt){
+    asignarPorAsesor: function (evt) {
 
-    	var objLead = {
+        var objLead = {
             action: 'edit',
             copy: true,
             create: true,
             layout: 'create',
             module: 'Leads',
-            dataFromProtocolo:'1'
+            dataFromProtocolo: '1'
         };
 
-    	app.controller.loadView(objLead);
+        app.controller.loadView(objLead);
 
-    	// update the browser URL with the proper
-    	app.router.navigate('#Leads/create', {trigger: false});
+        // update the browser URL with the proper
+        app.router.navigate('#Leads/create', { trigger: false });
 
     },
 
-    asignarPorBD:function(){
+    asignarPorBD: function () {
 
-    	//Obtiene registros cargados a través de carga de layout
-    	app.alert.show('assignLeadFromDB', {
-    		level: 'confirmation',
-    		messages: 'Se asignará un Lead obtenido de una base de datos especial<br>¿Está seguro?',
-    		autoClose: false,
-    		onConfirm: function(){
-    			//Obtiene registros provenientes de la bd especial
-    			App.alert.show('asignaFromDB', {
-    				level: 'process',
-    				title: 'Procesando',
-    			});
+        //Obtiene registros cargados a través de carga de layout
+        app.alert.show('assignLeadFromDB', {
+            level: 'confirmation',
+            messages: 'Se asignará un Lead obtenido de una base de datos especial<br>¿Está seguro?',
+            autoClose: false,
+            onConfirm: function () {
+                //Obtiene registros provenientes de la bd especial
+                App.alert.show('asignaFromDB', {
+                    level: 'process',
+                    title: 'Procesando',
+                });
 
-                var equipo_usuario_logueado=App.user.attributes.equipo_c;
+                var equipo_usuario_logueado = App.user.attributes.equipo_c;
 
-    			app.api.call("read", app.api.buildURL("FilterLeadsToDB/"+equipo_usuario_logueado, null, null,null), null, {
+                app.api.call("read", app.api.buildURL("FilterLeadsToDB/" + equipo_usuario_logueado, null, null, null), null, {
                     success: _.bind(function (data) {
 
-                    	if(data.records.length>0){
+                        if (data.records.length > 0) {
                             //Actualizar lead desde potocolo, se hace desde api custom, para saltarse la seguridad de equipo
                             //y no se genere error al obtener registros que no estén asignados al asesor
-                            var idRegistro=data.records[0].idRegistro;
-                            self.modulo=data.records[0].modulo;
-                            var id_usuario=App.user.get('id');
-                            
-                            app.api.call("read",app.api.buildURL("UpdateLeadFromProtocolo/"+idRegistro+"/"+id_usuario+"/"+self.modulo, null, null,null),null,{
+                            var idRegistro = data.records[0].idRegistro;
+                            self.modulo = data.records[0].modulo;
+                            var id_usuario = App.user.get('id');
+
+                            app.api.call("read", app.api.buildURL("UpdateLeadFromProtocolo/" + idRegistro + "/" + id_usuario + "/" + self.modulo, null, null, null), null, {
                                 success: _.bind(function (data) {
-                                    var moduleLink="";
-                                    if(self.modulo=="Cuenta"){
-                                        moduleLink="Accounts"
-                                    }else{
-                                        moduleLink="Leads"
+                                    var moduleLink = "";
+                                    if (self.modulo == "Cuenta") {
+                                        moduleLink = "Accounts"
+                                    } else {
+                                        moduleLink = "Leads"
                                     }
                                     app.alert.dismiss('asignaFromDB');
                                     var modulo
-	    							var mensaje='Se ha asignado el registro: '+'<a href="#'+moduleLink+'/'+data.id+'">'+data.name+'</a>';
+                                    var mensaje = 'Se ha asignado el registro: ' + '<a href="#' + moduleLink + '/' + data.id + '">' + data.name + '</a>';
 
-	    							app.alert.show('assignFromDB', {
-		    							level: 'success',
-		    							messages: mensaje,
-		                    		});
+                                    app.alert.show('assignFromDB', {
+                                        level: 'success',
+                                        messages: mensaje,
+                                    });
                                 }, this)
                             })
-            			}else{
+                        } else {
 
-            				app.alert.show('sinRegistrosDB', {
-            					level: 'warning',
-            					messages: 'No existen registros disponibles para asignar',
-            					autoClose: true
-            				});
+                            app.alert.show('sinRegistrosDB', {
+                                level: 'warning',
+                                messages: 'No existen registros disponibles para asignar',
+                                autoClose: true
+                            });
 
-            				app.alert.dismiss('asignaFromDB');
-            			}
-                    	
+                            app.alert.dismiss('asignaFromDB');
+                        }
+
                     }, this)
                 });//Fin api call obtener registros de la bd
 
-    		},//OnConfirm
-    		onCancel: function(){
-    			
-    		}//onCancel
-    	});
+            },//OnConfirm
+            onCancel: function () {
+
+            }//onCancel
+        });
     },
 
-    asignarPorCancelados:function(){
+    asignarPorCancelados: function () {
 
-    	if(this.registros.length==0){
-    		app.alert.show('sinCancelados', {
-    			level: 'warning',
-    			messages: 'No existen registros de Leads Cancelados / Aplazados',
-    			autoClose: true
-			});
+        if (this.registros.length == 0) {
+            app.alert.show('sinCancelados', {
+                level: 'warning',
+                messages: 'No existen registros de Leads Cancelados / Aplazados',
+                autoClose: true
+            });
 
-    	}
-    	else{
-    		var modal = $('#modalRecordsCancel');
+        }
+        else {
+            var modal = $('#modalRecordsCancel');
             if (modal) {
                 modal.show();
             }
-    	}
-    	
+        }
+
     },
 
-    closeModal:function(){
-    	
-    	var modal = $('#modalRecordsCancel');
-    	if (modal) {
-    		modal.hide();
-      	}
+    closeModal: function () {
+
+        var modal = $('#modalRecordsCancel');
+        if (modal) {
+            modal.hide();
+        }
     },
 
-    activarLead:function(evt){
+    activarLead: function (evt) {
 
-    	var nombre=$(evt.currentTarget).parent().parent().children().eq(0).children().html();
-    	var id=$(evt.currentTarget).attr('data-id');
-        var tipo=$(evt.currentTarget).attr('data-type');
-        var idProducto=$(evt.currentTarget).attr('data-product');
-        
+        var nombre = $(evt.currentTarget).parent().parent().children().eq(0).children().html();
+        var id = $(evt.currentTarget).attr('data-id');
+        var tipo = $(evt.currentTarget).attr('data-type');
+        var idProducto = $(evt.currentTarget).attr('data-product');
 
-    	app.alert.show('confirmActivation', {
-    		level: 'confirmation',
-    		messages: 'Se procederá a activar el siguiente registro:<br>'+nombre+'<br>¿Estás seguro?',
-    		autoClose: false,
-    		onConfirm: function(){
-                if(tipo=='lead'){
+
+        app.alert.show('confirmActivation', {
+            level: 'confirmation',
+            messages: 'Se procederá a activar el siguiente registro:<br>' + nombre + '<br>¿Estás seguro?',
+            autoClose: false,
+            onConfirm: function () {
+                if (tipo == 'lead') {
                     var url = app.api.buildURL('Leads/' + id, null, null);
 
-                        App.alert.show('activaLead', {
-                            level: 'process',
-                            title: 'Activando registro, por favor espere',
-                        });
+                    App.alert.show('activaLead', {
+                        level: 'process',
+                        title: 'Activando registro, por favor espere',
+                    });
 
-                        var api_params = {};
-                        api_params['lead_cancelado_c']=0;
-                        api_params['motivo_cancelacion_c']="";
-                        api_params['status_management_c']="1";//Activo
-                        api_params['subtipo_registro_c']="1";//Sin Contactar
+                    var api_params = {};
+                    api_params['lead_cancelado_c'] = 0;
+                    api_params['motivo_cancelacion_c'] = "";
+                    api_params['status_management_c'] = "1";//Activo
+                    api_params['subtipo_registro_c'] = "1";//Sin Contactar
 
-                        app.api.call('update', url, api_params, {
-                            success: _.bind(function (data) {
-                                app.alert.dismiss('activaLead');
+                    app.api.call('update', url, api_params, {
+                        success: _.bind(function (data) {
+                            app.alert.dismiss('activaLead');
 
-                                var mensaje='Se ha actualizado el Lead: '+'<a href="#Leads/'+data.id+'">'+data.name+'</a>';
+                            var mensaje = 'Se ha actualizado el Lead: ' + '<a href="#Leads/' + data.id + '">' + data.name + '</a>';
 
-                                app.alert.show('activaLeadSuccess', {
-                                    level: 'success',
-                                    messages: mensaje,
-                                });
+                            app.alert.show('activaLeadSuccess', {
+                                level: 'success',
+                                messages: mensaje,
+                            });
 
-                                var indice=self.searchIndex(self.registros,id);
-                                self.registros.splice(indice, 1);
-                                self.render();
+                            var indice = self.searchIndex(self.registros, id);
+                            self.registros.splice(indice, 1);
+                            self.render();
                         })
                     });
-                }else{
+                } else {
                     //Activar cuenta
                     var url = app.api.buildURL('uni_Productos/' + idProducto, null, null);
 
-                        App.alert.show('activaCuenta', {
-                            level: 'process',
-                            title: 'Activando registro, por favor espere',
-                        });
+                    App.alert.show('activaCuenta', {
+                        level: 'process',
+                        title: 'Activando registro, por favor espere',
+                    });
 
-                        var api_params = {};
-                        api_params['no_viable']=0;
-                        api_params['no_viable_razon']="";
-                        api_params['no_viable_razon_fp']="";
-                        api_params['no_viable_razon_ni']="";
-                        api_params['no_viable_producto']="";
-                        api_params['no_viable_otro_c']="";
-                        api_params['no_viable_quien']="";
-                        api_params['no_viable_porque']="";
-                        api_params['status_management_c']="1";
-                        
+                    var api_params = {};
+                    api_params['no_viable'] = 0;
+                    api_params['no_viable_razon'] = "";
+                    api_params['no_viable_razon_fp'] = "";
+                    api_params['no_viable_razon_ni'] = "";
+                    api_params['no_viable_producto'] = "";
+                    api_params['no_viable_otro_c'] = "";
+                    api_params['no_viable_quien'] = "";
+                    api_params['no_viable_porque'] = "";
+                    api_params['status_management_c'] = "1";
 
-                        app.api.call('update', url, api_params, {
-                            success: _.bind(function (data) {
-                                app.alert.dismiss('activaCuenta');
 
-                                var mensaje='Se ha actualizado el registro: '+'<a href="#Accounts/'+data.accounts_uni_productos_1accounts_ida+'">'+data.accounts_uni_productos_1_name+'</a>';
+                    app.api.call('update', url, api_params, {
+                        success: _.bind(function (data) {
+                            app.alert.dismiss('activaCuenta');
 
-                                app.alert.show('activaCuentaSuccess', {
-                                    level: 'success',
-                                    messages: mensaje,
-                                });
+                            var mensaje = 'Se ha actualizado el registro: ' + '<a href="#Accounts/' + data.accounts_uni_productos_1accounts_ida + '">' + data.accounts_uni_productos_1_name + '</a>';
 
-                                var indice=self.searchIndex(self.registros,id);
-                                self.registros.splice(indice, 1);
-                                self.render();
+                            app.alert.show('activaCuentaSuccess', {
+                                level: 'success',
+                                messages: mensaje,
+                            });
+
+                            var indice = self.searchIndex(self.registros, id);
+                            self.registros.splice(indice, 1);
+                            self.render();
                         })
                     });
 
-                }	
-    		},
-    		onCancel: function(){
-    			
-    		}
-    	});
+                }
+            },
+            onCancel: function () {
+
+            }
+        });
 
     },
 
-    searchIndex:function(arreglo,id){
+    searchIndex: function (arreglo, id) {
 
-    	var index=-1;
+        var index = -1;
 
-    	if(arreglo.length>0){
+        if (arreglo.length > 0) {
 
-    		for (var i =0;i <arreglo.length; i ++) {
-    			if(arreglo[i].id==id){
-    				index=i;
-    			}
-    		}
-    	}
+            for (var i = 0; i < arreglo.length; i++) {
+                if (arreglo[i].id == id) {
+                    index = i;
+                }
+            }
+        }
 
-    	return index;
-    	
+        return index;
+
     },
 
-    getLeadsAplazadosCancelados:function(){
+    getLeadsAplazadosCancelados: function () {
 
-        var id_user=App.user.attributes.id;
+        var id_user = App.user.attributes.id;
 
         App.alert.show('getLeadsCancelados', {
             level: 'process'
         });
 
         //subtipo_registro_c=3, LEAD CANCELADO
-        app.api.call('GET', app.api.buildURL('GetLeadsAccountsAplazadosCancelados/'+ id_user), null, {
+        app.api.call('GET', app.api.buildURL('GetLeadsAccountsAplazadosCancelados/' + id_user), null, {
             success: function (data) {
                 App.alert.dismiss('getLeadsCancelados');
-                self.registros=data.records;
+                self.registros = data.records;
                 self.render();
             },
             error: function (e) {

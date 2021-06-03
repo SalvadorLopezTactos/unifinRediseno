@@ -24,6 +24,8 @@ class AgentesTelefonicos extends SugarApi
         $date= TimeDate::getInstance()->nowDb();
         $id_u_audit=create_guid();
 
+        $equipos_c = $args['data']['equipos_c'];
+        // $equipos_c = '^'.implode('^,^',$oficinaAtiende).'^';
         //Validar que exista registro en users_audit, de lo contrario genera el registro
         //Traer el bean de users_audit
         $bean_Audit = BeanFactory::getBean('Users',$user_id);
@@ -39,9 +41,11 @@ class AgentesTelefonicos extends SugarApi
 
         }
         //Actualiza el registro en users y users_cstm
-        $query = "update users a, users_cstm b set a.reports_to_id = '{$reports_to_id}', b.equipo_c = '{$equipo_c}' where a.id = b.id_c and a.id = '{$user_id}'";
+        // $query = "update users a, users_cstm b set a.reports_to_id = '{$reports_to_id}', b.equipo_c = '{$equipo_c}' where a.id = b.id_c and a.id = '{$user_id}'";
+        $query = "update users a, users_cstm b set a.reports_to_id = '{$reports_to_id}', b.equipo_c = '{$equipo_c}', b.equipos_c = '{$equipos_c}' where a.id = b.id_c and a.id = '{$user_id}'";
         $result = $db->query($query);
-		    return $result;
+	
+        return $result;
         //$GLOBALS['log']->fatal('Realiza Update en users_cstm');
     }
 }
