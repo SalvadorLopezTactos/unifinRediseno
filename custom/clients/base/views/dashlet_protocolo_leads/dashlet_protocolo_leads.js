@@ -75,15 +75,15 @@
                 var yyyy = today.getFullYear();
                 var hora = today.getHours();
                 var minuto = today.getMinutes();
-                var segundo = today.getSeconds();
                 
                 if (daySum < 10) { daySum = '0' + daySum }
                 if (mm < 10) { mm = '0' + mm }
-                todayFormat = yyyy + '-' + mm + '-' + daySum + "T" + hora + ":" + minuto + ":" + segundo;
+                
+                todayFormat = yyyy + '-' + mm + '-' + daySum + "T" + hora + ":" + minuto + ":" + "00";
                 
                 var todayISO = new Date(todayFormat);
                 var fechaFin = todayISO.toISOString(); //Formto toISOString para fecha date_time
-
+                
                 //Obtener los agentes telefónicos disponibles para generarle el registro de tarea
                 // app.api.call("read", app.api.buildURL("GetSiguienteAgenteTel", null, null, {}), null, {
                 app.api.call('GET', app.api.buildURL('GetAgenteCP/' + idAgente), null, {
@@ -102,7 +102,7 @@
                                 "assigned_user_id": idAsesor,
                                 "description": "Se solicita la asignación de Lead para asesor " + usuario
                             };
-
+                            
                             app.api.call("create", app.api.buildURL("Tasks", null, null, bodyTask), null, {
                                 success: _.bind(function (data) {
                                     console.log("TAREA CREADA CORRECTAMENTE AL ASESOR");
