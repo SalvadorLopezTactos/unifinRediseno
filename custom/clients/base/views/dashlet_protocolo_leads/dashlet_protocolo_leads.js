@@ -15,8 +15,9 @@
 
     initialize: function (options) {
         this._super("initialize", [options]);
-        self = this;
-        this.viewEnable = false;
+        self=this;
+        this.viewEnable=false;
+        this.numero_registros=0;
         this.getRegistrosAsignados();
 
         //this.getLeadsAplazadosCancelados();
@@ -36,15 +37,17 @@
         app.api.call('GET', app.api.buildURL('GetRegistrosAsignadosForProtocolo/' + id_user), null, {
             success: function (data) {
                 App.alert.dismiss('obtieneAsignados');
-                var maximo_registros_list = App.lang.getAppListStrings('limite_maximo_asignados_list');
-                var maximo_registros = parseInt(maximo_registros_list["1"]);
-                if (data.total_asignados <= maximo_registros) { //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
-                    self.viewEnable = '1';
-                    self.getLeadsAplazadosCancelados();
-                } else {
-                    self.viewEnable = false;
-                    self.render();
-                }
+
+                var maximo_registros_list=App.lang.getAppListStrings('limite_maximo_asignados_list');
+                var maximo_registros=parseInt(maximo_registros_list["1"]);
+                self.numero_registros=data.total_asignados;
+            	if(data.total_asignados<=maximo_registros){ //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
+            		self.viewEnable='1';
+            		self.getLeadsAplazadosCancelados();
+            	}else{
+            		self.viewEnable=false;
+            		self.render();
+            	}
             },
             error: function (e) {
                 throw e;

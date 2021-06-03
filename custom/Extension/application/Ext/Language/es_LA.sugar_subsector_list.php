@@ -88,4 +88,13 @@ $app_list_strings['subsector_list'] = array(
   '814' => 'Hogares con empleados domésticos',
   '931' => 'Actividades legislativas, gubernamentales y de impartición de justicia',
   '932' => 'Organismos internacionales y extraterritoriales',
+  '469'=>'Comercio al por menor exclusivamente a través de internet, y catálogos impresos, televisión y similares',
+  '487'=>'Transporte turístico',
+  '492'=>'Servicios de mensajería y paquetería',
+  '518'=>'Procesamiento electrónico de información, hospedaje y otros servicios relacionados',
+  '533'=>'Servicios de alquiler de marcas registradas, patentes y franquicias',
+  '551'=>'Corporativos',
+  '562'=>'Manejo de residuos y servicios de remediación',
+  '623'=>'Residencias de asistencia social y para el cuidado de la salud',
+  '932'=>'Organismos internacionales y extraterritoriales',
 );
