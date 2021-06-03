@@ -163,10 +163,11 @@
 			}else{
 				this.model.set('name', "AYUDA CP");
 			}
-        }else{
-            this.model.set('name', '');
-			this.model.set('date_due', '');
         }
+        // else{
+        //     this.model.set('name', '');
+		// 	this.model.set('date_due', '');
+        // }
     },
 	
 	/*
