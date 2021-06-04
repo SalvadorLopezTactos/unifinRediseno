@@ -53,4 +53,6 @@ $app_list_strings['kam_list']=array (
   48 => 'Jonathan Olvera',
   49 => 'Ricardo Alberto Wilton Valdéz',
   50 => 'Sergio Jonathan Evangelista Anguiano',
+  51 => 'Nashely Gomez Recillas',
+  52 => 'Humberto Ruiz Hernandez',
 );
