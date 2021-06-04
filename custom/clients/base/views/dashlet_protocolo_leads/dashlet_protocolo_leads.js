@@ -80,6 +80,7 @@
                 
                 if (daySum < 10) { daySum = '0' + daySum }
                 if (mm < 10) { mm = '0' + mm }
+                if (hora < 10) { hora = '0' + hora }
                 
                 todayFormat = yyyy + '-' + mm + '-' + daySum + "T" + hora + ":" + "00" + ":" + "00";
                 
