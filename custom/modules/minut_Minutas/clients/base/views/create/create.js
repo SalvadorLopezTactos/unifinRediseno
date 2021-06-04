@@ -1200,13 +1200,12 @@
             $('[name="survey_minuta"]').removeClass('btn-success');
         }
 
-        if( this.leasingPuestos.includes( this.puesto_usuario )){
+        /*if( this.leasingPuestos.includes( this.puesto_usuario )){
             var moduleid = app.data.createBean('Meetings',{id:this.model.get('minut_minutas_meetingsmeetings_idb')});
             moduleid.fetch({
                 success:_.bind(function(modelo){
                     var parent_type1 = modelo.get('parent_type');
                     parent_id_acc = modelo.get('parent_id');
-                    /*********************************** */
                     //console.log(parent_id_acc);
                     if(parent_type1== "Leads"){
                         if(self.model.get('resultado_c')=='2' ||self.model.get('resultado_c')=='18' || self.model.get('resultado_c')=='21' || self.model.get('resultado_c')=='25'){
@@ -1246,7 +1245,7 @@
                     }
                 }, this)
             });
-        }
+        }*/
 
     },
 
