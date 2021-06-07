@@ -290,6 +290,8 @@
         this.model.on('sync', this.hideButtonsModal_Account, this);
         this.context.on('button:get_account_asesor:click', this.get_Account, this);
         this.context.on('button:send_account_asesor:click', this.set_Account, this);
+		this.context.on('button:bloquea_cuenta:click', this.bloquea_cuenta, this);
+		this.context.on('button:desbloquea_cuenta:click', this.desbloquea_cuenta, this);
 
         /***************Validacion de Campos No viables en los Productos********************/
         this.model.addValidationTask('LeasingUP', _.bind(this.requeridosLeasingUP, this));
@@ -6256,4 +6258,118 @@
         callback(null, fields, errors);
     },
 
+    bloquea_cuenta: function () {
+        var consulta = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
+        app.api.call('read', consulta, {}, {
+            success: _.bind(function (data) {
+                if((data.user_id1_c == app.user.id && this.model.get('tct_no_contactar_chk_c')) || (data.user_id3_c == app.user.id && data.bloqueo_credito_c) || (data.user_id5_c == app.user.id && data.bloqueo_cumple_c)) {
+					var params = {};
+					if(data.user_id1_c == app.user.id && this.model.get('tct_no_contactar_chk_c')) params["bloqueo_cartera_c"] = 1;
+					if(data.user_id3_c == app.user.id && data.bloqueo_credito_c) params["bloqueo2_c"] = 1;
+					if(data.user_id5_c == app.user.id && data.bloqueo_cumple_c) params["bloqueo3_c"] = 1;
+					var actualiza = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
+					app.api.call('update', actualiza, params, {
+						success: _.bind(function (data) {
+							app.alert.show('alert_change_success', {
+								level: 'success',
+								messages: 'Cuenta Bloqueada',
+							});
+						}, this)
+					});
+				}
+            }, this)
+        });
+    },
+
+    desbloquea_cuenta: function () {
+		var consulta = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
+        app.api.call('read', consulta, {}, {
+            success: _.bind(function (data) {
+                if((data.user_id1_c == app.user.id && (this.model.get('tct_no_contactar_chk_c') || data.bloqueo_cartera_c)) || (data.user_id3_c == app.user.id && (data.bloqueo_credito_c || data.bloqueo2_c)) || (data.user_id5_c == app.user.id && (data.bloqueo_cumple_c || data.bloqueo3_c))) {
+					var params = {};
+					var actualiza = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
+					if(data.user_id1_c == app.user.id && data.bloqueo_cartera_c) params["bloqueo_cartera_c"] = 0;
+					if(data.user_id3_c == app.user.id && data.bloqueo2_c) params["bloqueo2_c"] = 0;
+					if(data.user_id5_c == app.user.id && data.bloqueo3_c) params["bloqueo3_c"] = 0;
+					if(data.user_id1_c == app.user.id && (this.model.get('tct_no_contactar_chk_c') || data.bloqueo_cartera_c)) {
+						this.model.set("tct_no_contactar_chk_c", false);
+						this.model.save();
+						params["condicion_cliente_c"] = "";
+						params["razon_c"] = "";
+						params["motivo_c"] = "";
+						params["detalle_c"] = "";
+						params["user_id_c"] = "";
+						params["user_id1_c"] = "";
+					}
+					if(data.user_id3_c == app.user.id && (data.bloqueo_credito_c || data.bloqueo2_c)) {
+						params["bloqueo_credito_c"] = 0;
+						params["condicion2_c"] = "";
+						params["razon2_c"] = "";
+						params["motivo2_c"] = "";
+						params["detalle3_c"] = "";
+						params["user_id2_c"] = "";
+						params["user_id3_c"] = "";
+					}
+					if(data.user_id5_c == app.user.id && (data.bloqueo_cumple_c || data.bloqueo3_c)) {
+						params["bloqueo_cumple_c"] = 0;
+						params["condicion3_c"] = "";
+						params["razon3_c"] = "";
+						params["motivo3_c"] = "";
+						params["detalle3_c"] = "";
+						params["user_id4_c"] = "";
+						params["user_id5_c"] = "";
+					}
+					//Consulta Grupo Empresarial
+					app.api.call("read", app.api.buildURL("Accounts/" + this.model.get('id') + "/link/members", null, null, {}), null, {
+						success: _.bind(function (data1) {
+							if (data1.records.length > 0) {
+								app.alert.show('errorAlert2', {
+									level: 'confirmation',
+									messages: "¿Desea desbloquear todas las cuentas del grupo empresarial?",
+									autoClose: false,
+									onCancel: function() {
+										app.api.call('update', actualiza, params, {
+											success: _.bind(function (data2) {
+												app.alert.show('alert_change_success', {
+													level: 'success',
+													messages: 'Cuenta Desbloqueada',
+												});
+												this.render();
+											}, this)
+										});
+									},
+									onConfirm: function() {
+										if(data.grupo_c) {
+											params["grupo_c"] = 0;
+										} else {
+											params["grupo_c"] = 1;
+										}
+										app.api.call('update', actualiza, params, {
+											success: _.bind(function (data2) {
+												app.alert.show('alert_change_success', {
+													level: 'success',
+													messages: 'Cuenta Desbloqueada',
+												});
+												this.render();
+											}, this)
+										});
+									},
+								});
+							} else {
+								app.api.call('update', actualiza, params, {
+									success: _.bind(function (data2) {
+										app.alert.show('alert_change_success', {
+											level: 'success',
+											messages: 'Cuenta Desbloqueada',
+										});
+										this.render();
+									}, this)
+								});
+							}
+						}, this)
+					});
+				}
+            }, this)
+        });
+    },
 })

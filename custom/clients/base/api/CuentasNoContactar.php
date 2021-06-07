@@ -45,17 +45,12 @@ class CuentasNoContactar extends SugarApi
             //Omitiendo espacios en blanco
             $filtroCliente = trim($filtroCliente);
             $filtroTipoCuenta = $args['tipos_cuenta'];
-
             $tipos_separados = explode(",", $filtroTipoCuenta);
             $arr_aux = array();
-
             for ($i = 0; $i < count($tipos_separados); $i++) {
                 array_push($arr_aux, "'" . $tipos_separados[$i] . "'");
             }
-
             $tipos_query = join(',', $arr_aux);
-
-
             $total_rows = <<<SQL
 SELECT id, name, tipodepersona_c, tipo_registro_cuenta_c, idcliente_c, tct_no_contactar_chk_c, bloqueo_credito_c, bloqueo_cumple_c FROM accounts
 INNER JOIN accounts_cstm ON accounts_cstm.id_c = accounts.id
@@ -76,7 +71,6 @@ AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id
             while ($row = $db->fetchByAssoc($totalResult)) {
                 $response['full_cuentas'][] = $row['id'];
             }
-
             $query = <<<SQL
 SELECT id, name, tipodepersona_c, tipo_registro_cuenta_c, rfc_c, idcliente_c, tct_no_contactar_chk_c, bloqueo_credito_c, bloqueo_cumple_c FROM accounts
 INNER JOIN accounts_cstm ON accounts_cstm.id_c = accounts.id
@@ -89,7 +83,6 @@ SQL;
 AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id}' OR accounts_cstm.user_id2_c='{$user_id}' OR accounts_cstm.user_id6_c='{$user_id}')
  AND deleted=0";
             }
-
             if (!empty($filtroCliente)) {
                 $query .= " AND name LIKE '%{$filtroCliente}%' ";
             }
@@ -149,13 +142,30 @@ AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id
 						}
 					}
 					if($bloqueo) {
-						$resumen->condicion_cliente_c = $parame["condicion"];
-						$resumen->razon_c = $parame["razon"];
-						$resumen->motivo_c = $parame["motivo"];
-						$resumen->detalle_c = $parame["detalle"];
-						$resumen->user_id_c = $parame["ingesta"];
-						$resumen->user_id1_c = $parame["valida"];
-						$resumen->save();
+						if(trim($selected) == "selected1") {
+							$resumen->condicion_cliente_c = $parame["condicion"];
+							$resumen->razon_c = $parame["razon"];
+							$resumen->motivo_c = $parame["motivo"];
+							$resumen->detalle_c = $parame["detalle"];
+							$resumen->user_id_c = $parame["ingesta"];
+							$resumen->user_id1_c = $parame["valida"];
+						}
+						if(trim($selected) == "selected2") {
+							$resumen->condicion2_c = $parame["condicion"];
+							$resumen->razon2_c = $parame["razon"];
+							$resumen->motivo2_c = $parame["motivo"];
+							$resumen->detalle2_c = $parame["detalle"];
+							$resumen->user_id2_c = $parame["ingesta"];
+							$resumen->user_id3_c = $parame["valida"];
+						}
+						if(trim($selected) == "selected3") {
+							$resumen->condicion3_c = $parame["condicion"];
+							$resumen->razon3_c = $parame["razon"];
+							$resumen->motivo3_c = $parame["motivo"];
+							$resumen->detalle3_c = $parame["detalle"];
+							$resumen->user_id4_c = $parame["ingesta"];
+							$resumen->user_id5_c = $parame["valida"];
+						}
 						//Notifica bloqueo al Resposable de validación
 						global $app_list_strings;
 						require_once 'include/SugarPHPMailer.php';
@@ -177,14 +187,26 @@ AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id
 						$mailer->addRecipientsTo(new EmailIdentity($valida->email1, $valida->first_name . ' ' . $valida->last_name));
 						$result = $mailer->send();
 					}else{
-						$resumen->condicion_cliente_c = "";
-						$resumen->razon_c = "";
-						$resumen->motivo_c = "";
-						$resumen->detalle_c = "";
-						$resumen->user_id_c = "";
-						$resumen->user_id1_c = "";
-						$resumen->save();
+						//Notifica desbloqueo al Resposable de validación
+						global $app_list_strings;
+						require_once 'include/SugarPHPMailer.php';
+						require_once 'modules/Administration/Administration.php';
+						$ingesta = BeanFactory::retrieveBean('Users', $parame["ingesta"]);
+						$valida = BeanFactory::retrieveBean('Users', $parame["valida"]);
+						$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Hola <b>'.$valida->nombre_completo_c.'</b>
+						<br><br>Se le informa que la cuenta <b>'.$cuenta.'</b> ha sido desbloqueada por <b>'.$ingesta->nombre_completo_c.'</b>
+						<br><br>Se requiere de su aprobación para desbloquear definitivamente la cuenta.
+						<br><br>Saludos.</font></p>';
+						$mailer = MailerFactory::getSystemDefaultMailer();
+						$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+						$mailer->setSubject('Cuenta '.$cuenta.' desbloqueada por '.$ingesta->nombre_completo_c);
+						$body = trim($mailHTML);
+						$mailer->setHtmlBody($body);
+						$mailer->clearRecipients();
+						$mailer->addRecipientsTo(new EmailIdentity($valida->email1, $valida->first_name . ' ' . $valida->last_name));
+						$result = $mailer->send();
 					}
+					$resumen->save();
 				}
                 array_push($cuentas_resumen['actualizados'],$cuentas[$i]);
             }else{
