@@ -18,9 +18,9 @@ class GetAgenteCP extends SugarApi
                 'reqType' => 'GET',
                 'noLoginRequired' => true,
                 //endpoint path
-                'path' => array('GetAgenteCP', '?'),
+                'path' => array('GetAgenteCP'),
                 //endpoint variables
-                'pathVars' => array('method', 'idAgente'),
+                'pathVars' => array('method'),
                 //method to call
                 'method' => 'getAgenteTelCP',
                 //short help string to be displayed in the help documentation
@@ -37,39 +37,32 @@ class GetAgenteCP extends SugarApi
     {
         try {
             global $db;
-            $idAgente = $args['idAgente'];
+            global $current_user;
+            $equipoUNICS = $current_user->equipo_c;
+            $new_assigned_user = "";
 
             $query = "SELECT value FROM config WHERE name = 'last_assigned_user'";
             $result = $db->query($query);
             $row = $db->fetchByAssoc($result);
             $last_indice = $row['value'];
+            
+            if ($equipoUNICS != "" && $equipoUNICS != "0") {
 
-            $new_assigned_user = "";
+                $query_asesores = "SELECT id,date_entered from users u INNER JOIN users_cstm uc ON uc.id_c=u.id
+                where equipos_c like '%{$equipoUNICS}%'
+                AND puestousuario_c='27' AND subpuesto_c='3' AND u.status='Active' ORDER BY date_entered ASC ";
 
-            $query_agente_oa = "SELECT equipo_c from users u INNER JOIN users_cstm uc ON uc.id_c = u.id
-            where id = '{$idAgente}' AND puestousuario_c='27' AND subpuesto_c='3' AND u.status='Active'";
+                $result_usr = $db->query($query_asesores);
+                
+                while ($row = $db->fetchByAssoc($result_usr)) {
+                    $users[] = $row['id'];
+                }
 
-            $resultAgenteOA = $db->query($query_agente_oa);
-
-            while ($row = $db->fetchByAssoc($resultAgenteOA)) {
-                //Obtiene Equipo UNICS
-                $equipoUNICS = $row['equipo_c'];
-            }
-
-            $query_asesores = "SELECT id,date_entered from users u INNER JOIN users_cstm uc ON uc.id_c=u.id
-            where equipos_c like '%{$equipoUNICS}%'
-            AND puestousuario_c='27' AND subpuesto_c='3' AND u.status='Active' ORDER BY date_entered ASC ";
-
-            $result_usr = $db->query($query_asesores);
-            //$usuarios=;
-            while ($row = $db->fetchByAssoc($result_usr)) {
-                //Obtiene fecha de inicio de reunión
-                $users[] = $row['id'];
-            }
-
-            $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
-            $new_assigned_user = $users[$new_indice];
-
+                $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
+                $new_assigned_user = $users[$new_indice];           
+                
+            } 
+            
             return $new_assigned_user;
 
         } catch (Exception $e) {

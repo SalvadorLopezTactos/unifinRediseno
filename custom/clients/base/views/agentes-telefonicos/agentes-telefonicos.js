@@ -7,6 +7,7 @@
         'change .usuarios': 'actualizaUsuarios',
         'change .equipos': 'actualizaEquipos',
         'change .oficinas_atiende': 'actualizaOficinasAtiende',
+        'change .sub_puesto': 'actualizaSubpuesto',
     },
 
     initialize: function(options){
@@ -24,6 +25,7 @@
           };
           
           this.lista_equipo = app.lang.getAppListStrings('equipo_list');
+          this.lista_subpuesto = app.lang.getAppListStrings('subpuesto_list');
 
           var strUrl = 'Users?fields=id,nombre_completo_c&order_by=nombre_completo_c:asc&max_num=-1&filter[][status]=Active';
           app.api.call("GET", app.api.buildURL(strUrl), null, {
@@ -57,7 +59,7 @@
               "Informa": Informa
           };
           $('#successful').hide();
-          var strUrl = 'Users?fields=id,nombre_completo_c,puestousuario_c,reports_to_id,reports_to_name,equipo_c,equipos_c&max_num=-1&filter[][status]=Active&filter[1][$or][0][puestousuario_c]=27&filter[1][$or][1][puestousuario_c]=31&order_by=nombre_completo_c:asc';
+          var strUrl = 'Users?fields=id,nombre_completo_c,puestousuario_c,subpuesto_c,reports_to_id,reports_to_name,equipo_c,equipos_c&max_num=-1&filter[][status]=Active&filter[1][$or][0][puestousuario_c]=27&filter[1][$or][1][puestousuario_c]=31&order_by=nombre_completo_c:asc';
           if(AgenteN != "" && AgenteN != null) {
             strUrl = strUrl + '&filter[][first_name][$contains]=' + AgenteN;
           }
@@ -99,7 +101,8 @@
                          "equipo_c": data.records[i].equipo_c,
                          "equipos_c": equiposOA_concat,
                          "nombre_completo_c": data.records[i].nombre_completo_c,
-                         "reports_to_name": data.records[i].reports_to_name
+                         "reports_to_name": data.records[i].reports_to_name,
+                         "subpuesto_c": data.records[i].subpuesto_c
                      };
                      var previo = {
                          "id": data.records[i].id,
@@ -107,7 +110,8 @@
                          "equipo_c": data.records[i].equipo_c,
                          "equipos_c": equiposOA_concat,
                          "nombre_completo_c": data.records[i].nombre_completo_c,
-                         "reports_to_name": data.records[i].reports_to_name
+                         "reports_to_name": data.records[i].reports_to_name,
+                         "subpuesto_c": data.records[i].subpuesto_c
                      };
                      agentes.listausuarios.push(actual);
                      agentes.listausuarios_previo.push(previo);
@@ -162,13 +166,21 @@
       }
       agentes.listausuarios[index].equipos_c = selectOA.toString();
       $('#btn_guardar').attr('style', 'pointer-events:auto;');
-  },
+    },
+
+    actualizaSubpuesto: function(evt) {
+      var inputs = this.$('[data-field="subpuesto_id"].updatesubp'),
+          input = this.$(evt.currentTarget),
+          index = inputs.index(input);
+      agentes.listausuarios[index].subpuesto_c = input.val();
+      $('#btn_guardar').attr('style', 'pointer-events:auto;');
+    },
     
     guardar: function (){
         $('#btn_guardar').attr('style', 'pointer-events:none;');
         for(var i = 0; i < agentes.listausuarios.length; i++) {
           if(agentes.listausuarios[i].reports_to_id != agentes.listausuarios_previo[i].reports_to_id || agentes.listausuarios[i].equipo_c != agentes.listausuarios_previo[i].equipo_c ||
-            agentes.listausuarios[i].equipos_c != agentes.listausuarios_previo[i].equipos_c) {
+            agentes.listausuarios[i].equipos_c != agentes.listausuarios_previo[i].equipos_c || agentes.listausuarios[i].subpuesto_c != agentes.listausuarios_previo[i].subpuesto_c) {
             
             app.alert.show("alerta_update", {
                 level: 'process',
@@ -180,6 +192,7 @@
               reports_to_id: agentes.listausuarios[i].reports_to_id,
               equipo_c: agentes.listausuarios[i].equipo_c,
               equipos_c: agentes.listausuarios[i].equipos_c,
+              subpuesto_c: agentes.listausuarios[i].subpuesto_c,
             };
             
             var Url = app.api.buildURL("AgentesTelefonicos", '', {}, {});
@@ -205,6 +218,7 @@
             agentes.listausuarios_previo[i].reports_to_id = agentes.listausuarios[i].reports_to_id;
             agentes.listausuarios_previo[i].equipo_c = agentes.listausuarios[i].equipo_c;
             agentes.listausuarios_previo[i].equipos_c = agentes.listausuarios[i].equipos_c;
+            agentes.listausuarios_previo[i].subpuesto_c = agentes.listausuarios[i].subpuesto_c;
           }
         }
     },
