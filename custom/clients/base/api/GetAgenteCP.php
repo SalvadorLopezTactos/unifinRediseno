@@ -49,7 +49,7 @@ class GetAgenteCP extends SugarApi
             if ($equipoUNICS != "" && $equipoUNICS != "0") {
 
                 $query_asesores = "SELECT id,date_entered from users u INNER JOIN users_cstm uc ON uc.id_c=u.id
-                where equipos_c like '%{$equipoUNICS}%'
+                where equipos_c like '%^{$equipoUNICS}^%'
                 AND puestousuario_c='27' AND subpuesto_c='3' AND u.status='Active' ORDER BY date_entered ASC ";
 
                 $result_usr = $db->query($query_asesores);
