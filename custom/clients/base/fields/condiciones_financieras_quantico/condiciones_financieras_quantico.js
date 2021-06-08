@@ -9,6 +9,7 @@
     loadData: function(options){
         this.headers=[];
         this.bodyTable=[];
+        this.mainRowsBodyTable=[];
         this.idsTipo=[];
         self=this;
 
@@ -16,13 +17,14 @@
         var url = app.api.buildURL('CondicionesFinancierasQuantico?tipo=12345', null, null, {});
         app.api.call('GET', url, {},{
             success: function (data){
+
+                //Llenar los headers
                 //Recorres el array de respuesta para corroborar el tipo de dato para conocer el campo html que corresponde
                 if(data.FinancialTermGroupResponseList.length>0){
                     var arrayRespuesta=data.FinancialTermGroupResponseList[3].FinancialTermResponseList;
                     if(arrayRespuesta.length>0){
                         for (var i = 0; i < arrayRespuesta.length; i++) {
                             var objHeader={};
-                            var objBody={};
                             objHeader["name"]=arrayRespuesta[i].Name;
                             objHeader["idCampo"]=arrayRespuesta[i].DataType.Id;
 
@@ -30,12 +32,18 @@
                             if(arrayRespuesta[i].DataType.Id=='4' || arrayRespuesta[i].DataType.Id=='5' || arrayRespuesta[i].DataType.Id=='9' || arrayRespuesta[i].DataType.Id=='11'){
                                 objHeader['dobleCampo']='1';
                                 self.bodyTable.push();
-
                             }else{
                                 objHeader['dobleCampo']='';
                             }
                             self.headers.push(objHeader);
-                            /*
+                        }
+                    }
+
+                    //Llenado del cuerpo de la tabla
+                    for (var index = 0; index < data.FinancialTermGroupResponseList.length; index++) {
+                        var arrayRespuesta=data.FinancialTermGroupResponseList[index];
+                        var objRow={};
+                        /*
                             id 1: Booleano - Check
                             id 2: Numérico - Text
                             id 3: Texto - Text
@@ -47,25 +55,30 @@
                             id 9: Rango porcentaje - 2 Text
                             id 10: Decimal - Text
                             id 11: Rango Decimal - 2 Text
-                            */
-                            //Rangos (2 Text)
-                            if(arrayRespuesta[i].DataType.Id=='4' || arrayRespuesta[i].DataType.Id=='5' || arrayRespuesta[i].DataType.Id=='9' || arrayRespuesta[i].DataType.Id=='11'){
-                                self.bodyTable.push({'select':'','text':'1','checkbox':'','nombreCampo':arrayRespuesta[i].Name});
-                                self.bodyTable.push({'select':'','text':'1','checkbox':'','nombreCampo':arrayRespuesta[i].Name});
-                            }else if(arrayRespuesta[i].DataType.Id=='7'){//Catálogo
-                                self.bodyTable.push({'select':'1','text':'','checkbox':'','nombreCampo':arrayRespuesta[i].Name});
-                            }else if(arrayRespuesta[i].DataType.Id=='1'){//Check
-                                self.bodyTable.push({'select':'','text':'','checkbox':'1','nombreCampo':arrayRespuesta[i].Name});
+                        */
+                       self.bodyTable=[];
+                       for (var i = 0; i < arrayRespuesta.FinancialTermResponseList.length; i++){
+                           if(arrayRespuesta.FinancialTermResponseList[i].DataType.Id=='4' || 
+                            arrayRespuesta.FinancialTermResponseList[i].DataType.Id=='5' || 
+                            arrayRespuesta.FinancialTermResponseList[i].DataType.Id=='9' || 
+                            arrayRespuesta.FinancialTermResponseList[i].DataType.Id=='11'
+                           ){
+                               self.bodyTable.push({'select':'','text':'1','checkbox':'','nombreCampo':arrayRespuesta.FinancialTermResponseList[i].Name});
+                               self.bodyTable.push({'select':'','text':'1','checkbox':'','nombreCampo':arrayRespuesta.FinancialTermResponseList[i].Name});
+                            }else if(arrayRespuesta.FinancialTermResponseList[i].DataType.Id=='7'){//Catálogo
+                                self.bodyTable.push({'select':'1','text':'','checkbox':'','nombreCampo':arrayRespuesta.FinancialTermResponseList[i].Name});
+                            }else if(arrayRespuesta.FinancialTermResponseList[i].DataType.Id=='1'){//Check
+                                self.bodyTable.push({'select':'','text':'','checkbox':'1','nombreCampo':arrayRespuesta.FinancialTermResponseList[i].Name});
                             }else{// Solo 1 Text
-                                self.bodyTable.push({'select':'','text':'1','checkbox':'','nombreCampo':arrayRespuesta[i].Name});
+                                self.bodyTable.push({'select':'','text':'1','checkbox':'','nombreCampo':arrayRespuesta.FinancialTermResponseList[i].Name});
                             }
-
-                        }
-
+                       }
+                       self.mainRowsBodyTable.push({'bodyTable':self.bodyTable});
 
                     }
 
                 }
+                
                                 
                 self.render();
             }
