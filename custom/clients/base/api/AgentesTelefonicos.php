@@ -21,6 +21,7 @@ class AgentesTelefonicos extends SugarApi
         $user_id = $args['data']['user_id'];
         $reports_to_id = $args['data']['reports_to_id'];
         $equipo_c = $args['data']['equipo_c'];
+        $subpuesto_c = $args['data']['subpuesto_c'];
         $date= TimeDate::getInstance()->nowDb();
         $id_u_audit=create_guid();
 
@@ -35,16 +36,16 @@ class AgentesTelefonicos extends SugarApi
 
         if ($reports_to_id != $audit_last){
             //$GLOBALS['log']->fatal('>>>>Genera Insert en users_audit<<<<<<<');
-            $sqlInsert="insert into users_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
+            $sqlInsert="INSERT into users_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
                   VALUES ('{$id_u_audit}', '{$user_id}', '{$date}', '{$current_user->id}', 'reports_to_id', 'id', '{$audit_last}', '{$reports_to_id}', '', '', '1', '{$date}')";
             $GLOBALS['db']->query($sqlInsert);
 
         }
         //Actualiza el registro en users y users_cstm
-        // $query = "update users a, users_cstm b set a.reports_to_id = '{$reports_to_id}', b.equipo_c = '{$equipo_c}' where a.id = b.id_c and a.id = '{$user_id}'";
-        $query = "update users a, users_cstm b set a.reports_to_id = '{$reports_to_id}', b.equipo_c = '{$equipo_c}', b.equipos_c = '{$equipos_c}' where a.id = b.id_c and a.id = '{$user_id}'";
+        $query = "UPDATE users a, users_cstm b set a.reports_to_id = '{$reports_to_id}', b.equipo_c = '{$equipo_c}', b.equipos_c = '{$equipos_c}', b.subpuesto_c = '{$subpuesto_c}' 
+        WHERE a.id = b.id_c and a.id = '{$user_id}'";
         $result = $db->query($query);
-	
+
         return $result;
         //$GLOBALS['log']->fatal('Realiza Update en users_cstm');
     }

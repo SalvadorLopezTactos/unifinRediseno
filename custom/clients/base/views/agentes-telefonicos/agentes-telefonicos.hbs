@@ -129,6 +129,9 @@
                         <td class="span4">
 							<label class="record-label" style="font-weight:bold; text-align:center">OFICINAS ATIENDE</label>
 						</td>
+                        <td class="span4">
+							<label class="record-label" style="font-weight:bold; text-align:center">SUBPUESTO</label>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -157,6 +160,13 @@
 							<select class="oficinas_atiende select2 updateOA" multiple="multiple" style="width: 100%;" data-field="oficinas_atiende_id">
 								{{#each ../lista_equipo}}
 									<option value="{{@key}}" {{ifMSelected @key ../equipos_c}}>{{this}}</option>
+								{{/each}}
+							</select>
+						</td>
+                        <td class="span4">
+							<select class="sub_puesto select2 updatesubp" style="width: 100%;" data-field="subpuesto_id">
+								{{#each ../lista_subpuesto}}
+									<option value="{{@key}}" {{ifSelected @key ../subpuesto_c}}>{{this}}</option>
 								{{/each}}
 							</select>
 						</td>

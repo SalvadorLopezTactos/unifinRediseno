@@ -15,9 +15,9 @@
 
     initialize: function (options) {
         this._super("initialize", [options]);
-        self=this;
-        this.viewEnable=false;
-        this.numero_registros=0;
+        self = this;
+        this.viewEnable = false;
+        this.numero_registros = 0;
         this.getRegistrosAsignados();
 
         //this.getLeadsAplazadosCancelados();
@@ -38,16 +38,16 @@
             success: function (data) {
                 App.alert.dismiss('obtieneAsignados');
 
-                var maximo_registros_list=App.lang.getAppListStrings('limite_maximo_asignados_list');
-                var maximo_registros=parseInt(maximo_registros_list["1"]);
-                self.numero_registros=data.total_asignados;
-            	if(data.total_asignados<=maximo_registros){ //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
-            		self.viewEnable='1';
-            		self.getLeadsAplazadosCancelados();
-            	}else{
-            		self.viewEnable=false;
-            		self.render();
-            	}
+                var maximo_registros_list = App.lang.getAppListStrings('limite_maximo_asignados_list');
+                var maximo_registros = parseInt(maximo_registros_list["1"]);
+                self.numero_registros = data.total_asignados;
+                if (data.total_asignados <= maximo_registros) { //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
+                    self.viewEnable = '1';
+                    self.getLeadsAplazadosCancelados();
+                } else {
+                    self.viewEnable = false;
+                    self.render();
+                }
             },
             error: function (e) {
                 throw e;
@@ -68,8 +68,6 @@
                     title: 'Procesando',
                 });
 
-                var idAgente = App.user.attributes.id; //ID usuario logeado
-                
                 var today = new Date();
                 var n = 6;
                 var day = today.getDay();
@@ -77,52 +75,64 @@
                 var mm = today.getMonth() + 1;
                 var yyyy = today.getFullYear();
                 var hora = today.getHours();
-                
+
                 if (daySum < 10) { daySum = '0' + daySum }
                 if (mm < 10) { mm = '0' + mm }
                 if (hora < 10) { hora = '0' + hora }
-                
+
                 todayFormat = yyyy + '-' + mm + '-' + daySum + "T" + hora + ":" + "00" + ":" + "00";
-                
+
                 var todayISO = new Date(todayFormat);
                 var fechaFin = todayISO.toISOString(); //Formto toISOString para fecha date_time
-                
+
                 //Obtener los agentes telefónicos disponibles para generarle el registro de tarea
                 // app.api.call("read", app.api.buildURL("GetSiguienteAgenteTel", null, null, {}), null, {
-                app.api.call('GET', app.api.buildURL('GetAgenteCP/' + idAgente), null, {
+                app.api.call('GET', app.api.buildURL('GetAgenteCP/'), null, {
                     success: _.bind(function (data) {
-                        if (data != "") {
-                            var idAsesor = data;
-                            var usuario = App.user.get('full_name');
-                            var jsonDate = (new Date()).toJSON();
-                            
+                        
+                        var idAsesor = data;
+                        var usuario = App.user.get('full_name');
+                        var jsonDate = (new Date()).toJSON();
+                        
+                        if (idAsesor != "" && idAsesor != null) {
+
                             var bodyTask = {
                                 "name": "Solicitud de asignación de Lead - (Lead Management)",
                                 "date_start": jsonDate,
                                 "date_due": fechaFin,
                                 "priority": "High",
-                                "status":"Not Started",
+                                "status": "Not Started",
                                 "assigned_user_id": idAsesor,
                                 "description": "Se solicita la asignación de Lead para asesor " + usuario
                             };
-                            
+
                             app.api.call("create", app.api.buildURL("Tasks", null, null, bodyTask), null, {
                                 success: _.bind(function (data) {
                                     console.log("TAREA CREADA CORRECTAMENTE AL ASESOR");
                                     App.alert.dismiss('asignaLeadCP');
                                     app.alert.show('taskCreteSuccess', {
                                         level: 'success',
-                                        messages: 'Proceso completo<br>El agente encargado de gestionar la asignación es: ' + data.assigned_user_name,
+                                        messages: 'Proceso completo<br>El agente encargado de gestionar la asignación es: <b>' + data.assigned_user_name,
                                         autoClose: false
                                     });
 
                                 }, this)
                             });
+
+                        } else {
+
+                            App.alert.dismiss('asignaLeadCP');
+                            app.alert.show('message-idAgente-CP', {
+                                level: 'warning',
+                                messages: 'Por el momento no se tienen Agentes disponibles para asignación. Por favor, intenta más tarde...',
+                                autoClose: false
+                            });
                         }
+
                     }, this)
                 });
             },
-            onCancel: function () {}
+            onCancel: function () { }
         });
     },
 
