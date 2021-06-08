@@ -29,12 +29,32 @@ class notifica_cartera
 				$bloqueo = 1;
 			}
 			if($bloqueo || $bean->fetched_row['grupo_c'] != $bean->grupo_c) {
-				//Busca Grupo Empresarial
 				$beanAcct = BeanFactory::retrieveBean('Accounts', $bean->id, array('disable_row_level_security' => true));
+				// Bloquea Productos
+				if($bloqueo) {
+					$beanAcct->load_relationship('accounts_uni_productos_1');
+					$relatedBeans = $beanAcct->accounts_uni_productos_1->getBeans();
+					foreach ($relatedBeans as $rel) {
+						$rel->estatus_atencion = 3;
+						$rel->save();
+					}
+				}
+				//Busca Grupo Empresarial
 				if($beanAcct->load_relationship('members')) {
 					$relatedBeans = $beanAcct->members->getBeans();
 					if (!empty($relatedBeans)) {
 						foreach ($relatedBeans as $member) {
+							if($bloqueo) {
+								// Bloquea Productos
+								$beanAcct1 = BeanFactory::retrieveBean('Accounts', $member->id, array('disable_row_level_security' => true));
+								$beanAcct1->load_relationship('accounts_uni_productos_1');
+								$relatedBeans1 = $beanAcct1->accounts_uni_productos_1->getBeans();
+								foreach ($relatedBeans1 as $rel1) {
+									$rel1->estatus_atencion = 3;
+									$rel1->save();
+								}
+							}
+							//Actualiza Grupo Empresarial
 							if($bean->fetched_row['bloqueo_cartera_c'] != $bean->bloqueo_cartera_c) {
 								if($member->tct_no_contactar_chk_c) {
 									$member->tct_no_contactar_chk_c = 0;
