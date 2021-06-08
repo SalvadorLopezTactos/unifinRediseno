@@ -1,0 +1,64 @@
+<style>
+    #cont {
+        overflow: auto;
+        width: 96%;
+        float: left;
+        white-space: nowrap;
+        border: 1px solid lightblue;
+    }
+
+    .box {
+        /*background-color: #BBBBBB;*/
+        /*height: 100px;*/
+        display: inline-block;
+        margin: 10px;
+        /*width: 100px;*/
+    }
+</style>
+<div class="CFPoliticaQ container-fluid" id="cont">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">&nbsp;</th>
+                {{#each headers}}
+                <th scope="col" {{#if dobleCampo}}colspan="2"{{/if}}>{{name}}</th>
+                {{/each}}
+                <!--
+                <th scope="col">Tipo Activo</th>
+                <th scope="col" colspan="2">Porcentaje de Pago único</th>
+                <th scope="col" colspan="2">Porcentaje de Tasa</th>
+                <th scope="col" colspan="2">Plazo Meses /Días</th>
+                <th scope="col" colspan="2">Porcentaje Comisión Apertura</th>
+                <th scope="col" colspan="2">Porcentaje Comisión Financiada</th>
+                <th scope="col" colspan="2">Porcentaje Depósito Garantía</th>
+                -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">
+                    <span class="fa-stack" style="background-color: #0089fff2;">
+                        <i class="fa fa-plus fa-inverse fa-stack" style="text-align:center;color:white"></i>
+                    </span>
+                </th>
+                {{#each bodyTable}}
+                    <td style="text-align:center">
+                        {{#if select}}
+                            <select data-name="{{nombreCampo}}">
+                                <option value="UNO">UNO</option>
+                                <option value="DOS">DOS</option>
+                            </select>
+                        {{/if}}
+                        {{#if text}}
+                            <input data-name="{{nombreCampo}}" type="text" class="form-control" size="10">
+                        {{/if}}
+                        {{#if checkbox}}
+                            <input data-name="{{nombreCampo}}" type="checkbox" class="form-control" size="10">
+                        {{/if}}
+                    </td>
+                {{/each}}
+            </tr>
+        </tbody>
+    </table>
+
+</div>
