@@ -2415,4 +2415,32 @@ SQL;
 
     }
 
+    public function getQuanticoCFListaValores($host,$auth_encode,$nombre_lista)
+    {
+        try {
+            $url = $host;
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_ENCODING, '');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    'Content-Type: application/json',
+                    'Authorization: Basic ' . $auth_encode)
+            );
+            
+            $result = curl_exec($ch);
+            $curl_info = curl_getinfo($ch);
+            $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $response = json_decode($result, true);
+            $GLOBALS['log']->fatal('FIN PETICIÓN  GetAssetRequest '.$nombre_lista);
+            
+            return $response;
+        } catch (Exception $exception) {
+
+        }
+
+    }
+
 }
