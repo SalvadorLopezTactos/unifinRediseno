@@ -175,6 +175,20 @@ array (
                 'label' => 'Enviar Cuenta a',
                 'event' => 'button:send_account_asesor:click',
               ),
+              16 => 
+              array (
+                'name' => 'bloquea_cuenta',
+                'type' => 'rowaction',
+                'label' => 'Bloquear Cuenta',
+                'event' => 'button:bloquea_cuenta:click',
+              ),
+              17 => 
+              array (
+                'name' => 'desbloquea_cuenta',
+                'type' => 'rowaction',
+                'label' => 'Desbloquear Cuenta',
+                'event' => 'button:desbloquea_cuenta:click',
+              ),
             ),
           ),
           4 => 
