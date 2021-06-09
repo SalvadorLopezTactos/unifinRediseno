@@ -139,7 +139,7 @@
                     {{/if}}
                     {{#if ResumenProductos.leasing.visible_sinoportunidad}}
                     <tr>
-                        <td  width="33%" colspan = '3' >
+                        <td colspan = '3' >
                             <div class="row-fluid" style="margin-top: 10px;">
                                 <div class="l_so_razon span4">
                                     <label class="record-label mpad" style="margin-left:0px">Razón</label>
@@ -157,12 +157,7 @@
                             <div class="row-fluid" style="margin-top: 10px;">
                                 <div class="l_so_detalle  span8">
                                     <label class="record-label mpad" style="margin-left:0px">Detalle</label>
-                                    <label class="normal txt_l_so_detalle" type="text" data-name="txt_l_so_detalle">
-                                        {{ResumenProductos.leasing.detalle_c}}
-                                    </label>
-                                    <textarea class="normal txt_l_so_detalle" style="margin-left:0px" rows="4" cols="10" readonly>
-                                        {{ResumenProductos.leasing.detalle_c}}
-                                    </textarea>
+                                    <textarea class="normal txt_l_so_detalle" data-name="txt_l_so_detalle" style="margin-left:0px; margin: 1px;" rows="4" cols="10" readonly>{{ResumenProductos.leasing.detalle_c}}</textarea>
                                 </div>
                                 <div class="span4">&nbsp;</div>
                             </div>
@@ -187,8 +182,8 @@
                              <a href="#Employees/{{ResumenProductos.leasing.user_id2_c}}">{{ResumenProductos.leasing.fullname_validacion2_c}}</a>
                          </div>
                         </td>
-                    </tr>  
-                    {{/if}}
+                    </tr> 
+                    {{/if}} 
                 </table>
             </td>
         </tr>
@@ -312,30 +307,29 @@
                     {{/if}}
                     {{#if ResumenProductos.factoring.visible_sinoportunidad}}
                     <tr>
-						<td  width="33%" > <!-- Fila 7 -->
-                         <div class="f_so_razon ">
-                             <label class="record-label mpad" style="margin-left:0px">Razón</label>
-                             <label class="normal row-fluid select2 list_f_so_razon" data-field="list_f_so_razon">
-                                 {{getUnifinListValue 'razon_list' ResumenProductos.factoring.razon_c}}
-                             </label>
-                         </div>
-                         </td>
-						<td  width="33%" >
-						<div class="f_so_motivo ">
-                             <label class="record-label mpad" style="margin-left:0px">Motivo</label>
-                             <label class="normal row-fluid select2 list_f_so_motivo" data-field="list_f_so_motivo">
-                                 {{getUnifinListValue 'motivo_bloqueo_list' ResumenProductos.factoring.motivo_c}}
-                             </label>
-                         </div>
-                         </td>
-						<td  width="33%" >
-						<div class="f_so_detalle ">
-                             <label class="record-label mpad" style="margin-left:0px">Detalle</label>
-                             <label class="normal txt_f_so_detalle" type="text" data-name="txt_f_so_detalle">
-                                {{ResumenProductos.factoring.detalle_c}}
-                            </label>
-                         </div>
-						 </td>
+                        <td colspan = '3' >
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="f_so_razon span4">
+                                     <label class="record-label mpad" style="margin-left:0px">Razón</label>
+                                     <label class="normal row-fluid select2 list_f_so_razon" data-field="list_f_so_razon">
+                                         {{getUnifinListValue 'razon_list' ResumenProductos.factoring.razon_c}}
+                                     </label>
+                                </div>
+                                <div class="f_so_motivo span4">
+                                     <label class="record-label mpad" style="margin-left:0px">Motivo</label>
+                                     <label class="normal row-fluid select2 list_f_so_motivo" data-field="list_f_so_motivo">
+                                        {{getUnifinListValue 'motivo_bloqueo_list' ResumenProductos.factoring.motivo_c}}
+                                     </label>
+                                </div>
+                            </div>
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="f_so_detalle  span8">
+                                    <label class="record-label mpad" style="margin-left:0px">Detalle</label>
+                                    <textarea class="normal txt_f_so_detalle" style="margin-left:0px; margin: 1px;" rows="4" cols="10" readonly>{{ResumenProductos.factoring.detalle_c}}</textarea>
+                                </div>
+                                <div class="span4">&nbsp;</div>
+                            </div>
+                        </td>
                     </tr> <!-- Cierre Fila 7 -->
                     <tr>
 						<td  width="33%" > <!-- Fila 8 -->
@@ -357,7 +351,7 @@
                          </div>
 						</td>
                     </tr> <!-- Cierre Fila 8-->
-                    {{/if}}               
+                    {{/if}}
 				</table>
             </td>
         </tr> 
@@ -479,32 +473,31 @@
 						</td>
 					</tr>  <!-- Cierre Fila 6-->
 					{{/if}}
-					{{#if ResumenProductos.credito_auto.visible_sinoportunidad}}
+                    {{#if ResumenProductos.credito_auto.visible_sinoportunidad}}
 					<tr>
-						<td > <!-- Fila 7 -->
-							<div class="ca_so_razon ">
-								<label class="record-label mpad" style="margin-left:0px">Razón</label>
-								<label class="normal row-fluid select2 list_ca_so_razon" data-field="list_ca_so_razon">
-									{{getUnifinListValue 'razon_list' ResumenProductos.credito_auto.razon_c}}
-								</label>
-							</div>
-						</td>
-						<td  width="33%" >
-							<div class="ca_so_motivo ">
-								<label class="record-label mpad" style="margin-left:0px">Motivo</label>
-								<label class="normal row-fluid select2 list_ca_so_motivo" data-field="list_ca_so_motivo">
-									{{getUnifinListValue 'motivo_bloqueo_list' ResumenProductos.credito_auto.motivo_c}}
-								</label>
-							</div>
-						</td>
-						<td  width="33%" >
-							<div class="ca_so_detalle ">
-								<label class="record-label mpad" style="margin-left:0px">Detalle</label>
-								<label class="normal txt_ca_so_detalle" type="text" data-name="txt_ca_so_detalle">
-									{{ResumenProductos.credito_auto.detalle_c}}
-								</label>
-							</div>
-						</td>
+                        <td colspan = '3' >
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="ca_so_razon span4">
+							    	<label class="record-label mpad" style="margin-left:0px">Razón</label>
+							    	<label class="normal row-fluid select2 list_ca_so_razon" data-field="list_ca_so_razon">
+							    		{{getUnifinListValue 'razon_list' ResumenProductos.credito_auto.razon_c}}
+							    	</label>
+							    </div>
+                                <div class="ca_so_motivo span4">
+							    	<label class="record-label mpad" style="margin-left:0px">Motivo</label>
+							    	<label class="normal row-fluid select2 list_ca_so_motivo" data-field="list_ca_so_motivo">
+							    		{{getUnifinListValue 'motivo_bloqueo_list' ResumenProductos.credito_auto.motivo_c}}
+							    	</label>
+							    </div>
+                            </div>
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="ca_so_detalle  span8">
+                                    <label class="record-label mpad" style="margin-left:0px">Detalle</label>
+                                    <textarea class="normal txt_ca_so_detalle" style="margin-left:0px; margin: 1px;" rows="4" cols="10" readonly>{{ResumenProductos.credito_auto.detalle_c}}</textarea>
+                                </div>
+                                <div class="span4">&nbsp;</div>
+                            </div>
+                        </td>
 					</tr>  <!-- Cierre Fila 7 -->
 					<tr>
 						<td > <!-- Fila 8 -->
@@ -526,7 +519,7 @@
 							</div>
 						</td>
 					</tr>  <!-- Cierre Fila 8-->
-					{{/if}}
+                {{/if}}
                 </table>
             </td>
         </tr>
@@ -648,31 +641,31 @@
 						</td>
 					</tr>  <!-- Cierre Fila 6-->
 					{{/if}}
-					{{#if ResumenProductos.fleet.visible_sinoportunidad}}
+                    {{#if ResumenProductos.fleet.visible_sinoportunidad}}
 					<tr> <!-- Fila 7 -->
-						<td  width="33%" >
-						<div class="fl_so_razon ">
-							<label class="record-label mpad" style="margin-left:0px">Razón</label>
-							<label class="normal row-fluid select2 list_fl_so_razon" data-field="list_fl_so_razon">
-								{{getUnifinListValue 'razon_list' ResumenProductos.fleet.razon_c}}
-							</label>
-						</div>
-						</td>
-						<td  width="33%" >
-						<div class="fl_so_motivo ">
-							<label class="record-label mpad" style="margin-left:0px">Motivo</label>
-							<label class="normal row-fluid select2 list_fl_so_motivo" data-field="list_fl_so_motivo">
-								{{getUnifinListValue 'motivo_bloqueo_list' ResumenProductos.fleet.motivo_c}}
-							</label>
-						</div>
-						</td>
-						<td  width="33%" >
-						<div class="fl_so_detalle ">
-							<label class="record-label mpad" style="margin-left:0px">Detalle</label>
-							<label class="normal txt_fl_so_detalle" type="text" data-name="txt_fl_so_detalle">
-							{{ResumenProductos.fleet.detalle_c}}
-						</label>
-						</td>
+                        <td colspan = '3' >
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="fl_so_razon span4">
+						        	<label class="record-label mpad" style="margin-left:0px">Razón</label>
+						        	<label class="normal row-fluid select2 list_fl_so_razon" data-field="list_fl_so_razon">
+						        		{{getUnifinListValue 'razon_list' ResumenProductos.fleet.razon_c}}
+						        	</label>
+						        </div>
+                                <div class="fl_so_motivo span4 ">
+                                	<label class="record-label mpad" style="margin-left:0px">Motivo</label>
+                                	<label class="normal row-fluid select2 list_fl_so_motivo" data-field="list_fl_so_motivo">
+                                		{{getUnifinListValue 'motivo_bloqueo_list' ResumenProductos.fleet.motivo_c}}
+                                	</label>
+                                </div>
+                            </div>
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="fl_so_detalle  span8">
+                                    <label class="record-label mpad" style="margin-left:0px">Detalle</label>
+                                    <textarea class="normal txt_fl_so_detalle" style="margin-left:0px; margin: 1px;" rows="4" cols="10" readonly>{{ResumenProductos.fleet.detalle_c}}</textarea>
+                                </div>
+                                <div class="span4">&nbsp;</div>
+                            </div>
+                        </td>
 					</tr>	<!-- Cierre Fila 7 -->
 					<tr > <!-- Fila 8 -->
 						<td  width="33%" >
@@ -694,7 +687,7 @@
 						</div>
 						</td>
 					</tr>  <!-- Cierre Fila 8-->
-					{{/if}}
+                    {{/if}}
 				</table>
 			</td>
         </tr>
@@ -826,30 +819,29 @@
                     {{/if}}
                     {{#if ResumenProductos.uniclick.visible_sinoportunidad}}
                     <tr> <!-- Fila 7 -->
-						<td  width="33%" >
-                         <div class="u_so_razon ">
-                             <label class="record-label mpad" style="margin-left:0px">Razón</label>
-                             <label class="normal row-fluid select2 list_u_so_razon" data-field="list_u_so_razon">
-                                 {{getUnifinListValue 'razon_list' ResumenProductos.uniclick.razon_c}}
-                             </label>
-                         </div>
-                         </td>
-						<td  width="33%" >
-						<div class="u_so_motivo ">
-                             <label class="record-label mpad" style="margin-left:0px">Motivo</label>
-                             <label class="normal row-fluid select2 list_u_so_motivo" data-field="list_u_so_motivo">
-                                 {{getUnifinListValue 'motivo_bloqueo_list' ResumenProductos.uniclick.motivo_c}}
-                             </label>
-                         </div>
-                         </td>
-						<td  width="33%" >
-						<div class="u_so_detalle ">
-                             <label class="record-label mpad" style="margin-left:0px">Detalle</label>
-                             <label class="normal txt_u_so_detalle" type="text" data-name="txt_u_so_detalle">
-                                {{ResumenProductos.uniclick.detalle_c}}
-                            </label>
-                         </div>
-						 </td>
+                        <td colspan = '3' >
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="u_so_razon span4">
+                                    <label class="record-label mpad" style="margin-left:0px">Razón</label>
+                                    <label class="normal row-fluid select2 list_u_so_razon" data-field="list_u_so_razon">
+                                        {{getUnifinListValue 'razon_list' ResumenProductos.uniclick.razon_c}}
+                                    </label>
+                                </div>
+                                <div class="u_so_motivo span4">
+                                    <label class="record-label mpad" style="margin-left:0px">Motivo</label>
+                                    <label class="normal row-fluid select2 list_u_so_motivo" data-field="list_u_so_motivo">
+                                        {{getUnifinListValue 'motivo_bloqueo_list' ResumenProductos.uniclick.motivo_c}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="u_so_detalle  span8">
+                                    <label class="record-label mpad" style="margin-left:0px">Detalle</label>
+                                    <textarea class="normal txt_u_so_detalle" style="margin-left:0px; margin: 1px;" rows="4" cols="10" readonly>{{ResumenProductos.uniclick.detalle_c}}</textarea>
+                                </div>
+                                <div class="span4">&nbsp;</div>
+                            </div>
+                        </td>
                     </tr>  <!-- Cierre Fila 7 -->
                     <tr> <!-- Fila 8 -->
 						<td  width="33%" >

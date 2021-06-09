@@ -42,7 +42,7 @@
                         <td width="33%">
                             <div class="ls_estatus_lm mpad ">
                                 <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
-                                <select class="row-fluid select2 list_l_estatus_lm" data-field="list_l_estatus_lm">
+                                <select class="row-fluid select2 list_l_estatus_lm" id="list_l_estatus_lm" data-field="list_l_estatus_lm">
 								{{#each status_management_list}}
                                 <option value="{{@key}}" {{ifSelected @key
                                                                         ../ResumenProductos.leasing.status_management_c}}>{{this}}</option>
@@ -156,13 +156,12 @@
                         </td>
                     </tr>
                     {{/if}}
-                    {{#if ResumenProductos.leasing.visible_sinoportunidad}}
                     <tr>
-                         <td  width="33%" colspan = '3' >
+                        <td   colspan = '3' >
                             <div class="row-fluid" style="margin-top: 10px;">
                                 <div class="l_so_razon span4">
                                     <label class="record-label mpad" style="margin-left:0px">Razón</label>
-                                    <select class="row-fluid select2 list_l_so_razon" data-field="list_l_so_razon">
+                                    <select class="row-fluid select2 list_l_so_razon" id = "list_l_so_razon" data-field="list_l_so_razon">
                                         {{#each razon_list}}
 							            <option value="{{@key}}" {{ifSelected @key
 							            	                                    ../ResumenProductos.leasing.razon_c}}>{{this}}</option>
@@ -171,7 +170,7 @@
                                 </div>
                                 <div class="l_so_motivo span4">
                                     <label class="record-label mpad" style="margin-left:0px">Motivo</label>
-                                    <select class="row-fluid select2 list_l_so_motivo" data-field="list_l_so_motivo"
+                                    <select class="row-fluid select2 list_l_so_motivo" id = "list_l_so_motivo" data-field="list_l_so_motivo"
                                         {{#each motivo_bloqueo_list}}
 							            <option value="{{@key}}" {{ifSelected @key
 							            	                                    ../ResumenProductos.leasing.motivo_c}}>{{this}}</option>
@@ -182,12 +181,7 @@
                             <div class="row-fluid" style="margin-top: 10px;">
                                 <div class="l_so_detalle  span8">
                                     <label class="record-label mpad" style="margin-left:0px">Detalle</label>
-                                    <label class="normal txt_l_so_detalle" type="text" data-name="txt_l_so_detalle">
-                                        {{ResumenProductos.leasing.detalle_c}}
-                                    </label>
-                                    <textarea class="normal txt_l_so_detalle" style="margin-left:0px" rows="4" cols="10" data-field="txt_l_so_detalle" data-name="txt_l_so_detalle">
-                                        {{ResumenProductos.leasing.detalle_c}}
-                                    </textarea>
+                                    <textarea class="normal txt_l_so_detalle" style="margin-left:0px" rows="4" cols="10" data-field="txt_l_so_detalle" data-name="txt_l_so_detalle">{{ResumenProductos.leasing.detalle_c}}</textarea>
                                 </div>
                                 <div class="span4">&nbsp;</div>
                             </div>
@@ -202,18 +196,21 @@
                         </td>
                         <td width="33%">
                             <div class="l_so_raspval1 ">
-                             <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
-                              <input class="bigdrop" id="e6" style="width:260px"/></p>
-                         </div>
+                                <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
+                                <select class="row-fluid select2 list_l_respval_1" id = "list_l_respval_1" data-field="list_l_respval_1">
+                                    {{{directoresLeasing1}}}
+                                </select>                           
+                            </div>
                         </td>
                         <td width="33%">
                             <div class="l_so_raspval2 ">
-                             <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
-                              <input class="bigdrop" id="e6" style="width:260px"/></p>
-                         </div>
+                                <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
+                                <select class="row-fluid select2 list_l_respval_2" id = "list_l_respval_2" data-field="list_l_respval_2">
+                                    {{{directoresLeasing2}}}
+                                </select>  
+                            </div>
                         </td>
                     </tr>  
-                    {{/if}}
                 </table>
             </td>
         </tr>
@@ -247,7 +244,7 @@
                             <div class="fac_estatus_lm mpad ">
                                 <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
                                 {{#if ResumenProductos.factoring.status_management_c}}{{getUnifinListValue 'status_management_list' ResumenProductos.factoring.status_management_c}}{{/if}}
-                                <select class="row-fluid select2 list_fac_estatus_lm" data-field="list_fac_estatus_lm">
+                                <select class="row-fluid select2 list_fac_estatus_lm" id="list_fac_estatus_lm" data-field="list_fac_estatus_lm">
 								{{#each status_management_list}}
                                 <option value="{{@key}}" {{ifSelected @key
                                                                         ../ResumenProductos.factoring.status_management_c}}>{{this}}</option>
@@ -355,55 +352,61 @@
                         </td>
                     </tr>
                     {{/if}}
-                    {{#if ResumenProductos.factoring.visible_sinoportunidad}}
                     <tr>
-                        <td width="33%">
-                            <div class="f_so_razon ">
-                             <label class="record-label mpad" style="margin-left:0px">Razón</label>
-                            {{#each razon_list}}
-							<option value="{{@key}}" {{ifSelected @key
-								../ResumenProductos.factoring.razon_c}}>{{this}}</option>
-							{{/each}}
-                         </div>
-                        </td>
-                        <td width="33%">
-                            <div class="f_so_motivo ">
-                             <label class="record-label mpad" style="margin-left:0px">Motivo</label>
-                            {{#each motivo_bloqueo_list}}
-							<option value="{{@key}}" {{ifSelected @key
-								../ResumenProductos.factoring.motivo_c}}>{{this}}</option>
-							{{/each}}
-                         </div>
-                        </td>
-                        <td width="33%">
-                            <div class="f_so_detalle ">
-                            <label class="record-label mpad" style="margin-left:0px">Detalle</label>
-                            <input type="text" class="txt_f_so_detalle" value="{{ResumenProductos.factoring.detalle_c}}"
-									data-field="txt_f_so_detalle" data-name="txt_f_so_detalle" maxlength="255" />
-                         </div>
+                        <td colspan = '3' >
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="f_so_razon span4">
+                                    <label class="record-label mpad" style="margin-left:0px">Razón</label>
+                                    <select class="row-fluid select2 list_f_razon_lm" id="list_f_estatus_lm" data-field="list_f_estatus_lm">
+                                        {{#each razon_list}}
+							            <option value="{{@key}}" {{ifSelected @key
+								                                            ../ResumenProductos.factoring.razon_c}}>{{this}}</option>
+							            {{/each}}
+                                    </select>
+                                </div>
+                                <div class="f_so_motivo span4">
+                                    <label class="record-label mpad" style="margin-left:0px">Motivo</label>
+                                    <select class="row-fluid select2 list_f_so_motivo" id = "list_f_so_motivo" data-field="list_f_so_motivo">
+                                        {{#each motivo_bloqueo_list}}
+						                <option value="{{@key}}" {{ifSelected @key
+						        	                                            ../ResumenProductos.factoring.motivo_c}}>{{this}}</option>
+						                {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="f_so_detalle  span8">
+                                    <label class="record-label mpad" style="margin-left:0px">Detalle</label>
+                                    <textarea class="normal txt_f_so_detalle" style="margin-left:0px" rows="4" cols="10" data-field="txt_f_so_detalle" data-name="txt_f_so_detalle">{{ResumenProductos.factoring.detalle_c}}</textarea>
+                                </div>
+                                <div class="span4">&nbsp;</div>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <td width="33%">
                             <div class="f_so_resp_ingesta ">
-                             <label class="record-label mpad" style="margin-left:0px">Responsable de Ingesta</label>
-                             <a href="#Employees/{{ResumenProductos.factoring.ingesta_c}}">{{ResumenProductos.factoring.fullname_ingesta_c}}</a>
+                                <label class="record-label mpad" style="margin-left:0px">Responsable de Ingesta</label>
+                                <a href="#Employees/{{ResumenProductos.factoring.user_id_c}}">{{ResumenProductos.factoring.fullname_ingesta_c}}</a>
                             </div>
                         </td>
                         <td width="33%">
                             <div class="f_so_raspval1 ">
-                             <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
-                             <a href="#Employees/{{ResumenProductos.factoring.validacion1_c}}">{{ResumenProductos.factoring.fullname_validacion1_c}}</a>
-                         </div>
+                                <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
+                                <select class="row-fluid select2 list_f_respval_1" id = "list_f_respval_1" data-field="list_f_respval_1">
+                                    {{{directoresFactoraje1}}}
+                                </select>
+                            </div>
                         </td>
                         <td width="33%">
                             <div class="f_so_raspval2 ">
-                             <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
-                             <a href="#Employees/{{ResumenProductos.factoring.validacion2_c}}">{{ResumenProductos.factoring.fullname_validacion2_c}}</a>
-                         </div>
+                                <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
+                                <select class="row-fluid select2 list_f_respval_2" id = "list_f_respval_2" data-field="list_f_respval_2">
+                                    {{{directoresFactoraje2}}}
+                                </select>
+                            </div>
                         </td>
-                    </tr>  
-                    {{/if}}
+                    </tr>
                 </table>
             </td>
         </tr>
@@ -436,7 +439,7 @@
                         <td width="33%">
                             <div class="ca_estatus_lm mpad ">
                                 <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
-                                <select class="row-fluid select2 list_ca_estatus_lm" data-field="list_ca_estatus_lm">
+                                <select class="row-fluid select2 list_ca_estatus_lm" id="list_ca_estatus_lm" data-field="list_ca_estatus_lm">
 								{{#each status_management_list}}
                                 <option value="{{@key}}" {{ifSelected @key
                                                                         ../ResumenProductos.credito_auto.status_management_c}}>{{this}}</option>
@@ -544,55 +547,61 @@
                         </td>
                     </tr>
                     {{/if}}
-                    {{#if ResumenProductos.credito_auto.visible_sinoportunidad}}
                     <tr>
-                        <td width="33%">
-                            <div class="ca_so_razon ">
-                             <label class="record-label mpad" style="margin-left:0px">Razón</label>
-                            {{#each razon_list}}
-							<option value="{{@key}}" {{ifSelected @key
-								../ResumenProductos.credito_auto.razon_c}}>{{this}}</option>
-							{{/each}}
-                         </div>
-                        </td>
-                        <td width="33%">
-                            <div class="ca_so_motivo ">
-                             <label class="record-label mpad" style="margin-left:0px">Motivo</label>
-                            {{#each motivo_bloqueo_list}}
-							<option value="{{@key}}" {{ifSelected @key
-								../ResumenProductos.credito_auto.motivo_c}}>{{this}}</option>
-							{{/each}}
-                         </div>
-                        </td>
-                        <td width="33%">
-                            <div class="ca_so_detalle ">
-                            <label class="record-label mpad" style="margin-left:0px">Detalle</label>
-                            <input type="text" class="txt_ca_so_detalle" value="{{ResumenProductos.credito_auto.detalle_c}}"
-									data-field="txt_ca_so_detalle" data-name="txt_ca_so_detalle" maxlength="255" />
-                         </div>
+                        <td  width="33%" colspan = '3' >
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="ca_so_razon span4">
+                                    <label class="record-label mpad" style="margin-left:0px">Razón</label>
+                                    <select class="row-fluid select2 list_ca_so_razon" id = "list_ca_so_razon" data-field="list_ca_so_razon">
+                                        {{#each razon_list}}
+	    					        	<option value="{{@key}}" {{ifSelected @key
+		    				        	                                    	../ResumenProductos.credito_auto.razon_c}}>{{this}}</option>
+			    			        	{{/each}}
+                                    </select>
+                                </div>
+                                <div class="ca_so_motivo span4">
+                                    <label class="record-label mpad" style="margin-left:0px">Motivo</label>
+                                    <select class="row-fluid select2 list_ca_so_motivo" id = "list_ca_so_motivo" data-field="list_ca_so_motivo">
+                                        {{#each motivo_bloqueo_list}}
+						                <option value="{{@key}}" {{ifSelected @key
+						        	                                            ../ResumenProductos.credito_auto.motivo_c}}>{{this}}</option>
+						                {{/each}}
+                                    </select>                                    
+                                </div>
+                            </div>
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="ca_so_detalle  span8">
+                                    <label class="record-label mpad" style="margin-left:0px">Detalle</label>
+                                    <textarea class="normal txt_ca_so_detalle" style="margin-left:0px" rows="4" cols="10" data-field="txt_ca_so_detalle" data-name="txt_ca_so_detalle">{{ResumenProductos.credito_auto.detalle_c}}</textarea>
+                                </div>
+                                <div class="span4">&nbsp;</div>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <td width="33%">
                             <div class="ca_so_resp_ingesta ">
                              <label class="record-label mpad" style="margin-left:0px">Responsable de Ingesta</label>
-                             <a href="#Employees/{{ResumenProductos.credito_auto.ingesta_c}}">{{ResumenProductos.credito_auto.fullname_ingesta_c}}</a>
+                             <a href="#Employees/{{ResumenProductos.credito_auto.user_id_c}}">{{ResumenProductos.credito_auto.fullname_ingesta_c}}</a>
                             </div>
                         </td>
                         <td width="33%">
                             <div class="ca_so_raspval1 ">
-                             <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
-                             <a href="#Employees/{{ResumenProductos.credito_auto.validacion1_c}}">{{ResumenProductos.credito_auto.fullname_validacion1_c}}</a>
-                         </div>
+                                <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
+                                <select class="row-fluid select2 list_ca_respval_1" id = "list_ca_respval_1" data-field="list_ca_respval_1">
+                                    {{{directoresCredAuto1}}}
+                                </select>
+                            </div>
                         </td>
                         <td width="33%">
                             <div class="ca_so_raspval2 ">
-                             <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
-                             <a href="#Employees/{{ResumenProductos.credito_auto.validacion2_c}}">{{ResumenProductos.credito_auto.fullname_validacion2_c}}</a>
-                         </div>
+                                <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
+                                <select class="row-fluid select2 list_ca_respval_2" id = "list_ca_respval_2" data-field="list_ca_respval_2">
+                                    {{{directoresCredAuto2}}}
+                                </select>
+                            </div>
                         </td>
-                    </tr>  
-                    {{/if}}
+                    </tr>
                 </table>
             </td>
         </tr>
@@ -625,7 +634,7 @@
                         <td width="33%">
                             <div class="fe_estatus_lm mpad ">
                                 <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
-                                <select class="row-fluid select2 list_fl_estatus_lm" data-field="list_fl_estatus_lm">
+                                <select class="row-fluid select2 list_fl_estatus_lm" id="list_fl_estatus_lm" data-field="list_fl_estatus_lm">
 								{{#each status_management_list}}
                                 <option value="{{@key}}" {{ifSelected @key
                                                                         ../ResumenProductos.fleet.status_management_c}}>{{this}}</option>
@@ -733,55 +742,61 @@
                         </td>
                     </tr>
                     {{/if}}
-                    {{#if ResumenProductos.fleet.visible_sinoportunidad}}
                     <tr>
-                        <td width="33%">
-                            <div class="fl_so_razon ">
-                             <label class="record-label mpad" style="margin-left:0px">Razón</label>
-                            {{#each razon_list}}
-							<option value="{{@key}}" {{ifSelected @key
-								../ResumenProductos.fleet.razon_c}}>{{this}}</option>
-							{{/each}}
-                         </div>
+                        <td colspan = '3' >
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="fl_so_razon span4">                            
+                                    <label class="record-label mpad" style="margin-left:0px">Razón</label>
+                                    <select class="row-fluid select2 list_fl_so_razon" id = "list_fl_so_razon" data-field="list_fl_so_razon">
+                                        {{#each razon_list}}
+						        	    <option value="{{@key}}" {{ifSelected @key
+						        	    	../ResumenProductos.fleet.razon_c}}>{{this}}</option>
+						        	    {{/each}}
+                                    </select>
+                                </div>
+                                <div class="fl_so_motivo span4">
+                                    <label class="record-label mpad" style="margin-left:0px">Motivo</label>
+                                    <select class="row-fluid select2 list_fl_so_motivo" id = "list_fl_so_motivo" data-field="list_fl_so_motivo">
+                                        {{#each motivo_bloqueo_list}}
+						        	    <option value="{{@key}}" {{ifSelected @key
+						        	    	../ResumenProductos.fleet.motivo_c}}>{{this}}</option>
+						        	    {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="fl_so_detalle  span8">
+                                    <label class="record-label mpad" style="margin-left:0px">Detalle</label>
+                                    <textarea class="normal txt_fl_so_detalle" style="margin-left:0px" rows="4" cols="10" data-field="txt_fl_so_detalle" data-name="txt_fl_so_detalle">{{ResumenProductos.fleet.detalle_c}}</textarea>
+                                </div>
+                                <div class="span4">&nbsp;</div>
+                            </div>
                         </td>
-                        <td width="33%">
-                            <div class="fl_so_motivo ">
-                             <label class="record-label mpad" style="margin-left:0px">Motivo</label>
-                            {{#each motivo_bloqueo_list}}
-							<option value="{{@key}}" {{ifSelected @key
-								../ResumenProductos.fleet.motivo_c}}>{{this}}</option>
-							{{/each}}
-                         </div>
-                        </td>
-                        <td>
-                            <div class="fl_so_detalle ">
-                            <label class="record-label mpad" style="margin-left:0px">Detalle</label>
-                            <input type="text" class="txt_fl_so_detalle" value="{{ResumenProductos.fleet.detalle_c}}"
-									data-field="txt_fl_so_detalle" data-name="txt_fl_so_detalle" maxlength="255" />
-                         </div>
-                        </td width="33%">
                     </tr>
                     <tr>
                         <td width="33%">
                             <div class="fl_so_resp_ingesta ">
                              <label class="record-label mpad" style="margin-left:0px">Responsable de Ingesta</label>
-                             <a href="#Employees/{{ResumenProductos.fleet.ingesta_c}}">{{ResumenProductos.fleet.fullname_ingesta_c}}</a>
+                             <a href="#Employees/{{ResumenProductos.fleet.user_id_c}}">{{ResumenProductos.fleet.fullname_ingesta_c}}</a>
                             </div>
                         </td>
                         <td width="33%">
                             <div class="fl_so_raspval1 ">
-                             <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
-                             <a href="#Employees/{{ResumenProductos.fleet.validacion1_c}}">{{ResumenProductos.fleet.fullname_validacion1_c}}</a>
-                         </div>
+                                <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
+                                <select class="row-fluid select2 list_fl_respval_1" id = "list_fl_respval_1" data-field="list_fl_respval_1">
+                                    {{{directoresFleet1}}}
+                                </select>
+                            </div>
                         </td>
                         <td width="33%">
                             <div class="fl_so_raspval2 ">
-                             <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
-                             <a href="#Employees/{{ResumenProductos.fleet.validacion2_c}}">{{ResumenProductos.fleet.fullname_validacion2_c}}</a>
-                         </div>
+                                <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
+                                <select class="row-fluid select2 list_fl_respval_2" id = "list_fl_respval_2" data-field="list_fl_respval_2">
+                                    {{{directoresFleet2}}}
+                                </select>
+                            </div>
                         </td>
-                    </tr>  
-                    {{/if}}
+                    </tr>
                 </table>
             </td>
         </tr>
@@ -814,7 +829,7 @@
                         <td width="33%">
                             <div class="uniclick_estatus_lm mpad ">
                                 <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
-                                <select class="row-fluid select2 list_u_estatus_lm" data-field="list_u_estatus_lm">
+                                <select class="row-fluid select2 list_u_estatus_lm" id="list_u_estatus_lm" data-field="list_u_estatus_lm">
 								{{#each status_management_list}}
                                 <option value="{{@key}}" {{ifSelected @key
                                                                         ../ResumenProductos.uniclick.status_management_c}}>{{this}}</option>
@@ -933,55 +948,63 @@
                         </td>
                     </tr>
                     {{/if}}
-                    {{#if ResumenProductos.uniclick.visible_sinoportunidad}}
                     <tr>
-                        <td width="33%">
-                            <div class="u_so_razon ">
-                             <label class="record-label mpad" style="margin-left:0px">Razón</label>
-                            {{#each razon_list}}
-							<option value="{{@key}}" {{ifSelected @key
-								../ResumenProductos.uniclick.razon_c}}>{{this}}</option>
-							{{/each}}
-                         </div>
-                        </td>
-                        <td width="33%">
-                            <div class="u_so_motivo ">
-                             <label class="record-label mpad" style="margin-left:0px">Motivo</label>
-                            {{#each motivo_bloqueo_list}}
-							<option value="{{@key}}" {{ifSelected @key
-								../ResumenProductos.uniclick.motivo_c}}>{{this}}</option>
-							{{/each}}
-                         </div>
-                        </td>
-                        <td width="33%">
-                            <div class="u_so_detalle ">
-                            <label class="record-label mpad" style="margin-left:0px">Detalle</label>
-                            <input type="text" class="txt_u_so_detalle" value="{{ResumenProductos.uniclick.detalle_c}}"
-									data-field="txt_u_so_detalle" data-name="txt_u_so_detalle" maxlength="255" />
-                         </div>
+                        <td colspan = '3' >
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="u_so_razon span4">
+                                    <label class="record-label mpad" style="margin-left:0px">Razón</label>
+                                    <select class="row-fluid select2 list_u_so_razon" id = "list_u_so_razon" data-field="list_u_so_razon">
+                                        {{#each razon_list}}
+						        	    <option value="{{@key}}" {{ifSelected @key
+						        	    	../ResumenProductos.uniclick.razon_c}}>{{this}}</option>
+						        	    {{/each}}
+                                    </select>
+                                </div>
+                                <div class="u_so_motivo span4 ">
+                                    <label class="record-label mpad" style="margin-left:0px">Motivo</label>
+                                    <select class="row-fluid select2 list_u_so_motivo" id = "list_u_so_motivo" data-field="list_u_so_motivo">
+                                        {{#each motivo_bloqueo_list}}
+						        	    <option value="{{@key}}" {{ifSelected @key
+						        	    	../ResumenProductos.uniclick.motivo_c}}>{{this}}</option>
+						        	    {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="u_so_detalle  span8">
+                                    <label class="record-label mpad" style="margin-left:0px">Detalle</label>
+                                    <textarea class="normal txt_u_so_detalle" style="margin-left:0px" rows="4" cols="10" data-field="txt_u_so_detalle" data-name="txt_u_so_detalle">
+                                        {{ResumenProductos.uniclick.detalle_c}}
+                                    </textarea>
+                                </div>
+                                <div class="span4">&nbsp;</div>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <td width="33%">
                             <div class="u_so_resp_ingesta ">
                              <label class="record-label mpad" style="margin-left:0px">Responsable de Ingesta</label>
-                             <a href="#Employees/{{ResumenProductos.uniclick.ingesta_c}}">{{ResumenProductos.uniclick.fullname_ingesta_c}}</a>
+                             <a href="#Employees/{{ResumenProductos.uniclick.user_id_c}}">{{ResumenProductos.uniclick.fullname_ingesta_c}}</a>
                             </div>
                         </td>
                         <td width="33%">
                             <div class="u_so_raspval1 ">
-                             <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
-                             <a href="#Employees/{{ResumenProductos.uniclick.validacion1_c}}">{{ResumenProductos.uniclick.fullname_validacion1_c}}</a>
-                         </div>
+                                <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
+                                <select class="row-fluid select2 list_u_respval_1" id = "list_u_respval_1" data-field="list_u_respval_1">
+                                    {{{directoresUniclick1}}}
+                                </select>
+                            </div>
                         </td>
                         <td width="33%">
                             <div class="u_so_raspval2 ">
-                             <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
-                             <a href="#Employees/{{ResumenProductos.uniclick.validacion2_c}}">{{ResumenProductos.uniclick.fullname_validacion2_c}}</a>
+                                <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
+                                <select class="row-fluid select2 list_u_respval_2" id = "list_u_respval_2" data-field="list_u_respval_2">
+                                    {{{directoresUniclick2}}}
+                                </select>
                          </div>
                         </td>
-                    </tr>  
-                    {{/if}}
+                    </tr>
                 </table>
             </td>
         </tr>

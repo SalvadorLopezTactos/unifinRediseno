@@ -251,7 +251,8 @@
         this.get_pld();
         this.get_resumen();
         this.get_analizate();
-
+        
+        this.carga_condiciones();
         //this.get_noviable();
 
 
@@ -5092,6 +5093,21 @@
         }
     },
 
+     //Carga Condiciones 
+     carga_condiciones: function () {
+        this.datacondiciones = [];
+        app.api.call('GET', app.api.buildURL('tct4_Condiciones/'), null, {
+			success: _.bind(function (data) {
+				if(data.records.length > 0) {
+					this.datacondiciones = data;
+				}
+			}, this),
+            error: function (e) {
+                throw e;
+            }
+		});
+	},
+
     setCustomFields: function (fields, errors, callback) {
         if ($.isEmptyObject(errors)) {
             //Teléfonos
@@ -5712,12 +5728,40 @@
                 errors['error_leasingUP'] = errors['error_leasingUP'] || {};
                 errors['error_leasingUP'].required = true;
             }
-            if (faltantesleasup == 0 && $('.chk_l_nv')[0].checked == true && cont_uni_p.ResumenProductos.leasing.status_management_c != "3") {
+            /*if (faltantesleasup == 0 && $('.chk_l_nv')[0].checked == true && cont_uni_p.ResumenProductos.leasing.status_management_c != "3") {
                 this.model.set('promotorleasing_c', '9 - No Viable');
                 this.model.set('user_id_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.leasing.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
-            }
+            }*/
         }
+
+        var faltantelm = 0;
+        var selectlm = document.getElementById("list_l_estatus_lm");
+        var selectlrazon = document.getElementById("list_l_so_razon");
+        var selectlmotivo = document.getElementById("list_l_so_motivo");
+        if(selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
+            for(var i = 0; i < this.datacondiciones.records.length; i++) {
+                if (this.datacondiciones.records[i].razon == selectlrazon.value && this.datacondiciones.records[i].motivo == selectlmotivo.value ){
+                    if (this.datacondiciones.records[i].detalle == true ) {
+                        if ( $('.txt_l_so_detalle').val().trim() == "") {
+                            $('.txt_l_so_detalle').css('border-color', 'red'); //TXT ¿Qué producto?
+                            faltantelm += 1;
+                        }
+                    }
+                }
+            }
+
+            if (faltantelm > 0) {
+                app.alert.show("Faltantes "+selectlm.options[selectlm.selectedIndex].text, {
+                    level: "error",
+                    title: 'Hace falta el Detalle para el Estatus <b>'+selectlm.options[selectlm.selectedIndex].text+'</b>.',
+                    autoClose: false
+                });
+                errors['error_leasingUP'] = errors['error_leasingUP'] || {};
+                errors['error_leasingUP'].required = true;
+            }
+		}
+
         callback(null, fields, errors);
     },
     /***********************************VALIDACION NO VIABLE PRODUCTO FACTORAJE*******************************/
@@ -5781,12 +5825,40 @@
                 errors['error_FactorajeUP'] = errors['error_FactorajeUP'] || {};
                 errors['error_FactorajeUP'].required = true;
             }
-            if (faltantesFactorajeUP == 0 && $('.chk_f_nv')[0].checked == true && cont_uni_p.ResumenProductos.factoring.status_management_c != "3") {
+            /*if (faltantesFactorajeUP == 0 && $('.chk_f_nv')[0].checked == true && cont_uni_p.ResumenProductos.factoring.status_management_c != "3") {
                 this.model.set('promotorfactoraje_c', '9 - No Viable');
                 this.model.set('user_id1_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.factoring.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
+            }*/
+
+            var faltantelm = 0;
+            var selectlm = document.getElementById("list_fac_estatus_lm");
+            var selectlrazon = document.getElementById("list_f_so_razon");
+            var selectlmotivo = document.getElementById("list_f_so_motivo");
+            if(selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
+                for(var i = 0; i < this.datacondiciones.records.length; i++) {
+                    if (this.datacondiciones.records[i].razon == selectlrazon.value && this.datacondiciones.records[i].motivo == selectlmotivo.value ){
+                        if (this.datacondiciones.records[i].detalle == true ) {
+                            if ( $('.txt_f_so_detalle').val().trim() == "") {
+                                $('.txt_f_so_detalle').css('border-color', 'red'); //TXT ¿Qué producto?
+                                faltantelm += 1;
+                            }
+                        }
+                    }
+                }
+    
+                if (faltantelm > 0) {
+                    app.alert.show("Faltantes "+selectlm.options[selectlm.selectedIndex].text, {
+                        level: "error",
+                        title: 'Hace falta el Detalle para el Estatus <b>'+selectlm.options[selectlm.selectedIndex].text+'</b>.',
+                        autoClose: false
+                    });
+                    errors['error_FactorajeUP'] = errors['error_FactorajeUP'] || {};
+                    errors['error_FactorajeUP'].required = true;
+                }
             }
         }
+
         callback(null, fields, errors);
     },
     /***********************************VALIDACION NO VIABLE PRODUCTO CREDITO - AUTOMOTRIZ********************/
@@ -5850,12 +5922,40 @@
                 errors['error_CAUP'] = errors['error_CAUP'] || {};
                 errors['error_CAUP'].required = true;
             }
-            if (faltantesCAUP == 0 && $('.chk_ca_nv')[0].checked == true && cont_uni_p.ResumenProductos.credito_auto.status_management_c != "3") {
+            /*if (faltantesCAUP == 0 && $('.chk_ca_nv')[0].checked == true && cont_uni_p.ResumenProductos.credito_auto.status_management_c != "3") {
                 this.model.set('promotorcredit_c', '9 - No Viable');
                 this.model.set('user_id2_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.credito_auto.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
-            }
+            }*/
         }
+
+        var faltantelm = 0;
+        var selectlm = document.getElementById("list_ca_estatus_lm");
+        var selectlrazon = document.getElementById("list_ca_so_razon");
+        var selectlmotivo = document.getElementById("list_ca_so_motivo");
+        if(selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
+            for(var i = 0; i < this.datacondiciones.records.length; i++) {
+                if (this.datacondiciones.records[i].razon == selectlrazon.value && this.datacondiciones.records[i].motivo == selectlmotivo.value ){
+                    if (this.datacondiciones.records[i].detalle == true ) {
+                        if ( $('.txt_ca_so_detalle').val().trim() == "") {
+                            $('.txt_ca_so_detalle').css('border-color', 'red'); //TXT ¿Qué producto?
+                            faltantelm += 1;
+                        }
+                    }
+                }
+            }
+
+            if (faltantelm > 0) {
+                app.alert.show("Faltantes "+selectlm.options[selectlm.selectedIndex].text, {
+                    level: "error",
+                    title: 'Hace falta el Detalle para el Estatus <b>'+selectlm.options[selectlm.selectedIndex].text+'</b>.',
+                    autoClose: false
+                });
+                errors['error_CAUP'] = errors['error_CAUP'] || {};
+                errors['error_CAUP'].required = true;
+            }
+		}
+
         callback(null, fields, errors);
     },
     /***********************************VALIDACION NO VIABLE PRODUCTO FLEET***********************************/
@@ -5919,12 +6019,40 @@
                 errors['error_FLeetUP'] = errors['error_FLeetUP'] || {};
                 errors['error_FLeetUP'].required = true;
             }
-            if (faltantesFleetUP == 0 && $('.chk_fl_nv')[0].checked == true && cont_uni_p.ResumenProductos.fleet.status_management_c != "3") {
+            /*if (faltantesFleetUP == 0 && $('.chk_fl_nv')[0].checked == true && cont_uni_p.ResumenProductos.fleet.status_management_c != "3") {
                 this.model.set('promotorfleet_c', '9 - No Viable');
                 this.model.set('user_id6_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.fleet.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
-            }
+            }*/
         }
+
+        var faltantelm = 0;
+        var selectlm = document.getElementById("list_fl_estatus_lm");
+        var selectlrazon = document.getElementById("list_fl_so_razon");
+        var selectlmotivo = document.getElementById("list_fl_so_motivo");
+        if(selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
+            for(var i = 0; i < this.datacondiciones.records.length; i++) {
+                if (this.datacondiciones.records[i].razon == selectlrazon.value && this.datacondiciones.records[i].motivo == selectlmotivo.value ){
+                    if (this.datacondiciones.records[i].detalle == true ) {
+                        if ( $('.txt_fl_so_detalle').val().trim() == "") {
+                            $('.txt_fl_so_detalle').css('border-color', 'red'); //TXT ¿Qué producto?
+                            faltantelm += 1;
+                        }
+                    }
+                }
+            }
+
+            if (faltantelm > 0) {
+                app.alert.show("Faltantes "+selectlm.options[selectlm.selectedIndex].text, {
+                    level: "error",
+                    title: 'Hace falta el Detalle para el Estatus <b>'+selectlm.options[selectlm.selectedIndex].text+'</b>.',
+                    autoClose: false
+                });
+                errors['error_FLeetUP'] = errors['error_FLeetUP'] || {};
+                errors['error_FLeetUP'].required = true;
+            }
+		}
+
         callback(null, fields, errors);
     },
     /***********************************VALIDACION NO VIABLE PRODUCTO UNICLICK********************************/
@@ -5988,12 +6116,38 @@
                 errors['error_UniclickUP'] = errors['error_UniclickUP'] || {};
                 errors['error_UniclickUP'].required = true;
             }
-            if (faltantesUniclickUP == 0 && $('.chk_u_nv')[0].checked == true && cont_uni_p.ResumenProductos.uniclick.status_management_c != "3") {
+            /*if (faltantesUniclickUP == 0 && $('.chk_u_nv')[0].checked == true && cont_uni_p.ResumenProductos.uniclick.status_management_c != "3") {
                 this.model.set('promotoruniclick_c', '9 - Sin Gestor');
                 this.model.set('user_id7_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.uniclick.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
-            }
+            }*/
         }
+        var faltantelm = 0;
+        var selectlm = document.getElementById("list_u_estatus_lm");
+        var selectlrazon = document.getElementById("list_u_so_razon");
+        var selectlmotivo = document.getElementById("list_u_so_motivo");
+        if(selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
+            for(var i = 0; i < this.datacondiciones.records.length; i++) {
+                if (this.datacondiciones.records[i].razon == selectlrazon.value && this.datacondiciones.records[i].motivo == selectlmotivo.value ){
+                    if (this.datacondiciones.records[i].detalle == true ) {
+                        if ( $('.txt_u_so_detalle').val().trim() == "") {
+                            $('.txt_u_so_detalle').css('border-color', 'red'); //TXT ¿Qué producto?
+                            faltantelm += 1;
+                        }
+                    }
+                }
+            }
+
+            if (faltantelm > 0) {
+                app.alert.show("Faltantes "+selectlm.options[selectlm.selectedIndex].text, {
+                    level: "error",
+                    title: 'Hace falta el Detalle para el Estatus <b>'+selectlm.options[selectlm.selectedIndex].text+'</b>.',
+                    autoClose: false
+                });
+                errors['error_UniclickUP'] = errors['error_UniclickUP'] || {};
+                errors['error_UniclickUP'].required = true;
+            }
+		}
         callback(null, fields, errors);
     },
     /*************Valida campo de Página Web*****************/
