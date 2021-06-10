@@ -13,6 +13,7 @@
         this.headers=[];
         this.bodyTable=[];
         this.mainRowsBodyTable=[];
+        this.mainRowsConfigBodyTable=[];
         this.idsTipo=[];
         self=this;
 
@@ -100,15 +101,17 @@
                     }
 
                 }
-                
-                                
+                          
                 self.render();
             }
           });
     },
 
     addNewCFConfigurada:function(e){
-        console.log('CLICK CF');
+        var indieFilaClickada=$(e.currentTarget).parent().parent().index();
+        var filaPoliticaObtenida=self.mainRowsBodyTable[indieFilaClickada];
+        this.mainRowsConfigBodyTable.push(filaPoliticaObtenida);
+        this.render();
 
     },
 

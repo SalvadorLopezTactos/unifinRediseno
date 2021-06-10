@@ -16,6 +16,12 @@
     }
 </style>
 <div class="CFPoliticaQ container-fluid" id="cont">
+    <!--Sección condiciones financieras de política -->
+    <div id="tituloCFPolitica" style="height:30px; border-radius: 10px" data-toggle="collapse" >
+        <font color="#9da0a4" size="3">
+        <strong>Nueva Condición Financiera de Política</strong>
+        </font>
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -59,4 +65,52 @@
         </tbody>
     </table>
 
+    <!-- Sección para condiciones financierar configuradas -->
+    <div id="tituloCFConfiguradas" style="height:30px; border-radius: 10px" data-toggle="collapse">
+        <font color="#9da0a4" size="3">
+        <strong>Condiciones Financieras  Configuradas</strong>
+        </font>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">&nbsp;</th>
+                {{#each headers}}
+                <th scope="col" {{#if dobleCampo}}colspan="2"{{/if}}>{{name}}</th>
+                {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+            {{#each mainRowsConfigBodyTable}}
+            <tr>
+                <th scope="row">
+                    <span class="fa-stack borrarCFQuantico" style="background-color: #bb0e1b;;">
+                        <i class="fa fa-minus fa-inverse fa-stack" style="text-align:center;color:white"></i>
+                    </span>
+                </th>
+                {{#each bodyTable}}
+                    <td style="text-align:center">
+                        {{#if select}}
+                            <select class="row-fluid select2" data-field="{{nombreCampo}}">
+                            {{#each valoresCatalogo}}
+                            <option value="{{@key}}" {{ifSelected @key ../valorSelected}}>{{this}}</option>
+                            {{/each}}
+                            </select>
+                        {{/if}}
+                        {{#if text}}
+                            {{#if rangoInferior}}
+                            <input data-name="{{nombreCampo}}" type="text" class="form-control" size="10" value={{rangoInferior}}>
+                            {{else}}
+                            <input data-name="{{nombreCampo}}" type="text" class="form-control" size="10" value={{rangoSuperior}}>
+                            {{/if}}
+                        {{/if}}
+                        {{#if checkbox}}
+                            <input data-name="{{nombreCampo}}" type="checkbox" class="form-control" size="10" {{checked}}>
+                        {{/if}}
+                    </td>
+                {{/each}}
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
 </div>
