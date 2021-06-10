@@ -39,7 +39,7 @@ class GetRegistrosAsignadosForProtocolo extends SugarApi
 
     public function getRecordsAssign($api, $args)
     {
-        
+
         global $db;
         $id_user=$args['id_user'];
         $total_leads=0;
@@ -47,14 +47,14 @@ class GetRegistrosAsignadosForProtocolo extends SugarApi
         $total_registros=0;
 
         //Query para obtener el número de leads asignados al usuario actual
-        $query = "SELECT count(l.id) as total_leads FROM leads l inner JOIN leads_cstm lc on l.id=lc.id_c 
+        $query = "SELECT count(l.id) as total_leads FROM leads l inner JOIN leads_cstm lc on l.id=lc.id_c
 WHERE l.assigned_user_id='{$id_user}'
 and lc.contacto_asociado_c=0
 and lc.subtipo_registro_c not in('4','3') and l.deleted=0";//4 - Convertido, 3 - Cancelado
         $result = $db->query($query);
 
         while($row = $db->fetchByAssoc($result)){
-            $total_leads = $row['total_leads']; 
+            $total_leads = $row['total_leads'];
         }
 
         /*
@@ -80,7 +80,7 @@ and a.deleted = 0 and up.deleted = 0";
         INNER JOIN uni_productos_cstm upc on upc.id_c = up.id
             and (upc.status_management_c IS NULL OR upc.status_management_c = '1')
         WHERE ac.tipo_registro_cuenta_c = '2'
-        and ac.subtipo_registro_cuenta_c IN ('2','7','8')
+        and ac.subtipo_registro_cuenta_c IN ('1','2','7','8','10')
         and ac.user_id_c = '{$id_user}'
         and a.deleted = 0 and up.deleted = 0";
 
@@ -100,7 +100,7 @@ and a.deleted = 0 and up.deleted = 0";
             a.parent_id,
             up.subtipo_cuenta,
             MAX(
-            CASE WHEN up.subtipo_cuenta IN ('2','7','8') THEN '1'
+            CASE WHEN up.subtipo_cuenta IN ('1','2','7','8','10') THEN '1'
                 ELSE '2'
                 END) registro_valido,
             CASE WHEN a.parent_id IS NULL THEN a.id
@@ -113,7 +113,7 @@ and a.deleted = 0 and up.deleted = 0";
             and up.tipo_producto = '1'
             INNER JOIN uni_productos_cstm upc on upc.id_c = up.id
             and (upc.status_management_c IS NULL OR upc.status_management_c = '1')
-            WHERE(a.id IN({$string_in}) OR 
+            WHERE(a.id IN({$string_in}) OR
             a.parent_id IN({$string_in}))
             and a.deleted = 0 and up.deleted = 0
             GROUP BY agrupador
