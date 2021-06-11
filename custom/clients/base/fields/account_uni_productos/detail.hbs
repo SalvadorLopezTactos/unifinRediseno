@@ -1,6 +1,7 @@
 <style>
     .mpad {
-        padding-top: 8px;
+        padding-top: 8px;        
+        margin-left: 0px;
     }    
     .mtop {
         margin-top: 7px;
@@ -9,379 +10,851 @@
         border: 0 !important;
     }
 </style>
+
 <div class="row-fluid">
     <table id="tableUni_productos" width="100%" class="table">
-        <tr>
-            <td width="33%" valign="top" class="campoLeasing sborder">
-                <div><strong>Leasing/Crédito SOS</strong></div>
-                <div class="mpad">
-                    {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.leasing.estatus_atencion}}
-                </div>
-                <div class="mpad">
-                    <label class="record-label mpad" style="margin-left:0px">Estatus por Producto</label>
-                    {{#if ResumenProductos.leasing.status_management_c}}{{getUnifinListValue 'status_management_list' ResumenProductos.leasing.status_management_c}}{{/if}}
-                </div>
-                <div class="mpad mtop">{{ResumenProductos.leasing.dias}} días
-                    <a href="#Employees/{{ResumenProductos.leasing.assigned_user_id}}">{{ResumenProductos.leasing.full_name}}</a>
-                </div>
-                <div class="ls_multi mpad">
-                    <label class="record-label mpad" style="margin-left:0px">Multilínea</label>
-                    <input type="checkbox" class="chk_ls_multi" {{#if ResumenProductos.leasing.multilinea_c}}checked{{/if}} data-field="chk_ls_multi"/>
-                </div>
-                <div class="ls_excluir mpad">
-                    <label class="record-label excluir mpad" style="margin-left:0px">Excluir pre-calificación</label>
-                    <input type="checkbox" class="chk_ls_excluir" {{#if ResumenProductos.leasing.exclu_precalif_c}}checked{{/if}} data-field="chk_ls_excluir"/>
-                </div>
-                {{#if ResumenProductos.leasing.visible_noviable}}
-                    <div class="l_nv mpad">
-                        <label class="record-label mpad" style="margin-left:0px">No Viable Leasing</label>
-                        <input type="checkbox" class="chk_l_nv" {{#if ResumenProductos.leasing.no_viable}}checked{{/if}} data-field="chk_l_nv"/>
-                    </div>
-                    <div class="l_nv_razon">
-                        <label class="record-label mpad" style="margin-left:0px">Razón de cuenta No viable</label>
-                        <label class="normal row-fluid select2 list_l_nv_razon" data-field="list_l_nv_razon">
-                            {{getUnifinListValue 'razones_ddw_list' ResumenProductos.leasing.no_viable_razon}}
-                        </label>
-                    </div>
-                    <div class="l_nv_razon_fp">
-                        <label class="record-label mpad" style="margin-left:0px">Fuera de Perfil (Razón)</label>
-                        <label class="normal row-fluid select2  list_l_nv_razon_fp" data-field="list_l_nv_razon_fp">
-                            {{getUnifinListValue 'fuera_de_perfil_ddw_list' ResumenProductos.leasing.no_viable_razon_fp}}
-                        </label>
-                    </div>
-                    <div class="l_nv_quien">
-                        <label class="record-label mpad" style="margin-left:0px">¿Quién?</label>
-                        <label class="normal txt_l_nv_quien" type="text" data-name="txt_l_nv_quien">
-                            {{ResumenProductos.leasing.no_viable_quien}}
-                        </label>
-                    </div>
-                    <div class="l_nv_porque">
-                        <label class="record-label mpad" style="margin-left:0px">¿Por qué?</label>
-                        <label class="normal txt_l_nv_porque" type="text" data-name="txt_l_nv_porque">
-                            {{ResumenProductos.leasing.no_viable_porque}}
-                        </label>
-                    </div>
-                    <div class="l_nv_producto">
-                        <label class="record-label mpad" style="margin-left:0px">¿Qué producto?</label>
-                        <label class="normal row-fluid select2 list_l_nv_producto" data-name="list_l_nv_producto">
-                            {{getUnifinListValue 'no_producto_requiere_list' ResumenProductos.leasing.no_viable_producto}}
-                        </label>
-                    </div>
-                    <div class="l_nv_razon_cf">
-                        <label class="record-label mpad" style="margin-left:0px">Condiciones Financieras</label>
-                        <label class="normal row-fluid select2 list_l_nv_razon_cf" data-name="list_l_nv_razon_cf">
-                            {{getUnifinListValue 'razones_cf_list' ResumenProductos.leasing.no_viable_razon_cf}}
-                        </label>
-                    </div>
-                    <div class="l_nv_otro">
-                        <label class="record-label mpad" style="margin-left:0px">¿Qué producto?</label>
-                        <label class="normal txt_l_nv_otro" type="text" data-name="txt_l_nv_otro">
-                            {{ResumenProductos.leasing.no_viable_otro_c}}
-                        </label>
-                    </div>
-                    <div class="l_nv_razon_ni">
-                        <label class="record-label mpad" style="margin-left:0px">Razón No se encuentra interesado</label>
-                        <label class="normal row-fluid select2 list_l_nv_razon_ni" data-name="list_l_nv_razon_ni">
-                            {{getUnifinListValue 'tct_razon_ni_l_ddw_c_list' ResumenProductos.leasing.no_viable_razon_ni}}
-                        </label>
-                    </div>
-                {{/if}}
-            </td>
-
-            <td width="33%" valign="top" class="campoFactoraje sborder">
-                <div><strong>Factoraje</strong></div>
-                <div class="mpad">
-                    {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.factoring.estatus_atencion}}
-                </div>
-                <!-- <div class="mpad">
-                    <label class="record-label mpad" style="margin-left:0px">Estatus por Producto</label>
-                    {{#if ResumenProductos.factoring.status_management_c}}{{getUnifinListValue 'status_management_list' ResumenProductos.factoring.status_management_c}}{{/if}}
-                </div> -->
-                <div class="mpad mtop">{{ResumenProductos.factoring.dias}} días
-                    <a href="#Employees/{{ResumenProductos.factoring.assigned_user_id}}">{{ResumenProductos.factoring.full_name}}</a>
-                </div>
-                <div class="fac_multi mpad">
-                    <label class="record-label mpad" style="margin-left:0px">Multilínea</label>
-                    <input type="checkbox" class="chk_fac_multi" {{#if ResumenProductos.factoring.multilinea_c}}checked{{/if}} data-field="chk_fac_multi"/>
-                </div>
-                {{#if ResumenProductos.factoring.visible_noviable}}
-                    <div class="f_nv mpad">
-                        <label class="record-label mpad" style="margin-left:0px">No Viable Factoraje</label>
-                        <input type="checkbox" class="chk_f_nv" {{#if ResumenProductos.factoring.no_viable}}checked{{/if}} data-field="chk_f_nv"/>
-                    </div>
-                    <div class="f_nv_razon">
-                        <label class="record-label mpad" style="margin-left:0px">Razón de cuenta No viable</label>
-                        <label class="normal row-fluid select2 list_f_nv_razon" data-field="list_f_nv_razon">
-                            {{getUnifinListValue 'razones_ddw_list' ResumenProductos.factoring.no_viable_razon}}
-                        </label>
-                    </div>
-                    <div class="f_nv_razon_fp">
-                        <label class="record-label mpad" style="margin-left:0px">Fuera de Perfil (Razón)</label>
-                        <label class="normal row-fluid select2  list_f_nv_razon_fp" data-field="list_f_nv_razon_fp">
-                            {{getUnifinListValue 'fuera_de_perfil_ddw_list' ResumenProductos.factoring.no_viable_razon_fp}}
-                        </label>
-                    </div>
-                    <div class="f_nv_quien">
-                        <label class="record-label mpad" style="margin-left:0px">¿Quién?</label>
-                        <label class="normal txt_f_nv_quien" type="text" data-name="txt_f_nv_quien">
-                            {{ResumenProductos.factoring.no_viable_quien}}
-                        </label>
-                    </div>
-                    <div class="f_nv_porque">
-                        <label class="record-label mpad" style="margin-left:0px">¿Por qué?</label>
-                        <label class="normal txt_f_nv_porque" type="text" data-name="txt_f_nv_porque">
-                            {{ResumenProductos.factoring.no_viable_porque}}
-                        </label>
-                    </div>
-                    <div class="f_nv_producto">
-                        <label class="record-label mpad" style="margin-left:0px">¿Qué producto?</label>
-                        <label class="normal row-fluid select2 list_f_nv_producto" data-name="list_f_nv_producto">
-                            {{getUnifinListValue 'no_producto_requiere_list' ResumenProductos.factoring.no_viable_producto}}
-                        </label>
-                    </div>
-                    <div class="f_nv_razon_cf">
-                        <label class="record-label mpad" style="margin-left:0px">Condiciones Financieras</label>
-                        <label class="normal row-fluid select2 list_f_nv_razon_cf" data-name="list_f_nv_razon_cf">
-                            {{getUnifinListValue 'razones_cf_list' ResumenProductos.factoring.no_viable_razon_cf}}
-                        </label>
-                    </div>
-                    <div class="f_nv_otro">
-                        <label class="record-label mpad" style="margin-left:0px">¿Qué producto?</label>
-                        <label class="normal txt_f_nv_otro" type="text" data-name="txt_f_nv_otro">
-                            {{ResumenProductos.factoring.no_viable_otro_c}}
-                        </label>
-                    </div>
-                    <div class="f_nv_razon_ni">
-                        <label class="record-label mpad" style="margin-left:0px">Razón No se encuentra interesado</label>
-                        <label class="normal row-fluid select2 list_f_nv_razon_ni" data-name="list_f_nv_razon_ni">
-                            {{getUnifinListValue 'tct_razon_ni_l_ddw_c_list' ResumenProductos.factoring.no_viable_razon_ni}}
-                        </label>
-                    </div>
-                {{/if}}
-            </td>
-
-            <td width="33%" valign="top" class="campoCA sborder">
-                <div><strong>Crédito Automotriz</strong></div>
-                <div class="mpad">
-                    {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.credito_auto.estatus_atencion}}
-                </div>
-                <!-- <div class="mpad">
-                    <label class="record-label mpad" style="margin-left:0px">Estatus por Producto</label>
-                    {{#if ResumenProductos.credito_auto.status_management_c}}{{getUnifinListValue 'status_management_list' ResumenProductos.credito_auto.status_management_c}}{{/if}}
-                </div> -->
-                <div class="mpad mtop">{{ResumenProductos.credito_auto.dias}} días
-                    <a href="#Employees/{{ResumenProductos.credito_auto.assigned_user_id}}">{{ResumenProductos.credito_auto.full_name}}</a>
-                </div>
-                <div class="ca_multi mpad">
-                    <label class="record-label mpad" style="margin-left:0px">Multilínea</label>
-                    <input type="checkbox" class="chk_ca_multi" {{#if ResumenProductos.credito_auto.multilinea_c}}checked{{/if}} data-field="chk_ca_multi"/>
-                </div>
-                {{#if ResumenProductos.credito_auto.visible_noviable}}
-                    <div class="ca_nv mpad">
-                        <label class="record-label mpad" style="margin-left:0px">No Viable Crédito Automotriz</label>
-                        <input type="checkbox" class="chk_ca_nv" {{#if ResumenProductos.credito_auto.no_viable}}checked{{/if}} data-field="chk_ca_nv"/>
-                    </div>
-                    <div class="ca_nv_razon">
-                        <label class="record-label mpad" style="margin-left:0px">Razón de cuenta No viable</label>
-                        <label class="normal row-fluid select2 list_ca_nv_razon" data-field="list_ca_nv_razon">
-                            {{getUnifinListValue 'razones_ddw_list' ResumenProductos.credito_auto.no_viable_razon}}
-                        </label>
-                    </div>
-                    <div class="ca_nv_razon_fp">
-                        <label class="record-label mpad" style="margin-left:0px">Fuera de Perfil (Razón)</label>
-                        <label class="normal row-fluid select2  list_ca_nv_razon_fp" data-field="list_ca_nv_razon_fp">
-                            {{getUnifinListValue 'fuera_de_perfil_ddw_list' ResumenProductos.credito_auto.no_viable_razon_fp}}
-                        </label>
-                    </div>
-                    <div class="ca_nv_quien">
-                        <label class="record-label mpad" style="margin-left:0px">¿Quién?</label>
-                        <label class="normal txt_ca_nv_quien" type="text" data-name="txt_ca_nv_quien">
-                            {{ResumenProductos.credito_auto.no_viable_quien}}
-                        </label>
-                    </div>
-                    <div class="ca_nv_porque">
-                        <label class="record-label mpad" style="margin-left:0px">¿Por qué?</label>
-                        <label class="normal txt_ca_nv_porque" type="text" data-name="txt_ca_nv_porque">
-                            {{ResumenProductos.credito_auto.no_viable_porque}}
-                        </label>
-                    </div>
-                    <div class="ca_nv_producto">
-                        <label class="record-label mpad" style="margin-left:0px">¿Qué producto?</label>
-                        <label class="normal row-fluid select2 list_ca_nv_producto" data-name="list_ca_nv_producto">
-                            {{getUnifinListValue 'no_producto_requiere_list' ResumenProductos.credito_auto.no_viable_producto}}
-                        </label>
-                    </div>
-                    <div class="ca_nv_razon_cf">
-                        <label class="record-label mpad" style="margin-left:0px">Condiciones Financieras</label>
-                        <label class="normal row-fluid select2 list_ca_nv_razon_cf" data-name="list_ca_nv_razon_cf">
-                            {{getUnifinListValue 'razones_cf_list' ResumenProductos.credito_auto.no_viable_razon_cf}}
-                        </label>
-                    </div>
-                    <div class="ca_nv_otro">
-                        <label class="record-label mpad" style="margin-left:0px">¿Qué producto?</label>
-                        <label class="normal txt_ca_nv_otro" type="text" data-name="txt_ca_nv_otro">
-                            {{ResumenProductos.credito_auto.no_viable_otro_c}}
-                        </label>
-                    </div>
-                    <div class="ca_nv_razon_ni">
-                        <label class="record-label mpad" style="margin-left:0px">Razón No se encuentra interesado</label>
-                        <label class="normal row-fluid select2 list_ca_nv_razon_ni" data-name="list_ca_nv_razon_ni">
-                            {{getUnifinListValue 'tct_razon_ni_l_ddw_c_list' ResumenProductos.credito_auto.no_viable_razon_ni}}
-                        </label>
-                    </div>
-                {{/if}}
+        <tr >
+            <td width="100%">
+                <table class="campoLeasing" width="100%" valign="top" style="border: 3px solid lightblue; padding: 8px;">
+                    <tr>
+                        <td colspan="3" width="100%">
+                            <div class="row-fluid" >  <!--Fila 0 -->
+                            <div><strong>Leasing / Crédito SOS</strong></div>
+                            </div>  <!--Cierre Fila1 -->
+                            <div class="row-fluid" style="background-color:#cfcfcf; height:5px;" > </div>  <!--Div -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  width="33%" >
+                            <div class="mpadc ">
+                                 <label class="record-label mpad" style="margin-left:0px">Estatus</label>
+                                 {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.leasing.estatus_atencion}}
+                            </div>
+                        </td>
+                        <td  width="33%" >
+                            <div class="mpad ">
+                                <label class="record-label mpad" style="margin-left:0px">{{ResumenProductos.leasing.dias}} días</label>
+                                <a href="#Employees/{{ResumenProductos.leasing.assigned_user_id}}">{{ResumenProductos.leasing.full_name}}</a>
+                            </div>
+                        </td>
+                        <td  width="33%" >
+                            <div class="ls_estatus_lm mpad ">
+                                <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
+                                {{getUnifinListValue 'status_management_list' ResumenProductos.leasing.status_management_c}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  width="33%" >
+                            <div class="ls_multi mpad ">
+                                <label class="record-label mpad" style="margin-left:0px">Multilínea</label>
+                                <input type="checkbox" class="chk_ls_multi" {{#if ResumenProductos.leasing.multilinea_c}}checked{{/if}} data-field="chk_ls_multi"/>
+                            </div>
+                        </td>
+                        <td  width="33%" >
+                            <div class="ls_excluir mpad ">
+                                <label class="record-label excluir mpad" style="margin-left:0px">Excluir pre-calificación</label>
+                                <input type="checkbox" class="chk_ls_excluir" {{#if ResumenProductos.leasing.exclu_precalif_c}}checked{{/if}} data-field="chk_ls_excluir"/>
+                            </div>
+                        </td>
+                        <td  width="33%" ></td>
+                    </tr>
+                    {{#if ResumenProductos.leasing.visible_noviable}}
+                    <tr>
+                        <td  width="33%" >
+                            <div class="l_nv mpad ">
+                                 <label class="record-label mpad" style="margin-left:0px">No Viable Leasing</label>
+                                 <input type="checkbox" class="chk_l_nv" {{#if ResumenProductos.leasing.no_viable}}checked{{/if}} data-field="chk_l_nv"/>
+                             </div>
+                        </td>
+                        <td  width="33%" >
+                            <div class="l_nv_razon ">
+                                <label class="record-label mpad" style="margin-left:0px">Razón de cuenta No viable</label>
+                                <label class="normal row-fluid select2 list_l_nv_razon" data-field="list_l_nv_razon">
+                                    {{getUnifinListValue 'razones_ddw_list' ResumenProductos.leasing.no_viable_razon}}
+                                </label>
+                            </div>                        
+                        </td>
+                        <td  width="33%" >
+                            <div class="l_nv_razon_fp ">
+                                <label class="record-label mpad" style="margin-left:0px">Fuera de Perfil (Razón)</label>
+                                <label class="normal row-fluid select2  list_l_nv_razon_fp" data-field="list_l_nv_razon_fp">
+                                    {{getUnifinListValue 'fuera_de_perfil_ddw_list' ResumenProductos.leasing.no_viable_razon_fp}}
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  width="33%" >
+                            <div class="l_nv_razon_cf ">
+                                <label class="record-label mpad" style="margin-left:0px">Condiciones Financieras</label>
+                                <label class="normal row-fluid select2 list_l_nv_razon_cf" data-name="list_l_nv_razon_cf">
+                                    {{getUnifinListValue 'razones_cf_list' ResumenProductos.leasing.no_viable_razon_cf}}
+                                </label>
+                            </div>
+                        </td>
+                        <td  width="33%" >
+                            <div class="l_nv_producto ">
+                                <label class="record-label mpad" style="margin-left:0px">¿Qué producto?</label>
+                                <label class="normal row-fluid select2 list_l_nv_producto" data-name="list_l_nv_producto">
+                                    {{getUnifinListValue 'no_producto_requiere_list' ResumenProductos.leasing.no_viable_producto}}
+                                </label>
+                            </div>                       
+                        </td>
+                        <td  width="33%" >
+                            <div class="l_nv_otro ">
+                                <label class="record-label mpad" style="margin-left:0px">¿Qué producto? (Otro)</label>
+                                <label class="normal txt_l_nv_otro" type="text" data-name="txt_l_nv_otro">
+                                    {{ResumenProductos.leasing.no_viable_otro_c}}
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  width="33%" >
+                            <div class="l_nv_quien ">
+                                <label class="record-label mpad" style="margin-left:0px">¿Quién?</label>
+                                <label class="normal txt_l_nv_quien" type="text" data-name="txt_l_nv_quien">
+                                    {{ResumenProductos.leasing.no_viable_quien}}
+                                </label>
+                            </div>
+                        </td>
+                        <td  width="33%" >
+                            <div class="l_nv_porque ">
+                                <label class="record-label mpad" style="margin-left:0px">¿Por qué?</label>
+                                <label class="normal txt_l_nv_porque" type="text" data-name="txt_l_nv_porque">
+                                    {{ResumenProductos.leasing.no_viable_porque}}
+                                </label>
+                            </div>
+                        </td>
+                        <td  width="33%" >
+                            <div class="l_nv_razon_ni ">
+                                <label class="record-label mpad" style="margin-left:0px">Razón No se encuentra interesado</label>
+                                <label class="normal row-fluid select2 list_l_nv_razon_ni" data-name="list_l_nv_razon_ni">
+                                    {{getUnifinListValue 'tct_razon_ni_l_ddw_c_list' ResumenProductos.leasing.no_viable_razon_ni}}
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan = '3' >
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="l_so_razon span4">
+                                    <label class="record-label mpad" style="margin-left:0px">Razón</label>
+                                    <label class="normal row-fluid select2 list_l_so_razon" data-field="list_l_so_razon">
+                                        {{getUnifinListValue 'razon_list' ResumenProductos.leasing.razon_c}}
+                                    </label>
+                                </div>
+                                <div class="l_so_motivo span4">
+                                    <label class="record-label mpad" style="margin-left:0px">Motivo</label>
+                                    <label class="normal row-fluid select2 list_l_so_motivo" data-field="list_l_so_motivo">
+                                        {{getUnifinListValue 'motivo_bloqueo_list' ResumenProductos.leasing.motivo_c}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="l_so_detalle  span8">
+                                    <label class="record-label mpad" style="margin-left:0px">Detalle</label>
+                                    <textarea class="normal txt_l_so_detalle" data-name="txt_l_so_detalle" style="margin-left:0px; margin: 1px;" rows="4" cols="10" readonly>{{ResumenProductos.leasing.detalle_c}}</textarea>
+                                </div>
+                                <div class="span4">&nbsp;</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  width="33%" >
+                            <div class="l_so_resp_ingesta ">
+                             <label class="record-label mpad" style="margin-left:0px">Responsable de Ingesta</label>
+                             <a href="#Employees/{{ResumenProductos.leasing.user_id_c}}">{{ResumenProductos.leasing.fullname_ingesta_c}}</a>
+                            </div>
+                        </td>
+                        <td  width="33%" >
+                            <div class="l_so_raspval1 ">
+                             <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
+                             <a href="#Employees/{{ResumenProductos.leasing.user_id1_c}}">{{ResumenProductos.leasing.fullname_validacion1_c}}</a>
+                         </div>
+                        </td>
+                        <td  width="33%" >
+                            <div class="l_so_raspval2 ">
+                             <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
+                             <a href="#Employees/{{ResumenProductos.leasing.user_id2_c}}">{{ResumenProductos.leasing.fullname_validacion2_c}}</a>
+                         </div>
+                        </td>
+                    </tr> 
+                    {{/if}} 
+                </table>
             </td>
         </tr>
-        <tr><label class="record-label">&nbsp;</label></tr>
         <tr>
-            <td width="33%" valign="top" class="campoFleet sborder">
-                <div><strong>Fleet</strong></div>
-                <div class="mpad">
-                    {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.fleet.estatus_atencion}}
-                </div>
-                <!-- <div class="mpad">
-                    <label class="record-label mpad" style="margin-left:0px">Estatus por Producto</label>
-                    {{#if ResumenProductos.fleet.status_management_c}}{{getUnifinListValue 'status_management_list' ResumenProductos.fleet.status_management_c}}{{/if}}
-                </div> -->
-                <div class="mpad mtop">{{ResumenProductos.fleet.dias}} días
-                    <a href="#Employees/{{ResumenProductos.fleet.assigned_user_id}}">{{ResumenProductos.fleet.full_name}}</a>
-                </div>
-                <div class="fe_multi mpad">
-                    <label class="record-label mpad" style="margin-left:0px">Multilínea</label>
-                    <input type="checkbox" class="chk_fe_multi" {{#if ResumenProductos.fleet.multilinea_c}}checked{{/if}} data-field="chk_fe_multi"/>
-                </div>
-                {{#if ResumenProductos.fleet.visible_noviable}}
-                    <div class="fl_nv mpad">
-                        <label class="record-label mpad" style="margin-left:0px">No Viable Fleet</label>
-                        <input type="checkbox" class="chk_fl_nv" {{#if ResumenProductos.fleet.no_viable}}checked{{/if}} data-field="chk_fl_nv"/>
-                    </div>
-                    <div class="fl_nv_razon">
-                        <label class="record-label mpad" style="margin-left:0px">Razón de cuenta No viable</label>
-                        <label class="normal row-fluid select2 list_fl_nv_razon" data-field="list_fl_nv_razon">
-                            {{getUnifinListValue 'razones_ddw_list' ResumenProductos.fleet.no_viable_razon}}
-                        </label>
-                    </div>
-                    <div class="fl_nv_razon_fp">
-                        <label class="record-label mpad" style="margin-left:0px">Fuera de Perfil (Razón)</label>
-                        <label class="normal row-fluid select2  list_fl_nv_razon_fp" data-field="list_fl_nv_razon_fp">
-                            {{getUnifinListValue 'fuera_de_perfil_ddw_list' ResumenProductos.fleet.no_viable_razon_fp}}
-                        </label>
-                    </div>
-                    <div class="fl_nv_quien">
-                        <label class="record-label mpad" style="margin-left:0px">¿Quién?</label>
-                        <label class="normal txt_fl_nv_quien" type="text" data-name="txt_fl_nv_quien">
-                            {{ResumenProductos.fleet.no_viable_quien}}
-                        </label>
-                    </div>
-                    <div class="fl_nv_porque">
-                        <label class="record-label mpad" style="margin-left:0px">¿Por qué?</label>
-                        <label class="normal txt_fl_nv_porque" type="text" data-name="txt_fl_nv_porque">
-                            {{ResumenProductos.fleet.no_viable_porque}}
-                        </label>
-                    </div>
-                    <div class="fl_nv_producto">
-                        <label class="record-label mpad" style="margin-left:0px">¿Qué producto?</label>
-                        <label class="normal row-fluid select2 list_fl_nv_producto" data-name="list_fl_nv_producto">
-                            {{getUnifinListValue 'no_producto_requiere_list' ResumenProductos.fleet.no_viable_producto}}
-                        </label>
-                    </div>
-                    <div class="fl_nv_razon_cf">
-                        <label class="record-label mpad" style="margin-left:0px">Condiciones Financieras</label>
-                        <label class="normal row-fluid select2 list_fl_nv_razon_cf" data-name="list_fl_nv_razon_cf">
-                            {{getUnifinListValue 'razones_cf_list' ResumenProductos.fleet.no_viable_razon_cf}}
-                        </label>
-                    </div>
-                    <div class="fl_nv_otro">
-                        <label class="record-label mpad" style="margin-left:0px">¿Qué producto?</label>
-                        <label class="normal txt_fl_nv_otro" type="text" data-name="txt_fl_nv_otro">
-                            {{ResumenProductos.fleet.no_viable_otro_c}}
-                        </label>
-                    </div>
-                    <div class="fl_nv_razon_ni">
-                        <label class="record-label mpad" style="margin-left:0px">Razón No se encuentra interesado</label>
-                        <label class="normal row-fluid select2 list_fl_nv_razon_ni" data-name="list_fl_nv_razon_ni">
-                            {{getUnifinListValue 'tct_razon_ni_l_ddw_c_list' ResumenProductos.fleet.no_viable_razon_ni}}
-                        </label>
-                    </div>
-                {{/if}}
+			<td width="100%">
+				<table class="campoFactoraje" width="100%" valign="top"  style="border: 3px solid lightblue; padding: 8px;">
+					<tr>
+					<td colspan="3" width="100%">
+						<div class="row-fluid" >  <!--Fila 0 -->
+                        <div><strong>Factoraje</strong></div>
+						</div>  <!--Cierre Fila1 -->
+						<div class="row-fluid" style="background-color:#cfcfcf; height:5px;" > </div>  <!--Div -->
+					</td>
+					</tr>
+                    <tr>
+						<td  width="33%" >  <!--Fila 1 -->
+                        <div class="">
+                            <label class="record-label mpad" style="margin-left:0px">Estatus</label>
+                            {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.factoring.estatus_atencion}}
+                        </div>
+						</td>
+						<td  width="33%" >
+                        <div class="mpad ">
+                            <label class="record-label mpad" style="margin-left:0px">{{ResumenProductos.factoring.dias}} días</label>
+                            <a href="#Employees/{{ResumenProductos.factoring.assigned_user_id}}">{{ResumenProductos.factoring.full_name}}</a>
+                        </div>
+						</td>
+						<td  width="33%" >
+                        <div class="f_estatus_lm mpad ">
+                            <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
+                            {{getUnifinListValue 'status_management_list' ResumenProductos.factoring.status_management_c}}
+                        </div>
+						</td>
+                    </tr>  <!--Cierre Fila1 -->
+                    <tr>
+						<td  width="33%" >  <!--- Fila 2-->
+                        <div class="fac_multi mpad  ">
+                            <label class="record-label mpad" style="margin-left:0px">Multilínea</label>
+                            <input type="checkbox" class="chk_fac_multi" {{#if ResumenProductos.factoring.multilinea_c}}checked{{/if}} data-field="chk_fac_multi"/>
+                        </div>
+						</td>
+						<td  width="33%" ></td><td  width="33%" ></td>
+					</tr><!--Cierre Fila 2 -->
+                    {{#if ResumenProductos.factoring.visible_noviable}}
+                    <tr>
+						<td  width="33%" > <!-- Fila 3 -->
+                        <div class="f_nv mpad ">
+                            <label class="record-label mpad" style="margin-left:0px">No Viable Factoraje</label>
+                            <input type="checkbox" class="chk_f_nv" {{#if ResumenProductos.factoring.no_viable}}checked{{/if}} data-field="chk_f_nv"/>
+                        </div>
+						</td>
+						<td  width="33%" >
+                        <div class="f_nv_razon ">
+                            <label class="record-label mpad" style="margin-left:0px">Razón de cuenta No viable</label>
+                            <label class="normal row-fluid select2 list_f_nv_razon" data-field="list_f_nv_razon">
+                                {{getUnifinListValue 'razones_ddw_list' ResumenProductos.factoring.no_viable_razon}}
+                            </label>
+                        </div>
+						</td>
+						<td  width="33%" >
+                        <div class="f_nv_razon_fp ">
+                            <label class="record-label mpad" style="margin-left:0px">Fuera de Perfil (Razón)</label>
+                            <label class="normal row-fluid select2  list_f_nv_razon_fp" data-field="list_f_nv_razon_fp">
+                                {{getUnifinListValue 'fuera_de_perfil_ddw_list' ResumenProductos.factoring.no_viable_razon_fp}}
+                            </label>
+                        </div>
+						</td>
+                    </tr>  <!-- Cierre Fila 3 -->
+                    <tr>
+						<td  width="33%" > <!-- Fila 4 -->
+                        <div class="f_nv_razon_cf ">
+                            <label class="record-label mpad" style="margin-left:0px">Condiciones Financieras</label>
+                            <label class="normal row-fluid select2 list_f_nv_razon_cf" data-name="list_f_nv_razon_cf">
+                                {{getUnifinListValue 'razones_cf_list' ResumenProductos.factoring.no_viable_razon_cf}}
+                            </label>
+                        </div>
+						</td>
+						<td  width="33%" >
+                        <div class="f_nv_producto ">
+                            <label class="record-label mpad" style="margin-left:0px">¿Qué producto?</label>
+                            <label class="normal row-fluid select2 list_f_nv_producto" data-name="list_f_nv_producto">
+                                {{getUnifinListValue 'no_producto_requiere_list' ResumenProductos.factoring.no_viable_producto}}
+                            </label>
+                        </div>
+						</td>
+						<td  width="33%" >
+                         <div class="f_nv_otro ">
+                            <label class="record-label mpad" style="margin-left:0px">¿Qué producto? (Otro)</label>
+                            <label class="normal txt_f_nv_otro" type="text" data-name="txt_f_nv_otro">
+                                {{ResumenProductos.factoring.no_viable_otro_c}}
+                            </label>
+                        </div>
+						</td>
+                    </tr> <!-- Cierre Fila 4-->
+                    <tr>
+						<td  width="33%" > <!-- Fila 5 -->
+                        <div class="f_nv_quien ">
+                             <label class="record-label mpad" style="margin-left:0px">¿Quién?</label>
+                             <label class="normal txt_f_nv_quien" type="text" data-name="txt_f_nv_quien">
+                            {{ResumenProductos.factoring.no_viable_quien}}
+                            </label>
+                        </div>
+                        </td>
+						<td  width="33%" >
+						<div class="f_nv_porque ">
+                            <label class="record-label mpad" style="margin-left:0px">¿Por qué?</label>
+                            <label class="normal txt_f_nv_porque" type="text" data-name="txt_f_nv_porque">
+                                {{ResumenProductos.factoring.no_viable_porque}}
+                            </label>
+                        </div>
+                        </td>
+						<td  width="33%" >
+						<div class="f_nv_razon_ni ">
+                            <label class="record-label mpad" style="margin-left:0px">Razón No se encuentra interesado</label>
+                            <label class="normal row-fluid select2 list_f_nv_razon_ni" data-name="list_f_nv_razon_ni">
+                                {{getUnifinListValue 'tct_razon_ni_l_ddw_c_list' ResumenProductos.factoring.no_viable_razon_ni}}
+                            </label>
+                        </div>
+						</td>
+                    </tr> <!-- Cierre Fila 6-->
+                    <tr>
+                        <td colspan = '3' >
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="f_so_razon span4">
+                                     <label class="record-label mpad" style="margin-left:0px">Razón</label>
+                                     <label class="normal row-fluid select2 list_f_so_razon" data-field="list_f_so_razon">
+                                         {{getUnifinListValue 'razon_list' ResumenProductos.factoring.razon_c}}
+                                     </label>
+                                </div>
+                                <div class="f_so_motivo span4">
+                                     <label class="record-label mpad" style="margin-left:0px">Motivo</label>
+                                     <label class="normal row-fluid select2 list_f_so_motivo" data-field="list_f_so_motivo">
+                                        {{getUnifinListValue 'motivo_bloqueo_list' ResumenProductos.factoring.motivo_c}}
+                                     </label>
+                                </div>
+                            </div>
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="f_so_detalle  span8">
+                                    <label class="record-label mpad" style="margin-left:0px">Detalle</label>
+                                    <textarea class="normal txt_f_so_detalle" style="margin-left:0px; margin: 1px;" rows="4" cols="10" readonly>{{ResumenProductos.factoring.detalle_c}}</textarea>
+                                </div>
+                                <div class="span4">&nbsp;</div>
+                            </div>
+                        </td>
+                    </tr> <!-- Cierre Fila 7 -->
+                    <tr>
+						<td  width="33%" > <!-- Fila 8 -->
+                        <div class="f_so_resp_ingesta ">
+                             <label class="record-label mpad" style="margin-left:0px">Responsable de Ingesta</label>
+                             <a href="#Employees/{{ResumenProductos.factoring.ingesta_c}}">{{ResumenProductos.factoring.fullname_ingesta_c}}</a>
+                         </div>
+                        </td>
+						<td  width="33%" >
+						<div class="f_so_raspval1 ">
+                             <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
+                             <a href="#Employees/{{ResumenProductos.factoring.validacion1_c}}">{{ResumenProductos.factoring.fullname_validacion1_c}}</a>
+                         </div>
+                         </td>
+						<td  width="33%" >
+						<div class="f_so_raspval2 ">
+                             <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
+                             <a href="#Employees/{{ResumenProductos.factoring.validacion2_c}}">{{ResumenProductos.factoring.fullname_validacion2_c}}</a>
+                         </div>
+						</td>
+                    </tr> <!-- Cierre Fila 8-->
+                    {{/if}}
+				</table>
             </td>
-
-            <td width="33%" valign="top" class="campoUniclick sborder">
-                <div><strong>Negocio Uniclick </strong></div>
-                <div class="mpad">
-                    {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.uniclick.estatus_atencion}}
-                </div>
-                <!-- <div class="mpad">
-                    <label class="record-label mpad" style="margin-left:0px">Estatus por Producto</label>
-                    {{#if ResumenProductos.uniclick.status_management_c}}{{getUnifinListValue 'status_management_list' ResumenProductos.uniclick.status_management_c}}{{/if}}
-                </div> -->
-                <div class="mpad mtop">{{ResumenProductos.uniclick.dias}} días
-                    <a href="#Employees/{{ResumenProductos.uniclick.assigned_user_id}}">{{ResumenProductos.uniclick.full_name}}</a>
-                </div>
-                <div class="uniclick_multi mpad">
-                    <label class="record-label mpad" style="margin-left:0px">Multilínea</label>
-                    <input type="checkbox" class="chk_uniclick_multi" {{#if ResumenProductos.uniclick.multilinea_c}}checked{{/if}} data-field="chk_uniclick_multi"/>
-                </div>
-                {{#if ResumenProductos.uniclick.visible_noviable}}
-                    <div class="u_nv mpad">
-                        <label class="record-label mpad" style="margin-left:0px">No Viable Uniclick</label>
-                        <input type="checkbox" class="chk_u_nv" {{#if ResumenProductos.uniclick.no_viable}}checked{{/if}} data-field="chk_u_nv"/>
-                    </div>
-                    <div class="u_nv_razon">
-                        <label class="record-label mpad" style="margin-left:0px">Razón de cuenta No viable</label>
-                        <label class="normal row-fluid select2 list_u_nv_razon" data-field="list_u_nv_razon">
-                            {{getUnifinListValue 'razones_ddw_list' ResumenProductos.uniclick.no_viable_razon}}
-                        </label>
-                    </div>
-                    <div class="u_nv_razon_fp">
-                        <label class="record-label mpad" style="margin-left:0px">Fuera de Perfil (Razón)</label>
-                        <label class="normal row-fluid select2  list_u_nv_razon_fp" data-field="list_u_nv_razon_fp">
-                            {{getUnifinListValue 'fuera_de_perfil_ddw_list' ResumenProductos.uniclick.no_viable_razon_fp}}
-                        </label>
-                    </div>
-                    <div class="u_nv_quien">
-                        <label class="record-label mpad" style="margin-left:0px">¿Quién?</label>
-                        <label class="normal txt_u_nv_quien" type="text" data-name="txt_u_nv_quien">
-                            {{ResumenProductos.uniclick.no_viable_quien}}
-                        </label>
-                    </div>
-                    <div class="u_nv_porque">
-                        <label class="record-label mpad" style="margin-left:0px">¿Por qué?</label>
-                        <label class="normal txt_u_nv_porque" type="text" data-name="txt_u_nv_porque">
-                            {{ResumenProductos.uniclick.no_viable_porque}}
-                        </label>
-                    </div>
-                    <div class="u_nv_producto">
-                        <label class="record-label mpad" style="margin-left:0px">¿Qué producto?</label>
-                        <label class="normal row-fluid select2 list_u_nv_producto" data-name="list_u_nv_producto">
-                            {{getUnifinListValue 'no_producto_requiere_list' ResumenProductos.uniclick.no_viable_producto}}
-                        </label>
-                    </div>
-                    <div class="u_nv_razon_cf">
-                        <label class="record-label mpad" style="margin-left:0px">Condiciones Financieras</label>
-                        <label class="normal row-fluid select2 list_u_nv_razon_cf" data-name="list_u_nv_razon_cf">
-                            {{getUnifinListValue 'razones_cf_list' ResumenProductos.uniclick.no_viable_razon_cf}}
-                        </label>
-                    </div>
-                    <div class="u_nv_otro">
-                        <label class="record-label mpad" style="margin-left:0px">¿Qué producto?</label>
-                        <label class="normal txt_u_nv_otro" type="text" data-name="txt_u_nv_otro">
-                            {{ResumenProductos.uniclick.no_viable_otro_c}}
-                        </label>
-                    </div>
-                    <div class="u_nv_razon_ni">
-                        <label class="record-label mpad" style="margin-left:0px">Razón No se encuentra interesado</label>
-                        <label class="normal row-fluid select2 list_u_nv_razon_ni" data-name="list_u_nv_razon_ni">
-                            {{getUnifinListValue 'tct_razon_ni_l_ddw_c_list' ResumenProductos.uniclick.no_viable_razon_ni}}
-                        </label>
-                    </div>
+        </tr> 
+        <tr >
+            <td width="100%">
+                <table class="campoCA" width="100%" valign="top" style="border: 3px solid lightblue; padding: 8px;">
+                    <tr>
+                        <td colspan="3" width="100%">
+							<div class="row-fluid" >  <!--Fila 0 -->
+								<div><strong>Crédito Automotriz</strong></div>
+							</div>  <!--Cierre Fila1 -->
+							<div class="row-fluid" style="background-color:#cfcfcf; height:5px;" > </div>  <!--Div -->
+						</td>
+					</tr>
+					<tr>
+						<td width="33%" >  <!--Fila 1 -->
+							<div class="mpadc ">
+								<label class="record-label mpad" style="margin-left:0px">Estatus</label>
+								{{getUnifinListValue 'product_status_atencion_list' ResumenProductos.credito_auto.estatus_atencion}}
+							</div>
+						</td>
+						<td  width="33%" >
+							<div class="mpad ">
+								<label class="record-label mpad" style="margin-left:0px">{{ResumenProductos.credito_auto.dias}} días</label>
+								<a href="#Employees/{{ResumenProductos.credito_auto.assigned_user_id}}">{{ResumenProductos.credito_auto.full_name}}</a>
+							</div>
+						</td>
+						<td  width="33%" >
+							<div class="ca_estatus_lm mpad ">
+								<label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
+								{{getUnifinListValue 'status_management_list' ResumenProductos.credito_auto.status_management_c}}
+							</div>
+						</td>
+					</tr>	<!--Cierre Fila1 -->
+					<tr>
+						<td width="33%" >  <!--- Fila 2-->
+							<div class="ca_multi mpad  ">
+								<label class="record-label mpad" style="margin-left:0px">Multilínea</label>
+								<input type="checkbox" class="chk_ca_multi" {{#if ResumenProductos.credito_auto.multilinea_c}}checked{{/if}} data-field="chk_ca_multi"/>
+							</div>
+						</td>
+						<td  width="33%" ></td><td  width="33%" ></td>
+					</tr> <!--Cierre Fila 2 -->
+					{{#if ResumenProductos.credito_auto.visible_noviable}}
+					<tr>
+						<td > <!-- Fila 3 -->
+							<div class="ca_nv mpad ">
+								<label class="record-label mpad" style="margin-left:0px">No Viable Crédito Automotriz</label>
+								<input type="checkbox" class="chk_ca_nv" {{#if ResumenProductos.credito_auto.no_viable}}checked{{/if}} data-field="chk_ca_nv"/>
+							</div>
+						</td>
+						<td  width="33%" >
+							<div class="ca_nv_razon ">
+								<label class="record-label mpad" style="margin-left:0px">Razón de cuenta No viable</label>
+								<label class="normal row-fluid select2 list_ca_nv_razon" data-field="list_ca_nv_razon">
+									{{getUnifinListValue 'razones_ddw_list' ResumenProductos.credito_auto.no_viable_razon}}
+								</label>
+							</div>
+						</td>
+						<td  width="33%" >
+							<div class="ca_nv_razon_fp ">
+								<label class="record-label mpad" style="margin-left:0px">Fuera de Perfil (Razón)</label>
+								<label class="normal row-fluid select2  list_ca_nv_razon_fp" data-field="list_ca_nv_razon_fp">
+									{{getUnifinListValue 'fuera_de_perfil_ddw_list' ResumenProductos.credito_auto.no_viable_razon_fp}}
+								</label>
+							</div>
+						</td>
+					</tr>  <!-- Cierre Fila 3 -->
+					<tr>
+						<td  width="33%" > <!-- Fila 4 -->
+							<div class="ca_nv_razon_cf ">
+								<label class="record-label mpad" style="margin-left:0px">Condiciones Financieras</label>
+								<label class="normal row-fluid select2 list_ca_nv_razon_cf" data-name="list_ca_nv_razon_cf">
+									{{getUnifinListValue 'razones_cca_list' ResumenProductos.credito_auto.no_viable_razon_cf}}
+								</label>
+							</div>
+						</td>
+						<td  width="33%" >
+							<div class="ca_nv_producto ">
+								<label class="record-label mpad" style="margin-left:0px">¿Qué producto?</label>
+								<label class="normal row-fluid select2 list_ca_nv_producto" data-name="list_ca_nv_producto">
+									{{getUnifinListValue 'no_producto_requiere_list' ResumenProductos.credito_auto.no_viable_producto}}
+								</label>
+							</div>
+						</td>
+						<td  width="33%" >
+							<div class="ca_nv_otro ">
+								<label class="record-label mpad" style="margin-left:0px">¿Qué producto? (Otro)</label>
+								<label class="normal txt_ca_nv_otro" type="text" data-name="txt_ca_nv_otro">
+									{{ResumenProductos.credito_auto.no_viable_otro_c}}
+								</label>
+							</div>
+						</td>
+					</tr>  <!-- Cierre Fila 4-->
+					<tr>
+						<td > <!-- Fila 5 -->
+							<div class="ca_nv_quien ">
+								<label class="record-label mpad" style="margin-left:0px">¿Quién?</label>
+								<label class="normal txt_ca_nv_quien" type="text" data-name="txt_ca_nv_quien">
+								{{ResumenProductos.credito_auto.no_viable_quien}}
+								</label>
+							</div>
+						</td>
+						<td  width="33%" >
+							<div class="ca_nv_porque ">
+								<label class="record-label mpad" style="margin-left:0px">¿Por qué?</label>
+								<label class="normal txt_ca_nv_porque" type="text" data-name="txt_ca_nv_porque">
+									{{ResumenProductos.credito_auto.no_viable_porque}}
+								</label>
+							</div>
+						</td>
+						<td  width="33%" >
+							<div class="ca_nv_razon_ni ">
+								<label class="record-label mpad" style="margin-left:0px">Razón No se encuentra interesado</label>
+								<label class="normal row-fluid select2 list_ca_nv_razon_ni" data-name="list_ca_nv_razon_ni">
+									{{getUnifinListValue 'tct_razon_ni_l_ddw_c_list' ResumenProductos.credito_auto.no_viable_razon_ni}}
+								</label>
+							</div>
+						</td>
+					</tr>  <!-- Cierre Fila 6-->
+					<tr>
+                        <td colspan = '3' >
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="ca_so_razon span4">
+							    	<label class="record-label mpad" style="margin-left:0px">Razón</label>
+							    	<label class="normal row-fluid select2 list_ca_so_razon" data-field="list_ca_so_razon">
+							    		{{getUnifinListValue 'razon_list' ResumenProductos.credito_auto.razon_c}}
+							    	</label>
+							    </div>
+                                <div class="ca_so_motivo span4">
+							    	<label class="record-label mpad" style="margin-left:0px">Motivo</label>
+							    	<label class="normal row-fluid select2 list_ca_so_motivo" data-field="list_ca_so_motivo">
+							    		{{getUnifinListValue 'motivo_bloqueo_list' ResumenProductos.credito_auto.motivo_c}}
+							    	</label>
+							    </div>
+                            </div>
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="ca_so_detalle  span8">
+                                    <label class="record-label mpad" style="margin-left:0px">Detalle</label>
+                                    <textarea class="normal txt_ca_so_detalle" style="margin-left:0px; margin: 1px;" rows="4" cols="10" readonly>{{ResumenProductos.credito_auto.detalle_c}}</textarea>
+                                </div>
+                                <div class="span4">&nbsp;</div>
+                            </div>
+                        </td>
+					</tr>  <!-- Cierre Fila 7 -->
+					<tr>
+						<td > <!-- Fila 8 -->
+							<div class="ca_so_resp_ingesta ">
+								<label class="record-label mpad" style="margin-left:0px">Responsable de Ingesta</label>
+								<a href="#Employees/{{ResumenProductos.credito_auto.ingesta_c}}">{{ResumenProductos.credito_auto.fullname_ingesta_c}}</a>
+							</div>
+						</td>
+						<td  width="33%" >
+							<div class="ca_so_raspval1 ">
+								<label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
+								<a href="#Employees/{{ResumenProductos.credito_auto.validacion1_c}}">{{ResumenProductos.credito_auto.fullname_validacion1_c}}</a>
+							</div>
+						</td>
+						<td  width="33%" >
+							<div class="ca_so_raspval2 ">
+								<label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
+								<a href="#Employees/{{ResumenProductos.credito_auto.validacion2_c}}">{{ResumenProductos.credito_auto.fullname_validacion2_c}}</a>
+							</div>
+						</td>
+					</tr>  <!-- Cierre Fila 8-->
                 {{/if}}
-                <div class="u_canal">
-                    <label class="record-label mpad" style="margin-left:0px">Canal</label>
-                    <label class="normal row-fluid select2 list_u_canal" data-name="list_u_canal">
-                        {{getUnifinListValue 'canal_list' ResumenProductos.uniclick.canal_c}}
-                    </label>
-                </div>
+                </table>
+            </td>
+        </tr>
+        <tr >
+            <td width="100%">
+				<table class="campoFleet" width="100%" valign="top" style="border: 3px solid lightblue; padding: 8px;">
+					<tr>
+                        <td colspan="3" width="100%">
+							<div class="row-fluid" >  <!--Fila 0 -->
+							<div><strong>Fleet</strong></div>
+							</div>  <!--Cierre Fila1 -->
+							<div class="row-fluid" style="background-color:#cfcfcf; height:5px;" > </div>  <!--Div -->
+						</td>
+                    </tr>
+                    <tr>  <!--Fila 1 -->
+						<td  width="33%" >
+							<div class="mpad ">
+								<label class="record-label mpad" style="margin-left:0px">Estatus</label>
+								{{getUnifinListValue 'product_status_atencion_list' ResumenProductos.fleet.estatus_atencion}}
+							</div>
+						</td>
+						<td  width="33%" >
+							<div class="mpad ">
+								<label class="record-label mpad" style="margin-left:0px">{{ResumenProductos.fleet.dias}} días</label>
+								<a href="#Employees/{{ResumenProductos.fleet.assigned_user_id}}">{{ResumenProductos.fleet.full_name}}</a>
+							</div>
+						</td>
+						<td  width="33%" >
+							<div class="fe_estatus_lm mpad ">
+								<label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
+								{{getUnifinListValue 'status_management_list' ResumenProductos.fleet.status_management_c}}
+							</div>
+						</td>
+					</tr>  <!--Cierre Fila1 -->
+					<tr >  <!--- Fila 2-->
+						<td  width="33%" >
+						<div class="fe_multi mpad ">
+							<label class="record-label mpad" style="margin-left:0px">Multilínea</label>
+							<input type="checkbox" class="chk_fe_multi" {{#if ResumenProductos.fleet.multilinea_c}}checked{{/if}} data-field="chk_fe_multi"/>
+						</div>
+						</td>
+						<td  width="33%" ></td><td  width="33%" ></td>
+					</tr> <!--Cierre Fila 2 -->
+					{{#if ResumenProductos.fleet.visible_noviable}}
+					<tr > <!-- Fila 3 -->
+						<td  width="33%" >
+						<div class="fl_nv mpad ">
+							<label class="record-label mpad" style="margin-left:0px">No Viable Fleet</label>
+							<input type="checkbox" class="chk_fl_nv" {{#if ResumenProductos.fleet.no_viable}}checked{{/if}} data-field="chk_fe_nv"/>
+						</div>
+						</td>
+						<td  width="33%" >
+						<div class="fl_nv_razon ">
+							<label class="record-label mpad" style="margin-left:0px">Razón de cuenta No viable</label>
+							<label class="normal row-fluid select2 list_fe_nv_razon" data-field="list_fl_nv_razon">
+								{{getUnifinListValue 'razones_ddw_list' ResumenProductos.fleet.no_viable_razon}}
+							</label>
+						</div>
+						</td>
+						<td  width="33%" >
+						<div class="fl_nv_razon_fp ">
+							<label class="record-label mpad" style="margin-left:0px">Fuera de Perfil (Razón)</label>
+							<label class="normal row-fluid select2  list_fl_nv_razon_fp" data-field="list_fl_nv_razon_fp">
+								{{getUnifinListValue 'fuera_de_perfil_ddw_list' ResumenProductos.fleet.no_viable_razon_fp}}
+							</label>
+						</div>
+						</td>
+					</tr>  <!-- Cierre Fila 3 -->
+					<tr > <!-- Fila 4 -->
+						<td  width="33%" >
+						<div class="fl_nv_razon_cf ">
+							<label class="record-label mpad" style="margin-left:0px">Condiciones Financieras</label>
+							<label class="normal row-fluid select2 list_fl_nv_razon_cf" data-name="list_fl_nv_razon_cf">
+								{{getUnifinListValue 'razones_cf_list' ResumenProductos.fleet.no_viable_razon_cf}}
+							</label>
+						</div>
+						</td>
+						<td  width="33%" >
+						<div class="fl_nv_producto ">
+							<label class="record-label mpad" style="margin-left:0px">¿Qué producto?</label>
+							<label class="normal row-fluid select2 list_fl_nv_producto" data-name="list_fl_nv_producto">
+								{{getUnifinListValue 'no_producto_requiere_list' ResumenProductos.fleet.no_viable_producto}}
+							</label>
+						</div>
+						</td>
+						<td  width="33%" >
+							<div class="fl_nv_otro ">
+							<label class="record-label mpad" style="margin-left:0px">¿Qué producto? (Otro)</label>
+							<label class="normal txt_fl_nv_otro" type="text" data-name="txt_fl_nv_otro">
+								{{ResumenProductos.fleet.no_viable_otro_c}}
+							</label>
+						</div>
+						</td>
+					</tr>  <!-- Cierre Fila 4-->
+					<tr > <!-- Fila 5 -->
+						<td  width="33%" >
+						<div class="fl_nv_quien ">
+								<label class="record-label mpad" style="margin-left:0px">¿Quién?</label>
+								<label class="normal txt_fl_nv_quien" type="text" data-name="txt_fl_nv_quien">
+							{{ResumenProductos.fleet.no_viable_quien}}
+							</label>
+						</div>
+						</td>
+						<td  width="33%" >
+						<div class="fl_nv_porque ">
+							<label class="record-label mpad" style="margin-left:0px">¿Por qué?</label>
+							<label class="normal txt_fl_nv_porque" type="text" data-name="txt_fl_nv_porque">
+								{{ResumenProductos.fleet.no_viable_porque}}
+							</label>
+						</div>
+						</td>
+						<td  width="33%" >
+						<div class="fl_nv_razon_ni ">
+							<label class="record-label mpad" style="margin-left:0px">Razón No se encuentra interesado</label>
+							<label class="normal row-fluid select2 list_fl_nv_razon_ni" data-name="list_f_nv_razon_ni">
+								{{getUnifinListValue 'tct_razon_ni_l_ddw_c_list' ResumenProductos.fleet.no_viable_razon_ni}}
+							</label>
+						</div>
+						</td>
+					</tr>  <!-- Cierre Fila 6-->
+					<tr> <!-- Fila 7 -->
+                        <td colspan = '3' >
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="fl_so_razon span4">
+						        	<label class="record-label mpad" style="margin-left:0px">Razón</label>
+						        	<label class="normal row-fluid select2 list_fl_so_razon" data-field="list_fl_so_razon">
+						        		{{getUnifinListValue 'razon_list' ResumenProductos.fleet.razon_c}}
+						        	</label>
+						        </div>
+                                <div class="fl_so_motivo span4 ">
+                                	<label class="record-label mpad" style="margin-left:0px">Motivo</label>
+                                	<label class="normal row-fluid select2 list_fl_so_motivo" data-field="list_fl_so_motivo">
+                                		{{getUnifinListValue 'motivo_bloqueo_list' ResumenProductos.fleet.motivo_c}}
+                                	</label>
+                                </div>
+                            </div>
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="fl_so_detalle  span8">
+                                    <label class="record-label mpad" style="margin-left:0px">Detalle</label>
+                                    <textarea class="normal txt_fl_so_detalle" style="margin-left:0px; margin: 1px;" rows="4" cols="10" readonly>{{ResumenProductos.fleet.detalle_c}}</textarea>
+                                </div>
+                                <div class="span4">&nbsp;</div>
+                            </div>
+                        </td>
+					</tr>	<!-- Cierre Fila 7 -->
+					<tr > <!-- Fila 8 -->
+						<td  width="33%" >
+						<div class="fl_so_resp_ingesta ">
+							<label class="record-label mpad" style="margin-left:0px">Responsable de Ingesta</label>
+							<a href="#Employees/{{ResumenProductos.fleet.ingesta_c}}">{{ResumenProductos.fleet.fullname_ingesta_c}}</a>
+						</div>
+						</td>
+						<td  width="33%" >
+						<div class="fl_so_raspval1 ">
+							<label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
+							<a href="#Employees/{{ResumenProductos.fleet.validacion1_c}}">{{ResumenProductos.fleet.fullname_validacion1_c}}</a>
+						</div>
+						</td>
+						<td  width="33%" >
+						<div class="fl_so_raspval2 ">
+							<label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
+							<a href="#Employees/{{ResumenProductos.fleet.validacion2_c}}">{{ResumenProductos.fleet.fullname_validacion2_c}}</a>
+						</div>
+						</td>
+					</tr>  <!-- Cierre Fila 8-->
+                    {{/if}}
+				</table>
+			</td>
+        </tr>
+        <tr >
+            <td width="100%">
+                <table class="campoUniclick" width="100%" valign="top" style="border: 3px solid lightblue; padding: 8px;">
+                    <tr>
+                        <td colspan="3" width="100%">
+							<div class="row-fluid" >  <!--Fila 0 -->
+							<div><strong>Negocio Uniclick</strong></div>
+							</div>  <!--Cierre Fila1 -->
+							<div class="row-fluid" style="background-color:#cfcfcf; height:5px;" > </div>  <!--Div -->
+						</td>
+					</tr>
+					<tr>  <!--Fila 1 -->
+						<td  width="33%" >
+						<div class="mpad">
+                            <label class="record-label mpad" style="margin-left:0px">Estatus</label>
+                            {{getUnifinListValue 'product_status_atencion_list' ResumenProductos.uniclick.estatus_atencion}}
+                        </div>
+                        </td>
+						<td  width="33%" >
+						<div class="mpad">
+                            <label class="record-label mpad" style="margin-left:0px">{{ResumenProductos.uniclick.dias}} días</label>
+                            <a href="#Employees/{{ResumenProductos.uniclick.assigned_user_id}}">{{ResumenProductos.uniclick.full_name}}</a>
+                        </div>
+                        </td>
+						<td  width="33%" >
+						<div class="u_estatus_lm mpad ">
+                            <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
+                            {{getUnifinListValue 'status_management_list' ResumenProductos.uniclick.status_management_c}}
+                        </div>
+						</td>
+                    </tr>  <!--Cierre Fila1 -->
+                    <tr>  <!--- Fila 2-->
+                        <td  width="33%" >
+						<div class="uniclick_multi mpad  ">
+                            <label class="record-label mpad" style="margin-left:0px">Multilínea</label>
+                            <input type="checkbox" class="chk_uniclick_multi" {{#if ResumenProductos.uniclick.multilinea_c}}checked{{/if}} data-field="chk_uniclick_multi"/>
+                        </div>
+						</td>
+						<td  width="33%" >
+						<div class="u_canal ">
+							<label class="record-label mpad" style="margin-left:0px">Canal</label>
+							<label class="normal row-fluid select2 list_u_canal" data-name="list_u_canal">
+								{{getUnifinListValue 'canal_list' ResumenProductos.uniclick.canal_c}}
+							</label>
+						</div>
+						</td>
+						<td  width="33%" ></td>
+                    </tr> <!--Cierre Fila 2 -->
+                    {{#if ResumenProductos.uniclick.visible_noviable}}
+                    <tr> <!-- Fila 3 -->
+						<td  width="33%" >
+						<div class="u_nv mpad ">
+                            <label class="record-label mpad" style="margin-left:0px">No Viable Negocio Uniclick</label>
+                            <input type="checkbox" class="chk_u_nv" {{#if ResumenProductos.uniclick.no_viable}}checked{{/if}} data-field="chk_u_nv"/>
+                        </div>
+                        </td>
+						<td  width="33%" >
+						<div class="u_nv_razon ">
+                            <label class="record-label mpad" style="margin-left:0px">Razón de cuenta No viable</label>
+                            <label class="normal row-fluid select2 list_u_nv_razon" data-field="list_u_nv_razon">
+                                {{getUnifinListValue 'razones_ddw_list' ResumenProductos.uniclick.no_viable_razon}}
+                            </label>
+                        </div>
+                        </td>
+						<td  width="33%" >
+						<div class="u_nv_razon_fp ">
+                            <label class="record-label mpad" style="margin-left:0px">Fuera de Perfil (Razón)</label>
+                            <label class="normal row-fluid select2  list_u_nv_razon_fp" data-field="list_u_nv_razon_fp">
+                                {{getUnifinListValue 'fuera_de_perfil_ddw_list' ResumenProductos.uniclick.no_viable_razon_fp}}
+                            </label>
+						</div>
+						</td>
+                    </tr>  <!-- Cierre Fila 3 -->
+                    <tr> <!-- Fila 4 -->
+						<td  width="33%" >
+						<div class="u_nv_razon_cf ">
+                            <label class="record-label mpad" style="margin-left:0px">Condiciones Financieras</label>
+                            <label class="normal row-fluid select2 list_u_nv_razon_cf" data-name="list_u_nv_razon_cf">
+                                {{getUnifinListValue 'razones_cu_list' ResumenProductos.uniclick.no_viable_razon_cf}}
+                            </label>
+                        </div>
+                        </td>
+						<td  width="33%" >
+						<div class="u_nv_producto ">
+                            <label class="record-label mpad" style="margin-left:0px">¿Qué producto?</label>
+                            <label class="normal row-fluid select2 list_u_nv_producto" data-name="list_u_nv_producto">
+                                {{getUnifinListValue 'no_producto_requiere_list' ResumenProductos.uniclick.no_viable_producto}}
+                            </label>
+                        </div>
+                         </td>
+						<td  width="33%" >
+						<div class="u_nv_otro ">
+                            <label class="record-label mpad" style="margin-left:0px">¿Qué producto? (Otro)</label>
+                            <label class="normal txt_u_nv_otro" type="text" data-name="txt_u_nv_otro">
+                                {{ResumenProductos.uniclick.no_viable_otro_c}}
+                            </label>
+                        </div>
+						</td>
+                    </tr>  <!-- Cierre Fila 4-->
+                    <tr> <!-- Fila 5 -->
+						<td  width="33%" >
+						<div class="u_nv_quien ">
+                             <label class="record-label mpad" style="margin-left:0px">¿Quién?</label>
+                             <label class="normal txt_u_nv_quien" type="text" data-name="txt_u_nv_quien">
+                            {{ResumenProductos.uniclick.no_viable_quien}}
+                            </label>
+                        </div>
+                        </td>
+						<td  width="33%" >
+						<div class="u_nv_porque ">
+                            <label class="record-label mpad" style="margin-left:0px">¿Por qué?</label>
+                            <label class="normal txt_u_nv_porque" type="text" data-name="txt_u_nv_porque">
+                                {{ResumenProductos.uniclick.no_viable_porque}}
+                            </label>
+                        </div>
+                        </td>
+						<td  width="33%" >
+						<div class="u_nv_razon_ni ">
+                            <label class="record-label mpad" style="margin-left:0px">Razón No se encuentra interesado</label>
+                            <label class="normal row-fluid select2 list_u_nv_razon_ni" data-name="list_u_nv_razon_ni">
+                                {{getUnifinListValue 'tct_razon_ni_l_ddw_c_list' ResumenProductos.uniclick.no_viable_razon_ni}}
+                            </label>
+                        </div>
+						</td>
+                    </tr>  <!-- Cierre Fila 6-->
+                    <tr> <!-- Fila 7 -->
+                        <td colspan = '3' >
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="u_so_razon span4">
+                                    <label class="record-label mpad" style="margin-left:0px">Razón</label>
+                                    <label class="normal row-fluid select2 list_u_so_razon" data-field="list_u_so_razon">
+                                        {{getUnifinListValue 'razon_list' ResumenProductos.uniclick.razon_c}}
+                                    </label>
+                                </div>
+                                <div class="u_so_motivo span4">
+                                    <label class="record-label mpad" style="margin-left:0px">Motivo</label>
+                                    <label class="normal row-fluid select2 list_u_so_motivo" data-field="list_u_so_motivo">
+                                        {{getUnifinListValue 'motivo_bloqueo_list' ResumenProductos.uniclick.motivo_c}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row-fluid" style="margin-top: 10px;">
+                                <div class="u_so_detalle  span8">
+                                    <label class="record-label mpad" style="margin-left:0px">Detalle</label>
+                                    <textarea class="normal txt_u_so_detalle" style="margin-left:0px; margin: 1px;" rows="4" cols="10" readonly>{{ResumenProductos.uniclick.detalle_c}}</textarea>
+                                </div>
+                                <div class="span4">&nbsp;</div>
+                            </div>
+                        </td>
+                    </tr>  <!-- Cierre Fila 7 -->
+                    <tr> <!-- Fila 8 -->
+						<td  width="33%" >
+                        <div class="u_so_resp_ingesta ">
+                             <label class="record-label mpad" style="margin-left:0px">Responsable de Ingesta</label>
+                             <a href="#Employees/{{ResumenProductos.uniclick.ingesta_c}}">{{ResumenProductos.uniclick.fullname_ingesta_c}}</a>
+                         </div>
+                        </td>
+						<td  width="33%" >
+						<div class="u_so_raspval1 ">
+                             <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
+                             <a href="#Employees/{{ResumenProductos.uniclick.validacion1_c}}">{{ResumenProductos.uniclick.fullname_validacion1_c}}</a>
+                         </div>
+                         </td>
+						<td  width="33%" >
+						<div class="u_so_raspval2 ">
+                             <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
+                             <a href="#Employees/{{ResumenProductos.uniclick.validacion2_c}}">{{ResumenProductos.uniclick.fullname_validacion2_c}}</a>
+                         </div>
+						</td>
+					</tr>  <!-- Cierre Fila 8-->  
+                    {{/if}}
+                </table>
             </td>
         </tr>
     </table>
