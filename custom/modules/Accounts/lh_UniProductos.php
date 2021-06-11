@@ -1,5 +1,8 @@
 <?php
 
+require_once 'include/SugarPHPMailer.php';
+require_once 'modules/Administration/Administration.php';
+
 class clase_UniProducto
 {
     public function func_UniProducto($bean = null, $event = null, $args = null)
@@ -183,74 +186,118 @@ class clase_UniProducto
 
             }
         }
-       
+        
         if ($GLOBALS['service']->platform != 'mobile') {
             $uniProducto = $bean->account_uni_productos;
-
-            if (!empty($uniProducto) && !$args['isUpdate'] && ( $actualizaLeasing ||  $actualizaFactoring || $actualizaCredAuto || $actualizaFleet || $actualizaUniclick )) {
+            //$GLOBALS['log']->fatal('objetisporductos' . !empty($uniProducto).' - leas:'.$actualizaLeasing.' - fact:'.$actualizaFactoring.' - cred:'.$actualizaCredAuto.' - fleet:'.$actualizaFleet.' - uniclick:'.$actualizaUniclick );
+            if (!empty($uniProducto)  && ( $actualizaLeasing ||  $actualizaFactoring || $actualizaCredAuto || $actualizaFleet || $actualizaUniclick )) {
+                //$GLOBALS['log']->fatal("actualiza-notificacion--");
                 foreach ($uniProducto as $key) {
                     if ($key['id'] != '') {
                         $beanUP = BeanFactory::retrieveBean('uni_Productos', $key['id'], array('disable_row_level_security' => true));
+                        //$GLOBALS['log']->fatal("---notifi". $beanUP->tipo_producto);
                         if( $actualizaLeasing && $beanUP->tipo_producto == '1'){
-                           
+                            $this->notificaDirector($beanUP , $beanUP->tipo_producto, $bean->name , $bean_id);
                         }
                         if($actualizaFactoring  && $beanUP->tipo_producto == '4'){
-                            $actualizaFactoring = true;
+                            $this->notificaDirector($beanUP , $beanUP->tipo_producto, $bean->name, $bean_id);
                         }
                         if($actualizaCredAuto && $beanUP->tipo_producto == '3'){
-                            $actualizaCredAuto = true;
+                            $this->notificaDirector($beanUP , $beanUP->tipo_producto, $bean->name, $bean_id);
                         }
                         if( $actualizaFleet && $beanUP->tipo_producto == '6'){
-                            $actualizaFleet = true;
+                            $this->notificaDirector($beanUP , $beanUP->tipo_producto, $bean->name, $bean_id);
                         }
                         if($actualizaUniclick  && $beanUP->tipo_producto == '8'){
-                            $actualizaUniclick = true;
+                            $this->notificaDirector($beanUP , $beanUP->tipo_producto, $bean->name, $bean_id);
                         }
-                        $this->notificaDirector($beanUP);
                     }
                 }
             }
         }
     }
 
-    public function dataCondiciones(){
-        $sql = "SELECT * FROM tct4_condiciones";
-        $result = $GLOBALS['db']->query($sql);
-       return $result;
-    }
-
-    function notificaDirector($beanUp)
+    public function notificaDirector($beanUp , $tipo,$NameCuenta,$idCuenta)
     { 
-        $condiciones = $this->dataCondiciones();
+        $sql = "SELECT * FROM tct4_condiciones";
+        $condiciones = $GLOBALS['db']->query($sql);
         //Obteniendo correo de director Leasing
         $dirId = [];
+        $correos=array();
+        $nombres=array();
+        //$GLOBALS['log']->fatal('statusmanagement:'.$beanUp->status_management_c);
         if($beanUp->status_management_c == '4' || $beanUp->status_management_c == '5'){
-            array_push($dirId, $beanUp->user_id1_c);
-            array_push($dirId, $beanUp->user_id2_c);
-            array_push($dirId, $beanUp->user_id_c);
-            while($row = $GLOBALS['db']->fetchByAssoc($result) ){
-                if($row['razon'] == $beanUp->razon_c && $row['motivo'] == $beanUp->motivo_c ){
 
+            $beanAc = BeanFactory::retrieveBean('Users', $beanUp->user_id_c , array('disable_row_level_security' => true));
+            $ResponsableIngesta = $beanAc->name;
+
+            array_push($dirId, "'".$beanUp->user_id2_c."'");
+            array_push($dirId,"'".$beanUp->user_id1_c."'");
+
+            $mailTo = [];
+		    $query1 = "SELECT A.id,A.first_name,A.last_name,B.nombre_completo_c, E.email_address
+            FROM users A
+            INNER JOIN users_cstm B ON B.id_c = A.id
+            INNER JOIN email_addr_bean_rel rel ON rel.bean_id = B.id_c
+                AND rel.bean_module = 'Users'
+                AND rel.deleted = 0 
+            INNER JOIN email_addresses E  ON E.id = rel.email_address_id
+              AND E.deleted=0
+            WHERE A.id in (".implode(",",$dirId). ")
+                AND  A.employee_status = 'Active' AND A.deleted = 0
+                AND (A.status IS NULL OR A.status = 'Active')";
+
+            $results1 = $GLOBALS['db']->query($query1);
+        	//$GLOBALS['log']->fatal('results1',$results1);
+        	while ($row = $GLOBALS['db']->fetchByAssoc($results1)) {
+        		$correo = $row['email_address'];
+        		$nombre = $row['nombre_completo_c'];
+        		if ($correo != "") {
+        			$mailTo ["$correo"] = $nombre; 
+                    array_push($correos,$correo);
+			        array_push($nombres,$nombre);
+        		}
+        	}
+            $GLOBALS['log']->fatal('correos',$correos);
+            $GLOBALS['log']->fatal('nombres',$nombres);
+
+            global $app_list_strings;
+            while($row = $GLOBALS['db']->fetchByAssoc($condiciones) ){
+                if(($row['condicion'] == $beanUp->status_management_c) && $row['razon'] == $beanUp->razon_c && $row['motivo'] == $beanUp->motivo_c && $row['notifica'] == 1 ){
+                    include_once('modules/Teams/Team.php');
+			        $team = new Team();
+			        $team->retrieve($app_list_strings['cartera_list']['Cartera']);
+			        $team_members = $team->get_team_members(true);
+                    //$GLOBALS['log']->fatal('team_members',$team_members);
+			        foreach($team_members as $user) {
+                        //$GLOBALS['log']->fatal('correos',$correos);
+			        	array_push($correos,$user->email1);
+			        	array_push($nombres,$user->nombre_completo_c);
+			        }
                 }
             }
+            $GLOBALS['log']->fatal('correos',$correos);
+            $GLOBALS['log']->fatal('nombres',$nombres);            
         }
-        if($beanUp->status_management_c == '1'){
-            array_push($dirId, $beanUp->user_id_c);
-        }
+
+        $urlSugar=$GLOBALS['sugar_config']['site_url'].'/#Accounts/';
+        $linkCuenta=$urlSugar.$idCuenta;
+        $razon =  $app_list_strings['razon_list'][$beanUp->razon_c];
+        $detalle = $beanUp->detalle_c;
         
         //$GLOBALS['log']->fatal("Director de la solicitud con nombre: ".$nombreDirector. 'y correo :' .$correo_director);
-        $cuerpoCorreo= $this->estableceCuerpoNotificacion($nombreDirector,$nombreCuenta,$linkSolicitud,$descripcion,$nombre_rm,$idRM,$Valor);
-
-        $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION A DIRECTOR DE SOLICITUD ".$correo_director);
+        $cuerpoCorreo= $this->estableceCuerpoNotificacion($NameCuenta,$ResponsableIngesta,$razon,$detalle,$linkCuenta);
+        $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION no viable: ".$cuerpoCorreo);
+        //$GLOBALS['log']->fatal("ENVIANDO NOTIFICACION no viable".$correo_director);
         //Enviando correo a director de solicitud con copia  a director regional leasing
-        $this->enviarNotificacionDirector("Solicitud por validar {$bean->name}",$cuerpoCorreo,$correos_director,$nombresDirector,$current_user->id, $idSolicitud);
+        $this->enviarNotificacionDirector("Cuenta {$nombreCuenta} bloqueada por {$ResponsableIngesta}",$cuerpoCorreo,$nombres,$correos);
         
         $GLOBALS['log']->fatal("Termina proceso de notificacion_director");
     }
 
-    public function enviarNotificacionDirector($asunto,$cuerpoCorreo,$correosDirector,$nombresDirector, $userid,$recordid){
+    public function enviarNotificacionDirector($asunto,$cuerpoCorreo,$nombres,$correos){
         //Enviando correo a asesor origen
-        $GLOBALS['log']->fatal("ENVIA A :".$correoDirector.', '.$nombreDirector);
+        //$GLOBALS['log']->fatal("ENVIA A :".$correoDirector.', '.$nombreDirector);
         $insert = '';
         $hoy = date("Y-m-d H:i:s");
         $cc ='';
@@ -263,38 +310,19 @@ class clase_UniProducto
             $mailer->setHtmlBody($body);
             $mailer->clearRecipients();
             $mailer->addRecipientsTo(new EmailIdentity($correoDirector, $nombreDirector));
-            if(count($recipients)>0){
-                for($i=0;$i<count($recipients);$i++){
-                    $mailer->addRecipientsCc(new EmailIdentity($recipients[$i]['correo'], $recipients[$i]['nombre']));
-                    $cc = $cc.$recipients[$i]['correo'].',';
-                }
-
+            if(count($correos)>0){
+                for ($i=0; $i < count($correos); $i++) {
+					$mailer->addRecipientsTo(new EmailIdentity($correos[$i], $nombres[$i]));
+				}
             }
 
-            /*Se agregan como copia oculta Correos de Wendy Reyes y Cristian Carral*/
-            $mailer->addRecipientsBcc(new EmailIdentity('ccarral@unifin.com.mx', 'Cristian Carral'));
-            $mailcco = 'ccarral@unifin.com.mx';
-
-            //Añadiendo múltiples adjuntos
-            $GLOBALS['log']->fatal("ADJUNTOS TIENE: ".count($adjuntos)." ELEMENTOS");
-            if(count($adjuntos)>0){
-                for($i=0;$i<count($adjuntos);$i++){
-                    $mailer->addAttachment(new \Attachment($adjuntos[$i]));
-                    $GLOBALS['log']->fatal("SE ADJUNTA ARCHIVO: ".$adjuntos[$i]);
-                }
-            }
             $result = $mailer->send();
 
             //$GLOBALS['log']->fatal('mailer',$mailer);
 
         } catch (Exception $e){
-            $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email ".$nombreDirector);
+            $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email ");
             $GLOBALS['log']->fatal("Exception ".$e);
-
-            $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,error_code,description)
-            VALUES (uuid() , '{$userid}' , '{$recordid}','{$hoy}','".$correoDirector."-".$cc."-".$mailcco."' , '{$asunto}','to', 'Solicitudes','ERROR','01', '{$e->getMessage()}')";
-            //$GLOBALS['log']->fatal($insert);
-            $GLOBALS['db']->query($insert);
         } catch (MailerException $me) {
             $message = $me->getMessage();
             switch ($me->getCode()) {
@@ -305,19 +333,15 @@ class clase_UniProducto
                     $GLOBALS["log"]->fatal("BeanUpdatesMailer :: error sending e-mail (method: {$mailTransmissionProtocol}), (error: {$message})");
                     break;
             }
-            $insert = "INSERT INTO user_email_log (id, user_id , related_id ,date_entered, name_email, subject,type,related_type,status,error_code,description)
-            VALUES (uuid() , '{$userid}' , '{$recordid}','{$hoy}' ,'".$correoDirector."-".$cc."-".$mailcco."', '{$asunto}','to', 'Solicitudes','ERROR','02', '{$message}')";
-            //$GLOBALS['log']->fatal($insert);
-            $GLOBALS['db']->query($insert);
         }
 
     }
 
-    public function NotificacionRM($nombre_rm,$oppName,$linkSolicitud,$nombreDirector){
-        
-        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombre_rm . '</b>
-      <br><br>Se le informa que ha sido validada su participación en la solicitud: ' .$oppName .', por el director: '.$nombreDirector.'
-      <br><br>Para ver el detalle de la solicitud dé <a id="linkSolicitud" href="'. $linkSolicitud.'">clic aquí</a>
+    public function estableceCuerpoNotificacion($nombreCuenta,$ResponsableIngesta,$razon,$detalle,$linkCuenta){
+
+        $mailHTML = '<br>Se le informa que la cuenta <a id="linkCuenta" href="'. $linkCuenta.'"> '  .$nombreCuenta.' </a> ha sido bloqueada por ' .$ResponsableIngesta.'.
+      <br><br>La razón de bloqueo es: '.$razon .' y el detalle: '.$detalle .'.
+      <br><br>Se requiere de su aprobación para bloquear definitivamente la cuenta.
       <br><br>Atentamente Unifin
       <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
       <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
@@ -326,8 +350,6 @@ class clase_UniProducto
        No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
        Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br /> </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a> </span><u></u><u></u></p>';
 
-        $GLOBALS['log']->fatal("Inicia NotificacionRM envio de mensaje a AsesoRM ".$mailHTML);
         return $mailHTML;
-
     }
 }

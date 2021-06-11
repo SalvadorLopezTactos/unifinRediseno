@@ -155,7 +155,6 @@
                             </div>
                         </td>
                     </tr>
-                    {{/if}}
                     <tr>
                         <td   colspan = '3' >
                             <div class="row-fluid" style="margin-top: 10px;">
@@ -210,7 +209,8 @@
                                 </select>  
                             </div>
                         </td>
-                    </tr>  
+                    </tr>
+                    {{/if}}  
                 </table>
             </td>
         </tr>
@@ -243,9 +243,7 @@
                         <td width="33%">
                             <div class="fac_estatus_lm mpad ">
                                 <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
-                                {{#if ResumenProductos.factoring.status_management_c}}{{getUnifinListValue 'status_management_list' ResumenProductos.factoring.status_management_c}}{{/if}}
-                                <select class="row-fluid select2 list_fac_estatus_lm" id="list_fac_estatus_lm" data-field="list_fac_estatus_lm">
-								{{#each status_management_list}}
+                                {{#each status_management_list}}
                                 <option value="{{@key}}" {{ifSelected @key
                                                                         ../ResumenProductos.factoring.status_management_c}}>{{this}}</option>
                                 {{/each}}
@@ -351,13 +349,12 @@
                             </div>
                         </td>
                     </tr>
-                    {{/if}}
                     <tr>
                         <td colspan = '3' >
                             <div class="row-fluid" style="margin-top: 10px;">
                                 <div class="f_so_razon span4">
                                     <label class="record-label mpad" style="margin-left:0px">Razón</label>
-                                    <select class="row-fluid select2 list_f_razon_lm" id="list_f_estatus_lm" data-field="list_f_estatus_lm">
+                                    <select class="row-fluid select2 list_f_razon_lm" id="list_f_razon_lm" data-field="list_f_razon_lm">
                                         {{#each razon_list}}
 							            <option value="{{@key}}" {{ifSelected @key
 								                                            ../ResumenProductos.factoring.razon_c}}>{{this}}</option>
@@ -407,6 +404,7 @@
                             </div>
                         </td>
                     </tr>
+                    {{/if}}
                 </table>
             </td>
         </tr>
@@ -546,7 +544,6 @@
                             </div>
                         </td>
                     </tr>
-                    {{/if}}
                     <tr>
                         <td  width="33%" colspan = '3' >
                             <div class="row-fluid" style="margin-top: 10px;">
@@ -602,6 +599,7 @@
                             </div>
                         </td>
                     </tr>
+                    {{/if}}
                 </table>
             </td>
         </tr>
@@ -741,7 +739,6 @@
                             </div>
                         </td>
                     </tr>
-                    {{/if}}
                     <tr>
                         <td colspan = '3' >
                             <div class="row-fluid" style="margin-top: 10px;">
@@ -797,6 +794,7 @@
                             </div>
                         </td>
                     </tr>
+                    {{/if}}
                 </table>
             </td>
         </tr>
@@ -947,7 +945,6 @@
                             </div>
                         </td>
                     </tr>
-                    {{/if}}
                     <tr>
                         <td colspan = '3' >
                             <div class="row-fluid" style="margin-top: 10px;">
@@ -1005,6 +1002,7 @@
                          </div>
                         </td>
                     </tr>
+                    {{/if}}
                 </table>
             </td>
         </tr>
