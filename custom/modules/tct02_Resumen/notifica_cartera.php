@@ -29,30 +29,43 @@ class notifica_cartera
 				$bloqueo = 1;
 			}
 			if($bloqueo || $bean->fetched_row['grupo_c'] != $bean->grupo_c) {
+				//Actualiza Productos
+				$estatus = "";
 				$beanAcct = BeanFactory::retrieveBean('Accounts', $bean->id, array('disable_row_level_security' => true));
-				// Bloquea Productos
-				if($bloqueo) {
-					$beanAcct->load_relationship('accounts_uni_productos_1');
-					$relatedBeans = $beanAcct->accounts_uni_productos_1->getBeans();
-					foreach ($relatedBeans as $rel) {
-						$rel->estatus_atencion = 3;
-						$rel->save();
+				$beanAcct->load_relationship('accounts_uni_productos_1');
+				$relatedBeans = $beanAcct->accounts_uni_productos_1->getBeans();
+				foreach ($relatedBeans as $rel) {
+					if($bloqueo) {
+						$estatus = 3;
+					} else {
+						$query = "select before_value_string from uni_productos_audit where field_name = 'estatus_atencion' and parent_id = '{$rel->id}' and before_value_string <> '' order by date_created desc";
+						$results = $db->query($query);
+						$row = $db->fetchByAssoc($results);
+						$estatus = $row['before_value_string'];
 					}
+					$rel->estatus_atencion = $estatus;
+					$rel->save();
 				}
 				//Busca Grupo Empresarial
 				if($beanAcct->load_relationship('members')) {
 					$relatedBeans = $beanAcct->members->getBeans();
 					if (!empty($relatedBeans)) {
 						foreach ($relatedBeans as $member) {
-							if($bloqueo) {
-								// Bloquea Productos
-								$beanAcct1 = BeanFactory::retrieveBean('Accounts', $member->id, array('disable_row_level_security' => true));
-								$beanAcct1->load_relationship('accounts_uni_productos_1');
-								$relatedBeans1 = $beanAcct1->accounts_uni_productos_1->getBeans();
-								foreach ($relatedBeans1 as $rel1) {
-									$rel1->estatus_atencion = 3;
-									$rel1->save();
+							//Actualiza Productos
+							$beanAcct1 = BeanFactory::retrieveBean('Accounts', $member->id, array('disable_row_level_security' => true));
+							$beanAcct1->load_relationship('accounts_uni_productos_1');
+							$relatedBeans1 = $beanAcct1->accounts_uni_productos_1->getBeans();
+							foreach ($relatedBeans1 as $rel1) {
+								if($bloqueo) {
+									$estatus = 3;
+								} else {
+									$query1 = "select before_value_string from uni_productos_audit where field_name = 'estatus_atencion' and parent_id = '{$rel1->id}' order by date_created desc";
+									$results1 = $db->query($query1);
+									$row1 = $db->fetchByAssoc($results1);
+									$estatus = $row1['before_value_string'];
 								}
+								$rel1->estatus_atencion = $estatus;
+								$rel1->save();
 							}
 							//Actualiza Grupo Empresarial
 							if($bean->fetched_row['bloqueo_cartera_c'] != $bean->bloqueo_cartera_c) {
@@ -62,6 +75,7 @@ class notifica_cartera
 									$member->tct_no_contactar_chk_c = 1;
 								}
 								$member->save();
+								if($bean->bloqueo_cartera_c == '') $bean->bloqueo_cartera_c = 0;
 								$actualiza = <<<SQL
 update tct02_resumen_cstm set condicion_cliente_c = '{$bean->condicion_cliente_c}', razon_c = '{$bean->razon_c}', motivo_c = '{$bean->motivo_c}', detalle_c = '{$bean->detalle_c}',
 user_id_c = '{$bean->user_id_c}', user_id1_c = '{$bean->user_id1_c}', bloqueo_cartera_c = '{$bean->bloqueo_cartera_c}' where id_c = '{$member->id}'
@@ -69,6 +83,7 @@ SQL;
 								$Result = $db->query($actualiza);
 							}
 							if($bean->fetched_row['bloqueo2_c'] != $bean->bloqueo2_c) {
+								if($bean->bloqueo2_c == '') $bean->bloqueo2_c = 0;
 								$actualiza = <<<SQL
 update tct02_resumen_cstm set condicion2_c = '{$bean->condicion2_c}', razon2_c = '{$bean->razon2_c}', motivo2_c = '{$bean->motivo2_c}', detalle2_c = '{$bean->detalle2_c}',
 user_id2_c = '{$bean->user_id2_c}', user_id3_c = '{$bean->user_id3_c}', bloqueo_credito_c = '{$bean->bloqueo_credito_c}', bloqueo2_c = '{$bean->bloqueo2_c}' where id_c = '{$member->id}'
@@ -76,6 +91,7 @@ SQL;
 								$Result = $db->query($actualiza);
 							}
 							if($bean->fetched_row['bloqueo3_c'] != $bean->bloqueo3_c) {
+								if($bean->bloqueo3_c == '') $bean->bloqueo3_c = 0;
 								$actualiza = <<<SQL
 update tct02_resumen_cstm set condicion3_c = '{$bean->condicion3_c}', razon3_c = '{$bean->razon3_c}', motivo3_c = '{$bean->motivo3_c}', detalle3_c = '{$bean->detalle3_c}',
 user_id4_c = '{$bean->user_id4_c}', user_id5_c = '{$bean->user_id5_c}', bloqueo_cumple_c = '{$bean->bloqueo_cumple_c}', bloqueo3_c = '{$bean->bloqueo3_c}' where id_c = '{$member->id}'
@@ -97,7 +113,7 @@ SQL;
 			foreach($team_members as $user) {
 				array_push($correos,$user->email1);
 				array_push($nombres,$user->nombre_completo_c);
-			}			
+			}
 			//Notifica Bloqueo
 			if($bloqueo && !$bean->grupo_c) {
 				$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Se le informa que la cuenta <b>'.$bean->name.'</b> ha sido bloqueada por el equipo de <b>'.$equipo.'</b>
@@ -128,8 +144,8 @@ SQL;
 					$mailer->addRecipientsTo(new EmailIdentity($correos[$i], $nombres[$i]));
 				}
 				$result = $mailer->send();
-				$bean->grupo_c = 0;
 			}
+			$bean->grupo_c = 0;
 		}
     }
 }

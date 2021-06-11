@@ -143,6 +143,7 @@ AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id
 					}
 					if($bloqueo) {
 						if(trim($selected) == "selected1") {
+							$query = "update tct02_resumen_cstm set bloqueo_cartera_c = 0 where id_c = '{$resumen->id}'";
 							$resumen->condicion_cliente_c = $parame["condicion"];
 							$resumen->razon_c = $parame["razon"];
 							$resumen->motivo_c = $parame["motivo"];
@@ -151,6 +152,7 @@ AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id
 							$resumen->user_id1_c = $parame["valida"];
 						}
 						if(trim($selected) == "selected2") {
+							$query = "update tct02_resumen_cstm set bloqueo2_c = 0 where id_c = '{$resumen->id}'";
 							$resumen->condicion2_c = $parame["condicion"];
 							$resumen->razon2_c = $parame["razon"];
 							$resumen->motivo2_c = $parame["motivo"];
@@ -159,6 +161,7 @@ AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id
 							$resumen->user_id3_c = $parame["valida"];
 						}
 						if(trim($selected) == "selected3") {
+							$query = "update tct02_resumen_cstm set bloqueo3_c = 0 where id_c = '{$resumen->id}'";
 							$resumen->condicion3_c = $parame["condicion"];
 							$resumen->razon3_c = $parame["razon"];
 							$resumen->motivo3_c = $parame["motivo"];
@@ -166,6 +169,7 @@ AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id
 							$resumen->user_id4_c = $parame["ingesta"];
 							$resumen->user_id5_c = $parame["valida"];
 						}
+						$queryResult = $db->query($query);
 						//Notifica bloqueo al Resposable de validación
 						global $app_list_strings;
 						require_once 'include/SugarPHPMailer.php';
