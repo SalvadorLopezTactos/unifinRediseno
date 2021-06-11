@@ -243,7 +243,8 @@
                         <td width="33%">
                             <div class="fac_estatus_lm mpad ">
                                 <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
-                                {{#each status_management_list}}
+                                <select class="row-fluid select2 list_fac_estatus_lm" id="list_fac_estatus_lm" data-field="list_fac_estatus_lm">
+								{{#each status_management_list}}
                                 <option value="{{@key}}" {{ifSelected @key
                                                                         ../ResumenProductos.factoring.status_management_c}}>{{this}}</option>
                                 {{/each}}
