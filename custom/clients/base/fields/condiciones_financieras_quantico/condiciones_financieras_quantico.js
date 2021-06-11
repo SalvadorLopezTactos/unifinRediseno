@@ -1,6 +1,7 @@
 ({
     events: {
         'click  .plusNuevaCF': 'addNewCFConfigurada',
+        'click  .borrarCFQuantico': 'deleteCFConfigurada',
     },
     initialize: function (options) {
         this._super('initialize', [options]);
@@ -108,11 +109,17 @@
     },
 
     addNewCFConfigurada:function(e){
-        var indieFilaClickada=$(e.currentTarget).parent().parent().index();
-        var filaPoliticaObtenida=self.mainRowsBodyTable[indieFilaClickada];
+        var indiceFilaClickada=$(e.currentTarget).parent().parent().index();
+        var filaPoliticaObtenida=self.mainRowsBodyTable[indiceFilaClickada];
         this.mainRowsConfigBodyTable.push(filaPoliticaObtenida);
         this.render();
 
+    },
+
+    deleteCFConfigurada:function(e){
+        var indiceBorrar=$(e.currentTarget).parent().parent().index();
+        this.mainRowsConfigBodyTable.splice(indiceBorrar, 1);
+        this.render();
     },
 
     bindDataChange: function () {
