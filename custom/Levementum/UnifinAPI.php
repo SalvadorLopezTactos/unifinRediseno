@@ -2362,7 +2362,8 @@ SQL;
         try {
             $url = $host;
             $fields_string = json_encode($body);
-            $GLOBALS['log']->fatal('Entra Funcion postQuantico');
+            $GLOBALS['log']->fatal('Entra Funcion postQuantico, body:');
+            $GLOBALS['log']->fatal(":JSON ENCODED  $url - " . print_r($fields_string, true));
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

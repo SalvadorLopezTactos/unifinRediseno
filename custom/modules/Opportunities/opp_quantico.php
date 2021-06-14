@@ -48,6 +48,12 @@ class IntegracionQuantico
                 $queryResult = $db->getOne($queryasesor);
                 $valorEquipo=$queryResult;
 
+            //Obtiene campo de condiciones financieras de quantico
+            $strCFQuantico=$bean->cf_quantico_c;
+            $jsonCFQuantico="";
+            if($strCFQuantico != ""){
+                $jsonCFQuantico=json_decode($strCFQuantico);
+            }
             //Declaracion de Body
             $body = array(
                 "RequestId" => $bean->idsolicitud_c,
@@ -70,7 +76,8 @@ class IntegracionQuantico
                 "BackOfficeId" => str_replace("^", "", $arrayBo[0]),
                 "BackOfficeName" => $app_list_strings['usuario_bo_0'][str_replace("^", "", $arrayBo[0])],
                 "BusinessGroupId"=>$bean->negocio_c,
-                "TeamId"=>$valorEquipo
+                "TeamId"=>$valorEquipo,
+                'FinancialTermGroupResponse'=>$jsonCFQuantico->FinancialTermGroupResponseList
             );
 			//Valida si se tiene Administración de Cartera y se añaden campos extras al body
 			if($bean->admin_cartera_c==1) {
@@ -170,6 +177,28 @@ class IntegracionQuantico
             }
         }
         $GLOBALS['log']->fatal('Finaliza QuanticoUpdate');
+    }
+
+    public function CFQuanticoUpdate($bean = null, $event = null, $args = null){
+        $GLOBALS['log']->fatal('Inicia Quantico Condiciones financieras');
+        global $sugar_config, $db, $app_list_strings, $current_user;
+        $user = $sugar_config['quantico_usr'];
+        $pwd = $sugar_config['quantico_psw'];
+        $auth_encode = base64_encode($user . ':' . $pwd);
+        
+
+        //Mandar actualización de condiciones financieras en caso de que se detecte una actualización al campo que guarda el json de la petición
+        if ($bean->fetched_row['cf_quantico_c'] != $bean->cf_quantico_c){
+            //Se define URL
+            $host = $sugar_config['quantico_url_base'] . '/CreditRequestIntegration/rest/CreditRequestApi/ModifyAsset';
+            $body=$bean->cf_quantico_c;
+
+            $callApi = new UnifinAPI();
+            $resultado = $callApi->postQuantico($host, $body, $auth_encode);
+            $GLOBALS['log']->fatal('Resultado: Actualizacion Quantico ' . json_encode($resultado));
+
+        }
+
     }
 
 }
