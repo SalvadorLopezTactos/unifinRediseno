@@ -424,9 +424,14 @@
         var filaPoliticaObtenida = self.mainRowsBodyTable[indiceFilaClickada];
         this.mainRowsConfigBodyTable.push(filaPoliticaObtenida);
 
-        //Comienza a formarse estructura json de condiciones financieras configuradas
-        this.jsonCFConfiguradas.RequestId=this.model.get('id');
-        this.jsonCFConfiguradas.OpportunitiesId=this.model.get('idsolicitud_c');
+        if(this.model.get('cf_quantico_c')!=""){
+            this.jsonCFConfiguradas=JSON.parse(this.model.get('cf_quantico_c'));
+        }else{
+            //Comienza a formarse estructura json de condiciones financieras configuradas
+            this.jsonCFConfiguradas.RequestId=this.model.get('id');
+            this.jsonCFConfiguradas.OpportunitiesId=this.model.get('idsolicitud_c');
+        }
+        
         //Obteniendo el campo html para conocer el tipo de campo quie se envía al json
         var camposEnfila=$(e.currentTarget).parent().parent().find('td');
         var objetoTermResponseList=[];
