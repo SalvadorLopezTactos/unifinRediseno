@@ -2,7 +2,8 @@
     events: {
         'click  .plusNuevaCF': 'addNewCFConfigurada',
         'click  .borrarCFQuantico': 'deleteCFConfigurada',
-        'change .fieldCFConfig':'updateJsonCFConfiguradas'
+        'change .fieldCFConfig':'updateJsonCFConfiguradas',
+        'keyup .fieldValidateRange':'validarRangos'
     },
     initialize: function (options) {
         this._super('initialize', [options]);
@@ -128,6 +129,8 @@
             var url = app.api.buildURL('CondicionesFinancierasQuantico', null, null, {});
             app.api.call('GET', url, {}, {
                 success: function (data) {
+                    var jsonStringPolitica=JSON.stringify(data);
+                    self.model.set("cf_quantico_politica_c",jsonStringPolitica);
 
                     //Llenar los headers
                     //Recorres el array de respuesta para corroborar el tipo de dato para conocer el campo html que corresponde
@@ -325,8 +328,10 @@
 
             //self.render();
         }
-
-        this.setinfoCFConfiguradas();
+        if (this.model.get('cf_quantico_politica_c') != "") {
+            this.setinfoCFConfiguradas();
+        }
+        
         self.render();
 
     },
@@ -540,6 +545,75 @@
         var jsonStringConfiguradas=JSON.stringify(self.jsonCFConfiguradas);
         self.model.set("cf_quantico_c",jsonStringConfiguradas);
 
+    },
+
+    validarRangos:function(e){
+        var valor=$(e.currentTarget).val();
+        var limite_inferior=$(e.currentTarget).attr('data-limite-inferior');
+        var limite_superior=$(e.currentTarget).attr('data-limite-superior');
+        //No permitir valores negativos, solo permitir números
+        if (!this.checkNumOnly(e)) {
+            return false;
+        }
+        //Limite inferior no puede ser mayor al limite superior
+        //Validar que ambos valores caigan dentro del rango
+        if(limite_inferior==""){
+            limite_inferior=0;
+        }
+        var esLimiteMayoroMenor=$(e.currentTarget).attr('data-tipo-campo');
+        if(esLimiteMayoroMenor=="inputInferior"){
+            var indextd=$(e.currentTarget).closest('td').index();
+            var valorCampoSuperior=$(e.currentTarget).closest('td').siblings().eq(indextd).find('input').val()
+            if(Number(valor) > Number(valorCampoSuperior)){
+                app.alert.show("fueraRango", {
+                    level: "error",
+                    title: "El n\u00FAmero ingresado no puede ser mayor al Valor Máximo",
+                    autoClose: true
+                });
+                $(e.currentTarget).val("")
+                return false;
+            }
+
+            if(Number(valor) < Number(limite_inferior) || Number(valor) > Number(limite_superior) ){
+                app.alert.show("fueraRango", {
+                    level: "error",
+                    title: "El n\u00FAmero ingresado está fuera del rango permitido",
+                    autoClose: true
+                });
+                $(e.currentTarget).val("")
+                return false;
+            }
+        }
+
+        if(esLimiteMayoroMenor=="inputSuperior"){
+            var indextd=$(e.currentTarget).closest('td').index();
+            var valorCampoSuperior=$(e.currentTarget).closest('td').siblings().eq(indextd).find('input').val()
+
+            if(Number(valor) < Number(limite_inferior) || Number(valor) > Number(limite_superior) ){
+                app.alert.show("fueraRango", {
+                    level: "error",
+                    title: "El n\u00FAmero ingresado está fuera del rango permitido",
+                    autoClose: true
+                });
+                $(e.currentTarget).val("")
+                return false;
+
+            }
+        }
+    },
+
+    //Función para solo permitir números
+    checkNumOnly: function (evt) {
+        if ($.inArray(evt.keyCode, [110, 188, 190, 45, 33, 36, 46, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 16, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105]) < 0) {
+            app.alert.show("Caracter Invalido", {
+                level: "error",
+                title: "Solo n\u00FAmeros son permitidos en este campo.",
+                autoClose: true
+            });
+            return false;
+        } else {
+            return true;
+        }
     },
 
     searchIndexForUpdate:function(valor,arreglo){
