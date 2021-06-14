@@ -122,7 +122,6 @@
             this.bodyTable = [];
             this.mainRowsBodyTable = [];
             this.mainRowsConfigBodyTable = [];
-            this.idsTipo = [];
             self = this;
 
             //Forma url de petición
@@ -230,7 +229,6 @@
             this.bodyTable = [];
             this.mainRowsBodyTable = [];
             this.mainRowsConfigBodyTable = [];
-            this.idsTipo = [];
             self = this;
             //Cuando se tiene lleno el campo cf_quantico_politica_c, se formatea el el diseño con el contenido de dicho campo
             var data = JSON.parse(this.model.get('cf_quantico_politica_c'));
@@ -325,12 +323,103 @@
 
             }
 
-            self.render();
+            //self.render();
+        }
+
+        this.setinfoCFConfiguradas();
+        self.render();
+
+    },
+
+    setinfoCFConfiguradas:function(){
+
+        if (this.model.get('cf_quantico_c') != "") {
+            this.mainRowsConfigBodyTable = [];
+            self = this;
+             //Cuando se tiene lleno el campo cf_quantico_c, se formatea el el diseño con el contenido para mostrar la tabla llena par CF configuradas
+            var data = JSON.parse(this.model.get('cf_quantico_c'));
+            //Como se asume que ya se ha llenado previamente el campo de cf politicas y éste trae consigo la definición
+            //de listas de valores, se establecen exactmanente los mismos pero ahora para la sección de CF configuradas
+            var dataPolitica = JSON.parse(this.model.get('cf_quantico_politica_c'));
+            data['listaValores']=dataPolitica.listaValores;
+
+            if (data.FinancialTermGroupResponseList.length > 0) {
+                //Llenado del cuerpo de la tabla
+                for (var index = 0; index < data.FinancialTermGroupResponseList.length; index++) {
+                    var arrayRespuesta = data.FinancialTermGroupResponseList[index];
+                    var objRow = {};
+                    /*
+                        id 1: Booleano - Check
+                        id 2: Numérico - Text
+                        id 3: Texto - Text
+                        id 4: Rango entero - 2 Text
+                        id 5: Rango moneda - 2 Text
+                        id 6: Moneda - Text
+                        id 7: Catálogo - Select
+                        id 8: Porcentaje - Text
+                        id 9: Rango porcentaje - 2 Text
+                        id 10: Decimal - Text
+                        id 11: Rango Decimal - 2 Text
+                    */
+                    self.bodyTable = [];
+                    for (var i = 0; i < arrayRespuesta.FinancialTermResponseList.length; i++) {
+                        if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '4' ||
+                            arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '5' ||
+                            arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '9' ||
+                            arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '11'
+                        ) {
+                            var rangoInferior = arrayRespuesta.FinancialTermResponseList[i].Value.ValueMin;
+                            var rangoSuperior = arrayRespuesta.FinancialTermResponseList[i].Value.ValueMax;
+
+                            var limiteInferior="";
+                            var limiteSuperior="";
+                            if(arrayRespuesta.FinancialTermResponseList[i].Configuration != undefined){
+                                limiteSuperior=arrayRespuesta.FinancialTermResponseList[i].Configuration.UpperLimit;
+
+                                if(arrayRespuesta.FinancialTermResponseList[i].Configuration.LowerLimit != undefined){
+                                    limiteInferior=arrayRespuesta.FinancialTermResponseList[i].Configuration.LowerLimit;
+                                }
+                            }
+
+                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'rangoInferior': rangoInferior, 'rangoSuperior': "" ,"limiteInferior":limiteInferior,"limiteSuperior":limiteSuperior});
+                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'rangoInferior': "", 'rangoSuperior': rangoSuperior,"limiteInferior":limiteInferior,"limiteSuperior":limiteSuperior });
+                        } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '7') {//Catálogo
+                            //Obteniendo los valores de la lista
+                            var nombre_lista = arrayRespuesta.FinancialTermResponseList[i].Name;
+                            //Obteniendo el mapeo desde la lista
+                            var lista_valores = App.lang.getAppListStrings('mapeo_nombre_attr_cf_quantico_list')[nombre_lista];
+                            var valores_select = data['listaValores'][lista_valores];
+                            var valores_select_obj = {};
+                            //Convirtiendo el arreglo a objeto para poderlo mostrar en las opciones del campo select
+                            for (var j = 0; j < valores_select.length; j++) {
+                                valores_select_obj[valores_select[j].Id] = valores_select[j].Name;
+                            }
+                            var valorSelected = arrayRespuesta.FinancialTermResponseList[i].Value.ValueId;
+
+                            self.bodyTable.push({ 'select': '1', 'text': '', 'checkbox': '','nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'valoresCatalogo': valores_select_obj, 'valorSelected': valorSelected });
+                        } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '1') {//Check
+                            var strChecked = "";
+                            var valorBoolean = arrayRespuesta.FinancialTermResponseList[11].Value.Value;
+                            if (valorBoolean == "True") {
+                                strChecked = 'checked'
+                            }
+                            self.bodyTable.push({ 'select': '', 'text': '', 'checkbox': '1','nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, "checked": strChecked });
+                        } else {// Solo 1 Text
+                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name });
+                        }
+                    }
+                    self.mainRowsConfigBodyTable.push({ 'bodyTable': self.bodyTable });
+
+                }
+
+            }
+
         }
 
     },
 
     addNewCFConfigurada: function (e) {
+
         var indiceFilaClickada = $(e.currentTarget).parent().parent().index();
         var filaPoliticaObtenida = self.mainRowsBodyTable[indiceFilaClickada];
         this.mainRowsConfigBodyTable.push(filaPoliticaObtenida);
