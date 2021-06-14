@@ -553,6 +553,7 @@
         var limite_superior=$(e.currentTarget).attr('data-limite-superior');
         //No permitir valores negativos, solo permitir números
         if (!this.checkNumOnly(e)) {
+            $(e.currentTarget).val("");
             return false;
         }
         //Limite inferior no puede ser mayor al limite superior
@@ -563,41 +564,48 @@
         var esLimiteMayoroMenor=$(e.currentTarget).attr('data-tipo-campo');
         if(esLimiteMayoroMenor=="inputInferior"){
             var indextd=$(e.currentTarget).closest('td').index();
-            var valorCampoSuperior=$(e.currentTarget).closest('td').siblings().eq(indextd).find('input').val()
-            if(Number(valor) > Number(valorCampoSuperior)){
-                app.alert.show("fueraRango", {
-                    level: "error",
-                    title: "El n\u00FAmero ingresado no puede ser mayor al Valor Máximo",
-                    autoClose: true
-                });
-                $(e.currentTarget).val("")
-                return false;
+            var valorCampoSuperior=$(e.currentTarget).closest('td').siblings().eq(indextd).find('input').val();
+            if(valorCampoSuperior!= "" && valor !=""){
+                if(Number(valor) > Number(valorCampoSuperior)){
+                    app.alert.show("fueraRango", {
+                        level: "error",
+                        title: "El n\u00FAmero ingresado no puede ser mayor al Valor Máximo",
+                        autoClose: true
+                    });
+                    $(e.currentTarget).val("")
+                    return false;
+                }
             }
-
-            if(Number(valor) < Number(limite_inferior) || Number(valor) > Number(limite_superior) ){
-                app.alert.show("fueraRango", {
-                    level: "error",
-                    title: "El n\u00FAmero ingresado está fuera del rango permitido",
-                    autoClose: true
-                });
-                $(e.currentTarget).val("")
-                return false;
+            
+            if(limite_superior!="" && valor !=""){
+                if(Number(valor) < Number(limite_inferior) || Number(valor) > Number(limite_superior) ){
+                    app.alert.show("fueraRango", {
+                        level: "error",
+                        title: "El n\u00FAmero ingresado está fuera del rango permitido",
+                        autoClose: true
+                    });
+                    $(e.currentTarget).val("")
+                    return false;
+                }
             }
+            
         }
 
         if(esLimiteMayoroMenor=="inputSuperior"){
             var indextd=$(e.currentTarget).closest('td').index();
             var valorCampoSuperior=$(e.currentTarget).closest('td').siblings().eq(indextd).find('input').val()
 
-            if(Number(valor) < Number(limite_inferior) || Number(valor) > Number(limite_superior) ){
-                app.alert.show("fueraRango", {
-                    level: "error",
-                    title: "El n\u00FAmero ingresado está fuera del rango permitido",
-                    autoClose: true
-                });
-                $(e.currentTarget).val("")
-                return false;
-
+            if(limite_superior!="" && valor!=""){
+                if(Number(valor) < Number(limite_inferior) || Number(valor) > Number(limite_superior) ){
+                    app.alert.show("fueraRango", {
+                        level: "error",
+                        title: "El n\u00FAmero ingresado está fuera del rango permitido",
+                        autoClose: true
+                    });
+                    $(e.currentTarget).val("")
+                    return false;
+    
+                }
             }
         }
     },
