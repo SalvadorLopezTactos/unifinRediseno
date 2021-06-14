@@ -1,5 +1,5 @@
 <?php
- // created: 2021-04-16 18:40:06
+ // created: 2021-06-14 16:29:33
 
 $app_list_strings['detalle_origen_list']=array (
   '' => '',
@@ -46,4 +46,6 @@ $app_list_strings['detalle_origen_list']=array (
   41 => 'Microsoft',
   42 => 'BillPocket',
   43 => 'Central Zone',
+  44 => 'Reditus',
+  45 => 'KBP Brokers',
 );

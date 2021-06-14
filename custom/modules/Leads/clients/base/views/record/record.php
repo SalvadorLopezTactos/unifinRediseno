@@ -268,11 +268,13 @@ array (
               ),
               20 => 
               array (
-                'name' => 'zona_geografica_c',
-                'label' => 'LBL_ZONA_GEOGRAFICA_C',
+                'name' => 'rfc_c',
+                'label' => 'LBL_RFC',
               ),
               21 => 
               array (
+                'name' => 'zona_geografica_c',
+                'label' => 'LBL_ZONA_GEOGRAFICA_C',
               ),
               22 => 
               array (
