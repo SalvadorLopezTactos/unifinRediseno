@@ -5099,14 +5099,17 @@
     },
 
      //Carga Condiciones 
-     carga_condiciones: function () {
+    carga_condiciones: function () {
         this.datacondiciones = [];
-        app.api.call('GET', app.api.buildURL('tct4_Condiciones/'), null, {
+        var url = app.api.buildURL('tct4_Condiciones/', null, null);
+        app.api.call('read', app.api.buildURL('tct4_Condiciones/'), null, {
+        //app.api.call('read', url, {}, {        
 			success: _.bind(function (data) {
 				if(data.records.length > 0) {
-					this.datacondiciones = data;
+					contexto_cuenta.datacondiciones = data;
+                    this.datacondiciones = data;
 				}
-			}, this),
+			}, contexto_cuenta),
             error: function (e) {
                 throw e;
             }
@@ -5771,8 +5774,8 @@
                 faltantelm += 1;
             }            
             if($('.chk_l_nv')[0].checked == true && selectlm.value != "" && selectlm.value !="1" ){
-                for(var i = 0; i < this.datacondiciones.records.length; i++) {
-                    if (this.datacondiciones.records[i].condicion == selectlm.value && this.datacondiciones.records[i].razon == selectlrazon.value && this.datacondiciones.records[i].motivo != "" ){
+                for(var i = 0; i < datacondiciones.records.length; i++) {
+                    if (datacondiciones.records[i].condicion == selectlm.value && datacondiciones.records[i].razon == selectlrazon.value && datacondiciones.records[i].motivo != "" ){
                         if ( selectlmotivo == "") {
                             $('.list_l_so_motivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                             //$('.list_l_so_motivo').css('border-color', 'red'); //TXT ¿Qué producto?
@@ -5780,8 +5783,8 @@
                         }
                     }
 
-                    if (this.datacondiciones.records[i].condicion == selectlm.value && this.datacondiciones.records[i].razon == selectlrazon.value && this.datacondiciones.records[i].motivo == selectlmotivo.value ){
-                        if (this.datacondiciones.records[i].detalle == true ) {
+                    if (datacondiciones.records[i].condicion == selectlm.value && datacondiciones.records[i].razon == selectlrazon.value && datacondiciones.records[i].motivo == selectlmotivo.value ){
+                        if (datacondiciones.records[i].detalle == true ) {
                             if ( $('.txt_l_so_detalle').val().trim() == "") {
                                 $('.txt_l_so_detalle').css('border-color', 'red'); //TXT ¿Qué producto?
                                 faltantelm += 1;
@@ -6685,6 +6688,29 @@
 									}, this)
 								});
 							}
+						}, this)
+					});
+				}
+            }, this)
+        });
+    },
+
+    aprobar_noviable: function () {
+        var consulta = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
+        app.api.call('read', consulta, {}, {
+            success: _.bind(function (data) {
+                if((data.user_id1_c == app.user.id && this.model.get('tct_no_contactar_chk_c')) || (data.user_id3_c == app.user.id && data.bloqueo_credito_c) || (data.user_id5_c == app.user.id && data.bloqueo_cumple_c)) {
+					var params = {};
+					if(data.user_id1_c == app.user.id && this.model.get('tct_no_contactar_chk_c')) params["bloqueo_cartera_c"] = 1;
+					if(data.user_id3_c == app.user.id && data.bloqueo_credito_c) params["bloqueo2_c"] = 1;
+					if(data.user_id5_c == app.user.id && data.bloqueo_cumple_c) params["bloqueo3_c"] = 1;
+					var actualiza = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
+					app.api.call('update', actualiza, params, {
+						success: _.bind(function (data) {
+							app.alert.show('alert_change_success', {
+								level: 'success',
+								messages: 'Cuenta Bloqueada',
+							});
 						}, this)
 					});
 				}

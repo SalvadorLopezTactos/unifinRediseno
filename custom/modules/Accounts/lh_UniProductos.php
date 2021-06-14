@@ -60,6 +60,7 @@ class clase_UniProducto
                         $beanUP->detalle_c = $key['detalle_c'];
                         $beanUP->user_id1_c = $key['user_id1_c'];
                         $beanUP->user_id2_c = $key['user_id2_c'];
+                        $beanUP->user_id_c = $key['user_id_c'];
                         
                         if ($bean->load_relationship('accounts_uni_productos_1') && ($key['tipo_producto'] == 1 || $key['tipo_producto'] == 8)) {
                             $updateProductos = $bean->accounts_uni_productos_1->getBeans($bean->id, array('disable_row_level_security' => true));

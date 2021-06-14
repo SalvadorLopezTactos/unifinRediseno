@@ -32,7 +32,7 @@
         options.def = options.def || {};
         cont_uni_p = this;
 
-        cont_uni_p.carga_condiciones();
+        //cont_uni_p.carga_condiciones();
         cont_uni_p.carga_usuarios_resp_validacion();
         //Guarda los valores hacia el modulo UNI PRODUCTOS
         this.model.addValidationTask('GuardaUniProductos', _.bind(this.SaveUniProductos, this));
@@ -724,24 +724,24 @@
     estatuslmCambio: function () {
         var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
         //if ((App.user.attributes.id != cont_uni_p.ResumenProductos.leasing.user_id_c ) && productos.includes("1") && (cont_uni_p.ResumenProductos.leasing.tipo_cuenta == '4' || cont_uni_p.ResumenProductos.leasing.tipo_cuenta == '5')) { //PRODUCTO LEASING
-        if ((App.user.attributes.id != cont_uni_p.ResumenProductos.leasing.user_id_c ) || !(productos.includes("1"))) { //PRODUCTO LEASING
+        if (((App.user.attributes.id != cont_uni_p.ResumenProductos.leasing.assigned_user_id ) || !(productos.includes("1"))) && cont_uni_p.action == "edit") { //PRODUCTO LEASING
             //$('[data-field="list_l_estatus_lm"]').attr('style', 'pointer-events:block;');
             $('.list_l_estatus_lm').prop("disabled", true);
         }
         //if ((App.user.attributes.id != cont_uni_p.ResumenProductos.factoring.user_id_c ) && productos.includes("4") && (cont_uni_p.ResumenProductos.factoring.tipo_cuenta == '4' || cont_uni_p.ResumenProductos.factoring.tipo_cuenta == '5')) {  //PRODUCTO FACTORAJE
-        if ((App.user.attributes.id != cont_uni_p.ResumenProductos.factoring.user_id_c ) || !(productos.includes("4"))) {  //PRODUCTO FACTORAJE
+       if (((App.user.attributes.id != cont_uni_p.ResumenProductos.factoring.assigned_user_id ) || !(productos.includes("4"))) && cont_uni_p.action == "edit") {  //PRODUCTO FACTORAJE
             $('.list_fac_estatus_lm').prop("disabled", true);
         }
-        if ((App.user.attributes.id != cont_uni_p.ResumenProductos.credito_auto.user_id_c ) || !(productos.includes("3")) ) { //PRODUCTO CREDITO AUTOMOTRIZ
         //if ((App.user.attributes.id != cont_uni_p.ResumenProductos.credito_auto.user_id_c ) && productos.includes("3") && (cont_uni_p.ResumenProductos.credito_auto.tipo_cuenta == '4' || cont_uni_p.ResumenProductos.credito_auto.tipo_cuenta == '5')) { //PRODUCTO CREDITO AUTOMOTRIZ
+        if (((App.user.attributes.id != cont_uni_p.ResumenProductos.credito_auto.assigned_user_id ) || !(productos.includes("3"))) && cont_uni_p.action == "edit" ) { //PRODUCTO CREDITO AUTOMOTRIZ        
             $('.list_ca_estatus_lm').prop("disabled", true);
         }
         //if ((App.user.attributes.id != cont_uni_p.ResumenProductos.fleet.user_id_c ) && productos.includes("6") && (cont_uni_p.ResumenProductos.fleet.tipo_cuenta == '4' || cont_uni_p.ResumenProductos.fleet.tipo_cuenta == '5')) { //PRODUCTO FLEET
-        if ((App.user.attributes.id != cont_uni_p.ResumenProductos.fleet.user_id_c ) || !(productos.includes("6") )) { //PRODUCTO FLEET
+        if (((App.user.attributes.id != cont_uni_p.ResumenProductos.fleet.assigned_user_id ) || !(productos.includes("6"))) && cont_uni_p.action == "edit") { //PRODUCTO FLEET
             $('.list_fl_estatus_lm').prop("disabled", true);
         }
         //if ((App.user.attributes.id != cont_uni_p.ResumenProductos.uniclick.user_id_c ) && productos.includes("8") && (cont_uni_p.ResumenProductos.uniclick.tipo_cuenta == '4' || cont_uni_p.ResumenProductos.uniclick.tipo_cuenta == '5')) { //PRODUCTO UNICLICK
-        if ((App.user.attributes.id != cont_uni_p.ResumenProductos.uniclick.user_id_c ) || !(productos.includes("8"))) { //PRODUCTO UNICLICK
+        if (((App.user.attributes.id != cont_uni_p.ResumenProductos.uniclick.assigned_user_id ) || !(productos.includes("8"))) && cont_uni_p.action == "edit") { //PRODUCTO UNICLICK
             $('.list_u_estatus_lm').prop("disabled", true);
         }
     },
@@ -797,29 +797,29 @@
                         cont_uni_p.ResumenProductos.leasing.no_viable_razon_cf = $('.list_l_nv_razon_cf').select2('val'); //lista Condiciones Financieras Leasing
                         cont_uni_p.ResumenProductos.leasing.no_viable_otro_c = $('.txt_l_nv_otro').val().trim(); //texto ¿Qué producto? Leasing
                         cont_uni_p.ResumenProductos.leasing.no_viable_razon_ni = $('.list_l_nv_razon_ni').select2('val'); //lista Razón No se encuentra interesado Leasing
-
+                        
                         this.tipoProducto.leasing = cont_uni_p.ResumenProductos.leasing;
                     }
 
-                }
-
-                var selectlm = document.getElementById("list_l_estatus_lm");
-                if(selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
-                    cont_uni_p.ResumenProductos.leasing.status_management_c = $('.list_l_estatus_lm').select2('val'); //estatus management
-                    cont_uni_p.ResumenProductos.leasing.razon_c = $('.list_l_so_razon').select2('val'); //razon lm
-                    cont_uni_p.ResumenProductos.leasing.motivo_c = $('.list_l_so_motivo').select2('val'); //motivo lm
-                    cont_uni_p.ResumenProductos.leasing.detalle_c = $('.txt_l_so_detalle').val().trim(); //detalle lm
-                    cont_uni_p.ResumenProductos.leasing.user_id1_c = $('.list_l_respval_1').select2('val');  //user id1
-                    cont_uni_p.ResumenProductos.leasing.user_id2_c = $('.list_l_respval_2').select2('val');  //user id2
-                    this.tipoProducto.leasing = cont_uni_p.ResumenProductos.leasing;
-                }else if(selectlm.value != "" && selectlm.value =="1"){
-                    cont_uni_p.ResumenProductos.leasing.status_management_c = $('.list_l_estatus_lm').select2('val'); //estatus management
-                }
+                    var selectlm = document.getElementById("list_l_estatus_lm");
+                    if($('.chk_l_nv')[0].checked == true && selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
+                        cont_uni_p.ResumenProductos.leasing.status_management_c = $('.list_l_estatus_lm').select2('val'); //estatus management
+                        cont_uni_p.ResumenProductos.leasing.razon_c = $('.list_l_so_razon').select2('val'); //razon lm
+                        cont_uni_p.ResumenProductos.leasing.motivo_c = $('.list_l_so_motivo').select2('val'); //motivo lm
+                        cont_uni_p.ResumenProductos.leasing.detalle_c = $('.txt_l_so_detalle').val().trim(); //detalle lm
+                        cont_uni_p.ResumenProductos.leasing.user_id1_c = $('.list_l_respval_1').select2('val');  //user id1
+                        cont_uni_p.ResumenProductos.leasing.user_id2_c = $('.list_l_respval_2').select2('val');  //user id2
+                        cont_uni_p.ResumenProductos.leasing.user_id_c = ResumenProductos.leasing.assigned_user_id;  //user id
+                        this.tipoProducto.leasing = cont_uni_p.ResumenProductos.leasing;
+                    }else if(selectlm.value != "" && selectlm.value =="1"){
+                        cont_uni_p.ResumenProductos.leasing.status_management_c = $('.list_l_estatus_lm').select2('val'); //estatus management
+                        this.tipoProducto.leasing = cont_uni_p.ResumenProductos.leasing;
+                    }
+                }                
                 
                 //Mapea los campos del modulo UNI PRODUCTOS con producto FACTORAJE en el objeto cont_uni_p.leadNoViable
                 if ($('.chk_f_nv')[0] != undefined) {
                     if ($('.chk_f_nv')[0].checked == true && typeof $('.list_f_nv_razon').select2('val') == "string") {
-
                         cont_uni_p.ResumenProductos.factoring.no_viable = $('.chk_f_nv')[0].checked; //check No Viable Factoraje
                         cont_uni_p.ResumenProductos.factoring.no_viable_razon = $('.list_f_nv_razon').select2('val'); //Razón de Lead no viable factoraje
                         cont_uni_p.ResumenProductos.factoring.no_viable_razon_fp = $('.list_f_nv_razon_fp').select2('val'); //lista Fuera de Perfil (Razón) factoraje
@@ -832,7 +832,23 @@
 
                         this.tipoProducto.factoring = cont_uni_p.ResumenProductos.factoring;
                     }
+
+                    var selectlm = document.getElementById("list_fac_estatus_lm");
+                    if($('.chk_f_nv')[0].checked == true && selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
+                        cont_uni_p.ResumenProductos.factoring.status_management_c = $('.list_fac_estatus_lm').select2('val'); //estatus management
+                        cont_uni_p.ResumenProductos.factoring.razon_c = $('.list_f_razon_lm').select2('val'); //razon lm
+                        cont_uni_p.ResumenProductos.factoring.motivo_c = $('.list_f_so_motivo').select2('val'); //motivo lm
+                        cont_uni_p.ResumenProductos.factoring.detalle_c = $('.txt_f_so_detalle').val().trim(); //detalle lm
+                        cont_uni_p.ResumenProductos.factoring.user_id1_c = $('.list_f_respval_1').select2('val');  //user id1
+                        cont_uni_p.ResumenProductos.factoring.user_id2_c = $('.list_f_respval_2').select2('val');  //user id2
+                        cont_uni_p.ResumenProductos.factoring.user_id_c = ResumenProductos.factoring.assigned_user_id;  //user id
+                        this.tipoProducto.factoring.user_id_c = cont_uni_p.ResumenProductos.factoring;
+                    }else if(selectlm.value != "" && selectlm.value =="1"){
+                        cont_uni_p.ResumenProductos.factoring.status_management_c = $('.list_fac_estatus_lm').select2('val'); //estatus management
+                        this.tipoProducto.factoring.user_id_c = cont_uni_p.ResumenProductos.factoring;
+                    }
                 }
+                
                 //Mapea los campos del modulo UNI PRODUCTOS con producto CREDITO AUTOMOTRIZ en el objeto cont_uni_p.leadNoViable
                 if ($('.chk_ca_nv')[0] != undefined) {
                     if ($('.chk_ca_nv')[0].checked == true && typeof $('.list_ca_nv_razon').select2('val') == "string") {
@@ -848,6 +864,20 @@
                         cont_uni_p.ResumenProductos.credito_auto.no_viable_razon_ni = $('.list_ca_nv_razon_ni').select2('val'); //lista Razón No se encuentra interesado CA
 
                         this.tipoProducto.credito_auto = cont_uni_p.ResumenProductos.credito_auto;
+                    }
+                    var selectlm = document.getElementById("list_ca_estatus_lm");
+                    if($('.chk_f_nv')[0].checked == true && selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
+                        cont_uni_p.ResumenProductos.credito_auto.status_management_c = $('.list_ca_estatus_lm').select2('val'); //estatus management
+                        cont_uni_p.ResumenProductos.credito_auto.razon_c = $('.list_ca_so_razon').select2('val'); //razon lm
+                        cont_uni_p.ResumenProductos.credito_auto.motivo_c = $('.list_ca_so_motivo').select2('val'); //motivo lm
+                        cont_uni_p.ResumenProductos.credito_auto.detalle_c = $('.txt_ca_so_detalle').val().trim(); //detalle lm
+                        cont_uni_p.ResumenProductos.credito_auto.user_id1_c = $('.list_ca_respval_1').select2('val');  //user id1
+                        cont_uni_p.ResumenProductos.credito_auto.user_id2_c = $('.list_ca_respval_2').select2('val');  //user id2
+                        cont_uni_p.ResumenProductos.credito_auto.user_id_c = ResumenProductos.credito_auto.assigned_user_id;  //user id
+                        this.tipoProducto.credito_auto.user_id_c = cont_uni_p.ResumenProductos.credito_auto;
+                    }else if(selectlm.value != "" && selectlm.value =="1"){
+                        cont_uni_p.ResumenProductos.credito_auto.status_management_c = $('.list_ca_estatus_lm').select2('val'); //estatus management
+                        this.tipoProducto.credito_auto.user_id_c = cont_uni_p.credito_auto.factoring;
                     }
                 }
                 //Mapea los campos del modulo UNI PRODUCTOS con producto FLEET en el objeto cont_uni_p.leadNoViable
@@ -866,6 +896,21 @@
 
                         this.tipoProducto.fleet = cont_uni_p.ResumenProductos.fleet;
                     }
+
+                    var selectlm = document.getElementById("list_fl_estatus_lm");
+                    if($('.chk_fl_nv')[0].checked == true && selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
+                        cont_uni_p.ResumenProductos.credito_auto.status_management_c = $('.list_fl_estatus_lm').select2('val'); //estatus management
+                        cont_uni_p.ResumenProductos.credito_auto.razon_c = $('.list_fl_so_razon').select2('val'); //razon lm
+                        cont_uni_p.ResumenProductos.credito_auto.motivo_c = $('.list_fl_so_motivo').select2('val'); //motivo lm
+                        cont_uni_p.ResumenProductos.credito_auto.detalle_c = $('.txt_fl_so_detalle').val().trim(); //detalle lm
+                        cont_uni_p.ResumenProductos.credito_auto.user_id1_c = $('.list_fl_respval_1').select2('val');  //user id1
+                        cont_uni_p.ResumenProductos.credito_auto.user_id2_c = $('.list_fl_respval_2').select2('val');  //user id2
+                        cont_uni_p.ResumenProductos.credito_auto.user_id_c = ResumenProductos.credito_auto.assigned_user_id;  //user id
+                        this.tipoProducto.credito_auto.user_id_c = cont_uni_p.ResumenProductos.credito_auto;
+                    }else if(selectlm.value != "" && selectlm.value =="1"){
+                        cont_uni_p.ResumenProductos.credito_auto.status_management_c = $('.list_fl_estatus_lm').select2('val'); //estatus management
+                        this.tipoProducto.credito_auto.user_id_c = cont_uni_p.credito_auto.factoring;
+                    }
                 }
                 //Mapea los campos del modulo UNI PRODUCTOS con producto UNICLICK en el objeto cont_uni_p.leadNoViable
                 if ($('.chk_u_nv')[0] != undefined) {
@@ -883,12 +928,26 @@
 
                         this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.uniclick;
                     }
-                }
 
+                    var selectlm = document.getElementById("list_u_estatus_lm");
+                    if($('.chk_u_nv')[0].checked == true && selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
+                        cont_uni_p.ResumenProductos.uniclick.status_management_c = $('.list_u_estatus_lm').select2('val'); //estatus management
+                        cont_uni_p.ResumenProductos.uniclick.razon_c = $('.list_u_so_razon').select2('val'); //razon lm
+                        cont_uni_p.ResumenProductos.uniclick.motivo_c = $('.list_u_so_motivo').select2('val'); //motivo lm
+                        cont_uni_p.ResumenProductos.uniclick.detalle_c = $('.txt_u_so_detalle').val().trim(); //detalle lm
+                        cont_uni_p.ResumenProductos.uniclick.user_id1_c = $('.list_u_respval_1').select2('val');  //user id1
+                        cont_uni_p.ResumenProductos.uniclick.user_id2_c = $('.list_u_respval_2').select2('val');  //user id2
+                        cont_uni_p.ResumenProductos.uniclick.user_id_c = ResumenProductos.uniclick.assigned_user_id;  //user id
+                        this.tipoProducto.uniclick.user_id_c = cont_uni_p.ResumenProductos.uniclick;
+                    }else if(selectlm.value != "" && selectlm.value =="1"){
+                        cont_uni_p.ResumenProductos.uniclick.status_management_c = $('.list_u_estatus_lm').select2('val'); //estatus management
+                        this.tipoProducto.uniclick.user_id_c = cont_uni_p.uniclick.factoring;
+                    }
+                }
+                
                 this.model.set('account_uni_productos', this.tipoProducto);
             }
-
-
+            
         }
 
         if (contexto_cuenta.createMode) {
@@ -1107,6 +1166,7 @@
         }
     },
 
+    /*
     //Carga Condiciones 
     carga_condiciones: function () {
         cont_uni_p.datacondiciones = [];
@@ -1121,7 +1181,7 @@
             }
 		});
 	},
-
+    */
     carga_usuarios_resp_validacion:function (){
         cont_uni_p.directoresLeasing1 = '<option value="0" > </option>';
         cont_uni_p.directoresFactoraje1 = '<option value="0" > </option>';
