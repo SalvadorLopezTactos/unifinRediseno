@@ -2,6 +2,7 @@
     events: {
         'click  .plusNuevaCF': 'addNewCFConfigurada',
         'click  .borrarCFQuantico': 'deleteCFConfigurada',
+        'change .fieldCFConfig':'updateJsonCFConfiguradas'
     },
     initialize: function (options) {
         this._super('initialize', [options]);
@@ -380,6 +381,8 @@
             
         }
         this.jsonCFConfiguradas.FinancialTermGroupResponseList.push({"Id":"67","FinancialTermResponseList":objetoTermResponseList})
+        var jsonStringConfiguradas=JSON.stringify(this.jsonCFConfiguradas);
+        this.model.set("cf_quantico_c",jsonStringConfiguradas);
 
         this.render();
 
@@ -388,7 +391,100 @@
     deleteCFConfigurada: function (e) {
         var indiceBorrar = $(e.currentTarget).parent().parent().index();
         this.mainRowsConfigBodyTable.splice(indiceBorrar, 1);
+        this.jsonCFConfiguradas.FinancialTermGroupResponseList.splice(indiceBorrar,1);
+        var jsonStringConfiguradas=JSON.stringify(this.jsonCFConfiguradas);
+        this.model.set("cf_quantico_c",jsonStringConfiguradas);
+
         this.render();
+    },
+
+    updateJsonCFConfiguradas:function(e){
+        var indexCampo = $(e.currentTarget).parent().parent().index();
+        var valorBuscado=$(e.currentTarget).attr('data-columna');
+        var indiceEncontrado=this.searchIndexForUpdate(valorBuscado,self.jsonCFConfiguradas.FinancialTermGroupResponseList[indexCampo]);
+        var indexForUpdateJsonToHbs=this.searchIndexForUpdateMainRowsConfigBodyTable(valorBuscado,self.mainRowsConfigBodyTable[indexCampo]);
+
+        //Se valida el tipo de campo para saber el valor sobre el que se debe de actualizar
+        var tipoCampo=$(e.currentTarget).attr('data-tipo-campo');
+        if(tipoCampo=="catalogo"){
+            self.jsonCFConfiguradas.FinancialTermGroupResponseList[indexCampo].FinancialTermResponseList[indiceEncontrado].Value.Value=$(e.currentTarget).children('option:selected').html();
+            self.jsonCFConfiguradas.FinancialTermGroupResponseList[indexCampo].FinancialTermResponseList[indiceEncontrado].Value.ValueId=$(e.currentTarget).children(':selected').val();
+            
+            //Se actualiza el objeto json que se dibuja en el hbs
+            self.mainRowsConfigBodyTable[indexCampo].bodyTable[indexForUpdateJsonToHbs].valorSelected=$(e.currentTarget).children(':selected').val();
+        }else if(tipoCampo=="inputInferior"){
+            self.jsonCFConfiguradas.FinancialTermGroupResponseList[indexCampo].FinancialTermResponseList[indiceEncontrado].Value.ValueMin=$(e.currentTarget).val();
+            
+            //Se actualiza el objeto json que se dibuja en el hbs
+            self.mainRowsConfigBodyTable[indexCampo].bodyTable[indexForUpdateJsonToHbs].rangoInferior=$(e.currentTarget).val();
+
+        }else if(tipoCampo=="inputSuperior"){
+            self.jsonCFConfiguradas.FinancialTermGroupResponseList[indexCampo].FinancialTermResponseList[indiceEncontrado].Value.ValueMax=$(e.currentTarget).val();
+
+            //Se actualiza el objeto json que se dibuja en el hbs
+            self.mainRowsConfigBodyTable[indexCampo].bodyTable[indexForUpdateJsonToHbs].rangoSuperior=$(e.currentTarget).val();
+
+        }else if(tipoCampo=="check"){
+            var valorSet="";
+            if($(e.currentTarget).is(":checked")){
+                valorSet="True";
+
+                //Se actualiza el objeto json que se dibuja en el hbs
+                self.mainRowsConfigBodyTable[indexCampo].bodyTable[indexForUpdateJsonToHbs].checked="checked";
+
+            }else{
+                valorSet="False";
+
+                //Se actualiza el objeto json que se dibuja en el hbs
+                self.mainRowsConfigBodyTable[indexCampo].bodyTable[indexForUpdateJsonToHbs].checked="";
+            }
+            self.jsonCFConfiguradas.FinancialTermGroupResponseList[indexCampo].FinancialTermResponseList[indiceEncontrado].Value.Value=valorSet;
+
+
+        }
+
+        var jsonStringConfiguradas=JSON.stringify(self.jsonCFConfiguradas);
+        self.model.set("cf_quantico_c",jsonStringConfiguradas);
+
+    },
+
+    searchIndexForUpdate:function(valor,arreglo){
+        
+        var indiceEncontrado="";
+        for (var i = 0; i < arreglo.FinancialTermResponseList.length; i++) {
+            if(arreglo.FinancialTermResponseList[i].Name==valor){
+                indiceEncontrado=i;
+                //Se actualiza el indice para romper el loop
+                i=arreglo.FinancialTermResponseList.length;
+            } 
+        }
+
+        return indiceEncontrado;
+    },
+
+    searchIndexForUpdateMainRowsConfigBodyTable:function(valor,arreglo){
+        var indiceEncontrado="";
+        for (var i = 0; i < arreglo.bodyTable.length; i++) {
+            if(arreglo.bodyTable[i].nombreColumna==valor){
+                indiceEncontrado=i;
+                //Primero se valida el tipo de campo
+                if(arreglo.bodyTable[i].text=="1"){
+                    //Buscar si el limite inferior, en este caso se regresa la primera ocurrencia dentro del arreglo
+                    //pero si es limite superior, se regresa la segunda ocurrencia
+                    if(arreglo.bodyTable[i].rangoInferior=="0"){
+                        indiceEncontrado=i;
+                    }else{
+                        //En este caso se regresa el índice con una unidad más, ya que en este caso se considera que representa a un campo de rango superior
+                        indiceEncontrado=i+1;
+                    }
+                }
+                //Se actualiza el indice para romper el loop
+                i=arreglo.bodyTable.length;
+            } 
+        }
+
+        return indiceEncontrado;
+
     },
 
     bindDataChange: function () {
@@ -407,7 +503,6 @@
 
     _render: function () {
         this._super("_render");
-
     },
 
 })
