@@ -73,10 +73,10 @@ function GetUserMKT($subpuesto_c)
 FROM users user
   INNER JOIN users_cstm uc
     ON uc.id_c = user.id
-  INNER JOIN leads lead
+  LEFT JOIN leads lead
     ON lead.assigned_user_id = user.id
 where puestousuario_c='27' AND user.status = 'Active' AND subpuesto_c='$subpuesto_c'
-GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
+GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC";
     $result_usr = $db->query($query_asesores);
 
     while ($row = $db->fetchByAssoc($result_usr)) {

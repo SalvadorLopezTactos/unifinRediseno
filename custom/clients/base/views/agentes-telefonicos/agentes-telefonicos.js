@@ -6,6 +6,8 @@
         'click #btn_guardar': 'guardar',
         'change .usuarios': 'actualizaUsuarios',
         'change .equipos': 'actualizaEquipos',
+        'change .oficinas_atiende': 'actualizaOficinasAtiende',
+        'change .sub_puesto': 'actualizaSubpuesto',
     },
 
     initialize: function(options){
@@ -21,7 +23,10 @@
             "Informa":"",
             "Total":"0"
           };
+          
           this.lista_equipo = app.lang.getAppListStrings('equipo_list');
+          this.lista_subpuesto = app.lang.getAppListStrings('subpuesto_list');
+
           var strUrl = 'Users?fields=id,nombre_completo_c&order_by=nombre_completo_c:asc&max_num=-1&filter[][status]=Active';
           app.api.call("GET", app.api.buildURL(strUrl), null, {
             success: _.bind(function (data) {
@@ -54,7 +59,7 @@
               "Informa": Informa
           };
           $('#successful').hide();
-          var strUrl = 'Users?fields=id,nombre_completo_c,puestousuario_c,reports_to_id,reports_to_name,equipo_c&max_num=-1&filter[][status]=Active&filter[1][$or][0][puestousuario_c]=27&filter[1][$or][1][puestousuario_c]=31&order_by=nombre_completo_c:asc';
+          var strUrl = 'Users?fields=id,nombre_completo_c,puestousuario_c,subpuesto_c,reports_to_id,reports_to_name,equipo_c,equipos_c&max_num=-1&filter[][status]=Active&filter[1][$or][0][puestousuario_c]=27&filter[1][$or][1][puestousuario_c]=31&order_by=nombre_completo_c:asc';
           if(AgenteN != "" && AgenteN != null) {
             strUrl = strUrl + '&filter[][first_name][$contains]=' + AgenteN;
           }
@@ -70,28 +75,49 @@
           $('#processing').show();
           app.api.call("GET", app.api.buildURL(strUrl), null, {
              success: _.bind(function (data) {
+                
                 if(data.records.length > 0) {
+
                   agentes.listausuarios = [];
                   agentes.listausuarios_previo = [];
+
                   for(var i = 0; i < data.records.length; i++) {
-                     var actual = {
+
+                    var equiposOA = data.records[i].equipos_c;
+                    var equiposOA_concat = "";
+                    for(var x = 0; x < equiposOA.length; x++){
+                      
+                      if(x == equiposOA.length-1){
+                        equiposOA_concat += "^" +equiposOA[x]+ "^";
+                        
+                      }else{
+                        equiposOA_concat += "^" +equiposOA[x]+ "^,";                        
+                      }
+                    }
+           
+                    var actual = {
                          "id": data.records[i].id,
                          "reports_to_id": data.records[i].reports_to_id,
                          "equipo_c": data.records[i].equipo_c,
+                         "equipos_c": equiposOA_concat,
                          "nombre_completo_c": data.records[i].nombre_completo_c,
-                         "reports_to_name": data.records[i].reports_to_name
+                         "reports_to_name": data.records[i].reports_to_name,
+                         "subpuesto_c": data.records[i].subpuesto_c
                      };
                      var previo = {
                          "id": data.records[i].id,
                          "reports_to_id": data.records[i].reports_to_id,
                          "equipo_c": data.records[i].equipo_c,
+                         "equipos_c": equiposOA_concat,
                          "nombre_completo_c": data.records[i].nombre_completo_c,
-                         "reports_to_name": data.records[i].reports_to_name
+                         "reports_to_name": data.records[i].reports_to_name,
+                         "subpuesto_c": data.records[i].subpuesto_c
                      };
                      agentes.listausuarios.push(actual);
                      agentes.listausuarios_previo.push(previo);
                      agentes.filtros.Total = data.records.length;
                   }
+
                 } else {
                   agentes.listausuarios = [];
                   agentes.listausuarios_previo = [];
@@ -127,11 +153,35 @@
         agentes.listausuarios[index].equipo_c = input.val();
         $('#btn_guardar').attr('style', 'pointer-events:auto;');
     },
+
+    actualizaOficinasAtiende: function(evt) {
+      
+      var inputs = this.$('[data-field="oficinas_atiende_id"].updateOA');
+      var input = this.$(evt.currentTarget);
+      var index = inputs.index(input);
+      var selectOA = $(evt.currentTarget).val();
+
+      for (var i = 0; i < selectOA.length; i++) {
+        selectOA[i] = '^' + selectOA[i] + '^'; 
+      }
+      agentes.listausuarios[index].equipos_c = selectOA.toString();
+      $('#btn_guardar').attr('style', 'pointer-events:auto;');
+    },
+
+    actualizaSubpuesto: function(evt) {
+      var inputs = this.$('[data-field="subpuesto_id"].updatesubp'),
+          input = this.$(evt.currentTarget),
+          index = inputs.index(input);
+      agentes.listausuarios[index].subpuesto_c = input.val();
+      $('#btn_guardar').attr('style', 'pointer-events:auto;');
+    },
     
     guardar: function (){
         $('#btn_guardar').attr('style', 'pointer-events:none;');
         for(var i = 0; i < agentes.listausuarios.length; i++) {
-          if(agentes.listausuarios[i].reports_to_id != agentes.listausuarios_previo[i].reports_to_id || agentes.listausuarios[i].equipo_c != agentes.listausuarios_previo[i].equipo_c) {
+          if(agentes.listausuarios[i].reports_to_id != agentes.listausuarios_previo[i].reports_to_id || agentes.listausuarios[i].equipo_c != agentes.listausuarios_previo[i].equipo_c ||
+            agentes.listausuarios[i].equipos_c != agentes.listausuarios_previo[i].equipos_c || agentes.listausuarios[i].subpuesto_c != agentes.listausuarios_previo[i].subpuesto_c) {
+            
             app.alert.show("alerta_update", {
                 level: 'process',
                 title: "Actualizando usuario(s), por favor espere.",
@@ -141,7 +191,10 @@
               user_id: agentes.listausuarios[i].id,
               reports_to_id: agentes.listausuarios[i].reports_to_id,
               equipo_c: agentes.listausuarios[i].equipo_c,
+              equipos_c: agentes.listausuarios[i].equipos_c,
+              subpuesto_c: agentes.listausuarios[i].subpuesto_c,
             };
+            
             var Url = app.api.buildURL("AgentesTelefonicos", '', {}, {});
             app.api.call("create", Url, {data: at_options}, {
               success: _.bind(function (data) {
@@ -164,6 +217,8 @@
             });
             agentes.listausuarios_previo[i].reports_to_id = agentes.listausuarios[i].reports_to_id;
             agentes.listausuarios_previo[i].equipo_c = agentes.listausuarios[i].equipo_c;
+            agentes.listausuarios_previo[i].equipos_c = agentes.listausuarios[i].equipos_c;
+            agentes.listausuarios_previo[i].subpuesto_c = agentes.listausuarios[i].subpuesto_c;
           }
         }
     },

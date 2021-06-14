@@ -15,7 +15,9 @@ class IntegracionQuantico
         $pwd = $sugar_config['quantico_psw'];
         $auth_encode = base64_encode($user . ':' . $pwd);
         $arrayBo = explode(',', $bean->usuario_bo_c);
-        if ($bean->idsolicitud_c != "" && $bean->id_process_c != "" && $bean->quantico_id_c == "") {
+        $iniciaPUni2 = ($app_list_strings['switch_inicia_proceso_list']['ejecuta'] == 1) ? true: false;   //Control para swith que indica si debe ejecutar o no inicia-proceso a uni2
+
+        if ( ( ($bean->id_process_c != "" && $iniciaPUni2) || (!$iniciaPUni2) ) && $bean->idsolicitud_c != "" && $bean->quantico_id_c == "" ) {
             $GLOBALS['log']->fatal("Inicia QuanticoIntegracion");
             $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id, array('disable_row_level_security' => true));
 
@@ -45,11 +47,11 @@ class IntegracionQuantico
                 $GLOBALS['log']->fatal("Ejecuta consulta" .print_r($queryasesor, true));
                 $queryResult = $db->getOne($queryasesor);
                 $valorEquipo=$queryResult;
-                
+
             //Declaracion de Body
             $body = array(
                 "RequestId" => $bean->idsolicitud_c,
-                "ProcessId" => $bean->id_process_c,
+                "ProcessId" => $iniciaPUni2 ? $bean->id_process_c: '1',
                 "OpportunitiesId" => $bean->id,
                 "ClientId" => $bean->account_id,
                 "ClientName" => $bean->account_name,
@@ -76,7 +78,7 @@ class IntegracionQuantico
                 $body["RequestTypePortfolioId"] = $bean->tipo_sol_admin_cartera_c;
                 $body["BusinessAmount"] = $bean->monto_gpo_emp_c;
                 $body["NumberDaysoverduePortfolio"] = $bean->cartera_dias_vencido_c;
-			}		
+			}
             $GLOBALS['log']->fatal('Body Quantico integracion ' . json_encode($body));
             $callApi = new UnifinAPI();
             $resultado = $callApi->postQuantico($host, $body, $auth_encode);

@@ -216,7 +216,7 @@ SQL;
     {
         require_once("custom/clients/base/api/excluir_productos.php");
 
-        global $db, $current_user;
+        global $db, $current_user, $app_list_strings;
         $args_uni_producto = [];
         $args_uni_producto['idCuenta'] = $bean->account_id;
         $args_uni_producto['Producto'] = $bean->tipo_producto_c;
@@ -248,6 +248,7 @@ SQL;
         $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && $bean->producto_financiero_c!="0" &&$bean->producto_financiero_c!="") ? true : $generaSolicitud;
         $generaSolicitud = ($args['isUpdate'] == 1 && $bean->admin_cartera_c) ? true : $generaSolicitud;
         $generaSolicitud = ($args['isUpdate'] == 1 && $row['no_viable'] == '1') ? false: $generaSolicitud;
+        $generaSolicitud = ($app_list_strings['switch_inicia_proceso_list']['ejecuta'] == 1) ? $generaSolicitud: false;   //Control para swith que indica si debe ejecutar o no inicia-proceso a uni2
         /*$GLOBALS['log']->fatal('valor Genera Solicitud JG: ' . $generaSolicitud);
         $GLOBALS['log']->fatal('Id process JG: ' . $bean->id_process_c);
         $GLOBALS['log']->fatal('Tipo operacion JG: ' . $bean->tipo_operacion_c);*/
