@@ -11,7 +11,9 @@ function job_resumen_encuestas_nps()
         $hoy = date("d/m/Y");
         $lista_destinatario = $app_list_strings['destinatario_nps_list']; //USUARIO DESTINATARIO DINAMICO "ARELLY SILVA"
         $id_informe_nps_list = $app_list_strings['id_informe_nps_list']; //ID DEL INFORME AVANZADO ENCUESTA DE SEGUIMIENTO LLAMADAS NPS - 7 DIAS
-        $hostSugar = $sugar_config['site_url'] . '#bwc/index.php?module=ReportMaker&offset=3&stamp=1623784938029538100&return_module=ReportMaker&action=DetailView&record='.$id_informe_nps_list;
+        foreach ($id_informe_nps_list as $key => $valueID) {
+            $hostSugar = $sugar_config['site_url'] . '/#bwc/index.php?module=ReportMaker&offset=3&stamp=1623784938029538100&return_module=ReportMaker&action=DetailView&record='.$valueID;
+        }
 
         foreach ($lista_destinatario as $key => $value) {
 
