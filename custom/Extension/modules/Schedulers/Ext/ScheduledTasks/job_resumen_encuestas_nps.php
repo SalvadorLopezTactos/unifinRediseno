@@ -7,9 +7,11 @@ function job_resumen_encuestas_nps()
 
         $GLOBALS['log']->fatal('---INICIA JOB RESUMEN ENCUESTA NPS---');
 
-        global $app_list_strings;
+        global $app_list_strings, $sugar_config;
         $hoy = date("d/m/Y");
         $lista_destinatario = $app_list_strings['destinatario_nps_list']; //USUARIO DESTINATARIO DINAMICO "ARELLY SILVA"
+        $id_informe_nps_list = $app_list_strings['id_informe_nps_list']; //ID DEL INFORME AVANZADO ENCUESTA DE SEGUIMIENTO LLAMADAS NPS - 7 DIAS
+        $hostSugar = $sugar_config['site_url'] . '#bwc/index.php?module=ReportMaker&offset=3&stamp=1623784938029538100&return_module=ReportMaker&action=DetailView&record='.$id_informe_nps_list;
 
         foreach ($lista_destinatario as $key => $value) {
 
@@ -69,16 +71,16 @@ function job_resumen_encuestas_nps()
                         $totalRegistros++;
 
                         $mailHTMLRecords .= '<font face="verdana" color="#635f5f"><ul><li>
-                        Cliente: <b>' . $cliente . '</b>, persona que contestó la encuesta: 
+                        Cliente: <b>' . $cliente . '</b>, persona que contestó la encuesta 
                         <br><b>' . $personaContesto . '</b> y el asesor que ejecutó llamada para envío de encuesta fue:  <b>' . $asesor . '</b>,</li></ul></font>';
                     }
                     
-                    $mailHTMLRecords .= '<br>Consultar Registro: <a href="#bwc/index.php?module=ReportMaker&action=index&return_module=ReportMaker&return_action=index">Informes</a>';
+                    $mailHTMLRecords .= '<br>Consultar Registro: <a href="' . $hostSugar . '" target="_blank">Informes</a>';
                 }
 
                 if ($totalRegistros > 0) {
                     $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Estimada <b>' . $nombreUsuario . '</b>
-                    <br><br>Se le informa que el día de hoy ' . $hoy . ' se generaron un total de ' . $totalRegistros . ' los cuales se resumen a continuación:
+                    <br><br>Se le informa que el día de hoy <b>' . $hoy . '</b> se recibieron <b>' . $totalRegistros . '</b> encuestas NPS por parte de los siguientes clientes:
                     </font></p>'.$mailHTMLRecords;
                 
                 } else {
@@ -89,8 +91,6 @@ function job_resumen_encuestas_nps()
                 $mailer->getMailTransmissionProtocol();
                 $mailer->setSubject("Resumen de respuestas de encuestas NPS Transaccional");
                 $body = trim($mailHTML);
-                $GLOBALS['log']->fatal('BODY HTML NPS');
-                $GLOBALS['log']->fatal($body);
                 $mailer->setHtmlBody($body);
                 $mailer->clearRecipients();
                 $mailer->addRecipientsTo(new EmailIdentity($correo, $usuario->first_name . ' ' . $usuario->last_name));
