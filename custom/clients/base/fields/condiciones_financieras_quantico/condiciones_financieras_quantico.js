@@ -700,6 +700,8 @@
 
     _render: function () {
         this._super("_render");
+        $('[data-type="textarea"][data-name="cf_quantico_politica_c"]').addClass('hide');
+        $('[data-type="textarea"][data-name="cf_quantico_c"]').addClass('hide');
     },
 
 })
