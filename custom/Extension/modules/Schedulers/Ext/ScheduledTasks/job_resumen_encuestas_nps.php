@@ -69,11 +69,11 @@ function job_resumen_encuestas_nps()
                         $totalRegistros++;
 
                         $mailHTMLRecords .= '<font face="verdana" color="#635f5f"><ul><li>
-                        <br><br>Cliente: ' . $cliente . ', persona que contestó la encuesta: 
-                        <br>' . $personaContesto . ' y el asesor que ejecutó llamada para envío de encuesta fue:  ' . $asesor . ',';
+                        Cliente: <b>' . $cliente . '</b>, persona que contestó la encuesta: 
+                        <br><b>' . $personaContesto . '</b> y el asesor que ejecutó llamada para envío de encuesta fue:  <b>' . $asesor . '</b>,</li></ul></font>';
                     }
                     
-                    $mailHTMLRecords .= '<br>consultar registro <a id="InformesNPS" href="#bwc/index.php?module=ReportMaker&action=index&return_module=ReportMaker&return_action=index"></a></li></ul></font>';
+                    $mailHTMLRecords .= '<br>Consultar Registro: <a href="#bwc/index.php?module=ReportMaker&action=index&return_module=ReportMaker&return_action=index">Informes</a>';
                 }
 
                 if ($totalRegistros > 0) {
