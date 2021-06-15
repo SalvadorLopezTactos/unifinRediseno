@@ -310,7 +310,7 @@ class clase_UniProducto
             $body = trim($cuerpoCorreo);
             $mailer->setHtmlBody($body);
             $mailer->clearRecipients();
-            $mailer->addRecipientsTo(new EmailIdentity($correoDirector, $nombreDirector));
+            //$mailer->addRecipientsTo(new EmailIdentity($correoDirector, $nombreDirector));
             if(count($correos)>0){
                 for ($i=0; $i < count($correos); $i++) {
 					$mailer->addRecipientsTo(new EmailIdentity($correos[$i], $nombres[$i]));

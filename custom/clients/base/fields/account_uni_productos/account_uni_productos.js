@@ -687,31 +687,31 @@
     //Funcion para habilitar la funcionalidad de los checks de cada producto dependiendo del producto que tenga el usuario logueado.
     nvproductos: function () {
         var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
-        if (productos.includes("1") && cont_uni_p.action == "edit") { //PRODUCTO LEASING
+        if (App.user.attributes.id == cont_uni_p.ResumenProductos.leasing.assigned_user_id && productos.includes("1") && cont_uni_p.action == "edit") { //PRODUCTO LEASING
             $('[data-field="chk_l_nv"]').attr('style', 'pointer-events:block;');
             if (app.user.attributes.multilinea_c == 1 ) {
                 $('[data-field="chk_ls_multi"]').attr('style', 'pointer-events:block;');
             }
         }
-        if (productos.includes("4") && cont_uni_p.action == "edit") {  //PRODUCTO FACTORAJE
+        if (App.user.attributes.id == cont_uni_p.ResumenProductos.factoring.assigned_user_id && productos.includes("4") && cont_uni_p.action == "edit") {  //PRODUCTO FACTORAJE
             $('[data-field="chk_f_nv"]').attr('style', 'pointer-events:block;');
             if (app.user.attributes.multilinea_c == 1 ) {
                 $('[data-field="chk_fac_multi"]').attr('style', 'pointer-events:block;');
             }
         }
-        if (productos.includes("3") && cont_uni_p.action == "edit") { //PRODUCTO CREDITO AUTOMOTRIZ
+        if (App.user.attributes.id == cont_uni_p.ResumenProductos.credito_auto.assigned_user_id && productos.includes("3") && cont_uni_p.action == "edit") { //PRODUCTO CREDITO AUTOMOTRIZ
             $('[data-field="chk_ca_nv"]').attr('style', 'pointer-events:block;');
             if (app.user.attributes.multilinea_c == 1) {
                 $('[data-field="chk_ca_multi"]').attr('style', 'pointer-events:block;');
             }
         }
-        if (productos.includes("6") && cont_uni_p.action == "edit") { //PRODUCTO FLEET
+        if (App.user.attributes.id !== cont_uni_p.ResumenProductos.fleet.assigned_user_id && productos.includes("6") && cont_uni_p.action == "edit") { //PRODUCTO FLEET
             $('[data-field="chk_fl_nv"]').attr('style', 'pointer-events:block;');
             if (app.user.attributes.multilinea_c == 1 ) {
                 $('[data-field="chk_fe_multi"]').attr('style', 'pointer-events:block;');
             }
         }
-        if (productos.includes("8") && cont_uni_p.action == "edit") { //PRODUCTO UNICLICK
+        if (App.user.attributes.id == cont_uni_p.ResumenProductos.uniclick.assigned_user_id && productos.includes("8") && cont_uni_p.action == "edit") { //PRODUCTO UNICLICK
             $('[data-field="chk_u_nv"]').attr('style', 'pointer-events:block;');
             if (app.user.attributes.multilinea_c == 1 ) {
                 $('[data-field="chk_uniclick_multi"]').attr('style', 'pointer-events:block;');
