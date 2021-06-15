@@ -1206,25 +1206,43 @@
                     pba_razon_list = app.lang.getAppListStrings('razon_list');
                     pba_motivo_bloqueo_list = app.lang.getAppListStrings('motivo_bloqueo_list');
                     aux1 = [];
-                    aux2 = [];        
+                    aux2 = [];
+                    var j=0;
                     
                     for(var i = 0; i < cont_uni_p.datacondiciones.records.length; i++) {
-                        if(cont_uni_p.datacondiciones.records[i].condicion != '4' && cont_uni_p.datacondiciones.records[i].condicion != '5'){
-                            aux1.push(cont_uni_p.datacondiciones.records[i].razon);
-                            aux2.push(cont_uni_p.datacondiciones.records[i].motivo);
+                        if(cont_uni_p.datacondiciones.records[i].condicion == '4' || cont_uni_p.datacondiciones.records[i].condicion == '5'){
+                            aux1[j] = cont_uni_p.datacondiciones.records[i].razon;
+                            aux2[j] = pba_razon_list[cont_uni_p.datacondiciones.records[i].razon];
+                            console.log(aux1[j] + ' - ' + aux2[j]);
+                            //document.getElementById("list_l_so_razon").options[j]=new Option(app.lang.getAppListStrings('pba_razon_list')[cont_uni_p.datacondiciones.records[i].razon],cont_uni_p.datacondiciones.records[i].razon);
+                            //document.getElementById("list_f_razon_lm").options[j]=new Option(app.lang.getAppListStrings('pba_razon_list')[cont_uni_p.datacondiciones.records[i].razon],cont_uni_p.datacondiciones.records[i].razon);
+                            //document.getElementById("list_ca_so_razon").options[j]=new Option(app.lang.getAppListStrings('pba_razon_list')[cont_uni_p.datacondiciones.records[i].razon],cont_uni_p.datacondiciones.records[i].razon);
+                            //document.getElementById("list_fl_so_razon").options[j]=new Option(app.lang.getAppListStrings('pba_razon_list')[cont_uni_p.datacondiciones.records[i].razon],cont_uni_p.datacondiciones.records[i].razon);
+                            //document.getElementById("list_u_so_razon").options[j]=new Option(app.lang.getAppListStrings('pba_razon_list')[cont_uni_p.datacondiciones.records[i].razon],cont_uni_p.datacondiciones.records[i].razon);
+                            //aux1.push(cont_uni_p.datacondiciones.records[i].razon);
+                            //aux2.push(cont_uni_p.datacondiciones.records[i].motivo);
                             //aux1[cont_uni_p.datacondiciones.records[i].razon] = pba_razon_list[cont_uni_p.datacondiciones.records[i].razon];
                             //aux2[cont_uni_p.datacondiciones.records[i].motivo] = pba_motivo_bloqueo_list[cont_uni_p.datacondiciones.records[i].motivo];
+                            j++;
                         }
                     }
-                    for(i = 0; i <aux1.length; i++) {
+                    /*for(i = 0; i <aux1.length; i++) {
                         //pba_razon_list.splice(aux1[i], 1);
                         delete pba_razon_list[aux1[i]];
                     }
                     for(i = 0; i <aux2.length; i++) {
                         //pba_motivo_bloqueo_list.splice(aux2[i], 1);
                         delete pba_motivo_bloqueo_list[aux2[i]];
+                    }*/
+                    var text = '{'; 
+                    text += '"0":"",';
+                    for(i = 0; i <aux1.length; i++) {
+                        text += '"' + aux1[i] + '":"'+ aux2[i] + '",';
                     }
-                    cont_uni_p.razon_list = pba_razon_list;
+                    text = text.substring(0,text.length-1);
+                    text += '}';
+                    //console.log(text);
+                    cont_uni_p.razon_list = JSON.parse(text);
                     //cont_uni_p.motivo_bloqueo_list = pba_motivo_bloqueo_list;
 				}
 			}, cont_uni_p),
@@ -1242,31 +1260,37 @@
         document.getElementById("list_fl_so_motivo").options.length=0;
         document.getElementById("list_u_so_motivo").options.length=0;
 
+        var j =0;
 		for(var i = 0; i < cont_uni_p.datacondiciones.records.length; i++) {
             switch (tipoProducto) {
                 case "1": //Leasing
                     if($("#list_l_so_razon")[0].value == cont_uni_p.datacondiciones.records[i].razon && cont_uni_p.datacondiciones.records[i].motivo) {
-                        document.getElementById("list_l_so_motivo").options[i]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
+                        document.getElementById("list_l_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);  
+                        j++;
                     }
                     break;
                 case "4": //Factoraje
                     if($("#list_f_razon_lm")[0].value == cont_uni_p.datacondiciones.records[i].razon && cont_uni_p.datacondiciones.records[i].motivo) {
-                        document.getElementById("list_f_so_motivo").options[i]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
+                        document.getElementById("list_f_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
+                        j++;
                     }
                     break;
                 case "3": //Credito-auto
                     if($("#list_ca_so_razon")[0].value == cont_uni_p.datacondiciones.records[i].razon && cont_uni_p.datacondiciones.records[i].motivo) {
-                        document.getElementById("list_ca_so_motivo").options[i]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
+                        document.getElementById("list_ca_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
+                        j++;
                     }
                     break;
                 case "6": //Fleet
                     if($("#list_fl_so_razon")[0].value == cont_uni_p.datacondiciones.records[i].razon && cont_uni_p.datacondiciones.records[i].motivo) {
-                        document.getElementById("list_fl_so_motivo").options[i]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
+                        document.getElementById("list_fl_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
+                        j++;
                     }
                     break;
                 case "8": //Uniclick
                     if($("#list_u_so_razon")[0].value == cont_uni_p.datacondiciones.records[i].razon && cont_uni_p.datacondiciones.records[i].motivo) {    
-                        document.getElementById("list_u_so_motivo").options[i]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
+                        document.getElementById("list_u_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
+                        j++;
                     }
                     break;
             }
