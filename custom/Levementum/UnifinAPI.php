@@ -2407,7 +2407,7 @@ SQL;
             $curl_info = curl_getinfo($ch);
             $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $response = json_decode($result, true);
-            $GLOBALS['log']->fatal('FIN PETICIÓN GetProductFinancialTermGroup');
+            $GLOBALS['log']->fatal('FIN PETICIÓN QUANTICO CF');
             
             return $response;
         } catch (Exception $exception) {
