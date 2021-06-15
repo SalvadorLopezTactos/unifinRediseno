@@ -24,3 +24,5 @@ $mod_strings['LBL_VALIDACION1_USER_ID'] = 'Responsable Validación 1 (relacionad
 $mod_strings['LBL_VALIDACION1'] = 'Responsable Validación 1';
 $mod_strings['LBL_VALIDACION2_USER_ID'] = 'Responsable Validación 2 (relacionado Usuario ID)';
 $mod_strings['LBL_VALIDACION2'] = 'Responsable Validación 2';
+$mod_strings['LBL_APRUEBA1'] = 'Aprueba1';
+$mod_strings['LBL_APRUEBA2'] = 'Aprueba2';

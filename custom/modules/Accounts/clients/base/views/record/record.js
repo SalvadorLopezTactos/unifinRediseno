@@ -293,6 +293,7 @@
         this.context.on('button:send_account_asesor:click', this.set_Account, this);
 		this.context.on('button:bloquea_cuenta:click', this.bloquea_cuenta, this);
 		this.context.on('button:desbloquea_cuenta:click', this.desbloquea_cuenta, this);
+		this.context.on('button:aprobar_noviable:click', this.aprobar_noviable, this);
 
         /***************Validacion de Campos No viables en los Productos********************/
         this.model.addValidationTask('LeasingUP', _.bind(this.requeridosLeasingUP, this));
@@ -6650,25 +6651,32 @@
     },
 
     aprobar_noviable: function () {
-        var consulta = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
-        app.api.call('read', consulta, {}, {
-            success: _.bind(function (data) {
-                if((data.user_id1_c == app.user.id && this.model.get('tct_no_contactar_chk_c')) || (data.user_id3_c == app.user.id && data.bloqueo_credito_c) || (data.user_id5_c == app.user.id && data.bloqueo_cumple_c)) {
-					var params = {};
-					if(data.user_id1_c == app.user.id && this.model.get('tct_no_contactar_chk_c')) params["bloqueo_cartera_c"] = 1;
-					if(data.user_id3_c == app.user.id && data.bloqueo_credito_c) params["bloqueo2_c"] = 1;
-					if(data.user_id5_c == app.user.id && data.bloqueo_cumple_c) params["bloqueo3_c"] = 1;
-					var actualiza = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
-					app.api.call('update', actualiza, params, {
-						success: _.bind(function (data) {
-							app.alert.show('alert_change_success', {
-								level: 'success',
-								messages: 'Cuenta Bloqueada',
-							});
-						}, this)
-					});
-				}
-            }, this)
+        var Productos = [];
+        app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + this.model.get('id')), null, {
+            success: function (data) {
+				Productos = data;
+                _.each(Productos, function (value, key) {
+					alert(value);
+					alert(key);
+					if(Productos[key].no_viable && (Productos[key].user_id1_c == app.user.id || Productos[key].user_id2_c == app.user.id)) {
+						var params = {};
+						if(Productos[key].user_id1_c == app.user.id) params["aprueba1_c"] = 1;
+						if(Productos[key].user_id2_c == app.user.id) params["aprueba2_c"] = 1;
+						var actualiza = app.api.buildURL('uni_Productos/' + Productos[key].id, null, null);
+						app.api.call('update', actualiza, params, {
+							success: _.bind(function (data) {
+								app.alert.show('alert_change_success', {
+									level: 'success',
+									messages: 'Cuenta Bloqueada',
+								});
+							}, this)
+						});
+                    }
+                });
+            },
+            error: function (e) {
+                throw e;
+            }
         });
     },
 })
