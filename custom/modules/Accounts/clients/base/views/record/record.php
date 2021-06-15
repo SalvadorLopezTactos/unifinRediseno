@@ -189,6 +189,27 @@ array (
                 'label' => 'Desbloquear Cuenta',
                 'event' => 'button:desbloquea_cuenta:click',
               ),
+              18 => 
+              array (
+                'name' => 'aprobar_noviable',
+                'type' => 'rowaction',
+                'label' => 'Aprobar No Viable',
+                'event' => 'button:aprobar_noviable:click',
+              ),
+              19 => 
+              array (
+                'name' => 'rechazar_noviable',
+                'type' => 'rowaction',
+                'label' => 'Rechazar No Viable',
+                'event' => 'button:rechazar_noviable:click',
+              ),
+              20 => 
+              array (
+                'name' => 'activar_noviable',
+                'type' => 'rowaction',
+                'label' => 'Activar No Viable',
+                'event' => 'button:activar_noviable:click',
+              ),
             ),
           ),
           4 => 

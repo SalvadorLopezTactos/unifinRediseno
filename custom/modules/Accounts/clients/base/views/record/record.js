@@ -5101,15 +5101,14 @@
      //Carga Condiciones 
     carga_condiciones: function () {
         this.datacondiciones = [];
-        var url = app.api.buildURL('tct4_Condiciones/', null, null);
-        app.api.call('read', app.api.buildURL('tct4_Condiciones/'), null, {
-        //app.api.call('read', url, {}, {        
-			success: _.bind(function (data) {
+        var url = app.api.buildURL('tct4_Condiciones/', null);
+        app.api.call('read',url, null, {
+            success: _.bind(function (data) {
 				if(data.records.length > 0) {
 					contexto_cuenta.datacondiciones = data;
                     this.datacondiciones = data;
 				}
-			}, contexto_cuenta),
+			}, this),
             error: function (e) {
                 throw e;
             }
@@ -5742,22 +5741,11 @@
                 errors['error_leasingUP'] = errors['error_leasingUP'] || {};
                 errors['error_leasingUP'].required = true;
             }
-            if ($('.chk_l_nv')[0].checked == true && (document.getElementById("list_l_estatus_lm").value !="4" && document.getElementById("list_l_estatus_lm").value !="5")) {
-                $('.list_l_estatus_lm').css('border-color', 'red'); //TXT ¿Qué producto?
-                app.alert.show("Faltantes no viable Leasing", {
-                    level: "error",
-                    title: 'Debe cambiar el estatus Lead Management para No viable Leasing.',
-                    autoClose: false
-                });
-                errors['error_leasingUP'] = errors['error_leasingUP'] || {};
-                errors['error_leasingUP'].required = true;
-            }
-
+            
             var faltantelm = 0;
-            var selectlm = document.getElementById("list_l_estatus_lm");
             var selectlrazon = document.getElementById("list_l_so_razon");
             var selectlmotivo = document.getElementById("list_l_so_motivo");
-            if ($('.chk_l_nv')[0].checked == true && selectlrazon.value == '' && (selectlm.value =="4" || selectlm.value =="5")) {
+            if ($('.chk_l_nv')[0].checked == true && selectlrazon.value == '' ) {
                 $('.list_l_so_razon').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
             }
@@ -5765,26 +5753,26 @@
                 $('.selectlmotivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
             }*/
-            if ($('.chk_l_nv')[0].checked == true && ($('.list_l_respval_1').select2('val') == "" || $('.list_l_respval_1').select2('val') == "0") && (selectlm.value =="4" || selectlm.value =="5")) {
+            if ($('.chk_l_nv')[0].checked == true && ($('.list_l_respval_1').select2('val') == "" || $('.list_l_respval_1').select2('val') == "0")) {
                 $('.list_l_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
             }
-             if ($('.chk_l_nv')[0].checked == true && ($('.list_l_respval_2').select2('val') == "" || $('.list_l_respval_2').select2('val') == "0") && (selectlm.value =="4" || selectlm.value =="5")) {
+             if ($('.chk_l_nv')[0].checked == true && ($('.list_l_respval_2').select2('val') == "" || $('.list_l_respval_2').select2('val') == "0")) {
                 $('.list_l_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
-            }            
-            if($('.chk_l_nv')[0].checked == true && selectlm.value != "" && selectlm.value !="1" ){
-                for(var i = 0; i < datacondiciones.records.length; i++) {
-                    if (datacondiciones.records[i].condicion == selectlm.value && datacondiciones.records[i].razon == selectlrazon.value && datacondiciones.records[i].motivo != "" ){
+            }
+            
+            if($('.chk_l_nv')[0].checked == true ) {
+                for(var i = 0; i < contexto_cuenta.datacondiciones.records.length; i++) {
+                    if ( contexto_cuenta.datacondiciones.records[i].razon == selectlrazon.value && contexto_cuenta.datacondiciones.records[i].motivo != "" ){
                         if ( selectlmotivo == "") {
                             $('.list_l_so_motivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                             //$('.list_l_so_motivo').css('border-color', 'red'); //TXT ¿Qué producto?
                             faltantelm += 1;
                         }
                     }
-
-                    if (datacondiciones.records[i].condicion == selectlm.value && datacondiciones.records[i].razon == selectlrazon.value && datacondiciones.records[i].motivo == selectlmotivo.value ){
-                        if (datacondiciones.records[i].detalle == true ) {
+                    if (contexto_cuenta.datacondiciones.records[i].razon == selectlrazon.value && contexto_cuenta.datacondiciones.records[i].motivo == selectlmotivo.value ){
+                        if (contexto_cuenta.datacondiciones.records[i].detalle == true ) {
                             if ( $('.txt_l_so_detalle').val().trim() == "") {
                                 $('.txt_l_so_detalle').css('border-color', 'red'); //TXT ¿Qué producto?
                                 faltantelm += 1;
@@ -5795,9 +5783,9 @@
             }
 
             if (faltantelm > 0) {
-                app.alert.show("Faltantes "+selectlm.options[selectlm.selectedIndex].text, {
+                app.alert.show("Faltantes No viable - Lead Management", {
                     level: "error",
-                    title: 'Hace falta información para el Estatus <b>'+selectlm.options[selectlm.selectedIndex].text+'</b> Leasing.',
+                    title: 'Hace falta información para <b>No Viable Leasing </b>.',
                     autoClose: false
                 });
                 errors['error_leasingUP'] = errors['error_leasingUP'] || {};
@@ -5873,22 +5861,11 @@
                 errors['error_FactorajeUP'] = errors['error_FactorajeUP'] || {};
                 errors['error_FactorajeUP'].required = true;
             }
-            if ($('.chk_f_nv')[0].checked == true && (document.getElementById("list_fac_estatus_lm").value !="4" && document.getElementById("list_fac_estatus_lm").value !="5")) {
-                $('.list_fac_estatus_lm').css('border-color', 'red'); //TXT ¿Qué producto?
-                app.alert.show("Faltantes no viable Factoraje", {
-                    level: "error",
-                    title: 'Debe cambiar el estatus Lead Management para No Viable Factoraje.',
-                    autoClose: false
-                });
-                errors['error_FactorajeUP'] = errors['error_FactorajeUP'] || {};
-                errors['error_FactorajeUP'].required = true;
-            }
-
+            
             var faltantelm = 0;
-            var selectlm = document.getElementById("list_fac_estatus_lm");
             var selectlrazon = document.getElementById("list_f_razon_lm");
             var selectlmotivo = document.getElementById("list_f_so_motivo");
-            if ($('.chk_f_nv')[0].checked == true && selectlrazon.value == '' && (selectlm.value =="4" || selectlm.value =="5")) {
+            if ($('.chk_f_nv')[0].checked == true && selectlrazon.value == '' ) {
                 $('.list_f_razon_lm').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
             }
@@ -5896,19 +5873,19 @@
                 $('.selectlmotivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
             }*/
-            if ($('.chk_f_nv')[0].checked == true && ($('.list_f_respval_1').select2('val') == "" || $('.list_f_respval_1').select2('val') == "0") && (selectlm.value =="4" || selectlm.value =="5")) {
+            if ($('.chk_f_nv')[0].checked == true && ($('.list_f_respval_1').select2('val') == "" || $('.list_f_respval_1').select2('val') == "0") ) {
                 $('.list_f_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
             }
-             if ($('.chk_f_nv')[0].checked == true && ($('.list_f_respval_2').select2('val') == "" || $('.list_f_respval_2').select2('val') == "0") && (selectlm.value =="4" || selectlm.value =="5")) {
+             if ($('.chk_f_nv')[0].checked == true && ($('.list_f_respval_2').select2('val') == "" || $('.list_f_respval_2').select2('val') == "0") ) {
                 $('.list_f_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
             }  
-            if($('.chk_f_nv')[0].checked == true && selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
+            if($('.chk_f_nv')[0].checked == true){
                 for(var i = 0; i < this.datacondiciones.records.length; i++) {
-                    if (this.datacondiciones.records[i].condicion == selectlm.value && this.datacondiciones.records[i].razon == selectlrazon.value && this.datacondiciones.records[i].motivo != "" ){
+                    if ( this.datacondiciones.records[i].razon == selectlrazon.value && this.datacondiciones.records[i].motivo != "" ){
                         if ( selectlmotivo == "") {
-                            $('.list_l_so_motivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
+                            $('.list_f_so_motivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                             //$('.list_l_so_motivo').css('border-color', 'red'); //TXT ¿Qué producto?
                             faltantelm += 1;
                         }
@@ -5925,9 +5902,9 @@
                 }
     
                 if (faltantelm > 0) {
-                    app.alert.show("Faltantes "+selectlm.options[selectlm.selectedIndex].text, {
+                    app.alert.show("Faltantes No viable - Lead Management", {
                         level: "error",
-                        title: 'Hace falta información para el Estatus <b>'+selectlm.options[selectlm.selectedIndex].text+'</b>. Factoraje',
+                        title: 'Hace falta información para <b>No Viable Factoraje.</b>',
                         autoClose: false
                     });
                     errors['error_FactorajeUP'] = errors['error_FactorajeUP'] || {};
@@ -6000,26 +5977,15 @@
                 errors['error_CAUP'].required = true;
             }
 
-            if ($('.chk_ca_nv')[0].checked == true && (document.getElementById("list_ca_estatus_lm").value !="4" && document.getElementById("list_ca_estatus_lm").value !="5")) {
-                $('.list_ca_estatus_lm').css('border-color', 'red'); //TXT ¿Qué producto?
-                app.alert.show("Faltantes no viable Crédito Auto", {
-                    level: "error",
-                    title: 'Debe cambiar el estatus Lead Management para No Viable Crédito Automotriz',
-                    autoClose: false
-                });
-                errors['error_CAUP'] = errors['error_CAUP'] || {};
-                errors['error_CAUP'].required = true;
-            }
             /*if (faltantesCAUP == 0 && $('.chk_ca_nv')[0].checked == true && cont_uni_p.ResumenProductos.credito_auto.status_management_c != "3") {
                 this.model.set('promotorcredit_c', '9 - No Viable');
                 this.model.set('user_id2_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.credito_auto.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
             }*/
             var faltantelm = 0;
-            var selectlm = document.getElementById("list_ca_estatus_lm");
             var selectlrazon = document.getElementById("list_ca_so_razon");
             var selectlmotivo = document.getElementById("list_ca_so_motivo");
-            if ($('.chk_ca_nv')[0].checked == true && selectlrazon.value == '' && (selectlm.value =="4" || selectlm.value =="5")) {
+            if ($('.chk_ca_nv')[0].checked == true && selectlrazon.value == '') {
                 $('.list_ca_so_razon').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
             }
@@ -6027,17 +5993,17 @@
                 $('.selectlmotivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
             }*/
-            if ($('.chk_ca_nv')[0].checked == true && ($('.list_ca_respval_1').select2('val') == "" || $('.list_ca_respval_1').select2('val') == "0") && (selectlm.value =="4" || selectlm.value =="5")) {
+            if ($('.chk_ca_nv')[0].checked == true && ($('.list_ca_respval_1').select2('val') == "" || $('.list_ca_respval_1').select2('val') == "0") ) {
                 $('.list_ca_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
             }
-             if ($('.chk_ca_nv')[0].checked == true && ($('.list_ca_respval_2').select2('val') == "" || $('.list_ca_respval_2').select2('val') == "0") && (selectlm.value =="4" || selectlm.value =="5")) {
+             if ($('.chk_ca_nv')[0].checked == true && ($('.list_ca_respval_2').select2('val') == "" || $('.list_ca_respval_2').select2('val') == "0") ) {
                 $('.list_ca_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
             }
-            if($('.chk_ca_nv')[0].checked == true && selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
+            if($('.chk_ca_nv')[0].checked == true ){
                 for(var i = 0; i < this.datacondiciones.records.length; i++) {
-                    if (this.datacondiciones.records[i].condicion == selectlm.value && this.datacondiciones.records[i].razon == selectlrazon.value && this.datacondiciones.records[i].motivo != "" ){
+                    if ( this.datacondiciones.records[i].razon == selectlrazon.value && this.datacondiciones.records[i].motivo != "" ){
                         if ( selectlmotivo == "") {
                             $('.list_ca_so_motivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                             //$('.list_l_so_motivo').css('border-color', 'red'); //TXT ¿Qué producto?
@@ -6055,9 +6021,9 @@
                 }
 
                 if (faltantelm > 0) {
-                    app.alert.show("Faltantes "+selectlm.options[selectlm.selectedIndex].text, {
+                    app.alert.show("Faltantes No viable - Lead Management", {
                         level: "error",
-                        title: 'Hace falta información para el Estatus <b>'+selectlm.options[selectlm.selectedIndex].text+'</b> en Crédito Automotriz.',
+                        title: 'Hace falta información para <b>No Viable Crédito Automotriz.</b>',
                         autoClose: false
                     });
                     errors['error_CAUP'] = errors['error_CAUP'] || {};
@@ -6129,26 +6095,16 @@
                 errors['error_FLeetUP'] = errors['error_FLeetUP'] || {};
                 errors['error_FLeetUP'].required = true;
             }
-            if ($('.chk_fl_nv')[0].checked == true && (document.getElementById("list_fl_estatus_lm").value !="4" && document.getElementById("list_fl_estatus_lm").value !="5")) {
-                $('.list_fl_estatus_lm').css('border-color', 'red'); //TXT ¿Qué producto?
-                app.alert.show("Faltantes no viable Leasing", {
-                    level: "error",
-                    title: 'Debe cambiar el estatus Lead Management para No viable Fleet.',
-                    autoClose: false
-                });
-                errors['error_FLeetUP'] = errors['error_FLeetUP'] || {};
-                errors['error_FLeetUP'].required = true;
-            }
+            
             /*if (faltantesFleetUP == 0 && $('.chk_fl_nv')[0].checked == true && cont_uni_p.ResumenProductos.fleet.status_management_c != "3") {
                 this.model.set('promotorfleet_c', '9 - No Viable');
                 this.model.set('user_id6_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.fleet.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
             }*/
             var faltantelm = 0;
-            var selectlm = document.getElementById("list_fl_estatus_lm");
             var selectlrazon = document.getElementById("list_fl_so_razon");
             var selectlmotivo = document.getElementById("list_fl_so_motivo");
-            if ($('.chk_fl_nv')[0].checked == true && selectlrazon.value == '' && (selectlm.value =="4" || selectlm.value =="5")) {
+            if ($('.chk_fl_nv')[0].checked == true && selectlrazon.value == '') {
                 $('.list_fl_so_razon').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
             }
@@ -6156,17 +6112,17 @@
                 $('.selectlmotivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
             }*/
-            if ($('.chk_fl_nv')[0].checked == true && ($('.list_fl_respval_1').select2('val') == "" || $('.list_fl_respval_1').select2('val') == "0") && (selectlm.value =="4" || selectlm.value =="5")) {
+            if ($('.chk_fl_nv')[0].checked == true && ($('.list_fl_respval_1').select2('val') == "" || $('.list_fl_respval_1').select2('val') == "0")) {
                 $('.list_fl_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
             }
-             if ($('.chk_fl_nv')[0].checked == true && ($('.list_fl_respval_2').select2('val') == "" || $('.list_fl_respval_2').select2('val') == "0") && (selectlm.value =="4" || selectlm.value =="5")) {
+             if ($('.chk_fl_nv')[0].checked == true && ($('.list_fl_respval_2').select2('val') == "" || $('.list_fl_respval_2').select2('val') == "0") ) {
                 $('.list_fl_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
             }
-            if($('.chk_fl_nv')[0].checked == true && selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
+            if($('.chk_fl_nv')[0].checked == true ){
                 for(var i = 0; i < this.datacondiciones.records.length; i++) {
-                    if (this.datacondiciones.records[i].condicion == selectlm.value && this.datacondiciones.records[i].razon == selectlrazon.value && this.datacondiciones.records[i].motivo != "" ){
+                    if ( this.datacondiciones.records[i].razon == selectlrazon.value && this.datacondiciones.records[i].motivo != "" ){
                         if ( selectlmotivo == "") {
                             $('.list_fl_so_motivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                             //$('.list_l_so_motivo').css('border-color', 'red'); //TXT ¿Qué producto?
@@ -6184,9 +6140,9 @@
                 }
 
                 if (faltantelm > 0) {
-                    app.alert.show("Faltantes "+selectlm.options[selectlm.selectedIndex].text, {
+                    app.alert.show("Faltantes No viable - Lead Management", {
                         level: "error",
-                        title: 'Hace falta información para el Estatus <b>'+selectlm.options[selectlm.selectedIndex].text+'</b>. para Noviable Fleet',
+                        title: 'Hace falta información para <b>No viable Fleet.</b>',
                         autoClose: false
                     });
                     errors['error_FLeetUP'] = errors['error_FLeetUP'] || {};
@@ -6259,26 +6215,16 @@
                 errors['error_UniclickUP'] = errors['error_UniclickUP'] || {};
                 errors['error_UniclickUP'].required = true;
             }
-            if ($('.chk_u_nv')[0].checked == true && (document.getElementById("list_u_estatus_lm").value !="4" && document.getElementById("list_u_estatus_lm").value !="5")) {
-                $('.list_u_estatus_lm').css('border-color', 'red'); //TXT ¿Qué producto?
-                app.alert.show("Faltantes no viable Leasing", {
-                    level: "error",
-                    title: 'Debe cambiar el estatus Lead Management Uniclick.',
-                    autoClose: false
-                });
-                errors['error_UniclickUP'] = errors['error_UniclickUP'] || {};
-                errors['error_UniclickUP'].required = true;
-            }
+           
             /*if (faltantesUniclickUP == 0 && $('.chk_u_nv')[0].checked == true && cont_uni_p.ResumenProductos.uniclick.status_management_c != "3") {
                 this.model.set('promotoruniclick_c', '9 - Sin Gestor');
                 this.model.set('user_id7_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.uniclick.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
             }*/
             var faltantelm = 0;
-            var selectlm = document.getElementById("list_u_estatus_lm");
             var selectlrazon = document.getElementById("list_u_so_razon");
             var selectlmotivo = document.getElementById("list_u_so_motivo");
-            if ($('.chk_u_nv')[0].checked == true && selectlrazon.value == '' && (selectlm.value =="4" || selectlm.value =="5")) {
+            if ($('.chk_u_nv')[0].checked == true && selectlrazon.value == '') {
                 $('.list_u_so_razon').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
             }
@@ -6286,16 +6232,23 @@
                 $('.selectlmotivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
             }*/
-            if ($('.chk_u_nv')[0].checked == true && ($('.list_u_respval_1').select2('val') == "" || $('.list_u_respval_1').select2('val') == "0") && (selectlm.value =="4" || selectlm.value =="5")) {
+            if ($('.chk_u_nv')[0].checked == true && ($('.list_u_respval_1').select2('val') == "" || $('.list_u_respval_1').select2('val') == "0") ) {
                 $('.list_u_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
             }
-             if ($('.chk_u_nv')[0].checked == true && ($('.list_u_respval_2').select2('val') == "" || $('.list_u_respval_2').select2('val') == "0") && (selectlm.value =="4" || selectlm.value =="5")) {
+             if ($('.chk_u_nv')[0].checked == true && ($('.list_u_respval_2').select2('val') == "" || $('.list_u_respval_2').select2('val') == "0") ) {
                 $('.list_u_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                 faltantelm += 1;
             } 
-            if($('.chk_u_nv')[0].checked == true && selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
+            if($('.chk_u_nv')[0].checked == true  ){
                 for(var i = 0; i < this.datacondiciones.records.length; i++) {
+                    if ( this.datacondiciones.records[i].razon == selectlrazon.value && this.datacondiciones.records[i].motivo != "" ){
+                        if ( selectlmotivo == "") {
+                            $('.list_u_so_motivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
+                            //$('.list_l_so_motivo').css('border-color', 'red'); //TXT ¿Qué producto?
+                            faltantelm += 1;
+                        }
+                    }
                     if (this.datacondiciones.records[i].razon == selectlrazon.value && this.datacondiciones.records[i].motivo == selectlmotivo.value ){
                         if (this.datacondiciones.records[i].detalle == true ) {
                             if ( $('.txt_u_so_detalle').val().trim() == "") {
@@ -6307,9 +6260,9 @@
                 }
 
                 if (faltantelm > 0) {
-                    app.alert.show("Faltantes "+selectlm.options[selectlm.selectedIndex].text, {
+                    app.alert.show("Faltantes No viable - Lead Management", {
                         level: "error",
-                        title: 'Hace falta información para el Estatus <b>'+selectlm.options[selectlm.selectedIndex].text+'</b>.',
+                        title: 'Hace falta información para No viable Uniclick</b>.',
                         autoClose: false
                     });
                     errors['error_UniclickUP'] = errors['error_UniclickUP'] || {};
@@ -6319,6 +6272,7 @@
         }        
         callback(null, fields, errors);
     },
+
     /*************Valida campo de Página Web*****************/
     validaPagWeb: function (fields, errors, callback) {
         var webSite = this.model.get('website');
