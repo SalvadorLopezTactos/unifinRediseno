@@ -5,6 +5,8 @@
  */ 
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
+require_once("custom/Levementum/UnifinAPI.php");
+
 class CondicionesFinancierasQuantico extends SugarApi
 {
     public function registerApiRest()
