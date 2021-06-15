@@ -74,10 +74,10 @@ function job_resumen_encuestas_nps()
 
                         $mailHTMLRecords .= '<font face="verdana" color="#635f5f"><ul><li>
                         Cliente: <b>' . $cliente . '</b>, persona que contestó la encuesta 
-                        <br><b>' . $personaContesto . '</b> y el asesor que ejecutó llamada para envío de encuesta fue:  <b>' . $asesor . '</b>,</li></ul></font>';
+                        <br><b>' . $personaContesto . '</b> y el asesor que ejecutó llamada para envío de encuesta fue <b>' . $asesor . '</b>,</li></ul></font>';
                     }
                     
-                    $mailHTMLRecords .= '<br>Consultar Registro: <a href="' . $hostSugar . '" target="_blank">Informes</a>';
+                    $mailHTMLRecords .= '<br>Consultar Registro: <a href="' . $hostSugar . '" target="_blank">Informe</a>';
                 }
 
                 if ($totalRegistros > 0) {
