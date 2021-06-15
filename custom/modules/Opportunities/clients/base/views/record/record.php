@@ -591,12 +591,14 @@ array (
                 'name' => 'cf_quantico_politica_c',
                 'studio' => 'visible',
                 'label' => 'LBL_CF_QUANTICO_POLITICA',
+                'css_class' => 'hide',
               ),
               61 => 
               array (
                 'name' => 'cf_quantico_c',
                 'studio' => 'visible',
                 'label' => 'LBL_CF_QUANTICO_C',
+                'css_class' => 'hide',
               ),
               62 => 
               array (
