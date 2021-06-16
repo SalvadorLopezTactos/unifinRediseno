@@ -185,13 +185,12 @@ class IntegracionQuantico
         $user = $sugar_config['quantico_usr'];
         $pwd = $sugar_config['quantico_psw'];
         $auth_encode = base64_encode($user . ':' . $pwd);
-        
 
         //Mandar actualización de condiciones financieras en caso de que se detecte una actualización al campo que guarda el json de la petición
         if ($bean->fetched_row['cf_quantico_c'] != $bean->cf_quantico_c){
             //Se define URL
             $host = $sugar_config['quantico_url_base'] . '/CreditRequestIntegration/rest/CreditRequestApi/ModifyAsset';
-            $body=$bean->cf_quantico_c;
+            $body=json_decode($bean->cf_quantico_c);
 
             $callApi = new UnifinAPI();
             $resultado = $callApi->postQuantico($host, $body, $auth_encode);
