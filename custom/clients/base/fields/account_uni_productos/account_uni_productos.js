@@ -705,7 +705,7 @@
                 $('[data-field="chk_ca_multi"]').attr('style', 'pointer-events:block;');
             }
         }
-        if (App.user.attributes.id !== cont_uni_p.ResumenProductos.fleet.assigned_user_id && productos.includes("6") && cont_uni_p.action == "edit") { //PRODUCTO FLEET
+        if (App.user.attributes.id == cont_uni_p.ResumenProductos.fleet.assigned_user_id && productos.includes("6") && cont_uni_p.action == "edit") { //PRODUCTO FLEET
             $('[data-field="chk_fl_nv"]').attr('style', 'pointer-events:block;');
             if (app.user.attributes.multilinea_c == 1 ) {
                 $('[data-field="chk_fe_multi"]').attr('style', 'pointer-events:block;');
