@@ -6656,21 +6656,46 @@
             success: function (data) {
 				Productos = data;
                 _.each(Productos, function (value, key) {
-					alert(value);
-					alert(key);
 					if(Productos[key].no_viable && (Productos[key].user_id1_c == app.user.id || Productos[key].user_id2_c == app.user.id)) {
 						var params = {};
-						if(Productos[key].user_id1_c == app.user.id) params["aprueba1_c"] = 1;
-						if(Productos[key].user_id2_c == app.user.id) params["aprueba2_c"] = 1;
-						var actualiza = app.api.buildURL('uni_Productos/' + Productos[key].id, null, null);
-						app.api.call('update', actualiza, params, {
-							success: _.bind(function (data) {
-								app.alert.show('alert_change_success', {
-									level: 'success',
-									messages: 'Cuenta Bloqueada',
-								});
+						var strUrl = 'tct4_Condiciones?filter[][condicion]='+Productos[key].status_management_c+'&filter[][razon]='+Productos[key].razon_c;
+						app.api.call("GET", app.api.buildURL(strUrl), null, {
+							success: _.bind(function (data1) {
+								if(data1.records.length > 0) {
+									if(data1.records[0].bloquea) {
+										params["no_viable"] = 1;
+										params["aprueba1_c"] = 1;
+										params["aprueba2_c"] = 1;
+										params["status_management_c"] = Productos[key].status_management_c;
+										params["razon_c"] = Productos[key].razon_c;
+										params["motivo_c"] = Productos[key].motivo_c;
+										params["detalle_c"] = Productos[key].detalle_c;
+										params["user_id_c"] = Productos[key].user_id_c;
+										params["user_id1_c"] = Productos[key].user_id1_c;
+										params["user_id2_c"] = Productos[key].user_id2_c;
+										_.each(Productos, function (value1, key1) {
+											var actualiza = app.api.buildURL('uni_Productos/' + Productos[key1].id, null, null);
+											app.api.call('update', actualiza, params, {
+												success: _.bind(function (data2) {
+												}, this)
+											});
+										});
+									} else {
+										if(Productos[key].user_id1_c == app.user.id) params["aprueba1_c"] = 1;
+										if(Productos[key].user_id2_c == app.user.id) params["aprueba2_c"] = 1;
+										var actualiza = app.api.buildURL('uni_Productos/' + Productos[key].id, null, null);
+										app.api.call('update', actualiza, params, {
+											success: _.bind(function (data2) {
+												app.alert.show('alert_change_success', {
+													level: 'success',
+													messages: 'Cuenta Bloqueada',
+												});
+											}, this)
+										});
+									}
+								}
 							}, this)
-						});
+						});						
                     }
                 });
             },
