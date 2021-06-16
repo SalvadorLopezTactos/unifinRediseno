@@ -454,8 +454,8 @@
             this.jsonCFConfiguradas=JSON.parse(this.model.get('cf_quantico_c'));
         }else{
             //Comienza a formarse estructura json de condiciones financieras configuradas
-            this.jsonCFConfiguradas.RequestId=this.model.get('id');
-            this.jsonCFConfiguradas.OpportunitiesId=this.model.get('idsolicitud_c');
+            this.jsonCFConfiguradas.RequestId=this.model.get('idsolicitud_c');
+            this.jsonCFConfiguradas.OpportunitiesId=this.model.get('id');
         }
         
         //Obteniendo el campo html para conocer el tipo de campo quie se envía al json

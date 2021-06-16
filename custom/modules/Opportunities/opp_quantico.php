@@ -57,7 +57,8 @@ class IntegracionQuantico
             //Declaracion de Body
             $body = array(
                 "RequestId" => $bean->idsolicitud_c,
-                "ProcessId" => $iniciaPUni2 ? $bean->id_process_c: '1',
+                //"ProcessId" => $iniciaPUni2 ? $bean->id_process_c: '1',
+                "ProcessId" =>  $bean->idsolicitud_c,
                 "OpportunitiesId" => $bean->id,
                 "ClientId" => $bean->account_id,
                 "ClientName" => $bean->account_name,
@@ -189,7 +190,7 @@ class IntegracionQuantico
         //Mandar actualización de condiciones financieras en caso de que se detecte una actualización al campo que guarda el json de la petición
         if ($bean->fetched_row['cf_quantico_c'] != $bean->cf_quantico_c){
             //Se define URL
-            $host = $sugar_config['quantico_url_base'] . '/CreditRequestIntegration/rest/CreditRequestApi/ModifyAsset';
+            $host = $sugar_config['quantico_url_base'] . '/CreditRequestIntegration/rest/CreditRequestApi/ModifyFinantialCondition';
             $body=json_decode($bean->cf_quantico_c);
 
             $callApi = new UnifinAPI();
