@@ -83,10 +83,54 @@ function job_resumen_encuestas_nps()
                 if ($totalRegistros > 0) {
                     $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Estimada <b>' . $nombreUsuario . '</b>
                     <br><br>Se le informa que el día de hoy <b>' . $hoy . '</b> se recibieron <b>' . $totalRegistros . '</b> encuestas NPS por parte de los siguientes clientes:
-                    </font></p>'.$mailHTMLRecords;
+                    </font></p>'.$mailHTMLRecords.'
+                    <br><br><br>
+                    <p align="justify"><font face="verdana" color="#635f5f">Atentamente Unifin</font></p>
+                    <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
+                    <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">__________<wbr>______<u></u><u></u></span></p>
+                    <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+                    Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. 
+                    Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+                    Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, 
+                    quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, 
+                    a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+                    No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+                    Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y 
+                    privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;
+                    </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;">
+                    <a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" 
+                    data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg">
+                    <span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span>
+                    <span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br/></span>
+                    <span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;">
+                    <a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" 
+                    data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ">
+                    <span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a></span><u></u><u></u></p>';
                 
                 } else {
-                    $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><br><b>Hoy no se respondieron encuestas</b></font></p>';
+                    $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><br><b>Hoy no se respondieron encuestas</b></font></p>
+                    <br><br><br>
+                    <p align="justify"><font face="verdana" color="#635f5f">Atentamente Unifin</font></p>
+                    <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
+                    <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">__________<wbr>______<u></u><u></u></span></p>
+                    <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+                    Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. 
+                    Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+                    Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, 
+                    quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, 
+                    a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+                    No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+                    Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y 
+                    privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;
+                    </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;">
+                    <a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" 
+                    data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg">
+                    <span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span>
+                    <span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br/></span>
+                    <span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;">
+                    <a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" 
+                    data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ">
+                    <span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a></span><u></u><u></u></p>';
                 }
 
                 $mailer = MailerFactory::getSystemDefaultMailer();
