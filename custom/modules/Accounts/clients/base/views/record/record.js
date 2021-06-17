@@ -294,7 +294,7 @@
 		this.context.on('button:bloquea_cuenta:click', this.bloquea_cuenta, this);
 		this.context.on('button:desbloquea_cuenta:click', this.desbloquea_cuenta, this);
 		this.context.on('button:aprobar_noviable:click', this.aprobar_noviable, this);
-
+		this.model.on('sync', this.bloqueo, this);
         /***************Validacion de Campos No viables en los Productos********************/
         this.model.addValidationTask('LeasingUP', _.bind(this.requeridosLeasingUP, this));
         this.model.addValidationTask('FactorajeUP', _.bind(this.requeridosFactorajeUP, this));
@@ -6551,6 +6551,7 @@
 								level: 'success',
 								messages: 'Cuenta Bloqueada',
 							});
+							$('[name="bloquea_cuenta"]').hide();
 						}, this)
 					});
 				}
@@ -6611,7 +6612,7 @@
 													level: 'success',
 													messages: 'Cuenta Desbloqueada',
 												});
-												this.render();
+												$('[name="desbloquea_cuenta"]').hide();
 											}, this)
 										});
 									},
@@ -6627,7 +6628,7 @@
 													level: 'success',
 													messages: 'Cuenta Desbloqueada',
 												});
-												this.render();
+												$('[name="desbloquea_cuenta"]').hide();
 											}, this)
 										});
 									},
@@ -6639,7 +6640,7 @@
 											level: 'success',
 											messages: 'Cuenta Desbloqueada',
 										});
-										this.render();
+										$('[name="desbloquea_cuenta"]').hide();
 									}, this)
 								});
 							}
@@ -6702,6 +6703,20 @@
             error: function (e) {
                 throw e;
             }
+        });
+    },
+
+    bloqueo: function () {
+        var consulta = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
+        app.api.call('read', consulta, {}, {
+            success: _.bind(function (data) {
+                if((data.user_id1_c == app.user.id && this.model.get('tct_no_contactar_chk_c') && !data.bloqueo_cartera_c) || (data.user_id3_c == app.user.id && data.bloqueo_credito_c && !data.bloqueo2_c) || (data.user_id5_c == app.user.id && data.bloqueo_cumple_c && !data.bloqueo2_c)) {
+					$('[name="bloquea_cuenta"]').removeClass('hidden');
+				}
+				if((data.user_id1_c == app.user.id && (this.model.get('tct_no_contactar_chk_c') || data.bloqueo_cartera_c)) || (data.user_id3_c == app.user.id && (data.bloqueo_credito_c || data.bloqueo2_c)) || (data.user_id5_c == app.user.id && (data.bloqueo_cumple_c || data.bloqueo3_c))) {
+					$('[name="desbloquea_cuenta"]').removeClass('hidden');
+				}
+            }, this)
         });
     },
 })

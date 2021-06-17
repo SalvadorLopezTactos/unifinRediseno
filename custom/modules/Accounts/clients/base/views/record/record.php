@@ -12,12 +12,36 @@ array (
           0 => 
           array (
             'type' => 'button',
+            'name' => 'bloquea_cuenta',
+            'label' => 'Bloquear Cuenta',
+            'css_class' => 'btn-danger hidden',
+            'showOn' => 'view',
+            'events' => 
+            array (
+              'click' => 'button:bloquea_cuenta:click',
+            ),
+          ),
+          1 => 
+          array (
+            'type' => 'button',
+            'name' => 'desbloquea_cuenta',
+            'label' => 'Desbloquear Cuenta',
+            'css_class' => 'btn-success hidden',
+            'showOn' => 'view',
+            'events' => 
+            array (
+              'click' => 'button:desbloquea_cuenta:click',
+            ),
+          ),
+          2 => 
+          array (
+            'type' => 'button',
             'name' => 'cancel_button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'edit',
           ),
-          1 => 
+          3 => 
           array (
             'type' => 'button',
             'name' => 'rfc_qr_button',
@@ -29,7 +53,7 @@ array (
               'click' => 'button:btn_rfc:click',
             ),
           ),
-          2 => 
+          4 => 
           array (
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
@@ -39,7 +63,7 @@ array (
             'showOn' => 'edit',
             'acl_action' => 'edit',
           ),
-          3 => 
+          5 => 
           array (
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
@@ -175,44 +199,9 @@ array (
                 'label' => 'Enviar Cuenta a',
                 'event' => 'button:send_account_asesor:click',
               ),
-              16 => 
-              array (
-                'name' => 'bloquea_cuenta',
-                'type' => 'rowaction',
-                'label' => 'Bloquear Cuenta',
-                'event' => 'button:bloquea_cuenta:click',
-              ),
-              17 => 
-              array (
-                'name' => 'desbloquea_cuenta',
-                'type' => 'rowaction',
-                'label' => 'Desbloquear Cuenta',
-                'event' => 'button:desbloquea_cuenta:click',
-              ),
-              18 => 
-              array (
-                'name' => 'aprobar_noviable',
-                'type' => 'rowaction',
-                'label' => 'Aprobar No Viable',
-                'event' => 'button:aprobar_noviable:click',
-              ),
-              19 => 
-              array (
-                'name' => 'rechazar_noviable',
-                'type' => 'rowaction',
-                'label' => 'Rechazar No Viable',
-                'event' => 'button:rechazar_noviable:click',
-              ),
-              20 => 
-              array (
-                'name' => 'activar_noviable',
-                'type' => 'rowaction',
-                'label' => 'Activar No Viable',
-                'event' => 'button:activar_noviable:click',
-              ),
             ),
           ),
-          4 => 
+          6 => 
           array (
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',

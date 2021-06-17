@@ -114,6 +114,7 @@ AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id
 			$account = BeanFactory::getBean('Accounts', trim($cuentas[$i]), array('disable_row_level_security' => true));
 			if ($account->id != null) {
 				$cuenta = $account->name;
+				$idcuenta = $account->id;
 				if(trim($selected) == "selected1") {
 					if($account->fetched_row['tct_no_contactar_chk_c']==1){
 						$account->tct_no_contactar_chk_c = 0;
@@ -176,12 +177,20 @@ AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id
 						require_once 'modules/Administration/Administration.php';
 						$ingesta = BeanFactory::retrieveBean('Users', $parame["ingesta"]);
 						$valida = BeanFactory::retrieveBean('Users', $parame["valida"]);
+						$linkCuenta=$GLOBALS['sugar_config']['site_url'].'/#Accounts/'.$idcuenta;
 						$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Hola <b>'.$valida->nombre_completo_c.'</b>
-						<br><br>Se le informa que la cuenta <b>'.$cuenta.'</b> ha sido bloqueada por <b>'.$ingesta->nombre_completo_c.'</b>
+						<br><br>Se le informa que la cuenta <b><a id="linkCuenta" href="'.$linkCuenta.'">'.$cuenta.'</a></b> ha sido bloqueada por <b>'.$ingesta->nombre_completo_c.'</b>
 						<br><br>La razón de bloqueo es: <b>'.$app_list_strings['razon_list'][$parame["razon"]].'</b>
 						<br><br>y el detalle: <b>'.$parame["detalle"].'</b>
 						<br><br>Se requiere de su aprobación para bloquear definitivamente la cuenta.
-						<br><br>Saludos.</font></p>';
+						<br><br>Saludos.
+						<br><br>Atentamente Unifin</font></p>
+						<br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>		
+						<p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+						Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+						Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+						No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+						Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/aviso-de-privacidad.php" target="_blank" rel="noopener"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a></span><u></u><u></u></p>';
 						$mailer = MailerFactory::getSystemDefaultMailer();
 						$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
 						$mailer->setSubject('Cuenta '.$cuenta.' bloqueada por '.$ingesta->nombre_completo_c);
@@ -197,10 +206,18 @@ AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id
 						require_once 'modules/Administration/Administration.php';
 						$ingesta = BeanFactory::retrieveBean('Users', $parame["ingesta"]);
 						$valida = BeanFactory::retrieveBean('Users', $parame["valida"]);
+						$linkCuenta=$GLOBALS['sugar_config']['site_url'].'/#Accounts/'.$idcuenta;
 						$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Hola <b>'.$valida->nombre_completo_c.'</b>
-						<br><br>Se le informa que la cuenta <b>'.$cuenta.'</b> ha sido desbloqueada por <b>'.$ingesta->nombre_completo_c.'</b>
+						<br><br>Se le informa que la cuenta <b><a id="linkCuenta" href="'.$linkCuenta.'">'.$cuenta.'</a></b> ha sido desbloqueada por <b>'.$ingesta->nombre_completo_c.'</b>
 						<br><br>Se requiere de su aprobación para desbloquear definitivamente la cuenta.
-						<br><br>Saludos.</font></p>';
+						<br><br>Saludos.
+						<br><br>Atentamente Unifin</font></p>
+						<br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>		
+						<p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+						Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+						Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+						No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+						Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/aviso-de-privacidad.php" target="_blank" rel="noopener"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a></span><u></u><u></u></p>';
 						$mailer = MailerFactory::getSystemDefaultMailer();
 						$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
 						$mailer->setSubject('Cuenta '.$cuenta.' desbloqueada por '.$ingesta->nombre_completo_c);
