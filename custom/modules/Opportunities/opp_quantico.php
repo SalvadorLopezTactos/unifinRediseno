@@ -53,33 +53,60 @@ class IntegracionQuantico
             $jsonCFQuantico="";
             if($strCFQuantico != ""){
                 $jsonCFQuantico=json_decode($strCFQuantico);
+                //Declaracion de Body
+                $body = array(
+                    "RequestId" => $bean->idsolicitud_c,
+                    //"ProcessId" => $iniciaPUni2 ? $bean->id_process_c: '1',
+                    "ProcessId" =>  $bean->idsolicitud_c,
+                    "OpportunitiesId" => $bean->id,
+                    "ClientId" => $bean->account_id,
+                    "ClientName" => $bean->account_name,
+                    "ProductId" => $bean->producto_financiero_c,
+                    "RequestTypeId" => $bean->tipo_de_operacion_c,
+                    "PersonTypeId" => $tipoPersona,
+                    "ProductTypeId" => $bean->tipo_producto_c,
+                    "CurrencyTypeId" => "1",
+                    "RequestAmount" => $RequestAmount,
+                    "IncreaseAmount" => $IncreaseAmount,
+                    "AdviserId" => $idActiveDirectory,
+                    "AdviserName" => $bean->assigned_user_name,
+                    "SinglePaymentPercentage"=>$bean->porciento_ri_c,
+                    //"SinglePaymentPercentage" => $CreditLineId,
+                    "CreditLineId" => $CreditLineId,
+                    "BackOfficeId" => str_replace("^", "", $arrayBo[0]),
+                    "BackOfficeName" => $app_list_strings['usuario_bo_0'][str_replace("^", "", $arrayBo[0])],
+                    "BusinessGroupId"=>$bean->negocio_c,
+                    "TeamId"=>$valorEquipo,
+                    'FinancialTermGroupResponse'=>$jsonCFQuantico->FinancialTermGroupResponseList
+                );
+            }else{
+                $body = array(
+                    "RequestId" => $bean->idsolicitud_c,
+                    //"ProcessId" => $iniciaPUni2 ? $bean->id_process_c: '1',
+                    "ProcessId" =>  $bean->idsolicitud_c,
+                    "OpportunitiesId" => $bean->id,
+                    "ClientId" => $bean->account_id,
+                    "ClientName" => $bean->account_name,
+                    "ProductId" => $bean->producto_financiero_c,
+                    "RequestTypeId" => $bean->tipo_de_operacion_c,
+                    "PersonTypeId" => $tipoPersona,
+                    "ProductTypeId" => $bean->tipo_producto_c,
+                    "CurrencyTypeId" => "1",
+                    "RequestAmount" => $RequestAmount,
+                    "IncreaseAmount" => $IncreaseAmount,
+                    "AdviserId" => $idActiveDirectory,
+                    "AdviserName" => $bean->assigned_user_name,
+                    "SinglePaymentPercentage"=>$bean->porciento_ri_c,
+                    //"SinglePaymentPercentage" => $CreditLineId,
+                    "CreditLineId" => $CreditLineId,
+                    "BackOfficeId" => str_replace("^", "", $arrayBo[0]),
+                    "BackOfficeName" => $app_list_strings['usuario_bo_0'][str_replace("^", "", $arrayBo[0])],
+                    "BusinessGroupId"=>$bean->negocio_c,
+                    "TeamId"=>$valorEquipo
+                );
+
             }
-            //Declaracion de Body
-            $body = array(
-                "RequestId" => $bean->idsolicitud_c,
-                //"ProcessId" => $iniciaPUni2 ? $bean->id_process_c: '1',
-                "ProcessId" =>  $bean->idsolicitud_c,
-                "OpportunitiesId" => $bean->id,
-                "ClientId" => $bean->account_id,
-                "ClientName" => $bean->account_name,
-                "ProductId" => $bean->producto_financiero_c,
-                "RequestTypeId" => $bean->tipo_de_operacion_c,
-                "PersonTypeId" => $tipoPersona,
-                "ProductTypeId" => $bean->tipo_producto_c,
-                "CurrencyTypeId" => "1",
-                "RequestAmount" => $RequestAmount,
-                "IncreaseAmount" => $IncreaseAmount,
-                "AdviserId" => $idActiveDirectory,
-                "AdviserName" => $bean->assigned_user_name,
-                "SinglePaymentPercentage"=>$bean->porciento_ri_c,
-                //"SinglePaymentPercentage" => $CreditLineId,
-                "CreditLineId" => $CreditLineId,
-                "BackOfficeId" => str_replace("^", "", $arrayBo[0]),
-                "BackOfficeName" => $app_list_strings['usuario_bo_0'][str_replace("^", "", $arrayBo[0])],
-                "BusinessGroupId"=>$bean->negocio_c,
-                "TeamId"=>$valorEquipo,
-                'FinancialTermGroupResponse'=>$jsonCFQuantico->FinancialTermGroupResponseList
-            );
+            
 			//Valida si se tiene Administración de Cartera y se añaden campos extras al body
 			if($bean->admin_cartera_c==1) {
                 $body["ProductOriginPortfolioId"] = $bean->producto_origen_vencido_c;
@@ -187,8 +214,11 @@ class IntegracionQuantico
         $pwd = $sugar_config['quantico_psw'];
         $auth_encode = base64_encode($user . ':' . $pwd);
 
+        //Control para swith que indica si debe ejecutar o proceso para Quantico
+        $switchUni2 = $app_list_strings['switch_inicia_proceso_list']['ejecuta'];
+
         //Mandar actualización de condiciones financieras en caso de que se detecte una actualización al campo que guarda el json de la petición
-        if ($bean->fetched_row['cf_quantico_c'] != $bean->cf_quantico_c){
+        if ($bean->fetched_row['cf_quantico_c'] != $bean->cf_quantico_c && $switchUni2=="0"){
             //Se define URL
             $host = $sugar_config['quantico_url_base'] . '/CreditRequestIntegration/rest/CreditRequestApi/ModifyFinantialCondition';
             $body=json_decode($bean->cf_quantico_c);

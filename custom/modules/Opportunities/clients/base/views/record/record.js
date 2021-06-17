@@ -78,6 +78,7 @@
         this.model.addValidationTask('ratificacion_incremento_c', _.bind(this.alertGpoEmpresarial, this));
         this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinancerasRI, this));
         this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
+        this.model.addValidationTask('check_condicionesFinancierasQuantico', _.bind(this.condicionesFinancierasQuanticoCheck, this));
         this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
         this.model.addValidationTask('check_oportunidadperdida', _.bind(this.oportunidadperdidacheck, this));
         // this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
@@ -1335,20 +1336,48 @@
     },
 
     condicionesFinancierasCheck: function (fields, errors, callback) {
-        if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
-            if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && this.model.get("producto_financiero_c") != 43 && this.model.get("tipo_producto_c") != 13) {
-                if (solicitud_cf.oFinanciera.condicion.length == 0) {
-                    errors[$(".addCondicionFinanciera")] = errors['condiciones_financieras'] || {};
-                    errors[$(".addCondicionFinanciera")].required = true;
+        var valorSwitchUni2=App.lang.getAppListStrings('switch_inicia_proceso_list')['ejecuta'];
+        if(valorSwitchUni2=='1'){
+            if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
+                if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && this.model.get("producto_financiero_c") != 43 && this.model.get("tipo_producto_c") != 13) {
+                    if (solicitud_cf.oFinanciera.condicion.length == 0) {
+                        errors[$(".addCondicionFinanciera")] = errors['condiciones_financieras'] || {};
+                        errors[$(".addCondicionFinanciera")].required = true;
+    
+                        $('.condiciones_financieras').css('border-color', 'red');
+                        app.alert.show("CondicionFinanciera requerida", {
+                            level: "error",
+                            title: "Al menos una Condición Financiera es requerida.",
+                            autoClose: false
+                        });
+                    } else if (solicitud_cf.oFinanciera.condicion.length >= 1) {
+                        solicitud_cf.model.set('condiciones_financieras', solicitud_cf.oFinanciera.condicion);
+                    }
+                }
+            }
+        }
+        callback(null, fields, errors);
+    },
 
-                    $('.condiciones_financieras').css('border-color', 'red');
-                    app.alert.show("CondicionFinanciera requerida", {
-                        level: "error",
-                        title: "Al menos una Condición Financiera es requerida.",
-                        autoClose: false
-                    });
-                } else if (solicitud_cf.oFinanciera.condicion.length >= 1) {
-                    solicitud_cf.model.set('condiciones_financieras', solicitud_cf.oFinanciera.condicion);
+    condicionesFinancierasQuanticoCheck: function (fields, errors, callback) {
+        var valorSwitchUni2=App.lang.getAppListStrings('switch_inicia_proceso_list')['ejecuta'];
+        if(valorSwitchUni2=='0'){
+            if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
+                if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && this.model.get("producto_financiero_c") != 43 && this.model.get("tipo_producto_c") != 13) {
+                    if(this.model.get('cf_quantico_c')!=""){
+                        var cfQuantico=JSON.parse(this.model.get('cf_quantico_c'));
+                        if (cfQuantico.FinancialTermGroupResponseList.length == 0) {
+                            errors[$(".addCondicionFinancieraQuantico")] = errors['addCondicionFinancieraQuantico'] || {};
+                            errors[$(".addCondicionFinancieraQuantico")].required = true;
+        
+                            $('.CFPoliticaQ').css('border-color', 'red');
+                            app.alert.show("CondicionFinancieraQuantico requerida", {
+                                level: "error",
+                                title: "Al menos una Condición Financiera es requerida.",
+                                autoClose: false
+                            });
+                        }
+                    }
                 }
             }
         }
@@ -1356,26 +1385,31 @@
     },
 
     condicionesFinancierasIncrementoCheck: function (fields, errors, callback) {
-        if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
-            if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 7) {
-                if (contRI.oFinancieraRI.ratificacion.length == 0) {
-                    // console.log("contRI = 0");
-                    errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};
-                    errors[$(".add_incremento_CondicionFinanciera")].required = true;
-
-                    $('.condiciones_financieras_incremento_ratificacion').css('border-color', 'red');
-                    app.alert.show("CondicionFinanciera requerida", {
-                        level: "error",
-                        title: "Al menos una Condición Financiera de Incremento/Ratificacion es requerida.",
-                        autoClose: false
-                    });
-                } else if (contRI.oFinancieraRI.ratificacion.length >= 1) {
-                    // console.log("contRI > 1");
-                    contRI.model.set('condiciones_financieras_incremento_ratificacion', contRI.oFinancieraRI.ratificacion);
-
+        
+        var valorSwitchUni2=App.lang.getAppListStrings('switch_inicia_proceso_list')['ejecuta'];
+        if(valorSwitchUni2=='1'){
+            if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
+                if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 7) {
+                    if (contRI.oFinancieraRI.ratificacion.length == 0) {
+                        // console.log("contRI = 0");
+                        errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};
+                        errors[$(".add_incremento_CondicionFinanciera")].required = true;
+    
+                        $('.condiciones_financieras_incremento_ratificacion').css('border-color', 'red');
+                        app.alert.show("CondicionFinanciera requerida", {
+                            level: "error",
+                            title: "Al menos una Condición Financiera de Incremento/Ratificacion es requerida.",
+                            autoClose: false
+                        });
+                    } else if (contRI.oFinancieraRI.ratificacion.length >= 1) {
+                        // console.log("contRI > 1");
+                        contRI.model.set('condiciones_financieras_incremento_ratificacion', contRI.oFinancieraRI.ratificacion);
+    
+                    }
                 }
             }
         }
+
         callback(null, fields, errors);
     },
 
