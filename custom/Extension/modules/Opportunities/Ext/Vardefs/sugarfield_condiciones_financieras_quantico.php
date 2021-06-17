@@ -1,5 +1,5 @@
 <?php
- // created: 2021-06-16 18:33:21
+ // created: 2021-06-17 09:31:41
 $dictionary['Opportunity']['fields']['condiciones_financieras_quantico']['len']='255';
 $dictionary['Opportunity']['fields']['condiciones_financieras_quantico']['audited']=false;
 $dictionary['Opportunity']['fields']['condiciones_financieras_quantico']['massupdate']=false;
@@ -7,6 +7,5 @@ $dictionary['Opportunity']['fields']['condiciones_financieras_quantico']['duplic
 $dictionary['Opportunity']['fields']['condiciones_financieras_quantico']['duplicate_merge_dom_value']='1';
 $dictionary['Opportunity']['fields']['condiciones_financieras_quantico']['merge_filter']='disabled';
 $dictionary['Opportunity']['fields']['condiciones_financieras_quantico']['calculated']=false;
-$dictionary['Opportunity']['fields']['condiciones_financieras_quantico']['dependency']='and(not(or(equal($tipo_producto_c,"4"),equal($tipo_producto_c,"6"))),equal(getDropdownValue("switch_inicia_proceso_list","ejecuta"),"0"))';
 
  ?>
