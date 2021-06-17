@@ -86,7 +86,7 @@ function job_resumen_encuestas_nps()
                     </font></p>'.$mailHTMLRecords.'
                     <br><br><br>
                     <p align="justify"><font face="verdana" color="#635f5f">Atentamente Unifin</font></p>
-                    <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
+                    <br><p class="imagen"><img id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
                     <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">__________<wbr>______<u></u><u></u></span></p>
                     <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
                     Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. 
@@ -111,7 +111,7 @@ function job_resumen_encuestas_nps()
                     $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><br><b>Hoy no se respondieron encuestas</b></font></p>
                     <br><br><br>
                     <p align="justify"><font face="verdana" color="#635f5f">Atentamente Unifin</font></p>
-                    <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
+                    <br><p class="imagen"><img id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
                     <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">__________<wbr>______<u></u><u></u></span></p>
                     <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
                     Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. 
