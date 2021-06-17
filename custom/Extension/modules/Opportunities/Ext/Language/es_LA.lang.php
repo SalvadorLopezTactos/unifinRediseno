@@ -231,3 +231,4 @@ $mod_strings['LBL_ASESOR_RM'] = 'Asesor RM que participó en Operación';
 $mod_strings['LBL_FULL_SERVICE_C'] = 'Se requiere Full Service';
 $mod_strings['LBL_CF_QUANTICO_POLITICA'] = 'Condiciones Financieras Quantico Políticas';
 $mod_strings['LBL_CF_QUANTICO_C'] = 'Condiciones Financieras Quantico Usuario';
+$mod_strings['CONDICIONES FINANCIERAS QUANTICO'] = 'Condiciones financieras quantico';
