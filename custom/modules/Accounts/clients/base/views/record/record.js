@@ -6612,6 +6612,7 @@
 													level: 'success',
 													messages: 'Cuenta Desbloqueada',
 												});
+												$('[name="bloquea_cuenta"]').hide();
 												$('[name="desbloquea_cuenta"]').hide();
 											}, this)
 										});
@@ -6628,6 +6629,7 @@
 													level: 'success',
 													messages: 'Cuenta Desbloqueada',
 												});
+												$('[name="bloquea_cuenta"]').hide();
 												$('[name="desbloquea_cuenta"]').hide();
 											}, this)
 										});
@@ -6640,6 +6642,7 @@
 											level: 'success',
 											messages: 'Cuenta Desbloqueada',
 										});
+										$('[name="bloquea_cuenta"]').hide();
 										$('[name="desbloquea_cuenta"]').hide();
 									}, this)
 								});
