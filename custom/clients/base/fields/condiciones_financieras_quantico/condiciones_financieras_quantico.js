@@ -128,6 +128,12 @@
 
             var url = app.api.buildURL('CondicionesFinancierasQuantico?productoFinanciero=true', null, null, {});
 
+            app.alert.show("getInfoCFQuantico", {
+                level: "process",
+                title: "Obteniendo información, por favor espere",
+                autoClose: false
+            });
+
             app.api.call('GET', url, {}, {
                 success: function (data) {
                     self.listaProductosFinancieros=data;
@@ -147,6 +153,7 @@
                     var url = app.api.buildURL('CondicionesFinancierasQuantico?tipo_producto='+tipo_producto+'&product_id='+product_id, null, null, {});
                     app.api.call('GET', url, {}, {
                         success: function (data) {
+                            app.alert.dismiss('getInfoCFQuantico');
                             var jsonStringPolitica=JSON.stringify(data);
                             self.model.set("cf_quantico_politica_c",jsonStringPolitica);
 
