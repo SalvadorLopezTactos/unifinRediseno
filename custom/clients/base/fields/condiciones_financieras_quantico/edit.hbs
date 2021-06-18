@@ -1,0 +1,124 @@
+<style>
+    #cont {
+        overflow: auto;
+        width: 96%;
+        float: left;
+        white-space: nowrap;
+        border: 1px solid lightblue;
+    }
+
+    .box {
+        /*background-color: #BBBBBB;*/
+        /*height: 100px;*/
+        display: inline-block;
+        margin: 10px;
+        /*width: 100px;*/
+    }
+</style>
+<div class="CFPoliticaQ container-fluid" id="cont" style="border: solid lightblue">
+    <!--Sección condiciones financieras de política -->
+    <div class="accordion-heading">
+        <div id="tituloCFPolitica" style="height:30px; border-radius: 10px" >
+             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseTableCF">
+                <font color="#9da0a4" size="3">
+                <strong>Condiciones Financieras de Política</strong>
+                </font>
+            </a>
+        </div>
+    </div>
+    <div id="collapseTableCF">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">&nbsp;</th>
+                    {{#each headers}}
+                    <th scope="col" {{#if dobleCampo}}colspan="2"{{/if}}>{{name}}</th>
+                    {{/each}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#each mainRowsBodyTable}}
+                <tr>
+                    <th scope="row">
+                        <span class="fa-stack plusNuevaCF" style="background-color: #0089fff2;">
+                            <i class="fa fa-plus fa-inverse fa-stack" style="text-align:center;color:white"></i>
+                        </span>
+                    </th>
+                    {{#each bodyTable}}
+                        <td style="text-align:center">
+                            {{#if select}}
+                                <select class="row-fluid select2" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" data-name="{{nombreCampo}}" disabled style="pointer-events:none;">
+                                {{#each valoresCatalogo}}
+                                <option value="{{@key}}" {{ifSelected @key ../valorSelected}}>{{this}}</option>
+                                {{/each}}
+                                </select>
+                            {{/if}}
+                            {{#if text}}
+                                {{#if rangoInferior}}
+                                <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control" size="10" value={{rangoInferior}} disabled style="pointer-events:none;" data-info="inferior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
+                                {{else}}
+                                <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control" size="10" value={{rangoSuperior}} disabled style="pointer-events:none;" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
+                                {{/if}}
+                            {{/if}}
+                            {{#if checkbox}}
+                                <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="checkbox" class="form-control" size="10" {{checked}} disabled style="pointer-events:none;">
+                            {{/if}}
+                        </td>
+                    {{/each}}
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    
+    <!--Linea divisoria -->
+    <hr size="3px" color="#9da0a4">
+    <!-- Sección para condiciones financieras configuradas -->
+    <div id="tituloCFConfiguradas" style="height:30px; border-radius: 10px" data-toggle="collapse">
+        <font color="#9da0a4" size="3">
+        <strong>Condiciones Financieras Configuradas</strong>
+        </font>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">&nbsp;</th>
+                {{#each headers}}
+                <th scope="col" {{#if dobleCampo}}colspan="2"{{/if}}>{{name}}</th>
+                {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+            {{#each mainRowsConfigBodyTable}}
+            <tr>
+                <th scope="row">
+                    <span class="fa-stack borrarCFQuantico" style="background-color: #bb0e1b;;">
+                        <i class="fa fa-minus fa-inverse fa-stack" style="text-align:center;color:white"></i>
+                    </span>
+                </th>
+                {{#each bodyTable}}
+                    <td style="text-align:center">
+                        {{#if select}}
+                            <select class="row-fluid select2 fieldCFConfig" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" data-name="{{nombreCampo}}" data-tipo-campo="catalogo">
+                            {{#each valoresCatalogo}}
+                            <option value="{{@key}}" {{ifSelected @key ../valorSelected}}>{{this}}</option>
+                            {{/each}}
+                            </select>
+                        {{/if}}
+                        {{#if text}}
+                            {{#if rangoInferior}}
+                            <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control fieldCFConfig fieldValidateRange" size="10" data-info="inferior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}" value="{{rangoInferior}}" data-tipo-campo="inputInferior">
+                            {{else}}
+                            <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control fieldCFConfig fieldValidateRange" size="10" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}" value="{{rangoSuperior}}" data-tipo-campo="inputSuperior">
+                            {{/if}}
+                        {{/if}}
+                        {{#if checkbox}}
+                            <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="checkbox" class="form-control fieldCFConfig" size="10" data-tipo-campo="check" {{checked}}>
+                        {{/if}}
+                    </td>
+                {{/each}}
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

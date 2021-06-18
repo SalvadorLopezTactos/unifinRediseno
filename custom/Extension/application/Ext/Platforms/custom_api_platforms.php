@@ -1,5 +1,5 @@
 <?php
- // created: 2021-06-09 22:35:35
+ // created: 2021-05-03 19:39:26
 $platforms[] = 'api';
 $platforms[] = 'unifinAPI';
 $platforms[] = 'efactor';
@@ -7,4 +7,21 @@ $platforms[] = 'unicsWeb';
 $platforms[] = 'unics';
 $platforms[] = 'mambu';
 $platforms[] = 'cvim';
-$platforms[] = 'AlexaArauz';
+$platforms[] = 'unicsWebCredit';
+$platforms[] = 'unicsWebUnicredit';
+$platforms[] = 'unicsWebCA';
+$platforms[] = 'unicsCalidad';
+$platforms[] = 'uni2';
+$platforms[] = 'uni2MWJava';
+$platforms[] = 'uni2CotizadorUnics';
+$platforms[] = 'uni2MWMule';
+$platforms[] = 'cvimUniclick';
+$platforms[] = 'cvimReporteador';
+$platforms[] = 'cvimLeads';
+$platforms[] = 'cvimChattigo';
+$platforms[] = 'cvimSeguros';
+$platforms[] = 'cvimPrometec';
+$platforms[] = 'cvimInfografias';
+$platforms[] = 'cvimExpDigital';
+$platforms[] = 'portalUnifin';
+$platforms[] = 'portalUniclick';

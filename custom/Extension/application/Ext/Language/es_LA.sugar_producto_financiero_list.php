@@ -1,5 +1,5 @@
 <?php
- // created: 2021-05-06 16:06:15
+ // created: 2021-06-03 09:23:44
 
 $app_list_strings['producto_financiero_list']=array (
   0 => '',
@@ -69,4 +69,5 @@ $app_list_strings['producto_financiero_list']=array (
   74 => 'CRÉDITO INTERCOMPAÑÍA EMERGENTE CREDIT',
   75 => 'FACTORAJE, COBRANZA PAGO A PROVEEDOR EMERGENTE',
   76 => 'FLEET SERVICES',
+  77 => 'CRÉDITO PYME',
 );

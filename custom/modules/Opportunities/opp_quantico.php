@@ -15,7 +15,9 @@ class IntegracionQuantico
         $pwd = $sugar_config['quantico_psw'];
         $auth_encode = base64_encode($user . ':' . $pwd);
         $arrayBo = explode(',', $bean->usuario_bo_c);
-        if ($bean->idsolicitud_c != "" && $bean->id_process_c != "" && $bean->quantico_id_c == "") {
+        $iniciaPUni2 = ($app_list_strings['switch_inicia_proceso_list']['ejecuta'] == 1) ? true: false;   //Control para swith que indica si debe ejecutar o no inicia-proceso a uni2
+
+        if ( ( ($bean->id_process_c != "" && $iniciaPUni2) || (!$iniciaPUni2) ) && $bean->idsolicitud_c != "" && $bean->quantico_id_c == "" ) {
             $GLOBALS['log']->fatal("Inicia QuanticoIntegracion");
             $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id, array('disable_row_level_security' => true));
 
@@ -45,38 +47,73 @@ class IntegracionQuantico
                 $GLOBALS['log']->fatal("Ejecuta consulta" .print_r($queryasesor, true));
                 $queryResult = $db->getOne($queryasesor);
                 $valorEquipo=$queryResult;
-                
-            //Declaracion de Body
-            $body = array(
-                "RequestId" => $bean->idsolicitud_c,
-                "ProcessId" => $bean->id_process_c,
-                "OpportunitiesId" => $bean->id,
-                "ClientId" => $bean->account_id,
-                "ClientName" => $bean->account_name,
-                "ProductId" => $bean->producto_financiero_c,
-                "RequestTypeId" => $bean->tipo_de_operacion_c,
-                "PersonTypeId" => $tipoPersona,
-                "ProductTypeId" => $bean->tipo_producto_c,
-                "CurrencyTypeId" => "1",
-                "RequestAmount" => $RequestAmount,
-                "IncreaseAmount" => $IncreaseAmount,
-                "AdviserId" => $idActiveDirectory,
-                "AdviserName" => $bean->assigned_user_name,
-                "SinglePaymentPercentage"=>$bean->porciento_ri_c,
-                //"SinglePaymentPercentage" => $CreditLineId,
-                "CreditLineId" => $CreditLineId,
-                "BackOfficeId" => str_replace("^", "", $arrayBo[0]),
-                "BackOfficeName" => $app_list_strings['usuario_bo_0'][str_replace("^", "", $arrayBo[0])],
-                "BusinessGroupId"=>$bean->negocio_c,
-                "TeamId"=>$valorEquipo
-            );
+
+            //Obtiene campo de condiciones financieras de quantico
+            $strCFQuantico=$bean->cf_quantico_c;
+            $jsonCFQuantico="";
+            if($strCFQuantico != ""){
+                $jsonCFQuantico=json_decode($strCFQuantico);
+                //Declaracion de Body
+                $body = array(
+                    "RequestId" => $bean->idsolicitud_c,
+                    //"ProcessId" => $iniciaPUni2 ? $bean->id_process_c: '1',
+                    "ProcessId" =>  $bean->idsolicitud_c,
+                    "OpportunitiesId" => $bean->id,
+                    "ClientId" => $bean->account_id,
+                    "ClientName" => $bean->account_name,
+                    "ProductId" => $bean->producto_financiero_c,
+                    "RequestTypeId" => $bean->tipo_de_operacion_c,
+                    "PersonTypeId" => $tipoPersona,
+                    "ProductTypeId" => $bean->tipo_producto_c,
+                    "CurrencyTypeId" => "1",
+                    "RequestAmount" => $RequestAmount,
+                    "IncreaseAmount" => $IncreaseAmount,
+                    "AdviserId" => $idActiveDirectory,
+                    "AdviserName" => $bean->assigned_user_name,
+                    "SinglePaymentPercentage"=>$bean->porciento_ri_c,
+                    //"SinglePaymentPercentage" => $CreditLineId,
+                    "CreditLineId" => $CreditLineId,
+                    "BackOfficeId" => str_replace("^", "", $arrayBo[0]),
+                    "BackOfficeName" => $app_list_strings['usuario_bo_0'][str_replace("^", "", $arrayBo[0])],
+                    "BusinessGroupId"=>$bean->negocio_c,
+                    "TeamId"=>$valorEquipo,
+                    'FinancialTermGroupResponse'=>$jsonCFQuantico->FinancialTermGroupResponseList
+                );
+            }else{
+                $body = array(
+                    "RequestId" => $bean->idsolicitud_c,
+                    //"ProcessId" => $iniciaPUni2 ? $bean->id_process_c: '1',
+                    "ProcessId" =>  $bean->idsolicitud_c,
+                    "OpportunitiesId" => $bean->id,
+                    "ClientId" => $bean->account_id,
+                    "ClientName" => $bean->account_name,
+                    "ProductId" => $bean->producto_financiero_c,
+                    "RequestTypeId" => $bean->tipo_de_operacion_c,
+                    "PersonTypeId" => $tipoPersona,
+                    "ProductTypeId" => $bean->tipo_producto_c,
+                    "CurrencyTypeId" => "1",
+                    "RequestAmount" => $RequestAmount,
+                    "IncreaseAmount" => $IncreaseAmount,
+                    "AdviserId" => $idActiveDirectory,
+                    "AdviserName" => $bean->assigned_user_name,
+                    "SinglePaymentPercentage"=>$bean->porciento_ri_c,
+                    //"SinglePaymentPercentage" => $CreditLineId,
+                    "CreditLineId" => $CreditLineId,
+                    "BackOfficeId" => str_replace("^", "", $arrayBo[0]),
+                    "BackOfficeName" => $app_list_strings['usuario_bo_0'][str_replace("^", "", $arrayBo[0])],
+                    "BusinessGroupId"=>$bean->negocio_c,
+                    "TeamId"=>$valorEquipo
+                );
+
+            }
+            
 			//Valida si se tiene Administración de Cartera y se añaden campos extras al body
 			if($bean->admin_cartera_c==1) {
                 $body["ProductOriginPortfolioId"] = $bean->producto_origen_vencido_c;
                 $body["RequestTypePortfolioId"] = $bean->tipo_sol_admin_cartera_c;
                 $body["BusinessAmount"] = $bean->monto_gpo_emp_c;
                 $body["NumberDaysoverduePortfolio"] = $bean->cartera_dias_vencido_c;
-			}		
+			}
             $GLOBALS['log']->fatal('Body Quantico integracion ' . json_encode($body));
             $callApi = new UnifinAPI();
             $resultado = $callApi->postQuantico($host, $body, $auth_encode);
@@ -168,6 +205,30 @@ class IntegracionQuantico
             }
         }
         $GLOBALS['log']->fatal('Finaliza QuanticoUpdate');
+    }
+
+    public function CFQuanticoUpdate($bean = null, $event = null, $args = null){
+        $GLOBALS['log']->fatal('Inicia Quantico Condiciones financieras');
+        global $sugar_config, $db, $app_list_strings, $current_user;
+        $user = $sugar_config['quantico_usr'];
+        $pwd = $sugar_config['quantico_psw'];
+        $auth_encode = base64_encode($user . ':' . $pwd);
+
+        //Control para swith que indica si debe ejecutar o proceso para Quantico
+        $switchUni2 = $app_list_strings['switch_inicia_proceso_list']['ejecuta'];
+
+        //Mandar actualización de condiciones financieras en caso de que se detecte una actualización al campo que guarda el json de la petición
+        if ($bean->fetched_row['cf_quantico_c'] != $bean->cf_quantico_c && $switchUni2=="0"){
+            //Se define URL
+            $host = $sugar_config['quantico_url_base'] . '/CreditRequestIntegration/rest/CreditRequestApi/ModifyFinantialCondition';
+            $body=json_decode($bean->cf_quantico_c);
+
+            $callApi = new UnifinAPI();
+            $resultado = $callApi->postQuantico($host, $body, $auth_encode);
+            $GLOBALS['log']->fatal('Resultado: Actualizacion Quantico ' . json_encode($resultado));
+
+        }
+
     }
 
 }

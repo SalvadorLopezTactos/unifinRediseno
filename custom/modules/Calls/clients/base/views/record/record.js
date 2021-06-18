@@ -51,7 +51,7 @@
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         /***********  Lead Management  *************/
         this.model.addValidationTask('lead_management', _.bind(this.ConfirmCancelar, this));  //OnConfirm cancelar LEad-PRospecto contactado
-        this.model.addValidationTask('lmanage_seg_reun', _.bind(this.SegundaReunion, this));  //OnConfirm cancelar Cuenta segunda llamada
+        //this.model.addValidationTask('lmanage_seg_reun', _.bind(this.SegundaReunion, this));  //OnConfirm cancelar Cuenta segunda llamada
 
         this.model.on('sync', this._readOnlyDateSE, this);
         this.model.on('sync', this.validaRelLeadCall, this);
@@ -71,7 +71,7 @@
         this.$('.record-edit-link-wrapper[data-name=campana_rel_c]').remove();
       }
     },
-    
+
     _render: function (options) {
         this._super("_render");
         this.enableparentname();
@@ -651,7 +651,7 @@
                 success: _.bind(function (model) {
                     var puesto_usuario = App.user.attributes.puestousuario_c;
                     if (model.get('subtipo_registro_c') == '1' || model.get('subtipo_registro_c') == '2') {
-                        if (this.model.get('tct_resultado_llamada_ddw_c') == 'Ilocalizable' || this.model.get('tct_resultado_llamada_ddw_c') == 'No_esta_Interesado' || this.model.get('tct_resultado_llamada_ddw_c') == 'Fuera_de_Perfil') {
+                        /*if (this.model.get('tct_resultado_llamada_ddw_c') == 'Ilocalizable' || this.model.get('tct_resultado_llamada_ddw_c') == 'No_esta_Interesado' || this.model.get('tct_resultado_llamada_ddw_c') == 'Fuera_de_Perfil') {
                             model.set('lead_cancelado_c', true);
                             model.save();
 
@@ -660,33 +660,32 @@
                                 messages: 'Lead Cancelado',
                                 autoClose: true
                             });
-                            /*************************************************/
                             if (Modernizr.touch) {
                                 app.$contentEl.addClass('content-overflow-visible');
                             }
-                            /**check whether the view already exists in the layout.
-                             * If not we will create a new view and will add to the components list of the record layout
-                             * */
+                            //check whether the view already exists in the layout.
+                            //If not we will create a new view and will add to the components list of the record layout
+
 
                                 //var quickCreateView = this.layout.getComponent('MotivoCancelModal');
                             var quickCreateView = null;
                             if (!quickCreateView) {
-                                /** Create a new view object */
+                                //Create a new view object
                                 quickCreateView = app.view.createView({
                                     context: this.context,
                                     name: 'MotivoCancelModal',
                                     layout: this.layout,
                                     module: 'Calls'
                                 });
-                                /** add the new view to the components list of the record layout*/
+                                // add the new view to the components list of the record layout
                                 this.layout._components.push(quickCreateView);
                                 this.layout.$el.append(quickCreateView.$el);
                             }
-                            /**triggers an event to show the pop up quick create view*/
+                            //riggers an event to show the pop up quick create view
                             this.layout.trigger("app:view:MotivoCancelModal");
-                            /**************************************/
                             callback(null, fields, errors);
-                        } else if (this.model.get('tct_resultado_llamada_ddw_c') == 'Checklist_expediente' && puesto_usuario != "31") {
+                        } else */
+                        if (this.model.get('tct_resultado_llamada_ddw_c') == 'Checklist_expediente' && puesto_usuario != "31") {
                             var filter_arguments = {
                                 "id": this.model.get('parent_id')
                             };
@@ -750,7 +749,7 @@
         var puesto_usuario = App.user.attributes.puestousuario_c;
         var leasingPuestos = ['1', '2', '3', '4', '5', '6', '20', '33', '44', '55'];
         var parent_id_acc = this.model.get('parent_id') ;
-        
+
         //Llamada_servicio
         if ($.isEmptyObject(errors) && parent_id_acc != "" && this.model.get('parent_type') == "Accounts" && this.model.get('status') == "Held" && this.model.get('tct_resultado_llamada_ddw_c') != 'Llamada_servicio' && leasingPuestos.includes(puesto_usuario)) {
             //this.model.get('tipo_registro_cuenta_c') == "Cliente"
@@ -771,7 +770,7 @@
                                     /**check whether the view already exists in the layout.
                                      * If not we will create a new view and will add to the components list of the record layout
                                      * */
-            
+
                                         //var quickCreateView = this.layout.getComponent('MotivoCancelModal');
                                     var quickCreateView = null;
                                     if (!quickCreateView) {
@@ -797,9 +796,9 @@
                         });
                     } else {
                         callback(null, fields, errors);
-                    }                    
+                    }
                 }, this)
-            });	
+            });
         } else {
             callback(null, fields, errors);
         }
@@ -921,7 +920,7 @@
 
         if (App.user.attributes.puestousuario_c == '27' || App.user.attributes.puestousuario_c == '31') {
             //Check Evento campaña, habilita relacion evento campaña
-            if (this.model.get('evento_campana_c') == true && this.model.get('campana_rel_c') == "") {                        
+            if (this.model.get('evento_campana_c') == true && this.model.get('campana_rel_c') == "") {
                 fieldERC = this.getField('campana_rel_c');
                 if (fieldERC.action == 'disabled') {
                     this.inlineEditMode = true;
@@ -938,8 +937,8 @@
             //VALIDA CUANDO ES PUESTO DE USUARIO 27 - "AGENTE TELEFONICO" Ó 31 - "COORDINADOR DE CENTRO DE PROSPECCIONES"
             if (App.user.attributes.puestousuario_c == '27' || App.user.attributes.puestousuario_c == '31') {
                 //Check Evento campaña
-                if (this.model.get('evento_campana_c') != "") {                        
-                    $('[data-name="evento_campana_c"]').attr('style', 'pointer-events:none;');                
+                if (this.model.get('evento_campana_c') != "") {
+                    $('[data-name="evento_campana_c"]').attr('style', 'pointer-events:none;');
                 }
             }
             //Resultado de la llamada
@@ -947,32 +946,32 @@
                 $('[data-name="tct_resultado_llamada_ddw_c"]').attr('style', 'pointer-events:none;');
             }
             if (this.model.get('tct_resultado_llamada_ddw_c') == "Ilocalizable" && this.model.get('detalle_resultado_c') != "") {
-                
+
                 $('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
-            }             
+            }
             if (this.model.get('tct_resultado_llamada_ddw_c') == "No_esta_Interesado" && this.model.get('detalle_resultado_c') != "") {
-                
+
                 $('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
-            }             
+            }
             if (this.model.get('tct_resultado_llamada_ddw_c') == "Fuera_de_Perfil" && this.model.get('detalle_resultado_c') != "") {
-                
+
                 $('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
             }
             if (this.model.get('tct_resultado_llamada_ddw_c') == "Llamada_servicio" && this.model.get('detalle_resultado_c') != "") {
-                
+
                 $('[data-name="detalle_resultado_c"]').attr('style', 'pointer-events:none;');
-            } 
+            }
             if (this.model.get('tct_resultado_llamada_ddw_c') == "Razon_Social" && this.model.get('cuenta_existente_c') != "") {
-                
+
                 $('[data-name="cuenta_existente_c"]').attr('style', 'pointer-events:none;');
-            } 
-        }        
+            }
+        }
     },
 
     _readOnlyDateSE: function () {
         //Campos de solo lectura fecha de Inicio y fecha Fin en estatus Realizada y Cancelada
         if (this.model.get('status') == 'Held' || this.model.get('status') == 'Not Held') {
-            
+
             $(".record-cell[data-type='duration']").attr('style','pointer-events:none');
         }
     },
@@ -980,7 +979,7 @@
     validaRelLeadCall: function () {
 
         if (this.model.get('parent_id') && this.model.get('parent_type') == "Leads") {
-            
+
             var lead = app.data.createBean('Leads', {id: this.model.get('parent_id')});
             lead.fetch({
                 success: _.bind(function (model) {
@@ -992,8 +991,8 @@
                             title: "Lead Cancelado<br>",
                             messages: "No se puede agregar / editar una relación con Lead Cancelado",
                             autoClose: false
-                        });  
-                        
+                        });
+
                         //Bloquear el registro completo y mostrar alerta
                         $('.record').attr('style', 'pointer-events:none');
                         $('.dropdown-toggle').attr('style', 'pointer-events:none');
@@ -1003,7 +1002,7 @@
                         var editButton = self.getField('edit_button');
                         editButton.setDisabled(true);
                     }
-                   
+
                 }, this)
             });
         }

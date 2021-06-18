@@ -13,13 +13,6 @@ $hook_array['after_save'][] = Array(
     'crearProspecto'
 );
 
-$hook_array['after_save'][] = Array(
-    2,
-    'hookleadcancelado',
-    'custom/modules/Leads/lead_cancelado_class.php',
-    'checkCancelado',
-    'subTipoCancelado'
-);
 
 $hook_array['after_save'][] = Array(
     3,
@@ -27,4 +20,12 @@ $hook_array['after_save'][] = Array(
     'custom/modules/Leads/Lead_Hooks.php',
     'Lead_Hooks',
     'crearURLOriginacion'
+);
+
+$hook_array['after_save'][] = Array(
+    4,
+    'Convierte a Cuenta',
+    'custom/modules/Leads/Lead_Hooks.php',
+    'Lead_Hooks',
+    're_asign_meetings'
 );

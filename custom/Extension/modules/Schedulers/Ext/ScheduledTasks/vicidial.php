@@ -12,7 +12,7 @@
         $con=new PDO("mysql:host=$host;port=3306;dbname=$bd;",$user,$passbd);
         $contador = 0;
         if($con) {
-            $query2 = 'select b.* from calls a, calls_cstm b where a.id = b.id_c and a.deleted = 0 and b.tct_call_issabel_c = 1';
+            $query2 = 'select b.* from calls a, calls_cstm b where a.id = b.id_c and a.deleted = 0 and a.status = "Planned" and b.tct_call_issabel_c = 1';
             $result2 = $GLOBALS['db']->query($query2);
             while ($row2 = $GLOBALS['db']->fetchByAssoc($result2)) {
                 $id = $row2['id_c'];

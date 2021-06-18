@@ -12,13 +12,21 @@ WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
     $row = $db->fetchByAssoc($queryResultId);
     $idMKT = $row['id'];
     /** Buscamos los Leads que tengan asignados el usuario de grupo 9.- MKT */
-    $getLeads = "select a.id id, b.compania_c compania from leads a, leads_cstm b where a.id = b.id_c and a.assigned_user_id='{$idMKT}'";
+    $getLeads = "select a.id id, b.compania_c compania , b.id_landing_c id_landing_c from leads a, leads_cstm b where a.id = b.id_c and a.assigned_user_id='{$idMKT}'";
     $ResultLeads = $db->query($getLeads);
     while ($row = $GLOBALS['db']->fetchByAssoc($ResultLeads)) {
 		// Obtiene Compañía
 		$compania_c = $row['compania'];
-		if($compania_c == 1) $subpuesto_c = 3;
-		if($compania_c == 2) $subpuesto_c = 4;
+        // Obtiene id_landing
+		$id_landing_c = $row['id_landing_c'];
+		
+        if( strpos(strtoupper($id_landing_c), 'INSURANCE') !== false){
+            $subpuesto_c = 5;  
+        }else{
+            if($compania_c == 1) $subpuesto_c = 3;
+		    if($compania_c == 2) $subpuesto_c = 4;
+        }
+        
         $usrEnable = GetUserMKT($subpuesto_c);
         $indices = $usrEnable['indice'];
         if (!empty($usrEnable['id'])) {
@@ -65,10 +73,10 @@ function GetUserMKT($subpuesto_c)
 FROM users user
   INNER JOIN users_cstm uc
     ON uc.id_c = user.id
-  INNER JOIN leads lead
+  LEFT JOIN leads lead
     ON lead.assigned_user_id = user.id
 where puestousuario_c='27' AND user.status = 'Active' AND subpuesto_c='$subpuesto_c'
-GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
+GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC";
     $result_usr = $db->query($query_asesores);
 
     while ($row = $db->fetchByAssoc($result_usr)) {

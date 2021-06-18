@@ -187,6 +187,7 @@
                     model.set('lead_cancelado_c', true); //Activa bandera de Lead Cancelado
                     model.set('motivo_cancelacion_c', KeyMotivoCancel);  //Guarda el motivo de cancelacion seleccionado
                     model.set('submotivo_cancelacion_c', KeySubmotivoCancel); //Guarda el submotivo de cancelacion
+                    model.set('status_management_c', '3');  //Cambia Estatus "Cancelado" - LEad Management
                     model.save();
                     location.reload(); //refresca la página
 

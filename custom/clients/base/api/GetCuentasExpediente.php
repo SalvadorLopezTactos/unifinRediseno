@@ -29,7 +29,7 @@ class GetCuentasExpediente extends SugarApi
 
             if ($statusProduct != 3) {
 
-                $query = "SELECT idCuenta,nombreCuenta,tipoCuenta,subtipoCuenta,idOpp,oppNombre,oppEtapa,
+                $query = "SELECT idCuenta,nombreCuenta,cuentas.idEmpresarial,cuentas.gpoEmpresarial,tipoCuenta,subtipoCuenta,idOpp,oppNombre,oppEtapa,
 				monto,  fecha_asignacion,daypas, tipo_producto, EstatusProducto, val_dias_20,val_dias_10,
 				CASE WHEN solicitudes.val_dias_20 = 20 and solicitudes.monto > 10000000 THEN 0
 				WHEN solicitudes.val_dias_20 = -20 and solicitudes.monto > 10000000 THEN 1
@@ -37,9 +37,10 @@ class GetCuentasExpediente extends SugarApi
 				WHEN solicitudes.val_dias_10 = -10 and (solicitudes.monto <= 10000000) THEN 1
 				END AS semaforo
                     FROM (
-	                    SELECT a.id as idCuenta, a.name as nombreCuenta, ac.user_id_c, ac.tipo_registro_c, up.tipo_cuenta as tipoCuenta,
+	                    SELECT a.id as idCuenta, a.name as nombreCuenta,aGpo.id as idEmpresarial, aGpo.name as gpoEmpresarial, ac.user_id_c, ac.tipo_registro_c, up.tipo_cuenta as tipoCuenta,
                         up.subtipo_cuenta as subtipoCuenta,up.name nameProd, up.tipo_producto, upc.status_management_c as EstatusProducto
                         FROM accounts a
+                        LEFT JOIN accounts aGpo on a.parent_id=aGpo.id
                         INNER JOIN accounts_cstm ac on ac.id_c = a.id
                         INNER JOIN accounts_uni_productos_1_c aup on aup.accounts_uni_productos_1accounts_ida = ac.id_c
                         INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb
@@ -49,7 +50,7 @@ class GetCuentasExpediente extends SugarApi
                         and upc.status_management_c = '{$statusProduct}' -- '2'
                         and tipo_producto = '1'
                         and a.deleted = 0 and up.deleted = 0
-                    ) AS CUENTAS LEFT JOIN (
+                    ) AS cuentas LEFT JOIN (
                         SELECT app.account_id acc, opp.date_modified, TIMESTAMPDIFF(DAY, opp.date_modified, now()) as daypas,
                         opp.id as idOpp, opp.name as oppNombre, oppcstm.tipo_producto_c, opp.assigned_user_id oppassigned, oppcstm.tct_etapa_ddw_c, oppcstm.estatus_c,
                         oppcstm.tct_estapa_subetapa_txf_c as oppEtapa, DATE_FORMAT( opp.date_modified, '%Y-%m-%d ') as fecha_asignacion,
@@ -76,7 +77,7 @@ class GetCuentasExpediente extends SugarApi
                         order by daypas
 			        ) as solicitudes
 	            on cuentas.idCuenta = solicitudes.acc
-                order by fecha_asignacion asc";
+                order by nombreCuenta asc";
 
                 /*if ($statusProduct == '2') {
                     $query = $query . "where ( solicitudes.val_dias_20=20 and solicitudes.monto > 10000000) OR
@@ -87,7 +88,7 @@ class GetCuentasExpediente extends SugarApi
 
                 while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                     $records_in['records'][] = array(
-                        'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'], 'tipoCuenta' => $row['tipoCuenta'],
+                        'idCuenta' => $row['idCuenta'], 'nombreCuenta' => $row['nombreCuenta'],'idEmpresarial'=>$row['idEmpresarial'],'gpoEmpresarial'=>$row['gpoEmpresarial'] ,'tipoCuenta' => $row['tipoCuenta'],
                         'subtipoCuenta' => $row['subtipoCuenta'], 'idOpp' => $row['idOpp'], 'oppNombre' => $row['oppNombre'],
                         'oppEtapa' => $row['oppEtapa'], 'EstatusProducto' => $row['EstatusProducto'], 'semaforo' => $row['semaforo'],
                         'fecha_asignacion' => $row['fecha_asignacion'], 'Monto' => '$ ' . round($row['monto'], 2)

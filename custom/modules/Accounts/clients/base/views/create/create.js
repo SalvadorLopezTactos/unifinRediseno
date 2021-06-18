@@ -1857,6 +1857,7 @@
         }
     },
 
+
     changeLabelMarketing: function () {
         console.log("Cambio de Origen");
         if (this.model.get('origen_cuenta_c') == 'Mercadotecnia') {

@@ -7,7 +7,7 @@
 		'click #validar_QR': 'validarServicioQR',
 		'click #activar_camara': 'activarCamara',
     'click #archivo_qr': 'cargarArchivo',
-		'change #btnSubir': 'SubirImagen',		
+		'change #btnSubir': 'SubirImagen',
   },
 
   initialize: function(options){
@@ -27,7 +27,7 @@
 	tieneSoporteUserMedia: function() {
 		return !!(navigator.getUserMedia || (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || navigator.webkitGetUserMedia || navigator.msGetUserMedia);
 	},
-	
+
 	getUserMedia: function() {
 		return (navigator.getUserMedia || (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || navigator.webkitGetUserMedia || navigator.msGetUserMedia).apply(navigator, arguments);
 	},
@@ -64,16 +64,16 @@
 			FR.readAsDataURL(input[0].files[0]);
 		}
 	},
-  
-		
+
+
   activarCamara: function(){
     this.$('#carga').hide();
-    this.$('#div_video').show();  
+    this.$('#div_video').show();
 		var elemento = null;
 		var video = this.$('#video')[0];
 			canvas = this.$('#canvas')[0];
 			snap = this.$('#snap')[0];
-			estado = this.$('#estado')[0];		
+			estado = this.$('#estado')[0];
 		if(this.$('#activar_camara')[0].checked == true){
 			this.fileupload = false;
 			elemento = this.$('#div_video')[0];
@@ -108,7 +108,7 @@
 							var body = {
 								"file" : foto
 							}
-							self.picturecam = true;							
+							self.picturecam = true;
 							video.play();
 						});
 					 }, function (error) {
@@ -141,7 +141,7 @@
 		}
   },
 
-	
+
 	validarServicioQR:function () {
 		var contextol = this;
 		var input = this.$('input[type=file]');
@@ -161,27 +161,27 @@
 				var FR= new FileReader();
 				FR.readAsDataURL( input[0].files[0] );
 				imgn.src = URL.createObjectURL(this.$('#btnSubir')[0].files[0]);
-			}			
+			}
 		}else{
 			var elemento = this.$('#canvas')[0];
 			imgn.src = elemento.toDataURL();
 		}
-			
+
 		imgn.onload = function(){
 			app.alert.show('procesando', {
 			level: 'process',
 			title: 'Cargando...'
 			});
 			self.$('#activar_camara').addClass('disabled');
-			self.$('#activar_camara').attr('style', 'pointer-events:none;');  
+			self.$('#activar_camara').attr('style', 'pointer-events:none;');
 			self.$('#archivo_qr').addClass('disabled');
-			self.$('#archivo_qr').attr('style', 'pointer-events:none;');  
+			self.$('#archivo_qr').attr('style', 'pointer-events:none;');
 			self.$('#btnSubir').addClass('disabled');
 			self.$('#btnSubir').attr('style', 'pointer-events:none;margin:10px');
 			self.$('#validar_QR').addClass('disabled');
 			self.$('#validar_QR').attr('style', 'pointer-events:none;margin:10px');
 			self.$('#btn_Cancelar').addClass('disabled');
-			self.$('#btn_Cancelar').attr('style', 'pointer-events:none;margin:10px');   
+			self.$('#btn_Cancelar').attr('style', 'pointer-events:none;margin:10px');
 			var vid = self.$('#video');
 			c.width = imgn.width;
 			c.height = imgn.height;
@@ -206,7 +206,7 @@
 						app.alert.show('error', {
 							level: 'error',
 							messages: Error,
-						});  
+						});
 						self.$('#activar_camara').removeClass('disabled');
 						self.$('#activar_camara').attr('style', '');
 						self.$('#archivo_qr').removeClass('disabled');
@@ -292,7 +292,7 @@
 									self.$('#activar_camara').removeClass('disabled');
 									self.$('#activar_camara').attr('style', '');
 									self.$('#archivo_qr').removeClass('disabled');
-									self.$('#archivo_qr').attr('style', '');                  
+									self.$('#archivo_qr').attr('style', '');
 									self.$('#btnSubir').removeClass('disabled');
 									self.$('#btnSubir').attr('style', 'margin:10px');
 									self.$('#validar_QR').removeClass('disabled');
@@ -314,7 +314,7 @@
 										self.$('#activar_camara').removeClass('disabled');
 										self.$('#activar_camara').attr('style', '');
 										self.$('#archivo_qr').removeClass('disabled');
-										self.$('#archivo_qr').attr('style', '');                  
+										self.$('#archivo_qr').attr('style', '');
 										self.$('#btnSubir').removeClass('disabled');
 										self.$('#btnSubir').attr('style', 'margin:10px');
 										self.$('#validar_QR').removeClass('disabled');
@@ -393,7 +393,7 @@
                         var secuencia = 0;
 												var duplicado = 0;
                         var duplicados = 0;
-												var cDuplicado = 0;            
+												var cDuplicado = 0;
 												var cDireccionFiscal = 0;
 												var direccion = cont_dir.oDirecciones.direccion;
 												var auxd = '';
@@ -410,7 +410,7 @@
 													duplicado = (contextol._limpiezaDatos(direccion[key].numext) == contextol._limpiezaDatos(Exterior)) ? duplicado+1 : duplicado;
 													duplicado = (contextol._limpiezaDatos(direccion[key].numint) == contextol._limpiezaDatos(Interior)) ? duplicado+1 : duplicado;
 													duplicado = (direccion[key].inactivo == 0) ? duplicado+1 : duplicado;
-													if(direccion[key].indicadorSeleccionados.includes('2') && direccion[key].inactivo == 0){ 
+													if(direccion[key].indicadorSeleccionados.includes('2') && direccion[key].inactivo == 0){
 														cDireccionFiscal = cDireccionFiscal + 1;
 														indice_indicador = key;
 													}
@@ -452,7 +452,7 @@
 													}
 												});
 												// Agrega Dirección
-												var strUrl = 'DireccionesQR/' + CP + '/0/' + Colonia +'/'+Municipio;
+												var strUrl = 'DireccionesQR/' + CP + '/0/' + Colonia +'/'+Municipio+'/'+Estado;
 												app.api.call('GET', app.api.buildURL(strUrl), null, {
 													success: _.bind(function (data) {
 														if(data.idCP) {
@@ -530,7 +530,7 @@
   																//Ciudad
   																direccion[indice_indicador].ciudad = auxCiudad;
   																direccion[indice_indicador].listCiudad = listCiudad;
-  																direccion[indice_indicador].listCiudadFull = listCiudad;                                  
+  																direccion[indice_indicador].listCiudadFull = listCiudad;
                                 } else {
                                   if(nada == 0) {
                                     var quita = '';
@@ -636,7 +636,7 @@
   															app.alert.show('multiple_fiscal', {
   																level: 'info',
   																messages: 'Se han actualizado los datos de dirección fiscal'
-  															});	
+  															});
   															self.$('#activar_camara').removeClass('disabled');
   															self.$('#activar_camara').attr('style', '');
   															self.$('#archivo_qr').removeClass('disabled');
@@ -748,7 +748,7 @@
 																	self.$('#activar_camara').removeClass('disabled');
 																	self.$('#activar_camara').attr('style', '');
 																	self.$('#archivo_qr').removeClass('disabled');
-																	self.$('#archivo_qr').attr('style', '');                                
+																	self.$('#archivo_qr').attr('style', '');
 																	self.$('#btnSubir').removeClass('disabled');
 																	self.$('#btnSubir').attr('style', 'margin:10px');
 																	self.$('#validar_QR').removeClass('disabled');
@@ -768,14 +768,14 @@
 																	self.$('#activar_camara').removeClass('disabled');
 																	self.$('#activar_camara').attr('style', '');
 																	self.$('#archivo_qr').removeClass('disabled');
-																	self.$('#archivo_qr').attr('style', '');                                
+																	self.$('#archivo_qr').attr('style', '');
 																	self.$('#btnSubir').removeClass('disabled');
 																	self.$('#btnSubir').attr('style', 'margin:10px');
 																	self.$('#validar_QR').removeClass('disabled');
 																	self.$('#validar_QR').attr('style', 'margin:10px');
 																	self.$('#btn_Cancelar').removeClass('disabled');
-																	self.$('#btn_Cancelar').attr('style', 'margin:10px'); 
-																	self.$('#rfcModal').hide();																	
+																	self.$('#btn_Cancelar').attr('style', 'margin:10px');
+																	self.$('#rfcModal').hide();
 																	//self.render();
 																}
 															}
@@ -787,7 +787,7 @@
 									}
 								}
 							})
-						});						
+						});
 					}
 				})
 			});
@@ -799,7 +799,7 @@
     this.$('#div_video').hide();
     self.picturecam = false;
   },
-  
+
   btn_rfc_qr: function() {
     this.$('#rfcModal').show();
   },
@@ -809,9 +809,9 @@
 	  self.picturecam = false;
 	  self.$('#rfcModal').hide();
   },
-  
+
   _limpiezaDatos: function(cadena){
-		
+
 		cadena = cadena.trim().toLowerCase();
 		cadena = cadena.split(" ").join("");
 		cadena = cadena.replace(".", "");
@@ -830,7 +830,7 @@
 		cadena = cadena.replace("\n", "");
 		return cadena;
   },
-  
+
   bindDataChange: function () {
         this.model.on('change:' + this.name, function () {
             if (this.action !== 'edit') {
@@ -838,5 +838,5 @@
             }
         }, this);
     },
-  
+
 })

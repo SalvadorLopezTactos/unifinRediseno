@@ -1010,4 +1010,27 @@ $dependencies['Opportunities']['lic_licitaciones_opportunities_1_name_readonly']
     ),
  );
 
+ $dependencies['Opportunities']['condiciones_financieras_quantico_readonly'] = array(
+    'hooks' => array("edit"),
+    'trigger' => 'true',
+    'triggerFields' => array('tct_etapa_ddw_c','estatus_c','condiciones_financieras_quantico','id'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'condiciones_financieras_quantico',
+                /*Este campo solo es editable para las siguientes etapas
+                tct_etapa_ddw_c: Solicitud Inicial
+                tct_etapa_ddw_c:Integración Expediente,estatus_c: En espera
+                tct_etapa_ddw_c:Integración Expediente,estatus_c: Integración Expediente
+                tct_etapa_ddw_c:Integración Expediente,estatus_c: Devuelta por Crédito
+                tct_etapa_ddw_c:Integración Expediente,estatus_c: Devuelta BO Crédito
+                tct_etapa_ddw_c:Rechazado,estatus_c: Rechazado Crédito
+                */
+                'value' => 'and(not(equal($tct_etapa_ddw_c,"SI")),and(not(equal($tct_etapa_ddw_c,"P")),not(equal($estatus_c,"PE"))),and(not(equal($tct_etapa_ddw_c,"P")),not(equal($estatus_c,"P"))),and(not(equal($tct_etapa_ddw_c,"P")),not(equal($estatus_c,"DP"))),and(not(equal($tct_etapa_ddw_c,"P")),not(equal($estatus_c,"DB"))),and(not(equal($tct_etapa_ddw_c,"R")),not(equal($estatus_c,"R"))))',
+            ),
+        ),
+    ),
+ );
 //////////***************************   END: READ ONLY   ******************************////////////////////////////

@@ -39,7 +39,7 @@ class GetRegistrosAsignadosForProtocolo extends SugarApi
 
     public function getRecordsAssign($api, $args)
     {
-        
+
         global $db;
         $id_user=$args['id_user'];
         $total_leads=0;
@@ -47,16 +47,17 @@ class GetRegistrosAsignadosForProtocolo extends SugarApi
         $total_registros=0;
 
         //Query para obtener el número de leads asignados al usuario actual
-        $query = "SELECT count(l.id) as total_leads FROM leads l inner JOIN leads_cstm lc on l.id=lc.id_c 
+        $query = "SELECT count(l.id) as total_leads FROM leads l inner JOIN leads_cstm lc on l.id=lc.id_c
 WHERE l.assigned_user_id='{$id_user}'
 and lc.contacto_asociado_c=0
 and lc.subtipo_registro_c not in('4','3') and l.deleted=0";//4 - Convertido, 3 - Cancelado
         $result = $db->query($query);
 
         while($row = $db->fetchByAssoc($result)){
-            $total_leads = $row['total_leads']; 
+            $total_leads = $row['total_leads'];
         }
 
+        /*
         $query_cuentas="SELECT count(a.id) as total_cuentas FROM accounts a
 INNER JOIN accounts_cstm ac on ac.id_c = a.id
 INNER JOIN accounts_uni_productos_1_c aup on aup.accounts_uni_productos_1accounts_ida = ac.id_c
@@ -68,13 +69,64 @@ WHERE ac.tipo_registro_cuenta_c = '2'
 and ac.subtipo_registro_cuenta_c IN ('2','7','8')
 and ac.user_id_c = '{$id_user}'
 and a.deleted = 0 and up.deleted = 0";
+*/
     //tipo_registro_cuenta_c 2 - Prospecto , subtipo_registro_cuenta_c=2 - Contactado,7-Interesado, 8 - Integración de Expediente
 
+    $query_cuentas="SELECT a.id FROM accounts a
+        INNER JOIN accounts_cstm ac on ac.id_c = a.id
+        INNER JOIN accounts_uni_productos_1_c aup on aup.accounts_uni_productos_1accounts_ida = ac.id_c
+        INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb
+            and up.tipo_producto = '1'
+        INNER JOIN uni_productos_cstm upc on upc.id_c = up.id
+            and (upc.status_management_c IS NULL OR upc.status_management_c = '1')
+        WHERE ac.tipo_registro_cuenta_c = '2'
+        and ac.subtipo_registro_cuenta_c IN ('1','2','7','8','10')
+        and ac.user_id_c = '{$id_user}'
+        and a.deleted = 0 and up.deleted = 0";
+
         $resultCuentas = $db->query($query_cuentas);
+        $arr_cuentas_filtradas=array();
 
         while($row = $db->fetchByAssoc($resultCuentas)){
-            $total_cuentas = $row['total_cuentas']; 
+            //$total_cuentas = $row['total_cuentas'];
+            //Se llena arreglo con ids de cuentas para posteriormente concatenerlos y añadirlos dentro de la sentencia IN en el query
+            array_push($arr_cuentas_filtradas,"'".$row['id']."'");
         }
+
+        $string_in= implode(",", $arr_cuentas_filtradas);
+
+        $queryCuentasGpoEmpresarial="SELECT count(conteoRegistros.id) as total_cuentas_gpo FROM (
+            SELECT a.id,
+            a.parent_id,
+            up.subtipo_cuenta,
+            MAX(
+            CASE WHEN up.subtipo_cuenta IN ('1','2','7','8','10') THEN '1'
+                ELSE '2'
+                END) registro_valido,
+            CASE WHEN a.parent_id IS NULL THEN a.id
+                WHEN a.parent_id IS NOT NULL THEN a.parent_id
+                END agrupador
+            FROM accounts a
+            INNER JOIN accounts_cstm ac on ac.id_c = a.id
+            INNER JOIN accounts_uni_productos_1_c aup on aup.accounts_uni_productos_1accounts_ida = ac.id_c
+            INNER JOIN uni_productos up on up.id = aup.accounts_uni_productos_1uni_productos_idb
+            and up.tipo_producto = '1'
+            INNER JOIN uni_productos_cstm upc on upc.id_c = up.id
+            and (upc.status_management_c IS NULL OR upc.status_management_c = '1')
+            WHERE(a.id IN({$string_in}) OR
+            a.parent_id IN({$string_in}))
+            and a.deleted = 0 and up.deleted = 0
+            GROUP BY agrupador
+            ) conteoRegistros WHERE conteoRegistros.registro_valido='1'";
+
+            $GLOBALS['log']->fatal($queryCuentasGpoEmpresarial);
+
+        $resultCuentasGpo = $db->query($queryCuentasGpoEmpresarial);
+
+        while($row = $db->fetchByAssoc($resultCuentasGpo)){
+            $total_cuentas = $row['total_cuentas_gpo'];
+        }
+
 
         $total_registros=$total_leads+$total_cuentas;
 

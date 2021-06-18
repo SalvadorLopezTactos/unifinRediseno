@@ -22,4 +22,5 @@ $app_list_strings['sector_list'] = array(
   '72' => 'Servicios de alojamiento temporal y de preparación de alimentos y bebidas',
   '81' => 'Otros servicios excepto actividades gubernamentales',
   '93' => 'Actividades legislativas, gubernamentales, de impartición de justicia y de organismos internacionales y extraterritoriales',
+  '55' =>	'Corporativos',
 );

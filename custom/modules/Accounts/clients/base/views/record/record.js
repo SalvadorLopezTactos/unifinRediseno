@@ -299,6 +299,7 @@
         this.model.addValidationTask('UniclickUP', _.bind(this.requeridosUniclickUP, this));
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
         this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
+        //this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
     },
 
     /** Asignacion modal */
