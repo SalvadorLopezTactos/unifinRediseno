@@ -463,7 +463,7 @@
         }else{
             filaPoliticaObtenida=this.mainRowsBodyTable[indiceFilaClickada];
         }
-        
+
         this.mainRowsConfigBodyTable.push(filaPoliticaObtenida);
 
         if(this.model.get('cf_quantico_c')!=""){
@@ -540,6 +540,12 @@
     updateJsonCFConfiguradas:function(e){
         var indexCampo = $(e.currentTarget).parent().parent().index();
         var valorBuscado=$(e.currentTarget).attr('data-columna');
+        if(self.jsonCFConfiguradas==undefined){
+            self.jsonCFConfiguradas=this.jsonCFConfiguradas;
+        }
+        if(self.mainRowsConfigBodyTable==undefined){
+            self.mainRowsConfigBodyTable=this.mainRowsConfigBodyTable;
+        }
         if(self.jsonCFConfiguradas.FinancialTermGroupResponseList.length==0){
             self.jsonCFConfiguradas=JSON.parse(this.model.get('cf_quantico_c'));
         }
