@@ -36,12 +36,36 @@ array (
           2 => 
           array (
             'type' => 'button',
+            'name' => 'aprobar_noviable',
+            'label' => 'Aprobar No Viable',
+            'css_class' => 'btn-danger hidden',
+            'showOn' => 'view',
+            'events' => 
+            array (
+              'click' => 'button:aprobar_noviable:click',
+            ),
+          ),
+          3 => 
+          array (
+            'type' => 'button',
+            'name' => 'desaprobar_noviable',
+            'label' => 'Desaprobar No Viable',
+            'css_class' => 'btn-success hidden',
+            'showOn' => 'view',
+            'events' => 
+            array (
+              'click' => 'button:desaprobar_noviable:click',
+            ),
+          ),
+          4 => 
+          array (
+            'type' => 'button',
             'name' => 'cancel_button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'edit',
           ),
-          3 => 
+          5 => 
           array (
             'type' => 'button',
             'name' => 'rfc_qr_button',
@@ -53,7 +77,7 @@ array (
               'click' => 'button:btn_rfc:click',
             ),
           ),
-          4 => 
+          6 => 
           array (
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
@@ -63,7 +87,7 @@ array (
             'showOn' => 'edit',
             'acl_action' => 'edit',
           ),
-          5 => 
+          7 => 
           array (
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
@@ -201,7 +225,7 @@ array (
               ),
             ),
           ),
-          6 => 
+          8 => 
           array (
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',

@@ -6710,6 +6710,7 @@
     },
 
     bloqueo: function () {
+		// Cuentas No Contactar
         var consulta = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
         app.api.call('read', consulta, {}, {
             success: _.bind(function (data) {
@@ -6720,6 +6721,24 @@
 					$('[name="desbloquea_cuenta"]').removeClass('hidden');
 				}
             }, this)
+        });
+		// No viable
+        var Productos = [];
+        app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + this.model.get('id')), null, {
+            success: function (data) {
+				Productos = data;
+                _.each(Productos, function (value, key) {
+					if(Productos[key].no_viable && (Productos[key].user_id1_c == app.user.id || Productos[key].user_id2_c == app.user.id)) {
+						$('[name="aprobar_noviable"]').removeClass('hidden');
+                    }
+					if(!Productos[key].no_viable && (Productos[key].user_id1_c == app.user.id || Productos[key].user_id2_c == app.user.id)) {
+						$('[name="desaprobar_noviable"]').removeClass('hidden');
+                    }
+                });
+            },
+            error: function (e) {
+                throw e;
+            }
         });
     },
 })
