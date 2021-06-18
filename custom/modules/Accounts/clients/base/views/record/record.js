@@ -276,9 +276,6 @@
         //this.events['keydown [name=ctpldnoseriefiel_c]'] = 'checkInVentas';
         this.events['keydown [name=tct_cpld_pregunta_u2_txf_c]'] = 'checkInVentas';
         this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'checkInVentas';
-
-
-
         // this.model.addValidationTask('LeasingNV', _.bind(this.requeridosleasingnv, this));
         // this.model.addValidationTask('FactorajeNV', _.bind(this.requeridosfacnv, this));
         // this.model.addValidationTask('CreditAutoNV', _.bind(this.requeridoscanv, this));
@@ -294,6 +291,7 @@
 		this.context.on('button:bloquea_cuenta:click', this.bloquea_cuenta, this);
 		this.context.on('button:desbloquea_cuenta:click', this.desbloquea_cuenta, this);
 		this.context.on('button:aprobar_noviable:click', this.aprobar_noviable, this);
+		this.context.on('button:desaprobar_noviable:click', this.rechazar_noviable, this);
 		this.model.on('sync', this.bloqueo, this);
         /***************Validacion de Campos No viables en los Productos********************/
         this.model.addValidationTask('LeasingUP', _.bind(this.requeridosLeasingUP, this));
@@ -6817,7 +6815,6 @@
 							success: _.bind(function (data1) {
 								if(data1.records.length > 0) {
 									if(data1.records[0].bloquea) {
-										params["no_viable"] = 1;
 										params["aprueba1_c"] = 1;
 										params["aprueba2_c"] = 1;
 										params["status_management_c"] = Productos[key].status_management_c;
@@ -6878,10 +6875,10 @@
             success: function (data) {
 				Productos = data;
                 _.each(Productos, function (value, key) {
-					if(Productos[key].no_viable && (Productos[key].user_id1_c == app.user.id || Productos[key].user_id2_c == app.user.id)) {
+					if(!Productos[key].aprueba1_c && !Productos[key].aprueba2_c && (Productos[key].user_id1_c == app.user.id || Productos[key].user_id2_c == app.user.id)) {
 						$('[name="aprobar_noviable"]').removeClass('hidden');
                     }
-					if(!Productos[key].no_viable && (Productos[key].user_id1_c == app.user.id || Productos[key].user_id2_c == app.user.id)) {
+					if(Productos[key].aprueba1_c && Productos[key].aprueba2_c && (Productos[key].user_id1_c == app.user.id || Productos[key].user_id2_c == app.user.id)) {
 						$('[name="desaprobar_noviable"]').removeClass('hidden');
                     }
                 });
@@ -6899,8 +6896,7 @@
             success: function (data) {
 				Productos = data;
                 _.each(Productos, function (value, key) {
-					if( (Productos[key].user_id1_c == app.user.id && Productos[key].aprueba1_c ) 
-                        && (Productos[key].user_id2_c == app.user.id && Productos[key].aprueba2_c )
+					if((Productos[key].user_id1_c == app.user.id && Productos[key].aprueba1_c) || (Productos[key].user_id2_c == app.user.id && Productos[key].aprueba2_c)
                         && (Productos[key].status_management_c == '4' || Productos[key].status_management_c == '5')) {
 						var params = {};
 						/*if(Productos[key].user_id1_c == app.user.id) params["aprueba1_c"] = 1;
