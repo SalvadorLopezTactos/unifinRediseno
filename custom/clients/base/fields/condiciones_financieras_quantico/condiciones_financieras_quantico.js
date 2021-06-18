@@ -720,7 +720,7 @@
 
     chk_condFinEmptyValues:function (fields, errors, callback){
 
-        if(this.model.get('cf_quantico_c')!=""){
+        if(this.model.get('cf_quantico_c')!="" && this.model.get('cf_quantico_c')!=undefined){
             var strJsonConfiguradas = JSON.parse(this.model.get('cf_quantico_c'));
             if(strJsonConfiguradas.FinancialTermGroupResponseList.length>0){
                 var strMsjError="Es requerido llenar todos los campos de condiciones financieras:<br>";
