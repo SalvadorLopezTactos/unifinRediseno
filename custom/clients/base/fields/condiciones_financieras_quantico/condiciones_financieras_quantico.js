@@ -725,7 +725,7 @@
             if(strJsonConfiguradas.FinancialTermGroupResponseList.length>0){
                 var strMsjError="Es requerido llenar todos los campos de condiciones financieras:<br>";
                 for (var i = 0; i < strJsonConfiguradas.FinancialTermGroupResponseList.length; i++) {
-                    strMsjError+="<br><b>Condición "+i+"</b><br>";
+                    strMsjError+="<br><b>Condición Financiera Configurada "+(i+1)+"</b><br>";
                     var listaCampos=strJsonConfiguradas.FinancialTermGroupResponseList[i].FinancialTermResponseList;
                     for (var index = 0; index < listaCampos.length; index++) {
                         if(listaCampos[index].Value.ValueMin!=undefined){
