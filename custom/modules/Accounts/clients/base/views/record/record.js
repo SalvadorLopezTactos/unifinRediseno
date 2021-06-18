@@ -5742,7 +5742,7 @@
                 errors['error_leasingUP'].required = true;
             }
 
-            if(  $('.chk_l_nv')[0].checked == true && (document.getElementById("list_l_estatus_lm") != undefined || document.getElementById("list_l_estatus_lm") != null)){
+            if( (document.getElementById("list_l_estatus_lm") != undefined || document.getElementById("list_l_estatus_lm") != null)){
                 if ($('.chk_l_nv')[0].checked == true && (document.getElementById("list_l_estatus_lm").value !="4" && document.getElementById("list_l_estatus_lm").value !="5")) {
                     $('.list_l_estatus_lm').css('border-color', 'red'); //TXT ¿Qué producto?
                     app.alert.show("Faltantes no viable Leasing", {
@@ -5759,7 +5759,7 @@
                 var selectlrazon = document.getElementById("list_l_so_razon");
                 var selectlmotivo = document.getElementById("list_l_so_motivo");
                 
-                if($('.chk_l_nv')[0].checked == true && selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
+                if( selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
                     if ($('.chk_l_nv')[0].checked == true && selectlrazon.value == '' ) {
                         $('.list_l_so_razon').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
@@ -6899,7 +6899,8 @@
             success: function (data) {
 				Productos = data;
                 _.each(Productos, function (value, key) {
-					if( Productos[key].no_viable && (Productos[key].user_id1_c == app.user.id || Productos[key].user_id2_c == app.user.id)
+					if( (Productos[key].user_id1_c == app.user.id && Productos[key].aprueba1_c ) 
+                        && (Productos[key].user_id2_c == app.user.id && Productos[key].aprueba2_c )
                         && (Productos[key].status_management_c == '4' || Productos[key].status_management_c == '5')) {
 						var params = {};
 						/*if(Productos[key].user_id1_c == app.user.id) params["aprueba1_c"] = 1;
