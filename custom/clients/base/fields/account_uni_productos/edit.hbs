@@ -42,7 +42,16 @@
                         <td width="33%">
                             <div class="ls_estatus_lm mpad ">
                                 <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
-                                {{#if ResumenProductos.leasing.status_management_c}}{{getUnifinListValue 'status_management_list' ResumenProductos.leasing.status_management_c}}{{/if}}
+                                {{getUnifinListValue 'status_management_list' ResumenProductos.leasing.status_management_c}}
+                            </div>
+                            <div class="ls_estatus_lm_edit mpad ">
+                                <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
+                                <select class="row-fluid select2 list_l_estatus_lm" id="list_l_estatus_lm" data-field="list_l_estatus_lm">
+								    {{#each status_management_list_edit}}
+                                    <option value="{{@key}}" {{ifSelected @key
+                                                                            ../ResumenProductos.leasing.status_management_c}}>{{this}}</option>
+                                    {{/each}}
+                                </select>
                             </div>
                         </td>
                     </tr>
@@ -156,7 +165,7 @@
                                 <div class="l_so_razon span4">
                                     <label class="record-label mpad" style="margin-left:0px">Razón</label>
                                     <select class="row-fluid select2 list_l_so_razon" id = "list_l_so_razon" data-field="list_l_so_razon">
-                                        {{#each razon_list}}
+                                        {{#each razon_list_edit}}
 							            <option value="{{@key}}" {{ifSelected @key
 							            	                                    ../ResumenProductos.leasing.razon_c}}>{{this}}</option>
 							            {{/each}}
@@ -165,7 +174,7 @@
                                 <div class="l_so_motivo span4">
                                     <label class="record-label mpad" style="margin-left:0px">Motivo</label>
                                     <select class="row-fluid select2 list_l_so_motivo" id = "list_l_so_motivo" data-field="list_l_so_motivo">
-                                        {{#each motivo_bloqueo_list}}
+                                        {{#each motivo_bloqueo_list_edit}}
 							            <option value="{{@key}}" {{ifSelected @key
 							            	                                    ../ResumenProductos.leasing.motivo_c}}>{{this}}</option>
 							            {{/each}}
@@ -238,7 +247,16 @@
                         <td width="33%">
                             <div class="fac_estatus_lm mpad ">
                                 <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
-                                {{#if ResumenProductos.factoring.status_management_c}}{{getUnifinListValue 'status_management_list' ResumenProductos.factoring.status_management_c}}{{/if}}
+                                {{getUnifinListValue 'status_management_list' ResumenProductos.factoring.status_management_c}}
+                            </div>
+                            <div class="fac_estatus_lm_edit mpad ">
+                                <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
+                                <select class="row-fluid select2 list_fac_estatus_lm" id="list_fac_estatus_lm" data-field="list_fac_estatus_lm">
+								    {{#each status_management_list_edit}}
+                                    <option value="{{@key}}" {{ifSelected @key
+                                                                            ../ResumenProductos.factoring.status_management_c}}>{{this}}</option>
+                                    {{/each}}
+                                </select>
                             </div>
                         </td>
                     </tr>
@@ -346,7 +364,7 @@
                                 <div class="f_so_razon span4">
                                     <label class="record-label mpad" style="margin-left:0px">Razón</label>
                                     <select class="row-fluid select2 list_f_razon_lm" id="list_f_razon_lm" data-field="list_f_razon_lm">
-                                        {{#each razon_list}}
+                                        {{#each razon_list_edit}}
 							            <option value="{{@key}}" {{ifSelected @key
 								                                            ../ResumenProductos.factoring.razon_c}}>{{this}}</option>
 							            {{/each}}
@@ -355,7 +373,7 @@
                                 <div class="f_so_motivo span4">
                                     <label class="record-label mpad" style="margin-left:0px">Motivo</label>
                                     <select class="row-fluid select2 list_f_so_motivo" id = "list_f_so_motivo" data-field="list_f_so_motivo">
-                                        {{#each motivo_bloqueo_list}}
+                                        {{#each motivo_bloqueo_list_edit}}
 						                <option value="{{@key}}" {{ifSelected @key
 						        	                                            ../ResumenProductos.factoring.motivo_c}}>{{this}}</option>
 						                {{/each}}
@@ -428,7 +446,16 @@
                         <td width="33%">
                             <div class="ca_estatus_lm mpad ">
                                 <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
-                                {{#if ResumenProductos.credito_auto.status_management_c}}{{getUnifinListValue 'status_management_list' ResumenProductos.credito_auto.status_management_c}}{{/if}}
+                                {{getUnifinListValue 'status_management_list' ResumenProductos.credito_auto.status_management_c}}
+                            </div>
+                            <div class="ca_estatus_lm_edit mpad ">
+                                <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>                                
+                                <select class="row-fluid select2 list_ca_estatus_lm" id="list_ca_estatus_lm" data-field="list_ca_estatus_lm">
+								    {{#each status_management_list_edit}}
+                                    <option value="{{@key}}" {{ifSelected @key
+                                                                            ../ResumenProductos.credito_auto.status_management_c}}>{{this}}</option>
+                                    {{/each}}
+                                </select>
                             </div>
                         </td>
                     </tr>
@@ -536,7 +563,7 @@
                                 <div class="ca_so_razon span4">
                                     <label class="record-label mpad" style="margin-left:0px">Razón</label>
                                     <select class="row-fluid select2 list_ca_so_razon" id = "list_ca_so_razon" data-field="list_ca_so_razon">
-                                        {{#each razon_list}}
+                                        {{#each razon_list_edit}}
 	    					        	<option value="{{@key}}" {{ifSelected @key
 		    				        	                                    	../ResumenProductos.credito_auto.razon_c}}>{{this}}</option>
 			    			        	{{/each}}
@@ -545,7 +572,7 @@
                                 <div class="ca_so_motivo span4">
                                     <label class="record-label mpad" style="margin-left:0px">Motivo</label>
                                     <select class="row-fluid select2 list_ca_so_motivo" id = "list_ca_so_motivo" data-field="list_ca_so_motivo">
-                                        {{#each motivo_bloqueo_list}}
+                                        {{#each motivo_bloqueo_list_edit}}
 						                <option value="{{@key}}" {{ifSelected @key
 						        	                                            ../ResumenProductos.credito_auto.motivo_c}}>{{this}}</option>
 						                {{/each}}
@@ -618,7 +645,16 @@
                         <td width="33%">
                             <div class="fe_estatus_lm mpad ">
                                 <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
-                                {{#if ResumenProductos.fleet.status_management_c}}{{getUnifinListValue 'status_management_list' ResumenProductos.fleet.status_management_c}}{{/if}}
+                                {{getUnifinListValue 'status_management_list' ResumenProductos.fleet.status_management_c}}
+                            </div>
+                            <div class="fe_estatus_lm_edit mpad ">
+                                <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
+                                <select class="row-fluid select2 list_fl_estatus_lm" id="list_fl_estatus_lm" data-field="list_fl_estatus_lm">
+								    {{#each status_management_list_edit}}
+                                    <option value="{{@key}}" {{ifSelected @key
+                                                                            ../ResumenProductos.fleet.status_management_c}}>{{this}}</option>
+                                    {{/each}}
+                                </select>
                             </div>
                         </td>
                     </tr>
@@ -726,7 +762,7 @@
                                 <div class="fl_so_razon span4">                            
                                     <label class="record-label mpad" style="margin-left:0px">Razón</label>
                                     <select class="row-fluid select2 list_fl_so_razon" id = "list_fl_so_razon" data-field="list_fl_so_razon">
-                                        {{#each razon_list}}
+                                        {{#each razon_list_edit}}
 						        	    <option value="{{@key}}" {{ifSelected @key
 						        	    	../ResumenProductos.fleet.razon_c}}>{{this}}</option>
 						        	    {{/each}}
@@ -735,7 +771,7 @@
                                 <div class="fl_so_motivo span4">
                                     <label class="record-label mpad" style="margin-left:0px">Motivo</label>
                                     <select class="row-fluid select2 list_fl_so_motivo" id = "list_fl_so_motivo" data-field="list_fl_so_motivo">
-                                        {{#each motivo_bloqueo_list}}
+                                        {{#each motivo_bloqueo_list_edit}}
 						        	    <option value="{{@key}}" {{ifSelected @key
 						        	    	../ResumenProductos.fleet.motivo_c}}>{{this}}</option>
 						        	    {{/each}}
@@ -808,7 +844,16 @@
                         <td width="33%">
                             <div class="uniclick_estatus_lm mpad ">
                                 <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
-                                {{#if ResumenProductos.uniclick.status_management_c}}{{getUnifinListValue 'status_management_list' ResumenProductos.uniclick.status_management_c}}{{/if}}
+                                {{getUnifinListValue 'status_management_list' ResumenProductos.uniclick.status_management_c}}
+                            </div>
+                            <div class="uniclick_estatus_lm_edit mpad ">
+                                <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
+                                <select class="row-fluid select2 list_u_estatus_lm" id="list_u_estatus_lm" data-field="list_u_estatus_lm">
+								{{#each status_management_list_edit}}
+                                <option value="{{@key}}" {{ifSelected @key
+                                                                        ../ResumenProductos.uniclick.status_management_c}}>{{this}}</option>
+                                {{/each}}
+                                </select>
                             </div>
                         </td>
                     </tr>
@@ -828,6 +873,7 @@
                                                         ../ResumenProductos.uniclick.canal_c}}>{{this}}</option>
 									{{/each}}
 								</select>
+                                </select>
                             </div>
                         </td>
                         <td width="33%"></td>
@@ -927,7 +973,7 @@
                                 <div class="u_so_razon span4">
                                     <label class="record-label mpad" style="margin-left:0px">Razón</label>
                                     <select class="row-fluid select2 list_u_so_razon" id = "list_u_so_razon" data-field="list_u_so_razon">
-                                        {{#each razon_list}}
+                                        {{#each razon_list_edit}}
 						        	    <option value="{{@key}}" {{ifSelected @key
 						        	    	../ResumenProductos.uniclick.razon_c}}>{{this}}</option>
 						        	    {{/each}}
@@ -936,7 +982,7 @@
                                 <div class="u_so_motivo span4 ">
                                     <label class="record-label mpad" style="margin-left:0px">Motivo</label>
                                     <select class="row-fluid select2 list_u_so_motivo" id = "list_u_so_motivo" data-field="list_u_so_motivo">
-                                        {{#each motivo_bloqueo_list}}
+                                        {{#each motivo_bloqueo_list_edit}}
 						        	    <option value="{{@key}}" {{ifSelected @key
 						        	    	../ResumenProductos.uniclick.motivo_c}}>{{this}}</option>
 						        	    {{/each}}

@@ -8,13 +8,14 @@ class clase_UniProducto
     public function func_UniProducto($bean = null, $event = null, $args = null)
     {
         $GLOBALS['log']->fatal("ACTUALIZA UNI PRODUCTOS CUSTOM ---- ");
-        //$GLOBALS['log']->fatal("Args", $bean);
         //Campo custom Uni Productos
         $actualizaLeasing = false;
         $actualizaFactoring = false;
         $actualizaCredAuto = false;
         $actualizaFleet = false;
         $actualizaUniclick = false;
+
+        $GLOBALS['log']->fatal("bean->",$bean->account_uni_productos);
 
         if ($GLOBALS['service']->platform != 'mobile') {
             $uniProducto = $bean->account_uni_productos;
@@ -37,7 +38,7 @@ class clase_UniProducto
                         $beanUP->canal_c = $key['canal_c'] != "" ? $key['canal_c'] : "";
                         $beanUP->multilinea_c = $key['multilinea_c'];
 
-                        //$GLOBALS['log']->fatal("bean->".$beanUP->status_management_c." - key->".$key['status_management_c']);
+                        $GLOBALS['log']->fatal("bean->".$beanUP->rechaza_noviable);
                         if(($beanUP->status_management_c != $key['status_management_c']) && ($beanUP->tipo_producto == $key['tipo_producto']) && $beanUP->tipo_producto == '1'){
                             $actualizaLeasing = true;
                         }
@@ -198,19 +199,19 @@ class clase_UniProducto
                         $beanUP = BeanFactory::retrieveBean('uni_Productos', $key['id'], array('disable_row_level_security' => true));
                         //$GLOBALS['log']->fatal("---notifi". $beanUP->tipo_producto);
                         if( $actualizaLeasing && $beanUP->tipo_producto == '1'){
-                            $this->notificaDirector($beanUP , $beanUP->tipo_producto, $bean->name , $bean_id);
+                            $this->notificaDirector($beanUP , $beanUP->tipo_producto, $bean->name , $bean->id);
                         }
                         if($actualizaFactoring  && $beanUP->tipo_producto == '4'){
-                            $this->notificaDirector($beanUP , $beanUP->tipo_producto, $bean->name, $bean_id);
+                            $this->notificaDirector($beanUP , $beanUP->tipo_producto, $bean->name, $bean->id);
                         }
                         if($actualizaCredAuto && $beanUP->tipo_producto == '3'){
-                            $this->notificaDirector($beanUP , $beanUP->tipo_producto, $bean->name, $bean_id);
+                            $this->notificaDirector($beanUP , $beanUP->tipo_producto, $bean->name, $bean->id);
                         }
                         if( $actualizaFleet && $beanUP->tipo_producto == '6'){
-                            $this->notificaDirector($beanUP , $beanUP->tipo_producto, $bean->name, $bean_id);
+                            $this->notificaDirector($beanUP , $beanUP->tipo_producto, $bean->name, $bean->id);
                         }
                         if($actualizaUniclick  && $beanUP->tipo_producto == '8'){
-                            $this->notificaDirector($beanUP , $beanUP->tipo_producto, $bean->name, $bean_id);
+                            $this->notificaDirector($beanUP , $beanUP->tipo_producto, $bean->name, $bean->id);
                         }
                     }
                 }
