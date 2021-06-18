@@ -7,6 +7,9 @@
     },
     initialize: function (options) {
         this._super('initialize', [options]);
+
+        this.model.addValidationTask('chk_condFinEmptyValues', _.bind(this.chk_condFinEmptyValues, this));
+
         this.jsonCFConfiguradas={
             "RequestId":"",//IdSolicitudCRM
             "OpportunitiesId": "",
@@ -606,7 +609,7 @@
                         title: "El n\u00FAmero ingresado no puede ser mayor al Valor Máximo",
                         autoClose: true
                     });
-                    $(e.currentTarget).val("")
+                    $(e.currentTarget).val("");
                     return false;
                 }
             }
@@ -618,7 +621,7 @@
                         title: "El n\u00FAmero ingresado está fuera del rango permitido",
                         autoClose: true
                     });
-                    $(e.currentTarget).val("")
+                    $(e.currentTarget).val("");
                     return false;
                 }
             }
@@ -629,6 +632,7 @@
             var indextd=$(e.currentTarget).closest('td').index();
             var valorCampoSuperior=$(e.currentTarget).closest('td').siblings().eq(indextd).find('input').val()
 
+            //Validación para rangos, no permitir introducir valores que no caen dentro de los rangos de política
             if(limite_superior!="" && valor!=""){
                 if(Number(valor) < Number(limite_inferior) || Number(valor) > Number(limite_superior) ){
                     app.alert.show("fueraRango", {
@@ -636,9 +640,26 @@
                         title: "El n\u00FAmero ingresado está fuera del rango permitido",
                         autoClose: true
                     });
-                    $(e.currentTarget).val("")
+                    $(e.currentTarget).val("");
                     return false;
     
+                }
+            }
+
+            //Validación para comparar el valor actual (valor máximo) vs el valor mínimo, para que el valor máximo no sea menor que el valor mínimo
+            var indexColumna=$(e.currentTarget).parent().index();
+            var valorMinimoIngresado=$(e.currentTarget).parent().siblings().eq(indexColumna-1).children().val();
+            if(valorMinimoIngresado!=""){
+                if(valor.length>=valorMinimoIngresado.length){//Aplicar validación solo si valor mínimo y valor máximo tienen el mismo número de dígitos
+                    if(Number(valor) < Number(valorMinimoIngresado)){
+                        app.alert.show("fueraRango", {
+                            level: "error",
+                            title: "El n\u00FAmero ingresado no puede ser menor al Valor Mínimo",
+                            autoClose: true
+                        });
+                        $(e.currentTarget).val("");
+                        return false;
+                    }
                 }
             }
         }
@@ -695,6 +716,51 @@
 
         return indiceEncontrado;
 
+    },
+
+    chk_condFinEmptyValues:function (fields, errors, callback){
+
+        if(this.model.get('cf_quantico_c')!=""){
+            var strJsonConfiguradas = JSON.parse(this.model.get('cf_quantico_c'));
+            if(strJsonConfiguradas.FinancialTermGroupResponseList.length>0){
+                var strMsjError="Es requerido llenar todos los campos de condiciones financieras:<br>";
+                for (var i = 0; i < strJsonConfiguradas.FinancialTermGroupResponseList.length; i++) {
+                    strMsjError+="<br><b>Condición "+i+"</b><br>";
+                    var listaCampos=strJsonConfiguradas.FinancialTermGroupResponseList[i].FinancialTermResponseList;
+                    for (var index = 0; index < listaCampos.length; index++) {
+                        if(listaCampos[index].Value.ValueMin!=undefined){
+                            if(listaCampos[index].Value.ValueMin==""){
+                                strMsjError+="Valor mínimo de columna "+listaCampos[index].Name+"<br>";
+                            }
+                        }
+                        if(listaCampos[index].Value.ValueMax!=undefined){
+                            if(listaCampos[index].Value.ValueMax==""){
+                                strMsjError+="Valor máximo de columna "+listaCampos[index].Name+"<br>";
+                            }
+
+                        }
+                        
+                    }
+                    
+                }
+
+                if(strMsjError.includes('Valor')){
+                    errors['condiciones_financieras_quantico_'] = errors['condiciones_financieras_quantico'] || {};
+                    errors['condiciones_financieras_quantico_'].required = true;
+                    $('.CFPoliticaQ').css('border-color', 'red');
+
+                    app.alert.show("CondicionFinancieraQuantico valores vacios", {
+                        level: "error",
+                        title: strMsjError,
+                        autoClose: false
+                    });
+
+                }
+
+            }
+        }
+        
+        callback(null, fields, errors);
     },
 
     bindDataChange: function () {

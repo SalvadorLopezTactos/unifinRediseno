@@ -1377,6 +1377,18 @@
                                 autoClose: false
                             });
                         }
+                    }else{
+
+                        errors[$(".addCondicionFinancieraQuantico")] = errors['addCondicionFinancieraQuantico'] || {};
+                        errors[$(".addCondicionFinancieraQuantico")].required = true;
+        
+                        $('.CFPoliticaQ').css('border-color', 'red');
+                        app.alert.show("CondicionFinancieraQuantico requerida", {
+                            level: "error",
+                            title: "Al menos una Condición Financiera es requerida.",
+                            autoClose: false
+                        });
+
                     }
                 }
             }
