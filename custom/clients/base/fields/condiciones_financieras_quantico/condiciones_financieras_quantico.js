@@ -457,7 +457,13 @@
     addNewCFConfigurada: function (e) {
 
         var indiceFilaClickada = $(e.currentTarget).parent().parent().index();
-        var filaPoliticaObtenida = self.mainRowsBodyTable[indiceFilaClickada];
+        var filaPoliticaObtenida="";
+        if(self.mainRowsBodyTable!=undefined){
+            filaPoliticaObtenida = self.mainRowsBodyTable[indiceFilaClickada];
+        }else{
+            filaPoliticaObtenida=this.mainRowsBodyTable[indiceFilaClickada];
+        }
+        
         this.mainRowsConfigBodyTable.push(filaPoliticaObtenida);
 
         if(this.model.get('cf_quantico_c')!=""){
