@@ -735,35 +735,45 @@
         if(this.model.get('cf_quantico_c')!="" && this.model.get('cf_quantico_c')!=undefined){
             var strJsonConfiguradas = JSON.parse(this.model.get('cf_quantico_c'));
             if(strJsonConfiguradas.FinancialTermGroupResponseList.length>0){
-                var strMsjError="Es requerido llenar todos los campos de condiciones financieras:<br>";
+                var strMsjErrorTitulo="Es requerido llenar todos los campos de condiciones financieras:<br>";
+                //var strMsjError="";
+                //var strMsjErrorCondicion="";
+                var arrayMsjCompleto=[];
                 for (var i = 0; i < strJsonConfiguradas.FinancialTermGroupResponseList.length; i++) {
-                    strMsjError+="<br><b>Condición Financiera Configurada "+(i+1)+"</b><br>";
+                    var strMsjError="<br><b>Condición Financiera Configurada "+(i+1)+"</b><br>";
                     var listaCampos=strJsonConfiguradas.FinancialTermGroupResponseList[i].FinancialTermResponseList;
+                    var arrayExistenVacios=[];
                     for (var index = 0; index < listaCampos.length; index++) {
                         if(listaCampos[index].Value.ValueMin!=undefined){
                             if(listaCampos[index].Value.ValueMin==""){
-                                strMsjError+="Valor mínimo de columna "+listaCampos[index].Name+"<br>";
+                                strMsjError+="-Valor mínimo de columna "+listaCampos[index].Name+"<br>";
+                                arrayExistenVacios.push('true');
                             }
                         }
                         if(listaCampos[index].Value.ValueMax!=undefined){
                             if(listaCampos[index].Value.ValueMax==""){
-                                strMsjError+="Valor máximo de columna "+listaCampos[index].Name+"<br>";
+                                strMsjError+="-Valor máximo de columna "+listaCampos[index].Name+"<br>";
+                                arrayExistenVacios.push('true');
                             }
 
                         }
-                        
+                    }
+                    //Checar si la condición financiera tiene valores vacíos para que, en caso de que no tenga valores vacíos,
+                    //se omite el titulo de la condición financiera del mensaje de error
+                    if(arrayExistenVacios.includes('true')){
+                        arrayMsjCompleto.push(strMsjError);
                     }
                     
                 }
 
-                if(strMsjError.includes('Valor')){
+                if(arrayMsjCompleto.length>0){
                     errors['condiciones_financieras_quantico_'] = errors['condiciones_financieras_quantico'] || {};
                     errors['condiciones_financieras_quantico_'].required = true;
                     $('.CFPoliticaQ').css('border-color', 'red');
 
                     app.alert.show("CondicionFinancieraQuantico valores vacios", {
                         level: "error",
-                        title: strMsjError,
+                        messages: strMsjErrorTitulo+arrayMsjCompleto.join(''),
                         autoClose: false
                     });
 
