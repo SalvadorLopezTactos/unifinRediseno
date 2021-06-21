@@ -159,7 +159,7 @@ class altaLeadServices extends SugarApi
         $users = [];
         /* Obetenemos el id del usuario de grupo de 9.- MKT*/
         $QueryId = "SELECT id from users
-            WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
+        WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
         $queryResultId = $db->query($QueryId);
         $row = $db->fetchByAssoc($queryResultId);
         $idMKT = $row['id'];
@@ -175,61 +175,94 @@ class altaLeadServices extends SugarApi
         $dateInput = date('H:i', strtotime($horaDia));
 
         /* Obtiene el ultimo  usuario asignado y registrado en el config*/
-        $query = "Select value from config  where name='last_assigned_user' ";
+        $query = "SELECT value from config  where name='last_assigned_user'";
         $result = $db->query($query);
         $row = $db->fetchByAssoc($result);
         $last_indice = $row['value'];
 		
-        if( strpos(strtoupper($id_landing_c), 'INSURANCE') !== false){
-            $subpuesto_c = 5;
-        }else{
-            if($compania_c == 1) $subpuesto_c = 3;
-		    if($compania_c == 2) $subpuesto_c = 4;
-        }
+        //VALIDACION DE REVISTA MEDICA
+        if ($id_landing_c != 'LP Revista Médica' && $id_landing_c != 'LP REVISTA MÉDICA') { 
 
-        $query_asesores = "SELECT
-  user.id,
-  user.date_entered,
-  count(lead.assigned_user_id) AS total_asignados,
-  uc.access_hours_c
-FROM users user
-  INNER JOIN users_cstm uc
-    ON uc.id_c = user.id
-  LEFT JOIN leads lead
-    ON lead.assigned_user_id = user.id
-where puestousuario_c='27' AND user.status = 'Active' AND subpuesto_c='$subpuesto_c'
-GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC";
-            
+            if( strpos(strtoupper($id_landing_c), 'INSURANCE') !== false){
+                $subpuesto_c = 5;
+            }else{
+                if($compania_c == 1) $subpuesto_c = 3;
+                if($compania_c == 2) $subpuesto_c = 4;
+            }
+
+            $query_asesores = "SELECT
+            user.id,
+            user.date_entered,
+            count(lead.assigned_user_id) AS total_asignados,
+            uc.access_hours_c
+            FROM users user
+            INNER JOIN users_cstm uc
+                ON uc.id_c = user.id
+            LEFT JOIN leads lead
+                ON lead.assigned_user_id = user.id
+            where puestousuario_c='27' AND user.status = 'Active' AND subpuesto_c='$subpuesto_c'
+            GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC";
+                
             $result_usr = $db->query($query_asesores);
-        //$usuarios=;
-        while ($row = $db->fetchByAssoc($result_usr)) {
-            $hours = json_decode($row['access_hours_c'], true);
-            $hoursIn = !empty($hours) ? $hours[$dia_semana]['entrada'] : "";
-			$hoursComida = !empty($hours) ? $hours[$dia_semana]['comida'] : "";
-			$hoursRegreso = !empty($hours) ? $hours[$dia_semana]['regreso'] : "";
-            $hoursOut = !empty($hours) ? $hours[$dia_semana]['salida'] : "";
-            if ($hoursIn != "" && $hoursOut != "") {
-                if (($hoursIn != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursOut != "Libre")) {
-                    $enable = $this->accessHours($hoursIn, $hoursComida, $hoursRegreso, $hoursOut, $dateInput);
-					if ($enable) {
+            //$usuarios=;
+            while ($row = $db->fetchByAssoc($result_usr)) {
+                $hours = json_decode($row['access_hours_c'], true);
+                $hoursIn = !empty($hours) ? $hours[$dia_semana]['entrada'] : "";
+                $hoursComida = !empty($hours) ? $hours[$dia_semana]['comida'] : "";
+                $hoursRegreso = !empty($hours) ? $hours[$dia_semana]['regreso'] : "";
+                $hoursOut = !empty($hours) ? $hours[$dia_semana]['salida'] : "";
+                if ($hoursIn != "" && $hoursOut != "") {
+                    if (($hoursIn != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursOut != "Libre")) {
+                        $enable = $this->accessHours($hoursIn, $hoursComida, $hoursRegreso, $hoursOut, $dateInput);
+                        if ($enable) {
+                            $users[] = $row['id'];
+                        }
+                    } elseif ($hoursIn == "Libre" && $hoursOut == "Libre") {
                         $users[] = $row['id'];
                     }
-                } elseif ($hoursIn == "Libre" && $hoursOut == "Libre") {
+                } /*else {
                     $users[] = $row['id'];
-                }
-            } /*else {
-                $users[] = $row['id'];
-            }*/
-        }
-        //$GLOBALS['log']->fatal("Usuarios MKT en servicio alta Leads  " . print_r($users, true));
+                }*/
+            }
+            //$GLOBALS['log']->fatal("Usuarios MKT en servicio alta Leads  " . print_r($users, true));
 
-        if (count($users) > 0) {
-            $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
-            $new_assigned_user = $users[$new_indice];
+            if (count($users) > 0) {
+                $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
+                $new_assigned_user = $users[$new_indice];
+                
+            } else {
+                /* No existen usuarios disponibles y se asigna a  9.- MKT " */
+                $new_assigned_user = $idMKT;
+            }
+
         } else {
-            /* No existen usuarios disponibles y se asigna a  9.- MKT " */
-            $new_assigned_user = $idMKT;
+
+            //USUARIOS QUE TIENEN EL EQUIPO PRINCIPAL UNICS 7 SE LEAS ASIGNA LEADS - REVISTA MEDICA
+            $query_revista = "SELECT
+            user.id,
+            user.date_entered,
+            count(lead.assigned_user_id) AS total_asignados,
+            uc.access_hours_c
+            FROM users user
+            INNER JOIN users_cstm uc
+                ON uc.id_c = user.id
+            LEFT JOIN leads lead
+                ON lead.assigned_user_id = user.id
+            WHERE user.status = 'Active' AND equipo_c = 7
+            GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC
+            LIMIT 1";
+                
+            $result_rm = $db->query($query_revista);
+            $conteo = $result_rm->num_rows;
+            
+            if ($conteo > 0) {
+                while ($row = $db->fetchByAssoc($result_rm)) {
+
+                    $new_assigned_user = $row['id'];
+                }
+            }
         }
+
 
         if ($regimenFiscal != "3") {
 
