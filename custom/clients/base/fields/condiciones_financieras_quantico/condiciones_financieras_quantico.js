@@ -61,6 +61,20 @@
                 }
             };
         }
+	if(tipoDato=="RangoDecimal"){
+            jsonRespuesta={
+                "Id":"",
+                "Name":"",
+                "DataType":{
+                    "Id":11,
+                    "Name":"RangoDecimal",
+                },
+                "Value": {
+                    "ValueMin": "",
+                    "ValueMax": ""
+                }
+            };
+        }
 
         if(tipoDato=="Rango Entero"){
             jsonRespuesta={
@@ -114,6 +128,21 @@
                 }
             }
         }
+	
+	if(tipoDato=="Numérico"){
+            jsonRespuesta={
+                "Id": "",
+                "Name": "",
+                "DataType": {
+                    "Id": 2,
+                    "Name": "Numérico"
+                },
+                "Value": {
+                    "Value": ""
+                }
+            }
+        }
+
 
         return jsonRespuesta;
 
@@ -519,6 +548,15 @@
                 objetoCheckBox.Id=elemento.children('input[type="checkbox"]').attr('data-id-nodo');
                 objetoCheckBox.Value.Value=valorJsonChk;
                 objetoTermResponseList.push(objetoCheckBox);
+            }else if(elemento.children('input[type="text"]').length>0 && elemento.children('input[type="text"]').attr('data-info')=='input'){
+                //Definición para campos númerico
+                var objetoNumerico=this.setPlantillasJSON(elemento.children('input[type="text"]').attr('data-name'));
+                objetoNumerico.Name=elemento.children('input[type="text"]').attr('data-columna');
+                objetoNumerico.Id=elemento.children('input[type="text"]').attr('data-id-nodo');
+                objetoNumerico.Value.Value=elemento.children('input[type="text"]').val();
+                
+                objetoTermResponseList.push(objetoNumerico);
+
             }
             
         }
