@@ -173,7 +173,7 @@
                                         // Comprobando los id 4,5,9 y 11 para colocar doble campo, que son los de rango (2 inputs)
                                         if (arrayRespuesta[i].DataType.Id == '4' || arrayRespuesta[i].DataType.Id == '5' || arrayRespuesta[i].DataType.Id == '9' || arrayRespuesta[i].DataType.Id == '11') {
                                             objHeader['dobleCampo'] = '1';
-                                            self.bodyTable.push();
+                                            //self.bodyTable.push();
                                         } else {
                                             objHeader['dobleCampo'] = '';
                                         }
@@ -236,7 +236,7 @@
                                             self.bodyTable.push({ 'select': '1', 'text': '', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'valoresCatalogo': valores_select_obj, 'valorSelected': valorSelected });
                                         } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '1') {//Check
                                             var strChecked = "";
-                                            var valorBoolean = arrayRespuesta.FinancialTermResponseList[11].Value.Value;
+                                            var valorBoolean = arrayRespuesta.FinancialTermResponseList[i].Value.Value;
                                             if (valorBoolean == "True") {
                                                 strChecked = 'checked'
                                             }
@@ -342,7 +342,7 @@
                             self.bodyTable.push({ 'select': '1', 'text': '', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'valoresCatalogo': valores_select_obj, 'valorSelected': valorSelected });
                         } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '1') {//Check
                             var strChecked = "";
-                            var valorBoolean = arrayRespuesta.FinancialTermResponseList[11].Value.Value;
+                            var valorBoolean = arrayRespuesta.FinancialTermResponseList[i].Value.Value;
                             if (valorBoolean == "True") {
                                 strChecked = 'checked'
                             }
@@ -435,7 +435,7 @@
                             self.bodyTable.push({ 'select': '1', 'text': '', 'checkbox': '','nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'valoresCatalogo': valores_select_obj, 'valorSelected': valorSelected });
                         } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '1') {//Check
                             var strChecked = "";
-                            var valorBoolean = arrayRespuesta.FinancialTermResponseList[11].Value.Value;
+                            var valorBoolean = arrayRespuesta.FinancialTermResponseList[i].Value.Value;
                             if (valorBoolean == "True") {
                                 strChecked = 'checked'
                             }
