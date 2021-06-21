@@ -540,6 +540,7 @@
     updateJsonCFConfiguradas:function(e){
         var indexCampo = $(e.currentTarget).parent().parent().index();
         var valorBuscado=$(e.currentTarget).attr('data-columna');
+        var inferiorOsuperior=$(e.currentTarget).attr('data-tipo-campo');
         if(self.jsonCFConfiguradas==undefined){
             self.jsonCFConfiguradas=this.jsonCFConfiguradas;
         }
@@ -550,7 +551,7 @@
             self.jsonCFConfiguradas=JSON.parse(this.model.get('cf_quantico_c'));
         }
         var indiceEncontrado=this.searchIndexForUpdate(valorBuscado,self.jsonCFConfiguradas.FinancialTermGroupResponseList[indexCampo]);
-        var indexForUpdateJsonToHbs=this.searchIndexForUpdateMainRowsConfigBodyTable(valorBuscado,self.mainRowsConfigBodyTable[indexCampo]);
+        var indexForUpdateJsonToHbs=this.searchIndexForUpdateMainRowsConfigBodyTable(valorBuscado,self.mainRowsConfigBodyTable[indexCampo],inferiorOsuperior);
 
         //Se valida el tipo de campo para saber el valor sobre el que se debe de actualizar
         var tipoCampo=$(e.currentTarget).attr('data-tipo-campo');
@@ -565,6 +566,10 @@
             
             //Se actualiza el objeto json que se dibuja en el hbs
             self.mainRowsConfigBodyTable[indexCampo].bodyTable[indexForUpdateJsonToHbs].rangoInferior=$(e.currentTarget).val();
+            if($(e.currentTarget).val()==""){
+                self.mainRowsConfigBodyTable[indexCampo].bodyTable[indexForUpdateJsonToHbs].actualizadoPorUsuarioPermiteVacio="true";
+            }
+            
 
         }else if(tipoCampo=="inputSuperior"){
             self.jsonCFConfiguradas.FinancialTermGroupResponseList[indexCampo].FinancialTermResponseList[indiceEncontrado].Value.ValueMax=$(e.currentTarget).val();
@@ -705,8 +710,9 @@
         return indiceEncontrado;
     },
 
-    searchIndexForUpdateMainRowsConfigBodyTable:function(valor,arreglo){
+    searchIndexForUpdateMainRowsConfigBodyTable:function(valor,arreglo,inferiorOsuperior){
         var indiceEncontrado="";
+        
         for (var i = 0; i < arreglo.bodyTable.length; i++) {
             if(arreglo.bodyTable[i].nombreColumna==valor){
                 indiceEncontrado=i;
@@ -714,12 +720,16 @@
                 if(arreglo.bodyTable[i].text=="1"){
                     //Buscar si el limite inferior, en este caso se regresa la primera ocurrencia dentro del arreglo
                     //pero si es limite superior, se regresa la segunda ocurrencia
-                    if(arreglo.bodyTable[i].rangoInferior=="0"){
-                        indiceEncontrado=i;
-                    }else{
-                        //En este caso se regresa el índice con una unidad más, ya que en este caso se considera que representa a un campo de rango superior
-                        indiceEncontrado=i+1;
+                    if(inferiorOsuperior !=undefined){
+                        if(inferiorOsuperior=="inputInferior"){
+                            indiceEncontrado=i;
+                        }else{
+                            //En este caso se regresa el índice con una unidad más, ya que en este caso se considera que representa a un campo de rango superior
+                            indiceEncontrado=i+1;
+                        }
+
                     }
+                    
                 }
                 //Se actualiza el indice para romper el loop
                 i=arreglo.bodyTable.length;
