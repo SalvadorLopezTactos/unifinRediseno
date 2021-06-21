@@ -181,7 +181,7 @@ class altaLeadServices extends SugarApi
         $last_indice = $row['value'];
 		
         //VALIDACION DE REVISTA MEDICA
-        if ($id_landing_c != 'LP REVISTA MÉDICA') { 
+        if ($id_landing_c != 'LP Revista Médica' && $id_landing_c != 'LP REVISTA MÉDICA') { 
 
             if( strpos(strtoupper($id_landing_c), 'INSURANCE') !== false){
                 $subpuesto_c = 5;
