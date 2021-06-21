@@ -173,7 +173,7 @@
                                         // Comprobando los id 4,5,9 y 11 para colocar doble campo, que son los de rango (2 inputs)
                                         if (arrayRespuesta[i].DataType.Id == '4' || arrayRespuesta[i].DataType.Id == '5' || arrayRespuesta[i].DataType.Id == '9' || arrayRespuesta[i].DataType.Id == '11') {
                                             objHeader['dobleCampo'] = '1';
-                                            self.bodyTable.push();
+                                            //self.bodyTable.push();
                                         } else {
                                             objHeader['dobleCampo'] = '';
                                         }
@@ -223,6 +223,7 @@
                                         } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '7') {//Catálogo
                                             //Obteniendo los valores de la lista
                                             var nombre_lista = arrayRespuesta.FinancialTermResponseList[i].Name;
+                                            nombre_lista=nombre_lista.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                                             //Obteniendo el mapeo desde la lista
                                             var lista_valores = App.lang.getAppListStrings('mapeo_nombre_attr_cf_quantico_list')[nombre_lista];
                                             var valores_select = data['listaValores'][lista_valores];
@@ -236,13 +237,13 @@
                                             self.bodyTable.push({ 'select': '1', 'text': '', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'valoresCatalogo': valores_select_obj, 'valorSelected': valorSelected });
                                         } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '1') {//Check
                                             var strChecked = "";
-                                            var valorBoolean = arrayRespuesta.FinancialTermResponseList[11].Value.Value;
+                                            var valorBoolean = arrayRespuesta.FinancialTermResponseList[i].Value.Value;
                                             if (valorBoolean == "True") {
                                                 strChecked = 'checked'
                                             }
                                             self.bodyTable.push({ 'select': '', 'text': '', 'checkbox': '1','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, "checked": strChecked });
                                         } else {// Solo 1 Text
-                                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name });
+                                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name,"valorCampo": arrayRespuesta.FinancialTermResponseList[i].Value.Value});
                                         }
                                     }
                                     self.mainRowsBodyTable.push({ 'bodyTable': self.bodyTable });
@@ -279,7 +280,7 @@
                         // Comprobando los id 4,5,9 y 11 para colocar doble campo, que son los de rango (2 inputs)
                         if (arrayRespuesta[i].DataType.Id == '4' || arrayRespuesta[i].DataType.Id == '5' || arrayRespuesta[i].DataType.Id == '9' || arrayRespuesta[i].DataType.Id == '11') {
                             objHeader['dobleCampo'] = '1';
-                            self.bodyTable.push();
+                            //self.bodyTable.push();
                         } else {
                             objHeader['dobleCampo'] = '';
                         }
@@ -329,6 +330,7 @@
                         } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '7') {//Catálogo
                             //Obteniendo los valores de la lista
                             var nombre_lista = arrayRespuesta.FinancialTermResponseList[i].Name;
+                            nombre_lista=nombre_lista.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                             //Obteniendo el mapeo desde la lista
                             var lista_valores = App.lang.getAppListStrings('mapeo_nombre_attr_cf_quantico_list')[nombre_lista];
                             var valores_select = data['listaValores'][lista_valores];
@@ -342,13 +344,13 @@
                             self.bodyTable.push({ 'select': '1', 'text': '', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'valoresCatalogo': valores_select_obj, 'valorSelected': valorSelected });
                         } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '1') {//Check
                             var strChecked = "";
-                            var valorBoolean = arrayRespuesta.FinancialTermResponseList[11].Value.Value;
+                            var valorBoolean = arrayRespuesta.FinancialTermResponseList[i].Value.Value;
                             if (valorBoolean == "True") {
                                 strChecked = 'checked'
                             }
                             self.bodyTable.push({ 'select': '', 'text': '', 'checkbox': '1','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, "checked": strChecked });
                         } else {// Solo 1 Text
-                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name });
+                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name,"valorCampo": arrayRespuesta.FinancialTermResponseList[i].Value.Value });
                         }
                     }
                     self.mainRowsBodyTable.push({ 'bodyTable': self.bodyTable });
@@ -422,6 +424,7 @@
                         } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '7') {//Catálogo
                             //Obteniendo los valores de la lista
                             var nombre_lista = arrayRespuesta.FinancialTermResponseList[i].Name;
+                            nombre_lista=nombre_lista.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                             //Obteniendo el mapeo desde la lista
                             var lista_valores = App.lang.getAppListStrings('mapeo_nombre_attr_cf_quantico_list')[nombre_lista];
                             var valores_select = data['listaValores'][lista_valores];
@@ -435,13 +438,13 @@
                             self.bodyTable.push({ 'select': '1', 'text': '', 'checkbox': '','nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'valoresCatalogo': valores_select_obj, 'valorSelected': valorSelected });
                         } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '1') {//Check
                             var strChecked = "";
-                            var valorBoolean = arrayRespuesta.FinancialTermResponseList[11].Value.Value;
+                            var valorBoolean = arrayRespuesta.FinancialTermResponseList[i].Value.Value;
                             if (valorBoolean == "True") {
                                 strChecked = 'checked'
                             }
                             self.bodyTable.push({ 'select': '', 'text': '', 'checkbox': '1','nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, "checked": strChecked });
                         } else {// Solo 1 Text
-                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name });
+                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name,"valorCampo": arrayRespuesta.FinancialTermResponseList[i].Value.Value });
                         }
                     }
                     self.mainRowsConfigBodyTable.push({ 'bodyTable': self.bodyTable });
@@ -594,6 +597,10 @@
             self.jsonCFConfiguradas.FinancialTermGroupResponseList[indexCampo].FinancialTermResponseList[indiceEncontrado].Value.Value=valorSet;
 
 
+        }else if(tipoCampo="input"){
+            self.jsonCFConfiguradas.FinancialTermGroupResponseList[indexCampo].FinancialTermResponseList[indiceEncontrado].Value.Value=$(e.currentTarget).val();
+             //Se actualiza el objeto json que se dibuja en el hbs
+             self.mainRowsConfigBodyTable[indexCampo].bodyTable[indexForUpdateJsonToHbs].valorCampo=$(e.currentTarget).val();
         }
 
         var jsonStringConfiguradas=JSON.stringify(self.jsonCFConfiguradas);
