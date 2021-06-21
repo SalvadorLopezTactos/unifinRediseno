@@ -223,6 +223,7 @@
                                         } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '7') {//Catálogo
                                             //Obteniendo los valores de la lista
                                             var nombre_lista = arrayRespuesta.FinancialTermResponseList[i].Name;
+                                            nombre_lista=nombre_lista.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                                             //Obteniendo el mapeo desde la lista
                                             var lista_valores = App.lang.getAppListStrings('mapeo_nombre_attr_cf_quantico_list')[nombre_lista];
                                             var valores_select = data['listaValores'][lista_valores];
@@ -329,6 +330,7 @@
                         } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '7') {//Catálogo
                             //Obteniendo los valores de la lista
                             var nombre_lista = arrayRespuesta.FinancialTermResponseList[i].Name;
+                            nombre_lista=nombre_lista.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                             //Obteniendo el mapeo desde la lista
                             var lista_valores = App.lang.getAppListStrings('mapeo_nombre_attr_cf_quantico_list')[nombre_lista];
                             var valores_select = data['listaValores'][lista_valores];
@@ -422,6 +424,7 @@
                         } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '7') {//Catálogo
                             //Obteniendo los valores de la lista
                             var nombre_lista = arrayRespuesta.FinancialTermResponseList[i].Name;
+                            nombre_lista=nombre_lista.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                             //Obteniendo el mapeo desde la lista
                             var lista_valores = App.lang.getAppListStrings('mapeo_nombre_attr_cf_quantico_list')[nombre_lista];
                             var valores_select = data['listaValores'][lista_valores];
