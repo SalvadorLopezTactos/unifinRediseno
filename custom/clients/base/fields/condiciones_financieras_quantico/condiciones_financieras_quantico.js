@@ -242,7 +242,7 @@
                                             }
                                             self.bodyTable.push({ 'select': '', 'text': '', 'checkbox': '1','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, "checked": strChecked });
                                         } else {// Solo 1 Text
-                                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name });
+                                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name,"valorCampo": arrayRespuesta.FinancialTermResponseList[i].Value.Value});
                                         }
                                     }
                                     self.mainRowsBodyTable.push({ 'bodyTable': self.bodyTable });
@@ -279,7 +279,7 @@
                         // Comprobando los id 4,5,9 y 11 para colocar doble campo, que son los de rango (2 inputs)
                         if (arrayRespuesta[i].DataType.Id == '4' || arrayRespuesta[i].DataType.Id == '5' || arrayRespuesta[i].DataType.Id == '9' || arrayRespuesta[i].DataType.Id == '11') {
                             objHeader['dobleCampo'] = '1';
-                            self.bodyTable.push();
+                            //self.bodyTable.push();
                         } else {
                             objHeader['dobleCampo'] = '';
                         }
@@ -348,7 +348,7 @@
                             }
                             self.bodyTable.push({ 'select': '', 'text': '', 'checkbox': '1','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, "checked": strChecked });
                         } else {// Solo 1 Text
-                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name });
+                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name,"valorCampo": arrayRespuesta.FinancialTermResponseList[i].Value.Value });
                         }
                     }
                     self.mainRowsBodyTable.push({ 'bodyTable': self.bodyTable });
@@ -441,7 +441,7 @@
                             }
                             self.bodyTable.push({ 'select': '', 'text': '', 'checkbox': '1','nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, "checked": strChecked });
                         } else {// Solo 1 Text
-                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name });
+                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name,"valorCampo": arrayRespuesta.FinancialTermResponseList[i].Value.Value });
                         }
                     }
                     self.mainRowsConfigBodyTable.push({ 'bodyTable': self.bodyTable });
@@ -594,6 +594,10 @@
             self.jsonCFConfiguradas.FinancialTermGroupResponseList[indexCampo].FinancialTermResponseList[indiceEncontrado].Value.Value=valorSet;
 
 
+        }else if(tipoCampo="input"){
+            self.jsonCFConfiguradas.FinancialTermGroupResponseList[indexCampo].FinancialTermResponseList[indiceEncontrado].Value.Value=$(e.currentTarget).val();
+             //Se actualiza el objeto json que se dibuja en el hbs
+             self.mainRowsConfigBodyTable[indexCampo].bodyTable[indexForUpdateJsonToHbs].valorCampo=$(e.currentTarget).val();
         }
 
         var jsonStringConfiguradas=JSON.stringify(self.jsonCFConfiguradas);
