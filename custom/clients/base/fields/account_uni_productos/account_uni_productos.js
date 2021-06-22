@@ -301,6 +301,9 @@
             cont_uni_p.dependenciasFleet(); //FUNCION DE DEPENDENCIA DE CAMPOS FLEET
             cont_uni_p.dependenciasUniclick(); //FUNCION DE DEPENDENCIA DE CAMPOS UNICLICK
 
+            cont_uni_p.buscaRazon(); 
+            cont_uni_p.buscaMotivo(); 
+            
             cont_uni_p.noeditables();  //FUNCION PARA CAMPOS NO EDITABLES
 
         } catch (err) {
@@ -1537,9 +1540,6 @@
     //Carga Condiciones 
     carga_condiciones: function () {
         cont_uni_p.datacondiciones = [];
-        cont_uni_p.datacondicion4 = [];
-        cont_uni_p.datacondicion5 = [];
-        
         var url = app.api.buildURL('tct4_Condiciones/');
         app.api.call('GET',url, null, {
 			success: _.bind(function (data) {
@@ -1547,23 +1547,7 @@
 					cont_uni_p.datacondiciones = data;
                     pba_razon_list = app.lang.getAppListStrings('razon_list');
                     pba_motivo_bloqueo_list = app.lang.getAppListStrings('motivo_bloqueo_list');
-                    aux1 = [];
-                    aux2 = [];
-                    var j=0;
-                    var k=0;
-                    
-                    for(var i = 0; i < cont_uni_p.datacondiciones.records.length; i++) {
-                        if(cont_uni_p.datacondiciones.records[i].condicion == '4'){
-                            cont_uni_p.datacondicion4[j] = cont_uni_p.datacondiciones.records[i];
-                            j++;
-                        }
-                        if(cont_uni_p.datacondiciones.records[i].condicion == '5'){
-                            cont_uni_p.datacondicion5[k] = cont_uni_p.datacondiciones.records[i];
-                            k++;
-                        }
-                    }
-                    console.log(cont_uni_p.datacondicion4);
-                    console.log(cont_uni_p.datacondicion5);
+                   
 				}
 			}, cont_uni_p),
             error: function (e) {
@@ -1573,87 +1557,116 @@
 	},
 
     buscaRazon:function (tipoProducto) {
-        var j =0;
-        var aux1 = [];
-        cont_uni_p.datacondicion4relacion = [];
-        cont_uni_p.datarazon4 = [];
-        cont_uni_p.datacondicion5relacion = [];
-        cont_uni_p.datarazon5 = [];
+                
+        cont_uni_p.datarazones = {};
 
-        /*for(var i = 0; i < cont_uni_p.datacondicion4.records.length; i++) {
-            if($("#list_l_estatus_lm")[0].value == cont_uni_p.datacondiciones.records[i].condicion ) {
-            }
+        switch (tipoProducto) {
+            case "1": //Leasing
+                document.getElementById("list_l_so_razon").options.length=0;
+                document.getElementById("list_l_so_razon").innerHTML = "";
+                document.getElementById("list_l_so_razon").selectedIndex = "-1"
+                break;
+            case "4": //Factoraje
+                document.getElementById("list_f_razon_lm").options.length=0;
+                document.getElementById("list_f_razon_lm").innerHTML = "";
+                document.getElementById("list_f_razon_lm").selectedIndex = "-1"
+                break;
+            case "3": //Credito-auto
+                document.getElementById("list_ca_so_razon").options.length=0;
+                document.getElementById("list_ca_so_razon").innerHTML = "";
+                document.getElementById("list_ca_so_razon").selectedIndex = "-1"
+                break;
+            case "6": //Fleet
+                document.getElementById("list_fl_so_razon").options.length=0;
+                document.getElementById("list_fl_so_razon").innerHTML = "";
+                document.getElementById("list_fl_so_razon").selectedIndex = "-1"
+                break;
+            case "8": //Uniclick
+                document.getElementById("list_u_so_razon").options.length=0;
+                document.getElementById("list_u_so_razon").innerHTML = "";
+                document.getElementById("list_u_so_razon").selectedIndex = "-1"
+                break;
         }
-*/
-        
-		for(var i = 0; i < cont_uni_p.datacondiciones.records.length; i++) {
-            switch (tipoProducto) {
-                case "1": //Leasing
-                    if($("#list_l_estatus_lm")[0].value == cont_uni_p.datacondiciones.records[i].condicion ) {
-                        //document.getElementById("list_l_so_razon").options[j]=new Option(app.lang.getAppListStrings('razon_list')[cont_uni_p.datacondiciones.records[i].razon],cont_uni_p.datacondiciones.records[i].razon);  
-                        j++;
-                    }
-                    break;
-                case "4": //Factoraje
-                    if($("#list_fac_estatus_lm")[0].value == cont_uni_p.datacondiciones.records[i].condicion ) {
-                        //document.getElementById("list_f_razon_lm").options[j]=new Option(app.lang.getAppListStrings('razon_list')[cont_uni_p.datacondiciones.records[i].razon],cont_uni_p.datacondiciones.records[i].razon);   
-                        j++;
-                    }
-                    break;
-                case "3": //Credito-auto
-                    if($("#list_ca_estatus_lm")[0].value == cont_uni_p.datacondiciones.records[i].razon) {
-                        //document.getElementById("list_ca_so_razon").options[j]=new Option(app.lang.getAppListStrings('razon_list')[cont_uni_p.datacondiciones.records[i].razon],cont_uni_p.datacondiciones.records[i].razon);   
-                        j++;
-                    }
-                    break;
-                case "6": //Fleet
-                    if($("#list_fl_estatus_lm")[0].value == cont_uni_p.datacondiciones.records[i].razon ) {
-                        //document.getElementById("list_fl_so_razon").options[j]=new Option(app.lang.getAppListStrings('razon_list')[cont_uni_p.datacondiciones.records[i].razon],cont_uni_p.datacondiciones.records[i].razon);   
-                        j++;
-                    }
-                    break;
-                case "8": //Uniclick
-                    if($("#list_u_estatus_lm")[0].value == cont_uni_p.datacondiciones.records[i].razon) {    
-                        //document.getElementById("list_u_so_razon").options[j]=new Option(app.lang.getAppListStrings('razon_list')[cont_uni_p.datacondiciones.records[i].razon],cont_uni_p.datacondiciones.records[i].razon);   
-                        j++;
-                    }
-                    break;
-            }
-		}
+        var seleccionado = -1;
         for(var i = 0; i < cont_uni_p.datacondiciones.records.length; i++) {
             switch (tipoProducto) {
                 case "1": //Leasing
                     if($("#list_l_estatus_lm")[0].value == cont_uni_p.datacondiciones.records[i].condicion ) {
-                        document.getElementById("list_l_so_razon").options[j]=new Option(app.lang.getAppListStrings('razon_list')[cont_uni_p.datacondiciones.records[i].razon],cont_uni_p.datacondiciones.records[i].razon);  
-                        j++;
+                        cont_uni_p.datarazones[cont_uni_p.datacondiciones.records[i].razon] = app.lang.getAppListStrings('razon_list')[cont_uni_p.datacondiciones.records[i].razon];
                     }
                     break;
                 case "4": //Factoraje
                     if($("#list_fac_estatus_lm")[0].value == cont_uni_p.datacondiciones.records[i].condicion ) {
-                        document.getElementById("list_f_razon_lm").options[j]=new Option(app.lang.getAppListStrings('razon_list')[cont_uni_p.datacondiciones.records[i].razon],cont_uni_p.datacondiciones.records[i].razon);   
-                        j++;
+                        cont_uni_p.datarazones[cont_uni_p.datacondiciones.records[i].razon] = app.lang.getAppListStrings('razon_list')[cont_uni_p.datacondiciones.records[i].razon];
                     }
                     break;
                 case "3": //Credito-auto
                     if($("#list_ca_estatus_lm")[0].value == cont_uni_p.datacondiciones.records[i].razon) {
-                        document.getElementById("list_ca_so_razon").options[j]=new Option(app.lang.getAppListStrings('razon_list')[cont_uni_p.datacondiciones.records[i].razon],cont_uni_p.datacondiciones.records[i].razon);   
-                        j++;
+                        cont_uni_p.datarazones[cont_uni_p.datacondiciones.records[i].razon] = app.lang.getAppListStrings('razon_list')[cont_uni_p.datacondiciones.records[i].razon];
                     }
                     break;
                 case "6": //Fleet
                     if($("#list_fl_estatus_lm")[0].value == cont_uni_p.datacondiciones.records[i].razon ) {
-                        document.getElementById("list_fl_so_razon").options[j]=new Option(app.lang.getAppListStrings('razon_list')[cont_uni_p.datacondiciones.records[i].razon],cont_uni_p.datacondiciones.records[i].razon);   
-                        j++;
+                        cont_uni_p.datarazones[cont_uni_p.datacondiciones.records[i].razon] = app.lang.getAppListStrings('razon_list')[cont_uni_p.datacondiciones.records[i].razon];
                     }
                     break;
                 case "8": //Uniclick
                     if($("#list_u_estatus_lm")[0].value == cont_uni_p.datacondiciones.records[i].razon) {    
-                        document.getElementById("list_u_so_razon").options[j]=new Option(app.lang.getAppListStrings('razon_list')[cont_uni_p.datacondiciones.records[i].razon],cont_uni_p.datacondiciones.records[i].razon);   
-                        j++;
+                        cont_uni_p.datarazones[cont_uni_p.datacondiciones.records[i].razon] = app.lang.getAppListStrings('razon_list')[cont_uni_p.datacondiciones.records[i].razon];
                     }
                     break;
             }
 		}
+        
+        var i =0;
+        _.each(cont_uni_p.datarazones, function (value, key) {
+            switch (tipoProducto) {
+                case "1": //Leasing Object.keys(obj)
+                    document.getElementById("list_l_so_razon").options[i]=new Option(value,key);
+                    if(i == 0){seleccionado = key} 
+                    i++;
+                    break;
+                case "4": //Factoraje
+                    document.getElementById("list_f_razon_lm").options[i]=new Option(value,key); 
+                    if(i == 0){seleccionado = key}
+                    i++;
+                    break;
+                case "3": //Credito-auto
+                    document.getElementById("list_ca_so_razon").options[i]=new Option(value,key); 
+                    if(i == 0){seleccionado = key}
+                    i++;
+                    break;
+                case "6": //Fleet
+                    document.getElementById("list_fl_so_razon").options[i]=new Option(value,key);  
+                    if(i == 0){seleccionado = key}
+                    i++; 
+                    break;
+                case "8": //Uniclick
+                    document.getElementById("list_u_so_razon").options[i]=new Option(value,key);
+                    if(i == 0){seleccionado = key}
+                    i++;
+                    break;
+            }
+		});
+        
+        switch (tipoProducto) {
+            case "1": //Leasing
+                document.getElementById("list_l_so_razon").selectedIndex = "1";
+                break;
+            case "4": //Factoraje
+                document.getElementById("list_f_razon_lm").selectedIndex = "1";
+                break;
+            case "3": //Credito-auto
+                document.getElementById("list_ca_so_razon").selectedIndex = "1";
+                break;
+            case "6": //Fleet
+                document.getElementById("list_fl_so_razon").selectedIndex = "1";
+                break;
+            case "8": //Uniclick
+                document.getElementById("list_u_so_razon").selectedIndex = "1";
+                break;
+        }
+        //console.log(cont_uni_p.datarazones);
     },
 
     buscaMotivo:function (tipoProducto) {
@@ -1663,6 +1676,7 @@
         //document.getElementById("list_ca_so_motivo").options.length=0;
         //document.getElementById("list_fl_so_motivo").options.length=0;
         //document.getElementById("list_u_so_motivo").options.length=0;
+        cont_uni_p.datamotivos = {};
 
         var j =0;
         
@@ -1671,30 +1685,35 @@
                 case "1": //Leasing
                     if($("#list_l_so_razon")[0].value == cont_uni_p.datacondiciones.records[i].razon && cont_uni_p.datacondiciones.records[i].razon) {
                         document.getElementById("list_l_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);  
+                        cont_uni_p.datamotivos[cont_uni_p.datacondiciones.records[i].motivo] = app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo];
                         j++;
                     }
                     break;
                 case "4": //Factoraje
-                    if($("#list_f_razon_lm")[0].value == cont_uni_p.datacondiciones.records[i].razon && cont_uni_p.datacondiciones.records[i].motivo) {
+                    if($("#list_f_razon_lm")[0].value == cont_uni_p.datacondiciones.records[i].razon && cont_uni_p.datacondiciones.records[i].razon) {
                         document.getElementById("list_f_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
+                        cont_uni_p.datamotivos[cont_uni_p.datacondiciones.records[i].motivo] = app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo];
                         j++;
                     }
                     break;
                 case "3": //Credito-auto
-                    if($("#list_ca_so_razon")[0].value == cont_uni_p.datacondiciones.records[i].razon && cont_uni_p.datacondiciones.records[i].motivo) {
+                    if($("#list_ca_so_razon")[0].value == cont_uni_p.datacondiciones.records[i].razon && cont_uni_p.datacondiciones.records[i].razon) {
                         document.getElementById("list_ca_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
+                        cont_uni_p.datamotivos[cont_uni_p.datacondiciones.records[i].motivo] = app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo];
                         j++;
                     }
                     break;
                 case "6": //Fleet
-                    if($("#list_fl_so_razon")[0].value == cont_uni_p.datacondiciones.records[i].razon && cont_uni_p.datacondiciones.records[i].motivo) {
+                    if($("#list_fl_so_razon")[0].value == cont_uni_p.datacondiciones.records[i].razon && cont_uni_p.datacondiciones.records[i].razon) {
                         document.getElementById("list_fl_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
+                        cont_uni_p.datamotivos[cont_uni_p.datacondiciones.records[i].motivo] = app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo];
                         j++;
                     }
                     break;
                 case "8": //Uniclick
-                    if($("#list_u_so_razon")[0].value == cont_uni_p.datacondiciones.records[i].razon && cont_uni_p.datacondiciones.records[i].motivo) {    
+                    if($("#list_u_so_razon")[0].value == cont_uni_p.datacondiciones.records[i].razon && cont_uni_p.datacondiciones.records[i].razon) {    
                         document.getElementById("list_u_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
+                        cont_uni_p.datamotivos[cont_uni_p.datacondiciones.records[i].motivo] = app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo];
                         j++;
                     }
                     break;
