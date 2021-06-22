@@ -1139,23 +1139,23 @@
                 this.model.set('account_uni_productos', this.tipoProducto);
             }
 
-            if (cont_uni_p.ResumenProductos.leasing.tipo_cuenta == 3 && ( cont_uni_p.ResumenProductos.leasing.status_management_c == '1' && ($('.list_l_estatus_lm').select2('val') == '4' || $('.list_l_estatus_lm').select2('val') == '5'))) {
+            if (!cont_uni_p.ResumenProductos.leasing.notificacion_noviable_c && cont_uni_p.ResumenProductos.leasing.tipo_cuenta == 3 && ( cont_uni_p.ResumenProductos.leasing.status_management_c == '1' && ($('.list_l_estatus_lm').select2('val') == '4' || $('.list_l_estatus_lm').select2('val') == '5'))) {
                 guardaL = true;
             }
             
-            if (cont_uni_p.ResumenProductos.factoring.tipo_cuenta == 3 && ( cont_uni_p.ResumenProductos.factoring.status_management_c == '1' && ($('.list_fac_estatus_lm').select2('val') == '4' || $('.list_fac_estatus_lm').select2('val') == '5'))) {
+            if (!cont_uni_p.ResumenProductos.factoring.notificacion_noviable_c && cont_uni_p.ResumenProductos.factoring.tipo_cuenta == 3 && ( cont_uni_p.ResumenProductos.factoring.status_management_c == '1' && ($('.list_fac_estatus_lm').select2('val') == '4' || $('.list_fac_estatus_lm').select2('val') == '5'))) {
                 guardaF = true;
             }
             
-            if (cont_uni_p.ResumenProductos.credito_auto.tipo_cuenta == 3 && ( cont_uni_p.ResumenProductos.credito_auto.status_management_c == '1' && ($('.list_ca_estatus_lm').select2('val') == '4' || $('.list_ca_estatus_lm').select2('val') == '5'))) {
+            if (!cont_uni_p.ResumenProductos.credito_auto.notificacion_noviable_c && cont_uni_p.ResumenProductos.credito_auto.tipo_cuenta == 3 && ( cont_uni_p.ResumenProductos.credito_auto.status_management_c == '1' && ($('.list_ca_estatus_lm').select2('val') == '4' || $('.list_ca_estatus_lm').select2('val') == '5'))) {
                 guardaCA = true;
             }
 
-            if (cont_uni_p.ResumenProductos.fleet.tipo_cuenta == 3 && ( cont_uni_p.ResumenProductos.fleet.status_management_c == '1' && ($('.list_fl_estatus_lm').select2('val') == '4' || $('.list_fl_estatus_lm').select2('val') == '5'))) {
+            if (!cont_uni_p.ResumenProductos.fleet.notificacion_noviable_c && cont_uni_p.ResumenProductos.fleet.tipo_cuenta == 3 && ( cont_uni_p.ResumenProductos.fleet.status_management_c == '1' && ($('.list_fl_estatus_lm').select2('val') == '4' || $('.list_fl_estatus_lm').select2('val') == '5'))) {
                 guardaFL = true;
             }
             
-            if (cont_uni_p.ResumenProductos.uniclick.tipo_cuenta == 3 && ( cont_uni_p.ResumenProductos.uniclick.status_management_c == '1' && ($('.list_u_estatus_lm').select2('val') == '4' || $('.list_u_estatus_lm').select2('val') == '5'))) {
+            if (!cont_uni_p.ResumenProductos.uniclick.notificacion_noviable_c && cont_uni_p.ResumenProductos.uniclick.tipo_cuenta == 3 && ( cont_uni_p.ResumenProductos.uniclick.status_management_c == '1' && ($('.list_u_estatus_lm').select2('val') == '4' || $('.list_u_estatus_lm').select2('val') == '5'))) {
                 guardaU = true;
             }
             
@@ -1753,63 +1753,77 @@
             }
         ];
        
-
+        var a=0;
+        var b=0;
+        var c=0;
+        var d=0;
+        var e=0;
         app.api.call("read", app.api.buildURL("Users", null, null, filter_arguments), null, {
             success: _.bind(function (data) {               
                 for(var i=0; i< data.records.length ; i++) {
                     if(data.records[i].tipodeproducto_c == '1'){
-                        if(cont_uni_p.ResumenProductos.leasing.user_id1_c ==  data.records[i].id || i == 0){
+                        if(cont_uni_p.ResumenProductos.leasing.user_id1_c ==  data.records[i].id || a == 0){
                             cont_uni_p.directoresLeasing1 += '<option value="' + data.records[i].id + '" selected>' + data.records[i].nombre_completo_c + '</option>';
+                            a++;
                         }else{
                             cont_uni_p.directoresLeasing1 += '<option value="' + data.records[i].id + '" >' + data.records[i].nombre_completo_c + '</option>';
+                            a++;
                         }
                         if(cont_uni_p.ResumenProductos.leasing.user_id2_c ==  data.records[i].id){
-                            cont_uni_p.directoresLeasing2 += '<option value="' + data.records[i].id + '" selected>' + data.records[i].nombre_completo_c + '</option>';
+                            cont_uni_p.directoresLeasing2 += '<option value="' + data.records[i].id + '" >' + data.records[i].nombre_completo_c + '</option>';
                         }else{
                             cont_uni_p.directoresLeasing2 += '<option value="' + data.records[i].id + '" >' + data.records[i].nombre_completo_c + '</option>';
                         }
                     }
                     if(data.records[i].tipodeproducto_c == '4'){
-                        if(cont_uni_p.ResumenProductos.factoring.user_id1_c ==  data.records[i].id || i == 0){
+                        if(cont_uni_p.ResumenProductos.factoring.user_id1_c ==  data.records[i].id || b == 0){
                             cont_uni_p.directoresFactoraje1 += '<option value="' + data.records[i].id + '" selected>' + data.records[i].nombre_completo_c + '</option>';
+                            b++;
                         }else{
                             cont_uni_p.directoresFactoraje1 += '<option value="' + data.records[i].id + '" >' + data.records[i].nombre_completo_c + '</option>';
+                            b++;
                         }
                         if(cont_uni_p.ResumenProductos.factoring.user_id2_c ==  data.records[i].id){
-                            cont_uni_p.directoresFactoraje2 += '<option value="' + data.records[i].id + '" selected>' + data.records[i].nombre_completo_c + '</option>';
+                            cont_uni_p.directoresFactoraje2 += '<option value="' + data.records[i].id + '" >' + data.records[i].nombre_completo_c + '</option>';
                         }else{
                             cont_uni_p.directoresFactoraje2 += '<option value="' + data.records[i].id + '" >' + data.records[i].nombre_completo_c + '</option>';
                         }
                     }
                     if(data.records[i].tipodeproducto_c == '3'){
-                        if(cont_uni_p.ResumenProductos.credito_auto.user_id1_c ==  data.records[i].id || i == 0){
+                        if(cont_uni_p.ResumenProductos.credito_auto.user_id1_c ==  data.records[i].id || c == 0){
                             cont_uni_p.directoresCredAuto1 += '<option value="' + data.records[i].id + '" selected>' + data.records[i].nombre_completo_c + '</option>';
+                            c++;
                         }else{
                             cont_uni_p.directoresCredAuto1 += '<option value="' + data.records[i].id + '" >' + data.records[i].nombre_completo_c + '</option>';
+                            c++;
                         }
                         if(cont_uni_p.ResumenProductos.credito_auto.user_id2_c ==  data.records[i].id){
-                            cont_uni_p.directoresCredAuto2 += '<option value="' + data.records[i].id + '" selected>' + data.records[i].nombre_completo_c + '</option>';
+                            cont_uni_p.directoresCredAuto2 += '<option value="' + data.records[i].id + '" >' + data.records[i].nombre_completo_c + '</option>';
                         }else{
                             cont_uni_p.directoresCredAuto2 += '<option value="' + data.records[i].id + '" >' + data.records[i].nombre_completo_c + '</option>';
                         }
                     }
                     if(data.records[i].tipodeproducto_c == '6'){
-                        if(cont_uni_p.ResumenProductos.fleet.user_id1_c ==  data.records[i].id || i == 0){
+                        if(cont_uni_p.ResumenProductos.fleet.user_id1_c ==  data.records[i].id || d == 0){
                             cont_uni_p.directoresFleet1 += '<option value="' + data.records[i].id + '" selected>' + data.records[i].nombre_completo_c + '</option>';
+                            d++;
                         }else{
                             cont_uni_p.directoresFleet1 += '<option value="' + data.records[i].id + '" >' + data.records[i].nombre_completo_c + '</option>';
+                            d++;
                         }
                         if(cont_uni_p.ResumenProductos.fleet.user_id2_c ==  data.records[i].id){
-                            cont_uni_p.directoresFleet2 += '<option value="' + data.records[i].id + '" selected>' + data.records[i].nombre_completo_c + '</option>';
+                            cont_uni_p.directoresFleet2 += '<option value="' + data.records[i].id + '" >' + data.records[i].nombre_completo_c + '</option>';
                         }else{
                             cont_uni_p.directoresFleet2 += '<option value="' + data.records[i].id + '" >' + data.records[i].nombre_completo_c + '</option>';
                         }
                     }
                     if(data.records[i].tipodeproducto_c == '8'){
-                        if(cont_uni_p.ResumenProductos.uniclick.user_id1_c ==  data.records[i].id || i == 0){
+                        if(cont_uni_p.ResumenProductos.uniclick.user_id1_c ==  data.records[i].id || e == 0){
                             cont_uni_p.directoresUniclick1 += '<option value="' + data.records[i].id + '" selected>' + data.records[i].nombre_completo_c + '</option>';
+                            e++;
                         }else{
                             cont_uni_p.directoresUniclick1 += '<option value="' + data.records[i].id + '" >' + data.records[i].nombre_completo_c + '</option>';
+                            e++;
                         }
                         if(cont_uni_p.ResumenProductos.uniclick.user_id2_c ==  data.records[i].id){
                             cont_uni_p.directoresUniclick2 += '<option value="' + data.records[i].id + '" selected>' + data.records[i].nombre_completo_c + '</option>';
