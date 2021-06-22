@@ -247,8 +247,8 @@ array (
           ),
           1 => 
           array (
-            'name' => 'tct_no_contactar_chk_c',
-            'label' => 'LBL_TCT_NO_CONTACTAR_CHK',
+            'name' => 'deudor_factoraje_c',
+            'label' => 'LBL_DEUDOR_FACTORAJE',
           ),
         ),
         5 => 
@@ -260,8 +260,8 @@ array (
           ),
           1 => 
           array (
-            'name' => 'deudor_factoraje_c',
-            'label' => 'LBL_DEUDOR_FACTORAJE',
+            'name' => 'depurar_leads_c',
+            'label' => 'LBL_DEPURAR_LEADS',
           ),
         ),
         6 => 
@@ -273,8 +273,8 @@ array (
           ),
           1 => 
           array (
-            'name' => 'depurar_leads_c',
-            'label' => 'LBL_DEPURAR_LEADS',
+            'name' => 'responsable_oficina_chk_c',
+            'label' => 'LBL_RESPONSABLE_OFICINA_CHK',
           ),
         ),
         7 => 
@@ -286,8 +286,8 @@ array (
           ),
           1 => 
           array (
-            'name' => 'responsable_oficina_chk_c',
-            'label' => 'LBL_RESPONSABLE_OFICINA_CHK',
+            'name' => 'admin_cartera_c',
+            'label' => 'LBL_ADMIN_CARTERA_C',
           ),
         ),
         8 => 
@@ -308,8 +308,8 @@ array (
           0 => 'business_center_name',
           1 => 
           array (
-            'name' => 'admin_cartera_c',
-            'label' => 'LBL_ADMIN_CARTERA_C',
+            'name' => 'multilinea_c',
+            'label' => 'LBL_MULTILINEA_C',
           ),
         ),
         10 => 
@@ -321,8 +321,8 @@ array (
           ),
           1 => 
           array (
-            'name' => 'multilinea_c',
-            'label' => 'LBL_MULTILINEA_C',
+            'name' => 'valida_vta_cruzada_c',
+            'label' => 'LBL_VALIDA_VTA_CRUZADA',
           ),
         ),
         11 => 
@@ -334,8 +334,21 @@ array (
           ),
           1 => 
           array (
-            'name' => 'valida_vta_cruzada_c',
-            'label' => 'LBL_VALIDA_VTA_CRUZADA',
+            'name' => 'tct_no_contactar_chk_c',
+            'label' => 'LBL_TCT_NO_CONTACTAR_CHK',
+          ),
+        ),
+        12 => 
+        array (
+          0 => 
+          array (
+            'name' => 'bloqueo_credito_c',
+            'label' => 'LBL_BLOQUEO_CREDITO_C',
+          ),
+          1 => 
+          array (
+            'name' => 'bloqueo_cumple_c',
+            'label' => 'LBL_BLOQUEO_CUMPLE_C',
           ),
         ),
       ),

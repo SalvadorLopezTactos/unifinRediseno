@@ -941,31 +941,32 @@
     },
 
     blockRecordNoContactar: function () {
-
-        var id_cuenta = this.model.get('account_id');
-
-        if (id_cuenta != '' && id_cuenta != undefined) {
-
-            var account = app.data.createBean('Accounts', { id: this.model.get('account_id') });
-            account.fetch({
-                success: _.bind(function (model) {
-                    if (model.get('tct_no_contactar_chk_c') == true) {
-
-                        app.alert.show("cuentas_no_contactar", {
-                            level: "error",
-                            title: "Cuenta No Contactable<br>",
-                            messages: "Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
-                            autoClose: false
-                        });
-
-                        //Bloquear el registro completo y mostrar alerta
-                        $('.record.tab-layout').attr('style', 'pointer-events:none');
-                    }
-                }, this)
-            });
-
-        }
-
+        if (!app.user.attributes.tct_no_contactar_chk_c && !app.user.attributes.bloqueo_credito_c && !app.user.attributes.bloqueo_cumple_c) {
+			var id_cuenta=this.model.get('account_id');
+			if(id_cuenta!='' && id_cuenta != undefined && this.model.get('parent_type') == "Accounts" ){
+				var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
+				account.fetch({
+					success: _.bind(function (model) {
+						var url = app.api.buildURL('tct02_Resumen/' + this.model.get('account_id'), null, null);
+						app.api.call('read', url, {}, {
+							success: _.bind(function (data) {
+								if (model.get('tct_no_contactar_chk_c') && (data.bloqueo_cartera_c || data.bloqueo2_c || data.bloqueo3_c)) {
+									app.alert.show("cuentas_no_contactar", {
+										level: "error",
+										title: "Cuenta No Contactable<br>",
+										messages: "Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+										autoClose: false
+									});
+									//Bloquear el registro completo y mostrar alerta
+									$('.record').attr('style','pointer-events:none')
+									$('.subpanel').attr('style', 'pointer-events:none');
+								}
+							}, this)
+						});
+					}, this)
+				});
+			}
+		}
     },
 
     expedienteCredito: function () {
