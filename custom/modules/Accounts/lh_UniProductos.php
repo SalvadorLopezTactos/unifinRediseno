@@ -62,6 +62,7 @@ class clase_UniProducto
                         $beanUP->user_id1_c = $key['user_id1_c'];
                         $beanUP->user_id2_c = $key['user_id2_c'];
                         $beanUP->user_id_c = $key['user_id_c'];
+                        $beanUP->notificacion_noviable_c = $key['notificacion_noviable_c'];                 
                         
                         if ($bean->load_relationship('accounts_uni_productos_1') && ($key['tipo_producto'] == 1 || $key['tipo_producto'] == 8)) {
                             $updateProductos = $bean->accounts_uni_productos_1->getBeans($bean->id, array('disable_row_level_security' => true));
@@ -167,6 +168,16 @@ class clase_UniProducto
                         $beanUP->assigned_user_id = $key['assigned_user_id'];
                         $beanUP->canal_c = $key['canal_c'] != "" ? $key['canal_c'] : "";
                         $beanUP->multilinea_c = $key['multilinea_c'] != "" ? $key['multilinea_c'] : "";
+
+                        $beanUP->status_management_c = $key['status_management_c'];
+                        $beanUP->razon_c = $key['razon_c'];
+                        $beanUP->motivo_c = $key['motivo_c'];
+                        $beanUP->detalle_c = $key['detalle_c'];
+                        $beanUP->user_id1_c = $key['user_id1_c'];
+                        $beanUP->user_id2_c = $key['user_id2_c'];
+                        $beanUP->user_id_c = $key['user_id_c'];
+                        $beanUP->notificacion_noviable_c = $key['notificacion_noviable_c'];
+                        
                         $beanUP->save();
                     }
 

@@ -5605,6 +5605,7 @@
                     Productos[key]['no_viable'] = (Productos[key]['no_viable'] != "0") ? true : false;
                     Productos[key]['multilinea_c'] = (Productos[key]['multilinea_c'] == "1") ? true : false;
                     Productos[key]['exclu_precalif_c'] = (Productos[key]['exclu_precalif_c'] == "1") ? true : false;
+                    Productos[key]['notificacion_noviable_c'] = (Productos[key]['notificacion_noviable_c'] == "1") ? true : false;
                     
                     switch (tipoProducto) {
                         case "1": //Leasing
@@ -5739,26 +5740,19 @@
                 errors['error_leasingUP'] = errors['error_leasingUP'] || {};
                 errors['error_leasingUP'].required = true;
             }
+        }
 
-            if( (document.getElementById("list_l_estatus_lm") != undefined || document.getElementById("list_l_estatus_lm") != null)){
-                if ($('.chk_l_nv')[0].checked == true && (document.getElementById("list_l_estatus_lm").value !="4" && document.getElementById("list_l_estatus_lm").value !="5")) {
-                    $('.list_l_estatus_lm').css('border-color', 'red'); //TXT ¿Qué producto?
-                    app.alert.show("Faltantes no viable Leasing", {
-                        level: "error",
-                        title: 'Debe cambiar el estatus Lead Management para No viable Leasing.',
-                        autoClose: false
-                    });
-                    errors['error_leasingUP'] = errors['error_leasingUP'] || {};
-                    errors['error_leasingUP'].required = true;
-                }
-                
+            var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
+            
+            if( (document.getElementById("list_l_estatus_lm") != undefined || document.getElementById("list_l_estatus_lm") != null) && 
+                (productos.includes("1")&& (App.user.attributes.id == ResumenProductos.leasing.assigned_user_id))){
                 var faltantelm = 0;
                 var selectlm = document.getElementById("list_l_estatus_lm");
                 var selectlrazon = document.getElementById("list_l_so_razon");
                 var selectlmotivo = document.getElementById("list_l_so_motivo");
                 
                 if( selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
-                    if ($('.chk_l_nv')[0].checked == true && selectlrazon.value == '' ) {
+                    if ( selectlrazon.value == '' ) {
                         $('.list_l_so_razon').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
                     }
@@ -5812,7 +5806,7 @@
                 if (faltantelm > 0) {
                     app.alert.show("Faltantes No viable - Lead Management", {
                         level: "error",
-                        title: 'Hace falta información para <b>No Viable Leasing </b>.',
+                        title: 'Hace falta información para cambio de estatus <b>'+selectlm.value+' Leasing </b>.',
                         autoClose: false
                     });
                     errors['error_leasingUP'] = errors['error_leasingUP'] || {};
@@ -5825,7 +5819,6 @@
                 this.model.set('user_id_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.leasing.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
             }*/
-        }
 
         callback(null, fields, errors);
     },
@@ -5888,25 +5881,19 @@
                 errors['error_FactorajeUP'] = errors['error_FactorajeUP'] || {};
                 errors['error_FactorajeUP'].required = true;
             }
+        }
             
-            if($('.chk_f_nv')[0].checked == true && (document.getElementById("list_fac_estatus_lm") != undefined || document.getElementById("list_fac_estatus_lm") != null)){
-                if ($('.chk_f_nv')[0].checked == true && (document.getElementById("list_fac_estatus_lm").value !="4" && document.getElementById("list_fac_estatus_lm").value !="5")) {
-                    $('.list_fac_estatus_lm').css('border-color', 'red'); //TXT ¿Qué producto?
-                    app.alert.show("Faltantes no viable Factoraje", {
-                        level: "error",
-                        title: 'Debe cambiar el estatus Lead Management para No viable Factoraje.',
-                        autoClose: false
-                    });
-                    errors['error_FactorajeUP'] = errors['error_FactorajeUP'] || {};
-                    errors['error_FactorajeUP'].required = true;
-                }
+            var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
+            
+            if( (document.getElementById("list_fac_estatus_lm") != undefined || document.getElementById("list_fac_estatus_lm") != null) && 
+                (productos.includes("4")&& (App.user.attributes.id == ResumenProductos.factoring.assigned_user_id))){
                 var faltantelm = 0;
                 var selectlm = document.getElementById("list_fac_estatus_lm");
                 var selectlrazon = document.getElementById("list_f_razon_lm");
                 var selectlmotivo = document.getElementById("list_f_so_motivo");
 
-                if($('.chk_f_nv')[0].checked == true && selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
-                    if ($('.chk_f_nv')[0].checked == true && selectlrazon.value == '' ) {
+                if( selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5")  ){
+                    if (selectlrazon.value == '' ) {
                         $('.list_f_razon_lm').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
                     }
@@ -5914,7 +5901,7 @@
                         $('.selectlmotivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
                     }*/
-                    if ($('.chk_f_nv')[0].checked == true && ($('.list_f_respval_1').select2('val') == "" || $('.list_f_respval_1').select2('val') == "0") ) {
+                    if (($('.list_f_respval_1').select2('val') == "" || $('.list_f_respval_1').select2('val') == "0") ) {
                         $('.list_f_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
                     }
@@ -5933,43 +5920,40 @@
                         faltantelm += 1;
                     }
                     
-                        for(var i = 0; i < this.datacondiciones.records.length; i++) {
-                            if ( this.datacondiciones.records[i].razon == selectlrazon.value && this.datacondiciones.records[i].motivo != "" ){
-                                if ( selectlmotivo == "") {
-                                    $('.list_f_so_motivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
-                                    //$('.list_l_so_motivo').css('border-color', 'red'); //TXT ¿Qué producto?
-                                    faltantelm += 1;
-                                }
+                    for(var i = 0; i < this.datacondiciones.records.length; i++) {
+                        if ( this.datacondiciones.records[i].razon == selectlrazon.value && this.datacondiciones.records[i].motivo != "" ){
+                            if ( selectlmotivo == "") {
+                                $('.list_f_so_motivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
+                                //$('.list_l_so_motivo').css('border-color', 'red'); //TXT ¿Qué producto?
+                                faltantelm += 1;
                             }
-
-                            if (this.datacondiciones.records[i].razon == selectlrazon.value && this.datacondiciones.records[i].motivo == selectlmotivo.value ){
-                                if (this.datacondiciones.records[i].detalle == true ) {
-                                    if ( $('.txt_f_so_detalle').val().trim() == "") {
-                                        $('.txt_f_so_detalle').css('border-color', 'red'); //TXT ¿Qué producto?
-                                        faltantelm += 1;
-                                    }
-                                }
-                            }
-
-                            if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value && contexto_cuenta.datacondiciones.records[i].razon == selectlrazon.value && contexto_cuenta.datacondiciones.records[i].motivo == selectlmotivo.value ){
-                                if (contexto_cuenta.datacondiciones.records[i].notifica == true && ($('.list_f_respval_2').select2('val') == "" || $('.list_f_respval_2').select2('val') == "0") ) {
-                                    $('.list_f_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
+                        }
+                        if (this.datacondiciones.records[i].razon == selectlrazon.value && this.datacondiciones.records[i].motivo == selectlmotivo.value ){
+                            if (this.datacondiciones.records[i].detalle == true ) {
+                                if ( $('.txt_f_so_detalle').val().trim() == "") {
+                                    $('.txt_f_so_detalle').css('border-color', 'red'); //TXT ¿Qué producto?
                                     faltantelm += 1;
                                 }
                             }
                         }
+                        if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value && contexto_cuenta.datacondiciones.records[i].razon == selectlrazon.value && contexto_cuenta.datacondiciones.records[i].motivo == selectlmotivo.value ){
+                            if (contexto_cuenta.datacondiciones.records[i].notifica == true && ($('.list_f_respval_2').select2('val') == "" || $('.list_f_respval_2').select2('val') == "0") ) {
+                                $('.list_f_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
+                                faltantelm += 1;
+                            }
+                        }
+                    }
                 }
                 if (faltantelm > 0) {
                     app.alert.show("Faltantes No viable - Lead Management", {
                         level: "error",
-                        title: 'Hace falta información para <b>No Viable Factoraje.</b>',
+                        title: 'Hace falta información para cambio de estatus <b>'+selectlm.value+' Factoraje.</b>',
                         autoClose: false
                     });
                     errors['error_FactorajeUP'] = errors['error_FactorajeUP'] || {};
                     errors['error_FactorajeUP'].required = true;
                 }
             }
-        }
 
         callback(null, fields, errors);
     },
@@ -6034,29 +6018,22 @@
                 errors['error_CAUP'] = errors['error_CAUP'] || {};
                 errors['error_CAUP'].required = true;
             }
+        }
 
             /*if (faltantesCAUP == 0 && $('.chk_ca_nv')[0].checked == true && cont_uni_p.ResumenProductos.credito_auto.status_management_c != "3") {
                 this.model.set('promotorcredit_c', '9 - No Viable');
                 this.model.set('user_id2_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.credito_auto.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
             }*/
-
-            if($('.chk_ca_nv')[0].checked == true && (document.getElementById("list_ca_estatus_lm") != undefined || document.getElementById("list_ca_estatus_lm") != null)){
-                if ($('.chk_ca_nv')[0].checked == true && (document.getElementById("list_ca_estatus_lm").value !="4" && document.getElementById("list_ca_estatus_lm").value !="5")) {
-                    $('.list_ca_estatus_lm').css('border-color', 'red'); //TXT ¿Qué producto?
-                    app.alert.show("Faltantes no viable Crédito Automotriz", {
-                        level: "error",
-                        title: 'Debe cambiar el estatus Lead Management para No viable Crédito Automotriz.',
-                        autoClose: false
-                    });
-                    errors['error_CAUP'] = errors['error_leasingUP'] || {};
-                    errors['error_CAUP'].required = true;
-                }
-                var faltantelm = 0;
+            var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
+            
+            if((document.getElementById("list_ca_estatus_lm") != undefined || document.getElementById("list_ca_estatus_lm") != null) && 
+            (productos.includes("3")&& (App.user.attributes.id == ResumenProductos.credito_auto.assigned_user_id))){
                 var selectlm = document.getElementById("list_ca_estatus_lm");
                 var selectlrazon = document.getElementById("list_ca_so_razon");
                 var selectlmotivo = document.getElementById("list_ca_so_motivo");
-                if ($('.chk_ca_nv')[0].checked == true && selectlrazon.value == '') {
+                var faltantelm = 0;
+                if ( selectlrazon.value == '') {
                     $('.list_ca_so_razon').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                     faltantelm += 1;
                 }
@@ -6064,7 +6041,7 @@
                     $('.selectlmotivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                     faltantelm += 1;
                 }*/
-                if ($('.chk_ca_nv')[0].checked == true && ($('.list_ca_respval_1').select2('val') == "" || $('.list_ca_respval_1').select2('val') == "0") ) {
+                if (($('.list_ca_respval_1').select2('val') == "" || $('.list_ca_respval_1').select2('val') == "0") ) {
                     $('.list_ca_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                     faltantelm += 1;
                 }
@@ -6109,7 +6086,7 @@
                 if (faltantelm > 0) {
                     app.alert.show("Faltantes No viable - Lead Management", {
                         level: "error",
-                        title: 'Hace falta información para <b>No Viable Crédito Automotriz.</b>',
+                        title: 'Hace falta información para cambio de estatus <b>'+ selectlm.value +'. Crédito Automotriz.</b>',
                         autoClose: false
                     });
                     errors['error_CAUP'] = errors['error_CAUP'] || {};
@@ -6117,7 +6094,6 @@
                 }
 		        
             }
-        }
 
         callback(null, fields, errors);
     },
@@ -6182,30 +6158,26 @@
                 errors['error_FLeetUP'] = errors['error_FLeetUP'] || {};
                 errors['error_FLeetUP'].required = true;
             }
+        }
             
             /*if (faltantesFleetUP == 0 && $('.chk_fl_nv')[0].checked == true && cont_uni_p.ResumenProductos.fleet.status_management_c != "3") {
                 this.model.set('promotorfleet_c', '9 - No Viable');
                 this.model.set('user_id6_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.fleet.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
             }*/
-            if($('.chk_fl_nv')[0].checked == true && (document.getElementById("list_fl_estatus_lm") != undefined || document.getElementById("list_fl_estatus_lm") != null)){
-                if ($('.chk_fl_nv')[0].checked == true && (document.getElementById("list_fl_estatus_lm").value !="4" && document.getElementById("list_fl_estatus_lm").value !="5")) {
-                    $('.list_fl_estatus_lm').css('border-color', 'red'); //TXT ¿Qué producto?
-                    app.alert.show("Faltantes no viable Leasing", {
-                        level: "error",
-                        title: 'Debe cambiar el estatus Lead Management para No viable Leasing.',
-                        autoClose: false
-                    });
-                    errors['error_FLeetUP'] = errors['error_FLeetUP'] || {};
-                    errors['error_FLeetUP'].required = true;
-                }
+            var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
+            
+            if((document.getElementById("list_fl_estatus_lm") != undefined || document.getElementById("list_fl_estatus_lm") != null) && 
+            (productos.includes("6")&& (App.user.attributes.id == ResumenProductos.fleet.assigned_user_id))){
+                
                 var faltantelm = 0;
                 var selectlm = document.getElementById("list_fl_estatus_lm");
                 var selectlrazon = document.getElementById("list_fl_so_razon");
                 var selectlmotivo = document.getElementById("list_fl_so_motivo");
-                if($('.chk_l_nv')[0].checked == true && selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
                 
-                    if ($('.chk_fl_nv')[0].checked == true && selectlrazon.value == '') {
+                if(selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
+                
+                    if ( selectlrazon.value == '') {
                         $('.list_fl_so_razon').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
                     }
@@ -6213,7 +6185,7 @@
                         $('.selectlmotivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
                     }*/
-                    if ($('.chk_fl_nv')[0].checked == true && ($('.list_fl_respval_1').select2('val') == "" || $('.list_fl_respval_1').select2('val') == "0")) {
+                    if (($('.list_fl_respval_1').select2('val') == "" || $('.list_fl_respval_1').select2('val') == "0")) {
                         $('.list_fl_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
                     }
@@ -6259,7 +6231,7 @@
                 if (faltantelm > 0) {
                     app.alert.show("Faltantes No viable - Lead Management", {
                         level: "error",
-                        title: 'Hace falta información para <b>No viable Fleet.</b>',
+                        title: 'Hace falta información para cambio de estatus <b>'+selectlm.value +' Fleet.</b>',
                         autoClose: false
                     });
                     errors['error_FLeetUP'] = errors['error_FLeetUP'] || {};
@@ -6267,8 +6239,6 @@
                 }
 		        
             }
-
-        }
         
         callback(null, fields, errors);
     },
@@ -6333,29 +6303,23 @@
                 errors['error_UniclickUP'] = errors['error_UniclickUP'] || {};
                 errors['error_UniclickUP'].required = true;
             }
+        }
            
             /*if (faltantesUniclickUP == 0 && $('.chk_u_nv')[0].checked == true && cont_uni_p.ResumenProductos.uniclick.status_management_c != "3") {
                 this.model.set('promotoruniclick_c', '9 - Sin Gestor');
                 this.model.set('user_id7_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.uniclick.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
             }*/
-            if($('.chk_u_nv')[0].checked == true && (document.getElementById("list_u_estatus_lm") != undefined || document.getElementById("list_u_estatus_lm") != null)){
-                if ($('.chk_u_nv')[0].checked == true && (document.getElementById("list_u_estatus_lm").value !="4" && document.getElementById("list_u_estatus_lm").value !="5")) {
-                    $('.list_u_estatus_lm').css('border-color', 'red'); //TXT ¿Qué producto?
-                    app.alert.show("Faltantes no viable Uniclick", {
-                        level: "error",
-                        title: 'Debe cambiar el estatus Lead Management para No viable Uniclick.',
-                        autoClose: false
-                    });
-                    errors['error_UniclickUP'] = errors['error_UniclickUP'] || {};
-                    errors['error_UniclickUP'].required = true;
-                }
+            var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
+            
+            if((document.getElementById("list_u_estatus_lm") != undefined || document.getElementById("list_u_estatus_lm") != null) && 
+            (productos.includes("8")&& (App.user.attributes.id == ResumenProductos.uniclick.assigned_user_id))){
                 var faltantelm = 0;
                 var selectlm = document.getElementById("list_u_estatus_lm");
                 var selectlrazon = document.getElementById("list_u_so_razon");
                 var selectlmotivo = document.getElementById("list_u_so_motivo");
-                if($('.chk_u_nv')[0].checked == true && selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
-                    if ($('.chk_u_nv')[0].checked == true && selectlrazon.value == '') {
+                if(selectlm.value != "" && (selectlm.value =="4" || selectlm.value =="5") ){
+                    if (selectlrazon.value == '') {
                         $('.list_u_so_razon').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
                     }
@@ -6363,7 +6327,7 @@
                         $('.selectlmotivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
                     }*/
-                    if ($('.chk_u_nv')[0].checked == true && ($('.list_u_respval_1').select2('val') == "" || $('.list_u_respval_1').select2('val') == "0") ) {
+                    if (($('.list_u_respval_1').select2('val') == "" || $('.list_u_respval_1').select2('val') == "0") ) {
                         $('.list_u_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
                     }
@@ -6409,7 +6373,7 @@
                     if (faltantelm > 0) {
                         app.alert.show("Faltantes No viable - Lead Management", {
                             level: "error",
-                            title: 'Hace falta información para No viable Uniclick</b>.',
+                            title: 'Hace falta información para cambio de estatus <b>'+selectlm.value +' Uniclick</b>.',
                             autoClose: false
                         });
                         errors['error_UniclickUP'] = errors['error_UniclickUP'] || {};
@@ -6418,7 +6382,7 @@
                 
                 }
             }
-        }        
+
         callback(null, fields, errors);
     },
 
