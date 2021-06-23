@@ -8,6 +8,14 @@ $hook_array['before_save'][] = Array(
     'validacionAlta'
 );
 
+$hook_array['before_save'][] = Array(
+    3,
+    'verificar equipos de asesores origen y destino para establecer referencia como No válida',
+    'custom/modules/Ref_Venta_Cruzada/VentasCruzadas_class.php',
+    'VentasCruzadas_class',
+    'validaEquiposAsesores'
+);
+
 $hook_array['after_save'][] = Array(
     3,
     'Envio de notificaciones para referencias válidas y canceladas',
