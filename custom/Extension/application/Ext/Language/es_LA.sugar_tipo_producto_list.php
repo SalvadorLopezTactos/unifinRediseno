@@ -1,5 +1,5 @@
 <?php
- // created: 2021-05-06 23:02:11
+ // created: 2021-06-23 12:50:39
 
 $app_list_strings['tipo_producto_list']=array (
   '' => '',
@@ -16,4 +16,5 @@ $app_list_strings['tipo_producto_list']=array (
   11 => 'RM',
   12 => 'CREDITO REVOLVENTE',
   13 => 'SERVICIOS',
+  14 => 'TARJETA DE CRÉDITO',
 );
