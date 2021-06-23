@@ -292,6 +292,8 @@
 		this.context.on('button:desbloquea_cuenta:click', this.desbloquea_cuenta, this);
 		this.context.on('button:aprobar_noviable:click', this.aprobar_noviable, this);
 		this.context.on('button:desaprobar_noviable:click', this.rechazar_noviable, this);
+        this.context.on('button:reactivar_noviable:click', this.reactivar_noviable, this);
+        
 		this.model.on('sync', this.bloqueo, this);
         /***************Validacion de Campos No viables en los Productos********************/
         this.model.addValidationTask('LeasingUP', _.bind(this.requeridosLeasingUP, this));
@@ -6804,9 +6806,29 @@
 											});
 										});
 									} else {
+                                        params["aprueba1_c"] = 0;
+                                        params["aprueba2_c"] = 0;
 										if(Productos[key].user_id1_c == app.user.id) params["aprueba1_c"] = 1;
 										if(Productos[key].user_id2_c == app.user.id) params["aprueba2_c"] = 1;
-										var actualiza = app.api.buildURL('uni_Productos/' + Productos[key].id, null, null);
+                                        params["id_Producto"] =  Productos[key].id;
+                                        params["tipoupdate"] = '2';
+                                        
+                                        //var actualiza = app.api.buildURL('actualizaProductosPermisos/' + Productos[key].id, null, null);
+                                        var uni = app.api.buildURL('actualizaProductosPermisos', null, null,params);
+                                        var resp;
+                                        app.api.call('create', uni, null, {
+                                            success: function (data) {
+                                                app.alert.show('Rechazar No viable cuenta', {
+                                                    level: 'warning',
+                                                    messages: 'Se aprobó el No Viable, para la cuenta',
+                                                });
+                                            },
+                                            error: function (e) {
+                                                throw e;
+                                            }
+                                        });
+
+										/*var actualiza = app.api.buildURL('uni_Productos/' + Productos[key].id, null, null);
 										app.api.call('update', actualiza, params, {
 											success: _.bind(function (data2) {
 												app.alert.show('alert_change_success', {
@@ -6815,6 +6837,7 @@
 												});
 											}, this)
 										});
+                                        */
 									}
 								}
 							}, this)
@@ -6847,12 +6870,16 @@
             success: function (data) {
 				Productos = data;
                 _.each(Productos, function (value, key) {
-					if(!Productos[key].aprueba1_c && !Productos[key].aprueba2_c && (Productos[key].user_id1_c == app.user.id || Productos[key].user_id2_c == app.user.id)) {
+                    var ap1 = (Productos[key].aprueba1_c == "0") ? false :true;
+                    var ap2 = (Productos[key].aprueba2_c == "0") ? false :true; 
+					if((!ap1 && !ap2) && (Productos[key].user_id1_c == app.user.id || Productos[key].user_id2_c == app.user.id)) {
 						$('[name="aprobar_noviable"]').removeClass('hidden');
+                        $('[name="desaprobar_noviable"]').removeClass('hidden');
                     }
-					if(Productos[key].aprueba1_c && Productos[key].aprueba2_c && (Productos[key].user_id1_c == app.user.id || Productos[key].user_id2_c == app.user.id)) {
-						$('[name="desaprobar_noviable"]').removeClass('hidden');
+                    if((ap1 || ap2) && (Productos[key].user_id1_c == app.user.id || Productos[key].user_id2_c == app.user.id)) {
+						$('[name="reactivar_noviable"]').removeClass('hidden');
                     }
+					
                 });
             },
             error: function (e) {
@@ -6864,51 +6891,72 @@
     rechazar_noviable: function (){
         var noviable = 0;
         var Productos = [];
-        app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + this.model.get('id')), null, {
-            success: function (data) {
-				Productos = data;
-                _.each(Productos, function (value, key) {
-					if((Productos[key].user_id1_c == app.user.id && Productos[key].aprueba1_c) || (Productos[key].user_id2_c == app.user.id && Productos[key].aprueba2_c)
-                        && (Productos[key].status_management_c == '4' || Productos[key].status_management_c == '5')) {
-						var params = {};
-						/*if(Productos[key].user_id1_c == app.user.id) params["aprueba1_c"] = 1;
-						if(Productos[key].user_id2_c == app.user.id) params["aprueba2_c"] = 1;
-                        */
-                        params["no_viable"] =false; //check No Viable 
-                        params["no_viable_razon"] = '0'; //lista Razón de Lead no viable 
-                        params["no_viable_razon_fp"] = '0'; //lista Fuera de Perfil (Razón) 
-                        params["no_viable_quien"] = ''; //texto ¿Quién? 
-                        params["no_viable_porque"] = ''; //texto ¿Por qué? 
-                        params["no_viable_producto"] = '0'; //lista ¿Qué producto? 
-                        params["no_viable_razon_cf"] = '0'; //lista Condiciones Financieras 
-                        params["no_viable_otro_c"] = ''; //texto ¿Qué producto? 
-                        params["no_viable_razon_ni"] = '0'; //lista Razón No se encuentra interesado 
-                        params["razon_c"] = '0'; //razon lm
-                        params["motivo_c"] = '0'; //motivo lm
-                        params["detalle_c"] = ''; //detalle lm
-                        params["user_id1_c"] = '';  //user id1
-                        params["user_id2_c"] = '';  //user id2
-                        params["user_id_c"] = '';  //user id
-                        params["status_management_c"] = '1';
 
-						var actualiza = app.api.buildURL('uni_Productos/' + Productos[key].id, null, null);
-						app.api.call('update', actualiza, params, {
-							success: _.bind(function (data) {
-								app.alert.show('alert_change_success', {
-									level: 'success',
-									messages: 'Cuenta Rechazada No viable',
-								});
-                                noviable++;
-							}, this)
-						});
-                    }
-                    if(noviable == 0){
-                         app.alert.show('Rechazar No viable cuenta', {
-                            level: 'error',
-                            messages: 'No se encuentra producto a rechazar No viable',
-                         });
-                    }
-                });
+        var params = {};
+		params["razon_c"] = '0'; //razon lm
+        params["motivo_c"] = '0'; //motivo lm
+        params["detalle_c"] = ''; //detalle lm
+        params["user_id1_c"] = '';  //user id1
+        params["user_id2_c"] = '';  //user id2
+        params["user_id_c"] = '';  //user id
+        params["status_management_c"] = '1';
+        params["id_Account"] = this.model.get('id');
+        params["user_id"] = app.user.id;
+        params["tipoupdate"] = '1';
+        params["notificacion_noviable_c"] = false;
+        
+        //var uni = app.api.buildURL('actualizaProductosPermisos/');
+        var uni = app.api.buildURL('actualizaProductosPermisos', null, null,params);
+        var resp;
+        app.api.call('create', uni, null, {
+            success: function (data) {
+				resp = data;
+                if(resp > 0){
+                    app.alert.show('Rechazar No viable cuenta', {
+                       level: 'info',
+                       messages: 'No se aprobó el No Viable, para la cuenta',
+                    });
+                }else{
+                    app.alert.show('Rechazar No viable cuenta', {
+                        level: 'error',
+                        messages: 'No se encuentra producto a Desaprobar No viable',
+                     });
+                }
+                //  this.render();
+            },
+            error: function (e) {
+                throw e;
+            }
+        });
+    },
+
+    reactivar_noviable: function (){
+        
+        var params = {};
+		
+        params["status_management_c"] = '1';
+        params["id_Account"] = this.model.get('id');
+        params["user_id"] = app.user.id;
+        params["tipoupdate"] = '3';
+        
+        //var uni = app.api.buildURL('actualizaProductosPermisos/');
+        var uni = app.api.buildURL('actualizaProductosPermisos', null, null,params);
+        var resp;
+        app.api.call('create', uni, null, {
+            success: function (data) {
+				resp = data;
+                if(resp > 0){
+                    app.alert.show('Rechazar No viable cuenta', {
+                       level: 'info',
+                       messages: 'Se envío la notificación a directores, para reactivar la cuenta',
+                    });
+                }else{
+                    app.alert.show('Rechazar No viable cuenta', {
+                        level: 'error',
+                        messages: 'No se encuentra producto a Reactivar No viable',
+                     });
+                }
+                this.render();
             },
             error: function (e) {
                 throw e;

@@ -60,12 +60,24 @@ array (
           4 => 
           array (
             'type' => 'button',
+            'name' => 'reactivar_noviable',
+            'label' => 'Reactivar No Viable',
+            'css_class' => 'btn-success hidden',
+            'showOn' => 'view',
+            'events' => 
+            array (
+              'click' => 'button:reactivar_noviable:click',
+            ),
+          ),
+          5 => 
+          array (
+            'type' => 'button',
             'name' => 'cancel_button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'edit',
           ),
-          5 => 
+          6 => 
           array (
             'type' => 'button',
             'name' => 'rfc_qr_button',
@@ -77,7 +89,7 @@ array (
               'click' => 'button:btn_rfc:click',
             ),
           ),
-          6 => 
+          7 => 
           array (
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
@@ -87,7 +99,7 @@ array (
             'showOn' => 'edit',
             'acl_action' => 'edit',
           ),
-          7 => 
+          8 => 
           array (
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
