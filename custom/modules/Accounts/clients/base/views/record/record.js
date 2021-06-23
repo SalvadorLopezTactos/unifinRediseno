@@ -6876,7 +6876,7 @@
 						$('[name="aprobar_noviable"]').removeClass('hidden');
                         $('[name="desaprobar_noviable"]').removeClass('hidden');
                     }
-                    if((ap1 || ap2) && (Productos[key].user_id1_c == app.user.id || Productos[key].user_id2_c == app.user.id)) {
+                    if((ap1 || ap2) && (Productos[key].user_id_c == app.user.id )) {
 						$('[name="reactivar_noviable"]').removeClass('hidden');
                     }
 					
