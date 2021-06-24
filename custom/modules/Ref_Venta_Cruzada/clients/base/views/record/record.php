@@ -37,6 +37,18 @@ array (
           2 => 
           array (
             'type' => 'button',
+            'name' => 'set_ref_valida',
+            'label' => 'Establecer como Válida',
+            'css_class' => 'btn-success hidden',
+            'showOn' => 'view',
+            'events' => 
+            array (
+              'click' => 'button:establece_ref_valida:click',
+            ),
+          ),
+          3 => 
+          array (
+            'type' => 'button',
             'name' => 'cancel_button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
@@ -46,7 +58,7 @@ array (
               'click' => 'button:cancel_button:click',
             ),
           ),
-          3 => 
+          4 => 
           array (
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
@@ -56,7 +68,7 @@ array (
             'showOn' => 'edit',
             'acl_action' => 'edit',
           ),
-          4 => 
+          5 => 
           array (
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
@@ -138,7 +150,7 @@ array (
               ),
             ),
           ),
-          5 => 
+          6 => 
           array (
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
@@ -259,6 +271,8 @@ array (
               ),
               9 => 
               array (
+                'name' => 'ref_validada_av_c',
+                'label' => 'LBL_REF_VALIDADA_AV',
               ),
               10 => 
               array (

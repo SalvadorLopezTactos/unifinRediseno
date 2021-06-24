@@ -10,7 +10,9 @@
 		this.model.on('sync', this.hideShowUniclick, this);
 
 		this.context.on('button:aceptar_vta_cruzada:click', this.aceptar_vta_cruzada, this);
-        this.context.on('button:cancelar_vta_cruzada:click', this.rechazar_vta_cruzada, this);
+		this.context.on('button:cancelar_vta_cruzada:click', this.rechazar_vta_cruzada, this);
+		//Acción de botón para que únicamente Alejandro de la Vega pueda establecer como Válida
+		this.context.on('button:establece_ref_valida:click', this.establece_ref_valida, this);
 
     },
 	
@@ -40,7 +42,10 @@
         $('[data-name="cancelado"]').attr('style',"pointer-events:none");
 		
 		$('span[data-fieldname="usuario_rechazo"]').find('input').attr('disabled','');
-        $('[data-name="usuario_rechazo"]').attr('style',"pointer-events:none");
+		$('[data-name="usuario_rechazo"]').attr('style',"pointer-events:none");
+		
+		//Ocultando campo de control que valida si Alejandro de la Vega ha Validado la referencia
+		$('[data-name="ref_validada_av_c"]').hide();
     },
 
     hideShowCancelar:function(){
@@ -192,6 +197,33 @@
 		this.layout.trigger("app:view:MotivoCancelModal");
 	},
 
+	establece_ref_valida:function(){
+		$('[name="set_ref_valida"]').attr('style', 'pointer-events:none');
+
+		App.alert.show('validandoReferencia', {
+            level: 'process',
+            title: 'Estableciendo como Válida esta referencia, por favor espere.',
+		});
+		
+		this.model.set('estatus',"1");
+		this.model.set('ref_validada_av_c',1);
+		this.model.save(null, {
+            success: function (model, response) {
+                App.alert.dismiss('validandoReferencia');
+                App.alert.show("referencia_valida", {
+                    level: "success",
+                    messages: "Este registro de referencia se ha establecido como Válida",
+                    autoClose: false
+                });
+				location.reload();
+            }, error: function (model, response) {
+                $('[name="set_ref_valida"]').attr('style', 'pointer-events:block');
+            }
+        });
+
+
+	},
+
 	hideShowUniclick:function(){
 
 		var puedeCancelar = App.user.get('valida_vta_cruzada_c');
@@ -207,8 +239,22 @@
 
 		}
 
-        this.setEtiquetasFechas(productoRef);
+		this.setEtiquetasFechas(productoRef);
+		this.hideShowBotonValidarReferencia();
 
 	},
+
+	hideShowBotonValidarReferencia:function(){
+		//Obtiene usuario logueado
+		var idCurrentUser=App.user.attributes.id;
+		var idUserAlejandro=App.lang.getAppListStrings("usuario_ref_no_valida_list")[0];
+		var valorCampoControl=this.model.get('ref_validada_av_c');
+		//Solo mostrar el botón cuando el usuario firmado sea el mismo que Alejandro
+		if(idCurrentUser==idUserAlejandro && !valorCampoControl){
+			$('[name="set_ref_valida"]').removeClass('hidden');
+		}
+
+	}
+
 	
 })

@@ -147,7 +147,7 @@ class VentasCruzadas_class
 				$equipo_asesor2=$array_equipos[1];
 				$GLOBALS['log']->fatal(print_r($array_equipos,true));
 
-				if($equipo_asesor1==$equipo_asesor2){
+				if($equipo_asesor1==$equipo_asesor2 && $bean->ref_validada_av_c==0){
 					$GLOBALS['log']->fatal('EQUIPOS DE ASESORES SON IGUALES, SE PROCEDE A INVALIDAR REFERENCIA CRUZADA');
 					//Estatus No válida => 2
 					$bean->estatus='2';
