@@ -771,6 +771,8 @@ class ResumenClienteAPI extends SugarApi
                 $arr_principal['pb']['pb_clase'] = $beanResumen->pb_clase_c;
 				//Condición del Cliente
 				$arr_principal['general_cliente']['condicion'] = $app_list_strings['condicion_cliente_list'][$beanResumen->condicion_cliente_c];
+				$arr_principal['general_cliente']['condicion2'] = $app_list_strings['condicion_cliente_list'][$beanResumen->condicion2_c];
+				$arr_principal['general_cliente']['condicion3'] = $app_list_strings['condicion_cliente_list'][$beanResumen->condicion3_c];
             }
         }
 
