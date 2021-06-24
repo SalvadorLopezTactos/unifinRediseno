@@ -1248,10 +1248,9 @@ where rfc_c = '{$bean->rfc_c}' and
         //Sólo se ejecuta en la creación
         if (!$args['isUpdate']) {
             //Declara variables para generación de registros
-            global $current_user;
-            global $app_list_strings;
+            global $current_user,$app_list_strings,$db;
             $beanprod = null;
-
+            $idSinGestor = '569246c7-da62-4664-ef2a-5628f649537e';
             $module = 'uni_Productos';
             $key_productos = array('1', '4', '3', '6', '8', '10');
             $name_productos = array('-LEASING', '-FACTORAJE', '-CRÉDITO AUTOMOTRIZ', '-FLEET', '-UNICLICK', '-SEGUROS');
@@ -1259,7 +1258,7 @@ where rfc_c = '{$bean->rfc_c}' and
             $current_prod = null;
             $fechaAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
             //Validación temporal- Se debe quitar cuando el campo $bean->tipo_registro_c se elimine
-            $tipoCuentaServicio = !empty($bean->tipo_registro_c) ? $bean->tipo_registro_c : 'Lead';
+            $tipoCuentaServicio = !empty($bean->tipo_registro_c) ? $bean->tipo_registro_c : 'Prospecto';
             $bean->tipo_registro_cuenta_c = ($tipoCuentaServicio == 'Persona') ? '4' : $bean->tipo_registro_cuenta_c;
             $bean->tipo_registro_cuenta_c = ($tipoCuentaServicio == 'Proveedor') ? '5' : $bean->tipo_registro_cuenta_c;
             $tipo = $app_list_strings['tipo_registro_cuenta_list'];
@@ -1276,14 +1275,24 @@ where rfc_c = '{$bean->rfc_c}' and
                 $beanprod->subtipo_cuenta = (empty($bean->subtipo_registro_cuenta_c) && $beanprod->tipo_cuenta == '2') ? '1' : $bean->subtipo_registro_cuenta_c;
                 $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo));
                 //Caso especial: Alta portal CA
-                if ($beanprod->tipo_producto == '3' && empty($bean->id_uniclick_c) && $bean->tipo_registro_cuenta_c != '4' && $bean->tipo_registro_cuenta_c != '5' && $GLOBALS['service']->platform != 'base' && $GLOBALS['service']->platform != 'mobile') {
+                if ($bean->user_id2_c != $idSinGestor && $beanprod->tipo_producto == '3' && empty($bean->id_uniclick_c) && $bean->tipo_registro_cuenta_c != '4' && $bean->tipo_registro_cuenta_c != '5' && $GLOBALS['service']->platform != 'base' && $GLOBALS['service']->platform != 'mobile') {
                     $beanprod->tipo_cuenta = "2"; //2-Prospecto
                     $beanprod->subtipo_cuenta = "8"; //Integración de expediente
                     $beanprod->tipo_subtipo_cuenta = "PROSPECTO INTEGRACIÓN DE EXPEDIENTE";
                     //Actualiza campo general
-                    global $db;
                     $update = "update accounts_cstm set
                       tipo_registro_cuenta_c='2', subtipo_registro_cuenta_c ='8', tct_tipo_subtipo_txf_c='PROSPECTO INTEGRACIÓN DE EXPEDIENTE'
+                      where id_c = '{$bean->id}'";
+                    $updateExecute = $db->query($update);
+                }
+                //Caso especial: Alta por sistema 3ro como tipo Lead, se convierte a Prospecto sin contactar
+                if ($bean->tipo_registro_cuenta_c == '1'  && $key_productos[$i]!='8' ) {
+                    $beanprod->tipo_cuenta = "2"; //2-Prospecto
+                    $beanprod->subtipo_cuenta = "1"; //Sin Contactar
+                    $beanprod->tipo_subtipo_cuenta = "PROSPECTO SIN CONTACTAR";
+                    //Actualiza campo general
+                    $update = "update accounts_cstm set
+                      tipo_registro_cuenta_c='2', subtipo_registro_cuenta_c ='1', tct_tipo_subtipo_txf_c='PROSPECTO SIN CONTACTAR'
                       where id_c = '{$bean->id}'";
                     $updateExecute = $db->query($update);
                 }
