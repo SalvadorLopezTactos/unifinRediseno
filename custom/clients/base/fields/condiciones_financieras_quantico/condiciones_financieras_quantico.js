@@ -586,6 +586,27 @@
     },
 
     updateJsonCFConfiguradas:function(e){
+        var valor=$(e.currentTarget).val();
+        var esLimiteMayoroMenor=$(e.currentTarget).attr('data-tipo-campo');
+        if(esLimiteMayoroMenor=="inputSuperior"){
+            var indextd=$(e.currentTarget).closest('td').index();
+            //Validación para comparar el valor actual (valor máximo) vs el valor mínimo, para que el valor máximo no sea menor que el valor mínimo
+            var indexColumna=$(e.currentTarget).parent().index();
+            var valorMinimoIngresado=$(e.currentTarget).parent().siblings().eq(indexColumna-1).children().val();
+            if(valorMinimoIngresado!=""){
+                if(valor.length>=valorMinimoIngresado.length){//Aplicar validación solo si valor mínimo y valor máximo tienen el mismo número de dígitos
+                    if(Number(valor) < Number(valorMinimoIngresado)){
+                        app.alert.show("fueraRango", {
+                            level: "error",
+                            title: "El n\u00FAmero ingresado no puede ser menor al Valor Mínimo",
+                            autoClose: true
+                        });
+                        $(e.currentTarget).val("");
+                        return false;
+                    }
+                }
+            }
+        }
         var indexCampo = $(e.currentTarget).parent().parent().index();
         var valorBuscado=$(e.currentTarget).attr('data-columna');
         var inferiorOsuperior=$(e.currentTarget).attr('data-tipo-campo');
@@ -719,7 +740,7 @@
             var indexColumna=$(e.currentTarget).parent().index();
             var valorMinimoIngresado=$(e.currentTarget).parent().siblings().eq(indexColumna-1).children().val();
             if(valorMinimoIngresado!=""){
-                if(valor.length>=valorMinimoIngresado.length){//Aplicar validación solo si valor mínimo y valor máximo tienen el mismo número de dígitos
+                if(valor.length>valorMinimoIngresado.length){//Aplicar validación solo si valor mínimo y valor máximo tienen el mismo número de dígitos
                     if(Number(valor) < Number(valorMinimoIngresado)){
                         app.alert.show("fueraRango", {
                             level: "error",
