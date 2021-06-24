@@ -503,6 +503,17 @@ class Ref_Cruzadas_Hooks
 
     public function enviarNotificacionReferencia($asunto, $cuerpoCorreo, $correoAsesor, $nombreAsesor)
     {
+        global $app_list_strings;
+        //Se obtiene información de Alejandro de la Vega a través de lista de valores
+        $id_usuario_ref=$app_list_strings['usuario_ref_no_valida_list'][0];
+        $email_alejandro="";
+        $nombreAlejandro="";
+
+        $beanUsuarioAV = BeanFactory::retrieveBean('Users', $id_usuario_ref,array('disable_row_level_security' => true));
+        if (!empty($beanUsuarioAV)) {
+            $email_alejandro = $beanUsuarioAV->email1;
+            $nombreAlejandro = $beanUsuarioAV->full_name;
+        }
         //Enviando correo a asesor origen
         try {
             $mailer = MailerFactory::getSystemDefaultMailer();
@@ -512,6 +523,7 @@ class Ref_Cruzadas_Hooks
             $mailer->setHtmlBody($body);
             $mailer->clearRecipients();
             $mailer->addRecipientsTo(new EmailIdentity($correoAsesor, $nombreAsesor));
+            $mailer->addRecipientsCc(new EmailIdentity($email_alejandro, $nombreAlejandro));
             $result = $mailer->send();
         } catch (Exception $e) {
             $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email " . $correoAsesor);

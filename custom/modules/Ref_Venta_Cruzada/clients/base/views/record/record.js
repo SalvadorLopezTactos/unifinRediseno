@@ -250,7 +250,7 @@
 		var idUserAlejandro=App.lang.getAppListStrings("usuario_ref_no_valida_list")[0];
 		var valorCampoControl=this.model.get('ref_validada_av_c');
 		//Solo mostrar el botón cuando el usuario firmado sea el mismo que Alejandro
-		if(idCurrentUser==idUserAlejandro && !valorCampoControl){
+		if(idCurrentUser==idUserAlejandro && !valorCampoControl && this.model.get('estatus')=='2'){
 			$('[name="set_ref_valida"]').removeClass('hidden');
 		}
 
