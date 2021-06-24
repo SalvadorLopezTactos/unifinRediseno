@@ -8,6 +8,19 @@
 function statusReferenciaVentaCruzada()
     {
         $urlSugar=$GLOBALS['sugar_config']['site_url'].'/#Ref_Venta_Cruzada/';
+
+        //Obtiene información del usuario que será copiado a los correos de notificación
+        global $app_list_strings;
+        //Se obtiene información de Alejandro de la Vega a través de lista de valores
+        $id_usuario_ref=$app_list_strings['usuario_ref_no_valida_list'][0];
+        $email_alejandro="";
+        $nombreAlejandro="";
+
+        $beanUsuarioAV = BeanFactory::retrieveBean('Users', $id_usuario_ref,array('disable_row_level_security' => true));
+        if (!empty($beanUsuarioAV)) {
+            $email_alejandro = $beanUsuarioAV->email1;
+            $nombreAlejandro = $beanUsuarioAV->full_name;
+        }
         /*------------------------Notificaciones 3 meses antes------------------------*/
         $hoy= date("Y-m-d H:i:s");
         $tres_meses=date( "Y-m-d H:i:s", strtotime( $hoy ." -3 month" ) );
@@ -95,6 +108,7 @@ SQL;
                         $mailer->setHtmlBody($body);
                         $mailer->clearRecipients();
                         $mailer->addRecipientsTo(new EmailIdentity($correo_asesor_origen, $nombreAsesorOrigen));
+                        $mailer->addRecipientsCc(new EmailIdentity($email_alejandro, $nombreAlejandro));
                         $result = $mailer->send();
 
                         $mailHTMLRM = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreAsesorRM . '</b>
@@ -120,6 +134,7 @@ SQL;
                             $mailer->setHtmlBody($body);
                             $mailer->clearRecipients();
                             $mailer->addRecipientsTo(new EmailIdentity($correo_asesor_rm, $nombreAsesorRM));
+                            $mailer->addRecipientsCc(new EmailIdentity($email_alejandro, $nombreAlejandro));
                             $result = $mailer->send();
 
                         }
@@ -177,6 +192,7 @@ SQL;
                         $mailer->setHtmlBody($body);
                         $mailer->clearRecipients();
                         $mailer->addRecipientsTo(new EmailIdentity($correo_asesor_origen, $nombreAsesorOrigen));
+                        $mailer->addRecipientsCc(new EmailIdentity($email_alejandro, $nombreAlejandro));
                         $result = $mailer->send();
 
                         $mailHTMLRM = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreAsesorRM . '</b>
@@ -202,6 +218,7 @@ SQL;
                             $mailer->setHtmlBody($body);
                             $mailer->clearRecipients();
                             $mailer->addRecipientsTo(new EmailIdentity($correo_asesor_rm, $nombreAsesorRM));
+                            $mailer->addRecipientsCc(new EmailIdentity($email_alejandro, $nombreAlejandro));
                             $result = $mailer->send();
 
                         }
@@ -291,6 +308,7 @@ SQL;
                         $mailer->setHtmlBody($body);
                         $mailer->clearRecipients();
                         $mailer->addRecipientsTo(new EmailIdentity($correo_asesor_origen, $nombreAsesorOrigen));
+                        $mailer->addRecipientsCc(new EmailIdentity($email_alejandro, $nombreAlejandro));
                         $result = $mailer->send();
 
                         $mailHTMLRM = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreAsesorRM . '</b>
@@ -316,6 +334,7 @@ SQL;
                             $mailer->setHtmlBody($body);
                             $mailer->clearRecipients();
                             $mailer->addRecipientsTo(new EmailIdentity($correo_asesor_rm, $nombreAsesorRM));
+                            $mailer->addRecipientsCc(new EmailIdentity($email_alejandro, $nombreAlejandro));
                             $result = $mailer->send();
 
                         }
@@ -371,6 +390,7 @@ SQL;
                         $mailer->setHtmlBody($body);
                         $mailer->clearRecipients();
                         $mailer->addRecipientsTo(new EmailIdentity($correo_asesor_origen, $nombreAsesorOrigen));
+                        $mailer->addRecipientsCc(new EmailIdentity($email_alejandro, $nombreAlejandro));
                         $result = $mailer->send();
 
                         $mailHTMLRM = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreAsesorRM . '</b>
@@ -396,6 +416,7 @@ SQL;
                             $mailer->setHtmlBody($body);
                             $mailer->clearRecipients();
                             $mailer->addRecipientsTo(new EmailIdentity($correo_asesor_rm, $nombreAsesorRM));
+                            $mailer->addRecipientsCc(new EmailIdentity($email_alejandro, $nombreAlejandro));
                             $result = $mailer->send();
 
                         }
@@ -484,6 +505,7 @@ SQL;
                         $mailer->setHtmlBody($body);
                         $mailer->clearRecipients();
                         $mailer->addRecipientsTo(new EmailIdentity($correo_asesor_origen, $nombreAsesorOrigen));
+                        $mailer->addRecipientsCc(new EmailIdentity($email_alejandro, $nombreAlejandro));
                         $result = $mailer->send();
 
                         $mailHTMLRM = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreAsesorRM . '</b>
@@ -509,6 +531,7 @@ SQL;
                             $mailer->setHtmlBody($body);
                             $mailer->clearRecipients();
                             $mailer->addRecipientsTo(new EmailIdentity($correo_asesor_rm, $nombreAsesorRM));
+                            $mailer->addRecipientsCc(new EmailIdentity($email_alejandro, $nombreAlejandro));
                             $result = $mailer->send();
 
                         }
@@ -564,6 +587,7 @@ SQL;
                         $mailer->setHtmlBody($body);
                         $mailer->clearRecipients();
                         $mailer->addRecipientsTo(new EmailIdentity($correo_asesor_origen, $nombreAsesorOrigen));
+                        $mailer->addRecipientsCc(new EmailIdentity($email_alejandro, $nombreAlejandro));
                         $result = $mailer->send();
 
                         $mailHTMLRM = '<p align="justify"><font face="verdana" color="#635f5f"><b>' . $nombreAsesorRM . '</b>
@@ -589,6 +613,7 @@ SQL;
                             $mailer->setHtmlBody($body);
                             $mailer->clearRecipients();
                             $mailer->addRecipientsTo(new EmailIdentity($correo_asesor_rm, $nombreAsesorRM));
+                            $mailer->addRecipientsCc(new EmailIdentity($email_alejandro, $nombreAlejandro));
                             $result = $mailer->send();
 
                         }
