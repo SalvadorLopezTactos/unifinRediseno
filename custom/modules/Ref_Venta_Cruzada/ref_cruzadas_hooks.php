@@ -130,7 +130,7 @@ class Ref_Cruzadas_Hooks
                                 $cuerpoCorreo = $this->estableceCuerpoNotificacionUniclickRespondido($nombre_acepta_uniclick, $nombre_current_user, $nombreCuenta, $linkReferencia, 'Aceptada', '');
 
                                 //Enviando correo a asesor origen
-                                $this->enviarNotificacionReferencia("Nueva referencia válida", $cuerpoCorreo, $correo_acpeta_uniclick, $nombre_acepta_uniclick);
+                                $this->enviarNotificacionReferencia("Nueva referencia de venta cruzada", $cuerpoCorreo, $correo_acpeta_uniclick, $nombre_acepta_uniclick);
                             }
                         }
                         //Referencia uniclick cancelada
@@ -162,7 +162,7 @@ class Ref_Cruzadas_Hooks
                 $GLOBALS['log']->fatal("ENVIANDO CORREO (REFERENCIA VÁLIDA) A ASESOR ORIGEN CON EMAIL " . $correo_asesor_origen);
 
                 //Enviando correo a asesor origen
-                $this->enviarNotificacionReferencia("Nueva referencia válida", $cuerpoCorreo, $correo_asesor_origen, $nombreAsesorOrigen);
+                $this->enviarNotificacionReferencia("Nueva referencia de venta cruzada", $cuerpoCorreo, $correo_asesor_origen, $nombreAsesorOrigen);
             } else {
                 $GLOBALS['log']->fatal("ASESOR ORIGEN " . $nombreAsesorOrigen . " NO TIENE EMAIL");
             }
@@ -175,7 +175,7 @@ class Ref_Cruzadas_Hooks
                 $GLOBALS['log']->fatal("ENVIANDO CORREO (REFERENCIA VÁLIDA) A ASESOR PRODUCTO REFERENCIADO CON EMAIL " . $correo_asesor_ref);
 
                 //Enviando correo a asesor origen
-                $this->enviarNotificacionReferencia("Nueva referencia válida", $cuerpoCorreo, $correo_asesor_ref, $nombreAsesorRef);
+                $this->enviarNotificacionReferencia("Nueva referencia de venta cruzada", $cuerpoCorreo, $correo_asesor_ref, $nombreAsesorRef);
             } else {
                 $GLOBALS['log']->fatal("ASESOR PRODUCTO REFERENCIADO " . $nombreAsesorRef . " NO TIENE EMAIL");
             }
@@ -189,7 +189,7 @@ class Ref_Cruzadas_Hooks
                 $GLOBALS['log']->fatal("ENVIANDO CORREO (REFERENCIA VÁLIDA) A ASESOR RM CON EMAIL " . $correo_asesor_origen);
 
                 //Enviando correo a asesor origen
-                $this->enviarNotificacionReferencia("Nueva referencia válida", $cuerpoCorreoRM, $correo_asesor_rm, $nombreAsesorRM);
+                $this->enviarNotificacionReferencia("Nueva referencia de venta cruzada", $cuerpoCorreoRM, $correo_asesor_rm, $nombreAsesorRM);
             } else {
                 $GLOBALS['log']->fatal("ASESOR RM " . $nombreAsesorRM . " NO TIENE EMAIL");
             }
@@ -204,7 +204,7 @@ class Ref_Cruzadas_Hooks
                 $GLOBALS['log']->fatal("ENVIANDO CORREO (REFERENCIA CANCELADA) A ASESOR ORIGEN CON EMAIL " . $correo_asesor_origen);
 
                 //Enviando correo a asesor origen
-                $this->enviarNotificacionReferencia("Referencia cancelada", $cuerpoCorreo, $correo_asesor_origen, $nombreAsesorOrigen);
+                $this->enviarNotificacionReferencia("Referencia de venta cruzada cancelada", $cuerpoCorreo, $correo_asesor_origen, $nombreAsesorOrigen);
             } else {
                 $GLOBALS['log']->fatal("ASESOR ORIGEN " . $nombreAsesorOrigen . " NO TIENE EMAIL");
             }
@@ -217,7 +217,7 @@ class Ref_Cruzadas_Hooks
                 $GLOBALS['log']->fatal("ENVIANDO CORREO (REFERENCIA CANCELADA) A ASESOR ORIGEN CON EMAIL " . $correo_asesor_origen);
 
                 //Enviando correo a asesor origen
-                $this->enviarNotificacionReferencia("Referencia cancelada", $cuerpoCorreoRM, $correo_asesor_rm, $nombreAsesorRM);
+                $this->enviarNotificacionReferencia("Referencia de venta cruzada cancelada", $cuerpoCorreoRM, $correo_asesor_rm, $nombreAsesorRM);
             } else {
                 $GLOBALS['log']->fatal("ASESOR RM " . $nombreAsesorRM . " NO TIENE EMAIL");
             }
