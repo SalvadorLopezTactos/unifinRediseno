@@ -6840,6 +6840,7 @@
                                         */
 									}
 								}
+                                location.reload();
 							}, this)
 						});						
                     }
@@ -6922,7 +6923,7 @@
                         messages: 'No se encuentra producto a Desaprobar No viable',
                      });
                 }
-                //  this.render();
+                location.reload();
             },
             error: function (e) {
                 throw e;
@@ -6956,7 +6957,7 @@
                         messages: 'No se encuentra producto a Reactivar No viable',
                      });
                 }
-                this.render();
+                location.reload();
             },
             error: function (e) {
                 throw e;

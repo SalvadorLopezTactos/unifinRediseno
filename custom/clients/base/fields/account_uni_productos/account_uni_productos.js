@@ -1547,6 +1547,7 @@
         cont_uni_p.datacondiciones = {};
         var filter_arguments =
         {
+            max_num:-1,
             "fields": [
                 "id",
                 "condicion",
@@ -1785,6 +1786,7 @@
 
         var filter_arguments =
         {
+            max_num: -1,
             "fields": [
                 "id_c",
                 "nombre_completo_c",

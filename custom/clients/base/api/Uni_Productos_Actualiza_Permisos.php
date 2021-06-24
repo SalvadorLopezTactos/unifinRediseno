@@ -261,7 +261,7 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
         $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION no viable: ".$cuerpoCorreo);
         //$GLOBALS['log']->fatal("ENVIANDO NOTIFICACION no viable".$correo_director);
         //Enviando correo a director de solicitud con copia  a director regional leasing
-        $this->enviarNotificacionDirector("Cuenta {$nombreCuenta} bloqueada por {$ResponsableIngesta}",$cuerpoCorreo,$nombres,$correos);
+        $this->enviarNotificacionDirector("Solicitud de reapertura para la cuenta {$nombreCuenta} solicitada por {$ResponsableIngesta}",$cuerpoCorreo,$nombres,$correos);
         
         $GLOBALS['log']->fatal("Termina proceso de notificacion_director");
     }
@@ -310,7 +310,7 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
 
     public function estableceCuerpoNotificacion($nombreCuenta,$ResponsableIngesta,$razon,$detalle,$linkCuenta){
 
-        $mailHTML = '<br>Se le informa que la cuenta <a id="linkCuenta" href="'. $linkCuenta.'"> '  .$nombreCuenta.' </a> ha sido reactivada por ' .$ResponsableIngesta.'.
+        $mailHTML = '<br>Se le informa que el usuario <b>' .$ResponsableIngesta. '</b> ha solicitado la reactivación para la cuenta <a id="linkCuenta" href="'. $linkCuenta.'"> '  .$nombreCuenta.' </a>. 
       <br><br>Atentamente Unifin
       <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
       <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
