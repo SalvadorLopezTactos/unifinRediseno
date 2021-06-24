@@ -150,7 +150,7 @@
 
     loadData: function (options) {
         //Solo cargar los datos de condiciones financieras cuando no se está creando
-        if(this.view.currentState!="create"){
+        if(this.view.currentState != "create"){
             //Validación para obtener información del campo en lugar de lanzar petición al servicio
             if (this.model.get('cf_quantico_politica_c') == "") {
                 this.headers = [];
@@ -886,6 +886,7 @@
     _render: function () {
         this._super("_render");
         $('[data-type="textarea"][data-name="cf_quantico_politica_c"]').addClass('hide');
+        $('[data-type="textarea"][data-name="cf_quantico_c"]').addClass('hide');
     
     },
 
