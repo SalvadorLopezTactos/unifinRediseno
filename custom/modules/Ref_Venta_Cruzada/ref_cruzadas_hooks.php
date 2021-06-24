@@ -224,6 +224,172 @@ class Ref_Cruzadas_Hooks
         }
     }
 
+    public function enviaNotificacionRefNoValida($bean = null, $event = null, $args = null){
+
+        global $app_list_strings;
+        
+        $status = $bean->estatus;
+        //Referencia No válida : 2
+        //Producto Leasing : 1
+        $id_usuario_ref=$app_list_strings['usuario_ref_no_valida_list'][0];
+        $email_alejandro="";
+        $nombreAlejandro="";
+
+        $beanUsuarioAV = BeanFactory::retrieveBean('Users', $id_usuario_ref,array('disable_row_level_security' => true));
+        if (!empty($beanUsuarioAV)) {
+            $email_alejandro = $beanUsuarioAV->email1;
+            $nombreAlejandro = $beanUsuarioAV->full_name;
+        }
+        //$email_alejandro="salvador.lopez@tactos.com.mx";
+        //$nombreAlejandro="Alejandro de la Vega";
+        $producto_referenciado=$bean->producto_referenciado;
+
+        $urlSugar = $GLOBALS['sugar_config']['site_url'] . '/#Ref_Venta_Cruzada/';
+        $idReferencia = $bean->id;
+        $linkReferencia = $urlSugar . $idReferencia;
+
+        $nombreAsesorOrigen = $bean->assigned_user_name;
+        $nombreAsesorReferenciado = $bean->usuario_producto;
+
+        $idCuenta = $bean->accounts_ref_venta_cruzada_1accounts_ida;
+        $nombreCuenta = "";
+        //Obteniendo nombre de Cuenta
+        if ($idCuenta != "" && $idCuenta != null) {
+            $beanCuenta = BeanFactory::retrieveBean('Accounts', $idCuenta,array('disable_row_level_security' => true));
+            if (!empty($beanCuenta)) {
+                $nombreCuenta = $beanCuenta->name;
+            }
+        }
+
+        $array_cond_no_cumplidas=$this->estableceCondicionesNoCumplidas($bean);
+
+        //Si el producto referenciado es Leasing y además se establece como No Válida
+        if($producto_referenciado=='1' && $status=='2' && $bean->correo_env_c != '1'){
+            $cuerpoCorreo = $this->estableceCuerpoNotificacionNoValida($nombreAlejandro, $nombreAsesorOrigen, $nombreAsesorReferenciado,$nombreCuenta, $linkReferencia,$array_cond_no_cumplidas);
+
+            $GLOBALS['log']->fatal("ENVIANDO CORREO (REFERENCIA NO VALIDA) A ALEJANDRO DE LA VEGA " . $email_alejandro);
+
+            //Enviando correo a Alejandro de la Vega
+            $this->enviarNotificacionReferencia("Intento de nueva referencia de venta cruzada", $cuerpoCorreo, $email_alejandro, $nombreAlejandro);
+
+            //Se actualiza bandera para controlar que el correo solo se envie la primera vez
+            $sqlUpdate="UPDATE ref_venta_cruzada_cstm SET correo_env_c = '1' WHERE id_c = '{$bean->id}'";
+            $resultado = $GLOBALS['db']->query($sqlUpdate);
+
+        }
+
+    }
+
+    public function estableceCondicionesNoCumplidas($bean){
+        global $db;
+        //Condiciones no cumplidas, por las cuales se establece como no válida
+        $array_cond_no_cumplidas=array();
+        $id_cuenta = '';
+
+        //Condición 1 - Mismo equipo de asesores y mismo producto origen y referenciado
+        $asesor_origen=$bean->assigned_user_id;
+		$asesor_referenciado=$bean->user_id_c;
+
+		$producto_origen=$bean->producto_origen;
+		$producto_referenciado=$bean->producto_referenciado;
+
+		if($producto_origen == $producto_referenciado){
+			//Comprobando equipos de los asesores, se opta por query en lugar de bean, para evitar seguridad de equipos
+			//y evitar doble consulta
+			$query = "SELECT equipo_c FROM users_cstm WHERE id_c IN ('{$asesor_origen}','{$asesor_referenciado}')";
+			$queryResult = $db->query($query);
+			$array_equipos=array();
+			while ($row = $db->fetchByAssoc($queryResult)) {
+				array_push($array_equipos,$row['equipo_c']);
+			}
+
+			if(count($array_equipos)>0){
+				$equipo_asesor1=$array_equipos[0];
+				$equipo_asesor2=$array_equipos[1];
+
+				if($equipo_asesor1==$equipo_asesor2){
+                    array_push($array_cond_no_cumplidas,"Producto origen es igual a producto referenciado y tanto Asesor Origen como Asesor referenciado pertenecen al mismo equipo");
+                }
+            }
+        }
+
+        //Condición 2 - Producto relacionado a la cuenta
+        if ($bean->load_relationship('accounts_ref_venta_cruzada_1')) {
+            $relatedBeans = $bean->accounts_ref_venta_cruzada_1->getBeans();
+        
+            $parentBean = false;
+            if (!empty($relatedBeans)) {
+                //order the results
+                reset($relatedBeans);
+            
+                //first record in the list is the parent
+                $parentBean = current($relatedBeans);
+                $auxrel = 'accounts_uni_productos_1';
+
+                $id_cuenta = $parentBean->id;
+                if($parentBean->load_relationship('accounts_uni_productos_1')){
+                    $beans = $parentBean->accounts_uni_productos_1->getBeans();
+                    if (!empty($beans)) {
+                        foreach($beans as $prod){
+
+                            //Producto desatendido estatus =2
+                            if($bean->producto_referenciado == $prod->tipo_producto){
+                                $array = $GLOBALS['app_list_strings']['usuarios_ref_no_validos_list'];
+
+                                //usuario no este en 9, lista usuarios_no_ceder_list
+                                //id no es null || vacio
+                                //$GLOBALS['log']->fatal('producto no valido');
+                                if($prod->estatus_atencion == '1' && !in_array($prod->assigned_user_id, $array)){
+                                    array_push($array_cond_no_cumplidas,"El producto relacionado a la Cuenta se encuentra Atendido y el usuario asignado es alguno de los usuarios 9");
+                                }
+                            }
+                        }
+                    }
+                }					
+            }
+        }
+
+        //Condición 3 - Solicitudes relacionadas a la Cuenta
+        if ($parentBean->load_relationship('opportunities')) {
+            //Fetch related beans
+            $relatedBeans = $parentBean->opportunities->getBeans();
+            //$GLOBALS['log']->fatal('oportunidades');
+            if (!empty($relatedBeans)) {
+                $hoy = date("Y-m-d");  
+                foreach($relatedBeans as $oppor){
+                    //Producto desatendido estatus =2     //mismo producto							
+                    if($bean->producto_referenciado == $oppor->tipo_producto_c){
+                        $auxdate = date($oppor->vigencialinea_c);
+                        if( $oppor->tct_opp_estatus_c=='1' && !($oppor->estatus_c =='K'||$oppor->estatus_c =='R'||$oppor->estatus_c =='CM')){
+                            array_push($array_cond_no_cumplidas,'La solicitud relacionada a la Cuenta perteneciente al mismo producto referenciado se encuentra Activa y además la subetapa no se encuentra en alguno de los estados:<br>
+                            <ul>
+                                <li type="circle">Cancelada</li>
+                                <li type="circle">Rechazada Crédito</li>
+                                <li type="circle">Rechazada Comité</li>
+                            </ul>');
+                        } 
+                    }
+                }
+            }
+        }
+
+        //Condición 4 - 
+        $mesactual = date("n");
+        $anioactual = date("Y");
+        $query = 'SELECT bcl.id,bcl.anio, bcl.mes FROM accounts ac, lev_backlog bcl WHERE bcl.account_id_c = ac.id and ac.id = "'.$id_cuenta.'" and bcl.deleted=0';
+		$results = $GLOBALS['db']->query($query);
+		while($row = $GLOBALS['db']->fetchByAssoc($results) ){
+            if($row['anio'] > $anioactual ){
+                array_push($array_cond_no_cumplidas,"El backlog relacionado a la Cuenta es de un año posterior al actual");
+            }else if($row['anio'] == $anioactual && $row['mes'] > $mesactual){
+                array_push($array_cond_no_cumplidas,"El backlog relacionado a la Cuenta es de un año posterior al actual y de un mes mayor al actual");
+			}
+        }
+        
+        return $array_cond_no_cumplidas;
+
+    }
+
     public function estableceCuerpoNotificacion($nombreAsesor, $nombreCuenta, $necesidadCliente, $linkReferencia)
     {
 
@@ -232,6 +398,36 @@ class Ref_Cruzadas_Hooks
       <br><br>Se le informa que se ha generado una referencia de venta cruzada para la cuenta: ' . $nombreCuenta . '
       <br>La necesidad del cliente es: ' . $necesidadCliente . '
       <br><br>Para ver el detalle de la referencia <a id="downloadErrors" href="' . $linkReferencia . '">Da Click Aquí</a>
+      <br><br>Atentamente Unifin</font></p>
+      <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
+      <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
+      <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+       Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+       Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+       No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+       Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br /> </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a> </span><u></u><u></u></p>';
+
+        return $mailHTML;
+    }
+
+    public function estableceCuerpoNotificacionNoValida($nombreAlejandro,$nombreAsesorOrigen,$nombreAsesorReferenciado,$nombreCuenta,$linkReferencia,$condicionesIncumplidas)
+    {
+        $strLista="";
+        if(count($condicionesIncumplidas)>0){
+            for ($i=0; $i < count($condicionesIncumplidas); $i++) { 
+                $strLista.='<li type="circle">'.$condicionesIncumplidas[$i].'</li>';
+            }
+
+        }
+
+
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>Estimado ' . $nombreAlejandro . '</b>
+      <br><br>Se le informa que se ha generado un intento de nueva referencia de venta cruzada: <a id="linkReferencia" href="' . $linkReferencia . '">Da Click Aquí</a>.
+      <br>El asesor ' . $nombreAsesorOrigen . ' generó el intento para la nueva referencia dirigida hacia el cliente '.$nombreCuenta.' estableciendo como asesor que lo atenderá a '.$nombreAsesorReferenciado.'.
+      <br><br>Las condiciones que no se cumplieron y por lo cual se establece como <b>No válida</b>, son las siguientes:
+      <br><br>
+      <ul>'.$strLista.'
+      </ul>
       <br><br>Atentamente Unifin</font></p>
       <br><p class="imagen"><img border="0" width="350" height="107" style="width:3.6458in;height:1.1145in" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
       <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
@@ -307,6 +503,17 @@ class Ref_Cruzadas_Hooks
 
     public function enviarNotificacionReferencia($asunto, $cuerpoCorreo, $correoAsesor, $nombreAsesor)
     {
+        global $app_list_strings;
+        //Se obtiene información de Alejandro de la Vega a través de lista de valores
+        $id_usuario_ref=$app_list_strings['usuario_ref_no_valida_list'][0];
+        $email_alejandro="";
+        $nombreAlejandro="";
+
+        $beanUsuarioAV = BeanFactory::retrieveBean('Users', $id_usuario_ref,array('disable_row_level_security' => true));
+        if (!empty($beanUsuarioAV)) {
+            $email_alejandro = $beanUsuarioAV->email1;
+            $nombreAlejandro = $beanUsuarioAV->full_name;
+        }
         //Enviando correo a asesor origen
         try {
             $mailer = MailerFactory::getSystemDefaultMailer();
@@ -316,10 +523,12 @@ class Ref_Cruzadas_Hooks
             $mailer->setHtmlBody($body);
             $mailer->clearRecipients();
             $mailer->addRecipientsTo(new EmailIdentity($correoAsesor, $nombreAsesor));
+            $mailer->addRecipientsCc(new EmailIdentity($email_alejandro, $nombreAlejandro));
             $result = $mailer->send();
         } catch (Exception $e) {
             $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email " . $correoAsesor);
             $GLOBALS['log']->fatal("Exception " . $e);
         }
     }
+
 }
