@@ -149,260 +149,261 @@
     },
 
     loadData: function (options) {
+        //Solo cargar los datos de condiciones financieras cuando no se está creando
+        if(this.view.currentState!="create"){
+            //Validación para obtener información del campo en lugar de lanzar petición al servicio
+            if (this.model.get('cf_quantico_politica_c') == "") {
+                this.headers = [];
+                this.bodyTable = [];
+                this.mainRowsBodyTable = [];
+                this.mainRowsConfigBodyTable = [];
+                self = this;
 
-        //Validación para obtener información del campo en lugar de lanzar petición al servicio
-        if (this.model.get('cf_quantico_politica_c') == "") {
-            this.headers = [];
-            this.bodyTable = [];
-            this.mainRowsBodyTable = [];
-            this.mainRowsConfigBodyTable = [];
-            self = this;
+                //Alert procesando
+                app.alert.show("getInfoCFQuantico", {
+                    level: "process",
+                    title: "Obteniendo información, por favor espere",
+                    autoClose: false
+                });
 
-            //Alert procesando
-            app.alert.show("getInfoCFQuantico", {
-                level: "process",
-                title: "Obteniendo información, por favor espere",
-                autoClose: false
-            });
+                //Forma url de petición
+                var tipo_producto=self.model.get('tipo_producto_c');
+                var product_id = self.model.get('producto_financiero_c');
+                product_id = (product_id==undefined || product_id=='')? 0:product_id;
+                var url = app.api.buildURL('CondicionesFinancierasQuantico?tipo_producto='+tipo_producto+'&product_id='+product_id, null, null, {});
+                app.api.call('GET', url, {}, {
+                    success: function (data) {
+                        try {
+                            var jsonStringPolitica=JSON.stringify(data);
+                            //Llenar los headers
+                            //Recorres el array de respuesta para corroborar el tipo de dato para conocer el campo html que corresponde
+                            if (data.FinancialTermGroupResponseList != undefined && data.FinancialTermGroupResponseList.length > 0) {
+                                self.model.set("cf_quantico_politica_c",jsonStringPolitica);
+                                var arrayRespuesta = data.FinancialTermGroupResponseList[0].FinancialTermResponseList;
+                                if (arrayRespuesta.length > 0) {
+                                    for (var i = 0; i < arrayRespuesta.length; i++) {
+                                        var objHeader = {};
+                                        objHeader["name"] = arrayRespuesta[i].Name;
+                                        objHeader["idCampo"] = arrayRespuesta[i].DataType.Id;
 
-            //Forma url de petición
-            var tipo_producto=self.model.get('tipo_producto_c');
-            var product_id = self.model.get('producto_financiero_c');
-            product_id = (product_id==undefined || product_id=='')? 0:product_id;
-            var url = app.api.buildURL('CondicionesFinancierasQuantico?tipo_producto='+tipo_producto+'&product_id='+product_id, null, null, {});
-            app.api.call('GET', url, {}, {
-                success: function (data) {
-                    try {
-                        var jsonStringPolitica=JSON.stringify(data);
-                        //Llenar los headers
-                        //Recorres el array de respuesta para corroborar el tipo de dato para conocer el campo html que corresponde
-                        if (data.FinancialTermGroupResponseList != undefined && data.FinancialTermGroupResponseList.length > 0) {
-                            self.model.set("cf_quantico_politica_c",jsonStringPolitica);
-                            var arrayRespuesta = data.FinancialTermGroupResponseList[0].FinancialTermResponseList;
-                            if (arrayRespuesta.length > 0) {
-                                for (var i = 0; i < arrayRespuesta.length; i++) {
-                                    var objHeader = {};
-                                    objHeader["name"] = arrayRespuesta[i].Name;
-                                    objHeader["idCampo"] = arrayRespuesta[i].DataType.Id;
-
-                                    // Comprobando los id 4,5,9 y 11 para colocar doble campo, que son los de rango (2 inputs)
-                                    if (arrayRespuesta[i].DataType.Id == '4' || arrayRespuesta[i].DataType.Id == '5' || arrayRespuesta[i].DataType.Id == '9' || arrayRespuesta[i].DataType.Id == '11') {
-                                        objHeader['dobleCampo'] = '1';
-                                        //self.bodyTable.push();
-                                    } else {
-                                        objHeader['dobleCampo'] = '';
+                                        // Comprobando los id 4,5,9 y 11 para colocar doble campo, que son los de rango (2 inputs)
+                                        if (arrayRespuesta[i].DataType.Id == '4' || arrayRespuesta[i].DataType.Id == '5' || arrayRespuesta[i].DataType.Id == '9' || arrayRespuesta[i].DataType.Id == '11') {
+                                            objHeader['dobleCampo'] = '1';
+                                            //self.bodyTable.push();
+                                        } else {
+                                            objHeader['dobleCampo'] = '';
+                                        }
+                                        self.headers.push(objHeader);
                                     }
-                                    self.headers.push(objHeader);
                                 }
-                            }
 
-                            //Llenado del cuerpo de la tabla
-                            for (var index = 0; index < data.FinancialTermGroupResponseList.length; index++) {
-                                var arrayRespuesta = data.FinancialTermGroupResponseList[index];
-                                var objRow = {};
-                                /*
-                                    id 1: Booleano - Check
-                                    id 2: Numérico - Text
-                                    id 3: Texto - Text
-                                    id 4: Rango entero - 2 Text
-                                    id 5: Rango moneda - 2 Text
-                                    id 6: Moneda - Text
-                                    id 7: Catálogo - Select
-                                    id 8: Porcentaje - Text
-                                    id 9: Rango porcentaje - 2 Text
-                                    id 10: Decimal - Text
-                                    id 11: Rango Decimal - 2 Text
-                                */
-                                self.bodyTable = [];
-                                for (var i = 0; i < arrayRespuesta.FinancialTermResponseList.length; i++) {
-                                    if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '4' ||
-                                        arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '5' ||
-                                        arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '9' ||
-                                        arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '11'
-                                    ) {
-                                        var rangoInferior = arrayRespuesta.FinancialTermResponseList[i].Value.ValueMin;
-                                        var rangoSuperior = arrayRespuesta.FinancialTermResponseList[i].Value.ValueMax;
+                                //Llenado del cuerpo de la tabla
+                                for (var index = 0; index < data.FinancialTermGroupResponseList.length; index++) {
+                                    var arrayRespuesta = data.FinancialTermGroupResponseList[index];
+                                    var objRow = {};
+                                    /*
+                                        id 1: Booleano - Check
+                                        id 2: Numérico - Text
+                                        id 3: Texto - Text
+                                        id 4: Rango entero - 2 Text
+                                        id 5: Rango moneda - 2 Text
+                                        id 6: Moneda - Text
+                                        id 7: Catálogo - Select
+                                        id 8: Porcentaje - Text
+                                        id 9: Rango porcentaje - 2 Text
+                                        id 10: Decimal - Text
+                                        id 11: Rango Decimal - 2 Text
+                                    */
+                                    self.bodyTable = [];
+                                    for (var i = 0; i < arrayRespuesta.FinancialTermResponseList.length; i++) {
+                                        if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '4' ||
+                                            arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '5' ||
+                                            arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '9' ||
+                                            arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '11'
+                                        ) {
+                                            var rangoInferior = arrayRespuesta.FinancialTermResponseList[i].Value.ValueMin;
+                                            var rangoSuperior = arrayRespuesta.FinancialTermResponseList[i].Value.ValueMax;
 
-                                        var limiteInferior="";
-                                        var limiteSuperior="";
-                                        if(arrayRespuesta.FinancialTermResponseList[i].Configuration != undefined){
-                                            limiteSuperior=arrayRespuesta.FinancialTermResponseList[i].Configuration.UpperLimit;
+                                            var limiteInferior="";
+                                            var limiteSuperior="";
+                                            if(arrayRespuesta.FinancialTermResponseList[i].Configuration != undefined){
+                                                limiteSuperior=arrayRespuesta.FinancialTermResponseList[i].Configuration.UpperLimit;
 
-                                            if(arrayRespuesta.FinancialTermResponseList[i].Configuration.LowerLimit != undefined){
-                                                limiteInferior=arrayRespuesta.FinancialTermResponseList[i].Configuration.LowerLimit;
+                                                if(arrayRespuesta.FinancialTermResponseList[i].Configuration.LowerLimit != undefined){
+                                                    limiteInferior=arrayRespuesta.FinancialTermResponseList[i].Configuration.LowerLimit;
+                                                }
                                             }
-                                        }
 
-                                        self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'rangoInferior': rangoInferior, 'rangoSuperior': "","limiteInferior":limiteInferior,"limiteSuperior":limiteSuperior});
-                                        self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'rangoInferior': "", 'rangoSuperior': rangoSuperior,"limiteInferior":limiteInferior,"limiteSuperior":limiteSuperior });
-                                    } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '7') {//Catálogo
-                                        //Obteniendo los valores de la lista
-                                        var nombre_lista = arrayRespuesta.FinancialTermResponseList[i].Name;
-                                        nombre_lista=nombre_lista.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                                        //Obteniendo el mapeo desde la lista
-                                        var lista_valores = App.lang.getAppListStrings('mapeo_nombre_attr_cf_quantico_list')[nombre_lista];
-                                        var valores_select = data['listaValores'][lista_valores];
-                                        var valores_select_obj = {};
-                                        //Convirtiendo el arreglo a objeto para poderlo mostrar en las opciones del campo select
-                                        for (var j = 0; j < valores_select.length; j++) {
-                                            valores_select_obj[valores_select[j].Id] = valores_select[j].Name;
-                                        }
-                                        var valorSelected = arrayRespuesta.FinancialTermResponseList[i].Value.ValueId;
+                                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'rangoInferior': rangoInferior, 'rangoSuperior': "","limiteInferior":limiteInferior,"limiteSuperior":limiteSuperior});
+                                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'rangoInferior': "", 'rangoSuperior': rangoSuperior,"limiteInferior":limiteInferior,"limiteSuperior":limiteSuperior });
+                                        } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '7') {//Catálogo
+                                            //Obteniendo los valores de la lista
+                                            var nombre_lista = arrayRespuesta.FinancialTermResponseList[i].Name;
+                                            nombre_lista=nombre_lista.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                                            //Obteniendo el mapeo desde la lista
+                                            var lista_valores = App.lang.getAppListStrings('mapeo_nombre_attr_cf_quantico_list')[nombre_lista];
+                                            var valores_select = data['listaValores'][lista_valores];
+                                            var valores_select_obj = {};
+                                            //Convirtiendo el arreglo a objeto para poderlo mostrar en las opciones del campo select
+                                            for (var j = 0; j < valores_select.length; j++) {
+                                                valores_select_obj[valores_select[j].Id] = valores_select[j].Name;
+                                            }
+                                            var valorSelected = arrayRespuesta.FinancialTermResponseList[i].Value.ValueId;
 
-                                        self.bodyTable.push({ 'select': '1', 'text': '', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'valoresCatalogo': valores_select_obj, 'valorSelected': valorSelected });
-                                    } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '1') {//Check
-                                        var strChecked = "";
-                                        var valorBoolean = arrayRespuesta.FinancialTermResponseList[i].Value.Value;
-                                        if (valorBoolean == "True") {
-                                            strChecked = 'checked'
+                                            self.bodyTable.push({ 'select': '1', 'text': '', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'valoresCatalogo': valores_select_obj, 'valorSelected': valorSelected });
+                                        } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '1') {//Check
+                                            var strChecked = "";
+                                            var valorBoolean = arrayRespuesta.FinancialTermResponseList[i].Value.Value;
+                                            if (valorBoolean == "True") {
+                                                strChecked = 'checked'
+                                            }
+                                            self.bodyTable.push({ 'select': '', 'text': '', 'checkbox': '1','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, "checked": strChecked });
+                                        } else {// Solo 1 Text
+                                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name,"valorCampo": arrayRespuesta.FinancialTermResponseList[i].Value.Value});
                                         }
-                                        self.bodyTable.push({ 'select': '', 'text': '', 'checkbox': '1','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, "checked": strChecked });
-                                    } else {// Solo 1 Text
-                                        self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name,"valorCampo": arrayRespuesta.FinancialTermResponseList[i].Value.Value});
+                                    }
+                                    self.mainRowsBodyTable.push({ 'bodyTable': self.bodyTable });
+
+                                }
+
+                            }else{
+                                app.alert.show("errorGetInfoCFQuantico", {
+                                    level: "warning",
+                                    title: "No se recuperaron condiciones financieras de polítca para este producto.",
+                                    autoClose: true
+                                });
+                            }
+                            app.alert.dismiss('getInfoCFQuantico');
+                            self.render();
+                        } catch (e) {
+                        app.alert.dismiss('getInfoCFQuantico');
+                        app.alert.show("errorGetInfoCFQuantico", {
+                            level: "warning",
+                            title: "No se pudieron recuperar condiciones financieras de política. Por favor, intenta refrescando tu página.",
+                            autoClose: true
+                        });
+
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e);
+                        app.alert.dismiss('getInfoCFQuantico');
+                        app.alert.show("errorGetInfoCFQuantico", {
+                            level: "error",
+                            title: "No se pudieron recuperar condiciones financieras de política. Por favor, intenta refrescando tu página",
+                            autoClose: true
+                        });
+                    }
+                });
+
+            } else {
+                this.headers = [];
+                this.bodyTable = [];
+                this.mainRowsBodyTable = [];
+                this.mainRowsConfigBodyTable = [];
+                self = this;
+                //Cuando se tiene lleno el campo cf_quantico_politica_c, se formatea el el diseño con el contenido de dicho campo
+                var data = JSON.parse(this.model.get('cf_quantico_politica_c'));
+                //Llenar los headers
+                //Recorres el array de respuesta para corroborar el tipo de dato para conocer el campo html que corresponde
+                if (data.FinancialTermGroupResponseList.length > 0) {
+                    var arrayRespuesta = data.FinancialTermGroupResponseList[0].FinancialTermResponseList;
+                    if (arrayRespuesta.length > 0) {
+                        for (var i = 0; i < arrayRespuesta.length; i++) {
+                            var objHeader = {};
+                            objHeader["name"] = arrayRespuesta[i].Name;
+                            objHeader["idCampo"] = arrayRespuesta[i].DataType.Id;
+
+                            // Comprobando los id 4,5,9 y 11 para colocar doble campo, que son los de rango (2 inputs)
+                            if (arrayRespuesta[i].DataType.Id == '4' || arrayRespuesta[i].DataType.Id == '5' || arrayRespuesta[i].DataType.Id == '9' || arrayRespuesta[i].DataType.Id == '11') {
+                                objHeader['dobleCampo'] = '1';
+                                //self.bodyTable.push();
+                            } else {
+                                objHeader['dobleCampo'] = '';
+                            }
+                            self.headers.push(objHeader);
+                        }
+                    }
+
+                    //Llenado del cuerpo de la tabla
+                    for (var index = 0; index < data.FinancialTermGroupResponseList.length; index++) {
+                        var arrayRespuesta = data.FinancialTermGroupResponseList[index];
+                        var objRow = {};
+                        /*
+                            id 1: Booleano - Check
+                            id 2: Numérico - Text
+                            id 3: Texto - Text
+                            id 4: Rango entero - 2 Text
+                            id 5: Rango moneda - 2 Text
+                            id 6: Moneda - Text
+                            id 7: Catálogo - Select
+                            id 8: Porcentaje - Text
+                            id 9: Rango porcentaje - 2 Text
+                            id 10: Decimal - Text
+                            id 11: Rango Decimal - 2 Text
+                        */
+                        self.bodyTable = [];
+                        for (var i = 0; i < arrayRespuesta.FinancialTermResponseList.length; i++) {
+                            if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '4' ||
+                                arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '5' ||
+                                arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '9' ||
+                                arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '11'
+                            ) {
+                                var rangoInferior = arrayRespuesta.FinancialTermResponseList[i].Value.ValueMin;
+                                var rangoSuperior = arrayRespuesta.FinancialTermResponseList[i].Value.ValueMax;
+
+                                var limiteInferior="";
+                                var limiteSuperior="";
+                                if(arrayRespuesta.FinancialTermResponseList[i].Configuration != undefined){
+                                    limiteSuperior=arrayRespuesta.FinancialTermResponseList[i].Configuration.UpperLimit;
+
+                                    if(arrayRespuesta.FinancialTermResponseList[i].Configuration.LowerLimit != undefined){
+                                        limiteInferior=arrayRespuesta.FinancialTermResponseList[i].Configuration.LowerLimit;
                                     }
                                 }
-                                self.mainRowsBodyTable.push({ 'bodyTable': self.bodyTable });
 
-                            }
-
-                        }else{
-                            app.alert.show("errorGetInfoCFQuantico", {
-                                level: "warning",
-                                title: "No se recuperaron condiciones financieras de polítca para este producto.",
-                                autoClose: true
-                            });
-                        }
-                        app.alert.dismiss('getInfoCFQuantico');
-                        self.render();
-                    } catch (e) {
-                      app.alert.dismiss('getInfoCFQuantico');
-                      app.alert.show("errorGetInfoCFQuantico", {
-                          level: "warning",
-                          title: "No se pudieron recuperar condiciones financieras de política. Por favor, intenta refrescando tu página.",
-                          autoClose: true
-                      });
-
-                    }
-                },
-                error: function (e) {
-                    console.log(e);
-                    app.alert.dismiss('getInfoCFQuantico');
-                    app.alert.show("errorGetInfoCFQuantico", {
-                        level: "error",
-                        title: "No se pudieron recuperar condiciones financieras de política. Por favor, intenta refrescando tu página",
-                        autoClose: true
-                    });
-                }
-            });
-
-        } else {
-            this.headers = [];
-            this.bodyTable = [];
-            this.mainRowsBodyTable = [];
-            this.mainRowsConfigBodyTable = [];
-            self = this;
-            //Cuando se tiene lleno el campo cf_quantico_politica_c, se formatea el el diseño con el contenido de dicho campo
-            var data = JSON.parse(this.model.get('cf_quantico_politica_c'));
-            //Llenar los headers
-            //Recorres el array de respuesta para corroborar el tipo de dato para conocer el campo html que corresponde
-            if (data.FinancialTermGroupResponseList.length > 0) {
-                var arrayRespuesta = data.FinancialTermGroupResponseList[0].FinancialTermResponseList;
-                if (arrayRespuesta.length > 0) {
-                    for (var i = 0; i < arrayRespuesta.length; i++) {
-                        var objHeader = {};
-                        objHeader["name"] = arrayRespuesta[i].Name;
-                        objHeader["idCampo"] = arrayRespuesta[i].DataType.Id;
-
-                        // Comprobando los id 4,5,9 y 11 para colocar doble campo, que son los de rango (2 inputs)
-                        if (arrayRespuesta[i].DataType.Id == '4' || arrayRespuesta[i].DataType.Id == '5' || arrayRespuesta[i].DataType.Id == '9' || arrayRespuesta[i].DataType.Id == '11') {
-                            objHeader['dobleCampo'] = '1';
-                            //self.bodyTable.push();
-                        } else {
-                            objHeader['dobleCampo'] = '';
-                        }
-                        self.headers.push(objHeader);
-                    }
-                }
-
-                //Llenado del cuerpo de la tabla
-                for (var index = 0; index < data.FinancialTermGroupResponseList.length; index++) {
-                    var arrayRespuesta = data.FinancialTermGroupResponseList[index];
-                    var objRow = {};
-                    /*
-                        id 1: Booleano - Check
-                        id 2: Numérico - Text
-                        id 3: Texto - Text
-                        id 4: Rango entero - 2 Text
-                        id 5: Rango moneda - 2 Text
-                        id 6: Moneda - Text
-                        id 7: Catálogo - Select
-                        id 8: Porcentaje - Text
-                        id 9: Rango porcentaje - 2 Text
-                        id 10: Decimal - Text
-                        id 11: Rango Decimal - 2 Text
-                    */
-                    self.bodyTable = [];
-                    for (var i = 0; i < arrayRespuesta.FinancialTermResponseList.length; i++) {
-                        if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '4' ||
-                            arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '5' ||
-                            arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '9' ||
-                            arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '11'
-                        ) {
-                            var rangoInferior = arrayRespuesta.FinancialTermResponseList[i].Value.ValueMin;
-                            var rangoSuperior = arrayRespuesta.FinancialTermResponseList[i].Value.ValueMax;
-
-                            var limiteInferior="";
-                            var limiteSuperior="";
-                            if(arrayRespuesta.FinancialTermResponseList[i].Configuration != undefined){
-                                limiteSuperior=arrayRespuesta.FinancialTermResponseList[i].Configuration.UpperLimit;
-
-                                if(arrayRespuesta.FinancialTermResponseList[i].Configuration.LowerLimit != undefined){
-                                    limiteInferior=arrayRespuesta.FinancialTermResponseList[i].Configuration.LowerLimit;
+                                self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'rangoInferior': rangoInferior, 'rangoSuperior': "" ,"limiteInferior":limiteInferior,"limiteSuperior":limiteSuperior});
+                                self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'rangoInferior': "", 'rangoSuperior': rangoSuperior,"limiteInferior":limiteInferior,"limiteSuperior":limiteSuperior });
+                            } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '7') {//Catálogo
+                                //Obteniendo los valores de la lista
+                                var nombre_lista = arrayRespuesta.FinancialTermResponseList[i].Name;
+                                nombre_lista=nombre_lista.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                                //Obteniendo el mapeo desde la lista
+                                var lista_valores = App.lang.getAppListStrings('mapeo_nombre_attr_cf_quantico_list')[nombre_lista];
+                                var valores_select = data['listaValores'][lista_valores];
+                                var valores_select_obj = {};
+                                //Convirtiendo el arreglo a objeto para poderlo mostrar en las opciones del campo select
+                                for (var j = 0; j < valores_select.length; j++) {
+                                    valores_select_obj[valores_select[j].Id] = valores_select[j].Name;
                                 }
-                            }
+                                var valorSelected = arrayRespuesta.FinancialTermResponseList[i].Value.ValueId;
 
-                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'rangoInferior': rangoInferior, 'rangoSuperior': "" ,"limiteInferior":limiteInferior,"limiteSuperior":limiteSuperior});
-                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'rangoInferior': "", 'rangoSuperior': rangoSuperior,"limiteInferior":limiteInferior,"limiteSuperior":limiteSuperior });
-                        } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '7') {//Catálogo
-                            //Obteniendo los valores de la lista
-                            var nombre_lista = arrayRespuesta.FinancialTermResponseList[i].Name;
-                            nombre_lista=nombre_lista.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                            //Obteniendo el mapeo desde la lista
-                            var lista_valores = App.lang.getAppListStrings('mapeo_nombre_attr_cf_quantico_list')[nombre_lista];
-                            var valores_select = data['listaValores'][lista_valores];
-                            var valores_select_obj = {};
-                            //Convirtiendo el arreglo a objeto para poderlo mostrar en las opciones del campo select
-                            for (var j = 0; j < valores_select.length; j++) {
-                                valores_select_obj[valores_select[j].Id] = valores_select[j].Name;
+                                self.bodyTable.push({ 'select': '1', 'text': '', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'valoresCatalogo': valores_select_obj, 'valorSelected': valorSelected });
+                            } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '1') {//Check
+                                var strChecked = "";
+                                var valorBoolean = arrayRespuesta.FinancialTermResponseList[i].Value.Value;
+                                if (valorBoolean == "True") {
+                                    strChecked = 'checked'
+                                }
+                                self.bodyTable.push({ 'select': '', 'text': '', 'checkbox': '1','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, "checked": strChecked });
+                            } else {// Solo 1 Text
+                                self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name,"valorCampo": arrayRespuesta.FinancialTermResponseList[i].Value.Value });
                             }
-                            var valorSelected = arrayRespuesta.FinancialTermResponseList[i].Value.ValueId;
-
-                            self.bodyTable.push({ 'select': '1', 'text': '', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, 'valoresCatalogo': valores_select_obj, 'valorSelected': valorSelected });
-                        } else if (arrayRespuesta.FinancialTermResponseList[i].DataType.Id == '1') {//Check
-                            var strChecked = "";
-                            var valorBoolean = arrayRespuesta.FinancialTermResponseList[i].Value.Value;
-                            if (valorBoolean == "True") {
-                                strChecked = 'checked'
-                            }
-                            self.bodyTable.push({ 'select': '', 'text': '', 'checkbox': '1','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name, "checked": strChecked });
-                        } else {// Solo 1 Text
-                            self.bodyTable.push({ 'select': '', 'text': '1', 'checkbox': '','idNodo':arrayRespuesta.FinancialTermResponseList[i].Id,'nombreColumna':arrayRespuesta.FinancialTermResponseList[i].Name, 'nombreCampo': arrayRespuesta.FinancialTermResponseList[i].DataType.Name,"valorCampo": arrayRespuesta.FinancialTermResponseList[i].Value.Value });
                         }
+                        self.mainRowsBodyTable.push({ 'bodyTable': self.bodyTable });
+
                     }
-                    self.mainRowsBodyTable.push({ 'bodyTable': self.bodyTable });
 
                 }
 
+                //self.render();
+            }
+            if (this.model.get('cf_quantico_politica_c') != "") {
+                this.setinfoCFConfiguradas();
             }
 
-            //self.render();
+            self.render();
         }
-        if (this.model.get('cf_quantico_politica_c') != "") {
-            this.setinfoCFConfiguradas();
-        }
-
-        self.render();
-
     },
 
     setinfoCFConfiguradas:function(){
@@ -885,7 +886,7 @@
     _render: function () {
         this._super("_render");
         $('[data-type="textarea"][data-name="cf_quantico_politica_c"]').addClass('hide');
-        $('[data-type="textarea"][data-name="cf_quantico_c"]').addClass('hide');
+    
     },
 
 })
