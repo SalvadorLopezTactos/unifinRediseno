@@ -620,7 +620,7 @@
         if(self.jsonCFConfiguradas==undefined){
             self.jsonCFConfiguradas=this.jsonCFConfiguradas;
         }
-        if(self.mainRowsConfigBodyTable==undefined){
+        if(self.mainRowsConfigBodyTable == undefined || self.mainRowsConfigBodyTable.length != this.mainRowsConfigBodyTable.length){
             self.mainRowsConfigBodyTable=this.mainRowsConfigBodyTable;
         }
         if(self.jsonCFConfiguradas.FinancialTermGroupResponseList.length==0){
