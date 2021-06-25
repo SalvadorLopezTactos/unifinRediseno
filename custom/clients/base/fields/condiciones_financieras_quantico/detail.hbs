@@ -27,7 +27,11 @@
             <tr>
                 <th scope="col">&nbsp;</th>
                 {{#each headers}}
-                <th scope="col" {{#if dobleCampo}}colspan="2"{{/if}}>{{name}}</th>
+                <th scope="col" {{#if dobleCampo}}colspan="2"{{/if}}>{{name}}
+                {{#each numeroEspacios}}
+                        &nbsp;
+                {{/each}}
+                </th>
                 {{/each}}
             </tr>
         </thead>
