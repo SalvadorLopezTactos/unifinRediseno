@@ -647,6 +647,10 @@
             //Se actualiza el objeto json que se dibuja en el hbs
             self.mainRowsConfigBodyTable[indexCampo].bodyTable[indexForUpdateJsonToHbs].rangoSuperior=$(e.currentTarget).val();
 
+            if($(e.currentTarget).val()==""){
+                self.mainRowsConfigBodyTable[indexCampo].bodyTable[indexForUpdateJsonToHbs].actualizadoPorUsuarioInputSuperior="true";
+            }
+
         }else if(tipoCampo=="check"){
             var valorSet="";
             if($(e.currentTarget).is(":checked")){
