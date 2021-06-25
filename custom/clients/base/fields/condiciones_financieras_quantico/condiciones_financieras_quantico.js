@@ -579,6 +579,12 @@
     deleteCFConfigurada: function (e) {
         var indiceBorrar = $(e.currentTarget).parent().parent().index();
         this.mainRowsConfigBodyTable.splice(indiceBorrar, 1);
+        if(this.jsonCFConfiguradas.FinancialTermGroupResponseList.length==0){
+            if(this.model.get("cf_quantico_c")!=""){
+                this.jsonCFConfiguradas=JSON.parse(this.model.get("cf_quantico_c"))
+            }
+
+        }
         this.jsonCFConfiguradas.FinancialTermGroupResponseList.splice(indiceBorrar,1);
         var jsonStringConfiguradas=JSON.stringify(this.jsonCFConfiguradas);
         this.model.set("cf_quantico_c",jsonStringConfiguradas);
