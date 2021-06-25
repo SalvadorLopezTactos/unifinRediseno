@@ -183,7 +183,7 @@
                                 if (arrayRespuesta.length > 0) {
                                     for (var i = 0; i < arrayRespuesta.length; i++) {
                                         
-                                        var objHeader = {};s
+                                        var objHeader = {};
                                         //Procedimiento para obtener la opción de la lista con mayor número de caracteres
                                         //para poder establecer el ancho de la columna de mayor tamaño, añadiendo espacios en blanco
                                         if(arrayRespuesta[i].DataType.Id=='7'){
