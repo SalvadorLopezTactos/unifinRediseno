@@ -182,9 +182,35 @@
                                 var arrayRespuesta = data.FinancialTermGroupResponseList[0].FinancialTermResponseList;
                                 if (arrayRespuesta.length > 0) {
                                     for (var i = 0; i < arrayRespuesta.length; i++) {
-                                        var objHeader = {};
-                                        objHeader["name"] = arrayRespuesta[i].Name;
-                                        objHeader["idCampo"] = arrayRespuesta[i].DataType.Id;
+                                        
+                                        var objHeader = {};s
+                                        //Procedimiento para obtener la opción de la lista con mayor número de caracteres
+                                        //para poder establecer el ancho de la columna de mayor tamaño, añadiendo espacios en blanco
+                                        if(arrayRespuesta[i].DataType.Id=='7'){
+                                            var nombre_lista = arrayRespuesta[i].Name;
+                                            nombre_lista=nombre_lista.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                                            var lista_valores = App.lang.getAppListStrings('mapeo_nombre_attr_cf_quantico_list')[nombre_lista];
+                                            var valores_select = data['listaValores'][lista_valores];
+                                            var array_longitudes=[];
+                                            var array_aux_espacios=[];
+
+                                            for (var index = 0; index < valores_select.length; index++) {
+                                                array_longitudes.push(valores_select[index].Name.length)
+                                            }
+                                            var mayorLongitud=Math.max.apply(null, array_longitudes);
+                                            //Generando string con valores vacíos para ajustar el ancho de columna
+                                            for (let index = 0; index < mayorLongitud; index++) {
+                                                array_aux_espacios.push('1');
+                                            }
+
+                                            objHeader["name"] = arrayRespuesta[i].Name;
+                                            objHeader["idCampo"] = arrayRespuesta[i].DataType.Id;
+                                            objHeader["numeroEspacios"] = array_aux_espacios;
+
+                                        }else{
+                                            objHeader["name"] = arrayRespuesta[i].Name;
+                                            objHeader["idCampo"] = arrayRespuesta[i].DataType.Id;
+                                        }
 
                                         // Comprobando los id 4,5,9 y 11 para colocar doble campo, que son los de rango (2 inputs)
                                         if (arrayRespuesta[i].DataType.Id == '4' || arrayRespuesta[i].DataType.Id == '5' || arrayRespuesta[i].DataType.Id == '9' || arrayRespuesta[i].DataType.Id == '11') {
@@ -310,9 +336,35 @@
                     var arrayRespuesta = data.FinancialTermGroupResponseList[0].FinancialTermResponseList;
                     if (arrayRespuesta.length > 0) {
                         for (var i = 0; i < arrayRespuesta.length; i++) {
-                            var objHeader = {};
-                            objHeader["name"] = arrayRespuesta[i].Name;
-                            objHeader["idCampo"] = arrayRespuesta[i].DataType.Id;
+                            var objHeader = {};s
+                            //Procedimiento para obtener la opción de la lista con mayor número de caracteres
+                            //para poder establecer el ancho de la columna de mayor tamaño, añadiendo espacios en blanco
+                            if(arrayRespuesta[i].DataType.Id=='7'){
+                                var nombre_lista = arrayRespuesta[i].Name;
+                                nombre_lista=nombre_lista.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                                var lista_valores = App.lang.getAppListStrings('mapeo_nombre_attr_cf_quantico_list')[nombre_lista];
+                                var valores_select = data['listaValores'][lista_valores];
+                                var array_longitudes=[];
+                                var array_aux_espacios=[];
+
+                                for (var index = 0; index < valores_select.length; index++) {
+                                    array_longitudes.push(valores_select[index].Name.length);
+                                }
+
+                                var mayorLongitud=Math.max.apply(null, array_longitudes);
+                                //Generando string con valores vacíos para ajustar el ancho de columna
+                                for (let index = 0; index < mayorLongitud; index++) {
+                                    array_aux_espacios.push('1');
+                                }
+
+                                objHeader["name"] = arrayRespuesta[i].Name;
+                                objHeader["idCampo"] = arrayRespuesta[i].DataType.Id;
+                                objHeader["numeroEspacios"] = array_aux_espacios;
+
+                            }else{
+                                objHeader["name"] = arrayRespuesta[i].Name;
+                                objHeader["idCampo"] = arrayRespuesta[i].DataType.Id;
+                            }
 
                             // Comprobando los id 4,5,9 y 11 para colocar doble campo, que son los de rango (2 inputs)
                             if (arrayRespuesta[i].DataType.Id == '4' || arrayRespuesta[i].DataType.Id == '5' || arrayRespuesta[i].DataType.Id == '9' || arrayRespuesta[i].DataType.Id == '11') {
