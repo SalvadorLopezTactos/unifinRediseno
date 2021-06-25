@@ -820,6 +820,12 @@
 
     chk_condFinEmptyValues:function (fields, errors, callback){
 
+        if(self.jsonCFConfiguradas!=undefined){
+            if(self.jsonCFConfiguradas.FinancialTermGroupResponseList.length==this.jsonCFConfiguradas.FinancialTermGroupResponseList.length ){
+                self.jsonCFConfiguradas=this.jsonCFConfiguradas;
+            }
+        }
+
         if(this.model.get('cf_quantico_c')!="" && this.model.get('cf_quantico_c')!=undefined){
             var strJsonConfiguradas = JSON.parse(this.model.get('cf_quantico_c'));
             if(strJsonConfiguradas.FinancialTermGroupResponseList.length>0){
