@@ -821,7 +821,7 @@
     chk_condFinEmptyValues:function (fields, errors, callback){
 
         if(self.jsonCFConfiguradas!=undefined){
-            if(self.jsonCFConfiguradas.FinancialTermGroupResponseList.length==this.jsonCFConfiguradas.FinancialTermGroupResponseList.length ){
+            if(self.jsonCFConfiguradas.FinancialTermGroupResponseList.length != this.jsonCFConfiguradas.FinancialTermGroupResponseList.length ){
                 self.jsonCFConfiguradas=this.jsonCFConfiguradas;
             }
         }
