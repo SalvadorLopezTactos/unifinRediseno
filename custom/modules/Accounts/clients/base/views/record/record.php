@@ -237,7 +237,7 @@ array (
               ),
             ),
           ),
-          8 => 
+          9 => 
           array (
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
