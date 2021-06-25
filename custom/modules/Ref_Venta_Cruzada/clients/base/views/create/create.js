@@ -33,6 +33,8 @@
 	_render: function (options) {
         this._super("_render");
         $('[data-name="cancelado"]').hide();
+        //Ocultando campo de control que valida si Alejandro de la Vega ha Validado la referencia
+		$('[data-name="ref_validada_av_c"]').hide();
 		
 		
     },	
