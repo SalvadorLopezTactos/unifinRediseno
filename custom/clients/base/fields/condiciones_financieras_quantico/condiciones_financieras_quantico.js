@@ -955,6 +955,25 @@
         this._super("_render");
         $('[data-type="textarea"][data-name="cf_quantico_politica_c"]').addClass('hide');
         $('[data-type="textarea"][data-name="cf_quantico_c"]').addClass('hide');
+
+        /*Este campo solo es editable para las siguientes etapas
+        tct_etapa_ddw_c: Solicitud Inicial
+        tct_etapa_ddw_c:Integración Expediente,estatus_c: En espera
+        tct_etapa_ddw_c:Integración Expediente,estatus_c: Integración Expediente
+        tct_etapa_ddw_c:Integración Expediente,estatus_c: Devuelta por Crédito
+        tct_etapa_ddw_c:Integración Expediente,estatus_c: Devuelta BO Crédito
+        tct_etapa_ddw_c:Rechazado,estatus_c: Rechazado Crédito
+        */
+       //$('[data-type="condiciones_financieras_quantico"]').attr('style',"pointer-events:none");
+       if(!(this.model.get('tct_etapa_ddw_c')=='SI' || 
+       this.model.get('estatus_c')=='PE' ||
+       this.model.get('estatus_c')=='P' ||
+       this.model.get('estatus_c')=='DP' ||
+       this.model.get('estatus_c')=='DB' ||
+       this.model.get('estatus_c')=='R')
+        ){
+            $('[data-type="condiciones_financieras_quantico"]').attr('style',"pointer-events:none");
+       }
     
     },
 
