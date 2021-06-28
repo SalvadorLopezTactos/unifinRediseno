@@ -4750,7 +4750,7 @@
 			var url = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
 			app.api.call('read', url, {}, {
 				success: _.bind(function (data) {
-					if (this.model.get('tct_no_contactar_chk_c') && (data.bloqueo_cartera_c || data.bloqueo2_c || data.bloqueo3_c)) {
+					if (data.bloqueo_cartera_c || data.bloqueo2_c || data.bloqueo3_c) {
 						//Bloquear el registro completo y mostrar alerta
 						$('.record.tab-layout').attr('style', 'pointer-events:none');
 						$('.subpanel').attr('style', 'pointer-events:none');
@@ -6857,7 +6857,7 @@
         var consulta = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
         app.api.call('read', consulta, {}, {
             success: _.bind(function (data) {
-                if((data.user_id1_c == app.user.id && this.model.get('tct_no_contactar_chk_c') && !data.bloqueo_cartera_c) || (data.user_id3_c == app.user.id && data.bloqueo_credito_c && !data.bloqueo2_c) || (data.user_id5_c == app.user.id && data.bloqueo_cumple_c && !data.bloqueo2_c)) {
+                if((data.user_id1_c == app.user.id && this.model.get('tct_no_contactar_chk_c') && !data.bloqueo_cartera_c) || (data.user_id3_c == app.user.id && data.bloqueo_credito_c && !data.bloqueo2_c) || (data.user_id5_c == app.user.id && data.bloqueo_cumple_c && !data.bloqueo3_c)) {
 					$('[name="bloquea_cuenta"]').removeClass('hidden');
 				}
 				if((data.user_id1_c == app.user.id && (this.model.get('tct_no_contactar_chk_c') || data.bloqueo_cartera_c)) || (data.user_id3_c == app.user.id && (data.bloqueo_credito_c || data.bloqueo2_c)) || (data.user_id5_c == app.user.id && (data.bloqueo_cumple_c || data.bloqueo3_c))) {
