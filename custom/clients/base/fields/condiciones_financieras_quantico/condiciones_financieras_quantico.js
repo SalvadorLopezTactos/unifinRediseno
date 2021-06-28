@@ -965,12 +965,12 @@
         tct_etapa_ddw_c:Rechazado,estatus_c: Rechazado Crédito
         */
        //$('[data-type="condiciones_financieras_quantico"]').attr('style',"pointer-events:none");
-       if(!(this.model.get('tct_etapa_ddw_c')=='SI' || 
-       this.model.get('estatus_c')=='PE' ||
-       this.model.get('estatus_c')=='P' ||
-       this.model.get('estatus_c')=='DP' ||
-       this.model.get('estatus_c')=='DB' ||
-       this.model.get('estatus_c')=='R')
+       if(this.model.get('tct_etapa_ddw_c') !='SI' && 
+       this.model.get('estatus_c') !='PE' &&
+       this.model.get('estatus_c') !='P' &&
+       this.model.get('estatus_c') !='DP' &&
+       this.model.get('estatus_c') !='DB' &&
+       this.model.get('estatus_c') !='R'
         ){
             $('[data-type="condiciones_financieras_quantico"]').attr('style',"pointer-events:none");
        }
