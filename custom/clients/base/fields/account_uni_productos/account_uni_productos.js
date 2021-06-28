@@ -1679,19 +1679,24 @@
         
         switch (tipoProducto) {
             case "1": //Leasing
-                document.getElementById("list_l_so_razon").selectedIndex = "1";
+                document.getElementById("list_l_so_razon").value = "";
+                document.getElementById("list_l_so_motivo").value = "";
                 break;
             case "4": //Factoraje
-                document.getElementById("list_f_razon_lm").selectedIndex = "1";
+                document.getElementById("list_f_razon_lm").value = "";
+                document.getElementById("list_f_so_motivo").value = "";
                 break;
             case "3": //Credito-auto
-                document.getElementById("list_ca_so_razon").selectedIndex = "1";
+                document.getElementById("list_ca_so_razon").value = "";
+                document.getElementById("list_ca_so_motivo").value = "";
                 break;
             case "6": //Fleet
-                document.getElementById("list_fl_so_razon").selectedIndex = "1";
+                document.getElementById("list_fl_so_razon").value = "";
+                document.getElementById("list_fl_so_motivo").value = "";
                 break;
             case "8": //Uniclick
-                document.getElementById("list_u_so_razon").selectedIndex = "1";
+                document.getElementById("list_u_so_razon").value = "";
+                document.getElementById("list_u_so_motivo").value = "";
                 break;
         }
         //console.log(cont_uni_p.datarazones);
@@ -1769,6 +1774,23 @@
                     break;
             }
 		}
+        switch (tipoProducto) {
+            case "1": //Leasing
+                document.getElementById("list_l_so_motivo").value = "";
+                break;
+            case "4": //Factoraje
+                document.getElementById("list_f_so_motivo").value = "";
+                break;
+            case "3": //Credito-auto
+                document.getElementById("list_ca_so_motivo").value = "";
+                break;
+            case "6": //Fleet
+                document.getElementById("list_fl_so_motivo").value = "";
+                break;
+            case "8": //Uniclick
+                document.getElementById("list_u_so_motivo").value = "";
+                break;
+        }
     },
  
     carga_usuarios_resp_validacion:function (){
