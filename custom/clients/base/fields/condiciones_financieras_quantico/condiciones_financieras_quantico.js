@@ -973,6 +973,8 @@
        this.model.get('estatus_c') !='R'
         ){
             $('[data-type="condiciones_financieras_quantico"]').attr('style',"pointer-events:none");
+       }else{
+        $('[data-type="condiciones_financieras_quantico"]').attr('style',"pointer-events:block");
        }
     
     },
