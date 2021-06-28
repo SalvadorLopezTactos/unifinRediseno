@@ -25,4 +25,4 @@ $platforms[] = 'cvimInfografias';
 $platforms[] = 'cvimExpDigital';
 $platforms[] = 'portalUnifin';
 $platforms[] = 'portalUniclick';
-$platforms[] = 'AlexaArauz';
+$platforms[] = 'Alexa';
