@@ -545,7 +545,7 @@
                                     direccion[indice_indicador].indicadorSeleccionados = quita;
           													indicador = indicador.substring(1,indicador.length-1);
           													indicador = indicador.split('^,^');
-          													indicador.sort();
+          													indicador = indicador.sort((a,b)=>a-b);
           													for (var key1 in dir_indicador_map_list) {
           														var value = app.lang.getAppListStrings('dir_indicador_map_list')[key1];
           														if (value == indicador) direccion[indice_indicador].indicador = key1;
