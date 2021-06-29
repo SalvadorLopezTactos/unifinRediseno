@@ -220,7 +220,7 @@
 					}else {
 						var indice_indicador = 0;
 						var Completo = '';
-/*            data = [];
+            data = [];
             data.push({
               "AL": "CIUDAD DE MEXICO 1",
               "CP": "05129",
@@ -243,7 +243,7 @@
               "Tipo de vialidad": "CERRADA (CDA) O PRIVADA (PRIV)",
               "id": "custom_qr_QR_RFC_5fe10d78040f3",
               "path_img_qr": "custom/qr/QR_RFC_5fe10d78040f3.png"
-            });*/
+			});
 						var RFC = data[0]["RFC"].toUpperCase();
 						var PathQR=data[0]["path_img_qr"];
 						var Correo = data[0]["Correo electrónico"];
@@ -389,10 +389,11 @@
 												cont_dir.oDirecciones = contexto_cuenta.oDirecciones;
 												cont_tel.oTelefonos = contexto_cuenta.oTelefonos;
 												cont_tel.render();
-                        var nada = 0;
-                        var secuencia = 0;
+												var nada = 0;
+												var secuencia = 0;
+												var principal = 0;
 												var duplicado = 0;
-                        var duplicados = 0;
+												var duplicados = 0;
 												var cDuplicado = 0;
 												var cDireccionFiscal = 0;
 												var direccion = cont_dir.oDirecciones.direccion;
@@ -400,7 +401,8 @@
 												var auxd1 = '';
 												Object.keys(direccion).forEach(key => {
 													duplicado = 0;
-                          secuencia = secuencia + 1;
+													secuencia = secuencia + 1;
+													if(direccion[key].principal && !direccion[key].inactivo) principal = 1;
 													duplicado = (direccion[key].valCodigoPostal == CP) ? duplicado+1 : duplicado;
 													duplicado = (direccion[key].listPais[direccion[key].pais] == Pais) ? duplicado+1 : duplicado;
 													//duplicado = (direccion[key].listEstado[direccion[key].estado] == Estado) ? duplicado+1 : duplicado;
@@ -414,12 +416,12 @@
 														cDireccionFiscal = cDireccionFiscal + 1;
 														indice_indicador = key;
 													}
-                          if(duplicado == 8) duplicados = 1;
-                          if(duplicado == 8 && cDireccionFiscal == 1) nada = 1;
+													if(duplicado == 8) duplicados = 1;
+													if(duplicado == 8 && cDireccionFiscal == 1) nada = 1;
 													if(duplicado == 8 && cDireccionFiscal == 0) {
-                            var bloqueado = 1;
-                            var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
-                            if (accesoFiscal > 0) bloqueado = 0;
+														var bloqueado = 1;
+														var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
+														if (accesoFiscal > 0) bloqueado = 0;
 														// Indicador
 														direccion[key].indicadorSeleccionados = direccion[key].indicadorSeleccionados + ',^2^';
 														direccion[key].bloqueado = bloqueado;
@@ -505,7 +507,7 @@
 																}
 															}
 															if(cDireccionFiscal >= 1) {
-                                if(direccion[indice_indicador].indicador == 2) {
+															  if(direccion[indice_indicador].indicador == 2) {
   																direccion[indice_indicador].valCodigoPostal = CP;
   																direccion[indice_indicador].calle = Calle.trim();
   																direccion[indice_indicador].numext = Exterior.trim();
@@ -531,29 +533,29 @@
   																direccion[indice_indicador].ciudad = auxCiudad;
   																direccion[indice_indicador].listCiudad = listCiudad;
   																direccion[indice_indicador].listCiudadFull = listCiudad;
-                                } else {
-                                  if(nada == 0) {
-                                    var quita = '';
-                                    if(direccion[indice_indicador].indicadorSeleccionados.includes('^2^,')) {
-                                      quita = direccion[indice_indicador].indicadorSeleccionados.replace("^2^,", "");
-                                    }
-                                    if(direccion[indice_indicador].indicadorSeleccionados.includes(',^2^')) {
-                                      quita = direccion[indice_indicador].indicadorSeleccionados.replace(",^2^", "");
-                                    }
-        														var indicador = quita;
-          													var dir_indicador_map_list = app.lang.getAppListStrings('dir_indicador_map_list');
-                                    direccion[indice_indicador].indicadorSeleccionados = quita;
-          													indicador = indicador.substring(1,indicador.length-1);
-          													indicador = indicador.split('^,^');
-          													indicador = indicador.sort((a,b)=>a-b);
-          													for (var key1 in dir_indicador_map_list) {
-          														var value = app.lang.getAppListStrings('dir_indicador_map_list')[key1];
-          														if (value == indicador) direccion[indice_indicador].indicador = key1;
-          													}
-                                    direccion[indice_indicador].bloqueado = 0;
-          													cont_dir.oDirecciones.direccion = direccion;
-                                  }
-                                  if(duplicados == 0) {
+															  } else {
+																if(nada == 0) {
+																	var quita = '';
+																	if(direccion[indice_indicador].indicadorSeleccionados.includes('^2^,')) {
+																	  quita = direccion[indice_indicador].indicadorSeleccionados.replace("^2^,", "");
+																	}
+																	if(direccion[indice_indicador].indicadorSeleccionados.includes(',^2^')) {
+																	  quita = direccion[indice_indicador].indicadorSeleccionados.replace(",^2^", "");
+																	}
+																	var indicador = quita;
+																	var dir_indicador_map_list = app.lang.getAppListStrings('dir_indicador_map_list');
+																	direccion[indice_indicador].indicadorSeleccionados = quita;
+																	indicador = indicador.substring(1,indicador.length-1);
+																	indicador = indicador.split('^,^');
+																	indicador = indicador.sort((a,b)=>a-b);
+																	for (var key1 in dir_indicador_map_list) {
+																		var value = app.lang.getAppListStrings('dir_indicador_map_list')[key1];
+																		if (value == indicador) direccion[indice_indicador].indicador = key1;
+																	}
+																	direccion[indice_indicador].bloqueado = 0;
+																	cont_dir.oDirecciones.direccion = direccion;
+																}
+																if(duplicados == 0) {
     																var nuevaDireccion = {
     																	"tipodedireccion":"",
     																	"listTipo":App.lang.getAppListStrings('dir_tipo_unique_list'),
@@ -593,11 +595,11 @@
     																	"id":"",
     																	"direccionCompleta":""
     																};
-                                    var bloqueado = 1;
-                                    var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
-                                    if (accesoFiscal > 0) bloqueado = 0;
+																	var bloqueado = 1;
+																	var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
+																	if(accesoFiscal > 0) bloqueado = 0;
+																	if(!principal) nuevaDireccion.principal = "1";
     																nuevaDireccion.secuencia = secuencia;
-    																nuevaDireccion.principal = "1";
     																nuevaDireccion.tipodedireccion = "1";
     																nuevaDireccion.tipoSeleccionados = '^1^';
     																nuevaDireccion.indicador = "2";
@@ -628,31 +630,31 @@
     																nuevaDireccion.ciudad = auxCiudad;
     																nuevaDireccion.listCiudad = listCiudad;
     																nuevaDireccion.listCiudadFull = listCiudad;
-    															  cont_dir.oDirecciones.direccion.push(nuevaDireccion);
-                                  }
-                                }
-  															cont_dir.render();
-  															app.alert.dismiss('procesando');
-  															app.alert.show('multiple_fiscal', {
+																	cont_dir.oDirecciones.direccion.push(nuevaDireccion);
+																}
+															  }
+  															  cont_dir.render();
+  															  app.alert.dismiss('procesando');
+  															  app.alert.show('multiple_fiscal', {
   																level: 'info',
   																messages: 'Se han actualizado los datos de dirección fiscal'
-  															});
-  															self.$('#activar_camara').removeClass('disabled');
-  															self.$('#activar_camara').attr('style', '');
-  															self.$('#archivo_qr').removeClass('disabled');
-  															self.$('#archivo_qr').attr('style', '');
-  															self.$('#btnSubir').removeClass('disabled');
-  															self.$('#btnSubir').attr('style', 'margin:10px');
-  															self.$('#validar_QR').removeClass('disabled');
-  															self.$('#validar_QR').attr('style', 'margin:10px');
-  															self.$('#btn_Cancelar').removeClass('disabled');
-  															self.$('#btn_Cancelar').attr('style', 'margin:10px');
-  															self.$('#rfcModal').hide();
-  															if(contexto_cuenta.cambio_previo_mail == '1'){
-  																contexto_cuenta.cambio_previo_mail = '1';
-  															}else{
+  															  });
+  															  self.$('#activar_camara').removeClass('disabled');
+  															  self.$('#activar_camara').attr('style', '');
+  															  self.$('#archivo_qr').removeClass('disabled');
+  															  self.$('#archivo_qr').attr('style', '');
+  															  self.$('#btnSubir').removeClass('disabled');
+  															  self.$('#btnSubir').attr('style', 'margin:10px');
+  															  self.$('#validar_QR').removeClass('disabled');
+  															  self.$('#validar_QR').attr('style', 'margin:10px');
+  															  self.$('#btn_Cancelar').removeClass('disabled');
+  															  self.$('#btn_Cancelar').attr('style', 'margin:10px');
+  															  self.$('#rfcModal').hide();
+  															  if(contexto_cuenta.cambio_previo_mail == '1'){
+																contexto_cuenta.cambio_previo_mail = '1';
+  															  }else{
   																contexto_cuenta.cambio_previo_mail = '4';
-  															}
+  															  }
 															} else {
 																if(cDuplicado == 0 && duplicados == 0) {
 																	var nuevaDireccion = {
@@ -694,11 +696,11 @@
 																		"id":"",
 																		"direccionCompleta":""
 																	};
-                                  var bloqueado = 1;
-                                  var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
-                                  if (accesoFiscal > 0) bloqueado = 0;
+																	var bloqueado = 1;
+																	var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
+																	if(accesoFiscal > 0) bloqueado = 0;
+																	if(!principal) nuevaDireccion.principal = "1";
 																	nuevaDireccion.secuencia = "1";
-																	nuevaDireccion.principal = "1";
 																	nuevaDireccion.tipodedireccion = "1";
 																	nuevaDireccion.tipoSeleccionados = '^1^';
 																	nuevaDireccion.indicador = "2";
