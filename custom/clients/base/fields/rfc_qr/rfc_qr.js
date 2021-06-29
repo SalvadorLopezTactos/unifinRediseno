@@ -220,30 +220,30 @@
 					}else {
 						var indice_indicador = 0;
 						var Completo = '';
-            data = [];
-            data.push({
-              "AL": "CIUDAD DE MEXICO 1",
-              "CP": "05129",
-              "Colonia": "LOMAS DEL CHAMIZAL",
-              "Correo electrónico": "albertotame@gmail.com",
-              "Denominación o Razón Social": "DEPORTE MOTOR BTL",
-              "Entidad Federativa": "CIUDAD DE MEXICO",
-              "Fecha de Inicio de operaciones": "12-01-2011",
-              "Fecha de alta": "12-01-2011",
-              "Fecha de constitución": "12-01-2011",
-              "Fecha del último cambio de situación": "12-01-2011",
-              "Municipio o delegación": "CUAJIMALPA DE MORELOS",
-              "Nombre de la vialidad": "RETORNO ADIM",
-              "Número exterior": "6",
-              "Número interior": "DEPTO. 101",
-              "RFC": "DMB1101126Q3",
-              "Régimen": "Régimen General de Ley Personas Morales",
-              "Régimen de capital": "SA DE CV",
-              "Situación del contribuyente": "ACTIVO",
-              "Tipo de vialidad": "CERRADA (CDA) O PRIVADA (PRIV)",
-              "id": "custom_qr_QR_RFC_5fe10d78040f3",
-              "path_img_qr": "custom/qr/QR_RFC_5fe10d78040f3.png"
-			});
+/*						data = [];
+						data.push({
+						  "AL": "CIUDAD DE MEXICO 1",
+						  "CP": "05129",
+						  "Colonia": "LOMAS DEL CHAMIZAL",
+						  "Correo electrónico": "albertotame@gmail.com",
+						  "Denominación o Razón Social": "DEPORTE MOTOR BTL",
+						  "Entidad Federativa": "CIUDAD DE MEXICO",
+						  "Fecha de Inicio de operaciones": "12-01-2011",
+						  "Fecha de alta": "12-01-2011",
+						  "Fecha de constitución": "12-01-2011",
+						  "Fecha del último cambio de situación": "12-01-2011",
+						  "Municipio o delegación": "CUAJIMALPA DE MORELOS",
+						  "Nombre de la vialidad": "RETORNO ADIM",
+						  "Número exterior": "6",
+						  "Número interior": "DEPTO. 101",
+						  "RFC": "DMB1101126Q3",
+						  "Régimen": "Régimen General de Ley Personas Morales",
+						  "Régimen de capital": "SA DE CV",
+						  "Situación del contribuyente": "ACTIVO",
+						  "Tipo de vialidad": "CERRADA (CDA) O PRIVADA (PRIV)",
+						  "id": "custom_qr_QR_RFC_5fe10d78040f3",
+						  "path_img_qr": "custom/qr/QR_RFC_5fe10d78040f3.png"
+						});*/
 						var RFC = data[0]["RFC"].toUpperCase();
 						var PathQR=data[0]["path_img_qr"];
 						var Correo = data[0]["Correo electrónico"];
