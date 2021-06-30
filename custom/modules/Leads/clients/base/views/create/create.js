@@ -29,6 +29,7 @@
         this.getRegistrosAsignados();
         this.fechaAsignacion();
         this.model.on("change:leads_leads_1_right", _.bind(this._checkContactoAsociado, this));
+        this.metodo_asignacion_lm_lead();
     },
 
     delegateButtonEvents: function() {
@@ -662,6 +663,18 @@
         } else {
             // console.log("Desactiva check Contacto asociado create");
             this.model.set('contacto_asociado_c', false);
+        }
+    },
+
+    metodo_asignacion_lm_lead: function() {
+        if(this.createMode){
+            
+            var posicionOperativa = App.user.attributes.posicion_operativa_c; //Posición Operativa - Asesor
+
+            if (posicionOperativa == '^3^'){
+                //METODO DE ASIGNACION LM - CREADO POR ASESOR
+                this.model.set('metodo_asignacion_lm_c','2');
+            }
         }
     },
 })
