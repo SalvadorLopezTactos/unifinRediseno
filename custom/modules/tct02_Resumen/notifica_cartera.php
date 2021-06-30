@@ -13,31 +13,30 @@ class notifica_cartera
 			if($bean->fetched_row['bloqueo_cartera_c'] != $bean->bloqueo_cartera_c) $equipo = 'Cartera';
 			if($bean->fetched_row['bloqueo2_c'] != $bean->bloqueo2_c) $equipo = 'Crédito';
 			if($bean->fetched_row['bloqueo3_c'] != $bean->bloqueo3_c) $equipo = 'Cumplimiento';
-			if($bean->bloqueo_cartera_c) {
+			if(!$bean->fetched_row['bloqueo_cartera_c'] && $bean->bloqueo_cartera_c) {
 				$razon = $app_list_strings['razon_list'][$bean->razon_c];
 				$detalle = $bean->detalle_c;
 				$bloqueo = 1;
 			}
-			if($bean->bloqueo2_c) {
+			if(!$bean->fetched_row['bloqueo2_c'] && $bean->bloqueo2_c) {
 				$razon = $app_list_strings['razon_list'][$bean->razon2_c];
 				$detalle = $bean->detalle2_c;
 				$bloqueo = 1;
 			}
-			if($bean->bloqueo3_c) {
+			if(!$bean->fetched_row['bloqueo3_c'] && $bean->bloqueo3_c) {
 				$razon = $app_list_strings['razon_list'][$bean->razon3_c];
 				$detalle = $bean->detalle3_c;
 				$bloqueo = 1;
 			}
-			if($bloqueo || $bean->fetched_row['grupo_c'] != $bean->grupo_c) {
+			if($bloqueo || $bean->fetched_row['grupo_c'] != $bean->grupo_c || (!$bean->bloqueo_cartera_c && !$bean->bloqueo2_c && !$bean->bloqueo3_c)) {
 				//Actualiza Productos
 				$estatus = "";
 				$beanAcct = BeanFactory::retrieveBean('Accounts', $bean->id, array('disable_row_level_security' => true));
 				$beanAcct->load_relationship('accounts_uni_productos_1');
 				$relatedBeans = $beanAcct->accounts_uni_productos_1->getBeans();
 				foreach ($relatedBeans as $rel) {
-					if($bloqueo) {
-						$estatus = 3;
-					} else {
+					if($bloqueo) $estatus = 3;
+					if(!$bean->bloqueo_cartera_c && !$bean->bloqueo2_c && !$bean->bloqueo3_c) {
 						$query = "select before_value_string from uni_productos_audit where field_name = 'estatus_atencion' and parent_id = '{$rel->id}' and before_value_string <> '' order by date_created desc";
 						$results = $db->query($query);
 						$row = $db->fetchByAssoc($results);
@@ -56,9 +55,8 @@ class notifica_cartera
 							$beanAcct1->load_relationship('accounts_uni_productos_1');
 							$relatedBeans1 = $beanAcct1->accounts_uni_productos_1->getBeans();
 							foreach ($relatedBeans1 as $rel1) {
-								if($bloqueo) {
-									$estatus = 3;
-								} else {
+								if($bloqueo) $estatus = 3;
+								if(!$bean->bloqueo_cartera_c && !$bean->bloqueo2_c && !$bean->bloqueo3_c) {
 									$query1 = "select before_value_string from uni_productos_audit where field_name = 'estatus_atencion' and parent_id = '{$rel1->id}' order by date_created desc";
 									$results1 = $db->query($query1);
 									$row1 = $db->fetchByAssoc($results1);
@@ -139,7 +137,7 @@ SQL;
 				$result = $mailer->send();
 			}
 			//Notifica Desbloqueo
-			if(!$bloqueo && $bean->grupo_c) {
+			if(!$bloqueo || $bean->grupo_c) {
 				$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">
 				Se le informa que la cuenta <b><a id="linkCuenta" href="'.$linkCuenta.'">'.$bean->name.'</a></b> ha sido desbloqueada por el equipo de <b>'.$equipo.'</b>
 				<br><br>Atentamente Unifin</font></p>
