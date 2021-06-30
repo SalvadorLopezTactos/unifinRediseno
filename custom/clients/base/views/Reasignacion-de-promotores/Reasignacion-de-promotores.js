@@ -283,6 +283,7 @@
     },
 
     buscarCuentas: function(){
+        this.objEtiquetaID = {};
         var assigneUsr = this.model.get('users_accounts_1users_ida');
         //Condición para controlar la búsqueda cuando no se ha seleccionado Promotor, esto sucede cuando se da click en el icono con el tache
         //dentro del campo Asesor Actual con formato select2
