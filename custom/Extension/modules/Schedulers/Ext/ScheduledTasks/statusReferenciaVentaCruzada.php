@@ -31,8 +31,8 @@ function statusReferenciaVentaCruzada()
 
         /*
         $query = <<<SQL
-select * from ref_venta_cruzada 
-where date_entered between '{$tres_meses_un_dia_antes}' and '{$tres_meses}' 
+select * from ref_venta_cruzada
+where date_entered between '{$tres_meses_un_dia_antes}' and '{$tres_meses}'
 order by date_entered desc
 SQL;
         */
@@ -103,7 +103,7 @@ SQL;
                         //Enviando correo a asesor origen
                         $mailer = MailerFactory::getSystemDefaultMailer();
                         $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
-                        $mailer->setSubject("Referencia exitosa");
+                        $mailer->setSubject("Referencia de venta cruzada exitosa");
                         $body = trim($mailHTML);
                         $mailer->setHtmlBody($body);
                         $mailer->clearRecipients();
@@ -129,7 +129,7 @@ SQL;
                             $GLOBALS['log']->fatal("ENVIANDO CORREO A ASESOR RM CON EMAIL ".$correo_asesor_rm);
                             $mailer = MailerFactory::getSystemDefaultMailer();
                             $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
-                            $mailer->setSubject("Referencia exitosa");
+                            $mailer->setSubject("Referencia de venta cruzada exitosa");
                             $body = trim($mailHTMLRM);
                             $mailer->setHtmlBody($body);
                             $mailer->clearRecipients();
@@ -303,7 +303,7 @@ SQL;
                         //Enviando correo a asesor origen
                         $mailer = MailerFactory::getSystemDefaultMailer();
                         $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
-                        $mailer->setSubject("Referencia exitosa");
+                        $mailer->setSubject("Referencia de venta cruzada exitosa");
                         $body = trim($mailHTML);
                         $mailer->setHtmlBody($body);
                         $mailer->clearRecipients();
@@ -329,7 +329,7 @@ SQL;
                             $GLOBALS['log']->fatal("ENVIANDO CORREO A ASESOR RM CON EMAIL ".$correo_asesor_rm);
                             $mailer = MailerFactory::getSystemDefaultMailer();
                             $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
-                            $mailer->setSubject("Referencia exitosa");
+                            $mailer->setSubject("Referencia de venta cruzada exitosa");
                             $body = trim($mailHTMLRM);
                             $mailer->setHtmlBody($body);
                             $mailer->clearRecipients();
@@ -500,7 +500,7 @@ SQL;
                         //Enviando correo a asesor origen
                         $mailer = MailerFactory::getSystemDefaultMailer();
                         $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
-                        $mailer->setSubject("Referencia exitosa");
+                        $mailer->setSubject("Referencia de venta cruzada exitosa");
                         $body = trim($mailHTML);
                         $mailer->setHtmlBody($body);
                         $mailer->clearRecipients();
@@ -526,7 +526,7 @@ SQL;
                             $GLOBALS['log']->fatal("ENVIANDO CORREO A ASESOR RM CON EMAIL ".$correo_asesor_rm);
                             $mailer = MailerFactory::getSystemDefaultMailer();
                             $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
-                            $mailer->setSubject("Referencia exitosa");
+                            $mailer->setSubject("Referencia de venta cruzada exitosa");
                             $body = trim($mailHTMLRM);
                             $mailer->setHtmlBody($body);
                             $mailer->clearRecipients();
