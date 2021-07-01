@@ -4750,7 +4750,7 @@
 			var url = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
 			app.api.call('read', url, {}, {
 				success: _.bind(function (data) {
-					if (data.bloqueo_cartera_c || data.bloqueo2_c || data.bloqueo3_c) {
+					if (this.model.get('tct_no_contactar_chk_c') && (data.bloqueo_cartera_c || data.bloqueo2_c || data.bloqueo3_c)) {
 						//Bloquear el registro completo y mostrar alerta
 						$('.record.tab-layout').attr('style', 'pointer-events:none');
 						$('.subpanel').attr('style', 'pointer-events:none');
@@ -5155,6 +5155,7 @@
                 this.get_phones();
                 this.get_addresses();
                 this.get_pld();
+                this.get_uni_productos();
 
             }, this);
 
@@ -5818,7 +5819,7 @@
                 if (faltantelm > 0) {
                     app.alert.show("Faltantes No viable - Lead Management", {
                         level: "error",
-                        title: ' Para el cambio de estaus <b> '+app.lang.getAppListStrings('status_management_list')[selectlm.value] +' en Leasing </b> <br> Hace falta llenar los campos: <br>'+errorLM ,
+                        title: ' Para el cambio de estatus <b> '+app.lang.getAppListStrings('status_management_list')[selectlm.value] +' en Leasing </b> <br> Hace falta llenar los campos: <br>'+errorLM ,
                         autoClose: false
                     });
                     errors['error_leasingUP'] = errors['error_leasingUP'] || {};
@@ -5970,7 +5971,7 @@
             if (faltantelm > 0) {
                 app.alert.show("Faltantes No viable - Lead Management", {
                     level: "error",
-                    title: 'Para el cambio de estaus <b>'+app.lang.getAppListStrings('status_management_list')[selectlm.value] +' en Factoraje </b> <br> Hace falta llenar los campos :<br>'+errorLM ,
+                    title: 'Para el cambio de estatus <b>'+app.lang.getAppListStrings('status_management_list')[selectlm.value] +' en Factoraje </b> <br> Hace falta llenar los campos :<br>'+errorLM ,
                     autoClose: false
                 });
                 errors['error_FactorajeUP'] = errors['error_FactorajeUP'] || {};
@@ -6123,7 +6124,7 @@
                 if (faltantelm > 0) {
                     app.alert.show("Faltantes No viable - Lead Management", {
                         level: "error",
-                        title: ' Para el cambio de estaus <b> '+ app.lang.getAppListStrings('status_management_list')[selectlm.value] +'  Crédito Automotriz.</b>  <br> Hace falta llenar los campos :<br>'+errorLM ,
+                        title: ' Para el cambio de estatus <b> '+ app.lang.getAppListStrings('status_management_list')[selectlm.value] +'  Crédito Automotriz.</b>  <br> Hace falta llenar los campos :<br>'+errorLM ,
                         autoClose: false
                     });
                     errors['error_CAUP'] = errors['error_CAUP'] || {};
@@ -6279,7 +6280,7 @@
                 if (faltantelm > 0) {
                     app.alert.show("Faltantes No viable - Lead Management", {
                         level: "error",
-                        title: ' Para el cambio de estaus <b> '+app.lang.getAppListStrings('status_management_list')[selectlm.value] 
+                        title: ' Para el cambio de estatus <b> '+app.lang.getAppListStrings('status_management_list')[selectlm.value] 
                         +' en Fleet.</b> <br> Hace falta llenar los campos :<br>'+errorLM ,
                         autoClose: false
                     });
@@ -6434,7 +6435,7 @@
                     if (faltantelm > 0) {
                         app.alert.show("Faltantes No viable - Lead Management", {
                             level: "error",
-                            title: 'Para el cambio de estaus <b> '+app.lang.getAppListStrings('status_management_list')[selectlm.value] +' en Uniclick</b> <br> Hace falta llenar los campos :<br>'+errorLM ,
+                            title: 'Para el cambio de estatus <b> '+app.lang.getAppListStrings('status_management_list')[selectlm.value] +' en Uniclick</b> <br> Hace falta llenar los campos :<br>'+errorLM ,
                             autoClose: false
                         });
                         errors['error_UniclickUP'] = errors['error_UniclickUP'] || {};
@@ -6908,7 +6909,7 @@
         var consulta = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
         app.api.call('read', consulta, {}, {
             success: _.bind(function (data) {
-                if((data.user_id1_c == app.user.id && this.model.get('tct_no_contactar_chk_c') && !data.bloqueo_cartera_c) || (data.user_id3_c == app.user.id && data.bloqueo_credito_c && !data.bloqueo2_c) || (data.user_id5_c == app.user.id && data.bloqueo_cumple_c && !data.bloqueo3_c)) {
+                if((data.user_id1_c == app.user.id && this.model.get('tct_no_contactar_chk_c') && !data.bloqueo_cartera_c) || (data.user_id3_c == app.user.id && data.bloqueo_credito_c && !data.bloqueo2_c) || (data.user_id5_c == app.user.id && data.bloqueo_cumple_c && !data.bloqueo2_c)) {
 					$('[name="bloquea_cuenta"]').removeClass('hidden');
 				}
 				if((data.user_id1_c == app.user.id && (this.model.get('tct_no_contactar_chk_c') || data.bloqueo_cartera_c)) || (data.user_id3_c == app.user.id && (data.bloqueo_credito_c || data.bloqueo2_c)) || (data.user_id5_c == app.user.id && (data.bloqueo_cumple_c || data.bloqueo3_c))) {
