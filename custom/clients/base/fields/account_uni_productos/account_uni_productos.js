@@ -1789,8 +1789,8 @@
 
         var j =0;
 
-        if($("#list_l_so_razon")[0].value == '7' || $("#list_f_razon_lm")[0].value == '7' || $("#list_l_so_razon")[0].value == '7'
-            || $("#list_l_so_razon")[0].value == '7' || $("#list_l_so_razon")[0].value == '7'){
+        if($("#list_l_so_razon")[0].value == '7' || $("#list_f_razon_lm")[0].value == '7' || $("#list_ca_so_razon")[0].value == '7'
+            || $("#list_fl_so_razon")[0].value == '7' || $("#list_u_so_razon")[0].value == '7'){
             
             cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
         }else{
