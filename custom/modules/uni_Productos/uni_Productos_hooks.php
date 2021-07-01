@@ -5,6 +5,7 @@ class uni_Productos_hooks
     function cancelarOppsFromAccounts($bean, $event, $arguments){
 
       //Obteniendo el Estatus por producto
+      $GLOBALS['log']->fatal('---logic hook1---');
       $status=$bean->status_management_c;
       $tipo=$bean->tipo_producto;
       if($tipo=="1" && $status=="3"){//status ->3 =Cancelado

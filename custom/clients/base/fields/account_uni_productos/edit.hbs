@@ -166,7 +166,7 @@
                                 <div class="l_so_razon span4">
                                     <label class="record-label mpad" style="margin-left:0px">Razón</label>
                                     <select class="row-fluid select2 list_l_so_razon" id = "list_l_so_razon" data-field="list_l_so_razon">
-                                        {{#each razon_list_edit}}
+                                        {{#each razon_list}}
 							            <option value="{{@key}}" {{ifSelected @key
 							            	                                    ../ResumenProductos.leasing.razon_c}}>{{this}}</option>
 							            {{/each}}
@@ -175,7 +175,7 @@
                                 <div class="l_so_motivo span4">
                                     <label class="record-label mpad" style="margin-left:0px">Motivo</label>
                                     <select class="row-fluid select2 list_l_so_motivo" id = "list_l_so_motivo" data-field="list_l_so_motivo">
-                                        {{#each motivo_bloqueo_list_edit}}
+                                        {{#each motivo_bloqueo_list}}
 							            <option value="{{@key}}" {{ifSelected @key
 							            	                                    ../ResumenProductos.leasing.motivo_c}}>{{this}}</option>
 							            {{/each}}
@@ -365,7 +365,7 @@
                                 <div class="f_so_razon span4">
                                     <label class="record-label mpad" style="margin-left:0px">Razón</label>
                                     <select class="row-fluid select2 list_f_razon_lm" id="list_f_razon_lm" data-field="list_f_razon_lm">
-                                        {{#each razon_list_edit}}
+                                        {{#each razon_list}}
 							            <option value="{{@key}}" {{ifSelected @key
 								                                            ../ResumenProductos.factoring.razon_c}}>{{this}}</option>
 							            {{/each}}
@@ -374,7 +374,7 @@
                                 <div class="f_so_motivo span4">
                                     <label class="record-label mpad" style="margin-left:0px">Motivo</label>
                                     <select class="row-fluid select2 list_f_so_motivo" id = "list_f_so_motivo" data-field="list_f_so_motivo">
-                                        {{#each motivo_bloqueo_list_edit}}
+                                        {{#each motivo_bloqueo_list}}
 						                <option value="{{@key}}" {{ifSelected @key
 						        	                                            ../ResumenProductos.factoring.motivo_c}}>{{this}}</option>
 						                {{/each}}
@@ -564,7 +564,7 @@
                                 <div class="ca_so_razon span4">
                                     <label class="record-label mpad" style="margin-left:0px">Razón</label>
                                     <select class="row-fluid select2 list_ca_so_razon" id = "list_ca_so_razon" data-field="list_ca_so_razon">
-                                        {{#each razon_list_edit}}
+                                        {{#each razon_list}}
 	    					        	<option value="{{@key}}" {{ifSelected @key
 		    				        	                                    	../ResumenProductos.credito_auto.razon_c}}>{{this}}</option>
 			    			        	{{/each}}
@@ -573,7 +573,7 @@
                                 <div class="ca_so_motivo span4">
                                     <label class="record-label mpad" style="margin-left:0px">Motivo</label>
                                     <select class="row-fluid select2 list_ca_so_motivo" id = "list_ca_so_motivo" data-field="list_ca_so_motivo">
-                                        {{#each motivo_bloqueo_list_edit}}
+                                        {{#each motivo_bloqueo_list}}
 						                <option value="{{@key}}" {{ifSelected @key
 						        	                                            ../ResumenProductos.credito_auto.motivo_c}}>{{this}}</option>
 						                {{/each}}
@@ -763,7 +763,7 @@
                                 <div class="fl_so_razon span4">                            
                                     <label class="record-label mpad" style="margin-left:0px">Razón</label>
                                     <select class="row-fluid select2 list_fl_so_razon" id = "list_fl_so_razon" data-field="list_fl_so_razon">
-                                        {{#each razon_list_edit}}
+                                        {{#each razon_list}}
 						        	    <option value="{{@key}}" {{ifSelected @key
 						        	    	../ResumenProductos.fleet.razon_c}}>{{this}}</option>
 						        	    {{/each}}
@@ -772,7 +772,7 @@
                                 <div class="fl_so_motivo span4">
                                     <label class="record-label mpad" style="margin-left:0px">Motivo</label>
                                     <select class="row-fluid select2 list_fl_so_motivo" id = "list_fl_so_motivo" data-field="list_fl_so_motivo">
-                                        {{#each motivo_bloqueo_list_edit}}
+                                        {{#each motivo_bloqueo_list}}
 						        	    <option value="{{@key}}" {{ifSelected @key
 						        	    	../ResumenProductos.fleet.motivo_c}}>{{this}}</option>
 						        	    {{/each}}
@@ -974,7 +974,7 @@
                                 <div class="u_so_razon span4">
                                     <label class="record-label mpad" style="margin-left:0px">Razón</label>
                                     <select class="row-fluid select2 list_u_so_razon" id = "list_u_so_razon" data-field="list_u_so_razon">
-                                        {{#each razon_list_edit}}
+                                        {{#each razon_list}}
 						        	    <option value="{{@key}}" {{ifSelected @key
 						        	    	../ResumenProductos.uniclick.razon_c}}>{{this}}</option>
 						        	    {{/each}}
@@ -983,7 +983,7 @@
                                 <div class="u_so_motivo span4 ">
                                     <label class="record-label mpad" style="margin-left:0px">Motivo</label>
                                     <select class="row-fluid select2 list_u_so_motivo" id = "list_u_so_motivo" data-field="list_u_so_motivo">
-                                        {{#each motivo_bloqueo_list_edit}}
+                                        {{#each motivo_bloqueo_list}}
 						        	    <option value="{{@key}}" {{ifSelected @key
 						        	    	../ResumenProductos.uniclick.motivo_c}}>{{this}}</option>
 						        	    {{/each}}

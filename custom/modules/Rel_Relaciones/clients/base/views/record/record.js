@@ -80,7 +80,7 @@ extendsFrom: 'RecordView',
 						var url = app.api.buildURL('tct02_Resumen/' + this.model.get('rel_relaciones_accounts_1accounts_ida'), null, null);
 						app.api.call('read', url, {}, {
 							success: _.bind(function (data) {
-								if (model.get('tct_no_contactar_chk_c') && (data.bloqueo_cartera_c || data.bloqueo2_c || data.bloqueo3_c)) {
+								if (data.bloqueo_cartera_c || data.bloqueo2_c || data.bloqueo3_c) {
 									app.alert.show("cuentas_no_contactar", {
 										level: "error",
 										title: "Cuenta No Contactable<br>",
