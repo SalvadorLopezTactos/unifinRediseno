@@ -1,5 +1,5 @@
 <?php
- // created: 2021-06-23 12:53:37
+ // created: 2021-06-30 18:43:32
 
 $app_list_strings['producto_financiero_list']=array (
   0 => '',
@@ -31,7 +31,7 @@ $app_list_strings['producto_financiero_list']=array (
   34 => 'ARRENDAMIENTO PURO EXENTO IVA',
   35 => 'LÍNEA CRÉDITO SIMPLE USD',
   38 => 'ARRENDAMIENTO FRONTERA 8%',
-  39 => 'UNICREDIT',
+  39 => 'CS UNICLICK',
   40 => 'CRÉDITO SOS',
   41 => 'UNILEASE',
   42 => 'ARRENDAMIENTO ESTRUCTURADO',
@@ -72,4 +72,5 @@ $app_list_strings['producto_financiero_list']=array (
   77 => 'CRÉDITO PYME',
   78 => 'CRÉDITO CORTO PLAZO',
   79 => 'CRÉDITO MEDIANO PLAZO',
+  80 => 'ARRENDAMIENTO PURO AGRICOLA DOLARES',
 );
