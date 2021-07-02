@@ -1991,44 +1991,54 @@
         for(var i=0; i< cont_uni_p.directorRegion.length ; i++) {
             if(tipoProducto == '1' && cont_uni_p.directorRegion[i].tipodeproducto_c ==  tipoProducto){                
                 document.getElementById("list_l_respval_1").options[j]=new Option(cont_uni_p.directorRegion[i].nombre_completo_c , cont_uni_p.directorRegion[i].id );  
+                document.getElementById("list_l_respval_2").options[j]=new Option(cont_uni_p.directorRegion[i].nombre_completo_c , cont_uni_p.directorRegion[i].id );  
                 j++;
             }
             if(tipoProducto == '4' && cont_uni_p.directorRegion[i].tipodeproducto_c ==  tipoProducto){
                 document.getElementById("list_f_respval_1").options[j]=new Option(cont_uni_p.directorRegion[i].nombre_completo_c , cont_uni_p.directorRegion[i].id);  
+                document.getElementById("list_f_respval_2").options[j]=new Option(cont_uni_p.directorRegion[i].nombre_completo_c , cont_uni_p.directorRegion[i].id);  
                 j++;
             }
             if(tipoProducto == '3' && cont_uni_p.directorRegion[i].tipodeproducto_c ==  tipoProducto){
                 document.getElementById("list_ca_respval_1").options[j]=new Option(cont_uni_p.directorRegion[i].nombre_completo_c , cont_uni_p.directorRegion[i].id);  
+                document.getElementById("list_ca_respval_2").options[j]=new Option(cont_uni_p.directorRegion[i].nombre_completo_c , cont_uni_p.directorRegion[i].id);  
                 j++;
             }
             if(tipoProducto == '6' && cont_uni_p.directorRegion[i].tipodeproducto_c ==  tipoProducto){
                 document.getElementById("list_fl_respval_1").options[j]=new Option(cont_uni_p.directorRegion[i].nombre_completo_c , cont_uni_p.directorRegion[i].id);  
+                document.getElementById("list_fl_respval_2").options[j]=new Option(cont_uni_p.directorRegion[i].nombre_completo_c , cont_uni_p.directorRegion[i].id);  
                 j++;
             }
             if(tipoProducto == '8' && cont_uni_p.directorRegion[i].tipodeproducto_c ==  tipoProducto){
                 document.getElementById("list_u_respval_1").options[j]=new Option(cont_uni_p.directorRegion[i].nombre_completo_c , cont_uni_p.directorRegion[i].id);  
+                document.getElementById("list_u_respval_2").options[j]=new Option(cont_uni_p.directorRegion[i].nombre_completo_c , cont_uni_p.directorRegion[i].id);  
                 j++;
             }
         }
-        var j = 0;
+        //var j = 0;
         for(var i=0; i< cont_uni_p.cartera.length ; i++) {
-            if(tipoProducto == '1'){                
+            if(tipoProducto == '1'){
+                document.getElementById("list_l_respval_1").options[j]=new Option(cont_uni_p.cartera[i].nombre , cont_uni_p.cartera[i].id );  
                 document.getElementById("list_l_respval_2").options[j]=new Option(cont_uni_p.cartera[i].nombre , cont_uni_p.cartera[i].id );  
                 j++;
             }
             if(tipoProducto == '4'){
+                document.getElementById("list_f_respval_1").options[j]=new Option(cont_uni_p.cartera[i].nombre , cont_uni_p.cartera[i].id);  
                 document.getElementById("list_f_respval_2").options[j]=new Option(cont_uni_p.cartera[i].nombre , cont_uni_p.cartera[i].id);  
                 j++;
             }
             if(tipoProducto == '3'){
+                document.getElementById("list_ca_respval_1").options[j]=new Option(cont_uni_p.cartera[i].nombre , cont_uni_p.cartera[i].id);  
                 document.getElementById("list_ca_respval_2").options[j]=new Option(cont_uni_p.cartera[i].nombre , cont_uni_p.cartera[i].id);  
                 j++;
             }
             if(tipoProducto == '6'){
+                document.getElementById("list_fl_respval_1").options[j]=new Option(cont_uni_p.cartera[i].nombre , cont_uni_p.cartera[i].id);  
                 document.getElementById("list_fl_respval_2").options[j]=new Option(cont_uni_p.cartera[i].nombre , cont_uni_p.cartera[i].id);  
                 j++;
             }
             if(tipoProducto == '8'){
+                document.getElementById("list_u_respval_1").options[j]=new Option(cont_uni_p.cartera[i].nombre , cont_uni_p.cartera[i].id);  
                 document.getElementById("list_u_respval_2").options[j]=new Option(cont_uni_p.cartera[i].nombre , cont_uni_p.cartera[i].id);  
                 j++;
             }
@@ -2076,7 +2086,7 @@
         app.api.call("read", app.api.buildURL("Users", null, null, filter_arguments), null, {
             success: _.bind(function (data) {    
                 cont_uni_p.directorEquipo = data.records;           
-                for(var i=0; i< data.records.length ; i++) {
+                /*for(var i=0; i< data.records.length ; i++) {
                     if(data.records[i].tipodeproducto_c == '1'){
                         if(cont_uni_p.ResumenProductos.leasing.user_id1_c ==  data.records[i].id || a == 0){
                             cont_uni_p.directoresLeasing1 += '<option value="' + data.records[i].id + '" selected>' + data.records[i].nombre_completo_c + '</option>';
@@ -2148,6 +2158,7 @@
                         }
                     }
                 }
+                */
             }, this)
         });
     },
