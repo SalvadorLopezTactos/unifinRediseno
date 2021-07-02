@@ -272,6 +272,7 @@
                     api_params['motivo_cancelacion_c'] = "";
                     api_params['status_management_c'] = "1";//Activo
                     api_params['subtipo_registro_c'] = "1";//Sin Contactar
+                    api_params['metodo_asignacion_lm_c'] = "4"; //Metodo de Asignación LM - 4.- Reactivación Cancelado / Aplazado
 
                     app.api.call('update', url, api_params, {
                         success: _.bind(function (data) {
@@ -308,6 +309,7 @@
                     api_params['no_viable_quien'] = "";
                     api_params['no_viable_porque'] = "";
                     api_params['status_management_c'] = "1";
+                    api_params['metodo_asignacion_lm_c'] = "4"; //Metodo de Asignación LM - 4.- Reactivación Cancelado / Aplazado
 
 
                     app.api.call('update', url, api_params, {
