@@ -227,6 +227,7 @@ class Ref_Cruzadas_Hooks
     public function enviaNotificacionRefNoValida($bean = null, $event = null, $args = null){
 
         global $app_list_strings;
+        global $db;
         
         $status = $bean->estatus;
         //Referencia No válida : 2
@@ -250,6 +251,27 @@ class Ref_Cruzadas_Hooks
 
         $nombreAsesorOrigen = $bean->assigned_user_name;
         $nombreAsesorReferenciado = $bean->usuario_producto;
+
+        $queryAsesorOrigen=<<<SQL
+        SELECT CONCAT(first_name," ",last_name) as full_name FROM users WHERE id='{$bean->assigned_user_id}';
+        SQL;
+        $queryAsesorRef=<<<SQL
+        SELECT CONCAT(first_name," ",last_name) as full_name FROM users WHERE id='{$bean->user_id_c}';
+        SQL;
+
+        $queryResultOrigen = $db->query($queryAsesorOrigen);
+        while ($row = $db->fetchByAssoc($queryResultOrigen)) {
+            $nombreAsesorOrigen=$row['full_name'];
+        }
+
+        $queryResultRef = $db->query($queryAsesorRef);
+        while ($row = $db->fetchByAssoc($queryResultRef)) {
+            $nombreAsesorReferenciado=$row['full_name'];
+        }
+
+
+        $GLOBALS['log']->fatal('ASESOR ORIGEN: '. $nombreAsesorOrigen);
+        $GLOBALS['log']->fatal('ASESOR REFRENCIADO: '. $nombreAsesorReferenciado);
 
         $idCuenta = $bean->accounts_ref_venta_cruzada_1accounts_ida;
         $nombreCuenta = "";
@@ -514,6 +536,7 @@ class Ref_Cruzadas_Hooks
             $email_alejandro = $beanUsuarioAV->email1;
             $nombreAlejandro = $beanUsuarioAV->full_name;
         }
+        $GLOBALS['log']->fatal('CORREO CON COPIA A ALEJANDRO: '.$email_alejandro." NOMBRE: ".$nombreAlejandro);
         //Enviando correo a asesor origen
         try {
             $mailer = MailerFactory::getSystemDefaultMailer();

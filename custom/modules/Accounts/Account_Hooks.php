@@ -1090,62 +1090,13 @@ where rfc_c = '{$bean->rfc_c}' and
             $bean->name = $bean->razonsocial_c;
         }
 
-        //Crea Clean_name (exclusivo para aplicativos externos a CRM)
-        if ($bean->clean_name == "" || $bean->clean_name == null) {
-            $tipo = $app_list_strings['validacion_simbolos_list']; //obtencion lista simbolos
-            $acronimos = $app_list_strings['validacion_duplicados_list'];
-
-            if ($bean->tipodepersona_c != "Persona Moral") {
-                //$GLOBALS['log']->fatal(print_r($tipo,true));
-                //Cambia a mayúsculas y quita espacios a cada campo
-                //Concatena los tres campos para formar el clean_name
-                $nombre = $bean->name;
-                $nombre = mb_strtoupper($nombre, "UTF-8");
-                $separa = explode(" ", $nombre);
-                //$GLOBALS['log']->fatal(print_r($separa,true));
-                $longitud = count($separa);
-                //Itera el arreglo separado
-                for ($i = 0; $i < $longitud; $i++) {
-                    foreach ($tipo as $t => $key) {
-                        $separa[$i] = str_replace($key, "", $separa[$i]);
-                    }
-                }
-                $une = implode($separa);
-                $bean->clean_name = $une;
-                //$GLOBALS['log']->fatal($bean->clean_name);
-
-            } else {
-                //$GLOBALS['log']->fatal($bean->razonsocial_c);
-                $nombre = $bean->name;
-                $nombre = mb_strtoupper($nombre, "UTF-8");
-                $separa = explode(" ", $nombre);
-                $separa_limpio = $separa;
-                $GLOBALS['log']->fatal(print_r($separa, true));
-                $longitud = count($separa);
-                $eliminados = 0;
-                //Itera el arreglo separado
-                for ($i = 0; $i < $longitud; $i++) {
-                    foreach ($tipo as $t => $key) {
-                        $separa[$i] = str_replace($key, "", $separa[$i]);
-                        $separa_limpio[$i] = str_replace($key, "", $separa_limpio[$i]);
-                    }
-                    foreach ($acronimos as $a => $key) {
-                        if ($separa[$i] == $a) {
-                            $separa[$i] = "";
-                            $eliminados++;
-                        }
-                        //$GLOBALS['log']->fatal($a);
-                        $GLOBALS['log']->fatal(print_r($separa, true));
-                    }
-                }
-                //Condicion para eliminar los acronimos
-                if (($longitud - $eliminados) <= 1) {
-                    $separa = $separa_limpio;
-                }
-                //Convierte el array a string nuevamente
-                $une = implode($separa);
-                $bean->clean_name = $une;
-            }
+        //Consumir servicio de cleanName, declarado en custom api
+        require_once("custom/clients/base/api/cleanName.php");
+        $apiCleanName= new cleanName();
+        $body=array('name'=>$bean->name);
+        $response=$apiCleanName->getCleanName(null,$body);
+        if ($response['status']=='200') {
+            $bean->clean_name = $response['cleanName'];
         }
     }
 
@@ -1187,7 +1138,8 @@ where rfc_c = '{$bean->rfc_c}' and
         if (!empty($bean->id_uniclick_c) && $bean->id != "") {
             //Consulta id_uniclick_c
             $query = "SELECT id_c, id_uniclick_c FROM accounts_cstm
-            WHERE id_c != '{$bean->id}' and id_uniclick_c = '{$bean->id_uniclick_c}'";
+            inner join accounts on id=id_c
+            WHERE id_c != '{$bean->id}' and id_uniclick_c = '{$bean->id_uniclick_c}' and deleted=0";
             //Ejecuta consulta
             $queryResult = $db->query($query);
             while ($row = $db->fetchByAssoc($queryResult)) {

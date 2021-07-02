@@ -318,6 +318,8 @@ array (
               ),
               29 => 
               array (
+                'name' => 'metodo_asignacion_lm_c',
+                'label' => 'LBL_METODO_ASIGNACION_LM_C',
               ),
             ),
           ),

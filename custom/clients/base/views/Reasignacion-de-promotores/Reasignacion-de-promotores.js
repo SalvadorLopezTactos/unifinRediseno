@@ -261,7 +261,7 @@
         $("#offset_value").html(current_set);
         $("#offset_value").attr("from_set", next_from_set);
         $("#offset_value").attr("to_set", next_to_set);
-        this.buscarCuentas();
+        this.buscarCuentas(1);
     },
 
     previousOffset: function(){
@@ -279,10 +279,18 @@
         $("#offset_value").html(current_set);
         $("#offset_value").attr("from_set", next_from_set);
         $("#offset_value").attr("to_set", next_to_set);
-        this.buscarCuentas();
+        this.buscarCuentas(1);
     },
 
-    buscarCuentas: function(){
+    buscarCuentas: function(flagClean=0){
+        //Establece objeto vacio de las cuentas seleccionadas y desmarca los check seleccionados
+        
+        if(flagClean != 1){
+            this.objEtiquetaID = {};
+            $("#offset_value").attr("from_set", 0);
+            $("#crossSeleccionados").val("");
+        } 
+
         var assigneUsr = this.model.get('users_accounts_1users_ida');
         //Condición para controlar la búsqueda cuando no se ha seleccionado Promotor, esto sucede cuando se da click en el icono con el tache
         //dentro del campo Asesor Actual con formato select2
@@ -548,13 +556,13 @@
                     var maximo_registros=parseInt(maximo_registros_list["1"]);
 
                     //VALIDA EL CONTEO DE PROSPECTOS
-                    if ((maximo_registros - data.total_asignados) < countProspecto && countProspecto != 0) {
+                    if ((maximo_registros - data.total_asignados) < countProspecto && countProspecto != 0 && data.posicion_operativa.includes('3')) {
 
                         var leadsDesmarcar = 0;
                         leadsDesmarcar = ((maximo_registros - data.total_asignados) > 0)?countProspecto-(maximo_registros - data.total_asignados) : "todos los ";
 
                         var alertOptions = {
-                            title: "Si desea continuar con la asignación de:<br>Personas, Clientes o Proveedores,<br>Desmarque " + leadsDesmarcar + " prospecto (s) seleccionado (s).",
+                            title: "No es posible reasignar al asesor seleccionado ya que cuenta con más de " + maximo_registros +" registros asignados de la Metodología LM <br>Si desea continuar con la asignación de:<br>Personas, Clientes o Proveedores,<br>Desmarque " + leadsDesmarcar + " prospecto (s) seleccionado (s).",
                             level: "error"
                         };
                         app.alert.show('validaNumeroProspectos', alertOptions);

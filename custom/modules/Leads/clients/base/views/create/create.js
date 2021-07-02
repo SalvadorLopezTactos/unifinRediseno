@@ -27,11 +27,12 @@
         this.model.addValidationTask('check_duplicados_modal', _.bind(this.check_duplicados_modal, this));
         this.events['keydown [name=ventas_anuales_c]'] = 'checkInVentas';
         this.on('render', this._hidechkLeadCancelado, this);
-        this.model.on('change:name_c', this.cleanName, this);
+        this.model.addValidationTask('setCleanName', _.bind(this.cleanName, this));
         this.model.on("change:regimen_fiscal_c", _.bind(this._cleanRegFiscal, this));
         this.getRegistrosAsignados();
         this.fechaAsignacion();
         this.model.on("change:leads_leads_1_right", _.bind(this._checkContactoAsociado, this));
+        this.metodo_asignacion_lm_lead();
     },
 
     delegateButtonEvents: function() {
@@ -42,72 +43,57 @@
     _cleanRegFiscal: function () {
 
         if (this.model.get('regimen_fiscal_c') == '3') {
-            
+
             this.model.set('nombre_c', '');
             this.model.set('apellido_paterno_c', '');
             this.model.set('apellido_materno_c', '');
-            
+
         } else {
             this.model.set('nombre_empresa_c', '');
         }
     },
 
-    cleanName: function () {
-        //Recupera variables
-        var original_name = this.model.get("name_c");
-        // console.log("CleanName "+original_name);
-        var list_check = app.lang.getAppListStrings('validacion_duplicados_list');
-        var simbolos = app.lang.getAppListStrings('validacion_simbolos_list');
-        //Define arreglos para guardar nombre de lead
-        var clean_name_split = [];
-        var clean_name_split_full = [];
-        clean_name_split = original_name.split(" ");
-        //Elimina simbolos: Ej. . , -
-        _.each(clean_name_split, function (value, key) {
-            _.each(simbolos, function (simbolo, index) {
-                var clean_value = value.split(simbolo).join('');
-                if (clean_value != value) {
-                    clean_name_split[key] = clean_value;
-                }
-            });
-        });
-        clean_name_split_full = App.utils.deepCopy(clean_name_split);
-
-        if (this.model.get('regimen_fiscal_c') == "3") {
-            //Elimina tipos de sociedad: Ej. SA, de , CV...
-            var totalVacio = 0;
-            _.each(clean_name_split, function (value, key) {
-                _.each(list_check, function (index, nomenclatura) {
-                    var upper_value = value.toUpperCase();
-                    if (upper_value == nomenclatura) {
-                        var clean_value = upper_value.replace(nomenclatura, "");
-                        clean_name_split[key] = clean_value;
-                    }
+    cleanName: function (fields, errors, callback) {
+        if(_.isEmpty(errors)){
+            //Recupera variables
+            var postData = {
+                'name': this.model.get("name")
+            };
+            //Consume servicio
+            if(this.model.get("name").trim()!='') {
+                var serviceURI = app.api.buildURL("getCleanName", '', {}, {});
+                App.api.call("create", serviceURI, postData, {
+                    success: _.bind(function (data) {
+                        if (data['status']=='200') {
+                            this.model.set('clean_name', data['cleanName']);
+                        }else{
+                            //Error
+                            app.alert.show('error_clean_name', {
+                                level: 'error',
+                                autoClose: false,
+                                messages: data['error']
+                            });
+                            //Agrega errores
+                            errors['clean_name'] = errors['clean_name']|| {};
+                            errors['clean_name'].required = true;
+                        }
+                        callback(null, fields, errors);
+                    }, this)
                 });
-            });
-            //Genera clean_name con arreglo limpio
-            var clean_name = "";
-            _.each(clean_name_split, function (value, key) {
-                clean_name += value;
-                //Cuenta elementos vacíos
-                if (value == "") {
-                    totalVacio++;
-                }
-            });
-
-            //Valida que exista más de un elemento, caso contrario establece para clean_name_c valores con tipo de sociedad
-            if ((clean_name_split.length - totalVacio) <= 1) {
-                clean_name = "";
-                _.each(clean_name_split_full, function (value, key) {
-                    clean_name += value;
+            }else{
+                //Error
+                app.alert.show('error_clean_name', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: 'Se requiere ingresar nombre de la cuenta'
                 });
+                //Agrega errores
+                errors['clean_name'] = errors['clean_name'] || {};
+                errors['clean_name'].required = true;
+                callback(null, fields, errors);
             }
-            clean_name = clean_name.toUpperCase();
-            this.model.set("clean_name_c", clean_name);
-        } else {
-            original_name = original_name.replace(/\s+/gi, '');
-            original_name = original_name.toUpperCase();
-            this.model.set("clean_name_c", original_name);
+        }else{
+          callback(null, fields, errors);
         }
     },
 
@@ -147,7 +133,7 @@
 
     checkCreateRecord:function(fields, errors, callback){
         //Obteniendo el puesto del usuario
-        //Se restringe creación de Leads cuando ya se tienen más de 20 registros asignados a los usuarios 
+        //Se restringe creación de Leads cuando ya se tienen más de 20 registros asignados a los usuarios
         //Asesor Leasing:2, Director Leasing:5
         var puesto=App.user.attributes.puestousuario_c;
         var maximo_registros_list=App.lang.getAppListStrings('limite_maximo_asignados_list');
@@ -734,7 +720,7 @@
         }else{
             this._super("cancel");
         }
-        
+
     },
 
     _render: function (options) {
@@ -759,7 +745,7 @@
             mm = '0' + mm
         }
         today = yyyy + '-' + mm + '-' + dd;
-    
+
         if (puestoUsuario == '2' || puestoUsuario == '5') {
             this.model.set('fecha_asignacion_c',today);
         }
@@ -770,10 +756,22 @@
         if (this.model.get("leads_leads_1_right").id != "" && this.model.get("leads_leads_1_right").id != undefined) {
             // console.log("Activa check Contacto asociado create");
             this.model.set('contacto_asociado_c', true);
-        
+
         } else {
             // console.log("Desactiva check Contacto asociado create");
             this.model.set('contacto_asociado_c', false);
+        }
+    },
+
+    metodo_asignacion_lm_lead: function() {
+        if(this.createMode){
+
+            var posicionOperativa = App.user.attributes.posicion_operativa_c; //Posición Operativa - Asesor
+
+            if (posicionOperativa.includes('3')){
+                //METODO DE ASIGNACION LM - CREADO POR ASESOR
+                this.model.set('metodo_asignacion_lm_c','2');
+            }
         }
     },
 })

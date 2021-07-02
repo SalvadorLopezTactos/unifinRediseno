@@ -10,3 +10,4 @@ $mod_strings['LBL_EXCLUIR_PRECALIF_STREET'] = 'Excluye Precalifiación Street';
 $mod_strings['LBL_EXCLU_PRECALIF'] = 'Excluye Pre-Califiación';
 $mod_strings['LBL_STATUS_MANAGEMENT'] = 'Estatus por Producto';
 $mod_strings['LBL_OFICINA'] = 'Oficina';
+$mod_strings['LBL_METODO_ASIGNACION_LM_C'] = 'Método de Asignación LM';

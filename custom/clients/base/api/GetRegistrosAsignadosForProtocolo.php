@@ -117,10 +117,8 @@ and a.deleted = 0 and up.deleted = 0";
             WHERE(a.id IN({$string_in}) OR
             a.parent_id IN({$string_in}))
             and a.deleted = 0 and up.deleted = 0
-            GROUP BY agrupador
+            GROUP BY agrupador,a.id,a.parent_id,up.subtipo_cuenta
             ) conteoRegistros WHERE conteoRegistros.registro_valido='1'";
-
-            $GLOBALS['log']->fatal($queryCuentasGpoEmpresarial);
 
         $resultCuentasGpo = $db->query($queryCuentasGpoEmpresarial);
 
@@ -134,9 +132,9 @@ and a.deleted = 0 and up.deleted = 0";
         //Se agrega a la respuesta el puesto del usuario
         $usuario_asesor = BeanFactory::retrieveBean('Users', $id_user, array('disable_row_level_security' => true));
         $puesto_asesor=$usuario_asesor->puestousuario_c;
+        $posicionOperativa=$usuario_asesor->posicion_operativa_c;
 
-
-        return array('total_asignados'=>$total_registros,'puesto'=>$puesto_asesor);
+        return array('total_asignados'=>$total_registros,'puesto'=>$puesto_asesor,'posicion_operativa'=>$posicionOperativa);
 
     }
 

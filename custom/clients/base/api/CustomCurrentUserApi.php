@@ -59,6 +59,7 @@ class CustomCurrentUserApi extends CurrentUserApi
         $userArray['current_user']['access_hours_c'] = $current_user->access_hours_c;
         $userArray['current_user']['reset_leadcancel_c'] = $current_user->reset_leadcancel_c;
 		$userArray['current_user']['tct_id_uni2_txf_c'] = $current_user->tct_id_uni2_txf_c;
+        $userArray['current_user']['posicion_operativa_c'] = $current_user->posicion_operativa_c;
 		
         return $userArray;
     }
