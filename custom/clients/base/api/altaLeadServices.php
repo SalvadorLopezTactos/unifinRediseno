@@ -179,9 +179,9 @@ class altaLeadServices extends SugarApi
         $result = $db->query($query);
         $row = $db->fetchByAssoc($result);
         $last_indice = $row['value'];
-		
+
         //VALIDACION DE REVISTA MEDICA
-        if ($id_landing_c != 'LP Revista Médica' && $id_landing_c != 'LP REVISTA MÉDICA') { 
+        if ($id_landing_c != 'LP Revista Médica' && $id_landing_c != 'LP REVISTA MÉDICA') {
 
             if( strpos(strtoupper($id_landing_c), 'INSURANCE') !== false){
                 $subpuesto_c = 5;
@@ -202,7 +202,7 @@ class altaLeadServices extends SugarApi
                 ON lead.assigned_user_id = user.id
             where puestousuario_c='27' AND user.status = 'Active' AND subpuesto_c='$subpuesto_c'
             GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC";
-                
+
             $result_usr = $db->query($query_asesores);
             //$usuarios=;
             while ($row = $db->fetchByAssoc($result_usr)) {
@@ -229,7 +229,7 @@ class altaLeadServices extends SugarApi
             if (count($users) > 0) {
                 $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
                 $new_assigned_user = $users[$new_indice];
-                
+
             } else {
                 /* No existen usuarios disponibles y se asigna a  9.- MKT " */
                 $new_assigned_user = $idMKT;
@@ -251,10 +251,10 @@ class altaLeadServices extends SugarApi
             WHERE user.status = 'Active' AND equipo_c = 7
             GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC
             LIMIT 1";
-                
+
             $result_rm = $db->query($query_revista);
             $conteo = $result_rm->num_rows;
-            
+
             if ($conteo > 0) {
                 while ($row = $db->fetchByAssoc($result_rm)) {
 
@@ -691,59 +691,23 @@ class altaLeadServices extends SugarApi
 
     public function crea_clean_name($data)
     {
-        global $app_list_strings, $current_user; //Obtención de listas de valores
+        $nombre = "";
         $clean_name = "";
-        //Se crean variables que limpien los excesos de espacios en los campos establecidos.
-        $limpianame = preg_replace('/\s\s+/', ' ', $data['fullname']); // PENDIENTE
-        $limpianombre = preg_replace('/\s\s+/', ' ', $data['nombre_c']);
-        $limpiaapaterno = preg_replace('/\s\s+/', ' ', $data['apellido_paterno_c']);
-        $limpiamaterno = preg_replace('/\s\s+/', ' ', $data['apellido_materno_c']);
-        $limpiarazon = preg_replace('/\s\s+/', ' ', $data['nombre_empresa_c']); # prendiente
-
-        $tipo = $app_list_strings['validacion_simbolos_list']; //obtencion lista simbolos
-        $acronimos = $app_list_strings['validacion_duplicados_list'];
-
         if ($data['regimen_fiscal_c'] != "3") {
-            $full_name = $data['nombre_c'] . " " . $data['apellido_paterno_c'] . " " . $data['apellido_materno_c'];
-            $nombre = $full_name;
-            $nombre = mb_strtoupper($nombre, "UTF-8");
-            $separa = explode(" ", $nombre);
-            $longitud = count($separa);
-            for ($i = 0; $i < $longitud; $i++) {
-                foreach ($tipo as $t => $key) {
-                    $separa[$i] = str_replace($key, "", $separa[$i]);
-                }
-            }
-            $une = implode($separa);
-            $clean_name = $une;
+            $nombre = $data['nombre_c'] . " " . $data['apellido_paterno_c'] . " " . $data['apellido_materno_c'];
         } else {
             $nombre = $data['nombre_empresa_c'];
-            $nombre = mb_strtoupper($nombre, "UTF-8");
-            $separa = explode(" ", $nombre);
-            $separa_limpio = $separa;
-            $longitud = count($separa);
-            $eliminados = 0;
-            //Itera el arreglo separado
-            for ($i = 0; $i < $longitud; $i++) {
-                foreach ($tipo as $t => $key) {
-                    $separa[$i] = str_replace($key, "", $separa[$i]);
-                    $separa_limpio[$i] = str_replace($key, "", $separa_limpio[$i]);
-                }
-                foreach ($acronimos as $a => $key) {
-                    if ($separa[$i] == $a) {
-                        $separa[$i] = "";
-                        $eliminados++;
-                    }
-                }
-            }
-            //Condicion para eliminar los acronimos
-            if (($longitud - $eliminados) <= 1) {
-                $separa = $separa_limpio;
-            }
-            //Convierte el array a string nuevamente
-            $une = implode($separa);
-            $clean_name = $une;
         }
+
+        //Consumir servicio de cleanName, declarado en custom api
+        require_once("custom/clients/base/api/cleanName.php");
+        $apiCleanName= new cleanName();
+        $body=array('name'=>$nombre);
+        $response=$apiCleanName->getCleanName(null,$body);
+        if ($response['status']=='200') {
+            $clean_name = $response['cleanName'];
+        }
+
         return $clean_name;
     }
 
