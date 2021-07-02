@@ -8,7 +8,7 @@
 
     events: {
         'click #btn-cancel-save': 'closeModalCheckDuplicado',
-        //'click #bbtn-guardar': 'assignedAccount',
+        'click #btn-guardar': 'omiteMatchGuardaRegistro',
     },
 
     initialize: function (options) {
@@ -17,71 +17,25 @@
         app.view.View.prototype.initialize.call(this, options);
         if (this.layout) {
             this.layout.on('app:view:ValidaDuplicadoModal', function () {
-                //obitene modelo
+                //obtiene modelo
                 var modelo=this.options.context.attributes.model;
+                var array_coincidencias=[];
                 //Mandar petición solo cuando ya se han llenado todos los capos requeridos
-                if(Object.keys(this.options.errors).length==0){
-                    //Obteniendo teléfonos
-                    var telefonos=[];
-                    if(modelo.get('phone_mobile')!="" && modelo.get('phone_mobile')!=undefined){
-                        telefonos.push(modelo.get('phone_mobile'));
+                if(Object.keys(this.options.registros).length>0){
+                    self_modal.duplicados=this.options.registros;
+                    //Omitir match, Guardar
+                    //Se recorren todos los registros para saber si existe al menos una coincidencia del 100%
+                    //formateando el nivel match
+                    for (var property in self_modal.duplicados) {
+                        array_coincidencias.push(self.duplicados[property].coincidencia);
+                    }
+                    self_modal.textoBotonGuardar="Omitir match, Guardar";
+                    
+                    if(array_coincidencias.includes('100')){
+                        self_modal.textoBotonGuardar="Es homónimo, Guardar";
                     }
 
-                    if(modelo.get('phone_home')!="" && modelo.get('phone_home')!=undefined){
-                        telefonos.push(modelo.get('phone_home'));
-                    }
-
-                    if(modelo.get('phone_work')!="" && modelo.get('phone_work')!=undefined){
-                        telefonos.push(modelo.get('phone_work'));
-                    }
-                    var email="";
-                    if(modelo.attributes.email !=undefined){
-                        if(modelo.attributes.email.length>0){
-                            email=modelo.attributes.email[0].email_address
-                        }
-                    }
-                    //Parámetros para consumir servicio
-                    /*
-                    var params = {
-                        'nombre': modelo.get('clean_name_c'),
-                        'correo': email,
-                        'telefonos': telefonos,
-                        'rfc': "",
-                    };
-                    */
-                    var params={
-                        "nombre":"27 MICRAS INTERNACIONAL",
-                        "correo":"GGONZALEZ@UNIFIN.COM.MX",
-                        "telefonos":[
-                            "12345643",
-                            "323232344",
-                            "5579389732"
-                        ],
-                        "rfc":""
-                    };
-
-                    var urlValidaDuplicados = app.api.buildURL("validaDuplicado", '', {}, {});
-                    App.alert.show('obteniendoDuplicados', {
-                        level: 'process',
-                        title: 'Cargando',
-                    });
-
-                    app.api.call("create", urlValidaDuplicados, params, {
-                        success: _.bind(function (data) {
-                            App.alert.dismiss('obteniendoDuplicados');
-                            if(data.code=='200'){
-                                self_modal.duplicados=data.registros;
-                            }
-                            //formateando el nivel match
-                            for (var property in self_modal.duplicados) {
-                                self_modal.duplicados[property].nivelMatch= self_modal.duplicados[property].nivelMatch[0];
-                            }
-                            
-                            self_modal.render();
-                        }, this)
-                    });
-
-                    //this.render();
+                    this.render();
                 }
                 
 
@@ -106,6 +60,17 @@
 
        this._disposeView();
 
+    },
+
+    omiteMatchGuardaRegistro:function(){
+        //self_modal.options.context.attributes.model.save();
+        //Se agrega este atributo para identificar del lado del validationTask de Leads y 
+        //no se ejecute la petición al servicio de duplicado nuevamente
+        self_modal.options.context.flagGuardar="1";
+        if(self_modal.textoBotonGuardar=="Es homónimo, Guardar"){
+            self_modal.model.set('homonimo_c',1);
+        }
+        self_modal.options.context.trigger('button:save_button:click');
     },
 
     _render: function () {

@@ -155,7 +155,7 @@ class validaDuplicado extends SugarApi
                 while ($row = $db->fetchByAssoc($resultadoConsulta)) {
                     //Itera resultado y agrega a lista de registros
                     //$item = [];
-                    $items[$row['id']]['nivelMatch'][]=$row['nivel'];
+                    $items[$row['id']]['nivelMatch']=$row['nivel'];
                     $items[$row['id']]['modulo']=$row['modulo'];
                     $items[$row['id']]['moduloLink']=$row['moduloLink'];
                     $items[$row['id']]['nombre']=$row['nombre'];
@@ -192,7 +192,7 @@ class validaDuplicado extends SugarApi
                     if ($elemento['similarity']>.80) {
                         //$item = [];
                         $similitud = (!empty($elemento['similarity'])) ? number_format($elemento['similarity']*100) : "0";
-                        $items[$elemento['id_bd']]['nivelMatch'][]='3 - '.$similitud.'%';
+                        $items[$elemento['id_bd']]['nivelMatch'].=(empty($items[$elemento['id_bd']]['nivelMatch'])) ? '3 - '.$similitud.'%' : ',3 - '.$similitud.'%';
                         $items[$elemento['id_bd']]['modulo']=($elemento['source']=='accounts') ? 'Cuenta' : 'Lead';
                         $items[$elemento['id_bd']]['moduloLink']=($elemento['source']=='accounts') ? 'Accounts' : 'Leads';
                         $items[$elemento['id_bd']]['nombre']=$elemento['business_name'];
@@ -208,7 +208,7 @@ class validaDuplicado extends SugarApi
                     if ($elemento['similarity']>.80) {
                         //$item = [];
                         $similitud = (!empty($elemento['similarity'])) ? number_format($elemento['similarity']*100) : "0";
-                        $items[$elemento['id_bd']]['nivelMatch'][]='3 - '.$similitud.'%';
+                        $items[$elemento['id_bd']]['nivelMatch'].=(empty($items[$elemento['id_bd']]['nivelMatch'])) ? '3 - '.$similitud.'%' : ',3 - '.$similitud.'%';
                         $items[$elemento['id_bd']]['modulo']=($elemento['source']=='accounts') ? 'Cuenta' : 'Lead';
                         $items[$elemento['id_bd']]['moduloLink']=($elemento['source']=='accounts') ? 'Accounts' : 'Leads';
                         $items[$elemento['id_bd']]['nombre']=$elemento['business_name'];

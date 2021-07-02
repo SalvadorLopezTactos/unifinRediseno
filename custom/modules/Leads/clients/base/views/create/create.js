@@ -215,34 +215,110 @@
 
     check_duplicados_modal:function(fields, errors, callback){
 
-        if (Modernizr.touch) {
-            app.$contentEl.addClass('content-overflow-visible');
-        }
-        /**check whether the view already exists in the layout.
-         * If not we will create a new view and will add to the components list of the record layout
-         * */
+        if(Object.keys(errors).length==0 && this.options.context.flagGuardar!="1"){
+            var telefonos=[];
+            if(this.model.get('phone_mobile')!="" && this.model.get('phone_mobile')!=undefined){
+                telefonos.push(this.model.get('phone_mobile'));
+            }
 
-        var quickCreateView = null;
-        if (!quickCreateView) {
-            /** Create a new view object */
-            quickCreateView = app.view.createView({
-                context: this.context,
-                errors:errors,
-                name: 'ValidaDuplicadoModal',
-                layout: this.layout,
-                module: 'Leads'
+            if(this.model.get('phone_home')!="" && this.model.get('phone_home')!=undefined){
+                telefonos.push(this.model.get('phone_home'));
+            }
+
+            if(this.model.get('phone_work')!="" && this.model.get('phone_work')!=undefined){
+                telefonos.push(this.model.get('phone_work'));
+            }
+
+            var email="";
+            if(this.model.attributes.email !=undefined){
+                if(this.model.attributes.email.length>0){
+                    email=this.model.attributes.email[0].email_address
+                }
+            }
+            //Parámetros para consumir servicio
+            /*
+            var params = {
+                'nombre': this.model.get('clean_name_c'),
+                'correo': email,
+                'telefonos': telefonos,
+                'rfc': "",
+            };
+            */
+
+            var params={
+                "nombre":"27 MICRAS INTERNACIONAL",
+                //"nombre":"GRUASDELVALLESANMARTIN",
+                "correo":"GGONZALEZ@UNIFIN.COM.MX",
+                "telefonos":[
+                    "12345643",
+                    "323232344",
+                    "5579389732"
+                ],
+                "rfc":""
+            };
+
+            var urlValidaDuplicados = app.api.buildURL("validaDuplicado", '', {}, {});
+            
+            App.alert.show('obteniendoDuplicados', {
+                level: 'process',
+                title: 'Cargando',
             });
-            /** add the new view to the components list of the record layout*/
-            this.layout._components.push(quickCreateView);
-            this.layout.$el.append(quickCreateView.$el);
+
+            app.api.call("create", urlValidaDuplicados, params, {
+                success: _.bind(function (data) {
+                    App.alert.dismiss('obteniendoDuplicados');
+                    if(data.code=='200'){
+                        self.duplicados=data.registros;
+
+                        //formateando el nivel match
+                        for (var property in self.duplicados) {
+                            //self.duplicados[property].nivelMatch= self.duplicados[property].nivelMatch[0];
+                            //self.duplicados[property].rfc= "LOBS920410HDFPLL06";
+                            self.duplicados[property].coincidencia= self.duplicados[property].coincidencia;
+                        }
+                        errors['modal_duplicados'] = errors['modal_duplicados'] || {};
+                        errors['modal_duplicados'].custom_message1 = true;
+
+                        //Mandamos a llamar el popup custom
+                        if (Modernizr.touch) {
+                            app.$contentEl.addClass('content-overflow-visible');
+                        }
+                        /**check whether the view already exists in the layout.
+                         * If not we will create a new view and will add to the components list of the record layout
+                         * */
+                
+                        var quickCreateView = null;
+                        if (!quickCreateView) {
+                            /** Create a new view object */
+                            quickCreateView = app.view.createView({
+                                context: this.context,
+                                errors:errors,
+                                registros:self.duplicados,
+                                name: 'ValidaDuplicadoModal',
+                                layout: this.layout,
+                                module: 'Leads'
+                            });
+                            /** add the new view to the components list of the record layout*/
+                            this.layout._components.push(quickCreateView);
+                            this.layout.$el.append(quickCreateView.$el);
+                        }
+                        /**triggers an event to show the pop up quick create view*/
+                        this.layout.trigger("app:view:ValidaDuplicadoModal");
+                    }
+                    
+                    callback(null, fields, errors);
+                    
+                }, this)
+            });
+
+
+        }else{
+            callback(null, fields, errors);
         }
-        /**triggers an event to show the pop up quick create view*/
-        this.layout.trigger("app:view:ValidaDuplicadoModal");
+        //errors['modal_duplicados'] = errors['modal_duplicados'] || {};
+        //errors['modal_duplicados'].custom_message1 = true;
 
-        errors['modal_duplicados'] = errors['modal_duplicados'] || {};
-        errors['modal_duplicados'].custom_message1 = true;
-
-        callback(null, fields, errors);
+        //callback(null, fields, errors);
 
     },
 
