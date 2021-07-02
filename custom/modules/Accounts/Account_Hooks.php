@@ -1187,6 +1187,7 @@ where rfc_c = '{$bean->rfc_c}' and
         if (!empty($bean->id_uniclick_c) && $bean->id != "") {
             //Consulta id_uniclick_c
             $query = "SELECT id_c, id_uniclick_c FROM accounts_cstm
+            inner join accounts on id=id_c
             WHERE id_c != '{$bean->id}' and id_uniclick_c = '{$bean->id_uniclick_c}' and deleted=0";
             //Ejecuta consulta
             $queryResult = $db->query($query);
