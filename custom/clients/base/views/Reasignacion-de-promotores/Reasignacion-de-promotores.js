@@ -562,7 +562,7 @@
                         leadsDesmarcar = ((maximo_registros - data.total_asignados) > 0)?countProspecto-(maximo_registros - data.total_asignados) : "todos los ";
 
                         var alertOptions = {
-                            title: "No es posible reasignar al asesor seleccionado ya que cuenta con más de " + maximo_registros +" registros asignados<br>Si desea continuar con la asignación de:<br>Personas, Clientes o Proveedores,<br>Desmarque " + leadsDesmarcar + " prospecto (s) seleccionado (s).",
+                            title: "No es posible reasignar al asesor seleccionado ya que cuenta con más de " + maximo_registros +" registros asignados de la Metodología LM <br>Si desea continuar con la asignación de:<br>Personas, Clientes o Proveedores,<br>Desmarque " + leadsDesmarcar + " prospecto (s) seleccionado (s).",
                             level: "error"
                         };
                         app.alert.show('validaNumeroProspectos', alertOptions);
