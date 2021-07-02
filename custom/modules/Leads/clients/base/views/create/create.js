@@ -670,8 +670,8 @@
         if(this.createMode){
             
             var posicionOperativa = App.user.attributes.posicion_operativa_c; //Posición Operativa - Asesor
-
-            if (posicionOperativa == '^3^'){
+            
+            if (posicionOperativa.includes('3')){
                 //METODO DE ASIGNACION LM - CREADO POR ASESOR
                 this.model.set('metodo_asignacion_lm_c','2');
             }

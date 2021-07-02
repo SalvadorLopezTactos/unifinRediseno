@@ -63,16 +63,18 @@ class UpdateLeadFromProtocoloDB extends SugarApi
                 $team_id=$row['default_team'];
                 $team_set_id=$row['team_set_id'];
             }
-
+            
             //$queryAsignado = "UPDATE leads SET assigned_user_id='{$id_usuario}',team_id='{$team_id}',team_set_id='{$team_set_id}' WHERE id='{$id_lead}'";
             //$result = $db->query($queryAsignado);
             $beanLeadReasignado=BeanFactory::retrieveBean('Leads',$id_lead,array('disable_row_level_security' => true));
             $beanLeadReasignado->assigned_user_id=$id_usuario;
             $beanLeadReasignado->team_id=$team_id;
             $beanLeadReasignado->team_set_id=$team_set_id;
+            $beanLeadReasignado->fecha_asignacion_c=date('Y-m-d');
+            $beanLeadReasignado->metodo_asignacion_lm_c='3'; //Metodo de asignacion LM - 3.- Asignación Automática
             $beanLeadReasignado->save();
-
-
+            
+            
             //Reasignar también los "Contactos asociados" para que el usuario tenga permiso de verlos
             $queryGetContactosAsociados="SELECT leads_leads_1leads_idb FROM leads_leads_1_c 
             WHERE leads_leads_1leads_ida='{$id_lead}'
@@ -89,6 +91,8 @@ class UpdateLeadFromProtocoloDB extends SugarApi
                             $beanLeadReasignadoRel->assigned_user_id=$id_usuario;
                             $beanLeadReasignadoRel->team_id=$team_id;
                             $beanLeadReasignadoRel->team_set_id=$team_set_id;
+                            $beanLeadReasignadoRel->fecha_asignacion_c=date('Y-m-d');
+                            $beanLeadReasignadoRel->metodo_asignacion_lm_c='3'; //Metodo de asignacion LM - 3.- Asignación Automática
                             $beanLeadReasignadoRel->save();
                         }
                         
@@ -153,7 +157,7 @@ class UpdateLeadFromProtocoloDB extends SugarApi
 
             //Actualizando información del uni_producto con el nuevo usuario
             $queryAsignadoProd = "UPDATE uni_productos p INNER JOIN uni_productos_cstm pc ON p.id=pc.id_c
-            SET assigned_user_id='{$id_usuario}',team_id='{$team_id}',team_set_id='{$team_set_id}',fecha_asignacion_c=CURDATE()
+            SET assigned_user_id='{$id_usuario}',team_id='{$team_id}',team_set_id='{$team_set_id}',metodo_asignacion_lm_c=3,fecha_asignacion_c=CURDATE()
             WHERE id='{$idProducto}'";
             $rProd = $db->query($queryAsignadoProd);
 
