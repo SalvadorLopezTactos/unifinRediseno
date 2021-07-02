@@ -117,10 +117,8 @@ and a.deleted = 0 and up.deleted = 0";
             WHERE(a.id IN({$string_in}) OR
             a.parent_id IN({$string_in}))
             and a.deleted = 0 and up.deleted = 0
-            GROUP BY agrupador
+            GROUP BY agrupador,a.id,a.parent_id,up.subtipo_cuenta
             ) conteoRegistros WHERE conteoRegistros.registro_valido='1'";
-
-            $GLOBALS['log']->fatal($queryCuentasGpoEmpresarial);
 
         $resultCuentasGpo = $db->query($queryCuentasGpoEmpresarial);
 
