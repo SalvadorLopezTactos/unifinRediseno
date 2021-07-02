@@ -261,7 +261,7 @@
         $("#offset_value").html(current_set);
         $("#offset_value").attr("from_set", next_from_set);
         $("#offset_value").attr("to_set", next_to_set);
-        this.buscarCuentas();
+        this.buscarCuentas(1);
     },
 
     previousOffset: function(){
@@ -279,15 +279,18 @@
         $("#offset_value").html(current_set);
         $("#offset_value").attr("from_set", next_from_set);
         $("#offset_value").attr("to_set", next_to_set);
-        this.buscarCuentas();
+        this.buscarCuentas(1);
     },
 
-    buscarCuentas: function(){
+    buscarCuentas: function(flagClean=0){
         //Establece objeto vacio de las cuentas seleccionadas y desmarca los check seleccionados
-        this.objEtiquetaID = {};
-        $("#offset_value").attr("from_set", 0);
-        $("#crossSeleccionados").val("");
         
+        if(flagClean != 1){
+            this.objEtiquetaID = {};
+            $("#offset_value").attr("from_set", 0);
+            $("#crossSeleccionados").val("");
+        } 
+
         var assigneUsr = this.model.get('users_accounts_1users_ida');
         //Condición para controlar la búsqueda cuando no se ha seleccionado Promotor, esto sucede cuando se da click en el icono con el tache
         //dentro del campo Asesor Actual con formato select2
