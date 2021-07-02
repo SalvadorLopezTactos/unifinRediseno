@@ -65,7 +65,7 @@
                 App.api.call("create", serviceURI, postData, {
                     success: _.bind(function (data) {
                         if (data['status']=='200') {
-                            this.model.set('clean_name', data['cleanName']);
+                            this.model.set('clean_name_c', data['cleanName']);
                         }else{
                             //Error
                             app.alert.show('error_clean_name', {
@@ -74,8 +74,8 @@
                                 messages: data['error']
                             });
                             //Agrega errores
-                            errors['clean_name'] = errors['clean_name']|| {};
-                            errors['clean_name'].required = true;
+                            errors['clean_name_c'] = errors['clean_name_c']|| {};
+                            errors['clean_name_c'].required = true;
                         }
                         callback(null, fields, errors);
                     }, this)
@@ -88,8 +88,8 @@
                     messages: 'Se requiere ingresar nombre de la cuenta'
                 });
                 //Agrega errores
-                errors['clean_name'] = errors['clean_name'] || {};
-                errors['clean_name'].required = true;
+                errors['clean_name_c'] = errors['clean_name_c'] || {};
+                errors['clean_name_c'].required = true;
                 callback(null, fields, errors);
             }
         }else{
