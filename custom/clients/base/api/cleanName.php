@@ -117,7 +117,7 @@ class cleanName extends SugarApi
             for ($index = 0; $index <= count($lsExceptions); $index++) {
                 $cleanName = str_replace($lsExceptions[$index][0],$lsExceptions[$index][1],$cleanName);
             }
-            //Upper
+            //Format
             $cleanName = strtoupper($cleanName);
 
             //Valida expresión regular e identifica match
@@ -129,7 +129,7 @@ class cleanName extends SugarApi
                     $cleanName = str_replace($lsExceptions[$index][1],$lsExceptions[$index][0],$cleanName);
                 }
             }
-            $cleanName = trim($cleanName);
+            $cleanName = preg_replace('!\s+!', ' ', $cleanName);
             $status = '200';
         } catch (Exception $e) {
             //Error al procesar petición

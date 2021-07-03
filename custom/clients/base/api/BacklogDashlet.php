@@ -1037,6 +1037,7 @@ SQL;
                             $colValues = $this->removeElement($colValues, "comentado");
                             $colValues = $this->removeElement($colValues, "color");
                             $colValues = $this->removeElement($colValues, "colorDispLinea");
+                            $colValues = $this->removeElement($colValues, "estado_cancelacion_c");
                             $colValues = $this->removeSpecialCharacters($colValues);
                             fputcsv($fp, $colValues);
                         }
