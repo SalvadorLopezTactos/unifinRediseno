@@ -221,16 +221,16 @@
                     email=this.model.attributes.email[0].email_address
                 }
             }
+
             //Parámetros para consumir servicio
-            /*
             var params = {
-                'nombre': this.model.get('clean_name_c'),
+                'nombre': this.model.get('name'),
                 'correo': email,
                 'telefonos': telefonos,
                 'rfc': "",
             };
-            */
-
+            
+            /*
             var params={
                 "nombre":"27 MICRAS INTERNACIONAL",
                 //"nombre":"GRUASDELVALLESANMARTIN",
@@ -242,6 +242,7 @@
                 ],
                 "rfc":""
             };
+            */
 
             var urlValidaDuplicados = app.api.buildURL("validaDuplicado", '', {}, {});
             
@@ -301,10 +302,6 @@
         }else{
             callback(null, fields, errors);
         }
-        //errors['modal_duplicados'] = errors['modal_duplicados'] || {};
-        //errors['modal_duplicados'].custom_message1 = true;
-
-        //callback(null, fields, errors);
 
     },
 

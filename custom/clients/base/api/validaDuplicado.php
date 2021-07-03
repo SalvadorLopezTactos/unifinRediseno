@@ -69,6 +69,14 @@ class validaDuplicado extends SugarApi
         $items = [];
         $item = [];
 
+        //Consumir servicio de cleanName, declarado en custom api
+        require_once("custom/clients/base/api/cleanName.php");
+        $apiCleanName= new cleanName();
+        $body=array('name'=>$nombre);
+        $response=$apiCleanName->getCleanName(null,$body);
+        if ($response['status']=='200') {
+            $nombre = $response['cleanName'];
+        }
         //Prepara consulta: Lead
         //Nivel 0 - Nombre (limpio con algoritmo: clean_name) + email + algún teléfono + RFC.
         if (!empty($nombre) && !empty($correo) &&  $totalTelefonos>0 &&  !empty($rfc) ) {

@@ -634,6 +634,9 @@
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
         this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
         this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
+
+        //Validation task que muestra modal sobre duplicados
+        this.model.addValidationTask('check_duplicados_account', _.bind(this.check_duplicados_account, this));
     },
 
     /** BEGIN CUSTOMIZATION:
@@ -1844,6 +1847,108 @@
         }
     },
 
+    check_duplicados_account:function (fields, errors, callback) {
+        
+        if(Object.keys(errors).length==0 && this.options.context.flagGuardarAcc!="1"){
+            var telefonos=[];
+            //Obtener los telefonos
+            if(this.oTelefonos.telefono.length>0){
+                for (let index = 0; index < this.oTelefonos.telefono.length; index++) {
+                    telefonos.push(this.oTelefonos.telefono[index].name);  
+                }
+            }
+
+            var email="";
+            if(this.model.attributes.email !=undefined){
+                if(this.model.attributes.email.length>0){
+                    email=this.model.attributes.email[0].email_address;
+                }
+            }
+
+            var rfc="";
+            if(this.model.get('rfc_c') != undefined && this.model.get('rfc_c') != ""){
+                rfc=this.model.get('rfc_c');
+            }
+            
+            //Parámetros para consumir servicio
+            var params = {
+                'nombre': this.model.get('name'),
+                'correo': email,
+                'telefonos': telefonos,
+                'rfc': rfc,
+            };
+            
+            /*
+            var params={
+                //"nombre":"27 MICRAS INTERNACIONAL",
+                "nombre":"GRUASDELVALLESANMARTIN",
+                "correo":"GGONZALEZ@UNIFIN.COM.MX",
+                "telefonos":[
+                    "12345643",
+                    "323232344",
+                    "5579389732"
+                ],
+                "rfc":""
+            };
+            */
+
+            var urlValidaDuplicados = app.api.buildURL("validaDuplicado", '', {}, {});
+            
+            App.alert.show('obteniendoDuplicados', {
+                level: 'process',
+                title: 'Cargando',
+            });
+
+            app.api.call("create", urlValidaDuplicados, params, {
+                success: _.bind(function (data) {
+                    App.alert.dismiss('obteniendoDuplicados');
+                    if(data.code=='200'){
+                        self.duplicados=data.registros;
+
+                        //formateando el nivel match
+                        for (var property in self.duplicados) {
+                            self.duplicados[property].coincidencia= self.duplicados[property].coincidencia;
+                        }
+                        errors['modal_duplicadosacc'] = errors['modal_duplicadosacc'] || {};
+                        errors['modal_duplicadosacc'].custom_message1 = true;
+
+                        //Mandamos a llamar el popup custom
+                        if (Modernizr.touch) {
+                            app.$contentEl.addClass('content-overflow-visible');
+                        }
+                        /**check whether the view already exists in the layout.
+                         * If not we will create a new view and will add to the components list of the record layout
+                         * */
+                
+                        var quickCreateView = null;
+                        if (!quickCreateView) {
+                            /** Create a new view object */
+                            quickCreateView = app.view.createView({
+                                context: this.context,
+                                errors:errors,
+                                registros:self.duplicados,
+                                name: 'ValidaDuplicadoAccModal',
+                                layout: this.layout,
+                                module: 'Accounts'
+                            });
+                            /** add the new view to the components list of the record layout*/
+                            this.layout._components.push(quickCreateView);
+                            this.layout.$el.append(quickCreateView.$el);
+                        }
+                        /**triggers an event to show the pop up quick create view*/
+                        this.layout.trigger("app:view:ValidaDuplicadoAccModal");
+                    }
+                    
+                    callback(null, fields, errors);
+                    
+                }, this)
+            });
+
+
+        }else{
+            callback(null, fields, errors);
+        }
+    },
 
     changeLabelMarketing: function () {
         console.log("Cambio de Origen");
