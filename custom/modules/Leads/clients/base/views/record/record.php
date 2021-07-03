@@ -487,6 +487,14 @@ array (
                 'name' => 'metodo_asignacion_lm_c',
                 'label' => 'LBL_METODO_ASIGNACION_LM_C',
               ),
+              55 => 
+              array (
+                'name' => 'homonimo_c',
+                'label' => 'LBL_HOMONIMO',
+              ),
+              56 => 
+              array (
+              ),
             ),
           ),
           2 => 

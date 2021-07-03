@@ -116,4 +116,5 @@ $mod_strings['LBL_INEGI_MACRO'] = 'Macro';
 $mod_strings['LBL_LEAD_CLASF_SECTORIAL'] = 'Clasificación Sectorial';
 $mod_strings['LBL_CONTACTO_ASOCIADO_IMP'] = 'Contacto Asociado';
 $mod_strings['LBL_RFC'] = 'RFC';
+$mod_strings['LBL_HOMONIMO'] = 'Homónimo';
 $mod_strings['LBL_METODO_ASIGNACION_LM_C'] = 'Método de Asignación LM';
