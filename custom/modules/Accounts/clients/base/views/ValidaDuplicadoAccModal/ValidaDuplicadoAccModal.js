@@ -46,7 +46,7 @@
     /**Custom method to dispose the view*/
     _disposeView: function () {
         /**Find the index of the view in the components list of the layout*/
-        var index = _.indexOf(this.layout._components, _.findWhere(this.layout._components, { name: 'ValidaDuplicadoModal' }));
+        var index = _.indexOf(this.layout._components, _.findWhere(this.layout._components, { name: 'ValidaDuplicadoAccModal' }));
         if (index > -1) {
             /** dispose the view so that the evnets, context elements etc created by it will be released*/
             this.layout._components[index].dispose();
