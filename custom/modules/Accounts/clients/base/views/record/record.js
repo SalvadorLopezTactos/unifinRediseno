@@ -6834,6 +6834,7 @@
 
     aprobar_noviable: function () {
         var Productos = [];
+       
         app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + this.model.get('id')), null, {
             success: function (data) {
 				Productos = data;
@@ -6880,6 +6881,8 @@
                                                 }
                                             });
                                         });
+                                        location.reload();
+                                        
 									} else {
                                         params["aprueba1_c"] = 1;
                                         params["aprueba2_c"] = 1;
@@ -6898,6 +6901,7 @@
                                                     level: 'warning',
                                                     messages: 'Se aprobó el No Viable, para la cuenta',
                                                 });*/
+                                                location.reload();
                                             },
                                             error: function (e) {
                                                 throw e;
@@ -7000,7 +7004,8 @@
                         messages: 'No se encuentra producto a Desaprobar No viable',
                      });
                 }*/
-                //location.reload();
+                //this.model.save();
+                location.reload();
             },
             error: function (e) {
                 throw e;
@@ -7035,7 +7040,8 @@
                         messages: 'No se encuentra producto a Reactivar No viable',
                      });
                 }*/
-                //location.reload();
+                //this.model.save();
+                location.reload();
             },
             error: function (e) {
                 throw e;
