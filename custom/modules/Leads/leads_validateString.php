@@ -81,7 +81,7 @@ class leads_validateString
         if ($servicio!= "api" && $servicio != "unifinAPI") {
 
             // omitir si el leads es cancelado no se haga nada o si ya esta convertido se brinca la validación
-            if ($bean->subtipo_registro_c != 3 && $bean->subtipo_registro_c != 4) {
+            if ($bean->subtipo_registro_c != 3 && $bean->subtipo_registro_c != 4 && $bean->homonimo_c==0) {
 
                 $idPadre = $this->createCleanName($bean->leads_leads_1_name);
                 //  $GLOBALS['log']->fatal("cOMIENZA A vALIDAR dUPLICADO ");
@@ -111,6 +111,7 @@ class leads_validateString
                 $sqlLead = new SugarQuery();
                 $sqlLead->select(array('id', 'clean_name_c', 'pb_id_c', 'duns_id_c'));
                 $sqlLead->from(BeanFactory::newBean('Leads'), array('team_security' => false));
+                $sqlLead->where()->equals('homonimo_c', 0);
                 $sqlLead->where()
                     ->queryOr()
                     ->equals('clean_name_c', $bean->clean_name_c)
