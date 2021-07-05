@@ -49,7 +49,7 @@ array (
           array (
             'type' => 'button',
             'name' => 'desaprobar_noviable',
-            'label' => 'Desaprobar No Viable',
+            'label' => 'Rechazar No Viable',
             'css_class' => 'btn-success hidden',
             'showOn' => 'view',
             'events' => 

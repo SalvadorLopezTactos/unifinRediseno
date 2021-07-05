@@ -1382,8 +1382,9 @@
             }
 
         }
-        //cont_uni_p.render();
+        cont_uni_p.render();
         callback(null, fields, errors);
+        cont_uni_p.render();
     },
 
     //Validación para dejar sin editar los campos de producto después de haberlos editado por primera y única vez.

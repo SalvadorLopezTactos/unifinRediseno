@@ -5152,6 +5152,7 @@
                     this.render();
                 }
                 //Refresca cambios en teléfonos, direcciones y pld(Recupera ids de nuevos teléfonos)
+                location.reload();
                 this.get_phones();
                 this.get_addresses();
                 this.get_pld();
@@ -6869,10 +6870,10 @@
                                             var resp;
                                             app.api.call('create', uni, null, {
                                                 success: function (data) {
-                                                    app.alert.show('Rechazar No viable cuenta', {
+                                                    /*app.alert.show('Rechazar No viable cuenta', {
                                                         level: 'warning',
                                                         messages: 'Se aprobó el No Viable, para la cuenta',
-                                                    });
+                                                    });*/
                                                 },
                                                 error: function (e) {
                                                     throw e;
@@ -6893,10 +6894,10 @@
                                         var resp;
                                         app.api.call('create', uni, null, {
                                             success: function (data) {
-                                                app.alert.show('Rechazar No viable cuenta', {
+                                                /*app.alert.show('Rechazar No viable cuenta', {
                                                     level: 'warning',
                                                     messages: 'Se aprobó el No Viable, para la cuenta',
-                                                });
+                                                });*/
                                             },
                                             error: function (e) {
                                                 throw e;
@@ -6988,7 +6989,7 @@
         app.api.call('create', uni, null, {
             success: function (data) {
 				resp = data;
-                if(resp > 0){
+                /*if(resp > 0){
                     app.alert.show('Rechazar No viable cuenta', {
                        level: 'info',
                        messages: 'No se aprobó el No Viable, para la cuenta',
@@ -6998,8 +6999,8 @@
                         level: 'error',
                         messages: 'No se encuentra producto a Desaprobar No viable',
                      });
-                }
-                location.reload();
+                }*/
+                //location.reload();
             },
             error: function (e) {
                 throw e;
@@ -7023,7 +7024,7 @@
         app.api.call('create', uni, null, {
             success: function (data) {
 				resp = data;
-                if(resp > 0){
+                /*if(resp > 0){
                     app.alert.show('Rechazar No viable cuenta', {
                        level: 'info',
                        messages: 'Se envío la notificación a directores, para reactivar la cuenta',
@@ -7033,8 +7034,8 @@
                         level: 'error',
                         messages: 'No se encuentra producto a Reactivar No viable',
                      });
-                }
-                location.reload();
+                }*/
+                //location.reload();
             },
             error: function (e) {
                 throw e;
