@@ -6853,20 +6853,40 @@
 										params["user_id_c"] = Productos[key].user_id_c;
 										params["user_id1_c"] = Productos[key].user_id1_c;
 										params["user_id2_c"] = Productos[key].user_id2_c;
-										_.each(Productos, function (value1, key1) {
+                                        params["estatus_atencion"] = '3';
+                                        params["tipoupdate"] = '2';
+                                        
+										/*_.each(Productos, function (value1, key1) {
 											var actualiza = app.api.buildURL('uni_Productos/' + Productos[key1].id, null, null);
 											app.api.call('update', actualiza, params, {
 												success: _.bind(function (data2) {
 												}, this)
 											});
-										});
+										});*/
+                                        _.each(Productos, function (value1, key1) {
+                                            params["id_Producto"] =  Productos[key1].id;
+                                            var uni = app.api.buildURL('actualizaProductosPermisos', null, null,params);
+                                            var resp;
+                                            app.api.call('create', uni, null, {
+                                                success: function (data) {
+                                                    app.alert.show('Rechazar No viable cuenta', {
+                                                        level: 'warning',
+                                                        messages: 'Se aprobó el No Viable, para la cuenta',
+                                                    });
+                                                },
+                                                error: function (e) {
+                                                    throw e;
+                                                }
+                                            });
+                                        });
 									} else {
-                                        params["aprueba1_c"] = 0;
-                                        params["aprueba2_c"] = 0;
+                                        params["aprueba1_c"] = 1;
+                                        params["aprueba2_c"] = 1;
 										if(Productos[key].user_id1_c == app.user.id) params["aprueba1_c"] = 1;
 										if(Productos[key].user_id2_c == app.user.id) params["aprueba2_c"] = 1;
                                         params["id_Producto"] =  Productos[key].id;
                                         params["tipoupdate"] = '2';
+                                        params["estatus_atencion"] = '3';
                                         
                                         //var actualiza = app.api.buildURL('actualizaProductosPermisos/' + Productos[key].id, null, null);
                                         var uni = app.api.buildURL('actualizaProductosPermisos', null, null,params);
@@ -6895,7 +6915,7 @@
                                         */
 									}
 								}
-                                location.reload();
+                                //location.reload();
 							}, this)
 						});						
                     }
@@ -6960,6 +6980,7 @@
         params["user_id"] = app.user.id;
         params["tipoupdate"] = '1';
         params["notificacion_noviable_c"] = false;
+        params["estatus_atencion"] = '1';
         
         //var uni = app.api.buildURL('actualizaProductosPermisos/');
         var uni = app.api.buildURL('actualizaProductosPermisos', null, null,params);
@@ -6994,6 +7015,7 @@
         params["id_Account"] = this.model.get('id');
         params["user_id"] = app.user.id;
         params["tipoupdate"] = '3';
+        //params["estatus_atencion"] = '1';
         
         //var uni = app.api.buildURL('actualizaProductosPermisos/');
         var uni = app.api.buildURL('actualizaProductosPermisos', null, null,params);

@@ -1414,7 +1414,7 @@
             if (cont_uni_p.ResumenProductos.credito_auto.tipo_cuenta != 1 && cont_uni_p.ResumenProductos.credito_auto.subtipo_cuenta != 2 && cont_uni_p.ResumenProductos.credito_auto.subtipo_cuenta != 7 && this.model.get('user_id2_c') != App.user.id) {
                 editaCA = false;
             }
-            //Valida FLEET TIPO CUENTA 1-LEAD - SUBTIPO CUENTA 2-CONTACTADO - SUBTIPO CUENTA 7-INTERESADO
+                           //Valida FLEET TIPO CUENTA 1-LEAD - SUBTIPO CUENTA 2-CONTACTADO - SUBTIPO CUENTA 7-INTERESADO
             if (cont_uni_p.ResumenProductos.fleet.tipo_cuenta != 1 && cont_uni_p.ResumenProductos.fleet.subtipo_cuenta != 2 && cont_uni_p.ResumenProductos.fleet.subtipo_cuenta != 7 && this.model.get('user_id6_c') != App.user.id) {
                 editaFL = false;
             }
@@ -1786,89 +1786,106 @@
                 break;
         }
         cont_uni_p.datamotivos = {};
-
+        
         var j =0;
-
-        if($("#list_l_so_razon")[0].value == '7' || $("#list_f_razon_lm")[0].value == '7' || $("#list_ca_so_razon")[0].value == '7'
-            || $("#list_fl_so_razon")[0].value == '7' || $("#list_u_so_razon")[0].value == '7'){
-            
-            cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
-        }else{
-
-            for(var i = 0; i < cont_uni_p.datacondiciones.records.length; i++) {
-                switch (tipoProducto) {
-                    case "1": //Leasing
-                        if($("#list_l_so_razon")[0].value == cont_uni_p.datacondiciones.records[i].razon) {
-                            document.getElementById("list_l_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);  
-                            cont_uni_p.datamotivos[cont_uni_p.datacondiciones.records[i].motivo] = app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo];
-                            j++;
-                        }
-                        break;
-                    case "4": //Factoraje
-                        if($("#list_f_razon_lm")[0].value == cont_uni_p.datacondiciones.records[i].razon) {
-                            document.getElementById("list_f_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
-                            cont_uni_p.datamotivos[cont_uni_p.datacondiciones.records[i].motivo] = app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo];
-                            j++;
-                        }
-                        break;
-                    case "3": //Credito-auto
-                        if($("#list_ca_so_razon")[0].value == cont_uni_p.datacondiciones.records[i].razon ) {
-                            document.getElementById("list_ca_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
-                            cont_uni_p.datamotivos[cont_uni_p.datacondiciones.records[i].motivo] = app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo];
-                            j++;
-                        }
-                        break;
-                    case "6": //Fleet
-                        if($("#list_fl_so_razon")[0].value == cont_uni_p.datacondiciones.records[i].razon) {
-                            document.getElementById("list_fl_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
-                            cont_uni_p.datamotivos[cont_uni_p.datacondiciones.records[i].motivo] = app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo];
-                            j++;
-                        }
-                        break;
-                    case "8": //Uniclick
-                        if($("#list_u_so_razon")[0].value == cont_uni_p.datacondiciones.records[i].razon ) {    
-                            document.getElementById("list_u_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
-                            cont_uni_p.datamotivos[cont_uni_p.datacondiciones.records[i].motivo] = app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo];
-                            j++;
-                        }
-                        break;
-                }
-            }
+        for(var i = 0; i < cont_uni_p.datacondiciones.records.length; i++) {
             switch (tipoProducto) {
                 case "1": //Leasing
-                    document.getElementById("list_l_so_motivo").value = "";
+                    if($("#list_l_so_razon")[0].value == cont_uni_p.datacondiciones.records[i].razon) {
+                        document.getElementById("list_l_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);  
+                        cont_uni_p.datamotivos[cont_uni_p.datacondiciones.records[i].motivo] = app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo];
+                        j++;
+                    }
                     break;
                 case "4": //Factoraje
-                    document.getElementById("list_f_so_motivo").value = "";
+                    if($("#list_f_razon_lm")[0].value == cont_uni_p.datacondiciones.records[i].razon) {
+                        document.getElementById("list_f_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
+                        cont_uni_p.datamotivos[cont_uni_p.datacondiciones.records[i].motivo] = app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo];
+                        j++;
+                    }
                     break;
                 case "3": //Credito-auto
-                    document.getElementById("list_ca_so_motivo").value = "";
+                    if($("#list_ca_so_razon")[0].value == cont_uni_p.datacondiciones.records[i].razon ) {
+                        document.getElementById("list_ca_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
+                        cont_uni_p.datamotivos[cont_uni_p.datacondiciones.records[i].motivo] = app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo];
+                        j++;
+                    }
                     break;
                 case "6": //Fleet
-                    document.getElementById("list_fl_so_motivo").value = "";
+                    if($("#list_fl_so_razon")[0].value == cont_uni_p.datacondiciones.records[i].razon) {
+                        document.getElementById("list_fl_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
+                        cont_uni_p.datamotivos[cont_uni_p.datacondiciones.records[i].motivo] = app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo];
+                        j++;
+                    }
                     break;
                 case "8": //Uniclick
-                    document.getElementById("list_u_so_motivo").value = "";
+                    if($("#list_u_so_razon")[0].value == cont_uni_p.datacondiciones.records[i].razon ) {    
+                        document.getElementById("list_u_so_motivo").options[j]=new Option(app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo],cont_uni_p.datacondiciones.records[i].motivo);   
+                        cont_uni_p.datamotivos[cont_uni_p.datacondiciones.records[i].motivo] = app.lang.getAppListStrings('motivo_bloqueo_list')[cont_uni_p.datacondiciones.records[i].motivo];
+                        j++;
+                    }
                     break;
             }
-            cont_uni_p.carga_usuarios_resp_validacion_reload(tipoProducto);
+        }
+
+        switch (tipoProducto) {
+            case "1": //Leasing
+                document.getElementById("list_l_so_motivo").value = "";
+                break;
+            case "4": //Factoraje
+                document.getElementById("list_f_so_motivo").value = "";
+                break;
+            case "3": //Credito-auto
+                document.getElementById("list_ca_so_motivo").value = "";
+                break;
+            case "6": //Fleet
+                document.getElementById("list_fl_so_motivo").value = "";
+                break;
+            case "8": //Uniclick
+                document.getElementById("list_u_so_motivo").value = "";
+                break;
+        }
+
+        if($("#list_l_so_razon")[0].value == '7' || $("#list_f_razon_lm")[0].value == '7' || $("#list_ca_so_razon")[0].value == '7'
+        || $("#list_fl_so_razon")[0].value == '7' || $("#list_u_so_razon")[0].value == '7'){
             
+            if($("#list_l_so_razon")[0].value == '7' &&  tipoProducto == '1'){    
+                cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
+            }else if($("#list_f_razon_lm")[0].value == '7' && tipoProducto == '4'){
+                cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
+            }else if( $("#list_ca_so_razon")[0].value == '7' && tipoProducto == '3'){
+                cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
+            }else if($("#list_l_so_razon")[0].value == '7'&& tipoProducto == '6'){
+                cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
+            }else if( $("#list_u_so_razon")[0].value == '7' && tipoProducto == '8'){
+                cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
+            } 
+        }else{
+            cont_uni_p.carga_usuarios_resp_validacion_reload(tipoProducto);
         } 
     },
 
     buscaMotivoFinal:function (tipoProducto) {
 
         if(($("#list_l_so_razon")[0].value == '10' && $("#list_l_so_motivo")[0].value == '7')
-            || ($("#list_f_razon_lm")[0].value == '10' && $("#list_f_so_motivo")[0].value == '7')
-            || ($("#list_ca_so_razon")[0].value == '10' && $("#list_ca_so_motivo")[0].value == '7')
-            || ($("#list_fl_so_razon")[0].value == '10' && $("#list_fl_so_motivo")[0].value == '7')
-            || ($("#list_u_so_razon")[0].value == '10' && $("#list_u_so_motivo")[0].value == '7')){
+        || ($("#list_f_razon_lm")[0].value == '10' && $("#list_f_so_motivo")[0].value == '7')
+        || ($("#list_ca_so_razon")[0].value == '10' && $("#list_ca_so_motivo")[0].value == '7')
+        || ($("#list_fl_so_razon")[0].value == '10' && $("#list_fl_so_motivo")[0].value == '7')
+        || ($("#list_u_so_razon")[0].value == '10' && $("#list_u_so_motivo")[0].value == '7')){
 
-            cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
+            if(($("#list_l_so_razon")[0].value == '10' && $("#list_l_so_motivo")[0].value == '7') && tipoProducto == '1'){
+                cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
+            }else if(($("#list_f_razon_lm")[0].value == '10' && $("#list_f_so_motivo")[0].value == '7') && tipoProducto == '4' ){
+                cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
+            } if(($("#list_ca_so_razon")[0].value == '10' && $("#list_ca_so_motivo")[0].value == '7') && tipoProducto == '3'){
+                cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
+            } if(($("#list_fl_so_razon")[0].value == '10' && $("#list_fl_so_motivo")[0].value == '7') && tipoProducto == '6'){
+                cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
+            }if(($("#list_u_so_razon")[0].value == '10' && $("#list_u_so_motivo")[0].value == '7') && tipoProducto == '8' ){
+                cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
+            }
         }else{
-           
             cont_uni_p.carga_usuarios_resp_validacion_reload(tipoProducto);
-            
         } 
     },
 

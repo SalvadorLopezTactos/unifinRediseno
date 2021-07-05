@@ -90,6 +90,8 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                         && ($beanProduct->status_management_c == '4' || $beanProduct->status_management_c == '5')) {
                         
                             $GLOBALS['log']->fatal("Entro modificacion*********");
+                            //$GLOBALS['log']->fatal("estatus de atencion",$args['estatus_atencion']);
+                            
                             $return_productos = "";
                         
                             $beanProduct->razon_c = $args['razon_c']; //razon lm
@@ -100,6 +102,7 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                             $beanProduct->user_id_c = $args['user_id_c'];  //user id
                             $beanProduct->status_management_c = $args['status_management_c']; //status lm
                             $beanProduct->notificacion_noviable_c = $args['notificacion_noviable_c']; //notificaion noviable
+                            $beanProduct->estatus_atencion = $args['estatus_atencion']; //notificaion noviable
                         
                             $cont_cambios++;
                             $beanProduct->save();
@@ -121,7 +124,8 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                     
                     $beanProduct->aprueba1_c = $args['aprueba1_c']; //
                     $beanProduct->aprueba2_c = $args['aprueba2_c']; //
-                    
+                    $beanProduct->estatus_atencion = $args['estatus_atencion']; //notificaion noviable
+                                            
                     $beanProduct->save();
                     
                 } catch (Exception $ex) {
