@@ -445,7 +445,7 @@ class Ref_Cruzadas_Hooks
 
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>Estimado ' . $nombreAlejandro . '</b>
       <br><br>Se le informa que se ha generado un intento de nueva referencia de venta cruzada: <a id="linkReferencia" href="' . $linkReferencia . '">Da Click Aquí</a>.
-      <br>El asesor ' . $nombreAsesorOrigen . ' generó el intento para la nueva referencia dirigida hacia el cliente '.$nombreCuenta.' estableciendo como asesor que lo atenderá a '.$nombreAsesorReferenciado.'.
+      <br>El asesor <b>' . $nombreAsesorOrigen . '</b> generó el intento para la nueva referencia dirigida hacia el cliente '.$nombreCuenta.' estableciendo como asesor que lo atenderá a <b>'.$nombreAsesorReferenciado.'</b>.
       <br><br>Las condiciones que no se cumplieron y por lo cual se establece como <b>No válida</b>, son las siguientes:
       <br><br>
       <ul>'.$strLista.'
