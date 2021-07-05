@@ -30,7 +30,8 @@ class GetUsuariosEquipo extends SugarApi
                 JOIN team_memberships tm ON tm.team_id = teams.id
                 INNER JOIN users ON tm.user_id = users.id
                 INNER JOIN users_cstm uc ON users.id = uc.id_c
-                where teams.name = '{$equipo}' and users.status = 'Active'
+                where teams.name = '{$equipo}' and tm.explicit_assign = 1
+                and users.is_admin = 0 and users.status = 'Active'
             ) as usuarios inner join 
             (	SELECT users.id , users.user_name, email_address FROM users
                 LEFT JOIN email_addr_bean_rel ON email_addr_bean_rel.bean_id=users.id

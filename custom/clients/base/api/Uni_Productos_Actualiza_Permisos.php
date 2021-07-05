@@ -90,6 +90,8 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                         && ($beanProduct->status_management_c == '4' || $beanProduct->status_management_c == '5')) {
                         
                             $GLOBALS['log']->fatal("Entro modificacion*********");
+                            //$GLOBALS['log']->fatal("estatus de atencion",$args['estatus_atencion']);
+                            
                             $return_productos = "";
                         
                             $beanProduct->razon_c = $args['razon_c']; //razon lm
@@ -100,6 +102,7 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                             $beanProduct->user_id_c = $args['user_id_c'];  //user id
                             $beanProduct->status_management_c = $args['status_management_c']; //status lm
                             $beanProduct->notificacion_noviable_c = $args['notificacion_noviable_c']; //notificaion noviable
+                            $beanProduct->estatus_atencion = $args['estatus_atencion']; //notificaion noviable
                         
                             $cont_cambios++;
                             $beanProduct->save();
@@ -121,7 +124,8 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                     
                     $beanProduct->aprueba1_c = $args['aprueba1_c']; //
                     $beanProduct->aprueba2_c = $args['aprueba2_c']; //
-                    
+                    $beanProduct->estatus_atencion = $args['estatus_atencion']; //notificaion noviable
+                                            
                     $beanProduct->save();
                     
                 } catch (Exception $ex) {
@@ -311,14 +315,14 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
     public function estableceCuerpoNotificacion($nombreCuenta,$ResponsableIngesta,$razon,$detalle,$linkCuenta){
 
         $mailHTML = '<br>Se le informa que el usuario <b>' .$ResponsableIngesta. '</b> ha solicitado la reactivación para la cuenta <a id="linkCuenta" href="'. $linkCuenta.'"> '  .$nombreCuenta.' </a>. 
-      <br><br>Atentamente Unifin
-      <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
-      <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
-       Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
-       Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
-       No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
-       Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br /> </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a> </span><u></u><u></u></p>';
-
+        <br><br>Atentamente Unifin</font></p>
+        <br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>		
+        <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+        Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+        Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+        No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+        Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/aviso-de-privacidad.php" target="_blank" rel="noopener"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a></span><u></u><u></u></p>';
+        
         return $mailHTML;
     }
 

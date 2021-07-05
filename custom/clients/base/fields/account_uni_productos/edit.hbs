@@ -199,19 +199,27 @@
                             </div>
                         </td>
                         <td width="33%">
-                            <div class="l_so_raspval1 ">
+                            <div class="l_so_raspval1_edit ">
                                 <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
                                 <select class="row-fluid select2 list_l_respval_1" id = "list_l_respval_1" data-field="list_l_respval_1">
                                     {{{directoresLeasing1}}}
                                 </select>                           
                             </div>
+                            <div class="l_so_raspval1 ">
+                                <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
+                                <a href="#Employees/{{ResumenProductos.leasing.user_id1_c}}">{{ResumenProductos.leasing.fullname_validacion1_c}}</a>
+                            </div>
                         </td>
                         <td width="33%">
-                            <div class="l_so_raspval2 ">
+                            <div class="l_so_raspval2_edit ">
                                 <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
                                 <select class="row-fluid select2 list_l_respval_2" id = "list_l_respval_2" data-field="list_l_respval_2">
                                     {{{directoresLeasing2}}}
                                 </select>  
+                            </div>
+                            <div class="l_so_raspval2">
+                                <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
+                                <a href="#Employees/{{ResumenProductos.leasing.user_id2_c}}">{{ResumenProductos.leasing.fullname_validacion2_c}}</a>
                             </div>
                         </td>
                     </tr> 
@@ -399,6 +407,10 @@
                         </td>
                         <td width="33%">
                             <div class="f_so_raspval1 ">
+                                 <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
+                                <a href="#Employees/{{ResumenProductos.factoring.validacion1_c}}">{{ResumenProductos.factoring.fullname_validacion1_c}}</a>
+                             </div>
+                            <div class="f_so_raspval1_edit ">
                                 <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
                                 <select class="row-fluid select2 list_f_respval_1" id = "list_f_respval_1" data-field="list_f_respval_1">
                                     {{{directoresFactoraje1}}}
@@ -407,6 +419,10 @@
                         </td>
                         <td width="33%">
                             <div class="f_so_raspval2 ">
+                                <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
+                                 <a href="#Employees/{{ResumenProductos.factoring.validacion2_c}}">{{ResumenProductos.factoring.fullname_validacion2_c}}</a>
+                            </div>
+                            <div class="f_so_raspval2_edit ">
                                 <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
                                 <select class="row-fluid select2 list_f_respval_2" id = "list_f_respval_2" data-field="list_f_respval_2">
                                     {{{directoresFactoraje2}}}
@@ -598,6 +614,10 @@
                         </td>
                         <td width="33%">
                             <div class="ca_so_raspval1 ">
+								<label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
+								<a href="#Employees/{{ResumenProductos.credito_auto.validacion1_c}}">{{ResumenProductos.credito_auto.fullname_validacion1_c}}</a>
+							</div>
+                            <div class="ca_so_raspval1_edit ">
                                 <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
                                 <select class="row-fluid select2 list_ca_respval_1" id = "list_ca_respval_1" data-field="list_ca_respval_1">
                                     {{{directoresCredAuto1}}}
@@ -606,6 +626,10 @@
                         </td>
                         <td width="33%">
                             <div class="ca_so_raspval2 ">
+								<label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
+								<a href="#Employees/{{ResumenProductos.credito_auto.validacion2_c}}">{{ResumenProductos.credito_auto.fullname_validacion2_c}}</a>
+							</div>
+                            <div class="ca_so_raspval2_edit ">
                                 <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
                                 <select class="row-fluid select2 list_ca_respval_2" id = "list_ca_respval_2" data-field="list_ca_respval_2">
                                     {{{directoresCredAuto2}}}
@@ -797,6 +821,10 @@
                         </td>
                         <td width="33%">
                             <div class="fl_so_raspval1 ">
+							    <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
+							    <a href="#Employees/{{ResumenProductos.fleet.validacion1_c}}">{{ResumenProductos.fleet.fullname_validacion1_c}}</a>
+						    </div>
+                            <div class="fl_so_raspval1_edit ">
                                 <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
                                 <select class="row-fluid select2 list_fl_respval_1" id = "list_fl_respval_1" data-field="list_fl_respval_1">
                                     {{{directoresFleet1}}}
@@ -805,6 +833,10 @@
                         </td>
                         <td width="33%">
                             <div class="fl_so_raspval2 ">
+							<label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
+							<a href="#Employees/{{ResumenProductos.fleet.validacion2_c}}">{{ResumenProductos.fleet.fullname_validacion2_c}}</a>
+						</div>
+                            <div class="fl_so_raspval2_edit ">
                                 <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
                                 <select class="row-fluid select2 list_fl_respval_2" id = "list_fl_respval_2" data-field="list_fl_respval_2">
                                     {{{directoresFleet2}}}
@@ -1010,6 +1042,10 @@
                         </td>
                         <td width="33%">
                             <div class="u_so_raspval1 ">
+                              <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
+                                 <a href="#Employees/{{ResumenProductos.uniclick.validacion1_c}}">{{ResumenProductos.uniclick.fullname_validacion1_c}}</a>
+                            </div>
+                            <div class="u_so_raspval1_edit ">
                                 <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 1</label>
                                 <select class="row-fluid select2 list_u_respval_1" id = "list_u_respval_1" data-field="list_u_respval_1">
                                     {{{directoresUniclick1}}}
@@ -1018,6 +1054,10 @@
                         </td>
                         <td width="33%">
                             <div class="u_so_raspval2 ">
+                                 <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
+                                 <a href="#Employees/{{ResumenProductos.uniclick.validacion2_c}}">{{ResumenProductos.uniclick.fullname_validacion2_c}}</a>
+                            </div>
+                            <div class="u_so_raspval2_edit ">
                                 <label class="record-label mpad" style="margin-left:0px">Responsable de Validación 2</label>
                                 <select class="row-fluid select2 list_u_respval_2" id = "list_u_respval_2" data-field="list_u_respval_2">
                                     {{{directoresUniclick2}}}

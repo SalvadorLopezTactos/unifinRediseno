@@ -4750,7 +4750,7 @@
 			var url = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
 			app.api.call('read', url, {}, {
 				success: _.bind(function (data) {
-					if (data.bloqueo_cartera_c || data.bloqueo2_c || data.bloqueo3_c) {
+					if (this.model.get('tct_no_contactar_chk_c') && (data.bloqueo_cartera_c || data.bloqueo2_c || data.bloqueo3_c)) {
 						//Bloquear el registro completo y mostrar alerta
 						$('.record.tab-layout').attr('style', 'pointer-events:none');
 						$('.subpanel').attr('style', 'pointer-events:none');
@@ -5152,9 +5152,11 @@
                     this.render();
                 }
                 //Refresca cambios en teléfonos, direcciones y pld(Recupera ids de nuevos teléfonos)
+                location.reload();
                 this.get_phones();
                 this.get_addresses();
                 this.get_pld();
+                this.get_uni_productos();
 
             }, this);
 
@@ -5608,6 +5610,9 @@
                     Productos[key]['multilinea_c'] = (Productos[key]['multilinea_c'] == "1") ? true : false;
                     Productos[key]['exclu_precalif_c'] = (Productos[key]['exclu_precalif_c'] == "1") ? true : false;
                     Productos[key]['notificacion_noviable_c'] = (Productos[key]['notificacion_noviable_c'] == "1") ? true : false;
+                    Productos[key]['notificacion_noviable_c'] = (Productos[key]['notificacion_noviable_c'] == "1") ? true : false;
+                    Productos[key]['razon_c'] = (Productos[key]['razon_c'] == null) ? "" : Productos[key]['razon_c'];
+                    Productos[key]['motivo_c'] = (Productos[key]['motivo_c'] == null) ? "" : Productos[key]['motivo_c'];
                     
                     switch (tipoProducto) {
                         case "1": //Leasing
@@ -5766,13 +5771,13 @@
                         $('.selectlmotivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
                     }*/
-                    if (($('.list_l_respval_1').select2('val') == "" || $('.list_l_respval_1').select2('val') == "0")) {
+                    if ($('.list_l_respval_1').select2('val') == null || $('.list_l_respval_1').select2('val') == "" || $('.list_l_respval_1').select2('val') == "0") {
                         $('.list_l_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         errorLM +="Responsable de Validación 1 <br>";
                         faltantelm += 1;
                     }
-                    if ( ($('.list_l_respval_2').select2('val') == "" || $('.list_l_respval_2').select2('val') == "0")
-                        && ($('.list_l_respval_1').select2('val') == "" || $('.list_l_respval_1').select2('val') == "0") &&  $('.list_l_respval_2').select2('val') == $('.list_l_respval_1').select2('val')) {
+                    if ( ($('.list_l_respval_2').select2('val') == null || $('.list_l_respval_2').select2('val') == "" || $('.list_l_respval_2').select2('val') == "0" || $('.list_l_respval_2').select2('val') == null)
+                        && ($('.list_l_respval_1').select2('val') == null || $('.list_l_respval_1').select2('val') == "" || $('.list_l_respval_1').select2('val') == "0") &&  $('.list_l_respval_2').select2('val') == $('.list_l_respval_1').select2('val')) {
                         $('.list_l_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         $('.list_l_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         app.alert.show("Faltantes No viable - Lead Management", {
@@ -5818,7 +5823,7 @@
                 if (faltantelm > 0) {
                     app.alert.show("Faltantes No viable - Lead Management", {
                         level: "error",
-                        title: ' Para el cambio de estaus <b> '+app.lang.getAppListStrings('status_management_list')[selectlm.value] +' en Leasing </b> <br> Hace falta llenar los campos: <br>'+errorLM ,
+                        title: ' Para el cambio de estatus <b> '+app.lang.getAppListStrings('status_management_list')[selectlm.value] +' en Leasing </b> <br> Hace falta llenar los campos: <br>'+errorLM ,
                         autoClose: false
                     });
                     errors['error_leasingUP'] = errors['error_leasingUP'] || {};
@@ -5916,14 +5921,14 @@
                     $('.selectlmotivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                     faltantelm += 1;
                 }*/
-                if (($('.list_f_respval_1').select2('val') == "" || $('.list_f_respval_1').select2('val') == "0") ) {
+                if (($('.list_f_respval_1').select2('val') == null || $('.list_f_respval_1').select2('val') == "" || $('.list_f_respval_1').select2('val') == "0") ) {
                     $('.list_f_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                     faltantelm += 1;
                     errorLM +="Responsable de Validación 1 <br>";
                 }
                  
-                if ( ($('.list_f_respval_2').select2('val') == "" || $('.list_f_respval_2').select2('val') == "0")
-                    && ($('.list_f_respval_1').select2('val') == "" || $('.list_f_respval_1').select2('val') == "0") &&  $('.list_l_respval_2').select2('val') == $('.list_l_respval_1').select2('val')) {
+                if ( ($('.list_f_respval_2').select2('val') == null || $('.list_f_respval_2').select2('val') == "" || $('.list_f_respval_2').select2('val') == "0")
+                    && ($('.list_f_respval_1').select2('val') == null || $('.list_f_respval_1').select2('val') == "" || $('.list_f_respval_1').select2('val') == "0") &&  $('.list_l_respval_2').select2('val') == $('.list_l_respval_1').select2('val')) {
                     $('.list_f_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                     $('.list_f_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                     app.alert.show("Faltantes No viable - Lead Management", {
@@ -5970,7 +5975,7 @@
             if (faltantelm > 0) {
                 app.alert.show("Faltantes No viable - Lead Management", {
                     level: "error",
-                    title: 'Para el cambio de estaus <b>'+app.lang.getAppListStrings('status_management_list')[selectlm.value] +' en Factoraje </b> <br> Hace falta llenar los campos :<br>'+errorLM ,
+                    title: 'Para el cambio de estatus <b>'+app.lang.getAppListStrings('status_management_list')[selectlm.value] +' en Factoraje </b> <br> Hace falta llenar los campos :<br>'+errorLM ,
                     autoClose: false
                 });
                 errors['error_FactorajeUP'] = errors['error_FactorajeUP'] || {};
@@ -6069,14 +6074,14 @@
                         $('.selectlmotivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
                     }*/
-                    if (($('.list_ca_respval_1').select2('val') == "" || $('.list_ca_respval_1').select2('val') == "0") ) {
+                    if (($('.list_ca_respval_1').select2('val') == null || $('.list_ca_respval_1').select2('val') == "" || $('.list_ca_respval_1').select2('val') == "0") ) {
                         $('.list_ca_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
                         errorLM +="Responsable de Validación 1 <br>";
                     }
 
-                    if ( ($('.list_ca_respval_2').select2('val') == "" || $('.list_ca_respval_2').select2('val') == "0")
-                            && ($('.list_ca_respval_1').select2('val') == "" || $('.list_ca_respval_1').select2('val') == "0") &&  $('.list_ca_respval_2').select2('val') == $('.list_ca_respval_1').select2('val')) {
+                    if ( ($('.list_ca_respval_2').select2('val') == null || $('.list_ca_respval_2').select2('val') == "" || $('.list_ca_respval_2').select2('val') == "0")
+                            && ($('.list_ca_respval_1').select2('val') == null || $('.list_ca_respval_1').select2('val') == "" || $('.list_ca_respval_1').select2('val') == "0") &&  $('.list_ca_respval_2').select2('val') == $('.list_ca_respval_1').select2('val')) {
                             $('.list_ca_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                             $('.list_ca_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                             app.alert.show("Faltantes No viable - Lead Management", {
@@ -6123,7 +6128,7 @@
                 if (faltantelm > 0) {
                     app.alert.show("Faltantes No viable - Lead Management", {
                         level: "error",
-                        title: ' Para el cambio de estaus <b> '+ app.lang.getAppListStrings('status_management_list')[selectlm.value] +'  Crédito Automotriz.</b>  <br> Hace falta llenar los campos :<br>'+errorLM ,
+                        title: ' Para el cambio de estatus <b> '+ app.lang.getAppListStrings('status_management_list')[selectlm.value] +'  Crédito Automotriz.</b>  <br> Hace falta llenar los campos :<br>'+errorLM ,
                         autoClose: false
                     });
                     errors['error_CAUP'] = errors['error_CAUP'] || {};
@@ -6225,14 +6230,14 @@
                         $('.selectlmotivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
                     }*/
-                    if (($('.list_fl_respval_1').select2('val') == "" || $('.list_fl_respval_1').select2('val') == "0")) {
+                    if (($('.list_fl_respval_1').select2('val') == null || $('.list_fl_respval_1').select2('val') == "" || $('.list_fl_respval_1').select2('val') == "0")) {
                         $('.list_fl_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
                         errorLM +="Responsable de Validación 1 <br>";
                     }
 
-                    if ( ($('.list_fl_respval_2').select2('val') == "" || $('.list_fl_respval_2').select2('val') == "0")
-                        && ($('.list_fl_respval_1').select2('val') == "" || $('.list_fl_respval_1').select2('val') == "0") &&  $('.list_fl_respval_2').select2('val') == $('.list_fl_respval_1').select2('val')) {
+                    if ( ($('.list_fl_respval_2').select2('val') == null || $('.list_fl_respval_2').select2('val') == "" || $('.list_fl_respval_2').select2('val') == "0")
+                        && ($('.list_fl_respval_1').select2('val') == null || $('.list_fl_respval_1').select2('val') == "" || $('.list_fl_respval_1').select2('val') == "0") &&  $('.list_fl_respval_2').select2('val') == $('.list_fl_respval_1').select2('val')) {
                         $('.list_l_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         $('.list_fl_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         app.alert.show("Faltantes No viable - Lead Management", {
@@ -6279,7 +6284,7 @@
                 if (faltantelm > 0) {
                     app.alert.show("Faltantes No viable - Lead Management", {
                         level: "error",
-                        title: ' Para el cambio de estaus <b> '+app.lang.getAppListStrings('status_management_list')[selectlm.value] 
+                        title: ' Para el cambio de estatus <b> '+app.lang.getAppListStrings('status_management_list')[selectlm.value] 
                         +' en Fleet.</b> <br> Hace falta llenar los campos :<br>'+errorLM ,
                         autoClose: false
                     });
@@ -6380,14 +6385,14 @@
                         $('.selectlmotivo').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
                     }*/
-                    if (($('.list_u_respval_1').select2('val') == "" || $('.list_u_respval_1').select2('val') == "0") ) {
+                    if (($('.list_u_respval_1').select2('val') == null || $('.list_u_respval_1').select2('val') == "" || $('.list_u_respval_1').select2('val') == "0") ) {
                         $('.list_u_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         faltantelm += 1;
                         errorLM +="Responsable de Validación 1 <br>";
                     }
 
-                    if ( ($('.list_u_respval_2').select2('val') == "" || $('.list_u_respval_2').select2('val') == "0")
-                    && ($('.list_u_respval_1').select2('val') == "" || $('.list_u_respval_1').select2('val') == "0") &&  $('.list_u_respval_2').select2('val') == $('.list_u_respval_1').select2('val')) {
+                    if ( ($('.list_u_respval_2').select2('val') == null || $('.list_u_respval_2').select2('val') == "" || $('.list_u_respval_2').select2('val') == "0")
+                    && ($('.list_u_respval_1').select2('val') == null || $('.list_u_respval_1').select2('val') == "" || $('.list_u_respval_1').select2('val') == "0") &&  $('.list_u_respval_2').select2('val') == $('.list_u_respval_1').select2('val')) {
                     $('.list_u_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                     $('.list_u_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                     app.alert.show("Faltantes No viable - Lead Management", {
@@ -6434,7 +6439,7 @@
                     if (faltantelm > 0) {
                         app.alert.show("Faltantes No viable - Lead Management", {
                             level: "error",
-                            title: 'Para el cambio de estaus <b> '+app.lang.getAppListStrings('status_management_list')[selectlm.value] +' en Uniclick</b> <br> Hace falta llenar los campos :<br>'+errorLM ,
+                            title: 'Para el cambio de estatus <b> '+app.lang.getAppListStrings('status_management_list')[selectlm.value] +' en Uniclick</b> <br> Hace falta llenar los campos :<br>'+errorLM ,
                             autoClose: false
                         });
                         errors['error_UniclickUP'] = errors['error_UniclickUP'] || {};
@@ -6849,30 +6854,50 @@
 										params["user_id_c"] = Productos[key].user_id_c;
 										params["user_id1_c"] = Productos[key].user_id1_c;
 										params["user_id2_c"] = Productos[key].user_id2_c;
-										_.each(Productos, function (value1, key1) {
+                                        params["estatus_atencion"] = '3';
+                                        params["tipoupdate"] = '2';
+                                        
+										/*_.each(Productos, function (value1, key1) {
 											var actualiza = app.api.buildURL('uni_Productos/' + Productos[key1].id, null, null);
 											app.api.call('update', actualiza, params, {
 												success: _.bind(function (data2) {
 												}, this)
 											});
-										});
+										});*/
+                                        _.each(Productos, function (value1, key1) {
+                                            params["id_Producto"] =  Productos[key1].id;
+                                            var uni = app.api.buildURL('actualizaProductosPermisos', null, null,params);
+                                            var resp;
+                                            app.api.call('create', uni, null, {
+                                                success: function (data) {
+                                                    /*app.alert.show('Rechazar No viable cuenta', {
+                                                        level: 'warning',
+                                                        messages: 'Se aprobó el No Viable, para la cuenta',
+                                                    });*/
+                                                },
+                                                error: function (e) {
+                                                    throw e;
+                                                }
+                                            });
+                                        });
 									} else {
-                                        params["aprueba1_c"] = 0;
-                                        params["aprueba2_c"] = 0;
+                                        params["aprueba1_c"] = 1;
+                                        params["aprueba2_c"] = 1;
 										if(Productos[key].user_id1_c == app.user.id) params["aprueba1_c"] = 1;
 										if(Productos[key].user_id2_c == app.user.id) params["aprueba2_c"] = 1;
                                         params["id_Producto"] =  Productos[key].id;
                                         params["tipoupdate"] = '2';
+                                        params["estatus_atencion"] = '3';
                                         
                                         //var actualiza = app.api.buildURL('actualizaProductosPermisos/' + Productos[key].id, null, null);
                                         var uni = app.api.buildURL('actualizaProductosPermisos', null, null,params);
                                         var resp;
                                         app.api.call('create', uni, null, {
                                             success: function (data) {
-                                                app.alert.show('Rechazar No viable cuenta', {
+                                                /*app.alert.show('Rechazar No viable cuenta', {
                                                     level: 'warning',
                                                     messages: 'Se aprobó el No Viable, para la cuenta',
-                                                });
+                                                });*/
                                             },
                                             error: function (e) {
                                                 throw e;
@@ -6891,7 +6916,7 @@
                                         */
 									}
 								}
-                                location.reload();
+                                //location.reload();
 							}, this)
 						});						
                     }
@@ -6908,7 +6933,7 @@
         var consulta = app.api.buildURL('tct02_Resumen/' + this.model.get('id'), null, null);
         app.api.call('read', consulta, {}, {
             success: _.bind(function (data) {
-                if((data.user_id1_c == app.user.id && this.model.get('tct_no_contactar_chk_c') && !data.bloqueo_cartera_c) || (data.user_id3_c == app.user.id && data.bloqueo_credito_c && !data.bloqueo2_c) || (data.user_id5_c == app.user.id && data.bloqueo_cumple_c && !data.bloqueo3_c)) {
+                if((data.user_id1_c == app.user.id && this.model.get('tct_no_contactar_chk_c') && !data.bloqueo_cartera_c) || (data.user_id3_c == app.user.id && data.bloqueo_credito_c && !data.bloqueo2_c) || (data.user_id5_c == app.user.id && data.bloqueo_cumple_c && !data.bloqueo2_c)) {
 					$('[name="bloquea_cuenta"]').removeClass('hidden');
 				}
 				if((data.user_id1_c == app.user.id && (this.model.get('tct_no_contactar_chk_c') || data.bloqueo_cartera_c)) || (data.user_id3_c == app.user.id && (data.bloqueo_credito_c || data.bloqueo2_c)) || (data.user_id5_c == app.user.id && (data.bloqueo_cumple_c || data.bloqueo3_c))) {
@@ -6956,6 +6981,7 @@
         params["user_id"] = app.user.id;
         params["tipoupdate"] = '1';
         params["notificacion_noviable_c"] = false;
+        params["estatus_atencion"] = '1';
         
         //var uni = app.api.buildURL('actualizaProductosPermisos/');
         var uni = app.api.buildURL('actualizaProductosPermisos', null, null,params);
@@ -6963,7 +6989,7 @@
         app.api.call('create', uni, null, {
             success: function (data) {
 				resp = data;
-                if(resp > 0){
+                /*if(resp > 0){
                     app.alert.show('Rechazar No viable cuenta', {
                        level: 'info',
                        messages: 'No se aprobó el No Viable, para la cuenta',
@@ -6973,8 +6999,8 @@
                         level: 'error',
                         messages: 'No se encuentra producto a Desaprobar No viable',
                      });
-                }
-                location.reload();
+                }*/
+                //location.reload();
             },
             error: function (e) {
                 throw e;
@@ -6990,6 +7016,7 @@
         params["id_Account"] = this.model.get('id');
         params["user_id"] = app.user.id;
         params["tipoupdate"] = '3';
+        //params["estatus_atencion"] = '1';
         
         //var uni = app.api.buildURL('actualizaProductosPermisos/');
         var uni = app.api.buildURL('actualizaProductosPermisos', null, null,params);
@@ -6997,7 +7024,7 @@
         app.api.call('create', uni, null, {
             success: function (data) {
 				resp = data;
-                if(resp > 0){
+                /*if(resp > 0){
                     app.alert.show('Rechazar No viable cuenta', {
                        level: 'info',
                        messages: 'Se envío la notificación a directores, para reactivar la cuenta',
@@ -7007,8 +7034,8 @@
                         level: 'error',
                         messages: 'No se encuentra producto a Reactivar No viable',
                      });
-                }
-                location.reload();
+                }*/
+                //location.reload();
             },
             error: function (e) {
                 throw e;

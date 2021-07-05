@@ -42,31 +42,43 @@ class clase_UniProducto
                         if(($beanUP->status_management_c != $key['status_management_c']) && ($beanUP->tipo_producto == $key['tipo_producto']) && $beanUP->tipo_producto == '1'){
                             $actualizaLeasing = true;
                             $beanUP->notificacion_noviable_c = $key['notificacion_noviable_c']; 
+                            $beanUP->user_id1_c = $key['user_id1_c'];
+                            $beanUP->user_id2_c = $key['user_id2_c'];
+                            $beanUP->user_id_c = $key['user_id_c'];    
                         }
                         if(($beanUP->status_management_c != $key['status_management_c']) && ($beanUP->tipo_producto == $key['tipo_producto']) && $beanUP->tipo_producto == '4'){
                             $actualizaFactoring = true;
                             $beanUP->notificacion_noviable_c = $key['notificacion_noviable_c']; 
+                            $beanUP->user_id1_c = $key['user_id1_c'];
+                            $beanUP->user_id2_c = $key['user_id2_c'];
+                            $beanUP->user_id_c = $key['user_id_c'];    
                         }
                         if(($beanUP->status_management_c != $key['status_management_c']) && ($beanUP->tipo_producto == $key['tipo_producto']) && $beanUP->tipo_producto == '3'){
                             $actualizaCredAuto = true;
                             $beanUP->notificacion_noviable_c = $key['notificacion_noviable_c']; 
+                            $beanUP->user_id1_c = $key['user_id1_c'];
+                            $beanUP->user_id2_c = $key['user_id2_c'];
+                            $beanUP->user_id_c = $key['user_id_c'];    
                         }
                         if(($beanUP->status_management_c != $key['status_management_c']) && ($beanUP->tipo_producto == $key['tipo_producto']) && $beanUP->tipo_producto == '6'){
                             $actualizaFleet = true;
                             $beanUP->notificacion_noviable_c = $key['notificacion_noviable_c']; 
+                            $beanUP->user_id1_c = $key['user_id1_c'];
+                            $beanUP->user_id2_c = $key['user_id2_c'];
+                            $beanUP->user_id_c = $key['user_id_c'];    
                         }
                         if(($beanUP->status_management_c != $key['status_management_c']) && ($beanUP->tipo_producto == $key['tipo_producto']) && $beanUP->tipo_producto == '8'){
                             $actualizaUniclick = true;
                             $beanUP->notificacion_noviable_c = $key['notificacion_noviable_c']; 
+                            $beanUP->user_id1_c = $key['user_id1_c'];
+                            $beanUP->user_id2_c = $key['user_id2_c'];
+                            $beanUP->user_id_c = $key['user_id_c'];    
                         }
                         
                         $beanUP->status_management_c = $key['status_management_c'];
                         $beanUP->razon_c = $key['razon_c'];
                         $beanUP->motivo_c = $key['motivo_c'];
                         $beanUP->detalle_c = $key['detalle_c'];
-                        $beanUP->user_id1_c = $key['user_id1_c'];
-                        $beanUP->user_id2_c = $key['user_id2_c'];
-                        $beanUP->user_id_c = $key['user_id_c'];                
                         
                         if ($bean->load_relationship('accounts_uni_productos_1') && ($key['tipo_producto'] == 1 || $key['tipo_producto'] == 8)) {
                             $updateProductos = $bean->accounts_uni_productos_1->getBeans($bean->id, array('disable_row_level_security' => true));
@@ -360,14 +372,14 @@ class clase_UniProducto
         $mailHTML = '<br>Se le informa que la cuenta <a id="linkCuenta" href="'. $linkCuenta.'"> '  .$nombreCuenta.' </a> ha sido bloqueada por ' .$ResponsableIngesta.'.
       <br><br>La razón de bloqueo es: '.$razon .' y el detalle: '.$detalle .'.
       <br><br>Se requiere de su aprobación para bloquear definitivamente la cuenta.
-      <br><br>Atentamente Unifin
-      <p class="MsoNormal"><span style="font-size:8.5pt;color:#757b80">______________________________<wbr>______________<u></u><u></u></span></p>
-      <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
-       Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
-       Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
-       No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
-       Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/2019/av_menu.php" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=https://www.unifin.com.mx/2019/av_menu.php&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNHMJmAEhoNZUAyPWo2l0JoeRTWipg"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp; <br /> </span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener" data-saferedirecturl="https://www.google.com/url?q=http://www.unifin.com.mx/&amp;source=gmail&amp;ust=1582731642466000&amp;usg=AFQjCNF6DiYZ19MWEI49A8msTgXM9unJhQ"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a> </span><u></u><u></u></p>';
-
+      <br><br>Atentamente Unifin</font></p>
+	<br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>		
+	<p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+	Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+	Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+	No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+	Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/aviso-de-privacidad.php" target="_blank" rel="noopener"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a></span><u></u><u></u></p>';
+							
         return $mailHTML;
     }
 }
