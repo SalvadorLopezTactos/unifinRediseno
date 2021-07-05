@@ -139,5 +139,61 @@ $dependencies['Leads']['readonly_fields'] = array(
                 'value' => 'not(equal($pb_clase_c,""))',
             ),
         ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'productos_interes_c',
+                'value' => 'true',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'opportunity_amount',
+                'value' => 'true',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'plazo_c',
+                'value' => 'true',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'pago_mensual_estimado_c',
+                'value' => 'true',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'medios_contacto_deseado_c',
+                'value' => 'true',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'medio_preferido_contacto_c',
+                'value' => 'true',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'dia_contacto_c',
+                'value' => 'true',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'hora_contacto_c',
+                'value' => 'true',
+            ),
+        ),
     ),
 );
