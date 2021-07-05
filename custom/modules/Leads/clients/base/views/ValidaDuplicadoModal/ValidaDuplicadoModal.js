@@ -59,7 +59,8 @@
     closeModalCheckDuplicado: function () {
 
        this._disposeView();
-
+       self_modal.options.context.trigger('button:save_button:click');
+       
     },
 
     omiteMatchGuardaRegistro:function(){
