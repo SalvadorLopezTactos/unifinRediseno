@@ -408,6 +408,15 @@ array (
             'label' => 'LBL_VALIDA_VTA_CRUZADA',
           ),
         ),
+        12 => 
+        array (
+          0 => 
+          array (
+            'name' => 'gestion_lm_c',
+            'label' => 'LBL_GESTION_LM',
+          ),
+          1 => '',
+        ),
       ),
     ),
   ),
