@@ -1,5 +1,22 @@
 <?php
 
+$dependencies['Lic_Licitaciones']['name'] = array(
+    'hooks' => array("edit"),
+    'trigger' => 'true',
+    'triggerFields' => array('name'),
+    'onload' => true,
+    'actions' => array(
+        //Persona
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'name', //campo por afectar
+                'value' => 'not(equal($id, ""))',
+            ),
+        ),
+    ),
+);
+
 $dependencies['Lic_Licitaciones']['lic_licitaciones_accounts_name'] = array(
     'hooks' => array("edit"),
     'trigger' => 'true',
