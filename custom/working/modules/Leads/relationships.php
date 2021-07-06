@@ -371,6 +371,117 @@ $relationships = array (
     'is_custom' => false,
     'from_studio' => false,
   ),
+  'leads_c5515_uni_chattigo_1' => 
+  array (
+    'name' => 'leads_c5515_uni_chattigo_1',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'leads_c5515_uni_chattigo_1' => 
+      array (
+        'lhs_module' => 'Leads',
+        'lhs_table' => 'leads',
+        'lhs_key' => 'id',
+        'rhs_module' => 'C5515_uni_chattigo',
+        'rhs_table' => 'c5515_uni_chattigo',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'leads_c5515_uni_chattigo_1_c',
+        'join_key_lhs' => 'leads_c5515_uni_chattigo_1leads_ida',
+        'join_key_rhs' => 'leads_c5515_uni_chattigo_1c5515_uni_chattigo_idb',
+      ),
+    ),
+    'table' => 'leads_c5515_uni_chattigo_1_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'id',
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'default' => 0,
+      ),
+      'leads_c5515_uni_chattigo_1leads_ida' => 
+      array (
+        'name' => 'leads_c5515_uni_chattigo_1leads_ida',
+        'type' => 'id',
+      ),
+      'leads_c5515_uni_chattigo_1c5515_uni_chattigo_idb' => 
+      array (
+        'name' => 'leads_c5515_uni_chattigo_1c5515_uni_chattigo_idb',
+        'type' => 'id',
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'idx_leads_c5515_uni_chattigo_1_pk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'idx_leads_c5515_uni_chattigo_1_ida1_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'leads_c5515_uni_chattigo_1leads_ida',
+          1 => 'deleted',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'idx_leads_c5515_uni_chattigo_1_idb2_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'leads_c5515_uni_chattigo_1c5515_uni_chattigo_idb',
+          1 => 'deleted',
+        ),
+      ),
+      3 => 
+      array (
+        'name' => 'leads_c5515_uni_chattigo_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'leads_c5515_uni_chattigo_1c5515_uni_chattigo_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Leads',
+    'lhs_table' => 'leads',
+    'lhs_key' => 'id',
+    'rhs_module' => 'C5515_uni_chattigo',
+    'rhs_table' => 'c5515_uni_chattigo',
+    'rhs_key' => 'id',
+    'relationship_type' => 'one-to-many',
+    'join_table' => 'leads_c5515_uni_chattigo_1_c',
+    'join_key_lhs' => 'leads_c5515_uni_chattigo_1leads_ida',
+    'join_key_rhs' => 'leads_c5515_uni_chattigo_1c5515_uni_chattigo_idb',
+    'readonly' => true,
+    'relationship_name' => 'leads_c5515_uni_chattigo_1',
+    'rhs_subpanel' => 'ForLeadsLeads_c5515_uni_chattigo_1',
+    'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+  ),
   'bc_survey_leads' => 
   array (
     'name' => 'bc_survey_leads',
@@ -579,65 +690,229 @@ $relationships = array (
     'relationship_only' => false,
     'for_activities' => false,
   ),
-  'contact_leads' => 
+  'notes_leads_1' => 
   array (
-    'name' => 'contact_leads',
-    'lhs_module' => 'Contacts',
-    'lhs_table' => 'contacts',
+    'name' => 'notes_leads_1',
+    'true_relationship_type' => 'many-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'notes_leads_1' => 
+      array (
+        'lhs_module' => 'Notes',
+        'lhs_table' => 'notes',
+        'lhs_key' => 'id',
+        'rhs_module' => 'Leads',
+        'rhs_table' => 'leads',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'notes_leads_1_c',
+        'join_key_lhs' => 'notes_leads_1notes_ida',
+        'join_key_rhs' => 'notes_leads_1leads_idb',
+      ),
+    ),
+    'table' => 'notes_leads_1_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'id',
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'default' => 0,
+      ),
+      'notes_leads_1notes_ida' => 
+      array (
+        'name' => 'notes_leads_1notes_ida',
+        'type' => 'id',
+      ),
+      'notes_leads_1leads_idb' => 
+      array (
+        'name' => 'notes_leads_1leads_idb',
+        'type' => 'id',
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'idx_notes_leads_1_pk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'idx_notes_leads_1_ida1_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'notes_leads_1notes_ida',
+          1 => 'deleted',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'idx_notes_leads_1_idb2_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'notes_leads_1leads_idb',
+          1 => 'deleted',
+        ),
+      ),
+      3 => 
+      array (
+        'name' => 'notes_leads_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'notes_leads_1notes_ida',
+          1 => 'notes_leads_1leads_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Notes',
+    'lhs_table' => 'notes',
     'lhs_key' => 'id',
     'rhs_module' => 'Leads',
     'rhs_table' => 'leads',
-    'rhs_key' => 'contact_id',
-    'relationship_type' => 'one-to-many',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'notes_leads_1_c',
+    'join_key_lhs' => 'notes_leads_1notes_ida',
+    'join_key_rhs' => 'notes_leads_1leads_idb',
     'readonly' => true,
-    'relationship_name' => 'contact_leads',
+    'relationship_name' => 'notes_leads_1',
     'rhs_subpanel' => 'default',
-    'lhs_subpanel' => NULL,
+    'lhs_subpanel' => 'default',
+    'is_custom' => true,
     'deleted' => false,
     'relationship_only' => false,
     'for_activities' => false,
-    'is_custom' => false,
-    'from_studio' => false,
   ),
-  'account_leads' => 
+  'tasks_leads_1' => 
   array (
-    'name' => 'account_leads',
-    'lhs_module' => 'Accounts',
-    'lhs_table' => 'accounts',
+    'name' => 'tasks_leads_1',
+    'true_relationship_type' => 'many-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'tasks_leads_1' => 
+      array (
+        'lhs_module' => 'Tasks',
+        'lhs_table' => 'tasks',
+        'lhs_key' => 'id',
+        'rhs_module' => 'Leads',
+        'rhs_table' => 'leads',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'tasks_leads_1_c',
+        'join_key_lhs' => 'tasks_leads_1tasks_ida',
+        'join_key_rhs' => 'tasks_leads_1leads_idb',
+      ),
+    ),
+    'table' => 'tasks_leads_1_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'id',
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'default' => 0,
+      ),
+      'tasks_leads_1tasks_ida' => 
+      array (
+        'name' => 'tasks_leads_1tasks_ida',
+        'type' => 'id',
+      ),
+      'tasks_leads_1leads_idb' => 
+      array (
+        'name' => 'tasks_leads_1leads_idb',
+        'type' => 'id',
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'idx_tasks_leads_1_pk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'idx_tasks_leads_1_ida1_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'tasks_leads_1tasks_ida',
+          1 => 'deleted',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'idx_tasks_leads_1_idb2_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'tasks_leads_1leads_idb',
+          1 => 'deleted',
+        ),
+      ),
+      3 => 
+      array (
+        'name' => 'tasks_leads_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'tasks_leads_1tasks_ida',
+          1 => 'tasks_leads_1leads_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Tasks',
+    'lhs_table' => 'tasks',
     'lhs_key' => 'id',
     'rhs_module' => 'Leads',
     'rhs_table' => 'leads',
-    'rhs_key' => 'account_id',
-    'relationship_type' => 'one-to-many',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'tasks_leads_1_c',
+    'join_key_lhs' => 'tasks_leads_1tasks_ida',
+    'join_key_rhs' => 'tasks_leads_1leads_idb',
     'readonly' => true,
-    'relationship_name' => 'account_leads',
+    'relationship_name' => 'tasks_leads_1',
     'rhs_subpanel' => 'default',
-    'lhs_subpanel' => NULL,
+    'lhs_subpanel' => 'ForLeadsTasks',
+    'is_custom' => true,
     'deleted' => false,
     'relationship_only' => false,
     'for_activities' => false,
-    'is_custom' => false,
-    'from_studio' => false,
-  ),
-  'opportunity_leads' => 
-  array (
-    'name' => 'opportunity_leads',
-    'lhs_module' => 'Opportunities',
-    'lhs_table' => 'opportunities',
-    'lhs_key' => 'id',
-    'rhs_module' => 'Leads',
-    'rhs_table' => 'leads',
-    'rhs_key' => 'opportunity_id',
-    'relationship_type' => 'one-to-many',
-    'readonly' => true,
-    'relationship_name' => 'opportunity_leads',
-    'rhs_subpanel' => NULL,
-    'lhs_subpanel' => NULL,
-    'deleted' => false,
-    'relationship_only' => false,
-    'for_activities' => false,
-    'is_custom' => false,
-    'from_studio' => false,
   ),
   'leads_modified_user' => 
   array (
@@ -805,7 +1080,7 @@ $relationships = array (
     'readonly' => true,
     'relationship_name' => 'lead_tasks',
     'rhs_subpanel' => 'ForLeadsTasks',
-    'lhs_subpanel' => NULL,
+    'lhs_subpanel' => 'default',
     'deleted' => false,
     'relationship_only' => false,
     'for_activities' => false,
@@ -827,7 +1102,7 @@ $relationships = array (
     'readonly' => true,
     'relationship_name' => 'lead_notes',
     'rhs_subpanel' => 'default',
-    'lhs_subpanel' => NULL,
+    'lhs_subpanel' => 'default',
     'deleted' => false,
     'relationship_only' => false,
     'for_activities' => false,
@@ -1014,115 +1289,80 @@ $relationships = array (
     'is_custom' => false,
     'from_studio' => false,
   ),
-  'leads_c5515_uni_chattigo_1' => 
+  'contact_leads' => 
   array (
-    'name' => 'leads_c5515_uni_chattigo_1',
-    'true_relationship_type' => 'one-to-many',
-    'from_studio' => true,
-    'relationships' => 
-    array (
-      'leads_c5515_uni_chattigo_1' => 
-      array (
-        'lhs_module' => 'Leads',
-        'lhs_table' => 'leads',
-        'lhs_key' => 'id',
-        'rhs_module' => 'C5515_uni_chattigo',
-        'rhs_table' => 'c5515_uni_chattigo',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'leads_c5515_uni_chattigo_1_c',
-        'join_key_lhs' => 'leads_c5515_uni_chattigo_1leads_ida',
-        'join_key_rhs' => 'leads_c5515_uni_chattigo_1c5515_uni_chattigo_idb',
-      ),
-    ),
-    'table' => 'leads_c5515_uni_chattigo_1_c',
-    'fields' => 
-    array (
-      'id' => 
-      array (
-        'name' => 'id',
-        'type' => 'id',
-      ),
-      'date_modified' => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      'deleted' => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'default' => 0,
-      ),
-      'leads_c5515_uni_chattigo_1leads_ida' => 
-      array (
-        'name' => 'leads_c5515_uni_chattigo_1leads_ida',
-        'type' => 'id',
-      ),
-      'leads_c5515_uni_chattigo_1c5515_uni_chattigo_idb' => 
-      array (
-        'name' => 'leads_c5515_uni_chattigo_1c5515_uni_chattigo_idb',
-        'type' => 'id',
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'idx_leads_c5515_uni_chattigo_1_pk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'idx_leads_c5515_uni_chattigo_1_ida1_deleted',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'leads_c5515_uni_chattigo_1leads_ida',
-          1 => 'deleted',
-        ),
-      ),
-      2 => 
-      array (
-        'name' => 'idx_leads_c5515_uni_chattigo_1_idb2_deleted',
-        'type' => 'index',
-        'fields' => 
-        array (
-          0 => 'leads_c5515_uni_chattigo_1c5515_uni_chattigo_idb',
-          1 => 'deleted',
-        ),
-      ),
-      3 => 
-      array (
-        'name' => 'leads_c5515_uni_chattigo_1_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'leads_c5515_uni_chattigo_1c5515_uni_chattigo_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'Leads',
-    'lhs_table' => 'leads',
+    'name' => 'contact_leads',
+    'lhs_module' => 'Contacts',
+    'lhs_table' => 'contacts',
     'lhs_key' => 'id',
-    'rhs_module' => 'C5515_uni_chattigo',
-    'rhs_table' => 'c5515_uni_chattigo',
-    'rhs_key' => 'id',
+    'rhs_module' => 'Leads',
+    'rhs_table' => 'leads',
+    'rhs_key' => 'contact_id',
     'relationship_type' => 'one-to-many',
-    'join_table' => 'leads_c5515_uni_chattigo_1_c',
-    'join_key_lhs' => 'leads_c5515_uni_chattigo_1leads_ida',
-    'join_key_rhs' => 'leads_c5515_uni_chattigo_1c5515_uni_chattigo_idb',
     'readonly' => true,
-    'relationship_name' => 'leads_c5515_uni_chattigo_1',
+    'relationship_name' => 'contact_leads',
     'rhs_subpanel' => 'default',
     'lhs_subpanel' => NULL,
-    'is_custom' => true,
     'deleted' => false,
     'relationship_only' => false,
     'for_activities' => false,
+    'is_custom' => false,
+    'from_studio' => false,
+  ),
+  'account_leads' => 
+  array (
+    'name' => 'account_leads',
+    'lhs_module' => 'Accounts',
+    'lhs_table' => 'accounts',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Leads',
+    'rhs_table' => 'leads',
+    'rhs_key' => 'account_id',
+    'relationship_type' => 'one-to-many',
+    'readonly' => true,
+    'relationship_name' => 'account_leads',
+    'rhs_subpanel' => 'default',
+    'lhs_subpanel' => NULL,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'is_custom' => false,
+    'from_studio' => false,
+  ),
+  'opportunity_leads' => 
+  array (
+    'name' => 'opportunity_leads',
+    'lhs_module' => 'Opportunities',
+    'lhs_table' => 'opportunities',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Leads',
+    'rhs_table' => 'leads',
+    'rhs_key' => 'opportunity_id',
+    'relationship_type' => 'one-to-many',
+    'readonly' => true,
+    'relationship_name' => 'opportunity_leads',
+    'rhs_subpanel' => NULL,
+    'lhs_subpanel' => NULL,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'is_custom' => false,
+    'from_studio' => false,
+  ),
+  'leads_lic_licitaciones_1' => 
+  array (
+    'rhs_label' => 'Licitaciones',
+    'lhs_label' => 'Leads',
+    'rhs_subpanel' => 'default',
+    'lhs_module' => 'Leads',
+    'rhs_module' => 'Lic_Licitaciones',
+    'relationship_type' => 'one-to-many',
+    'readonly' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'is_custom' => false,
+    'from_studio' => true,
+    'relationship_name' => 'leads_lic_licitaciones_1',
   ),
 );

@@ -578,5 +578,23 @@ SITE;
                 }
             }
         }
+
+        //Reasigna Licitaciones
+        
+            $GLOBALS['log']->fatal("Obtiene Licitaciones y añade a la cuenta.");
+            global $db;
+                 $query="SELECT licitacion.id FROM lic_licitaciones as licitacion
+                 INNER JOIN leads_lic_licitaciones_1_c as intermedia ON intermedia.leads_lic_licitaciones_1lic_licitaciones_idb = licitacion.id AND intermedia.deleted = 0
+                 WHERE intermedia.leads_lic_licitaciones_1leads_ida = '{$bean_LEad->id}';";
+
+                $queryResult = $db->query($query);
+                while($row = $db->fetchByAssoc($queryResult))
+                {
+                    $beanlicitacion = BeanFactory::retrieveBean('Lic_Licitaciones', $row['id'], array('disable_row_level_security' => true));
+                    $beanlicitacion->lic_licitaciones_accountsaccounts_ida  = $acct->id;
+                    $GLOBALS['log']->fatal("guarda licitacion a la cuenta.");
+                    $beanlicitacion->save();
+                }
+        
     }
 }
