@@ -1989,7 +1989,7 @@
             }
         }
         
-        switch (tipoProducto) {
+        /*switch (tipoProducto) {
             case "1": //Leasing
                 document.getElementById("list_l_respval_1").value =""
                 document.getElementById("list_l_respval_2").value =""
@@ -2010,7 +2010,7 @@
                 document.getElementById("list_u_respval_1").value =""
                 document.getElementById("list_u_respval_2").value =""
                 break;
-        }
+        }*/
     },
 
     carga_usuarios_resp_validacion2:function (tipoProducto){
@@ -2110,7 +2110,7 @@
             }
         }
 
-        switch (tipoProducto) {
+        /*switch (tipoProducto) {
             case "1": //Leasing
                 document.getElementById("list_l_respval_1").value =""
                 document.getElementById("list_l_respval_2").value =""
@@ -2131,7 +2131,7 @@
                 document.getElementById("list_u_respval_1").value =""
                 document.getElementById("list_u_respval_2").value =""
                 break;
-        }
+        }*/
     },
 
     carga_usuarios_resp_validacion:function (){
