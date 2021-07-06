@@ -81,7 +81,7 @@ class leads_validateString
         if ($servicio!= "api" && $servicio != "unifinAPI") {
 
             // omitir si el leads es cancelado no se haga nada o si ya esta convertido se brinca la validación
-            if ($bean->subtipo_registro_c != 3 && $bean->subtipo_registro_c != 4 && $bean->homonimo_c==0) {
+            if ($bean->subtipo_registro_c != 3 && $bean->subtipo_registro_c != 4 && $bean->homonimo_c==0 && $bean->omite_match_c==0) {
 
                 $idPadre = $this->createCleanName($bean->leads_leads_1_name);
                 //  $GLOBALS['log']->fatal("cOMIENZA A vALIDAR dUPLICADO ");

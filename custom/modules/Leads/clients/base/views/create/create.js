@@ -724,6 +724,8 @@
         this._super("_render");
         this.$(".record-cell[data-name='blank_space']").hide();
         $('[data-name="contacto_asociado_c"]').attr('style', 'pointer-events:none');
+        //Ocultando campo de control que omite validación de duplicados
+		$('[data-name="omite_match_c"]').hide();
     },
 
     fechaAsignacion: function () {
