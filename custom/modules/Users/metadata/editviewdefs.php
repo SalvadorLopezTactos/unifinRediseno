@@ -222,6 +222,15 @@ array (
             'label' => 'LBL_POSICION_OPERATIVA',
           ),
         ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'limite_asignacion_lm_c',
+            'label' => 'LBL_LIMITE_ASIGNACION_LM',
+          ),
+          1 => '',
+        ),
       ),
       'lbl_editview_panel1' => 
       array (
@@ -407,6 +416,15 @@ array (
             'name' => 'valida_vta_cruzada_c',
             'label' => 'LBL_VALIDA_VTA_CRUZADA',
           ),
+        ),
+        12 => 
+        array (
+          0 => 
+          array (
+            'name' => 'gestion_lm_c',
+            'label' => 'LBL_GESTION_LM',
+          ),
+          1 => '',
         ),
       ),
     ),

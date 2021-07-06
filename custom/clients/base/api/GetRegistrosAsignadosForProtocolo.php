@@ -40,7 +40,7 @@ class GetRegistrosAsignadosForProtocolo extends SugarApi
     public function getRecordsAssign($api, $args)
     {
 
-        global $db;
+        global $db, $app_list_strings;
         $id_user=$args['id_user'];
         $total_leads=0;
         $total_cuentas=0;
@@ -133,8 +133,11 @@ and a.deleted = 0 and up.deleted = 0";
         $usuario_asesor = BeanFactory::retrieveBean('Users', $id_user, array('disable_row_level_security' => true));
         $puesto_asesor=$usuario_asesor->puestousuario_c;
         $posicionOperativa=$usuario_asesor->posicion_operativa_c;
+        $limitePersonal = ($usuario_asesor->limite_asignacion_lm_c > 0)? $usuario_asesor->limite_asignacion_lm_c: 0;
+        $max_registros_list = $app_list_strings['limite_maximo_asignados_list'];
+        $max_registros = ($limitePersonal>0) ? $limitePersonal : intval($max_registros_list['1']);
 
-        return array('total_asignados'=>$total_registros,'puesto'=>$puesto_asesor,'posicion_operativa'=>$posicionOperativa);
+        return array('total_asignados'=>$total_registros,'puesto'=>$puesto_asesor,'posicion_operativa'=>$posicionOperativa,'limite'=>$max_registros);
 
     }
 
