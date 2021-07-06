@@ -1907,6 +1907,9 @@
                 document.getElementById("list_l_respval_1").selectedIndex = "-1"
                 document.getElementById("list_l_respval_2").innerHTML = "";
                 document.getElementById("list_l_respval_2").selectedIndex = "-1"
+
+                document.getElementById("list_l_respval_1").value =""
+                document.getElementById("list_l_respval_2").value =""
                 break;
             case "4": //Factoraje
                 document.getElementById("list_f_respval_1").options.length=0;
@@ -1916,6 +1919,9 @@
                 document.getElementById("list_f_respval_1").selectedIndex = "-1"
                 document.getElementById("list_f_respval_2").innerHTML = "";
                 document.getElementById("list_f_respval_2").selectedIndex = "-1"
+
+                document.getElementById("list_f_respval_1").value =""
+                document.getElementById("list_f_respval_2").value =""
                 break;
             case "3": //Credito-auto
                 document.getElementById("list_ca_respval_1").options.length=0;
@@ -1925,6 +1931,9 @@
                 document.getElementById("list_ca_respval_1").selectedIndex = "-1"
                 document.getElementById("list_ca_respval_2").innerHTML = "";
                 document.getElementById("list_ca_respval_2").selectedIndex = "-1"
+
+                document.getElementById("list_ca_respval_1").value =""
+                document.getElementById("list_ca_respval_2").value =""
                 break;
             case "6": //Fleet
                 document.getElementById("list_fl_respval_1").options.length=0;
@@ -1934,6 +1943,9 @@
                 document.getElementById("list_fl_respval_1").selectedIndex = "-1"
                 document.getElementById("list_fl_respval_2").innerHTML = "";
                 document.getElementById("list_fl_respval_2").selectedIndex = "-1"
+
+                document.getElementById("list_fl_respval_1").value =""
+                document.getElementById("list_fl_respval_2").value =""
                 break;
             case "8": //Uniclick
                 document.getElementById("list_u_respval_1").options.length=0;
@@ -1943,6 +1955,9 @@
                 document.getElementById("list_u_respval_1").selectedIndex = "-1"
                 document.getElementById("list_u_respval_2").innerHTML = "";
                 document.getElementById("list_u_respval_2").selectedIndex = "-1"
+
+                document.getElementById("list_u_respval_1").value =""
+                document.getElementById("list_u_respval_2").value =""  
                 break;
         }
         var j = 0;
@@ -1973,6 +1988,29 @@
                 j++;
             }
         }
+        
+        switch (tipoProducto) {
+            case "1": //Leasing
+                document.getElementById("list_l_respval_1").value =""
+                document.getElementById("list_l_respval_2").value =""
+                break;
+            case "4": //Factoraje
+                document.getElementById("list_f_respval_1").value =""
+                document.getElementById("list_f_respval_2").value =""
+                break;
+            case "3": //Credito-auto
+                document.getElementById("list_ca_respval_1").value =""
+                document.getElementById("list_ca_respval_2").value =""
+                break;
+            case "6": //Fleet
+                document.getElementById("list_fl_respval_1").value =""
+                document.getElementById("list_fl_respval_2").value =""
+                break;
+            case "8": //Uniclick
+                document.getElementById("list_u_respval_1").value =""
+                document.getElementById("list_u_respval_2").value =""
+                break;
+        }
     },
 
     carga_usuarios_resp_validacion2:function (tipoProducto){
@@ -1987,22 +2025,32 @@
             case "1": //Leasing
                 document.getElementById("list_l_respval_1").options.length=0;
                 document.getElementById("list_l_respval_2").options.length=0;
+                document.getElementById("list_l_respval_1").value =""
+                document.getElementById("list_l_respval_2").value =""
                 break;
             case "4": //Factoraje
                 document.getElementById("list_f_respval_1").options.length=0;
                 document.getElementById("list_f_respval_2").options.length=0;
+                document.getElementById("list_f_respval_1").value =""
+                document.getElementById("list_f_respval_2").value =""
                 break;
             case "3": //Credito-auto
                 document.getElementById("list_ca_respval_1").options.length=0;
                 document.getElementById("list_ca_respval_2").options.length=0;
+                document.getElementById("list_ca_respval_1").value =""
+                document.getElementById("list_ca_respval_2").value =""
                 break;
             case "6": //Fleet
                 document.getElementById("list_fl_respval_1").options.length=0;
                 document.getElementById("list_fl_respval_2").options.length=0;
+                document.getElementById("list_fl_respval_1").value =""
+                document.getElementById("list_fl_respval_2").value =""
                 break;
             case "8": //Uniclick
                 document.getElementById("list_u_respval_1").options.length=0;
                 document.getElementById("list_u_respval_2").options.length=0;
+                document.getElementById("list_u_respval_1").value =""
+                document.getElementById("list_u_respval_2").value =""
                 break;
         }
         var j = 0;
@@ -2060,6 +2108,29 @@
                 document.getElementById("list_u_respval_2").options[j]=new Option(cont_uni_p.cartera[i].nombre , cont_uni_p.cartera[i].id);  
                 j++;
             }
+        }
+
+        switch (tipoProducto) {
+            case "1": //Leasing
+                document.getElementById("list_l_respval_1").value =""
+                document.getElementById("list_l_respval_2").value =""
+                break;
+            case "4": //Factoraje
+                document.getElementById("list_f_respval_1").value =""
+                document.getElementById("list_f_respval_2").value =""
+                break;
+            case "3": //Credito-auto
+                document.getElementById("list_ca_respval_1").value =""
+                document.getElementById("list_ca_respval_2").value =""
+                break;
+            case "6": //Fleet
+                document.getElementById("list_fl_respval_1").value =""
+                document.getElementById("list_fl_respval_2").value =""
+                break;
+            case "8": //Uniclick
+                document.getElementById("list_u_respval_1").value =""
+                document.getElementById("list_u_respval_2").value =""
+                break;
         }
     },
 
