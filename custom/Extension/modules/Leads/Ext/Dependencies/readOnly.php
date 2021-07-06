@@ -195,5 +195,12 @@ $dependencies['Leads']['readonly_fields'] = array(
                 'value' => 'true',
             ),
         ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'metodo_asignacion_lm_c',
+                'value' => 'true',
+            ),
+        ),
     ),
 );

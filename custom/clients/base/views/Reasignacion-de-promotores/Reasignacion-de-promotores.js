@@ -111,7 +111,7 @@
                 if(content.trim() ==""){
                     $('.btnSubir').removeClass('disabled');
                     $('.btnSubir').attr('style', 'margin:10px');
-                    app.alert.dismiss('reasignandoCSV');                    
+                    app.alert.dismiss('reasignandoCSV');
                     app.alert.show('csvVacio', {
                         level: 'error',
                         messages: 'Archivo sin contenido, favor de elegir un archivo v\u00E1lido',
@@ -195,7 +195,7 @@
 
             this.persistNoSeleccionados=[];
         }
-        
+
 
         //Control de bandera para saber si se ha oprimido el botón de "Seleccionar Todo" y de esta manera saber si el siguiente "offset" de la tabla
         // debe mostrarse con los check como true
@@ -284,12 +284,12 @@
 
     buscarCuentas: function(flagClean=0){
         //Establece objeto vacio de las cuentas seleccionadas y desmarca los check seleccionados
-        
+
         if(flagClean != 1){
             this.objEtiquetaID = {};
             $("#offset_value").attr("from_set", 0);
             $("#crossSeleccionados").val("");
-        } 
+        }
 
         var assigneUsr = this.model.get('users_accounts_1users_ida');
         //Condición para controlar la búsqueda cuando no se ha seleccionado Promotor, esto sucede cuando se da click en el icono con el tache
@@ -363,7 +363,7 @@
                                 var index = tempArray.indexOf(this.persistNoSeleccionados[i]);
                                 if (index > -1) {
                                   tempArray.splice(index, 1);
-                                }                                
+                                }
                             }
                         }
 
@@ -469,7 +469,7 @@
         if($(e.target).is(':checked')){
             seleccionarTodo.push($(e.target).val());
             this.seleccionados = seleccionarTodo;
-            
+
             this.objEtiquetaID[$(e.target).val()]=$(e.currentTarget).attr('title'); //OBJ DEL ID Y LA ETIQUETA DE REGISTROS SELECCIONADOS
 
         }else{
@@ -486,7 +486,7 @@
             // console.log(this.seleccionados);
             delete this.objEtiquetaID[itemToRemove]; //ELIMINA LOS ID Y ETIQUETA DE LOS REGISTROS DESMARCADOS
         }
-        
+
         //Validación para controlar checks seleccionados en caso de que se hayan seleccionado todos los registros
         //(Click en Selecionar Todo)
         if(this.full_cuentas.length >0 && this.full_cuentas != undefined){
@@ -552,8 +552,8 @@
             app.api.call('GET', app.api.buildURL('GetRegistrosAsignadosForProtocolo/' + id_user), null, {
                 success: function (data) {
                     App.alert.dismiss('obtieneAsignados');
-                    var maximo_registros_list=App.lang.getAppListStrings('limite_maximo_asignados_list');
-                    var maximo_registros=parseInt(maximo_registros_list["1"]);
+                    //var maximo_registros_list=App.lang.getAppListStrings('limite_maximo_asignados_list');
+                    var maximo_registros=data.limite;
 
                     //VALIDA EL CONTEO DE PROSPECTOS
                     if ((maximo_registros - data.total_asignados) < countProspecto && countProspecto != 0 && data.posicion_operativa.includes('3')) {
@@ -581,7 +581,7 @@
                         var parametros = self.seleccionados;
                         var producto_seleccionado = $("#Productos").val();
                         if(!_.isEmpty(parametros)) {
-                            
+
                             var Params = {
                                 'optBl':radioBl,
                                 'seleccionados': parametros,
@@ -624,14 +624,14 @@
                             };
                             app.alert.show('validation', alertOptions);
                         }
-                    }                   
+                    }
                 },
                 error: function (e) {
                     throw e;
                 }
             });
 
-            
+
         }else{
             var alertOptions = {
                 title: "Por favor, seleccione un asesor Destino",

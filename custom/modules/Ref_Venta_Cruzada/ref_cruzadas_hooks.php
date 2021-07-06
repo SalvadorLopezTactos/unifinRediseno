@@ -285,6 +285,9 @@ class Ref_Cruzadas_Hooks
 
         $array_cond_no_cumplidas=$this->estableceCondicionesNoCumplidas($bean);
 
+        $GLOBALS['log']->fatal("CONDICIONES INCUMPLIDAS");
+        $GLOBALS['log']->fatal(print_r($array_cond_no_cumplidas,true));
+
         //Si el producto referenciado es Leasing y además se establece como No Válida
         if($producto_referenciado=='1' && $status=='2' && $bean->correo_env_c != '1'){
             $cuerpoCorreo = $this->estableceCuerpoNotificacionNoValida($nombreAlejandro, $nombreAsesorOrigen, $nombreAsesorReferenciado,$nombreCuenta, $linkReferencia,$array_cond_no_cumplidas);
@@ -327,7 +330,18 @@ class Ref_Cruzadas_Hooks
 
 			if(count($array_equipos)>0){
 				$equipo_asesor1=$array_equipos[0];
-				$equipo_asesor2=$array_equipos[1];
+
+                $equipo_asesor2="";
+                //Se agrega condicion para controlar los equipos obtenidos en caso de que asesor origen y referenciado sean el mismo
+                //en este caso, como solo trae un resultado, el $array_equipos[1] no trae valor, ya que la consulta solo trae un resultado en lugar de 2
+                if(count($array_equipos)==1){
+                    $equipo_asesor2=$array_equipos[0];
+                }else{
+                    $equipo_asesor2=$array_equipos[1];
+                }
+
+                $GLOBALS['log']->fatal("EQUIPO USUARIO 1: ".$equipo_asesor1);
+                $GLOBALS['log']->fatal("EQUIPO USUARIO 2: ".$equipo_asesor2);
 
 				if($equipo_asesor1==$equipo_asesor2){
                     array_push($array_cond_no_cumplidas,"Producto origen es igual a producto referenciado y tanto Asesor Origen como Asesor referenciado pertenecen al mismo equipo");

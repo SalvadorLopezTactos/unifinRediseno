@@ -126,3 +126,4 @@ $mod_strings['LBL_MEDIOS_CONTACTO_DESEADO_C'] = 'Medios de contacto';
 $mod_strings['LBL_MEDIO_PREFERIDO_CONTACTO_C'] = 'Medio preferido de contacto';
 $mod_strings['LBL_DIA_CONTACTO_C'] = 'Día preferido de contacto';
 $mod_strings['LBL_HORA_CONTACTO_C'] = 'Hora preferida de contacto';
+$mod_strings['LBL_OMITE_MATCH'] = 'Omitir match';

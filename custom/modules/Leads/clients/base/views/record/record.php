@@ -494,6 +494,8 @@ array (
               ),
               56 => 
               array (
+                'name' => 'omite_match_c',
+                'label' => 'LBL_OMITE_MATCH',
               ),
             ),
           ),

@@ -28,6 +28,8 @@
 
     _render: function (options) {
         this._super("_render");
+        $('div[data-name=lic_licitaciones_accounts_name]').css("pointer-events", "none");
+        $('div[data-name=leads_lic_licitaciones_1_name]').css("pointer-events", "none");
         
     },
 

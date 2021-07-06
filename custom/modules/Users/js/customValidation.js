@@ -193,7 +193,8 @@ $(window).load(function(){
     $('#multilinea_c').attr('disabled','disabled');
     $('#responsable_oficina_chk_c').attr('disabled','disabled');
     $('#reset_leadcancel_c').attr('disabled','disabled');
-
+    $('#limite_asignacion_lm_c').attr('disabled','disabled');
+    $('#gestion_lm_c').attr('disabled','disabled');
 
    }
   }catch(error){
@@ -235,7 +236,8 @@ $(window).load(function(){
       $('#multilinea_c').attr('disabled','disabled');
       $('#responsable_oficina_chk_c').attr('disabled','disabled');
       $('#reset_leadcancel_c').attr('disabled','disabled');
-
+      $('#limite_asignacion_lm_c').attr('disabled','disabled');
+      $('#gestion_lm_c').attr('disabled','disabled');
 
     }
   }

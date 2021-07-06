@@ -58,6 +58,7 @@
     closeModalCheckDuplicado: function () {
 
        this._disposeView();
+       self_modal_accs.options.context.trigger('button:cancel_button:click');
 
     },
 

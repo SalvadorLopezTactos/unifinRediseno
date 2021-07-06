@@ -205,84 +205,105 @@ array (
               1 => 
               array (
                 'name' => 'monto_total',
-                'related_fields' => 
-                array (
-                  0 => 'currency_id',
-                  1 => 'base_rate',
-                ),
                 'label' => 'LBL_MONTO_TOTAL',
+                'inline' => true,
+                'type' => 'fieldset',
+                'fields' => 
+                array (
+                  0 => 
+                  array (
+                    'name' => 'divisa_c',
+                  ),
+                  1 => 
+                  array (
+                    'name' => 'monto_total',
+                  ),
+                ),
               ),
               2 => 
+              array (
+                'name' => 'leads_lic_licitaciones_1_name',
+              ),
+              3 => 
+              array (
+              ),
+              4 => 
               array (
                 'name' => 'region',
                 'label' => 'LBL_REGION',
               ),
-              3 => 
+              5 => 
               array (
                 'name' => 'equipo',
                 'label' => 'LBL_EQUIPO',
               ),
-              4 => 
+              6 => 
               array (
                 'name' => 'fecha_ultimo_contacto',
                 'label' => 'LBL_FECHA_ULTIMO_CONTACTO',
               ),
-              5 => 
+              7 => 
               array (
                 'name' => 'descripcion_contrato',
                 'studio' => 'visible',
                 'label' => 'LBL_DESCRIPCION_CONTRATO',
               ),
-              6 => 
+              8 => 
               array (
                 'name' => 'institucion',
                 'label' => 'LBL_INSTITUCION',
                 'span' => 12,
               ),
-              7 => 
+              9 => 
               array (
                 'name' => 'fecha_publicacion',
                 'label' => 'LBL_FECHA_PUBLICACION',
               ),
-              8 => 
+              10 => 
               array (
                 'name' => 'fecha_apertura',
                 'label' => 'LBL_FECHA_APERTURA',
               ),
-              9 => 
+              11 => 
               array (
                 'name' => 'fecha_inicio_contrato',
                 'label' => 'LBL_FECHA_INICIO_CONTRATO',
               ),
-              10 => 
+              12 => 
               array (
                 'name' => 'fecha_fin_contrato',
                 'label' => 'LBL_FECHA_FIN_CONTRATO',
               ),
-              11 => 
+              13 => 
               array (
                 'name' => 'assigned_user_name',
                 'span' => 12,
               ),
-              12 => 
+              14 => 
               array (
                 'name' => 'resultado_licitacion_c',
                 'label' => 'LBL_RESULTADO_LICITACION',
               ),
-              13 => 
+              15 => 
               array (
                 'name' => 'razon_no_viable_c',
                 'label' => 'LBL_RAZON_NO_VIABLE',
               ),
-              14 => 
+              16 => 
               array (
                 'name' => 'codigo_contrato_c',
                 'label' => 'LBL_CODIGO_CONTRATO',
               ),
-              15 => 
+              17 => 
               array (
                 'name' => 'url_contrato_c',
                 'label' => 'LBL_URL_CONTRATO',
+              ),
+              18 => 
+              array (
+              ),
+              19 => 
+              array (
               ),
             ),
           ),
