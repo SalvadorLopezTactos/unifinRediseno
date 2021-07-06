@@ -7,3 +7,4 @@ $mod_strings['LBL_RESULTADO_LICITACION'] = 'Resultado de licitación';
 $mod_strings['LBL_CODIGO_CONTRATO'] = 'Código del contrato';
 $mod_strings['LBL_URL_CONTRATO'] = 'URL del contrato';
 $mod_strings['LBL_IFRAME_COMPRANET'] = 'Contrato compranet';
+$mod_strings['LBL_DIVISA_C'] = 'Divisa';
