@@ -1989,28 +1989,38 @@
             }
         }
         
-        /*switch (tipoProducto) {
+        switch (tipoProducto) {
             case "1": //Leasing
+                document.getElementById("list_l_respval_1").options[j]=new Option('','');
+                document.getElementById("list_l_respval_2").options[j]=new Option('','');
                 document.getElementById("list_l_respval_1").value =""
                 document.getElementById("list_l_respval_2").value =""
                 break;
             case "4": //Factoraje
+                document.getElementById("list_f_respval_1").options[j]=new Option('','');
+                document.getElementById("list_f_respval_2").options[j]=new Option('','');
                 document.getElementById("list_f_respval_1").value =""
                 document.getElementById("list_f_respval_2").value =""
                 break;
             case "3": //Credito-auto
+                document.getElementById("list_ca_respval_1").options[j]=new Option('','');
+                document.getElementById("list_ca_respval_2").options[j]=new Option('','');
                 document.getElementById("list_ca_respval_1").value =""
                 document.getElementById("list_ca_respval_2").value =""
                 break;
             case "6": //Fleet
+                document.getElementById("list_fl_respval_1").options[j]=new Option('','');
+                document.getElementById("list_fl_respval_2").options[j]=new Option('','');
                 document.getElementById("list_fl_respval_1").value =""
                 document.getElementById("list_fl_respval_2").value =""
                 break;
             case "8": //Uniclick
+                document.getElementById("list_u_respval_1").options[j]=new Option('','');
+                document.getElementById("list_u_respval_2").options[j]=new Option('','');
                 document.getElementById("list_u_respval_1").value =""
                 document.getElementById("list_u_respval_2").value =""
                 break;
-        }*/
+        }
     },
 
     carga_usuarios_resp_validacion2:function (tipoProducto){
@@ -2110,28 +2120,38 @@
             }
         }
 
-        /*switch (tipoProducto) {
+        switch (tipoProducto) {
             case "1": //Leasing
+                document.getElementById("list_l_respval_1").options[j]=new Option('','');
+                document.getElementById("list_l_respval_2").options[j]=new Option('','');
                 document.getElementById("list_l_respval_1").value =""
                 document.getElementById("list_l_respval_2").value =""
                 break;
             case "4": //Factoraje
+                document.getElementById("list_f_respval_1").options[j]=new Option('','');
+                document.getElementById("list_f_respval_2").options[j]=new Option('','');
                 document.getElementById("list_f_respval_1").value =""
                 document.getElementById("list_f_respval_2").value =""
                 break;
             case "3": //Credito-auto
+                document.getElementById("list_ca_respval_1").options[j]=new Option('','');
+                document.getElementById("list_ca_respval_2").options[j]=new Option('','');
                 document.getElementById("list_ca_respval_1").value =""
                 document.getElementById("list_ca_respval_2").value =""
                 break;
             case "6": //Fleet
+                document.getElementById("list_fl_respval_1").options[j]=new Option('','');
+                document.getElementById("list_fl_respval_2").options[j]=new Option('','');
                 document.getElementById("list_fl_respval_1").value =""
                 document.getElementById("list_fl_respval_2").value =""
                 break;
             case "8": //Uniclick
+                document.getElementById("list_u_respval_1").options[j]=new Option('','');
+                document.getElementById("list_u_respval_2").options[j]=new Option('','');
                 document.getElementById("list_u_respval_1").value =""
                 document.getElementById("list_u_respval_2").value =""
                 break;
-        }*/
+        }
     },
 
     carga_usuarios_resp_validacion:function (){
