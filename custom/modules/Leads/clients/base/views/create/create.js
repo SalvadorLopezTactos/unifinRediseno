@@ -256,44 +256,44 @@
                 success: _.bind(function (data) {
                     App.alert.dismiss('obteniendoDuplicados');
                     if(data.code=='200'){
-                        self.duplicados=data.registros;
+                        if(!_.isEmpty(data.registros)){
+                            self.duplicados=data.registros;
 
-                        //formateando el nivel match
-                        for (var property in self.duplicados) {
-                            //self.duplicados[property].nivelMatch= self.duplicados[property].nivelMatch[0];
-                            //self.duplicados[property].rfc= "LOBS920410HDFPLL06";
-                            self.duplicados[property].coincidencia= self.duplicados[property].coincidencia;
-                        }
-                        errors['modal_duplicados'] = errors['modal_duplicados'] || {};
-                        errors['modal_duplicados'].custom_message1 = true;
+                            //formateando el nivel match
+                            for (var property in self.duplicados) {
+                                //self.duplicados[property].nivelMatch= self.duplicados[property].nivelMatch[0];
+                                //self.duplicados[property].rfc= "LOBS920410HDFPLL06";
+                                self.duplicados[property].coincidencia= self.duplicados[property].coincidencia;
+                            }
+                            errors['modal_duplicados'] = errors['modal_duplicados'] || {};
+                            errors['modal_duplicados'].custom_message1 = true;
 
-                        //Mandamos a llamar el popup custom
-                        if (Modernizr.touch) {
-                            app.$contentEl.addClass('content-overflow-visible');
-                        }
-                        /**check whether the view already exists in the layout.
-                         * If not we will create a new view and will add to the components list of the record layout
-                         * */
-
-                        var quickCreateView = null;
-                        if (!quickCreateView) {
-                            /** Create a new view object */
-                            quickCreateView = app.view.createView({
-                                context: this.context,
-                                errors:errors,
-                                registros:self.duplicados,
-                                name: 'ValidaDuplicadoModal',
-                                layout: this.layout,
-                                module: 'Leads'
-                            });
-                            /** add the new view to the components list of the record layout*/
-                            this.layout._components.push(quickCreateView);
-                            this.layout.$el.append(quickCreateView.$el);
-                        }
-                        /**triggers an event to show the pop up quick create view*/
-                        this.layout.trigger("app:view:ValidaDuplicadoModal");
+                            //Mandamos a llamar el popup custom
+                            if (Modernizr.touch) {
+                                app.$contentEl.addClass('content-overflow-visible');
+                            }
+                            /**check whether the view already exists in the layout.
+                             * If not we will create a new view and will add to the components list of the record layout
+                             * */
+                            var quickCreateView = null;
+                            if (!quickCreateView) {
+                                /** Create a new view object */
+                                quickCreateView = app.view.createView({
+                                    context: this.context,
+                                    errors:errors,
+                                    registros:self.duplicados,
+                                    name: 'ValidaDuplicadoModal',
+                                    layout: this.layout,
+                                    module: 'Leads'
+                                });
+                                /** add the new view to the components list of the record layout*/
+                                this.layout._components.push(quickCreateView);
+                                this.layout.$el.append(quickCreateView.$el);
+                            }
+                            /**triggers an event to show the pop up quick create view*/
+                            this.layout.trigger("app:view:ValidaDuplicadoModal");
+                        }  
                     }
-
                     callback(null, fields, errors);
 
                 }, this)
@@ -725,6 +725,8 @@
         this._super("_render");
         this.$(".record-cell[data-name='blank_space']").hide();
         $('[data-name="contacto_asociado_c"]').attr('style', 'pointer-events:none');
+        //Ocultando campo de control que omite validación de duplicados
+		$('[data-name="omite_match_c"]').hide();
     },
 
     fechaAsignacion: function () {

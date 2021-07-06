@@ -70,6 +70,8 @@
         self_modal.options.context.flagGuardar="1";
         if(self_modal.textoBotonGuardar=="Es homónimo, Guardar"){
             self_modal.model.set('homonimo_c',1);
+        }else{
+            self_modal.model.set('omite_match_c',1);
         }
         self_modal.options.context.trigger('button:save_button:click');
     },
