@@ -88,7 +88,7 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                         */
                         /*if((($beanProduct->user_id1_c == $args['user_id'] ) || ($beanProduct->user_id2_c == $args['user_id'] ))
                         && ($beanProduct->status_management_c == '4' || $beanProduct->status_management_c == '5')) {*/
-                        if($beanProduct->status_management_c == '4' || $beanProduct->status_management_c == '5') {
+                        if($beanProduct->estatus_atencion == '3' || $beanProduct->status_management_c == '4' || $beanProduct->status_management_c == '5') {
                             $GLOBALS['log']->fatal("Entro modificacion*********");
                             //$GLOBALS['log']->fatal("estatus de atencion",$args['estatus_atencion']);
                             
