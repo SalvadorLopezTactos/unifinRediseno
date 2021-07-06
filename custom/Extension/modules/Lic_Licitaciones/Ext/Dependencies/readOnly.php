@@ -11,7 +11,7 @@ $dependencies['Lic_Licitaciones']['lic_licitaciones_accounts_name'] = array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'lic_licitaciones_accounts_name', //campo por afectar
-                'value' => 'not(equal($lic_licitaciones_accounts_name, ""))',
+                'value' => 'not(equal($id, ""))',
             ),
         ),
     ),
@@ -28,7 +28,7 @@ $dependencies['Lic_Licitaciones']['divisa_c'] = array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'divisa_c', //campo por afectar
-                'value' => 'not(equal($divisa_c, ""))',
+                'value' => 'not(equal($id, ""))',
             ),
         ),
     ),
@@ -45,7 +45,7 @@ $dependencies['Lic_Licitaciones']['monto_total'] = array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'monto_total', //campo por afectar
-                'value' => 'not(equal($monto_total, ""))',
+                'value' => 'not(equal($id, ""))',
             ),
         ),
     ),
@@ -62,7 +62,7 @@ $dependencies['Lic_Licitaciones']['leads_lic_licitaciones_1_name'] = array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'leads_lic_licitaciones_1_name', //campo por afectar
-                'value' => 'not(equal($leads_lic_licitaciones_1_name, ""))',
+                'value' => 'not(equal($id, ""))',
             ),
         ),
     ),
@@ -79,7 +79,7 @@ $dependencies['Lic_Licitaciones']['region'] = array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'region', //campo por afectar
-                'value' => 'not(equal($region, ""))',
+                'value' => 'not(equal($id, ""))',
             ),
         ),
     ),
@@ -96,7 +96,7 @@ $dependencies['Lic_Licitaciones']['equipo'] = array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'equipo', //campo por afectar
-                'value' => 'not(equal($equipo, ""))',
+                'value' => 'not(equal($id, ""))',
             ),
         ),
     ),
@@ -113,7 +113,7 @@ $dependencies['Lic_Licitaciones']['fecha_ultimo_contacto'] = array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'fecha_ultimo_contacto', //campo por afectar
-                'value' => 'not(equal($fecha_ultimo_contacto, ""))',
+                'value' => 'not(equal($id, ""))',
             ),
         ),
     ),
@@ -130,7 +130,7 @@ $dependencies['Lic_Licitaciones']['descripcion_contrato'] = array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'descripcion_contrato', //campo por afectar
-                'value' => 'not(equal($descripcion_contrato, ""))',
+                'value' => 'not(equal($id, ""))',
             ),
         ),
     ),
@@ -147,7 +147,7 @@ $dependencies['Lic_Licitaciones']['institucion'] = array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'institucion', //campo por afectar
-                'value' => 'not(equal($institucion, ""))',
+                'value' => 'not(equal($id, ""))',
             ),
         ),
     ),
@@ -164,7 +164,7 @@ $dependencies['Lic_Licitaciones']['fecha_publicacion'] = array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'fecha_publicacion', //campo por afectar
-                'value' => 'not(equal($fecha_publicacion, ""))',
+                'value' => 'not(equal($id, ""))',
             ),
         ),
     ),
@@ -181,7 +181,24 @@ $dependencies['Lic_Licitaciones']['fecha_apertura'] = array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'fecha_apertura', //campo por afectar
-                'value' => 'not(equal($fecha_apertura, ""))',
+                'value' => 'not(equal($id, ""))',
+            ),
+        ),
+    ),
+);
+
+$dependencies['Lic_Licitaciones']['fecha_inicio_contrato'] = array(
+    'hooks' => array("edit"),
+    'trigger' => 'true',
+    'triggerFields' => array('fecha_inicio_contrato'),
+    'onload' => true,
+    'actions' => array(
+        //Persona
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'fecha_inicio_contrato', //campo por afectar
+                'value' => 'not(equal($id, ""))',
             ),
         ),
     ),
@@ -198,7 +215,7 @@ $dependencies['Lic_Licitaciones']['fecha_fin_contrato'] = array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'fecha_fin_contrato', //campo por afectar
-                'value' => 'not(equal($fecha_fin_contrato, ""))',
+                'value' => 'not(equal($id, ""))',
             ),
         ),
     ),
@@ -215,7 +232,7 @@ $dependencies['Lic_Licitaciones']['codigo_contrato_c'] = array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'codigo_contrato_c', //campo por afectar
-                'value' => 'not(equal($codigo_contrato_c, ""))',
+                'value' => 'not(equal($id, ""))',
             ),
         ),
     ),
@@ -232,7 +249,7 @@ $dependencies['Lic_Licitaciones']['url_contrato_c'] = array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'url_contrato_c', //campo por afectar
-                'value' => 'not(equal($url_contrato_c, ""))',
+                'value' => 'not(equal($id, ""))',
             ),
         ),
     ),
@@ -249,7 +266,7 @@ $dependencies['Lic_Licitaciones']['assigned_user_name'] = array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'assigned_user_name', //campo por afectar
-                'value' => 'not(equal($assigned_user_name, ""))',
+                'value' => 'not(equal($id, ""))',
             ),
         ),
     ),
