@@ -6845,7 +6845,15 @@
 						app.api.call("GET", app.api.buildURL(strUrl), null, {
 							success: _.bind(function (data1) {
 								if(data1.records.length > 0) {
-									if(data1.records[0].bloquea) {
+                                    var bloqueo = false;
+                                    if(data1.records.length > 1) {
+                                        _.each(data1.records, function (valor, llave) {
+                                            if(data1.records[llave].motivo == Productos[key].motivo_c) {
+                                                bloqueo = true;
+                                            }    
+                                        });
+                                    }
+									if(data1.records[0].bloquea || bloqueo) {
 										params["aprueba1_c"] = 1;
 										params["aprueba2_c"] = 1;
 										params["status_management_c"] = Productos[key].status_management_c;
