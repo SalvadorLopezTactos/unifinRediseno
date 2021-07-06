@@ -6882,12 +6882,13 @@
                                             });
                                         });
                                         location.reload();
+                                        //cont_uni_p.render();
                                         
 									} else {
                                         params["aprueba1_c"] = 1;
                                         params["aprueba2_c"] = 1;
-										if(Productos[key].user_id1_c == app.user.id) params["aprueba1_c"] = 1;
-										if(Productos[key].user_id2_c == app.user.id) params["aprueba2_c"] = 1;
+										//if(Productos[key].user_id1_c == app.user.id) params["aprueba1_c"] = 1;
+										//if(Productos[key].user_id2_c == app.user.id) params["aprueba2_c"] = 1;
                                         params["id_Producto"] =  Productos[key].id;
                                         params["tipoupdate"] = '2';
                                         params["estatus_atencion"] = '3';
@@ -6902,6 +6903,7 @@
                                                     messages: 'Se aprobó el No Viable, para la cuenta',
                                                 });*/
                                                 location.reload();
+                                                //cont_uni_p.render();
                                             },
                                             error: function (e) {
                                                 throw e;
@@ -6974,8 +6976,8 @@
         var Productos = [];
 
         var params = {};
-		params["razon_c"] = '0'; //razon lm
-        params["motivo_c"] = '0'; //motivo lm
+		params["razon_c"] = ''; //razon lm
+        params["motivo_c"] = ''; //motivo lm
         params["detalle_c"] = ''; //detalle lm
         params["user_id1_c"] = '';  //user id1
         params["user_id2_c"] = '';  //user id2
