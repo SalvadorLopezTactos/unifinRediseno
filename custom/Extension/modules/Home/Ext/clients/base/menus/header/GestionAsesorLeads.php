@@ -5,7 +5,7 @@
  */
 $viewdefs['Home']['base']['menu']['header'][] = array(
     'route'=>'#Home/layout/GestionAsesorLeads',
-    'label' =>'Gestión Leads Asignados',
+    'label' =>'Gestión de asignación LM',
     'acl_module'=>'Home',
-    'icon' => 'fa_team',
+    'icon' => 'fa-users',
 );

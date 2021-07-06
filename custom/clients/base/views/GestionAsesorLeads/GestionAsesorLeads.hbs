@@ -1,294 +1,181 @@
-<style>
-    .container {
-        overflow-y: auto;
-        display: inline-block;
-        width: 100%;
-        height: 100%;
-    }
+{{#if this.loadView}}
+    <style>
+        .container {
+            overflow-y: auto;
+            display: block;
+            width: 100%;
+        }
+        .cuentas {
+            display: table;
+            width: 90%;
+        }
+        .cuentasContainer {
+            margin-top: 1%;
+            overflow-y: auto;
+            height: 300px;
+        }
+        #containerHeader {
+            font-size: 18px;
+            margin-top: 2%;
+            margin-left: 1%;
+            line-height: 10px;
+        }
+        #successful {
+            margin-top: 10%;
+            font-size: 25px;
+            color: #33800d;
+        }
+    </style>
+	<script>
+		var $select2 = this.$('.cuentasContainer').find('select.select2');
+		$select2.select2();
 
-    #titulo {
-        color: #e2efe2;
-        background-color: #22608c;
-        border-color: #22608c;
-        border-radius: 10px;
-        margin-right: 15px;
-        height: 35px;
-        display: table;
-        width: 96%;
-        font-size: 18px;
-        margin-top: 2%;
-        margin-left: 1%;
-        line-height: 30px;
-        padding-left: 10px;
+        this.$('[data-field="posicion_operativa"].updatePO').select2({
+            width:'100%',
+            minimumResultsForSearch:7,
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
 
-    }
-
-    .SetHorario th {
-        padding: 5px;
-        /*width: 75px;*/
-        background-color: #22608c;
-    }
-
-    .SetHorario td {
-        padding: 5px;
-        /*width: 75px;*/
-        background-color: #f6f8f9;
-    }
-
-    .modal {
-        position: fixed;
-        top: 10%;
-        left: 21%;
-        z-index: 1050;
-        width: 560px;
-        margin-left: -280px;
-        background-color: rgba(111, 112, 113, 0.67);
-        background-clip: padding-box;
-        outline: none;
-    }
-
-    select {
-        width: 75px;
-        border: 1px solid #f6f6f6;
-        background-color: #fff;
-    }
-
-    .dia {
-        background: #1a74c2;
-        color: white;
-
-    }
-
-    .close {
-        float: right;
-        font-size: 20px;
-        font-weight: bold;
-        line-height: 18px;
-        color: rgb(255, 0, 11);
-        text-shadow: rgb(255 255 255) 0px 1px 0px;
-        opacity: unset;
-    }
-
-    #checkboxes label {
-        display: inline-flex;
-        padding: 5px;
-    }
-
-    [data-tip] {
-        position: relative;
-
-    }
-
-    [data-tip]:before {
-        content: '';
-        /* hides the tooltip when not hovered */
-        display: none;
-        content: '';
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-bottom: 5px solid #8e8e8e;
-        position: absolute;
-        top: 30px;
-        left: 35px;
-        z-index: 8;
-        font-size: 0;
-        line-height: 0;
-        width: 0;
-        height: 0;
-    }
-
-    [data-tip]:after {
-        display: none;
-        content: attr(data-tip);
-        position: absolute;
-        top: 35px;
-        left: 0px;
-        padding: 5px 8px;
-        background: #8e8e8e;
-        color: #fff;
-        z-index: 9;
-        font-size: 0.95em;
-        height: 18px;
-        line-height: 18px;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
-        white-space: nowrap;
-        word-wrap: normal;
-    }
-
-    [data-tip]:hover:before,
-    [data-tip]:hover:after {
-        display: block;
-    }
-
-    .form-control {
-        width: 115px;
-    }
-
-</style>
-
-<div class="container">
-    <h2 id="titulo" align="left"><b>Gestión de Leads Asignados Asesor</b></h2>
-    <br>
-    <div style="margin-left: 15px;">
-        <input id="filtroNombre" type="text" value="" placeholder="Nombre(s)">
-        <input id="filtroApellido" type="text" value="" placeholder="Apellido">
-        <select class="select2 inherit-width " id="filtroSubPuesto" data-name="subpuesto"
-                data-placeholder="Subpuesto" data-toggle="tooltip" title="Selecciona un Subpuesto" style="width: 167px; margin: auto; ">
-            <option value=""  selected hidden>Subpuesto</option>
-            {{#each subpuesto_list}}
-                <!--<option value="{{@key}}" {{ifSelected @key "" }}>{{this}}</option>-->
-                <option value="{{@key}}" >{{this}}</option>
-            {{/each}}
-        </select>
-
-        <i style="color: white" class="fa fa-search btn btn-primary" id="btn_search" type="button"> Buscar</i>
-    </div>
-    <br>
-
-    <div class="AgentesContainer" style="padding-left: 15px">
-        {{#if agentes}}
-            <div class="table-responsive text-nowrap">
-                <!--Table-->
-                <table class="table table-striped" style="width: 98%">
-                    <!--Table head-->
-                    <thead>
-                    <tr style="background: #20608c; color: white;">
-                        <th style="background: #f6f8f9;"></th>
-                        <th style="background: #f6f8f9;"></th>
-                        <th ># Leads Asignados</th>
-                    </tr>
-                    <tr style="background: #0d75b994;">
-                        <th width="5%">
-                            <input type="checkbox" value="Todo" id="btn_STodo" class="btn btn-primary"
-                                   btnState="Off"/>
-                        </th>
-                        <th colspan="2" style="padding: 2px">Asesor</th>
-                    </tr>
-                    </thead>
-                    <!--Table head-->
-                    <!--Table body-->
-                    <tbody>
-                    {{#each agentes}}
-                        <tr class='single' style="border-bottom: 2px solid skyblue;">
-                            <th scope="row">
-                            <span sfuuid='880' class='list'>
-                            <div class='ellipsis_inline' data-placement='bottom'>
-                                <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'><input
-                                    type="checkbox" name="selected" value="{{id}}" class="selected"/></span>
-                            </div>
-                            </span>
-                            </th>
-                            <td>
-                                <span sfuuid='880' class='list'>
-                                    <div class='ellipsis_inline' data-placement='bottom'>
-                                        <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{nombre_completo_c}}</span>
-                                    </div>
-                                </span>
-                            </td>
-                            <td>
-                                <span sfuuid='880' class='list'>
-                                <div>
-                                    <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{entrada}}</span>
-                                </div>
-                                </span>
-                            </td>
-                        </tr>
-                    {{/each}}
-                    <tr style="background: #f6f8f9;">
-                        <td colspan="1"></td>
-                        <td colspan="2">
-                            <div class="btn-group">
-                                <a class="btn fa fa-caret-left" id="previous_offset"></a>
-                                <a class="btn disabled" id="offset_value" from_set="" to_set=""
-                                   total="{{../total_page}}"></a>
-                                <a class="btn fa fa-caret-right" id="next_offset"></a>
-                            </div>
-                        </td>
-                        <td>
-                            <a class="btn fa fa-calendar openModalHorarios"> Reasignar Número de Leads</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <!--Table body-->
-                </table>
-                <!--Table-->
-            </div>
-
-        {{else}}
-            <div class="block-footer">
-                {{str "LBL_NO_DATA_AVAILABLE"}}
-            </div>
-        {{/if}}
-
-
-    </div>
-    <textarea style="display: none" id="crossSeleccionados" value=""></textarea>
-
-    <div id="myModal" class="row-fluid" style="display:none; ">
-        <div class="modal " style="width:98%">
-            <!-- Modal content -->
-            <div class="modal-content">
-                <!-- Modal header -->
-                <div class="modal-header" style="color: white;">
-                    <span class="close closeModalHorarios"><b>X</b></span>
-                    <h3><b>Actualizar Leads de Agentes</b></h3>
-                </div>
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <!--Table-->
-                    <table class="SetHorario " style="width: 55%; margin-bottom: 40px; margin-left: 21%">
-                        <!--Table head-->
-                        <thead>
-                        <tr style="color: white; text-align: justify">
-                            <th>Número de Leads</th>
-                            <th>Actualizar</th>
-                        </tr>
-                        </thead>
-                        <!--Table head-->
-                        <!--Table body-->
-                        <tbody>
-                        <!-- Lunes -->
-                        <tr>
-                            <td class="dia" style="text-align: justify; background: #0d75b994"><b>Número de Leads</b></td>
-                            <td class="dia" style="text-align: justify; ">
-                                <div id="checkboxesL">
-                                    <input type="checkbox" id="bloqueadoL" {{#if data.bloqL}} checked{{/if}}
-                                           data-tip="Bloquear: Se bloqueará el acceso a CRM durante todo el día"/>
-                                    <i class="fa fa-lock" style="padding-left: 2px"></i>
-                                </div>
-                            </td>
-                            
-                            <td>
-                                <div class="form-group row">
-                                    <input class="form-control" type="time" min="00:01" max="23:59" {{#if data.bloqL}}
-                                        disabled {{/if}} {{#if data.libL}} disabled {{/if}} step="" value="{{data.lhout}}"
-                                        id="LHout">
-                                </div>
-                            </td>
-                            <td>
-                                <input type="checkbox" class="radio " id="updateL" value="1"
-                                       data-tip="¿Actualizar día?"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><a class="btn fa fa-ban ExcluirHorario"
-                                               style="background: #0e90d2; color: #ffffff;">
-                                Excluir de Horario</a></td>
-                            <td colspan="3"></td>
-                            <td colspan="2"><a class="btn fa fa-save UpdateHorario"
-                                               style="background: #0e90d2; color: #ffffff;">
-                                Actualizar Horario</a></td>
-                        </tr>
-                        </tbody>
-                        <!--Table body-->
-                    </table>
-                    <!--Table-->
-                </div>
+	</script>
+	<div><p></p></div>
+    <div class="container">
+        <div class="row-fluid">
+            <div style="color: #e2efe2;background-color:#22608c;border-color:#22608c;border-radius: 10px;margin-left:15px;margin-right:15px;height: 35px;display: table;width: 96%;">
+                <h1>
+                    <p style="vertical-align: middle;  margin: 5px;">
+						Gestión de asignación LM
+                    </p>
+                </h1>
             </div>
         </div>
+        <div class="record row-fluid panel_body">
+            <div class="span3 record-cell">
+                <div class="record-label">Posición Operativa</div>
+                <span>
+                    <span>
+                      <select class="span11" id="PosicionOperativa">
+                          {{#each lista_posicion_operativa}}
+                              <option value="{{@key}}" {{ifSelected @key ../filtros.PosicionOperativa}}>{{this}}</option>
+                          {{/each}}
+                      </select>
+					            <p class="help-block"></p>
+                    </span>
+                </span>
+            </div>
+            <div class="span3 record-cell">
+                <div class="record-label">Producto</div>
+                <span>
+                    <span>
+                    <select class="span11" id="Producto">
+                        {{#each lista_producto}}
+                            <option value="{{@key}}" {{ifSelected @key ../filtros.Producto}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+					               <p class="help-block"></p>
+                    </span>
+                </span>
+            </div>
+            <div class="span1 record-cell">
+                <div></div>
+                <span>
+                    <span>
+						<h1>Usuario</h1>
+                    </span>
+                </span>
+            </div>
+            <div class="span2 record-cell">
+                <div class="record-label">Nombre</div>
+                <span>
+                    <span>
+                        <input id="AgenteN" type="text" value="{{filtros.Nombre}}">
+                        <p class="help-block"></p>
+                    </span>
+                </span>
+            </div>
+            <div class="span2 record-cell">
+                <div class="record-label">Apellido</div>
+                <span>
+                    <span>
+						<input id="AgenteA" type="text" value="{{filtros.Apellidos}}">
+                        <p class="help-block"></p>
+                    </span>
+                </span>
+            </div>
+            <div class="span1 record-cell" style="margin-left:0px;">
+                <div class="record-label">&nbsp;</div>
+                <span>
+                    <span>
+                        <button class="btn btn-primary" id="btn_Buscar" type="button">Buscar<img
+                                        id='processing' style="display: none;" width="15" height="5"
+                                        src="custom/Levementum/images/icon_processing.gif"></button>
+                    </span>
+                </span>
+            </div>
+        </div>
+		{{#if listausuarios}}
+			<div class="row-fluid">
+				<table class="table">
+					<tr>
+						<td class="span3">
+							<label class="record-label" style="font-weight:bold">USUARIO</label>
+						</td>
+						<td class="span2">
+							<label class="record-label" style="font-weight:bold">PUESTO</label>
+						</td>
+						<td class="span2">
+							<label class="record-label" style="font-weight:bold">EQUIPO</label>
+						</td>
+            <td class="span3">
+							<label class="record-label" style="font-weight:bold">POSICIÓN OPERATIVA</label>
+						</td>
+            <td class="span2">
+							<label class="record-label" style="font-weight:bold">LÍMITE MÁXIMO</label>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="cuentasContainer row-fluid">
+			  <table class="table table-striped tablavet">
+				{{#each listausuarios}}
+					<tr>
+						<td class="span3">
+							<span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{nombre_completo_c}}</span>
+						</td>
+            <td class="span2">
+              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'> {{getUnifinListValue 'puestousuario_c_list' puestousuario_c}} </span>
+            </td>
+            <td class="span2">
+              <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'> {{getUnifinListValue 'equipo_list' equipo_c}} </span>
+            </td>
+            <td class="span3">
+							<select class="posicion_operativa select2 updatePO" multiple="multiple" style="width: 100%;" data-field="posicion_operativa">
+								{{#each ../lista_posicion_operativa}}
+									<option value="{{@key}}" {{ifMSelected @key ../posicion_operativa_c}}>{{this}}</option>
+								{{/each}}
+							</select>
+						</td>
+            <td class="span2">
+							<input type="text" class="limite_max updateL" placeholder="Límite máximo" value="{{limite_asignacion_lm_c}}" style="width:100%" data-field="limite_asignacion_lm_c"/>
+						</td>
+					</tr>
+				{{/each}}
+			  </table>
+			</div>
+			<div><p></p></div>
+      <table>
+				<br>
+				<tr>
+					<th>Total de registros encontrados: {{filtros.Total}}</th>
+          <td align="center"><input type="button" value="Guardar cambios" id="btn_guardar" class="btn btn-success" /></td>
+					<td></td>
+        </tr>
+			</table>
+		{{else}}
+			<div class="row-fluid hide notFound" style="color:gray;">
+				<div class="span12"><center>No se han encontrado registros</center></div>
+			</div>
+		{{/if}}
+		<textarea style="display: none" id="crossSeleccionados" value=""></textarea>
     </div>
-
-
-</div>
+{{/if}}

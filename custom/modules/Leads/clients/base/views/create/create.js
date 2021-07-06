@@ -18,7 +18,7 @@
         this.events['keydown [name=phone_mobile]'] = 'validaSoloNumerosTel';
         this.events['keydown [name=phone_home]'] = 'validaSoloNumerosTel';
         this.events['keydown [name=phone_work]'] = 'validaSoloNumerosTel';
-       
+
         this.model.addValidationTask('check_longDupTel', _.bind(this.validaLongDupTel, this));
         this.model.addValidationTask('check_TextOnly', _.bind(this.checkTextOnly, this));
         this.model.addValidationTask('change:email', _.bind(this.expmail, this));
@@ -137,8 +137,9 @@
         //Asesor Leasing:2, Director Leasing:5
         var puesto=App.user.attributes.puestousuario_c;
         var maximo_registros_list=App.lang.getAppListStrings('limite_maximo_asignados_list');
-        var maximo_registros=parseInt(maximo_registros_list["1"]);
-
+        var limitePersonal = (App.user.attributes.limite_asignacion_lm_c > 0) ? App.user.attributes.limite_asignacion_lm_c : 0;
+        var maximo_registros = (limitePersonal>0) ? limitePersonal : parseInt(maximo_registros_list["1"]);
+        
         if(this.total_asignados>maximo_registros && (puesto=='2' || puesto=='5')){
 
             app.alert.show("error_create_leads", {
@@ -229,7 +230,7 @@
                 'telefonos': telefonos,
                 'rfc': "",
             };
-            
+
             /*
             var params={
                 "nombre":"27 MICRAS INTERNACIONAL",
@@ -245,7 +246,7 @@
             */
 
             var urlValidaDuplicados = app.api.buildURL("validaDuplicado", '', {}, {});
-            
+
             App.alert.show('obteniendoDuplicados', {
                 level: 'process',
                 title: 'Cargando',
@@ -273,7 +274,7 @@
                         /**check whether the view already exists in the layout.
                          * If not we will create a new view and will add to the components list of the record layout
                          * */
-                
+
                         var quickCreateView = null;
                         if (!quickCreateView) {
                             /** Create a new view object */
@@ -292,9 +293,9 @@
                         /**triggers an event to show the pop up quick create view*/
                         this.layout.trigger("app:view:ValidaDuplicadoModal");
                     }
-                    
+
                     callback(null, fields, errors);
-                    
+
                 }, this)
             });
 
