@@ -255,7 +255,7 @@
                 success: _.bind(function (data) {
                     App.alert.dismiss('obteniendoDuplicados');
                     if(data.code=='200'){
-                        if(data.registros.length>0){
+                        if(!_.isEmpty(data.registros)){
                             self.duplicados=data.registros;
 
                             //formateando el nivel match
