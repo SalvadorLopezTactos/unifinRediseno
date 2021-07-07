@@ -291,6 +291,8 @@
         this.context.on('button:get_account_asesor:click', this.get_Account, this);
         this.context.on('button:send_account_asesor:click', this.set_Account, this);
 
+        this.context.on('button:open_negociador_quantico:click', this.open_negociador_quantico, this);
+
         /***************Validacion de Campos No viables en los Productos********************/
         this.model.addValidationTask('LeasingUP', _.bind(this.requeridosLeasingUP, this));
         this.model.addValidationTask('FactorajeUP', _.bind(this.requeridosFactorajeUP, this));
@@ -381,6 +383,13 @@
         }
         /**triggers an event to show the pop up quick create view*/
         this.layout.trigger("app:view:setAccountModal");
+    },
+
+    open_negociador_quantico:function(){
+        //Abrir nueva ventana del entrypoint del Negociador Quantico
+        var idCuenta = this.model.get('id');
+        window.open("#bwc/index.php?entryPoint=NegociadorQuantico&idPersona=" + idCuenta);
+
     },
 
     saveProdPLD: function (fields, errors, callback) {
