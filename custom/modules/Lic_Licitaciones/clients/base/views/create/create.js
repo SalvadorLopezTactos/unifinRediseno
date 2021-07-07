@@ -18,7 +18,7 @@
         if ((cuenta==""|| cuenta==null) && (lead==""|| lead==null)) {
             app.alert.show("cuentaFaltante", {
                 level: "error",
-                title: "No se puede guardar el registro sin un lead o cuenta asociada. Favor de verificar.",
+                title: "No se puede guardar el registro sin un lead o cuenta asociada, Favor de verificar.",
                 autoClose: false
             });
             errors['lic_licitaciones_accounts_name'] = errors['lic_licitaciones_accounts_name'] || {};
@@ -26,10 +26,10 @@
             errors['leads_lic_licitaciones_1_name'] = errors['leads_lic_licitaciones_1_name'] || {};
             errors['leads_lic_licitaciones_1_name'].required = true;
         }
-        if (cuenta!="" && lead !="") {
+        if (cuenta!="" && cuenta!=undefined && lead!="" && lead!=undefined) {
             app.alert.show("leadCuentaAsociada", {
                 level: "error",
-                title: "No se puede guardar el registro con un lead y cuenta diferentes. Favor de verificar.",
+                title: "No se puede registrar la licitación asociada a un lead y una cuenta distintas, Favor de verificar.",
                 autoClose: false
             });
             errors['lic_licitaciones_accounts_name'] = errors['lic_licitaciones_accounts_name'] || {};
