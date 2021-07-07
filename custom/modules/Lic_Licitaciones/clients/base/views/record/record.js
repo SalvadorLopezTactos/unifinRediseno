@@ -5,7 +5,7 @@
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
-       
+
         //Al dar click mandara a la vista de creacion correspondiente a la minuta
         this.context.on('button:btn_meet_button:click', this.CreaMeet,this);
         this.context.on('button:btn_call_button:click', this.CreaCall,this);
@@ -30,15 +30,18 @@
         this._super("_render");
         $('div[data-name=lic_licitaciones_accounts_name]').css("pointer-events", "none");
         $('div[data-name=leads_lic_licitaciones_1_name]').css("pointer-events", "none");
-        
+
     },
 
     CreaMeet:function(){
         var model=App.data.createBean('Meetings');
         var name=this.model.get('name');
-        //model.set('account_id_c', this.model.get('parent_id'));
-        model.set('parent_name', this.model.get('lic_licitaciones_accounts_name'));
-        model.set('parent_id', this.model.get('lic_licitaciones_accountsaccounts_ida'));
+        var parent_type = (this.model.get('lic_licitaciones_accounts_name')!='') ? 'Accounts':'Leads';
+        var parent_name= (parent_type=='Accounts') ? this.model.get('lic_licitaciones_accounts_name') : this.model.get('leads_lic_licitaciones_1_name');
+        var parent_id = (parent_type=='Accounts') ? this.model.get('lic_licitaciones_accountsaccounts_ida') : this.model.get('leads_lic_licitaciones_1leads_ida');
+        model.set('parent_type', parent_type);
+        model.set('parent_name', parent_name);
+        model.set('parent_id', parent_id);
         model.set('lic_licitaciones_meetings_1lic_licitaciones_ida',this.model.get('id'));
         model.set('lic_licitaciones_meetings_1_name',this.model.get('name'));
         model.set('name',"Reunión"+" "+name);
@@ -56,9 +59,13 @@
     CreaCall:function(){
         var model=App.data.createBean('Calls');
         var name=this.model.get('name');
+        var parent_type = (this.model.get('lic_licitaciones_accounts_name')!='') ? 'Accounts':'Leads';
+        var parent_name= (parent_type=='Accounts') ? this.model.get('lic_licitaciones_accounts_name') : this.model.get('leads_lic_licitaciones_1_name');
+        var parent_id = (parent_type=='Accounts') ? this.model.get('lic_licitaciones_accountsaccounts_ida') : this.model.get('leads_lic_licitaciones_1leads_ida');
+        model.set('parent_type', parent_type);
+        model.set('parent_name', parent_name);
+        model.set('parent_id', parent_id);
         model.set('lic_licitaciones_calls_1_name', this.model.get('name'));
-        model.set('parent_id', this.model.get('lic_licitaciones_accountsaccounts_ida'));
-        model.set('parent_name', this.model.get('lic_licitaciones_accounts_name'));
         model.set('lic_licitaciones_calls_1lic_licitaciones_ida',this.model.get('id'));
         model.set('name',"Llamada"+" "+name);
         app.drawer.open({
@@ -100,7 +107,7 @@
             $('[name="create_meet"]').hide();
             $('[name="create_call"]').hide();
         }
-        if (this.model.get('resultado_licitacion_c')=="1" && App.user.attributes.productos_c.includes('^1^')){
+        if (this.model.get('lic_licitaciones_accounts_name') != '' && this.model.get('lic_licitaciones_accounts_name') != null && this.model.get('resultado_licitacion_c')=="1" && App.user.attributes.productos_c.includes('^1^')){
             $('[name="create_pre"]').show();
         }else{
             $('[name="create_pre"]').hide();
@@ -109,10 +116,12 @@
 
     validacuenta: function (fields, errors, callback) {
         var cuenta=this.model.get('lic_licitaciones_accounts_name');
-        if (cuenta==""|| cuenta==null) {
+        var cuenta=this.model.get('lic_licitaciones_accounts_name');
+        var lead = this.model.get('leads_lic_licitaciones_1_name');
+        if ((cuenta==""|| cuenta==null) && (lead==""|| lead==null)) {
             app.alert.show("cuentaFaltante", {
                 level: "error",
-                title: "No se puede guardar el registro sin una cuenta asociada. Favor de verificar.",
+                title: "No se puede guardar el registro sin un lead o cuenta asociada. Favor de verificar.",
                 autoClose: false
             });
             errors['lic_licitaciones_accounts_name'] = errors['lic_licitaciones_accounts_name'] || {};
@@ -136,9 +145,9 @@
         callback(null, fields, errors);
 
     },
- 
+
     ocultarQuickCreate:function (){
         $('.subpanel-controls').addClass("hide");
     },
-   
+
 })
