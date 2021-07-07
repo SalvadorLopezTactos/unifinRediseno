@@ -26,7 +26,7 @@
             errors['leads_lic_licitaciones_1_name'] = errors['leads_lic_licitaciones_1_name'] || {};
             errors['leads_lic_licitaciones_1_name'].required = true;
         }
-        if (cuenta!="" && lead !="") {
+        if (cuenta!="" && cuenta!=undefined && lead!="" && lead!=undefined) {
             app.alert.show("leadCuentaAsociada", {
                 level: "error",
                 title: "No se puede guardar el registro con un lead y cuenta diferentes. Favor de verificar.",
