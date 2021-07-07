@@ -42,7 +42,7 @@
                 var limitePersonal = (App.user.attributes.limite_asignacion_lm_c > 0) ? App.user.attributes.limite_asignacion_lm_c : 0;
                 var maximo_registros = (limitePersonal>0) ? limitePersonal : parseInt(maximo_registros_list["1"]);
                 self.numero_registros = data.total_asignados;
-                if (data.total_asignados <= maximo_registros) { //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
+                if (data.total_asignados < maximo_registros) { //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
                     self.viewEnable = '1';
                     self.getLeadsAplazadosCancelados();
                 } else {
