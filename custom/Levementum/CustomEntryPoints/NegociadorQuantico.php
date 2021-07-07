@@ -34,10 +34,10 @@ class ApiCallQuantico
 
     }
 }
+
 global $current_user,$sugar_config;
-//$objGUID="36f736ec-89fa-441f-9cef-ac5458f9b629";
-//$objGUID=$current_user->id_active_directory_c;
-$objGUID="bddbd1e6-f582-450f-9761-9807afb56349";
+
+$objGUID=$current_user->id_active_directory_c;
 $url_token=$sugar_config['url_quantico_token'];
 $GLOBALS['log']->fatal("inicia CallQuantico");
 
