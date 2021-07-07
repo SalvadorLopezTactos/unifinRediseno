@@ -14,14 +14,17 @@
 
     validacuenta: function (fields, errors, callback) {
         var cuenta=this.model.get('lic_licitaciones_accounts_name');
-        if (cuenta==""|| cuenta==null) {
+        var lead = this.model.get('leads_lic_licitaciones_1_name');
+        if ((cuenta==""|| cuenta==null) && (lead==""|| lead==null)) {
             app.alert.show("cuentaFaltante", {
                 level: "error",
-                title: "No se puede guardar el registro sin una cuenta asociada. Favor de verificar.",
+                title: "No se puede guardar el registro sin un lead o cuenta asociada. Favor de verificar.",
                 autoClose: false
             });
             errors['lic_licitaciones_accounts_name'] = errors['lic_licitaciones_accounts_name'] || {};
             errors['lic_licitaciones_accounts_name'].required = true;
+            errors['leads_lic_licitaciones_1_name'] = errors['leads_lic_licitaciones_1_name'] || {};
+            errors['leads_lic_licitaciones_1_name'].required = true;
         }
         callback(null, fields, errors);
     },
