@@ -5776,8 +5776,8 @@
                         errorLM +="Responsable de Validación 1 <br>";
                         faltantelm += 1;
                     }
-                    if ( ($('.list_l_respval_2').select2('val') == null || $('.list_l_respval_2').select2('val') == "" || $('.list_l_respval_2').select2('val') == "0" || $('.list_l_respval_2').select2('val') == null)
-                        && ($('.list_l_respval_1').select2('val') == null || $('.list_l_respval_1').select2('val') == "" || $('.list_l_respval_1').select2('val') == "0") &&  $('.list_l_respval_2').select2('val') == $('.list_l_respval_1').select2('val')) {
+                    if ( ($('.list_l_respval_2').select2('val') != null || $('.list_l_respval_2').select2('val') != "" || $('.list_l_respval_2').select2('val') != "0" || $('.list_l_respval_2').select2('val') == null)
+                        && ($('.list_l_respval_1').select2('val') != null || $('.list_l_respval_1').select2('val') != "" || $('.list_l_respval_1').select2('val') != "0") &&  ($('.list_l_respval_2').select2('val') == $('.list_l_respval_1').select2('val'))) {
                         $('.list_l_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         $('.list_l_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         app.alert.show("Faltantes No viable - Lead Management", {
@@ -5927,8 +5927,8 @@
                     errorLM +="Responsable de Validación 1 <br>";
                 }
                  
-                if ( ($('.list_f_respval_2').select2('val') == null || $('.list_f_respval_2').select2('val') == "" || $('.list_f_respval_2').select2('val') == "0")
-                    && ($('.list_f_respval_1').select2('val') == null || $('.list_f_respval_1').select2('val') == "" || $('.list_f_respval_1').select2('val') == "0") &&  $('.list_l_respval_2').select2('val') == $('.list_l_respval_1').select2('val')) {
+                if ( ($('.list_f_respval_2').select2('val') != null || $('.list_f_respval_2').select2('val') != "" || $('.list_f_respval_2').select2('val') != "0")
+                    && ($('.list_f_respval_1').select2('val') != null || $('.list_f_respval_1').select2('val') != "" || $('.list_f_respval_1').select2('val') != "0") &&  ($('.list_l_respval_2').select2('val') == $('.list_l_respval_1').select2('val'))) {
                     $('.list_f_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                     $('.list_f_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                     app.alert.show("Faltantes No viable - Lead Management", {
@@ -6080,8 +6080,8 @@
                         errorLM +="Responsable de Validación 1 <br>";
                     }
 
-                    if ( ($('.list_ca_respval_2').select2('val') == null || $('.list_ca_respval_2').select2('val') == "" || $('.list_ca_respval_2').select2('val') == "0")
-                            && ($('.list_ca_respval_1').select2('val') == null || $('.list_ca_respval_1').select2('val') == "" || $('.list_ca_respval_1').select2('val') == "0") &&  $('.list_ca_respval_2').select2('val') == $('.list_ca_respval_1').select2('val')) {
+                    if ( ($('.list_ca_respval_2').select2('val') != null || $('.list_ca_respval_2').select2('val') != "" || $('.list_ca_respval_2').select2('val') != "0")
+                            && ($('.list_ca_respval_1').select2('val') != null || $('.list_ca_respval_1').select2('val') != "" || $('.list_ca_respval_1').select2('val') == "0") &&  ($('.list_ca_respval_2').select2('val') == $('.list_ca_respval_1').select2('val'))) {
                             $('.list_ca_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                             $('.list_ca_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                             app.alert.show("Faltantes No viable - Lead Management", {
@@ -6236,8 +6236,8 @@
                         errorLM +="Responsable de Validación 1 <br>";
                     }
 
-                    if ( ($('.list_fl_respval_2').select2('val') == null || $('.list_fl_respval_2').select2('val') == "" || $('.list_fl_respval_2').select2('val') == "0")
-                        && ($('.list_fl_respval_1').select2('val') == null || $('.list_fl_respval_1').select2('val') == "" || $('.list_fl_respval_1').select2('val') == "0") &&  $('.list_fl_respval_2').select2('val') == $('.list_fl_respval_1').select2('val')) {
+                    if ( ($('.list_fl_respval_2').select2('val') != null || $('.list_fl_respval_2').select2('val') != "" || $('.list_fl_respval_2').select2('val') != "0")
+                        && ($('.list_fl_respval_1').select2('val') != null || $('.list_fl_respval_1').select2('val') != "" || $('.list_fl_respval_1').select2('val') != "0") && ($('.list_fl_respval_2').select2('val') == $('.list_fl_respval_1').select2('val'))) {
                         $('.list_l_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         $('.list_fl_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                         app.alert.show("Faltantes No viable - Lead Management", {
@@ -6391,8 +6391,8 @@
                         errorLM +="Responsable de Validación 1 <br>";
                     }
 
-                    if ( ($('.list_u_respval_2').select2('val') == null || $('.list_u_respval_2').select2('val') == "" || $('.list_u_respval_2').select2('val') == "0")
-                    && ($('.list_u_respval_1').select2('val') == null || $('.list_u_respval_1').select2('val') == "" || $('.list_u_respval_1').select2('val') == "0") &&  $('.list_u_respval_2').select2('val') == $('.list_u_respval_1').select2('val')) {
+                    if ( ($('.list_u_respval_2').select2('val') != null || $('.list_u_respval_2').select2('val') != "" || $('.list_u_respval_2').select2('val') != "0")
+                    && ($('.list_u_respval_1').select2('val') != null || $('.list_u_respval_1').select2('val') != "" || $('.list_u_respval_1').select2('val') != "0") &&  ($('.list_u_respval_2').select2('val') == $('.list_u_respval_1').select2('val'))) {
                     $('.list_u_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                     $('.list_u_respval_1').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
                     app.alert.show("Faltantes No viable - Lead Management", {
@@ -6846,13 +6846,24 @@
 							success: _.bind(function (data1) {
 								if(data1.records.length > 0) {
                                     var bloqueo = false;
+                                    var razon = "";
+                                    var motivo = "";
                                     
                                     _.each(data1.records, function (valor, llave) {
-                                        if((data1.records[llave].razon != "" && data1.records[llave].razon == Productos[key].razon_c)
-                                            && (data1.records[llave].motivo != "" && data1.records[llave].motivo == Productos[key].motivo_c) 
+                                        razon = Productos[key].razon_c;
+                                        motivo = (Productos[key].motivo_c == null) ? "":Productos[key].motivo_c;
+
+                                        if(razon != "" && motivo == "" ){
+                                            if(data1.records[llave].razon == razon && data1.records[llave].bloquea) {
+                                                bloqueo = true;
+                                            }    
+                                        }
+                                        if(razon != "" && motivo != "" ){
+                                            if((data1.records[llave].razon == razon) && (data1.records[llave].motivo == motivo) 
                                             && data1.records[llave].bloquea) {
-                                            bloqueo = true;
-                                        }    
+                                                bloqueo = true;
+                                            }    
+                                        }
                                     });
                                     
                                     if( bloqueo) {
