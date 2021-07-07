@@ -726,7 +726,10 @@
         this.$(".record-cell[data-name='blank_space']").hide();
         $('[data-name="contacto_asociado_c"]').attr('style', 'pointer-events:none');
         //Ocultando campo de control que omite validación de duplicados
-		$('[data-name="omite_match_c"]').hide();
+        $('[data-name="omite_match_c"]').hide();
+        //Ocultando campo check de homonimo
+        $('[data-name="homonimo_c"]').hide();
+
     },
 
     fechaAsignacion: function () {
