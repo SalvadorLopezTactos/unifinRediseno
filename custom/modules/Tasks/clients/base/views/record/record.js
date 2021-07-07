@@ -322,7 +322,7 @@
 
     metodoAsignacionLM: function (fields, errors, callback) {
 
-        if (this.model.get('name') == "Solicitud de asignación de Lead - (Lead Management)") {
+        if (this.model.get('name') == "Solicitud de asignación de Lead/Cuenta - (Lead Management)") {
             
             if (this.model.get('status') == 'Completed') {
                 

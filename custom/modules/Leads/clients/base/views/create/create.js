@@ -136,11 +136,12 @@
         //Se restringe creación de Leads cuando ya se tienen más de 20 registros asignados a los usuarios
         //Asesor Leasing:2, Director Leasing:5
         var puesto=App.user.attributes.puestousuario_c;
+        var posicionOperativa = App.user.attributes.posicion_operativa_c;
         var maximo_registros_list=App.lang.getAppListStrings('limite_maximo_asignados_list');
         var limitePersonal = (App.user.attributes.limite_asignacion_lm_c > 0) ? App.user.attributes.limite_asignacion_lm_c : 0;
         var maximo_registros = (limitePersonal>0) ? limitePersonal : parseInt(maximo_registros_list["1"]);
-        
-        if(this.total_asignados>maximo_registros && (puesto=='2' || puesto=='5')){
+
+        if(this.total_asignados>=maximo_registros && posicionOperativa.includes("^3^")){
 
             app.alert.show("error_create_leads", {
                 level: "error",
@@ -223,12 +224,17 @@
                 }
             }
 
+            var rfc="";
+            if(this.model.get('rfc_c') != undefined && this.model.get('rfc_c') != ""){
+                rfc=this.model.get('rfc_c');
+            }
+
             //Parámetros para consumir servicio
             var params = {
                 'nombre': this.model.get('name'),
                 'correo': email,
                 'telefonos': telefonos,
-                'rfc': "",
+                'rfc': rfc,
             };
 
             /*
@@ -292,7 +298,7 @@
                             }
                             /**triggers an event to show the pop up quick create view*/
                             this.layout.trigger("app:view:ValidaDuplicadoModal");
-                        }  
+                        }
                     }
                     callback(null, fields, errors);
 
@@ -726,7 +732,10 @@
         this.$(".record-cell[data-name='blank_space']").hide();
         $('[data-name="contacto_asociado_c"]').attr('style', 'pointer-events:none');
         //Ocultando campo de control que omite validación de duplicados
-		$('[data-name="omite_match_c"]').hide();
+        $('[data-name="omite_match_c"]').hide();
+        //Ocultando campo check de homonimo
+        $('[data-name="homonimo_c"]').hide();
+
     },
 
     fechaAsignacion: function () {

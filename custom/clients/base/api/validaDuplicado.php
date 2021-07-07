@@ -183,10 +183,12 @@ class validaDuplicado extends SugarApi
             require_once("custom/Levementum/UnifinAPI.php");
             //Define petición
             //$servicioURI= 'http://192.168.150.231:5481/similarity/CRM';
-            $servicioURI = $sugar_config['similarity_api'].'/similarity/CRM';
+            $ambiente=$sugar_config['similarity_env'];
+            $servicioURI = $sugar_config['similarity_api'].'/similarity/';
             $peticion = array(
               "business_name" => $nombre,
-              "show_items" => "10"
+              "show_items" => "10",
+              "cnn_name"=>$ambiente
             );
 
             //Ejecuta petición de servicio

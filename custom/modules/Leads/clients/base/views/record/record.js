@@ -542,6 +542,9 @@
         $('[data-name="contacto_asociado_c"]').attr('style', 'pointer-events:none');
         //Oculta etiqueta de lead_direcciones
         this.$("div.record-label[data-name='lead_direcciones']").attr('style', 'display:none;');
+        //Ocultando campo check de homonimo
+        $('[data-name="homonimo_c"]').hide();
+
     },
 
     convert_Lead_to_Accounts: function () {
