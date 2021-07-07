@@ -26,6 +26,18 @@
             errors['leads_lic_licitaciones_1_name'] = errors['leads_lic_licitaciones_1_name'] || {};
             errors['leads_lic_licitaciones_1_name'].required = true;
         }
+        if (cuenta!="" && lead !="") {
+            app.alert.show("leadCuentaAsociada", {
+                level: "error",
+                title: "No se puede guardar el registro con un lead y cuenta diferentes. Favor de verificar.",
+                autoClose: false
+            });
+            errors['lic_licitaciones_accounts_name'] = errors['lic_licitaciones_accounts_name'] || {};
+            errors['lic_licitaciones_accounts_name'].required = true;
+            errors['leads_lic_licitaciones_1_name'] = errors['leads_lic_licitaciones_1_name'] || {};
+            errors['leads_lic_licitaciones_1_name'].required = true;
+        }
+
         callback(null, fields, errors);
     },
 
