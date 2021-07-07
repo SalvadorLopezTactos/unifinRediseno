@@ -540,6 +540,8 @@
         this._super("_render");
         this.$(".record-cell[data-name='blank_space']").hide();
         $('[data-name="contacto_asociado_c"]').attr('style', 'pointer-events:none');
+        //Oculta etiqueta de lead_direcciones
+        this.$("div.record-label[data-name='lead_direcciones']").attr('style', 'display:none;');
     },
 
     convert_Lead_to_Accounts: function () {

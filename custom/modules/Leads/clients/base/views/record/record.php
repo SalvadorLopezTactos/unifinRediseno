@@ -497,6 +497,18 @@ array (
                 'name' => 'omite_match_c',
                 'label' => 'LBL_OMITE_MATCH',
               ),
+              57 => 
+              array (
+                'name' => 'blank_space',
+                'label' => 'LBL_BLANK_SPACE',
+              ),
+              58 => 
+              array (
+                'name' => 'lead_direcciones',
+                'studio' => 'visible',
+                'label' => 'LBL_LEAD_DIRECCIONES',
+                'span' => 12,
+              ),
             ),
           ),
           2 => 
