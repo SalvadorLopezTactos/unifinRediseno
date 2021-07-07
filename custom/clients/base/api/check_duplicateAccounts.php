@@ -589,8 +589,9 @@ SITE;
                 $queryResult = $db->query($query);
                 while($row = $db->fetchByAssoc($queryResult))
                 {
+                    
                     $beanlicitacion = BeanFactory::retrieveBean('Lic_Licitaciones', $row['id'], array('disable_row_level_security' => true));
-                    $beanlicitacion->lic_licitaciones_accountsaccounts_ida  = $acct->id;
+                    $beanlicitacion->lic_licitaciones_accountsaccounts_ida  = $idCuenTa;
                     $GLOBALS['log']->fatal("guarda licitacion a la cuenta.");
                     $beanlicitacion->save();
                 }
