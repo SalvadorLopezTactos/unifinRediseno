@@ -223,12 +223,17 @@
                 }
             }
 
+            var rfc="";
+            if(this.model.get('rfc_c') != undefined && this.model.get('rfc_c') != ""){
+                rfc=this.model.get('rfc_c');
+            }
+
             //Parámetros para consumir servicio
             var params = {
                 'nombre': this.model.get('name'),
                 'correo': email,
                 'telefonos': telefonos,
-                'rfc': "",
+                'rfc': rfc,
             };
 
             /*
