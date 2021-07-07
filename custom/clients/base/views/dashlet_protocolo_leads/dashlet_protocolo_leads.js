@@ -98,7 +98,7 @@
                         if (idAsesor != "" && idAsesor != null) {
 
                             var bodyTask = {
-                                "name": "Solicitud de asignación de Lead - (Lead Management)",
+                                "name": "Solicitud de asignación de Lead/Cuenta - (Lead Management)",
                                 "date_start": jsonDate,
                                 "date_due": fechaFin,
                                 "priority": "High",
