@@ -9,6 +9,7 @@
     events: {
         'click #btn-cancel-save': 'closeModalCheckDuplicado',
         'click #btn-guardar': 'omiteMatchGuardaRegistro',
+        'click .closeModalDuplicadosAccs':'closeModalDuplicadosAccs'
     },
 
     initialize: function (options) {
@@ -71,6 +72,10 @@
             self_modal_accs.model.set('tct_homonimo_chk_c',1);
         }
         self_modal_accs.options.context.trigger('button:save_button:click');
+    },
+
+    closeModalDuplicadosAccs:function(){
+        this._disposeView();
     },
 
     _render: function () {
