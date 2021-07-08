@@ -43,13 +43,11 @@
 		account.fetch({
       success: _.bind(function (modelo) {
         //Asignamos el promotor del producto para la operación
-        var idrm = modelo.get('promotorrm_c');
-				var idrm1 = modelo.get('user_id8_c');
-				//console.log(idrm);
-				//console.log(idrm1);
-        if(idrm1 !='' && idrm1 != undefined && self.noAsignado != idrm1){
-  				self.model.set('user_id1_c', idrm1);
-  				self.model.set('usuario_rm', idrm);
+        var idrm = (modelo.get('promotorrm_c')!= undefined) ? modelo.get('promotorrm_c') : '';
+				var idrm1 = (modelo.get('user_id8_c') != undefined) ? modelo.get('user_id8_c') : '' ;
+				self.model.set('user_id1_c', idrm1);
+        self.model.set('usuario_rm', idrm);
+        if(idrm1 !='' && self.noAsignado != idrm1){
           self.$('[data-name="usuario_rm"]').attr('style',"pointer-events:none");
         }
       }, this)
