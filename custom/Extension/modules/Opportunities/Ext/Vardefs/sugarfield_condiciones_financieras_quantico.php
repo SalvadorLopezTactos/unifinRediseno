@@ -7,6 +7,6 @@ $dictionary['Opportunity']['fields']['condiciones_financieras_quantico']['duplic
 $dictionary['Opportunity']['fields']['condiciones_financieras_quantico']['duplicate_merge_dom_value']='1';
 $dictionary['Opportunity']['fields']['condiciones_financieras_quantico']['merge_filter']='disabled';
 $dictionary['Opportunity']['fields']['condiciones_financieras_quantico']['calculated']=false;
-$dictionary['Opportunity']['fields']['condiciones_financieras_quantico']['dependency']='not(equal($date_entered,""))';
+$dictionary['Opportunity']['fields']['condiciones_financieras_quantico']['dependency']='and(equal(getDropdownValue("switch_inicia_proceso_list","ejecuta"),"0"),not(equal($date_entered,"")))';
 
  ?>
