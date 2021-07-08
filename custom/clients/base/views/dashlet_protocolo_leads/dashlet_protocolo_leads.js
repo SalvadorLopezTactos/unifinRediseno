@@ -18,6 +18,7 @@
         self = this;
         this.viewEnable = false;
         this.numero_registros = 0;
+        this.limite_asignacion = 0;
         this.getRegistrosAsignados();
 
         //this.getLeadsAplazadosCancelados();
@@ -42,6 +43,7 @@
                 var limitePersonal = (App.user.attributes.limite_asignacion_lm_c > 0) ? App.user.attributes.limite_asignacion_lm_c : 0;
                 var maximo_registros = (limitePersonal>0) ? limitePersonal : parseInt(maximo_registros_list["1"]);
                 self.numero_registros = data.total_asignados;
+                self.limite_asignacion = maximo_registros;
                 if (data.total_asignados < maximo_registros) { //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
                     self.viewEnable = '1';
                     self.getLeadsAplazadosCancelados();
@@ -197,6 +199,10 @@
                                         level: 'success',
                                         messages: mensaje,
                                     });
+                                    self.numero_registros++
+                                    self.viewEnable = (self.numero_registros >= self.limite_asignacion) ? 0 : self.viewEnable;
+                                    self.render();
+
                                 }, this)
                             })
                         } else {
@@ -208,6 +214,7 @@
                             });
 
                             app.alert.dismiss('asignaFromDB');
+                            self.render();
                         }
 
                     }, this)
@@ -288,6 +295,8 @@
 
                             var indice = self.searchIndex(self.registros, id);
                             self.registros.splice(indice, 1);
+                            self.numero_registros++
+                            self.viewEnable = (self.numero_registros >= self.limite_asignacion) ? 0 : self.viewEnable;
                             self.render();
                         })
                     });
@@ -326,6 +335,8 @@
 
                             var indice = self.searchIndex(self.registros, id);
                             self.registros.splice(indice, 1);
+                            self.numero_registros++
+                            self.viewEnable = (self.numero_registros >= self.limite_asignacion) ? 0 : self.viewEnable;
                             self.render();
                         })
                     });
