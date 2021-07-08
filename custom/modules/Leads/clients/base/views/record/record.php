@@ -497,6 +497,18 @@ array (
                 'name' => 'omite_match_c',
                 'label' => 'LBL_OMITE_MATCH',
               ),
+              57 => 
+              array (
+                'name' => 'blank_space',
+                'label' => 'LBL_BLANK_SPACE',
+              ),
+              58 => 
+              array (
+                'name' => 'lead_direcciones',
+                'studio' => 'visible',
+                'label' => 'LBL_LEAD_DIRECCIONES',
+                'span' => 12,
+              ),
             ),
           ),
           2 => 
@@ -596,6 +608,47 @@ array (
               ),
               13 => 
               array (
+              ),
+              14 => 
+              array (
+                'name' => 'productos_interes_c',
+                'label' => 'LBL_PRODUCTOS_INTERES_C',
+              ),
+              15 => 'opportunity_amount',
+              16 => 
+              array (
+                'name' => 'plazo_c',
+                'label' => 'LBL_PLAZO_C',
+              ),
+              17 => 
+              array (
+                'related_fields' => 
+                array (
+                  0 => 'currency_id',
+                  1 => 'base_rate',
+                ),
+                'name' => 'pago_mensual_estimado_c',
+                'label' => 'LBL_PAGO_MENSUAL_ESTIMADO_C',
+              ),
+              18 => 
+              array (
+                'name' => 'medios_contacto_deseado_c',
+                'label' => 'LBL_MEDIOS_CONTACTO_DESEADO_C',
+              ),
+              19 => 
+              array (
+                'name' => 'medio_preferido_contacto_c',
+                'label' => 'LBL_MEDIO_PREFERIDO_CONTACTO_C',
+              ),
+              20 => 
+              array (
+                'name' => 'dia_contacto_c',
+                'label' => 'LBL_DIA_CONTACTO_C',
+              ),
+              21 => 
+              array (
+                'name' => 'hora_contacto_c',
+                'label' => 'LBL_HORA_CONTACTO_C',
               ),
             ),
           ),

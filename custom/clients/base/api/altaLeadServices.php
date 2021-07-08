@@ -539,6 +539,7 @@ class altaLeadServices extends SugarApi
         $bean_Lead->phone_work = $dataOrigen['phone_work'];
         $bean_Lead->detalle_plataforma_c = $dataOrigen['GLID'];
         $bean_Lead->assigned_user_id = $dataOrigen['assigned_user_id'];
+        /** Seccion de Digital Inbound **/
         $bean_Lead->id_landing_c = $dataOrigen['id_landing_c'];
         $bean_Lead->lead_source_c = $dataOrigen['lead_source_c'];
         $bean_Lead->facebook_pixel_c = $dataOrigen['facebook_pixel_c'];
@@ -546,6 +547,14 @@ class altaLeadServices extends SugarApi
         $bean_Lead->keyword_c = $dataOrigen['keyword_c'];
         $bean_Lead->campana_c = $dataOrigen['campana_c'];
         $bean_Lead->compania_c = $dataOrigen['compania_c'];
+        $bean_Lead->productos_interes_c = $dataOrigen['productos_interes_c'];
+        $bean_Lead->opportunity_amount = $dataOrigen['opportunity_amount'];
+        $bean_Lead->plazo_c = $dataOrigen['plazo_c'];
+        $bean_Lead->pago_mensual_estimado_c = $dataOrigen['pago_mensual_estimado_c'];
+        $bean_Lead->medios_contacto_deseado_c = $dataOrigen['medios_contacto_deseado_c'];
+        $bean_Lead->medio_preferido_contacto_c = $dataOrigen['medio_preferido_contacto_c'];
+        $bean_Lead->dia_contacto_c = $dataOrigen['dia_contacto_c'];
+        $bean_Lead->hora_contacto_c = $dataOrigen['hora_contacto_c'];
         /** Seccion de Contacto **/
         $bean_Lead->contacto_nombre_c = $dataOrigen['contacto_nombre_c'];
         $bean_Lead->contacto_apellidop_c = $dataOrigen['contacto_apellidop_c'];
