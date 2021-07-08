@@ -74,24 +74,24 @@ class GetDireccionesCP extends SugarApi
   co.name                                                 AS nameColonia
 FROM dire_codigopostal cp
   RIGHT JOIN dire_codigopostal_dire_municipio_c cp_m
-    ON cp_m.dire_codigopostal_dire_municipiodire_codigopostal_idb = cp.id
+    ON cp_m.dire_codigopostal_dire_municipiodire_codigopostal_idb = cp.id and cp_m.deleted=0
   RIGHT JOIN dire_municipio m
-    ON m.id = cp_m.dire_codigopostal_dire_municipiodire_municipio_ida
+    ON m.id = cp_m.dire_codigopostal_dire_municipiodire_municipio_ida and m.deleted=0
   RIGHT JOIN dire_municipio_dire_estado_c m_e
-    ON m_e.dire_municipio_dire_estadodire_municipio_idb = m.id
+    ON m_e.dire_municipio_dire_estadodire_municipio_idb = m.id and m_e.deleted=0
   RIGHT JOIN dire_estado e
-    ON e.id = m_e.dire_municipio_dire_estadodire_estado_ida
+    ON e.id = m_e.dire_municipio_dire_estadodire_estado_ida and e.deleted=0
   RIGHT JOIN dire_estado_dire_pais_c e_p
-    ON e_p.dire_estado_dire_paisdire_estado_idb = e.id
+    ON e_p.dire_estado_dire_paisdire_estado_idb = e.id and e_p.deleted=0
   RIGHT JOIN dire_pais p
-    ON p.id = e_p.dire_estado_dire_paisdire_pais_ida
+    ON p.id = e_p.dire_estado_dire_paisdire_pais_ida and p.deleted=0
    right join dire_ciudad_dire_estado_c c_e
-  	on c_e.dire_ciudad_dire_estadodire_estado_ida = e.id
+  	on c_e.dire_ciudad_dire_estadodire_estado_ida = e.id and c_e.deleted=0
   right join dire_ciudad c
-   	on c.id = c_e.dire_ciudad_dire_estadodire_ciudad_idb
+   	on c.id = c_e.dire_ciudad_dire_estadodire_ciudad_idb and c.deleted=0
   RIGHT JOIN dire_colonia co
   -- on co.codigo_postal = cp.name
-    ON co.id LIKE concat(cp_m.dire_codigopostal_dire_municipiodire_municipio_ida, cp.name, '%')
+    ON co.id LIKE concat(cp_m.dire_codigopostal_dire_municipiodire_municipio_ida, cp.name, '%') and co.deleted=0
 WHERE cp.name = '{$cp}'";
 
         $result = $GLOBALS['db']->query($query);
