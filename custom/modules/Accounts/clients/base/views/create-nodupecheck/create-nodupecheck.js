@@ -44,7 +44,7 @@
         this.Oproductos = [];
         this.Oproductos.productos = [];
 
-        this.enableDuplicateCheck = true;
+        //this.enableDuplicateCheck = true;
 
         //Funcion que quita los años futuros y menores a -5 del año actual
         this.quitaanos();
@@ -128,7 +128,7 @@
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('Guarda_campos_auto_potencial', _.bind(this.savepotauto, this));
 
-        this.enableDuplicateCheck = true;
+        //this.enableDuplicateCheck = true;
 
 
 		/*RFC_ValidatePadron

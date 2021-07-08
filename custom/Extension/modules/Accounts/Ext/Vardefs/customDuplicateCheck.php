@@ -5,11 +5,4 @@
  * Date: 6/9/2015
  * Time: 10:42 AM
  */
-$dictionary['Account']['duplicate_check'] = array(
-    'enabled' => false,
-    'UnifinFieldDuplicateCheck' => array(
-        'field1' => 'clean_name',
-        'field2' => 'rfc',
-        'field3' => 'name'
-    )
-);
+$dictionary['Account']['duplicate_check']['enabled']=false;
