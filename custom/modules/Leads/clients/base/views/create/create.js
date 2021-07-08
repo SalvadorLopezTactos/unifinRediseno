@@ -274,6 +274,12 @@
                             errors['modal_duplicados'] = errors['modal_duplicados'] || {};
                             errors['modal_duplicados'].custom_message1 = true;
 
+                            app.alert.show("posibles_coincidencias", {
+                                level: "error",
+                                title: "Se han identificado posibles duplicados. Favor de validar",
+                                autoClose: false
+                            });
+
                             //Mandamos a llamar el popup custom
                             if (Modernizr.touch) {
                                 app.$contentEl.addClass('content-overflow-visible');
