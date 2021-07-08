@@ -1,81 +1,53 @@
 <style>
-
-    .modal-header_cstm h3 {
-        font-size: 16px;
-        font-weight: normal;
-		justify-content: center;
-		align-items: center;
-    }
-
-	.modal-header_cstm {
-        background: #0679c8;
-        color: #ffff;
-        padding: 1px;
-		justify-content: center;
-		align-items: center;
-		border-color: #021741;
-		text-align: center;
-		height: 48px;
-    }
-
-    .modal-body_cstm {
-        padding: 18px 40px 16px;
-		font-size: 14px;
-		display: block;
-    }
-
-    .fa-book {
-        color: #866500;
-    }
-
-    .modal_cstm {
-        position: absolute;
-        padding-top: 0px;
-        padding-bottom: 0px;
+    .modal {
+        position: fixed; /* Stay in place */
+        padding-top: 100px; /* Location of the box */
+        padding-bottom: 100px;
         top: 0;
-        overflow: auto;
-		border-color: #021741;
-		color: #555;
-        display: block;
-		width: auto;
-		height: auto;
-		 overflow: hidden;
+        left:0;
+        /* width: 100%; /* Full width */
+        /*height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     }
 
-    .modal-backdrop {
-        /* bug fix - no overlay */
-        display: flex;
+    /* Modal Content */
+    .modal-content {
+        position: relative;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 1;
+        border: 1px solid #888;
+        width: 98%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s
     }
 
-    .form-horizontal {
-        display: inline-block;
+    .modal-header {
+        padding: .5px 0px;
+        background-color: #21618C;
+        color: white;
+        text-align: center;
     }
-	
-	.modal-footer_cstm {
-		border-top: 1px solid #021741;
-        /*background: #021741;*/
-        color: #555;
-        padding: 1px;
-		justify-content: center;
-		border-color: #021741;
-		width: 100%;
-		height: 35px;
-		justify-content: center;
-		
-    }
-	
-	.btn-esn{
-		text-align: center;
-		display: inline-block !important;
-		padding: 1px 1px;
-		margin: 0;
-		width: 50%;
-		color: #555;
-		font-size: 13px;
-		background: #faf8f7;
-		height: 100%;
-	}
 
+    .modal-body {
+        padding: .5px 0px;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .modal-footer {
+        padding: 2px 16px;
+        bottom: auto;
+        background-color: #fefefe;
+        color: #ffffff;
+        font-size: 12px;
+        text-align: center;
+    }
 </style>
 
 <script>
@@ -83,37 +55,42 @@
     $select.select2();
 </script>
 
-<div class="modal modal_cstm " id="ValidaDuplicadoModal" tabindex="-1" role="dialog">
-    <div class="modal-header_cstm">
-        <span class="close closeModalDuplicadosLead" tabindex="-1">×</span>
-        <h3><b>Posibles coincidencias</b></h3>
-    </div>
-	<div class="modal-body_cstm">
-		<table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">Nivel match</th>
-                    <th scope="col">Módulo</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">RFC</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each duplicados}}
-                    <tr>
-                        <td scope="col">{{nivelMatch}}</td>
-                        <td scope="col">{{modulo}}</td>
-                        <td scope="col">
-                            <a href="#{{moduloLink}}/{{id}}" target="_blank">{{nombre}}</a>
-                        </td>
-                        <td scope="col">{{rfc}}</td>
-                    </tr>
-                {{/each}}
-            </tbody>
-        </table>
-    </div>
-    <div class="modal-footer_cstm" style="display: inline-flex;">
-		<button class="span6 btn btn-warning" id="btn-cancel-save">Coincide, No Guardar</button>
-        <button class="span6 btn btn-success" id="btn-guardar">{{textoBotonGuardar}}</button>
-    </div>
+<div id="myModalDuplicadoLead" class="row-fluid">
+    <!-- Modal content -->
+  <div class="modal span12 " style="width:100%;height:100%">
+      <div class="modal-content" style="margin:auto; width:50%">
+          <div class="modal-header">
+              <span class="close closeModalDuplicadosLead" tabindex="-1">×</span>
+              <h3><b>Posibles coincidencias</b></h3>
+          </div>
+          <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                          <th scope="col">Nivel match</th>
+                          <th scope="col">Módulo</th>
+                          <th scope="col">Nombre</th>
+                          <th scope="col">RFC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each duplicados}}
+                        <tr>
+                            <td scope="col">{{nivelMatch}}</td>
+                            <td scope="col">{{modulo}}</td>
+                            <td scope="col">
+                                <a href="#{{moduloLink}}/{{id}}" target="_blank">{{nombre}}</a>
+                            </td>
+                            <td scope="col">{{rfc}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+          </div>
+          <div class="modal-footer">
+              <button class="span6 btn btn-warning" id="btn-cancel-save">Coincide, No Guardar</button>
+              <button class="span6 btn btn-success" id="btn-guardar">{{textoBotonGuardar}}</button>
+          </div>
+      </div>
+  </div>
 </div>
