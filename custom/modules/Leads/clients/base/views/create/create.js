@@ -40,11 +40,11 @@
     _cleanRegFiscal: function () {
 
         if (this.model.get('regimen_fiscal_c') == '3') {
-            
+
             this.model.set('nombre_c', '');
             this.model.set('apellido_paterno_c', '');
             this.model.set('apellido_materno_c', '');
-            
+
         } else {
             this.model.set('nombre_empresa_c', '');
         }
@@ -145,7 +145,7 @@
 
     checkCreateRecord:function(fields, errors, callback){
         //Obteniendo el puesto del usuario
-        //Se restringe creación de Leads cuando ya se tienen más de 20 registros asignados a los usuarios 
+        //Se restringe creación de Leads cuando ya se tienen más de 20 registros asignados a los usuarios
         //Asesor Leasing:2, Director Leasing:5
         var puesto=App.user.attributes.puestousuario_c;
         var maximo_registros_list=App.lang.getAppListStrings('limite_maximo_asignados_list');
@@ -623,7 +623,7 @@
         }else{
             this._super("cancel");
         }
-        
+
     },
 
     _render: function (options) {
@@ -648,7 +648,7 @@
             mm = '0' + mm
         }
         today = yyyy + '-' + mm + '-' + dd;
-    
+
         if (puestoUsuario == '2' || puestoUsuario == '5') {
             this.model.set('fecha_asignacion_c',today);
         }
@@ -659,7 +659,7 @@
         if (this.model.get("leads_leads_1_right").id != "" && this.model.get("leads_leads_1_right").id != undefined) {
             // console.log("Activa check Contacto asociado create");
             this.model.set('contacto_asociado_c', true);
-        
+
         } else {
             // console.log("Desactiva check Contacto asociado create");
             this.model.set('contacto_asociado_c', false);
@@ -668,9 +668,9 @@
 
     metodo_asignacion_lm_lead: function() {
         if(this.createMode){
-            
-            var posicionOperativa = App.user.attributes.posicion_operativa_c; //Posición Operativa - Asesor
-            
+
+            var posicionOperativa = (App.user.attributes.posicion_operativa_c == undefined)? '' : App.user.attributes.posicion_operativa_c ; //Posición Operativa - Asesor
+
             if (posicionOperativa.includes('3')){
                 //METODO DE ASIGNACION LM - CREADO POR ASESOR
                 this.model.set('metodo_asignacion_lm_c','2');
