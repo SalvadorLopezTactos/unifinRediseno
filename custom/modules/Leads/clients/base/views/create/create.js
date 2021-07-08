@@ -781,7 +781,7 @@
     metodo_asignacion_lm_lead: function() {
         if(this.createMode){
 
-            var posicionOperativa = App.user.attributes.posicion_operativa_c; //Posición Operativa - Asesor
+            var posicionOperativa = (App.user.attributes.posicion_operativa_c == undefined)? '' : App.user.attributes.posicion_operativa_c ; //Posición Operativa - Asesor
 
             if (posicionOperativa.includes('3')){
                 //METODO DE ASIGNACION LM - CREADO POR ASESOR
