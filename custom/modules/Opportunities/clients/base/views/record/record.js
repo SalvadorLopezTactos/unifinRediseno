@@ -332,11 +332,6 @@
             this.$('div[data-name=ri_usuario_bo_c]').show();
         }
 
-        //Oculta Crédito Estructurado
-        if (this.model.get('producto_financiero_c') != '43') {
-            this.$('div[data-panelname=LBL_RECORDVIEW_PANEL4').hide();
-        }
-
         //this.evaluaCampoSolicitudVobo();
         //this.evaluaCampoEnviarNotificacion();
         if (this.model.get('producto_financiero_c') == "" || this.model.get('producto_financiero_c') == 0) {
@@ -741,7 +736,7 @@
         tipoProdArr['1'] = 'AP';
         tipoProdArr['4'] = 'FF';
         tipoProdArr['3'] = 'CA';
-        
+
         //var usuarioProducto = tipoProdArr[App.user.attributes.tipodeproducto_c];
         var usuarioProducto = this.model.get('tipo_producto_c');
         var producto = "";
@@ -759,7 +754,7 @@
         if (usuarioProducto == "CA") {
             producto = "Crédito Automotriz";
         }
-       
+
         //Recupera cuenta asociada
         var producto_financiero = this.model.get('producto_financiero_c');
         var cuentaId = this.model.get('account_id');
@@ -1080,6 +1075,17 @@
                 errors['monto_c'] = errors['monto_c'] || {};
                 errors['monto_c'].required = true;
             }
+            //Validación Crédito Corto Plazo
+            if (this.model.get('producto_financiero_c') == '78' && (parseFloat(this.model.get('monto_c'))<500000 || parseFloat(this.model.get('monto_c'))>10000000) ) {
+                delete errors.monto_c;
+                errors['monto_c'] = errors['monto_c'] || {};
+                errors['monto_c'].required = true;
+                app.alert.show("monto_corto_plazo", {
+                    level: "error",
+                    title: "El monto de línea debe ser mayor a $500,000.00 y menor a $10,000,000.00",
+                    autoClose: false
+                });
+            }
 
             if (parseFloat(this.model.get('amount')) <= 0 && this.model.get('tipo_operacion_c') == '1' && this.model.get('tipo_producto_c') != "7" &&
                 this.model.get('admin_cartera_c') != true) {
@@ -1343,7 +1349,7 @@
                     if (solicitud_cf.oFinanciera.condicion.length == 0) {
                         errors[$(".addCondicionFinanciera")] = errors['condiciones_financieras'] || {};
                         errors[$(".addCondicionFinanciera")].required = true;
-    
+
                         $('.condiciones_financieras').css('border-color', 'red');
                         app.alert.show("CondicionFinanciera requerida", {
                             level: "error",
@@ -1369,7 +1375,7 @@
                         if (cfQuantico.FinancialTermGroupResponseList.length == 0) {
                             errors[$(".addCondicionFinancieraQuantico")] = errors['addCondicionFinancieraQuantico'] || {};
                             errors[$(".addCondicionFinancieraQuantico")].required = true;
-        
+
                             $('.CFPoliticaQ').css('border-color', 'red');
                             app.alert.show("CondicionFinancieraQuantico requerida", {
                                 level: "error",
@@ -1381,7 +1387,7 @@
 
                         errors[$(".addCondicionFinancieraQuantico")] = errors['addCondicionFinancieraQuantico'] || {};
                         errors[$(".addCondicionFinancieraQuantico")].required = true;
-        
+
                         $('.CFPoliticaQ').css('border-color', 'red');
                         app.alert.show("CondicionFinancieraQuantico requerida", {
                             level: "error",
@@ -1397,7 +1403,7 @@
     },
 
     condicionesFinancierasIncrementoCheck: function (fields, errors, callback) {
-        
+
         var valorSwitchUni2=App.lang.getAppListStrings('switch_inicia_proceso_list')['ejecuta'];
         if(valorSwitchUni2=='1'){
             if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
@@ -1406,7 +1412,7 @@
                         // console.log("contRI = 0");
                         errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};
                         errors[$(".add_incremento_CondicionFinanciera")].required = true;
-    
+
                         $('.condiciones_financieras_incremento_ratificacion').css('border-color', 'red');
                         app.alert.show("CondicionFinanciera requerida", {
                             level: "error",
@@ -1416,7 +1422,7 @@
                     } else if (contRI.oFinancieraRI.ratificacion.length >= 1) {
                         // console.log("contRI > 1");
                         contRI.model.set('condiciones_financieras_incremento_ratificacion', contRI.oFinancieraRI.ratificacion);
-    
+
                     }
                 }
             }
@@ -2833,7 +2839,7 @@
         var fecha = yyyy + '-' + mm + '-' + dd + 'T' + hour + ':' + min + ':' + secs + '-0' + zona + ':00';
         this.model.set("fecha_validacion_c", fecha);
         //this.model.save(),
-       
+
         var userprodprin = this.model.get('tipo_producto_c');
         app.api.call('GET', app.api.buildURL('Accounts/' + this.model.get('account_id')), null, {
             success: _.bind(function (cuenta) {
@@ -2846,10 +2852,10 @@
                             var tipoProducto = Productos[key].tipo_producto;
                             if(tipoProducto == userprodprin){
                                 idProdM = Productos[key].id;
-                              
+
                                         var textmsg = '';
                                         var tipom = "";
-                                        
+
                                         /****************************************/
                                         self.model.save(null, {
                                             success: function (model, response) {
@@ -2878,18 +2884,18 @@
                                             }
                                         });
                                         /****************************************/
-                                                        
+
                             }
                         });
                     },
                         error: function (e) {
                             throw e;
                         }
-                    });  
+                    });
 
             }, self),
-        });                
-        
+        });
+
     },
     noauthsol: function () {
         this.model.set("vobo_dir_c", false);
@@ -3381,13 +3387,13 @@
         }
     },
 
-    //Función para validar que el asesor RM sea realmente un asesor RM 
+    //Función para validar que el asesor RM sea realmente un asesor RM
     validaAsesorRM: function (fields, errors, callback) {
         var asesorRM=this.model.get('user_id1_c');
         if(asesorRM!="" && this.model.get('tipo_producto_c')!='13'){
             app.api.call('GET', app.api.buildURL('Infouser/' + asesorRM), null, {
                 success: _.bind(function (data) {
-    
+
                     if (data != "") {
                         if (!data.productos_c.includes("^11^")&& data.user_name!="SinGestor") {
                                 app.alert.show("error_asesorRM", {

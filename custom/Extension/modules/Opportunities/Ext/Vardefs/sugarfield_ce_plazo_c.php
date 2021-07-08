@@ -1,5 +1,5 @@
 <?php
- // created: 2020-12-15 17:43:31
+ // created: 2021-07-08 14:18:11
 $dictionary['Opportunity']['fields']['ce_plazo_c']['labelValue']='Plazo';
 $dictionary['Opportunity']['fields']['ce_plazo_c']['full_text_search']=array (
   'enabled' => '0',
@@ -7,6 +7,6 @@ $dictionary['Opportunity']['fields']['ce_plazo_c']['full_text_search']=array (
   'searchable' => false,
 );
 $dictionary['Opportunity']['fields']['ce_plazo_c']['enforced']='';
-$dictionary['Opportunity']['fields']['ce_plazo_c']['dependency']='';
+$dictionary['Opportunity']['fields']['ce_plazo_c']['dependency']='equal($producto_financiero_c,"43")';
 
  ?>

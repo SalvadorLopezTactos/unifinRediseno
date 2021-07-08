@@ -114,6 +114,10 @@ class IntegracionQuantico
                 $body["FinancialTermGroupResponse"] = $jsonCFQuantico->FinancialTermGroupResponseList;
 
             }
+            //Para Crédito Corto plazo
+            if ($bean->producto_financiero_c=='78') {
+                $body["BusinessAmount"] = $bean->monto_gpo_emp_c;
+            }
 
       			//Valida si se tiene Administración de Cartera y se añaden campos extras al body
       			if($bean->admin_cartera_c==1) {
