@@ -1917,7 +1917,7 @@
                                 level: "error",
                                 title: "Se han identificado posibles duplicados. Favor de validar",
                                 autoClose: false
-                            })
+                            });
 
                             //Mandamos a llamar el popup custom
                             if (Modernizr.touch) {
