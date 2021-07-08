@@ -136,7 +136,7 @@
         //Se restringe creación de Leads cuando ya se tienen más de 20 registros asignados a los usuarios
         //Asesor Leasing:2, Director Leasing:5
         var puesto=App.user.attributes.puestousuario_c;
-        var posicionOperativa = App.user.attributes.posicion_operativa_c;
+        var posicionOperativa = (App.user.attributes.posicion_operativa_c == undefined) ? '' : App.user.attributes.posicion_operativa_c;
         var maximo_registros_list=App.lang.getAppListStrings('limite_maximo_asignados_list');
         var limitePersonal = (App.user.attributes.limite_asignacion_lm_c > 0) ? App.user.attributes.limite_asignacion_lm_c : 0;
         var maximo_registros = (limitePersonal>0) ? limitePersonal : parseInt(maximo_registros_list["1"]);
