@@ -62,3 +62,4 @@ $mod_strings['LBL_SEGURO_UNI2'] = 'Uni2';
 $mod_strings['LBL_TIPO_CLIENTE'] = 'Tipo de Cliente';
 $mod_strings['LBL_PARTICIPA_KAM'] = 'Participación KAM';
 $mod_strings['LBL_TIPO_CUENTA'] = 'Tipo Cuenta';
+$mod_strings['LBL_FECHA_RESOLUCION'] = 'Fecha de Resolución';
