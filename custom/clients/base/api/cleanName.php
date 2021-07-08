@@ -130,7 +130,7 @@ class cleanName extends SugarApi
                 }
             }
             $cleanName = preg_replace('!\s+!', ' ', $cleanName);
-            $cleanName = trim($cleanName);
+            $cleanName=trim($cleanName);
             $status = '200';
         } catch (Exception $e) {
             //Error al procesar petición
