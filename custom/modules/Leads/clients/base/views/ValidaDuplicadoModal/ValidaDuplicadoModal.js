@@ -9,6 +9,7 @@
     events: {
         'click #btn-cancel-save': 'closeModalCheckDuplicado',
         'click #btn-guardar': 'omiteMatchGuardaRegistro',
+        'click .closeModalDuplicadosLead': 'closeModalDuplicadosLead'
     },
 
     initialize: function (options) {
@@ -74,6 +75,10 @@
             self_modal.model.set('omite_match_c',1);
         }
         self_modal.options.context.trigger('button:save_button:click');
+    },
+
+    closeModalDuplicadosLead:function(){
+        this._disposeView();
     },
 
     _render: function () {
