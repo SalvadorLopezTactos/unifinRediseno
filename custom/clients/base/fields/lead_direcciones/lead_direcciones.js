@@ -35,10 +35,6 @@
         options = options || {};
         options.def = options.def || {};
         lead_dir = this;
-        this.lDirecciones = [];
-        this.lDirecciones.direccion = [];
-        this.prev_lDirecciones = [];
-        this.prev_lDirecciones.prev_direccion = [];
         this._super('initialize', [options]);
         this.principal = 1;
         //Declaración de variables
@@ -73,37 +69,6 @@
 
     _render: function () {
         this._super("_render");
-
-        // if (this.accesoFiscal == 0 && this.model.get('tipo_registro_cuenta_c') != 4 && this.cont_render == 0) {
-        //     var auxindicador = new Object();
-        //     for (var [key, value] of Object.entries(this.def.listIndicador)) {
-        //         if (key != "2") {
-        //             auxindicador[key] = value;
-        //         }
-        //     }
-        //     //Permite edición para personas
-        //     try {
-        //         if (this.lDirecciones != undefined) {
-        //             if (this.lDirecciones.direccion != undefined) {
-        //                 for (var indexDir = 0; indexDir < this.lDirecciones.direccion.length; indexDir++) {
-        //                     if (this.lDirecciones.direccion[indexDir].indicadorSeleccionados.includes('^2^')) {
-        //                         this.lDirecciones.direccion[indexDir].bloqueado = 1;
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     } catch (e) {
-        //         console.log(e);
-        //     }
-        //     this.cont_render = 1;
-        //     this.def.listIndicador = auxindicador;
-        //     this.nuevaDireccion.listIndicador = this.def.listIndicador;
-        //     this.render();
-        // } else {
-        //     this.def.listIndicador = App.lang.getAppListStrings('dir_indicador_unique_list');
-        //     this.nuevaDireccion.listIndicador = this.def.listIndicador;
-        //     this.cont_render = 0;
-        // }
     },
 
     getInfoAboutCP: function (evt) {
@@ -541,7 +506,7 @@
 
         //Validación de campos
         if (this.lDirecciones == undefined) {
-            this.lDirecciones = lead_dir.lDirecciones;
+            this.lDirecciones = contexto_lead.lDirecciones;
         }
 
         //Tipo
@@ -724,10 +689,6 @@
         }
     },
 
-    /**
-     * Establece campo original de Tipo de Dirección depende el valor del campo multiselect
-     * @param  {object} evt, Objeto que contiene información del evento
-     */
     updateValueTipoMultiselect: function (evt) {
         //Aplica estilo
         //  this.$('[data-field="multiTipoNew"].multiTipoNew').select2({
@@ -751,10 +712,6 @@
         this.nuevaDireccion.tipoSeleccionados = '^' + tipoSeleccionados.replace(/,/gi, "^,^") + '^';
     },
 
-    /**
-     * Establece campo original de Indicador depende el valor del campo multiselect
-     * @param  {object} evt, Objeto que contiene información del evento
-    */
     updateValueIndicadorMultiselect: function (evt) {
         //Aplica estilo
         // this.$('[data-field="multiIndicadorNew"].multiIndicadorNew').select2({
@@ -1128,17 +1085,15 @@
             }
 
             //Validación 2:
-            // if (this.model.get("tipo_registro_cuenta_c") == "3" || this.model.get("subtipo_registro_cuenta_c") == "8" || this.model.get("subtipo_registro_cuenta_c") == "9") {
-            //     if (cDireccionFiscal == 0 || cDireccionCorrs == 0) {
-            //         app.alert.show('multiple_fiscal', {
-            //             level: 'error',
-            //             autoClose: true,
-            //             messages: "Se requiere de al menos una direcci\u00F3n fiscal y una de correspondencia.",
-            //         });
-            //         errors['lead_direcciones_corr_fiscal'] = errors['lead_direcciones_corr_fiscal'] || {};
-            //         errors['lead_direcciones_corr_fiscal'].required = true;
-            //     }
-            // }
+            if (cDireccionFiscal == 0 || cDireccionCorrs == 0) {
+                app.alert.show('multiple_fiscal', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: "Se requiere de al menos una direcci\u00F3n fiscal y una de correspondencia.",
+                });
+                errors['lead_direcciones_corr_fiscal'] = errors['lead_direcciones_corr_fiscal'] || {};
+                errors['lead_direcciones_corr_fiscal'].required = true;
+            }
 
             //Validación 3: Si existe más de 1 dirección Administración regresa error y muestra alerta
             if (cDireccionAdmin > 1) {
@@ -1166,7 +1121,7 @@
                 this.render();
             }
         }, this);
-    },   
+    },
 
     updateValueCalle: function (evt) {
         //Recupera valor
@@ -1278,10 +1233,6 @@
         this.lDirecciones.direccion[index].numext = numExt;
     },
 
-    /**
-     * Actualiza Número interior de dirección existente
-     * @param  {object} evt, Objeto que contiene información del evento
-    */
     updateNumIntDE: function (evt) {
         //Recupera valor
         var inputs = this.$('.numIntExisting'),
@@ -1293,11 +1244,6 @@
         this.lDirecciones.direccion[index].numint = numInt;
     },
 
-
-    /**
-     * Actualiza Tipo de dirección existente en modelo
-     * @param  {object} evt, Objeto que contiene información del evento
-    */
     updateValueTipoMultiselectDE: function (evt) {
         //Recupera valor
         var inputs = this.$('[data-field="multi_tipo_existing"].multi_tipo_existing'),
@@ -1318,10 +1264,6 @@
         this.lDirecciones.direccion[index].tipoSeleccionados = '^' + tipoSeleccionados.replace(/,/gi, "^,^") + '^';
     },
 
-    /**
-     * Establece el valor del campo indicador para dirección existente en modelo
-     * @param  {object} evt, Objeto que contiene información del evento
-    */
     updateValueIndicadorMultiselectDE: function (evt) {
         //Recupera valor seleccionado
         var inputs = this.$('[data-field="multi1_n_existing"].multi1_n_existing'),
@@ -1343,7 +1285,6 @@
         this.lDirecciones.direccion[index].indicadorSeleccionados = '^' + indicadorSeleccionados.replace(/,/gi, "^,^") + '^';
         var res = indicadorSeleccionados.split(",");
         var bloqueado = (res.indexOf('2') != -1) ? 1 : 0;
-        // bloqueado = (this.accesoFiscal > 0 || this.model.get('tipo_registro_cuenta_c') == 4 || this.model.get('tipo_registro_cuenta_c') == 5) ? 0 : bloqueado;
         this.lDirecciones.direccion[index].bloqueado = bloqueado;
         this.render();
         document.getElementsByClassName("multi1_n_existing")[index].focus();

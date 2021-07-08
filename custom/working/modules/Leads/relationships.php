@@ -371,6 +371,103 @@ $relationships = array (
     'is_custom' => false,
     'from_studio' => false,
   ),
+  'bc_survey_leads' => 
+  array (
+    'name' => 'bc_survey_leads',
+    'true_relationship_type' => 'many-to-many',
+    'relationships' => 
+    array (
+      'bc_survey_leads' => 
+      array (
+        'lhs_module' => 'bc_survey',
+        'lhs_table' => 'bc_survey',
+        'lhs_key' => 'id',
+        'rhs_module' => 'Leads',
+        'rhs_table' => 'leads',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'bc_survey_leads_c',
+        'join_key_lhs' => 'bc_survey_leadsbc_survey_ida',
+        'join_key_rhs' => 'bc_survey_leadsleads_idb',
+      ),
+    ),
+    'table' => 'bc_survey_leads_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'len' => '1',
+        'default' => '0',
+        'required' => true,
+      ),
+      'bc_survey_leadsbc_survey_ida' => 
+      array (
+        'name' => 'bc_survey_leadsbc_survey_ida',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+      'bc_survey_leadsleads_idb' => 
+      array (
+        'name' => 'bc_survey_leadsleads_idb',
+        'type' => 'varchar',
+        'len' => 36,
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'bc_survey_leadsspk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'bc_survey_leads_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'bc_survey_leadsbc_survey_ida',
+          1 => 'bc_survey_leadsleads_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'bc_survey',
+    'lhs_table' => 'bc_survey',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Leads',
+    'rhs_table' => 'leads',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'bc_survey_leads_c',
+    'join_key_lhs' => 'bc_survey_leadsbc_survey_ida',
+    'join_key_rhs' => 'bc_survey_leadsleads_idb',
+    'readonly' => true,
+    'relationship_name' => 'bc_survey_leads',
+    'rhs_subpanel' => NULL,
+    'lhs_subpanel' => NULL,
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'from_studio' => false,
+  ),
   'leads_c5515_uni_chattigo_1' => 
   array (
     'name' => 'leads_c5515_uni_chattigo_1',
@@ -481,103 +578,6 @@ $relationships = array (
     'deleted' => false,
     'relationship_only' => false,
     'for_activities' => false,
-  ),
-  'bc_survey_leads' => 
-  array (
-    'name' => 'bc_survey_leads',
-    'true_relationship_type' => 'many-to-many',
-    'relationships' => 
-    array (
-      'bc_survey_leads' => 
-      array (
-        'lhs_module' => 'bc_survey',
-        'lhs_table' => 'bc_survey',
-        'lhs_key' => 'id',
-        'rhs_module' => 'Leads',
-        'rhs_table' => 'leads',
-        'rhs_key' => 'id',
-        'relationship_type' => 'many-to-many',
-        'join_table' => 'bc_survey_leads_c',
-        'join_key_lhs' => 'bc_survey_leadsbc_survey_ida',
-        'join_key_rhs' => 'bc_survey_leadsleads_idb',
-      ),
-    ),
-    'table' => 'bc_survey_leads_c',
-    'fields' => 
-    array (
-      'id' => 
-      array (
-        'name' => 'id',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'date_modified' => 
-      array (
-        'name' => 'date_modified',
-        'type' => 'datetime',
-      ),
-      'deleted' => 
-      array (
-        'name' => 'deleted',
-        'type' => 'bool',
-        'len' => '1',
-        'default' => '0',
-        'required' => true,
-      ),
-      'bc_survey_leadsbc_survey_ida' => 
-      array (
-        'name' => 'bc_survey_leadsbc_survey_ida',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-      'bc_survey_leadsleads_idb' => 
-      array (
-        'name' => 'bc_survey_leadsleads_idb',
-        'type' => 'varchar',
-        'len' => 36,
-      ),
-    ),
-    'indices' => 
-    array (
-      0 => 
-      array (
-        'name' => 'bc_survey_leadsspk',
-        'type' => 'primary',
-        'fields' => 
-        array (
-          0 => 'id',
-        ),
-      ),
-      1 => 
-      array (
-        'name' => 'bc_survey_leads_alt',
-        'type' => 'alternate_key',
-        'fields' => 
-        array (
-          0 => 'bc_survey_leadsbc_survey_ida',
-          1 => 'bc_survey_leadsleads_idb',
-        ),
-      ),
-    ),
-    'lhs_module' => 'bc_survey',
-    'lhs_table' => 'bc_survey',
-    'lhs_key' => 'id',
-    'rhs_module' => 'Leads',
-    'rhs_table' => 'leads',
-    'rhs_key' => 'id',
-    'relationship_type' => 'many-to-many',
-    'join_table' => 'bc_survey_leads_c',
-    'join_key_lhs' => 'bc_survey_leadsbc_survey_ida',
-    'join_key_rhs' => 'bc_survey_leadsleads_idb',
-    'readonly' => true,
-    'relationship_name' => 'bc_survey_leads',
-    'rhs_subpanel' => NULL,
-    'lhs_subpanel' => NULL,
-    'is_custom' => true,
-    'deleted' => false,
-    'relationship_only' => false,
-    'for_activities' => false,
-    'from_studio' => false,
   ),
   'leads_leads_1' => 
   array (
@@ -909,6 +909,117 @@ $relationships = array (
     'relationship_name' => 'tasks_leads_1',
     'rhs_subpanel' => 'default',
     'lhs_subpanel' => 'ForLeadsTasks',
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+  ),
+  'leads_lic_licitaciones_1' => 
+  array (
+    'name' => 'leads_lic_licitaciones_1',
+    'true_relationship_type' => 'one-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'leads_lic_licitaciones_1' => 
+      array (
+        'lhs_module' => 'Leads',
+        'lhs_table' => 'leads',
+        'lhs_key' => 'id',
+        'rhs_module' => 'Lic_Licitaciones',
+        'rhs_table' => 'lic_licitaciones',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'leads_lic_licitaciones_1_c',
+        'join_key_lhs' => 'leads_lic_licitaciones_1leads_ida',
+        'join_key_rhs' => 'leads_lic_licitaciones_1lic_licitaciones_idb',
+      ),
+    ),
+    'table' => 'leads_lic_licitaciones_1_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'id',
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'default' => 0,
+      ),
+      'leads_lic_licitaciones_1leads_ida' => 
+      array (
+        'name' => 'leads_lic_licitaciones_1leads_ida',
+        'type' => 'id',
+      ),
+      'leads_lic_licitaciones_1lic_licitaciones_idb' => 
+      array (
+        'name' => 'leads_lic_licitaciones_1lic_licitaciones_idb',
+        'type' => 'id',
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'idx_leads_lic_licitaciones_1_pk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'idx_leads_lic_licitaciones_1_ida1_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'leads_lic_licitaciones_1leads_ida',
+          1 => 'deleted',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'idx_leads_lic_licitaciones_1_idb2_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'leads_lic_licitaciones_1lic_licitaciones_idb',
+          1 => 'deleted',
+        ),
+      ),
+      3 => 
+      array (
+        'name' => 'leads_lic_licitaciones_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'leads_lic_licitaciones_1lic_licitaciones_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Leads',
+    'lhs_table' => 'leads',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Lic_Licitaciones',
+    'rhs_table' => 'lic_licitaciones',
+    'rhs_key' => 'id',
+    'relationship_type' => 'one-to-many',
+    'join_table' => 'leads_lic_licitaciones_1_c',
+    'join_key_lhs' => 'leads_lic_licitaciones_1leads_ida',
+    'join_key_rhs' => 'leads_lic_licitaciones_1lic_licitaciones_idb',
+    'readonly' => true,
+    'relationship_name' => 'leads_lic_licitaciones_1',
+    'rhs_subpanel' => 'default',
+    'lhs_subpanel' => NULL,
     'is_custom' => true,
     'deleted' => false,
     'relationship_only' => false,
@@ -1269,26 +1380,6 @@ $relationships = array (
     'is_custom' => false,
     'from_studio' => false,
   ),
-  'campaign_leads' => 
-  array (
-    'name' => 'campaign_leads',
-    'lhs_module' => 'Campaigns',
-    'lhs_table' => 'campaigns',
-    'lhs_key' => 'id',
-    'rhs_module' => 'Leads',
-    'rhs_table' => 'leads',
-    'rhs_key' => 'campaign_id',
-    'relationship_type' => 'one-to-many',
-    'readonly' => true,
-    'relationship_name' => 'campaign_leads',
-    'rhs_subpanel' => 'default',
-    'lhs_subpanel' => NULL,
-    'deleted' => false,
-    'relationship_only' => false,
-    'for_activities' => false,
-    'is_custom' => false,
-    'from_studio' => false,
-  ),
   'contact_leads' => 
   array (
     'name' => 'contact_leads',
@@ -1349,13 +1440,33 @@ $relationships = array (
     'is_custom' => false,
     'from_studio' => false,
   ),
-  'leads_lic_licitaciones_1' => 
+  'campaign_leads' => 
   array (
-    'rhs_label' => 'Licitaciones',
+    'name' => 'campaign_leads',
+    'lhs_module' => 'Campaigns',
+    'lhs_table' => 'campaigns',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Leads',
+    'rhs_table' => 'leads',
+    'rhs_key' => 'campaign_id',
+    'relationship_type' => 'one-to-many',
+    'readonly' => true,
+    'relationship_name' => 'campaign_leads',
+    'rhs_subpanel' => 'default',
+    'lhs_subpanel' => NULL,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+    'is_custom' => false,
+    'from_studio' => false,
+  ),
+  'leads_dire_direccion_1' => 
+  array (
+    'rhs_label' => 'Direcciones',
     'lhs_label' => 'Leads',
     'rhs_subpanel' => 'default',
     'lhs_module' => 'Leads',
-    'rhs_module' => 'Lic_Licitaciones',
+    'rhs_module' => 'dire_Direccion',
     'relationship_type' => 'one-to-many',
     'readonly' => true,
     'deleted' => false,
@@ -1363,6 +1474,6 @@ $relationships = array (
     'for_activities' => false,
     'is_custom' => false,
     'from_studio' => true,
-    'relationship_name' => 'leads_lic_licitaciones_1',
+    'relationship_name' => 'leads_dire_direccion_1',
   ),
 );

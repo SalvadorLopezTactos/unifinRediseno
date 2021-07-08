@@ -33,6 +33,14 @@
         this.fechaAsignacion();
         this.model.on("change:leads_leads_1_right", _.bind(this._checkContactoAsociado, this));
         this.metodo_asignacion_lm_lead();
+
+        //Direcciones
+        contexto_lead = this;
+        this.lDirecciones = [];
+        this.lDirecciones.direccion = [];
+        this.prev_lDirecciones = [];
+        this.prev_lDirecciones.prev_direccion = [];
+        this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
     },
 
     delegateButtonEvents: function() {
@@ -735,6 +743,8 @@
         $('[data-name="omite_match_c"]').hide();
         //Ocultando campo check de homonimo
         $('[data-name="homonimo_c"]').hide();
+        //Oculta etiqueta de lead_direcciones
+        this.$("div.record-label[data-name='lead_direcciones']").attr('style', 'display:none;');
 
     },
 
@@ -783,4 +793,11 @@
             }
         }
     },
+
+    setCustomFields: function (fields, errors, callback) {
+        //Direcciones
+        this.model.set('lead_direcciones', this.lDirecciones.direccion);
+
+        callback(null, fields, errors);
+    },    
 })

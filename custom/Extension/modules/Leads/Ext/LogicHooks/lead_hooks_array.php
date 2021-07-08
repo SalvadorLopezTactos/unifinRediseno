@@ -29,3 +29,11 @@ $hook_array['after_save'][] = Array(
     'Lead_Hooks',
     're_asign_meetings'
 );
+
+$hook_array['after_save'][] = Array(
+    5,
+    'Manage Related Direcciones',//Just a quick comment about the logic of it
+    'custom/modules/Leads/lead_direcciones_class.php', //path to the logic hook
+    'Direcciones_Hooks', // name of the class
+    'lead_direcciones' // name of the function.
+);
