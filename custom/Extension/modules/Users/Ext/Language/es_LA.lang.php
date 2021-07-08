@@ -63,3 +63,5 @@ $mod_strings['LBL_RESET_LEADCANCEL_C'] = 'Restablecer Leads Cancelados';
 $mod_strings['LBL_EDITVIEW_PANEL5'] = 'Nuevo Panel 5';
 $mod_strings['LBL_VALIDA_VTA_CRUZADA'] = 'Validación de referencia de venta cruzada Uniclick';
 $mod_strings['LBL_POSICION_OPERATIVA'] = 'Posición Operativa';
+$mod_strings['LBL_LIMITE_ASIGNACION_LM'] = 'Límite asignación LM';
+$mod_strings['LBL_GESTION_LM'] = 'Gestión LM';

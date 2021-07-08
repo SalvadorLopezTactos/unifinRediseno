@@ -540,6 +540,9 @@
         this._super("_render");
         this.$(".record-cell[data-name='blank_space']").hide();
         $('[data-name="contacto_asociado_c"]').attr('style', 'pointer-events:none');
+        //Ocultando campo check de homonimo
+        $('[data-name="homonimo_c"]').hide();
+
     },
 
     convert_Lead_to_Accounts: function () {

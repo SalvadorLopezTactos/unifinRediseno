@@ -611,7 +611,7 @@
         this.model.fields['tipo_registro_cuenta_c'].options = new_options;
         if(Object.keys(new_options).length == 0) alert("No es posible crear Cuentas");
 
-        this.model.on('change:name', this.cleanName, this);
+        //this.model.on('change:name', this.cleanName, this);
         /*
          //Ocultar Div "Prospecto Contactado"
          this.$('div[data-name=tct_prospecto_contactado_chk_c]').hide();
@@ -633,6 +633,10 @@
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL18']").hide();
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
         this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
+        this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
+
+        //Validation task que muestra modal sobre duplicados
+        this.model.addValidationTask('check_duplicados_account', _.bind(this.check_duplicados_account, this));
     },
 
     /** BEGIN CUSTOMIZATION:
@@ -1799,64 +1803,160 @@
         callback(null, fields, errors);
     },
 
-    cleanName: function () {
-        //Recupera variables
-        var original_name = this.model.get("name");
-        var list_check = app.lang.getAppListStrings('validacion_duplicados_list');
-        var simbolos = app.lang.getAppListStrings('validacion_simbolos_list');
-        //Define arreglos para guardar nombre de cuenta
-        var clean_name_split = [];
-        var clean_name_split_full = [];
-        clean_name_split = original_name.split(" ");
-        //Elimina simbolos: Ej. . , -
-        _.each(clean_name_split, function (value, key) {
-            _.each(simbolos, function (simbolo, index) {
-                var clean_value = value.split(simbolo).join('');
-                if (clean_value != value) {
-                    clean_name_split[key] = clean_value;
-                }
-            });
-        });
-        clean_name_split_full = App.utils.deepCopy(clean_name_split);
-
-        if (this.model.get('tipodepersona_c') == "Persona Moral") {
-            //Elimina tipos de sociedad: Ej. SA, de , CV...
-            var totalVacio = 0;
-            _.each(clean_name_split, function (value, key) {
-                _.each(list_check, function (index, nomenclatura) {
-                    var upper_value = value.toUpperCase();
-                    if (upper_value == nomenclatura) {
-                        var clean_value = upper_value.replace(nomenclatura, "");
-                        clean_name_split[key] = clean_value;
-                    }
+    cleanName: function (fields, errors, callback) {
+        if(_.isEmpty(errors)){
+            //Recupera variables
+            var postData = {
+                'name': this.model.get("name")
+            };
+            //Consume servicio
+            if(this.model.get("name").trim()!='') {
+                var serviceURI = app.api.buildURL("getCleanName", '', {}, {});
+                App.api.call("create", serviceURI, postData, {
+                    success: _.bind(function (data) {
+                        if (data['status']=='200') {
+                            this.model.set('clean_name', data['cleanName']);
+                        }else{
+                            //Error
+                            app.alert.show('error_clean_name', {
+                                level: 'error',
+                                autoClose: false,
+                                messages: data['error']
+                            });
+                            //Agrega errores
+                            errors['clean_name'] = errors['clean_name']|| {};
+                            errors['clean_name'].required = true;
+                        }
+                        callback(null, fields, errors);
+                    }, this)
                 });
-            });
-            //Genera clean_name con arreglo limpio
-            var clean_name = "";
-            _.each(clean_name_split, function (value, key) {
-                clean_name += value;
-                //Cuenta elementos vacíos
-                if (value == "") {
-                    totalVacio++;
-                }
-            });
-
-            //Valida que exista más de un elemento, caso cotrarioe establece para clean_name valores con tipo de sociedad
-            if ((clean_name_split.length - totalVacio) <= 1) {
-                clean_name = "";
-                _.each(clean_name_split_full, function (value, key) {
-                    clean_name += value;
+            }else{
+                //Error
+                app.alert.show('error_clean_name', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: 'Se requiere ingresar nombre de la cuenta'
                 });
+                //Agrega errores
+                errors['clean_name'] = errors['clean_name'] || {};
+                errors['clean_name'].required = true;
+                callback(null, fields, errors);
             }
-            clean_name = clean_name.toUpperCase();
-            this.model.set("clean_name", clean_name);
-        } else {
-            original_name = original_name.replace(/\s+/gi, '');
-            original_name = original_name.toUpperCase();
-            this.model.set("clean_name", original_name);
+        }else{
+          callback(null, fields, errors);
         }
     },
 
+    check_duplicados_account:function (fields, errors, callback) {
+        
+        if(Object.keys(errors).length==0 && this.options.context.flagGuardarAcc!="1"){
+            var telefonos=[];
+            //Obtener los telefonos
+            if(this.oTelefonos.telefono.length>0){
+                for (let index = 0; index < this.oTelefonos.telefono.length; index++) {
+                    telefonos.push(this.oTelefonos.telefono[index].name);  
+                }
+            }
+
+            var email="";
+            if(this.model.attributes.email !=undefined){
+                if(this.model.attributes.email.length>0){
+                    email=this.model.attributes.email[0].email_address;
+                }
+            }
+
+            var rfc="";
+            if(this.model.get('rfc_c') != undefined && this.model.get('rfc_c') != ""){
+                rfc=this.model.get('rfc_c');
+            }
+            
+            //Parámetros para consumir servicio
+            var params = {
+                'nombre': this.model.get('name'),
+                'correo': email,
+                'telefonos': telefonos,
+                'rfc': rfc,
+            };
+            
+            /*
+            var params={
+                //"nombre":"27 MICRAS INTERNACIONAL",
+                "nombre":"GRUASDELVALLESANMARTIN",
+                "correo":"GGONZALEZ@UNIFIN.COM.MX",
+                "telefonos":[
+                    "12345643",
+                    "323232344",
+                    "5579389732"
+                ],
+                "rfc":""
+            };
+            */
+
+            var urlValidaDuplicados = app.api.buildURL("validaDuplicado", '', {}, {});
+            
+            App.alert.show('obteniendoDuplicados', {
+                level: 'process',
+                title: 'Cargando',
+            });
+
+            app.api.call("create", urlValidaDuplicados, params, {
+                success: _.bind(function (data) {
+                    App.alert.dismiss('obteniendoDuplicados');
+                    if(data.code=='200'){
+                        if(!_.isEmpty(data.registros)){
+                            self.duplicados=data.registros;
+
+                            //formateando el nivel match
+                            for (var property in self.duplicados) {
+                                self.duplicados[property].coincidencia= self.duplicados[property].coincidencia;
+                            }
+                            errors['modal_duplicadosacc'] = errors['modal_duplicadosacc'] || {};
+                            errors['modal_duplicadosacc'].custom_message1 = true;
+
+                            app.alert.show("posibles_coincidencias_acc", {
+                                level: "error",
+                                title: "Se han identificado posibles duplicados. Favor de validar",
+                                autoClose: false
+                            })
+
+                            //Mandamos a llamar el popup custom
+                            if (Modernizr.touch) {
+                                app.$contentEl.addClass('content-overflow-visible');
+                            }
+                            /**check whether the view already exists in the layout.
+                             * If not we will create a new view and will add to the components list of the record layout
+                             * */
+                    
+                            var quickCreateView = null;
+                            if (!quickCreateView) {
+                                /** Create a new view object */
+                                quickCreateView = app.view.createView({
+                                    context: this.context,
+                                    errors:errors,
+                                    registros:self.duplicados,
+                                    name: 'ValidaDuplicadoAccModal',
+                                    layout: this.layout,
+                                    module: 'Accounts'
+                                });
+                                /** add the new view to the components list of the record layout*/
+                                this.layout._components.push(quickCreateView);
+                                this.layout.$el.append(quickCreateView.$el);
+                            }
+                            /**triggers an event to show the pop up quick create view*/
+                            this.layout.trigger("app:view:ValidaDuplicadoAccModal");
+                        }
+                    }
+                    
+                    callback(null, fields, errors);
+                    
+                }, this)
+            });
+
+
+        }else{
+            callback(null, fields, errors);
+        }
+    },
 
     changeLabelMarketing: function () {
         console.log("Cambio de Origen");
@@ -3289,7 +3389,7 @@
                 //ValidacionRFC
                 var rfc=this.model.get('rfc_c');
                 rfc= rfc.substring(4, 10);
-            
+
                 if (rfc!=complete) {
                     app.alert.show("Error_validacion_RFC", {
                         level: "error",
@@ -3299,7 +3399,7 @@
                     errors['Error_validacion_RFC'] = errors['Error_validacion_RFC'] || {};
                     errors['Error_validacion_RFC'].required = true;
                 }
-            } 
+            }
         }else{
             if ((this.model.get('rfc_c')!=undefined && this.model.get('rfc_c')!="") && this.model.get('rfc_c') != 'XXX010101XXX' && (this.model.get('fechaconstitutiva_c')!=undefined && this.model.get('fechaconstitutiva_c')!="")){
                 //Obtiene valor de la fecha y resconstruye
@@ -3314,7 +3414,7 @@
                 //ValidacionRFC
                 var rfc=this.model.get('rfc_c');
                 rfc= rfc.substring(3, 9);
-            
+
                 if (rfc!=complete) {
                     app.alert.show("Error_validacion_RFC_Moral", {
                         level: "error",
@@ -3324,7 +3424,7 @@
                     errors['Error_validacion_RFC_Moral'] = errors['Error_validacion_RFC_Moral'] || {};
                     errors['Error_validacion_RFC_Moral'].required = true;
                 }
-            }    
+            }
         }
         callback(null, fields, errors);
     },

@@ -322,11 +322,12 @@
 
     metodoAsignacionLM: function (fields, errors, callback) {
 
-        if (this.model.get('name') == "Solicitud de asignación de Lead - (Lead Management)") {
+        if (this.model.get('name') == "Solicitud de asignación de Lead/Cuenta - (Lead Management)") {
             
             if (this.model.get('status') == 'Completed') {
                 
-                if((this.model.get('parent_type') == "Accounts" || this.model.get('parent_type') == "Leads") && this.model.get('parent_id') == ""){
+                if((this.model.get('parent_type') == "Accounts" || this.model.get('parent_type') == "Leads" || this.model.get('parent_type') == "") && 
+                this.model.get('parent_id') == ""){
                     
                     app.alert.show('message-metodo-lm', {
                         level: 'error',
