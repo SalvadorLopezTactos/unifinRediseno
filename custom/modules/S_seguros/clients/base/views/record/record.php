@@ -603,18 +603,14 @@ array (
               array (
                 'name' => 'tipo_cliente_c',
                 'label' => 'LBL_TIPO_CLIENTE',
+                'span' => 12,
               ),
               1 => 
-              array (
-                'name' => 'fecha_resolucion_c',
-                'label' => 'LBL_FECHA_RESOLUCION',
-              ),
-              2 => 
               array (
                 'name' => 'description',
                 'span' => 12,
               ),
-              3 => 
+              2 => 
               array (
                 'name' => 'date_modified_by',
                 'readonly' => true,
@@ -639,13 +635,13 @@ array (
                 ),
                 'span' => 12,
               ),
-              4 => 
+              3 => 
               array (
                 'name' => 'producto_c',
                 'label' => 'LBL_PRODUCTO',
                 'readonly' => true,
               ),
-              5 => 
+              4 => 
               array (
                 'name' => 'id_disposicion_c',
                 'label' => 'LBL_ID_DISPOSICION',
