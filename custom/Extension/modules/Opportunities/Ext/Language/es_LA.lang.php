@@ -232,3 +232,5 @@ $mod_strings['LBL_FULL_SERVICE_C'] = 'Se requiere Full Service';
 $mod_strings['LBL_CF_QUANTICO_POLITICA'] = 'Condiciones Financieras Quantico Políticas';
 $mod_strings['LBL_CF_QUANTICO_C'] = 'Condiciones Financieras Quantico Usuario';
 $mod_strings['CONDICIONES FINANCIERAS QUANTICO'] = 'Condiciones financieras quantico';
+$mod_strings['LBL_NO_DISPOSICIONES'] = 'No. Disposiciones';
+$mod_strings['LBL_GRACIA_CAPITAL'] = 'Gracia de capital';
