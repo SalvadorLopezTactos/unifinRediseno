@@ -208,6 +208,15 @@ class validaDuplicado extends SugarApi
                         $items[$elemento['id_bd']]['nombre']=$elemento['business_name'];
                         $items[$elemento['id_bd']]['id']=$elemento['id_bd'];
                         $items[$elemento['id_bd']]['rfc']= (!empty($items[$elemento['id_bd']]['rfc'])) ? $items[$elemento['id_bd']]['rfc']: '';
+
+                        if(empty($items[$elemento['id_bd']]['rfc'])){
+                            //Obtener bean del modulo
+                            $beanModulo=BeanFactory::retrieveBean($items[$elemento['id_bd']]['moduloLink'], $items[$elemento['id_bd']]['id'], array('disable_row_level_security' => true));
+                            if (!empty($beanModulo) && $beanModulo != null) {
+                                $items[$elemento['id_bd']]['rfc']=$beanModulo->rfc_c;
+                            }
+                        }
+                            
                         $items[$elemento['id_bd']]['coincidencia']=$similitud;
                         //$items[$elemento['id_bd']]=$item;
                     }
@@ -224,6 +233,15 @@ class validaDuplicado extends SugarApi
                         $items[$elemento['id_bd']]['nombre']=$elemento['business_name'];
                         $items[$elemento['id_bd']]['id']=$elemento['id_bd'];
                         $items[$elemento['id_bd']]['rfc']= (!empty($items[$elemento['id_bd']]['rfc'])) ? $items[$elemento['id_bd']]['rfc']: '';
+
+                        if(empty($items[$elemento['id_bd']]['rfc'])){
+                            //Obtener bean del modulo
+                            $beanModulo=BeanFactory::retrieveBean($items[$elemento['id_bd']]['moduloLink'], $items[$elemento['id_bd']]['id'], array('disable_row_level_security' => true));
+                            if (!empty($beanModulo) && $beanModulo != null) {
+                                $items[$elemento['id_bd']]['rfc']=$beanModulo->rfc_c;
+                            }
+                        }
+
                         $items[$elemento['id_bd']]['coincidencia']=$similitud;
                         //$items[$elemento['id_bd']]=$item;
                     }
