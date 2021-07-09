@@ -1,17 +1,19 @@
 <?php
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
-class Direcciones_Hooks
+require_once("custom/Levementum/UnifinAPI.php");
+
+class lead_direcciones_class
 {
-    public function lead_direcciones($bean, $event, $args)
+    public function lead_direcciones_function($bean, $event, $args)
     {
         global $current_user, $db;
         $current_id_list = array();
-        
+
         if ($_REQUEST['module'] != 'Import' && $_SESSION['platform'] != 'unifinAPI') {
 
             foreach ($bean->lead_direcciones as $direccion_row) {
-                
+
                 $direccion = BeanFactory::getBean('dire_Direccion', $direccion_row['id']);
 
                 if (empty($direccion_row['id'])) {
@@ -43,7 +45,7 @@ class Direcciones_Hooks
                 $direccion->team_id = $bean->team_id;
                 $direccion->team_set_id = $bean->team_set_id;
                 $direccion->assigned_user_id = $bean->assigned_user_id;
-                
+
                 // populate related lead id
                 $direccion->leads_dire_direccion_1leads_ida = $bean->id;
 
