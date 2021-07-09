@@ -1082,7 +1082,7 @@
                 errors['monto_c'].required = true;
                 app.alert.show("monto_corto_plazo", {
                     level: "error",
-                    title: "El monto de línea debe ser mayor a $500,000.00 y menor a $10,000,000.00",
+                    title: "El monto de línea debe tener un valor mínimo de $500,000.00 y máximo $10,000,000.00",
                     autoClose: false
                 });
             }
