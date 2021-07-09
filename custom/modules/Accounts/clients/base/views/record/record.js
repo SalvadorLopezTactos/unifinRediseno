@@ -6955,13 +6955,13 @@
                                         }else{
                                             params["aprueba1_c"] = 1;
                                             params["aprueba2_c"] = 1;
+                                            params["estatus_atencion"] = '3';
                                         }
                                         params["user_id"] = app.user.id;
 										//if(Productos[key].user_id1_c == app.user.id) params["aprueba1_c"] = 1;
 										//if(Productos[key].user_id2_c == app.user.id) params["aprueba2_c"] = 1;
                                         params["id_Producto"] =  Productos[key].id;
                                         params["tipoupdate"] = '2';
-                                        params["estatus_atencion"] = '3';
                                         params["reactivacion_c"] = 0;
 
                                         //var actualiza = app.api.buildURL('actualizaProductosPermisos/' + Productos[key].id, null, null);

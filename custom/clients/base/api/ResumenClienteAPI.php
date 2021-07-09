@@ -790,7 +790,7 @@ class ResumenClienteAPI extends SugarApi
                 $tipoProducto = $product->tipo_producto;
                 $statusProducto = $product->estatus_atencion;
                 $cobranza = $product->cobranza_c;
-                $estatusxproducto = $app_list_strings['status_management_list'][$product->status_management_c] .' '.$app_list_strings['razon_list'][$product->razon_c];
+                $estatusxproducto = $app_list_strings['status_management_list'][$product->status_management_c] .' / '.$app_list_strings['razon_list'][$product->razon_c];
 
                 if ($statusProducto == '' || $statusProducto == null){
                     $statusProducto = '0'; //0 = vacio
