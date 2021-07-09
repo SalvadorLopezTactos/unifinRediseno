@@ -6852,32 +6852,63 @@
                                     _.each(data1.records, function (valor, llave) {
                                         razon = Productos[key].razon_c;
                                         motivo = (Productos[key].motivo_c == null) ? "":Productos[key].motivo_c;
+                                        aprueba2 = (Productos[key].aprueba2_c == "0") ? false:true;
+                                        aprueba1 = (Productos[key].aprueba1_c == "0") ? false:true;
 
                                         if(razon != "" && motivo == "" ){
                                             if(data1.records[llave].razon == razon && data1.records[llave].bloquea) {
-                                                bloqueo = true;
+                                                
+                                                if(app.user.id == Productos[key].user_id1_c ){
+                                                    params["aprueba1_c"] = 1;
+                                                    aprueba1 = true;
+                                                    if(aprueba2){
+                                                        bloqueo = true;
+                                                    }
+                                                }
+                                                if(app.user.id == Productos[key].user_id2_c ){
+                                                    params["aprueba2_c"] = 1;
+                                                    aprueba2 = true;
+                                                    if(aprueba1){
+                                                        bloqueo = true;
+                                                    }
+                                                }
                                             }    
                                         }
                                         if(razon != "" && motivo != "" ){
                                             if((data1.records[llave].razon == razon) && (data1.records[llave].motivo == motivo) 
                                             && data1.records[llave].bloquea) {
                                                 bloqueo = true;
+                                                if(app.user.id == Productos[key].aprueba1_c ){
+                                                    params["aprueba1_c"] = true;
+										            if(Productos[key].aprueba2_c){
+                                                        bloqueo = true;
+                                                    }
+                                                }
+                                                if(app.user.id == Productos[key].aprueba2_c ){
+                                                    params["aprueba1_c"] = false;
+										            if(Productos[key].aprueba1_c){
+                                                        bloqueo = true;
+                                                    }
+                                                }
                                             }    
                                         }
                                     });
                                     
                                     if( bloqueo) {
-										params["aprueba1_c"] = 1;
-										params["aprueba2_c"] = 1;
+                                        
 										params["status_management_c"] = Productos[key].status_management_c;
-										params["razon_c"] = Productos[key].razon_c;
-										params["motivo_c"] = Productos[key].motivo_c;
-										params["detalle_c"] = Productos[key].detalle_c;
-										params["user_id_c"] = Productos[key].user_id_c;
-										params["user_id1_c"] = Productos[key].user_id1_c;
-										params["user_id2_c"] = Productos[key].user_id2_c;
+										//params["razon_c"] = Productos[key].razon_c;
+										//params["motivo_c"] = Productos[key].motivo_c;
+										//params["detalle_c"] = Productos[key].detalle_c;
+										//params["user_id_c"] = Productos[key].user_id_c;
+										//params["user_id1_c"] = Productos[key].user_id1_c;
+										//params["user_id2_c"] = Productos[key].user_id2_c;
+                                        params["aprueba1_c"] = 1;
+                                        params["aprueba2_c"] = 1;
                                         params["estatus_atencion"] = '3';
+                                        params["reactivacion_c"] = false;
                                         params["tipoupdate"] = '2';
+                                        params["user_id"] = app.user.id;
                                         
 										/*_.each(Productos, function (value1, key1) {
 											var actualiza = app.api.buildURL('uni_Productos/' + Productos[key1].id, null, null);
@@ -6906,14 +6937,21 @@
                                         //cont_uni_p.render();
                                         
 									} else {
-                                        params["aprueba1_c"] = 1;
-                                        params["aprueba2_c"] = 1;
+                                        if(aprueba1 || aprueba2){
+                                            params["aprueba1_c"] = (aprueba1)? 1:0 ;
+                                            params["aprueba2_c"] = (aprueba2)? 1:0 ;
+                                        }else{
+                                            params["aprueba1_c"] = 1;
+                                            params["aprueba2_c"] = 1;
+                                        }
+                                        params["user_id"] = app.user.id;
 										//if(Productos[key].user_id1_c == app.user.id) params["aprueba1_c"] = 1;
 										//if(Productos[key].user_id2_c == app.user.id) params["aprueba2_c"] = 1;
                                         params["id_Producto"] =  Productos[key].id;
                                         params["tipoupdate"] = '2';
                                         params["estatus_atencion"] = '3';
-                                        
+                                        params["reactivacion_c"] = 0;
+
                                         //var actualiza = app.api.buildURL('actualizaProductosPermisos/' + Productos[key].id, null, null);
                                         var uni = app.api.buildURL('actualizaProductosPermisos', null, null,params);
                                         var resp;
@@ -6976,11 +7014,29 @@
                 _.each(Productos, function (value, key) {
                     var ap1 = (Productos[key].aprueba1_c == "0") ? false :true;
                     var ap2 = (Productos[key].aprueba2_c == "0") ? false :true; 
-					if((!ap1 && !ap2) && (Productos[key].user_id1_c == app.user.id || Productos[key].user_id2_c == app.user.id)) {
+                    var react = (Productos[key].reactivacion_c == "0") ? false :true; 
+
+					if(!ap1 && (Productos[key].user_id1_c == app.user.id) && (Productos[key].status_management_c == '4' || Productos[key].status_management_c == '5')) {
 						$('[name="aprobar_noviable"]').removeClass('hidden');
                         $('[name="desaprobar_noviable"]').removeClass('hidden');
+                        if(react){
+                            $('[name="aprobar_noviable"]')[0].text = "Rechazar Reactivación";
+                            $('[name="desaprobar_noviable"]')[0].text = "Confirmar Reactivación";
+                            $('[name="aprobar_noviable"]')[0].className= "btn btn-danger";
+                            $('[name="desaprobar_noviable"]')[0].className= "btn btn-success";
+                        }
                     }
-                    if((ap1 || ap2) && (Productos[key].user_id_c == app.user.id )) {
+                    if(!ap2 && (Productos[key].user_id2_c == app.user.id)  && (Productos[key].status_management_c == '4' || Productos[key].status_management_c == '5')) {
+						$('[name="aprobar_noviable"]').removeClass('hidden');
+                        $('[name="desaprobar_noviable"]').removeClass('hidden');
+                        if(react){
+                            $('[name="aprobar_noviable"]')[0].text = "Rechazar Reactivación";
+                            $('[name="desaprobar_noviable"]')[0].text = "Confirmar Reactivación";
+                            $('[name="aprobar_noviable"]')[0].className= "btn btn-danger";
+                            $('[name="desaprobar_noviable"]')[0].className= "btn btn-success";
+                        }
+                    }
+                    if((ap1 || ap2) && (Productos[key].user_id_c == app.user.id ) && !react) {
 						$('[name="reactivar_noviable"]').removeClass('hidden');
                     }
 					
@@ -7044,6 +7100,7 @@
         params["id_Account"] = this.model.get('id');
         params["user_id"] = app.user.id;
         params["tipoupdate"] = '3';
+        params["reactivacion_c"] = true;
         //params["estatus_atencion"] = '1';
         
         //var uni = app.api.buildURL('actualizaProductosPermisos/');

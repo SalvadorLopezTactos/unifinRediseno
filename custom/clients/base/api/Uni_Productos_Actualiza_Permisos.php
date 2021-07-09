@@ -36,14 +36,16 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
         $GLOBALS['log']->fatal("tipoupdate " .$args['tipoupdate']);
         $cont_cambios = 0;
 
-        if( $args['tipoupdate'] == "1" ){
+        if( $args['tipoupdate'] == "1" ){  // tipo 1 rechazar no viable
             $id_Account = $args['id_Account'];
+            $user_id = $args['user_id'];
             
             $GLOBALS['log']->fatal("id_Account " . $id_Account);
             $return_productos = "";
             
             $beanAccount = BeanFactory::retrieveBean('Accounts', $id_Account, array('disable_row_level_security' => true));
-            
+            $beanUser = BeanFactory::retrieveBean('Users', $user_id, array('disable_row_level_security' => true));
+                    
             $query = "SELECT PRODUCTOS.*, concat(uassign.first_name,' ',uassign.last_name) as full_name
             ,concat(u1.first_name,' ',u1.last_name) as fullname_ingesta_c
             ,concat(u2.first_name,' ',u2.last_name) as fullname_validacion1_c
@@ -70,62 +72,191 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                 ";
 
             $result = $GLOBALS['db']->query($query);
+            
             $cont_cambios = 0;
-            while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
-                //$records_in[] = $row; 
-                $beanProduct = BeanFactory::retrieveBean('uni_Productos', $row['id'], array('disable_row_level_security' => true));
-                $GLOBALS['log']->fatal("Id producto" . $row['id']);
+            $sql = "SELECT * FROM tct4_condiciones";
+            $condiciones = $GLOBALS['db']->query($sql);
+            $desbloquear = false;
+            $idProd_desbloquear = '';
+            $aprueba1 = false;
+            $aprueba2 = false;
+            $bloqueouno = false;
+
+            //$GLOBALS['log']->fatal("condiciones" , $condiciones);
+
+            //while($condicion = $GLOBALS['db']->fetchByAssoc($condiciones) ){
+            while ($product = $GLOBALS['db']->fetchByAssoc($result)) {
+                while($condicion = $GLOBALS['db']->fetchByAssoc($condiciones) ){
+                    //$GLOBALS['log']->fatal("while id prod " .$product['id']);
+                    
+                    $beanProduct = BeanFactory::retrieveBean('uni_Productos', $product['id'], array('disable_row_level_security' => true));
+                    //$GLOBALS['log']->fatal("name " .$beanProduct->name);
+                    //$GLOBALS['log']->fatal("ids " . $beanProduct->user_id1_c .'-'.$beanUser->id);
+                    //$GLOBALS['log']->fatal("ids " . $beanProduct->user_id2_c .'-'.$beanUser->id);
+                    if( $beanProduct->user_id1_c == $beanUser->id  || $beanProduct->user_id2_c == $beanUser->id ){
+                        //$GLOBALS['log']->fatal("lm " . $condicion['condicion'] .'-'.$beanProduct->status_management_c);
+                        //$GLOBALS['log']->fatal("razon " . $condicion['razon'] .'-'. $beanProduct->razon_c);
+                        //$GLOBALS['log']->fatal("motivo " . $condicion['motivo'].'-'. $beanProduct->motivo_c);
+                        //$GLOBALS['log']->fatal("atecion " . $beanProduct->estatus_atencion );
+                        //$GLOBALS['log']->fatal("bloqeuar " . $condicion['bloquea']);
+
+                        if(($condicion['condicion'] == $beanProduct->status_management_c) && ($condicion['razon'] == $beanProduct->razon_c) && ($condicion['motivo'] == $beanProduct->motivo_c) && $condicion['bloquea'] 
+                        && ( $beanProduct->status_management_c == '4' || $beanProduct->status_management_c == '5')){
+                            $GLOBALS['log']->fatal("reactivacion_c*** ",$beanProduct->reactivacion_c);
+                            if($beanProduct->reactivacion_c == 1){
+                                $GLOBALS['log']->fatal("reactivacion****************** ");
+                                $GLOBALS['log']->fatal("usuarios: ". $beanProduct->user_id1_c. "-".$beanUser->id);
+                                $GLOBALS['log']->fatal("usuarios: ". $beanProduct->user_id2_c. "-".$beanUser->id);
+                                $GLOBALS['log']->fatal("usuarios: ". $beanProduct->aprueba1_c. "-".$beanProduct->aprueba2_c);
+                                
+                                if( $beanProduct->user_id1_c == $beanUser->id ){
+                                    $aprueba1 = 1;
+                                    $idProd_desbloquear = $beanProduct->id;
+                                    if($beanProduct->aprueba2_c == 1){
+                                        $desbloquear = 1;
+                                    }
+                                }
+                                if( $beanProduct->user_id2_c == $beanUser->id){
+                                    $aprueba2 = 1;
+                                    $idProd_desbloquear = $beanProduct->id;
+                                    if($beanProduct->aprueba1_c == 1){
+                                        $desbloquear = 1;
+                                    }
+                                }
+
+                            }else{
+                                $desbloquear = 0;
+                            }
+                        }
+                        if(($condicion['condicion'] == $beanProduct->status_management_c) && ($condicion['razon'] == $beanProduct->razon_c) && ($condicion['motivo'] == $beanProduct->motivo_c) 
+                            && ($condicion['bloquea'] == false) && ($beanProduct->estatus_atencion == '3' || $beanProduct->status_management_c == '4' || $beanProduct->status_management_c == '5')){
+                                $bloqueouno = true;
+                                $aprueba1 = 1;
+                                $aprueba2 = 1;
+                                $idProd_desbloquear = $beanProduct->id;
+                        }
+                    }
+                }
+            }
+            $GLOBALS['log']->fatal("desbloquear " , $desbloquear);
+            if($desbloquear== 1 ){
+                //$GLOBALS['log']->fatal("result2",$result2[]);
+                $result = $GLOBALS['db']->query($query);
+                while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
+                    //$records_in[] = $row; 
+                    $GLOBALS['log']->fatal($row['id']);
+                    $beanProduct = BeanFactory::retrieveBean('uni_Productos', $row['id'], array('disable_row_level_security' => true));
+                    
+                    $GLOBALS['log']->fatal("Id producto" . $row['id']);
+                    if (!empty($beanProduct) && $beanProduct != null) {
+                        try {
+                            $GLOBALS['log']->fatal("beanProduct tipo " . $beanProduct->tipo_producto);
+                            $GLOBALS['log']->fatal("user id " . $args['user_id']);
+                           
+                            /*if((($beanProduct->user_id1_c == $args['user_id'] ) || ($beanProduct->user_id2_c == $args['user_id'] ))
+                            && ($beanProduct->status_management_c == '4' || $beanProduct->status_management_c == '5')) {*/
+                            if($beanProduct->estatus_atencion == '3' || $beanProduct->status_management_c == '4' || $beanProduct->status_management_c == '5') {
+                                $GLOBALS['log']->fatal("Entro modificacion*********");
+                                //$GLOBALS['log']->fatal("estatus de atencion",$args['estatus_atencion']);
+                                
+                                $return_productos = "";
+                            
+                                $beanProduct->razon_c = $args['razon_c']; //razon lm
+                                $beanProduct->motivo_c = $args['motivo_c']; //motivo lm
+                                $beanProduct->detalle_c = $args['detalle_c']; //detalle lm
+                                $beanProduct->user_id1_c =  $args['user_id1_c'];  //user id1
+                                $beanProduct->user_id2_c =  $args['user_id2_c'];  //user id2
+                                $beanProduct->user_id_c = $args['user_id_c'];  //user id
+                                $beanProduct->status_management_c = $args['status_management_c']; //status lm
+                                $beanProduct->notificacion_noviable_c = $args['notificacion_noviable_c']; //notificaion noviable
+                                $beanProduct->estatus_atencion = $args['estatus_atencion']; //notificaion noviable
+                                $beanProduct->aprueba1_c = false; //notificaion noviable
+                                $beanProduct->aprueba2_c = false; //notificaion noviable
+                                $beanProduct->reactivacion_c = false; //notificaion noviable
+
+                                $cont_cambios++;
+                                $beanProduct->save();
+                            }
+                        } catch (Exception $ex) {
+                            $GLOBALS['log']->fatal("Exception " . $ex);
+                        }
+                    }
+                }
+            }else{
+                $beanProduct = BeanFactory::retrieveBean('uni_Productos', $idProd_desbloquear , array('disable_row_level_security' => true));
+                $GLOBALS['log']->fatal("Id producto" . $idProd_desbloquear);
                 if (!empty($beanProduct) && $beanProduct != null) {
                     try {
                         $GLOBALS['log']->fatal("beanProduct tipo " . $beanProduct->tipo_producto);
                         $GLOBALS['log']->fatal("user id " . $args['user_id']);
-                        /*$GLOBALS['log']->fatal("validador1 " . $beanProduct->user_id1_c);
-                        $GLOBALS['log']->fatal("validador2 " . $beanProduct->user_id2_c);
-                        $GLOBALS['log']->fatal("status_management_c " .  $beanProduct->status_management_c);
-                        $GLOBALS['log']->fatal("aprueba1_c " .  $beanProduct->aprueba1_c);
-                        $GLOBALS['log']->fatal("aprueba2_c " .  $beanProduct->aprueba2_c);
-                        $GLOBALS['log']->fatal("tipoupdate " .   $args['tipoupdate']);
-                        */
-                        /*if((($beanProduct->user_id1_c == $args['user_id'] ) || ($beanProduct->user_id2_c == $args['user_id'] ))
-                        && ($beanProduct->status_management_c == '4' || $beanProduct->status_management_c == '5')) {*/
-                        if($beanProduct->estatus_atencion == '3' || $beanProduct->status_management_c == '4' || $beanProduct->status_management_c == '5') {
-                            $GLOBALS['log']->fatal("Entro modificacion*********");
-                            //$GLOBALS['log']->fatal("estatus de atencion",$args['estatus_atencion']);
-                            
-                            $return_productos = "";
-                        
-                            $beanProduct->razon_c = $args['razon_c']; //razon lm
-                            $beanProduct->motivo_c = $args['motivo_c']; //motivo lm
-                            $beanProduct->detalle_c = $args['detalle_c']; //detalle lm
-                            $beanProduct->user_id1_c =  $args['user_id1_c'];  //user id1
-                            $beanProduct->user_id2_c =  $args['user_id2_c'];  //user id2
-                            $beanProduct->user_id_c = $args['user_id_c'];  //user id
-                            $beanProduct->status_management_c = $args['status_management_c']; //status lm
-                            $beanProduct->notificacion_noviable_c = $args['notificacion_noviable_c']; //notificaion noviable
-                            $beanProduct->estatus_atencion = $args['estatus_atencion']; //notificaion noviable
-                        
-                            $cont_cambios++;
+                        $GLOBALS['log']->fatal("estatus de atencion",$beanProduct->estatus_atencion);
+                        $GLOBALS['log']->fatal("status_management_c",$beanProduct->status_management_c);
+                        $GLOBALS['log']->fatal("reactivacion_c",$beanProduct->reactivacion_c);
+                        if($beanProduct->reactivacion_c && !$bloqueouno){
+                            $GLOBALS['log']->fatal("entro reactivacion_c: 1-".$aprueba1." 2-".$aprueba2);
+                            $beanProduct->aprueba1_c =  $aprueba1;  //user id1
+                            $beanProduct->aprueba2_c =  $aprueba2;  //user id2
                             $beanProduct->save();
+                            $cont_cambios++;
+                        }else{
+                            /*if((($beanProduct->user_id1_c == $args['user_id'] ) || ($beanProduct->user_id2_c == $args['user_id'] ))
+                            && ($beanProduct->status_management_c == '4' || $beanProduct->status_management_c == '5')) {*/
+                            if($beanProduct->estatus_atencion == '3' || $beanProduct->status_management_c == '4' || $beanProduct->status_management_c == '5') {
+                                $GLOBALS['log']->fatal("Entro modificacion*********");
+                                //$GLOBALS['log']->fatal("estatus de atencion",$args['estatus_atencion']);
+
+                                $GLOBALS['log']->fatal("validador1 " . $beanProduct->user_id1_c);
+                                $GLOBALS['log']->fatal("validador2 " . $beanProduct->user_id2_c);
+                                $GLOBALS['log']->fatal("status_management_c " .  $beanProduct->status_management_c);
+                                $GLOBALS['log']->fatal("aprueba1_c " .  $beanProduct->aprueba1_c);
+                                $GLOBALS['log']->fatal("aprueba2_c " .  $beanProduct->aprueba2_c);
+                                $GLOBALS['log']->fatal("tipoupdate " .   $args['tipoupdate']);
+
+                                $beanProduct->razon_c = $args['razon_c']; //razon lm
+                                $beanProduct->motivo_c = $args['motivo_c']; //motivo lm
+                                $beanProduct->detalle_c = $args['detalle_c']; //detalle lm
+                                
+                                $beanProduct->user_id_c = $args['user_id_c'];  //user id
+                                $beanProduct->user_id1_c =  $args['user_id1_c'];  //user id1
+                                $beanProduct->user_id2_c =  $args['user_id2_c'];  //user id2
+                                $beanProduct->status_management_c = $args['status_management_c']; //status lm
+                                $beanProduct->notificacion_noviable_c = $args['notificacion_noviable_c']; //notificaion noviable
+                                $beanProduct->estatus_atencion = $args['estatus_atencion']; //estatus atencion
+                                $beanProduct->aprueba1_c = false; //aprobador 1
+                                $beanProduct->aprueba2_c = false; //aprobador 2
+                                $beanProduct->reactivacion_c = false; //reactivador
+
+                                $beanProduct->save();
+                                $cont_cambios++;
+                            }
                         }
+                        
                     } catch (Exception $ex) {
                         $GLOBALS['log']->fatal("Exception " . $ex);
                     }
                 }
             }
+            
         }
         
-        if($args['tipoupdate']=="2"){
+        if($args['tipoupdate']=="2"){  // tipo 2, aceptar no viable
 
             $id_Producto = $args['id_Producto'];
             $beanProduct = BeanFactory::retrieveBean('uni_Productos', $id_Producto, array('disable_row_level_security' => true));
             $GLOBALS['log']->fatal("Id producto" . $id_Producto);
             if (!empty($beanProduct) && $beanProduct != null) {
-                try {                        
+                try {          
+                    $GLOBALS['log']->fatal("Retrieve producto" . $beanProduct->name);  
+                    $GLOBALS['log']->fatal("Retrieve aprueba1" . $args['aprueba1_c']);
+                    $GLOBALS['log']->fatal("Retrieve aprueba2" .$args['aprueba2_c']);  
+                    $GLOBALS['log']->fatal("Retrieve reactivacion_c" .$args['reactivacion_c']);              
                     
-                    $beanProduct->aprueba1_c = $args['aprueba1_c']; //
-                    $beanProduct->aprueba2_c = $args['aprueba2_c']; //
-                    $beanProduct->estatus_atencion = $args['estatus_atencion']; //notificaion noviable
-                                            
+                    $beanProduct->aprueba1_c = $args['aprueba1_c']; //aprobador 1
+                    $beanProduct->aprueba2_c = $args['aprueba2_c']; //aprobador2
+                    $beanProduct->estatus_atencion = $args['estatus_atencion']; // estatus de atención
+                    //$beanProduct->notificacion_noviable_c = $args['notificacion_noviable_c']; //notificaion noviable
+                    $beanProduct->reactivacion_c = $args['reactivacion_c']; //reactivación noviable
+                    $cont_cambios ++;
                     $beanProduct->save();
                     
                 } catch (Exception $ex) {
@@ -134,12 +265,14 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
             }
         }
 
-        if( $args['tipoupdate'] == "3" ){
+        if( $args['tipoupdate'] == "3" ){   // tipo 3, solicitud reactivacion
             $id_Account = $args['id_Account'];
+            $user_id = $args['user_id'];
             
             $GLOBALS['log']->fatal("id_Account " . $id_Account);
             $return_productos = "";
             
+            $beanUser = BeanFactory::retrieveBean('Users', $user_id, array('disable_row_level_security' => true));
             $beanAccount = BeanFactory::retrieveBean('Accounts', $id_Account, array('disable_row_level_security' => true));
             
             $query = "SELECT PRODUCTOS.*, concat(uassign.first_name,' ',uassign.last_name) as full_name
@@ -169,24 +302,32 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
 
             $result = $GLOBALS['db']->query($query);
             $cont_cambios = 0;
-            while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
-                //$records_in[] = $row; 
-                $beanProduct = BeanFactory::retrieveBean('uni_Productos', $row['id'], array('disable_row_level_security' => true));
-                $GLOBALS['log']->fatal("Id producto" . $row['id']);
-                if (!empty($beanProduct) && $beanProduct != null) {
-                    try {
-                       $beanProduct->aprueba1_c = 0; //status lm
-                       $beanProduct->aprueba2_c = 0; //notificaion noviable
-
-                       $beanProduct->save();
-                       $cont_cambios++;
-                       $this->notificaDirector($beanProduct , $beanProduct->tipo_producto, $beanAccount->name , $beanAccount->id);
-                    } catch (Exception $ex) {
-                        $GLOBALS['log']->fatal("Exception " . $ex);
-                    }
-                }
-            }
             
+            $sql = "SELECT * FROM tct4_condiciones";
+            $condiciones = $GLOBALS['db']->query($sql);
+            $bloquear = false;
+
+            //while($row = $GLOBALS['db']->fetchByAssoc($condiciones) ){
+                while ($product = $GLOBALS['db']->fetchByAssoc($result)) {
+                    $beanProduct = BeanFactory::retrieveBean('uni_Productos', $product['id'], array('disable_row_level_security' => true));
+                
+                    //if(($row['condicion'] == $beanProduct->status_management_c) && ($row['razon'] == $beanProduct->razon_c) && ($row['motivo'] == $beanProduct->motivo_c) && $row['bloquear'] ){
+                        if($beanProduct->user_id_c == $beanUser->id){
+                            try {
+                                $beanProduct->aprueba1_c = 0; //status lm
+                                $beanProduct->aprueba2_c = 0; //notificaion noviable
+                                $beanProduct->reactivacion_c = true;
+         
+                                $beanProduct->save();
+                                $cont_cambios++;
+                                $this->notificaDirector($beanProduct , $beanProduct->tipo_producto, $beanAccount->name , $beanAccount->id);
+                             } catch (Exception $ex) {
+                                 $GLOBALS['log']->fatal("Exception " . $ex);
+                             }
+                        }
+                    //}
+                }
+            //}
         }
 
         return $cont_cambios;
@@ -265,7 +406,7 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
         $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION no viable: ".$cuerpoCorreo);
         //$GLOBALS['log']->fatal("ENVIANDO NOTIFICACION no viable".$correo_director);
         //Enviando correo a director de solicitud con copia  a director regional leasing
-        $this->enviarNotificacionDirector("Solicitud de reapertura para la cuenta {$nombreCuenta} solicitada por {$ResponsableIngesta}",$cuerpoCorreo,$nombres,$correos);
+        $this->enviarNotificacionDirector("Solicitud de reactivación para la cuenta {$nombreCuenta} solicitada por {$ResponsableIngesta}",$cuerpoCorreo,$nombres,$correos);
         
         $GLOBALS['log']->fatal("Termina proceso de notificacion_director");
     }
