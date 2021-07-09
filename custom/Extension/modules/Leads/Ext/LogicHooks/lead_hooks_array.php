@@ -32,8 +32,8 @@ $hook_array['after_save'][] = Array(
 
 $hook_array['after_save'][] = Array(
     5,
-    'Manage Related Direcciones',//Just a quick comment about the logic of it
+    'Direcciones_Leads_Hooks',//Just a quick comment about the logic of it
     'custom/modules/Leads/lead_direcciones_class.php', //path to the logic hook
-    'Direcciones_Hooks', // name of the class
-    'lead_direcciones' // name of the function.
+    'lead_direcciones_class', // name of the class
+    'lead_direcciones_function' // name of the function.
 );
