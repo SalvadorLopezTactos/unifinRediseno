@@ -126,6 +126,8 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
 
                             }else{
                                 $desbloquear = 0;
+                                $bloqueouno = true;
+                                $idProd_desbloquear = $beanProduct->id;
                             }
                         }
                         if(($condicion['condicion'] == $beanProduct->status_management_c) && ($condicion['razon'] == $beanProduct->razon_c) && ($condicion['motivo'] == $beanProduct->motivo_c) 
@@ -406,7 +408,7 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
         $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION no viable: ".$cuerpoCorreo);
         //$GLOBALS['log']->fatal("ENVIANDO NOTIFICACION no viable".$correo_director);
         //Enviando correo a director de solicitud con copia  a director regional leasing
-        $this->enviarNotificacionDirector("Solicitud de reactivación para la cuenta {$nombreCuenta} solicitada por {$ResponsableIngesta}",$cuerpoCorreo,$nombres,$correos);
+        $this->enviarNotificacionDirector("Solicitud de reactivación solicitada por {$ResponsableIngesta}",$cuerpoCorreo,$nombres,$correos);
         
         $GLOBALS['log']->fatal("Termina proceso de notificacion_director");
     }
@@ -455,7 +457,7 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
 
     public function estableceCuerpoNotificacion($nombreCuenta,$ResponsableIngesta,$razon,$detalle,$linkCuenta){
 
-        $mailHTML = '<br>Se le informa que el usuario <b>' .$ResponsableIngesta. '</b> ha solicitado la reactivación para la cuenta <a id="linkCuenta" href="'. $linkCuenta.'"> '  .$nombreCuenta.' </a>. 
+        $mailHTML = '<br>"Solicitud de reactivación para la cuenta <a id="linkCuenta" href="'. $linkCuenta.'"> '  .$nombreCuenta.' </a> solicitado por <b>' .$ResponsableIngesta. ' .</b>
         <br><br>Atentamente Unifin</font></p>
         <br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>		
         <p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
