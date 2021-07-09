@@ -824,7 +824,7 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['fleet']['subtipo_cuenta'] = $subtipoCuenta;
                         $arr_principal['fleet']['estatus_atencion'] = $statusProducto;
                         $arr_principal['fleet']['cobranza'] = $cobranza;
-                        $arr_principal['factoring']['estatusxproducto'] = $estatusxproducto;
+                        $arr_principal['fleet']['estatusxproducto'] = $estatusxproducto;
                         break;
                     case '7': //Credito SOS
                         $arr_principal['credito_sos']['estatus_atencion'] = $statusProducto;

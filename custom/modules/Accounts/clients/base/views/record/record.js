@@ -6902,10 +6902,8 @@
 										            params["aprueba1_c"] = false;
 										            
                                                 }
-                                        }3
-                                        
+                                        }
                                     });
-                                    
                                     if( bloqueo) {
                                         
 										params["status_management_c"] = Productos[key].status_management_c;
@@ -6952,6 +6950,7 @@
                                         if(aprueba1 || aprueba2){
                                             params["aprueba1_c"] = (aprueba1)? 1:0 ;
                                             params["aprueba2_c"] = (aprueba2)? 1:0 ;
+                                            params["estatus_atencion"] = '1';
                                         }else{
                                             params["aprueba1_c"] = 1;
                                             params["aprueba2_c"] = 1;
