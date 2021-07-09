@@ -6854,44 +6854,56 @@
                                         motivo = (Productos[key].motivo_c == null) ? "":Productos[key].motivo_c;
                                         aprueba2 = (Productos[key].aprueba2_c == "0") ? false:true;
                                         aprueba1 = (Productos[key].aprueba1_c == "0") ? false:true;
+                                        reactivacion = (Productos[key].reactivacion_c == "0") ? false:true;
 
-                                        if(razon != "" && motivo == "" ){
-                                            if(data1.records[llave].razon == razon && data1.records[llave].bloquea) {
-                                                
-                                                if(app.user.id == Productos[key].user_id1_c ){
-                                                    params["aprueba1_c"] = 1;
-                                                    aprueba1 = true;
-                                                    if(aprueba2){
-                                                        bloqueo = true;
+                                        if(!reactivacion ){
+                                            if(razon != "" && motivo == "" ){
+                                                if(data1.records[llave].razon == razon && data1.records[llave].bloquea) {
+
+                                                    if(app.user.id == Productos[key].user_id1_c ){
+                                                        params["aprueba1_c"] = 1;
+                                                        aprueba1 = true;
+                                                        if(aprueba2){
+                                                            bloqueo = true;
+                                                        }
                                                     }
-                                                }
-                                                if(app.user.id == Productos[key].user_id2_c ){
-                                                    params["aprueba2_c"] = 1;
-                                                    aprueba2 = true;
-                                                    if(aprueba1){
-                                                        bloqueo = true;
+                                                    if(app.user.id == Productos[key].user_id2_c ){
+                                                        params["aprueba2_c"] = 1;
+                                                        aprueba2 = true;
+                                                        if(aprueba1){
+                                                            bloqueo = true;
+                                                        }
                                                     }
-                                                }
-                                            }    
-                                        }
-                                        if(razon != "" && motivo != "" ){
+                                                }    
+                                            }
+                                            if(razon != "" && motivo != "" ){
+                                                if((data1.records[llave].razon == razon) && (data1.records[llave].motivo == motivo) 
+                                                && data1.records[llave].bloquea) {
+                                                    //bloqueo = true;
+                                                    if(app.user.id == Productos[key].aprueba1_c ){
+                                                        params["aprueba1_c"] = true;
+										                if(Productos[key].aprueba2_c){
+                                                            bloqueo = true;
+                                                        }
+                                                    }
+                                                    if(app.user.id == Productos[key].aprueba2_c ){
+                                                        params["aprueba1_c"] = false;
+										                if(Productos[key].aprueba1_c){
+                                                            bloqueo = true;
+                                                        }
+                                                    }
+                                                }    
+                                            }
+                                        }else{
                                             if((data1.records[llave].razon == razon) && (data1.records[llave].motivo == motivo) 
-                                            && data1.records[llave].bloquea) {
-                                                bloqueo = true;
-                                                if(app.user.id == Productos[key].aprueba1_c ){
-                                                    params["aprueba1_c"] = true;
-										            if(Productos[key].aprueba2_c){
-                                                        bloqueo = true;
-                                                    }
-                                                }
-                                                if(app.user.id == Productos[key].aprueba2_c ){
+                                                && data1.records[llave].bloquea) {
+                                                    bloqueo = true;
                                                     params["aprueba1_c"] = false;
-										            if(Productos[key].aprueba1_c){
-                                                        bloqueo = true;
-                                                    }
+										            params["aprueba1_c"] = false;
+										            
                                                 }
-                                            }    
-                                        }
+                                        }3
+                                        
                                     });
                                     
                                     if( bloqueo) {
@@ -7036,7 +7048,7 @@
                             $('[name="desaprobar_noviable"]')[0].className= "btn btn-success";
                         }
                     }
-                    if((ap1 || ap2) && (Productos[key].user_id_c == app.user.id ) && !react) {
+                    if((ap1 && ap2) && (Productos[key].user_id_c == app.user.id ) && !react) {
 						$('[name="reactivar_noviable"]').removeClass('hidden');
                     }
 					
