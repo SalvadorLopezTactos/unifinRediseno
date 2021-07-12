@@ -256,6 +256,14 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                     $beanProduct->aprueba1_c = $args['aprueba1_c']; //aprobador 1
                     $beanProduct->aprueba2_c = $args['aprueba2_c']; //aprobador2
                     $beanProduct->estatus_atencion = $args['estatus_atencion']; // estatus de atención
+
+                    $beanProduct->status_management_c = $args["status_management_c"];
+					$beanProduct->razon_c = $args["razon_c"];
+					$beanProduct->motivo_c = $args["motivo_c"];
+					$beanProduct->detalle_c = $args["detalle_c"];
+					$beanProduct->user_id_c = $args["user_id_c"];
+					$beanProduct->user_id1_c = $args["user_id1_c"];
+					$beanProduct->user_id2_c = $args["user_id2_c"];
                     //$beanProduct->notificacion_noviable_c = $args['notificacion_noviable_c']; //notificaion noviable
                     $beanProduct->reactivacion_c = $args['reactivacion_c']; //reactivación noviable
                     $cont_cambios ++;
@@ -307,29 +315,59 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
             
             $sql = "SELECT * FROM tct4_condiciones";
             $condiciones = $GLOBALS['db']->query($sql);
-            $bloquear = false;
+            $desbloquear = false;
+            $notificacion = false;
 
-            //while($row = $GLOBALS['db']->fetchByAssoc($condiciones) ){
-                while ($product = $GLOBALS['db']->fetchByAssoc($result)) {
+            while ($product = $GLOBALS['db']->fetchByAssoc($result)) {
+                while($row = $GLOBALS['db']->fetchByAssoc($condiciones) ){
                     $beanProduct = BeanFactory::retrieveBean('uni_Productos', $product['id'], array('disable_row_level_security' => true));
                 
-                    //if(($row['condicion'] == $beanProduct->status_management_c) && ($row['razon'] == $beanProduct->razon_c) && ($row['motivo'] == $beanProduct->motivo_c) && $row['bloquear'] ){
+                    $GLOBALS['log']->fatal("condicion " . $row['condicion'] ." - ".$beanProduct->status_management_c);
+                    $GLOBALS['log']->fatal("razon " . $row['razon'] ." - ".$beanProduct->razon_c);
+                    $GLOBALS['log']->fatal("motivo " . $row['motivo'] ." - ".$beanProduct->motivo_c);
+                    $GLOBALS['log']->fatal("bloquear " . $row['bloquea'] );
+
+                    if(($row['condicion'] == $beanProduct->status_management_c) && ($row['razon'] == $beanProduct->razon_c) 
+                        && ($row['motivo'] == $beanProduct->motivo_c) && $row['bloquea'] == '0' ){
+                            $desbloquear = true;
+                    }else{
                         if($beanProduct->user_id_c == $beanUser->id){
-                            try {
-                                $beanProduct->aprueba1_c = 0; //status lm
-                                $beanProduct->aprueba2_c = 0; //notificaion noviable
-                                $beanProduct->reactivacion_c = true;
-         
-                                $beanProduct->save();
-                                $cont_cambios++;
-                                $this->notificaDirector($beanProduct , $beanProduct->tipo_producto, $beanAccount->name , $beanAccount->id);
-                             } catch (Exception $ex) {
-                                 $GLOBALS['log']->fatal("Exception " . $ex);
-                             }
+                            $notificacion = true;
                         }
-                    //}
+                    }
                 }
-            //}
+            }
+            if($desbloquear){
+                $beanProduct->razon_c = ""; //razon lm
+                $beanProduct->motivo_c = ""; //motivo lm
+                $beanProduct->detalle_c = ""; //detalle lm
+                $beanProduct->user_id1_c =  null;  //user id1
+                $beanProduct->user_id2_c =  null;  //user id2
+                $beanProduct->user_id_c = null;  //user id
+                $beanProduct->status_management_c = "1"; //status lm
+                $beanProduct->notificacion_noviable_c = 0; //notificaion noviable
+                $beanProduct->estatus_atencion = "1"; //notificaion noviable
+                $beanProduct->aprueba1_c = 0; //notificaion noviable
+                $beanProduct->aprueba2_c = 0; //notificaion noviable
+                $beanProduct->reactivacion_c = false; //notificaion noviable}
+                
+                $beanProduct->save();
+                $cont_cambios++;
+            }
+            
+            if($notificacion){
+                try {
+                    $beanProduct->aprueba1_c = 0; //status lm
+                    $beanProduct->aprueba2_c = 0; //notificaion noviable
+                    $beanProduct->reactivacion_c = true;
+
+                    $beanProduct->save();
+                    $cont_cambios++;
+                    $this->notificaDirector($beanProduct , $beanProduct->tipo_producto, $beanAccount->name , $beanAccount->id);
+                 } catch (Exception $ex) {
+                     $GLOBALS['log']->fatal("Exception " . $ex);
+                 }
+            }
         }
 
         return $cont_cambios;

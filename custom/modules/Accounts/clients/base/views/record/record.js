@@ -5804,7 +5804,7 @@
                                 errorLM +="Motivo <br>";
                             }
                         }
-                        /*if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value && contexto_cuenta.datacondiciones.records[i].razon == selectlrazon.value && contexto_cuenta.datacondiciones.records[i].motivo == selectlmotivo.value ){
+                        if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value && contexto_cuenta.datacondiciones.records[i].razon == selectlrazon.value && contexto_cuenta.datacondiciones.records[i].motivo == selectlmotivo.value ){
                             if (contexto_cuenta.datacondiciones.records[i].detalle == true ) {
                                 if ( $('.txt_l_so_detalle').val().trim() == "") {
                                     $('.txt_l_so_detalle').css('border-color', 'red'); //TXT ¿Qué producto?
@@ -5812,7 +5812,7 @@
                                     faltantelm += 1;
                                 }
                             }
-                        }*/
+                        }
                         if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value && contexto_cuenta.datacondiciones.records[i].razon == selectlrazon.value && contexto_cuenta.datacondiciones.records[i].motivo == selectlmotivo.value ){
                             if (contexto_cuenta.datacondiciones.records[i].notifica == true && ($('.list_l_respval_2').select2('val') == "" || $('.list_l_respval_2').select2('val') == "0") ) {
                                 $('.list_l_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
@@ -5955,7 +5955,7 @@
                             errorLM +="Motivo <br>";
                         }
                     }
-                    /*if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value
+                    if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value
                         && this.datacondiciones.records[i].razon == selectlrazon.value 
                         && this.datacondiciones.records[i].motivo == selectlmotivo.value ){
                         if (this.datacondiciones.records[i].detalle == true ) {
@@ -5965,7 +5965,7 @@
                                 errorLM +="Detalle <br>";
                             }
                         }
-                    }*/
+                    }
                     if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value && contexto_cuenta.datacondiciones.records[i].razon == selectlrazon.value && contexto_cuenta.datacondiciones.records[i].motivo == selectlmotivo.value ){
                         if (contexto_cuenta.datacondiciones.records[i].notifica == true && ($('.list_f_respval_2').select2('val') == "" || $('.list_f_respval_2').select2('val') == "0") ) {
                             $('.list_f_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
@@ -6108,7 +6108,7 @@
                                 errorLM +="Motivo <br>";
                             }
                         }
-                        /*if ( this.datacondiciones.records[i].condicion == selectlm.value 
+                        if ( this.datacondiciones.records[i].condicion == selectlm.value 
                             && this.datacondiciones.records[i].razon == selectlrazon.value 
                             && this.datacondiciones.records[i].motivo == selectlmotivo.value ){
                             if (this.datacondiciones.records[i].detalle == true ) {
@@ -6118,7 +6118,7 @@
                                     errorLM +="Detalle <br>";
                                 }
                             }
-                        }*/
+                        }
                         if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value && contexto_cuenta.datacondiciones.records[i].razon == selectlrazon.value && contexto_cuenta.datacondiciones.records[i].motivo == selectlmotivo.value ){
                             if (contexto_cuenta.datacondiciones.records[i].notifica == true && ($('.list_ca_respval_2').select2('val') == "" || $('.list_ca_respval_2').select2('val') == "0") ) {
                                 $('.list_ca_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
@@ -6264,7 +6264,7 @@
                                 errorLM +="Motivo <br>";
                             }
                         }
-                        /*if (this.datacondiciones.records[i].condicion == selectlm.value 
+                        if (this.datacondiciones.records[i].condicion == selectlm.value 
                             && this.datacondiciones.records[i].razon == selectlrazon.value 
                             && this.datacondiciones.records[i].motivo == selectlmotivo.value ){
                             if (this.datacondiciones.records[i].detalle == true ) {
@@ -6274,7 +6274,7 @@
                                     errorLM +="Detalle <br>";
                                 }
                             }
-                        }*/
+                        }
                         if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value && contexto_cuenta.datacondiciones.records[i].razon == selectlrazon.value && contexto_cuenta.datacondiciones.records[i].motivo == selectlmotivo.value ){
                             if (contexto_cuenta.datacondiciones.records[i].notifica == true && ($('.list_fl_respval_2').select2('val') == "" || $('.list_fl_respval_2').select2('val') == "0") ) {
                                 $('.list_fl_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
@@ -6419,7 +6419,7 @@
                                 errorLM +="Motivo <br>";
                             }
                         }
-                        /*if (this.datacondiciones.records[i].condicion == selectlm.value 
+                        if (this.datacondiciones.records[i].condicion == selectlm.value 
                             && this.datacondiciones.records[i].razon == selectlrazon.value 
                             && this.datacondiciones.records[i].motivo == selectlmotivo.value ){
                             if (this.datacondiciones.records[i].detalle == true ) {
@@ -6429,7 +6429,7 @@
                                     errorLM +="Detalle <br>";
                                 }
                             }
-                        }*/
+                        }
 
                         if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value && contexto_cuenta.datacondiciones.records[i].razon == selectlrazon.value && contexto_cuenta.datacondiciones.records[i].motivo == selectlmotivo.value ){
                             if (contexto_cuenta.datacondiciones.records[i].notifica == true && ($('.list_l_respval_2').select2('val') == "" || $('.list_l_respval_2').select2('val') == "0") ) {
@@ -6910,12 +6910,12 @@
                                     if( bloqueo) {
                                         
 										params["status_management_c"] = Productos[key].status_management_c;
-										//params["razon_c"] = Productos[key].razon_c;
-										//params["motivo_c"] = Productos[key].motivo_c;
-										//params["detalle_c"] = Productos[key].detalle_c;
-										//params["user_id_c"] = Productos[key].user_id_c;
-										//params["user_id1_c"] = Productos[key].user_id1_c;
-										//params["user_id2_c"] = Productos[key].user_id2_c;
+										params["razon_c"] = Productos[key].razon_c;
+										params["motivo_c"] = Productos[key].motivo_c;
+										params["detalle_c"] = Productos[key].detalle_c;
+										params["user_id_c"] = Productos[key].user_id_c;
+										params["user_id1_c"] = Productos[key].user_id1_c;
+										params["user_id2_c"] = Productos[key].user_id2_c;
                                         params["aprueba1_c"] = 1;
                                         params["aprueba2_c"] = 1;
                                         params["estatus_atencion"] = '3';
@@ -6966,7 +6966,15 @@
                                         params["id_Producto"] =  Productos[key].id;
                                         params["tipoupdate"] = '2';
                                         params["reactivacion_c"] = 0;
-
+                                        params["status_management_c"] = Productos[key].status_management_c;
+										params["razon_c"] = Productos[key].razon_c;
+										params["motivo_c"] = Productos[key].motivo_c;
+										params["detalle_c"] = Productos[key].detalle_c;
+										params["user_id_c"] = Productos[key].user_id_c;
+										params["user_id1_c"] = Productos[key].user_id1_c;
+										params["user_id2_c"] = Productos[key].user_id2_c;
+                                        params["notificacion_noviable_c"] = 1;
+                                        
                                         //var actualiza = app.api.buildURL('actualizaProductosPermisos/' + Productos[key].id, null, null);
                                         var uni = app.api.buildURL('actualizaProductosPermisos', null, null,params);
                                         var resp;
