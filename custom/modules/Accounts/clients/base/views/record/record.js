@@ -199,6 +199,8 @@
         //Carga de funcion quitar años lista para ventas anuales
         this.model.on('sync', this.quitaanos, this);
         this.model.on('sync', this.blockRecordNoContactar, this);
+        //bloquear no viable
+        this.model.on('sync', this.blockRecordNoViable, this);
         //this.model.on('sync', this._render, this);
         this.model.on('sync', this.hideconfiinfo, this);
         this.model.on('sync', this.disable_panels_rol, this); //@Jesus Carrilllo; metodo que deshabilita panels de acuerdo a rol;
@@ -4766,7 +4768,52 @@
 		}
     },
 
-  
+    blockRecordNoViable: function () {
+        
+        var idCuenta = this.model.get('id');
+        app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + idCuenta), null, {
+            success: function (data) {
+                valProd = data;
+                
+                var bloquemsg = false;
+                _.each(valProd, function (value, key) {
+                    if(valProd[key]['aprueba1_c'] == '1' && valProd[key]['aprueba2_c'] == '1'){
+                        var strUrl = 'tct4_Condiciones?filter[][condicion]='+valProd[key].status_management_c+'&filter[][razon]='+valProd[key].razon_c;
+						app.api.call("GET", app.api.buildURL(strUrl), null, {
+							success: _.bind(function (data1) {
+								if(data1.records.length > 0) {
+                                    razon = Productos[key].razon_c;
+                                        
+                                    _.each(data1.records, function (valor, llave) {
+                                        if(data1.records[llave].razon == razon && data1.records[llave].bloquea){
+                                            bloquemsg = true;
+                                        }
+                                        
+                                    });
+                                    
+                                    if(bloquemsg){
+                                        $('.record.tab-layout').attr('style', 'pointer-events:none');
+                                        $('.subpanel').attr('style', 'pointer-events:none');
+                                        app.alert.show("cuentas_no_contactar", {
+                                            level: "error",
+                                            title: "Cuenta No Contactable<br>",
+                                            messages: "Cuenta No viable. La cuenta se encuentra marcada como no viable y no puede ser editada, ni registrar actividad comercial. <br>Para retomar actividad comercial reactive la cuenta",
+                                            autoClose: false
+                                        });
+                                    }
+
+                                }
+                            }, this)
+						});
+                    }
+                });
+            },
+            error: function (e) {
+                throw e;
+            }
+        });
+    },
+    
     get_phones: function () {
         //Extiende This
         this.oTelefonos = [];

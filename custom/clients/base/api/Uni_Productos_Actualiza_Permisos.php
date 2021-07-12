@@ -330,10 +330,11 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                     if(($row['condicion'] == $beanProduct->status_management_c) && ($row['razon'] == $beanProduct->razon_c) 
                         && ($row['motivo'] == $beanProduct->motivo_c) && $row['bloquea'] == '0' ){
                             $desbloquear = true;
-                    }else{
-                        if($beanProduct->user_id_c == $beanUser->id){
-                            $notificacion = true;
-                        }
+                    }
+                    if(($row['condicion'] == $beanProduct->status_management_c) && ($row['razon'] == $beanProduct->razon_c) 
+                    && ($row['motivo'] == $beanProduct->motivo_c) && $row['bloquea'] == '1' && ($beanProduct->user_id_c == $beanUser->id))
+                    {
+                        $notificacion = true;
                     }
                 }
             }
@@ -349,7 +350,7 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                 $beanProduct->estatus_atencion = "1"; //notificaion noviable
                 $beanProduct->aprueba1_c = 0; //notificaion noviable
                 $beanProduct->aprueba2_c = 0; //notificaion noviable
-                $beanProduct->reactivacion_c = false; //notificaion noviable}
+                $beanProduct->reactivacion_c = 0; //notificaion noviable}
                 
                 $beanProduct->save();
                 $cont_cambios++;
@@ -359,7 +360,7 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                 try {
                     $beanProduct->aprueba1_c = 0; //status lm
                     $beanProduct->aprueba2_c = 0; //notificaion noviable
-                    $beanProduct->reactivacion_c = true;
+                    $beanProduct->reactivacion_c = 1;
 
                     $beanProduct->save();
                     $cont_cambios++;
