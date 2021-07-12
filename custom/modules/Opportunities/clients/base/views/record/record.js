@@ -1101,7 +1101,7 @@
 
             if (this.model.get('tct_etapa_ddw_c') == 'SI') {
                 if (parseFloat(this.model.get('ca_importe_enganche_c')) <= 0 && (this.model.get('tipo_producto_c') == "1" || this.model.get('tipo_producto_c') == "9") &&
-                    this.model.get('admin_cartera_c') != true) {
+                    this.model.get('admin_cartera_c') != true && this.model.get('producto_financiero_c') != '43') {
                     errors['ca_importe_enganche_c'] = errors['ca_importe_enganche_c'] || {};
                     errors['ca_importe_enganche_c'].required = true;
 
@@ -1114,7 +1114,7 @@
                 }
 
                 if ((parseFloat(this.model.get('porciento_ri_c')) <= 0 || this.model.get('porciento_ri_c') == "") && (this.model.get('tipo_producto_c') == "1" || this.model.get('tipo_producto_c') == "9") &&
-                    this.model.get('admin_cartera_c') != true) {
+                    this.model.get('admin_cartera_c') != true && this.model.get('producto_financiero_c') != '43') {
                     errors['porciento_ri_c'] = errors['porciento_ri_c'] || {};
                     errors['porciento_ri_c'].required = true;
 
@@ -2134,7 +2134,7 @@
 
     validapagounico: function (fields, errors, callback) {
         if (this.model.get('porciento_ri_c') != "" && this.model.get('porciento_ri_c') != undefined && (Number(this.model.get('porciento_ri_c')) <= 0 || Number(this.model.get('porciento_ri_c')) > 100.00) &&
-            this.model.get('admin_cartera_c') != true) {
+            this.model.get('admin_cartera_c') != true && this.model.get('producto_financiero_c') != '43') {
 
             if (parseFloat(this.model.get('porciento_ri_c')) <= 0.0000) {
                 errors['porciento_ri_c'] = errors['porciento_ri_c'] || {};
@@ -2583,6 +2583,10 @@
             //Prende los campos
             this.$('div[data-name=plazo_ratificado_incremento_c]').show();
             this.$('div[data-name=ri_usuario_bo_c]').show();
+        }
+        //Cambio texto Crédito Estructurado
+        if (this.model.get('producto_financiero_c') == 43 ) {
+            this.$("div.record-label[data-name='porciento_ri_c']").text("% Pago Inicial");
         }
     },
 
