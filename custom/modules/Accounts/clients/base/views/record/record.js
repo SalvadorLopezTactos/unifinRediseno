@@ -4766,6 +4766,7 @@
 		}
     },
 
+  
     get_phones: function () {
         //Extiende This
         this.oTelefonos = [];
@@ -5610,9 +5611,11 @@
                     Productos[key]['multilinea_c'] = (Productos[key]['multilinea_c'] == "1") ? true : false;
                     Productos[key]['exclu_precalif_c'] = (Productos[key]['exclu_precalif_c'] == "1") ? true : false;
                     Productos[key]['notificacion_noviable_c'] = (Productos[key]['notificacion_noviable_c'] == "1") ? true : false;
-                    Productos[key]['notificacion_noviable_c'] = (Productos[key]['notificacion_noviable_c'] == "1") ? true : false;
+                    Productos[key]['reactivacion_c'] = (Productos[key]['reactivacion_c'] == "1") ? true : false;
                     Productos[key]['razon_c'] = (Productos[key]['razon_c'] == null) ? "" : Productos[key]['razon_c'];
                     Productos[key]['motivo_c'] = (Productos[key]['motivo_c'] == null) ? "" : Productos[key]['motivo_c'];
+                    Productos[key]['aprueba1_c'] = (Productos[key]['aprueba1_c'] == "1") ? true : false;
+                    Productos[key]['aprueba2_c'] = (Productos[key]['aprueba2_c'] == "1") ? true : false;
                     
                     switch (tipoProducto) {
                         case "1": //Leasing
@@ -5801,7 +5804,7 @@
                                 errorLM +="Motivo <br>";
                             }
                         }
-                        if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value && contexto_cuenta.datacondiciones.records[i].razon == selectlrazon.value && contexto_cuenta.datacondiciones.records[i].motivo == selectlmotivo.value ){
+                        /*if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value && contexto_cuenta.datacondiciones.records[i].razon == selectlrazon.value && contexto_cuenta.datacondiciones.records[i].motivo == selectlmotivo.value ){
                             if (contexto_cuenta.datacondiciones.records[i].detalle == true ) {
                                 if ( $('.txt_l_so_detalle').val().trim() == "") {
                                     $('.txt_l_so_detalle').css('border-color', 'red'); //TXT ¿Qué producto?
@@ -5809,7 +5812,7 @@
                                     faltantelm += 1;
                                 }
                             }
-                        }
+                        }*/
                         if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value && contexto_cuenta.datacondiciones.records[i].razon == selectlrazon.value && contexto_cuenta.datacondiciones.records[i].motivo == selectlmotivo.value ){
                             if (contexto_cuenta.datacondiciones.records[i].notifica == true && ($('.list_l_respval_2').select2('val') == "" || $('.list_l_respval_2').select2('val') == "0") ) {
                                 $('.list_l_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
@@ -5952,7 +5955,7 @@
                             errorLM +="Motivo <br>";
                         }
                     }
-                    if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value
+                    /*if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value
                         && this.datacondiciones.records[i].razon == selectlrazon.value 
                         && this.datacondiciones.records[i].motivo == selectlmotivo.value ){
                         if (this.datacondiciones.records[i].detalle == true ) {
@@ -5962,7 +5965,7 @@
                                 errorLM +="Detalle <br>";
                             }
                         }
-                    }
+                    }*/
                     if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value && contexto_cuenta.datacondiciones.records[i].razon == selectlrazon.value && contexto_cuenta.datacondiciones.records[i].motivo == selectlmotivo.value ){
                         if (contexto_cuenta.datacondiciones.records[i].notifica == true && ($('.list_f_respval_2').select2('val') == "" || $('.list_f_respval_2').select2('val') == "0") ) {
                             $('.list_f_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
@@ -6105,7 +6108,7 @@
                                 errorLM +="Motivo <br>";
                             }
                         }
-                        if ( this.datacondiciones.records[i].condicion == selectlm.value 
+                        /*if ( this.datacondiciones.records[i].condicion == selectlm.value 
                             && this.datacondiciones.records[i].razon == selectlrazon.value 
                             && this.datacondiciones.records[i].motivo == selectlmotivo.value ){
                             if (this.datacondiciones.records[i].detalle == true ) {
@@ -6115,7 +6118,7 @@
                                     errorLM +="Detalle <br>";
                                 }
                             }
-                        }
+                        }*/
                         if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value && contexto_cuenta.datacondiciones.records[i].razon == selectlrazon.value && contexto_cuenta.datacondiciones.records[i].motivo == selectlmotivo.value ){
                             if (contexto_cuenta.datacondiciones.records[i].notifica == true && ($('.list_ca_respval_2').select2('val') == "" || $('.list_ca_respval_2').select2('val') == "0") ) {
                                 $('.list_ca_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
@@ -6261,7 +6264,7 @@
                                 errorLM +="Motivo <br>";
                             }
                         }
-                        if (this.datacondiciones.records[i].condicion == selectlm.value 
+                        /*if (this.datacondiciones.records[i].condicion == selectlm.value 
                             && this.datacondiciones.records[i].razon == selectlrazon.value 
                             && this.datacondiciones.records[i].motivo == selectlmotivo.value ){
                             if (this.datacondiciones.records[i].detalle == true ) {
@@ -6271,7 +6274,7 @@
                                     errorLM +="Detalle <br>";
                                 }
                             }
-                        }
+                        }*/
                         if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value && contexto_cuenta.datacondiciones.records[i].razon == selectlrazon.value && contexto_cuenta.datacondiciones.records[i].motivo == selectlmotivo.value ){
                             if (contexto_cuenta.datacondiciones.records[i].notifica == true && ($('.list_fl_respval_2').select2('val') == "" || $('.list_fl_respval_2').select2('val') == "0") ) {
                                 $('.list_fl_respval_2').find('.select2-choice').css('border-color', 'red'); //Fuera de Perfil (Razón)
@@ -6416,7 +6419,7 @@
                                 errorLM +="Motivo <br>";
                             }
                         }
-                        if (this.datacondiciones.records[i].condicion == selectlm.value 
+                        /*if (this.datacondiciones.records[i].condicion == selectlm.value 
                             && this.datacondiciones.records[i].razon == selectlrazon.value 
                             && this.datacondiciones.records[i].motivo == selectlmotivo.value ){
                             if (this.datacondiciones.records[i].detalle == true ) {
@@ -6426,7 +6429,7 @@
                                     errorLM +="Detalle <br>";
                                 }
                             }
-                        }
+                        }*/
 
                         if (contexto_cuenta.datacondiciones.records[i].condicion == selectlm.value && contexto_cuenta.datacondiciones.records[i].razon == selectlrazon.value && contexto_cuenta.datacondiciones.records[i].motivo == selectlmotivo.value ){
                             if (contexto_cuenta.datacondiciones.records[i].notifica == true && ($('.list_l_respval_2').select2('val') == "" || $('.list_l_respval_2').select2('val') == "0") ) {
@@ -6918,6 +6921,7 @@
                                         params["estatus_atencion"] = '3';
                                         params["reactivacion_c"] = false;
                                         params["tipoupdate"] = '2';
+                                        params["notificacion_noviable_c"] = 1;
                                         params["user_id"] = app.user.id;
                                         
 										/*_.each(Productos, function (value1, key1) {
