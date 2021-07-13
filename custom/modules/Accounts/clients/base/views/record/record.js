@@ -7180,6 +7180,11 @@
         params["reactivacion_c"] = true;
         //params["estatus_atencion"] = '1';
         
+        App.alert.show('loadingReactivar', {
+            level: 'process',
+            title: 'Reactivando cuenta, por favor espere',
+        });
+
         //var uni = app.api.buildURL('actualizaProductosPermisos/');
         var uni = app.api.buildURL('actualizaProductosPermisos', null, null,params);
         var resp;
