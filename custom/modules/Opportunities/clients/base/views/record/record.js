@@ -2708,8 +2708,8 @@
             self = this;
             app.api.call('GET', app.api.buildURL('GetMontoGpoEmpApi/' + idCuenta), null, {
                 success: function (data) {
-                    montoTotalGpoEmp = data['montoTotalGpoEmp'];
-                    numCuentasGpoEmp = data['numCuentasGpoEmp'];
+                    montoTotalGpoEmp = (data['montoTotalGpoEmp'] == null || data['montoTotalGpoEmp']==undefined) ? 0 : data['montoTotalGpoEmp'];
+                    numCuentasGpoEmp = (data['numCuentasGpoEmp'] == null || data['numCuentasGpoEmp']==undefined) ? 0 : data['numCuentasGpoEmp'];
 
                     if (self.model.get('estatus_c') != 'N' && checkRI != true && self.model.get('tipo_de_operacion_c')!='RATIFICACION_INCREMENTO') {
                         montoTotalGpoEmp = parseInt(montoTotalGpoEmp) + parseInt(self.model.get('monto_c'));
