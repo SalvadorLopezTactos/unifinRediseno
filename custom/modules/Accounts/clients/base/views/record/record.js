@@ -6936,15 +6936,17 @@
                                                 if((data1.records[llave].razon == razon) && (data1.records[llave].motivo == motivo) 
                                                 && data1.records[llave].bloquea) {
                                                     //bloqueo = true;
-                                                    if(app.user.id == Productos[key].aprueba1_c ){
-                                                        params["aprueba1_c"] = true;
-										                if(Productos[key].aprueba2_c){
+                                                    if(app.user.id == Productos[key].user_id1_c ){
+                                                        params["aprueba1_c"] = 1;
+                                                        aprueba1 = true;
+										                if(aprueba2){
                                                             bloqueo = true;
                                                         }
                                                     }
-                                                    if(app.user.id == Productos[key].aprueba2_c ){
-                                                        params["aprueba1_c"] = false;
-										                if(Productos[key].aprueba1_c){
+                                                    if(app.user.id == Productos[key].user_id2_c ){
+                                                        params["aprueba2_c"] = 1;
+                                                        aprueba2 = true;
+										                if(aprueba1){
                                                             bloqueo = true;
                                                         }
                                                     }
