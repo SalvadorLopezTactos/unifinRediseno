@@ -2122,6 +2122,10 @@
             if (this.model.get('tipo_producto_c') == '1') {
                 campos = campos.replace(/Renta Inicial/gi, "Pago Único");
             }
+            //Remplaza etiquetas para Crédito Estructurado
+            if (this.model.get('producto_financiero_c') == '43') {
+                campos = campos.replace(/Renta Inicial/gi, "Pago Inicial");
+            }
 
             app.alert.show("Campos Requeridos", {
                 level: "error",
