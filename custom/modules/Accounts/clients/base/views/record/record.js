@@ -6894,6 +6894,8 @@
         app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + this.model.get('id')), null, {
             success: function (data) {
 				Productos = data;
+                apruebaGeneral2 = false;
+                apruebaGEneral1 = false;
                 _.each(Productos, function (value, key) {
 					if(Productos[key].no_viable && (Productos[key].user_id1_c == app.user.id || Productos[key].user_id2_c == app.user.id)) {
 						var params = {};
@@ -6918,14 +6920,14 @@
 
                                                     if(app.user.id == Productos[key].user_id1_c ){
                                                         params["aprueba1_c"] = 1;
-                                                        aprueba1 = true;
+                                                        apruebaGeneral1 = true;
                                                         if(aprueba2){
                                                             bloqueo = true;
                                                         }
                                                     }
                                                     if(app.user.id == Productos[key].user_id2_c ){
                                                         params["aprueba2_c"] = 1;
-                                                        aprueba2 = true;
+                                                        apruebaGeneral2 = true;
                                                         if(aprueba1){
                                                             bloqueo = true;
                                                         }
@@ -6938,14 +6940,14 @@
                                                     //bloqueo = true;
                                                     if(app.user.id == Productos[key].user_id1_c ){
                                                         params["aprueba1_c"] = 1;
-                                                        aprueba1 = true;
+                                                        apruebaGeneral1 = true;
 										                if(aprueba2){
                                                             bloqueo = true;
                                                         }
                                                     }
                                                     if(app.user.id == Productos[key].user_id2_c ){
                                                         params["aprueba2_c"] = 1;
-                                                        aprueba2 = true;
+                                                        apruebaGeneral2 = true;
 										                if(aprueba1){
                                                             bloqueo = true;
                                                         }
@@ -7006,9 +7008,9 @@
                                         //cont_uni_p.render();
                                         
 									} else {
-                                        if(aprueba1 || aprueba2){
-                                            params["aprueba1_c"] = (aprueba1)? 1:0 ;
-                                            params["aprueba2_c"] = (aprueba2)? 1:0 ;
+                                        if(apruebaGeneral2 || apruebaGeneral1){
+                                            params["aprueba1_c"] = (apruebaGeneral1)? 1:0 ;
+                                            params["aprueba2_c"] = (apruebaGeneral2)? 1:0 ;
                                             params["estatus_atencion"] = '1';
                                         }else{
                                             params["aprueba1_c"] = 1;
