@@ -4,6 +4,8 @@
     initialize: function (options) {
         this._super("initialize", [options]);
         this.model.on('sync', this.roFunction, this);
+		this.model.on("change:tipo_sf_c",this.perIncentivo, this);
+		this.model.on("change:tipo_venta_c",this.perIncentivo, this);
         this.model.on('change:etapa', this.refrescaPipeLine, this);
         this.model.on("change:referenciador",this.addRegion, this);
         this.model.on("change:empleados_c",this.adDepartment, this);
@@ -35,17 +37,32 @@
         if(this.model.get('tipo_cuenta_c') == 3) this.model.set('tipo_cliente_c', 2);
     },
 
+    perIncentivo: function() {
+      if(this.model.get('user_id1_c')) var usrid = this.model.get('user_id1_c');
+	  if(this.model.get('user_id2_c')) var usrid = this.model.get('user_id2_c');
+      app.api.call("read", app.api.buildURL("Users/" + usrid, null, null, {}), null, {
+        success: _.bind(function (data) {
+		  if(data.puestousuario_c == 58) this.model.set('incentivo',15);
+		  if(this.model.get('tipo_venta_c') == 4) this.model.set('incentivo',0);
+		  if(this.model.get('tipo_sf_c') == 2 && data.puestousuario_c != 58) this.model.set('incentivo',10);
+		  if(this.model.get('tipo_sf_c') == 1 && data.productos_c.includes("8")) this.model.set('incentivo',15);
+        }, this)
+      });
+    },
+
     roFunction: function() {
-    		if(this.model.get('etapa') == 2 || this.model.get('etapa') == 5 || this.model.get('etapa') == 9 || this.model.get('etapa') == 10 || (app.user.get('puestousuario_c') != 56 && this.model.get('etapa') != 1))
-    		{
-          $('[name="edit_button"]').hide();
-    		  _.each(this.model.fields, function(field)
-       	  {
-     			  this.noEditFields.push(field.name);
-            $('.record-edit-link-wrapper[data-name='+field.name+']').remove();
+    	if(this.model.get('etapa') == 2 || this.model.get('etapa') == 5 || this.model.get('etapa') == 9 || this.model.get('etapa') == 10 || this.model.get('registro_no_valido_c') || (app.user.get('puestousuario_c') != 56 && app.user.get('puestousuario_c') != 58 && this.model.get('etapa') != 1))
+		{
+			if(app.user.get('puestousuario_c') != 56 || app.user.get('puestousuario_c') != 58 && this.model.get('etapa') != 9) $('[name="edit_button"]').hide();
+    		_.each(this.model.fields, function(field)
+			{
+				if(app.user.get('puestousuario_c') != 56 || app.user.get('puestousuario_c') != 58 && field.name != 'no_poliza_emitida_c' && field.name != 'inicio_vigencia_emitida_c' && field.name != 'fin_vigencia_emitida_c' && field.name != 'prima_neta_emitida_c' && field.name != 'cambio_pn_emitida_c' && field.name != 'prima_total_emitida_c' && field.name != 'cambio_pt_emitida_c' && field.name != 'forma_pago_emitida_c' && field.name != 'aseguradora_emitida_c' && field.name != 'fecha_pago_c' && field.name != 'fecha_aplicacion_c' && field.name != 'razon_cancel_ganada_c' && field.name != 'comentarios_ganada_c' && field.name != 'subetapa_c') {
+					this.noEditFields.push(field.name);
+					$('.record-edit-link-wrapper[data-name='+field.name+']').remove();
+				}
          	},this);
-     			this.noEditFields.push('prima_objetivo');
-          this.$("[data-name='prima_objetivo']").attr('style', 'pointer-events:none;');
+     		this.noEditFields.push('prima_objetivo');
+			this.$("[data-name='prima_objetivo']").attr('style', 'pointer-events:none;');
       	}
     },
         
@@ -54,6 +71,10 @@
       app.api.call("read", app.api.buildURL("Users/" + usrid, null, null, {}), null, {
         success: _.bind(function (data) {
           this.model.set('region',data.region_c);
+		  if(data.puestousuario_c == 58) this.model.set('incentivo',15);
+		  if(this.model.get('tipo_venta_c') == 4) this.model.set('incentivo',0);
+		  if(this.model.get('tipo_sf_c') == 2 && data.puestousuario_c != 58) this.model.set('incentivo',10);
+		  if(this.model.get('tipo_sf_c') == 1 && data.productos_c.includes("8")) this.model.set('incentivo',15);
         }, this)
       });
     },
@@ -63,6 +84,10 @@
       app.api.call("read", app.api.buildURL("Employees/" + empid, null, null, {}), null, {
         success: _.bind(function (data) {
           this.model.set('departamento_c',data.no_empleado_c);
+		  if(data.puestousuario_c == 58) this.model.set('incentivo',15);
+		  if(this.model.get('tipo_venta_c') == 4) this.model.set('incentivo',0);
+		  if(this.model.get('tipo_sf_c') == 2 && data.puestousuario_c != 58) this.model.set('incentivo',10);
+		  if(this.model.get('tipo_sf_c') == 1 && data.productos_c.includes("8")) this.model.set('incentivo',15);
         }, this)
       });
     },
