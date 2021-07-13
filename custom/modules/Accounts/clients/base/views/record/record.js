@@ -6895,7 +6895,7 @@
             success: function (data) {
 				Productos = data;
                 apruebaGeneral2 = false;
-                apruebaGEneral1 = false;
+                apruebaGeneral1 = false;
                 _.each(Productos, function (value, key) {
 					if(Productos[key].no_viable && (Productos[key].user_id1_c == app.user.id || Productos[key].user_id2_c == app.user.id)) {
 						var params = {};
@@ -6905,7 +6905,9 @@
 								if(data1.records.length > 0) {
                                     var bloqueo = false;
                                     var razon = "";
-                                    var motivo = "";
+                                    var motivo = "";                                    
+                                    //var apruebaGeneral2 = false;
+                                    //var apruebaGeneral1 = false;
                                     
                                     _.each(data1.records, function (valor, llave) {
                                         razon = Productos[key].razon_c;
