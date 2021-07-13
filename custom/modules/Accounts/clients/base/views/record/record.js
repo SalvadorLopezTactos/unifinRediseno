@@ -4772,8 +4772,6 @@
         var userpuesto = app.user.attributes.puestousuario_c;
         var puestos = ['5','11','16','53','54'];
 
-        
-        
         var idCuenta = this.model.get('id');
        
             app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + idCuenta), null, {
@@ -4789,9 +4787,10 @@
 		    					success: _.bind(function (data1) {
 		    						if(data1.records.length > 0) {
                                         razon = Productos[key].razon_c;
+                                        motivo = (Productos[key].motivo_c == null) ? "":Productos[key].motivo_c;
 
                                         _.each(data1.records, function (valor, llave) {
-                                            if(data1.records[llave].razon == razon && data1.records[llave].bloquea){
+                                            if(data1.records[llave].razon == razon && data1.records[llave].motivo == motivo && data1.records[llave].bloquea){
                                                 bloquemsg = true;
                                             }
 
