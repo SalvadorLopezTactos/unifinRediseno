@@ -384,6 +384,14 @@ array (
                 'name' => 'notifica_kam_c',
                 'label' => 'LBL_NOTIFICA_KAM',
               ),
+              35 => 
+              array (
+                'name' => 'registro_no_valido_c',
+                'label' => 'LBL_REGISTRO_NO_VALIDO',
+              ),
+              36 => 
+              array (
+              ),
             ),
           ),
           2 => 
@@ -535,6 +543,39 @@ array (
               ),
               4 => 
               array (
+                'name' => 'aseguradora_c',
+                'label' => 'LBL_ASEGURADORA',
+              ),
+              5 => 
+              array (
+              ),
+              6 => 
+              array (
+                'name' => 'fecha_ini_c',
+                'label' => 'LBL_FECHA_INI_C',
+              ),
+              7 => 
+              array (
+                'name' => 'fecha_fin_c',
+                'label' => 'LBL_FECHA_FIN_C',
+              ),
+              8 => 
+              array (
+                'name' => 'participa_kam_c',
+                'label' => 'LBL_PARTICIPA_KAM',
+              ),
+              9 => 
+              array (
+                'name' => 'seguro_uni2_c',
+                'label' => 'LBL_SEGURO_UNI2',
+              ),
+              10 => 
+              array (
+                'name' => 'subetapa_c',
+                'label' => 'LBL_SUBETAPA',
+              ),
+              11 => 
+              array (
                 'name' => 'prima_neta',
                 'related_fields' => 
                 array (
@@ -544,17 +585,12 @@ array (
                 'label' => 'LBL_PRIMA_NETA',
                 'readonly' => true,
               ),
-              5 => 
-              array (
-                'name' => 'aseguradora_c',
-                'label' => 'LBL_ASEGURADORA',
-              ),
-              6 => 
+              12 => 
               array (
                 'name' => 'incentivo',
                 'label' => 'LBL_INCENTIVO',
               ),
-              7 => 
+              13 => 
               array (
                 'name' => 'ingreso_ref',
                 'related_fields' => 
@@ -565,25 +601,83 @@ array (
                 'label' => 'LBL_INGRESO_REF',
                 'readonly' => true,
               ),
-              8 => 
+              14 => 
               array (
-                'name' => 'fecha_ini_c',
-                'label' => 'LBL_FECHA_INI_C',
+                'name' => 'no_poliza_emitida_c',
+                'label' => 'LBL_NO_POLIZA_EMITIDA',
               ),
-              9 => 
+              15 => 
               array (
-                'name' => 'fecha_fin_c',
-                'label' => 'LBL_FECHA_FIN_C',
               ),
-              10 => 
+              16 => 
               array (
-                'name' => 'participa_kam_c',
-                'label' => 'LBL_PARTICIPA_KAM',
+                'name' => 'inicio_vigencia_emitida_c',
+                'label' => 'LBL_INICIO_VIGENCIA_EMITIDA',
               ),
-              11 => 
+              17 => 
               array (
-                'name' => 'seguro_uni2_c',
-                'label' => 'LBL_SEGURO_UNI2',
+                'name' => 'fin_vigencia_emitida_c',
+                'label' => 'LBL_FIN_VIGENCIA_EMITIDA',
+              ),
+              18 => 
+              array (
+                'related_fields' => 
+                array (
+                  0 => 'currency_id',
+                  1 => 'base_rate',
+                ),
+                'name' => 'prima_neta_emitida_c',
+                'label' => 'LBL_PRIMA_NETA_EMITIDA',
+              ),
+              19 => 
+              array (
+                'name' => 'cambio_pn_emitida_c',
+                'label' => 'LBL_CAMBIO_PN_EMITIDA',
+              ),
+              20 => 
+              array (
+                'related_fields' => 
+                array (
+                  0 => 'currency_id',
+                  1 => 'base_rate',
+                ),
+                'name' => 'prima_total_emitida_c',
+                'label' => 'LBL_PRIMA_TOTAL_EMITIDA',
+              ),
+              21 => 
+              array (
+                'name' => 'cambio_pt_emitida_c',
+                'label' => 'LBL_CAMBIO_PT_EMITIDA',
+              ),
+              22 => 
+              array (
+                'name' => 'forma_pago_emitida_c',
+                'label' => 'LBL_FORMA_PAGO_EMITIDA',
+              ),
+              23 => 
+              array (
+                'name' => 'aseguradora_emitida_c',
+                'label' => 'LBL_ASEGURADORA_EMITIDA',
+              ),
+              24 => 
+              array (
+                'name' => 'fecha_pago_c',
+                'label' => 'LBL_FECHA_PAGO',
+              ),
+              25 => 
+              array (
+                'name' => 'fecha_aplicacion_c',
+                'label' => 'LBL_FECHA_APLICACION',
+              ),
+              26 => 
+              array (
+                'name' => 'razon_cancel_ganada_c',
+                'label' => 'LBL_RAZON_CANCEL_GANADA',
+              ),
+              27 => 
+              array (
+                'name' => 'comentarios_ganada_c',
+                'label' => 'LBL_COMENTARIOS_GANADA',
               ),
             ),
           ),
