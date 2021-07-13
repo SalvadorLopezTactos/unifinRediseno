@@ -36,10 +36,10 @@
 
         //Direcciones
         contexto_lead = this;
-        this.lDirecciones = [];
-        this.lDirecciones.direccion = [];
-        this.prev_lDirecciones = [];
-        this.prev_lDirecciones.prev_direccion = [];
+        this.oDirecciones = [];
+        this.oDirecciones.direccion = [];
+        this.prev_oDirecciones = [];
+        this.prev_oDirecciones.prev_direccion = [];
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
     },
 
@@ -802,7 +802,7 @@
 
     setCustomFields: function (fields, errors, callback) {
         //Direcciones
-        this.model.set('lead_direcciones', this.lDirecciones.direccion);
+        this.model.set('lead_direcciones', this.oDirecciones.direccion);
 
         callback(null, fields, errors);
     },    
