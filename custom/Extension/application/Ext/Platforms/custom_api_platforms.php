@@ -1,5 +1,5 @@
 <?php
- // created: 2021-05-03 19:39:26
+ // created: 2021-07-14 10:07:30
 $platforms[] = 'api';
 $platforms[] = 'unifinAPI';
 $platforms[] = 'efactor';
@@ -25,3 +25,5 @@ $platforms[] = 'cvimInfografias';
 $platforms[] = 'cvimExpDigital';
 $platforms[] = 'portalUnifin';
 $platforms[] = 'portalUniclick';
+$platforms[] = 'cvimUnion';
+$platforms[] = 'quantico';
