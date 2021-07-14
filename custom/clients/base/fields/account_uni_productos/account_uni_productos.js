@@ -392,9 +392,9 @@
                 $('.l_so_motivo').show();
                 $('.l_so_detalle').show();
                 $('.l_so_resp_ingesta').show(); 
-                if(this.busca_bloquea(cont_uni_p.ResumenProductos.leasing.status_management_c  , cont_uni_p.ResumenProductos.leasing.razon_c , cont_uni_p.ResumenProductos.leasing.motivo_c )){
+                /*if(this.busca_bloquea(cont_uni_p.ResumenProductos.leasing.status_management_c  , cont_uni_p.ResumenProductos.leasing.razon_c , cont_uni_p.ResumenProductos.leasing.motivo_c )){
                     $('.l_so_raspval2').show(); 
-                }                
+                } */               
             }
             if(cont_uni_p.ResumenProductos.leasing.status_management_c == '1' ){
                 if(cont_uni_p.ResumenProductos.leasing.deshabilitar_lmedit){
@@ -528,9 +528,9 @@
                 $('.f_so_resp_ingesta').show();
                 $('.f_so_raspval1').show();
                 //$('.f_so_raspval2').show();  
-                if(this.busca_bloquea(cont_uni_p.ResumenProductos.factoring.status_management_c  , cont_uni_p.ResumenProductos.factoring.razon_c , cont_uni_p.ResumenProductos.factoring.motivo_c )){
+                /*if(this.busca_bloquea(cont_uni_p.ResumenProductos.factoring.status_management_c  , cont_uni_p.ResumenProductos.factoring.razon_c , cont_uni_p.ResumenProductos.factoring.motivo_c )){
                     $('.f_so_raspval2').show();
-                }
+                }*/
             }
             if(cont_uni_p.ResumenProductos.factoring.status_management_c == '1' ){
                 if(cont_uni_p.ResumenProductos.factoring.deshabilitar_lmedit){
@@ -660,9 +660,9 @@
                 $('.ca_so_resp_ingesta').show();
                 $('.ca_so_raspval1').show();
                 //$('.ca_so_raspval2').show();  
-                if(this.busca_bloquea(cont_uni_p.ResumenProductos.credito_auto.status_management_c  , cont_uni_p.ResumenProductos.credito_auto.razon_c , cont_uni_p.ResumenProductos.credito_auto.motivo_c )){
+                /*if(this.busca_bloquea(cont_uni_p.ResumenProductos.credito_auto.status_management_c  , cont_uni_p.ResumenProductos.credito_auto.razon_c , cont_uni_p.ResumenProductos.credito_auto.motivo_c )){
                     $('.ca_so_raspval2').show(); 
-                }
+                }*/
             }
             if(cont_uni_p.ResumenProductos.credito_auto.status_management_c == '1' ){
                 if(cont_uni_p.ResumenProductos.credito_auto.deshabilitar_lmedit){
@@ -795,9 +795,9 @@
                 $('.fl_so_resp_ingesta').show();
                 $('.fl_so_raspval1').show();
                 //$('.fl_so_raspval2').show();  
-                if(this.busca_bloquea(cont_uni_p.ResumenProductos.fleet.status_management_c  , cont_uni_p.ResumenProductos.fleet.razon_c , cont_uni_p.ResumenProductos.fleet.motivo_c )){
+                /*if(this.busca_bloquea(cont_uni_p.ResumenProductos.fleet.status_management_c  , cont_uni_p.ResumenProductos.fleet.razon_c , cont_uni_p.ResumenProductos.fleet.motivo_c )){
                     $('.fl_so_raspval2').show(); 
-                }
+                }*/
             }
             if(cont_uni_p.ResumenProductos.fleet.status_management_c == '1' ){
                 if(cont_uni_p.ResumenProductos.fleet.deshabilitar_lmedit){
@@ -929,9 +929,9 @@
                 $('.u_so_resp_ingesta').show();
                 $('.u_so_raspval1').show();
                 //$('.u_so_raspval2').show(); 
-                if(this.busca_bloquea(cont_uni_p.ResumenProductos.uniclick.status_management_c  , cont_uni_p.ResumenProductos.uniclick.razon_c , cont_uni_p.ResumenProductos.uniclick.motivo_c )){
+                /*if(this.busca_bloquea(cont_uni_p.ResumenProductos.uniclick.status_management_c  , cont_uni_p.ResumenProductos.uniclick.razon_c , cont_uni_p.ResumenProductos.uniclick.motivo_c )){
                     $('.u_so_raspval2').show(); 
-                }
+                }*/
             }
             if(cont_uni_p.ResumenProductos.uniclick.status_management_c == '1' ){
                 if(cont_uni_p.ResumenProductos.uniclick.deshabilitar_lmedit){
