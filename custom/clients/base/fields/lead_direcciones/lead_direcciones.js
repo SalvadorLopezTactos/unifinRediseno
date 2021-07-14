@@ -1105,15 +1105,15 @@
             }
 
             //Validación 2:
-            if (cDireccionFiscal == 0 || cDireccionCorrs == 0) {
-                app.alert.show('multiple_fiscal', {
-                    level: 'error',
-                    autoClose: true,
-                    messages: "Se requiere de al menos una direcci\u00F3n fiscal y una de correspondencia.",
-                });
-                errors['lead_direcciones_corr_fiscal'] = errors['lead_direcciones_corr_fiscal'] || {};
-                errors['lead_direcciones_corr_fiscal'].required = true;
-            }
+            // if (cDireccionFiscal == 0 || cDireccionCorrs == 0) {
+            //     app.alert.show('multiple_fiscal', {
+            //         level: 'error',
+            //         autoClose: true,
+            //         messages: "Se requiere de al menos una direcci\u00F3n fiscal y una de correspondencia.",
+            //     });
+            //     errors['lead_direcciones_corr_fiscal'] = errors['lead_direcciones_corr_fiscal'] || {};
+            //     errors['lead_direcciones_corr_fiscal'].required = true;
+            // }
 
             //Validación 3: Si existe más de 1 dirección Administración regresa error y muestra alerta
             if (cDireccionAdmin > 1) {
