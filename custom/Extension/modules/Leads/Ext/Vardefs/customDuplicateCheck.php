@@ -1,7 +1,7 @@
 <?php
 
 $dictionary['Lead']['duplicate_check'] = array(
-    'enabled' => true,
+    'enabled' => false,
     'LeadFieldDuplicateCheck' => array(
         'field' => 'clean_name_c'        
     )

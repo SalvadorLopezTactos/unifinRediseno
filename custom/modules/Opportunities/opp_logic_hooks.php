@@ -216,7 +216,7 @@ SQL;
     {
         require_once("custom/clients/base/api/excluir_productos.php");
 
-        global $db, $current_user;
+        global $db, $current_user, $app_list_strings;
         $args_uni_producto = [];
         $args_uni_producto['idCuenta'] = $bean->account_id;
         $args_uni_producto['Producto'] = $bean->tipo_producto_c;
@@ -248,6 +248,7 @@ SQL;
         $generaSolicitud = ($args['isUpdate'] == 1 && $bean->tct_etapa_ddw_c == 'SI' && $bean->producto_financiero_c!="0" &&$bean->producto_financiero_c!="") ? true : $generaSolicitud;
         $generaSolicitud = ($args['isUpdate'] == 1 && $bean->admin_cartera_c) ? true : $generaSolicitud;
         $generaSolicitud = ($args['isUpdate'] == 1 && $row['no_viable'] == '1') ? false: $generaSolicitud;
+        $generaSolicitud = ($app_list_strings['switch_inicia_proceso_list']['ejecuta'] == 1) ? $generaSolicitud: false;   //Control para swith que indica si debe ejecutar o no inicia-proceso a uni2
         /*$GLOBALS['log']->fatal('valor Genera Solicitud JG: ' . $generaSolicitud);
         $GLOBALS['log']->fatal('Id process JG: ' . $bean->id_process_c);
         $GLOBALS['log']->fatal('Tipo operacion JG: ' . $bean->tipo_operacion_c);*/
@@ -492,6 +493,10 @@ SQL;
               $opp->tct_etapa_ddw_c = 'SI';
               $opp->estatus_c = '';
             }
+
+            //Agregar condiciones financieras Quantico
+            $opp->cf_quantico_c = $bean->cf_quantico_c;
+            $opp->cf_quantico_politica_c = $bean->cf_quantico_politica_c;
 
             $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> Condiciones en nueva solicitud : " . print_r(count($opp->condiciones_financieras), 1));
             $id = $opp->save();
@@ -1112,9 +1117,14 @@ SQL;
                 $this->actualizaTipoCuenta('2', '10', $cliente, $producto);
             }
             //Actualiza cuando la solicitud es Autorizada (N) Cliente Con Línea Vigente: 3, 18
-            if ($bean->estatus_c == "N") { //Etapa solicitud= N= Autorizada
+            if ($bean->estatus_c == "N" && $producto!='3') { //Etapa solicitud= N= Autorizada
                 $GLOBALS['log']->fatal('Cliente con Línea Vigente');
                 $this->actualizaTipoCuenta('3', '18', $cliente, $producto);
+                $bean->tipo_operacion_c = '2';
+            }
+            if ($bean->estatus_c == "N" && $producto=='3') { //Etapa solicitud= N= Autorizada
+                $GLOBALS['log']->fatal('Manda Credito Automotriz como: Prospecto con Línea');
+                $this->actualizaTipoCuenta('2', '12', $cliente, $producto);
                 $bean->tipo_operacion_c = '2';
             }
         }
@@ -1221,7 +1231,7 @@ function actualizaTipoCuenta($tipo=null, $subtipo=null, $idCuenta=null, $tipoPro
                     $tipoSubtipo = mb_strtoupper(trim($tipoList[$tipo].' '.$subtipoList[$subtipo]),'UTF-8');
                     //Itera productos recuperados
                     foreach ($relateProducts as $product) {
-                        if ($tipoProducto == $product->tipo_producto && (($product->tipo_cuenta!='3' && $product->subtipo_cuenta!=$subtipo ) || ($subtipo=='18')) ) {
+                        if ($tipoProducto == $product->tipo_producto && ($product->tipo_cuenta!='3' && $product->subtipo_cuenta!=$subtipo ) ) {
                             //Actualiza tipo y subtipo de producto
                             $product->tipo_cuenta = $tipo;
                             $product->subtipo_cuenta = $subtipo;

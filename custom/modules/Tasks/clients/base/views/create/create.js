@@ -28,11 +28,11 @@
     Oculta los campos relacionados
     */
     disableparentsfields:function () {
-        if(this.createMode){//Evalua si es la vista de creacion
-            if(this.model.get('parent_id')!=undefined){
-                this.$('[data-name="parent_name"]').attr('style','pointer-events:none;')
-            }
-        }
+        // if(this.createMode){//Evalua si es la vista de creacion
+        //     if(this.model.get('parent_id')!=undefined){
+        //         this.$('[data-name="parent_name"]').attr('style','pointer-events:none;')
+        //     }
+        // }
 		
 		
 		if (App.user.attributes.puestousuario_c=='27'||App.user.attributes.puestousuario_c=='31') {
@@ -163,10 +163,11 @@
 			}else{
 				this.model.set('name', "AYUDA CP");
 			}
-        }else{
-            this.model.set('name', '');
-			this.model.set('date_due', '');
         }
+        // else{
+        //     this.model.set('name', '');
+		// 	this.model.set('date_due', '');
+        // }
     },
 	
 	/*

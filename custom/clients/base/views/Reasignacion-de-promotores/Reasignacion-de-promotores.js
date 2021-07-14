@@ -24,6 +24,7 @@
 
         this.cuentas = '';
         this.seleccionados = [];
+        this.objEtiquetaID = {};
         this.persistNoSeleccionados=[];
         this.flagSeleccionados=0;
         this.tipo_cuenta = App.lang.getAppListStrings('tipo_registro_cuenta_list');
@@ -110,7 +111,7 @@
                 if(content.trim() ==""){
                     $('.btnSubir').removeClass('disabled');
                     $('.btnSubir').attr('style', 'margin:10px');
-                    app.alert.dismiss('reasignandoCSV');                    
+                    app.alert.dismiss('reasignandoCSV');
                     app.alert.show('csvVacio', {
                         level: 'error',
                         messages: 'Archivo sin contenido, favor de elegir un archivo v\u00E1lido',
@@ -194,7 +195,7 @@
 
             this.persistNoSeleccionados=[];
         }
-        
+
 
         //Control de bandera para saber si se ha oprimido el botón de "Seleccionar Todo" y de esta manera saber si el siguiente "offset" de la tabla
         // debe mostrarse con los check como true
@@ -260,7 +261,7 @@
         $("#offset_value").html(current_set);
         $("#offset_value").attr("from_set", next_from_set);
         $("#offset_value").attr("to_set", next_to_set);
-        this.buscarCuentas();
+        this.buscarCuentas(1);
     },
 
     previousOffset: function(){
@@ -278,10 +279,18 @@
         $("#offset_value").html(current_set);
         $("#offset_value").attr("from_set", next_from_set);
         $("#offset_value").attr("to_set", next_to_set);
-        this.buscarCuentas();
+        this.buscarCuentas(1);
     },
 
-    buscarCuentas: function(){
+    buscarCuentas: function(flagClean=0){
+        //Establece objeto vacio de las cuentas seleccionadas y desmarca los check seleccionados
+
+        if(flagClean != 1){
+            this.objEtiquetaID = {};
+            $("#offset_value").attr("from_set", 0);
+            $("#crossSeleccionados").val("");
+        }
+
         var assigneUsr = this.model.get('users_accounts_1users_ida');
         //Condición para controlar la búsqueda cuando no se ha seleccionado Promotor, esto sucede cuando se da click en el icono con el tache
         //dentro del campo Asesor Actual con formato select2
@@ -329,8 +338,8 @@
             $('#processing').show();
             app.api.call("read", app.api.buildURL("ReasignaciondePromotoresBusqueda/" + assigneUsr, null, null, {}), null, {
                 success: _.bind(function (data) {
-                    console.log(typeof data);
-                    console.log(data);
+                    // console.log(typeof data);
+                    // console.log(data);
                     if (data.total <= 0) {
                         var alertOptions = {
                             title: "No se encontraron clientes para el usuario seleccionado del producto: " + producto_seleccionado,
@@ -354,7 +363,7 @@
                                 var index = tempArray.indexOf(this.persistNoSeleccionados[i]);
                                 if (index > -1) {
                                   tempArray.splice(index, 1);
-                                }                                
+                                }
                             }
                         }
 
@@ -460,6 +469,9 @@
         if($(e.target).is(':checked')){
             seleccionarTodo.push($(e.target).val());
             this.seleccionados = seleccionarTodo;
+
+            this.objEtiquetaID[$(e.target).val()]=$(e.currentTarget).attr('title'); //OBJ DEL ID Y LA ETIQUETA DE REGISTROS SELECCIONADOS
+
         }else{
             var itemToRemove = $(e.target).val();
             var seleccionadosClone = seleccionarTodo;
@@ -471,6 +483,8 @@
                 }
             });
             this.seleccionados = seleccionadosCleaned;
+            // console.log(this.seleccionados);
+            delete this.objEtiquetaID[itemToRemove]; //ELIMINA LOS ID Y ETIQUETA DE LOS REGISTROS DESMARCADOS
         }
 
         //Validación para controlar checks seleccionados en caso de que se hayan seleccionado todos los registros
@@ -501,6 +515,15 @@
     },
 
     reAsignarCuentas: function(){
+
+        //CONTEO DE NUMERO DE PROSPECTOS SELECCIONADOS
+        var countProspecto = 0;
+        Object.entries(this.objEtiquetaID).forEach(([key, value]) => {
+            if (value == 'Prospecto'){
+                countProspecto++;
+            }
+        });
+
         self=this;
         var reAssignarA = this.model.get('asignar_a_promotor_id');
         var promoActual = this.model.get('users_accounts_1users_ida');
@@ -529,19 +552,36 @@
             app.api.call('GET', app.api.buildURL('GetRegistrosAsignadosForProtocolo/' + id_user), null, {
                 success: function (data) {
                     App.alert.dismiss('obtieneAsignados');
-                    var maximo_registros_list=App.lang.getAppListStrings('limite_maximo_asignados_list');
-                    var maximo_registros=parseInt(maximo_registros_list["1"]);
-                    if(data.total_asignados>=maximo_registros && (data.puesto=='2' || data.puesto=='5')){
+                    //var maximo_registros_list=App.lang.getAppListStrings('limite_maximo_asignados_list');
+                    var maximo_registros=data.limite;
+
+                    //VALIDA EL CONTEO DE PROSPECTOS
+                    if ((maximo_registros - data.total_asignados) < countProspecto && countProspecto != 0 && data.posicion_operativa.includes('3')) {
+
+                        var leadsDesmarcar = 0;
+                        leadsDesmarcar = ((maximo_registros - data.total_asignados) > 0)?countProspecto-(maximo_registros - data.total_asignados) : "todos los ";
+
                         var alertOptions = {
-                            title: "No es posible reasignar al asesor seleccionado ya que cuenta con más de 20 registros asignados<br>Para continuar es necesario atender alguno de sus registros asignados",
+                            title: "No es posible reasignar al asesor seleccionado ya que cuenta con más de " + maximo_registros +" registros asignados de la Metodología LM <br>Si desea continuar con la asignación de:<br>Personas, Clientes o Proveedores,<br>Desmarque " + leadsDesmarcar + " prospecto (s) seleccionado (s).",
                             level: "error"
                         };
-                        app.alert.show('validation', alertOptions);
+                        app.alert.show('validaNumeroProspectos', alertOptions);
+
+                        return;
+                    }
+                    //VALIDA EL TOTAL DE ASIGNADOS CONTRA EL MAXIMO DE REGISTROS Y CUENTA EL NUMERO DE PROSPECTOS
+                    if(data.total_asignados>=maximo_registros && (data.puesto=='2' || data.puesto=='5') && countProspecto >= 1){
+                        var alertOptions = {
+                            title: "No es posible reasignar al asesor seleccionado ya que cuenta con más de " + maximo_registros +" registros asignados<br>Para continuar es necesario atender alguno de sus registros asignados.",
+                            level: "error"
+                        };
+                        app.alert.show('validationProspecto', alertOptions);
 
                     }else{
                         var parametros = self.seleccionados;
                         var producto_seleccionado = $("#Productos").val();
                         if(!_.isEmpty(parametros)) {
+
                             var Params = {
                                 'optBl':radioBl,
                                 'seleccionados': parametros,
@@ -591,7 +631,7 @@
                 }
             });
 
-            
+
         }else{
             var alertOptions = {
                 title: "Por favor, seleccione un asesor Destino",

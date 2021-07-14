@@ -1,9 +1,9 @@
 ({
     extendsFrom: 'RecordView',
 
-    events: {
-        'click .record-edit-link-wrapper': 'handleEdit',
-    },
+    // events: {
+    //     'click .record-edit-link-wrapper': 'handleEdit',
+    // },
 
     initialize: function (options) {
         self = this;
@@ -18,7 +18,7 @@
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         this.model.addValidationTask('checkdate', _.bind(this.checkdate, this));
 		this.model.addValidationTask('valida_asignado', _.bind(this.valida_asignado, this));
-
+        this.model.addValidationTask('metodo_asignacion_lm', _.bind(this.metodoAsignacionLM, this));
         /*@Jesus Carrillo
             Funcion que pinta de color los paneles relacionados
         */
@@ -33,65 +33,63 @@
      * Se habilita handleEdit, editClicked y cancelClicked para dejar habilitado el campo parent_name y solo se bloquea al
      * dar click en el campo e intentar editar
      * */
-    handleEdit: function(e, cell) {
-        var target,
-            cellData,
-            field;
-        if (e) { // If result of click event, extract target and cell.
-            target = this.$(e.target);
-            cell = target.parents('.record-cell');
-        }
+    // handleEdit: function(e, cell) {
+    //     var target,
+    //         cellData,
+    //         field;
+    //     if (e) { // If result of click event, extract target and cell.
+    //         target = this.$(e.target);
+    //         cell = target.parents('.record-cell');
+    //     }
 
-        if(e.currentTarget.dataset['name']=='parent_name'){
+    //     if(e.currentTarget.dataset['name']=='parent_name'){
 
-            this.inlineEditMode = false;
+    //         this.inlineEditMode = false;
 
-        }else{
+    //     }else{
 
-            cellData = cell.data();
-            field = this.getField(cellData.name);
+    //         cellData = cell.data();
+    //         field = this.getField(cellData.name);
 
-            // Set Editing mode to on.
-            this.inlineEditMode = true;
+    //         // Set Editing mode to on.
+    //         this.inlineEditMode = true;
 
-            this.setButtonStates(this.STATE.EDIT);
+    //         this.setButtonStates(this.STATE.EDIT);
 
-            this.toggleField(field);
+    //         this.toggleField(field);
 
-            if (cell.closest('.headerpane').length > 0) {
-                this.toggleViewButtons(true);
-                this.adjustHeaderpaneFields();
-            }
+    //         if (cell.closest('.headerpane').length > 0) {
+    //             this.toggleViewButtons(true);
+    //             this.adjustHeaderpaneFields();
+    //         }
 
-        }
+    //     }
 
 
-    },
+    // },
 
-    editClicked: function() {
+    // editClicked: function() {
 
-        this._super("editClicked");
-        this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;');
-        this.setButtonStates(this.STATE.EDIT);
-        this.action = 'edit';
-        this.toggleEdit(true);
-        this.setRoute('edit');
+    //     this._super("editClicked");
+    //     this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;');
+    //     this.setButtonStates(this.STATE.EDIT);
+    //     this.action = 'edit';
+    //     this.toggleEdit(true);
+    //     this.setRoute('edit');
 
-    },
+    // },
 
-    cancelClicked: function() {
+    // cancelClicked: function() {
 
-        this._super("cancelClicked");
-
-        this.$('[data-name="parent_name"]').attr('style', '');
-
-        this.setButtonStates(this.STATE.VIEW);
-        this.action = 'detail';
-        this.handleCancel();
-        this.clearValidationErrors(this.editableFields);
-        this.setRoute();
-        this.unsetContextAction();
-    },
+    //     this._super("cancelClicked");
+    //     this.$('[data-name="parent_name"]').attr('style', '');
+    //     this.setButtonStates(this.STATE.VIEW);
+    //     this.action = 'detail';
+    //     this.handleCancel();
+    //     this.clearValidationErrors(this.editableFields);
+    //     this.setRoute();
+    //     this.unsetContextAction();
+    // },
 
     _render: function () {
         this._super("_render");
@@ -254,10 +252,11 @@
 			}else{
 				this.model.set('name', "AYUDA CP");
 			}
-        }else{
-            this.model.set('name', '');
-			this.model.set('date_due', '');
         }
+        // else{
+        //     this.model.set('name', '');
+		// 	this.model.set('date_due', '');
+        // }
     },
 	
 	/*
@@ -319,5 +318,76 @@
                 }, this)
             });
         }
+    },
+
+    metodoAsignacionLM: function (fields, errors, callback) {
+
+        if (this.model.get('name') == "Solicitud de asignación de Lead/Cuenta - (Lead Management)") {
+            
+            if (this.model.get('status') == 'Completed') {
+                
+                if((this.model.get('parent_type') == "Accounts" || this.model.get('parent_type') == "Leads" || this.model.get('parent_type') == "") && 
+                this.model.get('parent_id') == ""){
+                    
+                    app.alert.show('message-metodo-lm', {
+                        level: 'error',
+                        messages: 'Seleccionar un Lead/Cuenta relacionada con la Tarea!',
+                        autoClose: false
+                    });
+
+                    errors['parent_name'] = errors['parent_name'] || {};
+                    errors['parent_name'].required = true;
+                
+                } else {
+
+                    if(this.model.get('parent_type') == "Leads" && this.model.get('parent_id') != ""){
+                        
+                        var lead_ = app.data.createBean('Leads', {id: this.model.get('parent_id')});
+                        lead_.fetch({
+                            success: _.bind(function (model) {
+                                //Método de Asignación LM - Centro de Prospección
+                                model.set('metodo_asignacion_lm_c','1');
+                                model.save(); 
+                            
+                            }, this)
+                        });
+                    }
+                    if(this.model.get('parent_type') == "Accounts" && this.model.get('parent_id') != ""){
+                        
+                        var userTipoProducto = App.user.attributes.tipodeproducto_c;
+                        var idProducto = '';
+
+                        app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + this.model.get('parent_id')), null, {
+                            success: function (data) {
+                                Productos = data;
+            
+                                _.each(Productos, function (value, key) {
+                                    var tipoProducto = Productos[key].tipo_producto;
+                                    
+                                    if (tipoProducto == userTipoProducto) { //Tipo de Producto Leasing "1"
+                                        
+                                        idProducto = Productos[key].id; //Id cuenta de uni productos "Leasing"
+                                        
+                                        var producto = app.data.createBean('uni_Productos', { id: idProducto });
+                                        producto.fetch({
+                                            success: _.bind(function (model) {
+                                                //Método de Asignación LM - Centro de Prospección
+                                                model.set('metodo_asignacion_lm_c','1');
+                                                model.save();
+
+                                            }, this)
+                                        });
+                                    }
+                                });
+                            },
+                            error: function (e) {
+                                throw e;
+                            }
+                        });
+                    }
+                }
+            }
+        }
+        callback(null, fields, errors);
     },
 })

@@ -1,0 +1,9 @@
+# BEGIN SUGARCRM RESTRICTIONS
+
+<IfModule mod_rewrite.c>
+    Options +FollowSymLinks
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [R=404,L]
+</IfModule>
+# END SUGARCRM RESTRICTIONS
+

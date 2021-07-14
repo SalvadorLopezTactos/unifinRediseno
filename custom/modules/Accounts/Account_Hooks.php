@@ -1090,62 +1090,13 @@ where rfc_c = '{$bean->rfc_c}' and
             $bean->name = $bean->razonsocial_c;
         }
 
-        //Crea Clean_name (exclusivo para aplicativos externos a CRM)
-        if ($bean->clean_name == "" || $bean->clean_name == null) {
-            $tipo = $app_list_strings['validacion_simbolos_list']; //obtencion lista simbolos
-            $acronimos = $app_list_strings['validacion_duplicados_list'];
-
-            if ($bean->tipodepersona_c != "Persona Moral") {
-                //$GLOBALS['log']->fatal(print_r($tipo,true));
-                //Cambia a mayúsculas y quita espacios a cada campo
-                //Concatena los tres campos para formar el clean_name
-                $nombre = $bean->name;
-                $nombre = mb_strtoupper($nombre, "UTF-8");
-                $separa = explode(" ", $nombre);
-                //$GLOBALS['log']->fatal(print_r($separa,true));
-                $longitud = count($separa);
-                //Itera el arreglo separado
-                for ($i = 0; $i < $longitud; $i++) {
-                    foreach ($tipo as $t => $key) {
-                        $separa[$i] = str_replace($key, "", $separa[$i]);
-                    }
-                }
-                $une = implode($separa);
-                $bean->clean_name = $une;
-                //$GLOBALS['log']->fatal($bean->clean_name);
-
-            } else {
-                //$GLOBALS['log']->fatal($bean->razonsocial_c);
-                $nombre = $bean->name;
-                $nombre = mb_strtoupper($nombre, "UTF-8");
-                $separa = explode(" ", $nombre);
-                $separa_limpio = $separa;
-                $GLOBALS['log']->fatal(print_r($separa, true));
-                $longitud = count($separa);
-                $eliminados = 0;
-                //Itera el arreglo separado
-                for ($i = 0; $i < $longitud; $i++) {
-                    foreach ($tipo as $t => $key) {
-                        $separa[$i] = str_replace($key, "", $separa[$i]);
-                        $separa_limpio[$i] = str_replace($key, "", $separa_limpio[$i]);
-                    }
-                    foreach ($acronimos as $a => $key) {
-                        if ($separa[$i] == $a) {
-                            $separa[$i] = "";
-                            $eliminados++;
-                        }
-                        //$GLOBALS['log']->fatal($a);
-                        $GLOBALS['log']->fatal(print_r($separa, true));
-                    }
-                }
-                //Condicion para eliminar los acronimos
-                if (($longitud - $eliminados) <= 1) {
-                    $separa = $separa_limpio;
-                }
-                //Convierte el array a string nuevamente
-                $une = implode($separa);
-                $bean->clean_name = $une;
-            }
+        //Consumir servicio de cleanName, declarado en custom api
+        require_once("custom/clients/base/api/cleanName.php");
+        $apiCleanName= new cleanName();
+        $body=array('name'=>$bean->name);
+        $response=$apiCleanName->getCleanName(null,$body);
+        if ($response['status']=='200') {
+            $bean->clean_name = $response['cleanName'];
         }
     }
 
@@ -1187,7 +1138,8 @@ where rfc_c = '{$bean->rfc_c}' and
         if (!empty($bean->id_uniclick_c) && $bean->id != "") {
             //Consulta id_uniclick_c
             $query = "SELECT id_c, id_uniclick_c FROM accounts_cstm
-            WHERE id_c != '{$bean->id}' and id_uniclick_c = '{$bean->id_uniclick_c}'";
+            inner join accounts on id=id_c
+            WHERE id_c != '{$bean->id}' and id_uniclick_c = '{$bean->id_uniclick_c}' and deleted=0";
             //Ejecuta consulta
             $queryResult = $db->query($query);
             while ($row = $db->fetchByAssoc($queryResult)) {
@@ -1248,10 +1200,9 @@ where rfc_c = '{$bean->rfc_c}' and
         //Sólo se ejecuta en la creación
         if (!$args['isUpdate']) {
             //Declara variables para generación de registros
-            global $current_user;
-            global $app_list_strings;
+            global $current_user,$app_list_strings,$db;
             $beanprod = null;
-
+            $idSinGestor = '569246c7-da62-4664-ef2a-5628f649537e';
             $module = 'uni_Productos';
             $key_productos = array('1', '4', '3', '6', '8', '10');
             $name_productos = array('-LEASING', '-FACTORAJE', '-CRÉDITO AUTOMOTRIZ', '-FLEET', '-UNICLICK', '-SEGUROS');
@@ -1259,7 +1210,7 @@ where rfc_c = '{$bean->rfc_c}' and
             $current_prod = null;
             $fechaAsignaAsesor = date("Y-m-d"); //Fecha de Hoy
             //Validación temporal- Se debe quitar cuando el campo $bean->tipo_registro_c se elimine
-            $tipoCuentaServicio = !empty($bean->tipo_registro_c) ? $bean->tipo_registro_c : 'Lead';
+            $tipoCuentaServicio = !empty($bean->tipo_registro_c) ? $bean->tipo_registro_c : 'Prospecto';
             $bean->tipo_registro_cuenta_c = ($tipoCuentaServicio == 'Persona') ? '4' : $bean->tipo_registro_cuenta_c;
             $bean->tipo_registro_cuenta_c = ($tipoCuentaServicio == 'Proveedor') ? '5' : $bean->tipo_registro_cuenta_c;
             $tipo = $app_list_strings['tipo_registro_cuenta_list'];
@@ -1272,18 +1223,28 @@ where rfc_c = '{$bean->rfc_c}' and
                 $beanprod->name = $bean->name . $name_productos[$i];
                 $beanprod->tipo_producto = $key_productos[$i];
                 $beanprod->fecha_asignacion_c = $fechaAsignaAsesor;
-                $beanprod->tipo_cuenta = empty($bean->tipo_registro_cuenta_c) ? '1' : $bean->tipo_registro_cuenta_c;
-                $beanprod->subtipo_cuenta = (empty($bean->subtipo_registro_cuenta_c) && $beanprod->tipo_cuenta == '1') ? '5' : $bean->subtipo_registro_cuenta_c;
+                $beanprod->tipo_cuenta = empty($bean->tipo_registro_cuenta_c) ? '2' : $bean->tipo_registro_cuenta_c;
+                $beanprod->subtipo_cuenta = (empty($bean->subtipo_registro_cuenta_c) && $beanprod->tipo_cuenta == '2') ? '1' : $bean->subtipo_registro_cuenta_c;
                 $beanprod->tipo_subtipo_cuenta = mb_strtoupper(trim($etitipo . ' ' . $etisubtipo));
                 //Caso especial: Alta portal CA
-                if ($beanprod->tipo_producto == '3' && empty($bean->id_uniclick_c) && $bean->tipo_registro_cuenta_c != '4' && $bean->tipo_registro_cuenta_c != '5' && $GLOBALS['service']->platform != 'base' && $GLOBALS['service']->platform != 'mobile') {
+                if ($bean->user_id2_c != $idSinGestor && $beanprod->tipo_producto == '3' && empty($bean->id_uniclick_c) && $bean->tipo_registro_cuenta_c != '4' && $bean->tipo_registro_cuenta_c != '5' && $GLOBALS['service']->platform != 'base' && $GLOBALS['service']->platform != 'mobile') {
                     $beanprod->tipo_cuenta = "2"; //2-Prospecto
                     $beanprod->subtipo_cuenta = "8"; //Integración de expediente
                     $beanprod->tipo_subtipo_cuenta = "PROSPECTO INTEGRACIÓN DE EXPEDIENTE";
                     //Actualiza campo general
-                    global $db;
                     $update = "update accounts_cstm set
                       tipo_registro_cuenta_c='2', subtipo_registro_cuenta_c ='8', tct_tipo_subtipo_txf_c='PROSPECTO INTEGRACIÓN DE EXPEDIENTE'
+                      where id_c = '{$bean->id}'";
+                    $updateExecute = $db->query($update);
+                }
+                //Caso especial: Alta por sistema 3ro como tipo Lead, se convierte a Prospecto sin contactar
+                if ($bean->tipo_registro_cuenta_c == '1'  && $key_productos[$i]!='8' ) {
+                    $beanprod->tipo_cuenta = "2"; //2-Prospecto
+                    $beanprod->subtipo_cuenta = "1"; //Sin Contactar
+                    $beanprod->tipo_subtipo_cuenta = "PROSPECTO SIN CONTACTAR";
+                    //Actualiza campo general
+                    $update = "update accounts_cstm set
+                      tipo_registro_cuenta_c='2', subtipo_registro_cuenta_c ='1', tct_tipo_subtipo_txf_c='PROSPECTO SIN CONTACTAR'
                       where id_c = '{$bean->id}'";
                     $updateExecute = $db->query($update);
                 }
@@ -1401,7 +1362,7 @@ where rfc_c = '{$bean->rfc_c}' and
         //Cliente con Línea Vigente: 3,18
         if ($bean->subtipo_registro_cuenta_c == '18' && $bean->tipo_registro_cuenta_c == '3' && /*$bean->fetched_row['subtipo_registro_cuenta_c']!='18' &&*/
             $bean->encodedkey_mambu_c == "") {
-                
+
             //variables para consumo de servicio
             $url = $sugar_config['url_mambu_gral'] . 'groups';
             $user = $sugar_config['user_mambu'];
@@ -1598,7 +1559,7 @@ where rfc_c = '{$bean->rfc_c}' and
 
     public function estableceCuerpoCorreoErrorMambu($contenidoPeticion,$contenidoError){
 
-        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>Estimado usuario</b><br> 
+        $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b>Estimado usuario</b><br>
         Se le informa que se ha producido un error en la petición hacia Mambú, el cual se detalla de la siguiente forma:<br><br>'.json_encode($contenidoError).'
       <br><br>En donde la petición enviada fue la siguiente:<br><br>'.json_encode($contenidoPeticion).'
       <br><br>Atentamente Unifin</font></p>

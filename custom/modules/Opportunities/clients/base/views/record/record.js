@@ -78,6 +78,7 @@
         this.model.addValidationTask('ratificacion_incremento_c', _.bind(this.alertGpoEmpresarial, this));
         this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinancerasRI, this));
         this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
+        this.model.addValidationTask('check_condicionesFinancierasQuantico', _.bind(this.condicionesFinancierasQuanticoCheck, this));
         this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
         this.model.addValidationTask('check_oportunidadperdida', _.bind(this.oportunidadperdidacheck, this));
         // this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
@@ -329,11 +330,6 @@
             this.$('div[data-name=ri_usuario_bo_c]').hide();
         } else {
             this.$('div[data-name=ri_usuario_bo_c]').show();
-        }
-
-        //Oculta Crédito Estructurado
-        if (this.model.get('producto_financiero_c') != '43') {
-            this.$('div[data-panelname=LBL_RECORDVIEW_PANEL4').hide();
         }
 
         //this.evaluaCampoSolicitudVobo();
@@ -740,7 +736,7 @@
         tipoProdArr['1'] = 'AP';
         tipoProdArr['4'] = 'FF';
         tipoProdArr['3'] = 'CA';
-        
+
         //var usuarioProducto = tipoProdArr[App.user.attributes.tipodeproducto_c];
         var usuarioProducto = this.model.get('tipo_producto_c');
         var producto = "";
@@ -758,7 +754,7 @@
         if (usuarioProducto == "CA") {
             producto = "Crédito Automotriz";
         }
-       
+
         //Recupera cuenta asociada
         var producto_financiero = this.model.get('producto_financiero_c');
         var cuentaId = this.model.get('account_id');
@@ -1079,6 +1075,17 @@
                 errors['monto_c'] = errors['monto_c'] || {};
                 errors['monto_c'].required = true;
             }
+            //Validación Crédito Corto Plazo
+            if (this.model.get('producto_financiero_c') == '78' && (parseFloat(this.model.get('monto_c'))<500000 || parseFloat(this.model.get('monto_c'))>10000000) ) {
+                delete errors.monto_c;
+                errors['monto_c'] = errors['monto_c'] || {};
+                errors['monto_c'].required = true;
+                app.alert.show("monto_corto_plazo", {
+                    level: "error",
+                    title: "El monto de línea debe tener un valor mínimo de $500,000.00 y máximo $10,000,000.00",
+                    autoClose: false
+                });
+            }
 
             if (parseFloat(this.model.get('amount')) <= 0 && this.model.get('tipo_operacion_c') == '1' && this.model.get('tipo_producto_c') != "7" &&
                 this.model.get('admin_cartera_c') != true) {
@@ -1094,7 +1101,7 @@
 
             if (this.model.get('tct_etapa_ddw_c') == 'SI') {
                 if (parseFloat(this.model.get('ca_importe_enganche_c')) <= 0 && (this.model.get('tipo_producto_c') == "1" || this.model.get('tipo_producto_c') == "9") &&
-                    this.model.get('admin_cartera_c') != true) {
+                    this.model.get('admin_cartera_c') != true && this.model.get('producto_financiero_c') != '43') {
                     errors['ca_importe_enganche_c'] = errors['ca_importe_enganche_c'] || {};
                     errors['ca_importe_enganche_c'].required = true;
 
@@ -1107,7 +1114,7 @@
                 }
 
                 if ((parseFloat(this.model.get('porciento_ri_c')) <= 0 || this.model.get('porciento_ri_c') == "") && (this.model.get('tipo_producto_c') == "1" || this.model.get('tipo_producto_c') == "9") &&
-                    this.model.get('admin_cartera_c') != true) {
+                    this.model.get('admin_cartera_c') != true && this.model.get('producto_financiero_c') != '43') {
                     errors['porciento_ri_c'] = errors['porciento_ri_c'] || {};
                     errors['porciento_ri_c'].required = true;
 
@@ -1335,20 +1342,60 @@
     },
 
     condicionesFinancierasCheck: function (fields, errors, callback) {
-        if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
-            if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && this.model.get("producto_financiero_c") != 43 && this.model.get("tipo_producto_c") != 13) {
-                if (solicitud_cf.oFinanciera.condicion.length == 0) {
-                    errors[$(".addCondicionFinanciera")] = errors['condiciones_financieras'] || {};
-                    errors[$(".addCondicionFinanciera")].required = true;
+        var valorSwitchUni2=App.lang.getAppListStrings('switch_inicia_proceso_list')['ejecuta'];
+        if(valorSwitchUni2=='1'){
+            if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
+                if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && this.model.get("producto_financiero_c") != 43 && this.model.get("tipo_producto_c") != 13) {
+                    if (solicitud_cf.oFinanciera.condicion.length == 0) {
+                        errors[$(".addCondicionFinanciera")] = errors['condiciones_financieras'] || {};
+                        errors[$(".addCondicionFinanciera")].required = true;
 
-                    $('.condiciones_financieras').css('border-color', 'red');
-                    app.alert.show("CondicionFinanciera requerida", {
-                        level: "error",
-                        title: "Al menos una Condición Financiera es requerida.",
-                        autoClose: false
-                    });
-                } else if (solicitud_cf.oFinanciera.condicion.length >= 1) {
-                    solicitud_cf.model.set('condiciones_financieras', solicitud_cf.oFinanciera.condicion);
+                        $('.condiciones_financieras').css('border-color', 'red');
+                        app.alert.show("CondicionFinanciera requerida", {
+                            level: "error",
+                            title: "Al menos una Condición Financiera es requerida.",
+                            autoClose: false
+                        });
+                    } else if (solicitud_cf.oFinanciera.condicion.length >= 1) {
+                        solicitud_cf.model.set('condiciones_financieras', solicitud_cf.oFinanciera.condicion);
+                    }
+                }
+            }
+        }
+        callback(null, fields, errors);
+    },
+
+    condicionesFinancierasQuanticoCheck: function (fields, errors, callback) {
+        var valorSwitchUni2=App.lang.getAppListStrings('switch_inicia_proceso_list')['ejecuta'];
+        if(valorSwitchUni2=='0'){
+            if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
+                if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && this.model.get("producto_financiero_c") != 43 && this.model.get("tipo_producto_c") != 13) {
+                    if(this.model.get('cf_quantico_c')!=""){
+                        var cfQuantico=JSON.parse(this.model.get('cf_quantico_c'));
+                        if (cfQuantico.FinancialTermGroupResponseList.length == 0) {
+                            errors[$(".addCondicionFinancieraQuantico")] = errors['addCondicionFinancieraQuantico'] || {};
+                            errors[$(".addCondicionFinancieraQuantico")].required = true;
+
+                            $('.CFPoliticaQ').css('border-color', 'red');
+                            app.alert.show("CondicionFinancieraQuantico requerida", {
+                                level: "error",
+                                title: "Al menos una Condición Financiera es requerida.",
+                                autoClose: false
+                            });
+                        }
+                    }else{
+
+                        errors[$(".addCondicionFinancieraQuantico")] = errors['addCondicionFinancieraQuantico'] || {};
+                        errors[$(".addCondicionFinancieraQuantico")].required = true;
+
+                        $('.CFPoliticaQ').css('border-color', 'red');
+                        app.alert.show("CondicionFinancieraQuantico requerida", {
+                            level: "error",
+                            title: "Al menos una Condición Financiera es requerida.",
+                            autoClose: false
+                        });
+
+                    }
                 }
             }
         }
@@ -1356,26 +1403,31 @@
     },
 
     condicionesFinancierasIncrementoCheck: function (fields, errors, callback) {
-        if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
-            if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 7) {
-                if (contRI.oFinancieraRI.ratificacion.length == 0) {
-                    // console.log("contRI = 0");
-                    errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};
-                    errors[$(".add_incremento_CondicionFinanciera")].required = true;
 
-                    $('.condiciones_financieras_incremento_ratificacion').css('border-color', 'red');
-                    app.alert.show("CondicionFinanciera requerida", {
-                        level: "error",
-                        title: "Al menos una Condición Financiera de Incremento/Ratificacion es requerida.",
-                        autoClose: false
-                    });
-                } else if (contRI.oFinancieraRI.ratificacion.length >= 1) {
-                    // console.log("contRI > 1");
-                    contRI.model.set('condiciones_financieras_incremento_ratificacion', contRI.oFinancieraRI.ratificacion);
+        var valorSwitchUni2=App.lang.getAppListStrings('switch_inicia_proceso_list')['ejecuta'];
+        if(valorSwitchUni2=='1'){
+            if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
+                if (this.model.get("ratificacion_incremento_c") == 1 && this.model.get("tipo_operacion_c") == 2 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 7) {
+                    if (contRI.oFinancieraRI.ratificacion.length == 0) {
+                        // console.log("contRI = 0");
+                        errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};
+                        errors[$(".add_incremento_CondicionFinanciera")].required = true;
 
+                        $('.condiciones_financieras_incremento_ratificacion').css('border-color', 'red');
+                        app.alert.show("CondicionFinanciera requerida", {
+                            level: "error",
+                            title: "Al menos una Condición Financiera de Incremento/Ratificacion es requerida.",
+                            autoClose: false
+                        });
+                    } else if (contRI.oFinancieraRI.ratificacion.length >= 1) {
+                        // console.log("contRI > 1");
+                        contRI.model.set('condiciones_financieras_incremento_ratificacion', contRI.oFinancieraRI.ratificacion);
+
+                    }
                 }
             }
         }
+
         callback(null, fields, errors);
     },
 
@@ -2070,6 +2122,10 @@
             if (this.model.get('tipo_producto_c') == '1') {
                 campos = campos.replace(/Renta Inicial/gi, "Pago Único");
             }
+            //Remplaza etiquetas para Crédito Estructurado
+            if (this.model.get('producto_financiero_c') == '43') {
+                campos = campos.replace(/Renta Inicial/gi, "Pago Inicial");
+            }
 
             app.alert.show("Campos Requeridos", {
                 level: "error",
@@ -2082,7 +2138,7 @@
 
     validapagounico: function (fields, errors, callback) {
         if (this.model.get('porciento_ri_c') != "" && this.model.get('porciento_ri_c') != undefined && (Number(this.model.get('porciento_ri_c')) <= 0 || Number(this.model.get('porciento_ri_c')) > 100.00) &&
-            this.model.get('admin_cartera_c') != true) {
+            this.model.get('admin_cartera_c') != true && this.model.get('producto_financiero_c') != '43') {
 
             if (parseFloat(this.model.get('porciento_ri_c')) <= 0.0000) {
                 errors['porciento_ri_c'] = errors['porciento_ri_c'] || {};
@@ -2532,6 +2588,10 @@
             this.$('div[data-name=plazo_ratificado_incremento_c]').show();
             this.$('div[data-name=ri_usuario_bo_c]').show();
         }
+        //Cambio texto Crédito Estructurado
+        if (this.model.get('producto_financiero_c') == 43 ) {
+            this.$("div.record-label[data-name='porciento_ri_c']").text("% Pago Inicial");
+        }
     },
 
     ConficionFinancieraFormat: function (fields, errors, callback) {
@@ -2652,8 +2712,8 @@
             self = this;
             app.api.call('GET', app.api.buildURL('GetMontoGpoEmpApi/' + idCuenta), null, {
                 success: function (data) {
-                    montoTotalGpoEmp = data['montoTotalGpoEmp'];
-                    numCuentasGpoEmp = data['numCuentasGpoEmp'];
+                    montoTotalGpoEmp = (data['montoTotalGpoEmp'] == null || data['montoTotalGpoEmp']==undefined) ? 0 : data['montoTotalGpoEmp'];
+                    numCuentasGpoEmp = (data['numCuentasGpoEmp'] == null || data['numCuentasGpoEmp']==undefined) ? 0 : data['numCuentasGpoEmp'];
 
                     if (self.model.get('estatus_c') != 'N' && checkRI != true && self.model.get('tipo_de_operacion_c')!='RATIFICACION_INCREMENTO') {
                         montoTotalGpoEmp = parseInt(montoTotalGpoEmp) + parseInt(self.model.get('monto_c'));
@@ -2787,7 +2847,7 @@
         var fecha = yyyy + '-' + mm + '-' + dd + 'T' + hour + ':' + min + ':' + secs + '-0' + zona + ':00';
         this.model.set("fecha_validacion_c", fecha);
         //this.model.save(),
-       
+
         var userprodprin = this.model.get('tipo_producto_c');
         app.api.call('GET', app.api.buildURL('Accounts/' + this.model.get('account_id')), null, {
             success: _.bind(function (cuenta) {
@@ -2800,10 +2860,10 @@
                             var tipoProducto = Productos[key].tipo_producto;
                             if(tipoProducto == userprodprin){
                                 idProdM = Productos[key].id;
-                              
+
                                         var textmsg = '';
                                         var tipom = "";
-                                        
+
                                         /****************************************/
                                         self.model.save(null, {
                                             success: function (model, response) {
@@ -2832,18 +2892,18 @@
                                             }
                                         });
                                         /****************************************/
-                                                        
+
                             }
                         });
                     },
                         error: function (e) {
                             throw e;
                         }
-                    });  
+                    });
 
             }, self),
-        });                
-        
+        });
+
     },
     noauthsol: function () {
         this.model.set("vobo_dir_c", false);
@@ -3335,13 +3395,13 @@
         }
     },
 
-    //Función para validar que el asesor RM sea realmente un asesor RM 
+    //Función para validar que el asesor RM sea realmente un asesor RM
     validaAsesorRM: function (fields, errors, callback) {
         var asesorRM=this.model.get('user_id1_c');
         if(asesorRM!="" && this.model.get('tipo_producto_c')!='13'){
             app.api.call('GET', app.api.buildURL('Infouser/' + asesorRM), null, {
                 success: _.bind(function (data) {
-    
+
                     if (data != "") {
                         if (!data.productos_c.includes("^11^")&& data.user_name!="SinGestor") {
                                 app.alert.show("error_asesorRM", {

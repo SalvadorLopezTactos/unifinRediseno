@@ -42,6 +42,7 @@ class check_duplicateAccounts extends SugarApi
         $finish = array();
         global $sugar_config;
         global $app_list_strings;
+        global $current_user;
         $url = $sugar_config['site_url'];
         /**
          * Validamos que el Lead no exista en Cuentas
@@ -55,7 +56,6 @@ class check_duplicateAccounts extends SugarApi
 
 
                 $responsMeeting = $this->getMeetingsUser($bean);
-                   
                 $requeridos = $this->validaRequeridos($bean);
 
                 if (($responsMeeting['status'] != "stop" && !empty($responsMeeting['data'])) && $requeridos == "") {
@@ -67,7 +67,7 @@ class check_duplicateAccounts extends SugarApi
                     //Obteniendo puesto del usuario asignado a la reunión
                     $usuario_asesor = BeanFactory::retrieveBean('Users', $idAsesor, array('disable_row_level_security' => true));
                     $puesto_asesor=$usuario_asesor->puestousuario_c;
-                        
+                    $limitePersonal = ($usuario_asesor->limite_asignacion_lm_c > 0)? $usuario_asesor->limite_asignacion_lm_c: 0;
                     $args=array('id_user'=>$idAsesor);
                     $objRegistrosAsignados= GetRegistrosAsignadosForProtocolo::getRecordsAssign("",$args);
                     $total_asignados=$objRegistrosAsignados['total_asignados'];
@@ -76,10 +76,16 @@ class check_duplicateAccounts extends SugarApi
 
                     //Obteniendo número máximo de registros asignados que puede tener un asesor
                     $max_registros_list = $app_list_strings['limite_maximo_asignados_list'];
-                    $max_registros=intval($max_registros_list['1']);
-                    
+                    $max_registros = ($limitePersonal>0) ? $limitePersonal : intval($max_registros_list['1']);
+
+                    //Se manipula el $total_asignados para que el usuario logueado si tenga posibilidad de convertir
+                    //en el caso de que se encuentre asignado al bean del Lead y evitar mostrar la restricción sobre el límite máximo de asignados
+                    if($current_user->id == $bean->assigned_user_id){
+                        $total_asignados=0;
+                    }
+
                     if($total_asignados>=$max_registros && ($puesto_asesor=='2' || $puesto_asesor=='5')){ //2-Director Leasing, 5-Asesor Leasing
-                        
+
                         $msj_reunion="No es posible generar la conversión pues el Asesor asignado a la Reunión/Llamada ya cuenta con más de ".$max_registros." registros Asignados<br>Para continuar es necesario atender alguno de sus registros asignados";
 
                         $finish = array("idCuenta" => "", "mensaje" => $msj_reunion);
@@ -278,9 +284,9 @@ SITE;
         //Recupera reuniones
         if ($beanL->load_relationship('meetings')) {
             $relatedBeans = $beanL->meetings->getBeans();
-     
+
             if (!empty($relatedBeans)) {
-                
+
                 foreach ($relatedBeans as $meeting) {
 
                     //if ($meeting->status != "Not Held") {
@@ -523,18 +529,6 @@ SITE;
 
     public function re_asign_meetings($bean_LEad, $idCuenTa)
     {
-		//Reasigna Reuniones
-        if ($bean_LEad->load_relationship('meetings')) {
-            $relatedBeans = $bean_LEad->meetings->getBeans();
-            if (!empty($relatedBeans)) {
-                foreach ($relatedBeans as $meeting) {
-					global $db;
-					$meetUpdate = "update meetings set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$meeting->id}'";
-					$updateResult = $db->query($meetUpdate);
-                }
-            }
-        }
-		$GLOBALS['log']->fatal("$idCuenTa: ".$idCuenTa);
 		//Reasigna Llamadas
         if ($bean_LEad->load_relationship('calls')) {
             $relatedBeans = $bean_LEad->calls->getBeans();
@@ -542,6 +536,17 @@ SITE;
                 foreach ($relatedBeans as $call) {
 					global $db;
 					$meetUpdate = "update calls set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$call->id}'";
+					$updateResult = $db->query($meetUpdate);
+                }
+            }
+        }
+		//Reasigna Reuniones
+        if ($bean_LEad->load_relationship('meetings')) {
+            $relatedBeans = $bean_LEad->meetings->getBeans();
+            if (!empty($relatedBeans)) {
+                foreach ($relatedBeans as $meeting) {
+					global $db;
+					$meetUpdate = "update meetings set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$meeting->id}'";
 					$updateResult = $db->query($meetUpdate);
                 }
             }
@@ -568,9 +573,28 @@ SITE;
 					$meetUpdate = "update notes set parent_type = 'Accounts', parent_id = '{$idCuenTa}' where id = '{$note->id}'";
 					$updateResult = $db->query($meetUpdate);
 					$bean_LEad->load_relationship('notes_leads_1');
-					$bean_LEad->notes_leads_1->add($note->id);					
+					$bean_LEad->notes_leads_1->add($note->id);
                 }
             }
         }
+
+        //Reasigna Licitaciones
+        
+            $GLOBALS['log']->fatal("Obtiene Licitaciones y añade a la cuenta.");
+            global $db;
+                 $query="SELECT licitacion.id FROM lic_licitaciones as licitacion
+                 INNER JOIN leads_lic_licitaciones_1_c as intermedia ON intermedia.leads_lic_licitaciones_1lic_licitaciones_idb = licitacion.id AND intermedia.deleted = 0
+                 WHERE intermedia.leads_lic_licitaciones_1leads_ida = '{$bean_LEad->id}';";
+
+                $queryResult = $db->query($query);
+                while($row = $db->fetchByAssoc($queryResult))
+                {
+                    
+                    $beanlicitacion = BeanFactory::retrieveBean('Lic_Licitaciones', $row['id'], array('disable_row_level_security' => true));
+                    $beanlicitacion->lic_licitaciones_accountsaccounts_ida  = $idCuenTa;
+                    $GLOBALS['log']->fatal("guarda licitacion a la cuenta.");
+                    $beanlicitacion->save();
+                }
+        
     }
 }

@@ -7,26 +7,66 @@ function assignLeadMktToUser()
     global $db;
     /* Obetenemos el id del usuario de grupo de 9.- MKT*/
     $QueryId = "SELECT id from users
-WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
+    WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
     $queryResultId = $db->query($QueryId);
     $row = $db->fetchByAssoc($queryResultId);
     $idMKT = $row['id'];
     /** Buscamos los Leads que tengan asignados el usuario de grupo 9.- MKT */
-    $getLeads = "select a.id id, b.compania_c compania from leads a, leads_cstm b where a.id = b.id_c and a.assigned_user_id='{$idMKT}'";
+    $getLeads = "select a.id id, b.compania_c compania , b.id_landing_c id_landing_c from leads a, leads_cstm b where a.id = b.id_c and a.assigned_user_id='{$idMKT}'";
     $ResultLeads = $db->query($getLeads);
     while ($row = $GLOBALS['db']->fetchByAssoc($ResultLeads)) {
 		// Obtiene Compañía
 		$compania_c = $row['compania'];
-		if($compania_c == 1) $subpuesto_c = 3;
-		if($compania_c == 2) $subpuesto_c = 4;
-        $usrEnable = GetUserMKT($subpuesto_c);
-        $indices = $usrEnable['indice'];
-        if (!empty($usrEnable['id'])) {
-            $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='".$usrEnable['id']."' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$usrEnable['id']}'  WHERE l.id ='{$row['id']}' ";
-            $db->query($update_assigne_user);
-            if ($indices > -1) {
-                $update_assigne_user = "UPDATE config SET value = $indices  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
+        // Obtiene id_landing
+		$id_landing_c = $row['id_landing_c'];
+
+        //VALIDACION DE REVISTA MEDICA
+        if ($id_landing_c != 'LP REVISTA MÉDICA') { 
+		
+            if( strpos(strtoupper($id_landing_c), 'INSURANCE') !== false){
+                $subpuesto_c = 5;  
+            }else{
+                if($compania_c == 1) $subpuesto_c = 3;
+                if($compania_c == 2) $subpuesto_c = 4;
+            }
+            
+            $usrEnable = GetUserMKT($subpuesto_c);
+            $indices = $usrEnable['indice'];
+            if (!empty($usrEnable['id'])) {
+                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='".$usrEnable['id']."' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$usrEnable['id']}'  WHERE l.id ='{$row['id']}' ";
                 $db->query($update_assigne_user);
+                if ($indices > -1) {
+                    $update_assigne_user = "UPDATE config SET value = $indices  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
+                    $db->query($update_assigne_user);
+                }
+            }
+        
+        } else {
+
+            //USUARIOS QUE TIENEN EL EQUIPO PRINCIPAL UNICS 7 SE LEAS ASIGNA LEADS CON 9.- MKT - REVISTA MEDICA
+            $query_revista = "SELECT
+            user.id,
+            user.date_entered,
+            count(lead.assigned_user_id) AS total_asignados,
+            uc.access_hours_c
+            FROM users user
+            INNER JOIN users_cstm uc
+                ON uc.id_c = user.id
+            LEFT JOIN leads lead
+                ON lead.assigned_user_id = user.id
+            WHERE user.status = 'Active' AND equipo_c = 7
+            GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC
+            LIMIT 1";
+                
+            $result_rm = $db->query($query_revista);
+            $conteo = $result_rm->num_rows;
+            
+            if ($conteo > 0) {
+                while ($rowUsr7 = $db->fetchByAssoc($result_rm)) {
+
+                    $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='".$rowUsr7['id']."' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$rowUsr7['id']}'  WHERE l.id ='{$row['id']}' ";
+                    $db->query($update_assigne_user);
+                }
             }
         }
     }
@@ -58,17 +98,17 @@ function GetUserMKT($subpuesto_c)
 
     /** Obtenemos los usuarios disponibles */
     $query_asesores = "SELECT
-  user.id,
-  user.date_entered,
-  count(lead.assigned_user_id) AS total_asignados,
-  uc.access_hours_c
-FROM users user
-  INNER JOIN users_cstm uc
-    ON uc.id_c = user.id
-  INNER JOIN leads lead
-    ON lead.assigned_user_id = user.id
-where puestousuario_c='27' AND user.status = 'Active' AND subpuesto_c='$subpuesto_c'
-GROUP BY lead.assigned_user_id ORDER BY total_asignados,date_entered ASC";
+    user.id,
+    user.date_entered,
+    count(lead.assigned_user_id) AS total_asignados,
+    uc.access_hours_c
+    FROM users user
+    INNER JOIN users_cstm uc
+        ON uc.id_c = user.id
+    LEFT JOIN leads lead
+        ON lead.assigned_user_id = user.id
+    where puestousuario_c='27' AND user.status = 'Active' AND subpuesto_c='$subpuesto_c'
+    GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC";
     $result_usr = $db->query($query_asesores);
 
     while ($row = $db->fetchByAssoc($result_usr)) {

@@ -198,7 +198,7 @@
 
                     var parent_meet = modelo.get('parent_type');
                     var parent_id_acc = modelo.get('parent_id');
-                    if(parent_meet == "Accounts"  &&  this.leasingPuestos.includes(  this.puesto_usuario ) && !(this.sin_accion.includes( self.model.get('resultado_c'))) ){
+                    /*if(parent_meet == "Accounts"  &&  this.leasingPuestos.includes(  this.puesto_usuario ) && !(this.sin_accion.includes( self.model.get('resultado_c'))) ){
                     var account = app.data.createBean('Accounts', {id:parent_id_acc});
 			              account.fetch({
 			              success: _.bind(function (modelAcconut) {
@@ -279,7 +279,6 @@
                                             var emptynoviable = 0;
                                             $('#razon_noviable').css('color', 'black');
                                             $('#RazonNoViable').css('border-color', '');
-                                            /***********************************************/
                                             //Se obtiene los valores de los campos seleccionados en el modal
                                             if ($("#RazonNoViable").val() == "" || $("#RazonNoViable").val() == "0") {
                                                 $('#RazonNoViable').css('border-color', 'red');
@@ -329,7 +328,7 @@
                                                 errors['MotivoCancelacion'].required = true;
                                                 callback(null, fields, errors);
                                             }else{
-                                                /*********************************************************/
+
                                                 //Valor de la lista de Razon no viable
 	                                             if ($("#RazonNoViable").val() != "" || $("#RazonNoViable").val() != "0") {
 	                                                 var KeyRazonNV = $("#RazonNoViable").val();
@@ -414,6 +413,7 @@
 
                                 }
                             }else{
+                                modelo.save();
                                 callback(null, fields, errors);
                             }
                           }, this)
@@ -549,7 +549,7 @@
                                                 app.alert.dismiss('upload');
                                                 callback(null, fields, errors);
                                             }, this),
-                                        });*/
+                                        }); //
 										modelo.save([],{
                                             dataType:"text",
                                             complete:function() {
@@ -600,7 +600,7 @@
                             }, this)
                             });
                         }
-                    }else{
+                    }else{*/
 
                         modelo.save([],{
                         dataType:"text",
@@ -613,7 +613,7 @@
                             }
                         });
                         callback(null, fields, errors);
-                    }
+                    //}
                     //callback(null, fields, errors);
                 }, this)
             });
@@ -1200,13 +1200,12 @@
             $('[name="survey_minuta"]').removeClass('btn-success');
         }
 
-        if( this.leasingPuestos.includes( this.puesto_usuario )){
+        /*if( this.leasingPuestos.includes( this.puesto_usuario )){
             var moduleid = app.data.createBean('Meetings',{id:this.model.get('minut_minutas_meetingsmeetings_idb')});
             moduleid.fetch({
                 success:_.bind(function(modelo){
                     var parent_type1 = modelo.get('parent_type');
                     parent_id_acc = modelo.get('parent_id');
-                    /*********************************** */
                     //console.log(parent_id_acc);
                     if(parent_type1== "Leads"){
                         if(self.model.get('resultado_c')=='2' ||self.model.get('resultado_c')=='18' || self.model.get('resultado_c')=='21' || self.model.get('resultado_c')=='25'){
@@ -1246,7 +1245,7 @@
                     }
                 }, this)
             });
-        }
+        }*/
 
     },
 

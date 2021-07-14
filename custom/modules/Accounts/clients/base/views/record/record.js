@@ -75,6 +75,9 @@
 
         this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
 
+        //Validacion para que la fecha de nac/constitutiva sea igual al RFC
+        this.model.addValidationTask('Valida_RFC', _.bind(this.validaRFC, this));
+
         /*
          Eduardo Carrasco
          revisa que la persona no tenga contratos existentes despues de cambiar el RFC. Si hay contratos existentes, no se podra cambiar el RFC
@@ -288,6 +291,8 @@
         this.context.on('button:get_account_asesor:click', this.get_Account, this);
         this.context.on('button:send_account_asesor:click', this.set_Account, this);
 
+        this.context.on('button:open_negociador_quantico:click', this.open_negociador_quantico, this);
+
         /***************Validacion de Campos No viables en los Productos********************/
         this.model.addValidationTask('LeasingUP', _.bind(this.requeridosLeasingUP, this));
         this.model.addValidationTask('FactorajeUP', _.bind(this.requeridosFactorajeUP, this));
@@ -296,6 +301,7 @@
         this.model.addValidationTask('UniclickUP', _.bind(this.requeridosUniclickUP, this));
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
         this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
+        //this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
     },
 
     /** Asignacion modal */
@@ -377,6 +383,13 @@
         }
         /**triggers an event to show the pop up quick create view*/
         this.layout.trigger("app:view:setAccountModal");
+    },
+
+    open_negociador_quantico:function(){
+        //Abrir nueva ventana del entrypoint del Negociador Quantico
+        var idCuenta = this.model.get('id');
+        window.open("#bwc/index.php?entryPoint=NegociadorQuantico&idPersona=" + idCuenta);
+
     },
 
     saveProdPLD: function (fields, errors, callback) {
@@ -3194,62 +3207,21 @@
     },
 
     cleanName: function () {
-        //Recupera variables
-        var original_name = this.model.get("name");
-        var list_check = app.lang.getAppListStrings('validacion_duplicados_list');
-        var simbolos = app.lang.getAppListStrings('validacion_simbolos_list');
-        //Define arreglos para guardar nombre de cuenta
-        var clean_name_split = [];
-        var clean_name_split_full = [];
-        clean_name_split = original_name.split(" ");
-        //Elimina simbolos: Ej. . , -
-        _.each(clean_name_split, function (value, key) {
-            _.each(simbolos, function (simbolo, index) {
-                var clean_value = value.split(simbolo).join('');
-                if (clean_value != value) {
-                    clean_name_split[key] = clean_value;
-                }
-            });
-        });
-        clean_name_split_full = App.utils.deepCopy(clean_name_split);
-        if (this.model.get('tipodepersona_c') == "Persona Moral") {
-            //Elimina tipos de sociedad: Ej. SA, de , CV...
-            var totalVacio = 0;
-            _.each(clean_name_split, function (value, key) {
-                _.each(list_check, function (index, nomenclatura) {
-                    var upper_value = value.toUpperCase();
-                    if (upper_value == nomenclatura) {
-                        var clean_value = upper_value.replace(nomenclatura, "");
-                        clean_name_split[key] = clean_value;
+        //Consume servicio
+        if(this.model.get("name").trim()!='') {
+            //Recupera variables
+            var postData = {
+                'name': this.model.get("name")
+            };
+            var serviceURI = app.api.buildURL("getCleanName", '', {}, {});
+            App.api.call("create", serviceURI, postData, {
+                success: _.bind(function (data) {
+                    if (data['status']=='200') {
+                        this.model.set('clean_name', data['cleanName']);
                     }
-                });
+                }, this)
             });
-            //Genera clean_name con arreglo limpio
-            var clean_name = "";
-            _.each(clean_name_split, function (value, key) {
-                clean_name += value;
-                //Cuenta elementos vacíos
-                if (value == "") {
-                    totalVacio++;
-                }
-            });
-
-            //Valida que exista más de un elemento, caso cotrarioe establece para clean_name valores con tipo de sociedad
-            if ((clean_name_split.length - totalVacio) <= 1) {
-                clean_name = "";
-                _.each(clean_name_split_full, function (value, key) {
-                    clean_name += value;
-                });
-            }
-
-            clean_name = clean_name.toUpperCase();
-            this.model.set("clean_name", clean_name);
-        } else {
-            original_name = original_name.replace(/\s+/gi, '');
-            original_name = original_name.toUpperCase();
-            this.model.set("clean_name", original_name);
         }
-
     },
 
     /*
@@ -6196,5 +6168,60 @@
     //_set_rfc_antiguo: function(rfca){
     //	self.rfc_antiguo = rfca;
     //},
+
+    validaRFC: function (fields, errors, callback) {
+        if (this.model.get('tipodepersona_c') != "" && this.model.get('tipodepersona_c') != "Persona Moral") {
+            if (this.model.get('rfc_c')!="" && this.model.get('rfc_c') != 'XXXX010101XXX' && this.model.get('fechadenacimiento_c')!=""){
+                //Obtiene valor de la fecha y resconstruye
+                var fecha= this.model.get('fechadenacimiento_c');
+                var convert= fecha.split('-');
+                var ano= convert[0];
+                ano= ano.substring(2);
+                var mes= convert[1];
+                var dia= convert[2];
+                var complete="";
+                complete=complete.concat(ano,mes,dia);
+                //ValidacionRFC
+                var rfc=this.model.get('rfc_c');
+                rfc= rfc.substring(4, 10);
+
+                if (rfc!=complete) {
+                    app.alert.show("Error_validacion_RFC", {
+                        level: "error",
+                        messages: 'La fecha no coincide con el RFC favor de corregir',
+                        autoClose: false
+                    });
+                    errors['Error_validacion_RFC'] = errors['Error_validacion_RFC'] || {};
+                    errors['Error_validacion_RFC'].required = true;
+                }
+            }
+        }else{
+            if (this.model.get('rfc_c')!="" && this.model.get('rfc_c') != 'XXX010101XXX' && this.model.get('fechaconstitutiva_c')!=""){
+                //Obtiene valor de la fecha y resconstruye
+                var fecha= this.model.get('fechaconstitutiva_c');
+                var convert= fecha.split('-');
+                var ano= convert[0];
+                ano= ano.substring(2);
+                var mes= convert[1];
+                var dia= convert[2];
+                var complete="";
+                complete=complete.concat(ano,mes,dia);
+                //ValidacionRFC
+                var rfc=this.model.get('rfc_c');
+                rfc= rfc.substring(3, 9);
+
+                if (rfc!=complete) {
+                    app.alert.show("Error_validacion_RFC_Moral", {
+                        level: "error",
+                        messages: 'La fecha no coincide con el RFC favor de corregir',
+                        autoClose: false
+                    });
+                    errors['Error_validacion_RFC_Moral'] = errors['Error_validacion_RFC_Moral'] || {};
+                    errors['Error_validacion_RFC_Moral'].required = true;
+                }
+            }
+        }
+        callback(null, fields, errors);
+    },
 
 })

@@ -61,76 +61,14 @@ class leads_validateString
         $bean->apellido_materno_c = $limpiamaterno;
         $bean->nombre_empresa_c = $limpiarazon;
 
-        /*if ($bean->tipo_registro_c == "Persona Moral") {
-            $bean->name = $bean->nombre_empresa_c;
-        }*/
-        //Crea Clean_name (exclusivo para aplicativos externos a CRM)
-        // if ($bean->clean_name_c == "" || $bean->clean_name_c == null) {
-
-        $tipo = $app_list_strings['validacion_simbolos_list']; //obtencion lista simbolos
-        $acronimos = $app_list_strings['validacion_duplicados_list'];
-
-        //  $GLOBALS['log']->fatal('full name ' . $bean->full_name);
-
-        if ($bean->regimen_fiscal_c != "3") {
-            $full_name = $bean->nombre_c . " " . $bean->apellido_paterno_c . " " . $bean->apellido_materno_c;
-            //$GLOBALS['log']->fatal(print_r($tipo,true));
-            //Cambia a mayúsculas y quita espacios a cada campo
-            //Concatena los tres campos para formar el clean_name
-            $nombre = $full_name;
-            $nombre = mb_strtoupper($nombre, "UTF-8");
-            $separa = explode(" ", $nombre);
-            //$GLOBALS['log']->fatal(print_r($separa,true));
-            $longitud = count($separa);
-            //Itera el arreglo separado
-            for ($i = 0; $i < $longitud; $i++) {
-                foreach ($tipo as $t => $key) {
-                    $separa[$i] = str_replace($key, "", $separa[$i]);
-                }
-            }
-            $une = implode($separa);
-            $bean->clean_name_c = $une;
-
-            //    $GLOBALS['log']->fatal("para fisica " . $bean->clean_name_c);
-
-        } else {
-            //$GLOBALS['log']->fatal($bean->razonsocial_c);
-            $nombre = $bean->nombre_empresa_c;
-            $nombre = mb_strtoupper($nombre, "UTF-8");
-            $separa = explode(" ", $nombre);
-            $separa_limpio = $separa;
-            // $GLOBALS['log']->fatal(print_r($separa, true));
-            $longitud = count($separa);
-            $eliminados = 0;
-            //Itera el arreglo separado
-            for ($i = 0; $i < $longitud; $i++) {
-                foreach ($tipo as $t => $key) {
-                    $separa[$i] = str_replace($key, "", $separa[$i]);
-                    $separa_limpio[$i] = str_replace($key, "", $separa_limpio[$i]);
-                }
-                foreach ($acronimos as $a => $key) {
-                    if ($separa[$i] == $a) {
-                        $separa[$i] = "";
-                        $eliminados++;
-                    }
-                    //$GLOBALS['log']->fatal($a);
-                    //   $GLOBALS['log']->fatal(print_r($separa, true));
-
-
-                }
-            }
-            //Condicion para eliminar los acronimos
-            if (($longitud - $eliminados) <= 1) {
-                $separa = $separa_limpio;
-            }
-            //Convierte el array a string nuevamente
-            $une = implode($separa);
-            $bean->clean_name_c = $une;
-
-            //  $GLOBALS['log']->fatal("para moral " . $bean->clean_name_c);
-
+        //Consumir servicio de cleanName, declarado en custom api
+        require_once("custom/clients/base/api/cleanName.php");
+        $apiCleanName= new cleanName();
+        $body=array('name'=>$bean->last_name); //Se identificó que sobre el campo last_name se concatena el nombre del lead
+        $response=$apiCleanName->getCleanName(null,$body);
+        if ($response['status']=='200') {
+            $bean->clean_name_c = $response['cleanName'];
         }
-        //}
     }
 
 
@@ -143,7 +81,7 @@ class leads_validateString
         if ($servicio!= "api" && $servicio != "unifinAPI") {
 
             // omitir si el leads es cancelado no se haga nada o si ya esta convertido se brinca la validación
-            if ($bean->subtipo_registro_c != 3 && $bean->subtipo_registro_c != 4) {
+            if ($bean->subtipo_registro_c != 3 && $bean->subtipo_registro_c != 4 && $bean->homonimo_c==0 && $bean->omite_match_c==0) {
 
                 $idPadre = $this->createCleanName($bean->leads_leads_1_name);
                 //  $GLOBALS['log']->fatal("cOMIENZA A vALIDAR dUPLICADO ");
@@ -173,6 +111,7 @@ class leads_validateString
                 $sqlLead = new SugarQuery();
                 $sqlLead->select(array('id', 'clean_name_c', 'pb_id_c', 'duns_id_c'));
                 $sqlLead->from(BeanFactory::newBean('Leads'), array('team_security' => false));
+                $sqlLead->where()->equals('homonimo_c', 0);
                 $sqlLead->where()
                     ->queryOr()
                     ->equals('clean_name_c', $bean->clean_name_c)
@@ -226,42 +165,16 @@ class leads_validateString
     }
     public function createCleanName($nameCuenta)
     {
-        // $GLOBALS['log']->fatal('QUITO ESPACIOS Y REEMPLAZO POR NUEVOS VALORES');
-
         global $db;
-        global $app_list_strings, $current_user; //Obtención de listas de valores
-
-
-        $limpianomcomercial = preg_replace('/\s\s+/', ' ', $nameCuenta);
-
-        $tipo = $app_list_strings['validacion_simbolos_list']; //obtencion lista simbolos
-        $acronimos = $app_list_strings['validacion_duplicados_list'];
-
-        $nombre = mb_strtoupper($limpianomcomercial, "UTF-8");
-        $separa = explode(" ", $nombre);
-        $separa_limpio = $separa;
-        $longitud = count($separa);
-        $eliminados = 0;
-        //Itera el arreglo separado
-        for ($i = 0; $i < $longitud; $i++) {
-            foreach ($tipo as $t => $key) {
-                $separa[$i] = str_replace($key, "", $separa[$i]);
-                $separa_limpio[$i] = str_replace($key, "", $separa_limpio[$i]);
-            }
-            foreach ($acronimos as $a => $key) {
-                if ($separa[$i] == $a) {
-                    $separa[$i] = "";
-                    $eliminados++;
-                }
-            }
+        $cleanName = '';
+        //Consumir servicio de cleanName, declarado en custom api
+        require_once("custom/clients/base/api/cleanName.php");
+        $apiCleanName= new cleanName();
+        $body=array('name'=>$nameCuenta); //Se identificó que sobre el campo last_name se concatena el nombre del lead
+        $response=$apiCleanName->getCleanName(null,$body);
+        if ($response['status']=='200') {
+            $cleanName = $response['cleanName'];
         }
-        //Condicion para eliminar los acronimos
-        if (($longitud - $eliminados) <= 1) {
-            $separa = $separa_limpio;
-        }
-        //Convierte el array a string nuevamente
-        $une = implode($separa);
-        $cleanName = $une;
 
         $sqlLead = new SugarQuery();
         $sqlLead->select(array('id', 'clean_name_c'));

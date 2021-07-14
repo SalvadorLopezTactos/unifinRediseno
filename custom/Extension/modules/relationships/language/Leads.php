@@ -6,3 +6,7 @@ $mod_strings['LBL_TASKS_LEADS_1_FROM_TASKS_TITLE'] = 'Tareas';
 $mod_strings['LBL_TASKS_LEADS_1_FROM_LEADS_TITLE'] = 'Tareas';
 $mod_strings['LBL_NOTES_LEADS_1_FROM_NOTES_TITLE'] = 'Notas';
 $mod_strings['LBL_NOTES_LEADS_1_FROM_LEADS_TITLE'] = 'Notas';
+$mod_strings['LBL_LEADS_LIC_LICITACIONES_1_FROM_LIC_LICITACIONES_TITLE'] = 'Licitaciones';
+$mod_strings['LBL_LEADS_LIC_LICITACIONES_1_FROM_LEADS_TITLE'] = 'Licitaciones';
+$mod_strings['LBL_LEADS_DIRE_DIRECCION_1_FROM_DIRE_DIRECCION_TITLE'] = 'Direcciones';
+$mod_strings['LBL_LEADS_DIRE_DIRECCION_1_FROM_LEADS_TITLE'] = 'Direcciones';

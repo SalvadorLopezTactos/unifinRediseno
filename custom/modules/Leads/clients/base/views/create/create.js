@@ -18,17 +18,29 @@
         this.events['keydown [name=phone_mobile]'] = 'validaSoloNumerosTel';
         this.events['keydown [name=phone_home]'] = 'validaSoloNumerosTel';
         this.events['keydown [name=phone_work]'] = 'validaSoloNumerosTel';
+
         this.model.addValidationTask('check_longDupTel', _.bind(this.validaLongDupTel, this));
         this.model.addValidationTask('check_TextOnly', _.bind(this.checkTextOnly, this));
         this.model.addValidationTask('change:email', _.bind(this.expmail, this));
         this.model.addValidationTask('checkCreateRecord', _.bind(this.checkCreateRecord, this));
+        //Validation task que muestra modal sobre duplicados
+        this.model.addValidationTask('check_duplicados_modal', _.bind(this.check_duplicados_modal, this));
         this.events['keydown [name=ventas_anuales_c]'] = 'checkInVentas';
         this.on('render', this._hidechkLeadCancelado, this);
-        this.model.on('change:name_c', this.cleanName, this);
+        this.model.addValidationTask('setCleanName', _.bind(this.cleanName, this));
         this.model.on("change:regimen_fiscal_c", _.bind(this._cleanRegFiscal, this));
         this.getRegistrosAsignados();
         this.fechaAsignacion();
         this.model.on("change:leads_leads_1_right", _.bind(this._checkContactoAsociado, this));
+        this.metodo_asignacion_lm_lead();
+
+        //Direcciones
+        contexto_lead = this;
+        this.oDirecciones = [];
+        this.oDirecciones.direccion = [];
+        this.prev_oDirecciones = [];
+        this.prev_oDirecciones.prev_direccion = [];
+        this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
     },
 
     delegateButtonEvents: function() {
@@ -39,72 +51,57 @@
     _cleanRegFiscal: function () {
 
         if (this.model.get('regimen_fiscal_c') == '3') {
-            
+
             this.model.set('nombre_c', '');
             this.model.set('apellido_paterno_c', '');
             this.model.set('apellido_materno_c', '');
-            
+
         } else {
             this.model.set('nombre_empresa_c', '');
         }
     },
 
-    cleanName: function () {
-        //Recupera variables
-        var original_name = this.model.get("name_c");
-        // console.log("CleanName "+original_name);
-        var list_check = app.lang.getAppListStrings('validacion_duplicados_list');
-        var simbolos = app.lang.getAppListStrings('validacion_simbolos_list');
-        //Define arreglos para guardar nombre de lead
-        var clean_name_split = [];
-        var clean_name_split_full = [];
-        clean_name_split = original_name.split(" ");
-        //Elimina simbolos: Ej. . , -
-        _.each(clean_name_split, function (value, key) {
-            _.each(simbolos, function (simbolo, index) {
-                var clean_value = value.split(simbolo).join('');
-                if (clean_value != value) {
-                    clean_name_split[key] = clean_value;
-                }
-            });
-        });
-        clean_name_split_full = App.utils.deepCopy(clean_name_split);
-
-        if (this.model.get('regimen_fiscal_c') == "3") {
-            //Elimina tipos de sociedad: Ej. SA, de , CV...
-            var totalVacio = 0;
-            _.each(clean_name_split, function (value, key) {
-                _.each(list_check, function (index, nomenclatura) {
-                    var upper_value = value.toUpperCase();
-                    if (upper_value == nomenclatura) {
-                        var clean_value = upper_value.replace(nomenclatura, "");
-                        clean_name_split[key] = clean_value;
-                    }
+    cleanName: function (fields, errors, callback) {
+        if(_.isEmpty(errors)){
+            //Recupera variables
+            var postData = {
+                'name': this.model.get("name")
+            };
+            //Consume servicio
+            if(this.model.get("name").trim()!='') {
+                var serviceURI = app.api.buildURL("getCleanName", '', {}, {});
+                App.api.call("create", serviceURI, postData, {
+                    success: _.bind(function (data) {
+                        if (data['status']=='200') {
+                            this.model.set('clean_name_c', data['cleanName']);
+                        }else{
+                            //Error
+                            app.alert.show('error_clean_name', {
+                                level: 'error',
+                                autoClose: false,
+                                messages: data['error']
+                            });
+                            //Agrega errores
+                            errors['clean_name_c'] = errors['clean_name_c']|| {};
+                            errors['clean_name_c'].required = true;
+                        }
+                        callback(null, fields, errors);
+                    }, this)
                 });
-            });
-            //Genera clean_name con arreglo limpio
-            var clean_name = "";
-            _.each(clean_name_split, function (value, key) {
-                clean_name += value;
-                //Cuenta elementos vacíos
-                if (value == "") {
-                    totalVacio++;
-                }
-            });
-
-            //Valida que exista más de un elemento, caso contrario establece para clean_name_c valores con tipo de sociedad
-            if ((clean_name_split.length - totalVacio) <= 1) {
-                clean_name = "";
-                _.each(clean_name_split_full, function (value, key) {
-                    clean_name += value;
+            }else{
+                //Error
+                app.alert.show('error_clean_name', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: 'Se requiere ingresar nombre de la cuenta'
                 });
+                //Agrega errores
+                errors['clean_name_c'] = errors['clean_name_c'] || {};
+                errors['clean_name_c'].required = true;
+                callback(null, fields, errors);
             }
-            clean_name = clean_name.toUpperCase();
-            this.model.set("clean_name_c", clean_name);
-        } else {
-            original_name = original_name.replace(/\s+/gi, '');
-            original_name = original_name.toUpperCase();
-            this.model.set("clean_name_c", original_name);
+        }else{
+          callback(null, fields, errors);
         }
     },
 
@@ -144,13 +141,15 @@
 
     checkCreateRecord:function(fields, errors, callback){
         //Obteniendo el puesto del usuario
-        //Se restringe creación de Leads cuando ya se tienen más de 20 registros asignados a los usuarios 
+        //Se restringe creación de Leads cuando ya se tienen más de 20 registros asignados a los usuarios
         //Asesor Leasing:2, Director Leasing:5
         var puesto=App.user.attributes.puestousuario_c;
+        var posicionOperativa = (App.user.attributes.posicion_operativa_c == undefined) ? '' : App.user.attributes.posicion_operativa_c;
         var maximo_registros_list=App.lang.getAppListStrings('limite_maximo_asignados_list');
-        var maximo_registros=parseInt(maximo_registros_list["1"]);
+        var limitePersonal = (App.user.attributes.limite_asignacion_lm_c > 0) ? App.user.attributes.limite_asignacion_lm_c : 0;
+        var maximo_registros = (limitePersonal>0) ? limitePersonal : parseInt(maximo_registros_list["1"]);
 
-        if(this.total_asignados>maximo_registros && (puesto=='2' || puesto=='5')){
+        if(this.total_asignados>=maximo_registros && posicionOperativa.includes("^3^")){
 
             app.alert.show("error_create_leads", {
                 level: "error",
@@ -208,6 +207,123 @@
             });
         }
         callback(null, fields, errors);
+    },
+
+    check_duplicados_modal:function(fields, errors, callback){
+
+        if(Object.keys(errors).length==0 && this.options.context.flagGuardar!="1"){
+            var telefonos=[];
+            if(this.model.get('phone_mobile')!="" && this.model.get('phone_mobile')!=undefined){
+                telefonos.push(this.model.get('phone_mobile'));
+            }
+
+            if(this.model.get('phone_home')!="" && this.model.get('phone_home')!=undefined){
+                telefonos.push(this.model.get('phone_home'));
+            }
+
+            if(this.model.get('phone_work')!="" && this.model.get('phone_work')!=undefined){
+                telefonos.push(this.model.get('phone_work'));
+            }
+
+            var email="";
+            if(this.model.attributes.email !=undefined){
+                if(this.model.attributes.email.length>0){
+                    email=this.model.attributes.email[0].email_address
+                }
+            }
+
+            var rfc="";
+            if(this.model.get('rfc_c') != undefined && this.model.get('rfc_c') != ""){
+                rfc=this.model.get('rfc_c');
+            }
+
+            //Parámetros para consumir servicio
+            var params = {
+                'nombre': this.model.get('name'),
+                'correo': email,
+                'telefonos': telefonos,
+                'rfc': rfc,
+            };
+
+            /*
+            var params={
+                "nombre":"27 MICRAS INTERNACIONAL",
+                //"nombre":"GRUASDELVALLESANMARTIN",
+                "correo":"GGONZALEZ@UNIFIN.COM.MX",
+                "telefonos":[
+                    "12345643",
+                    "323232344",
+                    "5579389732"
+                ],
+                "rfc":""
+            };
+            */
+
+            var urlValidaDuplicados = app.api.buildURL("validaDuplicado", '', {}, {});
+
+            App.alert.show('obteniendoDuplicados', {
+                level: 'process',
+                title: 'Cargando',
+            });
+
+            app.api.call("create", urlValidaDuplicados, params, {
+                success: _.bind(function (data) {
+                    App.alert.dismiss('obteniendoDuplicados');
+                    if(data.code=='200'){
+                        if(!_.isEmpty(data.registros)){
+                            self.duplicados=data.registros;
+
+                            //formateando el nivel match
+                            for (var property in self.duplicados) {
+                                //self.duplicados[property].nivelMatch= self.duplicados[property].nivelMatch[0];
+                                //self.duplicados[property].rfc= "LOBS920410HDFPLL06";
+                                self.duplicados[property].coincidencia= self.duplicados[property].coincidencia;
+                            }
+                            errors['modal_duplicados'] = errors['modal_duplicados'] || {};
+                            errors['modal_duplicados'].custom_message1 = true;
+
+                            app.alert.show("posibles_coincidencias", {
+                                level: "error",
+                                title: "Se han identificado posibles duplicados. Favor de validar",
+                                autoClose: false
+                            });
+
+                            //Mandamos a llamar el popup custom
+                            if (Modernizr.touch) {
+                                app.$contentEl.addClass('content-overflow-visible');
+                            }
+                            /**check whether the view already exists in the layout.
+                             * If not we will create a new view and will add to the components list of the record layout
+                             * */
+                            var quickCreateView = null;
+                            if (!quickCreateView) {
+                                /** Create a new view object */
+                                quickCreateView = app.view.createView({
+                                    context: this.context,
+                                    errors:errors,
+                                    registros:self.duplicados,
+                                    name: 'ValidaDuplicadoModal',
+                                    layout: this.layout,
+                                    module: 'Leads'
+                                });
+                                /** add the new view to the components list of the record layout*/
+                                this.layout._components.push(quickCreateView);
+                                this.layout.$el.append(quickCreateView.$el);
+                            }
+                            /**triggers an event to show the pop up quick create view*/
+                            this.layout.trigger("app:view:ValidaDuplicadoModal");
+                        }
+                    }
+                    callback(null, fields, errors);
+
+                }, this)
+            });
+
+
+        }else{
+            callback(null, fields, errors);
+        }
+
     },
 
     validaLongDupTel: function (fields, errors, callback) {
@@ -622,13 +738,20 @@
         }else{
             this._super("cancel");
         }
-        
+
     },
 
     _render: function (options) {
         this._super("_render");
         this.$(".record-cell[data-name='blank_space']").hide();
         $('[data-name="contacto_asociado_c"]').attr('style', 'pointer-events:none');
+        //Ocultando campo de control que omite validación de duplicados
+        $('[data-name="omite_match_c"]').hide();
+        //Ocultando campo check de homonimo
+        $('[data-name="homonimo_c"]').hide();
+        //Oculta etiqueta de lead_direcciones
+        this.$("div.record-label[data-name='lead_direcciones']").attr('style', 'display:none;');
+
     },
 
     fechaAsignacion: function () {
@@ -647,7 +770,7 @@
             mm = '0' + mm
         }
         today = yyyy + '-' + mm + '-' + dd;
-    
+
         if (puestoUsuario == '2' || puestoUsuario == '5') {
             this.model.set('fecha_asignacion_c',today);
         }
@@ -658,10 +781,29 @@
         if (this.model.get("leads_leads_1_right").id != "" && this.model.get("leads_leads_1_right").id != undefined) {
             // console.log("Activa check Contacto asociado create");
             this.model.set('contacto_asociado_c', true);
-        
+
         } else {
             // console.log("Desactiva check Contacto asociado create");
             this.model.set('contacto_asociado_c', false);
         }
     },
+
+    metodo_asignacion_lm_lead: function() {
+        if(this.createMode){
+
+            var posicionOperativa = (App.user.attributes.posicion_operativa_c == undefined)? '' : App.user.attributes.posicion_operativa_c ; //Posición Operativa - Asesor
+
+            if (posicionOperativa.includes('3')){
+                //METODO DE ASIGNACION LM - CREADO POR ASESOR
+                this.model.set('metodo_asignacion_lm_c','2');
+            }
+        }
+    },
+
+    setCustomFields: function (fields, errors, callback) {
+        //Direcciones
+        this.model.set('lead_direcciones', this.oDirecciones.direccion);
+
+        callback(null, fields, errors);
+    },    
 })
