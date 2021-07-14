@@ -33,6 +33,7 @@
         contexto_lead = this;
         this.get_addresses();
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
+        this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
         this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
     },
 
@@ -1099,6 +1100,95 @@
                 this.adjustHeaderpane();
             }
         }
+    },
+
+    validadirecc: function (fields, errors, callback) {
+        //Campos requeridos
+        var cont = 0;
+        var direccion = this.oDirecciones.direccion;
+        for (iDireccion = 0; iDireccion < direccion.length; iDireccion++) {
+            //Tipo
+            if (direccion[iDireccion].tipodedireccion == "") {
+                cont++;
+                this.$('.multi_tipo_existing ul.select2-choices').eq(iDireccion).css('border-color', 'red');
+            } else {
+                this.$('.multi_tipo_existing ul.select2-choices').eq(iDireccion).css('border-color', '');
+            }
+            //Indicador
+            if (direccion[iDireccion].indicador == "") {
+                cont++;
+                this.$('.multi1_n_existing ul.select2-choices').eq(iDireccion).css('border-color', 'red');
+            } else {
+                this.$('.multi1_n_existing ul.select2-choices').eq(iDireccion).css('border-color', '');
+            }
+            //Código Postal
+            if (direccion[iDireccion].valCodigoPostal == "") {
+                cont++;
+                this.$('.postalInputTempExisting').eq(iDireccion).css('border-color', 'red');
+            } else {
+                this.$('.postalInputTempExisting').eq(iDireccion).css('border-color', '');
+            }
+            //Calle
+            if (direccion[iDireccion].calle.trim() == "") {
+                cont++;
+                this.$('.calleExisting').eq(iDireccion).css('border-color', 'red');
+            } else {
+                this.$('.calleExisting').eq(iDireccion).css('border-color', '');
+            }
+            //Número Exterior
+            if (direccion[iDireccion].numext.trim() == "") {
+                cont++;
+                this.$('.numExtExisting').eq(iDireccion).css('border-color', 'red');
+            } else {
+                this.$('.numExtExisting').eq(iDireccion).css('border-color', '');
+            }
+        }
+        //Muestra error en direcciones existentes
+        if (cont > 0) {
+            app.alert.show("empty_fields_dire", {
+                level: "error",
+                messages: "Favor de llenar los campos se\u00F1alados en <b> Direcciones </b> .",
+                autoClose: false
+            });
+            errors['dire_direccion_req'] = errors['dire_direccion_req'] || {};
+            errors['dire_direccion_req'].required = true;
+
+        }
+
+        //Valida direcciones duplicadas
+        if (direccion.length > 0) {
+            var coincidencia = 0;
+            var indices = [];
+            for (var i = 0; i < direccion.length; i++) {
+                for (var j = 0; j < direccion.length; j++) {
+                    if (i != j && direccion[i].inactivo == 0 && direccion[j].calle.trim().toLowerCase() + direccion[j].ciudad + direccion[j].colonia + direccion[j].estado + direccion[j].municipio + direccion[j].numext.trim().toLowerCase() + direccion[j].pais + direccion[j].postal + direccion[j].inactivo == direccion[i].calle.trim().toLowerCase() + direccion[i].ciudad + direccion[i].colonia + direccion[i].estado + direccion[i].municipio + direccion[i].numext.trim().toLowerCase() + direccion[i].pais + direccion[i].postal + direccion[i].inactivo) {
+                        coincidencia++;
+                        indices.push(i);
+                        indices.push(j);
+                    }
+                }
+            }
+            //indices=indices.unique();
+            if (coincidencia > 0) {
+                app.alert.show('error_direccion_duplicada', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: 'Existen direcciones iguales, favor de corregir.'
+                });
+                //$($input).focus();
+                if (indices.length > 0) {
+                    for (var i = 0; i < indices.length; i++) {
+                        $('.calleExisting').eq(indices[i]).css('border-color', 'red');
+                        $('.numExtExisting').eq(indices[i]).css('border-color', 'red');
+                        $('.postalInputTempExisting').eq(indices[i]).css('border-color', 'red');
+                    }
+                }
+                errors['dire_direccion_duplicada'] = errors['dire_direccion_duplicada'] || {};
+                errors['dire_direccion_duplicada'].required = true;
+            }
+        }
+
+        callback(null, fields, errors);
     },
 
 })
