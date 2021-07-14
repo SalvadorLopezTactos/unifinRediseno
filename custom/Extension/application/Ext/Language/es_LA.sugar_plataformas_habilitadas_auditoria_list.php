@@ -24,5 +24,6 @@ $app_list_strings['plataformas_habilitadas_auditoria_list']=array (
   'cvimInfografias'=>'INFOGRAFIAS',
   'cvimExpDigital'=>'EXPEDIENTE DIGITAL',
   'portalUnifin'=>'Portal UNIFIN',
-  'portalUniclick'=>'Portal UNICLICK'
+  'portalUniclick'=>'Portal UNICLICK',
+  'quantico'=>'Quantico'
 );

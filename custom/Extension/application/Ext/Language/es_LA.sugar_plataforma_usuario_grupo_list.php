@@ -24,5 +24,6 @@ $app_list_strings['plataforma_usuario_grupo_list']=array (
   'cvimInfografias'=>'INFOGRAFIAS',
   'cvimExpDigital'=>'EXPEDIENTE DIGITAL',
   'portalUnifin'=>'Portal UNIFIN',
-  'portalUniclick'=>'Portal UNICLICK'
+  'portalUniclick'=>'Portal UNICLICK',
+  'quantico'=>'Quantico'
 );
