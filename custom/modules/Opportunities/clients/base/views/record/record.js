@@ -1582,6 +1582,9 @@
             var percent = (this.model.get("amount") * this.model.get("porciento_ri_c")) / 100;
             this.model.set("ca_importe_enganche_c", percent);
         }
+        if(this.model.get("porciento_ri_c")==0 && this.model.get('producto_financiero_c') == '43'){
+            this.model.set("ca_importe_enganche_c", 0);
+        }
     },
 
     calcularPorcientoRI: function () {
@@ -1589,6 +1592,9 @@
         if (!_.isEmpty(this.model.get("amount")) && !_.isEmpty(this.model.get("ca_importe_enganche_c")) && this.model.get("ca_importe_enganche_c") != 0 && this.model.get("tipo_operacion_c") == 1) {
             var percent = ((this.model.get("ca_importe_enganche_c") * 100) / this.model.get("amount")).toFixed(2);
             this.model.set("porciento_ri_c", percent);
+        }
+        if(this.model.get("ca_importe_enganche_c")==0 && this.model.get('producto_financiero_c') == '43'){
+            this.model.set("porciento_ri_c", 0);
         }
     },
 
