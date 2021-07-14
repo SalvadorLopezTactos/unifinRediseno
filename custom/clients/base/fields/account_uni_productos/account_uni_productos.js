@@ -217,7 +217,7 @@
         $('.list_f_razon_lm').change(function (evt) { //LISTA - Cambio de Estatus Lead Management Factoraje
             cont_uni_p.buscaMotivo('4');
         });
-        $('.list_f_motivo').change(function (evt) { 
+        $('.list_f_so_motivo').change(function (evt) { 
             cont_uni_p.buscaMotivoFinal('4');
         });
       
@@ -1884,19 +1884,37 @@
             if($("#list_l_so_razon")[0].value == '7' &&  tipoProducto == '1'){    
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
                 $('.l_so_raspval2_edit').show();
-            }else if($("#list_f_razon_lm")[0].value == '7' && tipoProducto == '4'){
+            }else if(tipoProducto == '1'){
+                $('.l_so_raspval2_edit').hide();
+            }
+            
+            if($("#list_f_razon_lm")[0].value == '7' && tipoProducto == '4'){
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
                 $('.f_so_raspval2_edit').show();
-            }else if( $("#list_ca_so_razon")[0].value == '7' && tipoProducto == '3'){
+            }else if(tipoProducto == '4'){
+                $('.f_so_raspval2_edit').hide();
+            }
+            
+            if( $("#list_ca_so_razon")[0].value == '7' && tipoProducto == '3'){
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
                 $('.ca_so_raspval2_edit').show();
-            }else if($("#list_l_so_razon")[0].value == '7'&& tipoProducto == '6'){
+            }else if(tipoProducto == '3'){
+                $('.ca_so_raspval2_edit').hide();
+            }
+            
+            if($("#list_fl_so_razon")[0].value == '7'&& tipoProducto == '6'){
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
                 $('.fl_so_raspval2_edit').show();
-            }else if( $("#list_u_so_razon")[0].value == '7' && tipoProducto == '8'){
+            }else if(tipoProducto == '6'){
+                $('.fl_so_raspval2_edit').hide();
+            }
+            
+            if( $("#list_u_so_razon")[0].value == '7' && tipoProducto == '8'){
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
                 $('.u_so_raspval2_edit').show(); 
-            } 
+            }else if(tipoProducto == '8'){
+                $('.u_so_raspval2_edit').hide();
+            }
         }else{
             cont_uni_p.carga_usuarios_resp_validacion_reload(tipoProducto);
             $('.l_so_raspval2_edit').hide();
@@ -1918,18 +1936,35 @@
             if(($("#list_l_so_razon")[0].value == '10' && $("#list_l_so_motivo")[0].value == '7') && tipoProducto == '1'){
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
                 $('.l_so_raspval2_edit').show();
-            }else if(($("#list_f_razon_lm")[0].value == '10' && $("#list_f_so_motivo")[0].value == '7') && tipoProducto == '4' ){
+            }else if(tipoProducto == '1'){
+                $('.l_so_raspval2_edit').hide();
+            }
+            
+            if(($("#list_f_razon_lm")[0].value == '10' && $("#list_f_so_motivo")[0].value == '7') && tipoProducto == '4' ){
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
                 $('.f_so_raspval2_edit').show();
-            } if(($("#list_ca_so_razon")[0].value == '10' && $("#list_ca_so_motivo")[0].value == '7') && tipoProducto == '3'){
+            }else if(tipoProducto == '4'){
+                $('.f_so_raspval2_edit').hide();
+            }
+
+            if(($("#list_ca_so_razon")[0].value == '10' && $("#list_ca_so_motivo")[0].value == '7') && tipoProducto == '3'){
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
                 $('.ca_so_raspval2_edit').show();
-            } if(($("#list_fl_so_razon")[0].value == '10' && $("#list_fl_so_motivo")[0].value == '7') && tipoProducto == '6'){
+            }else if(tipoProducto == '3'){
+                $('.ca_so_raspval2_edit').hide();
+            }
+
+            if(($("#list_fl_so_razon")[0].value == '10' && $("#list_fl_so_motivo")[0].value == '7') && tipoProducto == '6'){
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
                 $('.fl_so_raspval2_edit').show();
-            }if(($("#list_u_so_razon")[0].value == '10' && $("#list_u_so_motivo")[0].value == '7') && tipoProducto == '8' ){
+            }else if(tipoProducto == '6'){
+                $('.fl_so_raspval2_edit').hide();
+            }
+            if(($("#list_u_so_razon")[0].value == '10' && $("#list_u_so_motivo")[0].value == '7') && tipoProducto == '8' ){
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
                 $('.u_so_raspval2_edit').show(); 
+            }else if(tipoProducto == '8'){
+                $('.u_so_raspval2_edit').hide();
             }
         }else{
             cont_uni_p.carga_usuarios_resp_validacion_reload(tipoProducto);
