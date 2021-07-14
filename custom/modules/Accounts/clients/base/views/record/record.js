@@ -4773,12 +4773,17 @@
         var puestos = ['5','11','16','53','54'];
 
         var idCuenta = this.model.get('id');
+        var listCondicion = App.lang.getAppListStrings('status_management_list');
+        var listRazon = App.lang.getAppListStrings('razon_list');
+        
        
             app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + idCuenta), null, {
                 success: function (data) {
                     valProd = data;
 
                     var bloquemsg = false;
+                    var estatusmsg = "";
+                    var razonmsg = "";
                     _.each(valProd, function (value, key) {
                         if(userpuesto.includes(puestos) || app.user.id == valProd[key]['user_id_c']){
                         if(valProd[key]['aprueba1_c'] == '1' && valProd[key]['aprueba2_c'] == '1'){
@@ -4792,6 +4797,8 @@
                                         _.each(data1.records, function (valor, llave) {
                                             if(data1.records[llave].razon == razon && data1.records[llave].motivo == motivo && data1.records[llave].bloquea){
                                                 bloquemsg = true;
+                                                estatusmsg = data1.records[llave].condicion;
+                                                razonmsg = data1.records[llave].razon;
                                             }
 
                                         });
@@ -4801,8 +4808,8 @@
                                             $('.subpanel').attr('style', 'pointer-events:none');
                                             app.alert.show("cuentas_no_contactar", {
                                                 level: "error",
-                                                title: "Cuenta No Contactable<br>",
-                                                messages: "Cuenta No viable. La cuenta se encuentra marcada como no viable y no puede ser editada, ni registrar actividad comercial. <br>Para retomar actividad comercial reactive la cuenta",
+                                                title: "Cuenta No Contactable",
+                                                messages: "La cuenta se encuentra "+listCondicion[estatusmsg]+" debido a "+listRazon[razonmsg]+" . <br>Es necesario reactivar la cuenta, para retomar actividad comercial",
                                                 autoClose: false
                                             });
                                         }

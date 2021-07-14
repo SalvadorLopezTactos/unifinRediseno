@@ -61,7 +61,7 @@ array (
           array (
             'type' => 'button',
             'name' => 'reactivar_noviable',
-            'label' => 'Reactivar No Viable',
+            'label' => 'Reactivar Cuenta',
             'css_class' => 'btn-success hidden',
             'showOn' => 'view',
             'events' => 
