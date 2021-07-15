@@ -58,6 +58,9 @@ class CustomCurrentUserApi extends CurrentUserApi
         $userArray['current_user']['config_admin_cartera'] = $sugar_config['service_admin_cartera'];
         $userArray['current_user']['access_hours_c'] = $current_user->access_hours_c;
         $userArray['current_user']['reset_leadcancel_c'] = $current_user->reset_leadcancel_c;
+    		$userArray['current_user']['tct_id_uni2_txf_c'] = $current_user->tct_id_uni2_txf_c;
+    		$userArray['current_user']['bloqueo_credito_c'] = $current_user->bloqueo_credito_c;
+    		$userArray['current_user']['bloqueo_cumple_c'] = $current_user->bloqueo_cumple_c;
         $userArray['current_user']['tct_id_uni2_txf_c'] = $current_user->tct_id_uni2_txf_c;
         $userArray['current_user']['posicion_operativa_c'] = $current_user->posicion_operativa_c;
         $userArray['current_user']['limite_asignacion_lm_c'] = $current_user->limite_asignacion_lm_c;

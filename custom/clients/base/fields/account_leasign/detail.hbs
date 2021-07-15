@@ -274,11 +274,19 @@ AF - 18-01-18
             <div class="span6"><strong>Nivel de satisfacción</strong> </div>
             <div class="span6">{{ResumenCliente.general_cliente.nivel_satisfaccion}}</div>
           </div> -->
-            <!-- Línea 5 -->
-            <div class="row-fluid" style="background-color: #ffffff">
-                <div class="span6"><strong>Asesor RM</strong> </div>
-                <div class="span6">{{ResumenCliente.general_cliente.asesorRM}}</div>
-            </div>
+          <!-- Línea 5 -->
+          <div class="row-fluid" style="background-color: #ffffff">
+            <div class="span6"><strong>Asesor RM</strong> </div>
+            <div class="span6">{{ResumenCliente.general_cliente.asesorRM}}</div>
+          </div>
+          <!-- Línea 6 -->
+          <div class="row-fluid" style="background-color: #ffffff">
+            <div class="span6"><strong>Condición del Cliente</strong></div>
+			<div class="span6">{{ResumenCliente.general_cliente.condicion}}<br>
+				{{ResumenCliente.general_cliente.condicion2}}<br>
+				{{ResumenCliente.general_cliente.condicion3}}
+			</div>
+          </div>
         </div>
       </div>
     </div>
@@ -405,6 +413,11 @@ AF - 18-01-18
                 <div class="span6"><strong>Estatus de Atención</strong> </div>
                 <div class="span6">{{getUnifinListValue 'product_status_atencion_list' ResumenCliente.leasing.estatus_atencion}}</div>
             </div>
+            <!-- Línea 1.1 -->
+            <div class="row-fluid" style="background-color: #f9f9f9">
+                <div class="span6"><strong>Estatus del Producto</strong> </div>
+                <div class="span6">{{ResumenCliente.leasing.estatusxproducto}}</div>
+            </div>
             <!-- Línea 2 -->
             <div class="row-fluid" style="background-color: #ffffff">
                 <div class="span6"><strong>Tipo de Cuenta</strong> </div>
@@ -505,6 +518,11 @@ AF - 18-01-18
                   <div class="span6"><strong>Estatus de Atención</strong> </div>
                   <div class="span6">{{getUnifinListValue 'product_status_atencion_list' ResumenCliente.factoring.estatus_atencion}}</div>
               </div>
+              <!-- Línea 1.1 -->
+            <div class="row-fluid" style="background-color: #f9f9f9">
+                <div class="span6"><strong>Estatus del Producto</strong> </div>
+                <div class="span6">{{ResumenCliente.factoring.estatusxproducto}}</div>
+            </div>
               <!-- Línea 2 -->
               <div class="row-fluid" style="background-color: #ffffff">
                   <div class="span6"><strong>Tipo de Cuenta</strong> </div>
@@ -604,6 +622,11 @@ AF - 18-01-18
             <div class="row-fluid" style="background-color: #f9f9f9">
                 <div class="span6"><strong>Estatus de Atención</strong> </div>
                 <div class="span6">{{getUnifinListValue 'product_status_atencion_list' ResumenCliente.credito_auto.estatus_atencion}}</div>
+            </div>
+            <!-- Línea 1.1 -->
+            <div class="row-fluid" style="background-color: #f9f9f9">
+                <div class="span6"><strong>Estatus del Producto</strong> </div>
+                <div class="span6">{{ResumenCliente.credito_auto.estatusxproducto}}</div>
             </div>
             <!-- Línea 2 -->
             <div class="row-fluid" style="background-color: #ffffff">
@@ -708,6 +731,11 @@ AF - 18-01-18
                     <div class="row-fluid" style="background-color: #f9f9f9">
                         <div class="span6"><strong>Estatus de Atención</strong> </div>
                         <div class="span6">{{getUnifinListValue 'product_status_atencion_list' ResumenCliente.fleet.estatus_atencion}}</div>
+                    </div>
+                    <!-- Línea 1.1 -->
+                    <div class="row-fluid" style="background-color: #f9f9f9">
+                        <div class="span6"><strong>Estatus del Producto</strong> </div>
+                        <div class="span6">{{ResumenCliente.fleet.estatusxproducto}}</div>
                     </div>
                     <!-- Línea 2 -->
                     <div class="row-fluid" style="background-color: #ffffff">
@@ -868,6 +896,11 @@ AF - 18-01-18
   					<div class="span6"><strong>Estatus de Atención</strong> </div>
   					<div class="span6">{{getUnifinListValue 'product_status_atencion_list' ResumenCliente.uniclick.estatus_atencion}}</div>
   				</div>
+          <!-- Línea 1.1 -->
+          <div class="row-fluid" style="background-color: #f9f9f9">
+              <div class="span6"><strong>Estatus del Producto</strong> </div>
+              <div class="span6">{{ResumenCliente.uniclick.estatusxproducto}}</div>
+          </div>
   				<!-- Línea 2 -->
   				<div class="row-fluid" style="background-color: #ffffff">
   					<div class="span6"><strong>Tipo de Cuenta</strong> </div>
@@ -927,6 +960,11 @@ AF - 18-01-18
                     <div class="row-fluid" style="background-color: #f9f9f9">
                         <div class="span6"><strong>Estatus de Atención</strong> </div>
                         <div class="span6">{{getUnifinListValue 'product_status_atencion_list' ResumenCliente.unilease.estatus_atencion}}</div>
+                    </div>
+                    <!-- Línea 1.1 -->
+                    <div class="row-fluid" style="background-color: #f9f9f9">
+                        <div class="span6"><strong>Estatus del Producto</strong> </div>
+                        <div class="span6">{{ResumenCliente.unilease.estatusxproducto}}</div>
                     </div>
                     <!-- Línea 2 -->
                     <div class="row-fluid" style="background-color: #ffffff">
