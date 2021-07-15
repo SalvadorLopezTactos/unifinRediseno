@@ -775,12 +775,19 @@
         //Recupera variables
         var origen = this.model.get('origen_cuenta_c');
         var puesto = App.user.attributes.puestousuario_c; //27=> Agente Tel, 31=> Coordinador CP,
+        var listaEdicionOrigen = [];    //Recupera Ids de usuarios que pueden editar origen
+        Object.entries(App.lang.getAppListStrings('usuario_edicion_origen_list')).forEach(([key, value]) => {
+            listaEdicionOrigen.push(value);
+        });
+        listaEdicionOrigen.includes(App.user.attributes.id)
+
         /*
          -- Bloquea campos si;
          1.- Origen es Marketing = 1 o Inteligencia de negocio = 2
          2.- Puesto es diferente de Agente Tel. y Coordinador de centro de prospección
+         3.- Usuario no está en lista de Usuario que pueden editar
          */
-        if ((origen == "1" || origen == "2") && (puesto != '27' && puesto != '31')) {
+        if ((origen == "1" || origen == "2") && (puesto != '27' && puesto != '31') && !listaEdicionOrigen.includes(App.user.attributes.id) ) {
             //Establece como no editables campos de origen
             this.noEditFields.push('origen_cuenta_c');
             this.noEditFields.push('detalle_origen_c');
