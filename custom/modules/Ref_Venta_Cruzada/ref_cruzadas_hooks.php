@@ -422,7 +422,7 @@ class Ref_Cruzadas_Hooks
 			}
         }
         
-        return $array_cond_no_cumplidas;
+        return array_unique($array_cond_no_cumplidas);
 
     }
 
