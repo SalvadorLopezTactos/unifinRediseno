@@ -16,8 +16,9 @@
             $result2 = $GLOBALS['db']->query($query2);
             while ($row2 = $GLOBALS['db']->fetchByAssoc($result2)) {
                 $id = $row2['id_c'];
-                $query1 = "SELECT C.*,C2.cid_name FROM `cdr` as C, `cel` C2 where C.uniqueid=C2.uniqueid and C2.cid_name like '%{$id}' ORDER BY `C`.`calldate` DESC";
-                $statement = $con->prepare($query1);
+				$fecha = date("Y-m-d", strtotime("-1 day"));
+                $query1 = "SELECT C.*,C2.cid_name FROM `cdr` as C, `cel` C2 where C.calldate >= '{$fecha}' and C.uniqueid=C2.uniqueid and C2.cid_name like '%{$id}' ORDER BY `C`.`calldate` DESC";
+				$statement = $con->prepare($query1);
                 $statement->execute();
                 if ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
                     $temp = explode(" ", $row['calldate']);
