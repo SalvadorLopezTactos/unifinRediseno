@@ -42,6 +42,7 @@
         this.prev_oDirecciones.prev_direccion = [];
         this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
         this.model.addValidationTask('check_direcciones', _.bind(this.validadireccexisting, this));
+        this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
     },
 
     delegateButtonEvents: function() {
@@ -893,6 +894,54 @@
                 errors['dire_direccion_duplicada'].required = true;
             }
         }
+        callback(null, fields, errors);
+    },
+
+    _direccionDuplicada: function (fields, errors, callback) {
+
+        /* SE VALIDA DIRECTAMENTE DE LOS ELEMENTOS DEL HTML POR LA COMPLEJIDAD DE
+         OBETENER LAS DESDRIPCIONES DE LOS COMBOS*/
+        var objDirecciones = $('.control-group.direccion');
+        var concatDirecciones = [];
+        var strDireccionTemp = "";
+        for (var i = 0; i < objDirecciones.length - 1; i++) {
+            if (objDirecciones.eq(i).find('select.inactivo option:selected') == 0) {
+                strDireccionTemp = objDirecciones.eq(i).find('.calleExisting').val() +
+                    objDirecciones.eq(i).find('.numExtExisting').val() +
+                    objDirecciones.eq(i).find('.numIntExisting').val() +
+                    objDirecciones.eq(i).find('select.coloniaExisting option:selected').text() +
+                    objDirecciones.eq(i).find('select.municipioExisting option:selected').text() +
+                    objDirecciones.eq(i).find('select.estadoExisting option:selected').text() +
+                    objDirecciones.eq(i).find('select.ciudadExisting option:selected').text() +
+                    objDirecciones.eq(i).find('.postalInputTempExisting').val();
+
+                concatDirecciones.push(strDireccionTemp.replace(/\s/g, "").toUpperCase());
+            }
+        }
+
+        // validamos  el arreglo generado
+        var existe = false;
+        for (var j = 0; j < concatDirecciones.length; j++) {
+            for (var k = j + 1; k < concatDirecciones.length; k++) {
+
+                if (concatDirecciones[j] == concatDirecciones[k]) {
+                    existe = true;
+                }
+            }
+        }
+
+        if (existe) {
+            app.alert.show('Direcci\u00F3n', {
+                level: 'error',
+                autoClose: false,
+                messages: 'Existe una o mas direcciones repetidas'
+            });
+            var messages1 = 'Existe una o mas direcciones repetidas';
+            errors['xd'] = errors['xd'] || {};
+            // errors['xd'].messages1 = true;
+            errors['xd'].required = true;
+        }
+
         callback(null, fields, errors);
     },
 })
