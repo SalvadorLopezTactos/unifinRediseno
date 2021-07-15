@@ -217,7 +217,7 @@
         $('.list_f_razon_lm').change(function (evt) { //LISTA - Cambio de Estatus Lead Management Factoraje
             cont_uni_p.buscaMotivo('4');
         });
-        $('.list_f_motivo').change(function (evt) { 
+        $('.list_f_so_motivo').change(function (evt) { 
             cont_uni_p.buscaMotivoFinal('4');
         });
       
@@ -353,6 +353,7 @@
         $('.l_nv_razon_cf').hide(); //CLASE Condiciones Financieras LEASING
         $('.l_nv_otro').hide(); //CLASE ¿Qué producto? LEASING
         $('.l_nv_razon_ni').hide(); //CLASE Razón No se encuentra interesado LEASING
+
         /************************************ */
         $('.l_so_razon').hide();
         $('.l_so_motivo').hide();
@@ -386,11 +387,14 @@
                     $('.ls_estatus_lm').show();
                 }
                 $('.l_so_raspval1').show(); 
-                $('.l_so_raspval2').show(); 
+                //$('.l_so_raspval2').show(); 
                 $('.l_so_razon').show();
                 $('.l_so_motivo').show();
                 $('.l_so_detalle').show();
-                $('.l_so_resp_ingesta').show();                 
+                $('.l_so_resp_ingesta').show(); 
+                /*if(this.busca_bloquea(cont_uni_p.ResumenProductos.leasing.status_management_c  , cont_uni_p.ResumenProductos.leasing.razon_c , cont_uni_p.ResumenProductos.leasing.motivo_c )){
+                    $('.l_so_raspval2').show(); 
+                } */               
             }
             if(cont_uni_p.ResumenProductos.leasing.status_management_c == '1' ){
                 if(cont_uni_p.ResumenProductos.leasing.deshabilitar_lmedit){
@@ -423,7 +427,7 @@
             $('.l_so_detalle').show();
             $('.l_so_resp_ingesta').show();
             $('.l_so_raspval1_edit').show();
-            $('.l_so_raspval2_edit').show();
+            //$('.l_so_raspval2_edit').show();
         }
           
     },
@@ -523,7 +527,10 @@
                 $('.f_so_detalle').show();
                 $('.f_so_resp_ingesta').show();
                 $('.f_so_raspval1').show();
-                $('.f_so_raspval2').show();  
+                //$('.f_so_raspval2').show();  
+                /*if(this.busca_bloquea(cont_uni_p.ResumenProductos.factoring.status_management_c  , cont_uni_p.ResumenProductos.factoring.razon_c , cont_uni_p.ResumenProductos.factoring.motivo_c )){
+                    $('.f_so_raspval2').show();
+                }*/
             }
             if(cont_uni_p.ResumenProductos.factoring.status_management_c == '1' ){
                 if(cont_uni_p.ResumenProductos.factoring.deshabilitar_lmedit){
@@ -554,7 +561,7 @@
             $('.f_so_detalle').show();
             $('.f_so_resp_ingesta').show();
             $('.f_so_raspval1_edit').show();
-            $('.f_so_raspval2_edit').show();  
+            //$('.f_so_raspval2_edit').show();  
         }
           
     },
@@ -652,7 +659,10 @@
                 $('.ca_so_detalle').show();
                 $('.ca_so_resp_ingesta').show();
                 $('.ca_so_raspval1').show();
-                $('.ca_so_raspval2').show();  
+                //$('.ca_so_raspval2').show();  
+                /*if(this.busca_bloquea(cont_uni_p.ResumenProductos.credito_auto.status_management_c  , cont_uni_p.ResumenProductos.credito_auto.razon_c , cont_uni_p.ResumenProductos.credito_auto.motivo_c )){
+                    $('.ca_so_raspval2').show(); 
+                }*/
             }
             if(cont_uni_p.ResumenProductos.credito_auto.status_management_c == '1' ){
                 if(cont_uni_p.ResumenProductos.credito_auto.deshabilitar_lmedit){
@@ -683,7 +693,7 @@
             $('.ca_so_detalle').show();
             $('.ca_so_resp_ingesta').show();
             $('.ca_so_raspval1_edit').show();
-            $('.ca_so_raspval2_edit').show();
+            //$('.ca_so_raspval2_edit').show();
             
         }
           
@@ -784,7 +794,10 @@
                 $('.fl_so_detalle').show();
                 $('.fl_so_resp_ingesta').show();
                 $('.fl_so_raspval1').show();
-                $('.fl_so_raspval2').show();  
+                //$('.fl_so_raspval2').show();  
+                /*if(this.busca_bloquea(cont_uni_p.ResumenProductos.fleet.status_management_c  , cont_uni_p.ResumenProductos.fleet.razon_c , cont_uni_p.ResumenProductos.fleet.motivo_c )){
+                    $('.fl_so_raspval2').show(); 
+                }*/
             }
             if(cont_uni_p.ResumenProductos.fleet.status_management_c == '1' ){
                 if(cont_uni_p.ResumenProductos.fleet.deshabilitar_lmedit){
@@ -816,7 +829,7 @@
             $('.fl_so_detalle').show();
             $('.fl_so_resp_ingesta').show();
             $('.fl_so_raspval1_edit').show();
-            $('.fl_so_raspval2_edit').show();  
+            //$('.fl_so_raspval2_edit').show();  
         }          
     },
     //FUNCION DE PRODUCTO FLEET PARA LAS DEPENDENCIAS DE LOS CAMPOS
@@ -915,7 +928,10 @@
                 $('.u_so_detalle').show();
                 $('.u_so_resp_ingesta').show();
                 $('.u_so_raspval1').show();
-                $('.u_so_raspval2').show();  
+                //$('.u_so_raspval2').show(); 
+                /*if(this.busca_bloquea(cont_uni_p.ResumenProductos.uniclick.status_management_c  , cont_uni_p.ResumenProductos.uniclick.razon_c , cont_uni_p.ResumenProductos.uniclick.motivo_c )){
+                    $('.u_so_raspval2').show(); 
+                }*/
             }
             if(cont_uni_p.ResumenProductos.uniclick.status_management_c == '1' ){
                 if(cont_uni_p.ResumenProductos.uniclick.deshabilitar_lmedit){
@@ -946,7 +962,7 @@
             $('.u_so_detalle').show();
             $('.u_so_resp_ingesta').show();
             $('.u_so_raspval1_edit').show();
-            $('.u_so_raspval2_edit').show();  
+            //$('.u_so_raspval2_edit').show();  
         }          
     },
     //FUNCION DE PRODUCTO UNICLICK PARA LAS DEPENDENCIAS DE LOS CAMPOS
@@ -1610,6 +1626,7 @@
                 "detalle",
                 "responsable1",
                 "responsable2",
+                "bloquea",
             ],
         };
         filter_arguments["filter"] = [
@@ -1630,7 +1647,21 @@
         app.api.call("read", app.api.buildURL("tct4_Condiciones", null, null, filter_arguments), null, {
         	success: _.bind(function (data) {
                 cont_uni_p.datacondiciones = data;
-                   
+                if(this.busca_bloquea(cont_uni_p.ResumenProductos.leasing.status_management_c  , cont_uni_p.ResumenProductos.leasing.razon_c , cont_uni_p.ResumenProductos.leasing.motivo_c )){
+                    $('.l_so_raspval2').show(); 
+                }
+                if(this.busca_bloquea(cont_uni_p.ResumenProductos.factoring.status_management_c  , cont_uni_p.ResumenProductos.factoring.razon_c , cont_uni_p.ResumenProductos.factoring.motivo_c )){
+                    $('.f_so_raspval2').show();
+                } 
+                if(this.busca_bloquea(cont_uni_p.ResumenProductos.credito_auto.status_management_c  , cont_uni_p.ResumenProductos.credito_auto.razon_c , cont_uni_p.ResumenProductos.credito_auto.motivo_c )){
+                    $('.ca_so_raspval2').show(); 
+                } 
+                if(this.busca_bloquea(cont_uni_p.ResumenProductos.fleet.status_management_c  , cont_uni_p.ResumenProductos.fleet.razon_c , cont_uni_p.ResumenProductos.fleet.motivo_c )){
+                    $('.fl_so_raspval2').show(); 
+                } 
+                if(this.busca_bloquea(cont_uni_p.ResumenProductos.uniclick.status_management_c  , cont_uni_p.ResumenProductos.uniclick.razon_c , cont_uni_p.ResumenProductos.uniclick.motivo_c )){
+                    $('.u_so_raspval2').show(); 
+                }                 
 			}, cont_uni_p),
             error: function (e) {
                 throw e;
@@ -1852,17 +1883,45 @@
             
             if($("#list_l_so_razon")[0].value == '7' &&  tipoProducto == '1'){    
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
-            }else if($("#list_f_razon_lm")[0].value == '7' && tipoProducto == '4'){
+                $('.l_so_raspval2_edit').show();
+            }else if(tipoProducto == '1'){
+                $('.l_so_raspval2_edit').hide();
+            }
+            
+            if($("#list_f_razon_lm")[0].value == '7' && tipoProducto == '4'){
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
-            }else if( $("#list_ca_so_razon")[0].value == '7' && tipoProducto == '3'){
+                $('.f_so_raspval2_edit').show();
+            }else if(tipoProducto == '4'){
+                $('.f_so_raspval2_edit').hide();
+            }
+            
+            if( $("#list_ca_so_razon")[0].value == '7' && tipoProducto == '3'){
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
-            }else if($("#list_l_so_razon")[0].value == '7'&& tipoProducto == '6'){
+                $('.ca_so_raspval2_edit').show();
+            }else if(tipoProducto == '3'){
+                $('.ca_so_raspval2_edit').hide();
+            }
+            
+            if($("#list_fl_so_razon")[0].value == '7'&& tipoProducto == '6'){
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
-            }else if( $("#list_u_so_razon")[0].value == '7' && tipoProducto == '8'){
+                $('.fl_so_raspval2_edit').show();
+            }else if(tipoProducto == '6'){
+                $('.fl_so_raspval2_edit').hide();
+            }
+            
+            if( $("#list_u_so_razon")[0].value == '7' && tipoProducto == '8'){
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
-            } 
+                $('.u_so_raspval2_edit').show(); 
+            }else if(tipoProducto == '8'){
+                $('.u_so_raspval2_edit').hide();
+            }
         }else{
             cont_uni_p.carga_usuarios_resp_validacion_reload(tipoProducto);
+            $('.l_so_raspval2_edit').hide();
+            $('.f_so_raspval2_edit').hide();
+            $('.ca_so_raspval2_edit').hide();
+            $('.fl_so_raspval2_edit').hide();
+            $('.u_so_raspval2_edit').hide(); 
         } 
     },
 
@@ -1876,17 +1935,44 @@
 
             if(($("#list_l_so_razon")[0].value == '10' && $("#list_l_so_motivo")[0].value == '7') && tipoProducto == '1'){
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
-            }else if(($("#list_f_razon_lm")[0].value == '10' && $("#list_f_so_motivo")[0].value == '7') && tipoProducto == '4' ){
+                $('.l_so_raspval2_edit').show();
+            }else if(tipoProducto == '1'){
+                $('.l_so_raspval2_edit').hide();
+            }
+            
+            if(($("#list_f_razon_lm")[0].value == '10' && $("#list_f_so_motivo")[0].value == '7') && tipoProducto == '4' ){
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
-            } if(($("#list_ca_so_razon")[0].value == '10' && $("#list_ca_so_motivo")[0].value == '7') && tipoProducto == '3'){
+                $('.f_so_raspval2_edit').show();
+            }else if(tipoProducto == '4'){
+                $('.f_so_raspval2_edit').hide();
+            }
+
+            if(($("#list_ca_so_razon")[0].value == '10' && $("#list_ca_so_motivo")[0].value == '7') && tipoProducto == '3'){
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
-            } if(($("#list_fl_so_razon")[0].value == '10' && $("#list_fl_so_motivo")[0].value == '7') && tipoProducto == '6'){
+                $('.ca_so_raspval2_edit').show();
+            }else if(tipoProducto == '3'){
+                $('.ca_so_raspval2_edit').hide();
+            }
+
+            if(($("#list_fl_so_razon")[0].value == '10' && $("#list_fl_so_motivo")[0].value == '7') && tipoProducto == '6'){
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
-            }if(($("#list_u_so_razon")[0].value == '10' && $("#list_u_so_motivo")[0].value == '7') && tipoProducto == '8' ){
+                $('.fl_so_raspval2_edit').show();
+            }else if(tipoProducto == '6'){
+                $('.fl_so_raspval2_edit').hide();
+            }
+            if(($("#list_u_so_razon")[0].value == '10' && $("#list_u_so_motivo")[0].value == '7') && tipoProducto == '8' ){
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
+                $('.u_so_raspval2_edit').show(); 
+            }else if(tipoProducto == '8'){
+                $('.u_so_raspval2_edit').hide();
             }
         }else{
             cont_uni_p.carga_usuarios_resp_validacion_reload(tipoProducto);
+            $('.l_so_raspval2_edit').hide();
+            $('.f_so_raspval2_edit').hide();
+            $('.ca_so_raspval2_edit').hide();
+            $('.fl_so_raspval2_edit').hide();
+            $('.u_so_raspval2_edit').hide(); 
         } 
     },
 
@@ -1907,6 +1993,9 @@
                 document.getElementById("list_l_respval_1").selectedIndex = "-1"
                 document.getElementById("list_l_respval_2").innerHTML = "";
                 document.getElementById("list_l_respval_2").selectedIndex = "-1"
+
+                document.getElementById("list_l_respval_1").value =""
+                document.getElementById("list_l_respval_2").value =""
                 break;
             case "4": //Factoraje
                 document.getElementById("list_f_respval_1").options.length=0;
@@ -1916,6 +2005,9 @@
                 document.getElementById("list_f_respval_1").selectedIndex = "-1"
                 document.getElementById("list_f_respval_2").innerHTML = "";
                 document.getElementById("list_f_respval_2").selectedIndex = "-1"
+
+                document.getElementById("list_f_respval_1").value =""
+                document.getElementById("list_f_respval_2").value =""
                 break;
             case "3": //Credito-auto
                 document.getElementById("list_ca_respval_1").options.length=0;
@@ -1925,6 +2017,9 @@
                 document.getElementById("list_ca_respval_1").selectedIndex = "-1"
                 document.getElementById("list_ca_respval_2").innerHTML = "";
                 document.getElementById("list_ca_respval_2").selectedIndex = "-1"
+
+                document.getElementById("list_ca_respval_1").value =""
+                document.getElementById("list_ca_respval_2").value =""
                 break;
             case "6": //Fleet
                 document.getElementById("list_fl_respval_1").options.length=0;
@@ -1934,6 +2029,9 @@
                 document.getElementById("list_fl_respval_1").selectedIndex = "-1"
                 document.getElementById("list_fl_respval_2").innerHTML = "";
                 document.getElementById("list_fl_respval_2").selectedIndex = "-1"
+
+                document.getElementById("list_fl_respval_1").value =""
+                document.getElementById("list_fl_respval_2").value =""
                 break;
             case "8": //Uniclick
                 document.getElementById("list_u_respval_1").options.length=0;
@@ -1943,6 +2041,9 @@
                 document.getElementById("list_u_respval_1").selectedIndex = "-1"
                 document.getElementById("list_u_respval_2").innerHTML = "";
                 document.getElementById("list_u_respval_2").selectedIndex = "-1"
+
+                document.getElementById("list_u_respval_1").value =""
+                document.getElementById("list_u_respval_2").value =""  
                 break;
         }
         var j = 0;
@@ -1973,6 +2074,39 @@
                 j++;
             }
         }
+        
+        switch (tipoProducto) {
+            case "1": //Leasing
+                document.getElementById("list_l_respval_1").options[j]=new Option('','');
+                document.getElementById("list_l_respval_2").options[j]=new Option('','');
+                document.getElementById("list_l_respval_1").value =""
+                document.getElementById("list_l_respval_2").value =""
+                break;
+            case "4": //Factoraje
+                document.getElementById("list_f_respval_1").options[j]=new Option('','');
+                document.getElementById("list_f_respval_2").options[j]=new Option('','');
+                document.getElementById("list_f_respval_1").value =""
+                document.getElementById("list_f_respval_2").value =""
+                break;
+            case "3": //Credito-auto
+                document.getElementById("list_ca_respval_1").options[j]=new Option('','');
+                document.getElementById("list_ca_respval_2").options[j]=new Option('','');
+                document.getElementById("list_ca_respval_1").value =""
+                document.getElementById("list_ca_respval_2").value =""
+                break;
+            case "6": //Fleet
+                document.getElementById("list_fl_respval_1").options[j]=new Option('','');
+                document.getElementById("list_fl_respval_2").options[j]=new Option('','');
+                document.getElementById("list_fl_respval_1").value =""
+                document.getElementById("list_fl_respval_2").value =""
+                break;
+            case "8": //Uniclick
+                document.getElementById("list_u_respval_1").options[j]=new Option('','');
+                document.getElementById("list_u_respval_2").options[j]=new Option('','');
+                document.getElementById("list_u_respval_1").value =""
+                document.getElementById("list_u_respval_2").value =""
+                break;
+        }
     },
 
     carga_usuarios_resp_validacion2:function (tipoProducto){
@@ -1987,22 +2121,32 @@
             case "1": //Leasing
                 document.getElementById("list_l_respval_1").options.length=0;
                 document.getElementById("list_l_respval_2").options.length=0;
+                document.getElementById("list_l_respval_1").value =""
+                document.getElementById("list_l_respval_2").value =""
                 break;
             case "4": //Factoraje
                 document.getElementById("list_f_respval_1").options.length=0;
                 document.getElementById("list_f_respval_2").options.length=0;
+                document.getElementById("list_f_respval_1").value =""
+                document.getElementById("list_f_respval_2").value =""
                 break;
             case "3": //Credito-auto
                 document.getElementById("list_ca_respval_1").options.length=0;
                 document.getElementById("list_ca_respval_2").options.length=0;
+                document.getElementById("list_ca_respval_1").value =""
+                document.getElementById("list_ca_respval_2").value =""
                 break;
             case "6": //Fleet
                 document.getElementById("list_fl_respval_1").options.length=0;
                 document.getElementById("list_fl_respval_2").options.length=0;
+                document.getElementById("list_fl_respval_1").value =""
+                document.getElementById("list_fl_respval_2").value =""
                 break;
             case "8": //Uniclick
                 document.getElementById("list_u_respval_1").options.length=0;
                 document.getElementById("list_u_respval_2").options.length=0;
+                document.getElementById("list_u_respval_1").value =""
+                document.getElementById("list_u_respval_2").value =""
                 break;
         }
         var j = 0;
@@ -2060,6 +2204,39 @@
                 document.getElementById("list_u_respval_2").options[j]=new Option(cont_uni_p.cartera[i].nombre , cont_uni_p.cartera[i].id);  
                 j++;
             }
+        }
+
+        switch (tipoProducto) {
+            case "1": //Leasing
+                document.getElementById("list_l_respval_1").options[j]=new Option('','');
+                document.getElementById("list_l_respval_2").options[j]=new Option('','');
+                document.getElementById("list_l_respval_1").value =""
+                document.getElementById("list_l_respval_2").value =""
+                break;
+            case "4": //Factoraje
+                document.getElementById("list_f_respval_1").options[j]=new Option('','');
+                document.getElementById("list_f_respval_2").options[j]=new Option('','');
+                document.getElementById("list_f_respval_1").value =""
+                document.getElementById("list_f_respval_2").value =""
+                break;
+            case "3": //Credito-auto
+                document.getElementById("list_ca_respval_1").options[j]=new Option('','');
+                document.getElementById("list_ca_respval_2").options[j]=new Option('','');
+                document.getElementById("list_ca_respval_1").value =""
+                document.getElementById("list_ca_respval_2").value =""
+                break;
+            case "6": //Fleet
+                document.getElementById("list_fl_respval_1").options[j]=new Option('','');
+                document.getElementById("list_fl_respval_2").options[j]=new Option('','');
+                document.getElementById("list_fl_respval_1").value =""
+                document.getElementById("list_fl_respval_2").value =""
+                break;
+            case "8": //Uniclick
+                document.getElementById("list_u_respval_1").options[j]=new Option('','');
+                document.getElementById("list_u_respval_2").options[j]=new Option('','');
+                document.getElementById("list_u_respval_1").value =""
+                document.getElementById("list_u_respval_2").value =""
+                break;
         }
     },
 
@@ -2179,6 +2356,18 @@
                 */
             }, this)
         });
+    },
+
+    busca_bloquea:function (bestatus , brazon , bmotivo ){
+        var salida=false;
+        for(var i=0; i< cont_uni_p.datacondiciones.records.length ; i++) {
+
+            if((cont_uni_p.datacondiciones.records[i].condicion == bestatus) && (cont_uni_p.datacondiciones.records[i].razon == brazon) 
+            && (cont_uni_p.datacondiciones.records[i].motivo == bmotivo) && (cont_uni_p.datacondiciones.records[i].bloquea =="1")){
+                salida = true;
+            }
+        }
+        return salida;
     },
 
     carga_usuarios_DirectorRegional:function (){

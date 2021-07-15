@@ -184,6 +184,7 @@ class clase_UniProducto
                         $beanUP->assigned_user_id = $key['assigned_user_id'];
                         $beanUP->canal_c = $key['canal_c'] != "" ? $key['canal_c'] : "";
                         $beanUP->multilinea_c = $key['multilinea_c'] != "" ? $key['multilinea_c'] : "";
+                        $beanUP->notificacion_noviable_c = $key['notificacion_noviable_c']; 
 
                         /*
                         $beanUP->status_management_c = $key['status_management_c'];
@@ -320,7 +321,7 @@ class clase_UniProducto
         $GLOBALS['log']->fatal("ENVIANDO NOTIFICACION no viable: ".$cuerpoCorreo);
         //$GLOBALS['log']->fatal("ENVIANDO NOTIFICACION no viable".$correo_director);
         //Enviando correo a director de solicitud con copia  a director regional leasing
-        $this->enviarNotificacionDirector("Cuenta {$nombreCuenta} bloqueada por {$ResponsableIngesta}",$cuerpoCorreo,$nombres,$correos);
+        $this->enviarNotificacionDirector("Solicitud de bloqueo de cuenta por  {$ResponsableIngesta}",$cuerpoCorreo,$nombres,$correos);
         
         $GLOBALS['log']->fatal("Termina proceso de notificacion_director");
     }

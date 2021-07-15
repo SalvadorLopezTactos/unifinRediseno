@@ -37,8 +37,8 @@ array (
           array (
             'type' => 'button',
             'name' => 'aprobar_noviable',
-            'label' => 'Aprobar No Viable',
-            'css_class' => 'btn-danger hidden',
+            'label' => 'Confirmar Bloqueo',
+            'css_class' => 'btn-success hidden',
             'showOn' => 'view',
             'events' => 
             array (
@@ -49,8 +49,8 @@ array (
           array (
             'type' => 'button',
             'name' => 'desaprobar_noviable',
-            'label' => 'Rechazar No Viable',
-            'css_class' => 'btn-success hidden',
+            'label' => 'Rechazar Bloqueo',
+            'css_class' => 'btn-danger hidden',
             'showOn' => 'view',
             'events' => 
             array (
@@ -61,7 +61,7 @@ array (
           array (
             'type' => 'button',
             'name' => 'reactivar_noviable',
-            'label' => 'Reactivar No Viable',
+            'label' => 'Reactivar Cuenta',
             'css_class' => 'btn-success hidden',
             'showOn' => 'view',
             'events' => 

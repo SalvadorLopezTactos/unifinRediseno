@@ -790,6 +790,7 @@ class ResumenClienteAPI extends SugarApi
                 $tipoProducto = $product->tipo_producto;
                 $statusProducto = $product->estatus_atencion;
                 $cobranza = $product->cobranza_c;
+                $estatusxproducto = $app_list_strings['status_management_list'][$product->status_management_c] .' / '.$app_list_strings['razon_list'][$product->razon_c];
 
                 if ($statusProducto == '' || $statusProducto == null){
                     $statusProducto = '0'; //0 = vacio
@@ -802,24 +803,28 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['leasing']['subtipo_cuenta'] = $subtipoCuenta;
                         $arr_principal['leasing']['estatus_atencion'] = $statusProducto;
                         $arr_principal['leasing']['cobranza'] = $cobranza;
+                        $arr_principal['leasing']['estatusxproducto'] = $estatusxproducto;
                         break;
                     case '3': //Credito-Automotriz
                         $arr_principal['credito_auto']['tipo_cuenta'] = $tipoCuenta;
                         $arr_principal['credito_auto']['subtipo_cuenta'] = $subtipoCuenta;
                         $arr_principal['credito_auto']['estatus_atencion'] = $statusProducto;
                         $arr_principal['credito_auto']['cobranza'] = $cobranza;
+                        $arr_principal['credito_auto']['estatusxproducto'] = $estatusxproducto;
                         break;
                     case '4': //Factoraje
                         $arr_principal['factoring']['tipo_cuenta'] = $tipoCuenta;
                         $arr_principal['factoring']['subtipo_cuenta'] = $subtipoCuenta;
                         $arr_principal['factoring']['estatus_atencion'] = $statusProducto;
                         $arr_principal['factoring']['cobranza'] = $cobranza;
+                        $arr_principal['factoring']['estatusxproducto'] = $estatusxproducto;
                         break;
                     case '6': //Fleet
                         $arr_principal['fleet']['tipo_cuenta'] = $tipoCuenta;
                         $arr_principal['fleet']['subtipo_cuenta'] = $subtipoCuenta;
                         $arr_principal['fleet']['estatus_atencion'] = $statusProducto;
                         $arr_principal['fleet']['cobranza'] = $cobranza;
+                        $arr_principal['fleet']['estatusxproducto'] = $estatusxproducto;
                         break;
                     case '7': //Credito SOS
                         $arr_principal['credito_sos']['estatus_atencion'] = $statusProducto;
@@ -830,6 +835,7 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['uniclick']['subtipo_cuenta'] = $subtipoCuenta;
                         $arr_principal['uniclick']['estatus_atencion'] = $statusProducto;
                         $arr_principal['uniclick']['cobranza'] = $cobranza;
+                        $arr_principal['uniclick']['estatusxproducto'] = $estatusxproducto;
                         break;
                     case '9': //Uniclick
                         $arr_principal['unilease']['tipo_cuenta'] = $tipoCuenta;

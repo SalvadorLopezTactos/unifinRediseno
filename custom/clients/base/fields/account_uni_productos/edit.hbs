@@ -10,7 +10,6 @@
         border: 0 !important;
     }
 </style>
-
 <div class="row-fluid">
     <table id="tableUni_productos" width="100%" class="table">
         <tr >
@@ -41,11 +40,11 @@
                         </td>
                         <td width="33%">
                             <div class="ls_estatus_lm mpad ">
-                                <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
+                                <label class="record-label mpad" style="margin-left:0px">Estatus del Producto</label>
                                 {{getUnifinListValue 'status_management_list' ResumenProductos.leasing.status_management_c}}
                             </div>
                             <div class="ls_estatus_lm_edit mpad ">
-                                <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
+                                <label class="record-label mpad" style="margin-left:0px">Estatus del Producto</label>
                                 <select class="row-fluid select2 list_l_estatus_lm" id="list_l_estatus_lm" data-field="list_l_estatus_lm">
 								    {{#each status_management_list_edit}}
                                     <option value="{{@key}}" {{ifSelected @key
@@ -254,11 +253,11 @@
                         </td>
                         <td width="33%">
                             <div class="fac_estatus_lm mpad ">
-                                <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
+                                <label class="record-label mpad" style="margin-left:0px">Estatus del Producto</label>
                                 {{getUnifinListValue 'status_management_list' ResumenProductos.factoring.status_management_c}}
                             </div>
                             <div class="fac_estatus_lm_edit mpad ">
-                                <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
+                                <label class="record-label mpad" style="margin-left:0px">Estatus del Producto</label>
                                 <select class="row-fluid select2 list_fac_estatus_lm" id="list_fac_estatus_lm" data-field="list_fac_estatus_lm">
 								    {{#each status_management_list_edit}}
                                     <option value="{{@key}}" {{ifSelected @key
@@ -461,11 +460,11 @@
                         </td>
                         <td width="33%">
                             <div class="ca_estatus_lm mpad ">
-                                <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
+                                <label class="record-label mpad" style="margin-left:0px">Estatus del Producto</label>
                                 {{getUnifinListValue 'status_management_list' ResumenProductos.credito_auto.status_management_c}}
                             </div>
                             <div class="ca_estatus_lm_edit mpad ">
-                                <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>                                
+                                <label class="record-label mpad" style="margin-left:0px">Estatus del Producto</label>                                
                                 <select class="row-fluid select2 list_ca_estatus_lm" id="list_ca_estatus_lm" data-field="list_ca_estatus_lm">
 								    {{#each status_management_list_edit}}
                                     <option value="{{@key}}" {{ifSelected @key
@@ -668,11 +667,11 @@
                         </td>
                         <td width="33%">
                             <div class="fe_estatus_lm mpad ">
-                                <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
+                                <label class="record-label mpad" style="margin-left:0px">Estatus del Producto</label>
                                 {{getUnifinListValue 'status_management_list' ResumenProductos.fleet.status_management_c}}
                             </div>
                             <div class="fe_estatus_lm_edit mpad ">
-                                <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
+                                <label class="record-label mpad" style="margin-left:0px">Estatus del Producto</label>
                                 <select class="row-fluid select2 list_fl_estatus_lm" id="list_fl_estatus_lm" data-field="list_fl_estatus_lm">
 								    {{#each status_management_list_edit}}
                                     <option value="{{@key}}" {{ifSelected @key
@@ -875,11 +874,11 @@
                         </td>
                         <td width="33%">
                             <div class="uniclick_estatus_lm mpad ">
-                                <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
+                                <label class="record-label mpad" style="margin-left:0px">Estatus del Producto</label>
                                 {{getUnifinListValue 'status_management_list' ResumenProductos.uniclick.status_management_c}}
                             </div>
                             <div class="uniclick_estatus_lm_edit mpad ">
-                                <label class="record-label mpad" style="margin-left:0px">Estatus Lead Management</label>
+                                <label class="record-label mpad" style="margin-left:0px">Estatus del Producto</label>
                                 <select class="row-fluid select2 list_u_estatus_lm" id="list_u_estatus_lm" data-field="list_u_estatus_lm">
 								{{#each status_management_list_edit}}
                                 <option value="{{@key}}" {{ifSelected @key
