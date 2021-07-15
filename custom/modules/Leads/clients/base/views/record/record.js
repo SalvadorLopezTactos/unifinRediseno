@@ -45,6 +45,7 @@
         $('[data-subpanel-link="campaigns"]').find(".subpanel-controls").hide();
         $('[data-subpanel-link="archived_emails"]').find(".subpanel-controls").hide();
         $('[data-subpanel-link="leads_leads_1"]').find(".subpanel-controls").hide();
+        $("div.record-label[data-name='lead_direcciones']").attr('style', 'display:none;');
     },
 
     expmail: function (fields, errors, callback) {
