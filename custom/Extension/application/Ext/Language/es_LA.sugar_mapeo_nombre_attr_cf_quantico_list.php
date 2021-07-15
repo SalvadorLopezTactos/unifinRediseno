@@ -1,8 +1,9 @@
 <?php
- // created: 2021-06-21 13:47:12
+ // created: 2021-07-09 10:51:03
 
 $app_list_strings['mapeo_nombre_attr_cf_quantico_list']=array (
   'Tipo Activo' => 'TipoActivo',
+  'AplicaTipoActivo' => 'TipoActivo',
   'Tipo de Factoraje' => 'TipoFactoraje',
   'Tipo Instrumento Financiero' => 'InstrumentoFinanciero',
   'Tipo Comision' => 'TipoComision',

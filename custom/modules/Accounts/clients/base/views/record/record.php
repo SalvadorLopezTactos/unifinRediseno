@@ -235,6 +235,13 @@ array (
                 'label' => 'Enviar Cuenta a',
                 'event' => 'button:send_account_asesor:click',
               ),
+              16 => 
+              array (
+                'name' => 'negociador_quantico',
+                'type' => 'rowaction',
+                'label' => 'Negociador Quantico',
+                'event' => 'button:open_negociador_quantico:click',
+              ),
             ),
           ),
           9 => 

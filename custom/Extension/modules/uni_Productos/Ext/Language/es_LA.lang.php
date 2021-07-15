@@ -28,3 +28,4 @@ $mod_strings['LBL_APRUEBA1'] = 'Aprueba1';
 $mod_strings['LBL_APRUEBA2'] = 'Aprueba2';
 $mod_strings['LBL_NOTIFICACION_NOVIABLE'] = 'Notificación no viable';
 $mod_strings['LBL_REACTIVACION'] = 'reactivacion';
+$mod_strings['LBL_METODO_ASIGNACION_LM_C'] = 'Método de Asignación LM';

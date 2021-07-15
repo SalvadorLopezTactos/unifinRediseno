@@ -7,7 +7,7 @@
         this.model.addValidationTask('check_Requeridos', _.bind(this.valida_requeridos_min, this));
         this.model.on('sync', this._readonlyFields, this);
         this.context.on('button:convert_Lead_to_Accounts:click', this.convert_Lead_to_Accounts, this);
-		this.context.on('button:cancel_button:click', this.handleCancel, this);
+        this.context.on('button:cancel_button:click', this.handleCancel, this);
         this.model.on("change:lead_cancelado_c", _.bind(this._subMotivoCancelacion, this));
         this.model.on('sync', this._hideBtnConvert, this);
         this._readonlyFields();
@@ -29,6 +29,12 @@
         this.context.on('button:reset_lead:click', this.reset_lead, this);
         this.model.on('sync', this._hideBtnReset, this);
         this.model.on("change:leads_leads_1_right", _.bind(this._checkContactoAsociado, this));
+        //Direcciones
+        contexto_lead = this;
+        this.get_addresses();
+        this.model.addValidationTask('set_custom_fields', _.bind(this.setCustomFields, this));
+        this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
+        this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
     },
 
     _disableActionsSubpanel: function () {
@@ -540,6 +546,11 @@
         this._super("_render");
         this.$(".record-cell[data-name='blank_space']").hide();
         $('[data-name="contacto_asociado_c"]').attr('style', 'pointer-events:none');
+        //Oculta etiqueta de lead_direcciones
+        this.$("div.record-label[data-name='lead_direcciones']").attr('style', 'display:none;');
+        //Ocultando campo check de homonimo
+        $('[data-name="homonimo_c"]').hide();
+
     },
 
     convert_Lead_to_Accounts: function () {
@@ -550,60 +561,60 @@
         // alert(this.model.get('id'))
         this.valida_requeridos();
 
-            app.alert.show('upload', { level: 'process', title: 'LBL_LOADING', autoclose: false });
+        app.alert.show('upload', { level: 'process', title: 'LBL_LOADING', autoclose: false });
 
-            app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
-                success: _.bind(function (data) {
+        app.api.call("create", app.api.buildURL("existsLeadAccounts", null, null, filter_arguments), null, {
+            success: _.bind(function (data) {
 
-                    console.log(data);
-                    app.alert.dismiss('upload');
-                    app.controller.context.reloadData({});
+                console.log(data);
+                app.alert.dismiss('upload');
+                app.controller.context.reloadData({});
 
-                    if (data.idCuenta === "") {
-                        app.alert.show("Conversión", {
-                            level: "error",
-                            messages: data.mensaje,
-                            autoClose: false
-                        });
-                    } else {
-                        app.alert.show("Conversión", {
-                            level: "success",
-                            messages: data.mensaje,
-                            autoClose: false
-                        });
-                        this._disableActionsSubpanel();
-
-                    }
-                    var btnConvert = this.getField("convert_Leads_button")
-
-                    if (this.model.get('subtipo_registro_c') == '2') {
-                        btnConvert.show();
-                    } else {
-                        btnConvert.hide();
-                    }
-                    //app.controller.context.reloadData({});
-                    //SUGAR.App.controller.context.reloadData({})
-                    /* Para refrescar solo un campo
-
-                     model.fetch({
-
-                      view: undefined,
-
-                      fields: ['industry']
-
+                if (data.idCuenta === "") {
+                    app.alert.show("Conversión", {
+                        level: "error",
+                        messages: data.mensaje,
+                        autoClose: false
                     });
-                     */
+                } else {
+                    app.alert.show("Conversión", {
+                        level: "success",
+                        messages: data.mensaje,
+                        autoClose: false
+                    });
+                    this._disableActionsSubpanel();
 
-                }, this),
-                failure: _.bind(function (data) {
-                    app.alert.dismiss('upload');
+                }
+                var btnConvert = this.getField("convert_Leads_button")
 
-                }, this),
-                error: _.bind(function (data) {
-                    app.alert.dismiss('upload');
+                if (this.model.get('subtipo_registro_c') == '2') {
+                    btnConvert.show();
+                } else {
+                    btnConvert.hide();
+                }
+                //app.controller.context.reloadData({});
+                //SUGAR.App.controller.context.reloadData({})
+                /* Para refrescar solo un campo
 
-                }, this)
-            });
+                 model.fetch({
+
+                  view: undefined,
+
+                  fields: ['industry']
+
+                });
+                 */
+
+            }, this),
+            failure: _.bind(function (data) {
+                app.alert.dismiss('upload');
+
+            }, this),
+            error: _.bind(function (data) {
+                app.alert.dismiss('upload');
+
+            }, this)
+        });
 
     },
 
@@ -628,7 +639,7 @@
                     this.model.set('regimen_fiscal_c', '3');
                 }
             }
-            if (this.model._previousAttributes.regimen_fiscal_c != '0' ) {
+            if (this.model._previousAttributes.regimen_fiscal_c != '0') {
                 if (this.model.get('regimen_fiscal_c') == '0' || this.model.get('regimen_fiscal_c') == "") {
                     this.model.set('regimen_fiscal_c', this.model._previousAttributes.regimen_fiscal_c);
                 }
@@ -637,18 +648,18 @@
     },
 
     llamar_movil: function () {
-      var tel_client = this.model.get('phone_mobile');
-      this.llamar_vicidial(tel_client);
+        var tel_client = this.model.get('phone_mobile');
+        this.llamar_vicidial(tel_client);
     },
 
     llamar_casa: function () {
-      var tel_client = this.model.get('phone_home');
-      this.llamar_vicidial(tel_client);
+        var tel_client = this.model.get('phone_home');
+        this.llamar_vicidial(tel_client);
     },
 
     llamar_trabajo: function () {
-      var tel_client = this.model.get('phone_work');
-      this.llamar_vicidial(tel_client);
+        var tel_client = this.model.get('phone_work');
+        this.llamar_vicidial(tel_client);
     },
 
     llamar_vicidial: function (tel_client) {
@@ -656,25 +667,25 @@
         var leadid = this.model.get('id');
         vicidial = app.config.vicidial + '?exten=SIP/' + tel_usr + '&number=' + tel_client;
         _.extend(this, vicidial);
-        if(tel_usr!='' || tel_usr!=null){
-            if(tel_client!='' || tel_client!=null){
-                context=this;
+        if (tel_usr != '' || tel_usr != null) {
+            if (tel_client != '' || tel_client != null) {
+                context = this;
                 app.alert.show('do-call', {
                     level: 'confirmation',
                     messages: '¿Realmente quieres realizar la llamada? <br><br><b>NOTA: La marcaci\u00F3n se realizar\u00E1 tal cual el n\u00FAmero est\u00E1 registrado</b>',
                     autoClose: false,
-                    onConfirm: function(){
+                    onConfirm: function () {
                         context.createcall(context.resultCallback);
                     },
                 });
-            }else{
+            } else {
                 app.alert.show('error_tel_client', {
                     level: 'error',
                     autoClose: true,
                     messages: 'El cliente al que quieres llamar no tiene <b>N\u00FAmero telefonico</b>.'
                 });
             }
-        }else {
+        } else {
             app.alert.show('error_tel_usr', {
                 level: 'error',
                 autoClose: true,
@@ -684,58 +695,58 @@
     },
 
     createcall: function (callback) {
-        self=this;
-        var id_call='';
-        var name_client=this.model.get('name');
-        var id_client=this.model.get('id');
-        var modulo='Leads';
-        var Params=[id_client,name_client,modulo];
-        app.api.call('create', app.api.buildURL('createcall'),{data: Params}, {
+        self = this;
+        var id_call = '';
+        var name_client = this.model.get('name');
+        var id_client = this.model.get('id');
+        var modulo = 'Leads';
+        var Params = [id_client, name_client, modulo];
+        app.api.call('create', app.api.buildURL('createcall'), { data: Params }, {
             success: _.bind(function (data) {
-                id_call=data;
-                console.log('Llamada creada, id: '+id_call);
+                id_call = data;
+                console.log('Llamada creada, id: ' + id_call);
                 app.alert.show('message-to', {
                     level: 'info',
-                    messages: 'Usted está llamando a '+name_client,
+                    messages: 'Usted está llamando a ' + name_client,
                     autoClose: true
                 });
-                callback(id_call,self);
+                callback(id_call, self);
             }, this),
         });
     },
 
-    resultCallback:function(id_call,context) {
-        self=context;
-        vicidial+='&leadid='+id_call;
+    resultCallback: function (id_call, context) {
+        self = context;
+        vicidial += '&leadid=' + id_call;
         $.ajax({
-            cache:false,
+            cache: false,
             type: "get",
             url: vicidial,
         });
     },
 
-    siNumero: function() {
-      if(!this.model.get('phone_mobile')) $('.llamada_mobile').hide();
-      if(!this.model.get('phone_home')) $('.llamada_home').hide();
-      if(!this.model.get('phone_work')) $('.llamada_work').hide();
+    siNumero: function () {
+        if (!this.model.get('phone_mobile')) $('.llamada_mobile').hide();
+        if (!this.model.get('phone_home')) $('.llamada_home').hide();
+        if (!this.model.get('phone_work')) $('.llamada_work').hide();
     },
 
-    noLlamar: function() {
-      $('.llamada_mobile').hide();
-      $('.llamada_home').hide();
-      $('.llamada_work').hide();
+    noLlamar: function () {
+        $('.llamada_mobile').hide();
+        $('.llamada_home').hide();
+        $('.llamada_work').hide();
     },
 
     _hideBtnReset: function () {
         var btnReset = this.getField("reset_lead");
-        var check_resetLead=app.user.attributes.reset_leadcancel_c;
-        var motivoCancel= this.model.get('motivo_cancelacion_c');
+        var check_resetLead = app.user.attributes.reset_leadcancel_c;
+        var motivoCancel = this.model.get('motivo_cancelacion_c');
 
 
         if (btnReset) {
             btnReset.listenTo(btnReset, "render", function () {
 
-                if (this.model.get('subtipo_registro_c') == '3' && check_resetLead &&(motivoCancel=='3' || motivoCancel=='4' )) {
+                if (this.model.get('subtipo_registro_c') == '3' && check_resetLead && (motivoCancel == '3' || motivoCancel == '4')) {
                     btnReset.show();
                 } else {
                     btnReset.hide();
@@ -755,12 +766,12 @@
 
     },
 
-    _checkContactoAsociado: function() {
+    _checkContactoAsociado: function () {
 
         if (this.model.get("leads_leads_1_right").id != "" && this.model.get("leads_leads_1_right").id != null) {
             // console.log("Activa check Contacto asociado");
             this.model.set('contacto_asociado_c', true);
-        
+
         } else {
             // console.log("Desactiva check Contacto asociado");
             this.model.set('contacto_asociado_c', false);
@@ -778,5 +789,406 @@
         clasf_sectorial.ResumenCliente.inegi.inegi_sector = clasf_sectorial.prevActEconomica.inegi_sector;
         clasf_sectorial.ResumenCliente.inegi.inegi_macro = clasf_sectorial.prevActEconomica.inegi_macro;
         clasf_sectorial.render();
+
+        //Direcciones
+        var lead_direcciones = app.utils.deepCopy(this.prev_oDirecciones.prev_direccion);
+        this.model.set('lead_direcciones', lead_direcciones);
+        this.oDirecciones.direccion = lead_direcciones;
+        lead_dir.nuevaDireccion = lead_dir.limpiaNuevaDireccion();
+        lead_dir.render();
     },
+
+    get_addresses: function () {
+
+        this.oDirecciones = [];
+        this.oDirecciones.direccion = [];
+        this.prev_oDirecciones = [];
+        this.prev_oDirecciones.prev_direccion = [];
+
+        //Define variables
+        var listMapTipo = App.lang.getAppListStrings('tipo_dir_map_list');
+        var listTipo = App.lang.getAppListStrings('dir_tipo_unique_list');
+        var listMapIndicador = App.lang.getAppListStrings('dir_indicador_map_list');
+        var listIndicador = App.lang.getAppListStrings('dir_indicador_unique_list');
+        var idLead = this.model.get('id');
+
+        //Recupera información
+        if (!_.isEmpty(idLead) && idLead != "") {
+            app.api.call('GET', app.api.buildURL('Leads/' + idLead + '/link/leads_dire_direccion_1'), null, {
+                success: function (data) {
+                    //Itera y agrega direcciones
+                    for (var i = 0; i < data.records.length; i++) {
+                        //Asignando valores de los campos
+                        var tipo = data.records[i].tipodedireccion.toString();
+                        var tipoSeleccionados = '^' + listMapIndicador[tipo].replace(/,/gi, "^,^") + '^';
+                        var indicador = data.records[i].indicador;
+                        var indicadorSeleccionados = '^' + listMapIndicador[indicador].replace(/,/gi, "^,^") + '^';
+                        var valCodigoPostal = data.records[i].dire_direccion_dire_codigopostal_name;
+                        var idCodigoPostal = data.records[i].dire_direccion_dire_codigopostaldire_codigopostal_ida;
+                        var valPais = data.records[i].dire_direccion_dire_pais_name;
+                        var idPais = data.records[i].dire_direccion_dire_paisdire_pais_ida;
+                        var valEstado = data.records[i].dire_direccion_dire_estado_name;
+                        var idEstado = data.records[i].dire_direccion_dire_estadodire_estado_ida;
+                        var valMunicipio = data.records[i].dire_direccion_dire_municipio_name;
+                        var idMunicipio = data.records[i].dire_direccion_dire_municipiodire_municipio_ida;
+                        var valCiudad = data.records[i].dire_direccion_dire_ciudad_name;
+                        var idCiudad = data.records[i].dire_direccion_dire_ciudaddire_ciudad_ida;
+                        var valColonia = data.records[i].dire_direccion_dire_colonia_name;
+                        var idColonia = data.records[i].dire_direccion_dire_coloniadire_colonia_ida;
+                        var calle = data.records[i].calle;
+                        var numExt = data.records[i].numext;
+                        var numInt = data.records[i].numint;
+                        var principal = (data.records[i].principal == true) ? 1 : 0;
+                        var inactivo = (data.records[i].inactivo == true) ? 1 : 0;
+                        var secuencia = data.records[i].secuencia;
+                        var idDireccion = data.records[i].id;
+                        var direccionCompleta = data.records[i].name;
+                        var bloqueado = (indicadorSeleccionados.indexOf('2') != -1) ? 1 : 0;
+                        // var accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
+                        // bloqueado = (self.model.get('tipo_registro_cuenta_c') == 4 || self.model.get('subtipo_registro_cuenta_c') == '') ? 0 : bloqueado;
+                        // if (accesoFiscal > 0) bloqueado = 0;
+
+                        //Parsea a objeto direccion
+                        var direccion = {
+                            "tipodedireccion": tipo,
+                            "listTipo": listTipo,
+                            "tipoSeleccionados": tipoSeleccionados,
+                            "indicador": indicador,
+                            "listIndicador": listIndicador,
+                            "indicadorSeleccionados": indicadorSeleccionados,
+                            "valCodigoPostal": valCodigoPostal,
+                            "postal": idCodigoPostal,
+                            "valPais": valPais,
+                            "pais": idPais,
+                            "listPais": {},
+                            "listPaisFull": {},
+                            "valEstado": valEstado,
+                            "estado": idEstado,
+                            "listEstado": {},
+                            "listEstadoFull": {},
+                            "valMunicipio": valMunicipio,
+                            "municipio": idMunicipio,
+                            "listMunicipio": {},
+                            "listMunicipioFull": {},
+                            "valCiudad": valCiudad,
+                            "ciudad": idCiudad,
+                            "listCiudad": {},
+                            "listCiudadFull": {},
+                            "valColonia": valColonia,
+                            "colonia": idColonia,
+                            "listColonia": {},
+                            "listColoniaFull": {},
+                            "calle": calle,
+                            "numext": numExt,
+                            "numint": numInt,
+                            "principal": principal,
+                            "inactivo": inactivo,
+                            "secuencia": secuencia,
+                            "id": idDireccion,
+                            "direccionCompleta": direccionCompleta,
+                            "bloqueado": bloqueado
+                        };
+
+                        //Agregar dirección
+                        contexto_lead.oDirecciones.direccion.push(direccion);
+
+                        //recupera información asociada a CP
+                        var strUrl = 'DireccionesCP/' + valCodigoPostal + '/' + i;
+                        app.api.call('GET', app.api.buildURL(strUrl), null, {
+                            success: _.bind(function (data) {
+                                //recupera info
+                                var list_paises = data.paises;
+                                var list_municipios = data.municipios;
+                                var city_list = App.metadata.getCities();
+                                var list_estados = data.estados;
+                                var list_colonias = data.colonias;
+                                //Poarsea valores para listas
+                                //País
+                                listPais = {};
+                                for (var i = 0; i < list_paises.length; i++) {
+                                    listPais[list_paises[i].idPais] = list_paises[i].namePais;
+                                }
+                                contexto_lead.oDirecciones.direccion[data.indice].listPais = listPais;
+                                contexto_lead.oDirecciones.direccion[data.indice].listPaisFull = listPais;
+                                //Municipio
+                                listMunicipio = {};
+                                for (var i = 0; i < list_municipios.length; i++) {
+                                    listMunicipio[list_municipios[i].idMunicipio] = list_municipios[i].nameMunicipio;
+                                }
+                                contexto_lead.oDirecciones.direccion[data.indice].listMunicipio = listMunicipio;
+                                contexto_lead.oDirecciones.direccion[data.indice].listMunicipioFull = listMunicipio;
+                                //Estado
+                                listEstado = {};
+                                for (var i = 0; i < list_estados.length; i++) {
+                                    listEstado[list_estados[i].idEstado] = list_estados[i].nameEstado;
+                                }
+                                contexto_lead.oDirecciones.direccion[data.indice].listEstado = listEstado;
+                                contexto_lead.oDirecciones.direccion[data.indice].listEstadoFull = listEstado;
+                                //Colonia
+                                listColonia = {};
+                                for (var i = 0; i < list_colonias.length; i++) {
+                                    listColonia[list_colonias[i].idColonia] = list_colonias[i].nameColonia;
+                                }
+                                contexto_lead.oDirecciones.direccion[data.indice].listColonia = listColonia;
+                                contexto_lead.oDirecciones.direccion[data.indice].listColoniaFull = listColonia;
+                                //Ciudad
+                                listCiudad = {}
+                                ciudades = Object.values(city_list);
+                                for (var [key, value] of Object.entries(contexto_lead.oDirecciones.direccion[data.indice].listEstado)) {
+                                    for (var i = 0; i < ciudades.length; i++) {
+                                        if (ciudades[i].estado_id == key) {
+                                            listCiudad[ciudades[i].id] = ciudades[i].name;
+                                        }
+                                    }
+                                }
+                                contexto_lead.oDirecciones.direccion[data.indice].listCiudad = listCiudad;
+                                contexto_lead.oDirecciones.direccion[data.indice].listCiudadFull = listCiudad;
+
+                                //Genera objeto con valores previos para control de cancelar
+                                contexto_lead.prev_oDirecciones.prev_direccion = app.utils.deepCopy(contexto_lead.oDirecciones.direccion);
+                                lead_dir.oDirecciones = contexto_lead.oDirecciones;
+
+                                //Aplica render a campo custom
+                                lead_dir.render();
+
+                            }, contexto_lead)
+                        });
+                    }
+                },
+                error: function (e) {
+                    throw e;
+                }
+            });
+        }
+    },
+
+    //Sobre escribe función para recuperar info de registros relacionados
+    _saveModel: function () {
+        var options,
+            successCallback = _.bind(function () {
+                // Loop through the visible subpanels and have them sync. This is to update any related
+                // fields to the record that may have been changed on the server on save.
+                _.each(this.context.children, function (child) {
+                    if (child.get('isSubpanel') && !child.get('hidden')) {
+                        if (child.get('collapsed')) {
+                            child.resetLoadFlag({ recursive: false });
+                        } else {
+                            child.reloadData({ recursive: false });
+                        }
+                    }
+                });
+                if (this.createMode) {
+                    app.navigate(this.context, this.model);
+                } else if (!this.disposed && !app.acl.hasAccessToModel('edit', this.model)) {
+                    //re-render the view if the user does not have edit access after save.
+                    this.render();
+                }
+                /*******************Refresca cambios en Direcciones******************/
+                this.get_addresses();
+
+            }, this);
+
+        //Call editable to turn off key and mouse events before fields are disposed (SP-1873)
+        this.turnOffEvents(this.fields);
+
+        options = {
+            showAlerts: true,
+            success: successCallback,
+            error: _.bind(function (model, error) {
+                if (error.status === 412 && !error.request.metadataRetry) {
+                    this.handleMetadataSyncError(error);
+                } else if (error.status === 409) {
+                    app.utils.resolve409Conflict(error, this.model, _.bind(function (model, isDatabaseData) {
+                        if (model) {
+                            if (isDatabaseData) {
+                                successCallback();
+                            } else {
+                                this._saveModel();
+                            }
+                        }
+                    }, this));
+                } else if (error.status === 403 || error.status === 404) {
+                    this.alerts.showNoAccessError.call(this);
+                } else {
+                    this.editClicked();
+                }
+            }, this),
+            lastModified: this.model.get('date_modified'),
+            viewed: true
+        };
+
+        // ensure view and field are sent as params so collection-type fields come back in the response to PUT requests
+        // (they're not sent unless specifically requested)
+        options.params = options.params || {};
+        if (this.context.has('dataView') && _.isString(this.context.get('dataView'))) {
+            options.params.view = this.context.get('dataView');
+        }
+
+        if (this.context.has('fields')) {
+            options.params.fields = this.context.get('fields').join(',');
+        }
+
+        options = _.extend({}, options, this.getCustomSaveOptions(options));
+
+        this.model.save({}, options);
+    },
+
+    setCustomFields: function (fields, errors, callback) {
+        if ($.isEmptyObject(errors)) {
+            //Direcciones
+            this.prev_oDirecciones.prev_direccion = app.utils.deepCopy(this.oDirecciones.direccion);
+            this.model.set('lead_direcciones', this.oDirecciones.direccion);
+        }
+        //Callback a validation task
+        callback(null, fields, errors);
+    },
+
+    _direccionDuplicada: function (fields, errors, callback) {
+
+        /* SE VALIDA DIRECTAMENTE DE LOS ELEMENTOS DEL HTML POR LA COMPLEJIDAD DE
+         OBETENER LAS DESCRIPCIONES DE LOS COMBOS*/
+        var objDirecciones = $('.control-group.direccion');
+        var concatDirecciones = [];
+        var strDireccionTemp = "";
+        for (var i = 0; i < objDirecciones.length - 1; i++) {
+            if (objDirecciones.eq(i).find('select.inactivo option:selected') == 0) {
+                strDireccionTemp = objDirecciones.eq(i).find('.calleExisting').val() +
+                    objDirecciones.eq(i).find('.numExtExisting').val() +
+                    objDirecciones.eq(i).find('.numIntExisting').val() +
+                    objDirecciones.eq(i).find('select.coloniaExisting option:selected').text() +
+                    objDirecciones.eq(i).find('select.municipioExisting option:selected').text() +
+                    objDirecciones.eq(i).find('select.estadoExisting option:selected').text() +
+                    objDirecciones.eq(i).find('select.ciudadExisting option:selected').text() +
+                    objDirecciones.eq(i).find('.postalInputTempExisting').val();
+
+                concatDirecciones.push(strDireccionTemp.replace(/\s/g, "").toUpperCase());
+            }
+        }
+
+        // validamos  el arreglo generado
+        var existe = false;
+        for (var j = 0; j < concatDirecciones.length; j++) {
+            for (var k = j + 1; k < concatDirecciones.length; k++) {
+
+                if (concatDirecciones[j] == concatDirecciones[k]) {
+                    existe = true;
+                }
+            }
+        }
+
+        if (existe) {
+            app.alert.show('Direcci\u00F3n', {
+                level: 'error',
+                autoClose: false,
+                messages: 'Existe una o mas direcciones repetidas'
+            });
+            var messages1 = 'Existe una o mas direcciones repetidas';
+            errors['xd'] = errors['xd'] || {};
+            // errors['xd'].messages1 = true;
+            errors['xd'].required = true;
+        }
+
+        callback(null, fields, errors);
+    },
+
+    /** Description: On Inline edit disable the TAB Key in order to prevent the field from going to detail mode.*/
+    handleKeyDown: function (e, field) {
+        if (e.which === 9) {
+            if (field.name != this.model.fields.lead_direcciones.name) {
+                e.preventDefault();
+                this.nextField(field, e.shiftKey ? 'prevField' : 'nextField');
+                this.adjustHeaderpane();
+            }
+        }
+    },
+
+    validadirecc: function (fields, errors, callback) {
+        //Campos requeridos
+        var cont = 0;
+        var direccion = this.oDirecciones.direccion;
+        for (iDireccion = 0; iDireccion < direccion.length; iDireccion++) {
+            //Tipo
+            if (direccion[iDireccion].tipodedireccion == "") {
+                cont++;
+                this.$('.multi_tipo_existing ul.select2-choices').eq(iDireccion).css('border-color', 'red');
+            } else {
+                this.$('.multi_tipo_existing ul.select2-choices').eq(iDireccion).css('border-color', '');
+            }
+            //Indicador
+            if (direccion[iDireccion].indicador == "") {
+                cont++;
+                this.$('.multi1_n_existing ul.select2-choices').eq(iDireccion).css('border-color', 'red');
+            } else {
+                this.$('.multi1_n_existing ul.select2-choices').eq(iDireccion).css('border-color', '');
+            }
+            //Código Postal
+            if (direccion[iDireccion].valCodigoPostal == "") {
+                cont++;
+                this.$('.postalInputTempExisting').eq(iDireccion).css('border-color', 'red');
+            } else {
+                this.$('.postalInputTempExisting').eq(iDireccion).css('border-color', '');
+            }
+            //Calle
+            if (direccion[iDireccion].calle.trim() == "") {
+                cont++;
+                this.$('.calleExisting').eq(iDireccion).css('border-color', 'red');
+            } else {
+                this.$('.calleExisting').eq(iDireccion).css('border-color', '');
+            }
+            //Número Exterior
+            if (direccion[iDireccion].numext.trim() == "") {
+                cont++;
+                this.$('.numExtExisting').eq(iDireccion).css('border-color', 'red');
+            } else {
+                this.$('.numExtExisting').eq(iDireccion).css('border-color', '');
+            }
+        }
+        //Muestra error en direcciones existentes
+        if (cont > 0) {
+            app.alert.show("empty_fields_dire", {
+                level: "error",
+                messages: "Favor de llenar los campos se\u00F1alados en <b> Direcciones </b> .",
+                autoClose: false
+            });
+            errors['dire_direccion_req'] = errors['dire_direccion_req'] || {};
+            errors['dire_direccion_req'].required = true;
+
+        }
+
+        //Valida direcciones duplicadas
+        if (direccion.length > 0) {
+            var coincidencia = 0;
+            var indices = [];
+            for (var i = 0; i < direccion.length; i++) {
+                for (var j = 0; j < direccion.length; j++) {
+                    if (i != j && direccion[i].inactivo == 0 && direccion[j].calle.trim().toLowerCase() + direccion[j].ciudad + direccion[j].colonia + direccion[j].estado + direccion[j].municipio + direccion[j].numext.trim().toLowerCase() + direccion[j].pais + direccion[j].postal + direccion[j].inactivo == direccion[i].calle.trim().toLowerCase() + direccion[i].ciudad + direccion[i].colonia + direccion[i].estado + direccion[i].municipio + direccion[i].numext.trim().toLowerCase() + direccion[i].pais + direccion[i].postal + direccion[i].inactivo) {
+                        coincidencia++;
+                        indices.push(i);
+                        indices.push(j);
+                    }
+                }
+            }
+            //indices=indices.unique();
+            if (coincidencia > 0) {
+                app.alert.show('error_direccion_duplicada', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: 'Existen direcciones iguales, favor de corregir.'
+                });
+                //$($input).focus();
+                if (indices.length > 0) {
+                    for (var i = 0; i < indices.length; i++) {
+                        $('.calleExisting').eq(indices[i]).css('border-color', 'red');
+                        $('.numExtExisting').eq(indices[i]).css('border-color', 'red');
+                        $('.postalInputTempExisting').eq(indices[i]).css('border-color', 'red');
+                    }
+                }
+                errors['dire_direccion_duplicada'] = errors['dire_direccion_duplicada'] || {};
+                errors['dire_direccion_duplicada'].required = true;
+            }
+        }
+
+        callback(null, fields, errors);
+    },
+
 })

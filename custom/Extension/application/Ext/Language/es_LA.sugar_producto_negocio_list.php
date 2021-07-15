@@ -1,5 +1,5 @@
 <?php
- // created: 2021-05-06 16:04:56
+ // created: 2021-06-23 12:52:27
 
 $app_list_strings['producto_negocio_list']=array (
   0 => '',
@@ -15,4 +15,6 @@ $app_list_strings['producto_negocio_list']=array (
   10 => 'UNICLICK',
   11 => 'CRÉDITO SIMPLE',
   12 => 'FLEET',
+  13 => 'CRÉDITO PLAZO',
+  14 => 'CRÉDITO TARJETA',
 );

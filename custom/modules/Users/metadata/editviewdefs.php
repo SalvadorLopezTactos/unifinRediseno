@@ -222,6 +222,15 @@ array (
             'label' => 'LBL_POSICION_OPERATIVA',
           ),
         ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'limite_asignacion_lm_c',
+            'label' => 'LBL_LIMITE_ASIGNACION_LM',
+          ),
+          1 => '',
+        ),
       ),
       'lbl_editview_panel1' => 
       array (
@@ -420,6 +429,15 @@ array (
             'name' => 'bloqueo_cumple_c',
             'label' => 'LBL_BLOQUEO_CUMPLE_C',
           ),
+        ),
+        12 => 
+        array (
+          0 => 
+          array (
+            'name' => 'gestion_lm_c',
+            'label' => 'LBL_GESTION_LM',
+          ),
+          1 => '',
         ),
       ),
     ),

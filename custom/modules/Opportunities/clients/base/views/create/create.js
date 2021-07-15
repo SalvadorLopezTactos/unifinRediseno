@@ -169,6 +169,7 @@
         // this.Updt_OptionProdFinan(); # se comenta para hacer listas dependiente
         this.model.on("change:negocio_c", _.bind(this.Updt_OptionProdFinan, this));
         this.model.on('change:negocio_c', this.verificaOperacionProspecto, this);
+        this.model.on('change:producto_financiero_c', this.asesorCCP, this);
         this.adminUserCartera();
     },
 
@@ -496,13 +497,24 @@
     },
 
     _ValidateAmount: function (fields, errors, callback) {
-        if (parseFloat(this.model.get('monto_c')) <= 0 && this.model.get('producto_financiero_c') != 40 && this.model.get('admin_cartera_c') != true) {
+        if (parseFloat(this.model.get('monto_c')) <= 0 && this.model.get('producto_financiero_c') != 40 && this.model.get('producto_financiero_c') != 78 && this.model.get('admin_cartera_c') != true) {
             errors['monto_c'] = errors['monto_c'] || {};
             errors['monto_c'].required = true;
 
             app.alert.show("Monto de Linea requerido", {
                 level: "error",
                 title: "Monto de L\u00EDnea debe ser mayor a cero",
+                autoClose: false
+            });
+        }
+        //Validación Crédito Corto Plazo
+        if (this.model.get('producto_financiero_c') == '78' && (parseFloat(this.model.get('monto_c'))<500000 || parseFloat(this.model.get('monto_c'))>10000000) ) {
+            delete errors.monto_c;
+            errors['monto_c'] = errors['monto_c'] || {};
+            errors['monto_c'].required = true;
+            app.alert.show("monto_corto_plazo", {
+                level: "error",
+                title: "El monto de línea debe tener un valor mínimo de $500,000.00 y máximo $10,000,000.00",
                 autoClose: false
             });
         }
@@ -760,7 +772,7 @@
                     id_promotor = modelo.get('user_id7_c');
                     name_promotor = modelo.attributes.promotoruniclick_c;
                 }
-                if( parseInt(this.model.get('producto_financiero_c'))==43)
+                if( parseInt(this.model.get('producto_financiero_c'))==43 || parseInt(this.model.get('producto_financiero_c'))==78)
                 {
                     id_promotor = app.user.id;
                     name_promotor = app.user.attributes.full_name;
@@ -1341,9 +1353,9 @@
             $('[data-name="' + field.name + '"]').hide();
         });
         $('[data-name="name"]').show();
-        $('[data-name="tct_etapa_ddw_c"]').show();
-        $('[data-name="estatus_c"]').show();
-        $('[data-name="idsolicitud_c"]').show();
+        //$('[data-name="tct_etapa_ddw_c"]').show();
+        //$('[data-name="estatus_c"]').show();
+        //$('[data-name="idsolicitud_c"]').show();
         $('[data-name="account_name"]').show();
         $('[data-name="tipo_producto_c"]').show();
        // $('[data-name="producto_financiero_c"]').show();
@@ -1352,7 +1364,6 @@
         $('[data-name="assigned_user_name"]').show();
         $('[data-name="picture"]').show();
         $('[data-name="tct_numero_vehiculos_c"]').show();
-        $('[data-name="lic_licitaciones_opportunities_1_name"]').show();
 
         //Se visualiza campo de Administrador cartera solo si el usuario tiene activo el check
         if (app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
@@ -1732,7 +1743,7 @@
         var op = app.lang.getAppListStrings('tipo_producto_list');
         var op2 = {};
         var productos = App.user.attributes.productos_c;
-        
+
         //Establece el valor por default del user logueado
         productos=productos.replace(/\^/g,"");
         productos= productos.split(",");
@@ -1927,7 +1938,7 @@
                     id_promotor = modelo.get('user_id7_c');
                     name_promotor = modelo.attributes.promotoruniclick_c;
                 }
-                if( parseInt(this.model.get('producto_financiero_c'))==43)
+                if( parseInt(this.model.get('producto_financiero_c'))==43 || parseInt(this.model.get('producto_financiero_c'))==78)
                 {
                     id_promotor = app.user.id;
                     name_promotor = app.user.attributes.full_name;
@@ -1954,7 +1965,7 @@
             this.render();
         }
     },
-    
+
     showSubpanels: function () {
         if (typeof this.model.get('tipo_producto_c') != "undefined" && this.model.get('tipo_producto_c') != ""
             && typeof this.model.get('account_id') != "undefined" && this.model.get('account_id') != "") {
@@ -2297,4 +2308,11 @@
         }
         callback(null, fields, errors);
     },
+    asesorCCP:function () {
+        if (this.model.get('producto_financiero_c') == '78') {
+            this.model.set("assigned_user_id", App.user.id);
+            this.model.set("assigned_user_name", App.user.attributes.full_name);
+        }
+
+    }
 })

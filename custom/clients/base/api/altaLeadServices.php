@@ -159,7 +159,7 @@ class altaLeadServices extends SugarApi
         $users = [];
         /* Obetenemos el id del usuario de grupo de 9.- MKT*/
         $QueryId = "SELECT id from users
-            WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
+        WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
         $queryResultId = $db->query($QueryId);
         $row = $db->fetchByAssoc($queryResultId);
         $idMKT = $row['id'];
@@ -175,61 +175,94 @@ class altaLeadServices extends SugarApi
         $dateInput = date('H:i', strtotime($horaDia));
 
         /* Obtiene el ultimo  usuario asignado y registrado en el config*/
-        $query = "Select value from config  where name='last_assigned_user' ";
+        $query = "SELECT value from config  where name='last_assigned_user'";
         $result = $db->query($query);
         $row = $db->fetchByAssoc($result);
         $last_indice = $row['value'];
-		
-        if( strpos(strtoupper($id_landing_c), 'INSURANCE') !== false){
-            $subpuesto_c = 5;
-        }else{
-            if($compania_c == 1) $subpuesto_c = 3;
-		    if($compania_c == 2) $subpuesto_c = 4;
-        }
 
-        $query_asesores = "SELECT
-  user.id,
-  user.date_entered,
-  count(lead.assigned_user_id) AS total_asignados,
-  uc.access_hours_c
-FROM users user
-  INNER JOIN users_cstm uc
-    ON uc.id_c = user.id
-  LEFT JOIN leads lead
-    ON lead.assigned_user_id = user.id
-where puestousuario_c='27' AND user.status = 'Active' AND subpuesto_c='$subpuesto_c'
-GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC";
-            
+        //VALIDACION DE REVISTA MEDICA
+        if ($id_landing_c != 'LP Revista Médica' && $id_landing_c != 'LP REVISTA MÉDICA') {
+
+            if( strpos(strtoupper($id_landing_c), 'INSURANCE') !== false){
+                $subpuesto_c = 5;
+            }else{
+                if($compania_c == 1) $subpuesto_c = 3;
+                if($compania_c == 2) $subpuesto_c = 4;
+            }
+
+            $query_asesores = "SELECT
+            user.id,
+            user.date_entered,
+            count(lead.assigned_user_id) AS total_asignados,
+            uc.access_hours_c
+            FROM users user
+            INNER JOIN users_cstm uc
+                ON uc.id_c = user.id
+            LEFT JOIN leads lead
+                ON lead.assigned_user_id = user.id
+            where puestousuario_c='27' AND user.status = 'Active' AND subpuesto_c='$subpuesto_c'
+            GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC";
+
             $result_usr = $db->query($query_asesores);
-        //$usuarios=;
-        while ($row = $db->fetchByAssoc($result_usr)) {
-            $hours = json_decode($row['access_hours_c'], true);
-            $hoursIn = !empty($hours) ? $hours[$dia_semana]['entrada'] : "";
-			$hoursComida = !empty($hours) ? $hours[$dia_semana]['comida'] : "";
-			$hoursRegreso = !empty($hours) ? $hours[$dia_semana]['regreso'] : "";
-            $hoursOut = !empty($hours) ? $hours[$dia_semana]['salida'] : "";
-            if ($hoursIn != "" && $hoursOut != "") {
-                if (($hoursIn != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursOut != "Libre")) {
-                    $enable = $this->accessHours($hoursIn, $hoursComida, $hoursRegreso, $hoursOut, $dateInput);
-					if ($enable) {
+            //$usuarios=;
+            while ($row = $db->fetchByAssoc($result_usr)) {
+                $hours = json_decode($row['access_hours_c'], true);
+                $hoursIn = !empty($hours) ? $hours[$dia_semana]['entrada'] : "";
+                $hoursComida = !empty($hours) ? $hours[$dia_semana]['comida'] : "";
+                $hoursRegreso = !empty($hours) ? $hours[$dia_semana]['regreso'] : "";
+                $hoursOut = !empty($hours) ? $hours[$dia_semana]['salida'] : "";
+                if ($hoursIn != "" && $hoursOut != "") {
+                    if (($hoursIn != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursOut != "Libre")) {
+                        $enable = $this->accessHours($hoursIn, $hoursComida, $hoursRegreso, $hoursOut, $dateInput);
+                        if ($enable) {
+                            $users[] = $row['id'];
+                        }
+                    } elseif ($hoursIn == "Libre" && $hoursOut == "Libre") {
                         $users[] = $row['id'];
                     }
-                } elseif ($hoursIn == "Libre" && $hoursOut == "Libre") {
+                } /*else {
                     $users[] = $row['id'];
-                }
-            } /*else {
-                $users[] = $row['id'];
-            }*/
-        }
-        //$GLOBALS['log']->fatal("Usuarios MKT en servicio alta Leads  " . print_r($users, true));
+                }*/
+            }
+            //$GLOBALS['log']->fatal("Usuarios MKT en servicio alta Leads  " . print_r($users, true));
 
-        if (count($users) > 0) {
-            $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
-            $new_assigned_user = $users[$new_indice];
+            if (count($users) > 0) {
+                $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
+                $new_assigned_user = $users[$new_indice];
+
+            } else {
+                /* No existen usuarios disponibles y se asigna a  9.- MKT " */
+                $new_assigned_user = $idMKT;
+            }
+
         } else {
-            /* No existen usuarios disponibles y se asigna a  9.- MKT " */
-            $new_assigned_user = $idMKT;
+
+            //USUARIOS QUE TIENEN EL EQUIPO PRINCIPAL UNICS 7 SE LEAS ASIGNA LEADS - REVISTA MEDICA
+            $query_revista = "SELECT
+            user.id,
+            user.date_entered,
+            count(lead.assigned_user_id) AS total_asignados,
+            uc.access_hours_c
+            FROM users user
+            INNER JOIN users_cstm uc
+                ON uc.id_c = user.id
+            LEFT JOIN leads lead
+                ON lead.assigned_user_id = user.id
+            WHERE user.status = 'Active' AND equipo_c = 7
+            GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC
+            LIMIT 1";
+
+            $result_rm = $db->query($query_revista);
+            $conteo = $result_rm->num_rows;
+
+            if ($conteo > 0) {
+                while ($row = $db->fetchByAssoc($result_rm)) {
+
+                    $new_assigned_user = $row['id'];
+                }
+            }
         }
+
 
         if ($regimenFiscal != "3") {
 
@@ -506,6 +539,7 @@ GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered A
         $bean_Lead->phone_work = $dataOrigen['phone_work'];
         $bean_Lead->detalle_plataforma_c = $dataOrigen['GLID'];
         $bean_Lead->assigned_user_id = $dataOrigen['assigned_user_id'];
+        /** Seccion de Digital Inbound **/
         $bean_Lead->id_landing_c = $dataOrigen['id_landing_c'];
         $bean_Lead->lead_source_c = $dataOrigen['lead_source_c'];
         $bean_Lead->facebook_pixel_c = $dataOrigen['facebook_pixel_c'];
@@ -513,6 +547,14 @@ GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered A
         $bean_Lead->keyword_c = $dataOrigen['keyword_c'];
         $bean_Lead->campana_c = $dataOrigen['campana_c'];
         $bean_Lead->compania_c = $dataOrigen['compania_c'];
+        $bean_Lead->productos_interes_c = $dataOrigen['productos_interes_c'];
+        $bean_Lead->opportunity_amount = $dataOrigen['opportunity_amount'];
+        $bean_Lead->plazo_c = $dataOrigen['plazo_c'];
+        $bean_Lead->pago_mensual_estimado_c = $dataOrigen['pago_mensual_estimado_c'];
+        $bean_Lead->medios_contacto_deseado_c = $dataOrigen['medios_contacto_deseado_c'];
+        $bean_Lead->medio_preferido_contacto_c = $dataOrigen['medio_preferido_contacto_c'];
+        $bean_Lead->dia_contacto_c = $dataOrigen['dia_contacto_c'];
+        $bean_Lead->hora_contacto_c = $dataOrigen['hora_contacto_c'];
         /** Seccion de Contacto **/
         $bean_Lead->contacto_nombre_c = $dataOrigen['contacto_nombre_c'];
         $bean_Lead->contacto_apellidop_c = $dataOrigen['contacto_apellidop_c'];
@@ -658,59 +700,23 @@ GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered A
 
     public function crea_clean_name($data)
     {
-        global $app_list_strings, $current_user; //Obtención de listas de valores
+        $nombre = "";
         $clean_name = "";
-        //Se crean variables que limpien los excesos de espacios en los campos establecidos.
-        $limpianame = preg_replace('/\s\s+/', ' ', $data['fullname']); // PENDIENTE
-        $limpianombre = preg_replace('/\s\s+/', ' ', $data['nombre_c']);
-        $limpiaapaterno = preg_replace('/\s\s+/', ' ', $data['apellido_paterno_c']);
-        $limpiamaterno = preg_replace('/\s\s+/', ' ', $data['apellido_materno_c']);
-        $limpiarazon = preg_replace('/\s\s+/', ' ', $data['nombre_empresa_c']); # prendiente
-
-        $tipo = $app_list_strings['validacion_simbolos_list']; //obtencion lista simbolos
-        $acronimos = $app_list_strings['validacion_duplicados_list'];
-
         if ($data['regimen_fiscal_c'] != "3") {
-            $full_name = $data['nombre_c'] . " " . $data['apellido_paterno_c'] . " " . $data['apellido_materno_c'];
-            $nombre = $full_name;
-            $nombre = mb_strtoupper($nombre, "UTF-8");
-            $separa = explode(" ", $nombre);
-            $longitud = count($separa);
-            for ($i = 0; $i < $longitud; $i++) {
-                foreach ($tipo as $t => $key) {
-                    $separa[$i] = str_replace($key, "", $separa[$i]);
-                }
-            }
-            $une = implode($separa);
-            $clean_name = $une;
+            $nombre = $data['nombre_c'] . " " . $data['apellido_paterno_c'] . " " . $data['apellido_materno_c'];
         } else {
             $nombre = $data['nombre_empresa_c'];
-            $nombre = mb_strtoupper($nombre, "UTF-8");
-            $separa = explode(" ", $nombre);
-            $separa_limpio = $separa;
-            $longitud = count($separa);
-            $eliminados = 0;
-            //Itera el arreglo separado
-            for ($i = 0; $i < $longitud; $i++) {
-                foreach ($tipo as $t => $key) {
-                    $separa[$i] = str_replace($key, "", $separa[$i]);
-                    $separa_limpio[$i] = str_replace($key, "", $separa_limpio[$i]);
-                }
-                foreach ($acronimos as $a => $key) {
-                    if ($separa[$i] == $a) {
-                        $separa[$i] = "";
-                        $eliminados++;
-                    }
-                }
-            }
-            //Condicion para eliminar los acronimos
-            if (($longitud - $eliminados) <= 1) {
-                $separa = $separa_limpio;
-            }
-            //Convierte el array a string nuevamente
-            $une = implode($separa);
-            $clean_name = $une;
         }
+
+        //Consumir servicio de cleanName, declarado en custom api
+        require_once("custom/clients/base/api/cleanName.php");
+        $apiCleanName= new cleanName();
+        $body=array('name'=>$nombre);
+        $response=$apiCleanName->getCleanName(null,$body);
+        if ($response['status']=='200') {
+            $clean_name = $response['cleanName'];
+        }
+
         return $clean_name;
     }
 

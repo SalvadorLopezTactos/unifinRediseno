@@ -65,3 +65,5 @@ $mod_strings['LBL_VALIDA_VTA_CRUZADA'] = 'Validación de referencia de venta cru
 $mod_strings['LBL_POSICION_OPERATIVA'] = 'Posición Operativa';
 $mod_strings['LBL_BLOQUEO_CREDITO_C'] = 'Bloqueo Crédito';
 $mod_strings['LBL_BLOQUEO_CUMPLE_C'] = 'Bloqueo Cumplimiento';
+$mod_strings['LBL_LIMITE_ASIGNACION_LM'] = 'Límite asignación LM';
+$mod_strings['LBL_GESTION_LM'] = 'Gestión LM';

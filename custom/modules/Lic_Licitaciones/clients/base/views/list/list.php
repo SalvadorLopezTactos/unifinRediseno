@@ -25,6 +25,16 @@ array (
               ),
               1 => 
               array (
+                'name' => 'leads_lic_licitaciones_1_name',
+                'label' => 'LBL_LEADS_LIC_LICITACIONES_1_FROM_LEADS_TITLE',
+                'enabled' => true,
+                'id' => 'LEADS_LIC_LICITACIONES_1LEADS_IDA',
+                'link' => true,
+                'sortable' => false,
+                'default' => true,
+              ),
+              2 => 
+              array (
                 'name' => 'lic_licitaciones_accounts_name',
                 'label' => 'LBL_LIC_LICITACIONES_ACCOUNTS_FROM_ACCOUNTS_TITLE',
                 'enabled' => true,
@@ -32,14 +42,6 @@ array (
                 'link' => true,
                 'sortable' => false,
                 'default' => true,
-              ),
-              2 => 
-              array (
-                'name' => 'assigned_user_name',
-                'label' => 'LBL_ASSIGNED_TO_NAME',
-                'default' => true,
-                'enabled' => true,
-                'link' => true,
               ),
               3 => 
               array (

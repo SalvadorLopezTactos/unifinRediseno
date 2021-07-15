@@ -136,12 +136,31 @@
                 $("#SE3").html("Sugerencias de Crédito");
             }
         }
+        if (etapa=="D"){
+            //Agrega clase current para sombrear en color actual al pipeline CLIENTE CON LINEA
+            $('#D').addClass('current');
+            $('#SI').addClass('done');
+            $('#P').addClass('done');
+            $('#C').addClass('done');
+            //Valida subetapa
+            if (subetapa=="D") {
+                $("#SE4").removeClass('ocult');
+                $('#SE4').addClass('success');
+                $("#SE4").html("Comité");
+            }
+            if (subetapa=="AC") {
+                $("#SE4").removeClass('ocult');
+                $('#SE4').addClass('success');
+                $("#SE4").html("Autorizador Carátula");
+            }
+        }
         if (etapa=="CL"){
             //Agrega clase current para sombrear en color actual al pipeline CLIENTE CON LINEA
             $('#CL').addClass('current');
             $('#SI').addClass('done');
             $('#P').addClass('done');
             $('#C').addClass('done');
+            $('#D').addClass('done');
             //Valida subetapa
             if (subetapa=="N") {
                 $("#SE4").removeClass('ocult');
@@ -155,6 +174,7 @@
             $('#SI').addClass('done');
             $('#P').addClass('done');
             $('#C').addClass('done');
+            $('#D').addClass('done');
             //Cambia texto a Rechazado
             $("#CL").html("Rechazado");
             //Valida subetapas

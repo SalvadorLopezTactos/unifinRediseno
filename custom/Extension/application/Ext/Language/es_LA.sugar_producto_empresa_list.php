@@ -1,5 +1,5 @@
 <?php
- // created: 2021-06-03 09:24:44
+ // created: 2021-06-23 12:58:25
 
 $app_list_strings['producto_empresa_list']=array (
   0 => '',
@@ -7,5 +7,6 @@ $app_list_strings['producto_empresa_list']=array (
   2 => 'Unifin Credit',
   3 => 'Uniclick',
   10 => 'Admonflot',
-  4 => 'CLICK PYME',
+  19 => 'CLICK PYME',
+  20 => 'VITA',
 );

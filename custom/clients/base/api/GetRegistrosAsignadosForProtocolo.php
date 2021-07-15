@@ -40,7 +40,7 @@ class GetRegistrosAsignadosForProtocolo extends SugarApi
     public function getRecordsAssign($api, $args)
     {
 
-        global $db;
+        global $db, $app_list_strings;
         $id_user=$args['id_user'];
         $total_leads=0;
         $total_cuentas=0;
@@ -50,7 +50,8 @@ class GetRegistrosAsignadosForProtocolo extends SugarApi
         $query = "SELECT count(l.id) as total_leads FROM leads l inner JOIN leads_cstm lc on l.id=lc.id_c
 WHERE l.assigned_user_id='{$id_user}'
 and lc.contacto_asociado_c=0
-and lc.subtipo_registro_c not in('4','3') and l.deleted=0";//4 - Convertido, 3 - Cancelado
+and lc.subtipo_registro_c not in('4','3') and l.deleted=0
+and lc.status_management_c=1"; //4 - Convertido, 3 - Cancelado
         $result = $db->query($query);
 
         while($row = $db->fetchByAssoc($result)){
@@ -116,10 +117,8 @@ and a.deleted = 0 and up.deleted = 0";
             WHERE(a.id IN({$string_in}) OR
             a.parent_id IN({$string_in}))
             and a.deleted = 0 and up.deleted = 0
-            GROUP BY agrupador
+            GROUP BY agrupador,a.id,a.parent_id,up.subtipo_cuenta
             ) conteoRegistros WHERE conteoRegistros.registro_valido='1'";
-
-            $GLOBALS['log']->fatal($queryCuentasGpoEmpresarial);
 
         $resultCuentasGpo = $db->query($queryCuentasGpoEmpresarial);
 
@@ -133,9 +132,12 @@ and a.deleted = 0 and up.deleted = 0";
         //Se agrega a la respuesta el puesto del usuario
         $usuario_asesor = BeanFactory::retrieveBean('Users', $id_user, array('disable_row_level_security' => true));
         $puesto_asesor=$usuario_asesor->puestousuario_c;
+        $posicionOperativa=$usuario_asesor->posicion_operativa_c;
+        $limitePersonal = ($usuario_asesor->limite_asignacion_lm_c > 0)? $usuario_asesor->limite_asignacion_lm_c: 0;
+        $max_registros_list = $app_list_strings['limite_maximo_asignados_list'];
+        $max_registros = ($limitePersonal>0) ? $limitePersonal : intval($max_registros_list['1']);
 
-
-        return array('total_asignados'=>$total_registros,'puesto'=>$puesto_asesor);
+        return array('total_asignados'=>$total_registros,'puesto'=>$puesto_asesor,'posicion_operativa'=>$posicionOperativa,'limite'=>$max_registros);
 
     }
 

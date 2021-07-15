@@ -18,6 +18,7 @@
         self = this;
         this.viewEnable = false;
         this.numero_registros = 0;
+        this.limite_asignacion = 0;
         this.getRegistrosAsignados();
 
         //this.getLeadsAplazadosCancelados();
@@ -39,9 +40,11 @@
                 App.alert.dismiss('obtieneAsignados');
 
                 var maximo_registros_list = App.lang.getAppListStrings('limite_maximo_asignados_list');
-                var maximo_registros = parseInt(maximo_registros_list["1"]);
+                var limitePersonal = (App.user.attributes.limite_asignacion_lm_c > 0) ? App.user.attributes.limite_asignacion_lm_c : 0;
+                var maximo_registros = (limitePersonal>0) ? limitePersonal : parseInt(maximo_registros_list["1"]);
                 self.numero_registros = data.total_asignados;
-                if (data.total_asignados <= maximo_registros) { //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
+                self.limite_asignacion = maximo_registros;
+                if (data.total_asignados < maximo_registros) { //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
                     self.viewEnable = '1';
                     self.getLeadsAplazadosCancelados();
                 } else {
@@ -89,15 +92,15 @@
                 // app.api.call("read", app.api.buildURL("GetSiguienteAgenteTel", null, null, {}), null, {
                 app.api.call('GET', app.api.buildURL('GetAgenteCP/'), null, {
                     success: _.bind(function (data) {
-                        
+
                         var idAsesor = data;
                         var usuario = App.user.get('full_name');
                         var jsonDate = (new Date()).toJSON();
-                        
+
                         if (idAsesor != "" && idAsesor != null) {
 
                             var bodyTask = {
-                                "name": "Solicitud de asignación de Lead - (Lead Management)",
+                                "name": "Solicitud de asignación de Lead/Cuenta - (Lead Management)",
                                 "date_start": jsonDate,
                                 "date_due": fechaFin,
                                 "priority": "High",
@@ -196,6 +199,10 @@
                                         level: 'success',
                                         messages: mensaje,
                                     });
+                                    self.numero_registros++
+                                    self.viewEnable = (self.numero_registros >= self.limite_asignacion) ? 0 : self.viewEnable;
+                                    self.render();
+
                                 }, this)
                             })
                         } else {
@@ -207,6 +214,7 @@
                             });
 
                             app.alert.dismiss('asignaFromDB');
+                            self.render();
                         }
 
                     }, this)
@@ -272,6 +280,7 @@
                     api_params['motivo_cancelacion_c'] = "";
                     api_params['status_management_c'] = "1";//Activo
                     api_params['subtipo_registro_c'] = "1";//Sin Contactar
+                    api_params['metodo_asignacion_lm_c'] = "4"; //Metodo de Asignación LM - 4.- Reactivación Cancelado / Aplazado
 
                     app.api.call('update', url, api_params, {
                         success: _.bind(function (data) {
@@ -286,6 +295,8 @@
 
                             var indice = self.searchIndex(self.registros, id);
                             self.registros.splice(indice, 1);
+                            self.numero_registros++
+                            self.viewEnable = (self.numero_registros >= self.limite_asignacion) ? 0 : self.viewEnable;
                             self.render();
                         })
                     });
@@ -308,6 +319,7 @@
                     api_params['no_viable_quien'] = "";
                     api_params['no_viable_porque'] = "";
                     api_params['status_management_c'] = "1";
+                    api_params['metodo_asignacion_lm_c'] = "4"; //Metodo de Asignación LM - 4.- Reactivación Cancelado / Aplazado
 
 
                     app.api.call('update', url, api_params, {
@@ -323,6 +335,8 @@
 
                             var indice = self.searchIndex(self.registros, id);
                             self.registros.splice(indice, 1);
+                            self.numero_registros++
+                            self.viewEnable = (self.numero_registros >= self.limite_asignacion) ? 0 : self.viewEnable;
                             self.render();
                         })
                     });

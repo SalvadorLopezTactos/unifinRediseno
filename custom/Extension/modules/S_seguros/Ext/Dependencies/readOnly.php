@@ -13,7 +13,7 @@ $dependencies['S_seguros']['readOnly'] = array
       'params' => array
       (
         'target' => 'edit_button',
-        'value' => 'or(equal($etapa,2),equal($etapa,9))',
+        'value' => 'or(equal($etapa,2),equal($etapa,10))',
       ),
     ),
   ),
