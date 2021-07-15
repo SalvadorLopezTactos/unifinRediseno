@@ -58,17 +58,49 @@
         this.def.listMapIndicador = App.lang.getAppListStrings('dir_indicador_map_list');
         this.def.listIndicador = App.lang.getAppListStrings('dir_indicador_unique_list');
         //Valida perfil de usuario para ocultar dirección fiscal
-        // this.accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
-        // if (this.accesoFiscal > 0) this.bloqueado = 0;
+        this.accesoFiscal = App.user.attributes.tct_alta_clientes_chk_c + App.user.attributes.tct_altaproveedor_chk_c + App.user.attributes.tct_alta_cd_chk_c + App.user.attributes.deudor_factoraje_c;
+        if (this.accesoFiscal > 0) this.bloqueado = 0;
         //Declaración de validation Tasks
         this.model.addValidationTask('check_multiple_fiscal', _.bind(this._doValidateDireccionIndicador, this));
         //Declaración de modelo para nueva dirección
         this.nuevaDireccion = this.limpiaNuevaDireccion();
-        // this.cont_render = 0;
+        this.cont_render = 0;
     },
 
     _render: function () {
         this._super("_render");
+
+        if (this.accesoFiscal == 0 && this.cont_render == 0) {
+            var auxindicador = new Object();
+            for (var [key, value] of Object.entries(this.def.listIndicador)) {
+                if (key != "2") {
+                    auxindicador[key] = value;
+                }
+            }
+            //Permite edición para personas
+            try {
+                if (this.oDirecciones != undefined) {
+                    if (this.oDirecciones.direccion != undefined) {
+                        for (var indexDir = 0; indexDir < this.oDirecciones.direccion.length; indexDir++) {
+                            if (this.oDirecciones.direccion[indexDir].indicadorSeleccionados.includes('^2^')) {
+                                this.oDirecciones.direccion[indexDir].bloqueado = 1;
+                            }
+                        }
+                    }
+                }
+            } catch (e) {
+                console.log(e);
+            }
+            this.cont_render = 1;
+            this.def.listIndicador = auxindicador;
+            this.nuevaDireccion.listIndicador = this.def.listIndicador;
+            this.render();
+
+        } else {
+            this.def.listIndicador = App.lang.getAppListStrings('dir_indicador_unique_list');
+            this.nuevaDireccion.listIndicador = this.def.listIndicador;
+            this.cont_render = 0;
+        }
     },
 
     getInfoAboutCP: function (evt) {
@@ -1318,7 +1350,7 @@
         this.oDirecciones.direccion[index].indicadorSeleccionados = '^' + indicadorSeleccionados.replace(/,/gi, "^,^") + '^';
         var res = indicadorSeleccionados.split(",");
         var bloqueado = (res.indexOf('2') != -1) ? 1 : 0;
-        // bloqueado = (this.accesoFiscal > 0 || this.model.get('tipo_registro_cuenta_c') == 4 || this.model.get('tipo_registro_cuenta_c') == 5) ? 0 : bloqueado;
+        bloqueado = (this.accesoFiscal > 0) ? 0 : bloqueado;
         this.oDirecciones.direccion[index].bloqueado = bloqueado;
         this.render();
         document.getElementsByClassName("multi1_n_existing")[index].focus();
