@@ -6766,6 +6766,7 @@
 								messages: 'Cuenta Bloqueada',
 							});
 							$('[name="bloquea_cuenta"]').hide();
+							location.reload();
 						}, this)
 					});
 				}
@@ -6828,6 +6829,7 @@
 												});
 												$('[name="bloquea_cuenta"]').hide();
 												$('[name="desbloquea_cuenta"]').hide();
+												location.reload();
 											}, this)
 										});
 									},
@@ -6845,6 +6847,7 @@
 												});
 												$('[name="bloquea_cuenta"]').hide();
 												$('[name="desbloquea_cuenta"]').hide();
+												location.reload();
 											}, this)
 										});
 									},
@@ -6858,6 +6861,7 @@
 										});
 										$('[name="bloquea_cuenta"]').hide();
 										$('[name="desbloquea_cuenta"]').hide();
+										location.reload();
 									}, this)
 								});
 							}
