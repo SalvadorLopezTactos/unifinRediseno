@@ -17,6 +17,7 @@
         this.model.addValidationTask('comision_c', _.bind(this.comision, this));
         this.model.addValidationTask('validaDoc', _.bind(this.validaDoc, this));
         this.model.addValidationTask('Notifica', _.bind(this.notifica, this));
+		this.model.addValidationTask('fecha_aplicacion_c', _.bind(this.validAplica, this));
     },
 
     _render: function() {
@@ -254,6 +255,19 @@
                 messages: "Favor de Integrar la documentación/Información mínima requerida para determinar las condiciones del seguro a cotizar, tales como: Carátula de póliza actual, términos y condiciones, reporte de siniestralidad, listados de asegurados o bienes por asegurar, ubicaciones del bien, otros",
                 autoClose: false
             });
+        }
+        callback(null, fields, errors);
+    },
+
+    validAplica: function (fields, errors, callback) {
+        if (this.model.get('subetapa_c') == 2 && this.model.get('fecha_aplicacion_c') < this.model.get('fecha_pago_c')) {
+			errors['fecha_aplicacion_c'] = errors['fecha_aplicacion_c'] || {};
+			errors['fecha_aplicacion_c'].required = true;
+			app.alert.show("Error_fechas", {
+				level: "error",
+				messages: "La Fecha de Aplicación debe ser mayor o igual a la Fecha de Pago",
+				autoClose: false
+			});
         }
         callback(null, fields, errors);
     },
