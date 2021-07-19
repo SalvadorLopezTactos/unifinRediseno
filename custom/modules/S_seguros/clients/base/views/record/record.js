@@ -52,7 +52,7 @@
     },
 
     roFunction: function() {
-    	if(this.model.get('etapa') == 2 || this.model.get('etapa') == 5 || this.model.get('etapa') == 9 || this.model.get('etapa') == 10 || this.model.get('registro_no_valido_c') || (app.user.get('puestousuario_c') != 56 && app.user.get('puestousuario_c') != 58 && this.model.get('etapa') != 1))
+    	if(app.user.get('puestousuario_c') == 59 || app.user.get('puestousuario_c') == 60 || this.model.get('etapa') == 2 || this.model.get('etapa') == 5 || this.model.get('etapa') == 9 || this.model.get('etapa') == 10 || this.model.get('registro_no_valido_c') || (app.user.get('puestousuario_c') != 56 && app.user.get('puestousuario_c') != 58 && this.model.get('etapa') != 1))
 		{
 			if(app.user.get('puestousuario_c') != 56 || app.user.get('puestousuario_c') != 58 && this.model.get('etapa') != 9) $('[name="edit_button"]').hide();
     		_.each(this.model.fields, function(field)
