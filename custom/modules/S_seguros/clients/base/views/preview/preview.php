@@ -6,120 +6,8 @@ array (
   array (
     'view' => 
     array (
-      'record' => 
+      'preview' => 
       array (
-        'buttons' => 
-        array (
-          0 => 
-          array (
-            'type' => 'button',
-            'name' => 'cancel_button',
-            'label' => 'LBL_CANCEL_BUTTON_LABEL',
-            'css_class' => 'btn-invisible btn-link',
-            'showOn' => 'edit',
-            'events' => 
-            array (
-              'click' => 'button:cancel_button:click',
-            ),
-          ),
-          1 => 
-          array (
-            'type' => 'rowaction',
-            'event' => 'button:save_button:click',
-            'name' => 'save_button',
-            'label' => 'LBL_SAVE_BUTTON_LABEL',
-            'css_class' => 'btn btn-primary',
-            'showOn' => 'edit',
-            'acl_action' => 'edit',
-          ),
-          2 => 
-          array (
-            'type' => 'actiondropdown',
-            'name' => 'main_dropdown',
-            'primary' => true,
-            'showOn' => 'view',
-            'buttons' => 
-            array (
-              0 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:edit_button:click',
-                'name' => 'edit_button',
-                'label' => 'LBL_EDIT_BUTTON_LABEL',
-                'acl_action' => 'edit',
-              ),
-              1 => 
-              array (
-                'type' => 'shareaction',
-                'name' => 'share',
-                'label' => 'LBL_RECORD_SHARE_BUTTON',
-                'acl_action' => 'view',
-              ),
-              2 => 
-              array (
-                'type' => 'pdfaction',
-                'name' => 'download-pdf',
-                'label' => 'LBL_PDF_VIEW',
-                'action' => 'download',
-                'acl_action' => 'view',
-              ),
-              3 => 
-              array (
-                'type' => 'pdfaction',
-                'name' => 'email-pdf',
-                'label' => 'LBL_PDF_EMAIL',
-                'action' => 'email',
-                'acl_action' => 'view',
-              ),
-              4 => 
-              array (
-                'type' => 'divider',
-              ),
-              5 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:find_duplicates_button:click',
-                'name' => 'find_duplicates_button',
-                'label' => 'LBL_DUP_MERGE',
-                'acl_action' => 'edit',
-              ),
-              6 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:duplicate_button:click',
-                'name' => 'duplicate_button',
-                'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
-                'acl_module' => 'S_seguros',
-                'acl_action' => 'create',
-              ),
-              7 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:audit_button:click',
-                'name' => 'audit_button',
-                'label' => 'LNK_VIEW_CHANGE_LOG',
-                'acl_action' => 'view',
-              ),
-              8 => 
-              array (
-                'type' => 'divider',
-              ),
-              9 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:delete_button:click',
-                'name' => 'delete_button',
-                'label' => 'LBL_DELETE_BUTTON_LABEL',
-                'acl_action' => 'delete',
-              ),
-            ),
-          ),
-          3 => 
-          array (
-            'name' => 'sidebar_toggle',
-            'type' => 'sidebartoggle',
-          ),
-        ),
         'panels' => 
         array (
           0 => 
@@ -139,22 +27,6 @@ array (
                 'readonly' => true,
               ),
               1 => 'name',
-              2 => 
-              array (
-                'name' => 'favorite',
-                'label' => 'LBL_FAVORITE',
-                'type' => 'favorite',
-                'readonly' => true,
-                'dismiss_label' => true,
-              ),
-              3 => 
-              array (
-                'name' => 'follow',
-                'label' => 'LBL_FOLLOW',
-                'type' => 'follow',
-                'readonly' => true,
-                'dismiss_label' => true,
-              ),
             ),
           ),
           1 => 
@@ -173,7 +45,6 @@ array (
                 'name' => 'seguro_pipeline',
                 'studio' => 'visible',
                 'label' => '',
-                'span' => 12,
               ),
               1 => 
               array (
@@ -391,6 +262,7 @@ array (
               ),
               36 => 
               array (
+                'span' => 12,
               ),
             ),
           ),
@@ -445,6 +317,7 @@ array (
               ),
               5 => 
               array (
+                'span' => 12,
               ),
               6 => 
               array (
@@ -494,6 +367,7 @@ array (
               ),
               3 => 
               array (
+                'span' => 12,
               ),
             ),
           ),
@@ -548,33 +422,30 @@ array (
               ),
               5 => 
               array (
-              ),
-              6 => 
-              array (
                 'name' => 'fecha_ini_c',
                 'label' => 'LBL_FECHA_INI_C',
               ),
-              7 => 
+              6 => 
               array (
                 'name' => 'fecha_fin_c',
                 'label' => 'LBL_FECHA_FIN_C',
               ),
-              8 => 
+              7 => 
               array (
                 'name' => 'participa_kam_c',
                 'label' => 'LBL_PARTICIPA_KAM',
               ),
-              9 => 
+              8 => 
               array (
                 'name' => 'seguro_uni2_c',
                 'label' => 'LBL_SEGURO_UNI2',
               ),
-              10 => 
+              9 => 
               array (
                 'name' => 'subetapa_c',
                 'label' => 'LBL_SUBETAPA',
               ),
-              11 => 
+              10 => 
               array (
                 'name' => 'prima_neta',
                 'related_fields' => 
@@ -585,12 +456,12 @@ array (
                 'label' => 'LBL_PRIMA_NETA',
                 'readonly' => true,
               ),
-              12 => 
+              11 => 
               array (
                 'name' => 'incentivo',
                 'label' => 'LBL_INCENTIVO',
               ),
-              13 => 
+              12 => 
               array (
                 'name' => 'ingreso_ref',
                 'related_fields' => 
@@ -601,96 +472,57 @@ array (
                 'label' => 'LBL_INGRESO_REF',
                 'readonly' => true,
               ),
-              14 => 
+              13 => 
               array (
                 'name' => 'no_poliza_emitida_c',
                 'label' => 'LBL_NO_POLIZA_EMITIDA',
               ),
-              15 => 
-              array (
-              ),
-              16 => 
+              14 => 
               array (
                 'name' => 'inicio_vigencia_emitida_c',
                 'label' => 'LBL_INICIO_VIGENCIA_EMITIDA',
               ),
-              17 => 
+              15 => 
               array (
                 'name' => 'fin_vigencia_emitida_c',
                 'label' => 'LBL_FIN_VIGENCIA_EMITIDA',
               ),
-              18 => 
-              array (
-                'name' => 'prima_neta_emitida_c',
-                'label' => 'LBL_PRIMA_NETA_EMITIDA',
-                'inline' => true,
-                'type' => 'fieldset',
-                'fields' => 
-                array (
-                  0 => 
-                  array (
-                    'name' => 'monedas_c',
-                  ),
-                  1 => 
-                  array (
-                    'name' => 'prima_neta_emitida_c',
-                  ),
-                ),
-              ),
-              19 => 
+              16 => 
               array (
                 'name' => 'cambio_pn_emitida_c',
                 'label' => 'LBL_CAMBIO_PN_EMITIDA',
               ),
-              20 => 
-              array (
-                'name' => 'prima_total_emitida_c',
-                'label' => 'LBL_PRIMA_TOTAL_EMITIDA',
-                'inline' => true,
-                'type' => 'fieldset',
-                'fields' => 
-                array (
-                  0 => 
-                  array (
-                    'name' => 'monedas_c',
-                  ),
-                  1 => 
-                  array (
-                    'name' => 'prima_total_emitida_c',
-                  ),
-                ),
-              ),
-              21 => 
+              17 => 
               array (
                 'name' => 'cambio_pt_emitida_c',
                 'label' => 'LBL_CAMBIO_PT_EMITIDA',
               ),
-              22 => 
+              18 => 
               array (
                 'name' => 'forma_pago_emitida_c',
                 'label' => 'LBL_FORMA_PAGO_EMITIDA',
               ),
-              23 => 
+              19 => 
               array (
                 'name' => 'aseguradora_emitida_c',
                 'label' => 'LBL_ASEGURADORA_EMITIDA',
               ),
-              24 => 
+              20 => 
               array (
                 'name' => 'fecha_pago_c',
                 'label' => 'LBL_FECHA_PAGO',
               ),
-              25 => 
+              21 => 
               array (
                 'name' => 'fecha_aplicacion_c',
                 'label' => 'LBL_FECHA_APLICACION',
               ),
-              26 => 
+              22 => 
               array (
                 'name' => 'razon_cancel_ganada_c',
                 'label' => 'LBL_RAZON_CANCEL_GANADA',
               ),
-              27 => 
+              23 => 
               array (
                 'name' => 'comentarios_ganada_c',
                 'label' => 'LBL_COMENTARIOS_GANADA',
@@ -713,12 +545,10 @@ array (
               array (
                 'name' => 'tipo_cliente_c',
                 'label' => 'LBL_TIPO_CLIENTE',
-                'span' => 12,
               ),
               1 => 
               array (
                 'name' => 'description',
-                'span' => 12,
               ),
               2 => 
               array (
@@ -743,7 +573,6 @@ array (
                     'name' => 'modified_by_name',
                   ),
                 ),
-                'span' => 12,
               ),
               3 => 
               array (
@@ -762,7 +591,7 @@ array (
         ),
         'templateMeta' => 
         array (
-          'useTabs' => false,
+          'maxColumns' => 1,
         ),
       ),
     ),
