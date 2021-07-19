@@ -6,6 +6,8 @@
         'change .multiIndicadorNew': 'updateValueIndicadorMultiselect',     //Recupera valor para mapeo de indicador
         'change .newCalle': 'updateValueCalle',     //Actualiza calle a modelo
         'change .newNumExt': 'updateValueNumExt',     //Actualiza número exterior a modelo
+        'keydown .newNumExt': 'validaSoloTexto',
+        'keypress .newNumExt': 'validaSoloTexto',
         'change .newNumInt': 'updateValueNumInt',     //Actualiza número interior a modelo
         'change .newPais': 'populateEdoByPais',     //Actualiza dependencias por País
         'change .newEstado': 'populateCiudadesByEstado',      //Actualiza estado a modelo y filtra ciudad y municipio
@@ -20,6 +22,8 @@
         'change .multi1_n_existing': 'updateValueIndicadorMultiselectDE',     //Recupera valor para mapeo de indicador y actualiza en modelo
         'change .calleExisting': 'updateCalleDE',     //Actualiza calle existente en modelo
         'change .numExtExisting': 'updateNumExtDE',     //Actualiza número exterior en modelo
+        'keydown .numExtExisting': 'validaSoloTexto',
+        'keypress .numExtExisting': 'validaSoloTexto',
         'change .numIntExisting': 'updateNumIntDE',     //Actualiza número interior en modelo
         'change .paisExisting': 'populateEdoByPaisDE',     //Actualiza dependencias por País
         'change .estadoExisting': 'populateCiudadesByEstadoDE',      //Actualiza estado a modelo y filtra ciudad y municipio
@@ -1178,7 +1182,8 @@
     updateValueCalle: function (evt) {
         //Recupera valor
         calle = this.$('.newCalle').val();
-        calle = calle.toUpperCase();
+        calle1 = calle.toUpperCase();
+        calle = calle1.trim();
         //Limipa borde
         this.$('.newCalle').css('border-color', '');
         //Actualiza modelo
@@ -1188,7 +1193,8 @@
     updateValueNumExt: function (evt) {
         //Recupera valor
         numExt = this.$('.newNumExt').val();
-        numExt = numExt.toUpperCase();
+        numExt1 = numExt.toUpperCase();
+        numExt = numExt1.trim();
         //Limpia borde
         this.$('.newNumExt').css('border-color', '');
         //Actualiza modelo
@@ -1269,7 +1275,8 @@
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
         var calle = input.val();
-        calle = calle.toUpperCase();
+        calle1 = calle.toUpperCase();
+        calle = calle1.trim();
         //Actualiza modelo
         this.oDirecciones.direccion[index].calle = calle;
     },
@@ -1280,7 +1287,8 @@
             input = this.$(evt.currentTarget),
             index = inputs.index(input);
         var numExt = input.val();
-        numExt = numExt.toUpperCase();
+        numExt1 = numExt.toUpperCase();
+        numExt = numExt1.trim();
         //Actualiza modelo
         this.oDirecciones.direccion[index].numext = numExt;
     },
@@ -1421,4 +1429,14 @@
         this.render();
     },
 
+    validaSoloTexto: function (e) {
+        if (e.which === 32) {
+            app.alert.show('caracter_invalido_texto', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo no acepta espacios en blanco.'
+            });
+            return false;
+        }
+    },
 })
