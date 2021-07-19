@@ -29,6 +29,7 @@ class reAsignarCuentas extends SugarApi
 
     public function asignarCuentas($api, $args)
     {
+	  try {
         global $db, $current_user;
         $actualizados = array();
         $no_actualizados = array();
@@ -61,13 +62,12 @@ class reAsignarCuentas extends SugarApi
             $user_field = "user_id8_c";
         }
 
-
         $IntValue = new DropdownValuesHelper();
         $callApi = new UnifinAPI();
         foreach ($args['data']['seleccionados'] as $key => $value) {
 
-            $account = BeanFactory::retrieveBean('Accounts', $value, array('disable_row_level_security' => true));
-
+            $cuenta = $value;
+			$account = BeanFactory::retrieveBean('Accounts', $value, array('disable_row_level_security' => true));
 
             if ($account == null || $user_field == null || $reAsignado == null || $promoActual == null) {
 
@@ -615,7 +615,6 @@ SQL;
         $main_array['actualizados'] = $actualizados;
         $main_array['no_actualizados'] = $no_actualizados;
         if (count($no_actualizados) > 0 && $nombreArchivo != null && !empty($nombreArchivo)) {
-
             $fichero = 'custom/errores_reasignacion/' . $nombreArchivo . '.txt';
             $texto_archivo = '';
             for ($i = 0;
@@ -623,16 +622,18 @@ SQL;
                  $i++) {
                 $texto_archivo .= $no_actualizados[$i] . "\n";
             }
-
 // Escribir los contenidos en el fichero,
 //// usando la bandera FILE_APPEND para añadir el contenido al final del fichero
 /// // y la bandera LOCK_EX para evitar que cualquiera escriba en el fichero al mismo tiempo
             file_put_contents($fichero, $texto_archivo, FILE_APPEND | LOCK_EX);
-
         }
-
+	  } //try
+	  catch (Exception $e) {
+        array_push($main_array['no_actualizados'],$cuenta);
+		$GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error al reasignar la cuenta ".$cuenta." ".$e->getMessage());
         return $main_array;
-
+      }
+      return $main_array;
     }
 
     public function MeetOrCallValid($numDays, $idAccount, $nuevoAsesor)
