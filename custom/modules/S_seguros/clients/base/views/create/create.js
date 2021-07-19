@@ -14,6 +14,7 @@
         this.model.addValidationTask('referenciador', _.bind(this.validauser, this));
         this.model.addValidationTask('Requeridos_c', _.bind(this.valida_Req, this));
         this.model.addValidationTask('Notifica', _.bind(this.notifica, this));
+		this.model.addValidationTask('puesto', _.bind(this.validaPuesto, this));
     },
 
     _render: function() {
@@ -183,6 +184,19 @@
             app.alert.show("Notifica", {
                 level: "info",
                 messages: "Favor de Integrar la documentación/Información mínima requerida para determinar las condiciones del seguro a cotizar, tales como: Carátula de póliza actual, términos y condiciones, reporte de siniestralidad, listados de asegurados o bienes por asegurar, ubicaciones del bien, otros",
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
+    },
+
+    validaPuesto: function (fields, errors, callback) {
+        if (app.user.get('puestousuario_c') == 59) {
+		    errors['puesto'] = errors['puesto'] || {};
+            errors['puesto'].required = true;	
+            app.alert.show("ErrorPuesto", {
+                level: "error",
+                messages: "Usted no tiene privilegios para crear Oportunidades de Seguro",
                 autoClose: false
             });
         }
