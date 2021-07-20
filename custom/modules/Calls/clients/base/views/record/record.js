@@ -55,6 +55,8 @@
 
         this.model.on('sync', this._readOnlyDateSE, this);
         this.model.on('sync', this.validaRelLeadCall, this);
+
+        this.omiteLlamadaPreventiva();
     },
 
     abre: function () {
@@ -1011,4 +1013,22 @@
             });
         }
     },
+
+    omiteLlamadaPreventiva:function(){
+
+        var nueva_lista_resultado = app.lang.getAppListStrings('tct_resultado_llamada_ddw_list');
+        var productos=App.user.attributes.productos_c;
+
+        //Valor 8 - Uniclick,Solo se muestra el valor de Llamada preventiva cuando el usuario tenga en su perfil el producto Uniclick
+        if (!productos.includes('8')) {
+            Object.keys(nueva_lista_resultado).forEach(function (key) {
+                if (key == "Llamada_preventiva") {
+                    delete nueva_lista_resultado[key];
+                }
+            });
+        }
+
+        this.model.fields['tct_resultado_llamada_ddw_c'].options = nueva_lista_resultado;
+
+    }
 })

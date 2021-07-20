@@ -1,5 +1,5 @@
 <?php
- // created: 2021-02-08 19:14:33
+ // created: 2021-07-20 15:29:17
 
 $app_list_strings['tct_resultado_llamada_ddw_list']=array (
   '' => '',
@@ -11,4 +11,5 @@ $app_list_strings['tct_resultado_llamada_ddw_list']=array (
   'Checklist_expediente' => 'Se envía checklist y se procede a generar expediente',
   'Razon_Social' => 'Con seguimiento en otra Razón Social',
   'Llamada_servicio' => 'Seguimiento',
+  'Llamada_preventiva' => 'Llamada Preventiva',
 );
