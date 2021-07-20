@@ -1,5 +1,5 @@
 <?php
- // created: 2021-03-03 15:40:37
+ // created: 2021-07-20 15:33:41
 $dictionary['Call']['fields']['detalle_resultado_c']['labelValue']='Detalle';
 $dictionary['Call']['fields']['detalle_resultado_c']['dependency']='';
 $dictionary['Call']['fields']['detalle_resultado_c']['visibility_grid']=array (
@@ -51,6 +51,14 @@ $dictionary['Call']['fields']['detalle_resultado_c']['visibility_grid']=array (
     ),
     'Razon_Social' => 
     array (
+    ),
+    'Llamada_preventiva' => 
+    array (
+      0 => '',
+      1 => '18',
+      2 => '19',
+      3 => '20',
+      4 => '21',
     ),
   ),
 );
