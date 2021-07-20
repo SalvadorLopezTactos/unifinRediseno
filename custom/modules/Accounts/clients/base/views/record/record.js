@@ -6220,7 +6220,7 @@
                 $('.list_fl_nv_producto').find('.select2-choice').css('border-color', 'red'); //¿Qué producto?
                 faltantesFleetUP += 1;
             }
-            if (($('.list_fl_nv_razon').select2('val') == "4" || $('.list_fl_nv_razon option:selected').text() == "4" || $('.list_fl_nv_razon')[0].innerText.trim() == "4") &&
+            if (($('.list_fl_nv_razon').select2('val') == "4" || $('.list_fl_nv_razon option:selected').text() == "4" ) &&
             ($('.list_fl_nv_producto').select2('val') == "4" || $('.list_fl_nv_producto option:selected').text() == "4" || $('.list_fl_nv_producto')[0].innerText.trim() == "4") &&
             $('.chk_fl_nv')[0].checked && $('.txt_fl_nv_otro').val().trim() == "") {
 

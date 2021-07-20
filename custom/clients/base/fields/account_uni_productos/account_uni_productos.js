@@ -1094,7 +1094,7 @@
 		if (cont_uni_p.ResumenProductos == undefined) {
 			cont_uni_p.ResumenProductos = contexto_cuenta.ResumenProductos;
 		}
-        if (cont_uni_p.ResumenProductos != undefined) {
+        if (cont_uni_p.ResumenProductos != undefined && cont_uni_p.ResumenProductos!='') {
             //Valida tipo de cuenta
             var guardaL = false;
             var guardaF = false;
@@ -1647,20 +1647,22 @@
         app.api.call("read", app.api.buildURL("tct4_Condiciones", null, null, filter_arguments), null, {
         	success: _.bind(function (data) {
                 cont_uni_p.datacondiciones = data;
-                if(this.busca_bloquea(cont_uni_p.ResumenProductos.leasing.status_management_c  , cont_uni_p.ResumenProductos.leasing.razon_c , cont_uni_p.ResumenProductos.leasing.motivo_c )){
-                    $('.l_so_raspval2').show();
-                }
-                if(this.busca_bloquea(cont_uni_p.ResumenProductos.factoring.status_management_c  , cont_uni_p.ResumenProductos.factoring.razon_c , cont_uni_p.ResumenProductos.factoring.motivo_c )){
-                    $('.f_so_raspval2').show();
-                }
-                if(this.busca_bloquea(cont_uni_p.ResumenProductos.credito_auto.status_management_c  , cont_uni_p.ResumenProductos.credito_auto.razon_c , cont_uni_p.ResumenProductos.credito_auto.motivo_c )){
-                    $('.ca_so_raspval2').show();
-                }
-                if(this.busca_bloquea(cont_uni_p.ResumenProductos.fleet.status_management_c  , cont_uni_p.ResumenProductos.fleet.razon_c , cont_uni_p.ResumenProductos.fleet.motivo_c )){
-                    $('.fl_so_raspval2').show();
-                }
-                if(this.busca_bloquea(cont_uni_p.ResumenProductos.uniclick.status_management_c  , cont_uni_p.ResumenProductos.uniclick.razon_c , cont_uni_p.ResumenProductos.uniclick.motivo_c )){
-                    $('.u_so_raspval2').show();
+                if (cont_uni_p.ResumenProductos != '') {
+                    if(this.busca_bloquea(cont_uni_p.ResumenProductos.leasing.status_management_c  , cont_uni_p.ResumenProductos.leasing.razon_c , cont_uni_p.ResumenProductos.leasing.motivo_c )){
+                        $('.l_so_raspval2').show();
+                    }
+                    if(this.busca_bloquea(cont_uni_p.ResumenProductos.factoring.status_management_c  , cont_uni_p.ResumenProductos.factoring.razon_c , cont_uni_p.ResumenProductos.factoring.motivo_c )){
+                        $('.f_so_raspval2').show();
+                    }
+                    if(this.busca_bloquea(cont_uni_p.ResumenProductos.credito_auto.status_management_c  , cont_uni_p.ResumenProductos.credito_auto.razon_c , cont_uni_p.ResumenProductos.credito_auto.motivo_c )){
+                        $('.ca_so_raspval2').show();
+                    }
+                    if(this.busca_bloquea(cont_uni_p.ResumenProductos.fleet.status_management_c  , cont_uni_p.ResumenProductos.fleet.razon_c , cont_uni_p.ResumenProductos.fleet.motivo_c )){
+                        $('.fl_so_raspval2').show();
+                    }
+                    if(this.busca_bloquea(cont_uni_p.ResumenProductos.uniclick.status_management_c  , cont_uni_p.ResumenProductos.uniclick.razon_c , cont_uni_p.ResumenProductos.uniclick.motivo_c )){
+                        $('.u_so_raspval2').show();
+                    }
                 }
 			}, cont_uni_p),
             error: function (e) {
