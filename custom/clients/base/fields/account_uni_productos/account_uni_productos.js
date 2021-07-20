@@ -1647,7 +1647,7 @@
         app.api.call("read", app.api.buildURL("tct4_Condiciones", null, null, filter_arguments), null, {
         	success: _.bind(function (data) {
                 cont_uni_p.datacondiciones = data;
-                if (cont_uni_p.ResumenProductos != '') {
+                if (cont_uni_p.ResumenProductos != '' && cont_uni_p.ResumenProductos != undefined) {
                     if(this.busca_bloquea(cont_uni_p.ResumenProductos.leasing.status_management_c  , cont_uni_p.ResumenProductos.leasing.razon_c , cont_uni_p.ResumenProductos.leasing.motivo_c )){
                         $('.l_so_raspval2').show();
                     }
@@ -1663,7 +1663,10 @@
                     if(this.busca_bloquea(cont_uni_p.ResumenProductos.uniclick.status_management_c  , cont_uni_p.ResumenProductos.uniclick.razon_c , cont_uni_p.ResumenProductos.uniclick.motivo_c )){
                         $('.u_so_raspval2').show();
                     }
+                }else{
+                  cont_uni_p.ResumenProductos = contexto_cuenta.ResumenProductos;
                 }
+                cont_uni_p.render();
 			}, cont_uni_p),
             error: function (e) {
                 throw e;
