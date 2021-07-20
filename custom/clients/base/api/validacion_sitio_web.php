@@ -38,19 +38,45 @@ class validacion_sitio_web extends SugarApi
     {
         //Recupera página web
 		$url = $args['website'];
+        /*************************************/
+        //check, if a valid url is provided
+        if(!filter_var($url, FILTER_VALIDATE_URL))
+        {
+                return false;
+        }
+
+        //initialize curl
+        $curlInit = curl_init($url);
+        curl_setopt($curlInit,CURLOPT_CONNECTTIMEOUT,10);
+        curl_setopt($curlInit,CURLOPT_HEADER,true);
+        curl_setopt($curlInit,CURLOPT_NOBODY,true);
+        curl_setopt($curlInit,CURLOPT_RETURNTRANSFER,true);
+
+        //get answer
+        $response = curl_exec($curlInit);
+        $httpcode = curl_getinfo($curlInit, CURLINFO_HTTP_CODE);
+
+        curl_close($curlInit);
+
+        /*if ($response) return true;
+
+        return false;*/
+        /*******************************************/
         //Genera petición a dominio
-        $ch = curl_init($url);
+        /*$ch = curl_init($url);
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $data = curl_exec($ch);
         $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
+        */
         //Interpreta resultado
-        if((($httpcode>=200 && $httpcode<=400) || $httpcode==0 ) && ($data != '' && $data != '0') ){
+        if(($httpcode>=200 && $httpcode<=400) || $httpcode==0 ){
+        //if($response || $httpcode == 0 ){
             return '00';
         } else {
-            if($data != '' && $data != '0' ){
+            if($response != '' && $response != '0' ){
                 return '00';
             }else{
                  //Segunda validación
@@ -64,7 +90,7 @@ class validacion_sitio_web extends SugarApi
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 $data = curl_exec($ch);
                 $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-               
+
                 curl_close($ch);
                 //Interpreta resultado
                 if((($httpcode>=200 && $httpcode<=400) || $httpcode==0) && ($data != '' && $data != '0' )){
