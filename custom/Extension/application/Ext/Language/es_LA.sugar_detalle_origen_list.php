@@ -1,5 +1,5 @@
 <?php
- // created: 2021-06-14 16:29:33
+ // created: 2021-07-20 17:23:30
 
 $app_list_strings['detalle_origen_list']=array (
   '' => '',
@@ -48,4 +48,13 @@ $app_list_strings['detalle_origen_list']=array (
   43 => 'Central Zone',
   44 => 'Reditus',
   45 => 'KBP Brokers',
+  46 => 'Best Credit',
+  47 => 'AC Logistica',
+  48 => 'Financer',
+  49 => 'KBP- Easy Homes',
+  50 => 'KBP- Creditice',
+  51 => 'KBP- KREO Asesores',
+  52 => 'KBP- Salud Patrimonial',
+  53 => 'EMH Brokers',
+  54 => 'Salud',
 );
