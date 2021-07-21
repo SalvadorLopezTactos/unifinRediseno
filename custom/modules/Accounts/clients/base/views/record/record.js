@@ -5186,7 +5186,7 @@
                     this.render();
                 }
                 //Refresca cambios en teléfonos, direcciones y pld(Recupera ids de nuevos teléfonos)
-                location.reload();
+                //location.reload();
                 this.get_phones();
                 this.get_addresses();
                 this.get_pld();
@@ -5785,11 +5785,11 @@
             }
         }
 
-            var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
-
-            if( (document.getElementById("list_l_estatus_lm") != undefined || document.getElementById("list_l_estatus_lm") != null)
-                && (productos.includes("1")&& (App.user.attributes.id == ResumenProductos.leasing.assigned_user_id))
-                && (!ResumenProductos.leasing.notificacion_noviable_c)){
+        var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
+        if(ResumenProductos.leasing != undefined && (document.getElementById("list_l_estatus_lm") != undefined || document.getElementById("list_l_estatus_lm") != null) ){
+                
+            if( (productos.includes("1") && (App.user.attributes.id == ResumenProductos.leasing.assigned_user_id))
+                    && (!ResumenProductos.leasing.notificacion_noviable_c)){
                 var faltantelm = 0;
                 var selectlm = document.getElementById("list_l_estatus_lm");
                 var selectlrazon = document.getElementById("list_l_so_razon");
@@ -5866,6 +5866,8 @@
                     errors['error_leasingUP'].required = true;
                 }
             }
+        }
+            
 
             /*if (faltantesleasup == 0 && $('.chk_l_nv')[0].checked == true && cont_uni_p.ResumenProductos.leasing.status_management_c != "3") {
                 this.model.set('promotorleasing_c', '9 - No Viable');
@@ -5938,8 +5940,10 @@
 
         var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
 
-        if( (document.getElementById("list_fac_estatus_lm") != undefined || document.getElementById("list_fac_estatus_lm") != null)
-            && (productos.includes("4")&& (App.user.attributes.id == ResumenProductos.factoring.assigned_user_id))
+        if( (document.getElementById("list_fac_estatus_lm") != undefined || document.getElementById("list_fac_estatus_lm") != null) && 
+            ResumenProductos.factoring != undefined){
+        
+        if( (productos.includes("4")&& (App.user.attributes.id == ResumenProductos.factoring.assigned_user_id))
             && (!ResumenProductos.factoring.notificacion_noviable_c)){
             var faltantelm = 0;
             var selectlm = document.getElementById("list_fac_estatus_lm");
@@ -6018,6 +6022,7 @@
                 errors['error_FactorajeUP'].required = true;
             }
         }
+    }
 
         callback(null, fields, errors);
     },
@@ -6090,9 +6095,10 @@
                 cont_uni_p.ResumenProductos.credito_auto.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
             }*/
             var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
-
             if((document.getElementById("list_ca_estatus_lm") != undefined || document.getElementById("list_ca_estatus_lm") != null)
-                && (productos.includes("3")&& (App.user.attributes.id == ResumenProductos.credito_auto.assigned_user_id))
+                && ResumenProductos.credito_auto != undefined){
+
+            if((productos.includes("3")&& (App.user.attributes.id == ResumenProductos.credito_auto.assigned_user_id))
                 && (!ResumenProductos.credito_auto.notificacion_noviable_c)){
                 var selectlm = document.getElementById("list_ca_estatus_lm");
                 var selectlrazon = document.getElementById("list_ca_so_razon");
@@ -6170,8 +6176,8 @@
                     errors['error_CAUP'] = errors['error_CAUP'] || {};
                     errors['error_CAUP'].required = true;
                 }
-
             }
+        }
 
         callback(null, fields, errors);
     },
@@ -6243,10 +6249,11 @@
                 this.model.set('user_id6_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.fleet.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
             }*/
-            var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
+        var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
+        if((document.getElementById("list_fl_estatus_lm") != undefined || document.getElementById("list_fl_estatus_lm") != null)
+        && ResumenProductos.fleet != undefined){
 
-            if((document.getElementById("list_fl_estatus_lm") != undefined || document.getElementById("list_fl_estatus_lm") != null)
-            && (productos.includes("6")&& (App.user.attributes.id == ResumenProductos.fleet.assigned_user_id))
+            if((productos.includes("6")&& (App.user.attributes.id == ResumenProductos.fleet.assigned_user_id))
             && (!ResumenProductos.fleet.notificacion_noviable_c)){
 
                 var faltantelm = 0;
@@ -6329,6 +6336,7 @@
                 }
 
             }
+        }
 
         callback(null, fields, errors);
     },
@@ -6400,10 +6408,12 @@
                 this.model.set('user_id7_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
                 cont_uni_p.ResumenProductos.uniclick.assigned_user_id = 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb'; //'9 - No Viable' en Uni_Productos
             }*/
-            var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
+        var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
 
-            if((document.getElementById("list_u_estatus_lm") != undefined || document.getElementById("list_u_estatus_lm") != null)
-                && (productos.includes("8")&& (App.user.attributes.id == ResumenProductos.uniclick.assigned_user_id))
+        if((document.getElementById("list_u_estatus_lm") != undefined || document.getElementById("list_u_estatus_lm") != null)
+                && ResumenProductos.uniclick != undefined){
+            
+            if((productos.includes("8")&& (App.user.attributes.id == ResumenProductos.uniclick.assigned_user_id))
                 && (!ResumenProductos.uniclick.notificacion_noviable_c)){
                 var faltantelm = 0;
                 var selectlm = document.getElementById("list_u_estatus_lm");
@@ -6484,6 +6494,7 @@
 
                 }
             }
+        }
 
         callback(null, fields, errors);
     },
