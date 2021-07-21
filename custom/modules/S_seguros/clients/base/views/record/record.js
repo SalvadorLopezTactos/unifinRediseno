@@ -30,6 +30,8 @@
         this.noEditFields.push('seguro_pipeline');
         //Oculta campo UNI2
         this.$('[data-name=seguro_uni2_c]').hide();
+		//Oculta espacio en blanco
+		this.$(".record-cell[data-name='blank_space']").hide();
     },
 
     setTipo: function() {
