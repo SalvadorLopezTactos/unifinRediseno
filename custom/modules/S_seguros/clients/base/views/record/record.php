@@ -548,6 +548,8 @@ array (
               ),
               5 => 
               array (
+                'name' => 'blank_space',
+                'label' => 'LBL_BLANK_SPACE',			  
               ),
               6 => 
               array (
@@ -608,6 +610,8 @@ array (
               ),
               15 => 
               array (
+                'name' => 'blank_space',
+                'label' => 'LBL_BLANK_SPACE',
               ),
               16 => 
               array (
