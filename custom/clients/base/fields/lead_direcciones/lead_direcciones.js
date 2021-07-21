@@ -32,6 +32,10 @@
         'change .ciudadExisting': 'updateValueCiudadDE',     //Actualiza ciudad a modelo
         'click .principal': 'updatePrincipalDE',     //Actualiza principal a modelo
         'click .inactivo': 'updateInactivoDE',     //Actualiza inactivo a modelo
+
+        //Se añade evento para obligar el estilo select2 en los campos Tipo y Tipo de dirección en la creación de Lead
+        'focus .multiTipoNew': 'setStyleSelect2',
+        'focus .multiIndicadorNew': 'setStyleSelect2',
     },
 
     initialize: function (options) {
@@ -1427,6 +1431,15 @@
             this.oDirecciones.direccion[index].inactivo = 0;
         }
         this.render();
+    },
+
+    /*
+    Función para agregar estilo select2, ya que en la creación del Lead, se mostraba con el estilo select2 básico
+    */ 
+    setStyleSelect2:function(evt){
+
+        $(evt.currentTarget).addClass('select2-choices-pills-close')
+
     },
 
     validaSoloTexto: function (e) {
