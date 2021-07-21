@@ -1,5 +1,5 @@
 <?php
- // created: 2021-03-03 15:34:35
+ // created: 2021-07-20 15:32:18
 
 $app_list_strings['detalle_resultado_llamada_list']=array (
   '' => '',
@@ -20,4 +20,8 @@ $app_list_strings['detalle_resultado_llamada_list']=array (
   15 => 'YA NO EXISTE',
   16 => 'SEGUIMIENTO A SOLICITUD DEL CLIENTE O RESOLUCIÓN DE PROBLEMA',
   17 => 'SEGUIMIENTO A PROCESO DE CONTRATACIÓN',
+  18 => 'SIN INCONVENIENTES PARA LA DOMICILIACIÓN',
+  19 => 'REALIZA TRANSFERENCIA ANTES DEL CORTE',
+  20 => 'NO TENDRÁ LOS FONDOS, PROMESA DE PAGO',
+  21 => 'NO TENDRÁ LOS FONDOS, NO DEFINE',
 );
