@@ -324,7 +324,6 @@
             cont_uni_p.noeditables();  //FUNCION PARA CAMPOS NO EDITABLES
 
             cont_uni_p.buscaRazon();
-            cont_uni_p.usuariosInicial();
 
         } catch (err) {
             console.log(err.message);
@@ -797,7 +796,17 @@
         $('.fl_nv_razon_cf').hide(); //CLASE Condiciones Financieras FLEET
         $('.fl_nv_otro').hide(); //CLASE ¿Qué producto? FLEET
         $('.fl_nv_razon_ni').hide(); //CLASE Razón No se encuentra interesado FLEET
-        
+        /*********************************************/
+        $('.fl_so_razon').hide();
+        $('.fl_so_motivo').hide();
+        $('.fl_so_detalle').hide();
+        $('.fl_so_resp_ingesta').hide();
+        $('.fe_estatus_lm').hide();
+        $('.fe_estatus_lm_edit').hide();
+        $('.fl_so_raspval1_edit').hide();
+        $('.fl_so_raspval1').hide();
+        $('.fl_so_raspval2_edit').hide();
+        $('.fl_so_raspval2').hide();
         /************************************/
         if ($('.chk_fl_nv')[0] != undefined) {
             if ($('.chk_fl_nv')[0].checked) { //CHECK - CLASE No Viable FLEET
