@@ -2,8 +2,8 @@
     extendsFrom: 'CreateView',
     previas: null,
     initialize: function (options)
-	  {
-		    relContext = this;
+	{
+		relContext = this;
         accountContext = null; //._previousAttributes.model._previousAttributes;
 
         /*
@@ -16,60 +16,50 @@
          */
         this._super('initialize', [options]);
 
-         /*
-        	AF. 13/02/2018
-        	Set account_id: Establece id para campo
-        		from: 	rel_relaciones_accounts_1accounts_ida
-        		to: 	rel_relaciones_accountsaccounts_ida
-        */
-        this.model.addValidationTask('set_Account_Related', _.bind(this._setAccount, this));
-
         //CVV INICIO
-		    //this.events['blur input[name=relaciones_activas]'] = 'doRelationFields';
+		//this.events['blur input[name=relaciones_activas]'] = 'doRelationFields';
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
-    		this.model.addValidationTask('check_Campos_Contacto', _.bind(this._doValidateContactFields, this));
-    		//this.model.addValidationTask('check_custom_validations', _.bind(this.checarValidacionesonSave, this));
-    		this.model.addValidationTask('check_custom_relacion_c', _.bind(this.checarRelacion, this));
-    		this.model.addValidationTask('check_Relaciones_Permitidas', _.bind(this.RelacionesPermitidas, this));
-    		this.model.addValidationTask('check_Relaciones_Duplicadas', _.bind(this.relacionesDuplicadas, this));
+    	this.model.addValidationTask('check_Campos_Contacto', _.bind(this._doValidateContactFields, this));
+    	//this.model.addValidationTask('check_custom_validations', _.bind(this.checarValidacionesonSave, this));
+    	this.model.addValidationTask('check_custom_relacion_c', _.bind(this.checarRelacion, this));
+    	this.model.addValidationTask('check_Relaciones_Permitidas', _.bind(this.RelacionesPermitidas, this));
+    	this.model.addValidationTask('check_Relaciones_Duplicadas', _.bind(this.relacionesDuplicadas, this));
         this.model.addValidationTask('crearrelacionaccionista', _.bind(this.Relacionaccionista, this));
         this.model.addValidationTask('validarequeridosPropReal',_.bind(this.validaPropietarioReal, this));
         this.model.addValidationTask('validarequeridosProvRec',_.bind(this.validaProveedorRecursos, this));
         this.model.addValidationTask('validarequeridosRelActivas',_.bind(this.validaRelacionesValidation, this));
 
-    		//this.model.on('change:relacion_c', this.checarValidaciones, this);
-    		//this.model.on('change:relaciones_activas',this.checarValidaciones, this);
-    		this.model.on('change:relaciones_activas',this.doRelationFields, this);
-    		this.model.on('change:relaciones_activas',this.chkjuridico, this);
-    		//this.model.on('change:relaciones_activas',this.validaPropietarioRealchange, this);
-    		this.model.on('change:relaciones_activas',this.changejuridico, this);
-    		//this.model.on('change:relaciones_activas',this.validaProveedorRecursoschange, this);
+    	//this.model.on('change:relacion_c', this.checarValidaciones, this);
+    	//this.model.on('change:relaciones_activas',this.checarValidaciones, this);
+    	this.model.on('change:relaciones_activas',this.doRelationFields, this);
+    	this.model.on('change:relaciones_activas',this.chkjuridico, this);
+    	//this.model.on('change:relaciones_activas',this.validaPropietarioRealchange, this);
+    	this.model.on('change:relaciones_activas',this.changejuridico, this);
+    	//this.model.on('change:relaciones_activas',this.validaProveedorRecursoschange, this);
         //this.model.on('change:relaciones_activas',this.validaRelacionesChange, this);
         //this.model.on('change:relacion_c', this.validaRelacionesChange, this);
     
-    		//Perform check of parent data once parent record finishes loading
-    		/*this.model.once('data:sync:complete', this.doRecordCheck, this);*/
+    	//Perform check of parent data once parent record finishes loading
+    	/*this.model.once('data:sync:complete', this.doRecordCheck, this);*/
+    	/** BEGIN CUSTOMIZATION: jgarcia@levementum.com 8/27/2015 Description: When a new relationship is created, the same person is pre-selected in the “Relacion” field.
+    	* Modify the out of the box behavior to start with a blank “Relacion”*/
+    	this.model.set("relacion_c", "   ");
+    	/* END CUSTOMIZATION */
     
-    		/** BEGIN CUSTOMIZATION: jgarcia@levementum.com 8/27/2015 Description: When a new relationship is created, the same person is pre-selected in the “Relacion” field.
-    		 * Modify the out of the box behavior to start with a blank “Relacion”*/
-    		this.model.set("relacion_c", "   ");
-    		/* END CUSTOMIZATION */
-    
-    
-    		var valParams = {
-    			'modulo': 'Accounts',
-    		};
-    		var valUrl = app.api.buildURL("customValidations", '', {}, {});
-    		app.api.call("create", valUrl, {data: valParams}, { //Call and Collect the Dependencies
-    			success: _.bind(function (data) {
-    				if (data != null) {
-    					self.validaciones = data;
-    					console.log(self.validaciones);
-    				}
-    			}, this)
-    		});
-            this.previas = new String(this.model.get('relaciones_activas'));
-	  },
+    	var valParams = {
+    		'modulo': 'Accounts',
+    	};
+    	var valUrl = app.api.buildURL("customValidations", '', {}, {});
+    	app.api.call("create", valUrl, {data: valParams}, { //Call and Collect the Dependencies
+    		success: _.bind(function (data) {
+    			if (data != null) {
+    				self.validaciones = data;
+    				console.log(self.validaciones);
+    			}
+    		}, this)
+    	});
+        this.previas = new String(this.model.get('relaciones_activas'));
+	},
 
     saveAndClose: function (){
         if (accountContext==null) {
@@ -113,13 +103,6 @@
             }
         },this));
 	},
-
-	_setAccount: function (fields, errors, callback) {
-		this.model.set('rel_relaciones_accountsaccounts_ida',this.model.get('rel_relaciones_accounts_1accounts_ida'));
-		//console.log('idPersona: ' + this.model.get('rel_relaciones_accountsaccounts_ida'));
-
-    	callback(null, fields, errors);
-    },
 
 	RelacionesPermitidas: function(fields, errors, callback){
 		//Valida los tipos de relación permitidos para el regimen de la persona relacionada

@@ -9,8 +9,6 @@ require_once("custom/Levementum/UnifinAPI.php");
 class Rel_Relaciones_Hooks{
 
     public function SetName($bean=null,$event=null,$args=null){
-        //Inserta los datos a la otra tabla, copia del campo Relacion a Persona
-        $bean->rel_relaciones_accountsaccounts_ida = $bean->rel_relaciones_accounts_1accounts_ida;
         global $db;
         $query = <<<SQL
 select id from rel_relaciones_accounts_1_c where deleted = 0 and rel_relaciones_accounts_1rel_relaciones_idb <> '{$bean->id}' 
@@ -20,27 +18,26 @@ and rel_relaciones_accounts_1rel_relaciones_idb in
 SQL;
         $queryResult = $db->query($query);
         $row = $db->fetchByAssoc($queryResult);
-        $GLOBALS['log']->fatal("LALO: ".$query);
-		    if($row)
-        {
-       	  $beanPersona = BeanFactory::getBean('Accounts', $bean->account_id1_c);
-    			$persona = $beanPersona->name;
-          $beanRelacion = BeanFactory::getBean('Accounts', $bean->rel_relaciones_accounts_1accounts_ida);
-    			$relacion = $beanRelacion->name;
-    			require_once 'include/api/SugarApiException.php';
-    			throw new SugarApiExceptionInvalidParameter("La relación ".$persona." ya existe para la cuenta ".$relacion." Favor de verificarlo. Si deseas agregar una nueva Relación Activa para ".$persona.", favor de acceder a la Relación, editar y agregarlo.");
-    	  }
-    		else
-    		{
+		if($row)
+		{
+			$beanPersona = BeanFactory::getBean('Accounts', $bean->account_id1_c);
+    		$persona = $beanPersona->name;
+			$beanRelacion = BeanFactory::getBean('Accounts', $bean->rel_relaciones_accounts_1accounts_ida);
+    		$relacion = $beanRelacion->name;
+    		require_once 'include/api/SugarApiException.php';
+    		throw new SugarApiExceptionInvalidParameter("La relación ".$persona." ya existe para la cuenta ".$relacion." Favor de verificarlo. Si deseas agregar una nueva Relación Activa para ".$persona.", favor de acceder a la Relación, editar y agregarlo.");
+    	}
+    	else
+    	{
       		$query = <<<SQL
 SELECT name FROM accounts WHERE id = '{$bean->account_id1_c}'
 SQL;
-    			$queryResult = $db->query($query);
-   			  while($row = $db->fetchByAssoc($queryResult))
-    			{
-    				 $bean->name = $row['name'];
-   			  }
-    		}
+    		$queryResult = $db->query($query);
+			while($row = $db->fetchByAssoc($queryResult))
+    		{
+    			$bean->name = $row['name'];
+   			}
+    	}
     }
 
     public function insertarRelacionenUNICS($bean=null,$event=null,$args=null){
@@ -133,4 +130,14 @@ SQL;
         }
         $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : ESTADO: " . $_SESSION['estadoRelacion'] );
     }
+
+    public function setAccount($bean=null,$event=null,$args=null){
+		if(!$bean->rel_relaciones_accountsaccounts_ida) {
+			global $db;
+			//Inserta los datos a la otra tabla, copia del campo Relacion a Persona
+			$bean->rel_relaciones_accountsaccounts_ida = $bean->rel_relaciones_accounts_1accounts_ida;
+			$query = "insert into rel_relaciones_accounts_c (select * from rel_relaciones_accounts_1_c where rel_relaciones_accounts_1accounts_ida = '{$bean->rel_relaciones_accounts_1accounts_ida}')";
+			$queryResult = $db->query($query);
+		}
+	}
 }

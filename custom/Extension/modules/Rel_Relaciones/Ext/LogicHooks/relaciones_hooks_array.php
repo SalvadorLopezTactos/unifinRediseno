@@ -19,6 +19,13 @@ $hook_array['after_save'][] = Array(
     'Rel_Relaciones_Hooks',
     'insertarRelacionenUNICS'
 );
+$hook_array['after_save'][] = Array(
+    2,
+    'Inserta los datos a la otra tabla',
+    'custom/modules/Rel_Relaciones/Rel_Relaciones_Hooks.php',
+    'Rel_Relaciones_Hooks',
+    'setAccount'
+);
 $hook_array['after_delete'][] = Array(
     1,
     'Actualiza Relacion en UNICS',
