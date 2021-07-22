@@ -323,7 +323,7 @@
 
             cont_uni_p.noeditables();  //FUNCION PARA CAMPOS NO EDITABLES
 
-            cont_uni_p.buscaRazon();
+            //cont_uni_p.buscaRazon();
 
         } catch (err) {
             console.log(err.message);
