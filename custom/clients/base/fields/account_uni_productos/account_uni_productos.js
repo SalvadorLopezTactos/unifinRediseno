@@ -419,15 +419,6 @@
         $('.l_so_raspval1_edit').hide();
         $('.l_so_raspval2_edit').hide();
         //$('.ls_estatus_lm_edit').hide(); 
-        /****************************************/
-        $('.l_so_razon').select2('val', "");
-        $('.l_so_motivo').select2('val', "");
-        $('.l_so_detalle').val("");
-        $('.l_so_resp_ingesta').val();
-        $('.l_so_raspval1').select2('val', "");
-        $('.l_so_raspval2').select2('val', "");
-        $('.l_so_raspval1_edit').val("");
-        $('.l_so_raspval2_edit').val("");
         /************************************/
         if (($('.list_l_estatus_lm').select2('val') == "4" || $('.list_l_estatus_lm').select2('val') == "5" ) ) { //PRODUCTO LEASING
             //$('.ls_estatus_lm').show();
@@ -437,6 +428,13 @@
             $('.l_so_resp_ingesta').show();
             $('.l_so_raspval1_edit').show();
             //$('.l_so_raspval2_edit').show();
+            /****************************************/
+            $('.list_l_so_razon').select2('val', "");
+            $('.list_l_so_motivo').select2('val', "");
+            $('.txt_l_so_detalle').val("");
+            $('.list_l_respval_1').select2('val', "");
+            $('.list_l_respval_2').select2('val', "");
+            
         }
 
     },
@@ -562,15 +560,6 @@
         $('.f_so_raspval1_edit').hide();
         $('.f_so_raspval2_edit').hide();
         //$('.ls_estatus_lm_edit').hide();
-        /****************************************/
-        $('.f_so_razon').select2('val', "");
-        $('.f_so_motivo').select2('val', "");
-        $('.f_so_detalle').val("");
-        $('.f_so_resp_ingesta').val();
-        $('.f_so_raspval1').select2('val', "");
-        $('.f_so_raspval2').select2('val', "");
-        $('.f_so_raspval1_edit').val("");
-        $('.f_so_raspval2_edit').val("");
         /************************************/
         if (($('.list_fac_estatus_lm').select2('val') == "4" || $('.list_fac_estatus_lm').select2('val') == "5" ) ) { //PRODUCTO LEASING
             //$('.ls_estatus_lm').show();
@@ -580,6 +569,12 @@
             $('.f_so_resp_ingesta').show();
             $('.f_so_raspval1_edit').show();
             //$('.f_so_raspval2_edit').show();
+            /****************************************/
+            $('.list_f_razon_lm').select2('val', "");
+            $('.list_f_so_motivo').select2('val', "");
+            $('.txt_f_so_detalle').val("");
+            $('.list_f_respval_1').select2('val', "");
+            $('.list_f_respval_2').select2('val', "");
         }
 
     },
@@ -703,15 +698,6 @@
         $('.ca_so_raspval1_edit').hide();
         $('.ca_so_raspval2_edit').hide();
         //$('.ls_estatus_lm_edit').hide();
-        /*******************************************/
-        $('.ca_so_razon').select2('val', "");
-        $('.ca_so_motivo').select2('val', "");
-        $('.ca_so_detalle').val("");
-        $('.ca_so_resp_ingesta').val();
-        $('.ca_so_raspval1').select2('val', "");
-        $('.ca_so_raspval2').select2('val', "");
-        $('.ca_so_raspval1_edit').val("");
-        $('.ca_so_raspval2_edit').val("");
         /************************************/
         if (($('.list_ca_estatus_lm').select2('val') == "4" || $('.list_ca_estatus_lm').select2('val') == "5" ) ) { //PRODUCTO LEASING
             //$('.ls_estatus_lm').show();
@@ -721,7 +707,12 @@
             $('.ca_so_resp_ingesta').show();
             $('.ca_so_raspval1_edit').show();
             //$('.ca_so_raspval2_edit').show();
-
+            /****************************************/
+            $('.list_ca_so_razon').select2('val', "");
+            $('.list_ca_so_motivo').select2('val', "");
+            $('.txt_ca_so_detalle').val("");
+            $('.list_ca_respval_1').select2('val', "");
+            $('.list_ca_respval_2').select2('val', "");
         }
 
     },
@@ -839,15 +830,6 @@
         $('.fl_so_raspval2_edit').hide();
         //$('.ls_estatus_lm_edit').hide();
         /*******************************************/
-        $('.fl_so_razon').select2('val', "");
-        $('.fl_so_motivo').select2('val', "");
-        $('.fl_so_detalle').val("");
-        $('.fl_so_resp_ingesta').val();
-        $('.fl_so_raspval1').select2('val', "");
-        $('.fl_so_raspval2').select2('val', "");
-        $('.fl_so_raspval1_edit').val("");
-        $('.fl_so_raspval2_edit').val("");
-        /************************************/
         if (($('.list_fl_estatus_lm').select2('val') == "4" || $('.list_fl_estatus_lm').select2('val') == "5" ) ) { //PRODUCTO LEASING
             //$('.ls_estatus_lm').show();
             $('.fl_so_razon').show();
@@ -856,6 +838,12 @@
             $('.fl_so_resp_ingesta').show();
             $('.fl_so_raspval1_edit').show();
             //$('.fl_so_raspval2_edit').show();
+            /****************************************/
+            $('.list_fl_so_razon').select2('val', "");
+            $('.list_fl_so_motivo').select2('val', "");
+            $('.txt_fl_so_detalle').val("");
+            $('.list_fl_respval_1').select2('val', "");
+            $('.list_fl_respval_2').select2('val', "");
         }
     },
     //FUNCION DE PRODUCTO FLEET PARA LAS DEPENDENCIAS DE LOS CAMPOS
@@ -981,15 +969,6 @@
         $('.u_so_raspval2_edit').hide();
         //$('.ls_estatus_lm_edit').hide();
         /****************************************/
-        $('.u_so_razon').select2('val', "");
-        $('.u_so_motivo').select2('val', "");
-        $('.u_so_detalle').val("");
-        $('.u_so_resp_ingesta').val();
-        $('.u_so_raspval1').select2('val', "");
-        $('.u_so_raspval2').select2('val', "");
-        $('.u_so_raspval1_edit').val("");
-        $('.u_so_raspval2_edit').val("");
-        /************************************/
         if (($('.list_u_estatus_lm').select2('val') == "4" || $('.list_u_estatus_lm').select2('val') == "5" ) ) { //PRODUCTO LEASING
             //$('.ls_estatus_lm').show();
             $('.u_so_razon').show();
@@ -998,6 +977,12 @@
             $('.u_so_resp_ingesta').show();
             $('.u_so_raspval1_edit').show();
             //$('.u_so_raspval2_edit').show();
+            /****************************************/
+            $('.list_u_so_razon').select2('val', "");
+            $('.list_u_so_motivo').select2('val', "");
+            $('.txt_u_so_detalle').val("");
+            $('.list_u_respval_1').select2('val', "");
+            $('.list_u_respval_2').select2('val', "");
         }
     },
     //FUNCION DE PRODUCTO UNICLICK PARA LAS DEPENDENCIAS DE LOS CAMPOS
@@ -1129,7 +1114,7 @@
 		if (cont_uni_p.ResumenProductos == undefined) {
 			cont_uni_p.ResumenProductos = contexto_cuenta.ResumenProductos;
 		}
-        if (cont_uni_p.ResumenProductos != undefined && cont_uni_p.ResumenProductos.length > 0) {
+        if (cont_uni_p.ResumenProductos != undefined && cont_uni_p.ResumenProductos.leasing != undefined) {
             //Valida tipo de cuenta
             var guardaL = false;
             var guardaF = false;
@@ -1835,26 +1820,46 @@
                 document.getElementById("list_l_so_motivo").options.length=0;
                 document.getElementById("list_l_so_motivo").innerHTML = "";
                 document.getElementById("list_l_so_motivo").selectedIndex = "-1"
+                /****************************************/
+                $('.list_l_so_motivo').select2('val', "");
+                $('.list_l_respval_1').select2('val', "");
+                $('.list_l_respval_2').select2('val', "");
                 break;
             case "4": //Factoraje
                 document.getElementById("list_f_so_motivo").options.length=0;
                 document.getElementById("list_f_so_motivo").innerHTML = "";
                 document.getElementById("list_f_so_motivo").selectedIndex = "-1"
+                /****************************************/
+                $('.list_f_so_motivo').select2('val', "");
+                $('.list_f_respval_1').select2('val', "");
+                $('.list_f_respval_2').select2('val', "");
                 break;
             case "3": //Credito-auto
                 document.getElementById("list_ca_so_motivo").options.length=0;
                 document.getElementById("list_ca_so_motivo").innerHTML = "";
                 document.getElementById("list_ca_so_motivo").selectedIndex = "-1"
+                /****************************************/
+                $('.list_ca_so_motivo').select2('val', "");
+                $('.list_ca_respval_1').select2('val', "");
+                $('.list_ca_respval_2').select2('val', "");
                 break;
             case "6": //Fleet
                 document.getElementById("list_fl_so_motivo").options.length=0;
                 document.getElementById("list_fl_so_motivo").innerHTML = "";
                 document.getElementById("list_fl_so_motivo").selectedIndex = "-1"
+                /****************************************/
+                $('.list_fl_so_motivo').select2('val', "");
+                $('.list_fl_respval_1').select2('val', "");
+                $('.list_fl_respval_2').select2('val', "");
                 break;
             case "8": //Uniclick
                 document.getElementById("list_u_so_motivo").options.length=0;
                 document.getElementById("list_u_so_motivo").innerHTML = "";
                 document.getElementById("list_u_so_motivo").selectedIndex = "-1"
+                /****************************************/
+                $('.list_u_so_motivo').select2('val', "");
+                $('.list_u_respval_1').select2('val', "");
+                $('.list_u_respval_2').select2('val', "");
                 break;
         }
         cont_uni_p.datamotivos = {};
