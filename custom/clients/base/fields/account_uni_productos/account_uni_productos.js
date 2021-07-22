@@ -392,6 +392,12 @@
                 $('.l_so_motivo').show();
                 $('.l_so_detalle').show();
                 $('.l_so_resp_ingesta').show();
+                if (cont_uni_p.ResumenProductos.leasing.razon_c == '7' && cont_uni_p.ResumenProductos.leasing.motivo_c == '' ) { //PRODUCTO LEASING
+                    $('.l_so_raspval2').show();
+                }
+                if (cont_uni_p.ResumenProductos.leasing.razon_c == '10' && cont_uni_p.ResumenProductos.leasing.motivo_c == '7' ) { //PRODUCTO LEASING
+                    $('.l_so_raspval2').show();
+                }
                 /*if(this.busca_bloquea(cont_uni_p.ResumenProductos.leasing.status_management_c  , cont_uni_p.ResumenProductos.leasing.razon_c , cont_uni_p.ResumenProductos.leasing.motivo_c )){
                     $('.l_so_raspval2').show();
                 } */
@@ -538,6 +544,12 @@
                 /*if(this.busca_bloquea(cont_uni_p.ResumenProductos.factoring.status_management_c  , cont_uni_p.ResumenProductos.factoring.razon_c , cont_uni_p.ResumenProductos.factoring.motivo_c )){
                     $('.f_so_raspval2').show();
                 }*/
+                if (cont_uni_p.ResumenProductos.factoring.razon_c == '7' && cont_uni_p.ResumenProductos.factoring.motivo_c == '' ) { //PRODUCTO LEASING
+                    $('.l_so_raspval2').show();
+                }
+                if (cont_uni_p.ResumenProductos.factoring.razon_c == '10' && cont_uni_p.ResumenProductos.factoring.motivo_c == '7' ) { //PRODUCTO LEASING
+                    $('.l_so_raspval2').show();
+                }
             }
             if(cont_uni_p.ResumenProductos.factoring.status_management_c == '1' ){
                 if(cont_uni_p.ResumenProductos.factoring.deshabilitar_lmedit){
@@ -676,6 +688,12 @@
                 /*if(this.busca_bloquea(cont_uni_p.ResumenProductos.credito_auto.status_management_c  , cont_uni_p.ResumenProductos.credito_auto.razon_c , cont_uni_p.ResumenProductos.credito_auto.motivo_c )){
                     $('.ca_so_raspval2').show();
                 }*/
+                if (cont_uni_p.ResumenProductos.credito_auto.razon_c == '7' && cont_uni_p.ResumenProductos.credito_auto.motivo_c == '' ) { //PRODUCTO LEASING
+                    $('.l_so_raspval2').show();
+                }
+                if (cont_uni_p.ResumenProductos.credito_auto.razon_c == '10' && cont_uni_p.ResumenProductos.credito_auto.motivo_c == '7' ) { //PRODUCTO LEASING
+                    $('.l_so_raspval2').show();
+                }
             }
             if(cont_uni_p.ResumenProductos.credito_auto.status_management_c == '1' ){
                 if(cont_uni_p.ResumenProductos.credito_auto.deshabilitar_lmedit){
@@ -806,6 +824,12 @@
                 /*if(this.busca_bloquea(cont_uni_p.ResumenProductos.fleet.status_management_c  , cont_uni_p.ResumenProductos.fleet.razon_c , cont_uni_p.ResumenProductos.fleet.motivo_c )){
                     $('.fl_so_raspval2').show();
                 }*/
+                if (cont_uni_p.ResumenProductos.fleet.razon_c == '7' && cont_uni_p.ResumenProductos.fleet.motivo_c == '' ) { //PRODUCTO LEASING
+                    $('.l_so_raspval2').show();
+                }
+                if (cont_uni_p.ResumenProductos.fleet.razon_c == '10' && cont_uni_p.ResumenProductos.fleet.motivo_c == '7' ) { //PRODUCTO LEASING
+                    $('.l_so_raspval2').show();
+                }
             }
             if(cont_uni_p.ResumenProductos.fleet.status_management_c == '1' ){
                 if(cont_uni_p.ResumenProductos.fleet.deshabilitar_lmedit){
@@ -946,6 +970,13 @@
                 /*if(this.busca_bloquea(cont_uni_p.ResumenProductos.uniclick.status_management_c  , cont_uni_p.ResumenProductos.uniclick.razon_c , cont_uni_p.ResumenProductos.uniclick.motivo_c )){
                     $('.u_so_raspval2').show();
                 }*/
+                
+                if (cont_uni_p.ResumenProductos.uniclick.razon_c == '7' && cont_uni_p.ResumenProductos.uniclick.motivo_c == '' ) { //PRODUCTO LEASING
+                    $('.l_so_raspval2').show();
+                }
+                if (cont_uni_p.ResumenProductos.uniclick.razon_c == '10' && cont_uni_p.ResumenProductos.uniclick.motivo_c == '7' ) { //PRODUCTO LEASING
+                    $('.l_so_raspval2').show();
+                }
             }
             if(cont_uni_p.ResumenProductos.uniclick.status_management_c == '1' ){
                 if(cont_uni_p.ResumenProductos.uniclick.deshabilitar_lmedit){
@@ -1929,6 +1960,7 @@
             if($("#list_l_so_razon")[0].value == '7' &&  tipoProducto == '1'){
                 cont_uni_p.carga_usuarios_resp_validacion2(tipoProducto);
                 $('.l_so_raspval2_edit').show();
+                //$('.l_so_raspval2').show();
             }else if(tipoProducto == '1'){
                 $('.l_so_raspval2_edit').hide();
             }
