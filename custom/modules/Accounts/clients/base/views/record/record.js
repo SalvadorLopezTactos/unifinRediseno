@@ -245,11 +245,11 @@
         //Recupera datos para custom fields
 
         this.get_uni_productos();
-		    this.get_phones();
+	    this.get_phones();
         this.get_addresses();
         this.get_v360();
 
-        //this.get_Oproductos();
+        this.get_Oproductos();
         this.get_pld();
         this.get_resumen();
         this.get_analizate();
@@ -5050,6 +5050,7 @@
     get_Oproductos: function () {
         //Extiende This
         this.productos = [];
+        Oproductos = [];
         //contexto_cuenta = this;
 
         //Recupera id de cliente
@@ -5191,6 +5192,7 @@
                 this.get_addresses();
                 this.get_pld();
                 this.get_uni_productos();
+                this.get_Oproductos();
 
             }, this);
 
