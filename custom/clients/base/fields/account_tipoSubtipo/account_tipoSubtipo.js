@@ -70,7 +70,7 @@
             }
             if (subtipoCuenta == 12) {
                 $("#ST2").removeClass('ocult');
-                $('#ST2').addClass('error');
+                $('#ST2').addClass('success');
                 $("#ST2").html("Con Línea");
             }
         }
