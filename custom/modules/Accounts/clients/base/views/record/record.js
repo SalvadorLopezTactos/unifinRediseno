@@ -5050,12 +5050,12 @@
     get_Oproductos: function () {
         //Extiende This
         this.productos = [];
-        Oproductos = [];
+        //Oproductos = [];
         //contexto_cuenta = this;
 
         //Recupera id de cliente
         var id = this.model.id;
-
+        
         //Forma Petición de datos
         if (id != '' && id != undefined && id != null) {
             //Ejecuta petición ResumenCliente
@@ -5069,6 +5069,8 @@
                 }, contexto_cuenta)
             });
         }
+        //Oproductos.render();
+        //this.cuenta_productos.render();
     },
 
     get_resumen: function () {
@@ -5188,12 +5190,15 @@
                 }
                 //Refresca cambios en teléfonos, direcciones y pld(Recupera ids de nuevos teléfonos)
                 //location.reload();
+                this.get_uni_productos();
                 this.get_phones();
                 this.get_addresses();
                 this.get_pld();
-                this.get_uni_productos();
+                /************************************/
+                this.get_resumen();
+                this.get_v360();
                 this.get_Oproductos();
-
+                /***********************************/
             }, this);
 
         //Call editable to turn off key and mouse events before fields are disposed (SP-1873)
