@@ -68,6 +68,11 @@
                 $('#ST2').addClass('error');
                 $("#ST2").html("Rechazado");
             }
+            if (subtipoCuenta == 12) {
+                $("#ST2").removeClass('ocult');
+                $('#ST2').addClass('success');
+                $("#ST2").html("Con Línea");
+            }
         }
 
         if (tipoCuenta == 3) {
