@@ -249,7 +249,7 @@
         this.get_addresses();
         this.get_v360();
 
-        this.get_Oproductos();
+        //this.get_Oproductos();
         this.get_pld();
         this.get_resumen();
         this.get_analizate();
@@ -5059,6 +5059,7 @@
         //Forma Petición de datos
         if (id != '' && id != undefined && id != null) {
             //Ejecuta petición ResumenCliente
+            /*
             var url = app.api.buildURL('tct02_Resumen/' + id, null, null);
             app.api.call('read', url, {}, {
                 success: _.bind(function (data) {
@@ -5067,6 +5068,55 @@
                     //_.extend(this, v360.ResumenCliente);
                     Oproductos.render();
                 }, contexto_cuenta)
+            });
+            */
+            cont_uni_p = this;
+            this.Productos = [];
+            //Recupera información
+            var idCuenta = this.model.get('id');
+            app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + idCuenta), null, {
+                success: function (data) {
+                    Productos = data;
+                    _.each(Productos, function (value, key) {
+                        var tipoProducto = Productos[key].tipo_producto;
+                        switch (tipoProducto) {
+                            case "1": //Leasing
+                                Oproductos.productos.tct_tipo_cuenta_l_c = Productos[key]['tipo_cuenta'];
+                                Oproductos.productos.tct_subtipo_l_txf_c = Productos[key]['subtipo_cuenta'];
+                                break;
+                            case "3": //Credito-auto
+                                Oproductos.productos.tct_tipo_cuenta_ca_c = Productos[key]['tipo_cuenta'];
+                                Oproductos.productos.tct_subtipo_ca_txf_c = Productos[key]['subtipo_cuenta'];
+                                break;
+                            case "4": //Factoraje
+                                Oproductos.productos.tct_tipo_cuenta_f_c = Productos[key]['tipo_cuenta'];
+                                Oproductos.productos.tct_subtipo_f_txf_c = Productos[key]['subtipo_cuenta'];
+                                break;
+                            case "6": //Fleet
+                                Oproductos.productos.tct_tipo_cuenta_fl_c = Productos[key]['tipo_cuenta'];
+                                Oproductos.productos.tct_subtipo_fl_txf_c = Productos[key]['subtipo_cuenta'];
+                                break;
+                            case "8": //Uniclick
+                                Oproductos.productos.tct_tipo_cuenta_uc_c = Productos[key]['tipo_cuenta'];
+                                Oproductos.productos.tct_subtipo_uc_txf_c = Productos[key]['subtipo_cuenta'];
+                                break;
+                            case "9": //Unilease
+                                Oproductos.productos.tct_tipo_cuenta_ul_c = Productos[key]['tipo_cuenta'];
+                                Oproductos.productos.tct_subtipo_ul_txf_c = Productos[key]['subtipo_cuenta'];
+                                break;
+                            case "10": //Seguros
+                                Oproductos.productos.tct_tipo_cuenta_se_c = Productos[key]['tipo_cuenta'];
+                                Oproductos.productos.tct_subtipo_se_txf_c = Productos[key]['subtipo_cuenta'];
+                                break;
+                            default:
+                                break;
+                        }
+                    });
+                    Oproductos.render();
+                },
+                error: function (e) {
+                    throw e;
+                }
             });
         }
         //Oproductos.render();
@@ -5189,7 +5239,7 @@
                     this.render();
                 }
                 //Refresca cambios en teléfonos, direcciones y pld(Recupera ids de nuevos teléfonos)
-                //location.reload();
+                //location.reload();                
                 this.get_uni_productos();
                 this.get_phones();
                 this.get_addresses();
@@ -5714,6 +5764,7 @@
                 cont_uni_p['ResumenProductos'] = ResumenProductos;
 				contexto_cuenta['ResumenProductos'] = ResumenProductos;
                 cont_uni_p.render();
+                Oproductos.render();
             },
             error: function (e) {
                 throw e;
