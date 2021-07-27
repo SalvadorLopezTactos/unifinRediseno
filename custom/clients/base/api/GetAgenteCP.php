@@ -39,7 +39,8 @@ class GetAgenteCP extends SugarApi
             global $db;
             global $current_user;
             $equipoUNICS = $current_user->equipo_c;
-            $new_assigned_user = "";
+            $fechaFin = date('Y-m-d',strtotime('6 weekdays'));  //OBTIENE LA FECHA DE 6 DÍAS HABILES A PARTIR DE LA FECHA ACTUAL
+            // $new_assigned_user = "";
 
             $query = "SELECT value FROM config WHERE name = 'last_assigned_user'";
             $result = $db->query($query);
@@ -59,7 +60,8 @@ class GetAgenteCP extends SugarApi
                 }
 
                 $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
-                $new_assigned_user = $users[$new_indice];           
+                // $new_assigned_user = $users[$new_indice];           
+                $new_assigned_user = ["idAsesor" => $users[$new_indice], "fechaFin" => $fechaFin];
                 
             } 
             

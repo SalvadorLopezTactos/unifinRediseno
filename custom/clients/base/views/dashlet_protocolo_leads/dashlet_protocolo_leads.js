@@ -70,30 +70,18 @@
                     level: 'process',
                     title: 'Procesando',
                 });
-
-                var today = new Date();
-                var n = 6;
-                var day = today.getDay();
-                var daySum = today.getDate() + n + (day === 6 ? 2 : +!day) + (Math.floor((n - 1 + (day % 6 || 1)) / 5) * 2); //Suma 6 días habiles posteriores a fecha de inicio
-                var mm = today.getMonth() + 1;
-                var yyyy = today.getFullYear();
-                var hora = today.getHours();
-
-                if (daySum < 10) { daySum = '0' + daySum }
-                if (mm < 10) { mm = '0' + mm }
-                if (hora < 10) { hora = '0' + hora }
-
-                todayFormat = yyyy + '-' + mm + '-' + daySum + "T" + hora + ":" + "00" + ":" + "00";
-
-                var todayISO = new Date(todayFormat);
-                var fechaFin = todayISO.toISOString(); //Formto toISOString para fecha date_time
-
                 //Obtener los agentes telefónicos disponibles para generarle el registro de tarea
                 // app.api.call("read", app.api.buildURL("GetSiguienteAgenteTel", null, null, {}), null, {
                 app.api.call('GET', app.api.buildURL('GetAgenteCP/'), null, {
                     success: _.bind(function (data) {
-
-                        var idAsesor = data;
+                        var idAsesor = data.idAsesor;
+                        var tmpfechaFin = data.fechaFin; 
+                        var today = new Date();                       
+                        var hora = today.getHours();
+                        if (hora < 10) { hora = '0' + hora }
+                        todayFormat = tmpfechaFin+"T"+hora+":"+"00"+":"+"00";
+                        var todayISO = new Date(todayFormat);
+                        var fechaFin = todayISO.toISOString();  //OBTIENE LA FECHA CON EL FORMATO DATE_TIME
                         var usuario = App.user.get('full_name');
                         var jsonDate = (new Date()).toJSON();
 
@@ -108,7 +96,7 @@
                                 "assigned_user_id": idAsesor,
                                 "description": "Se solicita la asignación de Lead para asesor " + usuario
                             };
-
+                            
                             app.api.call("create", app.api.buildURL("Tasks", null, null, bodyTask), null, {
                                 success: _.bind(function (data) {
                                     console.log("TAREA CREADA CORRECTAMENTE AL ASESOR");
