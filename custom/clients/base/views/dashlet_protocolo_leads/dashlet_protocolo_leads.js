@@ -41,7 +41,7 @@
 
                 var maximo_registros_list = App.lang.getAppListStrings('limite_maximo_asignados_list');
                 var limitePersonal = (App.user.attributes.limite_asignacion_lm_c > 0) ? App.user.attributes.limite_asignacion_lm_c : 0;
-                var maximo_registros = (limitePersonal>0) ? limitePersonal : parseInt(maximo_registros_list["1"]);
+                var maximo_registros = (limitePersonal > 0) ? limitePersonal : parseInt(maximo_registros_list["1"]);
                 self.numero_registros = data.total_asignados;
                 self.limite_asignacion = maximo_registros;
                 if (data.total_asignados < maximo_registros) { //Las opciones de protocolo solo serán visibles cuando el usuario tiene menos de 20 registros asignados
@@ -261,6 +261,13 @@
         var tipo = $(evt.currentTarget).attr('data-type');
         var idProducto = $(evt.currentTarget).attr('data-product');
 
+        var hoy = new Date();
+        var dia = hoy.getDate();
+        var mmes = hoy.getMonth() + 1;
+        var anio = hoy.getFullYear();
+        if (dia < 10) { dia = '0' + dia }
+        if (mmes < 10) { mmes = '0' + mmes }
+        FechaAsignacion = anio + '-' + mmes + '-' + dia;
 
         app.alert.show('confirmActivation', {
             level: 'confirmation',
@@ -281,6 +288,7 @@
                     api_params['status_management_c'] = "1";//Activo
                     api_params['subtipo_registro_c'] = "1";//Sin Contactar
                     api_params['metodo_asignacion_lm_c'] = "4"; //Metodo de Asignación LM - 4.- Reactivación Cancelado / Aplazado
+                    api_params['fecha_asignacion_c'] = FechaAsignacion;
 
                     app.api.call('update', url, api_params, {
                         success: _.bind(function (data) {
@@ -320,7 +328,7 @@
                     api_params['no_viable_porque'] = "";
                     api_params['status_management_c'] = "1";
                     api_params['metodo_asignacion_lm_c'] = "4"; //Metodo de Asignación LM - 4.- Reactivación Cancelado / Aplazado
-
+                    api_params['fecha_asignacion_c'] = FechaAsignacion; 
 
                     app.api.call('update', url, api_params, {
                         success: _.bind(function (data) {
