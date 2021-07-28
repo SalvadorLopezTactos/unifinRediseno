@@ -1869,7 +1869,7 @@
             app.api.call("create", urlValidaDuplicados, params, {
                 success: _.bind(function (data) {
                     App.alert.dismiss('obteniendoDuplicados');
-                    if(data.code=='200'){
+                    if(data.code=='200' && data.registros.length>0){
                         self.duplicados=data.registros;
 
                         //formateando el nivel match
