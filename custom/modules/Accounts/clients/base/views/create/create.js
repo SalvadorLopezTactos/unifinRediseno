@@ -1903,7 +1903,7 @@
                 success: _.bind(function (data) {
                     App.alert.dismiss('obteniendoDuplicados');
                     if(data.code=='200'){
-                        if(!_.isEmpty(data.registros)){
+                        if(data.registros.length>0){
                             self.duplicados=data.registros;
 
                             //formateando el nivel match
