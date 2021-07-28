@@ -1902,8 +1902,7 @@
             app.api.call("create", urlValidaDuplicados, params, {
                 success: _.bind(function (data) {
                     App.alert.dismiss('obteniendoDuplicados');
-                    if(data.code=='200'){
-                        if(data.registros.length>0){
+                    if(data.code=='200'&& data.registros.length>0){
                             self.duplicados=data.registros;
 
                             //formateando el nivel match
@@ -1944,7 +1943,7 @@
                             }
                             /**triggers an event to show the pop up quick create view*/
                             this.layout.trigger("app:view:ValidaDuplicadoAccModal");
-                        }
+                        
                     }
                     
                     callback(null, fields, errors);
