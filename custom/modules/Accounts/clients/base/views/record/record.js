@@ -1456,11 +1456,21 @@
                 var asesorFL = this.model.get('user_id6_c');
                 var asesorUC = this.model.get('user_id7_c');
                 myField2.hide();
-                if (((leasingprod == "5" || leasingprod == "4") && userprod.includes('1') && asesorL == logueado) || ((factprod == "5" || factprod == "4") && userprod.includes("4") && asesorF == logueado) || ((caprod == "5" || caprod == "4") && userprod.includes("3") && asesorCA == logueado) ||
+                //Antes de mostrar el campo, hay que validar si los valores vienen como string "PROVEEDOR" o como número "5"
+                if(isNaN(Number(leasingprod))){//el valor viene como string
+                    if (((leasingprod.toLowerCase() == "proveedor" || leasingprod.toLowerCase() == "persona") && userprod.includes('1') && asesorL == logueado) || ((factprod.toLowerCase() == "proveedor" || factprod.toLowerCase() == "persona") && userprod.includes("4") && asesorF == logueado) || ((caprod.toLowerCase() == "proveedor" || caprod.toLowerCase() == "persona") && userprod.includes("3") && asesorCA == logueado) ||
+                    ((fleetprod.toLowerCase() == "proveedor" || fleetprod.toLowerCase() == "persona") && userprod.includes('6') && asesorFL == logueado) || ((ucprod.toLowerCase() == "proveedor" || ucprod.toLowerCase() == "persona") && userprod.includes('8') && asesorUC == logueado)) {
+                        myField2.show();
+                    } else {
+                        myField2.hide();
+                    }
+                }else{//el valor viene como número
+                    if (((leasingprod == "5" || leasingprod == "4") && userprod.includes('1') && asesorL == logueado) || ((factprod == "5" || factprod == "4") && userprod.includes("4") && asesorF == logueado) || ((caprod == "5" || caprod == "4") && userprod.includes("3") && asesorCA == logueado) ||
                     ((fleetprod == "5" || fleetprod == "4") && userprod.includes('6') && asesorFL == logueado) || ((ucprod == "5" || ucprod == "4") && userprod.includes('8') && asesorUC == logueado)) {
-                    myField2.show();
-                } else {
-                    myField2.hide();
+                        myField2.show();
+                    } else {
+                        myField2.hide();
+                    }
                 }
             });
         }
