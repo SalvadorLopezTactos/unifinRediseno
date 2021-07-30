@@ -701,7 +701,11 @@
         var name_client = this.model.get('name');
         var id_client = this.model.get('id');
         var modulo = 'Leads';
-        var Params = [id_client, name_client, modulo];
+		var posiciones = app.user.attributes.posicion_operativa_c;
+		var posicion = '';
+		if(posiciones.includes(3)) posicion = 'Ventas';
+		if(posiciones.includes(4)) posicion = 'Staff';		
+        var Params = [id_client, name_client, modulo, posicion];
         app.api.call('create', app.api.buildURL('createcall'), { data: Params }, {
             success: _.bind(function (data) {
                 id_call = data;

@@ -41,9 +41,14 @@
                     $beanCall->date_start = $date_start;
                     $beanCall->date_end = $date_end;
                     $beanCall->save();
-                    $GLOBALS['log']->fatal('Se ha modificado llamada:' . $id);
-                    $contador++;
                 }
+				else {
+					$beanCall = BeanFactory::retrieveBean('Calls', $id);
+					$beanCall->description = $beanCall->description . " - Intento no exitoso";
+                    $beanCall->save();
+				}
+				$contador++;
+				$GLOBALS['log']->fatal('Se ha modificado llamada:' . $id);//-----------------
             }
         }
         $GLOBALS['log']->fatal('>>>>>> TERMINA JOB VICIDIAL, llamadas modificadas: '.$contador);
