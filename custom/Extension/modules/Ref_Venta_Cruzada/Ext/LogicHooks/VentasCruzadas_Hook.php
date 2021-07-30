@@ -16,6 +16,14 @@ $hook_array['before_save'][] = Array(
     'validaEquiposAsesores'
 );
 
+$hook_array['before_save'][] = Array(
+    4,
+    'Establece registro en tabla de auditoría dependiendo de la plataforma proveniento de los servicios de Referencia Bancaria',
+    'custom/modules/Ref_Venta_Cruzada/Ref_VtaCruzada_platform.php',
+    'Ref_VtaCruzada_platform_user',
+    'set_audit_user_platform'
+);
+
 $hook_array['after_save'][] = Array(
     3,
     'Envio de notificaciones para referencias válidas y canceladas',
