@@ -1218,7 +1218,7 @@ where rfc_c = '{$bean->rfc_c}' and
             $etitipo = $tipo[$bean->tipo_registro_cuenta_c];
             $etisubtipo = $subtipo[$bean->subtipo_registro_cuenta_c];
             //OBTIENE EL CHECK DE ALTA CLIENTE DEL USUARIO LOGEADO
-            $bean_user = BeanFactory::retrieveBean('Users', $bean->created_by, array('disable_row_level_security' => true));
+            $bean_user = BeanFactory::retrieveBean('Users', $current_user->id, array('disable_row_level_security' => true));
             if (!empty($bean_user)) {
                 $user_alta_clientes = $bean_user->tct_alta_clientes_chk_c;
             }
