@@ -15,7 +15,7 @@ class clase_UniProducto
         $actualizaFleet = false;
         $actualizaUniclick = false;
 
-        $GLOBALS['log']->fatal("bean->",$bean->account_uni_productos);
+        // $GLOBALS['log']->fatal("bean->",$bean->account_uni_productos);
 
         if ($GLOBALS['service']->platform != 'mobile') {
             $uniProducto = $bean->account_uni_productos;
@@ -38,7 +38,7 @@ class clase_UniProducto
                         $beanUP->canal_c = $key['canal_c'] != "" ? $key['canal_c'] : "";
                         $beanUP->multilinea_c = $key['multilinea_c'];
 
-                        $GLOBALS['log']->fatal("bean->".$beanUP->rechaza_noviable);
+                        // $GLOBALS['log']->fatal("bean->".$beanUP->rechaza_noviable);
                         if(($beanUP->status_management_c != $key['status_management_c']) && ($beanUP->tipo_producto == $key['tipo_producto']) && $beanUP->tipo_producto == '1'){
                             $actualizaLeasing = true;
                             $beanUP->notificacion_noviable_c = $key['notificacion_noviable_c']; 
