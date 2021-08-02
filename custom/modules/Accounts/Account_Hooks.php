@@ -1258,6 +1258,7 @@ where rfc_c = '{$bean->rfc_c}' and
                 if ($user_alta_clientes == true) {        
                     if ($key_productos[$i] != '1') { //SI ES DIFERENTE DEL PRODUCTO LEASING
                         $beanprod->tipo_cuenta = "4"; //4-Persona
+                        $beanprod->subtipo_cuenta = ""; //Vacio
                         $beanprod->tipo_subtipo_cuenta = "PERSONA";
                     
                     } else {
