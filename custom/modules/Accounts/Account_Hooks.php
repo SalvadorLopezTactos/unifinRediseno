@@ -1217,6 +1217,12 @@ where rfc_c = '{$bean->rfc_c}' and
             $subtipo = $app_list_strings['subtipo_registro_cuenta_list'];
             $etitipo = $tipo[$bean->tipo_registro_cuenta_c];
             $etisubtipo = $subtipo[$bean->subtipo_registro_cuenta_c];
+            //OBTIENE EL CHECK DE ALTA CLIENTE DEL USUARIO LOGEADO
+            $bean_user = BeanFactory::retrieveBean('Users', $bean->created_by, array('disable_row_level_security' => true));
+            if (!empty($bean_user)) {
+                $user_alta_clientes = $bean_user->tct_alta_clientes_chk_c;
+            }
+            
             for ($i = 0; $i < $count; $i++) {
                 //$GLOBALS['log']->fatal($current_prod);
                 $beanprod = BeanFactory::newBean($module);
@@ -1248,6 +1254,20 @@ where rfc_c = '{$bean->rfc_c}' and
                       where id_c = '{$bean->id}'";
                     $updateExecute = $db->query($update);
                 }
+                //CASO ESPECIAL DE USUARIOS CON EL CHECK ACTIVO DE ALTA CLIENTES
+                if ($user_alta_clientes == true) {        
+                    if ($key_productos[$i] != '1') { //SI ES DIFERENTE DEL PRODUCTO LEASING
+                        $beanprod->tipo_cuenta = "4"; //4-Persona
+                        $beanprod->tipo_subtipo_cuenta = "PERSONA";
+                    
+                    } else {
+                        //SI ES PRODUCTO LEASING
+                        $beanprod->tipo_cuenta = "3"; //3-Cliente
+                        $beanprod->subtipo_cuenta = "11"; //11-Venta Activo
+                        $beanprod->tipo_subtipo_cuenta = "CLIENTE VENTA ACTIVO";
+                    }                                        
+                }
+
                 //Asignación de usuario
                 switch ($key_productos[$i]) {
                     case '1': //Leasing
@@ -1522,7 +1542,7 @@ where rfc_c = '{$bean->rfc_c}' and
 
     public function enviarNotificacionErrorMambu($asunto,$cuerpoCorreo,$correos,$nombreUsuario){
         //Enviando correo a asesor origen
-        $GLOBALS['log']->fatal("ENVIANDO CORREO DE ERROR MAMBU A :".$correo);
+        $GLOBALS['log']->fatal("ENVIANDO CORREO DE ERROR MAMBU A :".$correos);
         $insert = '';
         $hoy = date("Y-m-d H:i:s");
         try{
