@@ -19,3 +19,10 @@ $hook_array['before_save'][] = Array(
     'Drive_docs', // name of the class
     'actualizatipoprod' // name of the function.
 );
+$hook_array['before_save'][] = Array(
+    4,
+    'Establece registro en tabla de auditoría dependiendo de la plataforma proveniento de los servicios de Seguros',
+    'custom/modules/S_seguros/Seguros_platform.php',
+    'Seguros_platform_user',
+    'set_audit_user_platform'
+);
