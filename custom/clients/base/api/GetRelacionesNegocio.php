@@ -9,7 +9,7 @@ class GetRelacionesNegocio extends SugarApi
         return array(
             'GETProductosAPI' => array(
                 'reqType' => 'GET',
-                'noLoginRequired' => true,
+                'noLoginRequired' => false,
                 'path' => array('GetRelacionesNegocio', '?' ),
                 'pathVars' => array('module', 'id' ),
                 'method' => 'getRelRelaciones',
