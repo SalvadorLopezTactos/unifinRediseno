@@ -57,36 +57,46 @@ class GetRelacionesNegocio extends SugarApi
             
             //$GLOBALS['log']->fatal("query++ ", $query);
             $result = $GLOBALS['db']->query($query);
-            $valortr = false;
+            $valortr = 0;
+            $para = 0;
             if($condiciones){
                 while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
-                    $datajs = json_decode ($row['relacionesProducto']);
-                    $datajs = $datajs[0];
-                    $GLOBALS['log']->fatal("datajs++ ", $datajs);
-                    foreach ($datajs as $claved => $valord) {
-                        foreach ($args as $clave => $valor) {                
-                            //$GLOBALS['log']->fatal("clave++ ". $claved."-".$clave);
-                            if ($claved == $clave) {
-                                $resultado = str_replace("^", "", $valor);
-                                $aux  = explode(",", $resultado);
-                                //$GLOBALS['log']->fatal("aux++ ", $aux);
-                                foreach ($aux as $dataex) {
-                                    
-                                    //$GLOBALS['log']->fatal("contains++ ". strpos(strval($valord), strval($dataex)));
-                                        if(strpos(strval($valord), strval($dataex)) !== false ){
-                                            $GLOBALS['log']->fatal("dataex++ ". $dataex);                                            
-                                            $valortr = true;
+                    $datatotal = json_decode ($row['relacionesProducto']);
+                    //$GLOBALS['log']->fatal("datajs ", $datajs);
+                    $GLOBALS['log']->fatal("datatotal: ", $datatotal);
+                    foreach ($args as $clave => $valor) {
+                        if ($clave != '__sugar_url' && $clave != 'module' && $clave != 'id') {    
+                            $para ++;
+                            foreach ($datatotal as $reg => $data) {  
+                                $datajs = $data;
+                                //$GLOBALS['log']->fatal("datajs++ ", $datajs);
+                                foreach ($datajs as $claved => $valord) {  
+                                     
+                                    if ($claved == $clave) {
+                                        //$GLOBALS['log']->fatal("clave: ". $clave.'--'.$valor);
+                                        $resultado = str_replace("^", "", $valor);
+                                        $aux  = explode(",", $resultado);
+                                        foreach ($aux as $dataex) {
+                                            //$GLOBALS['log']->fatal("aux++ ". $dataex.'-'.$valord);
+                                            if(strpos(strval($valord), strval($dataex)) !== false ){
+                                                //$GLOBALS['log']->fatal("dataex++ ". $dataex);                                            
+                                                $valortr ++;
+                                            }
                                         }
-                                }
-                                if($valortr){
-                                    $mensajeData = true;
-                                    $records_in[] = $row;
-                                    $valortr = false;
+                                    }
                                 }
                             }
                         }
                     }
-             }
+                    //$GLOBALS['log']->fatal("grupi++ ". $valortr.'--'.$para);
+                    if($valortr >= $para && $valortr > 0){
+                        $mensajeData = true;
+                        $records_in[] = $row;
+                    }
+                    $para=0;
+                    $valortr = 0;
+                }
+                //$records_in = unique_multidim_array($records_in,'idCuenta');
             }else{
                 while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                     $records_in[] = $row;
@@ -110,5 +120,20 @@ class GetRelacionesNegocio extends SugarApi
 
             $GLOBALS['log']->fatal("Error: " . $e->getMessage());
         }
+    }
+
+    function unique_multidim_array($array, $key) {
+        $temp_array = array();
+        $i = 0;
+        $key_array = array();
+       
+        foreach($array as $val) {
+            if (!in_array($val[$key], $key_array)) {
+                $key_array[$i] = $val[$key];
+                $temp_array[$i] = $val;
+            }
+            $i++;
+        }
+        return $temp_array;
     }
 }
