@@ -1869,47 +1869,49 @@
             app.api.call("create", urlValidaDuplicados, params, {
                 success: _.bind(function (data) {
                     App.alert.dismiss('obteniendoDuplicados');
-                    if(data.code=='200' && data.registros.length>0){
-                        self.duplicados=data.registros;
+                    if(data.code=='200'){
+                        if(!_.isEmpty(data.registros)){
+                            self.duplicados=data.registros;
 
-                        //formateando el nivel match
-                        for (var property in self.duplicados) {
-                            self.duplicados[property].coincidencia= self.duplicados[property].coincidencia;
-                        }
-                        errors['modal_duplicadosacc'] = errors['modal_duplicadosacc'] || {};
-                        errors['modal_duplicadosacc'].custom_message1 = true;
+                            //formateando el nivel match
+                            for (var property in self.duplicados) {
+                                self.duplicados[property].coincidencia= self.duplicados[property].coincidencia;
+                            }
+                            errors['modal_duplicadosacc'] = errors['modal_duplicadosacc'] || {};
+                            errors['modal_duplicadosacc'].custom_message1 = true;
 
-                        app.alert.show("posibles_coincidencias_acc", {
-                            level: "error",
-                            title: "Se han identificado posibles duplicados. Favor de validar",
-                            autoClose: false
-                        });
-
-                        //Mandamos a llamar el popup custom
-                        if (Modernizr.touch) {
-                            app.$contentEl.addClass('content-overflow-visible');
-                        }
-                        /**check whether the view already exists in the layout.
-                         * If not we will create a new view and will add to the components list of the record layout
-                         * */
-                
-                        var quickCreateView = null;
-                        if (!quickCreateView) {
-                            /** Create a new view object */
-                            quickCreateView = app.view.createView({
-                                context: this.context,
-                                errors:errors,
-                                registros:self.duplicados,
-                                name: 'ValidaDuplicadoAccModal',
-                                layout: this.layout,
-                                module: 'Accounts'
+                            app.alert.show("posibles_coincidencias_acc", {
+                                level: "error",
+                                title: "Se han identificado posibles duplicados. Favor de validar",
+                                autoClose: false
                             });
-                            /** add the new view to the components list of the record layout*/
-                            this.layout._components.push(quickCreateView);
-                            this.layout.$el.append(quickCreateView.$el);
+
+                            //Mandamos a llamar el popup custom
+                            if (Modernizr.touch) {
+                                app.$contentEl.addClass('content-overflow-visible');
+                            }
+                            /**check whether the view already exists in the layout.
+                             * If not we will create a new view and will add to the components list of the record layout
+                             * */
+                
+                            var quickCreateView = null;
+                            if (!quickCreateView) {
+                                /** Create a new view object */
+                                quickCreateView = app.view.createView({
+                                    context: this.context,
+                                    errors:errors,
+                                    registros:self.duplicados,
+                                    name: 'ValidaDuplicadoAccModal',
+                                    layout: this.layout,
+                                    module: 'Accounts'
+                                });
+                                /** add the new view to the components list of the record layout*/
+                                this.layout._components.push(quickCreateView);
+                                this.layout.$el.append(quickCreateView.$el);
+                            }
+                            /**triggers an event to show the pop up quick create view*/
+                            this.layout.trigger("app:view:ValidaDuplicadoAccModal");
                         }
-                        /**triggers an event to show the pop up quick create view*/
-                        this.layout.trigger("app:view:ValidaDuplicadoAccModal");
                     }
                     
                     callback(null, fields, errors);
