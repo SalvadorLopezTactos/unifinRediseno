@@ -20,7 +20,7 @@ class GetRelacionesNegocio extends SugarApi
     public function getRelRelaciones($api, $args)
     {
         try {
-            //$GLOBALS['log']->fatal("args ",$args);
+            ////$GLOBALS['log']->fatal("args ",$args);
             $id = $args['id'];
             
             $records_in = [];
@@ -49,51 +49,71 @@ class GetRelacionesNegocio extends SugarApi
             WHERE ra.rel_relaciones_accounts_1accounts_ida='{$id}'";
             
             $condiciones = false;
+            $para = 0;
             foreach ($args as $clave => $valor) {                
                 if ($clave != '__sugar_url' && $clave != 'module' && $clave != 'id') {
                     $condiciones = true;
+                    $para ++;
                 }
             }
             
-            //$GLOBALS['log']->fatal("query++ ", $query);
+            ////$GLOBALS['log']->fatal("query++ ", $query);
+            //$GLOBALS['log']->fatal("para++ ", $para);
             $result = $GLOBALS['db']->query($query);
             $valortr = 0;
-            $para = 0;
+            $valok = 0;
+            $para1 = 0;
+            $auxrel = [];
+            $relactivax = "";
+            $arrelstr = "";
             if($condiciones){
                 while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                     $datatotal = json_decode ($row['relacionesProducto']);
-                    //$GLOBALS['log']->fatal("datajs ", $datajs);
-                    $GLOBALS['log']->fatal("datatotal: ", $datatotal);
-                    foreach ($args as $clave => $valor) {
-                        if ($clave != '__sugar_url' && $clave != 'module' && $clave != 'id') {    
-                            $para ++;
-                            foreach ($datatotal as $reg => $data) {  
-                                $datajs = $data;
-                                //$GLOBALS['log']->fatal("datajs++ ", $datajs);
+                    ////$GLOBALS['log']->fatal("datajs ", $datajs);
+                    //$GLOBALS['log']->fatal("datatotal: ", $datatotal);
+                    foreach ($datatotal as $reg => $data) {  
+                        $datajs = $data;
+                        //$GLOBALS['log']->fatal("datajs++ ", $datajs);
+                        foreach ($args as $clave => $valor) {
+                            if ($clave != '__sugar_url' && $clave != 'module' && $clave != 'id') {    
+                                $para1 ++;
                                 foreach ($datajs as $claved => $valord) {  
-                                     
+                                    if($claved == 'rel'){
+                                        $relactivax = $valord;
+                                        //$GLOBALS['log']->fatal("relactivax++ ", $relactivax);
+                                    }
                                     if ($claved == $clave) {
                                         //$GLOBALS['log']->fatal("clave: ". $clave.'--'.$valor);
                                         $resultado = str_replace("^", "", $valor);
                                         $aux  = explode(",", $resultado);
                                         foreach ($aux as $dataex) {
-                                            //$GLOBALS['log']->fatal("aux++ ". $dataex.'-'.$valord);
                                             if(strpos(strval($valord), strval($dataex)) !== false ){
-                                                //$GLOBALS['log']->fatal("dataex++ ". $dataex);                                            
+                                                //$GLOBALS['log']->fatal("aux++ ". $dataex.'-'.$valord);
                                                 $valortr ++;
+                                                $valok ++;
                                             }
                                         }
                                     }
                                 }
                             }
                         }
+                        //$GLOBALS['log']->fatal("coincidencias1: ". $valok.'-'.$para1);
+                        if($valok >= $para1 && $valok > 0){
+                            array_push($auxrel , $relactivax );
+                        }
+                        $para1 = 0;
+                        $valok = 0;
                     }
                     //$GLOBALS['log']->fatal("grupi++ ". $valortr.'--'.$para);
+                    //$GLOBALS['log']->fatal("auxrel: ", $auxrel);
                     if($valortr >= $para && $valortr > 0){
                         $mensajeData = true;
+                        $arrelstr = implode("^,^", $auxrel);
+                        $arrelstr = '^' . $arrelstr . '^';
+                        //$GLOBALS['log']->fatal("arrelstr: ", $arrelstr);
+                        $row['relacionesActivas'] = $arrelstr;
                         $records_in[] = $row;
                     }
-                    $para=0;
                     $valortr = 0;
                 }
                 //$records_in = unique_multidim_array($records_in,'idCuenta');
@@ -105,7 +125,7 @@ class GetRelacionesNegocio extends SugarApi
             }
             
 
-            //$GLOBALS['log']->fatal("records_in ",$records_in);
+            ////$GLOBALS['log']->fatal("records_in ",$records_in);
             if ($mensajeData) {
                 return $records_in;
             } else {
@@ -118,7 +138,7 @@ class GetRelacionesNegocio extends SugarApi
 
         } catch (Exception $e) {
 
-            $GLOBALS['log']->fatal("Error: " . $e->getMessage());
+            //$GLOBALS['log']->fatal("Error: " . $e->getMessage());
         }
     }
 
