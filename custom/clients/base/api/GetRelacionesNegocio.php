@@ -66,6 +66,7 @@ class GetRelacionesNegocio extends SugarApi
             $auxrel = [];
             $relactivax = "";
             $arrelstr = "";
+            $coincide = false;
             if($condiciones){
                 while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
                     $datatotal = json_decode ($row['relacionesProducto']);
@@ -87,10 +88,14 @@ class GetRelacionesNegocio extends SugarApi
                                         $resultado = str_replace("^", "", $valor);
                                         $aux  = explode(",", $resultado);
                                         foreach ($aux as $dataex) {
-                                            if(strpos(strval($valord), strval($dataex)) !== false ){
-                                                //$GLOBALS['log']->fatal("aux++ ". $dataex.'-'.$valord);
-                                                $valortr ++;
-                                                $valok ++;
+                                            $resultadox = str_replace("^", "", $valord);
+                                            $auxx  = explode(",", $resultadox);
+                                            foreach ($auxx as $datacompare) {
+                                                //$GLOBALS['log']->fatal("aux++ ". $dataex.'-'.$datacompare);
+                                                if($datacompare == $dataex){
+                                                    $valortr ++;
+                                                    $valok ++;
+                                                }
                                             }
                                         }
                                     }
@@ -100,19 +105,23 @@ class GetRelacionesNegocio extends SugarApi
                         //$GLOBALS['log']->fatal("coincidencias1: ". $valok.'-'.$para1);
                         if($valok >= $para1 && $valok > 0){
                             array_push($auxrel , $relactivax );
+                            $coincide = true;
                         }
                         $para1 = 0;
                         $valok = 0;
                     }
                     //$GLOBALS['log']->fatal("grupi++ ". $valortr.'--'.$para);
                     //$GLOBALS['log']->fatal("auxrel: ", $auxrel);
-                    if($valortr >= $para && $valortr > 0){
+                    //if($valortr >= $para && $valortr > 0){
+                    if($coincide){
                         $mensajeData = true;
                         $arrelstr = implode("^,^", $auxrel);
                         $arrelstr = '^' . $arrelstr . '^';
                         //$GLOBALS['log']->fatal("arrelstr: ", $arrelstr);
                         $row['relacionesActivas'] = $arrelstr;
                         $records_in[] = $row;
+                        $auxrel = [];
+                        $coincide = false;
                     }
                     $valortr = 0;
                 }
