@@ -35,7 +35,11 @@ class cleanName extends SugarApi
         $GLOBALS['log']->fatal('getCleanName::Init');
         ############################
         ## Declara atributos para procesamiento
-        $names = $args['names'];          //lista de nombres
+        if(isset($args['names'])){
+            $names = $args['names']; 
+        }else{
+            $names="";
+        }
         $name = $args['name'];            //Nombre por procesar
         $mode = (empty($names))?'1':'n';  //Modo de procesamiento; 1 sólo nombre, múltiples nombres
 
