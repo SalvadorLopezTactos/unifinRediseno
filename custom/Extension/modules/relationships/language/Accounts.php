@@ -22,3 +22,5 @@ $mod_strings['LBL_ACCOUNTS_REF_VENTA_CRUZADA_2_FROM_REF_VENTA_CRUZADA_TITLE'] = 
 $mod_strings['LBL_ACCOUNTS_REF_VENTA_CRUZADA_2_FROM_ACCOUNTS_TITLE'] = 'Referencias Vtas Cruzadas';
 $mod_strings['LBL_ACCOUNTS_LIC_LICITACIONES_1_FROM_LIC_LICITACIONES_TITLE'] = 'Licitaciones';
 $mod_strings['LBL_ACCOUNTS_LIC_LICITACIONES_1_FROM_ACCOUNTS_TITLE'] = 'Licitaciones';
+$mod_strings['LBL_ACCOUNTS_CALLS_1_FROM_CALLS_TITLE'] = 'Llamadas Relacionadas';
+$mod_strings['LBL_ACCOUNTS_CALLS_1_FROM_ACCOUNTS_TITLE'] = 'Llamadas Relacionadas';

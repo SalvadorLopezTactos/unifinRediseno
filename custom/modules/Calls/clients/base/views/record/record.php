@@ -92,7 +92,7 @@ array (
               array (
                 'type' => 'divider',
               ),
-              8 =>
+              8 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:delete_button:click',
@@ -395,6 +395,8 @@ array (
               ),
               18 => 
               array (
+                'name' => 'padres_c',
+                'label' => 'LBL_PADRES',
               ),
               19 => 
               array (
@@ -434,7 +436,24 @@ array (
                 'name' => 'lic_licitaciones_calls_1_name',
                 'label' => 'LBL_LIC_LICITACIONES_CALLS_1_FROM_LIC_LICITACIONES_TITLE',
                 'readonly' => true,
-                'span' => 12,
+              ),
+              26 => 
+              array (
+                'name' => 'accounts_calls_1_name',
+              ),
+              27 => 
+              array (
+                'name' => 'leads_calls_1_name',
+              ),
+              28 => 
+              array (
+                'name' => 'tct_call_issabel_c',
+                'label' => 'LBL_TCT_CALL_ISSABEL_C',
+              ),
+              29 => 
+              array (
+                'name' => 'tct_call_from_issabel_c',
+                'label' => 'LBL_TCT_CALL_FROM_ISSABEL_C',
               ),
             ),
           ),

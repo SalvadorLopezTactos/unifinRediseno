@@ -19,9 +19,8 @@
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         this.on('render', this.hidePErsonaEdit, this);
         this.model.addValidationTask('validaRelLeadCall', _.bind(this.validaRelLeadCall, this));
-
+		this.on('render', this.hideLlamadas, this);
         this.omiteLlamadaPreventiva();
-        
     },
 
     abre: function () {
@@ -355,4 +354,13 @@
         }
     },
 
+    hideLlamadas: function()
+    {
+		this.$('div[data-name="padres_c"]').hide();
+        this.$('div[data-name="accounts_calls_1_name"]').hide();
+        this.$('div[data-name="leads_calls_1_name"]').hide();
+		this.$('div[data-name="tct_call_issabel_c"]').hide();
+		this.$('div[data-name="tct_call_from_issabel_c"]').hide();
+		if (this.model.get('tct_call_issabel_c') || this.model.get('tct_call_from_issabel_c')) this.$('div[data-name="padres_c"]').show();
+    },
 })

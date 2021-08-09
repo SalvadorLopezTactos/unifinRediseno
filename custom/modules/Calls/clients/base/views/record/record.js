@@ -12,7 +12,7 @@
     initialize: function (options) {
       	var createViewEvents = {};
         createViewEvents['focus [data-name=campana_rel_c]'] = 'abre';
-	      this.events = _.extend({}, this.events, createViewEvents);
+	    this.events = _.extend({}, this.events, createViewEvents);
         self = this;
         this._super("initialize", [options]);
         this.on('render', this.disableparentsfields, this);
@@ -25,6 +25,7 @@
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial2Call, this));
         this.model.addValidationTask('VaildaConferencia', _.bind(this.validaConferencia, this));
+		this.model.addValidationTask('VaildaPadres', _.bind(this.validaPadres, this));
 
         /*****************************************/
         //this.model.addValidationTask('valida_requeridos_Leads',_.bind(this.valida_requeridos_Leads, this));
@@ -43,7 +44,9 @@
         this.model.on('sync', this.hidePErsonaEdit, this);
         this.model.on('sync', this.campanas, this);
         this.model.on('sync', this._disableDepResultCall, this);
+		this.model.on('sync', this.hideLlamadas, this);
         this.model.on('change:evento_campana_c', this.enableRelECamp, this);
+		this.model.on('change:padres_c', this.llenaLlamada, this);
 
         this.model.addValidationTask('resultCallReq', _.bind(this.resultCallRequerido, this));
         // this.events['click a[name=edit_button]'] = 'fechascallsymeet';
@@ -1015,10 +1018,8 @@
     },
 
     omiteLlamadaPreventiva:function(){
-
         var nueva_lista_resultado = app.lang.getAppListStrings('tct_resultado_llamada_ddw_list');
         var producto=App.user.attributes.tipodeproducto_c;
-
         //Valor 8 - Uniclick,Solo se muestra el valor de Llamada preventiva cuando el usuario tenga en su perfil el producto Uniclick
         if (producto!='8') {
             Object.keys(nueva_lista_resultado).forEach(function (key) {
@@ -1027,8 +1028,29 @@
                 }
             });
         }
-
         this.model.fields['tct_resultado_llamada_ddw_c'].options = nueva_lista_resultado;
+    },
 
-    }
+    hideLlamadas: function()
+    {
+		this.$('div[data-name="padres_c"]').hide();
+        this.$('div[data-name="accounts_calls_1_name"]').hide();
+        this.$('div[data-name="leads_calls_1_name"]').hide();
+		this.$('div[data-name="tct_call_issabel_c"]').hide();
+		this.$('div[data-name="tct_call_from_issabel_c"]').hide();
+		if (this.model.get('tct_call_issabel_c') || this.model.get('tct_call_from_issabel_c')) this.$('div[data-name="padres_c"]').show();
+    },
+	
+	llenaLlamada:function(){
+		if(this.model.get('parent_type') == "Accounts") this.model.set('accounts_calls_1accounts_ida', this.model.get('padres_c'));
+		if(this.model.get('parent_type') == "Leads") this.model.set('leads_calls_1leads_ida', this.model.get('padres_c'));
+    },
+
+    validaPadres: function (fields, errors, callback) {
+        if ((this.model.get('tct_call_issabel_c') || this.model.get('tct_call_from_issabel_c')) && this.model.get('padres_c') == '' && window.padres > 0) {
+            errors['padres_c'] = errors['padres_c'] || {};
+            errors['padres_c'].required = true;
+        }
+        callback(null, fields, errors);
+    },
 })
