@@ -171,6 +171,8 @@
         this.model.on('change:negocio_c', this.verificaOperacionProspecto, this);
         this.model.on('change:producto_financiero_c', this.asesorCCP, this);
         this.adminUserCartera();
+        
+        this.model.addValidationTask('dataOrigen',_.bind(this.dataOrigen, this));
     },
 
    /* producto_financiero: function () {
@@ -428,7 +430,44 @@
             this.model.set('admin_cartera_c', true);
         }
     },
+        
+    dataOrigen: function (fields, errors, callback) {
+        var userprodprin = this.model.get('tipo_producto_c');
+        app.api.call('GET', app.api.buildURL('Accounts/' + this.model.get('account_id')), null, {
+            success: _.bind(function (cuenta) {
 
+                app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + cuenta.id), null, {
+                    success: function (data) {
+                        Productos = data;
+                        //ResumenProductos = Productos;
+                        //estatus_atencion - tipo_producto_c
+                        _.each(Productos, function (value, key) {
+                            var tipoProducto = Productos[key].tipo_producto;
+                            var statusProducto = Productos[key].status_management_c;
+                            if(tipoProducto == userprodprin && statusProducto == '3'){
+                                
+                                textmsg = 'La cuenta está marcada como <b>Cancelada</b>. Active la cuenta para continuar.';
+                                tipom = "error";
+                                
+                                App.alert.show("producto_cancelado", {
+                                    level: tipom,
+                                    messages: textmsg,
+                                    autoClose: false
+                                });
+                                //errors['tipo_producto_c'] = "No puedes generar factoraje para Personas F&iacute;sicas";
+                                errors['tipo_producto_c'].required = true;
+                                /****************************************/
+                            }
+                        });
+                    },
+                        error: function (e) {
+                            throw e;
+                        }
+                    });
+
+            }, self),
+        });
+    },
 
     /*
     *Victor Martinez Lopez
@@ -2315,4 +2354,5 @@
         }
 
     }
+
 })
