@@ -455,7 +455,7 @@
                                     autoClose: false
                                 });
                                 //errors['tipo_producto_c'] = "No puedes generar factoraje para Personas F&iacute;sicas";
-                                errors['tipo_producto_c'].required = true;
+                                //errors['tipo_producto_c'].required = true;
                                 /****************************************/
                             }
                         });
