@@ -4736,13 +4736,17 @@
 			app.api.call('read', url, {}, {
 				success: _.bind(function (data) {
 					if (data.bloqueo_cartera_c || data.bloqueo2_c || data.bloqueo3_c) {
+						var equipo = '';
+						if(data.bloqueo_cartera_c) equipo = 'Cartera<br>';
+						if(data.bloqueo2_c) equipo = equipo + 'Crédito<br>';
+						if(data.bloqueo3_c) equipo = equipo + 'Cumplimiento';
 						//Bloquear el registro completo y mostrar alerta
 						$('.record.tab-layout').attr('style', 'pointer-events:none');
 						$('.subpanel').attr('style', 'pointer-events:none');
 						app.alert.show("cuentas_no_contactar", {
 							level: "error",
 							title: "Cuenta No Contactable<br>",
-							messages: "Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+							messages: "Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de "+equipo+"</b>",
 							autoClose: false
 						});
 					}
