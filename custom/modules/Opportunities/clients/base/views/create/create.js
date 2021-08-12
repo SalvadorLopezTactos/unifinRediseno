@@ -433,6 +433,9 @@
         
     dataOrigen: function (fields, errors, callback) {
         var userprodprin = this.model.get('tipo_producto_c');
+        var textmsg = "";
+        var tipom = "";
+
         app.api.call('GET', app.api.buildURL('Accounts/' + this.model.get('account_id')), null, {
             success: _.bind(function (cuenta) {
 
@@ -444,26 +447,25 @@
                         _.each(Productos, function (value, key) {
                             var tipoProducto = Productos[key].tipo_producto;
                             var statusProducto = Productos[key].status_management_c;
-                            if(tipoProducto == userprodprin && statusProducto == '3'){
-                                
+                            if(tipoProducto == userprodprin && statusProducto == '3'){                                
                                 textmsg = 'La cuenta está marcada como <b>Cancelada</b>. Active la cuenta para continuar.';
                                 tipom = "error";
-                                
-                                App.alert.show("producto_cancelado", {
-                                    level: tipom,
-                                    messages: textmsg,
-                                    autoClose: false
-                                });
-                                //errors['tipo_producto_c'] = "No puedes generar factoraje para Personas F&iacute;sicas";
-                                //errors['tipo_producto_c'].required = true;
-                                /****************************************/
                             }
                         });
+                        if(textmsg != ""){      
+                            App.alert.show("producto_cancelado", {
+                                level: tipom,
+                                messages: textmsg,
+                                autoClose: false
+                            });
+                            errors['tipo_producto_c'] = "cuenta cancelada";
+                            errors['tipo_producto_c'].required = true;
+                            /****************************************/
+                        }
                         callback(null, fields, errors);
                     },
                         error: function (e) {
                             throw e;
-                            callback(null, fields, errors);
                         }
                     });
 
