@@ -458,10 +458,12 @@
                                 //errors['tipo_producto_c'].required = true;
                                 /****************************************/
                             }
+                            callback(null, fields, errors);
                         });
                     },
                         error: function (e) {
                             throw e;
+                            callback(null, fields, errors);
                         }
                     });
 
