@@ -174,8 +174,13 @@ class altaLeadServices extends SugarApi
         $horaDia = $array_date[1] . ":" . $array_date[2];
         $dateInput = date('H:i', strtotime($horaDia));
 
+        //$GLOBALS['log']->fatal("compania_c " . $compania_c);
         /* Obtiene el ultimo  usuario asignado y registrado en el config*/
-        $query = "SELECT value from config  where name='last_assigned_user'";
+        $query = "SELECT value from config  ";
+        if($compania_c == '1'){ $query = $query . "WHERE name='last_assigned_user_unifin'"; }
+        if($compania_c == '2'){ $query = $query . "WHERE name='last_assigned_user_uniclick'"; }
+        //$GLOBALS['log']->fatal("query " . $query);
+
         $result = $db->query($query);
         $row = $db->fetchByAssoc($result);
         $last_indice = $row['value'];
@@ -183,6 +188,7 @@ class altaLeadServices extends SugarApi
         //VALIDACION DE REVISTA MEDICA
         if ($id_landing_c != 'LP Revista Médica' && $id_landing_c != 'LP REVISTA MÉDICA') {
 
+            //$GLOBALS['log']->fatal("id_landing_c "  , $id_landing_c);
             if( strpos(strtoupper($id_landing_c), 'INSURANCE') !== false){
                 $subpuesto_c = 5;
             }else{
@@ -203,14 +209,17 @@ class altaLeadServices extends SugarApi
             where puestousuario_c='27' AND user.status = 'Active' AND subpuesto_c='$subpuesto_c'
             GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC";
 
+            //$GLOBALS['log']->fatal("query_asesores "  , $query_asesores);
             $result_usr = $db->query($query_asesores);
             //$usuarios=;
+            //$GLOBALS['log']->fatal("result_usr "  , $result_usr);
             while ($row = $db->fetchByAssoc($result_usr)) {
                 $hours = json_decode($row['access_hours_c'], true);
                 $hoursIn = !empty($hours) ? $hours[$dia_semana]['entrada'] : "";
                 $hoursComida = !empty($hours) ? $hours[$dia_semana]['comida'] : "";
                 $hoursRegreso = !empty($hours) ? $hours[$dia_semana]['regreso'] : "";
                 $hoursOut = !empty($hours) ? $hours[$dia_semana]['salida'] : "";
+                //$GLOBALS['log']->fatal("hoursIn" , $hoursIn);
                 if ($hoursIn != "" && $hoursOut != "") {
                     if (($hoursIn != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursOut != "Libre")) {
                         $enable = $this->accessHours($hoursIn, $hoursComida, $hoursRegreso, $hoursOut, $dateInput);
@@ -225,7 +234,6 @@ class altaLeadServices extends SugarApi
                 }*/
             }
             //$GLOBALS['log']->fatal("Usuarios MKT en servicio alta Leads  " . print_r($users, true));
-
             if (count($users) > 0) {
                 $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
                 $new_assigned_user = $users[$new_indice];
@@ -275,7 +283,9 @@ class altaLeadServices extends SugarApi
                 $GLOBALS['log']->fatal("Usuarios MKT en servicio alta Indice  " . $new_indice);
 
                 if ( $new_indice > -1 ) {
-                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
+                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' " ;
+                    if($compania_c == '1'){ $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_unifin'"; }
+                    if($compania_c == '2'){ $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_uniclick'"; }
                     $db->query($update_assigne_user);
                 }
             }
@@ -295,7 +305,9 @@ class altaLeadServices extends SugarApi
                 $db->query($update_assigne_user_asociado);
 
                 if ( $new_indice > -1 ) {
-                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
+                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' ";
+                    if($compania_c == '1'){ $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_unifin'"; }
+                    if($compania_c == '2'){ $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_uniclick'"; }
                     $db->query($update_assigne_user);
                 }
 
@@ -309,7 +321,9 @@ class altaLeadServices extends SugarApi
                 $db->query($update_assigne_user);
 
                 if ( $new_indice > -1 ) {
-                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
+                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' ";
+                    if($compania_c == '1'){ $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_unifin'"; }
+                    if($compania_c == '2'){ $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_uniclick'"; }
                     $db->query($update_assigne_user);
                 }
             } elseif (($data_result['lead']['status'] == 503 && $data_result['lead']['modulo'] == 'Leads') && $data_result['asociados'][0]['status'] == 200) {
