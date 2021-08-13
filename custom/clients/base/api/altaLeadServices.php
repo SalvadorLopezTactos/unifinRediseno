@@ -174,7 +174,6 @@ class altaLeadServices extends SugarApi
         $horaDia = $array_date[1] . ":" . $array_date[2];
         $dateInput = date('H:i', strtotime($horaDia));
 
-        //$GLOBALS['log']->fatal("compania_c " . $compania_c);
         /* Obtiene el ultimo  usuario asignado y registrado en el config*/
         $query = "SELECT value from config  ";
         if($compania_c == '1'){ $query = $query . "WHERE name='last_assigned_user_unifin'"; }
