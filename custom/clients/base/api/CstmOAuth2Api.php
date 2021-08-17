@@ -72,6 +72,29 @@ class CstmOAuth2Api extends OAuth2Api
 
             }
         }
+        //Recupera lista de usuarios
+        // $GLOBALS['log']->fatal('Usuario '. $current_user->user_name);
+        // $GLOBALS['log']->fatal('Platform '. $args['platform']);
+        $usuario = isset($current_user->user_name) ? $current_user->user_name : '';
+        $plataforma = isset($args['platform']) ? $args['platform'] : '';
+        global $app_list_strings;
+        $usuariosExternos = $app_list_strings['usuarios_api_ext_list'];
+        $plataformaNoValida = $app_list_strings['plataformas_no_validas_ext_list'];
+        //Valida usuario y plataforma definidos
+        if (!empty($usuario) && !empty($plataforma)) {
+            //Valida si es usuario de integracion(externo) y si plataforma no está habilitada para usuario de integración
+            if (in_array($usuario, $usuariosExternos) && in_array($plataforma, $plataformaNoValida) ){
+                $userArray = null;
+                $e = new SugarApiExceptionError(
+                    "La plataforma: ".$plataforma. " no es valida para usuario de integración",
+                    null,
+                    null,
+                    0,
+                    null
+                );
+                $api->needLogin($e);
+            }
+        }
 
         return $userArray;
     }
@@ -89,7 +112,7 @@ class CstmOAuth2Api extends OAuth2Api
         $respuesta = ($A == $B) ? "A es igual a B" : "A no es igual a B";
         $dateComida = ($comida != "") ? date("H:i", strtotime($comida)) : "";
         $dateRegreso = ($regreso != "") ? date("H:i", strtotime($regreso)) : "";
-        
+
         $dateLogin = date("H:i", strtotime($login));
 
         $GLOBALS['log']->fatal('FRom ' . $dateFrom);
@@ -104,7 +127,7 @@ class CstmOAuth2Api extends OAuth2Api
         }*/
         $salida = false;
         if($dateComida != "" && $dateRegreso != ""){
-            if(($dateFrom <= $dateLogin && $dateLogin <= $dateComida) 
+            if(($dateFrom <= $dateLogin && $dateLogin <= $dateComida)
             || ($dateRegreso <= $dateLogin && $dateLogin <= $dateTo) ){
                 $salida = true;
             }

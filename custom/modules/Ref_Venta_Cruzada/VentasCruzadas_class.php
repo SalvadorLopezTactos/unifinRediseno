@@ -122,6 +122,45 @@ class VentasCruzadas_class
 			$bean->estatus = '3';
 		}
 	}
+
+	function validaEquiposAsesores($bean, $event, $arguments){
+		
+		global $db;
+		$asesor_origen=$bean->assigned_user_id;
+		$asesor_referenciado=$bean->user_id_c;
+
+		$producto_origen=$bean->producto_origen;
+		$producto_referenciado=$bean->producto_referenciado;
+
+		if($producto_origen ==$producto_referenciado){
+			//Comprobando equipos de los asesores, se opta por query en lugar de bean, para evitar seguridad de equipos
+			//y evitar doble consulta
+			$query = "SELECT equipo_c FROM users_cstm WHERE id_c IN ('{$asesor_origen}','{$asesor_referenciado}')";
+			$queryResult = $db->query($query);
+			$array_equipos=array();
+			while ($row = $db->fetchByAssoc($queryResult)) {
+				array_push($array_equipos,$row['equipo_c']);
+			}
+
+			if(count($array_equipos)>0){
+				$equipo_asesor1=$array_equipos[0];
+				$equipo_asesor2=$array_equipos[1];
+				$GLOBALS['log']->fatal(print_r($array_equipos,true));
+
+				if($equipo_asesor1==$equipo_asesor2 && $bean->ref_validada_av_c==0){
+					$GLOBALS['log']->fatal('EQUIPOS DE ASESORES SON IGUALES, SE PROCEDE A INVALIDAR REFERENCIA CRUZADA');
+					//Estatus No válida => 2
+					$bean->estatus='2';
+				}
+
+			}
+
+		}
+
+
+
+
+	}
 }
 
 ?>

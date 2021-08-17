@@ -13,7 +13,7 @@ $viewdefs['base']['view']['Cuentas-no-contactar'] = array(
                     'type' => 'relate',
                     'view' => 'edit',
                 ),
-            ),
+			),
         ),
     ),
 );

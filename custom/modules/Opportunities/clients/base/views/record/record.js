@@ -332,11 +332,6 @@
             this.$('div[data-name=ri_usuario_bo_c]').show();
         }
 
-        //Oculta Crédito Estructurado
-        if (this.model.get('producto_financiero_c') != '43') {
-            this.$('div[data-panelname=LBL_RECORDVIEW_PANEL4').hide();
-        }
-
         //this.evaluaCampoSolicitudVobo();
         //this.evaluaCampoEnviarNotificacion();
         if (this.model.get('producto_financiero_c') == "" || this.model.get('producto_financiero_c') == 0) {
@@ -741,7 +736,7 @@
         tipoProdArr['1'] = 'AP';
         tipoProdArr['4'] = 'FF';
         tipoProdArr['3'] = 'CA';
-        
+
         //var usuarioProducto = tipoProdArr[App.user.attributes.tipodeproducto_c];
         var usuarioProducto = this.model.get('tipo_producto_c');
         var producto = "";
@@ -759,7 +754,7 @@
         if (usuarioProducto == "CA") {
             producto = "Crédito Automotriz";
         }
-       
+
         //Recupera cuenta asociada
         var producto_financiero = this.model.get('producto_financiero_c');
         var cuentaId = this.model.get('account_id');
@@ -941,31 +936,32 @@
     },
 
     blockRecordNoContactar: function () {
-
-        var id_cuenta = this.model.get('account_id');
-
-        if (id_cuenta != '' && id_cuenta != undefined) {
-
-            var account = app.data.createBean('Accounts', { id: this.model.get('account_id') });
-            account.fetch({
-                success: _.bind(function (model) {
-                    if (model.get('tct_no_contactar_chk_c') == true) {
-
-                        app.alert.show("cuentas_no_contactar", {
-                            level: "error",
-                            title: "Cuenta No Contactable<br>",
-                            messages: "Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
-                            autoClose: false
-                        });
-
-                        //Bloquear el registro completo y mostrar alerta
-                        $('.record.tab-layout').attr('style', 'pointer-events:none');
-                    }
-                }, this)
-            });
-
-        }
-
+        if (!app.user.attributes.tct_no_contactar_chk_c && !app.user.attributes.bloqueo_credito_c && !app.user.attributes.bloqueo_cumple_c) {
+			var id_cuenta=this.model.get('account_id');
+			if(id_cuenta!='' && id_cuenta != undefined && this.model.get('parent_type') == "Accounts" ){
+				var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
+				account.fetch({
+					success: _.bind(function (model) {
+						var url = app.api.buildURL('tct02_Resumen/' + this.model.get('account_id'), null, null);
+						app.api.call('read', url, {}, {
+							success: _.bind(function (data) {
+								if (data.bloqueo_cartera_c || data.bloqueo2_c || data.bloqueo3_c) {
+									app.alert.show("cuentas_no_contactar", {
+										level: "error",
+										title: "Cuenta No Contactable<br>",
+										messages: "Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+										autoClose: false
+									});
+									//Bloquear el registro completo y mostrar alerta
+									$('.record').attr('style','pointer-events:none')
+									$('.subpanel').attr('style', 'pointer-events:none');
+								}
+							}, this)
+						});
+					}, this)
+				});
+			}
+		}
     },
 
     expedienteCredito: function () {
@@ -1080,6 +1076,17 @@
                 errors['monto_c'] = errors['monto_c'] || {};
                 errors['monto_c'].required = true;
             }
+            //Validación Crédito Corto Plazo
+            if (this.model.get('producto_financiero_c') == '78' && (parseFloat(this.model.get('monto_c'))<500000 || parseFloat(this.model.get('monto_c'))>10000000) ) {
+                delete errors.monto_c;
+                errors['monto_c'] = errors['monto_c'] || {};
+                errors['monto_c'].required = true;
+                app.alert.show("monto_corto_plazo", {
+                    level: "error",
+                    title: "El monto de línea debe tener un valor mínimo de $500,000.00 y máximo $10,000,000.00",
+                    autoClose: false
+                });
+            }
 
             if (parseFloat(this.model.get('amount')) <= 0 && this.model.get('tipo_operacion_c') == '1' && this.model.get('tipo_producto_c') != "7" &&
                 this.model.get('admin_cartera_c') != true) {
@@ -1095,7 +1102,7 @@
 
             if (this.model.get('tct_etapa_ddw_c') == 'SI') {
                 if (parseFloat(this.model.get('ca_importe_enganche_c')) <= 0 && (this.model.get('tipo_producto_c') == "1" || this.model.get('tipo_producto_c') == "9") &&
-                    this.model.get('admin_cartera_c') != true) {
+                    this.model.get('admin_cartera_c') != true && this.model.get('producto_financiero_c') != '43') {
                     errors['ca_importe_enganche_c'] = errors['ca_importe_enganche_c'] || {};
                     errors['ca_importe_enganche_c'].required = true;
 
@@ -1108,7 +1115,7 @@
                 }
 
                 if ((parseFloat(this.model.get('porciento_ri_c')) <= 0 || this.model.get('porciento_ri_c') == "") && (this.model.get('tipo_producto_c') == "1" || this.model.get('tipo_producto_c') == "9") &&
-                    this.model.get('admin_cartera_c') != true) {
+                    this.model.get('admin_cartera_c') != true && this.model.get('producto_financiero_c') != '43') {
                     errors['porciento_ri_c'] = errors['porciento_ri_c'] || {};
                     errors['porciento_ri_c'].required = true;
 
@@ -1343,7 +1350,7 @@
                     if (solicitud_cf.oFinanciera.condicion.length == 0) {
                         errors[$(".addCondicionFinanciera")] = errors['condiciones_financieras'] || {};
                         errors[$(".addCondicionFinanciera")].required = true;
-    
+
                         $('.condiciones_financieras').css('border-color', 'red');
                         app.alert.show("CondicionFinanciera requerida", {
                             level: "error",
@@ -1369,7 +1376,7 @@
                         if (cfQuantico.FinancialTermGroupResponseList.length == 0) {
                             errors[$(".addCondicionFinancieraQuantico")] = errors['addCondicionFinancieraQuantico'] || {};
                             errors[$(".addCondicionFinancieraQuantico")].required = true;
-        
+
                             $('.CFPoliticaQ').css('border-color', 'red');
                             app.alert.show("CondicionFinancieraQuantico requerida", {
                                 level: "error",
@@ -1381,7 +1388,7 @@
 
                         errors[$(".addCondicionFinancieraQuantico")] = errors['addCondicionFinancieraQuantico'] || {};
                         errors[$(".addCondicionFinancieraQuantico")].required = true;
-        
+
                         $('.CFPoliticaQ').css('border-color', 'red');
                         app.alert.show("CondicionFinancieraQuantico requerida", {
                             level: "error",
@@ -1397,7 +1404,7 @@
     },
 
     condicionesFinancierasIncrementoCheck: function (fields, errors, callback) {
-        
+
         var valorSwitchUni2=App.lang.getAppListStrings('switch_inicia_proceso_list')['ejecuta'];
         if(valorSwitchUni2=='1'){
             if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
@@ -1406,7 +1413,7 @@
                         // console.log("contRI = 0");
                         errors[$(".add_incremento_CondicionFinanciera")] = errors['condiciones_financieras_incremento_ratificacion'] || {};
                         errors[$(".add_incremento_CondicionFinanciera")].required = true;
-    
+
                         $('.condiciones_financieras_incremento_ratificacion').css('border-color', 'red');
                         app.alert.show("CondicionFinanciera requerida", {
                             level: "error",
@@ -1416,7 +1423,7 @@
                     } else if (contRI.oFinancieraRI.ratificacion.length >= 1) {
                         // console.log("contRI > 1");
                         contRI.model.set('condiciones_financieras_incremento_ratificacion', contRI.oFinancieraRI.ratificacion);
-    
+
                     }
                 }
             }
@@ -1576,6 +1583,9 @@
             var percent = (this.model.get("amount") * this.model.get("porciento_ri_c")) / 100;
             this.model.set("ca_importe_enganche_c", percent);
         }
+        if(this.model.get("porciento_ri_c")==0 && this.model.get('producto_financiero_c') == '43'){
+            this.model.set("ca_importe_enganche_c", 0);
+        }
     },
 
     calcularPorcientoRI: function () {
@@ -1583,6 +1593,9 @@
         if (!_.isEmpty(this.model.get("amount")) && !_.isEmpty(this.model.get("ca_importe_enganche_c")) && this.model.get("ca_importe_enganche_c") != 0 && this.model.get("tipo_operacion_c") == 1) {
             var percent = ((this.model.get("ca_importe_enganche_c") * 100) / this.model.get("amount")).toFixed(2);
             this.model.set("porciento_ri_c", percent);
+        }
+        if(this.model.get("ca_importe_enganche_c")==0 && this.model.get('producto_financiero_c') == '43'){
+            this.model.set("porciento_ri_c", 0);
         }
     },
 
@@ -2116,6 +2129,10 @@
             if (this.model.get('tipo_producto_c') == '1') {
                 campos = campos.replace(/Renta Inicial/gi, "Pago Único");
             }
+            //Remplaza etiquetas para Crédito Estructurado
+            if (this.model.get('producto_financiero_c') == '43') {
+                campos = campos.replace(/Renta Inicial/gi, "Pago Inicial");
+            }
 
             app.alert.show("Campos Requeridos", {
                 level: "error",
@@ -2128,7 +2145,7 @@
 
     validapagounico: function (fields, errors, callback) {
         if (this.model.get('porciento_ri_c') != "" && this.model.get('porciento_ri_c') != undefined && (Number(this.model.get('porciento_ri_c')) <= 0 || Number(this.model.get('porciento_ri_c')) > 100.00) &&
-            this.model.get('admin_cartera_c') != true) {
+            this.model.get('admin_cartera_c') != true && this.model.get('producto_financiero_c') != '43') {
 
             if (parseFloat(this.model.get('porciento_ri_c')) <= 0.0000) {
                 errors['porciento_ri_c'] = errors['porciento_ri_c'] || {};
@@ -2578,6 +2595,10 @@
             this.$('div[data-name=plazo_ratificado_incremento_c]').show();
             this.$('div[data-name=ri_usuario_bo_c]').show();
         }
+        //Cambio texto Crédito Estructurado
+        if (this.model.get('producto_financiero_c') == 43 ) {
+            this.$("div.record-label[data-name='porciento_ri_c']").text("% Pago Inicial");
+        }
     },
 
     ConficionFinancieraFormat: function (fields, errors, callback) {
@@ -2698,8 +2719,8 @@
             self = this;
             app.api.call('GET', app.api.buildURL('GetMontoGpoEmpApi/' + idCuenta), null, {
                 success: function (data) {
-                    montoTotalGpoEmp = data['montoTotalGpoEmp'];
-                    numCuentasGpoEmp = data['numCuentasGpoEmp'];
+                    montoTotalGpoEmp = (data['montoTotalGpoEmp'] == null || data['montoTotalGpoEmp']==undefined) ? 0 : data['montoTotalGpoEmp'];
+                    numCuentasGpoEmp = (data['numCuentasGpoEmp'] == null || data['numCuentasGpoEmp']==undefined) ? 0 : data['numCuentasGpoEmp'];
 
                     if (self.model.get('estatus_c') != 'N' && checkRI != true && self.model.get('tipo_de_operacion_c')!='RATIFICACION_INCREMENTO') {
                         montoTotalGpoEmp = parseInt(montoTotalGpoEmp) + parseInt(self.model.get('monto_c'));
@@ -2833,7 +2854,7 @@
         var fecha = yyyy + '-' + mm + '-' + dd + 'T' + hour + ':' + min + ':' + secs + '-0' + zona + ':00';
         this.model.set("fecha_validacion_c", fecha);
         //this.model.save(),
-       
+
         var userprodprin = this.model.get('tipo_producto_c');
         app.api.call('GET', app.api.buildURL('Accounts/' + this.model.get('account_id')), null, {
             success: _.bind(function (cuenta) {
@@ -2846,10 +2867,10 @@
                             var tipoProducto = Productos[key].tipo_producto;
                             if(tipoProducto == userprodprin){
                                 idProdM = Productos[key].id;
-                              
+
                                         var textmsg = '';
                                         var tipom = "";
-                                        
+
                                         /****************************************/
                                         self.model.save(null, {
                                             success: function (model, response) {
@@ -2878,18 +2899,18 @@
                                             }
                                         });
                                         /****************************************/
-                                                        
+
                             }
                         });
                     },
                         error: function (e) {
                             throw e;
                         }
-                    });  
+                    });
 
             }, self),
-        });                
-        
+        });
+
     },
     noauthsol: function () {
         this.model.set("vobo_dir_c", false);
@@ -3381,13 +3402,13 @@
         }
     },
 
-    //Función para validar que el asesor RM sea realmente un asesor RM 
+    //Función para validar que el asesor RM sea realmente un asesor RM
     validaAsesorRM: function (fields, errors, callback) {
         var asesorRM=this.model.get('user_id1_c');
         if(asesorRM!="" && this.model.get('tipo_producto_c')!='13'){
             app.api.call('GET', app.api.buildURL('Infouser/' + asesorRM), null, {
                 success: _.bind(function (data) {
-    
+
                     if (data != "") {
                         if (!data.productos_c.includes("^11^")&& data.user_name!="SinGestor") {
                                 app.alert.show("error_asesorRM", {

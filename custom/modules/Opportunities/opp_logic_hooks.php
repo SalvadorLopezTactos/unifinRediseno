@@ -494,6 +494,10 @@ SQL;
               $opp->estatus_c = '';
             }
 
+            //Agregar condiciones financieras Quantico
+            $opp->cf_quantico_c = $bean->cf_quantico_c;
+            $opp->cf_quantico_politica_c = $bean->cf_quantico_politica_c;
+
             $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> Condiciones en nueva solicitud : " . print_r(count($opp->condiciones_financieras), 1));
             $id = $opp->save();
 
@@ -1113,9 +1117,14 @@ SQL;
                 $this->actualizaTipoCuenta('2', '10', $cliente, $producto);
             }
             //Actualiza cuando la solicitud es Autorizada (N) Cliente Con Línea Vigente: 3, 18
-            if ($bean->estatus_c == "N") { //Etapa solicitud= N= Autorizada
+            if ($bean->estatus_c == "N" && $producto!='3') { //Etapa solicitud= N= Autorizada
                 $GLOBALS['log']->fatal('Cliente con Línea Vigente');
                 $this->actualizaTipoCuenta('3', '18', $cliente, $producto);
+                $bean->tipo_operacion_c = '2';
+            }
+            if ($bean->estatus_c == "N" && $producto=='3') { //Etapa solicitud= N= Autorizada
+                $GLOBALS['log']->fatal('Manda Credito Automotriz como: Prospecto con Línea');
+                $this->actualizaTipoCuenta('2', '12', $cliente, $producto);
                 $bean->tipo_operacion_c = '2';
             }
         }

@@ -35,32 +35,32 @@
     },
 
     blockRecordNoContactar:function () {
-
-        var id_cuenta=this.model.get('parent_id');
-
-        if(id_cuenta!='' && id_cuenta != undefined && this.model.get('parent_type') == "Accounts" ){
-
-            var account = app.data.createBean('Accounts', {id:this.model.get('parent_id')});
-            account.fetch({
-                success: _.bind(function (model) {
-
-                    if(model.get('tct_no_contactar_chk_c')==true){
-
-                        app.alert.show("cuentas_no_contactar", {
-                            level: "error",
-                            title: "Cuenta No Contactable<br>",
-                            messages: "Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
-                            autoClose: false
-                        });
-
-                        //Bloquear el registro completo y mostrar alerta
-                        $('.record').attr('style','pointer-events:none')
-                    }
-                }, this)
-            });
-
-        }
-
+        if (!app.user.attributes.tct_no_contactar_chk_c && !app.user.attributes.bloqueo_credito_c && !app.user.attributes.bloqueo_cumple_c) {
+			var id_cuenta=this.model.get('parent_id');
+			if(id_cuenta!='' && id_cuenta != undefined && this.model.get('parent_type') == "Accounts" ){
+				var account = app.data.createBean('Accounts', {id:this.model.get('parent_id')});
+				account.fetch({
+					success: _.bind(function (model) {
+						var url = app.api.buildURL('tct02_Resumen/' + this.model.get('parent_id'), null, null);
+						app.api.call('read', url, {}, {
+							success: _.bind(function (data) {
+								if (data.bloqueo_cartera_c || data.bloqueo2_c || data.bloqueo3_c) {
+									app.alert.show("cuentas_no_contactar", {
+										level: "error",
+										title: "Cuenta No Contactable<br>",
+										messages: "Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+										autoClose: false
+									});
+									//Bloquear el registro completo y mostrar alerta
+									$('.record').attr('style','pointer-events:none')
+									$('.subpanel').attr('style', 'pointer-events:none');
+								}
+							}, this)
+						});
+					}, this)
+				});
+			}
+		}
     },
     
     showMinutarel:function(){
@@ -137,31 +137,35 @@
     },
 
     valida_cuenta_no_contactar:function (fields, errors, callback) {
-
-        if (this.model.get('parent_id') && this.model.get('parent_type') == "Accounts") {
-            var account = app.data.createBean('Accounts', {id:this.model.get('parent_id')});
-            account.fetch({
-                success: _.bind(function (model) {
-                    if(model.get('tct_no_contactar_chk_c')==true){
-
-                        app.alert.show("cuentas_no_contactar", {
-                            level: "error",
-                            title: "Cuenta No Contactable<br>",
-                            messages: "Unifin ha decidido NO trabajar con la cuenta relacionada a esta nota.<br>Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
-                            autoClose: false
-                        });
-
-                        errors['parent_name'] = errors['parent_name'] || {};
-                        errors['parent_name'].required = true;
-
-                    }
-                    callback(null, fields, errors);
-                }, this)
-            });
-        }else {
-            callback(null, fields, errors);
-        }
-
+		if (!app.user.attributes.tct_no_contactar_chk_c && !app.user.attributes.bloqueo_credito_c && !app.user.attributes.bloqueo_cumple_c) {
+			if (this.model.get('parent_id') && this.model.get('parent_type') == "Accounts") {
+				var account = app.data.createBean('Accounts', {id:this.model.get('parent_id')});
+				account.fetch({
+					success: _.bind(function (model) {
+						var url = app.api.buildURL('tct02_Resumen/' + this.model.get('parent_id'), null, null);
+						app.api.call('read', url, {}, {
+							success: _.bind(function (data) {
+								if (data.bloqueo_cartera_c || data.bloqueo2_c || data.bloqueo3_c) {
+									app.alert.show("cuentas_no_contactar", {
+										level: "error",
+										title: "Cuenta No Contactable<br>",
+										messages: "Unifin ha decidido NO trabajar con la cuenta relacionada a esta nota.<br>Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+										autoClose: false
+									});
+									errors['parent_name'] = errors['parent_name'] || {};
+									errors['parent_name'].required = true;
+								}
+								callback(null, fields, errors);
+							}, this)
+						});
+					}, this)
+				});
+			} else {
+				callback(null, fields, errors);
+			}
+		} else {
+			callback(null, fields, errors);
+		}
     },
 
     /* @Salvador Lopez Y Adrian Arauz

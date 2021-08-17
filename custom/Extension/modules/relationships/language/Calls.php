@@ -6,3 +6,7 @@ $mod_strings['LBL_MINUT_MINUTAS_CALLS_1_FROM_MINUT_MINUTAS_TITLE'] = 'Minutas';
 $mod_strings['LBL_MINUT_MINUTAS_CALLS_1_FROM_CALLS_TITLE'] = 'Minutas';
 $mod_strings['LBL_LIC_LICITACIONES_CALLS_1_FROM_LIC_LICITACIONES_TITLE'] = 'Licitaciones';
 $mod_strings['LBL_LIC_LICITACIONES_CALLS_1_FROM_CALLS_TITLE'] = 'Licitaciones';
+$mod_strings['LBL_ACCOUNTS_CALLS_1_FROM_ACCOUNTS_TITLE'] = 'Cuentas';
+$mod_strings['LBL_ACCOUNTS_CALLS_1_FROM_CALLS_TITLE'] = 'Cuentas';
+$mod_strings['LBL_LEADS_CALLS_1_FROM_LEADS_TITLE'] = 'Leads';
+$mod_strings['LBL_LEADS_CALLS_1_FROM_CALLS_TITLE'] = 'Leads';

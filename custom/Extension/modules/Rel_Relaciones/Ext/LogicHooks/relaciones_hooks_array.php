@@ -19,6 +19,13 @@ $hook_array['after_save'][] = Array(
     'Rel_Relaciones_Hooks',
     'insertarRelacionenUNICS'
 );
+$hook_array['after_save'][] = Array(
+    2,
+    'Inserta los datos a la otra tabla',
+    'custom/modules/Rel_Relaciones/Rel_Relaciones_Hooks.php',
+    'Rel_Relaciones_Hooks',
+    'setAccount'
+);
 $hook_array['after_delete'][] = Array(
     1,
     'Actualiza Relacion en UNICS',
@@ -26,4 +33,10 @@ $hook_array['after_delete'][] = Array(
     'Rel_Relaciones_Hooks',
     'insertarRelacionenUNICS'
 );
-
+$hook_array['before_save'][] = Array(
+    2,
+    'Establece registro en tabla de auditoría dependiendo de la plataforma proveniento de los servicios Relaciones',
+    'custom/modules/Rel_Relaciones/Rel_Relaciones_platform.php',
+    'Relacion_platform_user',
+    'set_audit_user_platform'
+);

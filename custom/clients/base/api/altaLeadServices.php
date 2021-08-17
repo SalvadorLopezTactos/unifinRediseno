@@ -159,7 +159,7 @@ class altaLeadServices extends SugarApi
         $users = [];
         /* Obetenemos el id del usuario de grupo de 9.- MKT*/
         $QueryId = "SELECT id from users
-            WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
+        WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
         $queryResultId = $db->query($QueryId);
         $row = $db->fetchByAssoc($queryResultId);
         $idMKT = $row['id'];
@@ -174,62 +174,103 @@ class altaLeadServices extends SugarApi
         $horaDia = $array_date[1] . ":" . $array_date[2];
         $dateInput = date('H:i', strtotime($horaDia));
 
+        //$GLOBALS['log']->fatal("compania_c " . $compania_c);
         /* Obtiene el ultimo  usuario asignado y registrado en el config*/
-        $query = "Select value from config  where name='last_assigned_user' ";
+        $query = "SELECT value from config  ";
+        if($compania_c == '1'){ $query = $query . "WHERE name='last_assigned_user_unifin'"; }
+        if($compania_c == '2'){ $query = $query . "WHERE name='last_assigned_user_uniclick'"; }
+        //$GLOBALS['log']->fatal("query " . $query);
+
         $result = $db->query($query);
         $row = $db->fetchByAssoc($result);
         $last_indice = $row['value'];
-		
-        if( strpos(strtoupper($id_landing_c), 'INSURANCE') !== false){
-            $subpuesto_c = 5;
-        }else{
-            if($compania_c == 1) $subpuesto_c = 3;
-		    if($compania_c == 2) $subpuesto_c = 4;
-        }
 
-        $query_asesores = "SELECT
-  user.id,
-  user.date_entered,
-  count(lead.assigned_user_id) AS total_asignados,
-  uc.access_hours_c
-FROM users user
-  INNER JOIN users_cstm uc
-    ON uc.id_c = user.id
-  LEFT JOIN leads lead
-    ON lead.assigned_user_id = user.id
-where puestousuario_c='27' AND user.status = 'Active' AND subpuesto_c='$subpuesto_c'
-GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC";
-            
+        //VALIDACION DE REVISTA MEDICA
+        if ($id_landing_c != 'LP Revista Médica' && $id_landing_c != 'LP REVISTA MÉDICA') {
+
+            //$GLOBALS['log']->fatal("id_landing_c "  , $id_landing_c);
+            if( strpos(strtoupper($id_landing_c), 'INSURANCE') !== false){
+                $subpuesto_c = 5;
+            }else{
+                if($compania_c == 1) $subpuesto_c = 3;
+                if($compania_c == 2) $subpuesto_c = 4;
+            }
+
+            $query_asesores = "SELECT
+            user.id,
+            user.date_entered,
+            count(lead.assigned_user_id) AS total_asignados,
+            uc.access_hours_c
+            FROM users user
+            INNER JOIN users_cstm uc
+                ON uc.id_c = user.id
+            LEFT JOIN leads lead
+                ON lead.assigned_user_id = user.id
+            where puestousuario_c='27' AND user.status = 'Active' AND subpuesto_c='$subpuesto_c'
+            GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC";
+
+            //$GLOBALS['log']->fatal("query_asesores "  , $query_asesores);
             $result_usr = $db->query($query_asesores);
-        //$usuarios=;
-        while ($row = $db->fetchByAssoc($result_usr)) {
-            $hours = json_decode($row['access_hours_c'], true);
-            $hoursIn = !empty($hours) ? $hours[$dia_semana]['entrada'] : "";
-			$hoursComida = !empty($hours) ? $hours[$dia_semana]['comida'] : "";
-			$hoursRegreso = !empty($hours) ? $hours[$dia_semana]['regreso'] : "";
-            $hoursOut = !empty($hours) ? $hours[$dia_semana]['salida'] : "";
-            if ($hoursIn != "" && $hoursOut != "") {
-                if (($hoursIn != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursOut != "Libre")) {
-                    $enable = $this->accessHours($hoursIn, $hoursComida, $hoursRegreso, $hoursOut, $dateInput);
-					if ($enable) {
+            //$usuarios=;
+            //$GLOBALS['log']->fatal("result_usr "  , $result_usr);
+            while ($row = $db->fetchByAssoc($result_usr)) {
+                $hours = json_decode($row['access_hours_c'], true);
+                $hoursIn = !empty($hours) ? $hours[$dia_semana]['entrada'] : "";
+                $hoursComida = !empty($hours) ? $hours[$dia_semana]['comida'] : "";
+                $hoursRegreso = !empty($hours) ? $hours[$dia_semana]['regreso'] : "";
+                $hoursOut = !empty($hours) ? $hours[$dia_semana]['salida'] : "";
+                //$GLOBALS['log']->fatal("hoursIn" , $hoursIn);
+                if ($hoursIn != "" && $hoursOut != "") {
+                    if (($hoursIn != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursOut != "Libre")) {
+                        $enable = $this->accessHours($hoursIn, $hoursComida, $hoursRegreso, $hoursOut, $dateInput);
+                        if ($enable) {
+                            $users[] = $row['id'];
+                        }
+                    } elseif ($hoursIn == "Libre" && $hoursOut == "Libre") {
                         $users[] = $row['id'];
                     }
-                } elseif ($hoursIn == "Libre" && $hoursOut == "Libre") {
+                } /*else {
                     $users[] = $row['id'];
-                }
-            } /*else {
-                $users[] = $row['id'];
-            }*/
-        }
-        //$GLOBALS['log']->fatal("Usuarios MKT en servicio alta Leads  " . print_r($users, true));
+                }*/
+            }
+            //$GLOBALS['log']->fatal("Usuarios MKT en servicio alta Leads  " . print_r($users, true));
+            if (count($users) > 0) {
+                $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
+                $new_assigned_user = $users[$new_indice];
 
-        if (count($users) > 0) {
-            $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
-            $new_assigned_user = $users[$new_indice];
+            } else {
+                /* No existen usuarios disponibles y se asigna a  9.- MKT " */
+                $new_assigned_user = $idMKT;
+            }
+
         } else {
-            /* No existen usuarios disponibles y se asigna a  9.- MKT " */
-            $new_assigned_user = $idMKT;
+
+            //USUARIOS QUE TIENEN EL EQUIPO PRINCIPAL UNICS 7 SE LEAS ASIGNA LEADS - REVISTA MEDICA
+            $query_revista = "SELECT
+            user.id,
+            user.date_entered,
+            count(lead.assigned_user_id) AS total_asignados,
+            uc.access_hours_c
+            FROM users user
+            INNER JOIN users_cstm uc
+                ON uc.id_c = user.id
+            LEFT JOIN leads lead
+                ON lead.assigned_user_id = user.id
+            WHERE user.status = 'Active' AND equipo_c = 7
+            GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC
+            LIMIT 1";
+
+            $result_rm = $db->query($query_revista);
+            $conteo = $result_rm->num_rows;
+
+            if ($conteo > 0) {
+                while ($row = $db->fetchByAssoc($result_rm)) {
+
+                    $new_assigned_user = $row['id'];
+                }
+            }
         }
+
 
         if ($regimenFiscal != "3") {
 
@@ -242,7 +283,9 @@ GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered A
                 $GLOBALS['log']->fatal("Usuarios MKT en servicio alta Indice  " . $new_indice);
 
                 if ( $new_indice > -1 ) {
-                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
+                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' " ;
+                    if($compania_c == '1'){ $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_unifin'"; }
+                    if($compania_c == '2'){ $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_uniclick'"; }
                     $db->query($update_assigne_user);
                 }
             }
@@ -262,7 +305,9 @@ GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered A
                 $db->query($update_assigne_user_asociado);
 
                 if ( $new_indice > -1 ) {
-                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
+                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' ";
+                    if($compania_c == '1'){ $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_unifin'"; }
+                    if($compania_c == '2'){ $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_uniclick'"; }
                     $db->query($update_assigne_user);
                 }
 
@@ -276,7 +321,9 @@ GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered A
                 $db->query($update_assigne_user);
 
                 if ( $new_indice > -1 ) {
-                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
+                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' ";
+                    if($compania_c == '1'){ $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_unifin'"; }
+                    if($compania_c == '2'){ $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_uniclick'"; }
                     $db->query($update_assigne_user);
                 }
             } elseif (($data_result['lead']['status'] == 503 && $data_result['lead']['modulo'] == 'Leads') && $data_result['asociados'][0]['status'] == 200) {
@@ -506,6 +553,7 @@ GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered A
         $bean_Lead->phone_work = $dataOrigen['phone_work'];
         $bean_Lead->detalle_plataforma_c = $dataOrigen['GLID'];
         $bean_Lead->assigned_user_id = $dataOrigen['assigned_user_id'];
+        /** Seccion de Digital Inbound **/
         $bean_Lead->id_landing_c = $dataOrigen['id_landing_c'];
         $bean_Lead->lead_source_c = $dataOrigen['lead_source_c'];
         $bean_Lead->facebook_pixel_c = $dataOrigen['facebook_pixel_c'];
@@ -513,6 +561,14 @@ GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered A
         $bean_Lead->keyword_c = $dataOrigen['keyword_c'];
         $bean_Lead->campana_c = $dataOrigen['campana_c'];
         $bean_Lead->compania_c = $dataOrigen['compania_c'];
+        $bean_Lead->productos_interes_c = $dataOrigen['productos_interes_c'];
+        $bean_Lead->opportunity_amount = $dataOrigen['opportunity_amount'];
+        $bean_Lead->plazo_c = $dataOrigen['plazo_c'];
+        $bean_Lead->pago_mensual_estimado_c = $dataOrigen['pago_mensual_estimado_c'];
+        $bean_Lead->medios_contacto_deseado_c = $dataOrigen['medios_contacto_deseado_c'];
+        $bean_Lead->medio_preferido_contacto_c = $dataOrigen['medio_preferido_contacto_c'];
+        $bean_Lead->dia_contacto_c = $dataOrigen['dia_contacto_c'];
+        $bean_Lead->hora_contacto_c = $dataOrigen['hora_contacto_c'];
         /** Seccion de Contacto **/
         $bean_Lead->contacto_nombre_c = $dataOrigen['contacto_nombre_c'];
         $bean_Lead->contacto_apellidop_c = $dataOrigen['contacto_apellidop_c'];
@@ -658,59 +714,23 @@ GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered A
 
     public function crea_clean_name($data)
     {
-        global $app_list_strings, $current_user; //Obtención de listas de valores
+        $nombre = "";
         $clean_name = "";
-        //Se crean variables que limpien los excesos de espacios en los campos establecidos.
-        $limpianame = preg_replace('/\s\s+/', ' ', $data['fullname']); // PENDIENTE
-        $limpianombre = preg_replace('/\s\s+/', ' ', $data['nombre_c']);
-        $limpiaapaterno = preg_replace('/\s\s+/', ' ', $data['apellido_paterno_c']);
-        $limpiamaterno = preg_replace('/\s\s+/', ' ', $data['apellido_materno_c']);
-        $limpiarazon = preg_replace('/\s\s+/', ' ', $data['nombre_empresa_c']); # prendiente
-
-        $tipo = $app_list_strings['validacion_simbolos_list']; //obtencion lista simbolos
-        $acronimos = $app_list_strings['validacion_duplicados_list'];
-
         if ($data['regimen_fiscal_c'] != "3") {
-            $full_name = $data['nombre_c'] . " " . $data['apellido_paterno_c'] . " " . $data['apellido_materno_c'];
-            $nombre = $full_name;
-            $nombre = mb_strtoupper($nombre, "UTF-8");
-            $separa = explode(" ", $nombre);
-            $longitud = count($separa);
-            for ($i = 0; $i < $longitud; $i++) {
-                foreach ($tipo as $t => $key) {
-                    $separa[$i] = str_replace($key, "", $separa[$i]);
-                }
-            }
-            $une = implode($separa);
-            $clean_name = $une;
+            $nombre = $data['nombre_c'] . " " . $data['apellido_paterno_c'] . " " . $data['apellido_materno_c'];
         } else {
             $nombre = $data['nombre_empresa_c'];
-            $nombre = mb_strtoupper($nombre, "UTF-8");
-            $separa = explode(" ", $nombre);
-            $separa_limpio = $separa;
-            $longitud = count($separa);
-            $eliminados = 0;
-            //Itera el arreglo separado
-            for ($i = 0; $i < $longitud; $i++) {
-                foreach ($tipo as $t => $key) {
-                    $separa[$i] = str_replace($key, "", $separa[$i]);
-                    $separa_limpio[$i] = str_replace($key, "", $separa_limpio[$i]);
-                }
-                foreach ($acronimos as $a => $key) {
-                    if ($separa[$i] == $a) {
-                        $separa[$i] = "";
-                        $eliminados++;
-                    }
-                }
-            }
-            //Condicion para eliminar los acronimos
-            if (($longitud - $eliminados) <= 1) {
-                $separa = $separa_limpio;
-            }
-            //Convierte el array a string nuevamente
-            $une = implode($separa);
-            $clean_name = $une;
         }
+
+        //Consumir servicio de cleanName, declarado en custom api
+        require_once("custom/clients/base/api/cleanName.php");
+        $apiCleanName= new cleanName();
+        $body=array('name'=>$nombre);
+        $response=$apiCleanName->getCleanName(null,$body);
+        if ($response['status']=='200') {
+            $clean_name = $response['cleanName'];
+        }
+
         return $clean_name;
     }
 
@@ -793,32 +813,31 @@ GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered A
         $correo = '';
         $user1 = '';
         $cliente = '';
-
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Estimado(a) <b> user1 .</b>
 						<br><br>Tu Cliente/Prospecto cliente1 ha dejado sus datos como Lead en una campaña digital.
 						<br><br>Favor de contactarlo para dar el seguimiento adecuado.
 						<br><br>Si tienes alguna duda contacta a:
 						<br><br>Equipo CRM
 						<br>Inteligencia de Negocios<br>T: (55) 5249.5800 Ext.5737 y 5677';
-
         if ($idaccount != null || $idaccount != '') {
             $beanaccount = BeanFactory::retrieveBean('Accounts', $idaccount);
             $cliente = $beanaccount->name;
+			$linkCuenta=$GLOBALS['sugar_config']['site_url'].'/#Accounts/'.$beanaccount->id;
+			$cuenta = '<b><a id="linkCuenta" href="'.$linkCuenta.'">'.$cliente.'</a></b>';
             if ($beanaccount->load_relationship('accounts_uni_productos_1')) {
-                $GLOBALS['log']->fatal('ENvío mail x producto');
+                $GLOBALS['log']->fatal('Envío mail x producto');
                 //Fetch related beans
                 $relatedBeans = $beanaccount->accounts_uni_productos_1->getBeans();
                 foreach ($relatedBeans as $rel) {
+					$mailHTML = str_replace($user1, 'user1', $mailHTML);
                     $usuario = BeanFactory::retrieveBean('Users', $rel->assigned_user_id);
                     $user_name = $usuario->user_name;
                     $correo = $usuario->email1;
                     $user1 = $usuario->nombre_completo_c;
-
                     if ($user_name != 'SinGestor' && !empty($correo)) {
-                        $GLOBALS['log']->fatal('cliente' . $cliente . ' usuario' . $user1 . ' correo' . $correo);
+                        $GLOBALS['log']->fatal('cliente: ' . $cliente . ' usuario: ' . $user1 . ' correo: ' . $correo);
                         $mailHTML = str_replace('user1', $user1, $mailHTML);
-                        $mailHTML = str_replace('cliente1', $cliente, $mailHTML);
-
+                        $mailHTML = str_replace('cliente1', $cuenta, $mailHTML);
                         $mailer = MailerFactory::getSystemDefaultMailer();
                         $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
                         $mailer->setSubject('Seguimiento de Campaña Digital a Cliente/Prospecto ' . $cliente . '.');
@@ -831,16 +850,18 @@ GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered A
                 }
             }
         } else if ($idlead != null && ($idaccount == null || $idaccount == '')) {
-
             $beanlead = BeanFactory::retrieveBean('Leads', $idlead, array('disable_row_level_security' => true));
             $cliente = $beanlead->name;
+			$linkLead=$GLOBALS['sugar_config']['site_url'].'/#Leads/'.$beanlead->id;
+			$lead = '<b><a id="linkLead" href="'.$linkLead.'">'.$cliente.'</a></b>';
             $usuario = BeanFactory::retrieveBean('Users', $beanlead->assigned_user_id, array('disable_row_level_security' => true));
-
             $correo = $usuario->email1;
             $user1 = $usuario->nombre_completo_c;
             $mailHTML = str_replace('user1', $user1, $mailHTML);
-            $mailHTML = str_replace('cliente1', $cliente, $mailHTML);
+            $mailHTML = str_replace('cliente1', $lead, $mailHTML);
             if (!empty($correo)) {
+				$GLOBALS['log']->fatal('Envío mail x Lead');
+				$GLOBALS['log']->fatal('cliente: ' . $cliente . ' usuario: ' . $user1 . ' correo: ' . $correo);
                 $mailer = MailerFactory::getSystemDefaultMailer();
                 $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
                 $mailer->setSubject('Seguimiento de Campaña Digital a Cliente/Prospecto ' . $cliente . '.');

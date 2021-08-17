@@ -27,7 +27,11 @@
             <tr>
                 <th scope="col">&nbsp;</th>
                 {{#each headers}}
-                <th scope="col" {{#if dobleCampo}}colspan="2"{{/if}}>{{name}}</th>
+                <th scope="col" {{#if dobleCampo}}colspan="2"{{/if}}>{{name}}
+                {{#each numeroEspacios}}
+                        &nbsp;
+                {{/each}}
+                </th>
                 {{/each}}
             </tr>
         </thead>
@@ -48,11 +52,13 @@
                         {{/if}}
                         {{#if text}}
                             {{#if rangoInferior}}
-                            <!-- <input data-name="{{nombreCampo}}" data-columna="{{nombreColumna}}" type="text" class="form-control fieldCFConfig" size="10" data-info="inferior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}" value="{{rangoInferior}}" data-tipo-campo="inputInferior">-->
-                            {{rangoInferior}}
+                                {{rangoInferior}}
                             {{else}}
-                            <!-- <input data-name="{{nombreCampo}}" data-columna="{{nombreColumna}}" type="text" class="form-control fieldCFConfig" size="10" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}" value="{{rangoSuperior}}" data-tipo-campo="inputSuperior">-->
-                            {{rangoSuperior}}
+                                {{#if rangoSuperior}}
+                                    {{rangoSuperior}}
+                                {{else}}
+                                    {{valorCampo}}
+                                {{/if}}
                             {{/if}}
                         {{/if}}
                         {{#if checkbox}}

@@ -816,6 +816,65 @@ array (
               101 => 
               array (
               ),
+              102 => 
+              array (
+                'name' => 'ce_destino_c',
+                'label' => 'LBL_CE_DESTINO',
+                'span' => 12,
+              ),
+              103 => 
+              array (
+                'name' => 'ce_tasa_c',
+                'label' => 'LBL_CE_TASA',
+              ),
+              104 => 
+              array (
+                'name' => 'ce_plazo_c',
+                'label' => 'LBL_CE_PLAZO',
+              ),
+              105 => 
+              array (
+                'name' => 'no_disposiciones_c',
+                'label' => 'LBL_NO_DISPOSICIONES',
+              ),
+              106 => 
+              array (
+                'name' => 'gracia_capital_c',
+                'label' => 'LBL_GRACIA_CAPITAL',
+              ),
+              107 => 
+              array (
+                'name' => 'ce_moneda_c',
+                'label' => 'LBL_CE_MONEDA',
+              ),
+              108 => 
+              array (
+              ),
+              109 => 
+              array (
+                'name' => 'ce_apertura_c',
+                'label' => 'LBL_CE_APERTURA',
+              ),
+              110 => 
+              array (
+                'name' => 'ce_comisiones_c',
+                'studio' => 'visible',
+                'label' => 'LBL_CE_COMISIONES',
+              ),
+              111 => 
+              array (
+                'name' => 'credito_estructurado',
+                'label' => 'Comisiones adicionales',
+                'studio' => 'visible',
+                'span' => 12,
+              ),
+              112 => 
+              array (
+                'name' => 'ce_comentarios_c',
+                'studio' => 'visible',
+                'label' => 'LBL_CE_COMENTARIOS',
+                'span' => 12,
+              ),
             ),
           ),
           2 => 
@@ -867,67 +926,6 @@ array (
             ),
           ),
           3 => 
-          array (
-            'newTab' => false,
-            'panelDefault' => 'expanded',
-            'name' => 'LBL_RECORDVIEW_PANEL4',
-            'label' => 'LBL_RECORDVIEW_PANEL4',
-            'columns' => 2,
-            'placeholders' => 1,
-            'fields' => 
-            array (
-              0 => 
-              array (
-                'name' => 'ce_destino_c',
-                'label' => 'LBL_CE_DESTINO',
-                'span' => 12,
-              ),
-              1 => 
-              array (
-                'name' => 'ce_tasa_c',
-                'label' => 'LBL_CE_TASA',
-              ),
-              2 => 
-              array (
-                'name' => 'ce_plazo_c',
-                'label' => 'LBL_CE_PLAZO',
-              ),
-              3 => 
-              array (
-                'name' => 'ce_moneda_c',
-                'label' => 'LBL_CE_MONEDA',
-              ),
-              4 => 
-              array (
-              ),
-              5 => 
-              array (
-                'name' => 'ce_apertura_c',
-                'label' => 'LBL_CE_APERTURA',
-              ),
-              6 => 
-              array (
-                'name' => 'ce_comisiones_c',
-                'studio' => 'visible',
-                'label' => 'LBL_CE_COMISIONES',
-              ),
-              7 => 
-              array (
-                'name' => 'credito_estructurado',
-                'label' => 'Comisiones adicionales',
-                'studio' => 'visible',
-                'span' => 12,
-              ),
-              8 => 
-              array (
-                'name' => 'ce_comentarios_c',
-                'studio' => 'visible',
-                'label' => 'LBL_CE_COMENTARIOS',
-                'span' => 12,
-              ),
-            ),
-          ),
-          4 => 
           array (
             'newTab' => false,
             'panelDefault' => 'expanded',
@@ -990,7 +988,7 @@ array (
               ),
             ),
           ),
-          5 => 
+          4 => 
           array (
             'newTab' => false,
             'panelDefault' => 'expanded',

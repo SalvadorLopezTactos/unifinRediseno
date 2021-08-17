@@ -169,7 +169,10 @@
         // this.Updt_OptionProdFinan(); # se comenta para hacer listas dependiente
         this.model.on("change:negocio_c", _.bind(this.Updt_OptionProdFinan, this));
         this.model.on('change:negocio_c', this.verificaOperacionProspecto, this);
+        this.model.on('change:producto_financiero_c', this.asesorCCP, this);
         this.adminUserCartera();
+        
+        this.model.addValidationTask('dataOrigen',_.bind(this.dataOrigen, this));
     },
 
    /* producto_financiero: function () {
@@ -427,7 +430,48 @@
             this.model.set('admin_cartera_c', true);
         }
     },
+        
+    dataOrigen: function (fields, errors, callback) {
+        var userprodprin = this.model.get('tipo_producto_c');
+        var textmsg = "";
+        var tipom = "";
 
+        app.api.call('GET', app.api.buildURL('Accounts/' + this.model.get('account_id')), null, {
+            success: _.bind(function (cuenta) {
+
+                app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + cuenta.id), null, {
+                    success: function (data) {
+                        Productos = data;
+                        //ResumenProductos = Productos;
+                        //estatus_atencion - tipo_producto_c
+                        _.each(Productos, function (value, key) {
+                            var tipoProducto = Productos[key].tipo_producto;
+                            var statusProducto = Productos[key].status_management_c;
+                            if(tipoProducto == userprodprin && statusProducto == '3'){                                
+                                textmsg = 'La cuenta está marcada como <b>Cancelada</b>. Active la cuenta para continuar.';
+                                tipom = "error";
+                            }
+                        });
+                        if(textmsg != ""){      
+                            App.alert.show("producto_cancelado", {
+                                level: tipom,
+                                messages: textmsg,
+                                autoClose: false
+                            });
+                            errors['tipo_producto_c'] = "cuenta cancelada";
+                            errors['tipo_producto_c'].required = true;
+                            /****************************************/
+                        }
+                        callback(null, fields, errors);
+                    },
+                        error: function (e) {
+                            throw e;
+                        }
+                    });
+
+            }, self),
+        });
+    },
 
     /*
     *Victor Martinez Lopez
@@ -496,13 +540,24 @@
     },
 
     _ValidateAmount: function (fields, errors, callback) {
-        if (parseFloat(this.model.get('monto_c')) <= 0 && this.model.get('producto_financiero_c') != 40 && this.model.get('admin_cartera_c') != true) {
+        if (parseFloat(this.model.get('monto_c')) <= 0 && this.model.get('producto_financiero_c') != 40 && this.model.get('producto_financiero_c') != 78 && this.model.get('admin_cartera_c') != true) {
             errors['monto_c'] = errors['monto_c'] || {};
             errors['monto_c'].required = true;
 
             app.alert.show("Monto de Linea requerido", {
                 level: "error",
                 title: "Monto de L\u00EDnea debe ser mayor a cero",
+                autoClose: false
+            });
+        }
+        //Validación Crédito Corto Plazo
+        if (this.model.get('producto_financiero_c') == '78' && (parseFloat(this.model.get('monto_c'))<500000 || parseFloat(this.model.get('monto_c'))>10000000) ) {
+            delete errors.monto_c;
+            errors['monto_c'] = errors['monto_c'] || {};
+            errors['monto_c'].required = true;
+            app.alert.show("monto_corto_plazo", {
+                level: "error",
+                title: "El monto de línea debe tener un valor mínimo de $500,000.00 y máximo $10,000,000.00",
                 autoClose: false
             });
         }
@@ -679,32 +734,37 @@
                             autoClose: false
                         });
                     }
-
-                    if (model.get('tct_no_contactar_chk_c') == true) {
-
-                        app.alert.show("cuentas_no_contactar", {
-                            level: "error",
-                            title: "Cuenta No Contactable<br>",
-                            messages: "Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
-                            autoClose: false
-                        });
-
-                        //Cerrar vista de creación de solicitud
-                        if (app.drawer.count()) {
-                            app.drawer.close(this.context);
-                            //Ocultar alertas excepto la que indica que no se pueden crear relacionados a Cuentas No Contactar
-                            var alertas = app.alert.getAll();
-                            for (var property in alertas) {
-                                if (property != 'cuentas_no_contactar') {
-                                    app.alert.dismiss(property);
-                                }
-                            }
-                        } else {
-                            app.router.navigate(this.module, {trigger: true});
-                        }
-
-                    }
-                    callback(null, fields, errors);
+					if(!app.user.attributes.tct_no_contactar_chk_c && !app.user.attributes.bloqueo_credito_c && !app.user.attributes.bloqueo_cumple_c) {
+						var url = app.api.buildURL('tct02_Resumen/' + this.model.get('account_id'), null, null);
+						app.api.call('read', url, {}, {
+							success: _.bind(function (data) {
+								if (data.bloqueo_cartera_c || data.bloqueo2_c || data.bloqueo3_c) {
+									app.alert.show("cuentas_no_contactar", {
+										level: "error",
+										title: "Cuenta No Contactable<br>",
+										messages: "Cualquier duda o aclaraci\u00F3n, favor de contactar al \u00E1rea de <b>Administraci\u00F3n de cartera</b>",
+										autoClose: false
+									});
+									//Cerrar vista de creación de solicitud
+									if (app.drawer.count()) {
+										app.drawer.close(this.context);
+										//Ocultar alertas excepto la que indica que no se pueden crear relacionados a Cuentas No Contactar
+										var alertas = app.alert.getAll();
+										for (var property in alertas) {
+											if (property != 'cuentas_no_contactar') {
+												app.alert.dismiss(property);
+											}
+										}
+									} else {
+										app.router.navigate(this.module, {trigger: true});
+									}
+								}
+								callback(null, fields, errors);
+							}, this)
+						});
+					} else {
+						callback(null, fields, errors);
+					}
                 }, this)
             });
         } else {
@@ -755,7 +815,7 @@
                     id_promotor = modelo.get('user_id7_c');
                     name_promotor = modelo.attributes.promotoruniclick_c;
                 }
-                if( parseInt(this.model.get('producto_financiero_c'))==43)
+                if( parseInt(this.model.get('producto_financiero_c'))==43 || parseInt(this.model.get('producto_financiero_c'))==78)
                 {
                     id_promotor = app.user.id;
                     name_promotor = app.user.attributes.full_name;
@@ -1336,9 +1396,9 @@
             $('[data-name="' + field.name + '"]').hide();
         });
         $('[data-name="name"]').show();
-        $('[data-name="tct_etapa_ddw_c"]').show();
-        $('[data-name="estatus_c"]').show();
-        $('[data-name="idsolicitud_c"]').show();
+        //$('[data-name="tct_etapa_ddw_c"]').show();
+        //$('[data-name="estatus_c"]').show();
+        //$('[data-name="idsolicitud_c"]').show();
         $('[data-name="account_name"]').show();
         $('[data-name="tipo_producto_c"]').show();
        // $('[data-name="producto_financiero_c"]').show();
@@ -1347,7 +1407,6 @@
         $('[data-name="assigned_user_name"]').show();
         $('[data-name="picture"]').show();
         $('[data-name="tct_numero_vehiculos_c"]').show();
-        $('[data-name="lic_licitaciones_opportunities_1_name"]').show();
 
         //Se visualiza campo de Administrador cartera solo si el usuario tiene activo el check
         if (app.user.attributes.admin_cartera_c == 1 && app.user.attributes.config_admin_cartera == true) {
@@ -1727,7 +1786,7 @@
         var op = app.lang.getAppListStrings('tipo_producto_list');
         var op2 = {};
         var productos = App.user.attributes.productos_c;
-        
+
         //Establece el valor por default del user logueado
         productos=productos.replace(/\^/g,"");
         productos= productos.split(",");
@@ -1922,7 +1981,7 @@
                     id_promotor = modelo.get('user_id7_c');
                     name_promotor = modelo.attributes.promotoruniclick_c;
                 }
-                if( parseInt(this.model.get('producto_financiero_c'))==43)
+                if( parseInt(this.model.get('producto_financiero_c'))==43 || parseInt(this.model.get('producto_financiero_c'))==78)
                 {
                     id_promotor = app.user.id;
                     name_promotor = app.user.attributes.full_name;
@@ -1949,7 +2008,7 @@
             this.render();
         }
     },
-    
+
     showSubpanels: function () {
         if (typeof this.model.get('tipo_producto_c') != "undefined" && this.model.get('tipo_producto_c') != ""
             && typeof this.model.get('account_id') != "undefined" && this.model.get('account_id') != "") {
@@ -2292,4 +2351,12 @@
         }
         callback(null, fields, errors);
     },
+    asesorCCP:function () {
+        if (this.model.get('producto_financiero_c') == '78') {
+            this.model.set("assigned_user_id", App.user.id);
+            this.model.set("assigned_user_name", App.user.attributes.full_name);
+        }
+
+    }
+
 })

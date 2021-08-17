@@ -4,6 +4,8 @@
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
+		this.model.on("change:tipo_sf_c",this.perIncentivo, this);
+		this.model.on("change:tipo_venta_c",this.perIncentivo, this);
         this.model.on("change:referenciador",this.addRegion, this);
         this.model.on("change:empleados_c",this.adDepartment, this);
         this.model.on("change:tipo_cuenta_c",this.setTipo, this);
@@ -12,6 +14,7 @@
         this.model.addValidationTask('referenciador', _.bind(this.validauser, this));
         this.model.addValidationTask('Requeridos_c', _.bind(this.valida_Req, this));
         this.model.addValidationTask('Notifica', _.bind(this.notifica, this));
+		this.model.addValidationTask('puesto', _.bind(this.validaPuesto, this));
     },
 
     _render: function() {
@@ -32,22 +35,49 @@
         if(this.model.get('tipo_cuenta_c') == 3) this.model.set('tipo_cliente_c', 2);
     },
 
+    perIncentivo: function() {
+		if(this.model.get('user_id1_c')) var usrid = this.model.get('user_id1_c');
+		if(this.model.get('user_id2_c')) var usrid = this.model.get('user_id2_c');
+		if(usrid) {
+			app.api.call("read", app.api.buildURL("Users/" + usrid, null, null, {}), null, {
+				success: _.bind(function (data) {
+					if(data.puestousuario_c == 58) this.model.set('incentivo',15);
+					if(this.model.get('tipo_venta_c') == 4) this.model.set('incentivo',0);
+					if(this.model.get('tipo_sf_c') == 2 && data.puestousuario_c != 58) this.model.set('incentivo',10);
+					if(this.model.get('tipo_sf_c') == 1 && data.productos_c.includes("8")) this.model.set('incentivo',15);
+				}, this)
+			});
+		}
+    },
+
     addRegion: function() {
-      var usrid = this.model.get('user_id1_c');
-      app.api.call("read", app.api.buildURL("Users/" + usrid, null, null, {}), null, {
-        success: _.bind(function (data) {
-          this.model.set('region',data.region_c);
-        }, this)
-      });
+		var usrid = this.model.get('user_id1_c');
+		if(usrid) {
+			app.api.call("read", app.api.buildURL("Users/" + usrid, null, null, {}), null, {
+				success: _.bind(function (data) {
+					this.model.set('region',data.region_c);
+					if(data.puestousuario_c == 58) this.model.set('incentivo',15);
+					if(this.model.get('tipo_venta_c') == 4) this.model.set('incentivo',0);
+					if(this.model.get('tipo_sf_c') == 2 && data.puestousuario_c != 58) this.model.set('incentivo',10);
+					if(this.model.get('tipo_sf_c') == 1 && data.productos_c.includes("8")) this.model.set('incentivo',15);
+				}, this)
+			});
+		}
     },
 
     adDepartment: function() {
-      var empid = this.model.get('user_id2_c');
-      app.api.call("read", app.api.buildURL("Employees/" + empid, null, null, {}), null, {
-        success: _.bind(function (data) {
-          this.model.set('departamento_c',data.no_empleado_c);
-        }, this)
-      });
+		var empid = this.model.get('user_id2_c');
+		if(empid) {
+		  app.api.call("read", app.api.buildURL("Employees/" + empid, null, null, {}), null, {
+			success: _.bind(function (data) {
+			  this.model.set('departamento_c',data.no_empleado_c);
+			  if(data.puestousuario_c == 58) this.model.set('incentivo',15);
+			  if(this.model.get('tipo_venta_c') == 4) this.model.set('incentivo',0);
+			  if(this.model.get('tipo_sf_c') == 2 && data.puestousuario_c != 58) this.model.set('incentivo',10);
+			  if(this.model.get('tipo_sf_c') == 1 && data.productos_c.includes("8")) this.model.set('incentivo',15);
+			}, this)
+		  });
+		}
     },
 
     fechaCierre: function(fields, errors, callback) {
@@ -160,6 +190,19 @@
             app.alert.show("Notifica", {
                 level: "info",
                 messages: "Favor de Integrar la documentación/Información mínima requerida para determinar las condiciones del seguro a cotizar, tales como: Carátula de póliza actual, términos y condiciones, reporte de siniestralidad, listados de asegurados o bienes por asegurar, ubicaciones del bien, otros",
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
+    },
+
+    validaPuesto: function (fields, errors, callback) {
+        if (app.user.get('puestousuario_c') == 59) {
+		    errors['puesto'] = errors['puesto'] || {};
+            errors['puesto'].required = true;	
+            app.alert.show("ErrorPuesto", {
+                level: "error",
+                messages: "Usted no tiene privilegios para crear Oportunidades de Seguro",
                 autoClose: false
             });
         }

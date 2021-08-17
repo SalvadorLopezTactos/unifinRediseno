@@ -32,7 +32,11 @@
                 <tr>
                     <th scope="col">&nbsp;</th>
                     {{#each headers}}
-                    <th scope="col" {{#if dobleCampo}}colspan="2"{{/if}}>{{name}}</th>
+                    <th scope="col" {{#if dobleCampo}}colspan="2"{{/if}}>{{name}}
+                    {{#each numeroEspacios}}
+                        &nbsp;
+                    {{/each}}
+                    </th>
                     {{/each}}
                 </tr>
             </thead>
@@ -55,9 +59,13 @@
                             {{/if}}
                             {{#if text}}
                                 {{#if rangoInferior}}
-                                <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control" size="10" value={{rangoInferior}} disabled style="pointer-events:none;" data-info="inferior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
+                                    <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control" size="10" value={{rangoInferior}} disabled style="pointer-events:none;" data-info="inferior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
                                 {{else}}
-                                <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control" size="10" value={{rangoSuperior}} disabled style="pointer-events:none;" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
+                                    {{#if rangoSuperior}}
+                                    <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control" size="10" value={{rangoSuperior}} disabled style="pointer-events:none;" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}">
+                                    {{else}}
+                                    <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control" size="10" value="{{valorCampo}}" disabled style="pointer-events:none;" data-info="input">
+                                    {{/if}}
                                 {{/if}}
                             {{/if}}
                             {{#if checkbox}}
@@ -84,7 +92,11 @@
             <tr>
                 <th scope="col">&nbsp;</th>
                 {{#each headers}}
-                <th scope="col" {{#if dobleCampo}}colspan="2"{{/if}}>{{name}}</th>
+                <th scope="col" {{#if dobleCampo}}colspan="2"{{/if}}>{{name}}
+                {{#each numeroEspacios}}
+                        &nbsp;
+                {{/each}}
+                </th>
                 {{/each}}
             </tr>
         </thead>
@@ -106,11 +118,26 @@
                             </select>
                         {{/if}}
                         {{#if text}}
-                            {{#if rangoInferior}}
-                            <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control fieldCFConfig fieldValidateRange" size="10" data-info="inferior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}" value="{{rangoInferior}}" data-tipo-campo="inputInferior">
+                            <!--Se agrega esta variable ya que al introducir valor vacío, la validación de hbs pensaba que no debía 
+                            pintar la sección de inputInferior y pintaba la sección de inputSuperior, lo que hacía validación de rangos incorrectas -->
+                            {{#if actualizadoPorUsuarioPermiteVacio}}
+                                <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control fieldCFConfig fieldValidateRange" size="10" data-info="inferior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}" value="{{rangoInferior}}" data-tipo-campo="inputInferior">
                             {{else}}
-                            <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control fieldCFConfig fieldValidateRange" size="10" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}" value="{{rangoSuperior}}" data-tipo-campo="inputSuperior">
+                                {{#if rangoInferior}}
+                                    <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control fieldCFConfig fieldValidateRange" size="10" data-info="inferior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}" value="{{rangoInferior}}" data-tipo-campo="inputInferior">
+                                {{else}}
+                                    {{#if actualizadoPorUsuarioInputSuperior}}
+                                        <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control fieldCFConfig fieldValidateRange" size="10" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}" value="{{rangoSuperior}}" data-tipo-campo="inputSuperior">
+                                        {{else}}
+                                            {{#if rangoSuperior}}
+                                                <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control fieldCFConfig fieldValidateRange" size="10" data-info="superior" data-limite-inferior="{{limiteInferior}}" data-limite-superior="{{limiteSuperior}}" value="{{rangoSuperior}}" data-tipo-campo="inputSuperior">
+                                            {{else}}
+                                                <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="text" class="form-control fieldCFConfig fieldValidateRange" size="10" value="{{valorCampo}}" data-tipo-campo="input">
+                                            {{/if}}
+                                    {{/if}}
+                                {{/if}}
                             {{/if}}
+                            
                         {{/if}}
                         {{#if checkbox}}
                             <input data-name="{{nombreCampo}}" data-id-nodo="{{idNodo}}" data-columna="{{nombreColumna}}" type="checkbox" class="form-control fieldCFConfig" size="10" data-tipo-campo="check" {{checked}}>

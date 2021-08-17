@@ -244,4 +244,8 @@ $searchFields['Leads'] = array (
   array (
     'query_type' => 'default',
   ),
+  'opportunity_amount' => 
+  array (
+    'query_type' => 'default',
+  ),
 );

@@ -45,50 +45,44 @@ class CuentasNoContactar extends SugarApi
             //Omitiendo espacios en blanco
             $filtroCliente = trim($filtroCliente);
             $filtroTipoCuenta = $args['tipos_cuenta'];
-
             $tipos_separados = explode(",", $filtroTipoCuenta);
             $arr_aux = array();
-
             for ($i = 0; $i < count($tipos_separados); $i++) {
                 array_push($arr_aux, "'" . $tipos_separados[$i] . "'");
             }
-
             $tipos_query = join(',', $arr_aux);
-
-
             $total_rows = <<<SQL
-SELECT id, name, tipodepersona_c, tipo_registro_cuenta_c, idcliente_c,tct_no_contactar_chk_c FROM accounts
+SELECT id, name, tipodepersona_c, tipo_registro_cuenta_c, idcliente_c, tct_no_contactar_chk_c, bloqueo_credito_c, bloqueo_cumple_c FROM accounts
 INNER JOIN accounts_cstm ON accounts_cstm.id_c = accounts.id
+INNER JOIN tct02_resumen_cstm ON tct02_resumen_cstm.id_c = accounts.id
 SQL;
             if ($user_id == "undefined") {
                 $total_rows .= " WHERE tipo_registro_cuenta_c IN({$tipos_query}) AND deleted =0";
             } else {
                 $total_rows .= " WHERE tipo_registro_cuenta_c IN({$tipos_query})
-AND (user_id_c='{$user_id}' OR user_id1_c='{$user_id}' OR user_id2_c='{$user_id}' OR user_id6_c='{$user_id}')
- AND deleted =0";
+AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id}' OR accounts_cstm.user_id2_c='{$user_id}' OR accounts_cstm.user_id6_c='{$user_id}')
+ AND deleted=0";
             }
             if (!empty($filtroCliente)) {
                 $total_rows .= " AND name LIKE '%{$filtroCliente}%' ";
             }
             $totalResult = $db->query($total_rows);
-
             $response['total'] = $totalResult->num_rows;
             while ($row = $db->fetchByAssoc($totalResult)) {
                 $response['full_cuentas'][] = $row['id'];
             }
-
             $query = <<<SQL
-SELECT id, name, tipodepersona_c, tipo_registro_cuenta_c, rfc_c, idcliente_c,tct_no_contactar_chk_c FROM accounts
+SELECT id, name, tipodepersona_c, tipo_registro_cuenta_c, rfc_c, idcliente_c, tct_no_contactar_chk_c, bloqueo_credito_c, bloqueo_cumple_c FROM accounts
 INNER JOIN accounts_cstm ON accounts_cstm.id_c = accounts.id
+INNER JOIN tct02_resumen_cstm ON tct02_resumen_cstm.id_c = accounts.id
 SQL;
             if ($user_id == "undefined") {
                 $query .= " WHERE tipo_registro_cuenta_c IN({$tipos_query}) AND deleted =0";
             } else {
                 $query .= " WHERE tipo_registro_cuenta_c IN({$tipos_query})
-AND (user_id_c='{$user_id}' OR user_id1_c='{$user_id}' OR user_id2_c='{$user_id}' OR user_id6_c='{$user_id}')
- AND deleted =0";
+AND (accounts_cstm.user_id_c='{$user_id}' OR accounts_cstm.user_id1_c='{$user_id}' OR accounts_cstm.user_id2_c='{$user_id}' OR accounts_cstm.user_id6_c='{$user_id}')
+ AND deleted=0";
             }
-
             if (!empty($filtroCliente)) {
                 $query .= " AND name LIKE '%{$filtroCliente}%' ";
             }
@@ -107,113 +101,145 @@ AND (user_id_c='{$user_id}' OR user_id1_c='{$user_id}' OR user_id2_c='{$user_id}
 
     public function updateCuentasNoContactar($api, $args)
     {
-
-        global $db, $current_user;
-
-        //Obtener los ids de las Cuentas a actualizar
-        $cuentas = $args['data']['cuentas'];
-        $cuentas_resumen['actualizados']=array();
-        $cuentas_resumen['no_actualizados']=array();
-        //Obtener id de usuario 9 - Bloqueado
-        $id_user_assing = '36af9462-37e6-11ea-baed-a44e314beb18';
-
-
-        $IntValue = new DropdownValuesHelper();
-        $callApi = new UnifinAPI();
-
-        for ($i = 0; $i < count($cuentas); $i++) {
-
-            $account = BeanFactory::getBean('Accounts', trim($cuentas[$i]), array('disable_row_level_security' => true));
-            if ($account->id != null) {
-                
-                if($account->fetched_row['tct_no_contactar_chk_c']==1){
-                    $account->tct_no_contactar_chk_c = 0;
-                }else{
-                    $account->tct_no_contactar_chk_c = 1;
-                }
-
-                //Leasing
-                $account->user_id_c = $id_user_assing;
-                //Crédito Automotriz
-                $account->user_id2_c = $id_user_assing;
-                //Factoraje
-                $account->user_id1_c = $id_user_assing;
-                //Fleet
-                $account->user_id6_c = $id_user_assing;
-                //Uniclick
-                $account->user_id7_c = $id_user_assing;
-
-                $account->save();
-
-                array_push($cuentas_resumen['actualizados'],$cuentas[$i]);
-
-                /*Actualizar solicitudes*/
-                $query = <<<SQL
-UPDATE opportunities
-INNER JOIN accounts_opportunities ON accounts_opportunities.opportunity_id = opportunities.id AND accounts_opportunities.deleted = 0
-INNER JOIN accounts ON accounts.id = accounts_opportunities.account_id AND accounts.deleted = 0
-INNER JOIN opportunities_cstm cs ON opportunities.id = cs.id_c
-SET opportunities.assigned_user_id = '{$id_user_assing}'
-WHERE accounts.id = '{$cuentas[$i]}'
-SQL;
-                $queryResult = $db->query($query);
-
-                /*Actualizar backlogs*/
-
-                //Meses siguientes
-                //$condicion=" AND ((b.anio = year(NOW()) and b.mes > month(NOW())) OR b.anio > year(NOW()))";
-                //Mes actual y siguientes
-                $condicion = " AND ((b.anio = year(NOW()) and b.mes >= month(NOW())) OR b.anio > year(NOW()))";
-                $bl_cuenta = "SELECT b.id, b.mes,b.description
-  FROM
-      lev_backlog b
-  WHERE
-      b.account_id_c = '{$cuentas[$i]}'" . $condicion . "
-          AND deleted = 0;";
-
-                $result_bl_cuentas = $db->query($bl_cuenta);
-
-                if ($result_bl_cuentas->num_rows > 0 && $result_bl_cuentas != null) {
-
-                    while ($row = $db->fetchByAssoc($result_bl_cuentas)) {
-
-                        $bl = BeanFactory::retrieveBean("lev_Backlog", $row['id']);
-                        if ($bl != null) {
-                            $bl->assigned_user_id = $id_user_assing;
-                            //$bl->description=$row['description']. ' \n UNI2CRM - '. $hoy.'/'. $mes_actual.'/'. $anio_actual. ': BL Reasignado a promotor '. $IntValue->getUserName($reAsignado);
-                            $bl->save();
-                        }
-                    }
-
-                }
-
-                $query = <<<SQL
-select CASE WHEN idcliente_c > 0 THEN idcliente_c ELSE 0 END idCliente from accounts_cstm where id_c = '{$cuentas[$i]}'
-SQL;
-                $idCliente = $db->getone($query);
-
-                if (intval($idCliente) > 0) {
-                    $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> :  Se sincronizaran promtores con UNICS ");
-                    $hostLeasing = "http://" . $GLOBALS['unifin_url'] . "/Uni2WsClnt/WsRest/Uni2ClntService.svc/Uni2/AsignaPromotor?idCliente=" . $idCliente . "&usuarioPromotorLeasing=" . $IntValue->getUserName($id_user_assing) . "&usuarioDominio=" . $current_user->user_name;;
-                    $callApi->unifingetCall($hostLeasing);
-                    $hostFactoraje = "http://" . $GLOBALS['unifin_url'] . "/Uni2WsClnt/WsRest/Uni2ClntService.svc/Uni2/AsignaPromotor?idCliente=" . $idCliente . "&usuarioPromotorFactoring=" . $IntValue->getUserName($id_user_assing) . "&usuarioDominio=" . $current_user->user_name;;
-                    $callApi->unifingetCall($hostFactoraje);
-                    $hostCA = "http://" . $GLOBALS['unifin_url'] . "/Uni2WsClnt/WsRest/Uni2ClntService.svc/Uni2/AsignaPromotor?idCliente=" . $idCliente . "&usuarioPromotorCredit=" . $IntValue->getUserName($id_user_assing) . "&usuarioDominio=" . $current_user->user_name;
-                    $callApi->unifingetCall($hostCA);
-
-                } else {
-                    $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> :  La persona a reasignar no cuenta con IdCliente: " . print_r($idCliente, 1));
-                }
-            }else{
-
-                if($cuentas[$i]) array_push($cuentas_resumen['no_actualizados'],$cuentas[$i]);
-
-            }
-
-
-        }//for
-
-        return $cuentas_resumen;
-
+		try {
+			global $db, $current_user;
+			$cuentas = $args['data']['cuentas'];
+			$parame = $args['data']['parame'];
+			$selected = $args['data']['selected'];
+			$cuentas_resumen['actualizados']=array();
+			$cuentas_resumen['no_actualizados']=array();
+			$IntValue = new DropdownValuesHelper();
+			$callApi = new UnifinAPI();
+			$bloqueo = 0;
+			for ($i = 0; $i < count($cuentas); $i++) {
+				$account = BeanFactory::getBean('Accounts', trim($cuentas[$i]), array('disable_row_level_security' => true));
+				if ($account->id != null) {
+					$cuenta = $account->name;
+					$idcuenta = $account->id;
+					if(trim($selected) == "selected1") {
+						if($account->fetched_row['tct_no_contactar_chk_c']==1){
+							$account->tct_no_contactar_chk_c = 0;
+						}else{
+							$account->tct_no_contactar_chk_c = 1;
+							$bloqueo = 1;
+						}
+						$account->save();
+					}
+					$resumen = BeanFactory::getBean('tct02_Resumen', trim($cuentas[$i]), array('disable_row_level_security' => true));
+					if ($resumen->id != null) {
+						if(trim($selected) == "selected2") {
+							if($resumen->fetched_row['bloqueo_credito_c']==1){
+								$resumen->bloqueo_credito_c = 0;
+							}else{
+								$resumen->bloqueo_credito_c = 1;
+								$bloqueo = 1;
+							}
+						}
+						if(trim($selected) == "selected3") {
+							if($resumen->fetched_row['bloqueo_cumple_c']==1){
+								$resumen->bloqueo_cumple_c = 0;
+							}else{
+								$resumen->bloqueo_cumple_c = 1;
+								$bloqueo = 1;
+							}
+						}
+						if($bloqueo) {
+							if(trim($selected) == "selected1") {
+								$query = "update tct02_resumen_cstm set bloqueo_cartera_c = 0 where id_c = '{$resumen->id}'";
+								$resumen->condicion_cliente_c = $parame["condicion"];
+								$resumen->razon_c = $parame["razon"];
+								$resumen->motivo_c = $parame["motivo"];
+								$resumen->detalle_c = $parame["detalle"];
+								$resumen->user_id_c = $parame["ingesta"];
+								$resumen->user_id1_c = $parame["valida"];
+							}
+							if(trim($selected) == "selected2") {
+								$query = "update tct02_resumen_cstm set bloqueo2_c = 0 where id_c = '{$resumen->id}'";
+								$resumen->condicion2_c = $parame["condicion"];
+								$resumen->razon2_c = $parame["razon"];
+								$resumen->motivo2_c = $parame["motivo"];
+								$resumen->detalle2_c = $parame["detalle"];
+								$resumen->user_id2_c = $parame["ingesta"];
+								$resumen->user_id3_c = $parame["valida"];
+							}
+							if(trim($selected) == "selected3") {
+								$query = "update tct02_resumen_cstm set bloqueo3_c = 0 where id_c = '{$resumen->id}'";
+								$resumen->condicion3_c = $parame["condicion"];
+								$resumen->razon3_c = $parame["razon"];
+								$resumen->motivo3_c = $parame["motivo"];
+								$resumen->detalle3_c = $parame["detalle"];
+								$resumen->user_id4_c = $parame["ingesta"];
+								$resumen->user_id5_c = $parame["valida"];
+							}
+							$queryResult = $db->query($query);
+							//Notifica bloqueo al Resposable de validación
+							global $app_list_strings;
+							require_once 'include/SugarPHPMailer.php';
+							require_once 'modules/Administration/Administration.php';
+							$ingesta = BeanFactory::retrieveBean('Users', $parame["ingesta"]);
+							$valida = BeanFactory::retrieveBean('Users', $parame["valida"]);
+							$linkCuenta=$GLOBALS['sugar_config']['site_url'].'/#Accounts/'.$idcuenta;
+							$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Hola <b>'.$valida->nombre_completo_c.'</b>
+							<br><br>Se le informa que la cuenta <b><a id="linkCuenta" href="'.$linkCuenta.'">'.$cuenta.'</a></b> ha sido bloqueada por <b>'.$ingesta->nombre_completo_c.'</b>
+							<br><br>La razón de bloqueo es: <b>'.$app_list_strings['razon_list'][$parame["razon"]].'</b>
+							<br><br>y el detalle: <b>'.$parame["detalle"].'</b>
+							<br><br>Se requiere de su aprobación para bloquear definitivamente la cuenta.
+							<br><br>Saludos.
+							<br><br>Atentamente Unifin</font></p>
+							<br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>		
+							<p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+							Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+							Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+							No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+							Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/aviso-de-privacidad.php" target="_blank" rel="noopener"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a></span><u></u><u></u></p>';
+							$mailer = MailerFactory::getSystemDefaultMailer();
+							$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+							$mailer->setSubject('Cuenta '.$cuenta.' bloqueada por '.$ingesta->nombre_completo_c);
+							$body = trim($mailHTML);
+							$mailer->setHtmlBody($body);
+							$mailer->clearRecipients();
+							$mailer->addRecipientsTo(new EmailIdentity($valida->email1, $valida->first_name . ' ' . $valida->last_name));
+							$result = $mailer->send();
+						}else{
+							//Notifica desbloqueo al Resposable de validación
+							global $app_list_strings;
+							require_once 'include/SugarPHPMailer.php';
+							require_once 'modules/Administration/Administration.php';
+							$ingesta = BeanFactory::retrieveBean('Users', $parame["ingesta"]);
+							$valida = BeanFactory::retrieveBean('Users', $parame["valida"]);
+							$linkCuenta=$GLOBALS['sugar_config']['site_url'].'/#Accounts/'.$idcuenta;
+							$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Hola <b>'.$valida->nombre_completo_c.'</b>
+							<br><br>Se le informa que la cuenta <b><a id="linkCuenta" href="'.$linkCuenta.'">'.$cuenta.'</a></b> ha sido desbloqueada por <b>'.$ingesta->nombre_completo_c.'</b>
+							<br><br>Se requiere de su aprobación para desbloquear definitivamente la cuenta.
+							<br><br>Saludos.
+							<br><br>Atentamente Unifin</font></p>
+							<br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>		
+							<p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
+							Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
+							Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
+							No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
+							Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/aviso-de-privacidad.php" target="_blank" rel="noopener"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a></span><u></u><u></u></p>';
+							$mailer = MailerFactory::getSystemDefaultMailer();
+							$mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
+							$mailer->setSubject('Cuenta '.$cuenta.' desbloqueada por '.$ingesta->nombre_completo_c);
+							$body = trim($mailHTML);
+							$mailer->setHtmlBody($body);
+							$mailer->clearRecipients();
+							$mailer->addRecipientsTo(new EmailIdentity($valida->email1, $valida->first_name . ' ' . $valida->last_name));
+							$result = $mailer->send();
+						} //else
+						$resumen->save();
+					} //if
+					array_push($cuentas_resumen['actualizados'],$cuentas[$i]);
+				}else{
+					if($cuentas[$i]) array_push($cuentas_resumen['no_actualizados'],$cuentas[$i]);
+				}
+			} //for
+			return $cuentas_resumen;
+        } //try
+		catch (Exception $e) {
+            array_push($cuentas_resumen['no_actualizados'],$cuentas[$i]);
+            return $cuentas_resumen;
+        }
     }
 }

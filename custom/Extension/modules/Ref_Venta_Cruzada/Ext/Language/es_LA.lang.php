@@ -13,3 +13,5 @@ $mod_strings['LBL_VALIDADO_POR_USER_ID'] = ' Validado por (relacionado Usuario I
 $mod_strings['LBL_VALIDADO_POR'] = ' Validado por';
 $mod_strings['LBL_FECHA_VALIDACION'] = 'Fecha de validación';
 $mod_strings['LBL_ACCION_VALIDACION'] = 'Acción de validación';
+$mod_strings['LBL_REF_VALIDADA_AV'] = 'Referencia validada por Alejandro de la Vega';
+$mod_strings['LBL_CORREO_ENV'] = 'Correo enviado';

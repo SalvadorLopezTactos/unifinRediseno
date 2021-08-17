@@ -1,6 +1,6 @@
 <?php
 // WARNING: The contents of this file are auto-generated.
-$mod_strings['LBL_OPPORTUNITY_AMOUNT'] = 'Cantidad de la Solicitud y Línea:';
+$mod_strings['LBL_OPPORTUNITY_AMOUNT'] = 'Monto deseado';
 $mod_strings['LBL_OPPORTUNITY_ID'] = 'ID de Solicitud y Línea';
 $mod_strings['LBL_OPPORTUNITY_NAME'] = 'Nombre de la Solicitud y Línea:';
 $mod_strings['LBL_CONVERTED_OPP'] = 'Solicitud y Línea Convertida:';
@@ -116,3 +116,14 @@ $mod_strings['LBL_INEGI_MACRO'] = 'Macro';
 $mod_strings['LBL_LEAD_CLASF_SECTORIAL'] = 'Clasificación Sectorial';
 $mod_strings['LBL_CONTACTO_ASOCIADO_IMP'] = 'Contacto Asociado';
 $mod_strings['LBL_RFC'] = 'RFC';
+$mod_strings['LBL_HOMONIMO'] = 'Homónimo';
+$mod_strings['LBL_METODO_ASIGNACION_LM_C'] = 'Método de Asignación LM';
+$mod_strings['LBL_PRODUCTOS_INTERES_C'] = 'Productos de interés';
+$mod_strings['LBL_PLAZO_C'] = 'Plazo deseado (meses)';
+$mod_strings['LBL_CURRENCY_0'] = 'LBL_CURRENCY';
+$mod_strings['LBL_PAGO_MENSUAL_ESTIMADO_C'] = 'Pago mensual estimado';
+$mod_strings['LBL_MEDIOS_CONTACTO_DESEADO_C'] = 'Medios de contacto';
+$mod_strings['LBL_MEDIO_PREFERIDO_CONTACTO_C'] = 'Medio preferido de contacto';
+$mod_strings['LBL_DIA_CONTACTO_C'] = 'Día preferido de contacto';
+$mod_strings['LBL_HORA_CONTACTO_C'] = 'Hora preferida de contacto';
+$mod_strings['LBL_OMITE_MATCH'] = 'Omitir match';

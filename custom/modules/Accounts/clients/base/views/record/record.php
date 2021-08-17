@@ -12,12 +12,72 @@ array (
           0 => 
           array (
             'type' => 'button',
+            'name' => 'bloquea_cuenta',
+            'label' => 'Bloquear Cuenta',
+            'css_class' => 'btn-danger hidden',
+            'showOn' => 'view',
+            'events' => 
+            array (
+              'click' => 'button:bloquea_cuenta:click',
+            ),
+          ),
+          1 => 
+          array (
+            'type' => 'button',
+            'name' => 'desbloquea_cuenta',
+            'label' => 'Desbloquear Cuenta',
+            'css_class' => 'btn-success hidden',
+            'showOn' => 'view',
+            'events' => 
+            array (
+              'click' => 'button:desbloquea_cuenta:click',
+            ),
+          ),
+          2 => 
+          array (
+            'type' => 'button',
+            'name' => 'aprobar_noviable',
+            'label' => 'Confirmar Bloqueo',
+            'css_class' => 'btn-success hidden',
+            'showOn' => 'view',
+            'events' => 
+            array (
+              'click' => 'button:aprobar_noviable:click',
+            ),
+          ),
+          3 => 
+          array (
+            'type' => 'button',
+            'name' => 'desaprobar_noviable',
+            'label' => 'Rechazar Bloqueo',
+            'css_class' => 'btn-danger hidden',
+            'showOn' => 'view',
+            'events' => 
+            array (
+              'click' => 'button:desaprobar_noviable:click',
+            ),
+          ),
+          4 => 
+          array (
+            'type' => 'button',
+            'name' => 'reactivar_noviable',
+            'label' => 'Reactivar Cuenta',
+            'css_class' => 'btn-success hidden',
+            'showOn' => 'view',
+            'events' => 
+            array (
+              'click' => 'button:reactivar_noviable:click',
+            ),
+          ),
+          5 => 
+          array (
+            'type' => 'button',
             'name' => 'cancel_button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'edit',
           ),
-          1 => 
+          6 => 
           array (
             'type' => 'button',
             'name' => 'rfc_qr_button',
@@ -29,7 +89,7 @@ array (
               'click' => 'button:btn_rfc:click',
             ),
           ),
-          2 => 
+          7 => 
           array (
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
@@ -39,7 +99,7 @@ array (
             'showOn' => 'edit',
             'acl_action' => 'edit',
           ),
-          3 => 
+          8 => 
           array (
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
@@ -175,9 +235,16 @@ array (
                 'label' => 'Enviar Cuenta a',
                 'event' => 'button:send_account_asesor:click',
               ),
+              16 => 
+              array (
+                'name' => 'negociador_quantico',
+                'type' => 'rowaction',
+                'label' => 'Negociador Quantico',
+                'event' => 'button:open_negociador_quantico:click',
+              ),
             ),
           ),
-          4 => 
+          9 => 
           array (
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
