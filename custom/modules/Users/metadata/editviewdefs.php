@@ -421,21 +421,17 @@ array (
         array (
           0 => 
           array (
-            'name' => 'bloqueo_credito_c',
-            'label' => 'LBL_BLOQUEO_CREDITO_C',
+            'name' => 'gestion_lm_c',
+            'label' => 'LBL_GESTION_LM',
           ),
-          1 => 
-          array (
-            'name' => 'bloqueo_cumple_c',
-            'label' => 'LBL_BLOQUEO_CUMPLE_C',
-          ),
+          1 => '',
         ),
-        12 => 
+        13 => 
         array (
           0 => 
           array (
-            'name' => 'gestion_lm_c',
-            'label' => 'LBL_GESTION_LM',
+            'name' => 'portal_proveedores_c',
+            'label' => 'LBL_PORTAL_PROVEEDORES',
           ),
           1 => '',
         ),
