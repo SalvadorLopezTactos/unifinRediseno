@@ -171,6 +171,8 @@
         this.model.on('change:negocio_c', this.verificaOperacionProspecto, this);
         this.model.on('change:producto_financiero_c', this.asesorCCP, this);
         this.adminUserCartera();
+        //TIPO DE PRODUCTO TARJETA DE CREDITO
+        this.model.on("change:tipo_producto_c", _.bind(this.montoTarjetaCredito, this));
     },
 
    /* producto_financiero: function () {
@@ -756,6 +758,10 @@
                         id_promotor = modelo.get('user_id7_c');
                         name_promotor = modelo.attributes.promotoruniclick_c;
                         break;
+                    case 14:
+                        id_promotor = App.user.id;
+                        name_promotor = App.user.attributes.full_name;
+                        break;
                     default:
                         id_promotor = modelo.get('user_id_c');
                         name_promotor = modelo.attributes.promotorleasing_c;
@@ -1284,8 +1290,8 @@
         var tipo_registro;
         //id de la Persona asociada
         var id_person = this.model.get('account_id');
-        // Valida que sea diferente de Credito simple y de SERVICIOS
-        if(this.model.get('tipo_producto_c')!='2' && this.model.get('tipo_producto_c')!='13')
+        // Valida que sea diferente de Credito simple, de SERVICIOS y de TARJETA DE CREDITO
+        if(this.model.get('tipo_producto_c')!='2' && this.model.get('tipo_producto_c')!='13' && this.model.get('tipo_producto_c')!='14')
         {
             //Recupera productos asociados
             if (id_person && id_person != '' && id_person.length > 0 ) {
@@ -1923,6 +1929,10 @@
                         id_promotor = modelo.get('user_id7_c');
                         name_promotor = modelo.attributes.promotoruniclick_c;
                         break;
+                    case 14:
+                        id_promotor = App.user.id;
+                        name_promotor = App.user.attributes.full_name;
+                        break;
                     default:
                         id_promotor = modelo.get('user_id_c');
                         name_promotor = modelo.attributes.promotorleasing_c;
@@ -2314,5 +2324,17 @@
             this.model.set("assigned_user_name", App.user.attributes.full_name);
         }
 
-    }
+    },
+
+    montoTarjetaCredito: function () {
+        //TIPO DE PRODUCTO TARJETA DE CREDITO
+        if (this.model.get('tipo_producto_c') == '14') {
+            this.model.set('monto_c','1000000'); //monto de línea por defecto la cantidad de $1,000,000.00 (Un millón de pesos)
+            $('[data-name="monto_c"]').attr('style', 'pointer-events:none');
+        
+        } else {
+            this.model.set('monto_c','');
+            $('[data-name="monto_c"]').attr('style', 'pointer-events:block;');
+        }
+    },
 })

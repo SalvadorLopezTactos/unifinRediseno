@@ -420,7 +420,7 @@
             } else {
                 this.$('div[data-name=plazo_ratificado_incremento_c]').show();
                 this.$('div[data-name=ri_usuario_bo_c]').show();
-                this.obtieneCondicionesFinancieras();
+                // this.obtieneCondicionesFinancieras();
             }
         }, this));
 
@@ -572,13 +572,13 @@
         }*/
         //llamamos a las condiciones financieras por default para ratificación.
         // this.obtieneCondicionesFinancieras();
-        this.model.on("change:plazo_ratificado_incremento_c", _.bind(function () {
-            //Si cambia el plazo disparamos las condiciones:
-            this.obtieneCondicionesFinancieras();
-        }, this));
+        // this.model.on("change:plazo_ratificado_incremento_c", _.bind(function () {
+        //     //Si cambia el plazo disparamos las condiciones:
+        //     this.obtieneCondicionesFinancieras();
+        // }, this));
 
         this.model.on("change:tipo_producto_c", _.bind(function () {
-            this.obtieneCondicionesFinancieras();
+            // this.obtieneCondicionesFinancieras();
             if (this.model.get('tipo_producto_c') == '3') {
                 this.$("div.record-label[data-name='ri_porcentaje_renta_inicial_c']").text("Porcentaje de Enganche R/I");
                 this.$("div.record-label[data-name='porcentaje_renta_inicial_c']").text("Porcentaje de Enganche");
@@ -591,6 +591,12 @@
                 this.$("div.record-label[data-name='monto_c']").text("L\u00EDnea aproximada");
             } else {
                 this.$("div.record-label[data-name='monto_c']").text("Monto de l\u00EDnea");
+            }
+            //TIPO DE PRODUCTO TARJETA DE CREDITO - OCULTA EL CHECK DE RATIFICACION / INCREMENTO
+            if (this.model.get('tipo_producto_c') == '14') {
+                this.$('div[data-name=ratificacion_incremento_c]').hide();      
+            } else {
+                this.$('div[data-name=ratificacion_incremento_c]').show();
             }
         }, this));
 
@@ -1158,7 +1164,7 @@
         }
         callback(null, fields, errors);
     },
-    obtieneCondicionesFinancieras: function () {
+    // obtieneCondicionesFinancieras: function () {
         /*
          * Obtiene las condidionces financieras
          * */
@@ -1201,7 +1207,7 @@
                 }, this)
             });
         }*/
-    },
+    // },
     validaCondicionesFinancerasRI: function (fields, errors, callback) {
         if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
             if (this.model.get('ratificacion_incremento_c') == true && this.model.get('tipo_operacion_c') == '2') {
