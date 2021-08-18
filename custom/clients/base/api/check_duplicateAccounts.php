@@ -51,7 +51,7 @@ class check_duplicateAccounts extends SugarApi
         // $GLOBALS['log']->fatal("nombre del LEads " . $bean->first_name);
         $result = $this->existLeadAccount($bean);
         $count = count($result);
-        if ($bean->subtipo_registro_c != "4") {
+        if ($bean->subtipo_registro_c != "4" && $bean->subtipo_registro_c != "3") { //SUBTIPO DE LEAD ES DIFERENTE DE 4-CONVERTIDO Y DE 3-CANCELADO
             if ($count == 0) {
 
 
