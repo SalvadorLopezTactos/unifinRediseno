@@ -14,7 +14,7 @@
         contexto_cuenta = this;
         self.hasContratosActivos = false;
         this._super("initialize", [options]);
-
+        
         this.context.on('button:cancel_button:click', this.handleCancel, this);
 
         this.totalllamadas = 0;
@@ -242,6 +242,9 @@
         this.model.on('sync', this.ocultaGeneraRFC, this);
 
         //this.model.on('sync', this.get_phones, this);
+
+        //Funcion para ocultar o no el boton de enviar a Portal Proveedores
+        this.model.on('sync', this.btnenvia_proveedor, this);
         //Recupera datos para custom fields
 
         this.get_uni_productos();
@@ -7281,5 +7284,18 @@
                 throw e;
             }
         });
+    },
+
+    btnenvia_proveedor:function(){
+        var button= this.getField("portal_proveedores");
+        button.hide();
+        //Valida que el usuario tenga el chk de envio a portal asi como que la cuenta sea de tipo proveedor
+        if(this.model.get('tipo_registro_cuenta_c')=='5' && App.user.attributes.portal_proveedores_c=='1'){
+            //Muestra boton 
+            button.show();
+            //$('[name="portal_proveedores"]').removeClass('hidden');
+            //Accion para abrir la ventana
+            //window.open("#bwc/index.php?entryPoint=NegociadorQuantico&idPersona=" + idCuenta);
+        }
     },
 })

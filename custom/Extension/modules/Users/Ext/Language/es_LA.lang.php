@@ -67,3 +67,5 @@ $mod_strings['LBL_BLOQUEO_CREDITO_C'] = 'Bloqueo Crédito';
 $mod_strings['LBL_BLOQUEO_CUMPLE_C'] = 'Bloqueo Cumplimiento';
 $mod_strings['LBL_LIMITE_ASIGNACION_LM'] = 'Límite asignación LM';
 $mod_strings['LBL_GESTION_LM'] = 'Gestión LM';
+$mod_strings['LBL_PORTAL_PROOVEDORES'] = 'portal proovedores';
+$mod_strings['LBL_PORTAL_PROVEEDORES'] = 'Enviar a Portal Proveedores';

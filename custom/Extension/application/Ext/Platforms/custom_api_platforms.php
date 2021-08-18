@@ -25,5 +25,6 @@ $platforms[] = 'cvimInfografias';
 $platforms[] = 'cvimExpDigital';
 $platforms[] = 'portalUnifin';
 $platforms[] = 'portalUniclick';
+$platforms[] = 'Alexa';
 $platforms[] = 'cvimUnion';
 $platforms[] = 'quantico';

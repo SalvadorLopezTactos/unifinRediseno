@@ -242,6 +242,14 @@ array (
                 'label' => 'Negociador Quantico',
                 'event' => 'button:open_negociador_quantico:click',
               ),
+              17 => 
+              array (
+                'name' => 'portal_proveedores',
+                'type' => 'rowaction',
+                'label' => 'Enviar al portal de proveedor',
+                /*'css_class' => 'hidden',*/
+                'event' => 'button:enviar_portal_proveedores:click',
+              ),
             ),
           ),
           9 => 

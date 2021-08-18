@@ -430,12 +430,21 @@ array (
             'label' => 'LBL_BLOQUEO_CUMPLE_C',
           ),
         ),
-        12 => 
+        13 => 
         array (
           0 => 
           array (
             'name' => 'gestion_lm_c',
             'label' => 'LBL_GESTION_LM',
+          ),
+          1 => '',
+        ),
+        14 => 
+        array (
+          0 => 
+          array (
+            'name' => 'portal_proveedores_c',
+            'label' => 'LBL_PORTAL_PROVEEDORES',
           ),
           1 => '',
         ),
