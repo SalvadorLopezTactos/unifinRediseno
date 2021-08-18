@@ -7289,13 +7289,17 @@
     btnenvia_proveedor:function(){
         var button= this.getField("portal_proveedores");
         button.hide();
-        //Valida que el usuario tenga el chk de envio a portal asi como que la cuenta sea de tipo proveedor
-        if(this.model.get('tipo_registro_cuenta_c')=='5' && App.user.attributes.portal_proveedores_c=='1'){
-            //Muestra boton 
-            button.show();
-            //$('[name="portal_proveedores"]').removeClass('hidden');
-            //Accion para abrir la ventana
-            //window.open("#bwc/index.php?entryPoint=NegociadorQuantico&idPersona=" + idCuenta);
-        }
+            if (button) {
+                  button.listenTo(button, "render", function () {
+                      
+                       if(this.model.get('tipo_registro_cuenta_c')=='5' && App.user.attributes.portal_proveedores_c=='1'){
+                          button.show();
+                          //Accion próxima
+                          //window.open("#bwc/index.php?entryPoint=NegociadorQuantico&idPersona=" + idCuenta);
+                      } else {
+                          button.hide();
+                      }
+                  });
+            }
     },
 })
