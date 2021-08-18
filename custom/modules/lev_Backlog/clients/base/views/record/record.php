@@ -101,8 +101,8 @@ array (
             array (
               0 => 
               array (
-                'name' => 'tct_tipo_op_leasing_mls_c',
-                'label' => 'LBL_TCT_TIPO_OP_LEASING_MLS',
+                'name' => 'producto_c',
+                'label' => 'LBL_PRODUCTO_C',
               ),
               1 => 
               array (
@@ -111,76 +111,90 @@ array (
               ),
               2 => 
               array (
+                'name' => 'tct_tipo_op_leasing_mls_c',
+                'label' => 'LBL_TCT_TIPO_OP_LEASING_MLS',
+              ),
+              3 => 
+              array (
+              ),
+              4 => 
+              array (
+                'name' => 'num_tipo_op_credito_c',
+                'label' => 'LBL_NUM_TIPO_OP_CREDITO',
+              ),
+              5 => 
+              array (
+              ),
+              6 => 
+              array (
                 'name' => 'anio',
                 'studio' => 'visible',
                 'label' => 'LBL_ANIO',
               ),
-              3 => 
+              7 => 
               array (
                 'name' => 'mes',
                 'studio' => 'visible',
                 'label' => 'LBL_MES',
               ),
-              4 => 
+              8 => 
               array (
                 'name' => 'cliente',
                 'studio' => 'visible',
                 'label' => 'LBL_CLIENTE',
               ),
-              5 => 
+              9 => 
               array (
                 'name' => 'tipo_c',
                 'label' => 'LBL_TIPO_C',
               ),
-              6 => 'assigned_user_name',
-              7 => 
+              10 => 'assigned_user_name',
+              11 => 
               array (
                 'name' => 'equipo',
                 'studio' => 'visible',
                 'label' => 'LBL_EQUIPO',
               ),
-              8 => 
-              array (
-                'name' => 'producto_c',
-                'label' => 'LBL_PRODUCTO_C',
-              ),
-              9 => 
+              12 => 
               array (
                 'name' => 'region',
                 'studio' => 'visible',
                 'label' => 'LBL_REGION',
               ),
-              10 => 
+              13 => 
+              array (
+              ),
+              14 => 
               array (
                 'name' => 'tipo_operacion_c',
                 'label' => 'LBL_TIPO_OPERACION_C',
               ),
-              11 => 
+              15 => 
               array (
                 'name' => 'estatus_operacion_c',
                 'label' => 'LBL_ESTATUS_OPERACION_C',
               ),
-              12 => 
+              16 => 
               array (
                 'name' => 'activo',
                 'label' => 'LBL_ACTIVO',
               ),
-              13 => 
+              17 => 
               array (
                 'name' => 'dif_residuales_c',
                 'label' => 'LBL_DIF_RESIDUALES',
               ),
-              14 => 
+              18 => 
               array (
                 'name' => 'tasa_c',
                 'label' => 'LBL_TASA',
               ),
-              15 => 
+              19 => 
               array (
                 'name' => 'comision_c',
                 'label' => 'LBL_COMISION',
               ),
-              16 => 
+              20 => 
               array (
                 'name' => 'monto_original',
                 'related_fields' => 
@@ -191,12 +205,12 @@ array (
                 'label' => 'LBL_MONTO_ORIGINAL',
                 'readonly' => true,
               ),
-              17 => 
+              21 => 
               array (
                 'name' => 'tct_conversion_c',
                 'label' => 'LBL_TCT_CONVERSION',
               ),
-              18 => 
+              22 => 
               array (
                 'name' => 'monto_comprometido',
                 'related_fields' => 
@@ -206,15 +220,15 @@ array (
                 ),
                 'label' => 'LBL_MONTO_COMPROMETIDO',
               ),
-              19 => 
+              23 => 
               array (
               ),
-              20 => 
+              24 => 
               array (
                 'name' => 'porciento_ri',
                 'label' => 'LBL_PORCIENTO_RI',
               ),
-              21 => 
+              25 => 
               array (
                 'name' => 'renta_inicial_comprometida',
                 'related_fields' => 
@@ -224,7 +238,7 @@ array (
                 ),
                 'label' => 'LBL_RENTA_INICIAL_COMPROMETIDA',
               ),
-              22 => 
+              26 => 
               array (
                 'related_fields' => 
                 array (
@@ -234,7 +248,7 @@ array (
                 'name' => 'monto_final_comprometido_c',
                 'label' => 'LBL_MONTO_FINAL_COMPROMETIDO',
               ),
-              23 => 
+              27 => 
               array (
                 'related_fields' => 
                 array (
@@ -244,7 +258,7 @@ array (
                 'name' => 'ri_final_comprometida_c',
                 'label' => 'LBL_RI_FINAL_COMPROMETIDA',
               ),
-              24 => 
+              28 => 
               array (
                 'name' => 'monto_real_logrado',
                 'related_fields' => 
@@ -254,7 +268,7 @@ array (
                 ),
                 'label' => 'LBL_MONTO_REAL_LOGRADO',
               ),
-              25 => 
+              29 => 
               array (
                 'name' => 'renta_inicial_real',
                 'related_fields' => 
@@ -264,39 +278,39 @@ array (
                 ),
                 'label' => 'LBL_RENTA_INICIAL_REAL',
               ),
-              26 => 
+              30 => 
               array (
                 'name' => 'etapa_c',
                 'label' => 'LBL_ETAPA_C',
               ),
-              27 => 
+              31 => 
               array (
                 'name' => 'etapa_preliminar_c',
                 'label' => 'LBL_ETAPA_PRELIMINAR_C',
               ),
-              28 => 
+              32 => 
               array (
                 'name' => 'motivo_cancelacion_c',
                 'label' => 'LBL_MOTIVO_CANCELACION_C',
                 'span' => 12,
               ),
-              29 => 
+              33 => 
               array (
                 'name' => 'tct_competencia_quien_txf_c',
                 'label' => 'LBL_TCT_COMPETENCIA_QUIEN_TXF',
               ),
-              30 => 
+              34 => 
               array (
               ),
-              31 => 
+              35 => 
               array (
                 'name' => 'tct_que_producto_txf_c',
                 'label' => 'LBL_TCT_QUE_PRODUCTO_TXF',
               ),
-              32 => 
+              36 => 
               array (
               ),
-              33 => 
+              37 => 
               array (
                 'name' => 'monto_comprometido_cancelado',
                 'related_fields' => 
@@ -306,7 +320,7 @@ array (
                 ),
                 'label' => 'LBL_MONTO_COMPROMETIDO_CANCELADO',
               ),
-              34 => 
+              38 => 
               array (
                 'name' => 'renta_inicialcomp_can',
                 'related_fields' => 
@@ -316,19 +330,19 @@ array (
                 ),
                 'label' => 'LBL_RENTA_INICIALCOMP_CAN',
               ),
-              35 => 
+              39 => 
               array (
                 'name' => 'description',
                 'span' => 12,
               ),
-              36 => 
+              40 => 
               array (
                 'name' => 'progreso',
                 'studio' => 'visible',
                 'label' => 'LBL_PROGRESO',
                 'span' => 12,
               ),
-              37 => 
+              41 => 
               array (
                 'related_fields' => 
                 array (
@@ -338,7 +352,7 @@ array (
                 'name' => 'monto_prospecto_c',
                 'label' => 'LBL_MONTO_PROSPECTO_C',
               ),
-              38 => 
+              42 => 
               array (
                 'related_fields' => 
                 array (
@@ -348,7 +362,7 @@ array (
                 'name' => 'ri_prospecto_c',
                 'label' => 'LBL_RI_PROSPECTO_C',
               ),
-              39 => 
+              43 => 
               array (
                 'related_fields' => 
                 array (
@@ -358,7 +372,7 @@ array (
                 'name' => 'monto_credito_c',
                 'label' => 'LBL_MONTO_CREDITO_C',
               ),
-              40 => 
+              44 => 
               array (
                 'related_fields' => 
                 array (
@@ -368,7 +382,7 @@ array (
                 'name' => 'ri_credito_c',
                 'label' => 'LBL_RI_CREDITO_C',
               ),
-              41 => 
+              45 => 
               array (
                 'related_fields' => 
                 array (
@@ -378,7 +392,7 @@ array (
                 'name' => 'monto_rechazado_c',
                 'label' => 'LBL_MONTO_RECHAZADO_C',
               ),
-              42 => 
+              46 => 
               array (
                 'related_fields' => 
                 array (
@@ -388,7 +402,7 @@ array (
                 'name' => 'ri_rechazada_c',
                 'label' => 'LBL_RI_RECHAZADA_C',
               ),
-              43 => 
+              47 => 
               array (
                 'related_fields' => 
                 array (
@@ -398,7 +412,7 @@ array (
                 'name' => 'monto_sin_solicitud_c',
                 'label' => 'LBL_MONTO_SIN_SOLICITUD_C',
               ),
-              44 => 
+              48 => 
               array (
                 'related_fields' => 
                 array (
@@ -408,7 +422,7 @@ array (
                 'name' => 'ri_sin_solicitud_c',
                 'label' => 'LBL_RI_SIN_SOLICITUD_C',
               ),
-              45 => 
+              49 => 
               array (
                 'related_fields' => 
                 array (
@@ -418,7 +432,7 @@ array (
                 'name' => 'monto_con_solicitud_c',
                 'label' => 'LBL_MONTO_CON_SOLICITUD_C',
               ),
-              46 => 
+              50 => 
               array (
                 'related_fields' => 
                 array (
@@ -428,7 +442,7 @@ array (
                 'name' => 'ri_con_solicitud_c',
                 'label' => 'LBL_RI_CON_SOLICITUD_C',
               ),
-              47 => 
+              51 => 
               array (
                 'name' => 'date_entered_by',
                 'readonly' => true,
@@ -451,7 +465,7 @@ array (
                   ),
                 ),
               ),
-              48 => 
+              52 => 
               array (
                 'name' => 'date_modified_by',
                 'readonly' => true,
@@ -474,17 +488,17 @@ array (
                   ),
                 ),
               ),
-              49 => 
+              53 => 
               array (
                 'name' => 'tag',
                 'span' => 12,
               ),
-              50 => 
+              54 => 
               array (
                 'name' => 'tct_carga_masiva_chk_c',
                 'label' => 'LBL_TCT_CARGA_MASIVA_CHK',
               ),
-              51 => 
+              55 => 
               array (
                 'name' => 'tct_bloqueo_txf_c',
                 'label' => 'LBL_TCT_BLOQUEO_TXF',
