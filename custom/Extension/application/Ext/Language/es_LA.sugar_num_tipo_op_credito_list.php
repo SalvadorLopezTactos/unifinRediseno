@@ -1,7 +1,8 @@
 <?php
- // created: 2021-08-19 10:31:29
+ // created: 2021-08-19 11:05:07
 
 $app_list_strings['num_tipo_op_credito_list']=array (
+  0 => 'Sin Clasificar',
   1 => 'Cesion',
   2 => 'Crédito Simple',
   3 => 'Crédito Puente',
@@ -33,5 +34,4 @@ $app_list_strings['num_tipo_op_credito_list']=array (
   29 => 'Arrendamiento Frontera Financiera',
   30 => 'Arrendamiento Puro Exento IVA Financiera',
   31 => 'C.Simple Para Capital de Trabajo a Corto Plazo',
-  0 => '',
 );
