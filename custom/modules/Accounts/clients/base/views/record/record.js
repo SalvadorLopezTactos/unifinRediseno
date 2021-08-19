@@ -7292,14 +7292,14 @@
             if (button) {
                   button.listenTo(button, "render", function () {
                       
-                       if(this.model.get('tipo_registro_cuenta_c')=='5' && App.user.attributes.portal_proveedores_c=='1'){
-                          button.show();
-                          //Accion próxima
-                          //window.open("#bwc/index.php?entryPoint=NegociadorQuantico&idPersona=" + idCuenta);
-                      } else {
-                          button.hide();
-                      }
-                  });
+                    if((this.model.get('esproveedor_c')=='1' || this.model.get('tipo_registro_cuenta_c')=='5') && App.user.attributes.portal_proveedores_c=='1'){
+                        button.show();
+                        //Accion próxima
+                        //window.open("#bwc/index.php?entryPoint=NegociadorQuantico&idPersona=" + idCuenta);
+                    } else {
+                        button.hide();
+                    }
+                });
             }
     },
 })
