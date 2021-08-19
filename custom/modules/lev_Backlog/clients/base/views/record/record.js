@@ -24,7 +24,8 @@
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         this.model.addValidationTask('Valida_edicionBacklog', _.bind(this.mesbacklog, this));
 
-
+		/************  CAmbiar valores tipo PRoducto LEasing   *****************/
+		this.model.addValidationTask('num_tipo_producto',_.bind(this.num_tipo_leasing, this));
 
         // validación de los campos con formato númerico
         this.events['keydown [name=dif_residuales_c]'] = 'checkInVentas';
@@ -665,4 +666,28 @@
           }
           callback(null, fields, errors);
       },
+	  
+	  num_tipo_leasing: function(fields, errors, callback) {
+		var tiposnum = app.lang.getAppListStrings('num_tipo_op_leasing_list');
+		var data1 = this.model.get('tct_tipo_op_leasing_mls_c');
+		var producto = this.model.get('producto_c');
+		var salida = [];
+		
+		if(producto == "2"){
+			if(this.model.get('comision_c') == undefined){
+				errors['comision_c'] = errors['comision_c'] || {};
+				errors['comision_c'].required = true;
+			}
+			if(parseFloat(this.model.get('comision_c')) <= 0.0 ){
+				errors['tct_conversion_c'] = errors['tct_conversion_c'] || {};
+				errors['tct_conversion_c'].required = true;
+				app.alert.show("comision", {
+					level: "error",
+					messages: "El campo <b>Comisión</b> debe ser mayor a 0.",
+					autoClose: false
+				});
+			}
+		}
+        callback(null, fields, errors);
+    },
 })
