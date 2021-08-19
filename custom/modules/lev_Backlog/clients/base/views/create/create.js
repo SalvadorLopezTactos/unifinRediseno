@@ -37,7 +37,9 @@
         this.model.addValidationTask('camponovacio',_.bind(this.validacampoconversion,this));
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
 
-
+		/************  CAmbiar valores tipo PRoducto LEasing   *****************/
+		this.model.addValidationTask('num_tipo_producto',_.bind(this.num_tipo_leasing, this));
+		
         /*
         var usuario = app.data.createBean('Users',{id:app.user.get('id')});
         usuario.fetch({
@@ -327,11 +329,12 @@
         var id_account=this.model.get('account_id_c');
         var mes=this.model.get('mes');
         var anio=this.model.get('anio');
+		var producto=this.model.get('producto_c');
 
         if(id_account && id_account != '' && id_account.length>0){
 
 
-            var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes+'&filter[2][anio][$equals]='+anio+'&filter[3][estatus_operacion_c][$not_equals]=1&fields=id,mes,estatus_operacion_c',
+            var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes+'&filter[2][anio][$equals]='+anio+'&filter[3][estatus_operacion_c][$not_equals]=1&filter[4][producto_c][$equals]='+producto+'&fields=id,mes,estatus_operacion_c,producto_c',
                 null, null, null);
 
 
@@ -824,6 +827,40 @@
             });
 
         }
+        callback(null, fields, errors);
+    },
+	
+	num_tipo_leasing: function(fields, errors, callback) {
+		var tiposnum = app.lang.getAppListStrings('num_tipo_op_leasing_list');
+		var data1 = this.model.get('tct_tipo_op_leasing_mls_c');
+		var producto = this.model.get('producto_c');
+		var salida = [];
+		
+		if(producto == "1"){
+			_.each(data1, function(value, key) {
+				_.each(tiposnum, function(valor, key1) {
+					valor = valor.replace('&', 'and');
+					if(_.isEqual(value,valor)) {
+						salida.push(key1);
+					}
+				}, this);
+			}, this);
+			this.model.set('num_tipo_op_leasing_c',salida);
+		}else if(producto == "2"){
+			if(this.model.get('comision_c') == undefined){
+				errors['comision_c'] = errors['comision_c'] || {};
+				errors['comision_c'].required = true;
+			}
+			if(parseFloat(this.model.get('comision_c')) <= 0.0 ){
+				errors['tct_conversion_c'] = errors['tct_conversion_c'] || {};
+				errors['tct_conversion_c'].required = true;
+				app.alert.show("comision", {
+					level: "error",
+					messages: "El campo <b>Comisión</b> debe ser mayor a 0.",
+					autoClose: false
+				});
+			}
+		}
         callback(null, fields, errors);
     },
 })
