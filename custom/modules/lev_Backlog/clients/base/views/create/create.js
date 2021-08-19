@@ -836,17 +836,7 @@
 		var producto = this.model.get('producto_c');
 		var salida = [];
 		
-		if(producto == "1"){
-			_.each(data1, function(value, key) {
-				_.each(tiposnum, function(valor, key1) {
-					valor = valor.replace('&', 'and');
-					if(_.isEqual(value,valor)) {
-						salida.push(key1);
-					}
-				}, this);
-			}, this);
-			this.model.set('num_tipo_op_leasing_c',salida);
-		}else if(producto == "2"){
+		if(producto == "2"){
 			if(this.model.get('comision_c') == undefined){
 				errors['comision_c'] = errors['comision_c'] || {};
 				errors['comision_c'].required = true;
