@@ -243,8 +243,6 @@
 
         //this.model.on('sync', this.get_phones, this);
 
-        //Funcion para ocultar o no el boton de enviar a Portal Proveedores
-        this.model.on('sync', this.btnenvia_proveedor, this);
         //Recupera datos para custom fields
 
         this.get_uni_productos();
@@ -299,6 +297,8 @@
     		this.context.on('button:desaprobar_noviable:click', this.rechazar_noviable, this);
         this.context.on('button:reactivar_noviable:click', this.reactivar_noviable, this);
     		this.model.on('sync', this.bloqueo, this);
+             //Funcion para ocultar o no el boton de enviar a Portal Proveedores
+        this.model.on('sync', this.btnenvia_proveedor, this);
         this.context.on('button:open_negociador_quantico:click', this.open_negociador_quantico, this);
         /***************Validacion de Campos No viables en los Productos********************/
         this.model.addValidationTask('LeasingUP', _.bind(this.requeridosLeasingUP, this));
@@ -1129,6 +1129,9 @@
         //@Jesus Carrillo
         //Ocultar Div y boton "Prospecto Contactado"
         $('div[data-name=tct_prospecto_contactado_chk_c]').hide();
+         //Oculta campo proveedor
+         $('[name="portal_proveedores"]').hide();
+         this.btnenvia_proveedor();
 
         // Validación para no poder inactivar clientes con contratos activos
         if (this.model.dataFetched) {
@@ -7291,15 +7294,14 @@
         button.hide();
             if (button) {
                   button.listenTo(button, "render", function () {
-                      
-                    if((this.model.get('esproveedor_c')=='1' || this.model.get('tipo_registro_cuenta_c')=='5') && App.user.attributes.portal_proveedores_c=='1'){
-                        button.show();
-                        //Accion próxima
-                        //window.open("#bwc/index.php?entryPoint=NegociadorQuantico&idPersona=" + idCuenta);
-                    } else {
-                        button.hide();
-                    }
-                });
+                       if((this.model.get('esproveedor_c')=='1' || this.model.get('tipo_registro_cuenta_c')=='5') && App.user.attributes.portal_proveedores_c=='1'){
+                        $('[name="portal_proveedores"]').show();
+                          //Accion próxima
+                          //window.open("#bwc/index.php?entryPoint=NegociadorQuantico&idPersona=" + idCuenta);
+                      } else {
+                        $('[name="portal_proveedores"]').hide();
+                      }
+                  });
             }
     },
 })
