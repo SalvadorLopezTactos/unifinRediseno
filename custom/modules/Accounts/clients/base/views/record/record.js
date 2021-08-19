@@ -1191,6 +1191,7 @@
         //Evento para validar acciones
         $('a.btn.dropdown-toggle.btn-primary').on('click', function (e) {
             contexto_cuenta.hideButton_Conversion_change();
+            contexto_cuenta.btnenvia_proveedor();
         });
 
         if (app.user.attributes.cuenta_especial_c == 0 || app.user.attributes.cuenta_especial_c == "") {
