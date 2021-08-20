@@ -139,12 +139,15 @@
                 /*for (id in this.productos){
                     op2[this.productos[id]] = op[this.productos[id]];
                 }*/
-				Object.keys(op).forEach(function (key) {
-                    if(this.productos.includes(key) && key !=""){
-                        //delete lista_productos[key];
-						op2[this.productos[id]] = op[this.productos[id]];
-                    }
-                });
+				for (id in this.productos){
+					for (key in op){
+						if(this.productos[id] ==  key && key !=""){
+							//delete lista_productos[key];
+							op2[this.productos[id]] = op[key];
+						}
+					}
+                }
+				
                 var lista = this.getField('producto_c');
                 lista.items = op2;
                 lista.render();
