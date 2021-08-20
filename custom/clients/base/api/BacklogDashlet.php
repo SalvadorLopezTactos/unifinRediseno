@@ -142,9 +142,10 @@ class BacklogDashlet extends SugarApi
         $equipo_filtro = $args['data']['equipo'];
         $promotor_filtro = $args['data']['promotor'];
         $progreso = $args['data']['progreso'];
+		$producto_filtro = $args['data']['producto'];
         $sortBy = $args['data']['sortBy'];
         $sortByDireccion = $args['data']['sortByDireccion'];
-
+		
         $query = <<<SQL
 SELECT r.name FROM acl_roles r
 INNER JOIN acl_roles_users ru ON ru.role_id = r.id AND ru.deleted = 0
@@ -163,24 +164,24 @@ WHERE r.name in ('Backlog-BO')
 SQL;
             $EquiposVisibles = $db->getone($query);
 
-            $response['backlogs']['MyBacklogs'] = $this->backlogsArray($current_user->id, $mes_filtro, $anio_filtro, $region_filtro, $tipo_de_operacion_filtro, $etapa_filtro, $estatus_filtro, $equipo_filtro, $rolResult, $promotor_filtro, $progreso, $EquiposVisibles, $sortBy, $sortByDireccion);
+            $response['backlogs']['MyBacklogs'] = $this->backlogsArray($current_user->id, $mes_filtro, $anio_filtro, $region_filtro, $tipo_de_operacion_filtro, $etapa_filtro, $estatus_filtro, $equipo_filtro, $rolResult, $promotor_filtro, $progreso, $producto_filtro , $EquiposVisibles, $sortBy, $sortByDireccion);
             $response['backlogs']['totales'] = $this->backlogTotalsArray($response['backlogs']);
             $response['backlogs']['RoleView'] = 'Full_Access';
         }else {
-            $response['backlogs']['MyBacklogs'] = $this->backlogsArray($current_user->id, $mes_filtro, $anio_filtro, $region_filtro, $tipo_de_operacion_filtro, $etapa_filtro, $estatus_filtro, $equipo_filtro, "", $promotor_filtro, $progreso, $EquiposVisibles, $sortBy, $sortByDireccion);
+            $response['backlogs']['MyBacklogs'] = $this->backlogsArray($current_user->id, $mes_filtro, $anio_filtro, $region_filtro, $tipo_de_operacion_filtro, $etapa_filtro, $estatus_filtro, $equipo_filtro, "", $promotor_filtro, $progreso, $producto_filtro , $EquiposVisibles, $sortBy, $sortByDireccion);
             $response['backlogs']['totales'] = $this->backlogTotalsArray($response['backlogs']);
             $response['backlogs']['RoleView'] = 'hierarchy';
 
             if(empty($promotor_filtro) || $promotor_filtro == 'Todos') {
                 //Get Subordinados
                 foreach ($args['data']['subordinados'] as $index => $subordinado) {
-                    $sub_backlog = $this->backlogsArray($subordinado['metadata']['id'], $mes_filtro, $anio_filtro, $region_filtro, $tipo_de_operacion_filtro, $etapa_filtro, $estatus_filtro, $equipo_filtro, "" , "", $progreso, $EquiposVisibles, $sortBy, $sortByDireccion);
+                    $sub_backlog = $this->backlogsArray($subordinado['metadata']['id'], $mes_filtro, $anio_filtro, $region_filtro, $tipo_de_operacion_filtro, $etapa_filtro, $estatus_filtro, $equipo_filtro, "" , "", $progreso, $producto_filtro , $EquiposVisibles, $sortBy, $sortByDireccion);
                     if (!empty($sub_backlog)) {
                         $response['backlogs']['SubBacklogs'][] = $sub_backlog;
                         $response['backlogs']['totales'] = $this->backlogTotalsArray($response['backlogs']);
                     }
                     if (!empty($subordinado['children'])) {
-                        $response['backlogs']['Children'][] = $this->getChildren($subordinado['children'], $mes_filtro, $anio_filtro, $region_filtro, $tipo_de_operacion_filtro, $etapa_filtro, $estatus_filtro, $equipo_filtro, "", "", $progreso, $EquiposVisibles, $sortBy, $sortByDireccion);
+                        $response['backlogs']['Children'][] = $this->getChildren($subordinado['children'], $mes_filtro, $anio_filtro, $region_filtro, $tipo_de_operacion_filtro, $etapa_filtro, $estatus_filtro, $equipo_filtro, "", "", $progreso, $producto_filtro , $EquiposVisibles, $sortBy, $sortByDireccion);
                         $response['backlogs']['totales'] = $this->backlogTotalsArray($response['backlogs']);
                     }
                 }
@@ -231,7 +232,7 @@ SQL;
     public function getChildren($children, $mes_filtro, $anio_filtro, $region_filtro, $tipo_de_operacion_filtro, $etapa_filtro, $estatus_filtro, $equipo_filtro, $role = null, $progreso = null, $EquiposVisibles = null, $sortBy, $sortByDireccion) //recursion
     {
         foreach ($children as $child) {
-            $sub_backlog[] = $this->backlogsArray($child['metadata']['id'], $mes_filtro, $anio_filtro, $region_filtro, $tipo_de_operacion_filtro, $etapa_filtro, $estatus_filtro, $equipo_filtro, "", "", $progreso, $EquiposVisibles, $sortBy, $sortByDireccion);
+            $sub_backlog[] = $this->backlogsArray($child['metadata']['id'], $mes_filtro, $anio_filtro, $region_filtro, $tipo_de_operacion_filtro, $etapa_filtro, $estatus_filtro, $equipo_filtro, "", "", $progreso, $producto_filtro , $EquiposVisibles, $sortBy, $sortByDireccion);
             if(!empty($sub_backlog)){
                 $response = $sub_backlog;
             }
@@ -264,7 +265,7 @@ SQL;
         }
     }
 
-    public function backlogsArray($user_id, $mes, $anio, $region, $tipo_de_operacion, $etapa, $estatus, $equipo, $role = null, $promotor = null, $progreso = null, $EquiposVisibles = null, $sortBy = null, $sortByDireccion = null){
+    public function backlogsArray($user_id, $mes, $anio, $region, $tipo_de_operacion, $etapa, $estatus, $equipo, $role = null, $promotor = null, $progreso = null, $producto = null, $EquiposVisibles = null, $sortBy = null, $sortByDireccion = null){
 
         global $db;
         /*if(empty($etapa)){
@@ -301,7 +302,7 @@ CASE WHEN blcs.estatus_operacion_c = '1' THEN 0 ELSE
   + CASE WHEN '{$etapa}' LIKE '%Rechazada%' THEN  monto_rechazado_c ELSE 0 END
   + CASE WHEN '{$etapa}' LIKE '%AutorizadaSinSolicitud%'  THEN  monto_sin_solicitud_c ELSE 0 END
   + CASE WHEN '{$etapa}' LIKE '%AutorizadaConSolicitud%' THEN  monto_con_solicitud_c  ELSE 0 END  END*/  END AS bl_actual,
-tasa_c, comision_c, dif_residuales_c, monto_pipeline_posterior_c, tct_conversion_c, motivo_rechazo_txf_c, estado_cancelacion_c
+tasa_c, comision_c, dif_residuales_c, monto_pipeline_posterior_c, tct_conversion_c, motivo_rechazo_txf_c, estado_cancelacion_c , blcs.producto_c as producto
 FROM lev_backlog lb
 INNER JOIN lev_backlog_cstm blcs ON blcs.id_c = lb.id
 INNER JOIN accounts a ON a.id = lb.account_id_c AND a.deleted = 0
@@ -356,6 +357,16 @@ SQL;
 				$query .= " AND blcs.estatus_operacion_c = {$estatus}";
 			}
         }
+		
+		if(!empty($producto)){
+			if($producto == '1'){
+				$query .= " AND blcs.producto_c = '1'";
+			}else if($producto == '2'){
+				$query .= " AND blcs.producto_c = '2'";
+			}else if($producto == '3'){
+				$query .= " AND blcs.producto_c IS NOT NULL";
+			}
+        }
 
         if(!empty($equipo) && $equipo != "Todos"){
             $query .= " AND lb.equipo = '{$equipo}'";
@@ -375,6 +386,7 @@ SQL;
         global $app_list_strings;
         $queryResult = $db->query($query);
         while ($row = $db->fetchByAssoc($queryResult)) {
+			$response['linea'][$row['id']]['producto'] = $app_list_strings['tipo_producto_list'][$row['producto']];
             $response['linea'][$row['id']]['estatus_operacion_c'] = $app_list_strings['estatus_operacion_c_list'][$row['estatus_operacion_c']];
 			$response['linea'][$row['id']]['estado_cancelacion_c'] = $app_list_strings['estado_cancelacion_list'][$row['estado_cancelacion_c']];
 			if($row['estado_cancelacion_c'] == "1") $response['linea'][$row['id']]['estatus_operacion_c'] = $app_list_strings['estado_cancelacion_list'][$row['estado_cancelacion_c']];
@@ -1009,7 +1021,7 @@ SQL;
         $fp = fopen($csvfile, 'w');
 
          // output the column headings
-        fputcsv($fp, array('ESTATUS', 'MES','EQUIPO', 'ZONA', 'ASESOR', 'ID CLIENTE','CLIENTE', 'NO. BACKLOG', 'BIEN',  'L'.utf8_decode('Í').'NEA DISPONIBLE',
+        fputcsv($fp, array('PRODUCTO','ESTATUS', 'MES','EQUIPO', 'ZONA', 'ASESOR', 'ID CLIENTE','CLIENTE', 'NO. BACKLOG', 'BIEN',  'L'.utf8_decode('Í').'NEA DISPONIBLE',
                            'MONTO ORIGINAL', 'PAGO '.utf8_decode('Ú').'NICO ORIGINAL', 'DIFERENCIA', 'BACKLOG', 'PAGO '.utf8_decode('Ú').'NICO', 'BACKLOG ACTUAL', 'COLOCACI'.utf8_decode('Ó').'N REAL', 'PAGO '.utf8_decode('Ú').'NICO REAL', 'MONTO CANCELADO',
             'PAGO '.utf8_decode('Ú').'NICO CANCELADA',  'TIPO DE OPERACI'.utf8_decode('Ó').'N','ETAPA INICIO MES', 'ETAPA', 'SOLICITUD',
             'PROSPECTO','CR'.utf8_decode('É').'DITO','RECHAZADA','SIN SOLICITUD','CON SOLICITUD','PAGO '.utf8_decode('Ú').'NICO PROSPECTO','PAGO '.utf8_decode('Ú').'NICO CR'.utf8_decode('É').'DITO','PAGO '.utf8_decode('Ú').'NICO RECHAZADA','PAGO '.utf8_decode('Ú').'NICO SIN SOLICITUD','PAGO '.utf8_decode('Ú').'NICO CON SOLICITUD', 'TASA', 'COMISI'.utf8_decode('Ó').'N', 'DIF RESIDUALES', 'COLOCACI'.utf8_decode('Ó').'N PIPELINE', 'PROBABILIDAD DE CONVERSI'.utf8_decode('Ó').'N %','MOTIVO DE RECHAZO' ));
@@ -1019,7 +1031,7 @@ SQL;
                 if ($index == "MyBacklogs") {
                     foreach ($linea as $backlogId => $backlogValues) {
                         foreach ($backlogValues as $colName => $colValues) {
-                            $colValues['equipo'] = ($colValues['equipo'] == "Equipo 0") ? "0" : $colValues['equipo'];
+							$colValues['equipo'] = ($colValues['equipo'] == "Equipo 0") ? "0" : $colValues['equipo'];
                             $colValues['zona'] = ($colValues['zona'] == "Region 0") ? "0" : $colValues['zona'];
                             $colValues = $this->removeElement($colValues, "name");
                             $colValues = $this->removeElement($colValues, "clienteId");
