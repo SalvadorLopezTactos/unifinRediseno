@@ -5,7 +5,8 @@
 
 ({
     extendsFrom: 'CreateView',
-
+	val : null,
+	
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
@@ -89,13 +90,15 @@
 
     _render: function() {
         this._super("_render");
-
+		
         this.$('[data-name=editar]').hide();
         if(this.$('[data-fieldname=lev_backlog_opportunities_name]').children().children(['data-original-title']).html() != null&&
             this.$('[data-fieldname=lev_backlog_opportunities_name]').children().children(['data-original-title']).html() != ""){
             this.model.set("editar", false);
         }
-
+		
+		this.setValores(this.val);
+		
         // Oculta campos al crear BL
         this.$('div[data-name=numero_de_backlog]').hide();
         this.$('div[data-name=tipo_c]').hide();
@@ -131,11 +134,17 @@
                 this.multiProducto = modelo.get('multiproducto_c');
 
 
-                var op = app.lang.getAppListStrings('tipo_producto_list');
+                var op = app.lang.getAppListStrings('producto_activo_backlog_list');
                 var op2 = {};
-                for (id in this.productos){
+                /*for (id in this.productos){
                     op2[this.productos[id]] = op[this.productos[id]];
-                }
+                }*/
+				Object.keys(op).forEach(function (key) {
+                    if(productos.includes(key) && key !=""){
+                        //delete lista_productos[key];
+						op2[this.productos[id]] = op[this.productos[id]];
+                    }
+                });
                 var lista = this.getField('producto_c');
                 lista.items = op2;
                 lista.render();
@@ -453,9 +462,27 @@
         this.model.fields['mes'].options = opciones_mes;
 
         //this.model.set("mes", '');
+		this.val = this.getValores();
+		
         if(stage != "loading"){
             this.render();
         }
+    },
+	
+	getValores: function(){
+      var valores = {
+        tempProducto : this.model.get('producto_c'),
+		tempProductoLead : this.model.get('num_tipo_op_leasing_c'),
+		tempProductoCred : this.model.get('num_tipo_op_credito_c')
+      }
+      return valores;
+    },
+
+    setValores: function(valores){
+		this.model.set("producto_c", valores.tempProducto);
+		this.model.set("num_tipo_op_leasing_c", valores.tempProductoLead);
+		this.model.set("num_tipo_op_credito_c", valores.tempProductoCred);
+		
     },
 
     getTipoCliente: function(){
