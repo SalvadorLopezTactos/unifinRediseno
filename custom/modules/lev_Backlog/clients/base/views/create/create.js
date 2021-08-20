@@ -140,7 +140,7 @@
                     op2[this.productos[id]] = op[this.productos[id]];
                 }*/
 				Object.keys(op).forEach(function (key) {
-                    if(productos.includes(key) && key !=""){
+                    if(this.productos.includes(key) && key !=""){
                         //delete lista_productos[key];
 						op2[this.productos[id]] = op[this.productos[id]];
                     }
