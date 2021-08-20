@@ -77,6 +77,7 @@
     tipo_operacion_list_html : null,
     etapa_list_html : null,
     estatus_list_html : null,
+	producto_list_html : null,
     backlogs : null,
 	disposiciones : null,
 	disposiciones2 : null,
@@ -96,7 +97,12 @@
         this.etapa_list_html = app.lang.getAppListStrings('etapa_c_list');//app.lang.getAppListStrings('etapa_backlog');
         this.estatus_list_html = app.lang.getAppListStrings('estatus_operacion_c_list');
 		this.estatus_list_html["3"] = "En Proceso de Cancelación";
-
+		
+		this.producto_list_html = {};
+        this.producto_list_html["1"] = "Leasing";
+		this.producto_list_html["2"] = "Crédito";
+		this.producto_list_html["3"] = "Todos";
+		
         this.EquipoSortDirection = 'DESC';
         this.PromotorSortDirection = 'DESC';
         this.ClienteSortDirection = 'DESC';
@@ -122,17 +128,15 @@
         this.tipo_operacion_filtro = "";
         this.etapa_filtro = "";
         this.estatus_filtro = "";
+		this.producto_filtro = "";
         this.progreso_list_html[''] = "";
         this.tipo_operacion_list_html[''] = "";
         this.etapa_list_html[''] = "";
-        this.estatus_list_html[''] = "";
         //Variable para total de registros
         this.totalRegistros = 0;
 
         this.anio_filtro_popup_mover='';
         this.mes_filtro_mover_op='';
-
-
 
     },
 
@@ -211,6 +215,7 @@
                     equipo: $("#equipo_filtro").val(),
                     promotor: $("#promotor_filtro").val(),
                     progreso: $("#progreso_filtro").val(),
+					producto: $("#producto_filtro").val(),
                     sortBy: ordenarPor,
                     sortByDireccion: direccion,
                 }
@@ -631,6 +636,7 @@
          tempEquipo: $("#equipo_filtro").val(),
          tempPromotor: $("#promotor_filtro").val(),
          tempSolicitud: $("#progreso_filtro").val(),
+		 tempProducto: $("#producto_filtro").val(),
          tempTipoOperacion: $("#tipo_operacion_filtro").val(),
          tempEtapa: $("#etapa_filtro").val(),
          tempEstatus: $("#estatus_filtro").val()
@@ -644,6 +650,7 @@
          $("#equipo_filtro").val(valores.tempEquipo);
          $("#promotor_filtro").val(valores.tempPromotor);
          $("#progreso_filtro").val(valores.tempSolicitud);
+		 $("#producto_filtro").val(valores.tempProducto);
          $("#tipo_operacion_filtro").val(valores.tempTipoOperacion);
          $("#etapa_filtro").val(valores.tempEtapa);
          $("#estatus_filtro").val(valores.tempEstatus);
@@ -735,6 +742,7 @@
         var backlogEstatus = e.currentTarget.getAttribute('data-estatus');
         var tempPromotor = $("#promotor_filtro").val();
         var tempProgreso = $("#progreso_filtro").val();
+		var tempProducto = $("#producto_filtro").val();		
         var ProgresoBL = e.currentTarget.getAttribute('data-progreso');
         var rolAutorizacion = self.rolAutorizacion;
         var currentYear = (new Date).getFullYear();
@@ -1042,6 +1050,7 @@
          this.countChecks=this.array_checks.length;
          var tempPromotor = $("#promotor_filtro").val();
          var tempProgreso = $("#progreso_filtro").val();
+		 var tempProducto = $("#producto_filtro").val();
          var rolAutorizacion = self.rolAutorizacion;
          var currentYear = (new Date).getFullYear();
          var currentMonth = (new Date).getMonth()+1;
@@ -2370,6 +2379,7 @@
         var tempEstatus = $("#estatus_filtro").val();
         var tempEquipo = $("#equipo_filtro").val();
         var tempPromotor = $("#promotor_filtro").val();
+		var tempProducto = $("#producto_filtro").val();
         //var oppTipo = e.currentTarget.getAttribute('data-oppTipo');
         var tempProgreso = $("#progreso_filtro").val();
         //var ProgresoBL = e.currentTarget.getAttribute('data-progreso');
@@ -2553,6 +2563,8 @@
         var tempEquipo = $("#equipo_filtro").val();
         var tempPromotor = $("#promotor_filtro").val();
         var tempProgreso = $("#progreso_filtro").val();
+		//var tempProducto = $("#producto_filtro").val();
+		
         var arr_posiciones=[];
         $('#quienMasivo').attr('style','');
         $('#productoInputMasivo').attr('style','');
@@ -2743,6 +2755,7 @@
         this.tipo_operacion_filtro = $("#tipo_operacion_filtro").val();
         this.etapa_filtro = $("#etapa_filtro").val();
         this.estatus_filtro = $("#estatus_filtro").val();
+		this.producto_filtro = $("#producto_filtro").val();
 //        var rep = /,/gi;
 //        this.estatus_filtro = (this.estatus_filtro == "")? "": "^"+this.estatus_filtro.replace(rep, "^,^")+"^";
         this.render();
