@@ -496,6 +496,7 @@
             level: 'process',
             title: 'Cargando...'
         });
+		this.val = this.getValores();
         app.api.call("read", app.api.buildURL("Accounts/" + this.model.get('account_id_c'), null, null, {
             fields: name,
         }), null, {
@@ -606,7 +607,8 @@
                             //Estableciendo nuevas opciones en campo de producto
                             var campo_producto=this.getField('producto_c');
                             campo_producto.items=lista_productos;
-                            campo_producto.render()
+                            campo_producto.render();
+							//this.setValores(this.val);
                             this.model.set("region", modelo.get("region_c"));
                             this.model.set("equipo", modelo.get("equipo_c"));
                             this.model.set("assigned_user_id", modelo.get('id'));
