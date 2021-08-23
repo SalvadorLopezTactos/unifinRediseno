@@ -80,7 +80,8 @@ class validaDuplicado extends SugarApi
         //Prepara consulta: Lead
         //Nivel 0 - Nombre (limpio con algoritmo: clean_name) + email + algún teléfono + RFC.
         if (!empty($nombre) && !empty($correo) &&  $totalTelefonos>0 &&  !empty($rfc) ) {
-            $consultas[] = "select '0' as nivel, 'Lead' as modulo, 'Leads' as moduloLink, lc.clean_name_c nombre, l.id as id, lc.rfc_c as rfc
+            $consultas[] = "select '0' as nivel, 'Lead' as modulo, 'Leads' as moduloLink, lc.clean_name_c nombre, l.id as id, lc.rfc_c as rfc,
+            'Nivel de match encontrado a través de la combinación del nombre, email, algún teléfono y RFC' as descripcion
                         from leads l
                         	inner join leads_cstm lc on lc.id_c=l.id
                         	left join email_addr_bean_rel er on er.bean_id = l.id and er.deleted=0
@@ -91,7 +92,8 @@ class validaDuplicado extends SugarApi
                           and( l.phone_home in ('".$telefonos."') or l.phone_mobile in ('".$telefonos."') or l.phone_work in ('".$telefonos."')  or l.phone_other in ('".$telefonos."') )
                           and lc.rfc_c = '".$rfc."'
                         ";
-            $consultas[] ="select '0' as nivel, 'Cuenta' as modulo, 'Accounts' as moduloLink, a.clean_name nombre, a.id as id, ac.rfc_c as rfc
+            $consultas[] ="select '0' as nivel, 'Cuenta' as modulo, 'Accounts' as moduloLink, a.clean_name nombre, a.id as id, ac.rfc_c as rfc,
+            'Nivel de match encontrado a través de la combinación del nombre, email, algún teléfono y RFC' as descripcion
                         from accounts a
                         	inner join accounts_cstm ac on ac.id_c=a.id
                         	left join email_addr_bean_rel er on er.bean_id = a.id and er.deleted=0
@@ -107,7 +109,8 @@ class validaDuplicado extends SugarApi
         }
         //Nivel 1 - Nombre (limpio con algoritmo: clean_name) + email + algún teléfono
         if(!empty($nombre) && !empty($correo) &&  $totalTelefonos>0 ) {
-            $consultas[] = "select '1' as nivel, 'Lead' as modulo, 'Leads' as moduloLink, lc.clean_name_c nombre, l.id as id, lc.rfc_c as rfc
+            $consultas[] = "select '1' as nivel, 'Lead' as modulo, 'Leads' as moduloLink, lc.clean_name_c nombre, l.id as id, lc.rfc_c as rfc,
+            'Nivel de match encontrado a través de la combinación del nombre, email y algún teléfono' as descripcion
                         from leads l
                         	inner join leads_cstm lc on lc.id_c=l.id
                         	left join email_addr_bean_rel er on er.bean_id = l.id and er.deleted=0
@@ -117,7 +120,8 @@ class validaDuplicado extends SugarApi
                           and e.email_address='".$correo."'
                           and( l.phone_home in ('".$telefonos."') or l.phone_mobile in ('".$telefonos."') or l.phone_work in ('".$telefonos."')  or l.phone_other in ('".$telefonos."') )
                         ";
-            $consultas[] ="select '1' as nivel, 'Cuenta' as modulo, 'Accounts' as moduloLink, a.clean_name nombre, a.id as id, ac.rfc_c as rfc
+            $consultas[] ="select '1' as nivel, 'Cuenta' as modulo, 'Accounts' as moduloLink, a.clean_name nombre, a.id as id, ac.rfc_c as rfc,
+            'Nivel de match encontrado a través de la combinación del nombre, email y algún teléfono' as descripcion
                         from accounts a
                         	inner join accounts_cstm ac on ac.id_c=a.id
                         	left join email_addr_bean_rel er on er.bean_id = a.id and er.deleted=0
@@ -132,7 +136,8 @@ class validaDuplicado extends SugarApi
         }
         //Nivel 2 - Nombre (limpio con algoritmo: clean_name) + email o algún teléfono
         if(!empty($nombre) && (!empty($correo) || $totalTelefonos>0) ) {
-          $consultas[] = "select '2' as nivel, 'Lead' as modulo,  'Leads' as moduloLink, lc.clean_name_c nombre, l.id as id, lc.rfc_c as rfc -- , e.email_address email, l.phone_mobile
+          $consultas[] = "select '2' as nivel, 'Lead' as modulo,  'Leads' as moduloLink, lc.clean_name_c nombre, l.id as id, lc.rfc_c as rfc,
+          'Nivel de match encontrado a través de la combinación del nombre, email o algún teléfono' as descripcion
                       from leads l
                         inner join leads_cstm lc on lc.id_c=l.id
                         left join email_addr_bean_rel er on er.bean_id = l.id and er.deleted=0
@@ -141,7 +146,8 @@ class validaDuplicado extends SugarApi
                         lc.clean_name_c='".$nombre."'
                         and ( e.email_address='".$correo."' or l.phone_home in ('".$telefonos."') or l.phone_mobile in ('".$telefonos."') or l.phone_work in ('".$telefonos."')  or l.phone_other in ('".$telefonos."') )
                       ";
-          $consultas[] ="select '2' as nivel, 'Cuenta' as modulo, 'Accounts' as moduloLink, a.clean_name nombre, a.id as id, ac.rfc_c as rfc
+          $consultas[] ="select '2' as nivel, 'Cuenta' as modulo, 'Accounts' as moduloLink, a.clean_name nombre, a.id as id, ac.rfc_c as rfc,
+          'Nivel de match encontrado a través de la combinación del nombre, email o algún teléfono' as descripcion
                       from accounts a
                       	inner join accounts_cstm ac on ac.id_c=a.id
                       	left join email_addr_bean_rel er on er.bean_id = a.id and er.deleted=0
@@ -154,7 +160,8 @@ class validaDuplicado extends SugarApi
                       ";
         }
 
-        $queryRegistros = isset($consultas) ? implode(" union ",$consultas)." order by nivel desc ; " : '';
+        // $queryRegistros = isset($consultas) ? implode(" union ",$consultas)." order by nivel desc ; " : '';
+        $queryRegistros = !empty($consultas) ? implode(" union ",$consultas)." order by nivel desc ; " : '';
 
         //Ejecuta consulta Leads y Cuentas
         if(!empty($queryRegistros)){
@@ -169,6 +176,7 @@ class validaDuplicado extends SugarApi
                     $items[$row['id']]['nombre']=$row['nombre'];
                     $items[$row['id']]['id']=$row['id'];
                     $items[$row['id']]['rfc']=$row['rfc'];
+                    $items[$row['id']]['descripcion']=$row['descripcion'];
                     //$items[$row['id']]=$item;
                 }
             } catch (\Exception $e) {
@@ -208,6 +216,7 @@ class validaDuplicado extends SugarApi
                         $items[$elemento['id_bd']]['nombre']=$elemento['business_name'];
                         $items[$elemento['id_bd']]['id']=$elemento['id_bd'];
                         $items[$elemento['id_bd']]['rfc']= (!empty($items[$elemento['id_bd']]['rfc'])) ? $items[$elemento['id_bd']]['rfc']: '';
+                        $items[$elemento['id_bd']]['descripcion']="Nivel de match encontrado a través del nombre";
 
                         if(empty($items[$elemento['id_bd']]['rfc'])){
                             //Obtener bean del modulo
@@ -233,6 +242,7 @@ class validaDuplicado extends SugarApi
                         $items[$elemento['id_bd']]['nombre']=$elemento['business_name'];
                         $items[$elemento['id_bd']]['id']=$elemento['id_bd'];
                         $items[$elemento['id_bd']]['rfc']= (!empty($items[$elemento['id_bd']]['rfc'])) ? $items[$elemento['id_bd']]['rfc']: '';
+                        $items[$elemento['id_bd']]['descripcion']="Nivel de match encontrado a través del nombre";
 
                         if(empty($items[$elemento['id_bd']]['rfc'])){
                             //Obtener bean del modulo
