@@ -36,10 +36,11 @@
         this.model.addValidationTask('check_solicitud', _.bind(this._ValidateSolicitud, this));
         this.model.addValidationTask('check_existingBL', _.bind(this._ValidateExistingBL, this));
         this.model.addValidationTask('camponovacio',_.bind(this.validacampoconversion,this));
-        this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
-
-		/************  CAmbiar valores tipo PRoducto LEasing   *****************/
+        /************  CAmbiar valores tipo PRoducto LEasing   *****************/
 		this.model.addValidationTask('num_tipo_producto',_.bind(this.num_tipo_leasing, this));
+		/*********** ---- ***********************/
+		this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
+
 		
         /*
         var usuario = app.data.createBean('Users',{id:app.user.get('id')});
@@ -122,7 +123,7 @@
         this.$('div[data-name=tct_carga_masiva_chk_c]').hide();
         this.$('div[data-name=tct_bloqueo_txf_c]').hide();
 
-
+		this.$(".record-cell[data-name='blank_space']").hide();
 
         var usuario = app.data.createBean('Users',{id:app.user.get('id')});
         usuario.fetch({
@@ -870,10 +871,9 @@
 			if(this.model.get('comision_c') == undefined){
 				errors['comision_c'] = errors['comision_c'] || {};
 				errors['comision_c'].required = true;
-			}
-			if(parseFloat(this.model.get('comision_c')) <= 0.0 ){
-				errors['tct_conversion_c'] = errors['tct_conversion_c'] || {};
-				errors['tct_conversion_c'].required = true;
+			}else if(parseFloat(this.model.get('comision_c')) <= 0.0 ){
+				errors['comision_c'] = errors['comision_c'] || {};
+				errors['comision_c'].required = true;
 				app.alert.show("comision", {
 					level: "error",
 					messages: "El campo <b>Comisión</b> debe ser mayor a 0.",
@@ -881,6 +881,7 @@
 				});
 			}
 		}
-        callback(null, fields, errors);
+		callback(null, fields, errors);
+		
     },
 })

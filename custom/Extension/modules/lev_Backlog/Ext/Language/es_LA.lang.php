@@ -79,3 +79,4 @@ $mod_strings['LBL_ETAPA_PRELIMINAR_C'] = 'Etapa inicio mes';
 $mod_strings['LBL_ESTADO_CANCELACION'] = 'Estado de cancelación';
 $mod_strings['LBL_NUM_TIPO_OP_LEASING'] = 'Tipo Operación Producto';
 $mod_strings['LBL_NUM_TIPO_OP_CREDITO'] = 'Tipo Operación Producto';
+$mod_strings['LBL_RECORDVIEW_PANEL1'] = 'Nuevo Panel 1';

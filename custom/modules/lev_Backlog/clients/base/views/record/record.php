@@ -116,44 +116,48 @@ array (
               ),
               3 => 
               array (
-              ),
-              4 => 
-              array (
                 'name' => 'num_tipo_op_credito_c',
                 'label' => 'LBL_NUM_TIPO_OP_CREDITO',
               ),
-              5 => 
-              array (
-              ),
-              6 => 
+              4 => 
               array (
                 'name' => 'anio',
                 'studio' => 'visible',
                 'label' => 'LBL_ANIO',
               ),
-              7 => 
+              5 => 
               array (
                 'name' => 'mes',
                 'studio' => 'visible',
                 'label' => 'LBL_MES',
               ),
-              8 => 
+              6 => 
               array (
                 'name' => 'cliente',
                 'studio' => 'visible',
                 'label' => 'LBL_CLIENTE',
               ),
-              9 => 
+              7 => 
               array (
                 'name' => 'tipo_c',
                 'label' => 'LBL_TIPO_C',
               ),
-              10 => 'assigned_user_name',
-              11 => 
+              8 => 'assigned_user_name',
+              9 => 
               array (
                 'name' => 'equipo',
                 'studio' => 'visible',
                 'label' => 'LBL_EQUIPO',
+              ),
+              10 => 
+              array (
+                'name' => 'tipo_operacion_c',
+                'label' => 'LBL_TIPO_OPERACION_C',
+              ),
+              11 => 
+              array (
+                'name' => 'estatus_operacion_c',
+                'label' => 'LBL_ESTATUS_OPERACION_C',
               ),
               12 => 
               array (
@@ -163,26 +167,28 @@ array (
               ),
               13 => 
               array (
+                'name' => 'blank_space',
+                'label' => 'LBL_BLANK_SPACE',
               ),
               14 => 
-              array (
-                'name' => 'tipo_operacion_c',
-                'label' => 'LBL_TIPO_OPERACION_C',
-              ),
-              15 => 
-              array (
-                'name' => 'estatus_operacion_c',
-                'label' => 'LBL_ESTATUS_OPERACION_C',
-              ),
-              16 => 
               array (
                 'name' => 'activo',
                 'label' => 'LBL_ACTIVO',
               ),
-              17 => 
+              15 => 
+              array (
+                'name' => 'blank_space',
+                'label' => 'LBL_BLANK_SPACE',
+              ),
+              16 => 
               array (
                 'name' => 'dif_residuales_c',
                 'label' => 'LBL_DIF_RESIDUALES',
+              ),
+              17 => 
+              array (
+                'name' => 'blank_space',
+                'label' => 'LBL_BLANK_SPACE',
               ),
               18 => 
               array (

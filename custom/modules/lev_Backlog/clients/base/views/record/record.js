@@ -21,11 +21,13 @@
         //this.model.on("change:ri_final_comprometida_c", _.bind(this.setEtapa, this));
         this.model.addValidationTask('igualaMontosFinales', _.bind(this.igualaMontoFinalOpp, this));
         this.model.addValidationTask('camponovacio',_.bind(this.validacampoconversion,this));
-        this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
-        this.model.addValidationTask('Valida_edicionBacklog', _.bind(this.mesbacklog, this));
-
+        
 		/************  CAmbiar valores tipo PRoducto LEasing   *****************/
 		this.model.addValidationTask('num_tipo_producto',_.bind(this.num_tipo_leasing, this));
+		/*********** ---- ***********************/
+		
+		this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
+        this.model.addValidationTask('Valida_edicionBacklog', _.bind(this.mesbacklog, this));
 
         // validación de los campos con formato númerico
         this.events['keydown [name=dif_residuales_c]'] = 'checkInVentas';
@@ -94,6 +96,7 @@
                 //this.model.set("region", modelo.get("region_c"));
             }, this)
         });
+		this.$(".record-cell[data-name='blank_space']").hide();
     },
 
     /**
