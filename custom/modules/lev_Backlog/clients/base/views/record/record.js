@@ -79,20 +79,21 @@
                 var lista = this.getField('producto_c');
                 lista.items = op2;
                 lista.render();
+                if(this.model.get('producto_c')==null){
+                    if (this.productos[0] == "4") {
+                        this.model.set('producto_c', '4');
+                    } else if (this.productos[0] == "1") {
+                        this.model.set('producto_c', '1');
+                    } else if (this.productos[0] == "3") {
+                        this.model.set('producto_c', '3');
+                    } else if (this.productos[0] == "2") {
+                        this.model.set('producto_c', '3');
+                    }
+                    else if (this.productos[0] == "5") {
+                        this.model.set('producto_c', '5');
+                    }
 
-                if (this.productos[0] == "4") {
-                    this.model.set('producto_c', '4');
-                } else if (this.productos[0] == "1") {
-                    this.model.set('producto_c', '1');
-                } else if (this.productos[0] == "3") {
-                    this.model.set('producto_c', '3');
-                } else if (this.productos[0] == "2") {
-                    this.model.set('producto_c', '3');
                 }
-                else if (this.productos[0] == "5") {
-                    this.model.set('producto_c', '5');
-                }
-
                 //this.model.set("region", modelo.get("region_c"));
             }, this)
         });
