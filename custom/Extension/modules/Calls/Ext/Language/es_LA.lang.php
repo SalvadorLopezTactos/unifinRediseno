@@ -29,3 +29,4 @@ $mod_strings['LBL_EVENTO_CAMPANA'] = 'Evento/Campaña';
 $mod_strings['LBL_CAMPANA_REL_CAMPAIGN_ID'] = 'Evento/Campaña Relacionada (relacionado Campaña ID)';
 $mod_strings['LBL_CAMPANA_REL'] = 'Evento/Campaña Relacionada';
 $mod_strings['LBL_PADRES'] = 'Padres Relacionados';
+$mod_strings['LBL_TCT_UNION'] = 'Union';

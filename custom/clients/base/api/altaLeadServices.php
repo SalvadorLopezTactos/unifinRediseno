@@ -347,44 +347,38 @@ class altaLeadServices extends SugarApi
 
     public function insert_Leads_Asociados($lead_asociado, $parent_id)
     {
-
         $error_sec = "";
-
         if (empty($lead_asociado['duplicados_en_cuentas'])) {
             if (empty($lead_asociado['duplicados_en_leads'])) {
-
                 if ($lead_asociado['requeridos'] != 'fail') {
-
                     if ($lead_asociado['formato_texto'] != 'fail' && $lead_asociado['formato_telefenos'] != 'fail' && $lead_asociado['formato_correo'] != 'fail') {
-
                         # inserta
                         $id_lead = $this->crea_Lead($lead_asociado);
-
+						if (!empty($id_lead)) {
+							# crea llamada
+							require_once("custom/clients/base/api/registroLlamada.php");
+							$apiCall = new registroLlamada();
+							$body=array('idCRM'=>$id_lead, 'tipo'=>'Leads');
+							$result = $apiCall->registroLlamadas(null,$body);
+						}
                         if (!empty($parent_id)) {
                             # crea la relacion lead asociado
-
                             $this->crea_relacion($parent_id, $id_lead);
                         }
                         $response = $this->estatus(200, 'Alta de Leads exitoso', $id_lead, "Leads", "");
-
                     } else {
                         $arrayErrores = array();
                         $lead_asociado['formato_texto'] == 'fail' ? $arrayErrores = $lead_asociado['formato_texto_error'] : "";
                         $lead_asociado['formato_telefenos'] == 'fail' ? array_push($arrayErrores, 'Telefono') : "";
                         $lead_asociado['formato_correo'] == 'fail' ? array_push($arrayErrores, 'Correo') : "";
-
                         $response = $this->estatus(424, 'Formato de información no válido', '', "", $arrayErrores);
                     }
-
                 } else {
-
                     $response = $this->estatus(422, 'Información incompleta', '', "", $lead_asociado['requeridos_error']);
                 }
             } else {
-
                 if (!empty($parent_id)) {
                     # crea la relacion lead asociado
-
                     $this->crea_relacion($parent_id, $lead_asociado['duplicados_en_leads']);
                 }
                 $response = $this->estatus(503, 'Lead existente en Cuentas/Leads', $lead_asociado['duplicados_en_leads'], "Leads", "");
@@ -392,8 +386,6 @@ class altaLeadServices extends SugarApi
         } else {
             $response = $this->estatus(503, 'Lead existente en Cuentas/Leads', $lead_asociado['duplicados_en_cuentas'], "Cuentas", "");
         }
-
-
         return $response;
     }
 
