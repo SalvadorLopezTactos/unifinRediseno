@@ -100,7 +100,7 @@
 		
 		this.producto_list_html = {};
         this.producto_list_html["1"] = "Leasing";
-		this.producto_list_html["2"] = "Crédito";
+		this.producto_list_html["2"] = "Crédito Simple";
 		this.producto_list_html["3"] = "Todos";
 		
         this.EquipoSortDirection = 'DESC';
