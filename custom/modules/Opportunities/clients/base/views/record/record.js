@@ -154,6 +154,9 @@
         //this.model.on("change:admin_cartera_c", _.bind(this.adminUserCartera, this));
         this.model.on('sync', this.adminUserCartera, this);
         //this.adminUserCartera();
+		/*************** validacion SOC ****************/
+		this.model.on('sync', this.SOCInicio, this);
+		this.model.addValidationTask('validacionSOC', _.bind(this.validacionSOC, this));
     },
 
     fulminantcolor: function () {
@@ -3428,4 +3431,37 @@
             callback(null, fields, errors);
         }
     },
+	
+	SOCInicio: function () {
+		
+		var id_cuenta=this.model.get('account_id');
+		if(id_cuenta!='' && id_cuenta != undefined && this.model.get('alianza_soc_chk_c') === ""){
+			var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
+			account.fetch({
+				success: _.bind(function (model) {
+					if(model.attributes.alianza_soc_chk_c){
+						this.model.set('alianza_soc_chk_c',true);
+					}
+				}, this)
+			});
+		}    
+    },
+	
+	validacionSOC: function (fields, errors, callback) {
+		
+		var id_cuenta=this.model.get('account_id');
+		if(id_cuenta!='' && id_cuenta != undefined && $.isEmptyObject(errors)){
+			var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
+			account.fetch({
+				success: _.bind(function (model) {
+					if(this.model.get('alianza_soc_chk_c')){
+						model.attributes.alianza_soc_chk_c = true;
+						model.save();
+					}
+				}, this)
+			});
+		}       
+        callback(null, fields, errors);
+    },
+
 })
