@@ -150,3 +150,11 @@ $hook_array['after_save'][] = Array(
     'IntegracionQuantico', // name of the class
     'CFQuanticoUpdate'
 );
+
+$hook_array['before_save'][] = Array(
+    17,
+    'Funcion para guardar informacion del usuario logueado asi como asignado a la opp CREADA.',
+    'custom/modules/Opportunities/opp_logic_hooks.php',
+    'OpportunityLogic', // name of the class
+    'InfoMeet'
+);

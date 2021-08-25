@@ -152,8 +152,11 @@
                 var lista = this.getField('producto_c');
                 lista.items = op2;
                 lista.render();
-
-                this.model.set('producto_c',this.productos[0]);
+                
+                //Establece valor por default, solo si el campo viene null
+                if(this.model.get('producto_c')==null){
+                    this.model.set('producto_c',this.productos[0]);
+                }
                 /*
                 if(this.productos[0] == "4"){
                     this.model.set('producto','4');
