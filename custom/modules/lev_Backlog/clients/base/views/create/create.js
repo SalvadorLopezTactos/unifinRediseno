@@ -473,6 +473,7 @@
 		
         if(stage != "loading"){
             this.render();
+			this.setValores(this.val);;
         }
     },
 	
