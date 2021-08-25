@@ -100,3 +100,11 @@ $hook_array['after_save'][] = Array(
     'Meetings_Hooks',
     'ConvierteLead'
 );
+
+$hook_array['before_save'][] = Array(
+    4,
+    'Funcion para guardar informacion del usuario logueado asi como asignado a la reunion CREADA.',
+    'custom/modules/Meetings/meetings_hooks.php',
+    'Meetings_Hooks',
+    'InfoMeet'
+);
