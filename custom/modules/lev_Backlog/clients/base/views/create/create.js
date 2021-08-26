@@ -153,7 +153,10 @@
                 lista.items = op2;
                 lista.render();
 
-                this.model.set('producto_c',this.productos[0]);
+                //Establece valor por default, solo si el campo viene null
+                if(this.model.get('producto_c')==null){
+                    this.model.set('producto_c',this.productos[0]);
+                }
                 /*
                 if(this.productos[0] == "4"){
                     this.model.set('producto','4');
@@ -297,40 +300,48 @@
 
             self = this;
             var accountid=this.model.get('account_id_c');
-            //console.log('sccount_id: '. accountid )
-            if (accountid) {
-                app.api.call('GET', app.api.buildURL('Accounts/'+accountid+'/link/opportunities', null, null, {
-                    "filter":[
-                        {
-                            $or:[
-                                {
-                                    "tipo_de_operacion_c":"LINEA_NUEVA"
-                                },
-                                {
-                                    "tipo_de_operacion_c":"RATIFICACION_INCREMENTO"
-                                }
-                            ]
-                        }
-                    ]
-                }), null, {
-                    success: _.bind(function (data){
+            var producto=this.model.get('producto_c');
+            if(producto!="2"){ //Se aplica validación únicamente cuando el producto no es Crédito Simple
+                if (accountid) {
+                    app.api.call('GET', app.api.buildURL('Accounts/'+accountid+'/link/opportunities', null, null, {
+                        "filter":[
+                            {
+                                $or:[
+                                    {
+                                        "tipo_de_operacion_c":"LINEA_NUEVA"
+                                    },
+                                    {
+                                        "tipo_de_operacion_c":"RATIFICACION_INCREMENTO"
+                                    }
+                                ]
+                            }
+                        ]
+                    }), null, {
+                        success: _.bind(function (data){
+    
+                            if (data.records.length<1) {
+                                app.error.errorName2Keys[''] = '';
+                                errors[''] = errors[''] || {};
+                                errors[''] = errors[''] || {};
+                                errors[''].custom_message1 = true;
+                                errors[''].required = true;
+                                app.alert.show('validaSolicitudes', {
+                                    level: 'error',
+                                    messages: 'Para crear un Backlog es necesario que el cliente cuente m&iacutenimo con una Pre-Solicitud de l&iacutenea'
+                                });
+                            }
+                            callback(null, fields, errors);
+    
+                        }, self)
+                    });
+                }else {
+                    callback(null, fields, errors);
+                }
 
-                        if (data.records.length<1) {
-                            app.error.errorName2Keys[''] = '';
-                            errors[''] = errors[''] || {};
-                            errors[''] = errors[''] || {};
-                            errors[''].custom_message1 = true;
-                            errors[''].required = true;
-                            app.alert.show('validaSolicitudes', {
-                                level: 'error',
-                                messages: 'Para crear un Backlog es necesario que el cliente cuente m&iacutenimo con una Pre-Solicitud de l&iacutenea'
-                            });
-                        }
-                        callback(null, fields, errors)
-
-                    }, self)
-                });
-            }else {callback(null, fields, errors)}
+            }else{
+                callback(null, fields, errors);
+            }
+            
         },
 
     _ValidateExistingBL:function(fields, errors, callback){

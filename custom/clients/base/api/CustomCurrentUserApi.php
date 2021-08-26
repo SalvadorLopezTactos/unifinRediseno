@@ -66,6 +66,7 @@ class CustomCurrentUserApi extends CurrentUserApi
         $userArray['current_user']['limite_asignacion_lm_c'] = $current_user->limite_asignacion_lm_c;
         $userArray['current_user']['gestion_lm_c'] = $current_user->gestion_lm_c;
         $userArray['current_user']['portal_proveedores_c'] = $current_user->portal_proveedores_c;
+        $userArray['current_user']['editar_backlog_chk_c'] = $current_user->editar_backlog_chk_c;
 
         return $userArray;
     }

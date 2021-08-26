@@ -198,6 +198,7 @@ $(window).load(function(){
   	$('#bloqueo_cumple_c').attr('disabled','disabled');
     $('#limite_asignacion_lm_c').attr('disabled','disabled');
     $('#gestion_lm_c').attr('disabled','disabled');
+    $('#editar_backlog_chk_c').attr('disabled','disabled');
    }
   }catch(error){
       console.log(error.message);
@@ -243,6 +244,7 @@ $(window).load(function(){
   	  $('#bloqueo_cumple_c').attr('disabled','disabled');
       $('#limite_asignacion_lm_c').attr('disabled','disabled');
       $('#gestion_lm_c').attr('disabled','disabled');
+      $('#editar_backlog_chk_c').attr('disabled','disabled');
     }
   }
   catch(error){

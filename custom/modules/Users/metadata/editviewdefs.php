@@ -446,7 +446,11 @@ array (
             'name' => 'portal_proveedores_c',
             'label' => 'LBL_PORTAL_PROVEEDORES',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'editar_backlog_chk_c',
+            'label' => 'LBL_EDITAR_BACKLOG_CHK',
+          ),
         ),
       ),
     ),
