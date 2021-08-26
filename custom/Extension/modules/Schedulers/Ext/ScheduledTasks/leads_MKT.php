@@ -30,13 +30,14 @@ function assignLeadMktToUser()
                 if($compania_c == 2) $subpuesto_c = 4;
             }
             
-            $usrEnable = GetUserMKT($subpuesto_c);
+            $usrEnable = GetUserMKT($subpuesto_c,$compania_c);
             $indices = $usrEnable['indice'];
             if (!empty($usrEnable['id'])) {
                 $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='".$usrEnable['id']."' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$usrEnable['id']}'  WHERE l.id ='{$row['id']}' ";
                 $db->query($update_assigne_user);
                 if ($indices > -1) {
-                    $update_assigne_user = "UPDATE config SET value = $indices  WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user'";
+                    if($compania_c == 1) $update_assigne_user = "UPDATE config SET value = $indices WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user_unifin'";
+					if($compania_c == 2) $update_assigne_user = "UPDATE config SET value = $indices WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user_uniclick'";
                     $db->query($update_assigne_user);
                 }
             }
@@ -74,7 +75,7 @@ function assignLeadMktToUser()
     return true;
 }
 
-function GetUserMKT($subpuesto_c)
+function GetUserMKT($subpuesto_c,$compania_c)
 {
     global $db;
     $users = [];
@@ -91,7 +92,9 @@ function GetUserMKT($subpuesto_c)
     $dateInput = date('H:i', strtotime($horaDia));
 
     /* Obtiene el ultimo  usuario asignado y registrado en el config*/
-    $query = "Select value from config  where name='last_assigned_user' ";
+	if($compania_c == 1) $query = "Select value from config where name='last_assigned_user_unifin'";
+    if($compania_c == 2) $query = "Select value from config where name='last_assigned_user_uniclick'";
+    
     $result = $db->query($query);
     $row = $db->fetchByAssoc($result);
     $last_indice = $row['value'];
