@@ -291,13 +291,26 @@
                       {{/each}}
                     </select>
                 </td>
-                <td colspan="6">
+            </tr>
+			<tr>
+                <td>Producto:</td>
+				<td></td>
+				<td colspan = "12"></td>
+            </tr>
+            <tr>
+                <td>
+                    <select id="producto_filtro" class="filtros">
+                      {{#each producto_list_html}}
+                        <option value="{{@key}}" {{ifSelected @key ../producto_filtro}}>{{this}}</option>
+                      {{/each}}
+                    </select>
+                </td>
+                <td> 
                     <input type="button" value="Buscar" id="btn_Buscar" class="btn btn-primary filtros"/>
                     <i class="fa fa-spinner fa-spin loadingIcon" style="display: none"></i>
-                </td>
-                <td colspan="6">
                     <span class="btn btn-success exportar filtros" tabindex="-1">Exportar a Excel</span>
                 </td>
+				<td colspan="12"></td>
             </tr>
         </table>
     </div>
@@ -360,6 +373,13 @@
                         <table width="100%">
                             <tr>
                                 <td class="innerTableTd">Acciones</td>
+                            </tr>
+                        </table>
+                    </th>
+					<th width="5%" class="hide_estatus">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Producto</td>
                             </tr>
                         </table>
                     </th>
@@ -554,6 +574,7 @@
                         <!-- AF: 09/04/2018 - Menú
                         Actualizaicón masiva: Adición de menú de opciones-->
                         <th class="totales hide_acciones"></th>
+						<th class="totales hide_producto"></th>
                         <th class="totales hide_estatus"></th>
                         <th class="totales hide_mes"></th>
                         <th class="totales hide_equipo"></th>
@@ -603,6 +624,7 @@
                             <!--<td>
                             <input type="checkbox" class="mass_update" value="{{@key}}" {{estatus_checked}} {{mass_checked}}/>
                         </td>-->
+							<td class="hide_estatus">{{producto}}</td>
                             <td class="hide_estatus">{{estatus_operacion_c}}</td>
                             <td class="hide_mes">{{mes}}-{{anio}}</td>
                             <td class="hide_equipo">{{equipo}}</td>
@@ -658,6 +680,7 @@
                                 <!--<td>
                                 <input type="checkbox" class="mass_update" value="{{@key}}" {{estatus_checked}} {{mass_checked}}/>
                             </td>-->
+								<td class="hide_estatus">{{producto}}</td
                                 <td class="hide_estatus">{{estatus_operacion_c}}</td>
                                 <td class="hide_mes">{{mes}}-{{anio}}</td>
                                 <td class="hide_equipo">{{equipo}}</td>
@@ -718,6 +741,7 @@
                                             <!--<td>
                                             <input type="checkbox" class="mass_update" value="{{@key}}" {{estatus_checked}} {{mass_checked}}/>
                                         </td>-->
+											<td class="hide_estatus">{{producto}}</td>
                                             <td class="hide_estatus">{{estatus_operacion_c}}</td>
                                             <td class="hide_mes">{{mes}}-{{anio}}</td>
                                             <td class="hide_equipo">{{equipo}}</td>
@@ -781,6 +805,7 @@
                                     <select id="sel_columnas" multiple size=22>
                                         <option value="none">Ninguno</option>
                                         <option value="hide_acciones">Acciones</option>
+										<option value="hide_acciones">Producto</option>
                                         <option value="hide_estatus">Estatus</option>
                                         <option value="hide_mes">Mes</option>
                                         <option value="hide_equipo">Equipo</option>

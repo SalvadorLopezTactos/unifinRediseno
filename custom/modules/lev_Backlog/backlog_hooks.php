@@ -178,5 +178,4 @@ class backlog_hooks {
         }
         return $bean;
     }
-
 }

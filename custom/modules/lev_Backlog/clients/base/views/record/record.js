@@ -21,10 +21,13 @@
         //this.model.on("change:ri_final_comprometida_c", _.bind(this.setEtapa, this));
         this.model.addValidationTask('igualaMontosFinales', _.bind(this.igualaMontoFinalOpp, this));
         this.model.addValidationTask('camponovacio',_.bind(this.validacampoconversion,this));
-        this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
+        
+		/************  CAmbiar valores tipo PRoducto LEasing   *****************/
+		this.model.addValidationTask('num_tipo_producto',_.bind(this.num_tipo_leasing, this));
+		/*********** ---- ***********************/
+		
+		this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         this.model.addValidationTask('Valida_edicionBacklog', _.bind(this.mesbacklog, this));
-
-
 
         // validación de los campos con formato númerico
         this.events['keydown [name=dif_residuales_c]'] = 'checkInVentas';
@@ -76,23 +79,25 @@
                 var lista = this.getField('producto_c');
                 lista.items = op2;
                 lista.render();
+                if(this.model.get('producto_c')==null){
+                    if (this.productos[0] == "4") {
+                        this.model.set('producto_c', '4');
+                    } else if (this.productos[0] == "1") {
+                        this.model.set('producto_c', '1');
+                    } else if (this.productos[0] == "3") {
+                        this.model.set('producto_c', '3');
+                    } else if (this.productos[0] == "2") {
+                        this.model.set('producto_c', '3');
+                    }
+                    else if (this.productos[0] == "5") {
+                        this.model.set('producto_c', '5');
+                    }
 
-                if (this.productos[0] == "4") {
-                    this.model.set('producto_c', '4');
-                } else if (this.productos[0] == "1") {
-                    this.model.set('producto_c', '1');
-                } else if (this.productos[0] == "3") {
-                    this.model.set('producto_c', '3');
-                } else if (this.productos[0] == "2") {
-                    this.model.set('producto_c', '3');
                 }
-                else if (this.productos[0] == "5") {
-                    this.model.set('producto_c', '5');
-                }
-
                 //this.model.set("region", modelo.get("region_c"));
             }, this)
         });
+		this.$(".record-cell[data-name='blank_space']").hide();
     },
 
     /**
@@ -665,4 +670,28 @@
           }
           callback(null, fields, errors);
       },
+	  
+	  num_tipo_leasing: function(fields, errors, callback) {
+		var tiposnum = app.lang.getAppListStrings('num_tipo_op_leasing_list');
+		var data1 = this.model.get('tct_tipo_op_leasing_mls_c');
+		var producto = this.model.get('producto_c');
+		var salida = [];
+		
+		if(producto == "2"){
+			if(this.model.get('comision_c') == undefined){
+				errors['comision_c'] = errors['comision_c'] || {};
+				errors['comision_c'].required = true;
+			}
+			if(parseFloat(this.model.get('comision_c')) <= 0.0 ){
+				errors['tct_conversion_c'] = errors['tct_conversion_c'] || {};
+				errors['tct_conversion_c'].required = true;
+				app.alert.show("comision", {
+					level: "error",
+					messages: "El campo <b>Comisión</b> debe ser mayor a 0.",
+					autoClose: false
+				});
+			}
+		}
+        callback(null, fields, errors);
+    },
 })

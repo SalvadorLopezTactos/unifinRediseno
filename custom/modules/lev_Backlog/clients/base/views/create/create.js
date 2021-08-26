@@ -5,7 +5,8 @@
 
 ({
     extendsFrom: 'CreateView',
-
+	val : null,
+	
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
@@ -35,9 +36,12 @@
         this.model.addValidationTask('check_solicitud', _.bind(this._ValidateSolicitud, this));
         this.model.addValidationTask('check_existingBL', _.bind(this._ValidateExistingBL, this));
         this.model.addValidationTask('camponovacio',_.bind(this.validacampoconversion,this));
-        this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
+        /************  CAmbiar valores tipo PRoducto LEasing   *****************/
+		this.model.addValidationTask('num_tipo_producto',_.bind(this.num_tipo_leasing, this));
+		/*********** ---- ***********************/
+		this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
 
-
+		
         /*
         var usuario = app.data.createBean('Users',{id:app.user.get('id')});
         usuario.fetch({
@@ -87,13 +91,15 @@
 
     _render: function() {
         this._super("_render");
-
+		
         this.$('[data-name=editar]').hide();
         if(this.$('[data-fieldname=lev_backlog_opportunities_name]').children().children(['data-original-title']).html() != null&&
             this.$('[data-fieldname=lev_backlog_opportunities_name]').children().children(['data-original-title']).html() != ""){
             this.model.set("editar", false);
         }
-
+		
+		this.setValores(this.val);
+		
         // Oculta campos al crear BL
         this.$('div[data-name=numero_de_backlog]').hide();
         this.$('div[data-name=tipo_c]').hide();
@@ -117,7 +123,7 @@
         this.$('div[data-name=tct_carga_masiva_chk_c]').hide();
         this.$('div[data-name=tct_bloqueo_txf_c]').hide();
 
-
+		this.$(".record-cell[data-name='blank_space']").hide();
 
         var usuario = app.data.createBean('Users',{id:app.user.get('id')});
         usuario.fetch({
@@ -129,16 +135,28 @@
                 this.multiProducto = modelo.get('multiproducto_c');
 
 
-                var op = app.lang.getAppListStrings('tipo_producto_list');
+                var op = app.lang.getAppListStrings('producto_activo_backlog_list');
                 var op2 = {};
-                for (id in this.productos){
+                /*for (id in this.productos){
                     op2[this.productos[id]] = op[this.productos[id]];
+                }*/
+				for (id in this.productos){
+					for (key in op){
+						if(this.productos[id] ==  key && key !=""){
+							//delete lista_productos[key];
+							op2[this.productos[id]] = op[key];
+						}
+					}
                 }
+				
                 var lista = this.getField('producto_c');
                 lista.items = op2;
                 lista.render();
 
-                this.model.set('producto_c',this.productos[0]);
+                //Establece valor por default, solo si el campo viene null
+                if(this.model.get('producto_c')==null){
+                    this.model.set('producto_c',this.productos[0]);
+                }
                 /*
                 if(this.productos[0] == "4"){
                     this.model.set('producto','4');
@@ -282,40 +300,48 @@
 
             self = this;
             var accountid=this.model.get('account_id_c');
-            //console.log('sccount_id: '. accountid )
-            if (accountid) {
-                app.api.call('GET', app.api.buildURL('Accounts/'+accountid+'/link/opportunities', null, null, {
-                    "filter":[
-                        {
-                            $or:[
-                                {
-                                    "tipo_de_operacion_c":"LINEA_NUEVA"
-                                },
-                                {
-                                    "tipo_de_operacion_c":"RATIFICACION_INCREMENTO"
-                                }
-                            ]
-                        }
-                    ]
-                }), null, {
-                    success: _.bind(function (data){
+            var producto=this.model.get('producto_c');
+            if(producto!="2"){ //Se aplica validación únicamente cuando el producto no es Crédito Simple
+                if (accountid) {
+                    app.api.call('GET', app.api.buildURL('Accounts/'+accountid+'/link/opportunities', null, null, {
+                        "filter":[
+                            {
+                                $or:[
+                                    {
+                                        "tipo_de_operacion_c":"LINEA_NUEVA"
+                                    },
+                                    {
+                                        "tipo_de_operacion_c":"RATIFICACION_INCREMENTO"
+                                    }
+                                ]
+                            }
+                        ]
+                    }), null, {
+                        success: _.bind(function (data){
+    
+                            if (data.records.length<1) {
+                                app.error.errorName2Keys[''] = '';
+                                errors[''] = errors[''] || {};
+                                errors[''] = errors[''] || {};
+                                errors[''].custom_message1 = true;
+                                errors[''].required = true;
+                                app.alert.show('validaSolicitudes', {
+                                    level: 'error',
+                                    messages: 'Para crear un Backlog es necesario que el cliente cuente m&iacutenimo con una Pre-Solicitud de l&iacutenea'
+                                });
+                            }
+                            callback(null, fields, errors);
+    
+                        }, self)
+                    });
+                }else {
+                    callback(null, fields, errors);
+                }
 
-                        if (data.records.length<1) {
-                            app.error.errorName2Keys[''] = '';
-                            errors[''] = errors[''] || {};
-                            errors[''] = errors[''] || {};
-                            errors[''].custom_message1 = true;
-                            errors[''].required = true;
-                            app.alert.show('validaSolicitudes', {
-                                level: 'error',
-                                messages: 'Para crear un Backlog es necesario que el cliente cuente m&iacutenimo con una Pre-Solicitud de l&iacutenea'
-                            });
-                        }
-                        callback(null, fields, errors)
-
-                    }, self)
-                });
-            }else {callback(null, fields, errors)}
+            }else{
+                callback(null, fields, errors);
+            }
+            
         },
 
     _ValidateExistingBL:function(fields, errors, callback){
@@ -327,11 +353,12 @@
         var id_account=this.model.get('account_id_c');
         var mes=this.model.get('mes');
         var anio=this.model.get('anio');
+		var producto=this.model.get('producto_c');
 
         if(id_account && id_account != '' && id_account.length>0){
 
 
-            var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes+'&filter[2][anio][$equals]='+anio+'&filter[3][estatus_operacion_c][$not_equals]=1&fields=id,mes,estatus_operacion_c',
+            var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes+'&filter[2][anio][$equals]='+anio+'&filter[3][estatus_operacion_c][$not_equals]=1&filter[4][producto_c][$equals]='+producto+'&fields=id,mes,estatus_operacion_c,producto_c',
                 null, null, null);
 
 
@@ -450,9 +477,28 @@
         this.model.fields['mes'].options = opciones_mes;
 
         //this.model.set("mes", '');
+		this.val = this.getValores();
+		
         if(stage != "loading"){
             this.render();
+			this.setValores(this.val);;
         }
+    },
+	
+	getValores: function(){
+      var valores = {
+        tempProducto : this.model.get('producto_c'),
+		tempProductoLead : this.model.get('num_tipo_op_leasing_c'),
+		tempProductoCred : this.model.get('num_tipo_op_credito_c')
+      }
+      return valores;
+    },
+
+    setValores: function(valores){
+		this.model.set("producto_c", valores.tempProducto);
+		this.model.set("num_tipo_op_leasing_c", valores.tempProductoLead);
+		this.model.set("num_tipo_op_credito_c", valores.tempProductoCred);
+		
     },
 
     getTipoCliente: function(){
@@ -462,6 +508,7 @@
             level: 'process',
             title: 'Cargando...'
         });
+		this.val = this.getValores();
         app.api.call("read", app.api.buildURL("Accounts/" + this.model.get('account_id_c'), null, null, {
             fields: name,
         }), null, {
@@ -572,7 +619,8 @@
                             //Estableciendo nuevas opciones en campo de producto
                             var campo_producto=this.getField('producto_c');
                             campo_producto.items=lista_productos;
-                            campo_producto.render()
+                            campo_producto.render();
+							//this.setValores(this.val);
                             this.model.set("region", modelo.get("region_c"));
                             this.model.set("equipo", modelo.get("equipo_c"));
                             this.model.set("assigned_user_id", modelo.get('id'));
@@ -825,5 +873,29 @@
 
         }
         callback(null, fields, errors);
+    },
+	
+	num_tipo_leasing: function(fields, errors, callback) {
+		var tiposnum = app.lang.getAppListStrings('num_tipo_op_leasing_list');
+		var data1 = this.model.get('tct_tipo_op_leasing_mls_c');
+		var producto = this.model.get('producto_c');
+		var salida = [];
+		
+		if(producto == "2"){
+			if(this.model.get('comision_c') == undefined){
+				errors['comision_c'] = errors['comision_c'] || {};
+				errors['comision_c'].required = true;
+			}else if(parseFloat(this.model.get('comision_c')) <= 0.0 ){
+				errors['comision_c'] = errors['comision_c'] || {};
+				errors['comision_c'].required = true;
+				app.alert.show("comision", {
+					level: "error",
+					messages: "El campo <b>Comisión</b> debe ser mayor a 0.",
+					autoClose: false
+				});
+			}
+		}
+		callback(null, fields, errors);
+		
     },
 })

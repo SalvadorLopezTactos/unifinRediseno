@@ -136,7 +136,7 @@ SQL;
 			global $db;
 			//Inserta los datos a la otra tabla, copia del campo Relacion a Persona
 			$bean->rel_relaciones_accountsaccounts_ida = $bean->rel_relaciones_accounts_1accounts_ida;
-			$query = "insert into rel_relaciones_accounts_c (select * from rel_relaciones_accounts_1_c where rel_relaciones_accounts_1accounts_ida = '{$bean->rel_relaciones_accounts_1accounts_ida}')";
+			$query = "insert ignore into rel_relaciones_accounts_c (select * from rel_relaciones_accounts_1_c where rel_relaciones_accounts_1accounts_ida = '{$bean->rel_relaciones_accounts_1accounts_ida}')";
 			$queryResult = $db->query($query);
 		}
 	}

@@ -23,3 +23,11 @@ $hook_array['after_save'][] = Array(
     'callLead_class',
     'ConvierteLead'
 );
+
+$hook_array['before_save'][] = Array(
+    1,
+    'Funcion para guardar informacion del usuario logueado asi como asignado a la call CREADA.',
+    'custom/modules/Calls/callLead_class.php',
+    'callLead_class',
+    'InfoCall'
+);

@@ -6,6 +6,7 @@ class Lead_platform_user
         global $app_list_strings;
         global $db;
         //Obtiene la plataforma
+        if(isset($GLOBALS['service']->platform) && $GLOBALS['service']->platform != ""){
         $plataforma=$GLOBALS['service']->platform;
         $lista_plataformas_audit=$app_list_strings['plataformas_habilitadas_auditoria_list'];
         $plataformas_array=array();
@@ -55,7 +56,6 @@ class Lead_platform_user
             }
 
         }
-
+      }
     }
-
 }

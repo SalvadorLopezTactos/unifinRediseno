@@ -196,15 +196,6 @@ array (
                 'acl_action' => 'view',
                 'class' => 'jcmx1',
               ),
-              // 12 => 
-              // array (
-              //   'type' => 'rowaction',
-              //   'event' => 'button:conversion_cliente_uniclick:click',
-              //   'name' => 'clienteuniclick',
-              //   'label' => 'Conversión Cliente Uniclick',
-              //   'acl_action' => 'view',
-              //   'class' => 'jcmx1',
-              // ),
               12 => 
               array (
                 'name' => 'send_survey',
@@ -241,6 +232,13 @@ array (
                 'type' => 'rowaction',
                 'label' => 'Negociador Quantico',
                 'event' => 'button:open_negociador_quantico:click',
+              ),
+              17 => 
+              array (
+                'name' => 'portal_proveedores',
+                'type' => 'rowaction',
+                'label' => 'Enviar al portal de proveedor',
+                'event' => 'button:enviar_portal_proveedores:click',
               ),
             ),
           ),
@@ -554,8 +552,8 @@ array (
               ),
               19 => 
               array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
+                'name' => 'alianza_soc_chk_c',
+                'label' => 'LBL_ALIANZA_SOC_CHK',
               ),
               20 => 
               array (

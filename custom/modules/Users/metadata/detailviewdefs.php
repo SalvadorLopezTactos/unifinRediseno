@@ -351,6 +351,19 @@ array (
             'label' => 'LBL_BLOQUEO_CUMPLE_C',
           ),
         ),
+        13 => 
+        array (
+          0 => 
+          array (
+            'name' => 'portal_proveedores_c',
+            'label' => 'LBL_PORTAL_PROVEEDORES',
+          ),
+          1 => 
+          array (
+            'name' => 'editar_backlog_chk_c',
+            'label' => 'LBL_EDITAR_BACKLOG_CHK',
+          ),
+        ),
       ),
     ),
   ),
