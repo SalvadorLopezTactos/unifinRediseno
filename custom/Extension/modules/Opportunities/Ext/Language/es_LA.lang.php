@@ -235,3 +235,4 @@ $mod_strings['CONDICIONES FINANCIERAS QUANTICO'] = 'Condiciones financieras quan
 $mod_strings['LBL_NO_DISPOSICIONES'] = 'No. Disposiciones';
 $mod_strings['LBL_GRACIA_CAPITAL'] = 'Gracia de capital';
 $mod_strings['LBL_ALIANZA_SOC_CHK'] = 'Alianza SOC';
+$mod_strings['LBL_FLG_SOC_OUT'] = 'flg soc out';
