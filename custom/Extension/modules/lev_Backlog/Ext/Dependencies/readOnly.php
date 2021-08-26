@@ -5,6 +5,8 @@
  * Date: 3/7/2016
  * Time: 3:09 PM
  */
+global $current_user;
+$editar_backlog=$current_user->editar_backlog_chk_c;
 
 $dependencies['lev_Backlog']['monto_real_logrado_readonly'] = array(
     'hooks' => array("all"),
@@ -524,13 +526,15 @@ $dependencies['lev_Backlog']['cliente_readonly'] = array(
 $dependencies['lev_Backlog']['monto_prospecto_c_readonly'] = array(
     'hooks' => array("all"),
     'onload' => true,
+    'trigger' => 'true',
+    'triggerFields' => array('id'),
     'actions' => array(
         array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'monto_prospecto_c',
                 'label' => 'monto_prospecto_c_label',
-                'value' => 'true',
+                'value' => 'not(and(equal($producto_c,"2"),equal(1,'.$editar_backlog.')))',
             ),
         ),
     ),
@@ -545,7 +549,7 @@ $dependencies['lev_Backlog']['monto_credito_c_readonly'] = array(
             'params' => array(
                 'target' => 'monto_credito_c',
                 'label' => 'monto_credito_c_label',
-                'value' => 'true',
+                'value' => 'not(and(equal($producto_c,"2"),equal(1,'.$editar_backlog.')))',
             ),
         ),
     ),
@@ -554,13 +558,15 @@ $dependencies['lev_Backlog']['monto_credito_c_readonly'] = array(
 $dependencies['lev_Backlog']['monto_rechazado_c_readonly'] = array(
     'hooks' => array("all"),
     'onload' => true,
+    'trigger' => 'true',
+    'triggerFields' => array('id'),
     'actions' => array(
         array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'monto_rechazado_c',
                 'label' => 'monto_rechazado_c_label',
-                'value' => 'true',
+                'value' => 'not(and(equal($producto_c,"2"),equal(1,'.$editar_backlog.')))',
             ),
         ),
     ),
@@ -575,7 +581,7 @@ $dependencies['lev_Backlog']['monto_sin_solicitud_c_readonly'] = array(
             'params' => array(
                 'target' => 'monto_sin_solicitud_c',
                 'label' => 'monto_sin_solicitud_c_label',
-                'value' => 'true',
+                'value' => 'not(and(equal($producto_c,"2"),equal(1,'.$editar_backlog.')))',
             ),
         ),
     ),
@@ -590,7 +596,7 @@ $dependencies['lev_Backlog']['monto_con_solicitud_c_readonly'] = array(
             'params' => array(
                 'target' => 'monto_con_solicitud_c',
                 'label' => 'monto_con_solicitud_c_label',
-                'value' => 'true',
+                'value' => 'not(and(equal($producto_c,"2"),equal(1,'.$editar_backlog.')))',
             ),
         ),
     ),
