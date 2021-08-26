@@ -243,3 +243,4 @@ $mod_strings['LBL_CREADO_PRODUCTO_C'] = 'Producto';
 $mod_strings['LBL_CREADO_PUESTO_C'] = 'Puesto';
 $mod_strings['LBL_A_EQUIPO_PROMOCION_C'] = 'Equipo de promoción';
 $mod_strings['LBL_C_EQUIPO_PROMOCION_C'] = 'Equipo de promoción';
+$mod_strings['LBL_FLG_SOC_OUT'] = 'flg soc out';
