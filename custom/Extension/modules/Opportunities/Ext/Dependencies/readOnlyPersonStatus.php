@@ -40,3 +40,19 @@ $dependencies['Opportunities']['readOnly_Monto_c'] = array(
     )
 
 );
+$dependencies['Opportunities']['readOnly_alianza_soc_chk_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tct_etapa_ddw_c'),
+    'onload' => true,
+    'actions' => array(
+        //Persona
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'alianza_soc_chk_c', //campo por afectar
+                'value' => 'equal($tct_etapa_ddw_c,"C")',
+            ),
+        ),
+    )
+);

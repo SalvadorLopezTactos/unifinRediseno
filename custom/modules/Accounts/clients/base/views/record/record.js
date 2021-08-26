@@ -309,6 +309,8 @@
         this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
         this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
         //this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
+		//Funcion para que se pueda o no editar el check de Alianza SOC
+        this.model.on('sync', this.userAlianzaSoc, this);
     },
 
     /** Asignacion modal */
@@ -7304,5 +7306,24 @@
                       }
                   });
             }
+    },
+	
+	userAlianzaSoc: function () {
+        //Recupera variables
+        //var chksock = this.model.get('alianza_soc_chk_c');
+        var productos = App.user.attributes.productos_c; //27=> Agente Tel, 31=> Coordinador CP,
+		var idUser = App.user.attributes.id; //27=> Agente Tel, 31=> Coordinador CP,
+        //var listaProductosSock = [];    //Recupera Ids de usuarios que pueden editar origen
+        //listaProductosSock = app.lang.getAppListStrings('producto_soc_usuario_list');
+		var readonly = true;
+		
+		Object.entries(App.lang.getAppListStrings('producto_soc_usuario_list')).forEach(([key, value]) => {
+            if(this.model.get(value) == idUser && productos.includes(key) ){
+				readonly = false;
+			}
+        });
+		if(readonly){
+			this.$("[data-name='alianza_soc_chk_c']").attr('style', 'pointer-events:none;');
+		}
     },
 })

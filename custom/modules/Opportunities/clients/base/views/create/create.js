@@ -2357,6 +2357,6 @@
             this.model.set("assigned_user_name", App.user.attributes.full_name);
         }
 
-    }
-
+    },
+	
 })

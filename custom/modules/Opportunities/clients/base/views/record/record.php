@@ -731,8 +731,8 @@ array (
               ),
               85 => 
               array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
+                'name' => 'alianza_soc_chk_c',
+                'label' => 'LBL_ALIANZA_SOC_CHK',
               ),
               86 => 
               array (

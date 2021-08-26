@@ -12,3 +12,11 @@ $hook_array['before_save'][] = Array(
     'Task_Hooks', // name of the class
     'afterWorkflow'
 );
+
+$hook_array['before_save'][] = Array(
+    2,
+    'Funcion para guardar informacion del usuario logueado asi como asignado a la tarea CREADA.',
+    'custom/modules/Tasks/Task_Hooks.php',
+    'Task_Hooks', // name of the class
+    'InfoTasks'
+);
