@@ -173,6 +173,8 @@
         this.adminUserCartera();
         
         this.model.addValidationTask('dataOrigen',_.bind(this.dataOrigen, this));
+		
+		this.model.addValidationTask('SOCInicio', _.bind(this.SOCInicio, this));
     },
 
    /* producto_financiero: function () {
@@ -2357,6 +2359,22 @@
             this.model.set("assigned_user_name", App.user.attributes.full_name);
         }
 
+    },
+	
+	SOCInicio: function (fields, errors, callback) {
+				
+		var id_cuenta=this.model.get('account_id');
+		if(id_cuenta!='' && id_cuenta != undefined ){
+			var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
+			account.fetch({
+				success: _.bind(function (model) {
+					if(model.attributes.alianza_soc_chk_c){
+						this.model.set('alianza_soc_chk_c',true);
+					}
+				}, this)
+			});
+		}
+		callback(null, fields, errors);
     },
 	
 })
