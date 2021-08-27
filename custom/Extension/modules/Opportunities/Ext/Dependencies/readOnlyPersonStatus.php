@@ -56,3 +56,4 @@ $dependencies['Opportunities']['readOnly_alianza_soc_chk_c'] = array(
         ),
     )
 );
+
