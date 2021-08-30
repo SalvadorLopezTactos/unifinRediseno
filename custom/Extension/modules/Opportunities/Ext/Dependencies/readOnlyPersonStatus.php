@@ -51,7 +51,7 @@ $dependencies['Opportunities']['readOnly_alianza_soc_chk_c'] = array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'alianza_soc_chk_c', //campo por afectar
-                'value' => 'equal($tct_etapa_ddw_c,"C")',
+                'value' => 'or(not(isInList($tct_etapa_ddw_c,createList("SI","P","R"))),equal($estatus_c,"K"))',
             ),
         ),
     )
