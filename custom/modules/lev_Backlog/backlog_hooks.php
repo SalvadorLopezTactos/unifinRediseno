@@ -41,58 +41,62 @@ class backlog_hooks {
     public function setMontosMultiEtapa($bean = null, $event = null, $args = null)
     {
         global $current_user;
-        //$GLOBALS['log']->fatal('Guarda Montos Nuevo Update');
-        //Solo se ejecuta al insertar
-        if (empty($bean->fetched_row['id'])) {
-            // $GLOBALS['log']->fatal('Es nuevo backlog');
-            // $GLOBALS['log']->fatal('Actualiza Valores');
-            $bean->monto_con_solicitud_c = 0;
-            $bean->ri_con_solicitud_c = 0;
-            $bean->monto_credito_c = 0;
-            $bean->ri_credito_c = 0;
-            $bean->monto_rechazado_c = 0;
-            $bean->ri_rechazada_c = 0;
-            $bean->monto_final_comprometido_c = $bean->monto_comprometido;  //Backlog
-            $bean->ri_final_comprometida = $bean->renta_inicial_comprometida;
-            $bean->monto_prospecto_c = 0;
-            $bean->ri_prospecto_c = 0;
-            //$GLOBALS['log']->fatal('Valida Si Linea Disponible >= Backlog - Renta Inicial'.$bean->monto_original.'-'.$bean->monto_final_comprometido.'-'.$bean->ri_final_comprometida_c);
-            //Si Linea Disponible >= Backlog - Renta Inicial
-            if ($bean->monto_original >= ($bean->monto_final_comprometido_c - $bean->ri_final_comprometida_c)) {
-                // $GLOBALS['log']->fatal('cumple condicion backlog >=- Renta Inicial');
+        
+        if($bean->producto_c != "2"){
+            //Solo se ejecuta al insertar
+            if (empty($bean->fetched_row['id'])) {
+                // $GLOBALS['log']->fatal('Es nuevo backlog');
                 // $GLOBALS['log']->fatal('Actualiza Valores');
-                $bean->monto_sin_solicitud_c = $bean->monto_final_comprometido_c;
-                $bean->ri_sin_solicitud_c = $bean->ri_final_comprometida_c;
-                $bean->etapa_c = '1';
-                $bean->etapa_preliminar_c='1';
+                $bean->monto_con_solicitud_c = 0;
+                $bean->ri_con_solicitud_c = 0;
+                $bean->monto_credito_c = 0;
+                $bean->ri_credito_c = 0;
+                $bean->monto_rechazado_c = 0;
+                $bean->ri_rechazada_c = 0;
+                $bean->monto_final_comprometido_c = $bean->monto_comprometido;  //Backlog
+                $bean->ri_final_comprometida = $bean->renta_inicial_comprometida;
+                $bean->monto_prospecto_c = 0;
+                $bean->ri_prospecto_c = 0;
+                //$GLOBALS['log']->fatal('Valida Si Linea Disponible >= Backlog - Renta Inicial'.$bean->monto_original.'-'.$bean->monto_final_comprometido.'-'.$bean->ri_final_comprometida_c);
+                //Si Linea Disponible >= Backlog - Renta Inicial
+                if ($bean->monto_original >= ($bean->monto_final_comprometido_c - $bean->ri_final_comprometida_c)) {
+                    // $GLOBALS['log']->fatal('cumple condicion backlog >=- Renta Inicial');
+                    // $GLOBALS['log']->fatal('Actualiza Valores');
+                    $bean->monto_sin_solicitud_c = $bean->monto_final_comprometido_c;
+                    $bean->ri_sin_solicitud_c = $bean->ri_final_comprometida_c;
+                    $bean->etapa_c = '1';
+                    $bean->etapa_preliminar_c='1';
+
+                } else {
+                    //$GLOBALS['log']->fatal('No cumple condicion');
+                    $bean = backlog_hooks::ActualizaValores($bean);
+                }
+
+                $bean->etapa_preliminar_c=$bean->etapa_c;
 
             } else {
-                //$GLOBALS['log']->fatal('No cumple condicion');
-                $bean = backlog_hooks::ActualizaValores($bean);
+                //$GLOBALS['log']->fatal('Si no existe registro, calcula valores-'.$bean->monto_final_comprometido_c.'-'.$bean->monto_con_solicitud_c);
+                //Si no existe registro, calcula valores
+                $montoTMP = $bean->monto_final_comprometido_c - $bean->monto_con_solicitud_c;
+                if ($montoTMP < 0) {
+                    $montoTMP = 0;
+                }
+                $RITMP = $montoTMP * ($bean->porciento_ri/100);
+                $GLOBALS['log']->fatal('Si Linea Disponible >= montoTMP - RITMP'.'-'.$montoTMP.'-'.$RITMP.'-'.$bean->monto_original);
+                //Si Linea Disponible >= montoTMP - RITMP
+                if ($bean->monto_original >= ($montoTMP - $RITMP)) {
+                    //$GLOBALS['log']->fatal('Si Linea Disponible >= montoTMP - RITMP asigna valores');
+                    //Actualiza
+                    $bean->monto_sin_solicitud_c = $montoTMP;
+                    $bean->ri_sin_solicitud_c = $RITMP;
+                    $bean->etapa_c = '1';
+                } else {
+                    $bean = backlog_hooks::ActualizaValores($bean);
+                }
             }
 
-            $bean->etapa_preliminar_c=$bean->etapa_c;
-
-        } else {
-            //$GLOBALS['log']->fatal('Si no existe registro, calcula valores-'.$bean->monto_final_comprometido_c.'-'.$bean->monto_con_solicitud_c);
-            //Si no existe registro, calcula valores
-            $montoTMP = $bean->monto_final_comprometido_c - $bean->monto_con_solicitud_c;
-            if ($montoTMP < 0) {
-                $montoTMP = 0;
-            }
-            $RITMP = $montoTMP * ($bean->porciento_ri/100);
-            $GLOBALS['log']->fatal('Si Linea Disponible >= montoTMP - RITMP'.'-'.$montoTMP.'-'.$RITMP.'-'.$bean->monto_original);
-            //Si Linea Disponible >= montoTMP - RITMP
-            if ($bean->monto_original >= ($montoTMP - $RITMP)) {
-                //$GLOBALS['log']->fatal('Si Linea Disponible >= montoTMP - RITMP asigna valores');
-                //Actualiza
-                $bean->monto_sin_solicitud_c = $montoTMP;
-                $bean->ri_sin_solicitud_c = $RITMP;
-                $bean->etapa_c = '1';
-            } else {
-                $bean = backlog_hooks::ActualizaValores($bean);
-            }
         }
+        
 
         //Elimina valores negativos
         $monto_sin_solicitud_c = ($monto_sin_solicitud_c <= 0) ? 0 : $monto_sin_solicitud_c;
