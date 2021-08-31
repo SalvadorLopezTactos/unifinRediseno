@@ -40,6 +40,45 @@ class AuditTable
 
             }
 
+            //Valida cambio en el campo Id UNICS
+            if($bean->fetched_row['tct_id_unics_txf_c'] != $bean->tct_id_unics_txf_c){
+
+                $id_u_audit=create_guid();
+                $tipo=$this->getFieldType($bean,'tct_id_unics_txf_c');
+                $anterior=$bean->fetched_row["tct_id_unics_txf_c"];
+                $actual=$bean->tct_id_unics_txf_c;
+                $sqlInsert="insert into users_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
+                  VALUES ('{$id_u_audit}', '{$bean->id}', '{$date}', '{$current_user->id}', 'reports_to_id', '{$tipo}', '{$anterior}', '{$actual}', '{$anterior}', '{$actual}', '1', '{$date}')";
+                $GLOBALS['db']->query($sqlInsert);
+
+            }
+
+            //Valida cambio en el campo Id UNI2
+            if($bean->fetched_row['tct_id_uni2_txf_c'] != $bean->tct_id_uni2_txf_c){
+
+                $id_u_audit=create_guid();
+                $tipo=$this->getFieldType($bean,'tct_id_uni2_txf_c');
+                $anterior=$bean->fetched_row["tct_id_uni2_txf_c"];
+                $actual=$bean->tct_id_uni2_txf_c;
+                $sqlInsert="insert into users_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
+                  VALUES ('{$id_u_audit}', '{$bean->id}', '{$date}', '{$current_user->id}', 'reports_to_id', '{$tipo}', '{$anterior}', '{$actual}', '{$anterior}', '{$actual}', '1', '{$date}')";
+                $GLOBALS['db']->query($sqlInsert);
+
+            }
+
+            //Valida cambio en el campo ID Active Directory
+            if($bean->fetched_row['id_active_directory_c'] != $bean->id_active_directory_c){
+
+                $id_u_audit=create_guid();
+                $tipo=$this->getFieldType($bean,'id_active_directory_c');
+                $anterior=$bean->fetched_row["id_active_directory_c"];
+                $actual=$bean->id_active_directory_c;
+                $sqlInsert="insert into users_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
+                  VALUES ('{$id_u_audit}', '{$bean->id}', '{$date}', '{$current_user->id}', 'reports_to_id', '{$tipo}', '{$anterior}', '{$actual}', '{$anterior}', '{$actual}', '1', '{$date}')";
+                $GLOBALS['db']->query($sqlInsert);
+
+            }
+        
         }
 
     }
