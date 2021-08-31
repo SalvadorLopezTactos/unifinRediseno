@@ -48,7 +48,7 @@ class AuditTable
                 $anterior=$bean->fetched_row["tct_id_unics_txf_c"];
                 $actual=$bean->tct_id_unics_txf_c;
                 $sqlInsert="insert into users_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
-                  VALUES ('{$id_u_audit}', '{$bean->id}', '{$date}', '{$current_user->id}', 'reports_to_id', '{$tipo}', '{$anterior}', '{$actual}', '{$anterior}', '{$actual}', '1', '{$date}')";
+                  VALUES ('{$id_u_audit}', '{$bean->id}', '{$date}', '{$current_user->id}', 'tct_id_unics_txf_c', '{$tipo}', '{$anterior}', '{$actual}', '{$anterior}', '{$actual}', '1', '{$date}')";
                 $GLOBALS['db']->query($sqlInsert);
 
             }
@@ -61,7 +61,7 @@ class AuditTable
                 $anterior=$bean->fetched_row["tct_id_uni2_txf_c"];
                 $actual=$bean->tct_id_uni2_txf_c;
                 $sqlInsert="insert into users_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
-                  VALUES ('{$id_u_audit}', '{$bean->id}', '{$date}', '{$current_user->id}', 'reports_to_id', '{$tipo}', '{$anterior}', '{$actual}', '{$anterior}', '{$actual}', '1', '{$date}')";
+                  VALUES ('{$id_u_audit}', '{$bean->id}', '{$date}', '{$current_user->id}', 'tct_id_uni2_txf_c', '{$tipo}', '{$anterior}', '{$actual}', '{$anterior}', '{$actual}', '1', '{$date}')";
                 $GLOBALS['db']->query($sqlInsert);
 
             }
@@ -74,7 +74,7 @@ class AuditTable
                 $anterior=$bean->fetched_row["id_active_directory_c"];
                 $actual=$bean->id_active_directory_c;
                 $sqlInsert="insert into users_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
-                  VALUES ('{$id_u_audit}', '{$bean->id}', '{$date}', '{$current_user->id}', 'reports_to_id', '{$tipo}', '{$anterior}', '{$actual}', '{$anterior}', '{$actual}', '1', '{$date}')";
+                  VALUES ('{$id_u_audit}', '{$bean->id}', '{$date}', '{$current_user->id}', 'id_active_directory_c', '{$tipo}', '{$anterior}', '{$actual}', '{$anterior}', '{$actual}', '1', '{$date}')";
                 $GLOBALS['db']->query($sqlInsert);
 
             }
