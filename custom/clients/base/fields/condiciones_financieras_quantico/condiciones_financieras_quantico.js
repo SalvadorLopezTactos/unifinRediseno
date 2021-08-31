@@ -182,7 +182,7 @@
                                 //Ajuste: Obtener el elemento con mayor número de columnas para evitar que algunas filas se vean sin un título en su respectiva columna
                                 var arr_numero_elementos=[];
                                 for (let pos = 0; pos < data.FinancialTermGroupResponseList.length; pos++) {
-                                    arr_numero_elementos[pos]=data.FinancialTermGroupResponseList[pos].length;
+                                    arr_numero_elementos[pos]=data.FinancialTermGroupResponseList[pos].FinancialTermResponseList.length;
                                 }
                                 var posicion_del_maximo=self.indexOfMax(arr_numero_elementos);
                                 
@@ -343,7 +343,7 @@
                     //Ajuste: Obtener el elemento con mayor número de columnas para evitar que algunas filas se vean sin un título en su respectiva columna
                     var arr_numero_elementos=[];
                     for (let pos = 0; pos < data.FinancialTermGroupResponseList.length; pos++) {
-                        arr_numero_elementos[pos]=data.FinancialTermGroupResponseList[pos].length;
+                        arr_numero_elementos[pos]=data.FinancialTermGroupResponseList[pos].FinancialTermResponseList.length;
                     }
                     var posicion_del_maximo=self.indexOfMax(arr_numero_elementos);
                     
