@@ -99,9 +99,9 @@
 		this.estatus_list_html["3"] = "En Proceso de Cancelación";
 		
 		this.producto_list_html = {};
+		this.producto_list_html["0"] = "Todos";
         this.producto_list_html["1"] = "Leasing";
 		this.producto_list_html["2"] = "Crédito Simple";
-		this.producto_list_html["3"] = "Todos";
 		
         this.EquipoSortDirection = 'DESC';
         this.PromotorSortDirection = 'DESC';

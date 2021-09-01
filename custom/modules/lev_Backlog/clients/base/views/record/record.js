@@ -482,71 +482,75 @@
     },
 
     setEtapa: function () {
-        //Se recalcula la distribuci�n de montos en cada etapa
-        var RI = 0;
-        if (parseFloat(this.model.get("monto_final_comprometido_c")) > 0) {
-            var RI = (parseFloat(this.model.get("ri_final_comprometida_c")) / parseFloat(this.model.get("monto_final_comprometido_c"))).toFixed(2);
-        }
-        //El monto en compras no se altera, el resto de lo comprometido se manda a Sin Solicitud
-        var SinSolicitud = parseFloat(this.model.get("monto_final_comprometido_c")) - parseFloat(this.model.get("monto_con_solicitud_c"));
-        var RISinSolicitud = SinSolicitud * RI;
-
-        //Si el disponible NO alcanza para el resto de la operacion se manda el disponible a SinSolicitud y el resto a PROCESO
-        if (parseFloat(this.model.get("monto_original")) < (SinSolicitud - RISinSolicitud)) {
-            SinSolicitud = parseFloat(this.model.get("monto_original"));
-        }
-        if (SinSolicitud < 0) {
-            SinSolicitud = 0;
-        }
-        RISinSolicitud = SinSolicitud * RI;
-
-        //Asignamos montos Sin Solicitud al modelo
-        this.model.set("monto_sin_solicitud_c", SinSolicitud);
-        this.model.set("ri_sin_solicitud_c", RISinSolicitud);
-
-        //El monto restante de la operacion se reparte en etapas de "Proceso"
-        var MontoSolicitudes = parseFloat(this.model.get("monto_final_comprometido_c")) - parseFloat(this.model.get("monto_con_solicitud_c")) - parseFloat(SinSolicitud);
-        if (parseFloat(MontoSolicitudes) > 0) {
-            var RISolicitudes = parseFloat(MontoSolicitudes) * parseFloat(RI);
-            if (parseFloat(this.model.get("monto_prospecto_c")) > 0) {
-                this.model.set("monto_prospecto_c", MontoSolicitudes);
-                this.model.set("ri_prospecto_c", RISolicitudes);
-                this.model.set("monto_credito_c", 0);
-                this.model.set("ri_credito_c", 0);
-                this.model.set("monto_rechazado_c", 0);
-                this.model.set("ri_rechazada_c", 0);
+        //Se aplican validaciones únicamente cuando el producto No es de CRÉDITO SIMPLE
+        if(this.model.get('producto_c') != "2"){
+            //Se recalcula la distribuci�n de montos en cada etapa
+            var RI = 0;
+            if (parseFloat(this.model.get("monto_final_comprometido_c")) > 0) {
+                var RI = (parseFloat(this.model.get("ri_final_comprometida_c")) / parseFloat(this.model.get("monto_final_comprometido_c"))).toFixed(2);
             }
-            if (parseFloat(this.model.get("monto_credito_c")) > 0) {
-                this.model.set("monto_credito_c", MontoSolicitudes);
-                this.model.set("ri_credito_c", RISolicitudes);
+            //El monto en compras no se altera, el resto de lo comprometido se manda a Sin Solicitud
+            var SinSolicitud = parseFloat(this.model.get("monto_final_comprometido_c")) - parseFloat(this.model.get("monto_con_solicitud_c"));
+            var RISinSolicitud = SinSolicitud * RI;
+
+            //Si el disponible NO alcanza para el resto de la operacion se manda el disponible a SinSolicitud y el resto a PROCESO
+            if (parseFloat(this.model.get("monto_original")) < (SinSolicitud - RISinSolicitud)) {
+                SinSolicitud = parseFloat(this.model.get("monto_original"));
+            }
+            if (SinSolicitud < 0) {
+                SinSolicitud = 0;
+            }
+            RISinSolicitud = SinSolicitud * RI;
+
+            //Asignamos montos Sin Solicitud al modelo
+            this.model.set("monto_sin_solicitud_c", SinSolicitud);
+            this.model.set("ri_sin_solicitud_c", RISinSolicitud);
+
+            //El monto restante de la operacion se reparte en etapas de "Proceso"
+            var MontoSolicitudes = parseFloat(this.model.get("monto_final_comprometido_c")) - parseFloat(this.model.get("monto_con_solicitud_c")) - parseFloat(SinSolicitud);
+            if (parseFloat(MontoSolicitudes) > 0) {
+                var RISolicitudes = parseFloat(MontoSolicitudes) * parseFloat(RI);
+                if (parseFloat(this.model.get("monto_prospecto_c")) > 0) {
+                    this.model.set("monto_prospecto_c", MontoSolicitudes);
+                    this.model.set("ri_prospecto_c", RISolicitudes);
+                    this.model.set("monto_credito_c", 0);
+                    this.model.set("ri_credito_c", 0);
+                    this.model.set("monto_rechazado_c", 0);
+                    this.model.set("ri_rechazada_c", 0);
+                }
+                if (parseFloat(this.model.get("monto_credito_c")) > 0) {
+                    this.model.set("monto_credito_c", MontoSolicitudes);
+                    this.model.set("ri_credito_c", RISolicitudes);
+                    this.model.set("monto_prospecto_c", 0);
+                    this.model.set("ri_prospecto_c", 0);
+                    this.model.set("monto_rechazado_c", 0);
+                    this.model.set("ri_rechazada_c", 0);
+                }
+                if (parseFloat(this.model.get("monto_rechazado_c"), 0) > 0) {
+                    this.model.set("monto_rechazado_c", MontoSolicitudes);
+                    this.model.set("ri_rechazada_c", RISolicitudes);
+                    this.model.set("monto_prospecto_c", 0);
+                    this.model.set("ri_prospecto_c", 0);
+                    this.model.set("monto_credito_c", 0);
+                    this.model.set("ri_credito_c", 0);
+                }
+                if (parseFloat(this.model.get("monto_prospecto_c")) == 0 && parseFloat(this.model.get("monto_credito_c")) == 0 && parseFloat(this.model.get("monto_rechazado_c")) == 0) {
+                    this.model.set("monto_prospecto_c", MontoSolicitudes);
+                    this.model.set("ri_prospecto_c", RISolicitudes);
+                    this.model.set("monto_credito_c", 0);
+                    this.model.set("ri_credito_c", 0);
+                    this.model.set("monto_rechazado_c", 0);
+                    this.model.set("ri_rechazada_c", 0);
+                }
+            } else {
                 this.model.set("monto_prospecto_c", 0);
                 this.model.set("ri_prospecto_c", 0);
-                this.model.set("monto_rechazado_c", 0);
-                this.model.set("ri_rechazada_c", 0);
-            }
-            if (parseFloat(this.model.get("monto_rechazado_c"), 0) > 0) {
-                this.model.set("monto_rechazado_c", MontoSolicitudes);
-                this.model.set("ri_rechazada_c", RISolicitudes);
-                this.model.set("monto_prospecto_c", 0);
-                this.model.set("ri_prospecto_c", 0);
-                this.model.set("monto_credito_c", 0);
-                this.model.set("ri_credito_c", 0);
-            }
-            if (parseFloat(this.model.get("monto_prospecto_c")) == 0 && parseFloat(this.model.get("monto_credito_c")) == 0 && parseFloat(this.model.get("monto_rechazado_c")) == 0) {
-                this.model.set("monto_prospecto_c", MontoSolicitudes);
-                this.model.set("ri_prospecto_c", RISolicitudes);
                 this.model.set("monto_credito_c", 0);
                 this.model.set("ri_credito_c", 0);
                 this.model.set("monto_rechazado_c", 0);
                 this.model.set("ri_rechazada_c", 0);
             }
-        } else {
-            this.model.set("monto_prospecto_c", 0);
-            this.model.set("ri_prospecto_c", 0);
-            this.model.set("monto_credito_c", 0);
-            this.model.set("ri_credito_c", 0);
-            this.model.set("monto_rechazado_c", 0);
-            this.model.set("ri_rechazada_c", 0);
+
         }
 
         //Calcula la etapa del Backlog
