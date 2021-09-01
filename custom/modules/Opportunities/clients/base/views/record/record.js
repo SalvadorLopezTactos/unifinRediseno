@@ -372,6 +372,9 @@
 
         //Oculta campo de control para director de la solicitud
         $('[data-name="director_solicitud_c"]').hide();
+        //OCULTA CAMPOS DE ID RESPUESTA UNION Y CONTROL DEL MONTO
+        $('[data-name="id_response_union_c"]').hide();
+        $('[data-name="control_monto_c"]').hide();
 
         //this.evaluaCampoSolicitudVobo();
         //this.evaluaCampoEnviarNotificacion();
@@ -1355,7 +1358,8 @@
         var valorSwitchUni2=App.lang.getAppListStrings('switch_inicia_proceso_list')['ejecuta'];
         if(valorSwitchUni2=='1'){
             if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
-                if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && this.model.get("producto_financiero_c") != 43 && this.model.get("tipo_producto_c") != 13) {
+                if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && 
+                this.model.get("producto_financiero_c") != 43 && this.model.get("tipo_producto_c") != 13 && this.model.get("tipo_producto_c") != 14) {
                     if (solicitud_cf.oFinanciera.condicion.length == 0) {
                         errors[$(".addCondicionFinanciera")] = errors['condiciones_financieras'] || {};
                         errors[$(".addCondicionFinanciera")].required = true;
@@ -1379,7 +1383,8 @@
         var valorSwitchUni2=App.lang.getAppListStrings('switch_inicia_proceso_list')['ejecuta'];
         if(valorSwitchUni2=='0'){
             if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
-                if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && this.model.get("producto_financiero_c") != 43 && this.model.get("tipo_producto_c") != 13) {
+                if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && 
+                this.model.get("producto_financiero_c") != 43 && this.model.get("tipo_producto_c") != 13 && this.model.get("tipo_producto_c") != 14) {
                     if(this.model.get('cf_quantico_c')!=""){
                         var cfQuantico=JSON.parse(this.model.get('cf_quantico_c'));
                         if (cfQuantico.FinancialTermGroupResponseList.length == 0) {

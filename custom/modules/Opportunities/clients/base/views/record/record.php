@@ -875,6 +875,21 @@ array (
                 'label' => 'LBL_CE_COMENTARIOS',
                 'span' => 12,
               ),
+              113 => 
+              array (
+                'name' => 'id_response_union_c',
+                'label' => 'LBL_ID_RESPONSE_UNION_C',
+              ),
+              114 => 
+              array (
+                'related_fields' => 
+                array (
+                  0 => 'currency_id',
+                  1 => 'base_rate',
+                ),
+                'name' => 'control_monto_c',
+                'label' => 'LBL_CONTROL_MONTO_C',
+              ),
             ),
           ),
           2 => 

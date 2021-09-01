@@ -158,3 +158,11 @@ $hook_array['before_save'][] = Array(
     'OpportunityLogic', // name of the class
     'InfoMeet'
 );
+
+$hook_array['after_save'][] = Array(
+    18,
+    'POST UNION SERVICE',
+    'custom/modules/Opportunities/opp_union.php',
+    'oppUnionService', // name of the class
+    'idResponseUnion'
+);
