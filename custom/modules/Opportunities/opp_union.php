@@ -70,7 +70,7 @@ class oppUnionService
 
             $callApi = new UnifinAPI();
             $resultado = $callApi->postUNION($url, $body);
-            // $GLOBALS['log']->fatal('Resultado: ' . json_encode($resultado));
+            $GLOBALS['log']->fatal('Resultado UNION: ' . json_encode($resultado));
 
             if ($resultado != "" && $resultado != null) {
 
