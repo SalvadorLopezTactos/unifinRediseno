@@ -36,6 +36,7 @@ class oppUnionService
             $GLOBALS['log']->fatal('*****Envia peticion al servicio de UNION*****');
 
             $url = $sugar_config['url_Union'];
+            $GLOBALS['log']->fatal('URL UNION '. $url);
             $tipoPersona = ($beanCuenta->tipodepersona_c == "Persona Fisica con Actividad Empresarial") ? 2 : 3;
 
             $body = array(
@@ -67,7 +68,8 @@ class oppUnionService
                     )
                 )
             );
-
+            $GLOBALS['log']->fatal('BODY UNION: ');
+            $GLOBALS['log']->fatal($body);
             $callApi = new UnifinAPI();
             $resultado = $callApi->postUNION($url, $body);
             $GLOBALS['log']->fatal('Resultado UNION: ' . json_encode($resultado));
