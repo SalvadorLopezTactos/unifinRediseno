@@ -179,6 +179,10 @@
         this.model.addValidationTask('validaCreditCard', _.bind(this.validaCreditCard, this));
         //VALIDA EL MONTO DEL TIPO DE PRODUCTO TARJETA DE CREDITO QUE NO SUPERE EL CONTROL DEL MONTO
         this.model.addValidationTask('validaMontoCreditCard', _.bind(this.validaMontoCreditCard, this));
+        
+        this.model.addValidationTask('dataOrigen',_.bind(this.dataOrigen, this));
+		
+		this.model.addValidationTask('SOCInicio', _.bind(this.SOCInicio, this));
     },
 
     /* producto_financiero: function () {
@@ -2464,4 +2468,22 @@
         }
     },
 
+
+	
+	SOCInicio: function (fields, errors, callback) {
+				
+		var id_cuenta=this.model.get('account_id');
+		if(id_cuenta!='' && id_cuenta != undefined ){
+			var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
+			account.fetch({
+				success: _.bind(function (model) {
+					if(model.attributes.alianza_soc_chk_c){
+						this.model.set('alianza_soc_chk_c',true);
+					}
+				}, this)
+			});
+		}
+		callback(null, fields, errors);
+    },
+	
 })

@@ -45,6 +45,7 @@ class CondicionesFinancierasQuantico extends SugarApi
             $host_lista_instrumento_financiero=$sugar_config['quantico_url_base'] . '/CreditRequestIntegration/rest/CreditRequestApi/GetFinancialInstrument';
             $host_lista_comision=$sugar_config['quantico_url_base'] . '/CreditRequestIntegration/rest/CreditRequestApi/GetCommissionType';
             $host_lista_calculo=$sugar_config['quantico_url_base'] . '/CreditRequestIntegration/rest/CreditRequestApi/GetCollectionCalculationType';
+            $host_lista_tipo_tasa=$sugar_config['quantico_url_base'] . '/CreditRequestIntegration/rest/CreditRequestApi/GetRateType';
 
             $callApi = new UnifinAPI();
             $resultado = $callApi->getQuanticoCF($host, $auth_encode);
@@ -55,6 +56,7 @@ class CondicionesFinancierasQuantico extends SugarApi
             $resultado['listaValores']['InstrumentoFinanciero']=$callApi->getQuanticoCF($host_lista_instrumento_financiero, $auth_encode);
             $resultado['listaValores']['TipoComision']=$callApi->getQuanticoCF($host_lista_comision, $auth_encode);
             $resultado['listaValores']['TipoCalculo']=$callApi->getQuanticoCF($host_lista_calculo, $auth_encode);
+            $resultado['listaValores']['TipoTasa']=$callApi->getQuanticoCF($host_lista_tipo_tasa, $auth_encode);
         }
 
         return $resultado;

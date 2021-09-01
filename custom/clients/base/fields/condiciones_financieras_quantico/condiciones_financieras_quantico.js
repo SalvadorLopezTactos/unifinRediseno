@@ -179,7 +179,14 @@
                             //Recorres el array de respuesta para corroborar el tipo de dato para conocer el campo html que corresponde
                             if (data.FinancialTermGroupResponseList != undefined && data.FinancialTermGroupResponseList.length > 0) {
                                 self.model.set("cf_quantico_politica_c",jsonStringPolitica);
-                                var arrayRespuesta = data.FinancialTermGroupResponseList[0].FinancialTermResponseList;
+                                //Ajuste: Obtener el elemento con mayor número de columnas para evitar que algunas filas se vean sin un título en su respectiva columna
+                                var arr_numero_elementos=[];
+                                for (let pos = 0; pos < data.FinancialTermGroupResponseList.length; pos++) {
+                                    arr_numero_elementos[pos]=data.FinancialTermGroupResponseList[pos].FinancialTermResponseList.length;
+                                }
+                                var posicion_del_maximo=self.indexOfMax(arr_numero_elementos);
+                                
+                                var arrayRespuesta = data.FinancialTermGroupResponseList[posicion_del_maximo].FinancialTermResponseList;
                                 if (arrayRespuesta.length > 0) {
                                     for (var i = 0; i < arrayRespuesta.length; i++) {
                                         
@@ -333,7 +340,14 @@
                 //Llenar los headers
                 //Recorres el array de respuesta para corroborar el tipo de dato para conocer el campo html que corresponde
                 if (data.FinancialTermGroupResponseList.length > 0) {
-                    var arrayRespuesta = data.FinancialTermGroupResponseList[0].FinancialTermResponseList;
+                    //Ajuste: Obtener el elemento con mayor número de columnas para evitar que algunas filas se vean sin un título en su respectiva columna
+                    var arr_numero_elementos=[];
+                    for (let pos = 0; pos < data.FinancialTermGroupResponseList.length; pos++) {
+                        arr_numero_elementos[pos]=data.FinancialTermGroupResponseList[pos].FinancialTermResponseList.length;
+                    }
+                    var posicion_del_maximo=self.indexOfMax(arr_numero_elementos);
+                    
+                    var arrayRespuesta = data.FinancialTermGroupResponseList[posicion_del_maximo].FinancialTermResponseList;
                     if (arrayRespuesta.length > 0) {
                         for (var i = 0; i < arrayRespuesta.length; i++) {
                             var objHeader = {};
@@ -456,6 +470,24 @@
 
             self.render();
         }
+    },
+
+    indexOfMax:function(arr) {
+        if (arr.length === 0) {
+            return -1;
+        }
+    
+        var max = arr[0];
+        var maxIndex = 0;
+    
+        for (var i = 1; i < arr.length; i++) {
+            if (arr[i] > max) {
+                maxIndex = i;
+                max = arr[i];
+            }
+        }
+    
+        return maxIndex;
     },
 
     setinfoCFConfiguradas:function(){

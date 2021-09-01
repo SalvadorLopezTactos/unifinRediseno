@@ -31,7 +31,7 @@
         //$('[data-name="opportunities_directores"]').hide();
         //$('[data-name="vobo_descripcion_txa_c"]').hide();
         //$('[data-name="doc_scoring_chk_c"]').hide();
-
+		
         //Contexto para exlcuir_check
         banderaExcluye = this;
         banderaExcluye.check = [];
@@ -154,9 +154,15 @@
         //this.model.on("change:admin_cartera_c", _.bind(this.adminUserCartera, this));
         this.model.on('sync', this.adminUserCartera, this);
         //this.adminUserCartera();
-		/*************** validacion SOC ****************/
-		this.model.on('sync', this.SOCInicio, this);
+		
+		
+	/*************** validacion SOC ****************/
+		//this.model.on('sync', this.SOCInicio, this);
+		//this.model.on("change:alianza_soc_chk_c", _.bind(this.SOCflag, this));
+		//this.events['click a[name=alianza_soc_chk_c]'] = 'SOCflag';
 		this.model.addValidationTask('validacionSOC', _.bind(this.validacionSOC, this));
+	/***********************************************/
+		
     },
 
     fulminantcolor: function () {
@@ -3445,8 +3451,10 @@
 	
 	SOCInicio: function () {
 		
+		$('[name="flg_soc_out_c"]').hide();
+		
 		var id_cuenta=this.model.get('account_id');
-		if(id_cuenta!='' && id_cuenta != undefined && this.model.get('alianza_soc_chk_c') === ""){
+		if(id_cuenta!='' && id_cuenta != undefined && this.model.get('flg_soc_out_c') != true){
 			var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
 			account.fetch({
 				success: _.bind(function (model) {
@@ -3457,7 +3465,7 @@
 			});
 		}    
     },
-	
+
 	validacionSOC: function (fields, errors, callback) {
 		
 		var id_cuenta=this.model.get('account_id');

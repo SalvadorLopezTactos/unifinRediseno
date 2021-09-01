@@ -10,4 +10,7 @@ $app_list_strings['mapeo_nombre_attr_cf_quantico_list']=array (
   'Tipo Calculo Cobranza' => 'TipoCalculo',
   'Tasa Ordinario' => 'InstrumentoFinanciero',
   'Tasa Moratorio' => 'InstrumentoFinanciero',
+  'Calculo Sobre'=>'TipoCalculo',
+  'Tipo Tasa Ordinario'=>'TipoTasa',
+  'Tipo Tasa Moratorio'=>'TipoTasa'
 );

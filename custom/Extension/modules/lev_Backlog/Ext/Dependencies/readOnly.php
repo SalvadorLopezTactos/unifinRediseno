@@ -527,7 +527,7 @@ $dependencies['lev_Backlog']['monto_prospecto_c_readonly'] = array(
     'hooks' => array("all"),
     'onload' => true,
     'trigger' => 'true',
-    'triggerFields' => array('id'),
+    'triggerFields' => array('id','producto_c'),
     'actions' => array(
         array(
             'name' => 'ReadOnly',
@@ -543,6 +543,8 @@ $dependencies['lev_Backlog']['monto_prospecto_c_readonly'] = array(
 $dependencies['lev_Backlog']['monto_credito_c_readonly'] = array(
     'hooks' => array("all"),
     'onload' => true,
+    'trigger' => 'true',
+    'triggerFields' => array('id','producto_c'),
     'actions' => array(
         array(
             'name' => 'ReadOnly',
@@ -559,7 +561,7 @@ $dependencies['lev_Backlog']['monto_rechazado_c_readonly'] = array(
     'hooks' => array("all"),
     'onload' => true,
     'trigger' => 'true',
-    'triggerFields' => array('id'),
+    'triggerFields' => array('id','producto_c'),
     'actions' => array(
         array(
             'name' => 'ReadOnly',
@@ -575,6 +577,8 @@ $dependencies['lev_Backlog']['monto_rechazado_c_readonly'] = array(
 $dependencies['lev_Backlog']['monto_sin_solicitud_c_readonly'] = array(
     'hooks' => array("all"),
     'onload' => true,
+    'trigger' => 'true',
+    'triggerFields' => array('id','producto_c'),
     'actions' => array(
         array(
             'name' => 'ReadOnly',
@@ -590,6 +594,8 @@ $dependencies['lev_Backlog']['monto_sin_solicitud_c_readonly'] = array(
 $dependencies['lev_Backlog']['monto_con_solicitud_c_readonly'] = array(
     'hooks' => array("all"),
     'onload' => true,
+    'trigger' => 'true',
+    'triggerFields' => array('id','producto_c'),
     'actions' => array(
         array(
             'name' => 'ReadOnly',
