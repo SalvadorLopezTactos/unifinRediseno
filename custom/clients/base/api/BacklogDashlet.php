@@ -363,7 +363,7 @@ SQL;
 				$query .= " AND blcs.producto_c = '1'";
 			}else if($producto == '2'){
 				$query .= " AND blcs.producto_c = '2'";
-			}else if($producto == '3'){
+			}else if($producto == '0'){
 				$query .= " AND blcs.producto_c IS NOT NULL";
 			}
         }
