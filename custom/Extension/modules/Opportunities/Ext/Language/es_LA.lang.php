@@ -244,3 +244,5 @@ $mod_strings['LBL_CREADO_PUESTO_C'] = 'Puesto';
 $mod_strings['LBL_A_EQUIPO_PROMOCION_C'] = 'Equipo de promoción';
 $mod_strings['LBL_C_EQUIPO_PROMOCION_C'] = 'Equipo de promoción';
 $mod_strings['LBL_FLG_SOC_OUT'] = 'flg soc out';
+$mod_strings['LBL_ID_RESPONSE_UNION_C'] = 'ID Response Union';
+$mod_strings['LBL_CONTROL_MONTO_C'] = 'Control del monto';

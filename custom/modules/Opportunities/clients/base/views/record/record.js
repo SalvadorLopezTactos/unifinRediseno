@@ -378,6 +378,9 @@
 
         //Oculta campo de control para director de la solicitud
         $('[data-name="director_solicitud_c"]').hide();
+        //OCULTA CAMPOS DE ID RESPUESTA UNION Y CONTROL DEL MONTO
+        $('[data-name="id_response_union_c"]').hide();
+        $('[data-name="control_monto_c"]').hide();
 
         //this.evaluaCampoSolicitudVobo();
         //this.evaluaCampoEnviarNotificacion();
@@ -429,7 +432,7 @@
             } else {
                 this.$('div[data-name=plazo_ratificado_incremento_c]').show();
                 this.$('div[data-name=ri_usuario_bo_c]').show();
-                this.obtieneCondicionesFinancieras();
+                // this.obtieneCondicionesFinancieras();
             }
         }, this));
 
@@ -581,13 +584,13 @@
         }*/
         //llamamos a las condiciones financieras por default para ratificación.
         // this.obtieneCondicionesFinancieras();
-        this.model.on("change:plazo_ratificado_incremento_c", _.bind(function () {
-            //Si cambia el plazo disparamos las condiciones:
-            this.obtieneCondicionesFinancieras();
-        }, this));
+        // this.model.on("change:plazo_ratificado_incremento_c", _.bind(function () {
+        //     //Si cambia el plazo disparamos las condiciones:
+        //     this.obtieneCondicionesFinancieras();
+        // }, this));
 
         this.model.on("change:tipo_producto_c", _.bind(function () {
-            this.obtieneCondicionesFinancieras();
+            // this.obtieneCondicionesFinancieras();
             if (this.model.get('tipo_producto_c') == '3') {
                 this.$("div.record-label[data-name='ri_porcentaje_renta_inicial_c']").text("Porcentaje de Enganche R/I");
                 this.$("div.record-label[data-name='porcentaje_renta_inicial_c']").text("Porcentaje de Enganche");
@@ -600,6 +603,12 @@
                 this.$("div.record-label[data-name='monto_c']").text("L\u00EDnea aproximada");
             } else {
                 this.$("div.record-label[data-name='monto_c']").text("Monto de l\u00EDnea");
+            }
+            //TIPO DE PRODUCTO TARJETA DE CREDITO - OCULTA EL CHECK DE RATIFICACION / INCREMENTO
+            if (this.model.get('tipo_producto_c') == '14') {
+                this.$('div[data-name=ratificacion_incremento_c]').hide();      
+            } else {
+                this.$('div[data-name=ratificacion_incremento_c]').show();
             }
         }, this));
 
@@ -1167,7 +1176,7 @@
         }
         callback(null, fields, errors);
     },
-    obtieneCondicionesFinancieras: function () {
+    // obtieneCondicionesFinancieras: function () {
         /*
          * Obtiene las condidionces financieras
          * */
@@ -1210,7 +1219,7 @@
                 }, this)
             });
         }*/
-    },
+    // },
     validaCondicionesFinancerasRI: function (fields, errors, callback) {
         if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
             if (this.model.get('ratificacion_incremento_c') == true && this.model.get('tipo_operacion_c') == '2') {
@@ -1355,7 +1364,8 @@
         var valorSwitchUni2=App.lang.getAppListStrings('switch_inicia_proceso_list')['ejecuta'];
         if(valorSwitchUni2=='1'){
             if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
-                if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && this.model.get("producto_financiero_c") != 43 && this.model.get("tipo_producto_c") != 13) {
+                if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && 
+                this.model.get("producto_financiero_c") != 43 && this.model.get("tipo_producto_c") != 13 && this.model.get("tipo_producto_c") != 14) {
                     if (solicitud_cf.oFinanciera.condicion.length == 0) {
                         errors[$(".addCondicionFinanciera")] = errors['condiciones_financieras'] || {};
                         errors[$(".addCondicionFinanciera")].required = true;
@@ -1379,7 +1389,8 @@
         var valorSwitchUni2=App.lang.getAppListStrings('switch_inicia_proceso_list')['ejecuta'];
         if(valorSwitchUni2=='0'){
             if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
-                if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && this.model.get("producto_financiero_c") != 43 && this.model.get("tipo_producto_c") != 13) {
+                if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && 
+                this.model.get("producto_financiero_c") != 43 && this.model.get("tipo_producto_c") != 13 && this.model.get("tipo_producto_c") != 14) {
                     if(this.model.get('cf_quantico_c')!=""){
                         var cfQuantico=JSON.parse(this.model.get('cf_quantico_c'));
                         if (cfQuantico.FinancialTermGroupResponseList.length == 0) {
