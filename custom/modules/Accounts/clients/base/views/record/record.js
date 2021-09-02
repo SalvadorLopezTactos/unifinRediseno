@@ -166,6 +166,8 @@
 
         this.events['click a[name=generar_rfc_c]'] = '_doGenera_RFC_CURP';
         this.events['click a[name=generar_curp_c]'] = '_doGeneraCURP';
+        //Evento boton Portal Proveedores
+        this.events['click a[name=portal_proveedores]'] = 'func_Proveedor';
 
         /* LEV INICIO */
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 7/14/2015 Description: Cuando estamos en el modulo de Personas, no queremos que se muestre la opcion Persona para el tipo de registro */
@@ -7297,12 +7299,26 @@
                   button.listenTo(button, "render", function () {
                        if((this.model.get('esproveedor_c')=='1' || this.model.get('tipo_registro_cuenta_c')=='5') && App.user.attributes.portal_proveedores_c=='1'){
                         $('[name="portal_proveedores"]').show();
-                          //Accion próxima
-                          //window.open("#bwc/index.php?entryPoint=NegociadorQuantico&idPersona=" + idCuenta);
                       } else {
                         $('[name="portal_proveedores"]').hide();
                       }
                   });
             }
+    },
+
+    func_Proveedor: function () {
+        App.alert.show('ProcesoProveedor', {
+            level: 'process',
+            title: 'Enviando cuenta a portal de proveedores, por favor espere.',
+        });
+        app.api.call("read", app.api.buildURL("AltaProveedor/" + this.model.get('id'), null, null, {}), null, {
+            success: _.bind(function (data) {
+                app.alert.dismiss('ProcesoProveedor');
+                app.alert.show('alert_func_Proveedor_success', {
+                    level: 'success',
+                    messages: 'Se ha dado de alta al proveedor.',
+                });
+            }, this),
+        });
     },
 })
