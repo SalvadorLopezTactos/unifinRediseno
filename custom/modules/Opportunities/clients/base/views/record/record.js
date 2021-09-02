@@ -154,7 +154,8 @@
         //this.model.on("change:admin_cartera_c", _.bind(this.adminUserCartera, this));
         this.model.on('sync', this.adminUserCartera, this);
         //this.adminUserCartera();
-		
+		//VALIDA EL MONTO DEL TIPO DE PRODUCTO TARJETA DE CREDITO QUE NO SUPERE EL CONTROL DEL MONTO
+        this.model.addValidationTask('validaMontoCreditCard', _.bind(this.validaMontoCreditCard, this));
 		
 	/*************** validacion SOC ****************/
 		//this.model.on('sync', this.SOCInicio, this);
@@ -3481,6 +3482,31 @@
 			});
 		}       
         callback(null, fields, errors);
+    },
+
+    validaMontoCreditCard: function (fields, errors, callback) {
+        //VALIDA QUE NO SUPERE EL $1,000,000 (UN MILLON) EN EL CAMPO DEL MONTO DEL TIPO DE PRODUCTO TARJETA DE CREDITO
+        if (this.model.get('tipo_producto_c') == '14') {
+
+            var controlMonto = this.model.get('control_monto_c');
+
+            if (this.model.get('monto_c') > this.model.get('control_monto_c')) {
+
+                app.alert.show('message-control-monto', {
+                    level: 'error',
+                    title: 'El Monto de línea no debe ser mayor a $'+ controlMonto,
+                    autoClose: false
+                });
+
+                errors['monto_c'] = errors['monto_c'] || {};
+                errors['monto_c'].required = true;
+            }
+
+            callback(null, fields, errors);
+
+        } else {
+            callback(null, fields, errors);
+        }
     },
 
 })
