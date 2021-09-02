@@ -20,6 +20,7 @@
 							window.padres = window.padres + 1;
 						}
 						this.items = arrayPadres;
+						if(data.length == 1) this.model.set('padres_c',data[0]['id']);
 						this._super('render');
 					}, this)
 				});
