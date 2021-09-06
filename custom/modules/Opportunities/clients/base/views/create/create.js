@@ -179,6 +179,8 @@
         this.model.addValidationTask('validaCreditCard', _.bind(this.validaCreditCard, this));
         //VALIDA EL MONTO DEL TIPO DE PRODUCTO TARJETA DE CREDITO QUE NO SUPERE EL CONTROL DEL MONTO
         this.model.addValidationTask('validaMontoCreditCard', _.bind(this.validaMontoCreditCard, this));
+        //VALIDA SI YA EXISTE UNA SOLICITUD DE TIPO DE PRODUCTO TARJETA DE CREDITO
+        this.model.addValidationTask('validaTipoCreditCard', _.bind(this.validaTipoCreditCard, this));
         
         this.model.addValidationTask('dataOrigen',_.bind(this.dataOrigen, this));
 		
@@ -2438,6 +2440,50 @@
         }
     },
 
+    validaTipoCreditCard: function (fields, errors, callback) {
+        //VALIDA SI YA EXISTE UNA SOLICITUD DE TIPO DE PRODUCTO TARJETA DE CREDITO
+        if (this.model.get('tipo_producto_c') == '14') {
+
+            var id_account = this.model.get('account_id');
+
+            if (this.model.get('account_id') != "" && this.model.get('account_id') != undefined) {
+                
+                app.api.call('GET', app.api.buildURL('Accounts/' + id_account + '/link/opportunities'), null, {
+                    success: function (solicitudes) {
+
+                        var duplicado = 0;
+
+                        for (var i = 0; i < solicitudes.records.length; i++) {
+                            
+                            if (solicitudes.records[i].tipo_producto_c == '14') {
+                                duplicado = 1;
+                            }
+                        }
+
+                        if (duplicado == 1) {
+                            
+                            app.alert.show('message-tipo-producto', {
+                                level: 'error',
+                                title: 'No puede guardar la presolicitud de tipo producto Tarjeta de Crédito, existe una abierta para el mismo cliente.',
+                                autoClose: false
+                            });
+
+                            errors['tipo_producto_c'] = errors['tipo_producto_c'] || {};
+                            errors['tipo_producto_c'].required = true;
+                        }
+                        callback(null, fields, errors);
+                    },
+                    error: function (e) {
+                        throw e;
+                    }
+                });
+            }
+        
+        } else {
+            callback(null, fields, errors);
+        }
+    },
+
     validaCreditCard: function (fields, errors, callback) {
         //VALIDACIÓN DE TIPO DE PERSONA EN EL TIPO DE PRODUCTO TARJETA DE CREDITO
         if (this.model.get('account_id') != "" && this.model.get('account_id') != undefined) {
@@ -2452,7 +2498,7 @@
 
                         app.alert.show('message-tipo-persona', {
                             level: 'error',
-                            title: 'No se puede crear una solicitud con Tipo de Persona Fisica en el producto Tarjeta de Crédito!',
+                            title: 'No se puede crear una solicitud con Tipo de Persona Física en el producto Tarjeta de Crédito.',
                             autoClose: false
                         });
 
