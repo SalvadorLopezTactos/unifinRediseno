@@ -903,11 +903,15 @@
 		var salida = [];
 		
 		if(producto == "1"){
-			errors['num_tipo_op_leasing_c'] = errors['num_tipo_op_leasing_c'] || {};
-			errors['num_tipo_op_leasing_c'].required = true;
+			if(this.model.get('num_tipo_op_leasing_c')=='' || this.model.get('num_tipo_op_leasing_c')==null){
+				errors['num_tipo_op_leasing_c'] = errors['num_tipo_op_leasing_c'] || {};
+				errors['num_tipo_op_leasing_c'].required = true;
+			}
 		}else if(producto == "2"){
-			errors['num_tipo_op_credito_c'] = errors['num_tipo_op_credito_c'] || {};
-			errors['num_tipo_op_credito_c'].required = true;
+			if(this.model.get('num_tipo_op_credito_c')== '' || this.model.get('num_tipo_op_credito_c')== null){
+				errors['num_tipo_op_credito_c'] = errors['num_tipo_op_credito_c'] || {};
+				errors['num_tipo_op_credito_c'].required = true;
+			}
 		}
 		callback(null, fields, errors);
     },
