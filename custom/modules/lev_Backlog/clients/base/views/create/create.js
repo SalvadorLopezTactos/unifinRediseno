@@ -38,9 +38,9 @@
         this.model.addValidationTask('camponovacio',_.bind(this.validacampoconversion,this));
         /************  CAmbiar valores tipo PRoducto LEasing   *****************/
 		this.model.addValidationTask('num_tipo_producto',_.bind(this.num_tipo_leasing, this));
+		this.model.addValidationTask('tipo_producto_requerido',_.bind(this.tipo_producto_requerido, this));
 		/*********** ---- ***********************/
 		this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
-
 		
         /*
         var usuario = app.data.createBean('Users',{id:app.user.get('id')});
@@ -895,7 +895,20 @@
 				});
 			}
 		}
-		callback(null, fields, errors);
+		callback(null, fields, errors);		
+    },
+	
+	tipo_producto_requerido: function(fields, errors, callback) {
+		var producto = this.model.get('producto_c');
+		var salida = [];
 		
+		if(producto == "1"){
+			errors['num_tipo_op_leasing_c'] = errors['num_tipo_op_leasing_c'] || {};
+			errors['num_tipo_op_leasing_c'].required = true;
+		}else if(producto == "2"){
+			errors['num_tipo_op_credito_c'] = errors['num_tipo_op_credito_c'] || {};
+			errors['num_tipo_op_credito_c'].required = true;
+		}
+		callback(null, fields, errors);
     },
 })
