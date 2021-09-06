@@ -449,7 +449,7 @@ SQL;
             //$response['linea'][$row['id']]['tipo_operacion'] = $app_list_strings['tipo_operacion_bkl_list'][$row['tipo_operacion_c']];
             $response['linea'][$row['id']]['etapa_preliminar'] = $app_list_strings['etapa_c_list'][$row['etapa_preliminar_c']];
             $response['linea'][$row['id']]['etapa'] = $app_list_strings['etapa_c_list'][$row['etapa_c']];
-            $response['linea'][$row['id']]['progreso'] = $this->matchListLabel($row['progreso'], "progreso_list");
+            //$response['linea'][$row['id']]['progreso'] = $this->matchListLabel($row['progreso'], "progreso_list");
 
             if($row['estatus_operacion_c'] == "2"){
                 $response['linea'][$row['id']]['estatus_checked'] = "checked";
@@ -465,14 +465,14 @@ SQL;
             $response['linea'][$row['id']]['monto_rechazado'] = $row['monto_rechazado_c'];
             $response['linea'][$row['id']]['monto_sin_solicitud'] = $row['monto_sin_solicitud_c'];
             $response['linea'][$row['id']]['monto_con_solicitud'] = $row['monto_con_solicitud_c'];
-            $response['linea'][$row['id']]['ri_prospecto'] = $row['ri_prospecto_c'];
-            $response['linea'][$row['id']]['ri_credito'] = $row['ri_credito_c'];
-            $response['linea'][$row['id']]['ri_rechazada'] = $row['ri_rechazada_c'];
-            $response['linea'][$row['id']]['ri_sin_solicitud'] = $row['ri_sin_solicitud_c'];
-            $response['linea'][$row['id']]['ri_con_solicitud_c'] = $row['ri_con_solicitud_c'];
+            //$response['linea'][$row['id']]['ri_prospecto'] = $row['ri_prospecto_c'];
+            //$response['linea'][$row['id']]['ri_credito'] = $row['ri_credito_c'];
+            //$response['linea'][$row['id']]['ri_rechazada'] = $row['ri_rechazada_c'];
+            //$response['linea'][$row['id']]['ri_sin_solicitud'] = $row['ri_sin_solicitud_c'];
+            //$response['linea'][$row['id']]['ri_con_solicitud_c'] = $row['ri_con_solicitud_c'];
             $response['linea'][$row['id']]['tasa'] = $row['tasa_c'];
             $response['linea'][$row['id']]['comision'] = $row['comision_c'];
-            $response['linea'][$row['id']]['dif_residuales'] = $row['dif_residuales_c'];
+            //$response['linea'][$row['id']]['dif_residuales'] = $row['dif_residuales_c'];
             $response['linea'][$row['id']]['pipeline_posterior'] = $row['monto_pipeline_posterior_c'];
 
             $response['linea'][$row['id']]['name'] = $row['name'];
@@ -1030,8 +1030,8 @@ SQL;
             'PROSPECTO','CR'.utf8_decode('É').'DITO','RECHAZADA','SIN SOLICITUD','CON SOLICITUD','PAGO '.utf8_decode('Ú').'NICO PROSPECTO','PAGO '.utf8_decode('Ú').'NICO CR'.utf8_decode('É').'DITO','PAGO '.utf8_decode('Ú').'NICO RECHAZADA','PAGO '.utf8_decode('Ú').'NICO SIN SOLICITUD','PAGO '.utf8_decode('Ú').'NICO CON SOLICITUD', 'TASA', 'COMISI'.utf8_decode('Ó').'N', 'DIF RESIDUALES', 'COLOCACI'.utf8_decode('Ó').'N PIPELINE', 'PROBABILIDAD DE CONVERSI'.utf8_decode('Ó').'N %','MOTIVO DE RECHAZO' ));
 	*/
 		fputcsv($fp, array('PRODUCTO','TIPO OPERACION PRODUCTO','ESTATUS', 'MES','EQUIPO', 'ZONA', 'ASESOR', 'ID CLIENTE','CLIENTE', 'NO. BACKLOG', 'BIEN',  'L'.utf8_decode('Í').'NEA DISPONIBLE',
-            'PAGO '.utf8_decode('Ú').'NICO', 'ETAPA INICIO MES', 'ETAPA', 'SOLICITUD',
-            'PROSPECTO','CR'.utf8_decode('É').'DITO','RECHAZADA','SIN SOLICITUD','CON SOLICITUD','PAGO '.utf8_decode('Ú').'NICO PROSPECTO','PAGO '.utf8_decode('Ú').'NICO CR'.utf8_decode('É').'DITO','PAGO '.utf8_decode('Ú').'NICO RECHAZADA','PAGO '.utf8_decode('Ú').'NICO SIN SOLICITUD','PAGO '.utf8_decode('Ú').'NICO CON SOLICITUD', 'TASA', 'COMISI'.utf8_decode('Ó').'N', 'DIF RESIDUALES', 'COLOCACI'.utf8_decode('Ó').'N PIPELINE', 'PROBABILIDAD DE CONVERSI'.utf8_decode('Ó').'N %','MOTIVO DE RECHAZO' ));
+            'PAGO '.utf8_decode('Ú').'NICO', 'ETAPA INICIO MES', 'ETAPA', 
+            'PAGO '.utf8_decode('Ú').'NICO PROSPECTO','PAGO '.utf8_decode('Ú').'NICO CR'.utf8_decode('É').'DITO','PAGO '.utf8_decode('Ú').'NICO RECHAZADA','PAGO '.utf8_decode('Ú').'NICO SIN SOLICITUD','PAGO '.utf8_decode('Ú').'NICO CON SOLICITUD', 'TASA', 'COMISI'.utf8_decode('Ó').'N', 'DIF RESIDUALES', 'COLOCACI'.utf8_decode('Ó').'N PIPELINE', 'PROBABILIDAD DE CONVERSI'.utf8_decode('Ó').'N %','MOTIVO DE RECHAZO' ));
 
         foreach ($args['data']['backlogs'] as $key => $values) {
             foreach ($values as $index => $linea) {
