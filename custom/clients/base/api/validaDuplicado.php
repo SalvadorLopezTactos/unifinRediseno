@@ -210,13 +210,14 @@ class validaDuplicado extends SugarApi
                     if ($elemento['similarity']>.80) {
                         //$item = [];
                         $similitud = (!empty($elemento['similarity'])) ? number_format($elemento['similarity']*100) : "0";
-                        $items[$elemento['id_bd']]['nivelMatch'].=(empty($items[$elemento['id_bd']]['nivelMatch'])) ? '3 - '.$similitud.'%' : ',3 - '.$similitud.'%';
+                        $items[$elemento['id_bd']]['nivelMatch'].=(empty($items[$elemento['id_bd']]['nivelMatch'])) ? '3 - '.$similitud.'%' : ', 3 - '.$similitud.'%';
                         $items[$elemento['id_bd']]['modulo']=($elemento['source']=='accounts') ? 'Cuenta' : 'Lead';
                         $items[$elemento['id_bd']]['moduloLink']=($elemento['source']=='accounts') ? 'Accounts' : 'Leads';
                         $items[$elemento['id_bd']]['nombre']=$elemento['business_name'];
                         $items[$elemento['id_bd']]['id']=$elemento['id_bd'];
                         $items[$elemento['id_bd']]['rfc']= (!empty($items[$elemento['id_bd']]['rfc'])) ? $items[$elemento['id_bd']]['rfc']: '';
-                        $items[$elemento['id_bd']]['descripcion']="Nivel de match encontrado a través del nombre";
+                        $items[$elemento['id_bd']]['descripcion'].=(empty($items[$elemento['id_bd']]['descripcion'])) ? 'Nivel de match encontrado a través de similitud por nombre ' : '';
+                        //="Nivel de match encontrado a través del nombre";
 
                         if(empty($items[$elemento['id_bd']]['rfc'])){
                             //Obtener bean del modulo
@@ -225,7 +226,7 @@ class validaDuplicado extends SugarApi
                                 $items[$elemento['id_bd']]['rfc']=$beanModulo->rfc_c;
                             }
                         }
-                            
+
                         $items[$elemento['id_bd']]['coincidencia']=$similitud;
                         //$items[$elemento['id_bd']]=$item;
                     }
@@ -236,13 +237,14 @@ class validaDuplicado extends SugarApi
                     if ($elemento['similarity']>.80) {
                         //$item = [];
                         $similitud = (!empty($elemento['similarity'])) ? number_format($elemento['similarity']*100) : "0";
-                        $items[$elemento['id_bd']]['nivelMatch'].=(empty($items[$elemento['id_bd']]['nivelMatch'])) ? '3 - '.$similitud.'%' : ',3 - '.$similitud.'%';
+                        $items[$elemento['id_bd']]['nivelMatch'].=(empty($items[$elemento['id_bd']]['nivelMatch'])) ? '3 - '.$similitud.'%' : ', 3 - '.$similitud.'%';
                         $items[$elemento['id_bd']]['modulo']=($elemento['source']=='accounts') ? 'Cuenta' : 'Lead';
                         $items[$elemento['id_bd']]['moduloLink']=($elemento['source']=='accounts') ? 'Accounts' : 'Leads';
                         $items[$elemento['id_bd']]['nombre']=$elemento['business_name'];
                         $items[$elemento['id_bd']]['id']=$elemento['id_bd'];
                         $items[$elemento['id_bd']]['rfc']= (!empty($items[$elemento['id_bd']]['rfc'])) ? $items[$elemento['id_bd']]['rfc']: '';
-                        $items[$elemento['id_bd']]['descripcion']="Nivel de match encontrado a través del nombre";
+//                        $items[$elemento['id_bd']]['descripcion']="Nivel de match encontrado a través del nombre";
+                        $items[$elemento['id_bd']]['descripcion'].=(empty($items[$elemento['id_bd']]['descripcion'])) ? 'Nivel de match encontrado a través de similitud por nombre ' : '';
 
                         if(empty($items[$elemento['id_bd']]['rfc'])){
                             //Obtener bean del modulo
