@@ -1126,11 +1126,18 @@ SQL;
             }
         }
 
-        fputcsv($fp,array('', '','', '', '', '', '', '', '', $args['data']['backlogs']['backlogs']['totales']['total_monto_original'],$args['data']['backlogs']['backlogs']['totales']['total_monto_comprometido'],
+        /*fputcsv($fp,array('', '','', '', '', '', '', '', '','','', $args['data']['backlogs']['backlogs']['totales']['total_monto_original'],$args['data']['backlogs']['backlogs']['totales']['total_monto_comprometido'],
             $args['data']['backlogs']['backlogs']['totales']['total_renta_inicial'],0,$args['data']['backlogs']['backlogs']['totales']['total_monto_final_comprometido'],$args['data']['backlogs']['backlogs']['totales']['total_renta_inicial_final'],
             $args['data']['backlogs']['backlogs']['totales']['total_bl_actual'],$args['data']['backlogs']['backlogs']['totales']['total_monto_real'],$args['data']['backlogs']['backlogs']['totales']['total_renta_real'],
             $args['data']['backlogs']['backlogs']['totales']['total_monto_cancelado'],$args['data']['backlogs']['backlogs']['totales']['total_ri_cancelada'],'','','','','','','','',''));
-
+		*/
+		fputcsv($fp,array('', '','', '', '', '', '', '', '','','', 
+			$args['data']['backlogs']['backlogs']['totales']['total_monto_original'],
+			$args['data']['backlogs']['backlogs']['totales']['total_monto_comprometido'],
+            $args['data']['backlogs']['backlogs']['totales']['total_renta_inicial'],0,$args['data']['backlogs']['backlogs']['totales']['total_monto_final_comprometido'],$args['data']['backlogs']['backlogs']['totales']['total_renta_inicial_final'],
+            $args['data']['backlogs']['backlogs']['totales']['total_bl_actual'],$args['data']['backlogs']['backlogs']['totales']['total_monto_real'],$args['data']['backlogs']['backlogs']['totales']['total_renta_real'],
+            $args['data']['backlogs']['backlogs']['totales']['total_monto_cancelado'],$args['data']['backlogs']['backlogs']['totales']['total_ri_cancelada'],'','','','','','','','',''));
+		
         fclose($fp);
 
         return $backlog_doc_name;
