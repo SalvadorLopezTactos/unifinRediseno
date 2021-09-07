@@ -8,6 +8,7 @@ class oppUnionService
     {
 
         global $sugar_config, $db;
+        $combinacionDirFiscal = array("2","3","6","7","10","11","14","15","18","19","22","23","26","27","30","31");
         $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id, array('disable_row_level_security' => true));
 
         if ($beanCuenta->load_relationship('accounts_dire_direccion_1')) {
@@ -17,15 +18,19 @@ class oppUnionService
             if (!empty($beanDirecciones)) {
 
                 foreach ($beanDirecciones as $direccionFiscal) {
+                    //VALIDACION DE DIRECCION FISCAL Y SUS COMBINACIONES ACTIVAS
+                    if(in_array($direccionFiscal->indicador,$combinacionDirFiscal) && $direccionFiscal->inactivo == false){
 
-                    $dirCalle = $direccionFiscal->calle;
-                    $dirNumInt = $direccionFiscal->numint;
-                    $dirNumExt = $direccionFiscal->numext;
-                    $dirCP = $direccionFiscal->dire_direccion_dire_codigopostal_name;
-                    $dirColonia = $direccionFiscal->dire_direccion_dire_colonia_name;
-                    $dirMunicipio = $direccionFiscal->dire_direccion_dire_municipio_name;
-                    $dirCiudad = $direccionFiscal->dire_direccion_dire_ciudad_name;
-                    $dirEstado = $direccionFiscal->dire_direccion_dire_estado_name;
+                        $dirCalle = $direccionFiscal->calle;
+                        $dirNumInt = $direccionFiscal->numint;
+                        $dirNumExt = $direccionFiscal->numext;
+                        $dirCP = $direccionFiscal->dire_direccion_dire_codigopostal_name;
+                        $dirColonia = $direccionFiscal->dire_direccion_dire_colonia_name;
+                        $dirMunicipio = $direccionFiscal->dire_direccion_dire_municipio_name;
+                        $dirCiudad = $direccionFiscal->dire_direccion_dire_ciudad_name;
+                        $dirEstado = $direccionFiscal->dire_direccion_dire_estado_name;
+
+                    }
                 }
             }
         }
@@ -34,9 +39,8 @@ class oppUnionService
         if ($bean->id_response_union_c == "" && $bean->tipo_producto_c == "14" && $beanCuenta->tipodepersona_c != "Persona Fisica") {
 
             $GLOBALS['log']->fatal('*****Envia peticion al servicio de UNION*****');
-
+            $GLOBALS['log']->fatal('Solicitud con línea de crédito: '.$bean->id);
             $url = $sugar_config['url_Union'];
-            $GLOBALS['log']->fatal('URL UNION '. $url);
             $tipoPersona = ($beanCuenta->tipodepersona_c == "Persona Fisica con Actividad Empresarial") ? 2 : 3;
 
             $body = array(
@@ -68,8 +72,7 @@ class oppUnionService
                     )
                 )
             );
-            $GLOBALS['log']->fatal('BODY UNION: ');
-            $GLOBALS['log']->fatal($body);
+            // $GLOBALS['log']->fatal($body);
             $callApi = new UnifinAPI();
             $resultado = $callApi->postUNION($url, $body);
             $GLOBALS['log']->fatal('Resultado UNION: ' . json_encode($resultado));
