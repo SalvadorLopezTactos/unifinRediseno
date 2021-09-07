@@ -7332,12 +7332,14 @@
             level: 'process',
             title: 'Enviando cuenta a portal de proveedores, por favor espere.',
         });
-        app.api.call("read", app.api.buildURL("AltaProveedor/" + this.model.get('id'), null, null, {}), null, {
+        App.api.call("read", app.api.buildURL("AltaProveedor/" + this.model.get('id'), null, null, {}), null, {
             success: _.bind(function (data) {
-                app.alert.dismiss('ProcesoProveedor');
-                app.alert.show('alert_func_Proveedor_success', {
-                    level: 'success',
-                    messages: 'Se ha dado de alta al proveedor.',
+                App.alert.dismiss('ProcesoProveedor');
+                var level = (data.status=='200')?'success':'error';
+
+                App.alert.show('alert_func_Proveedor', {
+                    level: level,
+                    messages: data.message,
                 });
             }, this),
         });

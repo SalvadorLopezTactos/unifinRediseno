@@ -6,8 +6,6 @@
  */
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 require_once("custom/Levementum/UnifinAPI.php");
-global $sugar_config;
-$GLOBALS['esb_url'] = $sugar_config['esb_url'];
 
 class AltaProveedor extends SugarApi
 {
@@ -25,14 +23,13 @@ class AltaProveedor extends SugarApi
         );
     }
 
-public function usuarioProveedores($api, $args){   
+public function usuarioProveedores($api, $args){
         $idaccount = $args['id'];
-        $account = BeanFactory::retrieveBean('Accounts', $idaccount);
+        $account = BeanFactory::retrieveBean('Accounts', $idaccount, array('disable_row_level_security' => true));
         $response=array();
-        $GLOBALS['log']->fatal("Entra usuarioProveedores");
-        if ($account->tipo_registro_cuenta_c == '5' || $account->esproveedor_c == 0) {
-            global $app_list_strings, $current_user;
-            $host = 'http://' . $GLOBALS['esb_url'] . '/uni2/rest/creaUsuarioProveedor';
+        if ($account->tipo_registro_cuenta_c == '5' || $account->esproveedor_c == 1) {
+            global $app_list_strings, $current_user,$sugar_config;
+            $host = $sugar_config['esb_url']. '/uni2/rest/creaUsuarioProveedor';
 
             $tipoProveedor = 'BIENES';
             $paisConstitucion = '';
@@ -77,27 +74,30 @@ public function usuarioProveedores($api, $args){
                 "estadoConstitucion" => ucfirst(strtolower($estadoConstitucion))
             );
 
+            $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <CVV LOG> : Petición Alta Portal Proveedores: " . $host);
             $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <CVV LOG> : JSON para usuarios de proveedores por boton" . print_r($fields, 1));
-
             try {
                 $callApi = new UnifinAPI();
                 $proveedor = $callApi->unifinpostCall($host, $fields);
-                if (strpos($proveedor, 'exitosamente')) {
-                    $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <CVV LOG> : Respuesta de servicio para usuarios de proveedores por boton" . print_r($proveedor, 1));
-
+                $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <CVV LOG> : Respuesta de servicio para usuarios de proveedores por boton" . print_r($proveedor, 1));
+                if ($proveedor['resultDescription']=='Succes' || $proveedor['resultDescription']=='Success') {
                     $response['status']='200';
                     $response['message']='Se creó el registro de proveedor de forma correcta';
+                }else {
+                    $response['status']='400';
+                    $response['message']='Error al preocesar la petición. Intente nuevamente';
                 }
             } catch (Exception $e) {
-                error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error: " . $e->getMessage());
                 $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
                 $response['status']='400';
-                $response['message']='Hubo un problema al crear el proveedor.';
+                $response['message']=$e->getMessage();
             }
+        }else{
+            $response['status']='400';
+            $response['message']='La cuenta debe ser de tipo proveedor';
         }
-        $GLOBALS['log']->fatal("Termina usuarioProveedores");
 
         return $response;
     }
 
-}   
+}
