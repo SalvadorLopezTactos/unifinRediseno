@@ -154,7 +154,8 @@
         //this.model.on("change:admin_cartera_c", _.bind(this.adminUserCartera, this));
         this.model.on('sync', this.adminUserCartera, this);
         //this.adminUserCartera();
-		
+		//VALIDA EL MONTO DEL TIPO DE PRODUCTO TARJETA DE CREDITO QUE NO SUPERE EL CONTROL DEL MONTO
+        this.model.addValidationTask('validaMontoCreditCard', _.bind(this.validaMontoCreditCard, this));
 		
 	/*************** validacion SOC ****************/
 		//this.model.on('sync', this.SOCInicio, this);
@@ -604,11 +605,13 @@
             } else {
                 this.$("div.record-label[data-name='monto_c']").text("Monto de l\u00EDnea");
             }
-            //TIPO DE PRODUCTO TARJETA DE CREDITO - OCULTA EL CHECK DE RATIFICACION / INCREMENTO
+            //TIPO DE PRODUCTO TARJETA DE CREDITO - OCULTA EL CHECK DE RATIFICACION / INCREMENTO Y PONE EN SOLO LECTURA EL MONTO A OPERAR
             if (this.model.get('tipo_producto_c') == '14') {
                 this.$('div[data-name=ratificacion_incremento_c]').hide();      
+                this.$('[data-name="amount"]').attr('style', 'pointer-events:none'); //Monto a operar solo lectura
             } else {
                 this.$('div[data-name=ratificacion_incremento_c]').show();
+                this.$('[data-name="amount"]').attr('style', ''); //Monto a operar editable
             }
         }, this));
 
@@ -650,7 +653,6 @@
             $('[data-name="producto_origen_vencido_c"]').hide();
             $('[data-name="cartera_dias_vencido_c"]').hide();
         }*/
-
     },
 
     evaluaCampoSolicitudVobo: function () {
@@ -3481,6 +3483,33 @@
 			});
 		}       
         callback(null, fields, errors);
+    },
+
+    validaMontoCreditCard: function (fields, errors, callback) {
+
+        var controlMonto = this.model.get('control_monto_c');
+        var formatoControlMonto = Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'}).format(controlMonto); //FORMATO MONEDA MXN
+
+        //VALIDA QUE NO SUPERE EL $1,000,000 (UN MILLON) EN EL CAMPO DEL MONTO DEL TIPO DE PRODUCTO TARJETA DE CREDITO - RECORD 
+        if (this.model.get('tipo_producto_c') == '14') {
+            
+            if (this.model.get('monto_c') > this.model.get('control_monto_c')) {
+
+                app.alert.show('message-control-monto', {
+                    level: 'error',
+                    title: 'El Monto de línea no debe ser mayor a '+ formatoControlMonto,
+                    autoClose: false
+                });
+
+                errors['monto_c'] = errors['monto_c'] || {};
+                errors['monto_c'].required = true;
+            }
+
+            callback(null, fields, errors);
+
+        } else {
+            callback(null, fields, errors);
+        }
     },
 
 })

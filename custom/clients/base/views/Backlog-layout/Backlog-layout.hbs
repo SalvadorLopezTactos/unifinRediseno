@@ -383,6 +383,13 @@
                             </tr>
                         </table>
                     </th>
+					<th width="5%" class="hide_estatus">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Tipo Operación Producto</td>
+                            </tr>
+                        </table>
+                    </th>
                     <th width="5%" class="hide_estatus">
                         <table width="100%">
                             <tr>
@@ -446,6 +453,7 @@
                             </tr>
                         </table>
                     </th>
+					<!--
                     <th width="7%" class="hide_monto_comprometido">
                         <table width="100%">
                             <tr>
@@ -453,13 +461,16 @@
                             </tr>
                         </table>
                     </th>
-                    <th width="10%" class="hide_ri_comprometida">
+					-->
+                    <!--<th width="10%" class="hide_ri_comprometida">
                         <table width="100%">
                             <tr>
                                 <td class="innerTableTd">Pago Único Original</td>
                             </tr>
                         </table>
                     </th>
+					-->
+					<!--
                     <th width="7%" class="hide_monto_diferencia">
                         <table width="100%">
                             <tr>
@@ -467,6 +478,8 @@
                             </tr>
                         </table>
                     </th>
+					-->
+					<!--
                     <th width="5%" class="hide_monto_final_comprometido">
                         <table width="100%">
                             <tr>
@@ -474,6 +487,7 @@
                             </tr>
                         </table>
                     </th>
+					-->
                     <th width="5%" class="hide_ri_final_comprometida">
                         <table width="100%">
                             <tr>
@@ -495,6 +509,7 @@
                             </tr>
                         </table>
                     </th>
+					<!--
                     <th width="5%" class="hide_monto_real">
                         <table width="100%">
                             <tr>
@@ -502,6 +517,8 @@
                             </tr>
                         </table>
                     </th>
+					-->
+					<!--
                     <th width="10%" class="hide_ri_real">
                         <table width="100%">
                             <tr>
@@ -509,6 +526,8 @@
                             </tr>
                         </table>
                     </th>
+					-->
+					<!--
                     <th width="10%" class="hide_monto_cancelado">
                         <table width="100%">
                             <tr>
@@ -516,6 +535,8 @@
                             </tr>
                         </table>
                     </th>
+					-->
+					<!--
                     <th width="10%" class="hide_ri_cancelada">
                         <table width="100%">
                             <tr>
@@ -523,6 +544,8 @@
                             </tr>
                         </table>
                     </th>
+					-->
+					<!--
                     <th width="20%" class="hide_tipo_operacion">
                         <table width="100%">
                             <tr>
@@ -530,6 +553,7 @@
                             </tr>
                         </table>
                     </th>
+					-->
                     <th width="10%" class="hide_etapa_preliminar">
                         <table width="100%">
                             <tr>
@@ -544,6 +568,7 @@
                             </tr>
                         </table>
                     </th>
+					<!--
                     <th width="15%" class="hide_progreso">
                         <table width="100%">
                             <tr>
@@ -551,6 +576,7 @@
                             </tr>
                         </table>
                     </th>
+					-->
                     <th width="15%" class="hide_conversion">
                         <table width="100%">
                             <tr>
@@ -575,6 +601,7 @@
                         Actualizaicón masiva: Adición de menú de opciones-->
                         <th class="totales hide_acciones"></th>
 						<th class="totales hide_producto"></th>
+						<th class="totales hide_tipo_operacion"></th>
                         <th class="totales hide_estatus"></th>
                         <th class="totales hide_mes"></th>
                         <th class="totales hide_equipo"></th>
@@ -584,21 +611,21 @@
                         <th class="totales hide_operacion"></th>
                         <th class="totales hide_tipo_bien"></th>
                         <th class="totales hide_monto_original">{{customFormatNumber totales.total_monto_original}}</th>
-                        <th class="totales hide_monto_comprometido">{{customFormatNumber totales.total_monto_comprometido}}</th>
-                        <th class="totales hide_ri_comprometida">{{customFormatNumber totales.total_renta_inicial}}</th>
-                        <th class="totales hide_monto_diferencia">{{customFormatNumber totales.total_monto_diferencia}}</th>
-                        <th class="totales hide_monto_final_comprometido">{{customFormatNumber totales.total_monto_final_comprometido}}</th>
+                        <!--<th class="totales hide_monto_comprometido">{{customFormatNumber totales.total_monto_comprometido}}</th>-->
+                        <!--<th class="totales hide_ri_comprometida">{{customFormatNumber totales.total_renta_inicial}}</th>-->
+                        <!--<th class="totales hide_monto_diferencia">{{customFormatNumber totales.total_monto_diferencia}}</th>-->
+                        <!--<th class="totales hide_monto_final_comprometido">{{customFormatNumber totales.total_monto_final_comprometido}}</th>-->
                         <th class="totales hide_ri_final_comprometida">{{customFormatNumber totales.total_renta_inicial_final}}</th>
                         <!--<th class="totales hide_bl_actual">{{customFormatNumber totales.total_bl_actual}}</th>-->
                         <th class="totales hide_pipeline_posterior">{{customFormatNumber totales.total_pipeline_posterior}}</th>
-                        <th class="totales hide_monto_real">{{customFormatNumber totales.total_monto_real}}</th>
-                        <th class="totales hide_ri_real">{{customFormatNumber totales.total_renta_real}}</th>
-                        <th class="totales hide_monto_cancelado">{{customFormatNumber totales.total_monto_cancelado}}</th>
-                        <th class="totales hide_ri_cancelada">{{customFormatNumber totales.total_ri_cancelada}}</th>
-                        <th class="totales hide_tipo_operacion"></th>
+                        <!--<th class="totales hide_monto_real">{{customFormatNumber totales.total_monto_real}}</th>-->
+                        <!--<th class="totales hide_ri_real">{{customFormatNumber totales.total_renta_real}}</th>-->
+                        <!--<th class="totales hide_monto_cancelado">{{customFormatNumber totales.total_monto_cancelado}}</th>-->
+                        <!--<th class="totales hide_ri_cancelada">{{customFormatNumber totales.total_ri_cancelada}}</th>-->
+                        <!--<th class="totales hide_tipo_operacion"></th>-->
                         <th class="totales hide_etapa_preliminar"></th>
                         <th class="totales hide_etapa"></th>
-                        <th class="totales hide_progreso"></th>
+                        <!--<th class="totales hide_progreso"></th>-->
                         <th class="totales hide_conversion"></th>
                         <th class="totales hide_motivo_rechazo"></th>
                     </tr>
@@ -625,6 +652,7 @@
                             <input type="checkbox" class="mass_update" value="{{@key}}" {{estatus_checked}} {{mass_checked}}/>
                         </td>-->
 							<td class="hide_estatus">{{producto}}</td>
+							<td class="hide_estatus">{{tipo_operacion_producto}}</td>
                             <td class="hide_estatus">{{estatus_operacion_c}}</td>
                             <td class="hide_mes">{{mes}}-{{anio}}</td>
                             <td class="hide_equipo">{{equipo}}</td>
@@ -638,21 +666,21 @@
                             </td>
                             <td class="hide_tipo_bien">{{tipo_bien}}</td>
                             <td bgcolor="{{colorDispLinea}}" class="hide_monto_original">{{customFormatNumber monto_original}}</td>
-                            <td class="hide_monto_comprometido">{{customFormatNumber monto_comprometido}}</td>
-                            <td class="hide_ri_comprometida">{{customFormatNumber ri_comprometida}}</td>
-                            <td class="hide_monto_diferencia">{{customFormatNumber monto_diferencia}}</td>
-                            <td class="hide_monto_final_comprometido">{{customFormatNumber monto_final_comprometido}}</td>
+                            <!--<td class="hide_monto_comprometido">{{customFormatNumber monto_comprometido}}</td>-->
+                            <!--<td class="hide_ri_comprometida">{{customFormatNumber ri_comprometida}}</td>-->
+                            <!--<td class="hide_monto_diferencia">{{customFormatNumber monto_diferencia}}</td>-->
+                            <!--<td class="hide_monto_final_comprometido">{{customFormatNumber monto_final_comprometido}}</td>-->
                             <td class="hide_ri_final_comprometida">{{customFormatNumber ri_final_comprometida}}</td>
                             <!--<td class="hide_bl_actual">{{customFormatNumber bl_actual}}</td>-->
                             <td class="hide_pipeline_posterior">{{customFormatNumber pipeline_posterior}}</td>
-                            <td class="hide_monto_real">{{customFormatNumber monto_real}}</td>
-                            <td class="hide_ri_real">{{customFormatNumber renta_real}}</td>
-                            <td class="hide_monto_cancelado">{{customFormatNumber monto_cancelado}}</td>
-                            <td class="hide_ri_cancelada">{{customFormatNumber ri_cancelada}}</td>
-                            <td class="hide_tipo_operacion">{{tipo_operacion}}</td>
+                            <!--<td class="hide_monto_real">{{customFormatNumber monto_real}}</td>-->
+                            <!--<td class="hide_ri_real">{{customFormatNumber renta_real}}</td>-->
+                            <!--<td class="hide_monto_cancelado">{{customFormatNumber monto_cancelado}}</td>-->
+                            <!--<td class="hide_ri_cancelada">{{customFormatNumber ri_cancelada}}</td>-->
+                            <!--<td class="hide_tipo_operacion">{{tipo_operacion}}</td>-->
                             <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
                             <td class="hide_etapa">{{etapa}}</td>
-                            <td class="hide_progreso">{{progreso}}</td>
+                            <!--<td class="hide_progreso">{{progreso}}</td>-->
                             <td class="hide_conversion">{{conversion}}</td>
                             <td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>
                             <!--<td>-->
@@ -680,7 +708,8 @@
                                 <!--<td>
                                 <input type="checkbox" class="mass_update" value="{{@key}}" {{estatus_checked}} {{mass_checked}}/>
                             </td>-->
-								<td class="hide_estatus">{{producto}}</td
+								<td class="hide_estatus">{{producto}}</td>
+								<td class="hide_estatus">{{tipo_operacion_producto}}</td>
                                 <td class="hide_estatus">{{estatus_operacion_c}}</td>
                                 <td class="hide_mes">{{mes}}-{{anio}}</td>
                                 <td class="hide_equipo">{{equipo}}</td>
@@ -694,21 +723,21 @@
                                 </td>
                                 <td class="hide_tipo_bien">{{tipo_bien}}</td>
                                 <td bgcolor="{{colorDispLinea}}" class="hide_monto_original">{{customFormatNumber monto_original}}</td>
-                                <td class="hide_monto_comprometido">{{customFormatNumber monto_comprometido}}</td>
-                                <td class="hide_ri_comprometida">{{customFormatNumber ri_comprometida}}</td>
-                                <td class="hide_monto_diferencia">{{customFormatNumber monto_diferencia}}</td>
-                                <td class="hide_monto_final_comprometido">{{customFormatNumber monto_final_comprometido}}</td>
+                                <!--<td class="hide_monto_comprometido">{{customFormatNumber monto_comprometido}}</td>-->
+                                <!--<td class="hide_ri_comprometida">{{customFormatNumber ri_comprometida}}</td>-->
+                                <!--<td class="hide_monto_diferencia">{{customFormatNumber monto_diferencia}}</td>-->
+                                <!--<td class="hide_monto_final_comprometido">{{customFormatNumber monto_final_comprometido}}</td>-->
                                 <td class="hide_ri_final_comprometida">{{customFormatNumber ri_final_comprometida}}</td>
                                 <!--<td class="hide_bl_actual">{{customFormatNumber bl_actual}}</td>-->
                                 <td class="hide_pipeline_posterior">{{customFormatNumber pipeline_posterior}}</td>
-                                <td class="hide_monto_real">{{customFormatNumber monto_real}}</td>
-                                <td class="hide_ri_real">{{customFormatNumber renta_real}}</td>
-                                <td class="hide_monto_cancelado" >{{customFormatNumber monto_cancelado}}</td>
-                                <td class="hide_ri_cancelada">{{customFormatNumber ri_cancelada}}</td>
-                                <td class="hide_tipo_operacion">{{tipo_operacion}}</td>
+                                <!--<td class="hide_monto_real">{{customFormatNumber monto_real}}</td>-->
+                                <!--<td class="hide_ri_real">{{customFormatNumber renta_real}}</td>-->
+                                <!--<td class="hide_monto_cancelado" >{{customFormatNumber monto_cancelado}}</td>-->
+                                <!--<td class="hide_ri_cancelada">{{customFormatNumber ri_cancelada}}</td>-->
+                                <!--<td class="hide_tipo_operacion">{{tipo_operacion}}</td>-->
                                 <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
                                 <td class="hide_etapa">{{etapa}}</td>
-                                <td class="hide_progreso">{{progreso}}</td>
+                                <!--<td class="hide_progreso">{{progreso}}</td>-->
                                 <td class="hide_conversion">{{conversion}}</td>
                                 <td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>
                                 <!--<td>-->
@@ -742,6 +771,7 @@
                                             <input type="checkbox" class="mass_update" value="{{@key}}" {{estatus_checked}} {{mass_checked}}/>
                                         </td>-->
 											<td class="hide_estatus">{{producto}}</td>
+											<td class="hide_estatus">{{tipo_operacion_producto}}</td>
                                             <td class="hide_estatus">{{estatus_operacion_c}}</td>
                                             <td class="hide_mes">{{mes}}-{{anio}}</td>
                                             <td class="hide_equipo">{{equipo}}</td>
@@ -755,21 +785,21 @@
                                             </td>
                                             <td class="hide_tipo_bien">{{tipo_bien}}</td>
                                             <td bgcolor="{{colorDispLinea}}" class="hide_monto_original">{{customFormatNumber monto_original}}</td>
-                                            <td class="hide_monto_comprometido">{{customFormatNumber monto_comprometido}}</td>
-                                            <td class="hide_ri_comprometida">{{customFormatNumber ri_comprometida}}</td>
-                                            <td class="hide_monto_diferencia">{{customFormatNumber monto_diferencia}}</td>
-                                            <td class="hide_monto_final_comprometido">{{customFormatNumber monto_final_comprometido}}</td>
+                                            <!--<td class="hide_monto_comprometido">{{customFormatNumber monto_comprometido}}</td>-->
+                                            <!--<td class="hide_ri_comprometida">{{customFormatNumber ri_comprometida}}</td>-->
+                                            <!--<td class="hide_monto_diferencia">{{customFormatNumber monto_diferencia}}</td>-->
+                                            <!--<td class="hide_monto_final_comprometido">{{customFormatNumber monto_final_comprometido}}</td>-->
                                             <td class="hide_ri_final_comprometida">{{customFormatNumber ri_final_comprometida}}</td>
                                             <!--<td class="hide_bl_actual">{{customFormatNumber bl_actual}}</td>-->
                                             <td class="hide_pipeline_posterior">{{customFormatNumber pipeline_posterior}}</td>
-                                            <td class="hide_monto_real">{{customFormatNumber monto_real}}</td>
-                                            <td class="hide_ri_real">{{customFormatNumber renta_real}}</td>
-                                            <td class="hide_monto_cancelado">{{customFormatNumber monto_cancelado}}</td>
-                                            <td class="hide_ri_cancelada">{{customFormatNumber ri_cancelada}}</td>
-                                            <td class="hide_tipo_operacion">{{tipo_operacion}}</td>
+                                            <!--<td class="hide_monto_real">{{customFormatNumber monto_real}}</td>-->
+                                            <!--<td class="hide_ri_real">{{customFormatNumber renta_real}}</td>-->
+                                            <!--<td class="hide_monto_cancelado">{{customFormatNumber monto_cancelado}}</td>-->
+                                            <!--<td class="hide_ri_cancelada">{{customFormatNumber ri_cancelada}}</td>-->
+                                            <!--<td class="hide_tipo_operacion">{{tipo_operacion}}</td>-->
                                             <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
                                             <td class="hide_etapa">{{etapa}}</td>
-                                            <td class="hide_progreso">{{progreso}}</td>
+                                            <!--<td class="hide_progreso">{{progreso}}</td>-->
                                             <td class="hide_conversion">{{conversion}}</td>
                                             <td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>
                                             <!--<td>-->
@@ -806,6 +836,7 @@
                                         <option value="none">Ninguno</option>
                                         <option value="hide_acciones">Acciones</option>
 										<option value="hide_acciones">Producto</option>
+										<option value="hide_acciones">Tipo Operación Producto</option>
                                         <option value="hide_estatus">Estatus</option>
                                         <option value="hide_mes">Mes</option>
                                         <option value="hide_equipo">Equipo</option>
@@ -815,21 +846,21 @@
                                         <option value="hide_operacion">No. Backlog</option>
                                         <option value="hide_tipo_bien">Tipo de Bien</option>
                                         <option value="hide_monto_original">Linea Disponible</option>
-                                        <option value="hide_monto_comprometido">Monto Original</option>
-                                        <option value="hide_ri_comprometida">Pago Único Original</option>
-                                        <option value="hide_monto_diferencia">Diferencia</option>
-                                        <option value="hide_monto_final_comprometido">Backlog</option>
+                                        <!--<option value="hide_monto_comprometido">Monto Original</option>-->
+                                        <!--<option value="hide_ri_comprometida">Pago Único Original</option>-->
+                                        <!--<option value="hide_monto_diferencia">Diferencia</option>-->
+                                        <!--<option value="hide_monto_final_comprometido">Backlog</option>-->
                                         <option value="hide_ri_final_comprometida">Pago Único</option>
                                         <!--<option value="hide_bl_actual">Backlog Actual</option>-->
                                         <option value="hide_pipeline_posterior">Colocacion Pipeline</option>
-                                        <option value="hide_monto_real">Colocación Real</option>
-                                        <option value="hide_ri_real">Pago Único Real</option>
-                                        <option value="hide_monto_cancelado">Monto Cancelado</option>
-                                        <option value="hide_ri_cancelada">Pago Único Cancelada</option>
-                                        <option value="hide_tipo_operacion">Tipo de Operacion</option>
+                                        <!--<option value="hide_monto_real">Colocación Real</option>-->
+                                        <!--<option value="hide_ri_real">Pago Único Real</option>-->
+                                        <!--<option value="hide_monto_cancelado">Monto Cancelado</option>-->
+                                        <!--<option value="hide_ri_cancelada">Pago Único Cancelada</option>-->
+                                        <!--<option value="hide_tipo_operacion">Tipo de Operacion</option>-->
                                         <option value="hide_etapa_preliminar">Etapa Inicio Mes</option>
                                         <option value="hide_etapa">Etapa</option>
-                                        <option value="hide_progreso">Solicitud</option>
+                                        <!--<option value="hide_progreso">Solicitud</option>-->
                                         <option value="hide_conversion">Probabilidad de Conversión %</option>
                                         <option value="hide_motivo_rechazo">Motivo de Rechazo</option>
                                     </select>
