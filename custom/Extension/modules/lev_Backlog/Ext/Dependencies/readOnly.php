@@ -212,9 +212,8 @@ $dependencies['lev_Backlog']['numero_de_solicitud_readonly'] = array(
 );
 
 $dependencies['lev_Backlog']['producto_readonly'] = array(
-    'hooks' => array("edit"),
+    'hooks' => array("all"),
     'onload' => 'true',
-    'triggerFields' => array('id'),
     'actions' => array(
         array(
             'name' => 'ReadOnly',
