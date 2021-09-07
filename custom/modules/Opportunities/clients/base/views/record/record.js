@@ -605,11 +605,13 @@
             } else {
                 this.$("div.record-label[data-name='monto_c']").text("Monto de l\u00EDnea");
             }
-            //TIPO DE PRODUCTO TARJETA DE CREDITO - OCULTA EL CHECK DE RATIFICACION / INCREMENTO
+            //TIPO DE PRODUCTO TARJETA DE CREDITO - OCULTA EL CHECK DE RATIFICACION / INCREMENTO Y PONE EN SOLO LECTURA EL MONTO A OPERAR
             if (this.model.get('tipo_producto_c') == '14') {
                 this.$('div[data-name=ratificacion_incremento_c]').hide();      
+                this.$('[data-name="amount"]').attr('style', 'pointer-events:none'); //Monto a operar solo lectura
             } else {
                 this.$('div[data-name=ratificacion_incremento_c]').show();
+                this.$('[data-name="amount"]').attr('style', ''); //Monto a operar editable
             }
         }, this));
 
@@ -651,7 +653,6 @@
             $('[data-name="producto_origen_vencido_c"]').hide();
             $('[data-name="cartera_dias_vencido_c"]').hide();
         }*/
-
     },
 
     evaluaCampoSolicitudVobo: function () {
@@ -3485,16 +3486,18 @@
     },
 
     validaMontoCreditCard: function (fields, errors, callback) {
-        //VALIDA QUE NO SUPERE EL $1,000,000 (UN MILLON) EN EL CAMPO DEL MONTO DEL TIPO DE PRODUCTO TARJETA DE CREDITO
+
+        var controlMonto = this.model.get('control_monto_c');
+        var formatoControlMonto = Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'}).format(controlMonto); //FORMATO MONEDA MXN
+
+        //VALIDA QUE NO SUPERE EL $1,000,000 (UN MILLON) EN EL CAMPO DEL MONTO DEL TIPO DE PRODUCTO TARJETA DE CREDITO - RECORD 
         if (this.model.get('tipo_producto_c') == '14') {
-
-            var controlMonto = this.model.get('control_monto_c');
-
+            
             if (this.model.get('monto_c') > this.model.get('control_monto_c')) {
 
                 app.alert.show('message-control-monto', {
                     level: 'error',
-                    title: 'El Monto de línea no debe ser mayor a $'+ controlMonto,
+                    title: 'El Monto de línea no debe ser mayor a '+ formatoControlMonto,
                     autoClose: false
                 });
 
