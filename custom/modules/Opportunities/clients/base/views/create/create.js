@@ -171,17 +171,18 @@
         this.model.on('change:negocio_c', this.verificaOperacionProspecto, this);
         this.model.on('change:producto_financiero_c', this.asesorCCP, this);
         this.adminUserCartera();
-        //TIPO DE PRODUCTO TARJETA DE CREDITO
-        this.model.on("change:tipo_producto_c", _.bind(this.montoTarjetaCredito, this));
+        //TIPO DE PRODUCTO TARJETA DE CREDITO - OBTIENE EL 10% DE LA SUMA DE LAS LINEAS DE CREDITO AUTORIZADAS
+        this.model.on("change:tipo_producto_c", _.bind(this.montoTenPercentCreditCard, this));
 
         this.model.addValidationTask('dataOrigen', _.bind(this.dataOrigen, this));
         //VALIDA PERSONA FISICA CON TIPO DE PRODUCTO TARJETA DE CREDITO
-        this.model.addValidationTask('validaCreditCard', _.bind(this.validaCreditCard, this));
+        this.model.addValidationTask('validaPFCreditCard', _.bind(this.validaPFCreditCard, this));
         //VALIDA EL MONTO DEL TIPO DE PRODUCTO TARJETA DE CREDITO QUE NO SUPERE EL CONTROL DEL MONTO
         this.model.addValidationTask('validaMontoCreditCard', _.bind(this.validaMontoCreditCard, this));
         //VALIDA SI YA EXISTE UNA SOLICITUD DE TIPO DE PRODUCTO TARJETA DE CREDITO
         this.model.addValidationTask('validaTipoCreditCard', _.bind(this.validaTipoCreditCard, this));
-        
+        //VALIDA SI YA EXISTEN SOLICITUDES CON LÍNEAS DE CREDITO AUTORIZADAS ANTES DE CREAR UNA SOLICITUD CON TIPO PRODUCTO TARJETA DE CREDITO
+        this.model.addValidationTask('validaSolCreditCard', _.bind(this.validaSolCreditCard, this));
         this.model.addValidationTask('dataOrigen',_.bind(this.dataOrigen, this));
 		
 		this.model.addValidationTask('SOCInicio', _.bind(this.SOCInicio, this));
@@ -2371,7 +2372,7 @@
 
     },
 
-    montoTarjetaCredito: function () {
+    montoTenPercentCreditCard: function () {
         //TIPO DE PRODUCTO TARJETA DE CREDITO - AGREGA EL 10 % DE LA SUMA DE LAS LÍNEAS DE CREDITO EN EL MONTO
         self = this;
         if (this.model.get('tipo_producto_c') == '14') {
@@ -2416,16 +2417,18 @@
     },
 
     validaMontoCreditCard: function (fields, errors, callback) {
-        //VALIDA QUE NO SUPERE EL $1,000,000 (UN MILLON) EN EL CAMPO DEL MONTO DEL TIPO DE PRODUCTO TARJETA DE CREDITO
-        if (this.model.get('tipo_producto_c') == '14') {
+        
+        var controlMonto = this.model.get('control_monto_c');
+        var formatoControlMonto = Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'}).format(controlMonto); //FORMATO MONEDA MXN
 
-            var controlMonto = this.model.get('control_monto_c');
+        //VALIDA QUE NO SUPERE EL $1,000,000 (UN MILLON) EN EL CAMPO DEL MONTO DEL TIPO DE PRODUCTO TARJETA DE CREDITO - CREATE
+        if (this.model.get('tipo_producto_c') == '14') {
 
             if (this.model.get('monto_c') > this.model.get('control_monto_c')) {
 
                 app.alert.show('message-control-monto', {
                     level: 'error',
-                    title: 'El Monto de línea no debe ser mayor a $'+ controlMonto,
+                    title: 'El Monto de línea no debe ser mayor a '+ formatoControlMonto,
                     autoClose: false
                 });
 
@@ -2441,7 +2444,7 @@
     },
 
     validaTipoCreditCard: function (fields, errors, callback) {
-        //VALIDA SI YA EXISTE UNA SOLICITUD DE TIPO DE PRODUCTO TARJETA DE CREDITO
+        //VALIDA SI YA EXISTE UNA SOLICITUD DE TIPO DE PRODUCTO TARJETA DE CREDITO TOMANDO EN CONSIDERACIÓN QUE NO ESTÉN CANCELADAS
         if (this.model.get('tipo_producto_c') == '14') {
 
             var id_account = this.model.get('account_id');
@@ -2455,7 +2458,7 @@
 
                         for (var i = 0; i < solicitudes.records.length; i++) {
                             
-                            if (solicitudes.records[i].tipo_producto_c == '14') {
+                            if (solicitudes.records[i].tipo_producto_c == '14' && solicitudes.records[i].estatus_c != 'K') {
                                 duplicado = 1;
                             }
                         }
@@ -2484,7 +2487,7 @@
         }
     },
 
-    validaCreditCard: function (fields, errors, callback) {
+    validaPFCreditCard: function (fields, errors, callback) {
         //VALIDACIÓN DE TIPO DE PERSONA EN EL TIPO DE PRODUCTO TARJETA DE CREDITO
         if (this.model.get('account_id') != "" && this.model.get('account_id') != undefined) {
 
@@ -2509,6 +2512,50 @@
                 }, this)
             });
 
+        } else {
+            callback(null, fields, errors);
+        }
+    },
+
+    validaSolCreditCard: function (fields, errors, callback) {
+        //VALIDA SI YA EXISTEN SOLICITUDES CON LÍNEAS DE CREDITO AUTORIZADAS ANTES DE CREAR UNA SOLICITUD CON TIPO PRODUCTO TARJETA DE CREDITO
+        if (this.model.get('tipo_producto_c') == '14') {
+
+            var id_account = this.model.get('account_id');
+
+            if (this.model.get('account_id') != "" && this.model.get('account_id') != undefined) {
+                
+                app.api.call('GET', app.api.buildURL('Accounts/' + id_account + '/link/opportunities'), null, {
+                    success: function (solicitudes) {
+
+                        var solClienteLinea = 0;
+
+                        for (var i = 0; i < solicitudes.records.length; i++) {
+                            
+                            if (solicitudes.records[i].tipo_operacion_c == '2' && solicitudes.records[i].tct_etapa_ddw_c == 'CL' && solicitudes.records[i].estatus_c == 'N') {
+                                solClienteLinea = 1;
+                            }
+                        }
+
+                        if (solClienteLinea == 0) {
+                            
+                            app.alert.show('message-cliente-linea', {
+                                level: 'error',
+                                title: 'No se puede generar la Presolicitud de tipo producto Tarjeta de Crédito, se requiere tener una línea de crédito previamente autorizada.',
+                                autoClose: false
+                            });
+
+                            errors['tipo_producto_c'] = errors['tipo_producto_c'] || {};
+                            errors['tipo_producto_c'].required = true;
+                        }
+                        callback(null, fields, errors);
+                    },
+                    error: function (e) {
+                        throw e;
+                    }
+                });
+            }
+        
         } else {
             callback(null, fields, errors);
         }
