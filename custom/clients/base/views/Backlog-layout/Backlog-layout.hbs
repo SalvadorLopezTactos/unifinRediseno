@@ -258,9 +258,11 @@
             </tr>
             <tr>
                 <td>Solicitud:</td>
-                <td>Tipo de operacion:</td>
+                <!--<td>Tipo de operacion:</td>-->
                 <td>Etapa:</td>
                 <td>Estatus:</td>
+				<td>Producto:</td>
+				<td colspan="6"></td>
             </tr>
             <tr>
                 <td>
@@ -270,13 +272,13 @@
                       {{/each}}
                     </select>
                 </td>
-                <td>
+                <!--<td>
                     <select id="tipo_operacion_filtro" class="filtros">
                       {{#each tipo_operacion_list_html}}
                         <option value="{{@key}}" {{ifSelected @key ../tipo_operacion_filtro}}>{{this}}</option>
                       {{/each}}
                     </select>
-                </td>
+                </td>-->
                 <td>
                     <select id="etapa_filtro" class="filtros">
                       {{#each etapa_list_html}}
@@ -291,8 +293,20 @@
                       {{/each}}
                     </select>
                 </td>
+				<td>
+                    <select id="producto_filtro" class="filtros">
+                      {{#each producto_list_html}}
+                        <option value="{{@key}}" {{ifSelected @key ../producto_filtro}}>{{this}}</option>
+                      {{/each}}
+                    </select>
+                </td>
+                <td colspan="6"> 
+                    <input type="button" value="Buscar" id="btn_Buscar" class="btn btn-primary filtros"/>
+                    <i class="fa fa-spinner fa-spin loadingIcon" style="display: none"></i>
+                    <span class="btn btn-success exportar filtros" tabindex="-1">Exportar a Excel</span>
+                </td>
             </tr>
-			<tr>
+			<!--<tr>
                 <td>Producto:</td>
 				<td></td>
 				<td colspan = "12"></td>
@@ -312,6 +326,7 @@
                 </td>
 				<td colspan="12"></td>
             </tr>
+			-->
         </table>
     </div>
 
