@@ -62,15 +62,11 @@ class registroLlamada extends SugarApi
 				$agente = $response['idAsesor'];
 				//Crea Llamada
 				$bean_Call = BeanFactory::newBean('Calls');
+				$bean_Call->name = 'Llamada automática – Intento de registro en UniOn';
 				$bean_Call->date_start = date("d/m/Y h:i a", strtotime('+30 minutes'));
-				if($tipo == 'Accounts') {
-					$bean_Call->name = 'Llamada automática – Intento de registro en UniOn';
-					$bean_Call->parent_type = 'Accounts';
-				}
-				if($tipo == 'Leads') {
-					$bean_Call->name = 'Llamada automática – Registro en UniOn';
-					$bean_Call->parent_type = 'Leads';
-				}
+				if($args['origen']) $bean_Call->name = 'Llamada automática – Registro en UniOn';
+				if($tipo == 'Accounts') $bean_Call->parent_type = 'Accounts';
+				if($tipo == 'Leads') $bean_Call->parent_type = 'Leads';
 				$bean_Call->parent_id = $args['idCRM'];
 				$bean_Call->assigned_user_id = $agente;
 				$bean_Call->direction = 'Inbound';
