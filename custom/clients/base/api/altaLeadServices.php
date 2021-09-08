@@ -358,7 +358,7 @@ class altaLeadServices extends SugarApi
 							# crea llamada
 							require_once("custom/clients/base/api/registroLlamada.php");
 							$apiCall = new registroLlamada();
-							$body=array('idCRM'=>$id_lead, 'tipo'=>'Leads');
+							$body=array('idCRM'=>$id_lead, 'tipo'=>'Leads', 'origen'=>1);
 							$result = $apiCall->registroLlamadas(null,$body);
 						}
                         if (!empty($parent_id)) {
