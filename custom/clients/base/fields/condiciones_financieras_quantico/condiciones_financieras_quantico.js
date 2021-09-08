@@ -149,8 +149,8 @@
     },
 
     loadData: function (options) {
-        //Solo cargar los datos de condiciones financieras cuando no se está creando
-        if(this.view.currentState != "create"){
+        //Solo cargar los datos de condiciones financieras cuando no se está creando y que sea diferente del tipo de producto Tarjeta de Crédito
+        if(this.view.currentState != "create" && this.model.get('tipo_producto_c') != '14'){
             //Validación para obtener información del campo en lugar de lanzar petición al servicio
             if (this.model.get('cf_quantico_politica_c') == "") {
                 this.headers = [];
