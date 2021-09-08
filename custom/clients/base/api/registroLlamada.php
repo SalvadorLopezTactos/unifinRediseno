@@ -43,7 +43,7 @@ class registroLlamada extends SugarApi
 		else {
 			$tipo = 'Accounts';
 		}
-		if($args['tipo'] != 'Accounts' || $args['tipo'] == 'Leads') $respuesta = 'El valor del tipo es incorrecto';
+		if($args['tipo'] != 'Accounts' && $args['tipo'] != 'Leads') $respuesta = 'El valor del tipo es incorrecto';
 		if(empty($respuesta)) {
 			//Busca Llamada Planificada de hoy
 			$Llamadas = new SugarQuery();
@@ -62,7 +62,7 @@ class registroLlamada extends SugarApi
 				$agente = $response['idAsesor'];
 				//Crea Llamada
 				$bean_Call = BeanFactory::newBean('Calls');
-				$bean_Call->name = 'Llamada automática – Intento de Registro en UniOn';
+				$bean_Call->name = 'Llamada automática – Registro en UniOn';
 				$bean_Call->date_start = date("d/m/Y h:i a", strtotime('+30 minutes'));
 				if($tipo == 'Accounts') $bean_Call->parent_type = 'Accounts';
 				if($tipo == 'Leads') $bean_Call->parent_type = 'Leads';
