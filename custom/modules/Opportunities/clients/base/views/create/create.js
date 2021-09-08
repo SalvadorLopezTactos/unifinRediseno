@@ -2397,7 +2397,7 @@
                         var sumaMontos = parseInt(montos);
                         var totalTenPercent = (10 / 100) * sumaMontos;  //OPERACION PARA OBTENER EL 10% DE LA SUMA DE LOS MONTOS
                         
-                        if (self.model.get('monto_c') > sumaMontos) {
+                        if (totalTenPercent > 1000000) {
                             self.model.set('monto_c', 1000000);
                             self.model.set('control_monto_c', 1000000);
 
