@@ -156,6 +156,8 @@
         //this.adminUserCartera();
 		//VALIDA EL MONTO DEL TIPO DE PRODUCTO TARJETA DE CREDITO QUE NO SUPERE EL CONTROL DEL MONTO
         this.model.addValidationTask('validaMontoCreditCard', _.bind(this.validaMontoCreditCard, this));
+        //TIPO DE PRODUCTO TARJETA DE CREDITO - OBTIENE EL 10% DE LA SUMA DE LAS LINEAS DE CREDITO AUTORIZADAS
+        this.model.on("change:tipo_producto_c", _.bind(this.montoTenPercentCreditCard, this));
 		
 	/*************** validacion SOC ****************/
 		//this.model.on('sync', this.SOCInicio, this);
@@ -605,13 +607,12 @@
             } else {
                 this.$("div.record-label[data-name='monto_c']").text("Monto de l\u00EDnea");
             }
-            //TIPO DE PRODUCTO TARJETA DE CREDITO - OCULTA EL CHECK DE RATIFICACION / INCREMENTO Y PONE EN SOLO LECTURA EL MONTO A OPERAR
+            //TIPO DE PRODUCTO TARJETA DE CREDITO - OCULTA EL CHECK DE RATIFICACION / INCREMENTO
             if (this.model.get('tipo_producto_c') == '14') {
-                this.$('div[data-name=ratificacion_incremento_c]').hide();      
-                this.$('[data-name="amount"]').attr('style', 'pointer-events:none'); //Monto a operar solo lectura
+                this.$('div[data-name=ratificacion_incremento_c]').hide();
+                
             } else {
                 this.$('div[data-name=ratificacion_incremento_c]').show();
-                this.$('[data-name="amount"]').attr('style', ''); //Monto a operar editable
             }
         }, this));
 
@@ -3509,6 +3510,50 @@
 
         } else {
             callback(null, fields, errors);
+        }
+    },
+
+    montoTenPercentCreditCard: function () {
+        //TIPO DE PRODUCTO TARJETA DE CREDITO - AGREGA EL 10 % DE LA SUMA DE LAS LÍNEAS DE CREDITO EN EL MONTO
+        self = this;
+        if (this.model.get('tipo_producto_c') == '14') {
+
+            var id_account = this.model.get('account_id');
+
+            if (this.model.get('account_id') != "" && this.model.get('account_id') != undefined) {
+                //Realiza llamada para recuperar oportunidades de la cuenta, estas son solicitudes con Linea
+                app.api.call('GET', app.api.buildURL('Accounts/' + id_account + '/link/opportunities'), null, {
+                    success: function (solicitudes) {
+
+                        var montos = 0;
+
+                        for (var i = 0; i < solicitudes.records.length; i++) {
+                            //TIPO DE OPERACION LÍNEA, ETAPA CL Y ESTATUS N
+                            if (solicitudes.records[i].tipo_operacion_c == '2' && solicitudes.records[i].tct_etapa_ddw_c == 'CL' && solicitudes.records[i].estatus_c == 'N') {
+
+                                montos += parseInt(solicitudes.records[i].monto_c); //SUMA LOS MONTOS DE LAS LÍNEAS DE CREDITO
+                            }
+                        }
+                        
+                        var sumaMontos = parseInt(montos);
+                        var totalTenPercent = (10 / 100) * sumaMontos;  //OPERACION PARA OBTENER EL 10% DE LA SUMA DE LOS MONTOS
+                        
+                        if (self.model.get('monto_c') > sumaMontos) {
+                            self.model.set('monto_c', 1000000);
+                            self.model.set('control_monto_c', 1000000);
+
+                        } else {
+
+                            self.model.set('monto_c', totalTenPercent);
+                            self.model.set('control_monto_c', totalTenPercent);
+                        }
+
+                    },
+                    error: function (e) {
+                        throw e;
+                    }
+                });
+            }
         }
     },
 
