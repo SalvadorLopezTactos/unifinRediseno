@@ -36,7 +36,7 @@ class oppUnionService
         }
 
         //Condicion para realizar consumo de API para obtener el id de la respuesta del servicio
-        if ($bean->id_response_union_c == "" && $bean->tipo_producto_c == "14" && $beanCuenta->tipodepersona_c != "Persona Fisica") {
+        if ($args['isUpdate'] == 1 && $bean->id_response_union_c == "" && $bean->tipo_producto_c == "14" && $beanCuenta->tipodepersona_c != "Persona Fisica") {
 
             $GLOBALS['log']->fatal('*****Envia peticion al servicio de UNION*****');
             $GLOBALS['log']->fatal('Solicitud con línea de crédito: '.$bean->id);
