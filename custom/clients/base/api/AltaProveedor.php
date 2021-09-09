@@ -47,7 +47,7 @@ public function usuarioProveedores($api, $args){
             $GLOBALS['log']->fatal("Respuesta primer servicio: " . print_r($response1, true));
         } catch (Exception $exception) {
         }
-        if ($response1==null){
+        if ($response['usuarioPortalValido']==null){
             if ($account->tipo_registro_cuenta_c == '5' || $account->esproveedor_c == 1) {
                 global $app_list_strings, $current_user,$sugar_config,$db;
                 $host = $sugar_config['esb_url']. '/uni2/rest/creaUsuarioProveedor';
