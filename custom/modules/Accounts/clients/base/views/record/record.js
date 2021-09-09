@@ -1573,6 +1573,13 @@
         //     $('[name="conviertelead"]').hide();
         //     $('[name="prospectocontactado"]').hide();
         // }
+
+        //Boton de envio a Portal de Proveedores
+        if((this.model.get('esproveedor_c')=='1' || this.model.get('tipo_registro_cuenta_c')=='5') && App.user.attributes.portal_proveedores_c=='1' && !this.model.get('alta_portal_proveedor_chk_c')){
+            $('[name="portal_proveedores"]').show();
+          } else {
+            $('[name="portal_proveedores"]').hide();
+          }
     },
 
     /* @author F. Javier Garcia S. 10/07/2018
