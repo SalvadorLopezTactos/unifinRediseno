@@ -25,7 +25,7 @@ class AltaProveedor extends SugarApi
 
 public function usuarioProveedores($api, $args){
 
-        
+        global $app_list_strings, $current_user,$sugar_config,$db;
         $idaccount = $args['id'];
         $response=array();
         $account = BeanFactory::retrieveBean('Accounts', $idaccount, array('disable_row_level_security' => true));
@@ -33,6 +33,7 @@ public function usuarioProveedores($api, $args){
         //Ejecuta primer servicio para validar que exista usuario en Proveedores, si no existe ejecuta segundo servicio
         try {
             $GLOBALS['log']->fatal('Realiza consumo primer servicio para validar existencia de proveedor en portal');
+            
             $url = $host1;
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_ENCODING, '');
@@ -44,12 +45,12 @@ public function usuarioProveedores($api, $args){
             $curl_info = curl_getinfo($ch);
             $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $response1 = json_decode($result, true);
+            $GLOBALS['log']->fatal($host1);
             $GLOBALS['log']->fatal("Respuesta primer servicio: " . print_r($response1, true));
         } catch (Exception $exception) {
         }
-        if ($response['usuarioPortalValido']==null){
+        if ($response1['usuarioPortalValido']==null){
             if ($account->tipo_registro_cuenta_c == '5' || $account->esproveedor_c == 1) {
-                global $app_list_strings, $current_user,$sugar_config,$db;
                 $host = $sugar_config['esb_url']. '/uni2/rest/creaUsuarioProveedor';
     
                 $tipoProveedor = 'BIENES';
@@ -105,7 +106,8 @@ public function usuarioProveedores($api, $args){
                         $response['status']='200';
                         $response['message']='Se creó el registro de proveedor de forma exitosa.';
                         //Update a campo nuevo
-                        $query = " UPDATE accounts_cstm SET alta_portal_proveedor_chk_c = '1' WHERE id_c = '{$account->id}'";
+                        $query = " UPDATE accounts_cstm SET alta_portal_proveedor_chk_c = '1' WHERE id_c = '{$account->id}';";
+                        $GLOBALS['log']->fatal($query);
                         $queryResult = $db->query($query);
                     }else {
                         $response['status']='400';
@@ -121,6 +123,9 @@ public function usuarioProveedores($api, $args){
                 $response['message']='La cuenta debe ser de tipo proveedor';
             }
         }else{
+            $query = " UPDATE accounts_cstm SET alta_portal_proveedor_chk_c = '1' WHERE id_c = '{$account->id}';";
+            $GLOBALS['log']->fatal($query);
+            $queryResult = $db->query($query);
             $response['status']='400';
             $response['message']='Esta cuenta ya existe en el portal de Proveedores.';
         }
