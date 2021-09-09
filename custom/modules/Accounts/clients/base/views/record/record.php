@@ -818,6 +818,15 @@ array (
                 'name' => 'blank_space',
                 'label' => 'LBL_BLANK_SPACE',
               ),
+              42 => 
+              array (
+                'name' => 'alta_portal_proveedor_chk_c',
+                'label' => 'LBL_ALTA_PORTAL_PROVEEDOR_CHK',
+                'css_class' => 'hidden',
+              ),
+              43 => 
+              array (
+              ),
             ),
           ),
           7 => 
