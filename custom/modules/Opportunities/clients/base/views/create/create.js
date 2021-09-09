@@ -2424,7 +2424,7 @@
         //VALIDA QUE NO SUPERE EL $1,000,000 (UN MILLON) EN EL CAMPO DEL MONTO DEL TIPO DE PRODUCTO TARJETA DE CREDITO - CREATE
         if (this.model.get('tipo_producto_c') == '14') {
 
-            if (this.model.get('monto_c') > this.model.get('control_monto_c')) {
+            if (parseInt(this.model.get('monto_c')) > parseInt(this.model.get('control_monto_c'))) {
 
                 app.alert.show('message-control-monto', {
                     level: 'error',
