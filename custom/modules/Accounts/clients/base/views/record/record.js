@@ -299,8 +299,7 @@
     		this.context.on('button:desaprobar_noviable:click', this.rechazar_noviable, this);
         this.context.on('button:reactivar_noviable:click', this.reactivar_noviable, this);
     		this.model.on('sync', this.bloqueo, this);
-             //Funcion para ocultar o no el boton de enviar a Portal Proveedores
-        this.model.on('sync', this.btnenvia_proveedor, this);
+        
         this.context.on('button:open_negociador_quantico:click', this.open_negociador_quantico, this);
         /***************Validacion de Campos No viables en los Productos********************/
         this.model.addValidationTask('LeasingUP', _.bind(this.requeridosLeasingUP, this));
@@ -1135,7 +1134,7 @@
         $('div[data-name=tct_prospecto_contactado_chk_c]').hide();
          //Oculta campo proveedor
          $('[name="portal_proveedores"]').hide();
-         this.btnenvia_proveedor();
+         
 
         // Validación para no poder inactivar clientes con contratos activos
         if (this.model.dataFetched) {
@@ -1195,7 +1194,7 @@
         //Evento para validar acciones
         $('a.btn.dropdown-toggle.btn-primary').on('click', function (e) {
             contexto_cuenta.hideButton_Conversion_change();
-            contexto_cuenta.btnenvia_proveedor();
+            
         });
 
         if (app.user.attributes.cuenta_especial_c == 0 || app.user.attributes.cuenta_especial_c == "") {
@@ -7299,20 +7298,6 @@
                 throw e;
             }
         });
-    },
-
-    btnenvia_proveedor:function(){
-        var button= this.getField("portal_proveedores");
-        button.hide();
-            if (button) {
-                  button.listenTo(button, "render", function () {
-                       if((this.model.get('esproveedor_c')=='1' || this.model.get('tipo_registro_cuenta_c')=='5') && App.user.attributes.portal_proveedores_c=='1' && !this.model.get('alta_portal_proveedor_chk_c')){
-                        $('[name="portal_proveedores"]').show();
-                      } else {
-                        $('[name="portal_proveedores"]').hide();
-                      }
-                  });
-            }
     },
 
 	userAlianzaSoc: function () {
