@@ -156,9 +156,7 @@
         //this.adminUserCartera();
 		//VALIDA EL MONTO DEL TIPO DE PRODUCTO TARJETA DE CREDITO QUE NO SUPERE EL CONTROL DEL MONTO
         this.model.addValidationTask('validaMontoCreditCard', _.bind(this.validaMontoCreditCard, this));
-        //TIPO DE PRODUCTO TARJETA DE CREDITO - OBTIENE EL 10% DE LA SUMA DE LAS LINEAS DE CREDITO AUTORIZADAS
-        this.model.on("change:tipo_producto_c", _.bind(this.montoTenPercentCreditCard, this));
-		
+        
 	/*************** validacion SOC ****************/
 		//this.model.on('sync', this.SOCInicio, this);
 		//this.model.on("change:alianza_soc_chk_c", _.bind(this.SOCflag, this));
@@ -2592,6 +2590,10 @@
             this.$('div[data-name="condiciones_financieras_incremento_ratificacion"]').hide();
             this.$("[data-name='monto_ratificacion_increment_c']").attr('style', 'pointer-events:none');
         }
+        // Valida que sea Tarjeta de Credito y oculta condiciones financieras
+        if (this.model.get('tipo_producto_c') == '14') {
+            this.$('div[data-name=condiciones_financieras]').hide();
+        }
         //Se habilitan acciones existentes en render
         //no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
         if (this.model.get('tct_etapa_ddw_c') == 'SI' || this.model.get('tct_etapa_ddw_c') == 'P') {
@@ -3510,50 +3512,6 @@
 
         } else {
             callback(null, fields, errors);
-        }
-    },
-
-    montoTenPercentCreditCard: function () {
-        //TIPO DE PRODUCTO TARJETA DE CREDITO - AGREGA EL 10 % DE LA SUMA DE LAS LÍNEAS DE CREDITO EN EL MONTO
-        self = this;
-        if (this.model.get('tipo_producto_c') == '14') {
-
-            var id_account = this.model.get('account_id');
-
-            if (this.model.get('account_id') != "" && this.model.get('account_id') != undefined) {
-                //Realiza llamada para recuperar oportunidades de la cuenta, estas son solicitudes con Linea
-                app.api.call('GET', app.api.buildURL('Accounts/' + id_account + '/link/opportunities'), null, {
-                    success: function (solicitudes) {
-
-                        var montos = 0;
-
-                        for (var i = 0; i < solicitudes.records.length; i++) {
-                            //TIPO DE OPERACION LÍNEA, ETAPA CL Y ESTATUS N
-                            if (solicitudes.records[i].tipo_operacion_c == '2' && solicitudes.records[i].tct_etapa_ddw_c == 'CL' && solicitudes.records[i].estatus_c == 'N') {
-
-                                montos += parseInt(solicitudes.records[i].monto_c); //SUMA LOS MONTOS DE LAS LÍNEAS DE CREDITO
-                            }
-                        }
-                        
-                        var sumaMontos = parseInt(montos);
-                        var totalTenPercent = (10 / 100) * sumaMontos;  //OPERACION PARA OBTENER EL 10% DE LA SUMA DE LOS MONTOS
-                        
-                        if (totalTenPercent > 1000000) {
-                            self.model.set('monto_c', 1000000);
-                            self.model.set('control_monto_c', 1000000);
-
-                        } else {
-
-                            self.model.set('monto_c', totalTenPercent);
-                            self.model.set('control_monto_c', totalTenPercent);
-                        }
-
-                    },
-                    error: function (e) {
-                        throw e;
-                    }
-                });
-            }
         }
     },
 
