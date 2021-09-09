@@ -126,7 +126,7 @@ public function usuarioProveedores($api, $args){
             $query = " UPDATE accounts_cstm SET alta_portal_proveedor_chk_c = '1' WHERE id_c = '{$account->id}';";
             $GLOBALS['log']->fatal($query);
             $queryResult = $db->query($query);
-            $response['status']='400';
+            $response['status']='300';
             $response['message']='Esta cuenta ya existe en el portal de Proveedores.';
         }
         return $response;

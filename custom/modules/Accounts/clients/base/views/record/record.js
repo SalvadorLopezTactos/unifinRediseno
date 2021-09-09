@@ -7343,7 +7343,9 @@
             success: _.bind(function (data) {
                 App.alert.dismiss('ProcesoProveedor');
                 var level = (data.status=='200')?'success':'error';
-
+                if (data.status!='400'){
+                    self.model.set('alta_portal_proveedor_chk_c', 1);
+                }
                 App.alert.show('alert_func_Proveedor', {
                     level: level,
                     messages: data.message,
