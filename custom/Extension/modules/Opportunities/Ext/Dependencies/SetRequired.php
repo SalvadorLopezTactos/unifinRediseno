@@ -173,7 +173,7 @@ $dependencies['Opportunities']['assigned_user_name_required'] = array(
    
     $dependencies['Opportunities']['amount_readonly'] = array(
             'hooks' => array("edit"),
-            'trigger' => 'not(equal($id_process_c, ""))',
+            'trigger' => 'or(not(equal($id_process_c, "")),not(equal($id_response_union_c, "")))', 
             'onload' => true,
             'actions' => array(
                     array(
