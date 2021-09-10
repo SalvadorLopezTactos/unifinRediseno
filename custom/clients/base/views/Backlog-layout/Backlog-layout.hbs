@@ -609,6 +609,42 @@
                         </table>
                     </th>
 					-->
+					<th width="15%" class="hide_monto_prospecto">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Prospecto</td>
+                            </tr>
+                        </table>
+                    </th>
+					<th width="15%" class="hide_monto_credito">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Crédito</td>
+                            </tr>
+                        </table>
+                    </th>
+					<th width="15%" class="hide_monto_rechazado">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Rechazado</td>
+                            </tr>
+                        </table>
+                    </th>
+					<th width="15%" class="hide_sin_solicitud">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Sin solicitud</td>
+                            </tr>
+                        </table>
+                    </th>
+					<th width="15%" class="hide_con_solicitud">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Con solicitud</td>
+                            </tr>
+                        </table>
+                    </th>
+					
                 </tr>
 
                 {{#each backlogs}}
@@ -645,6 +681,11 @@
                         <!--<th class="totales hide_progreso"></th>-->
                         <!--<th class="totales hide_conversion"></th>-->
                         <!--<th class="totales hide_motivo_rechazo"></th>-->
+						<th class="totales hide_monto_prospecto"></th>
+						<th class="totales hide_monto_credito"></th>
+						<th class="totales hide_monto_rechazado"></th>
+						<th class="totales hide_sin_solicitud"></th>
+						<th class="totales hide_con_solicitud"></th>
                     </tr>
                 {{/each}}
 
@@ -698,8 +739,13 @@
                             <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
                             <td class="hide_etapa">{{etapa}}</td>
                             <!--<td class="hide_progreso">{{progreso}}</td>-->
-                            <td class="hide_conversion">{{conversion}}</td>
-                            <td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>
+                            <!--<td class="hide_conversion">{{conversion}}</td>-->
+                            <!--<td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>-->
+							<td class="hide_monto_prospecto">{{monto_prospecto}}</td>
+							<td class="hide_monto_credito">{{monto_credito}}</td>
+							<td class="hide_monto_rechazado">{{monto_rechazado}}</td>
+							<td class="hide_sin_solicitud">{{monto_sin_solicitud}}</td>
+							<td class="hide_con_solicitud">{{monto_con_solicitud}}</td>
                             <!--<td>-->
                             <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
                             <!--</td>-->
@@ -755,9 +801,14 @@
                                 <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
                                 <td class="hide_etapa">{{etapa}}</td>
                                 <!--<td class="hide_progreso">{{progreso}}</td>-->
-                                <td class="hide_conversion">{{conversion}}</td>
-                                <td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>
-                                <!--<td>-->
+                                <!--<td class="hide_conversion">{{conversion}}</td>-->
+                                <!--<td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>-->
+                                <td class="hide_monto_prospecto">{{monto_prospecto}}</td>
+								<td class="hide_monto_credito">{{monto_credito}}</td>
+								<td class="hide_monto_rechazado">{{monto_rechazado}}</td>
+								<td class="hide_sin_solicitud">{{monto_sin_solicitud}}</td>
+								<td class="hide_con_solicitud">{{monto_con_solicitud}}</td>
+								<!--<td>-->
                                 <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
                                 <!--</td>-->
 
@@ -817,9 +868,14 @@
                                             <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
                                             <td class="hide_etapa">{{etapa}}</td>
                                             <!--<td class="hide_progreso">{{progreso}}</td>-->
-                                            <td class="hide_conversion">{{conversion}}</td>
-                                            <td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>
-                                            <!--<td>-->
+                                            <!--<td class="hide_conversion">{{conversion}}</td>-->
+                                            <!--<td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>-->
+                                            <td class="hide_monto_prospecto">{{monto_prospecto}}</td>
+											<td class="hide_monto_credito">{{monto_credito}}</td>
+											<td class="hide_monto_rechazado">{{monto_rechazado}}</td>
+											<td class="hide_sin_solicitud">{{monto_sin_solicitud}}</td>
+											<td class="hide_con_solicitud">{{monto_con_solicitud}}</td>
+											<!--<td>-->
                                             <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
                                             <!--</td>-->
                                         </tr>
@@ -878,9 +934,14 @@
                                         <option value="hide_etapa_preliminar">Etapa Inicio Mes</option>
                                         <option value="hide_etapa">Etapa</option>
                                         <!--<option value="hide_progreso">Solicitud</option>-->
-                                        <option value="hide_conversion">Probabilidad de Conversión %</option>
-                                        <option value="hide_motivo_rechazo">Motivo de Rechazo</option>
-                                    </select>
+                                        <!--<option value="hide_conversion">Probabilidad de Conversión %</option>-->
+                                        <!--<option value="hide_motivo_rechazo">Motivo de Rechazo</option>-->
+										<option value="hide_monto_prospecto">Prospecto</option>
+										<option value="hide_monto_credito">Crédito</option>
+										<option value="hide_monto_rechazado">Rechazado</option>
+										<option value="hide_sin_solicitud">Sin solicitud</option>
+										<option value="hide_con_solicitud">Con solicitud</option>
+									</select>
                                 </div>
                                 <div class="span1" style="margin-top: 20px;">
                                     <input type="button" value="Ejecutar" id="btn_ejecuta_ocultar_columnas" class="btn btn-success"/>

@@ -459,7 +459,6 @@ SQL;
             if(empty($row['monto_comprometido']) || $row['monto_comprometido'] == 0 || $row['monto_comprometido'] == null){
                 $response['linea'][$row['id']]['mass_checked'] = "disabled";
             }
-
             $response['linea'][$row['id']]['monto_prospecto'] = $row['monto_prospecto_c'];
             $response['linea'][$row['id']]['monto_credito'] = $row['monto_credito_c'];
             $response['linea'][$row['id']]['monto_rechazado'] = $row['monto_rechazado_c'];
