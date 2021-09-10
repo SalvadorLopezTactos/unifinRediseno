@@ -236,6 +236,7 @@
          */
         this.model.on('sync', this._hideNPS, this);
         this.model.on('sync', this.hideButton_Conversion, this);
+        this.model.on('sync', this.hideButton_Conversion_change, this);
 
         //Validacion para mostrar chk para cuentas homonimas
         this.model.on('sync', this.homonimo, this);
@@ -299,7 +300,7 @@
     		this.context.on('button:desaprobar_noviable:click', this.rechazar_noviable, this);
         this.context.on('button:reactivar_noviable:click', this.reactivar_noviable, this);
     		this.model.on('sync', this.bloqueo, this);
-        
+
         this.context.on('button:open_negociador_quantico:click', this.open_negociador_quantico, this);
         /***************Validacion de Campos No viables en los Productos********************/
         this.model.addValidationTask('LeasingUP', _.bind(this.requeridosLeasingUP, this));
@@ -1134,7 +1135,7 @@
         $('div[data-name=tct_prospecto_contactado_chk_c]').hide();
          //Oculta campo proveedor
          $('[name="portal_proveedores"]').hide();
-         
+
 
         // Validación para no poder inactivar clientes con contratos activos
         if (this.model.dataFetched) {
@@ -1194,7 +1195,7 @@
         //Evento para validar acciones
         $('a.btn.dropdown-toggle.btn-primary').on('click', function (e) {
             contexto_cuenta.hideButton_Conversion_change();
-            
+
         });
 
         if (app.user.attributes.cuenta_especial_c == 0 || app.user.attributes.cuenta_especial_c == "") {
@@ -1392,6 +1393,8 @@
         var myField1 = this.getField("prospectocontactado");
         var myField2 = this.getField("conviertelead");
         // var myField3 = this.getField("clienteuniclick");
+        var myField4 = this.getField("portal_proveedores");
+
         if (myField) {
             myField.listenTo(myField, "render", function () {
                 var leasingprod = Oproductos.productos.tct_tipo_cuenta_l_c;
@@ -1499,12 +1502,17 @@
         //         }
         //     });
         // }
-         //Boton de envio a Portal de Proveedores
-         if((this.model.get('esproveedor_c')=='1' || this.model.get('tipo_registro_cuenta_c')=='5') && App.user.attributes.portal_proveedores_c=='1' && !this.model.get('alta_portal_proveedor_chk_c')){
-            $('[name="portal_proveedores"]').show();
-          } else {
-            $('[name="portal_proveedores"]').hide();
-          }
+        if (myField4) {
+            myField4.listenTo(myField4, "render", function () {
+                myField4.hide();
+                if((this.model.get('esproveedor_c')=='1' || this.model.get('tipo_registro_cuenta_c')=='5') && App.user.attributes.portal_proveedores_c=='1' && !this.model.get('alta_portal_proveedor_chk_c')){
+                  myField4.show();
+                } else {
+                  myField4.hide();
+                }
+            });
+        }
+
     },
 
     hideButton_Conversion_change: function () {
