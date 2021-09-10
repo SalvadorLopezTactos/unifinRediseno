@@ -426,8 +426,8 @@ SQL;
                 $response['linea'][$row['id']]['monto_diferencia'] = $row['monto_final_comprometido'] - $row['monto_comprometido'];
             }
 			*/
-            //$response['linea'][$row['id']]['monto_final_comprometido'] = $row['monto_final_comprometido'];
-            $response['linea'][$row['id']]['ri_final_comprometida'] = $row['ri_final_comprometida'];
+            $response['linea'][$row['id']]['monto_final_comprometido'] = $row['monto_final_comprometido'];
+            //$response['linea'][$row['id']]['ri_final_comprometida'] = $row['ri_final_comprometida'];
             //$response['linea'][$row['id']]['bl_actual'] = $row['bl_actual'];
 
             //$response['linea'][$row['id']]['monto_real'] = $row['monto_real_logrado'];
@@ -486,8 +486,8 @@ SQL;
             $response['linea'][$row['id']]['porciento_ri'] = $row['porciento_ri'];
             $response['linea'][$row['id']]['comentado'] = $row['comentado'];
             $response['linea'][$row['id']]['color'] = $row['color'];
-            $response['linea'][$row['id']]['conversion'] = $row['tct_conversion_c'];
-            $response['linea'][$row['id']]['motivo_rechazo'] = $row['motivo_rechazo_txf_c'];
+            //$response['linea'][$row['id']]['conversion'] = $row['tct_conversion_c'];
+            //$response['linea'][$row['id']]['motivo_rechazo'] = $row['motivo_rechazo_txf_c'];
         }
 
         return $response;
@@ -502,16 +502,16 @@ SQL;
             foreach($response['MyBacklogs']['linea'] as $key => $value) {
                 //Totales
                 $total['total_monto_original'] += $value['monto_original'];
-                //$total['total_monto_comprometido'] += $value['monto_comprometido'];
-                //$total['total_monto_real'] += $value['monto_real'];
-                //$total['total_renta_inicial'] += $value['ri_comprometida'];
-                //$total['total_renta_real'] += $value['renta_real'];
-                //$total['total_monto_cancelado'] += $value['monto_cancelado'];
-                //$total['total_ri_cancelada'] += $value['ri_cancelada'];
-                //$total['total_monto_diferencia'] += $value['monto_diferencia'];
-                //$total['total_monto_final_comprometido'] += $value['monto_final_comprometido'];
+                $total['total_monto_comprometido'] += $value['monto_comprometido'];
+                $total['total_monto_real'] += $value['monto_real'];
+                $total['total_renta_inicial'] += $value['ri_comprometida'];
+                $total['total_renta_real'] += $value['renta_real'];
+                $total['total_monto_cancelado'] += $value['monto_cancelado'];
+                $total['total_ri_cancelada'] += $value['ri_cancelada'];
+                $total['total_monto_diferencia'] += $value['monto_diferencia'];
+                $total['total_monto_final_comprometido'] += $value['monto_final_comprometido'];
                 $total['total_renta_inicial_final'] += $value['ri_final_comprometida'];
-                //$total['total_bl_actual'] += $value['bl_actual'];
+                $total['total_bl_actual'] += $value['bl_actual'];
                 $total['total_pipeline_posterior'] += $value['pipeline_posterior'];
             }
         }
@@ -522,16 +522,16 @@ SQL;
                     foreach($linea as $field => $amount){
                         //Totales
                         $total['total_monto_original'] += $amount['monto_original'];
-                        //$total['total_monto_comprometido'] += $amount['monto_comprometido'];
-                        //$total['total_monto_real'] += $amount['monto_real'];
-                        //$total['total_renta_inicial'] += $amount['ri_comprometida'];
-                        //$total['total_renta_real'] += $amount['renta_real'];
-                        //$total['total_monto_cancelado'] += $amount['monto_cancelado'];
-                        //$total['total_ri_cancelada'] += $amount['ri_cancelada'];
-                        //$total['total_monto_diferencia'] += $amount['monto_diferencia'];
-                        //$total['total_monto_final_comprometido'] += $amount['monto_final_comprometido'];
+                        $total['total_monto_comprometido'] += $amount['monto_comprometido'];
+                        $total['total_monto_real'] += $amount['monto_real'];
+                        $total['total_renta_inicial'] += $amount['ri_comprometida'];
+                        $total['total_renta_real'] += $amount['renta_real'];
+                        $total['total_monto_cancelado'] += $amount['monto_cancelado'];
+                        $total['total_ri_cancelada'] += $amount['ri_cancelada'];
+                        $total['total_monto_diferencia'] += $amount['monto_diferencia'];
+                        $total['total_monto_final_comprometido'] += $amount['monto_final_comprometido'];
                         $total['total_renta_inicial_final'] += $amount['ri_final_comprometida'];
-                        //$total['total_bl_actual'] += $amount['bl_actual'];
+                        $total['total_bl_actual'] += $amount['bl_actual'];
                         $total['total_pipeline_posterior'] += $amount['pipeline_posterior'];
                     }
                 }
@@ -1030,9 +1030,8 @@ SQL;
             'PROSPECTO','CR'.utf8_decode('É').'DITO','RECHAZADA','SIN SOLICITUD','CON SOLICITUD','PAGO '.utf8_decode('Ú').'NICO PROSPECTO','PAGO '.utf8_decode('Ú').'NICO CR'.utf8_decode('É').'DITO','PAGO '.utf8_decode('Ú').'NICO RECHAZADA','PAGO '.utf8_decode('Ú').'NICO SIN SOLICITUD','PAGO '.utf8_decode('Ú').'NICO CON SOLICITUD', 'TASA', 'COMISI'.utf8_decode('Ó').'N', 'DIF RESIDUALES', 'COLOCACI'.utf8_decode('Ó').'N PIPELINE', 'PROBABILIDAD DE CONVERSI'.utf8_decode('Ó').'N %','MOTIVO DE RECHAZO' ));
 	*/
 		fputcsv($fp, array('PRODUCTO','TIPO OPERACION PRODUCTO','ESTATUS', 'MES','EQUIPO', 'ZONA', 'ASESOR', 'ID CLIENTE','CLIENTE', 'NO. BACKLOG', 'BIEN',  'L'.utf8_decode('Í').'NEA DISPONIBLE',
-            'PAGO '.utf8_decode('Ú').'NICO', 'ETAPA INICIO MES', 'ETAPA', 
-            'PAGO '.utf8_decode('Ú').'NICO PROSPECTO','PAGO '.utf8_decode('Ú').'NICO CR'.utf8_decode('É').'DITO','PAGO '.utf8_decode('Ú').'NICO RECHAZADA','PAGO '.utf8_decode('Ú').'NICO SIN SOLICITUD',
-			'PAGO '.utf8_decode('Ú').'NICO CON SOLICITUD', 'TASA', 'COMISI'.utf8_decode('Ó').'N', 'COLOCACI'.utf8_decode('Ó').'N PIPELINE', 'PROBABILIDAD DE CONVERSI'.utf8_decode('Ó').'N %','MOTIVO DE RECHAZO' ));
+            'BACKLOG','ETAPA INICIO MES', 'ETAPA', 
+            'PROSPECTO','CR'.utf8_decode('É').'DITO','RECHAZADA','SIN SOLICITUD','CON SOLICITUD','TASA', 'COMISI'.utf8_decode('Ó').'N', 'COLOCACI'.utf8_decode('Ó').'N PIPELINE'));
 
         foreach ($args['data']['backlogs'] as $key => $values) {
             foreach ($values as $index => $linea) {
@@ -1131,12 +1130,21 @@ SQL;
             $args['data']['backlogs']['backlogs']['totales']['total_bl_actual'],$args['data']['backlogs']['backlogs']['totales']['total_monto_real'],$args['data']['backlogs']['backlogs']['totales']['total_renta_real'],
             $args['data']['backlogs']['backlogs']['totales']['total_monto_cancelado'],$args['data']['backlogs']['backlogs']['totales']['total_ri_cancelada'],'','','','','','','','',''));
 		*/
-		fputcsv($fp,array('', '','', '', '', '', '', '', '','','', 
+		/*fputcsv($fp,array('', '','', '', '', '', '', '', '','','', 
 			$args['data']['backlogs']['backlogs']['totales']['total_monto_original'],
 			$args['data']['backlogs']['backlogs']['totales']['total_monto_comprometido'],
-            $args['data']['backlogs']['backlogs']['totales']['total_renta_inicial'],0,$args['data']['backlogs']['backlogs']['totales']['total_monto_final_comprometido'],$args['data']['backlogs']['backlogs']['totales']['total_renta_inicial_final'],
-            $args['data']['backlogs']['backlogs']['totales']['total_bl_actual'],$args['data']['backlogs']['backlogs']['totales']['total_monto_real'],$args['data']['backlogs']['backlogs']['totales']['total_renta_real'],
-            $args['data']['backlogs']['backlogs']['totales']['total_monto_cancelado'],$args['data']['backlogs']['backlogs']['totales']['total_ri_cancelada'],'','','','','','','','',''));
+            $args['data']['backlogs']['backlogs']['totales']['total_renta_inicial'],0,
+			$args['data']['backlogs']['backlogs']['totales']['total_monto_final_comprometido'],
+			$args['data']['backlogs']['backlogs']['totales']['total_renta_inicial_final'],
+            $args['data']['backlogs']['backlogs']['totales']['total_bl_actual'],
+			$args['data']['backlogs']['backlogs']['totales']['total_monto_real'],
+			$args['data']['backlogs']['backlogs']['totales']['total_renta_real'],
+            $args['data']['backlogs']['backlogs']['totales']['total_monto_cancelado'],
+			$args['data']['backlogs']['backlogs']['totales']['total_ri_cancelada'],'','','','','','','','',''));
+		*/
+		fputcsv($fp,array('', '','', '', '', '', '', '', '','','', 
+			$args['data']['backlogs']['backlogs']['totales']['total_monto_original'],
+		));
 		
         fclose($fp);
 
