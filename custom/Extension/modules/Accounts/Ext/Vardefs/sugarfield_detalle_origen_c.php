@@ -1,5 +1,5 @@
 <?php
- // created: 2021-07-20 19:07:51
+ // created: 2021-09-13 17:27:18
 $dictionary['Account']['fields']['detalle_origen_c']['labelValue']=' Detalle Origen';
 $dictionary['Account']['fields']['detalle_origen_c']['dependency']='';
 $dictionary['Account']['fields']['detalle_origen_c']['visibility_grid']=array (
@@ -13,6 +13,22 @@ $dictionary['Account']['fields']['detalle_origen_c']['visibility_grid']=array (
       2 => '9',
       3 => '5',
       4 => '11',
+      5 => '70',
+      6 => '71',
+      7 => '72',
+      8 => '73',
+      9 => '74',
+      10 => '75',
+      11 => '76',
+      12 => '77',
+      13 => '78',
+      14 => '79',
+      15 => '80',
+      16 => '81',
+      17 => '82',
+      18 => '83',
+      19 => '84',
+      20 => '85',
     ),
     2 => 
     array (
@@ -94,6 +110,33 @@ $dictionary['Account']['fields']['detalle_origen_c']['visibility_grid']=array (
       41 => '52',
       42 => '53',
       43 => '54',
+      44 => '55',
+      45 => '56',
+      46 => '57',
+      47 => '58',
+      48 => '59',
+      49 => '60',
+      50 => '61',
+      51 => '62',
+    ),
+    13 => 
+    array (
+      0 => '',
+      1 => '63',
+      2 => '64',
+    ),
+    14 => 
+    array (
+      0 => '',
+      1 => '65',
+    ),
+    15 => 
+    array (
+      0 => '',
+      1 => '66',
+      2 => '67',
+      3 => '68',
+      4 => '69',
     ),
     '' => 
     array (
