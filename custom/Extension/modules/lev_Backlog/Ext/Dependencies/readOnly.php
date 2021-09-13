@@ -222,7 +222,7 @@ $dependencies['lev_Backlog']['producto_readonly'] = array(
             'params' => array(
                 'target' => 'producto_c',
                 'label' => 'producto_label',
-                'value' => 'equal(0,'.$editar_backlog.')',
+                'value' => 'and(equal(0,'.$editar_backlog.'),not(equal($id,"")))',
             ),
         ),
     ),
