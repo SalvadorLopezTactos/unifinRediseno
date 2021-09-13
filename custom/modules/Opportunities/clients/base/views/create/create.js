@@ -2496,12 +2496,24 @@
                 success: _.bind(function (modelo) {
 
                     var tipoPersona = modelo.get('tipodepersona_c');
+                    var viableCreditCard = modelo.get('viable_tc_c');
 
                     if (tipoPersona == "Persona Fisica" && this.model.get('tipo_producto_c') == "14") {
 
                         app.alert.show('message-tipo-persona', {
                             level: 'error',
                             title: 'No se puede crear una solicitud con Tipo de Persona Física en el producto Tarjeta de Crédito.',
+                            autoClose: false
+                        });
+
+                        errors['account_name'] = errors['account_name'] || {};
+                        errors['account_name'].required = true;
+                    }
+                    if (this.model.get('tipo_producto_c') == "14" && viableCreditCard == false) {
+
+                        app.alert.show('message-viable-TC', {
+                            level: 'error',
+                            title: 'No se puede crear una solicitud de Tarjeta de Crédito ya que la cuenta No es viable.',
                             autoClose: false
                         });
 
