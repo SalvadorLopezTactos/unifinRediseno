@@ -7,4 +7,5 @@ $app_list_strings['tipo_venta_list']=array (
   3 => 'Garantía Prendaria',
   4 => 'Coche Seguro',
   5 => 'Post-arrendamiento',
+  6 => 'Post-Leasing',
 );

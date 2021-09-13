@@ -258,9 +258,11 @@
             </tr>
             <tr>
                 <td>Solicitud:</td>
-                <td>Tipo de operacion:</td>
+                <!--<td>Tipo de operacion:</td>-->
                 <td>Etapa:</td>
                 <td>Estatus:</td>
+				<td>Producto:</td>
+				<td colspan="6"></td>
             </tr>
             <tr>
                 <td>
@@ -270,13 +272,13 @@
                       {{/each}}
                     </select>
                 </td>
-                <td>
+                <!--<td>
                     <select id="tipo_operacion_filtro" class="filtros">
                       {{#each tipo_operacion_list_html}}
                         <option value="{{@key}}" {{ifSelected @key ../tipo_operacion_filtro}}>{{this}}</option>
                       {{/each}}
                     </select>
-                </td>
+                </td>-->
                 <td>
                     <select id="etapa_filtro" class="filtros">
                       {{#each etapa_list_html}}
@@ -291,8 +293,20 @@
                       {{/each}}
                     </select>
                 </td>
+				<td>
+                    <select id="producto_filtro" class="filtros">
+                      {{#each producto_list_html}}
+                        <option value="{{@key}}" {{ifSelected @key ../producto_filtro}}>{{this}}</option>
+                      {{/each}}
+                    </select>
+                </td>
+                <td colspan="6"> 
+                    <input type="button" value="Buscar" id="btn_Buscar" class="btn btn-primary filtros"/>
+                    <i class="fa fa-spinner fa-spin loadingIcon" style="display: none"></i>
+                    <span class="btn btn-success exportar filtros" tabindex="-1">Exportar a Excel</span>
+                </td>
             </tr>
-			<tr>
+			<!--<tr>
                 <td>Producto:</td>
 				<td></td>
 				<td colspan = "12"></td>
@@ -312,6 +326,7 @@
                 </td>
 				<td colspan="12"></td>
             </tr>
+			-->
         </table>
     </div>
 
@@ -479,7 +494,7 @@
                         </table>
                     </th>
 					-->
-					<!--
+					
                     <th width="5%" class="hide_monto_final_comprometido">
                         <table width="100%">
                             <tr>
@@ -487,7 +502,7 @@
                             </tr>
                         </table>
                     </th>
-					-->
+					<!--
                     <th width="5%" class="hide_ri_final_comprometida">
                         <table width="100%">
                             <tr>
@@ -495,6 +510,7 @@
                             </tr>
                         </table>
                     </th>
+					-->
                     <!--<th width="5%" class="hide_bl_actual">
                         <table width="100%">
                             <tr>
@@ -568,6 +584,7 @@
                             </tr>
                         </table>
                     </th>
+					<!--
                     <th width="15%" class="hide_progreso">
                         <table width="100%">
                             <tr>
@@ -575,21 +592,59 @@
                             </tr>
                         </table>
                     </th>
-                    <th width="15%" class="hide_conversion">
+					-->
+                    <!--<th width="15%" class="hide_conversion">
                         <table width="100%">
                             <tr>
                                 <td class="innerTableTd">Probabilidad de Conversión %</td>
                             </tr>
                         </table>
                     </th>
-                    <th width="15%" class="hide_motivo_rechazo">
+					-->
+                    <!--<th width="15%" class="hide_motivo_rechazo">
                         <table width="100%">
                             <tr>
                                 <td class="innerTableTd">Motivo de rechazo</td>
                             </tr>
                         </table>
                     </th>
-
+					-->
+					<th width="15%" class="hide_monto_prospecto">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Prospecto</td>
+                            </tr>
+                        </table>
+                    </th>
+					<th width="15%" class="hide_monto_credito">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Crédito</td>
+                            </tr>
+                        </table>
+                    </th>
+					<th width="15%" class="hide_monto_rechazado">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Rechazado</td>
+                            </tr>
+                        </table>
+                    </th>
+					<th width="15%" class="hide_sin_solicitud">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Sin solicitud</td>
+                            </tr>
+                        </table>
+                    </th>
+					<th width="15%" class="hide_con_solicitud">
+                        <table width="100%">
+                            <tr>
+                                <td class="innerTableTd">Con solicitud</td>
+                            </tr>
+                        </table>
+                    </th>
+					
                 </tr>
 
                 {{#each backlogs}}
@@ -612,8 +667,8 @@
                         <!--<th class="totales hide_monto_comprometido">{{customFormatNumber totales.total_monto_comprometido}}</th>-->
                         <!--<th class="totales hide_ri_comprometida">{{customFormatNumber totales.total_renta_inicial}}</th>-->
                         <!--<th class="totales hide_monto_diferencia">{{customFormatNumber totales.total_monto_diferencia}}</th>-->
-                        <!--<th class="totales hide_monto_final_comprometido">{{customFormatNumber totales.total_monto_final_comprometido}}</th>-->
-                        <th class="totales hide_ri_final_comprometida">{{customFormatNumber totales.total_renta_inicial_final}}</th>
+                        <th class="totales hide_monto_final_comprometido">{{customFormatNumber totales.total_monto_final_comprometido}}</th>
+                        <!--<th class="totales hide_ri_final_comprometida">{{customFormatNumber totales.total_renta_inicial_final}}</th>-->
                         <!--<th class="totales hide_bl_actual">{{customFormatNumber totales.total_bl_actual}}</th>-->
                         <th class="totales hide_pipeline_posterior">{{customFormatNumber totales.total_pipeline_posterior}}</th>
                         <!--<th class="totales hide_monto_real">{{customFormatNumber totales.total_monto_real}}</th>-->
@@ -623,9 +678,14 @@
                         <!--<th class="totales hide_tipo_operacion"></th>-->
                         <th class="totales hide_etapa_preliminar"></th>
                         <th class="totales hide_etapa"></th>
-                        <th class="totales hide_progreso"></th>
-                        <th class="totales hide_conversion"></th>
-                        <th class="totales hide_motivo_rechazo"></th>
+                        <!--<th class="totales hide_progreso"></th>-->
+                        <!--<th class="totales hide_conversion"></th>-->
+                        <!--<th class="totales hide_motivo_rechazo"></th>-->
+						<th class="totales hide_monto_prospecto"></th>
+						<th class="totales hide_monto_credito"></th>
+						<th class="totales hide_monto_rechazado"></th>
+						<th class="totales hide_sin_solicitud"></th>
+						<th class="totales hide_con_solicitud"></th>
                     </tr>
                 {{/each}}
 
@@ -667,8 +727,8 @@
                             <!--<td class="hide_monto_comprometido">{{customFormatNumber monto_comprometido}}</td>-->
                             <!--<td class="hide_ri_comprometida">{{customFormatNumber ri_comprometida}}</td>-->
                             <!--<td class="hide_monto_diferencia">{{customFormatNumber monto_diferencia}}</td>-->
-                            <!--<td class="hide_monto_final_comprometido">{{customFormatNumber monto_final_comprometido}}</td>-->
-                            <td class="hide_ri_final_comprometida">{{customFormatNumber ri_final_comprometida}}</td>
+                            <td class="hide_monto_final_comprometido">{{customFormatNumber monto_final_comprometido}}</td>
+                            <!--<td class="hide_ri_final_comprometida">{{customFormatNumber ri_final_comprometida}}</td>-->
                             <!--<td class="hide_bl_actual">{{customFormatNumber bl_actual}}</td>-->
                             <td class="hide_pipeline_posterior">{{customFormatNumber pipeline_posterior}}</td>
                             <!--<td class="hide_monto_real">{{customFormatNumber monto_real}}</td>-->
@@ -678,9 +738,14 @@
                             <!--<td class="hide_tipo_operacion">{{tipo_operacion}}</td>-->
                             <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
                             <td class="hide_etapa">{{etapa}}</td>
-                            <td class="hide_progreso">{{progreso}}</td>
-                            <td class="hide_conversion">{{conversion}}</td>
-                            <td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>
+                            <!--<td class="hide_progreso">{{progreso}}</td>-->
+                            <!--<td class="hide_conversion">{{conversion}}</td>-->
+                            <!--<td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>-->
+							<td class="hide_monto_prospecto">{{monto_prospecto}}</td>
+							<td class="hide_monto_credito">{{monto_credito}}</td>
+							<td class="hide_monto_rechazado">{{monto_rechazado}}</td>
+							<td class="hide_sin_solicitud">{{monto_sin_solicitud}}</td>
+							<td class="hide_con_solicitud">{{monto_con_solicitud}}</td>
                             <!--<td>-->
                             <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
                             <!--</td>-->
@@ -724,8 +789,8 @@
                                 <!--<td class="hide_monto_comprometido">{{customFormatNumber monto_comprometido}}</td>-->
                                 <!--<td class="hide_ri_comprometida">{{customFormatNumber ri_comprometida}}</td>-->
                                 <!--<td class="hide_monto_diferencia">{{customFormatNumber monto_diferencia}}</td>-->
-                                <!--<td class="hide_monto_final_comprometido">{{customFormatNumber monto_final_comprometido}}</td>-->
-                                <td class="hide_ri_final_comprometida">{{customFormatNumber ri_final_comprometida}}</td>
+                                <td class="hide_monto_final_comprometido">{{customFormatNumber monto_final_comprometido}}</td>
+                                <!--<td class="hide_ri_final_comprometida">{{customFormatNumber ri_final_comprometida}}</td>-->
                                 <!--<td class="hide_bl_actual">{{customFormatNumber bl_actual}}</td>-->
                                 <td class="hide_pipeline_posterior">{{customFormatNumber pipeline_posterior}}</td>
                                 <!--<td class="hide_monto_real">{{customFormatNumber monto_real}}</td>-->
@@ -735,10 +800,15 @@
                                 <!--<td class="hide_tipo_operacion">{{tipo_operacion}}</td>-->
                                 <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
                                 <td class="hide_etapa">{{etapa}}</td>
-                                <td class="hide_progreso">{{progreso}}</td>
-                                <td class="hide_conversion">{{conversion}}</td>
-                                <td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>
-                                <!--<td>-->
+                                <!--<td class="hide_progreso">{{progreso}}</td>-->
+                                <!--<td class="hide_conversion">{{conversion}}</td>-->
+                                <!--<td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>-->
+                                <td class="hide_monto_prospecto">{{monto_prospecto}}</td>
+								<td class="hide_monto_credito">{{monto_credito}}</td>
+								<td class="hide_monto_rechazado">{{monto_rechazado}}</td>
+								<td class="hide_sin_solicitud">{{monto_sin_solicitud}}</td>
+								<td class="hide_con_solicitud">{{monto_con_solicitud}}</td>
+								<!--<td>-->
                                 <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
                                 <!--</td>-->
 
@@ -786,8 +856,8 @@
                                             <!--<td class="hide_monto_comprometido">{{customFormatNumber monto_comprometido}}</td>-->
                                             <!--<td class="hide_ri_comprometida">{{customFormatNumber ri_comprometida}}</td>-->
                                             <!--<td class="hide_monto_diferencia">{{customFormatNumber monto_diferencia}}</td>-->
-                                            <!--<td class="hide_monto_final_comprometido">{{customFormatNumber monto_final_comprometido}}</td>-->
-                                            <td class="hide_ri_final_comprometida">{{customFormatNumber ri_final_comprometida}}</td>
+                                            <td class="hide_monto_final_comprometido">{{customFormatNumber monto_final_comprometido}}</td>
+                                            <!--<td class="hide_ri_final_comprometida">{{customFormatNumber ri_final_comprometida}}</td>-->
                                             <!--<td class="hide_bl_actual">{{customFormatNumber bl_actual}}</td>-->
                                             <td class="hide_pipeline_posterior">{{customFormatNumber pipeline_posterior}}</td>
                                             <!--<td class="hide_monto_real">{{customFormatNumber monto_real}}</td>-->
@@ -797,10 +867,15 @@
                                             <!--<td class="hide_tipo_operacion">{{tipo_operacion}}</td>-->
                                             <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
                                             <td class="hide_etapa">{{etapa}}</td>
-                                            <td class="hide_progreso">{{progreso}}</td>
-                                            <td class="hide_conversion">{{conversion}}</td>
-                                            <td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>
-                                            <!--<td>-->
+                                            <!--<td class="hide_progreso">{{progreso}}</td>-->
+                                            <!--<td class="hide_conversion">{{conversion}}</td>-->
+                                            <!--<td class="hide_motivo_rechazo">{{motivo_rechazo}}</td>-->
+                                            <td class="hide_monto_prospecto">{{monto_prospecto}}</td>
+											<td class="hide_monto_credito">{{monto_credito}}</td>
+											<td class="hide_monto_rechazado">{{monto_rechazado}}</td>
+											<td class="hide_sin_solicitud">{{monto_sin_solicitud}}</td>
+											<td class="hide_con_solicitud">{{monto_con_solicitud}}</td>
+											<!--<td>-->
                                             <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
                                             <!--</td>-->
                                         </tr>
@@ -847,8 +922,8 @@
                                         <!--<option value="hide_monto_comprometido">Monto Original</option>-->
                                         <!--<option value="hide_ri_comprometida">Pago Único Original</option>-->
                                         <!--<option value="hide_monto_diferencia">Diferencia</option>-->
-                                        <!--<option value="hide_monto_final_comprometido">Backlog</option>-->
-                                        <option value="hide_ri_final_comprometida">Pago Único</option>
+                                        <option value="hide_monto_final_comprometido">Backlog</option>
+                                        <!--<option value="hide_ri_final_comprometida">Pago Único</option>-->
                                         <!--<option value="hide_bl_actual">Backlog Actual</option>-->
                                         <option value="hide_pipeline_posterior">Colocacion Pipeline</option>
                                         <!--<option value="hide_monto_real">Colocación Real</option>-->
@@ -858,10 +933,15 @@
                                         <!--<option value="hide_tipo_operacion">Tipo de Operacion</option>-->
                                         <option value="hide_etapa_preliminar">Etapa Inicio Mes</option>
                                         <option value="hide_etapa">Etapa</option>
-                                        <option value="hide_progreso">Solicitud</option>
-                                        <option value="hide_conversion">Probabilidad de Conversión %</option>
-                                        <option value="hide_motivo_rechazo">Motivo de Rechazo</option>
-                                    </select>
+                                        <!--<option value="hide_progreso">Solicitud</option>-->
+                                        <!--<option value="hide_conversion">Probabilidad de Conversión %</option>-->
+                                        <!--<option value="hide_motivo_rechazo">Motivo de Rechazo</option>-->
+										<option value="hide_monto_prospecto">Prospecto</option>
+										<option value="hide_monto_credito">Crédito</option>
+										<option value="hide_monto_rechazado">Rechazado</option>
+										<option value="hide_sin_solicitud">Sin solicitud</option>
+										<option value="hide_con_solicitud">Con solicitud</option>
+									</select>
                                 </div>
                                 <div class="span1" style="margin-top: 20px;">
                                     <input type="button" value="Ejecutar" id="btn_ejecuta_ocultar_columnas" class="btn btn-success"/>

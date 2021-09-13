@@ -347,3 +347,4 @@ $mod_strings['LBL_RECORDVIEW_PANEL23'] = 'Página Web y Redes Sociales';
 $mod_strings['LBL_OFICINA'] = 'Oficina';
 $mod_strings['LBL_ALIANZA_SOC_CHK'] = 'Alianza SOC';
 $mod_strings['LBL_VIABLE_TC_C'] = 'Viable Tarjeta de Crédito';
+$mod_strings['LBL_ALTA_PORTAL_PROVEEDOR_CHK'] = 'Alta Portal Proveedor';
