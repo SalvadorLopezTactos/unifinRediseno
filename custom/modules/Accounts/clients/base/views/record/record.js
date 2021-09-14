@@ -14,7 +14,7 @@
         contexto_cuenta = this;
         self.hasContratosActivos = false;
         this._super("initialize", [options]);
-        
+
         this.context.on('button:cancel_button:click', this.handleCancel, this);
 
         this.totalllamadas = 0;
@@ -166,6 +166,8 @@
 
         this.events['click a[name=generar_rfc_c]'] = '_doGenera_RFC_CURP';
         this.events['click a[name=generar_curp_c]'] = '_doGeneraCURP';
+        //Evento boton Portal Proveedores
+        this.events['click a[name=portal_proveedores]'] = 'func_Proveedor';
 
         /* LEV INICIO */
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 7/14/2015 Description: Cuando estamos en el modulo de Personas, no queremos que se muestre la opcion Persona para el tipo de registro */
@@ -234,6 +236,7 @@
          */
         this.model.on('sync', this._hideNPS, this);
         this.model.on('sync', this.hideButton_Conversion, this);
+        this.model.on('sync', this.hideButton_Conversion_change, this);
 
         //Validacion para mostrar chk para cuentas homonimas
         this.model.on('sync', this.homonimo, this);
@@ -297,8 +300,7 @@
     		this.context.on('button:desaprobar_noviable:click', this.rechazar_noviable, this);
         this.context.on('button:reactivar_noviable:click', this.reactivar_noviable, this);
     		this.model.on('sync', this.bloqueo, this);
-             //Funcion para ocultar o no el boton de enviar a Portal Proveedores
-        this.model.on('sync', this.btnenvia_proveedor, this);
+
         this.context.on('button:open_negociador_quantico:click', this.open_negociador_quantico, this);
         /***************Validacion de Campos No viables en los Productos********************/
         this.model.addValidationTask('LeasingUP', _.bind(this.requeridosLeasingUP, this));
@@ -1133,7 +1135,7 @@
         $('div[data-name=tct_prospecto_contactado_chk_c]').hide();
          //Oculta campo proveedor
          $('[name="portal_proveedores"]').hide();
-         this.btnenvia_proveedor();
+
 
         // Validación para no poder inactivar clientes con contratos activos
         if (this.model.dataFetched) {
@@ -1193,7 +1195,7 @@
         //Evento para validar acciones
         $('a.btn.dropdown-toggle.btn-primary').on('click', function (e) {
             contexto_cuenta.hideButton_Conversion_change();
-            contexto_cuenta.btnenvia_proveedor();
+
         });
 
         if (app.user.attributes.cuenta_especial_c == 0 || app.user.attributes.cuenta_especial_c == "") {
@@ -1391,6 +1393,8 @@
         var myField1 = this.getField("prospectocontactado");
         var myField2 = this.getField("conviertelead");
         // var myField3 = this.getField("clienteuniclick");
+        var myField4 = this.getField("portal_proveedores");
+
         if (myField) {
             myField.listenTo(myField, "render", function () {
                 var leasingprod = Oproductos.productos.tct_tipo_cuenta_l_c;
@@ -1498,6 +1502,17 @@
         //         }
         //     });
         // }
+        if (myField4) {
+            myField4.listenTo(myField4, "render", function () {
+                myField4.hide();
+                if((this.model.get('esproveedor_c')=='1' || this.model.get('tipo_registro_cuenta_c')=='5') && App.user.attributes.portal_proveedores_c=='1' && !this.model.get('alta_portal_proveedor_chk_c')){
+                  myField4.show();
+                } else {
+                  myField4.hide();
+                }
+            });
+        }
+
     },
 
     hideButton_Conversion_change: function () {
@@ -1571,6 +1586,13 @@
         //     $('[name="conviertelead"]').hide();
         //     $('[name="prospectocontactado"]').hide();
         // }
+
+        //Boton de envio a Portal de Proveedores
+        if((this.model.get('esproveedor_c')=='1' || this.model.get('tipo_registro_cuenta_c')=='5') && App.user.attributes.portal_proveedores_c=='1' && !this.model.get('alta_portal_proveedor_chk_c')){
+            $('[name="portal_proveedores"]').show();
+          } else {
+            $('[name="portal_proveedores"]').hide();
+          }
     },
 
     /* @author F. Javier Garcia S. 10/07/2018
@@ -5078,7 +5100,7 @@
 
         //Recupera id de cliente
         var id = this.model.id;
-        
+
         //Forma Petición de datos
         if (id != '' && id != undefined && id != null) {
             //Ejecuta petición ResumenCliente
@@ -5262,7 +5284,7 @@
                     this.render();
                 }
                 //Refresca cambios en teléfonos, direcciones y pld(Recupera ids de nuevos teléfonos)
-                //location.reload();                
+                //location.reload();
                 this.get_uni_productos();
                 this.get_phones();
                 this.get_addresses();
@@ -5868,7 +5890,7 @@
 
         var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
         if(ResumenProductos.leasing != undefined && (document.getElementById("list_l_estatus_lm") != undefined || document.getElementById("list_l_estatus_lm") != null) ){
-                
+
             if( (productos.includes("1") && (App.user.attributes.id == ResumenProductos.leasing.assigned_user_id))
                     && (!ResumenProductos.leasing.notificacion_noviable_c)){
                 var faltantelm = 0;
@@ -5948,7 +5970,7 @@
                 }
             }
         }
-            
+
 
             /*if (faltantesleasup == 0 && $('.chk_l_nv')[0].checked == true && cont_uni_p.ResumenProductos.leasing.status_management_c != "3") {
                 this.model.set('promotorleasing_c', '9 - No Viable');
@@ -6021,9 +6043,9 @@
 
         var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
 
-        if( (document.getElementById("list_fac_estatus_lm") != undefined || document.getElementById("list_fac_estatus_lm") != null) && 
+        if( (document.getElementById("list_fac_estatus_lm") != undefined || document.getElementById("list_fac_estatus_lm") != null) &&
             ResumenProductos.factoring != undefined){
-        
+
         if( (productos.includes("4")&& (App.user.attributes.id == ResumenProductos.factoring.assigned_user_id))
             && (!ResumenProductos.factoring.notificacion_noviable_c)){
             var faltantelm = 0;
@@ -6493,7 +6515,7 @@
 
         if((document.getElementById("list_u_estatus_lm") != undefined || document.getElementById("list_u_estatus_lm") != null)
                 && ResumenProductos.uniclick != undefined){
-            
+
             if((productos.includes("8")&& (App.user.attributes.id == ResumenProductos.uniclick.assigned_user_id))
                 && (!ResumenProductos.uniclick.notificacion_noviable_c)){
                 var faltantelm = 0;
@@ -7292,22 +7314,6 @@
         });
     },
 
-    btnenvia_proveedor:function(){
-        var button= this.getField("portal_proveedores");
-        button.hide();
-            if (button) {
-                  button.listenTo(button, "render", function () {
-                       if((this.model.get('esproveedor_c')=='1' || this.model.get('tipo_registro_cuenta_c')=='5') && App.user.attributes.portal_proveedores_c=='1'){
-                        $('[name="portal_proveedores"]').show();
-                          //Accion próxima
-                          //window.open("#bwc/index.php?entryPoint=NegociadorQuantico&idPersona=" + idCuenta);
-                      } else {
-                        $('[name="portal_proveedores"]').hide();
-                      }
-                  });
-            }
-    },
-	
 	userAlianzaSoc: function () {
         //Recupera variables
         //var chksock = this.model.get('alianza_soc_chk_c');
@@ -7316,7 +7322,7 @@
         //var listaProductosSock = [];    //Recupera Ids de usuarios que pueden editar origen
         //listaProductosSock = app.lang.getAppListStrings('producto_soc_usuario_list');
 		var readonly = true;
-		
+
 		Object.entries(App.lang.getAppListStrings('producto_soc_usuario_list')).forEach(([key, value]) => {
             if(this.model.get(value) == idUser && productos.includes(key) ){
 				readonly = false;
@@ -7325,5 +7331,25 @@
 		if(readonly){
 			this.$("[data-name='alianza_soc_chk_c']").attr('style', 'pointer-events:none;');
 		}
+  },
+
+    func_Proveedor: function () {
+        App.alert.show('ProcesoProveedor', {
+            level: 'process',
+            title: 'Enviando cuenta a portal de proveedores, por favor espere.',
+        });
+        App.api.call("read", app.api.buildURL("AltaProveedor/" + this.model.get('id'), null, null, {}), null, {
+            success: _.bind(function (data) {
+                App.alert.dismiss('ProcesoProveedor');
+                var level = (data.status=='200')?'success':'error';
+                if (data.status!='400'){
+                    self.model.set('alta_portal_proveedor_chk_c', 1);
+                }
+                App.alert.show('alert_func_Proveedor', {
+                    level: level,
+                    messages: data.message,
+                });
+            }, this),
+        });
     },
 })

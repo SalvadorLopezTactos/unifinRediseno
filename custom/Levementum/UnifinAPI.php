@@ -2050,7 +2050,7 @@ SQL;
     {
         IF (($account->tipo_registro_cuenta_c == '5' || $account->esproveedor_c) && (empty($account->alta_proveedor_c) ? 0 : $account->alta_proveedor_c) == 0) {
             global $app_list_strings, $db, $current_user;
-            $host = 'http://' . $GLOBALS['esb_url'] . '/uni2/rest/creaUsuarioProveedor';
+            $host = 'http://' . $GLOBALS['esb_url'] . '/uni2/rest/registraProveedorUni2';
 
             $tipoProveedor = 'BIENES';
             $paisConstitucion = '';
@@ -2087,8 +2087,8 @@ SQL;
                 "email" => $account->emailAddress->getPrimaryAddress($account),
                 "primerNombreRazonSocial" => $account->tipodepersona_c == 'Persona Moral' ? $account->razonsocial_c : $account->primernombre_c . ' ' . $account->apellidopaterno_c . ' ' . $account->apellidomaterno_c,
                 "anioNacimiento" => intval(date('Y', $timestamp)),
-                "mesNacimiento" => intval(date('n', $timestamp)),
-                "diaNacimiento" => intval(date('j', $timestamp)),
+                //"mesNacimiento" => intval(date('n', $timestamp)),
+                //"diaNacimiento" => intval(date('j', $timestamp)),
                 "tipoProveedor" => $tipoProveedor,
                 "tipoPersona" => $account->tipodepersona_c,
                 "paisConstitucion" => ucfirst(strtolower($paisConstitucion)),
@@ -2402,13 +2402,13 @@ SQL;
                     'Content-Type: application/json',
                     'Authorization: Basic ' . $auth_encode)
             );
-            
+
             $result = curl_exec($ch);
             $curl_info = curl_getinfo($ch);
             $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $response = json_decode($result, true);
             $GLOBALS['log']->fatal('FIN PETICIÓN QUANTICO CF');
-            
+
             return $response;
         } catch (Exception $exception) {
 
@@ -2430,13 +2430,13 @@ SQL;
                     'Content-Type: application/json',
                     'Authorization: Basic ' . $auth_encode)
             );
-            
+
             $result = curl_exec($ch);
             $curl_info = curl_getinfo($ch);
             $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $response = json_decode($result, true);
             $GLOBALS['log']->fatal('FIN PETICIÓN  GetAssetRequest '.$nombre_lista);
-            
+
             return $response;
         } catch (Exception $exception) {
 

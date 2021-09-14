@@ -212,8 +212,9 @@ $dependencies['lev_Backlog']['numero_de_solicitud_readonly'] = array(
 );
 
 $dependencies['lev_Backlog']['producto_readonly'] = array(
-    'hooks' => array("edit"),
-    'onload' => 'true',
+    'hooks' => array("all"),
+    'onload' => true,
+    'trigger' => 'true',
     'triggerFields' => array('id'),
     'actions' => array(
         array(
@@ -221,7 +222,7 @@ $dependencies['lev_Backlog']['producto_readonly'] = array(
             'params' => array(
                 'target' => 'producto_c',
                 'label' => 'producto_label',
-                'value' => 'not(equal($id, ""))',
+                'value' => 'and(equal(0,'.$editar_backlog.'),not(equal($id,"")))',
             ),
         ),
     ),

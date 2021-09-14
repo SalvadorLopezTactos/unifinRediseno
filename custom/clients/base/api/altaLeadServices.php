@@ -358,7 +358,7 @@ class altaLeadServices extends SugarApi
 							# crea llamada
 							require_once("custom/clients/base/api/registroLlamada.php");
 							$apiCall = new registroLlamada();
-							$body=array('idCRM'=>$id_lead, 'tipo'=>'Leads');
+							$body=array('idCRM'=>$id_lead, 'tipo'=>'Leads', 'origen'=>1);
 							$result = $apiCall->registroLlamadas(null,$body);
 						}
                         if (!empty($parent_id)) {
@@ -567,6 +567,7 @@ class altaLeadServices extends SugarApi
         $bean_Lead->contacto_apellidom_c = $dataOrigen['contacto_apellidom_c'];
         $bean_Lead->contacto_telefono_c = $dataOrigen['contacto_telefono_c'];
         $bean_Lead->contacto_email_c = $dataOrigen['contacto_email_c'];
+        $bean_Lead->rfc_c = $dataOrigen['rfc_c'];
 
         # falta obtener el asignado a
 
