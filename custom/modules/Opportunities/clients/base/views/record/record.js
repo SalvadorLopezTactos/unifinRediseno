@@ -2592,8 +2592,8 @@
         }
         // Valida que sea Tarjeta de Credito y oculta condiciones financieras
         if (this.model.get('tipo_producto_c') == '14') {
-            this.$('div[data-name=condiciones_financieras]').hide();
-            this.$('div[data-name=condiciones_financieras_quantico]').hide();
+            $('div[data-name=condiciones_financieras]').addClass('hide');
+            $('div[data-name=condiciones_financieras_quantico]').addClass('hide');
         }
         //Se habilitan acciones existentes en render
         //no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
