@@ -40,7 +40,7 @@ class oppUnionService
             if ($bean->id_response_union_c == "" && $bean->tipo_producto_c == "14" && $beanCuenta->tipodepersona_c != "Persona Fisica") {
 
                 $GLOBALS['log']->fatal('*****Envia peticion al servicio de UNION*****');
-                $GLOBALS['log']->fatal('Solicitud con línea de crédito: ' . $bean->id);
+                // $GLOBALS['log']->fatal('Solicitud Tarjeta de Crédito: ' . $bean->id);
                 $url = $sugar_config['url_Union'];
                 $tipoPersona = ($beanCuenta->tipodepersona_c == "Persona Fisica con Actividad Empresarial") ? 2 : 3;
 
