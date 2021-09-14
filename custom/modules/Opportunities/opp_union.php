@@ -7,7 +7,7 @@ class oppUnionService
     function idResponseUnion($bean = null, $event = null, $args = null)
     {
 
-        global $sugar_config;
+        global $sugar_config, $db;
         $combinacionDirFiscal = array("2", "3", "6", "7", "10", "11", "14", "15", "18", "19", "22", "23", "26", "27", "30", "31");
         $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id, array('disable_row_level_security' => true));
 
@@ -81,7 +81,12 @@ class oppUnionService
                 if ($resultado != "" && $resultado != null) {
                     
                     if ($resultado['id'] != "") {
+                        
                         $bean->id_response_union_c = $resultado['id'];
+                        $query = "UPDATE opportunities_cstm
+                        SET id_response_union_c ='".$resultado['id']."'
+                        WHERE id_c = '".$bean->id."';";
+                        $result = $db->query($query);
                     }
                 }
 
