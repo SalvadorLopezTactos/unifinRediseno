@@ -1,5 +1,5 @@
 <?php
- // created: 2021-07-20 17:23:30
+ // created: 2021-09-13 16:36:56
 
 $app_list_strings['detalle_origen_list']=array (
   '' => '',
@@ -57,4 +57,36 @@ $app_list_strings['detalle_origen_list']=array (
   52 => 'KBP- Salud Patrimonial',
   53 => 'EMH Brokers',
   54 => 'Salud',
+  55 => 'Broker',
+  56 => 'CAINTRA',
+  57 => 'Leadgenius',
+  58 => 'Solucredit',
+  59 => 'SOS',
+  60 => 'Unifin',
+  61 => 'Viraal',
+  62 => 'KBP',
+  63 => 'Prospección Propia',
+  64 => 'Listas',
+  65 => 'Closer',
+  66 => 'Campañas Growth',
+  67 => 'NBA / NBO',
+  68 => 'RM',
+  69 => 'Uniclick',
+  70 => 'Arkeero',
+  71 => 'Dv360',
+  72 => 'El Economista',
+  73 => 'El Financiero',
+  74 => 'Expansión',
+  75 => 'Facebook',
+  76 => 'Facebook Ads',
+  77 => 'Google Ads',
+  78 => 'Inbound',
+  79 => 'Instagram',
+  80 => 'Orgánico',
+  81 => 'Quiminet',
+  82 => 'Redes Sociales',
+  83 => 'Reforma',
+  84 => 'Facebook Megri Digital',
+  85 => 'Google Megri Digital',
+
 );
