@@ -852,6 +852,7 @@
              "montoRealBacklog":backlog.monto_real,
              "comentariosExistentes":backlog.comentarios,
              "comentarioNuevo":"",
+             "producto": backlog.producto
         };
         //Valores default año y mes
         this.anio_filtro_popup_mover = ((new Date).getFullYear()).toString();
@@ -878,7 +879,8 @@
          var mes_popup = $('.mes_switch_popup').val();
          var anio_popup = $('.anio_switch_popup').val();
          var current_backlog = $('#mes_filtro').val();
-
+         var producto_backlog = this.newMoverMes.producto;
+         var idProducto = (producto_backlog=="LEASING") ? 1 : 2;
 
          if(_.isEmpty(anio_popup)){
              app.alert.show('anio requerido', {
@@ -901,9 +903,9 @@
 
          var id_account=arr_p[1];
 
-         var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&filter[3][estatus_operacion_c][$not_equals]=1&fields=id,mes,estatus_operacion_c',
+         var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&filter[3][estatus_operacion_c][$not_equals]=1&filter[4][producto_c][$equals]='+idProducto+'&fields=id,mes,estatus_operacion_c,producto_c',
              null, null, null);
-
+             
         $('#btn-Cancelar').prop('disabled',true);
         $('#btn-GuardarMover').prop('disabled',true);
          //Notificacion de inicio de proceso

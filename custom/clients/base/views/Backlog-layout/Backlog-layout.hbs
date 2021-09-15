@@ -17,6 +17,7 @@
         background: #000042 !important;
         color: #f5f5f5;
         font-weight: bold;
+        white-space: nowrap;
     }
 
     table  {
@@ -113,8 +114,12 @@
         overflow-y:auto;
         overflow-x:inherit;
         height: 500px;
-        white-space: nowrap;
+        /*white-space: nowrap;*/
         width: auto;
+    }
+
+    .backlogBodyInfo{
+        white-space: nowrap;
     }
 
     .btn-Guardar {
@@ -712,11 +717,11 @@
 							<td class="hide_estatus">{{producto}}</td>
 							<td class="hide_estatus">{{tipo_operacion_producto}}</td>
                             <td class="hide_estatus">{{estatus_operacion_c}}</td>
-                            <td class="hide_mes">{{mes}}-{{anio}}</td>
+                            <td class="hide_mes backlogBodyInfo">{{mes}}-{{anio}}</td>
                             <td class="hide_equipo">{{equipo}}</td>
                             <td class="hide_zona">{{zona}}</td>
                             <td class="hide_promotor"  title="{{promotor}}">{{iniciales}}</td>
-                            <td class="hide_cliente">
+                            <td class="hide_cliente backlogBodyInfo">
                                 <a href="#Accounts/{{clienteId}}" target="_blank">{{cliente}}</a>
                             </td>
                             <td class="hide_operacion">
