@@ -309,7 +309,7 @@
                         autoClose: false
                 });
             }*/
-            self.model.set('amount', this.model.get('monto_c'));
+            this.model.set('amount', this.model.get('monto_c'));
             var str = this.model.get('monto_c');
             var n = str.length;
             if (n > 22) {
@@ -2434,6 +2434,10 @@
 
                 errors['monto_c'] = errors['monto_c'] || {};
                 errors['monto_c'].required = true;
+
+            } else {
+
+                this.model.set('amount', this.model.get('monto_c'));
             }
 
             callback(null, fields, errors);
