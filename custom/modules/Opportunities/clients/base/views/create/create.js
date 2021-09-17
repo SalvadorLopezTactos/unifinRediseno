@@ -309,7 +309,7 @@
                         autoClose: false
                 });
             }*/
-            this.model.set('amount', this.model.get('monto_c'));
+            self.model.set('amount', this.model.get('monto_c'));
             var str = this.model.get('monto_c');
             var n = str.length;
             if (n > 22) {
@@ -322,16 +322,16 @@
             }
         }, this));
 
-        this.model.on("change:amount", _.bind(function () {
-            if (parseFloat(this.model.get('amount')) > parseFloat(this.model.get('monto_c'))) {
-                app.alert.show("Moto a operar invalido", {
-                    level: "error",
-                    title: "El monto a operar no puede ser mayor al monto de la linea.",
-                    autoClose: false
-                });
-                this.model.set('amount', this.model.get('monto_c'));
-            }
-        }, this));
+        // this.model.on("change:amount", _.bind(function () {
+        //     if (parseFloat(this.model.get('amount')) > parseFloat(this.model.get('monto_c'))) {
+        //         app.alert.show("Moto a operar invalido", {
+        //             level: "error",
+        //             title: "El monto a operar no puede ser mayor al monto de la linea.",
+        //             autoClose: false
+        //         });
+        //         this.model.set('amount', this.model.get('monto_c'));
+        //     }
+        // }, this));
 
         this.model.on("change:account_id", _.bind(function () {
             this.verificaOperacionProspecto();
