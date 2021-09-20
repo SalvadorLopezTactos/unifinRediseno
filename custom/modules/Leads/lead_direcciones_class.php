@@ -111,7 +111,7 @@ class lead_direcciones_class
                 if ($new) {
                     $direccion->save();
                 } else {
-                    $inactivo = $direccion->inactivo == 1 ? $direccion->inactivo : 0;
+                    /*$inactivo = $direccion->inactivo == 1 ? $direccion->inactivo : 0;
                     $principal = $direccion->principal == 1 ? $direccion->principal : 0;
                     $query = <<<SQL
 update dire_direccion set  name = '{$direccion->name}', tipodedireccion = '{$direccion->tipodedireccion}',indicador = '{$direccion->indicador}',  calle = '{$direccion->calle}', numext = '{$direccion->numext}', numint= '{$direccion->numint}', principal=$principal, inactivo =$inactivo  where id = '{$direccion->id}';
@@ -128,7 +128,7 @@ SQL;
                         $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : resultado " . $db->getAffectedRowCount($resultado));
                     } catch (Exception $e) {
                         $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
-                    }
+                    }*/
                 }
                 //$direccion->save();
             }
