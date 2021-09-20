@@ -1224,12 +1224,14 @@
              for(var i=0; i<countChecks;i++){
                  var current_element=this.checks_actualizar[i];
                  var idBacklog=current_element.getAttribute('data-id');
+                 var productoBacklog=current_element.getAttribute('data-producto');
+                 var idProducto = (productoBacklog=="LEASING") ? 1 : 2;
                  var bl_check=$('.MoverOperacion[data-id="'+idBacklog+'"]');
                  var str=bl_check.closest('tr').children('.hide_cliente').children('a').attr('href');
                  var num_bl=bl_check.closest('tr').children('.hide_operacion').children('a').text();
                  var arr_p=str.split('#Accounts/');
                  var id_account=arr_p[1];
-                 var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&fields=id,mes,estatus_operacion_c,name',
+                 var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&filter[3][producto_c][$equals]='+idProducto+'&fields=id,mes,estatus_operacion_c,name,producto_c',
                      null, null, null);
                 $('#btn-Cancelar').prop('disabled',true);
                 $('#btn-GuardarMoverMasiva').prop('disabled',true);
