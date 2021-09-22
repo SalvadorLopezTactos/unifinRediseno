@@ -7317,8 +7317,9 @@
 	userAlianzaSoc: function () {
         //Recupera variables
         //var chksock = this.model.get('alianza_soc_chk_c');
-        var productos = App.user.attributes.productos_c; //27=> Agente Tel, 31=> Coordinador CP,
-		var idUser = App.user.attributes.id; //27=> Agente Tel, 31=> Coordinador CP,
+        var productos = App.user.attributes.productos_c; //lista de productos del usuario,
+		var idUser = App.user.attributes.id; //Id del usuario,
+		var puesto = App.user.attributes.puestousuario_c; //27=> Agente Tel, 31=> Coordinador CP,
         //var listaProductosSock = [];    //Recupera Ids de usuarios que pueden editar origen
         //listaProductosSock = app.lang.getAppListStrings('producto_soc_usuario_list');
 		var readonly = true;
@@ -7328,6 +7329,13 @@
 				readonly = false;
 			}
         });
+		
+		Object.entries(App.lang.getAppListStrings('soc_usuario_list')).forEach(([key, value]) => {
+            if(value == idUser){
+				readonly = false;
+			}
+        });
+		
 		if(readonly){
 			this.$("[data-name='alianza_soc_chk_c']").attr('style', 'pointer-events:none;');
 		}
