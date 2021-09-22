@@ -249,9 +249,15 @@ SQL;
         $generaSolicitud = ($args['isUpdate'] == 1 && $bean->admin_cartera_c) ? true : $generaSolicitud;
         $generaSolicitud = ($args['isUpdate'] == 1 && $row['no_viable'] == '1') ? false: $generaSolicitud;
         $generaSolicitud = ($app_list_strings['switch_inicia_proceso_list']['ejecuta'] == 1) ? $generaSolicitud: false;   //Control para swith que indica si debe ejecutar o no inicia-proceso a uni2
-        /*$GLOBALS['log']->fatal('valor Genera Solicitud JG: ' . $generaSolicitud);
-        $GLOBALS['log']->fatal('Id process JG: ' . $bean->id_process_c);
-        $GLOBALS['log']->fatal('Tipo operacion JG: ' . $bean->tipo_operacion_c);*/
+
+        /*Preguntar sobre el tipo de producto Leasing  y producto financiero  para la creacion de SOS
+          Línea con monto mayor/igual a 7.5 millones & Línea Leasing con id proceso
+        */
+        //$GLOBALS['log']->fatal('if para sos ' .$bean->id_process_c);
+        if ($bean->tipo_producto_c == 1 && ($bean->producto_financiero_c == 0 ||$bean->producto_financiero_c == "") && $bean->monto_c >= 7500000 ) {
+            $GLOBALS['log']->fatal('Valida creación de SOS' );
+            OpportunityLogic::solicitudSOS($bean);
+        }
 
         if ($generaSolicitud) {
             $GLOBALS['log']->fatal('Entra if valor generaSolicitud: ' . $generaSolicitud);
@@ -316,16 +322,7 @@ SQL;
                               SET id_process_c =  '$process_id'
                               WHERE id_c = '{$bean->id}'";
                     $queryResult = $db->query($query);
-                    /*Preguntar sobre el tipo de producto Leasing  y producto financiero  para la creacion de SOS
-                      Línea con monto mayor/igual a 7.5 millones & Línea Leasing con id proceso
-                    */
-                    //$GLOBALS['log']->fatal('if para sos ' .$bean->id_process_c);
-                    if ($bean->tipo_producto_c == 1 && ($bean->producto_financiero_c == 0 ||$bean->producto_financiero_c == "") && $bean->monto_c >= 7500000 && !empty($bean->id_process_c)) {
-                        $GLOBALS['log']->fatal('Entra if para sos ' );
 
-                        //Manda a llamar a la funcion solicitudSOS para la generacion de la copia de la linea SOS con Leasing
-                        OpportunityLogic::solicitudSOS($bean);
-                    }
                     if ($bean->id_process_c != 0 && $bean->id_process_c != null && $bean->id_process_c != "-1" && $bean->id_process_c != ""
                         && $bean->tipo_producto_c != 4) {
                         $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . "  <" . $current_user->user_name . "> : Despues de generar Process debe actualizarse la lista de condiciones financieras ");
@@ -1242,11 +1239,11 @@ function actualizaTipoCuenta($tipo=null, $subtipo=null, $idCuenta=null, $tipoPro
             }
         }
     }
-    
+
             function InfoMeet($bean = null, $event = null, $args = null)
           {
-    
-                if (!$args['isUpdate']) { 
+
+                if (!$args['isUpdate']) {
                             global $db ,$current_user;
                             $GLOBALS['log']->fatal("InfoMeet: Inicio");
                             //Realiza consulta para obtener info del usuario asignado
@@ -1272,7 +1269,7 @@ function actualizaTipoCuenta($tipo=null, $subtipo=null, $idCuenta=null, $tipoPro
                            $bean->creado_puesto_c=$current_user->puestousuario_c;
                            $GLOBALS['log']->fatal("InfoMeet: Finaliza");
                 }
-          }		          
-    
+          }
+
 
 }
