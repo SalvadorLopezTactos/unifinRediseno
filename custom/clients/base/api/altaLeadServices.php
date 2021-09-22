@@ -29,28 +29,28 @@ class altaLeadServices extends SugarApi
     public function leadAltaServicio($api, $args)
     {
         $response_Services = ["lead" => array(), "asociados" => array()];
-// Valida que regimen fiscal no este vacio
+        // Valida que regimen fiscal no este vacio
         $os = array("1", "2", "3");
 
-# OB003 Ajuste, tipo regimen fiscal valido
+        # OB003 Ajuste, tipo regimen fiscal valido
         if (!empty($args['lead']['regimen_fiscal_c']) && (in_array($args['lead']['regimen_fiscal_c'], $os, true))) {
 
             /** Agregamos atributos a cada lead y asociado */
-
             $obj_leads = $this->agrega_atributos($args);
-
-			// Obtiene Compañía
-			$compania_c = $args['lead']['compania_c'];
-
+            // Obtiene Compañía
+            $compania_c = $args['lead']['compania_c'];
             // Obtiene id_landing
-			$id_landing_c = $args['lead']['id_landing_c'];
+            $id_landing_c = $args['lead']['id_landing_c'];
+            //OBTIENE EL ORIGEN
+            $origen = $args['lead']['origen_c'];
+            //OBTIENE EL DETALLE ORIGEN
+            $detalleOrigen = $args['lead']['detalle_origen_c'];
 
             if ($args['lead']['regimen_fiscal_c'] != '3') {
                 $obj_leads['lead'] = $this->sec_validacion($obj_leads['lead']);
                 $response_Services['lead'] = $this->insert_Leads_Asociados($obj_leads['lead'], "");
-// Actualizamos el campo asignado a de cada registro nuevo
-                $this->get_asignado($response_Services, "1", $compania_c , $id_landing_c);
-
+                // Actualizamos el campo asignado a de cada registro nuevo
+                $this->get_asignado($response_Services, "1", $compania_c, $id_landing_c, $origen, $detalleOrigen);
             } else {
                 /** PErsona Moral */
 
@@ -81,7 +81,7 @@ class altaLeadServices extends SugarApi
                     }
                 }*/
                 // Actualizamos el campo asignado a de cada registro nuevo
-                $this->get_asignado($response_Services, "3", $compania_c , $id_landing_c);
+                $this->get_asignado($response_Services, "3", $compania_c, $id_landing_c, $origen, $detalleOrigen);
                 /*  } else {
 
                       $GLOBALS['log']->fatal(print_r($obj_leads, true));
@@ -108,10 +108,9 @@ class altaLeadServices extends SugarApi
                 /*} else {
                     $response_Services ["lead"] = $this->estatus(422, 'Debe contenener al menos un contacto asociado', '', "", "");
                 }*/
-
             }
         } else {
-            $response_Services ["lead"] = $this->estatus(422, 'Información incompleta', '', "", "");
+            $response_Services["lead"] = $this->estatus(422, 'Información incompleta', '', "", "");
         }
 
         //$GLOBALS['log']->fatal(print_r($response_Services, true));
@@ -153,10 +152,22 @@ class altaLeadServices extends SugarApi
         return $obj_leads;
     }
 
-    public function get_asignado($data_result, $regimenFiscal, $compania_c , $id_landing_c)
+    public function get_asignado($data_result, $regimenFiscal, $compania_c, $id_landing_c, $origen = null, $detalleOrigen = null)
     {
-        global $db;
+        global $db, $app_list_strings;
+        $alianzas_carrusel_do_list = $app_list_strings['alianzas_carrusel_do_list'];
+        $alianzas_responable_do_list = $app_list_strings['alianzas_responable_do_list'];
         $users = [];
+        $key_carrusel_do_list = [];
+        $key_responable_do_list = [];
+
+        foreach ($alianzas_carrusel_do_list as $key => $value) {
+            $key_carrusel_do_list[] = $key;
+        }
+        foreach ($alianzas_responable_do_list as $key => $value) {
+            $key_responable_do_list[] = $key;
+        }
+        
         /* Obetenemos el id del usuario de grupo de 9.- MKT*/
         $QueryId = "SELECT id from users
         WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
@@ -177,8 +188,12 @@ class altaLeadServices extends SugarApi
         //$GLOBALS['log']->fatal("compania_c " . $compania_c);
         /* Obtiene el ultimo  usuario asignado y registrado en el config*/
         $query = "SELECT value from config  ";
-        if($compania_c == '1'){ $query = $query . "WHERE name='last_assigned_user_unifin'"; }
-        if($compania_c == '2'){ $query = $query . "WHERE name='last_assigned_user_uniclick'"; }
+        if ($compania_c == '1') {
+            $query = $query . "WHERE name='last_assigned_user_unifin'";
+        }
+        if ($compania_c == '2') {
+            $query = $query . "WHERE name='last_assigned_user_uniclick'";
+        }
         //$GLOBALS['log']->fatal("query " . $query);
 
         $result = $db->query($query);
@@ -189,11 +204,11 @@ class altaLeadServices extends SugarApi
         if ($id_landing_c != 'LP Revista Médica' && $id_landing_c != 'LP REVISTA MÉDICA') {
 
             //$GLOBALS['log']->fatal("id_landing_c "  , $id_landing_c);
-            if( strpos(strtoupper($id_landing_c), 'INSURANCE') !== false){
+            if (strpos(strtoupper($id_landing_c), 'INSURANCE') !== false) {
                 $subpuesto_c = 5;
-            }else{
-                if($compania_c == 1) $subpuesto_c = 3;
-                if($compania_c == 2) $subpuesto_c = 4;
+            } else {
+                if ($compania_c == 1) $subpuesto_c = 3;
+                if ($compania_c == 2) $subpuesto_c = 4;
             }
 
             $query_asesores = "SELECT
@@ -236,11 +251,48 @@ class altaLeadServices extends SugarApi
             //$GLOBALS['log']->fatal("Usuarios MKT en servicio alta Leads  " . print_r($users, true));
             if (count($users) > 0) {
                 $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
-                $new_assigned_user = $users[$new_indice];
+                
+                if ($compania_c == 2 && $origen == 1) { //COMPANIA UNICLICK Y ORIGEN MARKETING
+                    $new_assigned_user = $users[$new_indice];
+                    // $GLOBALS['log']->fatal("UNICLICK-ORIGEN "  . $new_assigned_user);
+                } elseif ($compania_c == 2 && $origen == 12 && in_array($detalleOrigen, $key_carrusel_do_list)) { //COMPANIA UNICLICK, ORIGEN ALIANZAS Y DETALLE ORIGEN
+                    $new_assigned_user = $users[$new_indice];
+                    // $GLOBALS['log']->fatal("UNICLICK-ORIGEN-CARRUSEL "  . $new_assigned_user);
+                } else {
+                    $new_assigned_user = $users[$new_indice];
+                    // $GLOBALS['log']->fatal("ASESOR ASIGNADO POR CARRUSEL SIN VALIDACION "  . $new_assigned_user);
+                }
 
             } else {
-                /* No existen usuarios disponibles y se asigna a  9.- MKT " */
-                $new_assigned_user = $idMKT;
+
+                $query = "SELECT category, name, value from config where category = 'AltaLeadsServices'";
+                $result = $db->query($query);
+
+                while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
+
+                    if ($row['name'] == 'id_usuario_alianza') $idAsesorAlianza = $row['value'];
+                    if ($row['name'] == 'id_usuario_centro_prospeccion') $idAsesorCP = $row['value'];
+                    if ($row['name'] == 'id_usuario_closer') $idAsesorCloser = $row['value'];
+                    if ($row['name'] == 'id_usuario_growth') $idAsesorGrowth = $row['value'];
+                }
+                
+                if ($compania_c == 2 && $origen == 12 && in_array($detalleOrigen, $key_responable_do_list)) { //COMPANIA UNICLICK, ORIGEN ALIANZAS Y DETALLE ORIGEN
+                    $new_assigned_user = $idAsesorAlianza;
+                    // $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-ALIANZA "  . $new_assigned_user);
+                } elseif ($compania_c == 2 && $origen == 13) { //COMPANIA UNICLICK Y ORIGEN CENTRO DE PROSPECCION
+                    $new_assigned_user = $idAsesorCP;
+                    // $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-CP "  . $new_assigned_user);
+                } elseif ($compania_c == 2 && $origen == 14) { //COMPANIA UNICLICK Y ORIGEN CLOSER
+                    $new_assigned_user = $idAsesorCloser;
+                    // $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-CLOSER "  . $new_assigned_user);
+                } elseif ($compania_c == 2 && $origen == 15) { //COMPANIA UNICLICK Y ORIGEN GROWTH
+                    $new_assigned_user = $idAsesorGrowth;
+                    // $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-GROWTH "  . $new_assigned_user);
+                } else {
+                    // No existen usuarios disponibles y se asigna a  9.- MKT "
+                    $new_assigned_user = $idMKT;
+                    // $GLOBALS['log']->fatal("ID_MKT "  . $new_assigned_user);
+                }
             }
 
         } else {
@@ -278,52 +330,63 @@ class altaLeadServices extends SugarApi
 
                 $id_lead = $data_result['lead']['id'];
 
-                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='".$new_assigned_user."' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead' ";
+                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead' ";
                 $db->query($update_assigne_user);
                 $GLOBALS['log']->fatal("Usuarios MKT en servicio alta Indice  " . $new_indice);
 
-                if ( $new_indice > -1 ) {
-                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' " ;
-                    if($compania_c == '1'){ $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_unifin'"; }
-                    if($compania_c == '2'){ $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_uniclick'"; }
+                if ($new_indice > -1) {
+                    $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' ";
+                    if ($compania_c == '1') {
+                        $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_unifin'";
+                    }
+                    if ($compania_c == '2') {
+                        $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_uniclick'";
+                    }
                     $db->query($update_assigne_user);
                 }
             }
         } else {
 
             if ($data_result['lead']['status'] == 200 && $data_result['asociados'][0]['status'] == 200) {
-               // $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
-               // $new_assigned_user = $users[$new_indice];
+                // $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
+                // $new_assigned_user = $users[$new_indice];
                 $id_lead = $data_result['lead']['id'];
                 $id_lead_asociado = $data_result['asociados'][0]['id'];
 
                 // Actualiza lead padre
-                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='".$new_assigned_user."' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead'";
+                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead'";
                 $db->query($update_assigne_user);
                 //Actualiza lead Hijo
-                $update_assigne_user_asociado = "UPDATE leads l INNER JOIN users u on u.id='".$new_assigned_user."' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead_asociado' ";
+                $update_assigne_user_asociado = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead_asociado' ";
                 $db->query($update_assigne_user_asociado);
 
-                if ( $new_indice > -1 ) {
+                if ($new_indice > -1) {
                     $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' ";
-                    if($compania_c == '1'){ $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_unifin'"; }
-                    if($compania_c == '2'){ $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_uniclick'"; }
+                    if ($compania_c == '1') {
+                        $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_unifin'";
+                    }
+                    if ($compania_c == '2') {
+                        $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_uniclick'";
+                    }
                     $db->query($update_assigne_user);
                 }
-
             } elseif ($data_result['lead']['status'] == 200) {
 
-               // $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
+                // $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
                 //$new_assigned_user = $users[$new_indice];
                 $id_lead = $data_result['lead']['id'];
 
-                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='".$new_assigned_user."' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead' ";
+                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$new_assigned_user'  WHERE l.id ='$id_lead' ";
                 $db->query($update_assigne_user);
 
-                if ( $new_indice > -1 ) {
+                if ($new_indice > -1) {
                     $update_assigne_user = "UPDATE config SET value = $new_indice  WHERE category = 'AltaLeadsServices' ";
-                    if($compania_c == '1'){ $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_unifin'"; }
-                    if($compania_c == '2'){ $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_uniclick'"; }
+                    if ($compania_c == '1') {
+                        $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_unifin'";
+                    }
+                    if ($compania_c == '2') {
+                        $update_assigne_user = $update_assigne_user . "AND name = 'last_assigned_user_uniclick'";
+                    }
                     $db->query($update_assigne_user);
                 }
             } elseif (($data_result['lead']['status'] == 503 && $data_result['lead']['modulo'] == 'Leads') && $data_result['asociados'][0]['status'] == 200) {
@@ -336,13 +399,10 @@ class altaLeadServices extends SugarApi
                 $row = $db->fetchByAssoc($result_existente);
                 $existente_asignado = $row['assigned_user_id'];
 
-                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='".$new_assigned_user."' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$existente_asignado'  WHERE l.id ='$id_lead_asociado' ";
+                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $new_assigned_user . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='$existente_asignado'  WHERE l.id ='$id_lead_asociado' ";
                 $db->query($update_assigne_user);
-
             }
-
         }
-
     }
 
     public function insert_Leads_Asociados($lead_asociado, $parent_id)
@@ -354,13 +414,13 @@ class altaLeadServices extends SugarApi
                     if ($lead_asociado['formato_texto'] != 'fail' && $lead_asociado['formato_telefenos'] != 'fail' && $lead_asociado['formato_correo'] != 'fail') {
                         # inserta
                         $id_lead = $this->crea_Lead($lead_asociado);
-						if (!empty($id_lead)) {
-							# crea llamada
-							require_once("custom/clients/base/api/registroLlamada.php");
-							$apiCall = new registroLlamada();
-							$body=array('idCRM'=>$id_lead, 'tipo'=>'Leads', 'origen'=>1);
-							$result = $apiCall->registroLlamadas(null,$body);
-						}
+                        if (!empty($id_lead)) {
+                            # crea llamada
+                            require_once("custom/clients/base/api/registroLlamada.php");
+                            $apiCall = new registroLlamada();
+                            $body = array('idCRM' => $id_lead, 'tipo' => 'Leads', 'origen' => 1);
+                            $result = $apiCall->registroLlamadas(null, $body);
+                        }
                         if (!empty($parent_id)) {
                             # crea la relacion lead asociado
                             $this->crea_relacion($parent_id, $id_lead);
@@ -647,7 +707,6 @@ class altaLeadServices extends SugarApi
                 if (!empty($data[$campo])) {
                     if (preg_match($expresion, $data[$campo]) != 1) {
                         array_push($error_campo, $campo);
-
                     }
                 }
             }
@@ -698,7 +757,6 @@ class altaLeadServices extends SugarApi
                     if ($repetido == strlen($data[$telefono])) {
                         array_push($error_telefonos, $telefono);
                     }
-
                 }
             }
         }
@@ -717,10 +775,10 @@ class altaLeadServices extends SugarApi
 
         //Consumir servicio de cleanName, declarado en custom api
         require_once("custom/clients/base/api/cleanName.php");
-        $apiCleanName= new cleanName();
-        $body=array('name'=>$nombre);
-        $response=$apiCleanName->getCleanName(null,$body);
-        if ($response['status']=='200') {
+        $apiCleanName = new cleanName();
+        $body = array('name' => $nombre);
+        $response = $apiCleanName->getCleanName(null, $body);
+        if ($response['status'] == '200') {
             $clean_name = $response['cleanName'];
         }
 
@@ -815,14 +873,14 @@ class altaLeadServices extends SugarApi
         if ($idaccount != null || $idaccount != '') {
             $beanaccount = BeanFactory::retrieveBean('Accounts', $idaccount);
             $cliente = $beanaccount->name;
-			$linkCuenta=$GLOBALS['sugar_config']['site_url'].'/#Accounts/'.$beanaccount->id;
-			$cuenta = '<b><a id="linkCuenta" href="'.$linkCuenta.'">'.$cliente.'</a></b>';
+            $linkCuenta = $GLOBALS['sugar_config']['site_url'] . '/#Accounts/' . $beanaccount->id;
+            $cuenta = '<b><a id="linkCuenta" href="' . $linkCuenta . '">' . $cliente . '</a></b>';
             if ($beanaccount->load_relationship('accounts_uni_productos_1')) {
                 $GLOBALS['log']->fatal('Envío mail x producto');
                 //Fetch related beans
                 $relatedBeans = $beanaccount->accounts_uni_productos_1->getBeans();
                 foreach ($relatedBeans as $rel) {
-					$mailHTML = str_replace($user1, 'user1', $mailHTML);
+                    $mailHTML = str_replace($user1, 'user1', $mailHTML);
                     $usuario = BeanFactory::retrieveBean('Users', $rel->assigned_user_id);
                     $user_name = $usuario->user_name;
                     $correo = $usuario->email1;
@@ -845,16 +903,16 @@ class altaLeadServices extends SugarApi
         } else if ($idlead != null && ($idaccount == null || $idaccount == '')) {
             $beanlead = BeanFactory::retrieveBean('Leads', $idlead, array('disable_row_level_security' => true));
             $cliente = $beanlead->name;
-			$linkLead=$GLOBALS['sugar_config']['site_url'].'/#Leads/'.$beanlead->id;
-			$lead = '<b><a id="linkLead" href="'.$linkLead.'">'.$cliente.'</a></b>';
+            $linkLead = $GLOBALS['sugar_config']['site_url'] . '/#Leads/' . $beanlead->id;
+            $lead = '<b><a id="linkLead" href="' . $linkLead . '">' . $cliente . '</a></b>';
             $usuario = BeanFactory::retrieveBean('Users', $beanlead->assigned_user_id, array('disable_row_level_security' => true));
             $correo = $usuario->email1;
             $user1 = $usuario->nombre_completo_c;
             $mailHTML = str_replace('user1', $user1, $mailHTML);
             $mailHTML = str_replace('cliente1', $lead, $mailHTML);
             if (!empty($correo)) {
-				$GLOBALS['log']->fatal('Envío mail x Lead');
-				$GLOBALS['log']->fatal('cliente: ' . $cliente . ' usuario: ' . $user1 . ' correo: ' . $correo);
+                $GLOBALS['log']->fatal('Envío mail x Lead');
+                $GLOBALS['log']->fatal('cliente: ' . $cliente . ' usuario: ' . $user1 . ' correo: ' . $correo);
                 $mailer = MailerFactory::getSystemDefaultMailer();
                 $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
                 $mailer->setSubject('Seguimiento de Campaña Digital a Cliente/Prospecto ' . $cliente . '.');
@@ -870,12 +928,12 @@ class altaLeadServices extends SugarApi
     public function accessHours($from, $eat, $return, $to, $login)
     {
         $dateFrom = date("H:i", strtotime($from));
-		$dateEat = date("H:i", strtotime($eat));
-		$dateRet = date("H:i", strtotime($return));
+        $dateEat = date("H:i", strtotime($eat));
+        $dateRet = date("H:i", strtotime($return));
         $dateTo = date("H:i", strtotime($to));
         $dateLogin = date("H:i", strtotime($login));
-		if($dateFrom <= $dateLogin && $dateLogin <= $dateTo) $enable = 1;
-		if($dateEat <= $dateLogin && $dateLogin <= $dateRet) $enable = 0;
+        if ($dateFrom <= $dateLogin && $dateLogin <= $dateTo) $enable = 1;
+        if ($dateEat <= $dateLogin && $dateLogin <= $dateRet) $enable = 0;
         return ($enable);
     }
 }

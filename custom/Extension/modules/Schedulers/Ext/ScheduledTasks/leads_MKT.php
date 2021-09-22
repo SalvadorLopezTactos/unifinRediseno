@@ -3,8 +3,19 @@ array_push($job_strings, 'assignLeadMktToUser');
 
 function assignLeadMktToUser()
 {
-    $GLOBALS['log']->fatal("INICIA JOB REASIGNAR LEADS CON USR GRUPO 9.- MKT A USR AGENTE TELEFONICO" );
-    global $db;
+    $GLOBALS['log']->fatal("INICIA JOB REASIGNAR LEADS CON USR GRUPO 9.- MKT A USR AGENTE TELEFONICO");
+    global $db, $app_list_strings;
+    $alianzas_carrusel_do_list = $app_list_strings['alianzas_carrusel_do_list'];
+    $alianzas_responable_do_list = $app_list_strings['alianzas_responable_do_list'];
+    $key_carrusel_do_list = [];
+    $key_responable_do_list = [];
+
+    foreach ($alianzas_carrusel_do_list as $key => $value) {
+        $key_carrusel_do_list[] = $key;
+    }
+    foreach ($alianzas_responable_do_list as $key => $value) {
+        $key_responable_do_list[] = $key;
+    }
     /* Obetenemos el id del usuario de grupo de 9.- MKT*/
     $QueryId = "SELECT id from users
     WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
@@ -12,36 +23,74 @@ function assignLeadMktToUser()
     $row = $db->fetchByAssoc($queryResultId);
     $idMKT = $row['id'];
     /** Buscamos los Leads que tengan asignados el usuario de grupo 9.- MKT */
-    $getLeads = "select a.id id, b.compania_c compania , b.id_landing_c id_landing_c from leads a, leads_cstm b where a.id = b.id_c and a.assigned_user_id='{$idMKT}'";
+    $getLeads = "SELECT a.id id, b.compania_c compania , b.id_landing_c id_landing_c, b.origen_c origen_c, b.detalle_origen_c detalle_origen_c from leads a, leads_cstm b where a.id = b.id_c and a.assigned_user_id='{$idMKT}'";
     $ResultLeads = $db->query($getLeads);
     while ($row = $GLOBALS['db']->fetchByAssoc($ResultLeads)) {
-		// Obtiene Compañía
-		$compania_c = $row['compania'];
-        // Obtiene id_landing
-		$id_landing_c = $row['id_landing_c'];
+
+        $compania_c = $row['compania']; // Obtiene Compañía
+        $origen_c = $row['origen_c']; //Obtiene Origen 
+        $detalle_origen_c = $row['detalle_origen_c']; //Obtiene Detalle Origen 
+        $id_landing_c = $row['id_landing_c']; // Obtiene id_landing
 
         //VALIDACION DE REVISTA MEDICA
-        if ($id_landing_c != 'LP REVISTA MÉDICA') { 
-		
-            if( strpos(strtoupper($id_landing_c), 'INSURANCE') !== false){
-                $subpuesto_c = 5;  
-            }else{
-                if($compania_c == 1) $subpuesto_c = 3;
-                if($compania_c == 2) $subpuesto_c = 4;
+        if ($id_landing_c != 'LP REVISTA MÉDICA') {
+
+            if (strpos(strtoupper($id_landing_c), 'INSURANCE') !== false) {
+                $subpuesto_c = 5;
+            } else {
+                if ($compania_c == 1) $subpuesto_c = 3;
+                if ($compania_c == 2) $subpuesto_c = 4;
             }
-            
-            $usrEnable = GetUserMKT($subpuesto_c,$compania_c);
+
+            $usrEnable = GetUserMKT($subpuesto_c, $compania_c);
             $indices = $usrEnable['indice'];
             if (!empty($usrEnable['id'])) {
-                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='".$usrEnable['id']."' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$usrEnable['id']}'  WHERE l.id ='{$row['id']}' ";
+                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $usrEnable['id'] . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$usrEnable['id']}'  WHERE l.id ='{$row['id']}' ";
                 $db->query($update_assigne_user);
                 if ($indices > -1) {
-                    if($compania_c == 1) $update_assigne_user = "UPDATE config SET value = $indices WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user_unifin'";
-					if($compania_c == 2) $update_assigne_user = "UPDATE config SET value = $indices WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user_uniclick'";
+                    if ($compania_c == 1) $update_assigne_user = "UPDATE config SET value = $indices WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user_unifin'";
+                    if ($compania_c == 2) $update_assigne_user = "UPDATE config SET value = $indices WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user_uniclick'";
+                    //COMPANIA UNICLICK Y ORIGEN MARKETING
+                    if ($compania_c == 2 && $origen_c == 1) $update_assigne_user = "UPDATE config SET value = $indices WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user_uniclick'";
+                    //COMPANIA UNICLICK, ORIGEN ALIANZAS Y DETALLE ORIGEN
+                    if ($compania_c == 2 && $origen_c == 12 && in_array($detalle_origen_c, $key_carrusel_do_list)) $update_assigne_user = "UPDATE config SET value = $indices WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user_uniclick'";
+
                     $db->query($update_assigne_user);
                 }
             }
-        
+
+            $query = "SELECT category, name, value from config where category = 'AltaLeadsServices'";
+            $result = $db->query($query);
+
+            while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
+
+                if ($row['name'] == 'id_usuario_alianza') $idAsesorAlianza = $row['value'];
+                if ($row['name'] == 'id_usuario_centro_prospeccion') $idAsesorCP = $row['value'];
+                if ($row['name'] == 'id_usuario_closer') $idAsesorCloser = $row['value'];
+                if ($row['name'] == 'id_usuario_growth') $idAsesorGrowth = $row['value'];
+            }
+
+            //COMPANIA UNICLICK, ORIGEN ALIANZAS Y DETALLE ORIGEN
+            if ($compania_c == 2 && $origen_c == 12 && in_array($detalle_origen_c, $key_responable_do_list)) {
+                $update_assigned_responsable = "UPDATE leads l INNER JOIN users u on u.id='" . $idAsesorAlianza . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$idAsesorAlianza}'  WHERE l.id ='{$row['id']}'";
+                $db->query($update_assigned_responsable);
+            }
+            //COMPANIA UNICLICK Y ORIGEN CENTRO DE PROSPECCION
+            if ($compania_c == 2 && $origen_c == 13) {
+                $update_assigned_responsable = "UPDATE leads l INNER JOIN users u on u.id='" . $idAsesorCP . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$idAsesorCP}'  WHERE l.id ='{$row['id']}'";
+                $db->query($update_assigned_responsable);
+            }
+            //COMPANIA UNICLICK Y ORIGEN CLOSER
+            if ($compania_c == 2 && $origen_c == 14) {
+                $update_assigned_responsable = "UPDATE leads l INNER JOIN users u on u.id='" . $idAsesorCloser . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$idAsesorCloser}'  WHERE l.id ='{$row['id']}'";
+                $db->query($update_assigned_responsable);
+            }
+            //COMPANIA UNICLICK Y ORIGEN GROWTH
+            if ($compania_c == 2 && $origen_c == 15) {
+                $update_assigned_responsable = "UPDATE leads l INNER JOIN users u on u.id='" . $idAsesorGrowth . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$idAsesorGrowth}'  WHERE l.id ='{$row['id']}'";
+                $db->query($update_assigned_responsable);
+            }
+            
         } else {
 
             //USUARIOS QUE TIENEN EL EQUIPO PRINCIPAL UNICS 7 SE LEAS ASIGNA LEADS CON 9.- MKT - REVISTA MEDICA
@@ -58,24 +107,24 @@ function assignLeadMktToUser()
             WHERE user.status = 'Active' AND equipo_c = 7
             GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC
             LIMIT 1";
-                
+
             $result_rm = $db->query($query_revista);
             $conteo = $result_rm->num_rows;
-            
+
             if ($conteo > 0) {
                 while ($rowUsr7 = $db->fetchByAssoc($result_rm)) {
 
-                    $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='".$rowUsr7['id']."' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$rowUsr7['id']}'  WHERE l.id ='{$row['id']}' ";
+                    $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $rowUsr7['id'] . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$rowUsr7['id']}'  WHERE l.id ='{$row['id']}' ";
                     $db->query($update_assigne_user);
                 }
             }
         }
     }
-    $GLOBALS['log']->fatal("TERMINA JOB REASIGNAR LEADS CON USR GRUPO 9.- MKT A USR AGENTE TELEFONICO" );
+    $GLOBALS['log']->fatal("TERMINA JOB REASIGNAR LEADS CON USR GRUPO 9.- MKT A USR AGENTE TELEFONICO");
     return true;
 }
 
-function GetUserMKT($subpuesto_c,$compania_c)
+function GetUserMKT($subpuesto_c, $compania_c)
 {
     global $db;
     $users = [];
@@ -92,9 +141,9 @@ function GetUserMKT($subpuesto_c,$compania_c)
     $dateInput = date('H:i', strtotime($horaDia));
 
     /* Obtiene el ultimo  usuario asignado y registrado en el config*/
-	if($compania_c == 1) $query = "Select value from config where name='last_assigned_user_unifin'";
-    if($compania_c == 2) $query = "Select value from config where name='last_assigned_user_uniclick'";
-    
+    if ($compania_c == 1) $query = "Select value from config where name='last_assigned_user_unifin'";
+    if ($compania_c == 2) $query = "Select value from config where name='last_assigned_user_uniclick'";
+
     $result = $db->query($query);
     $row = $db->fetchByAssoc($result);
     $last_indice = $row['value'];
@@ -117,8 +166,8 @@ function GetUserMKT($subpuesto_c,$compania_c)
     while ($row = $db->fetchByAssoc($result_usr)) {
         $hours = json_decode($row['access_hours_c'], true);
         $hoursIn = !empty($hours) ? $hours[$dia_semana]['entrada'] : "";
-		$hoursComida = !empty($hours) ? $hours[$dia_semana]['comida'] : "";
-		$hoursRegreso = !empty($hours) ? $hours[$dia_semana]['regreso'] : "";
+        $hoursComida = !empty($hours) ? $hours[$dia_semana]['comida'] : "";
+        $hoursRegreso = !empty($hours) ? $hours[$dia_semana]['regreso'] : "";
         $hoursOut = !empty($hours) ? $hours[$dia_semana]['salida'] : "";
         if ($hoursIn != "" && $hoursOut != "") {
             if (($hoursIn != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursOut != "Libre")) {
@@ -143,11 +192,11 @@ function GetUserMKT($subpuesto_c,$compania_c)
 function accessHours($from, $eat, $return, $to, $login)
 {
     $dateFrom = date("H:i", strtotime($from));
-	$dateEat = date("H:i", strtotime($eat));
-	$dateRet = date("H:i", strtotime($return));
+    $dateEat = date("H:i", strtotime($eat));
+    $dateRet = date("H:i", strtotime($return));
     $dateTo = date("H:i", strtotime($to));
     $dateLogin = date("H:i", strtotime($login));
-	if($dateFrom <= $dateLogin && $dateLogin <= $dateTo) $enable = 1;
-	if($dateEat <= $dateLogin && $dateLogin <= $dateRet) $enable = 0;
+    if ($dateFrom <= $dateLogin && $dateLogin <= $dateTo) $enable = 1;
+    if ($dateEat <= $dateLogin && $dateLogin <= $dateRet) $enable = 0;
     return ($enable);
 }
