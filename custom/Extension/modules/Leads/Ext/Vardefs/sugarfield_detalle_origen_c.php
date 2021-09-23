@@ -1,5 +1,5 @@
 <?php
- // created: 2021-09-13 19:36:45
+ // created: 2021-09-23 17:19:25
 $dictionary['Lead']['fields']['detalle_origen_c']['labelValue']='Detalle Origen';
 $dictionary['Lead']['fields']['detalle_origen_c']['dependency']='';
 $dictionary['Lead']['fields']['detalle_origen_c']['visibility_grid']=array (
@@ -116,6 +116,8 @@ $dictionary['Lead']['fields']['detalle_origen_c']['visibility_grid']=array (
       47 => '59',
       48 => '60',
       49 => '61',
+      50 => '62',
+      51 => '57',
     ),
     13 => 
     array (
