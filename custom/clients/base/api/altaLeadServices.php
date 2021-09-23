@@ -254,13 +254,13 @@ class altaLeadServices extends SugarApi
                 
                 if ($compania_c == 2 && $origen == 1) { //COMPANIA UNICLICK Y ORIGEN MARKETING
                     $new_assigned_user = $users[$new_indice];
-                    // $GLOBALS['log']->fatal("UNICLICK-ORIGEN "  . $new_assigned_user);
+                    $GLOBALS['log']->fatal("UNICLICK-ORIGEN-CARRUSEL "  . $new_assigned_user);
                 } elseif ($compania_c == 2 && $origen == 12 && in_array($detalleOrigen, $key_carrusel_do_list)) { //COMPANIA UNICLICK, ORIGEN ALIANZAS Y DETALLE ORIGEN
                     $new_assigned_user = $users[$new_indice];
-                    // $GLOBALS['log']->fatal("UNICLICK-ORIGEN-CARRUSEL "  . $new_assigned_user);
+                    $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ALIANZA-CARRUSEL "  . $new_assigned_user);
                 } else {
                     $new_assigned_user = $users[$new_indice];
-                    // $GLOBALS['log']->fatal("ASESOR ASIGNADO POR CARRUSEL SIN VALIDACION "  . $new_assigned_user);
+                    $GLOBALS['log']->fatal("ASESOR ASIGNADO POR CARRUSEL "  . $new_assigned_user);
                 }
 
             } else {
@@ -278,20 +278,20 @@ class altaLeadServices extends SugarApi
                 
                 if ($compania_c == 2 && $origen == 12 && in_array($detalleOrigen, $key_responable_do_list)) { //COMPANIA UNICLICK, ORIGEN ALIANZAS Y DETALLE ORIGEN
                     $new_assigned_user = $idAsesorAlianza;
-                    // $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-ALIANZA "  . $new_assigned_user);
+                    $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-ALIANZA "  . $new_assigned_user);
                 } elseif ($compania_c == 2 && $origen == 13) { //COMPANIA UNICLICK Y ORIGEN CENTRO DE PROSPECCION
                     $new_assigned_user = $idAsesorCP;
-                    // $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-CP "  . $new_assigned_user);
+                    $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-CP "  . $new_assigned_user);
                 } elseif ($compania_c == 2 && $origen == 14) { //COMPANIA UNICLICK Y ORIGEN CLOSER
                     $new_assigned_user = $idAsesorCloser;
-                    // $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-CLOSER "  . $new_assigned_user);
+                    $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-CLOSER "  . $new_assigned_user);
                 } elseif ($compania_c == 2 && $origen == 15) { //COMPANIA UNICLICK Y ORIGEN GROWTH
                     $new_assigned_user = $idAsesorGrowth;
-                    // $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-GROWTH "  . $new_assigned_user);
+                    $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-GROWTH "  . $new_assigned_user);
                 } else {
                     // No existen usuarios disponibles y se asigna a  9.- MKT "
                     $new_assigned_user = $idMKT;
-                    // $GLOBALS['log']->fatal("ID_MKT "  . $new_assigned_user);
+                    $GLOBALS['log']->fatal("NO HAY ASESOR DISPONIBLE ASIGNA ID_MKT "  . $new_assigned_user);
                 }
             }
 
