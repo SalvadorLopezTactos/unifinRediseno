@@ -492,8 +492,9 @@ SQL;
             }
 
             //Agregar condiciones financieras Quantico
-            $opp->cf_quantico_c = $bean->cf_quantico_c;
-            $opp->cf_quantico_politica_c = $bean->cf_quantico_politica_c;
+            /*Ajuste ticket 81980: Se omite que los valores de condiciones financieras de quantico se hereden en la ratificación*/
+            //$opp->cf_quantico_c = $bean->cf_quantico_c;
+            //$opp->cf_quantico_politica_c = $bean->cf_quantico_politica_c;
 
             $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> Condiciones en nueva solicitud : " . print_r(count($opp->condiciones_financieras), 1));
             $id = $opp->save();
