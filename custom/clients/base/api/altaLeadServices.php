@@ -167,7 +167,7 @@ class altaLeadServices extends SugarApi
         foreach ($alianzas_responable_do_list as $key => $value) {
             $key_responable_do_list[] = $key;
         }
-        
+
         /* Obetenemos el id del usuario de grupo de 9.- MKT*/
         $QueryId = "SELECT id from users
         WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
@@ -203,6 +203,8 @@ class altaLeadServices extends SugarApi
         //VALIDACION DE REVISTA MEDICA
         if ($id_landing_c != 'LP Revista Médica' && $id_landing_c != 'LP REVISTA MÉDICA') {
 
+            $flagCarrusel = 1;
+
             //$GLOBALS['log']->fatal("id_landing_c "  , $id_landing_c);
             if (strpos(strtoupper($id_landing_c), 'INSURANCE') !== false) {
                 $subpuesto_c = 5;
@@ -211,83 +213,92 @@ class altaLeadServices extends SugarApi
                 if ($compania_c == 2) $subpuesto_c = 4;
             }
 
-            $query_asesores = "SELECT
-            user.id,
-            user.date_entered,
-            count(lead.assigned_user_id) AS total_asignados,
-            uc.access_hours_c
-            FROM users user
-            INNER JOIN users_cstm uc
-                ON uc.id_c = user.id
-            LEFT JOIN leads lead
-                ON lead.assigned_user_id = user.id
-            where puestousuario_c='27' AND user.status = 'Active' AND subpuesto_c='$subpuesto_c'
-            GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC";
+            $query = "SELECT category, name, value from config where category = 'AltaLeadsServices'";
+            $result = $db->query($query);
 
-            //$GLOBALS['log']->fatal("query_asesores "  , $query_asesores);
-            $result_usr = $db->query($query_asesores);
-            //$usuarios=;
-            //$GLOBALS['log']->fatal("result_usr "  , $result_usr);
-            while ($row = $db->fetchByAssoc($result_usr)) {
-                $hours = json_decode($row['access_hours_c'], true);
-                $hoursIn = !empty($hours) ? $hours[$dia_semana]['entrada'] : "";
-                $hoursComida = !empty($hours) ? $hours[$dia_semana]['comida'] : "";
-                $hoursRegreso = !empty($hours) ? $hours[$dia_semana]['regreso'] : "";
-                $hoursOut = !empty($hours) ? $hours[$dia_semana]['salida'] : "";
-                //$GLOBALS['log']->fatal("hoursIn" , $hoursIn);
-                if ($hoursIn != "" && $hoursOut != "") {
-                    if (($hoursIn != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursOut != "Libre")) {
-                        $enable = $this->accessHours($hoursIn, $hoursComida, $hoursRegreso, $hoursOut, $dateInput);
-                        if ($enable) {
+            while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
+
+                if ($row['name'] == 'id_usuario_alianza') $idAsesorAlianza = $row['value'];
+                if ($row['name'] == 'id_usuario_centro_prospeccion') $idAsesorCP = $row['value'];
+                if ($row['name'] == 'id_usuario_closer') $idAsesorCloser = $row['value'];
+                if ($row['name'] == 'id_usuario_growth') $idAsesorGrowth = $row['value'];
+            }
+            //VALIDACION DE ASESORES UNICLICK RESPONSABLES
+            if ($compania_c == 2 && $origen == 12 && in_array($detalleOrigen, $key_responable_do_list)) { //COMPANIA UNICLICK, ORIGEN ALIANZAS Y DETALLE ORIGEN
+                $new_assigned_user = $idAsesorAlianza;
+                $flagCarrusel = 0;
+                $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-ALIANZA "  . $new_assigned_user);
+            }
+            if ($compania_c == 2 && $origen == 13) { //COMPANIA UNICLICK Y ORIGEN CENTRO DE PROSPECCION
+                $new_assigned_user = $idAsesorCP;
+                $flagCarrusel = 0;
+                $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-CP "  . $new_assigned_user);
+            } 
+            if ($compania_c == 2 && $origen == 14) { //COMPANIA UNICLICK Y ORIGEN CLOSER
+                $new_assigned_user = $idAsesorCloser;
+                $flagCarrusel = 0;
+                $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-CLOSER "  . $new_assigned_user);
+            } 
+            if ($compania_c == 2 && $origen == 15) { //COMPANIA UNICLICK Y ORIGEN GROWTH
+                $new_assigned_user = $idAsesorGrowth;
+                $flagCarrusel = 0;
+                $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-GROWTH "  . $new_assigned_user);
+            }
+
+            if ($flagCarrusel == 1) {
+
+                $query_asesores = "SELECT
+                user.id,
+                user.date_entered,
+                count(lead.assigned_user_id) AS total_asignados,
+                uc.access_hours_c
+                FROM users user
+                INNER JOIN users_cstm uc
+                    ON uc.id_c = user.id
+                LEFT JOIN leads lead
+                    ON lead.assigned_user_id = user.id
+                where puestousuario_c='27' AND user.status = 'Active' AND subpuesto_c='$subpuesto_c'
+                GROUP BY lead.assigned_user_id , user.id ORDER BY total_asignados,date_entered ASC";
+
+                //$GLOBALS['log']->fatal("query_asesores "  , $query_asesores);
+                $result_usr = $db->query($query_asesores);
+                //$usuarios=;
+                //$GLOBALS['log']->fatal("result_usr "  , $result_usr);
+                while ($row = $db->fetchByAssoc($result_usr)) {
+                    $hours = json_decode($row['access_hours_c'], true);
+                    $hoursIn = !empty($hours) ? $hours[$dia_semana]['entrada'] : "";
+                    $hoursComida = !empty($hours) ? $hours[$dia_semana]['comida'] : "";
+                    $hoursRegreso = !empty($hours) ? $hours[$dia_semana]['regreso'] : "";
+                    $hoursOut = !empty($hours) ? $hours[$dia_semana]['salida'] : "";
+                    //$GLOBALS['log']->fatal("hoursIn" , $hoursIn);
+                    if ($hoursIn != "" && $hoursOut != "") {
+                        if (($hoursIn != "Bloqueado" && $hoursOut != "Bloqueado") && ($hoursIn != "Libre" && $hoursOut != "Libre")) {
+                            $enable = $this->accessHours($hoursIn, $hoursComida, $hoursRegreso, $hoursOut, $dateInput);
+                            if ($enable) {
+                                $users[] = $row['id'];
+                            }
+                        } elseif ($hoursIn == "Libre" && $hoursOut == "Libre") {
                             $users[] = $row['id'];
                         }
-                    } elseif ($hoursIn == "Libre" && $hoursOut == "Libre") {
+                    } /*else {
                         $users[] = $row['id'];
+                    }*/
+                }
+                //$GLOBALS['log']->fatal("Usuarios MKT en servicio alta Leads  " . print_r($users, true));
+                if (count($users) > 0) {
+                    $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
+
+                    if ($compania_c == 2 && $origen == 1) { //COMPANIA UNICLICK Y ORIGEN MARKETING
+                        $new_assigned_user = $users[$new_indice];
+                        $GLOBALS['log']->fatal("UNICLICK-ORIGEN-CARRUSEL");
+                    } elseif ($compania_c == 2 && $origen == 12 && in_array($detalleOrigen, $key_carrusel_do_list)) { //COMPANIA UNICLICK, ORIGEN ALIANZAS Y DETALLE ORIGEN
+                        $new_assigned_user = $users[$new_indice];
+                        $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ALIANZA-CARRUSEL");
+                    } else {
+                        $new_assigned_user = $users[$new_indice];
+                        $GLOBALS['log']->fatal("ASESOR ASIGNADO POR CARRUSEL");
                     }
-                } /*else {
-                    $users[] = $row['id'];
-                }*/
-            }
-            //$GLOBALS['log']->fatal("Usuarios MKT en servicio alta Leads  " . print_r($users, true));
-            if (count($users) > 0) {
-                $new_indice = $last_indice >= count($users) - 1 ? 0 : $last_indice + 1;
-                
-                if ($compania_c == 2 && $origen == 1) { //COMPANIA UNICLICK Y ORIGEN MARKETING
-                    $new_assigned_user = $users[$new_indice];
-                    $GLOBALS['log']->fatal("UNICLICK-ORIGEN-CARRUSEL");
-                } elseif ($compania_c == 2 && $origen == 12 && in_array($detalleOrigen, $key_carrusel_do_list)) { //COMPANIA UNICLICK, ORIGEN ALIANZAS Y DETALLE ORIGEN
-                    $new_assigned_user = $users[$new_indice];
-                    $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ALIANZA-CARRUSEL");
-                } else {
-                    $new_assigned_user = $users[$new_indice];
-                    $GLOBALS['log']->fatal("ASESOR ASIGNADO POR CARRUSEL");
-                }
 
-            } else {
-
-                $query = "SELECT category, name, value from config where category = 'AltaLeadsServices'";
-                $result = $db->query($query);
-
-                while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
-
-                    if ($row['name'] == 'id_usuario_alianza') $idAsesorAlianza = $row['value'];
-                    if ($row['name'] == 'id_usuario_centro_prospeccion') $idAsesorCP = $row['value'];
-                    if ($row['name'] == 'id_usuario_closer') $idAsesorCloser = $row['value'];
-                    if ($row['name'] == 'id_usuario_growth') $idAsesorGrowth = $row['value'];
-                }
-                
-                if ($compania_c == 2 && $origen == 12 && in_array($detalleOrigen, $key_responable_do_list)) { //COMPANIA UNICLICK, ORIGEN ALIANZAS Y DETALLE ORIGEN
-                    $new_assigned_user = $idAsesorAlianza;
-                    $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-ALIANZA "  . $new_assigned_user);
-                } elseif ($compania_c == 2 && $origen == 13) { //COMPANIA UNICLICK Y ORIGEN CENTRO DE PROSPECCION
-                    $new_assigned_user = $idAsesorCP;
-                    $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-CP "  . $new_assigned_user);
-                } elseif ($compania_c == 2 && $origen == 14) { //COMPANIA UNICLICK Y ORIGEN CLOSER
-                    $new_assigned_user = $idAsesorCloser;
-                    $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-CLOSER "  . $new_assigned_user);
-                } elseif ($compania_c == 2 && $origen == 15) { //COMPANIA UNICLICK Y ORIGEN GROWTH
-                    $new_assigned_user = $idAsesorGrowth;
-                    $GLOBALS['log']->fatal("UNICLICK-ORIGEN-ASESOR-GROWTH "  . $new_assigned_user);
                 } else {
                     // No existen usuarios disponibles y se asigna a  9.- MKT "
                     $new_assigned_user = $idMKT;

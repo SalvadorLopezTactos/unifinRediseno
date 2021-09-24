@@ -16,6 +16,18 @@ function assignLeadMktToUser()
     foreach ($alianzas_responable_do_list as $key => $value) {
         $key_responable_do_list[] = $key;
     }
+
+    $query = "SELECT category, name, value from config where category = 'AltaLeadsServices'";
+    $result = $db->query($query);
+
+    while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
+
+        if ($row['name'] == 'id_usuario_alianza') $idAsesorAlianza = $row['value'];
+        if ($row['name'] == 'id_usuario_centro_prospeccion') $idAsesorCP = $row['value'];
+        if ($row['name'] == 'id_usuario_closer') $idAsesorCloser = $row['value'];
+        if ($row['name'] == 'id_usuario_growth') $idAsesorGrowth = $row['value'];
+    }
+
     /* Obetenemos el id del usuario de grupo de 9.- MKT*/
     $QueryId = "SELECT id from users
     WHERE first_name LIKE '%9.-%' AND last_name LIKE 'MKT'";
@@ -35,6 +47,8 @@ function assignLeadMktToUser()
         //VALIDACION DE REVISTA MEDICA
         if ($id_landing_c != 'LP REVISTA MÉDICA') {
 
+            $flagCarrusel = 1;
+
             if (strpos(strtoupper($id_landing_c), 'INSURANCE') !== false) {
                 $subpuesto_c = 5;
             } else {
@@ -42,53 +56,50 @@ function assignLeadMktToUser()
                 if ($compania_c == 2) $subpuesto_c = 4;
             }
 
-            $usrEnable = GetUserMKT($subpuesto_c, $compania_c);
-            $indices = $usrEnable['indice'];
-            if (!empty($usrEnable['id'])) {
-                $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $usrEnable['id'] . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$usrEnable['id']}'  WHERE l.id ='{$row['id']}' ";
-                $db->query($update_assigne_user);
-                if ($indices > -1) {
-                    if ($compania_c == 1) $update_assigne_user = "UPDATE config SET value = $indices WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user_unifin'";
-                    if ($compania_c == 2) $update_assigne_user = "UPDATE config SET value = $indices WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user_uniclick'";
-                    //COMPANIA UNICLICK Y ORIGEN MARKETING
-                    if ($compania_c == 2 && $origen_c == 1) $update_assigne_user = "UPDATE config SET value = $indices WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user_uniclick'";
-                    //COMPANIA UNICLICK, ORIGEN ALIANZAS Y DETALLE ORIGEN
-                    if ($compania_c == 2 && $origen_c == 12 && in_array($detalle_origen_c, $key_carrusel_do_list)) $update_assigne_user = "UPDATE config SET value = $indices WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user_uniclick'";
-
-                    $db->query($update_assigne_user);
-                }
-            }
-
-            $query = "SELECT category, name, value from config where category = 'AltaLeadsServices'";
-            $result = $db->query($query);
-
-            while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
-
-                if ($row['name'] == 'id_usuario_alianza') $idAsesorAlianza = $row['value'];
-                if ($row['name'] == 'id_usuario_centro_prospeccion') $idAsesorCP = $row['value'];
-                if ($row['name'] == 'id_usuario_closer') $idAsesorCloser = $row['value'];
-                if ($row['name'] == 'id_usuario_growth') $idAsesorGrowth = $row['value'];
-            }
-
             //COMPANIA UNICLICK, ORIGEN ALIANZAS Y DETALLE ORIGEN
             if ($compania_c == 2 && $origen_c == 12 && in_array($detalle_origen_c, $key_responable_do_list)) {
                 $update_assigned_responsable = "UPDATE leads l INNER JOIN users u on u.id='" . $idAsesorAlianza . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$idAsesorAlianza}'  WHERE l.id ='{$row['id']}'";
                 $db->query($update_assigned_responsable);
+                $flagCarrusel = 0;
             }
             //COMPANIA UNICLICK Y ORIGEN CENTRO DE PROSPECCION
             if ($compania_c == 2 && $origen_c == 13) {
                 $update_assigned_responsable = "UPDATE leads l INNER JOIN users u on u.id='" . $idAsesorCP . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$idAsesorCP}'  WHERE l.id ='{$row['id']}'";
                 $db->query($update_assigned_responsable);
+                $flagCarrusel = 0;
             }
             //COMPANIA UNICLICK Y ORIGEN CLOSER
             if ($compania_c == 2 && $origen_c == 14) {
                 $update_assigned_responsable = "UPDATE leads l INNER JOIN users u on u.id='" . $idAsesorCloser . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$idAsesorCloser}'  WHERE l.id ='{$row['id']}'";
                 $db->query($update_assigned_responsable);
+                $flagCarrusel = 0;
             }
             //COMPANIA UNICLICK Y ORIGEN GROWTH
             if ($compania_c == 2 && $origen_c == 15) {
                 $update_assigned_responsable = "UPDATE leads l INNER JOIN users u on u.id='" . $idAsesorGrowth . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$idAsesorGrowth}'  WHERE l.id ='{$row['id']}'";
                 $db->query($update_assigned_responsable);
+                $flagCarrusel = 0;
+            }
+
+
+            if ($flagCarrusel == 1) {
+
+                $usrEnable = GetUserMKT($subpuesto_c, $compania_c);
+                $indices = $usrEnable['indice'];
+                if (!empty($usrEnable['id'])) {
+                    $update_assigne_user = "UPDATE leads l INNER JOIN users u on u.id='" . $usrEnable['id'] . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$usrEnable['id']}'  WHERE l.id ='{$row['id']}' ";
+                    $db->query($update_assigne_user);
+                    if ($indices > -1) {
+                        if ($compania_c == 1) $update_assigne_user = "UPDATE config SET value = $indices WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user_unifin'";
+                        if ($compania_c == 2) $update_assigne_user = "UPDATE config SET value = $indices WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user_uniclick'";
+                        //COMPANIA UNICLICK Y ORIGEN MARKETING
+                        if ($compania_c == 2 && $origen_c == 1) $update_assigne_user = "UPDATE config SET value = $indices WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user_uniclick'";
+                        //COMPANIA UNICLICK, ORIGEN ALIANZAS Y DETALLE ORIGEN
+                        if ($compania_c == 2 && $origen_c == 12 && in_array($detalle_origen_c, $key_carrusel_do_list)) $update_assigne_user = "UPDATE config SET value = $indices WHERE category = 'AltaLeadsServices' AND name = 'last_assigned_user_uniclick'";
+
+                        $db->query($update_assigne_user);
+                    }
+                }
             }
             
         } else {
