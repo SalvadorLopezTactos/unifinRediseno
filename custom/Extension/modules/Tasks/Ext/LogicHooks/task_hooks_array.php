@@ -20,3 +20,11 @@ $hook_array['before_save'][] = Array(
     'Task_Hooks', // name of the class
     'InfoTasks'
 );
+
+$hook_array['before_save'][] = Array(
+    3,
+    'Envia correo al asesor leasing de la cuenta',
+    'custom/modules/Tasks/Task_Hooks.php',
+    'Task_Hooks',
+    'sendEmail'
+);

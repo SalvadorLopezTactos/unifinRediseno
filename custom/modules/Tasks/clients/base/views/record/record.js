@@ -12,20 +12,20 @@
         this.on('render',this.disableparentsfields,this);
 		this.model.on('change:ayuda_asesor_cp_c', this._ValoresPredetAsesor, this);
 		this.model.on('change:parent_name', this._ValoresPredetAsesor, this);
-		
-
-		
+				
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         this.model.addValidationTask('checkdate', _.bind(this.checkdate, this));
 		this.model.addValidationTask('valida_asignado', _.bind(this.valida_asignado, this));
         this.model.addValidationTask('metodo_asignacion_lm', _.bind(this.metodoAsignacionLM, this));
+		this.model.addValidationTask('validaSolicitud', _.bind(this.validaSolicitud, this));
+		this.model.addValidationTask('validaRequeridos', _.bind(this.validaRequeridos, this));
         /*@Jesus Carrillo
             Funcion que pinta de color los paneles relacionados
         */
         this.model.on('sync', this.fulminantcolor, this);
         this.model.on('sync', this.loadprevdate, this);
         this.model.on('sync', this.validaRelLeadTask, this);
-
+		this.model.on('sync', this.roFunction, this);
     },
 
     /**
@@ -90,6 +90,36 @@
     //     this.setRoute();
     //     this.unsetContextAction();
     // },
+
+    roFunction: function() {
+		if(this.model.get('status') == "Completed") {
+			_.each(this.model.fields, function(field) {
+				if (!_.isEqual(field.name,'tasks_opportunities_1_name')) {
+					this.noEditFields.push(field.name);
+					this.$('.record-edit-link-wrapper[data-name='+field.name+']').remove();
+					this.$("[data-name='"+field.name+"']").attr('style', 'pointer-events:none;');
+					//Oculta campos CAC
+					if(app.user.attributes.puestousuario_c != '61' || this.model.get('parent_type') != "Accounts")
+					{
+						this.$('[data-name=tasks_opportunities_1_name]').hide();
+						this.$('[data-name=solicitud_alta_c]').hide();
+						this.$('[data-name=potencial_negocio_c]').hide();
+						this.$('[data-name=fecha_calificacion_c]').hide();
+						this.$('[data-name=motivo_potencial_c]').hide();
+						this.$('[data-name=detalle_motivo_potencial_c]').hide();
+					}
+				}
+			},this);
+		}
+		if(app.user.attributes.puestousuario_c != '61' || this.model.get('parent_type') != "Accounts") {
+			this.$('[data-name=tasks_opportunities_1_name]').hide();
+			this.$('[data-name=solicitud_alta_c]').hide();
+			this.$('[data-name=potencial_negocio_c]').hide();
+			this.$('[data-name=fecha_calificacion_c]').hide();
+			this.$('[data-name=motivo_potencial_c]').hide();
+			this.$('[data-name=detalle_motivo_potencial_c]').hide();
+		}
+    },
 
     _render: function () {
         this._super("_render");
@@ -393,5 +423,45 @@
             }
         }
         callback(null, fields, errors);
+    },
+
+    validaSolicitud: function (fields, errors, callback) {
+        if (this.model.get('tasks_opportunities_1opportunities_idb')) {            
+            var opp = app.data.createBean('Opportunities', {id: this.model.get('tasks_opportunities_1opportunities_idb')});
+            opp.fetch({
+                success: _.bind(function (model) {
+                    if(model.get('tct_etapa_ddw_c') == 'R' || model.get('estatus_c') == 'R' || model.get('estatus_c') == 'K' || model.get('estatus_c') == 'CM') {
+                        app.alert.show("opp-task", {
+                            level: "error",
+                            title: "Solicitud Cancelada/Rechazada<br>",
+                            messages: "No se puede agregar una relación con una Solicitud Cancelada o Rechazada",
+                            autoClose: false
+                        });
+                        app.error.errorName2Keys['custom_message2'] = '';
+                        errors['tasks_opportunities_1_name'] = errors['tasks_opportunities_1_name'] || {};
+                        errors['tasks_opportunities_1_name'].custom_message2 = true;
+                    }
+                    callback(null, fields, errors);
+                }, this)
+            });
+        } else {
+            callback(null, fields, errors);
+        }
+    },
+
+    validaRequeridos: function (fields, errors, callback) {
+		var puesto = this.model.get('puesto_asignado_c');
+        if(app.user.attributes.puestousuario_c == '61' && this.model.get('parent_type') == "Accounts" && !this.model.get('potencial_negocio_c') && this.model.get('status') == 'Completed' && (puesto == 5 || puesto == 11 || puesto == 16 || puesto == 53 || puesto == 54)) {
+            app.alert.show("potencial_negocio_c", {
+                level: "error",
+                title: "Potencial de Negocio<br>",
+                messages: "El campo Potencial de Negocio es requerido",
+                autoClose: false
+            });
+            app.error.errorName2Keys['custom_message2'] = '';
+            errors['potencial_negocio_c'] = errors['potencial_negocio_c'] || {};
+            errors['potencial_negocio_c'].custom_message2 = true;
+        }
+		callback(null, fields, errors);
     },
 })

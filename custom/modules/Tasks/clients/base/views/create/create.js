@@ -5,24 +5,19 @@
         self = this;
         this._super("initialize", [options]);
         this.on('render',this.disableparentsfields,this);
-
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         this.model.addValidationTask('checkdate', _.bind(this.checkdate, this));
 		this.model.addValidationTask('valida_asignado', _.bind(this.valida_asignado, this));
-		
 		this.model.on('change:ayuda_asesor_cp_c', this._ValoresPredetAsesor, this);
 		this.model.on('change:parent_name', this._ValoresPredetAsesor, this);
         this.model.addValidationTask('validaRelLeadTask', _.bind(this.validaRelLeadTask, this));
-		
+		this.model.addValidationTask('validaSolicitud', _.bind(this.validaSolicitud, this));
+		this.model.addValidationTask('validaRequeridos', _.bind(this.validaRequeridos, this));
     },
 
     _render: function () {
         this._super("_render");
-
-
     },
-
-
 
     /* @Alvador Lopez Y Adrian Arauz
     Oculta los campos relacionados
@@ -33,15 +28,20 @@
         //         this.$('[data-name="parent_name"]').attr('style','pointer-events:none;')
         //     }
         // }
-		
-		
+		if(app.user.attributes.puestousuario_c != '61')
+		{
+			this.$('[data-name=tasks_opportunities_1_name]').hide();
+			this.$('[data-name=solicitud_alta_c]').hide();
+			this.$('[data-name=potencial_negocio_c]').hide();
+			this.$('[data-name=fecha_calificacion_c]').hide();
+			this.$('[data-name=motivo_potencial_c]').hide();
+			this.$('[data-name=detalle_motivo_potencial_c]').hide();
+		}
 		if (App.user.attributes.puestousuario_c=='27'||App.user.attributes.puestousuario_c=='31') {
 			//Oculta Check ayuda
 			this.$('[data-name=ayuda_asesor_cp_c]').hide(); 
         }
-
         this.isAyudaVisible();
-        
     },
 
     isAyudaVisible:function(){
@@ -246,5 +246,45 @@
         } else {
             callback(null, fields, errors);
         }
+    },
+
+    validaSolicitud: function (fields, errors, callback) {
+        if (this.model.get('tasks_opportunities_1opportunities_idb')) {            
+            var opp = app.data.createBean('Opportunities', {id: this.model.get('tasks_opportunities_1opportunities_idb')});
+            opp.fetch({
+                success: _.bind(function (model) {
+                    if(model.get('tct_etapa_ddw_c') == 'R' || model.get('estatus_c') == 'R' || model.get('estatus_c') == 'K' || model.get('estatus_c') == 'CM') {
+                        app.alert.show("opp-task", {
+                            level: "error",
+                            title: "Solicitud Cancelada/Rechazada<br>",
+                            messages: "No se puede agregar una relación con una Solicitud Cancelada o Rechazada",
+                            autoClose: false
+                        });
+                        app.error.errorName2Keys['custom_message2'] = '';
+                        errors['tasks_opportunities_1_name'] = errors['tasks_opportunities_1_name'] || {};
+                        errors['tasks_opportunities_1_name'].custom_message2 = true;
+                    }
+                    callback(null, fields, errors);
+                }, this)
+            });
+        } else {
+            callback(null, fields, errors);
+        }
+    },
+
+    validaRequeridos: function (fields, errors, callback) {
+		var puesto = this.model.get('puesto_asignado_c');
+        if(app.user.attributes.puestousuario_c == '61' && this.model.get('parent_type') == "Accounts" && !this.model.get('potencial_negocio_c') && this.model.get('status') == 'Completed' && (puesto == 5 || puesto == 11 || puesto == 16 || puesto == 53 || puesto == 54)) {
+            app.alert.show("potencial_negocio_c", {
+                level: "error",
+                title: "Potencial de Negocio<br>",
+                messages: "El campo Potencial de Negocio es requerido",
+                autoClose: false
+            });
+            app.error.errorName2Keys['custom_message2'] = '';
+            errors['potencial_negocio_c'] = errors['potencial_negocio_c'] || {};
+            errors['potencial_negocio_c'].custom_message2 = true;
+        }
+		callback(null, fields, errors);
     },
 })

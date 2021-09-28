@@ -890,6 +890,10 @@ array (
                 'name' => 'control_monto_c',
                 'label' => 'LBL_CONTROL_MONTO_C',
               ),
+              115 => 
+              array (
+                'name' => 'tasks_opportunities_1_name',
+              ),
             ),
           ),
           2 => 
