@@ -98,6 +98,7 @@
 					this.noEditFields.push(field.name);
 					this.$('.record-edit-link-wrapper[data-name='+field.name+']').remove();
 					this.$("[data-name='"+field.name+"']").attr('style', 'pointer-events:none;');
+					this.$("[data-name='tasks_opportunities_1_name']").attr('style', 'pointer-events:none;');
 					//Oculta campos CAC
 					if(app.user.attributes.puestousuario_c != '61' || this.model.get('parent_type') != "Accounts")
 					{
