@@ -36,3 +36,39 @@ $dependencies['Tasks']['ayuda_asesor_cp_c']= array
     //),
   ),
 );
+
+$dependencies['Tasks']['status_completed']= array
+(
+    'hooks'=> array('all'),
+    'trigger'=>'true',
+    'triggerFields'=> array('potencial_negocio_c'),
+    'onload'=> true,
+    'actions'=> array(	
+		array(
+			'name'=>'SetValue',
+			'params'=> array(
+				'target'=>'status',
+				'label'=>'LBL_STATUS',
+				'value'=>'ifElse(equal($potencial_negocio_c,""),$status,"Completed")',
+			),
+		),
+    ),
+);
+
+$dependencies['Tasks']['atrasada']= array
+(
+    'hooks'=> array('all'),
+    'trigger'=>'true',
+    'triggerFields'=> array('ayuda_asesor_cp_c','status'),
+    'onload'=> true,
+    'actions'=> array(	
+		array(
+			'name'=>'SetValue',
+			'params'=> array(
+				'target'=>'atrasada_c',
+				'label'=>'LBL_ATRASADA',
+				'value'=>'ifElse(and($ayuda_asesor_cp_c,equal($status,"Atrasada")),"Ayuda Atrasada",ifElse(and($ayuda_asesor_cp_c,not(equal($status,"Atrasada"))),"Ayuda",ifElse(and(not($ayuda_asesor_cp_c),equal($status,"Atrasada")),"Atrasada","")))',
+			),
+		),
+    ),
+);

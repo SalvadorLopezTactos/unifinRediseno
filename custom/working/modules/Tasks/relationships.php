@@ -10,6 +10,118 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $relationships = array (
+  'tasks_leads_1' => 
+  array (
+    'name' => 'tasks_leads_1',
+    'true_relationship_type' => 'many-to-many',
+    'from_studio' => true,
+    'relationships' => 
+    array (
+      'tasks_leads_1' => 
+      array (
+        'lhs_module' => 'Tasks',
+        'lhs_table' => 'tasks',
+        'lhs_key' => 'id',
+        'rhs_module' => 'Leads',
+        'rhs_table' => 'leads',
+        'rhs_key' => 'id',
+        'relationship_type' => 'many-to-many',
+        'join_table' => 'tasks_leads_1_c',
+        'join_key_lhs' => 'tasks_leads_1tasks_ida',
+        'join_key_rhs' => 'tasks_leads_1leads_idb',
+      ),
+    ),
+    'table' => 'tasks_leads_1_c',
+    'fields' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+        'type' => 'id',
+      ),
+      'date_modified' => 
+      array (
+        'name' => 'date_modified',
+        'type' => 'datetime',
+      ),
+      'deleted' => 
+      array (
+        'name' => 'deleted',
+        'type' => 'bool',
+        'default' => 0,
+      ),
+      'tasks_leads_1tasks_ida' => 
+      array (
+        'name' => 'tasks_leads_1tasks_ida',
+        'type' => 'id',
+      ),
+      'tasks_leads_1leads_idb' => 
+      array (
+        'name' => 'tasks_leads_1leads_idb',
+        'type' => 'id',
+      ),
+    ),
+    'indices' => 
+    array (
+      0 => 
+      array (
+        'name' => 'idx_tasks_leads_1_pk',
+        'type' => 'primary',
+        'fields' => 
+        array (
+          0 => 'id',
+        ),
+      ),
+      1 => 
+      array (
+        'name' => 'idx_tasks_leads_1_ida1_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'tasks_leads_1tasks_ida',
+          1 => 'deleted',
+        ),
+      ),
+      2 => 
+      array (
+        'name' => 'idx_tasks_leads_1_idb2_deleted',
+        'type' => 'index',
+        'fields' => 
+        array (
+          0 => 'tasks_leads_1leads_idb',
+          1 => 'deleted',
+        ),
+      ),
+      3 => 
+      array (
+        'name' => 'tasks_leads_1_alt',
+        'type' => 'alternate_key',
+        'fields' => 
+        array (
+          0 => 'tasks_leads_1tasks_ida',
+          1 => 'tasks_leads_1leads_idb',
+        ),
+      ),
+    ),
+    'lhs_module' => 'Tasks',
+    'lhs_table' => 'tasks',
+    'lhs_key' => 'id',
+    'rhs_module' => 'Leads',
+    'rhs_table' => 'leads',
+    'rhs_key' => 'id',
+    'relationship_type' => 'many-to-many',
+    'join_table' => 'tasks_leads_1_c',
+    'join_key_lhs' => 'tasks_leads_1tasks_ida',
+    'join_key_rhs' => 'tasks_leads_1leads_idb',
+    'readonly' => true,
+    'relationship_name' => 'tasks_leads_1',
+    'rhs_subpanel' => 'default',
+    'lhs_subpanel' => 'ForLeadsTasks',
+    'is_custom' => true,
+    'deleted' => false,
+    'relationship_only' => false,
+    'for_activities' => false,
+  ),
   'tasks_modified_user' => 
   array (
     'name' => 'tasks_modified_user',
@@ -274,7 +386,7 @@ $relationships = array (
     'readonly' => true,
     'relationship_name' => 'lead_tasks',
     'rhs_subpanel' => 'ForLeadsTasks',
-    'lhs_subpanel' => NULL,
+    'lhs_subpanel' => 'default',
     'deleted' => false,
     'relationship_only' => false,
     'for_activities' => false,
@@ -543,21 +655,17 @@ $relationships = array (
     'is_custom' => false,
     'from_studio' => false,
   ),
-  'tasks_leads_1' => 
+  'tasks_opportunities_1' => 
   array (
-    'rhs_label' => 'Leads',
-    'lhs_label' => 'Tareas',
-    'lhs_subpanel' => 'default',
-    'rhs_subpanel' => 'default',
     'lhs_module' => 'Tasks',
-    'rhs_module' => 'Leads',
-    'relationship_type' => 'many-to-many',
+    'rhs_module' => 'Opportunities',
+    'relationship_type' => 'one-to-one',
     'readonly' => true,
     'deleted' => false,
     'relationship_only' => false,
     'for_activities' => false,
     'is_custom' => false,
     'from_studio' => true,
-    'relationship_name' => 'tasks_leads_1',
+    'relationship_name' => 'tasks_opportunities_1',
   ),
 );
