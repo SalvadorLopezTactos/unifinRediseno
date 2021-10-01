@@ -414,6 +414,9 @@ class altaLeadServices extends SugarApi
                 $db->query($update_assigne_user);
             }
         }
+
+        $update_call = "UPDATE calls c SET c.assigned_user_id ='{$new_assigned_user}' WHERE c.parent_id ='{$id_lead}'";
+        $db->query($update_call);
     }
 
     public function insert_Leads_Asociados($lead_asociado, $parent_id)
