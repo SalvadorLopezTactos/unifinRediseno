@@ -19,6 +19,7 @@
         this.model.addValidationTask('metodo_asignacion_lm', _.bind(this.metodoAsignacionLM, this));
 		this.model.addValidationTask('validaSolicitud', _.bind(this.validaSolicitud, this));
 		this.model.addValidationTask('validaRequeridos', _.bind(this.validaRequeridos, this));
+		this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         /*@Jesus Carrillo
             Funcion que pinta de color los paneles relacionados
         */
@@ -92,13 +93,22 @@
     // },
 
     roFunction: function() {
+		if(this.model.get('parent_name')) {
+			this.noEditFields.push('parent_type');
+			this.noEditFields.push('parent_name');
+			this.$('.record-edit-link-wrapper[data-name=parent_type]').remove();
+			this.$('.record-edit-link-wrapper[data-name=parent_name]').remove();
+		}
+		if(this.model.get('tasks_opportunities_1_name')) {
+			this.noEditFields.push('solicitud_alta_c');
+			this.$('.record-edit-link-wrapper[data-name=solicitud_alta_c]').remove();
+		}
 		if(this.model.get('status') == "Completed") {
 			_.each(this.model.fields, function(field) {
 				if (!_.isEqual(field.name,'tasks_opportunities_1_name')) {
 					this.noEditFields.push(field.name);
 					this.$('.record-edit-link-wrapper[data-name='+field.name+']').remove();
-					this.$("[data-name='"+field.name+"']").attr('style', 'pointer-events:none;');
-					this.$("[data-name='tasks_opportunities_1_name']").attr('style', 'pointer-events:none;');
+					this.$("[data-name='description']").attr('style', 'pointer-events:none;');
 					//Oculta campos CAC
 					if(app.user.attributes.puestousuario_c != '61' || this.model.get('parent_type') != "Accounts")
 					{
@@ -453,16 +463,46 @@
     validaRequeridos: function (fields, errors, callback) {
 		var puesto = this.model.get('puesto_asignado_c');
         if(app.user.attributes.puestousuario_c == '61' && this.model.get('parent_type') == "Accounts" && !this.model.get('potencial_negocio_c') && this.model.get('status') == 'Completed' && (puesto == 5 || puesto == 11 || puesto == 16 || puesto == 53 || puesto == 54)) {
-            app.alert.show("potencial_negocio_c", {
-                level: "error",
-                title: "Potencial de Negocio<br>",
-                messages: "El campo Potencial de Negocio es requerido",
-                autoClose: false
-            });
             app.error.errorName2Keys['custom_message2'] = '';
             errors['potencial_negocio_c'] = errors['potencial_negocio_c'] || {};
             errors['potencial_negocio_c'].custom_message2 = true;
         }
 		callback(null, fields, errors);
+    },
+
+    valida_requeridos: function (fields, errors, callback) {
+        var campos = "";
+        _.each(errors, function (value, key) {
+            _.each(this.model.fields, function (field) {
+                if (_.isEqual(field.name, key)) {
+                    if (field.vname) {
+                        if (field.vname == 'LBL_DUE_DATE') {
+                            campos = campos + '<b>Fecha de vencimiento</b><br>';
+                        }
+                        else {
+                            if (field.vname == 'LBL_DETALLE_MOTIVO_POTENCIAL') {
+                                campos = campos + '<b>Detalle</b><br>';
+                            }
+                            else {
+								if (field.vname == 'LBL_POTENCIAL_NEGOCIO') {
+									campos = campos + '<b>Potencial de Negocio</b><br>';
+								}
+								else {
+									campos = campos + '<b>' + app.lang.get(field.vname, "Calls") + '</b><br>';
+								}
+                            }
+                        }
+                    }
+                }
+            }, this);
+        }, this);
+        if (campos) {
+            app.alert.show("Campos Requeridos", {
+                level: "error",
+                messages: "Hace falta completar la siguiente información en la <b>Tarea:</b><br>" + campos,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
     },
 })
