@@ -38,6 +38,12 @@
 			this.$('[data-name=motivo_potencial_c]').hide();
 			this.$('[data-name=detalle_motivo_potencial_c]').hide();
 		}
+		if(this.model.get('parent_name')) {
+			this.noEditFields.push('parent_type');
+			this.noEditFields.push('parent_name');
+			this.$('[data-name="parent_type"]').attr('style', 'pointer-events:none');
+			this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none');
+		}
 		if (App.user.attributes.puestousuario_c=='27'||App.user.attributes.puestousuario_c=='31') {
 			//Oculta Check ayuda
 			this.$('[data-name=ayuda_asesor_cp_c]').hide(); 

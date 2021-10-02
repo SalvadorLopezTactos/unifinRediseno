@@ -7,7 +7,7 @@
 
     _render: function (options) {
         this._super("_render");
-        if(this.context.parent.get('module')=='Tasks' && $('input[value="filterSolicitudTemplate"]').val()=='filterSolicitudTemplate'){
+        if((this.context.parent.get('module')=='Tasks' || this.context.parent.get('module')=='Accounts') && $('input[value="filterSolicitudTemplate"]').val()=='filterSolicitudTemplate'){
             //Ocultando ícono que elimina filtro
             $('.choice-filter-close').hide();
             $('.choice-filter-label').parent('.choice-filter-clickable').attr('style','pointer-events:none');
