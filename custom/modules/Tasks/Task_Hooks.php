@@ -50,12 +50,7 @@ class Task_Hooks
     public function sendEmail($bean=null,$event=null,$args=null)
 	{
         $bean->fecha_vacia_c = $bean->fecha_calificacion_c;
-		if($bean->fetched_row['status'] == 'Atrasada') {
-			$bean->status = $bean->fetched_row['status'];
-			$bean->atrasada_c = $bean->fetched_row['atrasada_c'];
-		}
 		if($bean->potencial_negocio_c) $bean->status = 'Completed';
-		if(!$bean->subetapa_c) $bean->solicitud_alta_c = 1;
 		if(empty($bean->fetched_row['id']) && $bean->puesto_c == 61 && $bean->parent_type == 'Accounts') {
 			$account = BeanFactory::getBean('Accounts', $bean->parent_id);
 			$user = BeanFactory::getBean('Users', $account->user_id_c);
