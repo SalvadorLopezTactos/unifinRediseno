@@ -65,26 +65,40 @@ array (
               ),
               4 => 
               array (
+                'name' => 'tct_etapa_ddw_c',
+                'label' => 'LBL_TCT_ETAPA_DDW_C',
+                'enabled' => true,
+                'default' => true,
+              ),
+              5 => 
+              array (
+                'name' => 'estatus_c',
+                'label' => 'LBL_ESTATUS',
+                'enabled' => true,
+                'default' => true,
+              ),
+              6 => 
+              array (
                 'name' => 'opportunity_type',
                 'label' => 'LBL_TYPE',
                 'enabled' => true,
                 'default' => false,
               ),
-              5 => 
+              7 => 
               array (
                 'name' => 'lead_source',
                 'label' => 'LBL_LEAD_SOURCE',
                 'enabled' => true,
                 'default' => false,
               ),
-              6 => 
+              8 => 
               array (
                 'name' => 'next_step',
                 'label' => 'LBL_NEXT_STEP',
                 'enabled' => true,
                 'default' => false,
               ),
-              7 => 
+              9 => 
               array (
                 'name' => 'date_closed',
                 'label' => 'LBL_DATE_CLOSED',
@@ -96,7 +110,7 @@ array (
                 ),
                 'readonly' => true,
               ),
-              8 => 
+              10 => 
               array (
                 'name' => 'created_by_name',
                 'label' => 'LBL_CREATED',
@@ -106,7 +120,7 @@ array (
                 'link' => true,
                 'readonly' => true,
               ),
-              9 => 
+              11 => 
               array (
                 'name' => 'team_name',
                 'label' => 'LBL_LIST_TEAM',
@@ -114,7 +128,7 @@ array (
                 'default' => false,
                 'type' => 'teamset',
               ),
-              10 => 
+              12 => 
               array (
                 'name' => 'assigned_user_name',
                 'label' => 'LBL_LIST_ASSIGNED_USER',
@@ -123,7 +137,7 @@ array (
                 'id' => 'ASSIGNED_USER_ID',
                 'link' => true,
               ),
-              11 => 
+              13 => 
               array (
                 'name' => 'modified_by_name',
                 'label' => 'LBL_MODIFIED',
@@ -133,7 +147,7 @@ array (
                 'link' => true,
                 'readonly' => true,
               ),
-              12 => 
+              14 => 
               array (
                 'name' => 'date_entered',
                 'label' => 'LBL_DATE_ENTERED',
