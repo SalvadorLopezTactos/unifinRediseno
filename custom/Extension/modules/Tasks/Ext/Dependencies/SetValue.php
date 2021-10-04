@@ -72,21 +72,3 @@ $dependencies['Tasks']['atrasada']= array
 		),
     ),
 );
-
-$dependencies['Tasks']['solicitud_alta_c']= array
-(
-    'hooks'=> array('all'),
-    'trigger'=>'true',
-    'triggerFields'=> array('tasks_opportunities_1_name'),
-    'onload'=> true,
-    'actions'=> array(	
-		array(
-			'name'=>'SetValue',
-			'params'=> array(
-				'target'=>'solicitud_alta_c',
-				'label'=>'LBL_SOLICITUD_ALTA',
-				'value'=>'ifElse(equal($tasks_opportunities_1_name,""),1,0)',
-			),
-		),
-    ),
-);
