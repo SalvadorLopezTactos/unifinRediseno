@@ -261,6 +261,8 @@
 			//Oculta Check ayuda
 			this.$('[data-name=ayuda_asesor_cp_c]').hide(); 
         }
+		this.noEditFields.push('solicitud_alta_c');
+		this.$('[data-name="solicitud_alta_c"]').attr('style', 'pointer-events:none');
     },
 
     isAyudaVisible:function(){

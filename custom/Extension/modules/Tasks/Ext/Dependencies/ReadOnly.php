@@ -45,21 +45,3 @@ $dependencies['Tasks']['readonly'] = array
 		),
 	),
 );
-
-$dependencies['Tasks']['solicitud_alta'] = array
-(
-	'hooks' => array('all'),
-	'trigger' => 'true',
-	'triggerFields' => array('tasks_opportunities_1_name'),
-	'onload' => true,
-	'actions' => array(
-		array(
-			'name' => 'ReadOnly',
-			'params' => array
-			(
-				'target' => 'solicitud_alta_c',
-				'value'=>'not(equal($tasks_opportunities_1_name,""))',
-			),
-		),
-	),
-);

@@ -44,6 +44,20 @@
 			this.$('[data-name="parent_type"]').attr('style', 'pointer-events:none');
 			this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none');
 		}
+		if(this.model.get('parent_type') == "Accounts" && this.model.get('parent_id') != "" && this.model.get('parent_id') != null && this.model.get('parent_id') != 'undefined') {
+			var params = {
+				'account_id': this.model.get('parent_id'),
+			};
+			var urlGetSolicitudes = app.api.buildURL("getSolicitudes", '', {}, {});
+			app.api.call("create", urlGetSolicitudes, params, {
+                success: _.bind(function (data) {
+					this.model.set('solicitud_alta_c',0);
+                    if(data == 0) this.model.set('solicitud_alta_c',1);
+                }, this)
+            });
+		}
+		this.noEditFields.push('solicitud_alta_c');
+		this.$('[data-name="solicitud_alta_c"]').attr('style', 'pointer-events:none');
 		if (App.user.attributes.puestousuario_c=='27'||App.user.attributes.puestousuario_c=='31') {
 			//Oculta Check ayuda
 			this.$('[data-name=ayuda_asesor_cp_c]').hide(); 
@@ -178,6 +192,19 @@
         //     this.model.set('name', '');
 		// 	this.model.set('date_due', '');
         // }
+		
+		if(this.model.get('parent_type') == "Accounts" && this.model.get('parent_id') != "" && this.model.get('parent_id') != null && this.model.get('parent_id') != 'undefined') {
+			var params = {
+				'account_id': this.model.get('parent_id'),
+			};
+			var urlGetSolicitudes = app.api.buildURL("getSolicitudes", '', {}, {});
+			app.api.call("create", urlGetSolicitudes, params, {
+                success: _.bind(function (data) {
+					this.model.set('solicitud_alta_c',0);
+                    if(data == 0) this.model.set('solicitud_alta_c',1);
+                }, this)
+            });
+		}
     },
 	
 	/*
