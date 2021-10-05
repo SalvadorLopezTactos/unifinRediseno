@@ -110,7 +110,7 @@
 					this.$('.record-edit-link-wrapper[data-name='+field.name+']').remove();
 					this.$("[data-name='description']").attr('style', 'pointer-events:none;');
 					//Oculta campos CAC
-					if(app.user.attributes.puestousuario_c != '61' || this.model.get('parent_type') != "Accounts")
+					if(this.model.get('puesto_c') != '61' || this.model.get('parent_type') != "Accounts")
 					{
 						this.$('[data-name=tasks_opportunities_1_name]').hide();
 						this.$('[data-name=solicitud_alta_c]').hide();
@@ -122,7 +122,7 @@
 				}
 			},this);
 		}
-		if(app.user.attributes.puestousuario_c != '61' || this.model.get('parent_type') != "Accounts") {
+		if(this.model.get('puesto_c') != '61' || this.model.get('parent_type') != "Accounts") {
 			this.$('[data-name=tasks_opportunities_1_name]').hide();
 			this.$('[data-name=solicitud_alta_c]').hide();
 			this.$('[data-name=potencial_negocio_c]').hide();
@@ -130,6 +130,7 @@
 			this.$('[data-name=motivo_potencial_c]').hide();
 			this.$('[data-name=detalle_motivo_potencial_c]').hide();
 		}
+		this.$('[data-name=puesto_c]').hide();
     },
 
     _render: function () {

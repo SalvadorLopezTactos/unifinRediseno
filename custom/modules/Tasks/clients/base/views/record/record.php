@@ -196,14 +196,19 @@ array (
                 'name' => 'tasks_opportunities_1_name',
                 'initial_filter' => 'filterSolicitudTemplate',
                 'initial_filter_label' => 'LBL_FILTER_SOLICITUD_TEMPLATE',
-				'filter_populate' => array(
-					'tct_etapa_ddw_c' => array('R'),
-					'estatus_c' => array(
-						0 => 'R',
-						1 => 'K',
-						2 => 'CM',
-					),
-				),
+                'filter_populate' => 
+                array (
+                  'tct_etapa_ddw_c' => 
+                  array (
+                    0 => 'R',
+                  ),
+                  'estatus_c' => 
+                  array (
+                    0 => 'R',
+                    1 => 'K',
+                    2 => 'CM',
+                  ),
+                ),
                 'filter_relate' => 
                 array (
                   'parent_id' => 'account_id',
@@ -240,6 +245,8 @@ array (
               ),
               15 => 
               array (
+                'name' => 'puesto_c',
+                'label' => 'LBL_PUESTO',
               ),
             ),
           ),

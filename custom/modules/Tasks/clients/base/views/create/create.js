@@ -29,15 +29,6 @@
         //         this.$('[data-name="parent_name"]').attr('style','pointer-events:none;')
         //     }
         // }
-		if(app.user.attributes.puestousuario_c != '61')
-		{
-			this.$('[data-name=tasks_opportunities_1_name]').hide();
-			this.$('[data-name=solicitud_alta_c]').hide();
-			this.$('[data-name=potencial_negocio_c]').hide();
-			this.$('[data-name=fecha_calificacion_c]').hide();
-			this.$('[data-name=motivo_potencial_c]').hide();
-			this.$('[data-name=detalle_motivo_potencial_c]').hide();
-		}
 		if(this.model.get('parent_name')) {
 			this.noEditFields.push('parent_type');
 			this.noEditFields.push('parent_name');
@@ -63,6 +54,16 @@
 			this.$('[data-name=ayuda_asesor_cp_c]').hide(); 
         }
         this.isAyudaVisible();
+		this.$('[data-name=puesto_c]').hide();
+		if(app.user.attributes.puestousuario_c != '61')
+		{
+			this.$('[data-name=tasks_opportunities_1_name]').hide();
+			this.$('[data-name=solicitud_alta_c]').hide();
+			this.$('[data-name=potencial_negocio_c]').hide();
+			this.$('[data-name=fecha_calificacion_c]').hide();
+			this.$('[data-name=motivo_potencial_c]').hide();
+			this.$('[data-name=detalle_motivo_potencial_c]').hide();
+		}		
     },
 
     isAyudaVisible:function(){
