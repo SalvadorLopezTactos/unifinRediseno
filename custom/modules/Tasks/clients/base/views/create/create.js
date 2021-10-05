@@ -11,8 +11,6 @@
 		this.model.on('change:ayuda_asesor_cp_c', this._ValoresPredetAsesor, this);
 		this.model.on('change:parent_name', this._ValoresPredetAsesor, this);
         this.model.addValidationTask('validaRelLeadTask', _.bind(this.validaRelLeadTask, this));
-		this.model.addValidationTask('validaSolicitud', _.bind(this.validaSolicitud, this));
-		this.model.addValidationTask('validaRequeridos', _.bind(this.validaRequeridos, this));
 		this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
     },
 
@@ -55,15 +53,12 @@
         }
         this.isAyudaVisible();
 		this.$('[data-name=puesto_c]').hide();
-		if(app.user.attributes.puestousuario_c != '61')
-		{
-			this.$('[data-name=tasks_opportunities_1_name]').hide();
-			this.$('[data-name=solicitud_alta_c]').hide();
-			this.$('[data-name=potencial_negocio_c]').hide();
-			this.$('[data-name=fecha_calificacion_c]').hide();
-			this.$('[data-name=motivo_potencial_c]').hide();
-			this.$('[data-name=detalle_motivo_potencial_c]').hide();
-		}		
+		this.$('[data-name=tasks_opportunities_1_name]').hide();
+		this.$('[data-name=solicitud_alta_c]').hide();
+		this.$('[data-name=potencial_negocio_c]').hide();
+		this.$('[data-name=fecha_calificacion_c]').hide();
+		this.$('[data-name=motivo_potencial_c]').hide();
+		this.$('[data-name=detalle_motivo_potencial_c]').hide();
     },
 
     isAyudaVisible:function(){
@@ -281,40 +276,6 @@
         } else {
             callback(null, fields, errors);
         }
-    },
-
-    validaSolicitud: function (fields, errors, callback) {
-        if (this.model.get('tasks_opportunities_1opportunities_idb')) {            
-            var opp = app.data.createBean('Opportunities', {id: this.model.get('tasks_opportunities_1opportunities_idb')});
-            opp.fetch({
-                success: _.bind(function (model) {
-                    if(model.get('tct_etapa_ddw_c') == 'R' || model.get('estatus_c') == 'R' || model.get('estatus_c') == 'K' || model.get('estatus_c') == 'CM') {
-                        app.alert.show("opp-task", {
-                            level: "error",
-                            title: "Solicitud Cancelada/Rechazada<br>",
-                            messages: "No se puede agregar una relación con una Solicitud Cancelada o Rechazada",
-                            autoClose: false
-                        });
-                        app.error.errorName2Keys['custom_message2'] = '';
-                        errors['tasks_opportunities_1_name'] = errors['tasks_opportunities_1_name'] || {};
-                        errors['tasks_opportunities_1_name'].custom_message2 = true;
-                    }
-                    callback(null, fields, errors);
-                }, this)
-            });
-        } else {
-            callback(null, fields, errors);
-        }
-    },
-
-    validaRequeridos: function (fields, errors, callback) {
-		var puesto = this.model.get('puesto_asignado_c');
-        if(app.user.attributes.puestousuario_c == '61' && this.model.get('parent_type') == "Accounts" && !this.model.get('potencial_negocio_c') && this.model.get('status') == 'Completed' && (puesto == 5 || puesto == 11 || puesto == 16 || puesto == 53 || puesto == 54)) {
-            app.error.errorName2Keys['custom_message2'] = '';
-            errors['potencial_negocio_c'] = errors['potencial_negocio_c'] || {};
-            errors['potencial_negocio_c'].custom_message2 = true;
-        }
-		callback(null, fields, errors);
     },
 
     valida_requeridos: function (fields, errors, callback) {
