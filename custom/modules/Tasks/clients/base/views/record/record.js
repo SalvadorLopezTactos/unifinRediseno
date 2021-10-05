@@ -110,7 +110,7 @@
 					this.$('.record-edit-link-wrapper[data-name='+field.name+']').remove();
 					this.$("[data-name='description']").attr('style', 'pointer-events:none;');
 					//Oculta campos CAC
-					if(app.user.attributes.puestousuario_c != '61' || this.model.get('parent_type') != "Accounts")
+					if(this.model.get('puesto_c') != '61' || this.model.get('parent_type') != "Accounts")
 					{
 						this.$('[data-name=tasks_opportunities_1_name]').hide();
 						this.$('[data-name=solicitud_alta_c]').hide();
@@ -122,7 +122,30 @@
 				}
 			},this);
 		}
-		if(app.user.attributes.puestousuario_c != '61' || this.model.get('parent_type') != "Accounts") {
+		var RO = 1;
+		var puesto = app.user.attributes.puestousuario_c;
+        if(puesto == 5 || puesto == 11 || puesto == 16 || puesto == 53 || puesto == 54) RO = 0;
+		if(RO) {
+			this.noEditFields.push('tasks_opportunities_1_name');
+			this.noEditFields.push('solicitud_alta_c');
+			this.noEditFields.push('potencial_negocio_c');
+			this.noEditFields.push('fecha_calificacion_c');
+			this.noEditFields.push('motivo_potencial_c');
+			this.noEditFields.push('detalle_motivo_potencial_c');
+			this.$('.record-edit-link-wrapper[data-name=tasks_opportunities_1_name]').remove();
+			this.$('.record-edit-link-wrapper[data-name=solicitud_alta_c]').remove();
+			this.$('.record-edit-link-wrapper[data-name=potencial_negocio_c]').remove();
+			this.$('.record-edit-link-wrapper[data-name=fecha_calificacion_c]').remove();
+			this.$('.record-edit-link-wrapper[data-name=motivo_potencial_c]').remove();
+			this.$('.record-edit-link-wrapper[data-name=detalle_motivo_potencial_c]').remove();
+			this.$("[data-name='tasks_opportunities_1_name']").attr('style', 'pointer-events:none;');
+			this.$("[data-name='solicitud_alta_c']").attr('style', 'pointer-events:none;');
+			this.$("[data-name='potencial_negocio_c']").attr('style', 'pointer-events:none;');
+			this.$("[data-name='fecha_calificacion_c']").attr('style', 'pointer-events:none;');
+			this.$("[data-name='motivo_potencial_c']").attr('style', 'pointer-events:none;');
+			this.$("[data-name='detalle_motivo_potencial_c']").attr('style', 'pointer-events:none;');
+		}
+		if(this.model.get('puesto_c') != '61' || this.model.get('parent_type') != "Accounts") {
 			this.$('[data-name=tasks_opportunities_1_name]').hide();
 			this.$('[data-name=solicitud_alta_c]').hide();
 			this.$('[data-name=potencial_negocio_c]').hide();
@@ -130,6 +153,7 @@
 			this.$('[data-name=motivo_potencial_c]').hide();
 			this.$('[data-name=detalle_motivo_potencial_c]').hide();
 		}
+		this.$('[data-name=puesto_c]').hide();
     },
 
     _render: function () {

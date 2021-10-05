@@ -1,7 +1,7 @@
 <?php
- // created: 2021-09-25 13:38:46
+ // created: 2021-10-05 09:55:02
 $dictionary['Task']['fields']['puesto_c']['duplicate_merge_dom_value']=0;
-$dictionary['Task']['fields']['puesto_c']['labelValue']='Puesto';
+$dictionary['Task']['fields']['puesto_c']['labelValue']='Puesto Creado';
 $dictionary['Task']['fields']['puesto_c']['full_text_search']=array (
   'enabled' => '0',
   'boost' => '1',
