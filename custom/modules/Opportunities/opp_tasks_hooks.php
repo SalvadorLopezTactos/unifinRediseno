@@ -16,7 +16,7 @@ class opp_tasks_class
 			if($puesto == 5 || $puesto == 11 || $puesto == 16 || $puesto == 53 || $puesto == 54)
 			{
 				$query = "select a.id from tasks a, tasks_cstm b where a.id = b.id_c and a.deleted = 0 and a.parent_id = '$cuenta'
-						 and b.fecha_calificacion_c > CURDATE() - INTERVAL 1 MONTH and a.id not in 
+						 and b.fecha_calificacion_c >= CURDATE() - INTERVAL 3 MONTH and a.id not in
 						 (select tasks_opportunities_1tasks_ida from tasks_opportunities_1_c where deleted = 0) order by b.fecha_calificacion_c desc limit 1";
 				$result = $db->query($query);
 				$row = $db->fetchByAssoc($result);
