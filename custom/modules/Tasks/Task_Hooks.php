@@ -51,6 +51,7 @@ class Task_Hooks
 	{
         $bean->fecha_vacia_c = $bean->fecha_calificacion_c;
 		if($bean->potencial_negocio_c) $bean->status = 'Completed';
+		if(!$bean->potencial_negocio_c) $bean->status = $bean->fetched_row['status'];
 		if(empty($bean->fetched_row['id']) && $bean->puesto_c == 61 && $bean->parent_type == 'Accounts') {
 			$account = BeanFactory::getBean('Accounts', $bean->parent_id);
 			$user = BeanFactory::getBean('Users', $account->user_id_c);
