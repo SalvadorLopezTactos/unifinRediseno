@@ -12,7 +12,7 @@
         this.on('render',this.disableparentsfields,this);
 		this.model.on('change:ayuda_asesor_cp_c', this._ValoresPredetAsesor, this);
 		this.model.on('change:parent_name', this._ValoresPredetAsesor, this);
-				
+
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         this.model.addValidationTask('checkdate', _.bind(this.checkdate, this));
 		this.model.addValidationTask('valida_asignado', _.bind(this.valida_asignado, this));
@@ -277,13 +277,13 @@
     /* @Salvador Lopez Y Adrian Arauz
     Oculta los campos relacionados
     */
-    
+
     disableparentsfields:function () {
         //this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;');
         //$('.record-cell[data-type="relate"]').removeAttr("style");
 		if (App.user.attributes.puestousuario_c=='27'||App.user.attributes.puestousuario_c=='31') {
 			//Oculta Check ayuda
-			this.$('[data-name=ayuda_asesor_cp_c]').hide(); 
+			this.$('[data-name=ayuda_asesor_cp_c]').hide();
         }
 		this.noEditFields.push('solicitud_alta_c');
 		this.$('[data-name="solicitud_alta_c"]').attr('style', 'pointer-events:none');
@@ -291,26 +291,26 @@
 
     isAyudaVisible:function(){
         if(this.model.get('parent_type')=="Leads"){
-            this.$('[data-name=ayuda_asesor_cp_c]').hide(); 
+            this.$('[data-name=ayuda_asesor_cp_c]').hide();
         }
     },
-	
+
 	/*
-	Erick de Jesus check ayuda CP 
+	Erick de Jesus check ayuda CP
 	*/
 	_ValoresPredetAsesor: function () {
 		var parent_nombre="";
 		var fechaini = "";
 		var tomorrow = new Date();
 		var puesto = App.user.attributes.puestousuario_c; //27=> Agente Tel, 31=> Coordinador CP,
-		
+
         if(this.model.get('ayuda_asesor_cp_c') == '1') {
-			
+
 			var module = this.model.get('parent_type');
 			var parent_id = this.model.get('parent_id');
-				
+
 			if((module == "Accounts" || module == "Leads") && (parent_id != "" && parent_id != null && parent_id != 'undefined')){
-			
+
 				this.model.set('name', "AYUDA CP");
 				var reg_parent = app.data.createBean(module, {id:this.model.get('parent_id')});
 				reg_parent.fetch({
@@ -319,7 +319,7 @@
 						this.model.set('name', "AYUDA CP - "+model.get('name'));
 					}, this)
 				});
-				
+
 			}else{
 				this.model.set('name', "AYUDA CP");
 			}
@@ -329,13 +329,13 @@
 		// 	this.model.set('date_due', '');
         // }
     },
-	
+
 	/*
-	Erick de Jesus valida usuario asesor telefonico asignado cuando el check de ayuda esta activo 
+	Erick de Jesus valida usuario asesor telefonico asignado cuando el check de ayuda esta activo
 	*/
-	valida_asignado:function (fields, errors, callback) {        
+	valida_asignado:function (fields, errors, callback) {
 		if (this.model.get('ayuda_asesor_cp_c') == '1'){
-			
+
 			var user = app.data.createBean('Users', {id:this.model.get('assigned_user_id')});
             user.fetch({
                 success: _.bind(function (model) {
@@ -356,13 +356,13 @@
             });
         }else{
 			callback(null, fields, errors);
-		}       
-    },     
+		}
+    },
 
     validaRelLeadTask: function () {
 
         if (this.model.get('parent_id') && this.model.get('parent_type') == "Leads") {
-            
+
             var lead = app.data.createBean('Leads', {id: this.model.get('parent_id')});
             lead.fetch({
                 success: _.bind(function (model) {
@@ -374,8 +374,8 @@
                             title: "Lead Cancelado<br>",
                             messages: "No se puede agregar / editar una relación con Lead Cancelado",
                             autoClose: false
-                        });  
-                        
+                        });
+
                         //Bloquear el registro completo y mostrar alerta
                         $('.record').attr('style', 'pointer-events:none');
                         $('.dropdown-toggle').attr('style', 'pointer-events:none');
@@ -385,7 +385,7 @@
                         var editButton = self.getField('edit_button');
                         editButton.setDisabled(true);
                     }
-                   
+
                 }, this)
             });
         }
@@ -394,12 +394,12 @@
     metodoAsignacionLM: function (fields, errors, callback) {
 
         if (this.model.get('name') == "Solicitud de asignación de Lead/Cuenta - (Lead Management)") {
-            
+
             if (this.model.get('status') == 'Completed') {
-                
-                if((this.model.get('parent_type') == "Accounts" || this.model.get('parent_type') == "Leads" || this.model.get('parent_type') == "") && 
+
+                if((this.model.get('parent_type') == "Accounts" || this.model.get('parent_type') == "Leads" || this.model.get('parent_type') == "") &&
                 this.model.get('parent_id') == ""){
-                    
+
                     app.alert.show('message-metodo-lm', {
                         level: 'error',
                         messages: 'Seleccionar un Lead/Cuenta relacionada con la Tarea!',
@@ -408,37 +408,37 @@
 
                     errors['parent_name'] = errors['parent_name'] || {};
                     errors['parent_name'].required = true;
-                
+
                 } else {
 
                     if(this.model.get('parent_type') == "Leads" && this.model.get('parent_id') != ""){
-                        
+
                         var lead_ = app.data.createBean('Leads', {id: this.model.get('parent_id')});
                         lead_.fetch({
                             success: _.bind(function (model) {
                                 //Método de Asignación LM - Centro de Prospección
                                 model.set('metodo_asignacion_lm_c','1');
-                                model.save(); 
-                            
+                                model.save();
+
                             }, this)
                         });
                     }
                     if(this.model.get('parent_type') == "Accounts" && this.model.get('parent_id') != ""){
-                        
+
                         var userTipoProducto = App.user.attributes.tipodeproducto_c;
                         var idProducto = '';
 
                         app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + this.model.get('parent_id')), null, {
                             success: function (data) {
                                 Productos = data;
-            
+
                                 _.each(Productos, function (value, key) {
                                     var tipoProducto = Productos[key].tipo_producto;
-                                    
+
                                     if (tipoProducto == userTipoProducto) { //Tipo de Producto Leasing "1"
-                                        
+
                                         idProducto = Productos[key].id; //Id cuenta de uni productos "Leasing"
-                                        
+
                                         var producto = app.data.createBean('uni_Productos', { id: idProducto });
                                         producto.fetch({
                                             success: _.bind(function (model) {
@@ -463,7 +463,7 @@
     },
 
     validaSolicitud: function (fields, errors, callback) {
-        if (this.model.get('tasks_opportunities_1opportunities_idb')) {            
+        if (this.model.get('tasks_opportunities_1opportunities_idb')) {
             var opp = app.data.createBean('Opportunities', {id: this.model.get('tasks_opportunities_1opportunities_idb')});
             opp.fetch({
                 success: _.bind(function (model) {
@@ -487,13 +487,13 @@
     },
 
     validaRequeridos: function (fields, errors, callback) {
-		var puesto = this.model.get('puesto_asignado_c');
-        if(app.user.attributes.puestousuario_c == '61' && this.model.get('parent_type') == "Accounts" && !this.model.get('potencial_negocio_c') && this.model.get('status') == 'Completed' && (puesto == 5 || puesto == 11 || puesto == 16 || puesto == 53 || puesto == 54)) {
+		    var puesto = App.user.attributes.puestousuario_c; //this.model.get('puesto_asignado_c');
+        if(this.model.get('puesto_c') == '61' && this.model.get('parent_type') == "Accounts" && !this.model.get('potencial_negocio_c') && this.model.get('status') == 'Completed' && (puesto == 5 || puesto == 11 || puesto == 16 || puesto == 53 || puesto == 54)) {
             app.error.errorName2Keys['custom_message2'] = '';
             errors['potencial_negocio_c'] = errors['potencial_negocio_c'] || {};
             errors['potencial_negocio_c'].custom_message2 = true;
         }
-		callback(null, fields, errors);
+        callback(null, fields, errors);
     },
 
     valida_requeridos: function (fields, errors, callback) {
