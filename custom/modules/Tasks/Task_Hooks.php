@@ -19,7 +19,7 @@ class Task_Hooks
 
     function InfoTasks($bean = null, $event = null, $args = null)
     {
-        if (!$args['isUpdate']) { 
+        if (!$args['isUpdate']) {
             global $db ,$current_user;
             $GLOBALS['log']->fatal("InfoTasks: Inicio");
             //Realiza consulta para obtener info del usuario asignado
@@ -51,7 +51,7 @@ class Task_Hooks
 	{
         $bean->fecha_vacia_c = $bean->fecha_calificacion_c;
 		if($bean->potencial_negocio_c) $bean->status = 'Completed';
-		if(!$bean->potencial_negocio_c) $bean->status = $bean->fetched_row['status'];
+		//if(!$bean->potencial_negocio_c) $bean->status = $bean->fetched_row['status'];
 		if(empty($bean->fetched_row['id']) && $bean->puesto_c == 61 && $bean->parent_type == 'Accounts') {
 			$account = BeanFactory::getBean('Accounts', $bean->parent_id);
 			$user = BeanFactory::getBean('Users', $account->user_id_c);
@@ -72,7 +72,7 @@ class Task_Hooks
 					<br><br>Descripción: <b>'.$bean->description.'</b>
 					<br><br>Es importante que atienda esta tarea ya que representa una oportunidad de negocio para UNIFIN, la fecha de vencimiento de la tarea es <b>'.$fecha.'</b>
 					<br><br>Atentamente Unifin</font></p>
-					<br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>		
+					<br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
 					<p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
 					Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
 					Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
@@ -84,7 +84,7 @@ class Task_Hooks
 					<br><br>Asesor creador del registro: <b>'.$creador.'</b>
 					<br><br>Descripción: <b>'.$bean->description.'</b>
 					<br><br>Atentamente Unifin</font></p>
-					<br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>		
+					<br><p class="imagen"><img border="0" id="bannerUnifin" src="https://www.unifin.com.mx/ri/front/img/logo.png"></span></p>
 					<p class="MsoNormal" style="text-align: justify;"><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">
 					Este correo electrónico y sus anexos pueden contener información CONFIDENCIAL para uso exclusivo de su destinatario. Si ha recibido este correo por error, por favor, notifíquelo al remitente y bórrelo de su sistema.
 					Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
