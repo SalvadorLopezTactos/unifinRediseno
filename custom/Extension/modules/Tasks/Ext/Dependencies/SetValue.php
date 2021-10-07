@@ -37,24 +37,6 @@ $dependencies['Tasks']['ayuda_asesor_cp_c']= array
   ),
 );
 
-$dependencies['Tasks']['status_completed']= array
-(
-    'hooks'=> array('all'),
-    'trigger'=>'true',
-    'triggerFields'=> array('potencial_negocio_c'),
-    'onload'=> true,
-    'actions'=> array(	
-		array(
-			'name'=>'SetValue',
-			'params'=> array(
-				'target'=>'status',
-				'label'=>'LBL_STATUS',
-				'value'=>'ifElse(equal($potencial_negocio_c,""),$status,"Completed")',
-			),
-		),
-    ),
-);
-
 $dependencies['Tasks']['atrasada']= array
 (
     'hooks'=> array('all'),
