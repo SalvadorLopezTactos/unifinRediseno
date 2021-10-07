@@ -138,7 +138,6 @@
 			this.$('.record-edit-link-wrapper[data-name=fecha_calificacion_c]').remove();
 			this.$('.record-edit-link-wrapper[data-name=motivo_potencial_c]').remove();
 			this.$('.record-edit-link-wrapper[data-name=detalle_motivo_potencial_c]').remove();
-			this.$("[data-name='tasks_opportunities_1_name']").attr('style', 'pointer-events:none;');
 			this.$("[data-name='solicitud_alta_c']").attr('style', 'pointer-events:none;');
 			this.$("[data-name='potencial_negocio_c']").attr('style', 'pointer-events:none;');
 			this.$("[data-name='fecha_calificacion_c']").attr('style', 'pointer-events:none;');
