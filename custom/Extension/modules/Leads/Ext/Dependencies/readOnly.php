@@ -100,6 +100,13 @@ $dependencies['Leads']['readonly_fields'] = array(
         array(
             'name' => 'ReadOnly',
             'params' => array(
+                'target' => 'producto_financiero_c',
+                'value' => 'true',
+            ),
+        ),
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
                 'target' => 'nombre_de_cargar_c',
                 'value' => 'true',
             ),
