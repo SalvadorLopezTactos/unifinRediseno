@@ -37,7 +37,7 @@ function assignLeadMktToUser()
     $row = $db->fetchByAssoc($queryResultId);
     $idMKT = $row['id'];
     /** Buscamos los Leads que tengan asignados el usuario de grupo 9.- MKT */
-    $getLeads = "SELECT a.id id, b.compania_c compania , b.id_landing_c id_landing_c, b.origen_c origen_c, b.detalle_origen_c detalle_origen_c from leads a, leads_cstm b where a.id = b.id_c and a.assigned_user_id='{$idMKT}'";
+    $getLeads = "SELECT a.id id, b.compania_c compania , b.id_landing_c id_landing_c, b.origen_c origen_c, b.detalle_origen_c detalle_origen_c, b.producto_financiero_c producto_financiero_c from leads a, leads_cstm b where a.id = b.id_c and a.assigned_user_id='{$idMKT}'";
     $ResultLeads = $db->query($getLeads);
     while ($row = $GLOBALS['db']->fetchByAssoc($ResultLeads)) {
 
