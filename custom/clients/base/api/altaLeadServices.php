@@ -661,6 +661,7 @@ class altaLeadServices extends SugarApi
         $bean_Lead->contacto_telefono_c = $dataOrigen['contacto_telefono_c'];
         $bean_Lead->contacto_email_c = $dataOrigen['contacto_email_c'];
         $bean_Lead->rfc_c = $dataOrigen['rfc_c'];
+        $bean_Lead->producto_financiero_c = $dataOrigen['producto_financiero_c'];
 
         # falta obtener el asignado a
 
