@@ -26,6 +26,8 @@ function assignLeadMktToUser()
         if ($row['name'] == 'id_usuario_centro_prospeccion') $idAsesorCP = $row['value'];
         if ($row['name'] == 'id_usuario_closer') $idAsesorCloser = $row['value'];
         if ($row['name'] == 'id_usuario_growth') $idAsesorGrowth = $row['value'];
+        if ($row['name'] == 'id_usuario_asignar_unilease') $idAsesorUnilease[] = $row['value'];
+        if ($row['name'] == 'id_ultimo_unilease') $indiceUnilease = $row['value'];
     }
 
     /* Obetenemos el id del usuario de grupo de 9.- MKT*/
@@ -43,6 +45,7 @@ function assignLeadMktToUser()
         $origen_c = $row['origen_c']; //Obtiene Origen 
         $detalle_origen_c = $row['detalle_origen_c']; //Obtiene Detalle Origen 
         $id_landing_c = $row['id_landing_c']; // Obtiene id_landing
+        $productoFinanciero = $row['producto_financiero_c']; //PRODUCTO FINANCIERO
 
         //VALIDACION DE REVISTA MEDICA
         if ($id_landing_c != 'LP REVISTA MÉDICA') {
@@ -56,6 +59,21 @@ function assignLeadMktToUser()
                 if ($compania_c == 2) $subpuesto_c = 4;
             }
 
+            //VALIDACION DE ASESORES COMPANIA UNIFIN - PRODUCTO FINANCIERO UNILEASE 
+            if ($compania_c == 1 && $productoFinanciero == 41) {
+                $flagCarrusel = 0;
+
+                if (count($idAsesorUnilease) > 0) {
+                    $newIndiceUnilease = $indiceUnilease >= count($idAsesorUnilease) - 1 ? 0 : $indiceUnilease + 1;
+                    $assign_Asesor_Unilease = $idAsesorUnilease[$newIndiceUnilease];
+
+                    $update_assigned_responsable = "UPDATE leads l INNER JOIN users u on u.id='" . $assign_Asesor_Unilease . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$assign_Asesor_Unilease}'  WHERE l.id ='{$row['id']}'";
+                    $db->query($update_assigned_responsable);
+
+                    $update_Indice_Unilease = "UPDATE config c SET c.value ='{$newIndiceUnilease}' WHERE c.name ='id_ultimo_unilease' and c.category = 'AltaLeadsServices'";
+                    $db->query($update_Indice_Unilease);
+                }
+            }
             //COMPANIA UNICLICK, ORIGEN ALIANZAS Y DETALLE ORIGEN
             if ($compania_c == 2 && $origen_c == 12 && in_array($detalle_origen_c, $key_responable_do_list)) {
                 $update_assigned_responsable = "UPDATE leads l INNER JOIN users u on u.id='" . $idAsesorAlianza . "' SET l.team_id=u.default_team, l.team_set_id=u.team_set_id, l.assigned_user_id ='{$idAsesorAlianza}'  WHERE l.id ='{$row['id']}'";
