@@ -58,7 +58,7 @@
 
         this.model.on('sync', this._readOnlyDateSE, this);
         this.model.on('sync', this.validaRelLeadCall, this);
-
+		this.model.on('sync', this.roDescription, this);
         this.omiteLlamadaPreventiva();
     },
 
@@ -1052,5 +1052,25 @@
             errors['padres_c'].required = true;
         }
         callback(null, fields, errors);
+    },
+
+    roDescription: function () {
+		var description = this.model.get('description');
+        if((description.includes('El resultado de la llamada fue') && description.length <= 45) || (description.includes('Intento no exitoso') && description.length <= 21) && this.model.get('status') == 'Held') {
+			app.alert.show("description", {
+                level: "warning",
+                title: "Aviso",
+                messages: "Llamada realizada, favor de establecer una <b>descripción</b>",
+                autoClose: false
+            });
+        }
+		else {
+			if(this.model.get('status') == 'Held' && this.model.get('tct_resultado_llamada_ddw_c')) {
+				this.noEditFields.push('description');
+				this.$('.record-edit-link-wrapper[data-name=description]').remove();
+				var editButton = this.getField('edit_button');
+				editButton.setDisabled(true);
+			}
+        }
     },
 })

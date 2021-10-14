@@ -20,7 +20,7 @@ $dependencies['Calls']['readOnly_Held_NotHeld'] = array(
                 'target' => 'edit_button',
                 'label' => 'LBL_EDIT_BUTTON_LABEL',
                 // 'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
-                'value' => 'or(equal($status,"Not Held"),and(equal($status,"Held"),not(equal($tct_resultado_llamada_ddw_c,""))))',
+                'value' => 'equal($status,"Not Held")',
             ),
         ),
         //Asunto
@@ -92,7 +92,7 @@ $dependencies['Calls']['readOnly_Held_NotHeld'] = array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'description',
-                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
+                'value' => 'equal($status,"Not Held")',
             ),
         ),
         //Invitados
