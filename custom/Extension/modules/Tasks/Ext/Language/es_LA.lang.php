@@ -20,3 +20,4 @@ $mod_strings['LBL_PUESTO'] = 'Puesto Creado';
 $mod_strings['LBL_SUBETAPA'] = 'SubEtapa';
 $mod_strings['LBL_ATRASADA'] = 'Atrasada';
 $mod_strings['LBL_PUESTO_ASIGNADO'] = 'Puesto Asignado';
+$mod_strings['LBL_TIPO_TAREA'] = 'Tipo de Tarea';
