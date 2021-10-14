@@ -1,9 +1,9 @@
 ({
     extendsFrom: 'RecordView',
 
-    // events: {
-    //     'click .record-edit-link-wrapper': 'handleEdit',
-    // },
+    events: {
+        'change [name=tipo_tarea_c]': 'actualizaAsunto',
+    },
 
     initialize: function (options) {
         self = this;
@@ -19,14 +19,18 @@
         this.model.addValidationTask('metodo_asignacion_lm', _.bind(this.metodoAsignacionLM, this));
 		this.model.addValidationTask('validaSolicitud', _.bind(this.validaSolicitud, this));
 		this.model.addValidationTask('validaRequeridos', _.bind(this.validaRequeridos, this));
-		this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
+        this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
+        this.model.addValidationTask('valida_atrasada', _.bind(this.valida_atrasada, this));
+
         /*@Jesus Carrillo
             Funcion que pinta de color los paneles relacionados
         */
         this.model.on('sync', this.fulminantcolor, this);
         this.model.on('sync', this.loadprevdate, this);
         this.model.on('sync', this.validaRelLeadTask, this);
-		this.model.on('sync', this.roFunction, this);
+        this.model.on('sync', this.roFunction, this);
+        
+        this.deleteOportunidadRecuperacion();
     },
 
     /**
@@ -530,4 +534,69 @@
         }
         callback(null, fields, errors);
     },
+
+    valida_atrasada: function (fields, errors, callback) {
+        
+        if(this.model.get('status')=='Atrasada'){
+            app.alert.show("atrasada_invalid", {
+                level: "error",
+                title: "No se puede guardar una tarea con estado <b>Atrasada</b>. Seleccione otra opci\u00F3n para continuar",
+                autoClose: false
+            });
+            errors['status'] = errors['status'] || {};
+            errors['status'].required = true;
+        }
+        
+        callback(null, fields, errors);
+    },
+
+    deleteOportunidadRecuperacion(){
+        if (this.model.get('parent_type') == 'Accounts' && this.model.get('parent')!=null && this.model.get('parent')!=undefined) {
+            //la opción de CAC Oportunidad Recuperación solo se muestra para Cliente Perdido, 
+            //tipo_registro_cuenta_c:Cliente: 3, 
+            //subtipo_registro_cuenta_c:Perdido: 17
+            if (this.model.get('parent').tipo_registro_cuenta_c != '3' && this.model.get('parent').subtipo_registro_cuenta_c!='17') {
+                var new_options = app.lang.getAppListStrings('tipo_tarea_list');
+                Object.keys(new_options).forEach(function (key) {
+                    if (key == "CAC Oportunidad Recuperacion") {
+                        delete new_options[key];
+                    }
+                });
+
+                this.model.fields['tipo_tarea_c'].options = new_options;
+            }
+
+        }
+    },
+
+    actualizaAsunto:function(e){
+        var asunto="";
+        if(this.model.get('tipo_tarea_c')!=""){
+            var asunto="";
+            if(this.model.get('tipo_tarea_c')!=""){
+                var tipo_tarea=this.model.get('tipo_tarea_c');
+    
+                //Antes de concatenar, se resetea valor de nombre, para que solo tome el propio asunto y no concatene sobre lo que ya se ha escrito
+                var asunto=this.model.get('name');
+                if(asunto !="" && asunto !=undefined){
+                    var asunto_split=asunto.split(':');
+                    var asunto_inicial=asunto_split[asunto_split.length-1];
+                    asunto=App.lang.getAppListStrings("tipo_tarea_list")[tipo_tarea]+":"+asunto_inicial;
+    
+                    this.model.set("name",asunto);
+    
+                }
+            }
+        }else{
+            var asunto=this.model.get('name');
+            if(asunto !="" && asunto !=undefined){
+                var asunto_split=asunto.split(':');
+                var asunto_inicial=asunto_split[asunto_split.length-1];
+                asunto=asunto_inicial;
+
+                this.model.set("name",asunto);
+
+            }
+        }
+    }
 })
