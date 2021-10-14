@@ -45,12 +45,14 @@ class altaLeadServices extends SugarApi
             $origen = $args['lead']['origen_c'];
             //OBTIENE EL DETALLE ORIGEN
             $detalleOrigen = $args['lead']['detalle_origen_c'];
+            //PRODUCTO FINANCIERO
+            $productoFinanciero = $args['lead']['producto_financiero_c'];
 
             if ($args['lead']['regimen_fiscal_c'] != '3') {
                 $obj_leads['lead'] = $this->sec_validacion($obj_leads['lead']);
                 $response_Services['lead'] = $this->insert_Leads_Asociados($obj_leads['lead'], "");
                 // Actualizamos el campo asignado a de cada registro nuevo
-                $this->get_asignado($response_Services, "1", $compania_c, $id_landing_c, $origen, $detalleOrigen);
+                $this->get_asignado($response_Services, "1", $compania_c, $id_landing_c, $origen, $detalleOrigen, $productoFinanciero);
             } else {
                 /** PErsona Moral */
 
@@ -81,7 +83,7 @@ class altaLeadServices extends SugarApi
                     }
                 }*/
                 // Actualizamos el campo asignado a de cada registro nuevo
-                $this->get_asignado($response_Services, "3", $compania_c, $id_landing_c, $origen, $detalleOrigen);
+                $this->get_asignado($response_Services, "3", $compania_c, $id_landing_c, $origen, $detalleOrigen, $productoFinanciero);
                 /*  } else {
 
                       $GLOBALS['log']->fatal(print_r($obj_leads, true));
@@ -152,7 +154,7 @@ class altaLeadServices extends SugarApi
         return $obj_leads;
     }
 
-    public function get_asignado($data_result, $regimenFiscal, $compania_c, $id_landing_c, $origen = null, $detalleOrigen = null)
+    public function get_asignado($data_result, $regimenFiscal, $compania_c, $id_landing_c, $origen = null, $detalleOrigen = null, $productoFinanciero = null)
     {
         global $db, $app_list_strings;
         $alianzas_carrusel_do_list = $app_list_strings['alianzas_carrusel_do_list'];
@@ -222,7 +224,24 @@ class altaLeadServices extends SugarApi
                 if ($row['name'] == 'id_usuario_centro_prospeccion') $idAsesorCP = $row['value'];
                 if ($row['name'] == 'id_usuario_closer') $idAsesorCloser = $row['value'];
                 if ($row['name'] == 'id_usuario_growth') $idAsesorGrowth = $row['value'];
+                if ($row['name'] == 'id_usuario_asignar_unilease') $idAsesorUnilease[] = $row['value'];
+                if ($row['name'] == 'id_ultimo_unilease') $indiceUnilease = $row['value'];
             }
+
+            //VALIDACION DE ASESORES COMPANIA UNIFIN - PRODUCTO FINANCIERO UNILEASE 
+            if ($compania_c == 1 && $productoFinanciero == 41) {
+                $flagCarrusel = 0;
+
+                if (count($idAsesorUnilease) > 0) {
+                    $newIndiceUnilease = $indiceUnilease >= count($idAsesorUnilease) - 1 ? 0 : $indiceUnilease + 1;
+                    $new_assigned_user = $idAsesorUnilease[$newIndiceUnilease];
+                    $GLOBALS['log']->fatal("UNIFIN-PRODUCTO-FINANCIERO-UNILEASE "  . $new_assigned_user);
+
+                    $update_Indice_Unilease = "UPDATE config c SET c.value ='{$newIndiceUnilease}' WHERE c.name ='id_ultimo_unilease' and c.category = 'AltaLeadsServices'";
+                    $db->query($update_Indice_Unilease);
+                }
+            }
+
             //VALIDACION DE ASESORES UNICLICK RESPONSABLES
             if ($compania_c == 2 && $origen == 12 && in_array($detalleOrigen, $key_responable_do_list)) { //COMPANIA UNICLICK, ORIGEN ALIANZAS Y DETALLE ORIGEN
                 $new_assigned_user = $idAsesorAlianza;
@@ -642,6 +661,7 @@ class altaLeadServices extends SugarApi
         $bean_Lead->contacto_telefono_c = $dataOrigen['contacto_telefono_c'];
         $bean_Lead->contacto_email_c = $dataOrigen['contacto_email_c'];
         $bean_Lead->rfc_c = $dataOrigen['rfc_c'];
+        $bean_Lead->producto_financiero_c = $dataOrigen['producto_financiero_c'];
 
         # falta obtener el asignado a
 
