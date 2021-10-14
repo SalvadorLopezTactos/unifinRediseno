@@ -28,3 +28,19 @@ $hook_array['before_save'][] = Array(
     'Task_Hooks',
     'sendEmail'
 );
+
+$hook_array['before_save'][] = Array(
+    4,
+    'Relaciona última solicitud leasing para solicitud',
+    'custom/modules/Tasks/Task_Hooks.php',
+    'Task_Hooks',
+    'relateOppLeasing'
+);
+
+$hook_array['before_save'][] = Array(
+    5,
+    'Envia notificacion al asesor leasing, comunicando actualización del registro',
+    'custom/modules/Tasks/Task_Hooks.php',
+    'Task_Hooks',
+    'sendNotificationUpdate'
+);

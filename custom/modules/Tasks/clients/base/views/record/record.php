@@ -184,6 +184,8 @@ array (
               ),
               1 => 
               array (
+                'name' => 'tipo_tarea_c',
+                'label' => 'LBL_TIPO_TAREA',
               ),
               2 => 'date_start',
               3 => 'priority',
