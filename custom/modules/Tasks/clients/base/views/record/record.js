@@ -555,15 +555,17 @@
             //la opción de CAC Oportunidad Recuperación solo se muestra para Cliente Perdido, 
             //tipo_registro_cuenta_c:Cliente: 3, 
             //subtipo_registro_cuenta_c:Perdido: 17
-            if (this.model.get('parent').tipo_registro_cuenta_c != '3' && this.model.get('parent').subtipo_registro_cuenta_c!='17') {
-                var new_options = app.lang.getAppListStrings('tipo_tarea_list');
-                Object.keys(new_options).forEach(function (key) {
+            var opciones_default = app.lang.getAppListStrings('tipo_tarea_list');
+                Object.keys(opciones_default).forEach(function (key) {
                     if (key == "CAC Oportunidad Recuperacion") {
-                        delete new_options[key];
+                        delete opciones_default[key];
                     }
                 });
+            this.model.fields['tipo_tarea_c'].options = opciones_default;
 
-                this.model.fields['tipo_tarea_c'].options = new_options;
+            if (this.model.get('parent').tipo_registro_cuenta_c == '3' && this.model.get('parent').subtipo_registro_cuenta_c=='17') {
+                var opciones_full=app.lang.getAppListStrings('tipo_tarea_list');
+                this.model.fields['tipo_tarea_c'].options = opciones_full;
             }
 
         }
