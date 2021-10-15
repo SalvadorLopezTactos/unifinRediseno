@@ -713,7 +713,7 @@
                     if (data != "") {
                         var titulo = "Campos Requeridos en Cuentas";
                         var nivel = "error";
-                        var mensaje = "Hace falta completar la siguiente informaci&oacuten en la <b>Cuenta<b>:<br> " + data + "</b></b>";
+                        var mensaje = "Hace falta completar la siguiente informaci&oacuten en la <b>Cuenta</b>:<br> " + data ;
 
                         if (this.multiSearchOr(data, ["Propietario Real"]) == '1') {
                             var mensaje = mensaje + "<br><br>(Se debe agregar una relaci\u00F3n de tipo <b>Propietario real</b>).";
