@@ -1215,9 +1215,9 @@
                                 faltantes.push('Dirección Particular');
                             }
                             //Pregunta por el telefono
-                            if (telCyC== 0) {
+                            /*if (telCyC== 0) {
                                 faltantes.push('Teléfono Casa o Celular');
-                            }
+                            }*/
                         }
                         //valida relación: Accionista
                         if (this.model.get('relaciones_activas').includes('Accionista')) {
@@ -1262,9 +1262,9 @@
                                 }
                             }
                             //Pregunta por el telefono
-                            if (telO== 0) {
+                            /*if (telO== 0) {
                                 faltantes.push('Teléfono de Trabajo o Celular Trabajo');
-                            }
+                            }*/
                             //Pregunta por la direccion fiscal
                             if (direF == 0) {
                                 faltantes.push('Dirección Fiscal');
@@ -1317,9 +1317,9 @@
                                 }								
                             }														
                             //Pregunta por el telefono
-                            if (telO== 0) {
+                            /*if (telO== 0) {
                                 faltantes.push('Teléfono de Trabajo o Celular Trabajo');
-                            }	
+                            }*/	
 							//Pregunta por la direccion fiscal
 							if (direF == 0) {
 								faltantes.push('Dirección Fiscal');
@@ -1351,7 +1351,7 @@
         request.url="";
         request.method="GET";
 
-        if ((this.model.get('relaciones_activas').includes('Garante') || this.model.get('relaciones_activas').includes('Tarjetahabiente') || this.model.get('relaciones_activas').includes('Aval') || this.model.get('relaciones_activas').includes('Conyuge') || this.model.get('relaciones_activas').includes('Fiador') || this.model.get('relaciones_activas').includes('Contacto') || this.model.get('relaciones_activas').includes('Accionista') || this.model.get('relaciones_activas').includes('Representante') || this.model.get('relaciones_activas').includes('Coacreditado') || this.model.get('relaciones_activas').includes('Depositario') || this.model.get('relaciones_activas').includes('Directivo') || this.model.get('relaciones_activas').includes('Referencia') || this.model.get('relaciones_activas').includes('Obligado solidario') || this.model.get('relaciones_activas').includes('Firmantes VR')) && this.model.get("relacion_c").trim()!= "" && Cuenta != "") {
+        if ((this.model.get('relaciones_activas').includes('Garante') || this.model.get('relaciones_activas').includes('Tarjetahabiente') ||  this.model.get('relaciones_activas').includes('Conyuge') || this.model.get('relaciones_activas').includes('Fiador') || this.model.get('relaciones_activas').includes('Contacto') || this.model.get('relaciones_activas').includes('Coacreditado') ||  this.model.get('relaciones_activas').includes('Directivo') || this.model.get('relaciones_activas').includes('Referencia') || this.model.get('relaciones_activas').includes('Obligado solidario') || this.model.get('relaciones_activas').includes('Firmantes VR')) && this.model.get("relacion_c").trim()!= "" && Cuenta != "") {
             var requestA = app.utils.deepCopy(request);
             var url = app.api.buildURL("Accounts/" + Cuenta);
             requestA.url = url.substring(4);
@@ -1483,9 +1483,9 @@
                                 faltantes.push('Dirección Particular');
                             }
                             //Pregunta por el telefono
-                            if (telCyC== 0) {
+                            /*if (telCyC== 0) {
                                 faltantes.push('Teléfono Casa o Celular');
-                            }
+                            }*/
                         }
                         //valida relación: Conyuge
                         if (this.model.get('relaciones_activas').includes('Conyuge')) {
@@ -1657,9 +1657,9 @@
                                 }
                             }
                             //Pregunta por el telefono
-                            if (telO== 0) {
+                            /*if (telO== 0) {
                                 faltantes.push('Teléfono de Trabajo o Celular Trabajo');
-                            }
+                            }*/
                             //Pregunta por la direccion fiscal
                             if (direF == 0) {
                                 faltantes.push('Dirección Fiscal');
@@ -1724,9 +1724,9 @@
                                 }
                             }
                             //Pregunta por el telefono
-                            if (telO== 0) {
+                            /*if (telO== 0) {
                                 faltantes.push('Teléfono de Trabajo o Celular Trabajo');
-                            }
+                            }*/
                             //Pregunta por la direccion fiscal
                             if (direF == 0) {
                                 faltantes.push('Dirección Fiscal');
