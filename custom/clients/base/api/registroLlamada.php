@@ -29,7 +29,7 @@ class registroLlamada extends SugarApi
         if(empty($result1[0]['id'])) {
 			//Busca Lead
 			$Leads = new SugarQuery();
-			$Leads->select(array('id'));
+			$Leads->select(array('id','account_id'));
 			$Leads->from(BeanFactory::getBean('Leads'), array('team_security' => false));
 			$Leads->where()->equals('id', $args['idCRM']);
 			$result2 = $Leads->execute();
@@ -67,7 +67,13 @@ class registroLlamada extends SugarApi
 				if($args['origen']) $bean_Call->name = 'Llamada automática – Registro en UniOn';
 				if($tipo == 'Accounts') $bean_Call->parent_type = 'Accounts';
 				if($tipo == 'Leads') $bean_Call->parent_type = 'Leads';
-				$bean_Call->parent_id = $args['idCRM'];
+				if(empty($result2[0]['account_id'])) {
+					$bean_Call->parent_id = $args['idCRM'];
+				}
+				else {
+					$bean_Call->parent_type = 'Accounts';
+					$bean_Call->parent_id = $result2[0]['account_id'];
+				}
 				$bean_Call->assigned_user_id = $agente;
 				$bean_Call->direction = 'Inbound';
 				$bean_Call->duration_minutes = 30;
