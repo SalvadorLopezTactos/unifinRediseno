@@ -40,45 +40,33 @@ class clase_UniProducto
 
                         // $GLOBALS['log']->fatal("bean->".$beanUP->rechaza_noviable);
                         if(($beanUP->status_management_c != $key['status_management_c']) && ($beanUP->tipo_producto == $key['tipo_producto']) && $beanUP->tipo_producto == '1'){
-                            $actualizaLeasing = true;
-                            $beanUP->notificacion_noviable_c = $key['notificacion_noviable_c']; 
-                            $beanUP->user_id1_c = $key['user_id1_c'];
-                            $beanUP->user_id2_c = $key['user_id2_c'];
-                            $beanUP->user_id_c = $key['user_id_c'];    
+                            $actualizaLeasing = true;    
                         }
                         if(($beanUP->status_management_c != $key['status_management_c']) && ($beanUP->tipo_producto == $key['tipo_producto']) && $beanUP->tipo_producto == '4'){
-                            $actualizaFactoring = true;
-                            $beanUP->notificacion_noviable_c = $key['notificacion_noviable_c']; 
-                            $beanUP->user_id1_c = $key['user_id1_c'];
-                            $beanUP->user_id2_c = $key['user_id2_c'];
-                            $beanUP->user_id_c = $key['user_id_c'];    
+                            $actualizaFactoring = true;    
                         }
                         if(($beanUP->status_management_c != $key['status_management_c']) && ($beanUP->tipo_producto == $key['tipo_producto']) && $beanUP->tipo_producto == '3'){
-                            $actualizaCredAuto = true;
-                            $beanUP->notificacion_noviable_c = $key['notificacion_noviable_c']; 
-                            $beanUP->user_id1_c = $key['user_id1_c'];
-                            $beanUP->user_id2_c = $key['user_id2_c'];
-                            $beanUP->user_id_c = $key['user_id_c'];    
+                            $actualizaCredAuto = true;    
                         }
                         if(($beanUP->status_management_c != $key['status_management_c']) && ($beanUP->tipo_producto == $key['tipo_producto']) && $beanUP->tipo_producto == '6'){
-                            $actualizaFleet = true;
-                            $beanUP->notificacion_noviable_c = $key['notificacion_noviable_c']; 
-                            $beanUP->user_id1_c = $key['user_id1_c'];
-                            $beanUP->user_id2_c = $key['user_id2_c'];
-                            $beanUP->user_id_c = $key['user_id_c'];    
+                            $actualizaFleet = true;    
                         }
                         if(($beanUP->status_management_c != $key['status_management_c']) && ($beanUP->tipo_producto == $key['tipo_producto']) && $beanUP->tipo_producto == '8'){
-                            $actualizaUniclick = true;
-                            $beanUP->notificacion_noviable_c = $key['notificacion_noviable_c']; 
-                            $beanUP->user_id1_c = $key['user_id1_c'];
-                            $beanUP->user_id2_c = $key['user_id2_c'];
-                            $beanUP->user_id_c = $key['user_id_c'];    
+                            $actualizaUniclick = true;    
                         }
                         
                         $beanUP->status_management_c = $key['status_management_c'];
                         $beanUP->razon_c = $key['razon_c'];
                         $beanUP->motivo_c = $key['motivo_c'];
                         $beanUP->detalle_c = $key['detalle_c'];
+
+                        $beanUP->aprueba1_c = $key['aprueba1_c'];
+                        $beanUP->aprueba2_c = $key['aprueba2_c'];
+
+                        $beanUP->notificacion_noviable_c = $key['notificacion_noviable_c']; 
+                        $beanUP->user_id1_c = $key['user_id1_c'];
+                        $beanUP->user_id2_c = $key['user_id2_c'];
+                        $beanUP->user_id_c = $key['user_id_c'];
                         
                         if ($bean->load_relationship('accounts_uni_productos_1') && ($key['tipo_producto'] == 1 || $key['tipo_producto'] == 8)) {
                             $updateProductos = $bean->accounts_uni_productos_1->getBeans($bean->id, array('disable_row_level_security' => true));
@@ -221,6 +209,7 @@ class clase_UniProducto
         if ($GLOBALS['service']->platform != 'mobile') {
             $uniProducto = $bean->account_uni_productos;
             //$GLOBALS['log']->fatal('objetisporductos' . !empty($uniProducto).' - leas:'.$actualizaLeasing.' - fact:'.$actualizaFactoring.' - cred:'.$actualizaCredAuto.' - fleet:'.$actualizaFleet.' - uniclick:'.$actualizaUniclick );
+            if( $key['aprueba1_c'] != 'true' && $key['aprueba2_c'] != 'true'){
             if (!empty($uniProducto)  && ( $actualizaLeasing ||  $actualizaFactoring || $actualizaCredAuto || $actualizaFleet || $actualizaUniclick )) {
                 //$GLOBALS['log']->fatal("actualiza-notificacion--");
                 foreach ($uniProducto as $key) {
@@ -244,6 +233,7 @@ class clase_UniProducto
                         }
                     }
                 }
+            }
             }
         }
     }

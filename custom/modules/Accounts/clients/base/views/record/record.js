@@ -2814,19 +2814,30 @@
 
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono RECORD*/
     _doValidateEmailTelefono: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_cuenta_c') !== '4' || this.model.get('tipo_registro_cuenta_c') !== '5') {
-            if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.oTelefonos.telefono)) {
-                app.alert.show("Correo requerido", {
-                    level: "error",
-                    title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",
-                    autoClose: false
-                });
-                errors['email'] = errors['email'] || {};
-                errors['email'].required = true;
-                $('#tabletelefonos').css('border', '2px solid red');
-                errors['account_telefonos1'] = errors['account_telefonos1'] || {};
-                errors['account_telefonos1'].required = true;
-            }
+        if ((this.model.get('tipo_registro_cuenta_c')=="2" && (this.model.get('subtipo_registro_cuenta_c')=='8' ||this.model.get('subtipo_registro_cuenta_c')=='9' 
+        ||this.model.get('subtipo_registro_cuenta_c')=='10' ||this.model.get('subtipo_registro_cuenta_c')=='12')) || this.model.get('tipo_registro_cuenta_c')=="3") {
+                    if (_.isEmpty(this.model.get('email'))) {
+                        errors['email'] = errors['email'] || {};
+                        errors['email'].required = true;
+                    }
+                    if(_.isEmpty(this.oTelefonos.telefono)){
+                        $('#tabletelefonos').css('border', '2px solid red');
+                        errors['account_telefonos1'] = errors['account_telefonos1'] || {};
+                        errors['account_telefonos1'].required = true;
+                    }
+        }else if(this.model.get('tipo_registro_cuenta_c') !== '4' || this.model.get('tipo_registro_cuenta_c') !== '5'){
+                    if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.oTelefonos.telefono)) {
+                        app.alert.show("Correo requerido", {
+                            level: "error",
+                            title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",
+                            autoClose: false
+                        });
+                        errors['email'] = errors['email'] || {};
+                        errors['email'].required = true;
+                        $('#tabletelefonos').css('border', '2px solid red');
+                        errors['account_telefonos1'] = errors['account_telefonos1'] || {};
+                        errors['account_telefonos1'].required = true;
+                    }
         }
         callback(null, fields, errors);
     },
@@ -3698,8 +3709,12 @@
             for (i = 0; i < input.length; i++) {
 
                 if (expresion.test(input[i].email_address) == false) {
+                    cumple=false;
+                }
+                if(input[i].email_address.includes('@unifin')|| input[i].email_address.includes('@uniclick')){
                     cumple = false;
-
+                }else{
+                    cumple = true;
                 }
             }
 
@@ -7196,30 +7211,35 @@
                     var ap2 = (Productos[key].aprueba2_c == "0") ? false :true;
                     var react = (Productos[key].reactivacion_c == "0") ? false :true;
 
-					if(!ap1 && (Productos[key].user_id1_c == app.user.id) && (Productos[key].status_management_c == '4' || Productos[key].status_management_c == '5')) {
-						$('[name="aprobar_noviable"]').removeClass('hidden');
-                        $('[name="desaprobar_noviable"]').removeClass('hidden');
-                        if(react){
-                            $('[name="aprobar_noviable"]')[0].text = "Rechazar Reactivación";
-                            $('[name="desaprobar_noviable"]')[0].text = "Confirmar Reactivación";
-                            $('[name="aprobar_noviable"]')[0].className= "btn btn-danger";
-                            $('[name="desaprobar_noviable"]')[0].className= "btn btn-success";
+                    if(App.user.attributes.bloqueo_cuentas_c == '1' ){
+                        if(ap1 && ap2){
+                            $('[name="reactivar_noviable"]').removeClass('hidden');
+                        }
+                    }else{
+                        if(!ap1 && (Productos[key].user_id1_c == app.user.id) && (Productos[key].status_management_c == '4' || Productos[key].status_management_c == '5')) {
+                            $('[name="aprobar_noviable"]').removeClass('hidden');
+                            $('[name="desaprobar_noviable"]').removeClass('hidden');
+                            if(react){
+                                $('[name="aprobar_noviable"]')[0].text = "Rechazar Reactivación";
+                                $('[name="desaprobar_noviable"]')[0].text = "Confirmar Reactivación";
+                                $('[name="aprobar_noviable"]')[0].className= "btn btn-danger";
+                                $('[name="desaprobar_noviable"]')[0].className= "btn btn-success";
+                            }
+                        }
+                        if(!ap2 && (Productos[key].user_id2_c == app.user.id)  && (Productos[key].status_management_c == '4' || Productos[key].status_management_c == '5')) {
+                            $('[name="aprobar_noviable"]').removeClass('hidden');
+                            $('[name="desaprobar_noviable"]').removeClass('hidden');
+                            if(react){
+                                $('[name="aprobar_noviable"]')[0].text = "Rechazar Reactivación";
+                                $('[name="desaprobar_noviable"]')[0].text = "Confirmar Reactivación";
+                                $('[name="aprobar_noviable"]')[0].className= "btn btn-danger";
+                                $('[name="desaprobar_noviable"]')[0].className= "btn btn-success";
+                            }
+                        }
+                        if((ap1 && ap2) && (Productos[key].user_id_c == app.user.id ) && !react) {
+                            $('[name="reactivar_noviable"]').removeClass('hidden');
                         }
                     }
-                    if(!ap2 && (Productos[key].user_id2_c == app.user.id)  && (Productos[key].status_management_c == '4' || Productos[key].status_management_c == '5')) {
-						$('[name="aprobar_noviable"]').removeClass('hidden');
-                        $('[name="desaprobar_noviable"]').removeClass('hidden');
-                        if(react){
-                            $('[name="aprobar_noviable"]')[0].text = "Rechazar Reactivación";
-                            $('[name="desaprobar_noviable"]')[0].text = "Confirmar Reactivación";
-                            $('[name="aprobar_noviable"]')[0].className= "btn btn-danger";
-                            $('[name="desaprobar_noviable"]')[0].className= "btn btn-success";
-                        }
-                    }
-                    if((ap1 && ap2) && (Productos[key].user_id_c == app.user.id ) && !react) {
-						$('[name="reactivar_noviable"]').removeClass('hidden');
-                    }
-
                 });
             },
             error: function (e) {
@@ -7279,7 +7299,11 @@
         params["status_management_c"] = '1';
         params["id_Account"] = this.model.get('id');
         params["user_id"] = app.user.id;
-        params["tipoupdate"] = '3';
+        if(App.user.attributes.bloqueo_cuentas_c == 1){
+            params["tipoupdate"] = '4';
+        }else{
+          params["tipoupdate"] = '3';
+        }
         params["reactivacion_c"] = true;
         //params["estatus_atencion"] = '1';
 

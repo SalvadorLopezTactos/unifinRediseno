@@ -1391,9 +1391,9 @@ extendsFrom: 'RecordView',
                                 faltantes.push('Dirección Particular');
                             }
                             //Pregunta por el telefono
-                            if (telCyC== 0) {
+                            /*if (telCyC== 0) {
                                 faltantes.push('Teléfono Casa o Celular');
-                            }
+                            }*/
                         }
                         //valida relación: Conyuge
                         if (this.model.get('relaciones_activas').includes('Conyuge')) {
@@ -1565,9 +1565,9 @@ extendsFrom: 'RecordView',
                                 }
                             }
                             //Pregunta por el telefono
-                            if (telO== 0) {
+                            /*if (telO== 0) {
                                 faltantes.push('Teléfono de Trabajo o Celular Trabajo');
-                            }
+                            }*/
                             //Pregunta por la direccion fiscal
                             if (direF == 0) {
                                 faltantes.push('Dirección Fiscal');
@@ -1632,9 +1632,9 @@ extendsFrom: 'RecordView',
                                 }
                             }
                             //Pregunta por el telefono
-                            if (telO== 0) {
+                            /*if (telO== 0) {
                                 faltantes.push('Teléfono de Trabajo o Celular Trabajo');
-                            }
+                            }*/
                             //Pregunta por la direccion fiscal
                             if (direF == 0) {
                                 faltantes.push('Dirección Fiscal');

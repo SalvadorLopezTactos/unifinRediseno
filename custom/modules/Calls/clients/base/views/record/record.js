@@ -1,6 +1,6 @@
 ({
     extendsFrom: 'RecordView',
-
+	description:0,
     fechaInicioTemp: "",
     personasRelData_list: null,
     seleccionado:null,
@@ -21,12 +21,10 @@
         //Habilita el campo parent_name cuando esta vacio y lo deshabilta cuando ya tiene una cuenta
         this.model.on('sync', this.enableparentname, this);
         this.model.on('sync', this.cambioFecha, this);
-
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial2Call, this));
         this.model.addValidationTask('VaildaConferencia', _.bind(this.validaConferencia, this));
 		this.model.addValidationTask('VaildaPadres', _.bind(this.validaPadres, this));
-
         /*****************************************/
         //this.model.addValidationTask('valida_requeridos_Leads',_.bind(this.valida_requeridos_Leads, this));
         /*********************************************/
@@ -37,7 +35,6 @@
         this.model.on('sync', this.fulminantcolor, this);
         $('[data-name="status"]').find('.fa-pencil').remove();
         $('.record-edit-link-wrapper[data-name=status]').remove();
-
         this.model.on('sync', this.disablestatus1, this);
         this.model.on('sync', this.disableFieldsTime, this);
         this.model.on('sync', this.getPersonas, this);
@@ -47,15 +44,14 @@
 		this.model.on('sync', this.hideLlamadas, this);
         this.model.on('change:evento_campana_c', this.enableRelECamp, this);
 		this.model.on('change:padres_c', this.llenaLlamada, this);
-
         this.model.addValidationTask('resultCallReq', _.bind(this.resultCallRequerido, this));
         // this.events['click a[name=edit_button]'] = 'fechascallsymeet';
         this.model.addValidationTask('rqueridoPErsona', _.bind(this.reqPersona, this));
-        this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         /***********  Lead Management  *************/
         this.model.addValidationTask('lead_management', _.bind(this.ConfirmCancelar, this));  //OnConfirm cancelar LEad-PRospecto contactado
         //this.model.addValidationTask('lmanage_seg_reun', _.bind(this.SegundaReunion, this));  //OnConfirm cancelar Cuenta segunda llamada
-
+		this.model.addValidationTask('description', _.bind(this.valida_description, this));
+		this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         this.model.on('sync', this._readOnlyDateSE, this);
         this.model.on('sync', this.validaRelLeadCall, this);
 		this.model.on('sync', this.roDescription, this);
@@ -175,7 +171,7 @@
     editClicked: function () {
         this._super("editClicked");
 
-        if (this.model.get('status') == 'Not Held' || (this.model.get('status') == 'Held' && this.model.get('tct_resultado_llamada_ddw_c') != "")) {
+        if (this.model.get('status') == 'Not Held' && this.model.get('tct_resultado_llamada_ddw_c') != "") {
             this.setButtonStates(this.STATE.VIEW);
             this.action = 'detail';
             this.toggleEdit(false);
@@ -951,7 +947,7 @@
                 }
             }
             //Resultado de la llamada
-            if (this.model.get('tct_resultado_llamada_ddw_c') != "") {
+            if (this.model.get('tct_resultado_llamada_ddw_c') != "" && this.model.get('tct_resultado_llamada_ddw_c') != "Llamada_servicio") {
                 $('[data-name="tct_resultado_llamada_ddw_c"]').attr('style', 'pointer-events:none;');
             }
             if (this.model.get('tct_resultado_llamada_ddw_c') == "Ilocalizable" && this.model.get('detalle_resultado_c') != "") {
@@ -1056,13 +1052,14 @@
 
     roDescription: function () {
 		var description = this.model.get('description');
-        if((description.includes('El resultado de la llamada fue') && description.length <= 45) || (description.includes('Intento no exitoso') && description.length <= 21) && this.model.get('status') == 'Held') {
+        if((description == ' - El resultado de la llamada fue: BUSY' || description == ' - El resultado de la llamada fue: FAILED' || description == ' - El resultado de la llamada fue: ANSWERED' || description == ' - El resultado de la llamada fue: NO ANSWER' || description == ' - El resultado de la llamada fue: CONGESTION' || description == ' - Intento no exitoso') && this.model.get('status') == 'Held') {
 			app.alert.show("description", {
                 level: "warning",
                 title: "Aviso",
                 messages: "Llamada realizada, favor de establecer una <b>descripción</b>",
                 autoClose: false
             });
+			this.description = 1;
         }
 		else {
 			if(this.model.get('status') == 'Held' && this.model.get('tct_resultado_llamada_ddw_c')) {
@@ -1072,5 +1069,13 @@
 				editButton.setDisabled(true);
 			}
         }
+    },
+
+    valida_description: function (fields, errors, callback) {
+        if(this.description && !this.model.get('description')) {
+			errors['description'] = errors['description'] || {};
+            errors['description'].required = true;
+        }
+        callback(null, fields, errors);
     },
 })

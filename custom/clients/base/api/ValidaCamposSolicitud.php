@@ -40,6 +40,7 @@ class ValidaCamposSolicitud extends SugarApi
     {
         $option = $args['caso'];
         $producto = $args['producto'];
+        global $db;
 
         $req_pm = "origen_cuenta_c,tipodepersona_c," .
             "nombre_comercial_c,actividadeconomica_c," .
@@ -126,15 +127,22 @@ class ValidaCamposSolicitud extends SugarApi
             array_push($array_errores, 'Dirección');
         }
 
-        $beanPersona->load_relationship('accounts_tel_telefonos_1');
-        $relatedBeansTel = $beanPersona->accounts_tel_telefonos_1->getBeans();
-        $telefono = count($relatedBeansTel);
-        if ($telefono == 0 && ($beanPersona->email1 == "" || $beanPersona->email1 == null)) {
-            array_push($array_errores, 'Teléfono o Email');
-        }
+        if ($options=='2'){
+            $beanPersona->load_relationship('accounts_tel_telefonos_1');
+            $relatedBeansTel = $beanPersona->accounts_tel_telefonos_1->getBeans();
+            $telefono = 0;
+            for ($i = 0; $i < count($relatedBeansTel); $i++) {
+                if($relatedBeansTel[$i]['estatus']=="Activo"){
+                    $telefono++;
+                }
+            }
+            if ($beanPersona->email1 == "" || $beanPersona->email1 == null) {
+                array_push($array_errores, 'Email');
+            }
 
-        if ($telefono == 0 && $beanPersona->tipo_registro_cuenta_c == "2") { // Prospecto - 2
-            array_push($array_errores, 'Teléfono');
+            if ($telefono == 0) {
+                array_push($array_errores, 'Teléfono');
+            }
         }
 
         if ($option == '2' && $beanPersona->tipodepersona_c == 'Persona Moral') {
@@ -151,6 +159,60 @@ class ValidaCamposSolicitud extends SugarApi
             if ($relaciones==0){
                 array_push($array_errores, 'Propietario Real');
             }
+        }
+        if ($option == '2'){
+            $faltantes_relaciones="";
+            $no_correo=0;
+            $no_tels=0;
+            $nombres_mail="";
+            $nombres_tel="";
+            $GLOBALS['log']->fatal('Entra validación para relaciones Activas y tels/correos');
+            $GLOBALS['log']->fatal('ID de la cuenta es :' .$id_cuenta);
+            $query="SELECT distinct 
+                    rel.relaciones_activas relActivas,relp.rel_relaciones_accounts_1accounts_ida cuentaPadre, relc.account_id1_c cuentaHija, cuentaH.name,
+                    MAX(IF(email.email_address_id is null,0,1 )) correo,
+                    MAX(IF(tel.id is null,0,1 )) tel
+                    from rel_relaciones rel
+                    inner join rel_relaciones_cstm relc on relc.id_c=rel.id 
+                    inner join rel_relaciones_accounts_1_c relp on relp.rel_relaciones_accounts_1rel_relaciones_idb = rel.id
+                    inner join accounts cuentaH on cuentaH.id = relc.account_id1_c
+                    left join email_addr_bean_rel email on email.bean_id = relc.account_id1_c and email.deleted=0
+                    left join accounts_tel_telefonos_1_c telAc on telAc.accounts_tel_telefonos_1accounts_ida = relc.account_id1_c and telAc.deleted=0
+                    left join tel_telefonos tel on tel.id = telAc.accounts_tel_telefonos_1tel_telefonos_idb and tel.estatus='Activo' 
+                    where 
+                    rel.deleted=0
+                    -- and (email.id is null or tel.id is null )
+                    and relp.rel_relaciones_accounts_1accounts_ida='{$id_cuenta}'
+                    and (
+                    rel.relaciones_activas like '%Aval%'
+                    or rel.relaciones_activas like '%Accionista%'
+                    or rel.relaciones_activas like '%Depositario%'
+                    or rel.relaciones_activas like '%Representante%'
+                    or rel.relaciones_activas like '%Propietario Real%'
+                    )
+                    group by relc.account_id1_c;";
+            $GLOBALS['log']->fatal('La consulta es :' .print_r($query,1));
+            $result = $db->query($query);
+            $GLOBALS['log']->fatal('Ejecuto consulta para obtener tels o correos en las relaciones activas.');
+
+            while($row = $GLOBALS['db']->fetchByAssoc($result)){
+                $GLOBALS['log']->fatal("Entra a While");
+                $GLOBALS['log']->fatal($row['correo'].$row['name'].$row['tel']);
+                if ($row['correo']==false){
+                    $no_correo++;
+                    $nombres_mail.='<br>-<a href="#Accounts/' .$row['cuentaHija'].'" target= "_blank">'.$row['name'].'</a>';
+                    
+                    //array_push($array_errores, 'La siguiente relación requiere de un Correo:<br> '.$row['name']);
+                    $GLOBALS['log']->fatal('Setea correo faltante en la relacion.'.$row['name']);
+                }
+                if ($row['tel']==false){
+                    $no_tels++;
+                    $nombres_tel.='<br>-<a href="#Accounts/' .$row['cuentaHija'].'" target= "_blank">'.$row['name'].'</a>';
+                    //array_push($array_errores, 'La siguiente relación requiere de un Teléfono:<br> '.$row['name']);
+                    $GLOBALS['log']->fatal('Setea Teléfono faltante en la relacion.'.$row['name']);
+                }
+            }
+            
         }
         //Recuperar informacion de PLD
         $beanPersona->load_relationship('accounts_tct_pld_1');
@@ -227,6 +289,15 @@ class ValidaCamposSolicitud extends SugarApi
             $strResult = implode('<br>', $array_errores);
             $strResult = "<b>" . $strResult . "</b>";
 
+            if($option == '2' && ($no_correo || $no_tels)){
+                $strResult.='<br>';
+                if($no_correo>0){
+                    $strResult.= '<br>La(s) siguiente(s) relación(es) requiere(n) de un Correo: <b>'.$nombres_mail.'</b><br>';
+                }
+                if($no_tels>0){
+                    $strResult.= '<br>La(s) siguiente(s) relación(es) requiere(n) de un Teléfono: <b>'.$nombres_tel.'</b><br>';
+                }
+            }
             return $strResult;
         } else {
             return "";

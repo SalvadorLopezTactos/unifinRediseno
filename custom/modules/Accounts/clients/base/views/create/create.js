@@ -771,19 +771,30 @@
     },
 
     _doValidateEmailTelefono: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_cuenta_c') !== '4' || this.model.get('tipo_registro_cuenta_c') !== '5') {
-            if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.oTelefonos.telefono)) {
-                app.alert.show("Correo requerido", {
-                    level: "error",
-                    title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",
-                    autoClose: false
-                });
-                errors['email'] = errors['email'] || {};
-                errors['email'].required = true;
-                $('#tabletelefonos').css('border', '2px solid red');
-                errors['account_telefonos1'] = errors['account_telefonos1'] || {};
-                errors['account_telefonos1'].required = true;
-            }
+        if ((this.model.get('tipo_registro_cuenta_c')=="2" && (this.model.get('subtipo_registro_cuenta_c')=='8' ||this.model.get('subtipo_registro_cuenta_c')=='9' 
+        ||this.model.get('subtipo_registro_cuenta_c')=='10' ||this.model.get('subtipo_registro_cuenta_c')=='12')) || this.model.get('tipo_registro_cuenta_c')=="3") {
+                    if (_.isEmpty(this.model.get('email'))) {
+                        errors['email'] = errors['email'] || {};
+                        errors['email'].required = true;
+                    }
+                    if(_.isEmpty(this.oTelefonos.telefono)){
+                        $('#tabletelefonos').css('border', '2px solid red');
+                        errors['account_telefonos1'] = errors['account_telefonos1'] || {};
+                        errors['account_telefonos1'].required = true;
+                    }
+        }else if(this.model.get('tipo_registro_cuenta_c') !== '4' || this.model.get('tipo_registro_cuenta_c') !== '5'){
+                    if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.oTelefonos.telefono)) {
+                        app.alert.show("Correo requerido", {
+                            level: "error",
+                            title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",
+                            autoClose: false
+                        });
+                        errors['email'] = errors['email'] || {};
+                        errors['email'].required = true;
+                        $('#tabletelefonos').css('border', '2px solid red');
+                        errors['account_telefonos1'] = errors['account_telefonos1'] || {};
+                        errors['account_telefonos1'].required = true;
+                    }
         }
         callback(null, fields, errors);
     },
