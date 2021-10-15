@@ -1052,7 +1052,7 @@
 
     roDescription: function () {
 		var description = this.model.get('description');
-        if((description.includes('El resultado de la llamada fue') && description.length <= 45) || (description.includes('Intento no exitoso') && description.length <= 21) && this.model.get('status') == 'Held') {
+        if((description == ' - El resultado de la llamada fue: BUSY' || description == ' - El resultado de la llamada fue: FAILED' || description == ' - El resultado de la llamada fue: ANSWERED' || description == ' - El resultado de la llamada fue: NO ANSWER' || description == ' - El resultado de la llamada fue: CONGESTION' || description == ' - Intento no exitoso') && this.model.get('status') == 'Held') {
 			app.alert.show("description", {
                 level: "warning",
                 title: "Aviso",
