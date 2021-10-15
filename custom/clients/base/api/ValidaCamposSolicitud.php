@@ -127,7 +127,7 @@ class ValidaCamposSolicitud extends SugarApi
             array_push($array_errores, 'Dirección');
         }
 
-        if ($options=='2'){
+        if ($option=='2'){
             $beanPersona->load_relationship('accounts_tel_telefonos_1');
             $relatedBeansTel = $beanPersona->accounts_tel_telefonos_1->getBeans();
             $telefono = 0;
