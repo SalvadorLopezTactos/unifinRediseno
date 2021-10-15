@@ -355,6 +355,15 @@ array (
         array (
           0 => 
           array (
+            'name' => 'bloqueo_cuentas_c',
+            'label' => 'LBL_BLOQUEO_CUENTAS',
+          ),
+          1 => '',
+        ),
+        14 => 
+        array (
+          0 => 
+          array (
             'name' => 'portal_proveedores_c',
             'label' => 'LBL_PORTAL_PROVEEDORES',
           ),
