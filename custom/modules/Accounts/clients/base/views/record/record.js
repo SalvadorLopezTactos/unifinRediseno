@@ -7196,30 +7196,35 @@
                     var ap2 = (Productos[key].aprueba2_c == "0") ? false :true;
                     var react = (Productos[key].reactivacion_c == "0") ? false :true;
 
-					if(!ap1 && (Productos[key].user_id1_c == app.user.id) && (Productos[key].status_management_c == '4' || Productos[key].status_management_c == '5')) {
-						$('[name="aprobar_noviable"]').removeClass('hidden');
-                        $('[name="desaprobar_noviable"]').removeClass('hidden');
-                        if(react){
-                            $('[name="aprobar_noviable"]')[0].text = "Rechazar Reactivación";
-                            $('[name="desaprobar_noviable"]')[0].text = "Confirmar Reactivación";
-                            $('[name="aprobar_noviable"]')[0].className= "btn btn-danger";
-                            $('[name="desaprobar_noviable"]')[0].className= "btn btn-success";
+                    if(App.user.attributes.bloqueo_cuentas_c == '1' ){
+                        if(ap1 && ap2){
+                            $('[name="reactivar_noviable"]').removeClass('hidden');
+                        }
+                    }else{
+                        if(!ap1 && (Productos[key].user_id1_c == app.user.id) && (Productos[key].status_management_c == '4' || Productos[key].status_management_c == '5')) {
+                            $('[name="aprobar_noviable"]').removeClass('hidden');
+                            $('[name="desaprobar_noviable"]').removeClass('hidden');
+                            if(react){
+                                $('[name="aprobar_noviable"]')[0].text = "Rechazar Reactivación";
+                                $('[name="desaprobar_noviable"]')[0].text = "Confirmar Reactivación";
+                                $('[name="aprobar_noviable"]')[0].className= "btn btn-danger";
+                                $('[name="desaprobar_noviable"]')[0].className= "btn btn-success";
+                            }
+                        }
+                        if(!ap2 && (Productos[key].user_id2_c == app.user.id)  && (Productos[key].status_management_c == '4' || Productos[key].status_management_c == '5')) {
+                            $('[name="aprobar_noviable"]').removeClass('hidden');
+                            $('[name="desaprobar_noviable"]').removeClass('hidden');
+                            if(react){
+                                $('[name="aprobar_noviable"]')[0].text = "Rechazar Reactivación";
+                                $('[name="desaprobar_noviable"]')[0].text = "Confirmar Reactivación";
+                                $('[name="aprobar_noviable"]')[0].className= "btn btn-danger";
+                                $('[name="desaprobar_noviable"]')[0].className= "btn btn-success";
+                            }
+                        }
+                        if((ap1 && ap2) && (Productos[key].user_id_c == app.user.id ) && !react) {
+                            $('[name="reactivar_noviable"]').removeClass('hidden');
                         }
                     }
-                    if(!ap2 && (Productos[key].user_id2_c == app.user.id)  && (Productos[key].status_management_c == '4' || Productos[key].status_management_c == '5')) {
-						$('[name="aprobar_noviable"]').removeClass('hidden');
-                        $('[name="desaprobar_noviable"]').removeClass('hidden');
-                        if(react){
-                            $('[name="aprobar_noviable"]')[0].text = "Rechazar Reactivación";
-                            $('[name="desaprobar_noviable"]')[0].text = "Confirmar Reactivación";
-                            $('[name="aprobar_noviable"]')[0].className= "btn btn-danger";
-                            $('[name="desaprobar_noviable"]')[0].className= "btn btn-success";
-                        }
-                    }
-                    if((ap1 && ap2) && (Productos[key].user_id_c == app.user.id ) && !react) {
-						$('[name="reactivar_noviable"]').removeClass('hidden');
-                    }
-
                 });
             },
             error: function (e) {
@@ -7279,7 +7284,11 @@
         params["status_management_c"] = '1';
         params["id_Account"] = this.model.get('id');
         params["user_id"] = app.user.id;
-        params["tipoupdate"] = '3';
+        if(App.user.attributes.bloqueo_cuentas_c == 1){
+            params["tipoupdate"] = '4';
+        }else{
+          params["tipoupdate"] = '3';
+        }
         params["reactivacion_c"] = true;
         //params["estatus_atencion"] = '1';
 
