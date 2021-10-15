@@ -127,20 +127,22 @@ class ValidaCamposSolicitud extends SugarApi
             array_push($array_errores, 'Dirección');
         }
 
-        $beanPersona->load_relationship('accounts_tel_telefonos_1');
-        $relatedBeansTel = $beanPersona->accounts_tel_telefonos_1->getBeans();
-        $telefono = 0;
-        for ($i = 0; $i < count($relatedBeansTel); $i++) {
-            if($relatedBeansTel[$i]['estatus']=="Activo"){
-                $telefono++;
+        if ($options=='2'){
+            $beanPersona->load_relationship('accounts_tel_telefonos_1');
+            $relatedBeansTel = $beanPersona->accounts_tel_telefonos_1->getBeans();
+            $telefono = 0;
+            for ($i = 0; $i < count($relatedBeansTel); $i++) {
+                if($relatedBeansTel[$i]['estatus']=="Activo"){
+                    $telefono++;
+                }
             }
-        }
-        if ($beanPersona->email1 == "" || $beanPersona->email1 == null) {
-            array_push($array_errores, 'Email');
-        }
+            if ($beanPersona->email1 == "" || $beanPersona->email1 == null) {
+                array_push($array_errores, 'Email');
+            }
 
-        if ($telefono == 0) {
-            array_push($array_errores, 'Teléfono');
+            if ($telefono == 0) {
+                array_push($array_errores, 'Teléfono');
+            }
         }
 
         if ($option == '2' && $beanPersona->tipodepersona_c == 'Persona Moral') {
