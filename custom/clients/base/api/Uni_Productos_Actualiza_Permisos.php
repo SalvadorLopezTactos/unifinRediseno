@@ -197,21 +197,10 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                         $GLOBALS['log']->fatal("reactivacion_c",$beanProduct->reactivacion_c);
                         if($beanProduct->reactivacion_c && !$bloqueouno){
                             $GLOBALS['log']->fatal("entro reactivacion_c: 1-".$aprueba1." 2-".$aprueba2);
-                            $beanProduct->razon_c = null; //razon lm
-                            $beanProduct->motivo_c = null; //motivo lm
-                            $beanProduct->detalle_c = null; //detalle lm
                             
-                            $beanProduct->user_id_c = null;  //user id
-                            $beanProduct->user_id1_c = null;  //user id1
-                            $beanProduct->user_id2_c =  null;  //user id2
-                            $beanProduct->status_management_c = '1'; //status lm
-                            $beanProduct->notificacion_noviable_c = 0; //notificanoviable
-                            $beanProduct->estatus_atencion = '1'; //estatus atencion
-                            $beanProduct->aprueba1_c = false; //aprobador 1
-                            $beanProduct->aprueba2_c = false; //aprobador 2
-                            $beanProduct->reactivacion_c = false; //reactivador
-                            $beanProduct->no_viable = false; //noviable
-
+                            $beanProduct->aprueba1_c =  $aprueba1;  //user id1
+                            $beanProduct->aprueba2_c =  $aprueba2;  //user id2
+                            
                             $beanProduct->save();
                             $cont_cambios++;
                         }else{
