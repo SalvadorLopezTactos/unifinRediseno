@@ -947,7 +947,7 @@
                 }
             }
             //Resultado de la llamada
-            if (this.model.get('tct_resultado_llamada_ddw_c') != "") {
+            if (this.model.get('tct_resultado_llamada_ddw_c') != "" && this.model.get('tct_resultado_llamada_ddw_c') != "Llamada_servicio") {
                 $('[data-name="tct_resultado_llamada_ddw_c"]').attr('style', 'pointer-events:none;');
             }
             if (this.model.get('tct_resultado_llamada_ddw_c') == "Ilocalizable" && this.model.get('detalle_resultado_c') != "") {
