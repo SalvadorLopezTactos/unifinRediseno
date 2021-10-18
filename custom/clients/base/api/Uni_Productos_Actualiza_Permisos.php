@@ -175,7 +175,6 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                                 $beanProduct->aprueba1_c = false; //notificaion noviable
                                 $beanProduct->aprueba2_c = false; //notificaion noviable
                                 $beanProduct->reactivacion_c = false; //notificaion noviable
-                                $beanProduct->no_viable = false; //noviable
 
                                 $cont_cambios++;
                                 $beanProduct->save();
@@ -200,7 +199,7 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                             
                             $beanProduct->aprueba1_c =  $aprueba1;  //user id1
                             $beanProduct->aprueba2_c =  $aprueba2;  //user id2
-                            
+
                             $beanProduct->save();
                             $cont_cambios++;
                         }else{
@@ -230,7 +229,6 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                                 $beanProduct->aprueba1_c = false; //aprobador 1
                                 $beanProduct->aprueba2_c = false; //aprobador 2
                                 $beanProduct->reactivacion_c = false; //reactivador
-                                $beanProduct->no_viable = false; //noviable
 
                                 $beanProduct->save();
                                 $cont_cambios++;
@@ -257,8 +255,8 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                     $GLOBALS['log']->fatal("Retrieve aprueba2" .$args['aprueba2_c']);  
                     $GLOBALS['log']->fatal("Retrieve reactivacion_c" .$args['reactivacion_c']);              
                     
-                    $beanProduct->aprueba1_c = 1; //aprobador 1
-                    $beanProduct->aprueba2_c = 1; //aprobador2
+                    $beanProduct->aprueba1_c = $args['aprueba1_c']; //aprobador 1
+                    $beanProduct->aprueba2_c = $args['aprueba2_c']; //aprobador 2
                     $beanProduct->estatus_atencion = $args['estatus_atencion']; // estatus de atención
 
                     $beanProduct->status_management_c = $args["status_management_c"];
@@ -268,7 +266,6 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
 					$beanProduct->user_id_c = $args["user_id_c"];
 					$beanProduct->user_id1_c = $args["user_id1_c"];
 					$beanProduct->user_id2_c = $args["user_id2_c"];
-                    $beanProduct->no_viable = true; //noviable
                     //$beanProduct->notificacion_noviable_c = $args['notificacion_noviable_c']; //notificaion noviable
                     $beanProduct->reactivacion_c = $args['reactivacion_c']; //reactivación noviable
                     $cont_cambios ++;
@@ -420,21 +417,20 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
             while ($product = $GLOBALS['db']->fetchByAssoc($result)) {
                 $beanProduct = BeanFactory::retrieveBean('uni_Productos', $product['id'], array('disable_row_level_security' => true));
                 
-                if(($beanProduct->status_management_c == '4' || $beanProduct->status_management_c == '5') && $beanProduct->no_viable)  
+                if($beanProduct->status_management_c == '4' || $beanProduct->status_management_c == '5') 
                 {
                     $beanProduct->razon_c = ""; //razon lm
                     $beanProduct->motivo_c = ""; //motivo lm
                     $beanProduct->detalle_c = ""; //detalle lm
-                    $beanProduct->user_id1_c =  null;  //user id1
-                    $beanProduct->user_id2_c =  null;  //user id2
-                    $beanProduct->user_id_c = null;  //user id
+                    $beanProduct->user_id1_c =  null;  //user id1 - aprobador1
+                    $beanProduct->user_id2_c =  null;  //user id2 - aprobador2
+                    $beanProduct->user_id_c = null;  //user id - ingesta
                     $beanProduct->status_management_c = "1"; //status lm
                     $beanProduct->notificacion_noviable_c = 0; //notificaion noviable
-                    $beanProduct->estatus_atencion = "1"; //notificaion noviable
-                    $beanProduct->aprueba1_c = 0; //notificaion noviable
-                    $beanProduct->aprueba2_c = 0; //notificaion noviable
-                    $beanProduct->reactivacion_c = 0; //notificaion noviable}
-                    $beanProduct->no_viable = 0; //noviable}
+                    $beanProduct->estatus_atencion = "1"; //estatus de atencion
+                    $beanProduct->aprueba1_c = 0; //aprobador1
+                    $beanProduct->aprueba2_c = 0; //aprobador2
+                    $beanProduct->reactivacion_c = 0; //reactivacion
                 
                     $beanProduct->save();
                 }
