@@ -1307,7 +1307,6 @@
                         cont_uni_p.ResumenProductos.leasing.user_id_c = App.user.attributes.id;  //user id
                         cont_uni_p.ResumenProductos.leasing.aprueba1_c = true; 
                         cont_uni_p.ResumenProductos.leasing.aprueba2_c = true;
-                        cont_uni_p.ResumenProductos.leasing.no_viable = true; 
                     }else{
                         cont_uni_p.ResumenProductos.leasing.user_id_c = ResumenProductos.leasing.assigned_user_id;  //user id
                         cont_uni_p.ResumenProductos.leasing.notificacion_noviable_c = true;  //user id
@@ -1333,7 +1332,6 @@
                         cont_uni_p.ResumenProductos.factoring.user_id_c = App.user.attributes.id;  //user id
                         cont_uni_p.ResumenProductos.factoring.aprueba1_c = true; 
                         cont_uni_p.ResumenProductos.factoring.aprueba2_c = true;
-                        cont_uni_p.ResumenProductos.factoring.no_viable = true; 
                     }else{
                         cont_uni_p.ResumenProductos.factoring.user_id_c = ResumenProductos.factoring.assigned_user_id;  //user id
                         cont_uni_p.ResumenProductos.factoring.notificacion_noviable_c = true;  //user id
@@ -1356,7 +1354,6 @@
                         cont_uni_p.ResumenProductos.credito_auto.user_id_c = App.user.attributes.id;  //user id
                         cont_uni_p.ResumenProductos.credito_auto.aprueba1_c = true;
                         cont_uni_p.ResumenProductos.credito_auto.aprueba2_c = true;
-                        cont_uni_p.ResumenProductos.credito_auto.no_viable = true;
                     }else{
                         cont_uni_p.ResumenProductos.credito_auto.user_id_c = ResumenProductos.credito_auto.assigned_user_id;  //user id
                         cont_uni_p.ResumenProductos.credito_auto.notificacion_noviable_c = true;  //user id
@@ -1379,7 +1376,6 @@
                         cont_uni_p.ResumenProductos.fleet.user_id_c = App.user.attributes.id;  //user id
                         cont_uni_p.ResumenProductos.fleet.aprueba1_c = true; 
                         cont_uni_p.ResumenProductos.fleet.aprueba2_c = true;
-                        cont_uni_p.ResumenProductos.fleet.no_viable = true;
                     }else{
                         cont_uni_p.ResumenProductos.fleet.user_id_c = ResumenProductos.fleet.assigned_user_id;  //user id
                         cont_uni_p.ResumenProductos.fleet.notificacion_noviable_c = true;  //user id
@@ -1401,8 +1397,7 @@
                     if(App.user.attributes.bloqueo_cuentas_c == 1){
                         cont_uni_p.ResumenProductos.uniclick.user_id_c = App.user.attributes.id;  //user id
                         cont_uni_p.ResumenProductos.uniclick.aprueba1_c = true; 
-                        cont_uni_p.ResumenProductos.uniclick.aprueba2_c = true; 
-                        cont_uni_p.ResumenProductos.uniclick.no_viable = true;
+                        cont_uni_p.ResumenProductos.uniclick.aprueba2_c = true;
                     }else{
                         cont_uni_p.ResumenProductos.uniclick.user_id_c = ResumenProductos.fleet.assigned_user_id;  //user id
                         cont_uni_p.ResumenProductos.uniclick.notificacion_noviable_c = true;  //user id

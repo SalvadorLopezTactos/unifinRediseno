@@ -40,7 +40,7 @@ class clase_UniProducto
 
                         // $GLOBALS['log']->fatal("bean->".$beanUP->rechaza_noviable);
                         if(($beanUP->status_management_c != $key['status_management_c']) && ($beanUP->tipo_producto == $key['tipo_producto']) && $beanUP->tipo_producto == '1'){
-                            $actualizaLeasing = true;    
+                            $actualizaLeasing = true;
                         }
                         if(($beanUP->status_management_c != $key['status_management_c']) && ($beanUP->tipo_producto == $key['tipo_producto']) && $beanUP->tipo_producto == '4'){
                             $actualizaFactoring = true;    
