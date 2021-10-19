@@ -1172,6 +1172,14 @@
             var guardaCA_SM = false;
             var guardaFL_SM = false;
             var guardaU_SM = false;
+            /****************/
+            var bloqueacuentaf = false;
+            var bloqueorazon = "";
+            var bloqueomotivo = "";
+            var bloqueodescr = "";
+            var user_id_c = "";
+            var user_id1_c = "";
+            /****************/
             //Valida Leasing TIPO CUENTA 1-LEAD - SUBTIPO CUENTA 2-CONTACTADO - SUBTIPO CUENTA 7-INTERESADO
             if (cont_uni_p.ResumenProductos.leasing.tipo_cuenta == 1 || cont_uni_p.ResumenProductos.leasing.subtipo_cuenta == 2 || cont_uni_p.ResumenProductos.leasing.subtipo_cuenta == 7) {
                 guardaL = true;
@@ -1313,6 +1321,14 @@
                         cont_uni_p.ResumenProductos.leasing.user_id_c = App.user.attributes.id;  //user id
                         cont_uni_p.ResumenProductos.leasing.aprueba1_c = true; 
                         cont_uni_p.ResumenProductos.leasing.aprueba2_c = true;
+                        cont_uni_p.ResumenProductos.leasing.estatus_atencion = '3';
+                        /*****************************************************/
+                        bloqueacuentaf = true;
+                        bloqueorazon = $('.list_l_so_razon').select2('val'); //razon lm
+                        bloqueomotivo = $('.list_l_so_motivo').select2('val'); //motivo lm
+                        bloqueodescr = $('.txt_l_so_detalle').val().trim(); //detalle lm
+                        user_id_c = App.user.attributes.id;
+                        user_id1_c = $('.list_l_respval_1').select2('val');  //user id1
                     }else{
                         cont_uni_p.ResumenProductos.leasing.user_id_c = ResumenProductos.leasing.assigned_user_id;  //user id
                         cont_uni_p.ResumenProductos.leasing.notificacion_noviable_c = true;  //user id
@@ -1338,6 +1354,14 @@
                         cont_uni_p.ResumenProductos.factoring.user_id_c = App.user.attributes.id;  //user id
                         cont_uni_p.ResumenProductos.factoring.aprueba1_c = true; 
                         cont_uni_p.ResumenProductos.factoring.aprueba2_c = true;
+                        cont_uni_p.ResumenProductos.factoring.estatus_atencion = '3';
+                        /*****************************************************/
+                        bloqueacuentaf = true;
+                        bloqueorazon = $('.list_f_razon_lm').select2('val'); //razon lm
+                        bloqueomotivo = $('.list_f_so_motivo').select2('val'); //motivo lm
+                        bloqueodescr = $('.txt_f_so_detalle').val().trim(); //detalle lm
+                        user_id_c = App.user.attributes.id;
+                        user_id1_c = $('.list_f_respval_1').select2('val');  //user id1
                     }else{
                         cont_uni_p.ResumenProductos.factoring.user_id_c = ResumenProductos.factoring.assigned_user_id;  //user id
                         cont_uni_p.ResumenProductos.factoring.notificacion_noviable_c = true;  //user id
@@ -1360,6 +1384,14 @@
                         cont_uni_p.ResumenProductos.credito_auto.user_id_c = App.user.attributes.id;  //user id
                         cont_uni_p.ResumenProductos.credito_auto.aprueba1_c = true;
                         cont_uni_p.ResumenProductos.credito_auto.aprueba2_c = true;
+                        cont_uni_p.ResumenProductos.credito_auto.estatus_atencion = '3';
+                        /*****************************************************/
+                        bloqueacuentaf = true;
+                        bloqueorazon = $('.list_ca_so_razon').select2('val'); //razon lm
+                        bloqueomotivo = $('.list_ca_so_motivo').select2('val'); //motivo lm
+                        bloqueodescr = $('.txt_ca_so_detalle').val().trim(); //detalle lm
+                        user_id_c = App.user.attributes.id;
+                        user_id1_c = $('.list_ca_respval_1').select2('val');  //user id1
                     }else{
                         cont_uni_p.ResumenProductos.credito_auto.user_id_c = ResumenProductos.credito_auto.assigned_user_id;  //user id
                         cont_uni_p.ResumenProductos.credito_auto.notificacion_noviable_c = true;  //user id
@@ -1382,6 +1414,14 @@
                         cont_uni_p.ResumenProductos.fleet.user_id_c = App.user.attributes.id;  //user id
                         cont_uni_p.ResumenProductos.fleet.aprueba1_c = true; 
                         cont_uni_p.ResumenProductos.fleet.aprueba2_c = true;
+                        cont_uni_p.ResumenProductos.fleet.estatus_atencion = '3';
+                        /*****************************************************/
+                        bloqueacuentaf = true;
+                        bloqueorazon = $('.list_fl_so_razon').select2('val'); //razon lm
+                        bloqueomotivo = $('.list_fl_so_motivo').select2('val'); //motivo lm
+                        bloqueodescr = $('.txt_fl_so_detalle').val().trim(); //detalle lm
+                        user_id_c = App.user.attributes.id;
+                        user_id1_c = $('.list_fl_respval_1').select2('val');  //user id1
                     }else{
                         cont_uni_p.ResumenProductos.fleet.user_id_c = ResumenProductos.fleet.assigned_user_id;  //user id
                         cont_uni_p.ResumenProductos.fleet.notificacion_noviable_c = true;  //user id
@@ -1404,6 +1444,14 @@
                         cont_uni_p.ResumenProductos.uniclick.user_id_c = App.user.attributes.id;  //user id
                         cont_uni_p.ResumenProductos.uniclick.aprueba1_c = true; 
                         cont_uni_p.ResumenProductos.uniclick.aprueba2_c = true;
+                        cont_uni_p.ResumenProductos.uniclick.estatus_atencion = '3';
+                        /*****************************************************/
+                        bloqueacuentaf = true;
+                        bloqueorazon = $('.list_u_so_razon').select2('val'); //razon lm
+                        bloqueomotivo = $('.list_u_so_motivo').select2('val'); //motivo lm
+                        bloqueodescr = $('.txt_u_so_detalle').val().trim(); //detalle lm
+                        user_id_c = App.user.attributes.id;
+                        user_id1_c = $('.list_u_respval_1').select2('val');  //user id1
                     }else{
                         cont_uni_p.ResumenProductos.uniclick.user_id_c = ResumenProductos.fleet.assigned_user_id;  //user id
                         cont_uni_p.ResumenProductos.uniclick.notificacion_noviable_c = true;  //user id
