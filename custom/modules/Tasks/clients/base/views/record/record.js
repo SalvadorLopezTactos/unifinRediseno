@@ -568,6 +568,8 @@
                 this.model.fields['tipo_tarea_c'].options = opciones_full;
             }
 
+            this.render();
+
         }
     },
 
