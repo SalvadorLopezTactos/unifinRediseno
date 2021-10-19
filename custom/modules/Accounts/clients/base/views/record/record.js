@@ -7188,6 +7188,7 @@
         });
 		// No viable
         var Productos = [];
+        var reactivacion = false;
         app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + this.model.get('id')), null, {
             success: function (data) {
 				Productos = data;
@@ -7201,28 +7202,38 @@
                             $('[name="reactivar_noviable"]').removeClass('hidden');
                         }
                     }else{
-                        if(!ap1 && (Productos[key].user_id1_c == app.user.id) && (Productos[key].status_management_c == '4' || Productos[key].status_management_c == '5')) {
-                            $('[name="aprobar_noviable"]').removeClass('hidden');
-                            $('[name="desaprobar_noviable"]').removeClass('hidden');
-                            if(react){
-                                $('[name="aprobar_noviable"]')[0].text = "Rechazar Reactivación";
-                                $('[name="desaprobar_noviable"]')[0].text = "Confirmar Reactivación";
-                                $('[name="aprobar_noviable"]')[0].className= "btn btn-danger";
-                                $('[name="desaprobar_noviable"]')[0].className= "btn btn-success";
-                            }
+                        if( react && !reactivacion ){
+                            /*if((!ap1 && !ap2) && (Productos[key].user_id_c == app.user.id )) {
+                                $('[name="reactivar_noviable"]').removeClass('hidden');
+                            }*/
+                            reactivacion = true;
                         }
-                        if(!ap2 && (Productos[key].user_id2_c == app.user.id)  && (Productos[key].status_management_c == '4' || Productos[key].status_management_c == '5')) {
-                            $('[name="aprobar_noviable"]').removeClass('hidden');
-                            $('[name="desaprobar_noviable"]').removeClass('hidden');
-                            if(react){
-                                $('[name="aprobar_noviable"]')[0].text = "Rechazar Reactivación";
-                                $('[name="desaprobar_noviable"]')[0].text = "Confirmar Reactivación";
-                                $('[name="aprobar_noviable"]')[0].className= "btn btn-danger";
-                                $('[name="desaprobar_noviable"]')[0].className= "btn btn-success";
+
+                        if( reactivacion || !ap1 || !ap2){
+                            if(!ap1 && (Productos[key].user_id1_c == app.user.id) && (Productos[key].status_management_c == '4' || Productos[key].status_management_c == '5')) {
+                                $('[name="aprobar_noviable"]').removeClass('hidden');
+                                $('[name="desaprobar_noviable"]').removeClass('hidden');
+                                if(react){
+                                    $('[name="aprobar_noviable"]')[0].text = "Rechazar Reactivación";
+                                    $('[name="desaprobar_noviable"]')[0].text = "Confirmar Reactivación";
+                                    $('[name="aprobar_noviable"]')[0].className= "btn btn-danger";
+                                    $('[name="desaprobar_noviable"]')[0].className= "btn btn-success";
+                                }
                             }
-                        }
-                        if((ap1 && ap2) && (Productos[key].user_id_c == app.user.id ) && !react) {
-                            $('[name="reactivar_noviable"]').removeClass('hidden');
+                            if(!ap2 && (Productos[key].user_id2_c == app.user.id)  && (Productos[key].status_management_c == '4' || Productos[key].status_management_c == '5')) {
+                                $('[name="aprobar_noviable"]').removeClass('hidden');
+                                $('[name="desaprobar_noviable"]').removeClass('hidden');
+                                if(react){
+                                    $('[name="aprobar_noviable"]')[0].text = "Rechazar Reactivación";
+                                    $('[name="desaprobar_noviable"]')[0].text = "Confirmar Reactivación";
+                                    $('[name="aprobar_noviable"]')[0].className= "btn btn-danger";
+                                    $('[name="desaprobar_noviable"]')[0].className= "btn btn-success";
+                                }
+                            }
+                        }else{
+                            if((ap1 && ap2) && (Productos[key].user_id_c == app.user.id )) {
+                                $('[name="reactivar_noviable"]').removeClass('hidden');
+                            }
                         }
                     }
                 });
