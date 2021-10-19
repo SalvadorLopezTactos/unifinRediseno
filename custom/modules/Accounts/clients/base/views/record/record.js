@@ -5256,9 +5256,38 @@
 
      //Carga Condiciones
      carga_condiciones: function () {
+
+        var filter_arguments =
+        {
+            max_num:-1,
+            "fields": [
+                "id",
+                "condicion",
+                "razon",
+                "motivo",
+                "detalle",
+                "responsable1",
+                "responsable2",
+                "bloquea",
+                "notifica",
+            ],
+        };
+        filter_arguments["filter"] = [
+            {
+                "$or":[
+                    {
+                       "condicion":"4"
+                    },
+                    {
+                       "condicion":"5"
+                    }
+                ]
+            }
+        ];
         this.datacondiciones = [];
         var url = app.api.buildURL('tct4_Condiciones/', null);
-        app.api.call('read',url, null, {
+        //app.api.call('read',url, null, {
+        app.api.call("read", app.api.buildURL("tct4_Condiciones", null, null, filter_arguments), null, {
             success: _.bind(function (data) {
 				if(data.records.length > 0) {
 					contexto_cuenta.datacondiciones = data;
@@ -5914,8 +5943,8 @@
         var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
         if(ResumenProductos.leasing != undefined && (document.getElementById("list_l_estatus_lm") != undefined || document.getElementById("list_l_estatus_lm") != null) ){
 
-            if( (productos.includes("1") && (App.user.attributes.id == ResumenProductos.leasing.assigned_user_id))
-                    && (!ResumenProductos.leasing.notificacion_noviable_c)){
+            if( ( (productos.includes("1") && (App.user.attributes.id == ResumenProductos.leasing.assigned_user_id))
+                    && (!ResumenProductos.leasing.notificacion_noviable_c) ) || App.user.attributes.bloqueo_cuentas_c == 1 ){
                 var faltantelm = 0;
                 var selectlm = document.getElementById("list_l_estatus_lm");
                 var selectlrazon = document.getElementById("list_l_so_razon");
@@ -6069,8 +6098,8 @@
         if( (document.getElementById("list_fac_estatus_lm") != undefined || document.getElementById("list_fac_estatus_lm") != null) &&
             ResumenProductos.factoring != undefined){
 
-        if( (productos.includes("4")&& (App.user.attributes.id == ResumenProductos.factoring.assigned_user_id))
-            && (!ResumenProductos.factoring.notificacion_noviable_c)){
+        if( ( (productos.includes("4")&& (App.user.attributes.id == ResumenProductos.factoring.assigned_user_id))
+            && (!ResumenProductos.factoring.notificacion_noviable_c) )|| App.user.attributes.bloqueo_cuentas_c == 1 ){
             var faltantelm = 0;
             var selectlm = document.getElementById("list_fac_estatus_lm");
             var selectlrazon = document.getElementById("list_f_razon_lm");
@@ -6224,8 +6253,8 @@
             if((document.getElementById("list_ca_estatus_lm") != undefined || document.getElementById("list_ca_estatus_lm") != null)
                 && ResumenProductos.credito_auto != undefined){
 
-            if((productos.includes("3")&& (App.user.attributes.id == ResumenProductos.credito_auto.assigned_user_id))
-                && (!ResumenProductos.credito_auto.notificacion_noviable_c)){
+            if(((productos.includes("3")&& (App.user.attributes.id == ResumenProductos.credito_auto.assigned_user_id))
+                && (!ResumenProductos.credito_auto.notificacion_noviable_c)) || App.user.attributes.bloqueo_cuentas_c == 1 ){
                 var selectlm = document.getElementById("list_ca_estatus_lm");
                 var selectlrazon = document.getElementById("list_ca_so_razon");
                 var selectlmotivo = document.getElementById("list_ca_so_motivo");
@@ -6379,8 +6408,8 @@
         if((document.getElementById("list_fl_estatus_lm") != undefined || document.getElementById("list_fl_estatus_lm") != null)
         && ResumenProductos.fleet != undefined){
 
-            if((productos.includes("6")&& (App.user.attributes.id == ResumenProductos.fleet.assigned_user_id))
-            && (!ResumenProductos.fleet.notificacion_noviable_c)){
+            if(((productos.includes("6")&& (App.user.attributes.id == ResumenProductos.fleet.assigned_user_id))
+            && (!ResumenProductos.fleet.notificacion_noviable_c)) || App.user.attributes.bloqueo_cuentas_c == 1 ){
 
                 var faltantelm = 0;
                 var selectlm = document.getElementById("list_fl_estatus_lm");
@@ -6537,10 +6566,10 @@
         var productos = App.user.attributes.productos_c; //USUARIOS CON LOS SIGUIENTES PRODUCTOS
 
         if((document.getElementById("list_u_estatus_lm") != undefined || document.getElementById("list_u_estatus_lm") != null)
-                && ResumenProductos.uniclick != undefined){
+                && ResumenProductos.uniclick != undefined) {
 
-            if((productos.includes("8")&& (App.user.attributes.id == ResumenProductos.uniclick.assigned_user_id))
-                && (!ResumenProductos.uniclick.notificacion_noviable_c)){
+            if(((productos.includes("8")&& (App.user.attributes.id == ResumenProductos.uniclick.assigned_user_id))
+                && (!ResumenProductos.uniclick.notificacion_noviable_c)) || App.user.attributes.bloqueo_cuentas_c == 1 ){
                 var faltantelm = 0;
                 var selectlm = document.getElementById("list_u_estatus_lm");
                 var selectlrazon = document.getElementById("list_u_so_razon");
