@@ -2821,16 +2821,16 @@
                         errors['email'].required = true;
                     }
                         var validPhone = false;
-                        for (var i = 0; i < this.oTelefonos.length; i++) {
-                            if (telefono[i].estatus=='Activo') {
+                        for (var i = 0; i < this.oTelefonos.telefono.length; i++) {
+                            if (this.oTelefonos.telefono[i].estatus=='Activo') {
                                 validPhone= true;
                                 
                             }
                         }
                         if (validPhone==false){
                             $('#tabletelefonos').css('border', '2px solid red');
-                            errors['account_telefonos1'] = errors['account_telefonos1'] || {};
-                            errors['account_telefonos1'].required = true;
+                            errors['account_telefonos'] = errors['account_telefonos'] || {};
+                            errors['account_telefonos'].required = true;
                             }
                     
         }else if(this.model.get('tipo_registro_cuenta_c') !== '4' || this.model.get('tipo_registro_cuenta_c') !== '5'){
