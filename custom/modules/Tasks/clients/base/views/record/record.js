@@ -30,7 +30,7 @@
         this.model.on('sync', this.validaRelLeadTask, this);
         this.model.on('sync', this.roFunction, this);
         
-        this.deleteOportunidadRecuperacion();
+        this.model.on('sync', this.deleteOportunidadRecuperacion, this);
     },
 
     /**
