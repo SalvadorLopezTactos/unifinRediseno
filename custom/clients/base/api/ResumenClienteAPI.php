@@ -836,11 +836,16 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['uniclick']['estatus_atencion'] = $statusProducto;
                         $arr_principal['uniclick']['cobranza'] = $cobranza;
                         $arr_principal['uniclick']['estatusxproducto'] = $estatusxproducto;
-                        break;
-                    case '9': //Uniclick
+
                         $arr_principal['unilease']['tipo_cuenta'] = $tipoCuenta;
                         $arr_principal['unilease']['subtipo_cuenta'] = $subtipoCuenta;
                         $arr_principal['unilease']['estatus_atencion'] = $statusProducto;
+                        $arr_principal['unilease']['estatusxproducto'] = $estatusxproducto;
+                        break;
+                    case '9': //Uniclick
+                        //$arr_principal['unilease']['tipo_cuenta'] = $tipoCuenta;
+                        //$arr_principal['unilease']['subtipo_cuenta'] = $subtipoCuenta;
+                        //$arr_principal['unilease']['estatus_atencion'] = $statusProducto;
                         $arr_principal['unilease']['cobranza'] = $cobranza;
                         break;
                     default:
