@@ -1179,6 +1179,7 @@
             var bloqueodescr = "";
             var user_id_c = "";
             var user_id1_c = "";
+            var status_management_c = "";
             /****************/
             //Valida Leasing TIPO CUENTA 1-LEAD - SUBTIPO CUENTA 2-CONTACTADO - SUBTIPO CUENTA 7-INTERESADO
             if (cont_uni_p.ResumenProductos.leasing.tipo_cuenta == 1 || cont_uni_p.ResumenProductos.leasing.subtipo_cuenta == 2 || cont_uni_p.ResumenProductos.leasing.subtipo_cuenta == 7) {
@@ -1329,6 +1330,7 @@
                         bloqueodescr = $('.txt_l_so_detalle').val().trim(); //detalle lm
                         user_id_c = App.user.attributes.id;
                         user_id1_c = $('.list_l_respval_1').select2('val');  //user id1
+                        status_management_c = $('.list_l_estatus_lm').select2('val'); //estatus management
                     }else{
                         cont_uni_p.ResumenProductos.leasing.user_id_c = ResumenProductos.leasing.assigned_user_id;  //user id
                         cont_uni_p.ResumenProductos.leasing.notificacion_noviable_c = true;  //user id
@@ -1362,6 +1364,7 @@
                         bloqueodescr = $('.txt_f_so_detalle').val().trim(); //detalle lm
                         user_id_c = App.user.attributes.id;
                         user_id1_c = $('.list_f_respval_1').select2('val');  //user id1
+                        status_management_c = $('.list_fac_estatus_lm').select2('val'); //estatus management
                     }else{
                         cont_uni_p.ResumenProductos.factoring.user_id_c = ResumenProductos.factoring.assigned_user_id;  //user id
                         cont_uni_p.ResumenProductos.factoring.notificacion_noviable_c = true;  //user id
@@ -1392,6 +1395,7 @@
                         bloqueodescr = $('.txt_ca_so_detalle').val().trim(); //detalle lm
                         user_id_c = App.user.attributes.id;
                         user_id1_c = $('.list_ca_respval_1').select2('val');  //user id1
+                        status_management_c = $('.list_ca_estatus_lm').select2('val'); //estatus management
                     }else{
                         cont_uni_p.ResumenProductos.credito_auto.user_id_c = ResumenProductos.credito_auto.assigned_user_id;  //user id
                         cont_uni_p.ResumenProductos.credito_auto.notificacion_noviable_c = true;  //user id
@@ -1422,6 +1426,7 @@
                         bloqueodescr = $('.txt_fl_so_detalle').val().trim(); //detalle lm
                         user_id_c = App.user.attributes.id;
                         user_id1_c = $('.list_fl_respval_1').select2('val');  //user id1
+                        status_management_c = $('.list_fl_estatus_lm').select2('val'); //estatus management
                     }else{
                         cont_uni_p.ResumenProductos.fleet.user_id_c = ResumenProductos.fleet.assigned_user_id;  //user id
                         cont_uni_p.ResumenProductos.fleet.notificacion_noviable_c = true;  //user id
@@ -1452,6 +1457,7 @@
                         bloqueodescr = $('.txt_u_so_detalle').val().trim(); //detalle lm
                         user_id_c = App.user.attributes.id;
                         user_id1_c = $('.list_u_respval_1').select2('val');  //user id1
+                        status_management_c = $('.list_u_estatus_lm').select2('val'); //estatus management
                     }else{
                         cont_uni_p.ResumenProductos.uniclick.user_id_c = ResumenProductos.fleet.assigned_user_id;  //user id
                         cont_uni_p.ResumenProductos.uniclick.notificacion_noviable_c = true;  //user id
@@ -1463,6 +1469,73 @@
                     }*/
 					this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.uniclick;
                 }
+            }
+        }
+
+        if(bloqueacuentaf){
+            var bloqueo_completo = false;
+            for(var i=0; i< cont_uni_p.datacondiciones.records.length ; i++) {
+
+                if((cont_uni_p.datacondiciones.records[i].condicion == status_management_c) &&
+                   (cont_uni_p.datacondiciones.records[i].razon == bloqueorazon) && 
+                   (cont_uni_p.datacondiciones.records[i].motivo == bloqueomotivo) && 
+                   (cont_uni_p.datacondiciones.records[i].bloquea )){
+                        bloqueo_completo = true;
+                }
+            }
+
+            if(bloqueo_completo){
+                cont_uni_p.ResumenProductos.leasing.status_management_c = status_management_c; //estatus management
+                cont_uni_p.ResumenProductos.leasing.razon_c = bloqueorazon; //razon lm
+                cont_uni_p.ResumenProductos.leasing.motivo_c = bloqueomotivo; //motivo lm
+                cont_uni_p.ResumenProductos.leasing.detalle_c = bloqueodescr; //detalle lm
+                cont_uni_p.ResumenProductos.leasing.user_id_c = user_id_c;  //user id
+                cont_uni_p.ResumenProductos.leasing.user_id1_c = user_id1_c;  //user id1
+                cont_uni_p.ResumenProductos.leasing.user_id2_c = null;  //user id1
+                cont_uni_p.ResumenProductos.leasing.estatus_atencion = '3';
+                /******************************************************/
+                cont_uni_p.ResumenProductos.factoring.status_management_c = status_management_c; //estatus management
+                cont_uni_p.ResumenProductos.factoring.razon_c = bloqueorazon; //razon lm
+                cont_uni_p.ResumenProductos.factoring.motivo_c = bloqueomotivo; //motivo lm
+                cont_uni_p.ResumenProductos.factoring.detalle_c = bloqueodescr; //detalle lm
+                cont_uni_p.ResumenProductos.factoring.user_id_c = user_id_c;  //user id
+                cont_uni_p.ResumenProductos.factoring.user_id1_c = user_id1_c;  //user id1
+                cont_uni_p.ResumenProductos.factoring.user_id2_c = null;  //user id1
+                cont_uni_p.ResumenProductos.factoring.estatus_atencion = '3';
+                /******************************************************/
+                cont_uni_p.ResumenProductos.credito_auto.status_management_c = status_management_c; //estatus management
+                cont_uni_p.ResumenProductos.credito_auto.razon_c = bloqueorazon; //razon lm
+                cont_uni_p.ResumenProductos.credito_auto.motivo_c = bloqueomotivo; //motivo lm
+                cont_uni_p.ResumenProductos.credito_auto.detalle_c = bloqueodescr; //detalle lm
+                cont_uni_p.ResumenProductos.credito_auto.user_id_c = user_id_c;  //user id
+                cont_uni_p.ResumenProductos.credito_auto.user_id1_c = user_id1_c;  //user id1
+                cont_uni_p.ResumenProductos.credito_auto.user_id2_c = null;  //user id1
+                cont_uni_p.ResumenProductos.credito_auto.estatus_atencion = '3';
+                /******************************************************/
+                cont_uni_p.ResumenProductos.fleet.status_management_c = status_management_c; //estatus management
+                cont_uni_p.ResumenProductos.fleet.razon_c = bloqueorazon; //razon lm
+                cont_uni_p.ResumenProductos.fleet.motivo_c = bloqueomotivo; //motivo lm
+                cont_uni_p.ResumenProductos.fleet.detalle_c = bloqueodescr; //detalle lm
+                cont_uni_p.ResumenProductos.fleet.user_id_c = user_id_c;  //user id
+                cont_uni_p.ResumenProductos.fleet.user_id1_c = user_id1_c;  //user id1
+                cont_uni_p.ResumenProductos.fleet.user_id2_c = null;  //user id1
+                cont_uni_p.ResumenProductos.fleet.estatus_atencion = '3';
+                /******************************************************/
+                cont_uni_p.ResumenProductos.uniclick.status_management_c = status_management_c; //estatus management
+                cont_uni_p.ResumenProductos.uniclick.razon_c = bloqueorazon; //razon lm
+                cont_uni_p.ResumenProductos.uniclick.motivo_c = bloqueomotivo; //motivo lm
+                cont_uni_p.ResumenProductos.uniclick.detalle_c = bloqueodescr; //detalle lm
+                cont_uni_p.ResumenProductos.uniclick.user_id_c = user_id_c;  //user id
+                cont_uni_p.ResumenProductos.uniclick.user_id1_c = user_id1_c;  //user id1
+                cont_uni_p.ResumenProductos.uniclick.user_id2_c = null;  //user id1
+                cont_uni_p.ResumenProductos.uniclick.estatus_atencion = '3';
+                /****************************************************/
+                this.tipoProducto.leasing = cont_uni_p.ResumenProductos.leasing;
+                this.tipoProducto.factoring = cont_uni_p.ResumenProductos.factoring;
+                this.tipoProducto.credito_auto = cont_uni_p.ResumenProductos.credito_auto;
+                this.tipoProducto.fleet = cont_uni_p.ResumenProductos.fleet;
+                this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.uniclick;
+
             }
         }
 
@@ -2099,19 +2172,34 @@
     usuarioUnico:function (tipoProducto) {
         switch (tipoProducto) {
             case "1": //Leasing
-                document.getElementById("list_l_respval_1").options[0]=new Option( App.user.attributes.full_name , App.user.attributes.id );
+                $('.list_l_respval_1').select2('val', "");
+                $('.list_l_respval_2').select2('val', "");
+                document.getElementById("list_l_respval_1").options[0] = new Option("","");
+                document.getElementById("list_l_respval_1").options[1]=new Option( App.user.attributes.full_name , App.user.attributes.id );
                 break;
             case "4": //Factoraje
-                document.getElementById("list_f_respval_1").options[0]=new Option( App.user.attributes.full_name , App.user.attributes.id );
+                $('.list_f_respval_1').select2('val', "");
+                $('.list_f_respval_2').select2('val', "");
+                document.getElementById("list_f_respval_1").options[0] = new Option("","");
+                document.getElementById("list_f_respval_1").options[1]=new Option( App.user.attributes.full_name , App.user.attributes.id );
                 break;
             case "3": //Credito-auto
-                document.getElementById("list_ca_respval_1").options[0]=new Option( App.user.attributes.full_name , App.user.attributes.id );
+                $('.list_ca_respval_1').select2('val', "");
+                $('.list_ca_respval_2').select2('val', "");
+                document.getElementById("list_ca_respval_1").options[0] = new Option("","");
+                document.getElementById("list_ca_respval_1").options[1]=new Option( App.user.attributes.full_name , App.user.attributes.id );
                 break;
             case "6": //Fleet
-                document.getElementById("list_fl_respval_1").options[0]=new Option( App.user.attributes.full_name , App.user.attributes.id );
+                $('.list_fl_respval_1').select2('val', "");
+                $('.list_fl_respval_2').select2('val', "");
+                document.getElementById("list_fl_respval_1").options[0] = new Option("","");
+                document.getElementById("list_fl_respval_1").options[1]=new Option( App.user.attributes.full_name , App.user.attributes.id );
                 break;
             case "8": //Uniclick
-                document.getElementById("list_u_respval_1").options[0]=new Option( App.user.attributes.full_name , App.user.attributes.id );
+                $('.list_u_respval_1').select2('val', "");
+                $('.list_u_respval_2').select2('val', "");
+                document.getElementById("list_u_respval_1").options[0] = new Option("","");
+                document.getElementById("list_u_respval_1").options[1]=new Option( App.user.attributes.full_name , App.user.attributes.id );
                 break;
         }
     },
