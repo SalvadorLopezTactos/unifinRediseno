@@ -509,6 +509,9 @@
                         if (field.vname == 'LBL_DUE_DATE') {
                             campos = campos + '<b>Fecha de vencimiento</b><br>';
                         }
+                        if (field.vname == 'LBL_START_DATE') {
+                            campos = campos + '<b>Fecha Inicio</b><br>';
+                        }
                         else {
                             if (field.vname == 'LBL_DETALLE_MOTIVO_POTENCIAL') {
                                 campos = campos + '<b>Detalle</b><br>';
