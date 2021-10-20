@@ -106,10 +106,11 @@ class Task_Hooks
 
 		//Lanzar notificación en cada actualización del registro de Tarea creado por Centro de prospección, Asesor CAC: 61
 		$campos_modificados=array();
+		$campos_excluidos=array('date_modified','tn_name','tn_name_2','puesto_asignado_c');
 		if ($args['isUpdate'] && $bean->puesto_c=='61') {
 			foreach($bean->fetched_row as $key=>$val){
 				if($bean->fetched_row[$key] != $bean->{$key}){
-					if($key!="date_modified" && $key!="tn_name" && $key!="tn_name_2"){
+					if(!in_array($key, $campos_excluidos)){
 						array_push($campos_modificados,$key);
 					}
 				}
@@ -143,13 +144,17 @@ class Task_Hooks
 		global $app_list_strings;
 		
 		$string_modificados='';
-		for ($i=0; $i < count($campos_modificados); $i++) { 
+		for ($i=0; $i < count($campos_modificados); $i++) {
 			$GLOBALS['log']->fatal($beanTarea->getFieldDefinition($campos_modificados[$i]));
 			$definicion_campo=$beanTarea->getFieldDefinition($campos_modificados[$i]);
 			$etiqueta_sistema=$definicion_campo['vname'];
 			$label = translate($etiqueta_sistema, 'Tasks');
 			//Obteniendo la etiqueta del campo
-			$string_modificados.='Campo modificado <b>'.$label.'</b><br>';
+			if($campos_modificados[$i]=="assigned_user_id"){
+				$string_modificados.='Campo modificado <b>Usuario Asignado</b><br>';
+			}else{
+				$string_modificados.='Campo modificado <b>'.$label.'</b><br>';
+			}
 			
 			if($definicion_campo['type']=='enum'){
 				//Obtiene valor de la lista de valores
@@ -157,8 +162,20 @@ class Task_Hooks
 				$string_modificados.='<br><b>Valor anterior:</b> '.$lista_valores[$beanTarea->fetched_row[$campos_modificados[$i]]];
 				$string_modificados.='<br><b>Valor actual:</b> '.$lista_valores[$beanTarea->{$campos_modificados[$i]}].'<br><br>';
 			}else{
-				$string_modificados.='<br><b>Valor anterior:</b> '.$beanTarea->fetched_row[$campos_modificados[$i]];
-				$string_modificados.='<br><b>Valor actual:</b> '.$beanTarea->{$campos_modificados[$i]}.'<br><br>';
+				if($campos_modificados[$i]=="assigned_user_id"){
+					//Obtiene nombre de los usuarios
+					$usuario_anterior=BeanFactory::getBean('Users', $beanTarea->fetched_row[$campos_modificados[$i]]);
+					$nombre_usuario_anterior=$usuario_anterior->nombre_completo_c;
+
+					$usuario_nuevo=BeanFactory::getBean('Users', $beanTarea->{$campos_modificados[$i]});
+					$nombre_usuario_nuevo=$usuario_nuevo->nombre_completo_c;
+
+					$string_modificados.='<br><b>Valor anterior:</b> '.$nombre_usuario_anterior;
+					$string_modificados.='<br><b>Valor actual:</b> '.$nombre_usuario_nuevo.'<br><br>';
+				}else{
+					$string_modificados.='<br><b>Valor anterior:</b> '.$beanTarea->fetched_row[$campos_modificados[$i]];
+					$string_modificados.='<br><b>Valor actual:</b> '.$beanTarea->{$campos_modificados[$i]}.'<br><br>';
+				}
 			}
 
 		}
@@ -227,8 +244,11 @@ class Task_Hooks
 										$id_solicitud=$sol->id;
 										$nombre_solicitud=$sol->name;
 										$GLOBALS['log']->fatal("RELACIONANDO LA SOLICITUD ".$id_solicitud."-".$nombre_solicitud);
-										$bean->tasks_opportunities_1_name=$nombre_solicitud;
-										$bean->tasks_opportunities_1opportunities_idb=$id_solicitud;
+										//$bean->tasks_opportunities_1_name=$nombre_solicitud;
+										//$bean->tasks_opportunities_1opportunities_idb=$id_solicitud;
+										$sol->tasks_opportunities_1_name=$bean->name;
+										$sol->tasks_opportunities_1tasks_ida=$bean->id;
+										$sol->save();
 										$relacionada=true;//Se establece bandera para que solo se relacione la primera solicitud de Leasing encontrada
 									}
 								}
