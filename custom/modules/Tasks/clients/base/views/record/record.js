@@ -74,16 +74,13 @@
 
     // },
 
-    // editClicked: function() {
+    editClicked: function() {
 
-    //     this._super("editClicked");
-    //     this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;');
-    //     this.setButtonStates(this.STATE.EDIT);
-    //     this.action = 'edit';
-    //     this.toggleEdit(true);
-    //     this.setRoute('edit');
-
-    // },
+        this._super("editClicked");
+        $("[data-name='potencial_negocio_c']").attr('style', 'pointer-events:none;');
+        $("[data-name='tasks_opportunities_1_name']").attr('style', 'pointer-events:none;');
+        
+    },
 
     // cancelClicked: function() {
 
