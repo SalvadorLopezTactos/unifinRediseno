@@ -2,7 +2,6 @@
     extendsFrom: 'CreateView',
 
     events: {
-        'change [name=name]': 'actualizaAsunto',
         'change [name=tipo_tarea_c]': 'actualizaAsunto',
     },
 
@@ -20,6 +19,8 @@
         this.model.addValidationTask('valida_atrasada', _.bind(this.valida_atrasada, this));
         
         this.deleteOportunidadRecuperacion();
+
+        this.model.on('change:name', this.actualizaAsunto, this);
     },
 
     _render: function () {

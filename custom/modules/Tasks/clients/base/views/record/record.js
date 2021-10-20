@@ -2,7 +2,6 @@
     extendsFrom: 'RecordView',
 
     events: {
-        'change [name=name]': 'actualizaAsunto',
         'change [name=tipo_tarea_c]': 'actualizaAsunto',
     },
 
@@ -32,6 +31,8 @@
         this.model.on('sync', this.roFunction, this);
         
         this.model.on('sync', this.deleteOportunidadRecuperacion, this);
+
+        this.model.on('change:name', this.actualizaAsunto, this);
     },
 
     /**
