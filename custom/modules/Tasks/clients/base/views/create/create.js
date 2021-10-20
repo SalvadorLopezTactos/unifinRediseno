@@ -2,6 +2,7 @@
     extendsFrom: 'CreateView',
 
     events: {
+        'change [name=name]': 'actualizaAsunto',
         'change [name=tipo_tarea_c]': 'actualizaAsunto',
     },
 
@@ -12,7 +13,7 @@
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         this.model.addValidationTask('checkdate', _.bind(this.checkdate, this));
 		this.model.addValidationTask('valida_asignado', _.bind(this.valida_asignado, this));
-		this.model.on('change:ayuda_asesor_cp_c', this._ValoresPredetAsesor, this);
+		this.model.on('change:ayuda_asesor_cp_cfz', this._ValoresPredetAsesor, this);
 		this.model.on('change:parent_name', this._ValoresPredetAsesor, this);
         this.model.addValidationTask('validaRelLeadTask', _.bind(this.validaRelLeadTask, this));
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
@@ -360,7 +361,7 @@
 
     actualizaAsunto:function(e){
         var asunto="";
-        if(this.model.get('tipo_tarea_c')!=""){
+        if(this.model.get('tipo_tarea_c')!="" && this.model.get('tipo_tarea_c')!=null){
             var tipo_tarea=this.model.get('tipo_tarea_c');
 
             //Antes de concatenar, se resetea valor de nombre, para que solo tome el propio asunto y no concatene sobre lo que ya se ha escrito

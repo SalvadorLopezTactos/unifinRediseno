@@ -2,6 +2,7 @@
     extendsFrom: 'RecordView',
 
     events: {
+        'change [name=name]': 'actualizaAsunto',
         'change [name=tipo_tarea_c]': 'actualizaAsunto',
     },
 
@@ -575,7 +576,7 @@
 
     actualizaAsunto:function(e){
         var asunto="";
-        if(this.model.get('tipo_tarea_c')!=""){
+        if(this.model.get('tipo_tarea_c')!="" && this.model.get('tipo_tarea_c')!=null){
             var asunto="";
             if(this.model.get('tipo_tarea_c')!=""){
                 var tipo_tarea=this.model.get('tipo_tarea_c');
