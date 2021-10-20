@@ -56,6 +56,7 @@ class clase_UniProducto
                         }
                         
                         $beanUP->status_management_c = $key['status_management_c'];
+                        $beanUP->estatus_atencion = $key['estatus_atencion'];
                         $beanUP->razon_c = $key['razon_c'];
                         $beanUP->motivo_c = $key['motivo_c'];
                         $beanUP->detalle_c = $key['detalle_c'];
@@ -173,6 +174,7 @@ class clase_UniProducto
                         $beanUP->canal_c = $key['canal_c'] != "" ? $key['canal_c'] : "";
                         $beanUP->multilinea_c = $key['multilinea_c'] != "" ? $key['multilinea_c'] : "";
                         $beanUP->notificacion_noviable_c = $key['notificacion_noviable_c']; 
+                        $beanUP->estatus_atencion = $key['estatus_atencion'];
 
                         /*
                         $beanUP->status_management_c = $key['status_management_c'];

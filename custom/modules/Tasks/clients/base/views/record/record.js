@@ -30,7 +30,7 @@
         this.model.on('sync', this.validaRelLeadTask, this);
         this.model.on('sync', this.roFunction, this);
         
-        this.deleteOportunidadRecuperacion();
+        this.model.on('sync', this.deleteOportunidadRecuperacion, this);
     },
 
     /**
@@ -567,6 +567,8 @@
                 var opciones_full=app.lang.getAppListStrings('tipo_tarea_list');
                 this.model.fields['tipo_tarea_c'].options = opciones_full;
             }
+
+            this.render();
 
         }
     },

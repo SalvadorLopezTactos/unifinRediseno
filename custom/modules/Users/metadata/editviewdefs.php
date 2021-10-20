@@ -434,10 +434,14 @@ array (
         array (
           0 => 
           array (
+            'name' => 'bloqueo_cuentas_c',
+            'label' => 'LBL_BLOQUEO_CUENTAS',
+          ),
+          1 => 
+          array (
             'name' => 'gestion_lm_c',
             'label' => 'LBL_GESTION_LM',
           ),
-          1 => '',
         ),
         14 => 
         array (
