@@ -49,6 +49,7 @@ class Task_Hooks
 
     public function sendEmail($bean=null,$event=null,$args=null)
 	{
+		global $app_list_strings;
         $bean->fecha_vacia_c = $bean->fecha_calificacion_c;
 		if($bean->potencial_negocio_c) $bean->status = 'Completed';
 		if(empty($bean->fetched_row['id']) && $bean->puesto_c == 61 && $bean->parent_type == 'Accounts') {
@@ -64,6 +65,7 @@ class Task_Hooks
 				require_once 'include/SugarPHPMailer.php';
 				require_once 'modules/Administration/Administration.php';
 				$linkTarea=$GLOBALS['sugar_config']['site_url'].'/#Tasks/'.$bean->id;
+				$envio_usuarios_especificos=0;
 				if($account->user_id_c == $bean->assigned_user_id) {
 					$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Se le informa que se le ha asignado una nueva tarea con la siguiente información:
 					<br><br>Asunto: <b><a id="linkTarea" href="'.$linkTarea.'">'.$bean->name.'</a></b>
@@ -77,6 +79,8 @@ class Task_Hooks
 					Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
 					No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
 					Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/aviso-de-privacidad.php" target="_blank" rel="noopener"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a></span><u></u><u></u></p>';
+					
+					$envio_usuarios_especificos=1;
 				} else {
 					$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Se le informa que se le ha asignado una nueva tarea con la siguiente información:
 					<br><br>Asunto: <b><a id="linkTarea" href="'.$linkTarea.'">'.$bean->name.'</a></b>
@@ -97,6 +101,19 @@ class Task_Hooks
 				$mailer->setHtmlBody($body);
 				$mailer->clearRecipients();
 				$mailer->addRecipientsTo(new EmailIdentity($correo, $nombre));
+				if($envio_usuarios_especificos==1){
+					//Enviar copia a usuarios especificos solo si el asesor leasing de la cuenta es el mismo que el asignado de la Tarea
+					$lista_usuarios_copia=$app_list_strings["users_copia_tareas_list"];
+					foreach ($lista_usuarios_copia as $key => $value) {
+						$id_usuario=$lista_usuarios_copia[$key];
+						$userCopia = BeanFactory::getBean('Users', $id_usuario);
+						if(!empty($userCopia)){
+							$correoUserCopia = $userCopia->email1;
+							$nombreUserCopia = $userCopia->nombre_completo_c;
+							$mailer->addRecipientsCc(new EmailIdentity($correoUserCopia, $nombreUserCopia));
+						}
+					}
+				}
 				$result = $mailer->send();
 			}
 		}
@@ -106,7 +123,7 @@ class Task_Hooks
 
 		//Lanzar notificación en cada actualización del registro de Tarea creado por Centro de prospección, Asesor CAC: 61
 		$campos_modificados=array();
-		$campos_excluidos=array('date_modified','tn_name','tn_name_2','puesto_asignado_c');
+		$campos_excluidos=array('date_modified','tn_name','tn_name_2','puesto_asignado_c','subetapa_c');
 		if ($args['isUpdate'] && $bean->puesto_c=='61') {
 			foreach($bean->fetched_row as $key=>$val){
 				if($bean->fetched_row[$key] != $bean->{$key}){
