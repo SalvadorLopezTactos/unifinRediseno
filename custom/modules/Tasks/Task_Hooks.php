@@ -79,10 +79,10 @@ class Task_Hooks
 					Las opiniones expresadas en este correo son las de su autor y no son necesariamente compartidas o apoyadas por UNIFIN, quien no asume aquí obligaciones ni se responsabiliza del contenido de este correo, a menos que dicha información sea confirmada por escrito por un representante legal autorizado.
 					No se garantiza que la transmisión de este correo sea segura o libre de errores, podría haber sido viciada, perdida, destruida, haber llegado tarde, de forma incompleta o contener VIRUS.
 					Asimismo, los datos personales, que en su caso UNIFIN pudiera recibir a través de este medio, mantendrán la seguridad y privacidad en los términos de la Ley Federal de Protección de Datos Personales; para más información consulte nuestro &nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #2f96fb;"><a href="https://www.unifin.com.mx/aviso-de-privacidad.php" target="_blank" rel="noopener"><span style="color: #2f96fb; text-decoration: none;">Aviso de Privacidad</span></a></span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #212121;">&nbsp; publicado en&nbsp;</span><span style="font-size: 7.5pt; font-family: \'Arial\',sans-serif; color: #0b5195;"><a href="http://www.unifin.com.mx/" target="_blank" rel="noopener"><span style="color: #0b5195; text-decoration: none;">www.unifin.com.mx</span></a></span><u></u><u></u></p>';
-					
+
 					$envio_usuarios_especificos=1;
 				} else {
-					$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Se le informa que se le ha asignado una nueva tarea con la siguiente información:
+					$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Se le informa que se ha dado de alta una nueva tarea con la siguiente información:
 					<br><br>Asunto: <b><a id="linkTarea" href="'.$linkTarea.'">'.$bean->name.'</a></b>
 					<br><br>Asesor creador del registro: <b>'.$creador.'</b>
 					<br><br>Descripción: <b>'.$bean->description.'</b>
@@ -118,7 +118,7 @@ class Task_Hooks
 			}
 		}
 	}
-	
+
 	public function sendNotificationUpdate($bean = null, $event = null, $args = null){
 
 		//Lanzar notificación en cada actualización del registro de Tarea creado por Centro de prospección, Asesor CAC: 61
@@ -159,7 +159,7 @@ class Task_Hooks
 	public function bodyNotificacionUpdate($beanTarea,$linkTarea,$campos_modificados){
 		require_once 'include/utils.php';
 		global $app_list_strings;
-		
+
 		$string_modificados='';
 		for ($i=0; $i < count($campos_modificados); $i++) {
 			$GLOBALS['log']->fatal($beanTarea->getFieldDefinition($campos_modificados[$i]));
@@ -172,7 +172,7 @@ class Task_Hooks
 			}else{
 				$string_modificados.='Campo modificado <b>'.$label.'</b><br>';
 			}
-			
+
 			if($definicion_campo['type']=='enum'){
 				//Obtiene valor de la lista de valores
 				$lista_valores=$app_list_strings[$definicion_campo['options']];
@@ -196,7 +196,7 @@ class Task_Hooks
 			}
 
 		}
-        
+
         $mailHTML = '<p align="justify"><font face="verdana" color="#635f5f"><b></b>
 	  <br>Se le informa que se ha actualizado la siguiente información en el registro de la <a id="linkTarea" href="'. $linkTarea.'">Tarea</a>:
 	  <br><br>'.$string_modificados.'
@@ -213,7 +213,7 @@ class Task_Hooks
         return $mailHTML;
 
 	}
-	
+
 	public function enviaNotificaion($asunto,$cuerpoCorreo,$email,$nombre_asesor){
 		try{
             $mailer = MailerFactory::getSystemDefaultMailer();
@@ -227,7 +227,7 @@ class Task_Hooks
 		}catch (Exception $e){
             $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email ".$email);
             $GLOBALS['log']->fatal("Exception ".$e);
-        } 
+        }
 
 	}
 
@@ -257,7 +257,7 @@ class Task_Hooks
 								if(!$relacionada){
 									//Solicitud Leasing: 1, Rechazado : tct_etapa_ddw_c=R,Cancelada: estatus_c=K
 									if($sol->tipo_producto_c=='1' && $sol->tct_etapa_ddw_c!='R' && $sol->estatus_c !='K'){
-										
+
 										$id_solicitud=$sol->id;
 										$nombre_solicitud=$sol->name;
 										$GLOBALS['log']->fatal("RELACIONANDO LA SOLICITUD ".$id_solicitud."-".$nombre_solicitud);
@@ -276,7 +276,7 @@ class Task_Hooks
 			}
 
 		}
-		
+
 
 
 
