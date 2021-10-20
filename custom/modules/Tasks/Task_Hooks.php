@@ -244,8 +244,11 @@ class Task_Hooks
 										$id_solicitud=$sol->id;
 										$nombre_solicitud=$sol->name;
 										$GLOBALS['log']->fatal("RELACIONANDO LA SOLICITUD ".$id_solicitud."-".$nombre_solicitud);
-										$bean->tasks_opportunities_1_name=$nombre_solicitud;
-										$bean->tasks_opportunities_1opportunities_idb=$id_solicitud;
+										//$bean->tasks_opportunities_1_name=$nombre_solicitud;
+										//$bean->tasks_opportunities_1opportunities_idb=$id_solicitud;
+										$sol->tasks_opportunities_1_name=$bean->name;
+										$sol->tasks_opportunities_1tasks_ida=$bean->id;
+										$sol->save();
 										$relacionada=true;//Se establece bandera para que solo se relacione la primera solicitud de Leasing encontrada
 									}
 								}
