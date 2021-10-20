@@ -589,11 +589,11 @@ SQL;
         $total['total_renta_inicial_final'] = round($total['total_renta_inicial_final'],0);
         $total['total_bl_actual'] = round($total['total_bl_actual'],0);
         $total['total_pipeline_posterior'] = round($total['total_pipeline_posterior'],0);
-        $total['total_monto_prospecto'] = round($total['total_monto_prospecto'],2);
-        $total['total_monto_credito'] = round($total['total_monto_credito'],2);
-        $total['total_monto_rechazado'] = round($total['total_monto_rechazado'],2);
-        $total['total_sin_solicitud'] = round($total['total_sin_solicitud'],2);
-        $total['total_con_solicitud'] = round($total['total_con_solicitud'],2);
+        $total['total_monto_prospecto'] = $total['total_monto_prospecto'];
+        $total['total_monto_credito'] = $total['total_monto_credito'];
+        $total['total_monto_rechazado'] = $total['total_monto_rechazado'];
+        $total['total_sin_solicitud'] = $total['total_sin_solicitud'];
+        $total['total_con_solicitud'] = $total['total_con_solicitud'];
 
         return $total;
     }
