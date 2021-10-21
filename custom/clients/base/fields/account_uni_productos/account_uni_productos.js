@@ -2174,32 +2174,32 @@
             case "1": //Leasing
                 $('.list_l_respval_1').select2('val', "");
                 $('.list_l_respval_2').select2('val', "");
-                document.getElementById("list_l_respval_1").options[0] = new Option("","");
-                document.getElementById("list_l_respval_1").options[1]=new Option( App.user.attributes.full_name , App.user.attributes.id );
+                document.getElementById("list_l_respval_1").options[0]=new Option( App.user.attributes.full_name , App.user.attributes.id );
+                $('.list_l_respval_1').select2('val', App.user.attributes.id);
                 break;
             case "4": //Factoraje
                 $('.list_f_respval_1').select2('val', "");
                 $('.list_f_respval_2').select2('val', "");
-                document.getElementById("list_f_respval_1").options[0] = new Option("","");
-                document.getElementById("list_f_respval_1").options[1]=new Option( App.user.attributes.full_name , App.user.attributes.id );
+                document.getElementById("list_f_respval_1").options[0]=new Option( App.user.attributes.full_name , App.user.attributes.id );
+                $('.list_f_respval_1').select2('val', App.user.attributes.id);
                 break;
             case "3": //Credito-auto
                 $('.list_ca_respval_1').select2('val', "");
                 $('.list_ca_respval_2').select2('val', "");
-                document.getElementById("list_ca_respval_1").options[0] = new Option("","");
-                document.getElementById("list_ca_respval_1").options[1]=new Option( App.user.attributes.full_name , App.user.attributes.id );
+                document.getElementById("list_ca_respval_1").options[0]=new Option( App.user.attributes.full_name , App.user.attributes.id );
+                $('.list_ca_respval_1').select2('val', App.user.attributes.id);
                 break;
             case "6": //Fleet
                 $('.list_fl_respval_1').select2('val', "");
                 $('.list_fl_respval_2').select2('val', "");
-                document.getElementById("list_fl_respval_1").options[0] = new Option("","");
-                document.getElementById("list_fl_respval_1").options[1]=new Option( App.user.attributes.full_name , App.user.attributes.id );
+                document.getElementById("list_fl_respval_1").options[0]=new Option( App.user.attributes.full_name , App.user.attributes.id );
+                $('.list_fl_respval_1').select2('val', App.user.attributes.id);
                 break;
             case "8": //Uniclick
                 $('.list_u_respval_1').select2('val', "");
                 $('.list_u_respval_2').select2('val', "");
-                document.getElementById("list_u_respval_1").options[0] = new Option("","");
                 document.getElementById("list_u_respval_1").options[1]=new Option( App.user.attributes.full_name , App.user.attributes.id );
+                $('.list_u_respval_1').select2('val', App.user.attributes.id);
                 break;
         }
     },
