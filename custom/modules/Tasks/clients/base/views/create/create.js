@@ -20,7 +20,7 @@
         
         this.deleteOportunidadRecuperacion();
 
-        this.model.on('change:name', this.actualizaAsunto, this);
+        this.events['change input[name=name]'] = 'actualizaAsunto';
     },
 
     _render: function () {
@@ -366,17 +366,21 @@
     actualizaAsunto:function(e){
         var asunto="";
         if(this.model.get('tipo_tarea_c')!="" && this.model.get('tipo_tarea_c')!=null){
-            var tipo_tarea=this.model.get('tipo_tarea_c');
-
-            //Antes de concatenar, se resetea valor de nombre, para que solo tome el propio asunto y no concatene sobre lo que ya se ha escrito
-            var asunto=this.model.get('name');
-            if(asunto !="" && asunto !=undefined){
-                var asunto_split=asunto.split(':');
-                var asunto_inicial=asunto_split[asunto_split.length-1];
-                asunto=App.lang.getAppListStrings("tipo_tarea_list")[tipo_tarea]+":"+asunto_inicial;
-
-                this.model.set("name",asunto);
-
+            var asunto="";
+            if(this.model.get('tipo_tarea_c')!=""){
+                var tipo_tarea=this.model.get('tipo_tarea_c');
+    
+                //Antes de concatenar, se resetea valor de nombre, para que solo tome el propio asunto y no concatene sobre lo que ya se ha escrito
+                var asunto=this.model.get('name');
+                if(asunto !="" && asunto !=undefined){
+                    var asunto_split=asunto.split(':');
+                    var asunto_inicial=asunto_split[asunto_split.length-1];
+                    asunto=App.lang.getAppListStrings("tipo_tarea_list")[tipo_tarea]+":"+asunto_inicial;
+    
+                    this.model.set("name",asunto);
+                    $('[data-fieldname="name"]').find('input[name="name"]').val(asunto);
+    
+                }
             }
         }else{
             var asunto=this.model.get('name');
