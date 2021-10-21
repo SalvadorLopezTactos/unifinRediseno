@@ -709,7 +709,7 @@
 
         } else {
             //Pide teléfono/correo requerido
-            if (/*this.model.get('tipo_registro_cuenta_c') != 'Persona' && */ this.model.get('tipo_registro_cuenta_c') != '5') {
+            if (this.model.get('tipo_registro_cuenta_c') != '4' && this.model.get('tipo_registro_cuenta_c') != '5') {
                 var relaciones = this.model.get('tipo_relacion_c');
                 relaciones = relaciones.toString();
 
