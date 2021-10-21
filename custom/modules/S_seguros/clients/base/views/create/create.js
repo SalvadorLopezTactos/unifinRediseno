@@ -157,32 +157,31 @@
     },
 
     validauser: function(fields, errors, callback) {
-        //Validación para el referenciador asignado no sea un usuario inactivo
-        if(this.model.get('user_id1_c')) var usrid = this.model.get('user_id1_c');
-        if(this.model.get('user_id2_c')) var usrid = this.model.get('user_id2_c');
-        app.api.call("read", app.api.buildURL("Recuperauser/" + usrid, null, null, {}), null, {
-            success: _.bind(function (data) {
-                if(data=="Inactive"){
-                  if(this.model.get('user_id1_c')) {
-                    errors['referenciador'] = errors['referenciador'] || {};
-                    errors['referenciador'].required = true;
+        if(this.model.get('tipo_referenciador') == '1'){ //Valida sólo si tipo referenciador es usuario
+          //Validación para el referenciador asignado no sea un usuario inactivo
+          usrid = this.model.get('user_id1_c');
+          app.api.call("read", app.api.buildURL("Recuperauser/" + usrid, null, null, {}), null, {
+              success: _.bind(function (data) {
+                  if(data=="Inactive" || data == null){
+                    if(this.model.get('user_id1_c')) {
+                      errors['referenciador'] = errors['referenciador'] || {};
+                      errors['referenciador'].required = true;
+                    }
+                    app.alert.show("Error Referenciador", {
+                      level: "error",
+                      title: "El referenciador seleccionado no se encuentra activo, favor de elegir otro.",
+                      autoClose: false
+                    });
                   }
-                  if(this.model.get('user_id2_c')) {
-                    errors['empleados_c'] = errors['empleados_c'] || {};
-                    errors['empleados_c'].required = true;
-                  }
-                  app.alert.show("Error Referenciador", {
-                    level: "error",
-                    title: "El referenciador seleccionado no se encuentra activo, favor de elegir otro.",
-                    autoClose: false
-                  });
-                }
-                callback(null, fields, errors);
-            }, this),
-            error: function (e) {
-              throw e;
-            }
-        });
+                  callback(null, fields, errors);
+              }, this),
+              error: function (e) {
+                throw e;
+              }
+          });
+      }else{
+        callback(null, fields, errors);
+      }
     },
 
     notifica: function (fields, errors, callback) {
@@ -199,7 +198,7 @@
     validaPuesto: function (fields, errors, callback) {
         if (app.user.get('puestousuario_c') == 59) {
 		    errors['puesto'] = errors['puesto'] || {};
-            errors['puesto'].required = true;	
+            errors['puesto'].required = true;
             app.alert.show("ErrorPuesto", {
                 level: "error",
                 messages: "Usted no tiene privilegios para crear Oportunidades de Seguro",
