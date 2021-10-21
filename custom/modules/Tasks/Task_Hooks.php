@@ -123,7 +123,7 @@ class Task_Hooks
 
 		//Lanzar notificación en cada actualización del registro de Tarea creado por Centro de prospección, Asesor CAC: 61
 		$campos_modificados=array();
-		$campos_excluidos=array('date_modified','tn_name','tn_name_2','puesto_asignado_c','subetapa_c');
+		$campos_excluidos=array('modified_user_id','modified_by','date_modified','tn_name','tn_name_2','puesto_asignado_c','subetapa_c');
 		if ($args['isUpdate'] && $bean->puesto_c=='61') {
 			foreach($bean->fetched_row as $key=>$val){
 				if($bean->fetched_row[$key] != $bean->{$key}){
