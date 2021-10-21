@@ -78,8 +78,16 @@
     editClicked: function() {
 
         this._super("editClicked");
-        $("[data-name='potencial_negocio_c']").attr('style', 'pointer-events:none;');
-        $("[data-name='tasks_opportunities_1_name']").attr('style', 'pointer-events:none;');
+        
+        var RO = 1;
+        var puesto = app.user.attributes.puestousuario_c;
+        if(puesto == 5 || puesto == 11 || puesto == 16 || puesto == 53 || puesto == 54) RO = 0;
+        if(RO) {
+            //this.noEditFields.push('tasks_opportunities_1_name');
+            $("[data-name='potencial_negocio_c']").attr('style', 'pointer-events:none;');
+            $("[data-name='tasks_opportunities_1_name']").attr('style', 'pointer-events:none;');
+
+        }
         
     },
 
