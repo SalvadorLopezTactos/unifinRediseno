@@ -81,7 +81,9 @@
 
         var RO = 1;
         var puesto = app.user.attributes.puestousuario_c;
-        if((puesto == 5 || puesto == 11 || puesto == 16 || puesto == 53 || puesto == 54) &&  this.model.get('status')!='Completed' && this.model.get('potencial_negocio_c')!='' ) RO = 0;
+        RO = ((puesto == 5 || puesto == 11 || puesto == 16 || puesto == 53 || puesto == 54) &&  this.model.get('status')=='Completed' && this.model.get('potencial_negocio_c')!='' ) ? 1 : 0;
+        var ROCAC = (puesto == 61) ? 1 : 0;
+        //if((puesto == 5 || puesto == 11 || puesto == 16 || puesto == 53 || puesto == 54) &&  this.model.get('status')!='Completed' && this.model.get('potencial_negocio_c')!='' ) RO = 0;
         if(RO) {
             //this.noEditFields.push('tasks_opportunities_1_name');
             this.$("[data-name='potencial_negocio_c']").attr('style', 'pointer-events:none;');
@@ -103,7 +105,14 @@
 
             //$("[data-name='tasks_opportunities_1_name']").attr('style', 'pointer-events:none;');
         }
-
+        if(ROCAC) {
+            //this.noEditFields.push('tasks_opportunities_1_name');
+            this.$("[data-name='potencial_negocio_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='solicitud_alta_c']").attr('style', 'pointer-events:none;');
+      			this.$("[data-name='fecha_calificacion_c']").attr('style', 'pointer-events:none;');
+      			this.$("[data-name='motivo_potencial_c']").attr('style', 'pointer-events:none;');
+      			this.$("[data-name='detalle_motivo_potencial_c']").attr('style', 'pointer-events:none;');
+        }
     },
 
     // cancelClicked: function() {
