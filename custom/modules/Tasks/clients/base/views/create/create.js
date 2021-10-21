@@ -381,7 +381,7 @@
                 if(asunto !="" && asunto !=undefined){
                     var asunto_split=asunto.split(':');
                     var asunto_inicial=asunto_split[asunto_split.length-1];
-                    asunto=App.lang.getAppListStrings("tipo_tarea_list")[tipo_tarea]+": "+asunto_inicial;
+                    asunto=App.lang.getAppListStrings("tipo_tarea_list")[tipo_tarea]+": "+asunto_inicial.trim();
                     this.model.set("name",asunto);
                     $('[data-fieldname="name"]').find('input[name="name"]').val(asunto);
     
