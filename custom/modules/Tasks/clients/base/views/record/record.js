@@ -29,7 +29,7 @@
         this.model.on('sync', this.loadprevdate, this);
         this.model.on('sync', this.validaRelLeadTask, this);
         this.model.on('sync', this.roFunction, this);
-        
+
         this.model.on('sync', this.deleteOportunidadRecuperacion, this);
 
         this.model.on('change:name', this.actualizaAsunto, this);
@@ -78,17 +78,32 @@
     editClicked: function() {
 
         this._super("editClicked");
-        
+
         var RO = 1;
         var puesto = app.user.attributes.puestousuario_c;
-        if(puesto == 5 || puesto == 11 || puesto == 16 || puesto == 53 || puesto == 54) RO = 0;
+        if((puesto == 5 || puesto == 11 || puesto == 16 || puesto == 53 || puesto == 54) &&  this.model.get('status')!='Completed' && this.model.get('potencial_negocio_c')!='' ) RO = 0;
         if(RO) {
             //this.noEditFields.push('tasks_opportunities_1_name');
-            $("[data-name='potencial_negocio_c']").attr('style', 'pointer-events:none;');
-            $("[data-name='tasks_opportunities_1_name']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='potencial_negocio_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='solicitud_alta_c']").attr('style', 'pointer-events:none;');
+      			this.$("[data-name='fecha_calificacion_c']").attr('style', 'pointer-events:none;');
+      			this.$("[data-name='motivo_potencial_c']").attr('style', 'pointer-events:none;');
+      			this.$("[data-name='detalle_motivo_potencial_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='parent_type']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='tipo_tarea_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='date_start']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='date_due']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='priority']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='status']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='assigned_user_name']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='parent_name']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='parent_type']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='description']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='subject']").attr('style', 'pointer-events:none;');
 
+            //$("[data-name='tasks_opportunities_1_name']").attr('style', 'pointer-events:none;');
         }
-        
+
     },
 
     // cancelClicked: function() {
@@ -546,7 +561,7 @@
     },
 
     valida_atrasada: function (fields, errors, callback) {
-        
+
         if(this.model.get('status')=='Atrasada'){
             app.alert.show("atrasada_invalid", {
                 level: "error",
@@ -556,14 +571,14 @@
             errors['status'] = errors['status'] || {};
             errors['status'].required = true;
         }
-        
+
         callback(null, fields, errors);
     },
 
     deleteOportunidadRecuperacion(){
         if (this.model.get('parent_type') == 'Accounts' && this.model.get('parent')!=null && this.model.get('parent')!=undefined) {
-            //la opción de CAC Oportunidad Recuperación solo se muestra para Cliente Perdido, 
-            //tipo_registro_cuenta_c:Cliente: 3, 
+            //la opción de CAC Oportunidad Recuperación solo se muestra para Cliente Perdido,
+            //tipo_registro_cuenta_c:Cliente: 3,
             //subtipo_registro_cuenta_c:Perdido: 17
             var opciones_default = app.lang.getAppListStrings('tipo_tarea_list');
                 Object.keys(opciones_default).forEach(function (key) {
@@ -589,16 +604,16 @@
             var asunto="";
             if(this.model.get('tipo_tarea_c')!=""){
                 var tipo_tarea=this.model.get('tipo_tarea_c');
-    
+
                 //Antes de concatenar, se resetea valor de nombre, para que solo tome el propio asunto y no concatene sobre lo que ya se ha escrito
                 var asunto=this.model.get('name');
                 if(asunto !="" && asunto !=undefined){
                     var asunto_split=asunto.split(':');
                     var asunto_inicial=asunto_split[asunto_split.length-1];
                     asunto=App.lang.getAppListStrings("tipo_tarea_list")[tipo_tarea]+":"+asunto_inicial;
-    
+
                     this.model.set("name",asunto);
-    
+
                 }
             }
         }else{
