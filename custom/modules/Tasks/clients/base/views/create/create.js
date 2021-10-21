@@ -357,6 +357,12 @@
 
             if (this.model.get('parent').tipo_registro_cuenta_c == '3' && this.model.get('parent').subtipo_registro_cuenta_c=='17') {
                 var opciones_full=app.lang.getAppListStrings('tipo_tarea_list');
+                //Cuando es Cliente Perdido, solo se muestra la Opción de Oportunidad Recuperación
+                Object.keys(opciones_full).forEach(function (key) {
+                    if (key != "CAC Oportunidad Recuperacion") {
+                        delete opciones_full[key];
+                    }
+                });
                 this.model.fields['tipo_tarea_c'].options = opciones_full;
             }
 
@@ -375,8 +381,7 @@
                 if(asunto !="" && asunto !=undefined){
                     var asunto_split=asunto.split(':');
                     var asunto_inicial=asunto_split[asunto_split.length-1];
-                    asunto=App.lang.getAppListStrings("tipo_tarea_list")[tipo_tarea]+":"+asunto_inicial;
-    
+                    asunto=App.lang.getAppListStrings("tipo_tarea_list")[tipo_tarea]+": "+asunto_inicial;
                     this.model.set("name",asunto);
                     $('[data-fieldname="name"]').find('input[name="name"]').val(asunto);
     

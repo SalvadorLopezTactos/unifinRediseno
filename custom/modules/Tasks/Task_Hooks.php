@@ -265,6 +265,7 @@ class Task_Hooks
 										//$bean->tasks_opportunities_1opportunities_idb=$id_solicitud;
 										$sol->tasks_opportunities_1_name=$bean->name;
 										$sol->tasks_opportunities_1tasks_ida=$bean->id;
+										$sol->solicitud_alta_c=0;
 										$sol->save();
 										$relacionada=true;//Se establece bandera para que solo se relacione la primera solicitud de Leasing encontrada
 									}
