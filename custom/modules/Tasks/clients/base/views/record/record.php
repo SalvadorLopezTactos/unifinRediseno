@@ -188,10 +188,14 @@ array (
                 'label' => 'LBL_TIPO_TAREA',
               ),
               2 => 'date_start',
-              3 => 'priority',
-              4 => 'date_due',
+              3 => 'date_due',
+              4 => 'priority',
               5 => 'status',
-              6 => 'assigned_user_name',
+              6 => 
+              array (
+                'name' => 'assigned_user_name',
+                'span' => 12,
+              ),
               7 => 'parent_name',
               8 => 
               array (
@@ -239,16 +243,21 @@ array (
               13 => 
               array (
                 'name' => 'description',
+                'span' => 6,
               ),
               14 => 
               array (
                 'name' => 'detalle_motivo_potencial_c',
                 'label' => 'LBL_DETALLE_MOTIVO_POTENCIAL',
+                'span' => 6,
               ),
               15 => 
               array (
                 'name' => 'puesto_c',
                 'label' => 'LBL_PUESTO',
+              ),
+              16 => 
+              array (
               ),
             ),
           ),
