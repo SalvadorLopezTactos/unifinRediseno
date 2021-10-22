@@ -1,6 +1,10 @@
 ({
     extendsFrom: 'CreateView',
 
+    events: {
+        'change [name=tipo_tarea_c]': 'actualizaAsunto',
+    },
+
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
@@ -8,11 +12,17 @@
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         this.model.addValidationTask('checkdate', _.bind(this.checkdate, this));
 		this.model.addValidationTask('valida_asignado', _.bind(this.valida_asignado, this));
-		this.model.on('change:ayuda_asesor_cp_c', this._ValoresPredetAsesor, this);
+		this.model.on('change:ayuda_asesor_cp_cfz', this._ValoresPredetAsesor, this);
 		this.model.on('change:parent_name', this._ValoresPredetAsesor, this);
-        this.model.addValidationTask('validaRelLeadTask', _.bind(this.validaRelLeadTask, this));
-		this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
+        this.model.addValidationTask('validaRelLeadTask', _.bind(this.validaRelLeadTask, this));		
+        this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
+        this.model.addValidationTask('valida_atrasada', _.bind(this.valida_atrasada, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
+        
+        this.deleteOportunidadRecuperacion();
+
+        this.events['change input[name=name]'] = 'actualizaAsunto';
+
     },
 
     _render: function () {
@@ -288,6 +298,9 @@
                         if (field.vname == 'LBL_DUE_DATE') {
                             campos = campos + '<b>Fecha de vencimiento</b><br>';
                         }
+                        if (field.vname == 'LBL_START_DATE') {
+                            campos = campos + '<b>Fecha Inicio</b><br>';
+                        }
                         else {
                             if (field.vname == 'LBL_DETALLE_MOTIVO_POTENCIAL') {
                                 campos = campos + '<b>Detalle</b><br>';
@@ -314,7 +327,79 @@
         }
         callback(null, fields, errors);
     },
+    valida_atrasada: function (fields, errors, callback) {
+        
+        if(this.model.get('status')=='Atrasada'){
+            app.alert.show("atrasada_invalid", {
+                level: "error",
+                title: "No se puede guardar una tarea con estado <b>Atrasada</b>. Seleccione otra opci\u00F3n para continuar",
+                autoClose: false
+            });
+            errors['status'] = errors['status'] || {};
+            errors['status'].required = true;
 
+        }
+        
+        callback(null, fields, errors);
+    },
+
+    deleteOportunidadRecuperacion(){
+        if (this.model.get('parent_type') == 'Accounts' && this.model.get('parent')!=null && this.model.get('parent')!=undefined) {
+            //la opción de CAC Oportunidad Recuperación solo se muestra para Cliente Perdido, 
+            //tipo_registro_cuenta_c:Cliente: 3, 
+            //subtipo_registro_cuenta_c:Perdido: 17
+            var opciones_default = app.lang.getAppListStrings('tipo_tarea_list');
+                Object.keys(opciones_default).forEach(function (key) {
+                    if (key == "CAC Oportunidad Recuperacion") {
+                        delete opciones_default[key];
+                    }
+                });
+            this.model.fields['tipo_tarea_c'].options = opciones_default;
+
+            if (this.model.get('parent').tipo_registro_cuenta_c == '3' && this.model.get('parent').subtipo_registro_cuenta_c=='17') {
+                var opciones_full=app.lang.getAppListStrings('tipo_tarea_list');
+                //Cuando es Cliente Perdido, solo se muestra la Opción de Oportunidad Recuperación
+                Object.keys(opciones_full).forEach(function (key) {
+                    if (key != "CAC Oportunidad Recuperacion") {
+                        delete opciones_full[key];
+                    }
+                });
+                this.model.fields['tipo_tarea_c'].options = opciones_full;
+            }
+
+        }
+    },
+
+    actualizaAsunto:function(e){
+        var asunto="";
+        if(this.model.get('tipo_tarea_c')!="" && this.model.get('tipo_tarea_c')!=null){
+            var asunto="";
+            if(this.model.get('tipo_tarea_c')!=""){
+                var tipo_tarea=this.model.get('tipo_tarea_c');
+    
+                //Antes de concatenar, se resetea valor de nombre, para que solo tome el propio asunto y no concatene sobre lo que ya se ha escrito
+                var asunto=this.model.get('name');
+                if(asunto !="" && asunto !=undefined){
+                    var asunto_split=asunto.split(':');
+                    var asunto_inicial=asunto_split[asunto_split.length-1];
+                    asunto=App.lang.getAppListStrings("tipo_tarea_list")[tipo_tarea]+": "+asunto_inicial.trim();
+                    this.model.set("name",asunto);
+                    $('[data-fieldname="name"]').find('input[name="name"]').val(asunto);
+    
+                }
+            }
+        }else{
+            var asunto=this.model.get('name');
+            if(asunto !="" && asunto !=undefined){
+                var asunto_split=asunto.split(':');
+                var asunto_inicial=asunto_split[asunto_split.length-1];
+                asunto=asunto_inicial;
+
+                this.model.set("name",asunto);
+
+            }
+        }
+    },
     valida_usuarios_inactivos:function (fields, errors, callback) {
         var ids_usuarios='';
             if(this.model.attributes.assigned_user_id) {

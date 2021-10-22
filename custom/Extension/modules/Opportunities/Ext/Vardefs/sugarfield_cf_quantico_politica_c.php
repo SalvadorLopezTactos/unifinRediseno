@@ -8,5 +8,6 @@ $dictionary['Opportunity']['fields']['cf_quantico_politica_c']['full_text_search
 );
 $dictionary['Opportunity']['fields']['cf_quantico_politica_c']['enforced']='';
 $dictionary['Opportunity']['fields']['cf_quantico_politica_c']['dependency']='';
-
+$dictionary['Opportunity']['fields']['cf_quantico_politica_c']['dbType'] = 'mediumtext';
+//$dictionary['Opportunity']['fields']['cf_quantico_politica_c']['type'] = 'mediumtext';
  ?>

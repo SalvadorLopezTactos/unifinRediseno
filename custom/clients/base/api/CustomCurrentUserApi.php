@@ -46,7 +46,7 @@ class CustomCurrentUserApi extends CurrentUserApi
         $userArray['current_user']['tct_no_contactar_chk_c'] = $current_user->tct_no_contactar_chk_c;
         $userArray['current_user']['agente_telefonico_c'] = $current_user->agente_telefonico_c;
         $userArray['current_user']['deudor_factoraje_c'] = $current_user->deudor_factoraje_c;
-		    $userArray['current_user']['id_active_directory_c'] = $current_user->id_active_directory_c;
+		$userArray['current_user']['id_active_directory_c'] = $current_user->id_active_directory_c;
         $userArray['current_user']['cuenta_especial_c'] = $current_user->cuenta_especial_c;
         $userArray['current_user']['depurar_leads_c'] = $current_user->depurar_leads_c;
         $userArray['current_user']['tct_cancelar_ref_cruzada_chk_c'] = $current_user->tct_cancelar_ref_cruzada_chk_c;
@@ -58,15 +58,16 @@ class CustomCurrentUserApi extends CurrentUserApi
         $userArray['current_user']['config_admin_cartera'] = $sugar_config['service_admin_cartera'];
         $userArray['current_user']['access_hours_c'] = $current_user->access_hours_c;
         $userArray['current_user']['reset_leadcancel_c'] = $current_user->reset_leadcancel_c;
-    		$userArray['current_user']['tct_id_uni2_txf_c'] = $current_user->tct_id_uni2_txf_c;
-    		$userArray['current_user']['bloqueo_credito_c'] = $current_user->bloqueo_credito_c;
-    		$userArray['current_user']['bloqueo_cumple_c'] = $current_user->bloqueo_cumple_c;
+    	$userArray['current_user']['tct_id_uni2_txf_c'] = $current_user->tct_id_uni2_txf_c;
+    	$userArray['current_user']['bloqueo_credito_c'] = $current_user->bloqueo_credito_c;
+    	$userArray['current_user']['bloqueo_cumple_c'] = $current_user->bloqueo_cumple_c;
         $userArray['current_user']['tct_id_uni2_txf_c'] = $current_user->tct_id_uni2_txf_c;
         $userArray['current_user']['posicion_operativa_c'] = $current_user->posicion_operativa_c;
         $userArray['current_user']['limite_asignacion_lm_c'] = $current_user->limite_asignacion_lm_c;
         $userArray['current_user']['gestion_lm_c'] = $current_user->gestion_lm_c;
         $userArray['current_user']['portal_proveedores_c'] = $current_user->portal_proveedores_c;
         $userArray['current_user']['editar_backlog_chk_c'] = $current_user->editar_backlog_chk_c;
+        $userArray['current_user']['bloqueo_cuentas_c'] = $current_user->bloqueo_cuentas_c;
 
         return $userArray;
     }

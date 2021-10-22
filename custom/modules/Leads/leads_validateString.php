@@ -78,7 +78,7 @@ class leads_validateString
 
         $servicio= isset($GLOBALS['service']->platform)?$GLOBALS['service']->platform:"base";
 
-        if ($servicio!= "api" && $servicio != "unifinAPI") {
+        if ($servicio== "base" || $servicio == "mobile") {
 
             // omitir si el leads es cancelado no se haga nada o si ya esta convertido se brinca la validación
             if ($bean->subtipo_registro_c != 3 && $bean->subtipo_registro_c != 4 && $bean->homonimo_c==0 && $bean->omite_match_c==0) {

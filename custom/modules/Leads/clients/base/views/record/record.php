@@ -504,6 +504,9 @@ array (
               ),
               58 => 
               array (
+              ),
+              59 => 
+              array (
                 'name' => 'lead_direcciones',
                 'studio' => 'visible',
                 'label' => 'LBL_LEAD_DIRECCIONES',
@@ -578,8 +581,8 @@ array (
               ),
               7 => 
               array (
-                'name' => 'blank_space',
-                'label' => 'LBL_BLANK_SPACE',
+                'name' => 'producto_financiero_c',
+                'label' => 'LBL_PRODUCTO_FINANCIERO_C',
               ),
               8 => 
               array (

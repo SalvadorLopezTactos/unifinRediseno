@@ -1,9 +1,9 @@
 ({
     extendsFrom: 'RecordView',
 
-    // events: {
-    //     'click .record-edit-link-wrapper': 'handleEdit',
-    // },
+    events: {
+        'change [name=tipo_tarea_c]': 'actualizaAsunto',
+    },
 
     initialize: function (options) {
         self = this;
@@ -19,7 +19,9 @@
         this.model.addValidationTask('metodo_asignacion_lm', _.bind(this.metodoAsignacionLM, this));
 		this.model.addValidationTask('validaSolicitud', _.bind(this.validaSolicitud, this));
 		this.model.addValidationTask('validaRequeridos', _.bind(this.validaRequeridos, this));
+
 		this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
+        this.model.addValidationTask('valida_atrasada', _.bind(this.valida_atrasada, this));
         this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
         /*@Jesus Carrillo
             Funcion que pinta de color los paneles relacionados
@@ -27,7 +29,11 @@
         this.model.on('sync', this.fulminantcolor, this);
         this.model.on('sync', this.loadprevdate, this);
         this.model.on('sync', this.validaRelLeadTask, this);
-		this.model.on('sync', this.roFunction, this);
+        this.model.on('sync', this.roFunction, this);
+
+        this.model.on('sync', this.deleteOportunidadRecuperacion, this);
+
+        this.model.on('change:name', this.actualizaAsunto, this);
     },
 
     /**
@@ -70,16 +76,45 @@
 
     // },
 
-    // editClicked: function() {
+    editClicked: function() {
 
-    //     this._super("editClicked");
-    //     this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;');
-    //     this.setButtonStates(this.STATE.EDIT);
-    //     this.action = 'edit';
-    //     this.toggleEdit(true);
-    //     this.setRoute('edit');
+        this._super("editClicked");
 
-    // },
+        var RO = 1;
+        var puesto = app.user.attributes.puestousuario_c;
+        RO = ((puesto == 5 || puesto == 11 || puesto == 16 || puesto == 53 || puesto == 54) &&  this.model.get('status')=='Completed' && this.model.get('potencial_negocio_c')!='' ) ? 1 : 0;
+        var ROCAC = (puesto == 61) ? 1 : 0;
+        //if((puesto == 5 || puesto == 11 || puesto == 16 || puesto == 53 || puesto == 54) &&  this.model.get('status')!='Completed' && this.model.get('potencial_negocio_c')!='' ) RO = 0;
+        if(RO) {
+            //this.noEditFields.push('tasks_opportunities_1_name');
+            this.$("[data-name='potencial_negocio_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='solicitud_alta_c']").attr('style', 'pointer-events:none;');
+      			this.$("[data-name='fecha_calificacion_c']").attr('style', 'pointer-events:none;');
+      			this.$("[data-name='motivo_potencial_c']").attr('style', 'pointer-events:none;');
+      			this.$("[data-name='detalle_motivo_potencial_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='parent_type']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='tipo_tarea_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='date_start']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='date_due']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='priority']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='status']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='assigned_user_name']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='parent_name']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='parent_type']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='description']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='subject']").attr('style', 'pointer-events:none;');
+
+            //$("[data-name='tasks_opportunities_1_name']").attr('style', 'pointer-events:none;');
+        }
+        if(ROCAC) {
+            //this.noEditFields.push('tasks_opportunities_1_name');
+            this.$("[data-name='potencial_negocio_c']").attr('style', 'pointer-events:none;');
+            this.$("[data-name='solicitud_alta_c']").attr('style', 'pointer-events:none;');
+      			this.$("[data-name='fecha_calificacion_c']").attr('style', 'pointer-events:none;');
+      			this.$("[data-name='motivo_potencial_c']").attr('style', 'pointer-events:none;');
+      			this.$("[data-name='detalle_motivo_potencial_c']").attr('style', 'pointer-events:none;');
+        }
+    },
 
     // cancelClicked: function() {
 
@@ -505,6 +540,9 @@
                         if (field.vname == 'LBL_DUE_DATE') {
                             campos = campos + '<b>Fecha de vencimiento</b><br>';
                         }
+                        if (field.vname == 'LBL_START_DATE') {
+                            campos = campos + '<b>Fecha Inicio</b><br>';
+                        }
                         else {
                             if (field.vname == 'LBL_DETALLE_MOTIVO_POTENCIAL') {
                                 campos = campos + '<b>Detalle</b><br>';
@@ -532,6 +570,104 @@
         callback(null, fields, errors);
     },
 
+    valida_atrasada: function (fields, errors, callback) {
+
+        if(this.model.get('status')=='Atrasada'){
+            app.alert.show("atrasada_invalid", {
+                level: "error",
+                title: "No se puede guardar una tarea con estado <b>Atrasada</b>. Seleccione otra opci\u00F3n para continuar",
+                autoClose: false
+            });
+            errors['status'] = errors['status'] || {};
+            errors['status'].required = true;
+        }
+
+        callback(null, fields, errors);
+    },
+
+    deleteOportunidadRecuperacion(){
+        if (this.model.get('parent_type') == 'Accounts' && this.model.get('parent')!=null && this.model.get('parent')!=undefined) {
+            //la opción de CAC Oportunidad Recuperación solo se muestra para Cliente Perdido,
+            //tipo_registro_cuenta_c:Cliente: 3,
+            //subtipo_registro_cuenta_c:Perdido: 17
+            var opciones_default = app.lang.getAppListStrings('tipo_tarea_list');
+                Object.keys(opciones_default).forEach(function (key) {
+                    if (key == "CAC Oportunidad Recuperacion") {
+                        delete opciones_default[key];
+                    }
+                });
+            this.model.fields['tipo_tarea_c'].options = opciones_default;
+
+            if(this.model.get('parent').tipo_registro_cuenta_c==undefined){
+
+                app.api.call('GET', app.api.buildURL('Accounts/' + this.model.get('parent_id')), null, {
+                    success: _.bind(function (data) {
+                        if(data.tipo_registro_cuenta_c=="3" && data.subtipo_registro_cuenta_c=="17"){
+                            var opciones_full=app.lang.getAppListStrings('tipo_tarea_list');
+                            //Cuando es Cliente Perdido, solo se muestra la Opción de Oportunidad Recuperación
+                            Object.keys(opciones_full).forEach(function (key) {
+                                if (key != "CAC Oportunidad Recuperacion") {
+                                    delete opciones_full[key];
+                                }
+                            });
+                            
+                            this.model.fields['tipo_tarea_c'].options = opciones_full;
+
+                            this.render();
+                        }
+                    }, this),
+                });
+
+            }else{
+
+                if (this.model.get('parent').tipo_registro_cuenta_c == '3' && this.model.get('parent').subtipo_registro_cuenta_c=='17') {
+                    var opciones_full=app.lang.getAppListStrings('tipo_tarea_list');
+                    //Cuando es Cliente Perdido, solo se muestra la Opción de Oportunidad Recuperación
+                    
+                    Object.keys(opciones_full).forEach(function (key) {
+                        if (key != "CAC Oportunidad Recuperacion") {
+                            delete opciones_full[key];
+                        }
+                    });
+                    
+                    this.model.fields['tipo_tarea_c'].options = opciones_full;
+                }
+    
+                this.render();
+            }
+
+        }
+    },
+
+    actualizaAsunto:function(e){
+        var asunto="";
+        if(this.model.get('tipo_tarea_c')!="" && this.model.get('tipo_tarea_c')!=null){
+            var asunto="";
+            if(this.model.get('tipo_tarea_c')!=""){
+                var tipo_tarea=this.model.get('tipo_tarea_c');
+
+                //Antes de concatenar, se resetea valor de nombre, para que solo tome el propio asunto y no concatene sobre lo que ya se ha escrito
+                var asunto=this.model.get('name');
+                if(asunto !="" && asunto !=undefined){
+                    var asunto_split=asunto.split(':');
+                    var asunto_inicial=asunto_split[asunto_split.length-1];
+                    asunto=App.lang.getAppListStrings("tipo_tarea_list")[tipo_tarea]+": "+asunto_inicial.trim();
+                    this.model.set("name",asunto);
+
+                }
+            }
+        }else{
+            var asunto=this.model.get('name');
+            if(asunto !="" && asunto !=undefined){
+                var asunto_split=asunto.split(':');
+                var asunto_inicial=asunto_split[asunto_split.length-1];
+                asunto=asunto_inicial;
+
+                this.model.set("name",asunto);
+
+            }
+        }
+    },
     valida_usuarios_inactivos:function (fields, errors, callback) {
         var ids_usuarios='';
             if(this.model.attributes.assigned_user_id) {
@@ -565,4 +701,5 @@
           callback(null, fields, errors);
         }
     },
+
 })

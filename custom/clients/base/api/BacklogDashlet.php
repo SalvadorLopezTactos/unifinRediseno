@@ -512,6 +512,11 @@ SQL;
                 $total['total_renta_inicial_final'] += $value['ri_final_comprometida'];
                 $total['total_bl_actual'] += $value['bl_actual'];
                 $total['total_pipeline_posterior'] += $value['pipeline_posterior'];
+                $total['total_monto_prospecto'] += $value['monto_prospecto'];
+                $total['total_monto_credito'] += $value['monto_credito'];
+                $total['total_monto_rechazado'] += $value['monto_rechazado'];
+                $total['total_sin_solicitud'] += $value['monto_sin_solicitud'];
+                $total['total_con_solicitud'] += $value['monto_con_solicitud'];
             }
         }
 
@@ -532,6 +537,11 @@ SQL;
                         $total['total_renta_inicial_final'] += $amount['ri_final_comprometida'];
                         $total['total_bl_actual'] += $amount['bl_actual'];
                         $total['total_pipeline_posterior'] += $amount['pipeline_posterior'];
+                        $total['total_monto_prospecto'] += $amount['monto_prospecto'];
+                        $total['total_monto_credito'] += $amount['monto_credito'];
+                        $total['total_monto_rechazado'] += $amount['monto_rechazado'];
+                        $total['total_sin_solicitud'] += $amount['monto_sin_solicitud'];
+                        $total['total_con_solicitud'] += $amount['monto_con_solicitud'];
                     }
                 }
             }
@@ -555,6 +565,11 @@ SQL;
                             $total['total_renta_inicial_final'] += $children_amount['ri_final_comprometida'];
                             $total['total_bl_actual'] += $children_amount['bl_actual'];
                             $total['total_pipeline_posterior'] += $children_amount['pipeline_posterior'];
+                            $total['total_monto_prospecto'] += $children_amount['monto_prospecto'];
+                            $total['total_monto_credito'] += $children_amount['monto_credito'];
+                            $total['total_monto_rechazado'] += $children_amount['monto_rechazado'];
+                            $total['total_sin_solicitud'] += $children_amount['monto_sin_solicitud'];
+                            $total['total_con_solicitud'] += $children_amount['monto_con_solicitud'];
                         }
                     }
                 }
@@ -574,6 +589,11 @@ SQL;
         $total['total_renta_inicial_final'] = round($total['total_renta_inicial_final'],0);
         $total['total_bl_actual'] = round($total['total_bl_actual'],0);
         $total['total_pipeline_posterior'] = round($total['total_pipeline_posterior'],0);
+        $total['total_monto_prospecto'] = $total['total_monto_prospecto'];
+        $total['total_monto_credito'] = $total['total_monto_credito'];
+        $total['total_monto_rechazado'] = $total['total_monto_rechazado'];
+        $total['total_sin_solicitud'] = $total['total_sin_solicitud'];
+        $total['total_con_solicitud'] = $total['total_con_solicitud'];
 
         return $total;
     }

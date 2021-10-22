@@ -196,8 +196,10 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                         $GLOBALS['log']->fatal("reactivacion_c",$beanProduct->reactivacion_c);
                         if($beanProduct->reactivacion_c && !$bloqueouno){
                             $GLOBALS['log']->fatal("entro reactivacion_c: 1-".$aprueba1." 2-".$aprueba2);
+                            
                             $beanProduct->aprueba1_c =  $aprueba1;  //user id1
                             $beanProduct->aprueba2_c =  $aprueba2;  //user id2
+
                             $beanProduct->save();
                             $cont_cambios++;
                         }else{
@@ -254,7 +256,7 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                     $GLOBALS['log']->fatal("Retrieve reactivacion_c" .$args['reactivacion_c']);              
                     
                     $beanProduct->aprueba1_c = $args['aprueba1_c']; //aprobador 1
-                    $beanProduct->aprueba2_c = $args['aprueba2_c']; //aprobador2
+                    $beanProduct->aprueba2_c = $args['aprueba2_c']; //aprobador 2
                     $beanProduct->estatus_atencion = $args['estatus_atencion']; // estatus de atención
 
                     $beanProduct->status_management_c = $args["status_management_c"];
@@ -368,6 +370,70 @@ class Uni_Productos_Actualiza_Permisos extends SugarApi
                  } catch (Exception $ex) {
                      $GLOBALS['log']->fatal("Exception " . $ex);
                  }
+            }
+        }
+
+        if( $args['tipoupdate'] == "4" ){   // tipo 4,  reactivacion inmediata
+            $id_Account = $args['id_Account'];
+            $user_id = $args['user_id'];
+            
+            $GLOBALS['log']->fatal("id_Account " . $id_Account);
+            $return_productos = "";
+            
+            $beanUser = BeanFactory::retrieveBean('Users', $user_id, array('disable_row_level_security' => true));
+            $beanAccount = BeanFactory::retrieveBean('Accounts', $id_Account, array('disable_row_level_security' => true));
+            
+            $query = "SELECT PRODUCTOS.*, concat(uassign.first_name,' ',uassign.last_name) as full_name
+            ,concat(u1.first_name,' ',u1.last_name) as fullname_ingesta_c
+            ,concat(u2.first_name,' ',u2.last_name) as fullname_validacion1_c
+            ,concat(u3.first_name,' ',u3.last_name) as fullname_validacion2_c
+            FROM (SELECT
+                case
+                    when up.tipo_producto = 1 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.subtipo_cuenta = 1) then 1
+                    when up.tipo_producto = 3 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.subtipo_cuenta = 1) then 1
+                    when up.tipo_producto = 4 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.subtipo_cuenta = 1) then 1
+                    when up.tipo_producto = 6 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.subtipo_cuenta = 1) then 1
+                    when up.tipo_producto = 8 and (up.subtipo_cuenta = 2 or up.subtipo_cuenta = 7 or up.subtipo_cuenta = 1) then 1
+                    else 0
+                end 'visible_noviable', up.*, upc.*
+                FROM accounts a
+                inner join accounts_uni_productos_1_c ap on a.id = ap.accounts_uni_productos_1accounts_ida
+                inner join uni_productos up on up.id = ap.accounts_uni_productos_1uni_productos_idb
+                inner join uni_productos_cstm upc on upc.id_c = up.id
+                and a.id = '{$id_Account}' and up.deleted = 0
+             ) AS PRODUCTOS
+                INNER JOIN users AS uassign ON PRODUCTOS.assigned_user_id = uassign.id
+                LEFT JOIN users AS u1 ON PRODUCTOS.user_id_c = u1.id
+                LEFT JOIN users AS u2 ON PRODUCTOS.user_id1_c = u2.id
+                LEFT JOIN users AS u3 ON PRODUCTOS.user_id2_c = u3.id 
+                ";
+
+            $result = $GLOBALS['db']->query($query);
+            $cont_cambios = 0;
+            
+            $desbloquear = false;
+            $notificacion = false;
+
+            while ($product = $GLOBALS['db']->fetchByAssoc($result)) {
+                $beanProduct = BeanFactory::retrieveBean('uni_Productos', $product['id'], array('disable_row_level_security' => true));
+                
+                if($beanProduct->status_management_c == '4' || $beanProduct->status_management_c == '5') 
+                {
+                    $beanProduct->razon_c = ""; //razon lm
+                    $beanProduct->motivo_c = ""; //motivo lm
+                    $beanProduct->detalle_c = ""; //detalle lm
+                    $beanProduct->user_id1_c =  null;  //user id1 - aprobador1
+                    $beanProduct->user_id2_c =  null;  //user id2 - aprobador2
+                    $beanProduct->user_id_c = null;  //user id - ingesta
+                    $beanProduct->status_management_c = "1"; //status lm
+                    $beanProduct->notificacion_noviable_c = 0; //notificaion noviable
+                    $beanProduct->estatus_atencion = "1"; //estatus de atencion
+                    $beanProduct->aprueba1_c = 0; //aprobador1
+                    $beanProduct->aprueba2_c = 0; //aprobador2
+                    $beanProduct->reactivacion_c = 0; //reactivacion
+                
+                    $beanProduct->save();
+                }
             }
         }
 
