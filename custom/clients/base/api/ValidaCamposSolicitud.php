@@ -128,12 +128,14 @@ class ValidaCamposSolicitud extends SugarApi
         }
 
         if ($option=='2'){
-            $beanPersona->load_relationship('accounts_tel_telefonos_1');
-            $relatedBeansTel = $beanPersona->accounts_tel_telefonos_1->getBeans();
             $telefono = 0;
-            for ($i = 0; $i < count($relatedBeansTel); $i++) {
-                if($relatedBeansTel[$i]['estatus']=="Activo"){
+            $beanPersona->load_relationship('accounts_tel_telefonos_1');
+            foreach ($beanPersona->accounts_tel_telefonos_1->getBeans() as $a_telefono) {
+                //$GLOBALS['log']->fatal($telefono);
+                //$GLOBALS['log']->fatal($a_telefono->estatus);
+                if ($a_telefono->estatus=='Activo') {
                     $telefono++;
+                    
                 }
             }
             if ($beanPersona->email1 == "" || $beanPersona->email1 == null) {
@@ -166,8 +168,8 @@ class ValidaCamposSolicitud extends SugarApi
             $no_tels=0;
             $nombres_mail="";
             $nombres_tel="";
-            $GLOBALS['log']->fatal('Entra validación para relaciones Activas y tels/correos');
-            $GLOBALS['log']->fatal('ID de la cuenta es :' .$id_cuenta);
+            //$GLOBALS['log']->fatal('Entra validación para relaciones Activas y tels/correos');
+            //$GLOBALS['log']->fatal('ID de la cuenta es :' .$id_cuenta);
             $query="SELECT distinct 
                     rel.relaciones_activas relActivas,relp.rel_relaciones_accounts_1accounts_ida cuentaPadre, relc.account_id1_c cuentaHija, cuentaH.name,
                     MAX(IF(email.email_address_id is null,0,1 )) correo,
@@ -191,25 +193,25 @@ class ValidaCamposSolicitud extends SugarApi
                     or rel.relaciones_activas like '%Propietario Real%'
                     )
                     group by relc.account_id1_c;";
-            $GLOBALS['log']->fatal('La consulta es :' .print_r($query,1));
+            //$GLOBALS['log']->fatal('La consulta es :' .print_r($query,1));
             $result = $db->query($query);
-            $GLOBALS['log']->fatal('Ejecuto consulta para obtener tels o correos en las relaciones activas.');
+            //$GLOBALS['log']->fatal('Ejecuto consulta para obtener tels o correos en las relaciones activas.');
 
             while($row = $GLOBALS['db']->fetchByAssoc($result)){
-                $GLOBALS['log']->fatal("Entra a While");
-                $GLOBALS['log']->fatal($row['correo'].$row['name'].$row['tel']);
+                //$GLOBALS['log']->fatal("Entra a While");
+                //$GLOBALS['log']->fatal($row['correo'].$row['name'].$row['tel']);
                 if ($row['correo']==false){
                     $no_correo++;
                     $nombres_mail.='<br>-<a href="#Accounts/' .$row['cuentaHija'].'" target= "_blank">'.$row['name'].'</a>';
                     
                     //array_push($array_errores, 'La siguiente relación requiere de un Correo:<br> '.$row['name']);
-                    $GLOBALS['log']->fatal('Setea correo faltante en la relacion.'.$row['name']);
+                    //$GLOBALS['log']->fatal('Setea correo faltante en la relacion.'.$row['name']);
                 }
                 if ($row['tel']==false){
                     $no_tels++;
                     $nombres_tel.='<br>-<a href="#Accounts/' .$row['cuentaHija'].'" target= "_blank">'.$row['name'].'</a>';
                     //array_push($array_errores, 'La siguiente relación requiere de un Teléfono:<br> '.$row['name']);
-                    $GLOBALS['log']->fatal('Setea Teléfono faltante en la relacion.'.$row['name']);
+                    //$GLOBALS['log']->fatal('Setea Teléfono faltante en la relacion.'.$row['name']);
                 }
             }
             
