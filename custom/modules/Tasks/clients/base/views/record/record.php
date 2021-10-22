@@ -187,17 +187,38 @@ array (
                 'name' => 'tipo_tarea_c',
                 'label' => 'LBL_TIPO_TAREA',
               ),
-              2 => 'date_start',
-              3 => 'date_due',
-              4 => 'priority',
-              5 => 'status',
-              6 => 
+              2 => 
+              array (
+                'name' => 'solicitud_bloqueo_cuenta_c',
+                'label' => 'LBL_SOLICITUD_BLOQUEO_CUENTA_C',
+              ),
+              3 => 
+              array (
+                'name' => 'motivo_bloqueo_c',
+                'label' => 'LBL_MOTIVO_BLOQUEO_C',
+              ),
+              4 => 
+              array (
+                'name' => 'resultado_bloqueo_c',
+                'label' => 'LBL_RESULTADO_BLOQUEO_C',
+              ),
+              5 => 
+              array (
+                'name' => 'rechazo_bloqueo_c',
+                'studio' => 'visible',
+                'label' => 'LBL_RECHAZO_BLOQUEO_C',
+              ),
+              6 => 'date_start',
+              7 => 'date_due',
+              8 => 'priority',
+              9 => 'status',
+              10 => 
               array (
                 'name' => 'assigned_user_name',
                 'span' => 12,
               ),
-              7 => 'parent_name',
-              8 => 
+              11 => 'parent_name',
+              12 => 
               array (
                 'name' => 'tasks_opportunities_1_name',
                 'initial_filter' => 'filterSolicitudTemplate',
@@ -220,43 +241,43 @@ array (
                   'parent_id' => 'account_id',
                 ),
               ),
-              9 => 
+              13 => 
               array (
                 'name' => 'solicitud_alta_c',
                 'label' => 'LBL_SOLICITUD_ALTA',
               ),
-              10 => 
+              14 => 
               array (
                 'name' => 'potencial_negocio_c',
                 'label' => 'LBL_POTENCIAL_NEGOCIO',
               ),
-              11 => 
+              15 => 
               array (
                 'name' => 'fecha_calificacion_c',
                 'label' => 'LBL_FECHA_CALIFICACION',
               ),
-              12 => 
+              16 => 
               array (
                 'name' => 'motivo_potencial_c',
                 'label' => 'LBL_MOTIVO_POTENCIAL',
               ),
-              13 => 
+              17 => 
               array (
                 'name' => 'description',
                 'span' => 6,
               ),
-              14 => 
+              18 => 
               array (
                 'name' => 'detalle_motivo_potencial_c',
                 'label' => 'LBL_DETALLE_MOTIVO_POTENCIAL',
                 'span' => 6,
               ),
-              15 => 
+              19 => 
               array (
                 'name' => 'puesto_c',
                 'label' => 'LBL_PUESTO',
               ),
-              16 => 
+              20 => 
               array (
               ),
             ),

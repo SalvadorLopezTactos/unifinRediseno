@@ -456,6 +456,15 @@ array (
             'label' => 'LBL_EDITAR_BACKLOG_CHK',
           ),
         ),
+        15 => 
+        array (
+          0 => 
+          array (
+            'name' => 'solicitar_bloqueo_c',
+            'label' => 'LBL_SOLICITAR_BLOQUEO_C',
+          ),
+          1 => '',
+        ),
       ),
     ),
   ),

@@ -21,3 +21,7 @@ $mod_strings['LBL_SUBETAPA'] = 'SubEtapa';
 $mod_strings['LBL_ATRASADA'] = 'Atrasada';
 $mod_strings['LBL_PUESTO_ASIGNADO'] = 'Puesto Asignado';
 $mod_strings['LBL_TIPO_TAREA'] = 'Tipo de Tarea';
+$mod_strings['LBL_SOLICITUD_BLOQUEO_CUENTA_C'] = 'Solicitud de Bloqueo de Cliente';
+$mod_strings['LBL_MOTIVO_BLOQUEO_C'] = 'Motivo de Bloqueo';
+$mod_strings['LBL_RESULTADO_BLOQUEO_C'] = 'Resultado de Bloqueo';
+$mod_strings['LBL_RECHAZO_BLOQUEO_C'] = 'Detalle de Rechazo';
