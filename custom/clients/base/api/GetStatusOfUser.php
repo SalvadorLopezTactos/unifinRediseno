@@ -59,21 +59,18 @@ class GetStatusOfUser extends SugarApi
         $total_ids=count($id_usuarios);
         //Ciclo para concatenar los valores de los id con sus respectivas comillas simples para un correcto query
         for($i=0;$i < $total_ids;$i++){
-
             if($i==$total_ids-1){
                 $ids.="'".$id_usuarios[$i]."'";
 
             }else{
                 $ids.="'".$id_usuarios[$i]."',";
             }
-
         }
 
 
         $usuarios=array();
 
         $query="SELECT concat(first_name,' ',last_name) as full_name,user_name,status, vetados_chk_c FROM users, users_cstm WHERE id=id_c AND id IN ({$ids})";
-
         $result=$GLOBALS['db']->query($query);
 
         $num_rows = $result->num_rows;
