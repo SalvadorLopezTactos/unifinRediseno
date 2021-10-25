@@ -1,17 +1,16 @@
 <?php
- // created: 2021-08-20 08:29:36
+ // created: 2021-10-25 15:52:39
 $dictionary['lev_Backlog']['fields']['num_tipo_op_leasing_c']['labelValue']='Tipo Operación Producto';
+$dictionary['lev_Backlog']['fields']['num_tipo_op_leasing_c']['dependency']='';
 $dictionary['lev_Backlog']['fields']['num_tipo_op_leasing_c']['visibility_grid']=array (
   'trigger' => 'producto_c',
   'values' => 
   array (
     1 => 
     array (
-      0 => '0',
-      1 => '1',
-      2 => '2',
-      3 => '3',
-      4 => '4',
+      0 => '1',
+      1 => '3',
+      2 => '5',
     ),
     2 => 
     array (
