@@ -1082,12 +1082,12 @@
 
     valida_usuarios_inactivos:function (fields, errors, callback) {
         var ids_usuarios='';
-        for(var i=0;i<this.model.attributes.invitees.models.length;i++){
-            if(this.model.attributes.invitees.models[i].id) {
-              ids_usuarios+=this.model.attributes.invitees.models[i].id + ',';
+            if(this.model.attributes.assigned_user_id) {
+              ids_usuarios+=this.model.attributes.assigned_user_id;
             }
-        }
-        if(ids_usuarios) {
+            console.log("Valor del ID del asignado: ".ids_usuarios);
+            ids_usuarios += ',';
+        if(ids_usuarios!="") {
           //Generar petición para validación
           app.api.call('GET', app.api.buildURL('GetStatusOfUser/' + ids_usuarios+'/inactivo'), null, {
               success: _.bind(function(data) {
@@ -1099,7 +1099,7 @@
                       }
                       app.alert.show("Usuarios", {
                           level: "error",
-                          messages: "No es posible guardar la llamada con lo(s) siguiente(s) usuario(s) inactivo(s):<br>"+nombres,
+                          messages: "No es posible guardar la llamada el siguiente usuario inactivo:<br>"+nombres,
                           autoClose: false
                       });
                       errors['usuariostatus'] = errors['usuariostatus'] || {};
