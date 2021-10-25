@@ -804,6 +804,11 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['leasing']['estatus_atencion'] = $statusProducto;
                         $arr_principal['leasing']['cobranza'] = $cobranza;
                         $arr_principal['leasing']['estatusxproducto'] = $estatusxproducto;
+                        
+                        $arr_principal['unilease']['tipo_cuenta'] = $tipoCuenta;
+                        $arr_principal['unilease']['subtipo_cuenta'] = $subtipoCuenta;
+                        $arr_principal['unilease']['estatus_atencion'] = $statusProducto;
+                        $arr_principal['unilease']['estatusxproducto'] = $estatusxproducto;
                         break;
                     case '3': //Credito-Automotriz
                         $arr_principal['credito_auto']['tipo_cuenta'] = $tipoCuenta;
@@ -836,11 +841,6 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['uniclick']['estatus_atencion'] = $statusProducto;
                         $arr_principal['uniclick']['cobranza'] = $cobranza;
                         $arr_principal['uniclick']['estatusxproducto'] = $estatusxproducto;
-
-                        $arr_principal['unilease']['tipo_cuenta'] = $tipoCuenta;
-                        $arr_principal['unilease']['subtipo_cuenta'] = $subtipoCuenta;
-                        $arr_principal['unilease']['estatus_atencion'] = $statusProducto;
-                        $arr_principal['unilease']['estatusxproducto'] = $estatusxproducto;
                         break;
                     case '9': //Uniclick
                         //$arr_principal['unilease']['tipo_cuenta'] = $tipoCuenta;
