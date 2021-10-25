@@ -687,7 +687,7 @@
                       }
                       app.alert.show("Usuarios", {
                           level: "error",
-                          messages: "No es posible generar una tarea con los siguientes usuarios inactivos:<br>"+nombres,
+                          messages: "No es posible guardar la tarea con el siguiente usuario inactivo:<br>"+nombres,
                           autoClose: false
                       });
                       errors['usuariostatus'] = errors['usuariostatus'] || {};

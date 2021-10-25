@@ -1099,7 +1099,7 @@
                       }
                       app.alert.show("Usuarios", {
                           level: "error",
-                          messages: "No es posible generar una llamada con los siguientes usuarios inactivos:<br>"+nombres,
+                          messages: "No es posible guardar la llamada con lo(s) siguiente(s) usuario(s) inactivo(s):<br>"+nombres,
                           autoClose: false
                       });
                       errors['usuariostatus'] = errors['usuariostatus'] || {};
