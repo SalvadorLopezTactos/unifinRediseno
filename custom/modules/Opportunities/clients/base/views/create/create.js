@@ -2357,11 +2357,15 @@
 
     reqPrpductoFinanciero: function (fields, errors, callback) {
         var productofinan = this.model.get('producto_financiero_c');
+        var producto = this.model.get('tipo_producto_c');
 
-        if (this.exist_PRodFinanciero && productofinan == "0") {
-            errors['producto_financiero_c'] = errors['producto_financiero_c'] || {};
-            errors['producto_financiero_c'].required = true;
+        if(producto != "1"){
+            if (this.exist_PRodFinanciero && productofinan == "0") {
+               errors['producto_financiero_c'] = errors['producto_financiero_c'] || {};
+                errors['producto_financiero_c'].required = true;
+            }
         }
+        
         callback(null, fields, errors);
     },
     asesorCCP: function () {
