@@ -1,0 +1,173 @@
+<style>
+    .container {
+        overflow-y: auto;
+        display: block;
+        width: 100%;
+    }
+    #containerHeader {
+        font-size: 18px;
+        margin-top: 2%;
+        margin-left: 1%;
+        line-height: 10px;
+    }
+    .filtros_table {
+        margin-left: 1%;
+        margin-top: 2%;
+    }
+
+    .filtros {
+        margin-bottom: 10px !important;
+    }
+
+    .table th {
+        text-align: left;
+        background: #000042 !important;
+        color: #f5f5f5;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+    .backlogsContainer {
+            margin-top: 1%;
+            overflow-y: auto;
+            height: 300px;
+        }
+    </style>
+<div class="container">
+    <div class="row-fluid">
+            <div style="color: #e2efe2;background-color:#22608c;border-color:#22608c;border-radius: 10px;margin-left:15px;margin-right:15px;height: 35px;display: table;width: 96%;">
+                <h1>
+                    <p style="vertical-align: middle;  margin: 5px;">
+						Gestión de Backlog
+                    </p>
+                </h1>
+            </div>
+    </div>
+    <div class="record row-fluid panel_body">
+        <div class="span2 record-cell">
+            <div class="record-label">Mes</div>
+            <span>
+                <span>
+                    <select id="mes_filtro" class="filtros">
+                        {{#each meses_list_html}}
+                            <option value="{{@key}}" {{ifSelected @key ../mes_filtro}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+					<p class="help-block"></p>
+                </span>
+            </span>
+        </div>
+
+        <div class="span2 record-cell">
+            <div class="record-label">Año</div>
+            <span>
+                <span>
+                    <select id="anio_filtro" class="filtros">
+                        <option value="{{anio_filtro}}">{{getUnifinListValue "anio_list" anio_filtro}}</option>
+                        {{#each anio_list_html_filter}}
+                            {{#if @key}}
+                                <option value="{{@key}}">{{this}}</option>
+                            {{/if}}
+                        {{/each}}
+                    </select>
+					<p class="help-block"></p>
+                </span>
+            </span>
+        </div>
+
+        <div class="span2 record-cell">
+            <div class="record-label">Etapa</div>
+            <span>
+                <span>
+                    <select id="etapa_filtro" class="filtros">
+                        {{#each etapa_list_html}}
+                            <option value="{{@key}}" {{ifSelected @key ../etapa_filtro}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+					<p class="help-block"></p>
+                </span>
+            </span>
+        </div>
+
+        <div class="span2 record-cell">
+            <div class="record-label">Producto</div>
+            <span>
+                <span>
+                    <select id="producto_filtro" class="filtros">
+                        {{#each producto_list_html}}
+                            <option value="{{@key}}" {{ifSelected @key ../producto_filtro}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+					<p class="help-block"></p>
+                </span>
+            </span>
+        </div>
+
+        <div class="span2 record-cell" style="margin-left:0px;">
+            <div class="record-label">&nbsp;</div>
+            <span>
+                <span>
+                    <input type="button" value="Buscar" id="btn_Buscar" class="btn btn-primary filtros"/>
+                    <i class="fa fa-spinner fa-spin loadingIcon" style="display: none"></i>
+                </span>
+            </span>
+        </div>
+    </div>
+    <!-- Termina barra de búsqueda -->
+    <div class="row-fluid" style="overflow-x: auto;">
+			<table class="table">
+					<tr>
+						<td >
+							<label class="record-label" style="font-weight:bold; text-align:center">Equipo</label>
+						</td>
+						<td >
+							<label class="record-label" style="font-weight:bold; text-align:center">Zona</label>
+						</td>
+						<td >
+							<label class="record-label" style="font-weight:bold; text-align:center">Asesor</label>
+						</td>
+                        <td >
+							<label class="record-label" style="font-weight:bold; text-align:center">Cliente</label>
+						</td>
+                        <td >
+							<label class="record-label" style="font-weight:bold; text-align:center">Estatus</label>
+						</td>
+                        <td >
+							<label class="record-label" style="font-weight:bold; text-align:center">Prospecto</label>
+						</td>
+                        <td >
+							<label class="record-label" style="font-weight:bold; text-align:center">Crédito</label>
+						</td>
+                        <td >
+							<label class="record-label" style="font-weight:bold; text-align:center">Rechazada</label>
+						</td>
+                        <td >
+							<label class="record-label" style="font-weight:bold; text-align:center">Sin Solicitud</label>
+						</td>
+                        <td >
+							<label class="record-label" style="font-weight:bold; text-align:center">Estatus</label>
+						</td>
+                        <td >
+							<label class="record-label" style="font-weight:bold; text-align:center">Estatus</label>
+						</td>
+                        <td >
+							<label class="record-label" style="font-weight:bold; text-align:center">Estatus</label>
+						</td>
+                        <td >
+							<label class="record-label" style="font-weight:bold; text-align:center">Estatus</label>
+						</td>
+                        <td >
+							<label class="record-label" style="font-weight:bold; text-align:center">Estatus</label>
+						</td>
+                        <td >
+							<label class="record-label" style="font-weight:bold; text-align:center">Estatus</label>
+						</td>
+                        <td >
+							<label class="record-label" style="font-weight:bold; text-align:center">Estatus</label>
+						</td>
+                        <td >
+							<label class="record-label" style="font-weight:bold; text-align:center">Estatus</label>
+						</td>
+					</tr>
+			</table>
+	</div>
+</div>

@@ -14,10 +14,12 @@
 		this.model.addValidationTask('valida_asignado', _.bind(this.valida_asignado, this));
 		this.model.on('change:ayuda_asesor_cp_cfz', this._ValoresPredetAsesor, this);
 		this.model.on('change:parent_name', this._ValoresPredetAsesor, this);
-        this.model.addValidationTask('validaRelLeadTask', _.bind(this.validaRelLeadTask, this));
+        this.model.addValidationTask('validaRelLeadTask', _.bind(this.validaRelLeadTask, this));		
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         this.model.addValidationTask('valida_atrasada', _.bind(this.valida_atrasada, this));
         this.model.addValidationTask('valida_bloqueo_cuenta', _.bind(this.valida_bloqueo_cuenta, this));
+        this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
+        
         this.deleteOportunidadRecuperacion();
         this.on('render',this.bloqueoCuenta,this);
         this.on('render',this.dep_motivo_bloqueo,this);
@@ -25,6 +27,7 @@
         this.model.on('change:solicitud_bloqueo_cuenta_c', this.dep_motivo_bloqueo, this);
         this.model.on('change:resultado_bloqueo_c', this.dep_rechazo_bloqueo, this);
         this.events['change input[name=name]'] = 'actualizaAsunto';
+
     },
 
     _render: function () {
@@ -329,7 +332,6 @@
         }
         callback(null, fields, errors);
     },
-
     valida_atrasada: function (fields, errors, callback) {
         
         if(this.model.get('status')=='Atrasada'){
@@ -439,7 +441,6 @@
             $('div[data-name=solicitud_bloqueo_cuenta_c]').hide();
             $('div[data-name=resultado_bloqueo_c]').hide();
         }
-
     },
 
     dep_motivo_bloqueo: function () {
@@ -479,7 +480,40 @@
             errors['description'] = errors['description'] || {};
             errors['description'].required = true;
         }
-
         callback(null, fields, errors);
+    },
+
+    valida_usuarios_inactivos:function (fields, errors, callback) {
+        var ids_usuarios='';
+            if(this.model.attributes.assigned_user_id) {
+              ids_usuarios+=this.model.attributes.assigned_user_id;
+            }
+            console.log("Valor del ID del asignado: ".ids_usuarios);
+            ids_usuarios += ',';
+        if(ids_usuarios!="") {
+          //Generar petición para validación
+          app.api.call('GET', app.api.buildURL('GetStatusOfUser/' + ids_usuarios+'/inactivo'), null, {
+              success: _.bind(function(data) {
+                  if(data.length>0){
+                      var nombres='';
+                      //Armando lista de usuarios
+                      for(var i=0;i<data.length;i++){
+                          nombres+='<b>'+data[i].nombre_usuario+'</b><br>';
+                      }
+                      app.alert.show("Usuarios", {
+                          level: "error",
+                          messages: "No es posible generar una tarea con el siguiente usuario inactivo:<br>"+nombres,
+                          autoClose: false
+                      });
+                      errors['usuariostatus'] = errors['usuariostatus'] || {};
+                      errors['usuariostatus'].required = true;
+                  }
+                  callback(null, fields, errors);
+              }, this)
+          });
+        }
+        else {
+          callback(null, fields, errors);
+        }
     },
 })

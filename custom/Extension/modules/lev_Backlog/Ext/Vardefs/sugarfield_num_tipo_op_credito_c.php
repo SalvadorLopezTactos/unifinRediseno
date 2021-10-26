@@ -1,5 +1,5 @@
 <?php
- // created: 2021-08-20 08:35:15
+ // created: 2021-10-25 15:21:02
 $dictionary['lev_Backlog']['fields']['num_tipo_op_credito_c']['labelValue']='Tipo Operación Producto';
 $dictionary['lev_Backlog']['fields']['num_tipo_op_credito_c']['dependency']='';
 $dictionary['lev_Backlog']['fields']['num_tipo_op_credito_c']['visibility_grid']=array (
@@ -11,36 +11,9 @@ $dictionary['lev_Backlog']['fields']['num_tipo_op_credito_c']['visibility_grid']
     ),
     2 => 
     array (
-      0 => '1',
-      1 => '2',
-      2 => '3',
-      3 => '4',
-      4 => '5',
-      5 => '6',
-      6 => '7',
-      7 => '8',
-      8 => '9',
-      9 => '10',
-      10 => '11',
-      11 => '12',
-      12 => '13',
-      13 => '14',
-      14 => '15',
-      15 => '16',
-      16 => '18',
-      17 => '19',
-      18 => '20',
-      19 => '21',
-      20 => '22',
-      21 => '23',
-      22 => '24',
-      23 => '25',
-      24 => '26',
-      25 => '27',
-      26 => '28',
-      27 => '29',
-      28 => '30',
-      29 => '31',
+      0 => '2',
+      1 => '6',
+      2 => '31',
     ),
     3 => 
     array (

@@ -19,6 +19,7 @@
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         this.on('render', this.hidePErsonaEdit, this);
         this.model.addValidationTask('validaRelLeadCall', _.bind(this.validaRelLeadCall, this));
+        this.model.addValidationTask('valida_usuarios_inactivos',_.bind(this.valida_usuarios_inactivos, this));
 		this.on('render', this.hideLlamadas, this);
         this.omiteLlamadaPreventiva();
     },
@@ -362,5 +363,39 @@
 		this.$('div[data-name="tct_call_issabel_c"]').hide();
 		this.$('div[data-name="tct_call_from_issabel_c"]').hide();
 		if (this.model.get('tct_call_issabel_c') || this.model.get('tct_call_from_issabel_c')) this.$('div[data-name="padres_c"]').show();
+    },
+
+    valida_usuarios_inactivos:function (fields, errors, callback) {
+        var ids_usuarios='';
+        for(var i=0;i<this.model.attributes.invitees.models.length;i++){
+            if(this.model.attributes.invitees.models[i].id) {
+              ids_usuarios+=this.model.attributes.invitees.models[i].id + ',';
+            }
+        }
+        if(ids_usuarios) {
+          //Generar petición para validación
+          app.api.call('GET', app.api.buildURL('GetStatusOfUser/' + ids_usuarios+'/inactivo'), null, {
+              success: _.bind(function(data) {
+                  if(data.length>0){
+                      var nombres='';
+                      //Armando lista de usuarios
+                      for(var i=0;i<data.length;i++){
+                          nombres+='<b>'+data[i].nombre_usuario+'</b><br>';
+                      }
+                      app.alert.show("Usuarios", {
+                          level: "error",
+                          messages: "No es posible generar una llamada con lo(s) siguiente(s) usuario(s) inactivo(s):<br>"+nombres,
+                          autoClose: false
+                      });
+                      errors['usuariostatus'] = errors['usuariostatus'] || {};
+                      errors['usuariostatus'].required = true;
+                  }
+                  callback(null, fields, errors);
+              }, this)
+          });
+        }
+        else {
+          callback(null, fields, errors);
+        }
     },
 })

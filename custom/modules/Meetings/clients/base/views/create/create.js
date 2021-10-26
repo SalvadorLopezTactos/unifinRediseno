@@ -264,41 +264,37 @@
     },
 
     valida_usuarios_inactivos:function (fields, errors, callback) {
-
-        var inivitados=this.model.attributes.invitees.models;
-
         var ids_usuarios='';
-
-        for(var i=0;i<this.model.attributes.invitees.models.length;i++){
-
-            ids_usuarios+=this.model.attributes.invitees.models[i].id + ',';
-
+            if(this.model.attributes.assigned_user_id) {
+              ids_usuarios+=this.model.attributes.assigned_user_id;
+            }
+            console.log("Valor del ID del asignado: ".ids_usuarios);
+            ids_usuarios += ',';
+        if(ids_usuarios!="") {
+          //Generar petición para validación
+          app.api.call('GET', app.api.buildURL('GetStatusOfUser/' + ids_usuarios+'/inactivo'), null, {
+              success: _.bind(function(data) {
+                  if(data.length>0){
+                      var nombres='';
+                      //Armando lista de usuarios
+                      for(var i=0;i<data.length;i++){
+                          nombres+='<b>'+data[i].nombre_usuario+'</b><br>';
+                      }
+                      app.alert.show("Usuarios", {
+                          level: "error",
+                          messages: "No es posible crear la reunión el siguiente usuario inactivo:<br>"+nombres,
+                          autoClose: false
+                      });
+                      errors['usuariostatus'] = errors['usuariostatus'] || {};
+                      errors['usuariostatus'].required = true;
+                  }
+                  callback(null, fields, errors);
+              }, this)
+          });
         }
-
-        //Generar petición para validación
-        app.api.call('GET', app.api.buildURL('GetStatusOfUser/' + ids_usuarios +'/inactivo'), null, {
-            success: _.bind(function(data) {
-                if(data.length>0){
-
-                    var nombres='';
-                    //Armando lista de usuarios
-                    for(var i=0;i<data.length;i++){
-
-                        nombres+='<b>'+data[i].nombre_usuario+'</b><br>';
-                    }
-
-                    app.alert.show("Usuarios", {
-                        level: "error",
-                        messages: "No es posible generar una reunión con los siguientes usuarios inactivos:<br>"+nombres,
-                        autoClose: false
-                    });
-                    errors['usuariostatus'] = errors['usuariostatus'] || {};
-                    errors['usuariostatus'].required = true;
-                }
-                callback(null, fields, errors);
-            }, this)
-        });
-
+        else {
+          callback(null, fields, errors);
+        }
     },
 
     valida_usuarios_vetados:function (fields, errors, callback) {
