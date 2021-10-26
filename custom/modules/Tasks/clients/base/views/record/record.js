@@ -21,6 +21,7 @@
 		this.model.addValidationTask('validaRequeridos', _.bind(this.validaRequeridos, this));
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         this.model.addValidationTask('valida_atrasada', _.bind(this.valida_atrasada, this));
+        this.model.addValidationTask('valida_bloqueo_cuenta', _.bind(this.valida_bloqueo_cuenta, this));
 
         /*@Jesus Carrillo
             Funcion que pinta de color los paneles relacionados
@@ -29,10 +30,12 @@
         this.model.on('sync', this.loadprevdate, this);
         this.model.on('sync', this.validaRelLeadTask, this);
         this.model.on('sync', this.roFunction, this);
-
+        this.model.on('sync', this.bloqueoCuenta, this);
         this.model.on('sync', this.deleteOportunidadRecuperacion, this);
 
         this.model.on('change:name', this.actualizaAsunto, this);
+        this.model.on('change:solicitud_bloqueo_cuenta_c', this.dep_motivo_bloqueo, this);
+        this.model.on('change:resultado_bloqueo_c', this.dep_rechazo_bloqueo, this);
     },
 
     /**
@@ -666,5 +669,64 @@
 
             }
         }
-    }
+    },
+
+    bloqueoCuenta: function () {
+
+        var bloqueoCliente = App.user.attributes.solicitar_bloqueo_c;
+
+        if (bloqueoCliente == true) {
+
+            $('div[data-name=solicitud_bloqueo_cuenta_c]').show();
+            $('div[data-name=resultado_bloqueo_c]').show();
+            $("div[data-name=resultado_bloqueo_c]").attr('style', 'pointer-events:none;');
+            $("div[data-name='rechazo_bloqueo_c']").attr('style', 'pointer-events:none;');
+
+        } else {
+            $('div[data-name=solicitud_bloqueo_cuenta_c]').hide();
+            $('div[data-name=resultado_bloqueo_c]').hide();
+        }
+
+    },
+
+    dep_motivo_bloqueo: function () {
+        var bloqueoCliente = App.user.attributes.solicitar_bloqueo_c;
+        //Visible cuando el check esta activo de solicitud bloqueo cuenta
+        if (this.model.get('solicitud_bloqueo_cuenta_c') == true && bloqueoCliente == true) {
+            
+            this.$('div[data-name=motivo_bloqueo_c]').show();
+            this.$("div[data-name='assigned_user_name']").attr('style', 'pointer-events:none;');
+        } else {
+            this.$('div[data-name=motivo_bloqueo_c]').hide();
+            this.$("div[data-name='assigned_user_name']").attr('style', '');
+        }
+    },
+
+    dep_rechazo_bloqueo: function () {
+        var bloqueoCliente = App.user.attributes.solicitar_bloqueo_c;
+        //Visible cuando el resultado de bloqueo es Solicitud Rechazada
+        if (this.model.get('resultado_bloqueo_c') == '2' && bloqueoCliente == true) { 
+
+            this.$('div[data-name=rechazo_bloqueo_c]').show();
+        } else {
+            this.$('div[data-name=rechazo_bloqueo_c]').hide();
+        }
+    },
+
+    valida_bloqueo_cuenta: function (fields, errors, callback) {
+
+        var bloqueoCliente = App.user.attributes.solicitar_bloqueo_c;
+
+        if(bloqueoCliente == true && this.model.get('solicitud_bloqueo_cuenta_c') == true && this.model.get('description') == ""){
+            app.alert.show("msg-descripcion-bloqueo", {
+                level: "error",
+                title: "Descripción requerida para continuar.",
+                autoClose: false
+            });
+            errors['description'] = errors['description'] || {};
+            errors['description'].required = true;
+        }
+
+        callback(null, fields, errors);
+    },
 })

@@ -17,9 +17,13 @@
         this.model.addValidationTask('validaRelLeadTask', _.bind(this.validaRelLeadTask, this));
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         this.model.addValidationTask('valida_atrasada', _.bind(this.valida_atrasada, this));
-        
+        this.model.addValidationTask('valida_bloqueo_cuenta', _.bind(this.valida_bloqueo_cuenta, this));
         this.deleteOportunidadRecuperacion();
-
+        this.on('render',this.bloqueoCuenta,this);
+        this.on('render',this.dep_motivo_bloqueo,this);
+        this.on('render',this.dep_rechazo_bloqueo,this);
+        this.model.on('change:solicitud_bloqueo_cuenta_c', this.dep_motivo_bloqueo, this);
+        this.model.on('change:resultado_bloqueo_c', this.dep_rechazo_bloqueo, this);
         this.events['change input[name=name]'] = 'actualizaAsunto';
     },
 
@@ -398,5 +402,84 @@
 
             }
         }
-    }
+    },
+
+    bloqueoCuenta: function () {
+
+        var bloqueoCliente = App.user.attributes.solicitar_bloqueo_c;
+
+        if (bloqueoCliente == true) {
+
+            $('div[data-name=solicitud_bloqueo_cuenta_c]').show();
+            $('div[data-name=resultado_bloqueo_c]').show();
+            $("div[data-name=resultado_bloqueo_c]").attr('style', 'pointer-events:none;');
+            $("div[data-name='rechazo_bloqueo_c']").attr('style', 'pointer-events:none;');
+
+            app.api.call('GET', app.api.buildURL('GetWeekDays/'), null, {
+                success: _.bind(function (data) {
+
+                    if (data != "") {
+                        //OBTIENE 3 DÍAS HABILES DE LA FECHA ACTUAL
+                        var tmpfechaVencimiento = data.fechaVencimiento; 
+                        var today = new Date();                       
+                        var hora = today.getHours();
+                        if (hora < 10) { hora = '0' + hora }
+                        todayFormat = tmpfechaVencimiento+"T"+hora+":"+"00"+":"+"00";
+                        var todayISO = new Date(todayFormat);
+                        var fechaVencimiento = todayISO.toISOString();  //OBTIENE LA FECHA CON EL FORMATO DATE_TIME
+                        // console.log(fechaVencimiento);
+
+                        this.model.set("date_due",fechaVencimiento);
+                    }
+
+                }, this)
+            });
+
+        } else {
+            $('div[data-name=solicitud_bloqueo_cuenta_c]').hide();
+            $('div[data-name=resultado_bloqueo_c]').hide();
+        }
+
+    },
+
+    dep_motivo_bloqueo: function () {
+        var bloqueoCliente = App.user.attributes.solicitar_bloqueo_c;
+        //Visible cuando el check esta activo de solicitud bloqueo cuenta
+        if (this.model.get('solicitud_bloqueo_cuenta_c') == true && bloqueoCliente == true) {
+            
+            this.$('div[data-name=motivo_bloqueo_c]').show();
+            this.$("div[data-name='assigned_user_name']").attr('style', 'pointer-events:none;');
+        } else {
+            this.$('div[data-name=motivo_bloqueo_c]').hide();
+            this.$("div[data-name='assigned_user_name']").attr('style', '');
+        }
+    },
+
+    dep_rechazo_bloqueo: function () {
+        var bloqueoCliente = App.user.attributes.solicitar_bloqueo_c;
+        //Visible cuando el resultado de bloqueo es Solicitud Rechazada
+        if (this.model.get('resultado_bloqueo_c') == '2' && bloqueoCliente == true) { 
+
+            this.$('div[data-name=rechazo_bloqueo_c]').show();
+        } else {
+            this.$('div[data-name=rechazo_bloqueo_c]').hide();
+        }
+    },
+
+    valida_bloqueo_cuenta: function (fields, errors, callback) {
+
+        var bloqueoCliente = App.user.attributes.solicitar_bloqueo_c;
+
+        if(bloqueoCliente == true && this.model.get('solicitud_bloqueo_cuenta_c') == true && (this.model.get('description') == "" || this.model.get('description') == undefined)){
+            app.alert.show("msg-descripcion-bloqueo", {
+                level: "error",
+                title: "Descripción requerida para continuar.",
+                autoClose: false
+            });
+            errors['description'] = errors['description'] || {};
+            errors['description'].required = true;
+        }
+
+        callback(null, fields, errors);
+    },
 })
