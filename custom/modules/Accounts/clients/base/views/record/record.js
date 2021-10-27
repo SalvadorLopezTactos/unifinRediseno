@@ -7032,7 +7032,7 @@
 						params["condicion2_c"] = "";
 						params["razon2_c"] = "";
 						params["motivo2_c"] = "";
-						params["detalle3_c"] = "";
+						params["detalle2_c"] = "";
 						params["user_id2_c"] = "";
 						params["user_id3_c"] = "";
 					}
