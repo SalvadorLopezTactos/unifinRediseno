@@ -1,5 +1,5 @@
 <?php
- // created: 2021-07-12 23:12:57
+ // created: 2021-10-27 13:18:03
 
 $app_list_strings['motivo_bloqueo_list']=array (
   1 => 'PLD (En listas restringidas o notas negativas (prensa))',
@@ -25,5 +25,7 @@ $app_list_strings['motivo_bloqueo_list']=array (
   21 => 'Arrendamiento financiero',
   22 => 'Arrendadora',
   23 => 'Banco',
+  24 => 'Cartera Vencida',
+  25 => 'Información Apócrifa',
   '' => '',
 );
