@@ -784,7 +784,7 @@
                       }
                       app.alert.show("Usuarios", {
                           level: "error",
-                          messages: "No es posible guardar la reunión el siguiente usuario inactivo:<br>"+nombres,
+                          messages: "No es posible guardar la reunión con el/los siguiente(s) usuario(s) inactivo(s):<br>"+nombres,
                           autoClose: false
                       });
                       errors['usuariostatus'] = errors['usuariostatus'] || {};
