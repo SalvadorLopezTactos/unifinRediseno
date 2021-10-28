@@ -245,7 +245,7 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['fleet']['promotor']=$beanPersona->promotorfleet_c;
 			$arr_principal['credito_sos']['promotor']=$beanPersona->promotorleasing_c;
             $arr_principal['uniclick']['promotor']=$beanPersona->promotoruniclick_c;
-            $arr_principal['unilease']['promotor']=$beanPersona->promotoruniclick_c;
+            $arr_principal['unilease']['promotor']=$beanPersona->promotorleasing_c;
             $arr_principal['rm']['promotor']=$beanPersona->promotorrm_c;
 
             //Nivel satisfacción
