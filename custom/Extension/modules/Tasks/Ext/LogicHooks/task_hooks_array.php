@@ -44,3 +44,11 @@ $hook_array['before_save'][] = Array(
     'Task_Hooks',
     'sendNotificationUpdate'
 );
+
+$hook_array['before_save'][] = Array(
+    6,
+    'Envia notificacion de solicitud de bloqueo',
+    'custom/modules/Tasks/bloqueo_clientes_vita.php',
+    'bloqueo_clientes_vita',
+    'enviaNotificacionBloqueo'
+);
