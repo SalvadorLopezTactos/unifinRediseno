@@ -37,6 +37,7 @@ class reAsignarCuentas extends SugarApi
         $product = $args['data']['producto_seleccionado'];
         //Eliminando saltos de línea
         $product = str_replace("\r", "", $product);
+        $product = str_replace("É", "E", $product);
         $promoActual = $args['data']['promoActual'];
         $optRadio = $args['data']['optBl'];
         $nombreArchivo = $args['data']['nombreArchivo'];
