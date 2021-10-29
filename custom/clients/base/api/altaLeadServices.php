@@ -512,6 +512,7 @@ class altaLeadServices extends SugarApi
         $bean_Lead->origen_c = $dataOrigen['origen_c']; # se deja siempre como 1
 
         $detalle_origen = $dataOrigen['detalle_origen_c']; # se deja siempre como 3 Digital
+        $prospeccion_propia = $dataOrigen['prospeccion_propia_c']; # Prospeccion propia
         /*switch ($detalle_origen) {
             case 1:
                 $bean_Lead->detalle_origen_c = "Base de datos";
@@ -551,6 +552,7 @@ class altaLeadServices extends SugarApi
                 break;
         }*/
         $bean_Lead->detalle_origen_c = $detalle_origen;
+        $bean_Lead->prospeccion_propia_c = $prospeccion_propia;
 
         $medio = $dataOrigen['medio_digital_c'];
         /*switch ($medio) {
