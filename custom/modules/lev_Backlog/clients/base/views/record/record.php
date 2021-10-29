@@ -511,6 +511,39 @@ array (
               ),
             ),
           ),
+          2 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL1',
+            'label' => 'LBL_RECORDVIEW_PANEL1',
+            'columns' => 2,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'comentarios_c',
+                'studio' => 'visible',
+                'label' => 'LBL_COMENTARIOS',
+              ),
+              1 => 
+              array (
+                'name' => 'bl_estimado_c',
+                'label' => 'LBL_BL_ESTIMADO',
+              ),
+              2 => 
+              array (
+                'name' => 'tipo_bl_c',
+                'label' => 'LBL_TIPO_BL',
+              ),
+              3 => 
+              array (
+                'name' => 'rango_bl_c',
+                'label' => 'LBL_RANGO_BL',
+              ),
+            ),
+          ),
         ),
         'templateMeta' => 
         array (
