@@ -47,7 +47,7 @@ function job_update_filters()
                       'Accounts' as module_name,
                       null as acl_team_set_id
                 from users u, users_cstm uc
-                where u.id= uc.id_c and uc.puestousuario_c IN ('5','11','16')
+                where u.id= uc.id_c and uc.puestousuario_c IN ('5','11','16','62')
                 and u.status = 'Active';
     ";
     //Ejecuta insert
