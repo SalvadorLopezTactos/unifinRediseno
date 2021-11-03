@@ -268,6 +268,9 @@
                                             $('#etapa_filtro').select2('val',"");
                                             $('#producto_filtro').select2('val',"0");
                                         }
+
+                                        //Se lanza evento change a través de la clase para que el Monto, BL Estimado y Rango se calculen cuando la vista se cargue
+                                        $(".monto_prospecto").trigger("change");
                                         
                                     }
                                     self.counter++;
