@@ -439,6 +439,12 @@ class altaLeadServices extends SugarApi
 
         $update_call = "UPDATE calls c SET c.assigned_user_id ='{$new_assigned_user}' WHERE c.parent_id ='{$id_lead}'";
         $db->query($update_call);
+
+        $llamada = "SELECT id FROM calls c WHERE c.parent_id ='{$id_lead}'";
+        $id_llamada = $GLOBALS['db']->getOne($llamada);
+
+        $update_usercall = "UPDATE calls_users cu SET cu.user_id ='{$new_assigned_user}' WHERE cu.call_id ='{$id_llamada}'";
+        $db->query($update_usercall);
     }
 
     public function insert_Leads_Asociados($lead_asociado, $parent_id)
@@ -512,6 +518,7 @@ class altaLeadServices extends SugarApi
         $bean_Lead->origen_c = $dataOrigen['origen_c']; # se deja siempre como 1
 
         $detalle_origen = $dataOrigen['detalle_origen_c']; # se deja siempre como 3 Digital
+        $prospeccion_propia = $dataOrigen['prospeccion_propia_c']; # Prospeccion propia
         /*switch ($detalle_origen) {
             case 1:
                 $bean_Lead->detalle_origen_c = "Base de datos";
@@ -551,6 +558,7 @@ class altaLeadServices extends SugarApi
                 break;
         }*/
         $bean_Lead->detalle_origen_c = $detalle_origen;
+        $bean_Lead->prospeccion_propia_c = $prospeccion_propia;
 
         $medio = $dataOrigen['medio_digital_c'];
         /*switch ($medio) {
