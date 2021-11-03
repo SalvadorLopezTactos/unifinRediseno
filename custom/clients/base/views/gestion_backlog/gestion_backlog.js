@@ -16,11 +16,13 @@
         'keypress .monto_sin_solicitud': 'soloNumerosDecimales',
         'keypress .monto_con_solicitud': 'soloNumerosDecimales',
         'keypress .probabilidad': 'soloNumeros',
+        'keypress .probabilidad_campo_masivo': 'soloNumerosDecimales',
 
         'change .probabilidad': 'calculaBLEstimado',
         'change .montoTotal': 'calculaBLEstimado',
 
         'click #btn_guardar': 'guardarBacklogs',
+        'click #btn_actualizar_valores_masivo': 'actualizaValoresMasivo',
 
     },
 
@@ -76,7 +78,7 @@
 
         var anio_actual = (new Date).getFullYear();
         //var mes_actual = self.getActualBacklog();
-        var mes_actual = ((new Date).getMonth()+2).toString();
+        var mes_actual = ((new Date).getMonth()+1).toString();
 
         this.cargarBacklogsGestion(mes_actual,anio_actual,null,null);
     },
@@ -264,7 +266,7 @@
                                             $('#producto_filtro').val(self.producto_filtro);
                                         }else{
                                             //$('#mes_filtro').val(((new Date).getMonth()+2).toString());
-                                            $('#mes_filtro').select2('val',((new Date).getMonth()+2).toString());
+                                            $('#mes_filtro').select2('val',((new Date).getMonth()+1).toString());
                                             //$('#anio_filtro').val((new Date).getFullYear());
                                             $('#anio_filtro').select2('val',((new Date).getFullYear()));
                                             $('#etapa_filtro').select2('val',"");
@@ -475,6 +477,52 @@
 
             }, self)
         });
+
+    },
+
+    actualizaValoresMasivo:function(){
+        
+        var campo=$('#campo_actualizacion_masiva').val();
+        var valorCampo=$("#campo_masivo").val();
+
+        $('#campo_actualizacion_masiva').parent().parent().parent().find('.record-label').attr('style',"");
+        $(".probabilidad_campo_masivo").css('border-color', '');
+
+        if(campo==""){
+            $('#campo_actualizacion_masiva').parent().parent().parent().find('.record-label').attr('style',"color:red");
+            app.alert.show('campo_no_seleccionado', {
+                level: 'error',
+                messages: 'Elige un campo para actualización masiva',
+                autoClose: false
+            });
+            return;
+        }
+
+        if(valorCampo==""){
+            $(".probabilidad_campo_masivo").css('border-color', 'red');
+            
+            app.alert.show('masivo_sin_valor', {
+                level: 'error',
+                messages: 'Elige un valor para actualizar',
+                autoClose: false
+            });
+            return;
+        }
+
+        if(valorCampo==""){
+            $(".probabilidad_campo_masivo").css('border-color', 'red');
+            
+            app.alert.show('masivo_sin_valor', {
+                level: 'error',
+                messages: 'Elige un valor para actualizar',
+                autoClose: false
+            });
+            return;
+        }
+
+        //ToDo: Obtener el nombre del campo que se quiere actualizar para modificar los valores de ese campo en la tabla
+        $(".probabilidad").val(valorCampo);
+
 
     }
 })
