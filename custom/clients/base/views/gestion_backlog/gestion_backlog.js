@@ -20,6 +20,8 @@
         'change .probabilidad': 'calculaBLEstimado',
         'change .montoTotal': 'calculaBLEstimado',
 
+        'click #btn_guardar': 'guardarBacklogs',
+
     },
 
     meses_list_html : null,
@@ -407,5 +409,66 @@
             
         }
         return rango_encontrado;
+    },
+
+    guardarBacklogs:function(){
+        //Armar estructura json para mandar petición de actualización a través de un bulk
+        var peticion={
+            "requests":[
+            ]
+        }
+
+        $('#processingGuardar').show();
+        $('#btn_guardar').attr("disabled", true);
+
+        //Recorriendo los registros de la tabla para armar la petición BULK
+        $('.registroBL').each(function(i, obj) {
+            var id_bl=$(this).attr("data-id");
+            var etapa=$(this).find("select.etapa_c").val();
+            var monto_prospecto=$(this).find(".monto_prospecto").val();
+            var monto_credito=$(this).find(".monto_credito").val();
+            var monto_rechazado=$(this).find(".monto_rechazado").val();
+            var monto_sin_solicitud=$(this).find(".monto_sin_solicitud").val();
+            var monto_con_solicitud=$(this).find(".monto_con_solicitud").val();
+            var monto=$(this).find(".montoTotal").val();
+            var comentarios=$(this).find(".comentarios").val();
+            var probabilidad=$(this).find(".probabilidad").val();
+            var bl_estimado=$(this).find(".blEstimado").val();
+            var tipo=$(this).find(".tipo").html();
+            var rango=$(this).find(".rango_bl").attr('data-id');
+
+            var data="{\"etapa_c\": \"test123\"}";
+            peticion["requests"][i]={"url": "/v11_8/lev_Backlog/"+id_bl, "method": "PUT", "data": "{\"etapa_c\": \""+etapa+"\","+
+            "\"monto_prospecto_c\":"+Number(monto_prospecto)+","+
+            "\"monto_credito_c\": "+Number(monto_credito)+","+
+            "\"monto_rechazado_c\":"+Number(monto_rechazado)+","+
+            "\"monto_sin_solicitud_c\": "+Number(monto_sin_solicitud)+","+
+            "\"monto_con_solicitud_c\": "+Number(monto_con_solicitud)+","+
+            "\"monto_comprometido\": "+Number(monto)+","+
+            "\"comentarios_c\": \""+comentarios+"\","+
+            "\"tct_conversion_c\": "+Number(probabilidad)+","+
+            "\"bl_estimado_c\": "+Number(bl_estimado)+","+
+            "\"tipo_bl_c\": \""+tipo+"\","+
+            "\"rango_bl_c\": \""+rango+"\"}"}
+        });
+
+        //Llamada hacia API BULK
+        app.api.call('create', app.api.buildURL('bulk', null, null, peticion), null, {
+            success: _.bind(function (data){
+
+                app.alert.show('backlogs_actualizados_correctos', {
+                    level: 'success',
+                    messages: 'Registros actualizados correctamente',
+                    autoClose: true
+                });
+
+                self.cargarBacklogsGestionButton();
+
+                $('#processingGuardar').hide();
+                $('#btn_guardar').removeAttr("disabled");
+
+            }, self)
+        });
+
     }
 })

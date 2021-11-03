@@ -191,7 +191,7 @@
             </thead>
             <tbody>
             {{#each listaBacklogs}}
-					<tr data-id="{{id}}">
+					<tr data-id="{{id}}" class="registroBL">
 						<td class="">	
 							<span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{equipo}}</span>
 						</td>
@@ -247,7 +247,7 @@
                             </div>
 						</td>
                         <td class="">
-                            <textarea class="form-control" name="comentarios" data-id="{{id}}">{{comentarios_c}}</textarea>
+                            <textarea class="form-control comentarios" name="comentarios" data-id="{{id}}">{{comentarios_c}}</textarea>
 						</td>
                         <td class="">
                             <div align="middle">
@@ -257,18 +257,18 @@
 						</td>
                         <td class="">
 							<div class="edit disabled"  align="middle">
-                                <input type="text" style="width:80%" name="blEstimado" data-id="{{id}}" value="" class="inherit-width" disabled="" >
+                                <input type="text" style="width:80%" name="blEstimado" data-id="{{id}}" value="" class="inherit-width blEstimado" disabled="" >
                             </div>
 						</td>
                         <td class="">	
-							<span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{tipo_calculado}}</span>
+							<span class="tipo" style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{tipo_calculado}}</span>
 						</td>
                         <td class="">	
 							<span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{tipo_op}}</span>
 						</td>
                         <td class="">	
                             <div class="edit disabled"  align="middle">
-                               <input type="text" name="rangoBL" data-id="" value="{{rango_bl_c}}" class="inherit-width" disabled="" > 
+                               <input type="text" name="rangoBL" data-id="" value="{{rango_bl_c}}" class="inherit-width rango_bl" disabled="" > 
                             </div>
 						</td>
 					</tr>
