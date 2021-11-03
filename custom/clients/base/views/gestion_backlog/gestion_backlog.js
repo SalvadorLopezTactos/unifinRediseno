@@ -310,6 +310,12 @@
 
                         }
                         data.records[index].tipo_op=tipo_op;
+                        //Formateo de números
+                        data.records[index].monto_prospecto_c= Number(data.records[index].monto_prospecto_c).toFixed(2);
+                        data.records[index].monto_credito_c=tipo_op= Number(data.records[index].monto_credito_c).toFixed(2);
+                        data.records[index].monto_rechazado_c=tipo_op= Number(data.records[index].monto_rechazado_c).toFixed(2);
+                        data.records[index].monto_sin_solicitud_c=tipo_op= Number(data.records[index].monto_sin_solicitud_c).toFixed(2);
+                        data.records[index].monto_con_solicitud_c=tipo_op= Number(data.records[index].monto_con_solicitud_c).toFixed(2);
 
                         self.listaBacklogs.push(data.records[index]);
                     }
@@ -343,7 +349,7 @@
                 suma+=parseFloat(campos_con_montos.eq(index).val());
             }
         }
-        $(e.currentTarget).parent().parent().parent().find('[name="monto"]').val(suma);
+        $(e.currentTarget).parent().parent().parent().find('[name="monto"]').val(suma.toFixed(2));
 
         $(e.currentTarget).parent().parent().parent().find('[name="monto"]').trigger('change');
         
@@ -373,7 +379,7 @@
 
             var bl_Estimado= parseFloat(valorMonto) * (parseFloat(valorProbabilidad)/100);
 
-            $(e.currentTarget).parent().parent().parent().find('[name="blEstimado"]').val(bl_Estimado);
+            $(e.currentTarget).parent().parent().parent().find('[name="blEstimado"]').val(bl_Estimado.toFixed(2));
 
         }
 
