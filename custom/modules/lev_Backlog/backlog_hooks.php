@@ -41,8 +41,8 @@ class backlog_hooks {
     public function setMontosMultiEtapa($bean = null, $event = null, $args = null)
     {
         global $current_user;
-        
-        if($bean->producto_c != "2"){
+        $privilegio=$current_user->admin_backlog_c;
+        if($bean->producto_c != "2" && $privilegio==0){
             //Solo se ejecuta al insertar
             if (empty($bean->fetched_row['id'])) {
                 // $GLOBALS['log']->fatal('Es nuevo backlog');

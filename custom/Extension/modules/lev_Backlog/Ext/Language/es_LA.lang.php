@@ -84,3 +84,4 @@ $mod_strings['LBL_COMENTARIOS'] = 'Comentarios';
 $mod_strings['LBL_BL_ESTIMADO'] = 'BL Estimado';
 $mod_strings['LBL_TIPO_BL'] = 'Tipo Backlog';
 $mod_strings['LBL_RANGO_BL'] = 'Rango';
+$mod_strings['LBL_LUMO_CUENTAS'] = 'Lumo';

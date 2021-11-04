@@ -15,7 +15,7 @@
         'keypress .monto_rechazado': 'soloNumerosDecimales',
         'keypress .monto_sin_solicitud': 'soloNumerosDecimales',
         'keypress .monto_con_solicitud': 'soloNumerosDecimales',
-        'keypress .probabilidad': 'soloNumeros',
+        'keypress .probabilidad': 'soloNumerosDecimales',
         'keypress .probabilidad_campo_masivo': 'soloNumerosDecimales',
 
         'change .probabilidad': 'calculaBLEstimado',
@@ -35,6 +35,14 @@
         self=this;
 
         this._super("initialize", [options]);
+
+        this.loadViewAdminBacklog = false;
+        if(app.user.attributes.admin_backlog_c==1){
+			this.loadViewAdminBacklog = true;
+        }else{
+            var route = app.router.buildRoute(this.module, null, '');
+            app.router.navigate(route, {trigger: true});
+        }
 
         this.etapa_list_html = app.lang.getAppListStrings('etapa_c_list');
         this.etapa_list_html[''] = "";
@@ -106,6 +114,18 @@
         var anio=$('#anio_filtro').val();
         var etapa=$('#etapa_filtro').val();
         var producto=$('#producto_filtro').val();
+        //Antes de cargar los filtro con la llamada al api, validamos que los filtros de mes y año no sean de meses y años anteriores
+        var mes_actual=((new Date).getMonth()+1).toString();
+        var anio_actual = (new Date).getFullYear();
+        if(Number(anio) < Number(anio_actual) || (Number(mes) < Number(mes_actual) && Number(anio) <= Number(anio_actual))){
+            app.alert.show('sin_registros_bl', {
+                level: 'error',
+                messages: 'No se encontraron registros con este criterio de búsqueda.\n Favor de seleccionar mes y año posteriores a los actuales',
+                autoClose: false
+            });
+
+            return;
+        }
         this.cargarBacklogsGestion(mes,anio,etapa,producto);
     },
 
@@ -236,52 +256,13 @@
                         var nombre_cuenta=data.records[index].name.split("-")[2]
                         data.records[index].nombre_cuenta=nombre_cuenta.trim();
 
-                        //Calcular Tipo, basado en campo Lumo de Cuentas
+                        //Calcular Tipo, basado en campo Lumo de Cuentas (Asumiendo que el campo Lumo de Backlog está sincronizado completamente con el de cuentas)
                         var idCuenta=data.records[index].account_id_c;
-                        app.api.call("read", app.api.buildURL("Accounts/"+idCuenta, null, null, {
-                            fields: "lumo_c"
-                        }), null, {
-                            success: _.bind(function (dataCuenta) {
-                                if (dataCuenta) {
-                                    
-                                    if(dataCuenta.lumo_c==1){
-                                        self.listaBacklogs[self.counter].tipo_calculado="LUMO";
-                                        
-                                    }else{
-                                        self.listaBacklogs[self.counter].tipo_calculado=app.lang.getAppListStrings('tipo_producto_list')[self.listaBacklogs[self.counter].producto_c];
-                                    }
-                                    
-                                    //Validación aplicada para que únicamente se aplique render cuando se hayan terminado de ejecutar todas las peticiones
-                                    if(self.counter==self.cantidad_backlogs-1){
-                                        app.alert.dismiss('getBacklogs');
-                                        $('#processing_buscar').hide();
-                                        $('#btn_Buscar_bl').removeAttr("disabled");
-                                        self.render();
-
-                                        //Después de render, se restablecen los valores en la barra de búsqueda para que persistan los valores
-                                        if(self.mes_filtro!=undefined && self.anio_filtro!=undefined && self.etapa_filtro!=undefined && self.producto_filtro){
-                                            $('#mes_filtro').val(self.mes_filtro);
-                                            $('#anio_filtro').val(self.anio_filtro);
-                                            $('#etapa_filtro').val(self.etapa_filtro);
-                                            $('#producto_filtro').val(self.producto_filtro);
-                                        }else{
-                                            //$('#mes_filtro').val(((new Date).getMonth()+2).toString());
-                                            $('#mes_filtro').select2('val',((new Date).getMonth()+1).toString());
-                                            //$('#anio_filtro').val((new Date).getFullYear());
-                                            $('#anio_filtro').select2('val',((new Date).getFullYear()));
-                                            $('#etapa_filtro').select2('val',"");
-                                            $('#producto_filtro').select2('val',"0");
-                                        }
-
-                                        //Se lanza evento change a través de la clase para que el Monto, BL Estimado y Rango se calculen cuando la vista se cargue
-                                        $(".monto_prospecto").trigger("change");
-                                        
-                                    }
-                                    self.counter++;
-                                }
-                                
-                            }, this)
-                        });
+                        if(data.records[index].lumo_cuentas_c==1){
+                            data.records[index].tipo_calculado="LUMO";
+                        }else{
+                            data.records[index].tipo_calculado=app.lang.getAppListStrings('tipo_producto_list')[data.records[index].producto_c];
+                        }
 
                         //Llenando el Tipo de Operación Producto 
                         //num_tipo_op_leasing_c => num_tipo_op_leasing_list, 
@@ -334,7 +315,30 @@
                     $('#btn_Buscar_bl').removeAttr("disabled");
                 }
 
+                app.alert.dismiss('getBacklogs');
+                $('#processing_buscar').hide();
+                $('#btn_Buscar_bl').removeAttr("disabled");
+                
                 self.render();
+
+                //Después de render, se restablecen los valores en la barra de búsqueda para que persistan los valores
+                if(self.mes_filtro!=undefined && self.anio_filtro!=undefined && self.etapa_filtro!=undefined && self.producto_filtro){
+                    $('#mes_filtro').val(self.mes_filtro);
+                    $('#anio_filtro').val(self.anio_filtro);
+                    $('#etapa_filtro').val(self.etapa_filtro);
+                    $('#producto_filtro').val(self.producto_filtro);
+                }else{
+                    //$('#mes_filtro').val(((new Date).getMonth()+2).toString());
+                    $('#mes_filtro').select2('val',((new Date).getMonth()+1).toString());
+                    //$('#anio_filtro').val((new Date).getFullYear());
+                    $('#anio_filtro').select2('val',((new Date).getFullYear()));
+                    $('#etapa_filtro').select2('val',"");
+                    $('#producto_filtro').select2('val',"0");
+                }
+
+                //Se lanza evento change a través de la clase para que el Monto, BL Estimado y Rango se calculen cuando la vista se cargue
+                $(".monto_prospecto").trigger("change");
+
             }, self)
         });
 
@@ -358,11 +362,18 @@
     },
 
     soloNumerosDecimales:function(e){
-        const regex = /[^\d.]|\.(?=.*\.)/g;
-        const subst=``;
-        const str=$(e.currentTarget).val();
-        const result = str.replace(regex, subst);
-        $(e.currentTarget).val(result);
+       var charC = (e.which) ? e.which : e.keyCode;
+       if (charC == 46) {
+           if ($(e.currentTarget).val().indexOf('.') === -1) {
+               return true;
+           } else {
+               return false;
+           }
+       } else {
+           if (charC > 31 && (charC < 48 || charC > 57))
+               return false;
+       }
+       return true;
     },
 
     soloNumeros:function(e){
