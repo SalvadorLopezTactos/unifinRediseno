@@ -158,7 +158,12 @@
                                     "mes":{
                                         "$in":[mes]
                                     }
-                                }
+                                },
+                                {
+                                    "estatus_operacion_c":{
+                                        "$in":["2"]
+                                    }
+                                },
                             ]
                         }
                     ]
@@ -182,7 +187,12 @@
                                     "etapa_c":{
                                         "$in":[etapa]
                                     }
-                                }
+                                },
+                                {
+                                    "estatus_operacion_c":{
+                                        "$in":["2"]
+                                    }
+                                },
                             ]
                         }
                     ]
@@ -211,7 +221,12 @@
                                     "producto_c":{
                                         "$in":[producto]
                                     }
-                                }
+                                },
+                                {
+                                    "estatus_operacion_c":{
+                                        "$in":["2"]
+                                    }
+                                },
                             ]
                         }
                     ]
@@ -233,7 +248,13 @@
                                 "mes":{
                                     "$in":[mes]
                                 }
-                            }
+                            },
+                            {
+                                "estatus_operacion_c":{
+                                    "$in":["2"]
+                                }
+                            },
+
                         ]
                     }
                 ]
