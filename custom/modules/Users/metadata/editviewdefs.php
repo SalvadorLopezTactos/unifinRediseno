@@ -456,6 +456,15 @@ array (
             'label' => 'LBL_EDITAR_BACKLOG_CHK',
           ),
         ),
+        15 => 
+        array (
+          0 => 
+          array (
+            'name' => 'admin_backlog_c',
+            'label' => 'LBL_ADMIN_BACKLOG',
+          ),
+          1 => '',
+        ),
       ),
     ),
   ),
