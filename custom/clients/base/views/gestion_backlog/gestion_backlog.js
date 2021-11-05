@@ -411,6 +411,8 @@
         $('#processingGuardar').show();
         $('#btn_guardar').attr("disabled", true);
 
+        var contador = 0;
+
         //Recorriendo los registros de la tabla para armar la petición BULK
         $('.registroBL').each(function (i, obj) {
             var id_bl = $(this).attr("data-id");
@@ -432,7 +434,7 @@
             if (concat != concatOriginal) {
 
                 var data = "{\"etapa_c\": \"test123\"}";
-                peticion["requests"][i] = {
+                peticion["requests"][contador] = {
                     "url": "/v11_8/lev_Backlog/" + id_bl, "method": "PUT", "data": "{\"etapa_c\": \"" + etapa + "\"," +
                         "\"monto_prospecto_c\":" + Number(monto_prospecto) + "," +
                         "\"monto_credito_c\": " + Number(monto_credito) + "," +
@@ -446,9 +448,8 @@
                         "\"tipo_bl_c\": \"" + tipo + "\"," +
                         "\"rango_bl_c\": \"" + rango + "\"}"
                 }
+                contador++;
             }
-
-
         });
 
         if (peticion["requests"].length > 0) {
