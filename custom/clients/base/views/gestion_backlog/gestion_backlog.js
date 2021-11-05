@@ -312,7 +312,22 @@
             }
         }
         $(e.currentTarget).parent().parent().parent().find('[name="monto"]').val(suma.toFixed(2));
-        $(e.currentTarget).parent().parent().parent().find('[name="actualizado"]').val(1);
+        
+        if ($(e.currentTarget).parent().parent().parent().find('[name="actualizado"]').val() == "") {
+
+            var etapa = $(e.currentTarget).parent().parent().parent().find('[data-field="etapa_c"]').val();
+            var monto_prospecto = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_prospecto"]').val();
+            var monto_credito = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_credito"]').val();
+            var monto_rechazado = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_rechazado"]').val();
+            var monto_sin_solicitud = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_sin_solicitud"]').val();
+            var monto_con_solicitud = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_con_solicitud"]').val();
+            var comentarios = $(e.currentTarget).parent().parent().parent().find('[data-field="comentarios"]').val();
+            var probabilidad = $(e.currentTarget).parent().parent().parent().find('[data-field="probabilidad"]').val();
+            var concat = etapa + monto_prospecto + monto_credito + monto_rechazado + monto_sin_solicitud + monto_con_solicitud + comentarios + probabilidad;
+            $(e.currentTarget).parent().parent().parent().find('[name="actualizado"]').val(concat);
+
+        }
+
         $(e.currentTarget).parent().parent().parent().find('[name="monto"]').trigger('change');
 
     },
@@ -411,42 +426,68 @@
             var bl_estimado = $(this).find(".blEstimado").val();
             var tipo = $(this).find(".tipo").html();
             var rango = $(this).find(".rango_bl").attr('data-id');
+            var concat = etapa + monto_prospecto + monto_credito + monto_rechazado + monto_sin_solicitud + monto_con_solicitud + comentarios + probabilidad;
+            var concatOriginal = $(this).find(".actualizado").val();
 
-            var data = "{\"etapa_c\": \"test123\"}";
-            peticion["requests"][i] = {
-                "url": "/v11_8/lev_Backlog/" + id_bl, "method": "PUT", "data": "{\"etapa_c\": \"" + etapa + "\"," +
-                    "\"monto_prospecto_c\":" + Number(monto_prospecto) + "," +
-                    "\"monto_credito_c\": " + Number(monto_credito) + "," +
-                    "\"monto_rechazado_c\":" + Number(monto_rechazado) + "," +
-                    "\"monto_sin_solicitud_c\": " + Number(monto_sin_solicitud) + "," +
-                    "\"monto_con_solicitud_c\": " + Number(monto_con_solicitud) + "," +
-                    "\"monto_comprometido\": " + Number(monto) + "," +
-                    "\"comentarios_c\": \"" + comentarios + "\"," +
-                    "\"tct_conversion_c\": " + Number(probabilidad) + "," +
-                    "\"bl_estimado_c\": " + Number(bl_estimado) + "," +
-                    "\"tipo_bl_c\": \"" + tipo + "\"," +
-                    "\"rango_bl_c\": \"" + rango + "\"}"
+            if (concat != concatOriginal) {
+
+                var data = "{\"etapa_c\": \"test123\"}";
+                peticion["requests"][i] = {
+                    "url": "/v11_8/lev_Backlog/" + id_bl, "method": "PUT", "data": "{\"etapa_c\": \"" + etapa + "\"," +
+                        "\"monto_prospecto_c\":" + Number(monto_prospecto) + "," +
+                        "\"monto_credito_c\": " + Number(monto_credito) + "," +
+                        "\"monto_rechazado_c\":" + Number(monto_rechazado) + "," +
+                        "\"monto_sin_solicitud_c\": " + Number(monto_sin_solicitud) + "," +
+                        "\"monto_con_solicitud_c\": " + Number(monto_con_solicitud) + "," +
+                        "\"monto_comprometido\": " + Number(monto) + "," +
+                        "\"comentarios_c\": \"" + comentarios + "\"," +
+                        "\"tct_conversion_c\": " + Number(probabilidad) + "," +
+                        "\"bl_estimado_c\": " + Number(bl_estimado) + "," +
+                        "\"tipo_bl_c\": \"" + tipo + "\"," +
+                        "\"rango_bl_c\": \"" + rango + "\"}"
+                }
             }
+
+
         });
 
-        //Llamada hacia API BULK
-        app.api.call('create', app.api.buildURL('bulk', null, null, peticion), null, {
-            success: _.bind(function (data) {
+        if (peticion["requests"].length > 0) {
 
-                app.alert.show('backlogs_actualizados_correctos', {
-                    level: 'success',
-                    messages: 'Registros actualizados correctamente',
-                    autoClose: true
-                });
+            app.alert.show('save-Backlog', {
+                level: 'process',
+                title: 'Guardando cambios, por favor espere.',
+            });
+            //Llamada hacia API BULK
+            app.api.call('create', app.api.buildURL('bulk', null, null, peticion), null, {
+                success: _.bind(function (data) {
 
-                self.cargarBacklogsGestionButton();
+                    app.alert.dismiss('save-Backlog');
 
-                $('#processingGuardar').hide();
-                $('#btn_guardar').removeAttr("disabled");
+                    app.alert.show('backlogs_actualizados_correctos', {
+                        level: 'success',
+                        messages: 'Registros actualizados correctamente',
+                        autoClose: true
+                    });
 
-            }, self)
-        });
+                    self.cargarBacklogsGestionButton();
 
+                    $('#processingGuardar').hide();
+                    $('#btn_guardar').removeAttr("disabled");
+
+                }, self)
+            });
+
+        } else {
+
+            App.alert.show('backlog_sin_cambios', {
+                level: 'info',
+                messages: 'No hay cambios para actualizar',
+                autoClose: true
+            });
+
+            $('#processingGuardar').hide();
+            $('#btn_guardar').removeAttr("disabled");
+        }
     },
 
     actualizaValoresMasivo: function () {
