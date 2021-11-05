@@ -71,11 +71,8 @@
             <span>
                 <span>
                     <select id="anio_filtro" class="filtros select2">
-                        <option value="{{anio_filtro}}">{{getUnifinListValue "anio_list" anio_filtro}}</option>
                         {{#each anio_list_html_filter}}
-                            {{#if @key}}
-                                <option value="{{@key}}">{{this}}</option>
-                            {{/if}}
+                            <option value="{{@key}}" {{ifSelected @key ../anio_filtro}}>{{this}}</option>
                         {{/each}}
                     </select>
 					<p class="help-block"></p>
@@ -221,7 +218,7 @@
                         <td width="10%">
 							<label class="record-label" style="font-weight:bold; text-align:center">Rango</label>
 						</td>
-                        <td >
+                        <td class="hide">
 							<label class="record-label" style="font-weight:bold; text-align:center">Actualizado</label>
 						</td>
 					</tr>
@@ -250,31 +247,31 @@
 						</td>
                         <td class="">
 							<div align="middle">
-                                <input type="text" class="montos monto_prospecto" style="width:100px" value="{{monto_prospecto_c}}">
+                                <input type="text" class="montos monto_prospecto" data-field="monto_prospecto" style="width:100px" value="{{monto_prospecto_c}}">
                                 <p class="help-block"></p>
                             </div>
 						</td>
                         <td class="">
 							<div align="middle">
-                                <input type="text" class="montos monto_credito" style="width:100px" value="{{monto_credito_c}}">
+                                <input type="text" class="montos monto_credito" data-field="monto_credito" style="width:100px" value="{{monto_credito_c}}">
                                 <p class="help-block"></p>
                             </div>
 						</td>
                         <td class="">
 							<div align="middle">
-                                <input type="text" class="montos monto_rechazado" style="width:100px" value="{{monto_rechazado_c}}">
+                                <input type="text" class="montos monto_rechazado" data-field="monto_rechazado" style="width:100px" value="{{monto_rechazado_c}}">
                                 <p class="help-block"></p>
                             </div>
 						</td>
                         <td class="">
 							<div align="middle">
-                                <input type="text" class="montos monto_sin_solicitud" style="width:100px" value="{{monto_sin_solicitud_c}}">
+                                <input type="text" class="montos monto_sin_solicitud" data-field="monto_sin_solicitud" style="width:100px" value="{{monto_sin_solicitud_c}}">
                                 <p class="help-block"></p>
                             </div>
 						</td>
                         <td class="">
 							<div align="middle">
-                                <input type="text" class="montos monto_con_solicitud" style="width:100px" value="{{monto_con_solicitud_c}}">
+                                <input type="text" class="montos monto_con_solicitud" data-field="monto_con_solicitud" style="width:100px" value="{{monto_con_solicitud_c}}">
                                 <p class="help-block"></p>
                             </div>
 						</td>
@@ -284,11 +281,11 @@
                             </div>
 						</td>
                         <td class="">
-                            <textarea class="form-control comentarios" name="comentarios" data-id="{{id}}">{{comentarios_c}}</textarea>
+                            <textarea class="form-control comentarios" data-field="comentarios" name="comentarios" data-id="{{id}}">{{comentarios_c}}</textarea>
 						</td>
                         <td class="">
                             <div align="middle">
-                                <input type="text" class="probabilidad" style="width:100px" value="{{tct_conversion_c}}">
+                                <input type="text" class="probabilidad" data-field="probabilidad" style="width:100px" value="{{tct_conversion_c}}">
                                 <p class="help-block"></p>
                             </div>
 						</td>
@@ -308,9 +305,9 @@
                                <input type="text" name="rangoBL" data-id="" value="{{rango_bl_c}}" class="inherit-width rango_bl" disabled="" > 
                             </div>
 						</td>
-                        <td class="">
+                        <td class="hide">
 							<div class="edit disabled"  align="middle">
-                                <input type="text" style="width:80%" name="actualizado" data-id="{{id}}" value="" class="inherit-width actualizado" disabled="" >
+                                <input type="text" style="width:80%" name="actualizado" data-id="{{id}}" value="" class="inherit-width actualizado actualizacionInicial" disabled="" >
                             </div>
 						</td>
 					</tr>
