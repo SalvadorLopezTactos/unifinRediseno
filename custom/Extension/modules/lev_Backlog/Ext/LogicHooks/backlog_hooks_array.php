@@ -44,3 +44,10 @@ $hook_array['before_save'][] = Array(
     'Backlog_platform_user',
     'set_audit_user_platform'
 );
+$hook_array['before_save'][] = Array(
+    7,
+    'Valida check lumo de la cuenta relacionada y actualiza lumo a nivel de backlog',
+    'custom/modules/lev_Backlog/admin_Backlog.php',
+    'class_Backlog_Admin',
+    'func_Backlog_Admin'
+);
