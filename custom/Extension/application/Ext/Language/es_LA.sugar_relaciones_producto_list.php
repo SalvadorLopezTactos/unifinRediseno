@@ -1,5 +1,5 @@
 <?php
- // created: 2020-05-12 17:17:50
+ // created: 2021-11-08 14:58:20
 
 $app_list_strings['relaciones_producto_list']=array (
   'Contacto' => 'Contacto',
@@ -9,4 +9,5 @@ $app_list_strings['relaciones_producto_list']=array (
   'Conyuge' => 'Cónyuge',
   'Firmantes VR' => 'Firmantes VR',
   'Obligado solidario' => 'Obligado solidario',
+  'Depositario' => 'Depositario',
 );
