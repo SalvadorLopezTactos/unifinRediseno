@@ -19,7 +19,7 @@ array_push($job_strings, 'audios_issabel');
    function audios_issabel(){
         global $sugar_config;
         $iduser=$sugar_config['OneDrive_IDuser'];
-        $parentFolder=$sugar_config['OneDrive_url_directorio'];
+        $parentFolder=$sugar_config['OneDrive_url_directorioIssabel'];
         /*
         * 1.-Conectar al FTP y validar que haya archivos nuevos
         */
