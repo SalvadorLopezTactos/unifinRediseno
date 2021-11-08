@@ -7,7 +7,7 @@ class clase_UniProducto
 {
     public function func_UniProducto($bean = null, $event = null, $args = null)
     {
-        $GLOBALS['log']->fatal("ACTUALIZA UNI PRODUCTOS CUSTOM ---- ");
+        $GLOBALS['log']->fatal("---- ACTUALIZA UNI PRODUCTOS CUSTOM ---- ");
         //Campo custom Uni Productos
         $actualizaLeasing = false;
         $actualizaFactoring = false;
