@@ -158,14 +158,16 @@ array_push($job_strings, 'audios_issabel');
             $result = json_decode($result, true);
 
             //Guarda resultado en config
+            $GLOBALS['log']->fatal('Genera nuevo token y guarda resultado en config');
             $now = new DateTime();
             $now = date_modify($now, "+1 hour");
             $OneDrive['token']=$result['access_token'];
             $OneDrive['expire_in']=$now->format('Y-m-d H:i:s');
-            $update_toke = "update config set value='{$OneDrive['token']}' where category='OneDrive' and name='token'";
-            $update_expired = "update config set value='{$OneDrive['expire_in']}' where category='OneDrive' and name='expire_in'";
-            $update_by = "update config set value='{$current_user->user_name}' where category='OneDrive' and name='generated_by'";
-            $update_in = "update config set value='{$now->format('Y-m-d H:i:s')}' where category='OneDrive' and name='generated_in'";
+            $update_toke = "update config set value='{$OneDrive['token']}' where category='OneDrive' and name='token';";
+            $GLOBALS['log']->fatal($update_toke);
+            $update_expired = "update config set value='{$OneDrive['expire_in']}' where category='OneDrive' and name='expire_in';";
+            $update_by = "update config set value='{$current_user->user_name}' where category='OneDrive' and name='generated_by';";
+            $update_in = "update config set value='{$now->format('Y-m-d H:i:s')}' where category='OneDrive' and name='generated_in';";
             $resultado_token = $db->query($update_toke);
             $resultado_expired = $db->query($update_expired);
             $resultado_by = $db->query($update_by);
