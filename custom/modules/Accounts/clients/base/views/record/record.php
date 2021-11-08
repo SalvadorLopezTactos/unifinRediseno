@@ -826,6 +826,8 @@ array (
               ),
               43 => 
               array (
+                'name' => 'lumo_c',
+                'label' => 'LBL_LUMO',
               ),
             ),
           ),
