@@ -312,7 +312,7 @@
             }
         }
         $(e.currentTarget).parent().parent().parent().find('[name="monto"]').val(suma.toFixed(2));
-        
+
         if ($(e.currentTarget).parent().parent().parent().find('[name="actualizado"]').val() == "") {
 
             var etapa = $(e.currentTarget).parent().parent().parent().find('[data-field="etapa_c"]').val();
@@ -408,13 +408,18 @@
             ]
         }
 
+        var lista_peticiones = [];
+
         $('#processingGuardar').show();
         $('#btn_guardar').attr("disabled", true);
 
         var contador = 0;
+        var contador_lista = 0;
+        var restantes = $('.registroBL').length;
 
         //Recorriendo los registros de la tabla para armar la petición BULK
         $('.registroBL').each(function (i, obj) {
+
             var id_bl = $(this).attr("data-id");
             var etapa = $(this).find("select.etapa_c").val();
             var monto_prospecto = $(this).find(".monto_prospecto").val();
@@ -430,6 +435,7 @@
             var rango = $(this).find(".rango_bl").attr('data-id');
             var concat = etapa + monto_prospecto + monto_credito + monto_rechazado + monto_sin_solicitud + monto_con_solicitud + comentarios + probabilidad;
             var concatOriginal = $(this).find(".actualizado").val();
+            restantes--;
 
             if (concat != concatOriginal) {
 
@@ -450,33 +456,48 @@
                 }
                 contador++;
             }
+            //Se reinicia el contador, para que se vaya por bloques en la actualización masiva
+            if (contador >= 9 || (restantes == 0 && peticion['requests'].length > 0)) {
+
+                lista_peticiones[contador_lista] = peticion;
+                contador = 0;
+                contador_lista++;
+                peticion = {
+                    "requests": [
+                    ]
+                }
+            }
         });
 
-        if (peticion["requests"].length > 0) {
+        if (lista_peticiones.length > 0) {
 
-            app.alert.show('save-Backlog', {
-                level: 'process',
-                title: 'Guardando cambios, por favor espere.',
-            });
-            //Llamada hacia API BULK
-            app.api.call('create', app.api.buildURL('bulk', null, null, peticion), null, {
-                success: _.bind(function (data) {
+            for (var peticion_actual = 0; peticion_actual < lista_peticiones.length; peticion_actual++) {
 
-                    app.alert.dismiss('save-Backlog');
+                app.alert.show('save-Backlog', {
+                    level: 'process',
+                    title: 'Guardando cambios, por favor espere.',
+                });
 
-                    app.alert.show('backlogs_actualizados_correctos', {
-                        level: 'success',
-                        messages: 'Registros actualizados correctamente',
-                        autoClose: true
-                    });
+                //Llamada hacia API BULK
+                app.api.call('create', app.api.buildURL('bulk', null, null, lista_peticiones[peticion_actual]), null, {
+                    success: _.bind(function (data) {
 
-                    self.cargarBacklogsGestionButton();
+                        app.alert.dismiss('save-Backlog');
 
-                    $('#processingGuardar').hide();
-                    $('#btn_guardar').removeAttr("disabled");
+                        app.alert.show('backlogs_actualizados_correctos', {
+                            level: 'success',
+                            messages: 'Registros actualizados correctamente',
+                            autoClose: true
+                        });
 
-                }, self)
-            });
+                        // self.cargarBacklogsGestionButton();
+
+                        $('#processingGuardar').hide();
+                        $('#btn_guardar').removeAttr("disabled");
+
+                    }, self)
+                });
+            }
 
         } else {
 
