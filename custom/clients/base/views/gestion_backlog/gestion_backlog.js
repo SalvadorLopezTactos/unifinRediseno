@@ -412,6 +412,7 @@
 
         $('#processingGuardar').show();
         $('#btn_guardar').attr("disabled", true);
+        $('#btn_actualizar_valores_masivo').attr("disabled", true);
 
         var contador = 0;
         var contador_lista = 0;
@@ -490,10 +491,11 @@
                             autoClose: true
                         });
 
-                        // self.cargarBacklogsGestionButton();
+                        self.cargarBacklogsGestionButton();
 
                         $('#processingGuardar').hide();
                         $('#btn_guardar').removeAttr("disabled");
+                        $('#btn_actualizar_valores_masivo').removeAttr("disabled");
 
                     }, self)
                 });
@@ -509,6 +511,7 @@
 
             $('#processingGuardar').hide();
             $('#btn_guardar').removeAttr("disabled");
+            $('#btn_actualizar_valores_masivo').removeAttr("disabled");
         }
     },
 
