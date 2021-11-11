@@ -1,5 +1,5 @@
 <?php
- // created: 2021-10-26 09:52:34
+ // created: 2021-11-11 10:43:35
 
 $app_list_strings['plataforma_usuario_grupo_list']=array (
   'unics' => 'Unics',
@@ -26,4 +26,5 @@ $app_list_strings['plataforma_usuario_grupo_list']=array (
   'portalUniclick' => 'Portal UNICLICK',
   'quantico' => 'Quantico',
   'uni2Liberacion' => 'UNI2 LIBERACION',
+  'unionVita' => 'UNION VITA',
 );
