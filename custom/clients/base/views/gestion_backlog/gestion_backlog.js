@@ -312,11 +312,11 @@
     calculaMonto: function (e) {
 
         //FORMATO MONEDA DE LOS CAMPOS DE MONTO
-        var formatoMontoProspecto = Intl.NumberFormat().format($(e.currentTarget).parent().parent().parent().find('[data-field="monto_prospecto"]').val().replaceAll(",",""));
-        var formatoMontoCredito = Intl.NumberFormat().format($(e.currentTarget).parent().parent().parent().find('[data-field="monto_credito"]').val().replaceAll(",",""));
-        var formatoMontoRechazado = Intl.NumberFormat().format($(e.currentTarget).parent().parent().parent().find('[data-field="monto_rechazado"]').val().replaceAll(",",""));
-        var formatoMontoSinSolicitud = Intl.NumberFormat().format($(e.currentTarget).parent().parent().parent().find('[data-field="monto_sin_solicitud"]').val().replaceAll(",",""));
-        var formatoMontoConSolicitud = Intl.NumberFormat().format($(e.currentTarget).parent().parent().parent().find('[data-field="monto_con_solicitud"]').val().replaceAll(",",""));
+        var formatoMontoProspecto = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_prospecto"]').val().replaceAll(",","")).toLocaleString('es-MX');
+        var formatoMontoCredito = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_credito"]').val().replaceAll(",","")).toLocaleString('es-MX');
+        var formatoMontoRechazado = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_rechazado"]').val().replaceAll(",","")).toLocaleString('es-MX');
+        var formatoMontoSinSolicitud = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_sin_solicitud"]').val().replaceAll(",","")).toLocaleString('es-MX');        
+        var formatoMontoConSolicitud = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_con_solicitud"]').val().replaceAll(",","")).toLocaleString('es-MX');
         //SETEA EL MONTO CON EL FORMATO DE MONEDA
         $(e.currentTarget).parent().parent().parent().find('[data-field="monto_prospecto"]').val(formatoMontoProspecto);
         $(e.currentTarget).parent().parent().parent().find('[data-field="monto_credito"]').val(formatoMontoCredito);
@@ -334,7 +334,7 @@
                 suma += parseFloat(campos_con_montos.eq(index).val().replaceAll(",",""));
             }
         }
-        var formatoMontoTotal = Intl.NumberFormat().format(suma);
+        var formatoMontoTotal = suma.toLocaleString('es-MX');
         $(e.currentTarget).parent().parent().parent().find('[name="monto"]').val(formatoMontoTotal);
 
         if ($(e.currentTarget).parent().parent().parent().find('[name="actualizado"]').val() == "") {
@@ -397,7 +397,7 @@
         if (valorMonto != "" && valorProbabilidad != "") {
 
             var bl_Estimado = parseFloat(valorMonto) * (parseFloat(valorProbabilidad) / 100);
-            var formatoBLEstimado = Intl.NumberFormat().format(bl_Estimado);
+            var formatoBLEstimado = bl_Estimado.toLocaleString('es-MX');
             $(e.currentTarget).parent().parent().parent().find('[name="blEstimado"]').val(formatoBLEstimado);
 
         }
