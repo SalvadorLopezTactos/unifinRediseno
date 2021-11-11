@@ -10,13 +10,13 @@
         'change .monto_sin_solicitud': 'calculaMonto',
         'change .monto_con_solicitud': 'calculaMonto',
 
-        'keypress .monto_prospecto': 'soloNumeros',
-        'keypress .monto_credito': 'soloNumeros',
-        'keypress .monto_rechazado': 'soloNumeros',
-        'keypress .monto_sin_solicitud': 'soloNumeros',
-        'keypress .monto_con_solicitud': 'soloNumeros',
-        'keypress .probabilidad': 'soloNumeros',
-        'keypress .probabilidad_campo_masivo': 'soloNumeros',
+        'keypress .monto_prospecto': 'soloNumerosDecimales',
+        'keypress .monto_credito': 'soloNumerosDecimales',
+        'keypress .monto_rechazado': 'soloNumerosDecimales',
+        'keypress .monto_sin_solicitud': 'soloNumerosDecimales',
+        'keypress .monto_con_solicitud': 'soloNumerosDecimales',
+        'keypress .probabilidad': 'soloNumerosDecimales',
+        'keypress .probabilidad_campo_masivo': 'soloNumerosDecimales',
 
         'change .probabilidad': 'calculaBLEstimado',
         'change .montoTotal': 'calculaBLEstimado',
@@ -356,20 +356,20 @@
 
     },
 
-    // soloNumerosDecimales: function (e) {
-    //     var charC = (e.which) ? e.which : e.keyCode;
-    //     if (charC == 46) {
-    //         if ($(e.currentTarget).val().indexOf('.') === -1) {
-    //             return true;
-    //         } else {
-    //             return false;
-    //         }
-    //     } else {
-    //         if (charC > 31 && (charC < 48 || charC > 57))
-    //             return false;
-    //     }
-    //     return true;
-    // },
+    soloNumerosDecimales: function (e) {
+        var charC = (e.which) ? e.which : e.keyCode;
+        if (charC == 46) {
+            if ($(e.currentTarget).val().indexOf('.') === -1) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (charC > 31 && (charC < 48 || charC > 57))
+                return false;
+        }
+        return true;
+    },
 
     soloNumeros: function (e) {
         var charCode = (e.which) ? e.which : e.keyCode
