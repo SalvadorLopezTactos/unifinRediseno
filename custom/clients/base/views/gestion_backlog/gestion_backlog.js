@@ -1,7 +1,7 @@
 /**
  * Created by salvadorlopez salvador.lopez@tactos.com.mx
  */
-({
+ ({
     events: {
         'click #btn_Buscar_bl': 'cargarBacklogsGestionButton',
         'change .monto_prospecto': 'calculaMonto',
