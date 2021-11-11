@@ -1539,11 +1539,21 @@
             }
         }
 
-        this.tipoProducto.leasing = cont_uni_p.ResumenProductos.leasing;
-        this.tipoProducto.factoring = cont_uni_p.ResumenProductos.factoring;
-        this.tipoProducto.credito_auto = cont_uni_p.ResumenProductos.credito_auto;
-        this.tipoProducto.fleet = cont_uni_p.ResumenProductos.fleet;
-        this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.uniclick;
+        if (cont_uni_p.ResumenProductos.leasing != undefined ) {
+            this.tipoProducto.leasing = cont_uni_p.ResumenProductos.leasing;
+        }
+        if (cont_uni_p.ResumenProductos.factoring != undefined ) {
+            this.tipoProducto.factoring = cont_uni_p.ResumenProductos.factoring;
+        }
+        if (cont_uni_p.ResumenProductos.credito_auto != undefined ) {
+            this.tipoProducto.credito_auto = cont_uni_p.ResumenProductos.credito_auto;
+        }
+        if (cont_uni_p.ResumenProductos.fleet != undefined ) {
+            this.tipoProducto.fleet = cont_uni_p.ResumenProductos.fleet;
+        }
+        if (cont_uni_p.ResumenProductos.uniclick != undefined ) {
+            this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.uniclick;
+        }
 
         if (contexto_cuenta.createMode) {
             //this.tipoProducto.uniclick = cont_uni_p.ResumenProductos.uniclick;
