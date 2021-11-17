@@ -591,7 +591,29 @@
         }
 
         //ToDo: Obtener el nombre del campo que se quiere actualizar para modificar los valores de ese campo en la tabla
-        $(".probabilidad").val(valorCampo);
-        $(".probabilidad").trigger('change');
+        if (campo == 'probabilidad' && valorCampo != "") {
+            $(".probabilidad").val(valorCampo);
+            $(".probabilidad").trigger('change');
+        }
+        if (campo == 'monto_prospecto' && valorCampo != "") {
+            $(".monto_prospecto").val(valorCampo);
+            $(".monto_prospecto").trigger('change');
+        }
+        if (campo == 'monto_credito' && valorCampo != "") {
+            $(".monto_credito").val(valorCampo);
+            $(".monto_credito").trigger('change');
+        }
+        if (campo == 'monto_rechazado' && valorCampo != "") {
+            $(".monto_rechazado").val(valorCampo);
+            $(".monto_rechazado").trigger('change');
+        }
+        if (campo == 'monto_sin_solicitud' && valorCampo != "") {
+            $(".monto_sin_solicitud").val(valorCampo);
+            $(".monto_sin_solicitud").trigger('change');
+        }
+        if (campo == 'monto_con_solicitud' && valorCampo != "") {
+            $(".monto_con_solicitud").val(valorCampo);
+            $(".monto_con_solicitud").trigger('change');
+        }
     },
 })
