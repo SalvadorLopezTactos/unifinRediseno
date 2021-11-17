@@ -40,7 +40,7 @@
                         </td>
                         </td>
                         <td>
-                            <a href="{$url}" target="_blank">{$url}</a>
+                            <a href="{$url}" target="_blank" rel="nofollow noopener noreferrer">{$url}</a>
                         </td>
                     </tr>
                     {/if}

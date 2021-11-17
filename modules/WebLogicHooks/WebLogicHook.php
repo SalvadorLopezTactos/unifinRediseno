@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+include_once 'modules/WebLogicHooks/CreatePayload.php';
+
 use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 class WebLogicHook extends SugarBean implements RunnableSchedulerJob
@@ -89,7 +91,7 @@ class WebLogicHook extends SugarBean implements RunnableSchedulerJob
         $jobData = array(
             'url' => $this->url,
             'request_method' => $this->request_method,
-            'payload' => $this->formatRequestData($seed, $event, $arguments)
+            'payload' => (new CreatePayload($this))->getPayload($seed, $event, $arguments),
         );
 
         $job = new SchedulersJob();
@@ -121,7 +123,7 @@ class WebLogicHook extends SugarBean implements RunnableSchedulerJob
      */
     public function run($data)
     {
-        $data = unserialize($data);
+        $data = unserialize($data, ['allowed_classes' => false]);
         $payload = json_encode($data['payload']);
 
         $curlHandler = curl_init();
@@ -136,8 +138,8 @@ class WebLogicHook extends SugarBean implements RunnableSchedulerJob
             CURLOPT_VERBOSE         => false,
             CURLOPT_URL             => $data['url'],
             CURLOPT_HTTPHEADER      => array(
-                'Content-Type: application/json',                                                                                
-                'Content-Length: ' . strlen($payload)
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($payload),
             ),
             CURLOPT_POSTFIELDS      => $payload,
             CURLOPT_CUSTOMREQUEST   => $data['request_method'],
@@ -165,58 +167,5 @@ class WebLogicHook extends SugarBean implements RunnableSchedulerJob
         }
         remove_logic_hook($this->webhook_target_module, $this->trigger_event, $this->getActionArray());
         parent::mark_deleted($id);
-    }
-
-    private function formatRequestData(SugarBean $bean, $event, array $arguments)
-    {
-        global $current_user;
-
-        $data = array();
-        $sfh = new SugarFieldHandler();
-
-        $arguments['bean'] =  get_class($bean);
-
-        if (isset($bean->id)) {
-            $data['id'] = $bean->id;
-        }
-
-        if (!SugarACL::moduleSupportsACL($bean->webhook_target_module) || $bean->ACLAccess('detail')) {
-            $fieldList = $bean->field_defs;
-
-            $this->ACLFilterFieldList($fieldList, array(
-                'bean' => $bean
-            ));
-
-            $service = new RestService();
-            $service->user = $current_user;
-            foreach ($fieldList as $fieldName => $properties) {
-                $fieldType = !empty($properties['custom_type']) ? $properties['custom_type'] : $properties['type'];
-                $field = $sfh->getSugarField($fieldType);
-                if ('link' !== $fieldType && !empty($field) && (isset($bean->$fieldName)  || 'relate' === $fieldType)) {
-                    $field->apiFormatField($data, $bean, array(), $fieldName, $properties, array(), $service);
-                }
-            }
-        }
-
-        $arguments['data'] = $this->decodeHTML($data);
-        $arguments['dataChanges'] = $this->decodeHTML($arguments['dataChanges']);
-        $arguments['event'] = $event;
-
-        return $arguments;
-    }
-
-    private function decodeHTML($data)
-    {
-        $returnData = array();
-
-        $db = DBManagerFactory::getInstance();
-        foreach ($data as $key => $value) {
-            $returnData[$key] = $db->decodeHTML($value);
-            if (is_array($value)) {
-                $returnData[$key] = $this->decodeHTML($value);
-            }
-        }
-
-        return $returnData;
     }
 }

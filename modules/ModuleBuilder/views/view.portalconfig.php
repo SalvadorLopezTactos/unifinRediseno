@@ -99,6 +99,7 @@ class ViewPortalConfig extends SugarView
             'maxSearchQueryResult' => '5',
             'defaultUser' => '',
             'caseDeflection' => $isServe ? 'enabled' : 'disabled',
+            'allowCloseCase' => $isServe ? 'allow' : 'disallow',
             'contactInfo' => [
                 'contactPhone' => '',
                 'contactEmail' => '',

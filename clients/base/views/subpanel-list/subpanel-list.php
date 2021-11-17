@@ -11,6 +11,7 @@
  */
 $viewdefs['base']['view']['subpanel-list'] = array(
     'template' => 'flex-list',
+    'sticky_resizable_columns' => true,
     'favorite' => true,
     'rowactions' => array(
         'actions' => array(

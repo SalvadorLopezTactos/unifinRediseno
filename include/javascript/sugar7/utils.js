@@ -210,6 +210,68 @@
 
         app.utils = _.extend(app.utils, {
             /**
+             * Converts the Component data into view metadata
+             *
+             * @param {Object} comp The Component object data
+             * @return {Array} List of dashlet views from the app metadata
+             */
+            convertCompToDashletView: function(comp) {
+                var dashletConfigs = comp.view.dashletConfig;
+                dashletConfigs = _.isArray(dashletConfigs) ? dashletConfigs : [dashletConfigs];
+                return _.map(dashletConfigs, function(dashletConfig) {
+                    var metadata = {
+                        component: 'external-app-dashlet',
+                        config: {
+                            customConfig: true,
+                            src: comp.view.src,
+                            dashletConfig: comp.view.dashletConfig,
+                        },
+                        customDashletMeta: comp,
+                        description: comp.view.description,
+                        label: comp.view.name,
+                        dashletType: dashletConfig.type,
+                        type: 'external-app-dashlet'
+                    };
+                    return {
+                        description: comp.view.description,
+                        metadata: metadata,
+                        title: comp.view.name,
+                        type: 'external-app-dashlet'
+                    };
+                });
+            },
+            /**
+             * Gets a list of MFE custom dashlets available in this context
+             *
+             * @param {Object} context The context object data
+             * @return {Array} List of dashlet views
+             */
+            getMfeDashletViews: function(context) {
+                var isMultiLine = context && context.parent && context.parent.get('layout') === 'multi-line';
+                var parentModule = isMultiLine ? context.parent.get('module') : app.controller.context.get('module');
+                var parentView = isMultiLine ?
+                    'record' :
+                    app.controller.context.get('layout');
+                var dashletView = parentView === 'records' ?
+                    'list-dashlet' :
+                    'record-dashlet';
+                var dashletMeta = app.metadata.getLayout(parentModule, dashletView);
+                if (!dashletMeta) {
+                    return [];
+                }
+                return _(dashletMeta.components)
+                    .chain()
+                    .map(function(comp) {
+                        try {
+                            return app.utils.convertCompToDashletView(comp);
+                        } catch (err) {
+                            return [];
+                        }
+                    })
+                    .flatten()
+                    .value();
+            },
+            /**
              * If Forecasts is not setup, it will convert commit_stage into a spacer field and show no-data
              *
              * @param {Object} panels
@@ -924,6 +986,27 @@
             },
 
             /**
+             * Retrieves the labels for the fields that are searchable in the quicksearch.
+             *
+             * @param {string} moduleName The module name the fields belong to.
+             * @param {string[]} fields The list of searchable fields.
+             * @return {string[]} The list of labels.
+             */
+            getFieldLabels: function(moduleName, fields) {
+                var moduleMeta = app.metadata.getModule(moduleName);
+                var labels = [];
+
+                _.each(_.flatten(fields), function(fieldName) {
+                    var fieldMeta = moduleMeta.fields[fieldName];
+                    if (fieldMeta) {
+                        labels.push(app.lang.get(fieldMeta.vname, moduleName));
+                    }
+                });
+
+                return labels;
+            },
+
+            /**
              * Convert a raw file size into a human readable size
              *
              * @param {int} size
@@ -1271,6 +1354,103 @@
                     }
                 }
                 return {isValid: true, error: ''};
+            },
+
+            /**
+             * Create user SRN based on tenant
+             *
+             * @param {string} userId
+             * @return {string}
+             */
+            createUserSrn: function(userId) {
+                let srnParts = app.config.tenant
+                    .split(':')
+                    .slice(0, 5);
+                srnParts.splice(3, 1, '');  // delete region
+                srnParts.push('user', userId);
+                return srnParts.join(':');
+            },
+
+            /**
+             * Gets a stringKey value from an string_key input
+             * @param {string} str The underscore delimited input string
+             * @return {string} The camelCase string output
+             */
+            getUnderscoreToCamelCaseString: function(str) {
+                return str.replace(/_(\D)/g, function(a, b) {
+                    return b.toUpperCase();
+                });
+            },
+
+            /**
+             * Check if field is always readonly
+             * @param {Object} fieldDef field definition
+             * @param {Object} viewDef (optional) view defintion of the field
+             * @return {boolean} true if the field is readonly with no conditions
+             */
+            isFieldAlwaysReadOnly: function(fieldDef, viewDef) {
+                // readonly flag on the viewdef, if present, should always override the readonly flag
+                // on vardefs. If vardefs specify a readonly_formula, but viewdefs include a readonly
+                // flag with no readonly_formula, then the field should always be readonly.
+                if (_.isUndefined(viewDef) || _.isUndefined(viewDef.readonly)) {
+                    return app.utils.isTruthy(fieldDef.readonly) && _.isUndefined(fieldDef.readonly_formula);
+                } else {
+                    return app.utils.isTruthy(viewDef.readonly);
+                }
+            },
+
+            /**
+             * Updates the pendo visitor and account info object
+             * @param {Object} addCustomFieldToVisitor The custom metadata to add to visitor object
+             * @param {Object} addCustomFieldToAccount The custom metadata to add to account object
+             */
+            updatePendoMetadata: function(addCustomFieldToVisitor, addCustomFieldToAccount) {
+                var pendoObject = app.analytics.connectors.Pendo.getPendoMetadata();
+                var updatedVisitorObject = addCustomFieldToVisitor ?
+                    _.extend(pendoObject.visitor, addCustomFieldToVisitor) : pendoObject.visitor;
+                var updatedAccountObject = addCustomFieldToAccount ?
+                    _.extend(pendoObject.account, addCustomFieldToAccount) : pendoObject.account;
+
+                pendo.updateOptions({
+                    visitor: updatedVisitorObject,
+                    account: updatedAccountObject
+                });
+            },
+
+            /**
+             * Delete attachment from file field, then save the model with
+             * appropriate field cleared.
+             * @param {Field} field - field from which we remove the file
+             * @param {Object} data - data about the file to remove
+             * @param {boolean} shouldRender - should this field re-render?
+             */
+            deleteFileFromField: function(field, data, shouldRender) {
+                callbacks = {
+                    success: function() {
+                        field.model.set(data.field, '');
+                        field.model.save({}, {
+                            //Show alerts for this request
+                            showAlerts: {
+                                'process': true,
+                                'success': {
+                                    messages: app.lang.get('LBL_FILE_DELETED')
+                                }
+                            },
+                            fields: [data.field]
+                        });
+                        if (self.disposed) {
+                            return;
+                        }
+                        if (shouldRender) {
+                            field.render();
+                        }
+                    },
+                    error: function(data) {
+                        // refresh token if it has expired
+                        app.error.handleHttpError(data, {});
+                    }
+                };
+                app.api.file('delete', data, null, callbacks, {htmlJsonFormat: false});
             }
         });
     });

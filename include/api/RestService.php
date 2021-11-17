@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Doctrine\DBAL\Exception as DbException;
 use Sugarcrm\Sugarcrm\Logger\Factory as LoggerFactory;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\ServiceAccount\ServiceAccount;
@@ -55,7 +56,7 @@ class RestService extends ServiceBase
      * The maximum version accepted
      * @var string
      */
-    protected $max_version = '11.8';
+    protected $max_version = '11.12';
 
     /**
      * An array of api settings
@@ -456,6 +457,11 @@ class RestService extends ServiceBase
             $httpError = $exception->getHttpCode();
             $errorLabel = $exception->getMessage();
             $message = $exception->getDescription();
+        } elseif (is_a($exception, DbException::class)) {
+            global $app_strings;
+            $httpError = 500;
+            $errorLabel = 'db_error';
+            $message = $app_strings['ERR_DB_FAIL'];
         } else {
             $httpError = 500;
             $errorLabel = 'unknown_error';
@@ -574,7 +580,7 @@ class RestService extends ServiceBase
      *
      * @returns string The oauth token
      */
-    protected function grabToken()
+    public function grabToken()
     {
         // Bug 61887 - initial portal load dies with undefined variable error
         // Initialize the return var in case all conditionals fail
@@ -897,9 +903,9 @@ class RestService extends ServiceBase
                 foreach ($route['jsonParams'] as $fieldName) {
                     if (!empty($getVars[$fieldName])
                         && is_string($getVars[$fieldName])
-                        && isset($getVars[$fieldName]{0})
-                        && ($getVars[$fieldName]{0} == '{'
-                            || $getVars[$fieldName]{0} == '[')) {
+                        && isset($getVars[$fieldName][0])
+                        && ($getVars[$fieldName][0] == '{'
+                            || $getVars[$fieldName][0] == '[')) {
                         // This may be JSON data
                         $jsonData = @json_decode($getVars[$fieldName],true,32);
                         if (json_last_error() !== 0) {

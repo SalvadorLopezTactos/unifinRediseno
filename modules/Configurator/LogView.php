@@ -116,7 +116,7 @@ if (!empty ($_REQUEST['display'])) {
 		echo '<pre>';
 		while($line = fgets($fp)){
 
-            $line = filter_var($line, FILTER_SANITIZE_SPECIAL_CHARS);
+            $line = filter_var($line, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 			//preg_match('/[^\]]*\[([0-9]*)\] ([a-zA-Z]+) ([a-zA-Z0-9\.]+) - (.*)/', $line, $result);
 			preg_match('/[^\]]*\[([0-9]*)\]/', substr($line, 0, 80), $result);
 			ob_flush();

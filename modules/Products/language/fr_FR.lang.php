@@ -13,6 +13,8 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Tableau de bord de la liste de lignes de devis',
+    'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrement de lignes de devis',
+    'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Lignes de devis',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Campagne de la ligne de devis',
     'LBL_MODULE_NAME' => 'Lignes de devis',
@@ -61,6 +63,7 @@ $mod_strings = array(
     'LBL_WEIGHT' => 'Poids:',
     'LBL_DESCRIPTION' => 'Description :',
     'LBL_TYPE' => 'Type :',
+    'LBL_PRODUCT_TYPE' => 'Type de produit',
     'LBL_CATEGORY' => 'Catégorie :',
     'LBL_QUANTITY' => 'Quantité :',
     'LBL_STATUS' => 'Statut :',
@@ -110,7 +113,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Types de Produit',
     'LBL_ASSIGNED_TO_NAME' => 'Assigné à:',
     'LBL_ASSIGNED_USER_ID' => 'Assigné à (ID) ;',
-    'LBL_PRODUCT_TEMPLATE' => 'Ligne de devis',
+    'LBL_PRODUCT_TEMPLATE' => 'Produit',
     'LBL_PRODUCT_TEMPLATE_ID' => 'ID Modèle Produit:',
     'LBL_QUOTE_ID' => 'ID Devis',
     'LBL_CREATED_USER' => 'Créé par',
@@ -119,7 +122,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'Affaire (ID)',
     'LBL_OPPORTUNITY' => 'Affaire',
     'LBL_REVENUELINEITEM_ID' => 'Ligne de revenu (ID) :',
-    'LBL_REVENUELINEITEM' => 'Ligne de revenu', 
+    'LBL_REVENUELINEITEM' => 'Ligne de revenu',
     'LBL_EXPERT_ID' => 'Expert produit',
     'LBL_FORECAST' => 'Inclus dans Prévision',
     'LBL_CALCULATED_LINE_ITEM_AMOUNT' => 'Total de ligne de devis',
@@ -145,6 +148,8 @@ $mod_strings = array(
     'LBL_SALES_STAGE' => 'Phase de vente',
     'LBL_SALES_STATUS' => 'Statu des lignes de revenu',
     'LBL_PIPELINE_TOTAL_IS' => 'Total portefeuille',
+    'LBL_ADD_ON_TO' => 'Ajout à',
+    'LBL_ADD_ON_TO_ID' => 'Ajout à (ID)',
 
     'LBL_CONVERT_TO_QUOTE_ERROR' => 'Erreur :',
     'LBL_CONVERT_TO_QUOTE_ERROR_MESSAGE' => 'Une erreur est survenue lors de la conversion de cette ligne de devis en un devis',

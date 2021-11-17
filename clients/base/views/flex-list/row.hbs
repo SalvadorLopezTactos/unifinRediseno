@@ -12,7 +12,7 @@
 --}}
 <tr name="{{module}}_{{model.id}}" class="single">
     {{#each view.leftColumns}}
-        <td data-column="{{name}}">
+        <td data-column="{{name}}" class="sticky-column stick-left">
             {{field ../view model=../model template=../view.viewName}}
         </td>
     {{/each}}
@@ -22,7 +22,7 @@
         </td>
     {{/each}}
     {{#each view.rightColumns}}
-        <td data-column="{{name}}">
+        <td data-column="{{name}}" class="sticky-column stick-right">
             {{field ../view model=../model template=../view.viewName}}
         </td>
     {{/each}}

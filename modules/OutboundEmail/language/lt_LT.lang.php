@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Siunčiamo el. pašto paskyros',
     'LBL_MODULE_NAME_SINGULAR' => 'Siunčiamo el. pašto paskyra',
+    'LBL_STATUS' => 'Būsena',
     'LBL_MAIL_SENDTYPE' => 'Pašto siuntimo programa',
     'LBL_MAIL_SMTPSERVER' => 'Serveris',
     'LBL_MAIL_SMTPPORT' => 'Prievadas',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Tai yra sistemos paskyra.',
     'LBL_EMAIL_ADDRESS_ID' => 'El. pašto adreso ID',
     'LBL_TYPE' => 'Tipas',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Įgaliotas el. pašto adresas',
+    'LBL_FROM_EMAIL_ADDRESS' => 'Nuo: el. pašto adresas',
     'LBL_REPLY_TO_NAME' => 'Kam atsakyti: vardas',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Kam atsakyti: el. pašto adresai',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Kam atsakyti: el. pašto adreso ID',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Kam atsakyti: el. pašto adresas',
     'LBL_PRIMARY_TEAM' => 'Pagrindinė komanda',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ el. pašto nustatymai',
 );

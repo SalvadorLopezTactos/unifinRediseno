@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Prozess-E-Mail-Vorlagen',
     'LBL_MODULE_NAME_SINGULAR' => 'Prozess-E-Mail-Vorlage',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Prozess-E-Mail-Vorlagen',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Prozess-E-Mail-Vorlagenbericht-Dashboard',
     'LNK_LIST' => 'Prozess-E-Mail-Vorlagen anzeigen',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Prozess-E-Mail-Vorlage erstellen',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Prozess-E-Mail-Vorlagen importieren',

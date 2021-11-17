@@ -171,7 +171,18 @@ class OAuth2Api extends SugarApi
 
         // Adding the setcookie() here instead of calling $api->setHeader() because
         // manually adding a cookie header will break 3rd party apps that use cookies
-        setcookie(RestService::DOWNLOAD_COOKIE.'_'.$platform, $authData['download_token'], time()+$authData['refresh_expires_in'], ini_get('session.cookie_path'), ini_get('session.cookie_domain'), ini_get('session.cookie_secure'), true);
+        setcookie(
+            RestService::DOWNLOAD_COOKIE.'_'.$platform,
+            $authData['download_token'],
+            [
+                'expires' => time() + $authData['refresh_expires_in'],
+                'path' => ini_get('session.cookie_path'),
+                'domain' => ini_get('session.cookie_domain'),
+                'secure' => ini_get('session.cookie_secure'),
+                'httponly' => ini_get('session.cookie_httponly'),
+                'samesite' => ini_get('session.cookie_samesite'),
+            ]
+        );
 
         return $authData;
     }
@@ -189,9 +200,22 @@ class OAuth2Api extends SugarApi
             // No security checks needed here to make sure the refresh token is theirs,
             // because if someone else has your refresh token logging out is the nicest possible thing they could do.
             $oauth2Server->unsetRefreshToken($args['refresh_token']);
+        } else {
+            $oauth2Server->unsetAccessToken($api->grabToken());
         }
 
-        setcookie(RestService::DOWNLOAD_COOKIE.'_'.$api->platform, false, -1, ini_get('session.cookie_path'), ini_get('session.cookie_domain'), ini_get('session.cookie_secure'), true);
+        setcookie(
+            RestService::DOWNLOAD_COOKIE.'_'.$api->platform,
+            false,
+            [
+                'expires' => -1,
+                'path' => ini_get('session.cookie_path'),
+                'domain' => ini_get('session.cookie_domain'),
+                'secure' => ini_get('session.cookie_secure'),
+                'httponly' => ini_get('session.cookie_httponly'),
+                'samesite' => ini_get('session.cookie_samesite'),
+            ],
+        );
 
         SugarApplication::endSession();
 
@@ -364,11 +388,14 @@ class OAuth2Api extends SugarApi
         setcookie(
             $sessionName,
             $sessionId,
-            $expire,
-            ini_get('session.cookie_path'),
-            ini_get('session.cookie_domain'),
-            ini_get('session.cookie_secure'),
-            ini_get('session.cookie_httponly')
+            [
+                'expires' => $expire,
+                'path' => ini_get('session.cookie_path'),
+                'domain' => ini_get('session.cookie_domain'),
+                'secure' => ini_get('session.cookie_secure'),
+                'httponly' => ini_get('session.cookie_httponly'),
+                'samesite' => ini_get('session.cookie_samesite'),
+            ]
         );
 
         return $sessionName;
@@ -384,11 +411,14 @@ class OAuth2Api extends SugarApi
         setcookie(
             session_name(),
             '',
-            time() - 3600,
-            ini_get('session.cookie_path'),
-            ini_get('session.cookie_domain'),
-            ini_get('session.cookie_secure'),
-            ini_get('session.cookie_httponly')
+            [
+                'expires' => time() - 3600,
+                'path' => ini_get('session.cookie_path'),
+                'domain' => ini_get('session.cookie_domain'),
+                'secure' => ini_get('session.cookie_secure'),
+                'httponly' => ini_get('session.cookie_httponly'),
+                'samesite' => ini_get('session.cookie_samesite'),
+            ]
         );
     }
 }

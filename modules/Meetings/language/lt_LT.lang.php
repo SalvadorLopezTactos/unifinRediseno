@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Susitikimų sąrašo ataskaitų sritis',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Susitikimų duomenų ataskaitų sritis',
+    'LBL_LEAD_GUESTS' => 'Potencialus svečias',
+    'LBL_CONTACT_GUESTS' => 'Susisiekti su svečiais',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ susitikimai',
 
 	'ERR_DELETE_RECORD' => 'Įrašo numeris turi būti nurodytas norint ištrinti susitikimą.',
 	'LBL_ACCEPT_THIS'=>'Patvirtinti?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Kryptis',
 	'LBL_LIST_DUE_DATE'=>'Terminas',
 	'LBL_LIST_FORM_TITLE' => 'Susitikimų sąrašas',
-	'LBL_LIST_MY_MEETINGS' => 'Mano susitikimai',
+    'LBL_LIST_MY_MEETINGS' => 'Mano susitikimai',
     'LBL_MY_SCHEDULED_MEETINGS' => 'My Scheduled Meetings',
+    'LBL_GUEST_MEETINGS' => 'Mano kaip svečio susitikimai',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Suplanuoti susitikimai kaip svečio',
 	'LBL_LIST_RELATED_TO' => 'Susijęs su',
 	'LBL_LIST_STATUS'=>'Statusas',
 	'LBL_LIST_SUBJECT' => 'Tema',

@@ -1536,7 +1536,7 @@ function loadSugarChart(chartId, jsonFilename, css, chartConfig, chartParams, ca
                             renderCallback: function() {
                                 var uri = oCanvas.toDataURL((imageExt === 'jpg' ? 'image/jpeg' : 'image/png'));
                                 var ctx = oCanvas.getContext('2d');
-                                $.post(saveToUrl, {imageStr: uri, filename: filename});
+                                $.post(saveToUrl, {'imageStr': uri, 'chart_id': id});
                                 ctx.clearRect(0, 0, 1440, 960);
                                 // fix chrome crash caused by large image
                                 d3sugar.select(d3ChartId + ' svg').remove();

@@ -64,7 +64,7 @@ class Tag extends Basic
         }
 
         // Get the lowercase tag name, as we will need this no matter what
-        $nameLower = strtolower($this->name);
+        $nameLower = sugarStrToLower($this->name);
 
         // Verify uniqueness of the tag if needed
         $this->verifyUniqueness($nameLower);

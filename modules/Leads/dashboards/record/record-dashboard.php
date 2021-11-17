@@ -11,39 +11,56 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-return array(
-    'metadata' =>
-    array(
-        'components' =>
-        array(
-            array(
-                'rows' =>
-                array(
-                    array(
-                        array(
-                            'view' =>
-                            array(
+return [
+    'metadata' => [
+        'components' => [
+            [
+                'rows' => [
+                    [
+                        [
+                            'view' => [
+                                'module' => 'Leads',
+                                'type' => 'activity-timeline',
+                                'label' => 'LBL_ACTIVITY_TIMELINE_DASHLET',
+                            ],
+                            'context' => [
+                                'module' => 'Leads',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
                                 'type' => 'planned-activities',
                                 'label' => 'LBL_PLANNED_ACTIVITIES_DASHLET',
-                            ),
+                            ],
                             'width' => 12,
-                        ),
-                    ),
-                    array(
-                        array(
-                            'view' => array(
-                                'type' => 'history',
-                                'label' => 'LBL_HISTORY_DASHLET',
-                            ),
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
+                                'type' => 'commentlog-dashlet',
+                                'label' => 'LBL_DASHLET_COMMENTLOG_NAME',
+                            ],
                             'width' => 12,
-                        ),
-                    ),
-                ),
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
+                                'name' => 'active-tasks',
+                                'label' => 'LBL_ACTIVE_TASKS_DASHLET',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                ],
                 'width' => 12,
-            ),
-        ),
-    ),
+            ],
+        ],
+    ],
     'name' => 'LBL_LEADS_RECORD_DASHBOARD',
     'id' => '5d670ec4-7b52-11e9-b9e0-f218983a1c3e',
-);
-
+];

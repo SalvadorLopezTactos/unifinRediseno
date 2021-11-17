@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_TARGETS_LIST_DASHBOARD' => 'Paneli i listës së objektivave',
   'LBL_TARGETS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të objektivave',
+  'LBL_PROSPECTS_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te synimet',
 
   'LBL_MODULE_NAME' => 'Synimet',
   'LBL_MODULE_NAME_SINGULAR' => 'Synim',

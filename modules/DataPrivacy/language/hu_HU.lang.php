@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Törlésre jelölt mezők',
     'LBL_NO_RECORDS_MARKED' => 'Nincs egyetlen törlésre jelölt mező vagy rekord sem.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Adatvédelmi rekord műszerfal',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Adatvédelem figyelemfelhívás',
 
     // list view
     'LBL_HELP_RECORDS' => 'Az Adatvédelem modul nyomon követi az adatvédelmi tevékenységeket, beleértve a hozzájárulási és tárgyra vonatkozó kéréseket a szervezet adatvédelmi eljárásai támogatásához. A hozzájárulás követéséhez vagy adatvédelmi kérés nyomán valamilyen intézkedés foganatosításához hozzon létre adatvédelmi rekordokat, amelyek valamilyen egyéni rekordhoz (pl. kapcsolati adatokhoz) kapcsolódnak.',

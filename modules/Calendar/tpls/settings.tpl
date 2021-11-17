@@ -29,19 +29,19 @@ $(function() {
 </script>
 
 <div id="settings_dialog" style="width: 450px; display: none;">
-	<div class="hd">{$MOD.LBL_SETTINGS_TITLE}</div>
+	<div class="hd">{$MOD.LBL_SETTINGS_TITLE|escape:'html':'UTF-8'}</div>
 	<div class="bd">
 	<form name="settings" id="form_settings" method="POST" action="index.php?module=Calendar&action=SaveSettings">
 {sugar_csrf_form_token}
-		<input type="hidden" name="view" value="{$view}">
-		<input type="hidden" name="day" value="{$day}">
-		<input type="hidden" name="month" value="{$month}">
-		<input type="hidden" name="year" value="{$year}">
+		<input type="hidden" name="view" value="{$view|escape:'html':'UTF-8'}">
+		<input type="hidden" name="day" value="{$day|escape:'html':'UTF-8'}">
+		<input type="hidden" name="month" value="{$month|escape:'html':'UTF-8'}">
+		<input type="hidden" name="year" value="{$year|escape:'html':'UTF-8'}">
 		
 		<table class='edit view tabForm'>
 				<tr>
 					<td scope="row" valign="top" width="55%">
-						{$MOD.LBL_SETTINGS_DISPLAY_TIMESLOTS}
+						{$MOD.LBL_SETTINGS_DISPLAY_TIMESLOTS|escape:'html':'UTF-8'}
 					</td>
 					<td width="45%">	
 						<input type="hidden" name="display_timeslots" value="">
@@ -68,7 +68,7 @@ $(function() {
 				</tr>
 				<tr class="time_range_options_row">
 					<td scope="row" valign="top">
-						{$MOD.LBL_SETTINGS_TIME_ENDS}
+						{$MOD.LBL_SETTINGS_TIME_ENDS|escape:'html':'UTF-8'}
 					</td>
 					<td>
 						<div id="d_end_time_section">
@@ -86,23 +86,23 @@ $(function() {
 				</tr>
 				<tr>
 					<td scope="row" valign="top">
-						{$MOD.LBL_SETTINGS_CALLS_SHOW}
+						{$MOD.LBL_SETTINGS_CALLS_SHOW|escape:'html':'UTF-8'}
 					</td>
 					<td>	
 						<select size="1" name="show_calls" tabindex="102">
-							<option value='' {if !$show_calls}selected{/if}>{$MOD.LBL_NO}</option>
-							<option value='true' {if $show_calls}selected{/if}>{$MOD.LBL_YES}</option>								
+							<option value='' {if !$show_calls}selected{/if}>{$MOD.LBL_NO|escape:'html':'UTF-8'}</option>
+							<option value='true' {if $show_calls}selected{/if}>{$MOD.LBL_YES|escape:'html':'UTF-8'}</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<td scope="row" valign="top">
-						{$MOD.LBL_SETTINGS_TASKS_SHOW}
+						{$MOD.LBL_SETTINGS_TASKS_SHOW|escape:'html':'UTF-8'}
 					</td>
 					<td>	
 						<select size="1" name="show_tasks" tabindex="102">
-							<option value='' {if !$show_tasks}selected{/if}>{$MOD.LBL_NO}</option>
-							<option value='true' {if $show_tasks}selected{/if}>{$MOD.LBL_YES}</option>								
+							<option value='' {if !$show_tasks}selected{/if}>{$MOD.LBL_NO|escape:'html':'UTF-8'}</option>
+							<option value='true' {if $show_tasks}selected{/if}>{$MOD.LBL_YES|escape:'html':'UTF-8'}</option>
 						</select>
 					</td>
 				</tr>
@@ -111,8 +111,8 @@ $(function() {
 	
 	
 	<div style="text-align: right;">
-		<button id="btn-save-settings" class="button" type="button">{$MOD.LBL_APPLY_BUTTON}</button>&nbsp;
-		<button id="btn-cancel-settings" class="button" type="button">{$MOD.LBL_CANCEL_BUTTON}</button>&nbsp;
+		<button id="btn-save-settings" class="button" type="button">{$MOD.LBL_APPLY_BUTTON|escape:'html':'UTF-8'}</button>&nbsp;
+		<button id="btn-cancel-settings" class="button" type="button">{$MOD.LBL_CANCEL_BUTTON|escape:'html':'UTF-8'}</button>&nbsp;
 	</div>
 	</div>
 </div>

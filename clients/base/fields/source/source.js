@@ -37,6 +37,9 @@
         var labelValue = this._getValidLabelValue(this.module, subject._type);
 
         if (labelValue) {
+            if (subject.label) {
+                labelValue += ' ' + subject.label;
+            }
             return labelValue;
         }
 

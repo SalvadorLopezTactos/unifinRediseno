@@ -18,18 +18,31 @@ class M2MRelationship extends SugarRelationship
 {
     var $type = "many-to-many";
 
-    public function __construct($def)
+    /**#@+
+     * @var array|false
+     */
+    protected $lhsLinkDef;
+    protected $rhsLinkDef;
+    /**#@-*/
+
+    public function __construct(array $def)
     {
         $this->def = $def;
         $this->name = $def['name'];
 
         $lhsModule = $def['lhs_module'];
         $this->lhsLinkDef = $this->getLinkedDefForModuleByRelationship($lhsModule);
-        $this->lhsLink = $this->lhsLinkDef['name'];
+
+        if (isset($this->lhsLinkDef['name'])) {
+            $this->lhsLink = $this->lhsLinkDef['name'];
+        }
 
         $rhsModule = $def['rhs_module'];
         $this->rhsLinkDef = $this->getLinkedDefForModuleByRelationship($rhsModule);
-        $this->rhsLink = $this->rhsLinkDef['name'];
+
+        if (isset($this->rhsLinkDef['name'])) {
+            $this->rhsLink = $this->rhsLinkDef['name'];
+        }
 
         $this->self_referencing = $lhsModule == $rhsModule;
     }
@@ -623,7 +636,6 @@ class M2MRelationship extends SugarRelationship
 
         $startingKey = $linkIsLHS ? $this->def['lhs_key'] : $this->def['rhs_key'];
         // Adding a check for badly defined relationships for self referencing relationship
-        // $this->lhsLinkDef['id_name'] & $this->rhsLinkDef['id_name'] would contain accurate join key in this case
         if ($self_join && !empty($this->lhsLinkDef['id_name']) && $this->lhsLinkDef['id_name'] != $this->def['join_key_lhs']) {
             $startingJoinKey = $linkIsLHS ? $this->lhsLinkDef['id_name'] : $this->rhsLinkDef['id_name'];
         }
@@ -633,7 +645,6 @@ class M2MRelationship extends SugarRelationship
         $joinTable = $this->getRelationshipTable();
         $joinTableWithAlias = $joinTable;
         // Adding a check for badly defined relationships for self referencing relationship
-        // $this->lhsLinkDef['id_name'] & $this->rhsLinkDef['id_name'] would contain accurate join key in this case
         if ($self_join && !empty($this->lhsLinkDef['id_name']) && $this->lhsLinkDef['id_name'] != $this->def['join_key_lhs']) {
             $joinKey = $linkIsLHS ? $this->rhsLinkDef['id_name'] : $this->lhsLinkDef['id_name'];
         }

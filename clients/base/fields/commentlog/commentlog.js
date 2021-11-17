@@ -11,9 +11,11 @@
 /**
  * @class View.Fields.Base.CommentLogField
  * @alias SUGAR.App.view.fields.BaseCommentLogField
- * @extends View.Fields.Base.BaseField
+ * @extends View.Fields.Base.TextareaField
  */
 ({
+    extendsFrom: 'TextareaField',
+
     fieldTag: 'textarea',
 
     plugins: ['Taggable'],
@@ -138,11 +140,11 @@
                 }
 
                 var entry = this._escapeValue(commentModel.get('entry'));
-                var entryShort = this._getShortComment(entry);
+                var entryShort = this.getShortComment(entry);
                 var showShort = entry !== entryShort;
 
-                entry = this._insertHtmlLinks(entry);
-                entryShort = this._insertHtmlLinks(entryShort);
+                entry = this.insertHtmlLinks(entry);
+                entryShort = this.insertHtmlLinks(entryShort);
 
                 entry = this.formatTags(entry);
                 entryShort = this.formatTags(entryShort);
@@ -183,27 +185,6 @@
     },
 
     /**
-     * Truncate the comment log entry so it is shorter than the max_display_chars
-     * Only truncate on full words to prevent ellipsis in the middle of words
-     * @param {string} comment The comment log entry to truncate
-     * @return {string} the shortened version of an entry if it was originally longer than max_display_chars
-     * @private
-     */
-    _getShortComment: function(comment) {
-        if (comment.length > this._settings.max_display_chars) {
-
-            var cut = comment.substring(0, this._settings.max_display_chars);
-            // let's cut at a full word by checking we are at a whitespace char
-            while (!(/\s/.test(cut[cut.length - 1])) && cut.length > 0) {
-                cut = cut.substring(0, cut.length - 1);
-            }
-            comment = cut;
-        }
-
-        return comment;
-    },
-
-    /**
      * Escapes any dangerous values from the string
      *
      * @param {string} comment The comment entry
@@ -212,29 +193,6 @@
      */
     _escapeValue: function(comment) {
         return Handlebars.Utils.escapeExpression(comment);
-    },
-
-    /**
-     * Replaces any text urls with html links
-     *
-     * @param {string} comment The comment entry
-     * @return {string} The entry with html for any links
-     * @private
-     */
-    _insertHtmlLinks: function(string) {
-        // http://, https://, ftp://
-        var urlPattern = /\b(?:https?|ftp):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim;
-
-        // www. sans http:// or https://
-        var pseudoUrlPattern = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
-
-        // Email addresses
-        var emailAddressPattern = /[\w.]+@[a-zA-Z_-]+?(?:\.[a-zA-Z]{2,6})+/gim;
-
-        return string
-            .replace(urlPattern, '<a href="$&" target="_blank" rel="noopener">$&</a>')
-            .replace(pseudoUrlPattern, '$1<a href="http://$2" target="_blank" rel="noopener">$2</a>')
-            .replace(emailAddressPattern, '<a href="mailto:$&">$&</a>');
     },
 
     /**

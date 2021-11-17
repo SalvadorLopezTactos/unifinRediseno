@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Alerta: As modificat la configuración de importació automatica amb el posible resultat de perdua de informació.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Alerta: L&#39;importació automàtica esta activa quan esta actiu la creació automàtica de casos.',
 	'LBL_EDIT_LAYOUT' => 'Editar diseny' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'Adreça de correu electrònic',
+    'LBL_EMAIL_PROVIDER' => 'Proveïdor de correu electrònic',
+    'LBL_AUTH_STATUS' => 'Estat d&#39;autorització',
 );
-?>

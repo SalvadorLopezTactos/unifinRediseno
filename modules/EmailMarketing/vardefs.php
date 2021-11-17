@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$dictionary['EmailMarketing'] = array('table' => 'email_marketing'
+$dictionary['EmailMarketing'] = array('table' => 'email_marketing', 'archive' => false
                                ,'fields' => array (
  	'id' =>
   	array (

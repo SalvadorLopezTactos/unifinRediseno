@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'Parola introdusa nu a îndeplinit cerinţele parolei. Vă rugăm să încercaţi din nou.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Informaţii utilizator nu au fost găsite',
     'ERR_USER_NAME_EXISTS'              => 'Numele de utilizator {0} există deja. Numele de utilizator duplicate nu sunt permise. Modificaţi numele de utilizator pentru a fi unic.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => 'Licența „Sugar Hint” trebuie să fie salvată cu un tip de licență suplimentar compatibil',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Acest utilizator este blocat din aplicatia Sugar şi nu se poate autentifica folosind  parola lui / ei existent.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Utilizatorul cu drepturi exclusiv de autor extern nu are permisiunea de a se autentifica folosind acreditări Sugar',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Adresa de email destinatar',
 	'ERR_SERVER_STATUS'					=> 'Server-ul dvs. de stare',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Sistemul este în imposibilitatea de a trimite un e-mail pentru utilizator. Vă rugăm să verificaţi Outgoing Mail Configuration în Setări e-mail.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Utilizatorii noi trebuie creați în Setări SugarCloud <a href="{0}" target="_blank"></a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Adresă Email',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Previziuni',
     'LBL_WORKSHEETS'                    => 'Foi de lucru',
 	'LBL_CALENDARS'                     => 'Calendare',
+    'LBL_SHIFTS'                        => 'Ture',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Excepții tură',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Vei primi o notificare prin e-mail atunci când o înregistrare este alocat pentru tine.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'Mesaj e-mail în sarcină',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Primește o notificare printr-un mesaj e-mail atunci când cineva te menționează într-o intrare de jurnal de comentarii.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'Mesaj e-mail cu menționarea',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Selectați modul în care sunt afișate denumirile câmpurilor în vizualizările înregistrărilor. Alegeți „Lângă valoarea câmpului” pentru o vizualizare mai compactă a înregistrării.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Aranjarea denumirii câmpului',
     'LBL_ABOVE_FIELD_VALUE'             => 'Deasupra valorii câmpului',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Tip de licență',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Setaţi implicit pentru memento-uri pentru apeluri şi întâlniri.',
 	'LBL_REMINDER'						=> 'Memento',
 	'LBL_REMINDER_POPUP' => 'Popup',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Aceasta sesiune sa încheiat, deoarece o altă sesiune a fost început sub acelaşi nume de utilizator.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Selectaţi modulele care conţine înregistrările de realocare de la un anumit utilizator la un alt utilizator.',
-	'LBL_REASS_DESC_PART1'				=> 'Selectaţi modulele care conţine înregistrările de realocare de la un anumit utilizator la un alt utilizator.<br /><br />Faceţi clic pe Următorul pentru a vizualiza numărul de înregistrări care vor fi actualizate în fiecare modulul selectat. Faceţi clic pe Revocare pentru a ieşi din pagina fără nici o mutare de înregistrări.',
+    'LBL_REASS_DESC_PART1'              => 'Selectaţi modulele care conţine înregistrările de realocare de la un anumit utilizator la un alt utilizator.<br /><br />Faceţi clic pe Următorul pentru a vizualiza numărul de înregistrări care vor fi actualizate în fiecare modulul selectat. Faceţi clic pe Revocare pentru a ieşi din pagina fără nici o mutare de înregistrări.',
         'LBL_REASS_DESC_PART2'=>                    'Selecta care module în raport cu care să ruleze fluxurilor de lucru, trimite notificări de atribuire, şi nu de urmărire de audit în timpul mutării. Faceţi clic pe Următorul pentru a continua şi realocaţi înregistrări. Faceţi clic pe Restart pentru a reîncepe.',
 	'LBL_REASS_STEP2_TITLE'				=> 'Realocarea Echipei',
 	'LBL_REASS_STEP2_DESC'				=> 'Echipele enumerate mai jos au fost disponibile în echipa de la utilizator, dar nu în a echipei utilizatorului. Toate înregistrările în Din echipa utilizatorului nu vor fi vizibile în echipa de Utilizator excepţia cazului în care valorile echipei sunt mapate.',
@@ -624,7 +628,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Profil utilizator',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Accesați Setări SugarCloud <a href="%s" target="_blank"></a> pentru a face modificări în câmpurile numai în citire.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Vă rugăm să luați legătura cu administratorul site-ului web Sugar dacă doriți să modificați câmpurile disponibile numai pentru citire.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

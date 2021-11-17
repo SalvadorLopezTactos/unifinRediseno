@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Kļūda, izgūstot detalizētas atskaites datus par šo darbību. Lai saņemtu palīdzību, sazinieties ar atskaites īpašnieku.',
     'LBL_CHART_NO_DRILLTHRU' => 'Detalizācija nav pieejama',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Atskaišu fokusa panelis',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'Moduļa saraksta skatījuma režīmā tiek parādītas visas atskaites, kas atbilst pašreizējās meklēšanas kritērijiem un kurām lietotāji var piekļūt. Ir iespējams apskatīt pamatinformāciju par katru atskaiti saraksta skatījuma režīma lauku kolonnās un priekšskatījumā. Varat iestatīt birkas atskaitēm un izveidot filtrus. Uzklikšķiniet uz atskaites nosaukuma, lai apskatītu atskaiti, un darbību izvēlnē atlasiet "Rediģēt atskaiti", lai pārveidotu atskaiti.',

@@ -23,7 +23,8 @@
      */
     format: function(value) {
         return value ?
-            value.replace(/(src=")(?!http:\/\/|https:\/\/)(.*?)"/g, '$1' + app.config.siteUrl + '/$2"') :
+            value.replace(/(src=")(?!http:\/\/|https:\/\/)(.*?)"/g, '$1' + app.config.siteUrl + '/$2"')
+                .replace(/([\?|&amp;])platform=[^&"]+/g, '$1' + 'platform=portal') :
             value;
     }
 })

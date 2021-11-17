@@ -47,7 +47,7 @@ class PMSERoundRobin extends PMSEScriptTask
                 $flowAction = 'CREATE';
                 break;
         }
-        
+
         $bpmnElement = $this->retrieveDefinitionData($flowData['bpmn_id']);
         $act_assign_team = $bpmnElement['act_assign_team'];
 
@@ -56,7 +56,7 @@ class PMSERoundRobin extends PMSEScriptTask
         $act_assignment_method = $bpmnElement['act_assignment_method'];
         if (isset($bean->team_id) && isset($teamBean->id) && ($teamBean->id == $act_assign_team)) {
             if (strtolower($act_assignment_method) == 'balanced') {
-                $nextUser = $this->userAssignmentHandler->getNextUserUsingRoundRobin($bpmnElement['id']);
+                $nextUser = $this->userAssignmentHandler->getNextAvailableUser($bpmnElement, $bean, $flowData);
                 if (isset($bpmnElement['act_update_record_owner']) && $bpmnElement['act_update_record_owner'] == 1) {
                     $historyData = $this->retrieveHistoryData($flowData['cas_sugar_module']);
                     $historyData->savePreData('assigned_user_id', $bean->assigned_user_id);
@@ -94,6 +94,6 @@ class PMSERoundRobin extends PMSEScriptTask
             $this->caseFlowHandler->saveFormAction($params);
         }
         return $this->prepareResponse($flowData, 'ROUTE', $flowAction);
-        
+
     }
 }

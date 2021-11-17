@@ -86,13 +86,17 @@ $viewdefs['Documents']['DetailView'] = array(
         array (
 	      'name' => 'team_name',
           'label' => 'LBL_TEAM',
+          'customCode' => '{$fields.team_name.value|escape}',
 	    ),
         ),
       ),
       'LBL_REVISIONS_PANEL' => 
       array (
         array (
-          0 => 'last_rev_created_name',
+          0 => array(
+              'name' => 'last_rev_created_name',
+              'customCode' => '{$fields.last_rev_created_name.value|escape:"html":"UTF-8"}',
+          ),
           1 => array(
               'name' => 'last_rev_create_date',
               'type' => 'date'

@@ -15,7 +15,6 @@ namespace Sugarcrm\IdentityProvider\Authentication\Provider;
 use Sugarcrm\IdentityProvider\Authentication\Exception\ConfigurationException;
 use Sugarcrm\IdentityProvider\Authentication\Exception\RuntimeException;
 use Sugarcrm\IdentityProvider\Authentication\User;
-use Sugarcrm\IdentityProvider\Authentication\UserProvider\LdapUserProvider;
 use Sugarcrm\IdentityProvider\Authentication\UserMapping\MappingInterface;
 
 use Symfony\Component\Ldap\Entry;

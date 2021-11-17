@@ -259,6 +259,7 @@ MultipleItemField.prototype._createItemContainer = function (settings) {
 	    		that.scrollTo();
 	    		if(!that._panel.isOpen()) {
 	    			that.openPanel();
+                    that._panelSemaphore = true;
 	    		}
 	    	}
 		};

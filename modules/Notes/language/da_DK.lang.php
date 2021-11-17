@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Noteliste-dashboard',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Betjeningspanel for noteoptegnelser',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Noter',
 
+    'LBL_RELATED_CONTACT' => 'Relaterede kontakt',
     'ERR_DELETE_RECORD' => 'Du skal angive et postnummer for at slette virksomheden.',
     'LBL_ACCOUNT_ID' => 'Virksomheds-id:',
     'LBL_CASE_ID' => 'Sags-id:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'Kontakt-id:',
     'LBL_CONTACT_NAME' => 'Kontakt:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Noter',
+    'LBL_ATTACHMENTS' => 'Vedhæftede filer',
+    'LBL_ATTACHMENT_FLAG' => 'er vedhæftet',
     'LBL_DESCRIPTION' => 'Note',
     'LBL_EMAIL_ADDRESS' => 'E-mail-adresse:',
     'LBL_EMAIL_ATTACHMENT' => 'Vedhæftet fil til e-mail',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Noter & vedhæftede filer',
     'LBL_NOTE' => 'Note:',
     'LBL_OPPORTUNITY_ID' => 'Salgsmuligheds-id:',
+    'LBL_NOTE_PARENT_ID' => 'Overordnet id for note:',
     'LBL_PARENT_ID' => 'Overordnet id:',
     'LBL_PARENT_TYPE' => 'Overordnet type',
     'LBL_EMAIL_TYPE' => 'E-mailtype',

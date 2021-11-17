@@ -50,11 +50,14 @@ class ServiceDictionary {
         $dictFile = $this->cacheDir.'ServiceDictionary.'.$apiType.'.php';
         if ( ! file_exists($dictFile) || inDeveloperMode() ) {
             // No stored service dictionary, I need to build them
-            $this->buildAllDictionaries();
+            $apiDictionary = $this->buildAllDictionaries();
+        } else {
+            include $dictFile;
+            if (!isset($apiDictionary[$apiType])) {
+                $apiDictionary = $this->buildAllDictionaries();
+            }
         }
 
-        require($dictFile);
-        
         return $apiDictionary[$apiType];
     }
 
@@ -69,7 +72,7 @@ class ServiceDictionary {
             sugar_mkdir($this->cacheDir,null,true);
         }
 
-        sugar_file_put_contents($this->cacheDir.'ServiceDictionary.'.$apiType.'.php','<'."?php\n\$apiDictionary['".$apiType."'] = ".var_export($storageData,true).";\n");
+        sugar_file_put_contents_atomic($this->cacheDir.'ServiceDictionary.'.$apiType.'.php', '<'."?php\n\$apiDictionary['".$apiType."'] = ".var_export($storageData, true).";\n");
         
     }
 
@@ -77,6 +80,7 @@ class ServiceDictionary {
      * Build all dictionaries for the known service types.
      */
     public function buildAllDictionaries() {
+        $apiDict = [];
         $apis = $this->loadAllDictionaryClasses();
 
         foreach ( $apis as $apiType => $api ) {
@@ -132,8 +136,12 @@ class ServiceDictionary {
         }
 
         foreach ( $apis as $apiType => $api ) {
-            $this->saveDictionaryToStorage($apiType,$api->getRegisteredEndpoints());
+            $endpoints = $api->getRegisteredEndpoints();
+            $this->saveDictionaryToStorage($apiType, $endpoints);
+            $apiDict[$apiType] = $endpoints;
         }
+
+        return $apiDict;
     }
 
     /**

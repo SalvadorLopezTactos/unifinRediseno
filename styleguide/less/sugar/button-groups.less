@@ -79,9 +79,7 @@
 
 // On hover/focus/active, bring the proper btn to front
 .btn-group > .btn:hover,
-.btn-group > .btn:focus,
-.btn-group > .btn:active,
-.btn-group > .btn.active {
+.btn-group > .btn:focus {
   z-index: 2;
 }
 
@@ -226,15 +224,11 @@
     border-bottom-right-radius: @baseBorderRadius;
   }
   // On hover/focus/active, bring the proper btn to front
-  .btn:hover,
   .btn:active,
   .btn.active {
-    z-index: 0;
-  }
-
-  .btn:focus {
     z-index: 1;
   }
+
   // On active and open, don't show outline
   .dropdown-toggle:active,
   &.open {

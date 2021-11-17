@@ -145,7 +145,10 @@ $mod_strings = array (
   'LBL_EMAIL_ADDRESS'=>'E-Posta Adresi',
   'LBL_CONTACTS_SYNC' => 'Kontaklar',
     'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
-        'The employee can be created only in <a href="{0}" target="_blank">Cloud Settings</a>',
+        'Çalışan sadece <a href="{0}" target="_blank">SugarCloud Ayarları</a>&#39;da oluşturulabilir',
+
+    'LBL_COOKIE_CONSENT' => 'Çerez Onayı',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Alınan Çerez Onayı',
 );
 
 

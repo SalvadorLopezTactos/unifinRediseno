@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => '客户反馈列表仪表板',
     'LBL_CASES_RECORD_DASHBOARD' => '客户反馈记录仪表板',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => '客户反馈细节',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => '客户反馈焦点抽屉',
 
 	'ERR_DELETE_RECORD'					=> '必须指定记录编号才能删除帐户。',
 	'LBL_ACCOUNT_ID'					=> '帐户 ID',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => '显示在门户中',
 	'LBL_CREATE_KB_DOCUMENT' => '创建文章',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => '知识库',
+    'LBL_REQUEST_CLOSE' => '请求关闭',
+    'LBL_REQUEST_CLOSE_DATE' => '请求关闭日期',
+    'LBL_REQUEST_CLOSE_LABEL' => '请求关闭',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => '发送请求关闭这个客户反馈',
+    'LBL_REQUEST_CLOSE_MESSAGE' => '您是否要关闭这个客户反馈？',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => '我已请求关闭的客户反馈',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => '我已请求关闭的客户反馈',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => '我已请求关闭的客户反馈',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => '请求关闭的客户反馈列表',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => '显示请求关闭的已分配客户反馈列表',
 
     'LBL_CREATED_USER' => '已创建的用户',
     'LBL_MODIFIED_USER' => '已修改的用户',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => '分配的用户名',
     'LBL_EXPORT_TEAM_COUNT' => '团队数量',
     'LBL_CHANGETIMERS' => '更改计时器',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => '购买',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => '相关联系人的电子邮件',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => '例如，您可以使用此功能找到之前送出过的问题。',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => '如果您想报告新的客户反馈，您可以点击这里举报一个新的反馈。',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => '点击此处将随时返回到此视图。',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '客户反馈互动',
 
     'LBL_NOTES_SUBPANEL_TITLE' => '笔记',
 
@@ -149,5 +161,5 @@ $mod_strings = array (
 
     'LBL_SLA_DETAILS' => 'SLA 详细信息',
     'LBL_HOURS' => '小时',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => '状态',
 );

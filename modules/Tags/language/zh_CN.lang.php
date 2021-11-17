@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => '创建人 ID',
     'LBL_EXPORT_CREATED_BY_NAME' => '由用户名创建',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => '分配的用户名',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => '标记焦点抽屉',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => '标签记录仪表板',
+    'LBL_MY_TAGS' => '我的标签',
+    'LBL_MY_FAVORITE_TAGS' => '我的收藏夹标签',
 );

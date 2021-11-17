@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Quadre de comandament del llistat de trucades',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Quadre de comandament del registre de trucades',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat a les trucades',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Trucades',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Usuari assignat',
     'LBL_LIST_MY_CALLS' => 'Les Meves Trucades',
     'LBL_MY_SCHEDULED_CALLS' => 'Les meves trucades programades',
+    'LBL_GUEST_CALLS' => 'Les meves trucades com a convidat',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Trucades programades com a convidat',
     'LBL_SELECT_FROM_DROPDOWN' => 'Si us plau, seleccioni abans un element de la llista desplegable Relatiu A.',
 	'LBL_ASSIGNED_TO_NAME' => 'Assignat a',
 	'LBL_ASSIGNED_TO_ID' => 'Usuari assignat',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Cancel·la',
     'LBL_EMPTY_SEARCH_RESULT' => 'Ho sentim, no es van trobar resultats. Creeu un convidat més endavant.',
     'LBL_NO_ACCESS' => 'No té accés per crear $module',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'ID de contacte d&#39;Amazon Connect',
+
     'LBL_REPEAT_TYPE' => 'Repetició',
     'LBL_REPEAT_INTERVAL' => 'Cada',
     'LBL_REPEAT_END' => 'Fi',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Trucada amb {{{this}}}',
     'LBL_SEND_INVITES' => 'Enviar Invitacions',
     'LBL_REMINDER_TITLE' => 'Truqui:',
+    'LBL_CALL_RECORDING_URL' => 'URL de l&#39;enregistrament',
+    'LBL_CALL_RECORDING' => 'Enregistrant',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Heu programat {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> per al {{formatDate date_start}}.',

@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Kontrolna tabla liste prodajnih prilika',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa prodajnih prilika',
     'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Detalji prodajnih prilika',
+    'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za prilike',
+    'LBL_RENEWAL_OPPORTUNITY' => 'Prilika za obnovu',
 
     'LBL_MODULE_NAME' => 'Prodajne prilike',
     'LBL_MODULE_NAME_SINGULAR' => 'Prilika',
@@ -77,7 +79,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Tip:',
     'LBL_CAMPAIGN' => 'Kampanja:',
     'LBL_NEXT_STEP' => 'Sledeći korak:',
-    'LBL_SERVICE_START_DATE' => 'Service Start Date',
+    'LBL_SERVICE_START_DATE' => 'Datum početka usluge',
     'LBL_LEAD_SOURCE' => 'Izvor informacije o potencijalnom klijentu:',
     'LBL_SALES_STAGE' => 'Faza prodaje:',
     'LBL_SALES_STATUS' => 'Status',
@@ -144,6 +146,7 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE' => 'Faza Izvršenja',
     'LBL_COMMIT_STAGE_FORECAST' => 'Prognoza',
     'LBL_WORKSHEET' => 'Tabela',
+    'LBL_PURCHASED_LINE_ITEMS' => 'Kupljene stavke',
 
     'LBL_RENEWAL' => 'Obnova',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Obnova prodajnih prilika',
@@ -151,9 +154,9 @@ $mod_strings = array(
     'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'ID nadređene obnove',
     'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
 
-    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
-    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
-    'LBL_WIDGET_AMOUNT' => 'Amount',
+    'LBL_WIDGET_SALES_STAGE' => 'Faza prodaje',
+    'LBL_WIDGET_DATE_CLOSED' => 'Očekivani datum zatvaranja',
+    'LBL_WIDGET_AMOUNT' => 'Iznos',
 
     'TPL_RLI_CREATE' => 'Prodajna prilika mora da ima povezanu stavku prihoda. <a href="javascript:void(0);" id="createRLI">Napravite stavku prihoda</a>.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Napravi stavku prihoda.',
@@ -162,12 +165,16 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => 'Ukupno stavki prihoda',
     'LBL_CLOSED_RLIS' => 'Ukupno zatvorenih stavki prihoda',
+    'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => 'br. stavki prihoda sa trajanjem Open Service Flex',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Nije moguće obirsati prodajne prilike koje sadrže stavke prihoda.',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Jedan ili više izabranih zapisa sadrži zatvorene stavke prihoda i nije ih moguće obrisati.',
     'LBL_INCLUDED_RLIS' => '# od priloženih stavki linije prihoda',
-    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Ažuriranje je otvoreno',
+    'LBL_SERVICE_START_DATE_INVALID' => 'Datum početka usluge ne može da se postavi kao datuma završetka usluge za bilo koji otvoreni dodatak stavke prihoda.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Ponude',
+    'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Prodajne prilike prema dinamičnom nalogu',
+
 
     // Config
     'LBL_OPPS_CONFIG_VIEW_BY_LABEL' => 'Hijerarhija prodajnih prilika',
@@ -231,5 +238,10 @@ Kreiranje modula {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Moje prodajne prilike',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Prodajne prilike moga tima",
 
-    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Nije moguće promeniti {{fieldName}} jer modul {{moduleSingular}} nema otvorene stavke.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakcije prodajnih prilika',
+
+    // AI Predict
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Prognoza u pogledu zatvaranja prilike',
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Prikaži pojedinosti o prognozi za određenu prodajnu priliku',
 );

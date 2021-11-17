@@ -64,11 +64,11 @@ $(window).bind("load", function () {
                 return;
             }
             $('#upgradeTitle').text('Upgrade Progress ' + (uploader.stage + 1) + ' of ' + uploader.stages.length);
-            var $bar = $('#' + bar + ' .bar');
+            var $bar = $('#' + $.escapeSelector(bar) + ' .bar');
             if (percent == 100) {
                 $bar.removeClass('in-progress');
                 $bar.removeClass('error');
-                $('#' + bar + ' h1')
+                $('#' + $.escapeSelector(bar) + ' h1')
                     .removeClass('color_red')
                     .addClass('color_green')
                     .find('i')
@@ -79,7 +79,7 @@ $(window).bind("load", function () {
                     .addClass('color_green');
             } else {
                 $bar.addClass('in-progress');
-                $('#' + bar + ' h1 i').addClass('fa-spin');
+                $('#' + $.escapeSelector(bar) + ' h1 i').addClass('fa-spin');
             }
             $bar.width(percent + '%');
         };

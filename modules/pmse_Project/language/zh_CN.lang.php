@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => '流程定义',
   'LBL_MODULE_NAME_SINGULAR' => '流程定义',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => '流程定义焦点抽屉',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => '流程定义记录仪表板',
   'LNK_LIST' => '查看流程定义',
   'LNK_NEW_PMSE_PROJECT' => '新增流程定义',
   'LNK_IMPORT_PMSE_PROJECT' => '导入流程定义',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => '更改分配给用户',
     'LBL_PMSE_FORM_LABEL_TEAM' => '团队',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => '选择新流程用户',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => '电子邮件',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => '当分配流程时，将流程用电子邮件发送给用户',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => '用户定义',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => '分配方法',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => '分配用户',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => '更新记录上的“负责人”',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => '按可用性设置“负责人”',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => '新增相关记录',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => '相关模块',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => '活动名称为空。',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => '形状组合中已包含此名称 "%s"。',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => '必填的轮班可用性',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => '如果没有用户可用',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => '之前',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => '仅新增记录',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => '仅已更新的记录（首次更新 - 请参阅帮助文本）',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => '仅已更新的记录（所有更新 - 请参阅帮助文本）',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => '新记录或首次更新',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => '新记录和所有更新',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => '选择流程开始的时间。<br><br>新的：创建新记录后，运行流程。<br><br>首次更新：仅当现有记录满足首次条件时，运行流程。<br><br>所有更新：现有记录每次满足时，运行流程。',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => '选择流程开始的时间。<br><br>新的：创建新记录后，运行流程。<br><br>首次更新：仅当现有记录首次满足条件时，运行流程。<br><br>所有更新：现有记录每次满足时，运行流程。<br><br>新记录或首次更新：无论是在创建记录期间还是更新记录期间，仅当记录首次满足条件时，运行流程。<br><br>新记录和所有更新：每次对所有新记录和现有记录运行流程。',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => '选择 SugarCRM 模块来应用事件触发器 ',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => '指定日期',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => '变更前内容：',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => '变更后内容：',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => '包含任何',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => '不包含任何',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => '当日或之后',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => '当日或之前',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => '不等于',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => '添加',
     'LBL_PMSE_FORMPANEL_CLOSE' => '关闭',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => '分配至记录的所有团队',
     'LBL_PMSE_EMAILPICKER_TEAMS' => '团队',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% 关联到 %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => '创建 %MODULE% 的用户',

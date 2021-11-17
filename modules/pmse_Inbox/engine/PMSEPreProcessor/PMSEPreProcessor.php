@@ -24,6 +24,8 @@ class PMSEPreProcessor
     private static $instance;
 
     /**
+     * Cache executed events to prevent out of order runs
+     *
      * @var array
      */
     protected $executedFlowIds;
@@ -254,6 +256,9 @@ class PMSEPreProcessor
             if ($isAdminWork !== true) {
                 $acm->setAdminWork(true, true);
             }
+            // Disable portal visibility restrictions while processing BPM
+            // request
+            $portalVisibility = $this->clearPortalVisibility();
 
             // Now handle actual processing of the request
             $flowDataList = $this->getFlowDataList($request);
@@ -295,10 +300,23 @@ class PMSEPreProcessor
                 // we shouldn't go back and trigger P2 even if later on P3 updates
                 // the record and satisfies the criteria for P2
 
+                $hasRunOrder = is_int($flowData['prj_run_order']);
                 $eventId = $flowData['evn_id'];
-                if (isset($this->executedFlowIds[$bean->id])) {
-                    if ($flowData['evn_type'] === 'START' && in_array($eventId, $this->executedFlowIds[$bean->id])) {
-                        continue;
+                $eventData = [
+                    'evn_id' => $eventId,
+                    'run_order' => $flowData['prj_run_order'] ?? '',
+                ];
+
+                if ($hasRunOrder && isset($this->executedFlowIds[$bean->id])) {
+                    if ($flowData['evn_type'] === 'START') {
+                        $executedEvents = $this->executedFlowIds[$bean->id];
+                        $lastRanEvent = $executedEvents[count($executedEvents) - 1];
+
+                        // continue if the current event is out of order or has already been ran
+                        if ($flowData['prj_run_order'] < $lastRanEvent['run_order'] || in_array($eventData, $executedEvents)) {
+                            $this->logger->info('Event ' . $eventId . ' is out of run order or has already been ran');
+                            continue;
+                        }
                     }
                 }
 
@@ -320,6 +338,12 @@ class PMSEPreProcessor
                     $data = $validatedRequest->getFlowData();
 
                     if (!(isset($data['evn_type']) && $data['evn_type'] == 'GLOBAL_TERMINATE')) {
+                        // if run order is set, cache the event to prevent out of order runs
+                        if ($hasRunOrder) {
+                            // append the event to achieve first -> last order
+                            $this->executedFlowIds[$bean->id][] = $eventData;
+                        }
+
                         if (!PMSEEngineUtils::isTargetModule($flowData, $validatedRequest->getBean())) {
                             $parentBean = PMSEEngineUtils::getParentBean($flowData, $validatedRequest->getBean());
                             // Only when start bean is different of target module in PD
@@ -370,12 +394,6 @@ class PMSEPreProcessor
                 if ($request->getResult() == 'TERMINATE_CASE') {
                     $result = $this->terminateCaseByBeanAndProcess($request->getBean(), $data);
                 }
-
-                // Store project id if this flow's project has its "Run Order" set, so we don't trigger this process
-                // on future save.
-                if (is_int($flowData['prj_run_order'])) {
-                    $this->executedFlowIds[$bean->id][] = $eventId;
-                }
             }
 
             // Clear validator caches AFTER the loop completes so that the cache
@@ -387,6 +405,10 @@ class PMSEPreProcessor
             if ($isAdminWork !== true) {
                 $acm->setAdminWork(false, true);
             }
+
+            // Reset portal visibility flag if needed. Done at the very end of
+            // process management
+            $this->resetPortalVisibility($portalVisibility);
         }
 
         return $result;
@@ -612,12 +634,14 @@ class PMSEPreProcessor
         FROM
             pmse_bpm_related_dependency rd
         LEFT JOIN
-            pmse_bpm_flow flow
-            ON
-                rd.rel_element_id = flow.bpmn_id AND
+            (SELECT * 
+            FROM 
+                 pmse_bpm_flow flow
+            WHERE 
                 flow.cas_flow_status='WAITING' AND
                 flow.cas_sugar_object_id IN (?) AND
                 flow.deleted = 0
+            ) flow ON rd.rel_element_id = flow.bpmn_id
         LEFT JOIN
             pmse_project prj
             ON
@@ -625,7 +649,8 @@ class PMSEPreProcessor
         WHERE
             rd.deleted = 0 AND rd.pro_status != 'INACTIVE' AND (
                 (
-                    (rd.evn_type = 'START' AND rd.evn_module = ? AND $evnParamsChar $newOp 'new') OR
+                    (rd.evn_type = 'START' AND rd.evn_module = ? AND 
+                    ($evnParamsChar $newOp 'new' OR $evnParamsChar $newOp 'newfirstupdated' OR $evnParamsChar $newOp 'newallupdates')) OR
                     (
                         rd.evn_type = 'GLOBAL_TERMINATE' AND
                         (flow.cas_flow_status IS NULL OR flow.cas_flow_status != 'WAITING') AND
@@ -797,5 +822,36 @@ class PMSEPreProcessor
         }
 
         return $bean;
+    }
+
+    /**
+     * Disabled Portal Visbility restrictions, since they don't allow viewing
+     * the Teams and Teamsets, which are needed for shift-based assignment.
+     *
+     * @return bool Whether portal visibility was enabled
+     */
+    protected function clearPortalVisibility(): bool
+    {
+        $visibility = SugarBean::getDefaultVisibility();
+        $portalVisibility = isset($visibility['SupportPortalVisibility']) && isTruthy($visibility['SupportPortalVisibility']);
+        unset($visibility['SupportPortalVisibility']);
+        SugarBean::setDefaultVisibility($visibility);
+        return $portalVisibility;
+    }
+
+    /**
+     * Set `SupportPortalVisibility` action if provided value is truthy. Used to
+     * reset visibility restrictions after doing shift-based availability
+     * lookups.
+     *
+     * @param bool $portalVisibility Whether to enable portal visibility
+     */
+    protected function resetPortalVisibility(bool $portalVisibility): void
+    {
+        if (isTruthy($portalVisibility)) {
+            $visibility = SugarBean::getDefaultVisibility();
+            $visibility['SupportPortalVisibility'] = $portalVisibility;
+            SugarBean::setDefaultVisibility($visibility);
+        }
     }
 }

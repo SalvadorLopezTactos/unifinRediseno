@@ -17,7 +17,7 @@ use Symfony\Component\Validator\MetadataInterface;
 
 class FakeMetadataFactory implements MetadataFactoryInterface
 {
-    protected $metadatas = array();
+    protected $metadatas = [];
 
     public function getMetadataFor($class)
     {
@@ -29,7 +29,7 @@ class FakeMetadataFactory implements MetadataFactoryInterface
         }
 
         if (!\is_string($class)) {
-            throw new NoSuchMetadataException(sprintf('No metadata for type %s', \gettype($class)));
+            throw new NoSuchMetadataException(sprintf('No metadata for type "%s".', \gettype($class)));
         }
 
         if (!isset($this->metadatas[$class])) {

@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Quadre de comandament del llistat de llistes d&#39;objectius',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'Quadre de comandament del registre de llistes d&#39;objectius',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat a la llista d&#39;objectius',
+  'LBL_RELATED_ACCOUNTS' => 'Comptes relacionats',
+  'LBL_RELATED_CONTACTS' => 'Contactes relacionats',
+  'LBL_RELATED_LEADS_TARGETS' => 'Clients potencials i objectius relacionats',
 
   'LBL_MODULE_NAME' => 'Llistes d&#39;objectius',
   'LBL_MODULE_NAME_SINGULAR' => 'Llista d&#39;objectius',

@@ -115,7 +115,8 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Sugar dashlet pridaný',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Dashlety budú znova usporiadané. Naozaj chcete zmeniť rozloženie stĺpcov?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Naozaj chcete odstrániť tento Sugar dashlet?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Žiadny informačný panel nie je nakonfigurovaný.',
+  'LBL_NO_DASHBOARD_CONFIGURED' => 'Nie je nakonfigurovaný žiadny informačný panel',
+  'LBL_NO_DASHLETS_CONFIGURED' => 'Nie sú nakonfigurované žiadne dashlety',
   'LBL_CREATE_DASHBOARD_LINK' => 'Vytvoriť informačný panel',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Webová stránka',
@@ -123,7 +124,7 @@ $mod_strings = array (
   'LBL_DASHLET_WEBPAGE_URL' => 'URL',
   'LBL_DASHLET_WEBPAGE_URL_HELP' => 'V dôsledku nezabezpečeného obsahu alebo zásad sa niektoré stránky nemusia správne načítať.',
 
-  'LBL_DASHLET_ADD' => 'Pridať',
+  'LBL_DASHLET_ADD' => 'Pridať dashlet',
   'LBL_DASHLET_DELETE' => 'Vymazať Sugar dashlet',
   'LBL_DASHLET_REFRESH' => 'Obnoviť Sugar dashlet',
   'LBL_DASHLET_EDIT' => 'Upraviť Sugar dashlet',
@@ -218,7 +219,6 @@ $mod_strings = array (
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar – Kalendár na vkladanie údajov, ktorý vytvoril Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF – Knižnica na vytváranie PDF dokumentov, ktorú vytvoril Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server – Implementácia WebDAV servera v PHP.',
-  'LBL_SOURCE_PCLZIP' => 'PclZip – Knižnica poskytujúca funkcie komprimácie a extrakcie pre archívy v formáte Zip, ktorý vytvoril Vincent Blavet',
   'LBL_SOURCE_SMARTY' => 'Smarty – Nástroj na šablóny pre PHP.',
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library – Nástroje používateľského rozhrania knižnice uľahčujú implementáciu množstva funkcií na strane klienta.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer – Trieda emailového prenosu s množstvom funkcií pre PHP',

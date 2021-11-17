@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Prosess forretning regel',
   'LBL_MODULE_NAME_SINGULAR' => 'Prosess Forretnings regel',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Prosessforretningsregler fokusskuff',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Registerdashbord for behandling av forretningsregler',
   'LBL_RST_UID' => 'Business Regel ID',
   'LBL_RST_TYPE' => 'Business Regel Type',
   'LBL_RST_DEFINITION' => 'Business Regel Definisjon',

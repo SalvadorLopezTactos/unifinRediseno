@@ -53,6 +53,4 @@
 	</td>
 </tr>
 
-
-
 {include file="modules/DynamicFields/templates/Fields/Forms/coreBottom.tpl"}

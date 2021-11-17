@@ -164,6 +164,6 @@ $mod_strings = array (
     'LBL_BUGS_SUBPANEL_TITLE' => 'Bug',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Offerte',
     'LBL_RLI_SUBPANEL_TITLE' => 'Elementi dell´Opportunità',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
-    'LBL_PLIS_SUBPANEL_TITLE' => 'Purchased Line Items',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Acquisti',
+    'LBL_PLIS_SUBPANEL_TITLE' => 'Prodotti acquistati',
 );

@@ -73,6 +73,13 @@ class Localization {
      */
     protected $parsedFormats = array();
 
+    /**
+     * Reference to the logger for writing log messages
+     *
+     * @var LoggerManager
+     */
+    protected $logger;
+
 	/**
 	 * sole constructor
 	 */
@@ -80,6 +87,7 @@ class Localization {
     {
 		global $sugar_config;
 		$this->localeNameFormatDefault = empty($sugar_config['locale_name_format_default']) ? 's f l' : $sugar_config['default_name_format'];
+        $this->logger = LoggerManager::getLogger();
 	}
 
     /**
@@ -355,52 +363,90 @@ class Localization {
     {
         $GLOBALS['log']->debug("Localization: translating [{$string}] from {$fromCharset} into {$toCharset}");
 
-        // Bug #35413 Function has to use iconv if $fromCharset is not in mb_list_encodings
-        $isMb = function_exists('mb_convert_encoding') && !$forceIconv;
-        $isIconv = function_exists('iconv');
-        if ($isMb == true)
-        {
-            $fromCharset = strtoupper($fromCharset);
-            $listEncodings = mb_list_encodings();
-            $isFound = false;
-            foreach ($listEncodings as $encoding)
-            {
-                if (strtoupper($encoding) == $fromCharset)
-                {
-                    $isFound = true;
-                    break;
-                }
-            }
-            $isMb = $isFound;
-        }
+        // Bug #35413: Must fallback to using iconv if $fromCharset is not
+        // compatible with mb_convert_encoding
+        $canUseMbConvert = function_exists('mb_convert_encoding') &&
+            $this->validateMbEncoding($fromCharset) &&
+            !$forceIconv;
+        $canUseIconv = function_exists('iconv');
 
-        if($isMb)
-        {
+        if ($canUseMbConvert) {
             global $sugar_config;
             if (!empty($sugar_config['export_excel_compatible']) && $addBOM === true) {
                 return chr(255) . chr(254) . mb_convert_encoding($string, 'UTF-16LE', $fromCharset);
             } else {
                 return mb_convert_encoding($string, $toCharset, $fromCharset);
             }
-        }
-        elseif($isIconv)
-        {
+        } elseif ($canUseIconv) {
             $newFromCharset = $fromCharset;
             if (isset($this->iconvCharsetMap[$fromCharset])) {
                 $newFromCharset = $this->iconvCharsetMap[$fromCharset];
-                $GLOBALS['log']->debug("Localization: iconv using charset {$newFromCharset} instead of {$fromCharset}");
+                $this->logger->debug("Localization: iconv using charset {$newFromCharset} instead of {$fromCharset}");
             }
             $newToCharset = $toCharset;
             if (isset($this->iconvCharsetMap[$toCharset])) {
                 $newToCharset = $this->iconvCharsetMap[$toCharset];
-                $GLOBALS['log']->debug("Localization: iconv using charset {$newToCharset} instead of {$toCharset}");
+                $this->logger->debug("Localization: iconv using charset {$newToCharset} instead of {$toCharset}");
             }
             return iconv($newFromCharset, $newToCharset, $string);
-        }
-        else
-        {
+        } else {
             return $string;
-        } // end else clause
+        }
+    }
+
+    /**
+     * Validates whether the given character set is compatible for use with
+     * mb_convert_encoding
+     *
+     * @param string $charset the character set to validate
+     * @return bool true if the character set is compatible with mb_convert_encoding
+     */
+    public function validateMbEncoding(string $charset)
+    {
+        // Convert the character set to uppercase
+        $charset = sugarStrToUpper($charset);
+
+        // Get the uppercase list of all character sets supported by
+        // mb_convert_encoding
+        $validCharsets = $this->getValidMbEncodings();
+
+        // Check the list of supported character sets to see if the given
+        // character set is included among them
+        $isValid = array_key_exists($charset, $validCharsets);
+        if (!$isValid) {
+            $this->logger->debug("Localization: charset {$charset} not supported by mb_convert_encoding");
+        }
+
+        return $isValid;
+    }
+
+    /**
+     * Returns an array where the keys are encodings supported by mb_convert_encoding,
+     * including any aliases that are not directly returned by mb_list_encodings.
+     * Keys are returned in all-uppercase format
+     */
+    private function getValidMbEncodings()
+    {
+        $encodings = sugar_cache_retrieve('valid_mb_encodings');
+
+        // If the cache didn't contain the encodings, build the list and cache it
+        if (empty($encodings)) {
+            // Get the list of supported encodings, including all of their
+            // aliases. Store the encodings as all-uppercase keys of the array
+            // for faster lookup
+            $encodings = [];
+            foreach (mb_list_encodings() as $encoding) {
+                $encodings[sugarStrToUpper($encoding)] = true;
+                foreach (mb_encoding_aliases($encoding) as $alias) {
+                    $encodings[sugarStrToUpper($alias)] = true;
+                }
+            }
+
+            // Cache the list for future use
+            sugar_cache_put('valid_mb_encodings', $encodings);
+        }
+
+        return $encodings;
     }
 
 	/**
@@ -507,7 +553,7 @@ class Localization {
 				$offset = strlen($exNum[0]) % 3;
 				if($offset > 0) {
 					for($i=0; $i<$offset; $i++) {
-						$majorDigits .= $exNum[0]{$i};
+                        $majorDigits .= $exNum[0][$i];
 					}
 				}
 
@@ -517,7 +563,7 @@ class Localization {
 						$majorDigits .= $thou; // add separator
 					}
 
-					$majorDigits .= $exNum[0]{$i};
+                    $majorDigits .= $exNum[0][$i];
 					$tic++;
 				}
 			} else {
@@ -525,14 +571,6 @@ class Localization {
 			}
 			$fnum = $majorDigits;
 		}
-
-		// handle decimals
-		if($precision > 0) { // we toss the minor digits otherwise
-			if(is_array($exNum) && isset($exNum[1])) {
-
-			}
-		}
-
 
 		if($is_currency) {
 			$fnum = $symbol.$fnum;
@@ -786,7 +824,7 @@ eoq;
 		// parse localeNameFormat
 		$formattedName = '';
 		for($i=0; $i<strlen($this->localeNameFormat); $i++) {
-			$formattedName .= array_key_exists($this->localeNameFormat{$i}, $names) ? $names[$this->localeNameFormat{$i}] : $this->localeNameFormat{$i};
+            $formattedName .= $names[$this->localeNameFormat[$i]] ?? $this->localeNameFormat[$i];
 		}
 
 		$formattedName = trim($formattedName);
@@ -968,7 +1006,7 @@ eoq;
         if (!isset($this->parsedFormats[$format])) {
             $tokens = array();
             for ($i = 0, $length = strlen($format); $i < $length; $i++) {
-                $character = $format{$i};
+                $character = $format[$i];
                 $is_field = $character >= 'a' && $character <= 'z';
 
                 $token = array(

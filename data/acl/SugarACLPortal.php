@@ -61,6 +61,9 @@ class SugarACLPortal extends SugarACLStatic
                     ]);
                     $bean->portal_owner = count($rows['rows']) > 0;
                     break;
+                case 'Notes':
+                    $bean->portal_owner = $bean->contact_id === PortalFactory::getInstance('Session')->getContactId();
+                    break;
                 default:
                     // Unless we know how to find the "owner", they can't own it.
                     $bean->portal_owner = false;
@@ -108,6 +111,11 @@ class SugarACLPortal extends SugarACLStatic
                 if ($action === 'edit' && (empty($bean->id) || $bean->new_with_id)) {
                     return false;
                 }
+            }
+            // Allow users to delete, edit, and view notes they own
+            // to facilitate adding/removing attachments from a Note
+            if ($bean->module_name === 'Notes' && $context['owner_override']) {
+                return true;
             }
         }
 

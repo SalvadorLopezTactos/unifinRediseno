@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'La contrasenya que ha introduit no compleix amb els requisists de contrassenyes. Si us plau, intenti-ho de nou.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Informació d&#39;Usuari no trobada',
     'ERR_USER_NAME_EXISTS'              => 'El nom d&#39;usuari {0} ja existeix. No es permeten noms d&#39;usuari duplicats. Canviï el nom d&#39;usuari, ha de ser únic.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => 'Cal desar la llicència de "Sugar Hint" amb un tipus de llicència compatible addicional',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Aquest usuari ha estat bloquejat a l&#39;aplicació Sugar i no pot iniciar la sessió utilitzant la seva contrasenya actual.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Usuaris autoritzats només externament no tenen permès iniciar sessió amb les credencials de Sugar',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Correu electrònic del Destinatari',
 	'ERR_SERVER_STATUS'					=> 'L&#39;estat del seu servidor',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'El sistema no pot enviar correu a l&#39;usuari. Si us plau, comprovi la Configuració´de Correu sortint en la <a href="index.php?module=EmailMan&action=config">Configuració de Correu</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Els nous usuaris s&#39;han de crear a <a href="{0}" target="_blank">SugarCloud Settings</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Adreça electrònica',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Previsions',
     'LBL_WORKSHEETS'                    => 'Fulls de treball',
 	'LBL_CALENDARS'                     => 'Calendaris',
+    'LBL_SHIFTS'                        => 'Torns',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Excepcions dels torns',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Rebre un correu de notificació quan se li ha assignat un registre.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'Correu electrònic d&#39;assignació',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Rebeu una notificació de correu electrònic quan algú us menciona en un comentari de l&#39;entrada de registres.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'Correu electrònic de menció',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Seleccioneu com voleu que es mostrin els noms dels camps a les vistes del registre. Escolliu "Al costat del valor del camp" per tenir una vista del registre més compacta.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Situació del nom del camp',
     'LBL_ABOVE_FIELD_VALUE'             => 'Damunt del valor del camp',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Tipus de llicència',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Establir configuració per defecte per als avisos recordatoris de trucades i reunions',
 	'LBL_REMINDER'						=> 'Recordatoris',
 	'LBL_REMINDER_POPUP' => 'Popup',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Aquesta sessió ha estat acabada al haver-se iniciat una altre amb el mateix usuari',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Reasignació de Registres',
-	'LBL_REASS_DESC_PART1'				=> 'Això buscarà tots els registres (dels mòduls seleccionats) assignats a un usuari, i li permetrà reassignar-los a un altre usuari.',
+    'LBL_REASS_DESC_PART1'              => 'Això buscarà tots els registres (dels mòduls seleccionats) assignats a un usuari, i li permetrà reassignar-los a un altre usuari.',
         'LBL_REASS_DESC_PART2'=>                    'Seleccionar els mòduls amb el qual executar fluxos de treball, enviar notificacions d&#39;assignació, i fer el seguiment de l&#39;auditoria durant el canvi de destinació. Feu clic a Següent per continuar i reassignar els registres. Feu clic a Reinicia per començar de nou.',
 	'LBL_REASS_STEP2_TITLE'				=> 'Reasignació d´Equips',
 	'LBL_REASS_STEP2_DESC'				=> 'Els següents equips estaven disponibles per a l´usuari d´origen, però no per a l´usuari de destinació. Tots els registres de l´equip de l´usuari origen no seran visibles per a l´equip de l´usuari destí llevat que realitzi una associació dels següents valors.',
@@ -624,7 +628,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Perfil d&#39;usuari',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Accediu a <a href="%s" target="_blank">SugarCloud Settings</a> per fer canvis als camps només de lectura.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Contacteu amb el vostre administrador de Sugar si voleu fer canvis als camps de només lectura.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

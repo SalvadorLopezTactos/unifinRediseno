@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Došlo k chybě při načítání podrobné sestavy údajů pro tuto akci. Obraťte se o pomoc na vlastníka sestavy.',
     'LBL_CHART_NO_DRILLTHRU' => 'Podrobná sestava není k dispozici',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na sestavy',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'V zobrazení seznamu se zobrazí všechny zprávy ze schůzek, které splňují aktuální vyhledávací kritéria a ke kterým mají uživatelé přístup. Základní údaje o každé zprávě si můžete prohlédnout v polích sloupců zobrazení seznamu a v náhledu. Můžete nastavit značky pro zprávy a vytvářet filtry. Chcete-li zprávu zobrazit, klikněte na její název, chcete-li zprávu upravit, vyberte možnost „Upravit zprávu“ v nabídce akcí.',

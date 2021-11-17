@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Prosessisähköpostimallit',
     'LBL_MODULE_NAME_SINGULAR' => 'Prosessisähköpostimalli',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Sähköpostimallien prosessointi -tietolaatikko',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Sähköpostimallien prosessointitietueiden työpöytä',
     'LNK_LIST' => 'Näytä prosessisähköpostimallit',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Luo prosessisähköpostimalli',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Tuo prosessisähköpostimalleja',

@@ -64,6 +64,14 @@ abstract class AbstractMetaDataParser
         return $this->_fielddefs;
     }
 
+    /*
+     * Getter for implementation
+     */
+    public function getImplementation()
+    {
+        return $this->implementation;
+    }
+
     public function getPanelDefs() {
         return $this->_paneldefs;
     }
@@ -79,6 +87,36 @@ abstract class AbstractMetaDataParser
 
     public function useWorkingFile() {
         return $this->implementation->useWorkingFile();
+    }
+
+    /**
+     * Calls viewdef setter for the parser $implementation
+     *
+     * @param array $fieldList Array of field names to which the given properties will be set
+     * @param array $propertyList Array of 'property => value' to be set for each field in
+     */
+    public function setFieldProps($fieldList, $propertyList)
+    {
+        $this->implementation->setFieldProps($fieldList, $propertyList);
+    }
+
+    /**
+     * Updates the fielddefs with the properties for the given fieldNames
+     *
+     * @param array $fieldNames Array of field names to which the given properties will be set
+     * @param array $propertyList Array of 'property => value' to be set for each field in
+     */
+    public function setFielddefsProps($fieldNames, $propertyList)
+    {
+        $fielddefs = $this->getFieldDefs();
+        foreach ($fielddefs as $key => $fielddef) {
+            if (in_array($key, $fieldNames)) {
+                $fielddefs[$key] = array_merge($fielddefs[$key], $propertyList);
+            }
+        }
+
+        // update the _fielddefs for the parser
+        $this->_fielddefs = $fielddefs;
     }
 
     /**

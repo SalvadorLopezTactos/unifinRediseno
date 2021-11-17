@@ -105,7 +105,7 @@
 
 // Give the tabs something to sit on
 .nav-tabs {
-  border-bottom: 1px solid @grayLighter;
+  border-bottom: 1px solid @grayMid;
 }
 // Make the list-items overlay the bottom border
 .nav-tabs > li {
@@ -282,7 +282,7 @@
 }
 
 .tab-content {
-  overflow: auto; // prevent content from running below tabs
+  overflow: hidden; // prevent content from running below tabs
 }
 
 // Remove border on bottom, left, right
@@ -502,7 +502,7 @@
 .nav-tabs > .active > a,
 .nav-tabs > .active > a:hover {
   border: @borderWidgetLight;
-  border-bottom-color: @white;
+  border-bottom-color: @navbarLinkBackgroundActive;
   font-weight: bold;
 }
 
@@ -702,7 +702,7 @@
 
 li.tab.tab-badgeable {
   height: 36px;
-  margin-bottom: 0;
+  margin-bottom: 1px;
 
   .tab-title {
     text-align: left;
@@ -736,7 +736,6 @@ li.tab.tab-badgeable {
   &.active {
     // Paint over the border (from the ul element) for the active tab only
     border-bottom: 1px solid @tabBackgroundActive;
-    margin-bottom: -1px;
   }
 
   &:not(.active) {
@@ -748,9 +747,9 @@ li.tab.tab-badgeable {
     margin-right: 0;
     padding-top: 3px;
     padding-bottom: 3px;
-    min-height: @countBadgeHeight;
+    height: 30px;
     width: 162px;
-
+    line-height: @countBadgeHeight;
     // vertical centering hack for badgeless tabs, based off https://css-tricks.com/centering-in-the-unknown/
     vertical-align: middle;
 

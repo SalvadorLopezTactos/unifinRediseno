@@ -49,6 +49,17 @@ class RepairAndClear
     private $statementObserver;
 
     /**
+     * make sure mod_string contains 'LBL_ALL_MODULES'
+     * RepairAndClear constructor.
+     *
+     */
+    public function __construct()
+    {
+        global $mod_strings;
+        $mod_strings['LBL_ALL_MODULES'] = 'all_modules';
+    }
+
+    /**
      * Sets the callback function which will be invoked with every executed SQL statement
      *
      * @param callable $statementObserver

@@ -13,7 +13,10 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TASKS_LIST_DASHBOARD' => 'แดชบอร์ดรายการปัญหา',
+  'LBL_TASKS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกงาน',
+  'LBL_TASKS_FOCUS_DRAWER_DASHBOARD' => 'งานระบบลิ้นชัก',
 
+  'LBL_RELATED_CONTACT' => 'ที่อยู่ติดต่อที่เกี่ยวข้อง',
   'LBL_MODULE_NAME' => 'งาน',
   'LBL_MODULE_NAME_SINGULAR' => 'งาน',
   'LBL_TASK' => 'งาน: ',

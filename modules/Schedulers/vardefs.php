@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['Scheduler'] = array('table' => 'schedulers',
+$dictionary['Scheduler'] = array('table' => 'schedulers', 'archive' => false,
 	'fields' => array (
 		'job' => array (
 			'name' => 'job',

@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => '取引先担当者',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'リード',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'ユーザ',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'ビジネスセンター記録ダッシュボード',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'ビジネスセンター フォーカス ドロワ',
 ];

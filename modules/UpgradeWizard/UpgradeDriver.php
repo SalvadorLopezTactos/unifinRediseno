@@ -342,7 +342,7 @@ abstract class UpgradeDriver
         $this->context['state_file'] = $this->cacheDir('upgrades/') . self::STATE_FILE;
         $this->context['upgrader_dir'] = dirname(__FILE__);
         $this->loadState();
-        $this->context['backup_dir'] = $this->config['upload_dir'] . "/upgrades/backup/" . pathinfo(
+        $this->context['backup_dir'] = "upgrades/backup/" . pathinfo(
                 $this->context['zip'],
                 PATHINFO_FILENAME
             ) . "-restore";
@@ -645,15 +645,7 @@ abstract class UpgradeDriver
                 true
             );
         }
-        if (ini_get('magic_quotes_gpc') || ini_get('magic_quotes_runtime')
-            || (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc())
-            || (function_exists('get_magic_quotes_runtime') && get_magic_quotes_runtime())
-        ) {
-            return $this->error(
-                "Magic quotes are deprecated and not supported in SugarCRM. Please read: http://www.php.net/manual/en/security.magicquotes.php",
-                true
-            );
-        }
+
         return true;
     }
 
@@ -2052,6 +2044,7 @@ abstract class UpgradeDriver
  * Base class for upgrade scripts
  *
  * @property DBManager db
+ * @property array context
  */
 abstract class UpgradeScript
 {

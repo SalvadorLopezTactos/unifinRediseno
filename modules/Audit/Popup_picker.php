@@ -121,13 +121,13 @@ EOHTML;
             }
 
             $activity_fields = array(
-                'ID' => $audit['id'],
-			    'NAME' => $audit['field_name'],
-                'BEFORE_VALUE' => $before_value,
-                'AFTER_VALUE' => $after_value,
-                'CREATED_BY' => $audit['created_by'],
-                'DATE_CREATED' => $audit['date_created'],
-			);
+                'ID' => htmlspecialchars($audit['id'], ENT_QUOTES, 'UTF-8'),
+                'NAME' => htmlspecialchars($audit['field_name'], ENT_QUOTES, 'UTF-8'),
+                'BEFORE_VALUE' => htmlspecialchars($before_value, ENT_QUOTES, 'UTF-8'),
+                'AFTER_VALUE' => htmlspecialchars($after_value, ENT_QUOTES, 'UTF-8'),
+                'CREATED_BY' => htmlspecialchars($audit['created_by'], ENT_QUOTES, 'UTF-8'),
+                'DATE_CREATED' => htmlspecialchars($audit['date_created'], ENT_QUOTES, 'UTF-8'),
+            );
 
 			$xtpl->assign("ACTIVITY", $activity_fields);
 

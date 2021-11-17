@@ -12,7 +12,7 @@
 
 $viewdefs['Cases']['base']['filter']['default'] = array(
     'default_filter' => 'all_records',
-    'quicksearch_field' => array('name', 'case_number'),
+    'quicksearch_field' => ['name', 'case_number',],
     'quicksearch_priority' => 2,
     'fields' => array(
         'name' => array(),
@@ -23,6 +23,8 @@ $viewdefs['Cases']['base']['filter']['default'] = array(
         'date_entered' => array(),
         'date_modified' => array(),
         'tag' => array(),
+        'request_close' => array(),
+        'request_close_date' => array(),
         'follow_up_datetime' => [],
         'assigned_user_name' => array(),
         '$owner' => array(

@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Ανά Αναφορά',
     'LBL_RECENTLY_MODIFIED' => 'Τροποποιήθηκε Πρόσφατα',
     'LBL_RECORD_SAVED_SUCCESS' => 'Δημιουργήσατε με επιτυχία το {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. Ανοίξτε το χρονοδιάγραμμα για να προσθέσετε τους χρήστες μέσω του υποπίνακα χρηστών.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Αυτό το Πρόγραμμα Αναφοράς',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Προγραμμάτων Αναφοράς',
 );

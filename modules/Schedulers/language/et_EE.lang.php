@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Plaanitud töö',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Taasta meeskonna denormaliseeritud turbeandmed',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Tegevuste voo puhastaja',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Värskenda toote määratlust',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Protsessi ajateadlikud ajakavad',
+'LBL_OOTB_DATA_ARCHIVER' => 'Käita aktiivsete andmete arhiivimis-/kustutamistoiminguid',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervall:',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'Alati',
 'LBL_CATCH_UP' => 'Täida märkamata jätmisel',
+'LBL_SYSTEM_JOB' => 'Kas see on praegune töösüsteem?',
 'LBL_CATCH_UP_WARNING' => 'Tühjendage ruut, kui selle töö käivitamiseks võib kuluda rohkem kui hetk.',
 'LBL_DATE_TIME_END' => 'Lõppemise kuupäev ja kellaaeg',
 'LBL_DATE_TIME_START' => 'Alustamise kuupäev ja kellaaeg',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Eemalda diagnostikatööriista failid',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Eemalda ajutised failid',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Taasta meeskonna denormaliseeritud turbeandmed',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Värskenda toote määratlust',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Käivita igaõhtused hulgimeili kampaaniad',
 'LBL_ASYNCMASSUPDATE' => 'Tee asünkroonne hulgivärskendus',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'Puhasta tööde järjekord',
 'LBL_CLEANOLDRECORDLISTS' => 'Puhasta vanade kirjete loendid',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Tegevuste voo puhastaja',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Protsessi ajateadlikud ajakavad',
 'LBL_PMSEENGINECRON' => 'SugarBPM-i planeerija',
 );
 

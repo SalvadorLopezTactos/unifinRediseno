@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'Prozessverwaltung',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'Unbeaufsichtigte Prozesse',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Prozesse',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Prozessbericht-Dashboard',
+
     'LBL_CAS_ID' => 'Prozessnummer',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Unbekannt (gemäß Benutzer-ID:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "Aufgabe wurde",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Prozess-Design Vorschau',
     'LBL_PROJECT_RUN_ORDER' => 'Reihenfolge ausführen',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => 'Aktuelle Aktivität',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => 'Geändertes Datum',
+    'LBL_DATE_ENTERED' => 'Erstelldatum',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'Sind Sie sicher, dass Sie diesen Prozess anfordern möchten?',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'Prozess wurde erfolgreich angefordert',
 );
 

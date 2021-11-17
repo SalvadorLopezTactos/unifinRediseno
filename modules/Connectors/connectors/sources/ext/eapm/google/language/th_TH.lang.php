@@ -9,32 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+
+$readableProductNames =
+    getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($GLOBALS['current_user']));
+$readableProductNames = urlencode(implode(',', $readableProductNames));
+
+$url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar_flavor'] . '&version=' .
+    $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&module=Connectors&route=Google' .
+    $readableProductNames;
 
 $connector_strings = array(
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-รับคีย์ API และข้อมูลลับจาก Google ด้วยการลงทะเบียนอินสแตนซ์ Sugar เป็นแอปพลิเคชันใหม่
-<br/><br>ขั้นตอนในการลงทะเบียนอินสแตนซ์ของคุณ:
-<br/><br/>
-<ol>
-<li>ไปที่ไซต์ Google Developers:
-<a href=\'https://console.developers.google.com/project\'
-target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
-
-<li>ลงชื่อเข้าสู่ระบบโดยใช้บัญชี Google ที่คุณต้องการใช้ลงทะเบียนแอปพลิเคชัน</li>
-<li>สร้างโครงการใหม่</li>
-<li>ป้อนชื่อโครงการและคลิกสร้าง</li>
-<li>เมื่อมีการสร้างโครงการแล้ว ให้เปิดใช้งาน Google Drive และ Google Contacts API</li>
-<li>ในส่วน APIs & Auth > Credentials ให้สร้าง ID ไคลเอนต์ใหม่ </li>
-<li>เลือก Web Application และคลิก Configure หน้าจอการยินยอม</li>
-<li>ป้อนชื่อผลิตภัณฑ์ และคลิก Save</li>
-<li>ในส่วน Authorized redirect URIs ให้ป้อน URL ต่อไปนี้: {$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>
-<li>คลิกสร้าง ID ไคลเอนต์</li>
-<li>คัดลอก ID ไคลเอนต์และข้อมูลลับของไคลเอนต์ลงในช่องด้านล่าง</li>
-
-</li>
-</ol>
-</td></tr>
-</table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .
+        'ลงทะเบียนอินสแตนซ์ Sugar ของคุณด้วย Google เพื่อเปิดใช้งานการกำหนดค่าบัญชี Google สำหรับใช้ภายใน Sugar ' .
+        'โปรดศึกษา <a href="https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$lang}&module=Connectors&route=Google" target=\'_blank\'>' .
+        '\' target=\'_blank\'>เอกสารเกี่ยวกับเครื่องมือการเชื่อมต่อ</a> เพื่อรับข้อมูลเพิ่มเติม </td></tr></table>',
     'oauth2_client_id' => 'ID ไคลเอนต์',
     'oauth2_client_secret' => 'ข้อมูลลับของไคลเอนต์',
 );

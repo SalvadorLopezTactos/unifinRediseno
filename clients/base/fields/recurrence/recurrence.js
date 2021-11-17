@@ -110,14 +110,30 @@
             case 'Weekly':
             case 'Monthly':
             case 'Yearly':
-                this.show();
+                this.showFieldBlock();
                 break;
             default:
-                this.hide();
+                this.hideFieldBlock();
                 break;
         }
 
         this.prepareView();
+    },
+
+    /**
+     * Show the field and its wrapper
+     */
+    showFieldBlock: function() {
+        this.show();
+        this.$el.closest('.record-cell').show();
+    },
+
+    /**
+     * Hide the field and its wrapper
+     */
+    hideFieldBlock: function() {
+        this.hide();
+        this.$el.closest('.record-cell').hide();
     },
 
     /**
@@ -155,7 +171,13 @@
             var fieldValue = this.model.get(field.name),
                 isEmpty = !this._isPopulated(fieldValue) || (fieldValue === 0);
             if ((!isRecurring || isEmpty) && field.name !== 'repeat_end_type') {
-                this.model.set(field.name, field.def['default']);
+                if (field.name === 'repeat_dow' && this.model.get('date_start') !== '') {
+                    if (!this.model.get('repeat_dow')) {
+                        this.model.set(field.name, new Date(this.model.get('date_start')).getDay());
+                    }
+                } else {
+                    this.model.set(field.name, field.def['default']);
+                }
             }
         }, this);
 

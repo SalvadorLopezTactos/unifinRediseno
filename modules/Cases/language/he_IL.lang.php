@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'לוח מחוונים של רשימת מקרים',
     'LBL_CASES_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת מקרים',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'פרטי אירוע',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס אירועים',
 
 	'ERR_DELETE_RECORD'					=> 'You must specify a record number to delete the account.',
 	'LBL_ACCOUNT_ID'					=> 'זהות חשבון',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'הצג בפורטל',
 	'LBL_CREATE_KB_DOCUMENT' => 'צור מאמר',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'מרכז מידע',
+    'LBL_REQUEST_CLOSE' => 'בקשת סגירה',
+    'LBL_REQUEST_CLOSE_DATE' => 'תאריך סגירה של בקשה',
+    'LBL_REQUEST_CLOSE_LABEL' => 'בקשה לסגירה',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'שלח בקשה כדי לסגור פניית שירות זו',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'האם ברצונך לבקש את סגירת פניית השירות?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'הבקשות שלי לסגירת פניות שירות',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'הבקשות שלי לסגירת פניות שירות',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'הבקשות שלי לסגירת פניות שירות',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'רשימת בקשות לסגירת פניות שירות',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'מציג רשימה של אירועים שהוקצו ושהוגשו לגביהם בקשות סגירה',
 
     'LBL_CREATED_USER' => 'משתמש שנוצר',
     'LBL_MODIFIED_USER' => 'משתמש ששונה',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'הוקצה למשתמש ששמו',
     'LBL_EXPORT_TEAM_COUNT' => 'מונה צוות',
     'LBL_CHANGETIMERS' => 'שינוי טיימרים',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'רכישות',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'קשור לדואר אלקטרוני של איש קשר',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'לדוגמא, אתה יכול להשתמש בזה למציאת נושא שדווח בעבר',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'אם יש פניית שירות חדשה שברצונך לפתוח, הקלק כאן',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'הקלקה כאן תחזיר אותך לתצוגה זו בכל עת',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'אינטראקציות לגבי פניות שירות',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'הערות',
 
@@ -149,5 +161,5 @@ $mod_strings = array (
 
     'LBL_SLA_DETAILS' => 'פרטי SLA',
     'LBL_HOURS' => 'שעות',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'סטטוס',
 );

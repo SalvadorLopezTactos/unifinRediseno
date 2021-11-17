@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Poslovna pravila procesa',
   'LBL_MODULE_NAME_SINGULAR' => 'Poslovno pravilo procesa',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za poslovna pravila procesa',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o poslovnim pravilima procesa',
   'LBL_RST_UID' => 'ID poslovnog pravila',
   'LBL_RST_TYPE' => 'Vrsta poslovnog pravila',
   'LBL_RST_DEFINITION' => 'Definicija poslovnog pravila',

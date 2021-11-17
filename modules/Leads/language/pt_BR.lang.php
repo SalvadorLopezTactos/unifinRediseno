@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Painel da lista de potenciais',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Painel de registro de potenciais',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco em potenciais',
 
     'ERR_DELETE_RECORD' => 'Um número de registro deve ser especificado para excluir Potencial.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Descrição da conta',
@@ -325,4 +326,8 @@ Após confirmar cada módulo obrigatório e desejado, clique no botão Salvar e 
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Não é possível alterar o status de {{moduleSingular}}. Este {{moduleSingular}} já foi convertido.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Previsão de conversão de potenciais',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Ver detalhes de previsão para um Potencial específico',
 );

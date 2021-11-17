@@ -271,7 +271,12 @@ class RelatedValueApi extends SugarApi
                             }
                         }
                         $ret[$link][$type][$rField] = $sum;
-                        $ret[$link][$type][$rField . '_values'] = $values;
+                        // To avoid the values getting overridden in case of different categories within the condition
+                        if (!empty($ret[$link][$type][$rField . '_values'])) {
+                            $ret[$link][$type][$rField . '_values'] = array_merge($ret[$link][$type][$rField . '_values'], $values);
+                        } else {
+                            $ret[$link][$type][$rField . '_values'] = $values;
+                        }
                     }
                     break;
                 case 'rollupConditionalMinDate':

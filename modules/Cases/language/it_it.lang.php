@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Dashboard elenco casi',
     'LBL_CASES_RECORD_DASHBOARD' => 'Dashboard record casi',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Dettagli reclami',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Casi Focus Drawer',
 
 	'ERR_DELETE_RECORD'					=> 'Per eliminare l´azienda deve essere specificato il numero del record.',
 	'LBL_ACCOUNT_ID'					=> 'ID Azienda',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Mostra nel Portale',
 	'LBL_CREATE_KB_DOCUMENT' => 'Crea Articolo',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Knowledge Base',
+    'LBL_REQUEST_CLOSE' => 'Richiedi chiusura',
+    'LBL_REQUEST_CLOSE_DATE' => 'Richiedi data di chiusura',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Richiesta da chiudere',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Invia una richiesta per chiudere questo reclamo',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Richiedere la chiusura di questo reclamo?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Richieste di chiusura dei miei reclami',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Richieste di chiusura dei miei reclami',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Richieste di chiusura dei miei reclami',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Elenco delle richieste di chiusura reclami',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Mostra un elenco dei reclami assegnati di cui è stata richiesta la chiusura',
 
     'LBL_CREATED_USER' => 'Utente Creato',
     'LBL_MODIFIED_USER' => 'Utente Modificato',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nome Utente Assegnato',
     'LBL_EXPORT_TEAM_COUNT' => 'Totale Gruppo',
     'LBL_CHANGETIMERS' => 'Modifica timer',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Acquisti',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Email Contatti Relazionati',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Per esempio, potresti usarlo per trovare un compito che è stato creato in precedenza',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Se hai un nuovo reclamo che vuoi segnalare, puoi cliccare quì e segnalare un nuovo Reclamo.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Cliccando quì verrai ricondotto a questa vista ogni volta.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interazioni reclamo',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Note',
 
@@ -143,5 +155,5 @@ Per creare un {{module_name}}:
 
     'LBL_SLA_DETAILS' => 'Dettagli SLA',
     'LBL_HOURS' => 'Ore',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'Stato',
 );

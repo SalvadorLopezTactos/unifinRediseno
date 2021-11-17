@@ -32,7 +32,7 @@ Kroki do zarejestrowania Twojej instancji:<br>
     <li>Kliknij przycisk Utwórz aplikację</li>
     <li>Na liście aplikacji kliknij nazwę swojej aplikacji</li>
     <li>Kliknij przyciski strzałek</li>
-    <li>Sopiuj wartość klucza konsumenta i wprowadź ją poniżej</li>
+    <li>Skopiuj wartość klucza konsumenta i wprowadź ją poniżej</li>
 </ol>
 </td></tr></table>',
     'oauth_consumer_key' => 'Klucz konsumenta',

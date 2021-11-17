@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'לוח מחוונים של רשימת פגישות',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת פגישות',
+    'LBL_LEAD_GUESTS' => 'אורחי לידים',
+    'LBL_CONTACT_GUESTS' => 'אורחי אנשי קשר',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס פגישות',
 
 	'ERR_DELETE_RECORD' => 'למחיקת הרשומה יש לציין מספר רשומה',
 	'LBL_ACCEPT_THIS'=>'לקבל',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'הנחיות',
 	'LBL_LIST_DUE_DATE'=>'תאריך סיום',
 	'LBL_LIST_FORM_TITLE' => 'רשימת פגישות',
-	'LBL_LIST_MY_MEETINGS' => 'הפגישות שלי',
+    'LBL_LIST_MY_MEETINGS' => 'הפגישות שלי',
     'LBL_MY_SCHEDULED_MEETINGS' => 'הפגישות המתוזמנות שלי',
+    'LBL_GUEST_MEETINGS' => 'הפגישות שלי כאורח',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'פגישות מתוזמנות כאורח',
 	'LBL_LIST_RELATED_TO' => 'קשור אל',
 	'LBL_LIST_STATUS'=>'מצב',
 	'LBL_LIST_SUBJECT' => 'נושא',

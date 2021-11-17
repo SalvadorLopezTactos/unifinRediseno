@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Gewijzigd door ID',
     'LBL_EXPORT_CREATED_BY' => 'Aangemaakt door ID',
     'LBL_EXPORT_TYPE_NAME' => 'Type Naam',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer contracten',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Dashboard Contractenrecord',
 );

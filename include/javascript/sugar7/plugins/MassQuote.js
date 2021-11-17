@@ -47,8 +47,7 @@
 
                 var massQuote = this.context.get('mass_collection');
                 var errors = {
-                    'LBL_CONVERT_INVALID_RLI_PRODUCT_PLURAL': [],
-                    'LBL_CONVERT_INVALID_RLI_ALREADYQUOTED_PLURAL': []
+                    'LBL_CONVERT_INVALID_RLI_PRODUCT_PLURAL': []
                 };
                 var messageTpl;
 
@@ -57,9 +56,6 @@
                     // if product template is empty, but category is not, this RLI can not be converted to a quote
                     if (_.isEmpty(model.get('product_template_id')) && !_.isEmpty(model.get('category_id'))) {
                         errors['LBL_CONVERT_INVALID_RLI_PRODUCT_PLURAL'].push(model);
-                        return true;
-                    } else if (!_.isEmpty(model.get('quote_id'))) {
-                        errors['LBL_CONVERT_INVALID_RLI_ALREADYQUOTED_PLURAL'].push(model);
                         return true;
                     }
 
@@ -99,6 +95,7 @@
                     _.each(massQuote.models, function(rliModel) {
                         rliObj = rliModel.toJSON();
                         rliObj.revenuelineitem_id = rliObj.id;
+                        rliObj.parent_rli_id = rliObj.id;
 
                         _.each(this.blacklistRLIFields, function(fieldName) {
                             delete rliObj[fieldName];
@@ -115,13 +112,6 @@
                         if (_.isEmpty(rliObj.discount_price)) {
                             // if discount_price is empty, make it likely_Case
                             rliObj.discount_price = rliObj.likely_case;
-                        }
-
-                        rliObj.discount_select = false;
-                        if (_.isEmpty(rliObj.discount_amount)) {
-                            rliObj.discount_amount = 0.00;
-                            // if discount_amount is '0' or '', set discount_select true
-                            rliObj.discount_select = true;
                         }
 
                         qliModels.push(app.data.createBean('Products', rliObj));

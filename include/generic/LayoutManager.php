@@ -236,6 +236,14 @@ class LayoutManager
 			$widget_def['widget_class'] = 'Fieldteam_set_id';
 		}
 
+        if (!empty($widget_def['name']) && $widget_def['name'] == 'service_end_date') {
+            $widget_def['widget_class'] = 'Fielddate';
+        }
+
+        if (!empty($widget_def['type']) && $widget_def['type'] === 'textarea') {
+            $widget_def['widget_class'] = 'Fieldlongtext';
+        }
+
 		if(empty($widget_def['widget_class']))
 		{
 			// Default the class to SugarWidgetField
@@ -339,7 +347,7 @@ class LayoutManager
 	function widgetQuery($widget_def, $use_default = false)
 	{
 		$theclass = $this->getClassFromWidgetDef($widget_def, $use_default);
-//				_pp($theclass);
+
 		return $theclass->query($widget_def);
 	}
 

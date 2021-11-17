@@ -591,6 +591,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'Portal&#39;ı yapılandırın',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Enable portal',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Enable search before opening a case',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Portal kullanıcılarının talep kapatmasına izin ver',
     'LBL_PORTAL_THEME' => 'Portal Teması',
     'LBL_PORTAL_ENABLE' => 'Etkinleştir',
     'LBL_PORTAL_SITE_URL' => 'Portal sitenizin adresi:',
@@ -782,7 +783,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Bu modülde Genel Arama kullanarak kayıtları ararken bu alanı kullanmak için seçin.',
+'LBL_POPHELP_REQUIRED'=>"Bu alanın yerleşim planlarında gerekli olup olmadığını belirlemek için bir formül oluşturun.<br/>"
+    . "Gerekli alanlar, tarayıcı tabanlı mobil görünümde formüle uyacak, <br/>"
+    . "ancak iPhone için Sugar Mobile gibi bağımsız uygulamalardaki formüle uymayacaktır. <br/>"
+    . "Sugar Self-Service Portalındaki formüle uymayacaklar.",
+'LBL_POPHELP_READONLY'=>"Bu alanın yerleşim planlarında salt okunur olup olmadığını belirlemek için bir formül oluşturun.<br/>"
+        . "Salt okunur alanlar, tarayıcı tabanlı mobil görünümde formüle uyacak, <br/>"
+        . "ancak iPhone için Sugar Mobile gibi bağımsız uygulamalardaki formüle uymayacaktır. <br/>"
+        . "Sugar Self-Service Portalındaki formüle uymayacaklar.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Bu moduldeki Genel Aramayı kullanarak kayıtları ararken bu alanı kullanmayı seçin.',
 //Revert Module labels
 'LBL_RESET' => 'Sıfırla',
 'LBL_RESET_MODULE' => 'Modülü Sıfırla',
@@ -817,6 +826,7 @@ $mod_strings = array(
                 'encrypt'=>'Şifrele',
                 'datetimecombo' =>'Tarih Saat',
                 'decimal'=>'Ondalık',
+                'autoincrement' => 'Oto Arttırma',
 ),
 'labelTypes' => array(
     "" => "Sık kullanılan etiketler",
@@ -834,4 +844,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'Tüm Modüller',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} ({1} ID ilişkili)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Yerleşim planından kopyala',
+'LBL_RELATIONSHIP_TYPE' => 'İlişki',
 );

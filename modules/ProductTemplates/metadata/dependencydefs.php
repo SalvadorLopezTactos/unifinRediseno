@@ -66,6 +66,23 @@ $serviceFieldActions[] = array(
                 "0")',
     ),
 );
+$serviceFieldActions[] = [
+    'name' => 'ReadOnly',
+    'params' => [
+        'target' => 'lock_duration',
+        'value' => 'equal($service, "0")',
+    ],
+];
+$serviceFieldActions[] = [
+    'name' => 'SetValue',
+    'params' => [
+        'target' => 'lock_duration',
+        'value' => 'ifElse(
+                equal($service, "1"),
+                $lock_duration,
+                "0")',
+    ],
+];
 $dependencies['ProductTemplates']['handle_service_dependencies'] = array(
     'hooks' => array('edit'),
     'trigger' => 'true',

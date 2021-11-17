@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Üzleti Szabályok feldolgozása',
   'LBL_MODULE_NAME_SINGULAR' => 'Üzleti Szabályok feldolgozása',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Üzleti szabályok feldolgozása figyelemfelhívás',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'A Folyamati Üzleti Szabály bejegyzések műszerfal',
   'LBL_RST_UID' => 'Üzleti Szabályazonosító',
   'LBL_RST_TYPE' => 'Üzleti szabály típusa',
   'LBL_RST_DEFINITION' => 'Üzleti Szabálymeghatározás',

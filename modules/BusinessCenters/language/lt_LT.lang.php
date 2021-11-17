@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'Kontaktai',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'Galimi klientai',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'Vartotojai',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'Verslo centrų įrašų ataskaitų sritis',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'Verslo centrų „Focus“ stalčius',
 ];

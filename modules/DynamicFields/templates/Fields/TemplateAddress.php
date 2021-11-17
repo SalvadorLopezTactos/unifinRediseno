@@ -49,6 +49,8 @@ class TemplateAddress extends TemplateField
             if ($addressFieldName === 'Street') {
                 $addressField = new TemplateAddressStreet();
                 $addressField->len = 150;
+                $addressField->ext2 = 2;
+                $addressField->ext3 = 20;
             } else {
                 $addressField = new TemplateField();
                 $addressField->len = ($addressFieldName === 'PostalCode') ? 20 : 100;

@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'Gestionare procese',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'Procese negestionate',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare procese',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare procese',
+
     'LBL_CAS_ID' => 'Număr proces',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Necunoscut (conform UserId:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "sarcina a fost",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Previzualizare design proces',
     'LBL_PROJECT_RUN_ORDER' => 'Aplicați ordinea',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => 'Activitate curentă',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => 'Data modificată',
+    'LBL_DATE_ENTERED' => 'Data creată',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'Sigur doriți să revendicați acest proces?',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'Procesul a fost revendicat cu succes',
 );
 

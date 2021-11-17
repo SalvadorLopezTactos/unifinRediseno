@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Märkmete loendi töölaud',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Märkuste kirjete töölaud',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Märkmete fookuse sahtel',
 
+    'LBL_RELATED_CONTACT' => 'Seotud kontakt',
     'ERR_DELETE_RECORD' => 'Konto kustutamiseks täpsustage kirje numbrit.',
     'LBL_ACCOUNT_ID' => 'Konto ID:',
     'LBL_CASE_ID' => 'Juhtumi ID:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'Kontakti ID:',
     'LBL_CONTACT_NAME' => 'Kontakt:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Märkused',
+    'LBL_ATTACHMENTS' => 'Manused',
+    'LBL_ATTACHMENT_FLAG' => 'On manus',
     'LBL_DESCRIPTION' => 'Kirjeldus',
     'LBL_EMAIL_ADDRESS' => 'E-posti aadress:',
     'LBL_EMAIL_ATTACHMENT' => 'E-kirja manus',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Märkused ja manused',
     'LBL_NOTE' => 'Märkus:',
     'LBL_OPPORTUNITY_ID' => 'Müügivõimaluse ID:',
+    'LBL_NOTE_PARENT_ID' => 'Märkuse ema ID:',
     'LBL_PARENT_ID' => 'Ema ID:',
     'LBL_PARENT_TYPE' => 'Ema tüüp',
     'LBL_EMAIL_TYPE' => 'E-kirja tüüp',

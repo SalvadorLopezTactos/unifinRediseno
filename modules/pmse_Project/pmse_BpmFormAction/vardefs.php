@@ -12,6 +12,7 @@
 
 $dictionary['pmse_BpmFormAction'] = array(
     'table' => 'pmse_bpm_form_action',
+    'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'reassignable' => false,

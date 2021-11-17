@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Електронно табло със списък на обажданията',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Електронно табло със запис на обажданията',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на обаждания',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Обаждания',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Отговорник',
     'LBL_LIST_MY_CALLS' => 'Моите обаждания',
     'LBL_MY_SCHEDULED_CALLS' => 'Моите насрочени обаждания',
+    'LBL_GUEST_CALLS' => 'Моите обаждания като гост',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Планирани обаждания като гост',
     'LBL_SELECT_FROM_DROPDOWN' => 'Трябва да изберете стойност от падащото меню "Свързано със", преди да продължите.',
 	'LBL_ASSIGNED_TO_NAME' => 'Отговорник',
 	'LBL_ASSIGNED_TO_ID' => 'Отговорник',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Отмени',
     'LBL_EMPTY_SEARCH_RESULT' => 'Няма намерени резултати. Please create an invitee below.',
     'LBL_NO_ACCESS' => 'Нямате права да зъдадете $module',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Идентификатор на контакт в Amazon Connect',
+
     'LBL_REPEAT_TYPE' => 'Тип на повторение',
     'LBL_REPEAT_INTERVAL' => 'Интервал на повторение',
     'LBL_REPEAT_END' => 'Край',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Обаждане на {{{this}}}',
     'LBL_SEND_INVITES' => 'Изпращане на покани',
     'LBL_REMINDER_TITLE' => 'Среща:',
+    'LBL_CALL_RECORDING_URL' => 'Записване на URL',
+    'LBL_CALL_RECORDING' => 'Записване',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Вие насрочихте {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> за {{formatDate date_start}}.',

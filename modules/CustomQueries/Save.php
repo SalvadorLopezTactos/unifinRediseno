@@ -56,21 +56,27 @@ if(!empty($_REQUEST['record']) && $_REQUEST['record']!=""){
 	
 	//run valid test	
 	$query_error = $focus->get_custom_results(true, false, true);
-	
-	if($query_error['result']=="Error"){
-		
-		$record = $focus->id;
 
-		if(!empty($focus->id) && $focus->id!=''){
-			$edit='edit=true';
-		}
+if ($query_error['result'] === 'Error') {
+    $record = $focus->id;
 
-		$GLOBALS['log']->debug("Saved record with id of ".$return_id);
+    $GLOBALS['log']->debug("Saved record with id of " . $return_id);
 
-		header("Location: index.php?action=RepairQuery&module=CustomQueries&record=$record&$edit&error_msg=".$query_error['msg']."");
-		exit;
+    $query_data = [
+        'action' => 'RepairQuery',
+        'module' => 'CustomQueries',
+        'record' => $record,
+        'error_msg' => $query_error['msg'],
+    ];
 
-	}
+    if (!empty($focus->id) && $focus->id !== '') {
+        $query_data['edit'] = 'true';
+    }
+
+    $location = 'index.php' . http_build_query($query_data);
+    header("Location: $location");
+    exit;
+}
 
 //End check for query error
 
@@ -138,16 +144,31 @@ if(!empty($is_edit) && $is_edit==true){
 $return_id = $focus->id;
 //exit;
 $edit='';
-if(isset($_REQUEST['return_module']) && $_REQUEST['return_module'] != "") $return_module = $_REQUEST['return_module'];
-else $return_module = "CustomQueries";
-if(isset($_REQUEST['return_action']) && $_REQUEST['return_action'] != "") $return_action = $_REQUEST['return_action'];
-else $return_action = "DetailView";
-if(isset($_REQUEST['return_id']) && $_REQUEST['return_id'] != "") $return_id = $_REQUEST['return_id'];
-if(!empty($_REQUEST['edit'])) {
-	$return_id='';
-	$edit='edit=true';
+if (!empty($_REQUEST['return_module'])) {
+    $return_module = $_REQUEST['return_module'];
+} else {
+    $return_module = 'CustomQueries';
+}
+if (!empty($_REQUEST['return_action'])) {
+    $return_action = $_REQUEST['return_action'];
+} else {
+    $return_action = 'DetailView';
+}
+if (!empty($_REQUEST['return_id'])) {
+    $return_id = $_REQUEST['return_id'];
+}
+
+$query_data = [
+    'action' => $return_action,
+    'module' => $return_module,
+    'record' => $return_id,
+    'old_column_array' => $old_column_array,
+];
+if (!empty($_REQUEST['edit'])) {
+    unset($query_data['record']);
+    $query_data['edit'] = 'true';
 }
 
 $GLOBALS['log']->debug("Saved record with id of ".$return_id);
-header("Location: index.php?action=$return_action&module=$return_module&record=$return_id&$edit&old_column_array=$old_column_array");
-?>
+$location = 'index.php?' . http_build_query($query_data);
+header("Location: $location");

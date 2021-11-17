@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'ชั้นภาษี:',
   'LBL_TYPE_NAME'=>'ชื่อประเภท',
   'LBL_TYPE' => 'ประเภท',
+  'LBL_PRODUCT_TYPE' => 'ประเภทผลิตภัณฑ์',
   'LBL_URL' => 'URL ผลิตภัณฑ์:',
   'LBL_VENDOR_PART_NUM' => 'เลขที่ชิ้นส่วนของผู้ขาย:',
   'LBL_WEIGHT' => 'น้ำหนัก:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'ดูแคตตาล็อกผลิตภัณฑ์',
   'NTC_DELETE_CONFIRMATION' => 'คุณแน่ใจหรือไม่ว่าต้องการลบระเบียนนี้',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'เพิ่ม',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'ค้นหาแคตตาล็อกผลิตภัณฑ์',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'ไม่มีข้อมูล',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'ชื่อผู้ใช้ที่ระบุ',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'ประเภทผลิตภัณฑ์',
   'LBL_RENEWABLE' => 'ต่ออายุ',
   'LBL_SERVICE' => 'บริการ',
+  'LBL_LOCK_DURATION' => 'ระยะเวลาการล็อก',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'แดชบอร์ดรายการแคตตาล็อกผลิตภัณฑ์',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนแคตตาล็อกผลิตภัณฑ์',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'แคตตาล็อกผลิตภัณฑ์ระบบลิ้นชัก',
 );

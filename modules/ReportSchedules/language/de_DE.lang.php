@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Nach Bericht',
     'LBL_RECENTLY_MODIFIED' => 'Kürzlich verändert',
     'LBL_RECORD_SAVED_SUCCESS' => ' {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> wurde erfolgreich erstellt. Öffnen Sie den Zeitplan, um Benutzer über das Benutzer-Unterfenster hinzuzufügen.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Zeitplan für diesen Bericht',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Berichtzeitplanberichts-Dashboard',
 );

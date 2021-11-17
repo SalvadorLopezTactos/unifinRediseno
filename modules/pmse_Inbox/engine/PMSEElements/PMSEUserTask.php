@@ -82,6 +82,9 @@ class PMSEUserTask extends PMSEEvent
                 $flowAction = 'CREATE';
                 $routeAction = 'WAIT';
                 $saveBeanData = false;
+                if ($activityDefinitionBean->act_email_process_user) {
+                    $this->emailHandler->queueActivityEmail($flowData, $activityDefinitionBean, $userId);
+                }
                 break;
             case 'REASSIGN':
                 $flowData['cas_adhoc_type'] = isset($arguments['adhoc_type']) ? $arguments['adhoc_type'] : $flowData['cas_adhoc_type'];

@@ -37,8 +37,12 @@
             module = app.controller.context.get('module'),
             route = 'create';
 
-        var url = 'http://www.sugarcrm.com/crm/product_doc.php?edition=' + serverInfo.flavor
-            + '&version=' + serverInfo.version + '&lang=' + lang + '&module=' + module + '&route=' + route;
+        var url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' + serverInfo.flavor +
+            '&version=' + serverInfo.version + '&lang=' + lang + '&module=' + module + '&route=' + route;
+
+        url += app.user.get('products') ?
+            '&products=' + encodeURIComponent(app.user.get('products').join(',')) :
+            '';
 
         return '<a href="' + url + '" target="_blank">';
     }

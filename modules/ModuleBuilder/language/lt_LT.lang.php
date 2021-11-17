@@ -591,6 +591,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'Konfigūruoti portalą',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Įjungti portalą',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Prieš atidarydami atvejį įgalinkite paiešką',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Leisti portalo vartotojams uždaryti registrą',
     'LBL_PORTAL_THEME' => 'Portalo tema',
     'LBL_PORTAL_ENABLE' => 'Įjungti',
     'LBL_PORTAL_SITE_URL' => 'Jūsų portalo tinklapis yra prieinamas per:',
@@ -755,7 +756,7 @@ $mod_strings = array(
         . ' Jei šis laukas bus įtrauktas į formulę skaičiuoti bet kurių laukų vertėms, formulė nebeveiks.'
         . '\n\nLauko nebebus galima naudoti ataskaitose; šis pakeitimas įsigalios atsijungus ir vėl prisijungus prie programos. Visos ataskaitos, kuriose yra laukas, turės būti atnaujintos, kad būtų galima jas vykdyti.'
         . '\n\nAr norite tęsti?',
-'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Ar tikrai norite panaikinti šį ryšį?<br>Pastaba: ši operacija gali būti vykdoma keletą minučių.',
+'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Ar tikrai norite ištrinti šį ryšį?<br>Pastaba: Ši operacija gali būti nebaigta kelias minutes.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Tai padarys šį ryšį pastovų. Ar tikrai norite sukurti šį ryšį?',
 'LBL_CONFIRM_DONT_SAVE' => 'pakeitimai buvo atlikti nuo paskutinio išsaugojimo, ar norėtumėte išsaugoti?',
 'LBL_CONFIRM_DONT_SAVE_TITLE' => 'Išsaugoti pakeitimus?',
@@ -772,17 +773,25 @@ $mod_strings = array(
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: laukas rodomas dublikatų suliejimo funkcijoje, tačiau jo negalima naudoti filtro sąlygai dublikatų ieškos funkcijoje.<br><b>Disabled</b>: laukas nerodomas dublikatų suliejimo funkcijoje ir jo negalima naudoti filtro sąlygai dublikatų ieškos funkcijoje.'
 . '<br><b>In Filter</b>: laukas rodomas dublikatų suliejimo funkcijoje ir galima jį naudoti dublikatų ieškos funkcijoje.<br><b>Filter Only</b>: laukas neveikia dublikatų suliejimo funkcijoje, tačiau jį galima naudoti dublikatų ieškos funkcijoje.<br><b>Default Selected Filter</b>: laukas pagal numatytuosius parametrus naudojamas filtro sąlygai dublikatų ieškos puslapyje, jis rodomas ir dublikatų suliejimo funkcijoje.'
 ,
-'LBL_POPHELP_CALCULATED'=>"Sukurkite formulę, kuri apibrėžtų šio lauko reikšmę.<br>"
-   . "Darbo eigos apibrėžimai, kuriuose yra veiksmų, nustatytų atnaujinti šį lauką, šio veiksmo daugiau nevykdys.<br>"
-   . "Laukai, kuriuose naudojamos formulės, nebus apskaičiuoti realiuoju laiku "
-   . "„Sugar“ klientų savitarnos portalas arba "
-   . "Mobilios versijos EditView išdėstymai.",
+'LBL_POPHELP_CALCULATED'=>"Sukurkite formulę, kad nustatytumėte šio lauko reikšmę.<br>"
+   . "Darbo eigos apibrėžimai, kuriuose yra veiksmas, nustatytas šiam laukui atnaujinti, daugiau veiksmo nebevykdys.<br>"
+   . "Laukai, kuriuose naudojamos formulės, nebus realiuoju laiku "
+   . "apskaičiuojami „Sugar“ savitarnos portalo ar "
+   . "„Mobile EditView“ išdėstymuose.",
 
-'LBL_POPHELP_DEPENDENT'=>"Sukurkite formulę, kuri apibrėžtų, ar šis laukas bus matomas išdėstyme.<br/>"
-        . "Priklausomi laukai atitiks priklausomybės formulę naršyklėje veikiančios mobiliosios versijos rodinyje, <br/>"
-        . "tačiau neatitiks formulės, naudojamos vietinėse programose, pvz., „Sugar Mobile for iPhone“. <br/>"
-        . "Jie neatitiks formulės, naudojamos „Sugar“ savitarnos portale.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Pasirinkite naudoti šį lauką, kai ieškote įrašų šiame modulyje naudodami visuotinę iešką.',
+'LBL_POPHELP_DEPENDENT'=>"Sukurkite formulę, kad nustatytumėte, ar šis laukas matomas išdėstymuose.<br/>"
+        . "Priklausomi laukai priklausys nuo priklausomybės formulės naršyklės mobiliajame rodinyje, <br/>"
+        . "tačiau nesilaikys formulės savosiose programose, pvz., „Sugar Mobile for iPhone“. <br/>"
+        . "Jie nesilaikys „Sugar“ savitarnos portalo formulės.",
+'LBL_POPHELP_REQUIRED'=>"Sukurkite formulę, kad nustatytumėte, ar šis laukas reikalingas išdėstymuose.<br/>"
+    . "Privalomi laukai bus naudojami pagal naršyklės mobiliajame rodinyje pateiktą formulę, <br/>"
+    . "tačiau nebus laikomasi formulės savosiose programose, pvz., „Sugar Mobile for iPhone“. <br/>"
+    . "Jie nesilaikys „Sugar“ savitarnos portalo formulės.",
+'LBL_POPHELP_READONLY'=>"Sukurkite formulę, kad nustatytumėte, ar šis laukas tik skaitomas išdėstymuose.<br/>"
+        . "Tik skaitomi laukai bus naudojami pagal naršyklės mobiliajame rodinyje pateiktą formulę, <br/>"
+        . "tačiau nesilaikys formulės savosiose programose, pvz., „Sugar Mobile for iPhone“. <br/>"
+        . "Jie nesilaikys „Sugar“ savitarnos portalo formulės.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Pasirinkite, ar norite naudoti šį lauką, kai ieškosite įrašų naudodami visuotinę paiešką šiame modulyje.',
 //Revert Module labels
 'LBL_RESET' => 'Atstatyti',
 'LBL_RESET_MODULE' => 'Atstatyti modulį',
@@ -817,6 +826,7 @@ $mod_strings = array(
                 'encrypt'=>'Šifruoti',
                 'datetimecombo' =>'Data ir laikas',
                 'decimal'=>'Dešimtainis',
+                'autoincrement' => 'Automatinis padidinimas',
 ),
 'labelTypes' => array(
     "" => "Anksčiau naudoti pavadinimai",
@@ -834,4 +844,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'Visi moduliai',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (related {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Kopijuoti iš maketo',
+'LBL_RELATIONSHIP_TYPE' => 'Ryšiai',
 );

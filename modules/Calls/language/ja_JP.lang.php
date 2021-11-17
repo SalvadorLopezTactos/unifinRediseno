@@ -11,8 +11,9 @@
  */
 $mod_strings = array (
     // Dashboard Names
-    'LBL_CALLS_LIST_DASHBOARD' => '電話リストのダッシュボード',
-    'LBL_CALLS_RECORD_DASHBOARD' => '電話レコードのダッシュボード',
+    'LBL_CALLS_LIST_DASHBOARD' => '電話リストのダッシュ ボード',
+    'LBL_CALLS_RECORD_DASHBOARD' => '電話レコードのダッシュ ボード',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => '通話 フォーカス ドロワ',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => '電話',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'アサイン先',
     'LBL_LIST_MY_CALLS' => '私の電話',
     'LBL_MY_SCHEDULED_CALLS' => '私のスケジュールされた訪問',
+    'LBL_GUEST_CALLS' => '自分のゲストとしての通話',
+    'LBL_GUEST_SCHEDULED_CALLS' => '予定されたゲストとしての通話',
     'LBL_SELECT_FROM_DROPDOWN' => '関連先ドロップダウンリストから選択してください。',
 	'LBL_ASSIGNED_TO_NAME' => 'アサイン先',
 	'LBL_ASSIGNED_TO_ID' => 'アサイン先',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'キャンセル',
     'LBL_EMPTY_SEARCH_RESULT' => '見つかりませんでした。以下より参加者を作成してください。',
     'LBL_NO_ACCESS' => '$module を作成する権限がありません。',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Amazon Connect問い合わせId',
+
     'LBL_REPEAT_TYPE' => 'リピートタイプ',
     'LBL_REPEAT_INTERVAL' => 'リピート間隔',
     'LBL_REPEAT_END' => 'リピート終了',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => '{{{this}}}と訪問',
     'LBL_SEND_INVITES' => '招待送信',
     'LBL_REMINDER_TITLE' => '電話:',
+    'LBL_CALL_RECORDING_URL' => 'レコーディング URL',
+    'LBL_CALL_RECORDING' => 'レコーディング',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'スケジュールしました{{moduleSingularLower}} {{name}} for {{formatDate date_start}}.',
@@ -164,17 +172,17 @@ $mod_strings = array (
 Sugarユーザ、取引先担当者、リードをコール参加者として追加することもできます。 {{plural_module_name}} は{{plural_module_name}} モジュール、カレンダーモジュール、インポートだけでなく、アクティビティサブパネル (レガシーモジュール用) または関連モジュール (例：取引先担当者、取引先など) のレコード上の計画された活動ダッシュレット (サイドカーモジュール用) 経由で作成することができ、自動的に両方のレコードとの間の関係を作成します。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}}モジュールは、組織内のユーザによって記録された{{calls_singular_module}}レコードで構成されます。 {{plural_module_name}}は「スケジュール」、「開催」、または「キャンセル」の状態であってよいです。Sugarユーザならびに{contacts_module}}と{{leads_module}}が招待として追加してもよいです。 - 個々のフィールドまたは[編集]ボタンをクリックして、このレコードのフィールドを編集。 - 表示または左下のペインに「データビュー」を切り替えることで、サブパネル内の他のレコードへのリンクを変更します。 - 作成し、左下のペインに「アクティビティストリーム」を切り替えて、アクティビティストリームのビューのユーザのコメントやレコードの変更履歴を表示します。 - レコード名の右にあるアイコンを使用してこのレコードにフォローまたはお気に入りにします。 - 追加のアクションは、[編集]ボタンの右にあるドロップダウンの操作メニューで利用できます。',
+    'LBL_HELP_RECORD' => '{{plural_module_name}}モジュールは、組織内のユーザーによって記録された{{calls_singular_module}}レコードで構成されます。 {{plural_module_name}}は「スケジュール」、「開催」、または「キャンセル」の状態であってよいです。Sugarユーザならびに{contacts_module}}と{{leads_module}}が招待として追加してもよいです。 - 個々のフィールドまたは[編集]ボタンをクリックして、このレコードのフィールドを編集。 - 表示または左下のペインに「データビュー」を切り替えることで、サブパネル内の他のレコードへのリンクを変更します。 - 作成し、左下のペインに「アクティビティストリーム」を切り替えて、アクティビティストリームのビューのユーザーのコメントやレコードの変更履歴を表示します。 - レコード名の右にあるアイコンを使用してこのレコードにフォローまたはお気に入りにします。 - 追加のアクションは、[編集]ボタンの右にあるドロップダウンの操作メニューで利用できます。',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} モジュールは、組織内のユーザによって記録された{{calls_singular_module}} レコードで構成されます。 {{plural_module_name}} は「スケジュール」、「開催」、または「キャンセル」状態である可能性があります。Sugarユーザならびに取引先担当者とリードを参加者として追加できます。
+    'LBL_HELP_CREATE' => '{{plural_module_name}} モジュールは、組織内のユーザーによって記録された{{calls_singular_module}} レコードで構成されます。 {{plural_module_name}} は「スケジュール」、「開催」、または「キャンセル」状態である可能性があります。Sugarユーザならびに取引先担当者とリードを参加者として追加できます。
 
 {{calls_singular_module}} を作成するには：
 1. 必要に応じてフィールドに値を入力します。
 - 「必須」フィールドは保存前に入力完了してください。
 - 必要に応じて、追加のフィールドを展開する「更に表示」をクリックします。
 2.{{calls_singular_module}} に参加者を追加します。
-- 既存のユーザ、連絡先、リードを{{calls_singular_module}} に追加するには、「参加者の選択」をクリックします。
+- 既存のユーザー、連絡先、リードを{{calls_singular_module}} に追加するには、「参加者の選択」をクリックします。
 - 「参加者の選択」の右側にあるプラスアイコンをクリックして{{calls_singular_module}} 参加者を新しいSugarレコードとして作成します。
 3. 新しいレコードを確定し、前のページに戻るには「保存」をクリックします。',
 );

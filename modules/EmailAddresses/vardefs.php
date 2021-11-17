@@ -12,6 +12,7 @@
 
 $dictionary['EmailAddress'] = array(
     'table' => 'email_addresses',
+    'archive' => false,
     'audited' => true,
     'fields' => array(
         'id' => array(

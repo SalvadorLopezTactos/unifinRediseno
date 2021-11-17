@@ -1,0 +1,207 @@
+/* side pane */
+.config-side-pane {
+  display: flex;
+  border-bottom: 1px solid @gray40;
+  background-color: @grayLighter;
+  overflow-x: scroll;
+}
+
+/* Create two equal columns that sits next to each other */
+.config-side-pane .column {
+  flex: 50%;
+  padding: 10px;
+}
+
+.config-side-pane .border-right {
+  border-right: 1px solid @gray40;
+}
+
+.config-side-pane nav ul.field-list {
+  width: auto;
+  overflow: hidden;
+  overflow-y: scroll;
+  border: 1px solid @btnSecondaryBorder;
+  list-style-type: none;
+  padding-inline-start: 5px;
+  margin: 0;
+  padding-top: 8px;
+  background-color: @white;
+}
+
+.config-side-pane .columns nav ul.multi-field {
+  height: 70px;
+  width: auto;
+  list-style-type: none;
+  padding-inline-start: 3px;
+  margin-left: 0;
+  background-color: @gray10;
+  cursor: move;
+  padding: 0;
+}
+
+.config-side-pane .fields nav ul.field-list {
+  width: auto;
+  border: 1px solid @btnSecondaryBorder;
+  list-style-type: none;
+  padding-inline-start: 3px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: @white;
+}
+
+.config-side-pane .columns nav ul.field-list {
+  height: 480px;
+  width: 250px;
+}
+
+.config-side-pane .fields nav ul.field-list {
+  height: 500px;
+  width: 250px;
+}
+
+.config-side-pane .columns nav li {
+  padding-left: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+}
+
+.config-side-pane .fields nav li {
+  cursor: grab;
+  padding: 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &.ui-sortable-helper {
+    cursor: grabbing;
+  }
+
+  &:hover {
+    color: @darkBlue;
+  }
+
+  &.multi-line-field-cursor-over {
+    cursor: no-drop;
+  }
+}
+
+.config-side-pane .columns nav .pill {
+  border-radius: 3px;
+  background-color: @lightBlue;
+  color: @darkBlue;
+  margin: 3px 8px;
+  margin-bottom: 5px;
+  cursor: move;
+
+  &:not(.multi-field-block) {
+    padding-right: 18px;
+  }
+
+  &.multi-field-block {
+    background-color: @gray10;
+    border: 1px solid @gray30;
+    box-sizing: border-box;
+    box-shadow: 0 1px 1px rgba(94, 99, 103, 0.3);
+    border-radius: 3px;
+  }
+
+  &.multi-field-block-placeholder-none {
+    display: none;
+  }
+
+  &.multi-field-block-highlight {
+    border: 1px solid @blue;
+  }
+}
+
+.config-side-pane .columns nav .pill .list-header {
+  color: @black;
+  position: relative;
+  font-weight: bold;
+}
+
+.config-side-pane .columns nav .outer {
+  margin-left: 6px;
+  margin-right: 11px;
+}
+
+.config-side-pane .multi-field-label {
+  > .fa {
+    color: @black;
+  }
+}
+
+.config-side-pane .columns {
+  .console-field-remove {
+    right: 3px;
+    color: @white;
+  }
+
+  .multi-field-column-remove {
+    right: 6px;
+    color: @black;
+  }
+
+  .console-field-remove,
+  .multi-field-column-remove {
+    top: 2px;
+    z-index: 1;
+    cursor: pointer;
+    position: absolute;
+  }
+
+  .multi-field-hint {
+    position: relative;
+    left: 8px;
+    top: 10px;
+    color: @gray70;
+  }
+
+  .list-header {
+    padding: 4px 28px 0 12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .multi-field-block {
+    height: 75px;
+    padding-left: 0;
+    margin-bottom: 5px;
+
+    &:hover {
+      .list-header .fa-times-circle {
+        visibility: visible;
+        margin-top: 4px;
+      }
+    }
+
+    &:not(:hover) {
+      .list-header .fa-times-circle {
+        visibility: hidden;
+      }
+    }
+  }
+
+  .pill {
+    &:not(.multi-field-block) {
+      padding-right: 20px;
+    }
+
+    &:hover {
+      .fa-times-circle {
+        color: @darkBlue;
+        visibility: visible;
+        line-height: 14px;
+      }
+    }
+
+    &:not(:hover) {
+      .fa-times-circle {
+        visibility: hidden;
+      }
+    }
+  }
+}

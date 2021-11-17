@@ -210,6 +210,13 @@ input[type="button"] {
     font-size: @baseFontSize + 2;
     position: relative;
     top: 1px;
+
+    &.icon-create {
+      display: inline;
+      color: @blue;
+      padding-right: 5px;
+      top: 0;
+    }
   }
   // Hover state
   &:not(.disabled):hover,
@@ -227,22 +234,36 @@ input[type="button"] {
   }
 
   &.active {
-    color: @white !important;
+    color: @white;
     text-shadow: none;
     box-shadow: none;
 
     > .fa {
-      color: @grayLighter !important;
+      color: @grayLighter;
     }
 
     &:focus {
-      background: @grayDark !important;
+      background: @grayDark;
     }
   }
 
   &.active:hover {
     > .fa {
-      color: @white !important;
+      color: @white;
+    }
+  }
+
+  &.rowaction {
+    &.active {
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .fa {
+      &:focus {
+        outline: none;
+      }
     }
   }
 }
@@ -422,7 +443,7 @@ input.required + .btn.btn-input-addon {
 .btn {
   /* override */
   > .fa {
-    color: @btnIconColor;
+    color: @gray;
   }
 
   &:not(.disabled):not(.btn-invisible):active {
@@ -431,7 +452,7 @@ input.required + .btn.btn-input-addon {
 
   /* override */
   &.active {
-    background: @btnActiveBackground !important;
+    background: @btnActiveBackground;
   }
 
   /* override */

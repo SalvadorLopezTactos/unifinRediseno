@@ -13,6 +13,7 @@
 
 $dictionary['pmse_Project'] = array(
     'table' => 'pmse_project',
+    'archive' => false,
     'audited' => false,
     'activity_enabled' => true,
     'duplicate_merge' => true,
@@ -276,6 +277,10 @@ $dictionary['pmse_Project'] = array(
     'optimistic_locking' => true,
     'unified_search' => true,
     'acls' => array(
+        'SugarACLDeveloperOrAdmin' => array(
+            'allowUserRead' => false,
+            'aclModule' => 'pmse_Project',
+        ),
         'SugarACLDeveloperForTarget' => array(
             'targetModuleField' => 'prj_module',
             'allowUserRead' => false,

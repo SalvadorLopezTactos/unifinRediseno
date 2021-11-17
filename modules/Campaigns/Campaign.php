@@ -126,10 +126,16 @@ class Campaign extends SugarBean {
 		}
 		$temp_array['TRACK_CAMPAIGN_TITLE'] = translate("LBL_TRACK_BUTTON_TITLE",'Campaigns');
 		$temp_array['TRACK_CAMPAIGN_IMAGE'] = SugarThemeRegistry::current()->getImageURL('view_status.gif');
-		$temp_array['LAUNCH_WIZARD_TITLE'] = translate("LBL_TO_WIZARD_TITLE",'Campaigns');
-		$temp_array['LAUNCH_WIZARD_IMAGE'] = SugarThemeRegistry::current()->getImageURL('edit_wizard.gif');
         $temp_array['TRACK_VIEW_ALT_TEXT'] = translate("LBL_TRACK_BUTTON_TITLE",'Campaigns');
-        $temp_array['LAUNCH_WIZ_ALT_TEXT'] = translate("LBL_TO_WIZARD_TITLE",'Campaigns');
+
+        $wizardTitle = translate("LBL_TO_WIZARD_TITLE", 'Campaigns');
+        $wizardImg = SugarThemeRegistry::current()->getImageURL('edit_wizard.gif');
+        $wizardAltText = translate("LBL_TO_WIZARD_TITLE", 'Campaigns');
+
+        $wizardButton = ' <a title="' . $wizardTitle . '" href="index.php?action=WizardHome&module=Campaigns&record=';
+        $wizardButton .= $this->id . '"><img border="0" src="' . $wizardImg . '" alt="' . $wizardAltText . '"></a>  ';
+
+        $temp_array['WIZARD_BUTTON'] = $this->ACLAccess('edit') ? $wizardButton : '';
 
 		return $temp_array;
 	}

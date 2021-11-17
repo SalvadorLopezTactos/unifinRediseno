@@ -20,7 +20,6 @@ $dictionary['Contact'] = array(
     'unified_search_default_enabled' => true,
     'duplicate_merge' => true,
     'fields' => array(
-
         'email_and_name1' => array(
             'name' => 'email_and_name1',
             'vname' => 'LBL_NAME',
@@ -28,6 +27,7 @@ $dictionary['Contact'] = array(
             'source' => 'non-db',
             'len' => '510',
             'importable' => 'false',
+            'massupdate' => false,
             'studio' => array('formula' => false),
         ),
         'lead_source' => array(
@@ -314,6 +314,13 @@ $dictionary['Contact'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_BUSINESS_CENTER',
         ),
+        'purchases' => [
+            'name' => 'purchases',
+            'type' => 'link',
+            'relationship' => 'contacts_purchases',
+            'source' => 'non-db',
+            'vname' => 'LBL_PURCHASES_SUBPANEL_TITLE',
+        ],
         'accounts' => array(
             'name' => 'accounts',
             'type' => 'link',
@@ -496,6 +503,13 @@ $dictionary['Contact'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_NOTES',
         ),
+        'messages' => [
+            'name' => 'messages',
+            'type' => 'link',
+            'relationship' => 'contact_messages',
+            'source' => 'non-db',
+            'vname' => 'LBL_MESSAGES',
+        ],
         'project' => array(
             'name' => 'project',
             'type' => 'link',
@@ -644,6 +658,9 @@ $dictionary['Contact'] = array(
             'module' => 'Campaigns',
             'duplicate_merge' => 'disabled',
             'comment' => 'The first campaign name for Contact (Meta-data only)',
+            'studio' => array(
+                'mobile' => false,
+            ),
         ),
         'campaigns' => array(
             'name' => 'campaigns',
@@ -901,6 +918,15 @@ $dictionary['Contact'] = array(
             'rhs_key' => 'contact_id',
             'relationship_type' => 'one-to-many',
         ),
+        'contact_messages' => [
+            'lhs_module' => 'Contacts',
+            'lhs_table' => 'contacts',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Messages',
+            'rhs_table' => 'messages',
+            'rhs_key' => 'contact_id',
+            'relationship_type' => 'one-to-many',
+        ],
         'contact_notes_parent' => array(
             'lhs_module' => 'Contacts',
             'lhs_table' => 'contacts',
@@ -1062,3 +1088,10 @@ $dictionary['Contact']['fields']['phone_fax']['full_text_search']['boost'] = 1.0
 $dictionary['Contact']['fields']['description']['full_text_search']['boost'] = 0.71;
 $dictionary['Contact']['fields']['primary_address_street']['full_text_search']['boost'] = 0.33;
 $dictionary['Contact']['fields']['alt_address_street']['full_text_search']['boost'] = 0.32;
+
+// enable assistant_phone for full text search
+$dictionary['Contact']['fields']['assistant_phone']['full_text_search'] = [
+    'enabled' => true,
+    'searchable' => true,
+    'boost' => 1.05,
+];

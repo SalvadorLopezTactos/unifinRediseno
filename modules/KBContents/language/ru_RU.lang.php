@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Информационная панель списка базы знаний',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Информационная панель записей базы знаний',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для базы знаний',
 
     'LBL_MODULE_NAME' => 'База знаний',
     'LBL_MODULE_NAME_SINGULAR' => 'База знаний: статья',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Не полезно',
     'LBL_RATING' => 'Рейтинг',
     'LBL_VIEWED_COUNT' => 'Просмотреть количество',
-    'LBL_DOWNLOAD_ALL' => 'Загрузить все',
-    'LBL_DOWNLOAD_ONE' => 'Загрузить',
-    'LBL_ATTACHMENTS' => 'Вложения:',
-    'LBL_ADD_ATTACHMENT' => 'Обзор',
     'LBL_CATEGORIES' => 'Категории базы знаний',
     'LBL_CATEGORY_NAME' => 'Категория',
     'LBL_USEFULNESS' => 'Полезность',

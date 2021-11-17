@@ -12,6 +12,8 @@
 
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Job\RebuildJob;
 use Sugarcrm\Sugarcrm\ProductDefinition\Job\UpdateProductDefinitionJob;
+use Sugarcrm\Sugarcrm\Dbal\Connection;
+use Doctrine\DBAL\FetchMode;
 
 /**
  * Set up an array of Jobs with the appropriate metadata
@@ -32,32 +34,34 @@ use Sugarcrm\Sugarcrm\ProductDefinition\Job\UpdateProductDefinitionJob;
  * This array provides the Schedulers admin interface with values for its "Job"
  * dropdown menu.
  */
-$job_strings = array (
-	0 => 'refreshJobs',
-	1 => 'pollMonitoredInboxes',
-	2 => 'runMassEmailCampaign',
-    5 => 'pollMonitoredInboxesForBouncedCampaignEmails',
-	3 => 'pruneDatabase',
-	4 => 'trimTracker',
-	/*4 => 'securityAudit()',*/
-    6 => 'processWorkflow',
-	7 => 'processQueue',
-    9 => 'updateTrackerSessions',
-    12 => 'sendEmailReminders',
-    15 => 'cleanJobQueue',
+$job_strings = [
+    'refreshJobs',
+    'pollMonitoredInboxes',
+    'runMassEmailCampaign',
+    'pollMonitoredInboxesForBouncedCampaignEmails',
+    'pruneDatabase',
+    'trimTracker',
+    'processWorkflow',
+    'processQueue',
+    'updateTrackerSessions',
+    'sendEmailReminders',
+    'cleanJobQueue',
+
     //Add class to build additional TimePeriods as necessary
-    16 => 'class::SugarJobCreateNextTimePeriod',
-    17 => 'class::SugarJobHeartbeat',
-    20 => 'cleanOldRecordLists',
-    21 => 'class::SugarJobRemovePdfFiles',
-    22 => 'class::SugarJobKBContentUpdateArticles',
-    23 => 'class::\Sugarcrm\Sugarcrm\Elasticsearch\Queue\Scheduler',
-    24 => 'class::SugarJobRemoveDiagnosticFiles',
-    25 => 'class::SugarJobRemoveTmpFiles',
-    26 => 'class::' . RebuildJob::class,
-    27 => 'class::SugarJobActivityStreamPurger',
-    28 => 'class::' . UpdateProductDefinitionJob::class,
-);
+    'class::SugarJobCreateNextTimePeriod',
+    'class::SugarJobHeartbeat',
+    'cleanOldRecordLists',
+    'class::SugarJobRemovePdfFiles',
+    'class::SugarJobKBContentUpdateArticles',
+    'class::\Sugarcrm\Sugarcrm\Elasticsearch\Queue\Scheduler',
+    'class::SugarJobRemoveDiagnosticFiles',
+    'class::SugarJobRemoveTmpFiles',
+    'class::' . RebuildJob::class,
+    'class::SugarJobActivityStreamPurger',
+    'class::' . UpdateProductDefinitionJob::class,
+    'class::' . SugarJobProcessTimeAwareSchedules::class,
+    'class::SugarJobDataArchiver',
+];
 
 /**
  * Job 0 refreshes all job schedulers at midnight
@@ -91,6 +95,7 @@ function pollMonitoredInboxes() {
         $GLOBALS['current_user']->team_id = $ieX->team_id;
         $GLOBALS['current_user']->team_set_id = $ieX->team_set_id;
 		$mailboxes = $ieX->mailboxarray;
+        $leaveMessagesOnMailServer = $ieX->get_stored_options("leaveMessagesOnMailServer", 0);
 		foreach($mailboxes as $mbox) {
 			$ieX->mailbox = $mbox;
 			$newMsgs = array();
@@ -101,7 +106,7 @@ function pollMonitoredInboxes() {
 				// get all the keys which are msgnos;
 				$newMsgs = array_keys($msgNoToUIDL);
 			}
-			if($ieX->connectMailserver() == 'true') {
+            if ($ieX->connectToImapServer() == 'true') {
 				$connectToMailServer = true;
 			} // if
 
@@ -109,7 +114,8 @@ function pollMonitoredInboxes() {
 			if($connectToMailServer) {
 				$GLOBALS['log']->debug('Connected to mailserver');
 				if (!$ieX->isPop3Protocol()) {
-					$newMsgs = $ieX->getNewMessageIds();
+                    $ieX->conn->selectMailbox($mbox);
+                    $newMsgs = $ieX->getNewIds();
 				}
 				if(is_array($newMsgs)) {
 					$current = 1;
@@ -148,94 +154,98 @@ function pollMonitoredInboxes() {
 						$GLOBALS['log']->debug('distribution method id [ '.$distributionMethod.' ]');
 					}
 					foreach($newMsgs as $k => $msgNo) {
-						$uid = $msgNo;
-						if ($ieX->isPop3Protocol()) {
-							$uid = $msgNoToUIDL[$msgNo];
-						} else {
-							$uid = imap_uid($ieX->conn, $msgNo);
-						} // else
-						if ($isGroupFolderExists) {
-							$_REQUEST['team_id'] = $sugarFolder->team_id;
-							$_REQUEST['team_set_id'] = $sugarFolder->team_set_id;
-                            $_REQUEST['acl_team_set_id'] = $sugarFolder->acl_team_set_id;
-							if ($ieX->importOneEmail($msgNo, $uid)) {
-								// add to folder
-								$sugarFolder->addBean($ieX->email);
-								if ($ieX->isPop3Protocol()) {
-									$messagesToDelete[] = $msgNo;
-								} else {
-									$messagesToDelete[] = $uid;
-								}
-								if ($ieX->isMailBoxTypeCreateCase()) {
-									$userId = "";
-									if ($distributionMethod == 'roundRobin') {
-										if (sizeof($users) == 1) {
-											$userId = $users[0];
-											$lastRobin = $users[0];
-										} else {
-											$userIdsKeys = array_flip($users); // now keys are values
-											$thisRobinKey = $userIdsKeys[$lastRobin] + 1;
-											if(!empty($users[$thisRobinKey])) {
-												$userId = $users[$thisRobinKey];
-												$lastRobin = $users[$thisRobinKey];
-											} else {
-												$userId = $users[0];
-												$lastRobin = $users[0];
-											}
-										} // else
-									} else {
-										if (sizeof($users) == 1) {
-											foreach($users as $k => $value) {
-												$userId = $value;
-											} // foreach
-										} else {
-											asort($counts); // lowest to highest
-											$countsKeys = array_flip($counts); // keys now the 'count of items'
-											$leastBusy = array_shift($countsKeys); // user id of lowest item count
-											$userId = $leastBusy;
-											$counts[$leastBusy] = $counts[$leastBusy] + 1;
-										}
-									} // else
-									$GLOBALS['log']->debug('userId [ '.$userId.' ]');
-									$ieX->handleCreateCase($ieX->email, $userId);
-								} // if
-							} // if
-						} else {
-								if($ieX->isAutoImport()) {
-									$ieX->importOneEmail($msgNo, $uid);
-								} else {
-									/*If the group folder doesn't exist then download only those messages
-									 which has caseid in message*/
-									$ieX->getMessagesInEmailCache($msgNo, $uid);
-									$email = BeanFactory::newBean('Emails');
-									$header = imap_headerinfo($ieX->conn, $msgNo);
-									$email->name = $ieX->handleMimeHeaderDecode($header->subject);
-									$email->from_addr = $ieX->convertImapToSugarEmailAddress($header->from);
-									$email->reply_to_email  = $ieX->convertImapToSugarEmailAddress($header->reply_to);
-									if(!empty($email->reply_to_email)) {
-										$contactAddr = $email->reply_to_email;
-									} else {
-										$contactAddr = $email->from_addr;
-									}
-									$mailBoxType = $ieX->mailbox_type;
-									if (($mailBoxType == 'support') || ($mailBoxType == 'pick')) {
-										if(!class_exists('aCase')) {
-
-										}
-										$c = BeanFactory::newBean('Cases');
-										$GLOBALS['log']->debug('looking for a case for '.$email->name);
-										if ($ieX->getCaseIdFromCaseNumber($email->name, $c)) {
-											$ieX->importOneEmail($msgNo, $uid);
-										} else {
-											$ieX->handleAutoresponse($email, $contactAddr);
-										} // else
-									} else {
-										$ieX->handleAutoresponse($email, $contactAddr);
-									} // else
-								} // else
-						} // else
-						$GLOBALS['log']->debug('***** On message [ '.$current.' of '.$total.' ] *****');
-						$current++;
+                        try {
+                            $uid = $msgNo;
+                            if ($ieX->isPop3Protocol()) {
+                                $uid = $msgNoToUIDL[$msgNo];
+                            }
+                            if ($isGroupFolderExists) {
+                                $_REQUEST['team_id'] = $sugarFolder->team_id;
+                                $_REQUEST['team_set_id'] = $sugarFolder->team_set_id;
+                                $_REQUEST['acl_team_set_id'] = $sugarFolder->acl_team_set_id;
+                                if ($ieX->importEmailFromUid($uid)) {
+                                    // add to folder
+                                    $sugarFolder->addBean($ieX->email);
+                                    if ($ieX->isPop3Protocol()) {
+                                        $messagesToDelete[] = $msgNo;
+                                    } else {
+                                        $messagesToDelete[] = $uid;
+                                    }
+                                    if ($ieX->isMailBoxTypeCreateCase()) {
+                                        $userId = "";
+                                        if ($distributionMethod == 'roundRobin') {
+                                            if (sizeof($users) == 1) {
+                                                $userId = $users[0];
+                                                $lastRobin = $users[0];
+                                            } else {
+                                                $userIdsKeys = array_flip($users); // now keys are values
+                                                $thisRobinKey = $userIdsKeys[$lastRobin] + 1;
+                                                if (!empty($users[$thisRobinKey])) {
+                                                    $userId = $users[$thisRobinKey];
+                                                    $lastRobin = $users[$thisRobinKey];
+                                                } else {
+                                                    $userId = $users[0];
+                                                    $lastRobin = $users[0];
+                                                }
+                                            } // else
+                                        } else {
+                                            if (sizeof($users) == 1) {
+                                                foreach ($users as $k => $value) {
+                                                    $userId = $value;
+                                                } // foreach
+                                            } else {
+                                                asort($counts); // lowest to highest
+                                                $countsKeys = array_flip($counts); // keys now the 'count of items'
+                                                $leastBusy = array_shift($countsKeys); // user id of lowest item count
+                                                $userId = $leastBusy;
+                                                $counts[$leastBusy] = $counts[$leastBusy] + 1;
+                                            }
+                                        } // else
+                                        $GLOBALS['log']->debug('userId [ '.$userId.' ]');
+                                        $ieX->handleCreateCase($ieX->email, $userId);
+                                    } // if
+                                    if (!$leaveMessagesOnMailServer) {
+                                        $ieX->conn->deleteMessage($uid);
+                                    }
+                                } // if
+                            } else {
+                                if ($ieX->isAutoImport()) {
+                                    $ieX->importEmailFromUid($uid);
+                                } else {
+                                    /*If the group folder doesn't exist then download only those messages
+                                     which has caseid in message*/
+                                    $ieX->getMessagesInEmailCache($msgNo, $uid);
+                                    $email = BeanFactory::newBean('Emails');
+                                    $email->name = $ieX->conn->getSubject($uid);
+                                    $email->from_addr = implode(',', $ieX->conn->getFromAddresses($uid));
+                                    $email->reply_to_email  = implode(',', $ieX->conn->getReplyToAddresses($uid));
+                                    if (!empty($email->reply_to_email)) {
+                                        $contactAddr = $email->reply_to_email;
+                                    } else {
+                                        $contactAddr = $email->from_addr;
+                                    }
+                                    $mailBoxType = $ieX->mailbox_type;
+                                    if (($mailBoxType == 'support') || ($mailBoxType == 'pick')) {
+                                        $c = BeanFactory::newBean('Cases');
+                                        $GLOBALS['log']->debug('looking for a case for '.$email->name);
+                                        if ($ieX->getCaseIdFromCaseNumber($email->name, $c)) {
+                                            $ieX->importEmailFromUid($uid);
+                                        } else {
+                                            $ieX->handleAutoresponse($email, $contactAddr);
+                                        } // else
+                                    } else {
+                                        $ieX->handleAutoresponse($email, $contactAddr);
+                                    } // else
+                                } // else
+                            } // else
+                        } catch (Exception $e) {
+                            $GLOBALS['log']->fatal(
+                                'pollMonitoredInboxes unable to import email with UID ' . $uid . ': ' .
+                                $e->getMessage()
+                            );
+                        }
+                        $GLOBALS['log']->debug('***** On message [ '.$current.' of '.$total.' ] *****');
+                        $current++;
 					} // foreach
 					// update Inbound Account with last robin
 					if ($ieX->isMailBoxTypeCreateCase() && $distributionMethod == 'roundRobin') {
@@ -243,23 +253,11 @@ function pollMonitoredInboxes() {
 					} // if
 
 				} // if
-				if ($isGroupFolderExists)	 {
-					$leaveMessagesOnMailServer = $ieX->get_stored_options("leaveMessagesOnMailServer", 0);
-					if (!$leaveMessagesOnMailServer) {
-						if ($ieX->isPop3Protocol()) {
-							$ieX->deleteMessageOnMailServerForPop3(implode(",", $messagesToDelete));
-						} else {
-							$ieX->deleteMessageOnMailServer(implode($app_strings['LBL_EMAIL_DELIMITER'], $messagesToDelete));
-						}
-					}
-				}
 			} else {
 				$GLOBALS['log']->fatal("SCHEDULERS: could not get an IMAP connection resource for ID [ {$a['id']} ]. Skipping mailbox [ {$a['name']} ].");
 				// cn: bug 9171 - continue while
 			} // else
 		} // foreach
-		imap_expunge($ieX->conn);
-		imap_close($ieX->conn, CL_EXPUNGE);
 	} // while
     $GLOBALS['current_user']->team_id = $_bck_up['team_id'];
     $GLOBALS['current_user']->team_set_id = $_bck_up['team_set_id'];
@@ -321,9 +319,12 @@ function pruneDatabase() {
                             ->where('deleted = 1')
                             ->setMaxResults($pruneBatchSize)
                             ->execute()
-                            ->fetchColumn();
-                        if (count($ids) === 0) {
+                            ->fetchAll(FetchMode::COLUMN);
+                        if (!is_countable($ids) || count($ids) === 0) {
                             break;
+                        }
+                        if (!$conn->isAutoCommit()) {
+                            $conn->beginTransaction();
                         }
                         $conn->executeUpdate(
                             'DELETE FROM ' . $table . '_cstm WHERE id_c IN (?)',
@@ -335,7 +336,9 @@ function pruneDatabase() {
                             [$ids],
                             [Connection::PARAM_STR_ARRAY]
                         );
-                        $conn->commit();
+                        if (!$conn->isAutoCommit()) {
+                            $conn->commit();
+                        }
                     }
                 }
             } else {
@@ -391,38 +394,42 @@ function trimTracker()
  */
 function pollMonitoredInboxesForBouncedCampaignEmails() {
 	$GLOBALS['log']->info('----->Scheduler job of type pollMonitoredInboxesForBouncedCampaignEmails()');
-	global $dictionary;
-
 
 	$ie = BeanFactory::newBean('InboundEmail');
 	$r = $ie->db->query('SELECT id FROM inbound_email WHERE deleted=0 AND status=\'Active\' AND mailbox_type=\'bounce\'');
 
 	while($a = $ie->db->fetchByAssoc($r)) {
 		$ieX = BeanFactory::getBean('InboundEmail', $a['id'], array('disable_row_level_security' => true));
-		$ieX->connectMailserver();
+        $ieX->connectToImapServer();
         $GLOBALS['log']->info("Bounced campaign scheduler connected to mail server id: {$a['id']} ");
-		$newMsgs = array();
-		if ($ieX->isPop3Protocol()) {
-			$newMsgs = $ieX->getPop3NewMessagesToDownload();
-		} else {
-			$newMsgs = $ieX->getNewMessageIds();
-		}
 
-		//$newMsgs = $ieX->getNewMessageIds();
-		if(is_array($newMsgs)) {
-			foreach($newMsgs as $k => $msgNo) {
-				$uid = $msgNo;
-				if ($ieX->isPop3Protocol()) {
-					$uid = $ieX->getUIDLForMessage($msgNo);
-				} else {
-					$uid = imap_uid($ieX->conn, $msgNo);
-				} // else
-                 $GLOBALS['log']->info("Bounced campaign scheduler will import message no: $msgNo");
-				$ieX->importOneEmail($msgNo, $uid, false,false);
-			}
-		}
-		imap_expunge($ieX->conn);
-		imap_close($ieX->conn);
+        $mailboxes = $ieX->mailboxarray;
+        foreach ($mailboxes as $mailbox) {
+            if ($ieX->isPop3Protocol()) {
+                $newMsgs = $ieX->getPop3NewMessagesToDownload();
+            } else {
+                $ieX->conn->selectMailbox($mailbox);
+                $newMsgs = $ieX->getNewIds();
+            }
+
+            if (is_array($newMsgs)) {
+                foreach ($newMsgs as $k => $msgNo) {
+                    try {
+                        $uid = $msgNo;
+                        if ($ieX->isPop3Protocol()) {
+                            $uid = $ieX->getUIDLForMessage($msgNo);
+                        }
+                        $GLOBALS['log']->info("Bounced campaign scheduler will import message no: $msgNo");
+                        $ieX->importEmailFromUid($uid);
+                    } catch (Exception $e) {
+                        $GLOBALS['log']->fatal(
+                            'pollMonitoredInboxesForBouncedCampaignEmails unable to import email with UID ' . $uid .
+                            ': ' . $e->getMessage()
+                        );
+                    }
+                }
+            }
+        }
 	}
 
 	return true;
@@ -494,7 +501,6 @@ function cleanOldRecordLists() {
 
 	return true;
 }
-
 
 function cleanJobQueue($job)
 {

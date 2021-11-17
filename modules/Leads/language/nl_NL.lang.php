@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Dashboard leadlijst',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Dashboard leadrecord',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer leads',
 
     'ERR_DELETE_RECORD' => 'U dient een recordnummer op te geven om deze lead te verwijderen.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Account Beschrijving',
@@ -325,4 +326,8 @@ Na het bevestigen van elke vereiste en gewenste module, klikt u op de "Opslaan e
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Kan de status {{moduleSingular}} niet wijzigen. Deze {{moduleSingular}} is reeds geconverteerd.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Voorspelling leadsconversie',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Voorspellingsgegevens bekijken voor een specifieke lead',
 );

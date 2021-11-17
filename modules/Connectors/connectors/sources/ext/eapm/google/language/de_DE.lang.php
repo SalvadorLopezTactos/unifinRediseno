@@ -9,32 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+
+$readableProductNames =
+    getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($GLOBALS['current_user']));
+$readableProductNames = urlencode(implode(',', $readableProductNames));
+
+$url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar_flavor'] . '&version=' .
+    $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&module=Connectors&route=Google' .
+    $readableProductNames;
 
 $connector_strings = array(
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Holen Sie sich den Google API-Key und Secret-Code, indem Sie Ihre Sugar-Instanz als neue Anwendung registrieren.
-<br/><br>So registrieren Sie Ihre Instanz:
-<br/><br/>
-<ol>
-<li>Gehen Sie zur Google Developers-Webseite:
-<a href=\'https://console.developers.google.com/project\'
-target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
-
-<li>Melden Sie sich mit dem Google-Konto an, unter dem Sie diese Anwendung registrieren möchten.</li>
-<li>Legen Sie ein neues Projekt an</li>
-<li>Geben Sie den Projektnamen ein und klicken Sie auf "Erstellen".</li>
-<li>Aktivieren Sie daraufhin Google Drive und die Google Contacts API</li>
-<li>Erstellen Sie in dem Abschnitt "APIs & Auth > Anmeldedaten" eine neue Client ID </li>
-<li>Wählen Sie Web-Anwendung und klicken Sie auf Einstellung des Einwilligungsdialogfensters</li>
-<li>Geben Sie einen Produktnamen ein und klicken Sie auf "Speichern"</li>
-<li>Geben Sie in dem Abschnitt "Autorisierte weiterleitende URIs" folgende URL ein: {$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>
-<li>Klicken Sie auf "Client ID erstellen"</li>
-<li>Kopieren Sie die Client ID und den Secret-Code in die untenstehenden Feldera</li>
-
-</li>
-</ol>
-</td></tr>
-</table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .
+        'Registrieren Sie Ihre Sugar-Instanz bei Google, um die Konfiguration von Google-Konten für die Verwendung in Sugar zu aktivieren.' .
+        'Weitere Informationen finden Sie unter  <a href="https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$lang}&module=Connectors&route=Google" target=\'_blank\'>.' .
+        '\' target=\'_blank\'>Connectors documentation</a> für weitere Informationen.</td></tr></table>',
     'oauth2_client_id' => 'Client ID',
-    'oauth2_client_secret' => 'Secret-Code',
+    'oauth2_client_secret' => 'Client Secret',
 );

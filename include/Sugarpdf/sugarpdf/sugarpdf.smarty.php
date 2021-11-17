@@ -46,7 +46,7 @@ class SugarpdfSmarty extends Sugarpdf{
         parent::preDisplay();
         $this->print_header = false;
         $this->print_footer = false;
-        $this->_initSmartyInstance();
+        $this->initSmartyInstance();
     }
     
     function display(){
@@ -69,9 +69,10 @@ class SugarpdfSmarty extends Sugarpdf{
     /**
      * Init the Sugar_Smarty object.
      */
-    private function _initSmartyInstance(){
-        if ( !($this->ss instanceof Sugar_Smarty) ) {
-            $this->ss = new Sugar_Smarty();
+    private function initSmartyInstance()
+    {
+        if (!($this->ss instanceof Restricted_Sugar_Smarty)) {
+            $this->ss = new Restricted_Sugar_Smarty();
             // TODO: Remove after MAR-1064 is merged.
             // Enable enhanced security for user-provided templates. This
             // includes disabling the {php} Smarty tag.

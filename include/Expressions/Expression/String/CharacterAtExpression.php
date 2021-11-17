@@ -22,7 +22,8 @@ class CharacterAtExpression extends StringExpression {
 		$params = $this->getParameters();
 		$str = $params[0]->evaluate();
 		$idx = $params[1]->evaluate();
-		return $str{$idx};
+
+        return sugarSubstr($str, $idx, 1);
 	}
 
 	/**
@@ -65,4 +66,3 @@ EOQ;
 	function toString() {
 	}
 }
-?>

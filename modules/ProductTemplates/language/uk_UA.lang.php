@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Розряд оподаткування:',
   'LBL_TYPE_NAME'=>'Назва типу',
   'LBL_TYPE' => 'Тип',
+  'LBL_PRODUCT_TYPE' => 'Тип продукту',
   'LBL_URL' => 'URL продукту:',
   'LBL_VENDOR_PART_NUM' => 'Внутрішній код постачальника:',
   'LBL_WEIGHT' => 'Вага:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Переглянути каталог продуктів',
   'NTC_DELETE_CONFIRMATION' => 'Ви дійсно бажаєте видалити цей запис?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Додати',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Пошук у каталозі продуктів',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Немає доступних даних',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Відповідальний користувач',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Типи продуктів',
   'LBL_RENEWABLE' => 'Із можливістю поновлення',
   'LBL_SERVICE' => 'Послуга',
+  'LBL_LOCK_DURATION' => 'Тривалість блокування',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Інформаційна панель зі списком каталогів продуктів',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Інформаційна панель із записами каталогу продуктів',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель каталогу продуктів',
 );

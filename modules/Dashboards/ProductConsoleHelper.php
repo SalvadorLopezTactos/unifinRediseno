@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+
 /**
  * Class ProductConsoleHelper
  *
@@ -26,9 +28,7 @@ class ProductConsoleHelper
      */
     public function useRevenueLineItems(): bool
     {
-        // get the OpportunitySettings
-        $settings = Opportunity::getSettings();
-        return (isset($settings['opps_view_by']) && $settings['opps_view_by'] === 'RevenueLineItems');
+        return Opportunity::usingRevenueLineItems();
     }
 
     /**
@@ -41,6 +41,19 @@ class ProductConsoleHelper
     {
         if (!$this->useRevenueLineItems() && isset($args[0]) && $args[0] instanceof SugarQuery) {
             $args[0]->where()->notEquals('id', self::$renewalsConsoleId);
+
+            // Adjust the limit of the query to compensate for the removed records
+            if (!empty($args[1]['id_query']) && $args[1]['id_query'] instanceof SugarQuery) {
+                $oldLimit = $args[1]['id_query']->limit;
+                if (isset($oldLimit)) {
+                    $args[1]['id_query']->limit($oldLimit + 1);
+                }
+            } else {
+                $oldLimit = $args[0]->limit;
+                if (isset($oldLimit)) {
+                    $args[0]->limit($oldLimit + 1);
+                }
+            }
         }
     }
 
@@ -53,8 +66,27 @@ class ProductConsoleHelper
      */
     public function checkRenewalsConsole(SugarBean $bean, string $event, array $args)
     {
-        if (!$this->useRevenueLineItems() && !empty($args['id']) && $args['id'] ===  self::$renewalsConsoleId) {
+        if ($this->isAuthorized() === false && !empty($args['id']) && $args['id'] ===  self::$renewalsConsoleId) {
             throw new SugarApiExceptionNotAuthorized('SUGAR_API_EXCEPTION_RECORD_NOT_AUTHORIZED', ['view']);
         }
+    }
+
+    /**
+     * Checks to see if this console is loadable. Checks adminWork setting for cases like upgrade.
+     * @return boolean
+     */
+    private function isAuthorized() : bool
+    {
+        // Some console require certain setups on the system
+        return $this->useRevenueLineItems() || $this->isAdminWork();
+    }
+
+    /**
+     * Determines if we are in an admin only process to allow consumption of the dashboard
+     * @return boolean
+     */
+    public function isAdminWork() : bool
+    {
+        return AccessControlManager::instance()->getAdminWork() === true;
     }
 }

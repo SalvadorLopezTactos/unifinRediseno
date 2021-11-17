@@ -89,6 +89,10 @@ $viewdefs['Calls']['base']['view']['preview'] = array(
                     'span' => 12,
                     'rows' => 3,
                 ),
+                [
+                    'name' => 'transcript',
+                    'span' => 12,
+                ],
                 'parent_name',
                 array(
                     'name' => 'invitees',

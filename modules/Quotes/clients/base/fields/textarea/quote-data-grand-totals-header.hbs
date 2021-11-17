@@ -12,4 +12,10 @@
 --}}
 <div class="record-label quote-totals-row-label">{{label}}</div>
 
-<div class="quote-totals-row-value"  rel="tooltip" data-original-title="{{longName}}">{{shortName}}</div>
+<div class="quote-totals-row-value" rel="tooltip" data-original-title="{{value.defaultValue}}">
+    {{#if value.short}}
+        {{value.short}}
+    {{else}}
+        {{nl2br value.long}}
+    {{/if}}
+</div>

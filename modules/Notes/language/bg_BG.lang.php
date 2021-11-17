@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Електронно табло със списък на бележките',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Електронно табло със запис на бележките',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на бележки',
 
+    'LBL_RELATED_CONTACT' => 'Свързан контакт',
     'ERR_DELETE_RECORD' => 'Трябва да определите номер, за да изтриете този запис.',
     'LBL_ACCOUNT_ID' => 'Идентификатор на организацията:',
     'LBL_CASE_ID' => 'Казус:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'Контакт:',
     'LBL_CONTACT_NAME' => 'Контакт:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Бележки',
+    'LBL_ATTACHMENTS' => 'Прикачени файлове',
+    'LBL_ATTACHMENT_FLAG' => 'Е прикачен файл',
     'LBL_DESCRIPTION' => 'Описание',
     'LBL_EMAIL_ADDRESS' => 'Електронна поща:',
     'LBL_EMAIL_ATTACHMENT' => 'Приложения',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Приложения',
     'LBL_NOTE' => 'Бележки:',
     'LBL_OPPORTUNITY_ID' => 'Възможност:',
+    'LBL_NOTE_PARENT_ID' => 'Родителски идентификатор на бележка:',
     'LBL_PARENT_ID' => 'Родителско ID:',
     'LBL_PARENT_TYPE' => 'Parent тип',
     'LBL_EMAIL_TYPE' => 'Тип на електронната поща',

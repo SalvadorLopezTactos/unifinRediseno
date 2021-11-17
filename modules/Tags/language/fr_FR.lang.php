@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Créé par (ID)',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Créé par (Nom d&#39;utilisateur)',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Assigné à (Nom d&#39;utilisateur)',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Balises',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrement de balises',
+    'LBL_MY_TAGS' => 'Mes balises',
+    'LBL_MY_FAVORITE_TAGS' => 'Mes balises favorites',
 );

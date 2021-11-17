@@ -30,7 +30,26 @@ class ImportViewStep2 extends ImportView
         global $mod_strings, $app_list_strings, $app_strings, $current_user, $import_bean_map, $import_mod_strings;
 
         $this->instruction = 'LBL_SELECT_UPLOAD_INSTRUCTION';
-        $this->ss->assign('INSTRUCTION', $this->getInstruction());
+        $instruction = $this->getInstruction();
+        $idmUpdateInstruction = $idmCreateInstruction = '';
+        $this->ss->assign('idm_update_mode_only', false);
+
+        if ($this->isLimitedForModuleInIdmMode($this->importModule)) {
+            $this->ss->assign('idm_update_mode_only', true);
+
+            $csUrl = $this->getIdpConfig()
+                ->buildCloudConsoleUrl('/', ['users', 'import'], $GLOBALS['current_user']->id);
+
+            $idmCreateInstruction = string_format(
+                $mod_strings['LBL_SELECT_IDM_CREATE_INSTRUCTION'],
+                [$csUrl]
+            );
+            $idmUpdateInstruction = $mod_strings['LBL_SELECT_IDM_UPLOAD_INSTRUCTION'];
+        }
+
+        $this->ss->assign('IDM_CREATE_INSTRUCTION', $idmCreateInstruction);
+        $this->ss->assign('IDM_UPDATE_INSTRUCTION', $idmUpdateInstruction);
+        $this->ss->assign('INSTRUCTION', $instruction);
 
         $this->ss->assign("MODULE_TITLE", $this->getModuleTitle(false));
         $this->ss->assign("IMP", $import_mod_strings);
@@ -111,6 +130,15 @@ class ImportViewStep2 extends ImportView
     {
         global $mod_strings;
 
+        $idmUpdateModeOnly = 0;
+        $lblConfirmImport = 'LBL_CONFIRM_IMPORT';
+
+        if ($this->isLimitedForModuleInIdmMode($this->importModule)) {
+            $idmUpdateModeOnly = 1;
+            $lblConfirmImport = 'LBL_IDM_CONFIRM_IMPORT';
+        }
+
+
         return <<<EOJAVASCRIPT
 
 if( document.getElementById('goback') )
@@ -123,10 +151,11 @@ if( document.getElementById('goback') )
 }
 
 document.getElementById('gonext').onclick = function(){
+    var idmUpdateModeOnly = {$idmUpdateModeOnly}
     // warning message that tells user that updates can not be undone
-    if(document.getElementById('import_update').checked)
+    if(document.getElementById('import_update').checked || idmUpdateModeOnly)
     {
-        ret = confirm(SUGAR.language.get("Import", 'LBL_CONFIRM_IMPORT'));
+        ret = confirm(SUGAR.language.get("Import", '{$lblConfirmImport}'));
         if (!ret) {
             return false;
         }

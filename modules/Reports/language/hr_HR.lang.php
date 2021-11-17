@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Pogreška pri dohvaćanju podataka iz izvješća detaljne analize za ovu radnju. Pomoć zatražite od vlasnika izvješća.',
     'LBL_CHART_NO_DRILLTHRU' => 'Detaljna analiza nije dostupna',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za izvješća',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'Prikaz popisa pokazuje sva izvješća koja odgovaraju trenutačnim kriterijima pretraživanja i kojima korisnici imaju pristup. Možete vidjeti osnovne detalje o svakom izvješću unutar stupaca polja prikaza popisa i na pregledu. Možete postaviti oznake za izvješća i stvoriti filtre. Kliknite na naziv izvješća da bi se ono prikazalo ili odaberite „Uredi izvješće” u izborniku radnji da biste izmijenili izvješće.',

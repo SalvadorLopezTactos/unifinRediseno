@@ -30,14 +30,6 @@
     },
 
     /**
-     * @inheritdoc
-     */
-    bindDataChange: function() {
-        this.model.on('sync', this._toggleDisable, this);
-        this.model.on('change:quote_id', this._toggleDisable, this);
-    },
-
-    /**
      * convert RLI to quote
      * @param {Object} e
      */
@@ -49,15 +41,5 @@
         }
 
         this.view.layout.trigger('list:massquote:fire');
-    },
-
-    /**
-     * Reusable method for the event actions
-     *
-     * @private
-     */
-    _toggleDisable: function() {
-        var quote_id = this.model.get('quote_id');
-        this.setDisabled(!(_.isUndefined(quote_id) || _.isEmpty(quote_id)));
     }
 })

@@ -12,7 +12,6 @@
  */
 
 
-
 $modListHeader = array();
 
 require_once('modules/Reports/templates/templates_pdf.php');
@@ -75,7 +74,7 @@ foreach ($reportsToEmailEnt as $scheduleId => $scheduleInfo) {
     $recipientName = $locale->formatName($user);
 
     try {
-        $mailer = MailerFactory::getMailerForUser($current_user);
+        $mailer = MailerFactory::getSystemDefaultMailer();
 
         // set the subject of the email
         $subject = empty($reportMaker->name) ? "Report" : $reportMaker->name;

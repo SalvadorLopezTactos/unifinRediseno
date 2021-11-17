@@ -20,6 +20,7 @@ use Sugarcrm\IdentityProvider\Saml2\AuthPostBinding;
 use Sugarcrm\IdentityProvider\Saml2\AuthRedirectBinding;
 use Sugarcrm\IdentityProvider\Saml2\Builder\RequestBuilder;
 use Sugarcrm\IdentityProvider\Saml2\Request\LogoutPostRequest;
+use Sugarcrm\IdentityProvider\Tests\IDMFixturesHelper;
 
 /**
  * Test class for RequestBuilder logic.
@@ -46,6 +47,10 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
         $this->settingsMock = $this->getMockBuilder(Settings::class)
             ->disableOriginalConstructor()
             ->getMock();
+        $this->settingsMock->method('getIdPData')
+            ->willReturn(IDMFixturesHelper::getOktaParameters()['idp']);
+        $this->settingsMock->method('getSPData')
+            ->willReturn(IDMFixturesHelper::getOktaParameters()['sp']);
     }
 
     /**

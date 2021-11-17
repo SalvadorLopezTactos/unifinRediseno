@@ -60,8 +60,6 @@ class TermsAggregation extends AbstractAggregation
             return false;
         }
 
-        $filter = new \Elastica\Query\Terms();
-        $filter->setTerms($this->options['field'], $filterDefs);
-        return $filter;
+        return new \Elastica\Query\Terms($this->options['field'], $filterDefs);
     }
 }

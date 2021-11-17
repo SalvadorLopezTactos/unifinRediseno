@@ -133,8 +133,9 @@ class SqlsrvManager extends MssqlManager
     {
         global $sugar_config;
 
-        if (is_null($configOptions))
+        if (is_null($configOptions)) {
             $configOptions = $sugar_config['dbconfig'];
+        }
 
         //set the connections parameters
         $connect_param = '';

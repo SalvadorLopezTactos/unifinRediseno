@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Informačný panel so zoznamom ponúk',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Informačný panel so záznamom ponúk',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na ponuky',
 
     'LBL_CONTRACTS'=>'Kontrakty',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Kontrakty',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Krajina fakturácie',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'PSČ fakturácie',
     'LBL_BILLING_ADDRESS_STATE' => 'Krajina fakturácie',
-    'LBL_BILLING_ADDRESS_STREET' => 'Fakturačná adresa',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Fakturačná adresa:',
     'LBL_BILLING_CONTACT_ID' => 'Fakturačný kontakt ID:',
     'LBL_BILLING_CONTACT_NAME' => 'Fakturačný kontakt – meno:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Krajina dodania',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'PSČ dodania',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Štát dodania',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Adresa dodania',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Adresa dodania',
     'LBL_SHIPPING_BODY' => 'Fakturácia a dodanie',
     'LBL_SHIPPING_CONTACT_ID' => 'dodanie ID kontaktu',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Kopírovať fakturačnú adresa dodávateľa na adresu',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Kopírovať adresu pre dodanie na fakturačnú adresu',
     'NTC_COPY_BILLING_ADDRESS2' => 'Kopírovať k dodávateľovy',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopírovať do vyúčtovania',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Ste si istí, že chcete odstrániť tento príspevok z ICQ?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopírovať do vyúčtovania',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Ste si istí, že chcete odstrániť tento príspevok z ICQ?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Ste si istí, že chcete odstrániť túto skupinu z ICQ?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Ste si istí, že chcete odstrániť túto skupinu z citácií?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Ste si istí, že chcete odstrániť tento kontakt z ICQ?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Množstvo',
     'LBL_MFT_PART_NUM' => 'Číslo dielu',
     'LBL_ITEM_NAME' => 'Riadková položka',
+    'LBL_PRODUCT_TEMPLATE' => 'Produkt',
     'LBL_DISCOUNT_PRICE' => 'Jednotková cena',
     'LBL_DISCOUNT_AMOUNT' => 'Zľava',
     'LBL_LINE_ITEM_TOTAL' => 'Súčet položky',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'ID obchodnej príležitosti',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Konfigurácia ponúk',
+
+    'LBL_RENEWAL' => 'Obnovenie',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakcie ponúk',
 );

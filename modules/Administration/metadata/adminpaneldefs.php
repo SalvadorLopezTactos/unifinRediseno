@@ -15,10 +15,31 @@ use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 global $current_user,$admin_group_header;
 
 $config = \SugarConfig::getInstance();
+$idpConfig = new Authentication\Config($config);
+$idmModeConfig = $idpConfig->getIDMModeConfig();
+$admin_option_defs = [];
+
+if ($idpConfig->isIDMModeEnabled()) {
+    if (!key_exists('Administration', $admin_option_defs)) {
+        $admin_option_defs['Administration'] = [];
+    }
+    $admin_option_defs['Administration']['sugarCloudSettings'] = [
+        'Administration',
+        'LBL_SUGAR_CLOUD_SETTINGS_TITLE',
+        'LBL_SUGAR_CLOUD_SETTINGS_DESC',
+        $idpConfig->buildCloudConsoleUrl('/', [], $GLOBALS['current_user']->id),
+        null,
+        null,
+        '_blank',
+    ];
+}
 
 // Needed to see if this is configured for Sugar Cloud Insights
 $insights = $config->get('cloud_insight', []);
 if (!empty($insights['enabled'])) {
+    if (!key_exists('Administration', $admin_option_defs)) {
+        $admin_option_defs['Administration'] = [];
+    }
     $admin_option_defs['Administration']['insights'] = [
         'LeadReports',
         'LBL_CLOUD_INSIGHTS_ADMIN_TITLE',
@@ -31,7 +52,11 @@ if (!empty($insights['enabled'])) {
             $insights['key']
         ),
     ];
+}
 
+if (key_exists('Administration', $admin_option_defs) &&
+    (key_exists('insights', $admin_option_defs['Administration'])
+        || key_exists('sugarCloudSettings', $admin_option_defs['Administration']))) {
     $admin_group_header[] = [
         'LBL_SUGAR_CLOUD_TITLE',
         '',
@@ -47,10 +72,8 @@ $admin_option_defs['Users']['user_management']= array('Users','LBL_MANAGE_USERS_
 $admin_option_defs['Users']['roles_management']= array('Roles','LBL_MANAGE_ROLES_TITLE','LBL_MANAGE_ROLES','./index.php?module=ACLRoles&action=index');
 $admin_option_defs['Users']['teams_management']= array('Teams','LBL_MANAGE_TEAMS_TITLE','LBL_MANAGE_TEAMS','./index.php?module=Teams&action=index');
 
-$idpConfig = new Authentication\Config($config);
-$idmModeConfig = $idpConfig->getIDMModeConfig();
 if ($idpConfig->isIDMModeEnabled()) {
-    $passwordManagerUrl = $idpConfig->buildCloudConsoleUrl('passwordManagement');
+    $passwordManagerUrl = $idpConfig->buildCloudConsoleUrl('passwordManagement', [], $GLOBALS['current_user']->id);
     $passwordManagerTarget = '_blank';
     $passwordManagerLink = str_replace(
         '"',
@@ -79,48 +102,12 @@ $admin_option_defs['Administration']['password_management'] = array(
 
 $admin_option_defs['Users']['tba_management'] = array('TbACLs', 'LBL_TBA_CONFIGURATION', 'LBL_TBA_CONFIGURATION_DESC', './index.php?module=Teams&action=tba');
 $admin_group_header[]= array('LBL_USERS_TITLE','',false,$admin_option_defs, 'LBL_USERS_DESC');
-$license_management = false;
-    if (!isset($GLOBALS['sugar_config']['hide_admin_licensing']) || !$GLOBALS['sugar_config']['hide_admin_licensing']) {
-        $license_management = array('License','LBL_MANAGE_LICENSE_TITLE','LBL_MANAGE_LICENSE','./index.php?module=Administration&action=LicenseSettings');
-    }
-
-
-//Sugar Connect
-$admin_option_defs=array();
-$license_key = 'no_key';
-
-$admin_option_defs['Administration']['license_management']= $license_management;
-$focus = Administration::getSettings();
-$license_key = $focus->settings['license_key'];
-
-$admin_option_defs['Administration']['update'] = array('sugarupdate','LBL_SUGAR_UPDATE_TITLE','LBL_SUGAR_UPDATE','./index.php?module=Administration&action=Updater');
-$admin_option_defs['Administration']['documentation']= array('OnlineDocumentation','LBL_DOCUMENTATION_TITLE','LBL_DOCUMENTATION',
-        'javascript:void window.open("index.php?module=Administration&action=SupportPortal&view=documentation&help_module=Administration&edition='.$sugar_flavor.'&key='.$server_unique_key.'&language='.$current_language.'", "helpwin","width=600,height=600,status=0,resizable=1,scrollbars=1,toolbar=0,location=0")');
-if(!empty($license->settings['license_latest_versions'])){
-	$encodedVersions = $license->settings['license_latest_versions'];
-    $versions = unserialize(base64_decode($encodedVersions), ['allowed_classes' => false]);
-	include('sugar_version.php');
-	if(!empty($versions)){
-		foreach($versions as $version){
-			if(compareVersions($version['version'], $sugar_version))
-			{
-				$admin_option_defs['Administration']['update'][] ='red';
-				if(!isset($admin_option_defs['Administration']['update']['additional_label']))$admin_option_defs['Administration']['update']['additional_label']= '('.$version['version'].')';
-
-			}
-		}
-	}
-}
-
-
-
-$admin_group_header[]= array('LBL_SUGAR_NETWORK_TITLE','',false,$admin_option_defs, 'LBL_SUGAR_NETWORK_DESC');
 
 
 //system.
 $admin_option_defs=array();
 $admin_option_defs['Administration']['configphp_settings']= array('Administration','LBL_CONFIGURE_SETTINGS_TITLE','LBL_CONFIGURE_SETTINGS','./index.php?module=Configurator&action=EditView');
-$admin_option_defs['Administration']['import']= array('Import','LBL_IMPORT_WIZARD','LBL_IMPORT_WIZARD_DESC','./index.php?module=Import&action=step1&import_module=Administration');
+$admin_option_defs['Administration']['import']= array('Import','LBL_IMPORT_WIZARD','LBL_IMPORT_WIZARD_DESC','./index.php?module=Import&action=step1&import_module=Administration&from_admin_wizard=1');
 $admin_option_defs['Administration']['locale']= array('Currencies','LBL_MANAGE_LOCALE','LBL_LOCALE','./index.php?module=Administration&action=Locale&view=default');
 
 if (!isset($GLOBALS['sugar_config']['disable_uw_upload']) || !$GLOBALS['sugar_config']['disable_uw_upload']) {
@@ -149,6 +136,13 @@ $admin_option_defs['Administration']['scheduler'] = array('Schedulers','LBL_SUGA
 
 $admin_option_defs['Administration']['pdfmanager']= array('icon_PdfManager','LBL_PDFMANAGER_SETTINGS','LBL_PDFMANAGER_SETTINGS_DESC','./index.php?module=PdfManager&action=index');
 
+$admin_option_defs['Administration']['archive_records'] = array(
+    'Administration',
+    'LBL_DBARCHIVER_TITLE',
+    'LBL_DBARCHIVER',
+    'javascript:parent.SUGAR.App.router.navigate("DataArchiver", {trigger: true});',
+);
+
 // Enable/Disable wireless modules
 $admin_option_defs['Administration']['enable_wireless_modules']=array('icon_AdminMobile','LBL_WIRELESS_MODULES_ENABLE','LBL_WIRELESS_MODULES_ENABLE_DESC','./index.php?module=Administration&action=EnableWirelessModules');
 $admin_option_defs['Administration']['web_logic_hooks']=array('Administration','LBL_WEB_LOGIC_HOOKS','LBL_WEB_LOGIC_HOOKS_DESC','javascript:parent.SUGAR.App.router.navigate("WebLogicHooks", {trigger: true});');
@@ -159,6 +153,45 @@ if(SugarOAuthServer::enabled()) {
     $admin_option_defs['Administration']['oauth']= array('Password','LBL_OAUTH_TITLE','LBL_OAUTH','./index.php?module=OAuthKeys&action=index');
 }
 
+
+$license_management = false;
+if (!isset($GLOBALS['sugar_config']['hide_admin_licensing']) || !$GLOBALS['sugar_config']['hide_admin_licensing']) {
+    $license_management = ['License', 'LBL_MANAGE_LICENSE_TITLE', 'LBL_MANAGE_LICENSE', './index.php?module=Administration&action=LicenseSettings'];
+}
+
+$license_key = 'no_key';
+
+$admin_option_defs['Administration']['content_security_policy'] = [
+    'Administration',
+    'LBL_CSP_TITLE',
+    'LBL_MANAGE_CSP',
+    'javascript:void(parent.SUGAR.App.router.navigate("Administration/cspsetting", {trigger: true}));',
+];
+
+$admin_option_defs['Administration']['update'] = ['sugarupdate', 'LBL_SUGAR_UPDATE_TITLE', 'LBL_SUGAR_UPDATE', './index.php?module=Administration&action=Updater'];
+
+$admin_option_defs['Administration']['license_management'] = $license_management;
+$focus = Administration::getSettings();
+$license_key = $focus->settings['license_key'];
+
+$admin_option_defs['Administration']['update'] = ['sugarupdate', 'LBL_SUGAR_UPDATE_TITLE', 'LBL_SUGAR_UPDATE', './index.php?module=Administration&action=Updater'];
+
+if (!empty($license->settings['license_latest_versions'])) {
+    $encodedVersions = $license->settings['license_latest_versions'];
+    $versions = unserialize(base64_decode($encodedVersions), ['allowed_classes' => false]);
+    include 'sugar_version.php';
+
+    if (!empty($versions)) {
+        foreach ($versions as $version) {
+            if (compareVersions($version['version'], $sugar_version)) {
+                $admin_option_defs['Administration']['update'][] = 'red';
+                if (!isset($admin_option_defs['Administration']['update']['additional_label'])) {
+                    $admin_option_defs['Administration']['update']['additional_label'] = '(' . $version['version'] . ')';
+                }
+            }
+        }
+    }
+}
 
 $admin_group_header[]= array('LBL_ADMINISTRATION_HOME_TITLE','',false,$admin_option_defs, 'LBL_ADMINISTRATION_HOME_DESC');
 
@@ -197,8 +230,6 @@ $admin_option_defs['Administration']['config_prod_bar']=array('icon_ShortcutBar'
 $admin_option_defs['any']['dropdowneditor']= array('Dropdown','LBL_DROPDOWN_EDITOR','DESC_DROPDOWN_EDITOR','./index.php?module=ModuleBuilder&action=index&type=dropdowns');
 
 $admin_option_defs['Administration']['sugarportal']= array('SugarPortal','LBL_SUGARPORTAL','LBL_SUGARPORTAL_DESC','./index.php?module=ModuleBuilder&action=index&type=sugarportal');
-
-//$admin_option_defs['migrate_custom_fields']= array('MigrateFields','LBL_EXTERNAL_DEV_TITLE','LBL_EXTERNAL_DEV_DESC','./index.php?module=Administration&action=Development');
 
 $admin_option_defs['any']['workflow_management']= array('WorkFlow','LBL_MANAGE_WORKFLOW','LBL_WORKFLOW_DESC','./index.php?module=WorkFlow&action=ListView');
 $admin_option_defs['Administration']['api_platforms'] = [
@@ -243,6 +274,19 @@ $admin_option_defs['Quotes']['quotes_config'] = array(
 );
 
 $admin_group_header[]= array('LBL_PRICE_LIST_TITLE','',false,$admin_option_defs, 'LBL_PRICE_LIST_DESC');
+
+// AWS Configuration for Serve only
+if ($focus->isLicensedForServe()) {
+    $admin_option_defs = [];
+    $admin_option_defs['Administration']['connect'] = [
+        'Administration',
+        'LBL_AWS_CONNECT_TITLE',
+        'LBL_AWS_CONNECT_DESCR',
+        'javascript:void(parent.SUGAR.App.router.navigate("Administration/awsconnect", {trigger: true}));',
+    ];
+    $admin_group_header[] = ['LBL_AWS', '', false, $admin_option_defs, 'LBL_AWS_DESCR'];
+}
+
 //bug tracker.
 $admin_option_defs=array();
 $admin_option_defs['Bugs']['bug_tracker']= array('Releases','LBL_MANAGE_RELEASES','LBL_RELEASE','./index.php?module=Releases&action=index');

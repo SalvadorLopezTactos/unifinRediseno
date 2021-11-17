@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Figyelmeztetés: Ön az automatikus email beállításainak megváltoztatására készül, ami adatvesztéssel járhat.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Figyelmeztetés: az esetek automatikus létrehozásához engedélyezni kell a az automatikus import funkciót.',
 	'LBL_EDIT_LAYOUT' => 'Elrendezés szerkesztése' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'E-mail cím',
+    'LBL_EMAIL_PROVIDER' => 'E-mail szolgáltató',
+    'LBL_AUTH_STATUS' => 'Engedélyezési állapot',
 );
-?>

@@ -39,10 +39,13 @@ class ProductTemplateTreeApi extends SugarApi
      * Gets the full tree data in a jstree structure
      * @param ServiceBase $api
      * @param array $args
-     * @return stdClass
+     * @return array
+     * @throws SugarQueryException
      */
     public function getTemplateTree(ServiceBase $api, array $args)
     {
+        $this->checkAccess();
+
         $data = [];
         $tree = [];
         $records = [];
@@ -53,11 +56,11 @@ class ProductTemplateTreeApi extends SugarApi
 
         //set parameters
         if (array_key_exists('filter', $args)) {
-            $data = $this->getFilteredTreeData($args['filter']);
+            $data = $this->getTreeDataWithFilter($args['filter']);
         } elseif (array_key_exists('root', $args)) {
-            $data = $this->getRootedTreeData($args['root']);
+            $data = $this->getTreeDataWithRoot($args['root']);
         } else {
-            $data = $this->getRootedTreeData(null);
+            $data = $this->getTreeDataWithRoot(null);
         }
 
         if (array_key_exists('offset', $args)) {
@@ -78,11 +81,14 @@ class ProductTemplateTreeApi extends SugarApi
 
         if ($offset < $total) {
             $data = array_slice($data, $offset, $max_num);
-            
+
             //build the treedata
             foreach ($data as $node) {
-                //create new leaf
-                $records[] = $this->generateNewLeaf($node, $offset);
+                // do not render a leaf for an empty (product-free) category
+                if ($node['type'] === 'product' || $this->checkCategoryContainsProduct($node['id'])) {
+                    //create new leaf
+                    $records[] = $this->generateNewLeaf($node, $offset);
+                }
                 $offset++;
             }
         }
@@ -95,6 +101,169 @@ class ProductTemplateTreeApi extends SugarApi
         $tree['next_offset'] = $offset;
 
         return $tree;
+    }
+
+    /**
+     * Checks if the user has access to both ProductCategories and ProductTemplates
+     */
+    protected function checkAccess()
+    {
+        $pcBean = BeanFactory::newBean('ProductCategories');
+        $ptBean = BeanFactory::newBean('ProductTemplates');
+        if (!$pcBean->aclAccess('list')) {
+            throw new SugarApiExceptionNotAuthorized('No access to view Product Categories records');
+        } else if (!$ptBean->aclAccess('list')) {
+            throw new SugarApiExceptionNotAuthorized('No access to view Product Catalog records');
+        }
+    }
+
+    /**
+     * Returns true if the provided category has at least one product template
+     */
+    protected function checkCategoryContainsProduct(string $id): bool
+    {
+        $query = $this->prepareCategoryCheckQuery();
+        $query->where()->equals('category.id', $id);
+
+        return $this->continueRecursiveCategoryCheck($query);
+    }
+
+    /**
+     * Returns true if the children of the provided category list relate to at least one product template
+     */
+    protected function checkChildCategoriesContainProduct(array $categoryIds): bool
+    {
+        $query = $this->prepareCategoryCheckQuery();
+        $query->where()->in('category.parent_id', $categoryIds);
+
+        return $this->continueRecursiveCategoryCheck($query);
+    }
+
+    /**
+     * Returns true if provided SugarQuery returned at least one product template,
+     * otherwise recursively calls checkChildCategoriesContainProduct
+     */
+    protected function continueRecursiveCategoryCheck(SugarQuery $query): bool
+    {
+        $productFreeCategoriesIds = [];
+        $stmt = $query->compile()->execute();
+        while ($row = $stmt->fetch()) {
+            if ($row['p_id'] !== null) {
+                return true;
+            }
+            $productFreeCategoriesIds[$row['c_id']] = true;
+        }
+
+        if (!empty($productFreeCategoriesIds)) {
+            return $this->checkChildCategoriesContainProduct(array_keys($productFreeCategoriesIds));
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Returns SugarQuery for fetching categories and related product templates
+     */
+    protected function prepareCategoryCheckQuery(): SugarQuery
+    {
+        $bean = BeanFactory::newBean('ProductCategories');
+        $query = new SugarQuery(DBManagerFactory::getInstance('listviews'));
+        $query->from($bean, ['alias' => 'category']);
+
+        $subQuery = new SugarQuery(DBManagerFactory::getInstance('listviews'));
+        $bean = BeanFactory::newBean('ProductTemplates');
+        $subQuery->from($bean, ['alias' => 'product_template']);
+        $subQuery->select->selectReset();
+        $subQuery->select(['product_template.id', 'product_template.category_id']);
+
+        $query->joinTable($subQuery, ['alias' => 'product_template', 'joinType' => 'LEFT'])
+            ->on()
+            ->equalsField('product_template.category_id', 'category.id');
+        $query->select->selectReset();
+        $query->select([['category.id', 'c_id'], ['product_template.id', 'p_id']]);
+        $query->orderBy('product_template.id', 'ASC');
+
+        return $query;
+    }
+
+    /**
+     * Create input array with given filter
+     *
+     * @param string $filter
+     * @return array
+     * @throws SugarQueryException
+     */
+    protected function getTreeDataWithFilter(string $filter)
+    {
+        $array = [
+            'ProductCategories' => $filter,
+            'ProductTemplates' => $filter,
+        ];
+
+        return $this->getTreeDataWithArray($array);
+    }
+
+    /**
+     * Create input array with given root 'id'
+     *
+     * @param string $root
+     * @return array
+     * @throws SugarQueryException
+     */
+    protected function getTreeDataWithRoot(string $root = null)
+    {
+        $array = [
+            'ProductCategories' => [
+                'parent_id' => $root,
+            ],
+            'ProductTemplates' => [
+                'category_id' => $root,
+            ],
+        ];
+
+        return $this->getTreeDataWithArray($array);
+    }
+
+    /**
+     * Get data using SugarQuery with the given input array
+     *
+     * @param array $input
+     * @return array
+     * @throws SugarQueryException
+     */
+    protected function getTreeDataWithArray(array $input = [])
+    {
+        $q = new SugarQuery();
+        foreach ($input as $table => $value) {
+            $bean = BeanFactory::newBean($table);
+            if (!is_null($bean)) {
+                if ($table === 'ProductCategories') {
+                    $type = 'category';
+                } elseif ($table === 'ProductTemplates') {
+                    $type = 'product';
+                }
+                $query = new SugarQuery();
+                $query->from($bean);
+                $query->select(['id', 'name']);
+                $query->select()->fieldRaw("'{$type}'", 'type');
+                if (is_array($value)) {
+                    foreach ($value as $key => $colValue) {
+                        if (is_null($colValue)) {
+                            $query->where()->isNull($key);
+                        } else {
+                            $query->where()->equals($key, $colValue);
+                        }
+                    }
+                } else {
+                    $query->where()->contains('name', $value);
+                }
+                 $q->union($query);
+            }
+        }
+        $q->orderBy('type', 'ASC');
+        $q->orderBy('name', 'ASC');
+
+        return $q->execute();
     }
 
     /**
@@ -125,6 +294,11 @@ class ProductTemplateTreeApi extends SugarApi
         return $returnObj;
     }
 
+    /**
+     * @deprecated
+     * @param $filter
+     * @return mixed[][]
+     */
     protected function getFilteredTreeData($filter)
     {
         $filter = "%$filter%";
@@ -133,6 +307,11 @@ class ProductTemplateTreeApi extends SugarApi
         return $this->getTreeData($unionFilter, $unionFilter, [$filter, $filter]);
     }
 
+    /**
+     * @deprecated
+     * @param $root
+     * @return mixed[][]
+     */
     protected function getRootedTreeData($root)
     {
         $union1Root = '';
@@ -154,6 +333,7 @@ class ProductTemplateTreeApi extends SugarApi
     /**
      * Gets the tree data
      *
+     * @deprecated
      * @param string $union1Filter
      * @param string $union2Filter
      * @param array $params Query parameters

@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Řídicí panel seznamu schůzek',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Řídicí panel záznamů schůzek',
+    'LBL_LEAD_GUESTS' => 'Hosté zájemci',
+    'LBL_CONTACT_GUESTS' => 'Hosté kontakty',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na schůzky',
 
 	'ERR_DELETE_RECORD' => 'Pro odstranění',
 	'LBL_ACCEPT_THIS'=>'Přijmout?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Směr',
 	'LBL_LIST_DUE_DATE'=>'Do data',
 	'LBL_LIST_FORM_TITLE' => 'Seznam schůzek',
-	'LBL_LIST_MY_MEETINGS' => 'Schůzky',
+    'LBL_LIST_MY_MEETINGS' => 'Schůzky',
     'LBL_MY_SCHEDULED_MEETINGS' => 'Moje naplánované schůzky',
+    'LBL_GUEST_MEETINGS' => 'Moje schůzky jako host',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Naplánované schůzky jako host',
 	'LBL_LIST_RELATED_TO' => 'Týká se',
 	'LBL_LIST_STATUS'=>'Stav',
 	'LBL_LIST_SUBJECT' => 'Předmět',
@@ -103,7 +108,7 @@ $mod_strings = array (
     'LBL_PARENT_ID' => 'Zdrojové ID',
 	'LNK_MEETING_LIST'=>'Schůzky',
 	'LNK_NEW_APPOINTMENT' => 'Naplánovat událost',
-	'LNK_NEW_MEETING'=>'Harmonogram jednání',
+	'LNK_NEW_MEETING'=>'Naplánovat schůzku',
 	'LNK_IMPORT_MEETINGS' => 'Importovat schůzky',
 
 	'NTC_REMOVE_INVITEE' => 'Opravdu chcete odstranit pozvánku ze schůzky?',

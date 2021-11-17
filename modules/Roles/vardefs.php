@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['Role'] = array('table' => 'roles'
+$dictionary['Role'] = array('table' => 'roles', 'archive' => false
                                ,'fields' => array (
   'id' =>
   array (

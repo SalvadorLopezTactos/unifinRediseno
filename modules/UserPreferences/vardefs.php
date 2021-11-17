@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-$GLOBALS['dictionary']['UserPreference'] = array('table' => 'user_preferences',
+$GLOBALS['dictionary']['UserPreference'] = array('table' => 'user_preferences', 'archive' => false,
 'fields' => array (
   'id' => 
   array (

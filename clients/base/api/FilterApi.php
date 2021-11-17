@@ -167,11 +167,15 @@ class FilterApi extends SugarApi
         $options['offset'] = 0;
         $options['add_deleted'] = true;
 
-        if (!empty($args['max_num'])) {
-            $options['limit'] = (int) $args['max_num'];
+        if ($seed && isset($seed->force_limit)) {
+            $options['limit'] = $seed->force_limit;
+        } else {
+            if (!empty($args['max_num'])) {
+                $options['limit'] = (int) $args['max_num'];
+            }
+    
+            $options['limit'] = $this->checkMaxListLimit($options['limit']);
         }
-
-        $options['limit'] = $this->checkMaxListLimit($options['limit']);
 
         if (!empty($args['deleted'])) {
             $options['add_deleted'] = false;
@@ -206,7 +210,7 @@ class FilterApi extends SugarApi
         // Some modules have fields that are composed of or require other fields
         // Add those in now so that they can be selected and set onto the bean
         // so formatting can use them. This is necessary for file type fields.
-        if (!empty($seed)) {
+        if (!empty($seed) && !empty($seed->field_defs)) {
             foreach ($seed->field_defs as $field => $def) {
                 if (isset($def['name']) && in_array($def['name'], $options['select']) && isset($def['fields'])) {
                     foreach ($def['fields'] as $field) {
@@ -464,18 +468,13 @@ class FilterApi extends SugarApi
         $api->action = 'list';
 
         /** @var SugarQuery $q */
-        list(, $q) = $this->filterListSetup($api, $args);
+        [, $q, $options] = $this->filterListSetup($api, $args);
 
-        $q->select->selectReset()->setCountQuery();
-        $q->orderByReset();
-        $q->limit = null;
+        $q = $options['id_query'] ?? $q;
 
-        $stmt = $q->compile()->execute();
-        $count = (int) $stmt->fetchColumn();
-
-        return array(
-            'record_count' => $count,
-        );
+        return [
+            'record_count' => $this->fetchCount($q),
+        ];
     }
 
     /**
@@ -561,11 +560,13 @@ class FilterApi extends SugarApi
         }
 
         // nagative limit means no limit
-        if ($options['limit'] >= 0) {
+        if (isset($options['limit']) && $options['limit'] >= 0) {
             // Add an extra record to the limit so we can detect if there are more records to be found
             $q->limit($options['limit'] + 1);
         }
-        $q->offset($options['offset']);
+        if (isset($options['offset'])) {
+            $q->offset($options['offset']);
+        }
 
         return $q;
     }
@@ -948,12 +949,16 @@ class FilterApi extends SugarApi
      * This function should be considered internal to sugar and not extended by external customizations.
      *
      * @throws SugarApiExceptionInvalidParameter
+     * @throws SugarApiExceptionNotAuthorized
+     * @throws SugarQueryException
      */
     protected static function addFilter($field, $filter, SugarQuery_Builder_Where $where, SugarQuery $q)
     {
         // It's an email participant filter if the module is Emails and the field is an email participants operand.
         if ($q->getFromBean()->getModuleName() === 'Emails' && in_array($field, ['$from', '$to', '$cc', '$bcc'])) {
             static::addEmailParticipantFilter($q, $where, $filter, $field);
+        } elseif (in_array($q->getFromBean()->getModuleName(), ['Calls', 'Meetings']) && $field === '$guest') {
+            static::addGuestFilter($q, $where, $filter);
         } elseif ($field == '$or') {
             static::addFilters($filter, $where->queryOr(), $q);
         } elseif ($field == '$and') {
@@ -1231,6 +1236,33 @@ class FilterApi extends SugarApi
     }
 
     /**
+     * Add a guest filter to the query for Meetings and Calls
+     *
+     * @param SugarQuery $q
+     * @param SugarQuery_Builder_Where $where
+     * @param $link
+     * @throws SugarQueryException
+     */
+    protected static function addGuestFilter(SugarQuery $q, SugarQuery_Builder_Where $where, $link)
+    {
+        $tableName = $q->getFromBean()->getTableName();
+        $joinKeys = [
+            'meetings' => 'meeting_id',
+            'calls' => 'call_id',
+        ];
+
+        $joinTable = $tableName . '_users';
+        $join = $q->joinTable($joinTable, [
+            'joinType' => 'LEFT',
+        ]);
+        $join->on()->queryAnd()
+            ->equalsField($tableName . '.id', $joinTable . '.' . $joinKeys[$tableName])
+            ->notEquals($joinTable . '.' . 'accept_status', 'decline');
+
+        $where->equals($joinTable . '.user_id', self::$current_user->id);
+    }
+
+    /**
      * This function adds a favorite filter to the sugar query
      *
      * @param SugarQuery $q The whole SugarQuery object
@@ -1468,6 +1500,20 @@ class FilterApi extends SugarApi
             }
         }
         return $options;
+    }
+
+    /**
+     * Returns a result of a COUNT query
+     */
+    protected function fetchCount(SugarQuery $q): int
+    {
+        $q->select->selectReset()->setCountQuery();
+        $q->orderByReset();
+        $q->limit = null;
+
+        $stmt = $q->compile()->execute();
+
+        return (int) $stmt->fetchColumn();
     }
 
     /**

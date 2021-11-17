@@ -20,6 +20,14 @@
     _previewed: null,
 
     /**
+     * Property to determine if the user is on Safari so we can appropriately handle action dropdowns.
+     * See SS-1078 (https://sugarcrm.atlassian.net/browse/SS-1078).
+     *
+     * @property
+     */
+    _isSafariBrowser: null,
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -71,6 +79,8 @@
         this.resize = _.bind(_.debounce(this.resize, 200), this);
         this.bindResize();
 
+        this._isSafariBrowser = app.userAgent.browserEngine === 'webkit';
+
         var rightColumnsEvents = {};
         //add an event delegate for right action dropdown buttons onclick events
         if (this.rightColumns.length) {
@@ -99,34 +109,97 @@
         this.$el.removeClass('no-touch-scrolling');
         var $b = this.$(e.currentTarget).first();
         $b.parent().closest('.list').removeClass('open');
+
+        // Remove open class on Safari
+        if (this._isSafariBrowser) {
+            var stickyColumn = $b.parent().closest('td');
+            stickyColumn.removeClass('open');
+
+            // Remove the position property to fix z-index issues with subpanel header when there are less
+            // than 3 records.
+            if (this.collection.length <= 3) {
+                stickyColumn.addClass('sticky-column');
+            }
+        }
+
         $b.off('resetDropdownDelegate.right-actions');
     },
 
     delegateDropdown: function(e) {
-        var $buttonGroup = this.$(e.currentTarget).first(), // the button group
-            windowHeight = $(window).height() - 65; // height of window less padding
-
-        // fn to detect menu colliding with window bottom
-        var needsDropupClass = function($b) {
-                var menuHeight = $b.height() + $b.children('ul').first().height();
-                return (
-                     windowHeight < $b.offset().top + menuHeight
-                );
-            };
+        var $buttonGroup = this.$(e.currentTarget).first(); // the button group
 
         this.$el.addClass('no-touch-scrolling');
         // add open class to parent list to elevate absolute z-index for iOS
         $buttonGroup.parent().closest('.list').addClass('open');
+
+        // If the user is on Safari change the z-index of the opened dropdown's parent column to push to top
+        if (this._isSafariBrowser) {
+            var stickyColumn = $buttonGroup.parent().closest('.sticky-column');
+            stickyColumn.addClass('open');
+
+            // Remove the position property to fix z-index issues with subpanel header when there are less
+            // than 3 records.
+            if (this.collection.length <= 3) {
+                stickyColumn.removeClass('sticky-column');
+            }
+        }
+
         // detect window bottom collision
-        $buttonGroup.toggleClass('dropup', needsDropupClass($buttonGroup));
+        $buttonGroup.toggleClass('dropup', this.needsDropupClass($buttonGroup));
         // listen for delegate reset
         $buttonGroup.on('resetDropdownDelegate.right-actions', this.resetDropdownDelegate);
         // add a listener to scrolling container
         $buttonGroup.parents('.main-pane')
             .on('scroll.right-actions', _.bind(_.debounce(function() {
                 // detect window bottom collision on scroll
-                $buttonGroup.toggleClass('dropup', needsDropupClass($buttonGroup));
+                $buttonGroup.toggleClass('dropup', this.needsDropupClass($buttonGroup));
             }, 30), this));
+    },
+
+    /**
+     * A utility method to determine when a dropdown menu is going to collide with the bottom of the screen.
+     */
+    needsDropupClass: function($b) {
+        var menuHeight = $b.height() + $b.children('ul').first().height();
+        // TODO fix (SS-1078) | height of window less padding
+        var windowHeight = document.documentElement.clientHeight - 65;
+        // The total displacement needed for dropdown to expand + distance from top of screen
+        var dropdownDisplacement = $b.offset().top + menuHeight;
+
+        /**
+         * Special handling for Safari as the menu cannot overlay table content due to -webkit-sticky positioning
+         * and associated z-index behaviour.
+         */
+        if (this._isSafariBrowser && this.collection.length > 3) {
+            // Height of visible viewport (page height inside browser window)
+            windowHeight = document.documentElement.clientHeight;
+            var table = $b.parent().closest('.dataTable');
+            var tableHeight = table.height();
+            var tableOffsetTop = table.offset().top;
+
+            // The displacement of the table, using table height and it's distance from the top of the page
+            var tableOffset = windowHeight - tableHeight - Math.abs(tableOffsetTop);
+
+            /**
+             * There are 3 cases to check here:
+             * 1. If only the first subset of records are loaded and the table is shorter than the height of the table
+             * (on page load for list view).
+             * 2. If more records have been loaded, making the table height larger than screen size, and the user
+             * scrolls to the new bottom of the table and opens the right action dropdown.
+             * 3. If more records have been loaded and the users selects the right action dropdown somewhere before
+             * the bottom of the page.
+             */
+            if (tableHeight < windowHeight && tableOffsetTop > 0) {
+                return (tableHeight + tableOffsetTop) < dropdownDisplacement;
+            } else if ((tableHeight - Math.abs(tableOffsetTop) < dropdownDisplacement)) {
+                return true;
+            } else {
+                var footerHeight = $('#footer').children('footer').first().height();
+                return (windowHeight - footerHeight) < dropdownDisplacement;
+            }
+        }
+
+        return windowHeight < dropdownDisplacement;
     },
 
     /**
@@ -137,8 +210,15 @@
      * @private
      */
     _toggleAria: function(e) {
-        var $dropdown = this.$(e.currentTarget).find('.dropdown'),
-            $button = $dropdown.find('[data-toggle="dropdown"]');
+        var $tableHeader = this.$(e.currentTarget);
+        var $dropdown = $tableHeader.find('.dropdown');
+        var $button = $dropdown.find('[data-toggle="dropdown"]');
+
+        // Allow the dropdown for table header to pop over the top, remove position: -webkit-sticky property
+        if (this._isSafariBrowser) {
+            $tableHeader.toggleClass('sticky-column');
+        }
+
         $button.attr('aria-expanded', $dropdown.hasClass('open'));
     },
 
@@ -504,11 +584,13 @@
         var encodedData = [];
 
         var fieldList = this._appendFieldsToAllListViewsFieldList();
-        var visibleIndex = 0;
+        var visibleIndex;
+        var value;
         _.each(fieldList, function(fieldName) {
-            var value = 0;
-            if (_.contains(decodedData.visible, fieldName)) {
-                value = decodedData.widths[visibleIndex++];
+            value = 0;
+            visibleIndex = _.indexOf(decodedData.visible, fieldName);
+            if (visibleIndex !== -1) {
+                value = decodedData.widths[visibleIndex];
             }
             encodedData.push(value);
         });
@@ -795,8 +877,8 @@
             this.$el.addClass('right-actions');
         }
 
-        var displayWidthSetting = this._thisListViewFieldSizes ||
-            !_.isUndefined(app.user.lastState.get(this._thisListViewFieldSizesKey));
+        var displayWidthSetting = !!(this._thisListViewFieldSizes ||
+            !_.isUndefined(app.user.lastState.get(this._thisListViewFieldSizesKey)));
         var displayOrderSetting = false;
         if (this._thisListViewFieldList) {
             var customOrder = _.union(this._thisListViewFieldList.position, this._defaultFieldOrder);
@@ -1069,5 +1151,5 @@
             this.$helper.find('div').width(this.$spy.get(0).scrollWidth);
             this._toggleScrollHelper();
         }
-    }
+    },
 })

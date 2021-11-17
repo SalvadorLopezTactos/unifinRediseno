@@ -29,11 +29,9 @@ class Store implements StoreInterface
     private $locks;
 
     /**
-     * @param string $root The path to the cache directory
-     *
      * @throws \RuntimeException
      */
-    public function __construct($root)
+    public function __construct(string $root)
     {
         $this->root = $root;
         if (!file_exists($this->root) && !@mkdir($this->root, 0777, true) && !is_dir($this->root)) {
@@ -134,7 +132,7 @@ class Store implements StoreInterface
         $key = $this->getCacheKey($request);
 
         if (!$entries = $this->getMetadata($key)) {
-            return null;
+            return;
         }
 
         // find a cached entry that matches the request.
@@ -148,7 +146,7 @@ class Store implements StoreInterface
         }
 
         if (null === $match) {
-            return null;
+            return;
         }
 
         $headers = $match[1];
@@ -159,7 +157,6 @@ class Store implements StoreInterface
         // TODO the metaStore referenced an entity that doesn't exist in
         // the entityStore. We definitely want to return nil but we should
         // also purge the entry from the meta-store when this is detected.
-        return null;
     }
 
     /**
@@ -181,7 +178,7 @@ class Store implements StoreInterface
         if (!$response->headers->has('X-Content-Digest')) {
             $digest = $this->generateContentDigest($response);
 
-            if (!$this->save($digest, $response->getContent())) {
+            if (false === $this->save($digest, $response->getContent())) {
                 throw new \RuntimeException('Unable to store the entity.');
             }
 
@@ -210,7 +207,7 @@ class Store implements StoreInterface
 
         array_unshift($entries, [$storedEnv, $headers]);
 
-        if (!$this->save($key, serialize($entries))) {
+        if (false === $this->save($key, serialize($entries))) {
             throw new \RuntimeException('Unable to store the metadata.');
         }
 
@@ -249,7 +246,7 @@ class Store implements StoreInterface
             }
         }
 
-        if ($modified && !$this->save($key, serialize($entries))) {
+        if ($modified && false === $this->save($key, serialize($entries))) {
             throw new \RuntimeException('Unable to store the metadata.');
         }
     }
@@ -350,13 +347,13 @@ class Store implements StoreInterface
      *
      * @param string $key The store key
      *
-     * @return string|null The data associated with the key
+     * @return string The data associated with the key
      */
     private function load($key)
     {
         $path = $this->getPath($key);
 
-        return file_exists($path) && false !== ($contents = file_get_contents($path)) ? $contents : null;
+        return file_exists($path) ? file_get_contents($path) : false;
     }
 
     /**
@@ -409,8 +406,6 @@ class Store implements StoreInterface
         }
 
         @chmod($path, 0666 & ~umask());
-
-        return true;
     }
 
     public function getPath($key)

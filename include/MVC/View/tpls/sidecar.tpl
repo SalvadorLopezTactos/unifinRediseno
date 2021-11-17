@@ -20,6 +20,8 @@
         <link rel="shortcut icon" href="{sugar_getjspath file='themes/default/images/sugar_icon.ico'}">
         <!-- CSS -->
         <link rel="stylesheet" href="styleguide/assets/css/loading.css" type="text/css">
+        <link rel="stylesheet" href="styleguide/assets/css/gridstack.css" type="text/css">
+        <link rel="stylesheet" href="styleguide/assets/css/gridstack-extra.css" type="text/css">
         {foreach from=$css_url item=url}
             <link rel="stylesheet" href="{sugar_getjspath file=$url}"/>
         {/foreach}
@@ -75,9 +77,12 @@
             } else {
                 var App;
                 {/literal}{if $authorization}
-                SUGAR.App.cache.set("{$appPrefix}AuthAccessToken", "{$authorization.access_token}");
+                let authStore = SUGAR.App.config.authStore || "cache";
+                let keyPrefix = (authStore == "cache") ? "{$appPrefix}" : "";
+                let keyValueStore = SUGAR.App[authStore];
+                keyValueStore.set(keyPrefix + "AuthAccessToken", "{$authorization.access_token}");
                 {if $authorization.refresh_token}
-                SUGAR.App.cache.set("{$appPrefix}AuthRefreshToken", "{$authorization.refresh_token}");
+                keyValueStore.set(keyPrefix + "AuthRefreshToken", "{$authorization.refresh_token}");
                 {/if}
                 if (window.SUGAR.App.config.siteUrl != '') {ldelim}
                     history.replaceState(null, 'SugarCRM', window.SUGAR.App.config.siteUrl+"/"+window.location.hash);
@@ -93,9 +98,19 @@
                     el: "#sidecar",
                     callback: function(app){
                         app.progress.set(0.6);
+
                         app.once("app:view:change", function(){
+                            // Determine if we need to add a top level class to fix jumping elements in Safari
+                            var isSafariBrowser = app.userAgent.browserEngine === 'webkit';
+
+                            if (isSafariBrowser) {
+                                var bodyElement = document.querySelector('body');
+                                bodyElement.classList += ' safari-browser';
+                            }
+
                             app.progress.done();
                         });
+
                         app.alert.dismissAll();
                         app.start();
                     }

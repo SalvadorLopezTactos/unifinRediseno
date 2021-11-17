@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => '경고:귀하의 자동 가져오기 설정을 수정중이며 이에 따라 데이타를 잃을수도 있습니다.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => '경고: 자동으로 사례가 만들어질따는 자동 가져오기가 반드시 작동해야 합니다.',
 	'LBL_EDIT_LAYOUT' => '지면 배치 편집하기' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => '이메일 주소:',
+    'LBL_EMAIL_PROVIDER' => '이메일 공급자',
+    'LBL_AUTH_STATUS' => '승인 상태',
 );
-?>

@@ -45,6 +45,7 @@ $app_list_strings = array (
     'MergeRecords'=>'Förena poster',
       'VisualPipeline'=>'Visuell pipeline',
       'ConsoleConfiguration' => 'Konsolkonfiguration',
+      'SugarLive' => 'SugarLive',
     'Quotas' => 'Offerter',
     'Teams' => 'Team',
     'TeamNotices' => 'Team notiser',
@@ -78,10 +79,12 @@ $app_list_strings = array (
     'pmse_Business_Rules' => 'Affärsprocessregler',
     'pmse_Emails_Templates' => 'Processemailmallar',
     'BusinessCenters' => 'Affärscenter',
-    'Shifts' => 'Shifts',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchases',
-    'PurchasedLineItems' => 'Purchased Line Items',
+    'Shifts' => 'Skift',
+    'ShiftExceptions' => 'Skiftundantag',
+    'Purchases' => 'Köp',
+    'PurchasedLineItems' => 'Köpta poster',
+    'MobileDevices' => 'Mobila enheter',
+    'PushNotifications' => 'Pushaviseringar',
     'WorkFlow' => 'Arbetsflöden definitioner:',
     'EAPM' => 'Externa Konton',
     'Worksheet' => 'Arbetsark',
@@ -107,6 +110,8 @@ $app_list_strings = array (
     'Newsletters' => 'Nyhetsbrev',
   	'SugarFavorites'=>'Favoriter',
 	'PdfManager' => 'PdfManager',
+    'DataArchiver' => 'Dataarkiverare',
+    'ArchiveRuns' => 'Arkivkörningar',
 
     'OAuthKeys' => 'OAuth-konsumentnycklar',
     'OAuthTokens' => 'OAuth-tokens',
@@ -125,6 +130,7 @@ $app_list_strings = array (
     'CommentLog' => 'Kommentarslogg',
     'Holidays' => 'Semester',
     'ChangeTimers' => 'Ändra timers',
+    'Messages' => 'Meddelanden',
   ),
 
     'moduleIconList' =>
@@ -163,6 +169,8 @@ $app_list_strings = array (
     'Manufacturers' => 'Tillverkare',
     'VisualPipeline' => 'VisualPipeline',
     'ConsoleConfiguration' => 'Konsolkonfiguration',
+    'MobileDevices' => 'Mobil enhet',
+    'SugarLive' => 'SugarLive',
     'Contracts'=>'Kontrakt',
     'Quotes' => 'Offert',
     'Products' => 'Produkt',
@@ -202,6 +210,8 @@ $app_list_strings = array (
     'Notifications'=>'Meddelanden',
     'Sync'=>'Synka',
     'PdfManager' => 'PdfManager',
+    'DataArchiver' => 'Dataarkiverare',
+    'ArchiveRuns' => 'Arkivkörningar',
     'ReportMaker' => 'SweetReport',
     'DataSets' => 'Dataformat',
     'CustomQueries' => 'Anpassad sökning',
@@ -210,10 +220,11 @@ $app_list_strings = array (
     'pmse_Business_Rules' => 'Affärsprocessregel',
     'pmse_Emails_Templates' => 'Processemailmall',
     'BusinessCenters' => 'Affärscenter',
-    'Shifts' => 'Shift',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchase',
-    'PurchasedLineItems' => 'Purchased Line Item',
+    'Shifts' => 'Skift',
+    'ShiftExceptions' => 'Växla undantag',
+    'Purchases' => 'Köp',
+    'PurchasedLineItems' => 'Köpt post',
+    'PushNotifications' => 'Pushavisering',
     'WorkFlow' => 'Arbetsflöde',
     'EAPM' => 'Externt Konto',
     'Worksheet' => 'Arbetsark',
@@ -256,6 +267,7 @@ $app_list_strings = array (
     'ReportSchedules' => 'Rapportschema',
     'Holidays' => 'Semester',
     'ChangeTimers' => 'Ändra timer',
+    'Messages' => 'Meddelande',
   ),
 
 /*
@@ -334,6 +346,20 @@ $app_list_strings = array (
     'Utilities' => 'Verktyg',
     'Other' => 'Annan',
   ),
+    'message_status_dom' => [
+        '' => '',
+        'In Progress' => 'Pågår',
+        'Completed' => 'Klar',
+    ],
+    'message_direction_dom' => [
+        '' => '',
+        'Inbound' => 'Inkommande',
+        'Outbound' => 'Utgående',
+    ],
+    'message_channel_type_dom' => [
+        '' => '',
+        'Chat' => 'Chatt',
+    ],
   'service_level_dom' => array (
     '' => '',
     'T1' => 'Nivå 1',
@@ -342,10 +368,22 @@ $app_list_strings = array (
     'T4' => 'Nivå 4',
   ),
   'generate_purchase_dom' => [
-      'Yes' => 'Yes',
-      'No' => 'No',
-      'Completed' => 'Completed',
+      '' => '',
+      'Yes' => 'Ja',
+      'No' => 'Nej',
+      'Completed' => 'Genomförd',
   ],
+    'purchased_line_items_status_dom' => [
+        '' => '',
+        'Future' => 'Framtid',
+        'Active' => 'Aktiv',
+        'Past' => 'Dåtid',
+    ],
+    'aws_connect_identity_dom' => [
+      'Connect' => 'Amazon-innehåll',
+      'SAML' => 'SAML 2.0',
+      // TODO - Active Directory Text
+    ],
   'lead_source_default_key' => 'Självgenererad',
   'lead_source_dom' =>
   array (
@@ -566,6 +604,7 @@ $app_list_strings = array (
   'call_status_dom' =>
   array (
     'Planned' => 'Schemalagt',
+    'In Progress' => 'Pågår',
     'Held' => 'Avslutat',
     'Not Held' => 'Inställt',
   ),
@@ -724,8 +763,8 @@ $app_list_strings = array (
     'Meetings' => 'Möte',
     'Calls' => 'Telefonsamtal',
       'KBContents' => 'Kunskapsbas',
-      'PurchasedLineItems' => 'Purchased Line Item',
-      'Purchases' => 'Purchase',
+      'PurchasedLineItems' => 'Köpt post',
+      'Purchases' => 'Köp',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'Konto',
@@ -755,8 +794,8 @@ $app_list_strings = array (
     'Prospects' => 'Mål',
       'KBContents' => 'Kunskapsbas',
       'Notes' => 'Anteckning',
-    'PurchasedLineItems' => 'Purchased Line Item',
-    'Purchases' => 'Purchase',
+    'PurchasedLineItems' => 'Köpt post',
+    'Purchases' => 'Köp',
   ),
 
   'changetimer_parent_type' => [
@@ -925,6 +964,18 @@ $app_list_strings = array (
     'Twitter' => 'Twitter',
     'Portal' => 'Portal',
   ),
+    'cases_source_dom' => [
+        '' => '',
+        'Internal' => 'Intern',
+        'Forum' => 'Forum',
+        'Web' => 'Webb',
+        'InboundEmail' => 'E-post',
+        'Twitter' => 'Twitter',
+        'Portal' => 'Portal',
+        'Phone' => 'Telefon',
+        'Chat' => 'Chatt',
+        'Chatbot' => 'Chatbot',
+    ],
     'dataprivacy_type_default_key' => '',
     'dataprivacy_type_dom' => array(
         '' => '',
@@ -1990,10 +2041,17 @@ $app_list_strings = array (
         '2' => 'TLS',
     ),
     'mail_smtptype_options' => array(
-        'google' => 'Google',
-        'exchange' => 'Utbyte',
+        'google_oauth2' => 'Google',
+        'exchange_online' => 'Exchange Online',
         'outlook' => 'Outlook',
+        'google' => 'Mindre säkra Google-appar',
+        'exchange' => 'Utbyte',
         'other' => 'Annat',
+    ),
+    'dom_imaptype_options' => array(
+        'google_oauth2' => 'Google Mail',
+        'exchange_online' => 'Exchange Online',
+        'other' => 'Annan',
     ),
     'import_enclosure_options' =>
     array (
@@ -2153,6 +2211,20 @@ $app_list_strings = array (
         'Yes' => 'Ja',
         'No' => 'Nej',
     ],
+    'aws_end_chat_button_height' => [
+        '30' => '30',
+        '35' => '35',
+        '40' => '40',
+        '45' => '45',
+    ],
+    'aws_end_chat_button_width' => [
+        '100' => '100',
+        '110' => '110',
+        '120' => '120',
+        '130' => '130',
+        '140' => '140',
+        '150' => '150',
+    ],
     'forecasts_chart_options_group' => array(
         'forecast' => 'I prognos',
         'sales_stage' => 'Säljnivå',
@@ -2181,6 +2253,9 @@ $app_list_strings = array (
         'records' => 'Lista',
         'activities' => 'Aktivitetsström',
         'multi-line' => 'Lista med flera linjer',
+        'omnichannel' => 'Omnichannel',
+        'home' => 'Home',
+        'focus' => 'Fokustilldragare',
     ),
     'reportschedule_time_interval_dom' => array(
         '3600' => 'Varje timme',
@@ -2204,9 +2279,15 @@ $app_list_strings = array (
             'day' => 'Dag(ar)',
         ),
         'shift_exception_type_dom' => [
-            'time_off' => 'Time Off',
-            'event' => 'Event',
-            'other' => 'Other',
+            'time_off' => 'Ledighet',
+            'event' => 'Händelse',
+            'other' => 'Övrigt',
+        ],
+        'purchase_history_sort_dom' => [
+            'end_date:desc' => 'Datum (Senaste {{module}})',
+            'start_date:asc' => 'Datum (Första {{module}})',
+            'total_revenue:desc' => 'Pris (Högsta totalbelopp)',
+            'total_revenue:asc' => 'Pris (Lägsta totalbelopp)',
         ],
 );
 
@@ -2219,7 +2300,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Följ Länk',
   'LBL_TOGGLE_VISIBILITY' => 'Växla Synlighet', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivitetsström',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2020 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar och 3-D-kuben är registrerade varumärken för SugarCRM Inc. '.
         'Alla andra företags- och produktnamn som används eller förekommer i denna produkt kan vara varumärken tillhörande '.
         'SugarCRM ®, Sugar Enterprise™ och Sugar™ är varumärken tillhörande SugarCRM Inc.',
@@ -2283,7 +2364,7 @@ $app_strings = array (
     'LBL_PRINT' => "Skriv ut",
     'LBL_HELP' => "Hjälp",
     'LBL_TOUR' => "Rundtur",
-    'LBL_TOUR_LINK' => 'Rundtur - Se rundturen för att se några höjdpunkter',
+    'LBL_TOUR_LINK' => 'Ta en tour på den här sidan',
     'LBL_MOBILE' => "Mobil",
     'LBL_ID_FF_SELECT' => "Välj",
     'DEFAULT'                              => 'Grundläggande',
@@ -2690,10 +2771,22 @@ $app_strings = array (
     'LBL_EMAIL_SIGNATURE_CREATE'            => 'Skapa signatur',
     'LBL_EMAIL_SIGNATURE_NAME'              => 'Signatur namn',
     'LBL_EMAIL_SIGNATURE_TEXT'              => 'Signaturinnehåll',
-  'LBL_SMTPTYPE_GMAIL'                    => 'Gmail',
-  'LBL_SMTPTYPE_YAHOO'                    => 'Yahoo! Mail',
-  'LBL_SMTPTYPE_EXCHANGE'                 => 'Microsoft Exchange',
-    'LBL_SMTPTYPE_OTHER'                  => 'Annan',
+    'LBL_SMTPTYPE_MICROSOFT'                => 'Microsoft',
+    'LBL_SMTPTYPE_GOOGLE_OAUTH2'            => 'Google',
+    'LBL_SMTPTYPE_EXCHANGE_ONLINE'          => 'Exchange Online',
+    'LBL_SMTPTYPE_GMAIL'                    => 'Mindre säkra Google-appar',
+    'LBL_SMTPTYPE_YAHOO'                    => 'Yahoo! Mail',
+    'LBL_SMTPTYPE_EXCHANGE'                 => 'Microsoft Exchange',
+    'LBL_SMTPTYPE_OTHER'                    => 'Annan',
+    'LBL_EMAIL_AUTHORIZE'                   => 'Auktorisera',
+    'LBL_EMAIL_AUTHORIZED'                  => 'Auktoriserad',
+    'LBL_EMAIL_NOT_AUTHORIZED'              => 'Ej auktoriserad',
+    'LBL_EMAIL_AUTH_WARNING'                => 'En administratör måste konfigurera {0} Samordnare via Admin > Samordnare innan du kan konfigurera detta konto. För ytterligare information, se dokumentationen {1}.',
+    'LBL_EMAIL_AUTH_API_ERROR'              => 'Fel vid hämtning av konnektorinformation',
+    'LBL_EMAIL_AUTH_FAILURE'                => 'Auktoriseringsfel.',
+    'LBL_EMAIL_PLEASE_AUTHORIZE'            => 'Auktorisera kontot innan du sparar.',
+    'LBL_EMAIL_PLEASE_AUTHORIZE_TESTING'    => 'Auktorisera kontot innan du testar.',
+    'LBL_EMAIL_ACCOUNT_NOT_AUTHORIZED'      => 'Kontot är inte auktoriserat',
     'LBL_EMAIL_SPACER_MAIL_SERVER'          => '[ Fjärrkataloger ]',
     'LBL_EMAIL_SPACER_LOCAL_FOLDER'         => '[ Sugar katalog ]',
     'LBL_EMAIL_SUBJECT'                     => 'Ämne',
@@ -2734,6 +2827,9 @@ $app_strings = array (
     'LBL_CC' => 'CC',
     'LBL_BCC' => 'BCC',
 
+    'LBL_START_DATE' => 'Startdatum',
+    'LBL_END_DATE' => 'Slutdatum',
+
     'LBL_LINK_NONE'=> 'Ingen',
     'LBL_LINK_ALL'=> 'Alla',
     'LBL_LINK_RECORDS'=> 'Poster',
@@ -2770,6 +2866,7 @@ $app_strings = array (
     'ERROR_EXAMINE_MSG' => 'Kontrollera felmeddelandet nedan:',
     'NO_QUERY_SELECTED' => 'Det dataformat du har valt innehåller inte en query. Vänligen välj en custom query för det här dataformatet.',
 
+    'ERR_FIELD_TOO_LARGE' => 'The {0} content is too large. Please make the {0} shorter and try again.',
     'ERR_AJAX_LOAD'     => 'Ett fel har uppstått:',
     'ERR_AJAX_LOAD_FAILURE'     => 'Ett fel uppstod under behandlingen av din begärand, vänligen försök igen senare.',
     'ERR_AJAX_LOAD_FOOTER' => 'Om ett fel består, vänligen be din administratör avaktivera Ajax för den här modulen.',
@@ -2795,9 +2892,9 @@ $app_strings = array (
     'ERR_NO_HEADER_ID' => 'Den här funktionen är inte tillgänglig i det här temat.',
     'ERR_NOT_ADMIN' => "Obehörig åtkomst till administrationen.",
     'ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE' =>
-        'Lösenordshantering är endast tillgänglig i <a href="%s" target="_blank">Cloud Settings</a>.',
+        'Lösenordshantering är endast tillgänglig i <a href="%s" target="_blank">Inställningar för SugarCloud</a>.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'Vänligen kontakta din Sugar-administratör om du vill ändra i fälten som bara kan läsas.',
-    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Öppna <a href="{0}" target="_blank">Inställningar för SugarCloud</a> för att göra ändringar i skrivskyddade fält.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Saknar obligatoriskt fält:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Felaktigt obligatoriskt fält:',
     'ERR_INVALID_VALUE' => 'Ogiltigt värde:',
@@ -2938,6 +3035,7 @@ $app_strings = array (
     'LBL_ADD_BUTTON_KEY' => 'A',
     'LBL_ADD_BUTTON_TITLE' => 'Lägg till [Alt+A]',
     'LBL_ADD_BUTTON' => 'Lägg till',
+    'LBL_ADD_DASHLET_BUTTON' => 'Lägg till dashlet',
     'LBL_ADD_DOCUMENT' => 'Lägg till dokument',
     'LBL_REPLACE_BUTTON' => 'Byt ut',
     'LBL_ADD_TO_PROSPECT_LIST_BUTTON_KEY' => 'L',
@@ -2968,6 +3066,8 @@ $app_strings = array (
     'LBL_SUBMIT_BUTTON_LABEL' => 'Spara',
     'LBL_CASE'=>'Ärende',
     'LBL_CASES'=>'Ärenden',
+    'LBL_MESSAGE'=>'Meddelande',
+    'LBL_MESSAGES'=>'Meddelanden',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => 'Ändra lösenord',
     'LBL_CHANGE_BUTTON_LABEL' => 'Ändra',
@@ -3194,6 +3294,7 @@ $app_strings = array (
     'LBL_GENERATE_QUOTE' => 'Generera offert',
     'LBL_NO_MASS_UPDATE_FIELDS_AVAILABLE' => 'Det finns inga fält tillgängliga för Mass Update operationen',
     'LBL_MASS_UPDATE_JOB_QUEUED' => 'Din begäran om mass uppdateringen är planerat.',
+    'LBL_MASS_UPDATE_WARNING_SERVICE_START_DATE' => 'Startdatum för tjänsten ligger efter slutdatum för tjänsten',
     'LBL_MASS_UPDATE_SUCCESS' => 'Alla poster har uppdaterats.',
     'TPL_MASS_ADD_TO_LIST_SUCCESS' => 'Valda poster lades till <a href="{{listUrl}}">{{listName}}</a> mållista.',
     'TPL_MASS_ADD_TO_LIST_QUEUED' => 'Din begäran om att lägga valda poster till <a href="{{listUrl}}">{{listName}}</a> mållista är planerat.',
@@ -3429,11 +3530,12 @@ $app_strings = array (
     'LBL_SUBJECT' => 'Ämne',
 
     'LBL_INBOUNDEMAIL_ID' => 'Inkommande emailid',
+    'LBL_EAMP_ID' => 'Autentiseringstoken-ID',
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2020 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Med ensamrätt.<br />SugarCRM, Sugar och 3-D-kuben är registrerade varumärken för SugarCRM Inc. '.
         'Alla andra företags- och produktnamn som används eller förekommer i denna produkt kan vara varumärken tillhörande '.
         'respektive företag de associeras med.',
@@ -3500,6 +3602,8 @@ $app_strings = array (
     'LBL_USER_MENU' => 'Användarmeny',
     'LBL_USERS_SYNC'=>'Synkronisering av användare',
     'LBL_USERS'=>'Användare',
+    'LBL_USER'=>'Användare',
+    'LBL_CURRENT_USER'=>'Aktuell användare',
     'LBL_VERIFY_EMAIL_ADDRESS'=>'Söker efter befintliga mail entry...',
     'LBL_VERIFY_PORTAL_NAME'=>'Söker efter befintliga portalnamn...',
     'LBL_VIEW_IMAGE' => 'visa',
@@ -3588,6 +3692,8 @@ $app_strings = array (
         'Gränsen för användarens licensantal har nåtts. Endast befintliga användare kan logga in.',
     'WARN_ONLY_ADMINS'=> "Endast administratörer kan logga in.",
     'WARN_UNSAVED_CHANGES'=> "Du håller på att stänga denna post utan att spara dina ändringar. Är du säker på att du vill lämna denna post?",
+    'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'När du uppdaterar webbläsaren stängs alla SugarLive-samtals- eller chatt-sessioner som du har öppnat automatiskt och alla sparade ändringar kommer att försvinna. Vill du fortsätta?',
+    'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'Du har ändringar som inte sparats. Är du säker på att du vill lämna sidan och ignorera ändringarna?',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'En eller flera dashlets har osparade ändringar. Är du säker på att du vill stänga lådan?',
     'LBL_NAVIGATE_TO_REPORTS' => 'Du flyttar till modulen Rapporter. Dina ändringar av dashlet sparas inte. Fortsätta?',
@@ -3610,6 +3716,7 @@ $app_strings = array (
     'ERROR_TIME_IS_AFTER' => 'Fel. Tiden för detta fält måste var efter tiden för {{this}} fält.',
     'ERROR_NUMBER' => 'Fel. Detta fält kräver ett giltigt nummer.',
     'ERROR_INT' => 'Fel. Ogiltigt heltal.',
+    'ERROR_URL' => 'Fel. Ogiltig URL.',
     'ERROR_NO_BEAN' => 'Misslyckades att få bean.',
     'ERROR_ACCESS_MODULE' => 'Du har inte tillgång till denna modul.',
     'ERROR_MAX_FILESIZE_EXCEEDED' => 'Fel. Bilagan är för stor.',
@@ -3693,9 +3800,14 @@ $app_strings = array (
     'LBL_CREATE_OPPORTUNITY' => 'Skapa affärsmöjlighet',
     'LBL_SCHEDULE_CALL' => 'Schemalägg telefonsamtal',
     'LBL_SCHEDULE_MEETING' => 'Schemalägg möte',
+    'LBL_CREATE_MESSAGE' => 'Skapa meddelande',
     'LBL_CREATE_TASK' => 'Skapa uppgift',
     'LBL_REMOVE_FROM_FAVORITES' => 'Ta bort från mina favoiriter',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_DOWNLOAD_ALL' => 'Ladda ner alla',
+    'LBL_DOWNLOAD_ONE' => 'Ladda ner',
+    'LBL_ATTACHMENTS' => 'Bilagor',
+    'LBL_ADD_ATTACHMENT' => 'Bläddra',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => 'Generera formulär',
     'LBL_SAVE_WEB_TO_LEAD_FORM' =>'Spara Webb till Lead formulär',
@@ -3747,8 +3859,8 @@ $app_strings = array (
     'LBL_DASHLET_REFRESH_LABEL' => 'Uppdatera',
     'LBL_DASHLET_REMOVE_LABEL' => 'Radera',
     'LBL_DASHLET_DROP_HERE' => 'Släpp här',
-    'LBL_DASHLET_MINIMIZE_ALL' => 'Stäng alla',
-    'LBL_DASHLET_MAXIMIZE_ALL' => 'Öppna alla',
+    'LBL_DASHLET_MINIMIZE_ALL' => 'Collapse All Dashlets',
+    'LBL_DASHLET_MAXIMIZE_ALL' => 'Expand All Dashlets',
     'LBL_DASHLET_MINIMIZE' => 'Stäng',
     'LBL_DASHLET_MAXIMIZE' => 'Öppna',
     'LBL_DASHLET_CONFIGURE' => 'Konfigurera',
@@ -3770,6 +3882,10 @@ $app_strings = array (
     'LBL_DASHLET_LISTVIEW_NAME' => 'Listvy',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'Listar poster från en viss modul enligt kriterier som du definierar.',
 
+    // Console List view dashlet
+    'LBL_DASHLET_CONSOLE_LISTVIEW_NAME' => 'Konsollistvy',
+    'LBL_DASHLET_CONSOLE_LISTVIEW_DESCRIPTION' => 'Listar poster från en viss modul som hör samman med posten som du visar i konsolen.',
+
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'Postvy',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'Visar en post och (valfritt) relaterade poster i flikar.',
@@ -3780,6 +3896,7 @@ $app_strings = array (
     'TPL_DASHLET_RECORDVIEW_TOO_MANY_TABS' => 'Varning, endast {{numWord}} ({{num}})-moduler kan visas i flikar. ' .
         'Ta bort en eller flera moduler innan du lägger till fler.',
     'LBL_SIX' => 'sex', // record view dashlet tab limit
+    'LBL_DASHLET_NO_TABS_AVAILABLE' => 'No tabs available. Please add a module in the tabs field above.',
 
     //Commentlog Dashlet
     'LBL_DASHLET_COMMENTLOG_NAME' => 'Kommentarslogg',
@@ -3804,7 +3921,13 @@ $app_strings = array (
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'Nyligen använda',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'Favoriter',
 
-    'LBL_DASHBOARD_CONFIG' => 'Dashboard Configuration',
+    'LBL_DASHBOARD_CREATE' => 'Skapa Dashboard',
+    'LBL_DASHBOARD_DUPLICATE' => 'Duplicera Dashboard',
+    'LBL_DASHBOARD_DELETE' => 'Ta bort Dashboard',
+    'LBL_PIN_TO_TOP' => 'Fäst överst',
+    'LBL_PIN_TO_BOTTOM' => 'Fäst nederst',
+
+    'LBL_DASHBOARD_CONFIG' => 'Konfiguration av instrumentpanel',
     'LBL_LIST_VIEW__NAME' => 'Listvy',
     'LBL_PIPELINE_VIEW_NAME' => 'Brickvy',
     'LBL_PIPELINE_VIEW_BTN' => 'Brickvy',
@@ -3840,9 +3963,9 @@ $app_strings = array (
 
     /* Learning Resources */
     'LBL_LEARNING_RESOURCES_TITLE' => 'Utbildningsresurser',
-    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Sugaruniversitetet - bli en expert',
-    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'Forum - delta i diskussionen',
-    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'Dokumentation & Support - lär dig detaljerna',
+    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'Utbildning och certifiering',
+    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'SugarClub-forum',
+    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'Dokumentation och support',
 
     /* Country Chart Dashlet */
     'LBL_DASHLET_COUNTRY_CHART_NAME' => 'Försäljning per land',
@@ -3851,6 +3974,10 @@ $app_strings = array (
     /* Knowledge base category tree dashlet */
     'LBL_DASHLET_CATEGORIES_NAME' => 'Kunskapsbaskategorier och publicerade artiklar',
     'LBL_DASHLET_CATEGORIES_DESCRIPTION' => 'Displays a tree view of knowledge base categories & published articles',
+
+    /* Knowledge base category tree with search dashlet */
+    'LBL_DASHLET_KB_SEARCH_NAME' => 'Kunskapsdatabassökning',
+    'LBL_DASHLET_KB_SEARCH_DESCRIPTION' => 'Visa en sökbar trädvy över publicerade kunskapsbasartiklar och kategorier.',
 
     /* Knowledge base localizations dashlet */
     'LBL_DASHLET_LOCALIZATIONS_NAME' => 'Publicerade artiklar på andra språk',
@@ -4066,6 +4193,10 @@ $app_strings = array (
 
     //SugarFieldPhone labels
     'LBL_INVALID_USA_PHONE_FORMAT' => 'Vänligen fyll i ett telefonnummer inklusive riktnummer med siffror.',
+    'LBL_CCP_NOT_INITIATED' => 'Försöker ringa med CCP medan agent inte har loggat in.',
+    'LBL_CCP_LIBRARY_CALLOUT_ERROR' => 'Kunde inte initiera samtal via CCP.',
+    'LBL_CCP_DIALING_ERROR' => 'Detta samtal kan inte slutföras som det slagits.',
+    'LBL_CCP_DIALOUT_NOT_ALLOWED' => 'Stäng alla chattsessioner i SugarLive innan du ringer ett utgående samtal.',
 
     //File write error label
     'ERR_FILE_WRITE' => 'Fel: Kunde inte skriva file {0}. Vänligen kolla system och webserver behörigheter',
@@ -4401,8 +4532,8 @@ $app_strings = array (
     // start of: Quotes related
     'LBL_QLI_SINGLE_TITLE' => 'Offererad radartikel',
     'LBL_DISCOUNT_TOTAL' => 'Total rabatt',
-    'LBL_DISCOUNT_PERCENT' => '% Percent',
-    'LBL_DISCOUNT_SELECT' => 'Determines if the discount is a percentage or flat amount',
+    'LBL_DISCOUNT_PERCENT' => '% Procent',
+    'LBL_DISCOUNT_SELECT' => 'Bestämmer om rabatten är en procentsats eller ett schablonbelopp',
     'LBL_TAX' => 'Skatt',
     'LBL_SHIPPING' => 'Frakt',
     'LBL_GRAND_TOTAL' => 'Totalsumma',
@@ -4449,7 +4580,7 @@ $app_strings = array (
     'LBL_NO_ACCESS' => '(Ingen tillgång)',
     'LBL_NO_ACCESS_LOWER' => 'Ingen tillgång',
     'LBL_NO_FIELD_ACCESS' => 'Ingen tillgång',
-    'LBL_NO_LICENSE_ACCESS' => 'License Required',
+    'LBL_NO_LICENSE_ACCESS' => 'Licens krävs',
     'LBL_VALUE_ERASED' => 'Värdet raderades',
     'LBL_VALUE_ERASED_TOOLTIP' => 'Den här informationen raderas via datasekretessbegäran',
     'LBL_CREATE_RELATED_RECORD' => 'Skapa Relaterad Post',
@@ -4470,7 +4601,9 @@ $app_strings = array (
     'LBL_TASKS_SUBPANEL_TITLE' => 'Uppgifter',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Telefonsamtal',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'Email',
+    'LBL_SHIFTS_SUBPANEL_TITLE' => 'Skift',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Produkter',
+    'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'Skiftundantag',
     'LNK_SETTINGS' => 'Inställningar',
     'LBL_MOBILE_SUPPORT' => 'Support',
     'LBL_MOBILE_SHOW_MORE' => 'Visa fler ...',
@@ -4630,16 +4763,14 @@ $app_strings = array (
     'LBL_MOBILE_PDF_DOWNLOAD' => 'Ladda ner {{{pdfTemplateName}}} PDF',
 
     'ERR_SYNC_FAILED' => 'Det går inte att synkronisera med servern.',
-    'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'SSO-inloggning är inte tillgängligt. Kontrollera att Sugar är uppdaterat till version 7.5 eller senare och konfigurerat för SSO.',
+    'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'The Sugar instance at the provided URL is not configured for Single Sign-On. Please turn off Single Sign-On or contact your administrator for assistance.',
     'ERR_MOBILE_NOT_AUTHORIZED' => 'Tillgång ej tillåten.',
     'ERR_MOBILE_INVALID_CREDS' => 'Ogiltigt användarnamn eller lösenord.',
     'ERR_MOBILE_SESSION_EXPIRED' => 'Din session gått ut.',
     'ERR_MOBILE_NOT_FOUND' => 'Resursen hittades inte.',
     'ERR_MOBILE_TIMEOUT' => 'Servern svarar inte.',
     'ERR_MOBILE_CONNECTION_FAILED' => 'Det går inte att nå servern.',
-    'ERR_MOBILE_NOT_FOUND_LOGIN' => 'Inget {{{brandName}}} server hittades på den angivna webbadressen.',
-    'ERR_MOBILE_TIMEOUT_LOGIN' => 'Server svarar inte på den angivna webbadressen.',
-    'ERR_MOBILE_CONNECTION_FAILED_LOGIN' => 'Server inte tillgänglig för viss webbadress.',
+    'ERR_MOBILE_NOT_FOUND_LOGIN' => 'No {{{brandName}}} instance found at the provided URL (error {{{code}}}).',
     'ERR_MOBILE_INTERNET_UNAVAILABLE' => 'Internet-anslutning är inte tillgänglig.',
     'ERR_MOBILE_INTERNAL' => 'Internt fel ({{{code}}}). Vänligen försök senare.',
     'ERR_MOBILE_VALIDATION' => 'Post är ogiltig',
@@ -4838,6 +4969,55 @@ $app_strings = array (
     'LBL_VO_RIGHT_MENU_BTN' => 'Höger menyknapp',
     'LBL_VO_ADD_BTN' => 'Lägg till knapp',
 
+    // Sugar Mobile additions for 10.3
+    'LBL_DISCOUNT_AMOUNT' => 'Rabatt',
+    'LBL_MOBILE_CHOOSE_NAVIGATOR' => 'Välj en mappningsapp',
+    'LBL_OVERWRITE_PROCESS_CLAIM_QUESTION' => 'De utvalda {{entityName}} har relaterade värden: {{localizedFieldNames}}. Avbryt för att behålla befintliga värden. Bekräfta för att skriva över med nya värden.',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED' => 'Datakryptering är aktiverad.',
+    'LBL_LEAD_ALREADY_CONVERTED' => 'Vald affärsmöjlighet har redan konverterats.',
+    'LBL_OPERATION_NOT_AVAILABLE_OFFLINE' => 'Den här åtgärden är endast tillgänglig när enheten är online',
+    'LBL_QUOTES_GENERATE_OPPORTUNITY' => 'Är du säker på att du vill skapa en affärsmöjlighet från offerten?',
+    'LBL_TAG_ADD' => 'Lägg till tagg',
+    'LBL_TAG_ENTER_TAG_NAME' => 'Ange tagg',
+    'LBL_TAG_OFFLINE_READ_NOT_SUPPORTED' => 'Filtrering efter taggar stöds inte när enheten är offline.',
+    'LBL_COMMENTLOG_SHOWCOMMENT' => 'Visa hela kommentaren',
+    'LBL_COMMENT_VIEW' => 'Visa en kommentar',
+    'LBL_PMSE_LABEL_DUEDATE' => 'Förfallodatum',
+    'LBL_PMSE_DUE' => 'Förfaller',
+    'LBL_PMSE_DUE_ON' => 'Förfaller den',
+    'LBL_LEAD_CONVERSION_PARENT_RECORD_REQUIRED' => 'Skapa {{conversionParentModuleName}} först',
+    'LBL_LEAD_CONVERSION_MISSING_REQUIRED' => 'Saknar krävda poster: {{{missingRecords}}}',
+    'LBL_IMAGE_QUALITY_SELECTOR_HINT' => 'Välj bildkvalitet. Bilden ändras i enlighet med detta innan den sparas på servern. Det valda värdet kommer att användas som standard för alla liknande operationer i framtiden.',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATING' => 'Uppskattar filstorlek...',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATED' => 'Den uppskattade filstorleken är',
+    'LBL_IMAGE_QUALITY_SELECTOR_HEADER' => 'Bildkvalitet',
+    'LBL_IMAGE_QUALITY_BEST' => 'Originalstorlek',
+    'LBL_IMAGE_QUALITY_GOOD' => 'God kvalitet',
+    'LBL_IMAGE_QUALITY_POOR' => 'Liten storlek',
+    'LBL_IMAGE_QUALITY_BTN' => 'Kompression: {{{rate}}}',
+    'LBL_LIST_CONFIGURABLE_HEADER' => 'Lista fält på {{module}}',
+    'LBL_LIST_RESET_FIELDS' => 'Återställ till standard',
+    'LBL_LIST_NOT_ENOUGH' => 'Välj minst 1 aktivt fält.',
+    'LBL_LOGIN_PERMISSION_ABORTED' => 'Du måste logga in och acceptera behörigheter för att kunna arbeta med SugarCRM-instans.',
+    'LBL_SELECTING_EXISTING_RECORD' => 'Väljer {{{moduleSingular}}}',
+    'LBL_CREATING_NEW_RECORD' => 'Skapar ny {{{moduleSingular}}}',
+    'LBL_IMAGE_QUALITY_SELECTOR_LABEL' => 'Bildstorlek',
+    'LBL_COPY_ADDRESS' => 'Kopiera adress',
+    'LBL_OPEN_IN' => 'Öppna i',
+    'LBL_MULTIATTACHMENTS_NO_FILE_SELECTED' => 'Ingen fil vald.',
+    'LBL_ATTACHMENT_ADD' => 'Bifoga',
+
+    // Mobile cookie consent
+    'LBL_USE_COOKIES_CONFIRM_TITLE' => 'Denna app använder cookies',
+    'LBL_USE_COOKIES_CONFIRM' => 'Denna applikation använder cookies för att hjälpa dig få en bättre upplevelse. Genom att fortsätta ger du samtycke till användandet av cookies i enlighet med vår sekretesspolicy.',
+
+    // Mobile warnings
+    'WARN_SERVER_OUTDATED' => 'Du använder en Sugar-instans som inte är kompatibel med Sugar Mobile i en kommande mobilversion. Be din administratör att uppgradera Sugar så snart som möjligt.',
+    'ERROR_TAG_NAME_INVALID' => 'Taggnamn kan inte innehålla "{{{forbiddenChars}}}" tecken',
+    'ERROR_NO_TAGS_FOUND' => 'Inga befintliga taggar matchar "{{{searchQuery}}}"',
+    'ERR_PA_RECORD_INVALID' => 'Posten {{{moduleName}}} har ett eller flera ogiltiga värden och kan inte sparas. Vill du redigera posten för att utföra åtgärden {{{actionLabel}}}?',
+    'ERR_MOBILE_METADATA_RELOAD' => 'En administratör har gjort konfigurationsändringar i din Sugar-instans. Tryck på OK för att synkronisera appens konfiguration med servern.',
+
     // Cookie consent
     'LBL_WIZ_USER_COOKIE_CONSENT' => 'Denna applikation använder kakor',
     'LBL_USER_CLICK_FOR_COOKIE_CONSENT' => 'Kryssa i för att acceptera (obligatoriskt)',
@@ -4896,6 +5076,10 @@ $app_strings = array (
     'LBL_PORTAL_CONTACT_INFO_PHONE' => 'Telefon: ',
     'LBL_PORTAL_CONTACT_INFO_EMAIL' => 'E-post: ',
     'LBL_PORTAL_CONTACT_INFO_WEB' => 'Webb: ',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_HELLO'    => 'Hello there!',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_START'    => 'Click to start chat',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
+    'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'Är du säker på att du vill stänga chatten?',
 
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'Din inloggning lyckades inte. Var god och försök igen.',
@@ -4942,6 +5126,29 @@ $app_strings = array (
     'LBL_RENEWALS_CONSOLE_NAME_ACCOUNT' => 'Namn / kontonamn',
     'LBL_RENEWALS_CONSOLE_AMOUNT' => 'Worst | Likely | Best',
 
+    // Omnichannel Console
+    'LBL_OMNICHANNEL' => 'SugarLive',
+    'LBL_OMNICHANNEL_DASHBOARD' => 'Omnichannel Dashboard',
+    'LBL_OMNICHANNEL_DEFAULT_CUSTOMER_NAME' => 'Kund',
+    'TPL_OMNICHANNEL_NEW_RECORD_TITLE' => '{{type}} {{direction}} {{identifier}} vid {{time}}',
+    'LBL_OMNICHANNEL_UNSUPPORTED_BROWSER' => 'Din webbläsare har inte stöd för SugarLive. Vänligen använd Google Chrome eller Mozilla Firefox.',
+    'LBL_OMNICHANNEL_RECORD_CREATED' => 'En <a href="#{{buildRoute model=this}}">{{moduleSingularLower}}</a> har skapats som innehåller information om din konversation.',
+    'LBL_OMNICHANNEL_SUBJECT' => 'Ämne',
+    'LBL_OMNICHANNEL_DESCRIPTION' => 'Beskrivning',
+    'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'Sammanfattning av meddelande',
+    'LBL_OMNICHANNEL_CALL_SUMMARY' => 'Sammanfattning av samtal',
+    'LBL_OMNICHANNEL_LINK_TO' => 'Länk {{fromModule}} till {{toModule}}',
+    'LBL_OMNICHANNEL_LINKED' => 'Länkad',
+    'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'Din webbläsare har inte stöd för chatt. Vänligen använd Google Chrome eller Mozilla Firefox.',
+    'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'Vänligen kontakta din Sugaradministratör för att få hjälp.',
+    'LBL_OMNICHANNEL_CONFIG_LAYOUT' => 'Konfigurera layout',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'Slutför konfigureringen av SugarLive innan du ringer ett utgående samtal.',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'Slutför konfigurationen av SugarLive-layouten innan du öppnar SugarLive.',
+    'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'Ställ dig själv på "Offline" i SugarLive innan du konfigurerar SugarLive-layouten.',
+
+    // Omnichannel Console Config
+    'LBL_RESTORE_TAB_DEFAULT' => 'Återställ tab till standard',
+    'LBL_CONFIGURE_SUMMARY_PANEL' => 'Konfigurera sammanfattningspanelen',
 
     //First time login wizard
     'LBL_WIZ_USER_PROFILE_TITLE' => 'Användarinformation',
@@ -4973,6 +5180,10 @@ $app_strings = array (
     'LBL_WIZ_CREATE_USERS' => 'Skapa Användare',
     'LBL_WIZ_APPLICATION_SETTINGS' => 'Systeminställningar',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'Studio',
+
+    'LBL_CSP_ERROR_MESSAGE' => 'Värdena som du har angett stöds inte eller uppfyller inte det acceptabla formatet. För en lista över acceptabla fältvärden och format, se <a href="{{linkToDocumentation}}" target="_blank">Systemdokumentationen</a>.',
+    'LBL_CSP_ERROR_MESSAGE_ADMIN' => 'Detta innehåll har inte godkänts. Uppdatera systemets <a href="{{linkToDocumentation}}" target="_blank">Inställningar för innehållssäkerhetspolicy</a>.',
+    'LBL_CSP_ERROR_MESSAGE_USER' => 'Detta innehåll har inte godkänts. Be din administratör att uppdatera systemets <a href="{{linkToDocumentation}}" target="_blank">Inställningar för innehållssäkerhetspolicy</a>. När inställningarna har uppdaterats måste du uppdatera din webbläsare för att ändringarna ska träda i kraft.',
 
     // For password related labels
     'LBL_PASSWORD'						=> 'Lösenord',
@@ -5101,6 +5312,12 @@ $app_strings = array (
     'TPL_TABBED_DASHLET_USER_BUTTON_LABEL' => 'Mina Objekt',
     'TPL_TABBED_DASHLET_GROUP_BUTTON_LABEL' => 'Team Objekter',
 
+    // Sugar Apps Dashlet
+    'LBL_SUGAR_APPS_DASHLET_LABEL' => 'Sugar Apps Dashlet',
+    'LBL_SUGAR_APPS_DASHLET_DESC' => 'Allows Users to add Sugar Apps to a Dashboard',
+    'LBL_SUGAR_APPS_DASHLET_APP_SELECT_LABEL' => 'Select a Sugar App',
+    'LBL_SUGAR_APPS_DASHLET_CATALOG_ERROR' => 'This Sugar App is currently unavailable with error code {{errorCode}}. Please refresh the page or check with your Administrator if the problem persists.',
+
     // history dashlet
     'LBL_HISTORY_DASHLET' => 'Historik',
     'LBL_HISTORY_DASHLET_DESCRIPTION' => 'Historik-dashleten visar gångna möten, loggade samtal, samt mottagna och skickade email.',
@@ -5215,6 +5432,7 @@ $app_strings = array (
     //record save
     'LBL_RECORD_SAVED' => 'Post sparas.', // use when there is no information about the record
     'LBL_RECORD_SAVED_SUCCESS' => 'Du har skapat med framgång {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>.', // use when a model is available
+    'LBL_RECORD_SAVED_SUCCESS_NO_LINK' => 'Du skapat {{moduleSingularLower}}.',
     'LBL_RECORD_SAVED_ACCESS_DENIED' => 'Du skapat denna post, men du har inte behörighet att komma åt denna post.', // use when user has no access to the model
     'LBL_VALIDATING' => 'Verifierar ...',
 
@@ -5293,7 +5511,7 @@ $app_strings = array (
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Uppdatera listan',
     // Refresh button on tile views
-    'LBL_TILE_REFRESH' => 'Refresh Tiles',
+    'LBL_TILE_REFRESH' => 'Uppdatera plattor',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'mer',
@@ -5535,6 +5753,7 @@ $app_strings = array (
     'LBL_PMSE_PROCESS_USERS_CHART_NAME_RECORD' => 'Pågående aktiviteter',
     'LBL_PMSE_PROCESS_USERS_CHART_DESCRIPTION' => 'Pågående aktiviteter efter process',
     'LBL_PMSE_ALL_PROCESSES_LABEL' => 'Alla Processer',
+    'LBL_RECORD_DASHBOARD' => 'Instrumentpanel för poster',
 
 
     'LBL_PMSE_PROCESS_STATUS_CHART_NAME' => 'Sammanfattad processstatus',
@@ -5566,7 +5785,7 @@ $app_strings = array (
     'LBL_BUSINESS_CENTER_ID' => 'Affärscenter ID',
     'LBL_BUSINESS_CENTER_NAME' => 'Affärscenter namn',
 
-    'LBL_PLIS_ACTIVITIES' => 'Purchased Line Items Activities',
+    'LBL_PLIS_ACTIVITIES' => 'Aktiviteter för köpta poster',
 
     //Tag Strings
     'LBL_TAG_NEW_TAG' => '(Ny tagg)',
@@ -5606,6 +5825,7 @@ $app_strings = array (
     'TPL_DATAPRIVACY_PII_TITLE' => 'Personlig information för {{{name}}}',
 
     'LBL_CHANGETIMERS_SUBPANEL_TITLE' => 'Ändra timers',
+    'LBL_MESSAGES_SUBPANEL_TITLE' => 'Meddelanden',
 
     'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'Kopierad till urklipp!',
     'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'Kunde inte kopieras till urklipp',
@@ -5623,13 +5843,24 @@ $app_strings = array (
     'LBL_COMMENT_LOG_SHOW_LESS' => 'Visa Mindre...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'Inga data tillgängliga',
 
-    // Active Subscriptions Dashlet
+    // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'Aktiva prenumerationer',
+    'LBL_ACTIVE_SUBSCRIPTIONS_UNAVAILABLE' => 'Denna dashlet går bara att lägga till för moduler som länkar till ett enda konto. Se dokumentationen <a href={{linkToDocumentation}}>Aktiv prenumerationsdashlet</a> för ytterligare information.',
+    'LBL_LINKED_SUBSCRIPTIONS_ACCOUNT_FIELD' => 'Visa inköp som hör samman med detta länkade konto:',
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => 'Aktiva prenumerationer för ett specifikt konto.',
     'LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY' => ', kvantitet {{quantity}}',
     'LBL_ACTIVE_SUBSCRIPTIONS_TOTAL' => 'Totalt:',
     'LBL_NO_ACTIVE_SUBSCRIPTIONS' => 'Inga aktiva prenumerationer',
     'LBL_REQUIRE_REVENUE_LINE_ITEMS' => 'Denna instrumentpanel kräver {{module_name}} för att fungera. Kontakta din administratör om att aktivera {{module_name}}.',
+    'LBL_PURCHASE_HISTORY_DASHLET' => 'Köphistorik',
+    'LBL_PURCHASE_HISTORY_DASHLET_DESCRIPTION' => 'Alla köp för ett specifikt konto.',
+    'LBL_PURCHASE_HISTORY_UNAVAILABLE' => 'Denna dashlet går bara att lägga till för moduler som länkar till ett enda konto. Se dokumentationen <a href={{linkToDocumentation}} target="_blank">Köphistorikdashlet</a> för mer information.',
+    'LBL_NO_PURCHASE_HISTORY' => 'Inga köp att visa',
+    'LBL_NO_PLIS' => 'Inga köpta poster',
+    'LBL_PURCHASE_HISTORY_TOTAL_CURRENCY' => 'Totalt',
+    'LBL_PURCHASE_HISTORY_TOTAL_QUANTITY' => 'Kvantitet',
+    'LBL_REQUIRE_PURCHASES_AND_PLIS' => 'Denna dashlet kräver Köp och Köpta poster för att fungera. Prata med din administratör om att aktivera Köp och Köpta postera.',
+    'LBL_SEARCH_PURCHASE_NAME' => 'Söker efter Inköpsnamn...',
 
     // Customer Service
     'LBL_EDIT_IN_STUDIO' => 'Använd Studio för att redigera layouten för dashlet-vyn genom att gå till ' .
@@ -5645,7 +5876,39 @@ $app_strings = array (
     'LBL_SERVICE_DURATION' => 'Servicevaraktighet',
     'LBL_SERVICE_DURATION_VALUE' => 'Värde servicevaraktighet',
     'LBL_SERVICE_DURATION_UNIT' => 'Servicevaraktighet enhet',
+    'LBL_LOCK_DURATION' => 'Varaktighet för lås',
 
+// Omnichannel
+    'ERROR_OMNICHANNEL_LOAD_FAILED' => 'Amazon Connect CCP kunde inte laddas. Vänligen' .
+        'säkerställ att du använder en '.
+        '<a href="https://docs.aws.amazon.com/connect/latest/adminguide/browsers.html" target="_blank" rel="nofollow noopener noreferrer">webbläsare som stöds</a>. ' .
+        'Om problemet kvarstår ska du kontakta din Sugar-administratör.',
+    'ERROR_OMNICHANNEL_NOT_CONFIGURED' => 'Din Sugar-administratör har inte konfigurerat din instans för Amazon Connect.',
+    'ERROR_OMNICHANNEL_TIMEOUT' => 'Kunde inte etablera anslutning med Amazon Connect. Kontakta din Sugar-administratör för att få hjälp.',
+    'LBL_OMNICHANNEL_UNKNOWN' => 'Okänd',
+    'LBL_OMNICHANNEL_CONFIG_SUMMARY' => 'Summary Panel',
+
+    // Focus Drawer dashboards
+    'LBL_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda',
+    'LBL_EXTERNAL_GUESTS' => 'Externa gäster',
+    'LBL_MY_FAVORITE_TASKS' => 'Mina favorituppgifter',
+    'LBL_MY_TASKS' => 'Mina uppgifter',
+
+    // Sugar Integrate
+    'LBL_INTEGRATE_INVALID_FIELD' => 'Kunde inte hitta fältet: {0} i modulen: {1}',
+    'LBL_INTEGRATE_INVALID_PARAM' => 'Kunde inte hitta posten {0}: {1} i modulen: {2}',
+    'LBL_INTEGRATE_INVALID_RELATIONSHIP' => 'Kunde inte hitta en relation med namnet: {0}',
+    'LBL_INTEGRATE_DUPLICATE_PARAM' => 'En databasinmatning med id: {0}, med {1}: {2} i modulen: {3} finns redan',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS_DELETED' => 'mjuk borttagen (med borttagen flagga = 1)',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS' => 'Hittade flera databasposter för {0} {1} i modulen {2}. ' .
+        'Ta bort eller uppdatera de matchande posterna i enlighet med detta. Matchande poster: {3}',
+
+    // Time-Aware Schedules
+    'LBL_TIME_AWARE_NEXT_RUN' => 'Nästa körning',
+    'LBL_TIME_AWARE_TYPE' => 'Typ',
+    'LBL_TIME_AWARE_BEAN_ID' => 'Bean-ID',
+
+    'LBL_BLANK' => '-blank-',
 );
 
 $app_list_strings['activity_user_options'] = array (

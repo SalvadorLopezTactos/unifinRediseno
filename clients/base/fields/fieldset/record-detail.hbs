@@ -11,7 +11,7 @@
  */
 --}}
 {{#each fields}}
-    <div class="fieldset-field" data-type="{{type}}" data-name="{{name}}">
+    <div class="fieldset-field{{#if this.licensed}} hidden{{/if}}" data-type="{{type}}" data-name="{{name}}">
         {{#if ../def.show_child_labels}}
             <div class="record-label" data-name="{{name}}">{{str label ../module}}</div>
         {{/if}}

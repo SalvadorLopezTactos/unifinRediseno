@@ -107,20 +107,18 @@
      * @param {string} module The module to load the filter fields for.
      */
     loadFilterFields: function(module) {
-        // Get the set of multi-line-list fields for the tab, and extend it with
+        // Get the set of filterableFields for the tab, and extend it with
         // the default fieldList
-        var tabContent = this.model.get('tabContent') || {};
-        this.fieldList = _.extend({}, this.fieldList, tabContent.fields);
+        var filterableFields = this.model.get('filterableFields') || {};
+        this.fieldList = _.extend({}, this.fieldList, filterableFields);
 
         // For each field, if it is filterable (or a pre-defined filter), add it
         // to the filterFields list
         this.filterFields = {};
-        var nonFilterableTypes = ['id', 'relate'];
         _.each(this.fieldList, function(fieldDef, fieldName) {
             var label = app.lang.get(fieldDef.label || fieldDef.vname, module);
             var isPredefined = fieldDef.predefined_filter;
-            var isFilterable = !_.isEmpty(label) && this.filterOperatorMap[fieldDef.type] &&
-                _.indexOf(nonFilterableTypes, fieldDef.type) === -1;
+            var isFilterable = !_.isEmpty(label) && this.filterOperatorMap[fieldDef.type];
             if (isPredefined || isFilterable) {
                 this.filterFields[fieldName] = label;
             }

@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_BUGS_LIST_DASHBOARD' => 'Paneli i listës së problemeve',
   'LBL_BUGS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të problemeve',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te gabimet',
 
   'LBL_MODULE_NAME' => 'Gabimet',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Gabim',

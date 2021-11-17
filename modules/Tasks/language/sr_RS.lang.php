@@ -13,7 +13,10 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TASKS_LIST_DASHBOARD' => 'Kontrolna tabla liste zadataka',
+  'LBL_TASKS_RECORD_DASHBOARD' => 'Kontrolna tabla za zapise o zadacima',
+  'LBL_TASKS_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za zadatke',
 
+  'LBL_RELATED_CONTACT' => 'Povezani kontakt',
   'LBL_MODULE_NAME' => 'Zadaci',
   'LBL_MODULE_NAME_SINGULAR' => 'Zadatak',
   'LBL_TASK' => 'Zadaci:',

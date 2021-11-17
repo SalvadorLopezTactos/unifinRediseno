@@ -12,63 +12,11 @@
 $viewdefs['Dashboards']['base']['view']['dashboard-headerpane'] = array(
     'buttons' => array(
         array(
-            'type' => 'actiondropdown',
-            'buttons' => array(
-                array(
-                    'name' => 'add_button',
-                    'type' => 'rowaction',
-                    'label' => 'LBL_CREATE_BUTTON_LABEL',
-                    'css_class' => 'btn',
-                ),
-                array(
-                    'name' => 'edit_button',
-                    'type' => 'rowaction',
-                    'label' => 'LBL_EDIT_BUTTON',
-                    'acl_action' => 'edit',
-                ),
-                array(
-                    'type' => 'rowaction',
-                    'name' => 'duplicate_button',
-                    'label' => 'LBL_DUPLICATE_BUTTON',
-                    'acl_module' => 'Dashboards',
-                    'acl_action' => 'create',
-                ),
-                array(
-                    'name' => 'collapse_button',
-                    'type' => 'rowaction',
-                    'label' => 'LBL_DASHLET_MINIMIZE_ALL',
-                ),
-                array(
-                    'name' => 'expand_button',
-                    'type' => 'rowaction',
-                    'label' => 'LBL_DASHLET_MAXIMIZE_ALL',
-                ),
-            ),
+            'name' => 'edit_button',
+            'type' => 'rowaction',
+            'label' => 'LBL_EDIT_BUTTON',
+            'acl_action' => 'edit',
             'showOn' => 'view',
-        ),
-        array(
-            'name' => 'cancel_button',
-            'type' => 'button',
-            'label' => 'LBL_CANCEL_BUTTON_LABEL',
-            'css_class' => 'btn-invisible btn-link',
-            'showOn' => 'edit',
-        ),
-        array(
-            'name' => 'delete_button',
-            'type' => 'button',
-            'label' => 'LBL_DELETE_BUTTON_LABEL',
-            'css_class' => 'btn-danger',
-            'showOn' => 'edit',
-        ),
-        array(
-            'name' => 'save_button',
-            'type' => 'button',
-            'events' => array(
-                'click' => 'button:save_button:click',
-            ),
-            'label' => 'LBL_SAVE_BUTTON_LABEL',
-            'css_class' => 'btn-primary',
-            'showOn' => 'edit',
         ),
         array(
             'name' => 'create_cancel_button',
@@ -102,10 +50,6 @@ $viewdefs['Dashboards']['base']['view']['dashboard-headerpane'] = array(
                     'label' => 'LBL_FAVORITE',
                     'type' => 'favorite',
                     'dismiss_label' => true,
-                ),
-                array(
-                    'type' => 'layoutbutton',
-                    'name' => 'layout',
                 ),
             ),
         ),

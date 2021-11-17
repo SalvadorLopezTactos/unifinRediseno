@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Κλήσεων',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφών Κλήσεων',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης κλήσεων',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Κλήσεις',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Ανατέθηκε σε',
     'LBL_LIST_MY_CALLS' => 'Κλήσεις Μου',
     'LBL_MY_SCHEDULED_CALLS' => 'Οι προγραμματισμένες κλήσεις μου',
+    'LBL_GUEST_CALLS' => 'Οι κλήσεις μου ως επισκέπτης',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Προγραμματισμένες κλήσεις ως επισκέπτης',
     'LBL_SELECT_FROM_DROPDOWN' => 'Παρακαλώ κάνετε μια επιλογή από την Σχετική Αναπτυσσόμενη λίστα, αρχικά.',
 	'LBL_ASSIGNED_TO_NAME' => 'Ανατέθηκε σε:',
 	'LBL_ASSIGNED_TO_ID' => 'Ανατεθειμένος Χειριστής',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Ακύρωση',
     'LBL_EMPTY_SEARCH_RESULT' => 'Μας συγχωρείτε, δε βρέθηκαν αποτελέσματα. Παρακαλούμε δημιουργήστε έναν προσκεκλημένο.',
     'LBL_NO_ACCESS' => 'Δεν έχετε πρόσβαση για τη δημιουργία $module',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Αναγνωριστικό επικοινωνίας Amazon Connect',
+
     'LBL_REPEAT_TYPE' => 'Επανάληψη',
     'LBL_REPEAT_INTERVAL' => 'Κάθε',
     'LBL_REPEAT_END' => 'Τέλος',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Κλήση με {{{this}}}',
     'LBL_SEND_INVITES' => 'Αποστολή Προσκεκλημένων',
     'LBL_REMINDER_TITLE' => 'Κλήση:',
+    'LBL_CALL_RECORDING_URL' => 'URL εγγραφής',
+    'LBL_CALL_RECORDING' => 'Εγγραφή',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Προγραμματίσατε το {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> για {{formatDate date_start}}.',

@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'Nazwa użytkownika',
 	'LBL_RESTORE_BUTTON_LABEL'=>'Przywróć',
 	'LBL_SYSTEM_SETTINGS' => 'Ustawienia systemowe',
-	'LBL_SKYPEOUT_ON_DESC' => 'Funkcja umożliwia połączenie z wybranym numerem telefonu za pomocą SkypeOut&reg;. Aby skorzystać z tej funkcji, numery muszą mieć prawidłowy format: „+”  „Kod Kraju” „Numer”, np. +1 (555) 555-1234.',
-	'LBL_SKYPEOUT_ON' => 'Włącz integrację ze SkypeOut&reg;',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut&reg;',
+    'LBL_DIALOUT_ON_DESC' => 'Umożliwia użytkownikom klikanie numerów telefonów w celu połączenia się z nimi przy użyciu domyślnego oprogramowania integrującego telefon sieci publicznej z komputerem (CTI).',
+    'LBL_DIALOUT_ON' => 'Włącz funkcję Kliknij, aby połączyć',
+    'LBL_DIALOUT_TITLE' => 'Połączenia wychodzące',
     'LBL_TWEETTOCASE_ON_DESC' => 'Zezwól użytkownikom na tworzenie zgłoszeń z Tweetów',
     'LBL_TWEETTOCASE_ON' => 'Włącz integrację Tweetów&reg; do zgłoszenia',
     'LBL_TWEETTOCASE_TITLE' => 'Tweet&reg; do zgłoszenia',
@@ -375,8 +375,8 @@ Czcionki obsługiwane przez SugarPDF :
 <br>
 W przypadku wybrania nieosadzania czcionki w pliku PDF wygenerowany plik PDF będzie miał mniejszy rozmiar, ale zostanie użyta zastępcza czcionka, jeśli czcionka nie jest dostępna w systemie, w którym zainstalowano przeglądarkę.
 <br><br>
-Dodanie czcionki PDF do SugarCRM wymaga wykonania kroków 1 i 2 z dokumentacji czcionek TCPDF dostępnej w części „DOCS” <a href="http://www.tcpdf.org" target="_blank">witryny TCPDF</a>.
-<br><br>Narzędzia pfm2afm oraz ttf2ufm są dostępne w w ścieżce fonts/utils w pakiecie TCPDF, który można pobrać w części „DOWNLOAD” <a href="http://www.tcpdf.org" target="_blank">witryny TCPDF</a>.
+Dodanie czcionki PDF do SugarCRM wymaga wykonania kroków 1 i 2 z dokumentacji czcionek TCPDF dostępnej w części „DOCS” <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">witryny TCPDF </a>.
+<br><br>Narzędzia pfm2afm oraz ttf2ufm są dostępne w w ścieżce fonts/utils w pakiecie TCPDF, który można pobrać w części „DOWNLOAD” <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">witryny TCPDF</a>.
 <br><br>Załaduj plik metryki wygenerowany w kroku 2 oraz poniższy plik czcionki.
 BSOFR
 ,
@@ -429,6 +429,9 @@ Aby skonfigurować opcje systemu, kliknij <a href="index.php?module=Administrati
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Moduł Raporty nie jest dostępny w mobilnym widoku przeglądarki.',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => 'Maksymalna długość musi być większa niż minimalna długość',
+    'ERR_MIN_LENGTH_NEGATIVE' => 'Minimalna długość powinna być wartością dodatnią',
+    'ERR_MAX_LENGTH_NEGATIVE' => 'Maksymalna długość powinna być wartością dodatnią',
     'ERR_EMPTY_SAML_LOGIN' => 'URL logowania SAML nie może być pusty',
     'ERR_EMPTY_SAML_CERT' => 'Certyfikat SAML nie może być pusty',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'Identyfikator podmiotu SAML nie może być pusty',
@@ -442,9 +445,6 @@ Aby skonfigurować opcje systemu, kliknij <a href="index.php?module=Administrati
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Panele aktywności',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Włącz Panele aktywności',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Włącza Panele aktywności dla aplikacji',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Włącz dodatkową zawartość ekranu logowania',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Automatycznie zapisuj definicje procesów',

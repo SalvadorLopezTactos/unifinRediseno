@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'القواعد التجارية للعملية',
   'LBL_MODULE_NAME_SINGULAR' => 'القاعدة التجارية للعملية',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم القواعد التجارية للعمليات',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'لوحة معلومات سجل قواعد أعمال العمليات',
   'LBL_RST_UID' => 'معرف قاعدة الأعمال',
   'LBL_RST_TYPE' => 'نوع قاعدة الأعمال',
   'LBL_RST_DEFINITION' => 'تعريف قاعدة الأعمال',

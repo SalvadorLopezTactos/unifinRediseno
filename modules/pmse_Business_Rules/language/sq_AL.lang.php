@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Rregulla biznes procesi',
   'LBL_MODULE_NAME_SINGULAR' => 'Rregulla biznes procesi',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te rregullat tregtare të proceseve',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Paneli i regjistrimit të rregullave të biznesit të procesit',
   'LBL_RST_UID' => 'ID e biznes rregullave',
   'LBL_RST_TYPE' => 'Lloji i rregullit të biznesit',
   'LBL_RST_DEFINITION' => 'Definimi i biznes rregullave',

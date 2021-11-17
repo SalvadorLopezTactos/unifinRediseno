@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Ištrinti pažymėti laukai',
     'LBL_NO_RECORDS_MARKED' => 'Nėra pažymėtų ištrinti laukų arba įrašų.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Duomenų privatumo įrašų ataskaitų sritis',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ duomenų privatumas',
 
     // list view
     'LBL_HELP_RECORDS' => 'Duomenų privatumo modulis seka privatumo veiklas, įskaitant sutikimo ir temų užklausas, kad būtų palaikomos jūsų organizacijos privatumo procedūros. Kurkite duomenų privatumo įrašus, susietus su asmens įrašu (pvz., kontaktu), kad galėtumėte sekti sutikimą arba imtis veiksmų dėl privatumo užklausos.',

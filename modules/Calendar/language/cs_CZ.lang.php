@@ -54,8 +54,8 @@ $mod_strings = array (
 	'LBL_FILTER_BY_TEAM' => 'Vyfiltrovat uživatele podle týmu:',
 	'LBL_ASSIGNED_TO_NAME' => 'Přiřazeno komu',
 	'LBL_DATE' => 'Datum & čas začátku',  
-	'LBL_CREATE_MEETING' => 'Harmonogram jednání',
-	'LBL_CREATE_CALL' => 'Log hovorů',
+	'LBL_CREATE_MEETING' => 'Naplánovat schůzku',
+	'LBL_CREATE_CALL' => 'Zaznamenat hovor',
 	'LBL_HOURS_ABBREV' => 'h',
 	'LBL_MINS_ABBREV' => 'm',
 

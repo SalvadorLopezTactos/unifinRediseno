@@ -82,12 +82,10 @@ class ViewMapRoles extends SugarView
      */
     protected function getManifest()
     {
-        $post = InputValidation::getService();
-        $s_manifest = $post->getValidInputPost('s_manifest', array(
-            'Assert\PhpSerialized' => array("base64Encoded" => true)
-        ));
-
-        return $s_manifest;
+        if (isset($_POST['s_manifest'])) {
+            return unserialize(base64_decode($_POST['s_manifest']), ['allowed_classes' => false]);
+        }
+        return null;
     }
 
     /**

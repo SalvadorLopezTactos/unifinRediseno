@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => '筆記清單儀表板',
+    'LBL_NOTES_RECORD_DASHBOARD' => '備註記錄儀表板',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => '註釋焦點抽屜',
 
+    'LBL_RELATED_CONTACT' => '相關連絡人',
     'ERR_DELETE_RECORD' => '您必須指定記錄編號才能刪除「帳戶」。',
     'LBL_ACCOUNT_ID' => '帳戶 ID：',
     'LBL_CASE_ID' => '實例 ID：',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => '連絡人 ID：',
     'LBL_CONTACT_NAME' => '連絡人：',
     'LBL_DEFAULT_SUBPANEL_TITLE' => '附註',
+    'LBL_ATTACHMENTS' => '附件',
+    'LBL_ATTACHMENT_FLAG' => '是附件',
     'LBL_DESCRIPTION' => '描述',
     'LBL_EMAIL_ADDRESS' => '電子郵件地址：',
     'LBL_EMAIL_ATTACHMENT' => '電子郵件附件',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => '附註與附件',
     'LBL_NOTE' => '注意：',
     'LBL_OPPORTUNITY_ID' => '商機 ID：',
+    'LBL_NOTE_PARENT_ID' => '備註父 ID:',
     'LBL_PARENT_ID' => '父代 ID：',
     'LBL_PARENT_TYPE' => '父代類型',
     'LBL_EMAIL_TYPE' => '電子郵件類型',

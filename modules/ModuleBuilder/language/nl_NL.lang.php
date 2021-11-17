@@ -591,6 +591,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'Portaal configureren',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Portaal inschakelen',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Schakel zoeken in voordat u een case opent',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Portaalgebruikers toestaan om de zaak te sluiten',
     'LBL_PORTAL_THEME' => 'Thema portaal',
     'LBL_PORTAL_ENABLE' => 'Inschakelen',
     'LBL_PORTAL_SITE_URL' => 'Uw portaalsite is beschikbaar op:',
@@ -782,7 +783,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "Deze volgen de formule in het Sugar zelfbedieningsportaal niet.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Selecteer dit veld om hem te gebruiken wanneer er naar records gezocht wordt door Algemeen zoeken te gebruiken in deze module.',
+'LBL_POPHELP_REQUIRED'=>"Maak een formule om te bepalen of dit veld verplicht is in layouts.<br/>"
+    . "Verplichte velden volgen de formule in de op de browser gebaseerde mobiele weergave,<br/>"
+    . "maar volgen niet de formulie in de oorspronkelijke applicaties, zoals Sugar Mobile voor de iPhone. <br/>"
+    . "Deze volgen de formule in het Sugar zelfbedieningsportaal niet.",
+'LBL_POPHELP_READONLY'=>"Maak een formule om te bepalen of dit veld alleen-lezen is in layouts.<br/>"
+        . "Alleen-lezen velden volgen de formule in de op de browser gebaseerde mobiele weergave,<br/>"
+        . "maar volgen niet de formulie in de oorspronkelijke applicaties, zoals Sugar Mobile voor de iPhone. <br/>"
+        . "Deze volgen de formule in het Sugar zelfbedieningsportaal niet.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Selecteer om dit veld te gebruiken als u naar records zoekt via algemeen zoeken in deze module.',
 //Revert Module labels
 'LBL_RESET' => 'Resetten',
 'LBL_RESET_MODULE' => 'Module resetten',
@@ -817,6 +826,7 @@ $mod_strings = array(
                 'encrypt'=>'Coderen',
                 'datetimecombo' =>'Datum tijd',
                 'decimal'=>'Decimaal',
+                'autoincrement' => 'Automatisch verhogen',
 ),
 'labelTypes' => array(
     "" => "Veel gebruikte labels",
@@ -834,4 +844,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'Alle modules',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (gerelateerd {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Kopiëren uit layout',
+'LBL_RELATIONSHIP_TYPE' => 'Relatie',
 );

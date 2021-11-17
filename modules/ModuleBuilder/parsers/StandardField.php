@@ -122,6 +122,10 @@ class StandardField extends DynamicField
         
         if (isset($this->custom_def["duplicate_merge_dom_value"]) && !isset($this->custom_def["duplicate_merge"]))
         	unset($this->custom_def["duplicate_merge_dom_value"]);
+
+        if (isset($field->vname) && $currdef['vname'] !== $newDef['vname']) {
+            $this->custom_def['vname'] = $field->vname;
+        }
         
         $this->writeVardefExtension($bean_name, $field, $this->custom_def);
     }

@@ -21,10 +21,40 @@ class OpportunityViews
      */
     protected $bean;
 
+    /**
+     * Array of fields that should be readonly on Mobile Views when RLIs are enabled
+     *
+     * @var array
+     */
+    public $mobileReadOnlyFields = [
+        'service_start_date',
+        'date_closed',
+        'sales_stage',
+    ];
+
+    /**
+     * Array of fields that get added back to the views after a switch between Opps only and Opps+RLI modes
+     *
+     * @var array
+     */
+    protected $putBackFields = [];
+
     public function __construct()
     {
         SugarAutoLoader::load('modules/ModuleBuilder/parsers/ParserFactory.php');
         $this->bean = BeanFactory::newBean('Opportunities');
+    }
+
+    /**
+     * Process the Preview View for Opportunities
+     *
+     * @param array $fieldMap
+     */
+    public function processPreviewLayout(array $fieldMap)
+    {
+        /* @var $gridDefParser SidecarGridLayoutMetaDataParser */
+        $gridDefParser = ParserFactory::getParser(MB_PREVIEWVIEW, 'Opportunities', null, null, 'base');
+        $this->_processRecordParser($gridDefParser, $fieldMap);
     }
 
     /**
@@ -49,11 +79,57 @@ class OpportunityViews
     {
         /* @var $gridDefParser SidecarGridLayoutMetaDataParser */
         $gridDefParser = ParserFactory::getParser(MB_WIRELESSEDITVIEW, 'Opportunities', null, null, 'mobile');
+        // get field of interest from the fieldMap that are getting introduced back into the view
+        $this->getPutBackFieldList($fieldMap, $this->mobileReadOnlyFields);
+        // set readonly property for given fields on mobile edit view
+        $this->setMobileReadOnlyFields($gridDefParser, $this->mobileReadOnlyFields);
         $this->_processRecordParser($gridDefParser, $fieldMap);
 
         /* @var $gridDefParser SidecarGridLayoutMetaDataParser */
         $gridDefParser = ParserFactory::getParser(MB_WIRELESSDETAILVIEW, 'Opportunities', null, null, 'mobile');
         $this->_processRecordParser($gridDefParser, $fieldMap);
+    }
+
+    /**
+     * Stores an array of field names that are getting re-introduced to the views
+     *
+     * @param array $fieldMap an array of key-value pairs that are going to be added/removed from the views
+     * @param array $fieldCheckList a checklist for fields of interest
+     */
+    protected function getPutBackFieldList($fieldMap, $fieldCheckList)
+    {
+        foreach ($fieldCheckList as $field) {
+            if (isset($fieldMap[$field]) && $fieldMap[$field] === true) {
+                $this->putBackFields[] = $field;
+            }
+        }
+    }
+
+    /**
+     * Reusable util function that allows to set $mobileReadOnlyFields as readonly on parser's defs
+     *
+     * @param SidecarGridLayoutMetaDataParser &$parser reference to the parser whose viewdef needs to be updated
+     * @param array $fieldList
+     */
+    protected function setMobileReadOnlyFields(SidecarGridLayoutMetaDataParser &$parser, array $fieldList)
+    {
+        $hasRLI = Opportunity::usingRevenuelineItems();
+        $propertyList = ['readonly' => $hasRLI];
+        // adds properties to the fields present on parser's viewdef
+        $parser->setFieldProps($fieldList, $propertyList);
+        // handle the putBackFields separately as they will get read from the fielddefs instead of viewdefs
+        if (count($this->putBackFields) > 0) {
+            /*
+             * the utility of this function depends on the fact that once a field is removed from a view, it gets added
+             * back to the view via the parser's addField method which merges the fielddefs of a particular field based
+             * on the field names. This addField function in turn depends on the parser's getAvailableFields method that
+             * gets the fields from model and original layout defs excluding the ones already present on the viewdefs.
+             * So, any field that gets put back into the layout will be present, initially, on the fielddefs and not on
+             * the viewdefs. Therefore, we handle adding properties to such fields separate from the once handled in
+             * setPanelFieldPropertiesForViewdefs above.
+             */
+            $parser->setFielddefsProps($this->putBackFields, $propertyList);
+        }
     }
 
     /**
@@ -279,10 +355,16 @@ class OpportunityViews
         if (!empty($fieldMap)) {
             foreach($fieldMap as $field => $trigger) {
                 if($trigger === true) {
-                    $defs = $this->bean->getFieldDefinition($field);
-                    if ($defs) {
-                        $saveFields[] = array($field, array());
+                    $origDef = $listParser->panelGetField($field, $listParser->getOriginalPanelDefs());
+                    if (!empty($origDef['field'])) {
+                        $saveFields[] = array($field, $origDef['field']);
                         $handleSave = true;
+                    } else {
+                        $defs = $this->bean->getFieldDefinition($field);
+                        if ($defs) {
+                            $saveFields[] = array($field, array());
+                            $handleSave = true;
+                        }
                     }
                 }
             }

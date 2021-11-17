@@ -18,7 +18,7 @@
 * *******************************************************************************/
 
 $dictionary['ext_rest_twitter'] = array(
-
+  'archive' => false,
   'comment' => 'vardefs for twitter connector',
   'fields' => array (
     'id' =>

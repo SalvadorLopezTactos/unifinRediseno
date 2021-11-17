@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => '知識庫清單儀表板',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => '知識庫記錄儀表板',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => '知識庫焦點抽屜',
 
     'LBL_MODULE_NAME' => '知識庫',
     'LBL_MODULE_NAME_SINGULAR' => '知識庫文章',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => '沒有用',
     'LBL_RATING' => '評分',
     'LBL_VIEWED_COUNT' => '檢視次數',
-    'LBL_DOWNLOAD_ALL' => '下載所有',
-    'LBL_DOWNLOAD_ONE' => '下載',
-    'LBL_ATTACHMENTS' => '附件',
-    'LBL_ADD_ATTACHMENT' => '瀏覽',
     'LBL_CATEGORIES' => '知識庫類別',
     'LBL_CATEGORY_NAME' => '類別',
     'LBL_USEFULNESS' => '有用性',

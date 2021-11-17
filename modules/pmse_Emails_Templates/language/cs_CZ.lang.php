@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'E-mailové šablony procesů',
     'LBL_MODULE_NAME_SINGULAR' => 'Zavést emailové šablony',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na zpracování e-mailových šablon',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Řídicí panel záznamů e-mailových šablon procesů',
     'LNK_LIST' => 'Zobrazit e-mailovou šablonu procesu',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Vytvořit e-mailovou šablonu procesu',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Importovat e-mailové šablony procesů',

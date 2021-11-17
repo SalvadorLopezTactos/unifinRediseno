@@ -449,7 +449,7 @@ $mod_strings = array(
 'LBL_RELATED_FIELD' => '関連フィールド',
 'LBL_CONFIG_PORTAL_LOGOMARK_URL'=> 'カスタムロゴマーク画像のURL。おすすめのロゴマークの解像度は22x22ピクセルです。このサイズより大きい画像をアップロードした場合は、最大値にあわせて画像の大きさが変更されます。',
 'LBL_CONFIG_PORTAL_LOGO_URL'=> 'カスタムロゴ画像のURL。おすすめのロゴの幅は200ピクセルです。このサイズより大きい画像をアップロードした場合は、最大値にあわせて画像の大きさが変更されます。この画像はログイン画面で使用されます。画像がアップロードされていない場合は、ロゴマークが使用されます。',
-'LBL_PORTAL_ROLE_DESC' => 'この役割を削除しないでください。カスタマーセルフサービスポータル役割は、Sugarポータルのアクティベーション中にシステムによって自動生成された役割です。Sugarポータルで不具合、ケース、ナレッジベースを有効/無効にするには、この役割の中でアクセス権を設定してください。システムが正しく動作しなくなる場合があるため、他のモジュールについてのアクセス権をここでは設定しないでください。誤ってこの役割を削除してしまった場合は、Sugarポータルを無効にした後で有効にすることで再度作成されます。',
+'LBL_PORTAL_ROLE_DESC' => 'この役割を削除しないでください。カスタマーセルフサービスポータル役割は、Sugarポータルのアクティベーション中にシステムによって自動生成された役割です。Sugarポータルで不具合、ケース、ナレッジベースを有効/無効にするには、この役割の中でアクセス権限を設定してください。システムが正しく動作しなくなる場合があるため、他のモジュールについてのアクセス権をここでは設定しないでください。誤ってこの役割を削除してしまった場合は、Sugarポータルを無効にした後で有効にすることで再度作成されます。',
 
 //RELATIONSHIPS
 'LBL_MODULE' => 'モジュール',
@@ -591,6 +591,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'ポータルを設定',
     'LBL_PORTAL_ENABLE_PORTAL' => 'ポータルを有効化',
     'LBL_PORTAL_ENABLE_SEARCH' => 'ケースを開く前に検索を有効にします',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'ポータルユーザーによるケースのクローズを許可する',
     'LBL_PORTAL_THEME' => 'テーマポータル',
     'LBL_PORTAL_ENABLE' => '有効にする',
     'LBL_PORTAL_SITE_URL' => 'ポータルのURLは:',
@@ -766,7 +767,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'フィールドを全文検索可能に設定します。',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'ブースティングとは、レコード\\のフィールドの関連性を強化するプロセスです。 <br /> 高いブーストレベルのフィールドは検索が実行される際に、より重きを置かれます。検索が実行される際、より重きを置かれたフィールドを含む一致レコードは検索結果での表示順が上になります。<br /> デフォルト値は 1.0 で、これは中間のブーストを示します。プラスのブーストを適用するには、1 より大きい浮動小数点値が許容されます。マイナスのブーストを適用するには、1 より小さい値を使用します。例として、1.35 の値はフィールドに 135% プラスのブーストを与えます。0.60 の値を使用すると、マイナスのブーストが適用されます。 <br /> これまでのバージョンでは全文検索のインデックス再生成が必要だったことに注意してください。これはもう必要ありません。',
 'LBL_POPHELP_IMPORTABLE'=>'<b>はい</b>: インポート時にこのフィールドを含めます。<br><b>いいえ</b>: インポート時にこのフィールドを含めません。<br><b>必須</b>: フィールドの値はどのようなインポートでも入力しなければいけません。',
-'LBL_POPHELP_PII'=>'このフィールドは自動的に監査用にマークされ、個人情報ビューで利用できます。<br>個人情報フィールドは、レコードがデータプライバシー消去要求に関連付けられているときにも永続的に消去される可能性があります。<br>消去はデータプライバシーモジュールを介して実行され、データプライバシーマネージャ役割の管理者またはユーザが実行できます。',
+'LBL_POPHELP_PII'=>'このフィールドは自動的に監査用にマークされ、個人情報ビューで利用できます。<br>個人情報フィールドは、レコードがデータプライバシー消去要求に関連付けられているときにも永続的に消去される可能性があります。<br>消去はデータプライバシーモジュールを介して実行され、データプライバシーマネージャー役割の管理者またはユーザが実行できます。',
 'LBL_POPHELP_IMAGE_WIDTH'=>'幅をピクセルで入力してください。<br>アップロードした画像はこの数値で伸縮されます。',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'高さをピクセルで入力してください。<br>アップロードした画像はこの数値で伸縮されます。',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'
@@ -782,7 +783,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'このモジュールでグローバル検索を使用してレコードを検索する際には、このフィールドを使用してください。',
+'LBL_POPHELP_REQUIRED'=>"このフィールドがレイアウトで必須かどうかを決定する数式を作成します。<br/>"
+    . "必須フィールドは、ブラウザベースのモバイルビューの数式に従いますが、<br/>"
+    . "sugar Mobile for iPhoneなどのネイティブアプリケーション内の数式に従いません。<br/>"
+    . "これはSugarセルフサービスポータル内の数式を継承しません。",
+'LBL_POPHELP_READONLY'=>"このフィールドがレイアウトで読み取り専用かどうかを判断する式を作成します。<br/>"
+        . "読み取り専用フィールドは、ブラウザベースのモバイルビューの数式に従いますが、<br/>"
+        . "Sugar Mobile for iPhoneなどのネイティブアプリケーションの式には従いません。 <br/>"
+        . "これらは、 Sugarセルフサービスポータルの式には従いません。",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'このモジュールでグローバル検索を使用してレコードを検索する時にこのフィールドを使用する場合に選択します。',
 //Revert Module labels
 'LBL_RESET' => 'リセット',
 'LBL_RESET_MODULE' => 'モジュールをリセット',
@@ -817,6 +826,7 @@ $mod_strings = array(
                 'encrypt'=>'暗号化',
                 'datetimecombo' =>'日時',
                 'decimal'=>'小数点',
+                'autoincrement' => '自動インクレメント',
 ),
 'labelTypes' => array(
     "" => "よく利用されるラベル",
@@ -834,4 +844,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'すべてのモジュール',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} ({1}に関連するID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'レイアウトからのコピー',
+'LBL_RELATIONSHIP_TYPE' => '関連',
 );

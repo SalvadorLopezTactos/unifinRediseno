@@ -30,9 +30,13 @@
         // init bean collection used for type aheads
         this.filterResults = app.data.createBeanCollection('Tags');
 
-        // Set append as default when mass updating tags
-        this.appendTagValue = true;
-        this.model.setDefault('tag_type', this.appendTagValue ? '1' : '0');
+        // Set appendTagValue for mass update
+        if (_.isUndefined(this.model.get('tag_type'))) {
+            this.model.setDefault('tag_type', '1');
+            this.appendTagValue = true;
+        } else {
+            this.appendTagValue = this.model.get('tag_type') === '1';
+        }
     },
 
     /**
@@ -91,7 +95,7 @@
         }
 
         // Trim up the term for sanity sake
-        term = $.trim(term);
+        term = term.trim();
 
         // Check previously found results to see tag exists with different casing
         if (results && results.length) {
@@ -150,7 +154,7 @@
             shortlist = {results: []};
 
         // Trim the query term right up front since it needs to be clean
-        query.term = $.trim(query.term);
+        query.term = query.term.trim();
 
         this.filterResults.filterDef = {
             'filter': [{
@@ -232,7 +236,7 @@
                 var val = self.$('input.select2-input').val();
 
                 // Trim the tag
-                val = $.trim(val);
+                val = val.trim();
 
                 // Prevent blank tags
                 if (val === '') {

@@ -444,6 +444,12 @@ class UserViewHelper {
         $this->ss->assign('EXPORT_CHARSET_DISPLAY', $export_charset);
         //end:12293
 
+        if ($this->bean->getPreference('send_email_on_mention') == 'on') {
+            $this->ss->assign("SEND_EMAIL_ON_MENTION", 'checked');
+        } else {
+            $this->ss->assign("SEND_EMAIL_ON_MENTION", 'unchecked');
+        }
+
         if( $this->bean->getPreference('use_real_names') == 'on'
             || ( empty($this->bean->id)
                  && isset($GLOBALS['sugar_config']['use_real_names'])
@@ -794,16 +800,13 @@ class UserViewHelper {
         if ( $this->ss->get_template_vars("REQUIRED_EMAIL_ADDRESS") == '0' ) {
             $GLOBALS['dictionary']['User']['fields']['email1']['required'] = false;
         }
-        $idpConfig = new Authentication\Config(\SugarConfig::getInstance());
-        $skipIdmRestrictions = $idpConfig->isIDMModeEnabled() && $idpConfig->isSpecialBeanAction($this->bean, []);
         $this->ss->assign('NEW_EMAIL', '<span id="email_span">'
             . getEmailAddressWidget(
                 $this->bean,
                 'email1',
                 $this->bean->email1,
                 $this->viewType,
-                '0',
-                $skipIdmRestrictions
+                '0'
             )
             . '</span>');
         // hack to undo that previous hack

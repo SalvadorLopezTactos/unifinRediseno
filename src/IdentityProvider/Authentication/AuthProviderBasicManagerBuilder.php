@@ -12,13 +12,18 @@
 
 namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 
+use GuzzleHttp\Client;
+use Psr\Container\ContainerInterface;
 use Sugarcrm\IdentityProvider\Authentication\UserMapping\LDAPUserMapping;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Provider\IdPAuthenticationProvider;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Provider\OIDCAuthenticationProvider;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\ServiceAccount;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User\Mapping\SugarOidcUserMapping;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User\SugarOIDCUserChecker;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\UserProvider\SugarOIDCUserProvider;
+use Sugarcrm\Sugarcrm\SugarCloud\AuthZ;
+use Sugarcrm\Sugarcrm\SugarCloud\Discovery;
 use Sugarcrm\Sugarcrm\IdentityProvider\SessionProxy;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User\SugarSAMLUserChecker;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User\Mapping\SugarSAMLUserMapping;
@@ -206,6 +211,11 @@ class AuthProviderBasicManagerBuilder
             return null;
         }
 
+        $container = $this->getDIContainer();
+        $httpClient = new Client();
+        $discovery = new Discovery($this->idmModeConfig, $container, $httpClient);
+        $authZ = new AuthZ($this->idmModeConfig, $container, $httpClient, $discovery);
+
         $sugarLocalUserProvider = new SugarLocalUserProvider();
 
         return new OIDCAuthenticationProvider(
@@ -213,8 +223,16 @@ class AuthProviderBasicManagerBuilder
             new SugarOIDCUserProvider($sugarLocalUserProvider),
             new SugarOIDCUserChecker($sugarLocalUserProvider),
             new SugarOidcUserMapping(),
-            new ServiceAccount\Checker($this->idmModeConfig)
+            new ServiceAccount\Checker($this->idmModeConfig, $authZ)
         );
+    }
+
+    /**
+     * @return ContainerInterface
+     */
+    protected function getDIContainer(): ContainerInterface
+    {
+        return Container::getInstance();
     }
 
     /**

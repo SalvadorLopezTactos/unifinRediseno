@@ -12,6 +12,7 @@
 
 $dictionary['OutboundEmail'] = [
     'table' => 'outbound_email',
+    'archive' => false,
     'hidden_to_role_assignment' => true,
     'acls' => [
         'SugarACLOutboundEmail' => true,
@@ -24,6 +25,15 @@ $dictionary['OutboundEmail'] = [
             'required' => true,
             'reportable' => false,
             'mandatory_fetch' => true,
+        ],
+        'eapm_id' => [
+            'name' => 'eapm_id',
+            'vname' => 'LBL_EAPM_ID',
+            'type' => 'id',
+            'required' => false,
+            'reportable' => false,
+            'mandatory_fetch' => true,
+            'readonly' => true,
         ],
         'name' => [
             'name' => 'name',
@@ -84,7 +94,21 @@ $dictionary['OutboundEmail'] = [
             'source' => 'non-db',
             'table' => 'email_addresses',
             'type' => 'relate',
-            'vname' => 'LBL_EMAIL_ADDRESS',
+            'vname' => 'LBL_FROM_EMAIL_ADDRESS',
+        ],
+        'authorized_account' => [
+            'name' => 'authorized_account',
+            'vname' => 'LBL_AUTHORIZED_ACCOUNT',
+            'type' => 'varchar',
+            'readonly' => true,
+        ],
+        'mail_authtype' => [
+            'name' => 'mail_authtype',
+            'vname' => 'LBL_MAIL_AUTHTYPE',
+            'type' => 'varchar',
+            'len' => '10',
+            'mandatory_fetch' => true,
+            'readonly' => true,
         ],
         'reply_to_name' => [
             'name' => 'reply_to_name',
@@ -176,9 +200,10 @@ $dictionary['OutboundEmail'] = [
             'name' => 'mail_smtppass',
             'vname' => 'LBL_MAIL_SMTPPASS',
             'type' => 'encrypt',
-            'len' => 100,
+            'len' => 255,
             'reportable' => false,
             'duplicate_on_record_copy' => 'no',
+            'skip_password_validation' => true,
             'mandatory_fetch' => true,
         ],
         'mail_smtpauth_req' => [

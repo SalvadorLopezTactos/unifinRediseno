@@ -11,6 +11,7 @@
  */
 $dictionary['User'] = array(
     'table' => 'users',
+    'archive' => false,
     'favorites' => false,
     'fields' => array(
         'id' => array(
@@ -159,6 +160,7 @@ $dictionary['User'] = array(
             ) ,
             'len' => '510',
             'studio' => array('formula' => false),
+            'idm_mode_disabled' => true,
         ) ,
         'name' => array(
             'name' => 'name',
@@ -174,6 +176,7 @@ $dictionary['User'] = array(
             ) ,
             'len' => '510',
             'studio' => array('formula' => false),
+            'idm_mode_disabled' => true,
         ),
         'is_admin' => array(
             'name' => 'is_admin',
@@ -189,6 +192,7 @@ $dictionary['User'] = array(
             // This would tell the field to be pushed through an additional validation
             // step when being fetched for relationships
             'processes' => false,
+            'idm_mode_disabled' => true,
         ) ,
         'external_auth_only' => array(
             'name' => 'external_auth_only',
@@ -205,6 +209,14 @@ $dictionary['User'] = array(
             'vname' => 'LBL_RECEIVE_NOTIFICATIONS',
             'type' => 'bool',
             'default' => '1',
+            'massupdate' => false,
+            'studio' => false,
+        ) ,
+        'send_email_on_mention' => array(
+            'name' => 'send_email_on_mention',
+            'vname' => 'LBL_SEND_EMAIL_ON_MENTION',
+            'type' => 'bool',
+            'default' => '0',
             'massupdate' => false,
             'studio' => false,
         ) ,
@@ -520,6 +532,28 @@ $dictionary['User'] = array(
                 'source' => 'non-db',
                 'vname' => 'LBL_BUSINESS_CENTER',
             ),
+            'shifts' => [
+                'name' => 'shifts',
+                'type' => 'link',
+                'relationship' => 'shifts_users',
+                'source' => 'non-db',
+                'module' => 'Shifts',
+                'bean_name' => 'Shift',
+                'rel_fields' => [],
+                'vname' => 'LBL_SHIFTS',
+                'populate_list' => [],
+            ],
+            'shift_exceptions' => [
+                'name' => 'shift_exceptions',
+                'type' => 'link',
+                'relationship' => 'shift_exceptions_users',
+                'source' => 'non-db',
+                'module' => 'ShiftExceptions',
+                'bean_name' => 'ShiftException',
+                'rel_fields' => [],
+                'vname' => 'LBL_SHIFT_EXCEPTIONS',
+                'populate_list' => [],
+            ],
 			'team_count' =>
 			array (
 				'name' => 'team_count',
@@ -1071,6 +1105,43 @@ $dictionary['User'] = array(
             'comment' => 'Date cookie consent received on',
             'duplicate_on_record_copy' => 'no',
         ],
+        'sync_key' => [
+            'is_sync_key' => true,
+            'name' => 'sync_key',
+            'vname' => 'LBL_SYNC_KEY',
+            'type' => 'varchar',
+            'enforced' => '',
+            'required' => false,
+            'massupdate' => false,
+            'readonly' => true,
+            'default' => null,
+            'isnull' => true,
+            'no_default' => false,
+            'comments' => 'External default id of the remote integration record',
+            'help' => '',
+            'importable' => 'true',
+            'duplicate_merge' => 'disabled',
+            'merge_filter' => 'disabled',
+            'duplicate_on_record_copy' => 'no',
+            'audited' => true,
+            'reportable' => true,
+            'unified_search' => false,
+            'calculated' => false,
+            'len' => '100',
+            'size' => '20',
+            'studio' => [
+                'recordview' => true,
+                'wirelessdetailview' => true,
+                'listview' => false,
+                'wirelesseditview' => false,
+                'wirelesslistview' => false,
+                'wireless_basic_search' => false,
+                'wireless_advanced_search' => false,
+                'portallistview' => false,
+                'portalrecordview' => false,
+                'portaleditview' => false,
+            ],
+        ],
     ) ,
     'name_format_map' => array(
         'f' => 'first_name',
@@ -1133,6 +1204,11 @@ $dictionary['User'] = array(
         array('name' => 'idx_user_title', 'type' => 'index', 'fields' => array('title')),
         array('name' => 'idx_user_department', 'type' => 'index', 'fields' => array('department')),
         array('name' => 'idx_user_type_status', 'type' => 'index', 'fields' => array('status', 'is_admin', 'deleted')),
+        [
+            'name' => 'idx_users_skey',
+            'type' => 'unique',
+            'fields' => ['sync_key'],
+        ],
     ) ,
     'required_import_indexes' => array('idx_user_name::user_name'),
 	'relationships' => array (

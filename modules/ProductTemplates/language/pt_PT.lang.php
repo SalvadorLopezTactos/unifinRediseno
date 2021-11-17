@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Classificação Fiscal:',
   'LBL_TYPE_NAME'=>'Nome do Tipo',
   'LBL_TYPE' => 'Tipo:',
+  'LBL_PRODUCT_TYPE' => 'Tipo de produto',
   'LBL_URL' => 'URL do Produto:',
   'LBL_VENDOR_PART_NUM' => 'Número do Fornecedor:',
   'LBL_WEIGHT' => 'Peso:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Catálogo de Produtos',
   'NTC_DELETE_CONFIRMATION' => 'Tem a certeza de que pretende eliminar este registo?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Adicionar',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Pesquisar o Catálogo de Produtos',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Sem dados disponíveis',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nome do Utilizador Atribuído',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Tipos de Produtos',
   'LBL_RENEWABLE' => 'Renovável',
   'LBL_SERVICE' => 'Serviço',
+  'LBL_LOCK_DURATION' => 'Duração do bloqueio',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Dashboard de lista do catálogo de produtos',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Dashboard de registos do catálogo de produtos',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco de catálogo de produtos',
 );

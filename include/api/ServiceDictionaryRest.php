@@ -41,8 +41,8 @@ class ServiceDictionaryRest extends ServiceDictionary
      * Looks up a route based on the passed in information
      * @param array $path Split up array of path elements
      * @param string $version The requested API verison
-     * @param srting $requestType The HTTP request type (GET/POST/DELETE)
-     * @param srting $platform The platform for the API request
+     * @param string $requestType The HTTP request type (GET/POST/DELETE)
+     * @param string $platform The platform for the API request
      * @return array The best-match path element
      */
     public function lookupRoute($path, $version, $requestType, $platform)
@@ -139,12 +139,12 @@ class ServiceDictionaryRest extends ServiceDictionary
         $bestRoute = false;
 
         foreach ($routes as $route) {
-            if (isset($route['minVersion']) && $route['minVersion'] > $version) {
-                // Min version is too low, look for another route
+            if (isset($route['minVersion']) && version_compare($route['minVersion'], $version, '>')) {
+                // Route minVersion is too high, look for another route
                 continue;
             }
-            if (isset($route['maxVersion']) && $route['maxVersion'] < $version) {
-                // Max version is too high, look for another route
+            if (isset($route['maxVersion']) && version_compare($route['maxVersion'], $version, '<')) {
+                // Route maxVersion is too low, look for another route
                 continue;
             }
 
@@ -272,7 +272,7 @@ class ServiceDictionaryRest extends ServiceDictionary
         if ($currPath === '?') {
             // This matches anything
             $myScore = self::SCORE_WILDCARD;
-        } elseif ($currPath[0] === '<') {
+        } elseif (substr($currPath, 0, 1) === '<') {
             // This is looking for a specfic data type
             $myScore = self::SCORE_MODULE;
         } else {

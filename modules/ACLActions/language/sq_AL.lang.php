@@ -27,6 +27,7 @@ $mod_strings = array (
 'LIST_ROLES_BY_USER'=>'Rëndit role sipas përdoruesve',
 'LBL_ROLES_SUBPANEL_TITLE'=>'Rolet e përdoruesve',
 'LBL_SEARCH_FORM_TITLE'=>'Kërkim',
+'LBL_ACTION_RECORD_VIEW'=>'Shikimi i regjistrimeve',
 'LBL_ACTION_VIEW'=>'Shih',
 'LBL_ACTION_EDIT'=>'Ndrysho',
 'LBL_ACTION_DELETE'=>'Fshi',

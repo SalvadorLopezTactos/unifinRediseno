@@ -10,7 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $dictionary['ImportMap'] = array (
-    'table' => 'import_maps', 
+    'table' => 'import_maps',
+    'archive' => false,
     'comment' => 'Import mapping control table',
     'fields' => array (
         'id' => array (

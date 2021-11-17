@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'Lietotāja vārds',
 	'LBL_RESTORE_BUTTON_LABEL'=>'Atjaunot',
 	'LBL_SYSTEM_SETTINGS' => 'Sistēmas iestatījumi',
-	'LBL_SKYPEOUT_ON_DESC' => 'Sniedz iespēju lietotājiem klikšķināt uz tālruņa numuriem, lai zvanītu, izmantojot SkypeOut&reg;. Lai šo funkciju varētu izmantot, numuriem jābūt pareizi formatētiem.',
-	'LBL_SKYPEOUT_ON' => 'Atļaut "SkypeOut"&reg; integrāciju',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut&reg;',
+    'LBL_DIALOUT_ON_DESC' => 'Atļauj lietotājiem uzklikšķināt uz tālruņa numuriem, zvanīt uz tiem, izmantojot viņu noklusējuma integrētās datortelefonijas (CTI) programmatūru.',
+    'LBL_DIALOUT_ON' => 'Iespējot Uzklikšķini, lai zvanītu',
+    'LBL_DIALOUT_TITLE' => 'Izejošais zvans',
     'LBL_TWEETTOCASE_ON_DESC' => 'Ļaus lietotājiem veidot pieteikumus Tvītiem',
     'LBL_TWEETTOCASE_ON' => 'Iespējot Tweet&reg; par pieteikumu integrāciju',
     'LBL_TWEETTOCASE_TITLE' => 'Tweet&reg; par pieteikumu',
@@ -363,7 +363,7 @@ $mod_strings = array (
     'JS_ALERT_PDF_WRONG_EXTENSION' => 'Šim failam nav pareizs faila paplašinājums',
     'LBL_PDF_INSTRUCTIONS' => 'Instrukcijas',
     'PDF_INSTRUCTIONS_ADD_FONT' => <<<BSOFR
-Fonts supported by SugarPDF :
+Fonti, ko atbalsta SugarPDF :
 <ul>
 <li>TrueTypeUnicode (UTF-8 Unicode)</li>
 <li>OpenTypeUnicode</li>
@@ -373,11 +373,11 @@ Fonts supported by SugarPDF :
 <li>CID-0</li>
 </ul>
 <br>
-If you choose to not embed your font in the PDF, the generated PDF file will be lighter but a substitution will be use if the font is not available in the system of your reader.
+Ja izvēlēsieties neiekļaut savu fontu PDF, izģenerētais PDF fails būs gaišāks, bet, ja fonts nebūs pieejams jūsu lasītāja sistēmā, tiks izmantots aizstājējs.
 <br><br>
-Adding a PDF font to SugarCRM requires to follow steps 1 and 2 of the TCPDF Fonts documentation available in the "DOCS" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>The pfm2afm and ttf2ufm utils are available in fonts/utils in the TCPDF package that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>Load the metric file generated in step 2 and your font file below.
+Lai varētu pievienot PDF fontu SugarCRM, ir jāveic 1. un 2. darbība no TCPDF fontu dokumentācijas, kas ir pieejama sadaļā "DOCS" <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF tīmekļa vietnē</a>.
+<br><br>Rīki pfm2afm un ttf2ufm ir pieejami fonu/rīku sadaļā TCPDF pakotnē, kuru varat lejupielādēt sadaļā "DOWNLOAD" <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF tīmekļa vietnē</a>.
+<br><br>Ielādējiet metrisko failu, kas tika izģenerēts 2. darbībā, un zemāk pieejamo jūsu fonta failu.
 BSOFR
 ,
     'ERR_MISSING_CIDINFO' => 'Faila CID informācija nedrīkst būt tukša',
@@ -428,6 +428,9 @@ BSOFR
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Atskaišu modulis nav pieejams interneta pārlūkam veidotajā mobilajā skatā.',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => 'Maksimālajam garumam jābūt lielākam par minimālo garumu',
+    'ERR_MIN_LENGTH_NEGATIVE' => 'Minimālajam garumam ir jābūt pozitīvam lielumam',
+    'ERR_MAX_LENGTH_NEGATIVE' => 'Maksimālajam garumam ir jābūt pozitīvam lielumam',
     'ERR_EMPTY_SAML_LOGIN' => 'SAML Ierakstīšanās saite nevar būt tukša',
     'ERR_EMPTY_SAML_CERT' => 'SAML sertifikāts nevar būt tukšs',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML uzņēmuma ID nevar būt tukšs',
@@ -441,9 +444,6 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Darbību plūsmas',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Iespējot darbību plūsmas',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Ieslēdz darbību plūsmas lietojumprogrammai',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Iespējot papildu pieteikšanās ekrāna saturu',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Automātiski saglabā procesu definīcijas',

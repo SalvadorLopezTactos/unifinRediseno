@@ -329,7 +329,8 @@ class Indexer
     {
         $module = $bean->module_name;
         $index = $this->getWriteIndex($bean);
-        $document = new Document($bean->id, array(), $bean->module_name, $index);
+        $document = new Document($bean->id, array(), $index);
+        $document->setType($bean->getModuleName());
 
         // We dont need to send the whole data when deleting a record
         if ($bean->deleted) {
@@ -382,6 +383,6 @@ class Indexer
      */
     protected function isFromApi()
     {
-        return (defined('ENTRY_POINT_TYPE') && constant('ENTRY_POINT_TYPE') === 'api');
+        return isFromApi();
     }
 }

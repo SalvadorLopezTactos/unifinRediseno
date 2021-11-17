@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Ajánlások listája műszerfal',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Ajánlás bejegységek műszerfal',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Érdeklődök figyelemfelhívás',
 
     'ERR_DELETE_RECORD' => 'Adjon meg egy azonosítót az ajánlás törléséhez!',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Kliens leírása',
@@ -313,4 +314,8 @@ $mod_strings = array (
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'A(z) {{moduleSingular}} állapot nem módosítható. A(z) {{moduleSingular}} átalakítása már megtörtént.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Ajánlás konverziójának előrejelzése',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Az adott ajánlás előrejelzésével kapcsolatos részletek megtekintése',
 );

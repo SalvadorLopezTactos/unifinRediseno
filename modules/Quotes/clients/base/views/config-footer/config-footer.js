@@ -230,6 +230,9 @@
         }, this);
 
         this.model.set(this.eventViewName + '_related_fields', relatedFieldsList);
+
+        // Signal to the layout that the fields for this panel are loaded
+        this.layout.trigger('config:panel:fields:loaded', this);
     },
 
     /**

@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Müügivihjete loendi töölaud',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Müügivihjete kirjete töölaud',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Müügivihjete fookuse sahtel',
 
     'ERR_DELETE_RECORD' => 'en_us Müügivihje kustutamiseks on vaja täpsustada kirje numbrit.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Ettevõtte kirjeldus',
@@ -325,4 +326,8 @@ After confirming each required and desired module, click the Save and Convert bu
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Mooduli {{moduleSingular}} olekut ei saa muuta. Moodul {{moduleSingular}} on juba teisendatud.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Müügivihjete teisendamise prognoos',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Kuva konkreetse müügivihje prognoosi üksikasjad',
 );

@@ -148,12 +148,29 @@ $return_id=$_REQUEST['record'];
 
 if ($test) {
 	//navigate to EmailManDelivery..
-	$header_URL = "Location: index.php?action=EmailManDelivery&module=EmailMan&campaign_id={$_REQUEST['record']}&return_module={$return_module}&return_action={$return_action}&return_id={$return_id}&mode=test";
-    if($from_wiz){$header_URL .= "&from_wiz=true";}
+    $query_data = [
+        'action' => 'EmailManDelivery',
+        'module' => 'EmailMan',
+        'campaign_id' => $_REQUEST['record'],
+        'return_module' => $return_module,
+        'return_action' => $return_action,
+        'return_id' => $return_id,
+        'mode' => 'test',
+    ];
+    if ($from_wiz) {
+        $query_data['from_wiz'] = 'true';
+    }
 } else {
 	//navigate back to campaign detail view...
-	$header_URL = "Location: index.php?action={$return_action}&module={$return_module}&record={$return_id}";
-    if($from_wiz){$header_URL .= "&from=send";}
+    $query_data = [
+        'action' => $return_action,
+        'module' => $return_module,
+        'record' => $return_id,
+    ];
+    if ($from_wiz) {
+        $query_data['from'] = 'send';
+    }
 }
-$GLOBALS['log']->debug("about to post header URL of: $header_URL");
-header($header_URL);
+$location = 'index.php?' . http_build_query($query_data);
+$GLOBALS['log']->debug("about to post header URL of: $location");
+header("Location: $location");

@@ -43,6 +43,7 @@ CollapsiblePanel.prototype.init = function (settings) {
 		title: "[panel]",
 		items: [],
 		bodyHeight: "auto",
+        bodyClassName: null,
 		collapsed: true,
 		width: '100%',
 		onCollapse: null,
@@ -71,6 +72,7 @@ CollapsiblePanel.prototype.init = function (settings) {
 		.setTitle(defaults.title)
 		.setItems(defaults.items)
 		.setBodyHeight(defaults.bodyHeight)
+        .setBodyClassName(defaults.bodyClassName)
 		.setOnCollapseHandler(defaults.onCollapse)
 		.setOnExpandHandler(defaults.onExpand)
 		.setOnEnablementStatusChangeHandler(defaults.onEnablementStatusChange);
@@ -249,6 +251,16 @@ CollapsiblePanel.prototype.setBodyHeight = function (height) {
 	return this;
 };
 
+/**
+ * Set the CSS class name for the body of the panel
+ * @param className
+ * @returns {CollapsiblePanel}
+ */
+CollapsiblePanel.prototype.setBodyClassName = function(className) {
+    this.bodyClassName = className;
+    return this;
+};
+
 CollapsiblePanel.prototype.setTitle = function (title) {
 	if(typeof title !== 'string') {
 		throw new Error("setTitle(): The parameter must be a string.");
@@ -414,6 +426,9 @@ CollapsiblePanel.prototype.createHTML = function () {
 		this.html.appendChild(htmlHeader);
 		htmlBody = this._createBody();
 		htmlBody.className += " adam collapsible-panel-body";
+        if (this.bodyClassName) {
+            htmlBody.className += ' ' + this.bodyClassName;
+        }
 		this._htmlBody = htmlBody;
 		this.html.appendChild(htmlBody);
 

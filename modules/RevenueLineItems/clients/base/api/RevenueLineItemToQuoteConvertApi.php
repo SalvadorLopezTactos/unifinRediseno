@@ -120,6 +120,7 @@ class RevenueLineItemToQuoteConvertApi extends SugarApi
         $quote->id = create_guid();
         $quote->new_with_id = true;
         $quote->name = $opp->name;
+        $quote->renewal = $opp->renewal;
 
         // lets create a new bundle
         $product_bundle = $this->createProductBundleFromRLIList(array($args['record']), $quote->id);

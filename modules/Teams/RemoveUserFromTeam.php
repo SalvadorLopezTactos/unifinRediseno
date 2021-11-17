@@ -37,5 +37,9 @@ else {
 
 $focus->remove_user_from_team($_REQUEST['record']);
 
-header("Location: index.php?module={$_REQUEST['return_module']}&action={$_REQUEST['return_action']}&record={$_REQUEST['return_id']}");
-?>
+$location = 'index.php?' . http_build_query([
+        'module' => $_REQUEST['return_module'],
+        'action' => $_REQUEST['return_action'],
+        'record' => $_REQUEST['return_id'],
+    ]);
+header("Location: $location");

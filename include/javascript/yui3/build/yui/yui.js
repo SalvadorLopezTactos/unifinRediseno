@@ -11558,20 +11558,7 @@ Y.mix(YUI.Env[Y.version].modules, {
     },
     "uploader": {
         "requires": [
-            "uploader-html5",
-            "uploader-flash"
-        ]
-    },
-    "uploader-flash": {
-        "requires": [
-            "swfdetect",
-            "escape",
-            "widget",
-            "base",
-            "cssbutton",
-            "node",
-            "event-custom",
-            "uploader-queue"
+            "uploader-html5"
         ]
     },
     "uploader-html5": {

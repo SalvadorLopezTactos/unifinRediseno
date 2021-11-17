@@ -70,11 +70,11 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> '警告：不可写入',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'Sugar 不支持您的 PHP 版本。您需要安装一个与 Sugar 应用程序兼容的版本。请参阅支持的 PHP 版本发布说明中的兼容性矩阵。您的版本是',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'Sugar不支持您当前的IIS版本。您需要安装一个和Sugar应用兼容的版本，请参考发布说明的兼容性矩阵表。您的版本是 ',
-	'ERR_CHECKSYS_FASTCGI'              => '我们检测到您目前没有使用FastCGI处理器来映射PHP。您需要安装/配置一个和Sugar兼容的版本。请参考发布说明中的兼容矩阵表来寻找支持的版本。请参考<a href="http://www.iis.net/php/" target="_blank">http://www.iis.net/php/</a>以便获得更多信息',
+    'ERR_CHECKSYS_FASTCGI'              => '我们检测到您目前没有使用 FastCGI 处理器来映射 PHP。您需要安装/配置一个和Sugar应用程序兼容的版本。请查阅发布说明中的兼容矩阵表来了解受支持的版本。请参阅 <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a> 以获取详细信息',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => '为了获得IIS/FastCGI sapi的最佳效果，请在您的php.ini文件中设置fastcgi.logging为0。',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> '不支持当前PHP版本：（版本',
     'LBL_DB_UNAVAILABLE'                => '数据库不可用',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '未找到数据库支持。请确保您拥有下列受支持数据库类型之一所需的驱动程序：MySQL、MS SQLServer、Oracle 或 DB2。您可能需要在 php.ini 文件中取消批注扩展名，或使用正确的二进制文件重新编译，具体取决于您的 PHP 版本。请参阅您的 PHP 手册以获取有关如何启用数据库支持的更多信息。',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '找不到数据库支持。请确保您为以下受支持的数据库类型之一准备了必要的驱动程序：MySQL、MS SQLServer、Oracle 或 DB2。您可能需要在 php.ini 文件中取消注释扩展名，或者使用正确的二进制文件重新编译，具体取决于您的 PHP 版本。有关如何启用数据库支持的更多信息，请参阅 PHP 手册。',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => '找不到Sugar应用程序需要的XML解析库功能。您可能要移除php.ini文件中有关扩展的注释，或重新编译正确的二进制文件，具体视您的PHP版本而定。欲知详情，请参考您的PHP手册。',
     'LBL_CHECKSYS_CSPRNG' => '随机数字生成器',
     'ERR_CHECKSYS_MBSTRING'             => '找不到Sugar应用程序需要的多字节字符串扩展(mbstring)功能。<br/><br/>一般来说，PHP默认不启用mbstring模块并且必须使用PHP自建的库--enable-mbstring来启动。欲知详情，请参考您的PHP手册。',
@@ -491,139 +491,140 @@ SugarCRM兼容版本：<br>
 	'LBL_BACKWARD_COMPATIBILITY_ON' => '已打开 PHP 向下兼容模式。设置 zend.ze1_compatibility_mode 至 OFF 来继续',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => '会议通知电子邮件',
+        'subject' => 'SugarCRM 会议 - $event_name ',
+        'description' => '系统向用户发送会议通知时使用此模板。',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>收件人：$assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Meeting</p>
+	<p>$assigned_by_user 邀请您参加会议</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>主题：$event_name<br/>
+	开始日期： $start_date<br/>
+	结束日期：$end_date</p>
 
-	<p>Description: $description</p>
+	<p>说明：$description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>接受此会议：<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>暂时接受此会议：<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>拒绝此会议：<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            '收件人：$assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user 邀请您参加会议
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+主题：$event_name
+开始日期：$start_date
+结束日期：$end_date
 
-Description: $description
+说明：$description
 
-Accept this meeting:
+接受此会议：
 <$accept_link>
 
-Tentatively Accept this meeting
+暂时接受此会议
 <$tentative_link>
 
-Decline this meeting
+拒绝此会议
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => '电话通知电子邮件',
+        'subject' => 'SugarCRM 电话 - $event_name ',
+        'description' => '当系统向用户发送呼叫通知时使用此模板。',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>收件人：$assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user 邀请您参加通话</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>主题：$event_name<br/>
+	开始日期： $start_date<br/>
+	结束日期：$hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>说明：$description</p>
 
-	<p>Accept this call:<br/>
+	<p>接受此通话：<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>暂时接受此通话：<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>拒绝此通话：<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            '收件人：$assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user 邀请您参加通话
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+主题：$event_name
+开始日期：$start_date
+结束日期：$hoursh, $minutesm
 
-Description: $description
+说明：$description
 
-Accept this call:
+接受此通话：
 <$accept_link>
 
-Tentatively Accept this call
+暂时接受此通话
 <$tentative_link>
 
-Decline this call
+拒绝此通话
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => '指派通知电子邮件',
+        'subject' => 'SugarCRM - 分配的 $module_name ',
+        'description' => '当系统向用户发送任务分配时使用此模板。',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user 已分配 &nbsp;$module_name 给 &nbsp;$assigned_user.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>您可查看此&nbsp;$module_name 查看位置：<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user 已分配 $module_name 给 $assigned_user.
 
-You may review this $module_name at:
+您可以查看此 $module_name 查看位置：
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => '计划报表电子邮件',
+        'subject' => '截至 $report_time 的计划报表 $report_name',
+        'description' => '当系统向用户发送计划报表时使用此模板。',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>尊敬的 $assigned_user,</p>
+<p>附件是按计划自动生成的报表。</p>
+<p>报表名称：$report_name</p>
+<p>报表运行日期和时间：$report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            '尊敬的 $assigned_user,
 
-Attached is an auto generated report that has been scheduled for you.
+附件是按计划自动生成的报表。
 
-Report Name: $report_name
+报表名称：$report_name
 
-Report Run Date and Time: $report_time',
+报表运行报告和时间：$report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => '系统评论日志电子邮件通知',
+        'subject' => 'SugarCRM - $initiator_full_name 在 $singular_module_name 中提到了您',
+        'description' => '此模板用于向已在“注释日志”部分中标记的用户发送电子邮件通知。',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>您已在以下记录的评论日志中被提及： <a href="$record_url">$record_name</a></p>
+                <p>请登录 Sugar 查看评论。</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'您已在以下记录的评论日志中被提及：$record_name
+          请登录 Sugar 查看评论。',
     ],
 
     'advanced_password_new_account_email' => array(

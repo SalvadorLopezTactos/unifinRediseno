@@ -12,8 +12,8 @@
 
 namespace Sugarcrm\IdentityProvider\Tests\Unit\Authentication\Provider;
 
-use Sugarcrm\IdentityProvider\App\Authentication\AuthProviderManagerBuilder;
 use Sugarcrm\IdentityProvider\Authentication\Provider\MixedAuthenticationProvider;
+use Sugarcrm\IdentityProvider\Authentication\Provider\Providers;
 use Sugarcrm\IdentityProvider\Authentication\Provider\LdapAuthenticationProvider;
 use Sugarcrm\IdentityProvider\Authentication\Token\MixedUsernamePasswordToken;
 
@@ -67,13 +67,13 @@ class MixedAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
         $this->localProvider = $this->createMock(DaoAuthenticationProvider::class);
         $this->provider = new MixedAuthenticationProvider(
             [$this->ldapProvider, $this->localProvider],
-            AuthProviderManagerBuilder::PROVIDER_KEY_MIXED
+            Providers::PROVIDER_KEY_MIXED
         );
 
         $this->mixedToken = new MixedUsernamePasswordToken(
             'username',
             'password',
-            AuthProviderManagerBuilder::PROVIDER_KEY_MIXED
+            Providers::PROVIDER_KEY_MIXED
         );
 
         $this->localToken = $this->createMock(UsernamePasswordToken::class);
@@ -90,7 +90,7 @@ class MixedAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
         return [
             'supportedToken' => [
                 'class' => MixedUsernamePasswordToken::class,
-                'key' => AuthProviderManagerBuilder::PROVIDER_KEY_MIXED,
+                'key' => Providers::PROVIDER_KEY_MIXED,
                 'result' => true,
             ],
             'supportedClassUnsupportedKey' => [
@@ -100,7 +100,7 @@ class MixedAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
             ],
             'unsupportedClassSupportedKey' => [
                 'class' => UsernamePasswordToken::class,
-                'key' => AuthProviderManagerBuilder::PROVIDER_KEY_MIXED,
+                'key' => Providers::PROVIDER_KEY_MIXED,
                 'result' => false,
             ],
         ];
@@ -147,7 +147,7 @@ class MixedAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
     {
         $resultToken = $this->createMock(UsernamePasswordToken::class);
         $this->localToken->method('getProviderKey')
-                         ->willReturn(AuthProviderManagerBuilder::PROVIDER_KEY_LOCAL);
+                         ->willReturn(Providers::PROVIDER_KEY_LOCAL);
         $this->localProvider->method('supports')->with($this->localToken)->willReturn(true);
         $this->localProvider->expects($this->once())
                             ->method('authenticate')
@@ -166,7 +166,7 @@ class MixedAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
     public function testFailedAuthenticateThroughProvider()
     {
         $this->localToken->method('getProviderKey')
-                         ->willReturn(AuthProviderManagerBuilder::PROVIDER_KEY_LOCAL);
+                         ->willReturn(Providers::PROVIDER_KEY_LOCAL);
         $this->localProvider->method('supports')->with($this->localToken)->willReturn(true);
         $this->localProvider->expects($this->once())
                             ->method('authenticate')
@@ -185,9 +185,9 @@ class MixedAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
         $resultToken = $this->createMock(UsernamePasswordToken::class);
 
         $this->localToken->method('getProviderKey')
-            ->willReturn(AuthProviderManagerBuilder::PROVIDER_KEY_LOCAL);
+            ->willReturn(Providers::PROVIDER_KEY_LOCAL);
         $this->ldapToken->method('getProviderKey')
-            ->willReturn(AuthProviderManagerBuilder::PROVIDER_KEY_LDAP);
+            ->willReturn(Providers::PROVIDER_KEY_LDAP);
 
         $this->localProvider->method('supports')->willReturnMap(
             [
@@ -223,9 +223,9 @@ class MixedAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
     public function testSuccessAuthenticateWithFirstTokenWin()
     {
         $this->localToken->method('getProviderKey')
-            ->willReturn(AuthProviderManagerBuilder::PROVIDER_KEY_LOCAL);
+            ->willReturn(Providers::PROVIDER_KEY_LOCAL);
         $this->ldapToken->method('getProviderKey')
-            ->willReturn(AuthProviderManagerBuilder::PROVIDER_KEY_LDAP);
+            ->willReturn(Providers::PROVIDER_KEY_LDAP);
 
         $this->localProvider->method('supports')->willReturnMap(
             [

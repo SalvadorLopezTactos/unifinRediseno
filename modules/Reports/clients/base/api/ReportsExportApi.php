@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\modules\Reports\Exporters\ReportExporter;
+
 require_once('include/download_file.php');
 /**
  * @api
@@ -26,8 +28,14 @@ class ReportsExportApi extends SugarApi {
                 'pathVars' => array('module', 'record', 'export_type'),
                 'method' => 'exportRecord',
                 'rawReply'=> true,
-                'shortHelp' => 'This method exports a record in the specified type',
-                'longHelp' => '',
+                'shortHelp' => 'This method exports a report in the specified type',
+                'longHelp' => 'modules/Reports/clients/base/api/help/report_export_get_help.html',
+                'exceptions' => [
+                    'SugarApiExceptionNotFound',
+                    'SugarApiExceptionInvalidParameter',
+                    'SugarApiExceptionNoMethod',
+                    'SugarApiExceptionNotAuthorized',
+                ],
             ),
         );
     }
@@ -127,6 +135,60 @@ class ReportsExportApi extends SugarApi {
             $api->setHeader("Content-Disposition", 'attachment; filename="'.basename($report_filename).'"');
             $api->setHeader("Expires", TimeDate::httpTime(time() + 2592000));
             $api->fileResponse($report_filename);
+        }
+    }
+
+    /**
+     * Export a Report in CSV format
+     * @param ServiceBase $api The service base
+     * @param SugarBean $report
+     * @return string
+     */
+    protected function exportCsv(ServiceBase $api, SugarBean $report): string
+    {
+        // return csv
+        $api->getResponse()->setHeader('Content-Type', 'text/csv');
+        return $this->getResult($report, 'CSV');
+    }
+
+    /**
+     * Export a Report in JSON format
+     * @param ServiceBase $api The service base
+     * @param SugarBean $report
+     * @return string
+     */
+    protected function exportJson(ServiceBase $api, SugarBean $report): string
+    {
+        // return json
+        $api->getResponse()->setHeader('Content-Type', 'application/json');
+        return $this->getResult($report, 'JSON');
+    }
+
+    /**
+     * Get result in specified format
+     * @param SugarBean $report
+     * @param string $format
+     * @return string
+     */
+    protected function getResult(SugarBean $report, string $format): string
+    {
+        if ($report->id != null) {
+            $reporter = new Report(html_entity_decode($report->content), '', '');
+            $reporter->layout_manager->setAttribute('no_sort', 1);
+            $reporter->fromApi = true;
+            $reporter->saved_report_id = $report->id;
+            $reporter->is_saved_report = true;
+            $reporter->plain_text_output = true;
+            $reporter->enable_paging = false;
+            
+            try {
+                $exporter = new ReportExporter($reporter, $format);
+                return $exporter->export();
+            } catch (Exception $e) {
+                throw new SugarApiExceptionNoMethod('Report type is not supported');
+            }
+        } else {
+            throw new SugarApiExceptionNotFound('Report not found');
         }
     }
 }

@@ -16,6 +16,27 @@
 ({
     /**
      * @inheritdoc
+     */
+    initialize: function(options) {
+        this._super('initialize', [options]);
+        this._initDefaultValue();
+    },
+
+    /**
+     * Set default value
+     */
+    _initDefaultValue: function() {
+        if (!this.model.isNew() || this.model.get(this.name) || !this.def.default) {
+            return;
+        }
+
+        if (_.isFunction(this.model.setDefault) && this.def.default) {
+            this.model.setDefault(this.name, app.lang.get(this.def.default, this.module));
+        }
+    },
+
+    /**
+     * @inheritdoc
      *
      * Format the value to a string.
      * Return an empty string for undefined, null and object types.

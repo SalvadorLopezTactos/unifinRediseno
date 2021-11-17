@@ -55,6 +55,8 @@ class InitProductDefinition
         "ForecastWorksheets":["CURRENT","SUGAR_SELL"],
         "Forecasts":["CURRENT","SUGAR_SELL"],
         "Leads":["CURRENT","SUGAR_SELL"],
+        "Messages":["SUGAR_SERVE"],
+        "MobileDevices":["SUGAR_SERVE","SUGAR_SELL"],
         "Opportunities":["CURRENT","SUGAR_SELL"],
         "ProductBundleNotes":["CURRENT","SUGAR_SELL"],
         "ProductBundles":["CURRENT","SUGAR_SELL"],
@@ -63,6 +65,9 @@ class InitProductDefinition
         "ProjectTask":["CURRENT"],
         "ProspectLists":["CURRENT","SUGAR_SELL"],
         "Prospects":["CURRENT","SUGAR_SELL"],
+        "PurchasedLineItems":["SUGAR_SERVE","SUGAR_SELL"],
+        "Purchases":["SUGAR_SERVE","SUGAR_SELL"],
+        "PushNotifications":["SUGAR_SERVE","SUGAR_SELL"],
         "Quotas":["CURRENT","SUGAR_SELL"],
         "Quotes":["CURRENT","SUGAR_SELL"],
         "Releases":["CURRENT","SUGAR_SERVE"],
@@ -92,10 +97,15 @@ class InitProductDefinition
         "product-quick-picks-dashlet":["CURRENT","SUGAR_SELL"],
         "product-catalog":["CURRENT","SUGAR_SELL"],
         "sales-pipeline":["CURRENT","SUGAR_SELL"],
-        "twitter":["CURRENT"]
+        "twitter":["CURRENT"],
+        "dashlet-searchable-kb-list":["SUGAR_SERVE","SUGAR_SELL"],        
+        "active-subscriptions":["SUGAR_SERVE","SUGAR_SELL"],
+        "request-closed-cases-dashlet":["SUGAR_SERVE"],
+        "purchase-history":["SUGAR_SELL", "SUGAR_SERVE"]
     },
     "RECORDS": {
         "Dashboards": {
+            "32bc5cd0-b1a0-11ea-ad16-f45c898a3ce7":["SUGAR_SERVE"],
             "c108bb4a-775a-11e9-b570-f218983a1c3e":["SUGAR_SERVE"],
             "da438c86-df5e-11e9-9801-3c15c2c53980":["SUGAR_SELL"],
             "5d670ec4-7b52-11e9-b9e0-f218983a1c3e":["CURRENT","SUGAR_SELL"],
@@ -274,6 +284,20 @@ class InitProductDefinition
         }
     },
     "FIELDS": {
+        "Accounts": {
+            "business_center_id":["SUGAR_SERVE","SUGAR_SELL"],
+            "business_center_name":["SUGAR_SERVE","SUGAR_SELL"]
+        },
+        "Bugs": {
+            "hours_to_resolution":["SUGAR_SERVE"],
+            "business_hours_to_resolution":["SUGAR_SERVE"]
+        },
+        "Calls": {
+            "transcript":["SUGAR_SERVE"],
+            "aws_contact_id":["SUGAR_SERVE"],
+            "call_recording_url":["SUGAR_SERVE"],
+            "call_recording":["SUGAR_SERVE"]
+        },
         "Cases": {
             "business_center_id":["SUGAR_SERVE"],
             "business_center_name":["SUGAR_SERVE"],
@@ -288,17 +312,42 @@ class InitProductDefinition
             "first_response_user_link":["SUGAR_SERVE"],
             "first_response_sent":["SUGAR_SERVE"],
             "hours_to_resolution":["SUGAR_SERVE"],
-            "business_hours_to_resolution":["SUGAR_SERVE"]
+            "business_hours_to_resolution":["SUGAR_SERVE"],
+            "request_close":["SUGAR_SERVE"],
+            "request_close_date":["SUGAR_SERVE"]
         },
-        "Bugs": {
-            "hours_to_resolution":["SUGAR_SERVE"],
-            "business_hours_to_resolution":["SUGAR_SERVE"]
+        "Contacts": {
+            "business_center_id":["SUGAR_SERVE","SUGAR_SELL"],
+            "business_center_name":["SUGAR_SERVE","SUGAR_SELL"]
         },
         "DataPrivacy": {
-            "hours_to_resolution":["SUGAR_SERVE"],
-            "business_hours_to_resolution":["SUGAR_SERVE"]
+            "hours_to_resolution":["SUGAR_SERVE","SUGAR_SELL"],
+            "business_hours_to_resolution":["SUGAR_SERVE","SUGAR_SELL"]
         },
-        "Accounts": {
+        "KBContents": {
+            "kbscase_name":["SUGAR_SERVE"]
+        },
+        "Leads": {
+            "business_center_id":["SUGAR_SELL"],
+            "business_center_name":["SUGAR_SELL"]
+        },
+        "PurchasedLineItems": {
+            "renewal_opp_id": ["SUGAR_SELL"],
+            "renewal_opp_name": ["SUGAR_SELL"]
+        },
+        "RevenueLineItems": {
+            "purchasedlineitem":["SUGAR_SELL"],
+            "purchasedlineitem_name":["SUGAR_SELL"],
+            "purchasedlineitem_id":["SUGAR_SELL"],
+            "generate_purchase":["SUGAR_SELL"],
+            "add_on_to_id": ["SUGAR_SELL"],
+            "add_on_to_name": ["SUGAR_SELL"]
+        },
+        "Products": {
+            "add_on_to_id": ["SUGAR_SELL"],
+            "add_on_to_name": ["SUGAR_SELL"]
+        },
+        "Users": {
             "business_center_id":["SUGAR_SERVE","SUGAR_SELL"],
             "business_center_name":["SUGAR_SERVE","SUGAR_SELL"]
         }

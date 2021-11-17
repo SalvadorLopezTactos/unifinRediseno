@@ -155,6 +155,7 @@
       min-width: 155px !important;
       max-width: 100% !important;
 
+      .nodata,
       .list {
         width: 100%;
         text-align: right;
@@ -350,10 +351,6 @@
     &.highlighted {
       &.current {
         td {
-          &:last-child {
-            z-index: 2;
-          }
-
           .btn.preview-list-item,
           .rowaction.btn:not(.btn-invisible) {
             background: @gray;
@@ -551,6 +548,11 @@
           }
         }
 
+        &[data-type$="-cascade"] {
+          min-width: 210px;
+          height: 72px;
+        }
+
         &[data-type="teamset"] {
           font-size: @baseFontSize;
           padding-left: 8px;
@@ -560,6 +562,7 @@
         > span {
           width: 100%;
 
+          &.nodata,
           &.list {
             padding: 0 4px;
             display: inline-block;
@@ -612,12 +615,14 @@ FLEXLIST GENERIC */
 
   .flex-list-view-content {
     overflow-x: auto;
-  }
 
-  //override of bootstrap to fix safari
-  .dataTable {
-    max-width: none;
-    position: static;
+    /* Prevents double scrolls bars, which for Safari, occasionally locks up scrolling */
+    overflow-y: hidden;
+
+    .dataTable {
+      max-width: none;
+      position: static;
+    }
   }
 
   /*LEFT AND RIGHT ACTIONS*/
@@ -628,6 +633,10 @@ FLEXLIST GENERIC */
     height: 28px;
     text-align: center;
     overflow-x: visible;
+
+    &.open {
+      z-index: 999;
+    }
 
     .dropdown,
     > span {
@@ -847,6 +856,14 @@ FLEXLIST GENERIC */
           }
         }
       }
+    }
+  }
+
+  &.double-height-row .dataTable td:first-child,
+  &.double-height-row .dataTable td:last-child {
+    > span.edit {
+      margin-top: -40px;
+      padding: 26px 8px;
     }
   }
 
@@ -1075,7 +1092,6 @@ FLEXLIST GENERIC */
 
 .main-pane.span12 .flex-list-view.right-actions.scroll-width .dataTable {
   td:last-child > span,
-  th:last-child .dropdown,
   th:last-child > span {
     width: 55px;
   }

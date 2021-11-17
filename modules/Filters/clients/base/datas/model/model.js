@@ -53,10 +53,11 @@
      *
      * @param {string} moduleName The filtered module.
      * @param {string} searchTerm The search term.
+     * @param {string} operation To check any match instead of starts with
      * @return {Array} This search term filter.
      * @static
      */
-    buildSearchTermFilter: function(moduleName, searchTerm) {
+    buildSearchTermFilter: function(moduleName, searchTerm, operation) {
         if (moduleName === 'all_modules' || !searchTerm) {
             return [];
         }
@@ -72,7 +73,7 @@
         // or complex field, and build the filter object accordingly
         _.each(fieldNames, function(name) {
             if (!_.isArray(name)) {
-                var filter = this._buildFilterDef(name, '$starts', searchTerm);
+                var filter = this._buildFilterDef(name, operation || '$starts', searchTerm);
                 if (filter) {
                     // Simple filters are pushed to `filterList`
                     filterList.push(filter);

@@ -11,6 +11,7 @@
  */
 $dictionary['TaxRate'] = array(
     'table' => 'taxrates',
+    'archive' => false,
     'favorites' => false,
     'fields' => array(
         'value' => array(

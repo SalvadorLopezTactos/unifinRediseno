@@ -14,8 +14,9 @@ namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 
 use OneLogin\Saml2\Constants;
 use RobRichards\XMLSecLibs\XMLSecurityKey;
-use Sugarcrm\IdentityProvider\STS\EndpointInterface;
-use Sugarcrm\IdentityProvider\STS\EndpointService;
+use Sugarcrm\IdentityProvider\Srn;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\STS\EndpointInterface;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\STS\EndpointService;
 
 /**
  * Configuration glue for IdM
@@ -61,6 +62,26 @@ class Config
      * @var \Administration
      */
     protected $idmSettings;
+
+    /**
+     * idm settings
+     * @var Srn\Manager
+     */
+    protected $srnManager;
+
+    /**
+     * catalog_urls for different regions
+     * @var array
+     */
+    protected $catalogURLs = [
+        'us-west-2' => 'https://appcatalog-us-west-2.service.sugarcrm.com',
+        'eu-west-1' => 'https://appcatalog-eu-west-1.service.sugarcrm.com',
+        'ap-southeast-2' => 'https://appcatalog-ap-southeast-2.service.sugarcrm.com',
+        'eu-central-1' => 'https://appcatalog-eu-central-1.service.sugarcrm.com',
+        'ca-central-1' => 'https://appcatalog-ca-central-1.service.sugarcrm.com',
+        'ap-southeast-1' => 'https://appcatalog-ap-southeast-1.service.sugarcrm.com',
+        'eu-west-2' => 'https://appcatalog-eu-west-2.service.sugarcrm.com',
+    ];
 
     /**
      * @param \SugarConfig $sugarConfig
@@ -167,31 +188,38 @@ class Config
         }
 
         $stsUrl = rtrim($this->getIdmSettingsByKey('stsUrl', '/ '));
-        $ipdUrl = rtrim($this->getIdmSettingsByKey('idpUrl', '/ '));
+        $idpUrl = rtrim($this->getIdmSettingsByKey('idpUrl', '/ '));
         $stsKeySetId = $this->getIdmSettingsByKey('stsKeySetId');
         $urlKeys = $stsKeySetId ? $stsUrl . '/keys/' . $stsKeySetId : null;
 
         $endpointService = new EndpointService(['host' => $stsUrl]);
 
+        $tid = $this->getIdmSettingsByKey('tid', '');
         $idmModeConfig = [
-            'tid' => $this->getIdmSettingsByKey('tid', ''),
+            'tid' => $tid,
             'clientId' => $this->getIdmSettingsByKey('clientId'),
             'clientSecret' => $this->getIdmSettingsByKey('clientSecret'),
             'stsUrl' => $stsUrl,
-            'idpUrl' => $ipdUrl,
+            'idpUrl' => $idpUrl,
             'redirectUri' => rtrim($this->get('site_url'), '/') . '/?module=Users&action=OAuth2CodeExchange',
             'urlAuthorize' => $endpointService->getOAuth2Endpoint(EndpointInterface::AUTH_ENDPOINT),
             'urlAccessToken' => $endpointService->getOAuth2Endpoint(EndpointInterface::TOKEN_ENDPOINT),
             'urlResourceOwnerDetails' => $endpointService->getOAuth2Endpoint(EndpointInterface::INTROSPECT_ENDPOINT),
             'urlUserInfo' => $endpointService->getUserInfoEndpoint(),
+            'urlRevokeToken' => $endpointService->getOAuth2Endpoint(EndpointInterface::REVOCATION_ENDPOINT),
             'http_client' => $this->getIdmSettingsByKey('http_client', []),
             'cloudConsoleUrl' => $this->getIdmSettingsByKey('cloudConsoleUrl', ''),
             'cloudConsoleRoutes' => $this->getIdmSettingsByKey('cloudConsoleRoutes', []),
+            'profileUrls' => $this->getIdmSettingsByKey('profileUrls', ['changePassword' => $idpUrl . '/password/change']),
             'caching' => array_replace_recursive($this->getIDMModeDefaultCachingConfig(), $this->getIdmSettingsByKey('caching') ?? []),
             'crmOAuthScope' => $this->getIdmSettingsByKey('crmOAuthScope', ''),
             'requestedOAuthScopes' => $this->getIdmSettingsByKey('requestedOAuthScopes', []),
             // @deprecated: allowedSAs will be removed in the future versions.
             'allowedSAs' => $this->getIdmSettingsByKey('allowedSAs', []),
+            'serviceAccountPermissions' => $this->getIdmSettingsByKey(
+                'serviceAccountPermissions',
+                $this->getDefaultServiceAccountPermissions($tid)
+            ),
         ];
 
         if ($stsKeySetId) {
@@ -199,7 +227,40 @@ class Config
             $idmModeConfig['urlKeys'] = $urlKeys;
         }
 
+        if ($discoveryUrl = $this->getIdmSettingsByKey('discoveryUrl', $this->getDefaultDiscoveryUrl($tid))) {
+            $idmModeConfig['discoveryUrl'] = $discoveryUrl;
+        }
+
         return $idmModeConfig;
+    }
+
+    /**
+     * @param string $tid
+     * @return string
+     */
+    protected function getDefaultDiscoveryUrl(string $tid): string
+    {
+        $srn = Srn\Converter::fromString($tid);
+        switch ($srn->getPartition()) {
+            case 'stage':
+                return 'https://discovery-stage.service.sugarcrm.com/';
+            case 'cloud':
+                return 'https://discovery.service.sugarcrm.com/';
+        }
+        return '';
+    }
+
+    /**
+     * @param string $tid
+     * @return array
+     */
+    protected function getDefaultServiceAccountPermissions(string $tid): array
+    {
+        $srn = Srn\Converter::fromString($tid);
+        return [
+            sprintf('srn:%s:iam:::permission:crm.sa', $srn->getPartition()),
+            sprintf('srn:%s:iam:::permission:tenant.crm.sa', $srn->getPartition()),
+        ];
     }
 
     /**
@@ -212,9 +273,10 @@ class Config
      *
      * @param string $pathKey
      * @param array $parts
+     * @param string $userId
      * @return string
      */
-    public function buildCloudConsoleUrl($pathKey, $parts = [])
+    public function buildCloudConsoleUrl($pathKey, $parts = [], string $userId = '')
     {
         $config = $this->getIDMModeConfig();
         $serverUrl = rtrim($config['cloudConsoleUrl'], '/');
@@ -226,7 +288,30 @@ class Config
 
         $additional = array_merge($additional, array_map('urlencode', $parts));
 
-        return join('/', array_merge([$serverUrl], $additional)) . '?tenant_hint=' . urlencode($config['tid']);
+        $query = ['tenant_hint' => $config['tid']];
+        if ($userId !== '') {
+            $tenantSrn = Srn\Converter::fromString($config['tid']);
+            $userSrn = $this->getSrnManager()->createUserSrn($tenantSrn->getTenantId(), $userId);
+            $query['user_hint'] = Srn\Converter::toString($userSrn);
+        }
+        return join('/', array_merge([$serverUrl], $additional)) .'?'. http_build_query($query) ;
+    }
+
+    /**
+     * Create Srn\Manager
+     *
+     * @return Srn\Manager
+     */
+    protected function getSrnManager(): Srn\Manager
+    {
+        if (is_null($this->srnManager)) {
+            $tenantSrn = Srn\Converter::fromString($this->getIDMModeConfig()['tid']);
+            $this->srnManager = new Srn\Manager([
+                'partition' => $tenantSrn->getPartition(),
+                'region' => $tenantSrn->getRegion(),
+            ]);
+        }
+        return $this->srnManager;
     }
 
     /**
@@ -246,12 +331,13 @@ class Config
      * @param array $request the PHP $_REQUEST superglobal
      * @return bool
      */
-    public function isSpecialBeanAction(\SugarBean $bean, array $request) : bool
+    public function isSpecialBeanAction(\SugarBean $bean, array $request): bool
     {
         // Group and Portal Users are not a IdM domain entities and are special Users in terms of SugarCRM
         $creation = empty($bean->id) && in_array(strtolower($request['usertype'] ?? ''), ['portal', 'group']);
         $isPortalOrGroupUser = $bean->module_name == 'Users' && ($bean->is_group || $bean->portal_only || $creation);
-        return $isPortalOrGroupUser;
+        $isEmployee = ($bean->module_name == 'Employees') && !$bean->canBeAuthenticated();
+        return $isPortalOrGroupUser || $isEmployee;
     }
 
     /**
@@ -287,6 +373,8 @@ class Config
                 return;
             }
             $this->getIdmSettings()->saveSetting(self::IDM_MODE_KEY, 'enabled', false);
+            $this->toggleCatalog(false);
+            $this->setPushNotification(false);
         } else {
             foreach ($config as $key => $value) {
                 if ((is_array($value) && !$this->isArrayTypeValue($key))
@@ -297,12 +385,78 @@ class Config
                 }
                 $this->getIdmSettings()->saveSetting(self::IDM_MODE_KEY, $key, $value);
             }
+            $this->toggleCatalog(true);
+            $this->setPushNotification(true);
         }
 
         $this->refreshIdmSettings();
         if ($refreshCache) {
             $this->refreshCache();
         }
+    }
+
+    /**
+     * Enable or disable push notification.
+     *
+     * @param bool $state Set $sugar_config['push_notification']['enabled'] to this value in config_override.php
+     */
+    protected function setPushNotification(bool $state)
+    {
+        $configurator = new \Configurator();
+        if ($configurator->config['push_notification']['enabled'] === $state) {
+            return;
+        }
+        if (empty($configurator->config['push_notification']['service_provider']) ||
+            $configurator->config['push_notification']['service_provider'] === 'SugarPush') {
+            $configurator->config['push_notification']['enabled'] = $state;
+            if ($state && empty($configurator->config['push_notification']['service_provider'])) {
+                $configurator->config['push_notification']['service_provider'] = 'SugarPush';
+            }
+            $configurator->handleOverride();
+            $configurator->clearCache();
+            $this->sugarConfig->clearCache();
+        }
+    }
+
+    /**
+     * Toggle the catalog_enabled config property and set catalog_url if enabled
+     * @param bool $toggle Set catalog_enabled to this value in config_override.php
+     */
+    protected function toggleCatalog(bool $toggle)
+    {
+        $configurator = new \Configurator();
+        if ($configurator->config['catalog_enabled'] == $toggle) {
+            return;
+        }
+        $configurator->config['catalog_enabled'] = $toggle;
+        if ($toggle) {
+            // set catalog_url only if idmMode is changed from 'disabled' to 'enabled'
+            $catalogURL = $this->getCatalogURL();
+            if ($catalogURL) {
+                $configurator->config['catalog_url'] = $catalogURL;
+            }
+        }
+        $configurator->handleOverride();
+        $configurator->clearCache();
+        $this->sugarConfig->clearCache();
+    }
+
+    /**
+     * Get catalog_url
+     * @return string
+     */
+    public function getCatalogURL(): string
+    {
+        $catalogURL = '';
+        $config = $this->getIDMModeConfig();
+        if (!empty($config['tid'])) {
+            $tenantSrn = Srn\Converter::fromString($config['tid']);
+            if ($tenantSrn) {
+                $region = $tenantSrn->getRegion();
+                $catalogURL = $this->catalogURLs[$region] ?? '';
+            }
+        }
+        return $catalogURL;
     }
 
     /**
@@ -541,6 +695,8 @@ class Config
                 'introspectToken' => 10, // 10 seconds for introspecting user token
                 'userInfo' => 10, // 10 seconds for requesting user info
                 'keySet' => 24 * 60 * 60, // 24 hours for requesting keySet for Mango client
+                'discovery' => 24 * 60 * 60, // 24 hours for requesting Discovery data
+                'authz' => 15 * 60, // 15 minutes for requesting AuthZ data
             ],
         ];
     }

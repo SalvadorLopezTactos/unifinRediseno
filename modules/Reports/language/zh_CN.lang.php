@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => '此操作发生 Drillthrough 报表数据检索错误。请联系报告所有者以获取帮助。',
     'LBL_CHART_NO_DRILLTHRU' => '钻取不可用',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => '报告焦点抽屉',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => '列表视图显示所有满足当前搜索条件且用户对其拥有访问权限的报告。 您可以在列表视图的字段栏和预览中查看每个报告的基本详情。您可以为报告设置标签并创建筛选条件。点击报告的名称可查看报告或在操作菜单中选择“编辑报告”可修改报告。',

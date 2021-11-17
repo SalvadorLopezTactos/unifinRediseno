@@ -11,6 +11,7 @@
  */
 $dictionary['ProductBundle'] = array(
     'table' => 'product_bundles',
+    'archive' => false,
     'comment' => 'Quote groups',
     'fields' => array(
         'id' => array(
@@ -388,10 +389,52 @@ $dictionary['ProductBundle'] = array(
             'importable' => false,
             'default' => false,
         ),
+        'sync_key' => [
+            'is_sync_key' => true,
+            'name' => 'sync_key',
+            'vname' => 'LBL_SYNC_KEY',
+            'type' => 'varchar',
+            'enforced' => '',
+            'required' => false,
+            'massupdate' => false,
+            'readonly' => true,
+            'default' => null,
+            'isnull' => true,
+            'no_default' => false,
+            'comments' => 'External default id of the remote integration record',
+            'help' => '',
+            'importable' => 'true',
+            'duplicate_merge' => 'disabled',
+            'merge_filter' => 'disabled',
+            'duplicate_on_record_copy' => 'no',
+            'audited' => true,
+            'reportable' => true,
+            'unified_search' => false,
+            'calculated' => false,
+            'len' => '100',
+            'size' => '20',
+            'studio' => [
+                'recordview' => true,
+                'wirelessdetailview' => true,
+                'listview' => false,
+                'wirelesseditview' => false,
+                'wirelesslistview' => false,
+                'wireless_basic_search' => false,
+                'wireless_advanced_search' => false,
+                'portallistview' => false,
+                'portalrecordview' => false,
+                'portaleditview' => false,
+            ],
+        ],
     ),
     'indices' => array(
         array('name' => 'procuct_bundlespk', 'type' => 'primary', 'fields' => array('id')),
         array('name' => 'idx_products_bundles', 'type' => 'index', 'fields' => array('name', 'deleted')),
+        [
+            'name' => 'idx_product_bundles_skey',
+            'type' => 'unique',
+            'fields' => ['sync_key'],
+        ],
     ),
     'relationships' => array(
         'product_bundle_taxrate' => array(

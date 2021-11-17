@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'Girmiş olduğunuz şifre, şifre ihtiyaçlarını karşılamamaktadır.  Lütfen tekrar deneyiniz.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Kullanıcı Bilgisi bulunamadı',
     'ERR_USER_NAME_EXISTS'              => '{0} kullanıcı adı zaten var. Yinelenen kullanıcı adlarına izin verilmiyor. Kullanıcı adını benzersiz olacak şekilde değiştirin.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => '“Sugar Hint” lisansı, ek uyumlu lisans türüyle kaydedilmelidir',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Bu kullanıcının Sugar uygulamasına girişi engellenmekte olup, var olan şifresi ile bağlanamaz.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Sadece yabancı yazar kullanıcısının Sugar kimlik bilgilerini kullanarak oturum açmasına izin verilmiyor',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Alıcı E-Posta Adresi',
 	'ERR_SERVER_STATUS'					=> 'Sunucunuzun Durumu',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Sistem kullanıcıya E-Posta gönderemiyor. Lütfen <a href="index.php?module=EmailMan&action=config">E-Posta Ayarları</a> sayfasındaki Giden E-Posta Yapılandırma değerlerini kontrol ediniz.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Yeni kullanıcılar, <a href="{0}" target="_blank">SugarCloud Ayarları</a> ögesinde oluşturulmalıdır.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-Posta Adresi',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Tahminler',
     'LBL_WORKSHEETS'                    => 'Çalışma Sayfaları',
 	'LBL_CALENDARS'                     => 'Takvimler',
+    'LBL_SHIFTS'                        => 'Vardiyalar',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Vardiya İstisnaları',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Bir kayıt size atandığında, bilgilendirme E-Postası alın.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'Atamalarda E-posta Gönder',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Biri, yorum günlüğü girişinde sizden bahsederse bir e-posta bildirimi alırsınız.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'Bahsedildiğinde E-Posta Gönder',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Alan adlarının kayıt görünümlerinde nasıl görüntüleneceğini seçin. Daha kompakt bir kayıt görünümü için "Alan Değerinin Yanında" seçeneğini seçin.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Alan Adı Yerleştirme',
     'LBL_ABOVE_FIELD_VALUE'             => 'Alan Değerinin Üstünde',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Lisans Türü',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Çağrılar ve toplantılar için varsayılan değeri belirle. Bütün davetler için açılır pencere uyarıları görünecektir. E-posta hatırlatıcıları, bütün davetlilere gönderilir.',
 	'LBL_REMINDER'						=> 'Hatırlatıcılar',
 	'LBL_REMINDER_POPUP' => 'Açılan',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Aynı kullanıcı ismi altında başka bir oturum başlatıldığından bu oturum sona erdi.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Kayıtları Tekrar Ata',
-	'LBL_REASS_DESC_PART1'				=> 'Belirli kullanıcıdan, başka kullanıcıya atanacak kayıtları içeren modülleri seçin. <br/><br/><br />                                                            Her seçilen modülde güncellenecek kayıt sayısını bulmak için İleri tuşuna basın.<br />                                                            Herhangi bir kaydı tekrar atamadan çıkmak için İptal tuşuna basın.',
+    'LBL_REASS_DESC_PART1'              => 'Belirli kullanıcıdan, başka kullanıcıya atanacak kayıtları içeren modülleri seçin. <br/><br/><br />                                                            Her seçilen modülde güncellenecek kayıt sayısını bulmak için İleri tuşuna basın.<br />                                                            Herhangi bir kaydı tekrar atamadan çıkmak için İptal tuşuna basın.',
         'LBL_REASS_DESC_PART2'=>                    'Hangi modüller için iş akışlarının çalışacağını, atama bildirilerini gönderileceğini ve denetim tarihçesi takibinin yapılacağını seçin. Devam etmek ve kayıtları yeniden atamak için İleri tuşuna tıklayınız. Tekrarlamak için Baştan Başlayın.',
 	'LBL_REASS_STEP2_TITLE'				=> 'Takımın Yeniden Ataması',
 	'LBL_REASS_STEP2_DESC'				=> 'Aşağıdaki takımlar kaynak kullanıcının takımında mevcuttu, ancak hedef kullanıcının takımında bulunmamaktadır. Kaynak kullanıcının takımındaki kayıtların tamamı, takım kayıtları eşleşene kadar hedef kullanıcının takımında gözükmeyebilir.',
@@ -624,7 +628,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Kullanıcı Profili',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Salt okunur alanlarda değişiklikler yapmak için lütfen <a href="%s" target="_blank">SugarCloud Ayarları</a> ögesine gidin.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Salt okunur dosyalarda değişiklik yapmak istiyorsanız lütfen Sugar yöneticinizle iletişime geçin.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

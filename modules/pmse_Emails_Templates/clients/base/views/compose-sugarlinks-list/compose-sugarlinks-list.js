@@ -61,6 +61,7 @@
     _processResults: function(results) {
         var targetModule = _.first(results);
         var relatedModules = _.rest(results, 1)
+        var currentActivity = this._getCurrentActivity();
 
         //strip off '<' and '>' from target module's name
         targetModule.text = targetModule.text.substring(1, targetModule.text.length-1);
@@ -70,6 +71,20 @@
             return _.extend(relatedModule, {relatedTo: app.lang.get('LBL_RELATED_TO_TARGET_MODULE', 'pmse_Emails_Templates')})
         });
         relatedModules.unshift(targetModule);
+        relatedModules.push(currentActivity);
         return relatedModules;
+    },
+
+    _getCurrentActivity: function() {
+        var processModule = 'pmse_Inbox';
+        var moduleLabel = app.lang.getModuleName(processModule, {plural: true});
+        return {
+            module: processModule,
+            module_label: moduleLabel,
+            text: moduleLabel,
+            relatedTo: app.lang.get('LBL_PMSE_CURRENT_ACTIVITY', processModule),
+            relationship: 'current_activity',
+            value: 'current_activity'
+        };
     }
 })

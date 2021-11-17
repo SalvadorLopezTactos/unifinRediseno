@@ -68,7 +68,7 @@ $mod_strings = array (
   'LBL_PRODUCT' => '商品',
   'LBL_PRODUCT_ID' => '商品ID:',
   'LBL_QUANTITY' => '在庫数量:',
-  'LBL_RELATED_PRODUCTS' => '関連見積品目',
+  'LBL_RELATED_PRODUCTS' => '関連見積り済商品',
   'LBL_SEARCH_FORM_TITLE' => '商品カタログ検索',
   'LBL_STATUS' => '在庫:',
   'LBL_SUPPORT_CONTACT' => 'サポート問合せ先:',
@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => '税区分:',
   'LBL_TYPE_NAME'=>'タイプ名',
   'LBL_TYPE' => 'タイプ',
+  'LBL_PRODUCT_TYPE' => '製品のタイプ',
   'LBL_URL' => '商品URL:',
   'LBL_VENDOR_PART_NUM' => '販売元パートナンバー:',
   'LBL_WEIGHT' => '重量:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => '商品カタログ',
   'NTC_DELETE_CONFIRMATION' => '本当にこのレコードを削除してよいですか？',
     'LBL_ADD_TO_QUOTE_BUTTON' => '追加',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => '製品カタログの検索',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => '利用可能なデータはありません',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'アサイン先',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => '商品タイプ',
   'LBL_RENEWABLE' => 'Renewable',
   'LBL_SERVICE' => 'Service',
+  'LBL_LOCK_DURATION' => 'ロック期間',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => '製品カタログリストのダッシュボード',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => '製品カタログ記録ダッシュボード',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => '製品カタログフォーカス ドロワ',
 );

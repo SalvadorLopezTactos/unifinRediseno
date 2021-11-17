@@ -25,4 +25,7 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Todos os painéis para o módulo {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Todos os painéis para a visualização {{view}} do módulo {{module}}',
     'LBL_COPY_OF' => 'Cópia de {{{name}}}',
+    'LBL_DELETE_FOCUS_DRAWER' => 'Os painéis de gavetas de foco não podem ser excluídos.',
+    'LBL_CREATE_DASHBOARD_BUTTON' => 'Criar painel',
+    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
 );

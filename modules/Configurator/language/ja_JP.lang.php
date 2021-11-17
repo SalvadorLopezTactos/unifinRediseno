@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'ユーザ名',
 	'LBL_RESTORE_BUTTON_LABEL'=>'リストア',
 	'LBL_SYSTEM_SETTINGS' => 'システム設定',
-	'LBL_SKYPEOUT_ON_DESC' => 'SkypeOut&reg;を利用して、電話番号をクリックすると電話がかけられるように設定します。この機能を利用するためには、電話番号が+〔国番号〕〔電話番号〕の形式で保存されている必要があります。例えば +1 (555) 555-1234 です。',
-	'LBL_SKYPEOUT_ON' => 'SkypeOut&reg;連携を有効化',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut&reg;',
+    'LBL_DIALOUT_ON_DESC' => 'ユーザーが電話番号をクリックして、デフォルトのコンピューター テレフォニー インテグレーション (CTI) ソフトウェアを使用して電話をかけることができます。',
+    'LBL_DIALOUT_ON' => 'クリック通話を有効にする',
+    'LBL_DIALOUT_TITLE' => '送信コール',
     'LBL_TWEETTOCASE_ON_DESC' => 'ツイートからケースを作成できるようにする',
     'LBL_TWEETTOCASE_ON' => 'ツイートtoケース統合を有効にする',
     'LBL_TWEETTOCASE_TITLE' => 'ツイートtoケース',
@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobile Plusサーバ',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'サブパネルで表示するページごとのアイテム数',
 	'LOG_MEMORY_USAGE'=>'メモリ使用状況のログ',
-    'LOG_SLOW_QUERIES' => 'スロークエリのログ',
+    'LOG_SLOW_QUERIES' => 'スロークエリーのログ',
     'LOCK_HOMEPAGE_HELP'=>'この設定は以下を非許可にします。<BR> 1) ホームで新規ホームページとダッシュレットを追加 <BR>2) ドラッグアンドドロップによるホームのダッシュレットの配置のカスタマイズ',
     'CURRENT_LOGO'=>'現在のロゴ',
     'CURRENT_LOGO_HELP'=>'このロゴはSugarアプリケーションのフッタの左端に表示されます。',
@@ -121,7 +121,7 @@ $mod_strings = array (
     'NEW_QUOTE_LOGO'=>'新たな見積用ロゴをアップロード',
     'NEW_QUOTE_LOGO_HELP'=>'画像フォーマットはJPEGである必要があります。<br>推奨サイズは 867x74pxです。',
     'QUOTES_CURRENT_LOGO'=>'見積用ロゴ',
-	'SLOW_QUERY_TIME_MSEC'=>'スロークエリの閾値（ミリ秒）',
+	'SLOW_QUERY_TIME_MSEC'=>'遅延クエリの閾値（ミリ秒）',
 	'STACK_TRACE_ERRORS'=>'エラースタックトレースの表示',
 	'UPLOAD_MAX_SIZE'=>'最大アップロードサイズ',
 	'VERIFY_CLIENT_IP'=>'ユーザのIPアドレスの正当性を確認',
@@ -204,7 +204,7 @@ $mod_strings = array (
 	'LBL_LOGGER_MAX_LOGS'=>'ログファイルの最大数 (ローテーション前)',
 	'LBL_LOGGER_FILENAME_SUFFIX' =>'ファイル名に追加するサフィックス',
 	'LBL_VCAL_PERIOD' => 'vCal更新の周期:',
-    'LBL_NO_PRIVATE_TEAM_UPDATE' => 'プライベート チーム名にユーザ名フィールドが継承されることを防止する',
+    'LBL_NO_PRIVATE_TEAM_UPDATE' => 'プライベート チーム名にユーザー名フィールドが継承されることを防止する',
     'LBL_IMPORT_MAX_RECORDS' => 'インポート - 行の最大数',
     'LBL_IMPORT_MAX_RECORDS_HELP' => '１回のインポートでインポート可能な行数を指定します。インポート行数が<br>この数を超えた場合、ユーザにはアラートが表示されます。数の指定がない場合<br>インポート可能な行数の制限はありません。',
 	'vCAL_HELP' => 'この設定は、現在の日付から何カ月先までの電話および会議の空き状況を公開するかを決定する際に利用されます。</BR>空き状況を公開しない場合は、「0」を入力してください。最短期間は1カ月、最長期間は12カ月です。',
@@ -363,7 +363,7 @@ $mod_strings = array (
     'JS_ALERT_PDF_WRONG_EXTENSION' => 'このファイルは適切な拡張子を持っていません。',
     'LBL_PDF_INSTRUCTIONS' => 'ガイド',
     'PDF_INSTRUCTIONS_ADD_FONT' => <<<BSOFR
-Fonts supported by SugarPDF :
+SugarPDF でサポートされているフォント :
 <ul>
 <li>TrueTypeUnicode (UTF-8 Unicode)</li>
 <li>OpenTypeUnicode</li>
@@ -373,11 +373,11 @@ Fonts supported by SugarPDF :
 <li>CID-0</li>
 </ul>
 <br>
-If you choose to not embed your font in the PDF, the generated PDF file will be lighter but a substitution will be use if the font is not available in the system of your reader.
+フォントを PDF に埋め込まないことを選択した場合、生成された PDF ファイルは容量が軽くなりますが、フォントがリーダーのシステムで使用できない場合は、代替フォントが使用されます。
 <br><br>
-Adding a PDF font to SugarCRM requires to follow steps 1 and 2 of the TCPDF Fonts documentation available in the "DOCS" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>The pfm2afm and ttf2ufm utils are available in fonts/utils in the TCPDF package that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>Load the metric file generated in step 2 and your font file below.
+PDF フォントを SugarCRM に追加するには、 <a href="http://www.tcpdf.org" target="_blank" rel="nofollow n oopener noreferrer">TCPDF ウェブサイト</a> の「DOCS」セクション内にあるTCPDF Fonts ドキュメントのステップ 1 と 2 に従う必要があります。
+<br><br>pfm2afm および ttf2ufm utils は、 <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF ウェブサイト</a> の「DOWNLOAD」セクションでダウンロード可能な TCPDF パッケージに入っているフォント/utils で利用可能です。
+<br><br>手順2で生成したメトリックファイルと以下のフォントファイルをロードします。
 BSOFR
 ,
     'ERR_MISSING_CIDINFO' => 'CID情報フィールドは空白にできません。',
@@ -428,6 +428,9 @@ BSOFR
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '*レポートモジュールはブラウザベースのモバイルビューでは使用できません。',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => '最大長は最小長よりも長くする必要があります',
+    'ERR_MIN_LENGTH_NEGATIVE' => '最小長は正の値である必要があります',
+    'ERR_MAX_LENGTH_NEGATIVE' => '最大長は正の値である必要があります',
     'ERR_EMPTY_SAML_LOGIN' => 'SAMLログインURLは空白であってはなりません',
     'ERR_EMPTY_SAML_CERT' => 'SAML認証は空白であってはなりません',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML エンティティ ID を空にすることはできません。',
@@ -441,9 +444,6 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'アクティビティストリーム',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'アクティビティストリームを有効にする',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'アプリケーション用のアクティビティストリームをオンにする',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => '追加のログイン画面のコンテンツを有効にします',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => '自動保存プロセスの定義',

@@ -57,7 +57,7 @@
                 <input type="hidden" name='{$name}' value='false'>
                 <input type='checkbox' name='{$name}' value='true' id='{$name}' {if $property.value == "true"}CHECKED{/if}>
             {elseif $property.type == "password"}
-                <input type='password' size='20' name='{$name}' id='{$name}' value='{$property.value}'>
+                <input type='password' size='20' name='{$name}' id='{$name}' value='{$property.value}' autocomplete="off">
             {elseif $property.type == "file"}
                 <input type="file" id='{$name}' name='{$name}' size="20" onBlur="checkFileType('{$name}',0);"/>
             {/if}

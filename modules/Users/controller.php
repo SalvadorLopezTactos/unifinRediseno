@@ -74,10 +74,13 @@ class UsersController extends SugarController
 
 	protected function action_delete()
 	{
-	    if($_REQUEST['record'] != $GLOBALS['current_user']->id && ($GLOBALS['current_user']->isAdminForModule('Users')
-            ))
-        {
             $u = BeanFactory::getBean('Users', $_REQUEST['record']);
+        if (empty($u)) {
+            sugar_die(translate('EXCEPTION_NOT_FOUND'));
+        }
+        if (!$u->ACLAccess('delete')) {
+            sugar_die(translate('EXCEPTION_NOT_AUTHORIZED'));
+        }
             $u->status = 'Inactive';
             $u->deleted = 1;
             $u->employee_status = 'Terminated';
@@ -99,9 +102,6 @@ class UsersController extends SugarController
             else{
                 SugarApplication::redirect("index.php?module=Users&action=index");
             }
-        }
-        else
-            sugar_die("Unauthorized access to administration.");
 	}
 	/**
 	 * Clear the reassign user records session variables.

@@ -591,6 +591,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'Налаштувати портал',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Увімкнути портал',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Увімкнути пошук перед відкриттям звернення',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Дозволити користувачам порталу закривати звернення',
     'LBL_PORTAL_THEME' => 'Тема порталу',
     'LBL_PORTAL_ENABLE' => 'Активувати',
     'LBL_PORTAL_SITE_URL' => 'Ваш портал доступний за посиланням:',
@@ -782,7 +783,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Виберіть для використання цього поля при пошуку записів з використанням глобального пошуку на цьому модулі.',
+'LBL_POPHELP_REQUIRED'=>"Створіть формулу, щоб визначати, чи це поле є обов’язковим у макетах.<br/>"
+    . "Обов’язкові поля відповідатимуть формулі в мобільному поданні для браузера, <br/>"
+    . "однак не відповідатимуть формулі у власних програмах, як-от Sugar Mobile для iPhone. <br/>"
+    . "Вони не відповідатимуть формулі на порталі самообслуговування Sugar.",
+'LBL_POPHELP_READONLY'=>"Створіть формулу, щоб визначати, чи це поле в макетах призначене лише для читання.<br/>"
+        . "Поля, призначені лише для читання, відповідатимуть формулі в мобільному поданні для браузера, <br/>"
+        . "однак не відповідатимуть формулі у власних програмах, як-от Sugar Mobile для iPhone. <br/>"
+        . "Вони не відповідатимуть формулі на порталі самообслуговування Sugar.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Виберіть використання цього поля під час пошуку записів, використовуючи функцію глобального пошуку на цьому модулі.',
 //Revert Module labels
 'LBL_RESET' => 'Скинути',
 'LBL_RESET_MODULE' => 'Очистити модуль',
@@ -817,6 +826,7 @@ $mod_strings = array(
                 'encrypt'=>'Зашифрувати',
                 'datetimecombo' =>'Дата й час',
                 'decimal'=>'Десятковий знак',
+                'autoincrement' => 'Автоматичне зростання',
 ),
 'labelTypes' => array(
     "" => "Часто використовувані мітки",
@@ -834,4 +844,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'Всі модулі',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (пов&#39;язаний {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Скопіювати з макету',
+'LBL_RELATIONSHIP_TYPE' => 'Зв’язок',
 );

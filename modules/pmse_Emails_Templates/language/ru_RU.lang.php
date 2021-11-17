@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Процесс обработки шаблонов Email',
     'LBL_MODULE_NAME_SINGULAR' => 'Процесс обработки шаблона Email',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для процесса обработки шаблонов Email',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Информационная панель записей по шаблонам процессов электронной почты',
     'LNK_LIST' => 'Посмотреть процесс обработки шаблонов Email',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Создать процесс обработки шаблона Email',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Импортировать процесс обработки шаблонов Email',

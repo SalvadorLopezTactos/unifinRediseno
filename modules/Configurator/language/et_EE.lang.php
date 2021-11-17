@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'Kasutajanimi',
 	'LBL_RESTORE_BUTTON_LABEL'=>'Taasta',
 	'LBL_SYSTEM_SETTINGS' => 'Süsteemi sätted',
-	'LBL_SKYPEOUT_ON_DESC' => 'Võimaldab kasutajatel klõpsata telefoninumbritel helistamiseks rakendusega SkypeOut&reg;. Selle funktsiooni kasutamiseks peavad numbrid olema õigesti vormindatud. Vorminguks peab olema + riigi kood ja number, nagu +1 (555) 555 1234.',
-	'LBL_SKYPEOUT_ON' => 'Luba SkypeOut&reg;-i integratsioon',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut&reg;',
+    'LBL_DIALOUT_ON_DESC' => 'Võimaldab kasutajatel telefoninumbritel klõpsata, et neile arvuti telefonside vaikeintegratsiooni (CTI) tarkvara kaudu helistada.',
+    'LBL_DIALOUT_ON' => 'Luba klõpsates helistamine',
+    'LBL_DIALOUT_TITLE' => 'Väljuvad kõned',
     'LBL_TWEETTOCASE_ON_DESC' => 'Võimaldab kasutajatel luua juhtumeid säutsudest',
     'LBL_TWEETTOCASE_ON' => 'Luba Tweet&reg;-i juhtumi integratsioon',
     'LBL_TWEETTOCASE_TITLE' => 'Tweet&reg;-i juhtum',
@@ -373,11 +373,11 @@ SugarPDF-i toetatud fondid:
 <li>CID-0</li>
 </ul>
 <br>
-Kui otsustate oma fonti PDF-i mitte manustada, on loodud PDF-fail kergem, kuid kasutatakse asendust, kui font pole teie lugeja süsteemis saadaval.
+Kui otsustate jätta fondi PDF-i manustamata, on loodav PDF-fail väiksem, ent kui font ei ole teie lugeri süsteemis saadaval, kasutatakse asendusfonti.
 <br><br>
-PDF-fondi lisamiseks SugarCRM-i on vaja jälgida etappe 1 ja 2 TCPDF-fontide dokumentides, mis on saadaval jaotises DOCS <a href="http://www.tcpdf.org" target="_blank">TCPDF-i veebisaidil</a>.
-<br><br>Utiliidid pfm2afm ja ttf2ufm on saadaval TCPDF-paketi fontides/utiliitides, mille saate alla laadida jaotisest DOWNLOAD <a href="http://www.tcpdf.org" target="_blank">TCPDF-i veebisaidil</a>.
-<br><br>Laadige 2. etapis loodud meetrum ja teie allolev fondifail.
+Kui soovite lisada PDF-i fondi SugarCRM-i, tuleb teil järgida 1. ja 2. toimingut TCPDF-i fontide dokumendis, mis asub <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF-i veebisaidi</a> jaotises „DOCS“.
+<br><br>Utiliidid pfm2afm ja ttf2ufm on saadaval TCPDF-i paketi kaustas fonts/utils. Paketi saate alla laadida <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF-i veebisaidi</a> jaotisest „Allalaadimine“.
+<br><br>Laadige allpool 2. toimingus loodud mõõdikufail ja fondifail.
 BSOFR
 ,
     'ERR_MISSING_CIDINFO' => 'Väli CID teave ei tohi olla tühi.',
@@ -429,6 +429,9 @@ Täiendavate süsteemi sätete konfigureerimiseks klõpsake <a href="index.php?m
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Aruannete moodul pole saadaval brauseripõhise mobiilivaate puhul.',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => 'Maksimaalne pikkus peab olema suurem kui minimaalne pikkus',
+    'ERR_MIN_LENGTH_NEGATIVE' => 'Minimaalne pikkus peab olema positiivse väärtusega',
+    'ERR_MAX_LENGTH_NEGATIVE' => 'Maksimaalne pikkus peab olema positiivse väärtusega',
     'ERR_EMPTY_SAML_LOGIN' => 'SAML-i sisselogimise URL ei saa olla tühi',
     'ERR_EMPTY_SAML_CERT' => 'SAML-i sert ei saa olla tühi',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML-i olemi ID ei saa olla tühi',
@@ -442,9 +445,6 @@ Täiendavate süsteemi sätete konfigureerimiseks klõpsake <a href="index.php?m
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Tegevusvood',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Luba tegevusvood',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Lülitab tegevusvood rakenduse jaoks sisse',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Luba sisselogimiskuva lisasisu',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Automaatsalvesta protsessi definitsioonid',

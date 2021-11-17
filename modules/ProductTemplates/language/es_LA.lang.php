@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Tipo de Impuesto:',
   'LBL_TYPE_NAME'=>'Nombre de Tipo',
   'LBL_TYPE' => 'Tipo',
+  'LBL_PRODUCT_TYPE' => 'Tipo de Producto',
   'LBL_URL' => 'URL del Producto:',
   'LBL_VENDOR_PART_NUM' => 'Número de Pieza del Proveedor:',
   'LBL_WEIGHT' => 'Peso:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Ver Catálogo de Productos',
   'NTC_DELETE_CONFIRMATION' => '¿Está seguro de que desea eliminar este registro?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Agregar',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Buscar en el Catálogo de Productos',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'No hay datos disponibles',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nombre de Usuario Asignado',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Tipos de Producto',
   'LBL_RENEWABLE' => 'Renovable',
   'LBL_SERVICE' => 'Servicio',
+  'LBL_LOCK_DURATION' => 'Duración del bloqueo',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Tablero de Lista de Catálogo de Productos',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Tablero de Registro de Catálogo de Productos',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Panel de Enfoque de Catálogo de Productos',
 );

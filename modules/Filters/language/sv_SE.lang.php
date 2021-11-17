@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => 'nästa år',
     'LBL_OPEN_ISSUES' => 'Öppna{0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'Nyligen löst',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => 'Skapa filter',
+    'LBL_ERROR_FILTER_EMPTY' => 'Lägg till filterkriterium.',
+    'LBL_ADD_FILTER' => 'Lägg till kriterium',
+    'LBL_FILTER_NAME' => 'Filternamn',
+    'LBL_FILTER_FIELD' => 'Fält',
+    'LBL_FILTER_OPERATOR' => 'Operatör',
+    'LBL_FILTER_VALUE' => 'Värde',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Spara till skrivbordsapp',
+    'LBL_FILTER_LOCAL' => 'Lokalt filter',
 );

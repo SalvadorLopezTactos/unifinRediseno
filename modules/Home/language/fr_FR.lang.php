@@ -115,7 +115,8 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Dashlet ajouté',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Êtes-vous sûr de vouloir changer la mise en page? La mise en page peut être désorganisé.',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Êtes-vous sûr(e) de vouloir supprimer le Dashlet ?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Aucun tableau de bord configuré.',
+  'LBL_NO_DASHBOARD_CONFIGURED' => 'Aucun tableau de bord configuré',
+  'LBL_NO_DASHLETS_CONFIGURED' => 'Aucun Dashlet configuré',
   'LBL_CREATE_DASHBOARD_LINK' => 'Créer un tableau de bord',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Site Web',
@@ -123,7 +124,7 @@ $mod_strings = array (
   'LBL_DASHLET_WEBPAGE_URL' => 'URL',
   'LBL_DASHLET_WEBPAGE_URL_HELP' => 'Certains sites peuvent ne pas se charger correctement à cause des diverses politiques que gestion de contenu non-sécurisé.',
 
-  'LBL_DASHLET_ADD' => 'Ajouter un',
+  'LBL_DASHLET_ADD' => 'Ajouter le Dashlet',
   'LBL_DASHLET_DELETE' => 'Supprimer le Dashlet',
   'LBL_DASHLET_REFRESH' => 'Rafraîchir le Dashlet',
   'LBL_DASHLET_EDIT' => 'Éditer le Dashlet',
@@ -218,7 +219,6 @@ $mod_strings = array (
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - Un calendrier pour enregistrer des dates créé par Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - Une librairie pour créer des documents PDF créé par Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - Une implémentation de serveur WebDAV en PHP.',
-  'LBL_SOURCE_PCLZIP' => 'PclZip - librairie qui permet la compression et l&#39;extraction de fichier Zip par Vincent Blavet',
   'LBL_SOURCE_SMARTY' => 'Smarty - Un moteur de template en PHP.',
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - La librairie interface utilisateur pour faciliter l&#39;implentation de clients rîches.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - Une classe de transfert de mail en PHP',

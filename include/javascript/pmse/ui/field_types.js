@@ -173,7 +173,7 @@ FilterField.prototype._typeToControl = {
     //flex relate: 'flexrelate',
     phone: 'text',
     radio: 'radio',
-    //relate: 'related',
+    relate: 'related',
     textarea: 'text',//'textarea',
     url: 'text',
     textfield: 'text',
@@ -421,6 +421,34 @@ FilterField.prototype.processValueDependency = function(type) {
                 settings.searchLabel = PMSE_USER_SEARCH.text;
                 settings.searchURL = PMSE_USER_SEARCH.url;
                 break;
+            case 'related':
+                settings.options = [];
+                var relateBean = App.data.createRelatedBean(App.data.createBean(PROJECT_MODULE), null, this.module);
+                var fields = relateBean && relateBean.fields ? relateBean.fields : [];
+                var fieldName = this.selectField.value;
+                var relateFieldDef = fields && fieldName && fields[fieldName] ? fields[fieldName] : {};
+                var searchModule = relateFieldDef && relateFieldDef.module ? relateFieldDef.module : '';
+                settings.searchMore = {
+                    module: searchModule,
+                    fields: ['id', 'name'],
+                    filterOptions: null
+                };
+                settings.searchValue = 'id';
+                settings.searchLabel = 'name';
+                if (!_.isEmpty(searchModule)) {
+                    settings.searchURL = searchModule +
+                        '?filter[0][$and][1][$or][0][name][$starts]={%TERM%}&fields=id,' +
+                        'name&max_num={%PAGESIZE%}&offset={%OFFSET%}';
+                } else {
+                    settings.searchURL = '';
+                }
+
+                // For team_name specifically, we want to enable multi-select
+                if (fieldName === 'team_name') {
+                    settings.multiple = true;
+                }
+
+                break;
             case 'datetime':
                 settings.timeFormat = this.timeFormat;
             case 'date':
@@ -505,6 +533,7 @@ FilterField.prototype.createValueElements = function(settings) {
             valueElement = this.createCurrencyValueElement(settings);
             break;
         case 'friendlydropdown':
+        case 'related':
             valueElement = this.createFriendlyDropdownValueElement(settings);
             break;
         case 'decimal':
@@ -1561,6 +1590,16 @@ CheckboxField.prototype = new PMSE.Field();
 CheckboxField.prototype.type = 'CheckboxField';
 
 /**
+ * Sets the field's value and activates change event
+ * @param {*} value
+ */
+CheckboxField.prototype.update = function(value) {
+    this.setValue(value, true);
+    $(this.html).children('input').prop('checked', value);
+    this.change();
+};
+
+/**
  * Creates the HTML Element of the field
  */
 CheckboxField.prototype.createHTML = function () {
@@ -2054,10 +2093,27 @@ NumberField.prototype.type = 'TextField';
  */
 NumberField.prototype.initObject = function (options) {
     var defaults = {
-        maxCharacters: 0
+        maxCharacters: 0,
+        minValue: false,
+        keyup: function() {},
     };
     $.extend(true, defaults, options);
-    this.setMaxCharacters(defaults.maxCharacters);
+    this.setMaxCharacters(defaults.maxCharacters)
+        .setKeyUpHandler(defaults.keyup);
+
+    if (defaults.minValue !== false) {
+        this.setMinValue(parseInt(defaults.minValue));
+    }
+};
+
+/**
+ * Sets the keyup property
+ * @param {Function} fn
+ * @return {Object}
+ */
+NumberField.prototype.setKeyUpHandler = function(fn) {
+    this.keyup = fn;
+    return this;
 };
 
 /**
@@ -2067,6 +2123,16 @@ NumberField.prototype.initObject = function (options) {
  */
 NumberField.prototype.setMaxCharacters = function (value) {
     this.maxCharacters = value;
+    return this;
+};
+
+/**
+ * Sets the property minimal value
+ * @param {number|boolean} value
+ * @return {*}
+ */
+NumberField.prototype.setMinValue = function(value) {
+    this.minValue = value;
     return this;
 };
 
@@ -2090,6 +2156,7 @@ NumberField.prototype.createHTML = function () {
     this.html.appendChild(fieldLabel);
 
     textInput = this.createHTMLElement('input');
+    textInput.type = 'number';
     textInput.id = this.name;
     textInput.value = this.value || "";
     if (this.fieldWidth) {
@@ -2134,6 +2201,10 @@ NumberField.prototype.attachListeners = function () {
             .change(function () {
                 self.setValue(this.value, true);
                 self.onChange();
+            })
+            .keyup(function() {
+                self.setValue(this.value, true);
+                self.keyup();
             });
     }
     return this;
@@ -2147,11 +2218,12 @@ NumberField.prototype.isValid = function() {
     // Start with a true return
     var valid = true;
     // If this field is required, check whether it is numeric
-    if (this.required && !$.isNumeric(this.value)) {
+    if ((this.required && !$.isNumeric(this.value)) ||
+        ($.isNumeric(this.minValue) && parseInt(this.value) < this.minValue)) {
         // If not, mark it invalid and mark a field error
         valid = false;
-        this.markFieldError(!valid);
     }
+    this.markFieldError(!valid);
     return valid;
 };
 
@@ -2789,4 +2861,161 @@ SearchableCombobox.prototype.createHTML = function () {
     }
 
     return this.html;
+};
+
+SearchableCombobox.prototype.getObjectValue = function() {
+    let response = {};
+    response[this.name] = this.value;
+    return response;
+};
+
+/**
+ * @class FieldsGroup
+ * Handles the fields group
+ * @extends PMSE.Field
+ *
+ * Creates a new instance of the class
+ * @constructor
+ * @param {Object} options
+ * @param {PMSE.Form} parent
+ */
+var FieldsGroup = function(options, parent) {
+    PMSE.Field.call(this, options, parent);
+
+    this.controlObject = {};
+    FieldsGroup.prototype.initObject.call(this, options);
+};
+
+FieldsGroup.prototype = new PMSE.Field();
+
+/**
+ * Defines the object's type
+ * @type {string}
+ */
+FieldsGroup.prototype.type = 'FieldsGroup';
+
+/**
+ * Initializes the object with the default values
+ * @param {Object} options
+ */
+FieldsGroup.prototype.initObject = function(options) {
+    let defaults = {
+        items: [],
+        required: false,
+    };
+
+    $.extend(true, defaults, options);
+    this.items = defaults.items;
+
+    $.each(this.items, function(key, item) {
+        item.field.setParent(this);
+    }.bind(this));
+
+    this.setRequired(defaults.required);
+};
+
+/**
+ * Creates the HTML Element of the field group
+ * @return {*}
+ */
+FieldsGroup.prototype.createHTML = function() {
+    PMSE.Field.prototype.createHTML.call(this);
+
+    let required = '';
+    if (this.required) {
+        required = '<i>*</i> ';
+    }
+
+    let fieldLabel = this.createHTMLElement('span');
+    fieldLabel.className = 'adam-form-label';
+    fieldLabel.style.width = '40%';
+    fieldLabel.innerHTML = this.label + ': ' + required;
+
+    this.html.appendChild(fieldLabel);
+
+    let fieldsGroup = this.createHTMLElement('span');
+    fieldsGroup.className = 'adam-fields-group';
+
+    $.each(this.items, function(key, item) {
+        let fieldObj = item.field.createHTML();
+
+        if (item.textBefore) {
+            let textBefore = this.createHTMLElement('span');
+            textBefore.className = 'field-text-before';
+            textBefore.innerHTML = item.textBefore;
+
+            fieldsGroup.appendChild(textBefore);
+        }
+
+        fieldsGroup.appendChild(fieldObj);
+    }.bind(this));
+
+    this.html.appendChild(fieldsGroup);
+
+    this.labelObject = fieldLabel;
+
+    return this.html;
+};
+
+/**
+ * Wrapper for setting the dirty parameter of the form from children's methods
+ * @param {boolean} value
+ * @return {Object}
+ */
+FieldsGroup.prototype.setDirty = function(value) {
+    if (this.parent) {
+        this.parent.setDirty(value);
+    }
+    return this;
+};
+
+/**
+ * Wrapper for checking if children's fields are valid
+ * @return {boolean}
+ */
+FieldsGroup.prototype.isValid = function() {
+    let valid = true;
+
+    $.each(this.items, function(key, item) {
+        valid = valid && item.field.isValid();
+    });
+
+    return valid;
+};
+
+/**
+ * Initialization of children's listeners
+ */
+FieldsGroup.prototype.attachListeners = function() {
+    $.each(this.items, function(key, item) {
+        item.field.attachListeners();
+    });
+};
+
+/**
+ * Return list of children fields values
+ * @return {boolean}
+ */
+FieldsGroup.prototype.getObjectValue = function() {
+    let response = {};
+    $.each(this.items, function(key, item) {
+        $.extend(response, item.field.getObjectValue());
+    });
+
+    return response;
+};
+
+/**
+ * Run the evalRequired method of childrens
+ * @return {boolean}
+ */
+FieldsGroup.prototype.evalRequired = function() {
+    let response = true;
+    $.each(this.items, function(key, item) {
+        const fieldRequired = item.field.evalRequired();
+        if (!fieldRequired) {
+            response = false;
+        }
+    });
+    return response;
 };

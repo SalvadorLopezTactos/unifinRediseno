@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Modificat per ID',
     'LBL_EXPORT_CREATED_BY' => 'Creat per ID',
     'LBL_EXPORT_TYPE_NAME' => 'Nom del tipus',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat als contractes',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Quadre de comandament del registre de contractes',
 );

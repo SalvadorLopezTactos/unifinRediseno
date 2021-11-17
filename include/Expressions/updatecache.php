@@ -71,8 +71,10 @@ function recursiveParse($dir, $silent = false)
         // parse the sub-directories
         if (!is_file($entry)) {
             $cont = recursiveParse($dir . "/" . $entry, $silent);
-            $contents      .= $cont["function_map"];
-            $js_contents .= $cont["javascript"];
+            if ($cont !== null && is_array($cont)) {
+                $contents .= $cont["function_map"];
+                $js_contents .= $cont["javascript"];
+            }
         }
 
         // Check for extensions.
@@ -223,7 +225,7 @@ function buildCache($outputDir, $silent = false, $minify = true)
 
     $fmap = sugar_cached("Expressions/functionmap.php");
 // now write the new contents to functionmap.php
-    sugar_file_put_contents($fmap, $new_contents);
+    sugar_file_put_contents_atomic($fmap, $new_contents);
 
 // write the functions cache file
     $cache_contents = $contents["javascript"];
@@ -265,14 +267,10 @@ EOQ;
     $cache_contents .= "};\n";
 
     create_cache_directory("Expressions/functions_cache_debug.js");
-    sugar_file_put_contents(sugar_cached("Expressions/functions_cache_debug.js"), $cache_contents);
+    sugar_file_put_contents_atomic(sugar_cached("Expressions/functions_cache_debug.js"), $cache_contents);
 
 
-    if (function_exists('sugar_file_put_contents')) {
-        sugar_file_put_contents("$outputDir/functions_cache_debug.js", $cache_contents);
-    } else {
-        file_put_contents("$outputDir/functions_cache_debug.js", $cache_contents);
-    }
+    sugar_file_put_contents_atomic("$outputDir/functions_cache_debug.js", $cache_contents);
 
     if ($minify) {
         require_once "jssource/minify_utils.php";

@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Instrumentpanel med offertlista',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Instrumentpanel med offertposter',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för offerter',
 
     'LBL_CONTRACTS'=>'Kontrakt',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Kontrakt',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Fakturerings land',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Fakturerings postnummer',
     'LBL_BILLING_ADDRESS_STATE' => 'Fakturerings stat',
-    'LBL_BILLING_ADDRESS_STREET' => 'Faktureringsadress',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Adress:',
     'LBL_BILLING_CONTACT_ID' => 'Fakturerings kontakt id:',
     'LBL_BILLING_CONTACT_NAME' => 'Fakturerings kontaktnamn:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Leverans land',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Leverans postnummer',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Leverans stat',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Leveransadress',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Adress:',
     'LBL_SHIPPING_BODY' => 'Fakturering och frakt',
     'LBL_SHIPPING_CONTACT_ID' => 'Leverans kontakt id:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Kopiera faktureringsadress till leveransadress',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Kopiera leveransadress till faktureringsadress',
     'NTC_COPY_BILLING_ADDRESS2' => 'Kopiera leverans',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopiera fakturering',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Är du säker på att du vill radera kommentaren för offerten?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopiera fakturering',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Är du säker på att du vill radera kommentaren för offerten?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Är du säker på att du vill radera raden från offerten?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Är du säger på att du vill ta bort den här gruppen från offerten?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Är du säker på att du vill radera kontakten från offerten?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Antal',
     'LBL_MFT_PART_NUM' => 'Delnummer',
     'LBL_ITEM_NAME' => 'Radartikel',
+    'LBL_PRODUCT_TEMPLATE' => 'Produkt',
     'LBL_DISCOUNT_PRICE' => 'Enhetspris',
     'LBL_DISCOUNT_AMOUNT' => 'Rabatt',
     'LBL_LINE_ITEM_TOTAL' => 'Radartikelsumma',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'Affärsmöjlighet ID',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Offertkonfiguration',
+
+    'LBL_RENEWAL' => 'Förnyelse',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Offertinteraktioner',
 );

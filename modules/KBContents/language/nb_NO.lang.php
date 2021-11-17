@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Dashbord for kunnskapsbaseliste',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Dashbord for kunnskapsbaseliste',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Kunnskapsbase fokusskuff',
 
     'LBL_MODULE_NAME' => 'KB-dokumenter',
     'LBL_MODULE_NAME_SINGULAR' => 'Kunnskapsbase-artikkel',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Ikke nyttig',
     'LBL_RATING' => 'Rangering',
     'LBL_VIEWED_COUNT' => 'View Count',
-    'LBL_DOWNLOAD_ALL' => 'Last ned alle',
-    'LBL_DOWNLOAD_ONE' => 'Last ned',
-    'LBL_ATTACHMENTS' => 'Vedlegg:',
-    'LBL_ADD_ATTACHMENT' => 'Bla gjennom',
     'LBL_CATEGORIES' => 'Kunnskapsbasekategorier',
     'LBL_CATEGORY_NAME' => 'Kategori',
     'LBL_USEFULNESS' => 'Nyttighet',

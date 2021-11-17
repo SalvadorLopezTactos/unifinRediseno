@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'ID broj korisnika koji je promenio',
     'LBL_EXPORT_CREATED_BY' => 'ID broj korisnika koji je kreirao',
     'LBL_EXPORT_TYPE_NAME' => 'Naziv tipa',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za ugovore',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa o ugovorima',
 );

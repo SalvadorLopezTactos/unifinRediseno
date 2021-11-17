@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Στόχων Προσφορών',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Στόχων Προσφορών',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης προσφορών',
 
     'LBL_CONTRACTS'=>'Συμβάσεις',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Συμβάσεις',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Διεύθυνση Τιμολόγησης, Χώρα:',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Διεύθυνση Τιμολόγησης, Τ.Κ:',
     'LBL_BILLING_ADDRESS_STATE' => 'Διεύθυνση Τιμολόγησης, Περιοχή:',
-    'LBL_BILLING_ADDRESS_STREET' => 'Διεύθυνση Τιμολόγησης',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Διεύθυνση Τιμολόγησης:',
     'LBL_BILLING_CONTACT_ID' => 'Ταυτότητα Επαφής Τιμολόγησης:',
     'LBL_BILLING_CONTACT_NAME' => 'Όνομα Επαφής Τιμολόγησης:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Διεύθυνση Παράδοσης, Χώρα:',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Διεύθυνση Παράδοσης, Τ.Κ:',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Διεύθυνση Παράδοσης, Περιοχή:',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Διεύθυνση Παράδοσης:',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Διεύθυνση Παράδοσης:',
     'LBL_SHIPPING_BODY' => 'Χρέωση και Αποστολή',
     'LBL_SHIPPING_CONTACT_ID' => 'Ταυτότητα Επαφής Παράδοσης:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Αντιγραφή της διεύθυνσης τιμολόγησης στη διεύθυνση παράδοσης',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Αντιγραφή της διεύθυνσης παράδοσης στη διεύθυνση τιμολόγησης',
     'NTC_COPY_BILLING_ADDRESS2' => 'Αντιγραφή στην παράδοση',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Αντιγραφή στην τιμολόγηση',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Είστε βέβαιοι ότι θέλετε να αφαιρέσετε αυτό το σχόλιο από την προσφορά;',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Αντιγραφή στην τιμολόγηση',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Είστε βέβαιοι ότι θέλετε να αφαιρέσετε αυτό το σχόλιο από την προσφορά;',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Είστε βέβαιοι ότι θέλετε να αφαιρέσετε αυτό το στοιχείο γραμμής από την προσφορά;',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Είστε βέβαιοι ότι θέλετε να αφαιρέσετε αυτό το γκρουπ από την προσφορά;',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Είστε βέβαιοι ότι θέλετε να αφαιρέσετε την επαφή από την προσφορά;',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Ποσότητα',
     'LBL_MFT_PART_NUM' => 'Αριθμός Παραγωγής',
     'LBL_ITEM_NAME' => 'Γραμμή Στοιχείων',
+    'LBL_PRODUCT_TEMPLATE' => 'Προϊόν',
     'LBL_DISCOUNT_PRICE' => 'Τιμή Μονάδας',
     'LBL_DISCOUNT_AMOUNT' => 'Έκπτωση',
     'LBL_LINE_ITEM_TOTAL' => 'Σύνολο Γραμμής Στοιχείων',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'Ταυτότητα Ευκαιρίας',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Ρύθμιση προσφορών',
+
+    'LBL_RENEWAL' => 'Ανανέωση',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Αλληλεπιδράσεις Προσφοράς',
 );

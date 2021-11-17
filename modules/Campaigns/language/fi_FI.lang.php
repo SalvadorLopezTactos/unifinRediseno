@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Ei löydetty kohdelistaa jonka tyyppinä olisi default',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Merkintöjä ei löytynyt',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Merkinnät käsiteltiin',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Saapuvan sähköpostin asetukset',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Järjestelmän sähköpostiasetukset',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Seuraajan nimi:',
   'LBL_EDIT_TRACKER_URL'=>'Seuraajan URL:',

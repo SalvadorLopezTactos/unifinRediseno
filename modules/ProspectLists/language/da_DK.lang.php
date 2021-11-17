@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Mållisterliste-dashboard',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'Betjeningspanel til måloptegnelse',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Mållister',
+  'LBL_RELATED_ACCOUNTS' => 'Tilknyttede konti',
+  'LBL_RELATED_CONTACTS' => 'Tilknyttede kontakter',
+  'LBL_RELATED_LEADS_TARGETS' => 'Tilknyttede kundeemner og mål',
 
   'LBL_MODULE_NAME' => 'Målgruppelister',
   'LBL_MODULE_NAME_SINGULAR' => 'Målgruppeliste',

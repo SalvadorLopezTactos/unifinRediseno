@@ -89,6 +89,8 @@ $viewdefs['Cases']['base']['view']['recorddashlet'] = [
                 ],
                 'tag',
                 'business_center_name',
+                'request_close',
+                'request_close_date',
             ],
         ],
         [

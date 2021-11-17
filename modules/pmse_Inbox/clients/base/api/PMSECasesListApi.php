@@ -494,7 +494,7 @@ class PMSECasesListApi extends FilterApi
         $q->groupByRaw('pro_id, cas_status, prj_id');
 
         if ($filter !== 'all') {
-            $q->where()->addRaw("pmse_project.id = '" . $filter . "'");
+            $q->where()->equals('pdef.prj_id', $filter);
         }
 
         $data_bean = $q->execute();

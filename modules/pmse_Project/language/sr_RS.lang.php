@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Definicija procesa',
   'LBL_MODULE_NAME_SINGULAR' => 'Definicija procesa',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za definiciju procesa',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Kontrolna tabla za zapise o definicijama procesa',
   'LNK_LIST' => 'Prikaži definicije procesa',
   'LNK_NEW_PMSE_PROJECT' => 'Kreirati Procesne Definicije',
   'LNK_IMPORT_PMSE_PROJECT' => 'Uvesti Procesne Definicije',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Promeni dodeljeno korisniku',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Tim',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Odaberi novog procesnog korisnika',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'E-pošta',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'Pošalji proces korisniku kada proces bude dodeljen',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'Korisnička definicija',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Metod dodeljivanja',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Dodeliti korisniku',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Ažuriraj „dodeljeno“ na evidenciji',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Postavi „Dodeljeno” prema dostupnosti',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Dodati srodni zapis',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Povezani modul',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Naziv aktivnosti je prazan.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Naziv "%s" već postoji u obliku porodice.',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Dostupnost smene je obavezna',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Ako nema dostupnih korisnika',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'pre',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Samo novi zapisi',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Samo ažurirani zapisi (prva nadogradnja - pogledajte tekst pomoći)',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Samo ažurirani zapisi (sve nadogradnje - pogledajte tekst pomoći)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Novi zapisi ili prvo ažuriranje',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Novi zapisi i sva ažuriranja',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Odaberite kada će proces započeti.<br><br>Nov: Pokreni proces kada se kreira nov zapis.<br><br>Prvo ažuriranje: Proces se pokreće samo kada se ispuni kriterijum po prvi put za postojeći zapis.<br><br>Sva ažuriranja: Proces se pokreće svaki put kada se ispuni kriterijum za postojeći zapis.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Odaberite kada će proces započeti.<br><br>Novo: Pokreni proces kada se kreira nov zapis.<br><br>Prvo ažuriranje: Proces se pokreće samo kada se ispuni kriterijum po prvi put za postojeći zapis.<br><br>Sva ažuriranja: Proces se pokreće svaki put kada se ispuni kriterijum za postojeći zapis..<br><br>Novi zapisi ili prvo ažuriranje: proces se pokreće samo prvi put kada se zadovolje kriterijumi za zapis pri kreiranju ili ažuriranju zapisa.<br><br>Novi zapisi i sva ažuriranja: proces se pokreće svaki put za sve nove i postojeće zapise.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Odabrati SugarCRM modul koji će biti primenjen prilikom pokretanja događaja',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Fiksiran datum',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'izmene sa',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'izmene na',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'uključuje bilo koji',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'ne uključuje nijedan',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'u ili kasnije',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'u ili ranije',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'različito je',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Dodaj',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Zatvori',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'Svi timovi dodeljeni zapisu',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Timovi',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% povezano sa modulom %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Korisnik koji je kreirao modul %MODULE%',

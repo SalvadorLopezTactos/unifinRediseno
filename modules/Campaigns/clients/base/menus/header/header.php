@@ -40,25 +40,18 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'icon' => 'fa-bars',
     ),
     array(
-        'route'=>'#bwc/index.php?module=EmailTemplates&action=EditView&return_module=EmailTemplates&return_action=DetailView',
+        'route'=>'#EmailTemplates/create',
         'label' =>'LNK_NEW_EMAIL_TEMPLATE',
         'acl_action'=>'create',
         'acl_module'=>'EmailTemplates',
         'icon' => 'fa-plus',
     ),
     array(
-        'route'=>'#bwc/index.php?module=EmailTemplates&action=index',
+        'route'=>'#EmailTemplates',
         'label' =>'LNK_EMAIL_TEMPLATE_LIST',
         'acl_action'=>'list',
         'acl_module'=>'EmailTemplates',
         'icon' => 'fa-bars',
-    ),
-    array(
-        'route'=>'#bwc/index.php?module=Campaigns&action=WizardEmailSetup&return_module=Campaigns&return_action=index',
-        'label' =>'LBL_EMAIL_SETUP_WIZARD',
-        'acl_action'=>'admin',
-        'acl_module'=>$module_name,
-        'icon' => 'fa-cog',
     ),
     array(
         'route'=>'#bwc/index.php?module=Campaigns&action=CampaignDiagnostic&return_module=Campaigns&return_action=index',

@@ -161,7 +161,7 @@ class MysqliManager extends MysqlManager
             $this->logger->alert('mysqli has gone away, retrying');
             $this->retryCount++;
             $this->disconnect();
-            $this->connect();
+            $this->connect($this->connectOptions);
             return $this->query($sql, $dieOnError, $msg, $suppress, $keepResult);
         } else {
             $this->retryCount = 0;
@@ -304,7 +304,7 @@ class MysqliManager extends MysqlManager
                 return false;
             }
         }
-        
+
         if (!empty($this->connectOptions['db_name'])) {
             try {
                 $this->selectDb($this->connectOptions['db_name']);
@@ -329,7 +329,7 @@ class MysqliManager extends MysqlManager
      */
     protected function initDatabase()
     {
-        if (empty($this->database)) {            
+        if (empty($this->database)) {
             $this->database = mysqli_init();
         }
     }
@@ -346,7 +346,7 @@ class MysqliManager extends MysqlManager
      */
     protected function setupConnectOptions(array $configOptions = null)
     {
-        if (is_null($configOptions)) {            
+        if (is_null($configOptions)) {
             $this->connectOptions = SugarConfig::getInstance()->get('dbconfig');
         } else {
             $this->connectOptions = $configOptions;
@@ -391,7 +391,7 @@ class MysqliManager extends MysqlManager
      *
      * @param array   $configOptions
      */
-    protected function setupSSL() 
+    protected function setupSSL()
     {
         $sslOptions = $this->getOption('ssl_options');
 
@@ -629,6 +629,8 @@ class MysqliManager extends MysqlManager
     }
 
     /**
+     * @deprecated The core does not use this anymore. NOTE: this won't work starting from MySQL 8.0
+     *
      * Generates the a recursive SQL query or equivalent stored procedure implementation.
      * The DBManager's default implementation is based on SQL-99's recursive common table expressions.
      * Databases supporting recursive CTEs only need to set the recursive_query capability to true

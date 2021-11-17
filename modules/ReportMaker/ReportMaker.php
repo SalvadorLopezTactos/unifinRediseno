@@ -100,32 +100,33 @@ class ReportMaker extends SugarBean {
 		$this->get_scheduled_query();
 	}
 
-	function get_scheduled_query(){
+    public function get_scheduled_query()
+    {
+        $query = <<<EOT
+        SELECT
+             $this->schedules_table.id schedule_id,
+             $this->schedules_table.active active,
+             $this->schedules_table.next_run next_run
+        FROM
+             $this->schedules_table
+        WHERE 
+             $this->schedules_table.report_id = ? AND
+             $this->schedules_table.deleted = 0
+EOT;
+        $result = $this->db->getConnection()->executeQuery($query, [$this->id]);
 
-		$query = "	SELECT
-					$this->schedules_table.id schedule_id,
-                    $this->schedules_table.active active,
-                    $this->schedules_table.next_run next_run
-                    from ".$this->schedules_table."
-                    WHERE ".$this->schedules_table.".report_id = " . $this->db->quoted($this->id) . "
-					and ".$this->schedules_table.".deleted=0
-					";
-		$result = $this->db->query($query,true," Error filling in additional schedule query: ");
-
-		// Get the id and the name.
-		$row = $this->db->fetchByAssoc($result);
-
-		if($row != null){
-			$this->schedule_id = $row['schedule_id'];
-			$this->active = $row['active'];
-			$this->next_run = $row['next_run'];
-		} else {
-			$this->schedule_id = "";
-			$this->active = "";
-			$this->next_run = "";
-		}
-	//end get_scheduled_query
-	}
+        // Get the id and the name.
+        $row = $result->fetch();
+        if (false !== $row) {
+            $this->schedule_id = $row['schedule_id'];
+            $this->active = $row['active'];
+            $this->next_run = $row['next_run'];
+        } else {
+            $this->schedule_id = '';
+            $this->active = '';
+            $this->next_run = '';
+        }
+    }
 
 
 	function get_list_view_data(){

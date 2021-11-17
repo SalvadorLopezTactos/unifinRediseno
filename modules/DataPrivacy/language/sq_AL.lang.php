@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Fushat e shënuara për fshirje',
     'LBL_NO_RECORDS_MARKED' => 'Nuk ka fusha ose të dhëna të shënuara për fshirje.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Paneli i regjistrit të privatësisë së të dhënave',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te privatësia e të dhënave',
 
     // list view
     'LBL_HELP_RECORDS' => 'Moduli i të privatësisë së të dhënave monitoron aktivitetet e privatësisë, duke përfshirë miratimet dhe kërkesat e subjektit, për të ndihmuar procedurat e privatësisë së organizatës tënde. Krijo regjistrin e privatësisë së të dhënave në lidhje me regjistrin e një individi (p.sh. një kontakt) për të monitoruar miratimin ose për të ndërmarrë veprime në lidhje me kërkesën për privatësi.',

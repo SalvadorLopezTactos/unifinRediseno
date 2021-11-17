@@ -20,7 +20,7 @@ id='{{if empty($displayParams.idName)}}{{sugarvar key='name'}}{{else}}{{$display
 size='{{$displayParams.size|default:30}}'
 {{if isset($displayParams.maxlength)}}maxlength='{{$displayParams.maxlength}}'{{elseif isset($vardef.len)}}maxlength='{{$vardef.len}}'{{/if}}
 value='{sugar_number_format var=$value {{if isset($vardef.precision)}}precision={{$vardef.precision}}{{/if}} }'
-title='{{$vardef.help}}'
+title='{{$vardef.help|escape:"hexentity"}}'
 tabindex='{{$tabindex}}'
 {{if !empty($displayParams.accesskey)}} accesskey='{{$displayParams.accesskey}}' {{/if}} 
 {{$displayParams.field}}>

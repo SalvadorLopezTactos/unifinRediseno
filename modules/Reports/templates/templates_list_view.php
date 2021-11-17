@@ -1141,7 +1141,6 @@ function template_summary_combo_view(&$reporter,&$args) {
         $groupByIndexInHeaderRow[getGroupByKey($group_def_array[$i])] = $groupByColumnLabel;
 	} // for
 	$reporter->group_defs_Info = $groupByIndexInHeaderRow;
-	//_ppd($reporter->report_def);
 	$summary_column_label_to_name = getSummaryColumnLableToNameArray($summary_columns_array);
 	$countKeyIndex = -1;
 	if (($countKeyIndex = array_search("count", array_values($summary_column_label_to_name))) === false) {

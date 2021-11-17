@@ -15,6 +15,13 @@
 $viewdefs['Cases']['portal']['view']['record'] = array(
     'buttons' => array(
         array(
+            'type' => 'button',
+            'name' => 'request_close_button',
+            'label' => 'LBL_REQUEST_CLOSE_LABEL',
+            'css_class' => 'btn btn-primary hidden',
+            'tooltip' => 'LBL_REQUEST_CLOSE_TOOLTIP',
+        ),
+        array(
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
         ),
@@ -75,6 +82,40 @@ $viewdefs['Cases']['portal']['view']['record'] = array(
                         array(
                             'name' => 'date_modified',
                         ),
+                    ),
+                ),
+                array(
+                    'name' => 'request_close',
+                    'readonly' => true,
+                    'label' => 'LBL_REQUEST_CLOSE',
+                ),
+                array(
+                    'name' => 'request_close_date',
+                    'readonly' => true,
+                    'label' => 'LBL_REQUEST_CLOSE_DATE',
+                ),
+            ),
+        ),
+    ),
+    'dependencies' => array(
+        array(
+            'hooks' => array('all'),
+            'trigger' => 'true',
+            'triggerFields' => array('request_close', 'request_close_date'),
+            'onload' => true,
+            'actions' => array(
+                array(
+                    'action' => 'SetVisibility',
+                    'params' => array(
+                        'target' => 'request_close',
+                        'value' => 'equal($request_close, "1")',
+                    ),
+                ),
+                array(
+                    'action' => 'SetVisibility',
+                    'params' => array(
+                        'target' => 'request_close_date',
+                        'value' => 'equal($request_close, "1")',
                     ),
                 ),
             ),

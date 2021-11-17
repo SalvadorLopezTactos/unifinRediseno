@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Modificētāja ID',
     'LBL_EXPORT_CREATED_BY' => 'Izveidotāja ID',
     'LBL_EXPORT_TYPE_NAME' => 'Veida nosaukums',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Līgumu fokusa panelis',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Līgumu ierakstu instrumentu panelis',
 );

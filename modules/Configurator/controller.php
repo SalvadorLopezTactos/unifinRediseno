@@ -51,7 +51,6 @@ class ConfiguratorController extends SugarController
 
         'activity_streams_enabled',
 
-        'marketing_extras_enabled',
         'commentlog_maxchars',
         'allowed_link_schemes',
 

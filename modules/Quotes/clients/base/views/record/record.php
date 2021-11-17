@@ -194,6 +194,8 @@ $viewdefs['Quotes']['base']['view']['record'] = array(
                                         'renewable',
                                         'service_duration_value',
                                         'service_duration_unit',
+                                        'catalog_service_duration_value',
+                                        'catalog_service_duration_unit',
                                     ),
                                     'max_num' => -1,
                                 ),

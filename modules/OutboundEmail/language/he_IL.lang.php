@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'חשבונות דוא"ל יוצאים',
     'LBL_MODULE_NAME_SINGULAR' => 'חשבון דוא"ל יוצא',
+    'LBL_STATUS' => 'סטטוס',
     'LBL_MAIL_SENDTYPE' => 'ספק העברת דואר',
     'LBL_MAIL_SMTPSERVER' => 'שרת',
     'LBL_MAIL_SMTPPORT' => 'יציאה',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'זהו חשבון המערכת.',
     'LBL_EMAIL_ADDRESS_ID' => 'מזהה כתובת דוא"ל',
     'LBL_TYPE' => 'סוג',
+    'LBL_AUTHORIZED_ACCOUNT' => 'כתובת דואר אלקטרוני מורשית',
+    'LBL_FROM_EMAIL_ADDRESS' => 'מכתובת דוא"ל',
     'LBL_REPLY_TO_NAME' => 'שם "השב-אל"',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'כתובות דוא"ל "השב-אל"',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'מזהה כתובת דוא"ל "השב-אל"',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'כתובת דוא"ל "השב-אל"',
     'LBL_PRIMARY_TEAM' => 'צוות ראשי',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס הגדרות דוא"ל',
 );

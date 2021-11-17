@@ -229,6 +229,15 @@
     },
 
     /**
+     * Gets key for storing filter being editted.
+     *
+     * @return {string}
+     */
+    getFilterEditStateKey: function() {
+        return app.user.lastState.key('edit-' + this.layout.currentModule + '-' + this.layoutType, this);
+    },
+
+    /**
      * Retrieves the current edit state from cache.
      *
      * @return {Object} The filter attributes if found.
@@ -236,7 +245,7 @@
     retrieveFilterEditState: function() {
         var filterOptions = this.context.get('filterOptions') || {};
         if (filterOptions.stickiness !== false) {
-            var key = app.user.lastState.key('edit-' + this.layout.currentModule + '-' + this.layoutType, this);
+            var key = this.getFilterEditStateKey();
             return app.user.lastState.get(key);
         }
     },
@@ -249,7 +258,7 @@
     saveFilterEditState: function(filter) {
         var filterOptions = this.context.get('filterOptions') || {};
         if (filterOptions.stickiness !== false) {
-            var key = app.user.lastState.key('edit-' + this.layout.currentModule + '-' + this.layoutType, this);
+            var key = this.getFilterEditStateKey();
             app.user.lastState.set(key, filter);
         }
     },
@@ -260,7 +269,7 @@
     clearFilterEditState: function() {
         var filterOptions = this.context.get('filterOptions') || {};
         if (filterOptions.stickiness !== false) {
-            var key = app.user.lastState.key('edit-' + this.layout.currentModule + '-' + this.layoutType, this);
+            var key = this.getFilterEditStateKey();
             app.user.lastState.remove(key);
         }
     },

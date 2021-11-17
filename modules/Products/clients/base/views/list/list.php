@@ -71,17 +71,31 @@ $viewdefs['Products']['base']['view']['list'] = array(
                     'base_rate_field' => 'base_rate',
                 ),
                 array(
-                    'name' => 'discount_amount',
-                    'type' => 'discount',
-                    'related_fields' => array(
-                        'discount_select',
-                        'currency_id',
-                        'base_rate',
+                    'name' => 'discount_field',
+                    'type' => 'fieldset',
+                    'css_class' => 'discount-field',
+                    'label' => 'LBL_DISCOUNT_AMOUNT',
+                    'show_child_labels' => false,
+                    'sortable' => false,
+                    'fields' => array(
+                        array(
+                            'name' => 'discount_amount',
+                            'label' => 'LBL_DISCOUNT_AMOUNT',
+                            'type' => 'discount-amount',
+                            'discountFieldName' => 'discount_select',
+                            'related_fields' => array(
+                                'currency_id',
+                            ),
+                            'convertToBase' => true,
+                            'base_rate_field' => 'base_rate',
+                            'showTransactionalAmount' => true,
+                        ),
+                        array(
+                            'type' => 'discount-select',
+                            'name' => 'discount_select',
+                            'options' => array(),
+                        ),
                     ),
-                    'convertToBase' => true,
-                    'showTransactionalAmount' => true,
-                    'currency_field' => 'currency_id',
-                    'base_rate_field' => 'base_rate',
                 ),
                 array(
                     'name' => 'assigned_user_name',
@@ -89,6 +103,11 @@ $viewdefs['Products']['base']['view']['list'] = array(
                 array(
                     'name' => 'service',
                 ),
+                [
+                    'name' => 'add_on_to_name',
+                    'type' => 'add_on_to',
+                    'default' => false,
+                ],
             ),
         ),
     )

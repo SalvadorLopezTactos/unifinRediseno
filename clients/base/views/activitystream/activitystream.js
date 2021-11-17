@@ -137,10 +137,6 @@
         this.processEmbed();
         this.toggleSubmitButton = _.debounce(this.toggleSubmitButton, 200);
 
-        // Resize video when the browser window is resized
-        this.resizeVideo = _.bind(_.throttle(this.resizeVideo, 500), this);
-        $(window).on('resize.' + this.cid, this.resizeVideo);
-
         // specify the record that the tags are associated with
         this.setTaggableRecord(this.model.get('parent_type'), this.model.get('parent_id'));
     },
@@ -335,8 +331,6 @@
 
         app.view.View.prototype._renderHtml.call(this);
 
-        this.resizeVideo();
-
         // If the reply bar was previously open, keep it open (render hides it by default)
         if (isReplyBarOpen) {
             this.toggleReplyBar();
@@ -443,42 +437,6 @@
         }
 
         return formattedPost;
-    },
-
-    /**
-     * Resize the iframe that embeds video
-     */
-    resizeVideo: function() {
-        // if this is disposed, then just bail as the code below with throw errors
-        if (this.disposed === true) {
-            return;
-        }
-        var data = this.model.get('data'),
-            $embed = this.$('.embed'),
-            $iframes = $embed.find('iframe'),
-            videoCount = 0,
-            embedWidth;
-
-        if (_.isArray(data.embeds)) {
-            embedWidth = $embed.width();
-            _.each(data.embeds, function(embed) {
-                var $iframe, iframeWidth, iframeHeight;
-
-                if (((embed.type === 'video') || (embed.type === 'rich')) && ($iframes.length > 0)) {
-                    $iframe = $iframes.eq(videoCount);
-
-                    iframeWidth = Math.min(embedWidth, 480);
-                    iframeHeight = parseInt(embed.height, 10) * (iframeWidth / parseInt(embed.width, 10));
-
-                    $iframe.prop({
-                        width: iframeWidth,
-                        height: iframeHeight
-                    });
-
-                    videoCount++;
-                }
-            });
-        }
     },
 
     /**

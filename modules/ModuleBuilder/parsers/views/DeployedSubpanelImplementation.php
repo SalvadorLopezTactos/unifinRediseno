@@ -77,15 +77,16 @@ class DeployedSubpanelImplementation extends AbstractMetaDataImplementation impl
                     $this->_viewdefs = $layout_defs;
                 } else
                 {
-                    $this->_viewdefs = $this->_aSubPanelObject->get_list_fields () ;
+                    $this->_viewdefs = $this->_aSubPanelObject ? $this->_aSubPanelObject->get_list_fields() : [];
                 }
 
                 // don't attempt to access the template_instance property if our subpanel represents a collection, as it won't be there - the sub-sub-panels get this value instead
-                if ( ! $this->_aSubPanelObject->isCollection() )
-                    $this->_language = $this->_aSubPanelObject->template_instance->module_dir ;
+            if ($this->_aSubPanelObject && !$this->_aSubPanelObject->isCollection()) {
+                $this->_language = $this->_aSubPanelObject->template_instance->module_dir;
+            }
 
                 // Retrieve a copy of the bean for the parent module of this subpanel - so we can find additional fields for the layout
-                $subPanelParentModuleName = $this->_aSubPanelObject->get_module_name () ;
+                $subPanelParentModuleName = $this->_aSubPanelObject ? $this->_aSubPanelObject->get_module_name() : '';
                 $beanListLower = array_change_key_case ( $GLOBALS [ 'beanList' ] ) ;
                 if (! empty ( $subPanelParentModuleName ) && isset ( $beanListLower [ strtolower ( $subPanelParentModuleName ) ] ))
                 {

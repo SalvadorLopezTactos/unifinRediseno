@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'Het ingevoerde wachtwoord voldoet niet aan de eisen voor een wachtwoord. Probeer het nogmaals.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Gebruikersgegevens niet gevonden',
     'ERR_USER_NAME_EXISTS'              => 'De gebruikersnaam {0} bestaat al. Dubbele gebruikersnamen zijn niet toegestaan. Wijzig de gebruikersnaam zodat deze uniek is.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => '“Sugar Hint” licentie moet worden opgeslagen met aanvullend compatibel type licentie',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Deze gebruiker is heeft geen toegang tot Sugar en kan niet inloggen met zijn/ haar huidige wachtwoord.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Gebruiker met alleen externe auth mag niet aanmelden met inloggegevens van Sugar',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'E-mailadres van de ontvanger',
 	'ERR_SERVER_STATUS'					=> 'Uw Server status',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Het systeem kan geen e-mail versturen naar de gebruiker. Controleer de uitgaande e-mail instellingen in <a href="index.php?module=EmailMan&action=config">e-mailinstellingen</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Nieuwe gebruikers moeten worden aangemaakt in de <a href="{0}" target="_blank">SugarCloud instellingen</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-mailadres:',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Forecasts',
     'LBL_WORKSHEETS'                    => 'Werkbladen',
 	'LBL_CALENDARS'                     => 'Agenda&#39;s',
+    'LBL_SHIFTS'                        => 'Ploegen',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Uitzonderingen ploeg',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Ontvang een e-mail als er een item aan je toegewezen is.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'E-mail bij toewijzing',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Ontvang een e-mailmelding als iemand u vermeldt in een opmerking van een logboek.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'E-mailen bij vermelding',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Selecteer hoe veldnamen moeten worden weergegeven in recordweergaves. Kies "Naast veldwaarde" voor een compacter recordoverzicht.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Plaatsing veldnaam',
     'LBL_ABOVE_FIELD_VALUE'             => 'Boven veldwaarde',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Type licentie',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Geef een herinnering bij een naderende afspraak en telefoongesprek. Pop-up notificaties verschijnen voor Sugar-gebruikers. E-mail herinneringen worden verstuurd naar alle genodigden.',
 	'LBL_REMINDER'						=> 'Herinnering vooraf?',
 	'LBL_REMINDER_POPUP' => 'Pop-up',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Deze sessie is afgelopen, omdat een andere sessie is gestart onder dezelfde gebruikersnaam.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Record Reassignment',
-	'LBL_REASS_DESC_PART1'				=> 'Find all records in the selected modules that are assigned to a user, and reassign them to another user.',
+    'LBL_REASS_DESC_PART1'              => 'Find all records in the selected modules that are assigned to a user, and reassign them to another user.',
         'LBL_REASS_DESC_PART2'=>                    'Selecteer de modules waarvan u wil dat de workflow, toewijzingsnotificaties en audit tracking worden geactiveerd bij het opnieuw toewijzen van records. Klik op Volgende om het opnieuw toewijzen te starten of klik op Herstart om opnieuw te beginnen.',
 	'LBL_REASS_STEP2_TITLE'				=> 'Team Hertoewijzing',
 	'LBL_REASS_STEP2_DESC'				=> 'De hieronder vermelde teams waren beschikbaar in de &#39;van gebruikers team&#39;, maar niet in de &#39;aan gebruikers team&#39;. Alle records in het &#39;van gebruikers team&#39; zijn niet zichtbaar bij de &#39;aan gebruikers team&#39; tenzij de teamwaarden worden gemapped.',
@@ -624,7 +628,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Gebruikersprofiel',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Open de <a href="%s" target="_blank">SugarCloud instellingen</a>om veranderingen door te voeren van alleen-lezen velden.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Neem contact op met uw Sugar-beheerder als u veranderingen wilt doorvoeren in alleen-lezen velden.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

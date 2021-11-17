@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Řídicí panel seznamu příležitostí',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Řídicí panel záznamů příležitostí',
     'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Podrobnosti o příležitosti',
+    'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na příležitosti',
+    'LBL_RENEWAL_OPPORTUNITY' => 'Příležitost obnovení',
 
     'LBL_MODULE_NAME' => 'Obchody',
     'LBL_MODULE_NAME_SINGULAR' => 'Příležitost',
@@ -77,7 +79,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Typ:',
     'LBL_CAMPAIGN' => 'Kampaň:',
     'LBL_NEXT_STEP' => 'Další krok:',
-    'LBL_SERVICE_START_DATE' => 'Service Start Date',
+    'LBL_SERVICE_START_DATE' => 'Datum zahájení služby',
     'LBL_LEAD_SOURCE' => 'Zdrojový zájemce',
     'LBL_SALES_STAGE' => 'Fáze prodeje:',
     'LBL_SALES_STATUS' => 'Stav',
@@ -144,6 +146,7 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE' => 'Fáze schválení',
     'LBL_COMMIT_STAGE_FORECAST' => 'Předpověď',
     'LBL_WORKSHEET' => 'List',
+    'LBL_PURCHASED_LINE_ITEMS' => 'Zakoupené řádkové položky',
 
     'LBL_RENEWAL' => 'Obnovení',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Příležitosti obnovení',
@@ -151,9 +154,9 @@ $mod_strings = array(
     'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'ID nadřazeného obnovení',
     'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
 
-    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
-    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
-    'LBL_WIDGET_AMOUNT' => 'Amount',
+    'LBL_WIDGET_SALES_STAGE' => 'Fáze prodeje',
+    'LBL_WIDGET_DATE_CLOSED' => 'Předpokládané datum uzavření',
+    'LBL_WIDGET_AMOUNT' => 'Částka',
 
     'TPL_RLI_CREATE' => 'Příležitost musí mít asociovaný řádek tržby. <a href="javascript:void(0);" id="createRLI">Vytvořit řádek tržby</a>.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Vytvořit položku',
@@ -162,12 +165,16 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# celkových řádků',
     'LBL_CLOSED_RLIS' => '# uzavřených řádků',
+    'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => '# řádkových položek výnosů z doby trvání Open Service Flex',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Nemůžete smazat příležitosti, které obsahují uzavřené řádky',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Jeden nebo více vybraných záznamů obsahuje uzavřené řádky a nemůže být smazán.',
     'LBL_INCLUDED_RLIS' => '# zahrnutých položek Příjmy',
-    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Aktualizace otevření',
+    'LBL_SERVICE_START_DATE_INVALID' => 'Datum zahájení služby nelze nastavit za datum ukončení služby u žádných otevřených doplňkových řádkových položek výnosů.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Nabídky',
+    'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Příležitosti podle dynamického účtu',
+
 
     // Config
     'LBL_OPPS_CONFIG_VIEW_BY_LABEL' => 'Hierarchie obchodní příležitosti',
@@ -205,19 +212,19 @@ $mod_strings = array(
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje a řádkové položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd.
 
-- Upravte pole tohoto záznamu klepnutím na jednotlivé pole nebo na tlačítko Upravit. 
+- Upravte pole tohoto záznamu klepnutím na jednotlivé pole nebo na tlačítko Upravit.
 - Zobrazte nebo upravte odkazy na jiné záznamy v podpanelech přepnutím spodního levého podokna na „Zobrazení dat“.
 - Vytvořte a zobrazte uživatelské komentáře a historii změn v modulu {{activitystream_singular_module}} přepnutím spodního levého podokna na „Tok aktivit“.
-- Sledujte záznam nebo si ho přidejte do oblíbených pomocí tlačítek vpravo od názvu záznamu. 
+- Sledujte záznam nebo si ho přidejte do oblíbených pomocí tlačítek vpravo od názvu záznamu.
 - Další akce jsou k dispozici v rozevírací nabídce Akce vpravo od tlačítka Upravit.',
 
     // Create View Help Text
     'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} vám umožňuje sledovat jednotlivé prodeje a řádkové položky patřící k těmto prodejům od začátku do konce. Každý záznam {{module_name}} představuje potenciální prodej a obsahuje příslušné prodejní údaje, a také se vztahuje k dalším důležitým záznamům, jako je {{quotes_module}}, {{contacts_module}} atd.
 
-Chcete-li vytvořit modul {{module_name}}: 
-1. Vyplňte hodnoty polí dle potřeby. 
- - Pole označená jako „Povinné“ musí být vyplněna před uložením. 
- - V případě potřeby klikněte na položku „Zobrazit více“ pro zobrazení dalších polí. 
+Vytvoření modulu {{module_name}}:
+1. Vyplňte hodnoty polí dle potřeby.
+ - Pole označená jako „Povinné“ musí být vyplněna před uložením.
+ - V případě potřeby klikněte na položku „Zobrazit více“ pro zobrazení dalších polí.
 2. Kliknutím na tlačítko „Uložit“ dokončete nový záznam a vraťte se na předchozí stránku.',
 
 // END ENT/ULT
@@ -231,5 +238,10 @@ Chcete-li vytvořit modul {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Moje příležitosti',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Příležitosti mého týmu",
 
-    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => '{{fieldName}} nelze změnit, protože tento {{moduleSingular}} nemá žádné otevřené řádkové položky.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakce s příležitostí',
+
+    // AI Predict
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Predikce uzavření příležitosti',
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Zobrazit podrobnosti predikce pro konkrétní příležitost',
 );

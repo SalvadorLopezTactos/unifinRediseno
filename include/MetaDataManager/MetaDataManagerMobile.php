@@ -12,7 +12,7 @@
 
 class MetaDataManagerMobile extends MetaDataManager
 {
-    protected $blackListModuleDataKeys = array(
+    protected $denyListModuleDataKeys = array(
         'menu'
     );
 
@@ -25,6 +25,7 @@ class MetaDataManagerMobile extends MetaDataManager
         'quote-data-group-list',
         'quote-data-grand-totals-footer',
         'quote-data-group-footer',
+        'dashlet-inbox',
     );
 
     protected $allowedModuleLayouts = array(
@@ -101,6 +102,7 @@ class MetaDataManagerMobile extends MetaDataManager
             // CurrentUserApi
             'Users',
             'CommentLog',
+            'ContractTypes',
         );
     }
 
@@ -202,7 +204,7 @@ class MetaDataManagerMobile extends MetaDataManager
     }
 
     /**
-     * Retrieve white listed properties which shall be copied from server side
+     * Retrieve allowed properties which shall be copied from server side
      * configurations to client side configurations.
      *
      * @return array Configuration properties.
@@ -227,12 +229,12 @@ class MetaDataManagerMobile extends MetaDataManager
     {
         if (!empty($data['modules'])) {
             foreach($data['modules'] as $module=> $mData) {
-                //blacklist certain data types alltogether
-                foreach($this->blackListModuleDataKeys as $key) {
+                // Deny certain data types altogether
+                foreach ($this->denyListModuleDataKeys as $key) {
                     unset($data['modules'][$module][$key]);
                 }
 
-                //views and layouts should be white-list filtered
+                // Filter out views and layouts that are not allowed
                 if (!empty($mData['views'])) {
                     foreach($mData['views'] as $key => $def) {
                         if (!in_array($key, $this->allowedModuleViews)) {

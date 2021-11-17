@@ -37,6 +37,11 @@ class PMSEBeanHandler
     protected $expressionEvaluator;
 
     /**
+     * @var array
+     */
+    private $flowData = [];
+
+    /**
      * @codeCoverageIgnore
      */
     public function __construct()
@@ -183,7 +188,7 @@ class PMSEBeanHandler
      */
     public function mergeBeanInTemplate($bean, $template, $evaluate = false)
     {
-        //Parse template and return a string mergin bean fields and the template
+        //Parse template and return a string merging bean fields and the template
         $component_array = $this->parseString($template, $bean->module_dir);
         $parsed_template = $this->mergingTemplate($bean, $template, $component_array, $evaluate);
         return trim($parsed_template);
@@ -276,7 +281,9 @@ class PMSEBeanHandler
                     }
                 }
 
-                if ($data['value_type'] === 'href_link') {
+                if ($data['rel_module'] === pmse_Emails_Templates_sugar::CURRENT_ACTIVITY_LINK) {
+                    $replace[$data['original']] = $this->getCurrentActivityLink($bean);
+                } elseif ($data['value_type'] === 'href_link') {
                     $replace[$data['original']] = bpminbox_get_href($newBean, $fieldName, $value);
                 } else {
                     $replace[$data['original']] = $evaluate ?
@@ -468,6 +475,14 @@ class PMSEBeanHandler
                     case 'datetimecombo':
                         $dataEval[] = $timedate->asIso(new DateTime($field_value, new DateTimeZone('UTC')));
                         break;
+                    case 'date':
+                        // Unique case where we compare a Date to a Datetime field. In this case, we want the Datetime
+                        // to be truncated to only include the date part.
+                        if ($bean->getFieldDefinitions()[$fields]['type'] === 'datetime') {
+                            $field_value = explode(' ', $field_value)[0];
+                        }
+                        $dataEval[] = $field_value;
+                        break;
                     default:
                         $dataEval[] = $field_value;
                 }
@@ -500,6 +515,22 @@ class PMSEBeanHandler
             $response->value = $timedate->asIso(new DateTime());
         }
         return $response->value;
+    }
+
+    /**
+     * @param array $flowData data for currently running bpm Flow
+     */
+    public function setFlowData(array $flowData)
+    {
+        $this->flowData = $flowData;
+    }
+
+    /**
+     * @return array $flowData
+     */
+    public function getFlowData()
+    {
+        return $this->flowData;
     }
 
     /**
@@ -792,5 +823,46 @@ class PMSEBeanHandler
         global $sugar_config;
         $link = "{$sugar_config['site_url']}/index.php?module={$bean->module_dir}&action=DetailView&record={$bean->id}";
         return "<a href=\"$link\">Click Here</a>";
+    }
+
+    /**
+     * Get url for current running activity based on $this->flowData.
+     *
+     * @param SugarBean $bean
+     * @return string
+     * @throws SugarQueryException
+     */
+    private function getCurrentActivityLink(SugarBean $bean)
+    {
+        $flowData = $this->getFlowData();
+        if (empty($flowData) || $flowData['cas_flow_status'] !== 'FORM') {
+            return '';
+        }
+        global $sugar_config;
+
+        $targetModule = $this->flowData['cas_sugar_module'];
+        $inboxBean = BeanFactory::newBean('pmse_Inbox');
+
+        $q = new SugarQuery();
+        $q->select('id');
+        $q->from($inboxBean);
+        $q->where()->equals('cas_id', $this->flowData['cas_id']);
+        $result = $q->getOne();
+
+        $showCaseUrl = $sugar_config['site_url'] .'/index.php#';
+
+        if (isModuleBWC($targetModule)) {
+            $params = [
+                'module' => 'pmse_Inbox',
+                'id' => $flowData['id'],
+                'action' => 'showCase',
+            ];
+            $showCaseUrl .= 'bwc/index.php?' . http_build_query($params);
+        } else {
+            $showCaseUrl .= 'pmse_Inbox/' . rawurlencode($result) . '/layout/show-case/' . rawurlencode($flowData['id']);
+        }
+        $showCaseLabel = $bean->getRecordName();
+
+        return "<a href=\"$showCaseUrl\">$showCaseLabel</a>";
     }
 }

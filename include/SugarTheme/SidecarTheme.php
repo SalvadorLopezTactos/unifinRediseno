@@ -158,15 +158,11 @@ class SidecarTheme
 
             //Load and set variables
             $this->loadVariables();
-
-            if (!isset($this->variables['siteUrl'])) {
-                $this->setVariable('siteUrl', '"' . getValueFromConfig('site_url') . '"');
-            }
-
             if (!isset($this->variables['baseUrl'])) {
-                $this->setVariable('baseUrl', '"' . getValueFromConfig('site_url') . '/styleguide/assets"');
+                //Relative path from /cache/themes/clients/PLATFORM/THEMENAME/FILE.css
+                //              to   /styleguide/assets/
+                $this->setVariable('baseUrl', '"../../../../../styleguide/assets"');
             }
-
             $this->compiler->setVariables($this->loadVariables());
 
             if ($min) {
@@ -187,7 +183,7 @@ class SidecarTheme
             $hash = md5($css);
             // Write CSS file on the file system
             sugar_mkdir($this->paths['cache'], null, true);
-            sugar_file_put_contents($this->getCssFileLocation($lessFile, $hash), $css);
+            sugar_file_put_contents_atomic($this->getCssFileLocation($lessFile, $hash), $css);
             return $hash;
         } catch (Exception $e) {
             throw new SugarApiExceptionError('lessc fatal error:<br />' . $e->getMessage());
@@ -259,7 +255,7 @@ class SidecarTheme
                 '// created: ' . date('Y-m-d H:i:s') . "\n" .
                 '$lessdefs = ' .
                 var_export_helper($lessdefs) . ';';
-            sugar_file_put_contents($this->paths['custom'] . 'variables.php', $write);
+            sugar_file_put_contents_atomic($this->paths['custom'] . 'variables.php', $write);
         }
     }
 

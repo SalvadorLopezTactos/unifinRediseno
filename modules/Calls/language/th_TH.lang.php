@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'แดชบอร์ดรายการโทร',
     'LBL_CALLS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกการโทร',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'ระบบลิ้นชักต่อสาย',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'การโทร',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'ผู้ใช้ที่ระบุ',
     'LBL_LIST_MY_CALLS' => 'การโทรของฉัน',
     'LBL_MY_SCHEDULED_CALLS' => 'การโทรตามกำหนดการของฉัน',
+    'LBL_GUEST_CALLS' => 'การโทรของฉันในฐานะผู้เยี่ยมชม',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'การโทรที่กำหนดเวลาไว้ในฐานะผู้เยี่ยมชม',
     'LBL_SELECT_FROM_DROPDOWN' => 'โปรดเลือกจากรายการแบบดรอปดาวน์ "เกี่ยวข้องกับ" ก่อน',
 	'LBL_ASSIGNED_TO_NAME' => 'ระบุให้',
 	'LBL_ASSIGNED_TO_ID' => 'ผู้ใช้ที่ระบุ',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'ยกเลิก',
     'LBL_EMPTY_SEARCH_RESULT' => 'ขออภัย ไม่พบผลลัพธ์ โปรดสร้างผู้รับเชิญที่ด้านล่าง',
     'LBL_NO_ACCESS' => 'คุณไม่มีสิทธิ์ในการสร้าง $module',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Id ผู้ติดต่อ Amazon Connect',
+
     'LBL_REPEAT_TYPE' => 'ซ้ำ',
     'LBL_REPEAT_INTERVAL' => 'ทุก',
     'LBL_REPEAT_END' => 'สิ้นสุด',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'โทรด้วย {{{this}}}',
     'LBL_SEND_INVITES' => 'ส่งคำเชิญ',
     'LBL_REMINDER_TITLE' => 'การโทร:',
+    'LBL_CALL_RECORDING_URL' => 'กำลังบันทึก URL',
+    'LBL_CALL_RECORDING' => 'กำลังบันทึก',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'คุณได้วางกำหนดการ {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> สำหรับ {{formatDate date_start}}',

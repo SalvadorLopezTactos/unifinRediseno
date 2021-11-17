@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_TARGETS_LIST_DASHBOARD' => 'Målliste-dashboard',
   'LBL_TARGETS_RECORD_DASHBOARD' => 'Måloptegnelses-dashboard',
+  'LBL_PROSPECTS_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Mål',
 
   'LBL_MODULE_NAME' => 'Mål',
   'LBL_MODULE_NAME_SINGULAR' => 'Mål:',

@@ -154,7 +154,7 @@ class WebUpgrader extends UpgradeDriver
         }
         if (!empty($this->state['zip'])) {
             $this->context['zip'] = $this->state['zip'];
-            $this->context['backup_dir'] = $this->config['upload_dir'] . "/upgrades/backup/" . pathinfo(
+            $this->context['backup_dir'] = "upgrades/backup/" . pathinfo(
                     $this->context['zip'],
                     PATHINFO_FILENAME
                 ) . "-restore";
@@ -350,11 +350,11 @@ class WebUpgrader extends UpgradeDriver
         if (!is_uploaded_file($_FILES['zip']['tmp_name'])) {
             return $this->error("Upload failed", true);
         }
-        $this->ensureDir($this->config['upload_dir'] . "/upgrades");
-        $this->context['zip'] = $this->config['upload_dir'] . "/upgrades/" . basename($_FILES['zip']['name']);
+        $this->ensureDir("upgrades");
+        $this->context['zip'] = "upgrades/" . basename($_FILES['zip']['name']);
         if (move_uploaded_file($_FILES['zip']['tmp_name'], $this->context['zip'])) {
             $this->state['zip'] = $this->context['zip'];
-            $this->context['backup_dir'] = $this->config['upload_dir'] . "/upgrades/backup/" . pathinfo(
+            $this->context['backup_dir'] = "upgrades/backup/" . pathinfo(
                     $this->context['zip'],
                     PATHINFO_FILENAME
                 ) . "-restore";

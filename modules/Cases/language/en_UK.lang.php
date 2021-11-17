@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Cases List Dashboard',
     'LBL_CASES_RECORD_DASHBOARD' => 'Cases Record Dashboard',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Case Details',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Cases Focus Drawer',
 
 	'ERR_DELETE_RECORD'					=> 'You must specify a record number to delete the account.',
 	'LBL_ACCOUNT_ID'					=> 'Account ID',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Show in Portal',
 	'LBL_CREATE_KB_DOCUMENT' => 'Create Article',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Knowledge Base',
+    'LBL_REQUEST_CLOSE' => 'Request Close',
+    'LBL_REQUEST_CLOSE_DATE' => 'Request Close Date',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Request To Close',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Send a request to close this case',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Would you like to request this case to be closed?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'My Cases Requested For Close',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'My Cases Requested For Close',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'My Cases Requested For Close',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'List Of Cases Requested For Close',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Shows a list of assigned cases that are requested for close',
 
     'LBL_CREATED_USER' => 'Created User',
     'LBL_MODIFIED_USER' => 'Modified User',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'For example, you might use this to find an issue that has been previously submitted.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'If you have a new support Case you would like to submit, you can click here to submit a new Case.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Clicking here will return you to this view at any time.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Case Interactions',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notes',
 

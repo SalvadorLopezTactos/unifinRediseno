@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'プロセスEメールテンプレート',
     'LBL_MODULE_NAME_SINGULAR' => 'プロセスEメールテンプレート',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'プロセス Eメールテンプレート フォーカス ドロワ',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Eメールテンプレートの処理レコ―ドダッシュボード',
     'LNK_LIST' => '表示プロセスのEメールテンプレート',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'プロセスEメールテンプレートを作成',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'プロセスEメールテンプレートをインポート',
@@ -34,7 +37,7 @@ $mod_strings = array (
     'LBL_PMSE_IMPORT_BUTTON_LABEL' => 'インポート',
 
     'LBL_PMSE_MY_EMAIL_TEMPLATES' => '私のプロセスEメールテンプレート',
-    'LBL_PMSE_ALL_EMAIL_TEMPLATES' => 'すべてのプロセスEメールテンプレート',
+    'LBL_PMSE_ALL_EMAIL_TEMPLATES' => '全てのプロセスEメールテンプレート',
 
     'LBL_PMSE_EMAIL_TEMPLATES_IMPORT_TEXT' => '自動的に、a *.petファイルをあなたのファイルシステムから輸入して新しいプロセスEメールテンプレートレコードを作成しなさい。',
     'LBL_PMSE_EMAIL_TEMPLATES_IMPORT_SUCCESS' => 'プロセスEメールテンプレートのシステムへのインポートに成功しました。',

@@ -20,6 +20,12 @@
     dashboard: undefined,
 
     /**
+     * Reference to the component to be reloaded when the refresh button is clicked.
+     * If not set, the first component will be used.
+     */
+    reloadableComponent: null,
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -33,10 +39,8 @@
 
         //set current model draggable
         this.on('render', function() {
-            // If the user has write access, allow drag & drop
-            if (app.acl.hasAccessToModel('edit', this.model)) {
-                this.model.trigger('applyDragAndDrop');
-            } else {
+            // If the user does not have write access, don't display drag/drop cursor
+            if (!app.acl.hasAccessToModel('edit', this.model)) {
                 this.$('[data-toggle=dashlet]').css('cursor', 'default');
             }
         }, this);
@@ -79,9 +83,20 @@
                 dashletMeta = app.metadata.getView(dashletDef.view.module, dashletDef.view.name || dashletDef.view.type);
                 dashletModule = dashletDef.view.module ? dashletDef.view.module : null;
             } else if (dashletDef.layout) {
-                toolbar = dashletDef.view['custom_toolbar'] || {};
+                toolbar = dashletDef.layout.custom_toolbar || {};
                 dashletMeta = app.metadata.getLayout(dashletDef.layout.module, dashletDef.layout.name || dashletDef.layout.type);
                 dashletModule = dashletDef.layout.module ? dashletDef.layout.module : null;
+            }
+            if (!dashletMeta) {
+                var dashletViews = app.utils.getMfeDashletViews(this.context);
+                var customComp = _.find(dashletViews, function(dashlet) {
+                    return dashlet.metadata.dashletType === dashletDef.view.type;
+                });
+                if (customComp) {
+                    dashletDef.view.type = 'external-app-dashlet';
+                    dashletDef.view.src = customComp.metadata.config.src;
+                    dashletDef.view.customConfig = true;
+                }
             }
             if (!dashletModule && dashletDef.context && dashletDef.context.module) {
                 dashletModule = dashletDef.context.module;
@@ -109,14 +124,28 @@
                 this.hasToolbar = false;
             }
         }
-        if (this.meta.empty) {
-            this.$el.html(app.template.empty(this));
-        } else {
-            this.$el.html(this.template(this));
-        }
+
+        this._setDashletContents();
 
         var context = this.context.parent || this.context;
         this._super('_addComponentsFromDef', [components, context, context.get("module")]);
+    },
+
+    /**
+     * Set contents of `.dashlet-container` element. If we're initializing an
+     * empty dashlet, set the innerHTML of `this.$el`. If we're updating an
+     * existing dashlet, update with `replaceWith` to not overwrite neighbors or
+     * their event listeners
+     * @private
+     */
+    _setDashletContents: function() {
+        var htmlContent = this.meta.empty ? app.template.empty(this) : this.template(this);
+        var currentContent = this.$el.children('.dashlet-container').first();
+        if (!_.isEmpty(currentContent)) {
+            currentContent.replaceWith(htmlContent);
+        } else {
+            this.$el.html(htmlContent);
+        }
     },
 
     /**
@@ -128,10 +157,12 @@
         //pass the parent context only to the main dashlet component
         if (def.view && !_.isUndefined(def.view.toolbar)) {
             var dashlet = _.first(this._components);
-            if (_.isFunction(dashlet.getLabel)) {
-                def.view.label = dashlet.getLabel();
+            if (dashlet) {
+                if (_.isFunction(dashlet.getLabel)) {
+                    def.view.label = dashlet.getLabel();
+                }
+                context = dashlet.context;
             }
-            context = dashlet.context;
         }
         //set default skipFetch as false
         var skipFetch = def.view ? def.view.skipFetch : def.layout.skipFetch;
@@ -190,6 +221,8 @@
         } else if(def.view && !_.isUndefined(def.view.toolbar)) {
             //toolbar view
             this.$('[data-dashlet=toolbar]').append(comp.el);
+        } else if (def.prepend) {
+            this.$('[data-dashlet=dashlet]').before(comp.el);
         } else {
             //main dashlet component
             this.$('[data-dashlet=dashlet]').append(comp.el);
@@ -273,6 +306,8 @@
 
         this.meta.empty = false;
         this.meta.label = def.label || def.name || "";
+        this.meta.type = def.type;
+        this.meta.moduleName = def.module;
         //clear previous dashlet
         _.each(this._components, function(component) {
             component.layout = null;
@@ -359,8 +394,8 @@
      * @param {Object} options
      */
     reloadDashlet: function(options) {
-        var component = _.first(this._components),
-            context = component.context;
+        var component = this.reloadableComponent ||  _.first(this._components);
+        var context = component.context;
         context.resetLoadFlag();
         component.loadData(options);
     },
@@ -438,10 +473,21 @@
         if (this.hasToolbar === false) {
             return;
         }
+
+        // If user attempts to collapse a dashlet that is already collapsed via the "collapse all" fab button,
+        // dont execute any logic
+        if (!_.isUndefined(this.isCollapsed) && this.isCollapsed === collapsed) {
+            return;
+        }
+        this.isCollapsed = collapsed;
+
         this.$(".dashlet-toggle > i").toggleClass("fa-chevron-down", collapsed);
         this.$(".dashlet-toggle > i").toggleClass("fa-chevron-up", !collapsed);
         this.$(".thumbnail").toggleClass("collapsed", collapsed);
         this.$("[data-dashlet=dashlet]").toggleClass("hide", collapsed);
+
+        this.$el.toggleClass('collapsed', collapsed);
+        this.layout.collapseDashlet(this);
     },
 
     /**

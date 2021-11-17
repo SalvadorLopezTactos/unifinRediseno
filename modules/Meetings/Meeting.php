@@ -183,7 +183,7 @@ class Meeting extends SugarBean {
 
         // Do any external API saving
         // Clear out the old external API stuff if we have changed types
-        if (isset($this->fetched_row) && $this->fetched_row['type'] != $this->type ) {
+        if ($this->fetched_row !== false && $this->fetched_row['type'] != $this->type) {
             $this->join_url = null;
             $this->host_url = null;
             $this->external_id = null;
@@ -475,7 +475,7 @@ class Meeting extends SugarBean {
 
 		$meeting_fields['JOIN_MEETING']  = '';
 		if(!empty($meeting_fields['DISPLAYED_URL'])){
-			$meeting_fields['JOIN_MEETING']= '<a href="' . $meeting_fields['DISPLAYED_URL']. '" target="_blank">' . $join_icon . '</a>';
+            $meeting_fields['JOIN_MEETING']= '<a href="' . $meeting_fields['DISPLAYED_URL']. '" target="_blank" rel="nofollow noopener noreferrer">' . $join_icon . '</a>';
 		}
 
 		return $meeting_fields;

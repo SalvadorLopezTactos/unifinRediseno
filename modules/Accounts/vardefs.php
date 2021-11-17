@@ -141,6 +141,15 @@ $dictionary['Account'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_BUSINESS_CENTER',
         ),
+        'messages' => [
+            'name' => 'messages',
+            'type' => 'link',
+            'relationship' => 'account_messages',
+            'module' => 'Messages',
+            'bean_name' => 'Message',
+            'source' => 'non-db',
+            'vname' => 'LBL_MESSAGES',
+        ],
         'tasks' => array(
             'name' => 'tasks',
             'type' => 'link',
@@ -303,6 +312,16 @@ $dictionary['Account'] = array(
             'source' => 'non-db',
             'workflow' => false
         ),
+        'purchasedlineitems' => [
+            'name' => 'purchasedlineitems',
+            'type' => 'link',
+            'relationship' => 'purchasedlineitems_accounts',
+            'vname' => 'LBL_PURCHASED_LINE_ITEMS',
+            'module' => 'PurchasedLineItems',
+            'bean_name' => 'PurchasedLineItem',
+            'source' => 'non-db',
+            'workflow' => false,
+        ],
         'forecastworksheets' =>  array(
             'name' => 'forecastworksheets',
             'type' => 'link',
@@ -362,6 +381,9 @@ $dictionary['Account'] = array(
             'module' => 'Campaigns',
             'duplicate_merge' => 'disabled',
             'comment' => 'The first campaign name for Account (Meta-data only)',
+            'studio' => array(
+                'mobile' => false,
+            ),
         ),
         'prospect_lists' => array(
             'name' => 'prospect_lists',
@@ -377,6 +399,29 @@ $dictionary['Account'] = array(
             'type' => 'date',
             'readonly' => true,
         ),
+        'widget_next_renewal_date' => [
+            'name' => 'widget_next_renewal_date',
+            'vname' => 'LBL_WIDGET_NEXT_RENEWAL_DATE',
+            'type' => 'widget',
+            'multiline' => false,
+            'studio' => false,
+            'workflow' => false,
+            'reportable' => false,
+            'importable' => false,
+            'source' => 'non-db',
+            'console' => [
+                'name' => 'next_renewal_date',
+                'label' => 'LBL_WIDGET_NEXT_RENEWAL_DATE',
+                'type' => 'relative-date',
+            ],
+        ],
+        'purchases' => [
+            'name' => 'purchases',
+            'type' => 'link',
+            'relationship' => 'account_purchases',
+            'source' => 'non-db',
+            'vname' => 'LBL_PURCHASES',
+        ],
     ),
     'indices' => array(
         array('name' => 'idx_accnt_parent_id', 'type' => 'index', 'fields' => array('parent_id')),
@@ -511,7 +556,26 @@ $dictionary['Account'] = array(
             'rhs_key' => 'target_id',
             'relationship_type' => 'one-to-many'
         ),
-
+        'account_messages' => [
+            'lhs_module' => 'Accounts',
+            'lhs_table' => 'accounts',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Messages',
+            'rhs_table' => 'messages',
+            'rhs_key' => 'parent_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Accounts',
+        ],
+        'account_purchases' => [
+            'lhs_module' => 'Accounts',
+            'lhs_table' => 'accounts',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Purchases',
+            'rhs_table' => 'purchases',
+            'rhs_key' => 'account_id',
+            'relationship_type' => 'one-to-many',
+        ],
     ),
     'duplicate_check' => array(
         'enabled' => true,

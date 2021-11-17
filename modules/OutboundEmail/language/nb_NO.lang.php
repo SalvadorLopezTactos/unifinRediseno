@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Utgående e-postkontoer',
     'LBL_MODULE_NAME_SINGULAR' => 'Utgående e-postkontoer',
+    'LBL_STATUS' => 'Status',
     'LBL_MAIL_SENDTYPE' => 'Agent for e-postoverføring',
     'LBL_MAIL_SMTPSERVER' => 'Server',
     'LBL_MAIL_SMTPPORT' => 'Port',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Dette er system-kontoen.',
     'LBL_EMAIL_ADDRESS_ID' => 'ID for e-postadresse',
     'LBL_TYPE' => 'Type',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Godkjent e-postadresse',
+    'LBL_FROM_EMAIL_ADDRESS' => 'Fra e-post-adresse',
     'LBL_REPLY_TO_NAME' => 'Svar-til-navn',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Svar til e-postadresser',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Svar til e-postadresser-ID',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Svar til e-postadresse',
     'LBL_PRIMARY_TEAM' => 'Hovedteam',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'E-postinnstillinger fokusskuff',
 );

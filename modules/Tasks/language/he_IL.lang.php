@@ -13,7 +13,10 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TASKS_LIST_DASHBOARD' => 'לוח מחוונים של רשימת משימות',
+  'LBL_TASKS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות מסוג משימות',
+  'LBL_TASKS_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס משימות',
 
+  'LBL_RELATED_CONTACT' => 'איש קשר קשור',
   'LBL_MODULE_NAME' => 'משימות',
   'LBL_MODULE_NAME_SINGULAR' => 'משימה',
   'LBL_TASK' => 'משימות:',

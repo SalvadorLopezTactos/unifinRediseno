@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Προειδοποίηση: Τροποποιείτε την αυτόματη εισαγωγή ρυθμίσεων που μπορεί να οδηγήσει στην απώλεια στοιχείων.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Προειδοποίηση: Η αυτόματη εισαγωγή πρέπει να επιτραπεί όταν αυτόματα δημιουργούνται  υποθέσεις.',
 	'LBL_EDIT_LAYOUT' => 'Επεξεργασία Διάταξης' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'Διεύθυνση Email',
+    'LBL_EMAIL_PROVIDER' => 'Πάροχος Email',
+    'LBL_AUTH_STATUS' => 'Κατάσταση εξουσιοδότησης',
 );
-?>

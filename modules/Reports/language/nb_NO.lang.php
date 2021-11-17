@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Feil under henting av gjennomgående rapportdata for denne handlingen. Kontakt eieren av rapporten for å få hjelp.',
     'LBL_CHART_NO_DRILLTHRU' => 'Gjennomgang er ikke tilgjengelig',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Rapporter fokusskuff',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'Listevisning viser alle rapporter som oppfyller aktuelle søkekriterier og som brukere har tilgang til. Du kan se detaljer om hver rapport i feltkolonnene i listevisning og i forhåndsvisningen. Du kan angi tagger for rapporter og opprette filtre. Klikk på rapportens navn for å vise rapporten eller velg "Rediger rapport" i handlingsmenyen for å modifisere rapporten.',

@@ -115,7 +115,8 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Sugar-Dashlet hinzugefügt',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Sind Sie sicher, dass Sie das Layout ändern möchten? Die Dashlets werden dadurch neu angeordnet.',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Möchten Sie dieses Sugar-Dashlet wirklich löschen?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Kein Dashboard konfiguriert.',
+  'LBL_NO_DASHBOARD_CONFIGURED' => 'Kein Dashboard konfiguriert',
+  'LBL_NO_DASHLETS_CONFIGURED' => 'Keine Dashlets konfiguriert',
   'LBL_CREATE_DASHBOARD_LINK' => 'Neues Dashboard',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Webseite',
@@ -218,7 +219,6 @@ $mod_strings = array (
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar – Ein Kalender zum Eintragen von Daten, erstellt von Mihai Bazon.',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF – Eine Bibliothek zum Erstellen von PDF-Dokumenten. Erstellt von Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP WebDAV Server – Eine WebDAV-Server-Implementation in PHP.',
-  'LBL_SOURCE_PCLZIP' => 'PclZip – eine Bibliothek, die Kompressions- und Extrahierungsfunktionen für Zip Archive liefert. Von Vincent Blavet',
   'LBL_SOURCE_SMARTY' => 'Smarty – Eine Vorlagen-Engine für PHP.',
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library – Die Benutzeroberfläche-Tools erleichtern die Implementierung von umfassenden Client-seitigen Funktionen.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer – Eine funktionsstarke E-Mail-Transfer-Klasse für PHP',

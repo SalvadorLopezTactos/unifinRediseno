@@ -1,39 +1,39 @@
 // Content search dashlet
-.portal-home-dashboard .dashlet-row > li:first-child {
-  .dashlet-container {
+.portal-home-dashboard .dashboard-grid {
+  .dashlet-container[name='dashlet_0'] {
     padding: 0;
-    height: 305px;
+    height: 300px;
     background-image: url('../../../../../styleguide/assets/img/portal-search-background.png');
     background-repeat: no-repeat;
     background-size: cover;
-  }
 
-  .thumbnail.dashlet {
-    [data-dashlet='toolbar'] {
-      display: none;
+    .thumbnail.dashlet {
+      [data-dashlet='toolbar'] {
+        display: none;
+      }
+
+      margin: 0 !important;
+      box-shadow: none;
+      border-radius: 0;
+      padding: 25px 0;
+      background-color: @transparent;
     }
 
-    margin: 0 !important;
-    box-shadow: none;
-    border-radius: 0;
-    padding: 25px 0;
-    background-color: @transparent;
-  }
+    .dashlet-content {
+      max-width: 600px;
+      margin: 0 auto;
 
-  .dashlet-content {
-    max-width: 600px;
-    margin: 0 auto;
-
-    &.hide {
-      display: block;
-      //disable collapse feature of the dashboard
+      &.hide {
+        display: block;
+        //disable collapse feature of the dashboard
+      }
     }
   }
 }
 
 .contentsearchdashlet {
   padding: 30px;
-  background-color: fade(@ocean, 75%);
+  background-color: fade(@white, 60%);
   margin-top: 70px;
 
   .record-cell {
@@ -72,6 +72,13 @@
   li.search-result {
     min-height: 0;
     border-bottom: none;
+
+    .search-result-description {
+      display: inline-block;
+      max-height: 40px;
+      line-height: 13px;
+      overflow: hidden;
+    }
   }
 }
 

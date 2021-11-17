@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Pravidla obchodních procesů.',
   'LBL_MODULE_NAME_SINGULAR' => 'Pravidla obchodních procesů.',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na zpracování obchodních pravidel',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Řídicí panel záznamů obchodních pravidel procesů',
   'LBL_RST_UID' => 'ID obchodního pravidla',
   'LBL_RST_TYPE' => 'Typ obchodního pravidla',
   'LBL_RST_DEFINITION' => 'Definice obchodního pravidla',

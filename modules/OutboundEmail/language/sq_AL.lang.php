@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Llogaritë e emaileve dalëse',
     'LBL_MODULE_NAME_SINGULAR' => 'Llogaria e emaileve dalëse',
+    'LBL_STATUS' => 'Statusi',
     'LBL_MAIL_SENDTYPE' => 'Agjenti i transferimit të emaileve',
     'LBL_MAIL_SMTPSERVER' => 'Serveri',
     'LBL_MAIL_SMTPPORT' => 'Porta',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Kjo është llogari sistemi.',
     'LBL_EMAIL_ADDRESS_ID' => 'Identifikuesi i adresës së emailit',
     'LBL_TYPE' => 'Lloji',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Adresa e autorizuar e emailit',
+    'LBL_FROM_EMAIL_ADDRESS' => 'Nga adresa e emailit',
     'LBL_REPLY_TO_NAME' => 'Emri i përgjigjes',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Adresat e emailit të përgjigjes',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID-ja e adresave të emailit të përgjigjes',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Adresa e emailit të përgjigjes',
     'LBL_PRIMARY_TEAM' => 'Ekipi primar',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te cilësimet e emailit',
 );

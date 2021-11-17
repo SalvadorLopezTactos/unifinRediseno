@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Attention, vous aller modifier la configuration des imports automatiques des mails. Vous risquez des pertes de données.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Attention : L&#39;import automatique des emails doit être activé pour la création automatique de tickets.',
 	'LBL_EDIT_LAYOUT' => 'Éditer la mise en page' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'Adresse e-mail',
+    'LBL_EMAIL_PROVIDER' => 'Fournisseur de messagerie',
+    'LBL_AUTH_STATUS' => 'Statut de l&#39;autorisation',
 );
-?>

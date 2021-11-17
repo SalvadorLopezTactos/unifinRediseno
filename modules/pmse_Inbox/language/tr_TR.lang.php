@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'Süreç Yönetimi',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'Boş Bırakılmış Süreçler',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => 'Süreç Odak Bölmesi',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Süreçler Kaydı Panosu',
+
     'LBL_CAS_ID' => 'Süreç Numarası',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Bilinmyen (KullanıcıId'sine göre:'%s')",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "görev",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => 'İşlem Tasarım Önizlemesi',
     'LBL_PROJECT_RUN_ORDER' => 'Düzeni Çalıştır',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => 'Geçerli Aktivite',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => 'Değiştirilme Tarihi',
+    'LBL_DATE_ENTERED' => 'Oluşturulma Tarihi',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'Bu süreci talep etmek istediğinizden emin misiniz?',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'Süreç başarılı şekilde talep edildi',
 );
 

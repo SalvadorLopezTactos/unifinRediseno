@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\Exception\ProviderNotFoundException;
  * Goes through list of tokens and try to authenticate this tokens.
  *
  * Class MixedAuthenticationProvider
- * @package Sugarcrm\IdentityProvider\App\Provider
+ * @package Sugarcrm\IdentityProvider\Authentication\Provider
  */
 class MixedAuthenticationProvider implements AuthenticationProviderInterface
 {

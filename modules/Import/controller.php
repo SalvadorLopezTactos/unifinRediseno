@@ -20,10 +20,12 @@ require_once("modules/Import/Forms.php");
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
-use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\IdmModeLimitationTrait;
 
 class ImportController extends SugarController
 {
+    use IdmModeLimitationTrait;
+
     /**
      * @var Request
      */
@@ -34,23 +36,9 @@ class ImportController extends SugarController
      */
     protected $importModule;
 
-    /**
-     * @var bool
-     */
-    protected $isIDMModeEnabled;
-
-    /**
-     * @var array
-     */
-    protected $idmModeDisabledModules;
-
     public function __construct()
     {
         $this->request = InputValidation::getService();
-
-        $idpConfig =  new Authentication\Config(\SugarConfig::getInstance());
-        $this->isIDMModeEnabled = $idpConfig->isIDMModeEnabled();
-        $this->idmModeDisabledModules = $idpConfig->getIDMModeDisabledModules();
     }
 
     /**
@@ -177,15 +165,16 @@ class ImportController extends SugarController
 
 	function action_Step1()
     {
-        if ($this->isDisabled()) {
-            $this->showDisabledPage();
-        }
         $fromAdminView = isset($_REQUEST['from_admin_wizard']) ? $_REQUEST['from_admin_wizard'] : FALSE;
         if( $this->importModule == 'Administration' || $fromAdminView
             || $this->bean instanceof Person
         )
         {
-    		$this->view = 'step1';
+            if ($this->isLimitedForModuleInIdmMode($this->importModule) && !$fromAdminView) {
+                $this->view = 'step2';
+            } else {
+                $this->view = 'step1';
+            }
         }
         else
             $this->view = 'step2';
@@ -193,25 +182,16 @@ class ImportController extends SugarController
 
     function action_Step2()
     {
-        if ($this->isDisabled()) {
-            $this->showDisabledPage();
-        }
 		$this->view = 'step2';
     }
 
     function action_Confirm()
     {
-        if ($this->isDisabled()) {
-            $this->showDisabledPage();
-        }
-		$this->view = 'confirm';
+        $this->view = 'confirm';
     }
 
     function action_Step3()
     {
-        if ($this->isDisabled()) {
-            $this->showDisabledPage();
-        }
 		$this->view = 'step3';
     }
 
@@ -222,17 +202,11 @@ class ImportController extends SugarController
 
     function action_Step4()
     {
-        if ($this->isDisabled()) {
-            $this->showDisabledPage();
-        }
 		$this->view = 'step4';
     }
 
     function action_Last()
     {
-        if ($this->isDisabled()) {
-            $this->showDisabledPage();
-        }
 		$this->view = 'last';
     }
 
@@ -277,15 +251,6 @@ class ImportController extends SugarController
     public function action_RevokeAccess()
     {
         $this->view = 'revokeaccess';
-    }
-
-    /**
-     * is import disabled?
-     * @return bool
-     */
-    protected function isDisabled()
-    {
-        return ($this->isIDMModeEnabled && in_array($this->importModule, $this->idmModeDisabledModules));
     }
 
     /**

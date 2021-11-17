@@ -98,11 +98,14 @@ $viewdefs['Emails']['base']['view']['compose'] = array(
                     'type'          => 'htmleditable_tinymce',
                     'dismiss_label' => true,
                     'span'          => 12,
-                    'tinyConfig' => array(
-                        'toolbar' => 'code | bold italic underline strikethrough | bullist numlist | ' .
-                            'alignleft aligncenter alignright alignjustify | forecolor backcolor | ' .
-                            'fontsizeselect | formatselect | fontselect | sugarattachment sugarsignature sugartemplate',
-                    ),
+                    'tinyConfig' => [
+                        'toolbar' => 'code | bold italic underline strikethrough | alignleft aligncenter alignright ' .
+                            'alignjustify | forecolor backcolor |  styleselect formatselect fontselect ' .
+                            'fontsizeselect | cut copy paste pastetext | search searchreplace | bullist numlist | ' .
+                            'outdent indent | ltr rtl | undo redo | link unlink anchor image | subscript ' .
+                            'superscript | charmap | table | hr removeformat | insertdatetime | ' .
+                            'sugarattachment sugarsignature sugartemplate',
+                    ],
                 ),
                 array(
                     'name' => 'attachments',

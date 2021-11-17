@@ -140,7 +140,6 @@ class SugarAutoLoader
         'portal',
         'vendor/HTMLPurifier',
         'vendor/ytree',
-        'vendor/pclzip',
         'vendor/nusoap',
         'vendor/bin',
     );

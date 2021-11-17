@@ -22,97 +22,143 @@
     direction: 'ltr',
 
     /**
+     * Listen for CCP phone number clicks
+     */
+    events: {
+        'click .ccp-outgoing': '_dialNumber',
+    },
+
+    /**
+     * Is a CCP agent logged in? Defaults to false.
+     */
+    ccpEnabled: false,
+
+    /**
      * @override
      * @param options
      */
     initialize: function (options) {
         var serverInfo = app.metadata.getServerInfo();
 
-        this.skypeEnabled = serverInfo.system_skypeout_on ? true : false;
+        this.dialoutEnabled = serverInfo.system_skypeout_on ? true : false;
+        this.ccpEnabled = window.connect && window.connect.core.initialized;
 
         this._super('initialize', [options]);
     },
-    /**
-     * @override
-     * @param value
-     * @return {Mixed}
-     */
-    format: function (value) {
-        if ((this.action === 'list' || this.action === 'detail' || this.action === 'record')
-            && this.isSkypeFormatted(value)
-            && this.skypeEnabled) {
-            this.skypeValue = this.skypeFormat(value);
-        }
-        return value;
-    },
-    /**
-     * checks if value should be skype formatted + 00 or 011 leading is necessary
-     * @param value {String}
-     * @return {boolean}
-     */
-    isSkypeFormatted: function (value) {
-        if (_.isString(value)) {
-            return value.substr(0, 1) === '+' || value.substr(0, 2) === '00' || value.substr(0, 3) === '011';
-        } else {
-            return false;
-        }
-    },
-    /**
-     * strips extra characters from phone number for skype
-     *
-     * Document: https://support.skype.com/en/faq/FA12006/how-do-i-script-webpages-to-find-phone-numbers-using-click-to-call
-     *
-     * @param value {String}
-     * @return {string}
-     */
-    skypeFormat: function (value) {
-        if (_.isString(value)) {
-            var number = value.replace(/[^\d\(\)\.\-\/ ]/g, '');
 
-            if(null !== number.match(/[\-]/g) && number.match(/[\-]/g).length >= 2) {
-                // ensure format is "+CC-NDC-SN"
-                number = number.replace(/[^\d\-]/g, '')
-                    .replace(/(\d+)\-(\d+)\-([\d\-]+)/g, function($0, $1, $2, $3) {
-                        return [$1, $2, $3.replace(/\D/g, '')].join('-');
-                    });
-            } else if(null !== number.match(/[\.]/g) && number.match(/[\.]/g).length >= 2) {
-                // ensure format is "+CC.NDC.SN"
-                number = number.replace(/[^\d\.]/g, '')
-                    .replace(/(\d+)\.(\d+)\.([\d\.]+)/g, function($0, $1, $2, $3) {
-                        return [$1, $2, $3.replace(/\D/g, '')].join('.');
-                    });
-            } else if(null !== number.match(/\(\D*\d+\D*\)/g)) {
-                // ensure format is "+CC(NDC)SN"
-                number = number.replace(/[^\d\(\)]+/g, '')
-                    .replace(/(\d+)\((\d+)\)([0-9\(\)]+)/g, function($0, $1, $2, $3) {
-                        return $1 + '(' + $2 + ')' + $3.replace(/\D/g, '');
-                    })
-            } else if(null !== number.match(/[\/]/g) && number.match(/[\/]/g).length >= 2) {
-                // ensure format is "+CC/NDC/SN"
-                number = number.replace(/[^\d\/]/g, '')
-                    .replace(/(\d+)\/(\d+)\/([\d\/]+)/g, function($0, $1, $2, $3) {
-                        return [$1, $2, $3.replace(/\D/g, '')].join('/');
-                    });
-            } else if(null !== number.match(/\S+\s+\S+\s+[\S\s]+/g)) {
-                // ensure format is "+CC NDC SN"
-                number = number.replace(/(\S+)\s+(\S+)\s+([\S\s]+)/g, function($0, $1, $2, $3) {
-                    return _.map([$1, $2, $3], function(s) {
-                        return s.replace(/\D/g, '');
-                    }).join(' ');
-                })
-            } else {
-                number = number.replace(/\D/g, '');
-            }
-            if(value.substr(0, 1) === '+' || (number.substr(0, 2) !== '00' && number.substr(0, 3) !== '011')) {
-                number = '+' + number;
-            }
-            return number;
+    /**
+     * @inheritdoc
+     */
+    bindDataChange: function() {
+        this._super('bindDataChange');
+        app.events.on('ccp:initiated', this._enableCCP, this);
+        app.events.on('ccp:terminated', this._disableCCP, this);
+    },
 
-        } else if (_.isNumber(value)) {
-            if(value.substr(0, 2) !== '00' && value.substr(0, 3) !== '011') {
-                value = '+' + value;
-            }
+    /**
+     * Attempt to dial phone number via CCP. Warn user if calling fails.
+     * @param {Object} event - JQuery click event
+     * @private
+     */
+    _dialNumber: function(event) {
+        if (!(window.connect && connect.core.initialized)) {
+            app.alert.show('ccp-not-initiated', {
+                level: 'error',
+                messages: app.lang.get('LBL_CCP_NOT_INITIATED')
+            });
+            return;
         }
-        return value;
-    }
+
+        if (this._activeChatSession()) {
+            app.alert.show('dialout-not-allowed', {
+                level: 'warning',
+                messages: app.lang.get('LBL_CCP_DIALOUT_NOT_ALLOWED')
+            });
+            return;
+        }
+
+        try {
+            var phoneNumber = event.target.text;
+            var agent = new connect.Agent();
+            var arn = agent.getRoutingProfile().defaultOutboundQueue.queueARN;
+            var endpoint = connect.Endpoint.byPhoneNumber(phoneNumber);
+            agent.connect(endpoint, {
+                queueARN: arn, success: _.bind(this._callSuccess, this), failure: this._callFailure
+            });
+        } catch (e) {
+            // this occurs if there's an error in calling the library functions.
+            // Error in the call itself is handled in the failure callback.
+            app.logger.error(e);
+            app.alert.show('ccp-call-error', {
+                level: 'error',
+                messages: app.lang.get('LBL_CCP_LIBRARY_CALLOUT_ERROR')
+            });
+        }
+    },
+
+    /**
+     * Determine if there's an active chat session in the CCP.
+     * @private
+     */
+    _activeChatSession: function() {
+        var agent = new connect.Agent();
+        var currentContacts = agent.getContacts();
+        return _.reduce(currentContacts, function(memo, contact) {
+            return memo || contact.getType() === connect.MediaType.CHAT;
+        }, false);
+    },
+
+    /**
+     * Callback for successful outgoing call
+     * Set the phone number on the omnichannel.
+     * @private
+     */
+    _callSuccess: function() {
+        ccp = app.omniConsole.getComponent('omnichannel-ccp');
+        ccp.dialedNumber = this.model.get(this.name);
+    },
+
+    /**
+     * Callback for call failure. Example includes bad phone number, failure in
+     * CCP dialer, etc.
+     *
+     * @param {Object} err - API Error
+     * @private
+     */
+    _callFailure: function(err) {
+        app.alert.show('ccp-call-error', {
+            level: 'error',
+            messages: app.lang.get('LBL_CCP_DIALING_ERROR')
+        });
+        app.logger.error(err);
+    },
+
+    /**
+     * Convert phone number to link
+     * @private
+     */
+    _enableCCP: function() {
+        this.ccpEnabled = true;
+        this.render();
+    },
+
+    /**
+     * Convert phone number to text
+     * @private
+     */
+    _disableCCP: function() {
+        this.ccpEnabled = false;
+        this.render();
+    },
+
+    /**
+     * Remove event listeners on dispose
+     * @private
+     */
+    _dispose: function() {
+        this._super('_dispose');
+        app.events.off('ccp:initiated', null, this);
+        app.events.off('ccp:terminated', null, this);
+    },
+
 })

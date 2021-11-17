@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => 'next year',
     'LBL_OPEN_ISSUES' => 'Otvoriť {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'Nedávno vyriešené',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => 'Vytvoriť filter',
+    'LBL_ERROR_FILTER_EMPTY' => 'Pridajte kritériá filtra.',
+    'LBL_ADD_FILTER' => 'Pridať kritériá',
+    'LBL_FILTER_NAME' => 'Názov filtra',
+    'LBL_FILTER_FIELD' => 'Pole',
+    'LBL_FILTER_OPERATOR' => 'Operátor',
+    'LBL_FILTER_VALUE' => 'Hodnota',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Uložiť do počítačovej aplikácie',
+    'LBL_FILTER_LOCAL' => 'Lokálny filter',
 );

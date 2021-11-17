@@ -81,4 +81,4 @@ if(!empty($_REQUEST['name'])){
     sugar_cleanup(true);
 }
 
-header("Location: index.php?module=ACLRoles&action=DetailView&record=". $role->id);
+header("Location: index.php?module=ACLRoles&action=DetailView&record=". urlencode($role->id));

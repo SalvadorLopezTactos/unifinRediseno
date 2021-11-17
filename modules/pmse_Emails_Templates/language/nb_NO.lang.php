@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'E-postmalprosess',
     'LBL_MODULE_NAME_SINGULAR' => 'Process Email Mal',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Prosess-e-postmaler fokusskuff',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Registerdashbord for epostmalprosesser',
     'LNK_LIST' => 'Se Process Email Templates',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Opprett e-postmalprosess',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Importer e-postmalprosess',

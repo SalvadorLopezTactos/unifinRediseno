@@ -70,7 +70,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> 'Upozornenie: nedá sa zapisovať',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'Vaša verzia PHP nie je podporovaná aplikáciou Sugar. Musíte nainštalovať verziu, ktorá je kompatibilná s aplikáciou Sugar. Postupujte podľa matice kompatibility v poznámkach k vydaniu pre podporované verzie PHP. Vaša verzia je ',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'Vaša verzia IIS nie je podporovaná aplikáciou Sugar. Musíte nainštalovať verziu, ktorá je kompatibilná s aplikáciou Sugar. Postupujte podľa matice kompatibility v poznámkach k vydaniu pre podporované verzie PHP. Vaša verzia je ',
-	'ERR_CHECKSYS_FASTCGI'              => 'Zistili sme, že nepoužívate FastCGI na mapovanie PHP. Potrebujete nainštalovať/konfigurovať verziu, ktorá je kompatibilná s aplikáciou Sugar. Pozrite si maticu kompatibility v poznámkach k vydaniu pre podporované verzie. Prejdite na stránku <a href="http://www.iis.net/php/" target="_blank">http://www.iis.net/php/</a>, kde nájdete ďalšie podrobnosti ',
+    'ERR_CHECKSYS_FASTCGI'              => 'Zistili sme, že nepoužívate FastCGI na mapovanie PHP. Potrebujete nainštalovať/konfigurovať verziu, ktorá je kompatibilná s aplikáciou Sugar. Pozrite si maticu kompatibility v poznámkach k vydaniu pre podporované verzie. Prejdite na stránku <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a>, kde nájdete ďalšie podrobnosti ',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Pre optimálne využitie pomocou IIS / FastCGI SAPI nastavte fastcgi.logging na 0 v súbore php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Nainštalovaná PHP verzia nie je podporovaná: (ver',
     'LBL_DB_UNAVAILABLE'                => 'Databáza nie je k dispozícii',
@@ -534,139 +534,140 @@ Pozrite si inštalačnú príručku, kde nájdete ďalšie informácie.",
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Režim spätnej kompatibility PHP je zapnutý. Nastavte zend.ze1_compatibility_mode na možnosť Off (Vyp.) a pokračujte',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => 'E-maily s upozornením o schôdzke',
+        'subject' => 'Schôdzka SugarCRM – $event_name ',
+        'description' => 'Táto šablóna sa používa, keď systém posiela používateľovi upozornenia o schôdzke.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Komu: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Meeting</p>
+	<p>$assigned_by_user vás pozýva na schôdzku</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>Predmet: $event_name<br/>
+	Dátum začatia: $start_date<br/>
+	Dátum ukončenia: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>Popis: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>Prijať túto schôdzku:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>Predbežne prijať túto schôdzku:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>Odmietnuť túto schôdzku:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Komu: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user vás pozýva na schôdzku
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+Predmet: $event_name
+Dátum začatia: $start_date
+Dátum ukončenia: $end_date
 
-Description: $description
+Popis: $description
 
-Accept this meeting:
+Prijať túto schôdzku:
 <$accept_link>
 
-Tentatively Accept this meeting
+Predbežne prijať túto schôdzku
 <$tentative_link>
 
-Decline this meeting
+Odmietnuť túto schôdzku
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => 'E-maily s upozornením o volaní',
+        'subject' => 'Volanie SugarCRM – $event_name ',
+        'description' => 'Táto šablóna sa používa, keď systém posiela používateľovi upozornenia o volaní.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Komu: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user vás pozýva na volanie</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>Predmet: $event_name<br/>
+	Dátum začatia: $start_date<br/>
+	Trvanie: $hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>Popis: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>Prijať toto volanie:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>Predbežne prijať toto volanie:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>Odmietnuť toto volanie:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Komu: $assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user vás pozýva na volanie
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+Predmet: $event_name
+Dátum začatia: $start_date
+Trvanie: $hoursh, $minutesm
 
-Description: $description
+Popis: $description
 
-Accept this call:
+Prijať toto volanie:
 <$accept_link>
 
-Tentatively Accept this call
+Predbežne prijať toto volanie
 <$tentative_link>
 
-Decline this call
+Odmietnuť toto volanie
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => 'E-maily s upozornením o priradení',
+        'subject' => 'SugarCRM – priradený $module_name ',
+        'description' => 'Táto šablóna sa používa, keď systém posiela používateľovi priradenie úlohy.',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user priradil(-a)&nbsp;$module_name k&nbsp;$assigned_user.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>Tento&nbsp;$module_name môžete preskúmať na:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user priradil(-a) $module_name k $assigned_user.
 
-You may review this $module_name at:
+Tento $module_name môžete preskúmať na:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => 'E-maily s naplánovaným hlásením',
+        'subject' => 'Naplánované hlásenie: $report_name k $report_time',
+        'description' => 'Táto šablóna sa používa, keď systém posiela používateľovi naplánované hlásenie.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>Dobrý deň $assigned_user,</p>
+<p>pripojené je automaticky generované hlásenie, ktoré bolo naplánované pre vás.</p>
+<p>Názov hlásenia: $report_name</p>
+<p>Dátum a čas spustenia hlásenia: $report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            'Dobrý deň $assigned_user,
 
-Attached is an auto generated report that has been scheduled for you.
+pripojené je automaticky generované hlásenie, ktoré bolo naplánované pre vás.
 
-Report Name: $report_name
+Názov hlásenia: $report_name
 
-Report Run Date and Time: $report_time',
+Dátum a čas spustenia hlásenia: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => 'E-mailové upozornenie systémového denníka komentárov',
+        'subject' => 'SugarCRM – $initiator_full_name vás uviedol(-la) v $singular_module_name',
+        'description' => 'Táto šablóna sa používa na odosielanie e-mailového upozornenia používateľom, ktorí boli označení v sekcii denníka komentárov.',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>Boli ste uvedený v denníku komentárov nasledujúceho záznamu:  <a href="$record_url">$record_name</a></p>
+                <p>Prihláste sa do aplikácie Sugar, aby ste mohli zobraziť príslušný komentár.</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'Boli ste uvedený v denníku komentárov nasledujúceho záznamu: $record_name
+            Prihláste sa do aplikácie Sugar, aby ste mohli zobraziť príslušný komentár.',
     ],
 
     'advanced_password_new_account_email' => array(

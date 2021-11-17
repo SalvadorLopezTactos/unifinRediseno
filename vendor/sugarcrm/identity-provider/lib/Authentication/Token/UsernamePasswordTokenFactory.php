@@ -12,8 +12,7 @@
 
 namespace Sugarcrm\IdentityProvider\Authentication\Token;
 
-use Sugarcrm\IdentityProvider\App\Authentication\AuthProviderManagerBuilder;
-
+use Sugarcrm\IdentityProvider\Authentication\Provider\Providers;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
@@ -66,7 +65,7 @@ class UsernamePasswordTokenFactory
         return new UsernamePasswordToken(
             $this->username,
             $this->password,
-            AuthProviderManagerBuilder::PROVIDER_KEY_LOCAL
+            Providers::PROVIDER_KEY_LOCAL
         );
     }
 
@@ -83,7 +82,7 @@ class UsernamePasswordTokenFactory
         return new UsernamePasswordToken(
             $this->username,
             $this->password,
-            AuthProviderManagerBuilder::PROVIDER_KEY_LDAP
+            Providers::PROVIDER_KEY_LDAP
         );
     }
 
@@ -108,7 +107,7 @@ class UsernamePasswordTokenFactory
         $token = new MixedUsernamePasswordToken(
             $this->username,
             $this->password,
-            AuthProviderManagerBuilder::PROVIDER_KEY_MIXED
+            Providers::PROVIDER_KEY_MIXED
         );
         array_walk($tokens, [$token, 'addToken']);
         return $token;

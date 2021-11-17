@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Raportin mukaan',
     'LBL_RECENTLY_MODIFIED' => 'Äskettäin muokattu',
     'LBL_RECORD_SAVED_SUCCESS' => 'Luotiin asiakas {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. Avaa aikataulu lisätäksesi käyttäjiä Users-alapaneelin kautta.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Tämä raporttiaikataulu',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Raporttiaikataulu-tietueiden työpöytä',
 );

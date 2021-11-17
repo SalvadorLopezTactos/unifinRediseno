@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['CampaignTracker'] = array('table' => 'campaign_trkrs',
+$dictionary['CampaignTracker'] = array('table' => 'campaign_trkrs', 'archive' => false,
 	'comment' => 'Maintains the Tracker URLs used in campaign emails',
           
 'fields' => array (
@@ -129,4 +129,3 @@ $dictionary['CampaignTracker'] = array('table' => 'campaign_trkrs',
       array('name' => 'campaign_tracker_key_idx', 'type'=>'index', 'fields'=>array('tracker_key')),
  )
 );
-?>

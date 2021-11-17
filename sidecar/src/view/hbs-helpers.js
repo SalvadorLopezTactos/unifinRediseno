@@ -611,7 +611,7 @@ const Helpers = {
         data = _.extend({templateComponent: component}, properties, options.hash);
 
         module = options.hash.module || component.module;
-        if (component && component.options.templateOptions && component.options.templateOptions.partials) {
+        if (component && component.options && component.options.templateOptions && component.options.templateOptions.partials) {
             template = component.options.templateOptions.partials[name];
         }
         // TODO: need to do recursive walk up the tree if template is not found, until we find it.

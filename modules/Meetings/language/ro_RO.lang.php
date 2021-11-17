@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Tabloul de bord Listă întâlniri',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare întâlniri',
+    'LBL_LEAD_GUESTS' => 'Invitați principali',
+    'LBL_CONTACT_GUESTS' => 'Contactați invitații',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare întâlniri',
 
 	'ERR_DELETE_RECORD' => 'Trebuie să specifici un număr de înregistrare pentru a șterge întâlnirea.',
 	'LBL_ACCEPT_THIS'=>'Acceptati?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Directia',
 	'LBL_LIST_DUE_DATE'=>'Pana la data:',
 	'LBL_LIST_FORM_TITLE' => 'Lista intalniri',
-	'LBL_LIST_MY_MEETINGS' => 'Intalnirile mele',
+    'LBL_LIST_MY_MEETINGS' => 'Intalnirile mele',
     'LBL_MY_SCHEDULED_MEETINGS' => 'Întâlnirile mele programate',
+    'LBL_GUEST_MEETINGS' => 'Întâlnirile mele ca invitat',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Întâlniri programate ca invitat',
 	'LBL_LIST_RELATED_TO' => 'Asociat cu',
 	'LBL_LIST_STATUS'=>'Status',
 	'LBL_LIST_SUBJECT' => 'Subiect',

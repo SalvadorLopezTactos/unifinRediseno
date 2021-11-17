@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Lista ţintă de tip implicit nu a fost găsita',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nu s-au găsit înregistrări',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Candidaturile au fost prelucrate',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Setări Email Inbound',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Setări e-mail de sistem',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Numele Tracker-ului:',
   'LBL_EDIT_TRACKER_URL'=>'URL al Tracker-ului:',

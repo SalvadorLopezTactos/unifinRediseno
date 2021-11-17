@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_BUGS_LIST_DASHBOARD' => 'Tablero de Lista de Errores',
   'LBL_BUGS_RECORD_DASHBOARD' => 'Tablero de Registro de Errores',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => 'Panel de Enfoque de Errores',
 
   'LBL_MODULE_NAME' => 'Errores',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Error',

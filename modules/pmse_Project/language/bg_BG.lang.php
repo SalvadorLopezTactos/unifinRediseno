@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Дефиниции на процеси',
   'LBL_MODULE_NAME_SINGULAR' => 'Дефиниция на процес',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на дефиниции на процеси',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Електронно табло със запис на дефиниции на процесите',
   'LNK_LIST' => 'Списък с дефиниции на процеси',
   'LNK_NEW_PMSE_PROJECT' => 'Създай дефиниция на процес',
   'LNK_IMPORT_PMSE_PROJECT' => 'Импортирай дефиниции на процеси',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Проемни отговорника на записа',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Екип',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Преразпредели дейността',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'Електронна поща',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'Потребител на процес на имейл, когато е присвоен процес',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'Потребителска дефиниция',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Метод на разпределение',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Отговорник',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Актуализирайте "Присвоен на" в записа',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Задайте „Възложено на" по наличност',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Добави свързан запис',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Свързан модул',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Името на дейността е празно.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Името"%s" вече съществува.',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Задължителна наличност на смяна',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Ако не са налични потребители',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'преди',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Само нови записи',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Само актуализирани записи',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Само актуализирани записи (Всички актуализации - вижте Помощния текст)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Нови записи или първа актуализация',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Нови записи или всички актуализации',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Изберете кога ще започне събитието. <br><br>New: Run process when new record is created.<br><br>First Update: Process runs only the first time criteria is met for an existing record.<br><br>All Updates: Process runs every time criteria is met for an existing record.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Изберете кога процесът ще стартира.<br><br>Ново: Изпълнете процес, когато е създаден нов запис.<br><br>Първа актуализация: Процесът се изпълнява само първия път, когато е изпълнен критерий за съществуващ запис.<br><br>Всички актуализации: Процесът се изпълнява всеки път, когато е изпълнен критерий за съществуващ запис.<br><br>Нови записи или първа актуализация: Процесът се изпълнява само първия път, когато е изпълнен критерий за запис, по време или на създаване на запис, или на актуализация на запис.<br><br>Нови записи ивсички актуализации: Процесът се изпълнява всеки път за всички нови и съществуващи записи.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Изберете SugarCRM модул, върху който да бъде приложен тригер',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Фиксирана дата',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'промени от',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'промени на',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'включва всякакви',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'не включва никакви',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'на или след',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'на или преди',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'не е равно на',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Добави',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Затвори',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'Всички екипи, определени към записа',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Екип',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% е свързано с %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Потребител, който е създал %MODULE%',

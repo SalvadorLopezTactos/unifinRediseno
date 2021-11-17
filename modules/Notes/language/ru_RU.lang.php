@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Информационная панель списка заметок',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Информационная панель записей о примечаниях',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для заметок',
 
+    'LBL_RELATED_CONTACT' => 'Связанный контакт',
     'ERR_DELETE_RECORD' => 'Вам следует указать номер записи перед удалением контрагента.',
     'LBL_ACCOUNT_ID' => 'Контрагент:',
     'LBL_CASE_ID' => 'Обращение:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'ID Контакта:',
     'LBL_CONTACT_NAME' => 'Контакт:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Заметки',
+    'LBL_ATTACHMENTS' => 'Вложения',
+    'LBL_ATTACHMENT_FLAG' => 'Является вложением',
     'LBL_DESCRIPTION' => 'Раздел для заметок',
     'LBL_EMAIL_ADDRESS' => 'Адрес электронной почты:',
     'LBL_EMAIL_ATTACHMENT' => 'Вложение',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Вложения',
     'LBL_NOTE' => 'Заметка:',
     'LBL_OPPORTUNITY_ID' => 'ID Сделки:',
+    'LBL_NOTE_PARENT_ID' => 'Родительский идентификатор заметки:',
     'LBL_PARENT_ID' => 'Код изначальной записи:',
     'LBL_PARENT_TYPE' => 'Тип изначальной записи',
     'LBL_EMAIL_TYPE' => 'Тип электронной почты',

@@ -203,42 +203,29 @@ $viewdefs['Products']['base']['view']['record'] = array(
                 ),
                 'mft_part_num',
                 array(
-                    'name' => 'discount_amount',
-                    'type' => 'discount',
-                    'related_fields' => array(
-                        'discount_select',
-                        'currency_id',
-                        'base_rate',
-                    ),
-                    'convertToBase' => true,
-                    'showTransactionalAmount' => true,
-                    'currency_field' => 'currency_id',
-                    'base_rate_field' => 'base_rate',
-                ),
-                array(
-                    'name' => 'discount',
+                    'name' => 'discount_field',
                     'type' => 'fieldset',
-                    'css_class' => 'quote-discount-percent',
-                    'label' => 'LBL_DISCOUNT_TYPE',
+                    'css_class' => 'discount-field quote-discount-percent',
+                    'label' => 'LBL_DISCOUNT_AMOUNT',
+                    'show_child_labels' => false,
+                    'sortable' => false,
                     'fields' => array(
+                        array(
+                            'name' => 'discount_amount',
+                            'label' => 'LBL_DISCOUNT_AMOUNT',
+                            'type' => 'discount-amount',
+                            'discountFieldName' => 'discount_select',
+                            'related_fields' => array(
+                                'currency_id',
+                            ),
+                            'convertToBase' => true,
+                            'base_rate_field' => 'base_rate',
+                            'showTransactionalAmount' => true,
+                        ),
                         array(
                             'type' => 'discount-select',
                             'name' => 'discount_select',
-                            'no_default_action' => true,
-                            'buttons' => array(
-                                array(
-                                    'type' => 'rowaction',
-                                    'name' => 'select_discount_amount_button',
-                                    'label' => 'LBL_DISCOUNT_AMOUNT',
-                                    'event' => 'button:discount_select_change:click',
-                                ),
-                                array(
-                                    'type' => 'rowaction',
-                                    'name' => 'select_discount_percent_button',
-                                    'label' => 'LBL_DISCOUNT_PERCENT',
-                                    'event' => 'button:discount_select_change:click',
-                                ),
-                            ),
+                            'options' => array(),
                         ),
                     ),
                 ),
@@ -276,6 +263,10 @@ $viewdefs['Products']['base']['view']['record'] = array(
                     'label' => 'LBL_RENEWABLE',
                     'type' => 'bool',
                 ),
+                'add_on_to_name' => [
+                    'name' => 'add_on_to_name',
+                    'type' => 'add-on-to',
+                ],
                 'contact_name',
                 array(
                     'name' => 'tag',

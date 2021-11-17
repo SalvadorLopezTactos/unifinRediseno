@@ -45,9 +45,12 @@ class ViewSourceProperties extends ViewList {
             // treat string as a template (the string resource plugin is unavailable in the current Smarty version)
             if (isset($connector_language['LBL_LICENSING_INFO'])) {
                 $siteUrl = rtrim($sugar_config['site_url'], '/');
+                $flavor = $GLOBALS['sugar_flavor'];
+                $version = $GLOBALS['sugar_version'];
+                $lang = $GLOBALS['current_language'];
                 $connector_language['LBL_LICENSING_INFO'] = str_replace(
-                    '{$SITE_URL}',
-                    $siteUrl,
+                    ['{$SITE_URL}', '{$flavor}', '{$version}', '{$lang}'],
+                    [$siteUrl, $flavor, $version, $lang],
                     $connector_language['LBL_LICENSING_INFO']
                 );
             }

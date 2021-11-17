@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'Gebruikersnaam',
 	'LBL_RESTORE_BUTTON_LABEL'=>'Herstellen',
 	'LBL_SYSTEM_SETTINGS' => 'Systeeminstellingen',
-	'LBL_SKYPEOUT_ON_DESC' => 'Staat gebruikers toe om op telefoonnummers te klikken om zodoende SkypeOut& Reg.; te gebruiken. De telefoonnummers moeten in een bepaald formaat staan om van deze eigenschap gebruik te kunnen maken. Formaat:  "+"  "landcode" "nummer", voorbeeld  +31 (20) 5551234. Voor meer informatie, zie Skype FAQ bij skype& Reg.; faq',
-	'LBL_SKYPEOUT_ON' => 'SkypeOut® inschakelen',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut®',
+    'LBL_DIALOUT_ON_DESC' => 'Gebruikers toestaan op telefoonnummers te klikken om ze te bellen via de standaard computertelefonie-integratiesoftware (CTI).',
+    'LBL_DIALOUT_ON' => 'Click-to-Call inschakelen',
+    'LBL_DIALOUT_TITLE' => 'Uitgaand bellen',
     'LBL_TWEETTOCASE_ON_DESC' => 'Geeft gebruikers rechten om cases aan te maken van tweets',
     'LBL_TWEETTOCASE_ON' => 'Schakel Tweet&reg; in om cases te integreren',
     'LBL_TWEETTOCASE_TITLE' => 'Tweet&reg; naar case',
@@ -363,7 +363,7 @@ $mod_strings = array (
     'JS_ALERT_PDF_WRONG_EXTENSION' => 'Dit bestand heeft geen goede bestandsextensie',
     'LBL_PDF_INSTRUCTIONS' => 'Instructies',
     'PDF_INSTRUCTIONS_ADD_FONT' => <<<BSOFR
-Fonts supported by SugarPDF :
+Lettertypen ondersteund door SugarPDF :
 <ul>
 <li>TrueTypeUnicode (UTF-8 Unicode)</li>
 <li>OpenTypeUnicode</li>
@@ -373,10 +373,10 @@ Fonts supported by SugarPDF :
 <li>CID-0</li>
 </ul>
 <br>
-If you choose to not embed your font in the PDF, the generated PDF file will be lighter but a substitution will be use if the font is not available in the system of your reader.
+Als u ervoor kiest uw lettertype niet op te nemen in de PDF, is het gegenereerde PDF-bestand lichter, maar wordt er een vervanging gebruikt als het lettertype niet beschikbaar is in het systeem van uw lezer.
 <br><br>
-Adding a PDF font to SugarCRM requires to follow steps 1 and 2 of the TCPDF Fonts documentation available in the "DOCS" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>The pfm2afm and ttf2ufm utils are available in fonts/utils in the TCPDF package that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
+Om een PDF-lettertype toe te voegen aan SugarCRM moet u stap 1 en 2 van de TCPDF Fonts documentatie volgen, die beschikbaar is in het deel "DOCS" van de <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF website</a>.
+<br><br>De pfm2afm en ttf2ufm middelen zijn beschikbaar in lettertypes/hulpmiddelen in het TCPDF pakket dat u kunt downloaden in het deel "DOWNLOADEN" van de <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF website</a>.
 <br><br>Load the metric file generated in step 2 and your font file below.
 BSOFR
 ,
@@ -428,6 +428,9 @@ BSOFR
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* De Rapportage module is niet beschikbaar voor de browser gebaseerde mobiele weergave.',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => 'Maximale lengte moet groter zijn dan minimale lengte',
+    'ERR_MIN_LENGTH_NEGATIVE' => 'Minimale lengte moet een positieve waarde zijn',
+    'ERR_MAX_LENGTH_NEGATIVE' => 'Maximale lengte moet een positieve waarde zijn',
     'ERR_EMPTY_SAML_LOGIN' => 'Aanmeld URL SAML mag niet leeg zijn',
     'ERR_EMPTY_SAML_CERT' => 'SAML certificaat mag niet leeg zijn',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'ID SAML-entiteit kan niet leeg zijn',
@@ -441,9 +444,6 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Activity Streams inschakelen',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Schakelt Activity Streams in voor de toepassing',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Aanvullende inhoud aanmeldscherm inschakelen',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Procesdefinities automatisch opslaan',

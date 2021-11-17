@@ -70,7 +70,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> 'Предупреждение: Липса на права за писане',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'Инсталираната версия на PHP не се поддържа от SugarCRM.  Трябва да инсталирате версия съвместима с текущата версия на SugarCRM.  За повече информация относно поддържаните версии на PHP можете да разгледате "Compatibility Matrix in the Release Notes". Инсталираната версия на PHP е:',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'Your version of IIS is not supported by Sugar.  You will need to install a version that is compatible with the Sugar application.  Please consult the Compatibility Matrix in the Release Notes for supported IIS Versions. Your version is',
-	'ERR_CHECKSYS_FASTCGI'              => 'We detect that you are not using a FastCGI handler mapping for PHP. You will need to install/configure a version that is compatible with the Sugar application.  Please consult the Compatibility Matrix in the Release Notes for supported Versions. Please see <a href="http://www.iis.net/php/" target="_blank">http://www.iis.net/php/</a> for details',
+    'ERR_CHECKSYS_FASTCGI'              => 'Забелязваме, че не използвате FastCGI handler mapping за PHP. Ще трябва да инсталирате/конфигурирате версия, която е съвместима с приложението Sugar.  Моля, направете справка в матрицата за съвместимост в бележките за изданието на поддържаните версии. Моля, вижте <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a> за подробности ',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'За по-добра производителност при използване на IIS/FastCGI sapi, моля задайте стойност 0 на параметъра fastcgi.logging във файла php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Инсталираната версия на PHP не се поддържа: ( версия',
     'LBL_DB_UNAVAILABLE'                => 'Базата данни е недостъпна.',
@@ -550,139 +550,140 @@ Server или Oracle</li>
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Режимът Php обратна съвместимост е включен. Настройте zend.ze1_compatibility_mode на изключен, за да продължите по-нататък',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => 'Имейли с уведомления за срещи',
+        'subject' => 'Среща от SugarCRM - $event_name ',
+        'description' => 'Шаблонът се използва, когато системата изпраща уведомления за среща до потребител.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>До: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Meeting</p>
+	<p>$assigned_by_user ви кани на среща</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>Тема: $event_name<br/>
+	Начална дата: $start_date<br/>
+	Крайна дата: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>Описание: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>Приемате срещата:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>Приемате срещата с колебания:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>Отказвате срещата:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'До: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user ви покани на среща
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+Тема: $event_name
+Начална дата: $start_date
+Крайна дата: $end_date
 
-Description: $description
+Описание: $description
 
-Accept this meeting:
+Приемате срещата:
 <$accept_link>
 
-Tentatively Accept this meeting
+Приемате срещата с колебание:
 <$tentative_link>
 
-Decline this meeting
+Отказвате срещата:
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => 'Имейли с уведомления за повикване',
+        'subject' => 'Повикване от SugarCRM - $event_name ',
+        'description' => 'Шаблонът се използва, когато системата изпраща уведомления за повикване до потребител.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>До: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user ви кани на разговор</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>Тема: $event_name<br/>
+	Начална дата: $start_date<br/>
+	Продължителност: $hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>Описание: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>Приемате повикването:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>Приемате повикването с колебания:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>Отказвате повикването:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'До: $assigned_user
 
-$assigned_by_user has invited you to a Call
+	$assigned_by_user ви кани на разговор
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+	Тема: $event_name
+	Начална дата: $start_date
+	Продължителност: $hoursh, $minutesm
 
-Description: $description
+	Описание: $description
 
-Accept this call:
-<$accept_link>
+	Приемате повикването:
+	<$accept_link>
 
-Tentatively Accept this call
-<$tentative_link>
+	Приемате повикването с колебание
+	<$tentative_link>
 
-Decline this call
-<$decline_link>',
+	Отказвате повикването:
+        <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => 'Имейли с уведомления за задание',
+        'subject' => 'SugarCRM - Зададен $module_name ',
+        'description' => 'Шаблонът се използва, когато системата изпраща задание до потребител.',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user възложи&nbsp;$module_name на&nbsp;$assigned_user.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>Можете да прегледате&nbsp;$module_name на:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user възложи $module_name на $assigned_user.
 
-You may review this $module_name at:
+Можете да прегледате $module_name на:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => 'Имейли за насрочена справка',
+        'subject' => 'Насрочена справка: $report_name от $report_time',
+        'description' => 'Шаблонът се използва, когато системата изпраща насрочена справка до потребител.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>Здравейте, $assigned_user,</p>
+<p>Прикаченият файл съдържа автоматично генерирана справка, която е насрочена за Вас.</p>
+<p>Име на справка: $report_name</p>
+<p>Дата и час на изпълнение на справката: $report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            'Здравейте, $assigned_user,
 
-Attached is an auto generated report that has been scheduled for you.
+Прикаченият файл съдържа автоматично генерирана справка, която е насрочена за Вас.
 
-Report Name: $report_name
+Име на справка: $report_name
 
-Report Run Date and Time: $report_time',
+Дата и час на изпълнение на справката: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => 'Уведомление с имейл за системен регистър с коментари',
+        'subject' => 'SugarCRM - $initiator_full_name Ви спомена в $singular_module_name',
+        'description' => 'Шаблонът се използва, за да се изпрати уведомление по имейл на потребители, които са отбелязани в раздел на регистър с коментари.',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>Вие сте споменати в следния регистър с коментари на запис:  <a href="$record_url">$record_name</a></p>
+                <p>Влезте в Sugar, за да видите коментара.</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'Вие сте споменати в следния регистър с коментари на запис:  $record_name
+                Влезте в Sugar, за да видите коментара.',
     ],
 
     'advanced_password_new_account_email' => array(

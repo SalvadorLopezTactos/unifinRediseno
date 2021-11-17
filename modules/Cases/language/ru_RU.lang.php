@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Информационная панель списка обращений',
     'LBL_CASES_RECORD_DASHBOARD' => 'Информационная панель записей обращений',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Сведения об обращении',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для обращений',
 
 	'ERR_DELETE_RECORD'					=> 'Вы должны указать номер записи перед удалением контрагента.',
 	'LBL_ACCOUNT_ID'					=> 'Контрагент',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Показать в портале',
 	'LBL_CREATE_KB_DOCUMENT' => 'Добавить статью в Базе знаний',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'База знаний',
+    'LBL_REQUEST_CLOSE' => 'Закрытие запроса',
+    'LBL_REQUEST_CLOSE_DATE' => 'Дата закрытия запроса',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Запрос на закрытие',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Отправьте запрос, чтобы закрыть это обращение',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Хотите отправить запрос на закрытие этого обращения?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Мои обращения, для которых подан запрос на закрытие',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Мои обращения, для которых подан запрос на закрытие',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Мои обращения, для которых подан запрос на закрытие',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Перечень обращений, для которых подан запрос на закрытие',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Отображает перечень назначенных обращений, для которых подан запрос на закрытие',
 
     'LBL_CREATED_USER' => 'Создано пользователем',
     'LBL_MODIFIED_USER' => 'Изменено пользователем',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Ответственный пользователь',
     'LBL_EXPORT_TEAM_COUNT' => 'Team Count',
     'LBL_CHANGETIMERS' => 'Изменить таймеры',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Покупки',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Email-сообщения соответствующих контактов',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'К примеру, Вы можете воспользоваться этим для поиска кейса, который был уже оформлен.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Если вы хотите оформить кейс в поддержку, нажмите здесь, чтобы создать новый кейс.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Для возврата в предыдущее окно в любое время нажмите здесь.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Взаимодействие с обращением',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Заметки',
 
@@ -149,5 +161,5 @@ $mod_strings = array (
 
     'LBL_SLA_DETAILS' => 'Сведения о Соглашении об уровне обслуживания (SLA)',
     'LBL_HOURS' => 'Часы',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'Статус',
 );

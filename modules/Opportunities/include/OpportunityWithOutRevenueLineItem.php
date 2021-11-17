@@ -53,13 +53,11 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
             'massupdate' => true,
         ),
         'date_closed' => array(
-            'calculated' => false,
-            'enforced' => false,
-            'formula' => '',
             'audited' => true,
             'importable' => 'required',
             'required' => true,
             'massupdate' => true,
+            'hidemassupdate' => false,
         ),
         'commit_stage' => array(
             'massupdate' => true,
@@ -71,13 +69,14 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
             'calculated' => false,
             'enforced' => false,
             'formula' => '',
+            'readonly' => false,
             'audited' => true,
             'required' => true,
-            'studio' => true,
             'massupdate' => true,
             'reportable' => true,
             'workflow' => true,
             'importable' => 'required',
+            'hidemassupdate' => false,
         ),
         'probability' => array(
             'audited' => true,
@@ -93,8 +92,9 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
             'massupdate' => false,
             'importable' => false,
         ),
-        'date_closed_timestamp' => array(
-            'formula' => 'timestamp($date_closed)'
+        'service_start_date' => array(
+            'studio' => false,
+            'hidemassupdate' => false,
         ),
         'total_revenue_line_items' => array(
             'reportable' => false,
@@ -104,6 +104,7 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
             'reportable' => false,
             'workflow' => false
         ),
+
     );
 
     /**
@@ -137,10 +138,11 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
             array(
                 'commit_stage' => $this->isForecastSetup(),
                 'sales_status' => false,
-                'sales_stage' => true,
+                'service_start_date' => false,
                 'probability' => true,
                 'renewal' => false,
                 'renewal_parent_name' => false,
+                'service_duration' => false,
             )
         );
 
@@ -148,10 +150,12 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
         $this->fixListViews(
             array(
                 'commit_stage' => $this->isForecastSetup(),
-                'sales_status' => 'sales_stage',
+                'service_start_date' => false,
+                'sales_status' => false,
                 'probability' => true,
                 'renewal' => false,
                 'renewal_parent_name' => false,
+                'service_duration' => false,
             )
         );
 
@@ -159,7 +163,9 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
             array(
                 'sales_stage' => true,
                 'sales_status' => false,
+                'service_start_date' => false,
                 'probability' => true,
+                'service_duration' => false,
             )
         );
     }
@@ -181,8 +187,8 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
         SugarAutoLoader::ensureDir($this->moduleExtFolder . '/Vardefs');
         $file_contents = <<<EOL
 <?php
-\$dictionary['Opportunity']['fields']['renewal'] = null;
-\$dictionary['Opportunity']['fields']['renewal_parent_name'] = null;
+\$dictionary['Opportunity']['fields']['renewal']['studio'] = false;
+\$dictionary['Opportunity']['fields']['renewal_parent_name']['studio'] = false;
 EOL;
         sugar_file_put_contents($this->moduleExtFolder . '/Vardefs/' . $this->dupeCheckExtFile, $file_contents);
 
@@ -281,12 +287,38 @@ EOL;
         }
     }
 
+    protected $rliRelatedDataToRemove = [
+        'purchased_line_items' => [
+            'revenuelineitem_id',
+        ],
+    ];
+
+    /**
+     * Clear the related RLI data before truncating the RLI table
+     *
+     * @return array
+     */
+    protected function deleteRLIRelatedData()
+    {
+        $rowsEffected = [];
+        foreach ($this->rliRelatedDataToRemove as $tableName => $fields) {
+            $query = DBManagerFactory::getConnection()->createQueryBuilder();
+            $query->update($tableName);
+            foreach ($fields as $field) {
+                $query->set($field, $query->createPositionalParameter(null));
+            }
+            $rowsEffected[$tableName] = $query->execute();
+        }
+        return $rowsEffected;
+    }
+
     /**
      * Delete all the RLI data, since it not needed any more
      */
     protected function deleteRevenueLineItems()
     {
         $rli = BeanFactory::newBean('RevenueLineItems');
+        $rowsEffected = $this->deleteRLIRelatedData();
         /* @var $db DBManager */
         $db = DBManagerFactory::getInstance();
         $db->commit();

@@ -18,6 +18,7 @@
  ********************************************************************************/
 
 use Psr\Log\LoggerInterface;
+use Sugarcrm\Sugarcrm\CSP\ContentSecurityPolicy;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\ViolationException;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
@@ -25,6 +26,43 @@ use Sugarcrm\Sugarcrm\Security\Context;
 use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Language;
 use Sugarcrm\Sugarcrm\Security\Validator\Validator;
 use Sugarcrm\Sugarcrm\ProductDefinition\Config\Config as ProductDefinitionConfig;
+
+/**
+ * To get human readable, non-localized subscriptions such Enterprise, Sell, Serve, etc.
+ *
+ * @param array $subscriptions
+ * @return array
+ */
+function getReadableProductNames(array $subscriptions) : array
+{
+    global $sugar_flavor;
+
+    $readableNames = [];
+    static $flavorMapping = [
+        'PRO' => 'Professional',
+        'ENT' => 'Enterprise',
+        'ULT' => 'Ultimate',
+    ];
+    static $licenseMapping = [
+        'SUGAR_SELL' => 'Sell',
+        'SUGAR_SERVE' => 'Serve',
+    ];
+
+    if (!empty($sugar_flavor) && $flavorMapping[$sugar_flavor]) {
+        $currentFlavor = $flavorMapping[$sugar_flavor];
+    }
+    foreach ($subscriptions as $sub) {
+        if ($sub == 'CURRENT' && !empty($currentFlavor)) {
+            $readableNames[] = $currentFlavor;
+        } elseif (!empty($licenseMapping[$sub])) {
+            $readableNames[] = $licenseMapping[$sub];
+        } else {
+            // just in case
+            $readableNames[] = $sub;
+        }
+    }
+    return $readableNames;
+}
 
 function make_sugar_config(&$sugar_config)
 {
@@ -245,6 +283,16 @@ function make_sugar_config(&$sugar_config)
             'http',
             'https',
         ],
+        'push_notification' => [
+            'enabled' => false,
+        ],
+        'sugar_push' => [
+            'max_retries' => 2,
+            'service_urls' => [
+                'default' => 'https://sugarpush.service.sugarcrm.com',
+                'us-west-2' => 'https://sugarpush-us-west-2-prod.service.sugarcrm.com',
+            ],
+        ],
     );
 }
 
@@ -371,7 +419,7 @@ function get_sugar_config_defaults()
     'asp', 'cfm', 'js', 'vbs', 'html', 'htm' ),
     'upload_maxsize' => 30000000,
     'import_max_execution_time' => 3600,
-    'verify_client_ip' => true,
+    'verify_client_ip' => false,
     'js_custom_version' => '',
     'js_lang_version' => 1,
         'lead_conv_activity_opt' => 'donothing',
@@ -490,7 +538,6 @@ function get_sugar_config_defaults()
             // minutes) for multiple Data Privacy records to be grouped in a single job before going into execution.
             'erasure_job_delay' => 0,
         ],
-        'marketing_extras_enabled' => true,
         'marketing_extras_url' => 'https://marketing.sugarcrm.com/content',
         'default_background_image' => 'include/images/login-background.png',
 
@@ -499,10 +546,34 @@ function get_sugar_config_defaults()
             'connector' => 'Pendo',
             'id' => '1dd345e9-b638-4bd2-7bfb-147a937d4728',
         ),
-        // portal
-        'portal' => [
+        'generic_search' => [
             'modules' => [
                 'KBContents',
+            ],
+        ],
+        'login_page' => [
+            'marketing_extras_content' => [
+                'url' => 'https://www.sugarcrm.com/product-login-page-service/',
+                'static_url' => 'include/MarketingExtras/StaticMarketingContent/static.html',
+                'connect_timeout_ms' => 150, // max number of ms to wait while trying to connect
+                'timeout_ms' => 300, // max number of ms to allow cURL execution (default is connect_timeout_ms * 2)
+            ],
+        ],
+        'enable_link_to_drawer' => true,
+        'push_notification' => [
+            'enabled' => false,
+        ],
+        'sugar_push' => [
+            'max_retries' => 2,
+            'service_urls' => [
+                'default' => 'https://sugarpush.service.sugarcrm.com',
+                'us-west-2' => 'https://sugarpush-us-west-2-prod.service.sugarcrm.com',
+            ],
+        ],
+        'aws_connect' => [
+            'allow_list_domains' => [
+                '*.amazonaws.com', // used by AWS Connect chat and Portal chat
+                '*.static.connect.aws', // used by AWS Connect to serve static content
             ],
         ],
     );
@@ -1544,8 +1615,6 @@ function displayStudioForCurrentUser()
     $_SESSION['display_studio_for_user'] = false;
 
     return false;
-
-
 }
 
 function displayWorkflowForCurrentUser()
@@ -1618,6 +1687,7 @@ function get_admin_modules_for_user($user)
         'pmse_Emails_Templates', // Process Emails Templates
         'pmse_Inbox', // Processes
         'DataPrivacy',
+        'Shifts',
     );
 
     $workflow_mod_list = array();
@@ -1801,6 +1871,10 @@ function get_select_options_with_id_separate_key ($label_list, $key_list, $selec
  */
 function sugar_die($error_message, $exit_code = 1)
 {
+    if (isset($GLOBALS['log']) && is_object($GLOBALS['log'])) {
+        $GLOBALS['log']->fatal("died with message: " . $error_message);
+    }
+
     @header("HTTP/1.0 500 Server Error");
     @header("Status: 500 Server Error");
     sugar_cleanup();
@@ -2000,7 +2074,7 @@ function add_http($url)
 {
     if (!preg_match("@://@i", $url)) {
         $scheme = "http";
-        if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+        if (isHTTPS()) {
             $scheme = 'https';
         }
 
@@ -2016,25 +2090,21 @@ function add_http($url)
  */
 function getDefaultXssTags()
 {
-    $tmp = array(
-    "applet" => "applet",
-    "base" => "base",
-    "embed" => "embed",
-    "form" => "form",
-    "frame" => "frame",
-    "frameset" => "frameset",
-    "iframe" => "iframe",
-    "import" => "\?import",
-    "layer" => "layer",
-    "link" => "link",
-    "object" => "object",
-    "script" => "script",
-    "xmp" => "xmp",
-    );
-
-    $ret = base64_encode(serialize($tmp));
-
-    return $ret;
+    return [
+        "applet" => "applet",
+        "base" => "base",
+        "embed" => "embed",
+        "form" => "form",
+        "frame" => "frame",
+        "frameset" => "frameset",
+        "iframe" => "iframe",
+        "import" => "\?import",
+        "layer" => "layer",
+        "link" => "link",
+        "object" => "object",
+        "script" => "script",
+        "xmp" => "xmp",
+    ];
 }
 
 /**
@@ -2062,8 +2132,6 @@ function clean_xss($str, $cleanImg=true)
     if(empty($sugar_config['email_xss']))
     $sugar_config['email_xss'] = getDefaultXssTags();
 
-    $xsstags = unserialize(base64_decode($sugar_config['email_xss']));
-
     // cn: bug 13079 - "on\w" matched too many non-events (cONTact, strONG, etc.)
     $jsEvents  = "onblur|onfocus|oncontextmenu|onresize|onscroll|onunload|ondblclick|onclick|";
     $jsEvents .= "onmouseup|onmouseover|onmousedown|onmouseenter|onmouseleave|onmousemove|onload|onchange|";
@@ -2080,7 +2148,7 @@ function clean_xss($str, $cleanImg=true)
     $matches = array();
     preg_match_all($tagsrex, $str, $tagmatches, PREG_PATTERN_ORDER);
     foreach ($tagmatches[1] as $no => $tag) {
-        if (in_array($tag, $xsstags)) {
+        if (in_array($tag, $sugar_config['email_xss'])) {
             // dangerous tag - take out whole
             $matches[] = $tagmatches[0][$no];
             continue;
@@ -2267,23 +2335,11 @@ function clean_incoming_data()
     global $sugar_config;
     global $RAW_REQUEST;
 
-    if (get_magic_quotes_gpc()) {
-        // magic quotes screw up data, we'd have to clean up
-        $RAW_REQUEST = array_map("cleanup_slashes", $_REQUEST);
-    } else {
-        $RAW_REQUEST = $_REQUEST;
-    }
+    $RAW_REQUEST = $_REQUEST;
 
-    if (get_magic_quotes_gpc() == 1) {
-        $req  = array_map("preprocess_param", $_REQUEST);
-        $post = array_map("preprocess_param", $_POST);
-        $get  = array_map("preprocess_param", $_GET);
-    } else {
-
-        $req  = array_map("securexss", $_REQUEST);
-        $post = array_map("securexss", $_POST);
-        $get  = array_map("securexss", $_GET);
-    }
+    $req  = array_map("securexss", $_REQUEST);
+    $post = array_map("securexss", $_POST);
+    $get  = array_map("securexss", $_GET);
 
     // PHP cannot stomp out superglobals reliably
     foreach ($post as $k => $v) { $_POST[$k] = $v; }
@@ -2351,7 +2407,7 @@ function str_end($str, $end)
  */
 function securexss($value)
 {
-    if (defined('ENTRY_POINT_TYPE') && constant('ENTRY_POINT_TYPE') == 'api') {
+    if (isFromApi()) {
         return $value;
     }
     if (is_array($value)) {
@@ -2397,10 +2453,6 @@ function securexsskey($value, $die=true)
 function preprocess_param($value)
 {
     if (is_string($value)) {
-        if (get_magic_quotes_gpc() == 1) {
-            $value = stripslashes($value);
-        }
-
         $value = securexss($value);
     }
 
@@ -2886,10 +2938,19 @@ function insert_charset_header()
     header('Content-Type: text/html; charset=UTF-8');
 }
 
+function insert_csp_header()
+{
+    global $sugar_config;
+    if (!empty($sugar_config['disable_CSP']) || defined('SUGARCRM_IS_INSTALLING')) {
+        return;
+    }
+    header(ContentSecurityPolicy::fromAdministrationSettings()->withAddedDefaults()->asHeader());
+}
+
 function getCurrentURL()
 {
     $href = "http:";
-    if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+    if (isHTTPS()) {
         $href = 'https:';
     }
 
@@ -2909,7 +2970,7 @@ function javascript_escape($str)
         } elseif (ord(substr($str, $i, 1))==13) {
             $new_str .= '\r';
         } else {
-            $new_str .= $str{$i};
+            $new_str .= $str[$i];
         }
     }
 
@@ -2966,15 +3027,6 @@ function nl2html($str)
 }
 
 /**
- * Private helper function for displaying the contents of a given variable.
- * This function is only intended to be used for SugarCRM internal development.
- * The ppd stands for Pre Print Die.
- */
-function _ppd($mixed)
-{
-}
-
-/**
  * Private helper function for displaying the contents of a given variable in
  * the Logger. This function is only intended to be used for SugarCRM internal
  * development. The pp stands for Pre Print.
@@ -3011,59 +3063,6 @@ function _ppl($mixed, $die=false, $displayStackTrace=false, $loglevel="fatal")
 }
 
 /**
- * private helper function to quickly show the major, direct, field attributes of a given bean.
- * The ppf stands for Pre[formatted] Print Focus [object]
- * @param object bean The focus bean
- */
-function _ppf($bean, $die=false)
-{
-}
-
-/**
- * Private helper function for displaying the contents of a given variable.
- * This function is only intended to be used for SugarCRM internal development.
- * The pp stands for Pre Print.
- */
-function _pp($mixed)
-{
-}
-
-/**
- * Private helper function for displaying the contents of a given variable.
- * This function is only intended to be used for SugarCRM internal development.
- * The pp stands for Pre Print.
- */
-function _pstack_trace($mixed=null)
-{
-}
-
-/**
- * Private helper function for displaying the contents of a given variable.
- * This function is only intended to be used for SugarCRM internal development.
- * The pp stands for Pre Print Trace.
- */
-function _ppt($mixed, $textOnly=false)
-{
-}
-
-/**
- * Private helper function for displaying the contents of a given variable.
- * This function is only intended to be used for SugarCRM internal development.
- * The pp stands for Pre Print Trace Die.
- */
-function _pptd($mixed)
-{
-}
-
-/**
- * Private helper function for decoding javascript UTF8
- * This function is only intended to be used for SugarCRM internal development.
- */
-function decodeJavascriptUTF8($str)
-{
-}
-
-/**
  * Will check if a given PHP version string is supported.
  * Do not pass in any parameter to default to a check against the current environment's PHP version.
  *
@@ -3077,7 +3076,7 @@ function check_php_version(string $version = PHP_VERSION)
         return -1;
     }
 
-    if (version_compare($version, '7.4.0-dev', '>=')) {
+    if (version_compare($version, '7.5.0-dev', '>=')) {
         return -1;
     }
 
@@ -3473,7 +3472,7 @@ function mark_delete_components($sub_object_array, $run_second_level=false, $sub
 function return_bytes($val)
 {
     $val = trim($val);
-    $last = strtolower($val{strlen($val)-1});
+    $last = strtolower($val[strlen($val)-1]);
     $multiplers = array('k' => 1024, 'm' => 1048576, 'g' => 1073741824);
     if (isset($multiplers[$last])) {
         $val = substr($val, 0, -1);
@@ -3515,7 +3514,7 @@ function is_windows()
  */
 function is_writable_windows($file)
 {
-    if ($file{strlen($file)-1}=='/') {
+    if ($file[strlen($file)-1]=='/') {
         return is_writable_windows($file.uniqid(mt_rand()).'.tmp');
     }
 
@@ -3908,6 +3907,19 @@ function setPhpIniSettings()
     $backtrack_limit = ini_get('pcre.backtrack_limit');
     if (!empty($backtrack_limit)) {
         ini_set('pcre.backtrack_limit', '-1');
+    }
+
+    if (!isCli()) {
+        // sets HttpOnly flag for session cookie
+        ini_set('session.cookie_httponly', '1');
+
+        // set Secure flag for sesion cookie only for HTTPS protocol
+        if (isHTTPS()) {
+            ini_set('session.cookie_secure', '1');
+        }
+
+        //set SameSite = Lax for session
+        ini_set('session.cookie_samesite', 'Lax');
     }
 }
 
@@ -4680,6 +4692,70 @@ function sugar_ucfirst($string, $charset='UTF-8')
 }
 
 /**
+ * Performs a multibyte-safe conversion of a string to uppercase
+ *
+ * @param string $string the string to convert to uppercase
+ * @param string $encoding the character encoding to use, default is UTF-8
+ * @return string the string with all alphabetic characters converted to uppercase
+ */
+function sugarStrToUpper(string $string = '', string $encoding = 'UTF-8') : string
+{
+    // mb_strtoupper is not affected by locale settings and it can convert any
+    // characters that have 'alphabetic' property, including multi-byte characters
+    // (e.g. certain Chinese, Japanese, Korean, Turkish, etc. characters)
+    return function_exists('mb_strtoupper') ? mb_strtoupper($string, $encoding) : strtoupper($string);
+}
+
+/**
+ * Performs a multibyte-safe conversion of a string to lowercase
+ *
+ * @param string $string the string to convert to lowercase
+ * @param string $encoding the character encoding to use, default is UTF-8
+ * @return string the string with all alphabetic characters converted to lowercase
+ */
+function sugarStrToLower(string $string = '', string $encoding = 'UTF-8') : string
+{
+    // mb_strtolower is not affected by locale settings and it can convert any
+    // characters that have 'alphabetic' property, including multi-byte characters
+    // (e.g. certain Chinese, Japanese, Korean, Turkish, etc. characters)
+    return function_exists('mb_strtolower') ? mb_strtolower($string, $encoding) : strtolower($string);
+}
+
+/**
+ * Performs a multibyte-safe extraction of a substring from a string
+ *
+ * @param string $string the string to extract from
+ * @param int $start the starting character index of the string to extract from
+ * @param int $length the length of the substring to extract
+ * @param string $encoding the character encoding to use, default is UTF-8
+ * @return string the substring of the given length from the given index of the given string
+ */
+function sugarSubstr(string $string = '', ?int $start = 0, ?int $length = null, string $encoding = 'UTF-8') : string
+{
+    // mb_substr is not affected by locale settings and it works correctly on
+    // strings that contain multibyte characters (e.g. certain Chinese, Japanese,
+    // Korean, Turkish, etc. characters)
+    return function_exists('mb_substr') ?
+        mb_substr($string, $start, $length, $encoding) :
+        substr($string, $start, $length);
+}
+
+/**
+ * Performs a multibyte-safe count of characters in a string
+ *
+ * @param string $string the string to count the length of
+ * @param string $encoding the character encoding to use, default is UTF-8
+ * @return int the count of characters in the string
+ */
+function sugarStrlen(string $string = '', string $encoding = 'UTF-8') : int
+{
+    // mb_strlen is not affected by locale settings and it works correctly on
+    // strings that contain multibyte characters (e.g. certain Chinese, Japanese,
+    // Korean, Turkish, etc. characters)
+    return function_exists('mb_strlen') ? mb_strlen($string, $encoding) : strlen($string);
+}
+
+/**
  *
  */
 function unencodeMultienum($string)
@@ -4888,13 +4964,15 @@ function getUrls($string)
 function verify_image_file($path, $jpeg = false)
 {
     if (!empty($path)) {
+        $filetype = get_file_mime_type($path);
+        if ($filetype === 'image/svg+xml') {
+            return true;
+        }
         if (function_exists('imagepng') && function_exists('imagejpeg') && function_exists('imagecreatefromstring')) {
             $img = @imagecreatefromstring(file_get_contents($path));
             if (!$img) {
                 return false;
             }
-            $img_size = getimagesize($path);
-            $filetype = $img_size['mime'];
             //if filetype is jpeg or if we are only allowing jpegs, create jpg image
             if ($filetype == "image/jpeg" || $jpeg) {
                 ob_start();
@@ -5142,24 +5220,43 @@ function get_custom_file_if_exists($file)
  * @param string $dev_status
  * @param string $send_key
  * @param string $send_anchor
+ * @param string $send_products
  * @return string the completed help URL
  */
-function get_help_url($send_edition = '', $send_version = '', $send_lang = '', $send_module = '', $send_action = '', $dev_status = '', $send_key = '', $send_anchor = '')
-{
+function get_help_url(
+    $send_edition = '',
+    $send_version = '',
+    $send_lang = '',
+    $send_module = '',
+    $send_action = '',
+    $dev_status = '',
+    $send_key = '',
+    $send_anchor = '',
+    $send_products = ''
+) {
     global $sugar_config;
+
+    $params = array_filter([
+        'edition' => $send_edition,
+        'version' => $send_version,
+        'lang' => $send_lang,
+        'module' => $send_module,
+        'help_action' => $send_action,
+        'status' => $dev_status,
+        'key' => $send_key,
+        'anchor' => $send_anchor,
+        'products' => $send_products,
+    ]);
 
     if (!empty($sugar_config['custom_help_url'])) {
         $sendUrl = $sugar_config['custom_help_url'];
     } else {
         if (!empty($sugar_config['custom_help_base_url'])) {
-            $baseUrl= $sugar_config['custom_help_base_url'];
+            $baseUrl = $sugar_config['custom_help_base_url'];
         } else {
-            $baseUrl = "http://www.sugarcrm.com/crm/product_doc.php";
+            $baseUrl = "https://www.sugarcrm.com/crm/product_doc.php";
         }
-        $sendUrl = $baseUrl . "?edition={$send_edition}&version={$send_version}&lang={$send_lang}&module={$send_module}&help_action={$send_action}&status={$dev_status}&key={$send_key}";
-        if (!empty($send_anchor)) {
-            $sendUrl .= "&anchor=".$send_anchor;
-        }
+        $sendUrl = $baseUrl . '?' . http_build_query($params);
     }
 
     return $sendUrl;
@@ -5592,6 +5689,21 @@ function isTruthy($value)
 }
 
 /**
+ * Evaluates if a value is isFalsy
+ * @param mixed $value
+ * @return bool
+ */
+function isFalsy($value)
+{
+    return ($value === false ||
+            $value === 'false' ||
+            $value === 0 ||
+            $value === '0' ||
+            $value === 'off' ||
+            $value === 'no') ? true : false;
+}
+
+/**
  * Warn a message to log
  * @param string $param
  * @param array $backtrace
@@ -5871,4 +5983,33 @@ function prependSiteURL(string $addOn): string
 function isCli() : bool
 {
     return PHP_SAPI === 'cli';
+}
+
+/**
+ * check if it is HTTPS connection
+ * @return bool
+ */
+function isHTTPS() : bool
+{
+    $isHTTPS =
+        (!empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443) ||
+        (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') ||
+        (!empty($_SERVER['HTTP_HTTPS']) && strtolower($_SERVER['HTTP_HTTPS']) == 'on') ||
+        (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) == 'https');
+
+    //if HTTPS set key in $_SERVER array for backward compatibility
+    if ($isHTTPS) {
+        $_SERVER['HTTPS'] = 'on';
+    }
+
+    return $isHTTPS;
+}
+
+/**
+ * check if a request is coming from REST API
+ * @return bool
+ */
+function isFromApi() : bool
+{
+    return (defined('ENTRY_POINT_TYPE') && constant('ENTRY_POINT_TYPE') === 'api');
 }

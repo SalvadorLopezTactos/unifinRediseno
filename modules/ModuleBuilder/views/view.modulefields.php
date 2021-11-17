@@ -16,6 +16,9 @@ use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 
 class ViewModulefields extends SugarView
 {
+    /**
+     * @var MBModule
+     */
     var $mbModule;
 
     /**
@@ -69,10 +72,6 @@ class ViewModulefields extends SugarView
         $fieldTypes['datetime'] = $fieldTypes['datetimecombo'];
 
         if(!isset($_REQUEST['view_package']) || $_REQUEST['view_package'] == 'studio') {
-            //$this->loadPackageHelp($module_name);
-            $studioClass = new stdClass;
-            $studioClass->name = $module_name;
-
             $objectName = BeanFactory::getObjectName($module_name);
 
             VardefManager::loadVardef($module_name, $objectName, true);
@@ -94,21 +93,36 @@ class ViewModulefields extends SugarView
                     $def['label'] = $def['name'];
                 }
 
-				//Custom relate fields will have a non-db source, but custom_module set
-            	if(isset($def['source']) && $def['source'] == 'custom_fields' || isset($def['custom_module'])) {
-                   $f[$mod_strings['LBL_HCUSTOM']][$def['name']] = $def;
-                   $def['custom'] = true;
+                if (self::isRelationshipField($def)) {
+                    $def['type'] = translate('LBL_RELATIONSHIP_TYPE', 'ModuleBuilder');
+                    $def['custom'] = self::isCustomRelationshipField(
+                        $fieldName,
+                        $module_name,
+                        $dictionary[$objectName]['fields'],
+                    );
+                    if ($def['custom']) {
+                        $f[$mod_strings['LBL_HCUSTOM']][$def['name']] = $def;
+                    } else {
+                        $f[$mod_strings['LBL_HDEFAULT']][$def['name']] = $def;
+                    }
                 } else {
-                   $f[$mod_strings['LBL_HDEFAULT']][$def['name']] = $def;
-                   $def['custom'] = false;
+                    $def['type'] = isset($fieldTypes[$def['type']]) ? $fieldTypes[$def['type']] : ucfirst($def['type']);
+
+                    //Custom relate fields will have a non-db source, but custom_module set
+                    if (isset($def['source']) && $def['source'] == 'custom_fields' || isset($def['custom_module'])) {
+                        $f[$mod_strings['LBL_HCUSTOM']][$def['name']] = $def;
+                        $def['custom'] = true;
+                    } else {
+                        $f[$mod_strings['LBL_HDEFAULT']][$def['name']] = $def;
+                        $def['custom'] = false;
+                    }
                 }
 
-                $def['type'] = isset($fieldTypes[$def['type']]) ? $fieldTypes[$def['type']] : ucfirst($def['type']);
                 $fieldsData[] = $def;
                 $customFieldsData[$def['name']] = $def['custom'];
             }
-            $studioClass->mbvardefs->vardefs['fields'] = $f;
-            $smarty->assign('module', $studioClass);
+
+            $smarty->assign('moduleName', $module_name);
 
             $package = new stdClass;
             $package->name = '';
@@ -209,7 +223,7 @@ class ViewModulefields extends SugarView
             $smarty->assign('sortPreferences', $sortPreferences);
             $smarty->assign('title', $titleLBL);
             $smarty->assign('package', $package);
-            $smarty->assign('module', $this->mbModule);
+            $smarty->assign('moduleName', $this->mbModule->name);
             $smarty->assign('editLabelsMb','1');
             $smarty->assign('studio', false);
 
@@ -265,6 +279,11 @@ class ViewModulefields extends SugarView
     			if (isset($def['studio']['required']) && $def['studio']['required'])
                     return true;
 
+                // We need to check this explicitly here to catch OOTB relate fields. Otherwise
+                // it would fall through this block and return true even if editField => false
+                if (isset($def['studio']['editField']) && $def['studio']['editField'] == false) {
+                    return false;
+                }
     		} else
     		{
     			if ($def['studio'] == 'visible')
@@ -273,6 +292,11 @@ class ViewModulefields extends SugarView
                     return false;
             }
         }
+
+        if (self::isRelationshipField($def)) {
+            return true;
+        }
+
     	if (empty($def ['source']) || $def ['source'] == 'db' || $def ['source'] == 'custom_fields')
 		{
             if (strtolower($def['type']) != 'id' && (empty($def ['dbType']) || $def ['dbType'] != 'id')) {
@@ -282,4 +306,54 @@ class ViewModulefields extends SugarView
 
 		return false;
 	}
+
+    /**
+     * Checks if the field def is a relate field tied to a relationship
+     *
+     * @param $def
+     * @return bool
+     */
+    public static function isRelationshipField($def)
+    {
+        // Certain fields are disallowed from the fields list
+        $disallowed_fields = [
+            'created_by_name', 'modified_by_name', 'team_name', 'assigned_user_name',
+        ];
+
+        if (empty($def['name'])) {
+            return false;
+        }
+
+        if (!empty($def['source']) && $def['source'] === 'non-db' && $def['type'] === 'relate') {
+            if ((empty($def['dbType']) || $def['dbType'] !== 'id') && $def['rname'] !== 'id') {
+                if (empty($def['custom_module']) && !in_array($def['name'], $disallowed_fields)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the provided field name is tied to a custom relationship
+     *
+     * @param $fieldName
+     * @param $moduleName
+     * @param $fieldDefs
+     * @return bool
+     */
+    public static function isCustomRelationshipField($fieldName, $moduleName, $fieldDefs)
+    {
+        $relationships = new DeployedRelationships($moduleName);
+        $relationshipList = $relationships->getRelationshipList();
+        $linkFieldName = $fieldDefs[$fieldName]['link'];
+        $relationshipName = $fieldDefs[$linkFieldName]['relationship'];
+
+        if (in_array($relationshipName, $relationshipList)) {
+            $relationship = $relationships->get($relationshipName)->getDefinition();
+            return $relationship['is_custom'] && isset($relationship['from_studio']) && $relationship['from_studio'];
+        } else {
+            return false;
+        }
+    }
 }

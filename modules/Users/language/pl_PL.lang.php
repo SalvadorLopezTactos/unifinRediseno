@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'Wprowadzone hasło nie spełnia wymogów. Spróbuj ponownie.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Nie znaleziono informacji o użytkowniku',
     'ERR_USER_NAME_EXISTS'              => 'Nazwa użytkownika {0} już istnieje. Zduplikowane nazwy nie są dozwolone. Zmień nazwę użytkownika, aby była unikatowa.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => 'Licencję „Sugar Hint” należy zapisać z dodatkowym zgodnym typem licencji',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Ten użytkownik został zablokowany i nie może się zalogować za pomocą swojego istniejącego hasła.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Użytkownik tylko z uwierzytelnienia zewnętrznego nie może zalogować się przy użyciu danych logowania aplikacji Sugar',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Adres e-mail odbiorcy',
 	'ERR_SERVER_STATUS'					=> 'Status Twojego serwera',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'System nie mógł wysłać wiadomości e-mail do użytkownika. Sprawdź ustawienia poczty wychodzącej w <a href="index.php?module=EmailMan&action=config">Ustawieniach poczty e-mail</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Nowych użytkowników należy tworzyć w obszarze <a href="{0}" target="_blank">Ustawienia SugarCloud</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Adres e-mail',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Prognozy',
     'LBL_WORKSHEETS'                    => 'Arkusze',
 	'LBL_CALENDARS'                     => 'Kalendarze',
+    'LBL_SHIFTS'                        => 'Zmiany',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Wyjątki zmiany',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Otrzymuj wiadomość, jeśli rekord został do Ciebie przydzielony.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'E-mail po przydzieleniu',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Otrzymuj powiadomienie e-mail, gdy jakiś użytkownik wspomni Cię we wpisie dziennika komentarzy.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'E-mail po wspomnieniu',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Wybierz, jak nazwy pól mają być wyświetlane w widokach rekordów. Wybierz opcję „Obok wartości pola”, aby uzyskać bardziej zwarty widok rekordów.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Umieszczenie nazwy pola',
     'LBL_ABOVE_FIELD_VALUE'             => 'Nad wartością pola',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Typ licencji',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Ustaw domyślny czas przypomnienia o nadchodzącym spotkaniu lub rozmowie telefonicznej. Powiadomienia w formie wyskakujących okienek są wyświetlane dla wszystkich uczestników korzystających z Sugar. Powiadomienia w formie e-mail wysyłane są do wszystkich uczestników.',
 	'LBL_REMINDER'						=> 'Przypomnienia',
 	'LBL_REMINDER_POPUP' => 'Wyskakujące okienko',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Ta sesja została zakończona, ponieważ rozpoczęto inną sesję została z tą samą nazwą użytkownika.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Przydziel ponownie rekordy',
-	'LBL_REASS_DESC_PART1'				=> 'Wybierz moduły zawierające rekordy do ponownego przydzielenia od określonego użytkownika do innego. <br/><br/>
+    'LBL_REASS_DESC_PART1'              => 'Wybierz moduły zawierające rekordy do ponownego przydzielenia od określonego użytkownika do innego. <br/><br/>
 Kliknij Dalej, aby zobaczyć, ile rekordów zostanie zaktualizowanych w każdym z wybranych modułów.
 Kliknij Anuluj, aby wyjść ze strony bez ponownego przydzielenia jakiegokolwiek rekordu.',
         'LBL_REASS_DESC_PART2'=>                    'Wybierz moduły, na których będą wykonywane procesy workflow, wysyłane powiadomienia o przydzieleniu oraz śledzenie zmian podczas ponownego przydzielania. Kliknij Dalej, aby kontynuować i ponownie przydzielić rekordy. Kliknij Restartuj, aby rozpocząć nowa.',
@@ -635,7 +639,7 @@ Kliknij Anuluj, aby wyjść ze strony bez ponownego przydzielenia jakiegokolwiek
     'LBL_DETAIL' => 'Profil użytkownika',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Uzyskaj dostęp do obszaru <a href="%s" target="_blank">Ustawienia SugarCloud</a>, aby wprowadzić zmiany w polach tylko do odczytu.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Skontaktuj się z administratorem systemu Sugar, aby wprowadzić zmiany w polach tylko do odczytu.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

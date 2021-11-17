@@ -45,6 +45,7 @@ $app_list_strings = array (
     'MergeRecords'=>'מזג רשומות',
       'VisualPipeline'=>'צינור ויזואלי',
       'ConsoleConfiguration' => 'תצורת מסוף',
+      'SugarLive' => 'SugarLive',
     'Quotas' => 'מיכסות',
     'Teams' => 'קבוצות',
     'TeamNotices' => 'הודעות לצוות',
@@ -78,10 +79,12 @@ $app_list_strings = array (
     'pmse_Business_Rules' => 'תהליך כללים עסקיים',
     'pmse_Emails_Templates' => 'תבניות מייל תהליך',
     'BusinessCenters' => 'מרכזי עסקים',
-    'Shifts' => 'Shifts',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchases',
-    'PurchasedLineItems' => 'Purchased Line Items',
+    'Shifts' => 'משמרות',
+    'ShiftExceptions' => 'החרגות למשמרות',
+    'Purchases' => 'רכישות',
+    'PurchasedLineItems' => 'פריטי שורה - רכישות',
+    'MobileDevices' => 'מכשירים ניידים',
+    'PushNotifications' => 'הודעות בדחיפה',
     'WorkFlow' => 'הגדרות זרימת עבודה',
     'EAPM' => 'חשבונות חיצוניים',
     'Worksheet' => 'גיליון עבודה',
@@ -107,6 +110,8 @@ $app_list_strings = array (
     'Newsletters' => 'ניוזלטרים',
   	'SugarFavorites'=>'מועדפים',
 	'PdfManager' => 'מנהל PDF',
+    'DataArchiver' => 'מאחסן נתונים בארכיון',
+    'ArchiveRuns' => 'הפעלות ארכיון',
 
     'OAuthKeys' => 'מפתחי לקוח OAuth',
     'OAuthTokens' => 'אסימוני OAuth',
@@ -125,6 +130,7 @@ $app_list_strings = array (
     'CommentLog' => 'יומן הערות',
     'Holidays' => 'חגים וחופשות',
     'ChangeTimers' => 'שינוי טיימרים',
+    'Messages' => 'הודעות',
   ),
 
     'moduleIconList' =>
@@ -163,6 +169,8 @@ $app_list_strings = array (
     'Manufacturers' => 'יצרן',
     'VisualPipeline' => 'צינור-ויזואלי',
     'ConsoleConfiguration' => 'ConsoleConfiguration',
+    'MobileDevices' => 'מכשיר נייד',
+    'SugarLive' => 'SugarLive',
     'Contracts'=>'חוזה',
     'Quotes' => 'הצעת מחיר',
     'Products' => 'שורת פריט מצוטט',
@@ -202,6 +210,8 @@ $app_list_strings = array (
     'Notifications'=>'הודעה',
     'Sync'=>'סנכרן',
     'PdfManager' => 'מנהל PDF',
+    'DataArchiver' => 'מאחסן נתונים בארכיון',
+    'ArchiveRuns' => 'הפעלות ארכיון',
     'ReportMaker' => 'מחולל דוחות',
     'DataSets' => 'תבנית תאריך',
     'CustomQueries' => 'שאילתא מותאמת',
@@ -210,10 +220,11 @@ $app_list_strings = array (
     'pmse_Business_Rules' => 'תהליך כלל עסקי',
     'pmse_Emails_Templates' => 'תבנית מייל תהליך',
     'BusinessCenters' => 'מרכז עסקים',
-    'Shifts' => 'Shift',
-    'ShiftExceptions' => 'Shift Exceptions',
-    'Purchases' => 'Purchase',
-    'PurchasedLineItems' => 'Purchased Line Item',
+    'Shifts' => 'משמרת',
+    'ShiftExceptions' => 'החרגות למשמרות',
+    'Purchases' => 'רכישה',
+    'PurchasedLineItems' => 'פריט שורה - רכישות',
+    'PushNotifications' => 'הודעה בדחיפה',
     'WorkFlow' => 'זרימת עבודה',
     'EAPM' => 'חשבון חיצוני',
     'Worksheet' => 'גיליון עבודה',
@@ -256,6 +267,7 @@ $app_list_strings = array (
     'ReportSchedules' => 'דווח על לוח זמנים',
     'Holidays' => 'חופשה',
     'ChangeTimers' => 'שינוי טיימר',
+    'Messages' => 'הודעה',
   ),
 
 /*
@@ -334,6 +346,20 @@ $app_list_strings = array (
     'Utilities' => 'שירותים ציבוריים',
     'Other' => 'אחר',
   ),
+    'message_status_dom' => [
+        '' => '',
+        'In Progress' => 'בביצוע',
+        'Completed' => 'הושלם',
+    ],
+    'message_direction_dom' => [
+        '' => '',
+        'Inbound' => 'נכנסת',
+        'Outbound' => 'יוצאת',
+    ],
+    'message_channel_type_dom' => [
+        '' => '',
+        'Chat' => 'צ&#39;אט',
+    ],
   'service_level_dom' => array (
     '' => '',
     'T1' => 'שכבה 1',
@@ -342,10 +368,22 @@ $app_list_strings = array (
     'T4' => 'שכבה 4',
   ),
   'generate_purchase_dom' => [
-      'Yes' => 'Yes',
-      'No' => 'No',
-      'Completed' => 'Completed',
+      '' => '',
+      'Yes' => 'כן',
+      'No' => 'לא',
+      'Completed' => 'הושלם',
   ],
+    'purchased_line_items_status_dom' => [
+        '' => '',
+        'Future' => 'עתיד',
+        'Active' => 'פעיל',
+        'Past' => 'עבר',
+    ],
+    'aws_connect_identity_dom' => [
+      'Connect' => 'Amazon Connect',
+      'SAML' => 'SAML 2.0',
+      // TODO - Active Directory Text
+    ],
   'lead_source_default_key' => 'נוצר בעצמו',
   'lead_source_dom' =>
   array (
@@ -566,6 +604,7 @@ $app_list_strings = array (
   'call_status_dom' =>
   array (
     'Planned' => 'נקבע ביומן',
+    'In Progress' => 'בביצוע',
     'Held' => 'התקיים',
     'Not Held' => 'בוטל',
   ),
@@ -724,8 +763,8 @@ $app_list_strings = array (
     'Meetings' => 'פגישה',
     'Calls' => 'שיחת טלפון',
       'KBContents' => 'מרכז מידע',
-      'PurchasedLineItems' => 'Purchased Line Item',
-      'Purchases' => 'Purchase',
+      'PurchasedLineItems' => 'פריט שורה - רכישות',
+      'Purchases' => 'רכישה',
   ),
     'record_type_display_emailparticipants' => array(
         'Accounts' => 'חשבון',
@@ -755,8 +794,8 @@ $app_list_strings = array (
     'Prospects' => 'מטרה',
       'KBContents' => 'מרכז מידע',
       'Notes' => 'הערה',
-    'PurchasedLineItems' => 'Purchased Line Item',
-    'Purchases' => 'Purchase',
+    'PurchasedLineItems' => 'פריט שורה - רכישות',
+    'Purchases' => 'רכישה',
   ),
 
   'changetimer_parent_type' => [
@@ -925,6 +964,18 @@ $app_list_strings = array (
     'Twitter' => 'טוויטר',
     'Portal' => 'פורטל',
   ),
+    'cases_source_dom' => [
+        '' => '',
+        'Internal' => 'פנימי',
+        'Forum' => 'פורום',
+        'Web' => 'ווב',
+        'InboundEmail' => 'דוא"ל',
+        'Twitter' => 'Twitter',
+        'Portal' => 'פורטל',
+        'Phone' => 'טלפון',
+        'Chat' => 'צ&#39;אט',
+        'Chatbot' => 'צ&#39;אט בוט',
+    ],
     'dataprivacy_type_default_key' => '',
     'dataprivacy_type_dom' => array(
         '' => '',
@@ -1990,9 +2041,16 @@ $app_list_strings = array (
         '2' => 'TLS',
     ),
     'mail_smtptype_options' => array(
-        'google' => 'גוגל',
-        'exchange' => 'Exchange',
+        'google_oauth2' => 'Google',
+        'exchange_online' => 'Exchange Online',
         'outlook' => 'Outlook',
+        'google' => 'אפליקציות Google עם רמת אבטחה נמוכה יותר',
+        'exchange' => 'Exchange',
+        'other' => 'אחר',
+    ),
+    'dom_imaptype_options' => array(
+        'google_oauth2' => 'Google Mail',
+        'exchange_online' => 'Exchange Online',
         'other' => 'אחר',
     ),
     'import_enclosure_options' =>
@@ -2153,6 +2211,20 @@ $app_list_strings = array (
         'Yes' => 'כן',
         'No' => 'לא',
     ],
+    'aws_end_chat_button_height' => [
+        '30' => '30',
+        '35' => '35',
+        '40' => '40',
+        '45' => '45',
+    ],
+    'aws_end_chat_button_width' => [
+        '100' => '100',
+        '110' => '110',
+        '120' => '120',
+        '130' => '130',
+        '140' => '140',
+        '150' => '150',
+    ],
     'forecasts_chart_options_group' => array(
         'forecast' => 'בתחזית',
         'sales_stage' => 'שלב במכירות',
@@ -2181,6 +2253,9 @@ $app_list_strings = array (
         'records' => 'רשימה',
         'activities' => 'תזרים פעילויות',
         'multi-line' => 'רשימה מרובת שורות',
+        'omnichannel' => 'ריבוי ערוצים',
+        'home' => 'Home',
+        'focus' => 'מגירת פוקוס',
     ),
     'reportschedule_time_interval_dom' => array(
         '3600' => 'פעם בשעה',
@@ -2204,9 +2279,15 @@ $app_list_strings = array (
             'day' => 'ימים',
         ),
         'shift_exception_type_dom' => [
-            'time_off' => 'Time Off',
-            'event' => 'Event',
-            'other' => 'Other',
+            'time_off' => 'לא בעבודה',
+            'event' => 'אירוע',
+            'other' => 'אחר',
+        ],
+        'purchase_history_sort_dom' => [
+            'end_date:desc' => 'תאריך ({{module}} אחרון)',
+            'start_date:asc' => 'תאריך ({{module}} ראשון)',
+            'total_revenue:desc' => 'מחיר (הסה"כ הגבוה ביותר)',
+            'total_revenue:asc' => 'מחיר (הסה"כ הנמוך ביותר)',
         ],
 );
 
@@ -2219,7 +2300,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'עקוב אחר קישור',
   'LBL_TOGGLE_VISIBILITY' => 'החלף נראות', // Record view header panel element
   'LBL_ACTIVITIES' => 'תזרים פעילויות',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2020 SugarCRM Inc. All Rights Reserved.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2021 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM‏, Sugar וקוביית ‎3-D הם סימנים מסחריים רשומים של .SugarCRM Inc.'.
         'כל יתר השמות של חברות ומוצרים הנמצאים בשימוש במוצר זה או מופיעים בו עשויים להיות סימנים מסחריים של '.
         'SugarCRM ®, Sugar Enterprise™ and Sugar™ הם סימנים מסחריים של SugarCRM Inc.',
@@ -2283,7 +2364,7 @@ $app_strings = array (
     'LBL_PRINT' => "הדפס",
     'LBL_HELP' => "עזרה",
     'LBL_TOUR' => "סיור",
-    'LBL_TOUR_LINK' => 'סיור - צפה בסיור לקבלת פרטים על התכונות החשובות',
+    'LBL_TOUR_LINK' => 'סייר בדף זה',
     'LBL_MOBILE' => "סלולרי",
     'LBL_ID_FF_SELECT' => "בחר",
     'DEFAULT'                              => 'בסיסי',
@@ -2690,10 +2771,22 @@ $app_strings = array (
     'LBL_EMAIL_SIGNATURE_CREATE'            => 'צור חתימה',
     'LBL_EMAIL_SIGNATURE_NAME'              => 'שם לחתימה',
     'LBL_EMAIL_SIGNATURE_TEXT'              => 'גוף החתימה',
-  'LBL_SMTPTYPE_GMAIL'                    => 'Gmail',
-  'LBL_SMTPTYPE_YAHOO'                    => 'Yahoo! Mail',
-  'LBL_SMTPTYPE_EXCHANGE'                 => 'Microsoft Exchange',
-    'LBL_SMTPTYPE_OTHER'                  => 'אחר',
+    'LBL_SMTPTYPE_MICROSOFT'                => 'Microsoft',
+    'LBL_SMTPTYPE_GOOGLE_OAUTH2'            => 'Google',
+    'LBL_SMTPTYPE_EXCHANGE_ONLINE'          => 'Exchange Online',
+    'LBL_SMTPTYPE_GMAIL'                    => 'אפליקציות Google עם רמת אבטחה נמוכה יותר',
+    'LBL_SMTPTYPE_YAHOO'                    => 'Yahoo! Mail',
+    'LBL_SMTPTYPE_EXCHANGE'                 => 'Microsoft Exchange',
+    'LBL_SMTPTYPE_OTHER'                    => 'אחר',
+    'LBL_EMAIL_AUTHORIZE'                   => 'הרשה',
+    'LBL_EMAIL_AUTHORIZED'                  => 'מורשה',
+    'LBL_EMAIL_NOT_AUTHORIZED'              => 'לא מורשה',
+    'LBL_EMAIL_AUTH_WARNING'                => 'על מנהל המערכת לקבוע את התצורה של מחבר {0} דרך &#39;מנהל מערכת&#39; > &#39;מחברים&#39; לפני שתוכל להגדיר את חשבון זה. לקבלת פרטים נוספים, עיין במסמכים של {1}.',
+    'LBL_EMAIL_AUTH_API_ERROR'              => 'שגיאה במהלך אחזור נתוני המחבר',
+    'LBL_EMAIL_AUTH_FAILURE'                => 'כשל בהרשאה.',
+    'LBL_EMAIL_PLEASE_AUTHORIZE'            => 'עליך להעניק הרשאה לחשבון לפני שמירתו.',
+    'LBL_EMAIL_PLEASE_AUTHORIZE_TESTING'    => 'עליך להעניק הרשאה לחשבון לפני בדיקתו.',
+    'LBL_EMAIL_ACCOUNT_NOT_AUTHORIZED'      => 'חשבון לא מורשה',
     'LBL_EMAIL_SPACER_MAIL_SERVER'          => '[ ספריות מרוחקות ]',
     'LBL_EMAIL_SPACER_LOCAL_FOLDER'         => '[ ספריות מקומיות ]',
     'LBL_EMAIL_SUBJECT'                     => 'נושא',
@@ -2734,6 +2827,9 @@ $app_strings = array (
     'LBL_CC' => 'CC',
     'LBL_BCC' => 'BCC',
 
+    'LBL_START_DATE' => 'תאריך התחלה',
+    'LBL_END_DATE' => 'תאריך סיום',
+
     'LBL_LINK_NONE'=> 'אין',
     'LBL_LINK_ALL'=> 'הכל',
     'LBL_LINK_RECORDS'=> 'רשומות',
@@ -2770,6 +2866,7 @@ $app_strings = array (
     'ERROR_EXAMINE_MSG' => 'בדוק בבקשה את הודעת השגיאה ברשומה מטה:',
     'NO_QUERY_SELECTED' => 'פורמט המידע שבחרת איננו מכיל שאילתא.  בחר בבקשה שאילתות מיוחדות עבור פורמט המידע הזה.',
 
+    'ERR_FIELD_TOO_LARGE' => 'The {0} content is too large. Please make the {0} shorter and try again.',
     'ERR_AJAX_LOAD'     => 'An error has occured:',
     'ERR_AJAX_LOAD_FAILURE'     => 'הייתה בעיה בביצוע הבקשה שלך. אנא נסה שוב מאוחר יותר.',
     'ERR_AJAX_LOAD_FOOTER' => 'במידה ושגיאה זו מופיעה שוב, אנא בקש ממנהל המערכת שלך להשבית Ajax עבור מודול זה',
@@ -2795,9 +2892,9 @@ $app_strings = array (
     'ERR_NO_HEADER_ID' => 'תכונה זו אינה זמינה בערכת נושא זו.',
     'ERR_NOT_ADMIN' => "גישה לא מורשית למערכת ניהול.",
     'ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE' =>
-        'ניהול הססמאות זמין רק ב<a href="%s" target="_blank">הגדרות ענן</a>.',
+        'ניהול הססמאות זמין רק ב<a href="%s" target="_blank">הגדרות SugarCloud</a>.',
     'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE' => 'צור קשר עם מנהל מערכת של Sugar אם ברצונך לבצע שינויים בשדות שהוגדרו לקריאה בלבד.',
-    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'Please access <a href="{0}" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+    'ERR_UPDATE_PERSON_PRIMARY_EMAIL_IN_IDM_MODE_ADMIN' => 'יש לגשת אל <a href="{0}" target="_blank">הגדרות SugarCloud</a> כדי לבצע שינויים בשדות שהוגדרו לקריאה בלבד.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'חסר שדה נדרש:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'שדה נדרש איננו חוקי:',
     'ERR_INVALID_VALUE' => 'ערך חוקי:',
@@ -2938,6 +3035,7 @@ $app_strings = array (
     'LBL_ADD_BUTTON_KEY' => 'A',
     'LBL_ADD_BUTTON_TITLE' => 'הוסף [Alt+A]',
     'LBL_ADD_BUTTON' => 'הוסף',
+    'LBL_ADD_DASHLET_BUTTON' => 'הוסף חלונית',
     'LBL_ADD_DOCUMENT' => 'הוסף מסמך',
     'LBL_REPLACE_BUTTON' => 'החלף',
     'LBL_ADD_TO_PROSPECT_LIST_BUTTON_KEY' => 'L',
@@ -2968,6 +3066,8 @@ $app_strings = array (
     'LBL_SUBMIT_BUTTON_LABEL' => 'הגש',
     'LBL_CASE'=>'אירוע',
     'LBL_CASES'=>'אירועים',
+    'LBL_MESSAGE'=>'הודעה',
+    'LBL_MESSAGES'=>'הודעות',
     'LBL_CHANGE_BUTTON_KEY' => 'G',
     'LBL_CHANGE_PASSWORD' => 'שנה סיסמא',
     'LBL_CHANGE_BUTTON_LABEL' => 'שנה',
@@ -3194,6 +3294,7 @@ $app_strings = array (
     'LBL_GENERATE_QUOTE' => 'צור הצעת מחיר',
     'LBL_NO_MASS_UPDATE_FIELDS_AVAILABLE' => 'אין שדות זמינים לביצוע עדכון גורף',
     'LBL_MASS_UPDATE_JOB_QUEUED' => 'בקשתך לעדכון גורף נקבעה',
+    'LBL_MASS_UPDATE_WARNING_SERVICE_START_DATE' => 'תאריך ההתחלה של השירות מאוחר יותר מתאריך הסיום',
     'LBL_MASS_UPDATE_SUCCESS' => 'כל הרשומות עודכנו בהצלחה',
     'TPL_MASS_ADD_TO_LIST_SUCCESS' => 'הרשומות שנבחרו נוספו לרשימת מטרה <a href="{{listUrl}}">{{listName}}</a>.',
     'TPL_MASS_ADD_TO_LIST_QUEUED' => 'בקשתך להוסיף רשומות שנבחרו לרשימת מטרה <a href="{{listUrl}}">{{listName}}</a> נקבעה.',
@@ -3429,11 +3530,12 @@ $app_strings = array (
     'LBL_SUBJECT' => 'נושא',
 
     'LBL_INBOUNDEMAIL_ID' => 'דוא"ל נכנס ID',
+    'LBL_EAMP_ID' => 'מזהה אסימון אימות',
 
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2020 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2021 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'כל הזכויות שמורות.br />SugarCRM>‏, Sugar וקוביית ‎3-D הם סימנים מסחריים רשומים של .SugarCRM Inc.'.
         'כל יתר השמות של חברות ומוצרים הנמצאים בשימוש במוצר זה או מופיעים בו עשויים להיות סימנים מסחריים של '.
         'החברות שאליהן הם משויכים.',
@@ -3500,6 +3602,8 @@ $app_strings = array (
     'LBL_USER_MENU' => 'תפריט משתמש',
     'LBL_USERS_SYNC'=>'סנכרן משתמשים',
     'LBL_USERS'=>'משתמשים',
+    'LBL_USER'=>'משתמש',
+    'LBL_CURRENT_USER'=>'משתמש נוכחי',
     'LBL_VERIFY_EMAIL_ADDRESS'=>'בודק דבר קיומה של כניסת דוא"ל...',
     'LBL_VERIFY_PORTAL_NAME'=>'בודק שם פורטל קיים...',
     'LBL_VIEW_IMAGE' => 'צפה',
@@ -3588,6 +3692,8 @@ $app_strings = array (
         'המערכת הגיעה למגבלת &#39;ספירת רישיונות המשתמש&#39;. רק משתמשים קיימים יוכלו להתחבר.',
     'WARN_ONLY_ADMINS'=> "רק מנהלי המערכת יוכלו להתחבר.",
     'WARN_UNSAVED_CHANGES'=> "אתה מתכוון לעזוב את הרשומה הזו מבלי לשמור שינויים שערכת בה. אתה בטוח שברצונך לנווט הלאה מרשומה זו?",
+    'LBL_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'רענון הדפדפן יסגור אוטומטית את כל הפעלות השיחה או הצ&#39;אט ב-SugarLive הפתוחות אצלך. שינויים שלא נשמרו יאבדו. האם ברצונך להמשיך?',
+    'LBL_PORTAL_CHAT_WARN_ACTIVE_CCP_UNSAVED_CHANGES' => 'Refreshing the browser will automatically close your chat session. Do you wish to proceed?',
     'LBL_WARN_UNSAVED_CHANGES' => 'יש לך שינויים שלא נשמרו. האם אתה בטוח שברצונך לעזוב דף זה?',
     'LBL_ONE_OR_MORE_UNSAVED_CHANGES' => 'תאסופית אחת או יותר כוללת שינויים שלא נשמרו. האם אתה בטוח שברצונך לסגור את הצייר?',
     'LBL_NAVIGATE_TO_REPORTS' => 'אתה עובר למודול דוחות. השינויים שביצעת לא יישמרו. האם להמשיך?',
@@ -3610,6 +3716,7 @@ $app_strings = array (
     'ERROR_TIME_IS_AFTER' => 'שגיאה. השעה בשדה זה חייבת להיות מאוחרת מהשעה שבשדה {{this}}.',
     'ERROR_NUMBER' => 'שגיאה. שדה זה דורש מספר תקין',
     'ERROR_INT' => 'שגיאה: מספר שלם לא חוקי.',
+    'ERROR_URL' => 'שגיאה. כתובת URL שגויה.',
     'ERROR_NO_BEAN' => 'לא ניתן להשיג bean.',
     'ERROR_ACCESS_MODULE' => 'אין לך הרשאה למודול זה',
     'ERROR_MAX_FILESIZE_EXCEEDED' => 'שגיאה. הקובץ המצורף גדול מדי.',
@@ -3693,9 +3800,14 @@ $app_strings = array (
     'LBL_CREATE_OPPORTUNITY' => 'צור הזדמנות',
     'LBL_SCHEDULE_CALL' => 'צור שיחת טלפון',
     'LBL_SCHEDULE_MEETING' => 'תזמן פגישה',
+    'LBL_CREATE_MESSAGE' => 'צור הודעה',
     'LBL_CREATE_TASK' => 'צור משימה',
     'LBL_REMOVE_FROM_FAVORITES' => 'הסר מהמועדפים שלי',
     'LBL_CREATE_NOTE_OR_ATTACHMENT' => 'Create Note or Attachment',
+    'LBL_DOWNLOAD_ALL' => 'הורד הכל',
+    'LBL_DOWNLOAD_ONE' => 'הורד',
+    'LBL_ATTACHMENTS' => 'קבצים מצורפים',
+    'LBL_ADD_ATTACHMENT' => 'עיון',
     //web to lead
     'LBL_GENERATE_WEB_TO_LEAD_FORM' => 'צור טופס',
     'LBL_SAVE_WEB_TO_LEAD_FORM' =>'שמור טופס לידים מאתר האינטרנט',
@@ -3747,8 +3859,8 @@ $app_strings = array (
     'LBL_DASHLET_REFRESH_LABEL' => 'רענן',
     'LBL_DASHLET_REMOVE_LABEL' => 'הסר',
     'LBL_DASHLET_DROP_HERE' => 'הורד כאן',
-    'LBL_DASHLET_MINIMIZE_ALL' => 'סגור הכל',
-    'LBL_DASHLET_MAXIMIZE_ALL' => 'פתח הכל',
+    'LBL_DASHLET_MINIMIZE_ALL' => 'Collapse All Dashlets',
+    'LBL_DASHLET_MAXIMIZE_ALL' => 'Expand All Dashlets',
     'LBL_DASHLET_MINIMIZE' => 'סגור',
     'LBL_DASHLET_MAXIMIZE' => 'פתח',
     'LBL_DASHLET_CONFIGURE' => 'הגדר',
@@ -3770,6 +3882,10 @@ $app_strings = array (
     'LBL_DASHLET_LISTVIEW_NAME' => 'צפה כרשימה',
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'רשימות של רשומות ממודול מסויים לפי קריטריון שאתה מגדיר',
 
+    // Console List view dashlet
+    'LBL_DASHLET_CONSOLE_LISTVIEW_NAME' => 'תצוגת רשימת מסופים',
+    'LBL_DASHLET_CONSOLE_LISTVIEW_DESCRIPTION' => 'פירוט הרשומות ממודול ספציפי שקשורות לרשומה שבה אתה צופה במסוף.',
+
     // Record view dashlet
     'LBL_DASHLET_RECORDVIEW_NAME' => 'תצוגת רשומה',
     'LBL_DASHLET_RECORDVIEW_DESCRIPTION' => 'מציג רשומה ורשומות קשורות אופציונליות בלשוניות.',
@@ -3780,6 +3896,7 @@ $app_strings = array (
     'TPL_DASHLET_RECORDVIEW_TOO_MANY_TABS' => 'אזהרה, ניתן להציג עד {{numWord}} ({{num}}) מודולים בלשוניות. ' .
         'יש להסיר מודול אחד או יותר לפני הוספה של כל מודול אחר.',
     'LBL_SIX' => 'שש', // record view dashlet tab limit
+    'LBL_DASHLET_NO_TABS_AVAILABLE' => 'No tabs available. Please add a module in the tabs field above.',
 
     //Commentlog Dashlet
     'LBL_DASHLET_COMMENTLOG_NAME' => 'יומן הערות',
@@ -3804,7 +3921,13 @@ $app_strings = array (
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_RECENT_TAB' => 'היו בשימוש לאחרונה',
     'LBL_DASHLET_PRODUCT_QUICK_PICKS_FAVORITES_TAB' => 'מועדפים',
 
-    'LBL_DASHBOARD_CONFIG' => 'Dashboard Configuration',
+    'LBL_DASHBOARD_CREATE' => 'צור לוח מחוונים',
+    'LBL_DASHBOARD_DUPLICATE' => 'שכפל לוח מחוונים',
+    'LBL_DASHBOARD_DELETE' => 'מחק לוח מחוונים',
+    'LBL_PIN_TO_TOP' => 'הצמד לחלק העליון',
+    'LBL_PIN_TO_BOTTOM' => 'הצמד לחלק התחתון',
+
+    'LBL_DASHBOARD_CONFIG' => 'תצורת לוח מחוונים',
     'LBL_LIST_VIEW__NAME' => 'תצוגת רשימה',
     'LBL_PIPELINE_VIEW_NAME' => 'תצוגת אריחים',
     'LBL_PIPELINE_VIEW_BTN' => 'תצוגת אריחים',
@@ -3840,9 +3963,9 @@ $app_strings = array (
 
     /* Learning Resources */
     'LBL_LEARNING_RESOURCES_TITLE' => 'מקורות לימוד',
-    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'אוניברסיטת Sugar - הפוך למומחה',
-    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'פורומים של הקהילה - הצטרף לדיון',
-    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'תיעוד ותמיכה - למד את הפרטים',
+    'LBL_LEARNING_RESOURCES_SUGAR_UNIVERSITY_LINK' => 'הכשרה והסמכה',
+    'LBL_LEARNING_RESOURCES_COMMUNITY_LINK' => 'קהילת SugarClub',
+    'LBL_LEARNING_RESOURCES_SUPPORT_LINK' => 'תיעוד ותמיכה',
 
     /* Country Chart Dashlet */
     'LBL_DASHLET_COUNTRY_CHART_NAME' => 'מכירות לפי מדינה',
@@ -3851,6 +3974,10 @@ $app_strings = array (
     /* Knowledge base category tree dashlet */
     'LBL_DASHLET_CATEGORIES_NAME' => 'קטגוריות בבסיס הידע & מאמרים שפורסמו',
     'LBL_DASHLET_CATEGORIES_DESCRIPTION' => 'Displays a tree view of knowledge base categories & published articles',
+
+    /* Knowledge base category tree with search dashlet */
+    'LBL_DASHLET_KB_SEARCH_NAME' => 'חיפוש במרכז המידע',
+    'LBL_DASHLET_KB_SEARCH_DESCRIPTION' => 'תצוגת העץ שבו ניתן לחפש קטגוריות ומאמרים שפורסמו ממרכז מידע.',
 
     /* Knowledge base localizations dashlet */
     'LBL_DASHLET_LOCALIZATIONS_NAME' => 'מאמרים שפורסמו בשפות אחרות',
@@ -4066,6 +4193,10 @@ $app_strings = array (
 
     //SugarFieldPhone labels
     'LBL_INVALID_USA_PHONE_FORMAT' => 'אנא הזן מספר טפון כולל אזור חיוג.',
+    'LBL_CCP_NOT_INITIATED' => 'ניסיון לחייג באמצעות CCP כשהספק לא נכנס למערכת.',
+    'LBL_CCP_LIBRARY_CALLOUT_ERROR' => 'לא ניתן להוציא שיחה באמצעות CCP.',
+    'LBL_CCP_DIALING_ERROR' => 'לא ניתן להשלים את השיחה כפי שחויגה.',
+    'LBL_CCP_DIALOUT_NOT_ALLOWED' => 'לפני ביצוע שיחה יוצאת, יש לסגור את כל הפעלות הצ&#39;אט ב-SugarLive.',
 
     //File write error label
     'ERR_FILE_WRITE' => 'שגיאה: לא מצליח לכתוב קובץ {0}.  בדוק הרשאות בשרת האינטרנט שלך.',
@@ -4401,8 +4532,8 @@ $app_strings = array (
     // start of: Quotes related
     'LBL_QLI_SINGLE_TITLE' => 'שורת פריט עם הצעת מחיר',
     'LBL_DISCOUNT_TOTAL' => 'סכום ההנחה הכולל',
-    'LBL_DISCOUNT_PERCENT' => '% Percent',
-    'LBL_DISCOUNT_SELECT' => 'Determines if the discount is a percentage or flat amount',
+    'LBL_DISCOUNT_PERCENT' => '% אחוז',
+    'LBL_DISCOUNT_SELECT' => 'קביעה אם ההנחה היא באחוזים או סכום קבוע',
     'LBL_TAX' => 'מס',
     'LBL_SHIPPING' => 'משלוח',
     'LBL_GRAND_TOTAL' => 'סכום כולל',
@@ -4449,7 +4580,7 @@ $app_strings = array (
     'LBL_NO_ACCESS' => '(אין גישה)',
     'LBL_NO_ACCESS_LOWER' => 'אין גישה',
     'LBL_NO_FIELD_ACCESS' => 'ללא גישה',
-    'LBL_NO_LICENSE_ACCESS' => 'License Required',
+    'LBL_NO_LICENSE_ACCESS' => 'נדרש רישיון',
     'LBL_VALUE_ERASED' => 'הערך נמחק',
     'LBL_VALUE_ERASED_TOOLTIP' => 'מידע זה נמחק באמצעות בקשת פרטיות נתונים',
     'LBL_CREATE_RELATED_RECORD' => 'צור רשומה קשורה',
@@ -4470,7 +4601,9 @@ $app_strings = array (
     'LBL_TASKS_SUBPANEL_TITLE' => 'משימות',
     'LBL_CALLS_SUBPANEL_TITLE' => 'שיחות',
     'LBL_EMAILS_SUBPANEL_TITLE' => 'כתובות מייל',
+    'LBL_SHIFTS_SUBPANEL_TITLE' => 'משמרות',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'שורות הצעות מחיר',
+    'LBL_SHIFTS_EXCEPTIONS_SUBPANEL_TITLE' => 'החרגות למשמרות',
     'LNK_SETTINGS' => 'הגדרות',
     'LBL_MOBILE_SUPPORT' => 'תמיכה',
     'LBL_MOBILE_SHOW_MORE' => 'הצג עוד...',
@@ -4630,16 +4763,14 @@ $app_strings = array (
     'LBL_MOBILE_PDF_DOWNLOAD' => 'הורד PDF של {{{pdfTemplateName}}}',
 
     'ERR_SYNC_FAILED' => 'לא ניתן לסנכרן עם שרת.',
-    'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'חיבור SSO לא זמין. ודא כי המופע מופעל ב-Sugar 7/5 ומעלה והוגדר עבור SSO.',
+    'ERR_MOBILE_SSO_NOT_CONFIGURED' => 'The Sugar instance at the provided URL is not configured for Single Sign-On. Please turn off Single Sign-On or contact your administrator for assistance.',
     'ERR_MOBILE_NOT_AUTHORIZED' => 'גישה לא מורשית',
     'ERR_MOBILE_INVALID_CREDS' => 'שם משתמש או סיסמא לא נכונים',
     'ERR_MOBILE_SESSION_EXPIRED' => 'הסשן שלך הסתיים',
     'ERR_MOBILE_NOT_FOUND' => 'משאב לא נמצא',
     'ERR_MOBILE_TIMEOUT' => 'השרת אינו מגיב',
     'ERR_MOBILE_CONNECTION_FAILED' => 'השרת אינו מגיב',
-    'ERR_MOBILE_NOT_FOUND_LOGIN' => 'אין {{{brandName}}} שרת בכתובת שניתנה',
-    'ERR_MOBILE_TIMEOUT_LOGIN' => 'השרת אינו מגיב לכתובת שניתנה',
-    'ERR_MOBILE_CONNECTION_FAILED_LOGIN' => 'השרת אינו זמין לכתובת שניתנה',
+    'ERR_MOBILE_NOT_FOUND_LOGIN' => 'No {{{brandName}}} instance found at the provided URL (error {{{code}}}).',
     'ERR_MOBILE_INTERNET_UNAVAILABLE' => 'קישור לאינטרנט אינו זמין',
     'ERR_MOBILE_INTERNAL' => 'שגיאה ({{{code}}}). נסה שוב מאוחר יותר',
     'ERR_MOBILE_VALIDATION' => 'רשומה אינה זמינה',
@@ -4838,6 +4969,55 @@ $app_strings = array (
     'LBL_VO_RIGHT_MENU_BTN' => 'לחצן &#39;תפריט ימני&#39;',
     'LBL_VO_ADD_BTN' => 'לחצן &#39;הוסף&#39;',
 
+    // Sugar Mobile additions for 10.3
+    'LBL_DISCOUNT_AMOUNT' => 'הנחה',
+    'LBL_MOBILE_CHOOSE_NAVIGATOR' => 'בחר אפליקציית מיפוי',
+    'LBL_OVERWRITE_PROCESS_CLAIM_QUESTION' => 'ל{{entityName}} שנבחר יש ערכים קשורים: {{localizedFieldNames}}. בטל כדי לשמור את הערכים הקיימים. אשר כדי להחליף בערכים חדשים.',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED' => 'הצפנת נתונים מופעלת.',
+    'LBL_LEAD_ALREADY_CONVERTED' => 'הליד שנבחר כבר הומר.',
+    'LBL_OPERATION_NOT_AVAILABLE_OFFLINE' => 'פעולה זו זמינה רק כשהמכשיר במצב מקוון',
+    'LBL_QUOTES_GENERATE_OPPORTUNITY' => 'האם אתה בטוח שברצונך ליצור הזדמנות מהצעת המחיר?',
+    'LBL_TAG_ADD' => 'הוסף תג',
+    'LBL_TAG_ENTER_TAG_NAME' => 'הזן תג',
+    'LBL_TAG_OFFLINE_READ_NOT_SUPPORTED' => 'כשהמכשיר במצב לא מקוון לא ניתן לסנן לפי תגים.',
+    'LBL_COMMENTLOG_SHOWCOMMENT' => 'הצג את התגובה המלאה',
+    'LBL_COMMENT_VIEW' => 'הצג תגובה',
+    'LBL_PMSE_LABEL_DUEDATE' => 'תאריך יעד',
+    'LBL_PMSE_DUE' => 'לביצוע עד',
+    'LBL_PMSE_DUE_ON' => 'לביצוע עד',
+    'LBL_LEAD_CONVERSION_PARENT_RECORD_REQUIRED' => 'יש ליצור {{conversionParentModuleName}} תחילה',
+    'LBL_LEAD_CONVERSION_MISSING_REQUIRED' => 'חסרות רשומות נדרשות: {{{missingRecords}}}',
+    'LBL_IMAGE_QUALITY_SELECTOR_HINT' => 'בחר איכות תמונה. גודל התמונה ישתנה בהתאם לפני השמירה בשרת. הערך שנבחר ישמש כברירת מחדל עבור כל הפעולות הדומות בעתיד.',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATING' => 'מתבצעת הערכה של גודל הקובץ...',
+    'LBL_IMAGE_QUALITY_SELECTOR_CALCULATED' => 'גודל הקובץ המשוער הוא',
+    'LBL_IMAGE_QUALITY_SELECTOR_HEADER' => 'איכות תמונה',
+    'LBL_IMAGE_QUALITY_BEST' => 'גודל מקורי',
+    'LBL_IMAGE_QUALITY_GOOD' => 'איכות טובה',
+    'LBL_IMAGE_QUALITY_POOR' => 'גודל קטן',
+    'LBL_IMAGE_QUALITY_BTN' => 'דחיסה: {{{rate}}}',
+    'LBL_LIST_CONFIGURABLE_HEADER' => 'שדות רשימה ב-{{module}}',
+    'LBL_LIST_RESET_FIELDS' => 'איפוס לברירות המחדל',
+    'LBL_LIST_NOT_ENOUGH' => 'יש להגדיר לפחות שדה פעיל אחד.',
+    'LBL_LOGIN_PERMISSION_ABORTED' => 'כדי שתוכל לעבוד עם הפעלה של SugarCRM, עליך להיכנס ולקבל הרשאות.',
+    'LBL_SELECTING_EXISTING_RECORD' => 'בחירת {{{moduleSingular}}}',
+    'LBL_CREATING_NEW_RECORD' => 'יצירת {{{moduleSingular}}} חדש',
+    'LBL_IMAGE_QUALITY_SELECTOR_LABEL' => 'גודל תמונה',
+    'LBL_COPY_ADDRESS' => 'העתק כתובת',
+    'LBL_OPEN_IN' => 'פתח באמצעות',
+    'LBL_MULTIATTACHMENTS_NO_FILE_SELECTED' => 'לא נבחר אף קובץ.',
+    'LBL_ATTACHMENT_ADD' => 'צרף',
+
+    // Mobile cookie consent
+    'LBL_USE_COOKIES_CONFIRM_TITLE' => 'באפליקציה זו נעשה שימוש בקובצי Cookie',
+    'LBL_USE_COOKIES_CONFIRM' => 'באפליקציה זו נעשה שימוש בקובצי Cookie כדי לספק לך חוויה משופרת. המשך פעולה יהווה את הסכמתך לשימוש בקובצי Cookie בהתאם למדיניות הפרטיות שלנו.',
+
+    // Mobile warnings
+    'WARN_SERVER_OUTDATED' => 'אתה משתמש במופע Sugar שלא יהיה תואם ל-Sugar Mobile בגרסה לנייד שתושק בקרוב. בקש ממנהל המערכת לשדרג את Sugar בהקדם האפשרי.',
+    'ERROR_TAG_NAME_INVALID' => 'שם תג אינו יכול להכיל תווי "{{{forbiddenChars}}}"',
+    'ERROR_NO_TAGS_FOUND' => 'לא זמינים תגים התואמים את {{{searchQuery}}}',
+    'ERR_PA_RECORD_INVALID' => 'רשומת {{{moduleName}}} כוללת ערך לא חוקי אחד (או יותר) ולא ניתן לשמור אותה. האם ברצונך לערוך את הרשומה כדי לבצע פעולת {{{actionLabel}}}?',
+    'ERR_MOBILE_METADATA_RELOAD' => 'מנהל מערכת ביצע שינויי תצורה בהפעלת Sugar שלך. לחץ על &#39;אישור&#39; כדי לסנכרן את תצורת האפליקציה עם השרת.',
+
     // Cookie consent
     'LBL_WIZ_USER_COOKIE_CONSENT' => 'באפליקציה זו נעשה שימוש בקובצי Cookie',
     'LBL_USER_CLICK_FOR_COOKIE_CONSENT' => 'סמן כדי לאשר (חובה)',
@@ -4896,6 +5076,10 @@ $app_strings = array (
     'LBL_PORTAL_CONTACT_INFO_PHONE' => 'טלפון: ',
     'LBL_PORTAL_CONTACT_INFO_EMAIL' => 'דוא"ל: ',
     'LBL_PORTAL_CONTACT_INFO_WEB' => 'ווב: ',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_HELLO'    => 'Hello there!',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_START'    => 'Click to start chat',
+    'LBL_PORTAL_CHAT_RUN_BUTTON_CONTINUE' => 'Click to open chat',
+    'LBL_PORTAL_CHAT_CONFIRMATION_CLOSE'  => 'האם אתה בטוח שברצונך לסגור את הצ&#39;אט?',
 
     //for portal errors
     'LBL_PORTAL_LOGIN_UNSUCCESSFUL' => 'ניסיון הכניסה שלך כשל. נסה שנית.',
@@ -4942,6 +5126,29 @@ $app_strings = array (
     'LBL_RENEWALS_CONSOLE_NAME_ACCOUNT' => 'שם/שם חשבון',
     'LBL_RENEWALS_CONSOLE_AMOUNT' => 'Worst | Likely | Best',
 
+    // Omnichannel Console
+    'LBL_OMNICHANNEL' => 'SugarLive',
+    'LBL_OMNICHANNEL_DASHBOARD' => 'לוח מחוונים לריבוי ערוצים',
+    'LBL_OMNICHANNEL_DEFAULT_CUSTOMER_NAME' => 'לקוח',
+    'TPL_OMNICHANNEL_NEW_RECORD_TITLE' => '{{type}} {{direction}} {{identifier}} בשעה {{time}}',
+    'LBL_OMNICHANNEL_UNSUPPORTED_BROWSER' => 'הדפדפן שלך אינו תומך ב-SugarLive. יש להשתמש ב-Google Chrome או ב-Mozilla Firefox.',
+    'LBL_OMNICHANNEL_RECORD_CREATED' => 'נוצר <a href="#{{buildRoute model=this}}">{{moduleSingularLower}}</a> המכיל את פרטי ההמרה שלך.',
+    'LBL_OMNICHANNEL_SUBJECT' => 'נושא',
+    'LBL_OMNICHANNEL_DESCRIPTION' => 'תיאור',
+    'LBL_OMNICHANNEL_CHAT_SUMMARY' => 'סיכום הודעה',
+    'LBL_OMNICHANNEL_CALL_SUMMARY' => 'סיכום שיחה',
+    'LBL_OMNICHANNEL_LINK_TO' => 'קישור {{fromModule}} ל-{{toModule}}',
+    'LBL_OMNICHANNEL_LINKED' => 'מקושר',
+    'LBL_PORTALCHAT_UNSUPPORTED_BROWSER' => 'הדפדפן שלך אינו תומך בשיחות. יש להשתמש ב-Google Chrome או ב-Mozilla Firefox.',
+    'LBL_PORTALCHAT_CAN_NOT_LOAD_LIB' => 'לקבלת עזרה, פנה אל מנהל המערכת שלך ב-Sugar.',
+    'LBL_OMNICHANNEL_CONFIG_LAYOUT' => 'קביעת תצורה',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OUTBOUND_CALL' => 'לפני ביצוע שיחה יוצאת, יש לסיים את קביעת התצורה של SugarLive.',
+    'LBL_OMNICHANNEL_FINISH_CONFIGURING_BEFORE_OPENING_SUGARLIVE' => 'לפני פתיחת SugarLive, יש לסיים את קביעת התצורה של SugarLive.',
+    'LBL_OMNICHANNEL_SET_OFFLINE_BEFORE_CONFIGURING' => 'לפני קביעת התצורה של SugarLive, הגדר את עצמך כ"לא מחובר" ב-SugarLive.',
+
+    // Omnichannel Console Config
+    'LBL_RESTORE_TAB_DEFAULT' => 'שחזור הלשונית לברירת המחדל',
+    'LBL_CONFIGURE_SUMMARY_PANEL' => 'הגדרת חלונית הסיכום',
 
     //First time login wizard
     'LBL_WIZ_USER_PROFILE_TITLE' => 'פרופיל משתמש',
@@ -4973,6 +5180,10 @@ $app_strings = array (
     'LBL_WIZ_CREATE_USERS' => 'צור משתמש',
     'LBL_WIZ_APPLICATION_SETTINGS' => 'הגדרות מערכת',
     'LBL_WIZ_CONFIGURE_APPLICATION' => 'סטודיו',
+
+    'LBL_CSP_ERROR_MESSAGE' => 'הערכים שהזנת אינם נתמכים או שהפורמט שלהם אינו עומד בדרישות. לצפייה ברשימה של הפורמטים והערכים המקובלים עבור שדות, עיין במסמכי העזרה של ה<a href="{{linkToDocumentation}}" target="_blank">מערכת</a>.',
+    'LBL_CSP_ERROR_MESSAGE_ADMIN' => 'תוכן זה לא אושר. עדכן את <a href="{{linkToDocumentation}}" target="_blank">ההגדרות של מדיניות אבטחת תוכן</a> במערכת.',
+    'LBL_CSP_ERROR_MESSAGE_USER' => 'תוכן זה לא אושר. בקש ממנהל המערכת לעדכן את <a href="{{linkToDocumentation}}" target="_blank">ההגדרות של מדיניות אבטחת תוכן</a> במערכת. ברגע שההגדרות יעודכנו, תצטרך לרענן את הדפדפן כדי שהשינויים ייכנסו לתוקף.',
 
     // For password related labels
     'LBL_PASSWORD'						=> 'סיסמה',
@@ -5101,6 +5312,12 @@ $app_strings = array (
     'TPL_TABBED_DASHLET_USER_BUTTON_LABEL' => 'הפריטים שלי',
     'TPL_TABBED_DASHLET_GROUP_BUTTON_LABEL' => 'הפריטים של הצוות',
 
+    // Sugar Apps Dashlet
+    'LBL_SUGAR_APPS_DASHLET_LABEL' => 'Sugar Apps Dashlet',
+    'LBL_SUGAR_APPS_DASHLET_DESC' => 'Allows Users to add Sugar Apps to a Dashboard',
+    'LBL_SUGAR_APPS_DASHLET_APP_SELECT_LABEL' => 'Select a Sugar App',
+    'LBL_SUGAR_APPS_DASHLET_CATALOG_ERROR' => 'This Sugar App is currently unavailable with error code {{errorCode}}. Please refresh the page or check with your Administrator if the problem persists.',
+
     // history dashlet
     'LBL_HISTORY_DASHLET' => 'הסטוריה',
     'LBL_HISTORY_DASHLET_DESCRIPTION' => 'דשלט הסטוריה מציג פגישות שנערכו, לוגים של שיחות, מיילים שהתקבלו ונשלחו',
@@ -5215,6 +5432,7 @@ $app_strings = array (
     //record save
     'LBL_RECORD_SAVED' => 'הקלטה נשמרה', // use when there is no information about the record
     'LBL_RECORD_SAVED_SUCCESS' => 'יצרת בהצלחה את {{moduleSingularLower}} {{full_name}}.', // use when a model is available
+    'LBL_RECORD_SAVED_SUCCESS_NO_LINK' => 'יצרת בהצלחה את {{moduleSingularLower}}.',
     'LBL_RECORD_SAVED_ACCESS_DENIED' => 'יצרת רשומה זו בהצלחה אך אין לך הרשאת גישה אליה', // use when user has no access to the model
     'LBL_VALIDATING' => 'מאמת...',
 
@@ -5293,7 +5511,7 @@ $app_strings = array (
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'רענן רשימה',
     // Refresh button on tile views
-    'LBL_TILE_REFRESH' => 'Refresh Tiles',
+    'LBL_TILE_REFRESH' => 'רענון אריחים',
 
     // Textarea field.
     'LBL_TEXTAREA_MORE' => 'עוד',
@@ -5547,6 +5765,7 @@ $app_strings = array (
     'LBL_PMSE_PROCESS_USERS_CHART_NAME_RECORD' => 'פעילויות בהמתנה',
     'LBL_PMSE_PROCESS_USERS_CHART_DESCRIPTION' => 'פעילויות בהמתנה ע"י תהליך',
     'LBL_PMSE_ALL_PROCESSES_LABEL' => 'כל התהליכים',
+    'LBL_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות',
 
 
     'LBL_PMSE_PROCESS_STATUS_CHART_NAME' => 'סיכום סטטוס תהליך',
@@ -5578,7 +5797,7 @@ $app_strings = array (
     'LBL_BUSINESS_CENTER_ID' => 'מזהה מרכז עסקים',
     'LBL_BUSINESS_CENTER_NAME' => 'שם מרכז עסקים',
 
-    'LBL_PLIS_ACTIVITIES' => 'Purchased Line Items Activities',
+    'LBL_PLIS_ACTIVITIES' => 'פריטי שורה - פעילויות רכישה',
 
     //Tag Strings
     'LBL_TAG_NEW_TAG' => '(תיוג חדש)',
@@ -5618,6 +5837,7 @@ $app_strings = array (
     'TPL_DATAPRIVACY_PII_TITLE' => 'מידע אישי עבור {{{name}}}',
 
     'LBL_CHANGETIMERS_SUBPANEL_TITLE' => 'שינוי טיימרים',
+    'LBL_MESSAGES_SUBPANEL_TITLE' => 'הודעות',
 
     'LBL_TEXT_COPIED_TO_CLIPBOARD_SUCCESS' => 'הועתק ללוח שלך!',
     'LBL_TEXT_COPIED_TO_CLIPBOARD_ERROR' => 'לא ניתן להעתיק ללוח שלך',
@@ -5635,13 +5855,24 @@ $app_strings = array (
     'LBL_COMMENT_LOG_SHOW_LESS' => 'הראה פחות...',
     'LBL_NO_DATA_AVAILABLE_NO_PERIOD' => 'אין נתונים זמינים',
 
-    // Active Subscriptions Dashlet
+    // Active Subscriptions and Purchase History dashlets
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET' => 'מנויים פעילים',
+    'LBL_ACTIVE_SUBSCRIPTIONS_UNAVAILABLE' => 'ניתן להוסיף חלונית זו רק למודולים שמקושרים לחשבון יחיד. עיין במסמכים הזמינים ב<a href={{linkToDocumentation}}>חלונית למנויים פעילים</a> לקבל פרטים נוספים.',
+    'LBL_LINKED_SUBSCRIPTIONS_ACCOUNT_FIELD' => 'הצג רכישות ששייכות לחשבון מקושר זה:',
     'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET_DESCRIPTION' => 'מנויים פעילים עבור חשבון ספציפי.',
     'LBL_ACTIVE_SUBSCRIPTIONS_QUANTITY' => ', כמות {{quantity}}',
     'LBL_ACTIVE_SUBSCRIPTIONS_TOTAL' => 'סה"כ:',
     'LBL_NO_ACTIVE_SUBSCRIPTIONS' => 'אין מנויים פעילים',
     'LBL_REQUIRE_REVENUE_LINE_ITEMS' => 'חלונית זו מחייבת שימוש במודול {{module_name}} כדי לפעול. בקש ממנהל המערכת להפעיל את המודול {{module_name}}.',
+    'LBL_PURCHASE_HISTORY_DASHLET' => 'היסטוריית רכישות',
+    'LBL_PURCHASE_HISTORY_DASHLET_DESCRIPTION' => 'כל הרכישות עבור חשבון ספציפי.',
+    'LBL_PURCHASE_HISTORY_UNAVAILABLE' => 'ניתן להוסיף חלונית זו רק למודולים שמקושרים לחשבון יחיד. למידע נוסף, עיין במסמכים הזמינים ב<a href={{linkToDocumentation}}>חלונית &#39;היסטוריית רכישות&#39;</a>.',
+    'LBL_NO_PURCHASE_HISTORY' => 'אין רכישות להצגה',
+    'LBL_NO_PLIS' => 'אין פריטי שורה של רכישות',
+    'LBL_PURCHASE_HISTORY_TOTAL_CURRENCY' => 'סה"כ',
+    'LBL_PURCHASE_HISTORY_TOTAL_QUANTITY' => 'כמות',
+    'LBL_REQUIRE_PURCHASES_AND_PLIS' => 'כדי שחלונית זו תוכל לפעול, נדרש שימוש בפריטי השורה &#39;רכישות&#39; ו&#39;פריטים שנרכשו&#39;. בקש ממנהל המערכת להפעיל את פריטי השורה &#39;רכישות&#39; ו&#39;פריטים שנרכשו&#39;.',
+    'LBL_SEARCH_PURCHASE_NAME' => 'חיפוש לפי שם רכישה...',
 
     // Customer Service
     'LBL_EDIT_IN_STUDIO' => 'השתמש ב- Studio כדי לערוך את תצורת חלונית התצוגה של הרשימה על-ידי מעבר אל ' .
@@ -5657,7 +5888,39 @@ $app_strings = array (
     'LBL_SERVICE_DURATION' => 'משך זמן השירות',
     'LBL_SERVICE_DURATION_VALUE' => 'ערך משך זמן השירות',
     'LBL_SERVICE_DURATION_UNIT' => 'יחידת משך זמן השירות',
+    'LBL_LOCK_DURATION' => 'משך הנעילה',
 
+// Omnichannel
+    'ERROR_OMNICHANNEL_LOAD_FAILED' => 'לא ניתן להעלות את לוח הבקרה לאנשי קשר/CCP של Amazon Connect. נא' .
+        'ודא שאתה משתמש '.
+        '<a href="https://docs.aws.amazon.com/connect/latest/adminguide/browsers.html" target="_blank" rel="nofollow noopener noreferrer">דפדפן נתמך</a>. ' .
+        'אם הבעיה נמשכת, צור קשר עם מנהל המערכת של Sugar.',
+    'ERROR_OMNICHANNEL_NOT_CONFIGURED' => 'מנהל המערכת של Sugar לא הגדיר את המופע שלך ל-Amazon Connect.',
+    'ERROR_OMNICHANNEL_TIMEOUT' => 'לא ניתן להתחבר ל-Amazon Connect. צור קשר עם מנהל המערכת של Sugar לקבלת עזרה.',
+    'LBL_OMNICHANNEL_UNKNOWN' => 'לא ידוע',
+    'LBL_OMNICHANNEL_CONFIG_SUMMARY' => 'Summary Panel',
+
+    // Focus Drawer dashboards
+    'LBL_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס',
+    'LBL_EXTERNAL_GUESTS' => 'אורחים חיצוניים',
+    'LBL_MY_FAVORITE_TASKS' => 'המשימות המועדפות שלי',
+    'LBL_MY_TASKS' => 'המשימות שלי',
+
+    // Sugar Integrate
+    'LBL_INTEGRATE_INVALID_FIELD' => 'אי אפשר היה למצוא את השדה: {0} במודול: {1}',
+    'LBL_INTEGRATE_INVALID_PARAM' => 'אי אפשר היה למצוא רשומה עם {0}: {1} במודול: {2}',
+    'LBL_INTEGRATE_INVALID_RELATIONSHIP' => 'אי אפשר היה למצוא יחסים בשם: {0}',
+    'LBL_INTEGRATE_DUPLICATE_PARAM' => 'הרשומה במסד הנתונים עם המזהה: {0}, ו-{1}: {2} במודול: {3} כבר קיימת',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS_DELETED' => 'מחיקה זמנית (עם דגל מחיקה = 1)',
+    'LBL_INTEGRATE_DUPLICATE_RECORDS' => 'נמצאו מספר רשומות מבסיס הנתונים עבור {0} {1} במודול {2}. ' .
+        'נא להסיר או לעדכן את הרשומות התואמות לפי הצורך. רשומות תואמות: {3}',
+
+    // Time-Aware Schedules
+    'LBL_TIME_AWARE_NEXT_RUN' => 'ההפעלה הבאה',
+    'LBL_TIME_AWARE_TYPE' => 'סוג',
+    'LBL_TIME_AWARE_BEAN_ID' => 'מזהה Bean',
+
+    'LBL_BLANK' => '-blank-',
 );
 
 $app_list_strings['activity_user_options'] = array (

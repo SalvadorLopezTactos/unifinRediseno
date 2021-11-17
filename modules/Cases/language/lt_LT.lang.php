@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Atvejų sąrašo ataskaitų sritis',
     'LBL_CASES_RECORD_DASHBOARD' => 'Atvejų duomenų ataskaitų sritis',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Išsami atvejo informacija',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Aptarnavimo „Focus“ stalčius',
 
 	'ERR_DELETE_RECORD'					=> 'Privalote nurodyti įrašo numerį, kad būtų galima ištrinti klientą.',
 	'LBL_ACCOUNT_ID'					=> 'Kliento ID',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Rodyti portale',
 	'LBL_CREATE_KB_DOCUMENT' => 'Sukurti straipsnį',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Žinių bazė',
+    'LBL_REQUEST_CLOSE' => 'Užklausa uždaryta',
+    'LBL_REQUEST_CLOSE_DATE' => 'Užklausos uždarymo data',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Užklausa uždaryti',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Nusiųskite užklausą uždaryti šią bylą',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Ar norėtumėte paprašyti, kad ši byla būtų baigta?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Mano bylos, kurias prašoma uždaryti',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Mano bylos, kurias prašoma uždaryti',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Mano bylos, kurias prašoma uždaryti',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Bylų, kurias prašoma uždaryti, sąrašas',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Parodo priskirtų bylų, kurias prašoma uždaryti, sąrašą',
 
     'LBL_CREATED_USER' => 'Sukūrė',
     'LBL_MODIFIED_USER' => 'Redagavo',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Atsakingas',
     'LBL_EXPORT_TEAM_COUNT' => 'Komandos skaičius',
     'LBL_CHANGETIMERS' => 'Keisti laikmačius',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Pirkimai',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Susijusio kontakto el. paštas',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'For example, you might use this to find an issue that has been previously submitted.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'If you have a new support Case you would like to submit, you can click here to submit a new Case.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Clicking here will return you to this view at any time.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Bylų sąveikos',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Užrašai',
 
@@ -149,5 +161,5 @@ To create a {{module_name}}:
 
     'LBL_SLA_DETAILS' => 'Išsami SLA informacija',
     'LBL_HOURS' => 'Valandos',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'Būsena',
 );

@@ -311,6 +311,13 @@ $dictionary['Project'] = array(
     		'source'=>'non-db',
 				'vname'=>'LBL_NOTES',
   		),
+        'messages' => [
+            'name' => 'messages',
+            'type' => 'link',
+            'relationship' => 'projects_messages',
+            'source'=>'non-db',
+            'vname'=>'LBL_MESSAGES',
+        ],
 		'tasks' =>
   			array (
   			'name' => 'tasks',
@@ -482,6 +489,17 @@ $dictionary['Project'] = array(
 			'rhs_module'=> 'Notes', 'rhs_table'=> 'notes', 'rhs_key' => 'parent_id',
 			'relationship_type'=>'one-to-many', 'relationship_role_column'=>'parent_type',
 			'relationship_role_column_value'=>'Project'),
+        'projects_messages' => [
+            'lhs_module'=> 'Project',
+            'lhs_table'=> 'project',
+            'lhs_key' => 'id',
+            'rhs_module'=> 'Messages',
+            'rhs_table'=> 'messages',
+            'rhs_key' => 'parent_id',
+            'relationship_type'=>'one-to-many',
+            'relationship_role_column'=>'parent_type',
+            'relationship_role_column_value'=>'Project',
+        ],
 		'projects_tasks' => array(
 			'lhs_module'=> 'Project', 'lhs_table'=> 'project', 'lhs_key' => 'id',
 			'rhs_module'=> 'Tasks', 'rhs_table'=> 'tasks', 'rhs_key' => 'parent_id',

@@ -25,8 +25,11 @@
 
 
 require_once 'include/utils/progress_bar_utils.php';
+require_once 'ModuleInstall/ModuleInstallerException.php';
 
 use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
+use Sugarcrm\Sugarcrm\CSP\ContentSecurityPolicy;
+use Sugarcrm\Sugarcrm\CSP\Directive;
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Portal\Factory as PortalFactory;
@@ -46,6 +49,11 @@ class ModuleInstaller
 
     /** @var array */
     public $installdefs;
+
+    /**
+     * @var UpgradeHistory
+     */
+    protected $upgradeHistory = null;
 
     /**
      * List of install sections and modules affected by installation in each
@@ -94,6 +102,15 @@ class ModuleInstaller
     }
 
     /**
+     * setup UpgradeHistory
+     * @param UpgradeHistory|null $upgradeHistory
+     */
+    public function setUpgradeHistory(?UpgradeHistory $upgradeHistory)
+    {
+        $this->upgradeHistory = $upgradeHistory;
+    }
+
+    /**
      * ModuleInstaller->install includes the manifest.php from the base directory it has been given. If it has been asked to do an upgrade it checks to see if there is
      * an upgrade_manifest defined in the manifest; if not it errors. It then adds the bean into the custom/Extension/application/Ext/Include/<module>.php - sets beanList, beanFiles
      * and moduleList - and then calls ModuleInstaller->merge_files('Ext/Include', 'modules.ext.php', '', true) to merge the individual module files into a combined file
@@ -107,9 +124,15 @@ class ModuleInstaller
         if ((defined('MODULE_INSTALLER_PACKAGE_SCAN') && MODULE_INSTALLER_PACKAGE_SCAN)
             || !empty($GLOBALS['sugar_config']['moduleInstaller']['packageScan'])) {
             $this->ms->scanPackage($base_dir);
-            if($this->ms->hasIssues()){
-                $this->ms->displayIssues();
-                sugar_cleanup(true);
+            if ($this->ms->hasIssues()) {
+                if ($this->silent) {
+                    $e = new SugarException('LBL_UPGRADE_WIZARD_INVALID_PKG', null, 'Administration');
+                    $e->setExtraData('error_description', $this->ms->getFormattedIssues());
+                    throw $e;
+                } else {
+                    SugarCleaner::cleanHtml($this->ms->displayIssues());
+                    sugar_cleanup(true);
+                }
             }
         }
 
@@ -137,11 +160,12 @@ class ModuleInstaller
             'install_layoutfields',
             'install_relationships',
             'install_client_files',
+            'install_dashboards',
             'enable_manifest_logichooks',
+            'update_csp',
             'post_execute',
             'reset_opcodes',
             'reset_file_cache',
-            'setup_elastic_mapping',
         );
 
         $total_steps += count($tasks);
@@ -262,11 +286,13 @@ class ModuleInstaller
             $dict = new ServiceDictionaryRest();
             $dict->buildAllDictionaries();
 
+            // setup elastic mapping
+            $this->setup_elastic_mapping();
+
             $this->log('<br><b>' . translate('LBL_MI_COMPLETE') . '</b>');
         }else{
-            die("No \$installdefs Defined In $this->base_dir/manifest.php");
+            throw new ModuleInstallerException("No \$installdefs Defined In $this->base_dir/manifest.php");
         }
-
     }
 
     function pre_execute(){
@@ -317,7 +343,7 @@ class ModuleInstaller
         if(isset($this->installdefs['copy'])){
             /* BEGIN - RESTORE POINT - by MR. MILK August 31, 2005 02:22:11 PM */
 
-            $backup_path = clean_path( remove_file_extension(urldecode($this->validateInstallFile())) . "-restore" );
+            $backup_path = $this->getBackupPath();
             /* END - RESTORE POINT - by MR. MILK August 31, 2005 02:22:18 PM */
             foreach($this->installdefs['copy'] as $cp){
                 $GLOBALS['log']->debug("Copying ..." . $cp['from'].  " to " .$cp['to'] );
@@ -338,12 +364,12 @@ class ModuleInstaller
                 $GLOBALS['log']->debug('Unlink ' . $cp['to']);
                 /* BEGIN - RESTORE POINT - by MR. MILK August 31, 2005 02:22:11 PM */
 
-                $backup_path = clean_path( remove_file_extension(urldecode(hashToFile($this->validateInstallFile())))."-restore/".$cp['to'] );
+                $backup_path = $this->getBackupPath($cp['to']);
                 $this->uninstall_new_files($cp, $backup_path);
                 $this->copy_path($backup_path, $cp['to'], $backup_path, true);
                 /* END - RESTORE POINT - by MR. MILK August 31, 2005 02:22:18 PM */
             }
-            $backup_path = clean_path( remove_file_extension(urldecode(hashToFile($this->validateInstallFile())))."-restore");
+            $backup_path = $this->getBackupPath();
             if(file_exists($backup_path))
                 rmdir_recursive($backup_path);
         }
@@ -1046,9 +1072,8 @@ class ModuleInstaller
                 $lang_file = $path.'/'.$packs['language'].'.'. $this->id_name . '.php';
                 if (!file_exists($lang_file)) {
                     copy_recursive($packs['from'], $lang_file);
-                }
-                else {
-                    $temp_lang_file = $path.'/'.'temp.php';
+                } elseif (InputValidation::getService()->getValidInputRequest('module') !== 'ModuleBuilder') {
+                    $temp_lang_file = $path . '/' . 'temp.php';
                     copy_recursive($packs['from'], $temp_lang_file);
                     $contents = $this->getExtensionFileContents(array($lang_file, $temp_lang_file));
                     file_put_contents($lang_file, $contents);
@@ -1190,6 +1215,42 @@ class ModuleInstaller
         }
     }
 
+    /**
+     * Functions for updating Content-Security-Policy settings
+     * CSP directives needed for proper operation of the Package should be represented as associative array
+     * where keys are directive names and values are corresponding trusted sources
+     *
+     * CSP definition should look like this:
+     *
+     * $installdefs = array(
+     *     ...
+     *     'csp' => [
+     *        'default-src' => '*.trusted.com example.com',
+     *        'img-src' => 'http: https:'
+     *        ...
+     *    ]
+     *    ...
+     );
+     */
+    public function update_csp(): void
+    {
+        global $sugar_config;
+        $data = $this->readManifest();
+        extract($data);
+        if (isset($this->installdefs['csp']) && is_array($this->installdefs['csp'])) {
+            foreach ($this->installdefs['csp'] as $directiveName => $directiveSource) {
+                try {
+                    $csp = ContentSecurityPolicy::fromAdministrationSettings();
+                    $directive = Directive::create($directiveName, $directiveSource);
+                    $csp->appendDirective($directive);
+                    $csp->saveToSettings();
+                } catch (\Assert\InvalidArgumentException $exception) {
+                    throw new ModuleInstallerException($exception->getMessage());
+                }
+            }
+        }
+    }
+
     function disable_manifest_logichooks() {
         if(empty($this->installdefs['logic_hooks']) || !is_array($this->installdefs['logic_hooks'])) {
             return;
@@ -1230,12 +1291,12 @@ class ModuleInstaller
         if(empty($backup_path)) {
             /* END - RESTORE POINT - by MR. MILK August 31, 2005 02:22:18 PM */
             if(!copy_recursive($from, $to)){
-                die('Failed to copy ' . $from. ' ' . $to);
+                throw new ModuleInstallerException('Failed to copy ' . $from. ' ' . $to);
             }
             /* BEGIN - RESTORE POINT - by MR. MILK August 31, 2005 02:22:18 PM */
         }
         elseif(!$this->copy_recursive_with_backup($from, $to, $backup_path, $uninstall)){
-            die('Failed to copy ' . $from. ' to ' . $to);
+            throw new ModuleInstallerException('Failed to copy ' . $from. ' ' . $to);
         }
         /* END - RESTORE POINT - by MR. MILK August 31, 2005 02:22:18 PM */
     }
@@ -1273,6 +1334,10 @@ class ModuleInstaller
                     $mod->custom_fields->use_existing_labels =  true;
                     $mod->custom_fields->addFieldObject($fieldObject);
                 }
+
+                if (isset($field['addIndex']) && $field['addIndex'] === true) {
+                    $idx = $this->addIndexToCustomField($mod, $field);
+                }
             }
             if(!$installed){
                 $GLOBALS['log']->debug('Could not install custom field ' . $field['name'] . ' for module ' .  $field['module'] . ': Module does not exist');
@@ -1280,17 +1345,70 @@ class ModuleInstaller
         }
     }
 
+    /**
+     * Add index to custom field
+     *
+     * @param SugarBean $bean
+     * @param array $field
+     * @return string|null
+     */
+    protected function addIndexToCustomField(SugarBean $bean, array $field)
+    {
+        $typesNotSupported = [
+            'address',
+            'html',
+            'iframe',
+            'image',
+            'multienum',
+            'text',
+            'textarea',
+        ];
+
+        $tableName = $bean->get_custom_table_name();
+        $indexName = \DBManagerFactory::getInstance()->getValidDBName(
+            "idx_" . $tableName . "_{$field['name']}_c",
+            true,
+            'index',
+            true
+        );
+        $indexDef = [
+            [
+                'name'   => $indexName,
+                'type'   => 'index',
+                'fields' => ['id_c', $field['name'] . '_c'],
+            ],
+        ];
+        if (in_array($field['type'], $typesNotSupported)) {
+            $GLOBALS['log']->info('Add index does not support field type ' . $field['type']);
+            return null;
+        } else {
+            if ($this->db->get_index($tableName, $indexName)) {
+                $this->db->dropIndexes($tableName, $indexDef);
+            }
+            $this->db->addIndexes($tableName, $indexDef);
+            $GLOBALS['log']->info('Index: ' . $indexName . ' is added to table: ' . $tableName);
+            return $indexName;
+        }
+    }
+
     function uninstall_custom_fields($fields){
         $dyField = new DynamicField();
 
+        $modules = [];
         foreach($fields as $field){
-            $mod = BeanFactory::newBean($field['module']);
-            if(!empty($mod)) {
-                $dyField->bean = $mod;
+            $bean = BeanFactory::newBean($field['module']);
+            if (!empty($bean)) {
+                $dyField->bean = $bean;
                 $dyField->module = $field['module'];
-                $dyField->deleteField($field['name']);
+                $dyField->deleteField($field['name'], false);
+                $modules[$field['module']] = $bean->getObjectName();
             }
         }
+        VardefManager::clearVardef();
+        foreach ($modules as $module => $object) {
+            VardefManager::refreshVardefs($module, $object);
+        }
+        MetaDataManager::refreshModulesCache(array_keys($modules));
     }
 
     /*
@@ -1665,6 +1783,10 @@ class ModuleInstaller
 
     function uninstall($base_dir)
     {
+        // set long time out for long execution.
+        $uninstallTimeout = (int) SugarConfig::getInstance()->get('uninstall_timeout', 600);
+        ini_set('max_execution_time', $uninstallTimeout);
+
         global $app_strings;
         $total_steps = 5; //min steps with no tasks
         $current_step = 0;
@@ -1678,6 +1800,7 @@ class ModuleInstaller
             'uninstall_extensions',
             'uninstall_global_search',
             'uninstall_filters',
+            'uninstall_dashboards',
             'disable_manifest_logichooks',
             'post_uninstall',
         );
@@ -1703,6 +1826,7 @@ class ModuleInstaller
                 $this->modulesInPackage = $installed_modules;
                 $this->uninstall_beans($installed_modules);
                 $this->uninstall_customizations($installed_modules);
+                WorkFlow::deleteWorkFlowsByModule($installed_modules);
                 if(!$this->silent){
                     $current_step++;
                     update_progress_bar('install', $total_steps, $total_steps);
@@ -1720,6 +1844,13 @@ class ModuleInstaller
                     update_progress_bar('install', $current_step, $total_steps);
                 }
             }
+
+            // if we get here, package files have been removed, change upgradehistory status
+            if (!empty($this->upgradeHistory)) {
+                $this->upgradeHistory->status = UpgradeHistory::STATUS_STAGED;
+                $this->upgradeHistory->save();
+            }
+
             if(isset($installdefs['custom_fields']) && (isset($GLOBALS['mi_remove_tables']) && $GLOBALS['mi_remove_tables'])){
                 $this->log(translate('LBL_MI_UN_CUSTOMFIELD'));
                 $this->uninstall_custom_fields($installdefs['custom_fields']);
@@ -1773,7 +1904,7 @@ class ModuleInstaller
                 update_progress_bar('install', $total_steps, $total_steps);
             }
         }else{
-            die("No manifest.php Defined In $this->base_dir/manifest.php");
+            throw new ModuleInstallerException("No manifest.php Defined In $this->base_dir/manifest.php");
         }
     }
 
@@ -1877,7 +2008,7 @@ class ModuleInstaller
      * Merge the new style extensions
      * @param  string $module_path Path to the module's directory.
      */
-    public function mergeExtensionFiles($module_path)
+    private function mergeExtensionFiles($module_path)
     {
         $php_tags = array('<?php', '?>', '<?PHP', '<?');
         $path = "custom/Extension/{$module_path}/Ext/clients";
@@ -1933,7 +2064,8 @@ class ModuleInstaller
                 $paths = array($module_path . '/' . $ext_path);
                 $cache_path = 'custom/' . $module_path . '/' . $ext_path;
             }
-            $paths[] = 'custom/Extension' . '/' . $module_path . '/' . $ext_path;
+            $extFrameworkMainPath = 'custom/Extension' . '/' . $module_path . '/' . $ext_path;
+            $paths[] = $extFrameworkMainPath;
         }
 
         $files = array();
@@ -1946,7 +2078,7 @@ class ModuleInstaller
                     }
                     $fullpath = SugarAutoLoader::normalizeFilePath("$path/$entry");
                     $filterCheck = empty($filter) || substr_count($entry, $filter) > 0;
-                    $isPHPFile = strtolower(substr($entry, -4)) == ".php";
+                    $isPHPFile = strtolower(pathinfo($entry, PATHINFO_EXTENSION)) == 'php';
                     if (is_file($fullpath) && $filterCheck && $isPHPFile) {
                         $GLOBALS['log']->debug(__METHOD__ . ": found {$path}{$entry}");
                         $files[] = $fullpath;
@@ -1955,7 +2087,9 @@ class ModuleInstaller
             }
         }
 
-        $this->cacheExtensionFiles($files, $cache_path . '/' . $name);
+        $extFrameworkMainPath = rtrim($extFrameworkMainPath, DIRECTORY_SEPARATOR);
+        $orderMapFile = $extFrameworkMainPath . DIRECTORY_SEPARATOR . $filter . 'orderMapping.php';
+        $this->cacheExtensionFiles($files, $cache_path . '/' . $name, $orderMapFile);
     }
 
     /**
@@ -1964,11 +2098,12 @@ class ModuleInstaller
      *
      * @param array $sourceFiles Source file paths
      * @param string $cacheFile Cache file paths
+     * @param string $orderMapFile File that stores files order for merging
      */
-    protected function cacheExtensionFiles(array $sourceFiles, $cacheFile)
+    protected function cacheExtensionFiles(array $sourceFiles, string $cacheFile, string $orderMapFile)
     {
         if (count($sourceFiles) > 0) {
-            $sourceFiles = $this->sortExtensionFiles($sourceFiles);
+            $sourceFiles = $this->sortExtensionFiles($sourceFiles, $orderMapFile);
             $contents = $this->getExtensionFileContents($sourceFiles);
             $dirName = dirname($cacheFile);
             if (!file_exists($dirName)) {
@@ -1986,11 +2121,53 @@ class ModuleInstaller
      * Sorts file paths and returns sorted copy
      *
      * @param array $files File paths
+     * @param string $orderMapFile File that stores files order for merging
      * @return array Sorted file paths
      */
-    protected function sortExtensionFiles(array $files)
+    protected function sortExtensionFiles(array $files, string $orderMapFile)
     {
-        return sortExtensionFiles($files);
+        $filesSortedByMtime = sortExtensionFiles($files);
+        if (count($filesSortedByMtime) < 2) {
+            return $filesSortedByMtime;
+        }
+        $extensionOrderMap = [];
+        if (file_exists($orderMapFile)) {
+            require $orderMapFile;
+        }
+        foreach ($filesSortedByMtime as $index => $extFile) {
+            $normalizedFilePath = SugarAutoLoader::normalizeFilePath($extFile);
+            if (!file_exists($normalizedFilePath)
+                || basename($normalizedFilePath) == basename($orderMapFile)) {
+                unset($extensionOrderMap[$normalizedFilePath]);
+                continue;
+            }
+            $md5 = md5_file($normalizedFilePath);
+            $mtime = filemtime($normalizedFilePath);
+            if (!isset($extensionOrderMap[$extFile]) || $md5 !== $extensionOrderMap[$extFile]['md5']) {
+                $extensionOrderMap[$extFile] = [
+                    'md5' => $md5,
+                    'mtime' => $mtime,
+                    'is_override' => substr(basename($extFile), 0, 9) === '_override',
+                ];
+            }
+        }
+        uasort($extensionOrderMap, function ($a, $b) {
+            if ($a['is_override'] != $b['is_override']) {
+                return $a['is_override'] - $b['is_override'];
+            }
+
+            if ($a['mtime'] != $b['mtime']) {
+                return $a['mtime'] - $b['mtime'];
+            }
+
+            return 0;
+        });
+        $extensionOrderMap = array_filter($extensionOrderMap, function ($file) use ($filesSortedByMtime) {
+            return in_array($file, $filesSortedByMtime);
+        }, ARRAY_FILTER_USE_KEY);
+        sugar_mkdir(dirname($orderMapFile), null, true);
+        write_array_to_file('extensionOrderMap', $extensionOrderMap, $orderMapFile);
+        return array_keys($extensionOrderMap);
     }
 
     /**
@@ -2439,8 +2616,8 @@ class ModuleInstaller
         $current_step = 0;
         $this->base_dir = $base_dir;
         $tasks = array(
-            'disable_copy',
             'disable_relationships',
+            'disable_copy',
             'disable_extensions',
             'disable_global_search',
             'disable_manifest_logichooks',
@@ -2761,8 +2938,7 @@ class ModuleInstaller
                 foreach($this->installdefs['copy'] as $cp){
                     $cp['to'] = clean_path(str_replace('<basepath>', $this->base_dir, $cp['to']));
                     if (file_exists($cp['to'])) {
-                        $backup_path = clean_path(remove_file_extension(urldecode(hashToFile($this->validateInstallFile())))."-restore/".$cp['to']);
-
+                        $backup_path = $this->getBackupPath($cp['to']);
                         $GLOBALS['log']->debug('ENABLE COPY:: CREATING BACKUP OF: ' . $cp['to']);
                         $this->copy_path($cp['to'], $backup_path);
 
@@ -2883,7 +3059,7 @@ class ModuleInstaller
             ),
             'alertsEl' => '#alerts',
             'alertAutoCloseDelay' => 2500,
-            'serverUrl' => $config->get('site_url') . '/rest/v11_8',
+            'serverUrl' => $config->get('site_url') . '/rest/v11_12',
             'siteUrl' => $config->get('site_url'),
             'unsecureRoutes' => [
                 'signup',
@@ -2948,7 +3124,7 @@ class ModuleInstaller
             ),
             'alertsEl' => '#alerts',
             'alertAutoCloseDelay' => 2500,
-            'serverUrl' => 'rest/v11_8',
+            'serverUrl' => 'rest/v11_12',
             'siteUrl' => '',
             'unsecureRoutes' => array(
                 'login',
@@ -3090,6 +3266,61 @@ class ModuleInstaller
             $contents = file_get_contents($from);
             SugarAutoLoader::ensureDir(dirname($to));
             file_put_contents($to, $contents);
+        }
+    }
+
+    /**
+     * Installs the module dashboards
+     */
+    public function install_dashboards()
+    {
+        $dashboards = [
+            'focus' => 'focus-dashboard.php',
+            'record' => 'record-dashboard.php',
+        ];
+
+        if (empty($this->installdefs['beans'])) {
+            return;
+        }
+
+        $modules = array_column($this->installdefs['beans'], 'module');
+
+        $dashboardInstaller = new DefaultDashboardInstaller();
+        foreach ($modules as $module) {
+            foreach ($dashboards as $dashboardName => $dashboardFile) {
+                $fullPath = 'modules/' . $module . '/dashboards/' . $dashboardName . '/' . $dashboardFile;
+
+                if (!file_exists($fullPath)) {
+                    continue;
+                }
+
+                $dashboardInstaller->buildDashboardFromFile($fullPath, $module, $dashboardName);
+            }
+        }
+    }
+
+    /**
+     * Uninstalls all dashboards.
+     * @throws SugarQueryException
+     */
+    protected function uninstall_dashboards()
+    {
+        if (empty($this->installdefs['beans'])) {
+            return;
+        }
+
+        $modules = array_column($this->installdefs['beans'], 'module');
+
+        $query = new SugarQuery();
+        $query->select('id');
+        $query->from(BeanFactory::newBean('Dashboards'));
+        $query->where()->in('dashboard_module', $modules);
+        $data = $query->execute();
+
+        foreach ($data as $row) {
+            $bean = BeanFactory::retrieveBean('Dashboards', $row['id']);
+            $bean->mark_deleted($row['id']);
+            $bean->save();
         }
     }
 
@@ -3304,7 +3535,8 @@ class ModuleInstaller
             }
         }
         $cacheFile = 'custom/application/Ext/DropdownFilters/roles/' . $role . '/dropdownfilters.ext.php';
-        $this->cacheExtensionFiles($files, $cacheFile);
+        $orderMapFile = rtrim($roleDir, DIRECTORY_SEPARATOR) . '/orderMapping.php';
+        $this->cacheExtensionFiles($files, $cacheFile, $orderMapFile);
     }
 
     /**
@@ -3428,10 +3660,39 @@ class ModuleInstaller
      */
     protected function validateInstallFile()
     {
-        $request = InputValidation::getService();
-        // $_REQUEST['install_file'] is a hash as per fileToHash/hashToFile
-        $installFile = $request->getValidInputRequest('install_file');
+        $installFile = '';
+        if (!empty($this->upgradeHistory)) {
+            $installFile = $this->upgradeHistory->getFileName();
+        } else {
+            $request = InputValidation::getService();
+            $packageId = $request->getValidInputRequest('package_id');
+            $upgradeHistory = BeanFactory::retrieveBean('UpgradeHistory', $packageId);
+            if (!$upgradeHistory instanceof UpgradeHistory || empty($upgradeHistory->id)) {
+                $GLOBALS['log']->fatal("No upgrade history found");
+                sugar_die(htmlspecialchars(translate('ERR_UW_NO_PACKAGE_FILE', 'Administration')));
+            } else {
+                $installFile = $upgradeHistory->getFileName();
+            }
+        }
+        if (empty($installFile)) {
+            $GLOBALS['log']->fatal("No install file found");
+            sugar_die(htmlspecialchars(translate('ERR_UW_NO_INSTALL_FILE', 'Administration')));
+        }
         return $installFile;
+    }
+
+    /**
+     * get backup path
+     * @param string|null $subDir sub directory
+     * @return string
+     */
+    protected function getBackupPath(?string $subDir = null) : string
+    {
+        $backupPath = remove_file_extension(urldecode($this->validateInstallFile())) . '-restore';
+        if (!empty($subDir)) {
+            $backupPath .= '/' . $subDir;
+        }
+        return clean_path($backupPath);
     }
 
     /**

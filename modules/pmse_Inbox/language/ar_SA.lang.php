@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'إدارة العمليات',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'العمليات بدون متابع',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم العمليات',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'لوحة معلومات سجل العمليات',
+
     'LBL_CAS_ID' => 'رقم العملية',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "غير معروف (وفقًا لمعرف المستخدم: \"%s\")",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "المهمة",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => 'معاينة تصميم العملية',
     'LBL_PROJECT_RUN_ORDER' => 'ترتيب التشغبل',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => 'النشاط الحالي',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => 'تاريخ التعديل',
+    'LBL_DATE_ENTERED' => 'تاريخ الإنشاء',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'هل تريد بالتأكيد المطالبة بهذه العملية؟',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'تمت المطالبة بالعملية بنجاح',
 );
 

@@ -10,11 +10,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\IdmModeLimitationTrait;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 
 class ImportView extends SugarView
 {
+    use IdmModeLimitationTrait;
+
     protected $currentStep;
     protected $pageTitleKey;
     protected $instruction;

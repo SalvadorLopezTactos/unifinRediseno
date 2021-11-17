@@ -41,10 +41,13 @@ if(!empty($_REQUEST['sample'])){
         },
         explode(',', $_REQUEST['uid'])
     );
+
+    $module =  \Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation::getService()->getValidInputRequest('module', 'Assert\Mvc\ModuleName');
+
     $content = export(
-        clean_string($_REQUEST['module']),
+        $module,
         $recordsIds,
-        isset($_REQUEST['members']) ? $_REQUEST['members'] : false
+        $_REQUEST['members'] ?? false
     );
 }else{
 	$content = export(clean_string($_REQUEST['module']));

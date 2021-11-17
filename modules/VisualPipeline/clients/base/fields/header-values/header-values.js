@@ -86,10 +86,8 @@
                         _.union(Object.keys(availableValues[tableHeader]), hiddenValues));
 
                     if (!_.isUndefined(diffArr)) {
-                        _.each(diffArr, function(diffElem) {
-                            // add missing column values to the available columns
-                            availableValues[tableHeader][diffElem] = translated[diffElem];
-                        }, this);
+                        // show the new values with the hidden columns
+                        hiddenValues = _.union(hiddenValues, diffArr);
                     }
                 }
 

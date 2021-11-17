@@ -57,7 +57,7 @@ class DropdownListValidator extends ConstraintValidator
     {
         foreach ($array as $key => $value) {
             // allow white spaces in middle
-            $keyValid = preg_match('/^[a-zA-Z\_0-9]+(\s+[a-zA-Z\_0-9]+)*$/', $key) || $key == '';
+            $keyValid = preg_match('/^[a-zA-Z\_0-9]+(\s*[a-zA-Z\_0-9\/\.]+)*$/', $key) || $key == '';
             if (!$keyValid || (is_array($value) && !$this->checkArrayKeysValidityRecursively($value))) {
                 return false;
             }

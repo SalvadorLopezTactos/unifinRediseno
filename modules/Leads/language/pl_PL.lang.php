@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Pulpit list namiarów',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Pulpit rekordów namiarów',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy potencjalnych klientów',
 
     'ERR_DELETE_RECORD' => 'Należy podać numer rekordu, aby usunąć namiar.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Opis kontrahenta',
@@ -325,4 +326,8 @@ Po potwierdzeniu wprowadzonych zmian w modułach kliknij przycisk Zapisz i przek
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Nie można zmienić statusu {{moduleSingular}}. Ten {{moduleSingular}} został już skonwertowany.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Prognoza przekształcenia potencjalnych klientów',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Wyświetl szczegóły prognozy dla konkretnego potencjalnego klienta',
 );

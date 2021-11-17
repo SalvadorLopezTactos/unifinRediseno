@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Предупреждение: Вы изменяете параметр автоматического импорта, что может привести к потере данных.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Предупреждение: При автоматическом создании Обращений авто импорт также должен быть включен.',
 	'LBL_EDIT_LAYOUT' => 'Правка расположения' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'Адрес электронной почты',
+    'LBL_EMAIL_PROVIDER' => 'Поставщик услуг электронной почты',
+    'LBL_AUTH_STATUS' => 'Статус авторизации',
 );
-?>

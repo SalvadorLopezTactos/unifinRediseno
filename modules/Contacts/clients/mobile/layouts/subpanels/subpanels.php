@@ -92,13 +92,20 @@ $viewdefs['Contacts']['mobile']['layout']['subpanels'] = array(
                 'link' => 'documents',
             ),
         ),
-        array(
+        [
             'layout' => 'subpanel',
-            'label' => 'LBL_QUOTES_SUBPANEL_TITLE',
-            'context' => array(
+            'label' => 'LBL_QUOTES_SHIP_TO',
+            'context' => [
                 'link' => 'quotes',
-            ),
-        ),
+            ],
+        ],
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_QUOTES_BILL_TO',
+            'context' => [
+                'link' => 'billing_quotes',
+            ],
+        ],
         array (
             'layout' => 'subpanel',
             'label' => 'LBL_PRODUCTS_SUBPANEL_TITLE',
@@ -106,5 +113,12 @@ $viewdefs['Contacts']['mobile']['layout']['subpanels'] = array(
                 'link' => 'products',
             ),
         ),
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_PURCHASES_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'purchases',
+            ],
+        ],
     ),
 );

@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Nadzorna ploča za popis ponuda',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o ponudama',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za ponude',
 
     'LBL_CONTRACTS'=>'Ugovori',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Ugovori',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Zemlja za naplatu',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Poštanski broj za naplatu',
     'LBL_BILLING_ADDRESS_STATE' => 'Savezna država za naplatu',
-    'LBL_BILLING_ADDRESS_STREET' => 'Adresa za naplatu',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Adresa za naplatu:',
     'LBL_BILLING_CONTACT_ID' => 'ID kontakta za naplatu:',
     'LBL_BILLING_CONTACT_NAME' => 'Ime kontakta za naplatu:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Zemlja za dostavu',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Poštanski broj za dostavu',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Savezna država za dostavu',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Adresa za dostavu',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Adresa za dostavu:',
     'LBL_SHIPPING_BODY' => 'Naplata i dostava',
     'LBL_SHIPPING_CONTACT_ID' => 'ID kontakta za dostavu:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Kopiraj adresu za naplatu u adresu za dostavu',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Kopiraj adresu za dostavu u adresu za naplatu',
     'NTC_COPY_BILLING_ADDRESS2' => 'Kopiraj u dostavu',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopiraj u naplatu',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Jeste li sigurni da želite ukloniti ovaj komentar iz ponude?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopiraj u naplatu',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Jeste li sigurni da želite ukloniti ovaj komentar iz ponude?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Jeste li sigurni da želite ukloniti ovu stavku iz ponude?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Jeste li sigurni da želite ukloniti ovu grupu iz ponude?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Jeste li sigurni da želite ukloniti ovaj kontakt iz ponude?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Količina',
     'LBL_MFT_PART_NUM' => 'Broj dijela',
     'LBL_ITEM_NAME' => 'Stavka',
+    'LBL_PRODUCT_TEMPLATE' => 'Proizvod',
     'LBL_DISCOUNT_PRICE' => 'Jedinična cijena',
     'LBL_DISCOUNT_AMOUNT' => 'Popust',
     'LBL_LINE_ITEM_TOTAL' => 'Ukupni iznos stavke',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'ID prilike',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Konfiguracija ponuda',
+
+    'LBL_RENEWAL' => 'Obnova',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakcije s ponudom',
 );

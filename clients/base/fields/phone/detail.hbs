@@ -12,8 +12,14 @@
 --}}
 {{#if value}}
 <div class="ellipsis_inline" data-placement="bottom"{{#if dir}} dir="{{dir}}"{{/if}} title="{{value}}">
-    {{#if skypeValue}}
-        <a href="callto:{{skypeValue}}">{{value}}</a>
-    {{else}}{{value}}{{/if}}
+    {{#if dialoutEnabled}}
+        {{#if ccpEnabled}}
+            <a class="ccp-outgoing" href="javascript:void(0)">{{value}}</a>
+        {{else}}
+            <a href="callto:{{value}}">{{value}}</a>
+        {{/if}}
+    {{else}}
+        {{value}}
+    {{/if}}
 </div>
 {{/if}}

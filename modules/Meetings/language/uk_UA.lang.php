@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Інформаційна панель списку зустрічей',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Інформаційна панель записів зустрічей',
+    'LBL_LEAD_GUESTS' => 'Потенційні клієнти-гості',
+    'LBL_CONTACT_GUESTS' => 'Контакти-гості',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель для зустрічей',
 
 	'ERR_DELETE_RECORD' => 'Необхідно вказати номер запису, щоб видалити зустріч.',
 	'LBL_ACCEPT_THIS'=>'Прийняти?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Напрямок',
 	'LBL_LIST_DUE_DATE'=>'Дата завершення',
 	'LBL_LIST_FORM_TITLE' => 'Список зустрічей',
-	'LBL_LIST_MY_MEETINGS' => 'Мої зустрічі',
+    'LBL_LIST_MY_MEETINGS' => 'Мої зустрічі',
     'LBL_MY_SCHEDULED_MEETINGS' => 'Мої заплановані зустрічі',
+    'LBL_GUEST_MEETINGS' => 'Мої зустрічі в якості гостя',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Заплановані зустрічі в якості гостя',
 	'LBL_LIST_RELATED_TO' => 'Пов&#39;язаний з',
 	'LBL_LIST_STATUS'=>'Статус',
 	'LBL_LIST_SUBJECT' => 'Тема',

@@ -155,7 +155,7 @@ class ProspectList extends SugarBean {
                 c.phone_home AS phone_home, c.phone_mobile AS phone_mobile, c.phone_work AS phone_work
             FROM prospect_lists_prospects plp
             INNER JOIN contacts c ON plp.related_id=c.id LEFT JOIN accounts_contacts ac ON ac.contact_id=c.id 
-            LEFT JOIN accounts a ON ac.account_id=a.id
+            LEFT JOIN accounts a ON ac.account_id=a.id AND ac.deleted=0
             LEFT JOIN email_addr_bean_rel ear ON ear.bean_id=c.id AND ear.bean_module = 'Contacts' AND ear.deleted=0
             LEFT JOIN email_addresses ea ON ear.email_address_id=ea.id
             WHERE plp.prospect_list_id = %1\$s AND plp.related_type = 'Contacts' AND plp.deleted=0
@@ -244,12 +244,6 @@ class ProspectList extends SugarBean {
 
 	function fill_in_additional_list_fields()
 	{
-	}
-
-	function fill_in_additional_detail_fields()
-	{
-		parent::fill_in_additional_detail_fields();
-        $this->entry_count = $this->get_entry_count();
 	}
 
     public function updateRelatedCalcFields($linkName = "")

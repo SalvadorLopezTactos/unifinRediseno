@@ -180,46 +180,6 @@ $dependencies['RevenueLineItems']['likely_case_copy_when_closed'] = array(
 );
 
 // Handle dependencies related to service fields
-$dependencies['RevenueLineItems']['service_fields_read_only'] = [
-    'hooks' => ['edit'],
-    'trigger' => 'true',
-    'triggerFields' => ['service', 'product_template_id'],
-    'onload' => true,
-    'actions' => [
-        [
-            'name' => 'ReadOnly',
-            'params' => [
-                'target' => 'service',
-                'value' => 'not(equal($product_template_id,""))',
-            ],
-        ], [
-            'name' => 'ReadOnly',
-            'params' => [
-                'target' => 'renewable',
-                'value' => 'equal($service,0)',
-            ],
-        ], [
-            'name' => 'ReadOnly',
-            'params' => [
-                'target' => 'service_start_date',
-                'value' => 'equal($service,0)',
-            ],
-        ], [
-            'name' => 'ReadOnly',
-            'params' => [
-                'target' => 'service_duration_value',
-                'value' => 'or(equal($service,0),not(equal($product_template_id,"")))',
-            ],
-        ], [
-            'name' => 'ReadOnly',
-            'params' => [
-                'target' => 'service_duration_unit',
-                'value' => 'or(equal($service,0),not(equal($product_template_id,"")))',
-            ],
-        ],
-    ],
-];
-
 $dependencies['RevenueLineItems']['service_fields_required'] = [
     'hooks' => array('edit'),
     'trigger' => 'true',
@@ -305,6 +265,80 @@ $dependencies['RevenueLineItems']['service_fields_values'] = [
                     equal($service, "1"),
                     $renewable,
                     0)',
+            ],
+        ], [
+            'name' => 'SetValue',
+            'params' => [
+                'target' => 'add_on_to_name',
+                'value' => 'ifElse(
+                    equal($service, "1"),
+                    $add_on_to_name,
+                    "")',
+            ],
+        ], [
+            'name' => 'SetValue',
+            'params' => [
+                'target' => 'add_on_to_id',
+                'value' => 'ifElse(
+                    equal($service, "1"),
+                    $add_on_to_id,
+                    "")',
+            ],
+        ],
+        [
+            'name' => 'SetValue',
+            'params' => [
+                'target' => 'service_end_date',
+                'value' => 'ifElse(
+                    equal($service, "1"),
+                    $service_end_date,
+                    "")',
+            ],
+        ],
+    ],
+];
+
+$dependencies['RevenueLineItems']['service_fields_read_only'] = [
+    'hooks' => ['edit', 'view'],
+    'trigger' => 'true',
+    'triggerFields' => ['service', 'product_template_id', 'lock_duration', 'add_on_to_id'],
+    'onload' => true,
+    'actions' => [
+        [
+            'name' => 'ReadOnly',
+            'params' => [
+                'target' => 'service',
+                'value' => 'not(equal($product_template_id,""))',
+            ],
+        ], [
+            'name' => 'ReadOnly',
+            'params' => [
+                'target' => 'renewable',
+                'value' => 'equal($service,0)',
+            ],
+        ], [
+            'name' => 'ReadOnly',
+            'params' => [
+                'target' => 'service_start_date',
+                'value' => 'equal($service,0)',
+            ],
+        ], [
+            'name' => 'ReadOnly',
+            'params' => [
+                'target' => 'service_duration_value',
+                'value' => 'or(equal($service,0),and(not(equal($product_template_id,"")),equal($lock_duration,1)), not(equal($add_on_to_id,"")))',
+            ],
+        ], [
+            'name' => 'ReadOnly',
+            'params' => [
+                'target' => 'service_duration_unit',
+                'value' => 'or(equal($service,0),and(not(equal($product_template_id,"")),equal($lock_duration,1)), not(equal($add_on_to_id,"")))',
+            ],
+        ], [
+            'name' => 'ReadOnly',
+            'params' => [
+                'target' => 'add_on_to_name',
+                'value' => 'equal($service, 0)',
             ],
         ],
     ],

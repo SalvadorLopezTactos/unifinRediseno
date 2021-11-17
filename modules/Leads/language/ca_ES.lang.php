@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Quadre de comandament de la llista de possibles clients',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Quadre de comandament del registre de possibles clients',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat als clients potencials',
 
     'ERR_DELETE_RECORD' => 'Per suprimir el client potencial, heu d&#39;especificar un número de registre.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Descripció de la Compte',
@@ -325,4 +326,8 @@ Després de confirmar cada mòdul necessari i desitjat, feu clic al botó Desa i
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'No s&#39;ha pogut canviar l&#39;estat de {{moduleSingular}}. Aquest {{moduleSingular}} ja s&#39;ha convertit.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Predicció de conversió de client potencial',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Visualitza els detalls de predicció per a un client potencial específic',
 );

@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Zināšanu bāzes saraksta instrumentu panelis',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Zināšanu bāzes ierakstu instrumentu panelis',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Zināšanu bāzes fokusa panelis',
 
     'LBL_MODULE_NAME' => 'Zināšanu bāze',
     'LBL_MODULE_NAME_SINGULAR' => 'Zināšanu bāzes raksts',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Nav derīgs',
     'LBL_RATING' => 'Vērtējums',
     'LBL_VIEWED_COUNT' => 'Skatījumu skaits',
-    'LBL_DOWNLOAD_ALL' => 'Lejupielādēt visu',
-    'LBL_DOWNLOAD_ONE' => 'Lejupielādēt',
-    'LBL_ATTACHMENTS' => 'Pielikumi:',
-    'LBL_ADD_ATTACHMENT' => 'Pārlūkot',
     'LBL_CATEGORIES' => 'Zināšanu bāzes kategorijas',
     'LBL_CATEGORY_NAME' => 'Kategorija',
     'LBL_USEFULNESS' => 'Derīgums',

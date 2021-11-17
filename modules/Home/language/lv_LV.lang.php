@@ -115,7 +115,8 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Dašlets pievienots',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Vai tiešām vēlies mainīt izkārtojumu? Izkārtojums var tikt dezorganizēts.',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Vai tiešām vēlaties noņemt Sugar dašletu?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Neviens instrumentu panelis nav konfigurēts.',
+  'LBL_NO_DASHBOARD_CONFIGURED' => 'Neviens instrumentu panelis nav konfigurēts',
+  'LBL_NO_DASHLETS_CONFIGURED' => 'Neviens dašlets nav konfigurēts',
   'LBL_CREATE_DASHBOARD_LINK' => 'Izveidot instrumentu paneli',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Interneta lapa',
@@ -123,7 +124,7 @@ $mod_strings = array (
   'LBL_DASHLET_WEBPAGE_URL' => 'URL',
   'LBL_DASHLET_WEBPAGE_URL_HELP' => 'Dažas vietnes var neielādēties pareizi dēl nedroša satura vai ierobežojumiem.',
 
-  'LBL_DASHLET_ADD' => 'Pievienot Dašletu',
+  'LBL_DASHLET_ADD' => 'Pievienot dašletu',
   'LBL_DASHLET_DELETE' => 'Dzēst Sugar dašletu',
   'LBL_DASHLET_REFRESH' => 'Atjaunināt Sugar dašletu',
   'LBL_DASHLET_EDIT' => 'Rediģēt Sugar Dašletu',
@@ -218,7 +219,6 @@ $mod_strings = array (
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - Mihai Bazon izveidots kalendārs datumu ievadīšanai',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - Wayne Munro izveidota bibliotēka PDF dokumentu veidošanai',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - A WebDAV servera realizācija PHP.',
-  'LBL_SOURCE_PCLZIP' => 'PclZip - Vincent Blaveto Zip izveidota biblioteka, kurā pieejamas saspiešanas un izguves funkcijas formatētiem arhīviem',
   'LBL_SOURCE_SMARTY' => 'Smarty - Veidņu dzinējs priekš PHP.',
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! Lietotāja saskarnes bibliotēka - Lietotāja saskarnes bibliotēkas utilītprogrammas, lai realizētu bagātīgas klienta puses iespējas.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - Pilnas funkcionalitātes e-pasta sūtīšanas klase priekš PHP',

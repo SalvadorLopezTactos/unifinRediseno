@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Toplantılar Listesi Panosu',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Toplantılar Kaydı Panosu',
+    'LBL_LEAD_GUESTS' => 'Potansiyel Konuklar',
+    'LBL_CONTACT_GUESTS' => 'Kontak Konuklat',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Toplantılar Odak Bölmesi',
 
 	'ERR_DELETE_RECORD' => 'Toplantının silinebilmesi için bir kayıt numarası belirtilmelidir.',
 	'LBL_ACCEPT_THIS'=>'Kabul?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Yön',
 	'LBL_LIST_DUE_DATE'=>'Son Bitirme Tarihi',
 	'LBL_LIST_FORM_TITLE' => 'Toplantı Listesi',
-	'LBL_LIST_MY_MEETINGS' => 'Toplantılarım',
+    'LBL_LIST_MY_MEETINGS' => 'Toplantılarım',
     'LBL_MY_SCHEDULED_MEETINGS' => 'Benim Planlanan Toplantılarım',
+    'LBL_GUEST_MEETINGS' => 'Misafir Olarak Toplantılarım',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Misafir Olarak Planlanmış Toplantılar',
 	'LBL_LIST_RELATED_TO' => 'İlişkili',
 	'LBL_LIST_STATUS'=>'Durum',
 	'LBL_LIST_SUBJECT' => 'Konu',

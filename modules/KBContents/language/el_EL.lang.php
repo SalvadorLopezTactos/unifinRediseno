@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Γνωσιακής Βάσης',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Γνωσιακής Βάσης',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης Γνωσιακής βάσης',
 
     'LBL_MODULE_NAME' => 'Βάση Γνώσεων',
     'LBL_MODULE_NAME_SINGULAR' => 'Άρθρο Βάσης Γνώσεων',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Άχρηστο',
     'LBL_RATING' => 'Αξιολόγηση',
     'LBL_VIEWED_COUNT' => 'Προβολή καταμέτρησης',
-    'LBL_DOWNLOAD_ALL' => 'Κατεβάστε τα όλα',
-    'LBL_DOWNLOAD_ONE' => 'Λήψη',
-    'LBL_ATTACHMENTS' => 'Επισυνάψεις:',
-    'LBL_ADD_ATTACHMENT' => 'Περιήγηση',
     'LBL_CATEGORIES' => 'Knowledge Base Categories',
     'LBL_CATEGORY_NAME' => 'Κατηγορία',
     'LBL_USEFULNESS' => 'Χρησιμότητα',

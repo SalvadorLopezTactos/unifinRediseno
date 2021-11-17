@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Paneli i listës së thirrjeve',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të thirrjeve',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te thirrjet',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Thirrjet',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Drejtuar',
     'LBL_LIST_MY_CALLS' => 'Thirrjet e mia',
     'LBL_MY_SCHEDULED_CALLS' => 'Thirrjet e mia të programuara',
+    'LBL_GUEST_CALLS' => 'Thirrjet e mia si i ftuar',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Thirrjet e planifikuara si i ftuar',
     'LBL_SELECT_FROM_DROPDOWN' => 'Ju lutemi selektoni një nga Në lidhje me në listën e parë të poshtme',
 	'LBL_ASSIGNED_TO_NAME' => 'Drejtuar',
 	'LBL_ASSIGNED_TO_ID' => 'Përdorues i caktuar',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Anulo',
     'LBL_EMPTY_SEARCH_RESULT' => 'Na vjen keq, asnjë rezultat nuk u gjet. Ju lutemi krijoni një ftesë lartë.',
     'LBL_NO_ACCESS' => 'Nuk keni akses për të krijuar $ modul',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Id-ja e kontakteve për Amazon Connect',
+
     'LBL_REPEAT_TYPE' => 'Përsërit llojin',
     'LBL_REPEAT_INTERVAL' => 'Përsërit intervalin',
     'LBL_REPEAT_END' => 'Përfundim',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'telefono me {{{this}}}',
     'LBL_SEND_INVITES' => 'Dërgo ftesat',
     'LBL_REMINDER_TITLE' => 'Takim:',
+    'LBL_CALL_RECORDING_URL' => 'Regjistrimi i URL-së',
+    'LBL_CALL_RECORDING' => 'Regjistrimi',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Ju keni skeduluar {{moduleSingularLower}} {{name}} për {{formatDate date_start}}.',

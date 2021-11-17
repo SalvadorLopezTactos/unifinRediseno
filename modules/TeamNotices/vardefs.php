@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['TeamNotices'] = array('table' => 'team_notices'
+$dictionary['TeamNotices'] = array('table' => 'team_notices', 'archive' => false
                                ,'fields' => array (
   'id' =>
   array (

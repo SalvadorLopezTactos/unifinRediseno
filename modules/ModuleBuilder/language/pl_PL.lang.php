@@ -121,7 +121,7 @@ $mod_strings = array(
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Określa pole zależne, które może być widoczne lub niewidoczne w zależności od wartości wzoru.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Określa obliczone pole, którego wartość zostanie automatycznie określona na podstawie wzoru.'
     ,
         //this defualt will be used for edit view
-        'default'	=> 'Obszar <b>Układ</b> zawiera pola, które są aktualnie wyświetlane w ramach formularza <b>Widok edycji</b>.<br/><br/>Obszar <b>Narzędzia</b> zawiera <b>Kosz</b> oraz pola i elementy układu, które można dodać do układu.<br><br>Zmiany w układzie wprowadza się, przeciągając elementy i upuszczając je pomiędzy obszarami <b>Narzędzia</b> i <b>Układ</b> oraz w samym układzie.<br><br>Aby usunąć pole z układu, przeciągnij pole do <b>Kosza</b>. Pole będzie wówczas dostępne w obszarze Narzędzia do dodania do układu.'
+        'default'	=> 'Obszar <b>Układ</b> zawiera pola, które są aktualnie wyświetlane w ramach formularza <b>Widok edycji</b>.<br/><br/>Obszar <b>Narzędzia</b> zawiera <b>Kosz</b> oraz pola i elementy układu, które można dodać do układu.<br><br>Zmiany w układzie wprowadza się, przeciągając elementy i upuszczając je między obszarami <b>Narzędzia</b> i <b>Układ</b> oraz w samym układzie.<br><br>Aby usunąć pole z układu, przeciągnij pole do <b>Kosza</b>. Pole będzie wówczas dostępne w obszarze Narzędzia do dodania do układu.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Określa pole zależne, które może być widoczne lub niewidoczne w zależności od wartości wzoru.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Określa obliczone pole, którego wartość zostanie automatycznie określona na podstawie wzoru.'
     ,
         //this defualt will be used for edit view
@@ -600,6 +600,7 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
     'LBL_PORTAL_CONFIGURE' => 'Konfiguracja portalu',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Włącz portal',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Włącz wyszukiwanie przed otwarciem zgłoszenia',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Zezwól użytkownikom portalu na zamykanie zgłoszenia',
     'LBL_PORTAL_THEME' => 'Motyw portalu',
     'LBL_PORTAL_ENABLE' => 'Włącz',
     'LBL_PORTAL_SITE_URL' => 'Strona Twojego portalu jest dostępna pod adresem:',
@@ -764,7 +765,7 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
         . ' Jeśli to pole jest uwzględnione we wzorze obliczania wartości dla jakichkolwiek pól, wzór tej przestanie działać.'
         . '\n\nTo pole nie będzie już dostępne do użycia w Raportach; ta zmiana będzie obowiązywać od wylogowania i ponownego zalogowania do aplikacji. Wszelkie raporty zawierające to pole należy zaktualizować, aby można je było uruchomić.'
         . '\n\nCzy chcesz kontynuować?',
-'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Czy na pewno usunąć tę relację?<br>Uwaga: Ta operacja może zostać wykonana dopiero po kilku minutach.',
+'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Czy na pewno chcesz usunąć tę relację?<br>Uwaga: Ta operacja może zostać wykonana w ciągu kilku minut.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Spowoduje to ustawienie relacji jako trwałej. Czy na pewno chcesz zamieścić tę relację?',
 'LBL_CONFIRM_DONT_SAVE' => 'Od ostatniego zapisu zostały wprowadzone zmiany. Czy chcesz zapisać je teraz?',
 'LBL_CONFIRM_DONT_SAVE_TITLE' => 'Zapisać zmiany?',
@@ -782,13 +783,21 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
 . '<br><b>W filtrze</b>: pole będzie wyświetlane w funkcji Scalanie duplikatów, a także będzie dostępne w funkcji Znajdź duplikaty.<br><b>Tylko filtr</b>: pole nie będzie wyświetlane w funkcji Scalanie duplikatów, ale będzie dostępne w funkcji Znajdź duplikaty.<br><b>Domyślny wybrany filtr</b>: pole będzie użyte dla warunku filtra domyślnie na stronie Znajdź duplikaty i będzie również wyświetlane w funkcji Scalanie duplikatów.'
 ,
 'LBL_POPHELP_CALCULATED'=>"Utwórz formułę, aby określić wartość w tym polu.<br>"
-   . "Definicje workflow zawierające czynność, które mają aktualizować wartość tego pola, nie będą już wykonywać danej czynności.<br>"
+   . "Definicje workflow zawierające czynność aktualizacji tego pola nie będą już wykonywać tej czynności.<br>"
    . "Pola wykorzystujące formuły nie będą obliczane w czasie rzeczywistym w układach "
-   . "portalu samoobsługowego Sugar lub "
-   . "układach mobilnego widoku edycji.",
+   . "portal samoobsługowy Sugar ani "
+   . "Mobilny widok edycji.",
 
 'LBL_POPHELP_DEPENDENT'=>"Utwórz formułę służącą do określania, czy to pole jest widoczne w układach.<br/>"
         . "Pola zależne będą zgodne z formułą zależności w mobilnym widoku przeglądarki,<br/>"
+        . "ale nie będą zgodne z formułą w aplikacjach natywnych, takich jak Sugar Mobile for iPhone.<br/>"
+        . "Nie będą zgodne z formułą w portalu samoobsługowym Sugar.",
+'LBL_POPHELP_REQUIRED'=>"Utwórz formułę służącą do określania, czy to pole jest wymagane w układach.<br/>"
+    . "Pola wymagane będą zgodne z formułą w mobilnym widoku przeglądarki,<br/>"
+    . "ale nie będą zgodne z formułą w aplikacjach natywnych, takich jak Sugar Mobile for iPhone.<br/>"
+    . "Nie będą zgodne z formułą w portalu samoobsługowym Sugar.",
+'LBL_POPHELP_READONLY'=>"Utwórz formułę służącą do określania, czy to pole jest tylko do odczytu w układach.<br/>"
+        . "Pola tylko do odczytu będą zgodne z formułą w mobilnym widoku przeglądarki,<br/>"
         . "ale nie będą zgodne z formułą w aplikacjach natywnych, takich jak Sugar Mobile for iPhone.<br/>"
         . "Nie będą zgodne z formułą w portalu samoobsługowym Sugar.",
 'LBL_POPHELP_GLOBAL_SEARCH'=>'Tego pola używaj podczas wyszukiwania rekordów za pomocą globalnego wyszukiwania w tym module.',
@@ -826,6 +835,7 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
                 'encrypt'=>'Szyfruj',
                 'datetimecombo' =>'Data i czas',
                 'decimal'=>'Dziesiętne',
+                'autoincrement' => 'Automatyczne zwiększanie',
 ),
 'labelTypes' => array(
     "" => "Często używane etykiety",
@@ -843,4 +853,5 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
 'LBL_ALL_MODULES'=>'Wszystkie moduły',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (powiązane {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Kopiuj z układu',
+'LBL_RELATIONSHIP_TYPE' => 'Relacja',
 );

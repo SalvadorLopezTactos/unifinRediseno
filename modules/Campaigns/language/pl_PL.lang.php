@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Nie znaleziono domyślnych typów grup odbiorców',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nie znaleziono żadnych wpisów',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Wpisy zostały przetworzone',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Ustawienia poczty przychodzącej',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Ustawienia poczty systemowej',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Nazwa śledzenia:',
   'LBL_EDIT_TRACKER_URL'=>'URL śledzenia:',

@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'기본 유형의 목표 목록이 발견되지 않았습니다.',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'항목이 발견되지 않았습니다.',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => '항목이 진행되었습니다.',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => '수신 이메일 설정',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => '시스템 이메일 설정',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'추적기명',
   'LBL_EDIT_TRACKER_URL'=>'추적 URL',

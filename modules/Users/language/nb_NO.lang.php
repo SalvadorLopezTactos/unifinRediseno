@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'Passordet du skrev oppfyller ikke kravene til passord. Vennligst prøv igjen.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Brukerinformasjon ikke funnet',
     'ERR_USER_NAME_EXISTS'              => 'Brukernavnet {0} finnes allerede. Dubpliserte brukernavn er ikke tillatt. Endre brukernavnet slik at det blir unikt.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => '"Sugar Hint"-lisens må lagres med ekstra kompatibel lisenstype',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Denne brukeren er stengt ute av Sugar og kan ikke logge inn med sitt eksisterende passord.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Kun ekstern auth-bruker har ikke tillatelse til å logge på med Sugar-legitimasjon',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Mottakers e-postadresse',
 	'ERR_SERVER_STATUS'					=> 'Din server status',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Systemet kan ikke sende en epost til brukeren. Vennligst sjekk konfigurasjinen for utgående e-post  i<a href="index.php?module=EmailMan&action=config">e-post innstillinger</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Nye brukere må opprettes i <a href="{0}" target="_blank">SugarCloud-innstillinger</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-postadresse',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Prognoser',
     'LBL_WORKSHEETS'                    => 'Regneark',
 	'LBL_CALENDARS'                     => 'Kalendere',
+    'LBL_SHIFTS'                        => 'Skift',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Skiftunntak',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Motta en e-post når en registrering tildeles deg.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'E-post ved tildeling',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Motta et e-postvarsel når noen nevner deg i en kommentarloggoppføring.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'E-post når noen nevner deg',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Velg hvordan feltnavn bør vises i postvisninger. Velg "Ved siden av feltverdi" for en mer kompakt postvisning.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Feltnavnplassering',
     'LBL_ABOVE_FIELD_VALUE'             => 'Over feltverdi',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Lisenstype',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Skap en påminnelse for en kommende samtale eller et møte',
 	'LBL_REMINDER'						=> 'Vis påminnelse?',
 	'LBL_REMINDER_POPUP' => 'Popup',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Denne session er avsluttet fordi en annen session er startet med samme brukernavn.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Registrér omplassering',
-	'LBL_REASS_DESC_PART1'				=> 'Dette kommer til å finne alle registreringer (i de valgte modulene) som er tildelt en bruker, og tillater at du omplasserer dem til en annen bruker',
+    'LBL_REASS_DESC_PART1'              => 'Dette kommer til å finne alle registreringer (i de valgte modulene) som er tildelt en bruker, og tillater at du omplasserer dem til en annen bruker',
         'LBL_REASS_DESC_PART2'=>                    'Velg moduler for å kjøre arbeidsflyt, sende oppdragsmeldinger og revidere overføringer. Klikk Neste for å fortsette og overføre poster. Klikk Omstart for å starte på nytt.',
 	'LBL_REASS_STEP2_TITLE'				=> 'Gruppe-omplassering',
 	'LBL_REASS_STEP2_DESC'				=> 'Gruppene som listes nedenfor var tilgjengelige i fra-brukerens gruppe, men ikke i til-brukerens gruppe. Alle registreringer i fra-brukerens gruppe er ikke synlig i til-brukerens gruppe med mindre gruppenes verdier er markerte.',
@@ -624,7 +628,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Brukerprofil',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Få tilgang til <a href="%s" target="_blank">SugarCloud-innstillinger</a> for å gjøre endringer i skrivebeskyttede felt.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Kontakt Sugar-administrator hvis du ønsker å endre skrivebeskyttede felt.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

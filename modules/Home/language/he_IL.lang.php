@@ -116,6 +116,7 @@ $mod_strings = array (
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'החלוניות יסודרו מחדש, האם אתה בטוח שברצונך לשנות את תצורת העמודות?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'אתה בטוח שברצונך להסיר תאסופית זו?',
   'LBL_NO_DASHBOARD_CONFIGURED' => 'אין לוח מחוונים מוגדר',
+  'LBL_NO_DASHLETS_CONFIGURED' => 'אין חלונית מוגדרת',
   'LBL_CREATE_DASHBOARD_LINK' => 'צור לוח מחוונים',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'דף אינטרנט',
@@ -123,7 +124,7 @@ $mod_strings = array (
   'LBL_DASHLET_WEBPAGE_URL' => 'כתובת URL',
   'LBL_DASHLET_WEBPAGE_URL_HELP' => 'יתכן שאתרים מסויימים לא יטענו כהלכה בשל תוכן לא מאובטח או מדיניות',
 
-  'LBL_DASHLET_ADD' => 'הוסף דשלט',
+  'LBL_DASHLET_ADD' => 'הוסף חלונית',
   'LBL_DASHLET_DELETE' => 'מוחק תאסופית',
   'LBL_DASHLET_REFRESH' => 'מרענן תאסופית',
   'LBL_DASHLET_EDIT' => 'ערוך תאסופית',
@@ -218,7 +219,6 @@ $mod_strings = array (
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - לוח שנה להזנת תאריכים נוצר על ידי Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - ספרייה ליצירת מסמכי PDF נוצר על ידי Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - הטמעת שרת WebDAV ב-PHP.',
-  'LBL_SOURCE_PCLZIP' => 'PclZip - ספרייה שמציעה פונקציות דחיסה וחילוץ עבור ארכיונים בתבנית Zip מאת Vincent Blavet',
   'LBL_SOURCE_SMARTY' => 'Smarty - מנוע תבניות עבור PHP.',
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - אפשרויות ספריית ממשק המשתמש מקדמות את היישום של תכונות צד-לקוח עשירות.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - קלאס העברת דוא"ל מומלץ עבור PHP',

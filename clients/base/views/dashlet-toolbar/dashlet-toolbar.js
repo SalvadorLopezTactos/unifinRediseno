@@ -58,6 +58,9 @@
         this.canEdit = app.acl.hasAccessToModel('edit', model) || false;
 
         this.buttons = this.meta.buttons;
+        this.isChart = !_.isEmpty(this.buttons) && this.buttons[0].is_chart || false;
+        this.adjustHeaderPaneTitle = _.bind(_.debounce(this.adjustHeaderPaneTitle, 50), this);
+        $(window).on('resize.' + this.cid, this.adjustHeaderPaneTitle);
     },
 
     /**
@@ -79,12 +82,41 @@
     },
 
     /**
+     * Adjust header pane dashlet title such that the field is ellipsified.
+     */
+    adjustHeaderPaneTitle: function() {
+        // this is required due to _.debounce adding a setTimeout.
+        if (this.disposed) {
+            return;
+        }
+
+        var isDataTypeFullName = _.contains(_.pluck(this.headerFields, 'type'), 'fullname');
+        if (isDataTypeFullName) {
+            // Left side sibling record-cells width.
+            var recordCellsWidth = 0;
+            this.$('.record-cell').each(function() {
+                recordCellsWidth += $(this).outerWidth(true);
+            });
+            // Right side buttons width.
+            var btnGroupWidth = this.$('.pull-right').outerWidth(true);
+            // Parent header panel width.
+            var headerPaneWidth = this.$el.closest('.dashlet-header').width();
+            // Dashlet record title is positioned as the child element of the second record-cell.
+            // Calculate title width by subtracting the record-cell and btn-group width from parent headerPane width.
+            var titleWidth = headerPaneWidth - btnGroupWidth - recordCellsWidth;
+
+            this.$('.ellipsis_inline').css({'max-width': titleWidth + 'px'});
+        }
+    },
+
+    /**
      * @inheritdoc
      *
      * Handle the record state if this is a toolbar for a dashablerecord.
      */
     _render: function() {
         this._super('_render');
+        this.adjustHeaderPaneTitle();
         if (this.dashlet) {
             this._handleRecordState(this.dashlet && this.dashlet.action);
         }
@@ -151,6 +183,7 @@
                 button.setDisabled(state);
             }
         }, this);
+        this.adjustHeaderPaneTitle();
     },
 
     /**
@@ -243,6 +276,15 @@
         var $button = this.$('[data-toggle=dropdown]');
         var $group = $button.parent();
         $button.attr('aria-expanded', $group.hasClass('open'));
+    },
+
+    /**
+     * Remove event listeners on dispose
+     * @private
+     */
+    _dispose: function() {
+        $(window).off('resize.' + this.cid);
+        this._super('_dispose');
     }
 
 })

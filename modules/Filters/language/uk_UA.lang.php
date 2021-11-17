@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => 'наступного року',
     'LBL_OPEN_ISSUES' => 'Відкрити {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'Нещодавно вирішені',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => 'Створити фільтр',
+    'LBL_ERROR_FILTER_EMPTY' => 'Додайте критерії фільтра.',
+    'LBL_ADD_FILTER' => 'Додати критерії',
+    'LBL_FILTER_NAME' => 'Назва фільтра',
+    'LBL_FILTER_FIELD' => 'Поле',
+    'LBL_FILTER_OPERATOR' => 'Оператор',
+    'LBL_FILTER_VALUE' => 'Значення',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Зберегти в додатку на робочому столі',
+    'LBL_FILTER_LOCAL' => 'Локальний фільтр',
 );

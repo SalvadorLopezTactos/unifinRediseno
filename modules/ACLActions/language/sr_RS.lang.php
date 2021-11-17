@@ -27,6 +27,7 @@ $mod_strings = array (
 'LIST_ROLES_BY_USER'=>'Lista uloga po korisniku',
 'LBL_ROLES_SUBPANEL_TITLE'=>'Uloge korisnika',
 'LBL_SEARCH_FORM_TITLE'=>'Pretraga',
+'LBL_ACTION_RECORD_VIEW'=>'Prikaz zapisa',
 'LBL_ACTION_VIEW'=>'Pregled',
 'LBL_ACTION_EDIT'=>'Izmeni',
 'LBL_ACTION_DELETE'=>'Obriši',

@@ -9,7 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['Audit'] = array('fields' =>
+$dictionary['Audit'] = array(
+    'archive' => false,
+    'fields' =>
 array(
     'parent_id' => array(
         'name' => 'parent_id',

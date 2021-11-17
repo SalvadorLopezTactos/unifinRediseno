@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Muokkaajan ID',
     'LBL_EXPORT_CREATED_BY' => 'Tekijän ID',
     'LBL_EXPORT_TYPE_NAME' => 'Tyypin nimi',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Sopimukset-tietolaatikko',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Kampanjatietueiden työpöytä',
 );

@@ -12,9 +12,11 @@
 
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Queue;
 
+use Sugarcrm\Sugarcrm\DependencyInjection\Container as SugarContainer;
 use Sugarcrm\Sugarcrm\Dbal\Connection;
 use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Document;
 use Sugarcrm\Sugarcrm\Elasticsearch\Container;
+use Doctrine\DBAL\ParameterType;
 
 /**
  *
@@ -26,6 +28,22 @@ class QueueManager
     const FTS_QUEUE = 'fts_queue';
     const PROCESSED_NEW = '0';
     const DEFAULT_BUCKET_ID = -1;
+
+    /**
+     * config key name for enabling caching teamset Ids, this is for performance gain for those
+     * instances with large number of teamsets per user
+     * usage:
+     * add this line in config_override.php
+     * $sugar_config['perfProfile']['TeamSecurity']['gs_use_normalized_teams'] = true;
+     *
+     */
+    const CONFIG_PERF_GS_TEAM_KEY = 'perfProfile.TeamSecurity.gs_use_normalized_teams';
+
+    /**
+     * cached teamset Ids
+     * @var array
+     */
+    private static $fetchedTeamSetIds = [];
 
     /**
      * @var \Sugarcrm\Sugarcrm\Elasticsearch\Container
@@ -185,7 +203,7 @@ class QueueManager
             $scheduler->job_interval = '*/1::*::*::*::*';
             $scheduler->status = 'Active';
             $scheduler->date_time_start = '2001-01-01 00:00:01';
-            $scheduler->date_time_end = '2037-12-31 23:59:59';
+            $scheduler->date_time_end = null;
             $scheduler->catch_up = '0';
             $this->getLogger()->info("Create elastic queue scheduler");
         } else {
@@ -649,6 +667,52 @@ class QueueManager
         $this->batchRetrieveTags($module, $beans);
         $this->batchRetrieveFavorites($module, $beans);
         $this->batchRetrieveEmailText($module, $beans);
+
+        // for large teamset
+        if (self::isLargeTeamsets()) {
+            $this->batchUpdateTeamSetIds($module, $beans);
+        }
+
+        return $beans;
+    }
+
+    /**
+     * @param string $module
+     * @param array $beans
+     * @return array
+     */
+    protected function batchUpdateTeamSetIds(string $module, array $beans) : array
+    {
+        $globalTeamSetId = '1';
+        $beanTeamSetIds = array_column($beans, 'team_set_id', 'id');
+        $teamSetIdsToCheck = array_diff(array_values($beanTeamSetIds), array_keys(static::$fetchedTeamSetIds));
+
+        if (!empty($teamSetIdsToCheck)) {
+            $query = "SELECT team_set_id
+            FROM team_sets_teams
+            WHERE team_id = ?
+               AND team_set_id IN (?)
+               AND deleted = 0";
+
+            $teamSetIdsWithGlobalTeams = $this->db->getConnection()->executeQuery(
+                $query,
+                ['1', $teamSetIdsToCheck],
+                [ParameterType::STRING, Connection::PARAM_STR_ARRAY]
+            )->fetchAll(\PDO::FETCH_COLUMN);
+
+            static::$fetchedTeamSetIds = array_merge(
+                static::$fetchedTeamSetIds,
+                array_fill_keys($teamSetIdsToCheck, 0),
+                array_fill_keys($teamSetIdsWithGlobalTeams, 1)
+            );
+        }
+        if (!empty($beanTeamSetIds)) {
+            foreach ($beanTeamSetIds as $beanId => $teamSetId) {
+                if (static::$fetchedTeamSetIds[$teamSetId] === 1) {
+                    $beans[$beanId]->team_set_id = $globalTeamSetId;
+                }
+            }
+        }
         return $beans;
     }
 
@@ -908,5 +972,16 @@ class QueueManager
     protected function getLogger()
     {
         return $this->container->logger;
+    }
+
+    /**
+     * static method, to check if the instance has large team sets
+     * @return bool
+     */
+    public static function isLargeTeamsets() : bool
+    {
+        return SugarContainer::getInstance()
+            ->get(\SugarConfig::class)
+            ->get(self::CONFIG_PERF_GS_TEAM_KEY, false);
     }
 }

@@ -10,8 +10,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Entitlements\Subscription;
+
 class OpportunityHooks extends AbstractForecastHooks
 {
+    /**
+     * List of scheduled jobs that have just be scheduled
+     * @var array
+     */
+    protected static $scheduledJobIDs = [];
+
     /**
      * @return array
      */
@@ -51,23 +59,84 @@ class OpportunityHooks extends AbstractForecastHooks
                     $renewalBean = $bean->getExistingRenewalOpportunity();
                 }
 
-                // create a new renewal opportunity
-                if (empty($renewalBean)) {
+                // create/update renewal RLIs if Add-On-To PLI is linked to an open renewal Opp
+                $rlisUpdated = $bean->updateRenewalRLIs($rliBeans);
+
+                // create a new renewal opportunity if it doesn't exist
+                if (empty($renewalBean) && count($rlisUpdated) < count($rliBeans)) {
                     $renewalBean = $bean->createNewRenewalOpportunity();
                 }
 
-                if ($renewalBean) {
-                    foreach ($rliBeans as $rliBean) {
-                        // create new renewal RLI
+                // create new renewal RLIs in a new or existing renewal Opp
+                foreach ($rliBeans as $rliBean) {
+                    if (!in_array($rliBean->id, $rlisUpdated)) {
                         $newRliBean = $renewalBean->createNewRenewalRLI($rliBean);
-                    }
 
+                        // Link the renewal RLI to the RLI it is generating
+                        $rliBean->renewal_rli_id = $newRliBean->id;
+                        $rliBean->save();
+                    }
+                }
+
+                if ($renewalBean) {
                     return true;
                 }
             }
         }
 
         return false;
+    }
+
+    /**
+     * Queue Purchase generation for Closed Won RLIs when an Opportunity becomes
+     * Closed Won.
+     *
+     * Return true if the job was scheduled, otherwise false
+     * @param Opportunity $bean
+     * @param string $event
+     * @param array $args
+     * @return bool
+     * @throws SugarQueryException
+     */
+    public static function queueRLItoPurchaseJob(Opportunity $bean, string $event, array $args): bool
+    {
+        global $current_user;
+        if (!$current_user->hasLicense(Subscription::SUGAR_SELL_KEY)) {
+            return false;
+        }
+
+        if (!static::useRevenueLineItems()) {
+            return false;
+        }
+        $closedWon = $bean->getRliClosedWonStages();
+        if (empty($args['dataChanges']['sales_stage']) ||
+            !in_array($args['dataChanges']['sales_stage']['after'], $closedWon)) {
+            return false;
+        }
+
+        static::$scheduledJobIDs = array_merge(
+            static::$scheduledJobIDs,
+            RevenueLineItem::schedulePurchaseGenerationJob($bean->getGeneratePurchaseRliIds())
+        );
+
+        return true;
+    }
+
+    /**
+     * Gets the list of all ScheduledJobs IDs
+     * @return array
+     */
+    public static function getScheduledJobIDs() : array
+    {
+        return static::$scheduledJobIDs;
+    }
+
+    /**
+     * Resets the stack of scheduled job IDs
+     */
+    public static function resetScheduledJobIDs() : void
+    {
+        static::$scheduledJobIDs = [];
     }
 
     /**

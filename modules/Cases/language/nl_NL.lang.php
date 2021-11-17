@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Dashboard caselijst',
     'LBL_CASES_RECORD_DASHBOARD' => 'Dashboard caserecord',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Details case',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer cases',
 
 	'ERR_DELETE_RECORD'					=> 'U dient een record te selecteren om de organisatie te verwijderen.',
 	'LBL_ACCOUNT_ID'					=> 'Organisatie ID',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Toon in portal',
 	'LBL_CREATE_KB_DOCUMENT' => 'Maak Artikel aan',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Knowledge Base',
+    'LBL_REQUEST_CLOSE' => 'Aanvraag sluiten',
+    'LBL_REQUEST_CLOSE_DATE' => 'Sluitingsdatum aanvraag',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Te sluiten aanvraag',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Stuur een aanvraag om deze zaak te sluiten',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Wilt u deze zaak sluiten?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Mijn zaken die zijn aangevraagd om te sluiten',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Mijn zaken die zijn aangevraagd om te sluiten',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Mijn zaken die zijn aangevraagd om te sluiten',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Lijst met zaken die zijn aangevraagd om te sluiten',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Toont een lijst met toegewezen zaken waarvan is aangevraagd ze te sluiten',
 
     'LBL_CREATED_USER' => 'Aangemaakt door',
     'LBL_MODIFIED_USER' => 'Gewijzigd door',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Toegewezen aan',
     'LBL_EXPORT_TEAM_COUNT' => 'Team aantal',
     'LBL_CHANGETIMERS' => 'Timers veranderen',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Aankopen',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Gerelateerde e-mails van contactpersonen',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Bijvoorbeeld, u kunt dit gebruiken om een eerder gemeld probleem terug te vinden.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Wanneer u een nieuwe case heeft die u wilt melden, klik hier om een nieuwe case aan te maken.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Door hier te klikken, keert u terug naar deze weergave.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interactie zaak',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notities',
 

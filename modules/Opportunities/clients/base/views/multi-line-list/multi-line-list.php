@@ -20,10 +20,11 @@ $viewdefs['Opportunities']['base']['view']['multi-line-list'] = [
                     'subfields' => [
                         [
                             'name' => 'sales_stage',
-                            'label' => 'LBL_SALES_STAGE',
+                            'label' => 'LBL_WIDGET_SALES_STAGE',
                             'default' => true,
                             'enabled' => true,
                             'type' => 'enum-colorcoded-fore-bkgd',
+                            'widget_name' => 'widget_sales_stage',
                         ],
                         [
                             'name' => 'sales_status',
@@ -64,11 +65,11 @@ $viewdefs['Opportunities']['base']['view']['multi-line-list'] = [
                     'subfields' => [
                         [
                             'name' => 'date_closed',
-                            'label' => 'LBL_DATE_CLOSED',
+                            'label' => 'LBL_WIDGET_DATE_CLOSED',
                             'default' => true,
                             'enabled' => true,
                             'type' => 'relative-date',
-
+                            'widget_name' => 'widget_date_closed',
                         ],
                         [
                             'name' => 'date_closed',
@@ -85,7 +86,7 @@ $viewdefs['Opportunities']['base']['view']['multi-line-list'] = [
                     'subfields' => [
                         [
                             'name' => 'amount',
-                            'label' => 'LBL_LIKELY',
+                            'label' => 'LBL_WIDGET_AMOUNT',
                             'type' => 'boxplot',
                             'related_fields' => [
                                 'best_case',
@@ -93,6 +94,7 @@ $viewdefs['Opportunities']['base']['view']['multi-line-list'] = [
                             ],
                             'enabled' => true,
                             'default' => true,
+                            'widget_name' => 'widget_amount',
                         ],
                     ],
                 ],

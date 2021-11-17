@@ -39,7 +39,8 @@
 		</td>
 	</tr>
 	<tr>
-		<td class='mbLBL' ><b>{$mod_strings.LBL_AUTHOR}</b></td><td><input type='text' name='author' size='36' maxlength='36' value='{$package->author}'></td>
+		<td class="mbLBL"><b>{$mod_strings.LBL_AUTHOR}</b></td><td><input type="text" name="author" size="36" maxlength="36" value="{$package->author|escape:'html':'UTF-8'}"></td>
+
 	</tr>
 	
 	<tr>

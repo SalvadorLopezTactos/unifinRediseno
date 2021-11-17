@@ -56,7 +56,7 @@ class ViewModulefield extends SugarView
                 $this->request->getValidInputRequest('name', 'Assert\ComponentName')
             ));
         }
-        
+
         // If this is a new field mark it as such
         $isNew = empty($field_name) || !empty($_REQUEST['is_new']);
 
@@ -128,7 +128,7 @@ class ViewModulefield extends SugarView
 
             // If this is a new field but we are loading this form a second time,
             // like from coming back from a dropdown create on a new field, then
-            // keep the 'name' field open to allow the create field process to 
+            // keep the 'name' field open to allow the create field process to
             // continue like normal
             if (empty($vardef['name']) || $isNew) {
                 if (!empty($_REQUEST['type'])) {
@@ -147,7 +147,11 @@ class ViewModulefield extends SugarView
 
 			require_once ('modules/DynamicFields/FieldCases.php') ;
             $tf = get_widget ( empty($vardef [ 'type' ]) ?  "" : $vardef [ 'type' ]) ;
-            $tf->module = $module;
+
+            if (!$isNew) {
+                $tf->module = $module;
+            }
+
             $tf->populateFromRow($vardef);
 			$vardef = array_merge($vardef, $tf->get_field_def());
 
@@ -191,6 +195,9 @@ class ViewModulefield extends SugarView
 
             $edit_or_add = 'editField' ;
 
+            if (isset($module->disableImportFields) && in_array($vardef['name'], $module->disableImportFields)) {
+                $this->fv->ss->assign('hideImportable', true);
+            }
         } else
         {
             require_once('modules/ModuleBuilder/MB/ModuleBuilder.php');
@@ -280,11 +287,12 @@ class ViewModulefield extends SugarView
 	        }
 		}
 
+        $disallowed_field_names = [
+            'name', 'parent_type', 'parent_id', 'parent_name',
+        ];
         if (!empty($vardef['studio']['no_duplicate'])
-            || $field_name === 'name'
-            || $field_name === 'parent_type'
-            || $field_name === 'parent_id'
-            || $field_name === 'parent_name'
+            || in_array($field_name, $disallowed_field_names)
+            || ViewModulefields::isRelationshipField($vardef)
             // bug #35767, do not allow cloning of name field
             || (isset($vardef['type']) && $vardef['type'] === 'name')) {
             $this->fv->ss->assign('no_duplicate', true);
@@ -302,8 +310,44 @@ class ViewModulefield extends SugarView
         $json = getJSONobj();
 
         $this->fv->ss->assign('field_name_exceptions', $json->encode($field_name_exceptions));
+
+        // Only one AutoIncrement field can exist on a module, with the exception of Cases, that can have 2 because
+        // case_number is a Number field that behaves with auto increment properties. Check if this module has an
+        // existing AutoIncrement field, if so remove it from the list of field types in the Studio dropdown editor.
+        $existingAutoIncrementField = $module->getFieldDefinitions('type', ['autoincrement']);
+        if (!empty($existingAutoIncrementField)) {
+            $field_types = array_diff_key($field_types, ['autoincrement' => '']);
+        }
+
         ksort($field_types);
         $this->fv->ss->assign('field_types', $field_types);
+
+        // Handle a bunch of special case stuff for relate fields tied to relationships:
+        // 1. They use a different label than other relate fields.
+        // 2. Many options in studio are disabled - just set that flag here so we don't need
+        //    to make the check for stock relate everywhere.
+        // 3. The `audited` flag could be stored on either relate or ID field, so we need
+        //    to check both to get this properly.
+        if (ViewModulefields::isRelationshipField($vardef)) {
+            $this->fv->ss->assign('display_type', translate('LBL_RELATIONSHIP_TYPE', 'ModuleBuilder'));
+            $this->fv->ss->assign('is_relationship_field', true);
+            $this->fv->ss->assign('is_custom_relationship', ViewModulefields::isCustomRelationshipField(
+                $vardef['name'],
+                $moduleName,
+                $module->mbvardefs->vardefs['fields'],
+            ));
+
+            $fields = $module->mbvardefs->vardefs['fields'];
+            $audited = array_key_exists('audited', $vardef) ? $vardef['audited'] : false;
+            if (array_key_exists($vardef['id_name'], $fields)) {
+                $idVardefs = $fields[$vardef['id_name']];
+                $idAudited = array_key_exists('audited', $idVardefs) ? $idVardefs['audited'] : false;
+                $audited = $audited || $idAudited;
+                $this->fv->ss->assign('relationship_field_audited', $audited);
+            }
+        } else {
+            $this->fv->ss->assign('is_relationship_field', false);
+        }
 
         // Full Text Search settings
         $engine = SearchEngine::getInstance()->getEngine();

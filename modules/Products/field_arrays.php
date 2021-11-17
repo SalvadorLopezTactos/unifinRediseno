@@ -39,6 +39,7 @@ $fields_array['Product'] = array ('column_fields' => Array("id"
 		,"cost_price"
 		,"discount_price"
 		,"discount_amount"
+        ,"discount_amount_signed"
 		,"deal_calc"
 		,"discount_select"
 		,"list_price"
@@ -64,9 +65,9 @@ $fields_array['Product'] = array ('column_fields' => Array("id"
 		,"book_value_date"
 		),
         'list_fields' =>  array('id', 'name', 'status', 'quantity', 'date_purchased', 'cost_price',
-			'cost_usdollar', 'discount_amount', 'discount_select', 'discount_price','discount_usdollar', 'list_price','list_usdollar','deal_calc','deal_calc_usdollar',
+            'cost_usdollar', 'discount_amount', 'discount_amount_signed', 'discount_select', 'discount_price',
+            'discount_usdollar', 'list_price', 'list_usdollar', 'deal_calc', 'deal_calc_usdollar',
 			'mft_part_num', 'manufacturer_name', 'account_name', 'account_id', 'contact_id',
 			'contact_name', 'date_support_expires'),
     'required_fields' =>  array("name"=>1,  ),
 );
-?>

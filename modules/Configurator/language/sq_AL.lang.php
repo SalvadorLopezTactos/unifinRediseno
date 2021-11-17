@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'Emri i përdoruesit',
 	'LBL_RESTORE_BUTTON_LABEL'=>'Rikrijo',
 	'LBL_SYSTEM_SETTINGS' => 'Parametrat e sistemit',
-	'LBL_SKYPEOUT_ON_DESC' => 'Lejon përdoruesit të klikojnë mbi numrat e thirrur të telefonit duke përdorur ® SkypeOut. Numrat duhet të jenë të formatuar siç duhet për të bërë përdorimin e këtij funksion. Kjo është, ajo duhet të jetë "+" "Kodi i Shtetit" "Numri"​​, si +1 (555) 555-1234.',
-	'LBL_SKYPEOUT_ON' => 'Mundëso integrimin e SkypeOut®',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut®',
+    'LBL_DIALOUT_ON_DESC' => 'U mundëson përdoruesve të klikojnë numrat e telefonit për t&#39;i telefonuar duke përdorur softuerin e tyre standard të integrimit të telefonisë kompjuterike (CTI).',
+    'LBL_DIALOUT_ON' => 'Aktivizoni "Kliko për ta telefonuar"',
+    'LBL_DIALOUT_TITLE' => 'Thirrje dalëse',
     'LBL_TWEETTOCASE_ON_DESC' => 'Lejo përdoruesit të krijojnë raste nga Tweets',
     'LBL_TWEETTOCASE_ON' => 'Aktivizo Tweet® të integrojë rastin',
     'LBL_TWEETTOCASE_TITLE' => 'Rast Tweet®',
@@ -363,7 +363,7 @@ $mod_strings = array (
     'JS_ALERT_PDF_WRONG_EXTENSION' => 'Kjo dosje nuk ka zgjatje dosjeje të mirë.',
     'LBL_PDF_INSTRUCTIONS' => 'instruksione',
     'PDF_INSTRUCTIONS_ADD_FONT' => <<<BSOFR
-Fonts supported by SugarPDF :
+Fontet e mbështetura nga SugarPDF :
 <ul>
 <li>TrueTypeUnicode (UTF-8 Unicode)</li>
 <li>OpenTypeUnicode</li>
@@ -373,11 +373,11 @@ Fonts supported by SugarPDF :
 <li>CID-0</li>
 </ul>
 <br>
-If you choose to not embed your font in the PDF, the generated PDF file will be lighter but a substitution will be use if the font is not available in the system of your reader.
+Nëse zgjidhni të mos e ngulitni fontin në PDF, skedari PDF i gjeneruar do të jetë më i lehtë por, nëse fonti nuk është i disponueshëm në sistemin e lexuesit tuaj, do të përdoret një zëvendësues.
 <br><br>
-Adding a PDF font to SugarCRM requires to follow steps 1 and 2 of the TCPDF Fonts documentation available in the "DOCS" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>The pfm2afm and ttf2ufm utils are available in fonts/utils in the TCPDF package that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>Load the metric file generated in step 2 and your font file below.
+Për të shtuar një font PDF-je në SugarCRM duhen ndjekur hapat 1 dhe 2 të mëposhtëm të dokumentit të fonteve TCPDF që gjendet në seksionin "DOCS" të <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">faqes së internetit TCPDF</a>.
+<br><br>Programet ndihmëse pfm2afm dhe ttf2ufm janë të disponueshme në fontet/programet ndihmëse të paketës TCPDF, të cilën mund ta shkarkoni në seksionin "SHKARKO" të <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">faqes së internetit TCPDF</a>.
+<br><br> Ngarkoni më poshtë skedarin e gjeneruar në hapin 2 dhe skedarin e fonteve.
 BSOFR
 ,
     'ERR_MISSING_CIDINFO' => 'Kjo fushë e CID informacionit nuk mund të jetë e zbrazët.',
@@ -428,6 +428,9 @@ BSOFR
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '*Moduli i raportimit nuk është në disponim për pamje nga shfletuesi i bazuar në mobil.',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => 'Gjatësia maksimale duhet të jetë më e madhe se gjatësia minimale',
+    'ERR_MIN_LENGTH_NEGATIVE' => 'Gjatësia minimale duhet të jetë një vlerë pozitive',
+    'ERR_MAX_LENGTH_NEGATIVE' => 'Gjatësia maksimale duhet të jetë një vlerë pozitive',
     'ERR_EMPTY_SAML_LOGIN' => 'SAML URL logimi nuk mund të jetë i zbrazur',
     'ERR_EMPTY_SAML_CERT' => 'SAML çertifikata nuk mund të jetë e zbrazur',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'Identifikuesi i subjektit SAML nuk lejohet bosh',
@@ -441,9 +444,6 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Transmetimi i aktiviteteve',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Aktivizo transmetimin e aktiviteteve',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Aktivizon transmetimet e aktiviteteve për aplikacionin',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Aktivizo përmbajtje shtesë të ekranit të identifikimit',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Ruaj automatikisht përkufizimet e proceseve',

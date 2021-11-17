@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Varoitus: Olet muokkaamassa automaattisen tuonnin asetuksia, joka saattaa johtaa tietojen katoamiseen.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Varoitus: Automaattisen tuonnin pitää olla käytössä, kun luodaan automaattisesti asioita.',
 	'LBL_EDIT_LAYOUT' => 'Muokkaa asettelua' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'Sähköpostiosoite',
+    'LBL_EMAIL_PROVIDER' => 'Sähköpostipalvelun tarjoaja',
+    'LBL_AUTH_STATUS' => 'Valtuutuksen tila',
 );
-?>

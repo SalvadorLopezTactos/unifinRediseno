@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Διεργασία Προτύπου Email',
     'LBL_MODULE_NAME_SINGULAR' => 'Διεργασία Προτύπου Email',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης eπεξεργασία προτύπων email',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Διεργασιών Προτύπων Email',
     'LNK_LIST' => 'Προβολή Διεργασίας Προτύπων Email',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Δημιουργία Διεργασίας Προτύπου Email',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Εισαγωγή Διεργασίας Προτύπου Email',

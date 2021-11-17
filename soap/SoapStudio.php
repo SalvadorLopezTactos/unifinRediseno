@@ -173,7 +173,7 @@ $custom_field_meta = array(
 		'name',
 		'reportable',
 		'required'
-	)
+    ),
 );
 
 // create or update an existing custom field

@@ -21,6 +21,14 @@
     plugins: ['LinkedModel'],
 
     /**
+     * The modules that can use quickcreateModelData to pre-populate the drawer
+     */
+    qcModelDataModuleAllowList: [
+        'Cases',
+        'Contacts',
+    ],
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -129,9 +137,19 @@
         var relatedContext = this.getRelatedContext(module),
             model = null;
 
-        if (relatedContext) {
+        var quickcreateModelData = this.context.get('quickcreateModelData');
+        var setCreatedModelInContext = false;
+
+        if (_.contains(this.qcModelDataModuleAllowList, module) && !_.isEmpty(quickcreateModelData)) {
+            setCreatedModelInContext = true;
+
+            model = app.data.createBean(module, quickcreateModelData);
+
+            this.context.unset('quickcreateModelData');
+        } else if (relatedContext) {
             model = this.createLinkModel(this.context.get('model'), relatedContext.link);
         }
+
         app.drawer.open({
             layout: this.actionLayout || 'create',
             context: {
@@ -160,6 +178,12 @@
                         this._loadContext(context, module);
                     }, this);
                 }
+
+                if (setCreatedModelInContext && model) {
+                    this.context.set('quickcreateCreatedModel', model);
+                }
+
+                this.context.trigger('quickcreate-drawer:closed');
             }
         }, this));
     },

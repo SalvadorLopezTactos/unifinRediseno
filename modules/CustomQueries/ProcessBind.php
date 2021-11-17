@@ -72,21 +72,26 @@ foreach($temp_select as $key => $value){
 }
 
 $return_id = $focus->id;
-$edit='';
 if(isset($_REQUEST['return_module']) && $_REQUEST['return_module'] != "") $return_module = $_REQUEST['return_module'];
 else $return_module = "CustomQueries";
 if(isset($_REQUEST['return_action']) && $_REQUEST['return_action'] != "") $return_action = $_REQUEST['return_action'];
 else $return_action = "DetailView";
 if(isset($_REQUEST['return_id']) && $_REQUEST['return_id'] != "") $return_id = $_REQUEST['return_id'];
-if(!empty($_REQUEST['edit'])) {
-	$return_id='';
-	$edit='edit=true';
-}
 
+$query_data = [
+    'action' => $return_action,
+    'module' => $return_module,
+    'record' => $return_id,
+    'old_column_array' => $_SESSION['old_column_array'],
+];
+if (!empty($_REQUEST['edit'])) {
+    $return_id = '';
+    $query_data['edit'] = 'true';
+}
 
 //cleanup the session variable we have been using to pass the old_column_array information
 unset($_SESSION['old_column_array']);
 $GLOBALS['log']->debug("Process Bind record with id of ".$return_id);
 
-header("Location: index.php?action=$return_action&module=$return_module&record=$return_id&$edit&old_column_array=$old_column_array");
-?>
+$location = 'index.php?' . http_build_query($query_data);
+header("Location: $location");

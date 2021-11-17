@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_TARGETS_LIST_DASHBOARD' => '목표고객 목록 대시보드',
   'LBL_TARGETS_RECORD_DASHBOARD' => '목표고객 기록 대시보드',
+  'LBL_PROSPECTS_FOCUS_DRAWER_DASHBOARD' => '목표고객 포커스 서랍',
 
   'LBL_MODULE_NAME' => '목표고객',
   'LBL_MODULE_NAME_SINGULAR' => '목표고객',

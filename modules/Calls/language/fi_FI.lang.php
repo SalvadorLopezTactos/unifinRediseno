@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Soittoluettelojen työpöytä',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Soittotietueiden työpöytä',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Puhelut-tietolaatikko',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Puhelut',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Vastuuhenkilö',
     'LBL_LIST_MY_CALLS' => 'Omat puhelut',
     'LBL_MY_SCHEDULED_CALLS' => 'Omat ajastetut puhelut',
+    'LBL_GUEST_CALLS' => 'Omat puhelut vierailijana',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Ajastetut puhelut vierailijana',
     'LBL_SELECT_FROM_DROPDOWN' => 'Valitse ensin Liittyy-pudotusvalikosta.',
 	'LBL_ASSIGNED_TO_NAME' => 'Vastuuhenkilö',
 	'LBL_ASSIGNED_TO_ID' => 'Vastuuhenkilö',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Peruuta',
     'LBL_EMPTY_SEARCH_RESULT' => 'Tuloksia ei löytynyt. Luo uusi kutsuttava alla.',
     'LBL_NO_ACCESS' => 'Sinulla ei ole pääsyä luomaan $module',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Amazon Connect -yhteystiedon tunnus',
+
     'LBL_REPEAT_TYPE' => 'Toista',
     'LBL_REPEAT_INTERVAL' => 'Joka',
     'LBL_REPEAT_END' => 'Lopeta',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Puhelu {{{this}}} kanssa',
     'LBL_SEND_INVITES' => 'Lähetä kutsut',
     'LBL_REMINDER_TITLE' => 'Puhelu:',
+    'LBL_CALL_RECORDING_URL' => 'Tallennetaan URL',
+    'LBL_CALL_RECORDING' => 'Tallennetaan',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Luotiin {{moduleSingularLower}} ‘<a href=&#39;#{{buildRoute model=this}}&#39;>{{name}}</a>’ {{formatDate date_start}}.',

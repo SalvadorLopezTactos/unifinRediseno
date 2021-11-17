@@ -408,7 +408,6 @@ function addToValidateMoreThan(formname, name, type, required, msg, min) {
     validate[formname][validate[formname].length - 1][minIndex] = min;
 }
 
-
 function addToValidateUrl(formname, name, type, required, msg) {
     addToValidate(formname, name, type, required, msg);
     validate[formname][validate[formname].length - 1][jstypeIndex] = 'url';
@@ -667,6 +666,28 @@ function isValidEmail(emailStr) {
 		}
 	} // for
 	return true;
+}
+
+/**
+ * Checks if an email address is valid.
+ *
+ * Only performs a very basic validation because the complexity of the
+ * server-side regular expression is too great to mirror on the client,
+ * both in terms of maintenance and difficulty in porting to a different
+ * engine. Even if the light-weight validation passes, the server-side
+ * validation may fail.
+ *
+ * @param {string} address The email address to check.
+ * @return {boolean} `false` if this is definitely an invalid email
+ *   address. A return value of `true` does not guarantee that this is a
+ *   valid email address.
+ */
+function isValidEmailAddress(address) {
+    if (_.isEmpty(address)) {
+        return true;
+    }
+
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@\S+$/.test(address);
 }
 
 function isValidPhone(phoneStr) {
@@ -1026,7 +1047,7 @@ function validate_form(formname, startsWith){
 					if(!bail){
 						switch(validate[formname][i][typeIndex]){
                             case 'email':
-                                if(!isValidEmail(trim(form[validate[formname][i][nameIndex]].value))){
+                            if (!isValidEmailAddress(trim(form[validate[formname][i][nameIndex]].value))) {
                                     isError = true;
                                     add_error_style(formname, validate[formname][i][nameIndex], invalidTxt + " " +	validate[formname][i][msgIndex]);
                                 }

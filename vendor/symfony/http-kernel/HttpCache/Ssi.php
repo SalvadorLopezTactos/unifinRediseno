@@ -94,7 +94,5 @@ class Ssi extends AbstractSurrogate
 
         // remove SSI/1.0 from the Surrogate-Control header
         $this->removeFromControl($response);
-
-        return $response;
     }
 }

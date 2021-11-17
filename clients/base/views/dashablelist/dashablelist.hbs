@@ -28,7 +28,7 @@
                 {{#each ../collection.models}}
                     <tr class="single"{{#if id}} data-id="{{id}}"{{/if}}>
                         {{#each ../fields}}
-                            <td{{#if align}} class="{{align}}"{{/if}}{{#if name}} data-fieldname="{{name}}"{{/if}}>{{field ../../../this model=../this template=../../../viewName}}</td>
+                            <td{{#if align}} class="{{align}}"{{/if}}{{#if name}} data-fieldname="{{name}}"{{/if}} data-type="{{type}}">{{field ../../../this model=../this template=../../../viewName}}</td>
                         {{/each}}
                     </tr>
                 {{/each}}

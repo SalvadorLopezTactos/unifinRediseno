@@ -13,6 +13,7 @@
 namespace Sugarcrm\Sugarcrm\Dbal\IbmDb2;
 
 use Doctrine\DBAL\Driver\IBMDB2\DB2Statement as BaseStatement;
+use Throwable;
 
 /**
  * IBM DB2 statement
@@ -36,6 +37,13 @@ class Statement extends BaseStatement
             }
         }
 
-        return parent::execute($params);
+        try {
+            $res = parent::execute($params);
+        } catch (Throwable $e) {
+            [$msg, $code] = $this->errorInfo();
+            throw new Db2Exception($msg, $code);
+        }
+
+        return $res;
     }
 }

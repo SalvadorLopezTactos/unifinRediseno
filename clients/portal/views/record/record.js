@@ -8,6 +8,13 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+/**
+ * Portal Record view.
+ *
+ * @class View.Views.Portal.PortalRecordView
+ * @alias SUGAR.App.view.views.PortalRecordView
+ * @extends View.Views.Base.RecordView
+ */
 ({
     extendsFrom: 'RecordView',
     sidebarClosed: false,

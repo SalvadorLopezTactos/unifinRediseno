@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'Контакти',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'Потенциални клиенти',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'Потребители',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'Електронно табло със записи на бизнес центрове',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на бизнес центрове',
 ];

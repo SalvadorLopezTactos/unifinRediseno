@@ -61,11 +61,21 @@
   ::-moz-focus-inner {
     border: 0;
   }
+
+  .record-cell {
+    .record-edit-link-wrapper {
+      width: 9vw;
+    }
+  }
 }
 
 .record-cell {
   position: relative;
   height: 100%;
+
+  &[data-type="hidden"] {
+    display: none;
+  }
 
   &.vis_action_hidden {
     & > .normal {
@@ -93,7 +103,6 @@
     > span {
       display: block;
       min-height: 28px;
-      margin-bottom: 16px;
       box-sizing: border-box;
     }
 
@@ -111,6 +120,12 @@
       }
     }
 
+    > .detail {
+      input[type=checkbox] {
+        z-index: 0;
+      }
+    }
+
     > .disabled:not(.edit) {
       padding: 5px 7px;
     }
@@ -125,8 +140,14 @@
     margin-right: 5px;
   }
 
+  .create {
+    .ellipsis_inline {
+      padding-top: 4px;
+    }
+  }
+
   .ellipsis_inline {
-    display: block !important;
+    display: block;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -191,6 +212,10 @@
 
     &:not([disabled]):not([readonly]) {
       color: @gray;
+    }
+
+    &[rel=colorpicker] {
+      width: 122px;
     }
   }
 
@@ -345,11 +370,12 @@
     vertical-align: baseline;
   }
 
-  .edit {
+  .edit,
+  .create {
     input[type="radio"],
     input[type="checkbox"],
     input[type="image"] {
-      margin: 8px 7px 4px;
+      margin: 7px 7px 4px;
     }
   }
 
@@ -494,7 +520,7 @@
     padding: 0;
     margin-left: 0;
     text-decoration: none;
-    cursor: text;
+    cursor: default;
 
     &.btn-invisible:hover {
       border: 1px solid transparent;
@@ -717,16 +743,14 @@
   }
 
   .record-link-wrapper {
+    display: flex;
+    flex-flow: row;
     margin-left: @labelOnSideGutterWidth;
 
     html.rtl & {
       margin-right: @labelOnSideGutterWidth;
       margin-left: 0;
     }
-  }
-
-  .record-label-wrapper {
-    margin-bottom: @labelOnSideVerticalSpacing;
   }
 
   &.label-pill {
@@ -744,10 +768,6 @@
     > .detail,
     > .erased {
       margin-bottom: 0;
-    }
-
-    > .edit {
-      margin-bottom: 16px;
     }
   }
 
@@ -770,6 +790,7 @@
 
 .row-fluid > .record-cell {
   float: left;
+  margin-bottom: 8px;
 
   html.rtl & {
     float: right;
@@ -785,33 +806,145 @@
   }
 }
 
-.spanInputLabel (@columns, @columnWidth, @gutterWidth) {
-  width: (@columnWidth * @columns) + (@gutterWidth * (@columns - 1));
+.color-box {
+  display: flex;
+
+  .color-preview {
+    background: #eee;
+    border: solid 1px @grayMid;
+    border-radius: 2px;
+    box-sizing: border-box;
+    height: 28px;
+    margin-left: 10px;
+    width: 80px;
+  }
 }
 
 // override default grid values for labels-on-side
 .spanInputLabelX (@index) when (@index > 0) {
-  .labels-on-side > .span@{index} { .spanInputLabel(@index, @labelOnSideNarrowColumnWidth, @labelOnSideGutterWidth); }
+  @labelViewPortWidth: @columnViewPortWidth * @index + 2;
 
-  @media (min-width: 768px) {
-    .labels-on-side > .span@{index} { .spanInputLabel(@index, @labelsOnSideColumnWidth768, @labelOnSideGutterWidth); }
+  .labels-on-side > .record-label-wrapper.span@{index} { width: @labelViewPortWidth - 3; }
+
+  .labels-on-side {
+    //used adjacent sibling combinator in order to fill up the extra whitespace in the record-cell
+    .record-label-wrapper.span@{index} + .record-link-wrapper {
+      width: calc(~"100% - @{labelViewPortWidth}");
+    }
   }
 
-  @media (min-width: 1029px) {
-    .labels-on-side > .span@{index} { .spanInputLabel(@index, @gridColumnWidth768, @labelOnSideGutterWidth); }
+  @media (min-width: 640px) {
+    @labelViewPortWidth: @columnViewPortWidth * @index + 2;
+
+    .labels-on-side {
+      .record-label-wrapper.span@{index} + .record-link-wrapper {
+        width: calc(~"100% - @{labelViewPortWidth}");
+      }
+    }
   }
 
-  @media (min-width: 1370px) {
-    .labels-on-side > .span@{index} { .spanInputLabel(@index, @gridColumnWidth, @labelOnSideGutterWidth); }
+  @media (min-width: 1024px) {
+    @labelViewPortWidth: @columnViewPortWidth * @index + 1;
+
+    .labels-on-side {
+      .record-label-wrapper.span@{index} + .record-link-wrapper {
+        width: calc(~"100% - @{labelViewPortWidth}");
+      }
+    }
   }
 
-  @media (min-width: 1550px) {
-    .labels-on-side.record-cell > .span@{index} { .spanInputLabel(@index, @gridColumnWidth1200, @labelOnSideGutterWidth); }
+  @media (min-width: 1280px) {
+    @labelViewPortWidth: @columnViewPortWidth * @index;
+
+    .labels-on-side {
+      .record-label-wrapper.span@{index} + .record-link-wrapper {
+        width: calc(~"100% - @{labelViewPortWidth}");
+      }
+    }
   }
 
   .spanInputLabelX(@index - 1);
 }
 
 .spanInputLabelX (@gridColumns);
+
+@media screen and (max-width: 1369px) {
+  .record {
+    .labels-on-side {
+      &.empty-label .record-label-wrapper {
+        width: 0;
+      }
+
+      .record-edit-link-wrapper {
+        width: 108px;
+      }
+    }
+
+    .record-cell {
+      &:not(.label-pill) .record-label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &[data-type="fieldset"] .labels-on-side.empty-label {
+        .record-link-wrapper {
+          margin-left: 0;
+        }
+
+        .fa-pencil {
+          margin-left: -10px;
+        }
+      }
+
+      &[data-name="date_entered_by"],
+      &[data-name="date_modified_by"] {
+        overflow: hidden;
+      }
+    }
+
+    .record-link-wrapper {
+      max-width: 100%;
+    }
+
+    .record-label {
+      max-width: 100%;
+    }
+
+    .fieldset-field .record-label {
+      max-width: 100px;
+    }
+  }
+}
+
+@media screen and (max-width: 940px) {
+  .record {
+    .record-link-wrapper .edit .control-group.email {
+      padding-right: 0;
+
+      .btn-toolbar {
+        display: block;
+        margin: 0;
+        min-height: 28px;
+        position: relative;
+      }
+    }
+
+    .record-cell[data-name="repeat_type"] {
+      width: 100%;
+      margin-left: 0;
+
+      .labels-on-side .record-link-wrapper {
+        max-width: 80px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 517px) {
+  .record .record-cell {
+    width: 100%;
+    margin-left: 0 !important;
+  }
+}
 
 /* NEW SKIN END */

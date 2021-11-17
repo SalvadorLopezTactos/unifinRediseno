@@ -70,11 +70,11 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> '경고: 쓸수 없음',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> '귀하의 PHP버전은 Sugar에 의해 지원되지 않습니다. Sugar어플리케이션에 적합한 버전을 설치해야 합니다. 지원되는 PHP버전 발표노트의 Compatibility Matrix과 문의하시기 바랍니다. 귀하의 버전은',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => '귀하의 IIS버전은 Sugar에 의해 지원되지 않습니다. Sugar어플리케이션에 적합한 버전을 설치해야 합니다. 지원되는 IIS버전 발표노트의 Compatibility Matrix과 문의하시기 바랍니다. 귀하의 버전은',
-	'ERR_CHECKSYS_FASTCGI'              => 'PHP계획을 위한 FastCGI 처리기를 사용하지 않았습니다. Sugar어플리케이션에 적합한 버전을 설치해야 합니다. 지원되는 버전 발표노트의 Compatibility Matrix과 문의하시기 바랍니다. 보다 더 자세한 내용은  http://www.iis.net/php/를 참조하십시요.',
+    'ERR_CHECKSYS_FASTCGI'              => 'PHP 매핑을 위한 FastCGI 처리기를 사용하지 않았습니다. Sugar 어플리케이션에 적합한 버전을 설치해야 합니다. 지원되는 버전 릴리스 노트의 Compatibility Matrix를 참조하시기 바랍니다. 보다 자세한 내용은 <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a>를 참조하십시오.',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'IIS/FastCGI sapi의 최고의 사용경험을 위해 php.ini파일의 fastcgi.logging 을 0으로 설정하십시요.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> '지원되지 않는 PHP버전이 설치되었습니다.',
     'LBL_DB_UNAVAILABLE'                => '데이타베이스가 이용불가합니다.',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '데이터베이스 지원을 찾을 수 없습니다. 지원되는 데이터베이스 유형인 MySQL, MS SQLServer, Oracle, 또는 DB2 중 한 가지에 필요한 드라이버를 가지고 있는지 확인해 주십시오. PHP 버전에 따라 php.ini 파일에서 확장자를 주석 해제하거나 알맞은 바이너리 파일로 컴파일해야 할 수도 있습니다. 데이터베이스 지원을 활성화하는 방법에 대한 자세한 정보는 PHP 매뉴얼을 참조하십시오.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '데이터베이스 지원을 찾을 수 없습니다. 지원되는 데이터베이스 유형인 MySQL, MS SQLServer, Oracle, 또는 DB2 중 하나에 필요한 드라이버가 있는지 확인하십시오. PHP 버전에 따라서, php.ini 파일 내의 extension에서 주석 처리를 제거하거나, 올바른 이진 파일로 다시 컴파일해야 할 수도 있습니다. 데이터베이스 지원을 활성화하는 방법에 대한 자세한 정보는 PHP 매뉴얼을 참조하십시오.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Sugar 어플리케이션에 필요한 XML Parser Libraries 연결 기능이 발견되지 않았습니다. PHP버전에 따라 php.ini 파일 확장을 uncomment 하거나 이진 파일을 재편집해야 합니다. 더 자세한 정보를 위해PHP 안내서를 참조하십시요.',
     'LBL_CHECKSYS_CSPRNG' => '난수 생성기',
     'ERR_CHECKSYS_MBSTRING'             => 'Sugar 어플리케이션에 필요한 Multibyte Strings PHP (mbstring)확장에 연결 기능이 발견되지 않았습니다. 일반적으로 mbstring 모듈은 PHP초기설정에 의해 작동이 불가하며 반드시 이원체 설치가 완료된후 사용가능한 mbstring과 같이 작동되어야 합니다. mbstring 작동가능 지원에 관한 더 자세한 정보를 위해서 PHP 안내서를 참조하십시오.',
@@ -476,139 +476,140 @@ $mod_strings = array(
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'PHP 역방향 적합성 모드가 작동중입니다. 계속 진행하려면 zend.ze1_compatibility_mode 를 작동을 중지하십시오.',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => '회의 알림 이메일',
+        'subject' => 'SugarCRM 회의-$event_name',
+        'description' => '이 템플릿은 시스템이 회의 알림을 사용자에게 전송시 사용됩니다.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>받는 사람: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Meeting</p>
+	<p>$assigned_by_user 님이 회의에 초대하셨습니다</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>제목: $event_name<br/>
+	시작일: $start_date<br/>
+	종료일: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>설명: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>회의 수락:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>회의 잠정 수락:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>회의 거부:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            '받는 사람: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user 님이 회의에 초대하셨습니다
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+제목: $event_name
+시작일: $start_date
+종료일: $end_date
 
-Description: $description
+설명: $description
 
-Accept this meeting:
+회의 수락:
 <$accept_link>
 
-Tentatively Accept this meeting
+회의 잠정 수락
 <$tentative_link>
 
-Decline this meeting
+회의 거부
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => '전화 알림 이메일',
+        'subject' => 'SugarCRM 전화 - $event_name',
+        'description' => '이 템플릿은 시스템이 전화 알림을 사용자에게 전송시 사용됩니다.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>받는 사람: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user 님이 전화에 초대하셨습니다</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>제목: $event_name<br/>
+	시작일: $start_date<br/>
+	기간: $hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>설명: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>전화 수락:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>전화 잠정 수락:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>전화 거부:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            '받는 사람: $assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user 님이 전화에 초대하셨습니다
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+제목: $event_name
+시작일: $start_date
+기간: $hoursh, $minutesm
 
-Description: $description
+설명: $description
 
-Accept this call:
+전화 수락:
 <$accept_link>
 
-Tentatively Accept this call
+전화 잠정 수락
 <$tentative_link>
 
-Decline this call
+전화 거부
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => '할당 알림 이메일',
+        'subject' => 'SugarCRM - 할당된 $module_name ',
+        'description' => '이 템플릿은 시스템이 할당된 작업을 사용자에게 전송시 사용됩니다.',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user 님이 $module_name을(를) $assigned_user 님에게 할당했습니다.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>이 $module_name을(를) 확인할 수 있는 곳:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user 님이 $module_name을(를) $assigned_user 님에게 할당했습니다.
 
-You may review this $module_name at:
+이 $module_name을(를) 확인할 수 있는 곳:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => '보고서 일정 이메일',
+        'subject' => '보고서 일정: $report_time의 report_name',
+        'description' => '이 템플릿은 시스템이 보고서 일정을 사용자에게 전송시 사용됩니다.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>$assigned_user 님, 안녕하세요.</p>
+<p>첨부파일은 자동으로 생성된 보고서입니다.</p>
+<p>보고서 이름: $report_name</p>
+<p>보고서 실행 날짜 및 시간: $report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            '$assigned_user 님, 안녕하세요.
 
-Attached is an auto generated report that has been scheduled for you.
+첨부파일은 자동으로 생성된 보고서입니다.
 
-Report Name: $report_name
+보고서 이름: $report_name
 
-Report Run Date and Time: $report_time',
+보고서 실행 날짜 및 시간: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => '시스템 코멘트 로그 이메일 알림',
+        'subject' => 'SugarCRM - $initiator_full_name 님이 $singular_module_name에서 나를 언급했습니다',
+        'description' => '이 템플릿은 코멘트 로그 섹션에서 태그된 사용자에게 이메일 알림을 보내는 데 사용됩니다.',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>다음 레코드의 코멘트 로그에 언급됨:  <a href="$record_url">$record_name</a></p>
+                <p>Sugar에 로그인하여 코멘트를 확인하십시오.</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'다음 레코드의 코멘트 로그에 언급됨: $record_name
+                Sugar에 로그인하여 코멘트를 확인하십시오.',
     ],
 
     'advanced_password_new_account_email' => array(

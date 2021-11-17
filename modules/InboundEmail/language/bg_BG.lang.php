@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Предупреждение: Правите изменения в настройките за автоматичен импорт, което може да довете до загуба на данни.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Предупреждение: Автоматичният импорт трябва да бъде разрешен когато създавате казуси в следствие на получено писмо.',
 	'LBL_EDIT_LAYOUT' => 'Редактиране на подредби' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'Имейл адрес',
+    'LBL_EMAIL_PROVIDER' => 'Доставчик на електронна поща',
+    'LBL_AUTH_STATUS' => 'Статус на оторизация',
 );
-?>

@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'Kontaktid',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'Müügivihjed',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'Kasutajad',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'Ärikeskuste kirjete töölaud',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'Ärikeskuste fookuse sahtel',
 ];

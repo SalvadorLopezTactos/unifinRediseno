@@ -9,32 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+
+$readableProductNames =
+    getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($GLOBALS['current_user']));
+$readableProductNames = urlencode(implode(',', $readableProductNames));
+
+$url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar_flavor'] . '&versió=' .
+    $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&module=Connectors&route=Google' .
+    $readableProductNames;
 
 $connector_strings = array(
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtenir una clau secreta dels consumidors i Google mitjançant el registre de la instància de Sugar com una nova aplicació.
-<br/><br>Passos per a registrar la instància:
-<br/><br/>
-<ol>
-<li>Vagi al web de desenvolupament de Google:
-<a href=\'https://console.developers.google.com/project\'
-target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
-
-<li>Iniciï sessió amb el compte de Google en el qual vol registrar l\'aplicació.</li>
-<li>Creï un projecte nou</li>
-<li>Indiqui un Nom de projecte i faci clic a Crear.</li>
-<li>Un cop creat el projecte, activi Google Drive i Google Contacts API</li>
-<li>A la secció API i autenticació > Credencials, creï un ID de client nou</li>
-<li>Seleccioni Aplicació Web i faci clic a Configurar</li>
-<li>Escrigui un nom de producte i faci clic a Guardar</li>
-<li>A la secció URL de redirecció autoritzades escrigui la següent url: {$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>
-<li>Faci clic a crear ID de client</li>
-<li>Copiï l\'ID de client i el secret als quadres següents</li>
-
-</li>
-</ol>
-</td></tr>
-</table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .
+        'Registreu la vostra instància de Sugar amb Google per habilitar la configuració dels comptes de Google per utilitzar-los amb Sugar. ' .
+        'Consulteu <a href="https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$lang}&module=Connectors&route=Google" target=\'_blank\'>' .
+        '\' target=\'_blank\'>Documentació de connectors</a> per obtenir-ne més informació.</td></tr></table>',
     'oauth2_client_id' => 'ID de client',
     'oauth2_client_secret' => 'Secret de client',
 );

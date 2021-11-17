@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'ชื่อผู้ใช้',
 	'LBL_RESTORE_BUTTON_LABEL'=>'เรียกคืน',
 	'LBL_SYSTEM_SETTINGS' => 'การตั้งค่าระบบ',
-	'LBL_SKYPEOUT_ON_DESC' => 'ช่วยให้ผู้ใช้สามารถคลิกที่หมายเลขโทรศัพท์เพื่อโทรโดยใช้ SkypeOut&reg; หมายเลขจะต้องมีรูปแบบถูกต้องเพื่อที่จะใช้คุณลักษณะนี้ กล่าวคือจะต้องประกอบด้วย "+"  "รหัสประเทศ" "หมายเลข" เช่น +1 (555) 555-1234',
-	'LBL_SKYPEOUT_ON' => 'เปิดใช้งานการทำงานกับ SkypeOut&reg;',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut&reg;',
+    'LBL_DIALOUT_ON_DESC' => 'อนุญาตให้ผู้ใช้คลิกที่หมายเลขโทรศัพท์เพื่อโทรหาพวกเขาด้วยค่าเริ่มต้นซอฟต์แวร์ระบบคอมพิวเตอร์และโทรศัพท์รวมเบ็ดเสร็จ (CTI: computer telephony integration)',
+    'LBL_DIALOUT_ON' => 'เปิดใช้งานปุ่ม คลิกเพื่อโทร',
+    'LBL_DIALOUT_TITLE' => 'สายโทรขาออก',
     'LBL_TWEETTOCASE_ON_DESC' => 'อนุญาตให้ผู้ใช้สร้างเคสจากทวีต',
     'LBL_TWEETTOCASE_ON' => 'เปิดใช้งาน Tweet&reg; เพื่อทำงานร่วมกับเคส',
     'LBL_TWEETTOCASE_TITLE' => 'Tweet&reg; กับเคส',
@@ -363,7 +363,7 @@ $mod_strings = array (
     'JS_ALERT_PDF_WRONG_EXTENSION' => 'ไฟล์นี้มีนามสกุลไม่ถูกต้อง',
     'LBL_PDF_INSTRUCTIONS' => 'คำแนะนำ',
     'PDF_INSTRUCTIONS_ADD_FONT' => <<<BSOFR
-แบบอักษรที่สนับสนุนใน SugarPDF :
+แบบอักษรที่รองรับใน SugarPDF :
 <ul>
 <li>TrueTypeUnicode (UTF-8 Unicode)</li>
 <li>OpenTypeUnicode</li>
@@ -375,8 +375,8 @@ $mod_strings = array (
 <br>
 ถ้าคุณเลือกที่จะไม่ฝังแบบอักษรใน PDF ไฟล์ PDF ที่สร้างจะมีขนาดเล็กลง แต่จะมีการใช้แบบอักษรทดแทน ถ้าไม่มีแบบอักษรดังกล่าวอยู่ในระบบของผู้อ่าน
 <br><br>
-ในการเพิ่มแบบอักษรของ PDF ใน SugarCRM จะต้องปฏิบัติตามขั้นตอนที่ 1 และ 2 ของเอกสาร TCPDF Fonts ที่มีให้ในส่วน "DOCS" ของ <a href="http://www.tcpdf.org" target="_blank">เว็บไซต์ TCPDF</a>
-<br><br>ยูทิลิตี pfm2afm และ ttf2ufm มีอยู่ใน fonts/utils ในแพ็คเกจ TCPDF ที่คุณสามารถดาวน์โหลดจากส่วน "DOWNLOAD" ของ <a href="http://www.tcpdf.org" target="_blank">เว็บไซต์ TCPDF</a>
+ในการเพิ่มแบบอักษรของ PDF ใน SugarCRM จะต้องปฏิบัติตามขั้นตอนที่ 1 และ 2 ของเอกสาร TCPDF Fonts ที่มีให้ในส่วน "DOCS" ของ <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">เว็บไซต์ TCPDF</a>
+<br><br>ยูทิลิตี pfm2afm และ ttf2ufm มีอยู่ใน fonts/utils ในแพ็คเกจ TCPDF ที่คุณสามารถดาวน์โหลดจากส่วน "DOWNLOAD" ของ <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">เว็บไซต์ TCPDF</a>
 <br><br>โหลดไฟล์เมตริกที่สร้างในขั้นตอนที่ 2 และไฟล์แบบอักษรด้านล่าง
 BSOFR
 ,
@@ -429,6 +429,9 @@ BSOFR
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* โมดูลรายงานจะไม่สามารถใช้ได้สำหรับมุมมองในอุปกรณ์เคลื่อนที่ซึ่งใช้เบราว์เซอร์',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => 'ความยาวสูงสุดต้องมีค่ามากกว่าความยาวต่ำสุด',
+    'ERR_MIN_LENGTH_NEGATIVE' => 'ความยาวต่ำสุดควรเป็นค่าบวก',
+    'ERR_MAX_LENGTH_NEGATIVE' => 'ความยาวสูงสุดควรเป็นค่าบวก',
     'ERR_EMPTY_SAML_LOGIN' => 'URL ของล็อกอิน SAML ต้องไม่ว่างเปล่า',
     'ERR_EMPTY_SAML_CERT' => 'ใบรับรอง SAML ต้องไม่ว่างเปล่า',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'ID หน่วยงาน SAML จะว่างเปล่าไม่ได้',
@@ -442,9 +445,6 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'สตรีมกิจกรรม',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'เปิดการใช้งานสตรีมกิจกรรม',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'เปิดสตรีมกิจกรรมสำหรับแอปพลิเคชัน',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'เปิดการใช้งานเนื้อหาการเข้าสู่ระบบหน้าจอเพิ่มเติม',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'การกำหนดกระบวนการบันทึกอัตโนมัติ',

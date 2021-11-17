@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => '보고서별',
     'LBL_RECENTLY_MODIFIED' => '최근 수정',
     'LBL_RECORD_SAVED_SUCCESS' => '{{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}을(를)</a> 만들었습니다. 사용자 서브패널을 통해 사용자를 추가하려면 스케줄을 여십시오.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => '이 기록 일정',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => '기록 일정 기록 대시보드',
 );

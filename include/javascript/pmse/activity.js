@@ -1265,6 +1265,9 @@ AdamActivity.prototype.createConfigurateAction = function () {
         reassignmentFn,
         forms,
         teams,
+        emailProcessUser,
+        emailProcessUserForm,
+        emailTemplateList,
         cancelInformation;
     cancelInformation =  new MessagePanel({
         title: "Confirm",
@@ -1279,6 +1282,7 @@ AdamActivity.prototype.createConfigurateAction = function () {
     });
 
     if (this.act_task_type === 'USERTASK') {
+        w.style.addClasses(['adam-usertask-window']);
         actionCSS = 'adam-menu-icon-form';
         proxy = new SugarProxy({
             url: 'pmse_Project/ActivityDefinition/' + this.id,
@@ -1522,6 +1526,86 @@ AdamActivity.prototype.createConfigurateAction = function () {
             language: PMSE_DESIGNER_FORM_TRANSLATIONS
         });
 
+        let changeEmailProcessUserfn = function() {
+            const emailFlag = !!emailProcessUser.value;
+
+            if (!emailFlag) {
+                emailTemplateList.setValue(emailTemplateList.initialValue);
+            }
+
+            $(emailTemplateList.html).toggle(emailFlag);
+            emailTemplateList.setRequired(emailFlag);
+
+            $('.pmse-form-error')
+                .removeClass('pmse-form-error-on')
+                .addClass('pmse-form-error-off');
+        };
+
+        emailProcessUser = new CheckboxField({
+            name: 'act_email_process_user',
+            label: App.lang.getModString('LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER', 'pmse_Project'),
+            required: false,
+            options: {
+                labelAlign: 'right',
+                marginLeft: 80,
+            },
+            change: changeEmailProcessUserfn
+        });
+
+        emailTemplateList = new ComboboxField({
+            jtype: 'combobox',
+            name: 'act_email_template_id',
+            label: translate('LBL_PMSE_FORM_LABEL_EMAIL_TEMPLATE'),
+            proxy: new SugarProxy({
+                url: 'pmse_Project/CrmData/emailtemplates/' + PROJECT_MODULE,
+                uid: PROJECT_MODULE,
+                callback: null
+            })
+        });
+
+        emailProcessUserForm = new PMSE.Form({
+            items: [emailProcessUser, emailTemplateList],
+            closeContainerOnSubmit: true,
+            buttons: [
+                {
+                    jtype: 'submit',
+                    caption: App.lang.getModString('LBL_PMSE_BUTTON_SAVE', 'pmse_Project'),
+                    cssClasses: ['btn btn-primary']
+                },
+                {
+                    jtype: 'normal',
+                    caption: App.lang.getModString('LBL_PMSE_BUTTON_CANCEL', 'pmse_Project'),
+                    handler: function() {
+                        if (emailProcessUserForm.isDirty()) {
+                            cancelInformation.setButtons([
+                                {
+                                    jtype: 'normal',
+                                    caption: App.lang.getModString('LBL_PMSE_BUTTON_YES', 'pmse_Project'),
+                                    handler: function() {
+                                        cancelInformation.hide();
+                                        w.close();
+                                    }
+                                },
+                                {
+                                    jtype: 'normal',
+                                    caption: translate('LBL_PMSE_BUTTON_NO'),
+                                    handler: function() {
+                                        cancelInformation.hide();
+                                    }
+                                }
+                            ]);
+                            cancelInformation.show();
+                        } else {
+                            w.close();
+                        }
+                    },
+                    cssClasses: ['btn btn-invisible btn-link']
+                }
+            ],
+            labelWidth: '50%',
+            language: PMSE_DESIGNER_FORM_TRANSLATIONS
+        });
+
         reassignmentFn = function () {
             switch (this.name) {
                 case 'combo_teams':
@@ -1643,13 +1727,19 @@ AdamActivity.prototype.createConfigurateAction = function () {
 
         callback = {
             'submit': function (data) {
-                var f2Data = f2.getData(), f1Data = f.getData(), f3Data = f3.getData(), requiredData = requiredForm.getData(), relatedData = relatedForm.getData();
+                let f2Data = f2.getData();
+                let f1Data = f.getData();
+                let f3Data = f3.getData();
+                let requiredData = requiredForm.getData();
+                let relatedData = relatedForm.getData();
+                let emailProcessUserData = emailProcessUserForm.getData();
                 f2Data.act_readonly_fields = JSON.parse(f2Data.act_readonly_fields);
                 requiredData.act_required_fields = JSON.parse(requiredData.act_required_fields);
 
                 $.extend(true, f1Data, f2Data);
                 $.extend(true, f1Data, f3Data);
                 $.extend(true, f1Data, requiredData);
+                $.extend(true, f1Data, emailProcessUserData);
 
                 proxy.sendData(f1Data);
             },
@@ -1757,6 +1847,21 @@ AdamActivity.prototype.createConfigurateAction = function () {
                                 }
                             }
 
+                            if (data.act_email_process_user) {
+                                emailProcessUser.setValue(data.act_email_process_user);
+                            }
+
+                            emailTemplateList.proxy.getData(null, {
+                                success: function(emailTemplates) {
+                                    let options = [{'text': translate('LBL_PMSE_FORM_OPTION_SELECT'), 'value': ''}];
+                                    options = options.concat(emailTemplates.result);
+                                    emailTemplateList.setOptions(options);
+                                    if (data.act_email_template_id) {
+                                        emailTemplateList.setValue(data.act_email_template_id);
+                                    }
+                                }
+                            });
+
                             f.proxy = null;
                         }
                     }
@@ -1768,7 +1873,10 @@ AdamActivity.prototype.createConfigurateAction = function () {
         f3.setCallback({submit: callback.submit});
         requiredForm.setCallback({submit: callback.submit});
         relatedForm.setCallback({submit: callback.submit});
-
+        emailProcessUserForm.setCallback({
+            submit: callback.submit,
+            loaded: changeEmailProcessUserfn
+        });
     } else {
         //TODO REVIEW THIS ELSE
         actionCSS = 'adam-menu-icon-configure';
@@ -1871,6 +1979,13 @@ AdamActivity.prototype.createConfigurateAction = function () {
         w.addPanel({
             title: translate('LBL_PMSE_FORM_LABEL_EXPECTED_TIME'),
             panel: f3
+        });
+    }
+
+    if (emailProcessUserForm) {
+        w.addPanel({
+            title: App.lang.getModString('LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER', 'pmse_Project'),
+            panel: emailProcessUserForm
         });
     }
 
@@ -2178,6 +2293,10 @@ AdamActivity.prototype.actionFactory = function(type) {
         modal: true
     });
 
+    if (type === 'ASSIGN_TEAM') {
+        w.style.addClasses(['adam-decor']);
+    }
+
     var actionDef = this.getAction(type, w);
 
     var f = new PMSE.Form({
@@ -2382,10 +2501,19 @@ AdamActivity.prototype.getAction = function(type, w) {
 
                 })
             });
+
+            let changeRecordOwnerFn = function() {
+                if (!updateRecordOwner.value) {
+                    setByAvl.update(false);
+                }
+                $(setByAvl.html).toggle(updateRecordOwner.value);
+            };
+
             //here add checkbox
             var updateRecordOwner = new CheckboxField({
                 name: 'act_update_record_owner',
                 label: translate('LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER'),
+                change: changeRecordOwnerFn,
                 required: false,
                 value: false,
                 options: {
@@ -2393,6 +2521,141 @@ AdamActivity.prototype.getAction = function(type, w) {
                     marginLeft: 200
                 }
             });
+
+            let changeSetByAvlFn = function() {
+                const avlFlag = !!setByAvl.value;
+
+                if (!avlFlag) {
+                    $.each([availableCount, availableType, beforeType, reserveUser], function(key, item) {
+                        item.setValue(item.initialValue);
+                    });
+                }
+
+                $(avlSettings.html).toggle(avlFlag);
+                $(reserveUser.html).toggle(avlFlag);
+                reserveUser.setRequired(avlFlag);
+
+                if (!avlFlag) {
+                    beforeType.setRequired(false);
+                }
+
+                $('.pmse-form-error')
+                    .removeClass('pmse-form-error-on')
+                    .addClass('pmse-form-error-off');
+            };
+
+            let setByAvl = new CheckboxField({
+                name: 'act_set_by_avl',
+                label: App.lang.getModString('LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY', 'pmse_Project'),
+                required: false,
+                value: false,
+                change: changeSetByAvlFn,
+                options: {
+                    labelAlign: 'right',
+                    marginLeft: 80,
+                }
+            });
+
+            // Set the required attribute of "before" field when the "count" field was changed
+            const keyupAvailableCountFn = function() {
+                const required = !!parseInt(availableCount.value);
+
+                avlSettings.setRequired(required);
+                beforeType.setRequired(required);
+
+                if (!required) {
+                    beforeType.markFieldError(false);
+                    avlSettings.parent.validate();
+                }
+            };
+
+            let availableCount = new NumberField({
+                name: 'act_avl_count',
+                initialValue: '0',
+                fieldWidth: '20px',
+                minValue: 0,
+                keyup: keyupAvailableCountFn,
+            });
+
+            let availableType = new ComboboxField({
+                jtype: 'combobox',
+                name: 'act_avl_type',
+                label: App.lang.getModString('LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD', 'pmse_Project'),
+                options: [
+                    {text: App.lang.getModString('LBL_PMSE_FORM_OPTION_MINUTES', 'pmse_Project'), value: 'minutes'},
+                    {text: App.lang.getModString('LBL_PMSE_FORM_OPTION_HOURS', 'pmse_Project'), value: 'hours'},
+                ],
+                initialValue: 'minutes',
+                fieldWidth: '92px',
+            });
+
+            // Re-validate form when "before" field was changed.
+            // It's necessary to hide/show errors dynamically
+            const changeBeforeTypeFn = function() {
+                avlSettings.parent.validate();
+            };
+
+            let beforeType = new ComboboxField({
+                jtype: 'combobox',
+                name: 'act_avl_before_type',
+                label: App.lang.getModString('LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD', 'pmse_Project'),
+                options: [
+                    {text: App.lang.getModString('LBL_PMSE_FORM_OPTION_SELECT', 'pmse_Project'), value: ''},
+                ],
+                proxy: new SugarProxy({
+                    url: 'pmse_Project/CrmData/dateFieldsOfModule/' + PROJECT_MODULE,
+                    uid: null,
+                    callback: null,
+                }),
+                initialValue: '',
+                fieldWidth: '125px',
+                change: changeBeforeTypeFn,
+            });
+
+            let avlSettings = new FieldsGroup({
+                label: App.lang.getModString('LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY', 'pmse_Project'),
+                required: false,
+                items: [
+                    {
+                        field: availableCount,
+                    },
+                    {
+                        field: availableType,
+                    },
+                    {
+                        field: beforeType,
+                        textBefore: App.lang.getModString('LBL_PMSE_FORM_LABEL_BEFORE', 'pmse_Project'),
+                    },
+                ],
+            });
+
+            // Re-validate form when "If no users are available" field was changed.
+            // It's necessary to hide/show errors dynamically
+            const changeReserveUserFn = function() {
+                avlSettings.parent.validate();
+            };
+
+            let reserveUser = new SearchableCombobox({
+                label: App.lang.getModString('LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE', 'pmse_Project'),
+                name: 'act_reserve_user',
+                submit: false,
+                searchURL: 'Users?filter[0][$and][0][status][$not_equals]=Inactive' +
+                    '&filter[0][$and][1][$or][0][first_name][$starts]={%TERM%}' +
+                    '&filter[0][$and][1][$or][1][last_name][$starts]={%TERM%}' +
+                    '&fields=id,full_name&max_num={%PAGESIZE%}&offset={%OFFSET%}',
+                searchValue: 'id',
+                searchLabel: 'full_name',
+                initialValue: '',
+                placeholder: App.lang.getModString('LBL_PA_FORM_COMBO_ASSIGN_TO_USER_HELP_TEXT', 'pmse_Project'),
+                fieldWidth: '220px',
+                searchMore: {
+                    module: 'Users',
+                    fields: ['id', 'full_name'],
+                    filterOptions: null,
+                },
+                change: changeReserveUserFn,
+            });
+
             var combo_method = new ComboboxField({
                 jtype: 'combobox',
                 name: 'act_assignment_method',
@@ -2415,7 +2678,7 @@ AdamActivity.prototype.getAction = function(type, w) {
                 callback: null
             });
 
-            var items = [combo_teams, updateRecordOwner, hiddenMethod];
+            var items = [combo_teams, updateRecordOwner, hiddenMethod, setByAvl, avlSettings, reserveUser];
             var labelWidth = '40%';
             var actionText = translate('LBL_PMSE_CONTEXT_MENU_SETTINGS');
             var actionCSS = 'adam-menu-icon-configure';
@@ -2427,18 +2690,42 @@ AdamActivity.prototype.getAction = function(type, w) {
                             combo_teams.setOptions(teams.result);
                             if (data) {
                                 combo_teams.setValue(data.act_assign_team || teams.result[0].value);
-                                var nValue = false;
-                                if (data.act_update_record_owner && data.act_update_record_owner == 1) {
-                                    nValue = true;
-                                }
-                                updateRecordOwner.setValue(nValue);
-                                $(updateRecordOwner.html).children('input').prop('checked', nValue);
                             }
                             App.alert.dismiss('upload');
                             w.html.style.display = 'inline';
                         }
                     });
-                }
+
+                    $.each([setByAvl, avlSettings, reserveUser], function(key, item) {
+                        $(item.html).hide();
+                    });
+
+                    let isUpdateOwner = parseInt(data.act_update_record_owner || 0) === 1;
+                    updateRecordOwner.update(isUpdateOwner);
+
+                    let isSetByAvl = parseInt(data.act_set_by_avl || 0) === 1;
+                    setByAvl.update(isSetByAvl);
+
+                    availableCount.setValue(data.act_avl_count || availableCount.initialValue);
+                    availableType.setValue(data.act_avl_type || availableType.initialValue);
+                    beforeType.setValue(data.act_avl_before_type || beforeType.initialValue);
+
+                    reserveUser.setValue(data.act_reserve_user || '');
+
+                    keyupAvailableCountFn();
+
+                    beforeType.proxy.getData({}, {
+                        success: function(data) {
+                            if (data) {
+                                beforeType.setOptions(data.result, true);
+                            }
+                        }
+                    });
+
+                    this.userActionById(data.act_reserve_user, function(data) {
+                        reserveUser.setValue(data);
+                    });
+                }.bind(this)
             };
             action = {
                 proxy: proxy,
@@ -3122,7 +3409,7 @@ AdamActivity.prototype.getWindowDef = function(type) {
 
         case 'ASSIGN_TEAM':
             wWidth = 550;
-            wHeight = 160;
+            wHeight = 302;
             wTitle = 'LBL_PMSE_FORM_TITLE_ASSIGN_TEAM';
             break;
 
@@ -3396,4 +3683,23 @@ AdamActivity.prototype.checkIfRequiredFieldIsSet = function(field, criteria, ele
     if (!requiredFieldIsSet) {
         validationTools.createWarning(element, 'LBL_PMSE_ERROR_FIELD_REQUIRED', field.text);
     }
+};
+
+AdamActivity.prototype.userActionById = function(userId, callback) {
+    let usersProxy = new SugarProxy();
+    usersProxy.url = 'pmse_Project/CrmData/users';
+    usersProxy.getData(null, {
+        success: function(users) {
+            users = users.result || [];
+
+            let user = users.find(function(item) {
+                return item.value === userId;
+            });
+
+            callback.call(this, {
+                text: user ? user.text : userId,
+                value: user ? user.value : userId,
+            });
+        }
+    });
 };

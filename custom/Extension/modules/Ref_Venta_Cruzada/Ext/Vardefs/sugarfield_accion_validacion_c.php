@@ -4,4 +4,3 @@ $dictionary['Ref_Venta_Cruzada']['fields']['accion_validacion_c']['labelValue']=
 $dictionary['Ref_Venta_Cruzada']['fields']['accion_validacion_c']['dependency']='';
 $dictionary['Ref_Venta_Cruzada']['fields']['accion_validacion_c']['visibility_grid']='';
  ?>
- 

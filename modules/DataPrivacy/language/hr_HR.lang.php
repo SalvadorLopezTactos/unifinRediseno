@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Polja označena za brisanje',
     'LBL_NO_RECORDS_MARKED' => 'Nema polja ili zapisa označenih za brisanje.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Nadzorna ploča zapisa o zaštiti osobnih podataka',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za privatnost podataka',
 
     // list view
     'LBL_HELP_RECORDS' => 'Modul za zaštitu osobnih podataka prati aktivnosti zaštite, uključujući davanje privola i primanje zahtjeva u svrhu podrške postupaka vaše organizacije za zaštitu osobnih podataka. Stvorite zapise o zaštiti osobnih podataka koji se odnose na zapis pojedinca (npr. kontakta) za praćenje privola ili poduzimanje radnji na zahtjevu za zaštitu osobnih podataka.',

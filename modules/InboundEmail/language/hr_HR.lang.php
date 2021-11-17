@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Upozorenje: izmjenjujete postavku automatskog uvoza, što može uzrokovati gubitak podataka.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Upozorenje: automatski uvoz mora biti omogućen pri automatskom stvaranju slučajeva.',
 	'LBL_EDIT_LAYOUT' => 'Uredi izgled' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'Adresa e-pošte',
+    'LBL_EMAIL_PROVIDER' => 'Davatelj usluge e-pošte',
+    'LBL_AUTH_STATUS' => 'Status autorizacije',
 );
-?>

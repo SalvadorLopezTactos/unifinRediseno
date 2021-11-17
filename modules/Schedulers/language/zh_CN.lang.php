@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' 已安排的任务',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => '重建非规范化团队安全性数据',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => '活动流清除程序',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => '更新产品描述',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => '与时间相关的流程安排',
+'LBL_OOTB_DATA_ARCHIVER' => '运行活动数据存档/删除',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => '间隔：',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => '始终',
 'LBL_CATCH_UP' => '错过时执行',
+'LBL_SYSTEM_JOB' => '是否为当前任务系统？',
 'LBL_CATCH_UP_WARNING' => '如果此任务的执行时间较长，请取消选择。',
 'LBL_DATE_TIME_END' => '结束日期和时间',
 'LBL_DATE_TIME_START' => '开始日期与时间',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => '移除诊断工具文件',
 'LBL_SUGARJOBREMOVETMPFILES' => '移除临时文件',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => '重建非规范化团队安全性数据',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => '更新产品描述',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => '运行每晚批量运行邮件市场活动',
 'LBL_ASYNCMASSUPDATE' => '执行异步大规模更新',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => '清理任务队列',
 'LBL_CLEANOLDRECORDLISTS' => '清除旧记录列表',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => '活动流清除程序',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => '与时间相关的流程安排',
 'LBL_PMSEENGINECRON' => 'SugarBPM 工作计划',
 );
 

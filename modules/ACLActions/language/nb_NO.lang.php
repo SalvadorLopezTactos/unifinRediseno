@@ -27,6 +27,7 @@ $mod_strings = array (
 'LIST_ROLES_BY_USER'=>'Vis roller etter bruker',
 'LBL_ROLES_SUBPANEL_TITLE'=>'Brukerroller',
 'LBL_SEARCH_FORM_TITLE'=>'Søk',
+'LBL_ACTION_RECORD_VIEW'=>'Oppføringsvisning',
 'LBL_ACTION_VIEW'=>'Vis',
 'LBL_ACTION_EDIT'=>'Rediger',
 'LBL_ACTION_DELETE'=>'Slett',

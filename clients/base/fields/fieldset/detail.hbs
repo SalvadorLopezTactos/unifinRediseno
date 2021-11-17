@@ -11,7 +11,7 @@
  */
 --}}
 {{#each fields}}
-    <div class="fieldset-field">
+    <div class="fieldset-field{{#if this.licensed}} hidden{{/if}}">
         {{placeholder}}
     </div>
 {{/each}}

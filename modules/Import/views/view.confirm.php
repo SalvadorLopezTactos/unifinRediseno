@@ -27,14 +27,24 @@ class ImportViewConfirm extends ImportView
 
         $importModule = $this->request->getValidInputRequest('import_module', 'Assert\Mvc\ModuleName', '');
         $this->ss->assign("IMPORT_MODULE", $importModule);
+
+        $defaultType = 'import';
+        if ($this->isLimitedForModuleInIdmMode($importModule)) {
+            $this->ss->assign('idm_update_mode_only', true);
+            $defaultType = 'update';
+        } else {
+            $this->ss->assign('idm_update_mode_only', false);
+        }
+
         $this->ss->assign(
             'TYPE',
             $this->request->getValidInputRequest(
                 'type',
                 array('Assert\Choice' => array('choices' => array('import', 'update', ''))),
-                'import'
-            ) ?: 'import'
+                $defaultType
+            ) ?: $defaultType
         );
+
         $this->ss->assign("SOURCE_ID", $this->request->getValidInputRequest('source_id'));
 
         $this->instruction = 'LBL_SELECT_PROPERTY_INSTRUCTION';

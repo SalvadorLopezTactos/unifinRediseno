@@ -13,6 +13,7 @@
 
 $dictionary['pmse_Business_Rules'] = array(
     'table' => 'pmse_business_rules',
+    'archive' => false,
     'audited' => false,
     'activity_enabled' => true,
     'duplicate_merge' => true,

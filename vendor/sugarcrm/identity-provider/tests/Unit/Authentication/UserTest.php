@@ -195,4 +195,50 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->user->setSrn($srn);
         $this->assertEquals($srn, $this->user->getSrn());
     }
+
+    public function getFullnameDataProvider(): array
+    {
+        return [
+            'regular case' => [
+                'John Wick',
+                ['given_name' => 'John', 'family_name' => 'Wick'],
+            ],
+            'first name only' => [
+                'John',
+                ['given_name' => 'John', 'family_name' => ''],
+            ],
+            'first name only 2' => [
+                'John',
+                ['given_name' => 'John'],
+            ],
+            'last name only' => [
+                'Wick',
+                ['given_name' => '', 'family_name' => 'Wick'],
+            ],
+            'last name only 2' => [
+                'Wick',
+                ['family_name' => 'Wick'],
+            ],
+            'empty' => [
+                '',
+                ['given_name' => '', 'family_name' => ''],
+            ],
+            'empty 2' => [
+                '',
+                [],
+            ],
+        ];
+    }
+
+    /**
+     * @param string $expected
+     * @param array $attributes
+     * @dataProvider getFullnameDataProvider
+     * @covers ::getFullname
+     */
+    public function testGetFullname(string $expected, array $attributes)
+    {
+        $user = new User('test', 'test', ['attributes' => $attributes]);
+        $this->assertEquals($expected, $user->getFullname());
+    }
 }

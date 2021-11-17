@@ -138,7 +138,9 @@ else $return_action = "DetailView";
 if(isset($_REQUEST['return_id']) && $_REQUEST['return_id'] != "") $return_id = $_REQUEST['return_id'];
 
 $GLOBALS['log']->debug("Saved record with id of ".$return_id);
-//echo "index.php?action=$return_action&module=$return_module&record=$return_id";
-//exit;
-header("Location: index.php?action=$return_action&module=$return_module&record=$return_id");
-?>
+$location = 'index.php?' . http_build_query([
+        'action' => $return_action,
+        'module' => $return_module,
+        'record' => $return_id,
+    ]);
+header("Location: $location");

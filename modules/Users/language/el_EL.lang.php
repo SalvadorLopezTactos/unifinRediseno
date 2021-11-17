@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'Ο κωδικός πρόσβασης που εισάγατε δεν πληρεί τις απαιτήσεις του κωδικού πρόσβασης. Παρακαλώ δοκιμάστε ξανά.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Δεν βρέθηκαν Πληροφορίες Χρήστη',
     'ERR_USER_NAME_EXISTS'              => 'Το όνομα χρήστη {0} ήδη χρησιμοποιείται. Διπλότυπα ονόματα χρήστη δεν επιτρέπονται. Αλλάξτε το όνομα χρήστη ώστε να είνια μοναδικό.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => 'Η άδεια "Sugar Hint" πρέπει να αποθηκευτεί με επιπλέον συμβατό τύπο άδειας',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Αυτός ο χρήστης έχει κλειδωθεί από την εφαρμογή του Sugar και δεν μπορεί να συνδεθεί χρησιμοποιώντας τον υφιστάμενο κωδικό πρόσβασης.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Χρήστης με εξωτερική εξουσιοδότηση μόνο δεν επιτρέπεται να συνδεθεί χρησιμοποιώντας τα διαπιστευτήρια Sugar',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Διεύθυνση Email Παραλήπτη',
 	'ERR_SERVER_STATUS'					=> 'Η κατάσταση του διακομιστή σας',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Το σύστημα δεν είναι σε θέση να στείλει email στον χρήστη. Παρακαλώ ελέγξτε τη Διαμόρφωση του Εξερχόμενου Ταχυδρομείου στις <a href="index.php?module=EmailMan&amp;action=config">Ρυθμίσεις Email</a><div>',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Νέοι χρήστες πρέπει να δημιουργηθούν στο <a href="{0}" target="_blank">Ρυθμίσεις SugarCloud</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Διεύθυνση Email',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Προβλέψεις',
     'LBL_WORKSHEETS'                    => 'Φύλλα εργασίας',
 	'LBL_CALENDARS'                     => 'Ημερολόγια',
+    'LBL_SHIFTS'                        => 'Βάρδιες',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Εξαιρέσεις βάρδιας',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Λήψη μίας ειδοποίησης με email όταν μία εγγραφή ανατίθεται σε εσάς.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email σε Ανάθεση',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Λάβετε μια ειδοποίηση μέσω email όταν κάποιος σας αναφέρει σε μια καταχώρηση καταγραφής σχολίων.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email σε Αναφορά',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Επιλέξτε πώς θα εμφανίζονται τα ονόματα πεδίων στις προβολές εγγραφών. Επιλέξτε "Δίπλα στην Τιμή Πεδίου" για μια πιο σύντομη προβολή εγγραφής.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Τοποθέτηση Ονόματος Πεδίου',
     'LBL_ABOVE_FIELD_VALUE'             => 'Επάνω από την Τιμή Πεδίου',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Τύπος άδειας',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Καθορίστε μια προεπιλογή για τις υπενθυμίσεις των κλήσεων και των συναντήσεων. Οι αναδυόμενες ανακοινώσεις εμφανίζονται σε όλους τους προσκεκλημένους χρησιμοποιώντας το Sugar. Οι υπενθυμίσεις Email στέλνονται σε όλους τους προσκεκλημένους.',
 	'LBL_REMINDER'						=> 'Υπενθυμίσεις',
 	'LBL_REMINDER_POPUP' => 'Αναδυόμενη',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Αυτή η περίοδος συνεδρίας έχει λήξει, επειδή μία άλλη συνεδρία έχει ξεκινήσει κάτω από το ίδιο όνομα χρήστη.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Εκ νέου Ανάθεση Εγγραφών',
-	'LBL_REASS_DESC_PART1'				=> 'Επιλέξτε τις ενότητες που περιέχουν τις εγγραφές που επανεκχωρούνται από έναν συγκεκριμένο χρήστη σε έναν άλλο χρήστη.<br /><br />Πατήστε το κουμπί "Επόμενο" για να δείτε τον αριθμό εγγραφών που θα ενημερωθεί σε κάθε επιλεγμένη ενότητα.',
+    'LBL_REASS_DESC_PART1'              => 'Επιλέξτε τις ενότητες που περιέχουν τις εγγραφές που επανεκχωρούνται από έναν συγκεκριμένο χρήστη σε έναν άλλο χρήστη.<br /><br />Πατήστε το κουμπί "Επόμενο" για να δείτε τον αριθμό εγγραφών που θα ενημερωθεί σε κάθε επιλεγμένη ενότητα.',
         'LBL_REASS_DESC_PART2'=>                    'Επιλέξτε ποιες ενότητες θα αντιτεθούν στην εκτέλεση της ροής εργασίας, στείλτε τις ανακοινώσεις ανάθεσης, και κάντε την καταδίωξη ελέγχου κατά τη διάρκεια της νέας επανεκχώρησης. Πατήστε το κουμπί "Επόμενο" για να συνεχίσετε και επανεκχωρήστε τις εγγραφές. Πατήστε το κουμπί "Επανεκκίνηση" για να ξεκινήσετε από την αρχή.',
 	'LBL_REASS_STEP2_TITLE'				=> 'Ομάδα εκ νέου Ανάθεσης',
 	'LBL_REASS_STEP2_DESC'				=> 'Οι ομάδες που απαριθμήθηκαν παρακάτω ήταν διαθέσιμες από την ομάδα του χειριστή, αλλά όχι στην ομάδα του  χρήστη. Όλες οι εγγραφές Από την ομάδα του Χρήστη δεν θα είναι ορατές στην ομάδα χειριστών εκτός αν οι τιμές ομάδων χαρτογραφούνται.',
@@ -624,7 +628,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Προφίλ Χειριστή',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Παρακαλώ μπείτε στο <a href="%s" target="_blank">Ρυθμίσεις SugarCloud</a> για να κάνετε αλλαγές σε πεδία που είναι μόνο για ανάγνωση.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Επικοινωνήστε με το διαχειριστή Sugar αν θέλετε να κάνετε αλλαγές σε πεδία που είναι μόνο για ανάγνωση.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

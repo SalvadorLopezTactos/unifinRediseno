@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Ausgehende E-Mail-Konten',
     'LBL_MODULE_NAME_SINGULAR' => 'Ausgehendes E-Mail-Konto',
+    'LBL_STATUS' => 'Status',
     'LBL_MAIL_SENDTYPE' => 'E-Mail-Transfer Agent',
     'LBL_MAIL_SMTPSERVER' => 'Server',
     'LBL_MAIL_SMTPPORT' => 'Port',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Dies ist das Systemkonto.',
     'LBL_EMAIL_ADDRESS_ID' => 'E-Mail-Adressen-ID',
     'LBL_TYPE' => 'Typ',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Autorisierte E-Mail-Adresse',
+    'LBL_FROM_EMAIL_ADDRESS' => 'Von E-Mail-Adresse',
     'LBL_REPLY_TO_NAME' => 'Antwort-an Name',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Antwort-an E-Mail-Adressen',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Antwort-an E-Mail-Adressen-ID',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Antwort-an E-Mail-Adresse',
     'LBL_PRIMARY_TEAM' => 'Primäres Team',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für E-Mail-Einstellungen',
 );

@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Konta wychodzących wiadomości e-mail',
     'LBL_MODULE_NAME_SINGULAR' => 'Konto wychodzących wiadomości e-mail',
+    'LBL_STATUS' => 'Status',
     'LBL_MAIL_SENDTYPE' => 'Serwer poczty elektronicznej',
     'LBL_MAIL_SMTPSERVER' => 'Serwer',
     'LBL_MAIL_SMTPPORT' => 'Port',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Jest to konto systemowe.',
     'LBL_EMAIL_ADDRESS_ID' => 'Identyfikator adresu e-mail',
     'LBL_TYPE' => 'Typ',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Autoryzowany adres e-mail',
+    'LBL_FROM_EMAIL_ADDRESS' => 'Adres e-mail nadawcy',
     'LBL_REPLY_TO_NAME' => 'Nazwa adresata',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Adresy e-mail adresata',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID adresu e-mail adresata',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Adres e-mail adresata',
     'LBL_PRIMARY_TEAM' => 'Zespół podstawowy',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy ustawień e-mail',
 );

@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'用户名',
 	'LBL_RESTORE_BUTTON_LABEL'=>'还原',
 	'LBL_SYSTEM_SETTINGS' => '系统设置',
-	'LBL_SKYPEOUT_ON_DESC' => '允许用户使用SkypeOut&reg; 打电话。电话号码要使用正确的格式。电话号码必须要有“+”，“国家代码”，“号码”，例如+1（555）555-1234。',
-	'LBL_SKYPEOUT_ON' => '启用SkypeOut&reg;组件',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut&reg;',
+    'LBL_DIALOUT_ON_DESC' => '允许用户点击电话号码以使用他们的默认电脑电话集成 (CTI) 软件进行呼叫。',
+    'LBL_DIALOUT_ON' => '启用点击呼叫',
+    'LBL_DIALOUT_TITLE' => '呼出电话',
     'LBL_TWEETTOCASE_ON_DESC' => '允许用户从Twitter创建客户反馈',
     'LBL_TWEETTOCASE_ON' => '允许Tweet®与案例反馈集成',
     'LBL_TWEETTOCASE_TITLE' => 'Tweet®到案例反馈',
@@ -363,7 +363,7 @@ $mod_strings = array (
     'JS_ALERT_PDF_WRONG_EXTENSION' => '这个文件没有正确的文件扩展名。',
     'LBL_PDF_INSTRUCTIONS' => '用法说明',
     'PDF_INSTRUCTIONS_ADD_FONT' => <<<BSOFR
-Fonts supported by SugarPDF :
+SugarPDF 支持的字体：
 <ul>
 <li>TrueTypeUnicode (UTF-8 Unicode)</li>
 <li>OpenTypeUnicode</li>
@@ -373,11 +373,11 @@ Fonts supported by SugarPDF :
 <li>CID-0</li>
 </ul>
 <br>
-If you choose to not embed your font in the PDF, the generated PDF file will be lighter but a substitution will be use if the font is not available in the system of your reader.
+如果您选择不将字体嵌入 PDF 中，则生成的 PDF 文件将更亮，但是如果您的阅读器系统中没有该字体，则将使用替代字体。
 <br><br>
-Adding a PDF font to SugarCRM requires to follow steps 1 and 2 of the TCPDF Fonts documentation available in the "DOCS" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>The pfm2afm and ttf2ufm utils are available in fonts/utils in the TCPDF package that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>Load the metric file generated in step 2 and your font file below.
+要添加 PDF 字体到 SugarCRM，需要按照 <a href="http://www.tcpdf.org" tar get="_blank" rel="nofollow noopener noreferrer">TCPDF 网站</a>的“DOCS”部分中 TCPDF Fonts 文档内的第 1 步和第 2 步操作。
+<br><br>pfm2afm 和 ttf2ufm 工具可在 TCPDF 程序包的“字体/工具”中找到，而该程序包可在 <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF 网站</a>的“DOWNLOAD”部分下载。
+<br><br>加载在第 2 步中生成的指标文件和下面的字体文件。
 BSOFR
 ,
     'ERR_MISSING_CIDINFO' => '字段 CID 不能为空。',
@@ -428,6 +428,9 @@ BSOFR
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '*报表模块在移动用户的浏览器视图上无效。',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => '最大长度应大于最小长度',
+    'ERR_MIN_LENGTH_NEGATIVE' => '最小长度应为正值',
+    'ERR_MAX_LENGTH_NEGATIVE' => '最大长度应为正值',
     'ERR_EMPTY_SAML_LOGIN' => 'SAML登入链接不可以留空',
     'ERR_EMPTY_SAML_CERT' => 'SAML证书不可以留空',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML 实体 ID 不能为空',
@@ -441,9 +444,6 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => '活动流',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => '启用活动流',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => '打开应用程序的活动流',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => '启用其他登录画面内容',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => '自动保存流程定义',

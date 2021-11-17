@@ -24,6 +24,7 @@
         Calls: 'fa-phone',
         Emails: 'fa-envelope',
         Meetings: 'fa-calendar',
+        Messages: 'fa-comment',
         Notes: 'fa-file-text',
     },
 
@@ -34,6 +35,7 @@
         'Calls',
         'Emails',
         'Meetings',
+        'Messages',
         'Notes',
     ],
 
@@ -61,7 +63,6 @@
      * @inheritdoc
      */
     initialize: function(options) {
-
         if (options.context) {
             this.baseModule = options.context.get('module');
             this.module = this.baseModule;
@@ -140,7 +141,11 @@
 
             if (contextModel && contextModel.get('_module') === baseModule) {
                 model = contextModel;
-                break;
+
+                var parentHasRowModel = currContext.parent && currContext.parent.has('rowModel');
+                if (!parentHasRowModel) {
+                    break;
+                }
             }
 
             currContext = currContext.parent;
@@ -171,6 +176,7 @@
         }
 
         this.moduleFieldNames = {};
+        this.recordDateFields = {};
         _.each(modules, function(module) {
             this.moduleFieldNames[module.module] = module.fields;
             this.recordDateFields[module.module] = module.record_date || 'date_entered';
@@ -268,7 +274,7 @@
      * Fetch models from related collection if not all models had been fetched
      */
     fetchModels: function() {
-        if (!this.fetchCompleted) {
+        if (!this.fetchCompleted && !_.isUndefined(this.relatedCollection)) {
             this.relatedCollection.fetch({
                 offset: this.relatedCollection.next_offset,
                 success: _.bind(function(coll) {

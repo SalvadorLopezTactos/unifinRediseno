@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'אזהרה: אתה משנ את הגדרות הייבוא האוטומטית שלך מה שעלול לגרום לאובדן נתונים.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'אזהרה: יש להפעיל ייבוא אוטומטי בעת יצירת תיקים אוטומטית.',
 	'LBL_EDIT_LAYOUT' => 'Edit Layout' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'כתובת דואר אלקטרוני',
+    'LBL_EMAIL_PROVIDER' => 'ספק דוא"ל',
+    'LBL_AUTH_STATUS' => 'סטטוס הרשאה',
 );
-?>

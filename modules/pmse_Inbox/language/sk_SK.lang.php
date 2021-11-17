@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'Process Management',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'Unattended Processes',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na procesy',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Informačný panel so záznamom procesov',
+
     'LBL_CAS_ID' => 'Process Number',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Unknown (according UserId:'%s')",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "task has been",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Náhľad návrhu procesu',
     'LBL_PROJECT_RUN_ORDER' => 'Poradie spustenia',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => 'Súčasná aktivita',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => 'Dátum úpravy',
+    'LBL_DATE_ENTERED' => 'Dátum vytvorenia',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'Naozaj chcete nárokovať tento proces?',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'Proces bol úspešne nárokovaný',
 );
 

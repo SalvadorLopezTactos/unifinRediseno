@@ -14,6 +14,7 @@ $mod_strings = array (
 
     // Dashboard Names
     'LBL_FORECASTS_DASHBOARD' => 'Πίνακας Εργαλείων Προβλέψεων',
+    'LBL_FORECASTS_RECORD_DASHBOARD' => 'Πίνακας ελέγχου εγγραφής προβλέψεων',
 
     //module strings.
     'LBL_MODULE_NAME' => 'Προβλέψεις',

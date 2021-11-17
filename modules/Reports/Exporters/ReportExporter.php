@@ -38,6 +38,7 @@ class ReportExporter
      */
     protected $formatMapping = [
         'CSV' => 'CSV',
+        'JSON' => 'JSON',
     ];
 
     /**
@@ -55,6 +56,7 @@ class ReportExporter
      * @param string $type
      * @param string $format
      * @return ReportExporterInterface
+     * @throws \Exception
      */
     protected function getExporter(string $type, string $format) : ReportExporterInterface
     {
@@ -62,7 +64,9 @@ class ReportExporter
         $format = isset($this->formatMapping[$format]) ? $this->formatMapping[$format] : '';
 
         $class = "Sugarcrm\\Sugarcrm\\modules\\Reports\\Exporters\\" . 'Report' . $format . 'Exporter' . $type;
-        $class = class_exists($class) ? $class : 'Notype';
+        if (!class_exists($class)) {
+            throw new \Exception('Report and/or export type is not supported');
+        }
         if (method_exists($class, 'getSubTypeExporter')) {
             $subType = $class::getSubTypeExporter($this->reporter);
             $class .= $subType;

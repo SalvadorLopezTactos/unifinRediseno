@@ -12,6 +12,7 @@
 
 $dictionary['DocumentRevision'] = array(
     'table' => 'document_revisions',
+    'archive' => false,
     'fields' => array(
         'id' => array(
             'name' => 'id',

@@ -92,6 +92,14 @@
             if (app.config.platform === 'portal' && !app.user.get('cookie_consent')) {
                 return;
             }
+            pendo.initialize(this.getPendoMetadata());
+        },
+
+        /**
+         * Returns the pendo visitor and account info object
+         * @return {Object} visitor object, account-info
+         */
+        getPendoMetadata: function() {
             // user data
             var visitorId = app.user.get('site_user_id') || 'unknown_user';
             var userType = app.user.get('type') || 'unknown_user_type';
@@ -111,6 +119,8 @@
             var systemDefaultCurrencyCode = app.currency.getBaseCurrency().iso4217 ||
                 'unknown_system_default_currency_code';
             var systemDefaultLanguage = app.lang.getLanguage() || 'unknown_system_default_language';
+            var awsConnectInstanceName = app.config.awsConnectInstanceName || 'unknown_connect_instance_name';
+            var awsConnectUrl = app.config.awsConnectUrl || 'unknown_connect_url';
 
             var serverInfo = app.metadata.getServerInfo();
             var accountId = serverInfo.site_id || 'unknown_account';
@@ -128,13 +138,16 @@
                 subpanel_items_per_page: listMaxEntriesPerSubpanel,
                 lead_conversion_options: leadConversionOptions,
                 system_default_currency_code: systemDefaultCurrencyCode,
-                system_default_language: systemDefaultLanguage
+                system_default_language: systemDefaultLanguage,
+                aws_connect_instance_name: awsConnectInstanceName,
+                aws_connect_url: awsConnectUrl
             };
             var accountServerInfo = _.each(this.serverInfoDefaults, function(value, name, serverInfoList) {
                 serverInfoList[name] = serverInfo[name] || value;
                 return serverInfoList;
             });
-            pendo.initialize({
+
+            return {
                 visitor: {
                     id: visitorId,
                     user_type: userType,
@@ -143,7 +156,7 @@
                     licenses: licenses
                 },
                 account: _.extend(accountBasicInfo, accountServerInfo)
-            });
+            };
         },
 
         /*

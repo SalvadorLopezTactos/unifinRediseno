@@ -19,21 +19,24 @@ $mod_strings = array (
 	'LBL_CONTRACTS'=>'契約',
 	'LBL_CONTRACTS_SUBPANEL_TITLE'=>'契約',
     'LBL_RLI_SUBPANEL_TITLE' => '商談品目',
+    'LBL_PLI_SUBPANEL_TITLE' => '購入商品',
 	'LBL_QUOTES_SUBPANEL_TITLE' => '見積',
     'LBL_QUOTES_BILLTO' => '見積（請求先）',
     'LBL_QUOTES_SHIPTO' => '見積（出荷先）',
 	'LNK_ACCOUNT_REPORTS' => '取引先レポート',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'ドキュメント',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => '購入',
     // Dashboard Names
     'LBL_ACCOUNTS_LIST_DASHBOARD' => 'アカウント一覧のダッシュボード',
     'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'アカウントレコードのダッシュボード',
+    'LBL_ACCOUNTS_FOCUS_DRAWER_DASHBOARD' => 'アカウントフォーカスドロワー',
     'LBL_ACCOUNTS_MULTI_LINE_DASHBOARD' => 'アカウント詳細',
     'LBL_NEXT_RENEWAL_DATE' => '次回更新日',
-    'LBL_WIDGET_NEXT_RENEWAL_DATE' => 'Date of Next Renewal',
+    'LBL_WIDGET_NEXT_RENEWAL_DATE' => '次回更新日',
     'LBL_RENEWALS_CONSOLE_ACCOUNT_NAME_INDUSTRY' => 'アカウント名/業種',
     'LBL_RENEWALS_CONSOLE_LOCATION' => '場所',
-    'LBL_PURCHASES' => 'Purchases',
+    'LBL_PURCHASES' => '購入',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'アカウント通信',
 
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'チャート',
@@ -80,7 +83,7 @@ $mod_strings = array (
 	'LBL_DESCRIPTION' => '詳細:',
 	'LBL_DUPLICATE' => '重複の可能性がある取引先',
 	'LBL_EMAIL' => 'Eメール:',
-	'LBL_EMAIL_OPT_OUT' => 'メール送信除外:',
+	'LBL_EMAIL_OPT_OUT' => 'Eメール送信除外:',
 	'LBL_EMAIL_ADDRESSES' => 'Eメールアドレス',
 	'LBL_EMPLOYEES' => '従業員:',
 	'LBL_FAX' => 'ファックス:',
@@ -177,6 +180,7 @@ $mod_strings = array (
     'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => '関連取引先担当者のEメール',
     'LBL_FILENAME' => '添付ファイル',
     'LBL_REVENUELINEITEMS' => '商談品目',
+    'LBL_PURCHASED_LINE_ITEMS' => '購入商品',
     'LBL_DUNS_NUM' => 'DUNS:',
     'LBL_NOTES_SUBPANEL_TITLE' => 'メモ',
 
@@ -189,7 +193,7 @@ $mod_strings = array (
 
 - 個々のフィールドまたは「編集」ボタンをクリックして、このレコードのフィールドを編集します。
 - 左下のペインに「データビュー」をトグルしてサブパネル内の他のレコードへのリンクを表示または変更してください。
-- 左下ペインに「アクティビティストリーム」を切り替えることにより、{{activitystream_singular_module}} 内のレコードの変更履歴やユーザのコメントを作成し表示してください。
+- 左下ペインに「アクティビティストリーム」を切り替えることにより、{{activitystream_singular_module}} 内のレコードの変更履歴やユーザーのコメントを作成し表示してください。
 - レコード名の右にあるアイコンを使用して、このレコードをフォローするかお気に入りにしてください。
 - 追加のアクションは、「編集」ボタンの右にあるドロップダウンの「操作」メニューにあります。',
 

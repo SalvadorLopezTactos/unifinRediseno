@@ -599,6 +599,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => '配置门户',
     'LBL_PORTAL_ENABLE_PORTAL' => '启用门户',
     'LBL_PORTAL_ENABLE_SEARCH' => '打开客户反馈前启用搜索',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => '允许门户用户关闭客户反馈',
     'LBL_PORTAL_THEME' => '主题门户',
     'LBL_PORTAL_ENABLE' => '启用',
     'LBL_PORTAL_SITE_URL' => '您的门户站点可访问：',
@@ -790,7 +791,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'当在这个模块上使用全球查询功能来搜索记录时选择使用这个字段。',
+'LBL_POPHELP_REQUIRED'=>"创建公式以确定这个字段在布局中是否为必填。<br/>"
+    . "必填字段将遵循基于浏览器移动视图中的公式，<br/>"
+    . "但不会遵循本地应用程序中的公式，比如用于 iPhone 的 Sugar Mobile。 <br/>"
+    . "它们不会遵循 Sugar 自助服务门户中的公式。",
+'LBL_POPHELP_READONLY'=>"创建公式以确定这个字段在布局中是否为只读。<br/>"
+        . "只读字段将遵循基于浏览器移动视图中的公式，<br/>"
+        . "但不会遵循本地应用程序中的公式，比如 iPhone 版 Sugar Mobile。 <br/>"
+        . "它们不会遵循 Sugar 自助服务门户中的公式。",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'在此模块上使用“全局搜索”搜索记录时，选择使用此字段。',
 //Revert Module labels
 'LBL_RESET' => '重置',
 'LBL_RESET_MODULE' => '复位模块',
@@ -825,6 +834,7 @@ $mod_strings = array(
                 'encrypt'=>'加密',
                 'datetimecombo' =>'日期时间',
                 'decimal'=>'十进制',
+                'autoincrement' => '自动递增',
 ),
 'labelTypes' => array(
     "" => "经常使用的标签",
@@ -842,4 +852,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'所有模块',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} （相关 {1} ID）',
 'LBL_HEADER_COPY_FROM_LAYOUT' => '从布局复制',
+'LBL_RELATIONSHIP_TYPE' => '关系',
 );

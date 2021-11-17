@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Instrumentpanel med lista över kunskapsbas',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Instrumentpanel med poster över kunskapsbas',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för kunskapsbas',
 
     'LBL_MODULE_NAME' => 'Kunskapsbas',
     'LBL_MODULE_NAME_SINGULAR' => 'Kunskapsbasartikel',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Inte användbar',
     'LBL_RATING' => 'Klassificering',
     'LBL_VIEWED_COUNT' => 'Antal visningar',
-    'LBL_DOWNLOAD_ALL' => 'Ladda ner alla',
-    'LBL_DOWNLOAD_ONE' => 'Ladda ner',
-    'LBL_ATTACHMENTS' => 'Bilagor:',
-    'LBL_ADD_ATTACHMENT' => 'Bläddra',
     'LBL_CATEGORIES' => 'Kunskapsbaskategorier',
     'LBL_CATEGORY_NAME' => 'Kategori',
     'LBL_USEFULNESS' => 'Användbarhet',

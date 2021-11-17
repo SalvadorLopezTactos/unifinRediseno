@@ -27,6 +27,7 @@ $mod_strings = array (
 'LIST_ROLES_BY_USER'=>'Список ролей по пользователям',
 'LBL_ROLES_SUBPANEL_TITLE'=>'Роли пользователя',
 'LBL_SEARCH_FORM_TITLE'=>'Найти',
+'LBL_ACTION_RECORD_VIEW'=>'Просмотр записи',
 'LBL_ACTION_VIEW'=>'Просмотр',
 'LBL_ACTION_EDIT'=>'Правка',
 'LBL_ACTION_DELETE'=>'Удаление',

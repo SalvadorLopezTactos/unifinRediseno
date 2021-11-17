@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'لوحة معلومات قائمة العملاء المتوقعين',
     'LBL_LEADS_RECORD_DASHBOARD' => 'لوحة معلومات سجل العملاء المتوقعين',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم العملاء المتوقعين',
 
     'ERR_DELETE_RECORD' => 'يجب أن يتم تحديد رقم السجل لحذف العميل المتوقع.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'وصف الحساب',
@@ -325,4 +326,8 @@ $mod_strings = array (
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'تعذر تغيير حالة {{moduleSingular}}. تم تحويل {{moduleSingular}} بالفعل.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'التنبؤ بتحول العملاء المتوقعين',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'عرض تفاصيل التنبؤ لعميل متوقع معين',
 );

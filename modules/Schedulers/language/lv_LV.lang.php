@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Ieplānotais uzdevums',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Atjaunot denormalizētos komandas drošības datus',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Darbību plūsmas attīrīšana',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Atjaunināt produkta definīciju',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Apstrādes laiks - grafiki',
+'LBL_OOTB_DATA_ARCHIVER' => 'Ieslēgt aktīvos datu arhīvus/izdzēšanas',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervāls:',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'Vienmēr',
 'LBL_CATCH_UP' => 'Izpildīt, ja neveiksmīgs',
+'LBL_SYSTEM_JOB' => 'Pašreizējā uzdevuma sistēma?',
 'LBL_CATCH_UP_WARNING' => 'Neatzīmēt, ja procesa izpildei vajaga daudz laika.',
 'LBL_DATE_TIME_END' => 'Beigu datums un laiks',
 'LBL_DATE_TIME_START' => 'Sākuma datums un laiks',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Noņemt diagnostikas rīka failus',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Noņemt pagaidu failus',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Atjaunot denormalizētos komandas drošības datus',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Atjaunināt produkta definīciju',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Masveida e-pasta kampaņas izpildīt pa nakti',
 'LBL_ASYNCMASSUPDATE' => 'Notiek asinhronas masveida izmaiņas (Mass Update)',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'Attīrīšanas uzdevumu rinda',
 'LBL_CLEANOLDRECORDLISTS' => 'Iztīrīt vecos ierakstus',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Darbību plūsmas attīrīšana',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Apstrādes laiks - grafiki',
 'LBL_PMSEENGINECRON' => 'SugarBPM Plānotājs',
 );
 

@@ -19,15 +19,14 @@ interface OnlineOperations
     public function updateBean(SugarBean $bean, string $fieldName): void;
 
     public function updateLinkedBean(
-        SugarBean $bean,
-        string $linkedFieldName,
-        string $linkedKey,
+        string $relateRecordId,
         ?string $joinTableName,
         ?string $joinPrimaryKey,
         ?string $joinLinkedKey,
-        string $denormFieldName,
+        string $denormalizedFieldName,
         string $primaryTableName,
-        string $primaryKey
+        string $primaryKey,
+        $value
     ): void;
 
     public function updateBeanWithLinkId(

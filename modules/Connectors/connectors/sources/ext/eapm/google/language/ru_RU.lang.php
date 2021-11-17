@@ -9,32 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+
+$readableProductNames =
+    getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($GLOBALS['current_user']));
+$readableProductNames = urlencode(implode(',', $readableProductNames));
+
+$url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar_flavor'] . '&version=' .
+    $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&module=Connectors&route=Google' .
+    $readableProductNames;
 
 $connector_strings = array(
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Получите ключ API и Секретный ключ от Google, зарегистрировав свою систему SugarCRM в качестве нового приложения.
-<br/><br>Шаги для регистрации вашей системы:
-<br/><br/>
-<ol>
-<li>Перейдите на веб-сайт Google Developers:
-<a href=\'https://console.developers.google.com/project\'
-target=\'_blank\'> https://console.developers.google.com/project</a>.</li>
-
- <li>Войдите, используя аккаунт Google, в котором вы хотите зарегистрировать приложение.</li>
-<li>Создайте новый проект</li>
-<li>Введите имя проекта и нажмите кнопку «Create» (Создать).</li>
-<li>После создания проекта включите Google Диск и API контактов Google</li>
-<li>В разделе APIs & Auth (API и полномочия) > Credentials (Учетные данные) создайте новый идентификатор клиента</li>
-<li>Выберите пункт Web Application (Веб-приложение) и нажмите кнопку Configure conscent screen (Настройки соглашения)</li>
-<li>Введите название продукта и нажмите кнопку Save (Сохранить)</li>
-<li>В разделе Authorized redirect URIs (Разрешенные для перенаправления универсальные идентификаторы ресурсов) введите следующий URL-адрес: {$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>
-<li>Нажмите кнопку Create client id (Создать идентификатор клиента)</li>
-<li>Скопируйте идентификатор и секретный ключ клиента в поля ниже</li>
-
-</li>
-</ol>
-</td></tr>
-</table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .
+        'Зарегистрируйте свой экземпляр Sugar в Google, чтобы включить конфигурацию учетных записей Google для использования в Sugar. ' .
+        'См. <a href="https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$lang}&module=Connectors&route=Google" target=\'_blank\'>' .
+        '\' target=\'_blank\'>документацией о соединителях</a>, чтобы узнать больше.</td></tr></table>',
     'oauth2_client_id' => 'Идентификатор клиента',
     'oauth2_client_secret' => 'Секретный ключ клиента',
 );

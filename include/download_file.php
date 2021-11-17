@@ -71,7 +71,7 @@ class DownloadFile {
         } else {
             header("Content-Type: application/force-download");
             header("Content-type: application/octet-stream");
-            header("Content-Disposition: attachment; filename=\"".$info['name']."\"");
+            header("Content-Disposition: attachment; filename=\"" . $this->cleanFilename($info['name']) . "\"");
         }
         header("X-Content-Type-Options: nosniff");
         header("Content-Length: " . filesize($info['path']));
@@ -79,7 +79,7 @@ class DownloadFile {
         set_time_limit(0);
         ob_start();
 
-            readfile($info['path']);
+        readfile($info['path']);
         @ob_end_flush();
     }
 
@@ -224,6 +224,23 @@ class DownloadFile {
         } else {
             return null;
         }
+    }
+
+    /**
+     * Cleans a filename for placement in response headers
+     *
+     * @param string $filename the filename to clean
+     * @return string|string[]
+     */
+    protected function cleanFilename(string $filename)
+    {
+        if (!empty($filename)) {
+            // header() will complain if there are newline characters in a given
+            // header. For filename headers, this will cause files to download
+            // simply as "filename" rather than the actual filename
+            $filename = str_replace(["\r", "\n"], '', $filename);
+        }
+        return $filename;
     }
 
     /**
@@ -398,7 +415,7 @@ class DownloadFileApi extends DownloadFile
             if(empty($info['name'])) {
                 $info['name'] = pathinfo($info['path'], PATHINFO_BASENAME);
             }
-            $this->api->setHeader("Content-Disposition", "attachment; filename=\"".$info['name']."\"");
+            $this->api->setHeader("Content-Disposition", "attachment; filename=\"" . $this->cleanFilename($info['name']) . "\"");
         }
         $this->api->fileResponse($info['path']);
     }

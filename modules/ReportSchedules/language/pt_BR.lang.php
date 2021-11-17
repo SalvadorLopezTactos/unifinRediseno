@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Por Relatório',
     'LBL_RECENTLY_MODIFIED' => 'Modificado recentemente',
     'LBL_RECORD_SAVED_SUCCESS' => 'Criação de {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> feita com sucesso. Abra a agenda para adicionar usuários pelo subpainel de usuários.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Esta agenda de relatórios',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Painel de registros de agendas de relatórios',
 );

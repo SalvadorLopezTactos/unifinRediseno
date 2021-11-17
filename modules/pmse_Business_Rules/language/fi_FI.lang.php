@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Prosessiyrityssäännöt',
   'LBL_MODULE_NAME_SINGULAR' => 'Prosessiyrityssääntö',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Yrityssääntöjen prosessointi -tietolaatikko',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Yrityssääntöjen prosessointitietueiden työpöytä',
   'LBL_RST_UID' => 'Yrityssäännön ID',
   'LBL_RST_TYPE' => 'Yrityssäännön tyyppi',
   'LBL_RST_DEFINITION' => 'Yrityssäännön määritelmä',

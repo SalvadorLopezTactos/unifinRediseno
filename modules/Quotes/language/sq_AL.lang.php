@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Paneli i listës së kuotimeve',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të kuotave',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te kuotimet',
 
     'LBL_CONTRACTS'=>'Kontratat',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Kontratat',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Shteti i faturës',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Kodi postal i faturës',
     'LBL_BILLING_ADDRESS_STATE' => 'Shteti i faturës',
-    'LBL_BILLING_ADDRESS_STREET' => 'Adresa e faturës',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Adresa e faturës:',
     'LBL_BILLING_CONTACT_ID' => 'Id e kontaktit të faturës',
     'LBL_BILLING_CONTACT_NAME' => 'Emri i kontaktit të faturës',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Shteti i transportit',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Kodi postal i transportit',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Shteti i transportit',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Adresa e transportit',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Adresa e transportit',
     'LBL_SHIPPING_BODY' => 'Faturimi dhe dërgesa',
     'LBL_SHIPPING_CONTACT_ID' => 'Id e kontaktit të transportit',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Kopjo adresën e faturës në adresën e transportit',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Kopjo adresën e transportit në adresën e faturës',
     'NTC_COPY_BILLING_ADDRESS2' => 'Kopjo në transport',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopjo në faturë',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'A jeni i sigurt që dëshironi të largoni këtë koment nga ofertës?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopjo në faturë',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'A jeni i sigurt që dëshironi të largoni këtë koment nga ofertës?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'A jeni i sigurt që dëshironi të largoni këtë linjë nga ofertës?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'A jeni i sigurt që dëshironi të largoni këtë grup nga ofertës?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'A jeni i sigurt që dëshironi të largoni këtë kontaktt nga ofertës?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Sasia',
     'LBL_MFT_PART_NUM' => 'Numri i pjesës',
     'LBL_ITEM_NAME' => 'Artikulli në rresht',
+    'LBL_PRODUCT_TEMPLATE' => 'Produkti',
     'LBL_DISCOUNT_PRICE' => 'Çmimi i njësisë',
     'LBL_DISCOUNT_AMOUNT' => 'Skontoja',
     'LBL_LINE_ITEM_TOTAL' => 'Totali i artikujve në rresht',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'ID e mundësisë',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Konfigurimi i kuotave',
+
+    'LBL_RENEWAL' => 'Rnovimi',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Ndërveprimet e kuotës',
 );

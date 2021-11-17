@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Utgående e-postkonton',
     'LBL_MODULE_NAME_SINGULAR' => 'Utgående e-postkonto',
+    'LBL_STATUS' => 'Status',
     'LBL_MAIL_SENDTYPE' => 'Agent för överföring av email',
     'LBL_MAIL_SMTPSERVER' => 'Server',
     'LBL_MAIL_SMTPPORT' => 'Port',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Detta är systemkontot.',
     'LBL_EMAIL_ADDRESS_ID' => 'E-postadress ID',
     'LBL_TYPE' => 'Typ',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Auktoriserad e-postadress',
+    'LBL_FROM_EMAIL_ADDRESS' => 'Från e-postadress',
     'LBL_REPLY_TO_NAME' => 'Svarsnamn',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Svars-e-postadresser',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Svars-e-postadress-ID',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Svars-e-postadress',
     'LBL_PRIMARY_TEAM' => 'Förstateam',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för e-postinställningar',
 );

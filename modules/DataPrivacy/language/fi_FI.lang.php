@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Poistettavaksi merkityt kentät',
     'LBL_NO_RECORDS_MARKED' => 'Ei poistettaviksi merkittyjä kenttiä tai tietueita.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Tietosuojatietueiden työpöytä',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Tietosuoja-tietolaatikko',
 
     // list view
     'LBL_HELP_RECORDS' => 'Tietosuojamoduuli tukee organisaation tietosuojatoimenpiteitä jäljittämällä tietosuojatoimet, mukaan lukien suostumus- ja aihepyynnöt. Luo henkilön tietueeseen liittyvät tietosuojatietueet (esim. yhteystieto) jotta voit jäljittää suostumuksen tai toimia tietosuojapyynnön mukaan.',

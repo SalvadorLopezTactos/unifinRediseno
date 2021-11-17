@@ -35,6 +35,46 @@ class OpportunitiesSeedData {
      */
     protected static $db;
 
+    protected static $products = [];
+
+    protected static function hasProductLicense(string $product) : bool
+    {
+        if (!empty(static::$products)) {
+            return array_key_exists($product, static::$products);
+        }
+
+        if (empty(self::$db)) {
+            self::$db = DBManagerFactory::getInstance();
+        }
+
+        $sql = "SELECT value FROM config WHERE category = 'license' AND name = 'subscription'";
+        $data = self::$db->getOne($sql);
+        $data = json_decode($data);
+
+        if ($data && isset($data->subscription) && isset($data->subscription->addons)) {
+            $addons = $data->subscription->addons;
+
+            $check = [
+                'SELL' => 'sell',
+                'SERVE' => 'serve',
+                'ENT' => 'enterprise',
+                //'HINT' => 'hint',
+            ];
+
+            foreach ($addons as $addon) {
+                if (!empty($addon->product_code_c)) {
+                    if (isset($check[$addon->product_code_c])) {
+                        static::$products[$check[$addon->product_code_c]] = true;
+                    }
+                }
+            }
+
+            return array_key_exists($product, static::$products);
+        }
+
+        return false;
+    }
+
     /**
      * populateSeedData
      *
@@ -70,6 +110,7 @@ class OpportunitiesSeedData {
         /* @var $opp Opportunity */
         $opp = BeanFactory::newBean('Opportunities');
         $oppFieldDefs = $opp->getFieldDefinitions();
+        $oppIndices = $opp->getIndices();
         $oppDbData = self::toDatabaseArray($opp);
         $oppSql = 'INSERT INTO '. $opp->table_name . ' ('. join(',', array_keys($oppDbData)) . ') VALUES';
         $oppRows = array();
@@ -87,7 +128,7 @@ class OpportunitiesSeedData {
 
         if ($usingRLIs) {
             // load up the product template_ids
-            $sql = 'SELECT id, list_price, cost_price, discount_price, category_id, mft_part_num, list_usdollar, 
+            $sql = 'SELECT id, list_price, cost_price, discount_price, category_id, mft_part_num, list_usdollar,
                         cost_usdollar, discount_usdollar, tax_class, weight, service, renewable, service_duration_value,
                         service_duration_unit
                   FROM product_templates WHERE deleted = 0';
@@ -111,6 +152,7 @@ class OpportunitiesSeedData {
         $fw->date_modified = $now;
 
         $fwFieldDefs = $fw->getFieldDefinitions();
+        $fwIndices = $fw->getIndices();
         $fwRows = array();
         $fwDbData = self::toDatabaseArray($fw);
         $fwSql = 'INSERT INTO ' . $fw->table_name . '(' . join(',', array_keys($fwDbData)) . ') VALUES';
@@ -191,6 +233,7 @@ class OpportunitiesSeedData {
 
             $sqlValues = array();
             foreach($values as $key => $value) {
+                $value = self::evaluateIndexedValue($key, $value, $oppIndices);
                 $sqlValues[] = self::$db->massageValue($value, $oppFieldDefs[$key]);
             }
             $oppRows[] = '(' . join(',', $sqlValues) . ')';
@@ -206,6 +249,7 @@ class OpportunitiesSeedData {
 
                 $sqlValues = array();
                 foreach ($fwValues as $key => $value) {
+                    $value = self::evaluateIndexedValue($key, $value, $fwIndices);
                     $sqlValues[$key] = self::$db->massageValue($value, $fwFieldDefs[$key]);
                 }
                 $fwRows[] = '(' . join(',', $sqlValues) . ')';
@@ -279,6 +323,7 @@ class OpportunitiesSeedData {
             /* @var $opp Opportunity */
             $opp = BeanFactory::newBean('Opportunities');
             $oppFieldDefs = $opp->getFieldDefinitions();
+            $oppIndices = $opp->getIndices();
             $oppSalesStageFieldDef = $oppFieldDefs['sales_stage'];
             $opp->id = create_guid();
 
@@ -293,6 +338,7 @@ class OpportunitiesSeedData {
             $fw->date_modified = $now;
 
             $fwFieldDefs = $fw->getFieldDefinitions();
+            $fwIndices = $fw->getIndices();
             $fwRows = array();
             $fwDbData = self::toDatabaseArray($fw);
             $fwSql = 'INSERT INTO ' . $fw->table_name . '(' . join(',', array_keys($fwDbData)) . ') VALUES';
@@ -300,6 +346,7 @@ class OpportunitiesSeedData {
             /* @var $rli RevenueLineItem */
             $rli = BeanFactory::newBean('RevenueLineItems');
             $rliFieldDefs = $rli->getFieldDefinitions();
+            $rliIndices = $rli->getIndices();
             $rliSql = array();
             $rliDbData = self::toDatabaseArray($rli);
             $sqlRli = 'INSERT INTO '. $rli->table_name . '('. join(',', array_keys($rliDbData)) . ') VALUES';
@@ -307,6 +354,9 @@ class OpportunitiesSeedData {
             foreach (array_keys($serviceOpp) as $arrKey) {
                 $rli->$arrKey = $serviceOpp[$arrKey];
             }
+
+            // For sell based purchase generation
+            $rli->generate_purchase = static::hasProductLicense('sell') ? 'Yes' : '';
 
             // Updating RLI for renewal opp
             $rli->service_start_date = $timedate->fromString($rli->service_end_date)->modify('+1 day')->asDbDate();
@@ -327,6 +377,7 @@ class OpportunitiesSeedData {
 
             $sqlValues = array();
             foreach ($values as $key => $value) {
+                $value = self::evaluateIndexedValue($key, $value, $rliIndices);
                 $sqlValues[] = self::$db->massageValue($value, $rliFieldDefs[$key]);
             }
 
@@ -339,6 +390,7 @@ class OpportunitiesSeedData {
             $fwValues = self::toDatabaseArray($fw);
             $sqlValues = array();
             foreach ($fwValues as $key => $value) {
+                $value = self::evaluateIndexedValue($key, $value, $fwIndices);
                 $sqlValues[$key] = self::$db->massageValue($value, $fwFieldDefs[$key]);
             }
             $fwRows[] = $sqlValues;
@@ -406,6 +458,10 @@ class OpportunitiesSeedData {
             $opp->name .= ' - ' . $oppUnits . ' Renewal';
             $opp->sales_status = $app_list_strings['sales_status_dom']['In Progress'];
 
+            if (!in_array($rli->sales_stage, $rli->getClosedStages())) {
+                $opp->service_open_revenue_line_items++;
+            }
+
             if (!$usingRLIs) {
                 $seed = rand(1, 15);
                 if ($seed % 2 == 0) {
@@ -436,6 +492,7 @@ class OpportunitiesSeedData {
 
             $sqlValues = array();
             foreach ($values as $key => $value) {
+                $value = self::evaluateIndexedValue($key, $value, $oppIndices);
                 $sqlValues[] = self::$db->massageValue($value, $oppFieldDefs[$key]);
             }
             $oppRows[] = '(' . join(',', $sqlValues) . ')';
@@ -451,6 +508,7 @@ class OpportunitiesSeedData {
 
                 $sqlValues = array();
                 foreach ($fwValues as $key => $value) {
+                    $value = self::evaluateIndexedValue($key, $value, $fwIndices);
                     $sqlValues[$key] = self::$db->massageValue($value, $fwFieldDefs[$key]);
                 }
                 $fwRows[] = '(' . join(',', $sqlValues) . ')';
@@ -493,6 +551,7 @@ class OpportunitiesSeedData {
         $opp->total_revenue_line_items = $rlis_to_create;
         $opp->closed_revenue_line_items = 0;
         $opp->included_revenue_line_items = 0;
+        $opp->service_open_revenue_line_items = 0;
 
         $closedWon = 0;
         $closedLost = 0;
@@ -503,6 +562,7 @@ class OpportunitiesSeedData {
         /* @var $rli RevenueLineItem */
         $rli = BeanFactory::newBean('RevenueLineItems');
         $rliFieldDefs = $rli->getFieldDefinitions();
+        $rliIndices = $rli->getIndices();
         $rliSql = array();
         $sqlRli = 'INSERT INTO '. $rli->table_name . '('. join(',', array_keys(self::toDatabaseArray($rli))) . ') VALUES';
 
@@ -516,6 +576,7 @@ class OpportunitiesSeedData {
         $fw->modified_user_id = $opp->modified_user_id;
         $fw->created_by = $opp->created_by;
         $fwFieldDefs = $fw->getFieldDefinitions();
+        $fwIndices = $fw->getIndices();
         $fwRows = array();
         $fwSql = 'INSERT INTO '. $fw->table_name . '('. join(',', array_keys(self::toDatabaseArray($fw))) . ') VALUES';
 
@@ -641,7 +702,13 @@ class OpportunitiesSeedData {
                 $opp->name = $rli->name;
                 $rli->service_start_date = $rli->date_closed;
                 $rli->service_end_date = self::setServiceEndDate($rli);
+                if (!in_array($rli->sales_stage, $rli->getClosedStages())) {
+                    $opp->service_open_revenue_line_items++;
+                }
             }
+
+            // For sell based purchase generation
+            $rli->generate_purchase = !$isClosed && static::hasProductLicense('sell') ? 'Yes' : '';
 
             $rli->total_amount = (($rli->discount_price-$rli->discount_amount)*$rli->quantity);
             $rli->id = create_guid();
@@ -650,11 +717,11 @@ class OpportunitiesSeedData {
             $rli->modified_user_id = $opp->modified_user_id;
             $rli->created_by = $opp->created_by;
 
-
             $values = self::toDatabaseArray($rli);
 
             $sqlValues = array();
             foreach($values as $key => $value) {
+                $value = self::evaluateIndexedValue($key, $value, $rliIndices);
                 $sqlValues[] = self::$db->massageValue($value, $rliFieldDefs[$key]);
             }
 
@@ -668,6 +735,7 @@ class OpportunitiesSeedData {
 
             $sqlValues = array();
             foreach($fwValues as $key => $value) {
+                $value = self::evaluateIndexedValue($key, $value, $fwIndices);
                 $sqlValues[$key] = self::$db->massageValue($value, $fwFieldDefs[$key]);
             }
             $fwRows[] = $sqlValues;
@@ -854,6 +922,39 @@ class OpportunitiesSeedData {
         }
         $now->setTime(0, 0, 0); // always default it to midnight
         return $timedate->asDbDate($now->get_day_begin($day));
+    }
+
+    /**
+     * @static evaluates indexed value
+     * @param string $name field name from a bean
+     * @param int|string|null $value field value from a bean
+     * @param array $indices index definitions of the module
+     * @return
+     */
+    public static function evaluateIndexedValue(string $name, $value, array $indices)
+    {
+        $indexDef = [];
+        // Most indices don't have the field name defined as key in the $indices array, even it does,
+        // we cannot rely on the key as a valid field name, so we need to find out if it exists
+        // in the 'fields' of $index meta data.
+        foreach ($indices as $key => $index) {
+            if (!empty($index['fields']) &&
+                is_array($index['fields']) &&
+                in_array($name, $index['fields'])) {
+                $indexDef = $index;
+                break;
+            }
+        }
+
+        // Field with unique index type and has empty value should return null because DBs treat
+        // empty string as unique value, null as not set. Thus, such empty field value needs to be
+        // converted to null to avoid inserting duplicate entry error for database.
+        if (empty($value) &&
+            isset($indexDef['type']) &&
+            $indexDef['type'] === 'unique') {
+            return null;
+        }
+        return $value;
     }
 
     /**

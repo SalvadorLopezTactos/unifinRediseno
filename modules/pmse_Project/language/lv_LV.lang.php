@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Procesu definīcijas',
   'LBL_MODULE_NAME_SINGULAR' => 'Procesu definīcijas',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Procesu definīciju fokusa panelis',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Procesu definīciju instrumentu panelis',
   'LNK_LIST' => 'Skatīt procesu definīcijas',
   'LNK_NEW_PMSE_PROJECT' => 'Izveidot procesa definīciju',
   'LNK_IMPORT_PMSE_PROJECT' => 'Importēt procesa definīciju',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Mainīt piešķirto lietotāju',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Darba grupa',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Izvēlēties jaunu procesa lietotāju',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'E-pasts',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'E-pasta procesa lietotājs, kad process ir piešķirts',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'Lietotāja definīcija',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Piešķiršanas metode',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Piešķirt lietotāju',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Atjaunināt "Piešķirts" ierakstā',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Iestatiet "Piešķirts lietotājam" pēc pieejamības',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Pievienot saistīto ierakstu',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Saistītais modulis',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Aktivitātes nosaukums ir tukšs.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Nosaukums "%s" jau eksistē objektu grupā.',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Nepieciešamā maiņas pieejamība',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Ja nav pieejamu lietotāju',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'pirms',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Tikai jaunie ieraksti',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Tikai atjauninātie ieraksti (Pirmais atjauninājums - skat. palīga tekstu)',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Tikai atjauninātie ieraksti (Vsis atjauninājumi - skat. palīga tekstu)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Jauni ieraksti vai pirmais atjauninājums',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Jauni ieraksti vai visi atjauninājumi',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Izvēlēties, kad šis process sāksies. <br><br>Jauns: Palaist procesu, kad tiek izveidots jauns ieraksts. <br> <br>Pirmais atjauninājums: Process tiek palaists tikai pirmo reizi, kad tiek izpildīti kritēriji par esošo ierakstu. <br><br>Visi atjauninājumi: Process tiek palaists katru reizi, kad tiek izpildīti kritēriji par esošo ierakstu.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Atlasiet, kad process sāksies.<br><br>Jauns: Palaidiet procesu, kad ir izveidots jauns ieraksts.<br><br>Pirmais atjauninājums: Process tiek palaists tikai tad, kad pirmo reizi izpildās kritēriji esošajam ierakstam.<br><br>Visi atjauninājumi: Process tiek palaists katru reizi, kad izpildās kritēriji esošajam ierakstam.<br><br>Jauni ieraksti vai pirmais atjauninājums: Process tiek palaists tikai tad, kad pirmo reizi izpildās kritēriji ierakstam, ieraksta izveides vai atjaunināšanas laikā.<br><br>Jauni ieraksti vai visi atjauninājumi: Process tiek palaists katru reizi visiem jaunajiem un esošajiem ierakstiem.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Izvēlieties SugarCRM moduli, uz kuru attiecināt notikuma triggeri',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Fiksēts datums',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'mainās no',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'mainās uz',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'ietver jebkuru',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'neietver jebkuru',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'ne agrāk par',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'ne vēlāk par',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'nav vienāds ar',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Pievienot',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Aizvērt',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'Visas komandas, kurām ir piešķirts ieraksts',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Darba grupas',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% saistīs ar %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Lietotājs, kurš izveidoja %MODULE%',

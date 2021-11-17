@@ -115,7 +115,8 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Nënvizimi i Sugar është shtuar',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Panelet do të ri-organizohen, jeni të sigurt që dëshironi të ndryshoni planin e kolonës?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'A jeni të sigurt që dëshironi të largoni nënvizimin e Sugar?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Asnjë panel nuk është konfiguruar.',
+  'LBL_NO_DASHBOARD_CONFIGURED' => 'Asnjë panel nuk është konfiguruar',
+  'LBL_NO_DASHLETS_CONFIGURED' => 'Asnjë nënvizim nuk është konfiguruar',
   'LBL_CREATE_DASHBOARD_LINK' => 'Krijo panel',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Web faqe',
@@ -123,7 +124,7 @@ $mod_strings = array (
   'LBL_DASHLET_WEBPAGE_URL' => 'URL',
   'LBL_DASHLET_WEBPAGE_URL_HELP' => 'Disa faqe mund të mos hapen si duhet për shkak të përmbajtjes së pasigurt dhe politikave.',
 
-  'LBL_DASHLET_ADD' => 'Shtoni panel',
+  'LBL_DASHLET_ADD' => 'Shto nënvizim',
   'LBL_DASHLET_DELETE' => 'Fshi nënvizimet e Sugar',
   'LBL_DASHLET_REFRESH' => 'Rifresko nënvizimet e Sugar',
   'LBL_DASHLET_EDIT' => 'Ndrysho nënvizimet e Sugar',
@@ -218,7 +219,6 @@ $mod_strings = array (
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - Një kalendar për hyrjen në datat e krijuara nga Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - Biblioteka për krijimin e dokumenteve PDF të krijuar nga Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - ImplWebDAV Server në PHP.',
-  'LBL_SOURCE_PCLZIP' => 'PclZip - Biblioteka ofron ngjeshjen dhe funksionet e nxjerrjes për arkivat Zip formatuar nga Vincent Blavet',
   'LBL_SOURCE_SMARTY' => 'Smarty - Model makinë për PHP.',
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! Përdoruesi i ndërfaqes së Bibliotekës - Shërbimet e Bibliotekës UI lehtësojnë implementimin e pasur të klientit-anësorë të karakteristikave.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - Paraqitja e emailit të plotë transferimi i klasës për PHP',

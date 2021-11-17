@@ -34,10 +34,8 @@ class Administration extends SugarBean {
         'honeypot',
         'sugarpdf',
         'base',
-
-
         'license',
-
+        'csp',
     );
     var $disable_custom_fields = true;
     public $checkbox_fields = array(
@@ -311,14 +309,17 @@ class Administration extends SugarBean {
         }
         $this->settings[$category] = true;
 
-        // outbound email settings
-        $oe = new OutboundEmail();
+        // We only need this if we are requesting all categories or the mail category
+        if ($category === false || $category === 'mail') {
+            // outbound email settings
+            $oe = new OutboundEmail();
 
-        if ($oe->getSystemMailerSettings(false)) {
-            foreach ($oe->field_defs as $name => $value) {
-                // Only set the value if the key starts with "mail_".
-                if (strpos($name, 'mail_') === 0) {
-                    $this->settings[$name] = $oe->$name;
+            if ($oe->getSystemMailerSettings(false)) {
+                foreach ($oe->field_defs as $name => $value) {
+                    // Only set the value if the key starts with "mail_" or is oauth2 field.
+                    if ($name === 'eapm_id' || $name === 'authorized_account' || strpos($name, 'mail_') === 0) {
+                        $this->settings[$name] = $oe->$name;
+                    }
                 }
             }
         }
@@ -359,6 +360,8 @@ class Administration extends SugarBean {
                 $sea = new SugarEmailAddress();
                 $oe->email_address_id = $sea->getEmailGUID($val);
                 $oe->email_address = $val;
+            } elseif ($key === 'eapm_id' || $key === 'authorized_account') {
+                $oe->$key = $val;
             }
         }
 

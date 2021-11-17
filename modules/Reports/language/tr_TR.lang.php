@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Bu eylemin Drillthrough Rapor verisi alınırken hata oluştu. Destek için rapor sahibiyle iletişime geçin.',
     'LBL_CHART_NO_DRILLTHRU' => 'Drill through kullanılamıyor',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Raporlar Odak Bölmesi',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'Bir liste görünümü, mevcut arama kriterlerine uyan ve kullanıcıların erişim hakkı olan bütün raporları gösterir. Her raporun temel ayrıntılarını liste görünümünün alan sütunlarında veya ön izlemede görebilirsiniz. Raporu görmek için raporun adına tıklayın veya rapor üzerinde değişiklik yapmak için aksiyon menüsünde &#39;Raporu Düzenle&#39; seçeneğini seçin.  ',

@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Rapora Göre',
     'LBL_RECENTLY_MODIFIED' => 'Son Değiştirilen',
     'LBL_RECORD_SAVED_SUCCESS' => '{{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> başarılı şekilde oluşturdunuz. Kullanıcılar alt pabeli üzerinden kullanıcılar eklemek için planı açın.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Bu Rapor Planı',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Rapor Planları Kayıt Panosu',
 );

@@ -591,6 +591,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'Portál konfigurálása',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Portál engedélyezése',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Keresés engedélyezése az eset megnyitása előtt',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Esetzárások engedélyezése a portál felhasználói számára',
     'LBL_PORTAL_THEME' => 'Portál téma',
     'LBL_PORTAL_ENABLE' => 'Engedélyezés',
     'LBL_PORTAL_SITE_URL' => 'Az Ön portál oldala:',
@@ -782,7 +783,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Válassza ki ezt a mezőt amennyiben átfogó keresést kíván végezni ebben a modulban!',
+'LBL_POPHELP_REQUIRED'=>"Hozzon létre képletet annak meghatározására, hogy a mező kitöltése kötelező-e az elrendezésekben.<br/>"
+    . "A kötelező mezők követik a képletet a böngészőalapú mobilnézetben, <br/>"
+    . "de nem követik a képletet a natív alkalmazásokban, így például a Sugar Mobile for iPhone alkalmazásban. <br/>"
+    . "Nem követik a képletet a Sugar Önkiszolgáló Portálban.",
+'LBL_POPHELP_READONLY'=>"Hozzon létre képletet annak meghatározására, hogy a mező csak olvasható legyen-e az elrendezésekben.<br/>"
+        . "A csak olvasható mezők követik a képletet a böngészőalapú mobilnézetben, <br/>"
+        . "de nem követik a képletet a natív alkalmazásokban, így például a Sugar Mobile alkalmazásban iPhone-ra. <br/>"
+        . "Nem követik a képletet a Sugar Önkiszolgáló Portálban.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Használja ezt a mezőt, ha a Globális kereső használatával szeretne bejegyzéseket keresni ebben a modulban.',
 //Revert Module labels
 'LBL_RESET' => 'Visszaállít',
 'LBL_RESET_MODULE' => 'Modul visszaállítása',
@@ -817,6 +826,7 @@ $mod_strings = array(
                 'encrypt'=>'Titkosított',
                 'datetimecombo' =>'Dátum-Idő',
                 'decimal'=>'Decimális',
+                'autoincrement' => 'Automatikus növelés',
 ),
 'labelTypes' => array(
     "" => "gyakran használt címkék",
@@ -834,4 +844,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'Minden modul',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (kapcsolódó {1} azon.)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Másolás az elrendezésből',
+'LBL_RELATIONSHIP_TYPE' => 'Kapcsolat',
 );

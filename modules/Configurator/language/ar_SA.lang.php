@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'اسم المستخدم',
 	'LBL_RESTORE_BUTTON_LABEL'=>'استعادة',
 	'LBL_SYSTEM_SETTINGS' => 'إعدادات النظام',
-	'LBL_SKYPEOUT_ON_DESC' => 'تمكين المستخدمين من النقر فوق أرقام الهواتف لإجراء المكالمات باستخدام SkypeOut&reg;. يجب أن تكون الأرقام منسقة بشكل صحيح لاستخدام هذه الميزة. ولذا، يجب أن يكون "+" "رمز البلد" "الرقم"، مثل +1 (555) 555-1234.',
-	'LBL_SKYPEOUT_ON' => 'تمكين تكامل SkypeOut&reg;',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut&reg;',
+    'LBL_DIALOUT_ON_DESC' => 'يسمح للمستخدمين بالنقر على أرقام الهواتف لمكالمتهم باستخدام برنامج تكامل هاتف الكمبيوتر الافتراضي (CTI).',
+    'LBL_DIALOUT_ON' => 'تمكين انقر للاتصال',
+    'LBL_DIALOUT_TITLE' => 'الاتصال الصادر',
     'LBL_TWEETTOCASE_ON_DESC' => 'تمكين المستخدمين من إنشاء حالات من التغريدات',
     'LBL_TWEETTOCASE_ON' => 'تمكين Tweet&reg; لحالة التكامل',
     'LBL_TWEETTOCASE_TITLE' => 'Tweet&reg; للحالة',
@@ -363,7 +363,7 @@ $mod_strings = array (
     'JS_ALERT_PDF_WRONG_EXTENSION' => 'هذا الملف لا يحتوى على ملحق ملف جيد.',
     'LBL_PDF_INSTRUCTIONS' => 'التعليمات',
     'PDF_INSTRUCTIONS_ADD_FONT' => <<<BSOFR
-Fonts supported by SugarPDF :
+الخطوط المدعومة من SugarPDF:
 <ul>
 <li>TrueTypeUnicode (UTF-8 Unicode)</li>
 <li>OpenTypeUnicode</li>
@@ -373,11 +373,11 @@ Fonts supported by SugarPDF :
 <li>CID-0</li>
 </ul>
 <br>
-If you choose to not embed your font in the PDF, the generated PDF file will be lighter but a substitution will be use if the font is not available in the system of your reader.
+إذا اخترت عدم تضمين الخط الخاص بك في PDF، فسيكون ملف PDF الناتج أخف لكن سيتم استخدام بديل إذا لم يتوفر الخط في نظام القارئ لديك.
 <br><br>
-Adding a PDF font to SugarCRM requires to follow steps 1 and 2 of the TCPDF Fonts documentation available in the "DOCS" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>The pfm2afm and ttf2ufm utils are available in fonts/utils in the TCPDF package that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>Load the metric file generated in step 2 and your font file below.
+تتطلب إضافة خط PDF إلى SugarCRM اتباع الخطوتين 1 و2 من وثائق خطوط TCPDF المتاحة في قسم "DOCS" في <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">موقع ويب TCPDF</a>.
+<br><br>تتوفر الأداتين المساعدتين pfm2afm وttf2ufm في الخطوط/الأدوات المساعدة ضمن حزمة TCPDF التي يمكنك تنزيلها في قسم "التنزيل" في <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">موقع ويب TCPDF</a>.
+<br><br>قم بتحميل الملف القياسي الناتج في الخطوة 2 وملف الخط الخاص بك أدناه.
 BSOFR
 ,
     'ERR_MISSING_CIDINFO' => 'لا يمكن أن يكون حقل معلومات معرّف التأكيد فارغًا.',
@@ -428,6 +428,9 @@ BSOFR
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* وحدة التقارير غير متاحة لطريقة العرض المتنقلة التي تستند إلى مستعرض.',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => 'يجب أن يكون الحد الأقصى للطول أكبر من الحد الأدنى للطول',
+    'ERR_MIN_LENGTH_NEGATIVE' => 'ينبغي أن يكون الحد الأدنى للطول قيمة موجبة',
+    'ERR_MAX_LENGTH_NEGATIVE' => 'ينبغي أن يكون الحد الأقصى للطول قيمة موجبة',
     'ERR_EMPTY_SAML_LOGIN' => 'عنوان URL الخاص بتسجيل الدخول لـ SAML لا يمكن أن يكون قيمة فارغة',
     'ERR_EMPTY_SAML_CERT' => 'شهادة SAML لا يمكن أن تكون قيمة فارغة',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'لا يمكن أن يكون معرف SAML فارغًا',
@@ -441,9 +444,6 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'سير النشاط',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'تمكين سير النشاط',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'تشغيل سير النشاط للتطبيق',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'تمكين محتوى شاشات تسجيل دخول إضافية',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'الحفظ التلقائي لتعريفات العملية',

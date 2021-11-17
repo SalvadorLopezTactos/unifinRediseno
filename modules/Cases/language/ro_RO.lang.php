@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Tabloul de bord Listă cazuri',
     'LBL_CASES_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare cazuri',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Detalii caz',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare cazuri',
 
 	'ERR_DELETE_RECORD'					=> 'Trebuie să specifici un număr de înregistrare pentru a șterge contul.',
 	'LBL_ACCOUNT_ID'					=> 'Identitate Cont',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Arata in portal',
 	'LBL_CREATE_KB_DOCUMENT' => 'Creeaza articol',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Baza de cunostinte',
+    'LBL_REQUEST_CLOSE' => 'Solicitare închidere',
+    'LBL_REQUEST_CLOSE_DATE' => 'Solicitare dată de închidere',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Solicitare pentru închidere',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Trimitere solicitare pentru a închide acest caz',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Doriți să solicitați închiderea acestui caz?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Cazurile mele solicitate pentru închidere',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Cazurile mele solicitate pentru închidere',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Cazurile mele solicitate pentru închidere',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Lista cazurilor solicitate pentru închidere',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Afișează o listă de cazuri atribuite care sunt solicitate pentru închidere',
 
     'LBL_CREATED_USER' => 'Utilizator creat',
     'LBL_MODIFIED_USER' => 'Utilizator Modificat',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Alocat utilizatorului',
     'LBL_EXPORT_TEAM_COUNT' => 'Echipa Cont',
     'LBL_CHANGETIMERS' => 'Modificare temporizatoare',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Achiziții',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Contacte Email Asociate',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'De exemplu, puteţi utiliza asta pentru a găsi o problemă care a mai fost semnalată anterior.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Dacă aveţi un nou Caz de asistenţă pe care doriţi să-l transmiteţi, puteţi face clic aici pentru a transmite un Caz nou.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Făcând clic aici veţi reveni la această fereastră de vizualizare în orice moment.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interacțiuni cazuri',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Note',
 
@@ -143,5 +155,5 @@ Pentru a crea {{module_name}}:
 
     'LBL_SLA_DETAILS' => 'Detalii SLA',
     'LBL_HOURS' => 'Ore',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'Stare',
 );

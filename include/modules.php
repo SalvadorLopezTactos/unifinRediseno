@@ -39,6 +39,10 @@ $moduleList[] = 'pmse_Inbox';
 $moduleList[] = 'pmse_Business_Rules';
 $moduleList[] = 'pmse_Emails_Templates';
 $moduleList[] = 'BusinessCenters';
+$moduleList[] = 'Shifts';
+$moduleList[] = 'Purchases';
+$moduleList[] = 'PurchasedLineItems';
+$moduleList[] = 'Messages';
 
 $moduleList[] = 'Documents';
 $moduleList[] = 'Cases';
@@ -67,7 +71,6 @@ $beanList['EmailMarketing']  = 'EmailMarketing';
 $beanList['CampaignLog']        = 'CampaignLog';
 $beanList['CampaignTrackers']   = 'CampaignTracker';
 $beanList['Releases']       = 'Release';
-$beanList['Groups'] = 'Group';
 $beanList['EmailMan'] = 'EmailMan';
 $beanList['Schedulers']  = 'Scheduler';
 $beanList['SchedulersJobs']  = 'SchedulersJob';
@@ -115,7 +118,6 @@ $beanList['InboundEmail'] = 'InboundEmail';
 
 $beanList['SavedSearch']            = 'SavedSearch';
 $beanList['UserPreferences']        = 'UserPreference';
-$beanList['MergeRecords'] = 'MergeRecord';
 $beanList['EmailAddresses'] = 'EmailAddress';
 $beanList['EmailText'] = 'EmailText';
 $beanList['Relationships'] = 'Relationship';
@@ -202,14 +204,20 @@ $beanList['pmse_BpmGroup'] = 'pmse_BpmGroup';
 $beanList['pmse_BpmGroupUser'] = 'pmse_BpmGroupUser';
 $beanList['pmse_EmailMessage'] = 'pmse_EmailMessage';
 $beanList['BusinessCenters'] = 'BusinessCenter';
+$beanList['Shifts'] = 'Shift';
+$beanList['ShiftExceptions'] = 'ShiftException';
 $beanList['ChangeTimers'] = 'ChangeTimer';
+$beanList['Messages'] = 'Message';
+$beanList['MobileDevices'] = 'MobileDevice';
+$beanList['Purchases'] = 'Purchase';
+$beanList['PurchasedLineItems'] = 'PurchasedLineItem';
+$beanList['PushNotifications'] = 'PushNotification';
 $beanList['Empty'] = 'EmptyBean';
 $beanList['UpgradeHistory'] = 'UpgradeHistory';
 $beanList['OutboundEmail'] = 'OutboundEmail';
 $beanList['EmailParticipants'] = 'EmailParticipant';
 $beanList['DataPrivacy'] = 'DataPrivacy';
 $beanList['ReportSchedules'] = 'ReportSchedule';
-
 // this list defines all of the files that contain the SugarBean class definitions from $beanList
 // to create a new module's bean class, add the file definition here
 $beanFiles = array();
@@ -223,7 +231,6 @@ $beanFiles['ACLRoleSet'] = 'modules/ACLRoles/ACLRoleSet.php';
 $beanFiles['Lead']          = 'modules/Leads/Lead.php';
 $beanFiles['aCase']         = 'modules/Cases/Case.php';
 $beanFiles['Bug']           = 'modules/Bugs/Bug.php';
-$beanFiles['Group'] = 'modules/Groups/Group.php';
 $beanFiles['CampaignLog']  = 'modules/CampaignLog/CampaignLog.php';
 $beanFiles['Project']           = 'modules/Project/Project.php';
 $beanFiles['ProjectTask']           = 'modules/ProjectTask/ProjectTask.php';
@@ -279,7 +286,6 @@ $beanFiles['InboundEmail'] = 'modules/InboundEmail/InboundEmail.php';
 
 $beanFiles['SavedSearch']  = 'modules/SavedSearch/SavedSearch.php';
 $beanFiles['UserPreference']  = 'modules/UserPreferences/UserPreference.php';
-$beanFiles['MergeRecord']  = 'modules/MergeRecords/MergeRecord.php';
 $beanFiles['EmailAddress'] = 'modules/EmailAddresses/EmailAddress.php';
 $beanFiles['EmailText'] = 'modules/EmailText/EmailText.php';
 $beanFiles['SavedReport']   = 'modules/Reports/SavedReport.php';
@@ -364,7 +370,14 @@ $beanFiles['pmse_BpmGroup'] = 'modules/pmse_Project/pmse_BpmGroup/pmse_BpmGroup.
 $beanFiles['pmse_BpmGroupUser'] = 'modules/pmse_Project/pmse_BpmGroupUser/pmse_BpmGroupUser.php';
 $beanFiles['pmse_EmailMessage'] = 'modules/pmse_Emails_Templates/pmse_EmailMessage/pmse_EmailMessage.php';
 $beanFiles['BusinessCenter'] = 'modules/BusinessCenters/BusinessCenter.php';
+$beanFiles['Shift'] = 'modules/Shifts/Shift.php';
+$beanFiles['ShiftException'] = 'modules/ShiftExceptions/ShiftException.php';
 $beanFiles['ChangeTimer'] = 'modules/ChangeTimers/ChangeTimer.php';
+$beanFiles['Message'] = 'modules/Messages/Message.php';
+$beanFiles['MobileDevice'] = 'modules/MobileDevices/MobileDevice.php';
+$beanFiles['Purchase'] = 'modules/Purchases/Purchase.php';
+$beanFiles['PurchasedLineItem'] = 'modules/PurchasedLineItems/PurchasedLineItem.php';
+$beanFiles['PushNotification'] = 'modules/PushNotifications/PushNotification.php';
 
 $beanFiles['Configurator']          = 'modules/Configurator/Configurator.php';
 $beanFiles['EmptyBean'] = 'data/EmptyBean.php';
@@ -373,7 +386,6 @@ $beanFiles['OutboundEmail'] = 'include/OutboundEmail/OutboundEmail.php';
 $beanFiles['EmailParticipant'] = 'modules/EmailParticipants/EmailParticipant.php';
 $beanFiles['DataPrivacy'] = 'modules/DataPrivacy/DataPrivacy.php';
 $beanFiles['ReportSchedule'] = 'modules/ReportSchedules/ReportSchedule.php';
-
 // added these lists for security settings for tabs
 $modInvisList = array('Administration', 'CustomFields', 'Connectors',
     'Dropdown', 'Dynamic', 'DynamicFields', 'DynamicLayout', 'EditCustomFields',
@@ -384,11 +396,11 @@ $modInvisList = array('Administration', 'CustomFields', 'Connectors',
     'ContractTypes',
     'ACLFields', 'Holidays', 'SNIP', 'ForecastDirectReports',
     'Releases','Sync',
-    'Users',  'Versions', 'LabelEditor','Roles','EmailMarketing'
-    ,'OptimisticLock', 'TeamMemberships', 'TeamSets', 'TeamSetModule', 'Audit', 'MailMerge', 'MergeRecords', 'EmailAddresses','EmailText',
+    'Users',  'Versions','Roles','EmailMarketing'
+    ,'OptimisticLock', 'TeamMemberships', 'TeamSets', 'TeamSetModule', 'Audit', 'MailMerge', 'EmailAddresses','EmailText',
     'Schedulers','Schedulers_jobs', /*'Queues',*/ 'EmailTemplates','UserSignature',
     'CampaignTrackers', 'CampaignLog', 'EmailMan', 'Prospects', 'ProspectLists',
-    'Groups','InboundEmail',
+    'InboundEmail',
     'ACLActions', 'ACLRoles',
     'DocumentRevisions',
     'Empty',
@@ -437,7 +449,6 @@ $adminOnlyList = array(
                     'Currencies'=>array('all'=>1),
                     'EditCustomFields'=>array('all'=>1),
                     'FieldsMetaData'=>array('all'=>1),
-                    'LabelEditor'=>array('all'=>1),
                     'ACL'=>array('all'=>1),
                     'ACLActions'=>array('all'=>1),
                     'ACLRoles'=>array('all'=>1),
@@ -455,6 +466,7 @@ $modInvisList[] = 'DataSets';
 $modInvisList[] = 'DataSet_Attribute';
 $modInvisList[] = 'ReportMaker';
 $modInvisList[] = 'ChangeTimers';
+$modInvisList[] = 'MobileDevices';
 
 //$modInvisList[] = 'QueryBuilder';
 $modInvisList[] = 'WorkFlow';
@@ -583,7 +595,6 @@ $modInvisList[] = 'Categories';
 //No future module should need an entry here.
 $objectList = array();
 $objectList['Cases'] =  'Case';
-$objectList['Groups'] =  'Group';
 $objectList['Users'] =  'User';
 $objectList['ActivityStream/Activities'] = 'Activities';
 $objectList['ActivityStream/Comments'] = 'Comments';
@@ -621,17 +632,14 @@ $bwcModules = array(
     'EmailAddresses',
     'EmailMarketing',
     'EmailMan',
-    'EmailTemplates',
     'Employees',
     'Exports',
     'Expressions',
-    'Groups',
     'History',
     'Holidays',
     'iCals',
     'Import',
     'InboundEmail',
-    'MergeRecords',
     'ModuleBuilder',
     'MySettings',
     'OAuthKeys',
@@ -704,6 +712,10 @@ $beanList['ConsoleConfiguration']  = 'ConsoleConfiguration';
 $beanFiles['ConsoleConfiguration'] = 'modules/ConsoleConfiguration/ConsoleConfiguration.php';
 $modInvisList[] = 'ConsoleConfiguration';
 
+$beanList['SugarLive']  = 'SugarLive';
+$beanFiles['SugarLive'] = 'modules/SugarLive/SugarLive.php';
+$modInvisList[] = 'SugarLive';
+
 // this module doesn't need a Bean
 $modInvisList[] = 'Feedbacks';
 
@@ -711,6 +723,16 @@ $modInvisList[] = 'Feedbacks';
 $beanList['CommentLog'] = 'CommentLog';
 $beanFiles['CommentLog'] = 'modules/CommentLog/CommentLog.php';
 $modInvisList[] = 'CommentLog';
+
+// module for DataArchiver
+$beanList['DataArchiver'] = 'DataArchiver';
+$beanFiles['DataArchiver'] = 'modules/DataArchiver/DataArchiver.php';
+$modInvisList[] = 'DataArchiver';
+
+// module for ArchiveRuns
+$beanList['ArchiveRuns'] = 'ArchiveRuns';
+$beanFiles['ArchiveRuns'] = 'modules/ArchiveRuns/ArchiveRuns.php';
+$modInvisList[] = 'ArchiveRuns';
 
 foreach(SugarAutoLoader::existing('include/modules_override.php', SugarAutoLoader::loadExtension("modules")) as $modExtFile) {
     include $modExtFile;

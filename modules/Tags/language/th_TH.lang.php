@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'สร้างโดย ID',
     'LBL_EXPORT_CREATED_BY_NAME' => 'สร้างโดยชื่อผู้ใช้',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'ชื่อผู้ใช้ที่ระบุ',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'แท็กระบบลิ้นชัก',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกแท็ก',
+    'LBL_MY_TAGS' => 'แท็กของฉัน',
+    'LBL_MY_FAVORITE_TAGS' => 'แท็กโปรดของฉัน',
 );

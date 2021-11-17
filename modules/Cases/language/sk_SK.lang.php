@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Informačný panel so zoznamom prípadov',
     'LBL_CASES_RECORD_DASHBOARD' => 'Informačný panel so záznamom prípadov',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Podrobnosti prípadu',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na prípady',
 
 	'ERR_DELETE_RECORD'					=> 'Ak chcete zmazať účet, musíte zadať číslo záznamu.',
 	'LBL_ACCOUNT_ID'					=> 'ID účtu',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Zobraziť na portáli',
 	'LBL_CREATE_KB_DOCUMENT' => 'Vytvoriť článok',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Báza znalostí',
+    'LBL_REQUEST_CLOSE' => 'Uzavretie požiadavky',
+    'LBL_REQUEST_CLOSE_DATE' => 'Dátum uzavretia požiadavky',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Požiadavka na uzavretie',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Odoslať požiadavku na uzavretie tohto prípadu',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Chceli by ste požiadať o uzavretie tohto prípadu?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Moje prípady s požiadavkou na uzavretie',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Moje prípady s požiadavkou na uzavretie',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Moje prípady s požiadavkou na uzavretie',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Zoznam prípadov s požiadavkou na uzavretie',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Zobrazí zoznam priradených prípadov s požiadavkou na uzavretie',
 
     'LBL_CREATED_USER' => 'Vytvorený používateľ',
     'LBL_MODIFIED_USER' => 'Upravený používateľ',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Priradené meno používateľa',
     'LBL_EXPORT_TEAM_COUNT' => 'Počet tímov',
     'LBL_CHANGETIMERS' => 'Zmeniť časovače',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Nákupy',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'E-maily súvisiacich kontaktov',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Tento postup môžete napríklad použiť na vyhľadanie problému, ktorý bol nahlásený už predtým.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Ak máte nový prípad pre podporu, ktorý by ste radi nahlásili, kliknite tu a odošlite nový prípad.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Kliknutím tu sa kedykoľvek vrátite do tohto náhľadu.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakcie s prípadom',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Poznámky',
 
@@ -149,5 +161,5 @@ Ak chcete vytvoriť modul {{module_name}}:
 
     'LBL_SLA_DETAILS' => 'Podrobnosti o SLA',
     'LBL_HOURS' => 'Hodiny',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'Stav',
 );

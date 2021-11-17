@@ -37,6 +37,8 @@ class CurrentUserPortalApi extends CurrentUserApi
         $user_data['acl'] = $this->getAcls('portal');
         $user_data['id'] = $contact->id;
         $user_data['account_ids'] = $ps->getAccountIds();
+        $user_data['primary_account_id'] = $contact->account_id ?? '';
+        $user_data['primary_email_address'] = $contact->email1 ?? '';
         $user_data['full_name'] = $contact->full_name;
         $user_data['picture'] = $contact->picture;
         $user_data['portal_name'] = $contact->portal_name;

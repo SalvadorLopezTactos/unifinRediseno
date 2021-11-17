@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => '明年',
     'LBL_OPEN_ISSUES' => '打開 {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => '最近解決',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => '建立篩選器',
+    'LBL_ERROR_FILTER_EMPTY' => '請添加過濾條件。',
+    'LBL_ADD_FILTER' => '增加條件',
+    'LBL_FILTER_NAME' => '篩選器名稱',
+    'LBL_FILTER_FIELD' => '欄位',
+    'LBL_FILTER_OPERATOR' => '運算子',
+    'LBL_FILTER_VALUE' => '值',
+    'LBL_FILTER_SYNC_TO_SERVER' => '保存至桌面 App',
+    'LBL_FILTER_LOCAL' => '本地篩選器',
 );

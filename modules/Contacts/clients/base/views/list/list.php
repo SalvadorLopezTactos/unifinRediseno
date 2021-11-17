@@ -47,9 +47,27 @@ $viewdefs['Contacts']['base']['view']['list'] = array(
                     'default' => true,
                 ),
                 array(
+                    'name' => 'phone_mobile',
+                    'enabled' => true,
+                    'default' => true,
+                    'selected' => false,
+                ),
+                array(
                     'name' => 'phone_work',
                     'enabled' => true,
                     'default' => true,
+                ),
+                array(
+                    'name' => 'phone_other',
+                    'enabled' => true,
+                    'default' => true,
+                    'selected' => false,
+                ),
+                array(
+                    'name' => 'assistant_phone',
+                    'enabled' => true,
+                    'default' => true,
+                    'selected' => false,
                 ),
                 array(
                     'name' => 'assigned_user_name',

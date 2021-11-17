@@ -92,6 +92,7 @@ class DeployedMetaDataImplementation extends AbstractMetaDataImplementation impl
 			}
 		}
 
+        $viewName = substr($view, 0, -4);
 		if ($loaded === null)
 		{
 			switch ( $view )
@@ -114,6 +115,7 @@ class DeployedMetaDataImplementation extends AbstractMetaDataImplementation impl
 					$this->_mergeFielddefs ( $fielddefs , $loaded ) ;
 					break;
                 case MB_PREVIEWVIEW:
+                case MB_RECORDDASHLETVIEW:
                     // Fallback to record view
                     $loaded = $this->_loadFromFile($this->getFileName(MB_RECORDVIEW, $this->_moduleName, MB_CUSTOMMETADATALOCATION, $client)) ;
 
@@ -123,16 +125,15 @@ class DeployedMetaDataImplementation extends AbstractMetaDataImplementation impl
 
                     if ($loaded) {
                         // convert record defs
-                        $loaded = $this->getPreviewDefsFromRecord($loaded, $client);
+                        $loaded = $this->getDefsFromRecord($loaded, $viewName, $client);
                         // save out our new definition so that we have a base record for the history to work from
-                        $this->_sourceFilename = $this->getFileName(MB_PREVIEWVIEW, $this->_moduleName, MB_CUSTOMMETADATALOCATION, $client);
+                        $this->_sourceFilename = $this->getFileName($view, $this->_moduleName, MB_CUSTOMMETADATALOCATION, $client);
                         $this->_saveToFile($this->_sourceFilename, $loaded) ;
                         $this->_mergeFielddefs($fielddefs, $loaded);
                     }
                     break;
                 case MB_SIDECARLISTVIEW:
                 case MB_RECORDVIEW:
-                case MB_RECORDDASHLETVIEW:
                 case MB_SIDECARPOPUPVIEW:
 				case MB_SIDECARDUPECHECKVIEW:
                 case MB_PORTALLISTVIEW:
@@ -251,8 +252,8 @@ class DeployedMetaDataImplementation extends AbstractMetaDataImplementation impl
           }
         }
 
-        //For preview, if there is no preview.php under MB_BASEMETADATALOCATION, the original defs is record view defs.
-        if ($view === MB_PREVIEWVIEW) {
+        //For preview/recorddashlet, if there is no preview.php/recorddashlet.php under MB_BASEMETADATALOCATION, the original defs is record view defs.
+        if ($view === MB_PREVIEWVIEW || $view === MB_RECORDDASHLETVIEW) {
             $sourceFilename = $this->getFileName($view, $moduleName, MB_BASEMETADATALOCATION, $client);
             if (file_exists($sourceFilename)) {
                 $layout = $this->_loadFromFile($sourceFilename);
@@ -260,12 +261,12 @@ class DeployedMetaDataImplementation extends AbstractMetaDataImplementation impl
             if (null === $layout) {
                 $sourceFilename = $this->getFileName(MB_RECORDVIEW, $moduleName, MB_CUSTOMMETADATALOCATION, $client);
                 $layout = $this->_loadFromFile($sourceFilename);
-                $layout = $this->getPreviewDefsFromRecord($layout, $client);
+                $layout = $this->getDefsFromRecord($layout, $viewName, $client);
             }
             if (null === $layout) {
                 $sourceFilename = $this->getFileName(MB_RECORDVIEW, $moduleName, MB_BASEMETADATALOCATION, $client);
                 $layout = $this->_loadFromFile($sourceFilename);
-                $layout = $this->getPreviewDefsFromRecord($layout, $client);
+                $layout = $this->getDefsFromRecord($layout, $viewName, $client);
             }
             if (null === $layout) {
                 $sourceFilename = $this->getFileName($view, $moduleName, MB_CUSTOMMETADATALOCATION, $client);
@@ -290,31 +291,67 @@ class DeployedMetaDataImplementation extends AbstractMetaDataImplementation impl
 	}
 
     /**
-     * Get preview defs based on record view defs.
+     * Get defs based on record view defs.
      * @param array $defs
+     * @param string $viewName
      * @param string $client
      * @return array
      */
-    protected function getPreviewDefsFromRecord($defs, $client = 'base'): array
+    protected function getDefsFromRecord($defs, $viewName, $client = 'base'): array
     {
-        if (isset($defs[$client]['view']['record']['panels'])) {
-            $defs[$client]['view']['preview']['panels'] = $defs[$client]['view']['record']['panels'];
-            foreach ($defs[$client]['view']['preview']['panels'] as $i => $panel) {
-                if (isset($panel['fields'])) {
-                    foreach ($panel['fields'] as $j => $field) {
-                        // remove 'favorite' and 'follow' as in preview.js
-                        if (is_array($field) && isset($field['type']) &&
-                            in_array($field['type'], array('favorite', 'follow'))) {
-                            unset($defs[$client]['view']['preview']['panels'][$i]['fields'][$j]);
+        switch ($viewName) {
+            case 'preview':
+                if (isset($defs[$client]['view']['record']['panels'])) {
+                    $defs[$client]['view'][$viewName]['panels'] = $defs[$client]['view']['record']['panels'];
+                    foreach ($defs[$client]['view'][$viewName]['panels'] as $i => $panel) {
+                        if (isset($panel['fields'])) {
+                            foreach ($panel['fields'] as $j => $field) {
+                                // remove 'favorite' and 'follow' as in preview.js
+                                if (is_array($field) && isset($field['type']) &&
+                                    in_array($field['type'], array('favorite', 'follow'))) {
+                                    unset($defs[$client]['view'][$viewName]['panels'][$i]['fields'][$j]);
+                                }
+                            }
                         }
                     }
+                    // preview layout is always 1 column
+                    $defs[$client]['view']['preview']['templateMeta'] = array(
+                        'maxColumns' => 1,
+                    );
+                    unset($defs[$client]['view']['record']);
                 }
-            }
-            // preview layout is always 1 column
-            $defs[$client]['view']['preview']['templateMeta'] = array(
-                'maxColumns' => 1,
-            );
-            unset($defs[$client]['view']['record']);
+                break;
+            case 'recorddashlet':
+                if (isset($defs[$client]['view']['record'])) {
+                    $defs[$client]['view'][$viewName]['buttons'] = $defs[$client]['view']['record']['buttons'] ?? [];
+                    foreach ($defs[$client]['view'][$viewName]['buttons'] as $i => $button) {
+                        if (isset($button['name']) && !empty($button['buttons'])) {
+                            if ($button['name'] === 'main_dropdown') {
+                                foreach ($button['buttons'] as $j => $btn) {
+                                    if (is_array($btn) &&
+                                        (isset($btn['name']) && $btn['name'] !== 'edit_button') ||
+                                        (isset($btn['type']) && $btn['type'] == 'divider')
+                                    ) {
+                                        unset($defs[$client]['view'][$viewName]['buttons'][$i]['buttons'][$j]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    $defs[$client]['view'][$viewName]['panels'] = $defs[$client]['view']['record']['panels'] ?? [];
+                    foreach ($defs[$client]['view'][$viewName]['panels'] as $i => $panel) {
+                        if (isset($panel['name']) && $panel['name'] === 'panel_header' && isset($panel['fields'])) {
+                            foreach ($panel['fields'] as $j => $field) {
+                                if (is_array($field) && isset($field['type']) &&
+                                    !in_array($field['type'], ['avatar', 'fullname'])) {
+                                    unset($defs[$client]['view'][$viewName]['panels'][$i]['fields'][$j]);
+                                }
+                            }
+                        }
+                    }
+                    unset($defs[$client]['view']['record']);
+                }
+                break;
         }
         return $defs;
     }

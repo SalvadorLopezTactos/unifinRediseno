@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Cuadro de mando de la lista de notas',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Cuadro de mando del registro de notas',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Panel de enfoque en las notas',
 
+    'LBL_RELATED_CONTACT' => 'Contacto relacionado',
     'ERR_DELETE_RECORD' => 'Debe especificar un número de registro para eliminar la cuenta.',
     'LBL_ACCOUNT_ID' => 'ID de Cuenta:',
     'LBL_CASE_ID' => 'ID de Caso:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'ID Contacto:',
     'LBL_CONTACT_NAME' => 'Contacto:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Notas',
+    'LBL_ATTACHMENTS' => 'Adjuntos',
+    'LBL_ATTACHMENT_FLAG' => 'Es un adjunto',
     'LBL_DESCRIPTION' => 'Nota',
     'LBL_EMAIL_ADDRESS' => 'Dirección de Email:',
     'LBL_EMAIL_ATTACHMENT' => 'Adjunto de Correo',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notas y Adjuntos',
     'LBL_NOTE' => 'Nota:',
     'LBL_OPPORTUNITY_ID' => 'ID de Oportunidad:',
+    'LBL_NOTE_PARENT_ID' => 'ID principal de la nota:',
     'LBL_PARENT_ID' => 'ID Padre:',
     'LBL_PARENT_TYPE' => 'Tipo Padre',
     'LBL_EMAIL_TYPE' => 'Tipo de correo electrónico',

@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'Управление на процеси',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'Процеси оставени без надзор',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на процеси',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Електронно табло със запис на процесите',
+
     'LBL_CAS_ID' => 'Номер на процеса',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Неизвестна (според потребителски идентификатор:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "задачата е била",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Визуализация на дизайна на процеса',
     'LBL_PROJECT_RUN_ORDER' => 'Ред на изпълнение',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => 'Текуща дейност',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => 'Модифицирани данни',
+    'LBL_DATE_ENTERED' => 'Създадени данни',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'Сигурни ли сте, че искате да предявите претенция за този процес?',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'Претенцията за процеса е успешна',
 );
 

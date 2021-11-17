@@ -13,7 +13,10 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TASKS_LIST_DASHBOARD' => 'Görevler Listesi Panosu',
+  'LBL_TASKS_RECORD_DASHBOARD' => 'Görevler Kaydı Panosu',
+  'LBL_TASKS_FOCUS_DRAWER_DASHBOARD' => 'Görevler Odak Bölmesi',
 
+  'LBL_RELATED_CONTACT' => 'İlişkili Kontak',
   'LBL_MODULE_NAME' => 'Görevler',
   'LBL_MODULE_NAME_SINGULAR' => 'Görev',
   'LBL_TASK' => 'Görevler:',

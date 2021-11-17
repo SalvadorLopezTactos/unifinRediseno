@@ -20,12 +20,10 @@
         {{#each grid}}
             <div class="row-fluid {{../name}}{{#if ../hide}} hide{{/if}}">
                 {{#each this}}
-                    <div class="span{{span}} consent-cookie{{#if cell_css_class}} {{cell_css_class}}{{/if}}" data-type="{{type}}" data-name="{{name}}">
-                        <span class="normal{{#if css}} {{css}}{{/if}}" data-fieldname="{{name}}">
-                            {{field ../../../this model=../../../model template="edit"}}
-                        </span>
-                        <span class="record-label" data-type="{{type}}" data-name="{{name}}">{{#if label}}{{str label module}}{{/if}}</span>
-                    </div>
+                    <label class="span{{span}} consent-cookie{{#if cell_css_class}} {{cell_css_class}}{{/if}}" data-type="{{type}}" data-name="{{name}}">
+                        {{field ../../../this model=../../../model template="edit"}}
+                        <span>{{#if label}}{{str label module}}{{/if}}</span>
+                    </label>
                 {{/each}}
             </div>
         {{/each}}

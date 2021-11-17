@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Vidensbaseliste-dashboard',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Vidensbaseoptegnelses-dashboard',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Vidensbase',
 
     'LBL_MODULE_NAME' => 'Videnbase',
     'LBL_MODULE_NAME_SINGULAR' => 'Videnbaseartikel',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Ikke nyttig',
     'LBL_RATING' => 'Klassifikation',
     'LBL_VIEWED_COUNT' => 'Se optælling',
-    'LBL_DOWNLOAD_ALL' => 'Download alt',
-    'LBL_DOWNLOAD_ONE' => 'Download',
-    'LBL_ATTACHMENTS' => 'Vedhæftede filer:',
-    'LBL_ADD_ATTACHMENT' => 'Gennemse',
     'LBL_CATEGORIES' => 'Kategorier for videnbase',
     'LBL_CATEGORY_NAME' => 'Kategori navn',
     'LBL_USEFULNESS' => 'Anvendelighed',

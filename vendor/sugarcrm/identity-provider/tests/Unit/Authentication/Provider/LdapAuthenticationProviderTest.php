@@ -90,7 +90,10 @@ class LdapAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
         $this->ldapQuery = $this->getMockBuilder(QueryInterface::class)->getMock();
         $this->ldapCollection = $this->getMockBuilder(CollectionInterface::class)->getMock();
         $this->userChecker = $this->getMockBuilder(UserCheckerInterface::class)->getMock();
-        $this->mapper = $this->createMock(LDAPUserMapping::class);
+        $this->mapper = $this->getMockBuilder(LDAPUserMapping::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['map'])
+            ->getMock();
         $this->mapper->method('map')->willReturn([]);
 
         parent::setUp();

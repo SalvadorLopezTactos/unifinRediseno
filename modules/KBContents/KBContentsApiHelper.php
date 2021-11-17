@@ -16,7 +16,8 @@ use \Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\SearchFields;
 use \Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\Implement\MultiFieldHandler;
 
 
-class KBContentsApiHelper extends SugarBeanApiHelper {
+class KBContentsApiHelper extends AttachmentsApiHelper
+{
 
     public function formatForApi(SugarBean $bean, array $fieldList = array(), array $options = array())
     {
@@ -31,14 +32,6 @@ class KBContentsApiHelper extends SugarBeanApiHelper {
             $bean->db->query($query);
         }
         $result = parent::formatForApi($bean, $fieldList, $options);
-
-        $bean->load_relationship('attachments');
-        $result['attachment_list'] = array();
-        foreach ($bean->attachments->getBeans() as $note) {
-            if ($attachment = $note->getAttachment()) {
-                array_push($result['attachment_list'], $attachment);
-            }
-        }
 
         $query = new SugarQuery();
         $query->select(array('language'));
@@ -61,47 +54,12 @@ class KBContentsApiHelper extends SugarBeanApiHelper {
 
     public function populateFromApi(SugarBean $bean, array $submittedData, array $options = array())
     {
-        $attachment_list = array();
-        if (!empty($submittedData['attachment_list'])) {
-            $attachment_list = $submittedData['attachment_list'];
-            unset($submittedData['attachment_list']);
-        }
         $result = parent::populateFromApi($bean, $submittedData, $options);
 
         if (!$this->checkStatus($bean)) {
             throw new SugarApiExceptionInvalidParameter('Invalid status field value');
         }
 
-        if (!empty($attachment_list) && $result) {
-            $bean->load_relationship('attachments');
-            $attachments = array();
-            if ($bean->id) {
-                $attachments = $bean->attachments->getBeans();
-            } else {
-                $bean->id = create_guid();
-                $bean->new_with_id = true;
-            }
-            foreach ($attachment_list as $info) {
-                foreach ($attachments as $attachment) {
-                    if ($attachment->id === $info['id']) {
-                        continue 2;
-                    }
-                }
-                $note = BeanFactory::getBean('Notes', $info['id']);
-                if ($note->parent_id && $note->parent_type) {
-                    // Note of an original record.
-                    $attachment = clone $note;
-                    $attachment->new_with_id = true;
-                    $attachment->portal_flag = true;
-                    $attachment->id = create_guid();
-                    UploadFile::duplicate_file($note->id, $attachment->id);
-                } else {
-                    // A new note created on client.
-                    $attachment = $note;
-                }
-                $bean->attachments->add($attachment);
-            }
-        }
         return $result;
     }
 

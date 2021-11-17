@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Målgruppeliste af typen standard blev ikke fundet',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Ingen poster blev fundet',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Poster blev behandlet',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Indstillinger for indgående e-mails',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Systemindstillinger for e-mail',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Sporingsnavn:',
   'LBL_EDIT_TRACKER_URL'=>'Sporings-URL:',

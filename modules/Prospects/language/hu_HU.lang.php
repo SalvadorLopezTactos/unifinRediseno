@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_TARGETS_LIST_DASHBOARD' => 'Célok listája műszerfal',
   'LBL_TARGETS_RECORD_DASHBOARD' => 'Célbejegyzések műszerfal',
+  'LBL_PROSPECTS_FOCUS_DRAWER_DASHBOARD' => 'Célpont figyelemfelhívás',
 
   'LBL_MODULE_NAME' => 'Célok',
   'LBL_MODULE_NAME_SINGULAR' => 'Cél',

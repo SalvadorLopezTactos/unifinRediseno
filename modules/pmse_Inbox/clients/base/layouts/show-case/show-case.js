@@ -471,7 +471,7 @@
                 window.location.reload();
                 break;
             default:
-                app.router.list("Home");
+                app.router.navigate('Home', {trigger: true});
                 break;
         };
     },

@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Електронно табло със списък на срещите',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Електронно табло със запис на срещите',
+    'LBL_LEAD_GUESTS' => 'Потенциални гости',
+    'LBL_CONTACT_GUESTS' => 'Контакт с гости',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на срещи',
 
 	'ERR_DELETE_RECORD' => 'Трябва да определите номер на записа, за да изтриете тази среща.',
 	'LBL_ACCEPT_THIS'=>'Приемате ли?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Направление',
 	'LBL_LIST_DUE_DATE'=>'Падежна дата',
 	'LBL_LIST_FORM_TITLE' => 'Списък със срещи',
-	'LBL_LIST_MY_MEETINGS' => 'Моите срещи',
+    'LBL_LIST_MY_MEETINGS' => 'Моите срещи',
     'LBL_MY_SCHEDULED_MEETINGS' => 'Моите насрочени срещи',
+    'LBL_GUEST_MEETINGS' => 'Моите срещи като гост',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Насрочени срещи като гост',
 	'LBL_LIST_RELATED_TO' => 'Свързано с',
 	'LBL_LIST_STATUS'=>'Статус',
 	'LBL_LIST_SUBJECT' => 'Относно',

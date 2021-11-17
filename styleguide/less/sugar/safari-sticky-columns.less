@@ -1,0 +1,38 @@
+/* This file fixes jumping elements caused by WebKit when using position: absolute. See SS-1078. */
+body.safari-browser {
+  .dataTable {
+    th {
+      &.sticky-column {
+        position: -webkit-sticky;
+        z-index: 13;
+
+        &.stick-left {
+          left: 0;
+        }
+
+        &.stick-right {
+          right: 0;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          &.sticky-column {
+            position: -webkit-sticky;
+            z-index: 12;
+
+            &.stick-left {
+              left: 0;
+            }
+
+            &.stick-right {
+              right: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -97,7 +97,7 @@
                 });
 
                 return {
-                    value: $.trim(text),
+                    value: text.trim(),
                     tags: this._filterOutDuplicateTags(tags)
                 };
             },
@@ -131,7 +131,7 @@
                     });
                 }
 
-                return $.trim(html);
+                return html.trim();
             },
 
             /**
@@ -272,7 +272,7 @@
                         return;
                     }
 
-                    searchTerm = $.trim(searchTerm);
+                    searchTerm = searchTerm.trim();
 
                     // Reset taggable if the cursor is outside the tagging span
                     if (!$container.hasClass('sugar_tagging') && !isTextarea) {
@@ -395,7 +395,7 @@
                         selection.addRange(range);
 
                         $taggingSpan
-                            .before($.trim($taggingSpan.text()))
+                            .before($taggingSpan.html().trim())
                             .remove();
                     } else {
                         // Fix bug for Chrome where <b> tag gets inserted when tagging span is the only content inside
@@ -501,7 +501,7 @@
                 var tagAction = searchTerm.charAt(0); // @ or # character
                 var filtersBeanPrototype = app.data.getBeanClass('Filters').prototype;
 
-                searchTerm = $.trim(searchTerm.substr(1));
+                searchTerm = searchTerm.substr(1).trim();
 
                 // Do not perform search if the number of characters typed so far in typeahead is less than what is
                 // specified in taggableSearchAfter and if search term is the same as the last searched term.
@@ -559,15 +559,15 @@
                 var isTextarea = this._isTextArea(this._getTaggableInput());
 
                 if (collection.length > 0) {
-                    searchTerm = $.trim(searchTerm);
+                    searchTerm = searchTerm.trim();
 
                     // If the current search term differs from what was searched, do not display the dropdown list
                     if (isTextarea) {
-                        currentSearchTerm = $.trim(this.getCurrentSearchTerm(this._getTaggableInput()));
+                        currentSearchTerm = this.getCurrentSearchTerm(this._getTaggableInput()).trim();
                     } else {
-                        currentSearchTerm = $.trim(this._getTaggableInput().find('.sugar_tagging').text());
+                        currentSearchTerm = this._getTaggableInput().find('.sugar_tagging').text().trim();
                     }
-                    if ($.trim(currentSearchTerm.substr(1)) !== searchTerm) {
+                    if (currentSearchTerm.substr(1).trim() !== searchTerm) {
                         this._taggableLastSearchTerm = null;
                         return;
                     }

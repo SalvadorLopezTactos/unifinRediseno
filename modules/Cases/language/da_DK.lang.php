@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Case-liste dashboard',
     'LBL_CASES_RECORD_DASHBOARD' => 'Caseoptegnelses-dashboard',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Sagsoplysninger',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Sager',
 
 	'ERR_DELETE_RECORD'					=> 'Du skal angive et postnummer for at slette virksomheden.',
 	'LBL_ACCOUNT_ID'					=> 'Virksomheds-id',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Vis i portal',
 	'LBL_CREATE_KB_DOCUMENT' => 'Opret artikel',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Videnbase',
+    'LBL_REQUEST_CLOSE' => 'Anmod Luk',
+    'LBL_REQUEST_CLOSE_DATE' => 'Anmod lukkedato',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Anmod om at lukke',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Send en anmodning om at lukke denne case',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Vil du gerne anmode om at lukke casen?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Mine cases anmodet om luk',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Mine cases anmodet om luk',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Mine cases anmodet om luk',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Liste over cases anmodet om luk',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Viser en liste med tildelte cases, der er anmodet om luk',
 
     'LBL_CREATED_USER' => 'Oprettet bruger',
     'LBL_MODIFIED_USER' => 'Ændret bruger',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Tildelt brugernavn',
     'LBL_EXPORT_TEAM_COUNT' => 'Team bruger',
     'LBL_CHANGETIMERS' => 'Skift timere',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Køb',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Relaterede kontakters e-mail-adresser',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'For eksempel kan du bruge dette til at finde et emne, der tidligere er blevet sendt.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Hvis du har en ny support sag, du ønsker at indsende, kan du klikke her for at sende en ny sag.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Hvis du klikker her, vender du tilbage til denne visning til enhver tid.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Sagsinteraktioner',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Noter',
 

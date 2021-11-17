@@ -21,9 +21,11 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CONTACTS_LIST_DASHBOARD' => 'Contacts List Dashboard',
     'LBL_CONTACTS_RECORD_DASHBOARD' => 'Contacts Record Dashboard',
+    'LBL_CONTACTS_FOCUS_DRAWER_DASHBOARD' => 'Contacts Focus Drawer',
     'LBL_SITE_USER_ID' => 'Hash of site_url and contact id',
     'LBL_COOKIE_CONSENT' => 'Cookie Consent',
     'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Cookie Consent Received On',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Contact Interactions',
     'LNK_CONTACT_REPORTS' => 'View Contact Reports',
     'ERR_DELETE_RECORD' => 'Specify the record number to delete the contact.',
     'LBL_ACCOUNT_ID' => 'Account ID:',

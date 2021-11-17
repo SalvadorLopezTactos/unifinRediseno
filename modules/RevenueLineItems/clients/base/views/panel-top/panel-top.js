@@ -38,7 +38,11 @@
                 this.closestComponent('record') :
                 this.closestComponent('create');
 
-            if (!_.isUndefined(viewDetails)) {
+            // only allow PCDashlet and QuickPicks to add RLIs if this is the Opps or RLI
+            // page and the link is revenuelineitems
+            if (!_.isUndefined(viewDetails) &&
+                (this.module === 'Opportunities' || this.module === 'RevenueLineItems') &&
+                this.context.get('link') === 'revenuelineitems') {
                 app.controller.context.on(viewDetails.cid + ':productCatalogDashlet:add', this.openRLICreate, this);
             }
         }
@@ -127,6 +131,9 @@
         data.worst_case = data.discount_price;
         data.assigned_user_id = app.user.get('id');
         data.assigned_user_name = app.user.get('name');
+        // Update price on Flexible Duration Service
+        data.catalog_service_duration_value = data.service_duration_value;
+        data.catalog_service_duration_unit = data.service_duration_unit;
 
         if (createInPreferred) {
             currencyFields = _.filter(model.fields, function(field) {
@@ -199,7 +206,9 @@
                 this.closestComponent('record') :
                 this.closestComponent('create');
 
-            if (!_.isUndefined(viewDetails)) {
+            if (!_.isUndefined(viewDetails) &&
+                (this.module === 'Opportunities' || this.module === 'RevenueLineItems') &&
+                this.context.get('link') === 'revenuelineitems') {
                 app.controller.context.off(viewDetails.cid + ':productCatalogDashlet:add', null, this);
             }
         }

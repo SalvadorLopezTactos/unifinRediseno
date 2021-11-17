@@ -125,10 +125,57 @@ class EmailFormatter
         $body   = $converted["body"];
         $images = array_merge($images, $converted["images"]);
 
+        // Convert the EmbeddedFiles end point url to cid
+        $converted = $this->convertEmbeddedFileToImage($body);
+        $body   = $converted["body"];
+        $images = array_merge($images, $converted["images"]);
+
         return array(
             "body"   => $body,
             "images" => $images,
         );
+    }
+
+    /**
+     * Converts the EmbeddedFiles end point url to embedded image so the in-line image can be attached in email
+     *
+    // body example:
+    // <img src="rest/v11_13/EmbeddedFiles/8e1c9ec8-e99e-11eb-b7df-acde48001122/file/..." width="134" height="26"/>
+    // in this case, id would be '8e1c9ec8-e99e-11eb-b7df-acde48001122'
+     *
+     * @param string $body email body
+     * @return array
+     */
+    protected function convertEmbeddedFileToImage(string $body) : array
+    {
+        // the src regular expression to match
+        $src = <<<EOT
+["']rest/\S*/EmbeddedFiles/(\S*)/file/[\S]*["']
+EOT;
+        $embeddedImages = [];
+
+        preg_match_all("#<img[^>]*[\s]+src[^=]*=[\s]*{$src}#si", $body, $foundImages);
+        foreach ($foundImages[1] as $embeddedFileId) {
+            $img = BeanFactory::retrieveBean('EmbeddedFiles', $embeddedFileId);
+            if ($img) {
+                $cid = $embeddedFileId;
+                $embeddedImages[] = new EmbeddedImage(
+                    $cid,
+                    'upload://' . $embeddedFileId,
+                    $img->getFileName(),
+                    Encoding::Base64,
+                    $img->file_mime_type
+                );
+            }
+        }
+
+        // Convert the body to use cid:imageFileId
+        $body = preg_replace("|{$src}|i", '"cid:$1"', $body);
+
+        return [
+            'body'   => $body,
+            'images' => $embeddedImages,
+        ];
     }
 
     /**

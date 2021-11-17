@@ -195,6 +195,13 @@ abstract class DBManager implements LoggerAwareInterface
      */
     protected $type_range = array();
 
+    /**
+     * Field's max size
+     * @abstract
+     * @var array
+     */
+    protected $max_size = [];
+
 	/**
 	 * Type classification into:
 	 * - int
@@ -416,15 +423,15 @@ abstract class DBManager implements LoggerAwareInterface
      * Create DB Driver
      */
 	public function __construct()
-	{
-		$this->timedate = TimeDate::getInstance();
+    {
+        $this->timedate = TimeDate::getInstance();
         $this->setLogger(new NullLogger());
-		$this->helper = $this; // compatibility
-		if(defined('ENTRY_POINT_TYPE') && constant('ENTRY_POINT_TYPE') == 'api') {
-		    $this->encode = false;
-		}
+        $this->helper = $this;
+        if (isFromApi()) {
+            $this->encode = false;
+        }
         $this->request = InputValidation::getService();
-	}
+    }
 
     /**
      * Wrapper for those trying to access the private and protected class members directly
@@ -902,6 +909,10 @@ abstract class DBManager implements LoggerAwareInterface
 
         // build where clause
         $where_data = $this->updateWhereArray($bean);
+        if (count($where_data) == 0) {
+            $GLOBALS['log']->fatal('Unable to update Bean. The Bean does not have an ID.');
+            return false;
+        }
         if (isset($fields['deleted'])) {
             $where_data['deleted'] = "0";
         }
@@ -2293,6 +2304,22 @@ abstract class DBManager implements LoggerAwareInterface
         return false;
     }
 
+    /**
+     * Returns the max size that a field can store. -1 if not specified.
+     * @param array $fieldDef
+     * @return int
+     */
+    public function getMaxFieldSize($fieldDef)
+    {
+        $type = $this->getFieldType($fieldDef);
+
+        if ($type && isset($this->max_size[$type])) {
+            return $this->max_size[$type];
+        }
+
+        return -1;
+    }
+
 	/**
 	 * Returns the index description for a given index in table
 	 *
@@ -2958,9 +2985,11 @@ abstract class DBManager implements LoggerAwareInterface
 	 * @param  bool   $ignoreRequired  Optional, true if we should ignore this being a required field
 	 * @param  string $table           Optional, table name
 	 * @param  bool   $return_as_array Optional, true if we should return the result as an array instead of sql
+     * @param  string $action          Optional, 'add' or 'modify' based on path of execution. Used to determine how we
+     *                                           set the auto_increment property
      * @return string|string[]
 	 */
-	protected function oneColumnSQLRep($fieldDef, $ignoreRequired = false, $table = '', $return_as_array = false)
+    protected function oneColumnSQLRep($fieldDef, $ignoreRequired = false, $table = '', $return_as_array = false, $action = null)
 	{
 		$name = $fieldDef['name'];
 		$type = $this->getFieldType($fieldDef);
@@ -3003,7 +3032,8 @@ abstract class DBManager implements LoggerAwareInterface
             $auto_increment = $this->setAutoIncrement(
                 $table,
                 $fieldDef['name'],
-                $fieldDef['auto_increment_platform_options'] ?? []
+                $fieldDef['auto_increment_platform_options'] ?? [],
+                $action,
             );
 
 		$required = 'NULL';  // MySQL defaults to NULL, SQL Server defaults to NOT NULL -- must specify
@@ -3096,7 +3126,7 @@ abstract class DBManager implements LoggerAwareInterface
      * @param  array $platformOptions Options related to a platform autoincrement statement
 	 * @return string
 	 */
-    protected function setAutoIncrement($table, $field_name, array $platformOptions = [])
+    protected function setAutoIncrement($table, $field_name, array $platformOptions = [], $action = null)
 	{
 		$this->deleteAutoIncrement($table, $field_name);
 		return "";
@@ -4413,11 +4443,11 @@ abstract class DBManager implements LoggerAwareInterface
 	 * Supports both adding and droping a constraint.
 	 *
 	 * @param  string $table      tablename
-	 * @param  array  $definition field definition
+     * @param  array<string,array<string,mixed>>  $definition field definition
 	 * @param  bool   $drop       true if we are dropping the constraint, false if we are adding it
 	 * @return string SQL statement
 	 */
-	abstract public function add_drop_constraint($table, $definition, $drop = false);
+    abstract public function add_drop_constraint(string $table, array $definition, bool $drop = false): string;
 
 	/**
 	 * Returns the description of fields based on the result

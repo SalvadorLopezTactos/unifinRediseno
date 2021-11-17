@@ -94,8 +94,7 @@ class TemplateHandler {
             $processAutorDefs = true;
         }
         //Insert validation and quicksearch stuff here
-        if($view == 'EditView' || strpos($view,'QuickCreate') || $ajaxSave || $view == "ConvertLead") {
-
+        if ($view == 'EditView' || strpos($view, 'QuickCreate') || $ajaxSave) {
             global $dictionary, $app_strings, $mod_strings;
             $mod = BeanFactory::getObjectName($module);
             $defs = $dictionary[$mod]['fields'];
@@ -172,8 +171,7 @@ class TemplateHandler {
             $javascript->setFormName($view);
 
             $javascript->setSugarBean($sugarbean);
-            if ($view != "ConvertLead")
-                $javascript->addAllFields('', null,true);
+            $javascript->addAllFields('', null, true);
 
             $validatedFields = array();
             $validatedFields[] = 'team_name';
@@ -398,23 +396,6 @@ class TemplateHandler {
                 if(!isset($defs[$f['name']])) continue;
 
                 $field = $defs[$f['name']];
-                if ($view == "ConvertLead")
-                {
-                    $field['name'] = $module . $field['name'];
-                    if (isset($field['module']) && isset($field['id_name']) && substr($field['id_name'], -4) == "_ida") {
-                        $lc_module = strtolower($field['module']);
-                        $ida_suffix = "_".$lc_module.$lc_module."_ida";
-                        if (preg_match('/'.$ida_suffix.'$/', $field['id_name']) > 0) {
-                            $field['id_name'] = $module . $field['id_name'];
-                        }
-                        else
-                            $field['id_name'] = $field['name'] . "_" . $field['id_name'];
-                    }
-                    else {
-                        if (!empty($field['id_name']))
-                            $field['id_name'] = $field['name'] . "_" . $field['id_name'];
-                    }
-                }
 				$name = $qsd->form_name . '_' . $field['name'];
 
 
@@ -572,10 +553,6 @@ class TemplateHandler {
             . "SUGAR.util.doWhen('!SUGAR.util.ajaxCallInProgress()', function(){\n"
             . "SUGAR.forms.AssignmentHandler.registerView('$view');\n";
 
-        if ($view == 'ConvertLead')
-        {
-            $fieldDefs = $this->prepareCalculationFields($fieldDefs, $module);
-        }
         $js .= DependencyManager::getLinkFields($fieldDefs, $view);
 
         $createView = false;

@@ -25,6 +25,37 @@
     },
 
     /**
+     * Extends the base loadData to make sure that we have a fully fetched bean
+     * for the rowModel
+     * @param options
+     */
+    loadData: function(options) {
+        if (this.options && this.options.context && this.options.context.get('modelId')) {
+            var rowModelBean = app.data.createBean(this.options.context.get('module'), {
+                id: this.options.context.get('modelId')
+            });
+
+            app.alert.show('load_row_data_model', {
+                level: 'process',
+                title: app.lang.get('LBL_LOADING'),
+                autoClose: false
+            });
+
+            rowModelBean.fetch({
+                success: _.bind(function() {
+                    this.options.context.set('rowModel', rowModelBean);
+                    this._super('loadData', [options]);
+                }, this),
+                complete: function() {
+                    app.alert.dismiss('load_row_data_model');
+                }
+            });
+        } else {
+            this._super('loadData', [options]);
+        }
+    },
+
+    /**
      * Change row model.
      * @param {Object} model The new row model
      * @return {boolean} true if model changed, otherwise false

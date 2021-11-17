@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['InboundEmail'] = array('table' => 'inbound_email', 'comment' => 'Inbound email parameters',
+$dictionary['InboundEmail'] = array('table' => 'inbound_email', 'archive' => false, 'comment' => 'Inbound email parameters',
 	'fields' => array (
 		'id' => array (
 			'name' => 'id',
@@ -20,6 +20,34 @@ $dictionary['InboundEmail'] = array('table' => 'inbound_email', 'comment' => 'In
 			'reportable'=>false,
 			'comment' => 'Unique identifier'
 		),
+        'eapm_id' => [
+            'name' => 'eapm_id',
+            'vname' => 'LBL_EAPM_ID',
+            'type' => 'id',
+            'readonly' => true,
+        ],
+        'authorized_account' => [
+            'name' => 'authorized_account',
+            'vname' => 'LBL_AUTHORIZED_ACCOUNT',
+            'type' => 'varchar',
+            'readonly' => true,
+        ],
+        'auth_type' => [
+            'name' => 'auth_type',
+            'vname' => 'LBL_MAIL_AUTHTYPE',
+            'type' => 'varchar',
+            'len' => '10',
+            'readonly' => true,
+        ],
+        'email_provider' => [
+            'name' => 'email_provider',
+            'vname' => 'LBL_EMAIL_PROVIDER',
+            'type' => 'enum',
+            'options' => 'mail_imaptype_options',
+            'len' => 20,
+            'default' => 'other',
+            'required' => true,
+        ],
 		'deleted' => array (
 			'name' => 'deleted',
 			'vname' => 'LBL_DELETED',
@@ -128,7 +156,7 @@ $dictionary['InboundEmail'] = array('table' => 'inbound_email', 'comment' => 'In
 			'name' => 'email_password',
 			'vname' => 'LBL_PASSWORD',
 			'type' => 'encrypt',
-			'len' => '100',
+            'len' => '255',
 			'required' => true,
 			'reportable' => false,
             'write_only' => true,

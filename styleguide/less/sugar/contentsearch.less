@@ -1,0 +1,128 @@
+// Content search dashlet
+.portal-home-dashboard .dashlet-row > li:first-child {
+  .dashlet-container {
+    padding: 0;
+    height: 305px;
+    background-image: url('../../../../../styleguide/assets/img/portal-search-background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .thumbnail.dashlet {
+    [data-dashlet='toolbar'] {
+      display: none;
+    }
+
+    margin: 0 !important;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 25px 0;
+    background-color: @transparent;
+  }
+
+  .dashlet-content {
+    max-width: 600px;
+    margin: 0 auto;
+
+    &.hide {
+      display: block;
+      //disable collapse feature of the dashboard
+    }
+  }
+}
+
+.contentsearchdashlet {
+  padding: 30px;
+  background-color: fade(@white, 60%);
+  margin-top: 70px;
+
+  .record-cell {
+    position: static;
+  }
+
+  input {
+    min-width: 540px;
+    margin-top: 10px;
+  }
+
+  .btn-primary {
+    margin-left: 0;
+  }
+}
+
+.contentsearchdashlet-text {
+  margin: 0 0 20px;
+  font-weight: bold;
+  color: @darkBlue;
+}
+
+.contentsearch-dropdown {
+  position: absolute;
+  z-index: @zindexPopover;
+  display: none; // none by default, but block on "open"
+  margin: 1px 0 0; // override default ul
+  list-style: none;
+  background-color: @dropdownBackground;
+  background-clip: padding-box;
+  border-radius: 3px;
+  border: 1px solid fade(@black, 10%);
+  max-width: 539px;
+  width: 100%;
+
+  li.search-result {
+    min-height: 0;
+    border-bottom: none;
+    padding-right: 10px;
+
+    .search-result-description {
+      display: inline-block;
+      max-height: 40px;
+      line-height: 13px;
+      overflow: hidden;
+    }
+  }
+}
+
+.contentsearch-results {
+  li.no-results {
+    margin: 10px;
+  }
+
+  button.btn {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    font-weight: bold;
+  }
+}
+
+.contentsearch-footer {
+  border-top: 1px solid fade(@black, 10%);
+  background-color: @dropdownLinkBackgroundHover;
+  text-align: center;
+
+  span {
+    color: @darkBlue;
+    font-weight: bold;
+    vertical-align: middle;
+  }
+
+  .btn {
+    font-weight: bold;
+  }
+}
+
+// clear search text
+
+.search-container i.fa-times {
+  position: absolute;
+  right: 0;
+  top: 5px;
+  padding: 7px 10px;
+  color: @gray;
+  z-index: 2;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

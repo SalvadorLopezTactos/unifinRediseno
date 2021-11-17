@@ -36,7 +36,7 @@ class CalendarEventsHookManager
         $relationship = $args['relationship'];
         if (($bean->module_name === 'Meetings' || $bean->module_name === 'Calls') &&
             !empty($this->inviteeRelationships[$relationship]) &&
-             empty($bean->updateAcceptStatus)
+            empty($bean->updateAcceptStatus)
         ) {
             throw new BypassRelationshipUpdateException();
         }

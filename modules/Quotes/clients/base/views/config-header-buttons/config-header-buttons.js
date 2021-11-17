@@ -46,9 +46,15 @@
         // make sure related_fields contains description, currency_id, base_rate, quote_id, name, and
         // product_template_name & _id fields
         var requiredRelatedFields = [
+            'service_duration_value',
+            'service_duration_unit',
+            'catalog_service_duration_value',
+            'catalog_service_duration_unit',
+            'subtotal',
             'description',
             'currency_id',
             'base_rate',
+            'account_id',
             'quote_id',
             'name',
             'position',

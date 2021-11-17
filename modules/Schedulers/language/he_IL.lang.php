@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' עבודה מתוזמנת',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'בנה מחדש נתוני אבטחת צוות לא מנורמל',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'מטהר פעילויות',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'עדכן הגדרת מוצר',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'עיבוד תזמונים תלויי-זמן',
+'LBL_OOTB_DATA_ARCHIVER' => 'הפעלת מחיקות/אחסונים בארכיון של נתונים פעילים',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'מרווחים:',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'תמיד',
 'LBL_CATCH_UP' => 'יבוצע עם פיספס',
+'LBL_SYSTEM_JOB' => 'היא מערכת המשימה הנוכחית?',
 'LBL_CATCH_UP_WARNING' => 'בטל סימון אם גוב זה יארך יותר מרגע אחד.',
 'LBL_DATE_TIME_END' => 'מסתיים בתאריך ובשעה',
 'LBL_DATE_TIME_START' => 'מתחיל בתאריך ובשעה',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'הסר קבצים של כלי האבחון',
 'LBL_SUGARJOBREMOVETMPFILES' => 'הסר קבצים זמניים',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'בנה מחדש נתוני אבטחת צוות לא מנורמל',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'עדכן הגדרת מוצר',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'הרץ קמפיין דואר אלקטרוני לילי',
 'LBL_ASYNCMASSUPDATE' => 'בצע עדכון אסינכרוני מסיבי',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'ניקוי תור משרות',
 'LBL_CLEANOLDRECORDLISTS' => 'נקה רשימת רשומות ישנה',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'מטהר פעילויות',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'עיבוד תזמונים תלויי-זמן',
 'LBL_PMSEENGINECRON' => 'מתזמן SugarBPM',
 );
 

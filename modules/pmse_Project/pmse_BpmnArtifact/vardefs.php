@@ -12,6 +12,7 @@
 
 $dictionary['pmse_BpmnArtifact'] = array(
     'table' => 'pmse_bpmn_artifact',
+    'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,

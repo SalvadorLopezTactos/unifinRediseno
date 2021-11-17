@@ -36,6 +36,11 @@ class IndexPool
     const MAX_ES_INDEX_NAME = 255;
 
     /**
+     * default value for config entry 'enable_one_index'
+     */
+    const CONFIG_ENABLE_ONE_INDEX = false;
+
+    /**
      * @var string Prefix for every index
      */
     protected $prefix;
@@ -123,15 +128,15 @@ class IndexPool
     public function getStrategy($module)
     {
         // take strategy identifier from config or use default if not available
-        // for ES 6.x, it requires to use OneModulePerIndexStrategy strategy
+        // for ES 6.x, it doesn't require to use OneModulePerIndexStrategy strategy
 
         if (!empty($this->config[$module]) && !empty($this->config[$module]['strategy'])) {
             $id = $this->config[$module]['strategy'];
         } else {
-            if (version_compare($this->container->client->getVersion(), '6.0', '<')) {
+            if (version_compare($this->container->client->getElasticServerVersion(), '6.0', '<')) {
                 $id = self::DEFAULT_STRATEGY;
             } else {
-                $id = self::SINGLE_MODULE_STRATEGY;
+                $id = $this->getIndexStrategyFromConfig();
             }
         }
 
@@ -229,5 +234,16 @@ class IndexPool
     {
         $client = $client ?: $this->container->client;
         return new Index($client, $name);
+    }
+
+    /**
+     * get strategy based on 'enable_one_index' in config.php, by default the value will be false,
+     * it will use SINGLE_MODULE_STRATEGY
+     *
+     * @return string
+     */
+    protected function getIndexStrategyFromConfig() : string
+    {
+        return empty(IndexManager::isOneIndexEnabled()) ? self::SINGLE_MODULE_STRATEGY : self::DEFAULT_STRATEGY;
     }
 }

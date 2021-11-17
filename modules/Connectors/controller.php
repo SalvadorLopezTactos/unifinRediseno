@@ -205,7 +205,12 @@ class ConnectorsController extends SugarController {
 		$return_id = $ds_record->merge_bean->id;
 		$return_module = $ds_record->merge_module;
 		$return_action = 'EditView';
-		header("Location: index.php?action=$return_action&module=$return_module&record=$return_id");
+        $location = 'index.php?' . http_build_query([
+                'action' => $return_action,
+                'module' => $return_module,
+                'record' => $return_id,
+            ]);
+        header("Location: $location");
 	}
 
     function action_CallConnectorFunc() {

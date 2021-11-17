@@ -59,14 +59,12 @@
             {if isset($col.type) && ($col.type == 'phone')}
                 {$icon_phone}
             {/if}
-            {* BEGIN SUGARCRM flav=pro ONLY *}
             {if isset($field_defs.$field.calculated) && $field_defs.$field.calculated}
                 {sugar_getimage name="SugarLogic/icon_calculated" alt=$mod_strings.LBL_CALCULATED ext=".png" other_attributes='class="right_icon" '}
             {/if}
             {if isset($field_defs.$field.dependency) && $field_defs.$field.dependency}
                 {sugar_getimage name="SugarLogic/icon_dependent" ext=".png" alt=$mod_strings.LBL_DEPENDANT other_attributes='class="right_icon" '}
             {/if}
-            {* END SUGARCRM flav=pro ONLY *}
             <span id='le_label_{$idCount}'>
             {if !empty($translate) && !empty($col.label)}
                 {eval var=$col.label assign='newLabel'}
@@ -185,14 +183,12 @@
                     {if isset($col.type) && ($col.type == 'phone')}
                         {$icon_phone}
                     {/if}
-                    {* BEGIN SUGARCRM flav=pro ONLY *}
                     {if isset($field_defs.$field.calculated) && $field_defs.$field.calculated}
                         {sugar_getimage name="SugarLogic/icon_calculated" alt=$mod_strings.LBL_CALCULATED ext=".png" other_attributes='class="right_icon"'}
                     {/if}
                     {if isset($field_defs.$field.dependency) && $field_defs.$field.dependency}
                         {sugar_getimage name="SugarLogic/icon_dependent" ext=".png" alt=$mod_strings.LBL_DEPENDANT other_attributes='class="right_icon"'}
                     {/if}
-                    {* END SUGARCRM flav=pro ONLY *}
                     <span id='le_label_{$idCount}'>
                     {eval var=$col.label assign='label'}
                     {if !empty($translate) && !empty($col.label)}
@@ -276,7 +272,7 @@ var editPanelProperties = function (panelId, view) {
     panelId = "" + panelId;
 	var key_label = document.getElementById('le_panelid_' + panelId).innerHTML.replace(/^\s+|\s+$/g,'');
 	var value_label = document.getElementById('le_panelname_' + panelId).innerHTML.replace(/^\s+|\s+$/g,'');
-	var params = "module=ModuleBuilder&action=editProperty&view_module=" + encodeURIComponent(ModuleBuilder.module) 
+	var params = "module=ModuleBuilder&action=editProperty&view_module=" + encodeURIComponent(ModuleBuilder.module)
 	            + (ModuleBuilder.package ?  "&view_package=" + encodeURIComponent(ModuleBuilder.package) : "")
                 + "&view=" + encodeURIComponent(view) + "&id_label=le_panelname_" + encodeURIComponent(panelId) + "&name_label=label_" + encodeURIComponent(key_label.toUpperCase())
                 + "&title_label=" + encodeURIComponent(SUGAR.language.get("ModuleBuilder", "LBL_LABEL_TITLE")) + "&value_label=" + encodeURIComponent(value_label);

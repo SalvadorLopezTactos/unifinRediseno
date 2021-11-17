@@ -65,7 +65,7 @@
                 shortcut = findShortcut(self.shortcuts, id);
 
             _.each(keys, function (key, index){
-                keys[index] = $.trim(key);
+                keys[index] = key.trim();
             });
 
             if (shortcut && !_.isEqual(shortcut.keys, keys)) {

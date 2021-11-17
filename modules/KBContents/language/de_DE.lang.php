@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Dashboard für Wissensdatenbankliste',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Dashboard für Wissensdatenbankbericht',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Wissensdatenbank',
 
     'LBL_MODULE_NAME' => 'Wissensdatenbank',
     'LBL_MODULE_NAME_SINGULAR' => 'Wissensdatenbank-Artikel',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Nicht hilfreich',
     'LBL_RATING' => 'Einstufung',
     'LBL_VIEWED_COUNT' => 'Zähler anzeigen',
-    'LBL_DOWNLOAD_ALL' => 'Alles herunterladen',
-    'LBL_DOWNLOAD_ONE' => 'Herunterladen',
-    'LBL_ATTACHMENTS' => 'Anhänge',
-    'LBL_ADD_ATTACHMENT' => 'Durchsuchen',
     'LBL_CATEGORIES' => 'Wissensdatenbank-Kategorien',
     'LBL_CATEGORY_NAME' => 'Kategorie',
     'LBL_USEFULNESS' => 'Nützlichkeit',

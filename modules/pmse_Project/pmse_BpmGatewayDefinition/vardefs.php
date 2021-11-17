@@ -12,6 +12,7 @@
 
 $dictionary['pmse_BpmGatewayDefinition'] = array(
     'table' => 'pmse_bpm_gateway_definition',
+    'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,

@@ -246,7 +246,7 @@
     support: function() {
         app.logger.warn('The function `View.Views.Base.FooterActionsView.support`' +
             ' is deprecated in 7.9.0.0 and will be removed in 7.11.0.0.');
-        window.open('http://support.sugarcrm.com', '_blank');
+        window.open('https://support.sugarcrm.com', '_blank');
     },
 
     /**
@@ -388,8 +388,9 @@
             lang = app.lang.getLanguage(),
             module = app.controller.context.get('module'),
             route = this.routeParams.route,
-            url = 'http://www.sugarcrm.com/crm/product_doc.php?edition=' + serverInfo.flavor +
-                '&version=' + serverInfo.version + '&lang=' + lang + '&module=' + module + '&route=' + route;
+            url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' + serverInfo.flavor +
+                '&version=' + serverInfo.version + '&lang=' + lang + '&module=' + module + '&route=' + route +
+                '&products=' + encodeURIComponent(app.user.get('products').join(','));
         if (route == 'bwc') {
             var action = window.location.hash.match(/#bwc.*action=(\w*)/i);
             if (action && !_.isUndefined(action[1])) {

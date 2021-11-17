@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Nodokļu klase:',
   'LBL_TYPE_NAME'=>'Tipa nosaukums',
   'LBL_TYPE' => 'Tips:',
+  'LBL_PRODUCT_TYPE' => 'Produkta veids',
   'LBL_URL' => 'Produkta URL:',
   'LBL_VENDOR_PART_NUM' => 'Pārdevēja detaļas numurs:',
   'LBL_WEIGHT' => 'Svars:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Produktu katalogs',
   'NTC_DELETE_CONFIRMATION' => 'Vai tiešām vēlaties dzēst šo ierakstu?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Pievienot',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Meklēt produktu katalogā',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Dati nav pieejami',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Piešķirts lietotājam',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Produktu veidi',
   'LBL_RENEWABLE' => 'Atjaunojams',
   'LBL_SERVICE' => 'Pakalpojums',
+  'LBL_LOCK_DURATION' => 'Bloķēšanas ilgums',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Produktu kataloga saraksta informācijas panelis',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Produktu kataloga ieraksta informācijas panelis',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Produktu kataloga fokusa panelis',
 );

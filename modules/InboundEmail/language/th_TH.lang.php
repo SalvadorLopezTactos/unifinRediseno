@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'คำเตือน: คุณกำลังแก้ไขการตั้งค่าการนำเข้าอัตโนมัติซึ่งอาจทำให้ข้อมูลสูญหาย',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'คำเคือน: ต้องเปิดใช้งานการนำเข้าอัตโนมัติเมื่อสร้างเคสโดยอัตโนมัติ',
 	'LBL_EDIT_LAYOUT' => 'แก้ไขเลย์เอาต์' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'ที่อยู่อีเมล',
+    'LBL_EMAIL_PROVIDER' => 'ผู้ให้บริการอีเมล',
+    'LBL_AUTH_STATUS' => 'สถานะการอนุญาต',
 );
-?>

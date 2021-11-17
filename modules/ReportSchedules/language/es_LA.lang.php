@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Por informe',
     'LBL_RECENTLY_MODIFIED' => 'Modificado recientemente',
     'LBL_RECORD_SAVED_SUCCESS' => 'Ha creado correctamente el {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. Abra el planificador para añadir usuarios mediante el subpanel Usuarios.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Esta Planificación de Informes',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Tablero de Registro de Programaciones de Informes',
 );

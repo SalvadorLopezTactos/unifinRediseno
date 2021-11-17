@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Poreska stopa:',
   'LBL_TYPE_NAME'=>'Naziv tipa',
   'LBL_TYPE' => 'Tip',
+  'LBL_PRODUCT_TYPE' => 'Tip proizvoda',
   'LBL_URL' => 'URL proizvoda:',
   'LBL_VENDOR_PART_NUM' => 'Broj dela prodavca:',
   'LBL_WEIGHT' => 'Težina:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Prikaži katalog proizvoda',
   'NTC_DELETE_CONFIRMATION' => 'Da li ste sigurni da želite da obrišete ovaj zapis?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Dodaj',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Pretraži katalog proizvoda',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Nema dostupnih podataka',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Ime dodeljenog korisnika',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Tipovi proizvoda',
   'LBL_RENEWABLE' => 'Obnovljivo',
   'LBL_SERVICE' => 'Usluga',
+  'LBL_LOCK_DURATION' => 'Trajanje zaključavanja',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Kontrolna tabla liste kataloga proizvoda',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa kataloga proizvoda',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusas za katalog proizvoda',
 );

@@ -9,7 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-$dictionary['Version'] = array('table' => 'versions'
+$dictionary['Version'] = array('table' => 'versions', 'archive' => false
                                ,'fields' => array (
   'id' => 
   array (

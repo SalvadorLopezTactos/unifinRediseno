@@ -12,6 +12,7 @@
 
 $dictionary['pmse_BpmnGateway'] = array(
     'table' => 'pmse_bpmn_gateway',
+    'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,

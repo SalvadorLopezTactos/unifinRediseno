@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Creat per ID',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Creat per nom d&#39;usuari',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nom d&#39;usuari assignat',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat a les etiquetes',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'Quadre de comandament del registre d&#39;etiquetes',
+    'LBL_MY_TAGS' => 'Les meves etiquetes',
+    'LBL_MY_FAVORITE_TAGS' => 'Les meves etiquetes preferides',
 );

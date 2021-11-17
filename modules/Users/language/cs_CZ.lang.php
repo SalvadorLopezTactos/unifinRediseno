@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'Heslo, které jste vložili neodpovídá pořadavkům na heslo. Prosím vložte nové.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Info o uživateli nenalezeno',
     'ERR_USER_NAME_EXISTS'              => 'Jméno uživatele {0} již existuje. Duplicitní jména uživatelů nejsou povolena. Změňte jméno uživatele tak, aby bylo jedinečné.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => 'Licence „Nápověda systému Sugar“ musí být uložena s dalším kompatibilním typem licence',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Tento uživatel je zamknut a tímto heslem se nepřihlásí .',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Uživateli majícímu pouze externí ověření není povoleno se přihlásit pomocí přihlašovacích údajů systému Sugar',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Email Adresu příjemce',
 	'ERR_SERVER_STATUS'					=> 'Status Vašeho serveru',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'System není schopen odeslat email. Prosím ověřte nastavení odesílání pošty na <a href="index.php?module=EmailMan&action=config">Email Settings</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Noví uživatelé musí být vytvořeni v <a href="{0}" target="_blank">Nastavení SugarCloud</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-mailová adresa',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Předpovědi',
     'LBL_WORKSHEETS'                    => 'Listy',
 	'LBL_CALENDARS'                     => 'Kalendáře',
+    'LBL_SHIFTS'                        => 'Směny',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Výjimky směn',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Přímat emailové oznámení, když je Vám zadán úkol.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'E-mail o přiřazení',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Dostanete oznámení e-mailem, když vás někdo zmíní v položce protokolu komentářů.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'E-mail o zmínce',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Vyberte způsob zobrazení názvů polí v zobrazeních záznamů. Chcete-li zobrazit kompaktnější zobrazení záznamů, vyberte možnost „Vedle hodnoty pole“.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Umístění názvu pole',
     'LBL_ABOVE_FIELD_VALUE'             => 'Nad hodnotou pole',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Typ licence',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Nápověda systému Sugar',
 	'LBL_REMINDER_TEXT'					=> 'Přidá upomínání před následujícím hovorem nebo schůzkou',
 	'LBL_REMINDER'						=> 'Zobrazovat připomínání?',
 	'LBL_REMINDER_POPUP' => 'Vyskakovací okno',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Tato relace skončila, protože další relace byla zahájena pod stejným uživatelským jménem.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Znovu přiřadit záznam',
-	'LBL_REASS_DESC_PART1'				=> 'Najdi všechny záznamy v modulu přiřazené tomuto uživateli a přehod je na jiného uživatele.',
+    'LBL_REASS_DESC_PART1'              => 'Najdi všechny záznamy v modulu přiřazené tomuto uživateli a přehod je na jiného uživatele.',
         'LBL_REASS_DESC_PART2'=>                    'Vyberte které moduly proti sobě budou mít workflow, pošlete notifikaci o přiřazení a sledujte audit během přerozdělení. Vyberte "Další" pro pokračování a přerozdělení záznam. Vyberte "Restart" pro start od začátku.',
 	'LBL_REASS_STEP2_TITLE'				=> 'Přeřazení týmu',
 	'LBL_REASS_STEP2_DESC'				=> 'Níže uvedené týmy byly dostupné v Z týmu uživatele (From User&#39;s team), ale ne v Do uživatele týmu (To User&#39;s team). Všechny záznamy v Z týmu uživatele (From User&#39;s team) nebudou vidět v Do týmu uživatele, pokud hodnoty týmu jsou mapovány.',
@@ -624,7 +628,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Profil uživatele',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Chcete-li provést změny v polích určených pouze pro čtení, přejděte do <a href="%s" target="_blank">Nastavení SugarCloud</a>.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Chcete-li provést změny v polích určených jen pro čtení, kontaktujte svého správce programu Sugar.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

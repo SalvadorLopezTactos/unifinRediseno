@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => '프로세스 관리',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => '무인 프로세스',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => '프로세스 포커스 서랍',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => '프로세스 기록 대시보드',
+
     'LBL_CAS_ID' => '프로세스 번호',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "알 수없는 (사용자 아이디:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "작업이 완수됨",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => '프로세스 설계 미리 보기',
     'LBL_PROJECT_RUN_ORDER' => '주문 실행',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => '현재 활동',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => '수정일자:',
+    'LBL_DATE_ENTERED' => '생성일자',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => '이 프로세스를 받으시겠습니까?',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => '프로세스를 성공적으로 받았습니다',
 );
 

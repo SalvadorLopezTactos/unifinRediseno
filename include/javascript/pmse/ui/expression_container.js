@@ -35,8 +35,7 @@ ExpressionContainer.prototype.unsupportedDataTypes = [
     'IFrame',
     'Image',
     'MultiSelect',
-    'FlexRelate',
-    'Relate'
+    'FlexRelate'
 ];
 
 ExpressionContainer.prototype.init = function (options, parent) {
@@ -338,6 +337,9 @@ ExpressionContainer.prototype.handleCriteriaBuilder = function (globalParent, pa
 
             switch (parentVariable.fieldType) {
                 case 'Date':
+                    // Special typeFilter to allow comparison of Date fields with Datetime fields
+                    // Note, does not work the other way
+                    var typeFilter = [parentVariable.fieldType, 'Datetime'];
                 case 'Datetime':
                     config = {
                         operators: {
@@ -360,7 +362,7 @@ ExpressionContainer.prototype.handleCriteriaBuilder = function (globalParent, pa
                             data: parentVariable.inputFields,
                             dataFormat: "tabular",
                             textField: "label",
-                            typeFilter: parentVariable.fieldType,
+                            typeFilter: !_.isUndefined(typeFilter) ? typeFilter : parentVariable.fieldType,
                             moduleTextField: "moduleText",
                             moduleValueField: "moduleValue"
                         }

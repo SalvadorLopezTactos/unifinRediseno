@@ -15,6 +15,7 @@ namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User\Mapping;
 use Sugarcrm\IdentityProvider\Authentication\UserMapping\MappingInterface;
 use Sugarcrm\IdentityProvider\Authentication\User as IdmUser;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User;
+use Sugarcrm\IdentityProvider\Mango\LocaleMapping;
 use Sugarcrm\IdentityProvider\Srn\Converter;
 use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Language;
 use Sugarcrm\Sugarcrm\Security\Validator\Validator;
@@ -44,14 +45,6 @@ class SugarOidcUserMapping implements MappingInterface
         'address_state' => 'region',
         'address_country' => 'country',
         'address_postalcode' => 'postal_code',
-    ];
-
-    /**
-     * @var array
-     */
-    protected $languageMapping = [
-        'en_US' => 'en_us',
-        'it_IT' => 'it_it',
     ];
 
     /**
@@ -188,19 +181,7 @@ class SugarOidcUserMapping implements MappingInterface
         if (empty($userLanguage)) {
             return null;
         }
-
-        $languageParts = explode('-', $userLanguage);
-
-        if (count($languageParts) === 1) {
-            $languageParts[1] = strtoupper($languageParts[0]);
-        }
-
-        $userLanguage = implode('_', $languageParts);
-
-
-        if (array_key_exists($userLanguage, $this->languageMapping)) {
-            $userLanguage = $this->languageMapping[$userLanguage];
-        }
+        $userLanguage = LocaleMapping::map($userLanguage);
 
         $violations = Validator::getService()->validate($userLanguage, [new Language()]);
         if ($violations->count() > 0) {

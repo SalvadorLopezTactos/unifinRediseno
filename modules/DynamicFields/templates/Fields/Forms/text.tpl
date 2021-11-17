@@ -44,4 +44,5 @@
 	{/if}
 	</td>
 </tr>
+<input type='hidden' name='len' value='{$vardef.len}'>
 {include file="modules/DynamicFields/templates/Fields/Forms/coreBottom.tpl"}

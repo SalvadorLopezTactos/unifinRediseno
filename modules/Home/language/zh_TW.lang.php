@@ -116,6 +116,7 @@ $mod_strings = array (
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Dashlet 將重新排欄，您確定要更改欄的版面配置嗎？',
   'LBL_REMOVE_DASHLET_CONFIRM' => '您確定要移除 Sugar Dashlet 嗎？',
   'LBL_NO_DASHBOARD_CONFIGURED' => '未設定儀表板',
+  'LBL_NO_DASHLETS_CONFIGURED' => '未設定 Dashlet',
   'LBL_CREATE_DASHBOARD_LINK' => '建立儀表板',
 
   'LBL_DASHLET_WEBPAGE_NAME' => '網頁',
@@ -123,7 +124,7 @@ $mod_strings = array (
   'LBL_DASHLET_WEBPAGE_URL' => 'URL',
   'LBL_DASHLET_WEBPAGE_URL_HELP' => '由於不安全內容或政策，某些網站可能無法正常載入。',
 
-  'LBL_DASHLET_ADD' => '新增',
+  'LBL_DASHLET_ADD' => '添加 Dashlet',
   'LBL_DASHLET_DELETE' => '刪除 Sugar Dashlet ',
   'LBL_DASHLET_REFRESH' => '重新整理 Sugar Dashlet',
   'LBL_DASHLET_EDIT' => '編輯 Sugar Dashlet',
@@ -218,7 +219,6 @@ $mod_strings = array (
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar－Mihai Bazon 開發的用於輸入日期的行事曆',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF－Wayne Munro 推出的用於建立 PDF 文件的程式庫。',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - PHP 中的 WebDAV 伺服器執行方式。',
-  'LBL_SOURCE_PCLZIP' => 'PclZip－Vincent Blavet 推出的為 Zip 格式封存提供壓縮和擷取功能的程式庫',
   'LBL_SOURCE_SMARTY' => 'Smarty－適用於 PHP 的範本引擎。',
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library－用於實施豐富的用戶端功能的使用者介面庫公用程式。',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer－適用於 PHP 的全功能電子郵件傳送類',

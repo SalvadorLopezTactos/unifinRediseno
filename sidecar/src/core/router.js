@@ -123,6 +123,17 @@ const Router = Backbone.Router.extend({
     },
 
     /**
+     * Checks if the last page can be stored on the login process
+     *
+     * @return {boolean} true if page can be stored, false otherwise
+     * @private
+     */
+    _canStoreExternalAuthLastPage: function() {
+        const fragmentsToNotStore = ['stsAuthError'];
+        return Backbone.history.fragment && !_.contains(fragmentsToNotStore, Backbone.history.fragment);
+    },
+
+    /**
      * Registers a handler for a named route.
      *
      * This method wraps the handler into {@link Core.Router#_routeHandler}
@@ -370,9 +381,9 @@ const Router = Backbone.Router.extend({
     index: function() {
         SUGAR.App.logger.debug("Route changed to index");
         if (SUGAR.App.config.externalLogin) {
-            const lastPage = User.lastState.get('externalAuthLastPage');
+            const lastPage = SUGAR.App.cache.get('externalAuthLastPage');
             if (lastPage) {
-                User.lastState.remove('externalAuthLastPage');
+                SUGAR.App.cache.cut('externalAuthLastPage');
                 this.navigate(lastPage, {trigger: true});
                 return;
             }
@@ -459,8 +470,8 @@ const Router = Backbone.Router.extend({
         Events.trigger('app:login');
 
         if(SUGAR.App.config.externalLogin) {
-            if (Backbone.history.fragment) {
-                User.lastState.set('externalAuthLastPage', Backbone.history.fragment);
+            if (this._canStoreExternalAuthLastPage()) {
+                SUGAR.App.cache.set('externalAuthLastPage', Backbone.history.fragment);
             }
             // This will attempt reauth
             SUGAR.App.api.ping(null, {
@@ -481,34 +492,36 @@ const Router = Backbone.Router.extend({
      * @fires 'app:logout:success'
      */
     logout: function(clear) {
+        let logoutComplete = function(clear) {
+            SUGAR.App.router.navigate("#");
+            if (!SUGAR.App.config.externalLogin) {
+                if (clear) {
+                    //We have to reload to clear any sensitive data from browser tab memory.
+                    window.location.reload();
+                } else {
+                    SUGAR.App.router.login();
+                }
+            } else {
+                SUGAR.App.controller.loadView({
+                    module: 'Login',
+                    layout: 'logout',
+                    skipFetch: true,
+                    create: true
+                });
+            }
+        };
+
         if (!SUGAR.App.api.isAuthenticated()) {
-            // We don't want to store the #logout fragment in the URL
-            // history. This will re-direct to the root defined in the
-            // Backbone router, and replace the URL.
-            this.redirect('/');
+            logoutComplete(false);
             return;
         }
 
         clear = (clear === "1");
+
         SUGAR.App.logger.debug("Logging out: " + clear);
         SUGAR.App.logout({
             complete() {
-                SUGAR.App.router.navigate("#");
-                if (!SUGAR.App.config.externalLogin) {
-                    if (clear) {
-                        //We have to reload to clear any sensitive data from browser tab memory.
-                        window.location.reload();
-                    } else {
-                        SUGAR.App.router.login();
-                    }
-                } else {
-                    SUGAR.App.controller.loadView({
-                        module: 'Login',
-                        layout: 'logout',
-                        skipFetch: true,
-                        create: true
-                    });
-                }
+                logoutComplete(clear);
             },
             success(data) {
                 Events.trigger('app:logout:success', data);

@@ -229,6 +229,10 @@ module.exports = {
                 field.fields = self._patchFields(moduleName, module, field.fields);
                 return;
             }
+            if (field.subfields) {
+                field.subfields = self._patchFields(moduleName, module, field.subfields);
+                return;
+            }
 
             if (!_.isEmpty(fieldDef)) {
                 // Create a definition if it doesn't exist

@@ -78,13 +78,22 @@
          */
         this._isOpen = false;
 
-        var learnMoreUrl = 'http://www.sugarcrm.com/crm/product_doc.php?' + $.param({
+        var products = app.user.get('products') ?
+            app.user.get('products').join(',') :
+            '';
+
+        var params = {
             edition: app.metadata.getServerInfo().flavor,
             version: app.metadata.getServerInfo().version,
             lang: app.lang.getLanguage(),
             module: this.module,
             route: 'list'
-        });
+        };
+        if (!_.isEmpty(products)) {
+            params.products = products;
+        }
+        var learnMoreUrl = 'https://www.sugarcrm.com/crm/product_doc.php?' + $.param(params);
+
         /**
          * Aside text with all the translated links and strings to easily show
          * it in the view.

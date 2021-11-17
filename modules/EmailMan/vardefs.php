@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $dictionary['EmailMan'] = 
-array( 'table' => 'emailman', 'comment' => 'Email campaign queue', 'fields' => array(
+array( 'table' => 'emailman', 'archive' => false, 'comment' => 'Email campaign queue', 'fields' => array(
 	'date_entered' => array(
 		'name' => 'date_entered',
 		'vname' => 'LBL_DATE_ENTERED',

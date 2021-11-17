@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => '프로세스 정의',
   'LBL_MODULE_NAME_SINGULAR' => '프로세스 정의',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => '프로세스 정의 포커스 서랍',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => '프로세스 정의 기록 대시보드',
   'LNK_LIST' => '프로세스 정의 보기',
   'LNK_NEW_PMSE_PROJECT' => '프로세스 정의 만들기',
   'LNK_IMPORT_PMSE_PROJECT' => '프로세스 정의 가져 오기',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => '변경 기록 소유자',
     'LBL_PMSE_FORM_LABEL_TEAM' => '팀:',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => '활동을 다시 할당',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => '이메일',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => '프로세스가 할당되면 프로세스 사용자에게 이메일 보내기',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => '사용자 정의',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => '업무 배정 방법',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => '사용자 할당',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => '레코드에서 "~에게 할당됨"을 업데이트',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => '가용성별로 “할당” 설정',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => '관련 레코드 추가',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => '연관 모듈',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => '활동의 이름은 비어 있습니다.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => '이름 "% s 님이"이미 모양 가족에 존재합니다.',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => '시프트 가용성 필요',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => '사용 가능한 사용자가 없는 경우',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => '이전',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => '신규 레코드만',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => '업데이트 만 기록',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => '업데이트된 레코드만 해당 (전체 업데이트 - 도움말 전문 참조)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => '새로운 기록 또는 첫 업데이트',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => '새로운 기록 및 모든 업데이트',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => '이벤트를 시작 할 때 선택',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => '프로세스가 시작되는 시기를 선택하십시오.<br><br>신규: 새 기록가 생성될 때 프로세스를 실행합니다.<br><br>첫 업데이트: 기존 기록에 대한 기준이 처음 충족될 때만 프로세스가 실행됩니다.<br><br>모든 업데이트: 기존 기록에 대한 기준이 충족될 때마다 프로세스가 실행됩니다.<br><br>새 기록 또는 첫 업데이트: 기록 생성 또는 기록 업데이트 중 기록에 대한 기준이 처음 충족될 때만 프로세스가 실행됩니다.<br><br>새 기록 및 모든 업데이트: 모든 새 기록과 기존 기록에 대해 매번 프로세스가 실행됩니다.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => '이벤트 트리거를 적용 슈가 모듈을 선택',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => '기일',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => '다음으로부터 변경',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => '다음으로 변경',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => '모두 포함',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => '모두 포함하지 않음',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => '이후',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => '이전',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => '동일하지 않습니다',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => '추가',
     'LBL_PMSE_FORMPANEL_CLOSE' => '닫기',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => '레코드에 할당된 모든 팀',
     'LBL_PMSE_EMAILPICKER_TEAMS' => '팀',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%MODULE% 관련 %RELATED%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => '%MODULE% 작성한 사용자',

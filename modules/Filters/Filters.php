@@ -40,6 +40,7 @@ class Filters extends Basic
     public $assigned_user_name;
     public $assigned_user_link;
     public $filter_definition;
+    public $force_limit = 50;   // unlimited: -1
 
     public function retrieve($id = '-1', $encode = true, $deleted = false)
     {

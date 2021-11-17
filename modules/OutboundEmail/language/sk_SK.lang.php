@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Účty odchádzajúcich e-mailov',
     'LBL_MODULE_NAME_SINGULAR' => 'Účet odchádzajúcich e-mailov',
+    'LBL_STATUS' => 'Stav',
     'LBL_MAIL_SENDTYPE' => 'Agent prenosu pošty',
     'LBL_MAIL_SMTPSERVER' => 'Server',
     'LBL_MAIL_SMTPPORT' => 'Port',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'To je systémový účet.',
     'LBL_EMAIL_ADDRESS_ID' => 'ID e-mailovej adresy',
     'LBL_TYPE' => 'Typ',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Autorizovaná e-mailová adresa',
+    'LBL_FROM_EMAIL_ADDRESS' => 'Z e-mailovej adresy',
     'LBL_REPLY_TO_NAME' => 'Meno na zaslanie odpovede',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'E-mailové adresy na zaslanie odpovede',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID e-mailovej adresy na zaslanie odpovede',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'E-mailová adresa na zaslanie odpovede',
     'LBL_PRIMARY_TEAM' => 'Primárny tím',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na nastavenia e-mailu',
 );

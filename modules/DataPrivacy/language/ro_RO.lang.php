@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Câmpuri marcate pentru ștergere',
     'LBL_NO_RECORDS_MARKED' => 'Nu s-au marcat câmpuri sau înregistrări pentru ștergere.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Tablou de bord înregistrări de confidențialitate a datelor',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare confidențialitatea datelor',
 
     // list view
     'LBL_HELP_RECORDS' => 'Modulul de Confidențialitate a datelor monitorizează activitățile de confidențialitate, inclusiv consimțământul și solicitările subiecților, pentru a susține procedurile de confidențialitate ale organizației dvs. Creați înregistrări de confidențialitate a datelor legate de înregistrarea unui individ (de ex. un contact) pentru a monitoriza consimțământul sau pentru a lua măsuri în privința unei solicitări de confidențialitate.',

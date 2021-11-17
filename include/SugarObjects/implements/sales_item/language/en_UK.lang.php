@@ -34,4 +34,8 @@ $mod_strings = [
     'LBL_VENDOR_PART_NUM' => 'Vendor Part Number',
     'LBL_WEIGHT' => 'Weight',
     'LBL_SERVICE' => 'Service',
+    'LBL_CATALOG_SERVICE_DURATION_VALUE' => 'Catalog Service Duration Value',
+    'LBL_CATALOG_SERVICE_DURATION_UNIT' => 'Catalog Service Duration Unit',
+    'LBL_SERVICE_DURATION_MULTIPLIER' => 'Service Duration Multiplier',
+    'LBL_RENEWAL' => 'Renewal',
 ];

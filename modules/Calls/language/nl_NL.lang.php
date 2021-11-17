@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Dashboard bellijst',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Dashboard belrecord',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer oproepen',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Telefoongesprekken',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Toegewezen aan',
     'LBL_LIST_MY_CALLS' => 'Mijn Telefoongesprekken',
     'LBL_MY_SCHEDULED_CALLS' => 'Mijn geplande Telefoongesprekken',
+    'LBL_GUEST_CALLS' => 'Mijn oproepen als gast',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Geplande oproepen als gast',
     'LBL_SELECT_FROM_DROPDOWN' => 'Selecteer aub uit de gerelateerde keuzelijst.',
 	'LBL_ASSIGNED_TO_NAME' => 'Toegewezen aan',
 	'LBL_ASSIGNED_TO_ID' => 'Toegewezen aan',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Annuleren',
     'LBL_EMPTY_SEARCH_RESULT' => 'Helaas werden geen resultaten gevonden. Voeg hieronder aub een gast toe.',
     'LBL_NO_ACCESS' => 'U heeft geen toegang om $module te maken',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Contact-Id Amazon Connect',
+
     'LBL_REPEAT_TYPE' => 'Herhalingstype',
     'LBL_REPEAT_INTERVAL' => 'Herhalingsinterval',
     'LBL_REPEAT_END' => 'Einde',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Gesproken met {{{this}}}',
     'LBL_SEND_INVITES' => 'Verstuur Uitnodigingen',
     'LBL_REMINDER_TITLE' => 'Telefoongesprek:',
+    'LBL_CALL_RECORDING_URL' => 'URL opname',
+    'LBL_CALL_RECORDING' => 'Opname',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'U heeft {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> succesvol aangemaakt.',

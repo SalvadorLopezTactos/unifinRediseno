@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'Proceso listën',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'Procese të pambajtura',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te proceset',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Paneli i regjistrimit të proceseve',
+
     'LBL_CAS_ID' => 'Proceso ID',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "E panjohur (sipas UserId:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "detyra u",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Pamja paraprake e dizajnit të procesit',
     'LBL_PROJECT_RUN_ORDER' => 'Ekzekuto porosinë',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => 'Aktiviteti aktual',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => 'Data e modifikimit',
+    'LBL_DATE_ENTERED' => 'Data e krijimit',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'Je i sigurt që dëshiron ta kërkosh këtë proces?',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'Procesi është kërkuar me sukses',
 );
 

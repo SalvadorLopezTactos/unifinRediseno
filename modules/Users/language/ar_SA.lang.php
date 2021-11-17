@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'كلمة المرور التي أدخلتها لا تلبي متطلبات كلمة المرور.  يُرجى المحاولة مرة أخرى.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'معلومات المستخدم ليست موجودة',
     'ERR_USER_NAME_EXISTS'              => 'اسم المستخدم {0} موجود بالفعل. غير مسموح بأسماء المستخدم المتكررة. قم بتغيير اسم المستخدم لكي يصبح فريدًا من نوعه.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => 'يجب حفظ ترخيص “Sugar Hint” مع نوع ترخيص متوافق إضافي',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'تم حظر هذا المستخدم من استخدام تطبيق Sugar ويتعذر تسجيل الدخول باستخدام كلمة مروره/ مرورها الحالية.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'المستخدم بتصديق خارجي هو فقط غير المسموح له بتسجيل الدخول باستخدام بيانات اعتماد Sugar',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'عنوان البريد الإلكتروني للمستلم',
 	'ERR_SERVER_STATUS'					=> 'حالة خادمك',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'النظام غير قادر على إرسال بريد إلكتروني للمستخدم. يُرجى التحقق من تكوين البريد الصادر في <a href="index.php?module=EmailMan&action=config">إعدادات البريد الإلكتروني</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'يجب إنشاء المستخدمين الجدد في <a href="{0}" target="_blank">إعدادات SugarCloud</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'عنوان البريد الإلكتروني',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'التوقعات',
     'LBL_WORKSHEETS'                    => 'أوراق الأعمال',
 	'LBL_CALENDARS'                     => 'التقويمات',
+    'LBL_SHIFTS'                        => 'الورديات',
+    'LBL_SHIFT_EXCEPTIONS'              => 'استثناءات الورديات',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'استلام إخطار بالبريد الإلكتروني عند تعيين سجل لك.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'بريد إلكتروني عند تعيين مهمة',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'تسلم إشعار بالبريد الإلكتروني عند إشارة أحد الأشخاص إليك في إدخال سجل تعليق.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'بريد إلكتروني عند الإشارة',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'حدد طريقة عرض أسماء الحقول على طرق عرض السجلات. اختر "بجانب قيمة الحقل" لطريقة عرض سجلات أكثر إدماجًا.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'مكان اسم الحقل',
     'LBL_ABOVE_FIELD_VALUE'             => 'فوق قيمة الحقل',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'نوع الترخيص',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'أدخل قيمة افتراضية لتذكيرات المكالمات والاجتماعات. تظهر الإخطارات المنبثقة لجميع المدعوين باستخدام Sugar. يتم إرسال تذكيرات البريد الإلكتروني لجميع المدعوين.',
 	'LBL_REMINDER'						=> 'التذكيرات',
 	'LBL_REMINDER_POPUP' => 'منبثق',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'انتهت هذه الجلسة نظرًا لبدء جلسة أخرى باسم المستخدم ذاته.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'إعادة تعيين السجلات',
-	'LBL_REASS_DESC_PART1'				=> 'حدد الوحدات التي تحتوي على السجلات لإعادة التعيين من مستخدم محدد لمستخدم آخر. <br/><br/>                                                            
+    'LBL_REASS_DESC_PART1'              => 'حدد الوحدات التي تحتوي على السجلات لإعادة التعيين من مستخدم محدد لمستخدم آخر. <br/><br/>                                                            
 انقر فوق \"التالي\" لعرض عدد السجلات التي سيتم تحديثها في كل دورة محددة.
                                                             انقرفوق \"إلغاء\" للخروج من الصفحة دون إعادة تعيين أي سجلات.',
         'LBL_REASS_DESC_PART2'=>                    'حدد الوحدات التي سيتم إجراء عمليات سير العمل مقابلها، وأرسل إخطارات التعيين، وقم بتتبع التدقيق أثناء إعادة التعيين. انقر فوق \"التالي\" للمتابعة وإعادة تعيين السجلات. انقر فوق \"إعادة التشغيل\" لبدء التشغيل ثانية.',
@@ -635,7 +639,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'ملف تعريف المستخدم',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'الرجاء الوصول إلى <a href="%s" target="_blank">إعدادات SugarCloud</a> لإجراء تعييرات على حقول القراءة فقط.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'الرجاء الاتصال بمسؤول Sugar إذا كنت ترغب في إجراء تغييرات على حقول القراءة فقط.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

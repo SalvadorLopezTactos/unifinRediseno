@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Affärsprocessregler',
   'LBL_MODULE_NAME_SINGULAR' => 'Affärsprocessregel',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för affärsprocessregler',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Instrumentpanel för post för processverksamhetsregler',
   'LBL_RST_UID' => 'Affärsregels ID',
   'LBL_RST_TYPE' => 'Affärsregeltyp',
   'LBL_RST_DEFINITION' => 'Affärsregeldefinition',

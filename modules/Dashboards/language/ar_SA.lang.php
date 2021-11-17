@@ -25,4 +25,7 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'جميع لوحات المعلومات للوحدة {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'جميع لوحات المعلومات للوحدة {{module}} للعرض {{view}}',
     'LBL_COPY_OF' => 'نسخة من {{{name}}}',
+    'LBL_DELETE_FOCUS_DRAWER' => 'لا يمكن حذف لوحات معلومات درج التنظيم.',
+    'LBL_CREATE_DASHBOARD_BUTTON' => 'إنشاء لوحة معلومات',
+    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
 );

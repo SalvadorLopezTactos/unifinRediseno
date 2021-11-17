@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Normes empresarials de processos',
   'LBL_MODULE_NAME_SINGULAR' => 'Norma empresarial del procés',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat a les regles de negoci del procés',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Quadre de comandament del registre de normes empresarials de processos',
   'LBL_RST_UID' => 'ID de norma empresarial',
   'LBL_RST_TYPE' => 'Tipus de norma empresarial',
   'LBL_RST_DEFINITION' => 'Definició de norma empresarial',

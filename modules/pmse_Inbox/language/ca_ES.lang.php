@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'Gestió de processos',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'Processos desatesos',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat als processos',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Quadre de comandament del registre de processos',
+
     'LBL_CAS_ID' => 'Nombre de procès',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Desconegut (segons l&#39;Id d&#39;usuari:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "la tasca s'ha",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Vista prèvia de disseny del procés',
     'LBL_PROJECT_RUN_ORDER' => 'Executa la comanda',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => 'Activitat actual',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => 'Data modificada',
+    'LBL_DATE_ENTERED' => 'Data creada',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'Esteu segur que voleu reclamar aquest procés?',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'El procés s&#39;ha reclamat correctament',
 );
 

@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Nepavyko gauti šio veiksmo analizės ataskaitos duomenų. Kreipkitės į ataskaitos kūrėją.',
     'LBL_CHART_NO_DRILLTHRU' => 'Analizė negalima',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ ataskaitos',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'Sąrašo rodinyje rodomos visos dabartinius ieškos kriterijus atitinkančios ataskaitos, prie kurių vartotojai turi prieigą. Sąrašo rodinio lauko stulpeliuose ir peržiūroje galite peržiūrėti kiekvienos ataskaitos pagrindinius duomenis. Ataskaitoms galite priskirti žymes ir sukurti filtrus. Norėdami peržiūrėti ataskaitą spustelėkite jos pavadinimą, veiksmų meniu pasirinkite Redaguoti ataskaitą, kad galėtumėte ją modifikuoti.',

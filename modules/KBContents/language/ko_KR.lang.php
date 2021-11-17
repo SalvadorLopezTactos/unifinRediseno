@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => '지식 기반 목록 대시보드',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => '지식 기반 기록 대시보드',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => '지식 기반 포커스 서랍',
 
     'LBL_MODULE_NAME' => '지식 베이스',
     'LBL_MODULE_NAME_SINGULAR' => '지식기반 조항',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => '유용하지 않음',
     'LBL_RATING' => '평가:',
     'LBL_VIEWED_COUNT' => '카운트보기',
-    'LBL_DOWNLOAD_ALL' => '모두 다운로드',
-    'LBL_DOWNLOAD_ONE' => '다운로드',
-    'LBL_ATTACHMENTS' => '첨부',
-    'LBL_ADD_ATTACHMENT' => '찾아보기',
     'LBL_CATEGORIES' => '지식 기반 범주',
     'LBL_CATEGORY_NAME' => '범주',
     'LBL_USEFULNESS' => '유용함',

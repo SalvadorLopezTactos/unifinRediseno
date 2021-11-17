@@ -11,6 +11,8 @@
  */
 
 use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+use Sugarcrm\Sugarcrm\ACL\Cache as AclCacheInterface;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 
 require_once('modules/ACLFields/actiondefs.php');
 
@@ -206,7 +208,7 @@ AND deleted = 0';
         // We can not cache per user ID because ACLs are stored per role
         if(!$refresh) {
             $cached = self::loadFromCache($user_id, 'fields');
-            if ($cached) {
+            if ($cached !== null) {
                 // ACL data for some modules may already have been loaded and it shouldn't be erased
                 // in case it's not cached
                 if (isset(self::$acl_fields[$user_id])) {
@@ -504,7 +506,10 @@ AND deleted = 0';
      */
     public static function hasACLs($user_id, $module)
     {
-        if(empty(self::$acl_fields[$user_id])) {
+        if ($user_id === null) {
+            return false;
+        }
+        if (empty(self::$acl_fields[$user_id])) {
             self::$acl_fields[$user_id] = self::loadFromCache($user_id, 'fields');
         }
         return !empty(self::$acl_fields[$user_id][$module]);
@@ -516,7 +521,7 @@ AND deleted = 0';
      */
     protected static function loadFromCache($user_id, $type)
     {
-        return AclCache::getInstance()->retrieve($user_id, $type);
+        return Container::getInstance()->get(AclCacheInterface::class)->retrieve($user_id, $type);
     }
 
     /**
@@ -526,7 +531,7 @@ AND deleted = 0';
      */
     protected static function storeToCache($user_id, $type, $data)
     {
-        return AclCache::getInstance()->store($user_id, $type, $data);
+        return Container::getInstance()->get(AclCacheInterface::class)->store($user_id, $type, $data);
     }
 
     /**

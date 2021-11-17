@@ -13,7 +13,10 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TASKS_LIST_DASHBOARD' => 'Tablero de Lista de Tareas',
+  'LBL_TASKS_RECORD_DASHBOARD' => 'Tablero de Registro de Tareas',
+  'LBL_TASKS_FOCUS_DRAWER_DASHBOARD' => 'Panel de Enfoque de Tareas',
 
+  'LBL_RELATED_CONTACT' => 'Contacto Relacionado',
   'LBL_MODULE_NAME' => 'Tareas',
   'LBL_MODULE_NAME_SINGULAR' => 'Tarea',
   'LBL_TASK' => 'Tareas:',

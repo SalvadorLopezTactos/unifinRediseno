@@ -599,6 +599,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'Konfigurér Portal',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Enable portal',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Enable search before opening a case',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'La portalbrukere lukke sak',
     'LBL_PORTAL_THEME' => 'Tema for Portal',
     'LBL_PORTAL_ENABLE' => 'Aktivér',
     'LBL_PORTAL_SITE_URL' => 'Din portal er tilgjengelig på:',
@@ -790,7 +791,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Velg for å bruke dette feltet når du søker etter data ved hjelp av Globalt Søk i denne modulen.',
+'LBL_POPHELP_REQUIRED'=>"Opprett en formel for å fastslå om dette feltet er nødvendig i oppsett.<br/>"
+    . "Obligatoriske felt vil følge formelen i den nettleserbaserte mobilvisningen, <br/>"
+    . "men vil ikke følge formelen i de innebygde applikasjonene, som Sugar Mobile for iPhone. <br/>"
+    . "De vil ikke følge formelen i Sugars selvbetjeningsportal.",
+'LBL_POPHELP_READONLY'=>"Opprett en formell for å avgjøre hvorvidt dette feltet er skriverbeskyttet i oppsett.<br/>"
+        . "Skrivebeskyttede felt følger formellen i den nettleserbaserte mobilvisningen, <br/>"
+        . "men følger ikke formellen i opprinnelige applikasjoner, som Sugar Mobile for iPhone. <br/>"
+        . "De følger ikke formellen i Sugar Self-Service-portalen.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Velg å bruke dette feltet når du søker etter registre ved bruk av Global Search på denne modulen.',
 //Revert Module labels
 'LBL_RESET' => 'Tilbakestill',
 'LBL_RESET_MODULE' => 'Reset modul',
@@ -825,6 +834,7 @@ $mod_strings = array(
                 'encrypt'=>'Kryptere',
                 'datetimecombo' =>'Datotid',
                 'decimal'=>'Desimal',
+                'autoincrement' => 'Automatisk økning',
 ),
 'labelTypes' => array(
     "" => "Ofte brukte etiketter",
@@ -842,4 +852,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'Alle Moduler',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (relatert {1}-ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Kopier fra grensesnitt',
+'LBL_RELATIONSHIP_TYPE' => 'Relasjon',
 );
