@@ -13,7 +13,10 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TASKS_LIST_DASHBOARD' => 'Instrumentpanel för uppgiftslista',
+  'LBL_TASKS_RECORD_DASHBOARD' => 'Instrumentpanel för uppgiftsposter',
+  'LBL_TASKS_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för uppgifter',
 
+  'LBL_RELATED_CONTACT' => 'Relaterad kontakt',
   'LBL_MODULE_NAME' => 'Uppgifter',
   'LBL_MODULE_NAME_SINGULAR' => 'Uppgift',
   'LBL_TASK' => 'Uppgifter:',

@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Selle toimingu jaoks Drillthrough-aruande andmete hankimisel tekkis tõrge. Abi saamiseks võtke ühendust aruande omanikuga.',
     'LBL_CHART_NO_DRILLTHRU' => 'Drill through ei ole saadaval',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Aruannete fookuse sahtel',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'Loendi vaates kuvatakse kõik aruanded, mis vastavad praeguse otsingu kriteeriumidele ja millele kasutajatel on juurdepääs. Saate vaadata iga aruande põhiandmeid loendivaate välja veergudes ja eelvaates. Saate aruannetele määrata silte ja luua filtreid. Aruande vaatamiseks klõpsake aruande nimel või valige aruande muutmiseks toimingumenüüs suvand Redigeeri aruannet.',

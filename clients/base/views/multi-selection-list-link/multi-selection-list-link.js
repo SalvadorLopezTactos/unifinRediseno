@@ -17,6 +17,10 @@
 ({
     extendsFrom: 'MultiSelectionListView',
 
+    plugins: [
+        'SugarLogic',
+    ],
+
     /**
      * @inheritdoc
      */
@@ -87,6 +91,11 @@
             parentModel.set(updatedAttributes);
             //Once parent model is reset, reset internal synced attributes as well
             parentModel.setSyncedAttributes(data.record);
+
+            // get the model's dependencies
+            var deps = app.metadata.getModule(parentModel.module, 'dependencies');
+            // re-initialize SugarLogic for the parentModel with the module deps
+            this.initSugarLogic(parentModel, deps);
         }
 
         context.set('skipFetch', false);

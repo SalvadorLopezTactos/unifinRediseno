@@ -54,7 +54,7 @@ $dictionary['tracker_perf'] = array(
             'name' => 'memory_usage',
             'vname' => 'LBL_MEMORY_USAGE',
             'type' => 'int',
-            'len' => '12',
+            'len' => '11',
             'isnull' => 'true',  
         ),
 	    'deleted' =>array (

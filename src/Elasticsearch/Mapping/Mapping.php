@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Mapping;
 
+use Sugarcrm\Sugarcrm\Elasticsearch\Index\IndexManager;
 use Sugarcrm\Sugarcrm\Elasticsearch\Provider\ProviderCollection;
 use Sugarcrm\Sugarcrm\Elasticsearch\Exception\MappingException;
 use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Property\MultiFieldProperty;
@@ -41,26 +42,46 @@ class Mapping implements MappingInterface
     const PREFIX_COMMON = 'Common__';
 
     /**
+     * command field names
+     */
+    const COMMON_FIELD_NAMES = [
+        'acl_team_set_id',
+        'assigned_user_id',
+        'created_by',
+        'date_modified',
+        'favorite_link',
+        'modified_user_id',
+        'owner_id',
+        'tags',
+        'user_favorites',
+        'erased_fields',
+    ];
+    /**
+     * Module Name field used in index, this name should be unique
+     */
+    const MODULE_NAME_FIELD = 'sugar_module_name';
+
+    /**
      * @var string Module name
      */
-    private $module;
+    protected $module;
 
     /**
      * @var \SugarBean
      */
-    private $bean;
+    protected $bean;
 
     /**
      * Elasticsearch mapping properties
      * @var PropertyInterface[]
      */
-    private $properties = [];
+    protected $properties = [];
 
     /**
      * Base mapping used for all multi fields
      * @var array
      */
-    private $multiFieldBase = [
+    protected $multiFieldBase = [
         'type' => 'keyword',
         'index' => true,
     ];
@@ -70,12 +91,12 @@ class Mapping implements MappingInterface
      * even the size is large than 32K
      * @var array
      */
-    private $notIndexedBase = [
+    protected $notIndexedBase = [
         'type' => 'keyword',
         'index' => false,
     ];
 
-    private $notIndexedBaseNotDoc = [
+    protected $notIndexedBaseNotDoc = [
         'type' => 'keyword',
         'index' => false,
         'doc_values' => false,
@@ -85,7 +106,7 @@ class Mapping implements MappingInterface
      * Excluded fields from _source
      * @var array
      */
-    private $sourceExcludes = [];
+    protected $sourceExcludes = [];
 
     /**
      * @param string $module
@@ -93,6 +114,19 @@ class Mapping implements MappingInterface
     public function __construct($module)
     {
         $this->module = $module;
+    }
+
+    /**
+     * factory method, to get Mapping Object based on ES version and 'enable_one_index' in config
+     * @return Mapping
+     */
+    public static function getMapping(string $module)
+    {
+        if (IndexManager::isOneIndexEnabled() && IndexManager::isEsServerV6Above()) {
+            // enable_one_index is true and ES server is 6.0 and up
+            return new MappingForOneIndex($module);
+        }
+        return new Mapping($module);
     }
 
     /**
@@ -187,6 +221,7 @@ class Mapping implements MappingInterface
      */
     public function addCommonField($baseField, $field, MultiFieldProperty $property)
     {
+        self::checkCommonField($baseField);
         $commonField = self::PREFIX_COMMON . $baseField;
         $this->createMultiFieldBase($commonField, $this->notIndexedBase)->addField($field, $property);
         $this->createCopyToBase($baseField, $this->notIndexedBase, [$commonField]);
@@ -205,6 +240,7 @@ class Mapping implements MappingInterface
      */
     public function addCommonObjectProperty($field, ObjectProperty $property)
     {
+        self::checkCommonField($field);
         $this->addProperty(self::PREFIX_COMMON . $field, $property);
     }
 
@@ -278,7 +314,7 @@ class Mapping implements MappingInterface
      * @throws MappingException
      * @return MultiFieldBaseProperty
      */
-    private function createMultiFieldBase($field, array $mapping, array $copyTo = [])
+    protected function createMultiFieldBase($field, array $mapping, array $copyTo = [])
     {
         // create multi field base if not set yet
         if (!$this->hasProperty($field)) {
@@ -308,7 +344,7 @@ class Mapping implements MappingInterface
      * @param array $notIndexedBase the notindexedBase
      * @param string[] $targetFields Array of target fields
      */
-    private function createCopyToBase($field, array $notIndexedBase, array $targetFields = [])
+    protected function createCopyToBase($field, array $notIndexedBase, array $targetFields = [])
     {
         $this->createMultiFieldBase($field, $notIndexedBase, $targetFields);
     }
@@ -320,7 +356,7 @@ class Mapping implements MappingInterface
      * @param PropertyInterface $property
      * @throws MappingException
      */
-    private function addProperty($field, PropertyInterface $property)
+    protected function addProperty($field, PropertyInterface $property)
     {
         if (isset($this->properties[$field])) {
             throw new MappingException("Cannot redeclare field '{$field}' for module '{$this->module}'");
@@ -339,5 +375,21 @@ class Mapping implements MappingInterface
             return true;
         }
         return false;
+    }
+
+    /**
+     * this is common field check
+     * @param string $field
+     * @return bool
+     */
+    protected static function checkCommonField(?string $field) : bool
+    {
+        if (!in_array($field, static::COMMON_FIELD_NAMES)) {
+            if (!empty($GLOBALS['log'])) {
+                $GLOBALS['log']->error("This field is not in the common field list: " . $field);
+            }
+            return false;
+        }
+        return true;
     }
 }

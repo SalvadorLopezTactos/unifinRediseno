@@ -98,12 +98,13 @@ $viewdefs['Tags']['base']['view']['record'] = array(
             'header' => true,
             'fields' => array(
                 array(
-                    'name'          => 'picture',
-                    'type'          => 'avatar',
-                    'width'         => 42,
-                    'height'        => 42,
+                    'name' => 'picture',
+                    'type' => 'avatar',
+                    'size' => 'large',
+                    'width' => 42,
+                    'height' => 42,
                     'dismiss_label' => true,
-                    'readonly'      => true,
+                    'readonly' => true,
                 ),
                 'name',
                 array(

@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Camps marcats per esborrar',
     'LBL_NO_RECORDS_MARKED' => 'No s&#39;ha marcat cap camp ni registre per esborrar.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Quadre de comandaments de rgistres de privacitat de dades',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat a la privacitat de dades',
 
     // list view
     'LBL_HELP_RECORDS' => 'El mòdul de Privacitat de dades fa un seguiment de les activitats de privacitat, incloses les sol·licituds de constentiment i de subjectes, per ajudar en els procediments de privacitat de la vostra organització. Creeu registres de privacitat de dades relacionats amb el registre d&#39;un individu (per exemple, un contacte) per fer un seguiment o una acció en una sol·licitud de privacitat.',

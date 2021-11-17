@@ -34,7 +34,7 @@
             </span>
         {{/unless}}
     {{else}}
-        <div class="labels-on-side">
+        <div class="labels-on-side{{#if show_child_labels}} empty-label{{/if}}">
             {{#unless dismiss_label}}
                 <div class="record-label-wrapper span{{labelSpan}}">
                     <div class="record-label ellipsis_inline" data-placement="bottom" data-original-title="{{str label ../../../module}}" title="{{str label ../../../module}}" data-name="{{name}}">

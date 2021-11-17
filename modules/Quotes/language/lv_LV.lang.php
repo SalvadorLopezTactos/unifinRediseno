@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Piedāvājumu saraksta instrumentu panelis',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Piedāvājumu ierakstu instrumentu panelis',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Piedāvājumu fokusa panelis',
 
     'LBL_CONTRACTS'=>'Līgumi',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Līgumi',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Adrese - Valsts',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Adrese - Pasta indekss',
     'LBL_BILLING_ADDRESS_STATE' => 'Adrese - Novads',
-    'LBL_BILLING_ADDRESS_STREET' => 'Adrese',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Adrese:',
     'LBL_BILLING_CONTACT_ID' => 'Norēķinu kontaktpersonas Id:',
     'LBL_BILLING_CONTACT_NAME' => 'Norēķinu Kontaktpersonas vārds:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Piegādes valsts',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Piegādes pasta indekss',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Piegādes novads',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Piegādes adrese',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Piegādes Adrese:',
     'LBL_SHIPPING_BODY' => 'Rēķinu izrakstīšana un piegāde',
     'LBL_SHIPPING_CONTACT_ID' => 'Piegādes kontaktpersonas Id:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Kopēt adresi uz piegādes adresei',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Kopēt piegādes adresi uz adresi',
     'NTC_COPY_BILLING_ADDRESS2' => 'Kopēt uz piegādes adresi',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopēt uz adresi',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Vai jūs tiešām vēlaties noņemt šo komentāru no piedāvājuma?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopēt uz adresi',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Vai jūs tiešām vēlaties noņemt šo komentāru no piedāvājuma?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Vai tiešām vēlaties izņemt šo ierakstu no piedāvājuma?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Vai tiešām vēlaties izņemt šo grupu no piedāvājuma?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Vai tiešām vēlaties izņemt šo kontaktpersonu no piedāvājuma?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Daudzums',
     'LBL_MFT_PART_NUM' => 'Daļas numurs',
     'LBL_ITEM_NAME' => 'Rindas produkts',
+    'LBL_PRODUCT_TEMPLATE' => 'Produkts',
     'LBL_DISCOUNT_PRICE' => 'Vienības cena',
     'LBL_DISCOUNT_AMOUNT' => 'Atlaide',
     'LBL_LINE_ITEM_TOTAL' => 'Rindas produktu kopsumma',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'Darījuma ID',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Piedāvājumu konfigurācija',
+
+    'LBL_RENEWAL' => 'Atjaunošana',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Piedāvājuma mijiedarbības',
 );

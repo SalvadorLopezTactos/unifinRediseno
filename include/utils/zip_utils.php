@@ -10,94 +10,164 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-if(class_exists("ZipArchive")) {
-    require_once 'include/utils/php_zip_utils.php';
-    return;
-} else {
-require_once('vendor/pclzip/pclzip.lib.php');
-if ( isset($GLOBALS['log']) && class_implements($GLOBALS['log'],'LoggerTemplate') ) {
-    $GLOBALS['log']->deprecated('Use of PCLZip has been deprecated. Please enable the zip extension in your PHP install ( see http://www.php.net/manual/en/zip.installation.php for more details ).');
+function unzip($zip_archive, $zip_dir)
+{
+    return unzip_file($zip_archive, null, $zip_dir);
 }
-function unzip( $zip_archive, $zip_dir, $forceOverwrite = false ){
-    if( !is_dir( $zip_dir ) ){
-        if (!defined('SUGAR_PHPUNIT_RUNNER'))
-            die( "Specified directory '$zip_dir' for zip file '$zip_archive' extraction does not exist." );
+
+function unzip_file($zip_archive, $archive_file, $zip_dir)
+{
+    if (!is_dir($zip_dir)) {
+        if (defined('SUGAR_PHPUNIT_RUNNER') || defined('SUGARCRM_INSTALL')) {
+            $GLOBALS['log']->fatal("Specified directory '$zip_dir' for zip file '$zip_archive' extraction does not exist.");
+
+            return false;
+        }
+
+        $GLOBALS['log']->fatal(
+            "Unable to extract file '$zip_archive'. Target directory '$zip_dir' does not exist."
+        );
+
+        die('Unable to extract file. Target directory does not exist.');
+    }
+
+    $zip = new ZipArchive();
+
+    // we need realpath here for PHP streams support
+    $res = $zip->open(UploadFile::realpath($zip_archive));
+
+    if ($res !== true) {
+        if (defined('SUGAR_PHPUNIT_RUNNER') || defined('SUGARCRM_INSTALL')) {
+            $GLOBALS['log']->fatal(
+                sprintf(
+                    'ZIP Error(%d): Status(%s): Archive(%s): Directory(%s)',
+                    $res,
+                    $zip->status,
+                    $zip_archive,
+                    $zip_dir
+                )
+            );
+
+            return false;
+        }
+
+        $GLOBALS['log']->fatal(
+            sprintf(
+                'ZIP Error(%d): Status(%s): Archive(%s): Directory(%s)',
+                $res,
+                $zip->status,
+                $zip_archive,
+                $zip_dir
+            )
+        );
+
+        die(sprintf('Unable to extract file. ZIP Error(%d): Status(%s)', $res, $zip->status));
+    }
+
+    if ($archive_file !== null) {
+        $res = $zip->extractTo(UploadFile::realpath($zip_dir), $archive_file);
+    } else {
+        $res = $zip->extractTo(UploadFile::realpath($zip_dir));
+    }
+
+    if ($res !== true) {
+        if (defined('SUGAR_PHPUNIT_RUNNER') || defined('SUGARCRM_INSTALL')) {
+            $GLOBALS['log']->fatal(
+                sprintf(
+                    'ZIP Error(%d): Status(%s): Archive(%s): Directory(%s)',
+                    $res,
+                    $zip->status,
+                    $zip_archive,
+                    $zip_dir
+                )
+            );
+
+            return false;
+        }
+
+        $GLOBALS['log']->fatal(
+            sprintf(
+                'ZIP Error(%d): Status(%s): Archive(%s): Directory(%s)',
+                $res,
+                $zip->status,
+                $zip_archive,
+                $zip_dir
+            )
+        );
+
+        die(sprintf('Unable to extract file. ZIP Error(%d): Status(%s)', $res, $zip->status));
+    }
+
+    return true;
+}
+
+function zip_dir($zip_dir, $zip_archive)
+{
+    if (!is_dir($zip_dir)) {
+        if (!defined('SUGAR_PHPUNIT_RUNNER')) {
+            $GLOBALS['log']->fatal(
+                "Specified directory '$zip_dir' for zip file '$zip_archive' extraction does not exist."
+            );
+            die("Specified directory for zip file extraction does not exist.");
+        }
+
         return false;
     }
 
-    $archive = new PclZip( $zip_archive );
+    $zip = new ZipArchive();
+    // we need this for shadow path resolution to work
+    // we need realpath here for PHP streams support
+    $zip->open(UploadFile::realpath($zip_archive), ZipArchive::CREATE | ZipArchive::OVERWRITE);
+    $path = UploadFile::realpath($zip_dir);
 
-    if ( $forceOverwrite ) {
-        if( $archive->extract( PCLZIP_OPT_PATH, $zip_dir, PCLZIP_OPT_REPLACE_NEWER ) == 0 ){
-            if (!defined('SUGAR_PHPUNIT_RUNNER'))
-                die( "Error: " . $archive->errorInfo(true) );
-            return false;
-        }
-    }
-    else {
-        if( $archive->extract( PCLZIP_OPT_PATH, $zip_dir ) == 0 ){
-            if (!defined('SUGAR_PHPUNIT_RUNNER'))
-                die( "Error: " . $archive->errorInfo(true) );
-            return false;
-        }
-    }
-}
+    /** @var RecursiveIteratorIterator|RecursiveDirectoryIterator $it */
+    $it = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator(
+            $path,
+            FilesystemIterator::SKIP_DOTS | FilesystemIterator::UNIX_PATHS
+        ),
+        RecursiveIteratorIterator::SELF_FIRST
+    );
 
-function unzip_file( $zip_archive, $archive_file, $to_dir, $forceOverwrite = false ){
-    if( !is_dir( $to_dir ) ){
-        if (!defined('SUGAR_PHPUNIT_RUNNER'))
-            die( "Specified directory '$to_dir' for zip file '$zip_archive' extraction does not exist." );
-        return false;
-    }
-
-    $archive = new PclZip($zip_archive);
-    if ( $forceOverwrite ) {
-        if( $archive->extract(  PCLZIP_OPT_BY_NAME, $archive_file,
-                                PCLZIP_OPT_PATH,    $to_dir,
-                                PCLZIP_OPT_REPLACE_NEWER ) == 0 ){
-            if (!defined('SUGAR_PHPUNIT_RUNNER'))
-                die( "Error: " . $archive->errorInfo(true) );
-            return false;
+    foreach ($it as $fileinfo) {
+        $subPathName = $it->getSubPathname();
+        if ($fileinfo->isDir()) {
+            $zip->addEmptyDir($subPathName);
+        } else {
+            $zip->addFile($fileinfo->getPathname(), $subPathName);
         }
-    }
-    else {
-        if( $archive->extract(  PCLZIP_OPT_BY_NAME, $archive_file,
-                                PCLZIP_OPT_PATH,    $to_dir        ) == 0 ){
-            if (!defined('SUGAR_PHPUNIT_RUNNER'))
-                die( "Error: " . $archive->errorInfo(true) );
-            return false;
-        }
-    }
-}
-
-function zip_dir( $zip_dir, $zip_archive ){
-    $archive    = new PclZip( $zip_archive );
-    $v_list     = $archive->create( $zip_dir );
-    if( $v_list == 0 ){
-        if (!defined('SUGAR_PHPUNIT_RUNNER'))
-            die( "Error: " . $archive->errorInfo(true) );
-        return false;
     }
 }
 
 /**
  * Zip list of files, optionally stripping prefix
+ *
+ * FIXME: check what happens with streams
+ *
  * @param string $zip_file
- * @param array $file_list
- * @param string $prefix Regular expression for the prefix to strip
+ * @param array  $file_list
+ * @param string $prefix    Regular expression for the prefix to strip
  */
 function zip_files_list($zip_file, $file_list, $prefix = '')
 {
-    $archive    = new PclZip( $zip_file );
-    foreach($file_list as $file) {
-        if(!empty($prefix) && preg_match($prefix, $file, $matches) > 0) {
-            $remove_path = $matches[0];
-            $archive->add($file, PCLZIP_OPT_REMOVE_PATH, $prefix);
-        } else {
-            $archive->add($file);
-        }
+    $archive = new ZipArchive();
+    $res = $archive->open(UploadFile::realpath($zip_file), ZipArchive::CREATE | ZipArchive::OVERWRITE); // we need realpath here for PHP streams support
+
+    if ($res !== true) {
+        $GLOBALS['log']->fatal("Unable to open zip file, check directory permissions: $zip_file");
+
+        return false;
     }
+
+    foreach ($file_list as $file) {
+        if (!empty($prefix) && preg_match($prefix, $file, $matches) > 0) {
+            $zipname = substr($file, strlen($matches[0]));
+        } else {
+            $zipname = $file;
+        }
+
+        $archive->addFile(UploadFile::realpath($file), $zipname);
+    }
+
     return true;
 }
-
-} // if (ZipArchive exists)

@@ -13,6 +13,7 @@
 
 $dictionary['pmse_Inbox'] = array(
     'table' => 'pmse_inbox',
+    'archive' => false,
     'audited' => false,
     'activity_enabled' => true,
     'reassignable' => false,
@@ -346,10 +347,19 @@ $dictionary['pmse_Inbox'] = array(
                 'cas_id',
             ),
         ),
+        [
+            'name' => 'idx_proid_status_del',
+            'type' => 'index',
+            'fields' => [
+                'pro_id',
+                'cas_status',
+                'deleted',
+            ],
+        ],
     ),
     'optimistic_locking' => true,
     'unified_search' => true,
-    'hide_fields_to_edit_role' => true,
+    'hide_fields_to_edit_role' => false,
     // @TODO Fix the Default and Basic SugarObject templates so that Basic
     // implements Default. This would allow the application of various
     // implementations on Basic without forcing Default to have those so that

@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Errore durante il recupero dei dati del report drill-through per questa azione. Per assistenza, contattare il proprietario del report.',
     'LBL_CHART_NO_DRILLTHRU' => 'Drill-through non disponibile',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Report Focus Drawer',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'La vista elenco di un modulo visualizza tutti i report che rispondono ai criteri di ricerca correnti e ai quali gli utenti hanno accesso. È possibile visualizzare i dettagli di base di ogni report nelle colonne campo della vista elenco e nell&#39;anteprima. È possibile impostare dei tag per i report e creare dei filtri. Fare clic sul nome del report per visualizzare il report oppure selezionare "Modifica report" nel menu azioni per modificare il report.',

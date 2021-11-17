@@ -37,7 +37,7 @@ $viewdefs['ConsoleConfiguration']['base']['layout']['config-drawer'] = array(
                             'name' => 'side-pane',
                             'components' => array(
                                 array(
-                                    'view' => 'config-preview-content',
+                                    'view' => 'config-side-pane',
                                 ),
                             ),
                         ),

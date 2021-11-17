@@ -18,6 +18,7 @@ use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\AuthProviderBasicManagerBu
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\OIDC\IntrospectToken;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\OIDC\JWTBearerToken;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\OIDC\RefreshToken;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\OIDC\RevokeToken;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\OIDC\CodeToken;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -264,6 +265,7 @@ class SugarOAuth2ServerOIDC extends SugarOAuth2Server implements LoggerAwareInte
         try {
             $authManager = $this->getAuthProviderApiLoginBuilder($idpConfig)->buildAuthProviders();
             $jwtBearerToken = new JWTBearerToken(Srn\Converter::toString($userSrn), $idmModeConfig['tid']);
+            $jwtBearerToken->setAttribute('platform', $this->platform);
             $accessToken = $authManager->authenticate($jwtBearerToken);
 
             $token = array(
@@ -334,5 +336,38 @@ class SugarOAuth2ServerOIDC extends SugarOAuth2Server implements LoggerAwareInte
     {
         $this->oldRefreshToken = $refreshToken;
         return $this;
+    }
+
+    /**
+     * @param string $token
+     */
+    protected function revokeToken(string $token): void
+    {
+        $idpConfig = $this->getIdpConfig();
+        try {
+            $authManager = $this->getAuthProviderBasicBuilder($idpConfig)->buildAuthProviders();
+            $revokeToken = new RevokeToken($token);
+            $authManager->authenticate($revokeToken);
+        } catch (AuthenticationException $e) {
+            $this->logger->error($e->getMessage(), ['exception' => $e]);
+        }
+    }
+
+    /**
+     * @inheritdoc
+     * @param string $token
+     */
+    public function unsetRefreshToken($token)
+    {
+        $this->revokeToken($token);
+    }
+
+    /**
+     * Revoke access token
+     * @param string $token
+     */
+    public function unsetAccessToken(string $token): void
+    {
+        $this->revokeToken($token);
     }
 }

@@ -325,7 +325,7 @@ $mod_strings = array(
 //STUDIO2
 'LBL_MODULEBUILDER'=>'Stavitel modulu',
 'LBL_STUDIO' => 'Studio',
-'LBL_DROPDOWNEDITOR' => 'Editor "dropdownu"',
+'LBL_DROPDOWNEDITOR' => 'Editor rozevíracích seznamů',
 'LBL_EDIT_DROPDOWN'=>'Upravit dropdown',
 'LBL_DEVELOPER_TOOLS' => 'Studio',
 'LBL_SUGARPORTAL' => 'Editor Sugar portálu',
@@ -601,6 +601,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'Konfigurovat portál',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Povolit portál',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Povolit hledání před otevřením případu',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Povolit uživatelům portálu uzavřít případ',
     'LBL_PORTAL_THEME' => 'Motiv portálu',
     'LBL_PORTAL_ENABLE' => 'povoleno',
     'LBL_PORTAL_SITE_URL' => 'Váš portál je k dispozici na adrese:',
@@ -792,7 +793,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Vyberte k použití toto pole, pokud chcete vyhledávat záznamy pomocí globálního vyhledávání v tomto modulu.',
+'LBL_POPHELP_REQUIRED'=>"Vytvořte vzorec a určete, zda je toto pole v rozvržení povinné.<br/>"
+    . "Povinná pole se budou řídit vzorcem v mobilním zobrazení s využitím prohlížeče, <br/>"
+    . "nebudou se ale řídit vzorcem v nativních aplikacích, jako je Sugar Mobile pro iPhone. <br/>"
+    . "Nebudou se řídit vzorcem v samoobslužném portálu Sugar.",
+'LBL_POPHELP_READONLY'=>"Vytvořte vzorec, který určí, zda je toto pole v rozloženích jen pro čtení.<br/>"
+        . "Pole pouze pro čtení se budou řídit vzorcem v mobilním zobrazení s využitím prohlížeče, <br/>"
+        . "ale nebudou se řídit podle vzorce v nativních aplikacích, jako je Sugar Mobile pro iPhone. <br/>"
+        . "Nebudou se řídit vzorcem v samoobslužném portálu Sugar.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Vyberte, pokud chcete toto pole použít při vyhledávání záznamů pomocí globálního vyhledávání v tomto modulu.',
 //Revert Module labels
 'LBL_RESET' => 'Resetovat',
 'LBL_RESET_MODULE' => 'Zrušit modul',
@@ -827,6 +836,7 @@ $mod_strings = array(
                 'encrypt'=>'Šifrovat',
                 'datetimecombo' =>'Datum a čas',
                 'decimal'=>'Desetinný',
+                'autoincrement' => 'Automatický přírůstek',
 ),
 'labelTypes' => array(
     "" => "Často používané popisky",
@@ -844,4 +854,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'všechny moduly',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (související ID {1})',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Kopírovat z layoutu',
+'LBL_RELATIONSHIP_TYPE' => 'Vztah',
 );

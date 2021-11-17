@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Pulpit listy uwag',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Pulpit rekordów notatek',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy notatek',
 
+    'LBL_RELATED_CONTACT' => 'Powiązany kontakt',
     'ERR_DELETE_RECORD' => 'Aby usunąć Kontrahenta, musisz podać numer rekordu.',
     'LBL_ACCOUNT_ID' => 'ID kontrahenta:',
     'LBL_CASE_ID' => 'ID zgłoszenia:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'ID Kontaktu:',
     'LBL_CONTACT_NAME' => 'Kontakt:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Notatki',
+    'LBL_ATTACHMENTS' => 'Załączniki',
+    'LBL_ATTACHMENT_FLAG' => 'Jest załącznikiem',
     'LBL_DESCRIPTION' => 'Opis',
     'LBL_EMAIL_ADDRESS' => 'Adres e-mail:',
     'LBL_EMAIL_ATTACHMENT' => 'Załącznik wiadomości',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notatki i załączniki',
     'LBL_NOTE' => 'Uwaga:',
     'LBL_OPPORTUNITY_ID' => 'ID szansy:',
+    'LBL_NOTE_PARENT_ID' => 'ID elementu nadrzędnego notatki:',
     'LBL_PARENT_ID' => 'ID elementu nadrzędnego:',
     'LBL_PARENT_TYPE' => 'Typ nadrzędny',
     'LBL_EMAIL_TYPE' => 'Typ wiadomości e-mail',

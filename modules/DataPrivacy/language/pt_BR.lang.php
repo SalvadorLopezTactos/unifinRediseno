@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Campos marcados para apagar',
     'LBL_NO_RECORDS_MARKED' => 'Nenhum Campo ou Registro foi marcado para ser apagado.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Painel de registros de privacidade de dados',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco em privacidade de dados',
 
     // list view
     'LBL_HELP_RECORDS' => 'O módulo de Privacidade de dados controla as atividades de privacidade, incluindo a autorização e as solicitações do assunto, para ajudar os procedimentos de privacidade da sua organização. Crie registos de privacidade de dados relacionados com o registro de um indivíduo (por exemplo, um contato) para controlar a autorização ou tomar medidas referentes a uma solicitação de privacidade.',

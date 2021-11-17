@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'Korisničko ime',
 	'LBL_RESTORE_BUTTON_LABEL'=>'Obnovi',
 	'LBL_SYSTEM_SETTINGS' => 'Sistemska podešavaja',
-	'LBL_SKYPEOUT_ON_DESC' => 'Omogućava korisnicima da kllikom na telefonske brojeve pozovu koristeći SkypeOut&reg;. Brojevi moraju biti pravilno formatirani da bi se koristila ova funkcija. To znači, moraju biti "+"  "Kod zemlje" "Broj", na primer +1 (555) 555-1234.',
-	'LBL_SKYPEOUT_ON' => 'Omogući SkypeOut&reg; integraciju',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut&reg;',
+    'LBL_DIALOUT_ON_DESC' => 'Omogućava korisnicima da kliknu na brojeve telefona pomoću softvera podrazumevane integracije računarske telefonije (CTI).',
+    'LBL_DIALOUT_ON' => 'Omogući uslugu „Kliknite da biste pozivali”',
+    'LBL_DIALOUT_TITLE' => 'Odlazni pozivi',
     'LBL_TWEETTOCASE_ON_DESC' => 'Dozvoliti korisnicima da kreiraju predmete od objava',
     'LBL_TWEETTOCASE_ON' => 'Dozvoliti integraciju od objave prema predmeta',
     'LBL_TWEETTOCASE_TITLE' => 'Objava predmeta predmeta',
@@ -363,7 +363,7 @@ $mod_strings = array (
     'JS_ALERT_PDF_WRONG_EXTENSION' => 'Ovaj fajl nema dobru ekstenziju.',
     'LBL_PDF_INSTRUCTIONS' => 'Uputstva',
     'PDF_INSTRUCTIONS_ADD_FONT' => <<<BSOFR
-Fonts supported by SugarPDF :
+Fontovi koje podržava SugarPDF:
 <ul>
 <li>TrueTypeUnicode (UTF-8 Unicode)</li>
 <li>OpenTypeUnicode</li>
@@ -373,11 +373,11 @@ Fonts supported by SugarPDF :
 <li>CID-0</li>
 </ul>
 <br>
-If you choose to not embed your font in the PDF, the generated PDF file will be lighter but a substitution will be use if the font is not available in the system of your reader.
+Ako odlučite da ne umetnete svoj font u PDF, generisana PDF datoteka će biti manja, ali će se koristiti zamena ako font nije dostupan u sistemu vašeg čitača.
 <br><br>
-Adding a PDF font to SugarCRM requires to follow steps 1 and 2 of the TCPDF Fonts documentation available in the "DOCS" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>The pfm2afm and ttf2ufm utils are available in fonts/utils in the TCPDF package that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>Load the metric file generated in step 2 and your font file below.
+Za dodavanje PDF fonta u SugarCRM potrebno je pratiti korake 1 i 2 dokumentacije o TCPDF fontovima dostupne u odeljku „DOCS” na <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">veb-sajtu TCPDF</a>.
+<br><br>Alati pfm2afm i ttf2ufm su dostupni u fontovima/alatima u paketu TCPDF koji možete da preuzmete u odeljku „PREUZIMANJA” na <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">veb-sajtu TCPDF</a>.
+<br><br>Učitajte metričku datoteku generisanu u 2. koraku i svoju datoteku fonta u nastavku.
 BSOFR
 ,
     'ERR_MISSING_CIDINFO' => 'Polje CID Informacija ne može biti prazno.',
@@ -428,6 +428,9 @@ BSOFR
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Modul Izveštaji nije dostupan za pregledač mobilnog uređaja.',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => 'Maksimalna dužina mora da bude veća od minimalne dužine',
+    'ERR_MIN_LENGTH_NEGATIVE' => 'Minimalna dužina da bude pozitivna vrednost',
+    'ERR_MAX_LENGTH_NEGATIVE' => 'Maksimalna dužina mora da bude pozitivna vrednost',
     'ERR_EMPTY_SAML_LOGIN' => 'SAML prijava URL ne može biti prazna',
     'ERR_EMPTY_SAML_CERT' => 'SAML sertifikat ne može biti prazan',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'ID SAML entiteta ne može da bude prazan',
@@ -441,9 +444,6 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Pregledi aktivnosti',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Omogući preglede aktivnosti',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Uključuje preglede aktivnosti za aplikaciju',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Omogući dodatni sadržaj na prijavnom ekranu',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Automatsko čuvanje definicija procesa',

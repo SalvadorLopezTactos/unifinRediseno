@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Maksuklass:',
   'LBL_TYPE_NAME'=>'Tüübi nimi',
   'LBL_TYPE' => 'Tüüp',
+  'LBL_PRODUCT_TYPE' => 'Toote tüüp',
   'LBL_URL' => 'Toote URL:',
   'LBL_VENDOR_PART_NUM' => 'Müüja osa number:',
   'LBL_WEIGHT' => 'Kaal:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Vaata tootekataloogi',
   'NTC_DELETE_CONFIRMATION' => 'Kas olete kindel, et soovite selle kirje kustutada?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Lisa',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Otsi tootekataloogist',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Andmed puuduvad',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Määratud kasutaja nimi',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Tooteliigid',
   'LBL_RENEWABLE' => 'Uuendatav',
   'LBL_SERVICE' => 'Teenus',
+  'LBL_LOCK_DURATION' => 'Lukustuse kestus',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Tootekataloogide loendi juhtpaneel',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Tootekataloogi kirje juhtpaneel',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Tootekataloogi fookuse sahtel',
 );

@@ -50,7 +50,9 @@
         //Grab the record list of fields to display from the base metadata
         var recordListMeta = this._initializeMetadata(options);
         //Allows sub-views to override and use different view metadata if desired
-        options.meta = this._filterMeta(_.extend({}, recordListMeta, options.meta || {}), options);
+        var subViewMeta = this.combineMeta(recordListMeta, options.meta);
+        // Filter given metadata removing non-applicable portions
+        options.meta = this._filterMeta(subViewMeta, options);
         this._super("initialize", [options]);
 
         //Extend the prototype's events object to setup additional events for this controller
@@ -94,10 +96,91 @@
             this.layout.on('list:alert:show list:alert:hide', this._refreshReorderableColumns, this);
         }
 
+        app.events.on('sugarApp:' + this.module + ':' + this.name + ':updated', this._sugarAppsUpdatedMetadata, this);
+
         //event register for preventing actions
         // when user escapes the page without confirming deleting
         app.routing.before('route', this.beforeRouteDelete, this);
         $(window).on('beforeunload.delete' + this.cid, _.bind(this.warnDeleteOnRefresh, this));
+    },
+
+    /**
+     * Only runs when Sugar Apps are being used and the List View has loaded before the
+     * calls come back from manifest and individual MFE servers. This handles updating
+     * fields metadata for the MFE fields in the list if they exist
+     *
+     * @param {Object} fieldsToUpdate The MFE field defs that have come in to update on this view
+     */
+    _sugarAppsUpdatedMetadata: function(fieldsToUpdate) {
+        // update meta with the latest panel fields that have been updated
+        // during the MFE Sugar Apps loading metadata-patching process
+        _.extend(this.meta, app.metadata.getView(this.module, 'list'));
+
+        var resizableColumns;
+        var updatedWidths = false;
+
+        // update the table headers of the external app fields
+        _.each(fieldsToUpdate, function(ftu) {
+            if (ftu.width) {
+                var $el = this.$('th[data-fieldname="' + ftu.name + '"]');
+                // clear out the existing styles set by ResizableColumns
+                $el.attr('style', '');
+                // set the right width class
+                $el.addClass('cell-' + ftu.width);
+                updatedWidths = true;
+            }
+        }, this);
+
+        if (updatedWidths) {
+            // only do this if we actually updated some table column widths
+            resizableColumns = this.$('table').data('resizableColumns');
+            // update the cached column widths with the new column sizes
+            resizableColumns.saveColumnWidths();
+        }
+
+        if (_.size(this.fields) <= 1) {
+            // this case handles when the list view has initialized but rows have not
+            // been rendered yet but the fields catalog has already been
+            // created so we need to loop through that catalog and patch metadata
+            // _fields.all also updates _fields.visible
+            _.each(this._fields.all, function(field) {
+                _.each(fieldsToUpdate, function(ftu) {
+                    if (field.name === ftu.name) {
+                        _.extend(field, ftu);
+                        field.expectedWidth = ftu.width;
+                        field.widthClass = 'cell-' + ftu.width;
+                    }
+                }, this);
+            }, this);
+        } else {
+            // this case handles when the list view has already initialized and rendered fields
+            // so loop through the rendered fields and update parent data-type,
+            // dispose of the old fields, and create new fields
+            _.each(this.fields, function(field) {
+                _.each(fieldsToUpdate, function(ftu) {
+                    if (field.name === ftu.name) {
+                        var options = field.options;
+                        var $parent = field.$el.parent();
+                        _.extend(options.def, ftu);
+                        _.extend(options.viewDefs.def, ftu);
+                        _.extend(options.viewDefs, ftu);
+
+                        // set the right data-type on the field
+                        $parent.attr('data-type', ftu.type);
+                        // get rid of the old field and its DOM elements/templates
+                        field.dispose();
+                        // create the new field
+                        field = app.view.createField(options);
+
+                        var $el = $(field.getPlaceholder().string);
+                        $parent.append($el);
+                        // set the field to render inside the element
+                        field.setElement($el);
+                        field.render();
+                    }
+                }, this);
+            }, this);
+        }
     },
 
     /**
@@ -320,8 +403,8 @@
             thSelector.left = rtl ? 'last' : 'first';
             thSelector.right = rtl ? 'first' : 'last';
             this._bordersPosition.left = $scrollPanel.find('thead tr:first th:' + thSelector.left).outerWidth();
-            this._bordersPosition.right = $scrollPanel.find(
-                'thead tr:first th:' + thSelector.right).children().position().left;
+            this._bordersPosition.right = $scrollPanel.find('thead tr:first th:' + thSelector.right).children().first()
+                .offset().left;
         }
         return this._bordersPosition;
     },
@@ -343,6 +426,7 @@
         var bordersPosition = this._getBordersPosition();
         var fieldLeft = location.left;
         var fieldRight = location.right;
+
         if (fieldRight <= bordersPosition.right && fieldLeft >= bordersPosition.left) {
             return;
         }
@@ -804,5 +888,16 @@
      */
     _refreshReorderableColumns: function() {
         $(window).resize();
-    }
+    },
+
+    /**
+     * Helper function to allow subclasses to override how metadata is combined
+     *
+     * @param {Object} recordListMeta record-list metaData
+     * @param {Object} subViewMeta sub-views metaData
+     * @return {Object} Combined metadata with subview props overriding record view props
+     */
+    combineMeta: function(recordListMeta, subViewMeta) {
+        return _.extend({}, recordListMeta, subViewMeta || {});
+    },
 })

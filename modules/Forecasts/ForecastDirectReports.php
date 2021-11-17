@@ -280,7 +280,6 @@ SQL;
     }
     public function create_new_list_query($order_by, $where, $filter = array(), $params = array(), $show_deleted = 0, $join_type = '', $return_array = false, $parentbean = null, $singleSelect = false, $ifListForExport = false)
     {
-//        _pp(func_get_args());
         $ret_array=array();
         $ret_array['select'] = "SELECT id, users.first_name ,users.last_name, users.id as user_id";
         $ret_array['from'] = " FROM users  ";

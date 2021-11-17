@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Anruflisten-Dashboard',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Anrufbericht-Dashboard',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Anrufe',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Anrufe',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Zugewiesen an',
     'LBL_LIST_MY_CALLS' => 'Meine Anrufe',
     'LBL_MY_SCHEDULED_CALLS' => 'Meine geplanten Anrufe',
+    'LBL_GUEST_CALLS' => 'Meine Anrufe als Gast',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Geplante Anrufe als Gast',
     'LBL_SELECT_FROM_DROPDOWN' => 'Bitte wählen Sie zuerst einen Eintrag aus der Auswahlliste "Verbunden mit".',
 	'LBL_ASSIGNED_TO_NAME' => 'Zugewiesen an',
 	'LBL_ASSIGNED_TO_ID' => 'Zugew. Benutzer',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Abbrechen [Alt+X]',
     'LBL_EMPTY_SEARCH_RESULT' => 'Leider keine Ergebnisse gefunden. Bitte erstellen Sie einen neuen Teilnehmer.',
     'LBL_NO_ACCESS' => 'Sie haben keine Rechte, das Modul $module zu erstellen',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Amazon Connect-Kontakt-ID',
+
     'LBL_REPEAT_TYPE' => 'Wiederholung',
     'LBL_REPEAT_INTERVAL' => 'Wiederholungsintervall',
     'LBL_REPEAT_END' => 'Ende',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Anruf mit {{{this}}}',
     'LBL_SEND_INVITES' => 'Einladungen senden',
     'LBL_REMINDER_TITLE' => 'Anruf:',
+    'LBL_CALL_RECORDING_URL' => 'Aufzeichnungs-URL',
+    'LBL_CALL_RECORDING' => 'Aufzeichnung',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Sie haben {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> für {{formatDate date_start}} geplant.',

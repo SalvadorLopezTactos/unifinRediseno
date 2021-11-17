@@ -601,6 +601,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => '設定入口網站',
     'LBL_PORTAL_ENABLE_PORTAL' => '啟用門戶',
     'LBL_PORTAL_ENABLE_SEARCH' => '打開客戶反饋前啟用搜索',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => '允許門戶用戶關閉客戶回饋',
     'LBL_PORTAL_THEME' => '主題入口網站',
     'LBL_PORTAL_ENABLE' => '啟用',
     'LBL_PORTAL_SITE_URL' => '您的入口網站：',
@@ -792,7 +793,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'當在此模組上使用全域搜尋功能來搜尋記錄時使用此欄位。',
+'LBL_POPHELP_REQUIRED'=>"建立公式以確定這個字段在布局中是否為必填。<br/>"
+    . "必填字段將遵循基於瀏覽器移動視圖中的公式，<br/>"
+    . "但不會遵循本地應用程式中的公式，比如用於 iPhone 的 Sugar Mobile。 <br/>"
+    . "他們不會遵循 Sugar 自助服務門戶中的公式。",
+'LBL_POPHELP_READONLY'=>"建立公式以確定這個字段在布局中是否為唯讀。<br/>"
+        . "唯讀字段將遵循基於瀏覽器移動視圖中的公式，<br/>"
+        . "但不會遵循本地應用程式中的公式，比如用於 iPhone 的 Sugar Mobile。 <br/>"
+        . "他們不會遵循 Sugar 自助服務門戶中的公式。",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'使用此模組上的“全局搜索”搜索記錄時，選擇使用此字段。',
 //Revert Module labels
 'LBL_RESET' => '重設',
 'LBL_RESET_MODULE' => '重設模組',
@@ -827,6 +836,7 @@ $mod_strings = array(
                 'encrypt'=>'加密',
                 'datetimecombo' =>'日期時間',
                 'decimal'=>'小數點',
+                'autoincrement' => '自動遞增',
 ),
 'labelTypes' => array(
     "" => "最常使用標籤",
@@ -844,4 +854,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'所有模組',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0}（相關 {1} ID）',
 'LBL_HEADER_COPY_FROM_LAYOUT' => '複製版面配置',
+'LBL_RELATIONSHIP_TYPE' => '關係',
 );

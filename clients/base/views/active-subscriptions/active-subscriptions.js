@@ -24,13 +24,6 @@
      */
     baseModule: null,
 
-    /**
-     * The model to show active subscriptions for.
-     *
-     * @property {Object}
-     */
-    baseModel: null,
-
     overallSubscriptionStartDate: 0,
 
     overallSubscriptionEndDate: 0,
@@ -42,25 +35,37 @@
     expiryComingSoon: false,
 
     /**
-     * Flag indicating if RLI is enabled.
+     * Object representing the initial state of our dropdown.
+     *
+     * @property {Object}
+     */
+    _defaultSettings: {
+        linked_subscriptions_account_field: null,
+    },
+
+    /**
+     * Flag indicating Purchases module is enabled.
      *
      * @property {bool}
      */
-    opportunitiesWithRevenueLineItems: false,
+    purchasesModule: false,
 
     /**
      * @inheritdoc
      */
     initialize: function(options) {
         this._super('initialize', [options]);
-        this.module = 'RevenueLineItems';
+
+        this.currentModule = this.context.get('module');
+        this.module = 'Purchases';
         this.moduleName = {'module_name': app.lang.getModuleName(this.module, {'plural': true})};
         this.baseModule = 'Accounts';
-        this._getBaseModel();
-        var oppConfig = app.metadata.getModule('Opportunities', 'config');
-        if (oppConfig && oppConfig.opps_view_by === 'RevenueLineItems') {
-            this.opportunitiesWithRevenueLineItems = true;
+
+        if (!_.isUndefined(app.metadata.getModule('Purchases'))) {
+            this.purchasesModule = true;
         }
+
+        this.linkToDocumentation = this._buildDocumentationUrl();
     },
 
     /**
@@ -69,13 +74,44 @@
      * @param {string} viewName Current view
      */
     initDashlet: function(viewName) {
+        this._initSettings();
+
         this._mode = viewName;
+
+        // Builds our dynamic dropdown list, but also populates the Account field in case it is not already set,
+        // for example on upgrade.
+        this._buildFieldsList();
+
         this._initCollection();
+    },
+
+    _buildDocumentationUrl: function() {
+        var serverInfo = app.metadata.getServerInfo();
+        var language = app.lang.getLanguage();
+        var module = 'activesubscriptionsdashlet';
+        var route = app.controller.context.get('layout');
+        var products = app.user.get('products') ?
+            app.user.get('products').join(',') :
+            '';
+
+        var params = {
+            edition: serverInfo.flavor,
+            version: serverInfo.version,
+            lang: language,
+            module: module,
+            route: route
+        };
+        if (!_.isEmpty(products)) {
+            params.products = products;
+        }
+
+        return 'https://www.sugarcrm.com/crm/product_doc.php?' + $.param(params);
     },
 
     /**
      * Get base model from parent context.
      *
+     * @deprecated Since 10.2.0. Does not support non-Account module support.
      * @private
      */
     _getBaseModel: function() {
@@ -91,11 +127,158 @@
 
             if (contextModel && contextModel.get('_module') === baseModule) {
                 this.baseModel = contextModel;
-                break;
+
+                var parentHasRowModel = currContext.parent && currContext.parent.has('rowModel');
+                if (!parentHasRowModel) {
+                    break;
+                }
             }
 
             currContext = currContext.parent;
         }
+    },
+
+    /**
+     * Build our settings object, based on defaults and the metadata, to be used throughout the controller.
+     *
+     * @private
+     */
+    _initSettings: function() {
+        var settings = _.extend({}, this._defaultSettings, this.settings.attributes);
+
+        this.settings.set(settings);
+
+        return this;
+    },
+
+    /**
+     * Fetches the metadata object that needs to be updated with the dynamically generated dropdown options.
+     *
+     * @private
+     */
+    _getDashletConfigField: function(fieldName) {
+        var configPanelMetadata = this.dashletConfig.panels;
+        var fieldMetadata = null;
+
+        _.each(configPanelMetadata, function(p) {
+            if (_.has(p, 'fields')) {
+                _.each(p.fields, function(f) {
+                    if (f.name === fieldName) {
+                        fieldMetadata = f;
+                        return;
+                    }
+                });
+            }
+        });
+
+        return fieldMetadata;
+    },
+
+    /**
+     * Create the dynamic dropdown options for the dashlet config page.
+     *
+     * @private
+     */
+    _buildFieldsList: function() {
+        var configPanel = this._getDashletConfigField('linked_subscriptions_account_field');
+        var configPanelOptions = {};
+
+        if (this.currentModule === this.baseModule) {
+            // If this dashlet is being added to the Accounts module record view, use the default ID field in the
+            // Account module
+            configPanelOptions.id = 'ID';
+        } else {
+            configPanelOptions = this._getRelationshipFields();
+        }
+
+        if (_.keys(configPanelOptions).length > 0) {
+            // Populate dropdown with relationship field options
+            configPanel.options = configPanelOptions;
+
+            // If we don't have any existing field selected, or the previously selected field is no longer present
+            if (
+                !this.settings.get('linked_subscriptions_account_field') ||
+                !configPanelOptions[this.settings.get('linked_subscriptions_account_field')]
+            ) {
+                this.settings.set({linked_subscriptions_account_field: _.first(Object.keys(configPanelOptions))});
+            }
+        }
+    },
+
+    /**
+     * Grabs the 1:* Account-related fields on our current module and returns them in the enum dropdown format.
+     *
+     * @private
+     */
+    _getRelationshipFields: function() {
+        var relFieldsForDropdown = {};
+
+        // Grab the view metadata that has all of the available fields
+        var currentModuleFields = app.metadata.getModule(this.currentModule, 'fields');
+        // Grab all the 1:* Account relationship (link) and Account relate fields on the current module
+        _.each(currentModuleFields, _.bind(function(f) {
+            // Relationship logic
+            var isRelationship = f.type === 'link';
+            var rel = app.metadata.getRelationship(f.relationship);
+            var isLinkedToAccounts = rel && (rel.lhs_module === this.baseModule || rel.rhs_module === this.baseModule);
+
+            // Relate field logic
+            var isRelateField = f.type === 'relate';
+            var isRelatedToAccounts = f.module === this.baseModule;
+
+            // Stores the current field that metadata is fetched for
+            var relField = null;
+
+            if (isRelationship && isLinkedToAccounts) {
+                var fieldKey = null;
+
+                var hasLeftJoinKey = _.has(rel, 'join_key_lhs') && rel.join_key_lhs !== null;
+                var hasRightJoinKey = _.has(rel, 'join_key_rhs') && rel.join_key_rhs !== null;
+                // Determine where to grab the account_id field based on the relationship
+                if (hasLeftJoinKey && hasRightJoinKey) {
+                    fieldKey = rel.lhs_module === this.baseModule ? 'join_key_lhs' : 'join_key_rhs';
+                } else {
+                    fieldKey = rel.lhs_module === this.baseModule ? 'rhs_key' : 'lhs_key';
+                }
+
+                relField = app.metadata.getField({name: rel[fieldKey], module: this.currentModule});
+
+                if (_.has(relField, 'name')) {
+                    relFieldsForDropdown[relField.name] = app.lang.get(relField.vname, this.currentModule);
+                }
+            }
+
+            if (isRelateField && isRelatedToAccounts) {
+                // Relate fields stemming from the above relationship fields can be in our list, we want to filter
+                // those out by checking there isn't an existing entry in our dropdown options.
+                if (!relFieldsForDropdown[f.id_name] && _.has(f, 'id_name')) {
+                    relFieldsForDropdown[f.id_name] = app.lang.get(f.vname, this.currentModule);
+                }
+            }
+        }, this));
+
+        return relFieldsForDropdown;
+    },
+
+    /**
+     * Gets the account ID from the model
+     *
+     * @param settingsAccountField
+     * @return {null|string}
+     * @private
+     */
+    _getAccountId: function(settingsAccountField) {
+        var linkedAccountField = this.settings.get(settingsAccountField);
+        if (!linkedAccountField) {
+            return null;
+        }
+
+        // Normally, we get the field from the context's model. On focus drawer or
+        // console dashboards, we need to get the field from the parent context's rowModel
+        var rowModelLayouts = ['focus', 'multi-line'];
+        return _.contains(rowModelLayouts, this.context.get('layout')) ?
+            this.context.parent.get('rowModel').get(linkedAccountField) :
+            this.context.get('model').get(linkedAccountField);
     },
 
     /**
@@ -104,62 +287,59 @@
      * @private
      */
     _initCollection: function() {
-        if (!this.baseModel || !this.opportunitiesWithRevenueLineItems) {
+        if (this._mode === 'config' || !this.purchasesModule) {
             return;
         }
+
+        var accountId = this._getAccountId('linked_subscriptions_account_field');
+
         var today = app.date().formatServer(true);
         var filter = [
             {
                 'account_id': {
-                    '$equals': this.baseModel.get('id')
+                    '$equals': accountId,
                 }
             },
             {
-                'opportunities.sales_status': {
-                    '$equals': 'Closed Won'
-                }
+                'service': {
+                    '$equals': 1,
+                },
             },
             {
-                'sales_stage': {
-                    '$equals': 'Closed Won'
-                }
-            },
-            {
-                'service_duration_value': {
-                    '$gt': 0
-                }
-            },
-            {
-                'service_start_date': {
+                'start_date': {
                     '$lte': today
                 }
             },
             {
-                'service_end_date': {
+                'end_date': {
                     '$gte': today
                 }
             }
         ];
         var options = {
-            'fields': this.meta.fields || [],
+            'fields': this.dashletConfig.fields || [],
             'filter': filter,
             'limit': app.config.maxRecordFetchSize || 1000,
-            'params': {
-                'order_by': 'service_start_date,service_end_date',
-            },
             'success': _.bind(function() {
                 if (this.disposed) {
                     return;
                 }
+                var self = this;
+                // Render here only when the model empty, else render after the bulk call is resolved.
+                if (!this.collection.models.length) {
+                    this.render();
+                }
                 _.each(this.collection.models, function(model) {
                     // add 1 day to display remaining time correctly
-                    var nextDate = app.date(model.get('service_end_date')).add('1', 'day');
+                    var nextDate = app.date(model.get('end_date')).add('1', 'day');
                     model.set('service_remaining_time', nextDate.fromNow());
+                    var collections = model.get('pli_collection');
+                    // create the payload
+                    var bulkSaveRequests = self._createBulkCollectionsPayload(collections);
+                    // send the payload
+                    self._sendBulkCollectionsUpdate(bulkSaveRequests);
                 });
-                this._caseComparator();
-                this._daysDifferenceCalculator();
-                this.render();
-            }, this)
+            }, this),
         };
         this.collection = app.data.createBeanCollection(this.module, null, options);
         this.collection.fieldsMeta = {
@@ -179,10 +359,115 @@
      * @param {Object} options Call options
      */
     loadData: function(options) {
-        if (this._mode === 'config' || !this.opportunitiesWithRevenueLineItems) {
+        if (this._mode === 'config' || !this.purchasesModule) {
             return;
         }
         this.collection.fetch(options);
+    },
+
+    _render: function(options) {
+        this._super('_render', [options]);
+
+        if (!this.settings.get('linked_subscriptions_account_field')) {
+            // If we don't have any available fields, replace the dropdown with a label.
+            this.template = app.template.get(this.name + '.unavailable');
+            this._super('_render', [options]);
+        }
+    },
+
+    /**
+     * Utility method to create the payload that will be sent to the server via the bulk api call
+     * to fetch the related PLIs for a purchase
+     *
+     * @param {Array} collections
+     * @private
+     */
+    _createBulkCollectionsPayload: function(collections) {
+        // loop over all the collections and create the requests
+        var bulkSaveRequests = [];
+        var url;
+        collections.each(function(element) {
+            // if the element is new, don't try and save it
+            if (!element.isNew()) {
+                // create the update url
+                url = app.api.buildURL(element.module, 'read', {
+                    id: element.get('id')
+                });
+
+                // get request on each PLI
+                bulkSaveRequests.push({
+                    // app.api.buildURL() in app.api.call() calls the rest endpoint with the following request
+                    // remove rest from the url here
+                    url: url.substr(4),
+                    method: 'GET',
+                });
+            }
+        });
+
+        return bulkSaveRequests;
+    },
+
+    /**
+     * Send the payload via the bulk api
+     *
+     * @param {Array} bulkSaveRequests
+     * @private
+     */
+    _sendBulkCollectionsUpdate: function(bulkSaveRequests) {
+        if (!_.isEmpty(bulkSaveRequests)) {
+            app.api.call(
+                'create',
+                app.api.buildURL(null, 'bulk'),
+                {
+                    requests: bulkSaveRequests
+                },
+                {
+                    success: _.bind(this._onBulkCollectionsUpdateSuccess, this)
+                }
+            );
+        }
+    },
+
+    /**
+     * Update the bundles when the results from the bulk api call
+     *
+     * @param {Array} bulkResponses
+     * @private
+     */
+    _onBulkCollectionsUpdateSuccess: function(bulkResponses) {
+        var purchaseId = _.first(bulkResponses).contents.purchase_id;
+        var model = _.first(this.collection.models.filter(function(ele) {
+            return ele.id === purchaseId;
+        }));
+        var collectionIndex = this.collection.models.indexOf(model);
+        var currentSubscription = 0;
+        var collections = model.get('pli_collection');
+        var element;
+        var quantity = 0;
+        var totalAmount = 0;
+
+        _.each(bulkResponses, function(record) {
+            element = collections.get(record.contents.id);
+            if (element) {
+                var startDate = app.date(record.contents.service_start_date);
+                var endDate = app.date(record.contents.service_end_date);
+                var today = app.date();
+                if (startDate <= today && endDate >= today) {
+                    currentSubscription++;
+                    quantity += record.contents.quantity;
+                    totalAmount += parseFloat(app.currency.convertWithRate(parseFloat(record.contents.total_amount),
+                        record.contents.base_rate));
+                }
+            }
+        }, this);
+        model.set('quantity', quantity);
+        model.set('total_amount', totalAmount);
+        if (currentSubscription === 0) {
+            this.collection.models.splice(collectionIndex, 1);
+        }
+        this._caseComparator();
+        this._daysDifferenceCalculator();
+        this.render();
     },
 
     /**
@@ -198,10 +483,10 @@
             var end;
             var modelArray = this.collection.models;
             modelArray.forEach(function(model) {
-                start = model.get('service_start_date');
+                start = model.get('start_date');
                 start = this.moment(start);
                 start = start.diff(daysPast, 'days');
-                end = model.get('service_end_date');
+                end = model.get('end_date');
                 end = this.moment(end);
                 end = end.diff(daysPast, 'days');
                 if (max < end) {
@@ -237,12 +522,12 @@
             today = today.diff(daysPast, 'days');
 
             _.each(this.collection.models, function(model) {
-                start = model.get('service_start_date');
+                start = model.get('start_date');
                 start = this.moment(start);
                 start = start.diff(daysPast, 'days');
                 startDate = ((start - overallSubscriptionStartDate) / overallDaysDifference).toFixed(2) * 100;
 
-                end = model.get('service_end_date');
+                end = model.get('end_date');
                 end = this.moment(end);
                 this.endDate = end;
                 end = end.diff(daysPast, 'days');
@@ -261,8 +546,8 @@
                 activePastTimelineWidth = isNaN(activePastTimelineWidth) ? 99 : activePastTimelineWidth;
                 activeTimelineWidth = (activeTimelineWidth === 0) ? 100 - activePastTimelineWidth : activeTimelineWidth;
                 model.set({
-                    startDate: app.date(model.get('service_start_date')).formatUser().split(' ')[0],
-                    endDate: app.date(model.get('service_end_date')).formatUser().split(' ')[0],
+                    startDate: _.first(app.date(model.get('start_date')).formatUser().split(' ')),
+                    endDate: _.first(app.date(model.get('end_date')).formatUser().split(' ')),
                     expiration: this.endDate.fromNow(),
                     timelineOffset: timelineOffset,
                     subscriptionValidityActive: activeTimelineWidth.toFixed(2),

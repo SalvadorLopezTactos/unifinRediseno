@@ -62,13 +62,19 @@ function makeValidators() {
 
     // Helper that validates the given date is before/after the date of another field
     var _isBeforeAfter = function(field, value, type, model) {
-        if(_.indexOf(['date', 'datetimecombo'], field.type) !== -1 && field.validation && field.validation.type === type) {
+        var validatableTypes = ['date', 'datetimecombo'];
+        if(field.validation && field.validation.type === type &&
+            ((field.validation.datatype && _.contains(validatableTypes, field.validation.datatype)) ||
+                (_.contains(validatableTypes, field.type)))) {
             var compareTo = model.fields[field.validation.compareto];
-            if(!_.isUndefined(compareTo) && _.indexOf(['date', 'datetimecombo'], compareTo.type) != -1) {
+            if(!_.isUndefined(compareTo) &&
+                ((field.validation.datatype && _.contains(validatableTypes, field.validation.datatype)) ||
+                    (_.contains(validatableTypes, compareTo.type)))) {
                 var compareToValue = Date.parse(model.get(compareTo.name));
                 value = Date.parse(value.toString());
                 if(!_.isNaN(compareToValue) && !_.isNaN(value)) {
-                    var compareToLabel = Language.get(compareTo.label || compareTo.vname || compareTo.name, model.module);
+                    var compareToLabel = Language.get(compareTo.label || compareTo.vname || compareTo.name,
+                        model.module);
                     if(type == "isbefore") {
                         return compareToValue < value ? compareToLabel : undefined;
                     }

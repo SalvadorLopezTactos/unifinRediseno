@@ -11,6 +11,7 @@
  */
 $dictionary['ProductBundleNote'] = array(
     'table' => 'product_bundle_notes',
+    'archive' => false,
     'comment' => 'Group-level comments on quotes',
     'fields' => array(
         'id' => array(

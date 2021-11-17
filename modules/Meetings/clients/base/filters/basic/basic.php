@@ -23,7 +23,7 @@ $viewdefs['Meetings']['base']['filter']['basic'] = array(
         ),
         array(
             'id' => 'assigned_to_me',
-            'name' => 'LBL_ASSIGNED_TO_ME',
+            'name' => 'LBL_LIST_MY_MEETINGS',
             'filter_definition' => array(
                 '$owner' => '',
             ),
@@ -70,5 +70,30 @@ $viewdefs['Meetings']['base']['filter']['basic'] = array(
             ),
             'editable' => false,
         ),
+        [
+            'id' => 'meetings_attending',
+            'name' => 'LBL_GUEST_MEETINGS',
+            'filter_definition' => [
+                [
+                    '$guest' => '',
+                ],
+            ],
+            'editable' => false,
+        ],
+        [
+            'id' => 'scheduled_meetings_attending',
+            'name' => 'LBL_GUEST_SCHEDULED_MEETINGS',
+            'filter_definition' => [
+                [
+                    '$guest' => '',
+                ],
+                [
+                    'status' => [
+                        '$in' => ['Planned'],
+                    ],
+                ],
+            ],
+            'editable' => false,
+        ],
     ),
 );

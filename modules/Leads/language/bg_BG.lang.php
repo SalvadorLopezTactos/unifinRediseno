@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Електронно табло със списък на Потенциалните клиенти',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Електронно табло със запис на Потенциалните клиенти',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на потенциални клиенти',
 
     'ERR_DELETE_RECORD' => 'en_us Трябва да определите номер на записа, за да изтриете този потенциален клиент.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Описание на организацията',
@@ -324,4 +325,8 @@ $mod_strings = array (
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Не е възможна промяна на статуса на {{moduleSingular}}. Този {{moduleSingular}} вече е конвертиран.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Прогноза за преобразуване на Потенциални клиенти',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Вижте подробности на прогноза за конкретен Потенциален клиент',
 );

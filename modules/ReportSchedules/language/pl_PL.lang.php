@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Według raportu',
     'LBL_RECENTLY_MODIFIED' => 'Ostatnio zmodyfikowane',
     'LBL_RECORD_SAVED_SUCCESS' => 'Pomyślnie utworzono {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. Otwórz harmonogram, aby dodać użytkowników za pośrednictwem panelu podrzędnego Użytkownicy.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Ten harmonogram raportów',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Pulpit rekordów harmonogramów raportów',
 );

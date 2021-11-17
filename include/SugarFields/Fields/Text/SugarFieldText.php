@@ -53,5 +53,18 @@ class SugarFieldText extends SugarFieldBase {
 
 		return $this->ss->fetch($this->findTemplate('ClassicEditView'));
     }
+
+    /**
+     * Validates submitted data
+     * @param SugarBean $bean
+     * @param array $params
+     * @param string $field
+     * @param array $properties
+     * @return boolean
+     */
+    public function apiValidate(SugarBean $bean, array $params, $field, $properties)
+    {
+        return $this->apiValidateFieldSize($bean, $params, $field, $properties);
+    }
 }
 ?>

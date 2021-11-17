@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Geplande taak',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Gedenormaliseerde teambeveiligingsgegevens opnieuw opbouwen',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Activity Stream Purger',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Productdefinitie bijwerken',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Tijdbewuste planningen verwerken',
+'LBL_OOTB_DATA_ARCHIVER' => 'Actieve gegevensarchieven/verwijderingen uitvoeren',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'Altijd',
 'LBL_CATCH_UP' => 'Uitvoeren indien gemist',
+'LBL_SYSTEM_JOB' => 'Is huidige taaksysteem?',
 'LBL_CATCH_UP_WARNING' => 'Selectie ongedaan maken als deze taak lang duurt om uit te voeren.',
 'LBL_DATE_TIME_END' => 'Datum & tijd einde',
 'LBL_DATE_TIME_START' => 'Datum & tijd start',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Bestanden van het diagnostische middel verwijderen',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Tijdelijke bestanden verwijderen',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Gedenormaliseerde teambeveiligingsgegevens opnieuw opbouwen',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Productdefinitie bijwerken',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Massa e-mailcampagnes &#39;s nachts uitvoeren',
 'LBL_ASYNCMASSUPDATE' => 'Asynchrone massa-updates uitvoeren',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'Gooi de wachtrij voor taak leeg',
 'LBL_CLEANOLDRECORDLISTS' => 'Oude recordlijsten opschonen',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Activity Stream Purger',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Tijdbewuste planningen verwerken',
 'LBL_PMSEENGINECRON' => 'SugarBPM Taakplanner',
 );
 

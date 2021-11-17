@@ -4,39 +4,48 @@
 //HOMEPAGE
 .dashboard {
   .thumbnail.dashlet:not(.collapsed) {
-    //500 (max) - 34 (menubar) = 466
+    // 100% of parent container's size
     .dashlet-content > div {
-      max-height: 466px;
+      height: 100%;
     }
-    //466 (max) - 40 (block footer) = 426
+
     .dashlet-content .list-view {
-      max-height: 426px;
-      overflow: auto;
+      overflow: visible;
     }
-    //466 (max) - 40 (block footer) = 426
-    .dashlet-content .activitystream-list {
-      max-height: 426px;
-    }
-    //466 (max) - 16 (chart margins) = 450 - 2 border
+    // parent - 16px (chart margins)
     .sc-chart,
     .nv-chart {
-      height: 448px;
+      height: ~'calc(100% - 16px)';
       margin: 8px;
     }
-    //448 (chart height) - 41 (dashlet options) = 407
+
+    // parent - space for words to appear above/below chart as needed
+    .sales-pipeline-wrapper {
+      height: ~'calc(100% - 48px)';
+
+      .sales-pipeline-chart {
+        height: ~'calc(100% - 16px)';
+      }
+    }
+    // parent - 55px (dashlet toolbar)
     .dashlet-options + .sc-chart,
     .dashlet-options + .nv-chart,
     .process-users-chart .sc-chart,
     .process-users-chart .nv-chart,
-    .sales-pipeline-chart,
+    .sales-pipeline-wrapper,
     .opportunity-pipeline-wrapper .nv-chart,
     .forecast-pareto-chart,
     .forecasts-chart-wrapper .nv-chart {
-      height: 409px;
+      height: ~'calc(100% - 55px)';
     }
-    //466 (max) - 39 (block footer) = 427
+    // parent - 39px (block footer)
     .twitter-widget.scroll {
-      max-height: 427px;
+      max-height: ~'calc(100% - 39px)';
+    }
+
+    // override D3 default to fill allotted space
+    svg {
+      max-height: 100%;
     }
   }
 }
@@ -44,25 +53,13 @@
 //SIDEBAR
 .sidebar-content {
   .thumbnail.dashlet:not(.collapsed) {
-    //400 (max) - 34 (menubar) = 366
-    .dashlet-content > div {
-      max-height: 366px;
-    }
-    //366 (max) - 40 (block footer) = 326
-    .dashlet-content .list-view {
-      max-height: 326px;
-    }
-
-    .dashlet-content .activitystream-list {
-      max-height: 326px;
-    }
-    //366 (max) - 16 (chart margins) - 2 border = 350
+    // parent - 16px (margins)
     .sc-chart,
     .nv-chart {
-      height: 348px;
+      height: ~'calc(100% - 16px)';
       margin: 8px;
     }
-    //350 (chart height) - 41 (dashlet options) = 309
+    // parent - 55px (dashlet options + margins)
     .dashlet-options + .sc-chart,
     .dashlet-options + .nv-chart,
     .process-users-chart .sc-chart,
@@ -71,24 +68,53 @@
     .opportunity-pipeline-wrapper .nv-chart,
     .forecast-pareto-chart,
     .forecasts-chart-wrapper .nv-chart {
-      height: 309px;
+      height: ~'calc(100% - 55px)';
     }
-    //366 (max) - 67 (tabs) - 22 (chart margins) - 2 border = 275
-    .opportunity-metrics-chart,
-    .opportunity-metrics-wrapper .nv-chart {
-      height: 275px;
-      margin-bottom: 14px;
+
+    .opportunity-metrics-wrapper {
+      // parent - 8px (top margin)
+      [data-content='chart'] {
+        height: ~'calc(100% - 8px)';
+      }
+
+      // parent - 67px (tabs) - 22px (chart margins)
+      .opportunity-metrics-chart {
+        margin-bottom: 14px;
+        height: ~'calc(100% - 89px)';
+      }
     }
-    //366 (max) - 60 (tabs) - 16 (chart margins) = 288
-    .cases-summary-chart,
-    .nv-chart-cases {
-      height: 288px;
-    }
-    //366 (max) - 39 (block footer) = 327
-    .twitter-widget.scroll {
-      max-height: 327px;
+
+    .cases-summary-wrapper {
+      // parent - 8px (top margin)
+      [data-content='chart'] {
+        height: ~'calc(100% - 8px)';
+      }
+
+      .nav-tabs li {
+        margin-top: 0;
+      }
+
+      .tab-content {
+        // parent - 52px (tabs)
+        height: ~'calc(100% - 52px)';
+
+        .tab-pane {
+          // parent - 8px (top margin)
+          height: ~'calc(100% - 8px)';
+
+          .cases-summary-chart,
+          .nv-chart-cases {
+            // parent - 16px (chart margins)
+            height: ~'calc(100% - 8px)';
+          }
+        }
+      }
     }
   }
+}
+
+.drillthrough-pane .sc-chart {
+  height: 348px !important;
 }
 
 //interactions

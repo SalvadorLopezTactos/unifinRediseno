@@ -15,6 +15,7 @@ use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
+use Sugarcrm\Sugarcrm\CSP\ContentSecurityPolicy;
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
 use Sugarcrm\Sugarcrm\MetaData\RefreshQueue;
@@ -304,7 +305,8 @@ class MetaDataManager implements LoggerAwareInterface
         'max_aggregate_email_attachments_bytes' => true,
         'new_email_addresses_opted_out' => true,
         'activity_streams_enabled' => true,
-        'marketing_extras_enabled' => true,
+        'enable_link_to_drawer' => true,
+        'push_notification' => true,
     );
 
     /**
@@ -670,53 +672,29 @@ class MetaDataManager implements LoggerAwareInterface
     public function getModuleViews($moduleName, MetaDataContextInterface $context = null)
     {
         $data = $this->getModuleClientData('view', $moduleName, $context);
-        $data = $this->removeDisabledFields($moduleName, $data);
+        $data = $this->removeDisabledFields($data);
         return $data;
     }
 
     /**
      * Removes disabled fields from view definition
      *
-     * @param string $moduleName
      * @param array $data
      * @return array
      */
-    protected function removeDisabledFields(string $moduleName, array $data)
+    protected function removeDisabledFields(array $data)
     {
         foreach ($data as $key => $value) {
             if (is_array($value)) {
                 if ($key === 'fields') {
-                    $value = array_filter($value, function ($field) use ($moduleName) {
-                        if (!is_array($field)) {
-                            return !is_array($field);
-                        }
-
-                        // check enable flag
-                        if (isset($field['enabled']) && empty($field['enabled'])) {
-                            return false;
-                        }
-
-                        // check AccessControl
-                        // This section of code is a portion of the code referred
-                        // to as Critical Control Software under the End User
-                        // License Agreement.  Neither the Company nor the Users
-                        // may modify any portion of the Critical Control Software.
-                        if (empty($field['name'])
-                            || (AccessControlManager::instance()->isFieldAccessControlledModule($moduleName)
-                                && !AccessControlManager::instance()->allowFieldAccess($moduleName, $field['name'])
-                            )
-                        ) {
-                            return false;
-                        }
-                        //END REQUIRED CODE DO NOT MODIFY
-                        return true;
-
+                    $value = array_filter($value, function ($field) {
+                        return !is_array($field) || !isset($field['enabled']) || $field['enabled'];
                     });
 
                     // make sure the resulting array has no gaps in keys
                     $value = array_values($value);
                 } else {
-                    $value = $this->removeDisabledFields($moduleName, $value);
+                    $value = $this->removeDisabledFields($value);
                 }
                 $data[$key] = $value;
             }
@@ -865,7 +843,7 @@ class MetaDataManager implements LoggerAwareInterface
             $vardefs['fields'] = MassUpdate::setMassUpdateFielddefs($vardefs['fields'], $moduleName);
         }
 
-        $data['fields'] = $this->getVardefFields($moduleName, $vardefs);
+        $data['fields'] = isset($vardefs['fields']) ? $vardefs['fields'] : array();
         // Add the _hash for the fields array
         $data['fields']['_hash'] = md5(serialize($data['fields']));
         $data['nameFormat'] = isset($vardefs['name_format_map'])?$vardefs['name_format_map']:null;
@@ -883,12 +861,16 @@ class MetaDataManager implements LoggerAwareInterface
             $data['dependencies'] = $deps['dependencies'];
         }
 
+        // Archiving is always on unless we explicitly say it isn't
+        $data['archiveEnabled'] = !(isset($vardefs['archive']) && $vardefs['archive'] === false);
 
         // Indicate whether Module Has duplicate checking enabled --- Rules must exist and Enabled flag must be set
         $data['dupCheckEnabled'] = isset($vardefs['duplicate_check']) && isset($vardefs['duplicate_check']['enabled']) && ($vardefs['duplicate_check']['enabled']===true);
 
         // Indicate whether a Module has activity stream enabled
-        $data['activityStreamEnabled'] = ActivityQueueManager::isEnabledForModule($moduleName);
+        $data['activityStreamEnabled'] = SugarConfig::getInstance()->get('activity_streams_enabled', false) ?
+            ActivityQueueManager::isEnabledForModule($moduleName) : false;
+
         $data['ftsEnabled'] = SugarSearchEngineMetadataHelper::isModuleFtsEnabled($moduleName);
 
         // TODO we need to have this kind of information on the module itself not hacked around on globals
@@ -911,6 +893,9 @@ class MetaDataManager implements LoggerAwareInterface
                 $data['additionalProperties'][$prop] = $vardefs[$prop];
             }
         }
+
+        // Check if there is a focus dashboard that exists for this module
+        $data['hasFocusDashboard'] = $this->isFocusDashboardEnabled($moduleName);
 
         $data["_hash"] = $this->hashChunk($data);
 
@@ -1023,33 +1008,6 @@ class MetaDataManager implements LoggerAwareInterface
     }
 
     /**
-     * applying Field Access Control to vardefs' fields
-     * @param string $moduleName
-     * @param array $vardefs
-     * @return array
-     */
-    protected function getVardefFields(string $moduleName, array $vardefs) : array
-    {
-        if (!isset($vardefs['fields'])) {
-            return [];
-        }
-
-        $data = $vardefs['fields'];
-        // This section of code is a portion of the code referred
-        // to as Critical Control Software under the End User
-        // License Agreement.  Neither the Company nor the Users
-        // may modify any portion of the Critical Control Software.
-        if (AccessControlManager::instance()->isFieldAccessControlledModule($moduleName)) {
-            foreach ($data as $fieldName => $value) {
-                if (!AccessControlManager::instance()->allowFieldAccess($moduleName, $fieldName)) {
-                    unset($data[$fieldName]);
-                }
-            }
-        }
-        //END REQUIRED CODE DO NOT MODIFY
-        return $data;
-    }
-    /**
      * Gets the ACL's for the module, will also expand them so the client side of the ACL's don't have to do as many checks.
      *
      * @param  string $module     The module we want to fetch the ACL for
@@ -1160,6 +1118,12 @@ class MetaDataManager implements LoggerAwareInterface
                             $outputAcl['fields'][$field]['write'] = 'no';
                             $outputAcl['fields'][$field]['create'] = 'no';
                             break;
+                    }
+                    $licenseAccess = AccessControlManager::instance()->allowFieldAccess($module, $field);
+                    if ($licenseAccess === false) {
+                        $outputAcl['fields'][$field]['create'] = 'no';
+                        $outputAcl['fields'][$field]['write'] = 'no';
+                        $outputAcl['fields'][$field]['license'] = 'no';
                     }
                 }
             }
@@ -1334,16 +1298,47 @@ class MetaDataManager implements LoggerAwareInterface
      */
     public static function getPlatformList()
     {
-        $platforms = array();
-        $platformsDefs = SugarAutoLoader::existingCustom('clients/platforms.php');
-        if ($platformExtension = SugarAutoLoader::loadExtension('platforms')) {
-            $platformsDefs[] = $platformExtension;
+        return self::getPlatformMetadata('platforms');
+    }
+
+    /**
+     * Gets a list of platform options found in the application
+     *
+     * @return array Platform options in the form of
+     * [
+     *   'base' => [
+     *     'disable_notifications' => false
+     *     ...
+     *    ],
+     *   'portal' => [...]
+     *   ...
+     * ]
+     */
+    public static function getPlatformOptions()
+    {
+        return self::getPlatformMetadata('platformoptions');
+    }
+
+    /**
+     * Util to get a list of metadata defined in a global array, including
+     * extension metadata
+     *
+     * E.g. clients/platforms.php
+     *
+     * @param String $metaType Type of metadata to load (e.g. platforms)
+     * @return array Metadata loaded from files
+     */
+    protected static function getPlatformMetadata(String $metaType): array
+    {
+        $$metaType = [];
+        $metaDefs = SugarAutoLoader::existingCustom("clients/$metaType.php");
+        if ($metaExtension = SugarAutoLoader::loadExtension($metaType)) {
+            $metaDefs[] = $metaExtension;
         }
-        foreach ($platformsDefs as $file) {
+        foreach ($metaDefs as $file) {
             require $file;
         }
-
-        return $platforms;
+        return $$metaType;
     }
 
     /**
@@ -2052,7 +2047,7 @@ class MetaDataManager implements LoggerAwareInterface
 
             if (self::$queue) {
                 while ($task = self::$queue->dequeue()) {
-                    list($name, $items, $params) = $task;
+                    [$name, $items, $params] = $task;
                     if (isset(self::$cacheParts[$name])) {
                         $method = self::$cacheParts[$name];
                         if (isset($params['platforms'])) {
@@ -2218,14 +2213,14 @@ class MetaDataManager implements LoggerAwareInterface
     {
         $sugarConfig = $this->getSugarConfig();
         $administration = new Administration();
-        $administration->retrieveSettings();
+        $administration->retrieveSettings(false, true);
 
         $idpConfig = $this->getIdpConfig();
         $properties = $this->getConfigProperties();
         $properties = $this->parseConfigProperties($sugarConfig, $properties);
         $configs = $this->handleConfigPropertiesExceptions($properties);
 
-        // FIXME: Clean up properties bellow in order to fit standards
+        // FIXME: Clean up properties below in order to fit standards
         // regarding property names
         if (isset($administration->settings['honeypot_on'])) {
             $configs['honeypot_on'] = true;
@@ -2305,6 +2300,18 @@ class MetaDataManager implements LoggerAwareInterface
         $configs['allowedLinkSchemes'] = isset($sugarConfig['allowed_link_schemes']) ?
             $sugarConfig['allowed_link_schemes'] : ['http', 'https'];
 
+        // Get AWS configs for Serve
+        if ($administration->isLicensedForServe()) {
+            foreach ($administration->settings as $key => $value) {
+                if (substr($key, 0, 4) === 'aws_') {
+                    // Format the key for these configs correctly
+                    $configs[$this->translateConfigProperty($key)] = $value;
+                }
+            }
+        }
+        $configs['csp'] = ContentSecurityPolicy::fromAdministrationSettings()
+            ->withAddedDefaults()
+            ->asString();
         return $configs;
     }
 
@@ -3647,6 +3654,36 @@ class MetaDataManager implements LoggerAwareInterface
     {
         unset($data['_hash']);
         return md5(serialize($data));
+    }
+
+    /**
+     * Determines if focus dashboards are available for the given module.
+     */
+    public function isFocusDashboardEnabled(string $moduleName): bool
+    {
+        static $cached = null;
+
+        if ($cached === null) {
+            $moduleList = $this->getModules();
+            $cached = array_fill_keys($moduleList, false);
+
+            $query = new SugarQuery();
+            $query->select(['dashboard_module']);
+            $query->distinct(true);
+            $query->from(BeanFactory::newBean('Dashboards'), ['team_security' => false]);
+            $query->where()
+                ->queryAnd()
+                ->equals('view_name', 'focus')
+                ->in('dashboard_module', $moduleList);
+            $data = $query->execute();
+
+            foreach ($data as $row) {
+                $module = $row['dashboard_module'];
+                $cached[$module] = true;
+            }
+        }
+
+        return !empty($cached[$moduleName]);
     }
 
     /**

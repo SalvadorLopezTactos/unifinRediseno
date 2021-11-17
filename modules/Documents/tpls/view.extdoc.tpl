@@ -89,7 +89,7 @@ window.opener.YAHOO.util.Connect.asyncRequest('POST', 'index.php', callback, "mo
               </a>
             {/if}
             {if $params.link && !empty($rowData.URL) }
-              <a href="{$rowData.URL}" class="tabDetailViewDFLink" target="_blank"><img src="{$imgPath}" border="0"></a>
+              <a href="{$rowData.URL}" class="tabDetailViewDFLink" target="_blank" rel="nofollow noopener noreferrer"><img src="{$imgPath}" border="0"></a>
             {/if}
             {if $col == 'NAME' || $params.bold}</b>{/if}
           </td>

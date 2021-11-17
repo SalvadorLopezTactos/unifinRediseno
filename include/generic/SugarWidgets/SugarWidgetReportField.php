@@ -51,7 +51,7 @@ class SugarWidgetReportField extends SugarWidgetField
  {
         $obj = $this->getSubClass($layout_def);
 
-        $context = $this->layout_manager->getAttribute('context');//_ppd($context);
+        $context = $this->layout_manager->getAttribute('context');
         $func_name = 'display'.$context;
 
 

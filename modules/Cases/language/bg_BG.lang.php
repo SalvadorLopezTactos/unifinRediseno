@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Електронно табло със списък на казусите',
     'LBL_CASES_RECORD_DASHBOARD' => 'Електронно табло със запис на казусите',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Подробни данни за случай',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на случаи',
 
 	'ERR_DELETE_RECORD'					=> 'Трябва да определите номер, за да изтриете този запис.',
 	'LBL_ACCOUNT_ID'					=> 'Идентификатор на организацията',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Видим за портала',
 	'LBL_CREATE_KB_DOCUMENT' => 'Добавяне на материал',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'База от знания',
+    'LBL_REQUEST_CLOSE' => 'Финализиране на заявка',
+    'LBL_REQUEST_CLOSE_DATE' => 'Дата на финализиране на заявка',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Заявка за финализиране',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Изпратете заявка за затваряне на този случай',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Желаете ли да заявите този случай да бъде затворен?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Моите случаи, заявени за затваряне',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Моите случаи, заявени за затваряне',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Моите случаи, заявени за затваряне',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Списък на случаите, заявени за затваряне',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Показва списък на възложени случаи, които са заявени за затваряне',
 
     'LBL_CREATED_USER' => 'Създаден потребител',
     'LBL_MODIFIED_USER' => 'Модифициран потребител',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Отговорник',
     'LBL_EXPORT_TEAM_COUNT' => 'Брой екипи',
     'LBL_CHANGETIMERS' => 'Промени таймери',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Покупки',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Related Contacts&#39; Emails',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Можете да използвате това например, за да намерите конкретен казус, които е бил повдигнат.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Можете да натиснете тук, в случай че желаете да повдигнете нов казус.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Натискайки тук можете да се върнете в този списък по всяко време.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Взаимодействия на случай',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Бележки',
 
@@ -149,5 +161,5 @@ $mod_strings = array (
 
     'LBL_SLA_DETAILS' => 'Подробна информация за SLA',
     'LBL_HOURS' => 'Часове',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'Статус',
 );

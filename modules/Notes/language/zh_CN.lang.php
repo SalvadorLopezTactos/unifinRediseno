@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => '笔记列表仪表板',
+    'LBL_NOTES_RECORD_DASHBOARD' => '备注记录仪表板',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => '注释焦点抽屉',
 
+    'LBL_RELATED_CONTACT' => '相关联系人',
     'ERR_DELETE_RECORD' => '必须指定记录编号才能删除帐户。',
     'LBL_ACCOUNT_ID' => '帐户 ID：',
     'LBL_CASE_ID' => '客户反馈编号：',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => '联系人 ID：',
     'LBL_CONTACT_NAME' => '联系人：',
     'LBL_DEFAULT_SUBPANEL_TITLE' => '笔记',
+    'LBL_ATTACHMENTS' => '附件',
+    'LBL_ATTACHMENT_FLAG' => '为附件',
     'LBL_DESCRIPTION' => '备忘录',
     'LBL_EMAIL_ADDRESS' => '电子邮件地址：',
     'LBL_EMAIL_ATTACHMENT' => '电子邮件附件',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => '笔记与附件',
     'LBL_NOTE' => '笔记：',
     'LBL_OPPORTUNITY_ID' => '商业机会编号：',
+    'LBL_NOTE_PARENT_ID' => '备注父 ID：',
     'LBL_PARENT_ID' => '父级编号：',
     'LBL_PARENT_TYPE' => '原始类型',
     'LBL_EMAIL_TYPE' => '电子邮件类型',

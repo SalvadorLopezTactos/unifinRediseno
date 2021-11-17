@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Warning: You are modifying your automatic import setting which may result in loss of data.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Warning: Auto import must be enabled when automatically creating cases.',
 	'LBL_EDIT_LAYOUT' => 'Edit Layout' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'Email Address',
+    'LBL_EMAIL_PROVIDER' => 'Email Provider',
+    'LBL_AUTH_STATUS' => 'Authorization Status',
 );
-?>

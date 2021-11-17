@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Modifikuar nga ID',
     'LBL_EXPORT_CREATED_BY' => 'Krijuar Nga ID',
     'LBL_EXPORT_TYPE_NAME' => 'Emri i llojit',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te kontratat',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të kontakteve',
 );

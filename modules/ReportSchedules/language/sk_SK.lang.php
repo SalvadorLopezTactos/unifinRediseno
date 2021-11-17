@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Podľa hlásenia',
     'LBL_RECENTLY_MODIFIED' => 'Naposledy upravené',
     'LBL_RECORD_SAVED_SUCCESS' => 'Úspešne ste vytvorili {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. Otvorte plán na pridanie používateľov prostredníctvom podpanelu Používatelia.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Tento plán hlásení',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Informačný panel so záznamom plánov hlásení',
 );

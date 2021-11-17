@@ -17,6 +17,11 @@ use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheException;
 use Psr\SimpleCache\CacheInterface;
+use Sugarcrm\Sugarcrm\ACL\Backend\Redis as AclCacheRedis;
+use Sugarcrm\Sugarcrm\ACL\EncryptionKey;
+use Sugarcrm\Sugarcrm\ACL\InstanceKeyPrefix;
+use Sugarcrm\Sugarcrm\ACL\MultitenantValueSerializer;
+use Sugarcrm\Sugarcrm\ACL\PhpValueSerializer;
 use Sugarcrm\Sugarcrm\Audit\EventRepository;
 use Sugarcrm\Sugarcrm\Audit\Formatter as AuditFormatter;
 use Sugarcrm\Sugarcrm\Audit\Formatter\CompositeFormatter;
@@ -26,17 +31,19 @@ use Sugarcrm\Sugarcrm\Cache\Backend\InMemory as InMemoryCache;
 use Sugarcrm\Sugarcrm\Cache\Backend\Memcached as MemcachedCache;
 use Sugarcrm\Sugarcrm\Cache\Backend\Redis as RedisCache;
 use Sugarcrm\Sugarcrm\Cache\Backend\WinCache;
+use Sugarcrm\Sugarcrm\Cache\Exception as SugarCacheException;
 use Sugarcrm\Sugarcrm\Cache\Middleware\DefaultTTL;
 use Sugarcrm\Sugarcrm\Cache\Middleware\MultiTenant as MultiTenantCache;
 use Sugarcrm\Sugarcrm\Cache\Middleware\MultiTenant\KeyStorage\Configuration as ConfigurationKeyStorage;
 use Sugarcrm\Sugarcrm\Cache\Middleware\Replicate;
+use Sugarcrm\Sugarcrm\CSP\AdministrationSettingsCSPStorage;
+use Sugarcrm\Sugarcrm\CSP\CSPStorage;
 use Sugarcrm\Sugarcrm\DataPrivacy\Erasure\Repository;
 use Sugarcrm\Sugarcrm\Dbal\Logging\DebugLogger;
 use Sugarcrm\Sugarcrm\Dbal\Logging\Formatter as DbalFormatter;
 use Sugarcrm\Sugarcrm\Dbal\Logging\SlowQueryLogger;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Command\Rebuild;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Command\StateAwareRebuild;
-use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Console\StatusCommand;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Job\RebuildJob;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener;
 use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener\Builder\StateAwareBuilder;
@@ -52,46 +59,55 @@ use Sugarcrm\Sugarcrm\Security\Context;
 use Sugarcrm\Sugarcrm\Security\Subject\Formatter as SubjectFormatter;
 use Sugarcrm\Sugarcrm\Security\Subject\Formatter\BeanFormatter;
 use Sugarcrm\Sugarcrm\Security\Validator\Validator;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use UltraLite\Container\Container;
+use Sugarcrm\Sugarcrm\Performance\Dbal\XhprofLogger;
+use Sugarcrm\Sugarcrm\ACL\Cache as AclCacheInterface;
 
 return new Container([
-    SugarConfig::class => function () {
+    SugarConfig::class => function (): SugarConfig {
         return SugarConfig::getInstance();
     },
-    Connection::class => function () {
+    Connection::class => function (): Connection {
         return DBManagerFactory::getConnection();
     },
     SQLLogger::class => function (ContainerInterface $container) : SQLLogger {
         $config = $container->get(SugarConfig::class);
 
         $channel = LoggerFactory::getLogger('db');
+        DbalFormatter::wrapLogger($channel);
 
-        $logger = new LoggerChain();
-        $logger->addLogger(new DebugLogger($channel));
+        $loggers = [new DebugLogger($channel)];
 
         if ($config->get('dump_slow_queries')) {
-            $logger->addLogger(
-                new SlowQueryLogger(
-                    $channel,
-                    $config->get('slow_query_time_msec', 5000)
-                )
+            $loggers[] = new SlowQueryLogger(
+                $channel,
+                $config->get('slow_query_time_msec', 5000)
             );
         }
 
-        DbalFormatter::wrapLogger($channel);
+        if ($config->get('xhprof_config')
+            && SugarXHprof::getInstance()->isEnabled()
+            && empty($GLOBALS['installing'])) {
+            $loggers[] = new XhprofLogger(SugarXHprof::getInstance());
+        }
 
-        return $logger;
+        if (count($loggers) == 1) {
+            return array_shift($loggers);
+        }
+
+        return new LoggerChain($loggers);
     },
-    LoggerInterface::class => function () {
+    LoggerInterface::class => function (): LoggerInterface {
         return LoggerFactory::getLogger('default');
     },
-    LoggerInterface::class . '-denorm' => function () {
+    LoggerInterface::class . '-denorm' => function (): LoggerInterface {
         return LoggerFactory::getLogger('denorm');
     },
-    LoggerInterface::class . '-security' => function () {
+    LoggerInterface::class . '-security' => function (): LoggerInterface {
         return LoggerFactory::getLogger('security');
     },
-    State::class => function (ContainerInterface $container) {
+    State::class => function (ContainerInterface $container): State {
         $config = $container->get(SugarConfig::class);
 
         $state = new State(
@@ -103,7 +119,7 @@ return new Container([
 
         return $state;
     },
-    Listener::class => function (ContainerInterface $container) {
+    Listener::class => function (ContainerInterface $container): Listener {
         $conn = $container->get(Connection::class);
         $state = $container->get(State::class);
         $builder = new StateAwareBuilder(
@@ -122,7 +138,7 @@ return new Container([
             new PreFetch($conn)
         );
     },
-    StateAwareRebuild::class => function (ContainerInterface $container) {
+    StateAwareRebuild::class => function (ContainerInterface $container): StateAwareRebuild {
         $logger = $container->get(LoggerInterface::class . '-denorm');
 
         return new StateAwareRebuild(
@@ -134,47 +150,42 @@ return new Container([
             $logger
         );
     },
-    StatusCommand::class => function (ContainerInterface $container) {
-        return new StatusCommand(
-            $container->get(State::class)
-        );
-    },
-    RebuildJob::class => function (ContainerInterface $container) {
+    RebuildJob::class => function (ContainerInterface $container): RebuildJob {
         return new RebuildJob(
             $container->get(StateAwareRebuild::class)
         );
     },
-    Context::class => function (ContainerInterface $container) {
+    Context::class => function (ContainerInterface $container): Context {
         return new Context(
             $container->get(LoggerInterface::class . '-security')
         );
     },
-    Localization::class => function () {
+    Localization::class => function (): Localization {
         return Localization::getObject();
     },
-    SubjectFormatter::class => function (ContainerInterface $container) {
+    SubjectFormatter::class => function (ContainerInterface $container): SubjectFormatter {
         return new BeanFormatter(
             $container->get(Localization::class)
         );
     },
-    EventRepository::class => function (ContainerInterface $container) {
+    EventRepository::class => function (ContainerInterface $container): EventRepository {
         return new EventRepository(
             $container->get(Connection::class),
             $container->get(Context::class)
         );
     },
-    Repository::class => function (ContainerInterface $container) {
+    Repository::class => function (ContainerInterface $container): Repository {
         return new Repository(
             $container->get(Connection::class)
         );
     },
-    AuditFormatter::class => function (ContainerInterface $container) {
-        $class = \SugarAutoLoader::customClass(CompositeFormatter::class);
+    AuditFormatter::class => function (ContainerInterface $container): AuditFormatter {
+        $class = SugarAutoLoader::customClass(CompositeFormatter::class);
         return new $class(
-            new \Sugarcrm\Sugarcrm\Audit\Formatter\Date(),
-            new \Sugarcrm\Sugarcrm\Audit\Formatter\Enum(),
-            new \Sugarcrm\Sugarcrm\Audit\Formatter\Email(),
-            new \Sugarcrm\Sugarcrm\Audit\Formatter\Subject($container->get(SubjectFormatter::class))
+            new AuditFormatter\Date(),
+            new AuditFormatter\Enum(),
+            new AuditFormatter\Email(),
+            new AuditFormatter\Subject($container->get(SubjectFormatter::class))
         );
     },
     Administration::class => function () : Administration {
@@ -218,17 +229,8 @@ return new Container([
         }
     },
     RedisCache::class => function (ContainerInterface $container) : RedisCache {
-        $config = $container->get(SugarConfig::class)->get('external_cache.redis');
-        $persistentId = $container->get(SugarConfig::class)->get('unique_key');
-
         try {
-            return new RedisCache(
-                $config['host'] ?? '127.0.0.1',
-                $config['port'] ?? 6379,
-                $config['persistent'] ?? false,
-                $config['timeout'] ?? 0,
-                $persistentId ?? ''
-            );
+            return new RedisCache($container->get(Redis::class));
         } catch (CacheException $e) {
             throw new ServiceUnavailable($e->getMessage(), 0, $e);
         }
@@ -249,10 +251,72 @@ return new Container([
             throw new ServiceUnavailable($e->getMessage(), 0, $e);
         }
     },
-    \TimeDate::class => function (): \TimeDate {
-        return \TimeDate::getInstance();
+    TimeDate::class => function (): TimeDate {
+        return TimeDate::getInstance();
     },
-    Validator::class => function () {
+    Validator::class => function (): ValidatorInterface {
         return Validator::getService();
+    },
+    AclCacheInterface::class => function (ContainerInterface $container) : AclCacheInterface {
+        if (SugarCache::electBackend() instanceof SugarCacheRedis) {
+            $config = $container->get(SugarConfig::class);
+
+            $valueSerializer = new PhpValueSerializer();
+            if ($config->get('cache.multi_tenant')) {
+                $encryptionKey = (new EncryptionKey(new ConfigurationKeyStorage($config)))->get();
+                $valueSerializer = new MultitenantValueSerializer(
+                    $valueSerializer,
+                    $encryptionKey,
+                    $container->get(LoggerInterface::class)
+                );
+            }
+            $keyConverter = new InstanceKeyPrefix($config->get('unique_key'));
+
+            $backend = new AclCacheRedis(
+                $container->get(Redis::class),
+                $keyConverter,
+                $valueSerializer
+            );
+
+            return $backend;
+        }
+        return AclCache::getInstance();
+    },
+    Redis::class => function (ContainerInterface $container) : Redis {
+        if (!extension_loaded('redis')) {
+            throw new SugarCacheException('Redis extension is not loaded');
+        }
+
+        $client = new Redis();
+
+        $config = $container->get(SugarConfig::class)->get('external_cache.redis');
+        $persistentId = $container->get(SugarConfig::class)->get('unique_key');
+
+        $host = $config['host'] ?? '127.0.0.1';
+        $port = $config['port'] ?? 6379;
+        $timeout = $config['timeout'] ?? 0;
+        $persistentId = $persistentId ?? '';
+        $persistent = $config['persistent'] ?? false;
+
+        if (version_compare(phpversion('redis'), '4.0.0') >= 0) {
+            try {
+                if ($persistent) {
+                    $client->pconnect($host, $port, $timeout, $persistentId);
+                } else {
+                    $client->connect($host, $port, $timeout);
+                }
+            } catch (RedisException $e) {
+                throw new SugarCacheException($e->getMessage(), 0, $e);
+            }
+        } else {
+            if (!@$client->connect($host, $port, $timeout)) {
+                throw new SugarCacheException(error_get_last()['message']);
+            }
+        }
+
+        return $client;
+    },
+    CSPStorage::class => function (ContainerInterface $container): CSPStorage {
+        return new AdministrationSettingsCSPStorage();
     },
 ]);

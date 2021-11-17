@@ -66,6 +66,11 @@ class IdmProvider extends BasicGenericProvider
     protected $urlUserInfo;
 
     /**
+     * @var string
+     */
+    protected $urlRevokeToken;
+
+    /**
      * @var array
      */
     protected $caching = [];
@@ -127,6 +132,7 @@ class IdmProvider extends BasicGenericProvider
             'keySetId',
             'idpUrl',
             'urlUserInfo',
+            'urlRevokeToken',
         ]);
     }
 
@@ -165,6 +171,32 @@ class IdmProvider extends BasicGenericProvider
         $request = $this->getRequestFactory()->getRequestWithOptions(self::METHOD_POST, $url, $options);
         $result = $this->getParsedResponse($request);
         $this->setCache($cacheKey, $result, 'introspectToken');
+        return $result;
+    }
+
+    /**
+     * Revoke token
+     *
+     * @param AccessToken $token
+     * @return string
+     */
+    public function revokeToken(AccessToken $token)
+    {
+        $options = [
+            'headers' => [
+                'content-type' => 'application/x-www-form-urlencoded',
+                'Authorization' => $this->getHttpBasicAuthHeader(),
+            ],
+            'body' => $this->buildQueryString(['token' => $token->getToken()]),
+        ];
+
+        $request = $this->getRequestFactory()->getRequestWithOptions(
+            self::METHOD_POST,
+            $this->urlRevokeToken,
+            $options
+        );
+
+        $result = $this->getParsedResponse($request);
         return $result;
     }
 
@@ -402,7 +434,7 @@ class IdmProvider extends BasicGenericProvider
      */
     protected function checkResponse(ResponseInterface $response, $data)
     {
-        if (!is_array($data)) {
+        if (!is_array($data) && !empty($response->getBody())) {
             throw new IdentityProviderException(
                 'Invalid STS response ' . var_export($data, true),
                 $response->getStatusCode(),

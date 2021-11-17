@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Advarsel: Du endrer automatisk import innstilling som kan resultere i tap av data.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Advarsel: Auto import må være aktivert ved automatisk oppretting av saker.',
 	'LBL_EDIT_LAYOUT' => 'Redigér Oppsett' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'E-postadresse',
+    'LBL_EMAIL_PROVIDER' => 'E-postleverandør',
+    'LBL_AUTH_STATUS' => 'Godkjenningsstatus',
 );
-?>

@@ -18,6 +18,7 @@ $viewdefs['Users']['base']['filter']['default'] = array(
         'created_by_name' => array(),
         'email' => array(),
         'tag' => array(),
+        'status' => array(),
         '$owner' => array(
             'predefined_filter' => true,
             'vname' => 'LBL_CURRENT_USER_FILTER',

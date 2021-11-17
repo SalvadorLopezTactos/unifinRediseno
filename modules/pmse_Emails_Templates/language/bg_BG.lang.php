@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Шаблони на писма в процеси',
     'LBL_MODULE_NAME_SINGULAR' => 'Шаблон на писмо в процеси',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на шаблони на имейл в процеси',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Електронно табло със запис на шаблони за процесни имейли',
     'LNK_LIST' => 'Списък на шаблони за писма в процеси',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Създай шаблон на писмо в процес',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Импортирай шаблони на писма в процеси',

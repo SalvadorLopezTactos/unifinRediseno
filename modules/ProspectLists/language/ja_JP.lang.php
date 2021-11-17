@@ -12,7 +12,12 @@
 
 $mod_strings = array (
   // Dashboard Names
-  'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'ターゲットリスト一覧のダッシュボード',
+  'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'ターゲットリスト一覧のダッシュ ボード',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'ターゲットリストのレコードダッシュボード',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'ダーゲットリスト フォーカス ドロワ',
+  'LBL_RELATED_ACCOUNTS' => '関連アカウント',
+  'LBL_RELATED_CONTACTS' => '関連担当者',
+  'LBL_RELATED_LEADS_TARGETS' => '関連のリードとターゲット',
 
   'LBL_MODULE_NAME' => 'ターゲットリスト',
   'LBL_MODULE_NAME_SINGULAR' => 'ターゲットリスト',
@@ -70,18 +75,18 @@ $mod_strings = array (
     'LBL_CONTACTS' => '取引先担当者',
     'LBL_LEADS' => 'リード',
     'LBL_PROSPECTS' => 'ターゲット',
-    'LBL_USERS' => 'ユーザ',
+    'LBL_USERS' => 'ユーザー',
 
     // Help Text
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{module_name}} はあなたがマスマーケティング {{campaigns_singular_module}} に含めるか、除外したい個人または組織の集合体で構成されています。 {{plural_module_name}} はターゲットの任意の数の任意の組み合わせを含めることができます {{contacts_module}}、{{leads_module}}、ユーザ、 {{accounts_module}} など。ターゲットは、年齢グループ、地理的位置、あるいは支出の習慣などの所定の基準のセットに応じて {{module_name}} に分類することができます。 {{plural_module_name}} マスメールマーケティングで使用されている {{campaigns_module}} は、その {{campaigns_module}} モジュールで構成することができます。',
+    'LBL_HELP_RECORDS' => '{{module_name}} はあなたがマスマーケティング {{campaigns_singular_module}} に含めるか、除外したい個人または組織の集合体で構成されています。 {{plural_module_name}} はターゲットの任意の数の任意の組み合わせを含めることができます {{contacts_module}}、{{leads_module}}、ユーザー、 {{accounts_module}} など。ターゲットは、年齢グループ、地理的位置、あるいは支出の習慣などの所定の基準のセットに応じて {{module_name}} に分類することができます。 {{plural_module_name}} マスメールマーケティングで使用されている {{campaigns_module}} は、その {{campaigns_module}} モジュールで構成することができます。',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => '{{module_name}} はマスマーケティング{{campaigns_singular_module}} に含めたいか含めたくない個人や組織で構成されています。
 
 - 個々のフィールドまたは「編集」ボタンをクリックして、このレコードのフィールドを編集します。
 - 左下のペインに「データビュー」をトグルすることによって、{{campaigns_singular_module}} を含むサブパネル内の他のレコードへのリンクを閲覧・変更します。
-- 左下ペインで「アクティビティストリーム」を切り替えることにより、{{activitystream_singular_module}} 内のレコードの変更履歴やユーザコメントを作成したり編集したりしてください。
+- 左下ペインで「アクティビティストリーム」を切り替えることにより、{{activitystream_singular_module}} 内のレコードの変更履歴やユーザーコメントを作成したり編集したりしてください。
 - レコード名の右にあるアイコンを使用して、このレコードをフォローするかお気に入りにしてください。
 - 追加のアクションは、「編集」ボタンの右にあるドロップダウンの「操作」メニューにあります。',
 

@@ -54,5 +54,19 @@ $viewdefs['Documents']['mobile']['layout']['subpanels'] = array(
                 'link' => 'quotes',
             ),
         ),
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_PURCHASES_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'purchases',
+            ],
+        ],
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_PLIS_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'purchasedlineitems',
+            ],
+        ],
     ),
 );

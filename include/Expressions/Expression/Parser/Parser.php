@@ -136,7 +136,7 @@ class Parser {
 			$isPrevCharBK = $lastCharRead == '\\';
 
 			// get the charAt index $i
-			$char = $params{$i};
+            $char = $params[$i];
 
 			// if i am in quotes, then keep reading
 			if ( $isInQuotes && $char != '"' && !$isPrevCharBK ) {
@@ -232,12 +232,13 @@ class Parser {
 			return new StringLiteralExpression( $expr );
 		}
 
-		// a boolean
-		if ( $expr == "true" ) {
-			return new TrueExpression();
-		} else if ( $expr == "false" ) {
-			return new FalseExpression();
-		}
+        // a boolean
+        switch ($expr) {
+            case 'true':
+                return new TrueExpression();
+            case 'false':
+                return new FalseExpression();
+        }
 
 		// a date
 		if ( preg_match('/^(0[0-9]|1[0-2])\/([0-2][0-9]|3[0-1])\/[0-3][0-9]{3,3}$/', $expr) ) {

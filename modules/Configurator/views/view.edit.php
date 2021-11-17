@@ -49,11 +49,8 @@ class ConfiguratorViewEdit extends ViewEdit
         $sugarConfig = SugarConfig::getInstance();
         $focus = Administration::getSettings();
 
-        $idpConfig = new IdmConfig(\SugarConfig::getInstance());
-        $idmEnabled = $idpConfig->isIDMModeEnabled();
         $devModeOn = isset($configurator->config['developerMode']) ? $configurator->config['developerMode'] : false;
-        $showCatalogConfig = $idmEnabled || (!$idmEnabled && $devModeOn);
-        $this->ss->assign('SHOW_CATALOG_CONFIG', $showCatalogConfig);
+        $this->ss->assign('SHOW_CATALOG_CONFIG', $devModeOn);
 
         $this->ss->assign('MOD', $mod_strings);
         $this->ss->assign('APP', $app_strings);

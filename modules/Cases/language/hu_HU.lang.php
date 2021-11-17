@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Esetek listája műszerfal',
     'LBL_CASES_RECORD_DASHBOARD' => 'Eset bejegyzések műszerfal',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Eset részletek',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Figyelemfelhívás esetek',
 
 	'ERR_DELETE_RECORD'					=> 'Adjon meg egy azonosítót a kliens törléséhez!',
 	'LBL_ACCOUNT_ID'					=> 'Kliens azonosító',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Mutassa portál-formában',
 	'LBL_CREATE_KB_DOCUMENT' => 'Új cikk létrehozása',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Tudásbázis',
+    'LBL_REQUEST_CLOSE' => 'Zárás kérése',
+    'LBL_REQUEST_CLOSE_DATE' => 'Zárás kérésének ideje',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Kérés zárásra',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Kérést küldhet az eset zárására',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Szeretné kérni az eset zárását?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Zárásra kérvényezett saját esetek',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Zárásra kérvényezett saját esetek',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Zárásra kérvényezett saját esetek',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Zárásra kérvényezett saját esetek listája',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Azon hozzárendelt esetek listáját jeleníti meg, amelyek zárását kérte',
 
     'LBL_CREATED_USER' => 'Felhasználó által létrehozva',
     'LBL_MODIFIED_USER' => 'Felhasználó által módosítva',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Felelős felhasználó',
     'LBL_EXPORT_TEAM_COUNT' => 'Csoportlétszám',
     'LBL_CHANGETIMERS' => 'Időzítők módosítása',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Vásárlások',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Kontakszemélyek emailjei',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Ez hasznos lehet, ha például egy korábban bejegyzett ügyet keres.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Új eset, vagy ügy hozzáadásához, kattintson ide!',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Ide kattintva bármikor visszatérhet ehhez a nézethez.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Eset interakciók',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Feljegyzések',
 
@@ -143,5 +155,5 @@ $mod_strings = array (
 
     'LBL_SLA_DETAILS' => 'SLA részletek',
     'LBL_HOURS' => 'Óra',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'Állapot',
 );

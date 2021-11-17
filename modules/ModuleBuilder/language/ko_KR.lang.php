@@ -591,6 +591,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => '포탈 구성',
     'LBL_PORTAL_ENABLE_PORTAL' => '사용 가능한 포탈',
     'LBL_PORTAL_ENABLE_SEARCH' => '사례 열기 전 검색 사용 가능',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => '포털 사용자가 케이스를 종료하도록 허용합니다',
     'LBL_PORTAL_THEME' => '포탈 테마',
     'LBL_PORTAL_ENABLE' => '작동',
     'LBL_PORTAL_SITE_URL' => '포탈 주소는 다음과 같습니다:',
@@ -782,6 +783,14 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
+'LBL_POPHELP_REQUIRED'=>"이 필드가 레이아웃에서 필수인지 결정하는 공식을 생성합니다.<br/>"
+    . "브라우저 기반 모바일 보기에서 필수 필드는 이 공식을 따르지만,<br/>"
+    . "iPhone용 Sugar Mobile 등 독자적인 어플리케이션에서는 공식을 따르지 않습니다. <br/>"
+    . "Sugar Self-Service Portal에서도 공식을 따르지 않습니다.",
+'LBL_POPHELP_READONLY'=>"이 필드가 레이아웃에서 읽기 전용인지 결정하는 공식을 생성합니다.<br/>"
+        . "브라우저 기반 모바일 보기에서 읽기 전용 필드는 이 공식을 따르지만,<br/>"
+        . "iPhone용 Sugar Mobile 등 독자적인 어플리케이션에서는 공식을 따르지 않습니다. <br/>"
+        . "Sugar Self-Service Portal에서도 공식을 따르지 않습니다.",
 'LBL_POPHELP_GLOBAL_SEARCH'=>'이 모듈에서 글로벌 검색을 사용한 기록을 검색할때 이 필드를 선택하십시오.',
 //Revert Module labels
 'LBL_RESET' => '재설정',
@@ -817,6 +826,7 @@ $mod_strings = array(
                 'encrypt'=>'암호화',
                 'datetimecombo' =>'날짜시간',
                 'decimal'=>'소수',
+                'autoincrement' => '자동 증가',
 ),
 'labelTypes' => array(
     "" => "자주 사용되는 라벨",
@@ -834,4 +844,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'전체 모듈',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (related {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => '레이아웃에 복사',
+'LBL_RELATIONSHIP_TYPE' => '관계',
 );

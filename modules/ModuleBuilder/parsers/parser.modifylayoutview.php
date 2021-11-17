@@ -264,7 +264,6 @@ class ParserModifyLayoutView extends ModuleBuilderParser
                 $this->_viewdefs ['panels'] [$panelID] [$rowID] = $newRow;
             }
         }
-        //          _pp($this->_viewdefs);
     }
 
     function _padFields ()
@@ -499,6 +498,4 @@ class ParserModifyLayoutView extends ModuleBuilderParser
 
         return $origFieldDefs;
     }
-
 }
-?>

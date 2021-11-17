@@ -200,7 +200,7 @@ class EmailRecipientRelationship extends One2MBeanRelationship
         if ($bean->parent_type === 'Employees') {
             $parent = $this->getParent($bean);
 
-            if ($parent && $parent->id && !empty($parent->user_name)) {
+            if ($parent && $parent->id && $parent->canBeAuthenticated()) {
                 $bean->parent_type = 'Users';
             }
         }

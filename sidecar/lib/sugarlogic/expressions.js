@@ -671,13 +671,13 @@ SEP.prototype.tokenize = function(expr)
 	{
 		return {
 			type:"variable",
-			name:$.trim(expr).substr(1)
+			name: expr.trim().substr(1)
 		}
 	}
 	//Related Field
 	if(/^[$]\w+\.\w+$/.test(expr))
 	{
-		expr = $.trim(expr);
+		expr = expr.trim();
 		return {
 			type:"variable",
 			name: expr.substr(1, expr.indexOf('.') - 1),
@@ -719,7 +719,7 @@ SEP.prototype.tokenize = function(expr)
 
 		// the last parameter
 		if ( i == length ) {
-			argument = $.trim(argument);
+			argument = argument.trim();
 			if (argument != "")
 				args[args.length] = this.tokenize(argument);
 			break;
@@ -765,7 +765,7 @@ SEP.prototype.tokenize = function(expr)
 
 		// argument splitting
 		else if ( currChar == ',' && level == 0 ) {
-			argument = $.trim(argument);
+			argument = argument.trim();
 			if (argument == "")
 				throw ("Syntax Error: Unexpected ','");
 				args[args.length] = this.tokenize(argument);
@@ -790,7 +790,7 @@ SEP.prototype.tokenize = function(expr)
 	// require and return the appropriate expression object
 	return {
 		type: "function",
-		name: $.trim(func),
+		name: func.trim(),
 		args: args
 	}
 }
@@ -1235,8 +1235,8 @@ SUGAR.util.DateUtils = {
 		}
 		var jsDate = new Date("Jan 1, 1970 00:00:00");
 		var part = "";
-		var dateRemain = $.trim(date);
-		oldFormat = $.trim(oldFormat) + " "; // Trailing space to read as last separator.
+		var dateRemain = date.trim();
+		oldFormat = oldFormat.trim() + " "; // Trailing space to read as last separator.
 		for (var j = 0; j < oldFormat.length; j++) {
 			var c = oldFormat.charAt(j);
             if (c == ':' || c == '/' || c == '-' || c == '.' || c == " " || c == 'a' || c == "A" || c == "T") {

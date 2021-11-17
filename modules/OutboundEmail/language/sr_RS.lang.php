@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Nalozi odlazne e-pošte',
     'LBL_MODULE_NAME_SINGULAR' => 'Nalog odlazne e-pošte',
+    'LBL_STATUS' => 'Status',
     'LBL_MAIL_SENDTYPE' => 'Agent prenosa pošte',
     'LBL_MAIL_SMTPSERVER' => 'Server',
     'LBL_MAIL_SMTPPORT' => 'Port',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Ovo je sistemski nalog.',
     'LBL_EMAIL_ADDRESS_ID' => 'ID e-adrese',
     'LBL_TYPE' => 'Tip',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Autorizovana e-adresa',
+    'LBL_FROM_EMAIL_ADDRESS' => 'E-adresa pošiljaoca',
     'LBL_REPLY_TO_NAME' => 'Ime primaoca',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Email adrese primaoca',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID email adrese primaoca',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Email adresa primaoca',
     'LBL_PRIMARY_TEAM' => 'Osnovni tim',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za podešavanje e-pošte',
 );

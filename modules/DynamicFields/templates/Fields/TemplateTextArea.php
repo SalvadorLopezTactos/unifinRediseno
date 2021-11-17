@@ -12,6 +12,7 @@
 class TemplateTextArea extends TemplateText{
 	var $type = 'text';
 	var $len = '';
+    public $massupdate = 0;
 
 	public function __construct()
 	{

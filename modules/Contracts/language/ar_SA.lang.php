@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'تم التعديل بواسطة المعرّف',
     'LBL_EXPORT_CREATED_BY' => 'تم الإنشاء بواسطة المعرّف',
     'LBL_EXPORT_TYPE_NAME' => 'اسم النوع',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم العقود',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'لوحة معلومات سجل العقود',
 );

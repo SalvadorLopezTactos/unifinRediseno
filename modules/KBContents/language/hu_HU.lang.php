@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Tudásbázis-lista műszerfal',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Tudásbázis-bejegyzés műszerfal',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Tudásbázis figyelemfelhívás',
 
     'LBL_MODULE_NAME' => 'Tudásbázis',
     'LBL_MODULE_NAME_SINGULAR' => 'Tudásbázis cikk',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Nem hasznos',
     'LBL_RATING' => 'Értékelés',
     'LBL_VIEWED_COUNT' => 'Számítás megtekintése',
-    'LBL_DOWNLOAD_ALL' => 'Összes letöltése',
-    'LBL_DOWNLOAD_ONE' => 'Letöltés',
-    'LBL_ATTACHMENTS' => 'Mellékletek:',
-    'LBL_ADD_ATTACHMENT' => 'Tallóz',
     'LBL_CATEGORIES' => 'Tudásbázis kategóriák',
     'LBL_CATEGORY_NAME' => 'Kategória',
     'LBL_USEFULNESS' => 'Hasznosság',

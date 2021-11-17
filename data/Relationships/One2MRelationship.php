@@ -17,7 +17,7 @@
 class One2MRelationship extends M2MRelationship
 {
 
-    public function __construct($def)
+    public function __construct(array $def)
     {
         global $dictionary;
 
@@ -67,8 +67,14 @@ class One2MRelationship extends M2MRelationship
             $this->lhsLinkDef = $this->getLinkedDefForModuleByRelationship($lhsModule);
             $this->rhsLinkDef = $this->getLinkedDefForModuleByRelationship($rhsModule);
         }
-        $this->lhsLink = $this->lhsLinkDef['name'];
-        $this->rhsLink = $this->rhsLinkDef['name'];
+
+        if (isset($this->lhsLinkDef['name'])) {
+            $this->lhsLink = $this->lhsLinkDef['name'];
+        }
+
+        if (isset($this->rhsLinkDef['name'])) {
+            $this->rhsLink = $this->rhsLinkDef['name'];
+        }
     }
 
     protected function linkIsLHS($link) {

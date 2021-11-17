@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Cuadro de mando de la lista de oportunidades',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Cuadro de mando de la lista de oportunidades',
     'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Detalles de oportunidad',
+    'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Panel de enfoque en las oportunidades',
+    'LBL_RENEWAL_OPPORTUNITY' => 'Oportunidad de renovación',
 
     'LBL_MODULE_NAME' => 'Oportunidades',
     'LBL_MODULE_NAME_SINGULAR' => 'Oportunidad',
@@ -77,7 +79,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Tipo:',
     'LBL_CAMPAIGN' => 'Campaña:',
     'LBL_NEXT_STEP' => 'Próximo paso:',
-    'LBL_SERVICE_START_DATE' => 'Service Start Date',
+    'LBL_SERVICE_START_DATE' => 'Fecha de inicio del servicio',
     'LBL_LEAD_SOURCE' => 'Toma de contacto',
     'LBL_SALES_STAGE' => 'Etapa de ventas:',
     'LBL_SALES_STATUS' => 'Estado',
@@ -144,6 +146,7 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE' => 'Fase de Compromiso',
     'LBL_COMMIT_STAGE_FORECAST' => 'Previsión',
     'LBL_WORKSHEET' => 'Hoja de Trabajo',
+    'LBL_PURCHASED_LINE_ITEMS' => 'Elementos comprados',
 
     'LBL_RENEWAL' => 'Renovación',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Oportunidades de renovación',
@@ -151,9 +154,9 @@ $mod_strings = array(
     'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'ID del padre de renovación',
     'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
 
-    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
-    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
-    'LBL_WIDGET_AMOUNT' => 'Amount',
+    'LBL_WIDGET_SALES_STAGE' => 'Etapa de venta',
+    'LBL_WIDGET_DATE_CLOSED' => 'Fecha de cierre prevista',
+    'LBL_WIDGET_AMOUNT' => 'Cantidad',
 
     'TPL_RLI_CREATE' => 'Una oportunidad debe tener una Línea de Ingreso asociada.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Crear una línea de ingreso',
@@ -162,12 +165,16 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => 'nº Total de Líneas de Ingreso',
     'LBL_CLOSED_RLIS' => 'nº de Líneas de Ingreso Cerradas',
+    'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => 'Número de elementos de ingresos de duración flexible de Open Service',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'No puede eliminar Oportunidades que contienen Líneas de Ingreso cerradas',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Uno o más de los registros seleccionados contienen Líneas de Ingreso cerradas y no pueden ser eliminados.',
     'LBL_INCLUDED_RLIS' => 'Nº de artículos incluidos en líneas de ingresos',
-    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Actualización de apertura',
+    'LBL_SERVICE_START_DATE_INVALID' => 'La fecha de inicio del servicio no puede ser posterior a la fecha de fin del servicio de cualquier línea de ingreso adicional abierta.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Presupuestos',
+    'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Oportunidades por una cuenta dinámica',
+
 
     // Config
     'LBL_OPPS_CONFIG_VIEW_BY_LABEL' => 'Jerarquía de oportunidades',
@@ -200,15 +207,15 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Tras iniciar este cambio, se crearán registros de las líneas de ingresos para cada {{module_name}} existente en segundo plano. Cuando los Elementos de las líneas de ingresos se completen y estén disponibles, se enviará una notificación a la dirección de correo electrónico de su perfil de usuario. Tenga en cuenta que su instancia se debe configurar para enviar correos electrónicos en Admin > Configuración de correo electrónico para que se envíen las notificaciones.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'El módulo {{plural_module_name}} le permite realizar el seguimiento de ventas individuales y elementos de las líneas relacionadas con esas ventas de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos relevantes de la venta, así como otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} normalmente avanza por las distintas etapas de venta, hasta que se marque como "Ganada" o "Perdida". Los {{plural_module_name}} se pueden aprovechar aun más si se utiliza el módulo de {{forecasts_singular_module}} de Sugar para entender y predecir tendencias de ventas, además de dirigir el trabajo para conseguir las cuotas de venta.',
+    'LBL_HELP_RECORDS' => 'El módulo {{plural_module_name}} le permite realizar el seguimiento de ventas individuales de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos relevantes de la venta, así como otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} normalmente avanza por las distintas etapas de venta, hasta que se marque como "Ganada" o "Perdida". Los {{plural_module_name}} se pueden aprovechar aun más si se utiliza el módulo de {{forecasts_singular_module}} de Sugar para entender y predecir tendencias de ventas, además de dirigir el trabajo para conseguir las cuotas de venta.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'El módulo {{plural_module_name}} le permite realizar el seguimiento de ventas individuales de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos relevantes de la venta, así como otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc. 
+    'LBL_HELP_RECORD' => 'El módulo {{plural_module_name}} le permite realizar el seguimiento de ventas individuales de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos relevantes de la venta, así como otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc.
 
 - Edite los campos de este registro haciendo clic en el campo individual o el botón Editar.
-- Vea o modifique enlaces a otros registros en los subpaneles alternando el panel de la parte inferior izquierda "Ver datos".
-- Comente o vea otros comentarios de usuarios y vea el historial de cambios del registro en {{activitystream_singular_module}} alternando el panel de la parte inferior izquierda "Flujo de actividades".
-- Siga o guarde como favorito el registro utilizando los iconos a la derecha del nombre del registro. 
+- Vea o modifique enlaces a otros registros en los subpaneles cambiando el panel de la parte inferior izquierda a "Ver datos".
+- Comente o vea otros comentarios de usuarios y vea el historial de cambios del registro en {{activitystream_singular_module}} cambiando el panel de la parte inferior izquierda a "Flujo de actividades".
+- Siga o guarde como favorito el registro utilizando los iconos a la derecha del nombre del registro.
 - Hay acciones adicionales disponibles en el menú desplegable Acciones a la derecha del botón Editar.',
 
     // Create View Help Text
@@ -231,5 +238,10 @@ Para crear un {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Mis oportunidades',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Las oportunidades de mi equipo",
 
-    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'No se ha podido cambiar el {{fieldName}} ya que este {{moduleSingular}} no tiene elementos de línea abiertos.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interacciones de oportunidades',
+
+    // AI Predict
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Predicción de cierre de oportunidades',
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Ver los detalles de la predicción para una oportunidad específica',
 );

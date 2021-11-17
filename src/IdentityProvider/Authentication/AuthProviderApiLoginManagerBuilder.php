@@ -14,6 +14,7 @@ namespace Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Listener\Success\LoadUserOnSessionListener;
 
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Listener\Success\OIDC\SessionListener;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\AuthenticationEvents;
@@ -27,6 +28,11 @@ class AuthProviderApiLoginManagerBuilder extends AuthProviderManagerBuilder
     {
         $dispatcher = new EventDispatcher();
 
+        $dispatcher->addListener(
+            AuthenticationEvents::AUTHENTICATION_SUCCESS,
+            [new SessionListener(), 'execute'],
+            999
+        );
         $dispatcher->addListener(
             AuthenticationEvents::AUTHENTICATION_SUCCESS,
             [new LoadUserOnSessionListener(), 'execute']

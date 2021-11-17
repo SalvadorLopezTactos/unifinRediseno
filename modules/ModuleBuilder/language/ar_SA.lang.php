@@ -591,6 +591,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'تكوين الموقع المدخلي',
     'LBL_PORTAL_ENABLE_PORTAL' => 'تمكين المدخل',
     'LBL_PORTAL_ENABLE_SEARCH' => 'تمكين البحث قبل فتح حالة',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'السماح لمستخدمي البوابة بإغلاق الحالة',
     'LBL_PORTAL_THEME' => 'الموقع المدخلي للموضوعات',
     'LBL_PORTAL_ENABLE' => 'تمكين',
     'LBL_PORTAL_SITE_URL' => 'الموقع المدخلي الخاص بك متاح في:',
@@ -782,7 +783,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'حدد هذا الخيار لاستخدام هذا الحقل عند البحث عن السجلات باستخدام البحث العام في هذه الوحدة.',
+'LBL_POPHELP_REQUIRED'=>"أنشئ صيغة لتحديد ما إذا كان هذا الحقل مطلوبًا في التخطيطات أم لا.<br/>"
+    . "ستتبع الحقول المطلوبة الصيغة في طريقة عرض الهواتف المحمولة المستندة إلى المتصفح، <br/>"
+    . "لكن لن تتبع الصيغة في التطبيقات الأصلية، مثل Sugar Mobile لهواتف iPhone. <br/>"
+    . "لن تتبع الحقول الصيغة في بوابة Sugar Self-Service Portal.",
+'LBL_POPHELP_READONLY'=>"أنشئ صيغة لتحديد ما إذا كان هذا الحقل للقراءة فقط في التخطيطات أم لا.<br/>"
+        . "سوف تتبع حقول القراءة فقط الصيغة في طريقة عرض الهواتف المحمولة المستندة إلى المستعرض، <br/>"
+        . "لكن لن تتبع الصيغة في التطبيقات الأصلية، مثل Sugar Mobile لهواتف iPhone. <br/>"
+        . "لن تتبع الحقول الصيغة في بوابة Sugar Self-Service Portal.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'حدد لاستخدام هذا الحقل عند البحث عن سجلات باستخدام "البحث العام" في هذه الوحدة.',
 //Revert Module labels
 'LBL_RESET' => 'إعادة تعيين',
 'LBL_RESET_MODULE' => 'إعادة تعيين الوحدة',
@@ -817,6 +826,7 @@ $mod_strings = array(
                 'encrypt'=>'تشفير',
                 'datetimecombo' =>'التاريخ والوقت',
                 'decimal'=>'عشري',
+                'autoincrement' => 'زيادة تلقائية',
 ),
 'labelTypes' => array(
     "" => "التسميات شائعة الاستخدام",
@@ -834,4 +844,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'جميع الوحدات',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (المعرّف {1} المرتبط)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'نسخ من التصميم',
+'LBL_RELATIONSHIP_TYPE' => 'العلاقة',
 );

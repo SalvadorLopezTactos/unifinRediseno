@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Modifié par (ID)',
     'LBL_EXPORT_CREATED_BY' => 'Créé par (ID)',
     'LBL_EXPORT_TYPE_NAME' => 'Nom du type',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Contrats',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrement de contrats',
 );

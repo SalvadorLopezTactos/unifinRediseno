@@ -41,5 +41,3 @@ $module_menu = Array(
 	);
 	
 }	
-
-?>

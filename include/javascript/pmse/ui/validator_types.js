@@ -58,7 +58,7 @@ PMSE.TextLengthValidator.prototype.initObject = function(options) {
 
 PMSE.TextLengthValidator.prototype.validate = function() {
     var res = false,
-        value = this.criteria.trim ? $.trim(this.parent.value) : this.parent.value;
+        value = this.criteria.trim ? this.parent.value.trim() : this.parent.value;
 
     this.valid = true;
 
@@ -323,7 +323,7 @@ PMSE.RangeValidator.prototype.validate = function() {
                         val.milliseconds || 0
                     );
                 } else if (typeof val === 'string') {
-                    that.criteria.dateFormat = $.trim(that.criteria.dateFormat);
+                    that.criteria.dateFormat = that.criteria.dateFormat.trim();
                     /*if(that.criteria.dateFormat.length !== val.length) {
                         return null;
                     }*/

@@ -70,7 +70,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> 'Varoitus: ei voida kirjoittaa',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'Sugar ei tue PHP-versiotasi. Sinun pitää asentaa versio Sugarin kanssa yhteensopiva versio. Katso julkaisutiedoissa olevaa yhteensopivuusmatriisia tuetuille PHP-versioille. Sinun versiosi on',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'Sugar ei tue IIS-versiotasi. Sinun pitää asentaa Sugarin kanssa yhteensopiva versio. Katso julkaisutiedoissa olevaa yhteensopivuusmatriisia tuetuille IIS-versioille. Versiosi on',
-	'ERR_CHECKSYS_FASTCGI'              => 'Havaittiin että et käytä FastCGI-käsittelykartoitusta PHP:lle. Sinun pitää asentaa/konfiguroida Sugarin kanssa yhteensopiva versio. Katso yhteensopivat versiot julkaisutiedoissa olevasta yhteensopivuusmatriisista. Katso yksityiskohdat osoitteesta <a href=\'http://www.iis.net/php\' target=\'_blank\'>http://www.iis.net/php/</a>.',
+    'ERR_CHECKSYS_FASTCGI'              => 'Havaittiin että et käytä FastCGI-käsittelykartoitusta PHP:lle. Sinun pitää asentaa/konfiguroida Sugarin kanssa yhteensopiva versio. Katso tuetut versiot julkaisutiedoissa olevasta yhteensopivuusmatriisista. Katso yksityiskohdat osoitteesta <a href=\'http://www.iis.net/php\' target=\'_blank\'>http://www.iis.net/php/</a>. ',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Jotta saisit optimaalisen kokemuksen käyttäessäsi IIS/FastCGI sapi:a, aseta <code>fastcgi.logging</code> arvoon <code>0</code> <code>php.ini</code>-tiedostossa.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Tukematon PHP versio asennettuna: (versio&nbsp;',
     'LBL_DB_UNAVAILABLE'                => 'Tietokanta ei ole käytettävissä',
@@ -476,139 +476,140 @@ $mod_strings = array(
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'PHP taaksepäin-yhteensopivuustila on päällä. Aseta <code>zend.ze1_compatibility_mode</code> arvoon <code>Off</code>, jotta voit jatkaa',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => 'Sähköposti-ilmoitukset kokouksista',
+        'subject' => 'SugarCRM-kokous - $event_name ',
+        'description' => 'Tätä mallia käytetään, kun järjestelmä lähettää käyttäjälle kokousilmoituksen.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Vastaanottaja: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Meeting</p>
+	<p>$assigned_by_user on kutsunut sinut kokoukseen</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>Aihe: $event_name<br/>
+	Aloituspäivä: $start_date<br/>
+	Päättymispäivä: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>Kuvaus: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>Hyväksy tämä kokous:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>Hyväksy alustavasti tämä kokous:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>Hylkää tämä kokous:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Vastaanottaja: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user on kutsunut sinut kokoukseen
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+Aihe: $event_name
+Aloituspäivä: $start_date
+Päättymispäivä: $end_date
 
-Description: $description
+Kuvaus: $description
 
-Accept this meeting:
+Hyväksy tämä kokous:
 <$accept_link>
 
-Tentatively Accept this meeting
+Hyväksy alustavasti tämä kokous:
 <$tentative_link>
 
-Decline this meeting
+Hylkää tämä kokous:
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => 'Sähköposti-ilmoitukset puheluista',
+        'subject' => 'SugarCRM-puhelu - $event_name ',
+        'description' => 'Tätä mallia käytetään, kun järjestelmä lähettää käyttäjälle ilmoituksen puhelusta.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Vastaanottaja: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user on kutsunut sinut puheluun</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>Aihe: $event_name<br/>
+	Aloituspäivä: $start_date<br/>
+	Kesto: $hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>Kuvaus: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>Hyväksy tämä puhelu:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>Hyväksy alustavasti tämä puhelu:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>Hylkää tämä puhelu:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Vastaanottaja: $assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user on kutsunut sinut puheluun
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+Aihe: $event_name
+Aloituspäivä: $start_date
+Kesto: $hoursh, $minutesm
 
-Description: $description
+Kuvaus: $description
 
-Accept this call:
+Hyväksy tämä puhelu:
 <$accept_link>
 
-Tentatively Accept this call
+Hyväksy alustavasti tämä puhelu:
 <$tentative_link>
 
-Decline this call
+Hylkää tämä puhelu:
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => 'Sähköposti-ilmoitukset tehtävistä',
+        'subject' => 'SugarCRM - Osoitettu vastuuhenkilöksi moduulille $module_name ',
+        'description' => 'Tätä mallia käytetään, kun järjestelmä lähettää käyttäjälle osoitetun tehtävän.',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user on osoittanut moduulin &nbsp;$module_name vastuuhenkilöksi käyttäjän&nbsp;$assigned_user.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>Voit tarkastella tätä moduulia&nbsp;$module_name osoitteessa:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user on osoittanut moduulin $module_name käyttäjälle $assigned_user.
 
-You may review this $module_name at:
+Voit tarkastella tätä moduulia $module_name osoitteessa:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => 'Sähköpostiviestit aikataulutetuista raporteista',
+        'subject' => 'Aikataulutettu raportti: $report_name alkaen ajankohdasta $report_time',
+        'description' => 'Tätä mallia käytetään, kun järjestelmä lähettää käyttäjälle raportin määritetyn aikataulun mukaisesti.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>Hei $assigned_user</p>
+<p>Ohessa automaattisesti luotu raportti, joka lähetetään määritetyn aikataulun mukaisesti sinulle.</p>
+<p>Raportin nimi: $report_name</p>
+<p>Raportin ajopäivä- ja -aika: $report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            'Hei $assigned_user
 
-Attached is an auto generated report that has been scheduled for you.
+Ohessa automaattisesti luotu raportti, joka lähetetään määritetyn aikataulun mukaisesti sinulle.
 
-Report Name: $report_name
+Raportin nimi: $report_name
 
-Report Run Date and Time: $report_time',
+Raportin ajopäivä- ja -aika: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => 'Sähköposti-ilmoitus järjestelmän kommenttilokista',
+        'subject' => 'SugarCRM - $initiator_full_name mainitsi sinut moduulissa $singular_module_name',
+        'description' => 'Tätä mallia käytetään sähköposti-ilmoitusten lähettämiseen käyttäjille, jotka on mainittu kommenttiloki-osiossa.',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>Sinut on mainittu seuraavan tietueen kommenttilokissa:  <a href="$record_url">$record_name</a></p>
+                <p>Näet kommentin, kun kirjaudut Sugariin.</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'Sinut on mainittu seuraavan tietueen kommenttilokissa:  $record_name               
+            Näet kommentin, kun kirjaudut Sugariin.',
     ],
 
     'advanced_password_new_account_email' => array(

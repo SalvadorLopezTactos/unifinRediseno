@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Momsklasse:',
   'LBL_TYPE_NAME'=>'Typenavn',
   'LBL_TYPE' => 'Type:',
+  'LBL_PRODUCT_TYPE' => 'Produkttype',
   'LBL_URL' => 'Produkt-URL:',
   'LBL_VENDOR_PART_NUM' => 'Leverandørs artikelnummer:',
   'LBL_WEIGHT' => 'Vægt:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Produktkatalog',
   'NTC_DELETE_CONFIRMATION' => 'Er du sikker på, at du vil slette denne post?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Tilføj',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Søg produktkataloget',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Ingen tilgængelige data',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Tildelt brugernavn',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Produkttyper',
   'LBL_RENEWABLE' => 'Fornyelig',
   'LBL_SERVICE' => 'Serviceydelse',
+  'LBL_LOCK_DURATION' => 'Låsevarighed',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Dashboardet Liste med produktkataloger',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Dashboardet Register over produktkataloger',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Produktkatalog',
 );

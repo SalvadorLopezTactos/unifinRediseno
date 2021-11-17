@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'Gestione Flussi',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'Flussi Abbandonati',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => 'Flussi Focus Drawer',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Dashboard record processi',
+
     'LBL_CAS_ID' => 'Numero Flusso',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Sconosciuto (secondo UserId:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "il compito è stato",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Anteprima del disegno di processo',
     'LBL_PROJECT_RUN_ORDER' => 'Ordine di esecuzione',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => 'Attività corrente',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => 'Data di modifica',
+    'LBL_DATE_ENTERED' => 'Data di creazione',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'Si è certi di voler richiedere questo processo?',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'Il processo è stato richiesto con esito positivo',
 );
 

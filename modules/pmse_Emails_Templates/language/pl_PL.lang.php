@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Szablony wiadomości e-mail procesów',
     'LBL_MODULE_NAME_SINGULAR' => 'Szablon wiadomości e-mail procesów',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy szablonów wiadomości e-mail procesu',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Pulpit rekordów szablonów wiadomości e-mail procesu',
     'LNK_LIST' => 'Wyświetl szablony wiadomości e-mail procesów',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Utwórz szablon wiadomości e-mail procesów',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Importuj szablony wiadomości e-mail procesów',

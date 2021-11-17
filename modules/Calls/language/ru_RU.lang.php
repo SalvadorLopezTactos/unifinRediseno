@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Информационная панель списка звонков',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Информационная панель записей звонков',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для звонков',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Звонки',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Ответственный (-ая)',
     'LBL_LIST_MY_CALLS' => 'Мои звонки',
     'LBL_MY_SCHEDULED_CALLS' => 'Мои запланированные звонки',
+    'LBL_GUEST_CALLS' => 'Мои звонки в качестве гостя',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Запланированные звонки в качестве гостя',
     'LBL_SELECT_FROM_DROPDOWN' => 'Прежде всего выберите значение из списка "Относится к".',
 	'LBL_ASSIGNED_TO_NAME' => 'Ответственный (-ая)',
 	'LBL_ASSIGNED_TO_ID' => 'Ответственный (-ая)',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Отмена',
     'LBL_EMPTY_SEARCH_RESULT' => 'Результатов нет. Добавьте приглашенного ниже.',
     'LBL_NO_ACCESS' => 'У Вас нет доступа к созданию $module',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Идентификатор контакта Amazon Connect',
+
     'LBL_REPEAT_TYPE' => 'Повторить тип',
     'LBL_REPEAT_INTERVAL' => 'Интервал повторений',
     'LBL_REPEAT_END' => 'Дата окончания',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Звонок с {{{this}}}',
     'LBL_SEND_INVITES' => 'Отправить приглашения',
     'LBL_REMINDER_TITLE' => 'Звонок:',
+    'LBL_CALL_RECORDING_URL' => 'URL-адрес для записи',
+    'LBL_CALL_RECORDING' => 'Запись',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Вы запланировали {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> на {{formatDate date_start}}.',

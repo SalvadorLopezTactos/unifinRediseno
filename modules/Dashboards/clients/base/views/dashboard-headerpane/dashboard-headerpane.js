@@ -24,15 +24,10 @@
 
     events: {
         'click [name=edit_button]': 'editClicked',
+        'click [name=save_button]': 'saveClicked',
         'click [name=cancel_button]': 'cancelClicked',
         'click [name=create_cancel_button]': 'createCancelClicked',
-        'click [name=duplicate_button]': 'duplicateClicked',
-        'click [name=delete_button]': 'deleteClicked',
-        'click [name=add_button]': 'addClicked',
-        'click [name=collapse_button]': 'collapseClicked',
-        'click [name=expand_button]': 'expandClicked',
         'click [name=edit_overview_tab_button]': 'editOverviewTabClicked',
-        'click [name=edit_module_tabs_button]': 'editModuleTabsClicked'
     },
 
     initialize: function(options) {
@@ -41,6 +36,9 @@
             options.template = app.template.getView(options.type);
         }
         this._super('initialize', [options]);
+        if (this.model.isNew()) {
+            this._setNewModelMeta();
+        }
         this.context.set('dataView', '');
         this.model.on('change change:layout change:metadata', function() {
             if (this.inlineEditMode) {
@@ -97,26 +95,35 @@
         this.editClicked(evt);
     },
 
-    /**
-     * Event handler for button 'Edit Module Tabs'.
-     *
-     * @param {Event} evt Triggered mouse event
-     */
-    editModuleTabsClicked: function(evt) {
-        app.drawer.open({
-            layout: 'config-drawer',
-            context: {
-                module: 'ConsoleConfiguration',
-            }
-        });
-    },
-
     editClicked: function(evt) {
         this.previousModelState = app.utils.deepCopy(this.model.attributes);
         this.inlineEditMode = true;
         this.setButtonStates('edit');
         this.toggleEdit(true);
         this.model.trigger('setMode', 'edit');
+    },
+
+    /**
+     * Get the dashboard name field and toggle states
+     * @param {boolean} isEdit
+     */
+    toggleNameField: function(isEdit) {
+        var field = this.getField('name');
+        this.toggleField(field, !!isEdit);
+    },
+
+    /**
+     * Run save function and switch to view mode
+     */
+    saveHandle: function() {
+        var changes = this.model.changedAttributes(this.model.getSynced());
+        if (changes && changes.name) {
+            this.layout.handleSave();
+        }
+
+        this.setButtonStates('view');
+        this.toggleEdit(false);
+        this.model.trigger('setMode', 'view');
     },
 
     cancelClicked: function(evt) {
@@ -126,46 +133,7 @@
         this.setButtonStates('view');
         this.handleCancel();
         this.model.trigger('setMode', 'view');
-    },
-
-    /**
-     * Create a duplicate of current dashboard and assign it to the user,
-     * so that the user can make own modification on top of existing dashboards
-     *
-     * Some attributes are changed during the duplication:
-     *  id, name, assigned_user_id, assigned_user_name, team, default_dashboard, my_favorite
-     *
-     * @param {Event} evt Triggered mouse event
-     */
-    duplicateClicked: function(evt) {
-        var newModel = app.data.createBean('Dashboards');
-        newModel.copy(this.model);
-
-        var oldName = app.lang.get(newModel.get('name'), newModel.get('dashboard_module'));
-        // FIXME TY-1463: Will fix the hard coding of 'Dashboards'
-        var newName = app.lang.get('LBL_COPY_OF', 'Dashboards', {name: oldName});
-
-        var newAttributes = {
-            name: newName,
-            my_favorite: true
-        };
-
-        // Using void 0 to follow the convention in backbone.js
-        var clearAttributes = {
-            id: void 0,
-            assigned_user_id: void 0,
-            assigned_user_name: void 0,
-            team_name: void 0,
-            default_dashboard: void 0
-        };
-
-        newModel.unset(clearAttributes, {silent: true});
-
-        var options = {};
-        options.success = _.bind(this._successWhileSave, this, 'add', newModel);
-        options.error = this._errorWhileSave;
-
-        newModel.save(newAttributes, options);
+        this.toggleNameField();
     },
 
     /**
@@ -205,7 +173,9 @@
      *
      * The save function is handled by {@link View.Layouts.Dashboards.DashboardLayout#handleSave}.
      */
-    saveClicked: $.noop,
+    saveClicked: function(evt) {
+        this.toggleNameField();
+    },
 
     createCancelClicked: function(evt) {
         if (this.context.parent) {
@@ -213,27 +183,6 @@
         } else {
             app.navigate(this.context);
         }
-    },
-
-    deleteClicked: function(evt) {
-        this.handleDelete();
-    },
-
-    addClicked: function(evt) {
-        if (this.context.parent) {
-            this.layout.navigateLayout('create');
-        } else {
-            var route = app.router.buildRoute(this.module, null, 'create');
-            app.router.navigate(route, {trigger: true});
-        }
-    },
-
-    collapseClicked: function(evt) {
-        this.context.trigger('dashboard:collapse:fire', true);
-    },
-
-    expandClicked: function(evt) {
-        this.context.trigger('dashboard:collapse:fire', false);
     },
 
     /**
@@ -259,7 +208,8 @@
             return true;
         }
         var tabIndex = this.context.get('activeTab') || 0;
-        return tabs[tabIndex] && tabs[tabIndex].components && tabs[tabIndex].components[0].rows;
+        return tabs[tabIndex] &&
+            ((tabs[tabIndex].components && tabs[tabIndex].components[0].rows) || tabs[tabIndex].dashlets || false);
     },
 
     /**
@@ -273,7 +223,7 @@
             return button.type === 'actiondropdown';
         });
         if (dropdown) {
-            var editButton =  _.find(dropdown.fields, function(field) {
+            var editButton = _.find(dropdown.fields, function(field) {
                 return field.name === 'edit_button';
             });
             if (editButton) {
@@ -327,9 +277,7 @@
         this._setButtons();
         this.setButtonStates(this.context.get('create') ? 'create' : 'view');
         this.setEditableFields();
-        if (!this._isDashboard()) {
-            this._enableEditButton(false);
-        }
+        this._enableEditButton(false);
     },
 
     handleCancel: function() {
@@ -340,91 +288,28 @@
         this.toggleEdit(false);
     },
 
-    /**
-     * This method handles the deletion of a dashboard. It alerts the user
-     * before deleting the dashboard, and if the user chooses to delete the
-     * dashboard, it handles the deletion logic as well.
-     *
-     * @override
-     */
-    handleDelete: function() {
-        var modelName = app.lang.get(this.model.get('name'), this.model.get('dashboard_module'));
-        app.alert.show('delete_confirmation', {
-            level: 'confirmation',
-            // FIXME TY-1463: Will fix the hard coding of 'Dashboards'.
-            messages: app.lang.get('LBL_DELETE_DASHBOARD_CONFIRM', 'Dashboards', {name: modelName}),
-            onConfirm: _.bind(function() {
-                var message = app.lang.get('LBL_DELETE_DASHBOARD_SUCCESS', this.module, {
-                    name: modelName
-                });
-                this.model.destroy({
-                    success: _.bind(this._successWhileSave, this, 'delete', this.model),
-                    error: this._errorWhileSave,
-                    //Show alerts for this request
-                    showAlerts: {
-                        'process': true,
-                        'success': {
-                            messages: message
-                        }
-                    }
-                });
-            }, this)
-        });
-    },
-
-    /**
-     * Handler for saving success, it navigates to the layout or
-     * the page based on the context
-     *
-     * @param {string} change The change that's made to the model
-     *  This is either 'delete' or 'add'
-     * @param {Data.Bean} model The model that's changed
-     * @private
-     */
-    _successWhileSave: function(change, model) {
-        if (this.disposed) {
-            return;
-        }
-        // If we don't have a this.context.parent, that means we are
-        // navigating to a Home Dashboard, otherwise it's a RHS Dashboard
-        if (!this.context || !this.context.parent) {
-            var id = change === 'add' ? model.get('id') : null;
-            var route = app.router.buildRoute(this.module, id);
-            app.router.navigate(route, {trigger: true});
-            return;
-        }
-        var contextBro = this.context.parent && this.context.parent.get('layout') === 'multi-line' ?
-            this.context.parent : this.context.parent.getChildContext({module: 'Home'});
-        switch (change) {
-            case 'delete':
-                contextBro.get('collection').remove(model);
-                this.layout.navigateLayout('list');
-                break;
-            case 'add':
-                contextBro.get('collection').add(model);
-                this.layout.navigateLayout(model.get('id'));
-                break;
-        }
-    },
-
-    /**
-     * Error handler for Dashboard saving
-     *
-     * @private
-     */
-    _errorWhileSave: function() {
-        app.alert.show('error_while_save', {
-            level: 'error',
-            title: app.lang.get('ERR_INTERNAL_ERR_MSG'),
-            messages: ['ERR_HTTP_500_TEXT_LINE1', 'ERR_HTTP_500_TEXT_LINE2']
-        });
-    },
-
     bindDataChange: function() {
         //empty out because dashboard header does not need to switch the button sets while model is changed
     },
 
     toggleEdit: function(isEdit) {
+        this.editableFields = this.editableFields.filter(function(item) {
+            return item.name !== 'name';
+        });
+
         this.toggleFields(this.editableFields, isEdit);
-    }
+    },
+
+    /**
+     * Initialize metadata on new dashboard
+     * @private
+     */
+    _setNewModelMeta: function() {
+        var metadata = {
+            dashlets: []
+        };
+        this.model.set('metadata', metadata, {silent: true});
+        this.model.trigger('change:metadata');
+        this.model.changed = {};
+    },
 })

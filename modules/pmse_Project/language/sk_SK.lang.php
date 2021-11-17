@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Definície procesov',
   'LBL_MODULE_NAME_SINGULAR' => 'Definícia procesu',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na definície procesov',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Informačný panel so záznamom definícií procesov',
   'LNK_LIST' => 'Zobraziť definície procesov',
   'LNK_NEW_PMSE_PROJECT' => 'Vytvoriť definíciu procesu',
   'LNK_IMPORT_PMSE_PROJECT' => 'Importovať definície procesov',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Zmeniť priradenie k používateľovi',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Tím',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Vybrať nového používateľa procesu',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'E-mail',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'Používateľ procesu e-mailu pri priradení procesu',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'Definícia používateľa',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Metóda priradenia',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Priradiť používateľa',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Aktualizovať položku "Priradené k" v zázname',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Nastaviť „Priradené k“ podľa dostupnosti',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Pridať súvisiaci záznam',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Súvisiaci modul',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Názov aktivity je prázdny.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Názov "%s" už existuje v tvare rodiny.',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Požadovaná dostupnosť zmeny',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Ak nie sú dostupní žiadni používatelia',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'pred',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Len nové záznamy',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Len aktualizované záznamy (prvá aktualizácia – pozri text pomocníka)',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Len aktualizované záznamy (všetky aktualizácie – pozri text pomocníka)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Nové záznamy alebo prvá aktualizácia',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Nové záznamy a všetky aktualizácie',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Určte, kedy sa proces začne.<br><br>Nové: Spustiť proces pri vytvorení nového záznamu. <<br><br>Prvá aktualizácia: Proces prebieha len pri prvom splnení časového kritéria pre existujúci záznam. <br><br>Všetky aktualizácie: Proces prebieha pri každom splnení časového kritéria pre existujúci záznam.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Určte, kedy sa proces začne.<br><br>Nové: Spustiť proces pri vytvorení nového záznamu.<br><br>Prvá aktualizácia: Proces prebieha len pri prvom splnení kritéria pre existujúci záznam.<br><br>Všetky aktualizácie: Proces prebieha pri každom splnení kritéria pre existujúci záznam.<br><br>Nové záznamy alebo prvá aktualizácia: Proces prebieha len pri prvom splnení kritéria pre záznam, buď počas vytvorenia záznamu, alebo aktualizácie záznamu.<br><br>Nové záznamy a všetky aktualizácie: Proces prebieha zakaždým pre každý nový a existujúci záznam.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Vybrať modul SugarCRM, ktorý má využívať spúšťač udalosti',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Pevne stanovený dátum',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'zmení z',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'zmení na',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'zahŕňa akékoľvek',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'nezahŕňa žiadne',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'v deň alebo po',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'v deň alebo pred',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'nerovná sa',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Pridať',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Zavrieť',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'Všetky tímy priradené k záznamu',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Tímy',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% súvisí s %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Používateľ, ktorý vytvoril %MODULE%',

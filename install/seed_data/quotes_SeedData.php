@@ -124,6 +124,9 @@ if(!empty($sugar_demodata['quotes_seed_data']['quotes'])) {
 
                     $product->load_relationship('quotes');
                     $product->quotes->add($focus);
+                    $product->quote_id = $focus->id;
+
+                    $product->save();
 
                     $pb->load_relationship('products');
                     $pb->products->add($product, array('product_index' => $product_key));

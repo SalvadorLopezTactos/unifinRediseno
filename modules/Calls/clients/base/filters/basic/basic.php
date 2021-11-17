@@ -23,7 +23,7 @@ $viewdefs['Calls']['base']['filter']['basic'] = array(
         ),
         array(
             'id' => 'assigned_to_me',
-            'name' => 'LBL_ASSIGNED_TO_ME',
+            'name' => 'LBL_LIST_MY_CALLS',
             'filter_definition' => array(
                 '$owner' => '',
             ),
@@ -70,5 +70,30 @@ $viewdefs['Calls']['base']['filter']['basic'] = array(
             ),
             'editable' => false,
         ),
+        [
+            'id' => 'calls_attending',
+            'name' => 'LBL_GUEST_CALLS',
+            'filter_definition' => [
+                [
+                    '$guest' => '',
+                ],
+            ],
+            'editable' => false,
+        ],
+        [
+            'id' => 'scheduled_calls_attending',
+            'name' => 'LBL_GUEST_SCHEDULED_CALLS',
+            'filter_definition' => [
+                [
+                    '$guest' => '',
+                ],
+                [
+                    'status' => [
+                        '$in' => ['Planned'],
+                    ],
+                ],
+            ],
+            'editable' => false,
+        ],
     ),
 );

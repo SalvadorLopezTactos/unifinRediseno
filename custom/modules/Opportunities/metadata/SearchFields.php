@@ -1,5 +1,14 @@
 <?php
-// created: 2021-08-31 16:54:10
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
 $searchFields['Opportunities'] = array (
   'name' => 
   array (
@@ -218,6 +227,26 @@ $searchFields['Opportunities'] = array (
     'query_type' => 'default',
   ),
   'condiciones_financieras_quantico' => 
+  array (
+    'query_type' => 'default',
+  ),
+  'best_case' => 
+  array (
+    'query_type' => 'default',
+  ),
+  'worst_case' => 
+  array (
+    'query_type' => 'default',
+  ),
+  'commit_stage' => 
+  array (
+    'query_type' => 'default',
+  ),
+  'service_start_date' => 
+  array (
+    'query_type' => 'default',
+  ),
+  'total_revenue_line_items' => 
   array (
     'query_type' => 'default',
   ),

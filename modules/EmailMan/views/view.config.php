@@ -21,6 +21,58 @@ require_once('modules/EmailMan/Forms.php');
 
 class ViewConfig extends SugarView
 {
+   /**
+    * SMTP providers requiring OAuth2.
+    *
+    * @var array
+    */
+    private $oauth2Types = [
+        'google_oauth2' => [
+            'application' => 'GoogleEmail',
+            'auth_warning' => '',
+            'auth_url' => null,
+            'eapm_id' => '',
+            'authorized_account' => '',
+            'dataSource' => 'googleEmailRedirect',
+        ],
+        'exchange_online' => [
+            'application' =>'MicrosoftEmail',
+            'auth_warning' => '',
+            'auth_url' => null,
+            'eapm_id' => '',
+            'authorized_account' => '',
+            'dataSource' => 'microsoftEmailRedirect',
+        ],
+    ];
+
+    /**
+     * Gets auth info for oauth2 providers.
+     *
+     * @param array $settings
+     * @return string
+     */
+    protected function getAuthInfo(array $settings): string
+    {
+        $authApi = new AuthApi();
+        $api = new RestService();
+        $authInfo = $this->oauth2Types;
+        foreach ($authInfo as $key => $value) {
+            try {
+                $info = $authApi->getAuthInfo($api, ['module' => 'EAPM', 'application' => $value['application']]);
+            } catch (SugarApiExceptionNotFound $e) {
+                $info = [];
+            }
+            $authInfo[$key] = array_merge($value, $info);
+            if ($key === $settings['mail_smtptype']) {
+                $authInfo[$key]['eapm_id'] = $settings['eapm_id'];
+                $authInfo[$key]['authorized_account'] = $settings['authorized_account'];
+                $authInfo[$key]['mail_smtpuser'] = $settings['mail_smtpuser'];
+            }
+        }
+        // convert to json string
+        return json_encode($authInfo);
+    }
+
     /**
 	 * @see SugarView::_getModuleTitleParams()
 	 */
@@ -85,7 +137,9 @@ class ViewConfig extends SugarView
         );
         $this->ss->assign("notify_fromname", $focus->settings['notify_fromname']);
         $this->ss->assign("notify_allow_default_outbound_on", (!empty($focus->settings['notify_allow_default_outbound']) && $focus->settings['notify_allow_default_outbound']) ? "checked='checked'" : "");
-
+        $this->ss->assign("eapm_id", isset($focus->settings['eapm_id']) ? $focus->settings['eapm_id'] : '');
+        $this->ss->assign("authorized_account", isset($focus->settings['authorized_account']) ? $focus->settings['authorized_account'] : '');
+        $this->ss->assign("mail_authtype", $focus->settings['mail_authtype']);
         $this->ss->assign("mail_smtptype", $focus->settings['mail_smtptype']);
         $this->ss->assign("mail_smtpserver", $focus->settings['mail_smtpserver']);
         $this->ss->assign("mail_smtpport", $focus->settings['mail_smtpport']);
@@ -93,9 +147,15 @@ class ViewConfig extends SugarView
         $this->ss->assign("mail_smtpauth_req", ($focus->settings['mail_smtpauth_req']) ? "checked='checked'" : "");
         $this->ss->assign("mail_haspass", empty($focus->settings['mail_smtppass'])?0:1);
         $this->ss->assign("MAIL_SSL_OPTIONS", get_select_options_with_id($app_list_strings['email_settings_for_ssl'], $focus->settings['mail_smtpssl']));
+        $this->ss->assign("js_authinfo", $this->getAuthInfo($focus->settings));
 
         //Assign the current users email for the test send dialogue.
         $this->ss->assign("CURRENT_USER_EMAIL", $current_user->email1);
+
+        // Assign the max length for the email password field
+        $outboundEmailBean = BeanFactory::newBean('OutboundEmail');
+        $passwordFieldDef = $outboundEmailBean->getFieldDefinition('mail_smtppass');
+        $this->ss->assign('PASSWORD_MAX_LENGTH', $passwordFieldDef['len'] ?? null);
 
         $showSendMail = FALSE;
         $outboundSendTypeCSSClass = "yui-hidden";
@@ -132,7 +192,7 @@ class ViewConfig extends SugarView
             $sugar_config['email_xss'] = getDefaultXssTags();
         }
 
-        foreach (unserialize(base64_decode($sugar_config['email_xss']), ['allowed_classes' => false]) as $k => $v) {
+        foreach ($sugar_config['email_xss'] as $k => $v) {
             $this->ss->assign($k."Checked", 'CHECKED');
         }
 

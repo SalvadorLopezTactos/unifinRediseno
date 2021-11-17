@@ -81,7 +81,7 @@ var resources = new Array();
 <input type="hidden" name="layout" value="ProjectGrid">
 
 <input name="calendar_start" id="calendar_start" onblur="parseDate(this, '{$CALENDAR_DATEFORMAT}');SUGAR.gantt.createTable('biweek', this.value, '{$BG_COLOR}');" type="hidden" tabindex='2' value="{$PROJECT->estimated_start_date}" /><br />
-<input name="gantt_chart_start_date" id="gantt_chart_start_date" type="hidden" onChange="SUGAR.gantt.createTable(document.getElementById('gantt_chart_view').value, this.value, '{$BG_COLOR}');" value="{$PROJECT->estimated_start_date}" />
+<input name="gantt_chart_start_date" id="gantt_chart_start_date" type="hidden" onChange="SUGAR.gantt.createTable(document.getElementById('gantt_chart_view').value, this.value, '{$BG_COLOR}');" value="{$formatted_start_date}" />
 <input name="gantt_chart_view" id="gantt_chart_view" type="hidden" value="biweek" />
 
 <div id="projectButtonsDiv">
@@ -221,11 +221,11 @@ var resources = new Array();
 						</select>
 					</td>
 					<td>
-                        <input {if !$CANEDIT || !$taskEditAccess}readonly="readonly" {/if} id=date_start_{$TASK->project_task_id} name=date_start_{$TASK->project_task_id} style="border:0" type="text" tabindex='2' size='11' maxlength='10' value="{$TASK->date_start}">
+                        <input {if !$CANEDIT || !$taskEditAccess}readonly="readonly" {/if} id=date_start_{$TASK->project_task_id} name=date_start_{$TASK->project_task_id} style="border:0" type="text" tabindex='2' size='11' maxlength='10' value="{$TASK->display_date_start}">
 					</td>
 					<td>
                         <input {if !$CANEDIT || !$taskEditAccess}readonly="readonly"{/if} name=date_finish_{$TASK->project_task_id} id=date_finish_{$TASK->project_task_id} style="border:0" onchange="parseDate(this, '{$CALENDAR_DATEFORMAT}'); SUGAR.grid.processFinishDate(this, '{$TASK->project_task_id}');"
-							type="text" tabindex='2' size='11' maxlength='10' value="{$TASK->date_finish}">
+							type="text" tabindex='2' size='11' maxlength='10' value="{$TASK->display_date_finish}">
 					</td>
 					<td>
                         <input  {if !$CANEDIT || !$taskEditAccess}readonly="readonly"{/if} type=text size=10  style='border:0' name=predecessors_{$TASK->project_task_id} id=predecessors_{$TASK->project_task_id} value="{$TASK->predecessors}"

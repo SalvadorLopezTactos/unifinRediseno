@@ -33,7 +33,7 @@ class SubStrExpression extends StringExpression
         if (!is_numeric($strLength))
           throw new Exception($this->getOperationName() . ": Parameter LENGTH must be a number.");
 
-        return substr($str, $fromIdx, $strLength);
+        return sugarSubstr($str, $fromIdx, $strLength);
     }
 
     /**

@@ -22,7 +22,7 @@ class StringLengthExpression extends NumericExpression
      */
     public function evaluate()
     {
-        return strlen($this->getParameters()->evaluate());
+        return sugarStrlen($this->getParameters()->evaluate());
     }
 
     /**

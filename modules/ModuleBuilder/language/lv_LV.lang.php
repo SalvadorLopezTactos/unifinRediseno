@@ -591,6 +591,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'Konfigurēt portālu',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Aktivizēt portālu',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Aktivizēt meklēšanu pirms pieteikuma atvēršanas',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Atļaut portāla lietotājiem slēgt pieteikumu',
     'LBL_PORTAL_THEME' => 'Portāla tēma',
     'LBL_PORTAL_ENABLE' => 'Aktivēt',
     'LBL_PORTAL_SITE_URL' => 'Jūsu portāla vietne ir pieejama:',
@@ -782,6 +783,14 @@ $mod_strings = array(
         . "Atkarīgiem laukiem uz pārlūku balstītā mobilajā skatā tiks piemērota atkarības formula, <br/>"
         . "bet oriģinālajās lietotnēs, tādās kā Sugar Mobile for iPhone, šī formula netiks piemērota. <br/>"
         . "Sugar pašapkalpošanās portālā tiem šī formula netiks piemērota.",
+'LBL_POPHELP_REQUIRED'=>"Izveidojiet formulu, lai noteiktu, vai šis lauks ir obligāts izkārtojumos.<br/>"
+    . "Obligātajiem laukiem uz pārlūku balstītā mobilajā skatā tiks piemērota formula, <br/>"
+    . "bet oriģinālajās lietotnēs, tādās kā Sugar Mobile for iPhone, šī formula netiks piemērota. <br/>"
+    . "Sugar pašapkalpošanās portālā tiem šī formula netiks piemērota.",
+'LBL_POPHELP_READONLY'=>"Izveidojiet formulu, lai noteiktu, vai šis lauks ir tikai lasāms izkārtojumos.<br/>"
+        . "Tikai lasāmajiem laukiem uz pārlūku balstītā mobilajā skatā tiks piemērota formula, <br/>"
+        . "bet oriģinālajās lietotnēs, tādās kā Sugar Mobile for iPhone, šī formula netiks piemērota. <br/>"
+        . "Sugar pašapkalpošanās portālā tiem šī formula netiks piemērota.",
 'LBL_POPHELP_GLOBAL_SEARCH'=>'Atlasiet, lai izmantotu šo lauku, kad meklējat ierakstus, šajā modulī izmantojot globālo meklēšanu.',
 //Revert Module labels
 'LBL_RESET' => 'Atiestatīt',
@@ -817,6 +826,7 @@ $mod_strings = array(
                 'encrypt'=>'Šifrēt',
                 'datetimecombo' =>'Datums/laiks',
                 'decimal'=>'Decimālais',
+                'autoincrement' => 'Automātiskā palielināšana',
 ),
 'labelTypes' => array(
     "" => "Biežāk izmantotās etiķetes",
@@ -834,4 +844,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'Visi moduļi',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (saistīts ar {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Kopēt no izkārtojuma',
+'LBL_RELATIONSHIP_TYPE' => 'Relācija',
 );

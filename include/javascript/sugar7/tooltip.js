@@ -140,16 +140,12 @@
          *
          * This is useful for components to clear any tooltips after render:
          *     this.on('render', app.tooltip.clear);
-         *
-         * Currently it supports only the last tooltip shown, because the
-         * implementation only allows 1 tooltip to be shown at a time.
-         * Later this function can provide a clear of all tooltips if we allow
-         * having more than 1 showing at the same time.
          */
         clear: function() {
             if (this._$currentTip) {
                 this._$currentTip.detach();
             }
+            $('body > .tooltip').tooltip('hide');
         }
     });
 

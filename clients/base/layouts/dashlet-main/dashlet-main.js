@@ -75,13 +75,26 @@
         }
 
         var components = metadata.components;
+        var grid = [{layout: {name: 'dashboard-grid', css_class: 'grid-stack'}}];
 
         // if this is a tabbed dashboard, inject the metadata from the currently active tab and mark the active tab
         if (metadata.tabs) {
             components = metadata.tabs[tabIndex].components;
             var tabs = app.utils.deepCopy(metadata.tabs);
             var tabOptions = {activeTab: tabIndex, tabs: tabs};
+            if (!_.isUndefined(metadata.buttons)) {
+                tabOptions.buttons = app.utils.deepCopy(metadata.buttons);
+            }
             this.context.trigger('tabbed-dashboard:update', tabOptions);
+        }
+
+        if (_.every(components, function(component) {
+            return _.has(component, 'rows');
+        })) {
+            if (components) {
+                this.model.set('metadata', _.extend(metadata, {legacyComponents: components}), {silent: true});
+            }
+            components = grid;
         }
 
         _.each(components, function(component, index) {

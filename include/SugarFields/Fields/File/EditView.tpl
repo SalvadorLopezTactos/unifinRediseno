@@ -66,7 +66,7 @@
 <span id="{{$idName}}_new" style="display:{if $showRemove}none;{/if}">
 <input type="hidden" name="{{$idName}}_escaped">
 <input id="{{$idName}}_file" name="{{$idName}}_file" 
-type="file" title='{{$vardef.help}}' size="{{$displayParams.size|default:30}}"
+type="file" title='{{$vardef.help|escape:"hexentity"}}' size="{{$displayParams.size|default:30}}"
 {{if !empty($displayParams.accesskey)}} accesskey='{{$displayParams.accesskey}}' {{/if}} 
 {{if !empty($vardef.len)}}
     maxlength='{{$vardef.len}}'

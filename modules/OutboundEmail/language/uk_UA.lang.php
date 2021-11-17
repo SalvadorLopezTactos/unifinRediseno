@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Вихідні облікові записи електронної пошти',
     'LBL_MODULE_NAME_SINGULAR' => 'Вихідний обліковий запис електронної пошти',
+    'LBL_STATUS' => 'Статус',
     'LBL_MAIL_SENDTYPE' => 'Відправка пошти за допомогою',
     'LBL_MAIL_SMTPSERVER' => 'Сервер',
     'LBL_MAIL_SMTPPORT' => 'Порт',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Це системний обліковий запис.',
     'LBL_EMAIL_ADDRESS_ID' => 'Ідентифікатор адреси електронної пошти',
     'LBL_TYPE' => 'Тип',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Авторизована електронна адреса',
+    'LBL_FROM_EMAIL_ADDRESS' => 'Адреса електронної пошти відправника',
     'LBL_REPLY_TO_NAME' => 'Ім&#39;я для відповіді',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Адреси електронної пошти для відповіді',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Ідентифікатор адреси електронної пошти для відповіді',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Адреса електронної пошти для відповіді',
     'LBL_PRIMARY_TEAM' => 'Основна команда',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Фокусна панель «Налаштування електронної пошти»',
 );

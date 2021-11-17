@@ -144,6 +144,87 @@ abstract class AbstractMetaDataImplementation
     }
 
     /*
+     * Setter function for _viewdefs property
+     */
+    public function setViewdefs($viewdefs)
+    {
+        $this->_viewdefs = $viewdefs;
+    }
+
+    /**
+     * Sets given properties to the viewdef panel fields if they are present in the given fieldList
+     *
+     * @param array $fieldList Array of field names to which the given properties will be set
+     * @param array $propertyList Array of 'property => value' to be set for each field in
+     */
+    public function setFieldProps($fieldList, $propertyList)
+    {
+        $defs = $this->_viewdefs;
+        $view = $this->_viewType;
+        $client = $this->_viewClient;
+
+        // We need all of the panels for this implementation
+        $panels = isset($defs[$client]['view'][$view]['panels']) ? $defs[$client]['view'][$view]['panels'] : [];
+
+        // Now we need to loop over each panel, and within each panel...
+        foreach ($panels as $pKey => $panel) {
+            // ... look at each field on the view
+            $fields = isset($panel['fields']) && is_array($panel['fields']) ? $panel['fields'] : [];
+            foreach ($fields as $fKey => $field) {
+                // Used to maintain state of the fielddef, or create it from strings
+                $newDef = [];
+
+                // Fieldsets and fields with defs...
+                if (is_array($field) && isset($field['name'])) {
+                    // if the field is a fieldset
+                    if (isset($field['fields']) && $field['type'] === 'fieldset') {
+                        // Loop over each field within the fieldset
+                        foreach ($field['fields'] as $sfKey => $subField) {
+                            // if subField has a name and is present in the field list
+                            // we check if the name is set first as some subFields may not have a name property
+                            if (isset($subField['name']) && in_array($subField['name'], $fieldList)) {
+                                // update the properties of the subField
+                                $subField = array_merge($subField, $propertyList);
+
+                                // we update the field to cover the corner case where the field and subfield both
+                                // are present in the fieldList. This ensures that the subfield updates don't get
+                                // overwritten by the newDef
+                                $field['fields'][$sfKey] = $subField;
+
+                                // if the field is not in the fieldList then update the panel with changes made
+                                // to subfield since they won't be picked up via newDef later
+                                if (!in_array($field['name'], $fieldList)) {
+                                    $panels[$pKey]['fields'][$fKey]['fields'][$sfKey] = $subField;
+                                }
+                            }
+                        }
+                    }
+
+                    // We will just use the field def as is since it is an array
+                    // Moreover, we store the field even if it is a fieldset since we might need to update properties at
+                    // the fieldset level as well
+                    $newDef = $field;
+                } elseif (is_string($field)) {
+                    // Create an array def from the string name of the field
+                    $newDef = ['name' => $field];
+                } else {
+                    // There are sometimes fields that aren't actual fields
+                    continue;
+                }
+
+                // The logic above ensures we will always have this
+                if (in_array($newDef['name'], $fieldList)) {
+                    // Put all of it together now
+                    $panels[$pKey]['fields'][$fKey] = array_merge($newDef, $propertyList);
+                }
+            }
+        }
+
+        $defs[$client]['view'][$view]['panels'] = $panels;
+        $this->setViewdefs($defs);
+    }
+
+    /*
      * Getters for the definitions loaded by the Constructor
      */
     public function getViewdefs ()
@@ -458,6 +539,10 @@ abstract class AbstractMetaDataImplementation
      */
     public function _mergeFielddefs ( &$fielddefs , $layout )
     {
+        // nothing to merge
+        if (empty($layout)) {
+            return;
+        }
         $viewClient = empty($this->_viewClient) ? 'base' : $this->_viewClient;
         if (isset($layout[$viewClient]) && is_array($layout[$viewClient]) && isset($layout[$viewClient]['view']) && is_array($layout[$viewClient]['view'])) {
             $viewType = key($layout[$viewClient]['view']);

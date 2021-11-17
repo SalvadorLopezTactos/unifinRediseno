@@ -200,7 +200,7 @@ function checkForDuplicates($prefix='')
 	$count = 0;
         $emails = [];
         while (isset($_POST["{$this->moduleName}{$count}emailAddress{$count}"])) {
-            $emails[] = strtoupper(trim($_POST["{$this->moduleName}{$count}emailAddress" . $count++]));
+            $emails[] = sugarStrToUpper(trim($_POST["{$this->moduleName}{$count}emailAddress" . $count++]));
         } //while
 
         if (!empty($emails)) {
@@ -256,6 +256,4 @@ public function getDuplicateQuery($focus, $prefix='')
 {
     return null;
 }
-
-
 }

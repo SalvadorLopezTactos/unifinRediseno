@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => 'Paralajmërim: Ju keni modifikuar importin tuaj automatik të vendosjes i cili mund të rezultojë në humbjen e të dhënave.',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => 'Paralajmërim: Importi Automatik duhet të jetë i aktivizuar automatikisht kur krijohen rastet.',
 	'LBL_EDIT_LAYOUT' => 'Ndrysho formatin' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => 'Adresa e emailit',
+    'LBL_EMAIL_PROVIDER' => 'Ofruesi i emailit',
+    'LBL_AUTH_STATUS' => 'Statusi i autorizimit',
 );
-?>

@@ -229,6 +229,12 @@ class ViewListView extends SugarView
                     $groups[$groupKey][$fieldKey]['width'] = $width;
                     $groups[$groupKey][$fieldKey]['units'] = $unit;
                 }
+                if ($groupKey === 'Hidden') {
+                    $moduleName = !empty($this->subpanel) ? ucfirst($this->subpanel) : $this->editModule;
+                    if (!AccessControlManager::instance()->allowFieldAccess($moduleName, $fieldKey)) {
+                        unset($groups[$groupKey][$fieldKey]);
+                    }
+                }
             }
         }
 

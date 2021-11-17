@@ -192,7 +192,7 @@ class CommentLogHandler extends AbstractHandler implements
             $commentlogs[] = $commentlog_bean->entry;
         }
 
-        $document->setDataField($document->getType() . Mapping::PREFIX_SEP . self::COMMENTLOG_FIELD, $commentlogs);
+        $document->setDataField($bean->getModuleName() . Mapping::PREFIX_SEP . self::COMMENTLOG_FIELD, $commentlogs);
         $document->removeDataField(self::COMMENTLOG_FIELD);
 
         // Format data for commentlog search fields
@@ -205,7 +205,7 @@ class CommentLogHandler extends AbstractHandler implements
         }
 
         // Set formatted value in special commentlog search field
-        $searchField = $document->getType() . Mapping::PREFIX_SEP . $this->searchField;
+        $searchField = $bean->getModuleName() . Mapping::PREFIX_SEP . $this->searchField;
         $document->setDataField($searchField, $value);
     }
 

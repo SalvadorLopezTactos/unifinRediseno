@@ -77,7 +77,7 @@ $dictionary['ProductTemplate'] = array(
             'name' => 'type_name',
             'rname' => 'name',
             'id_name' => 'type_id',
-            'vname' => 'LBL_TYPE',
+            'vname' => 'LBL_PRODUCT_TYPE',
             'join_name'=>'product_types',
             'type' => 'relate',
             'link' => 'type_link',
@@ -118,7 +118,6 @@ $dictionary['ProductTemplate'] = array(
             'len' => '26,6',
             'comment' => 'Product cost ("Cost" in Quote)',
             'importable' => 'required',
-            'required' => true,
             'related_fields' => array(
                 'currency_id',
                 'base_rate'
@@ -129,7 +128,6 @@ $dictionary['ProductTemplate'] = array(
         'discount_price' => array(
             'name' => 'discount_price',
             'vname' => 'LBL_DISCOUNT_PRICE',
-            'required' => true,
             'type' => 'currency',
             'len' => '26,6',
             'comment' => 'Discounted price ("Unit Price" in Quote)',
@@ -145,7 +143,6 @@ $dictionary['ProductTemplate'] = array(
         'list_price' => array(
             'name' => 'list_price',
             'vname' => 'LBL_LIST_PRICE',
-            'required' => true,
             'type' => 'currency',
             'len' => '26,6',
             'importable' => 'required',
@@ -389,6 +386,13 @@ $dictionary['ProductTemplate'] = array(
             'type' => 'bool',
             'default' => 0,
             'comment' => 'Indicates whether the sales item is a service or a product',
+        ],
+        'lock_duration' => [
+            'name' => 'lock_duration',
+            'vname' => 'LBL_LOCK_DURATION',
+            'type' => 'bool',
+            'default' => 0,
+            'comment' => 'Indicates whether the duration can be manually changed',
         ],
     ),
     'relationships' => array(

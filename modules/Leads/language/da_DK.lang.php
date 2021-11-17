@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Leadliste-dashboard',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Leadoptegnelses-dashboard',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Kundeemner',
 
     'ERR_DELETE_RECORD' => 'Der skal angives et postnummer for at slette kundeemnet.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Kontobeskrivelse',
@@ -325,4 +326,8 @@ Efter bekræftelse af hvert enkelt påkrævet og ønsket modul, skal du klikke p
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Kan ikke ændre statussen for {{moduleSingular}}. Dette {{moduleSingular}} er allerede konverteret.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Kundeemne konverteringsprognose',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Se prognosedetaljer for et specifikt kundeemne',
 );

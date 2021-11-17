@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'فئة الضريبة:',
   'LBL_TYPE_NAME'=>'اسم النوع',
   'LBL_TYPE' => 'النوع',
+  'LBL_PRODUCT_TYPE' => 'نوع المنتج',
   'LBL_URL' => 'عنوان URL للمنتج:',
   'LBL_VENDOR_PART_NUM' => 'رقم الجزء للبائع:',
   'LBL_WEIGHT' => 'الوزن:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'عرض كتالوج المنتج',
   'NTC_DELETE_CONFIRMATION' => 'هل تريد بالتأكيد حذف هذا السجل؟',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'إضافة',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'بحث في كتالوج المنتج',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'لا تتوفر بيانات',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'اسم المستخدم المعين',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'أنواع المنتج',
   'LBL_RENEWABLE' => 'القابلية للتجديد',
   'LBL_SERVICE' => 'الخدمة',
+  'LBL_LOCK_DURATION' => 'مدة القفل',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'لوحة معلومات كتالوج المنتج',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'لوحة معلومات سجل كتالوج المنتج',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم كتالوج المنتج',
 );

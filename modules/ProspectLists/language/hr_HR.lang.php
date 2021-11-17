@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Nadzorna ploča za popis meta',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o popisima meta',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za popise meta',
+  'LBL_RELATED_ACCOUNTS' => 'Povezani računi',
+  'LBL_RELATED_CONTACTS' => 'Povezani kontakti',
+  'LBL_RELATED_LEADS_TARGETS' => 'Povezani potencijalni klijenti i mete',
 
   'LBL_MODULE_NAME' => 'Popisi meta',
   'LBL_MODULE_NAME_SINGULAR' => 'Popis meta',

@@ -16,7 +16,6 @@ use Doctrine\DBAL\FetchMode;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
-use Sugarcrm\Sugarcrm\Util\Serialized;
 use Sugarcrm\Sugarcrm\Security\Validator\Validator;
 use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Guid;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\ViolationException;
@@ -58,7 +57,7 @@ class EmailUI {
 		$folderStateSerial = $current_user->getPreference('folderOpenState', 'Emails');
 
 		if(!empty($folderStateSerial)) {
-            $this->folderStates = Serialized::unserialize($folderStateSerial);
+            $this->folderStates = unserialize($folderStateSerial, ['allowed_classes' => false]);
 		}
 
 		$this->smarty = new Sugar_Smarty();
@@ -247,7 +246,7 @@ class EmailUI {
 		$preloadFolder = 'lazyLoadFolder = ';
 		$focusFolderSerial = $current_user->getPreference('focusFolder', 'Emails');
 		if(!empty($focusFolderSerial)) {
-            $focusFolder = Serialized::unserialize($focusFolderSerial);
+            $focusFolder = unserialize($focusFolderSerial, ['allowed_classes' => false]);
 			//$focusFolder['ieId'], $focusFolder['folder']
 			$preloadFolder .= json_encode($focusFolder).";";
 		} else {
@@ -878,8 +877,6 @@ eoq;
 
 		$r = $user->db->query($union);
 
-		//_pp($union);
-
 		while($a = $user->db->fetchByAssoc($r)) {
 			$c = array();
             $c['name'] = $locale->formatName(
@@ -913,18 +910,18 @@ eoq;
 		$sortSerial = $current_user->getPreference('folderSortOrder', 'Emails');
 		$sortArray = array();
 		if(!empty($sortSerial)) {
-            $sortArray = Serialized::unserialize($sortSerial);
+            $sortArray = unserialize($sortSerial, ['allowed_classes' => false]);
 		}
 
 		// treeview collapsed/open states
 		$folderStateSerial = $current_user->getPreference('folderOpenState', 'Emails');
 		$folderStates = array();
 		if(!empty($folderStateSerial)) {
-            $folderStates = Serialized::unserialize($folderStateSerial);
+            $folderStates = unserialize($folderStateSerial, ['allowed_classes' => false]);
 		}
 
 		// subscribed accounts
-        $showFolders = Serialized::unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
+        $showFolders = unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')), ['allowed_classes' => false]);
 
 		// general settings
 		$emailSettings = $current_user->getPreference('emailSettings', 'Emails');
@@ -941,7 +938,7 @@ eoq;
 
 		// focus folder
 		$focusFolder = $current_user->getPreference('focusFolder', 'Emails');
-        $focusFolder = !empty($focusFolder) ? Serialized::unserialize($focusFolder) : array();
+        $focusFolder = !empty($focusFolder) ? unserialize($focusFolder, ['allowed_classes' => false]) : array();
 
 		// unread only flag
 		$showUnreadOnly = $current_user->getPreference('showUnreadOnly', 'Emails');
@@ -1025,7 +1022,7 @@ eoq;
 
 		$sortSerial = $current_user->getPreference('folderSortOrder', 'Emails');
 		if(!empty($sortSerial)) {
-            $sortArray = Serialized::unserialize($sortSerial);
+            $sortArray = unserialize($sortSerial, ['allowed_classes' => false]);
 		}
 
 		$sortArray[$ieId][$focusFolder]['current']['sort'] = $sortBy;
@@ -1044,7 +1041,7 @@ eoq;
 		$folderStates = array();
 
 		if(!empty($folderStateSerial)) {
-            $folderStates = Serialized::unserialize($folderStateSerial);
+            $folderStates = unserialize($folderStateSerial, ['allowed_classes' => false]);
 		}
 
 		$folderStates[$focusFolder] = $focusFolderOpen;
@@ -1101,7 +1098,7 @@ eoq;
 	function emptyTrash(&$ie) {
 		global $current_user;
 
-        $showFolders = Serialized::unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
+        $showFolders = unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')), ['allowed_classes' => false]);
 
 		if(is_array($showFolders)) {
 			foreach($showFolders as $ieId) {
@@ -1135,7 +1132,7 @@ eoq;
 		$rootNode->dynamicloadfunction = '';
 		$rootNode->expanded = true;
 		$rootNode->dynamic_load = true;
-        $showFolders = Serialized::unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
+        $showFolders = unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')), ['allowed_classes' => false]);
 
 		if(empty($showFolders)) {
 			$showFolders = array();
@@ -1345,39 +1342,6 @@ eoq;
 
 		return $ret;
 	}
-
-	function createCopyOfInboundAttachment($ie, $ret, $uid) {
-		global $sugar_config;
-
-        if ($this->mboxCacheExists($ie->id, $ie->mailbox, $uid)) {
-            $metaOut = $this->getMboxCacheValue($ie->id, $ie->mailbox, $uid);
-            $meta = $metaOut['meta']['email'];
-			if (isset($meta['attachments'])) {
-				$attachmentHtmlData = $meta['attachments'];
-				$actualAttachmentInfo = array();
-				$this->parseAttachmentInfo($actualAttachmentInfo, $attachmentHtmlData);
-				if (sizeof($actualAttachmentInfo) > 0) {
-					foreach($actualAttachmentInfo as $key => $value) {
-					    $info_vars = array();
-					    parse_str($value, $info_vars);
-					    $fileName = $info_vars['tempName'];
-					    $attachmentid = $info_vars['id'];
-						$guid = create_guid();
-						$destination = clean_path("{$this->userCacheDir}/{$guid}");
-
-						$attachmentFilePath = sugar_cached("modules/Emails/{$ie->id}/attachments/{$attachmentid}");
-						copy($attachmentFilePath, $destination);
-						$ret['attachments'][$guid] = array();
-						$ret['attachments'][$guid]['id'] = $guid . $fileName;
-						$ret['attachments'][$guid]['filename'] = $fileName;
-					} // for
-				} // if
-			} // if
-
-		} // if
-		return $ret;
-
-	} // fn
 
 	function parseAttachmentInfo(&$actualAttachmentInfo, $attachmentHtmlData) {
 	 	$downLoadPHP = strpos($attachmentHtmlData, "index.php?entryPoint=download&");
@@ -2520,13 +2484,16 @@ eoq;
 			$relatedIDs = implode(',', $beanIds);
 		}
 
-		if ($beanType == 'accounts') {
-			if (isset($whereArr['first_name'])) {
-				$whereArr['name'] = $whereArr['first_name'];
-			}
-			unset($whereArr['last_name']);
-			unset($whereArr['first_name']);
-		}
+        // Accounts are not Person modules, so we can't query by 'first_name',
+        // 'last_name', or 'full_name'. Instead, query by 'name'
+        if ($beanType == 'accounts') {
+            if (isset($whereArr['first_name'])) {
+                $whereArr['name'] = $whereArr['first_name'];
+            }
+            unset($whereArr['last_name']);
+            unset($whereArr['first_name']);
+            unset($whereArr['full_name']);
+        }
 
         $table = $beanType;
         $module = ucfirst($table);
@@ -2552,6 +2519,14 @@ eoq;
             } else {
                 foreach ($whereArr as $column => $clause) {
                     $clause = $current_user->db->quote($clause);
+
+                    // Since full_name isn't a DB field, we need to query by the
+                    // concatenation of {first_name} + " " + {last_name}
+                    if ($column === 'full_name') {
+                        $db = DBManagerFactory::getInstance();
+                        $column = $db->concat($table, ['first_name', 'last_name']);
+                    }
+
                     $whereAdd = "{$column} LIKE '{$clause}%'";
                     $t = $this->buildQuery(
                         $relatedIDs,
@@ -2831,7 +2806,7 @@ eoq;
 		} // if
 
 		//Check to make sure that the user has set the associated inbound email account -> outbound account is active.
-        $showFolders = Serialized::unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
+        $showFolders = unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')), ['allowed_classes' => false]);
         $sf = new SugarFolder();
         $groupSubs = $sf->getSubscriptions($current_user);
 
@@ -2905,7 +2880,7 @@ eoq;
 			$toArray = $ie->email->email2ParseAddressesForAddressesOnly($ret['to']);
 		} // else
         foreach($ieAccountsFull as $k => $v) {
-            $storedOptions = Serialized::unserialize($v->stored_options, array(), true);
+            $storedOptions = unserialize(base64_decode($v->stored_options), ['allowed_classes' => false]);
 			if (  array_search_insensitive($storedOptions['from_addr'], $toArray)) {
         		if ($v->is_personal) {
 					$foundInPersonalAccounts = true;
@@ -2952,7 +2927,7 @@ eoq;
 
         $ieAccountsFrom= array();
         foreach($ieAccountsFull as $k => $v) {
-            $storedOptions = Serialized::unserialize($v->stored_options, array(), true);
+            $storedOptions = unserialize(base64_decode($v->stored_options), ['allowed_classes' => false]);
         	$storedOptionsName = from_html($storedOptions['from_name']);
 
         	$selected = false;
@@ -2984,34 +2959,6 @@ eoq;
         return $ret;
     } // fn
 
-
-	/**
-	 * takes an array and creates XML
-	 * @param array Array to convert
-	 * @param string Name to wrap highest level items in array
-	 * @return string XML
-	 */
-	function arrayToXML($a, $paramName) {
-		if(!is_array($a))
-			return '';
-
-		$bad = array("<",">","'",'"',"&");
-		$good = array("&lt;", "&gt;", "&#39;", "&quot;","&amp;");
-
-		$ret = "";
-
-		for($i=0; $i<count($a); $i++) {
-			$email = $a[$i];
-			$ret .= "\n<{$paramName}>";
-
-			foreach($email as $k => $v) {
-				$ret .= "\n\t<{$k}>".str_replace($bad, $good, $v)."</{$k}>";
-			}
-			$ret .= "\n</{$paramName}>";
-		}
-		return $ret;
-	}
-
 	/**
 	 * Re-used option getter for Show Accounts multiselect pane
 	 */
@@ -3022,7 +2969,7 @@ eoq;
 
 		$ieAccountsFull = $ie->retrieveAllByGroupId($current_user->id);
 		$ieAccountsShowOptionsMeta = array();
-        $showFolders = Serialized::unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
+        $showFolders = unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')), ['allowed_classes' => false]);
 
 		$defaultIEAccount = $ie->getUsersDefaultOutboundServerId($current_user);
 
@@ -3076,7 +3023,7 @@ eoq;
 		//$ieAccountsShowOptions = "<option value=''>{$app_strings['LBL_NONE']}</option>\n";
 		$ieAccountsShowOptionsMeta = array();
 		$ieAccountsShowOptionsMeta[] = array("value" => "", "text" => $app_strings['LBL_NONE'], 'selected' => '');
-        $showFolders = Serialized::unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')));
+        $showFolders = unserialize(base64_decode($current_user->getPreference('showFolders', 'Emails')), ['allowed_classes' => false]);
 
 		foreach($ieAccountsFull as $k => $v) {
 			if(!in_array($v->id, $showFolders)) {
@@ -3189,7 +3136,7 @@ eoq;
 			$cacheFile = FileLoader::varFromInclude($cacheFilePath, 'cacheFile'); // provides $cacheFile
 
 			if(isset($cacheFile[$key])) {
-                $ret = Serialized::unserialize($cacheFile[$key]);
+                $ret = unserialize($cacheFile[$key], ['allowed_classes' => false]);
 				return $ret;
 			}
 		} else {
@@ -3367,41 +3314,7 @@ eoq;
 
 		return json_encode($jsonOut);
 	}
-	/**
-	 * generates XML output from an array
-	 * @param array
-	 * @param string master list Item
-	 * @return string
-	 */
-	function xmlOutput($a, $paramName, $count=0, $fromCache=true, $unread=-1) {
-		global $app_strings;
-		$count = ($count > 0) ? $count : 0;
 
-		if(isset($a['fromCache'])) {
-			$cached = ($a['fromCache'] == 1) ? 1 : 0;
-		} else {
-			$cached = ($fromCache) ? 1 : 0;
-		}
-
-		if($a['mbox'] == 'undefined' || empty($a['mbox'])) {
-			$a['mbox'] = $app_strings['LBL_NONE'];
-		}
-
-		$xml = $this->arrayToXML($a['out'], $paramName);
-
-		$ret =<<<eoq
-<?xml version="1.0" encoding="UTF-8"?>
-<EmailPage>
-<TotalCount>{$count}</TotalCount>
-<UnreadCount>{$unread}</UnreadCount>
-<FromCache> {$cached} </FromCache>
-<{$paramName}s>
-{$xml}
-</{$paramName}s>
-</EmailPage>
-eoq;
-		return $ret;
-	}
 
     /**
      * Generate to/cc addresses string in email detailview.

@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Daňova trieda',
   'LBL_TYPE_NAME'=>'Názov typu',
   'LBL_TYPE' => 'Typ',
+  'LBL_PRODUCT_TYPE' => 'Typ produktu',
   'LBL_URL' => 'URL produktu:',
   'LBL_VENDOR_PART_NUM' => 'Číslo dielu predajcu:',
   'LBL_WEIGHT' => 'Váha:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Zobrazenie katalógu produktov',
   'NTC_DELETE_CONFIRMATION' => 'Skutočne, chcete vymazať tento záznam?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Pridať',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Prehľadávať katalóg produktov',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Žiadne údaje nie sú k dispozícii',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Pridelené meno užívateľa',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Typy produktov',
   'LBL_RENEWABLE' => 'Obnoviteľné',
   'LBL_SERVICE' => 'Služba',
+  'LBL_LOCK_DURATION' => 'Trvanie uzamknutia',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Informačný panel so zoznamom katalógu produktov',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Informačný panel so záznamom katalógu produktov',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na katalóg produktov',
 );

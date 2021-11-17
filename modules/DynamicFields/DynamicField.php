@@ -451,11 +451,11 @@ class DynamicField {
      * Use the widgets get_db_modify_alter_table() method to get the table sql - some widgets do not need any custom table modifications
      * @param STRING $name - field name
      */
-    public function deleteField($widget){
+    public function deleteField($widget, ?bool $cleanup = true)
+    {
         require_once('modules/DynamicFields/templates/Fields/TemplateField.php');
         global $beanList;
 
-        $db = DBManagerFactory::getInstance();
         if (!($widget instanceof TemplateField)) {
             $field_name = $widget;
             $widget = new TemplateField();
@@ -468,16 +468,24 @@ class DynamicField {
             $newName = BeanFactory::getObjectName($this->module);
             $object_name = $newName != false ? $newName : $object_name;
         }
-
-        $db->query("DELETE FROM fields_meta_data WHERE id=" . $db->quoted($this->module . $widget->name));
+        if (empty($widget->name) || empty($this->module)) {
+            return;
+        }
+        $fieldsMetaData = (new FieldsMetaData())->retrieveByCustomModuleAndName($this->module, $widget->name);
+        if (empty($fieldsMetaData)) {
+            return;
+        }
+        $fieldsMetaData->mark_deleted($fieldsMetaData->id);
         $sql = $widget->get_db_delete_alter_table( $this->bean->table_name . "_cstm" ) ;
         if (! empty( $sql ) )
             $GLOBALS['db']->query( $sql );
 
         $this->removeVardefExtension($widget);
-        VardefManager::clearVardef();
-        VardefManager::refreshVardefs($this->module, $object_name);
-        MetaDataManager::refreshModulesCache(array($this->module));
+        if ($cleanup) {
+            VardefManager::clearVardef();
+            VardefManager::refreshVardefs($this->module, $object_name);
+            MetaDataManager::refreshModulesCache(array($this->module));
+        }
         // @TODO: Is this really necessary?
         //MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_LABELS));
     }
@@ -519,24 +527,26 @@ class DynamicField {
     public function addFieldObject($field)
     {
         $GLOBALS['log']->debug('adding field');
-        $object_name = $this->module;
-        $db_name = $field->name;
 
-        $fmd = BeanFactory::newBean('EditCustomFields');
-        $id =  $fmd->retrieve($object_name.$db_name,true, false);
-        $is_update = false;
-        $label = strtoupper( $field->label );
-        if(!empty($id)){
-            $is_update = true;
-        }else{
-            $db_name = $this->getDBName($field->name);
-            $field->name = $db_name;
+        if (empty($field) || empty($field->name) || empty($this->module)) {
+            return false;
         }
+        // All field metadata are related to field name. All field names are stored in the DB with _c at the end.
+        // Transform field name to DB format to find previous deleted field by name
+        $field->name = $this->getDBName($field->name);
+
+        /** @var FieldsMetaData $fmd */
+        $fmd = BeanFactory::newBean('EditCustomFields');
+        $existedMetaData = $fmd->retrieveByCustomModuleAndName($this->module, $field->name, ['add_deleted' => false]);
+        if (!empty($existedMetaData)) {
+            $fmd = $existedMetaData;
+        } else {
+            $fmd->name = $field->name;
+            $fmd->custom_module = $this->module;
+        }
+
         $this->createCustomTable();
-        $fmd->id = $object_name.$db_name;
-        $fmd->custom_module= $object_name;
-        $fmd->name = $db_name;
-        $fmd->vname = $label;
+        $fmd->vname = strtoupper($field->label);
         $fmd->type = $field->type;
         $fmd->help = $field->help;
         if (!empty($field->len))
@@ -555,11 +565,10 @@ class DynamicField {
         // pii field is always auditable
         $fmd->audited = isTruthy($field->audited) || isTruthy($field->pii);
         $fmd->reportable = ($field->reportable ? 1 : 0);
-        if(!$is_update){
-            $fmd->new_with_id=true;
-        }
+        $fmd->autoinc_next = $field->autoinc_next;
         if($field){
-            if(!$is_update){
+            $field->tablename = $this->bean->table_name . '_cstm';
+            if (!$fmd->isUpdate() || !empty($fmd->deleted)) {
                 //Do two SQL calls here in this case
             	//The first is to create the column in the custom table without the default value
             	//The second is to modify the column created in the custom table to set the default value
@@ -586,6 +595,9 @@ class DynamicField {
                 if(!empty($query)){
                 	$GLOBALS['db']->query($query, true, "Cannot modify field");
             	}
+            }
+            if (!empty($fmd->deleted)) {
+                $fmd->mark_undeleted($fmd->id);
             }
             $fmd->save();
             $this->buildCache($this->module);
@@ -653,7 +665,7 @@ class DynamicField {
         return false;
     }
 
-    protected function writeVardefExtension($bean_name, $field, $def_override)
+    public function writeVardefExtension($bean_name, $field, $def_override)
     {
         //Hack for the broken cases module
         $vBean = $bean_name == "aCase" ? "Case" : $bean_name;
@@ -972,7 +984,7 @@ class DynamicField {
         if (isset($types[$fieldType][$signed])) {
             return $types[$fieldType][$signed];
         }
-        
+
         return false;
     }
 
@@ -1063,4 +1075,3 @@ class DynamicField {
 
     ////////////////////////////END BACKWARDS COMPATIBILITY MODE FOR PRE 5.0 MODULES\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 }
-

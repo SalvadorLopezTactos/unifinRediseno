@@ -135,13 +135,15 @@
         var lang = app.lang.getLanguage();
         var module = app.controller.context.get('module');
         var route = app.controller.context.get('layout');
+        var products = app.user.get('products').join(',');
 
         var params = {
             edition: serverInfo.flavor,
             version: serverInfo.version,
             lang: lang,
             module: module,
-            route: route
+            route: route,
+            products: products
         };
 
         if (params.route === 'records') {
@@ -158,7 +160,7 @@
 
         params = this.sanitizeUrlParams(params);
 
-        var url = 'http://www.sugarcrm.com/crm/product_doc.php?' + $.param(params);
+        var url = 'https://www.sugarcrm.com/crm/product_doc.php?' + $.param(params);
 
         return '<a href="' + url + '" target="_blank">';
     }

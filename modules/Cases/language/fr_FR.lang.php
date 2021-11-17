@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Tableau de bord de la liste de Tickets',
     'LBL_CASES_RECORD_DASHBOARD' => 'Tableau de bord de l&#39;enregistrement de Tickets',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Détails du ticket',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Tickets',
 
 	'ERR_DELETE_RECORD'					=> 'Vous devez spécifier un ID pour toute suppression.',
 	'LBL_ACCOUNT_ID'					=> 'Compte (ID)',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Afficher dans le portail',
 	'LBL_CREATE_KB_DOCUMENT' => 'Créer un article',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Base de connaissances',
+    'LBL_REQUEST_CLOSE' => 'Demande de clôture',
+    'LBL_REQUEST_CLOSE_DATE' => 'Date de la demande de clôture',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Demande de clôture',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Envoyer une demande de clôture pour ce ticket',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Souhaitez-vous demander la clôture de ce ticket ?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Les tickets dont j&#39;ai demandé la clôture',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Les tickets dont j&#39;ai demandé la clôture',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Les tickets dont j&#39;ai demandé la clôture',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Liste des tickets dont j&#39;ai demandé la clôture',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Affiche une liste des tickets assignés dont la clôture a été demandée',
 
     'LBL_CREATED_USER' => 'Créé par',
     'LBL_MODIFIED_USER' => 'Modifié par',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Assigné à',
     'LBL_EXPORT_TEAM_COUNT' => 'Nb. équipes',
     'LBL_CHANGETIMERS' => 'Modifier les minuteries',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Achats',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Historique des emails des contacts liés',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Par exemple, vous pourriez l&#39;utiliser pour trouver un ticket que vous avez déclaré préalablement.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Si vous souhaitez ouvrir un demande, vous pouvez cliquer ici pour déclarer un nouveau ticket.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'En cliquant ici vous pouvez revenir sur cette page à tout moment.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interactions entre les tickets',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notes',
 
@@ -149,5 +161,5 @@ Pour créer un enregistrement {{module_name}}, les étapes suivantes sont néces
 
     'LBL_SLA_DETAILS' => 'Détails SLA',
     'LBL_HOURS' => 'Heures',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'Statut',
 );

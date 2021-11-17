@@ -33,6 +33,19 @@ class PortalDashboardHelper
         $platform = $_SESSION['platform'] ?? 'base';
         if ($platform !== 'portal' && isset($args[0]) && $args[0] instanceof SugarQuery) {
             $args[0]->where()->notIn('id', self::$portalDashboards);
+
+            // Adjust the limit of the query to compensate for the removed records
+            if (!empty($args[1]['id_query']) && $args[1]['id_query'] instanceof SugarQuery) {
+                $oldLimit = $args[1]['id_query']->limit;
+                if (isset($oldLimit)) {
+                    $args[1]['id_query']->limit($oldLimit + count(self::$portalDashboards));
+                }
+            } else {
+                $oldLimit = $args[0]->limit;
+                if (isset($oldLimit)) {
+                    $args[0]->limit($oldLimit + count(self::$portalDashboards));
+                }
+            }
         }
     }
 

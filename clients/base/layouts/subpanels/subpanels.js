@@ -108,7 +108,6 @@
                 axis: 'y',
                 containment: this.$el,
                 handle: '[data-sortable-subpanel=true]',
-                helper: 'clone',
                 tolerance: 'pointer',
                 scrollSensitivity: 50,
                 scrollSpeed: 15,
@@ -213,7 +212,11 @@
      */
     _pruneHiddenComponents: function(components) {
         var hiddenSubpanels = app.metadata.getHiddenSubpanels();
-        var visibleSubpanels = _.filter(components, function(component){
+        var visibleSubpanels = _.filter(components, function(component) {
+            if (!component || !component.context) {
+                app.logger.error('Unable to load subpanel component: component or context is missing');
+                return false;
+            }
             var relatedModule = app.data.getRelatedModule(this.module, component.context.link);
             return _.isEmpty(_.find(hiddenSubpanels, function(hiddenPanel){
                 if (relatedModule !== false) {

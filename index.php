@@ -13,7 +13,6 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
 
 define('ENTRY_POINT_TYPE', 'gui');
 include ('include/MVC/preDispatch.php');
-$startTime = microtime(true);
 require_once('include/entryPoint.php');
 ob_start();
 

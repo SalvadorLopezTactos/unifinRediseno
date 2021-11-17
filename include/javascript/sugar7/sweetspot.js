@@ -116,7 +116,8 @@
                     };
 
                     if (action.idm_mode_link && app.metadata.getConfig().idmModeEnabled) {
-                        actionObj.route = action.idm_mode_link;
+                        actionObj.route = action.idm_mode_link +
+                            '&user_hint=' + encodeURIComponent(app.utils.createUserSrn(app.user.id));
                         actionObj.openwindow = true;
                     }
 

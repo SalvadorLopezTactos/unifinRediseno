@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_TARGETS_LIST_DASHBOARD' => 'Електронно табло със списък на задачите',
   'LBL_TARGETS_RECORD_DASHBOARD' => 'Електронно табло със запис на Целевите клиенти',
+  'LBL_PROSPECTS_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на цели',
 
   'LBL_MODULE_NAME' => 'Целеви клиенти',
   'LBL_MODULE_NAME_SINGULAR' => 'Целеви клиент',

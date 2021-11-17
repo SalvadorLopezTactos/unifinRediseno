@@ -33,7 +33,6 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             'Zend',
             'include/nusoap',
             'include/oauth2-php',
-            'include/pclzip',
             'include/tcpdf',
             'include/ytree',
             'include/SugarSearchEngine/Elastic/Elastica',

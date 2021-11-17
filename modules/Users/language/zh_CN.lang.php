@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => '您输入的密码不符合密码要求，请再试一遍。',
 	'ERR_USER_INFO_NOT_FOUND'			=> '未找到用户信息',
     'ERR_USER_NAME_EXISTS'              => '用户名 {0} 已存在。不允许使用重复的用户名。请将其更改为唯一的用户名。',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => '“Sugar Hint” 许可证必须与其他兼容的许可证类型一起保存',
 	'ERR_USER_IS_LOCKED_OUT'			=> '当前用户已被锁在 Sugar 应用程序外，无法使用现有密码登录。',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => '仅通过外部验证的用户不能使用 Sugar 凭据登录',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> '收件人电子邮件地址',
 	'ERR_SERVER_STATUS'					=> '您的服务器状态',
 	'ERR_SERVER_SMTP_EMPTY'				=> '系统无法发送邮件给用户。请到 <a href="index.php?module=EmailMan&action=config">电子邮件设置</a>检查系统发信配置。',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => '必须在 <a href="{0}" target="_blank">SugarCloud 设置</a>中创建用户。',
 
     'LBL_EMAIL_ADDRESS'                 => '电子邮件地址',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => '预测',
     'LBL_WORKSHEETS'                    => '工作表',
 	'LBL_CALENDARS'                     => '日历',
+    'LBL_SHIFTS'                        => '班次',
+    'LBL_SHIFT_EXCEPTIONS'              => '班次异常',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => '当有记录指派给您的时候，接收电子邮件通知。',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => '在指派的时候发送电子邮件',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => '当有人在评论日志条目中提及您时，您会收到一封电子邮件通知。',
+    'LBL_SEND_EMAIL_ON_MENTION'         => '提及时发送电子邮件',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => '选择字段名称在记录视图中的显示方式。选择“字段值旁边”以获得更紧凑的记录视图。',
     'LBL_FIELD_NAME_PLACEMENT'          => '字段名称布置',
     'LBL_ABOVE_FIELD_VALUE'             => '字段值上方',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => '许可证类型',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar 服务',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar 销售',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> '为电话和会议的提醒设置默认值。使用 Sugar 为所有受邀者显示弹出式通知。电子邮件提醒发送给所有受邀者。',
 	'LBL_REMINDER'						=> '提醒',
 	'LBL_REMINDER_POPUP' => '弹出',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => '此会话已结束，因为另一个会话在相同的用户名下已启动。',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> '记录重新分配',
-	'LBL_REASS_DESC_PART1'				=> '选择包含要从特定用户重新分配给另一个用户的记录的模块。<br/> <br/>                                                            单击下一步，在每个选定的模块中查看的将更新的记录数。                                                            单击取消退出该页面不重新分配的任何记录。',
+    'LBL_REASS_DESC_PART1'              => '选择包含要从特定用户重新分配给另一个用户的记录的模块。<br/> <br/>                                                            单击下一步，在每个选定的模块中查看的将更新的记录数。                                                            单击取消退出该页面不重新分配的任何记录。',
         'LBL_REASS_DESC_PART2'=>                    '选择哪些模块，用以调动期间运行工作流、 发送分配通知和做审计跟踪。单击下一步继续，并将记录重新分派。单击重新启动以重新开始。',
 	'LBL_REASS_STEP2_TITLE'				=> '团队重新分配',
 	'LBL_REASS_STEP2_DESC'				=> '下面列出的团队在用户团队中可用，但是并不在用户团队。在从用户团队中的所有的纪录将不会显示到用户团队，除非映射团队价值。',
@@ -624,7 +628,7 @@ $mod_strings = array (
     'LBL_DETAIL' => '用户配置文件',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        '请访问 <a href="%s" target="_blank">SugarCloud 设置</a> 对只读字段进行变更。',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         '如果需要更改只读字段，请联系您的 Sugar 管理员。',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

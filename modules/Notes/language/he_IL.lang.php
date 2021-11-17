@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'לוח מחוונים של רשימת הערות',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות הערות',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס פתקים',
 
+    'LBL_RELATED_CONTACT' => 'איש קשר קשור',
     'ERR_DELETE_RECORD' => 'You must specify a record number to delete the account.',
     'LBL_ACCOUNT_ID' => 'זהות חשבון:',
     'LBL_CASE_ID' => 'זהות אירוע:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'זהות איש קשר:',
     'LBL_CONTACT_NAME' => 'איש קשר:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'הערות',
+    'LBL_ATTACHMENTS' => 'קבצים מצורפים',
+    'LBL_ATTACHMENT_FLAG' => 'הוא קובץ מצורף',
     'LBL_DESCRIPTION' => 'תיאור',
     'LBL_EMAIL_ADDRESS' => 'כתובת דואר אלקטרוני:',
     'LBL_EMAIL_ATTACHMENT' => 'צרופה לדואר אלקטרוני',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'צרופות',
     'LBL_NOTE' => 'פתק:',
     'LBL_OPPORTUNITY_ID' => 'זהות ההזדמנות:',
+    'LBL_NOTE_PARENT_ID' => 'מזהה אב-פתק:',
     'LBL_PARENT_ID' => 'מזהה אב:',
     'LBL_PARENT_TYPE' => 'סוג הורה',
     'LBL_EMAIL_TYPE' => 'סוג דוא"ל',

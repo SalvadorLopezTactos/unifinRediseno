@@ -114,9 +114,6 @@ class GroupedTabStructure
 			}
         }
 
-//        _pp($retStruct);
         return $retStruct;
     }
 }
-
-?>

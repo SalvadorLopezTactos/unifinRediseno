@@ -72,36 +72,6 @@ class ViewPlugins extends ViewAjax
 
 		$str .= "</table>";
 
-        $pluginsCat = array(
-					"Lotus" => array(
-						"name" => $app_strings['LBL_PLUGIN_LOTUS_NAME'],
-						"desc" => $app_strings['LBL_PLUGIN_LOTUS_DESC'],
-						),
-					);
-		$str .= '<table cellpadding="0" cellspacing="0" class="detail view">';
-        $str .= "<tr><th>";
-		$str .= "<h4>{$app_strings['LBL_PLUGINS_LOTUS_TITLE']}</h4>";
-        $str .= "</th></tr>";
-
-        $str .= "<tr><td style='padding-left: 10px;'>{$app_strings['LBL_PLUGINS_DESC']}</td></tr>";
-
-		foreach($pluginsCat as $key => $value ){
-            $str .= "<tr><td valign='top' width='80' style='padding-right: 10px; padding-left: 10px;'>";
-            $str .= "<b>{$value['name']}</b><br>";
-			$str .= $value['desc'];
-			$str .= '<ul id="pluginList">';
-
-			foreach($plugins as $plugin){
-				$raw_name = urlencode($plugin['raw_name']);
-				$display_name = str_replace('_', ' ' , $plugin['formatted_name']);
-				if(strpos($display_name,$key)!==false) {
-					$str .= "<li><a href='index.php?module=Home&action=DownloadPlugin&plugin=$raw_name'>$display_name</a></li>";
-				}
-			}
-			$str .= '</ul></td></tr>';
-		}
-
-		$str .= "</table>";
 		echo $str;
     }
 }

@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'قوالب البريد الإلكتروني للعملية',
     'LBL_MODULE_NAME_SINGULAR' => 'قالب البريد الإلكتروني للعملية',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم قوالب البريد الإلكتروني للعمليات',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'لوحة معلومات سجل قوالب بريد إلكتروني العمليات',
     'LNK_LIST' => 'عرض قوالب البريد الإلكتروني للعملية',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'إنشاء قالب البريد الإلكتروني للعملية',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'استيراد قوالب البريد الإلكتروني للعملية',

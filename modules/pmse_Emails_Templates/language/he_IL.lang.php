@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'תבניות של דוא"ל של תהליכים',
     'LBL_MODULE_NAME_SINGULAR' => 'תבנית מייל תהליך',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס של תבניות דוא"ל של תהליכים',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות מסוג תבניות דוא"ל',
     'LNK_LIST' => 'צפה בתבניות מייל תהליך',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'צור תבנית מייל תהליך',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'ייבא תבניות מייל תהליך',

@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Informačný panel so zoznamom stretnutí',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Informačný panel so záznamom stretnutí',
+    'LBL_LEAD_GUESTS' => 'Hostia záujemci',
+    'LBL_CONTACT_GUESTS' => 'Hostia kontakty',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na schôdzky',
 
 	'ERR_DELETE_RECORD' => 'Ak chcete odstrániť schôdzku, musíte zadať číslo záznamu.',
 	'LBL_ACCEPT_THIS'=>'Súhlasíte?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Smer',
 	'LBL_LIST_DUE_DATE'=>'Do dátumu',
 	'LBL_LIST_FORM_TITLE' => 'Zoznam schôdzok',
-	'LBL_LIST_MY_MEETINGS' => 'Moje schôdzky',
+    'LBL_LIST_MY_MEETINGS' => 'Moje schôdzky',
     'LBL_MY_SCHEDULED_MEETINGS' => 'Moje naplánované schôdzky',
+    'LBL_GUEST_MEETINGS' => 'Moje schôdzky ako hosťa',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Naplánované schôdzky ako hosťa',
 	'LBL_LIST_RELATED_TO' => 'Súvisiaci s',
 	'LBL_LIST_STATUS'=>'Stav',
 	'LBL_LIST_SUBJECT' => 'Predmet',

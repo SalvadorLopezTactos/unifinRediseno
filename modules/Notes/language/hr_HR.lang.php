@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Nadzorna ploča za popis bilješki',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o bilješkama',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za bilješke',
 
+    'LBL_RELATED_CONTACT' => 'Povezani kontakt',
     'ERR_DELETE_RECORD' => 'Morate navesti broj zapisa da biste izbrisali račun.',
     'LBL_ACCOUNT_ID' => 'ID računa:',
     'LBL_CASE_ID' => 'ID slučaja:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'ID kontakta:',
     'LBL_CONTACT_NAME' => 'Kontakt:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Bilješke',
+    'LBL_ATTACHMENTS' => 'Prilozi',
+    'LBL_ATTACHMENT_FLAG' => 'Jest prilog',
     'LBL_DESCRIPTION' => 'Opis',
     'LBL_EMAIL_ADDRESS' => 'Adresa e-pošte:',
     'LBL_EMAIL_ATTACHMENT' => 'Prilog poruke e-pošte',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Bilješke i prilozi',
     'LBL_NOTE' => 'Bilješka:',
     'LBL_OPPORTUNITY_ID' => 'ID prilike:',
+    'LBL_NOTE_PARENT_ID' => 'Nadređeni ID bilješke:',
     'LBL_PARENT_ID' => 'Nadređeni ID:',
     'LBL_PARENT_TYPE' => 'Nadređena vrsta',
     'LBL_EMAIL_TYPE' => 'Vrsta poruke e-pošte',

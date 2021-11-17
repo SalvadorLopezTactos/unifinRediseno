@@ -11,6 +11,8 @@
  */
 require_once 'vendor/Zend/Service/Amazon/S3.php';
 require_once 'vendor/Zend/Service/Amazon/S3/Stream.php';
+use Psr\Log\LoggerInterface;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 
 /**
  * S3 uploads driver
@@ -51,7 +53,8 @@ class SugarUploadS3 extends UploadStream
             $GLOBALS['log']->fatal("S3 keys are not set!");
             throw new Exception("S3 keys are not set!");
         }
-        // TODO: add location support for buckets
+        Container::getInstance()->get(LoggerInterface::class)
+            ->warning('S3 is deprecated since 10.3.0 and will be removed in future versions of SugarCRM.');
         $this->metadata = array(Zend_Service_Amazon_S3::S3_ACL_HEADER =>Zend_Service_Amazon_S3::S3_ACL_PRIVATE);
         $this->s3 = new Zend_Service_Amazon_S3($GLOBALS['sugar_config']['aws']['aws_key'], $GLOBALS['sugar_config']['aws']['aws_secret']);
         $this->s3->registerAsClient(self::S3_STREAM_NAME);

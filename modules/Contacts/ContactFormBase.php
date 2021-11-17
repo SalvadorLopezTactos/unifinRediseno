@@ -72,246 +72,6 @@ public function getDuplicateQuery($focus, $prefix='')
     return $query;
 }
 
-
-function getWideFormBody($prefix, $mod='',$formname='',  $contact = '', $portal = true){
-
-	if(!ACLController::checkAccess('Contacts', 'edit', true)){
-		return '';
-	}
-
-	if(empty($contact)){
-        $contact = $this->getContact();
-	}
-
-	global $mod_strings;
-	$temp_strings = $mod_strings;
-	if(!empty($mod)){
-		global $current_language;
-		$mod_strings = return_module_language($current_language, $mod);
-	}
-	global $app_strings;
-	global $current_user;
-	global $app_list_strings;
-	$primary_address_country_options = get_select_options_with_id($app_list_strings['countries_dom'], $contact->primary_address_country);
-	$lbl_required_symbol = $app_strings['LBL_REQUIRED_SYMBOL'];
-	$lbl_first_name = $mod_strings['LBL_FIRST_NAME'];
-	$lbl_last_name = $mod_strings['LBL_LAST_NAME'];
-	$lbl_phone = $mod_strings['LBL_OFFICE_PHONE'];
-	$lbl_address =  $mod_strings['LBL_PRIMARY_ADDRESS'];
-
-	if (isset($contact->assigned_user_id)) {
-		$user_id=$contact->assigned_user_id;
-	} else {
-		$user_id = $current_user->id;
-	}
-	if (isset($contact->team_id)) {
-		$team_id=$contact->team_id;
-	} else {
-		$team_id=$current_user->default_team;
-	}
-
-	//Retrieve Email address and set email1, email2
-	$sugarEmailAddress = BeanFactory::newBean('EmailAddresses');
-	$sugarEmailAddress->handleLegacyRetrieve($contact);
-  	if(!isset($contact->email1)){
-    	$contact->email1 = '';
-    }
-    if(!isset($contact->email2)){
-    	$contact->email2 = '';
-    }
-    if(!isset($contact->email_opt_out)){
-    	$contact->email_opt_out = '';
-    }
-	$lbl_email_address = $mod_strings['LBL_EMAIL_ADDRESS'];
-	$salutation_options=get_select_options_with_id($app_list_strings['salutation_dom'], $contact->salutation);
-
-	if (isset($contact->lead_source)) {
-		$lead_source_options=get_select_options_with_id($app_list_strings['lead_source_dom'], $contact->lead_source);
-	} else {
-		$lead_source_options=get_select_options_with_id($app_list_strings['lead_source_dom'], '');
-	}
-
-	$form="";
-	$form .=  "<input type=hidden name=".$prefix."team_id value=".$team_id.">";
-
-
-	if ($formname == 'ConvertProspect') {
-		$lead_source_label = "<td scope='row'>&nbsp;</td>";
-		$lead_source_field = "<td >&nbsp;</td>";
-	} else {
-		$lead_source_label = "<td scope='row' nowrap>${mod_strings['LBL_LEAD_SOURCE']}</td>";
-		$lead_source_field = "<td ><select name='${prefix}lead_source'>$lead_source_options</select></td>";
-	}
-
-
-global $timedate;
-$birthdate = '';
-if(!empty($_REQUEST['birthdate'])){
-    	$birthdate=$_REQUEST['birthdate'];
-   }
-
-
-$jsCalendarImage = SugarThemeRegistry::current()->getImageURL('jscalendar.gif');
-$ntc_date_format = $timedate->get_user_date_format();
-$cal_dateformat = $timedate->get_cal_date_format();
-$lbl_required_symbol = $app_strings['LBL_REQUIRED_SYMBOL'];
-
-$form .= <<<EOQ
-		<input type="hidden" name="${prefix}record" value="">
-		<input type="hidden" name="${prefix}assigned_user_id" value='${user_id}'>
-		<table border='0' celpadding="0" cellspacing="0" width='100%'>
-		<tr>
-		<td nowrap scope='row'>$lbl_first_name</td>
-		<td scope='row'>$lbl_last_name&nbsp;<span class="required">$lbl_required_symbol</span></td>
-		<td scope='row' nowrap>${mod_strings['LBL_TITLE']}</td>
-		<td scope='row' nowrap>${mod_strings['LBL_DEPARTMENT']}</td>
-		</tr>
-		<tr>
-		<td ><select name='${prefix}salutation'>$salutation_options</select>&nbsp;<input name="${prefix}first_name" type="text" value="{$contact->first_name}"></td>
-		<td ><input name='${prefix}last_name' type="text" value="{$contact->last_name}"></td>
-		<td  nowrap><input name='${prefix}title' type="text" value="{$contact->title}"></td>
-		<td  nowrap><input name='${prefix}department' type="text" value="{$contact->department}"></td>
-		</tr>
-		<tr>
-		<td nowrap colspan='4' scope='row'>$lbl_address</td>
-		</tr>
-
-		<tr>
-		<td nowrap colspan='4' ><textarea cols='80' rows='2' name='${prefix}primary_address_street'>{$contact->primary_address_street}</textarea></td>
-		</tr>
-
-		<tr>
-		<td scope='row'>${mod_strings['LBL_CITY']}</td>
-		<td scope='row'>${mod_strings['LBL_STATE']}</td>
-		<td scope='row'>${mod_strings['LBL_POSTAL_CODE']}</td>
-		<td scope='row'>${mod_strings['LBL_COUNTRY']}</td>
-		</tr>
-
-		<tr>
-		<td ><input name='${prefix}primary_address_city'  maxlength='100' value='{$contact->primary_address_city}'></td>
-		<td ><input name='${prefix}primary_address_state'  maxlength='100' value='{$contact->primary_address_state}'></td>
-		<td ><input name='${prefix}primary_address_postalcode'  maxlength='100' value='{$contact->primary_address_postalcode}'></td>
-		<td ><input name='${prefix}primary_address_country'  maxlength='100' value='{$contact->primary_address_country}'></td>
-		</tr>
-
-
-		<tr>
-		<td nowrap scope='row'>$lbl_phone</td>
-		<td nowrap scope='row'>${mod_strings['LBL_MOBILE_PHONE']}</td>
-		<td nowrap scope='row'>${mod_strings['LBL_FAX_PHONE']}</td>
-		<td nowrap scope='row'>${mod_strings['LBL_HOME_PHONE']}</td>
-		</tr>
-
-		<tr>
-		<td nowrap ><input name='${prefix}phone_work' type="text" value="{$contact->phone_work}"></td>
-		<td nowrap ><input name='${prefix}phone_mobile' type="text" value="{$contact->phone_mobile}"></td>
-		<td nowrap ><input name='${prefix}phone_fax' type="text" value="{$contact->phone_fax}"></td>
-		<td nowrap ><input name='${prefix}phone_home' type="text" value="{$contact->phone_home}"></td>
-		</tr>
-
-		<tr>
-		<td scope='row' nowrap>${mod_strings['LBL_OTHER_PHONE']}</td>
-		$lead_source_label
-
-		<td scope="row">${mod_strings['LBL_BIRTHDATE']}&nbsp;</td>
-		</tr>
-
-
-		<tr>
-		<td  nowrap><input name='${prefix}phone_other' type="text" value="{$contact->phone_other}"></td>
-		$lead_source_field
-
-		<td  nowrap>
-			<input name='{$prefix}birthdate' onblur="parseDate(this, '$cal_dateformat');" size='12' maxlength='10' id='${prefix}jscal_field' type="text" value="{$birthdate}">&nbsp;
-			<!--not_in_theme!--><img src="{$jsCalendarImage}" alt="{$app_strings['LBL_ENTER_DATE']}"  id="${prefix}jscal_trigger" align="absmiddle">
-		</td>
-		</tr>
-
-EOQ;
-
-$form .= $sugarEmailAddress->getEmailAddressWidgetEditView($contact->id, $_REQUEST['action']=='ConvertLead'?'Leads':'Contacts', false, 'include/SugarEmailAddress/templates/forWideFormBodyView.tpl');
-
-$sugarfield = new SugarFieldText('Text');
-$description_text = $sugarfield->getClassicEditView('description', $contact->description, $prefix, true);
-
-$form .= <<<EOQ
-		<tr>
-		<td nowrap colspan='4' scope='row'>${mod_strings['LBL_DESCRIPTION']}</td>
-		</tr>
-		<tr>
-		<td nowrap colspan='4' >{$description_text}</td>
-		</tr>
-EOQ;
-
-
-
-	//carry forward custom lead fields common to contacts during Lead Conversion
-    $tempContact = $this->getContact();
-
-	if (method_exists($contact, 'convertCustomFieldsForm')) $contact->convertCustomFieldsForm($form, $tempContact, $prefix);
-	unset($tempContact);
-
-$form .= <<<EOQ
-		</table>
-
-		<input type='hidden' name='${prefix}alt_address_street'  value='{$contact->alt_address_street}'>
-		<input type='hidden' name='${prefix}alt_address_city' value='{$contact->alt_address_city}'><input type='hidden' name='${prefix}alt_address_state'   value='{$contact->alt_address_state}'><input type='hidden' name='${prefix}alt_address_postalcode'   value='{$contact->alt_address_postalcode}'><input type='hidden' name='${prefix}alt_address_country'  value='{$contact->alt_address_country}'>
-		<input type='hidden' name='${prefix}do_not_call'  value='{$contact->do_not_call}'>
-		<input type='hidden' name='${prefix}email_opt_out'  value='{$contact->email_opt_out}'>
-EOQ;
-
-	if ($portal == true){
-		if (isset($contact->portal_name)) {
-			$form.="<input type='hidden' name='${prefix}portal_name'  value='{$contact->portal_name}'>";
-		} else {
-			$form.="<input type='hidden' name='${prefix}portal_name'  value=''>";
-		}
-		if (isset($contact->portal_app)) {
-			$form.="<input type='hidden' name='${prefix}portal_app'  value='{$contact->portal_app}'>";
-		} else {
-			$form.="<input type='hidden' name='${prefix}portal_app'  value=''>";
-		}
-
-
-		if(!empty($contact->portal_name) && !empty($contact->portal_app)){
-			$form .= "<input name='${prefix}portal_active' type='hidden' size='25'  value='1' >";
-		}
-
-	    if(isset($contact->portal_password)){
-	        $form.="<input type='password' name='${prefix}portal_password1'  value='{$contact->portal_password}'>";
-	        $form.="<input type='password' name='${prefix}portal_password'  value='{$contact->portal_password}'>";
-	        $form .= "<input name='${prefix}old_portal_password' type='hidden' size='25'  value='{$contact->portal_password}' >";
-	    }else{
-	        $form.="<input type='password' name='${prefix}portal_password1'  value=''>";
-	        $form.="<input type='password' name='${prefix}portal_password'  value=''>";
-	        $form .= "<input name='${prefix}old_portal_password' type='hidden' size='25'  value='' >";
-	    }
-	}
-
-$form .= <<<EOQ
-			<script type="text/javascript">
-				Calendar.setup ({
-				inputField : "{$prefix}jscal_field", daFormat : "$cal_dateformat", ifFormat : "$cal_dateformat", showsTime : false, button : "{$prefix}jscal_trigger", singleClick : true, step : 1, weekNumbers:false
-				});
-			</script>
-EOQ;
-
-
-
-	$javascript = new javascript();
-	$javascript->setFormName($formname);
-	$javascript->setSugarBean($this->getContact());
-	$javascript->addField('email1','false',$prefix);
-	$javascript->addField('email2','false',$prefix);
-	$javascript->addRequiredFields($prefix);
-
-	$form .=$javascript->getScript();
-	$mod_strings = $temp_strings;
-
-
-	return $form;
-}
-
 function getFormBody($prefix, $mod='', $formname=''){
 	if(!ACLController::checkAccess('Contacts', 'edit', true)){
 		return '';
@@ -461,8 +221,7 @@ function handleSave($prefix, $redirect=true, $useRequired=false){
 			ACLController::displayNoAccess(true);
 			sugar_cleanup(true);
 	}
-	if($_REQUEST['action'] != 'BusinessCard' && $_REQUEST['action'] != 'ConvertLead' && $_REQUEST['action'] != 'ConvertProspect')
-	{
+        if ($_REQUEST['action'] != 'BusinessCard' && $_REQUEST['action'] != 'ConvertProspect') {
 		if (isset($_POST[$prefix.'sync_contact'])){
 		    $focus->sync_contact = $_POST[$prefix.'sync_contact'];
 		}
@@ -644,45 +403,50 @@ function handleSave($prefix, $redirect=true, $useRequired=false){
 	}
 }
 
-function handleRedirect($return_id){
-    $return_module = InputValidation::getService()->getValidInputPost(
-        'return_module',
-        'Assert\Mvc\ModuleName',
-        'Contacts'
-    );
-    $return_action = InputValidation::getService()->getValidInputPost(
-        'return_action',
-        '',
-        'DetailView'
-    );
-    $return_id = InputValidation::getService()->getValidInputPost(
-        'return_id',
-        'Assert\Guid',
-        ''
-    );
+    public function handleRedirect($return_id)
+    {
+        $return_module = InputValidation::getService()->getValidInputPost(
+            'return_module',
+            'Assert\Mvc\ModuleName',
+            'Contacts'
+        ) ?: 'Contacts';
 
-    if ($_REQUEST['return_module'] == 'Emails') {
-        $return_action = InputValidation::getService()->getValidInputRequest('return_action', '');
+        $return_action = InputValidation::getService()->getValidInputPost(
+            'return_action',
+            '',
+            'DetailView'
+        ) ?: 'DetailView';
 
-	}
-    // if we create a new record "Save", we want to redirect to the DetailView
-    elseif ($_REQUEST['action'] == 'Save' && $return_module != 'Home') {
-        $return_action = 'DetailView';
+        $return_id = InputValidation::getService()->getValidInputPost(
+            'return_id',
+            'Assert\Guid',
+            ''
+        ) ?: $return_id;
+
+        if ($_REQUEST['return_module'] === 'Emails') {
+            $return_action = InputValidation::getService()->getValidInputRequest('return_action', '');
+        } // if we create a new record "Save", we want to redirect to the DetailView
+        elseif ($_REQUEST['action'] === 'Save' && $return_module !== 'Home') {
+            $return_action = 'DetailView';
+        }
+
+        //eggsurplus Bug 23816: maintain VCR after an edit/save. If it is a duplicate then don't worry about it. The offset is now worthless.
+        $queryData = [
+            'action' => $return_action,
+            'module' => $return_module,
+            'record' => $return_id,
+        ];
+        if (isset($_REQUEST['offset']) && empty($_REQUEST['duplicateSave'])) {
+            $queryData['offset'] = $_REQUEST['offset'];
+        }
+        $redirect_url = 'index.php?' . http_build_query($queryData);
+
+        if (!empty($_REQUEST['ajax_load'])) {
+            echo '<script>SUGAR.ajaxUI.loadContent(' . json_encode($redirect_url, JSON_HEX_TAG) . ');</script>';
+        } else {
+            header("Location: " . $redirect_url);
+        }
     }
-
-	//eggsurplus Bug 23816: maintain VCR after an edit/save. If it is a duplicate then don't worry about it. The offset is now worthless.
-    $redirect_url = "index.php?action=" . urlencode($return_action) . "&module=$return_module&record=$return_id";
- 	if(isset($_REQUEST['offset']) && empty($_REQUEST['duplicateSave'])) {
- 	    $redirect_url .= "&offset=".$_REQUEST['offset'];
- 	}
-
-    if(!empty($_REQUEST['ajax_load'])){
-        echo "<script>SUGAR.ajaxUI.loadContent('$redirect_url');</script>\n";
-    }
-    else {
-        header("Location: ". $redirect_url);
-    }
-}
 
     /**
     * @return Contact

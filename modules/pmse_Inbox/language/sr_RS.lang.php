@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'Lista procesa',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'Neprisutni procesi',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za procese',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Kontrolna tabla za zapise o procesima',
+
     'LBL_CAS_ID' => 'Broj procesa',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Nepoznato (prema Id korisnika:%s')",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "zadatak je bio",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Pregled dizajna procesa',
     'LBL_PROJECT_RUN_ORDER' => 'Primeni redosled',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => 'Trenutna aktivnost',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => 'Datum izmene',
+    'LBL_DATE_ENTERED' => 'Datum kreiranja',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'Želite li sigurno da zatražite ovaj proces?',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'Proces je uspešno zatražen',
 );
 

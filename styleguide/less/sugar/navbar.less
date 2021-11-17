@@ -365,7 +365,15 @@
 
     /*This is the actual content in nav item*/
     .btn-group {
+      display: inline-flex;
+      align-items: center;
       margin: 0;
+
+      &.home {
+        display: inline-block;
+        width: 44px;
+        max-width: 44px;
+      }
 
       /*This is the link text or image*/
       & > .dropdown-toggle {
@@ -495,10 +503,11 @@
 .module-list .megamenu {
   max-height: 44px;
   white-space: nowrap;
+  display: flex;
 
   > .dropdown {
     float: none;
-    display: inline-block;
+    display: flex;
 
     &.hidden {
       display: none;
@@ -589,6 +598,12 @@
       line-height: 26px;
       top: 0;
       font-size: 16px;
+    }
+  }
+
+  .profileactions-change-password {
+    .fa-lock {
+      text-indent: -9px;
     }
   }
 

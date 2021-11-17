@@ -31,6 +31,7 @@ $mod_strings = array(
  'LBL_REMOVE' => '제거하기',
     //define label(s) to be used for overriding local values during import/export
     'LBL_EXPORT_MODIFIED_BY_NAME' => '이름으로 수정',
+    'LBL_EXPORT_CREATED_BY_NAME' => '이름에 의해 생성',
 
     'LBL_COMMENTLOG' => 'Comment Log',
 );

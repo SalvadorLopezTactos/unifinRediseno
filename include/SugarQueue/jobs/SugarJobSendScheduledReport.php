@@ -113,10 +113,6 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
                 $reportTime = $timedate->getNow();
                 $reportTime = $timedate->asUser($reportTime) . ' ' . $reportTime->format('T');
                 $reportName = empty($savedReport->name) ? "Report" : $savedReport->name;
-                // set the subject of the email
-                $subject = $mod_strings["LBL_SUBJECT_SCHEDULED_REPORT"] . $reportName .
-                    $mod_strings["LBL_SUBJECT_AS_OF"] . $reportTime;
-                $mailer->setSubject($subject);
 
                 // add the recipient
                 $mailer->addRecipientsTo(new EmailIdentity($recipientEmailAddress, $recipientName));
@@ -130,20 +126,40 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
                 $attachment = new Attachment($reportFilename, $attachmentName, Encoding::Base64, "application/pdf");
                 $mailer->addAttachment($attachment);
 
-                // set the body of the email
-                $body = $mod_strings["LBL_HELLO"];
+                $emailConfig = SugarConfig::getInstance()->get('emailTemplate');
+                $templateID = $emailConfig['‌ReportSchedule'] ?? '';
 
-                if ($recipientName != "") {
-                    $body .= " {$recipientName}";
+                // Pull the email template if it exists
+                $emailTemplate = BeanFactory::getBean('EmailTemplates', $templateID);
+
+                if (!empty($emailTemplate) && $emailTemplate->id) {
+                    $variables = [
+                        '$assigned_user' => !empty($recipientName) ? $recipientName : '',
+                        '$report_name' => !empty($reportName) ? $reportName : '',
+                        '$report_time' => !empty($reportTime) ? $reportTime : '',
+                    ];
+                    $subject = str_replace(array_keys($variables), array_values($variables), $emailTemplate->subject);
+                    $body = str_replace(array_keys($variables), array_values($variables), $emailTemplate->body);
+                } else {
+                    // set the subject of the email
+                    $subject = $mod_strings["LBL_SUBJECT_SCHEDULED_REPORT"] . $reportName .
+                        $mod_strings["LBL_SUBJECT_AS_OF"] . $reportTime;
+
+                    // set the body of the email
+                    $body = $mod_strings["LBL_HELLO"];
+
+                    if ($recipientName != "") {
+                        $body .= " {$recipientName}";
+                    }
+
+                    $body .= ",\n\n" .
+                        $mod_strings["LBL_SCHEDULED_REPORT_MSG_INTRO"] .
+                        "\n\n" .
+                        $mod_strings["LBL_SCHEDULED_REPORT_MSG_BODY1"] .
+                        $reportName . "\n\n" .
+                        $mod_strings["LBL_SCHEDULED_REPORT_MSG_BODY2"] .
+                        $reportTime;
                 }
-
-                $body .= ",\n\n" .
-                    $mod_strings["LBL_SCHEDULED_REPORT_MSG_INTRO"] .
-                    "\n\n" .
-                    $mod_strings["LBL_SCHEDULED_REPORT_MSG_BODY1"] .
-                    $reportName . "\n\n" .
-                    $mod_strings["LBL_SCHEDULED_REPORT_MSG_BODY2"] .
-                    $reportTime;
 
                 $textOnly = EmailFormatter::isTextOnly($body);
                 if ($textOnly) {
@@ -153,6 +169,7 @@ class SugarJobSendScheduledReport implements RunnableSchedulerJob
                     $mailer->setTextBody($textBody);
                     $mailer->setHtmlBody($body);
                 }
+                $mailer->setSubject($subject);
 
                 $GLOBALS["log"]->debug("-----> Sending PDF via Email to [ {$recipientEmailAddress} ]");
                 $mailer->send();

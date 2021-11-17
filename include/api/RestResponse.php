@@ -40,6 +40,13 @@ class RestResponse extends Zend_Http_Response
     protected $filename;
 
     /**
+     * Headers set by the PHP engine outside of this response which need to be removed.
+     *
+     * @var array<string,null>
+     */
+    protected $removeHeaders = [];
+
+    /**
      * Flag for sending body or not
      * @var bool
      */
@@ -77,6 +84,15 @@ class RestResponse extends Zend_Http_Response
         // TODO: check if they are required
         //$header = ucwords(strtolower($header));
         $this->headers[$header] = $info;
+        return $this;
+    }
+
+    /**
+     * Remove a response header
+     */
+    public function removeHeader(string $name): self
+    {
+        $this->removeHeaders[$name] = null;
         return $this;
     }
 
@@ -222,6 +238,11 @@ class RestResponse extends Zend_Http_Response
         if($this->headersSent()) {
     		return false;
     	}
+
+        foreach ($this->removeHeaders as $header => $_) {
+            header_remove($header);
+        }
+
     	if($this->code != 200) {
     	    $text = self::responseCodeAsText($this->code, $this->version != '1.0');
     	    $this->sendHeader("HTTP/{$this->version} {$this->code} {$text}");
@@ -257,14 +278,15 @@ class RestResponse extends Zend_Http_Response
 
         //Override cache control to ensure the etag is respected by the browser
         $this->setHeader('Cache-Control', "max-age={$cache_age}, private");
-        $this->setHeader('Expires', "");
-        $this->setHeader('Pragma', "");
+
+        // Remove the session cache limiter headers which may conflict with the max-age above
+        // see https://php.net/session-cache-limiter
+        $this->removeHeader('Expires');
+        $this->removeHeader('Pragma');
 
         if (isset($this->server_data["HTTP_IF_NONE_MATCH"]) && $etag == $this->server_data["HTTP_IF_NONE_MATCH"]) {
             // Same data, clean it up and return 304
-            $this->body = '';
             $this->code = 304;
-            $this->type = self::RAW;
             $this->shouldSendBody = false;
             // disable gzip so that apache won't add compression header to response body
             @ini_set('zlib.output_compression', 'Off');
@@ -334,10 +356,17 @@ class RestResponse extends Zend_Http_Response
             $this->sendFile($this->filename);
             return;
         }
-        $response = $this->processContent();
-        $this->sendHeaders();
+
+        $body = null;
+
         if ($this->shouldSendBody) {
-            echo $response;
+            $body = $this->processContent();
+        }
+
+        $this->sendHeaders();
+
+        if ($this->shouldSendBody) {
+            echo $body;
         }
     }
 

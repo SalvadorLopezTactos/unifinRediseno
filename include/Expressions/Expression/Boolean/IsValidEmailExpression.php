@@ -13,8 +13,6 @@
 /**
  * <b>isValidEmail(String email)</b><br/>
  * Returns true if <i>email</i> is in a valid email address format. <br/>
- * ex: <i>isValidEmail("invalid@zxcv")</i> = false,<br/>
- * <i>isValidEmail("good@test.com")</i> = true
  */
 class IsValidEmailExpression extends BooleanExpression {
 	/**

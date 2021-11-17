@@ -95,6 +95,15 @@ class IBMDB2Manager  extends DBManager
         'tinyint'  => array('min_value'=>-32767, 'max_value'=>32767),
     );
 
+    /**
+     * Field's max size
+     * @var array
+     */
+    protected $max_size = [
+        'text' => 65535,
+        'html' => 65535,
+    ];
+
 	/**+
 	 * @var array
 	 */
@@ -320,7 +329,7 @@ class IBMDB2Manager  extends DBManager
         if (empty($tablename)) {
             $this->logger->error(__METHOD__ . ' called with an empty tablename argument');
             return array();
-        }        
+        }
 
         $query = 'SELECT COLNAME, TYPENAME, LENGTH, SCALE, DEFAULT, NULLS, GENERATED
 FROM SYSCAT.COLUMNS
@@ -606,8 +615,9 @@ WHERE TABSCHEMA = ?
 	{
 		global $sugar_config;
 
-		if(is_null($configOptions))
-			$configOptions = $sugar_config['dbconfig'];
+        if (is_null($configOptions)) {
+            $configOptions = $sugar_config['dbconfig'];
+        }
 
 
 		if($this->getOption('persistent'))
@@ -686,6 +696,7 @@ WHERE TABSCHEMA = ?
         '%Y-%m-%d' => 'YYYY-MM-DD',
         '%Y-%m' => 'YYYY-MM',
         '%Y' => 'YYYY',
+        '%x' => 'IYYY',
         '%v' => 'IW',
     );
 
@@ -832,7 +843,7 @@ public function convert($string, $type, array $additional_parameters = array())
 	/**~
 	 * @see DBManager::oneColumnSQLRep()
 	 */
-	protected function oneColumnSQLRep($fieldDef, $ignoreRequired = false, $table = '', $return_as_array = false)
+    protected function oneColumnSQLRep($fieldDef, $ignoreRequired = false, $table = '', $return_as_array = false, $action = null)
 	{
 		if(isset($fieldDef['name'])){
 			if(stristr($this->getFieldType($fieldDef), 'decimal') && isset($fieldDef['len'])) {
@@ -840,7 +851,7 @@ public function convert($string, $type, array $additional_parameters = array())
 			}
 		}
 		//May need to add primary key and sequence stuff here
-		$ref = parent::oneColumnSQLRep($fieldDef, $ignoreRequired, $table, true);
+        $ref = parent::oneColumnSQLRep($fieldDef, $ignoreRequired, $table, true, $action);
 
 		$matches = array();
 		if(!empty($fieldDef['len']) &&
@@ -1030,13 +1041,11 @@ public function convert($string, $type, array $additional_parameters = array())
 	 */
 	public function getAutoIncrement($table, $field_name)
 	{
-		$seqName = $this->_getSequenceName($table, $field_name, true);
-		// NOTE that we are not changing the sequence nor can we guarantee that this will be the next value
-		$currval = $this->getOne("SELECT PREVVAL FOR $seqName from SYSIBM.SYSDUMMY1");
-		if (!empty($currval))
-			return $currval + 1 ;
-		else
-			return "";
+        $currval = $this->getOne("SELECT max($field_name) currval FROM $table");
+        if (!empty($currval)) {
+            return $currval + 1;
+        }
+        return "";
 	}
 
 	/**+
@@ -1072,7 +1081,7 @@ public function convert($string, $type, array $additional_parameters = array())
 	/**+
 	 * @see DBManager::setAutoIncrement()
 	 */
-    protected function setAutoIncrement($table, $field_name, array $platformOptions = [])
+    protected function setAutoIncrement($table, $field_name, array $platformOptions = [], $action = null)
 	{
 		$this->deleteAutoIncrement($table, $field_name);
         if (!empty($platformOptions['cache'])) {
@@ -1230,12 +1239,13 @@ INNER JOIN SYSCAT."INDEXCOLUSE" c
 
 	/**~
 	 * @see DBManager::add_drop_constraint()
+     * @inheritDoc
 	 * Note: Tested all constructs pending feedback from IBM on text search index creation from code
 	 */
-	public function add_drop_constraint($table, $definition, $drop = false)
+    public function add_drop_constraint(string $table, array $definition, bool $drop = false): string
 	{
 		$type         = $definition['type'];
-		$fields       = implode(',',$definition['fields']);
+        $fieldsListSQL = implode(',', $definition['fields']);
 		$name         = $definition['name'];
 		$sql          = '';
 
@@ -1247,28 +1257,26 @@ INNER JOIN SYSCAT."INDEXCOLUSE" c
 			if ($drop)
 				$sql = "DROP INDEX {$name}";
 			else
-				$sql = "CREATE INDEX {$name} ON {$table} ({$fields})";
+                $sql = "CREATE INDEX {$name} ON {$table} ({$fieldsListSQL})";
 			break;
 		// constraints as indices
 		case 'unique':
-			// NOTE: DB2 doesn't allow null columns in UNIQUE constraint. Hence
-			// we will not enforce the uniqueness other than through Indexes which does treats nulls as 1 value.
 			if ($drop)
 				$sql = "DROP INDEX {$name}";
 			else
-				$sql = "CREATE UNIQUE INDEX {$name} ON {$table} ({$fields})";
+                $sql = "CREATE UNIQUE INDEX {$name} ON {$table} ({$fieldsListSQL}) EXCLUDE NULL KEYS";
 			break;
 		case 'primary':
 			if ($drop)
 				$sql = "ALTER TABLE {$table} DROP PRIMARY KEY";
 			else
-				$sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name} PRIMARY KEY ({$fields})";
+                $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name} PRIMARY KEY ({$fieldsListSQL})";
 			break;
 		case 'foreign':
 			if ($drop)
-				$sql = "ALTER TABLE {$table} DROP FOREIGN KEY ({$fields})";
+                $sql = "ALTER TABLE {$table} DROP FOREIGN KEY ({$fieldsListSQL})";
 			else
-				$sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name} FOREIGN KEY ({$fields}) REFERENCES {$definition['foreignTable']}({$definition['foreignField']})";
+                $sql = "ALTER TABLE {$table} ADD CONSTRAINT {$name} FOREIGN KEY ({$fieldsListSQL}) REFERENCES {$definition['foreignTable']}({$definition['foreignField']})";
 			break;
 		}
 
@@ -1970,5 +1978,4 @@ INNER JOIN SYSCAT."INDEXCOLUSE" c
         $guidStart = create_guid_section(9);
       	return "'$guidStart-' || HEX(generate_unique())";
     }
-
 }

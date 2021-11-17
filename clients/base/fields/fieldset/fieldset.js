@@ -103,10 +103,15 @@
     _loadTemplate: function() {
         this._super('_loadTemplate');
 
-        if ((this.view.name === 'record' || this.view.name === 'create'
-            || this.view.name === 'create-nodupecheck' || this.view.name === 'pmse-case')
-            && this.type === 'fieldset' && !_.contains(this.fallbackActions, this.action)) {
-
+        if ((this.view.name === 'record' ||
+            this.view.name === 'create' ||
+            this.view.name === 'dashablerecord' ||
+            this.view.name === 'create-nodupecheck' ||
+            this.view.name === 'create-no-cancel-button' ||
+            this.view.name === 'pmse-case') &&
+            this.type === 'fieldset' &&
+            !_.contains(this.fallbackActions, this.action)
+        ) {
             this.template = app.template.getField('fieldset', 'record-detail', this.model.module);
         }
     },
@@ -134,6 +139,26 @@
     },
 
     /**
+     * Will check for license access and if all the fields are restricted by license,
+     * it will mark every field as hidden, but one.
+     * @param {Array} fields A list of fields part of the given fieldset.
+     */
+    markLicensedFieldToHide: function(fields) {
+        var nrOfFieldsWithoutLicense = _.reduce(fields, function(nr, field) {
+            var hasAccess = app.acl.hasAccessToModel('license', this.model, field.name);
+            return hasAccess ? nr : nr + 1;
+        }, 0, this);
+
+        if (fields.length === nrOfFieldsWithoutLicense) {
+            _.each(fields, function(field, i) {
+                if (i > 0) {
+                    field.licensed = true;
+                }
+            });
+        }
+    },
+
+    /**
      * @inheritdoc
      *
      * We set the result from `field.getPlaceholder()` into a property named
@@ -147,6 +172,8 @@
         }, this);
 
         this.focusIndex = 0;
+
+        this.markLicensedFieldToHide(fields);
 
         this._super('_render');
 

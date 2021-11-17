@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Punë e planifikuar',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Rindërto të dhënat e denormalizuara të sigurisë së ekipit',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Pastruesi i listës së aktiviteteve',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Përditëso përkufizimin e produktit',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Përpunoni programe ndërgjegjësimi për kohën',
+'LBL_OOTB_DATA_ARCHIVER' => 'Ekzekutoni arkiva të të dhënave/fshirje aktive',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervali',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'Çdoherë',
 'LBL_CATCH_UP' => 'ekzekuto nëse mungon',
+'LBL_SYSTEM_JOB' => 'Është sistemi aktual i punës?',
 'LBL_CATCH_UP_WARNING' => 'Mos kontrollo nësë puna do të kap më tepër se një minutë për ta drejtuar',
 'LBL_DATE_TIME_END' => 'Data dhe koha e përfundimit',
 'LBL_DATE_TIME_START' => 'Data dhe ora e nisjes',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Hiq skedarët e mjetit diagnostikues',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Hiq skedarët e përkohshëm',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Rindërto të dhënat e denormalizuara të sigurisë së ekipit',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Përditëso përkufizimin e produktit',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Drejtimi i natës së Emailave masive të Kampanjës',
 'LBL_ASYNCMASSUPDATE' => 'Kryeni përditësim masive të josinkronik',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'Pastrim i punës së reshtit',
 'LBL_CLEANOLDRECORDLISTS' => 'Pastro listat e vjetra të regjistrimit',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Pastruesi i listës së aktiviteteve',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Përpunoni programe ndërgjegjësimi për kohën',
 'LBL_PMSEENGINECRON' => 'Planifikuesi i SugarBPM',
 );
 

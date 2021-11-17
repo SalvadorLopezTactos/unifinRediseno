@@ -591,6 +591,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'Configure Portal',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Enable portal',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Enable search before opening a case',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Allow portal users to close case',
     'LBL_PORTAL_THEME' => 'Theme Portal',
     'LBL_PORTAL_ENABLE' => 'Enable',
     'LBL_PORTAL_SITE_URL' => 'Your portal site is available at:',
@@ -782,6 +783,14 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
+'LBL_POPHELP_REQUIRED'=>"Create a formula to determine whether this field is required in layouts.<br/>"
+    . "Required fields will follow the formula in the browser-based mobile view, <br/>"
+    . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
+    . "They will not follow the formula in the Sugar Self-Service Portal.",
+'LBL_POPHELP_READONLY'=>"Create a formula to determine whether this field is read only in layouts.<br/>"
+        . "Read only fields will follow the formula in the browser-based mobile view, <br/>"
+        . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
+        . "They will not follow the formula in the Sugar Self-Service Portal.",
 'LBL_POPHELP_GLOBAL_SEARCH'=>'Select to use this field when searching for records using the Global Search on this module.',
 //Revert Module labels
 'LBL_RESET' => 'Reset',
@@ -817,6 +826,7 @@ $mod_strings = array(
                 'encrypt'=>'Encrypt',
                 'datetimecombo' =>'Datetime',
                 'decimal'=>'Decimal',
+                'autoincrement' => 'AutoIncrement',
 ),
 'labelTypes' => array(
     "" => "Frequently used labels",
@@ -834,4 +844,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'All Modules',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (related {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Copy from layout',
+'LBL_RELATIONSHIP_TYPE' => 'Relationship',
 );

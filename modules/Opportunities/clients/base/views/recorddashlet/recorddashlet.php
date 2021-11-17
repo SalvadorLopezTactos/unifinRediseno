@@ -72,20 +72,19 @@ $viewdefs['Opportunities']['base']['view']['recorddashlet'] = [
             'placeholders' => true,
             'fields' => [
                 [
-                    'name' => 'amount',
-                    'readonly' => true,
-                ],
-                [
-                    'name' => 'best_case',
-                    'readonly' => true,
-                ],
-                [
-                    'name' => 'worst_case',
-                    'readonly' => true,
+                    'name' => 'account_name',
+                    'related_fields' => [
+                        'account_id',
+                    ],
                 ],
                 [
                     'name' => 'date_closed',
-                    'readonly' => true,
+                    'type' => 'date-cascade',
+                    'label' => 'LBL_LIST_DATE_CLOSED',
+                    'disable_field' => [
+                        'total_revenue_line_items',
+                        'closed_revenue_line_items',
+                    ],
                 ],
                 [
                     'name' => 'sales_status',
@@ -93,9 +92,53 @@ $viewdefs['Opportunities']['base']['view']['recorddashlet'] = [
                 ],
                 [
                     'name' => 'sales_stage',
+                    'type' => 'enum-cascade',
+                    'label' => 'LBL_SALES_STAGE',
+                    'disable_field' => [
+                        'total_revenue_line_items',
+                        'closed_revenue_line_items',
+                    ],
+                ],
+                [
+                    'name' => 'amount',
                     'readonly' => true,
                 ],
-                'opportunity_type',
+                [
+                    'name' => 'service_start_date',
+                    'type' => 'date-cascade',
+                    'label' => 'LBL_SERVICE_START_DATE',
+                    'disable_field' => 'service_open_revenue_line_items',
+                    'related_fields' => [
+                        'service_open_revenue_line_items',
+                    ],
+                ],
+                [
+                    'name' => 'renewal',
+                ],
+                [
+                    'name' => 'service_duration',
+                    'type' => 'fieldset-cascade',
+                    'label' => 'LBL_SERVICE_DURATION',
+                    'inline' => true,
+                    'show_child_labels' => false,
+                    'css_class' => 'service-duration-field',
+                    'fields' => [
+                        [
+                            'name' => 'service_duration_value',
+                            'label' => 'LBL_SERVICE_DURATION_VALUE',
+                        ],
+                        [
+                            'name' => 'service_duration_unit',
+                            'label' => 'LBL_SERVICE_DURATION_UNIT',
+                        ],
+                    ],
+                    'related_fields' => [
+                        'service_duration_value',
+                        'service_duration_unit',
+                        'service_open_flex_duration_rlis',
+                    ],
+                    'disable_field' => 'service_open_flex_duration_rlis',
+                ],
             ],
         ],
         [
@@ -106,10 +149,13 @@ $viewdefs['Opportunities']['base']['view']['recorddashlet'] = [
             'placeholders' => true,
             'columns' => 2,
             'fields' => [
+                [
+                    'name' => 'best_case',
+                    'readonly' => true,
+                ],
                 'next_step',
-                'renewal_parent_name',
                 'lead_source',
-                'campaign_name',
+                'opportunity_type',
                 [
                     'name' => 'description',
                     'span' => 12,

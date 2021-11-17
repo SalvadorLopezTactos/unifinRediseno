@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Lähtevän sähköpostin tilit',
     'LBL_MODULE_NAME_SINGULAR' => 'Lähtevän sähköpostin tili',
+    'LBL_STATUS' => 'Tila',
     'LBL_MAIL_SENDTYPE' => 'Sähköpostin välitysohjelma',
     'LBL_MAIL_SMTPSERVER' => 'Palvelin',
     'LBL_MAIL_SMTPPORT' => 'Portti',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Tämä on järjestelmätili.',
     'LBL_EMAIL_ADDRESS_ID' => 'Sähköpostiosoitteen tunnus',
     'LBL_TYPE' => 'Tyyppi',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Valtuutettu sähköpostiosoite',
+    'LBL_FROM_EMAIL_ADDRESS' => 'Lähettäjän sähköpostiosoite',
     'LBL_REPLY_TO_NAME' => 'Vastauksen vastaanottajan nimi',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Vastausosoitteet',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Vastausosoitteen tunnus',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Vastausosoite',
     'LBL_PRIMARY_TEAM' => 'Ensisijainen tiimi',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Sähköpostiasetukset-tietolaatikko',
 );

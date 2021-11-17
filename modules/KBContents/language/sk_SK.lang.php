@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Informačný panel so zoznamom znalostí',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Informačný panel so záznamom znalostí',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na bázu znalostí',
 
     'LBL_MODULE_NAME' => 'Báza znalostí',
     'LBL_MODULE_NAME_SINGULAR' => 'Článok znalostnej bázy',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Not Useful',
     'LBL_RATING' => 'Hodnotenie',
     'LBL_VIEWED_COUNT' => 'View Count',
-    'LBL_DOWNLOAD_ALL' => 'Download All',
-    'LBL_DOWNLOAD_ONE' => 'nahrať',
-    'LBL_ATTACHMENTS' => 'Prílohy:',
-    'LBL_ADD_ATTACHMENT' => 'Prehliadať',
     'LBL_CATEGORIES' => 'Knowledge Base Categories',
     'LBL_CATEGORY_NAME' => 'Kategória',
     'LBL_USEFULNESS' => 'Usefulness',

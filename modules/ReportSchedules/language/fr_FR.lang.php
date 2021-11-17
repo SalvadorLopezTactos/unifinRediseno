@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Par rapport',
     'LBL_RECENTLY_MODIFIED' => 'Modifié récemment',
     'LBL_RECORD_SAVED_SUCCESS' => 'Vous avez créé avec succès le {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. Ouvrez le calendrier pour ajouter des utilisateurs via le sous-pannel d&#39;utilisateurs.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Ce calendrier de rapports',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrements de calendriers de rapports',
 );

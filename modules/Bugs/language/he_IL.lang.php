@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_BUGS_LIST_DASHBOARD' => 'לוח מחוונים של רשימת באגים',
   'LBL_BUGS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת באגים',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס באגים',
 
   'LBL_MODULE_NAME' => 'באגים',
   'LBL_MODULE_NAME_SINGULAR'	=> 'באג',

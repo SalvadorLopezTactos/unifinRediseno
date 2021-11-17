@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Kontrolna tabla liste potencijalnih klijenata',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa potencijalnih klijenata',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za potencijalne klijente',
 
     'ERR_DELETE_RECORD' => 'en_us Morate navesti broj zapisa da bi obrisali potencijalnog klijenta.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Opis kompanije',
@@ -325,4 +326,8 @@ After confirming each required and desired module, click the Save and Convert bu
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => 'Nije moguće izmeniti status modul {{moduleSingular}}. Ovaj modul {{moduleSingular}} je već konvertovan.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Prognoza konverzije potencijalnih klijenata',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Prikaži pojedinosti o prognozi za određenog potencijalnog klijenta',
 );

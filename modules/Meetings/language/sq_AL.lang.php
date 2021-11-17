@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Paneli i listës së takimeve',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të takimeve',
+    'LBL_LEAD_GUESTS' => 'Vizitorët udhëheqës',
+    'LBL_CONTACT_GUESTS' => 'Kontakto vizitorët',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te mbledhjet',
 
 	'ERR_DELETE_RECORD' => 'Duhet përcaktuar numrin e regjistrimit për të fshirë mbledhjen',
 	'LBL_ACCEPT_THIS'=>'Prano?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Drejtimi',
 	'LBL_LIST_DUE_DATE'=>'Data e caktuar',
 	'LBL_LIST_FORM_TITLE' => 'Lista e mbledhjeve',
-	'LBL_LIST_MY_MEETINGS' => 'Mbledhjet e mia',
+    'LBL_LIST_MY_MEETINGS' => 'Mbledhjet e mia',
     'LBL_MY_SCHEDULED_MEETINGS' => 'Mbledhjet e mia të programuara',
+    'LBL_GUEST_MEETINGS' => 'Mbledhjet e mia si i ftuar',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Mbledhjet e programuara si i ftuar',
 	'LBL_LIST_RELATED_TO' => 'Në lidhje me',
 	'LBL_LIST_STATUS'=>'Statusi',
 	'LBL_LIST_SUBJECT' => 'Subjekti',

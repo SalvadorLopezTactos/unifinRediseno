@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'שם משתמש',
 	'LBL_RESTORE_BUTTON_LABEL'=>'שחזר',
 	'LBL_SYSTEM_SETTINGS' => 'הגדרות מערכת',
-	'LBL_SKYPEOUT_ON_DESC' => 'Allows users to click on phone numbers to call using SkypeOut&reg;. The numbers must be formatted properly to make use of this feature. That is, it must be "+"  "The Country Code" "The Number", like +1 (555) 555-1234. For more information, see the Skype FAQ at <a href="http://www.skype.com/help/faq/skypeout.html#calling" target="skype">skype&reg; faq</a>',
-	'LBL_SKYPEOUT_ON' => 'הפעל שילוב SkypeOut&reg;',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut&reg;',
+    'LBL_DIALOUT_ON_DESC' => 'מאפשר למשתמשים ללחוץ על מספרי טלפון כדי להתקשר באמצעות תוכנת ברירת המחדל לשילוב טלפוניה (CTI) המותקנת במחשב שלהם.',
+    'LBL_DIALOUT_ON' => 'הפעל &#39;לחיצה להתקשרות&#39;',
+    'LBL_DIALOUT_TITLE' => 'שיחות יוצאות',
     'LBL_TWEETTOCASE_ON_DESC' => 'מאפשר למשתמשים לפתוח קריאת שירות',
     'LBL_TWEETTOCASE_ON' => 'אפשר טוויט® לאינטגרציה של קריאת שירות',
     'LBL_TWEETTOCASE_TITLE' => 'טוויט® לקריאת שירות',
@@ -363,9 +363,9 @@ $mod_strings = array (
     'JS_ALERT_PDF_WRONG_EXTENSION' => 'לקובץ זה אין סיומת קובץ טובה.',
     'LBL_PDF_INSTRUCTIONS' => 'הוראות',
     'PDF_INSTRUCTIONS_ADD_FONT' => <<<BSOFR
-Fonts supported by SugarPDF :
+הגופנים הנתמכים ב-SugarPDF:
 <ul>
-<li>TrueTypeUnicode (UTF-8 Unicode)</li>
+<li>TrueTypeUnicode (‏UTF-8 Unicode)</li>
 <li>OpenTypeUnicode</li>
 <li>TrueType</li>
 <li>OpenType</li>
@@ -373,11 +373,11 @@ Fonts supported by SugarPDF :
 <li>CID-0</li>
 </ul>
 <br>
-If you choose to not embed your font in the PDF, the generated PDF file will be lighter but a substitution will be use if the font is not available in the system of your reader.
+אם תבחר שלא להטמיע את הגופן שלך ב-PDF, קובץ ה-PDF שייווצר יהיה קטן יותר אך ייעשה שימוש בגופן להחלפה במקרה שהגופן אינו זמין במערכת של הקורא.
 <br><br>
-Adding a PDF font to SugarCRM requires to follow steps 1 and 2 of the TCPDF Fonts documentation available in the "DOCS" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>The pfm2afm and ttf2ufm utils are available in fonts/utils in the TCPDF package that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>Load the metric file generated in step 2 and your font file below.
+הוספת גופן PDF ל-SugarCRM מחייבת לבצע את שלבים 1 ו-2 המפורטים במסמכי התיעוד של גופני TCPDF באזור "DOCS" של <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">אתר TCPDF</a>.
+<br><br>כלי השירות pfm2afm ו-ttf2ufm זמינים בנתיב גופנים/כלי שירות של חבילת TCPDF הניתנת להורדה מאזור "DOWNLOAD" של <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">אתר TCPDF</a>.
+<br><br>טען את הקובץ המטרי שנוצר בשלב 2 ואת קובץ הגופן להלן.
 BSOFR
 ,
     'ERR_MISSING_CIDINFO' => 'השדה מידע CID לא יכול להיות ריק.',
@@ -428,6 +428,9 @@ BSOFR
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* מודול דוחות אינו זמין לתצוגת דפדפן במובייל',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => 'האורך המקסימלי אמור להיות גדול יותר מהאורך המינימלי',
+    'ERR_MIN_LENGTH_NEGATIVE' => 'האורך המינימלי אמור להיות ערך חיובי',
+    'ERR_MAX_LENGTH_NEGATIVE' => 'האורך המקסימלי אמור להיות ערך חיובי',
     'ERR_EMPTY_SAML_LOGIN' => 'כתובת URL להתחברות SAML לא יכולה להיות ריקה',
     'ERR_EMPTY_SAML_CERT' => 'תעודת SAML לא יכולה להיות ריקה',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'אסור על מזהה הישות של SAML להיות ריק',
@@ -441,9 +444,6 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'זרמי פעילות',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'הפעל &#39;זרמי פעילות&#39;',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'הפעל &#39;זרמי פעילות&#39; עבור היישום',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'הפעל תוכן נוסף במסך ההתחברות',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'שמירה אוטומטית של הגדרות התהליך',

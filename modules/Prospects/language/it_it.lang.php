@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_TARGETS_LIST_DASHBOARD' => 'Dashboard elenco obiettivi',
   'LBL_TARGETS_RECORD_DASHBOARD' => 'Dashboard record obiettivi',
+  'LBL_PROSPECTS_FOCUS_DRAWER_DASHBOARD' => 'Target Focus Drawer',
 
   'LBL_MODULE_NAME' => 'Obiettivi',
   'LBL_MODULE_NAME_SINGULAR' => 'Obiettivo',

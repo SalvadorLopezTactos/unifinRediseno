@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => '세금 종류',
   'LBL_TYPE_NAME'=>'이름 입력',
   'LBL_TYPE' => '유형',
+  'LBL_PRODUCT_TYPE' => '제품 유형',
   'LBL_URL' => '상품 URL',
   'LBL_VENDOR_PART_NUM' => '공급자 번호',
   'LBL_WEIGHT' => '무게',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => '상품 책자 보기',
   'NTC_DELETE_CONFIRMATION' => '이 기록을 삭제하시겠습니까?',
     'LBL_ADD_TO_QUOTE_BUTTON' => '추가',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => '제품 카탈로그 검색',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => '사용 가능한 일자가 없음',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => '지정 사용자명',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => '상품 유형',
   'LBL_RENEWABLE' => '갱신 가능',
   'LBL_SERVICE' => '서비스',
+  'LBL_LOCK_DURATION' => '잠금 기간',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => '제품 카탈로그 목록 대시보드',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => '제품 카탈로그 기록 대시 보드',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => '제품 카탈로그 포커스 서랍',
 );

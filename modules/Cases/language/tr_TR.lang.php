@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Talepler Listesi Panosu',
     'LBL_CASES_RECORD_DASHBOARD' => 'Talepler Kaydı Panosu',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Talep Detayları',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Talepler Odak Bölmesi',
 
 	'ERR_DELETE_RECORD'					=> 'Müşteriyi silmek için bir kayıt numarası girmelisiniz.',
 	'LBL_ACCOUNT_ID'					=> 'Müşteri ID',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Portal da göster',
 	'LBL_CREATE_KB_DOCUMENT' => 'Makale Oluştur',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Bilgi Tabanı',
+    'LBL_REQUEST_CLOSE' => 'İstek Kapatma',
+    'LBL_REQUEST_CLOSE_DATE' => 'İstek Kapatma Tarihi',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Kapatılacak İstek',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Bu talebi kapatmak için bir istek gönderin',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Bu talebin kapatılmasını istiyor musunuz?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Kapatılması İstenen Taleplerim',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Kapatılması İstenen Taleplerim',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Kapatılması İstenen Taleplerim',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Kapatılması İstenen Talepler Listesi',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Kapatılması istenen ayrılmış taleplerin bir listesini gösterir',
 
     'LBL_CREATED_USER' => 'Oluşturan Kullanıcı',
     'LBL_MODIFIED_USER' => 'Değiştiren Kullanıcı',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Atanmış Kullanıcı İsmi',
     'LBL_EXPORT_TEAM_COUNT' => 'Takım Sayısı',
     'LBL_CHANGETIMERS' => 'Zamanlayıcıları Değiştirin',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Satın Alımlar',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'İlişkilenmiş Kontakların E-Postaları',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Örneğin, daha önce paylaşılmış olan bir problemi bulmak için bunu kullanabilirsiniz.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Eğer göndermek istediğiniz yeni bir destek Talebiniz varsa, yeni bir Talep göndermek için buraya tıklayabilirsiniz.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Buraya tıkladığınızda, istediğiniz zaman bu görünüme dönebileceksiniz.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Talep Etkileşimleri',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notlar',
 
@@ -150,5 +162,5 @@ Sugar içinde {{plural_module_name}} kaydı oluşturmak için farklı yöntemler
 
     'LBL_SLA_DETAILS' => 'SLA Bilgileri',
     'LBL_HOURS' => 'Saat',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'Durum',
 );

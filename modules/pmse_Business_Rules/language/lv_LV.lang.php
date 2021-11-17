@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Procesa biznesa lomas',
   'LBL_MODULE_NAME_SINGULAR' => 'Procesa biznesa lomas',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Procesa biznesa noteikumu fokusa panelis',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Procesu biznesa noteikumu ierakstu instrumentu panelis',
   'LBL_RST_UID' => 'Biznesa noteikuma ID',
   'LBL_RST_TYPE' => 'Biznesa noteikuma veids',
   'LBL_RST_DEFINITION' => 'Biznesa noteikuma definīcija',

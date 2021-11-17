@@ -129,16 +129,4 @@ class SugarHeartbeatClient extends nusoap_client
     {
         return base64_encode(serialize($value));
     }
-
-    /**
-     * Base64 decode + Unserialize
-     * @see SugarHeartbeatClient::sugarHome
-     *
-     * @param $value
-     * @return mixed
-     */
-    protected function decode($value)
-    {
-        return unserialize(base64_decode($value));
-    }
 }

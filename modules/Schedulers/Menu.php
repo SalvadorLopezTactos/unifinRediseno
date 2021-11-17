@@ -20,7 +20,5 @@ if(is_admin($current_user)){
 $module_menu = array( 
 	array("index.php?module=Schedulers&action=index", $mod_strings['LNK_LIST_SCHEDULER'],"Schedulers"),
 	array("index.php?module=Schedulers&action=EditView", $mod_strings['LNK_NEW_SCHEDULER'],"CreateScheduler"),
-	
 );
 }
-?>

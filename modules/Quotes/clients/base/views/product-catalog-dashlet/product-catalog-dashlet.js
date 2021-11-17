@@ -11,55 +11,15 @@
 /**
  * @class View.Views.Base.Quotes.ProductCatalogDashletView
  * @alias SUGAR.App.view.views.QuotesProductCatalogDashletView
- * @extends View.View
+ * @extends View.Views.Base.ProductCatalogDashletView
+ * @deprecated Use {@link View.Views.Base.ProductCatalogDashletView} instead
  */
 ({
+    extendsFrom: 'ProductCatalogDashletView',
 
-    extendsFrom: 'QuotesProductCatalogView',
-
-    plugins: [
-        'CanvasDataRenderer',
-        'Dashlet'
-    ],
-
-    /**
-     * Boolean if this is the dashlet config view or not
-     */
-    isConfig: undefined,
-
-    /**
-     * @inheritdoc
-     */
     initialize: function(options) {
+        app.logger.warn('View.Views.Base.Quotes.ProductCatalogDashletView is deprecated. Use ' +
+            'View.Views.Base.ProductCatalogDashletView instead');
         this._super('initialize', [options]);
-
-        this.isConfig = !!this.meta.config;
-    },
-
-    /**
-     * @inheritdoc
-     */
-    loadData: function(options) {
-        if (this.isConfig) {
-            return;
-        }
-        this._super('loadData', [options]);
-    },
-
-    /**
-     * @inheritdoc
-     */
-    toggleLoading: function(startLoading, showPhaserLoading) {
-        if (this.layout.disposed === true) {
-            return;
-        }
-        var $el = this.layout.$('i[data-action=loading]');
-        if (startLoading) {
-            $el.removeClass('fa-cog');
-            $el.addClass('fa-refresh fa-spin');
-        } else {
-            $el.removeClass('fa-refresh fa-spin');
-            $el.addClass('fa-cog');
-        }
     }
 })

@@ -22,7 +22,7 @@ $connector_strings = array(
     <li>LogMeIn開発センターアカウントにログイン: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
     <li>My Appsをクリック</li>
     <li>Add a new Appをクリック</li>
-    <li>次から、Add Appのすべてのフィールドに記入:</li>
+    <li>次から、Add Appの全てのフィールドに記入:</li>
         <ul>
             <li>App名</li>
             <li>詳細</li>

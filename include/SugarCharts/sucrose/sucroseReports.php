@@ -16,6 +16,11 @@ class sucroseReports extends sucrose
 
     private $processed_report_keys = array();
 
+    /**
+     * @var Report
+     */
+    public $reporter;
+
     function __construct()
     {
         parent::__construct();
@@ -211,7 +216,10 @@ class sucroseReports extends sucrose
                     'currency_symbol' => $this->currency_symbol,
                     'decimals' => ($this->chart_properties['thousands'] ? 0 : null),
                 ));
+            } elseif (is_numeric($label)) {
+                $label = $this->formatNumber($this->chart_properties['thousands'] ? $label / 1000 : $label, 0);
             }
+
             if ($this->chart_properties['thousands']) {
                 $label .= $app_strings['LBL_THOUSANDS_SYMBOL'];
             }
@@ -288,5 +296,16 @@ class sucroseReports extends sucrose
         }
 
         return parent::display($name, $xmlFile, $width, $height, $resize = false);
+    }
+
+    /**
+     * Set the reporter property on this sucroseReport. Used in handleSort to
+     * determine which sorting method to apply based on report field type.
+     *
+     * @param Report $reporter
+     */
+    public function setReporter(Report $reporter)
+    {
+        $this->reporter = $reporter;
     }
 }

@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Kustutamiseks märgitud väljad',
     'LBL_NO_RECORDS_MARKED' => 'Kustutamiseks pole märgitud ühtegi välja ega kirjet.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Andmete privaatsuse kirjete töölaud',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Andmete privaatsuse fookuse sahtel',
 
     // list view
     'LBL_HELP_RECORDS' => 'Andmete privaatsuse moodul jälgib privaatsustegevusi, sealhulgas nõusolekuid ja teema taotlusi, et toetada teie organisatsiooni privaatsuspõhimõtteid. Looge üksikisiku kirjega (nt kontaktiga) seotud andmete privaatsuse kirjeid, et jälgida nõusolekut ja tegeleda privaatsustaotlustega.',

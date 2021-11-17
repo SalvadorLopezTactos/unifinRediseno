@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Καταλόγων Στόχων',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Λιστών Στόχου',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης λιστών στόχων',
+  'LBL_RELATED_ACCOUNTS' => 'Σχετικοί λογαριασμοί',
+  'LBL_RELATED_CONTACTS' => 'Σχετικές Επαφές',
+  'LBL_RELATED_LEADS_TARGETS' => 'Σχετικοί δυνητικοί πελάτες και στόχοι',
 
   'LBL_MODULE_NAME' => 'Λίστες Στόχων',
   'LBL_MODULE_NAME_SINGULAR' => 'Λίστα Στόχου',

@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Nadzorna ploča za popis poziva',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o pozivima',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za pozive',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Pozivi',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Dodijeljeni korisnik',
     'LBL_LIST_MY_CALLS' => 'Moji pozivi',
     'LBL_MY_SCHEDULED_CALLS' => 'Moji zakazani pozivi',
+    'LBL_GUEST_CALLS' => 'Moji pozivi kao Gost',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Pozivi zakazani kao Gost',
     'LBL_SELECT_FROM_DROPDOWN' => 'Prvo odaberite s padajućeg popisa „Povezano s”.',
 	'LBL_ASSIGNED_TO_NAME' => 'Dodijeljeno',
 	'LBL_ASSIGNED_TO_ID' => 'Dodijeljeni korisnik',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Odustani',
     'LBL_EMPTY_SEARCH_RESULT' => 'Žao nam je, ali nisu pronađeni nikakvi rezultati. Stvorite pozvanog korisnika u nastavku.',
     'LBL_NO_ACCESS' => 'Nemate pristup stvaranju $modula',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'ID kontakta usluge Amazon Connect',
+
     'LBL_REPEAT_TYPE' => 'Ponavljaj',
     'LBL_REPEAT_INTERVAL' => 'Svakih',
     'LBL_REPEAT_END' => 'Kraj',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Poziv s {{{this}}}',
     'LBL_SEND_INVITES' => 'Pošalji pozive',
     'LBL_REMINDER_TITLE' => 'Poziv:',
+    'LBL_CALL_RECORDING_URL' => 'URL snimke',
+    'LBL_CALL_RECORDING' => 'Snimka',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Zakazali ste {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> za {{formatDate date_start}}.',

@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Protsessi määratlused',
   'LBL_MODULE_NAME_SINGULAR' => 'Process Definition',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Protsessi definitsioonide fookuse sahtel',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Protsessi definitsioonide kirjete armatuurlaud',
   'LNK_LIST' => 'Kuva protsessi määratlused',
   'LNK_NEW_PMSE_PROJECT' => 'Create Process Definition',
   'LNK_IMPORT_PMSE_PROJECT' => 'Impordi protsessi määratlused',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Change Assigned To User',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Meeskond',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Select New Process User',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'Meil',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'Saada protsessi määramisel kasutajale meil',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'User Definition',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Assignment Method',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Assign User',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Update "Assigned To" on record',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Määra vastutaja saadavuse järgi',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Add Related Record',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Seotud moodul',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'The name of activity is empty.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'The name "%s" already exists in shape family.',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Nõutud vahetuse saadavus',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Kui ühtegi kasutajat pole saadaval',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'enne',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Ainult uued kirjed',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Updated Records Only (First Update - See Help Text)',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Updated Records Only (All Updates - See Help Text)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Uued kirjed või esimene värskendus',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Uued kirjed ja kõik värskendused',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Select when the process will start.<br><br>New: Run process when new record is created.<br><br>First Update: Process runs only the first time criteria is met for an existing record.<br><br>All Updates: Process runs every time criteria is met for an existing record.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Valige, millal protsess algab.<br><br>Uus: protsessi käitatakse uue kirje loomisel.<br><br>Esimene värskendus: protsessi käitatakse esimesel korral, kui olemasoleva kirje kriteeriumid on täidetud.<br><br>Kõik värskendused: protsessi käitatakse iga kord, kui olemasoleva kirje kriteeriumid on täidetud.<br><br>Uued kirjed või esimene värskendus: protsessi käitatakse kirje loomise või värskendamise ajal ainult esimesel korral, kui kirje kriteeriumid on täidetud.<br><br>Uued kirjed ja kõik värskendused: protsessi käitatakse iga kord kõigi uute ja olemasolevate kirjete puhul.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Select the SugarCRM module to apply the event trigger',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Fixed Date',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'muudatused valikust',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'muudatused valikule',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'sealhulgas mis tahes',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'ei hõlma ühtegi',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'on or after',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'on or before',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'is not equal to',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Lisa',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Sulge',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'Kõik meeskonnad, kellele kirje määrati',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Meeskonnad',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% seoses mooduliga %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Kasutaja, kes lõi mooduli %MODULE%',

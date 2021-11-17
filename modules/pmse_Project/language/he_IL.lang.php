@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'הגדרת תהליך',
   'LBL_MODULE_NAME_SINGULAR' => 'הגדרת תהליך',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס הגדרות תהליך',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'לוח מחוונים של רשומות מסוג הגדרות תהליכים',
   'LNK_LIST' => 'צפה בהגדרות תהליך',
   'LNK_NEW_PMSE_PROJECT' => 'צור הגדרות תהליך',
   'LNK_IMPORT_PMSE_PROJECT' => 'ייבא הגדרות תהליך',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'שנה את בעל הרשומה',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'צוות',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'הקצה פעילות מחדש',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'דוא"ל',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'שליחת דוא"ל למשתמש בעת הקצאת התהליך עבורו',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'הגדרת משתמש',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'שיטת הקצאה',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'הקצה משתמש',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'עדכן "מוקצה ל-" ברשומה',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'הגדר הקצאות לפי זמינות',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'הוסף רשומה מקושרת',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'מודול קשור',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'שם הפעילות ריק',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'השם "%s" כבר קיים במשפחת צורות',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'זמינות נדרשת עבור משמרת',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'אם אף משתמש אינו זמין',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'לפני',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'רשומות חדשות בלבד',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'רשומות מעודכנות בלבד',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'עדכון של רשומות בלבד (כל העדכונים - ראו טקסט עזרה)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'רשומות חדשות או עדכון ראשון',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'רשומות חדשות וכל העדכונים',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'בחר מתי הארוע יתחיל',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'בחר מתי התהליך יתחיל.<br><br>חדש: הפעלת תהליך בעת יצירת רשומה חדשה.<br><br>עדכון ראשון: התהליך מופעל רק בפעם הראשונה שבה רשומה קיימת עומדת בקריטריונים.<br><br>כל העדכונים: התהליך מופעל בכל פעם שבה רשומה קיימת עומדת בקריטריונים.<br><br>רשומות חדשות או עדכון ראשון: התהליך מופעל רק בפעם הראשונה שבה רשומה עומדת בקריטריונים – במהלך יצירת הרשומה או במהלך עדכון שלה.<br><br>רשומות חדשות וכל העדכונים: התהליך מופעל בכל פעם עבור כל הרשומות החדשות והקיימות.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'בחר במודול שוגר להפעלת הטריגר',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'תאריך קבוע',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'משתנה מ',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'משתנה ל',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'כולל כל',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'אינו כולל כל',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'ב- או אחרי',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'ב- או לפני',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'שונה מ',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'הוסף',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'סגור',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'כל הצוותים שהוקצו לרשומה',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'קבוצות',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% קשור/ים אל %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'המשתמש שיצר את %MODULE%',

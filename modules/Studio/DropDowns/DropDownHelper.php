@@ -76,7 +76,6 @@ class DropDownHelper
     {
         global $locale;
         $count = 0;
-        $dropdown = array();
         $dropdown_name = $params['dropdown_name'];
 
         if (!empty($params['dropdown_lang'])) {
@@ -86,6 +85,7 @@ class DropDownHelper
         }
 
         $my_list_strings = return_app_list_strings_language($selected_lang);
+        $dropdown = $my_list_strings[$dropdown_name];
         while (isset($params['slot_' . $count])) {
             $index = $params['slot_' . $count];
             $key = (isset($params['key_' . $index])) ? SugarCleaner::stripTags($params['key_' . $index]) : 'BLANK';
@@ -102,6 +102,6 @@ class DropDownHelper
             $count++;
         }
 
-        return save_custom_dropdown_strings(array($dropdown_name => $dropdown));
+        return save_custom_dropdown_strings(array($dropdown_name => $dropdown), $selected_lang);
     }
 }

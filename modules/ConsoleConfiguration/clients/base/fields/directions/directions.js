@@ -41,6 +41,11 @@
     filterString: '',
 
     /**
+     * Link to detailed instructions
+     */
+    detailedInstructionsLink: '',
+
+    /**
      * @inheritdoc
      *
      * @param options
@@ -58,6 +63,15 @@
      */
     _initDefaults: function() {
         this.defaults = this.model.get('defaults') || {};
+
+        // Build detailedInstructionsLink
+        var serverInfo = app.metadata.getServerInfo();
+        this.detailedInstructionsLink = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' +
+            serverInfo.flavor + '&version=' + serverInfo.version + '&lang=' + app.lang.getLanguage() +
+            '&module=ConsoleManagement';
+        this.detailedInstructionsLink += app.user.get('products') ?
+            '&products=' + encodeURIComponent(app.user.get('products').join(',')) :
+            '';
 
         // Get the tabContent attribute, which includes a mapping of
         // {sort field value} => {sort field label}
@@ -225,11 +239,27 @@
     },
 
     /**
+     * Set defaultViewMeta to context and trigger defaultmetaready.
+     *
+     * @param data
+     */
+    setViewMetaData: function(data) {
+        this.context.set('defaultViewMeta', data);
+        this.context.trigger('consoleconfig:reset:defaultmetaready');
+    },
+
+    /**
      * Sets the default values for fields on the model when the reset button is
      * clicked. Triggers an event to signal to the filter field to re-render properly
      */
     restoreClicked: function() {
         this.model.set(this.defaults);
         this.model.trigger('consoleconfig:reset:default');
+
+        var params = {modules: this.model.get('enabled_module'), type: 'view', name: 'multi-line-list'};
+        var url = app.api.buildURL('ConsoleConfiguration', 'default-metadata', {}, params);
+        app.api.call('GET', url, null, {
+            success: _.bind(this.setViewMetaData, this)
+        });
     }
 })

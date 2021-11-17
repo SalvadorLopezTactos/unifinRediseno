@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Redaguotojo ID',
     'LBL_EXPORT_CREATED_BY' => 'Sukūrėjo ID',
     'LBL_EXPORT_TYPE_NAME' => 'Tipo pavadinimas',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Kontaktų „Focus“ stalčius',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Sutarčių įrašų ataskaitų sritis',
 );

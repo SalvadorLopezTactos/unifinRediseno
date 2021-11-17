@@ -36,6 +36,12 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
     const TEAMSET_PREFETCH_MAX = 500;
 
     /**
+     * The SQL hint that can be used inside a select subquery (MySQL specific)
+     * https://dev.mysql.com/doc/refman/8.0/en/optimizer-hints.html#optimizer-hints-subquery
+     */
+    const SUBQUERY_OPTIMIZER_HINT = '/*+ SUBQUERY(MATERIALIZATION) */';
+
+    /**
      * Get team security `join` as a `IN()` condition.
      * @param string $current_user_id
      * @return string
@@ -85,7 +91,8 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
             }
         } else {
             $escapedCurrentUserId = $this->bean->db->quote($currentUserId);
-            return "select tst.team_set_id from team_sets_teams tst
+            $subqueryOptimizerHint = $this->useSubqueryOptimizerHint() ? ' ' . self::SUBQUERY_OPTIMIZER_HINT : '';
+            return "select{$subqueryOptimizerHint} tst.team_set_id from team_sets_teams tst
                     INNER JOIN team_memberships {$teamTableAlias} ON tst.team_id = {$teamTableAlias}.team_id
                     AND {$teamTableAlias}.user_id = '$escapedCurrentUserId'
                     AND {$teamTableAlias}.deleted = 0";
@@ -189,6 +196,21 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
     }
 
     /**
+     * MySQL feature that appeared to be useful for the team visibility:
+     * Adds a DB subquery optimizer hint to define "MATERIALIZATION" strategy -
+     * this forces DB to materialize and cache a subquery result between requests.
+     * https://dev.mysql.com/doc/refman/8.0/en/optimizer-hints.html#optimizer-hints-subquery
+     */
+    protected function useSubqueryOptimizerHint(): bool
+    {
+        if (($this->bean->db instanceof MysqlManager) && !$this->getOption('disable_subquery_optimizer_hint')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function addVisibilityFrom(&$query)
@@ -198,7 +220,7 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
             return $query;
         }
 
-        $this->addVisibility($query);
+        $this->addVisibility($query, false);
         return $query;
     }
 
@@ -211,17 +233,18 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
             return $query;
         }
 
-        $this->addVisibility($query);
+        $this->addVisibility($query, true);
         return $query;
     }
 
     /**
      * Add visibility query
-     * @param string $query
      *
+     * @param string $query
+     * @param bool|null $useWhereCondition
      * @see static::addVisibilityQuery(), should be kept synced
      */
-    protected function addVisibility(&$query)
+    protected function addVisibility(&$query, bool $useWhereCondition = null)
     {
         if (!$this->isTeamSecurityApplicable()) {
             return;
@@ -229,7 +252,10 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
 
         $current_user_id = empty($GLOBALS['current_user']) ? '' : $GLOBALS['current_user']->id;
 
-        if ($this->useCondition()) {
+        if (null === $useWhereCondition) {
+            $useWhereCondition = $this->useCondition();
+        }
+        if ($useWhereCondition) {
             $cond = $this->getCondition($current_user_id);
             if ($query) {
                 $query .= " AND ".ltrim($cond);
@@ -261,7 +287,7 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
 
         $current_user_id = empty($GLOBALS['current_user']) ? '' : $GLOBALS['current_user']->id;
 
-        if ($this->useCondition()) {
+        if ($this->useCondition() || $this->useSubqueryOptimizerHint()) {
             $cond = $this->getCondition($current_user_id);
             $query->whereRaw($cond);
         } else {
@@ -275,25 +301,11 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
     public function addVisibilityFromQuery(SugarQuery $sugarQuery, array $options = array())
     {
         // We'll get it on where clause
-        if ($this->useCondition()) {
+        if ($this->useCondition() || $this->useSubqueryOptimizerHint()) {
             return $sugarQuery;
         }
 
-        if ($this->useCondition()) {
-            $table_alias = $this->getOption('table_alias');
-            if (empty($sugarQuery->join[$table_alias])) {
-                return $sugarQuery;
-            }
-            $join = $sugarQuery->join[$table_alias];
-            $join->query = $sugarQuery;
-            $add_join = '';
-            $this->addVisibility($add_join);
-            if (!empty($add_join)) {
-                $join->on()->queryAnd()->addRaw($add_join);
-            }
-        } else {
-            $this->addVisibilityQuery($sugarQuery);
-        }
+        $this->addVisibilityQuery($sugarQuery);
 
         return $sugarQuery;
     }
@@ -303,12 +315,12 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
      */
     public function addVisibilityWhereQuery(SugarQuery $sugarQuery, array $options = array())
     {
-        if (!$this->useCondition()) {
+        if (!$this->useCondition() && !$this->useSubqueryOptimizerHint()) {
             return $sugarQuery;
         }
 
         $cond = '';
-        $this->addVisibility($cond);
+        $this->addVisibility($cond, true);
         if (!empty($cond)) {
             $sugarQuery->whereRaw($cond);
         }

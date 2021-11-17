@@ -11,6 +11,7 @@
  */
 $dictionary['Tracker'] = array(
     'table' => 'tracker',
+    'archive' => false,
     'fields' => array(
         'id'=>array(
             'name' => 'id',

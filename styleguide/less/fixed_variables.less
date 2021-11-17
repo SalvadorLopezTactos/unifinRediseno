@@ -1,6 +1,5 @@
-// Grays
+// Legacy colours - NOT TO BE USED ANYMORE
 // -------------------------
-@black: #000;
 @grayDarker: #111;
 @grayDark: #222;
 @grayDarkish: #4d4f50;
@@ -9,10 +8,31 @@
 @grayLightish: #999;
 @grayMid: #d5dce0;
 @grayLighter: #f6f6f6;
-@white: #fff;
+@grayActive: #e4e9ed;
 @transparent: rgba(0, 0, 0, 0);
 @slate: #9aa5ad;
 @steel: #50575b;
+@rock: #212121;
+@stone: #0c5ec8;
+@lime: #47c61e;
+@night: #011523;
+@darkIndigo: #093145;
+@indigo: #1b6893;
+@lightIndigo: #c3e0f0;
+
+// Monochrome palette
+// -------------------------
+@black: #000;
+@gray90: #2b2d2e;
+@gray80: #4d5154;
+@gray70: #6f777b;
+@gray60: #9ba1a6;
+@gray50: #b8bcbe;
+@gray40: #d9dddf;
+@gray30: #e5eaed;
+@gray20: #f1f3f4;
+@gray10: #f8fafc;
+@white: #fff;
 
 // Accent colors (auto)
 // For @color values we spin based off the @BorderColor from the theme
@@ -36,26 +56,15 @@
 @color14: spin(@BorderColor, -40);
 @color15: spin(@BorderColor, -20);
 
-// Accent colors (defined)
+// Sugar default color palette (defined)
 // -------------------------------------------------------------
-// Standard:
-@army: #6cdf46;
+// Primary palette
+@darkBlue: #005d9c;
 @blue: #0679c8;
-@coral: #f476b1;
-@green: #00ba83;
-@night: #011523;
-@orange: #ff9445;
-@ocean: #517bf8;
-@pacific: #36b0ff;
-@pink: #cd74f2;
-@purple: #8f5ff5;
-@red: #fa374f;
-@teal: #00e0e0;
-@yellow: #ffd132;
+@lightBlue: #d6eeff;
 
-// Dark:
+// Dark palette
 @darkArmy: #537600;
-@darkBlue: #016faa;
 @darkCoral: #a23354;
 @darkGreen: #056f37;
 @darkOcean: #29388c;
@@ -67,7 +76,20 @@
 @darkTeal: #00636e;
 @darkYellow: #866500;
 
-// Light:
+// Secondary palette
+@army: #6cdf46;
+@coral: #f476b1;
+@green: #00ba83;
+@orange: #ff9445;
+@ocean: #517bf8;
+@pacific: #36b0ff;
+@pink: #cd74f2;
+@purple: #8f5ff5;
+@red: #fa374f;
+@teal: #00e0e0;
+@yellow: #ffd132;
+
+// Light palette
 @lightArmy: #e4fbb4;
 @lightCoral: #fde2eb;
 @lightGreen: #baffcc;
@@ -84,6 +106,8 @@
 // -------------------------------------------------------------
 @el-accounts-text: @darkGreen;
 @el-accounts-bg: @lightGreen;
+@el-bc-bg: @lightPacific;
+@el-bc-text: @darkPacific;
 @el-bugs-text: @darkRed;
 @el-bugs-bg: @lightRed;
 @el-calendar-text: @darkTeal;
@@ -98,6 +122,8 @@
 @el-cases-bg: @lightOrange;
 @el-contacts-text: @darkPink;
 @el-contacts-bg: @lightPink;
+@el-dataprivacy-text: @darkArmy;
+@el-dataprivacy-bg: @lightArmy;
 @el-documents-text: @darkCoral;
 @el-documents-bg: @lightCoral;
 @el-emails-text: @darkOcean;
@@ -120,10 +146,16 @@
 @el-leads-bg: @lightPurple;
 @el-meetings-text: @darkTeal;
 @el-meetings-bg: @lightTeal;
+@el-messages-text: @grayDarkish;
+@el-messages-bg: @grayMid;
 @el-notes-text: @darkGreen;
 @el-notes-bg: @lightGreen;
 @el-opportunities-text: @darkRed;
 @el-opportunities-bg: @lightRed;
+@el-pc-bg: @lightPink;
+@el-pc-text: @darkPink;
+@el-pli-bg: @lightArmy;
+@el-pli-text: @darkArmy;
 @el-pmse-text: @grayDarkish;
 @el-pmse-bg: @grayMid;
 @el-products-text: @darkPurple;
@@ -132,6 +164,8 @@
 @el-prospectlists-bg: @lightArmy;
 @el-prospects-text: @darkYellow;
 @el-prospects-bg: @lightYellow;
+@el-purchases-bg: @lightPacific;
+@el-purchases-text: @darkPacific;
 @el-quotas-text: @darkPacific;
 @el-quotas-bg: @lightPacific;
 @el-quotes-text: @darkOcean;
@@ -140,16 +174,16 @@
 @el-reports-bg: @lightOrange;
 @el-rli-text: @darkPacific;
 @el-rli-bg: @lightPacific;
+@el-shifts-bg: @lightGreen;
+@el-shifts-text: @darkGreen;
+@el-shiftexceptions-bg: @lightOrange;
+@el-shiftexceptions-text: @darkOrange;
 @el-tags-text: @darkPink;
 @el-tags-bg: @lightPink;
 @el-tasks-text: @darkPurple;
 @el-tasks-bg: @lightPurple;
 @el-users-text: @darkTeal;
 @el-users-bg: @lightTeal;
-@el-workflow-text: @darkOcean;
-@el-workflow-bg: @darkOcean;
-@el-dataprivacy-text: @darkArmy;
-@el-dataprivacy-bg: @lightArmy;
 
 // Color coded enum colors
 // -------------------------------------------------------------
@@ -340,6 +374,7 @@
 @zindexModalBackdrop: 1040;
 @zindexModal: 1050;
 @zindexHeaderpane: 1002;
+@zindexSidebarContent: 1003;
 
 // Select2
 @zindexSelect2mask: 1051;
@@ -474,6 +509,8 @@
 
 @beforerightcaretpos: auto;
 
+@columnViewPortWidth: 5vw;
+
 // Standard Avatar fontSizes
 @sizeLarge: 42px;
 @sizeMedium: 32px;
@@ -538,7 +575,7 @@
 
 // Open Sans Font Path
 // -------------------------
-@os-font-path: "@{siteUrl}/styleguide/assets/fonts/opensans";
+@os-font-path: "../../../../../styleguide/assets/fonts/opensans";
 
 // New Theme Variables
 // -------------------------
@@ -578,7 +615,7 @@
 @select2LinkBackgroundActive: #005087;
 
 @navbarLinkColorHover: #6b7479;
-@navbarLinkBackgroundActive: #e4e9ed;
+@navbarLinkBackgroundActive: @grayActive;
 @navbarSearchBorder: #ebedef;
 @navbarSearchPlaceholderColor: #9aa5ad;
 @navbarBorder: #d3dbe1;
@@ -596,8 +633,8 @@
 
 // Footer
 // -------------------------
-@footerButtonColor: #6b7479;
-@footerBackgroundColor: #f7f8f9;
+@footerButtonColor: @gray;
+@footerBackgroundColor: @grayLighter;
 
 // Subpanels
 // -------------------------
@@ -675,9 +712,11 @@
 @countBadgeWidth: 28px;
 
 // Tabs
-@tabBackgroundActive: @contentBackground;
+@tabBackgroundActive: @navbarLinkBackgroundActive;
 @tabBackgroundInactive: @white;
 
 // Agent workbench related
 @workbenchOverviewDashletHeight: 520px;
 @workbenchDrawerDashletHeight: 458px;
+
+@amazonCcpWidth: 320px;

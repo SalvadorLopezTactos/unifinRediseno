@@ -70,11 +70,11 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> 'Attention : Impossible d\'écrire',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'Votre version de PHP n\' est pas supportée par SugarCRM. Vous devez installer une version de PHP compatible avec SugarCRM. Merci de consulter la matrice de compatibilté disponible dans le document "Release Notes" pour voir quelle versions de PHP sont supportées par SugarCRM. Votre version actuelle est',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'Votre version de IIS n\'est pas prise en charge par SugarCRM. Vous devez installer une version compatible avec SugarCRM. Veuillez consulter la matrice de compatibilité présente dans les Release Notes pour connaitre les versions d\'Oracle qui sont prises en charge. Votre version est ',
-	'ERR_CHECKSYS_FASTCGI'              => 'Nous avons détecté que vous n\'utilisez pas PHP en mode FastCGI. Vous devez installer/configurer une version de PHP compatible avec Sugar.  Veuillez consulter la matrice de compatibilité présente dans les Release Notes pour connaitre les versions prises en charge. Veuillez consulter <a href="http://www.iis.net/php/" target="_blank">http://www.iis.net/php/</a> pour plus de détails ',
+    'ERR_CHECKSYS_FASTCGI'              => 'Nous avons détecté que vous n\'utilisez pas PHP en mode FastCGI. Vous devez installer/configurer une version de PHP compatible avec Sugar. Veuillez consulter la matrice de compatibilité présente dans les notes de publication pour connaitre les versions prises en charge. Veuillez consulter <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a> pour plus de détails ',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Pour une utilisation optimale du SAPI IIS/FastCGI, positionnez fastcgi.logging à 0 dans votre fichier php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Version de PHP installée non prise en charge : ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Base de données indisponible',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Le support de base de données n\'a pas été trouvé. Veuillez vous assurer d\'avoir les pilotes nécessaires pour un des suivants types de bases de données pris en chargeˆ: MySQL, MS SQLServer, Oracle, ou DB2. Il se peut que vous deviez décommenter l\'extension dans le fichier php.ini, ou recompiler avec le fichier binaire correct, selon votre version de PH. Veuillez consulter votre manuel PHP pour plus d\'informations sur la façon d\'activer le support de base de données.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Le support de base de données n\'a pas été trouvé. Veuillez vous assurer d\'avoir les pilotes nécessaires pour un des types de bases de données pris en charge suivants : MySQL, MS SQLServer, Oracle, ou DB2. Il se peut que vous deviez décommenter l\'extension dans le fichier php.ini, ou recompiler avec le fichier binaire correct, selon votre version de PH. Veuillez consulter votre manuel PHP pour plus d\'informations sur la façon d\'activer le support de base de données.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Les fonctions associées aux bibliothèques de parsing XML qui sont nécessaires à Sugar n\'ont pas été retrouvées. Vous pourriez avoir besoin de décommenter l\'extension dans le fichier php.ini, ou recompiler avec le bon fichier binaire, en fonction de votre version de PHP. Veuillez vous référer à votre manuel PHP pour plus d\'informations.',
     'LBL_CHECKSYS_CSPRNG' => 'Générateur de nombres aléatoires',
     'ERR_CHECKSYS_MBSTRING'             => 'Les fonctions associées avec l\'extension Multibyte de PHP (mbstring) qui sont nécessaires pour Sugar n\'ont pas été trouvées. <br/><br/>En général, le module mbstring n\'est pas activé par défaut dans PHP et doit être activé avec --enable-mbstring quand le binaire PHP est constitué. Veuillez vous référer au manuel PHP pour plus d\'informations sur l\'activation de mbstring.',
@@ -557,7 +557,7 @@ $mod_strings = array(
 
     'meeting_notification_email' => array(
         'name' => 'E-mails de notification de réunion',
-        'subject' => 'Réunion SugarCRM - $event_name ',
+        'subject' => 'Réunion SugarCRM : $event_name',
         'description' => 'Ce modèle est utilisé lorsque le système envoie une notification de réunion à un utilisateur.',
         'body' => '<div>
 	<p>À : $assigned_user</p>
@@ -600,12 +600,12 @@ Refuser cette réunion
 
     'call_notification_email' => array(
         'name' => 'E-mails de notification d\'appel',
-        'subject' => 'Appel SugarCRM - $event_name ',
+        'subject' => 'Appel SugarCRM : $event_name ',
         'description' => 'Ce modèle est utilisé lorsque le système envoie une notification d\'appel à un utilisateur.',
         'body' => '<div>
 	<p>À : $assigned_user</p>
 
-	<p>$assigned_by_user vous a invité à un appel</p>
+	<p>$assigned_by_user vous a inviter à un appel</p>
 
 	<p>Objet : $event_name<br/>
 	Date de début : $start_date<br/>
@@ -643,18 +643,18 @@ Refuser cet appel
 
     'assigned_notification_email' => array(
         'name' => 'E-mails de notification d\'assignation',
-        'subject' => 'SugarCRM - $module_name assigné ',
+        'subject' => 'SugarCRM : $module_name assigné',
         'description' => 'Ce modèle est utilisé lorsque le système envoie une assignation de tâche à un utilisateur.',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user a assigné un&nbsp;$module_name à&nbsp;$assigned_user.</p>
 
-<p>Vous pouvez vérifier ce&nbsp;$module_name sur :<br/>
+<p>Vous pouvez consulter ce&nbsp;$module_name sur :<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user a assigné un $module_name à $assigned_user.
 
-Vous pouvez vérifier $module_name sur :
+Vous pouvez consulter ce $module_name sur :
 <$module_link>',
     ),
 
@@ -663,7 +663,7 @@ Vous pouvez vérifier $module_name sur :
         'subject' => 'Rapport planifié : $report_name à partir de $report_time',
         'description' => 'Ce modèle est utilisé lorsque le système envoie un rapport planifié à un utilisateur.',
         'body' => '<div>
-<p>Bonjour $assigned_user,</p>
+<p>Hello $assigned_user,</p>
 <p>Vous trouverez ci-joint un rapport généré automatiquement et planifié pour vous.</p>
 <p>Nom du rapport : $report_name</p>
 <p>Date et heure d\'exécution du rapport : $report_time</p>
@@ -679,16 +679,17 @@ Date et heure d\'exécution du rapport : $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => 'E-mail de notification du log des commentaires du système',
+        'subject' => 'SugarCRM : $initiator_full_name vous a mentionné dans un $singular_module_name',
+        'description' => 'Ce modèle est utilisé pour envoyer une notification par e-mail aux utilisateurs qui ont été identifiés dans la section "Commentaires".',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>Vous avez été mentionné dans le log des commentaires de l\'enregistrement suivant :  <a href="$record_url">$record_name</a></p>
+                <p>Veuillez vous connecter à Sugar pour voir le commentaire.</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'Vous avez été mentionné dans le log des commentaires de l\'enregistrement suivant : $record_name
+            Veuillez vous connecter à Sugar pour voir le commentaire.',
     ],
 
     'advanced_password_new_account_email' => array(

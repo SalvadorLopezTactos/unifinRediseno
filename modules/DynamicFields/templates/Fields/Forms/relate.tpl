@@ -17,9 +17,12 @@
 	{if $hideLevel == 0}
 		{html_options name="ext2" id="ext2" selected=$vardef.module options=$modules}
 	{else}
-		<input type='hidden' name='ext2' value='{$vardef.module}'>{$vardef.module}
+		<input type='hidden' name='ext2' value='{$vardef.module}'>
+		{sugar_translate module=$vardef.module label="LBL_MODULE_NAME"}
 	{/if}
 	<input type='hidden' name='ext3' value='{$vardef.id_name}'>
+    <input type='hidden' name='is_relationship_field' value='{$is_relationship_field}' />
+    <input type='hidden' name='is_custom_relationship' value='{$is_custom_relationship}' />
 	</td>
 </tr>
 {include file="modules/DynamicFields/templates/Fields/Forms/coreBottom.tpl"}

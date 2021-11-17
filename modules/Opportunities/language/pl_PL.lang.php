@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Pulpit listy możliwości',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Pulpit rekordów możliwości',
     'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Szczegóły szansy',
+    'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy możliwości',
+    'LBL_RENEWAL_OPPORTUNITY' => 'Możliwość odnowienia',
 
     'LBL_MODULE_NAME' => 'Szanse',
     'LBL_MODULE_NAME_SINGULAR' => 'Szansa',
@@ -77,7 +79,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Typ:',
     'LBL_CAMPAIGN' => 'Kampania:',
     'LBL_NEXT_STEP' => 'Następny krok:',
-    'LBL_SERVICE_START_DATE' => 'Service Start Date',
+    'LBL_SERVICE_START_DATE' => 'Data początkowa usługi',
     'LBL_LEAD_SOURCE' => 'Źródło pozyskania',
     'LBL_SALES_STAGE' => 'Etap sprzedaży',
     'LBL_SALES_STATUS' => 'Status',
@@ -144,6 +146,7 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE' => 'Etap wykonania',
     'LBL_COMMIT_STAGE_FORECAST' => 'Prognoza',
     'LBL_WORKSHEET' => 'Arkusz',
+    'LBL_PURCHASED_LINE_ITEMS' => 'Zakupione pozycje',
 
     'LBL_RENEWAL' => 'Odnowienie',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Szanse odnowienia',
@@ -151,9 +154,9 @@ $mod_strings = array(
     'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'ID elementu nadrzędnego odnowienia',
     'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
 
-    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
-    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
-    'LBL_WIDGET_AMOUNT' => 'Amount',
+    'LBL_WIDGET_SALES_STAGE' => 'Etap sprzedaży',
+    'LBL_WIDGET_DATE_CLOSED' => 'Oczekiwana data zakończenia',
+    'LBL_WIDGET_AMOUNT' => 'Kwota',
 
     'TPL_RLI_CREATE' => 'Szansa musi być powiązana z pozycją szansy.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Utwórz pozycję szansy',
@@ -162,12 +165,16 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => 'Liczba łącznych pozycji szans',
     'LBL_CLOSED_RLIS' => 'Liczba zamkniętych pozycji szans',
+    'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => 'Liczba otwartych pozycji przychodów o elastycznym czasie trwania',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Nie możesz usunąć szans, które zawierają zamknięte Pozycje szansy',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Co najmniej jeden wybrany rekord zawiera zamknięte Pozycje szansy i nie może zostać usunięty.',
     'LBL_INCLUDED_RLIS' => 'Liczba uwzględnionych pozycji szans',
-    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Aktualizuj otwarte',
+    'LBL_SERVICE_START_DATE_INVALID' => 'Data początkowa usługi nie może być późniejsza niż data końcowa usługi w żadnej z otwartych, dodatkowych pozycji przychodów.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Oferty',
+    'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Szansy wg dynamicznych kontrahentów',
+
 
     // Config
     'LBL_OPPS_CONFIG_VIEW_BY_LABEL' => 'Hierarchia szans',
@@ -231,5 +238,10 @@ Aby utworzyć rekord {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Moje szanse',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Szanse mojego zespołu",
 
-    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Nie można zmienić statusu {{fieldName}}, ponieważ ten {{moduleSingular}} nie ma już otwartych pozycji.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interakcje szansy',
+
+    // AI Predict
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Prognoza realizacji możliwości',
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Wyświetl szczegóły prognozy dla konkretnej możliwości',
 );

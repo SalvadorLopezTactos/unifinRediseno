@@ -52,6 +52,7 @@
         var $li = this.$(e.currentTarget),
             langKey = $li.data("lang-key");
         app.alert.show('language', {level: 'warning', title: app.lang.get('LBL_LOADING_LANGUAGE'), autoclose: false});
+        app.user.setPreference('language', langKey);
         app.lang.setLanguage(langKey, function() {
             app.alert.dismiss('language');
         });

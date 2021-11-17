@@ -69,7 +69,7 @@ class PMSEProjectCRUDApi extends ModuleApi
 
         $projectBean->mark_deleted($args['record']);
 
-        return array('id'=>$bean->id);
+        return array('id' => $projectBean->id);
     }
 
     /**

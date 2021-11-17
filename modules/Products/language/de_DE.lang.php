@@ -13,6 +13,8 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Dashboard für Liste der angebotenen Produkte',
+    'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Dashboard für Berichte der angebotenen Produkte',
+    'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für angebotene Produkte',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Kampagnen-Produkt',
     'LBL_MODULE_NAME' => 'Produkte',
@@ -61,6 +63,7 @@ $mod_strings = array(
     'LBL_WEIGHT' => 'Gewicht:',
     'LBL_DESCRIPTION' => 'Beschreibung:',
     'LBL_TYPE' => 'Typ:',
+    'LBL_PRODUCT_TYPE' => 'Produktart',
     'LBL_CATEGORY' => 'Kategorie',
     'LBL_QUANTITY' => 'Menge:',
     'LBL_STATUS' => 'Status:',
@@ -119,7 +122,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'Verkaufschance-ID',
     'LBL_OPPORTUNITY' => 'Verkaufschance',
     'LBL_REVENUELINEITEM_ID' => 'Umsatzposten-ID:',
-    'LBL_REVENUELINEITEM' => 'Umsatzposten', 
+    'LBL_REVENUELINEITEM' => 'Umsatzposten',
     'LBL_EXPERT_ID' => 'Produktexperte',
     'LBL_FORECAST' => 'In Prognose inkludieren',
     'LBL_CALCULATED_LINE_ITEM_AMOUNT' => 'Produktsumme',
@@ -127,7 +130,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'Kontakt',
     'LBL_DISCOUNT_TOTAL' => 'Rabatt gesamt',
     'LBL_DISCOUNT_AMOUNT' => 'Rabatt-Menge',
-    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Betrag des unterzeichneten Rabatts',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'Wert des Rabatts',
     'LBL_EXT_PRICE' => 'Ext. Preis',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Währungssymbol-Name',
@@ -145,6 +148,8 @@ $mod_strings = array(
     'LBL_SALES_STAGE' => 'Verkaufsphase',
     'LBL_SALES_STATUS' => 'Umsatzposten-Status',
     'LBL_PIPELINE_TOTAL_IS' => 'Pipeline-Summe beträgt ',
+    'LBL_ADD_ON_TO' => 'Hinzufügen zu',
+    'LBL_ADD_ON_TO_ID' => 'Zur ID hinzufügen',
 
     'LBL_CONVERT_TO_QUOTE_ERROR' => 'Fehler:',
     'LBL_CONVERT_TO_QUOTE_ERROR_MESSAGE' => 'Ein Fehler ist aufgetreten beim Konvertieren des Umsatzpostens zu einem Angebot',

@@ -27,6 +27,7 @@ $mod_strings = array (
 'LIST_ROLES_BY_USER'=>'Zoznam rolí podľa používateľov',
 'LBL_ROLES_SUBPANEL_TITLE'=>'Roly používateľov',
 'LBL_SEARCH_FORM_TITLE'=>'Vyhľadávanie',
+'LBL_ACTION_RECORD_VIEW'=>'Zobrazenie záznamu',
 'LBL_ACTION_VIEW'=>'Zobraziť',
 'LBL_ACTION_EDIT'=>'Upraviť',
 'LBL_ACTION_DELETE'=>'Vymazať',

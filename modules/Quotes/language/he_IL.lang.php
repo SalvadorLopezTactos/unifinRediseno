@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'לוח מחוונים של רשימת הצעות מחיר',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת הצעות מחיר',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס הצעות מחיר',
 
     'LBL_CONTRACTS'=>'חוזים',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'חוזים',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'מדינה לחיוב',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'מיקוד לחיוב',
     'LBL_BILLING_ADDRESS_STATE' => 'ארץ לחיוב',
-    'LBL_BILLING_ADDRESS_STREET' => 'כתובת לחיוב',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'כתובות לחיוב:',
     'LBL_BILLING_CONTACT_ID' => 'זהות איש קשר לחיוב:',
     'LBL_BILLING_CONTACT_NAME' => 'שם איש קשר לחיוב:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'מדינה למשלוח',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'מיקוד למשלוח',
     'LBL_SHIPPING_ADDRESS_STATE' => 'מצב המשלוח',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'כתובת למשלוח',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'כתובת למשלוח:',
     'LBL_SHIPPING_BODY' => 'חיוב ומשלוח',
     'LBL_SHIPPING_CONTACT_ID' => 'זהות איש קשר למשלוח:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'העתק כתובת להתחשבנות אל כתובת למשלוח',
     'NTC_COPY_SHIPPING_ADDRESS' => 'העתק כתובת למשלוח אל כתובת להתחשבנות',
     'NTC_COPY_BILLING_ADDRESS2' => 'העתק אל משלוח',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'העתק אל התחשבנות',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'אתה בטוח שברצונך להסיר הערה זו מהצעת המחיר?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'העתק אל התחשבנות',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'אתה בטוח שברצונך להסיר הערה זו מהצעת המחיר?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'אתה בטוח שברצונך להסיר שורת הפריט הזה מהצעת המחיר?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'אתה בטוח שברצונך להסיר קבוצה זו מהצעת המחיר?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'אתה בטוב שברצונך להסיר איש קשר זה מהצעת המחיר?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'כמות',
     'LBL_MFT_PART_NUM' => 'מספר החלק',
     'LBL_ITEM_NAME' => 'שורת פריט',
+    'LBL_PRODUCT_TEMPLATE' => 'מוצר',
     'LBL_DISCOUNT_PRICE' => 'מחיר יחידה',
     'LBL_DISCOUNT_AMOUNT' => 'הנחה',
     'LBL_LINE_ITEM_TOTAL' => 'סך שורת פריט',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'מזהה הזדמנות',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'תצורת הצעות מחיר',
+
+    'LBL_RENEWAL' => 'חידוש',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'אינטראקציות לגבי הצעת מחיר',
 );

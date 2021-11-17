@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Muistiinpanoluettelon työpöytä',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Muistiinpanotietueiden työpöytä',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Muistiinpanot-tietolaatikko',
 
+    'LBL_RELATED_CONTACT' => 'Liittyvä kontakti',
     'ERR_DELETE_RECORD' => 'Tietuenumero tulee määritellä, jotta voit poistaa asiakkaan.',
     'LBL_ACCOUNT_ID' => 'Asiakkaan ID:',
     'LBL_CASE_ID' => 'Palvelupyynnön ID:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'Kontaktin ID:',
     'LBL_CONTACT_NAME' => 'Kontaktin nimi:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Muistiot',
+    'LBL_ATTACHMENTS' => 'Liitteet',
+    'LBL_ATTACHMENT_FLAG' => 'On liitetiedosto',
     'LBL_DESCRIPTION' => 'Kuvaus',
     'LBL_EMAIL_ADDRESS' => 'Sähköpostiosoite:',
     'LBL_EMAIL_ATTACHMENT' => 'Sähköpostin liite',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Muistiot ja liitteet',
     'LBL_NOTE' => 'Muistio:',
     'LBL_OPPORTUNITY_ID' => 'Myyntimahdollisuuden ID:',
+    'LBL_NOTE_PARENT_ID' => 'Huomioi päätason tunnus:',
     'LBL_PARENT_ID' => 'Vanhemman ID:',
     'LBL_PARENT_TYPE' => 'Kannan tyyppi',
     'LBL_EMAIL_TYPE' => 'Sähköpostin tyyppi',

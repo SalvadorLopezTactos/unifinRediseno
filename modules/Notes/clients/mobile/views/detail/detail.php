@@ -30,7 +30,7 @@ $viewdefs['Notes']['mobile']['view']['detail'] = array(
                 'name',
                 'parent_name',
                 'date_modified',
-                'filename',
+                'attachment_list',
                 'tag',
             )
         )

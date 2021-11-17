@@ -197,8 +197,21 @@
     }
   }
 
-  span[data-type="name"] .table-cell-wrapper {
-    width: 100%;
+  span[data-type="name"],
+  span[data-type="dashboardtitle"] {
+    .table-cell-wrapper {
+      width: 100%;
+    }
+  }
+
+  span[data-type="dashboardtitle"] {
+    .detail {
+      position: relative;
+    }
+
+    .record-edit-link-wrapper .record-edit-link i.fa-pencil {
+      top: 8px !important;
+    }
   }
 
   span[data-type="enum"],

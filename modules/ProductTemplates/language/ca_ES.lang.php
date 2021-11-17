@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_TAX_CLASS' => 'Tipus d´Impost:',
   'LBL_TYPE_NAME'=>'Nom del tipus',
   'LBL_TYPE' => 'Tipus:',
+  'LBL_PRODUCT_TYPE' => 'Tipus de producte',
   'LBL_URL' => 'URL de Producte:',
   'LBL_VENDOR_PART_NUM' => 'Número de Parte del Comercial:',
   'LBL_WEIGHT' => 'Pes:',
@@ -91,6 +92,10 @@ $mod_strings = array (
   'LNK_PRODUCT_LIST' => 'Catàleg de Productes',
   'NTC_DELETE_CONFIRMATION' => 'Esteu segur que voleu suprimir aquest registre?',
     'LBL_ADD_TO_QUOTE_BUTTON' => 'Afegeix',
+
+    // Product Catalog Dashlet
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Cerca al Catàleg de productes',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'No hi ha dades disponibles',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nom d&#39;usuari assignat',
@@ -110,4 +115,8 @@ $mod_strings = array (
   'LBL_PRODUCT_TYPES' => 'Tipus de producte',
   'LBL_RENEWABLE' => 'Renovable',
   'LBL_SERVICE' => 'Sevei',
+  'LBL_LOCK_DURATION' => 'Durada del bloqueig',
+    'LBL_PRODUCT_TEMPLATE_LIST_DASHBOARD' => 'Quadre de comandament de la llista del catàleg de productes',
+    'LBL_PRODUCT_TEMPLATE_RECORD_DASHBOARD' => 'Quadre de comandament del registre del catàleg de productes',
+    'LBL_PRODUCT_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat al catàleg de productes',
 );

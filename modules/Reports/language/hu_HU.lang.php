@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Hiba a műveletre vonatkozó böngészési jelentés adatainak a lekérésekor. Segítségnyújtás ügyében vegye fel a kapcsolatot a jelentés tulajdonosával.',
     'LBL_CHART_NO_DRILLTHRU' => 'Böngészési adatok nem elérhetők',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Jelentések figyelemfelhívás',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'A listanézet megjeleníti a jelenlegi keresési kritériumoknak megfelelő összes jelentést, amelyekhez a felhasználók hozzáférhetnek. Az egyes jelentések alapvető részleteit megtekintheti a lista nézet és az előnézet mező oszlopaiban. A jelentésekhez címkéket rendelhet, illetve szűrőket hozhat létre. A jelentés megtekintéséhez kattintson a jelentésnévre, illetve a jelentés módosításához kattinthat a műveletek menü „Jelentés szerkesztése” parancsára.',

@@ -82,7 +82,7 @@ PMSE.ElementHelper.prototype._typeToControl = {
     //"flex relate": "flexrelate",
     "phone": "text",
     "radio": "radio",
-    //"relate": "related",
+    "relate": "related",
     "textarea": "text",//"textarea",
     "url": "text",
     "textfield": "text",
@@ -553,6 +553,7 @@ PMSE.ElementHelper.prototype.moduleFieldEvalGeneration = function(fieldPanel, fi
                     label += '%VALUE%';
                     break;
                 case 'user':
+                case 'Relate':
                 case 'DropDown':
                     label += valueField.getSelectedText();
                     break;
@@ -718,9 +719,25 @@ PMSE.ElementHelper.prototype.processValueDependency = function (dependantField, 
         case 'checkbox':
             labelField = 'text';
             break;
-        case 'dropdown':
-            labelField = 'text';
         case 'multiselect':
+            operators = _.union(operators, [
+                {
+                    textfield: App.lang.get(
+                        'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF',
+                        'pmse_Project'
+                    ),
+                    value: 'array_has_any'
+                },
+                {
+                    textfield: App.lang.get(
+                        'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY',
+                        'pmse_Project'
+                    ),
+                    value: 'array_has_none'
+                }
+            ]);
+        case 'dropdown':
+            labelField = type === 'dropdown' ? 'text' : labelField;
         case 'radio':
             var aux = parentField.getSelectedData() ||
                 parentField._getFirstAvailableOption(),
@@ -756,6 +773,54 @@ PMSE.ElementHelper.prototype.processValueDependency = function (dependantField, 
             newFieldSettings.searchValue = PMSE_USER_SEARCH.value;
             newFieldSettings.searchLabel = PMSE_USER_SEARCH.text;
             newFieldSettings.searchURL = PMSE_USER_SEARCH.url;
+            break;
+        case 'related':
+            newFieldSettings.options = [];
+            var beanToProcess = App.data.createBean(PROJECT_MODULE);
+            if (this._currentMod && this._currentMod !== PROJECT_MODULE) {
+                this._currentMod = this._currentMod.charAt(0).toUpperCase() + this._currentMod.slice(1);
+                beanToProcess = App.data.createBean(this._currentMod);
+            }
+            var fields = beanToProcess && beanToProcess.fields ? beanToProcess.fields : [];
+            var fieldName = parentField.getSelectedData().value;
+            var relateFieldDef = fields && fieldName && fields[fieldName] ? fields[fieldName] : {};
+            var searchModule = relateFieldDef && relateFieldDef.module ? relateFieldDef.module : '';
+            newFieldSettings.searchMore = {
+                module: searchModule,
+                fields: ['id', 'name'],
+                filterOptions: null
+            };
+            newFieldSettings.searchValue = 'id';
+            newFieldSettings.searchLabel = 'name';
+            if (!_.isEmpty(searchModule)) {
+                newFieldSettings.searchURL = searchModule +
+                    '?filter[0][$and][1][$or][0][name][$starts]={%TERM%}&fields=id,' +
+                    'name&max_num={%PAGESIZE%}&offset={%OFFSET%}';
+            } else {
+                newFieldSettings.searchURL = '';
+            }
+
+            // For team_name specifically, we want to enable multi-select and additional operators
+            if (fieldName === 'team_name') {
+                newFieldSettings.multiple = true;
+                operators = _.union(operators, [
+                    {
+                        textfield: App.lang.get(
+                            'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF',
+                            'pmse_Project'
+                        ),
+                        value: 'array_has_any'
+                    },
+                    {
+                        textfield: App.lang.get(
+                            'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY',
+                            'pmse_Project'
+                        ),
+                        value: 'array_has_none'
+                    }
+                ]);
+            }
+
             break;
         case 'datetime':
             newFieldSettings.timeFormat = this._timeFormat;
@@ -866,6 +931,7 @@ PMSE.ElementHelper.prototype.doValueDependency = function (dependantField, paren
         if (!type ||
             (type && type !== this._currentType) ||
             type === 'dropdown' ||
+            type === 'related' ||
             selVal !== this._currentVal ||
             modVal !== this._currentMod) {
             this._currentType = type;

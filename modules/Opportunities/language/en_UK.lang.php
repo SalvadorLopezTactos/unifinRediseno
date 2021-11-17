@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Opportunities List Dashboard',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Opportunities Record Dashboard',
     'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Opportunity Details',
+    'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Opportunities Focus Drawer',
+    'LBL_RENEWAL_OPPORTUNITY' => 'Renewal Opportunity',
 
     'LBL_MODULE_NAME' => 'Opportunities',
     'LBL_MODULE_NAME_SINGULAR' => 'Opportunity',
@@ -144,6 +146,7 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE' => 'Commit Stage',
     'LBL_COMMIT_STAGE_FORECAST' => 'Forecast',
     'LBL_WORKSHEET' => 'Worksheet',
+    'LBL_PURCHASED_LINE_ITEMS' => 'Purchased Line Items',
 
     'LBL_RENEWAL' => 'Renewal',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Renewal Opportunities',
@@ -162,12 +165,16 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# of Total Revenue Line Items',
     'LBL_CLOSED_RLIS' => '# of Closed Revenue Line Items',
+    'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => '# of Open Service Flex-duration Revenue Line Items',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'You cannot delete Opportunities that contain closed Revenue Line Items',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'One or more of the selected records contains closed Revenue Line Items and cannot be deleted.',
     'LBL_INCLUDED_RLIS' => '# of Included Revenue Line Items',
     'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
+    'LBL_SERVICE_START_DATE_INVALID' => 'The Service Start Date cannot be set past the Service End Date of any open add-on Revenue Line Items.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Quotes',
+    'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Opportunities By A Dynamic Account',
+
 
     // Config
     'LBL_OPPS_CONFIG_VIEW_BY_LABEL' => 'Opportunity Hierarchy',
@@ -260,4 +267,9 @@ To create an {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "My Team's Opportunities",
 
     'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Opportunity Interactions',
+
+    // AI Predict
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Opportunity Close Prediction',
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'View prediction details for a specific Opportunity',
 );

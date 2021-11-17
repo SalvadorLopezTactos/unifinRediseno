@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Champs marqués pour effacement',
     'LBL_NO_RECORDS_MARKED' => 'Aucun champ ou enregistrement n&#39;a été marqué pour effacement.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrements de confidentialité des données',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Tiroir de rangement Confidentialité des données',
 
     // list view
     'LBL_HELP_RECORDS' => 'Le module de confidentialité de données suit les activités de confidentialité, y compris le consentement et les demandes, pour supporter les procédures de confidentialité de votre organisation. Créez des enregistrements de confidentialité de données liés à l&#39;enregistrement d&#39;un individu (p. ex. à contact) pour suivre le consentement ou de réaliser une action concernant une demande de confidentialité.',

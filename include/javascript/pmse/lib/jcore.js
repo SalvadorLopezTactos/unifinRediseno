@@ -10930,7 +10930,7 @@ var jCore = (function ($, window) {
         this.text.style.width = "auto";
         this.text.style.height = "auto";
         this.text.style.lineHeight = this.lineHeight * this.canvas.zoomFactor + "px";
-        this.text.innerHTML = this.message;
+        this.text.textContent = this.message;
         this.html.appendChild(this.text);
         this.html.appendChild(this.textField);
         this.html.style.zIndex = 2;
@@ -10946,7 +10946,7 @@ var jCore = (function ($, window) {
 
         this.text.style.lineHeight = this.lineHeight * this.canvas.zoomFactor + "px";
         this.textField.value = this.message;
-        this.text.innerHTML = this.message;
+        this.text.textContent = this.message;
 
         this.html.style.verticalAlign = "middle";
         if (this.overflow) {
@@ -10996,7 +10996,7 @@ var jCore = (function ($, window) {
     Label.prototype.setMessage = function (newMessage) {
         this.message = newMessage;
         if (this.text) {
-            this.text.innerHTML = this.message;
+            this.text.textContent = this.message;
         }
         return this;
     };

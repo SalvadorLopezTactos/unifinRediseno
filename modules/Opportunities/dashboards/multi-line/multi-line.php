@@ -204,6 +204,12 @@ return [
                                                     'action' => 'reloadData',
                                                     'label' => 'LBL_DASHLET_REFRESH_LABEL',
                                                 ],
+                                                [
+                                                    'type' => 'dashletaction',
+                                                    'action' => 'removeClicked',
+                                                    'label' => 'LBL_DASHLET_REMOVE_LABEL',
+                                                    'name' => 'remove_button',
+                                                ],
                                             ],
                                         ],
                                     ],

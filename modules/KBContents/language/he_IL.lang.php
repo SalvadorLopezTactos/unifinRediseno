@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'לוח המחוונים של רשימת מאגר המידע',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'לוח המחוונים של רשומת מאגר המידע',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'מגירת פוקוס מאגר ידע',
 
     'LBL_MODULE_NAME' => 'מרכז מידע',
     'LBL_MODULE_NAME_SINGULAR' => 'מאמר במרכז המידע',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'לא שימושי',
     'LBL_RATING' => 'דירוג',
     'LBL_VIEWED_COUNT' => 'View Count',
-    'LBL_DOWNLOAD_ALL' => 'הורד הכל',
-    'LBL_DOWNLOAD_ONE' => 'הורדה',
-    'LBL_ATTACHMENTS' => 'מסמכים מצורפים:',
-    'LBL_ADD_ATTACHMENT' => 'עיין',
     'LBL_CATEGORIES' => 'קטגוריות בסיס ידע',
     'LBL_CATEGORY_NAME' => 'קטגוריה',
     'LBL_USEFULNESS' => 'תועלתיות',

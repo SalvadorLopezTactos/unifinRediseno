@@ -56,10 +56,12 @@ foreach($report_modules as $module_name=>$bean_name)
   	$mod_strings = return_module_language($current_language,$module_name);
 	$currentModule = $module_name;
 
+    $module_name_escaped = substr(JSON::encode($module_name), 1, -1);
+
 ?>
 
 var rel_defs = new Object();
-var link_defs_<?php echo $module_name; ?> = new Object();
+var link_defs_<?php echo $module_name_escaped; ?> = new Object();
 <?php
     $linked_fields = $module->get_linked_fields();
 
@@ -127,7 +129,7 @@ var link_defs_<?php echo $module_name; ?> = new Object();
 	  	$linked_field['label'] = preg_replace('/:$/','',$linked_field['label']);
 		$linked_field['label'] = addslashes($linked_field['label']);
 
-        echo "link_defs_{$module_name}[ '{$linked_field['name']}' ] = " . json_encode(array(
+        echo "link_defs_{$module_name_escaped}[ '{$linked_field['name']}' ] = " . json_encode(array(
             'name' => $linked_field['name'],
             'relationship_name' => $linked_field['relationship'],
             'bean_is_lhs' => $module->$field->getSide() == REL_LHS,
@@ -137,7 +139,7 @@ var link_defs_<?php echo $module_name; ?> = new Object();
         )) . ";\n";
     }
 ?>
-var field_defs_<?php echo $module_name; ?> = new Object();
+var field_defs_<?php echo $module_name_escaped; ?> = new Object();
 <?php
 
 		if(is_array($module->field_defs)) {
@@ -182,7 +184,7 @@ var field_defs_<?php echo $module_name; ?> = new Object();
 			    }
 
 ?>
-field_defs_<?php echo $module_name; ?>[ "<?php echo $field_def['name']; ?>"] = <?php
+field_defs_<?php echo $module_name_escaped; ?>[ "<?php echo $field_def['name']; ?>"] = <?php
 
 				$js_defs_array = array();
 
@@ -221,7 +223,7 @@ field_defs_<?php echo $module_name; ?>[ "<?php echo $field_def['name']; ?>"] = <
 
 if (!empty($field_def['options'])) {
 ?>
-var option_arr_<?php echo $module_name; ?> = new Array();
+var option_arr_<?php echo $module_name_escaped; ?> = new Array();
 
 <?php
 					$options_array = array();
@@ -247,19 +249,19 @@ var option_arr_<?php echo $module_name; ?> = new Array();
 				        $option_value = addslashes($option_value);
 
 ?>
-option_arr_<?php echo $module_name; ?>[option_arr_<?php echo $module_name; ?>.length] = { "value":"<?php echo $option_value; ?>", "text":"<?php echo $option_text; ?>"};
+option_arr_<?php echo $module_name_escaped; ?>[option_arr_<?php echo $module_name_escaped; ?>.length] = { "value":"<?php echo $option_value; ?>", "text":"<?php echo $option_text; ?>"};
 <?php
 // END HALF-FIX
 					}
 ?>
 
-field_defs_<?php echo $module_name; ?>[ "<?php echo $field_def['name']; ?>"].options=option_arr_<?php echo $module_name; ?>;
+field_defs_<?php echo $module_name_escaped; ?>[ "<?php echo $field_def['name']; ?>"].options=option_arr_<?php echo $module_name_escaped; ?>;
 
 <?php
 				} else if(isset($field_def['type']) && ($field_def['type'] == 'enum' || $field_def['type'] == 'timeperiod') && isset($field_def['function']))
 				{
 ?>
-					var option_arr_<?php echo $module_name; ?> = new Array();
+                    var option_arr_<?php echo $module_name_escaped; ?> = new Array();
 
 <?php
                     $options_array = getFunctionValue(!empty($field_def['function_bean']) ? $field_def['function_bean'] : null, $field_def['function']);
@@ -271,16 +273,16 @@ field_defs_<?php echo $module_name; ?>[ "<?php echo $field_def['name']; ?>"].opt
 			            $option_value = html_entity_decode($option_value,ENT_QUOTES);
 			            $option_value = addslashes($option_value);
 ?>
-option_arr_<?php echo $module_name; ?>[option_arr_<?php echo $module_name; ?>.length] = { "value":"<?php echo $option_value; ?>", "text":"<?php echo $option_text; ?>"};
+option_arr_<?php echo $module_name_escaped; ?>[option_arr_<?php echo $module_name_escaped; ?>.length] = { "value":"<?php echo $option_value; ?>", "text":"<?php echo $option_text; ?>"};
 <?php
             }
 ?>
-field_defs_<?php echo $module_name; ?>[ "<?php echo $field_def['name']; ?>"].options=option_arr_<?php echo $module_name; ?>;
+field_defs_<?php echo $module_name_escaped; ?>[ "<?php echo $field_def['name']; ?>"].options=option_arr_<?php echo $module_name_escaped; ?>;
 <?php
 			    } else if( isset($field_def['type']) && $field_def['type'] == 'parent_type' && isset($field_def['group']) && isset($module->field_defs[$field_def['group']]) && isset($module->field_defs[$field_def['group']]['options']))
 			    {
 	    	?>
-	    	var option_arr_<?php echo $module_name; ?> = new Array();
+                    var option_arr_<?php echo $module_name_escaped; ?> = new Array();
 	    	<?php
 	    	    	$options_array = array();
 				  	$trans_options = translate($module->field_defs[$field_def['group']]['options']);
@@ -304,12 +306,12 @@ field_defs_<?php echo $module_name; ?>[ "<?php echo $field_def['name']; ?>"].opt
 				        $option_value = addslashes($option_value);
 
 				?>
-option_arr_<?php echo $module_name; ?>[option_arr_<?php echo $module_name; ?>.length] = { "value":"<?php echo $option_value; ?>", "text":"<?php echo $option_text; ?>"};
+option_arr_<?php echo $module_name_escaped; ?>[option_arr_<?php echo $module_name_escaped; ?>.length] = { "value":"<?php echo $option_value; ?>", "text":"<?php echo $option_text; ?>"};
 				<?php
 		            }
 				?>
 
-field_defs_<?php echo $module_name; ?>[ "<?php echo $field_def['name']; ?>"].options=option_arr_<?php echo $module_name; ?>;
+field_defs_<?php echo $module_name_escaped; ?>[ "<?php echo $field_def['name']; ?>"].options=option_arr_<?php echo $module_name_escaped; ?>;
            <?php
 				}
                 elseif (isset($field_def['type']) && $field_def['type'] == 'currency_id')
@@ -324,25 +326,25 @@ field_defs_<?php echo $module_name; ?>[ "<?php echo $field_def['name']; ?>"].opt
                         );
                     }
                     $json = getJSONobj();
-                    echo "var option_arr_{$module_name} = " . $json->encode($currencyList) . ";\n";
-                    echo "field_defs_{$module_name}[\"{$field_def['name']}\"].options = option_arr_{$module_name};\n";
+                    echo "var option_arr_{$module_name_escaped} = " . $json->encode($currencyList) . ";\n";
+                    echo "field_defs_{$module_name_escaped}[\"{$field_def['name']}\"].options = option_arr_{$module_name_escaped};\n";
                 }
 			} //End foreach field
 		}
 ?>
-var default_table_columns_<?php echo $module_name; ?> = ["<?php echo implode("\",\"",array());?>"];
+var default_table_columns_<?php echo $module_name_escaped; ?> = ["<?php echo implode("\",\"", array()); ?>"];
 
 
 
 
-module_defs['<?php echo $module_name; ?>'] = new Object();
-module_defs['<?php echo $module_name; ?>'].link_defs = link_defs_<?php echo $module_name; ?>;
-module_defs['<?php echo $module_name; ?>'].field_defs = field_defs_<?php echo $module_name; ?>;
-module_defs['<?php echo $module_name; ?>'].default_table_columns = default_table_columns_<?php echo $module_name; ?>;
-module_defs['<?php echo $module_name; ?>'].summary_field_defs = new Object();
-module_defs['<?php echo $module_name; ?>'].group_by_field_defs = new Object();
-module_defs['<?php echo $module_name; ?>'].default_summary_columns = default_summary_columns;
-module_defs['<?php echo $module_name; ?>'].label = "<?php echo addslashes(
+module_defs['<?php echo $module_name_escaped; ?>'] = new Object();
+module_defs['<?php echo $module_name_escaped; ?>'].link_defs = link_defs_<?php echo $module_name_escaped; ?>;
+module_defs['<?php echo $module_name_escaped; ?>'].field_defs = field_defs_<?php echo $module_name_escaped; ?>;
+module_defs['<?php echo $module_name_escaped; ?>'].default_table_columns = default_table_columns_<?php echo $module_name_escaped; ?>;
+module_defs['<?php echo $module_name_escaped; ?>'].summary_field_defs = new Object();
+module_defs['<?php echo $module_name_escaped; ?>'].group_by_field_defs = new Object();
+module_defs['<?php echo $module_name_escaped; ?>'].default_summary_columns = default_summary_columns;
+module_defs['<?php echo $module_name_escaped; ?>'].label = "<?php echo addslashes(
     isset($app_list_strings['moduleList'][$module_name]) ? $app_list_strings['moduleList'][$module_name] : $module_name);?>";
 <?php
 	}
@@ -601,6 +603,7 @@ filter_defs['float'] = qualifiers;
 filter_defs['decimal'] = qualifiers;
 filter_defs['currency'] = qualifiers;
 filter_defs['num'] = qualifiers;
+filter_defs['autoincrement'] = qualifiers;
 
 var qualifiers =  new Array();
 qualifiers[qualifiers.length] = {name:'is',value:'<?php echo $mod_strings['LBL_IS']; ?>'};

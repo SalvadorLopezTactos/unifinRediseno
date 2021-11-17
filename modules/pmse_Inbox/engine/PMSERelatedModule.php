@@ -380,6 +380,20 @@ class PMSERelatedModule
             case 'multienum':
                 $value = !empty($value) ? unencodeMultienum($value) : array();
                 break;
+            case 'relate':
+                // Handle team_name as a special case here, as we have to load multiple values for this field
+                if ($def['name'] === 'team_name') {
+                    $teamSet = BeanFactory::retrieveBean('TeamSets', $newBean->team_set_id);
+                    if ($teamSet) {
+                        $teamSet->load_relationship('teams');
+                        $value = $teamSet->getTeamIds($newBean->team_set_id);
+                    }
+                } elseif (!empty($def['id_name']) &&
+                    !empty($newBean->field_defs[$def['id_name']]) &&
+                    !empty($newBean->{$def['id_name']})) {
+                    $value = $newBean->{$def['id_name']};
+                }
+                break;
           }
           return $value;
     }

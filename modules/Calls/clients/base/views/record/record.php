@@ -97,6 +97,13 @@ $viewdefs['Calls']['base']['view']['record'] = array(
                     'acl_module' => 'Calls',
                     'acl_action' => 'create',
                 ),
+                [
+                    'type' => 'rowaction',
+                    'event' => 'button:audit_button:click',
+                    'name' => 'audit_button',
+                    'label' => 'LNK_VIEW_CHANGE_LOG',
+                    'acl_action' => 'view',
+                ],
                 array(
                     'type' => 'divider',
                 ),
@@ -305,7 +312,19 @@ $viewdefs['Calls']['base']['view']['record'] = array(
                     'span' => 12,
                     'rows' => 3,
                 ),
+                [
+                    'name' => 'transcript',
+                    'span' => 12,
+                ],
                 'parent_name',
+                [
+                    'name' => 'call_recording',
+                    'related_fields' => [
+                        'aws_contact_id',
+                        'call_recording_url',
+                        'date_entered',
+                    ],
+                ],
                 array(
                     'name' => 'invitees',
                     'type' => 'participants',

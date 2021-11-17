@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => 'komend jaar',
     'LBL_OPEN_ISSUES' => 'Open {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'Recentelijk opgelost',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => 'Filter maken',
+    'LBL_ERROR_FILTER_EMPTY' => 'Voeg filtercriteria toe.',
+    'LBL_ADD_FILTER' => 'Criteria toevoegen',
+    'LBL_FILTER_NAME' => 'Filternaam',
+    'LBL_FILTER_FIELD' => 'Veld',
+    'LBL_FILTER_OPERATOR' => 'Aanbieder',
+    'LBL_FILTER_VALUE' => 'Waarde',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Opgeslagen in desktopapp',
+    'LBL_FILTER_LOCAL' => 'Lokaal filter',
 );

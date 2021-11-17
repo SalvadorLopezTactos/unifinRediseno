@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'Kontakty',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'Záujemcovia',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'Používatelia',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'Informačný panel so záznamom obchodných centier',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na obchodné centrá',
 ];

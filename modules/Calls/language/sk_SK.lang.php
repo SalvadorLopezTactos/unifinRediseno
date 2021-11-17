@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Informačný panel so zoznamom volaní',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Informačný panel so záznamom volaní',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na hovory',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Volania',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Priradený používateľ',
     'LBL_LIST_MY_CALLS' => 'Moje volania',
     'LBL_MY_SCHEDULED_CALLS' => 'Moje plánované volania',
+    'LBL_GUEST_CALLS' => 'Moje hovory ako hosťa',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Naplánované hovory ako hosťa',
     'LBL_SELECT_FROM_DROPDOWN' => 'Vyberte si najprv z rozbaľovacieho zoznamu "Priradené k".',
 	'LBL_ASSIGNED_TO_NAME' => 'Priradené k',
 	'LBL_ASSIGNED_TO_ID' => 'Priradený používateľ',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Zrušiť',
     'LBL_EMPTY_SEARCH_RESULT' => 'Ľutujeme, neboli nájdené žiadne výsledky. Vytvorte pozvanú osobu nižšie.',
     'LBL_NO_ACCESS' => 'Nemáte prístup potrebný na vytváranie modulu $',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'ID kontaktu Amazon Connect',
+
     'LBL_REPEAT_TYPE' => 'Opakovať',
     'LBL_REPEAT_INTERVAL' => 'Interval opakovania',
     'LBL_REPEAT_END' => 'Ukončenie',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Volanie s {{{this}}}',
     'LBL_SEND_INVITES' => 'Poslať pozvánky',
     'LBL_REMINDER_TITLE' => 'Volanie:',
+    'LBL_CALL_RECORDING_URL' => 'URL pre nahrávanie',
+    'LBL_CALL_RECORDING' => 'Nahrávanie',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Naplánovali ste {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> pre {{formatDate date_start}}.',

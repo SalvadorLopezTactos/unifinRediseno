@@ -62,13 +62,21 @@ $viewdefs['ConsoleConfiguration']['base']['view']['config-tab-settings'] = array
             'fields' => array(
                 array(
                     'name' => 'filter_def',
-                    'vname' => 'LBL_CONSOLE_FILTER_RULES',
+                    'dismiss_label' => true,
                     'type' => 'filter-field',
                 ),
             ),
         ),
+        [
+            'label' => 'LBL_PREVIEW',
+            'fields' => [
+                [
+                    'name' => 'preview-table',
+                    'type' => 'preview-table',
+                ],
+            ],
+        ],
         array(
-            'label' => 'LBL_CONSOLE_DIRECTIONS',
             'fields' => array(
                 array(
                     'name' => 'directions',

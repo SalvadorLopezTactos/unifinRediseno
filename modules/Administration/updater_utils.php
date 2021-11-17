@@ -61,7 +61,6 @@ function check_now($send_usage_info=true, $get_request_data=false, $response_dat
             $info = $systemInfo->getInfo();
         }
 
-
 		// This section of code is a portion of the code referred
 		// to as Critical Control Software under the End User
 		// License Agreement.  Neither the Company nor the Users
@@ -70,14 +69,8 @@ function check_now($send_usage_info=true, $get_request_data=false, $response_dat
 			$key = $license->settings['license_key'];
 		}else{
 			//END REQUIRED CODE
-
-
 			$key = '4829482749329';
-
-
 		}
-
-
 
 		$encoded = sugarEncode($key, serialize($info));
 
@@ -122,6 +115,7 @@ function check_now($send_usage_info=true, $get_request_data=false, $response_dat
             SubscriptionManager::instance()->downloadSubscriptionContent($key);
         }
         //END REQUIRED CODE
+
         if (!empty($resultData['msg'])) {
 			if(!empty($resultData['msg']['admin'])){
 				$license->saveSetting('license', 'msg_admin', base64_encode($resultData['msg']['admin']));
@@ -253,28 +247,12 @@ function set_sugarbeat($value) {
 	write_array_to_file( "sugar_config", $sugar_config, "config.php" );
 }
 function get_sugarbeat() {
-
-
-	/*
-
-	global $sugar_config;
-	$_SUGARBEAT="sugarbeet";
-
-	if (isset($sugar_config[$_SUGARBEAT]) && $sugar_config[$_SUGARBEAT] == false) {
-	return false;
-	}
-	*/
-
 	return true;
-
 }
-
-
 
 function shouldCheckSugar(){
 	global $license, $timedate;
 	if(
-
 	(empty($license->settings['license_last_validation_fail']) ||  $license->settings['license_last_validation_fail'] < $timedate->getNow()->modify("-6 hours")->asDb(false))  &&
     (get_CheckUpdates_config_setting() == 'automatic' || !empty($GLOBALS['sugar_config']['hide_admin_licensing']))) {
 		return true;
@@ -508,6 +486,7 @@ function isNeedRedirectDependingOnUserAndSystemState($state, $module = null, $ac
  */
 function setSystemState($state){
 	global $current_user;
+
 	$admin_redirect_url		= 'index.php?action=LicenseSettings&module=Administration&LicState=check';
 	$not_admin_redirect_url	= 'index.php?module=Users&action=Logout&LicState=check';
 
@@ -815,7 +794,6 @@ function isAboutToExpire($expire_date, $days_before_warning = 7){
 }
 //END REQUIRED CODE
 
-
 function loadLicense($firstLogin=false){
 
 	$GLOBALS['license'] = Administration::getSettings('license', $firstLogin);
@@ -882,7 +860,6 @@ function loginLicense(){
         }
     }
 
-
 	if (shouldCheckSugar()) {
 
 
@@ -895,10 +872,10 @@ function loginLicense(){
 			$version = check_now(get_sugarbeat());
 
 			unset($_SESSION['license_seats_needed']);
-
 			unset($_SESSION['LICENSE_EXPIRES_IN']);
 			unset($_SESSION['VALIDATION_EXPIRES_IN']);
 			unset($_SESSION['HomeOnly']);
+
 			loadLicense();
 			set_last_check_date_config_setting("$current_date_time");
 			include('sugar_version.php');
@@ -933,5 +910,4 @@ function loginLicense(){
 	    }
 	}
 	//END REQUIRED CODE DO NOT MODIFY
-
 }

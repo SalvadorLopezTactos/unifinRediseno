@@ -70,11 +70,11 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> 'Figyelem: nem írható',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'Ön által használt PHP verziót nem támogatja a SugarCRM. Szüksége lesz egy frissebb verzióra, amely kompatibilis a Sugar alkalmazással. Tekintse át a kiadásokra vonatkozó PHP kompatibilitási listát! Az Ön által használt verzió',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'Az Ön IIS verzióját nem támogatja a Sugar. Installálnia kell egy olyan verziót, amely megfelel a rendszer számára. Kérem, olvassa el a kompatibilitási mátrixot a kiadásokra vonatkozó jegyzetekben! Az Ön verziója',
-	'ERR_CHECKSYS_FASTCGI'              => 'A program észlelése szerint Ön nem használja a FastCGI kezelőt a PHP-hez. Installálnia kell egy olyan verziót, amely megfelel a rendszer számára. Kérem, olvassa el a kompatibilitási mátrixot a kiadásokra vonatkozó jegyzetekben! Az Ön verziója A részletekről itt olvashat: http://www.iis.net/php/',
+    'ERR_CHECKSYS_FASTCGI'              => 'A program észlelése szerint Ön nem használja a FastCGI kezelőt a PHP-hez. Installálnia kell egy olyan verziót, amely megfelel a rendszer számára. Kérem, olvassa el a kompatibilitási mátrixot a kiadásokra vonatkozó jegyzetekben! Az Ön verziója A részletekről itt olvashat: <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a> ',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Az optimális élmény érdekében használjon IIS/FastCGI sapi-t; állítsa 0-ra a fastcgi.logging paramétert a php.ini fájl-ban!',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Nem támogatott PHP verzió van telepítve: (ver',
     'LBL_DB_UNAVAILABLE'                => 'Adatbázis nem elérhető',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Az adatbázis támogatása nem található. Ellenőrizze, hogy rendelkezik a szükséges meghajtókkal a következő támogatott adatbázistípusok egyikéhez: MySQL, MS SQLServer, Oracle vagy DB2. Elképzelhető, hogy törölnie kell a php.ini fájlban található kiterjesztés megjelölését, vagy újra össze kell állítania a megfelelő bináris fájllal a PHP verziójától függően. Tekintse meg a PHP kezelési utasításokat további információért az adatbázis támogatásának engedélyezéséhez.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Adatbázistámogatás nem található. Kérjük, győződjön meg róla, hogy rendelkezik a megfelelő illesztőprogramokkal a támogatott adatbázisok egyikéhez: MySQL, MS SQLServer, Oracle vagy DB2. Elképzelhető, hogy a PHP-verziójától függően vissza kell fejtenie a php.ini fájlban található kiterjesztést vagy újra kell fordítani a megfelelő bináris fájlt. Ha további információra van szüksége az Adatbázistámogatás engedélyezéséről, kérjük, tekintse meg a PHP-kézikönyvet.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Egyes XML-feldolgozó könyvtárakhoz kapcsolódó funkciók, amelyek szükségesek a SugarCRM-hez, nem találhatók. Az Ön PHP verziójától függően vagy a php-ini fájlban kell módosításokat végezni, vagy a vonatkozó bináris fájlt kell ismételten összeállítani. Kérem, olvasson utána a PHP felhasználói kézikönyvében!',
     'LBL_CHECKSYS_CSPRNG' => 'Véletlenszerű számgenerátor',
     'ERR_CHECKSYS_MBSTRING'             => 'Egyes Multibyte Strings (mbstring) PHP kiterjesztéshez kapcsolódó funkciók, amelyek szükségesek a SugarCRM-hez, nem találhatók. <br /><br />Az alapértelmezett beállítások szerint az mbstring modul le van tiltva a PHP-ben, amit aktiválni kell az --enable-mbstring kifejezéssel. Kérem, olvasson utána a PHP felhasználói kézikönyvében, hogy lehet bekapcsolni az mbstring támogatást!',
@@ -476,139 +476,140 @@ $mod_strings = array(
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Php visszamenőleges kompatibilitási mód be van kapcsolva. A folytatáshoz állítsa a zend.ze1_compatibility_mode -ot  "off"-ra',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => 'Találkozóértesítések emailekben',
+        'subject' => 'SugarCRM találkozó - $event_name ',
+        'description' => 'A rendszer ezt a sablont alkalmazza, amikor találkozóértesítést küld egy felhasználónak.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Címzett: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Meeting</p>
+	<p>$assigned_by_user meghívót küldött egy találkozóra</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>Tárgy: $event_name<br/>
+	Kezdés dátuma: $start_date<br/>
+	Befejezés dátuma: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>Leírás: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>Találkozóra vonatkozó meghívó elfogadása:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>Találkozóra vonatkozó meghívó feltételes elfogadása:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>Találkozóra vonatkozó meghívó elutasítása:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Címzett: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user meghívót küldött egy találkozóra
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+Tárgy: $event_name
+Kezdés dátuma: $start_date
+Befejezés dátuma: $end_date
 
-Description: $description
+Leírás: $description
 
-Accept this meeting:
+Találkozóra vonatkozó meghívó elfogadása
 <$accept_link>
 
-Tentatively Accept this meeting
+Találkozóra vonatkozó meghívó feltételes elfogadása
 <$tentative_link>
 
-Decline this meeting
+Találkozóra vonatkozó meghívó elutasítása
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => 'Hívásértesítések emailekben',
+        'subject' => 'SugarCRM hívás - $event_name ',
+        'description' => 'A rendszer ezt a sablont alkalmazza, amikor hívásértesítést küld egy felhasználónak.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>Címzett: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user meghívót küldött egy találkozóra</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>Tárgy: $event_name<br/>
+	Kezdés dátuma: $start_date<br/>
+	Időtartam: $hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>Leírás: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>Hívás elfogadása:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>Hívás feltételes elfogadása:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>Hívás elutasítása:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'Címzett: $assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user meghívót küldött egy hívásra
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+Tárgy: $event_name
+Kezdés dátuma: $start_date
+Időtartam: $hoursh, $minutesm
 
-Description: $description
+Leírás: $description
 
-Accept this call:
+Hívás elfogadása
 <$accept_link>
 
-Tentatively Accept this call
+Hívás feltételes elfogadása
 <$tentative_link>
 
-Decline this call
+Hívás elutasítása
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => 'Hozzárendelési értesítés emailek',
+        'subject' => 'SugarCRM - $module_name hozzárendelve ',
+        'description' => 'A rendszer ezt a sablont alkalmazza, amikor feladathozzárendelést küld egy felhasználónak.',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user hozzárendelt egy&nbsp;$module_name modult a következő felhasználóhoz:&nbsp;$assigned_user.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>Ezt a(z)&nbsp;$module_name modult áttekintheti itt:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user hozzárendelt egy $module_name modult a következő felhasználóhoz: $assigned_user.
 
-You may review this $module_name at:
+Ezt a(z) $module_name modult áttekintheti itt:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => 'Beütemezett jelentés emailek',
+        'subject' => 'Beütemezett jelentés: $report_name, dátum: $report_time',
+        'description' => 'A rendszer ezt a sablont alkalmazza, amikor beütemezett jelentést küld egy felhasználónak.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>Tisztelt $assigned_user,</p>
+<p>Csatolmányként küldünk egy automatikusan generált jelentést, amelyet beütemeztek az Ön számára.</p>
+<p>Jelentés neve: $report_name</p>
+<p>Jelentés futtatásának dátuma és ideje: $report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            'Tisztelt $assigned_user,
 
-Attached is an auto generated report that has been scheduled for you.
+Csatolmányként küldünk egy automatikusan generált jelentést, amelyet beütemeztek az Ön számára.
 
-Report Name: $report_name
+Jelentés neve: $report_name
 
-Report Run Date and Time: $report_time',
+Jelentés futtatásának dátuma és ideje: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => 'Rendszer megjegyzésnapló email értesítés',
+        'subject' => 'SugarCRM - $initiator_full_name megemlítette Önt ebben: $singular_module_name',
+        'description' => 'A sablont a rendszer felhasználóknak küldött email értesítéseknél alkalmazza, amelyekkel a felhasználót tájékoztatja a megjegyzésnaplóban való megemlítésről.',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>Az Ön neve felmerült a következő rekord megjegyzésnaplójában:  <a href="$record_url">$record_name</a></p>
+                <p>A megjegyzés megtekintéséhez lépjen be a Sugar rendszerbe.</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'Az Ön neve felmerült a következő rekord megjegyzésnaplójában: $record_name
+            A megjegyzés megtekintéséhez lépjen be a Sugar rendszerbe.',
     ],
 
     'advanced_password_new_account_email' => array(

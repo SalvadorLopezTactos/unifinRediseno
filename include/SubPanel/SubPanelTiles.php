@@ -274,7 +274,7 @@ if(document.DetailView != null &&
             }
         }
         // drag/drop code
-        $tab_names = '["' . join($tab_names, '","') . '"]';
+        $tab_names = json_encode($tab_names);
         global $sugar_config;
 
         if(empty($sugar_config['lock_subpanels']) || $sugar_config['lock_subpanels'] == false) {

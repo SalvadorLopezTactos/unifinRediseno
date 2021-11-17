@@ -13,7 +13,10 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TASKS_LIST_DASHBOARD' => 'Uzdevumu saraksta instrumentu panelis',
+  'LBL_TASKS_RECORD_DASHBOARD' => 'Uzdevumu ierakstu instrumentu panelis',
+  'LBL_TASKS_FOCUS_DRAWER_DASHBOARD' => 'Uzdevumu fokusa panelis',
 
+  'LBL_RELATED_CONTACT' => 'Saistītā kontaktpersona',
   'LBL_MODULE_NAME' => 'Uzdevumi',
   'LBL_MODULE_NAME_SINGULAR' => 'Uzdevums',
   'LBL_TASK' => 'Uzdevumi:',

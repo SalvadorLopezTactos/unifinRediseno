@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Error al recuperar la información de la simulación a través de los datos de informe para esta acción. Contacte al propietario del reporte para obtener asistencia.',
     'LBL_CHART_NO_DRILLTHRU' => 'Profundización no disponible',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Panel de Enfoque de Informes',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'La vista de lista muestra todos los informes que cumplen con el criterio de búsqueda actual y a los cuales tienen acceso los usuarios. Puede ver los detalles básicos de cada informe en las columnas de la lista y en la vista previa. Puede establecer etiquetas para los informes y crear filtros. Haga clic en el nombre del informe para verlo, o seleccione &#39;Editar informe&#39; en el menú de acciones para modificarlo.',

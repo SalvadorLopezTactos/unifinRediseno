@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Campi contrassegnati per l&#39;eliminazione',
     'LBL_NO_RECORDS_MARKED' => 'Nessun campo o record è stato contrassegnato per l&#39;eliminazione.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Dashboard dei record della privacy dei dati',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Privacy dei dati Focus Drawer',
 
     // list view
     'LBL_HELP_RECORDS' => 'Il modulo Privacy dei dati tiene traccia delle attività relative alla privacy, incluse le richieste di consenso e di oggetto, per supportare le procedure di privacy dell&#39;organizzazione. Creare record di privacy dei dati relativi al record di un individuo (ad esempio, un contatto) per tenere traccia del consenso o intraprendere un&#39;azione su una richiesta di privacy.',

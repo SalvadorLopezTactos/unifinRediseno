@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'Vartotojo vardas',
 	'LBL_RESTORE_BUTTON_LABEL'=>'Atstatyti',
 	'LBL_SYSTEM_SETTINGS' => 'Sistemos nustatymai',
-	'LBL_SKYPEOUT_ON_DESC' => 'Šalinti vartotojus skambinti su SkypeOut&reg;. Numeris turi būti tinkamai suformatuotas, kad būtų galima naudotis šia savybe.Daugiau informacijos FAQ <a href="http://www.skype.com/help/faq/skypeout.html#calling" target="skype">skype&reg; faq</a>',
-	'LBL_SKYPEOUT_ON' => 'Įjungti SkypeOut&reg; integraciją',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut&reg;',
+    'LBL_DIALOUT_ON_DESC' => 'Leidžia vartotojams spustelėti telefono numerius ir paskambinti jiems naudojant numatytąją kompiuterinės telefonijos integravimo (CTI) programinę įrangą.',
+    'LBL_DIALOUT_ON' => 'Įgalinti skambinimo spustelėjus funkciją',
+    'LBL_DIALOUT_TITLE' => 'Siunčiamas skambutis',
     'LBL_TWEETTOCASE_ON_DESC' => 'Allows users to create cases from Tweets',
     'LBL_TWEETTOCASE_ON' => 'Enable Tweet&reg; to case integration',
     'LBL_TWEETTOCASE_TITLE' => 'Tweet&reg; to case',
@@ -363,7 +363,7 @@ $mod_strings = array (
     'JS_ALERT_PDF_WRONG_EXTENSION' => 'Šis failas neturi teisingos failo išplėtimo.',
     'LBL_PDF_INSTRUCTIONS' => 'Instrukcijos',
     'PDF_INSTRUCTIONS_ADD_FONT' => <<<BSOFR
-Fonts supported by SugarPDF :
+„SugarPDF“ palaikomi šriftai:
 <ul>
 <li>TrueTypeUnicode (UTF-8 Unicode)</li>
 <li>OpenTypeUnicode</li>
@@ -373,11 +373,11 @@ Fonts supported by SugarPDF :
 <li>CID-0</li>
 </ul>
 <br>
-If you choose to not embed your font in the PDF, the generated PDF file will be lighter but a substitution will be use if the font is not available in the system of your reader.
+Jei nuspręsite neįterpti šrifto į PDF, sugeneruotas PDF failas bus šviesesnis, tačiau bus naudojamas pakaitalas, jei šrifto nėra jūsų skaitytuvo sistemoje.
 <br><br>
-Adding a PDF font to SugarCRM requires to follow steps 1 and 2 of the TCPDF Fonts documentation available in the "DOCS" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>The pfm2afm and ttf2ufm utils are available in fonts/utils in the TCPDF package that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>Load the metric file generated in step 2 and your font file below.
+Pridėjus PDF šriftą prie „SugarCRM“, reikia atlikti TCPDF šriftų dokumentacijos, pateikiamos „DOCS“ skyriuje, <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF tinklalapyje</a>, 1 ir 2 veiksmus.
+<br><br>pfm2afm ir ttf2ufm įrankiai yra prieinami TCPDF paketo šriftuose / įrankiuose, kuriuos galite atsisiųsti skyriuje „ATSISIUNTIMAS“, <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF svetainėje</a>.
+<br><br>Įkelkite 2 veiksme sugeneruotą metrikos failą ir šrifto failą žemiau.
 BSOFR
 ,
     'ERR_MISSING_CIDINFO' => 'Laukas CID informacija negali būti tuščias.',
@@ -428,6 +428,9 @@ BSOFR
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Ataskaitų modulis yra nepasiekiamas dirbant per mobilią Interneto naršyklę.',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => 'Maksimalus ilgis turėtų būti didesnis nei minimalus ilgis',
+    'ERR_MIN_LENGTH_NEGATIVE' => 'Minimalus ilgis turėtų būti teigiama vertė',
+    'ERR_MAX_LENGTH_NEGATIVE' => 'Didžiausias ilgis turėtų būti teigiama vertė',
     'ERR_EMPTY_SAML_LOGIN' => 'SAML Login URL can not be empty',
     'ERR_EMPTY_SAML_CERT' => 'SAML certificate can not be empty',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'Reikia nurodyti SAML subjekto ID',
@@ -441,9 +444,6 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Veiklos srautai',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Įgalinti veiklos srautus',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Įjungiami programos veiklos srautus',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Įjungti papildomą prisijungimo ekrano turinį',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Automatinio išsaugojimo proceso apibrėžimai',

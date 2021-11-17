@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => '案件清單儀表板',
     'LBL_CASES_RECORD_DASHBOARD' => '案件紀錄儀表板',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => '案例詳細資料',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => '客戶反饋焦點抽屜',
 
 	'ERR_DELETE_RECORD'					=> '您必須指定記錄編號才能刪除「帳戶」。',
 	'LBL_ACCOUNT_ID'					=> '帳戶 ID',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => '在「入口網站」中顯示',
 	'LBL_CREATE_KB_DOCUMENT' => '建立文章',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => '知識庫',
+    'LBL_REQUEST_CLOSE' => '請求關閉',
+    'LBL_REQUEST_CLOSE_DATE' => '請求關閉日期',
+    'LBL_REQUEST_CLOSE_LABEL' => '請求關閉',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => '發送請求關閉這個客戶回饋',
+    'LBL_REQUEST_CLOSE_MESSAGE' => '您是否要關閉這個客戶回饋?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => '我已請求關閉的客戶回饋',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => '我已請求關閉的客戶回饋',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => '我已請求關閉的客戶回饋',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => '請求關閉的客戶回饋列表',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => '顯示請求關閉的已分配客戶回饋列表',
 
     'LBL_CREATED_USER' => '已建立使用者',
     'LBL_MODIFIED_USER' => '已修改使用者',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => '指派的使用者名稱',
     'LBL_EXPORT_TEAM_COUNT' => '群組計數',
     'LBL_CHANGETIMERS' => '更改計時器',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => '購買',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => '關聯連絡人電子郵件',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => '比如，可使用此功能尋找之前已提交的問題。',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => '如果您有需要提交的新支援「實例」，可按一下此處以提交新「實例」。',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => '按一下此處可隨時回到此檢視表。',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '客戶回饋互動',
 
     'LBL_NOTES_SUBPANEL_TITLE' => '附註',
 
@@ -149,5 +161,5 @@ $mod_strings = array (
 
     'LBL_SLA_DETAILS' => 'SLA 詳細訊息',
     'LBL_HOURS' => '小時',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => '狀態',
 );

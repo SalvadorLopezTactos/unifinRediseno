@@ -29,6 +29,10 @@
     * Initialize
     */
     initialize: function(options) {
+        this.events = _.extend({}, this.events, {
+            'click [data-action=refreshList]': '_refreshList'
+        });
+
         this.cacheKiller = (new Date()).getTime();
         this._super('initialize', [options]);
     },
@@ -205,6 +209,15 @@
         if ($filter.length > 0) {
             $filter.select2('val', this._selectedModule);
         }
+        this.applyFilter();
+    },
+
+    /**
+     * Refreshes the list view by applying filters.
+     *
+     * @private
+     */
+    _refreshList: function() {
         this.applyFilter();
     }
 })

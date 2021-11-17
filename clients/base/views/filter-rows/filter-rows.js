@@ -585,9 +585,9 @@
         }
 
         // Get operators for this filter type
-        var fieldType = this.fieldTypeMap[this.fieldList[fieldName].type] || this.fieldList[fieldName].type,
-            payload = {},
-            types = _.keys(this.filterOperatorMap[fieldType]);
+        var fieldType = this.fieldTypeMap[this.fieldList[fieldName].type] || this.fieldList[fieldName].type;
+        var payload = {};
+        var types = _.keys(this.filterOperatorMap[fieldType]);
 
         // For parent field with the operator '$equals', the operator field is
         // hidden and we need to display the value field directly. So here we
@@ -1007,7 +1007,10 @@
         ) {
             filter.name = this.layout.getComponent('filter-actions').getFilterName();
         }
-        this.layout.getComponent('filter').saveFilterEditState(filter);
+
+        if (!_.isUndefined(this.layout.getComponent('filter'))) {
+            this.layout.getComponent('filter').saveFilterEditState(filter);
+        }
     },
 
     /**

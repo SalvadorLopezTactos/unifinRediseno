@@ -207,14 +207,8 @@
 
         this.isEmptyGroup = this.collection.length === 0;
 
-        // for each item in the collection, setup SugarLogic
-        var collections = this.model.fields['product_bundle_items'].links;
-        _.each(collections, function(link) {
-            var collection = this.model.getRelatedCollection(link);
-            if (collection) {
-                this.setupSugarLogicForModelOrCollection(collection);
-            }
-        }, this);
+        // For each item in the collection, setup SugarLogic
+        this._setupSugarLogic();
 
         // listen directly on the parent QuoteDataGroupLayout
         this.layout.on('quotes:group:create:qli', this.onAddNewItemToGroup, this);
@@ -229,6 +223,21 @@
         this.context.parent.on('quotes:collections:not:all:checked', this.onNotAllChecked, this);
 
         this.collection.on('add remove', this.onNewItemChanged, this);
+    },
+
+    /**
+     * Initializes the SugarLogic contexts for this view
+     *
+     * @private
+     */
+    _setupSugarLogic: function() {
+        var collections = this.model.fields.product_bundle_items.links;
+        _.each(collections, function(link) {
+            var collection = this.model.getRelatedCollection(link);
+            if (collection) {
+                this.setupSugarLogicForModelOrCollection(collection);
+            }
+        }, this);
     },
 
     /**
@@ -454,6 +463,51 @@
     },
 
     /**
+     * Replaces the model of this view with the given one
+     *
+     * @param {Bean} model the new Product Bundles model to use for this view
+     */
+    switchModel: function(model) {
+        // Clear listeners attached to the old model
+        this.stopSugarLogic();
+        _.each(this.sugarLogicContexts, function(slContext) {
+            slContext.dispose();
+        });
+        this.sugarLogicContexts = {};
+        this.moduleDependencies = {};
+
+        // Set the new model and collection
+        this.model = model;
+        this.collection = this.model.get('product_bundle_items');
+        this.collection.on('add remove', this.onNewItemChanged, this);
+        this.isEmptyGroup = this.collection.length === 0;
+        this.isDefaultGroupList = this.model.get('default_group');
+
+        // Re-initialize SugarLogic for the new model and collection
+        this.startSugarLogic();
+        this._setupSugarLogic();
+
+        // Update the toggledModels list to make sure the mappings use the new models
+        var newToggledModels = {};
+        _.each(this.toggledModels, function(model, cid) {
+            // Untoggle the old model, otherwise if a record was in inline edit
+            // mode, the parent Quote record will always think it's in that mode
+            this.context.parent.trigger('quotes:item:toggle', false, cid);
+
+            var newItem = _.find(this.model.get('product_bundle_items').models, function(newModel) {
+                return model.id === newModel.id;
+            });
+            if (!_.isEmpty(newItem)) {
+                newToggledModels[newItem.cid] = newItem;
+            };
+        }, this);
+        this.toggledModels = newToggledModels;
+
+        // Reset the group line numbers
+        this.resetGroupLineNumbers(this.model.cid, this.collection);
+    },
+
+    /**
      * Toggles the cancel button disabled or not
      *
      * @param {boolean} disable If we should disable the button or not
@@ -488,7 +542,6 @@
         // already has currency_id or base_rate already set
         var currencyId = quoteModel.get('currency_id');
         var baseRate = quoteModel.get('base_rate');
-        var newLineNum;
 
         prepopulateData = prepopulateData || {};
 
@@ -517,46 +570,13 @@
                     }, this);
                 }
             }
-
         }
 
-        if (prepopulateData && prepopulateData._forcePosition) {
-            // initialize new line_num to 0
-            newLineNum = 0;
-
-            // increment the new line number to 1 and set that on prepopulateData
-            prepopulateData.line_num = ++newLineNum;
-
-            // since we're forcing a new position, we need to update all models in the collection with
-            // a new position and new line_num
-            _.each(this.collection.models, function(model) {
-                var pos = model.get('position');
-                // if an existing model's position is >= prepopulateData's position,
-                // we want to move all those positions up one so prepopulateData can fit
-                if (pos >= prepopulateData.position) {
-                    // increment the position by one and set on the model
-                    model.set('position', ++pos);
-                    this.collection._resavePositions = true;
-                }
-                if (this.showLineNums && model.module === 'Products') {
-                    // if this is also a Product row, update the line_num for the row
-                    model.set('line_num', ++newLineNum);
-                }
-            }, this);
-
-            // set position to be the prepopulateData position for later
-            position = prepopulateData.position;
-
-            // remove this property
-            delete prepopulateData._forcePosition;
-        } else {
-            // if there's no propopulate data nor _forcePosition
-            if (this.showLineNums && relatedModel.module === 'Products') {
-                // get the line_num count object from QuotesLineNumHelper plugin
-                groupLineNumObj = this.getGroupLineNumCount(this.model.cid);
-                // add the new line number to the model
-                modelData.line_num = groupLineNumObj.ct++;
-            }
+        if (this.showLineNums && relatedModel.module === 'Products') {
+            // get the line_num count object from QuotesLineNumHelper plugin
+            groupLineNumObj = this.getGroupLineNumCount(this.model.cid);
+            // get the new line number to be set on modelData
+            prepopulateData.line_num = groupLineNumObj.ct++;
         }
 
         // defers to prepopulateData
@@ -566,6 +586,8 @@
             position: position,
             currency_id: currencyId,
             base_rate: baseRate,
+            assigned_user_id: app.user.id,
+            assigned_user_name: app.user.get('full_name'),
             quote_id: quoteModel.get('id')
         }, prepopulateData);
 
@@ -873,7 +895,7 @@
             //disable drag/drop for this row
             $row.addClass('not-sortable');
             $row.parent().sortable({
-                cancel: '.not-sortable'
+                cancel: '.not-sortable, .dropdown-toggle, .dropdown-menu'
             });
             $row.removeClass('ui-sortable');
 

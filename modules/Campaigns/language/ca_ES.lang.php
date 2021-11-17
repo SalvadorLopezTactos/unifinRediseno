@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Llista de públic objectiu per defecte no trobada',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'No s´han trobat entrades',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Les entrades han estat processades',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Opcions del Correu Entrant',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Configuració del correu electrònic del sistema',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Nom de Seguiment:',
   'LBL_EDIT_TRACKER_URL'=>'URL de Seguiment:',

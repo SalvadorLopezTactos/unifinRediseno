@@ -13,6 +13,8 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Pulpit pozycji wiersza ofert',
+    'LBL_QUOTED_LINE_ITEMS_RECORD_DASHBOARD' => 'Pulpit rekordów pozycji oferty',
+    'LBL_PRODUCTS_FOCUS_DRAWER_DASHBOARD' => 'Widok szczegółowy pozycji oferty',
 
     'LBL_CAMPAIGN_PRODUCT' => 'Pozycje oferty kampanii',
     'LBL_MODULE_NAME' => 'Pozycje oferty',
@@ -61,6 +63,7 @@ $mod_strings = array(
     'LBL_WEIGHT' => 'Masa:',
     'LBL_DESCRIPTION' => 'Opis:',
     'LBL_TYPE' => 'Typ:',
+    'LBL_PRODUCT_TYPE' => 'Typ produktu',
     'LBL_CATEGORY' => 'Kategoria:',
     'LBL_QUANTITY' => 'Ilość:',
     'LBL_STATUS' => 'Status:',
@@ -110,7 +113,7 @@ $mod_strings = array(
     'LBL_PRODUCT_TYPES' => 'Typy produktów',
     'LBL_ASSIGNED_TO_NAME' => 'Przydzielono do:',
     'LBL_ASSIGNED_USER_ID' => 'Przypisano do (ID użytkownika):',
-    'LBL_PRODUCT_TEMPLATE' => 'Pozycja wiersza',
+    'LBL_PRODUCT_TEMPLATE' => 'Produkt',
     'LBL_PRODUCT_TEMPLATE_ID' => 'ID szablonu produktu:',
     'LBL_QUOTE_ID' => 'ID oferty',
     'LBL_CREATED_USER' => 'Utworzono przez',
@@ -119,7 +122,7 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'ID szansy',
     'LBL_OPPORTUNITY' => 'Szansa',
     'LBL_REVENUELINEITEM_ID' => 'ID pozycji szansy:',
-    'LBL_REVENUELINEITEM' => 'Pozycja szansy', 
+    'LBL_REVENUELINEITEM' => 'Pozycja szansy',
     'LBL_EXPERT_ID' => 'Ekspert produktowy',
     'LBL_FORECAST' => 'Uwzględnij w prognozie',
     'LBL_CALCULATED_LINE_ITEM_AMOUNT' => 'Suma pozycji wiersza',
@@ -127,7 +130,7 @@ $mod_strings = array(
     'LBL_CONTACT' => 'Kontakt',
     'LBL_DISCOUNT_TOTAL' => 'Całkowity rabat',
     'LBL_DISCOUNT_AMOUNT' => 'Kwota rabatu',
-    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Signed Discount Amount',
+    'LBL_DISCOUNT_AMOUNT_SIGNED' => 'Umowna kwota rabatu',
     'LBL_DISCOUNT_AMOUNT_VALUE' => 'Wartość kwoty rabatu',
     'LBL_EXT_PRICE' => 'Kwota zewnętrzna',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Nazwa symbolu waluty',
@@ -145,6 +148,8 @@ $mod_strings = array(
     'LBL_SALES_STAGE' => 'Etap sprzedaży',
     'LBL_SALES_STATUS' => 'Status pozycji szansy',
     'LBL_PIPELINE_TOTAL_IS' => 'Wartość całkowita lejka sprzedaży wynosi ',
+    'LBL_ADD_ON_TO' => 'Dodaj do',
+    'LBL_ADD_ON_TO_ID' => 'Dodaj do ID',
 
     'LBL_CONVERT_TO_QUOTE_ERROR' => 'Błąd:',
     'LBL_CONVERT_TO_QUOTE_ERROR_MESSAGE' => 'Wystąpił błąd podczas przekształcania tej Pozycji oferty w Ofertę',
@@ -174,7 +179,7 @@ Aby utworzyć {{module_name}}:
 2. Kliknij Zapisz, aby zapisać nowy rekord i powrócić do poprzedniej strony.',
 
     'LBL_PRODUCT_POSITION' => 'Pozycja pakietu produktów',
-    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Lista danych ofert dla pozcyzji linii oferty',
+    'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Lista danych ofert dla pozycji linii oferty',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nowa pozycja oferty)',
     'LBL_DISCOUNT_PERCENT' => '% procent',
     'LBL_DISCOUNT_TYPE' => 'Typ rabatu',

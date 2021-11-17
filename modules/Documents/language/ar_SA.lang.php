@@ -164,6 +164,6 @@ $mod_strings = array (
     'LBL_BUGS_SUBPANEL_TITLE' => 'الأخطاء',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'عروض الأسعار',
     'LBL_RLI_SUBPANEL_TITLE' => 'بنود العائدات',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
-    'LBL_PLIS_SUBPANEL_TITLE' => 'Purchased Line Items',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'المشتريات',
+    'LBL_PLIS_SUBPANEL_TITLE' => 'البنود المشتراة',
 );

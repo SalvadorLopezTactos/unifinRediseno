@@ -12,6 +12,7 @@
 
 $dictionary['pmse_BpmnLane'] = array(
     'table' => 'pmse_bpmn_lane',
+    'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,

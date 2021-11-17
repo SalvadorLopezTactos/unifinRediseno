@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Ορισμοί Διεργασιών',
   'LBL_MODULE_NAME_SINGULAR' => 'Ορισμοί Διεργασιών',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης διαδικασίας ορισμών',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Ορισμών Διαδικασίας',
   'LNK_LIST' => 'Προβολή Ορισμών Διεργασιών',
   'LNK_NEW_PMSE_PROJECT' => 'Δημιουργία Ορισμών Διεργασίας',
   'LNK_IMPORT_PMSE_PROJECT' => 'Εισαγωγή Ορισμών Διεργασίας',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Αλλαγή Ιδιοκτήτη Αρχείων',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Ομάδα',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Επαναπροσδιορισμός Εργασίας',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'Email',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'Χρήστης διαδικασίας ηλεκτρονικού ταχυδρομείου κατά την εκχώρηση της διαδικασίας',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'Ορισμός Χειριστή',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Μέθοδος Μερισμού',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Χειριστής Ανάθεσης',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Ενημέρωση "Ανάθεση σε" στο αρχείο',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Ρυθμίστε"Ανατέθηκε σε"από διαθεσιμότητα',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Προσθήκη Συναφούς Εγγραφής',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Σχετικά ενότητα',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Το όνομα της δραστηριότητας είναι άδειο.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Το όνομα "%s" υπάρχει ήδη σε οικογενειακό σχήμα.',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Απαιτούμενη διαθεσιμότητα βάρδιας',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Εάν δεν υπάρχουν διαθέσιμοι χρήστες',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'πριν',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Μόνο Νέες Εγγραφές',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Ενημερωμένες εγγραφές μόνο',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Ενημερωμένα Αρχεία μόνο (όλες οι ενημερώσεις - βλέπε κείμενο βοήθειας)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Νέες εγγραφές ή πρώτη ενημέρωση',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Νέες εγγραφές και όλες οι ενημερώσεις',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Επιλέξτε πότε η εκδήλωση θα ξεκινήσει',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Επιλέξτε πότε θα ξεκινήσει η διαδικασία.<br><br>Νέο: Εκτελέστε τη διαδικασία όταν δημιουργείται νέα εγγραφή.<br><br> Πρώτη ενημέρωση: Η διαδικασία εκτελείται μόνο την πρώτη φορά που πληρούνται τα κριτήρια για μια υπάρχουσα εγγραφή.<br><br> Όλες οι ενημερώσεις: Η διαδικασία εκτελείται κάθε φορά που πληρούνται τα κριτήρια για μια υπάρχουσα εγγραφή.<br><br>Νέες εγγραφές ή πρώτη ενημέρωση: Η διαδικασία εκτελείται μόνο την πρώτη φορά που πληρούνται τα κριτήρια για μια εγγραφή, κατά τη δημιουργία ή την ενημέρωση εγγραφής.<br><br>Νέες εγγραφές και όλες οι ενημερώσεις: Η διαδικασία εκτελείται κάθε φορά για όλες τις νέες και υπάρχουσες εγγραφές.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Επιλέξτε την ενότητα SugarCRM να εφαρμόσει το έναυσμα (trigger) εκδήλωσης',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Σταθερή Ημερομηνία',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'αλλαγές από',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'αλλαγές σε',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'περιλαμβάνει οποιαδήποτε',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'δεν συμπεριλαμβάνει τυχόν',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'στις ή μετά',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'στις ή πριν',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'δεν είναι ίσο με',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Προσθήκη',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Ελαχιστοποίηση',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'Όλες οι ομάδες ανατέθηκαν στην εγγραφή',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Ομάδες',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% σχετίζεται με %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Ο χρήστης που δημιούργησε την %MODULE%',

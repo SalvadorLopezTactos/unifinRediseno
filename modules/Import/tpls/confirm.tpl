@@ -20,7 +20,7 @@
 <input type="hidden" name="module" value="Import">
 <input type="hidden" name="type" value="{$TYPE}">
 <input type="hidden" name="source" id="source" value="{$SOURCE|escape:'html':'UTF-8'}">
-<input type="hidden" name="source_id" value="{$SOURCE_ID}">
+<input type="hidden" name="source_id" value="{$SOURCE_ID|escape:'html':'UTF-8'}">
 <input type="hidden" name="action" value="Step3">
 <input type="hidden" name="import_module" value="{$IMPORT_MODULE}">
 <input type="hidden" name="import_type" value="{$TYPE}">
@@ -140,21 +140,23 @@
                 
             </td>
         </tr>
-        <tr>
-            <td colspan="2"><div class="hr" style="margin-top: 0px;"></div></td>
-        </tr>
-        <tr>
-            <td colspan="2" scope="col"><h3><label for="external_source">{$MOD.LBL_THIRD_PARTY_CSV_SOURCES}</label>&nbsp;{sugar_help text=$MOD.LBL_THIRD_PARTY_CSV_SOURCES_HELP}</h3></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input class="radio" type="radio" name="external_source" value="" id='none' checked='checked'/>&nbsp;{$MOD.LBL_NONE}</td>
-        </tr>
-        <tr>
-            <td colspan="2"><input class="radio" type="radio" name="external_source" value="salesforce" id='sf_map'/>&nbsp;{$MOD.LBL_SALESFORCE}</td>
-        </tr>
-        <tr>
-            <td colspan="2"><input class="radio" type="radio" name="external_source" value="outlook" id='outlook_map'/>&nbsp;{$MOD.LBL_MICROSOFT_OUTLOOK}&nbsp;{sugar_help text=$MOD.LBL_MICROSOFT_OUTLOOK_HELP}</td>
-        </tr>
+        {if !$idm_update_mode_only}
+            <tr>
+                <td colspan="2"><div class="hr" style="margin-top: 0px;"></div></td>
+            </tr>
+            <tr>
+                <td colspan="2" scope="col"><h3><label for="external_source">{$MOD.LBL_THIRD_PARTY_CSV_SOURCES}</label>&nbsp;{sugar_help text=$MOD.LBL_THIRD_PARTY_CSV_SOURCES_HELP}</h3></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input class="radio" type="radio" name="external_source" value="" id='none' checked='checked'/>&nbsp;{$MOD.LBL_NONE}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><input class="radio" type="radio" name="external_source" value="salesforce" id='sf_map'/>&nbsp;{$MOD.LBL_SALESFORCE}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><input class="radio" type="radio" name="external_source" value="outlook" id='outlook_map'/>&nbsp;{$MOD.LBL_MICROSOFT_OUTLOOK}&nbsp;{sugar_help text=$MOD.LBL_MICROSOFT_OUTLOOK_HELP}</td>
+            </tr>
+        {/if}
         <tr>
             <td colspan="2">&nbsp;</td>
         </tr>

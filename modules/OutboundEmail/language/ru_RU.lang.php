@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Исходящие учетные записи электронной почты',
     'LBL_MODULE_NAME_SINGULAR' => 'Исходящая учетная запись электронной почты',
+    'LBL_STATUS' => 'Статус',
     'LBL_MAIL_SENDTYPE' => 'Отправка почты с помощью',
     'LBL_MAIL_SMTPSERVER' => 'Сервер',
     'LBL_MAIL_SMTPPORT' => 'Порт',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Это системная учетная запись.',
     'LBL_EMAIL_ADDRESS_ID' => 'Идентификатор адреса электронной почты',
     'LBL_TYPE' => 'Тип',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Авторизованный электронный адрес',
+    'LBL_FROM_EMAIL_ADDRESS' => 'Адрес электронной почты отправителя',
     'LBL_REPLY_TO_NAME' => 'Имя для ответа',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Адреса электронной почты для ответа',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Идентификатор адреса электронной почты для ответа',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Адрес электронной почты для ответа',
     'LBL_PRIMARY_TEAM' => 'Основная команда',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для настроек электронной почты',
 );

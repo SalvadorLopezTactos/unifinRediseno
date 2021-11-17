@@ -52,7 +52,7 @@ function to_html($string, $encode=true)
 	if (empty($string) || !$encode) {
 		return $string;
 	}
-    if(defined('ENTRY_POINT_TYPE') && constant('ENTRY_POINT_TYPE') == 'api') {
+    if (isFromApi()) {
         return $string;
     }
     return htmlspecialchars($string, ENT_QUOTES, "UTF-8");
@@ -70,7 +70,7 @@ function from_html($string, $decode=true)
     if (!is_string($string) || !$decode) {
         return $string;
     }
-    if(defined('ENTRY_POINT_TYPE') && constant('ENTRY_POINT_TYPE') == 'api') {
+    if (isFromApi()) {
         return $string;
     }
 
@@ -79,13 +79,13 @@ function from_html($string, $decode=true)
 
 /*
  * Return a version of $proposed that can be used as a column name in any of our supported databases
- * Practically this means no longer than 25 characters as the smallest identifier length for our supported DBs is 30 chars for Oracle plus we add on at least four characters in some places (for indices for example)
+ * Practically this means no longer than 59 characters as the smallest identifier length for our supported DBs is 64 chars for MySQL plus we add on at least four characters in some places (for indices for example)
  * @param string $name Proposed name for the column
  * @param string $ensureUnique
  * @param int $maxlen Deprecated and ignored
  * @return string Valid column name trimmed to right length and with invalid characters removed
  */
-function getValidDBName ($name, $ensureUnique = false, $maxLen = 30)
+function getValidDBName($name, $ensureUnique = false, $maxLen = 64)
 {
     return DBManagerFactory::getInstance()->getValidDBName($name, $ensureUnique);
 }

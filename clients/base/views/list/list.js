@@ -58,6 +58,10 @@
         options.meta.action = 'list';
         options = this.parseFieldMetadata(options);
 
+        if (options.meta.hasExternalFields) {
+            this.plugins = _.union(this.plugins || [], ['ExternalApp']);
+        }
+
         app.view.View.prototype.initialize.call(this, options);
 
         this.viewName = 'list';

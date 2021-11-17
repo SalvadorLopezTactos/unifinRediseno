@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Συναντήσεων',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Συναντήσεων',
+    'LBL_LEAD_GUESTS' => 'Επισκέπτες δυνητικοί πελάτες',
+    'LBL_CONTACT_GUESTS' => 'Επισκέπτης επαφή',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης συναντήσεων',
 
 	'ERR_DELETE_RECORD' => 'Πρέπει να προσδιορίσετε αριθμό εγγραφής για να διαγράψετε αυτήν την Συνάντηση.',
 	'LBL_ACCEPT_THIS'=>'Αποδοχή;',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Κατεύθυνση',
 	'LBL_LIST_DUE_DATE'=>'Έως Ημερομηνία',
 	'LBL_LIST_FORM_TITLE' => 'Λίστα Συναντήσεων',
-	'LBL_LIST_MY_MEETINGS' => 'Συναντήσεις Μου',
+    'LBL_LIST_MY_MEETINGS' => 'Συναντήσεις Μου',
     'LBL_MY_SCHEDULED_MEETINGS' => 'Προγραμματισμένες Συναντήσεις Μου',
+    'LBL_GUEST_MEETINGS' => 'Οι συναντήσεις μου ως επισκέπτης',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Προγραμματισμένες συναντήσεις ως επισκέπτης',
 	'LBL_LIST_RELATED_TO' => 'Σχετίζεται με',
 	'LBL_LIST_STATUS'=>'Κατάσταση',
 	'LBL_LIST_SUBJECT' => 'Θέμα',

@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'تعريف العملية',
   'LBL_MODULE_NAME_SINGULAR' => 'تعريف العملية',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم تعريفات العمليات',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'لوحة معلومات سجل تعريفات العمليات',
   'LNK_LIST' => 'عرض تعريفات العملية',
   'LNK_NEW_PMSE_PROJECT' => 'إنشاء تعريف العملية',
   'LNK_IMPORT_PMSE_PROJECT' => 'استيراد تعريفات العملية',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'تغيير مالك السجل',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'الفريق',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'إعادة تعيين النشاط',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'البريد الإلكتروني',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'إرسال بريد إلكتروني لمستخدم العملية عند تعيين العملية',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'تعريف المستخدم',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'أسلوب التعيين',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'تعيين المستخدم',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'تحديث "تعيين إلى" في السجل',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'ضبط "تعيين إلى" بحسب التوفر',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'إضافة سجل ذي صلة',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'الوحدة ذات الصلة',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'اسم النشاط فارغ.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'الاسم "%s" موجود بالفعل في عائلة الشكل.',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'توفر الوردية المطلوب',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'في حالة عدم توفر مستخدمين',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'قبل',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'السجلات الجديدة فقط',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'السجلات المحدثة فقط',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'تحديث السجلات فقط (جميع التحديثات - انظر نص التعليمات)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'السجلات الجديدة أو أول تحديث',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'السجلات الجديدة وكل التحديثات',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'تحديد متى يبدأ الحدث',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'حدد متى ستبدأ العملية.<br><br>جديد: تشغيل العملية عند إنشاء سجل جديد.<br><br>أول تحديث: تشغيل العملية فقط في أول مرة تتم فيها تلبية معيار لسجل موجود.<br><br>كل التحديثات: تشغيل العملية في كل مرة تتم فيها تلبية معيار لسجل معين.<br><br>السجلات الجديدة أو أول تحديث: تشغيل العملية فقط في أول مرة تتم فيها تلبية معيار لسجل أو أثناء إنشاء السجل أو تحديث السجل.<br><br>السجلات الجديدة وكل التحديثات: تشغيل العملية في كل مرة لكل السجلات الجديدة والحالية.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'حدد وحدة SugarCRM المطلوب تطبيق مشغل الحدث عليها',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'تاريخ ثابت',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'التغييرات من',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'التغييرات إلى',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'يتضمن أي',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'لا يتضمن أي',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'في أو بعد',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'في أو قبل',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'لا يساوي',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'إضافة',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'إغلاق',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'كل الفرق المخصصة للسجل',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'الفرق',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% ذو الصلة بـ %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'المستخدم الذي أنشأ %MODULE%',

@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Für Löschung markierte Felder',
     'LBL_NO_RECORDS_MARKED' => 'Es wurden keine Felder oder Datensätze zum Löschen markiert.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Dashboard Datenschutz-Datensatz',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Fokus-Drawer für Datenschutz',
 
     // list view
     'LBL_HELP_RECORDS' => 'Das Datenschutzmodul verfolgt Datenschutzaktivitäten, einschließlich Einwilligung und Themen-Anfragen zur Unterstützung der Datenschutzverfahren Ihrer Organisation. Erstellen Sie Datenschutz-Datensätze im Zusammenhang mit dem Datensatz einer Einzelperson (z. B. einem Kontakt), um die Einwilligung zu verfolgen oder Maßnahmen bei einer Datenschutz-Anfrage zu ergreifen.',

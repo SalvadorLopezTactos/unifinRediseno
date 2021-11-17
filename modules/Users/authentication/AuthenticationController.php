@@ -325,8 +325,6 @@ class AuthenticationController implements LoggerAwareInterface
     {
         if ($exception instanceof InvalidUserException) {
             return translate('LBL_LOGIN_PORTAL_GROUP_CANT_LOGIN');
-        } elseif ($exception instanceof InactiveUserException) {
-            return translate('LBL_LOGIN_INACTIVE_USER');
         } else {
             return translate('ERR_INVALID_PASSWORD', 'Users');
         }

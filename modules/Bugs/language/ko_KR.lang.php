@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_BUGS_LIST_DASHBOARD' => '버그 목록 대시보드',
   'LBL_BUGS_RECORD_DASHBOARD' => '버그 기록 대시보드',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => '벅스 포커스 서랍',
 
   'LBL_MODULE_NAME' => '버그',
   'LBL_MODULE_NAME_SINGULAR'	=> '버그',

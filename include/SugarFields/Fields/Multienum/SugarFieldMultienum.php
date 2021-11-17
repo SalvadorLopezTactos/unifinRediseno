@@ -180,13 +180,15 @@ class SugarFieldMultienum extends SugarFieldEnum
      */
     public function normalizeDefaultValue($value) {
         if (is_string($value)) {
+            if (empty($value)) {
+                return [];
+            }
             // The value SHOULD fit into the ^val^ or ^val^,^val1^ format
             if (preg_match('#\^(.*)\^#', $value)) {
                 return explode('^,^', substr($value, 1, strlen($value) - 2));
-            } else {
-                // And if not, just array the string and send it back
-                return array($value);
             }
+            // And if not, just array the string and send it back
+            return [$value];
         }
         
         return $value;

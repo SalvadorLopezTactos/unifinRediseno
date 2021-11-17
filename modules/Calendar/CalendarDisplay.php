@@ -251,84 +251,83 @@ class CalendarDisplay {
 		$ss->assign('TIME_END_MERIDIEM',$TIME_END_MERIDIEM);
 	}
 
-	/**
-	 * Get date info string (legacy from old calendar)
-	 * @return string
-	 */
-	public function get_date_info($view, $date_time){
-		$str = "";
+    /**
+     * Get date info string (legacy from old calendar)
+     * @return string
+     */
+    public function get_date_info($view, $date_time)
+    {
+        $str = "";
 
-		global $current_user;
-		$dateFormat = $current_user->getUserDateTimePreferences();
+        global $current_user;
+        $dateFormat = $current_user->getUserDateTimePreferences();
 
-		if($view == 'month'){
-			for($i=0; $i<strlen($dateFormat['date']); $i++){
-				switch($dateFormat['date']{$i}){
-					case "Y":
-						$str .= " ".$date_time->year;
-						break;
-					case "m":
-						$str .= " ".$date_time->get_month_name();
-						break;
-				}
-			}
-		}else
-			if($view == 'week' || $view == 'shared') {
-				$first_day = $date_time;
+        if ($view == 'month') {
+            for ($i = 0; $i < strlen($dateFormat['date']); $i++) {
+                switch ($dateFormat['date'][$i]) {
+                    case "Y":
+                        $str .= " " . $date_time->year;
+                        break;
+                    case "m":
+                        $str .= " " . $date_time->get_month_name();
+                        break;
+                }
+            }
+        } elseif ($view == 'week' || $view == 'shared') {
+            $first_day = CalendarUtils::get_first_day_of_week($date_time);
+            $last_day = $first_day->get("+6 days");
 
-				$first_day = CalendarUtils::get_first_day_of_week($date_time);
-				$last_day = $first_day->get("+6 days");
+            for ($i = 0; $i < strlen($dateFormat['date']); $i++) {
+                switch ($dateFormat['date'][$i]) {
+                    case "Y":
+                        $str .= " " . $first_day->year;
+                        break;
+                    case "m":
+                        $str .= " " . $first_day->get_month_name();
+                        break;
+                    case "d":
+                        $str .= " " . $first_day->get_day();
+                        break;
+                }
+            }
+            $str .= " - ";
+            for ($i = 0; $i < strlen($dateFormat['date']); $i++) {
+                switch ($dateFormat['date'][$i]) {
+                    case "Y":
+                        $str .= " " . $last_day->year;
+                        break;
+                    case "m":
+                        $str .= " " . $last_day->get_month_name();
+                        break;
+                    case "d":
+                        $str .= " " . $last_day->get_day();
+                        break;
+                }
+            }
+        } elseif ($view == 'day') {
+            $str .= $date_time->get_day_of_week() . " ";
 
-				for($i=0; $i<strlen($dateFormat['date']); $i++) {
-					switch($dateFormat['date']{$i}){
-						case "Y":
-							$str .= " ".$first_day->year;
-							break;
-						case "m":
-							$str .= " ".$first_day->get_month_name();
-							break;
-						case "d":
-							$str .= " ".$first_day->get_day();
-							break;
-					}
-				}
-				$str .= " - ";
-				for($i=0; $i<strlen($dateFormat['date']); $i++) {
-					switch($dateFormat['date']{$i}) {
-						case "Y":
-							$str .= " ".$last_day->year;
-							break;
-						case "m":
-							$str .= " ".$last_day->get_month_name();
-							break;
-						case "d":
-							$str .= " ".$last_day->get_day();
-							break;
-					}
-				}
-			}else if($view == 'day'){
-					$str .= $date_time->get_day_of_week()." ";
+            for ($i = 0; $i < strlen($dateFormat['date']); $i++) {
+                switch ($dateFormat['date'][$i]) {
+                    case "Y":
+                        $str .= " " . $date_time->year;
+                        break;
+                    case "m":
+                        $str .= " " . $date_time->get_month_name();
+                        break;
+                    case "d":
+                        $str .= " " . $date_time->get_day();
+                        break;
+                }
+            }
+        } elseif ($view == 'year') {
+            $str .= $date_time->year;
+        } else {
+            sugar_die("echo_date_info: date not supported");
+        }
 
-					for($i=0; $i<strlen($dateFormat['date']); $i++){
-						switch($dateFormat['date']{$i}){
-							case "Y":
-								$str .= " ".$date_time->year;
-								break;
-							case "m":
-								$str .= " ".$date_time->get_month_name();
-								break;
-							case "d":
-								$str .= " ".$date_time->get_day();
-								break;
-						}
-					}
-			}else if($view == 'year') {
-				$str .= $date_time->year;
-			}else{
-				sugar_die("echo_date_info: date not supported");
-			}
-		return $str;
-	}
+        return $str;
+    }
 
 	/**
 	 * Get link to next date range

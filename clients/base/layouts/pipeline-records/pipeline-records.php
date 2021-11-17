@@ -31,7 +31,8 @@ $viewdefs['base']['layout']['pipeline-records'] = array(
                                                 'toggle-view' => 'list',
                                             ),
                                         ),
-                                        'availableToggles' => array(),
+                                        'refresh_button' => true,
+                                        'css_class' => 'pipeline-refresh-btn',
                                         'components' => array(
                                             array(
                                                 'layout' => array(

@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Prema izvješću',
     'LBL_RECENTLY_MODIFIED' => 'Nedavno izmijenjeno',
     'LBL_RECORD_SAVED_SUCCESS' => 'Uspješno ste stvorili {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. Otvorite raspored da biste dodali korisnike putem podploče Korisnici.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Raspored izvješća',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o rasporedima izvješća',
 );

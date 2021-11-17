@@ -21,7 +21,9 @@ class CurrencyHooks
      */
     public function updateCurrencyConversion(Currency $bean, $event, $args)
     {
-        if ($args['isUpdate'] && $bean->fetched_row['conversion_rate'] != $bean->conversion_rate) {
+        if ($args['isUpdate']
+            && $bean->fetched_row !== false
+            && $bean->fetched_row['conversion_rate'] != $bean->conversion_rate) {
             $job = $this->getSchedulersJobs();
             $job->name = 'SugarJobUpdateCurrencyRates: ' . $bean->id;
             $job->target = 'class::SugarJobUpdateCurrencyRates';

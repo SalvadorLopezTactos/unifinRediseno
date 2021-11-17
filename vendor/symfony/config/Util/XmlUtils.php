@@ -47,7 +47,7 @@ class XmlUtils
     public static function parse($content, $schemaOrCallable = null)
     {
         if (!\extension_loaded('dom')) {
-            throw new \RuntimeException('Extension DOM is required.');
+            throw new \LogicException('Extension DOM is required.');
         }
 
         $internalErrors = libxml_use_internal_errors(true);
@@ -80,7 +80,7 @@ class XmlUtils
             $e = null;
             if (\is_callable($schemaOrCallable)) {
                 try {
-                    $valid = \call_user_func($schemaOrCallable, $dom, $internalErrors);
+                    $valid = $schemaOrCallable($dom, $internalErrors);
                 } catch (\Exception $e) {
                     $valid = false;
                 }
@@ -122,9 +122,18 @@ class XmlUtils
      */
     public static function loadFile($file, $schemaOrCallable = null)
     {
+        if (!is_file($file)) {
+            throw new \InvalidArgumentException(sprintf('Resource "%s" is not a file.', $file));
+        }
+
+        if (!is_readable($file)) {
+            throw new \InvalidArgumentException(sprintf('File "%s" is not readable.', $file));
+        }
+
         $content = @file_get_contents($file);
+
         if ('' === trim($content)) {
-            throw new \InvalidArgumentException(sprintf('File %s does not contain valid XML, it is empty.', $file));
+            throw new \InvalidArgumentException(sprintf('File "%s" does not contain valid XML, it is empty.', $file));
         }
 
         try {

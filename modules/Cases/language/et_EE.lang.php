@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Juhtumite loendi töölaud',
     'LBL_CASES_RECORD_DASHBOARD' => 'Juhtumikirjete töölaud',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Juhtumi üksikasjad',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Juhtumite fookuse sahtel',
 
 	'ERR_DELETE_RECORD'					=> 'Konto kustutamiseks täpsustage kirje numbrit.',
 	'LBL_ACCOUNT_ID'					=> 'Konto ID',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Kuva portaalis',
 	'LBL_CREATE_KB_DOCUMENT' => 'Loo artikkel',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Teadmusbaas',
+    'LBL_REQUEST_CLOSE' => 'Sulgemise taotlus',
+    'LBL_REQUEST_CLOSE_DATE' => 'Sulgemise taotluse kuupäev',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Sulgemise taotlus',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Saada taotlus selle juhtumi sulgemiseks',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Kas soovite taotleda selle juhtumi sulgemist?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Minu juhtumid, mille sulgemist olen taotlenud',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Minu juhtumid, mille sulgemist olen taotlenud',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Minu juhtumid, mille sulgemist olen taotlenud',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Loend juhtumitest, mille sulgemist on taotletud',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Kuvab loendi määratud juhtumitest, mille sulgemist on taotletud',
 
     'LBL_CREATED_USER' => 'Loodud kasutaja',
     'LBL_MODIFIED_USER' => 'Muudetud kasutaja',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Määratud kasutajanimi',
     'LBL_EXPORT_TEAM_COUNT' => 'Meeskonna arv',
     'LBL_CHANGETIMERS' => 'Muuda taimereid',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Ostud',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Seotud kontakti meilid',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Näiteks saate seda kasutada vea leidmiseks, millest on varem teatatud.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Kui teil on uus toe juhtum, mille soovite esitada, saate uue juhtumi esitamiseks klõpsata siin.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Siin klõpsamine viib teid igal ajal selle vaate juurde.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Juhtumi interaktsioonid',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Märkused',
 
@@ -149,5 +161,5 @@ Mooduli {{module_name}} loomiseks tehke järgmist.
 
     'LBL_SLA_DETAILS' => 'SLA üksikasjad',
     'LBL_HOURS' => 'Tundi',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'Olek',
 );

@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Processdefinition',
   'LBL_MODULE_NAME_SINGULAR' => 'Processdefinition',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för processdefinitioner',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Instrumentpanel för processdefinitionpost',
   'LNK_LIST' => 'Visa Processdefinitioner',
   'LNK_NEW_PMSE_PROJECT' => 'Skapa Processdefinitioner',
   'LNK_IMPORT_PMSE_PROJECT' => 'Importera Processdefinitioner',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Change Record Owner',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Lag',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Reassigna Aktivitet',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'E-post',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'E-postprocessanvändare när process har tilldelats',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'Användardefinition',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Tilldelningsmetod',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Tilldela Användare',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Uppdatera "Tilldelad" på post',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Ange "Tilldelad till" efter tillgänglighet',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Lägg till relaterad record',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Relaterad modul',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Namnet på aktiviteten är tom:',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Namnet "%s" finns redan.',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Nödvändig skifttillgänglighet',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Om inga användare är tillgängliga',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'före',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Endast nya poster',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Bara uppdaterade records',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Endast uppdaterade poster (Alla uppdateringar - Se hjälptext)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Nya poster eller första uppdatering',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Nya poster och alla uppdateringar',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Välj när eventet skall starta',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Välj när processen ska starta.<br><br>Ny: Kör processen när ny post skapas.<br><br>Första uppdatering: Processen körs endast första gången kriteriet möts för en befintlig post.<br><br>Alla uppdateringar: Processen körs varje gång kriteriet möts för en befintlig post.<br><br>Nya poster eller första uppdatering: Processen körs endast den första gången kriteriet möts för en post, under antingen skapande eller uppdatering av posten.<br><br>Nya poster och alla uppdateringar: Processen körs varje gång för alla nya och befintliga poster.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Välj SugarCRM-modul för att applicera händelse-trigger',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Fast Datum',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'ändrar från',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'ändrar till',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'inkluderar alla',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'inkluderar ingen',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'på eller efter',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'på eller före',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'inte är lika med',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Lägg till',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Close',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'Alla team som är tilldelade till posten',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Team',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% besläktad med %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Användaren som skapade %MODULE%',

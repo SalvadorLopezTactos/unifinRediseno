@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'เทมเพลทอีเมลของกระบวนการ',
     'LBL_MODULE_NAME_SINGULAR' => 'เทมเพลทอีเมลของกระบวนการ',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'เทมเพลตอีเมลดำเนินการระบบลิ้นชัก',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนการดำเนินการเทมเพลตอีเมล',
     'LNK_LIST' => 'ดูเทมเพลทอีเมลของกระบวนการ',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'สร้างเทมเพลทอีเมลของกระบวนการ',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'นำเข้าเทมเพลทอีเมลของกระบวนการ',

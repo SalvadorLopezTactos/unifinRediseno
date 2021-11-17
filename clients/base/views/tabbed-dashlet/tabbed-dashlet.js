@@ -74,6 +74,19 @@
     _defaultSettings: {},
 
     /**
+     * @inheritdoc
+     */
+    initialize: function(options) {
+        if (options.context) {
+            this.baseModule = options.context.get('module');
+            this.module = this.baseModule;
+            this.baseRecord = this._getBaseModel(options);
+        }
+
+        this._super('initialize', [options]);
+    },
+
+    /**
      * Bind the separate context to avoid sharing context's handlers
      * between its extension dashlets.
      */
@@ -207,6 +220,56 @@
         this.settings.set(settings);
 
         return this;
+    },
+
+    /**
+     * Get base model from parent context
+     *
+     * @param {Object} options
+     * @return {Data.Bean} model the base model of the dashlet
+     * @private
+     */
+    _getBaseModel: function(options) {
+        var model;
+        var baseModule = options.context.get('module');
+        var currContext = options.context;
+        while (currContext) {
+            var contextModel = currContext.get('rowModel') || currContext.get('model');
+
+            if (contextModel && contextModel.get('_module') === baseModule) {
+                model = contextModel;
+
+                var parentHasRowModel = currContext.parent && currContext.parent.has('rowModel');
+                if (!parentHasRowModel) {
+                    break;
+                }
+            }
+            currContext = currContext.parent;
+        }
+        return model;
+    },
+
+    /**
+     * Open create drawer to create new record.
+     */
+    openCreateDrawer: function(module, link) {
+        var self = this;
+        var link = link || this.context.get('link');
+        var model = this.createLinkModel(this.baseRecord, link);
+
+        app.drawer.open({
+            layout: 'create',
+            context: {
+                create: true,
+                module: module,
+                model: model
+            }
+        }, function(context, model) {
+            if (!model) {
+                return;
+            }
+            self.trigger('linked-model:create', model);
+        });
     },
 
     /**
@@ -575,6 +638,10 @@
     _renderHtml: function() {
         if (this.meta.config) {
             this._super('_renderHtml');
+            return;
+        }
+
+        if (_.isEmpty(this.tabs)) {
             return;
         }
 

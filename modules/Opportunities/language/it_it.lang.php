@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Dashboard elenco opportunità',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Dashboard record opportunità',
     'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Dettagli opportunità',
+    'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Opportunità Focus Drawer',
+    'LBL_RENEWAL_OPPORTUNITY' => 'Opportunità di rinnovo',
 
     'LBL_MODULE_NAME' => 'Opportunità',
     'LBL_MODULE_NAME_SINGULAR' => 'Opportunità',
@@ -77,7 +79,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Tipo:',
     'LBL_CAMPAIGN' => 'Campagna:',
     'LBL_NEXT_STEP' => 'Prossimo Passo:',
-    'LBL_SERVICE_START_DATE' => 'Service Start Date',
+    'LBL_SERVICE_START_DATE' => 'Data di inizio servizio',
     'LBL_LEAD_SOURCE' => 'Fonte del Lead:',
     'LBL_SALES_STAGE' => 'Fase di Vendita:',
     'LBL_SALES_STATUS' => 'Stato',
@@ -144,6 +146,7 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE' => 'Fase di Conferma',
     'LBL_COMMIT_STAGE_FORECAST' => 'Previsione',
     'LBL_WORKSHEET' => 'Matrice',
+    'LBL_PURCHASED_LINE_ITEMS' => 'Prodotti acquistati',
 
     'LBL_RENEWAL' => 'Rinnovo',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Opportunità di rinnovo',
@@ -151,9 +154,9 @@ $mod_strings = array(
     'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'ID padre rinnovo',
     'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
 
-    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
-    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
-    'LBL_WIDGET_AMOUNT' => 'Amount',
+    'LBL_WIDGET_SALES_STAGE' => 'Fase di Vendita',
+    'LBL_WIDGET_DATE_CLOSED' => 'Data di chiusura prevista',
+    'LBL_WIDGET_AMOUNT' => 'Importo',
 
     'TPL_RLI_CREATE' => 'Un´Opportunità deve avere una Elemento dell´Opportunità associato. <a href="javascript:void(0);" id="createRLI">Creare un Elemento dell´Opportunità</a>.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Crea un Elemento dell´Opportunità.',
@@ -162,12 +165,16 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# Elementi dell´Opportunità Totali',
     'LBL_CLOSED_RLIS' => '# Elementi dell´Opportunità Chiusi',
+    'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => 'Numero di prodotti per il ricavo con durata flessibile per servizio aperto',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Non si possono cancellare Opportunità con Elementi dell´Opportunità chiusi',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Uno o più record tra quelli selezionati contiene Elementi dell´Opportunità chiusi e non può essere cancellato.',
     'LBL_INCLUDED_RLIS' => '# of Included Revenue Line Items',
-    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Aggiorna apertura',
+    'LBL_SERVICE_START_DATE_INVALID' => 'La data di inizio del servizio non può essere impostata oltre la data di fine del servizio di qualsiasi voce di ricavo aggiuntiva aperta.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Offerte',
+    'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Opportunità per account dinamico',
+
 
     // Config
     'LBL_OPPS_CONFIG_VIEW_BY_LABEL' => 'Gerarchia Opportunità',
@@ -200,14 +207,14 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Dopo aver avviato questa modifica, gli Elementi dell´Opportunità saranno creati per ogni {{module_name}} esistente in background. Quando gli Elementi dell´Opportunità sono completi e disponibili, sarà inviata una notifica all´indirizzo email del tuo profilo utente. Si prega di notare che la tua istanza deve essere configurata per inviare email via Admin > Impostazioni Email in modo tale che le notifiche vengano inviate.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Il modulo {{plural_module_name}} consente di tracciare le vendite individuali dall&#39;inizio alla fine. Ciascun record {{module_name}} rappresenta una potenziale vendita e comprende dati attinenti ad essa e altri record importanti quali {{quotes_module}}, {{contacts_module}}, ecc. Un {{module_name}} si svilupperà in genere lungo diverse fasi di vendita fino a quando verrà contrassegnato come "Chiuso Vinto" o "Chiuso Perso". {{plural_module_name}} può essere sfruttato ulteriormente utilizzando il modulo {{forecasts_singular_module}} di Sugar per capire e prevedere le tendenze di vendita nonché per lavorare in maniera specifica per ottenere le quote di vendita.',
+    'LBL_HELP_RECORDS' => 'Il modulo {{plural_module_name}} consente di monitorare le singole vendite dall&#39;inizio alla fine. Ciascun record {{module_name}} rappresenta una vendita potenziale e include dati di vendita rilevanti, nonché relativi ad altri record importanti come {{quotes_module}}, {{contacts_module}}, ecc. Un modulo {{module_name}} generalmente avanza attraverso diverse fasi di vendita fino a quando non viene contrassegnato come "Chiusa vinta" o "Chiusa persa". Il modulo{{plural_module_name}} può essere sfruttato ulteriormente utilizzando il modulo {{forecasts_singular_module}} di Sugar per comprendere e prevedere le tendenze di vendita nonché le attività su cui concentrarsi per raggiungere le quote di vendita.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Il modulo {{plural_module_name}} consente di tenere traccia delle vendite individuali dall&#39;inizio alla fine. Ciascun record di {{module_name}} rappresenta una vendita potenziale e include i dati di vendita attinenti ad essa ed altri record importanti come {{quotes_module}}, {{contacts_module}}, ecc.
+    'LBL_HELP_RECORD' => 'Il modulo {{plural_module_name}} consente di tracciare le vendite individuali e le voci appartenenti a quelle vendite dall&#39;inizio alla fine. Ciascun record di {{module_name}} rappresenta una potenziale vendita e comprende dati attinenti ad essa e altri record importanti quali {{quotes_module}}, {{contacts_module}}, ecc.
 
-- Modificare i campi di questo record cliccando un singolo campo o il pulsante Modifica.
-- Visualizzare o modificare i collegamenti agli altri record nei sottopannelli spostando la visualizzazione del riquadro in basso a sinistra su "Vista dati".
-- Creare e visualizzare i commenti degli utenti e registrare la cronologia delle modifiche nel {{activitystream_singular_module}} spostando la visualizzazione del riquadro in basso a sinistra su "Activity Stream".
+- Modificare i campi di questo record facendo clic su un singolo campo o il pulsante Modifica.
+- Visualizzare o modificare i collegamenti agli altri record nei sottopannelli impostando il pannello in basso a sinistra su "Visualizza dati".
+- Puoi creare e visualizzare i commenti degli utenti e la cronologia delle modifiche dei record nel modulo {{activitystream_singular_module}} impostando il pannello in basso a sinistra su "Activity Stream".
 - Seguire o impostare come preferito questo record usando le icone alla destra del nome del record.
 - Nel menu a discesa Azioni, alla destra del pulsante Modifica, sono disponibili azioni aggiuntive.',
 
@@ -231,5 +238,10 @@ Per creare un {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Le mie Opportunità',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Le Opportunità del mio Gruppo",
 
-    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Impossibile modificare {{fieldName}} in quanto in questo {{moduleSingular}} non vi sono prodotti aperti.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interazioni opportunità',
+
+    // AI Predict
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Previsione chiusura opportunità',
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Visualizza dettagli di previsione per un&#39;opportunità specifica',
 );

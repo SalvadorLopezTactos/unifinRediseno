@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'لوحة معلومات قائمة قوائم الهدف',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'لوحة معلومات سجل قوائم الأهداف',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'درج تنظيم قوائم الأهداف',
+  'LBL_RELATED_ACCOUNTS' => 'الحسابات ذات الصلة',
+  'LBL_RELATED_CONTACTS' => 'جهات الاتصال ذات الصلة',
+  'LBL_RELATED_LEADS_TARGETS' => 'العلماء المتوقعون والمستهدفون ذوي الصلة',
 
   'LBL_MODULE_NAME' => 'قوائم هدف',
   'LBL_MODULE_NAME_SINGULAR' => 'قائمة هدف',

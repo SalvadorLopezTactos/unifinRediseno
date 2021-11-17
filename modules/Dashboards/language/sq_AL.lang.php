@@ -25,4 +25,7 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Të gjitha panelet për modulin {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Të gjitha panelet për modulin {{module}}, pamja {{view}}',
     'LBL_COPY_OF' => 'Kopje e {{{name}}}',
+    'LBL_DELETE_FOCUS_DRAWER' => 'Panelet e përqendruesit të fokusit nuk mund të fshihen.',
+    'LBL_CREATE_DASHBOARD_BUTTON' => 'Krijo panel',
+    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
 );

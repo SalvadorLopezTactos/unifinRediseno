@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+use Sugarcrm\Sugarcrm\Entitlements\Subscription;
 
 // Opportunity is used to store customer information.
 class Opportunity extends SugarBean
@@ -50,6 +50,10 @@ class Opportunity extends SugarBean
     public $team_name;
     public $team_id;
     public $quote_id;
+    public $service_start_date;
+    public $service_duration_value;
+    public $service_duration_unit;
+    public $service_open_flex_duration_rlis;
 
     // These are related
     public $account_name;
@@ -71,6 +75,27 @@ class Opportunity extends SugarBean
     public $worst_case;
     public $timeperiod_id;
     public $commit_stage;
+
+    /**
+     * Fields that should cascade down to RLIs on save in Opps + RLIs mode.
+     *
+     * These are in the form of
+     * [
+     *   $oppFieldName => $methodName
+     * ]
+     *
+     * These will cascade the given opportunity field down to related RLIs when the method returns true.
+     * Methods should be non-static, defined here in Opportunity.php, and take one RLI a a parameter,
+     * and return a boolean indicating whether or not values should cascade to that RLI.
+     */
+    public const CASCADE_FIELD_CONDITIONS = [
+        'date_closed' => 'cascadeWhenOpen',
+        'service_start_date' => 'cascadeWhenServiceOpen',
+        'service_duration_value' => 'cascadeWhenDurationEditableServiceOpen',
+        'service_duration_unit' => 'cascadeWhenDurationEditableServiceOpen',
+        'sales_stage' => 'cascadeWhenOpen',
+    ];
+    private const OPERATION_CASCADE = 'cascading_opportunity_';
 
     //Marketo
     var $mkto_sync;
@@ -115,6 +140,13 @@ class Opportunity extends SugarBean
         'quote_id' => 'quotes',
     );
 
+    /**
+     * Fields for which we will disable imports.
+     *
+     * @var array
+     */
+    public $disableImportFields = [];
+
 
     public function __construct()
     {
@@ -124,6 +156,10 @@ class Opportunity extends SugarBean
         if (empty($sugar_config['require_accounts'])) {
             unset($this->required_fields['account_name']);
         }
+        if (!isset($GLOBALS['installing']) || !$GLOBALS['installing']) {
+            $this->setDisabledImportFields();
+        }
+
     }
 
 
@@ -416,6 +452,10 @@ class Opportunity extends SugarBean
         if (isset($this->id) && !$this->new_with_id && $this->sales_status == Opportunity::STATUS_NEW) {
             $this->sales_status = Opportunity::STATUS_IN_PROGRESS;
         }
+        // trigger cascading changes down to open RLIs based on what data is being updated here
+        if ($this->isUpdate() && $this->shouldCascade()) {
+            $this->cascade();
+        }
 
         // verify that base_rate is set to the correct amount, moved in from SugarBean
         // as we need this to run before perform_save (which does calculations with base_rate)
@@ -582,7 +622,17 @@ class Opportunity extends SugarBean
      */
     public function getRliClosedWonStages(): array
     {
-        return Forecast::getSettings()['sales_stage_won'] ?? ['Closed Won'];
+        return Forecast::getSettings()['sales_stage_won'] ?? [self::STAGE_CLOSED_WON];
+    }
+
+    /**
+     * Return an array of RLI closed lost stage names.
+     *
+     * @return array array of RLI closed lost stage values
+     */
+    public function getRliClosedLostStages(): array
+    {
+        return Forecast::getSettings()['sales_stage_lost'] ?? [self::STAGE_CLOSED_LOST];
     }
 
     /**
@@ -592,12 +642,19 @@ class Opportunity extends SugarBean
      */
     public function canRenew(): bool
     {
-        // get the OpportunitySettings
+        // Renewals are only supported for Sell instances using RLIs
+        return static::usingRevenueLineItems() && $this->isLicensedForSell();
+    }
+
+    /**
+     * If we are in Opps + RLIs mode, disable importing our cascading fields..
+     */
+    public function setDisabledImportFields()
+    {
         $settings = Opportunity::getSettings();
-        $useRli = isset($settings['opps_view_by']) && $settings['opps_view_by'] === 'RevenueLineItems';
-        // get licenses
-        $licenses = SubscriptionManager::instance()->getSystemSubscriptionKeysInSortedValueArray();
-        return $useRli && in_array('SUGAR_SELL', $licenses);
+        if (isset($settings['opps_view_by']) && $settings['opps_view_by'] === 'RevenueLineItems') {
+            $this->disableImportFields = array_keys(self::CASCADE_FIELD_CONDITIONS);
+        }
     }
 
     /**
@@ -665,6 +722,28 @@ class Opportunity extends SugarBean
     }
 
     /**
+     * Get the ids of Related RLIs with "Generate Purchase" => Yes
+     *
+     * @return array ids of RLIs
+     * @throws SugarQueryException
+     */
+    public function getGeneratePurchaseRliIds()
+    {
+        global $current_user;
+        if (!$current_user->hasLicense(Subscription::SUGAR_SELL_KEY)) {
+            return [];
+        }
+
+        $q = new SugarQuery();
+        $q->from(BeanFactory::newBean('RevenueLineItems'));
+        $q->select(['id']);
+        $q->where()->queryAnd()
+            ->equals('opportunity_id', $this->id)
+            ->equals('generate_purchase', 'Yes');
+        return $q->execute();
+    }
+
+    /**
      * Get existing renewal opportunity.
      *
      * @return Opportunity|NULL
@@ -691,6 +770,86 @@ class Opportunity extends SugarBean
         }
 
         return $renewalBean;
+    }
+
+    /**
+     * Create/update renewal RLIs if Add-On-To PLI is linked to an open renewal Opp
+     *
+     * #1. Closed Won renewable RLIs with an Add-On-To PLI that links to an open renewal Opp where the renewal Opp
+     *    has no existing open RLI whose Product matches my newly won RLI, create a new renewal RLI in this
+     *    existing renewal Opp.
+     *
+     * #2. Closed Won renewable RLIs with an Add-On-To PLI that links to an open renewal Opp where the renewal Opp
+     *    has an existing open RLI whose Product matches my current won RLI, update the existing renewal RLI.
+     *
+     * @param array $rliBeans Closed Won renewable RLI Beans to be processed
+     * @return array beans that have ben processed
+     */
+    public function updateRenewalRLIs(array $rliBeans)
+    {
+        $rlisUpdated = [];
+        foreach ($rliBeans as $rliBean) {
+            if (!empty($rliBean->add_on_to_id)) {
+                $pli = BeanFactory::retrieveBean('PurchasedLineItems', $rliBean->add_on_to_id);
+                if ($pli && !empty($pli->renewal_opp_id)) {
+                    $renewalOpp = BeanFactory::retrieveBean('Opportunities', $pli->renewal_opp_id);
+                    // checks if this is a renewal open Opportunity and gets its related RLIs
+                    if ($renewalOpp->isOpenRenewalOpportunity() &&
+                        $renewalOpp->load_relationship('revenuelineitems')) {
+                        $rlis = $renewalOpp->revenuelineitems->getBeans();
+                        $rliProcessed = false;
+                        foreach ($rlis as $rli) {
+                            // checks if there is an open RLI whose Product matches the Closed Won renewable RLI
+                            if ($rli->isOpenRenewalRLI() &&
+                                !empty($rliBean->product_template_id) &&
+                                !empty($rli->product_template_id) &&
+                                $rliBean->product_template_id === $rli->product_template_id) {
+                                // #2 update the existing renewal RLI in existing renewal Opp
+                                $rli->quantity += $rliBean->quantity;
+                                // we need to convert the amount to the existing renewal RLI's currency
+                                // when $rliBean & $rli have different currency_id
+                                if ($rliBean->currency_id !== $rli->currency_id) {
+                                    $rli->likely_case +=
+                                        SugarCurrency::convertAmount(
+                                            (float)$rliBean->likely_case,
+                                            $rliBean->currency_id,
+                                            $rli->currency_id
+                                        );
+                                } else {
+                                    $rli->likely_case += $rliBean->likely_case;
+                                }
+                                $rli->save();
+                                $rliProcessed = true;
+                                break;
+                            }
+                        }
+                        if (!$rliProcessed) {
+                            // #1 create a new renewal RLI in existing renewal Opp
+                            $newRliBean = $renewalOpp->createNewRenewalRLI($rliBean);
+
+                            // Link the renewal RLI to the RLI it is generating
+                            $rliBean->renewal_rli_id = $newRliBean->id;
+                            $rliBean->save();
+                        }
+                        $rlisUpdated[] = $rliBean->id;
+                    }
+                }
+            }
+        }
+
+        return $rlisUpdated;
+    }
+
+    /**
+     * Check if it is an open renewal opportunity.
+     *
+     * @return bool
+     */
+    public function isOpenRenewalOpportunity()
+    {
+        return ($this->sales_status !== Opportunity::STATUS_CLOSED_WON &&
+            $this->sales_status !== Opportunity::STATUS_CLOSED_LOST &&
+            $this->renewal == 1);
     }
 
     /**
@@ -763,6 +922,8 @@ class Opportunity extends SugarBean
             'service',
             'service_duration_value',
             'service_duration_unit',
+            'catalog_service_duration_value',
+            'catalog_service_duration_unit',
             'assigned_user_id',
             'team_id',
             'team_set_id',
@@ -776,6 +937,7 @@ class Opportunity extends SugarBean
         $newRliBean->date_closed = $newStartDate;
         $newRliBean->product_type = 'Existing Business';
         $newRliBean->opportunity_id = $this->id;
+        $newRliBean->renewal = true;
 
         foreach ($copyRliFields as $field) {
             if (isset($rli->$field)) {
@@ -790,5 +952,499 @@ class Opportunity extends SugarBean
         }
 
         return $newRliBean;
+    }
+
+    /**
+     * Overrides the parent updateCalculatedFields to also include recalculating
+     * non-SugarLogic rollup fields, and prevent recalculating fields if we're in
+     * a cascade operation
+     *
+     * @throws SugarQueryException
+     */
+    public function updateCalculatedFields()
+    {
+        if (SugarBean::inOperation(self::OPERATION_CASCADE . $this->id)) {
+            return;
+        }
+        $this->updateRLIRollupFields();
+        parent::updateCalculatedFields();
+    }
+
+    /**
+     * Updates the non-SugarLogic rollup fields on the Opportunity
+     *
+     * @return $this
+     * @throws SugarQueryException
+     */
+    public function updateRLIRollupFields()
+    {
+        $settings = Opportunity::getSettings();
+        $rliMode = isset($settings['opps_view_by']) && $settings['opps_view_by'] === 'RevenueLineItems';
+        if (!empty($this->id) && $rliMode) {
+            $rollupFields = [
+                'service_start_date' => $this->calculateOpportunityServiceStartDate(),
+                'sales_stage' => $this->calculateOpportunitySalesStage(),
+                'date_closed' => $this->calculateOpportunityExpectedCloseDate(),
+                'service_open_revenue_line_items' => $this->calculateServiceOpenRLI(),
+                'service_open_flex_duration_rlis' => sizeof($this->getEditableDurationServiceRLIs()),
+            ];
+            $rollupFields = array_merge($rollupFields, $this->calculateServiceDuration());
+
+            // Update the Opportunity with the calculated rollup values. If any
+            // values have changed on the Opportunity, then save it afterward
+            foreach ($rollupFields as $field => $calculatedValue) {
+                if ($this->$field !== $calculatedValue) {
+                    $this->$field = $calculatedValue;
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Runs DB queries to calculate the rollup value for the service duration
+     * fields from the related RLIs
+     *
+     * @return array service duration value and unit
+     * @throws SugarQueryException
+     */
+    public function calculateServiceDuration()
+    {
+        // If there are no service RLIs, set the service duration to blank
+        $serviceRLICount = $this->getServiceRLIs(true);
+        if ($serviceRLICount === 0) {
+            return [
+                'service_duration_value' => '',
+                'service_duration_unit' => '',
+            ];
+        }
+
+        $closedLostStages = $this->getRliClosedLostStages();
+        $closedWonStages = $this->getRliClosedWonStages();
+
+        $closedServiceRLICount = $this->getServiceRLIs(true, 'in', array_merge($closedLostStages, $closedWonStages));
+        if ($serviceRLICount === $closedServiceRLICount) {
+            $closedLostServiceRLICount = $this->getServiceRLIs(true, 'in', $closedLostStages);
+            if ($closedServiceRLICount === $closedLostServiceRLICount) {
+                // If there are service RLIs and they're all closed and lost,
+                // use the max duration of the lost service RLIs.
+                $rlis = $this->getServiceRLIs(false, 'in', $closedLostStages);
+            } else {
+                // If there are service RLIs and they're all closed with at least one
+                // that is won, use the max duration of the won service RLIs.
+                $rlis = $this->getServiceRLIs(false, 'in', $closedWonStages);
+            }
+        } else {
+            $editableDurationServiceRLICount = $this->getEditableDurationServiceRLIs(true);
+            if ($editableDurationServiceRLICount > 0) {
+                // If there are service RLIs and at least one is open and has an editable
+                // duration, use the max duration of the open, service, flex duration RLIs.
+                $rlis = $this->getEditableDurationServiceRLIs();
+            } else {
+                // If there are service RLIs and at least one is open but none have an
+                // editable duration, use the max duration of the open and closed-won
+                // service RLIs.
+                $rlis = $this->getServiceRLIs(false, 'notIn', $closedLostStages);
+            }
+        }
+
+        $maxDurationRLI = $this->getRLIWithMaxDuration($rlis);
+        return [
+            'service_duration_value' => $maxDurationRLI['service_duration_value'],
+            'service_duration_unit' => $maxDurationRLI['service_duration_unit'],
+        ];
+    }
+
+    /**
+     * Finds the RLI with the maximum duration
+     * @param array $rlis
+     * @return array
+     */
+    private function getRLIWithMaxDuration($rlis)
+    {
+        // Safety check, if we got here with an empty array then return a blank
+        // service duration.
+        if (empty($rlis)) {
+            return [
+                'service_duration_value' => '',
+                'service_duration_unit' => '',
+            ];
+        }
+
+        $now = new SugarDateTime('now', new DateTimeZone('UTC'));
+
+        $durations = [];
+        foreach ($rlis as $rli) {
+            $modify_by = '+' . $rli['service_duration_value'] . ' ' . $rli['service_duration_unit'];
+            $ts = (clone $now)->modify($modify_by)->getTimestamp();
+            $durations[$ts] = $rli;
+        }
+
+        $maxTs = max(array_keys($durations));
+        return $durations[$maxTs];
+    }
+
+    /**
+     * Gets service RLIs related to this opportunity. If $op and $sales_stages
+     * are null then gets all service RLIs. Otherwise only gets service RLIs that
+     * match given sales stage criteria.
+     * @param bool $count_only
+     * @param 'in'|'notIn'|null $op
+     * @param array|null $sales_stages
+     * @return array
+     * @throws SugarQueryException
+     */
+    private function getServiceRLIs($count_only = false, $op = null, $sales_stages = null)
+    {
+        $q = new SugarQuery();
+        $q->from(BeanFactory::newBean('RevenueLineItems'));
+        if ($count_only) {
+            $q->select()->setCountQuery();
+        } else {
+            $q->select(['id', 'service_duration_unit', 'service_duration_value']);
+        }
+        $queryAnd = $q->where()->queryAnd();
+        $queryAnd
+            ->equals('opportunity_id', $this->id)
+            ->equals('service', 1);
+        if (!empty($op) && !empty($sales_stages) && in_array($op, ['in', 'notIn'])) {
+            $queryAnd->{$op}('sales_stage', $sales_stages);
+        }
+
+        if ($count_only) {
+            $data = $q->execute();
+            return $data[0]['record_count'];
+        } else {
+            return $q->execute();
+        }
+    }
+
+    /**
+     * Gets service RLIs with editable durations that are related to this
+     * opportunity.
+     * @return array
+     * @throws SugarQueryException
+     */
+    public function getEditableDurationServiceRLIs($count_only = false)
+    {
+        $closedStages = $this->getClosedStages();
+
+        // RLIs with no product template
+        $q1 = new SugarQuery();
+        $q1->from(BeanFactory::newBean('RevenueLineItems'));
+        if ($count_only) {
+            $q1->select()->setCountQuery();
+        } else {
+            $q1->select(['id', 'service_duration_unit', 'service_duration_value']);
+        }
+        $q1->where()->queryAnd()
+            ->equals('opportunity_id', $this->id)
+            ->equals('service', 1)
+            ->notIn('sales_stage', $closedStages)
+            ->isEmpty('add_on_to_id')
+            ->isEmpty('product_template_id');
+
+        // RLIs with an unlocked duration product template
+        $q2 = new SugarQuery();
+        $q2->from(BeanFactory::newBean('RevenueLineItems'));
+        $q2->joinTable('product_templates', [
+            'alias' => 'pt',
+        ])->on()
+            ->equalsField('pt.id', 'product_template_id')
+            ->notEquals('pt.lock_duration', 1);
+        if ($count_only) {
+            $q2->select()->setCountQuery();
+        } else {
+            $q2->select(['id', 'service_duration_unit', 'service_duration_value']);
+        }
+        $q2->where()->queryAnd()
+            ->equals('opportunity_id', $this->id)
+            ->equals('service', 1)
+            ->notIn('sales_stage', $closedStages)
+            ->isEmpty('add_on_to_id');
+
+        if ($count_only) {
+            $data1 = $q1->execute();
+            $data2 = $q2->execute();
+            return $data1[0]['record_count'] + $data2[0]['record_count'];
+        } else {
+            $q = new SugarQuery();
+            $q->union($q1);
+            $q->union($q2);
+
+            return $q->execute();
+        }
+    }
+
+    /**
+     * Runs DB query to check if there are any open and marked as service RLIs for the opportunity
+     *
+     * @return int the number of open and service RLIs
+     * @throws SugarQueryException
+     */
+    private function calculateServiceOpenRLI(): int
+    {
+        $closedStages = $this->getClosedStages();
+
+        // Get the number of open and service marked RLIs
+        $q = new SugarQuery();
+        $q->from(BeanFactory::newBean('RevenueLineItems'));
+        $q->select(['id']);
+        $q->where()->queryAnd()
+            ->equals('opportunity_id', $this->id)
+            ->equals('service', 1)
+            ->notIn('sales_stage', $closedStages);
+
+        return sizeof($q->execute());
+    }
+
+    /**
+     * Runs a DB query to calculate the rollup value for the Service Start Date
+     * field from the related RLIs
+     *
+     * @return string containing the calculated Service Start Date
+     * @throws SugarQueryException
+     */
+    private function calculateOpportunityServiceStartDate(): string
+    {
+        $closedWonStages = $this->getRliClosedWonStages();
+        $closedLostStages = $this->getRliClosedLostStages();
+
+        // Build the case statement for the query. This will be used to order the
+        // query results so that open RLIs come before closed-won
+        $quotedWonStages = implode(',', $this->getQuotedStringArray($closedWonStages));
+        $caseStatement = 'CASE WHEN sales_stage IN (' . $quotedWonStages . ') THEN 1 ELSE 0 END';
+
+        // Get the earliest Service Start Date of a non-closed-lost service RLI
+        // related to the Opportunity. If any of the related service RLIs are
+        // open, their value takes precedence over closed-won service RLIs.
+        $q = new SugarQuery();
+        $q->from(BeanFactory::newBean('RevenueLineItems'));
+        $q->select(['service_start_date'])
+            ->fieldRaw($caseStatement, 'is_closed');
+        $q->where()->queryAnd()
+            ->equals('opportunity_id', $this->id)
+            ->equals('service', 1)
+            ->notIn('sales_stage', $closedLostStages);
+        $q->orderByRaw('is_closed', 'ASC');
+        $q->orderBy('service_start_date', 'ASC');
+        $result = $q->getDBManager()->fromConvert($q->getOne(), 'date');
+
+        return !empty($result) ? $result : '';
+    }
+
+    /**
+     * Runs a DB query to calculate the rollup value for the Sales Stage field
+     * from the related RLIs
+     *
+     * @return string containing the calculated Sales Stage
+     * @throws SugarQueryException
+     */
+    private function calculateOpportunitySalesStage(): string
+    {
+        // Get the lists of sales stages needed for the query
+        $listStrings = return_app_list_strings_language('en_us');
+        $quotedAllStages = $this->getQuotedStringArray($listStrings['sales_stage_dom']);
+        $quotedClosedWonStages = $this->getQuotedStringArray($this->getRliClosedWonStages());
+        $quotedClosedLostStages = $this->getQuotedStringArray($this->getRliClosedLostStages());
+
+        // Build the case statements. These will be used to order query results
+        // so that the first result will be the correct sales stage
+        $wonStages = implode(',', $quotedClosedWonStages);
+        $lostStages = implode(',', $quotedClosedLostStages);
+        $closedOrderCases = 'CASE WHEN sales_stage IN (' . $wonStages . ') THEN 1 ' .
+            'WHEN sales_stage IN (' . $lostStages . ') THEN 2 ' .
+            'ELSE 0 END';
+        $stageOrderCases = 'CASE ';
+        foreach ($quotedAllStages as $index => $stage) {
+            $stageOrderCases .= 'WHEN sales_stage = ' . $stage . ' THEN ' . $index . ' ';
+        }
+        $stageOrderCases .= 'ELSE ' . count($quotedAllStages) . ' END';
+
+        // Execute the query. If any RLIs are open, we get the latest sales_stage
+        // of the open RLIs. Otherwise, if any are closed-won, the sales_stage is
+        // closed-won. Otherwise, it is closed-lost.
+        $q = new SugarQuery();
+        $q->from(BeanFactory::newBean('RevenueLineItems'));
+        $q->select(['sales_stage'])
+            ->fieldRaw($closedOrderCases, 'closed_order')
+            ->fieldRaw($stageOrderCases, 'stage_order');
+        $q->where()->equals('opportunity_id', $this->id);
+        $q->orderByRaw('closed_order', 'ASC');
+        $q->orderByRaw('stage_order', 'DESC');
+        $result = $q->getOne();
+
+        return !empty($result) ? $result : '';
+    }
+
+    /**
+     * Runs a DB query to calculate the rollup value for the Expected Close Date
+     * field from the related RLIs
+     *
+     * @return string containing the calculated Expected Close Date
+     * @throws SugarQueryException
+     */
+    private function calculateOpportunityExpectedCloseDate(): string
+    {
+        // Get the lists of sales stages needed for the query
+        $quotedClosedWonStages = $this->getQuotedStringArray($this->getRliClosedWonStages());
+        $quotedClosedLostStages = $this->getQuotedStringArray($this->getRliClosedLostStages());
+
+        // Build the case statement. This will be used to order query results so
+        // that open RLIs take precedence over closed RLIs, and closed-won RLIs
+        // take precedence over closed-lost RLIs
+        $wonStages = implode(',', $quotedClosedWonStages);
+        $lostStages = implode(',', $quotedClosedLostStages);
+        $closedOrderCases = 'CASE WHEN sales_stage IN (' . $wonStages . ') THEN 1 ' .
+            'WHEN sales_stage IN (' . $lostStages . ') THEN 2 ' .
+            'ELSE 0 END';
+
+        // Execute the query. If any RLIs are open, we get the latest expected
+        // close date of the open RLIs. Otherwise, if any are closed-won, we get
+        // the latest expected close date of the closed-won. Otherwise, we get
+        // the latest expected close date of the closed-lost RLIs
+        $q = new SugarQuery();
+        $q->from(BeanFactory::newBean('RevenueLineItems'));
+        $q->select(['date_closed'])
+            ->fieldRaw($closedOrderCases, 'closed_order');
+        $q->where()->equals('opportunity_id', $this->id);
+        $q->orderByRaw('closed_order', 'ASC');
+        $q->orderByRaw('date_closed', 'DESC');
+        $result = $q->getDBManager()->fromConvert($q->getOne(), 'date');
+
+        return !empty($result) ? $result : '';
+    }
+
+    /**
+     * Adds proper DB quotation to an array of strings for use in SQL queries
+     * @param array $array the array of strings to quote
+     * @return array an array of the passed-in strings quoted correctly for the DB
+     */
+    private function getQuotedStringArray(array $array): array
+    {
+        $db = DBManagerFactory::getInstance();
+        $quotedArray = [];
+        foreach ($array as $key => $value) {
+            $quotedArray[] = $db->quoted($value);
+        }
+        return $quotedArray;
+    }
+
+    /**
+     * Cascades certain Opportunity fields down to related RLIs upon save depending on
+     * the {field}=>{condition} mappings defined in CASCADE_FIELD_CONDITIONS. This is
+     * only called if at least one of our '_cascade' fields has a value.
+     */
+    private function cascade()
+    {
+        // If entering a cascade operation fails (because we're already in one) return early
+        if (!SugarBean::enterOperation(self::OPERATION_CASCADE . $this->id)) {
+            return;
+        }
+
+        // entering/leaving operations is entirely static, and incurs really low overhead
+        // Checking settings and local variables is a little more expensive, so we check these conditions
+        // after our static operations to avoid work we don't need to do.
+        $settings = Opportunity::getSettings();
+        if ($settings['opps_view_by'] !== 'RevenueLineItems') {
+            SugarBean::leaveOperation(self::OPERATION_CASCADE . $this->id);
+            return;
+        }
+
+        if ($this->load_relationship('revenuelineitems')) {
+            $rlis = $this->revenuelineitems->getBeans();
+            if (!is_array($rlis) || empty($rlis)) {
+                return;
+            }
+            $updated_rlis = [];
+
+            foreach (self::CASCADE_FIELD_CONDITIONS as $field => $callback) {
+                $cascadeField = $field . '_cascade';
+                if (!empty($this->{$cascadeField})) {
+                    foreach ($rlis as $rli) {
+                        if ($rli->{$field} !== $this->{$cascadeField} &&
+                            call_user_func([$this, $callback], $rli)) {
+                            $rli->{$field} = $this->{$cascadeField};
+                            $updated_rlis[] = $rli;
+                        }
+                    }
+                    $this->{$cascadeField} = null;
+                }
+            }
+            foreach ($updated_rlis as $rli) {
+                $rli->save();
+            }
+        }
+        SugarBean::leaveOperation(self::OPERATION_CASCADE . $this->id);
+        // After updating all associated RLIs, update the calculated fields on this Opportunity
+        // to set the original fields correctly.
+        $this->updateCalculatedFields();
+    }
+
+    /**
+     * Returns true when RLI is open.
+     *
+     * @param RevenueLineItem rli
+     * @return bool True if RLI is open
+     */
+    public function cascadeWhenOpen($rli)
+    {
+        return !in_array($rli->sales_stage, $this->getClosedStages());
+    }
+
+    /**
+     * Returns true when RLI is open and marked as a service.
+     *
+     * @param RevenueLineItem $rli
+     * @return bool True if RLI is marked 'service' and is open
+     */
+    public function cascadeWhenServiceOpen($rli)
+    {
+        return (isTruthy($rli->service) && $this->cascadeWhenOpen($rli));
+    }
+
+    /**
+     * Returns true when RLI is open, marked as a service, and has an editable
+     * duration.
+     *
+     * @param RevenueLineItem $rli
+     * @return bool
+     */
+    public function cascadeWhenDurationEditableServiceOpen($rli)
+    {
+        if (!$this->cascadeWhenServiceOpen($rli) || !empty($rli->add_on_to_id)) {
+            return false;
+        }
+        $productTemplate = BeanFactory::retrieveBean('ProductTemplates', $rli->product_template_id);
+        if ($productTemplate->id) {
+            return isFalsy($productTemplate->lock_duration);
+        }
+        return true;
+    }
+
+    /**
+     * If at least one '_cascade' field has a value set, we should cascade. Because they're
+     * non-db fields, on non-cascading saves they will be the empty string or null.
+     * @return bool
+     */
+    private function shouldCascade()
+    {
+        foreach (array_keys(self::CASCADE_FIELD_CONDITIONS) as $field) {
+            if (!empty($this->{$field . '_cascade'})) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Util function to see if we are in Opps + RLIs mode
+     * @return bool true if in RLIs mode, false if in Opps Only mode
+     */
+    public static function usingRevenueLineItems(): bool
+    {
+        $settings = Opportunity::getSettings();
+        return isset($settings['opps_view_by']) && $settings['opps_view_by'] === 'RevenueLineItems';
     }
 }

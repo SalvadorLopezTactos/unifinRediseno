@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Comptes de correu electrònic de sortida',
     'LBL_MODULE_NAME_SINGULAR' => 'Compte de correu electrònic de sortida',
+    'LBL_STATUS' => 'Estat',
     'LBL_MAIL_SENDTYPE' => 'Agent de transferència de correu',
     'LBL_MAIL_SMTPSERVER' => 'Servidor',
     'LBL_MAIL_SMTPPORT' => 'Port',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Aquest és el compte de sistema.',
     'LBL_EMAIL_ADDRESS_ID' => 'ID d&#39;adreça electrònica',
     'LBL_TYPE' => 'Tipus',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Adreça de correu electrònic autoritzada',
+    'LBL_FROM_EMAIL_ADDRESS' => 'Adreça de correu electrònic remitent',
     'LBL_REPLY_TO_NAME' => 'Nom de Contesta-a',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Adreces electròniques de Contesta-a',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID d&#39;adreça electrònica de Contesta-a',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Adreça electrònica de Contesta-a',
     'LBL_PRIMARY_TEAM' => 'Equip principal',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat a la configuració dels correus electrònics',
 );

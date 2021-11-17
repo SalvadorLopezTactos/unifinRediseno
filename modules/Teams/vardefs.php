@@ -11,6 +11,7 @@
  */
 $dictionary['Team'] = array(
     'table' => 'teams',
+    'archive' => false,
     'fields' => array(
         'name' => array(
             'name' => 'name',
@@ -173,6 +174,7 @@ $dictionary['TeamMembership'] = array(
         ),
     ),
 );
+
 $dictionary['TeamSet'] = array(
     'table' => 'team_sets',
     'fields' => array(

@@ -59,6 +59,11 @@
 
         this._currentIndex = 0;
         this.model.on("change:team_name_type", this.appendTeam, this);
+
+        // Set appendTeamValue for mass update
+        if (!_.isUndefined(this.model.get('team_name_type'))) {
+            this.appendTeamValue = this.model.get('team_name_type') === '1';
+        }
     },
 
     /**
@@ -242,6 +247,13 @@
                 this.type,
                 this.view.meta.template + '-' + this.tplName,
                 this.model.module);
+        }
+
+        // Make sure the correct template and module are used when this field is used
+        // in the audit log.
+        if (!template && this.view.name === 'audit') {
+            template = app.template.getField(this.type, 'audit-list', this.view.baseModule);
+            this.tplName = 'audit-list';
         }
 
         // If we're loading edit template on List view switch to detail template instead

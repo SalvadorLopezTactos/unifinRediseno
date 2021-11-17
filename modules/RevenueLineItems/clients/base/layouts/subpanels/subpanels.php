@@ -60,5 +60,12 @@ $viewdefs['RevenueLineItems']['base']['layout']['subpanels'] = array(
                 'link' => 'notes',
             ),
         ),
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_PARENT_RLIS_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'parent_rlis_link',
+            ],
+        ],
     ),
 );

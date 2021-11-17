@@ -133,7 +133,7 @@
             emailFieldHtml,
             $newEmailField;
 
-        email = $.trim(email);
+        email = email.trim();
 
         if ((email !== '') && (this._addNewAddressToModel(email))) {
             // build the new email field
@@ -176,7 +176,7 @@
             emails = this.model.get(this.name) || [],
             primaryRemoved;
 
-        newEmail = $.trim(newEmail);
+        newEmail = newEmail.trim();
 
         if (newEmail === '') {
             // remove email if email is empty

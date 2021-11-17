@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Adapter;
 
+use Elastica\Response;
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\Elasticsearch\Exception\ConnectionException;
 use Elastica\Client as BaseClient;
@@ -60,6 +61,7 @@ class Client extends BaseClient
         '5.4',
         '5.6',
         '6.x',
+        '7.x',
     );
 
     /**
@@ -68,7 +70,7 @@ class Client extends BaseClient
      */
     protected static $supportedVersions = array(
         array('version' =>'5.4', 'operator' => '>='),
-        array('version' => '7.0', 'operator' => '<'),
+        array('version' => '8.0', 'operator' => '<'),
     );
 
     /**
@@ -113,16 +115,31 @@ class Client extends BaseClient
     }
 
     /**
+     * get the version of Elastic Server
+     *
+     * @param bool $forceRefresh    to retrieve version info from server
+     * @param bool $useCache        to use cache
      * @return string elasticsearch version
      * @throws \Exception
      */
-    public function getVersion() : string
+    public function getElasticServerVersion(bool $forceRefresh = false, bool $useCache = true) : string
     {
-        if (empty($this->version)) {
+        $cacheKey = 'elastic_server_version';
+        if (!$forceRefresh && $useCache) {
+            $this->version = sugar_cache_retrieve($cacheKey);
+            if (!empty($this->version)) {
+                return $this->version;
+            }
+        }
+
+        if (empty($this->version) || $forceRefresh) {
             $result = $this->ping();
             if ($result->isOk()) {
                 $data = $result->getData();
                 $this->version = $data['version']['number']?? null;
+                if (!empty($this->version) && $useCache) {
+                    sugar_cache_put($cacheKey, $this->version);
+                }
             }
         }
 
@@ -353,7 +370,7 @@ class Client extends BaseClient
      * @throws \Exception
      * @throws \Sugarcrm\Sugarcrm\Elasticsearch\Exception\ConnectionException
      */
-    public function request($path, $method = Request::GET, $data = array(), array $query = array(), $contentType = Request::DEFAULT_CONTENT_TYPE)
+    public function request(string $path, string $method = Request::GET, $data = [], array $query = [], string $contentType = Request::DEFAULT_CONTENT_TYPE): Response
     {
         // Enforce cached availability
         if (!$this->isAvailable()) {

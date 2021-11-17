@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'Den adgangskode, du har angivet, opfylder ikke adgangskodekravene. Prøv igen.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Brugeroplysningerne blev ikke fundet',
     'ERR_USER_NAME_EXISTS'              => 'Brugernavnet {0} eksisterer allerede. Dublet brugernavne er ikke tilladt. Ædr brugernavnet så det bliver unikt.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => 'Licensen “Sugar Hint” skal gemmes sammen med en yderligere kompatibel licenstype',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Brugerens adgang til Sugar-programmet er spærret, og brugeren kan ikke logge på ved hjælp af sin eksisterende adgangskode.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Bruger der kun har ekstern tilladelse, må ikke logge på ved hjælp af Sugar legitimationsoplysninger',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Modtagers e-mail-adresse',
 	'ERR_SERVER_STATUS'					=> 'Din serverstatus',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Systemet kan ikke sende en e-mail til brugeren. Kontrollér e-mail-overførselsagenten i <a href="index.php?module=EmailMan&action=config">E-mail indstillinger</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Nye brugere skal oprettes i <a href="{0}" target="_blank">SugarCloud-indstillinger</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-mail-adresse',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Prognoser',
     'LBL_WORKSHEETS'                    => 'Regneark',
 	'LBL_CALENDARS'                     => 'Kalendere',
+    'LBL_SHIFTS'                        => 'Skift',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Undtagelser fra skift',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Modtag en e-mail-meddelelse, når en post er tildelt dig.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'Send en e-mail om tildeling',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Modtag en e-mail, når nogen nævner dig i en kommentar til en logfil.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'E-mail om omtale',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Vælg, hvordan feltnavne skal vises i postvisninger. Vælg "Ud for feltværdi" for at få en mere kompakt postvisning.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Placering af feltnavn',
     'LBL_ABOVE_FIELD_VALUE'             => 'Over feltværdi',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Licenstype',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Angiv en standardpåmindelse for opkald og møder. Pop up-meddelelser vises for alle inviterede med Sugar. E-mail-påmindelser sendes til alle inviterede.',
 	'LBL_REMINDER'						=> 'Påmindelser',
 	'LBL_REMINDER_POPUP' => 'Popup',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Denne session er afsluttet, da en anden session er blevet startet under samme brugernavn.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Omfordeling af poster',
-	'LBL_REASS_DESC_PART1'				=> 'Vælg de moduler, som indeholder poster, der skal overflyttes fra en bestemt bruger til en anden bruger. <br/><br/>
+    'LBL_REASS_DESC_PART1'              => 'Vælg de moduler, som indeholder poster, der skal overflyttes fra en bestemt bruger til en anden bruger. <br/><br/>
 Klik på Næste for at se antallet af poster, der vil blive opdateret i hvert valgte modul.
 Klik på Annuller for at lukke siden uden omfordeling af poster.',
         'LBL_REASS_DESC_PART2'=>                    'Vælg hvilke moduler der skal køres arbejdsprocesser, sendes opgavepåmindelser og revideres sporingen imod under omplacering. Klik på Næste for at fortsætte og overflytte poster. Klik på Genstart for at starte forfra.',
@@ -634,7 +638,7 @@ Klik på Annuller for at lukke siden uden omfordeling af poster.',
     'LBL_DETAIL' => 'Brugerprofil',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Gå til <a href="%s" target="_blank">SugarCloud-indstillinger</a> for at foretage ændringer i ikke-skrivbare felter.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Kontakt venligst Sugar-administratoren, hvis du vil foretage ændringer af skrivebeskyttede felter.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

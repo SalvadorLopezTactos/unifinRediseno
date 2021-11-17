@@ -68,9 +68,7 @@ class PMSEEngineUtils
     protected static $blacklistedFields = array(
         'ALL' => array(
             'deleted',
-            'mkto_sync',
             'mkto_id',
-            'mkto_lead_score',
             'parent_type',
             'user_name',
             'user_hash',
@@ -78,6 +76,7 @@ class PMSEEngineUtils
             'portal_active',
             'password',
             'is_admin',
+            'team_count',
         ),
         // list for BR conclusions and others (write)
         'BR' => array(
@@ -87,8 +86,8 @@ class PMSEEngineUtils
             'duration_minutes',
             'repeat_type',
             'viewcount',
-            'created_by',
-            'modified_user_id',
+            'created_by_name',
+            'modified_by_name',
             'date_entered',
             'date_modified',
             'primary_contact_name',
@@ -104,8 +103,8 @@ class PMSEEngineUtils
             'kbdocument_body',
             'revision',
             'viewcount',
-            'created_by',
-            'modified_user_id',
+            'created_by_name',
+            'modified_by_name',
             'portal_name',
         ),
         // Process Definitions
@@ -130,8 +129,8 @@ class PMSEEngineUtils
             'kbdocument_body',
             'revision',
             'viewcount',
-            'created_by',
-            'modified_user_id',
+            'created_by_name',
+            'modified_by_name',
             'date_entered',
             'date_modified',
             'portal_name',
@@ -195,7 +194,7 @@ class PMSEEngineUtils
      * @var array
      */
     public static $specialFields = array(
-        'All' => array('created_by', 'modified_user_id', 'primary_contact_name'),
+        'All' => array('created_by_name', 'modified_by_name', 'primary_contact_name'),
         'BR' => array('assigned_user_id', 'email1', 'outlook_id'),
         'BRR' => array('assigned_user_id', 'email1', 'outlook_id'),
         'ET' => array('email1', 'portal_name'),
@@ -1311,9 +1310,7 @@ class PMSEEngineUtils
     {
         // We only want a real return value if source is set to non-db
         if (isset($def['source']) && $def['source'] == 'non-db') {
-            // For now, only relate type non-db fields are valid, and only for
-            // Email Template actions
-            return $type !== 'ET' || !in_array($def['type'], self::$allowedNonDbFields);
+            return !in_array($def['type'], self::$allowedNonDbFields);
         }
 
         return null;
@@ -1419,6 +1416,25 @@ class PMSEEngineUtils
 
         if (in_array($type, array('AC', 'CF', 'BR', 'RR')) && !empty($def['readonly'])) {
             return false;
+        }
+
+        // Expose Relate Fields
+        if (isset($def['source']) && ($def['source'] === 'non-db' || $def['source'] === 'custom_fields')) {
+            if (isset($def['type']) && $def['type'] === 'relate' &&
+                isset($def['rname']) && $def['rname'] !== 'id') {
+                // We don't want the related ID field to be updated (written) in
+                // 'AC' - Add Related Record,
+                // 'CF' - Change Field,
+                // 'BR' - Business Rule Conclusions,
+                // or don't want related ID to be exposed in
+                // 'ET' - Email Templates ... yet,
+                // 'BRR' - Business Rules Conditions ... yet,
+                if (in_array($type, ['AC', 'CF', 'BR', 'ET', 'BRR'])) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
         }
 
         // At this point all we are left with is checking if it is studio valid

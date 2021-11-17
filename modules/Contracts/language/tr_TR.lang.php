@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Değiştiren ID',
     'LBL_EXPORT_CREATED_BY' => 'Oluşturan ID',
     'LBL_EXPORT_TYPE_NAME' => 'Tip İsmi',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Sözleşmeler Odak Bölmesi',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Kontratlar Kaydı Panosu',
 );

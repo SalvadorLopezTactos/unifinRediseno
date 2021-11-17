@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Definizioni Flusso',
   'LBL_MODULE_NAME_SINGULAR' => 'Definizione Flusso',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Definizioni flussi Focus Drawer',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Dashboard record definizioni processi',
   'LNK_LIST' => 'Visualizza Definizioni Flussi',
   'LNK_NEW_PMSE_PROJECT' => 'Crea Definizione Flusso',
   'LNK_IMPORT_PMSE_PROJECT' => 'Importa Definizioni Flusso',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Cambia Proprietario Record',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Gruppo',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Riassegna Attività',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'Email',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'Invia email all&#39;utente del flusso quando viene assegnato il flusso',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'Definizione Utente',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Metodo di Assegnazione',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Assegna Utente',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Aggiorna "Assegnati a" sul record',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Impostare "Assegnato a" in base alla disponibilità',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Aggiungi Record Relazionato',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Modulo correlato',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Il nome dell´attività è vuoto.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Il nome "%s" esiste già nella forma famiglia.',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Disponibilità ai turni richiesta',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Se nessun utente è disponibile',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'prima',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Solo nuovi record',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Solo i record aggiornati',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Aggiorna solo i record (Tutti gli aggiornamenti - Cfr- testo di aiuto)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Nuovi record di primo aggiornamento',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Nuovi record di tutti gli aggiornamenti',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Seleziona quanto l´evento inizierà',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Selezionare quando inizierà il flusso.<br><br>Nuovo: Eseguire il flusso quandi viene creato un nuovo record.<br><br>Primo aggiornamento: Il flusso viene eseguito solo la prima volta che vengono soddisfatti i criteri per un record esistente.<br><br>Tutti gli aggiornamento: Il flusso viene eseguito ogni volta che vengono soddisfatti i criteri per un record esistente.<br><br>Nuovi record o Primo aggiornamento: Il flusso viene eseguito solo la prima colta che viene soddisfatto il criterio per un record, durante la creazione del record o l&#39;aggiornamento del record.<br><br>Nuovi records e Tutti gli aggiornamento: Il flusso viene eseguito ogni volta per tutti i record nuovi ed esistenti.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Seleziona il modulo SugaCRM a cui applicare il trigger dell´evento',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Data Fissata',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'cambia da',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'cambia in',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'include qualsiasi',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'non include',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'il o dopo il',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'il o prima del',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'è uguale a',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Aggiungi',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Chiudi',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'Tutti i team sono assegnati al record',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Gruppi',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% relativo a %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Utente che ha creato il %MODULE%',

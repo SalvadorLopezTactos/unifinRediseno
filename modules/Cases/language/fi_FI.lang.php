@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Tapauslistojen työpöytä',
     'LBL_CASES_RECORD_DASHBOARD' => 'Tapaustietueiden työpöytä',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Palvelupyynnön tiedot',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Palvelupyynnöt-tietolaatikko',
 
 	'ERR_DELETE_RECORD'					=> 'Tietuenumero tulee määritellä jotta voit poistaa asiakkaan.',
 	'LBL_ACCOUNT_ID'					=> 'Asiakkaan ID',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Näytä Portalissa',
 	'LBL_CREATE_KB_DOCUMENT' => 'Luo artikkeli',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Tietämyskanta',
+    'LBL_REQUEST_CLOSE' => 'Pyyntö suljettu',
+    'LBL_REQUEST_CLOSE_DATE' => 'Sulkemispyynnön päivämäärä',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Sulkemispyyntö',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Lähetä pyyntö sulkea tämä palvelupyyntö',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Haluatko pyytää tämän palvelupyynnön sulkemista?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Omat palvelupyynnöt, joita on pyydetty suljettavaksi',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Omat palvelupyynnöt, joita on pyydetty suljettavaksi',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Omat palvelupyynnöt, joita on pyydetty suljettavaksi',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Luettelo suljettavaksi pyydetyistä palvelupyynnöistä',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Näytä luettelo suljettavaksi pyydetyistä palvelupyynnöistä, joille on määritetty tekijä',
 
     'LBL_CREATED_USER' => 'Luoja',
     'LBL_MODIFIED_USER' => 'Käyttäjä muokannut',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Vastuuhenkilö',
     'LBL_EXPORT_TEAM_COUNT' => 'Ryhmän Count',
     'LBL_CHANGETIMERS' => 'Muuta ajastimia',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Ostot',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Liittyvien kontaktien sähköpostit',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Esimerkiksi voisit käyttää tätä löytääksesi asian, joka on ennestään jätetty.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Jos sinulla on uusi ylläpitopalvelupyyntö jonka haluat jättää, klikkaa tästä lähettääksesi uuden palvelupyynnön.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Tämän klikkaaminen palauttaa sinut tähän näkymään milloin vain.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Palvelupyynnön yhteydet',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Muistiot',
 
@@ -157,5 +169,5 @@ $mod_strings = array (
 
     'LBL_SLA_DETAILS' => 'Palvelutasosopimuksen tiedot',
     'LBL_HOURS' => 'Tuntia',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'Tila',
 );

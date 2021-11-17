@@ -14,11 +14,7 @@
  * @extends View.Fields.Base.TextareaField
  */
 ({
-    extendsFrom: 'TextareaField',
-
-    shortName: undefined,
-
-    longName: undefined,
+    extendsFrom: 'BaseTextareaField',
 
     /**
      * @inheritdoc
@@ -32,11 +28,19 @@
      * @return {string} the formatted value
      */
     format: function(value) {
-        this.plugins = _.union(this.plugins, 'Tooltip');
-
         if (_.isString(value)) {
-            this.shortName = value.length > 20 ? value.substr(0,20) + '...' : value;
-            this.longName = value;
+            if (this.tplName !== 'edit') {
+                let shortComment = value;
+                var max = this.tplName === 'quote-data-grand-totals-header' ? 20 : this._settings.max_display_chars;
+                value = {
+                    long: this.getDescription(value, false),
+                    defaultValue: value,
+                };
+
+                if (value.long && value.long.string.length > max) {
+                    value.short = this.getDescription(shortComment, true);
+                }
+            }
 
             return value;
         }
@@ -53,14 +57,5 @@
         }
 
         return value.toString();
-    },
-
-    /**
-     * @inheritdoc
-     *
-     * Trim whitespace from value.
-     */
-    unformat: function(value) {
-        return value.trim();
     }
 })

@@ -679,6 +679,9 @@ class Email extends SugarBean {
      * @param string $toaddress
      * @param string $mail_sendtype
      * @param string $fromname
+     * @param string $mail_smtptype
+     * @param string $eapm_id
+     * @param string $authorized_account
      * @return array
      */
     public static function sendEmailTest(
@@ -691,7 +694,11 @@ class Email extends SugarBean {
         $fromaddress,
         $toaddress,
         $mail_sendtype = 'SMTP',
-        $fromname = ''
+        $fromname = '',
+        $mail_smtptype = '',
+        $mail_authtype = '',
+        $eapm_id = '',
+        $authorized_account = ''
     ) {
 		global $current_user,
                $app_strings;
@@ -717,7 +724,10 @@ class Email extends SugarBean {
         $outboundEmail->mail_smtpuser     = $smtp_username;
         $outboundEmail->mail_smtppass     = $smtppassword;
         $outboundEmail->mail_smtpssl      = $ssltls;
-
+        $outboundEmail->mail_smtptype     = $mail_smtptype;
+        $outboundEmail->mail_authtype     = $mail_authtype;
+        $outboundEmail->eapm_id           = $eapm_id;
+        $outboundEmail->authorized_account = $authorized_account;
         $return = array();
 
         try {
@@ -728,7 +738,6 @@ class Email extends SugarBean {
             );
 
             $mailer = MailerFactory::getMailer($outboundEmailConfiguration);
-
             $mailer->setSubject($mod_strings['LBL_TEST_EMAIL_SUBJECT']);
             $mailer->addRecipientsTo(new EmailIdentity($toaddress));
             $mailer->setTextBody($mod_strings['LBL_TEST_EMAIL_BODY']);
@@ -4325,7 +4334,7 @@ eoq;
                INNER JOIN email_addr_bean_rel eabr ON ea.id = eabr.email_address_id
                WHERE eabr.bean_module = ? AND email_address IN (?)
                AND eabr.bean_id = a.id AND a.deleted = 0 LIMIT 1
-             SQL;
+SQL;
 
         $conn = $this->db->getConnection();
         $stmt = $conn->executeQuery($sql, [$module, $addresses], [null, Connection::PARAM_STR_ARRAY]);

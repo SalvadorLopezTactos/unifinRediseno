@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => '노트 목록 대시보드',
+    'LBL_NOTES_RECORD_DASHBOARD' => '노트 기록 대시보드',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => '노트 포커스 서랍',
 
+    'LBL_RELATED_CONTACT' => '관련 문의',
     'ERR_DELETE_RECORD' => '거래처를 삭제하시려면 정확한 자료 고유번호를 입력하셔야합니다.',
     'LBL_ACCOUNT_ID' => '거래처 ID',
     'LBL_CASE_ID' => '사례ID',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => '연락처 ID:',
     'LBL_CONTACT_NAME' => '연락처',
     'LBL_DEFAULT_SUBPANEL_TITLE' => '메모 목록',
+    'LBL_ATTACHMENTS' => '첨부',
+    'LBL_ATTACHMENT_FLAG' => '첨부파일',
     'LBL_DESCRIPTION' => '설명',
     'LBL_EMAIL_ADDRESS' => '이메일 주소',
     'LBL_EMAIL_ATTACHMENT' => '이메일 첨부',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => '노트와 첨부 목록',
     'LBL_NOTE' => '메모',
     'LBL_OPPORTUNITY_ID' => '영업기회 ID',
+    'LBL_NOTE_PARENT_ID' => '노트 상위 ID:',
     'LBL_PARENT_ID' => '상위 ID:',
     'LBL_PARENT_TYPE' => '상위 유형:',
     'LBL_EMAIL_TYPE' => '이메일 유형',

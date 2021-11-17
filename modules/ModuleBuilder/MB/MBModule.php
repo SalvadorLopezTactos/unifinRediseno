@@ -325,6 +325,9 @@ class MBModule
             $this->copyMetaData () ;
             $this->copyDashlet () ;
             $this->copyViews() ;
+
+            $this->copyDashboards();
+
             // Bug 56675 - Clients directory not copied over
             // When clients were split apart from metadata, there was no accounting
             // for that here. This accounts for that
@@ -396,6 +399,18 @@ class MBModule
             }
         }
     }
+
+
+    /**
+     * Copies any available dashboards.
+     */
+    public function copyDashboards()
+    {
+        if (file_exists(MB_TEMPLATES . '/basic/dashboards')) {
+            $this->copyMetaRecursive(MB_TEMPLATES . '/basic/dashboards', $this->path . '/dashboards/');
+        }
+    }
+
 
     function copyMetaRecursive ($from , $to , $overwrite = false)
     {
@@ -928,6 +943,9 @@ class MBModule
             }
         }
 
+        // remove associated legacy workflows
+        WorkFlow::deleteWorkFlowsByModule([$this->key_name]);
+
         // remove the module itself
         return rmdir_recursive($this->getModuleDir());
     }
@@ -1128,6 +1146,29 @@ class MBModule
             }
         }
         return $field;
+    }
+
+    /**
+     * Returns an array of field definitions for this bean's module.
+     *
+     * Optionally, you can filter the returned list of field definitions by
+     * field type, name, etc (any property).
+     *
+     * @param string|null $property Field def property to filter by (e.g. type).
+     * @param array $filter An array of values to filter the returned field definitions.
+     * @return array Field definitions.
+     */
+    public function getFieldDefinitions(?string $property = null, array $filter = array()) : array
+    {
+        $definitions = $this->getVardefs()['fields'] ?? [];
+
+        if (empty($property) || empty($filter)) {
+            return $definitions;
+        }
+
+        return array_filter($definitions, function (array $def) use ($property, $filter) : bool {
+            return isset($def[$property]) && in_array($def[$property], $filter);
+        });
     }
 
     /**

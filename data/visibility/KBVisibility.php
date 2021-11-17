@@ -130,27 +130,27 @@ class KBVisibility extends SugarVisibility implements StrategyInterface
      */
     public function elasticAddFilters(User $user, \Elastica\Query\BoolQuery $filter, Visibility $provider)
     {
-        if (!$this->shouldCheckVisibility()) {
-            return;
-        }
+        $moduleName = $this->bean->module_name;
 
         // create owner filter
         $ownerFilter = $provider->createFilter('Owner', ['user' => $user]);
 
         if ($statuses = $this->getPublishedStatuses()) {
-            $combo = new \Elastica\Query\BoolQuery();
-            $combo->addShould($provider->createFilter('KBStatus', [
+            $filter->addMust($provider->createFilter('KBStatus', [
                 'published_statuses' => $statuses,
-                'module' => $this->bean->module_name,
+                'module' => $moduleName,
             ]));
-            $combo->addShould($ownerFilter);
-            $filter->addMust($combo);
         } else {
             $filter->addMust($ownerFilter);
         }
 
-        $filter->addShould($provider->createFilter('KBActiveRevision', [
-            'module' => $this->bean->module_name,
+        $filter->addMust($provider->createFilter('KBActiveRevision', [
+            'module' => $moduleName,
+        ]));
+
+        $filter->addMust($provider->createFilter('KBExpDate', [
+            'module' => $moduleName,
+            'range' => ['gte' => 'now/d'],
         ]));
     }
 

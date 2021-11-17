@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Aramalar Listesi Panosu',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Aramalar Kaydı Panosu',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Aramalar Odak Bölmesi',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Aramalar',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Atanan Kişi',
     'LBL_LIST_MY_CALLS' => 'Telefon Aramalarım',
     'LBL_MY_SCHEDULED_CALLS' => 'Planlanan Aramalarım',
+    'LBL_GUEST_CALLS' => 'Misafir Olarak Aramalarım',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Misafir Olarak Planlanmış Aramalarım',
     'LBL_SELECT_FROM_DROPDOWN' => 'Lütfen önce İlişkili açılır-listesinden seçim yapınız.',
 	'LBL_ASSIGNED_TO_NAME' => 'Atanan Kişi',
 	'LBL_ASSIGNED_TO_ID' => 'Atanan Kullanıcı',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'İptal',
     'LBL_EMPTY_SEARCH_RESULT' => 'Üzgünüm, sonuç bulunamadı. Aşağıda bir davetli oluşturun.',
     'LBL_NO_ACCESS' => '$module modülünü oluşturmak için erişim yetkiniz yok',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Amazon Connect Kontak Numarası',
+
     'LBL_REPEAT_TYPE' => 'Tekrarlama Türü',
     'LBL_REPEAT_INTERVAL' => 'Tekrarlama Aralığı',
     'LBL_REPEAT_END' => 'Son',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => '{{{this}}} ile Arayın',
     'LBL_SEND_INVITES' => 'Davetiye Gönder',
     'LBL_REMINDER_TITLE' => 'Çağrı:',
+    'LBL_CALL_RECORDING_URL' => 'Kayıt URL&#39;si',
+    'LBL_CALL_RECORDING' => 'Kayıt',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => '{{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> , {{formatDate date_start}} için planladınız.',

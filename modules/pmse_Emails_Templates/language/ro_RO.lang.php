@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Şabloane e-mail proces',
     'LBL_MODULE_NAME_SINGULAR' => 'Model email',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare șabloane e-mail de proces',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Tablou de bord Înregistrare proces șabloane e-mail',
     'LNK_LIST' => 'Vizualizeaza model email',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Creează Şablon E-mail proces',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Importă Şabloane E-mail proces',

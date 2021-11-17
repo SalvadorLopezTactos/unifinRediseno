@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Електронно табло със списък на офертите',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Електронно табло със запис на офертите',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на оферти',
 
     'LBL_CONTRACTS'=>'Договори',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Договори',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Данъчен адрес: държава',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Данъчен адрес: пощенски код',
     'LBL_BILLING_ADDRESS_STATE' => 'Данъчен адрес: област',
-    'LBL_BILLING_ADDRESS_STREET' => 'Данъчен адрес',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Данъчен адрес:',
     'LBL_BILLING_CONTACT_ID' => 'Данъчен адрес:',
     'LBL_BILLING_CONTACT_NAME' => 'Контакт:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Адрес за кореспонденция: държава',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Адрес за кореспонденция: пощенски код',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Адрес за кореспонденция: област',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Адрес за кореспонденция',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Адрес за кореспонденция:',
     'LBL_SHIPPING_BODY' => 'Плащане и изпращане',
     'LBL_SHIPPING_CONTACT_ID' => 'Адрес за кореспонденция:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Копиране данните от данъчния адрес върху адреса за кореспонденция',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Копиране данните от адреса за кореспонденция върху данъчния адрес',
     'NTC_COPY_BILLING_ADDRESS2' => 'Копирай в данни за транспорт',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Копирай в данъчен адрес',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Сигурни ли сте, че искате да изтриете този коментар от офертата?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Копирай в данъчен адрес',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Сигурни ли сте, че искате да изтриете този коментар от офертата?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Сигурни ли сте, че искате да изтриете този обект от офертата?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Сифурни ли сте, че желаете да премахнете тази група от офертата?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Сигурни ли сте, че искате да изтриете този контакт от офертата?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Количество',
     'LBL_MFT_PART_NUM' => 'Партиден номер',
     'LBL_ITEM_NAME' => 'Продукт',
+    'LBL_PRODUCT_TEMPLATE' => 'Продукт',
     'LBL_DISCOUNT_PRICE' => 'Единична цена',
     'LBL_DISCOUNT_AMOUNT' => 'Отстъпка',
     'LBL_LINE_ITEM_TOTAL' => 'Общо продукти',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'Идентификатор на възможността',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Конфигуриране на оферти',
+
+    'LBL_RENEWAL' => 'Подновяване',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Взаимодействия на оферта',
 );

@@ -13,7 +13,10 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TASKS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Εργασιών',
+  'LBL_TASKS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εργασιών',
+  'LBL_TASKS_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης εργασιών',
 
+  'LBL_RELATED_CONTACT' => 'Σχετική Επαφή',
   'LBL_MODULE_NAME' => 'Εργασίες',
   'LBL_MODULE_NAME_SINGULAR' => 'Εργασία',
   'LBL_TASK' => 'Εργασίες:',

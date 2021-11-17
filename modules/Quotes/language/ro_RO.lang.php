@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Tabloul de bord Listă oferte',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare oferte',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Sertar de focalizare oferte',
 
     'LBL_CONTRACTS'=>'Contracte',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Contracte',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Tara de Facturare',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Cod Postal de Facturare',
     'LBL_BILLING_ADDRESS_STATE' => 'Stat de Facturare',
-    'LBL_BILLING_ADDRESS_STREET' => 'Adresa de Facturare',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Adresă de facturare:',
     'LBL_BILLING_CONTACT_ID' => 'Date Persoana de Contact pentru Facturare',
     'LBL_BILLING_CONTACT_NAME' => 'Nume persoană de contact pentru facturare:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Tara Transport',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Cod Postal Transport',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Stat Transport',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Adresa Transport',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Adresă de livrare:',
     'LBL_SHIPPING_BODY' => 'Facturare și expediere',
     'LBL_SHIPPING_CONTACT_ID' => 'Date Persoana de Contact pentru Transport:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Copiaza adresa de facturare la adresa de transport',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Copiaza adresa de transport la adresa de facturare',
     'NTC_COPY_BILLING_ADDRESS2' => 'Copiaza la transport',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Copiaza la facturare',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Sunteți sigur că doriți să înlăturați acest comentariu din cadrul ofertei?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Copiaza la facturare',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Sunteți sigur că doriți să înlăturați acest comentariu din cadrul ofertei?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Sunteți sigur că doriți să eliminați acest element de linie din cadrul ofertei?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Sunteți sigur că doriți să eliminați acest grup din cadrul ofertei?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Sunteți sigur că doriți să eliminați acest contact din cadrul ofertei?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Cantitate',
     'LBL_MFT_PART_NUM' => 'Număr componentă',
     'LBL_ITEM_NAME' => 'Articol de linie',
+    'LBL_PRODUCT_TEMPLATE' => 'Produs',
     'LBL_DISCOUNT_PRICE' => 'Preț unitar',
     'LBL_DISCOUNT_AMOUNT' => 'Reducere',
     'LBL_LINE_ITEM_TOTAL' => 'Total articol de linie',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'ID oportunitate',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Configurare oferte',
+
+    'LBL_RENEWAL' => 'Reînnoire',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interacțiuni cotate',
 );

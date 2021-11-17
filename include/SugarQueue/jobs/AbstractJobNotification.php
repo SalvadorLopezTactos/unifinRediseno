@@ -11,6 +11,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+
 abstract class JobNotification
 {
     /**
@@ -116,7 +118,12 @@ abstract class JobNotification
 
     protected function appendHelpLink($body)
     {
-        $link = "http://www.sugarcrm.com/crm/product_doc.php?edition={$GLOBALS['sugar_flavor']}&version={$GLOBALS['sugar_version']}&lang=&module={$this->helpModule}&route=list";
+        $readableProductNames =
+            getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($GLOBALS['current_user']));
+        $readableProductNames = urlencode(implode(',', $readableProductNames));
+
+        $link = "https://www.sugarcrm.com/crm/product_doc.php?edition={$GLOBALS['sugar_flavor']}&version={$GLOBALS['sugar_version']}&lang=&module={$this->helpModule}&route=list";
+        $link .= '&products=' . $readableProductNames;
 
         $doc_url = "<a href=\"{$link}\">{$GLOBALS['app_strings']['LBL_JOB_NOTIFICATION_DOC_LINK_TEXT']}</a>";
 

@@ -72,7 +72,7 @@ $viewdefs['Campaigns']['DetailView'] = array(
                 array('customCode' => '<script>{$MSG_SCRIPT}</script>'),
             ),
             'links'   => array(
-                '<input type="button" class="button" onclick="javascript:window.location=\'index.php?module=Campaigns&action=WizardHome&record={$fields.id.value}\';" name="button" id="launch_wizard_button" value="{$MOD.LBL_TO_WIZARD_TITLE}" />',
+                '{if $HAS_EDIT_ACCESS}<input type="button" class="button" onclick="javascript:window.location=\'index.php?module=Campaigns&action=WizardHome&record={$fields.id.value}\';" name="button" id="launch_wizard_button" value="{$MOD.LBL_TO_WIZARD_TITLE}" />{/if}',
                 '<input type="button" class="button" onclick="javascript:window.location=\'index.php?module=Campaigns&action=TrackDetailView&record={$fields.id.value}\';" name="button" id="view_status_button" value="{$MOD.LBL_TRACK_BUTTON_LABEL}" />',
                 '<input id="viewRoiButtonId" type="button" class="button" onclick="javascript:window.location=\'index.php?module=Campaigns&action=RoiDetailView&record={$fields.id.value}\';" name="button" id="view_roi_button" value="{$MOD.LBL_TRACK_ROI_BUTTON_LABEL}" />',
 
@@ -164,15 +164,19 @@ $viewdefs['Campaigns']['DetailView'] = array(
                 array(
                     'name'       => 'date_modified',
                     'label'      => 'LBL_DATE_MODIFIED',
-                    'customCode' => '{$fields.date_modified.value} {$APP.LBL_BY} {$fields.modified_by_name.value}',
+                    'customCode' => '{$fields.date_modified.value} {$APP.LBL_BY} {$fields.modified_by_name.value|escape:"html":"UTF-8"}',
                 ),
             ),
             array(
 
-                'team_name',
+                array(
+                    'name' => 'team_name',
+                    'LBL_TEAM_NAME',
+                    'customCode' => '{$fields.team_name.value|escape}',
+                ),
                 array(
                     'name'       => 'date_entered',
-                    'customCode' => '{$fields.date_entered.value} {$APP.LBL_BY} {$fields.created_by_name.value}',
+                    'customCode' => '{$fields.date_entered.value} {$APP.LBL_BY} {$fields.created_by_name.value|escape:"html":"UTF-8"}',
                 ),
             ),
         ),

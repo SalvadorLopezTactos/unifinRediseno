@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Vuoronnettu tehtävä',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Muodosta uudelleen denormalisoidut tiimin suojaustiedot',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Aktiviteettivirran poistaminen',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Päivitä tuotemääritelmä',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Suorita ajastetut toiminnot',
+'LBL_OOTB_DATA_ARCHIVER' => 'Suorita aktiivisten tietojen arkistointi/poisto',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Aikaväli:',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'Aina',
 'LBL_CATCH_UP' => 'Suorita, jos myöhässä',
+'LBL_SYSTEM_JOB' => 'Is current job system?',
 'LBL_CATCH_UP_WARNING' => 'Älä rastita tätä, jos työ kestää enemmän kuin vain hetken.',
 'LBL_DATE_TIME_END' => 'Päättyy',
 'LBL_DATE_TIME_START' => 'Alkaa',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Poista diagnostiikkatyökalujen tiedostot',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Poista väliaikaiset tiedostot',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Muodosta uudelleen denormalisoidut tiimin suojaustiedot',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Päivitä tuotemääritelmä',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Suorita yölliset massaviestikampanjat',
 'LBL_ASYNCMASSUPDATE' => 'Suorita asynkroniset massapäivitykset',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'Puhdista työjono',
 'LBL_CLEANOLDRECORDLISTS' => 'Siisti vanhat tietuelistat',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Aktiviteettivirran poistaminen',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Ajastettujen aikataulujen prosessointi',
 'LBL_PMSEENGINECRON' => 'SugarBPM-vuorontaja',
 );
 

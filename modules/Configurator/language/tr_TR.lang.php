@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'Kullanıcı İsmi',
 	'LBL_RESTORE_BUTTON_LABEL'=>'Geri Yükle',
 	'LBL_SYSTEM_SETTINGS' => 'Sistem Ayarları',
-	'LBL_SKYPEOUT_ON_DESC' => 'Kullanıcılara SkypeOut&reg;. kullanarak telefon numarası tuşlamalarına izin verir. Numaralar bu özelliğin kullanılabilmesi için uygun şekilde biçimlendirilmiş olmalıdır. "+" "ülke Kodu" "Telefon Numarası" şeklindedir. Örneğin; +1 (555) 555-1234.',
-	'LBL_SKYPEOUT_ON' => 'SkypeOut&reg; entegrasyonunu etkinleştir',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut&reg;',
+    'LBL_DIALOUT_ON_DESC' => 'Kullanıcıların, varsayılan bilgisayar telefon entegrasyon (CTI) yazılımlarını kullanarak telefon numaralarına tıklayarak aramalarını sağlar.',
+    'LBL_DIALOUT_ON' => 'Tek tıklamayla aramayı etkinleştirin',
+    'LBL_DIALOUT_TITLE' => 'Giden Arama',
     'LBL_TWEETTOCASE_ON_DESC' => 'Kullanıcıların Tweets üzerinden talep oluşturmalarına olanak sağlar',
     'LBL_TWEETTOCASE_ON' => 'Talep entegrasyonu için Tweet&reg; etkinleştirin',
     'LBL_TWEETTOCASE_TITLE' => 'Tweet&reg; talebe',
@@ -363,7 +363,7 @@ $mod_strings = array (
     'JS_ALERT_PDF_WRONG_EXTENSION' => 'Bu dosya istenilen dosya uzantısına sahip değil.',
     'LBL_PDF_INSTRUCTIONS' => 'Talimatlar',
     'PDF_INSTRUCTIONS_ADD_FONT' => <<<BSOFR
-Fonts supported by SugarPDF :
+SugarPDF tarafından desteklenen yazı tipleri:
 <ul>
 <li>TrueTypeUnicode (UTF-8 Unicode)</li>
 <li>OpenTypeUnicode</li>
@@ -373,11 +373,11 @@ Fonts supported by SugarPDF :
 <li>CID-0</li>
 </ul>
 <br>
-If you choose to not embed your font in the PDF, the generated PDF file will be lighter but a substitution will be use if the font is not available in the system of your reader.
+Yazı tipinizi PDF'ye gömmemeyi seçerseniz oluşturulan PDF dosyası daha açık olur ancak yazı tipi okuyucunuzun sisteminde mevcut değilse bir yedek kullanılacaktır.
 <br><br>
-Adding a PDF font to SugarCRM requires to follow steps 1 and 2 of the TCPDF Fonts documentation available in the "DOCS" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>The pfm2afm and ttf2ufm utils are available in fonts/utils in the TCPDF package that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>Load the metric file generated in step 2 and your font file below.
+SugarCRM'e bir PDF yazı tipi eklemek, <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF web sitesinin "DOCS" bölümünde bulunan TCPDF Yazı Tipleri belgelerinin 1. ve 2. adımlarını izlemenizi gerektirir.</a>.
+<br><br>Pfm2afm ve ttf2ufm yardımcı programları, <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">web sitesinin "İNDİR" bölümünden indirebileceğiniz TCPDF paketindeki yazı tiplerinde / yardımcı programlarda mevcuttur.</a>.
+<br><br>2. adımda oluşturulan metrik dosyasını ve yazı tipi dosyanızı aşağıdaki kısma yükleyin.
 BSOFR
 ,
     'ERR_MISSING_CIDINFO' => 'CID Bilgi alanı boş olamaz.',
@@ -428,6 +428,9 @@ BSOFR
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Raporlar modülü tarayıcı tabanlı mobil görünüm için mevcut değil.',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => 'Maksimum Uzunluk, Minimum Uzunluktan fazla olmalıdır',
+    'ERR_MIN_LENGTH_NEGATIVE' => 'Minimum Uzunluk, artı bir değer olmalıdır',
+    'ERR_MAX_LENGTH_NEGATIVE' => 'Maksimum Uzunluk, artı bir değer olmalıdır',
     'ERR_EMPTY_SAML_LOGIN' => 'SAML bağlantı URL boş olamaz',
     'ERR_EMPTY_SAML_CERT' => 'SAML sertifika boş olamaz',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML Şirket Kimliği boş bırakılamaz',
@@ -441,9 +444,6 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Aktivite Akışları',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Aktivite Akışlarını Etkinleştir',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Uygulama için Aktivite Akışlarını açar',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Ek oturum ekran içeriğini etkinleştir',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'İşlem tanımlarını otomatik kaydet',

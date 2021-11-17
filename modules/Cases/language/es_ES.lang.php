@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Panel de lista de casos',
     'LBL_CASES_RECORD_DASHBOARD' => 'Panel de registros de casos',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Detalles de caso',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Panel de enfoque en los casos',
 
 	'ERR_DELETE_RECORD'					=> 'Debe especificar un número de registro a eliminar.',
 	'LBL_ACCOUNT_ID'					=> 'ID Cuenta',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Mostrar en Portal',
 	'LBL_CREATE_KB_DOCUMENT' => 'Crear Artículo',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Base de Conocimiento',
+    'LBL_REQUEST_CLOSE' => 'Solicitar cierre',
+    'LBL_REQUEST_CLOSE_DATE' => 'Solicitar fecha de cierre',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Solicitar cierre',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Enviar una solicitud para cerrar este caso',
+    'LBL_REQUEST_CLOSE_MESSAGE' => '¿Desea solicitar que se cierre este caso?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Mis casos con solicitud de cierre',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Mis casos con solicitud de cierre',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Mis casos con solicitud de cierre',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Lista de casos con solicitud de cierre',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Muestra una lista de casos asignados para los que se ha solicitado el cierre',
 
     'LBL_CREATED_USER' => 'Usuario Creado',
     'LBL_MODIFIED_USER' => 'Usuario Modificado',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nombre del usuario asignado',
     'LBL_EXPORT_TEAM_COUNT' => 'Número de equipos',
     'LBL_CHANGETIMERS' => 'Cambiar temporizadores',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Compras',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Relación de contactos en Emails',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Por ejemplo, podría usarlo para encontrar un tema previamente enviado.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Si tiene un nuevo Caso de asistencia que le gustaría enviar, puede hacer clic aquí para enviarlo.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'Haga clic aquí para volver a esta vista en cualquier momento.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interacciones de casos',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notas',
 
@@ -149,5 +161,5 @@ Para crear un {{module_name}}:
 
     'LBL_SLA_DETAILS' => 'Detalles de SLA',
     'LBL_HOURS' => 'Horas',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'Estado',
 );

@@ -1,6 +1,6 @@
 <?php
-$listViewDefs['Campaigns'] = 
-array (
+// created: 2021-11-10 18:21:35
+$listViewDefs['Campaigns'] = array (
   'track_campaign' => 
   array (
     'width' => '1',

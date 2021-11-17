@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Електронно табло със списък на Базата от знания',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Електронно табло със запис на Базата от знания',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Чекмедже Фокус на база знания',
 
     'LBL_MODULE_NAME' => 'База от знания',
     'LBL_MODULE_NAME_SINGULAR' => 'Материал',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Безполезен',
     'LBL_RATING' => 'Рейтинг',
     'LBL_VIEWED_COUNT' => 'View Count',
-    'LBL_DOWNLOAD_ALL' => 'Изтегли всички',
-    'LBL_DOWNLOAD_ONE' => 'Изтегли',
-    'LBL_ATTACHMENTS' => 'Приложения:',
-    'LBL_ADD_ATTACHMENT' => 'Търси',
     'LBL_CATEGORIES' => 'Категории на базата знания',
     'LBL_CATEGORY_NAME' => 'Категория',
     'LBL_USEFULNESS' => 'Полезност',

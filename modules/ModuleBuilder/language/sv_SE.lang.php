@@ -591,6 +591,7 @@ $mod_strings = array(
     'LBL_PORTAL_CONFIGURE' => 'Konfigurera Portal',
     'LBL_PORTAL_ENABLE_PORTAL' => 'Aktivera portal',
     'LBL_PORTAL_ENABLE_SEARCH' => 'Aktivera sökning innan du öppnar ett ärende',
+    'LBL_PORTAL_ALLOW_CLOSE_CASE' => 'Tillåt portalanvändare att avsluta ärenden',
     'LBL_PORTAL_THEME' => 'Tema Portal',
     'LBL_PORTAL_ENABLE' => 'Aktivera',
     'LBL_PORTAL_SITE_URL' => 'Din portal sida är tillgänglig på:',
@@ -782,7 +783,15 @@ $mod_strings = array(
         . "Dependent fields will follow the dependency formula in the browser-based mobile view, <br/>"
         . "but will not follow the formula in the native applications, such as Sugar Mobile for iPhone. <br/>"
         . "They will not follow the formula in the Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Välj om du vill använda det här fältet när du söker efter poster med den globala Sök på denna modul.',
+'LBL_POPHELP_REQUIRED'=>"Skapa en formel för att avgöra om detta fält är obligatoriskt i layouter.<br/>"
+    . "Obligatoriska fält följer formeln i webbläsarbaserad mobilvy, <br/>"
+    . "men kommer att följa formeln i de nativa applikationerna, såsom Sugar Mobile för iPhone.<br/>"
+    . "De kommer inte att följa formeln på Sugar Self-Service-portalen.",
+'LBL_POPHELP_READONLY'=>"Skapa en formel för att avgöra om detta fält är skrivskyddat i layouter.<br/>"
+        . "Skrivskyddade fält följer formeln i webbläsarbaserad mobilvy, <br/>"
+        . "men kommer att följa formeln i de interna applikationerna, såsom Sugar Mobile för iPhone.<br/>"
+        . "De kommer inte att följa formeln på Sugar Self-Service-portalen.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Välj om du vill använda det här fältet när du söker efter poster med Global Search i den här modulen.',
 //Revert Module labels
 'LBL_RESET' => 'Återställ',
 'LBL_RESET_MODULE' => 'Reset Modul',
@@ -817,6 +826,7 @@ $mod_strings = array(
                 'encrypt'=>'Kryptera',
                 'datetimecombo' =>'Datum och tid',
                 'decimal'=>'Decimaltal',
+                'autoincrement' => 'Automatisk ökning',
 ),
 'labelTypes' => array(
     "" => "Frekvent använda labels",
@@ -834,4 +844,5 @@ $mod_strings = array(
 'LBL_ALL_MODULES'=>'Alla moduler',
 'LBL_RELATED_FIELD_ID_NAME_LABEL' => '{0} (relaterad {1} ID)',
 'LBL_HEADER_COPY_FROM_LAYOUT' => 'Koiera från layout',
+'LBL_RELATIONSHIP_TYPE' => 'Relation',
 );

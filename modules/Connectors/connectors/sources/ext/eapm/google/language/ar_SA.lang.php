@@ -9,32 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+
+$readableProductNames =
+    getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($GLOBALS['current_user']));
+$readableProductNames = urlencode(implode(',', $readableProductNames));
+
+$url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar_flavor'] . '&version=' .
+    $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&module=Connectors&route=Google' .
+    $readableProductNames;
 
 $connector_strings = array(
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-احصل على مفتاح API والمفتاح "السري" من Google بواسطة تسجيل مثيل Sugar كتطبيق جديد.
-<br/><br>الخطوات لتسجيل المثيل الخاص بك:
-<br/><br/>
-<ol>
-<li>اذهب إلى موقع مطوري Google:
-<a href=\'https://console.developers.google.com/project\'
-target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
-
-<li>قم بتسجيل الدخول إلى حساب Google الذي ترغب في تسجيل التطبيق ضمنه.</li>
-<li>إنشاء مشروع جديد</li>
-<li>أدخل اسم المشروع وانقر فوق "حفظ".</li>
-<li>بمجرد إنشاء المشروع قم بتمكين Google Drive وجهات اتصال API في Google </li>
-<li>ضمن APIs & Auth > قسم بيانات الاعتماد قم بإنشاء معرف عميل جديد </li>
-<li>حدد تطبيق ويب وانقر فوق تهيئة شاشة الموافقة</li>
-<li>أدخل اسم المنتج وانقر فوق "حفظ"</li>
-<li>ضمن قسم "عناوين URL المعاد توجيهها المعتمدة" أدخل عنوان URL التالي: {$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>
-<li>انقر فوق إنشاء معرف العميل</li>
-<li>انسخ معرف العميل وسر العميل في المربعات التالية</li>
-
-</li>
-</ol>
-</td></tr>
-</table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .
+        'قم بتسجيل مثيل Sugar باستخدام Google لتمكين تكوين حسابات Google للاستخدام داخل Sugar. ' .
+        'ارجع إلى <a href="https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$lang}&module=Connectors&route=Google" target=\'_blank\'>' .
+        '\' target=\'_blank\'>وثائق الموصلات</a> لمزيد من المعلومات.</td></tr></table>',
     'oauth2_client_id' => 'معرف العميل',
     'oauth2_client_secret' => 'سر العميل',
 );

@@ -26,7 +26,7 @@
 <textarea  id='{{$idname}}' name='{{$idname}}'
 rows="{{if !empty($displayParams.rows)}}{{$displayParams.rows}}{{elseif !empty($vardef.rows)}}{{$vardef.rows}}{{else}}{{4}}{{/if}}" 
 cols="{{if !empty($displayParams.cols)}}{{$displayParams.cols}}{{elseif !empty($vardef.cols)}}{{$vardef.cols}}{{else}}{{60}}{{/if}}" 
-title='{{$vardef.help}}' tabindex="{{$tabindex}}" {{$displayParams.field}}
+title='{{$vardef.help|escape:"hexentity"}}' tabindex="{{$tabindex}}" {{$displayParams.field}}
 {{if !empty($displayParams.accesskey)}} accesskey='{{$displayParams.accesskey}}' {{/if}} >{$value}</textarea>
 
 

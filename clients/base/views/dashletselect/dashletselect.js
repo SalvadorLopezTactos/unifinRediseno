@@ -44,6 +44,11 @@
         }, this);
 
         this.context.on('dashletlist:preview:fire', function(model) {
+            let currentElem = this.$('tr[data-type=' + model.get('type') + '] a.rowaction.btn');
+
+            this.$('a.rowaction.btn').removeClass('active');
+            currentElem.addClass('active');
+
             this.previewDashlet(model.get('metadata'));
         }, this);
     },
@@ -126,6 +131,19 @@
     selectDashlet: function(metadata) {
         var model = new app.Bean();
 
+        // On the multi-line list and focus view, side drawer/focus drawer the dashlets need
+        // the correct module context, which is set here.
+        var contextModule;
+        var contextModel = this.context.get('model');
+        if (contextModel && _.contains(['multi-line', 'focus'], contextModel.get('view_name'))) {
+            contextModule = contextModel.get('dashboard_module');
+        }
+        // Set module for SugarLive console
+        if (contextModel && contextModel.get('view_name') === 'omnichannel' && this.context.parent) {
+            contextModule = this.context.parent.get('module');
+        }
+        var dashletConfigModule = metadata.config.module || metadata.module || contextModule;
+
         app.drawer.load({
             layout: {
                 type: 'dashletconfiguration',
@@ -135,13 +153,13 @@
                             label: app.lang.get(metadata.label, metadata.config.module),
                             type: metadata.type,
                             config: true,
-                            module: metadata.config.module || metadata.module
+                            module: dashletConfigModule
                         })
                     }
                 ]
             },
             context: {
-                module: metadata.config.module || metadata.module,
+                module: dashletConfigModule,
                 model: model,
                 forceNew: true,
                 skipFetch: true
@@ -157,17 +175,30 @@
      * @return {Array} A list of filtered dashlet set.
      */
     getFilteredList: function(dashlets) {
-        var isMultiLine = this.context && this.context.parent && this.context.parent.get('layout') === 'multi-line';
-        var parentModule = isMultiLine ? this.context.parent.get('module') : app.controller.context.get('module');
-        // show record view dashlets for 'multi-line' dashboards
-        var parentView = isMultiLine ? 'record' : app.controller.context.get('layout');
+        var alwaysRecordViewDashboards = ['multi-line', 'focus', 'omnichannel'];
+        var useRecordViewDashlets = this.context && this.context.parent &&
+            _.contains(alwaysRecordViewDashboards, this.context.parent.get('layout'));
 
-        return _.chain(dashlets)
+        var parentContext = useRecordViewDashlets ? this.context.parent : app.controller.context;
+        var parentModule = parentContext.get('module');
+
+        // always show record view dashlets for certain dashboards
+        var parentView = useRecordViewDashlets ? 'record' : parentContext.get('layout');
+        var externalAppDashlet;
+        var filteredDashlets = _.chain(dashlets)
             .filter(function(dashlet) {
                 var filter = dashlet.filter;
                 // if there is no filter for this dashlet, include it
                 if (_.isUndefined(filter)) {
                     return true;
+                }
+
+                if (dashlet.type === 'external-app-dashlet') {
+                    // save a reference to the external-app-dashlet def
+                    // since we're already looping over them
+                    externalAppDashlet = dashlet;
+                    // don't include external-app-dashlet in the list of dashlets yet
+                    return false;
                 }
 
                 var filterModules = filter.module || [parentModule];
@@ -201,6 +232,25 @@
                 return inModuleAndView && !blacklisted;
             })
             .value();
+
+        if (app.config.catalogEnabled) {
+            // only do this check if Catalog is enabled
+            var dashletView = parentView === 'records' ? 'list-dashlet' : 'record-dashlet';
+            var dashletMeta = app.metadata.getLayout(parentModule, dashletView);
+            if (dashletMeta) {
+                // loop through components to see if any of them call for
+                // customConfig true -- convert those to dashlet view metadata
+                _.each(dashletMeta.components, function(comp) {
+                    if (comp.view.customConfig) {
+                        filteredDashlets = filteredDashlets.concat(app.utils.convertCompToDashletView(comp));
+                    }
+                }, this);
+                // if there is a Sugar App already set to load in this module's list or record dashlet spot
+                // add the external-app-dashlet def to the filteredDashlets
+                filteredDashlets.push(externalAppDashlet);
+            }
+        }
+        return filteredDashlets;
     },
 
     /**

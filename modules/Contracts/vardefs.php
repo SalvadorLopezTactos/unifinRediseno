@@ -45,7 +45,6 @@ $dictionary['Contract'] = array(
             'type' => 'link',
             'vname' => 'LBL_QUOTES',
             'relationship' => 'contracts_quotes',
-            'link_type' => 'one',
             'source' => 'non-db',
         ),
         'opportunities' => array(
@@ -295,6 +294,13 @@ $dictionary['Contract'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_NOTES',
         ),
+        'messages' => [
+            'name' => 'messages',
+            'type' => 'link',
+            'relationship' => 'contract_messages',
+            'source' => 'non-db',
+            'vname' => 'LBL_MESSAGES',
+        ],
         'products' => array(
             'name' => 'products',
             'type' => 'link',
@@ -325,6 +331,17 @@ $dictionary['Contract'] = array(
             'relationship_role_column_value' => 'Contracts',
             'relationship_type' => 'one-to-many',
         ),
+        'contract_messages' => [
+            'lhs_module' => 'Contracts',
+            'lhs_table' => 'contracts',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Messages',
+            'rhs_table' => 'messages',
+            'rhs_key' => 'parent_id',
+            'relationship_role_column' => 'parent_type',
+            'relationship_role_column_value' => 'Contracts',
+            'relationship_type' => 'one-to-many',
+        ],
         'account_contracts' => array(
             'lhs_module' => 'Accounts',
             'lhs_table' => 'accounts',

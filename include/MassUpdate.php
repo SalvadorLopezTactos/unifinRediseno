@@ -13,6 +13,7 @@
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+use Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator;
 use Sugarcrm\Sugarcrm\ProcessManager\Registry;
 require_once 'include/EditView/EditView2.php';
 
@@ -128,17 +129,18 @@ class MassUpdate
 		if($multi_select_popup)
 		$tempString = '';
 		else
-		$tempString = "<form action='index.php' method='post' name='MassUpdate'  id='MassUpdate' onsubmit=\"return check_form('MassUpdate');\">\n"
-        . "<input type='hidden' name='return_action' value='" . htmlspecialchars($action, ENT_QUOTES, 'UTF-8') . "' />\n"
-        . "<input type='hidden' name='return_module' value='" . htmlspecialchars($module, ENT_QUOTES, 'UTF-8') . "' />\n"
-		. "<input type='hidden' name='massupdate' value='true' />\n"
-		. "<input type='hidden' name='delete' value='false' />\n"
-		. "<input type='hidden' name='merge' value='false' />\n"
-        . "<input type='hidden' name='current_query_by_page' value='" . htmlspecialchars($query, ENT_QUOTES, 'UTF-8') . "' />\n"
-        . "<input type='hidden' name='module' value='" . htmlspecialchars($module, ENT_QUOTES, 'UTF-8') . "' />\n"
-        . "<input type='hidden' name='action' value='MassUpdate' />\n"
-        . "<input type='hidden' name='lvso' value='" . htmlspecialchars($lvso, ENT_QUOTES, 'UTF-8') . "' />\n"
-        . "<input type='hidden' name='" . htmlspecialchars($order_by_name, ENT_QUOTES, 'UTF-8') . "' value='" . htmlspecialchars($request_order_by_name, ENT_QUOTES, 'UTF-8') . "' />\n";
+        $tempString = '<form action="index.php" method="post" name="MassUpdate" id="MassUpdate" onsubmit="return check_form(\'MassUpdate\');">'
+        . '<input type="hidden" name="return_action" value="' . htmlspecialchars($action, ENT_QUOTES, 'UTF-8') . '" />'
+        . '<input type="hidden" name="return_module" value="' . htmlspecialchars($module, ENT_QUOTES, 'UTF-8') . '" />'
+        . '<input type="hidden" name="massupdate" value="true" />'
+        . '<input type="hidden" name="delete" value="false" />'
+        . '<input type="hidden" name="merge" value="false" />'
+        . '<input type="hidden" name="current_query_by_page" value="' . htmlspecialchars($query, ENT_QUOTES, 'UTF-8') . '" />'
+        . '<input type="hidden" name="module" value="' . htmlspecialchars($module, ENT_QUOTES, 'UTF-8') . '" />'
+        . '<input type="hidden" name="action" value="MassUpdate" />'
+        . '<input type="hidden" name="lvso" value="' . htmlspecialchars($lvso, ENT_QUOTES, 'UTF-8') . '" />'
+        . '<input type="hidden" name="' . htmlspecialchars($order_by_name, ENT_QUOTES, 'UTF-8') . '" value="' . htmlspecialchars($request_order_by_name, ENT_QUOTES, 'UTF-8') . '" />'
+        . '<input type="hidden" name="' . htmlspecialchars(CsrfAuthenticator::FORM_TOKEN_FIELD) . '" value="' . htmlspecialchars(CsrfAuthenticator::getInstance()->getFormToken()) . '" />';
 
 		// cn: bug 9103 - MU navigation in emails is broken
 		if ($module == 'Emails') {
@@ -473,6 +475,14 @@ class MassUpdate
                         case "radioenum":
                         case "datetime":
                         case "date":
+                        case 'datetimecombo':
+                        case 'decimal':
+                        case 'float':
+                        case 'encrypt':
+                        case 'iframe':
+                        case 'phone':
+                        case 'url':
+                        case 'varchar':
                             $def['massupdate'] = true;
                             break;
                         case "int":

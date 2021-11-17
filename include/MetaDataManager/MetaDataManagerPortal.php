@@ -75,6 +75,7 @@ class MetaDataManagerPortal extends MetaDataManager
         global $sugar_config;
 
         $admin = new Administration();
+        $admin->retrieveSettings(false, true);
         $configs = $admin->getConfigForModule('portal', 'support');
 
         $configs['smtpServerSet'] = false;
@@ -82,6 +83,18 @@ class MetaDataManagerPortal extends MetaDataManager
             $configs['smtpServerSet'] = true;
         }
         $configs['passwordsetting'] = $sugar_config['passwordsetting'];
+
+        $configs['isServe'] = $admin->isLicensedForServe();
+
+        // Get AWS admin for Serve
+        if ($admin->isLicensedForServe()) {
+            foreach ($admin->settings as $key => $value) {
+                if (substr($key, 0, 4) === 'aws_') {
+                    // Format the key for these configs correctly
+                    $configs[$this->translateConfigProperty($key)] = $value;
+                }
+            }
+        }
 
         return $configs;
     }

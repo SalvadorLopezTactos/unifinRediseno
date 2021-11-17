@@ -40,7 +40,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 	{
         global $timedate;
 
-        $begin = $this->getTZOffsetByUser($layout_def['input_name0']);
+        $begin = $layout_def['input_name0'];
 
         $hasTime = $this->hasTime($begin);
         if(!$hasTime)
@@ -88,36 +88,11 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 	    }
 	}
 
-    /**
-     * This function converts the input $date to the correct date/time
-     * based on the timezone that is defined in the input $user's profile.
-     *
-     * @param $date String value of the date to be converted to timezone offset
-     * @param $user An user bean that contains user timezone
-     * @return $offset TimeDate object with offset applied
-     */
-    protected function getTZOffsetByUser(string $date, User $user = null)
-    {
-        global $timedate;
-
-        if ($user === null) {
-            global $current_user;
-            $user = $current_user;
-        }
-        $offset = $timedate->handle_offset(
-            $date,
-            $this->hasTime($date) ? $timedate->get_db_date_time_format() : $timedate->get_db_date_format(),
-            false,
-            $user
-        );
-        return $offset;
-    }
-
 	function queryFilterBefore($layout_def)
 	{
         $column = $this->_get_column_select($layout_def);
 
-        $begin = $this->getTZOffsetByUser($this->expandDate($layout_def['input_name0']));
+        $begin = $this->expandDate($layout_def['input_name0']);
 
         return $this->queryDateOp($column, $begin, '<', "datetime");
 	}
@@ -126,7 +101,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 	{
         $column = $this->_get_column_select($layout_def);
 
-        $begin = $this->getTZOffsetByUser($this->expandDate($layout_def['input_name0'], true));
+        $begin = $this->expandDate($layout_def['input_name0']);
 
         return $this->queryDateOp($column, $begin, '>', "datetime");
 	}
@@ -219,7 +194,7 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
 
         $column = $this->_get_column_select($layout_def);
 
-        $begin = $this->getTZOffsetByUser($layout_def['input_name0']);
+        $begin = $layout_def['input_name0'];
 
         $hasTime = $this->hasTime($begin);
         if(!$hasTime){
@@ -1044,8 +1019,8 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
     {
         $column = $this->_get_column_select($layout_def);
 
-        $dateYear = $this->reporter->db->convert($column, 'date_format', array('%Y'));
-        $dateWeek = $this->reporter->db->convert($column, 'date_format', array('%v'));
+        $dateYear = $this->reporter->db->convert($column, 'date_format', ['%x']);
+        $dateWeek = $this->reporter->db->convert($column, 'date_format', ['%v']);
 
         // Returns the result as YYYY-WW
         return $this->reporter->db->convert(
@@ -1080,8 +1055,8 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
     {
         $column = $this->_get_column_select($layout_def);
 
-        $dateYear = $this->reporter->db->convert($column, 'date_format', array('%Y'));
-        $dateWeek = $this->reporter->db->convert($column, 'date_format', array('%v'));
+        $dateYear = $this->reporter->db->convert($column, 'date_format', ['%x']);
+        $dateWeek = $this->reporter->db->convert($column, 'date_format', ['%v']);
 
         // Format the value we're grouping on as YYYY-WW
         return $this->reporter->db->convert(

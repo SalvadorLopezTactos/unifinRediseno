@@ -83,6 +83,15 @@ class SugarUpgradeConfigSettings extends UpgradeScript
 
         $this->removeMassActionsDefaultSettings();
         $this->fixConfigSettings($defaultSettings);
+        $this->unserializeXssTags($defaultSettings);
+    }
+
+    private function unserializeXssTags($config)
+    {
+        if (is_array($config['email_xss'])) {
+            return;
+        }
+        $this->upgrader->config['email_xss'] = unserialize(base64_decode($config['email_xss']), ['allowed_classes' => false]);
     }
 
     /**

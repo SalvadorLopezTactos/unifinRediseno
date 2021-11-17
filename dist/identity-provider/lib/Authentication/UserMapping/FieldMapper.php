@@ -59,6 +59,41 @@ trait FieldMapper
     }
 
     /**
+     * @param string $name
+     * @return bool
+     */
+    private function isComplexAttribute(string $name): bool
+    {
+        return !$this->isCustomAttribute($name) && count(explode($this->fieldDelimiter, $name)) > 1;
+    }
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    private function getComplexAttributeKey(string $name): string
+    {
+        if ($this->isComplexAttribute($name)) {
+            return explode($this->fieldDelimiter, $name)[0];
+        }
+        return '';
+    }
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    private function getComplexAttributeName(string $name): string
+    {
+        if ($this->isComplexAttribute($name)) {
+            $attr = explode($this->fieldDelimiter, $name);
+            return array_pop($attr);
+        }
+
+        return '';
+    }
+
+    /**
      * @param string $key
      * @param string $value
      * @param array $currentValue

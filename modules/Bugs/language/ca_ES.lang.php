@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_BUGS_LIST_DASHBOARD' => 'Quadre de comandament de llista d&#39;incidències',
   'LBL_BUGS_RECORD_DASHBOARD' => 'Quadre de comandament de registre d&#39;incidències',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat als errors',
 
   'LBL_MODULE_NAME' => 'Incidències',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Incidència',

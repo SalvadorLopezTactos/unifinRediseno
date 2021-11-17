@@ -12,7 +12,7 @@
 $module_name = 'EmailTemplates';
 $viewdefs[$module_name]['base']['menu']['header'] = array(
     array(
-        'route'=>'#bwc/index.php?module=EmailTemplates&action=EditView&return_module=EmailTemplates&return_action=DetailView',
+        'route'=>'#EmailTemplates/create',
         'label' =>'LNK_NEW_EMAIL_TEMPLATE',
         'acl_action'=>'create',
         'acl_module'=>'EmailTemplates',

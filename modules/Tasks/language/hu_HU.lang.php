@@ -13,7 +13,10 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TASKS_LIST_DASHBOARD' => 'Feladatok listája műszerfal',
+  'LBL_TASKS_RECORD_DASHBOARD' => 'Feladatok bejegyzés műszerfal',
+  'LBL_TASKS_FOCUS_DRAWER_DASHBOARD' => 'Feladatok figyelemfelhívás',
 
+  'LBL_RELATED_CONTACT' => 'Kapcsolódó kapcsolat',
   'LBL_MODULE_NAME' => 'Feladatok',
   'LBL_MODULE_NAME_SINGULAR' => 'Feladat',
   'LBL_TASK' => 'Feladatok:',

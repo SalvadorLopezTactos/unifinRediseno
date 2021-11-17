@@ -22,6 +22,12 @@ class FieldViewer{
         'date_entered', 'date_modified'
     );
 
+    public static $massUpdateWhitelist = [
+        'bool', 'int', 'date', 'datetime', 'datetimecombo', 'decimal', 'float', 'enum',
+        'multienum', 'radioenum', 'varchar', 'relate', 'encrypt', 'iframe', 'url', 'phone',
+        'text',
+    ];
+
 
     public function __construct() {
 		$this->ss = new Sugar_Smarty();
@@ -50,6 +56,18 @@ class FieldViewer{
         }
         else {
             $this->ss->assign('hideRequired', false);
+        }
+
+        $this->ss->assign('hideMassUpdate', !in_array($vardef['type'], self::$massUpdateWhitelist));
+
+        if ($this->ss->get_template_vars('is_relationship_field')) {
+            $this->ss->assign('hideDuplicatable', true);
+            $this->ss->assign('hideRequired', true);
+            $this->ss->assign('hideMassUpdate', true);
+            $this->ss->assign('hideImportable', true);
+            $this->ss->assign('hideReportable', true);
+            $this->ss->assign('hideDependent', true);
+            $this->ss->assign('hideReadOnly', true);
         }
 
 		$GLOBALS['log']->debug('FieldViewer.php->getLayout() = '.$vardef['type']);
@@ -105,9 +123,12 @@ class FieldViewer{
 			case 'phone':
 				require_once('modules/DynamicFields/templates/Fields/Forms/phone.php');
 				return get_body($this->ss, $vardef);
-			case 'pricing-formula':
-				require_once('modules/DynamicFields/templates/Fields/Forms/enum2.php');
-				return get_body($this->ss, $vardef);
+            case 'pricing-formula':
+                require_once 'modules/DynamicFields/templates/Fields/Forms/enum2.php';
+                return get_body($this->ss, $vardef);
+            case 'autoincrement':
+                require_once 'modules/DynamicFields/templates/Fields/Forms/autoincrement.php';
+                return get_body($this->ss, $vardef);
 			default:
 			    if(SugarAutoLoader::requireWithCustom('modules/DynamicFields/templates/Fields/Forms/'. $vardef['type'] . '.php')) {
 					return get_body($this->ss, $vardef);

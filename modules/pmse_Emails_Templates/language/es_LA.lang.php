@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Proceso de Plantillas E-mail',
     'LBL_MODULE_NAME_SINGULAR' => 'Plantilla de Correo Electrónico para procesos',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Panel de Enfoque de Plantillas de Correo Electrónico de Proceso',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Tablero de Registro de Plantillas de Correo Electrónico de Procesos',
     'LNK_LIST' => 'Ver Plantilla de Correo Electrónico para procesos',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Crear Proceso de Plantillas Email',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Importar Proceso de Plantillas Email',

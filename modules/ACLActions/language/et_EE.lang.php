@@ -27,6 +27,7 @@ $mod_strings = array (
 'LIST_ROLES_BY_USER'=>'Rollide loend kasutajati',
 'LBL_ROLES_SUBPANEL_TITLE'=>'Kasutaja rollid',
 'LBL_SEARCH_FORM_TITLE'=>'Otsi',
+'LBL_ACTION_RECORD_VIEW'=>'Kirje vaade',
 'LBL_ACTION_VIEW'=>'Vaade',
 'LBL_ACTION_EDIT'=>'Redigeeri',
 'LBL_ACTION_DELETE'=>'Kustuta',

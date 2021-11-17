@@ -10,14 +10,26 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="btn-group" data-record-id="{{fieldValue this.model 'id'}}" data-toggle="buttons-radio">
-    <button type="button" class="{{#eq value 'accept'}}active {{/eq}}btn btn-mini" data-action="accept"
-            rel="tooltip" data-container="body"
-            data-original-title="{{getDDLabel 'accept' def.options}}" aria-label="{{getDDLabel 'accept' def.options}}" aria-pressed="{{#eq value 'accept'}}true{{else}}false{{/eq}}"><i class="fa fa-check-circle"></i></button>
-    <button type="button" class="{{#eq value 'tentative'}}active {{/eq}}btn btn-mini" data-action="tentative"
-            rel="tooltip" data-container="body"
-            data-original-title="{{getDDLabel 'tentative' def.options}}" aria-label="{{getDDLabel 'tentative' def.options}}" aria-pressed="{{#eq value 'tentative'}}true{{else}}false{{/eq}}"><i class="fa fa-question-circle"></i></button>
-    <button type="button" class="{{#eq value 'decline'}}active {{/eq}}btn btn-mini" data-action="decline"
-            rel="tooltip" data-container="body"
-            data-original-title="{{getDDLabel 'decline' def.options}}" aria-label="{{getDDLabel 'decline' def.options}}" aria-pressed="{{#eq value 'decline'}}true{{else}}false{{/eq}}"><i class="fa fa-ban"></i></button>
+<div class="btn-group invitation-actions" data-record-id="{{fieldValue this.model 'id'}}" data-toggle="buttons-radio">
+    <button
+        type="button" class="{{#eq value 'accept'}}active {{/eq}}btn btn-mini action-accept" data-action="accept"
+        rel="tooltip" data-container="body" data-original-title="{{getDDLabel 'accept' def.options}}"
+        aria-label="{{getDDLabel 'accept' def.options}}" aria-pressed="{{#eq value 'accept'}}true{{else}}false{{/eq}}"
+    >
+        <i class="fa fa-check-circle"></i>
+    </button>
+    <button
+        type="button" class="{{#eq value 'tentative'}}active {{/eq}}btn btn-mini action-tentative" data-action="tentative"
+        rel="tooltip" data-container="body" data-original-title="{{getDDLabel 'tentative' def.options}}"
+        aria-label="{{getDDLabel 'tentative' def.options}}" aria-pressed="{{#eq value 'tentative'}}true{{else}}false{{/eq}}"
+    >
+        <i class="fa fa-question-circle"></i>
+    </button>
+    <button
+        type="button" class="{{#eq value 'decline'}}active {{/eq}}btn btn-mini action-decline" data-action="decline"
+        rel="tooltip" data-container="body" data-original-title="{{getDDLabel 'decline' def.options}}"
+        aria-label="{{getDDLabel 'decline' def.options}}" aria-pressed="{{#eq value 'decline'}}true{{else}}false{{/eq}}"
+    >
+        <i class="fa fa-ban"></i>
+    </button>
 </div>

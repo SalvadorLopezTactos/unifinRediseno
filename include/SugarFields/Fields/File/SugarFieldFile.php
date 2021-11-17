@@ -17,6 +17,7 @@ class SugarFieldFile extends SugarFieldBase
         'image/jpeg',
         'image/gif',
         'image/png',
+        'image/svg+xml',
     );
 
     private function fillInOptions(&$vardef, &$displayParams)

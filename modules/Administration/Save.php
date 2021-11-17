@@ -76,4 +76,8 @@ if (!authenticateDownloadKey()) {
     $_SESSION['HomeOnly'] = true;
 }
 
-header("Location: index.php?action={$_POST['return_action']}&module={$_POST['return_module']}");
+$location = 'index.php?' . http_build_query([
+        'action' => $_POST['return_action'],
+        'module' => $_POST['return_module'],
+    ]);
+header("Location: $location");

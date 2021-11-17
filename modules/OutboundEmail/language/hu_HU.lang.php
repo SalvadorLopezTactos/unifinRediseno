@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Kimenő e-mail fiókok',
     'LBL_MODULE_NAME_SINGULAR' => 'Kimenő e-mail fiók',
+    'LBL_STATUS' => 'Állapot',
     'LBL_MAIL_SENDTYPE' => 'Levéltovábbító ügynök',
     'LBL_MAIL_SMTPSERVER' => 'Kiszolgáló',
     'LBL_MAIL_SMTPPORT' => 'Port',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Ez a rendszerfiók.',
     'LBL_EMAIL_ADDRESS_ID' => 'E-mail cím azonosító',
     'LBL_TYPE' => 'Típus',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Engedélyezett e-mail cím',
+    'LBL_FROM_EMAIL_ADDRESS' => 'Feladó email címe',
     'LBL_REPLY_TO_NAME' => 'Válasz címzettje',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Válasz e-mail címei',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'Válasz e-mail cím azonosítója',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Válasz e-mail címe',
     'LBL_PRIMARY_TEAM' => 'Elsődleges csoport',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'E-mailbeállítások figyelemfelhívás',
 );

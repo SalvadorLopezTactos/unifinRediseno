@@ -140,6 +140,10 @@ class AuthSettingsApi extends SugarApi
         $this->ensureMigrationEnabled();
         $this->ensureAdminUser();
         $this->getAuthConfig()->setIDMMode(false);
+
+        $administrationApi = $this->getAdministrationApi();
+        $administrationApi->disableIdmMigration($api, $args);
+
         return $this->getAuthConfig()->getIDMModeConfig();
     }
 
@@ -383,5 +387,13 @@ class AuthSettingsApi extends SugarApi
         } else {
             return $default;
         }
+    }
+
+    /**
+     * @return AdministrationApi
+     */
+    protected function getAdministrationApi(): AdministrationApi
+    {
+        return new AdministrationApi();
     }
 }

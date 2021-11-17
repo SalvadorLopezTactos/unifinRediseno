@@ -27,11 +27,14 @@ use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 use Sugarcrm\Sugarcrm\Audit\EventRepository;
 use Sugarcrm\Sugarcrm\Audit\FieldChangeList;
 use Sugarcrm\Sugarcrm\DataPrivacy\Erasure\FieldList as ErasureFieldList;
+use Sugarcrm\Sugarcrm\DbArchiver\DbArchiver;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\DataPrivacy\Erasure\Repository;
 use Sugarcrm\Sugarcrm\Security\Crypto\Blowfish;
 use Sugarcrm\Sugarcrm\Security\Subject;
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+use Sugarcrm\Sugarcrm\Entitlements\Subscription;
 
 /**
  * SugarBean is the base class for all business objects in Sugar.  It implements
@@ -369,6 +372,19 @@ class SugarBean
     public $related_beans = array();
 
     /**
+     * Represents the state of the bean after its retrieval or last saving to the database.
+     * @var array
+     */
+    private $lastPersistedState = [];
+
+    /**
+     * This populates in saveData and contains the fields which were changed comparing to the previous bean state
+     *
+     * @var array
+     */
+    protected $stateChanges;
+
+    /**
      * Create Bean
      * @deprecated
      * @param string $beanName
@@ -545,7 +561,6 @@ class SugarBean
         }
         if (false == $this->disable_vardefs && (empty(self::$loadedDefs[$this->object_name]) || !empty($GLOBALS['reload_vardefs'])))
         {
-
             $refresh = inDeveloperMode() || !empty($isModuleInstalling);
 
             if ($refresh && !empty(VardefManager::$inReload["{$this->getModuleName()}:{$this->object_name}"])) {
@@ -865,8 +880,33 @@ class SugarBean
      */
     function get_audit_table_name()
     {
-        return $GLOBALS['db']->getValidDBName($this->getTableName().'_audit', true, 'table');
+        return $this->db->getValidDBName($this->getTableName().'_audit', true, 'table');
     }
+
+    /**
+     * Returns the name of the archive table.
+     *
+     * Archive table's name is based on implementing class' table name.
+     *
+     * @return string
+     */
+    public function getArchiveTableName()
+    {
+        return $this->db->getValidDBName($this->getTableName() . '_archive', true, 'table');
+    }
+
+    /**
+     * Used to archive an individual bean
+     * @param $bean
+     * @return mixed
+     * @throws RuntimeException
+     */
+    public function archiveBean()
+    {
+        $archiver = new DbArchiver($this->getModuleName());
+        $archiver->archiveBean($this->id);
+    }
+
     /**
      * Return true if activity is enabled for this object
      * You would set the activity flag in the implemting module's vardef file.
@@ -1727,7 +1767,7 @@ class SugarBean
                 && !empty($this->$key)
                 && strpos($type, 'json') === false
             ) {
-                if(!defined('ENTRY_POINT_TYPE') || constant('ENTRY_POINT_TYPE') != 'api') {
+                if (!isFromApi()) {
                     // for API, text fields are not cleaned, only HTML fields are
                     // since text fields supposed to be encoded by HBS templates when displaying
                     $this->$key = SugarCleaner::cleanHtml($this->$key);
@@ -1888,7 +1928,9 @@ class SugarBean
 
         $this->call_custom_logic('after_save', array(
             'isUpdate' => $isUpdate,
+            /* The usage of the dataChanges element is discouraged in favor of stateChanges */
             'dataChanges' => $this->dataChanges,
+            'stateChanges' => $this->stateChanges,
         ));
     }
 
@@ -1927,7 +1969,9 @@ class SugarBean
 
         $this->call_custom_logic('after_save', array(
             'isUpdate' => $isUpdate,
+            /* The usage of the dataChanges element is discouraged in favor of stateChanges */
             'dataChanges' => $this->dataChanges,
+            'stateChanges' => $this->stateChanges,
         ));
 
         return $this->id;
@@ -2119,6 +2163,7 @@ class SugarBean
         }
 
         $this->dataChanges = $this->db->getDataChanges($this);
+        $this->stateChanges = $this->getStateChanges();
 
         $this->_sendNotifications($check_notify);
 
@@ -2133,6 +2178,11 @@ class SugarBean
         }
 
         $this->updateRelatedCalcFields();
+
+        // Update the time_aware_schedules table
+        $this->updateTimeAwareSchedules();
+
+        $this->capturePersistedState();
 
         if (!empty($this->fetched_row)) {
             // populate fetched row with newest changes in the bean
@@ -2159,6 +2209,148 @@ class SugarBean
 
         $this->in_save = false;
         return $this->id;
+    }
+
+    /**
+     * Updates the Time-Aware Schedules table to schedule the next automatic
+     * record resave/recalculation. In order to use this functionality, a module's
+     * vardefs can store an array property 'recalculations' containing the names
+     * of date or datetime fields the record should be recalculated on, as well
+     * as any time modifications on them:
+     *
+     * 'recalculations' => [
+     *     [
+     *         'field' => 'service_start_date',
+     *     ],
+     *     [
+     *         'field' => 'service_end_date',
+     *         'modifications' => [
+     *             '+1 day',
+     *         ],
+     *     ],
+     * ]
+     */
+    protected function updateTimeAwareSchedules()
+    {
+        if ($this->shouldUpdateTimeAwareSchedules()) {
+            $this->clearActiveRecalculationSchedules();
+            $this->insertNewRecalculationSchedule();
+        }
+    }
+
+    /**
+     * Determines whether the Time-Aware Schedules functionality should trigger
+     * for this bean save
+     *
+     * @return bool true if Time-Aware Schedules functionality should trigger
+     */
+    protected function shouldUpdateTimeAwareSchedules()
+    {
+        $timeAwareSchedulesTableName = 'time_aware_schedules';
+        $recalculationsVardefs = $this->getTimeAwareRecalculationsVardefs();
+        return $this->db->tableExists($timeAwareSchedulesTableName) && !empty($recalculationsVardefs);
+    }
+
+    /**
+     * Clears any active (non-deleted) Time-Aware recalculation schedules set
+     * for this bean
+     *
+     * @throws Exception
+     */
+    protected function clearActiveRecalculationSchedules()
+    {
+        // Delete any existing active time-aware recalculation schedules for this bean
+        $qb = \DBManagerFactory::getInstance()->getConnection()->createQueryBuilder();
+        $qb->delete('time_aware_schedules')
+            ->where($qb->expr()->eq('module', $qb->createPositionalParameter($this->getModuleName())))
+            ->andWhere($qb->expr()->eq('bean_id', $qb->createPositionalParameter($this->id)))
+            ->andWhere($qb->expr()->eq('type', $qb->createPositionalParameter('recalculation')))
+            ->andWhere($qb->expr()->eq('deleted', $qb->createPositionalParameter(0)));
+        $qb->execute();
+    }
+
+    /**
+     * Creates a new Time-Aware recalculation schedule for the next time this
+     * bean should be recalculated
+     *
+     * @throws Exception
+     */
+    protected function insertNewRecalculationSchedule()
+    {
+        // Get the earliest recalculation date in the future
+        $nextRun = $this->getTimeAwareRecalculationNextRun();
+        if (empty($nextRun)) {
+            return;
+        }
+
+        // Insert a new row into the Time-Aware Schedules table
+        $qb = \DBManagerFactory::getInstance()->getConnection()->createQueryBuilder();
+        $qb->insert('time_aware_schedules')
+            ->values([
+                'id' => $qb->createPositionalParameter(\Sugarcrm\Sugarcrm\Util\Uuid::uuid1()),
+                'next_run' => $qb->createPositionalParameter($nextRun),
+                'type' => $qb->createPositionalParameter('recalculation'),
+                'module' => $qb->createPositionalParameter($this->getModuleName()),
+                'bean_id' => $qb->createPositionalParameter($this->id),
+            ])
+            ->execute();
+    }
+
+    /**
+     * Calculates the next earliest datetime that the record should be
+     * automatically resaved/recalculated
+     *
+     * @return string|null the DB-formatted datetime string if a valid
+     *                     recalculation datetime is found; null otherwise
+     */
+    protected function getTimeAwareRecalculationNextRun()
+    {
+        $nextRun = null;
+        $now = TimeDate::getInstance()->getNow(true);
+
+        // Look through the fields defined in the module's vardefs as
+        // 'recalculations' fields, and find the next earliest datetime value
+        // among them
+        $recalculations = $this->getTimeAwareRecalculationsVardefs();
+        foreach ($recalculations as $recalculation) {
+            $recalculationField = $recalculation['field'] ?? null;
+            $recalculationModifications = $recalculation['modifications'] ?? [];
+            if (empty($recalculationField) || empty($this->$recalculationField)) {
+                continue;
+            }
+
+            // Get the value of the date/datetime field, and add any time
+            // modifications to it
+            $fieldValue = TimeDate::getInstance()->fromString($this->$recalculationField);
+            foreach ($recalculationModifications as $recalculationModification) {
+                $fieldValue->modify($recalculationModification);
+            }
+
+            // If the result value is in the past, there is no need to consider
+            // it. Otherwise, compare the datetime value of the field with the
+            // earliest one found so far
+            $fieldValueTimestamp = $fieldValue->getTimestamp();
+            if ($fieldValueTimestamp <= $now->getTimestamp()) {
+                continue;
+            } elseif (empty($nextRun) || $fieldValueTimestamp <= $nextRun->getTimestamp()) {
+                $nextRun = $fieldValue;
+            }
+        }
+
+        return !empty($nextRun) ? $nextRun->asDb(false) : null;
+    }
+
+    /**
+     * Looks up the vardefs for this bean's module to find the 'recalculations'
+     * fields if they are defined
+     *
+     * @return array the list of date/datetime fields the record should base its
+     *               recalculation times off of
+     */
+    protected function getTimeAwareRecalculationsVardefs()
+    {
+        global $dictionary;
+        return $dictionary[$this->object_name]['recalculations'] ?? [];
     }
 
     /**
@@ -2236,29 +2428,29 @@ class SugarBean
     */
     function updateCalculatedFields()
     {
-        $deps = DependencyManager::getCalculatedFieldDependencies($this->field_defs, false, true);
-        foreach($deps as $dep)
-        {
-            if ($dep->getFireOnLoad())
-            {
-                $dep->fire($this);
+        $dependencies = $this->getUpdateCalculatedFieldsDeps();
+        foreach ($dependencies as $deps) {
+            foreach ($deps as $dep) {
+                if ($dep->getFireOnLoad()) {
+                    $dep->fire($this);
+                }
             }
         }
-        $deps = DependencyManager::getDependentFieldDependencies($this->field_defs, 'save');
-        foreach($deps as $dep) {
-            if ($dep->getFireOnLoad()) {
-                $dep->fire($this);
-            }
-        }
-        //Check for other on-save dependencies
-        $deps = DependencyManager::getModuleDependenciesForAction($this->module_dir, "save");
-        foreach($deps as $dep)
-        {
-            if ($dep->getFireOnLoad())
-            {
-                $dep->fire($this);
-            }
-        }
+    }
+
+    /**
+     * Return array of field dependencies to be executed the updateCalculatedFields function
+     * @return array
+     */
+    protected function getUpdateCalculatedFieldsDeps()
+    {
+        return [
+            DependencyManager::getCalculatedFieldDependencies($this->field_defs, false, true),
+            DependencyManager::getDependentFieldDependencies($this->field_defs, 'save'),
+            DependencyManager::getRequiredFieldDependencies($this->field_defs, 'save'),
+            DependencyManager::getReadOnlyFieldDependencies($this->field_defs, 'save'),
+            DependencyManager::getModuleDependenciesForAction($this->module_dir, "save"),
+        ];
     }
 
     /**
@@ -2526,6 +2718,48 @@ class SugarBean
     }
 
     /**
+     * Preprocess the email text to replace the variables with actual strings
+     *
+     * @param string $templateText text from email templates
+     * @param array $var array with variable values
+     * @return string|string[] replaced string to display in the email
+     */
+    protected function processText($templateText, $var)
+    {
+        $moduleName = $GLOBALS['app_list_strings']['moduleListSingular'][$this->module_name];
+
+        $replacements = [];
+        if (!empty($var["ASSIGNED_USER"])) {
+            $replacements['$assigned_user'] = $var["ASSIGNED_USER"];
+        } else {
+            $replacements['$assigned_user'] = !empty($var[strtoupper($moduleName) . "_TO"]) ?
+                $var[strtoupper($moduleName) . "_TO"] : '';
+        }
+        $replacements['$assigned_by_user'] = !empty($var["ASSIGNER"]) ? $var["ASSIGNER"] : '';
+        $replacements['$module_name'] = $moduleName;
+        $replacements['$module_link'] = !empty($var["URL"]) ? $var["URL"] : '';
+        $replacements['$event_name'] = !empty($var[strtoupper($moduleName) . "_SUBJECT"]) ?
+            $var[strtoupper($moduleName) . "_SUBJECT"] : '';
+        if (!empty($var["ACCEPT_URL"])) {
+            $replacements['$accept_link'] = $var["ACCEPT_URL"] . "&accept_status=accept";
+            $replacements['$tentative_link'] = $var["ACCEPT_URL"] . "&accept_status=tentative";
+            $replacements['$decline_link'] = $var["ACCEPT_URL"] . "&accept_status=decline";
+        }
+        $replacements['$start_date'] = !empty($var[strtoupper($moduleName) . "_STARTDATE"]) ?
+            $var[strtoupper($moduleName) . "_STARTDATE"] : '';
+        $replacements['$end_date'] = !empty($var[strtoupper($moduleName) . "_ENDDATE"]) ?
+            $var[strtoupper($moduleName) . "_ENDDATE"] : '';
+        $replacements['$hours'] = !empty($var[strtoupper($moduleName) . "_HOURS"]) ?
+            $var[strtoupper($moduleName) . "_HOURS"] : '';
+        $replacements['$minutes'] = !empty($var[strtoupper($moduleName) . "_MINUTES"]) ?
+            $var[strtoupper($moduleName) . "_MINUTES"] : '';
+        $replacements['$description'] = !empty($var[strtoupper($moduleName) . "_DESCRIPTION"]) ?
+            $var[strtoupper($moduleName) . "_DESCRIPTION"] : '';
+
+        return str_replace(array_keys($replacements), array_values($replacements), $templateText);
+    }
+
+    /**
     * Handles sending out email notifications when items are first assigned to users
     *
     * @param string $notify_user user to notify
@@ -2536,11 +2770,29 @@ class SugarBean
             || (isset($notify_user->receive_notifications) && $notify_user->receive_notifications) ) {
             $this->current_notify_user = $notify_user;
 
+            $emailConfig = SugarConfig::getInstance()->get('emailTemplate');
+            if ($this->object_name == 'Meeting' || $this->object_name == 'Call') {
+                $templateID = $emailConfig[$this->object_name] ?? '';
+            } else {
+                $templateID = $emailConfig['AssignmentNotification'] ?? '';
+            }
+
             $templateName = $this->getTemplateNameForNotificationEmail();
             $xtpl         = $this->createNotificationEmailTemplate($templateName, $notify_user);
-            $subject      = $xtpl->text($templateName . "_Subject");
-            $textBody     = trim($xtpl->text($templateName));
 
+            // Pull the email template if it exists
+            $emailTemplate = BeanFactory::getBean('EmailTemplates', $templateID);
+
+            $htmlBody = null;
+
+            if (!empty($emailTemplate) && $emailTemplate->id && !empty($xtpl->VARS)) {
+                $textBody = $this->processText($emailTemplate->body, $xtpl->VARS);
+                $htmlBody = $this->processText($emailTemplate->body_html, $xtpl->VARS);
+                $subject = $this->processText($emailTemplate->subject, $xtpl->VARS);
+            } else {
+                $subject      = $xtpl->text($templateName . "_Subject");
+                $textBody     = trim($xtpl->text($templateName));
+            }
 
             $mailTransmissionProtocol = "unknown";
 
@@ -2576,6 +2828,11 @@ class SugarBean
 
                 // set the body of the email... looks to be plain-text only
                 $mailer->setTextBody($textBody);
+
+                // set html text of the email
+                if ($htmlBody && !isTruthy($emailTemplate->text_only)) {
+                    $mailer->setHtmlBody($htmlBody);
+                }
 
                 // add the recipient
                 $recipientEmailAddress = $notify_user->emailAddress->getPrimaryAddress($notify_user);
@@ -3413,13 +3670,18 @@ class SugarBean
 		$this->is_updated_dependent_fields = false;
         $this->fill_in_additional_detail_fields();
         $this->fill_in_relationship_fields();
-// save related fields values for audit
-         foreach ($this->get_related_fields() as $rel_field_name)
-         {
-             $name = $rel_field_name['name'];
-             $value = isset($this->$name) ? $this->$name : null;
-             $this->fetched_rel_row[$name] = $value;
-         }
+        // save related fields values for audit
+        foreach ($this->get_related_fields() as $rel_field_name) {
+            $name = $rel_field_name['name'];
+            $value = isset($this->$name) ? $this->$name : null;
+            $this->fetched_rel_row[$name] = $value;
+
+            if (isset($rel_field_name['id_name'])) {
+                $id_name = $rel_field_name['id_name'];
+                $id_value = isset($this->$id_name) ? $this->$id_name : null;
+                $this->fetched_rel_row[$id_name] = $id_value;
+            }
+        }
         //make a copy of fields in the relationship_fields array. These field values will be used to
         //clear relationship.
         foreach ( $this->field_defs as $key => $def )
@@ -3445,6 +3707,8 @@ class SugarBean
                     $this->rel_fields_before_value[$rel_id]=null;
             }
         }
+
+        $this->capturePersistedState();
 
         // call the custom business logic
         $custom_logic_arguments['id'] = $id;
@@ -3528,6 +3792,7 @@ class SugarBean
             //true parameter below tells populate to perform conversions on row data
             $bean->fetched_row = $bean->populateFromRow($row, true);
             $this->populateFetchedEmail();
+            $this->capturePersistedState();
             $bean->call_custom_logic("process_record");
             $beans[$bean->id] = $bean;
             $rawRows[$bean->id] = $row;
@@ -5638,7 +5903,7 @@ class SugarBean
         $response = array();
         $response['list'] = $list;
         $response['parent_data'] = $parent_fields;
-        $response['row_count'] = $rows_found;
+        $response['row_count'] = $rows_found ?? 0;
         $response['next_offset'] = $next_offset;
         $response['previous_offset'] = $previous_offset;
         $response['current_offset'] = $row_offset ;
@@ -5812,6 +6077,7 @@ class SugarBean
             $bean->call_custom_logic("process_record");
             $bean->fetched_row = $row;
             $this->populateFetchedEmail();
+            $this->capturePersistedState();
 
             $list[] = $bean;
         }
@@ -5943,7 +6209,7 @@ class SugarBean
             if ($this->load_relationship($link)) {
                 $rows = $this->$link->rows;
                 $recordIds = array_keys($rows);
-                $recordId = array_shift($recordIds);
+                $recordId = strval(array_shift($recordIds));
                 if ($recordId) {
                     $this->$idName = $recordId;
                     if (!empty($rows[$recordId]['related_owner_id'])) {
@@ -6122,14 +6388,10 @@ class SugarBean
     }
 
     /**
-     * This function may be overridden in each module.  It marks an item as deleted.
-     *
-     * If it is not overridden, then marking this type of item is not allowed
-	 */
+     * @final This method will become strictly final in a future version
+     */
     public function mark_deleted($id)
     {
-        global $current_user;
-        $date_modified = $GLOBALS['timedate']->nowDb();
         if (isset($_SESSION['show_deleted'])) {
             $this->mark_undeleted($id);
         } else {
@@ -6140,65 +6402,83 @@ class SugarBean
             // call the custom business logic
             $custom_logic_arguments['id'] = $id;
             $this->call_custom_logic("before_delete", $custom_logic_arguments);
-            $this->deleted = 1;
 
-            if (isset($this->field_defs['team_id'])) {
-                if (empty($this->teams)) {
-                    $this->load_relationship('teams');
-                }
-
-                if (!empty($this->teams)) {
-                    $this->teams->removeTeamSetModule();
-                }
+            $backup = $this->id;
+            $this->id = $id;
+            try {
+                $this->doMarkDeleted();
+            } finally {
+                $this->id = $backup;
             }
-
-            // creator should be present after removal
-            $createdBy = null;
-            if (isset($this->field_defs['created_by'])) {
-                $createdBy = $this->created_by;
-            }
-            $this->mark_relationships_deleted($id);
-            if ($createdBy) {
-                $this->created_by = $createdBy;
-            }
-            if (isset($this->field_defs['modified_user_id'])) {
-                if (!empty($current_user)) {
-                    $this->modified_user_id = $current_user->id;
-                } else {
-                    $this->modified_user_id = 1;
-                }
-                $this->db->updateParams(
-                    $this->table_name,
-                    $this->field_defs,
-                    $this->getDeleteUpdateParams($date_modified, $this->modified_user_id),
-                    array('id' => $id)
-                );
-                if ($this->isFavoritesEnabled()) {
-                    SugarFavorites::markRecordDeletedInFavorites($id, $date_modified, $this->modified_user_id);
-                }
-            } else {
-                $this->db->updateParams(
-                    $this->table_name,
-                    $this->field_defs,
-                    $this->getDeleteUpdateParams($date_modified),
-                    array('id' => $id)
-                );
-                if ($this->isFavoritesEnabled()) {
-                    SugarFavorites::markRecordDeletedInFavorites($id, $date_modified);
-                }
-            }
-
-            // Take the item off the recently viewed lists
-            $tracker = BeanFactory::newBean('Trackers');
-            $tracker->makeInvisibleForAll($id);
-
-            SugarRelationship::resaveRelatedBeans();
 
             // call the custom business logic
             $this->call_custom_logic("after_delete", $custom_logic_arguments);
             static::leaveOperation('delete', $opflag);
             Activity::restoreToPreviousState();
         }
+    }
+
+    /**
+     * Implements soft-deletion of the bean
+     */
+    protected function doMarkDeleted(): void
+    {
+        global $current_user;
+
+        $date_modified = $GLOBALS['timedate']->nowDb();
+        $this->deleted = 1;
+
+        if (isset($this->field_defs['team_id'])) {
+            if (empty($this->teams)) {
+                $this->load_relationship('teams');
+            }
+
+            if (!empty($this->teams)) {
+                $this->teams->removeTeamSetModule();
+            }
+        }
+
+        // creator should be present after removal
+        $createdBy = null;
+        if (isset($this->field_defs['created_by'])) {
+            $createdBy = $this->created_by;
+        }
+        $this->mark_relationships_deleted($this->id);
+        if ($createdBy) {
+            $this->created_by = $createdBy;
+        }
+        if (isset($this->field_defs['modified_user_id'])) {
+            if (!empty($current_user)) {
+                $this->modified_user_id = $current_user->id;
+            } else {
+                $this->modified_user_id = 1;
+            }
+            $this->db->updateParams(
+                $this->table_name,
+                $this->field_defs,
+                $this->getDeleteUpdateParams($date_modified, $this->modified_user_id),
+                ['id' => $this->id]
+            );
+            if ($this->isFavoritesEnabled()) {
+                SugarFavorites::markRecordDeletedInFavorites($this->id, $date_modified, $this->modified_user_id);
+            }
+        } else {
+            $this->db->updateParams(
+                $this->table_name,
+                $this->field_defs,
+                $this->getDeleteUpdateParams($date_modified),
+                ['id' => $this->id]
+            );
+            if ($this->isFavoritesEnabled()) {
+                SugarFavorites::markRecordDeletedInFavorites($this->id, $date_modified);
+            }
+        }
+
+        // Take the item off the recently viewed lists
+        $tracker = BeanFactory::newBean('Trackers');
+        $tracker->makeInvisibleForAll($this->id);
+
+        SugarRelationship::resaveRelatedBeans();
     }
 
     /**
@@ -6478,8 +6758,7 @@ class SugarBean
 
                 //Fields hidden by Dependent Fields
                 if (isset($value['hidden']) && $value['hidden'] === true) {
-                        $return_array[$cache[$field]] = "";
-
+                    $return_array[$cache[$field]] = "";
                 }
                 //cn: if $field is a _dom, detect and return VALUE not KEY
                 //cl: empty function check for meta-data enum types that have values loaded from a function
@@ -6580,6 +6859,8 @@ class SugarBean
         $this->fromArray($row);
 		$this->is_updated_dependent_fields = false;
         $this->fill_in_additional_detail_fields();
+        $this->capturePersistedState();
+
         return $this;
     }
 
@@ -6696,6 +6977,7 @@ class SugarBean
             $options['join_teams'] = true;
         }
         $this->addVisibilityFrom($query, $options);
+        $this->addVisibilityWhere($query, $options);
         return $query;
     }
 
@@ -7429,6 +7711,7 @@ class SugarBean
         $this->fill_in_additional_list_fields();
 
         if($this->hasCustomFields())$this->custom_fields->fill_relationships();
+        $this->capturePersistedState();
         $this->call_custom_logic("process_record");
     }
 
@@ -7606,6 +7889,11 @@ class SugarBean
                 foreach ($notify_list as $notify_user)
                 {
                     $this->send_assignment_notifications($notify_user, $admin);
+                }
+                // if the send_invites is set
+                // unset the send_invites property since all the invitees/users have been notified
+                if (isset($this->send_invites)) {
+                    unset($this->send_invites);
                 }
             }
         }
@@ -8484,6 +8772,7 @@ class SugarBean
 
     /**
      * Checks whether email notification should be send or not
+     * This is only for CalendarEvent type modules like Calls and Meetings
      * @return bool
      */
     public function isEmailNotificationNeeded()
@@ -8491,7 +8780,12 @@ class SugarBean
         global $current_user;
 
         $sendingEmailNeeded = false;
-        $old_assigned_user_id = CalendarEvents::getOldAssignedUser($this->module_dir, $this->id);
+        // Try to get the assigned user from what is retrieved from DB first
+        if (isset($this->fetched_row['assigned_user_id'])) {
+            $old_assigned_user_id = $this->fetched_row['assigned_user_id'];
+        } else {
+            $old_assigned_user_id = CalendarEvents::getOldAssignedUser($this->module_dir, $this->id);
+        }
         $isInstalling = isset($GLOBALS['installing']) && $GLOBALS['installing'] === true;
 
         if (!$isInstalling &&                                       // this is not installing process
@@ -8646,5 +8940,87 @@ class SugarBean
         }
 
         return $erasedFields;
+    }
+
+    /**
+     * Checks to see if this instance is licensed for Sell
+     * @return boolean
+     */
+    final public function isLicensedForSell() : bool
+    {
+        $ret = false;
+        $subs = SubscriptionManager::instance()->getSystemSubscriptionKeys();
+        if (array_key_exists(Subscription::SUGAR_SELL_KEY, $subs)) {
+            $ret = true;
+        }
+        return $ret;
+    }
+
+    /**
+     * Checks to see if this instance is licensed for Serve
+     * @return boolean
+     */
+    final public function isLicensedForServe() : bool
+    {
+        $ret = false;
+        $subs = SubscriptionManager::instance()->getSystemSubscriptionKeys();
+        if (array_key_exists(Subscription::SUGAR_SERVE_KEY, $subs)) {
+            $ret = true;
+        }
+        return $ret;
+    }
+
+    /**
+     * Returns an array contained Changed fields and their "before" and "after" values.
+     * A field is Changed if its value was changed comparing to previous state.
+     *
+     * @return array{ field_name: array{ before: string, after: string, field_name: string, data_type: string }, ?}
+     */
+    public function getStateChanges(): array
+    {
+        return $this->db->getStateChanges($this, $this->lastPersistedState);
+    }
+
+    /**
+     * Returns an array with Bean fields and their values
+     */
+    private function getCurrentState(): array
+    {
+        $state = [];
+
+        foreach ($this->getFieldDefinitions() as $name => $def) {
+            $isRelateField = $def['type'] === 'relate';
+            $isEmailField = $def['type'] === 'email';
+            $isNonDbField = isset($def['source']) && $def['source'] === 'non-db';
+
+            // non-db fields except relate and email excluded from a Bean state as their value isn't stored in the
+            // database
+            if ($isNonDbField && !$isRelateField && !$isEmailField) {
+                continue;
+            }
+
+            if (!property_exists($this, $name)) {
+                continue;
+            }
+
+            $state[$name] = $this->{$name};
+
+            // this a special case which was previously defined in DBManager::getStateChanges
+            if ($name === 'email') {
+                if (!empty($this->emailAddress) && !empty($this->emailAddress->hasFetched)) {
+                    $state[$name] = $this->emailAddress->addresses;
+                }
+            }
+        }
+
+        return $state;
+    }
+
+    /**
+     * Makes the current state as persisted
+     */
+    private function capturePersistedState(): void
+    {
+        $this->lastPersistedState = $this->getCurrentState();
     }
 }

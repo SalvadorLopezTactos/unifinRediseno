@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Dashboard da Lista da Base de Conhecimento',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Dashboard do Registo da Base de Conhecimento',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco na base de conhecimento',
 
     'LBL_MODULE_NAME' => 'Base de Conhecimento',
     'LBL_MODULE_NAME_SINGULAR' => 'Artigo da Base de Conhecimento',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Não foi útil',
     'LBL_RATING' => 'Classificação',
     'LBL_VIEWED_COUNT' => 'Ver Contagem',
-    'LBL_DOWNLOAD_ALL' => 'Transferir Tudo',
-    'LBL_DOWNLOAD_ONE' => 'Transferir',
-    'LBL_ATTACHMENTS' => 'Anexos:',
-    'LBL_ADD_ATTACHMENT' => 'Procurar',
     'LBL_CATEGORIES' => 'Categorias da Base de Conhecimento',
     'LBL_CATEGORY_NAME' => 'Categoria',
     'LBL_USEFULNESS' => 'Utilidade',

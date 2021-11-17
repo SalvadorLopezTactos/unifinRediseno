@@ -32,10 +32,7 @@ $dictionary['Dashboard'] = array(
             'unified_search' => false,
             'merge_filter' => 'disabled',
             'calculated' => false,
-            'function' => array(
-                'name' => 'DashboardHelper::getDashboardsModulesDropdown',
-                'include' => 'modules/Dashboards/DashboardHelper.php',
-            ),
+            'options' => 'moduleList',
         ),
         'view_name' => array(
             'required' => false,

@@ -64,6 +64,7 @@ $mod_strings = array (
 	'ERR_RULES_NOT_MET'                 => 'Det lösenord du angav är inte tillräckligt starkt, var snäll och pröva igen.',
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Användarinformation kunde ej hittas',
     'ERR_USER_NAME_EXISTS'              => 'Användarnamnet {0} finns redan. Du får inte ha samma som någon annan, så ändra det till nåt unikt.',
+    'ERR_USER_MISSING_LICENSE_TYPE'     => 'Licensen “Sugar Hint” måste sparas med ytterligare kompatibel licenstyp',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Denna användare har låsts ute av Sugar applikation och kan inte logga in genom att använda existerande lösenord.',
     'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Enadast externa godkända användare är tillåtna att logga in med Sugar-autentiseringsuppgifter',
 
@@ -75,7 +76,7 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Mottagarens emailadress',
 	'ERR_SERVER_STATUS'					=> 'Din serverstatus',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Systemet kan inte skicka ett email till användaren. Var god kontrollera konfigurationen för utgående email under <a href="index.php?module=EmailMan&action=config">Emailinställningar</a>.',
-    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'New users must be created in <a href="{0}" target="_blank">Cloud Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Nya användare måste skapas i <a href="{0}" target="_blank">Inställningar för SugarCloud</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Emailadress',
 
@@ -298,11 +299,13 @@ $mod_strings = array (
     'LBL_FORECASTS'                     => 'Prognoser',
     'LBL_WORKSHEETS'                    => 'Arbetsark',
 	'LBL_CALENDARS'                     => 'Kalendrar',
+    'LBL_SHIFTS'                        => 'Skift',
+    'LBL_SHIFT_EXCEPTIONS'              => 'Skiftförväntningar',
 
     'LBL_RECEIVE_NOTIFICATIONS_TEXT'    => 'Få ett mail när en post tilldelas till dig.',
-    'LBL_RECEIVE_NOTIFICATIONS'         => 'Email on Assignment',
-    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Receive an email notification when someone mentions you in a comment log entry.',
-    'LBL_SEND_EMAIL_ON_MENTION'         => 'Email on Mention',
+    'LBL_RECEIVE_NOTIFICATIONS'         => 'Mejla vid tilldelning',
+    'LBL_SEND_EMAIL_ON_MENTION_TEXT'    => 'Få en e-postavisering när någon nämner dig i ett inlägg i kommentarsloggen.',
+    'LBL_SEND_EMAIL_ON_MENTION'         => 'E-post vid omnämnande',
     'LBL_FIELD_NAME_PLACEMENT_TEXT'     => 'Välj hur fältnamn ska visas i postvisningarna. Välj "Bredvid fältvärde" för en mer kompakt postvisning.',
     'LBL_FIELD_NAME_PLACEMENT'          => 'Fältnamnsplacering',
     'LBL_ABOVE_FIELD_VALUE'             => 'Ovanför fältvärde',
@@ -312,6 +315,7 @@ $mod_strings = array (
     'LBL_LICENSE_TYPE'                  => 'Licenstyp',
     'LBL_LICENSE_SUGAR_SERVE'           => 'Sugar Serve',
     'LBL_LICENSE_SUGAR_SELL'            => 'Sugar Sell',
+    'LBL_LICENSE_SUGAR_HINT'            => 'Sugar Hint',
 	'LBL_REMINDER_TEXT'					=> 'Skapa en påminnelse om ett kommande möte eller telefonsamtal',
 	'LBL_REMINDER'						=> 'Visa påminnelser?',
 	'LBL_REMINDER_POPUP' => 'Popup',
@@ -396,7 +400,7 @@ $mod_strings = array (
     'LBL_TOO_MANY_CONCURRENT'           => 'Den här sessionen har avslutats för att en annan session har startats med samma användarnman.',
 // MASS REASSIGNMENT SCRIPT STRINGS
 	'LBL_REASS_SCRIPT_TITLE'			=> 'Tilldela om poster',
-	'LBL_REASS_DESC_PART1'				=> 'Alla poster kommer hittas (i de valda modulerna) som är tilldelade till en användare, och gör det möjilgt för dig att tilldela dem till en annan användare.',
+    'LBL_REASS_DESC_PART1'              => 'Alla poster kommer hittas (i de valda modulerna) som är tilldelade till en användare, och gör det möjilgt för dig att tilldela dem till en annan användare.',
         'LBL_REASS_DESC_PART2'=>                    'Välj vilka moduler som ska köras mot vilka arbetsflöden, skicka uppdrags meddelanden och utför spårning under omplacering. Klicka nästa för att fortsätta omplacera poster. Klicka på återstart för att starta om igen.',
 	'LBL_REASS_STEP2_TITLE'				=> 'Tilldela om team',
 	'LBL_REASS_STEP2_DESC'				=> 'De team som listas nedan var tillgängliga för Från användarens team men inte för Till användarens team. Alla poster i Från användarens team kommer inte vara synliga för Till användarens team om inte teamvärdena är mappade.',
@@ -624,7 +628,7 @@ $mod_strings = array (
     'LBL_DETAIL' => 'Användarprofil',
 
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
-        'Please access <a href="%s" target="_blank">Cloud Settings</a> to make changes to read-only fields.',
+        'Öppna <a href="%s" target="_blank">Inställningar för SugarCloud</a> för att göra ändringar i skrivskyddade fält.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
         'Vänligen kontakta din Sugar-administratör om du vill ändra i fälten som bara kan läsas.',
     'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY' =>

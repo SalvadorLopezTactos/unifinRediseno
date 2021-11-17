@@ -25,4 +25,7 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Όλοι οι Πίνακες Εργαλείων για τη λειτουργική μονάδα {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Όλοι οι Πίνακες Εργαλείων για {{module}} λειτουργικής μονάδας {{view}}',
     'LBL_COPY_OF' => 'Αντίγραφο του {{{name}}}',
+    'LBL_DELETE_FOCUS_DRAWER' => 'Οι πίνακες ελέγχου του συρταριού εστίασης δεν μπορούν να διαγραφούν.',
+    'LBL_CREATE_DASHBOARD_BUTTON' => 'Δημιουργία Πίνακα Στοιχείων',
+    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
 );

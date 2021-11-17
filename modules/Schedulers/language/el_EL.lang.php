@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Χρονοπρογραμματισμένη Εργασία',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Αναδόμηση απομαλοποιημένων δεδομένων ασφαλείας ομάδας',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Καθαριστής ροής δραστηριότητας',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Ενημέρωση ορισμού προϊόντος',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Επεξεργασία χρονοδιαγραμμάτων',
+'LBL_OOTB_DATA_ARCHIVER' => 'Εκτελέστε ενεργά αρχεία / διαγραφές δεδομένων',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Διάστημα:',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'Πάντα',
 'LBL_CATCH_UP' => 'Εκτέλεση Αν Λείπει',
+'LBL_SYSTEM_JOB' => 'Είναι το τρέχον σύστημα εργασίας;',
 'LBL_CATCH_UP_WARNING' => 'Απο-ελέγξετε, αν αυτή η εργασία μπορεί να διαρκέσει περισσότερο από ένα λεπτό για να τρέξει.',
 'LBL_DATE_TIME_END' => 'Ημερομηνία και Ώρα Λήξης',
 'LBL_DATE_TIME_START' => 'Ημερομηνία και Ώρα Έναρξης',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Κατάργηση αρχείων διαγνωστικού εργαλείου',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Κατάργηση προσωρινών αρχείων',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Αναδόμηση απομαλοποιημένων δεδομένων ασφαλείας ομάδας',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Ενημέρωση ορισμού προϊόντος',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => '<b>Εκτέλεση Νυχτερινών Μαζικών Emails Εκστρατείας</b>',
 'LBL_ASYNCMASSUPDATE' => 'Εκτέλεση Ασύγχρονων Μαζικών Ενημερώσεων',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => '<b>Εκκαθάριση Εργασιών Ουράς Αναμονής</b>',
 'LBL_CLEANOLDRECORDLISTS' => 'Εκκαθάριση Λιστών Παλαιών Εγγραφών',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Καθαριστής ροής δραστηριότητας',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Επεξεργασία χρονοδιαγραμμάτων',
 'LBL_PMSEENGINECRON' => 'Χρονοδιάγραμμα SugarBPM',
 );
 

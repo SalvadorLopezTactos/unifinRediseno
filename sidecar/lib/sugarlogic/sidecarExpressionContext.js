@@ -193,6 +193,9 @@ App.utils.extendFrom(SEC, SE.ExpressionContext, {
             else {
                 result =  SEC.parser.toConstant('"' + value + '"');
             }
+        } else if (Array.isArray(value)) {
+            //This is probably an array that we must convert to an expression
+            result = this.getEnumExpression(value);
         } else if (typeof(value) == "object" && value != null && value.getTime) {
             //This is probably a date object that we must convert to an expression
             result = this.getDateExpression(value);
@@ -320,7 +323,8 @@ App.utils.extendFrom(SEC, SE.ExpressionContext, {
         _.each([field.def, def], function(d) {
             _.each(props, function(prop) {
                 if (d[prop] && d[prop].indexOf(css_class) != -1) {
-                    d[prop] = $.trim((" " + d[prop] + " ").replace(new RegExp(' ' + css_class + ' '), ""));
+                    var defProp = (" " + d[prop] + " ").replace(new RegExp(' ' + css_class + ' '), "");
+                    d[prop] = defProp.trim();
                 }
             });
         });
@@ -720,10 +724,17 @@ App.utils.extendFrom(SEC, SE.ExpressionContext, {
         d.value = date;
         return d;
     },
+    getEnumExpression: function(array) {
+        //This is probably an array that we must convert to an expression
+        var e = new SE.EnumExpression("");
+        e.evaluate = function(){return this.value};
+        e.value = array;
+        return e;
+    },
     //Helper function to trigger the actual load call of related data
     _loadRelatedData : function(link, fields, relContext, rField) {
         var self = this;
-        if (rField && this.model.get(rField.id_name)){
+        if (!_.isEmpty(rField) && this.model.get(rField.id_name)){
             //If we are using a relate field rather than a full link
             var modelId = this.model.get(rField.id_name),
                 model =  relContext.get("model")
@@ -754,7 +765,7 @@ App.utils.extendFrom(SEC, SE.ExpressionContext, {
         //relContext.set("parentModel", model);
         //relContext.attributes.collection.link.bean = model;
         relContext.loadData({
-            relate: !rField, //don't use the link api if we are forcing an id pulled from a field on the current model.
+            relate: _.isEmpty(rField), //don't use the link api if we are forcing an id pulled from a field on the current model.
             success: function() {
                 // We will fire the link change event once the load is complete to re-fire the dependency with the correct data.
                 model.trigger("change:" + link, model);
@@ -1159,8 +1170,20 @@ SUGAR.forms.Dependency.prototype.fire = function(undo)
             if (typeof action.exec == "function") {
                 action.setContext(this.context);
                 action.exec();
+
+                // Some actions need to be re-executed whenever the view
+                // re-renders. In that case, since these actions share a common
+                // context object, make sure that when the re-execution occurs
+                // that the context's model refers to the correct target model,
+                // as it's possible the context's model will change before this
+                // event triggers
                 if (this.testOnLoad && action.afterRender) {
-                    this.context.view.on('render', action.exec, action);
+                    this.context.view.on('render', function() {
+                        var prevModel = action.context.model;
+                        action.context.setModel(model);
+                        action.exec();
+                        action.context.setModel(prevModel);
+                    }, this);
                 }
             }
         }
@@ -1580,24 +1603,31 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
     SE.plugin = {
         onAttach: function() {
             this.on('init', function() {
-                this._slCtx = this.initSugarLogic();
-                /**
-                 * Reference to the `SugarLogic` plugin context on the view.
-                 *
-                 * @deprecated Deprecated since 7.9.
-                 * @type {SUGAR.expressions.ExpressionContext}
-                 */
-                Object.defineProperty(this, 'slContext', {
-                    get: function () {
-                        SUGAR.App.logger.warn('`View.slContext` has been deprecated since 7.9.');
-                        return this._slCtx;
-                    },
-                    configurable: true,
-                    enumerable: true,
-                });
-
-                this.context.addFields(this._getDepFields());
+                this.startSugarLogic();
             }, this);
+        },
+
+        /**
+         * Set up SugarLogic
+         */
+        startSugarLogic: function() {
+            this._slCtx = this.initSugarLogic();
+            /**
+             * Reference to the `SugarLogic` plugin context on the view.
+             *
+             * @deprecated Deprecated since 7.9.
+             * @type {SUGAR.expressions.ExpressionContext}
+             */
+            Object.defineProperty(this, 'slContext', {
+                get: function () {
+                    SUGAR.App.logger.warn('`View.slContext` has been deprecated since 7.9.');
+                    return this._slCtx;
+                },
+                configurable: true,
+                enumerable: true,
+            });
+
+            this.context.addFields(this._getDepFields());
         },
 
         /**
@@ -1684,9 +1714,9 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
         },
 
         /**
-         * Unbinds event listeners bound by SidecarExpressionContext class.
+         * Stop SugarLogic. Useful when switching models without disposing the view.
          */
-        onDetach: function () {
+        stopSugarLogic: function() {
             this.off(null, null, this._slCtx);
             this.model && this.model.off(null, null, this._slCtx);
             this.collection && this.collection.off(null, null, this._slCtx);
@@ -1697,6 +1727,13 @@ SUGAR.forms.Dependency.prototype.getRelatedFields = function() {
                     this.off(null, null, action);
                 }, this);
             }, this);
+        },
+
+        /**
+         * Unbinds event listeners bound by SidecarExpressionContext class.
+         */
+        onDetach: function () {
+            this.stopSugarLogic();
         },
     };
 

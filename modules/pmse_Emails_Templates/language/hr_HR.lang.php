@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Predlošci e-pošte procesa',
     'LBL_MODULE_NAME_SINGULAR' => 'Predložak e-pošte procesa',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Ladica fokusa za predloške e-pošte procesa',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o predlošcima e-pošte procesa',
     'LNK_LIST' => 'Prikaži predložak e-pošte procesa',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Stvori predložak e-pošte procesa',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Uvezi predloške e-pošte procesa',

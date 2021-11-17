@@ -12,6 +12,7 @@
 $mod_strings = array(
     'LBL_MODULE_NAME' => 'Contas de E-mail de saída',
     'LBL_MODULE_NAME_SINGULAR' => 'Conta de E-mail de saída',
+    'LBL_STATUS' => 'Estado',
     'LBL_MAIL_SENDTYPE' => 'Agente de Transferência de correio',
     'LBL_MAIL_SMTPSERVER' => 'Servidor',
     'LBL_MAIL_SMTPPORT' => 'Porta',
@@ -29,9 +30,13 @@ $mod_strings = array(
     'LBL_SYSTEM_ACCOUNT' => 'Esta é a conta do sistema.',
     'LBL_EMAIL_ADDRESS_ID' => 'ID do Endereço de E-mail',
     'LBL_TYPE' => 'Tipo',
+    'LBL_AUTHORIZED_ACCOUNT' => 'Endereço de E-mail autorizado',
+    'LBL_FROM_EMAIL_ADDRESS' => 'A partir do Endereço de E-mail',
     'LBL_REPLY_TO_NAME' => 'Nome de "Responder A"',
     'LBL_REPLY_TO_EMAIL_ADDRESSES' => 'Endereços de E-mail de "Responder A"',
     'LBL_REPLY_TO_EMAIL_ADDRESS_ID' => 'ID do Endereço de E-mail de "Responder A"',
     'LBL_REPLY_TO_EMAIL_ADDRESS' => 'Endereço de E-mail de "Responder A"',
     'LBL_PRIMARY_TEAM' => 'Equipa Principal',
+
+    'LBL_OUTBOUND_EMAIL_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco de definições de e-mails',
 );

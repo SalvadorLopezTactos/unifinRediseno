@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Elenco obiettivi del tipo default non trovato',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nessun valore trovato',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'I valori in elenco sono stati elaborati',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Impostazioni Posta in Arrivo',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Impostazioni posta elettronica di sistema',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Nome Tracker:',
   'LBL_EDIT_TRACKER_URL'=>'URL Tracker:',

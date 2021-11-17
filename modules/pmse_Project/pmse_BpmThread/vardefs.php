@@ -12,6 +12,7 @@
 
 $dictionary['pmse_BpmThread'] = array(
     'table' => 'pmse_bpm_thread',
+    'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,

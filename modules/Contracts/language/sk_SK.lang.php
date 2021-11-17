@@ -97,4 +97,8 @@ $mod_strings = array (
     'LBL_EXPORT_MODIFIED_USER_ID' => 'Zmenil podľa ID',
     'LBL_EXPORT_CREATED_BY' => 'Vytvorené podľa ID',
     'LBL_EXPORT_TYPE_NAME' => 'Názov typu',
+
+    'LBL_CONTRACTS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zamerania na kontrakty',
+
+    'LBL_CONTRACTS_RECORD_DASHBOARD' => 'Informačný panel so záznamom kontraktov',
 );

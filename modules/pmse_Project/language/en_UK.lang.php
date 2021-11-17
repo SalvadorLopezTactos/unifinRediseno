@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Process Definitions',
   'LBL_MODULE_NAME_SINGULAR' => 'Process Definition',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Process Definitions Focus Drawer',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Process Definitions Record Dashboard',
   'LNK_LIST' => 'View Process Definitions',
   'LNK_NEW_PMSE_PROJECT' => 'Create Process Definitions',
   'LNK_IMPORT_PMSE_PROJECT' => 'Import Process Definitions',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Change Assigned To User',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Team',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Select New Process User',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'Email',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'Email process user when process assigned',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'User Definition',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Assignment Method',
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'New Records Only',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Updated Records Only (First Update - See Help Text)',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Updated Records Only (All Updates - See Help Text)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'New Records or First Update',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'New Records and All Updates',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Select when the process will start.<br><br>New: Run process when new record is created.<br><br>First Update: Process runs only the first time criteria is met for an existing record.<br><br>All Updates: Process runs every time criteria is met for an existing record.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Select when the process will start.<br><br>New: Run process when new record is created.<br><br>First Update: Process runs only the first time when criteria are met for an existing record.<br><br>All Updates: Process runs every time criteria are met for an existing record.<br><br>New Records or First Update: Process runs only the first time when criteria are met for a record, during either record creation or record update.<br><br>New Records and All Updates: Process runs every time for all new and existing records.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Select the SugarCRM module to apply the event trigger',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Fixed Date',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'changes from',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'changes to',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'includes any',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'does not include any',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'on or after',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'on or before',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'is not equal to',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Add',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Close',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'All teams assigned to the record',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Teams',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% related to %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'User who created the %MODULE%',

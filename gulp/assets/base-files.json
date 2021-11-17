@@ -42,6 +42,7 @@
     "include/javascript/sugar7/accessibility/accessibility.js",
     "include/javascript/sugar7/accessibility/click.js",
     "include/javascript/sugar7/accessibility/label.js",
+    "include/javascript/sugar7/userAgent.js",
 
     // TODO: decide if we're going to only serve or if we should have
     // them all by default
@@ -66,6 +67,12 @@
     "include/javascript/sugar7/shortcuts.js",
     "include/javascript/sugar7/clipboard.js",
     "include/javascript/clipboardjs/clipboard.min.js",
+    "include/javascript/gridstack/gridstack-poly.js",
+    "include/javascript/gridstack/gridstack.js",
+    "include/javascript/gridstack/gridstack.JQueryUI.js",
+    "include/javascript/amazon-connect/amazon-connect-1.4.9-1-gf9242a0.js",
+    "include/javascript/amazon-connect/amazon-connect-chat.js",
+    "include/javascript/dom-purify/purify.min.js",
 
     // jasmine and sinon core files
     "node_modules/sinon/pkg/sinon.js",

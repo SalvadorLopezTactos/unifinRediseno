@@ -124,6 +124,7 @@ $viewdefs[$module_name]['base']['view']['record'] = array(
                     'width' => 42,
                     'height' => 42,
                     'dismiss_label' => true,
+                    'size' => 'large',
                 ),
                 array(
                     'name' => 'name',

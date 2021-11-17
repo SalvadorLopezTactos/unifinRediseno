@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Velden gemarkeerd voor wissen',
     'LBL_NO_RECORDS_MARKED' => 'Er zijn geen velden of records gemarkeerd om te wissen.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Dashboard gegevensprivacy record',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer gegevensprivacy',
 
     // list view
     'LBL_HELP_RECORDS' => 'De module Gegevensprivacy volgt privacy-activiteiten, waaronder het geven van toestemming voor en het verzenden van verzoeken. Dit wordt gedaan ter ondersteuning van de privacyprocedures van uw organisatie. Maak gegevensprivacyrecords met betrekking tot een individueel record aan (bijv. een contactpersoon) om toestemming te volgen of actie te ondernemen met betrekking tot een privacyverzoek.',

@@ -142,6 +142,7 @@ final class Filter implements ApiSerializable
             case '$following':
             case '$owner':
             case '$tracker':
+            case '$guest':
                 return $fn(new Operand($operand, $filter));
             case '$from':
             case '$to':

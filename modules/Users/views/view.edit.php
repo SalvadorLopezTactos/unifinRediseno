@@ -48,7 +48,9 @@ var $useForSubpanel = true;
         $idpConfig = new IdmConfig(\SugarConfig::getInstance());
         if ($idpConfig->isIDMModeEnabled() && !$this->bean->isUpdate() &&
             !$idpConfig->isSpecialBeanAction($this->bean, $_REQUEST)) {
-            $this->showRedirectToCloudConsole($idpConfig->buildCloudConsoleUrl('userCreate'));
+            $this->showRedirectToCloudConsole(
+                $idpConfig->buildCloudConsoleUrl('userCreate', [], $GLOBALS['current_user']->id)
+            );
         }
 
         //lets set the return values
@@ -237,13 +239,17 @@ EOD
                     'region' => $tenantSrn->getRegion(),
                 ]);
                 $userSrn = $srnManager->createUserSrn($tenantSrn->getTenantId(), $this->bean->id);
-                if (empty($this->bean->user_name)) {
-                    $msg = translate('LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY', 'Users');
-                } else {
+                if ($this->bean->canBeAuthenticated()) {
                     $msg = sprintf(
                         translate('LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER', 'Users'),
-                        $idpConfig->buildCloudConsoleUrl('userProfile', [Srn\Converter::toString($userSrn)])
+                        $idpConfig->buildCloudConsoleUrl(
+                            'userProfile',
+                            [Srn\Converter::toString($userSrn)],
+                            $GLOBALS['current_user']->id
+                        )
                     );
+                } else {
+                    $msg = translate('LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_EMPLOYEE_ONLY', 'Users');
                 }
             } else {
                 $msg = translate('LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER', 'Users');

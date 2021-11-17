@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => '이 작업에 대한 드릴스루 보고서 데이터를 검색하는 동안 오류가 발생했습니다. 보고서 소유자에게 도움을 요청하십시오.',
     'LBL_CHART_NO_DRILLTHRU' => '드릴스루를 사용할 수 없음',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => '보고서 포커스 서랍',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => '목록보기는 현재 검색 조건을 충족하며 사용자가 액세스할 수 있는 모든 보고서를 표시합니다. 목록보기의 필드 열과 미리보기에서 각 보고서의 기본 세부 정보를 볼 수 있습니다. 보고서 태그를 설정하고 필터를 만들 수 있습니다. 보고서를 보려면 보고서의 이름을 클릭하거나 동작 메뉴에서 &#39;보고서 편집&#39;을 선택하여 보고서를 수정하십시오.',

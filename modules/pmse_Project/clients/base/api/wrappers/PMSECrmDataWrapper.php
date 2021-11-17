@@ -689,7 +689,7 @@ class PMSECrmDataWrapper implements PMSEObservable
                 $output = $this->retrieveEmails($filter);
                 break;
             case 'teams':
-                $output = $this->retrieveTeams($filter);
+                $output = $this->retrieveTeams($filter, $args);
                 break;
             case 'fields':
                 $output = $this->retrieveFields($filter, $moduleApi, $type, $baseModule);
@@ -715,7 +715,7 @@ class PMSECrmDataWrapper implements PMSEObservable
                 $output = $this->retrieveFields($filter);
                 break;
             case 'users':
-                $output = $this->retrieveUsers($filter);
+                $output = $this->retrieveUsers($filter, $args);
                 break;
             case 'modules':
                 $output = $this->retrieveModules($filter);
@@ -769,6 +769,10 @@ class PMSECrmDataWrapper implements PMSEObservable
                 break;
             case 'dateFields':
                 $output = $this->retrieveDateFields($args['module']);
+                $outputType = 1;
+                break;
+            case 'dateFieldsOfModule':
+                $output = $this->retrieveDateFields($args['filter'], false);
                 $outputType = 1;
                 break;
             case 'validateReclaimCase':
@@ -853,34 +857,43 @@ class PMSECrmDataWrapper implements PMSEObservable
         $ie = $this->getInboundEmailBean();
         $ie->email = $email;
 
+        // When querying person modules, we want to also be able to query by the
+        // person's full name. Since we don't store that in the DB, we need to
+        // query by concatenating the first and last name
+        $db = DBManagerFactory::getInstance();
+        $usersFullName = $db->concat('users', ['first_name', 'last_name']);
+        $contactsFullName = $db->concat('contacts', ['first_name', 'last_name']);
+        $leadsFullName = $db->concat('leads', ['first_name', 'last_name']);
+        $prospectsFullName = $db->concat('prospects', ['first_name', 'last_name']);
+
         $query = <<<SQL
 SELECT users.id, users.first_name, users.last_name, eabr.primary_address, ea.email_address, 'Users' module
 FROM users
 JOIN email_addr_bean_rel eabr ON (users.id = eabr.bean_id AND eabr.deleted=0)
 JOIN email_addresses ea ON(eabr.email_address_id = ea.id)
 WHERE (users.deleted = 0 AND eabr.primary_address = 1)
-AND (first_name LIKE :filter OR last_name LIKE :filter OR email_address LIKE :filter)
+AND (first_name LIKE :filter OR last_name LIKE :filter OR $usersFullName LIKE :filter OR email_address LIKE :filter)
 UNION ALL
 SELECT contacts.id, contacts.first_name, contacts.last_name, eabr.primary_address, ea.email_address, 'Contacts' module
 FROM contacts
 JOIN email_addr_bean_rel eabr ON(contacts.id = eabr.bean_id AND eabr.deleted=0)
 JOIN email_addresses ea ON(eabr.email_address_id = ea.id)
 WHERE (contacts.deleted = 0 AND eabr.primary_address = 1)
-AND (first_name LIKE :filter OR last_name LIKE :filter OR email_address LIKE :filter)
+AND (first_name LIKE :filter OR last_name LIKE :filter OR $contactsFullName LIKE :filter OR email_address LIKE :filter)
 UNION ALL
 SELECT leads.id, leads.first_name, leads.last_name, eabr.primary_address, ea.email_address, 'Leads' module
 FROM leads
 JOIN email_addr_bean_rel eabr ON(leads.id = eabr.bean_id AND eabr.deleted=0)
 JOIN email_addresses ea ON(eabr.email_address_id = ea.id)
 WHERE (leads.deleted = 0 AND eabr.primary_address = 1)
-AND (first_name LIKE :filter OR last_name LIKE :filter OR email_address LIKE :filter)
+AND (first_name LIKE :filter OR last_name LIKE :filter OR $leadsFullName LIKE :filter OR email_address LIKE :filter)
 UNION ALL
 SELECT prospects.id, prospects.first_name, prospects.last_name, eabr.primary_address, ea.email_address,
 'Prospects' module FROM prospects 
 JOIN email_addr_bean_rel eabr ON(prospects.id = eabr.bean_id AND eabr.deleted=0)
 JOIN email_addresses ea ON(eabr.email_address_id = ea.id)
 WHERE (prospects.deleted = 0 AND eabr.primary_address = 1)
-AND (first_name LIKE :filter OR last_name LIKE :filter OR email_address LIKE :filter)
+AND (first_name LIKE :filter OR last_name LIKE :filter OR $prospectsFullName LIKE :filter OR email_address LIKE :filter)
 UNION ALL
 SELECT accounts.id, '' first_name, accounts.name last_name, eabr.primary_address, ea.email_address, 'Accounts' module
 FROM accounts
@@ -929,9 +942,10 @@ SQL;
     /**
      * Retrieve list of Teams
      * @param string $filter
+     * @param array $args
      * @return object
      */
-    public function retrieveTeams($filter = '')
+    public function retrieveTeams($filter = '', $args = [])
     {
         $beansTeams = $this->getTeamsBean();
         $output = array();
@@ -954,6 +968,11 @@ SQL;
                     ->equals('private', 1);
             }
         }
+        if (!empty($args['key'])) {
+            $q->where()
+                ->equals('id', $args['key']);
+        }
+
 
         $q->orderBy('id', 'ASC');
         $q->select($fields);
@@ -968,15 +987,23 @@ SQL;
             }
         }
 
+        if ($filter === 'all') {
+            $output[] = [
+                'value' => 'assigned_teams',
+                'text' => translate('LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS', 'pmse_Project'),
+            ];
+        }
+
         return $output;
     }
 
     /**
      * Retrieve list of Users
      * @param string $filter
+     * @param array $args
      * @return array
      */
-    public function retrieveUsers($filter = '')
+    public function retrieveUsers($filter = '', $args = [])
     {
         $users = BeanFactory::newBean('Users');
         $teams = BeanFactory::newBean('Teams');
@@ -1003,6 +1030,11 @@ SQL;
                 ->contains('last_name', $filter)
                 ->contains('user_name', $filter);
         }
+        if (!empty($args['key'])) {
+            $q->where()
+                ->equals('id', $args['key']);
+        }
+
         $result = [];
         $rows = $q->execute();
         foreach ($rows as $row) {
@@ -1795,9 +1827,10 @@ SQL;
     /**
      * Method that returns a list of type date fields
      * @param $filter
+     * @param $includeCurrent
      * @return object
      */
-    public function retrieveDateFields($filter)
+    public function retrieveDateFields($filter, $includeCurrent = true)
     {
         if (isset($this->beanList[$filter])) {
             $newModuleFilter = $filter;
@@ -1823,10 +1856,14 @@ SQL;
                 }
             }
         }
-        $arr_Now = array();
-        $arr_Now['value'] = 'current_date_time';
-        $arr_Now['text'] = 'Current Date Time';
-        array_unshift($output, $arr_Now);
+
+        if ($includeCurrent) {
+            $arr_Now = array();
+            $arr_Now['value'] = 'current_date_time';
+            $arr_Now['text'] = 'Current Date Time';
+            array_unshift($output, $arr_Now);
+        }
+
         $res['result'] = $output;
         return $res;
     }
@@ -2228,8 +2265,8 @@ SQL;
                 $field['vname'] = 'LBL_ASSIGNED_TO';
                 $field['required'] = true;
                 break;
-            case 'created_by':
-            case 'modified_user_id':
+            case 'created_by_name':
+            case 'modified_by_name':
                 $field['type'] = 'user';
                 break;
             case 'teams':

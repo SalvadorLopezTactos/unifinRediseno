@@ -27,6 +27,28 @@ $viewdefs["base"]["view"]["dashboard-headerpane"] = array(
                     "label"     => "LBL_EDIT_BUTTON",
                 ),
 
+                [
+                    "name"      => "add_dashlet_button",
+                    "type"      => "rowaction",
+                    "label"     => "LBL_ADD_DASHLET_BUTTON",
+                    'events' => [
+                        'click' => 'button:add_dashlet_button:click',
+                    ],
+                    'acl_action' => 'edit',
+                    'disallowed_layouts' => [
+                        [
+                            // service console
+                            'name' => 'dashboard',
+                            'id' => 'c108bb4a-775a-11e9-b570-f218983a1c3e',
+                        ],
+                        [
+                            // renewals console
+                            'name' => 'dashboard',
+                            'type' => 'renewals_console',
+                        ],
+                    ],
+                ],
+
                 array(
                     "name"      => "collapse_button",
                     "type"      => "rowaction",
@@ -55,6 +77,28 @@ $viewdefs["base"]["view"]["dashboard-headerpane"] = array(
             "css_class" => "btn-danger",
             "showOn" => "edit",
         ),
+        [
+            "name"      => "add_dashlet_button_edit",
+            "type"      => "button",
+            "label"     => "LBL_ADD_DASHLET_BUTTON",
+            'events' => [
+                'click' => 'button:add_dashlet_button:click',
+            ],
+            'acl_action' => 'edit',
+            'showOn' => 'edit',
+            'allowed_layouts' => [
+                [
+                    // service console
+                    'name' => 'dashboard',
+                    'id' => 'c108bb4a-775a-11e9-b570-f218983a1c3e',
+                ],
+                [
+                    // renewals console
+                    'name' => 'dashboard',
+                    'type' => 'renewals_console',
+                ],
+            ],
+        ],
         array(
             "name"      => "save_button",
             "type"      => "button",
@@ -92,10 +136,6 @@ $viewdefs["base"]["view"]["dashboard-headerpane"] = array(
                     "type" => "dashboardtitle",
                     "name" => "name",
                     "placeholder" => "LBL_DASHBOARD_TITLE",
-                ),
-                array(
-                    "type" => "layoutbutton",
-                    "name" => "layout",
                 ),
             )
         )

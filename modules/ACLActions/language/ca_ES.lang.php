@@ -27,6 +27,7 @@ $mod_strings = array (
 'LIST_ROLES_BY_USER'=>'Crear una llista dels rols per usuari',
 'LBL_ROLES_SUBPANEL_TITLE'=>'Rols d´Usuari',
 'LBL_SEARCH_FORM_TITLE'=>'Cerca',
+'LBL_ACTION_RECORD_VIEW'=>'Vista del Registre',
 'LBL_ACTION_VIEW'=>'Veure',
 'LBL_ACTION_EDIT'=>'Edita',
 'LBL_ACTION_DELETE'=>'Esborrar',

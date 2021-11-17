@@ -11,6 +11,7 @@
  */
 $dictionary['UserSignature'] = array(
     'table' => 'users_signatures',
+    'archive' => false,
     'hidden_to_role_assignment' => true,
     'favorites' => false,
     'fields' => array(

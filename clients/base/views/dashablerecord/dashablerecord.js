@@ -71,6 +71,15 @@
     ],
 
     /**
+     * Modules to show 'Link' FAB.
+     * @property {string[]}
+     */
+    linkModules: [
+        'Contacts',
+        'Cases'
+    ],
+
+    /**
      * List of modules that should not be available as tabs
      *
      * @property {string[]}
@@ -119,7 +128,7 @@
      *
      * @property {string[]}
      */
-    _noshowFields: ['favorite', 'follow', 'badge'],
+    _noshowFields: ['favorite', 'follow', 'badge', 'status'],
 
     /**
      * Size of avatars within the dashlet toolbar.
@@ -162,6 +171,11 @@
     dataView: 'recorddashlet',
 
     /**
+     * Are we in a config drawer layout?
+     */
+    configLayout: false,
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -175,6 +189,7 @@
         this._super('initialize', [options]);
 
         this._noAccessTemplate = app.template.get(this.name + '.noaccess');
+        this._noTabsAvailableTemplate = app.template.get(`${this.name}.no-tabs-available`);
         this._recordsTemplate = app.template.get(this.name + '.records');
         this._recordTemplate = app.template.get(this.name + '.record');
         this._tabsTemplate = app.template.get(this.name + '.tabs');
@@ -196,6 +211,8 @@
             'button:save_button:click': this.saveClicked,
             'button:cancel_button:click': this.cancelClicked
         };
+
+        this.configLayout = this._inConfigLayout();
     },
 
     /**
@@ -253,13 +270,18 @@
             this._configureDashlet();
         } else if (this.meta.pseudo) {
             // re-render the pseudo-dashlet in the configuration whenever the set of selected tabs or its order changes
-            this.layout.context.on('dashablerecord:config:tablist:change', function(newTabs, resetActiveTab) {
-                newTabs = newTabs || [];
+            this.layout.context.on('dashablerecord:config:tablist:change', function(newTabs = [], resetActiveTab) {
                 var oldTabsLength = this.tabs.length;
+
                 this._initTabs(newTabs);
 
+                // Show no tabs available template, since there are no tabs in the config screen
+                if (_.size(newTabs) === 0) {
+                    return this._noTabsAvailable();
+                }
+
                 // if we removed a tab, lets reset back to the first tab
-                if (resetActiveTab || newTabs.length < oldTabsLength) {
+                if (resetActiveTab || newTabs.length !== oldTabsLength) {
                     this.setActiveTab(0);
                 }
 
@@ -299,6 +321,38 @@
             }
         });
     },
+
+    /**
+     * Initialize the SugarLogic plugin for the current model. As the dashlet is initialized,
+     * the current model is a config model which is swapped later to the actual record model.
+     * In case there are multiple tabs containing different records, we have to initialize
+     * the plugin for each model (there are 3 critical plugin inputs - the model, the collection
+     * and the fields displayed).
+     */
+    initTabSugarLogic: function() {
+        // ensure that the SugarLogic listeners are attached only once
+        if (!this.disposed && !this.model.hasSugarLogicEvents) {
+            // we may lack a collection, so we create one to be able to trigger onLoad logics
+            if (!this.collection) {
+                if (this.model.collection) {
+                    this.collection = this.model.collection;
+                } else {
+                    this.collection = app.data.createBeanCollection(this.model.module, [this.model]);
+                }
+            }
+
+            this._slCtx = this.initSugarLogic();
+            this.context.addFields(this._getDepFields());
+            this.collection.trigger('sync', this.collection, this.collection.models);
+            this.model.hasSugarLogicEvents = true;
+        }
+    },
+
+    /**
+     * Prevent shortcuts from dashablerecord overriding the shortcuts set by the main view
+     * @override
+     */
+    registerShortcuts: _.noop,
 
     /**
      * Gets the currently active tab object.
@@ -391,6 +445,9 @@
 
             var link = tab.link;
             var relateField = model.get(link);
+            if (relateField && relateField.records) {
+                relateField = relateField.records[0];
+            }
             if (relateField && relateField.id) {
                 if (tab.model) {
                     tab.model.dispose();
@@ -437,10 +494,15 @@
             }
             var link = tab.link;
             var field = _.find(moduleFields, function(mField) {
-                return mField.link === link;
+                return mField.link === link ||
+                    (mField.name === 'parent_type' && contextModel.get('parent_type').toLowerCase() === link);
             });
             if (field) {
-                fields.push(field.name);
+                if (field.name === 'parent_type') {
+                    fields.push(contextModel.get(field.name).toLowerCase());
+                } else {
+                    fields.push(field.name);
+                }
             }
         }, this);
 
@@ -546,8 +608,11 @@
         } else if (this.meta.pseudo) {
             this._updateViewToCurrentTab();
             this.render();
-            if (this.settings.get('activeTab').type === 'list' &&
-                !this.model.get('fields')) {
+
+            if (_.has(this.settings.get('activeTab'), 'type') &&
+              this.settings.get('activeTab').type === 'list' &&
+              !this.model.get('fields')
+            ) {
                 this._updateDisplayColumns();
             }
         } else {
@@ -574,6 +639,7 @@
      */
     _updateViewToCurrentTab: function() {
         var tab = this.settings.get('activeTab');
+
         if (!tab) {
             return;
         }
@@ -672,14 +738,17 @@
      * @private
      */
     _getContextModel: function() {
+        let contextModel = null;
+
         if (this._contextModel) {
-            return this._contextModel;
+            contextModel = this._contextModel;
         } else if (this._hasRowModel()) {
-            return this._contextModel = this._cloneModel(this._getRowModel());
+            contextModel = this._cloneModel(this._getRowModel());
         } else {
-            return this._contextModel = this._cloneModel(app.controller.context.get('model'));
+            contextModel = this._cloneModel(app.controller.context.get('model'));
         }
 
+        return this._contextModel = contextModel;
     },
 
     /**
@@ -799,6 +868,9 @@
         if (this.disposed || this._mode === 'config' || this._mode === 'preview' || this.meta.pseudo) {
             return;
         }
+        if (this._contextModel) {
+            this._contextModel = undefined;
+        }
         this._loadContextModel();
         this._super('loadData', [options]);
         this._loadDataForTabs(this.tabs, options);
@@ -813,7 +885,7 @@
      */
     _loadDataForTabs: function(tabs, options) {
         // don't load data on the pseudo config  or preview dashlet
-        if (this.meta.pseudo || this._mode === 'preview') {
+        if (this.meta.pseudo || this._mode === 'preview' || this.configLayout) {
             return;
         }
 
@@ -858,6 +930,8 @@
                         success: _.bind(function(model) {
                             if (self._isActiveTab(tab)) {
                                 self.render();
+                                // init SugarLogic only after fields have been rendered
+                                self.initTabSugarLogic();
                             }
                         }, this)
                     });
@@ -879,6 +953,24 @@
                 }
             });
         }
+    },
+
+    /**
+     * Util method to determine if we are in a config layout. Used to allow
+     * dashlet to render an empty record view for config displays
+     *
+     * @return {boolean} Whether we are in a config layout
+     * @private
+     */
+    _inConfigLayout: function() {
+        var context = this.context;
+        while (context) {
+            if (context.get('config-layout')) {
+                return true;
+            }
+            context = context.parent;
+        }
+        return false;
     },
 
     /**
@@ -958,6 +1050,7 @@
 
         if (tabType === 'record') {
             this._setRecordState();
+            this._setReadonlyFields();
         }
 
         this.tabContentHtml = this._getTabContentTemplate(tabType)(this);
@@ -972,6 +1065,92 @@
         this._showHideListBottom(tab);
 
         this._super('_renderHtml');
+
+        if (tabType === 'record' && this.closestComponent('omnichannel-dashboard') &&
+            this.model && this.model.get('id') && _.contains(this.linkModules, this.module)) {
+            this._showLinkFAB();
+        } else if (this.linkFAB) {
+            this.linkFAB.dispose();
+            this.linkFAB = null;
+        }
+    },
+
+    /**
+     * Show 'Link' FAB for linking this record to current AWS connection, or
+     * 'Linked' FAB if this record has already been linked.
+     * @private
+     */
+    _showLinkFAB: function() {
+        if (this.linkFAB) {
+            return;
+        }
+        var detail = app.omniConsole.getComponent('omnichannel-detail');
+        var caseModel = detail.getCaseModel();
+        var contactModel = detail.getContactModel();
+        var linked = false;
+        if ((contactModel && contactModel.get('id') === this.model.get('id')) ||
+            (caseModel && caseModel.get('id') === this.model.get('id'))) {
+            linked = true;
+        }
+        var icon = linked ? 'fa-check' : 'fa-link';
+        var label = linked ? 'LBL_OMNICHANNEL_LINKED' : this._getLinkFABLabel();
+        var style = linked ? 'linked' : 'link-to';
+        var action = linked ? '' : this.cid + '-link';
+        var linkFAB = this._createLinkFAB(icon, label, style, action);
+        if (!linked) {
+            var model = this.model;
+            linkFAB.context.on(this.cid + '-link:clicked', function() {
+                var detailPanel = app.omniConsole.getComponent('omnichannel-detail');
+                detailPanel.setModel(model);
+                linkFAB.setOptions({
+                    icon: 'fa-check',
+                    label: 'LBL_OMNICHANNEL_LINKED',
+                    style: 'linked',
+                    action: ''
+                });
+                linkFAB.render();
+            });
+        }
+        this.linkFAB = linkFAB;
+    },
+
+    /**
+     * Get label for the 'Link' FAB.
+     * @return {string}
+     * @private
+     */
+    _getLinkFABLabel: function() {
+        var ccp = app.omniConsole.getComponent('omnichannel-ccp');
+        var activeContact = ccp.getActiveContact();
+        var contactType = activeContact.getType();
+        var toModule = contactType === 'voice' ? 'Calls' : 'Messages';
+        return app.lang.get('LBL_OMNICHANNEL_LINK_TO', null, {
+            fromModule: app.lang.getModuleName(this.module).toLowerCase(),
+            toModule: app.lang.getModuleName(toModule).toLowerCase()
+        });
+    },
+
+    /**
+     * Create a 'Link' FAB.
+     * @param {string} icon
+     * @param {string} label
+     * @param {string} style
+     * @param {string} action
+     * @return {View.View}
+     * @private
+     */
+    _createLinkFAB: function(icon, label, style, action) {
+        var fab = app.view.createView({
+            type: 'extended-fab',
+            icon: icon,
+            label: label,
+            style: style,
+            action: action
+        });
+        fab.render();
+        var $dashlet = this.$el.closest('.dashlet');
+        $dashlet.append(fab.$el);
+        return fab;
     },
 
     /**
@@ -998,12 +1177,29 @@
     _setRecordState: function() {
         var tab = this._getActiveTab();
         var contextModel = this._getContextModel();
-        if (tab.model.dataFetched || this.meta.pseudo) {
+        if (tab.model.dataFetched || this.meta.pseudo || this.configLayout) {
             this.recordState = 'READY';
         } else if (contextModel.dataFetched && _.isEmpty(tab.model.get('id'))) {
             this.recordState = 'NODATA';
         } else {
             this.recordState = 'LOADING';
+        }
+    },
+
+    /**
+     * Sets all model fields in `extraNoEditFields` array if we are in a config
+     * layout, since the dashlet is for display purposes only and does not
+     * represent a record.
+     *
+     * @private
+     */
+    _setReadonlyFields: function() {
+        if (this.configLayout) {
+            var tab = this._getActiveTab();
+            var noEditFields = this.extraNoEditFields || [];
+            noEditFields.push(_.keys(tab.model.fields));
+            noEditFields = _.uniq(noEditFields);
+            this.extraNoEditFields = noEditFields;
         }
     },
 
@@ -1211,6 +1407,7 @@
             this.settings.set('tabs', configTabs);
         }
         this.settings.set('tab_list', initialTabs);
+        this.settings.set('label', 'LBL_DASHLET_RECORDVIEW_NAME');
 
         this._bindSettingsEvents();
         this._bindSaveEvents();
@@ -1277,6 +1474,17 @@
     },
 
     /**
+     * Renders the no-tabs-available template, then aborts further rendering.
+     *
+     * @return {boolean} Always returns `false`.
+     * @private
+     */
+    _noTabsAvailable: function() {
+        this.$el.html(this._noTabsAvailableTemplate());
+        return false;
+    },
+
+    /**
      * Prepare the header fields from the given panels and buttons.
      *
      * @param {Object[]} panels Record view panel metadata.
@@ -1330,6 +1538,11 @@
      */
     _getHeaderButtons: function(buttons) {
         var desiredButtons = [];
+        // If we're rendering this dashlet in a console config layout, we do NOT
+        // want edit, save, or cancel buttons on our empty dashlet
+        if (this.configLayout) {
+            return desiredButtons;
+        }
         _.each(buttons, function(button) {
             var buttonToCheck = button;
 
@@ -1485,6 +1698,13 @@
                     }
                     tab.model = app.data.createRelatedBean(contextModel, id, tab.link);
                 }
+                if (this.configLayout) {
+                    _.each(tab.meta.panels, function(panel) {
+                        _.each(panel.fields, function(field) {
+                            field.readonly = true;
+                        });
+                    });
+                }
                 this._setDataView(tab.model);
             }
             this.tabs[index] = tab;
@@ -1613,7 +1833,7 @@
             return this._baseModule;
         }
 
-        return this. _getModuleFromLinkField(this._getBaseModuleFields()[linkName]);
+        return this._getModuleFromLinkField(this._getBaseModuleFields()[linkName]);
     },
 
     /**
@@ -1954,5 +2174,19 @@
         });
 
         return columns;
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        if (this.linkFAB) {
+            if (this.linkFAB.context) {
+                this.linkFAB.context.off('link:clicked');
+            }
+            this.linkFAB.dispose();
+            this.linkFAB = null;
+        }
+        this._super('_dispose');
     }
 })

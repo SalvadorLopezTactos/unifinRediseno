@@ -11,7 +11,10 @@
  */
 --}}
 <div class="dropdown">
-<a class="dropdown-toggle btn btn-invisible btn-link" data-toggle="dropdown" href="javascript:void(0);">{{value}}<i class="fa fa-caret-down"></i></a>
+    {{partial 'dashboardtitle' this value=value dir=dir hasEditAccess=hasEditAccess name=name type=type}}
+    <a class="dropdown-toggle btn btn-invisible btn-link" data-toggle="dropdown" href="javascript:void(0);">
+        <i class="fa fa-caret-down"></i>
+    </a>
 <ul class="dropdown-menu">
     {{!
         FIXME TY-1464: Don't hardcode the "Dashboards" module.

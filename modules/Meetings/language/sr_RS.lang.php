@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Kontrolna tabla liste sastanaka',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa sastanaka',
+    'LBL_LEAD_GUESTS' => 'Potencijalni gosti',
+    'LBL_CONTACT_GUESTS' => 'Gosti kontakata',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za sastanke',
 
 	'ERR_DELETE_RECORD' => 'Morate navesti broj zapisa da bi obrisali sastanak.',
 	'LBL_ACCEPT_THIS'=>'Prihvati?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Smer',
 	'LBL_LIST_DUE_DATE'=>'Krajnji rok',
 	'LBL_LIST_FORM_TITLE' => 'Lista sastanaka',
-	'LBL_LIST_MY_MEETINGS' => 'Moji sastanci',
+    'LBL_LIST_MY_MEETINGS' => 'Moji sastanci',
     'LBL_MY_SCHEDULED_MEETINGS' => 'Moji Zakazani Sastanci',
+    'LBL_GUEST_MEETINGS' => 'Moji sastanci u ulozi gosta',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Zakazani sastanci u ulozi gosta',
 	'LBL_LIST_RELATED_TO' => 'Povezano sa',
 	'LBL_LIST_STATUS'=>'Status',
 	'LBL_LIST_SUBJECT' => 'Naslov',

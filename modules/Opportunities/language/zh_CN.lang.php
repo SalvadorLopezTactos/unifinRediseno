@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => '机会列表仪表板',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => '机会记录仪表板',
     'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => '商业机会详细信息',
+    'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => '商业机会焦点抽屉',
+    'LBL_RENEWAL_OPPORTUNITY' => '续订商业机会',
 
     'LBL_MODULE_NAME' => '商业机会',
     'LBL_MODULE_NAME_SINGULAR' => '商业机会',
@@ -77,7 +79,7 @@ $mod_strings = array(
     'LBL_TYPE' => '类型：',
     'LBL_CAMPAIGN' => '市场活动：',
     'LBL_NEXT_STEP' => '下一步：',
-    'LBL_SERVICE_START_DATE' => 'Service Start Date',
+    'LBL_SERVICE_START_DATE' => '服务开始日期',
     'LBL_LEAD_SOURCE' => '潜在客户来源',
     'LBL_SALES_STAGE' => '销售阶段',
     'LBL_SALES_STATUS' => '状态',
@@ -144,6 +146,7 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE' => '提交阶段',
     'LBL_COMMIT_STAGE_FORECAST' => '预测',
     'LBL_WORKSHEET' => '工作表',
+    'LBL_PURCHASED_LINE_ITEMS' => '已购买单项',
 
     'LBL_RENEWAL' => '续订',
     'LBL_RENEWAL_OPPORTUNITIES' => '续订商业机会',
@@ -151,9 +154,9 @@ $mod_strings = array(
     'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => '续订父 ID',
     'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
 
-    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
-    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
-    'LBL_WIDGET_AMOUNT' => 'Amount',
+    'LBL_WIDGET_SALES_STAGE' => '销售阶段',
+    'LBL_WIDGET_DATE_CLOSED' => '预期结束日期',
+    'LBL_WIDGET_AMOUNT' => '金额',
 
     'TPL_RLI_CREATE' => '商业机会必须拥有关联的营收单项。',
     'TPL_RLI_CREATE_LINK_TEXT' => '新建营收单项。',
@@ -162,12 +165,16 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '总营收单项的数量',
     'LBL_CLOSED_RLIS' => '已完成收入线项目的数量',
+    'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => '开放服务弹性持续时间营收单项 #',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => '您不能删除包含已完成营收单项的商业机会',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => '所选择的记录中有一个或多个包含已完成营收单项，因此不能删除。',
     'LBL_INCLUDED_RLIS' => '包含的营收单项数量',
-    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => '更新打开',
+    'LBL_SERVICE_START_DATE_INVALID' => '任何开放附加营收单项的服务开始日期不能设置于服务结束日期之后。',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => '报价',
+    'LBL_FILTER_OPPORTUNITY_TEMPLATE' => '动态账户带来的商业机会',
+
 
     // Config
     'LBL_OPPS_CONFIG_VIEW_BY_LABEL' => '商业机会等级',
@@ -200,7 +207,7 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => '在您第一次执行此变更之后，系统会为每个现有的 {{module_name}} 在背景中创建营收单项记录。营收单项完成并可用后，系统会发送通知至您保存在用户资料中的电子邮件地址。请注意：您的实例必须通过“管理 > 电子邮件设置”配置为可发送电子邮件，才可能完成发送通知的动作。',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} 模块允许您全程追踪个人销售。每个 {{module_name}} 记录都代表一次预期销售，包括相关销售数据，且与 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。{{module_name}} 在最终标记为“谈成结束”或“丢单结束”前通常需要经过几个销售阶段。可使用 Sugar 的 {{forecasts_singular_module}}ing 模块来了解并预测销售趋势以及集中精力完成销售限额，对 {{plural_module_name}} 进行进一步利用。',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} 模块允许您全程追踪个人销售。每个 {{module_name}} 记录都代表一次预期销售，包括相关销售数据，且与 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。 一个 {{module_name}} 通常会经过几个销售阶段，直到它被标记为“Closed Won”或“Closed Lost”。通过使用 Sugar 的 {{forecasts_singular_module}}ing 模块可以进一步利用 {{plural_module_name}}，以了解和预测销售趋势以及集中精力实现销售配额。',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => '{{plural_module_name}} 模块允许您全程追踪个人销售和这些销售的明细项目。每个 {{module_name}} 记录都代表一次预期销售，包括相关销售数据，且与 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。
@@ -231,5 +238,10 @@ $mod_strings = array(
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => '我的商业机会',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "我的团队的商业机会",
 
-    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => '无法更改 {{fieldName}}，因为此 {{moduleSingular}} 没有开放的行项目。',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '机会互动',
+
+    // AI Predict
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => '商业机会关闭预测',
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => '查看特定商业机会的预测详细信息',
 );

@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'Nom Utilisateur',
 	'LBL_RESTORE_BUTTON_LABEL'=>'Réinitialiser',
 	'LBL_SYSTEM_SETTINGS' => 'Paramètres Système',
-	'LBL_SKYPEOUT_ON_DESC' => 'Autorise les utilisateurs à cliquer sur les numéros de téléphone pour appeler les contacts par SkypeOut&reg;. Le numéro doit être formaté correctement pour utiliser cette fonctionnalité. Le format est "+" "Code Pays" "numéro de téléphone" (exemple pour la France : +33427705370). Pour plus d&#39;informations sur le format visitez <a href="http://www.skype.com/intl/fr/help/" target="skype">le site skype&reg;</a>',
-	'LBL_SKYPEOUT_ON' => 'Activer l&#39;intégration de SkypeOut&reg; ?',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut&reg;',
+    'LBL_DIALOUT_ON_DESC' => 'Permet aux utilisateurs de cliquer sur des numéros de téléphone pour les appeler en utilisant leur logiciel de couplage téléphonie-informatique (CTI) par défaut.',
+    'LBL_DIALOUT_ON' => 'Activer la fonction Cliquer pour appeler',
+    'LBL_DIALOUT_TITLE' => 'Appels sortants',
     'LBL_TWEETTOCASE_ON_DESC' => 'Autorisé les utilisateurs à créer des tickets depuis des Tweets',
     'LBL_TWEETTOCASE_ON' => 'Activer l’intégration Tweet® vers ticket',
     'LBL_TWEETTOCASE_TITLE' => 'Tweet® vers ticket',
@@ -363,7 +363,7 @@ $mod_strings = array (
     'JS_ALERT_PDF_WRONG_EXTENSION' => 'Ce fichier n&#39;a pas une extension autorisées.',
     'LBL_PDF_INSTRUCTIONS' => 'Instructions',
     'PDF_INSTRUCTIONS_ADD_FONT' => <<<BSOFR
-Fonts supported by SugarPDF :
+Polices prises en charge par SugarPDF :
 <ul>
 <li>TrueTypeUnicode (UTF-8 Unicode)</li>
 <li>OpenTypeUnicode</li>
@@ -373,11 +373,11 @@ Fonts supported by SugarPDF :
 <li>CID-0</li>
 </ul>
 <br>
-If you choose to not embed your font in the PDF, the generated PDF file will be lighter but a substitution will be use if the font is not available in the system of your reader.
+Si vous choisissez de ne pas intégrer votre police dans le PDF, le fichier PDF généré sera plus léger mais une substitution sera utilisée si la police n'est pas disponible dans le système de votre lecteur.
 <br><br>
-Adding a PDF font to SugarCRM requires to follow steps 1 and 2 of the TCPDF Fonts documentation available in the "DOCS" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>The pfm2afm and ttf2ufm utils are available in fonts/utils in the TCPDF package that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>Load the metric file generated in step 2 and your font file below.
+L'ajout d'une police PDF à SugarCRM nécessite de suivre les étapes 1 et 2 de la documentation sur les polices TCPDF disponible dans la section "DOCS" du site web <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF </a>.
+<br><br>Les utils pfm2afm et ttf2ufm sont disponibles dans les polices/utils du paquet TCPDF que vous pouvez télécharger dans la rubrique "TÉLÉCHARGEMENT" du <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">site web TCPDF</a>.
+<br><br>Chargez le fichier métrique généré à l'étape 2 et votre fichier de police ci-dessous.
 BSOFR
 ,
     'ERR_MISSING_CIDINFO' => 'Le champ Information CID Information ne peut être vide.',
@@ -428,6 +428,9 @@ BSOFR
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Le module de Rapports est indisponible pour la vue navigateur mobile.',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => 'La longueur maximale doit être supérieure à la longueur minimale',
+    'ERR_MIN_LENGTH_NEGATIVE' => 'La longueur minimale doit être une valeur positive',
+    'ERR_MAX_LENGTH_NEGATIVE' => 'La longueur maximale doit être une valeur positive',
     'ERR_EMPTY_SAML_LOGIN' => 'L&#39;URL de login SAML ne peut pas être vide',
     'ERR_EMPTY_SAML_CERT' => 'Le certificat SAML ne peut être vide',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'L&#39;ID d&#39;entité SAML ne peut pas être vide',
@@ -441,9 +444,6 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Flux d&#39;activité',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Activer les flux d&#39;activité',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Active les flux d&#39;activité pour l&#39;application',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Activer le contenu supplémentaire de l&#39;écran de connexion',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Sauvegarde automatique des définitions processus',

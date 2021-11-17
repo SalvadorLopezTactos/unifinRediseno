@@ -83,6 +83,7 @@ class PMSEEndSendMessageEvent extends PMSEEndEvent
      */
     public function run($flowData, $bean = null, $externalAction = '', $arguments = array())
     {
+        $this->emailHandler->setFlowData($flowData);
         $this->emailHandler->queueEmail($flowData);
 
         // since all the actions from now on are exactly the same as the PMSEEndEvent

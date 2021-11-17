@@ -133,7 +133,7 @@
         var pageNumber = options && options.pageNum || 1;
         var offset = (pageNumber - 1) * this.searchOptions.max_num;
         var params = _.extend({}, this.searchOptions, {offset: offset});
-        var url = app.api.buildURL('portalsearch', null, null, params);
+        var url = app.api.buildURL('genericsearch', null, null, params);
         app.api.call('read', url, null, {
             success: _.bind(function(result) {
                 if (this.disposed) {
@@ -183,6 +183,8 @@
      * @private
      */
     _truncate: function(text) {
+        text = text || '';
+
         if (text.length > this.maxChars) {
             var cut = text.substring(0, this.maxChars);
             // cut at a full word

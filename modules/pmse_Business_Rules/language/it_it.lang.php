@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Regole Flussi',
   'LBL_MODULE_NAME_SINGULAR' => 'Regole Flusso',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Regole flussi Focus Drawer',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Dashboard dei record delle regole flussi',
   'LBL_RST_UID' => 'ID Business Rule',
   'LBL_RST_TYPE' => 'Tipo Business Rule',
   'LBL_RST_DEFINITION' => 'Definizione Business Rule',

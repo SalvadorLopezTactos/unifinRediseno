@@ -10,11 +10,18 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\PackageManager\Entity\PackageManifest;
+use Sugarcrm\Sugarcrm\PackageManager\Exception\PackageManifestException;
+use Doctrine\DBAL\DBALException;
 
-
-// The history of upgrades on the system
+/**
+ * External module class
+ */
 class UpgradeHistory extends SugarBean
 {
+    const STATUS_STAGED = 'staged';
+    const STATUS_INSTALLED = 'installed';
+
     var $new_schema = true;
     var $module_dir = 'Administration';
 
@@ -26,12 +33,58 @@ class UpgradeHistory extends SugarBean
     var $version;
     var $status;
     var $date_entered;
+
+    /**
+     * @var string
+     */
+    public $date_modified;
+
     var $name;
     var $description;
     var $id_name;
-    var $manifest;
+
+    /**
+     * serialized base_64_encoded package manifest
+     * @var string
+     */
+    public $manifest;
+
+    /**
+     * prepared package manifest
+     * @var PackageManifest
+     */
+    private $packageManifest;
+
+    /**
+     * serialized base_64_encoded package patch
+     * @var string
+     */
     public $patch;
-    var $enabled;
+
+    /**
+     * is package deleted?
+     * @var string
+     */
+    public $enabled;
+
+    /**
+     * is upgrade history deleted?
+     * @var bool
+     */
+    public $deleted;
+
+    /**
+     * published date provided by package manifest. Saved as is.
+     * @var string
+     */
+    public $published_date;
+
+    /**
+     * Is package uninstallable;
+     * @var bool
+     */
+    public $uninstallable;
+
     var $tracker_visibility = false;
     var $table_name = "upgrade_history";
     var $object_name = "UpgradeHistory";
@@ -39,58 +92,13 @@ class UpgradeHistory extends SugarBean
     var $column_fields = Array( "id", "filename", "md5sum", "type", "version", "status", "date_entered" );
     var $disable_custom_fields = true;
 
-    function delete()
-    {
-        $this->db->query( "delete from " . $this->table_name . " where id = " . $this->db->quoted($this->id));
-    }
-
+    /**
+     * UpgradeHistory constructor.
+     */
     public function __construct()
     {
         parent::__construct();
         $this->disable_row_level_security = true;
-    }
-
-    function getAllOrderBy($orderBy){
-        $query = "SELECT id FROM " . $this->table_name . " ORDER BY ".$orderBy;
-        return $this->getList($query);
-    }
-    /**
-     * Given a name check if it exists in the table
-     * @param name    the unique key from the manifest
-     * @param id      the id of the item you are comparing to
-     * @return upgrade_history object if found, null otherwise
-     */
-    function checkForExisting($patch_to_check){
-        $uh = new UpgradeHistory();
-        if($patch_to_check != null){
-
-            if(empty($patch_to_check->id_name)){
-                $where = " WHERE name = '$patch_to_check->name' ";
-            }else{
-                $where = " WHERE id_name = '$patch_to_check->id_name' ";
-            }
-
-            if(!empty($patch_to_check->id)){
-                $where .= "  AND id != '$patch_to_check->id'  ";
-            }else{
-                $where .= "  AND id is not null  ";
-            }
-
-            $query = "SELECT id FROM " . $this->table_name . " ". $where;
-
-            $result = $uh->db->query($query);
-            if(empty($result)){
-                return null;
-            }
-            $row = $uh->db->fetchByAssoc($result);
-            if(empty($row)){
-                return null;
-            }
-            if(!empty($row['id'])){
-                return $uh->retrieve($row['id']);
-            }
-        }
-        return null;
     }
 
     /**
@@ -101,9 +109,33 @@ class UpgradeHistory extends SugarBean
     {
         $packagePatch = [];
         if (!empty($this->patch)) {
-            $packagePatch = unserialize(base64_decode($this->patch));
+            $packagePatch = unserialize(base64_decode($this->patch), ['allowed_classes' => false]);
         }
         return $packagePatch;
+    }
+
+    /**
+     * return prepared package manifest
+     * @return PackageManifest
+     * @throws PackageManifestException
+     */
+    public function getPackageManifest(): PackageManifest
+    {
+        if (!$this->packageManifest) {
+            $manifest = unserialize(base64_decode($this->manifest), ['allowed_classes' => false]);
+            // Previous manifest might be saved with empty string instead of array
+            foreach (['manifest', 'installdefs', 'upgrade_manifest'] as $key) {
+                if (empty($manifest[$key]) || !is_array($manifest[$key])) {
+                    $manifest[$key] = [];
+                }
+            }
+            $this->packageManifest = new PackageManifest(
+                $manifest['manifest'],
+                $manifest['installdefs'],
+                $manifest['upgrade_manifest']
+            );
+        }
+        return $this->packageManifest;
     }
 
     /**
@@ -116,187 +148,263 @@ class UpgradeHistory extends SugarBean
     }
 
     /**
-     * Check if this is an upgrade, if it is then return the latest version before this installation
+     * is package uninstallable?
+     * @return bool
      */
-    public function determineIfUpgrade($id_name, $version)
+    public function isPackageUninstallable(): bool
     {
-        $stmt = $this->db->getConnection()
-            ->executeQuery(
-                "SELECT id, version FROM {$this->table_name} WHERE id_name = ? ORDER BY date_entered DESC",
-                [$id_name]
-            );
-        $temp_version = 0;
-        $id = '';
-        foreach ($stmt as $row) {
-            if (!$this->is_right_version_greater(explode('.', $row['version']), explode('.', $temp_version))) {
-                $temp_version = $row['version'];
-                $id = $row['id'];
-            }
-        }
-        if ($this->is_right_version_greater(explode('.', $temp_version), explode('.', $version), false)) {
-            return array('id' => $id, 'version' => $temp_version);
+        return intval($this->uninstallable) === 1;
+    }
+
+    /**
+     * get installed packages by type
+     * @param string $type
+     * @return array
+     * @throws SugarQueryException
+     */
+    public function getInstalledPackagesByType(string $type): array
+    {
+        $query = new SugarQuery();
+        $query->from($this);
+        $query->where()
+            ->equals('status', self::STATUS_INSTALLED)
+            ->equals('type', $type);
+        return $this->fetchFromQuery($query);
+    }
+
+    /**
+     * return all packages
+     * @return SugarBean[]
+     * @throws SugarQueryException
+     */
+    public function getPackages(): array
+    {
+        $query = new SugarQuery();
+        $query->from($this);
+        $query->orderBy('date_entered');
+        return $this->fetchFromQuery($query);
+    }
+
+    /**
+     * return all packages by type
+     * @param string $type
+     * @return SugarBean[]
+     * @throws SugarQueryException
+     */
+    public function getPackagesByType(string $type): array
+    {
+        $query = new SugarQuery();
+        $query->from($this);
+        $query->where()->equals('type', $type);
+        $query->orderBy('date_entered');
+        return $this->fetchFromQuery($query);
+    }
+
+    /**
+     * return module packages by status
+     * @param string $status
+     * @return SugarBean[]
+     * @throws SugarQueryException
+     */
+    public function getModulePackagesByStatus(string $status): array
+    {
+        $query = new SugarQuery();
+        $query->from($this);
+        $query->where()->equals('type', PackageManifest::PACKAGE_TYPE_MODULE);
+        $query->where()->equals('status', $status);
+        return $this->fetchFromQuery($query);
+    }
+
+    /**
+     * find all packages by md5
+     * @param string $md5Sum
+     * @param array $queryOptions
+     * @return SugarBean[]
+     * @throws SugarQueryException
+     */
+    public function findByMd5(string $md5Sum, array $queryOptions = []): array
+    {
+        $query = new SugarQuery();
+        $query->from($this, $queryOptions);
+        $query->where()->equals('md5sum', $md5Sum);
+        return $this->fetchFromQuery($query);
+    }
+
+    /**
+     * retrieve by MD5
+     * @param string $md5Sum
+     * @param array $queryOptions
+     * @return SugarBean|null
+     * @throws SugarQueryException
+     */
+    public function retrieveByMd5(string $md5Sum, array $queryOptions = []):? SugarBean
+    {
+        $result = $this->findByMd5($md5Sum, $queryOptions);
+        if (!empty($result)) {
+            return array_shift($result);
         }
         return null;
     }
 
-    function getAll()
+    /**
+     * retrieve upgrade history by id_name
+     * @param string $idName
+     * @return SugarBean|null
+     * @throws SugarQueryException
+     */
+    public function retrieveByIdName(string $idName):? SugarBean
     {
-        $query = "SELECT id FROM " . $this->table_name . " ORDER BY date_entered desc";
-        return $this->getList($query);
-    }
-
-    function getList($query){
-        return( parent::build_related_list( $query, $this ) );
-    }
-
-    function findByMd5( $var_md5 )
-    {
-        $query = "SELECT id FROM " . $this->table_name . " where md5sum = '$var_md5'";
-        return( parent::build_related_list( $query, $this ) );
-    }
-    public function findInstalledVersion($idName)
-    {
-        $uhTable = $this->table_name;
-        $query = "SELECT * FROM {$uhTable} where id_name = ? AND status = 'installed'";
-        $stmt = $this->db->getConnection()->executeQuery($query, [$idName]);
-        $return = $stmt->fetch();
-
-        return $return;
-    }
-
-    function UninstallAvailable($patch_list, $patch_to_check)
-    {
-        //before we even go through the list, let us try to see if we find a match.
-        $history_object = $this->checkForExisting($patch_to_check);
-        if($history_object != null){
-            if((!empty($history_object->id_name) && !empty($patch_to_check->id_name) && strcmp($history_object->id_name,  $patch_to_check->id_name) == 0) || strcmp($history_object->name,  $patch_to_check->name) == 0){
-                //we have found a match
-                //if the patch_to_check version is greater than the found version
-                return ($this->is_right_version_greater(explode('.', $history_object->version), explode('.', $patch_to_check->version)));
-            }else{
-                return true;
-            }
+        $query = new SugarQuery();
+        $query->from($this);
+        $query->where()->equals('id_name', $idName);
+        $query->limit(1);
+        $result = $this->fetchFromQuery($query);
+        if (!empty($result)) {
+            return array_shift($result);
         }
-        //we will only go through this loop if we have not found another UpgradeHistory object
-        //with a matching unique_key in the database
-        foreach($patch_list as $more_recent_patch)
-        {
-            if($more_recent_patch->id == $patch_to_check->id)
-                break;
-
-            //we will only resort to checking the files if we cannot find the unique_keys
-            //or the unique_keys do not match
-            $patch_to_check_backup_path    = clean_path(remove_file_extension(from_html($patch_to_check->filename))).'-restore';
-            $more_recent_patch_backup_path = clean_path(remove_file_extension(from_html($more_recent_patch->filename))).'-restore';
-            $patch_to_check_timestamp = TimeDate::getInstance()->fromDb($patch_to_check->date_entered)->getTimestamp();
-            $more_resent_patch_timestamp =
-                TimeDate::getInstance()->fromDb($more_recent_patch->date_entered)->getTimestamp();
-            if (
-            ($more_resent_patch_timestamp >= $patch_to_check_timestamp)
-            && $this->foundConflict($patch_to_check_backup_path, $more_recent_patch_backup_path)
-            )
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    function foundConflict($check_path, $recent_path)
-    {
-        if(is_file($check_path))
-        {
-            if(file_exists($recent_path))
-                return true;
-            else
-                return false;
-        }
-        elseif(is_dir($check_path))
-        {
-            $status = false;
-
-            $d = dir( $check_path );
-            while( $f = $d->read() )
-            {
-                if( $f == "." || $f == ".." )
-                    continue;
-
-                $status = $this->foundConflict("$check_path/$f", "$recent_path/$f");
-
-                if($status)
-                    break;
-            }
-
-            $d->close();
-            return( $status );
-        }
-
-        return false;
+        return null;
     }
 
     /**
-     * Given a left version and a right version, determine if the right hand side is greater
-     *
-     * @param left           the client sugar version
-     * @param right          the server version
-     *
-     * return               true if the right version is greater or they are equal
-     *                      false if the left version is greater
+     * find all matches by source names upgrade history
+     * @param UpgradeHistory $source
+     * @return array
+     * @throws SugarQueryException
      */
-    function is_right_version_greater($left, $right, $equals_is_greater = true){
-        if(count($left) == 0 && count($right) == 0){
-            return $equals_is_greater;
+    public function findMatchesByName(UpgradeHistory $source): array
+    {
+        if (empty($source->id_name) && empty($source->name)) {
+            return [];
         }
-        else if(count($left) == 0 || count($right) == 0){
-            return true;
+
+        $query = new SugarQuery();
+        $query->from($this);
+
+        if (!empty($source->id_name)) {
+            $query->where()->equals('id_name', $source->id_name);
+        } else {
+            $query->where()->equals('name', $source->name);
         }
-        else if($left[0] == $right[0]){
-            array_shift($left);
-            array_shift($right);
-            return $this->is_right_version_greater($left, $right, $equals_is_greater);
+
+        if (!empty($source->id)) {
+            $query->where()->notEquals('id', $source->id);
         }
-        else if($left[0] < $right[0]){
-           return true;
-        }
-        else
-            return false;
+
+        return $this->fetchFromQuery($query);
     }
 
     /**
-     * Given an array of id_names and versions, check if the dependencies are installed
-     *
-     * @param dependencies	an array of id_name, version to check if these dependencies are installed
-     * 						on the system
-     *
-     * @return not_found	an array of id_names that were not found to be installed on the system
+     * Given a name check if it exists in the table
+     * @param UpgradeHistory $source
+     * @return null|UpgradeHistory
+     * @throws SugarQueryException
      */
-    function checkDependencies($dependencies = array()){
-        $not_found = array();
-        foreach($dependencies as $dependent){
-            if (empty($dependent['id_name']) || empty($dependent['version'])) {
+    public function checkForExisting(UpgradeHistory $source):? UpgradeHistory
+    {
+        $result = $this->findMatchesByName($source);
+        if (!empty($result)) {
+            return array_shift($result);
+        }
+        return null;
+    }
+
+    /**
+     * Return upgrade history data as array
+     * @return array
+     */
+    public function getData(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => (string) $this->name,
+            'type' => (string) $this->type,
+            'status' => (string) $this->status,
+            'description' => (string) $this->description,
+            'version' => (string) $this->version,
+            'published_data' => (string) $this->published_date,
+            'enabled' => $this->isPackageEnabled(),
+            'uninstallable' => $this->isPackageUninstallable(),
+            'file' => $this->id,
+            'file_install' => $this->id,
+            'unFile' => $this->id,
+        ];
+    }
+
+    /**
+     * return list of not installed dependencies
+     * @return array
+     * @throws PackageManifestException
+     * @throws DBALException
+     * @throws Exception
+     */
+    public function getListNotInstalledDependencies(): array
+    {
+        $result = [];
+        $requiredDependencies = $this->getPackageManifest()->getManifestValue('dependencies', []);
+
+        $conn = $this->db->getConnection();
+        $stmt = $conn->prepare(sprintf(
+            'SELECT version FROM %s WHERE id_name = ? AND status = ? AND deleted = 0',
+            $this->table_name,
+        ));
+
+        foreach ($requiredDependencies as $dependency) {
+            if (empty($dependency['id_name']) || empty($dependency['version'])) {
                 continue;
             }
-            $found = false;
-            $query = "SELECT id FROM $this->table_name WHERE id_name = " . $this->db->quoted($dependent['id_name']);
-            $matches = $this->getList($query);
-            if(0 != sizeof($matches)){
-                foreach($matches as $match){
-                    if (version_compare($match->version, $dependent['version'], '>=')) {
-                        $found = true;
-                        break;
-                    }//fi
-                }//rof
-            }//fi
-            if(!$found){
-                $not_found[] = $dependent['id_name'];
-            }//fi
-        }//rof
-        return $not_found;
-    }
-    function retrieve($id = -1, $encode=true,$deleted=true) {
-        return parent::retrieve($id,$encode,false);  //ignore the deleted filter. the table does not have the deleted column in it.
+            $stmt->execute([$dependency['id_name'], self::STATUS_INSTALLED]);
+            $isRequiredVersionInstalled = false;
+            while ($row = $stmt->fetch()) {
+                if (version_compare($row['version'], $dependency['version'], '>=')) {
+                    $isRequiredVersionInstalled = true;
+                    break;
+                }
+            }
+            if (!$isRequiredVersionInstalled) {
+                $result[] = $dependency['id_name'];
+            }
+        }
+        return $result;
     }
 
+    /**
+     * Get previous installed version for staged upgrade history
+     * @return UpgradeHistory|null
+     * @throws SugarQueryException
+     */
+    public function getPreviousInstalledVersion():? UpgradeHistory
+    {
+        if ($this->status === self::STATUS_INSTALLED) {
+            return null;
+        }
+
+        $query = new SugarQuery();
+        $query->from($this);
+        $query->where()
+            ->equals('id_name', $this->id_name)
+            ->equals('status', self::STATUS_INSTALLED);
+        $query->orderBy('date_entered', 'DESC');
+
+        /** @var UpgradeHistory[] $versions */
+        $versions = $this->fetchFromQuery($query);
+        if (empty($versions)) {
+            return null;
+        }
+
+        $previousInstalled = array_shift($versions);
+        foreach ($versions as $version) {
+            if (version_compare($version->version, $previousInstalled->version, '>')) {
+                $previousInstalled = $version;
+            }
+        }
+        return $previousInstalled;
+    }
+
+    /**
+     * @deprecated please use mark_deleted
+     */
+    public function delete(): void
+    {
+        $this->mark_deleted($this->id);
+    }
 }
-?>

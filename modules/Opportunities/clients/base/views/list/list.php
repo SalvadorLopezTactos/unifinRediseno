@@ -36,12 +36,71 @@ $viewdefs['Opportunities']['base']['view']['list'] = array(
                     'default' => true,
                     'sortable' => true,
                 ),
-                array(
+                [
+                    'name' => 'date_closed',
+                    'type' => 'date-cascade',
+                    'label' => 'LBL_DATE_CLOSED',
+                    'enabled' => true,
+                    'default' => true,
+                    'disable_field' => [
+                        'total_revenue_line_items',
+                        'closed_revenue_line_items',
+                    ],
+                ],
+                [
+                    'name' => 'sales_status',
+                    'label' => 'LBL_SALES_STATUS',
+                    'default' => true,
+                    'enabled' => true,
+                    'type' => 'enum',
+                ],
+                [
                     'name' => 'sales_stage',
+                    'type' => 'enum-cascade',
                     'label' => 'LBL_LIST_SALES_STAGE',
                     'enabled' => true,
                     'default' => true,
+                    'disable_field' => array(
+                        'total_revenue_line_items',
+                        'closed_revenue_line_items',
+                    ),
+                ],
+                array(
+                    'name' => 'service_start_date',
+                    'type' => 'date-cascade',
+                    'label' => 'LBL_SERVICE_START_DATE',
+                    'disable_field' => 'service_open_revenue_line_items',
+                    'related_fields' => array(
+                        'service_open_revenue_line_items',
+                    ),
+                    'default' => false,
                 ),
+                [
+                    'name' => 'service_duration',
+                    'type' => 'fieldset-cascade',
+                    'label' => 'LBL_SERVICE_DURATION',
+                    'inline' => true,
+                    'show_child_labels' => false,
+                    'css_class' => 'service-duration-field',
+                    'fields' => [
+                        [
+                            'name' => 'service_duration_value',
+                            'label' => 'LBL_SERVICE_DURATION_VALUE',
+                        ],
+                        [
+                            'name' => 'service_duration_unit',
+                            'label' => 'LBL_SERVICE_DURATION_UNIT',
+                        ],
+                    ],
+                    'orderBy' => 'service_duration_unit',
+                    'related_fields' => [
+                        'service_duration_value',
+                        'service_duration_unit',
+                        'service_open_flex_duration_rlis',
+                    ],
+                    'disable_field' => 'service_open_flex_duration_rlis',
+                    'default' => false,
+                ],
                 array(
                     'name' => 'commit_stage',
                     'enabled' => true,
@@ -82,12 +141,6 @@ $viewdefs['Opportunities']['base']['view']['list'] = array(
                 array(
                     'name' => 'probability',
                     'label' => 'LBL_PROBABILITY',
-                    'enabled' => true,
-                    'default' => true,
-                ),
-                array(
-                    'name' => 'date_closed',
-                    'label' => 'LBL_DATE_CLOSED',
                     'enabled' => true,
                     'default' => true,
                 ),

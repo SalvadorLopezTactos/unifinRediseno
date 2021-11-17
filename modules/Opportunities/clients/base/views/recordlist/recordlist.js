@@ -33,5 +33,5 @@
         app.utils.hideForecastCommitStageField(options.meta.panels);
 
         return options;
-    }
+    },
 })

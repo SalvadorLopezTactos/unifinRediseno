@@ -272,7 +272,14 @@
             });
 
             this.setTabContent(bean);
+            this.setFilterableFields(bean);
             this.addValidationTasks(bean);
+
+            bean.on('change:columns', function() {
+                this.setTabContent(bean, true);
+                this.setSortValues(bean);
+            }, this);
+
             this.collection.add(bean);
         }
 
@@ -280,20 +287,35 @@
     },
 
     /**
+     * Sets the filterable fields
+     * @param bean
+     */
+    setFilterableFields: function(bean) {
+        var module = bean.get('enabled_module');
+        var filterableFields = app.data.getBeanClass('Filters').prototype.getFilterableFields(module);
+        bean.set('filterableFields', filterableFields);
+    },
+
+    /**
      * Sets the tab content for the module on the bean
      *
-     * @param {Object} bean to add to the collection
+     * @param {Object} bean to edit/add to the collection
+     * @param {boolean} update Flag to show if it's the updating of bean
      */
-    setTabContent: function(bean) {
+    setTabContent: function(bean, update) {
+        update = update || false;
+
         var tabContent = {};
         var module = bean.get('enabled_module');
-        var multiLineFields = this._getMultiLineFields(module);
+        var multiLineFields = update ?
+            this.getColumns(bean) :
+            this._getMultiLineFields(module);
 
         // Set the information about the tab's fields, including which fields
         // can be used for sorting
         var fields = {};
         var sortFields = {};
-        var nonSortableTypes = ['id', 'relate'];
+        var nonSortableTypes = ['id', 'relate', 'widget', 'assigned_user_name'];
         _.each(multiLineFields, function(field) {
             if (_.isObject(field) && app.acl.hasAccess('read', module, null, field.name)) {
                 // Set the field information
@@ -312,6 +334,57 @@
         tabContent.sortFields = sortFields;
 
         bean.set('tabContent', tabContent);
+        bean.trigger('change:tabContent');
+    },
+
+    /**
+     * Sets values of the sortable fields
+     *
+     * @param {Object} bean
+     */
+    setSortValues: function(bean) {
+        const sortValue1 = bean.get('order_by_primary');
+        const sortValue2 = bean.get('order_by_secondary');
+        const columns = this.getColumns(bean);
+
+        if (sortValue2 && !columns[sortValue2]) {
+            bean.set('order_by_secondary', '');
+        }
+
+        if (sortValue1 && !columns[sortValue1]) {
+            if (sortValue2) {
+                bean.set('order_by_primary', sortValue2);
+                bean.set('order_by_secondary', '');
+            } else {
+                bean.set('order_by_primary', '');
+            }
+        }
+    },
+
+    /**
+     * Return values of the sortable fields using selected columns and metadata
+     *
+     * @param {Object} bean
+     * @return {Object} a list fields by selected columns
+     */
+    getColumns: function(bean) {
+        const module = bean.get('enabled_module');
+        var columns = bean.get('columns');
+        var moduleFields = app.metadata.getModule(module, 'fields');
+
+        _.each(columns, function(field, key) {
+            // add related_fields from widgets, they should be sortable
+            if (!_.isEmpty(field.console) && !_.isEmpty(field.console.related_fields)) {
+                var relatedFields = field.console.related_fields;
+                _.each(relatedFields, function(field) {
+                    if (_.isEmpty(columns[field]) && !_.isEmpty(moduleFields[field])) {
+                        columns[field] = moduleFields[field];
+                    }
+                });
+            }
+        });
+
+        return columns;
     },
 
     /**
@@ -341,6 +414,11 @@
                 });
             }, this);
         }, this);
+
+        // To filter out special fields as they should not be available for sorting or filtering.
+        subfields = _.filter(subfields, function(field) {
+            return _.isEmpty(field.widget_name);
+        });
 
         // Return the combined list of subfields and related fields. Ensure that
         // the correct field type is associated with the field (important for

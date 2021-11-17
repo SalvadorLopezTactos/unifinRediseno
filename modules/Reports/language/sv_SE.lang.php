@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Fel vid hämtning av Drillthrough-rapportens data för den här åtgärden. Kontakta rapportägaren för assistans.',
     'LBL_CHART_NO_DRILLTHRU' => 'Borra igenom är inte tillgängligt',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för rapporter',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'Listvyn visar alla rapporter som uppfyller de aktuella sökkriterierna och som användare har tillgång till. Du kan visa grundläggande information om varje rapport inom fältkolumnerna i listvyn och i förhandsgranskningen. Du kan ställa in taggar för rapporter och skapa filter. Klicka på rapportens namn för att visa rapporten eller välj "Redigera rapport" i åtgärdsmenyn för att ändra rapporten.',

@@ -12,7 +12,6 @@
 
 
 use RobRichards\XMLSecLibs\XMLSecurityKey;
-use Sugarcrm\Sugarcrm\Util\Serialized;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
@@ -21,7 +20,7 @@ if ($idpConfig->isIDMModeEnabled()) {
     sugar_die(
         sprintf(
             $GLOBALS['app_strings']['ERR_PASSWORD_MANAGEMENT_DISABLED_FOR_IDM_MODE'],
-            $idpConfig->buildCloudConsoleUrl('passwordManagement')
+            $idpConfig->buildCloudConsoleUrl('passwordManagement', [], $GLOBALS['current_user']->id)
         )
     );
 }
@@ -101,24 +100,6 @@ if (!empty($_POST['saveConfig'])) {
 
 		if( isset($_REQUEST['passwordsetting_lockoutexpirationtime']) && is_numeric($_REQUEST['passwordsetting_lockoutexpirationtime'])  )
 		    $_POST['passwordsetting_lockoutexpiration'] = 2;
-
-        $minPasswordLength = $_POST['passwordsetting_minpwdlength'] ?? $GLOBALS['sugar_config']['passwordsetting']['minpwdlength'];
-        $maxPasswordLength = $_POST['passwordsetting_maxpwdlength'] ?? $GLOBALS['sugar_config']['passwordsetting']['maxpwdlength'];
-
-        if ($minPasswordLength < 1) {
-            $configurator->addError($config_strings['ERR_MIN_LENGTH_NEGATIVE']);
-            break;
-        }
-
-        if ($maxPasswordLength < 1) {
-            $configurator->addError($config_strings['ERR_MAX_LENGTH_NEGATIVE']);
-            break;
-        }
-
-        if ($minPasswordLength > $maxPasswordLength) {
-            $configurator->addError($config_strings['ERR_MIN_LENGTH_GREATER_THAN_MAX']);
-            break;
-        }
 
         // Check SAML settings
         if (!empty($_POST['authenticationClass']) && $_POST['authenticationClass'] == 'IdMSAMLAuthenticate') {
@@ -210,6 +191,24 @@ if (!empty($_POST['saveConfig'])) {
                 $signOptionInput = InputValidation::getService()->getValidInputRequest($signOption);
                 $_POST[$signOption] = !is_null($signOptionInput);
             }
+        } elseif ($_POST['system_ldap_enabled'] !== 1) {
+            $minPasswordLength = $_POST['passwordsetting_minpwdlength'] ?? $GLOBALS['sugar_config']['passwordsetting']['minpwdlength'];
+            $maxPasswordLength = $_POST['passwordsetting_maxpwdlength'] ?? $GLOBALS['sugar_config']['passwordsetting']['maxpwdlength'];
+
+            if ($minPasswordLength < 0) {
+                $configurator->addError($config_strings['ERR_MIN_LENGTH_NEGATIVE']);
+                break;
+            }
+
+            if ($maxPasswordLength < 0) {
+                $configurator->addError($config_strings['ERR_MAX_LENGTH_NEGATIVE']);
+                break;
+            }
+
+            if ($minPasswordLength > $maxPasswordLength) {
+                $configurator->addError($config_strings['ERR_MIN_LENGTH_GREATER_THAN_MAX']);
+                break;
+            }
         }
 
 		$configurator->saveConfig();
@@ -288,7 +287,7 @@ $sugar_smarty->assign("SMTP_SERVER_NOT_SET", $smtpServerIsSet);
 
 $focus = BeanFactory::newBean('InboundEmail');
 $focus->checkImap();
-$storedOptions = Serialized::unserialize($focus->stored_options, array(), true);
+$storedOptions = unserialize(base64_decode($focus->stored_options), ['allowed_classes' => false]);
 $email_templates_arr = get_bean_select_array(true, 'EmailTemplate','name', '','name',true);
 $create_case_email_template = (isset($storedOptions['create_case_email_template'])) ? $storedOptions['create_case_email_template'] : "";
 $TMPL_DRPDWN_LOST =get_select_options_with_id($email_templates_arr, $res['lostpasswordtmpl']);

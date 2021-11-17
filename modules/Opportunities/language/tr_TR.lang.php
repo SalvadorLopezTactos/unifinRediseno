@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Fırsatlar Listesi Panosu',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Fırsatlar Kaydı Panosu',
     'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Fırsat Bilgileri',
+    'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Fırsatlar Odak Bölmesi',
+    'LBL_RENEWAL_OPPORTUNITY' => 'Yenileme Fırsatı',
 
     'LBL_MODULE_NAME' => 'Fırsatlar',
     'LBL_MODULE_NAME_SINGULAR' => 'Fırsat',
@@ -77,7 +79,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Tipi:',
     'LBL_CAMPAIGN' => 'Kampanya:',
     'LBL_NEXT_STEP' => 'Bir Sonraki Adım:',
-    'LBL_SERVICE_START_DATE' => 'Service Start Date',
+    'LBL_SERVICE_START_DATE' => 'Hizmet Başlangıç Tarihi',
     'LBL_LEAD_SOURCE' => 'Potansiyel Kaynağı:',
     'LBL_SALES_STAGE' => 'Satış Aşaması:',
     'LBL_SALES_STATUS' => 'Durum',
@@ -144,6 +146,7 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE' => 'Onay Aşaması',
     'LBL_COMMIT_STAGE_FORECAST' => 'Tahmin',
     'LBL_WORKSHEET' => 'Çalışma Sayfası',
+    'LBL_PURCHASED_LINE_ITEMS' => 'Satın Alınan Kalemler',
 
     'LBL_RENEWAL' => 'Yenileme',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Yenileme Fırsatları',
@@ -151,9 +154,9 @@ $mod_strings = array(
     'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'Yenileme Üst ID&#39;si',
     'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
 
-    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
-    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
-    'LBL_WIDGET_AMOUNT' => 'Amount',
+    'LBL_WIDGET_SALES_STAGE' => 'Satış Aşaması',
+    'LBL_WIDGET_DATE_CLOSED' => 'Beklenen Kapanış Tarihi',
+    'LBL_WIDGET_AMOUNT' => 'Tutar',
 
     'TPL_RLI_CREATE' => 'Fırsat ilişkilendirilmiş bir Gelir Kalemi içermelidir. <a href="javascript:void(0);" id="createRLI">Gelir Kalemi Oluştur</a>.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Gelir Satır Öğesi Oluştur.',
@@ -162,12 +165,16 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# Toplam Gelir Kalemleri',
     'LBL_CLOSED_RLIS' => '# Kapanan Gelir Kalemleri',
+    'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => 'Open Service Flex süresi Gelir Kalemleri Sayısı',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Kapatılmış Gelir Kalemleri içeren Fırsatlar silemezsiniz',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'Seçilen kayıtların bir veya daha fazla kapatılmış Gelir Kalemlerini içerir ve silinemez.',
     'LBL_INCLUDED_RLIS' => 'Dahil Olan Gelir İlgili Kalemleri Sayısı',
-    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Güncelleme Açık',
+    'LBL_SERVICE_START_DATE_INVALID' => 'Hizmet Başlangıç Tarihi, herhangi bir açık eklenti Gelir Kaleminin Hizmet Bitiş Tarihinden sonrasına ayarlanamaz.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Teklifler',
+    'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Bir Dinamik Hesap Tarafından Fırsatlar',
+
 
     // Config
     'LBL_OPPS_CONFIG_VIEW_BY_LABEL' => 'Fırsat Hiyerarşisi',
@@ -203,21 +210,21 @@ $mod_strings = array(
     'LBL_HELP_RECORDS' => '{{plural_module_name}} modülü, münferit satışları başından sonuna kadar takip etmenizi sağlar. Her {{module_name}} kaydı, potansiyel bir satışı temsil eder ve hem ilgili satış verilerini hem de {{quotes_module}}, {{contacts_module}} gibi diğer önemli kayıtlara ilişkin verileri içerir. Bir {{module_name}} genellikle "Kazanılarak kapandı" veya "Kaybedilerek kapandı" olarak işaretlenene kadar birçok Satış Aşaması üzerinden ilerler. {{plural_module_name}}, satış trendlerinin anlaşılması ve tahmin edilmesi ve aynı zamanda satış kotalarına ulaşılması için işe odaklanılmasına yönelik olarak Sugar&#39;ın {{forecasts_singular_module}} modülü kullanılarak daha da geliştirilebilir.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} modülü, münferit satışları ve başından sonuna kadar bu satışlara ait kalemleri takip etmenizi sağlar. Her {{module_name}} kaydı, potansiyel bir satışı temsil eder ve hem ilgili satış verilerini hem de {{quotes_module}}, {{contacts_module}} gibi diğer önemli kayıtlara ilişkin verileri içerir.
+    'LBL_HELP_RECORD' => '{{plural_module_name}} modülü, münferit satışları başından sonuna kadar takip etmenizi sağlar. Her {{module_name}} kaydı, potansiyel bir satışı temsil eder ve hem ilgili satış verilerini hem de {{quotes_module}}, {{contacts_module}} gibi diğer önemli kayıtlara ilişkin verileri içerir.
 
-- Kaydın alanlarını, münferit bir alana veya Düzenle düğmesine tıklayarak düzenleyin.
-- Sol altta yer alan paneli "Kayıt Görünümü" olarak değiştirerek, diğer kayıtlar ile olan bağlantıları görün veya değiştirin.
-- Sol altta yer alan paneli "Aktivite Akışı" olarak değiştirerek kullanıcı yorumları yapın ve görün ve {{activitystream_singular_module}} modülünde değişiklik geçmişini kaydedin.
+- Kaydın alanlarını, herhangi bir alana veya Değiştir düğmesine tıklayarak değiştirin.
+- Sol altta yer alan paneli "Kayıt Görünümü" olarak değiştirerek, diğer kayıtlar ile olan bağlantıları görüntüleyin veya değiştirin.
+- Alt solda yer alan paneli "Aktivite Akışı" olarak değiştirerek, kullanıcı yorumları görün, oluşturun ve {{activitystream_singular_module}} kaydındaki değişiklik tarihçesini görün.
 - Kayıt adının sağ tarafında bulunan simgeleri kullanarak bu kaydı takip edin veya favoriler arasına alın.
-- Daha fazla aksiyon, Düzenle düğmesinin sağındaki Aksiyonlar açılır menüsünde yer almaktadır.',
+- Daha fazla işlem, Değiştir düğmesinin sağındaki Aksiyonlar açılır menüsünde yer almaktadır.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} modülü, satışları ve başından sonuna kadar bu satışlara ait kalemlerin satış sürecini takip etmenizi sağlar. Her {{module_name}} kaydı, potansiyel bir satışı temsil eder ve hem ilgili satış verilerini hem de {{quotes_module}}, {{contacts_module}} gibi diğer önemli kayıtlara ilişkin verileri içerir.
+    'LBL_HELP_CREATE' => '{{plural_module_name}} modülü, münferit satışları başından sonuna kadar takip etmenizi sağlar. Her {{module_name}} kaydı, potansiyel bir satışı temsil eder ve hem ilgili satış verilerini hem de {{quotes_module}}, {{contacts_module}} gibi diğer önemli kayıtlara ilişkin verileri içerir.
 
-Bir {{module_name}} modülü oluşturmak için:
-1.  İstendiği şekilde alanlar için değerler girin.
- - "Zorunlu" olarak belirtilmiş alanların kaydetme öncesinde girilmesi gereklidir.
- - Gerek duyulursa ek alanları açmak için "Daha Fazlasına" tıklayın.
+Bir {{module_name}} oluşturmak için:
+1. İstendiği şekilde alanlar için değerler girin.
+ -  "Zorunlu" olarak belirtilmiş alanların kaydetme öncesinde girilmesi gereklidir.
+ - Gerek duyulursa ek alanları açmak için "Daha Fazlası"na tıklayın.
 2. "Kaydet" tuşuna basarak yeni kayıt oluşturma işlemini tamamlayın ve önceki sayfaya dönün.',
 
 // END ENT/ULT
@@ -231,5 +238,10 @@ Bir {{module_name}} modülü oluşturmak için:
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Fırsatlarım',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Takımımın Fırsatları",
 
-    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Bu {{moduleSingular}} açık kalemler içermediği için {{fieldName}} değiştirilemez.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Fırsat Etkileşimleri',
+
+    // AI Predict
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Tahmine Yakın Fırsat',
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Belirli bir Fırsatın tahmin ayrıntılarını görüntüleyin',
 );

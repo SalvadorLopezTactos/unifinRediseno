@@ -15,6 +15,7 @@ SugarAutoLoader::load('modules/pmse_Project/pmse_BpmProcessDefinition/LockedFiel
 
 $dictionary['pmse_BpmProcessDefinition'] = array(
     'table' => 'pmse_bpm_process_definition',
+    'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'duplicate_merge' => true,

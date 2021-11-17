@@ -15,13 +15,13 @@ use Sugarcrm\Sugarcrm\AccessControl\AccessControlManager;
 /**
  *  Dashboards is used to store dashboard configuration data.
  */
-class Dashboard extends Basic 
-{    
+class Dashboard extends Basic
+{
     public $table_name = "dashboards";
     public $module_name = 'Dashboards';
     public $module_dir = 'Dashboards';
     public $object_name = "Dashboard";
-    
+
     /**
      * This overrides the default retrieve function setting the default to encode to false
      */
@@ -35,8 +35,8 @@ class Dashboard extends Basic
         // Expand the metadata for processing.
         $metadata = json_decode($dashboard->metadata);
 
-        // If we don't have a components in metadata for whatever reason, we're out, send back unchanged.
-        if(!isset($metadata->components)) {
+        // If we don't have a components/dashlets in metadata for whatever reason, we're out, send back unchanged.
+        if (!isset($metadata->components) && !isset($metadata->dashlets)) {
             return $dashboard;
         }
 
@@ -55,10 +55,54 @@ class Dashboard extends Basic
      */
     protected function processMetadataWithAcl($metadata)
     {
+        // If metadata doesn't have a top-level dashlets key, it's a legacy
+        // dashboard
+        if (!isset($metadata->dashlets)) {
+            return $this->processLegacyMetadataWithAcl($metadata);
+        }
+
+        $dirty = false;
+        foreach ($metadata->dashlets as $key => $dashlet) {
+            // This section of code is a portion of the code referred
+            // to as Critical Control Software under the End User
+            // License Agreement.  Neither the Company nor the Users
+            // may modify any portion of the Critical Control Software.
+            if (isset($dashlet->context->module) && !SugarACL::checkAccess($dashlet->context->module, 'access')) {
+                unset($metadata->dashlets[$key]);
+                $dirty = true;
+                continue;
+            }
+            if (!empty($dashlet->view->type)) {
+                $allowAccess = $this->allowedToAccessDashlet($dashlet->view->type);
+                if (!$allowAccess) {
+                    // this is license controled dashlet
+                    unset($metadata->dashlets[$key]);
+                    $dirty = true;
+                }
+            }
+            //END REQUIRED CODE DO NOT MODIFY
+        }
+
+        if ($dirty) {
+            $metadata->dashlets = array_values($metadata->dashlets);
+        }
+        return $metadata;
+    }
+
+    /**
+     * apply ACL and license type restriction to legacy metadata
+     * @param $metadata
+     * @return string
+     */
+    protected function processLegacyMetadataWithAcl($metadata)
+    {
         $dirty = false;
 
         // Loop through the dashboard, drilling down to the dashlet level.
         foreach($metadata->components as $component_key => $component) {
+            if (!isset($component->rows)) {
+                continue;
+            }
             foreach ($component->rows as $row_key => $row) {
                 foreach ($row as $item_key => $item) {
                     // Check if this user has access to the module upon which this dashlet is based.

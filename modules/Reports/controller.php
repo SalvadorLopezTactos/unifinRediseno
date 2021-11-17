@@ -102,19 +102,4 @@ class ReportsController extends SugarController
 
         echo json_encode($quicksearch_js);
 	}
-
-    protected function action_massupdate(){
-        //bug: 44857 - Reports calls MasUpdate passing back the 'module' parameter, but that is also a parameter in the database
-        //so when we call MassUpdate with $addAllBeanFields then it will use this in the query.
-		$query = $this->request->getValidInputRequest(
-            'current_query_by_page',
-            array('Assert\PhpSerialized' => array('base64Encoded' => true))
-        );
-
-        if(!empty($query['module'])) {
-            unset($query['module']);
-            $_REQUEST['current_query_by_page'] = base64_encode(serialize($query));
-        }
-        parent::action_massupdate();
-    }
 }

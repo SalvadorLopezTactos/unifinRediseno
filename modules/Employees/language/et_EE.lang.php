@@ -145,7 +145,10 @@ $mod_strings = array (
   'LBL_EMAIL_ADDRESS'=>'E-posti aadress',
   'LBL_CONTACTS_SYNC' => 'Kontaktid',
     'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
-        'The employee can be created only in <a href="{0}" target="_blank">Cloud Settings</a>',
+        'Töötajat saab luua ainult <a href="{0}" target="_blank">SugarCloudi sätetes</a>',
+
+    'LBL_COOKIE_CONSENT' => 'Küpsistega nõusolek',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Küpsistega nõusolek saadud',
 );
 
 

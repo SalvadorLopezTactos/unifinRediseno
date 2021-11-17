@@ -12,8 +12,8 @@
 *}
 
 <div id="edit_all_recurrences_block" style="display: none; margin-bottom: 10px;">
-	<button type="button" id="btn-edit-all-recurrences" onclick="CAL.editAllRecurrences();"> {$MOD.LBL_EDIT_ALL_RECURRENCES} </button>
-	<button type="button" id="btn-remove-all-recurrences" onclick="CAL.removeAllRecurrences();"> {$MOD.LBL_REMOVE_ALL_RECURRENCES} </button>
+	<button type="button" id="btn-edit-all-recurrences" onclick="CAL.editAllRecurrences();"> {$MOD.LBL_EDIT_ALL_RECURRENCES|escape:'html':'UTF-8'} </button>
+	<button type="button" id="btn-remove-all-recurrences" onclick="CAL.removeAllRecurrences();"> {$MOD.LBL_REMOVE_ALL_RECURRENCES|escape:'html':'UTF-8'} </button>
 </div>
 
 <div id="cal-repeat-block" style="dispaly: none;">
@@ -23,36 +23,36 @@
 <input type="hidden" name="repeat_parent_id">
 <table class="edit view" width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
-		<td width="12.5%" valign="top" scope="row">{$MOD.LBL_REPEAT_TYPE}:</td>
+		<td width="12.5%" valign="top" scope="row">{$MOD.LBL_REPEAT_TYPE|escape:'html':'UTF-8'}:</td>
 		<td width="37.5%" valign="top">
 			<select name="repeat_type" onchange="toggle_repeat_type();">{html_options options=$APPLIST.repeat_type_dom}</select>
 		</td>
 	</tr>
 	
 	<tr id="repeat_interval_row" style="display: none;">
-		<td width="12.5%" valign="top" scope="row">{$MOD.LBL_REPEAT_INTERVAL}:</td>
+		<td width="12.5%" valign="top" scope="row">{$MOD.LBL_REPEAT_INTERVAL|escape:'html':'UTF-8'}:</td>
 		<td width="37.5%" valign="top">
 			<select name="repeat_interval">{html_options options=$repeat_intervals selected="1"}</select> <span id="repeat-interval-text"></span>
 		</td>
 	</tr>
 	
 	<tr id="repeat_end_row" style="display: none;">
-		<td width="12.5%" valign="top" scope="row">{$MOD.LBL_REPEAT_END}:</td>
+		<td width="12.5%" valign="top" scope="row">{$MOD.LBL_REPEAT_END|escape:'html':'UTF-8'}:</td>
 		<td width="37.5%" valign="top">
 			<div>
-				<input type="radio" name="repeat_end_type" value="number" id="repeat_count_radio" checked onclick="toggle_repeat_end();" style="position: relative; top: -5px;"> {$MOD.LBL_REPEAT_END_AFTER} 
-				<input type="input" size="3" name="repeat_count" value="10"> {$MOD.LBL_REPEAT_OCCURRENCES}
+				<input type="radio" name="repeat_end_type" value="number" id="repeat_count_radio" checked onclick="toggle_repeat_end();" style="position: relative; top: -5px;"> {$MOD.LBL_REPEAT_END_AFTER|escape:'html':'UTF-8'}
+				<input type="input" size="3" name="repeat_count" value="10"> {$MOD.LBL_REPEAT_OCCURRENCES|escape:'html':'UTF-8'}
 			</div>
 			<div>					
-				<input type="radio" name="repeat_end_type" id="repeat_until_radio" value="date" onclick="toggle_repeat_end();" style="position: relative; top: -5px;"> {$MOD.LBL_REPEAT_END_BY}
+				<input type="radio" name="repeat_end_type" id="repeat_until_radio" value="date" onclick="toggle_repeat_end();" style="position: relative; top: -5px;"> {$MOD.LBL_REPEAT_END_BY|escape:'html':'UTF-8'}
 				<input type="input" size="11" maxlength="10" id="repeat_until_input" name="repeat_until" value="" disabled>
-				<img border="0" src="index.php?entryPoint=getImage&imageName=jscalendar.gif" alt="{$APP.LBL_ENTER_DATE}" id="repeat_until_trigger" align="absmiddle" style="display: none;">	
+				<img border="0" src="index.php?entryPoint=getImage&imageName=jscalendar.gif" alt="{$APP.LBL_ENTER_DATE|escape:'html':'UTF-8'}" id="repeat_until_trigger" align="absmiddle" style="display: none;">
 							
 				<script type="text/javascript">
 						Calendar.setup ({literal}{{/literal}
 							inputField : "repeat_until_input",
-							ifFormat : "{$CALENDAR_FORMAT}",
-							daFormat : "{$CALENDAR_FORMAT}",
+							ifFormat : "{$CALENDAR_FORMAT|escape:'javascript':'UTF-8'}",
+							daFormat : "{$CALENDAR_FORMAT|escape:'javascript':'UTF-8'}",
 							button : "repeat_until_trigger",
 							singleClick : true,
 							dateStr : "",
@@ -66,10 +66,10 @@
 	</tr>
 	
 	<tr id="repeat_dow_row" style="display: none;">
-		<td width="12.5%" valign="top" scope="row">{$MOD.LBL_REPEAT_DOW}:</td>
+		<td width="12.5%" valign="top" scope="row">{$MOD.LBL_REPEAT_DOW|escape:'html':'UTF-8'}:</td>
 		<td width="37.5%" valign="top">
 			{foreach name=dow from=$dow key=i item=d}
-				{$d.label} <input type="checkbox" id="repeat_dow_{$d.index}" name="repeat_dow[]" style="margin-right: 10px;"> 	
+				{$d.label|escape:'html':'UTF-8'} <input type="checkbox" id="repeat_dow_{$d.index|escape:'html':'UTF-8'}" name="repeat_dow[]" style="margin-right: 10px;">
 			{/foreach}
 		</td>
 	</tr>
@@ -116,7 +116,7 @@
 			if(typeof validate != "undefined" && typeof validate['CalendarRepeatForm'] != "undefined"){
 				removeFromValidate('CalendarRepeatForm', 'repeat_until');
 			}
-			addToValidateMoreThan('CalendarRepeatForm', 'repeat_count', 'int', true,'{/literal}{$MOD.LBL_REPEAT_COUNT}{literal}', 1);			
+			addToValidateMoreThan('CalendarRepeatForm', 'repeat_count', 'int', true,'{/literal}{$MOD.LBL_REPEAT_COUNT|escape:'javascript':'UTF-8'}{literal}', 1);			
 		}else{
 			document.forms['CalendarRepeatForm'].repeat_count.setAttribute("disabled","disabled");			
 			document.forms['CalendarRepeatForm'].repeat_until.removeAttribute("disabled");
@@ -125,7 +125,7 @@
 			if(typeof validate != "undefined" && typeof validate['CalendarRepeatForm'] != "undefined"){
 				removeFromValidate('CalendarRepeatForm', 'repeat_count');
 			}
-			addToValidate('CalendarRepeatForm', 'repeat_until', 'date', true,'{/literal}{$MOD.LBL_REPEAT_UNTIL}{literal}');			
+			addToValidate('CalendarRepeatForm', 'repeat_until', 'date', true,'{/literal}{$MOD.LBL_REPEAT_UNTIL|escape:'javascript':'UTF-8'}{literal}'); 		
 		}
 		
 		// prevent an issue when a calendar date picker is hidden under a dialog

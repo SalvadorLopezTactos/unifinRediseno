@@ -75,12 +75,8 @@ function export($type, $records = null, $members = false, $sample = false)
     } elseif (isset($_REQUEST['all'])) {
         $where = '';
     } else {
-        $current_post = InputValidation::getService()->getValidInputRequest(
-            'current_post',
-            array('Assert\PhpSerialized' => array('base64Encoded' => true))
-        );
-
-        if(!empty($current_post)) {
+        if (isset($_REQUEST['current_post'])) {
+            $current_post = unserialize(base64_decode($_REQUEST['current_post']), ['allowed_classes' => false]);
             $ret_array = generateSearchWhere($type, $current_post);
             $where = $ret_array['where'];
         } else {

@@ -248,6 +248,8 @@ $vardefs =array(
             ),
             'audited' => true,
             'pii' => true,
+            'rows' => 2,
+            'cols' => 20,
 		),
 	'primary_address_street_2' =>
 		array (
@@ -259,6 +261,7 @@ $vardefs =array(
             'duplicate_on_record_copy' => 'always',
             'audited' => true,
             'pii' => true,
+            'massupdate' => false,
 		),
 	'primary_address_street_3' =>
 		array (
@@ -270,6 +273,7 @@ $vardefs =array(
             'duplicate_on_record_copy' => 'always',
             'audited' => true,
             'pii' => true,
+            'massupdate' => false,
 		),
 	'primary_address_city' =>
 		array (
@@ -342,6 +346,8 @@ $vardefs =array(
             ),
             'audited' => true,
             'pii' => true,
+            'rows' => 2,
+            'cols' => 20,
 		),
 	'alt_address_street_2' =>
 		array (
@@ -353,6 +359,7 @@ $vardefs =array(
             'duplicate_on_record_copy' => 'always',
             'audited' => true,
             'pii' => true,
+            'massupdate' => false,
 		),
 	'alt_address_street_3' =>
 		array (
@@ -364,6 +371,7 @@ $vardefs =array(
             'duplicate_on_record_copy' => 'always',
             'audited' => true,
             'pii' => true,
+            'massupdate' => false,
 		),
 	'alt_address_city' =>
 		array (

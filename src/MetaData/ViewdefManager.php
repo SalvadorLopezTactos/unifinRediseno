@@ -28,19 +28,22 @@ class ViewdefManager
      */
     public function loadViewdef($platform, $module, $view, $loadBase = false)
     {
-        $returnViewdef = array();
         $paths = $this->getClientFiles([$platform], 'view', $module);
         $path = $this->findModuleViewdef($paths, $module, $view, $loadBase);
-        
+
+        if ($path === null) {
+            return [];
+        }
+
         //return viewdefs loaded in loadDef
         $viewdef = $this->loadDef($path['path']);
 
         //make sure the path we want exists in the loaded file
         if (isset($viewdef[$module][$platform]['view'][$view])) {
-            $returnViewdef = $viewdef[$module][$platform]['view'][$view];
+            return $viewdef[$module][$platform]['view'][$view];
         }
 
-        return $returnViewdef;
+        return [];
     }
 
     /**
@@ -82,7 +85,7 @@ class ViewdefManager
     /**
      * abstracts away the static call to MetaDataFiles::getClientFiles
      *
-     * @param string $platform
+     * @param string[] $platform
      * @param string $type
      * @param string $module
      * @return array
@@ -96,15 +99,16 @@ class ViewdefManager
      * Sorts through the output of MetaDataFiles::getClientFiles to find the proper definition file for a viewdef,
      * starting with custom first and working down from there.
      *
-     * @param string $paths output from calling MetaDataFiles::getClientFiles
-     * @param string $module - Quotes, Opportunities, etc
-     * @param string $view - record, edit, detail, etc
-     * @param bool $preferBase - flag to load base value over custom if base exists
-     * @return string
+     * @param array<string,array<string,mixed>> $paths      Output from calling {@link MetaDataFiles::getClientFiles}
+     * @param string                            $module     Quotes, Opportunities, etc
+     * @param string                            $view       record, edit, detail, etc
+     * @param bool                              $preferBase Flag to load base value over custom if base exists
+     *
+     * @return array<string,mixed>|null
      */
     public function findModuleViewdef($paths, $module, $view, $preferBase = false)
     {
-        $returnPaths = null;
+        $returnPath = null;
 
         foreach ($paths as $path) {
             // make sure this is the view we're looking for,
@@ -114,15 +118,16 @@ class ViewdefManager
                 strpos($path['path'], $module) !== false &&
                 strpos($path['path'], '.ext.') === false
             ) {
-                $returnPaths = $path;
+                $returnPath = $path;
                 // look for the custom def first, then load the default if we can't find a custom
                 // unless $preferBase is specified
                 if (strpos($path['path'], 'custom') !== false && !$preferBase) {
-                    $returnPaths = $path;
+                    $returnPath = $path;
                     break;
                 }
             }
         }
-        return $returnPaths;
+
+        return $returnPath;
     }
 }

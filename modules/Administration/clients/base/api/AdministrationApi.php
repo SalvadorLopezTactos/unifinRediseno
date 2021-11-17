@@ -11,6 +11,8 @@
  */
 
 use Sugarcrm\Sugarcrm\AccessControl\AdminWork;
+use Sugarcrm\Sugarcrm\CSP\ContentSecurityPolicy;
+use Sugarcrm\Sugarcrm\CSP\Directive;
 use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\SearchEngine\Engine\Elastic;
@@ -216,6 +218,56 @@ class AdministrationApi extends SugarApi
                 'longHelp' => 'include/api/help/administration_disable_license_limits_get_help.html',
                 'exceptions' => ['SugarApiExceptionNotAuthorized'],
                 'ignoreSystemStatusError' => true,
+            ],
+            'getAWSConfig' => [
+                'reqType' => ['GET'],
+                'path' => ['Administration', 'aws'],
+                'pathVars' => [''],
+                'method' => 'getAWSConfig',
+                'shortHelp' => 'Gets configuration settings for Amazon Web Services integrations',
+                'longHelp' => 'include/api/help/administration_get_aws_config_get_help.html',
+                'exceptions' => ['SugarApiExceptionNotAuthorized'],
+                'ignoreSystemStatusError' => true,
+            ],
+            'setAWSConfig' => [
+                'reqType' => ['POST'],
+                'path' => ['Administration', 'aws'],
+                'pathVars' => [''],
+                'method' => 'setAWSConfig',
+                'shortHelp' => 'Sets configuration settings for Amazon Web Services integrations',
+                'longHelp' => 'include/api/help/administration_set_aws_config_post_help.html',
+                'exceptions' => ['SugarApiExceptionNotAuthorized'],
+                'ignoreSystemStatusError' => true,
+            ],
+            'getCSPConfig' => [
+                'reqType' => ['GET'],
+                'path' => ['Administration', 'csp'],
+                'pathVars' => [''],
+                'method' => 'getCSPSConfig',
+                'shortHelp' => 'Gets configuration settings for Content Security Policy',
+                'longHelp' => 'include/api/help/administration_get_csp_setting_get_help.html',
+                'exceptions' => ['SugarApiExceptionNotAuthorized'],
+                'ignoreSystemStatusError' => true,
+            ],
+            'setCSPConfig' => [
+                'reqType' => ['POST'],
+                'path' => ['Administration', 'csp'],
+                'pathVars' => [''],
+                'method' => 'setCSPConfig',
+                'shortHelp' => 'Sets configuration settings for Content Security Policy',
+                'longHelp' => 'include/api/help/administration_set_csp_setting_post_help.html',
+                'exceptions' => ['SugarApiExceptionNotAuthorized'],
+                'ignoreSystemStatusError' => true,
+            ],
+            'getValidateIPAddress' => [
+                'reqType' => ['GET'],
+                'path' => ['Administration', 'settings', 'validateIPAddress'],
+                'pathVars' => [''],
+                'method' => 'getValidateIPAddress',
+                'shortHelp' => 'Gets value of Validate IP Address setting',
+                'longHelp' => 'include/api/help/administration_get_validate_ip_address.html',
+                'exceptions' => ['SugarApiExceptionNotAuthorized'],
+                'minVersion' => '11.12',
             ],
         );
     }
@@ -675,14 +727,209 @@ class AdministrationApi extends SugarApi
         $this->ensureAdminUser();
         $seats = SubscriptionManager::instance()->getSystemSubscriptionSeats();
         $defaultType = SubscriptionManager::instance()->getUserDefaultLicenseType();
+        $usedSeats = SubscriptionManager::instance()->getSystemUserCountByLicenseTypes();
+        $availableSeats = [];
+        foreach (SubscriptionManager::instance()->getAllSupportedProducts() as $key) {
+            $availableSeats[$key] = ($seats[$key] ?? 0) - ($usedSeats[$key] ?? 0);
+        }
         $admin = Administration::getSettings();
 
         return [
             'default_limit' => $seats[$defaultType],
+            'default_license_type' => $defaultType,
             'limit_enforced' => empty($admin->settings['license_enforce_user_limit']) ? 0 : 1,
             'seats' => $seats,
+            'available_seats' => $availableSeats,
         ];
     }
+
+    /**
+     * Gets AWS configuration details for Serve instances
+     *
+     * @param ServiceBase $api The RestService object
+     * @param array $args Arguments passed to the service
+     * @return array
+     */
+    public function getAWSConfig(ServiceBase $api, array $args)
+    {
+        $this->ensureAdminUser();
+        $admin = BeanFactory::getBean('Administration');
+        if ($admin->isLicensedForServe()) {
+            return $admin->retrieveSettings('aws', true)->settings;
+        }
+
+        return [];
+    }
+
+    /**
+     * Saves new AWS configuration details for Serve instances and returns what was saved
+     *
+     * @param ServiceBase $api The RestService object
+     * @param array $args Arguments passed to the service
+     * @return array
+     */
+    public function setAWSConfig(ServiceBase $api, array $args)
+    {
+        $this->ensureAdminUser();
+        $admin = BeanFactory::getBean('Administration');
+
+        // We only want to do this for Serve licensed intances
+        if ($admin->isLicensedForServe()) {
+            $category = 'aws';
+            $prefix = $category . '_';
+            $changes = [];
+
+            $oldSettings = $admin->retrieveSettings($category)->settings;
+
+            foreach ($args as $key => $value) {
+                // Look specifically for anything prefixed with aws_
+                if (substr($key, 0, 4) === $prefix) {
+                    if ($admin->saveSetting($category, str_replace($prefix, '', $key), $value, $api->platform)) {
+                        $changes[$key] = $value;
+                    }
+                }
+            }
+
+            if ($changes) {
+                $this->updateAWSDomainsOnCSP($changes, $oldSettings);
+
+                // Only reset the config metadata cache if there were changes to save
+                self::clearCache();
+                return $changes;
+            }
+        }
+
+        return [];
+    }
+
+    /**
+     * Update allowed AWS domains in content security policies
+     *
+     * @param array $settings
+     * @param array $oldSettings
+     */
+    public function updateAWSDomainsOnCSP(array $settings, array $oldSettings)
+    {
+        $awsUrlKey = 'aws_connect_url';
+
+        // if the key does not exist, nothing to update
+        if (!array_key_exists($awsUrlKey, $settings)) {
+            return;
+        }
+
+        $oldAwsUrl = $oldSettings[$awsUrlKey];
+        $awsUrl = $settings[$awsUrlKey];
+
+        $domainsToAppend = $domainsToRemove = [];
+        $allowListDomains = $this->getAWSAllowListDomains($settings);
+        $csp = ContentSecurityPolicy::fromAdministrationSettings();
+
+        if (empty($awsUrl)) {
+            // remove previously added domains as the new value is empty
+            $domainsToRemove = $allowListDomains;
+        } else {
+            $domainsToAppend = $allowListDomains;
+        }
+
+        // remove the previously added AWS URL
+        if (!empty($oldAwsUrl)) {
+            $domainsToRemove[] = parse_url($oldAwsUrl, PHP_URL_HOST);
+        }
+
+        foreach ($domainsToRemove as $domain) {
+            $directive = Directive::createHidden('default-src', $domain);
+            $csp->removeDirective($directive);
+        }
+
+        foreach ($domainsToAppend as $domain) {
+            $directive = Directive::createHidden('default-src', $domain);
+            $csp->appendDirective($directive);
+        }
+
+        $csp->saveToSettings();
+    }
+
+    /**
+     * Get the list of allowed domains for AWS
+     *
+     * @param array $args
+     * @return array
+     */
+    public function getAWSAllowListDomains(array $args): array
+    {
+        $awsConfig = $this->getSugarConfig()->get('aws_connect');
+        $allowListDomains = $awsConfig['allow_list_domains'];
+        $awsUrl = $args['aws_connect_url'];
+
+        if (!empty($awsUrl)) {
+            $allowListDomains[] = parse_url($awsUrl, PHP_URL_HOST);
+        }
+
+        return $allowListDomains;
+    }
+
+    /**
+     * Gets CSP configuration settings
+     *
+     * @param ServiceBase $api The RestService object
+     * @param array $args Arguments passed to the service
+     * @return array
+     */
+    public function getCSPSConfig(ServiceBase $api, array $args): array
+    {
+        $this->ensureAdminUser();
+        $admin = BeanFactory::getBean('Administration');
+        $settings = $admin->retrieveSettings('csp', true)->settings;
+        $cspSettings['csp_default_src'] = $settings['csp_default_src']?? '';
+
+        return array_merge(['csp_default_src' => ''], $cspSettings);
+    }
+
+    /**
+     * Saves new CSP settings configuration and returns what was saved
+     *
+     * @param ServiceBase $api The RestService object
+     * @param array $args Arguments passed to the service
+     * @return array
+     * @throws SugarApiException
+     */
+    public function setCSPConfig(ServiceBase $api, array $args): array
+    {
+        $this->ensureAdminUser();
+        $prefix =  'csp_';
+        $directives = [];
+        foreach ($args as $key => $value) {
+            if (substr($key, 0, 4) === $prefix) {
+                if ($key === 'csp_default_src') {
+                    if (trim($value) === '') {
+                        $directives[] = Directive::createWithEmptySource('default-src');
+                    } else {
+                        $directives[] = Directive::create('default-src', $value);
+                    }
+                }
+                if (!empty($directives)) {
+                    $csp = ContentSecurityPolicy::fromDirectivesList(...$directives);
+                    $csp->saveToSettings($api->platform);
+                }
+            }
+        }
+        return $this->getCSPSConfig($api, $args);
+    }
+
+    /**
+     * Gets Validate IP Address setting
+     *
+     * @param ServiceBase $api The RestService object
+     * @param array $args Arguments passed to the service
+     * @throws SugarApiExceptionNotAuthorized
+     */
+    public function getValidateIPAddress(ServiceBase $api, array $args)
+    {
+        $this->ensureAdminUser();
+        $verifyClientIp = (bool)$this->getSugarConfig()->get('verify_client_ip', false);
+        return ['validate_ip_address' => $verifyClientIp];
+    }
+
     /**
      * Factory method to mock Configurator
      *
@@ -699,5 +946,13 @@ class AdministrationApi extends SugarApi
     protected function clearCache(): void
     {
         \MetaDataManager::refreshSectionCache(\MetaDataManager::MM_CONFIG);
+    }
+
+    /**
+     * @return SugarConfig|null
+     */
+    public function getSugarConfig(): ?SugarConfig
+    {
+        return SugarConfig::getInstance();
     }
 }

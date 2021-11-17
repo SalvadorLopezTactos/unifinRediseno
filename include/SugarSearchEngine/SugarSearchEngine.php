@@ -26,59 +26,9 @@
  */
 class SugarSearchEngine implements SugarSearchEngineInterface
 {
-    public function search($query, $offset = 0, $limit = 20, $options = array() )
+    public function search($query, $offset = 0, $limit = 20, $options = [])
     {
         $sugarSpot = new SugarSpot();
         return $sugarSpot->search($query, $offset, $limit, $options);
-
     }
-
-    /**
-     * No-op
-     *
-     * @param $bean
-     */
-    public function indexBean($bean, $batched = TRUE) {}
-
-    /**
-     * No-op
-     *
-     * @param $bean
-     */
-    public function delete(SugarBean $bean) {}
-
-
-    /**
-     * No-op
-     */
-    public function bulkInsert(array $docs) {}
-
-    /**
-     * No-op
-     */
-    public function createIndexDocument($bean, $searchFields = null) {}
-
-    /**
-     * No-op
-     */
-    public function getServerStatus() {}
-
-    /**
-     * No-op
-     */
-    public function createIndex($recreate = false){}
-
-    /**
-     *
-     * Given a field type, determine whether this type can be enabled for full text search.
-     *
-     * @abstract
-     * @param string $type Sugar field type
-     * @return boolean whether the field type can be enabled for full text search
-     */
-    public function isTypeFtsEnabled($type)
-    {
-        return false;
-    }
-
 }

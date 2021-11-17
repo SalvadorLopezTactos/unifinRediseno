@@ -70,11 +70,11 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> 'Warnung: Keine Schreibrechte',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'Ihre PHP-Version wird von Sugar nicht unterstützt. Sie müssen eine kompatible Version installieren. Bitte überprüfen Sie dazu die Kompatibilitätsmatrix in den Versionshinweisen. Ihre Version ist ',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'Ihre IIS-Version wird von Sugar nicht unterstützt. Bitte installieren Sie eine kompatible Version gem. der Übersicht in den Versionshinweisen. Ihre Version ist ',
-	'ERR_CHECKSYS_FASTCGI'              => 'Sie benutzen kein FastCGI Handler Mapping für PHP. Bitte installieren oder konfigurieren Sie eine kompatible Version gem. der Übersicht in den Versionshinweisen. Mehr Details finden Sie unter <a href="http://www.iis.net/php/" target="_blank">http://www.iis.net/php/</a> ',
+    'ERR_CHECKSYS_FASTCGI'              => 'Sie benutzen kein FastCGI Handler Mapping für PHP. Bitte installieren oder konfigurieren Sie eine Version, die mit der Sugar-Anwendung kompatibel ist. Konsultieren Sie die Kompatibilitätsmatrix in den Versionshinweisen, um mehr über unterstützte Versionen zu erfahren. Weitere Informationen finden Sie unter <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a>. ',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Für optimale Leistung oder Ergebnisse mit IIS/FastCGI sapi sollte fastcgi.logging in der php.ini auf 0 gesetzt sein.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Nicht unterstützte PHP-Version installiert: (Ver.',
     'LBL_DB_UNAVAILABLE'                => 'Die Datenbank ist nicht verfügbar',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Der Datenbank-Support wurde nicht gefunden. Stellen Sie sicher, dass Sie über die erforderlichen Treiber für einen der folgenden unterstützten Datenbanktypen verfügen: MySQL, MS SQLServer, Oracle oder DB2. Möglicherweise müssen Sie die Erweiterung in der php.ini-Datei auskommentieren oder die richtige Binärdatei neu kompilieren, je nachdem, welche PHP-Version Sie haben. Weitere Informationen zum Aktivieren der Datenbankunterstützung finden Sie in Ihrem PHP-Handbuch.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Die Datenbankunterstützung wurde nicht gefunden.  Bitte stellen Sie sicher, dass Sie die notwendigen Treiber für einen der folgenden unterstützten Datenbanktypen haben: MySQL, MS SQLServer, Oracle, oder DB2. Abhängig von Ihrer PHP-Version müssen Sie eventuell die Erweiterung in der Datei php.ini entfernen oder mit der richtigen Binärdatei neu kompilieren.  Weitere Informationen zur Aktivierung der Datenbankunterstützung finden Sie in Ihrem PHP-Handbuch.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Die Funktionen verbunden mit XML Parser-Bibliotheken, die von SugarCRM gebraucht werden, wurden nicht gefunden. Sie können versuchen, die Kommentare in php.ini zu löschen, oder mit der richtigen Binary-Datei wieder zu kompilieren, abhängig von Ihrer PHP-Version. Nähere Informationen hierzu finden Sie in Ihrem PHP-Handbuch.',
     'LBL_CHECKSYS_CSPRNG' => 'Zufallszahlengenerator',
     'ERR_CHECKSYS_MBSTRING'             => 'Die Multibyte Strings PHP-Erweiterung (mbstring) scheint zu fehlen. <br/><br/>Dieses Modul ist normalerweise nicht aktiviert und muss mit --enable-mbstring aktiviert werden. In Ihrem PHP-Handbuch finden Sie mehr Informationen hierzu.',
@@ -545,139 +545,140 @@ Nehmen Sie die erforderlichen Änderungen vor, und führen Sie die System-Überp
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Der PHP-Rückwärts-Kompatibilitätsmodus ist eingeschaltet. Deaktivieren Sie den Modus "zend.ze1_compatibility_mode", um fortzufahren',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => 'Benachrichtigungs-E-Mails über Meetings',
+        'subject' => 'SugarCRM-Meeting - $event_name ',
+        'description' => 'Diese Vorlage wird verwendet, wenn das System Benachrichtigungen über Meetings an einen Benutzer sendet.',
         'body' => '<div>
 	<p>To: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Meeting</p>
+	<p>$assigned_by_user hat Sie zu einem Meeting eingeladen</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>Betreff: $event_name<br/>
+	Startdatum: $start_date<br/>
+	Enddatum: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>Beschreibung: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>Diesem Meeting zusagen:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>Diesem Meeting unter Vorbehalt zusagen:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>Diesem Meeting absagen:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
             'To: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user hat Sie zu einem Meeting eingeladen
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+Betreff: $event_name
+Startdatum: $start_date
+Enddatum: $end_date
 
-Description: $description
+Beschreibung: $description
 
-Accept this meeting:
+Diesem Meeting zusagen:
 <$accept_link>
 
-Tentatively Accept this meeting
+Diesem Meeting unter Vorbehalt zusagen
 <$tentative_link>
 
-Decline this meeting
+Diesem Meeting absagen
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => 'Benachrichtigungs-E-Mails über Anrufe',
+        'subject' => 'SugarCRM-Anruf - $event_name ',
+        'description' => 'Diese Vorlage wird verwendet, wenn das System Benachrichtigungen über Anrufe an einen Benutzer sendet.',
         'body' => '<div>
 	<p>To: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user hat Sie zu einem Anruf eingeladen</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>Betreff: $event_name<br/>
+	Startdatum: $start_date<br/>
+	Dauer: $hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>Beschreibung: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>Diesem Anruf zusagen:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>Diesem Anruf unter Vorbehalt zusagen:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>Diesem Anruf absagen:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
             'To: $assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user hat Sie zu einem Anruf eingeladen
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+Betreff: $event_name
+Startdatum: $start_date
+Dauer: $hoursh, $minutesm
 
-Description: $description
+Beschreibung: $description
 
-Accept this call:
+Diesem Anruf zusagen:
 <$accept_link>
 
-Tentatively Accept this call
+Diesem Anruf unter Vorbehalt zusagen
 <$tentative_link>
 
-Decline this call
+Diesem Anruf absagen
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => 'Benachrichtigungs-E-Mails über Zuweisungen',
+        'subject' => 'SugarCRM - $module_name zugewiesen',
+        'description' => 'Diese Vorlage wird verwendet, wenn das System die Zuweisung einer Aufgabe an einen Benutzer sendet.',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user hat dem&nbsp;$assigned_user einen&nbsp;$module_name zugewiesen.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>Sie können diesen&nbsp;$module_name überprüfen unter:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user hat dem $assigned_user einen $module_name zugewiesen.
 
-You may review this $module_name at:
+Sie können diesen $module_name überprüfen unter:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => 'E-Mails über geplante Berichte',
+        'subject' => 'Geplanter Bericht: $report_name ab $report_time',
+        'description' => 'Diese Vorlage wird verwendet, wenn das System einen geplanten Bericht an einen Benutzer sendet.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>Hallo $assigned_user,</p>
+<p>anbei ein automatisch generierter Bericht, der für Sie geplant wurde.</p>
+<p>Name des Berichts: $report_name</p>
+<p>Ausführungsdatum und -uhrzeit des Berichts: $report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            'Hallo $assigned_user,
 
-Attached is an auto generated report that has been scheduled for you.
+anbei ein automatisch generierter Bericht, der für Sie geplant wurde.
 
-Report Name: $report_name
+Name des Berichts: $report_name
 
-Report Run Date and Time: $report_time',
+Ausführungsdatum und -uhrzeit des Berichts: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => 'E-Mail-Benachrichtigung über Systemkommentarprotokolle',
+        'subject' => 'SugarCRM - $initiator_full_name hat Sie in einem(n) $singular_module_name erwähnt',
+        'description' => 'Diese Vorlage wird verwendet, um E-Mail-Benachrichtigungen für Benutzer zu senden, die im Bereich „Kommentarprotokolle" markiert wurden.',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>Sie wurden im Kommentarprotokoll des folgenden Datensatzes erwähnt:  <a href="$record_url">$record_name</a></p>
+                <p>Bitte melden Sie sich bei Sugar an, um den Kommentar anzuzeigen.</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'Sie wurden im Kommentarprotokoll des folgenden Datensatzes erwähnt: $record_name
+            Bite melden Sie sich bei Sugar an, um den Kommentar anzuzeigen.',
     ],
 
     'advanced_password_new_account_email' => array(

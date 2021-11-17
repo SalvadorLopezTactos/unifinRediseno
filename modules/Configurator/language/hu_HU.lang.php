@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'Felhasználónév',
 	'LBL_RESTORE_BUTTON_LABEL'=>'Visszaállítás',
 	'LBL_SYSTEM_SETTINGS' => 'Rendszer-beállítások',
-	'LBL_SKYPEOUT_ON_DESC' => 'Engedélyezi a felhasználóknak, hogy telefonszámra kattintva hívást kezdeményezzenek a SkypeOut® szolgáltatáson keresztül. A használathoz szintén szükséges a telefonszámok megfelelő formátuma: "+" "Körzetszám" "Telefonszám", például: +1 (555) 555-1234.',
-	'LBL_SKYPEOUT_ON' => 'Engedélyezze a SkypeOut® integrációt',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut®',
+    'LBL_DIALOUT_ON_DESC' => 'Lehetővé teszi a felhasználók számára azt, hogy a telefonszámokra kattintva az alapértelmezett számítógépes telefon-integrációs (CTI) szoftver használatával felhívják azokat.',
+    'LBL_DIALOUT_ON' => 'Kattintásra hívás engedélyezése',
+    'LBL_DIALOUT_TITLE' => 'Kimenő hívások',
     'LBL_TWEETTOCASE_ON_DESC' => 'Lehetővé teszi a felhasználóknak, hogy a Tweets-ből eseteket kreáljanak',
     'LBL_TWEETTOCASE_ON' => 'Lehetővé teszi a Tweet® részére az eset integrációját',
     'LBL_TWEETTOCASE_TITLE' => 'Tweet®-ből esetbe',
@@ -363,7 +363,7 @@ $mod_strings = array (
     'JS_ALERT_PDF_WRONG_EXTENSION' => 'Ennek a fájlnak nem megfelelő a kiterjesztése.',
     'LBL_PDF_INSTRUCTIONS' => 'Utasítások',
     'PDF_INSTRUCTIONS_ADD_FONT' => <<<BSOFR
-Fonts supported by SugarPDF :
+A SugarPDF által támogatott betűtípusok:
 <ul>
 <li>TrueTypeUnicode (UTF-8 Unicode)</li>
 <li>OpenTypeUnicode</li>
@@ -373,11 +373,11 @@ Fonts supported by SugarPDF :
 <li>CID-0</li>
 </ul>
 <br>
-If you choose to not embed your font in the PDF, the generated PDF file will be lighter but a substitution will be use if the font is not available in the system of your reader.
+Ha úgy dönt, hogy nem ágyazza bele a betűtípust a PDF-be, akkor a létrehozott PDF kisebb lesz, de a betűtípus le lesz cserélve, ha az nem elérhető az olvasójának rendszerén.
 <br><br>
-Adding a PDF font to SugarCRM requires to follow steps 1 and 2 of the TCPDF Fonts documentation available in the "DOCS" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>The pfm2afm and ttf2ufm utils are available in fonts/utils in the TCPDF package that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>Load the metric file generated in step 2 and your font file below.
+Ha hozzá szeretne adni egy betűtípust a SugarCRM-hez, akkor követnie kell a <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF weboldalának</a> "DOCS" szekcióban elérhető TCPDF betűtípus-dokumentációban található első és második lépést.
+<br><br>A pfm2afm és ttf2ufm eszközök elérhetőek a TCPDF csomagjának betűtípus/eszközök részében, amelyet letölthet a <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF weboldalának</a> "LETÖLTÉSEK" szekciójából.
+<br><br>Töltse be a létrehozott metrikus fájlt a második lépésben és az alább található betűtípus-fájlt.
 BSOFR
 ,
     'ERR_MISSING_CIDINFO' => 'A mező CID információja nem lehet üres.',
@@ -428,6 +428,9 @@ BSOFR
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* A Jelentések modul nem érhető el telefonos böngészőkön keresztül.',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => 'A maximális hossznak meg kell haladnia a minimális hossz értékét',
+    'ERR_MIN_LENGTH_NEGATIVE' => 'A minimális hossz mindenképpen legyen pozitív érték',
+    'ERR_MAX_LENGTH_NEGATIVE' => 'A maximális hossz mindenképpen legyen pozitív érték',
     'ERR_EMPTY_SAML_LOGIN' => 'Az SAML Bejelentkezési URL nem lehet üres',
     'ERR_EMPTY_SAML_CERT' => 'Az SAML tanúsítvány nem lehet üres',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML entitás azonosító mező nem lehet üres',
@@ -441,9 +444,6 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Tevékenységfolyamok',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Tevékenységfolyamok engedélyezése',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Bekapcsolja a tevékenységfolyamokat az alkalmazásban',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Bejelentkezési képernyő kiegészítő tartalmának engedélyezése',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Folyamatdefiníciók automatikus mentése',

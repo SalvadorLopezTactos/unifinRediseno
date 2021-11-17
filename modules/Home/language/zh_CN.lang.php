@@ -115,7 +115,8 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => '添加的 Sugar 仪表',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => '将 Dashlets 重新排列，您确定要更改列布局？',
   'LBL_REMOVE_DASHLET_CONFIRM' => '您确定要删除这个 Sugar 仪表吗?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => '没有配置仪表板。',
+  'LBL_NO_DASHBOARD_CONFIGURED' => '没有配置仪表板',
+  'LBL_NO_DASHLETS_CONFIGURED' => '没有配置仪表',
   'LBL_CREATE_DASHBOARD_LINK' => '创建仪表板',
 
   'LBL_DASHLET_WEBPAGE_NAME' => '网页',
@@ -123,7 +124,7 @@ $mod_strings = array (
   'LBL_DASHLET_WEBPAGE_URL' => 'URL',
   'LBL_DASHLET_WEBPAGE_URL_HELP' => '由于不安全的内容或政策，有些网站可能无法正确加载。',
 
-  'LBL_DASHLET_ADD' => '添加',
+  'LBL_DASHLET_ADD' => '添加仪表',
   'LBL_DASHLET_DELETE' => '删除 Sugar 仪表',
   'LBL_DASHLET_REFRESH' => '刷新 Sugar 仪表',
   'LBL_DASHLET_EDIT' => '编辑 Sugar 仪表',
@@ -218,7 +219,6 @@ $mod_strings = array (
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - Mihai Bazon 开发的用于输入日期的日历。',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - Wayne Munro 开发的用于创建 PDF 文档的库',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server-在 PHP 中的 WebDAV 服务器执行过程。',
-  'LBL_SOURCE_PCLZIP' => 'PclZip - Vincent Blavet 开发的为 Zip 格式的文章提供压缩和抽取功能的库',
   'LBL_SOURCE_SMARTY' => 'Smarty - 一个 PHP 模板引擎。',
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - 用于实施丰富的客户端功能的用户界面库实用程序。',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer-PHP 全功能的电子邮件传送类',

@@ -11,9 +11,12 @@
  */
 require_once('include/utils/zip_utils.php');
 
+use Sugarcrm\Sugarcrm\PackageManager\Entity\PackageManifest;
 use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+use Sugarcrm\Sugarcrm\PackageManager\PackageManager;
+use Sugarcrm\Sugarcrm\PackageManager\File\PackageZipFile;
 
 SugarAutoLoader::requireWithCustom('ModuleInstall/ModuleInstaller.php');
 
@@ -73,77 +76,6 @@ function parseAcceptLanguage() {
     return '';
 }
 
-
-
-function commitPatch($unlink = false, $type = 'patch'){
-    require_once('include/entryPoint.php');
-
-
-    global $mod_strings;
-    global $base_upgrade_dir;
-    global $base_tmp_upgrade_dir;
-    global $db;
-    $GLOBALS['db'] = $db;
-    $errors = array();
-    $files = array();
-     global $current_user;
-    $current_user = new User();
-    $current_user->is_admin = '1';
-    $old_mod_strings = $mod_strings;
-    if(is_dir($base_upgrade_dir)) {
-            $files = findAllFiles("$base_upgrade_dir/$type", $files);
-            $moduleInstallerClass = SugarAutoLoader::customClass('ModuleInstaller');
-            $mi = new $moduleInstallerClass();
-            $mi->silent = true;
-            $mod_strings = return_module_language('en', "Administration");
-
-            foreach($files as $file) {
-                if(!preg_match('#.*\.zip\$#', $file)) {
-                    continue;
-                }
-                // handle manifest.php
-                $target_manifest = remove_file_extension( $file ) . '-manifest.php';
-
-                include($target_manifest);
-
-                $unzip_dir = mk_temp_dir( $base_tmp_upgrade_dir );
-                unzip($file, $unzip_dir );
-                if(file_exists("$unzip_dir/scripts/pre_install.php")){
-                    require_once("$unzip_dir/scripts/pre_install.php");
-                    pre_install();
-                }
-                if( isset( $manifest['copy_files']['from_dir'] ) && $manifest['copy_files']['from_dir'] != "" ){
-                    $zip_from_dir   = $manifest['copy_files']['from_dir'];
-                }
-                $source = "$unzip_dir/$zip_from_dir";
-                $dest = getcwd();
-                copy_recursive($source, $dest);
-
-                if(file_exists("$unzip_dir/scripts/post_install.php")){
-                    require_once("$unzip_dir/scripts/post_install.php");
-                    post_install();
-                }
-                $new_upgrade = new UpgradeHistory();
-                $new_upgrade->filename      = $file;
-                $new_upgrade->md5sum        = md5_file($file);
-                $new_upgrade->type          = $manifest['type'];
-                $new_upgrade->version       = $manifest['version'];
-                $new_upgrade->status        = "installed";
-                $new_upgrade->name          = $manifest['name'];
-                $new_upgrade->description   = $manifest['description'];
-                $serial_manifest = array();
-                $serial_manifest['manifest'] = (isset($manifest) ? $manifest : '');
-                $serial_manifest['installdefs'] = (isset($installdefs) ? $installdefs : '');
-                $serial_manifest['upgrade_manifest'] = (isset($upgrade_manifest) ? $upgrade_manifest : '');
-                $new_upgrade->manifest   = base64_encode(serialize($serial_manifest));
-                $new_upgrade->save();
-                unlink($file);
-            }//rof
-    }//fi
-    $mod_strings = $old_mod_strings;
-}
-
-
 /**
  * creates UpgradeHistory entries
  * @param mode string Install or Uninstall
@@ -151,13 +83,39 @@ function commitPatch($unlink = false, $type = 'patch'){
 function updateUpgradeHistory() {
     if(isset($_SESSION['INSTALLED_LANG_PACKS']) && count($_SESSION['INSTALLED_LANG_PACKS']) > 0) {
         foreach($_SESSION['INSTALLED_LANG_PACKS'] as $k => $zipFile) {
+            // What was installed without source zip file?
+            if (!file_exists($zipFile)) {
+                continue;
+            }
+            $zipDir = pathinfo($zipFile, PATHINFO_DIRNAME);
+            $fileName = pathinfo($zipFile, PATHINFO_FILENAME);
+            $manifestFile = $zipDir . DIRECTORY_SEPARATOR . $fileName . '-manifest.php';
+            // How was it installed without manifest?
+            if (!file_exists($manifestFile)) {
+                continue;
+            }
+            $manifest = $installdefs = $upgrade_manifest = [];
+            require $manifestFile;
+            if (empty($manifest['id_name'])) {
+                $idName = !empty($manifest['name']) ? $manifest['name'] : $fileName;
+            } else {
+                $idName = $manifest['id_name'];
+            }
             $new_upgrade = new UpgradeHistory();
-            $new_upgrade->filename      = $zipFile;
-            $new_upgrade->md5sum        = md5_file($zipFile);
-            $new_upgrade->type          = 'langpack';
-            $new_upgrade->version       = $_SESSION['INSTALLED_LANG_PACKS_VERSION'][$k];
-            $new_upgrade->status        = "installed";
-            $new_upgrade->manifest      = $_SESSION['INSTALLED_LANG_PACKS_MANIFEST'][$k];
+
+            $new_upgrade->id_name = $idName;
+            $new_upgrade->name = !empty($manifest['name']) ? $manifest['name'] : $idName;
+            $new_upgrade->description = $manifest['description'] ?? '';
+            $new_upgrade->filename = $zipFile;
+            $new_upgrade->md5sum = md5_file($zipFile);
+            $new_upgrade->type = 'langpack';
+            $new_upgrade->version = $manifest['version'] ?? '';
+            $new_upgrade->status = UpgradeHistory::STATUS_INSTALLED;
+            $new_upgrade->manifest = base64_encode(serialize([
+                'manifest' => $manifest, 'installdefs' => $installdefs, 'upgrade_manifest' => $upgrade_manifest,
+            ]));
+            $new_upgrade->published_date = $manifest['published_date'] ?? '';
+            $new_upgrade->uninstallable = false;
             $new_upgrade->save();
         }
     }
@@ -675,6 +633,10 @@ function handleSidecarConfig()
 function getForbiddenPaths()
 {
     return [
+        'package\.json',
+        'yarn\.lock',
+        'gulpfile\.js',
+        'webpack\.config\.js',
         '\.git',
         '\.log$',
         '^bin/',
@@ -687,6 +649,7 @@ function getForbiddenPaths()
         '^files\.md5$',
         '^src/',
         '^upload/',
+        '^upgrades/',
         '^vendor/(?!ytree.*\.(css|gif|js|png)$)',
 // @codingStandardsIgnoreStart
         '^(cache|clients|data|examples|include|install|jssource|metadata|ModuleInstall|modules|soap|xtemplate)/.*\.(php|tpl)$',
@@ -749,6 +712,7 @@ EOQ;
     RewriteRule ^cache/Expressions/functions_cache(_debug)?.js$ rest/v10/ExpressionEngine/functions?debug=$1 [N,QSA,DPI]
     RewriteRule ^cache/jsLanguage/(.._..).js$ index.php?entryPoint=jslang&module=app_strings&lang=$1 [L,QSA,DPI]
     RewriteRule ^cache/jsLanguage/(\w*)/(.._..).js$ index.php?entryPoint=jslang&module=$1&lang=$2 [L,QSA,DPI]
+    RewriteRule ^oauth-handler/(.*)$ index.php?module=EAPM&action=$1 [L,QSA]
     RewriteRule ^portal/(.*)$ portal2/$1 [L,QSA]
     RewriteRule ^portal$ portal/? [R=301,L]
 </IfModule>
@@ -869,6 +833,10 @@ function handleWebConfig($iisCheck = true)
             '1' => 'rest/(.*)$',
             '2' => 'api/rest.php?__sugar_url={R:1}',
         ),
+        [
+            '1' => '^oauth-handler/(.*)$',
+            '2' => 'index.php?module=EAPM&action={R:1}',
+        ],
     );
 
     $xmldoc = new XMLWriter();
@@ -1107,12 +1075,10 @@ function insert_default_settings(){
     $db->query("INSERT INTO config (category, name, value) VALUES ('MySettings', 'tab', '')");
     $db->query("INSERT INTO config (category, name, value, platform) VALUES ('portal', 'on', '0', 'support')");
 
-
     // license info
     $db->query( "INSERT INTO config (category, name, value) VALUES ( 'license', 'users',        '0' )" );
     $db->query( "INSERT INTO config (category, name, value) VALUES ( 'license', 'expire_date',  '' )" );
     $db->query( "INSERT INTO config (category, name, value) VALUES ( 'license', 'key',          '' )" );
-
 
     //insert default tracker settings
     $db->query("INSERT INTO config (category, name, value) VALUES ('tracker', 'Tracker', '1')");
@@ -1125,8 +1091,6 @@ function insert_default_settings(){
     $db->query( "INSERT INTO config (category, name, value) VALUES ( 'system', 'tweettocase_on', '0' )");
 
 }
-
-
 
 function update_license_settings($users, $expire_date, $key)
 {
@@ -1166,17 +1130,10 @@ function update_license_settings($users, $expire_date, $key)
     );
 }
 
-
-
-
-
-
-
 // Returns true if the given file/dir has been made writable (or is already
 // writable).
 function make_writable($file)
 {
-
     $ret_val = false;
     if(is_file($file) || is_dir($file))
     {
@@ -1759,8 +1716,8 @@ function unlinkTempFiles($manifest='', $zipFile='') {
         @unlink($sugar_config['upload_dir'].$tmpZipFile);
     }
 
-    rmdir_recursive($sugar_config['upload_dir']."upgrades/temp");
-    sugar_mkdir($sugar_config['upload_dir']."upgrades/temp");
+        rmdir_recursive("upgrades/temp");
+        sugar_mkdir("upgrades/temp");
 }
 }
 
@@ -2001,17 +1958,20 @@ function post_install_modules(){
         global $current_user, $mod_strings;
         $current_user = new User();
         $current_user->is_admin = '1';
-        require_once('ModuleInstall/PackageManager/PackageManager.php');
+
+        $packageManager = new PackageManager();
+        $modules_to_install = [];
         require_once('modules_post_install.php');
-        //we now have the $modules_to_install array in memory
-        $pm = new PackageManager();
         $old_mod_strings = $mod_strings;
-        foreach($modules_to_install as $module_to_install){
-            if(is_file($module_to_install)){
-                $pm->performSetup($module_to_install, 'module', false);
-                $file_to_install = sugar_cached('upload/upgrades/module/').basename($module_to_install);
-                $_REQUEST['install_file'] = $file_to_install;
-                $pm->performInstall($file_to_install);
+        foreach ($modules_to_install as $installModule) {
+            try {
+                $packageZipFile = new PackageZipFile($installModule, $packageManager->getBaseTempDir());
+                $history = $packageManager->uploadPackageFromFile(
+                    $packageZipFile,
+                    PackageManifest::PACKAGE_TYPE_MODULE
+                );
+                $packageManager->installPackage($history);
+            } catch (Exception $e) {
             }
         }
         $mod_strings = $old_mod_strings;

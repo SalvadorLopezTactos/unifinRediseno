@@ -17,16 +17,79 @@
     events: {
         'click .dropdown-toggle': 'toggleClicked',
         'click a[data-id]': 'navigateClicked',
-        'click a[data-action=manager]': 'managerClicked'
+        'click a[data-action=manager]': 'managerClicked',
+        'click a[data-type=dashboardtitle]': 'editClicked',
+        'keydown input[name=name]': 'fieldInput',
+        'blur input[name=name]': 'fieldBlur',
     },
     dashboards: null,
+
+    hasEditAccess: true,
+
+    /**
+     * @inheritdoc
+     */
+    initialize: function(options) {
+        this._super('initialize', [options]);
+
+        if (!app.acl.hasAccessToModel('edit', this.model, this.name)) {
+            this.hasEditAccess = false;
+        }
+    },
+
+    /**
+     * Handle the click by dashboard title
+     * @param {Object} evt The jQuery Event Object
+     */
+    editClicked: function(evt) {
+        // Reinitialize hasChanges function to provide opportunity
+        // to collapse the field with changes
+        this.hasChanged = function() {
+            return false;
+        };
+
+        this.view.editClicked(evt);
+        this.view.toggleField(this, true);
+    },
+
+    /**
+     * Handle input in title field
+     * @param {Object} evt The jQuery Event Object
+     */
+    fieldInput: function(evt) {
+        this.model.set('name', evt.currentTarget.value, {
+            silent: true
+        });
+
+        if (!this.model.dataFetched) {
+            return;
+        }
+
+        if ($.inArray(evt.keyCode, [13, 27]) != -1) {
+            this.fieldBlur();
+        }
+    },
+
+    /**
+     * Handle blur of title field
+     * @param {Object} evt The jQuery Event Object
+     */
+    fieldBlur: function(evt) {
+        if (!this.model.dataFetched) {
+            return;
+        }
+
+        this.view.saveHandle();
+        this.view.toggleField(this);
+    },
+
     toggleClicked: function(evt) {
         var self = this;
         if (!_.isEmpty(this.dashboards)) {
             return;
         }
 
-        var contextBro = this.context.parent && this.context.parent.get('layout') === 'multi-line' ?
+        var contextBro = this.context.parent && _.contains(['multi-line', 'focus'], this.context.parent.get('layout')) ?
             this.context.parent : this.context.parent.getChildContext({module: 'Home'});
         var collection = contextBro.get('collection').clone();
         var pattern = /^(LBL|TPL|NTC|MSG)_(_|[a-zA-Z0-9])*$/;
@@ -54,7 +117,8 @@
      * Navigate the user to the manage dashboards view
      */
     managerClicked: function() {
-        var ctx = this.context && this.context.parent && this.context.parent.get('layout') === 'multi-line' ?
+        var ctx = this.context && this.context.parent &&
+        (_.contains(['multi-line', 'focus'], this.context.parent.get('layout'))) ?
             this.context.parent : app.controller.context;
         var dashboardModule = ctx.get('module');
         var dashboardLayout = ctx.get('layout');
@@ -97,7 +161,8 @@
         if (this.context && this.context.get('model') &&
             this.context.get('model').dashboardModule === 'Home'
         ) {
-            this.template = app.template.getField('base', this.tplName) || this.template;
+            var tpl = (this.tplName === 'detail') ? 'dashboardtitle' : this.tplName;
+            this.template = app.template.getField('dashboardtitle', tpl, this.module) || this.template;
         }
     },
 

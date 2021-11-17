@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Index;
 
+use Sugarcrm\Sugarcrm\DependencyInjection\Container as SugarContainer;
 use Sugarcrm\Sugarcrm\Elasticsearch\Container;
 use Sugarcrm\Sugarcrm\Elasticsearch\Analysis\AnalysisBuilder;
 use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\MappingHandlerInterface;
@@ -21,6 +22,7 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Index;
 use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\MappingCollection;
 use Sugarcrm\Sugarcrm\Elasticsearch\Exception\IndexManagerException;
 use Elastica\Response;
+use Elastica\Client as ElasticaClient;
 
 /**
  *
@@ -37,6 +39,18 @@ class IndexManager
      * which apply to all indices.
      */
     const DEFAULT_INDEX_SETTINGS_KEY = 'default';
+
+    /**
+     * default max number of fields for an index
+     * this value could be overwritten by
+     * `$sugar_config['default']['index.mapping.total_fields.limit']`
+     */
+    const DEFAULT_MAX_NUMBER_OF_FIELDS = 2000;
+
+    /**
+     * default value for config entry 'enable_one_index'
+     */
+    const CONFIG_ENABLE_ONE_INDEX = false;
 
     /**
      * @var Container
@@ -60,6 +74,9 @@ class IndexManager
         'index.refresh_interval' => '1s',
         // Number of replicas
         'index.number_of_replicas' => '1',
+        // max ngram diff, is only for ES 7.x and up
+        // 'index.max_ngram_diff' => 50,
+        'index.mapping.total_fields.limit' => self::DEFAULT_MAX_NUMBER_OF_FIELDS,
     );
 
     /**
@@ -67,6 +84,7 @@ class IndexManager
      */
     protected $defaultMapping = array(
         // Avoid wasting space on _all field which we don't need
+        // this option only works in ES 5.x and 6.x, it's been removed in ES 7.x
         '_all' => array('enabled' => false),
         // Ignore new fields for which no mapping exists
         'dynamic' => false,
@@ -185,6 +203,9 @@ class IndexManager
      */
     public function scheduleIndexing(array $modules = array(), $recreateIndices = false)
     {
+        // make sure to get the latest elastic version from server directly
+        $this->getServerVersion(true);
+
         $allModules = $this->getAllEnabledModules();
         if (empty($modules)) {
             $modules = $allModules;
@@ -235,9 +256,18 @@ class IndexManager
             return false;
         }
 
-        // add the mapping without re-creating the indices if indices exist,
-        // create new indices if indices don't exist
-        $this->syncIndices($modules, false, true);
+        $enabledModules = [];
+        foreach ($modules as $module) {
+            if ($this->container->metaDataHelper->isModuleEnabled($module)) {
+                $enabledModules[] = $module;
+            }
+        }
+
+        if (!empty($enabledModules)) {
+            // add the mapping without re-creating the indices if indices exist,
+            // create new indices if indices don't exist
+            $this->syncIndices($enabledModules, false, true);
+        }
 
         return true;
     }
@@ -357,7 +387,7 @@ class IndexManager
     protected function buildIndexSettings(Index $index, AnalysisBuilder $analysisBuilder)
     {
         $config = $this->getIndexSettingsFromConfig($index);
-        return array_merge($config, $analysisBuilder->compile());
+        return ['settings' => array_merge($config, $analysisBuilder->compile())];
     }
 
     /**
@@ -381,7 +411,7 @@ class IndexManager
         }
 
         // derfault core settings
-        $settings = array_merge($this->defaultSettings, $settings);
+        $settings = array_merge($this->getDefaultSettings(), $settings);
 
         // We do NOT accept analysis settings anymore in `$sugar_config`
         if (isset($settings[AnalysisBuilder::ANALYSIS])) {
@@ -406,31 +436,70 @@ class IndexManager
         $createNew = false
     ) {
         foreach ($indexCollection as $index) {
-
+            $isNewIndex = false;
             if ($dropExist === true || ($createNew === true && !$index->exists())) {
                 $this->createIndex($index, $analysisBuilder, $dropExist);
+                $isNewIndex = true;
             }
 
             // Set mapping for all available types on this index
             $types = $index->getTypes();
-            foreach ($types as $module => $type) {
+            $needSetSourceExcludes = true;
+            $aggeExcludeSettings = [];
+            if (self::isOneIndexEnabled()) {
+                // for one index per instance ES Index, Elastic can only updates source excludes once,
+                // so we have to calculate it first
+                $aggeExcludeSettings = $this->getAggSourceExcludes($index, $mappingCollection);
+            }
 
+            foreach ($types as $module => $type) {
                 /* @var $fieldMappings Mapping */
                 $fieldMappings = $mappingCollection->$module;
                 $properties = $fieldMappings->compile();
 
                 // Prepare mapping object
-                $mapping = new \Elastica\Type\Mapping();
+                $mapping = $this->getMapping();
                 $mapping->setType($type);
                 $mapping->setProperties($properties);
 
+                // only need to set '_source' once for one index for all modules
+                // this '_source' setting must be invoked in the first mapping API call for ES 7.x
                 // Configure _source
-                $mapping->setParam('_source', $this->getSourceSettings($fieldMappings));
-
+                if (self::isOneIndexEnabled()) {
+                    if ($needSetSourceExcludes && $isNewIndex) {
+                        // only update _source once
+                        $mapping->setParam('_source', $this->getSourceSettings($aggeExcludeSettings));
+                        $needSetSourceExcludes = false;
+                    }
+                } else {
+                    $mapping->setParam('_source', $this->getSourceSettings($fieldMappings->getSourceExcludes()));
+                }
                 // Send mapping
-                $this->sendMapping($mapping);
+                $this->sendMapping($mapping, $index);
             }
         }
+    }
+
+    /**
+     * To get aggregated Source excludes for given $index
+     * @param Index $index
+     * @param MappingCollection $mappingCollection
+     * @return array
+     */
+    protected function getAggSourceExcludes(Index $index, MappingCollection $mappingCollection) : array
+    {
+        $types = $index->getTypes();
+        $count = count($types);
+        $aggeExcludeSettings = [];
+        foreach ($types as $module => $type) {
+            /* @var $fieldMappings Mapping */
+            $fieldMappings = $mappingCollection->$module;
+            $excludes = $fieldMappings->getSourceExcludes();
+            if ($excludes) {
+                $aggeExcludeSettings = array_merge($aggeExcludeSettings, $excludes);
+            }
+        }
+        return $aggeExcludeSettings;
     }
 
     /**
@@ -468,22 +537,20 @@ class IndexManager
                 $properties = $fieldMappings->compile();
 
                 // Prepare mapping object
-                $mapping = new \Elastica\Type\Mapping();
+                $mapping = $this->getMapping();
                 $mapping->setType($type);
                 $mapping->setProperties($properties);
-
-                // send out without any default properties
-                $mapping->send();
+                $mapping->send($index);
             }
         }
     }
 
     /**
      * Get _source field settings
-     * @param Mapping $mapping
+     * @param array $excludes
      * @return array
      */
-    protected function getSourceSettings(Mapping $mapping)
+    protected function getSourceSettings(array $excludes = [])
     {
         // base settings
         $source = array(
@@ -491,7 +558,7 @@ class IndexManager
         );
 
         // add excludes
-        if ($excludes = $mapping->getSourceExcludes()) {
+        if (!empty($excludes)) {
             $source['excludes'] = $excludes;
         }
 
@@ -517,14 +584,15 @@ class IndexManager
     /**
      * Send type mapping to backend applying default mapping
      * @param \Elastica\Type\Mapping $mapping
+     * @param Index $index
      */
-    protected function sendMapping(\Elastica\Type\Mapping $mapping)
+    protected function sendMapping(\Elastica\Mapping $mapping, Index $index)
     {
         // Apply default mapping settings
-        foreach ($this->defaultMapping as $key => $value) {
+        foreach ($this->getDefaultMapping() as $key => $value) {
             $mapping->setParam($key, $value);
         }
-        $mapping->send();
+        $mapping->send($index);
     }
 
     /**
@@ -769,5 +837,104 @@ class IndexManager
             throw new IndexManagerException("No number_of_replicas config setting available");
         }
         return $this->setNumberOfReplicas($index, $config['index.number_of_replicas']);
+    }
+
+    /**
+     * factory, to get the right Mapping for the version
+     * @return \Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Mapping
+     */
+    protected function getMapping() : \Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Mapping
+    {
+        $esVersion = $this->getServerVersion();
+        // check elastic version to get the right version
+        if (version_compare($esVersion, '7.0', '<')) {
+            // ES 6.x or 5.x
+            if (version_compare($esVersion, '6.0', '<') || !self::isOneIndexEnabled()) {
+                //ES 5.x or no one index is enabled
+                return new \Sugarcrm\Sugarcrm\Elasticsearch\Adapter\MappingWithType();
+            } else {
+                // ES 6.x and one index per instance is enabled
+                return new \Sugarcrm\Sugarcrm\Elasticsearch\Adapter\MappingWithSingleType();
+            }
+        }
+        return new \Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Mapping();
+    }
+
+    /**
+     * get the version of elastic server
+     * @param bool $forceRefresh    flag to get from server directly
+     * @return string
+     * @throws \Exception
+     */
+    protected function getServerVersion(bool $forceRefresh = false) : string
+    {
+        return $this->container->client->getElasticServerVersion($forceRefresh);
+    }
+
+    /**
+     * get default settings
+     * @return array
+     */
+    protected function getDefaultSettings() : array
+    {
+        // check elastic version to get the right version
+        if (version_compare($this->getServerVersion(), '7.0', '<')) {
+            return $this->defaultSettings;
+        }
+        // for ES 7.x, need this max_ngram_diff property
+        return array_merge($this->defaultSettings, ['index.max_ngram_diff' => 50]);
+    }
+
+    // // Avoid wasting space on _all field which we don't need
+    //        '_all' => array('enabled' => false),
+    /**
+     * get default mapping
+     * @return array
+     */
+    protected function getDefaultMapping() : array
+    {
+        // check elastic version to get the right version
+        if (version_compare($this->getServerVersion(), '7.0', '<')) {
+            return $this->defaultMapping;
+        }
+        // for ES 7.x
+        return ['dynamic' => false];
+    }
+
+    /**
+     * check config for 'enable_one_index'
+     * @return bool
+     */
+    public static function isOneIndexEnabled() : bool
+    {
+        return SugarContainer::getInstance()
+            ->get(\SugarConfig::class)
+            ->get('enable_one_index', self::CONFIG_ENABLE_ONE_INDEX);
+    }
+
+    /**
+     * check if ES server version 6.0 or above
+     */
+    public static function isEsServerV6Above()
+    {
+        // using raw Client call to check Elastic server
+        static $checked = false;
+        static $result = false;
+        if (!$checked) {
+            $checked = true;
+            try {
+                $ftsConfig = SugarContainer::getInstance()
+                    ->get(\SugarConfig::class)
+                    ->get('full_text_engine.Elastic', []);
+                $client = new ElasticaClient($ftsConfig);
+                $data = $client->request('')->getData();
+                $version = $data['version']['number'] ?? "0";
+                $result = version_compare($version, '6.0', '>=');
+            } catch (Exception $e) {
+                $GLOBALS['log']->fatal('exception in getting Elastic version:' . $e->getMessage());
+                return false;
+            }
+        }
+        return $result;
     }
 }

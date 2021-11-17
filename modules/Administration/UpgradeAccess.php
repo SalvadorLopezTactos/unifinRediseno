@@ -14,8 +14,6 @@ require_once 'install/install_utils.php';
 global $mod_strings;
 global $sugar_config;
 
-$ignoreCase = (substr_count(strtolower($_SERVER['SERVER_SOFTWARE']), 'apache/2') > 0)?'(?i)':'';
-
 $htaccess_file   = getcwd() . "/.htaccess";
 $contents = getHtaccessData($htaccess_file);
 

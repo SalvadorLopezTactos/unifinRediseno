@@ -370,6 +370,7 @@ class FileApi extends SugarApi {
         if (isset($args['force_download'])) {
             $forceDownload = (bool) $args['force_download'];
         }
+        $api->setHeader('Content-Security-Policy', "script-src 'none'");
 
         $download = $this->getDownloadFileApi($api);
         try {
@@ -485,13 +486,26 @@ class FileApi extends SugarApi {
         // Handle ACL
         $this->verifyFieldAccess($linkSeed, $field);
 
-        $beans = $record->$linkName->getBeans();
+        $beans = $this->getBeansForZipArchive($record, $linkName, $field);
         $download = $this->getDownloadFileApi($api);
         try {
             $download->getArchive($beans, $field, empty($record->name) ? $record->id : $record->name);
         } catch (Exception $e) {
             throw new SugarApiExceptionNotFound($e->getMessage(), null, null, 0, $e);
         }
+    }
+
+    /**
+     * Util to get array of beans for zip archive file.
+     *
+     * @param SugarBean $record base record with attachments
+     * @param string $linkName name of multi-file relationship
+     * @param string $field name of file field on related beans
+     * @return array Array of SugarBeans storing files to download
+     */
+    public function getBeansForZipArchive(SugarBean $record, string $linkName, string $field)
+    {
+        return $record->$linkName->getBeans();
     }
 
     /**

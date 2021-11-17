@@ -20,11 +20,10 @@
 </style>
 {/literal}
 
-
-{$INSTRUCTION}
-
-<div class="hr"></div>
-
+{if !$idm_update_mode_only}
+    {$INSTRUCTION}
+    <div class="hr"></div>
+{/if}
 <form enctype="multipart/form-data" name="importstep2" method="POST" action="index.php" id="importstep2">
 {sugar_csrf_form_token}
 <input type="hidden" name="module" value="Import">
@@ -32,7 +31,7 @@
 <input type="hidden" name="custom_delimiter_other" value="{$CUSTOM_DELIMITER_OTHER}">
 <input type="hidden" name="custom_enclosure" value="{$CUSTOM_ENCLOSURE}">
 <input type="hidden" name="source" value="{$SOURCE|escape:'html':'UTF-8'}">
-<input type="hidden" name="source_id" value="{$SOURCE_ID}">
+<input type="hidden" name="source_id" value="{$SOURCE_ID|escape:'html':'UTF-8'}">
 <input type="hidden" name="action" value="Confirm">
 <input type="hidden" name="current_step" value="{$CURRENT_STEP}">
 <input type="hidden" name="import_module" value="{$IMPORT_MODULE}">
@@ -41,6 +40,31 @@
 <tr>
 <td>
 	<table border="0" cellspacing="0" cellpadding="0" width="100%">
+        {if $idm_update_mode_only}
+            <tr>
+                <td scope="row" colspan="4">
+                    <h3>{$MOD.LBL_IDM_IMPORT_TYPE_CREATE}&nbsp;</h3>
+                </td>
+            </tr>
+            <tr>
+                <td scope="row" colspan="4">
+                    {$IDM_CREATE_INSTRUCTION}
+                </td>
+            </tr>
+            <tr>
+                <td scope="row" colspan="4"><div class="hr">&nbsp;</div></td>
+            </tr>
+            <tr>
+                <td scope="row" colspan="4">
+                    <h3>{$MOD.LBL_IDM_IMPORT_TYPE_UPDATE}&nbsp;</h3>
+                </td>
+            </tr>
+            <tr>
+                <td scope="row" colspan="4">
+                    {$IDM_UPDATE_INSTRUCTION}
+                </td>
+            </tr>
+        {/if}
         <tr>
             <td align="left" scope="row" colspan="4" style="padding-left: 10px;">{$SAMPLE_URL} &nbsp;{sugar_help text=$MOD.LBL_SAMPLE_URL_HELP}</td>
         </tr>
@@ -53,28 +77,34 @@
         <tr>
             <td align="left" scope="row" colspan="3"><label for="userfile">{$MOD.LBL_SELECT_FILE}</label> <input type="hidden" /><input size="20" id="userfile" name="userfile" type="file"/> &nbsp;{sugar_help text=$MOD.LBL_FILE_UPLOAD_WIDGET_HELP}</td>
         </tr>
-        <tr>
-            <td scope="row" colspan="4"><div class="hr">&nbsp;</div></td>
-        </tr>
-        <tr>
-            <td scope="row" colspan="4">&nbsp;</td>
-        </tr>
-        <tr>
-            <td scope="row" colspan="3">
-                <h3>{$MOD.LBL_IMPORT_TYPE}&nbsp;</h3></td>
-          </tr>
-          <tr>
-            <td scope="row" colspan="3">
-                <input id="import_create" class="radio" type="radio" name="type" value="import" checked="checked" />
-                &nbsp;<label for="type">{$MOD.LBL_IMPORT_BUTTON}</label> &nbsp;{sugar_help text=$MOD.LBL_CREATE_BUTTON_HELP}
-            </td>
-          </tr>
-          <tr>
-            <td scope="row" colspan="3">
-                <input id="import_update" class="radio" type="radio" name="type" id="type" value="update" />
-                &nbsp;<label for="type">{$MOD.LBL_UPDATE_BUTTON}</label> &nbsp;{sugar_help text=$MOD.LBL_UPDATE_BUTTON_HELP}
-            </td>
-          </tr>
+        {if !$idm_update_mode_only}
+            <tr>
+                <td scope="row" colspan="4"><div class="hr">&nbsp;</div></td>
+            </tr>
+            <tr>
+                <td scope="row" colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td scope="row" colspan="3">
+                    <h3>{$MOD.LBL_IMPORT_TYPE}&nbsp;</h3></td>
+              </tr>
+              <tr>
+                <td scope="row" colspan="3">
+                    <input id="import_create" class="radio" type="radio" name="type" value="import" checked="checked" />
+                    &nbsp;<label for="type">{$MOD.LBL_IMPORT_BUTTON}</label> &nbsp;{sugar_help text=$MOD.LBL_CREATE_BUTTON_HELP}
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" colspan="3">
+                    <input id="import_update" class="radio" type="radio"
+                           name="type" id="type" value="update" />
+                        &nbsp;<label for="type">{$MOD.LBL_UPDATE_BUTTON}</label> &nbsp;{sugar_help text=$MOD.LBL_UPDATE_BUTTON_HELP}
+                </td>
+              </tr>
+        {else}
+            <input id="import_update" type="hidden" name="type" id="type" value="update" />
+        {/if}
+
 	</table>
     <br>
     <table border="0" cellspacing="0" cellpadding="0" width="100%" class="preset-settings">

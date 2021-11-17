@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Painel da lista de cotações',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Painel de registo de cotações',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco em cotações',
 
     'LBL_CONTRACTS'=>'Contratos',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Contratos',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'País para faturamento',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Código Postal para faturamento',
     'LBL_BILLING_ADDRESS_STATE' => 'Estado para faturamento',
-    'LBL_BILLING_ADDRESS_STREET' => 'Endereço de faturamento',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Endereço de faturamento:',
     'LBL_BILLING_CONTACT_ID' => 'Id de Contato para faturamento:',
     'LBL_BILLING_CONTACT_NAME' => 'Nome do Contato para faturamento:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'País para efeitos de entrega',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Código Postal para efeitos de entrega',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Estado para efeitos de entrega',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Endereço para efeitos de entrega',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Endereço de entrega:',
     'LBL_SHIPPING_BODY' => 'Faturamento e transporte',
     'LBL_SHIPPING_CONTACT_ID' => 'Id de Contato para efeitos de entrega:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Copiar os dados de endereço de faturamento para os de entrega',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Copiar os dados de endereço de entrega para os de faturamento',
     'NTC_COPY_BILLING_ADDRESS2' => 'Copiar para envio',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Copiar para faturamento',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Tem a certeza de que deseja remover este comentário da cotação?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Copiar para faturamento',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Tem a certeza de que deseja remover este comentário da cotação?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Tem a certeza de que deseja remover esta linha da cotação?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Tem certeza de que deseja remover este grupo da cotação?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Tem certeza de que deseja remover este contato da cotação?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Quantidade',
     'LBL_MFT_PART_NUM' => 'Número da peça',
     'LBL_ITEM_NAME' => 'Item de Linha',
+    'LBL_PRODUCT_TEMPLATE' => 'Produto',
     'LBL_DISCOUNT_PRICE' => 'Preço Unitário',
     'LBL_DISCOUNT_AMOUNT' => 'Desconto',
     'LBL_LINE_ITEM_TOTAL' => 'Total do Item de linha',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'ID da Oportunidade',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Configuração de cotações',
+
+    'LBL_RENEWAL' => 'Renovação',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interações de cotações',
 );

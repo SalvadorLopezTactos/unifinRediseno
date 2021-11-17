@@ -50,12 +50,21 @@ else $return_module = "Releases";
 if(isset($_REQUEST['return_action']) && $_REQUEST['return_action'] != "") $return_action = $_REQUEST['return_action'];
 else $return_action = "DetailView";
 if(isset($_REQUEST['return_id']) && $_REQUEST['return_id'] != "") $return_id = $_REQUEST['return_id'];
-if(!empty($_REQUEST['edit'])) {
-	$return_id='';
-	$edit='&edit=true';
+
+
+$query_data = [
+    'action' => $return_action,
+    'module' => $return_module,
+    'record' => $return_id,
+];
+
+if (!empty($_REQUEST['edit'])) {
+    $return_id = '';
+    $query_data['edit'] = 'true';
+    $query_data['record'] = '';
 }
 
-$GLOBALS['log']->debug("Saved record with id of ".$return_id);
+$GLOBALS['log']->debug('Saved record with id of ' . $return_id);
 
-header("Location: index.php?action=$return_action&module=$return_module&record=$return_id$edit");
-?>
+$location = 'index.php?' . http_build_query($query_data);
+header("Location: $location");

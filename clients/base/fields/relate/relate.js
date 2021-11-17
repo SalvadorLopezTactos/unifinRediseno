@@ -64,6 +64,8 @@
  * @extends View.Fields.Base.BaseField
  */
 ({
+    plugins: ['FocusDrawer'],
+
     fieldTag: 'input.select2',
 
     /**
@@ -127,7 +129,7 @@
         _.each(this.def.populate_list, function(target, source) {
             if (_.isUndefined(populateMetadata.fields[source])) {
                 app.logger.error('Fail to populate the related attributes: attempt to access undefined key - ' +
-                this.getSearchModule() + '::' + source);
+                    this.getSearchModule() + '::' + source);
             }
         }, this);
 
@@ -466,7 +468,7 @@
      * @return {string} A string containing template for a pill.
      *
      * @private
-    */
+     */
     _onFormatSelection: function(obj) {
         var ctx = {};
         //TODO We should investigate why it's sometimes `text` and
@@ -604,6 +606,13 @@
             this._buildRoute();
         }
 
+        // If the field is on the audit log, remove the link. We need to explicitly
+        // clear the href here as some fields will have an href created in the base
+        // field controller.
+        if (this.view.name === 'audit') {
+            this.href = null;
+        }
+
         var idList = this.model.get(this.def.id_name);
         if (_.isArray(value)) {
             this.formattedRname = value.join(this._separator);
@@ -702,15 +711,17 @@
         var newData = {},
             self = this;
         _.each(this.def.populate_list, function(target, source) {
-            source = _.isNumber(source) ? target : source;
-            if (!_.isUndefined(model[source]) && app.acl.hasAccessToModel('edit', this.model, target)) {
-                var before = this.model.get(target),
-                    after = model[source];
-
-                if (before !== after) {
-                    newData[target] = model[source];
+            target = !_.isArray(target) ? [target] : target;
+            _.each(target, function(targetName) {
+                source = _.isNumber(source) ? targetName : source;
+                if (!_.isUndefined(model[source]) && app.acl.hasAccessToModel('edit', this.model, targetName)) {
+                    var before = this.model.get(targetName);
+                    var after = model[source];
+                    if (before !== after) {
+                        newData[targetName] = model[source];
+                    }
                 }
-            }
+            }, this);
         }, this);
 
         if (_.isEmpty(newData)) {
@@ -987,10 +998,10 @@
                 var fetch = {results: [], more: data.next_offset > 0, context: data};
                 if (fetch.more) {
                     var fieldEl = self.$(self.fieldTag),
-                    //For teamset widget, we should specify which index element to be filled in
+                        //For teamset widget, we should specify which index element to be filled in
                         plugin = (fieldEl.length > 1) ? $(fieldEl.get(self._currentIndex)).data("select2") : fieldEl.data("select2"),
                         height = plugin.searchmore.children("li:first").children(":first").outerHeight(),
-                    //0.2 makes scroll not to touch the bottom line which avoid fetching next record set
+                        //0.2 makes scroll not to touch the bottom line which avoid fetching next record set
                         maxHeight = height * (limit - .2);
                     plugin.results.css("max-height", maxHeight);
                 }
@@ -1104,5 +1115,25 @@
         }, this);
 
         return dependentAttrs;
+    },
+
+    /**
+     * Used by the FocusDrawer plugin to get the ID of the record this
+     * field links to
+     *
+     * @return {string} the ID of the related record
+     */
+    getFocusContextModelId: function() {
+        return this._getRelateId();
+    },
+
+    /**
+     * Used by the FocusDrawer plugin to get the name of the module this
+     * field links to
+     *
+     * @return {string} the name of the related module
+     */
+    getFocusContextModule: function() {
+        return this.getSearchModule();
     }
 })

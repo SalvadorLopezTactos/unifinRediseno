@@ -29,10 +29,11 @@ class EmployeesController extends SugarController{
             $u->save();
             $GLOBALS['log']->info("User id: {$GLOBALS['current_user']->id} deleted user record: {$_REQUEST['record']}");
             
-            if( !empty($u->user_name) ) //If user redirect back to assignment screen.
+            if ($u->canBeAuthenticated()) { //If user redirect back to assignment screen.
                 SugarApplication::redirect("index.php?module=Users&action=reassignUserRecords&record={$u->id}");
-            else
+            } else {
                 SugarApplication::redirect("index.php?module=Employees&action=index");
+            }
         }
         else 
             sugar_die("Unauthorized access to administration.");

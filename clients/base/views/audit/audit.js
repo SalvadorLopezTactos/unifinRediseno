@@ -217,6 +217,14 @@
             var after = _.findWhere(model.fields, {name: 'after'});
             _.extend(after, fields[model.get('field_name')], {name: 'after'});
 
+            // relate fields can be stored in the audit log as id, relate, or varchar.
+            // Make sure they get rendered as relate.
+            var baseField = fields[model.get('field_name')];
+            if (baseField && _.contains(['id', 'relate'], baseField.type)) {
+                before.type = 'relate';
+                after.type = 'relate';
+            }
+
             // FIXME: Temporary fix due to time constraints, proper fix will be addressed in TY-359
             // We can check just `before` since `before` and `after` refer to same field
             if (_.contains(['multienum', 'enum'], before['type']) && before['function']) {

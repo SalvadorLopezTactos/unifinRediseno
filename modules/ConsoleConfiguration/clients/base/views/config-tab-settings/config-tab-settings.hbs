@@ -10,14 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="accordion-heading active">
-        <span class="pull-left step-circle pipeline-step-circle">
-            <span>1</span>
-            <i class="fa fa-check-circle"></i>
-        </span>
-    <h4>{{str "LBL_CONSOLE_MODULE_SETTINGS" this.module}}</h4>
-</div>
-
 <div class="accordion-inner">
     <div id="tabs" class="">
         {{#if collection.length}}
@@ -39,11 +31,13 @@
                                 <div class="row-fluid">
                                     <div class="{{#if span}}span{{span}}{{/if}} record-cell">
                                         {{#if label}}
-                                            <div class="record-label pipeline-record-label" data-name="{{name}}">
-                                                <h5>
-                                                    {{str label ../../../../this.module}}
-                                                </h5>
-                                            </div>
+                                             {{#unless dismiss_label}}
+                                                  <div class="record-label pipeline-record-label" data-name="{{../name}}">
+                                                       <h5>
+                                                           {{str label ../../../../../this.module}}
+                                                       </h5>
+                                                   </div>
+                                             {{/unless}}
                                         {{/if}}
                                         <span class="normal">
                                             {{field ../../../../this model=../../this template="edit"}}

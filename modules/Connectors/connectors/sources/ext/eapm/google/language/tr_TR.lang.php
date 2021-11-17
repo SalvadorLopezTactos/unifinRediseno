@@ -9,32 +9,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\Entitlements\SubscriptionManager;
+
+$readableProductNames =
+    getReadableProductNames(SubscriptionManager::instance()->getUserSubscriptions($GLOBALS['current_user']));
+$readableProductNames = urlencode(implode(',', $readableProductNames));
+
+$url = 'https://www.sugarcrm.com/crm/product_doc.php?edition=' . $GLOBALS['sugar_flavor'] . '&version=' .
+    $GLOBALS['sugar_version'] . '&lang=' . $GLOBALS['current_language'] . '&module=Connectors&route=Google' .
+    $readableProductNames;
 
 $connector_strings = array(
-    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Sugar kurulumunuzu yeni bir uygulama olarak kaydederek Google\'dan bir Müşteri Anahtarı ve şifresi alın.
-<br/><br>Kurulumunuzu kaydetmeniz için gereken adımlar:
-<br/><br/>
-<ol>
-<li>Google Developers sitesine gidin:
-<a href=\'https://console.developers.google.com/project\'
-target=\'_blank\'>https://console.developers.google.com/project</a>.</li>
-
-<li>Uygulamayı kaydetmek istediğiniz Google hesabını kullanarak Oturum Açın.</li>
-<li>Yeni bir proje oluşturun</li>
-<li>Bir Proje Adı girerek oluştur düğmesine tıklayın.</li>
-<li>Proje oluşturulduğunda Google Drive ve Google Contacts API\'yi etkinleştirin</li>
-<li>APIs & Auth > Kimlik Bilgileri bölümü altında yeni bir müşteri kimliği oluşturun </li>
-<li>Web Uygulamasını seçerek Yapılandırma onay ekranına tıklayın</li>
-<li>Bir ürün adına girerek Kaydet düğmesine tıklayın</li>
-<li>Onaylı yönlendirme URI\'leri bölümüne şu url\'yi girin: {$SITE_URL}/index.php?module=EAPM&action=GoogleOauth2Redirect</li>
-<li>Müşteri kimliği oluştur düğmesine tıklayın</li>
-<li>Aşağıdaki kutucuklara müşteri kimliği ve şifresini kopyalayın</li>
-
-</li>
-</ol>
-</td></tr>
-</table>',
+    'LBL_LICENSING_INFO' => '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">' .
+        'Sugar içerisinde kullanmak üzere Google hesaplarının yapılandırmasını etkinleştirmek için Sugar kurulumunuzu Google ile kaydedin. ' .
+        'Şuraya bakın <a href="https://www.sugarcrm.com/crm/product_doc.php?edition={$flavor}&version={$version}&lang={$lang}&module=Connectors&route=Google" target=\'_blank\'>' .
+        '\' target=\'_blank\'>Daha fazla bilgi için</a> konnektörler belgesi.</td></tr></table>',
     'oauth2_client_id' => 'Müşteri Kimliği',
-    'oauth2_client_secret' => 'Müşteri şifresi',
+    'oauth2_client_secret' => 'Müşteri Şifresi',
 );

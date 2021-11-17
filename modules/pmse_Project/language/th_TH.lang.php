@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'การกำหนดกระบวนการ',
   'LBL_MODULE_NAME_SINGULAR' => 'การกำหนดกระบวนการ',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'การกำหนดกระบวนการระบบลิ้นชัก',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนการกำหนดกระบวนการ',
   'LNK_LIST' => 'ดูการกำหนดกระบวนการ',
   'LNK_NEW_PMSE_PROJECT' => 'สร้างการกำหนดกระบวนการ',
   'LNK_IMPORT_PMSE_PROJECT' => 'นำเข้าการกำหนดกระบวนการ',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'เปลี่ยนผู้ใช้ที่ระบุ',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'ทีม',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'เลือกผู้ใช้ของกระบวนการใหม่',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'อีเมล',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'อีเมลกระบวนการแก่ผู้ใช้เมื่อมีการมอบหมายการดำเนินการ',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'การกำหนดผู้ใช้',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'วิธีการมอบหมาย',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'ระบุผู้ใช้',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'อัปเดต "ระบุให้" ในระเบียน',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'ตั้ง "มอบหมายให้" ตามความพร้อม',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'เพิ่มระเบียนที่เกี่ยวข้อง',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'โมดูลที่เกี่ยวข้อง',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'ชื่อของกิจกรรมว่างเปล่า',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'มีชื่อ "%s" แล้วในกลุ่มรูปทรง',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'ต้องมีความพร้อมตามกะ',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'ไม่มีผู้ใช้ใดพร้อมรับงาน',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'ก่อน',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'ระเบียนใหม่เท่านั้น',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'ระเบียนที่อัปเดตเท่านั้น (อัปเดตครั้งแรก - ดูข้อความช่วยเหลือ)',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'ระเบียนที่อัปเดตเท่านั้น (อัปเดตทั้งหมด - ดูข้อความช่วยเหลือ)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'ระเบียนใหม่ หรือการอัปเดตครั้งแรก',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'ระเบียนใหม่และการอัปเดตทั้งหมด',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'เลือกว่ากระบวนการจะเริ่มต้นเมื่อใด<br><br>ใหม่: เรียกใช้กระบวนการเมื่อมีการสร้างระเบียนใหม่<br><br>อัปเดตครั้งแรก: เรียกใช้กระบวนการเฉพาะเมื่อมีเงื่อนไขเป็นไปตามเกณฑ์เป็นครั้งแรกสำหรับระเบียนที่มีอยู่<br><br>อัปเดตทั้งหมด: เรียกใช้กระบวนการทุกครั้งที่มีเงื่อนไขเป็นไปตามเกณฑ์สำหรับระเบียนที่มีอยู่',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'เลือกว่ากระบวนการจะเริ่มต้นเมื่อใด<br><br>ใหม่: เรียกใช้กระบวนการเมื่อมีการสร้างระเบียนใหม่<br><br>อัปเดตครั้งแรก: เรียกใช้กระบวนการเฉพาะเมื่อมีเงื่อนไขเป็นไปตามเกณฑ์เป็นครั้งแรกสำหรับระเบียนที่มีอยู่<br><br>อัปเดตทั้งหมด: เรียกใช้กระบวนการทุกครั้งที่มีเงื่อนไขเป็นไปตามเกณฑ์สำหรับระเบียนที่มีอยู่<br><br>ระเบียนใหม่หรือการอัปเดตครั้งแรก: เรียกใช้กระบวนการเฉพาะเมื่อมีเงื่อนไขเป็นไปตามเกณฑ์สำหรับระเบียน ทั้งในระหว่างการสร้างระเบียนหรือการอัปเดตระเบียน<br><br>ระเบียนใหม่และการอัปเดตทั้งหมด: เรียกใช้กระบวนการทุกครั้งสำหรับระเบียนใหม่และระเบียนที่มีอยู่ทั้งหมด',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'เลือกโมดูล SugarCRM ที่จะใช้ทริกเกอร์ของเหตุการณ์',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'วันที่แน่นอน',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'เปลี่ยนแปลงจาก',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'เปลี่ยนแปลงเป็น',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'รวม',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'ไม่รวม',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'ตรงกับหรือหลังจาก',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'ตรงกับหรือก่อนหน้า',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'ไม่เท่ากับ',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'เพิ่ม',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'ปิด',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'ทีมทั้งหมดที่ได้รับมอบหมายให้กับระเบียน',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'ทีม',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% เกี่ยวข้องกับ %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'ผู้ใช้ที่สร้าง %MODULE%',

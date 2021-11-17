@@ -13,7 +13,10 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TASKS_LIST_DASHBOARD' => 'Tehtäväluettelon työpöytä',
+  'LBL_TASKS_RECORD_DASHBOARD' => 'Tehtävätietueiden työpöytä',
+  'LBL_TASKS_FOCUS_DRAWER_DASHBOARD' => 'Tehtävät-tietolaatikko',
 
+  'LBL_RELATED_CONTACT' => 'Liittyvä kontakti',
   'LBL_MODULE_NAME' => 'Tehtävät',
   'LBL_MODULE_NAME_SINGULAR' => 'Tehtävä',
   'LBL_TASK' => 'Tehtävät:',

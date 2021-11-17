@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Error retrieving Drillthrough Report data for this action. Contact the report owner for assistance.',
     'LBL_CHART_NO_DRILLTHRU' => 'Drill through not available',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Reports Focus Drawer',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'The list view displays all reports meeting the current search criteria and to which users have access. You can view the basic details of each report within the field columns of the list view and in the preview. You can set tags for reports and create filters. Click the report\'s name to view the report or select \'Edit Report\' in the action menu to modify the report.',

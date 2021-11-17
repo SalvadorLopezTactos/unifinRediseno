@@ -12,9 +12,10 @@
 
 $mod_strings = array (
     // Dashboard Names
-    'LBL_CASES_LIST_DASHBOARD' => 'ケースリストのダッシュボード',
-    'LBL_CASES_RECORD_DASHBOARD' => 'ケースレコードのダッシュボード',
+    'LBL_CASES_LIST_DASHBOARD' => 'ケースリストのダッシュ ボード',
+    'LBL_CASES_RECORD_DASHBOARD' => 'ケースレコードのダッシュ ボード',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'ケース詳細',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'ケース フォーカス ドロワ',
 
 	'ERR_DELETE_RECORD'					=> 'あなたがアカウントを削除するには、レコード番号を指定する必要があります。',
 	'LBL_ACCOUNT_ID'					=> '取引先ID',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'ポータルで表示',
 	'LBL_CREATE_KB_DOCUMENT' => '記事作成',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'ナレッジベース',
+    'LBL_REQUEST_CLOSE' => 'クローズをリクエスト',
+    'LBL_REQUEST_CLOSE_DATE' => 'クローズのリクエスト日時',
+    'LBL_REQUEST_CLOSE_LABEL' => 'クローズのリクエスト',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'このケースのクローズのリクエストを送信',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'このケースのクローズをリクエストしますか？',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'クローズがリクエストされたケース',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'クローズがリクエストされたケース',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'クローズがリクエストされたケース',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'クローズがリクエストされたケース一覧',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'クローズがリクエストされた、割り当て済みのケース一覧を表示',
 
     'LBL_CREATED_USER' => '作成者',
     'LBL_MODIFIED_USER' => '更新者',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'アサイン先',
     'LBL_EXPORT_TEAM_COUNT' => 'チーム数',
     'LBL_CHANGETIMERS' => 'タイマー変更',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => '購入',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => '関連取引先担当者のEメール',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => '例えば、以前に提出された問題を見つけるためにこれを使う事ができます。',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => '提出したい新しいサポートケースがあるのであれば、ここをクリックすることにより新しいケースを提出できます。',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'ここをクリックすることによりいつでもこのビューに戻ることができます。',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'ケース対話',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'メモ',
 
@@ -127,7 +139,7 @@ $mod_strings = array (
     'LBL_HELP_RECORDS' => '{{plural_module_name}}モジュールは、顧客が組織に報告した製品またはサービスに関連した問題を追跡し、管理するために使用されます。 {{plural_module_name}}は通常ひとつの{{accounts_singular_module}}に関連し、複数の{{plural_module_nameが}}  {{accounts_singular_module}}に関連しているでしょう。Sugarで{{plural_module_name}}を作成する方法はたくさんありますが、例えば{{plural_module_name}}モジュール経由で、{{quotes_module}}モジュール、{{plural_module_name}}などをインポートして、またはEメールをコンバートしてなどがあります。{{module_name}} レコードが作成されたなら、{{plural_module_name}}レコードの表示を経由して{{module_name}}に関連する情報を表示したり、編集することができます。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}}モジュールは、顧客が組織に報告した製品またはサービスに関連した問題を追跡し、管理するために使用されます。 - 個々のフィールドまたは[編集]ボタンをクリックして、このレコードのフィールドを編集します。 - 左下のペインに「データビュー」をトグルしてサブパネル内の他のレコードへのリンクを表示または変更してください。 - ユーザコメントを作成もしくは表示し、左下ペインの「アクティブストリーム」をトグルして{{activitystream_singular_module}}内のレコードを変更してください。-レコード名の右のアイコンを使用してこのレコードをフォローするかお気に入りにしてください。- 追加のアクションは、[編集]ボタンの右にあるドロップダウンの操作メニューにあります。',
+    'LBL_HELP_RECORD' => '{{plural_module_name}}モジュールは、顧客が組織に報告した製品またはサービスに関連した問題を追跡し、管理するために使用されます。 - 個々のフィールドまたは[編集]ボタンをクリックして、このレコードのフィールドを編集します。 - 左下のペインに「データビュー」をトグルしてサブパネル内の他のレコードへのリンクを表示または変更してください。 - ユーザーコメントを作成もしくは表示し、左下ペインの「アクティブストリーム」をトグルして{{activitystream_singular_module}}内のレコードを変更してください。-レコード名の右のアイコンを使用してこのレコードをフォローするかお気に入りにしてください。- 追加のアクションは、[編集]ボタンの右にあるドロップダウンの操作メニューにあります。',
 
     // Create View Help Text
     'LBL_HELP_CREATE' => '{{plural_module_name}} モジュールは、顧客が組織に報告した製品またはサービスに関連した問題を追跡し、管理するために使用されます。
@@ -143,5 +155,5 @@ $mod_strings = array (
 
     'LBL_SLA_DETAILS' => 'SLA詳細',
     'LBL_HOURS' => '時間',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'ステータス:',
 );

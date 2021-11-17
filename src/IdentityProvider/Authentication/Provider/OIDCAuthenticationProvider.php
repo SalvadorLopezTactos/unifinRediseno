@@ -25,6 +25,7 @@ use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\OIDC\CodeToken;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\OIDC\IntrospectToken;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\OIDC\JWTBearerToken;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\OIDC\RefreshToken;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Token\OIDC\RevokeToken;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\User\SugarOIDCUserChecker;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\UserProvider\SugarOIDCUserProvider;
@@ -79,6 +80,7 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
         JWTBearerToken::class => 'jwtBearerGrantTypeAuth',
         RefreshToken::class => 'refreshTokenGrantTypeAuth',
         CodeToken::class => 'authCodeGrantTypeAuth',
+        RevokeToken::class => 'revokeToken',
     ];
 
     /**
@@ -209,7 +211,7 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
         $user = $this->userProvider->loadUserBySrn($result['sub']);
 
         if ($user->isServiceAccount()) {
-            if (!$this->SAChecker->isAllowed($result)) {
+            if (!$this->SAChecker->isAllowed($token->getCredentials(), $result)) {
                 throw new AuthenticationException(
                     sprintf('Service account is not allowed: %s', $result['sub'])
                 );
@@ -251,6 +253,21 @@ class OIDCAuthenticationProvider implements AuthenticationProviderInterface
         $resultToken->setAuthenticated(true);
 
         return $resultToken;
+    }
+
+    /**
+     * Token revocation on OIDC server.
+     *
+     * @param TokenInterface $token
+     * @return RevokeToken
+     */
+    protected function revokeToken(TokenInterface $token): RevokeToken
+    {
+        $accessToken = new AccessToken(['access_token' => $token->getCredentials()]);
+
+        $this->oAuthProvider->revokeToken($accessToken);
+
+        return new RevokeToken($token->getCredentials());
     }
 
     /**

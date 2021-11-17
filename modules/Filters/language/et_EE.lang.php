@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => 'järgmisel aastal',
     'LBL_OPEN_ISSUES' => 'Ava {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'Hiljuti lahendatud',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => 'Loo filter',
+    'LBL_ERROR_FILTER_EMPTY' => 'Lisage filtri kriteeriumid.',
+    'LBL_ADD_FILTER' => 'Lisa kriteeriumid',
+    'LBL_FILTER_NAME' => 'Filtri nimi',
+    'LBL_FILTER_FIELD' => 'Väli',
+    'LBL_FILTER_OPERATOR' => 'Operaator',
+    'LBL_FILTER_VALUE' => 'Väärtus',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Salvesta töölauarakendusse',
+    'LBL_FILTER_LOCAL' => 'Kohalik filter',
 );

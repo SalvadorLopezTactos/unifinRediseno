@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Δημιουργήθηκε Από ταυτότητα',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Δημιουργήθηκε από όνομα χρήστη',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Όνομα Ανατεθειμένου Χρήστη',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης ετικετών',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Ετικετών',
+    'LBL_MY_TAGS' => 'Οι ετικέτες μου',
+    'LBL_MY_FAVORITE_TAGS' => 'Οι αγαπημένες μου ετικέτες',
 );

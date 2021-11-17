@@ -49,6 +49,7 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
             }
         }
 
+        $content = null;
         try {
             $content = $request->getContent();
         } catch (\LogicException $e) {
@@ -58,6 +59,7 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
 
         $sessionMetadata = [];
         $sessionAttributes = [];
+        $session = null;
         $flashes = [];
         if ($request->hasSession()) {
             $session = $request->getSession();
@@ -75,6 +77,13 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
         $responseCookies = [];
         foreach ($response->headers->getCookies() as $cookie) {
             $responseCookies[$cookie->getName()] = $cookie;
+        }
+
+        $dotenvVars = [];
+        foreach (explode(',', getenv('SYMFONY_DOTENV_VARS')) as $name) {
+            if ('' !== $name && false !== $value = getenv($name)) {
+                $dotenvVars[$name] = $value;
+            }
         }
 
         $this->data = [
@@ -99,6 +108,7 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
             'path_info' => $request->getPathInfo(),
             'controller' => 'n/a',
             'locale' => $request->getLocale(),
+            'dotenv_vars' => $dotenvVars,
         ];
 
         if (isset($this->data['request_headers']['php-auth-pw'])) {
@@ -148,6 +158,10 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
         }
 
         $this->data['identifier'] = $this->data['route'] ?: (\is_array($this->data['controller']) ? $this->data['controller']['class'].'::'.$this->data['controller']['method'].'()' : $this->data['controller']);
+
+        if ($response->headers->has('x-previous-debug-token')) {
+            $this->data['forward_token'] = $response->headers->get('x-previous-debug-token');
+        }
     }
 
     public function lateCollect()
@@ -256,6 +270,11 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
         return $this->data['locale'];
     }
 
+    public function getDotenvVars()
+    {
+        return new ParameterBag($this->data['dotenv_vars']->getValue());
+    }
+
     /**
      * Gets the route name.
      *
@@ -305,6 +324,11 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
     public function getRedirect()
     {
         return isset($this->data['redirect']) ? $this->data['redirect'] : false;
+    }
+
+    public function getForwardToken()
+    {
+        return isset($this->data['forward_token']) ? $this->data['forward_token'] : null;
     }
 
     public function onKernelController(FilterControllerEvent $event)

@@ -85,9 +85,9 @@ $mod_strings = array (
 	'LBL_PROXY_USERNAME'=>'Brukernavn',
 	'LBL_RESTORE_BUTTON_LABEL'=>'Gjenopprett',
 	'LBL_SYSTEM_SETTINGS' => 'Systeminnstillinger',
-	'LBL_SKYPEOUT_ON_DESC' => 'Tillat at brukere kan klikke på et telefonnummer for å ringe via SkypeOut®. Telefonnumrene må være korrekt formatert for at dette skal være mulig. Det innebærer at nummeret skrives slik: "+" "landskoden", f.eks. +1 (555) 555-1234. For ytterligere informasjon, sjekk Skype FAQ på <a href="http://www.skype.com/help/faq/skypeout.html#calling" target="skype">skype® faq</a>',
-	'LBL_SKYPEOUT_ON' => 'Aktivér SkypeOut®-integrasjon',
-	'LBL_SKYPEOUT_TITLE' => 'SkypeOut®',
+    'LBL_DIALOUT_ON_DESC' => 'Lar brukere klikke på telefonnumre for å ringe dem med deres standard datatelefonintegrasjonsprogramvare (CTI).',
+    'LBL_DIALOUT_ON' => 'Aktiver klikk for å ringe',
+    'LBL_DIALOUT_TITLE' => 'Utgående anrop',
     'LBL_TWEETTOCASE_ON_DESC' => 'Tillater brukere å opprette saker fra Tweets',
     'LBL_TWEETTOCASE_ON' => 'Aktiver Tweet® til saksintegrasjon',
     'LBL_TWEETTOCASE_TITLE' => 'Tweet&reg; til sak',
@@ -363,7 +363,7 @@ $mod_strings = array (
     'JS_ALERT_PDF_WRONG_EXTENSION' => 'Denne filen er ikke en god filtype.',
     'LBL_PDF_INSTRUCTIONS' => 'Instruksjoner',
     'PDF_INSTRUCTIONS_ADD_FONT' => <<<BSOFR
-Fonts supported by SugarPDF :
+Skrifttyper støttet av SugarPDF :
 <ul>
 <li>TrueTypeUnicode (UTF-8 Unicode)</li>
 <li>OpenTypeUnicode</li>
@@ -373,11 +373,11 @@ Fonts supported by SugarPDF :
 <li>CID-0</li>
 </ul>
 <br>
-If you choose to not embed your font in the PDF, the generated PDF file will be lighter but a substitution will be use if the font is not available in the system of your reader.
+Hvis du velger å ikke bygge inn skrifttypen din i PDF, vil den genererte PDF-filen være lettere, men en erstatning vil bli brukt hvis skrifttypen ikke er tilgjengelig i systemet til leseren din.
 <br><br>
-Adding a PDF font to SugarCRM requires to follow steps 1 and 2 of the TCPDF Fonts documentation available in the "DOCS" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>The pfm2afm and ttf2ufm utils are available in fonts/utils in the TCPDF package that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank">TCPDF website</a>.
-<br><br>Load the metric file generated in step 2 and your font file below.
+Å legge til en PDF-skrifttype til sugarCRM krever at du følger trinn 1 og 2 av TCDPF Fonts-dokumentasjonen tilgjengelig i "DOCS"-delen av <a href="shttp://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF-nettn</a>.
+<br><br>pfm2akken som d kan laste ned that you can download on the "DOWNLOAD" section of the <a href="http://www.tcpdf.org" target="_blank" rel="nofollow noopener noreferrer">TCPDF website</a>.
+<br><br>Last metrikkfilen generert i trinn 2 og skrifttypefilen din nedenfor.
 BSOFR
 ,
     'ERR_MISSING_CIDINFO' => 'Feltet CID Informasjon kan ikke være tom.',
@@ -428,6 +428,9 @@ BSOFR
     'LBL_MOBILE_MOD_REPORTS_RESTRICTION2' => '* Rapport modulen er ikke tilgjengelig for den nettleserbaserte mobilvisningen.',
 
 // Password settings
+    'ERR_MIN_LENGTH_GREATER_THAN_MAX' => 'Maksimum lengde bør være større enn minimum lengde',
+    'ERR_MIN_LENGTH_NEGATIVE' => 'Minimum lengde bør være positiv verdi',
+    'ERR_MAX_LENGTH_NEGATIVE' => 'Maksimum lengde bør være positiv verdi',
     'ERR_EMPTY_SAML_LOGIN' => 'SAML innloggings-URL kan ikke være tom',
     'ERR_EMPTY_SAML_CERT' => 'SAML-sertifikatet kan ikke være tomt',
     'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML enhets-ID kan ikke være tom',
@@ -441,9 +444,6 @@ BSOFR
     'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Enable Activity Streams',
     'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Turns on Activity Streams for the application',
-
-    // Marketing content settings
-    'LBL_ADDITIONAL_MARKETING_CONTENT' => 'Aktiver ekstra påloggingsskjerminnhold',
 
     // SugarBPM settings
     'LBL_ADVANCED_WORKFLOW_SETTINGS_AUTO_SAVE_INTERVAL' => 'Automatisk lagring av prosessdefinisjoner',

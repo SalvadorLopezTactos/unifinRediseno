@@ -27,7 +27,8 @@
     convertToQuoteFieldMap: {
         Opportunities: {
             opportunity_id: 'id',
-            opportunity_name: 'name'
+            opportunity_name: 'name',
+            renewal: 'renewal'
         },
         RevenueLineItems: {
             name: 'name',
@@ -161,6 +162,19 @@
             app.api.call('read', app.api.buildURL('Accounts/' + parentModel.get(parentModelAcctIdFieldName)), null, {
                 success: _.bind(this._setAccountInfo, this)
             });
+
+            // make an api call to get related Opportunity data
+            if (parentModule === 'RevenueLineItems') {
+                var oppId = parentModel.get(fieldMap.opportunity_id);
+                app.api.call('read', app.api.buildURL('Opportunities/' + oppId), null, {
+                    success: _.bind(function(oppData) {
+                        this.model.set('renewal', oppData.renewal);
+                    }, this),
+                    error: function(data) {
+                        app.error.handleHttpError(data, parentModel);
+                    }
+                });
+            }
 
             // set new quoteData attributes onto the create model
             ctxModel.set(quoteData);

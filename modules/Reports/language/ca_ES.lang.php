@@ -593,6 +593,8 @@ $mod_strings = array (
     'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Error de recuperació de les dades de l&#39;informe Drillthrough per a aquesta acció. Contacteu el propietari de l&#39;informe per obtenir assistència.',
     'LBL_CHART_NO_DRILLTHRU' => 'Drill through no està disponible',
 
+    'LBL_REPORTS_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat als informes',
+
     // Help Text
     // List View Help Text
     'LBL_HELP_RECORDS' => 'La vista de llista mostra tots els informes que cumpleixen amb el criteri de búsqueda actual i als

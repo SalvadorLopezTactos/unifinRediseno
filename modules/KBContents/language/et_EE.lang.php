@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Teabebaasi loendi töölaud',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Teabebaasi kirjete töölaud',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Teadmusbaasi fookuse sahtel',
 
     'LBL_MODULE_NAME' => 'Teadmusbaas',
     'LBL_MODULE_NAME_SINGULAR' => 'Teadmusbaasi artikkel',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Ei ole kasulik',
     'LBL_RATING' => 'Hinnang',
     'LBL_VIEWED_COUNT' => 'Vaadatud kordi',
-    'LBL_DOWNLOAD_ALL' => 'Laadi kõik alla',
-    'LBL_DOWNLOAD_ONE' => 'Laadi alla',
-    'LBL_ATTACHMENTS' => 'Manused',
-    'LBL_ADD_ATTACHMENT' => 'Sirvi',
     'LBL_CATEGORIES' => 'Teadmusbaasi kategooriad',
     'LBL_CATEGORY_NAME' => 'Kategooria',
     'LBL_USEFULNESS' => 'Kasulikkus',

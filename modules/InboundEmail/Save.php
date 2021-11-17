@@ -15,6 +15,7 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 global $current_user;
 
+$error = '';
 $focus = BeanFactory::newBean('InboundEmail');
 $focus->disable_row_level_security = true;
 if(!empty($_REQUEST['record'])) {
@@ -65,7 +66,7 @@ $useSsl = (isset($_REQUEST['ssl']) && $_REQUEST['ssl'] == 1) ? true : false;
 $remoteSystemName = RemoteSystemName::fromString($focus->server_url);
 $optimum = $focus->getSessionConnectionOptions($remoteSystemName, $focus->email_user, $focus->port, $focus->protocol);
 if (empty($optimum)) {
-    $optimum = $focus->findOptimumSettings($useSsl, $focus->email_user, $focus->email_password, $remoteSystemName, $focus->port, $focus->protocol, $focus->mailbox);
+    $optimum = $focus->preConnectMailServer($useSsl, $focus->email_user, $focus->email_password, $remoteSystemName, $focus->port, $focus->protocol, $focus->mailbox, $focus->eapm_id);
 } // if
 $delimiter = $focus->getSessionInboundDelimiterString($remoteSystemName, $focus->email_user, $focus->port, $focus->protocol);
 
@@ -76,7 +77,7 @@ if (ArrayFunctions::is_array_access($optimum) && (count($optimum) > 0) && !empty
 	// no save
 	// allowing bad save to allow Email Campaigns configuration to continue even without IMAP
 	$focus->service = "::::::".$focus->protocol."::::"; // save bogus info.
-	$error = "&error=true";
+    $error = true;
 }
 ////	END SERVICE STRING CONCAT
 /////////////////////////////////////////////////////////
@@ -201,7 +202,7 @@ $monitor_fields = array(
 
 $current_monitor_fields = array();
 foreach ($monitor_fields as $singleField) {
-    if(isset($focus->fetched_row[$singleField])) {
+    if (is_array($focus->fetched_row) && array_key_exists($singleField, $focus->fetched_row)) {
         $current_monitor_fields[$singleField] = $focus->fetched_row[$singleField];
     }
 }
@@ -219,11 +220,11 @@ if( empty($_REQUEST['id']) && empty($focus->groupfolder_id) )
 //after save.
 if( !empty($focus->groupfolder_id) )
 {
-    foreach ($monitor_fields as $singleField)
-    {
+    foreach ($current_monitor_fields as $singleField => $value) {
         //Check if the value is being changed during save.
-        if($current_monitor_fields[$singleField] != $focus->$singleField)
+        if ($value !== $focus->$singleField) {
             syncSugarFoldersWithBeanChanges($singleField, $focus);
+        }
     }
 }
 
@@ -252,15 +253,26 @@ if($_REQUEST['module'] == 'Campaigns'){
     if(isset($_REQUEST['return_id']) && $_REQUEST['return_id'] != "") {
         $return_id = $_REQUEST['return_id'];
     }
-    if(!empty($_REQUEST['edit'])) {
-        $return_id='';
-        $edit='&edit=true';
+
+    $query_data = [
+        'action' => $return_action,
+        'module' => $return_module,
+        'record' => $return_id,
+    ];
+
+    if (!empty($_REQUEST['edit'])) {
+        $return_id = '';
+        $query_data['edit'] = 'true';
     }
 
-    $GLOBALS['log']->debug("Saved record with id of ".$return_id);
+    if ($error) {
+        $query_data['error'] = 'true';
+    }
 
+    $GLOBALS['log']->debug("Saved record with id of " . $return_id);
 
-    header("Location: index.php?module=$return_module&action=$return_action&record=$return_id$edit$error");
+    $location = 'index.php?' . http_build_query($query_data);
+    header("Location: $location");
 }
 
 /**

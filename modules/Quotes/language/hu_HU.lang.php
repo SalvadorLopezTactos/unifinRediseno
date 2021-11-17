@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Árajánlatok listája műszerfal',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Árajánlat bejegyzések műszerfal',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Árajánlatok figyelemfelhívás',
 
     'LBL_CONTRACTS'=>'Szerződések',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Szerződések',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Számlázási cím, ország:',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Számlázási cím, irányítószám:',
     'LBL_BILLING_ADDRESS_STATE' => 'Számlázási cím, állam:',
-    'LBL_BILLING_ADDRESS_STREET' => 'Számlázási cím:',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Számlázási cím:',
     'LBL_BILLING_CONTACT_ID' => 'Számlázási kapcsolat azonosítója:',
     'LBL_BILLING_CONTACT_NAME' => 'Számlázási kapcsolat neve:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Szállítás - ország',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Szállítás - irányítószám',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Szállítás - állam',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Szállítási cím',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Szállítási cím:',
     'LBL_SHIPPING_BODY' => 'Számlázás és szállítás',
     'LBL_SHIPPING_CONTACT_ID' => 'Szállítói kapcsolat azonosítója:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Másolja a számlázási címet a szállítási címbe',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Másolja a szállítási címet a számlázási címbe',
     'NTC_COPY_BILLING_ADDRESS2' => 'Másolás a szállítási címbe',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Másolás a számlázási címbe',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Biztosan el akarja távolítani ezt a megjegyzést az árajánlatból?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Másolás a számlázási címbe',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Biztosan el akarja távolítani ezt a megjegyzést az árajánlatból?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Biztosan el akarja távolítani ezt a sort az árajánlatból?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Biztosan el akarja távolítani ezt a csoportot az árajánlatból?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Biztosan el akarja távolítani ezt a kapcsolatot az árajánlatból?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Mennyiség',
     'LBL_MFT_PART_NUM' => 'Cikkszám',
     'LBL_ITEM_NAME' => 'Sorelem',
+    'LBL_PRODUCT_TEMPLATE' => 'Termék',
     'LBL_DISCOUNT_PRICE' => 'Egységár',
     'LBL_DISCOUNT_AMOUNT' => 'Kedvezmény',
     'LBL_LINE_ITEM_TOTAL' => 'Sorelem összeg',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'Lehetőség azonosítója',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Árajánlatok konfiguráció',
+
+    'LBL_RENEWAL' => 'Megújítás',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Árajánlat interakciók',
 );

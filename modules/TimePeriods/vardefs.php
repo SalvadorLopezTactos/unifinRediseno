@@ -12,6 +12,7 @@
 
 $dictionary['TimePeriod'] = array(
     'table' => 'timeperiods',
+    'archive' => false,
     'favorites' => false,
     'fields' => array(
         'id' =>
@@ -56,7 +57,7 @@ $dictionary['TimePeriod'] = array(
                 'name' => 'start_date_timestamp',
                 'vname' => 'LBL_TP_START_DATE_TIMESTAMP',
                 'type' => 'int',
-                'len' => '14',
+                'len' => '11',
                 'required' => true,
                 'enable_range_search' => true,
                 'studio' => false,
@@ -75,7 +76,7 @@ $dictionary['TimePeriod'] = array(
                 'name' => 'end_date_timestamp',
                 'vname' => 'LBL_TP_END_DATE_TIMESTAMP',
                 'type' => 'int',
-                'len' => '14',
+                'len' => '11',
                 'required' => true,
                 'enable_range_search' => true,
                 'studio' => false,

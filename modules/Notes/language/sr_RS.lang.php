@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Kontrolna tabla liste napomena',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Kontrolna tabla za zapise o napomenama',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Fioka fokusa za beleške',
 
+    'LBL_RELATED_CONTACT' => 'Povezani kontakt',
     'ERR_DELETE_RECORD' => 'Morate navesti broj zapisa da bi obrisali kompaniju.',
     'LBL_ACCOUNT_ID' => 'ID broj kompanije:',
     'LBL_CASE_ID' => 'ID broj slučaja:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'ID broj kontakta:',
     'LBL_CONTACT_NAME' => 'Kontakt:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Beleške',
+    'LBL_ATTACHMENTS' => 'Prilozi',
+    'LBL_ATTACHMENT_FLAG' => 'Je prilog',
     'LBL_DESCRIPTION' => 'Beleška',
     'LBL_EMAIL_ADDRESS' => 'Email adresa:',
     'LBL_EMAIL_ATTACHMENT' => 'Email prilog',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Prilozi',
     'LBL_NOTE' => 'Beleška:',
     'LBL_OPPORTUNITY_ID' => 'ID broj prodajne prilike:',
+    'LBL_NOTE_PARENT_ID' => 'Nadređeni ID beleške:',
     'LBL_PARENT_ID' => 'Matični ID broj:',
     'LBL_PARENT_TYPE' => 'Matični tip',
     'LBL_EMAIL_TYPE' => 'Tip e-poruke',

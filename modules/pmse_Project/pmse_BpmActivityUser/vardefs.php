@@ -12,6 +12,7 @@
 
 $dictionary['pmse_BpmActivityUser'] = array(
     'table' => 'pmse_bpm_activity_user',
+    'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'reassignable' => false,

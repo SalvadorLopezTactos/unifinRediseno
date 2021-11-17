@@ -84,6 +84,9 @@ class MultiFieldHandler extends AbstractHandler implements
             // Disable wildcard search awaiting optimization
             //'gs_text_wildcard',
         ),
+        'textarea' => [
+            'gs_string',
+        ],
         'htmleditable_tinymce' => array(
             'gs_string',
             // Disable wildcard search awaiting optimization
@@ -298,21 +301,21 @@ class MultiFieldHandler extends AbstractHandler implements
             // ngram filter using 1/15
             ->addFilter(
                 'gs_filter_ngram_1_15',
-                'nGram',
+                'ngram',
                 array('min_gram' => 1, 'max_gram' => 15)
             )
 
             // ngram filter using 2_15
             ->addFilter(
                 'gs_filter_ngram_2_15',
-                'nGram',
+                'ngram',
                 array('min_gram' => 2, 'max_gram' => 15)
             )
 
             // ngram filter using 3_15
             ->addFilter(
                 'gs_filter_ngram_3_15',
-                'nGram',
+                'ngram',
                 array('min_gram' => 3, 'max_gram' => 15)
             )
 

@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Цільовий список за замовчуванням не виявлений',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Записи не виявлені',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Записи були оброблені',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Налаштування вхідної пошти',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Параметри електронної пошти системи',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Назва трекера:',
   'LBL_EDIT_TRACKER_URL'=>'URL-адреса трекера:',

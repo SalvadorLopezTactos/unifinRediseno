@@ -18,6 +18,13 @@
         'click [data-action="show-more"]': 'showMoreRecords'
     },
 
+    /**
+     * Flag for if the loading placeholder text should be hidden or not
+     *
+     * @property {boolean}
+     */
+    hideLoading: false,
+
     initialize: function(options) {
         this._super('initialize', [options]);
         // This component should always have a `list` action.
@@ -34,6 +41,14 @@
          */
         this._showMoreLabel = this.meta && this.meta.label || 'TPL_SHOW_MORE_MODULE';
         this._initPagination();
+
+        if (app.utils.isTruthy(options.usePaginationComponent)) {
+            this.collection = this.paginationComponent.collection;
+            this.moduleIsAvailable = true;
+        }
+        if (app.utils.isTruthy(options.hideFirstPaginationLoadingMessage)) {
+            this.hideLoading = true;
+        }
     },
 
     /**
@@ -56,6 +71,8 @@
         if (!this.paginationComponent) {
             return;
         }
+
+        this.hideLoading = false;
 
         var options = {};
         options.success = _.bind(function() {

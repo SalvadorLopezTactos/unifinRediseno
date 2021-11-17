@@ -13,8 +13,11 @@
 
 $mod_strings = array(
     // Dashboard Names
-    'LBL_NOTES_LIST_DASHBOARD' => 'メモリストのダッシュボード',
+    'LBL_NOTES_LIST_DASHBOARD' => 'メモリストのダッシュ ボード',
+    'LBL_NOTES_RECORD_DASHBOARD' => '注記レコードダッシュボード',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => '注記 フォーカス ドロワ',
 
+    'LBL_RELATED_CONTACT' => '関連する担当者',
     'ERR_DELETE_RECORD' => 'あなたがアカウントを削除するには、レコード番号を指定する必要があります。',
     'LBL_ACCOUNT_ID' => '取引先ID:',
     'LBL_CASE_ID' => 'ケースID',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => '取引先担当者ID:',
     'LBL_CONTACT_NAME' => '取引先担当者:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'メモ',
+    'LBL_ATTACHMENTS' => '添付',
+    'LBL_ATTACHMENT_FLAG' => 'は添付ファイルです',
     'LBL_DESCRIPTION' => '詳細',
     'LBL_EMAIL_ADDRESS' => 'Eメールアドレス:',
     'LBL_EMAIL_ATTACHMENT' => 'Eメール添付',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'ノート＆添付ファイル',
     'LBL_NOTE' => 'メモ:',
     'LBL_OPPORTUNITY_ID' => '商談ID:',
+    'LBL_NOTE_PARENT_ID' => 'メモ記親ID',
     'LBL_PARENT_ID' => '親ID:',
     'LBL_PARENT_TYPE' => '親タイプ',
     'LBL_EMAIL_TYPE' => 'Eメールのタイプ',
@@ -101,7 +107,7 @@ $mod_strings = array(
 をSugarで作成する様々な方法があります。例えば{{plural_module_name}}モジュールを介して, {{plural_module_name}}をインポートすることにより,あるいは 履歴のサブパネル経由でなどです。{{module_name}}レコードが作成されたら、{{plural_module_name}}レコードの表示を経由して{{module_name}}に関連する情報を表示したり、編集することができます。各{{module_name}}レコードは{{accounts_module}}、{{contacts_module}}、{{opportunities_module}}など、またその他多くの他のSugarのレコードに関するものになります。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}}モジュールは、テキストや関連するレコードに該当する添付ファイルが含まれている個々の{{plural_module_name}}で構成されています。 - 個々のフィールドまたは「編集」ボタンをクリックして、このレコードのフィールドを編集します。 - 左下のペインに「データビュー」をトグルしてサブパネル内の他のレコードへのリンクを表示または変更してください。 - 左下ペインに「アクティビティストリーム」を切り替えることにより、{{activitystream_singular_module}}内のレコード変更履歴やユーザのコメントを閲覧もしくは変更してください。 - レコード名の右にあるアイコンを使用して、このレコードをフォローするかお気に入りにしてください。 - 追加のアクションは、「編集」ボタンの右にあるドロップダウンの「操作」メニューにあります。',
+    'LBL_HELP_RECORD' => '{{plural_module_name}}モジュールは、テキストや関連するレコードに該当する添付ファイルが含まれている個々の{{plural_module_name}}で構成されています。 - 個々のフィールドまたは「編集」ボタンをクリックして、このレコードのフィールドを編集します。 - 左下のペインに「データビュー」をトグルしてサブパネル内の他のレコードへのリンクを表示または変更してください。 - 左下ペインに「アクティビティストリーム」を切り替えることにより、{{activitystream_singular_module}}内のレコード変更履歴やユーザーのコメントを閲覧もしくは変更してください。 - レコード名の右にあるアイコンを使用して、このレコードをフォローするかお気に入りにしてください。 - 追加のアクションは、「編集」ボタンの右にあるドロップダウンの「操作」メニューにあります。',
 
     // Create View Help Text
     'LBL_HELP_CREATE' => '{{module_name}} を作成するには：

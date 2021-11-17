@@ -70,11 +70,11 @@ $mod_strings = array(
 	'ERR_CHECKSYS_NOT_WRITABLE'			=> 'אזהרה: לא ניתן לכתיבה',
 	'ERR_CHECKSYS_PHP_INVALID_VER'		=> 'Your version of PHP is not supported by Sugar.  You will need to install a version that is compatible with the Sugar application.  Please consult the Compatibility Matrix in the Release Notes for supported PHP Versions. Your version is',
 	'ERR_CHECKSYS_IIS_INVALID_VER'      => 'Your version of IIS is not supported by Sugar.  You will need to install a version that is compatible with the Sugar application.  Please consult the Compatibility Matrix in the Release Notes for supported IIS Versions. Your version is',
-	'ERR_CHECKSYS_FASTCGI'              => 'We detect that you are not using a FastCGI handler mapping for PHP. You will need to install/configure a version that is compatible with the Sugar application.  Please consult the Compatibility Matrix in the Release Notes for supported Versions. Please see <a href="http://www.iis.net/php/" target="_blank">http://www.iis.net/php/</a> for details',
+    'ERR_CHECKSYS_FASTCGI'              => 'שמנו לב שאינך משתמש במיפוי מטפל FastCGI עבור PHP. תצטרך להתקין/להגדיר גרסה בעלת תאימות לאפליקציית Sugar. עיין במטריצת התאימות בהערות המוצר כדי ללמוד אילו גרסאות נתמכות. לפרטים, ראה <a href="http://www.iis.net/php/" target="_blank" rel="nofollow noopener noreferrer">http://www.iis.net/php/</a> ',
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'לחוויה אופטימלית באמצעות sapi IIS/FastCGI, הגדר fastcgi.logging ל0 בקובץ ה-php.ini שלך.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'מותקנת גרסת PHP לא נתמכת: (גרסה',
     'LBL_DB_UNAVAILABLE'                => 'מסד נתונים אינו זמין',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'לא נמצאה תמיכה במסד הנתונים. ודא שבידך מנהלי ההתקנים הדרושים עבור אחד מהסוגים הבאים של מסדי נתונים נתמכים: MySQL‏, MS SQLServer‏, Oracle או DB2. ייתכן שתצטרך להוריד את התגובה של הסיומת בקובץ php.ini, או להדר מחדש עם הקובץ הבינארי הנכון, בהתאם לגרסת PHP שברשותך. עיין במדריך PHP לקבלת מידע נוסף אודות אופן ההפעלה של תמיכה במסד נתונים.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'לא נמצאה תמיכה במסד הנתונים. ודא שברשותך מנהלי ההתקנים הדרושים עבור אחד מהסוגים הבאים של מסדי נתונים נתמכים: MySQL‏, MS SQLServer‏, Oracle או DB2. ייתכן שתצטרך להוריד את התגובה של הסיומת בקובץ ה-php.ini, או להדר מחדש עם הקובץ הבינארי הנכון, בהתאם לגרסת PHP שברשותך. עיין במדריך PHP לקבלת מידע נוסף אודות אופן ההפעלה של תמיכה במסד נתונים.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'לא נמצאו פונקציות הקשורות לספריות מנתח XML הנחוצים ליישום ה-Sugar. ייתכן שתצטרך להוריד את התגובה של השלוחה בקובץ php.ini, או להדר מחדש עם הקובץ הבינארי הנכון, בהתאם לגרסת ה-PHP שלך. נא עיין במדריך PHP שלך לקבלת מידע נוסף.',
     'LBL_CHECKSYS_CSPRNG' => 'מחולל מספרים אקראיים',
     'ERR_CHECKSYS_MBSTRING'             => 'לא נמצאו פונקציות הקשורות לשלוחת מחרוזות מרובות הבתים של PHP (mbstring) הנחוצים ליישום ה-Sugar. <br/><br/>באופן כללי, מודול ה-mbstring לא מופעל כברירת מחדל ב-PHP וחייב להיות מופעל עם --אפשר-mbstring כאשר ה-PHP הבניארי בנוי. נא עיין במדריך PHP שלך לקבלת מידע נוסף על כיצד לאפשר תמיכת mbstring.',
@@ -476,139 +476,140 @@ $mod_strings = array(
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Php Backward Compatibility mode is turned on. Set zend.ze1_compatibility_mode to Off for proceeding further',
 
     'meeting_notification_email' => array(
-        'name' => 'Meeting Notifications Emails',
-        'subject' => 'SugarCRM Meeting - $event_name ',
-        'description' => 'This template is used when the System sends a meeting notifications to a user.',
+        'name' => 'הודעות דוא"ל לגבי פגישות',
+        'subject' => 'פגישה ב-SugarCRM - ‏$event_name ',
+        'description' => 'תבנית זו נמצאת בשימוש כאשר המערכת שולחת למשתמש הודעה על פגישה.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>אל: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Meeting</p>
+	<p>$assigned_by_user הזמין אותך לפגישה</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	End Date: $end_date</p>
+	<p>נושא: $event_name<br/>
+	תאריך התחלה: $start_date<br/>
+	תאריך סיום: $end_date</p>
 
-	<p>Description: $description</p>
+	<p>תיאור: $description</p>
 
-	<p>Accept this meeting:<br/>
+	<p>לקבלת הפגישה:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this meeting:<br/>
+	<p>לקבלה טנטטיבית של הפגישה:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this meeting:<br/>
+	<p>לדחיית הפגישה:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'אל: $assigned_user
 
-$assigned_by_user has invited you to a Meeting
+$assigned_by_user הזמין אותך לפגישה
 
-Subject: $event_name
-Start Date: $start_date
-End Date: $end_date
+נושא: $event_name
+תאריך התחלה: $start_date
+תאריך סיום: $end_date
 
-Description: $description
+תיאור: $description
 
-Accept this meeting:
+לקבלת הפגישה:
 <$accept_link>
 
-Tentatively Accept this meeting
+לקבלה טנטטיבית של הפגישה:
 <$tentative_link>
 
-Decline this meeting
+לדחיית הפגישה:
 <$decline_link>',
     ),
 
     'call_notification_email' => array(
-        'name' => 'Call Notifications Emails',
-        'subject' => 'SugarCRM Call - $event_name ',
-        'description' => 'This template is used when the System sends a call notifications to a user.',
+        'name' => 'הודעות דוא"ל לגבי שיחות',
+        'subject' => 'שיחה ב-SugarCRM - ‏$event_name ',
+        'description' => 'תבנית זו נמצאת בשימוש כאשר המערכת שולחת למשתמש הודעה על שיחה.',
         'body' => '<div>
-	<p>To: $assigned_user</p>
+	<p>אל: $assigned_user</p>
 
-	<p>$assigned_by_user has invited you to a Call</p>
+	<p>$assigned_by_user הזמין אותך לשיחה</p>
 
-	<p>Subject: $event_name<br/>
-	Start Date: $start_date<br/>
-	Duration: $hoursh, $minutesm</p>
+	<p>נושא: $event_name<br/>
+	תאריך התחלה: $start_date<br/>
+	משך זמן: $hoursh, $minutesm</p>
 
-	<p>Description: $description</p>
+	<p>תיאור: $description</p>
 
-	<p>Accept this call:<br/>
+	<p>לקבלת השיחה:<br/>
 	<<a href="$accept_link">$accept_link</a>></p>
-	<p>Tentatively Accept this call:<br/>
+	<p>לקבלה טנטטיבית של השיחה:<br/>
 	<<a href="$tentative_link">$tentative_link</a>></p>
-	<p>Decline this call:<br/>
+	<p>לדחיית השיחה:<br/>
 	<<a href="$decline_link">$decline_link</a>></p>
 </div>',
         'txt_body' =>
-            'To: $assigned_user
+            'אל: $assigned_user
 
-$assigned_by_user has invited you to a Call
+$assigned_by_user הזמין אותך לשיחה
 
-Subject: $event_name
-Start Date: $start_date
-Duration: $hoursh, $minutesm
+נושא: $event_name
+תאריך התחלה: $start_date
+משך זמן: $hoursh, $minutesm
 
-Description: $description
+תיאור: $description
 
-Accept this call:
+לקבלת השיחה:
 <$accept_link>
 
-Tentatively Accept this call
+לקבלה טנטטיבית של השיחה:
 <$tentative_link>
 
-Decline this call
+לדחיית השיחה:
 <$decline_link>',
     ),
 
     'assigned_notification_email' => array(
-        'name' => 'Assignment Notification Emails',
-        'subject' => 'SugarCRM - Assigned $module_name ',
-        'description' => 'This template is used when the System sends a task assignment to a user.',
+        'name' => 'הודעות דוא"ל עם התראות הקצאה',
+        'subject' => 'SugarCRM - הקצאת $module_name ',
+        'description' => 'תבנית זו נמצאת בשימוש כאשר המערכת שולחת למשתמש הקצאה של משימה.',
         'body' => '<div>
-<p>$assigned_by_user has assigned a&nbsp;$module_name to&nbsp;$assigned_user.</p>
+<p>$assigned_by_user הקצה&nbsp;$module_name ל$assigned_user.</p>
 
-<p>You may review this&nbsp;$module_name at:<br/>
+<p>ניתן לראות את ה$module_name כאן:<br/>
 	<<a href="$module_link">$module_link</a>></p>
 </div>',
         'txt_body' =>
-            '$assigned_by_user has assigned a $module_name to $assigned_user.
+            '$assigned_by_user הקצה $module_name ל$assigned_user.
 
-You may review this $module_name at:
+ניתן לראות את ה$module_name כאן:
 <$module_link>',
     ),
 
     'scheduled_report_email' => array(
-        'name' => 'Scheduled Report Emails',
-        'subject' => 'Scheduled Report: $report_name as of $report_time',
-        'description' => 'This template is used when the System sends a scheduled report to a user.',
+        'name' => 'הודעות דוא"ל לגבי דוחות מתוזמנים',
+        'subject' => 'דוח מתוזמן: $report_name נכון ל-$report_time',
+        'description' => 'תבנית זו נמצאת בשימוש כאשר המערכת שולחת למשתמש דוח מתוזמן.',
         'body' => '<div>
-<p>Hello $assigned_user,</p>
-<p>Attached is an auto generated report that has been scheduled for you.</p>
-<p>Report Name: $report_name</p>
-<p>Report Run Date and Time: $report_time</p>
+<p>הי $assigned_user,</p>
+<p>מצורף לדוא"ל דוח שהופק אוטומטית ותוזמן עבורך.</p>
+<p>שם הדוח: $report_name</p>
+<p>התאריך והשעה של הפקת הדוח: $report_time</p>
 </div>',
         'txt_body' =>
-            'Hello $assigned_user,
+            'הי $assigned_user,
 
-Attached is an auto generated report that has been scheduled for you.
+מצורף לדוא"ל דוח שהופק אוטומטית ותוזמן עבורך.
 
-Report Name: $report_name
+שם הדוח: $report_name
 
-Report Run Date and Time: $report_time',
+התאריך והשעה של הפקת הדוח: $report_time',
     ),
 
     'comment_log_mention_email' => [
-        'name' => 'System Comment Log Email Notification',
-        'subject' => 'SugarCRM - $initiator_full_name mentioned you on a(n) $singular_module_name',
-        'description' => 'This template is used to send email notification for users that have been tagged int comment log section.',
+        'name' => 'הודעת דוא"ל על יומן ההערות במערכת',
+        'subject' => 'SugarCRM - שמך הוזכר על-ידי $initiator_full_name ב-$singular_module_name',
+        'description' => 'תבנית זו מיועדת לשליחת הודעת דוא"ל למשתמשים שתויגו ביומן ההערות.',
         'body' =>
             '<div>
-                <p>You have been mentioned in the following record’s comment log:  <a href="$record_url">$record_name</a></p>
-                <p>Please log in to Sugar to view the comment.</p>
+                <p>שמך הוזכר ביומן ההערות של הרשומה הבאה:  <a href="$record_url">$record_name</a></p>
+                <p>לצפייה בהערה, יש להיכנס למערכת של Sugar.</p>
             </div>',
-        'txt_body' => 'You have been mentioned in the following record’s comment log: $record_name
-            Please log in to Sugar to view the comment.',
+        'txt_body' =>
+'שמך הוזכר ביומן ההערות של הרשומה הבאה: $record_name
+            לצפייה בהערה, יש להיכנס למערכת של Sugar.',
     ],
 
     'advanced_password_new_account_email' => array(

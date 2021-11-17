@@ -177,8 +177,8 @@ $mod_strings = array (
   'LBL_DEFAULT_LIST_NOT_FOUND'=>'Lista e synuar e llojit të parazgjedhur nuk është gjetur',
   'LBL_DEFAULT_LIST_ENTRIES_NOT_FOUND'=>'Nuk është gjetur asnjë hyrje',
   'LBL_DEFAULT_LIST_ENTRIES_WERE_PROCESSED' => 'Hyrjet janë përpunuar',
-  'LBL_INBOUND_EMAIL_SETTINGS' => 'Inbound Email Settings',
-  'LBL_SYSTEM_EMAIL_SETTINGS' => 'System Email Settings',
+  'LBL_INBOUND_EMAIL_SETTINGS' => 'Cilësimet e emaileve hyrëse',
+  'LBL_SYSTEM_EMAIL_SETTINGS' => 'Cilësimet e sistemit të emaileve',
   //newsletter wizard
   'LBL_EDIT_TRACKER_NAME'=>'Emri i gjurmuesit:',
   'LBL_EDIT_TRACKER_URL'=>'URL e gjurmuesit:',

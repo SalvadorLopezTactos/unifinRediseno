@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => '按報表',
     'LBL_RECENTLY_MODIFIED' => '最近修改',
     'LBL_RECORD_SAVED_SUCCESS' => '您成功創建了 {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>。打開排程，通過使用者子面板添加使用者。',
+
+    'LBL_THIS_REPORT_SCHEDULE' => '此報表排程',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => '報表計劃紀錄儀表板',
 );

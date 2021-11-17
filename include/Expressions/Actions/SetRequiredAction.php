@@ -23,7 +23,7 @@ class SetRequiredAction extends AbstractAction
     {
         $this->params = $params;
         $this->targetField = $params['target'];
-        $this->targetLabel = isset($params['label']) ? $params['label'] : '';
+        $this->targetLabel = isset($params['label']) ? $params['label'] : $params['target'] . '_label';
         $this->expression = str_replace("\n", "", $params['value']);
     }
 
@@ -81,7 +81,7 @@ SUGAR.util.extend(SUGAR.forms.SetRequiredAction, SUGAR.forms.AbstractAction, {
             SUGAR.forms.FormValidator.setRequired(el.form.name, el.name, this.required);
         if (this._el_lbl != null && el != null) {
             var p = this._el_lbl,
-                els = YAHOO.util.Dom.getElementsBy( function(e) { return e.className == 'req'; }, \"span\", p),
+                els = YAHOO.util.Dom.getElementsBy( function(e) { return e.className == 'required'; }, \"span\", p),
                 reqSpan = false,
                 fName = el.name;
 
@@ -91,8 +91,8 @@ SUGAR.util.extend(SUGAR.forms.SetRequiredAction, SUGAR.forms.AbstractAction, {
             if ( (this.required == true  || this.required == 'true')) {
                 if (!reqSpan) {
                     var node = document.createElement(\"span\");
-                    node.innerHTML = \"<font color='red'>*</font>\";
-                    node.className = \"req\";
+                    node.innerHTML = \"*\";
+                    node.className = \"required\";
                     this._el_lbl.appendChild(node);
 
                     var i = this.findInValidate(context.formName, fName)

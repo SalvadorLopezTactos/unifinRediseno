@@ -38,13 +38,25 @@
         }
     };
 
-    var addCompToLayout = function(metadata, targetModule, targetLayout, def) {
+    var addCompToLayout = function(metadata, targetModule, targetLayout, def, fieldsToAdd) {
         var modMeta = metadata.modules[targetModule];
         var layoutPieces = targetLayout.split('-');
         var hasLayoutInModule;
         var dashPrevLayout;
         var meta;
         var layoutName;
+        var view;
+
+        // handle i18n for name
+        if (def.view.name && def.view.name.indexOf('LBL_') !== -1) {
+            // try to find language string in target module first then global scope
+            def.view.name = app.lang.get(def.view.name, targetModule);
+        }
+        // handle i18n for description
+        if (def.view.description && def.view.description.indexOf('LBL_') !== -1) {
+            // try to find language string in target module first then global scope
+            def.view.description = app.lang.get(def.view.description, targetModule);
+        }
 
         if (modMeta) {
             modMeta.layouts = modMeta.layouts || {};
@@ -52,10 +64,41 @@
             meta = modMeta.layouts[targetLayout];
             hasLayoutInModule = !!meta;
 
-            // if the targetLayout has 2 pieces "extra-info", "record-dashboard", etc
-            // and the second piece is either "dashboard" or "preview"
-            // we need to handle these components in a different way to "extra-info" components
-            if (layoutPieces.length === 2 && (layoutPieces[1] === 'dashboard' || layoutPieces[1] === 'preview')) {
+            // handle list-field and record-field items
+            if (layoutPieces.length === 2 &&
+                _.contains(['record', 'list', 'multiline'], layoutPieces[0]) &&
+                layoutPieces[1] === 'field') {
+
+                var layoutName = _fixViewName(layoutPieces[0]);
+                var layoutEventName = layoutName === 'list' ? 'recordlist' : layoutName;
+
+                // get the view: 'list' or 'record'
+                view = modMeta.views[layoutName];
+
+                _.each(fieldsToAdd, function(field) {
+                    // set the src for the field
+                    field.src = def.view.src;
+                    // if the field is already in the view's meta, find it and add mfe related properties to it
+                    var metaField = _findFieldInMeta(field, view);
+                    if (metaField) {
+                        _.extend(metaField, field);
+
+                    // if the field isn't in meta but we still want to force it in,
+                    // we can use the panel and field indices from manifest
+                    } else if (!_.isUndefined(field.panelIndex) && !_.isUndefined(field.fieldIndex)) {
+                        _spliceFieldIntoMeta(field, view, field.panelIndex, field.fieldIndex);
+                        view.meta.hasExternalFields = true;
+                    }
+                }, this);
+
+                // this currently only has a listener in the recordlist view otherwise this will do nothing
+                app.events.trigger('sugarApp:' + targetModule + ':' + layoutEventName + ':updated', fieldsToAdd);
+            } else if (layoutPieces.length === 2 &&
+                (layoutPieces[1] === 'dashboard' || layoutPieces[1] === 'preview')) {
+                // if the targetLayout has 2 pieces "extra-info", "record-dashboard", etc
+                // and the second piece is either "dashboard" or "preview"
+                // we need to handle these components in a different way to "extra-info" components
+
                 // if the first piece of he layout is "list" then we want the "records" layout
                 // otherwise we want the "record" layout
                 layoutName = layoutPieces[0] === 'list' ? 'records' : 'record';
@@ -103,6 +146,8 @@
                 };
 
                 modMeta.layouts[targetLayout].meta.components.push(def);
+                // let the layout know metadata has been updated for this particular MFE module/layout
+                app.events.trigger('sugarApp:' + targetModule + ':' + targetLayout + ':updated');
             } else {
                 if (!meta.meta) {
                     meta.meta = {};
@@ -113,6 +158,75 @@
 
                 meta.meta.components.push(def);
             }
+        }
+    };
+
+    /**
+     * Find the field if it exists in the view's meta by field name
+     *
+     * @param {Object} fieldDef The fieldDef object. Must contain at least the `name` property
+     * @param {Object} viewMeta View meta that has the format of meta.panels.fields
+     * @return {Object|null} Finds the field in the metadata if it exists
+     * @private
+     */
+    var _findFieldInMeta = function(fieldDef, viewMeta) {
+        var found = null;
+        _.some(viewMeta.meta.panels, function(panel) {
+            return _.some(panel.fields, function(metaField) {
+                if (metaField.subfields) {
+                    return _.some(metaField.subfields, function(subField) {
+                        if (subField.name === fieldDef.name) {
+                            found = subField;
+                            return true;
+                        }
+                    });
+                } else if (metaField.name === fieldDef.name) {
+                    found = metaField;
+                    return true;
+                }
+            });
+        });
+        return found;
+    };
+
+    /**
+     * Sanitize the name of the view
+     *
+     * @param {string} name
+     * @return {string}
+     * @private
+     */
+    var _fixViewName = function(name) {
+        var nameMap = {
+            multiline: 'multi-line-list',
+        };
+
+        return nameMap[name] || name;
+    };
+
+    /**
+     * Adds field to a specified position in the view's meta
+     *
+     * @param {Object} fieldDef The fieldDef to add
+     * @param {Object} viewMeta View meta that has the format of meta.panels.fields
+     * @param {number} panelIndex Which panel to add the field to
+     * @param {number} fieldIndex Where to add the field in the fields array
+     * @private
+     */
+    var _spliceFieldIntoMeta = function(fieldDef, viewMeta, panelIndex, fieldIndex) {
+        var panels = viewMeta.meta.panels;
+        var panel = panelIndex > panels.length ? panels[panels.length - 1] : panels[panelIndex];
+        var fields = panel.fields;
+        delete fieldDef.panelIndex;
+        delete fieldDef.fieldIndex;
+        if (fieldIndex < fields.length) {
+            // fieldIndex is less than the length of fields,
+            // so add field into the array at the specified index
+            fields.splice(fieldIndex, 0, fieldDef);
+        } else {
+            // fieldIndex is greater than the length of fields,
+            // add field to the end of fields
+            fields.push(fieldDef);
         }
     };
 
@@ -128,12 +242,19 @@
             return Promise.resolve();
         }
 
-        if (catalogUrl && catalogUrl !== '') {
+        if (catalogUrl && catalogUrl !== '' && _.isString(catalogUrl)) {
+            // if catalogUrl does not start with http or https, prepend https://
+            if (!(catalogUrl.indexOf('http://') === 0 || catalogUrl.indexOf('https://') === 0)) {
+                catalogUrl = 'https://' + catalogUrl;
+            }
             catalogUrl = catalogUrl.match(/^.+\:\/\/[^\/]+/)[0] + '/catalog?isAuthorized=true';
 
             var getCatalog = function(onSuccess, onError, onLogin) {
                 $.ajax({
                     url: catalogUrl,
+                    headers: {
+                        'X-IDM-ACCESS-TOKEN': app.api.getOAuthToken()
+                    },
                     xhrFields: {
                         withCredentials: true,
                         cors: true
@@ -153,12 +274,61 @@
                     }
                 });
             };
+            var addCatalogToLayout = function(catalog) {
+                _.each(catalog.layouts, function(def) {
+                    if (def.module && def.layout) {
+                        catalog.type = 'external-app';
+
+                        addCompToLayout(metadata, def.module, def.layout, {
+                            view: catalog
+                        }, def.fields);
+                    }
+                });
+            };
+
+            var updateManifest = function(catalog) {
+                if (catalog.customValidityCheck) {
+                    return System.import(catalog.src)
+                        .then(function(mod) {
+                            var props = Object.getOwnPropertyNames(mod).filter(function(name) {
+                                return name.substr(0, 2) !== '__';
+                            });
+
+                            if (mod.default && (props.length === 1 || mod.__useDefault)) {
+                                mod = mod.default;
+                            }
+                            return mod.updateManifest(catalog);
+                        })
+                        .then(function(result) {
+                            if (_.isObject(result)) {
+                                return result;
+                            } else if (result) {
+                                return catalog;
+                            } else {
+                                return null;
+                            }
+                        })
+                        .catch(function(err) {
+                            console.error('Failed to test module validity', err);
+                            return null;
+                        });
+                } else {
+                    return Promise.resolve(catalog);
+                }
+            };
 
             return new Promise(function(res, error) {
+                var serverInfo = App.metadata.getServerInfo();
                 var fetchAppLayout = function(app) {
                     $.ajax({
                         url: app.src,
                         dataType: 'json',
+                        data: {
+                            flavor: serverInfo.flavor,
+                            tenantId: App.config.tenant,
+                            version: serverInfo.version,
+                            licenses: App.user.attributes.licenses
+                        },
                         xhrFields: {
                             withCredentials: true
                         },
@@ -166,23 +336,28 @@
                         contentType: 'application/json; charset=utf-8',
                         mode: 'cors',
                         success: function(catalog) {
-                            _.each(catalog.layouts, function(def) {
-                                if (def.module && def.layout) {
-                                    var catalogEnv = {};
-                                    if (catalog.env) {
-                                        catalogEnv = catalog.env;
+                            updateManifest(catalog)
+                                .then(function(manifest) {
+                                    if (manifest.apps) {
+                                        _.each(manifest.apps, function(app) {
+                                            var catEntry = _.pick(
+                                                manifest,
+                                                'clientFileName',
+                                                'scope',
+                                                'src',
+                                                'srn',
+                                                'version'
+                                            );
+                                            // app will overwrite any values in catEntry e.g. src
+                                            catEntry = _.extend(catEntry, app);
+                                            updateManifest(catEntry)
+                                                .then(addCatalogToLayout);
+                                        }, this);
+
+                                    } else {
+                                        addCatalogToLayout(manifest);
                                     }
-                                    addCompToLayout(metadata, def.module, def.layout, {
-                                        'view': {
-                                            'type': 'external-app',
-                                            'name': catalog.name,
-                                            'src': catalog.src,
-                                            'srn': catalog.srn,
-                                            'env': catalogEnv
-                                        }
-                                    });
-                                }
-                            });
+                                });
                         },
                         error: function(error) {
                             console.error(error);

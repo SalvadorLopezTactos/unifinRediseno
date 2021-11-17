@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Teklifler Listesi Panosu',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Teklifler Kaydı Panosu',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Teklifler Odak Bölmesi',
 
     'LBL_CONTRACTS'=>'Kontratlar',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Kontratlar',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Fatura Ülkesi',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Fatura Posta Kodu',
     'LBL_BILLING_ADDRESS_STATE' => 'Fatura Eyaleti',
-    'LBL_BILLING_ADDRESS_STREET' => 'Fatura Adresi',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Fatura Adresi:',
     'LBL_BILLING_CONTACT_ID' => 'Fatura Kontak ID:',
     'LBL_BILLING_CONTACT_NAME' => 'Fatura Kontak İsmi:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Teslimat Adresi Ülke:',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Teslimat Adresi Posta Kodu:',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Teslimat Adresi Eyalet:',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Teslimat Adresi',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Teslimat Adresi:',
     'LBL_SHIPPING_BODY' => 'Faturalama ve Sevkiyat',
     'LBL_SHIPPING_CONTACT_ID' => 'Teslimat Kontak Id:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Fatura Adresini Teslimat Adresine kopyala',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Teslimat Adresini Fatura Adresine kopyala',
     'NTC_COPY_BILLING_ADDRESS2' => 'Teslimat Adresine kopyala',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Fatura Adresine kopyala',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Tekliften bu yorumu kaldırmak istediğinizden emin misiniz?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Fatura Adresine kopyala',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Tekliften bu yorumu kaldırmak istediğinizden emin misiniz?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Tekliften bu satırı kaldırmak istediğinizden emin misiniz?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Tekliften bu grubu kaldırmak istediğinizden emin misiniz?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Tekliften bu kontağı kaldırmak istediğinizden emin misiniz?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Miktar',
     'LBL_MFT_PART_NUM' => 'Parça Numarası',
     'LBL_ITEM_NAME' => 'Kalem',
+    'LBL_PRODUCT_TEMPLATE' => 'Ürün',
     'LBL_DISCOUNT_PRICE' => 'Birim Fiyatı',
     'LBL_DISCOUNT_AMOUNT' => 'İndirim',
     'LBL_LINE_ITEM_TOTAL' => 'Kalem Toplamı',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'Fırsat ID',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Teklifler Konfigürasyonu',
+
+    'LBL_RENEWAL' => 'Yenileme',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Teklif Etkileşimleri',
 );

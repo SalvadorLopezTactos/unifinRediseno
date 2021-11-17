@@ -145,7 +145,10 @@ $mod_strings = array (
   'LBL_EMAIL_ADDRESS'=>'Indirizzo Email:',
   'LBL_CONTACTS_SYNC' => 'Contatti',
     'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
-        'The employee can be created only in <a href="{0}" target="_blank">Cloud Settings</a>',
+        'Il dipendente può essere creato solo nelle <a href="{0}" target="_blank">Impostazioni SugarCloud</a>',
+
+    'LBL_COOKIE_CONSENT' => 'Consenso ai cookie',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Consenso ai cookie ricevuto il',
 );
 
 

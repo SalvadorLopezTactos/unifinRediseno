@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Query;
 
+use Elastica\Exception\ResponseException;
 use Sugarcrm\Sugarcrm\Elasticsearch\Container;
 use Sugarcrm\Sugarcrm\Elasticsearch\Query\Highlighter\HighlighterInterface;
 use Sugarcrm\Sugarcrm\Elasticsearch\Query\Aggregation\AggregationInterface;
@@ -21,6 +22,8 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Exception\QueryBuilderException;
 use Sugarcrm\Sugarcrm\Elasticsearch\Query\Aggregation\AggregationStack;
 use User;
 use Sugarcrm\Sugarcrm\Elasticsearch\Query\Result\ParserInterface;
+use Elastica\ResultSet as BaseResultSet;
+use Elastica\Response;
 
 /**
  *
@@ -381,6 +384,8 @@ class QueryBuilder
     /**
      * Execute query against search API
      * @return ResultSet
+     *
+     * @throws \Exception
      */
     public function executeSearch()
     {
@@ -400,9 +405,15 @@ class QueryBuilder
         $search = $this->newSearchObject();
         $search->setQuery($query);
         $search->addIndices($this->getReadIndices($this->modules, $this->user));
-        $search->addTypes($this->modules);
-
-        return $this->createResultSet($search->search());
+        try {
+            return $this->createResultSet($search->search());
+        } catch (ResponseException $responseException) {
+            // just return empty result
+            $emptyResult = new BaseResultSet(new Response(''), $query, []);
+            return $this->createResultSet($emptyResult);
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     /**

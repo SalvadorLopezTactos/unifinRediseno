@@ -60,12 +60,6 @@
     },
 
     /**
-     * Plugins.
-     * @property {Array}
-     */
-    plugins: ['ShortcutSession'],
-
-    /**
      * Shortcuts.
      * @property {Array}
      */
@@ -80,20 +74,21 @@
         this.$main.on('drawer:add.sidedrawer', _.bind(this.toggle, this));
         this.$main.on('drawer:remove.sidedrawer', _.bind(this.toggle, this));
         $(window).on('resize.sidedrawer', _.bind(this._resizeDrawer, this));
-        // register shortcuts to close drawer
-        app.shortcuts.register({
-            id: 'SideDrawer:Close',
-            keys: ['esc', 'mod+alt+l'],
-            component: this,
-            description: 'LBL_SHORTCUT_CLOSE_DRAWER',
-            callOnFocus: true,
-            handler: function() {
-                var $closeButton = this.$('button[data-action="close"]');
-                if ($closeButton.is(':visible') && !$closeButton.hasClass('disabled')) {
-                    $closeButton.click();
+
+        this.before('tabbed-dashboard:switch-tab', function(params) {
+            var callback = _.bind(function() {
+                this._close();
+                if (params.callback && _.isFunction(params.callback)) {
+                    params.callback.call(this);
                 }
+            }, this);
+
+            if (this.hasUnsavedChanges(callback)) {
+                return false;
             }
-        });
+            this._close();
+            return true;
+        }, this);
     },
 
     /**
@@ -125,6 +120,11 @@
 
         // open the drawer if not yet
         if (!this.isOpen()) {
+            // Save the previous session to prevent overwriting it
+            app.shortcuts.saveSession();
+            app.shortcuts.createSession(this.shortcuts, this);
+            this.registerShortcuts();
+
             this.currentState = 'opening';
             this.config();
             this.$el.show('slide', {direction: 'right'}, 300, _.bind(this.showComponent, this, def));
@@ -132,6 +132,26 @@
         } else {
             this.showComponent(def);
         }
+    },
+
+    /**
+     * Set up shortcuts for the side drawer
+     */
+    registerShortcuts: function() {
+        // register shortcuts to close drawer
+        app.shortcuts.register({
+            id: 'SideDrawer:Close',
+            keys: ['esc', 'mod+alt+l'],
+            component: this,
+            description: 'LBL_SHORTCUT_CLOSE_DRAWER',
+            callOnFocus: true,
+            handler: function() {
+                var $closeButton = this.$('button[data-action="close"]');
+                if ($closeButton.is(':visible') && !$closeButton.hasClass('disabled')) {
+                    $closeButton.click();
+                }
+            }
+        });
     },
 
     /**
@@ -177,11 +197,21 @@
     },
 
     /**
+     * Determines if there are any unsaved changes
+     *
+     * @param callback the callback
+     * @return boolean true if has unsaved changes, false otherwise
+     */
+    hasUnsavedChanges: function(callback) {
+        return !this.triggerBefore('side-drawer:close', {callback: callback});
+    },
+
+    /**
      * Check if it's okay to close the drawer before doing so.
      */
     close: function() {
         var _close = _.bind(this._close, this);
-        if (!this.triggerBefore('side-drawer:close', {callback: _close})) {
+        if (this.hasUnsavedChanges(_close)) {
             return;
         }
         _close();
@@ -208,6 +238,7 @@
         if (this.onCloseCallback) {
             this.onCloseCallback.apply(window, callbackArgs);
         }
+        app.shortcuts.restoreSession();
     },
 
     /**

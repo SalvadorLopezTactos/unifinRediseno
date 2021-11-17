@@ -271,4 +271,13 @@ class User implements AdvancedUserInterface
     {
         return $this->srn;
     }
+
+    /**
+     * Get full name
+     * @return string
+     */
+    public function getFullname(): string
+    {
+        return trim(sprintf('%s %s', $this->getOidcAttribute('given_name'), $this->getOidcAttribute('family_name')));
+    }
 }

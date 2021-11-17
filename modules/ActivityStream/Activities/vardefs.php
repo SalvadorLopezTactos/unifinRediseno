@@ -209,6 +209,13 @@ $dictionary['Activity'] = array(
             'source'       => 'non-db',
             'vname'        => 'LBL_PMSE_EMAILS_TEMPLATES_ACTIVITIES_TITLE',
         ),
+        'purchasedlineitems' => [
+            'name' => 'purchasedlineitems',
+            'type' => 'link',
+            'relationship' => 'purchasedlineitem_activities',
+            'source' => 'non-db',
+            'vname' => 'LBL_PLIS_ACTIVITIES',
+        ],
 
         // Add table columns.
         'parent_id' => array(

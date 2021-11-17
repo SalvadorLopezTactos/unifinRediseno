@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Dashbord for anropsliste',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Dashbord for anropsoppføring',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Anrop fokusskuff',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Oppringninger',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Tildelt bruker',
     'LBL_LIST_MY_CALLS' => 'Mine oppringninger',
     'LBL_MY_SCHEDULED_CALLS' => 'Mine planlagte anrop',
+    'LBL_GUEST_CALLS' => 'Mine anrop som gjest',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Planlagte anrop som gjest',
     'LBL_SELECT_FROM_DROPDOWN' => 'Vennligst gjør et valg fra Relatert til-listen først.',
 	'LBL_ASSIGNED_TO_NAME' => 'Tildelt:',
 	'LBL_ASSIGNED_TO_ID' => 'Tildelt bruker',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Avbryt',
     'LBL_EMPTY_SEARCH_RESULT' => 'Beklager, ingen funnet. Vennligst opprett en gjest under.',
     'LBL_NO_ACCESS' => 'Du har ingen tilgang til å opprette $module',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Amazon Connect kontakt-id',
+
     'LBL_REPEAT_TYPE' => 'Repetisjonstype',
     'LBL_REPEAT_INTERVAL' => 'Repetisjonsintervall',
     'LBL_REPEAT_END' => 'Slutt',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Opringning med {{{this}}}',
     'LBL_SEND_INVITES' => 'Send invitasjoner',
     'LBL_REMINDER_TITLE' => 'Oppringing:',
+    'LBL_CALL_RECORDING_URL' => 'Oppførings-URL',
+    'LBL_CALL_RECORDING' => 'Opptak',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Du lyktes i å opprette {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>.',

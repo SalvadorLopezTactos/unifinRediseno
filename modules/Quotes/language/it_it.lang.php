@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Dashboard elenco offerte',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Dashboard record offerte',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => 'Offerte Focus Drawer',
 
     'LBL_CONTRACTS'=>'Contratti',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Contratti',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Nazione di fatturazione',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'CAP di fatturazione',
     'LBL_BILLING_ADDRESS_STATE' => 'Provincia di fatturazione',
-    'LBL_BILLING_ADDRESS_STREET' => 'Indirizzo di fatturazione',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Indirizzo di fatturazione:',
     'LBL_BILLING_CONTACT_ID' => 'Id contatto di fatturazione:',
     'LBL_BILLING_CONTACT_NAME' => 'Contatto per la fatturazione:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Nazione di spedizione',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'CAP di spedizione',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Provincia di spedizione',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Indirizzo di spedizione',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Indirizzo di spedizione:',
     'LBL_SHIPPING_BODY' => 'Fatturazione e spedizione',
     'LBL_SHIPPING_CONTACT_ID' => 'Id contatto per la spedizione:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Copia l´indirizzo di fatturazione in indirizzo di spedizione',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Copia l´indirizzo di spedizione in indirizzo di fatturazione',
     'NTC_COPY_BILLING_ADDRESS2' => 'Copia in spedizione',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Copia in fatturazione',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Sei sicuro di voler rimuovere questo commento dall´offerta?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Copia in fatturazione',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Sei sicuro di voler rimuovere questo commento dall´offerta?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Sei sicuro di voler rimuovere questa linea dall´offerta?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Sei sicuro di voler eliminare questo gruppo dall´offerta?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Sei sicuro di voler rimuovere questo contatto dall´offerta?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Quantità',
     'LBL_MFT_PART_NUM' => 'Numero parte',
     'LBL_ITEM_NAME' => 'Voce',
+    'LBL_PRODUCT_TEMPLATE' => 'Prodotto',
     'LBL_DISCOUNT_PRICE' => 'Prezzo unitario',
     'LBL_DISCOUNT_AMOUNT' => 'Sconto',
     'LBL_LINE_ITEM_TOTAL' => 'Totale voce',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'ID opportunità',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Configurazione quote',
+
+    'LBL_RENEWAL' => 'Rinnovo',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interazioni offerta',
 );

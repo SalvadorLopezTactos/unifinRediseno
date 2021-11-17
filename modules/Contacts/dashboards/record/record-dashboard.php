@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -11,37 +10,80 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-return array(
-    'metadata' =>
-    array(
-        'components' =>
-        array(
-            array(
-                'rows' =>
-                array(
-                    array(
-                        array(
-                            'view' => array(
-                                'type' => 'planned-activities',
-                                'label' => 'LBL_PLANNED_ACTIVITIES_DASHLET',
-                            ),
-                            'width' => 12,
-                        ),
-                    ),
-                    array(
-                        array(
-                            'view' => array(
-                                'type' => 'history',
-                                'label' => 'LBL_HISTORY_DASHLET',
-                            ),
-                            'width' => 12,
-                        ),
-                    ),
-                ),
+return [
+    'metadata' => [
+        'components' => [
+            [
                 'width' => 12,
-            ),
-        ),
-    ),
+                'rows' => [
+                    [
+                        [
+                            'view' => [
+                                'module' => 'Contacts',
+                                'type' => 'activity-timeline',
+                                'label' => 'LBL_ACTIVITY_TIMELINE_DASHLET',
+                            ],
+                            'context' => [
+                                'module' => 'Contacts',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
+                                'type' => 'purchase-history',
+                                'label' => 'LBL_PURCHASE_HISTORY_DASHLET',
+                                'linked_account_field' => 'account_id',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
+                                'type' => 'commentlog-dashlet',
+                                'label' => 'LBL_DASHLET_COMMENTLOG_NAME',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
+                                'type' => 'active-subscriptions',
+                                'label' => 'LBL_ACTIVE_SUBSCRIPTIONS_DASHLET',
+                                'linked_subscriptions_account_field' => 'account_id',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                    [
+                        [
+                            'view' => [
+                                'type' => 'dashablerecord',
+                                'module' => 'Contacts',
+                                'tabs' => [
+                                    [
+                                        'active' => true,
+                                        'label' => 'LBL_MODULE_NAME_SINGULAR',
+                                        'link' => 'accounts',
+                                        'module' => 'Accounts',
+                                    ],
+                                ],
+                                'tab_list' => [
+                                    'accounts',
+                                ],
+                            ],
+                            'context' => [
+                                'module' => 'Contacts',
+                            ],
+                            'width' => 12,
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
     'name' => 'LBL_CONTACTS_RECORD_DASHBOARD',
-);
-
+];

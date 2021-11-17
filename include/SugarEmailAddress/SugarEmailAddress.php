@@ -15,11 +15,15 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Doctrine\DBAL\Connection;
 use Sugarcrm\IdentityProvider\Srn;
 use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
+use Psr\SimpleCache\CacheInterface;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 
 class SugarEmailAddress extends SugarBean
 {
     // max number of legacy emails
     const MAX_LEGACY_EMAILS = 10;
+
+    const EMAIL_CACHE_PREFIX = 'email_addresses_by_guid_';
 
     var $table_name = 'email_addresses';
     var $module_name = "EmailAddresses";
@@ -40,6 +44,11 @@ class SugarEmailAddress extends SugarBean
     static $count = 0;
 
     /**
+     * @var CacheInterface
+     */
+    protected $cache;
+
+    /**
      * Collection of fetched addressed for a record. Originally set to null to 
      * indicate a trip to the database was not yet made.
      * 
@@ -53,6 +62,7 @@ class SugarEmailAddress extends SugarBean
         $this->index = self::$count;
         $this->opt_out = !empty($GLOBALS['sugar_config']['new_email_addresses_opted_out']);
         self::$count++;
+        $this->cache = Container::getInstance()->get(CacheInterface::class);
     }
 
     /**
@@ -67,7 +77,15 @@ class SugarEmailAddress extends SugarBean
      */
     public static function isValidEmail($emailAddress)
     {
-        return PHPMailerProxy::ValidateAddress(Etechnika\IdnaConvert\IdnaConvert::encodeString($emailAddress));
+        $emailAddress = implode('@', array_map(function (string $part) : string {
+            if (mb_check_encoding($part, 'ASCII')) {
+                return $part;
+            }
+
+            return idn_to_ascii($part, IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46);
+        }, explode('@', $emailAddress)));
+
+        return PHPMailer::validateAddress($emailAddress);
     }
 
     /**
@@ -348,7 +366,7 @@ class SugarEmailAddress extends SugarBean
         while ($row2 = $stmt->fetch()) {
             $current_links[$row2['email_address_id']] = $row2;
         }
-
+        $this->cache->delete(self::EMAIL_CACHE_PREFIX . $module . $id);
         $isConversion = (isset($_REQUEST) && isset($_REQUEST['action']) && $_REQUEST['action'] == 'ConvertLead') ? true : false;
 
         if (!empty($this->addresses)) {
@@ -453,7 +471,7 @@ class SugarEmailAddress extends SugarBean
         $addresstype
     )
     {
-        $emailCaps = strtoupper(trim($email));
+        $emailCaps = sugarStrToUpper(trim($email));
         if (empty($emailCaps))
             return 0;
 
@@ -479,7 +497,7 @@ class SugarEmailAddress extends SugarBean
      * @param   $table      which table to query
      */
     function getRelatedId($email, $module) {
-        $email = trim(strtoupper($email));
+        $email = trim(sugarStrToUpper($email));
         $module = ucfirst($module);
 
         $q = "SELECT bean_id FROM email_addr_bean_rel eabr
@@ -520,7 +538,7 @@ class SugarEmailAddress extends SugarBean
         $q = "SELECT * FROM email_addr_bean_rel eabl JOIN " . $this->table_name . " ea ON (ea.id = eabl.email_address_id)
                 WHERE ea.email_address_caps = ? and eabl.deleted = 0";
         $conn = $this->db->getConnection();
-        $stmt = $conn->executeQuery($q, array(strtoupper($email)));
+        $stmt = $conn->executeQuery($q, array(sugarStrToUpper($email)));
 
         while ($a = $stmt->fetch()) {
             if(empty($a['bean_module'])) continue;
@@ -680,7 +698,7 @@ class SugarEmailAddress extends SugarBean
                             . " where email_address_caps = ?";
 
                         $conn = $this->db->getConnection();
-                        $stmt = $conn->executeQuery($query, array(strtoupper($email)));
+                        $stmt = $conn->executeQuery($query, array(sugarStrToUpper($email)));
                         $row = $stmt->fetch();
                         if (!empty($row['opt_out'])) {
                             $optOutValues[$k] = "emailAddress$count";
@@ -758,7 +776,7 @@ class SugarEmailAddress extends SugarBean
 
         $key = false;
         foreach ($this->addresses as $k => $address) {
-            if (strtoupper($address['email_address']) === strtoupper($new_address['email_address'])) {
+            if (sugarStrToUpper($address['email_address']) === sugarStrToUpper($new_address['email_address'])) {
                 $key = $k;
 
                 $diffCount = array_diff_assoc($new_address, $address);
@@ -932,7 +950,7 @@ class SugarEmailAddress extends SugarBean
 
         if (empty($guid)) {
             $address = $this->db->quote($this->_cleanAddress($addr));
-            $addressCaps = strtoupper($address);
+            $addressCaps = sugarStrToUpper($address);
 
             if (!empty($address)) {
                 $guid = create_guid();
@@ -963,7 +981,7 @@ class SugarEmailAddress extends SugarBean
     public function getGuid($address)
     {
         $address = $this->db->quote($this->_cleanAddress($address));
-        $addressCaps = strtoupper($address);
+        $addressCaps = sugarStrToUpper($address);
 
         //use email address in captial letters for query
         $q = "SELECT id FROM " . $this->table_name . " WHERE email_address_caps = ?";
@@ -988,7 +1006,7 @@ class SugarEmailAddress extends SugarBean
     public function AddUpdateEmailAddress($addr, $invalid = null, $opt_out = null, $id = null)
     {
         $address = self::_cleanAddress($addr);
-        $addressCaps = strtoupper($address);
+        $addressCaps = sugarStrToUpper($address);
 
         $addrBean = BeanFactory::newBean('EmailAddresses');
         $existingBean = $this->getEmailAddrBean($addrBean, $addressCaps, $id);
@@ -1136,6 +1154,11 @@ class SugarEmailAddress extends SugarBean
             return array();
         }
 
+        $data = $this->cache->get(self::EMAIL_CACHE_PREFIX . $module . $id);
+        if (!empty($data)) {
+            return $data;
+        }
+
         $module = $this->getCorrectedModule($module);
 
         $q = "SELECT ea.email_address, ea.email_address_caps, ea.invalid_email, ea.opt_out, ea.date_created, ea.date_modified,
@@ -1149,7 +1172,9 @@ class SugarEmailAddress extends SugarBean
         $stmt = $conn->prepare($q);
         $stmt->execute(array($module, $id));
 
-        return $stmt->fetchAll();
+        $data = $stmt->fetchAll();
+        $this->cache->set(self::EMAIL_CACHE_PREFIX . $module . $id, $data);
+        return $data;
     }
 
     /**
@@ -1216,7 +1241,11 @@ class SugarEmailAddress extends SugarBean
             ];
             $srnManager = new Srn\Manager($srnManagerConfig);
             $userSrn = $srnManager->createUserSrn($tenantSrn->getTenantId(), $id);
-            $cloudConsoleUrl = $idmConfig->buildCloudConsoleUrl('userProfile', [Srn\Converter::toString($userSrn)]);
+            $cloudConsoleUrl = $idmConfig->buildCloudConsoleUrl(
+                'userProfile',
+                [Srn\Converter::toString($userSrn)],
+                $GLOBALS['current_user']->id
+            );
         }
         $this->smarty->assign('idmMode', json_encode([
             'disabledForModule' => $disabledForModule,
@@ -1591,10 +1620,9 @@ class SugarEmailAddress extends SugarBean
  * @param string $value unused
  * @param string $view DetailView or EditView
  * @param string $tabindex
- * @param bool   $skipIdmRestrictions Optional, should we skip IDM restrictions for the field
  * @return string
  */
-function getEmailAddressWidget($focus, $field, $value, $view, $tabindex = '0', $skipIdmRestrictions = false)
+function getEmailAddressWidget($focus, $field, $value, $view, $tabindex = '0')
 {
     $sea = BeanFactory::newBean('EmailAddresses');
     $sea->setView($view);
@@ -1604,7 +1632,15 @@ function getEmailAddressWidget($focus, $field, $value, $view, $tabindex = '0', $
             $module = $focus->module_dir;
             if ($view == 'ConvertLead' && $module == "Contacts") $module = "Leads";
 
-            return $sea->getEmailAddressWidgetEditView($focus->id, $module, false, '', $tabindex, $skipIdmRestrictions);
+            $idmConfig = new IdmConfig(\SugarConfig::getInstance());
+            return $sea->getEmailAddressWidgetEditView(
+                $focus->id,
+                $module,
+                false,
+                '',
+                $tabindex,
+                !$idmConfig->isIDMModeEnabled() || $idmConfig->isSpecialBeanAction($focus, [])
+            );
         }
         elseif ($view == 'wirelessedit') {
             return $sea->getEmailAddressWidgetWirelessEdit($focus->id, $focus->module_dir, false);

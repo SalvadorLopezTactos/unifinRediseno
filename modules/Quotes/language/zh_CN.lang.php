@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => '报价列表仪表板',
     'LBL_QUOTES_RECORD_DASHBOARD' => '报价记录仪表板',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => '报价焦点抽屉',
 
     'LBL_CONTRACTS'=>'合同',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'合同',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => '邮编',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => '城市',
     'LBL_BILLING_ADDRESS_STATE' => '省份',
-    'LBL_BILLING_ADDRESS_STREET' => '账单地址',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => '账单地址：',
     'LBL_BILLING_CONTACT_ID' => '账单联系人编号：',
     'LBL_BILLING_CONTACT_NAME' => '账单联系人姓名：',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => '邮编',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => '城市',
     'LBL_SHIPPING_ADDRESS_STATE' => '省份',
-    'LBL_SHIPPING_ADDRESS_STREET' => '收货地址',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => '收货地址：',
     'LBL_SHIPPING_BODY' => '付款和货运',
     'LBL_SHIPPING_CONTACT_ID' => '收货联系人编号：',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => '将账单地址复制到收货地址',
     'NTC_COPY_SHIPPING_ADDRESS' => '将收货地址复制到付款地址',
     'NTC_COPY_BILLING_ADDRESS2' => '复制到收货',
-    'NTC_COPY_SHIPPING_ADDRESS2' => '复制到付款',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => '您确定要从这个报价中移除此注释吗?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => '复制到付款',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => '您确定要从这个报价中移除此注释吗?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => '您确定要从这个报价中移除此线项目吗?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => '您确定要从这个报价中删除此分组吗？',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => '您确定要从这个报价中移除此联系人吗?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => '数量',
     'LBL_MFT_PART_NUM' => '部件编号',
     'LBL_ITEM_NAME' => '单项',
+    'LBL_PRODUCT_TEMPLATE' => '产品',
     'LBL_DISCOUNT_PRICE' => '单价',
     'LBL_DISCOUNT_AMOUNT' => '折扣',
     'LBL_LINE_ITEM_TOTAL' => '单项总计',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => '机会 ID',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '报价配置',
+
+    'LBL_RENEWAL' => '续订',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '报价互动',
 );

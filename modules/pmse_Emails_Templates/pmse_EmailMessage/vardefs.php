@@ -12,6 +12,7 @@
 
 $dictionary['pmse_EmailMessage'] = array(
     'table' => 'pmse_email_message',
+    'archive' => false,
     'audited' => false,
     'activity_enabled' => false,
     'reassignable' => false,

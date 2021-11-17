@@ -71,4 +71,90 @@ $viewdefs['Leads']['base']['view']['activity-timeline'] = [
             ],
         ],
     ],
+    'custom_toolbar' => [
+        'buttons' => [
+            [
+                'type' => 'actiondropdown',
+                'no_default_action' => true,
+                'icon' => 'fa-plus',
+                'buttons' => [
+                    [
+                        'type' => 'dashletaction',
+                        'action' => 'composeEmail',
+                        'params' => [
+                            'link' => 'emails',
+                            'module' => 'Emails',
+                        ],
+                        'label' => 'LBL_COMPOSE_EMAIL_BUTTON_LABEL',
+                        'icon' => 'fa-plus',
+                        'acl_action' => 'create',
+                        'acl_module' => 'Emails',
+                    ],
+                    [
+                        'type' => 'dashletaction',
+                        'action' => 'createRecord',
+                        'params' => [
+                            'link' => 'calls',
+                            'module' => 'Calls',
+                        ],
+                        'label' => 'LBL_SCHEDULE_CALL',
+                        'icon' => 'fa-phone',
+                        'acl_action' => 'create',
+                        'acl_module' => 'Calls',
+                    ],
+                    [
+                        'type' => 'dashletaction',
+                        'action' => 'createRecord',
+                        'params' => [
+                            'link' => 'meetings',
+                            'module' => 'Meetings',
+                        ],
+                        'label' => 'LBL_SCHEDULE_MEETING',
+                        'icon' => 'fa-calendar',
+                        'acl_action' => 'create',
+                        'acl_module' => 'Meetings',
+                    ],
+                    [
+                        'type' => 'dashletaction',
+                        'action' => 'createRecord',
+                        'params' => [
+                            'link' => 'notes',
+                            'module' => 'Notes',
+                        ],
+                        'label' => 'LBL_CREATE_NOTE_OR_ATTACHMENT',
+                        'icon' => 'fa-plus',
+                        'acl_action' => 'create',
+                        'acl_module' => 'Notes',
+                    ],
+                ],
+            ],
+            [
+                'type' => 'dashletaction',
+                'css_class' => 'dashlet-toggle btn btn-invisible minify',
+                'icon' => 'fa-chevron-up',
+                'action' => 'toggleMinify',
+                'tooltip' => 'LBL_DASHLET_MINIMIZE',
+            ],
+            [
+                'dropdown_buttons' => [
+                    [
+                        'type' => 'dashletaction',
+                        'action' => 'editClicked',
+                        'label' => 'LBL_DASHLET_CONFIG_EDIT_LABEL',
+                    ],
+                    [
+                        'type' => 'dashletaction',
+                        'action' => 'reloadData',
+                        'label' => 'LBL_DASHLET_REFRESH_LABEL',
+                    ],
+                    [
+                        'type' => 'dashletaction',
+                        'action' => 'removeClicked',
+                        'label' => 'LBL_DASHLET_REMOVE_LABEL',
+                        'name' => 'remove_button',
+                    ],
+                ],
+            ],
+        ],
+    ],
 ];

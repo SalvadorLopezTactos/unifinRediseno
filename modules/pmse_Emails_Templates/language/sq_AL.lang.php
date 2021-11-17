@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Modelet e emaileve të proceseve',
     'LBL_MODULE_NAME_SINGULAR' => 'Proceso email templejtat',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Përqendruesi i fokusit te modelet e emaileve të proceseve',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Paneli i regjistrimit të shablloneve të emailit të procesit',
     'LNK_LIST' => 'Shiko modelet e emaileve të proceseve',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Krijo procesimin e email templejtave',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Importo templejtat e emailave të procesuar',

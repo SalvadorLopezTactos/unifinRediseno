@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_BUGS_LIST_DASHBOARD' => '錯誤清單儀表板',
   'LBL_BUGS_RECORD_DASHBOARD' => '錯誤記錄儀表板',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => '缺陷焦點抽屜',
 
   'LBL_MODULE_NAME' => '問題',
   'LBL_MODULE_NAME_SINGULAR'	=> '錯誤',

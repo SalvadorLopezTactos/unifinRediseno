@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => '사례 목록 대시보드',
     'LBL_CASES_RECORD_DASHBOARD' => '사례 기록 대시보드',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => '케이스 세부사항',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => '사례 포커스 서랍',
 
 	'ERR_DELETE_RECORD'					=> '거래처를 삭제하시려면 정확한 고유번호를 입력하셔야합니다.',
 	'LBL_ACCOUNT_ID'					=> '거래처 ID',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => '포탈에 보여주기',
 	'LBL_CREATE_KB_DOCUMENT' => '신규 기사 새로 만들기',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => '지식 기반',
+    'LBL_REQUEST_CLOSE' => '요청 종료',
+    'LBL_REQUEST_CLOSE_DATE' => '요청 종료일:',
+    'LBL_REQUEST_CLOSE_LABEL' => '종료 요청',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => '이 케이스를 종료하라는 요청을 보냅니다',
+    'LBL_REQUEST_CLOSE_MESSAGE' => '이 케이스를 종료하도록 요청하시겠습니까?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => '종료 요청된 내 케이스',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => '종료 요청된 내 케이스',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => '종료 요청된 내 케이스',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => '종료 요청된 케이스 목록',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => '종료 요청된 할당 케이스 목록을 표시합니다',
 
     'LBL_CREATED_USER' => '생성자',
     'LBL_MODIFIED_USER' => '수정자',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => '담당자명',
     'LBL_EXPORT_TEAM_COUNT' => '팀 카운트',
     'LBL_CHANGETIMERS' => '타이머 변경',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => '구매',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => '관련된 연락처의 이메일',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => '예를 들어 이전에 접수되었던 사례들을 찾는데 사용할수 있습니다.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => '등록하고자 하는 신규 사례가 있다면 신규 사례제출을 위해 이곳을 클릭할수 있습니다.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => '이곳을 클릭하면 언제든지 이 창으로 돌아올수 있습니다.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '케이스 상호작용',
 
     'LBL_NOTES_SUBPANEL_TITLE' => '메모 목록',
 
@@ -143,5 +155,5 @@ $mod_strings = array (
 
     'LBL_SLA_DETAILS' => 'SLA 세부 사항',
     'LBL_HOURS' => '시간',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => '상태',
 );

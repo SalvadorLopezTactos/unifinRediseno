@@ -57,6 +57,12 @@
                     delete settings.dependencies;
                     delete settings.buttons;
                     this.settings = new Dashlet(settings);
+                    // On the multi-line list and focus view, side drawer/focus drawer
+                    // the dashlets need the correct module context, which
+                    // is set here. The settings will sent to the dashlet, there the module will be used as needed.
+                    if (_.contains(['multi-line', 'focus'], this.context.get('layout')) && settings.module === null) {
+                        settings.module = this.module;
+                    }
                     if (settings.module) {
                         this.model = this.context.parent.get("model");
                     }

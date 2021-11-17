@@ -17,7 +17,6 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
-use Doctrine\DBAL\Connection;
 use Sugarcrm\Sugarcrm\Audit\Formatter as AuditFormatter;
 use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 
@@ -105,85 +104,60 @@ class Audit extends SugarBean
     }
     /**
      * This method gets the Audit log and formats it specifically for the API.
-     * @param  type SugarBean $bean
+     * @param SugarBean $bean
      * @return array
      */
-    public function getAuditLog(SugarBean $bean)
+    public function getAuditLog(SugarBean $bean) : array
     {
-        global $timedate;
-
-        if (!$bean->is_AuditEnabled()) {
+        if (!$bean->is_AuditEnabled() || $bean->id === null) {
             return array();
         }
 
-        $auditTable = $bean->get_audit_table_name();
+        $query = $this->getAuditQuery($bean);
 
-        $query = "SELECT atab.*, ae.source, ae.type AS event_type, usr.user_name AS created_by_username
-                  FROM {$auditTable} atab
-                  LEFT JOIN audit_events ae ON (ae.id = atab.event_id)
-                  LEFT JOIN users usr ON (usr.id = atab.created_by) 
-                  WHERE  atab.parent_id = ?
-                  ORDER BY atab.date_created DESC, atab.id DESC";
+        $stmt = $query->execute();
 
-        $db = DBManagerFactory::getInstance();
-
-        $stmt = $db->getConnection()->executeQuery($query, [$bean->id]);
         if (empty($stmt)) {
             return array();
         }
 
-        $fieldDefs = $this->fieldDefs;
+        return $this->fetchAuditLogRows($bean, $stmt);
+    }
 
-        $aclCheckContext = array('bean' => $bean);
-        $rows = [];
-        while ($row = $stmt->fetch()) {
-            if (!SugarACL::checkField($bean->module_dir, $row['field_name'], 'access', $aclCheckContext)) {
-                continue;
-            }
-
-            //convert date
-            $dateCreated = $timedate->fromDbType($db->fromConvert($row['date_created'], 'datetime'), "datetime");
-            $row['date_created'] = $timedate->asIso($dateCreated);
-
-            $row['source'] = json_decode($row['source'], true);
-
-            $viewName = array_search($row['field_name'], Team::$nameTeamsetMapping);
-            if ($viewName) {
-                $row['field_name'] = $viewName;
-                $rows[] = $this->handleTeamSetField($row);
-                continue;
-            }
-
-            if ($this->handleRelateField($bean, $row)) {
-                $rows[] = $row;
-                continue;
-            }
-
-            // look for opportunities to relate ids to name values.
-            if (!empty($this->genericAssocFieldsArray[$row['field_name']]) ||
-                !empty($this->moduleAssocFieldsArray[$bean->object_name][$row['field_name']])
-            ) {
-                foreach ($fieldDefs as $field) {
-                    if (in_array($field['name'], array('before_value_string', 'after_value_string'))) {
-                        $row[$field['name']] =
-                            $this->getNameForId($row['field_name'], $row[$field['name']]);
-                    }
-                }
-            }
-
-            $rows[] = $this->formatRowForApi($row);
+    /**
+     * This method gets the Audit log and formats it specifically for the API.
+     * @param SugarBean $bean
+     * @param array $options
+     * @return array
+     */
+    public function getAuditLogChunk(SugarBean $bean, array $options) : array
+    {
+        if (!$bean->is_AuditEnabled()) {
+            return array();
         }
 
-        Container::getInstance()->get(AuditFormatter::class)->formatRows($rows);
+        $query = $this->getAuditQuery($bean);
+        // nagative limit means no limit
+        if ($options['limit'] >= 0) {
+            // Add an extra record to the limit so we can detect if there are more records to be found
+            $query->setMaxResults($options['limit'] + 1);
+            $query->setFirstResult($options['offset']);
+        }
 
-        return $rows;
+        $stmt = $query->execute();
+
+        if (empty($stmt)) {
+            return array();
+        }
+
+        return $this->fetchAuditLogRows($bean, $stmt);
     }
 
     /**
      * Wrapper around static method self::getAssociatedFieldName($fieldName, $fieldValue)
      * @param string $fieldName
      * @param string $fieldValue
-     * @return string
+     * @return string|null
      */
     protected function getNameForId($fieldName, $fieldValue)
     {
@@ -393,7 +367,7 @@ class Audit extends SugarBean
      * Return a more readable name for an id
      * @param {String} $fieldName
      * @param {String} $fieldValue
-     * @return string
+     * @return string|null
      */
     public static function getAssociatedFieldName($fieldName, $fieldValue)
     {
@@ -425,6 +399,10 @@ SQL;
                 [$fieldValue]
             )->fetch();
 
+        if ($row === false) {
+            return null;
+        }
+
         if (is_array($field_arr['select_field_name'])) {
             $returnVal = '';
             foreach ($field_arr['select_field_name'] as $col) {
@@ -435,5 +413,83 @@ SQL;
         } else {
             return $row[$field_arr['select_field_name']];
         }
+    }
+
+    /**
+     * @param SugarBean $bean
+     * @return \Doctrine\DBAL\Query\QueryBuilder|\Sugarcrm\Sugarcrm\Dbal\Query\QueryBuilder
+     * @throws Exception
+     */
+    private function getAuditQuery(SugarBean $bean)
+    {
+        $auditTable = $bean->get_audit_table_name();
+        $qb = \DBManagerFactory::getInstance()->getConnection()->createQueryBuilder();
+        $expr = $qb->expr();
+
+        $query = $qb->select(
+            ['atab.*, ae.source', 'ae.type AS event_type', 'usr.user_name AS created_by_username']
+        )->from($auditTable, 'atab')
+            ->leftJoin('atab', 'audit_events', 'ae', 'ae.id = atab.event_id')
+            ->leftJoin('atab', 'users', 'usr', 'usr.id = atab.created_by')
+            ->orderBy('atab.date_created', 'DESC')
+            ->addOrderBy('atab.id', 'DESC');
+
+        if ($bean->id !== null) {
+            $query->where($expr->eq('atab.parent_id', $qb->createPositionalParameter($bean->id)));
+        }
+        return $query;
+    }
+
+    /**
+     * @param SugarBean $bean
+     * @param \Doctrine\DBAL\Driver\ResultStatement $stmt
+     * @return array
+     */
+    private function fetchAuditLogRows(SugarBean $bean, \Doctrine\DBAL\Driver\ResultStatement $stmt): array
+    {
+        $fieldDefs = $this->fieldDefs;
+        $aclCheckContext = array('bean' => $bean);
+        $rows = [];
+        while ($row = $stmt->fetch()) {
+            if (!SugarACL::checkField($bean->module_dir, $row['field_name'], 'access', $aclCheckContext)) {
+                continue;
+            }
+
+            //convert date
+            $dateCreated = $GLOBALS['timedate']->fromDbType($bean->db->fromConvert($row['date_created'], 'datetime'), "datetime");
+            $row['date_created'] = $GLOBALS['timedate']->asIso($dateCreated);
+
+            $row['source'] = json_decode($row['source'], true);
+
+            $viewName = array_search($row['field_name'], Team::$nameTeamsetMapping);
+            if ($viewName) {
+                $row['field_name'] = $viewName;
+                $rows[] = $this->handleTeamSetField($row);
+                continue;
+            }
+
+            if ($this->handleRelateField($bean, $row)) {
+                $rows[] = $row;
+                continue;
+            }
+
+            // look for opportunities to relate ids to name values.
+            if (!empty($this->genericAssocFieldsArray[$row['field_name']]) ||
+                !empty($this->moduleAssocFieldsArray[$bean->object_name][$row['field_name']])
+            ) {
+                foreach ($fieldDefs as $field) {
+                    if (in_array($field['name'], array('before_value_string', 'after_value_string'))) {
+                        $row[$field['name']] =
+                            $this->getNameForId($row['field_name'], $row[$field['name']]);
+                    }
+                }
+            }
+
+            $rows[] = $this->formatRowForApi($row);
+        }
+
+        Container::getInstance()->get(AuditFormatter::class)->formatRows($rows);
+
+        return $rows;
     }
 }

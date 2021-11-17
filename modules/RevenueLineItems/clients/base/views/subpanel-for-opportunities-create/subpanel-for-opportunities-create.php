@@ -111,6 +111,35 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities-create
                 ),
                 'quantity',
                 array(
+                    'name' => 'discount_field',
+                    'type' => 'fieldset',
+                    'css_class' => 'discount-field',
+                    'label' => 'LBL_DISCOUNT_AMOUNT',
+                    'enabled' => true,
+                    'default' => true,
+                    'sortable' => false,
+                    'show_child_labels' => false,
+                    'fields' => array(
+                        array(
+                            'name' => 'discount_amount',
+                            'label' => 'LBL_DISCOUNT_AMOUNT',
+                            'type' => 'discount-amount',
+                            'discountFieldName' => 'discount_select',
+                            'related_fields' => array(
+                                'currency_id',
+                            ),
+                            'convertToBase' => true,
+                            'base_rate_field' => 'base_rate',
+                            'showTransactionalAmount' => true,
+                        ),
+                        array(
+                            'type' => 'discount-select',
+                            'name' => 'discount_select',
+                            'options' => array(),
+                        ),
+                    ),
+                ),
+                array(
                     'name' => 'assigned_user_name',
                     'enabled' => true,
                     'default' => true
@@ -149,6 +178,11 @@ $viewdefs['RevenueLineItems']['base']['view']['subpanel-for-opportunities-create
                     'label' => 'LBL_RENEWABLE',
                     'type' => 'bool',
                 ),
+                'add_on_to_name' => [
+                    'name' => 'add_on_to_name',
+                    'type' => 'add-on-to',
+                    'default' => false,
+                ],
             ),
         ),
     ),

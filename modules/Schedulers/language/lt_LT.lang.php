@@ -41,6 +41,9 @@ $mod_strings = array (
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => ' Suplanuota užduotis',
 'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Atkurkite sugadintus komandos saugos duomenis',
 'LBL_OOTB_ACTIVITY_STREAM_PURGER' => 'Veiklos srauto valymo priemonė',
+'LBL_OOTB_UPDATE_PRODUCT_DEFINITION' => 'Atnaujinti produkto apibrėžimą',
+'LBL_OOTB_PROCESS_TIME_AWARE_SCHEDULES' => 'Proceso laiko tvarkaraščiai',
+'LBL_OOTB_DATA_ARCHIVER' => 'Vykdyti aktyvių duomenų archyvus / ištrynimus',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervalas:',
@@ -89,6 +92,7 @@ $mod_strings = array (
 // Labels
 'LBL_ALWAYS' => 'Visada',
 'LBL_CATCH_UP' => 'Vykdyti jei praleistas',
+'LBL_SYSTEM_JOB' => 'Ar dabartinė darbo sistema?',
 'LBL_CATCH_UP_WARNING' => 'Nuimti pažymėjimą, jeigu darbas gali užtrukti ilgiau.',
 'LBL_DATE_TIME_END' => 'Užbaigimo data ir laikas',
 'LBL_DATE_TIME_START' => 'Pradžios data ir laikas',
@@ -145,6 +149,7 @@ $mod_strings = array (
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Pašalinkite diagnostikos įrankio failus',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Pašalinkite laikinus failus',
 'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Atkurkite sugadintus komandos saugos duomenis',
+'LBL_SUGARCRM_SUGARCRM_PRODUCTDEFINITION_JOB_UPDATEPRODUCTDEFINITIONJOB' => 'Atnaujinti produkto apibrėžimą',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Vykdyti masinių laiškų siuntimą',
 'LBL_ASYNCMASSUPDATE' => 'Perform Asynchronous Mass Updates',
@@ -160,6 +165,7 @@ $mod_strings = array (
 'LBL_CLEANJOBQUEUE' => 'Išvalyti suplanuotą darbų eilę',
 'LBL_CLEANOLDRECORDLISTS' => 'Cleanup Old Record Lists',
 'LBL_SUGARJOBACTIVITYSTREAMPURGER' => 'Veiklos srauto valymo priemonė',
+'LBL_SUGARJOBPROCESSTIMEAWARESCHEDULES' => 'Apdoroti laiko tvarkaraščius',
 'LBL_PMSEENGINECRON' => '„SugarBPM“ planuoklė',
 );
 

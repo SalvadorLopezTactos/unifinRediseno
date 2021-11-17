@@ -16,6 +16,11 @@
 ({
     extendsFrom: 'CreateView',
 
+    /*
+     * Enable pre-population from Omnichanel
+     */
+    omniPopulation: true,
+
     /**
      * Gets the portal status from metadata to know if we render portal specific fields.
      * @override

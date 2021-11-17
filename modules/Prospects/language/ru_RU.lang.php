@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_TARGETS_LIST_DASHBOARD' => 'Информационная панель списка адресатов',
   'LBL_TARGETS_RECORD_DASHBOARD' => 'Информационная панель записей адресатов',
+  'LBL_PROSPECTS_FOCUS_DRAWER_DASHBOARD' => 'Фокусная панель для целей',
 
   'LBL_MODULE_NAME' => 'Потенциальные клиенты',
   'LBL_MODULE_NAME_SINGULAR' => 'Адресат',

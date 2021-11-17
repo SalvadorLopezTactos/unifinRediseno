@@ -22,6 +22,11 @@ use Elastica\Document as BaseDocument;
 class Document extends BaseDocument
 {
     /**
+     * type
+     * @var string
+     */
+    protected $type = '';
+    /**
      * Check whether the document has data
      * @return boolean
      */
@@ -49,5 +54,27 @@ class Document extends BaseDocument
         if (isset($this->_data[$field])) {
             unset($this->_data[$field]);
         }
+    }
+
+    /**
+     * get type
+     * @return string
+     */
+    public function getType() : string
+    {
+        return $this->type;
+    }
+
+    /**
+     * Sets the document type name.
+     *
+     * @param string $type Type name
+     *
+     * @return $this
+     */
+    public function setType(string $type) : self
+    {
+        $this->type = $type;
+        return $this;
     }
 }

@@ -607,7 +607,7 @@ class Report
 
         global $report_modules;
         if (empty($report_modules[$this->module])) {
-            $this->handleException("you are not allowed to report on this module:" . $this->module);
+            $this->handleException('You are not allowed to report on this module: %s', $this->module);
         }
     }
 
@@ -1008,9 +1008,11 @@ class Report
         global $current_language;
         if (!$this->is_definition_valid()) {
             $mod_strings = return_module_language($current_language, "Reports");
-            $this->handleException($mod_strings['LBL_DELETED_FIELD_IN_REPORT1'] . ' <b>'
-                    . implode(array_merge($this->invalid_links, $this->invalid_fields), ",")
-                    . '</b>. ' . $mod_strings['LBL_DELETED_FIELD_IN_REPORT2']
+            $this->handleException(
+                '%s <b>%s</b> %s',
+                $mod_strings['LBL_DELETED_FIELD_IN_REPORT1'],
+                implode(array_merge($this->invalid_links, $this->invalid_fields), ","),
+                $mod_strings['LBL_DELETED_FIELD_IN_REPORT2']
             );
         }
     }
@@ -1061,11 +1063,17 @@ class Report
         if (!$this->is_layout_def_valid($layout_def)) {
             global $current_language;
             $mod_strings = return_module_language($current_language, $this->module_dir);
-            $this->handleException($mod_strings['LBL_DELETED_FIELD_IN_REPORT1'] . ' <b>' . $layout_def['name'] . '</b>. ' . $mod_strings['LBL_DELETED_FIELD_IN_REPORT2']);
+            $this->handleException(
+                '%s <b>%s</b> %s',
+                $mod_strings['LBL_DELETED_FIELD_IN_REPORT1'],
+                $layout_def['name'],
+                $mod_strings['LBL_DELETED_FIELD_IN_REPORT2']
+            );
         }
 
         $layout_def['table_alias'] = $this->getTableFromField($layout_def);
         $field_def = $this->getFieldDefFromLayoutDef($layout_def);
+
         if (!empty($field_def['source']) && ($field_def['source'] == 'custom_fields' || ($field_def['source'] == 'non-db'
                                                                                          && !empty($field_def['ext2']) && !empty($field_def['id']))) && !empty($field_def['real_table'])
         ) {
@@ -1161,7 +1169,7 @@ class Report
     function filtersIterate($filters, &$where_clause)
     {
         $where_clause .= '(';
-        $operator = $filters['operator'];
+        $operator = $this->getFilterOperator($filters['operator']);
         $isSubCondition = 0;
         if (count($filters) < 2) { // We only have an operator and an empty Filter Box.
             $where_clause .= "1=1";
@@ -1313,11 +1321,9 @@ class Report
         return $where_clause;
     } // fn
 
-    function getFieldDefFromLayoutDef(&$layout_def)
+    public function getFieldDefFromLayoutDef(array &$layout_def) : array
     {
-        $field = null;
-        $relModules = explode('_', $layout_def['table_key']);
-        $module = $relModules[count($relModules) - 1];
+        $field = [];
         if (!empty($this->all_fields[$this->_get_full_key($layout_def)])) {
             $field = $this->all_fields[$this->_get_full_key($layout_def)];
         }
@@ -1471,7 +1477,7 @@ class Report
 
                 // this hack is so that the id field for every table is always selected
                 if (empty($display_column['table_key'])) {
-                    $this->handleException('table_key doesnt exist for ' . $display_column['name']);
+                    $this->handleException('table_key doesnt exist for %s', $display_column['name']);
                 }
 
                 if($display_column['type'] == 'fullname') {
@@ -1774,7 +1780,7 @@ class Report
                         $link = $this->full_bean_list[$table_def['parent']]->$link_name;
 
                         if (!$link->loadedSuccesfully()) {
-                            $this->handleException("Unable to load link: $link_name for bean {$table_def['parent']}");
+                            $this->handleException('Unable to load link: %s for bean %s', $link_name, $table_def['parent']);
                         }
 
                         // Start ACL check
@@ -1787,7 +1793,7 @@ class Report
                             if ((isset($_REQUEST['DynamicAction']) && $_REQUEST['DynamicAction'] === 'retrievePage') || (isset($_REQUEST['module']) && $_REQUEST['module'] === 'Home')) {
                                 throw new Exception($mod_strings['LBL_NO_ACCESS'] . "----" . $linkModName);
                             } else {
-                                $this->handleException($mod_strings['LBL_NO_ACCESS'] . "----" . $linkModName);
+                                $this->handleException('%s----%s', $mod_strings['LBL_NO_ACCESS'], $linkModName);
                             }
                         }
                         // End ACL check
@@ -1804,10 +1810,10 @@ class Report
                         $view_action = ACLAction::getUserAccessLevel($current_user->id, $linkModName, 'view', $type = 'module');
 
                         if (!$link->loadedSuccesfully()) {
-                            $this->handleException("Unable to load link: $rel_name");
+                            $this->handleException('Unable to load link: %s', $rel_name);
                         }
                         if ($list_action == ACL_ALLOW_NONE || $view_action == ACL_ALLOW_NONE)
-                            $this->handleException($mod_strings['LBL_NO_ACCESS'] . "----" . $linkModName);
+                            $this->handleException('%s----%s', $mod_strings['LBL_NO_ACCESS'], $linkModName);
                         // End ACL check
                     }
 
@@ -1856,11 +1862,17 @@ class Report
             $tp_count = 1;
             foreach ($this->report_def['group_defs'] as $id => $group_field) {
                 if (!empty($group_field['qualifier']) && $group_field['qualifier'] == 'fiscalQuarter') {
-                    $table_alias = $this->getTableFromField($group_field);
+                    $fieldDef = $this->getFieldDefFromLayoutDef($group_field);
+                    if ($fieldDef['source'] == 'custom_fields' && ($fieldDef['real_table'] ?? false)) {
+                        $table_alias = $fieldDef['real_table'];
+                    } else {
+                        $table_alias = $this->getTableFromField($group_field);
+                    }
+
                     $field_name = $table_alias . "." . $group_field['name'];
                     $this->from .= " INNER JOIN timeperiods tp" . $tp_count . " ON (" . $field_name .
                         " >= tp" . $tp_count . ".start_date AND " . $field_name . " <= tp" . $tp_count . ".end_date" .
-                        " AND tp" . $tp_count . ".type = 'Quarter')\n";
+                        " AND tp" . $tp_count . ".type = 'Quarter' AND tp" . $tp_count . ".deleted='0')\n";
                     $tp_count++;
                 }
             }
@@ -1887,7 +1899,7 @@ class Report
             $matches,
             PREG_OFFSET_CAPTURE
         )) {
-            $this->handleException('Unable to apply visibility to ' . $tableAlias);
+            $this->handleException('Unable to apply visibility to %s', $tableAlias);
         }
 
         [$targetTableWithAlias, $pos] = $matches[1];
@@ -1996,7 +2008,7 @@ class Report
             $view_action = ACLAction::getUserAccessLevel($current_user->id, $this->focus->module_dir, 'view', $type = 'module');
 
             if ($list_action == ACL_ALLOW_NONE || $view_action == ACL_ALLOW_NONE) {
-                $this->handleException($mod_strings['LBL_NO_ACCESS']);
+                $this->handleException('%s', $mod_strings['LBL_NO_ACCESS']);
             }
             $aclVisibility = new ACLVisibility($this->focus);
             $aclVisibility->setOptions(array('action' => 'view'));
@@ -2814,10 +2826,19 @@ class Report
         return $select_piece;
     }
 
-    protected function handleException($msg, $exit_code=1) {
+    /**
+     * @param int $exit_code
+     * @param string ...$args
+     * @throws SugarApiExceptionNotAuthorized
+     */
+    protected function handleException(string ... $args)
+    {
+        $template = array_shift($args);
         if($this->fromApi === false) {
-            sugar_die($msg, $exit_code);
+            $msg = sprintf($template, ... array_map('htmlspecialchars', $args));
+            sugar_die($msg);
         } else {
+            $msg = sprintf($template, ... $args);
             throw new SugarApiExceptionNotAuthorized($msg);
         }
     }
@@ -2942,4 +2963,23 @@ class Report
             }
         }
     }
+
+    /**
+    * Prepare operator to combine filters. Allowed AND or OR
+    *
+    * @param string $operator
+    * @return  string
+    */
+    protected function getFilterOperator(string $operator): string
+    {
+        $operator = trim(mb_convert_case($operator, MB_CASE_UPPER));
+        $allowed_operators = ['AND', 'OR'];
+
+        if (!in_array($operator, $allowed_operators)) {
+            $this->handleException('Invalid filter operator');
+        }
+
+        return $operator;
+    }
+
 }

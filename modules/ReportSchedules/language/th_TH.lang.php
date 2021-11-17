@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'ตามรายงาน',
     'LBL_RECENTLY_MODIFIED' => 'แก้ไขล่าสุด',
     'LBL_RECORD_SAVED_SUCCESS' => 'คุณได้สร้าง{{moduleSingularLower}}<a href="#{{buildRoute model=this}}">{{name}}</a>เสร็จสมบูรณ์แล้ว กรุณาเปิดกำหนดการเพื่อเพิ่มผู้ใช้ผ่านทางแผงย่อยของผู้ใช้',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'กำหนดการรายงานนี้',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนกำหนดการรายงาน',
 );

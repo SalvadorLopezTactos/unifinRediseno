@@ -290,7 +290,7 @@ PMSE.Window.prototype.createHTML = function() {
     this.style.addProperties({
         'z-index': 1033,
         'left': (window.innerWidth - this.width) / 2,
-        'top': (window.innerHeight - this.height) / 2
+        'top': (window.innerHeight - this.height) / 6
     });
 
     this.height -= 16;

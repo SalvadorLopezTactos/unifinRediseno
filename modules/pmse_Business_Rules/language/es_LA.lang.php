@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Proceso de Reglas Empresariales',
   'LBL_MODULE_NAME_SINGULAR' => 'Proceso de Regla Empresarial',
 
+  'LBL_PMSE_BUSINESS_RULES_FOCUS_DRAWER_DASHBOARD' => 'Panel de Enfoque de Proceso de Reglas Empresariales',
+
+  'LBL_PMSE_BUSINESS_RULES_RECORD_DASHBOARD' => 'Tablero de Registro de Reglas de Proceso de Negocio',
   'LBL_RST_UID' => 'ID de Regla Empresarial',
   'LBL_RST_TYPE' => 'Tipo de Regla Empresarial',
   'LBL_RST_DEFINITION' => 'Definición de Regla Empresarial',

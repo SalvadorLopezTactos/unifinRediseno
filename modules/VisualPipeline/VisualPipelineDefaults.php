@@ -169,20 +169,6 @@ class VisualPipelineDefaults
                     ),
                 ),
             ),
-            'header_colors' => array(
-                '#36850F',
-                '#0679C8',
-                '#AB173C',
-                '#854EDB',
-                '#00856F',
-                '#016FAA',
-                '#BC3CCD',
-                '#BD5800',
-                '#1202F5',
-                '#E61718',
-                '#717171',
-                '#222222',
-            ),
         );
     }
 }

@@ -10,12 +10,18 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class PHPMailerProxy extends PHPMailer
+class PHPMailerProxy extends PHPMailerOAuth
 {
     /**
      * {@inheritDoc}
      */
     public $AllowEmpty = true;
+
+    /**
+     * @var string $accessToken stores the access token that is used with the username
+     * to validate the sending account via XOAUTH2
+     */
+    public $accessToken = '';
 
     /**
      * {@inheritDoc}
@@ -47,6 +53,22 @@ class PHPMailerProxy extends PHPMailer
         }
 
         return $this->smtp;
+    }
+
+    /**
+     * Configures an XOAUTH2Encoder instance for PHPMailer to use
+     *
+     * @return XOAUTHEncoder
+     */
+    public function getOAUTHInstance()
+    {
+        if (!is_object($this->oauth)) {
+            $this->oauth = new XOAUTHEncoder(
+                $this->Username,
+                $this->accessToken
+            );
+        }
+        return $this->oauth;
     }
 
     /**
@@ -115,5 +137,16 @@ class PHPMailerProxy extends PHPMailer
 
         $class = get_class($this);
         $GLOBALS['log']->fatal("{$class} encountered an error: {$this->ErrorInfo}");
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * Overrides PHPMailer's validateAddress to call Sugar's email validation
+     * code
+     */
+    public static function validateAddress($address, $patternselect = null)
+    {
+        return SugarEmailAddress::isValidEmail($address);
     }
 }

@@ -275,7 +275,7 @@ class LegacyJsonServer
             }
             if ($condition['name'] == 'email1' or $condition['name'] == 'email2' or $condition['name'] == 'email') {
 
-                $email1_value = $GLOBALS['db']->quote(strtoupper($condition['value']));
+                $email1_value = $GLOBALS['db']->quote(sugarStrToUpper($condition['value']));
                 $email1_condition = " {$table}id in ( SELECT  er.bean_id AS id FROM email_addr_bean_rel er, " .
                     "email_addresses ea WHERE ea.id = er.email_address_id " .
                     "AND ea.deleted = 0 AND er.deleted = 0 AND er.bean_module = '{$module}' AND email_address_caps LIKE '%{$email1_value}%' )";
@@ -329,7 +329,10 @@ class LegacyJsonServer
         if ($group != "and" && $group != "or") {
             $group = "and";
         }
-        $result = implode(" $group ", $cond_arr);
+        // Fix for SS-422 Inactive Users can be found when creating meetings.
+        // Meetings and Calls modules escapes inactive user validations due to incorrect brackets placements.
+        // Add parenthesis because visibility will be added as an additional 'AND' clause.
+        $result = '(' . implode(" $group ", $cond_arr) . ')';
 
         //if filtering users table ensure status is Active
         if ($table == 'users.') {
@@ -339,8 +342,7 @@ class LegacyJsonServer
             $result = $result . "users.status='Active'";
         }
 
-        //add parenthesis because visibility will be added as an additional 'AND' clause
-        return '(' . $result . ')';
+        return $result;
     }
 
     /**

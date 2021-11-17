@@ -57,4 +57,4 @@ else {
 }
 
 
-}, '3.15.0', {"requires": ["uploader-html5", "uploader-flash"]});
+}, '3.15.0', {"requires": ["uploader-html5"]});

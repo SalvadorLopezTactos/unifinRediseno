@@ -19,6 +19,9 @@ $mod_strings = array (
     'LBL_MODULE_NAME' => 'Process-emailmallar',
     'LBL_MODULE_NAME_SINGULAR' => 'Process-emailmall',
 
+    'LBL_PMSE_EMAILS_TEMPLATES_FOCUS_DRAWER_DASHBOARD' => 'Fokuslåda för behandling av e-postmallar',
+
+    'LBL_PMSE_EMAILS_TEMPLATES_RECORD_DASHBOARD' => 'Instrumentpanel för post för process-e-postmallar',
     'LNK_LIST' => 'Visa process-emailmallar',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Skapa process-emailmall',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Importera process-emailmallar',

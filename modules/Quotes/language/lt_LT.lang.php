@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => 'Pasiūlymų sąrašo  ataskaitų sritis',
     'LBL_QUOTES_RECORD_DASHBOARD' => 'Pasiūlymų duomenų ataskaitų sritis',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ pasiūlymai',
 
     'LBL_CONTRACTS'=>'Sutartys',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Sutartys',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => 'Mokėjimo šalis',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => 'Mokėjimo pašto kodas',
     'LBL_BILLING_ADDRESS_STATE' => 'Mokėjimo valstija',
-    'LBL_BILLING_ADDRESS_STREET' => 'Mokėjimo gatvė',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => 'Mokėjimo adresas:',
     'LBL_BILLING_CONTACT_ID' => 'Kontakto mokėtojo Id:',
     'LBL_BILLING_CONTACT_NAME' => 'Kontaktas mokėtojas:',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => 'Pristatymo šalis',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => 'Pristatymo pašto kodas',
     'LBL_SHIPPING_ADDRESS_STATE' => 'Pristatymo valstija',
-    'LBL_SHIPPING_ADDRESS_STREET' => 'Pristatymo gatvė',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => 'Pristatymo adresas:',
     'LBL_SHIPPING_BODY' => 'Apmokėjimas ir siuntimas',
     'LBL_SHIPPING_CONTACT_ID' => 'Gavėjo kontakto id:',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => 'Kopijuoti mokėjimo adresą į pristatymo adreso laukelį',
     'NTC_COPY_SHIPPING_ADDRESS' => 'Kopijuoti pristatymo adresą į apmokėjimo adresą',
     'NTC_COPY_BILLING_ADDRESS2' => 'Kopijuoti į pristatymo adresą',
-    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopijuoti į apmokėjimo adresą',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Ar Jūs tikrai norite išimti šią pastabą iš pasiūlymo?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => 'Kopijuoti į apmokėjimo adresą',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => 'Ar Jūs tikrai norite išimti šią pastabą iš pasiūlymo?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => 'Ar Jūs tikrai norite išimti šią prekės eilutę iš pasiūlymo?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => 'Ar Jūs tikrai norite išimti šią grupę iš pasiūlymo?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => 'Ar Jūs tikrai norite išimti šį kontaktą iš pasiūlymo?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => 'Kiekis',
     'LBL_MFT_PART_NUM' => 'Tiekėjo prekės Nr.',
     'LBL_ITEM_NAME' => 'Eilutės elementas',
+    'LBL_PRODUCT_TEMPLATE' => 'Produktas',
     'LBL_DISCOUNT_PRICE' => 'Vieneto kaina',
     'LBL_DISCOUNT_AMOUNT' => 'Nuolaida',
     'LBL_LINE_ITEM_TOTAL' => 'Bendra eilutės elemento suma',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => 'Galimybės ID',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => 'Pasiūlymų konfigūravimas',
+
+    'LBL_RENEWAL' => 'Atnaujinimas',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Įvykdyto pirkimo sąveikos',
 );

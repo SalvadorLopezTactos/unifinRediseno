@@ -232,8 +232,8 @@
 
         this.model.set(this.eventViewName + '_related_fields', relatedFieldsList);
 
-        // trigger to render the fields on config page load
-        this.context.trigger('config:fields:change', this.eventViewName, this.panelFields);
+        // Signal to the layout that the fields for this panel are loaded
+        this.layout.trigger('config:panel:fields:loaded', this);
     },
 
     /**

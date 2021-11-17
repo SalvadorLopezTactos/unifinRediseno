@@ -24,7 +24,7 @@ class GenericProvider extends BasicGenericProvider
     protected $urlIntrospectToken;
 
     /**
-     * @var \Monolog\Logger
+     * @var \Psr\Log\LoggerInterface;
      */
     protected $logger;
 

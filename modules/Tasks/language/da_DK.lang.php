@@ -13,7 +13,10 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TASKS_LIST_DASHBOARD' => 'Opgaveliste-dashboard',
+  'LBL_TASKS_RECORD_DASHBOARD' => 'Betjeningspanel til optegnelser over opgaver',
+  'LBL_TASKS_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Opgaver',
 
+  'LBL_RELATED_CONTACT' => 'Relaterede kontakter',
   'LBL_MODULE_NAME' => 'Opgaver',
   'LBL_MODULE_NAME_SINGULAR' => 'Opgave',
   'LBL_TASK' => 'Opgaver:',

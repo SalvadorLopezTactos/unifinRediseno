@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_TARGETS_LIST_DASHBOARD' => 'Hedefler Listesi Panosu',
   'LBL_TARGETS_RECORD_DASHBOARD' => 'Hedefler Kaydı Panosu',
+  'LBL_PROSPECTS_FOCUS_DRAWER_DASHBOARD' => 'Hedefler Odak Bölmesi',
 
   'LBL_MODULE_NAME' => 'Hedefler',
   'LBL_MODULE_NAME_SINGULAR' => 'Hedef',

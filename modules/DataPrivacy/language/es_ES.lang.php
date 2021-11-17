@@ -55,6 +55,7 @@ $mod_strings = array(
     'LBL_COUNT_FIELDS_MARKED' => 'Campos marcados para borrado',
     'LBL_NO_RECORDS_MARKED' => 'No se ha marcado ningún campo ni registro para borrar.',
     'LBL_DATA_PRIVACY_RECORD_DASHBOARD' => 'Cuadro de mando de registros de privacidad de datos',
+    'LBL_DATA_PRIVACY_FOCUS_DRAWER_DASHBOARD' => 'Panel de enfoque en la privacidad de datos',
 
     // list view
     'LBL_HELP_RECORDS' => 'El módulo de Privacidad de datos controla las actividades de privacidad, incluido el consentimiento y las solicitudes del sujeto, para ayudar a los procedimientos de privacidad de su organización. Cree registros de privacidad de de datos relacionados con el registro de un individuo (por ejemplo, un contacto) para supervisar el consentimiento o emprender acciones respecto a una solicitud de privacidad.',

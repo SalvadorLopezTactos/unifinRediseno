@@ -107,4 +107,15 @@ $mod_strings = array(
     'LBL_OPERATOR_NEXT_YEAR' => 'anul urmator',
     'LBL_OPEN_ISSUES' => 'Deschis {0}',
     'LBL_RECENTLY_RESOLVED_ISSUES' => 'Soluționat recent',
+
+    // Sugar Mobile Client
+    'LBL_FILTER_CREATE_NEW' => 'Creare Filtru',
+    'LBL_ERROR_FILTER_EMPTY' => 'Vă rugăm adăugați criterii de filtrare.',
+    'LBL_ADD_FILTER' => 'Adăugați criterii',
+    'LBL_FILTER_NAME' => 'Nume filtru',
+    'LBL_FILTER_FIELD' => 'Câmp',
+    'LBL_FILTER_OPERATOR' => 'Operator',
+    'LBL_FILTER_VALUE' => 'Valoare',
+    'LBL_FILTER_SYNC_TO_SERVER' => 'Salvați pe aplicația desktop',
+    'LBL_FILTER_LOCAL' => 'Filtru local',
 );

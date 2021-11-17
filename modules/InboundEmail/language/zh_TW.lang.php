@@ -173,5 +173,7 @@ $mod_strings = array(
     'LBL_WARNING_CHANGING_AUTO_IMPORT' => '警告：您正在修改您的自動匯入設定，這可能導致資料丟失。',
     'LBL_WARNING_CHANGING_AUTO_IMPORT_WITH_CREATE_CASE' => '警告：自動建立實例時必須啟用自動匯入。',
 	'LBL_EDIT_LAYOUT' => '編輯配置' /*for 508 compliance fix*/,
+    'LBL_AUTHORIZED_ACCOUNT' => '電子郵件地址',
+    'LBL_EMAIL_PROVIDER' => '電子郵件提供者',
+    'LBL_AUTH_STATUS' => '授權狀態',
 );
-?>

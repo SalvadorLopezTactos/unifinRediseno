@@ -26,7 +26,10 @@ MultipleCollapsiblePanel.prototype = new CollapsiblePanel();
 MultipleCollapsiblePanel.prototype.constructor = MultipleCollapsiblePanel;
 MultipleCollapsiblePanel.prototype.type = "MultipleCollapsiblePanel";
 
-MultipleCollapsiblePanel.prototype.init = function () {
+MultipleCollapsiblePanel.prototype.init = function(factory) {
+    if (factory) {
+        this._parent = this._parent || factory._parent;
+    }
     this._panelList = new ListPanel({
         itemsContent: this._panelListItemContent(),
         onItemClick: this._onPanelListItemClick(),

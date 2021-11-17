@@ -74,6 +74,7 @@ class PMSEEngineApi extends SugarApi
                 'path' => array('pmse_Inbox','historyLog','?'),
                 'pathVars' => array('module','','filter'),
                 'method' => 'retrieveHistoryLog',
+                'acl' => 'view',
                 'keepSession' => true,
                 'shortHelp' => 'Returns the history log for a process',
                 'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_retrieve_history_log_help.html',
@@ -83,12 +84,14 @@ class PMSEEngineApi extends SugarApi
                 'path' => array('pmse_Inbox','note_list','?'),
                 'pathVars' => array('module','','cas_id'),
                 'method' => 'getNotes',
+                'acl' => 'view',
                 'keepSession' => true,
                 'shortHelp' => 'Returns the notes list for a process',
                 'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_get_notes_help.html',
             ),
             'savenoteList' => array(
                 'reqType' => 'POST',
+                'acl' => 'adminOrDev',
                 'path' => array('pmse_Inbox','save_notes'),
                 'pathVars' => array('module',''),
                 'method' => 'saveNotes',
@@ -254,8 +257,7 @@ class PMSEEngineApi extends SugarApi
 
     public function getNotes(ServiceBase $api, array $args)
     {
-        ProcessManager\AccessManager::getInstance()->verifyUserAccess($api, $args);
-
+        ProcessManager\AccessManager::getInstance()->verifyAccess($api, $args);
         $notesBean = BeanFactory::newBean('pmse_BpmNotes');
         $queryOptions = array('add_deleted' => true);
         $fields = array(
@@ -336,7 +338,7 @@ class PMSEEngineApi extends SugarApi
 
     public function retrieveHistoryLog(ServiceBase $api, array $args)
     {
-        ProcessManager\AccessManager::getInstance()->verifyUserAccess($api, $args);
+        ProcessManager\AccessManager::getInstance()->verifyAccess($api, $args);
         $historyLog = ProcessManager\Factory::getPMSEObject('PMSEHistoryLogWrapper');
         $res = $historyLog->_get($args);
         return array('success' => true, 'result' => $res->result);

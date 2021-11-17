@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'Contactes',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'Clients potencials',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'Usuaris',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'Quadre de comandament del registre de centres de negocis',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat als centres de negoci',
 ];

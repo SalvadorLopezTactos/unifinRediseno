@@ -41,4 +41,10 @@ $mod_strings = array(
     'LBL_EXPORT_CREATED_BY' => 'Created By ID',
     'LBL_EXPORT_CREATED_BY_NAME' => 'Created By User Name',
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Assigned User Name',
+
+    'LBL_TAGS_FOCUS_DRAWER_DASHBOARD' => '태그 포커스 서랍',
+
+    'LBL_TAGS_RECORD_DASHBOARD' => '태그 기록 대시보드',
+    'LBL_MY_TAGS' => '내 태그',
+    'LBL_MY_FAVORITE_TAGS' => '내 즐겨찾기 태그',
 );

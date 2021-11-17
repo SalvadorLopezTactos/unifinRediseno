@@ -14,6 +14,7 @@ $mod_strings = array (
 
     // Dashboard Names
     'LBL_FORECASTS_DASHBOARD' => 'Prognožu instrumentu panelis',
+    'LBL_FORECASTS_RECORD_DASHBOARD' => 'Prognožu ierakstu instrumentu panelis',
 
     //module strings.
     'LBL_MODULE_NAME' => 'Prognozes',

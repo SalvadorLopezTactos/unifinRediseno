@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'Διεργασίες Λίστας',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'Αφύλακτες Διεργασίες',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => 'Συρτάρι εστίασης διεργασιών',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Διεργασιών',
+
     'LBL_CAS_ID' => 'Αριθμός Διεργασίας',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "Άγνωστο (σύμφωνα με UserId:&#39;%s&#39;)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "η εργασία",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => 'Προεπισκόπηση διαδικασίας σχεδιασμού',
     'LBL_PROJECT_RUN_ORDER' => 'Σειρά Λειτουργίας',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => 'Τρέχουσα δραστηριότητα',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => 'Ημερομηνία Τροποποίησης',
+    'LBL_DATE_ENTERED' => 'Ημερομηνία Δημιουργίας',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => 'Είστε βέβαιοι ότι θέλετε να διεκδικήσετε αυτήν τη διεργασία;',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => 'Η διεργασία διεκδικήθηκε με επιτυχία',
 );
 

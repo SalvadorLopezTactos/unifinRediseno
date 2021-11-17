@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_CALLS_LIST_DASHBOARD' => 'Opkaldsiste-dashboard',
     'LBL_CALLS_RECORD_DASHBOARD' => 'Opkaldsliste-dashboard',
+    'LBL_CALLS_FOCUS_DRAWER_DASHBOARD' => 'Fokusskuffen Opkald',
 
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Opkald',
@@ -96,6 +97,8 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Tildelt til',
     'LBL_LIST_MY_CALLS' => 'Mine opkald',
     'LBL_MY_SCHEDULED_CALLS' => 'Mine planlagte Calls',
+    'LBL_GUEST_CALLS' => 'Mine opkald som gæst',
+    'LBL_GUEST_SCHEDULED_CALLS' => 'Planlagte opkald som gæst',
     'LBL_SELECT_FROM_DROPDOWN' => 'Vælg først fra rullelisten Relateret til.',
 	'LBL_ASSIGNED_TO_NAME' => 'Tildelt til',
 	'LBL_ASSIGNED_TO_ID' => 'Tildelt bruger',
@@ -121,7 +124,10 @@ $mod_strings = array (
     'LBL_CANCEL_CREATE_INVITEE' => 'Annullér',
     'LBL_EMPTY_SEARCH_RESULT' => 'Ingen søgeresultater fundet. Venligst opret en deltager nedenfor.',
     'LBL_NO_ACCESS' => 'Du har ikke adgang til at oprette $module',
-    
+
+    'LBL_TRANSCRIPT' => 'Transcript',
+    'LBL_CONNECT_CONTACT_ID' => 'Id for Amazon Connect-kontakt',
+
     'LBL_REPEAT_TYPE' => 'Gentag',
     'LBL_REPEAT_INTERVAL' => 'Gentagelseinterval',
     'LBL_REPEAT_END' => 'Slut',
@@ -146,6 +152,8 @@ $mod_strings = array (
     'LBL_RELATED_RECORD_DEFAULT_NAME' => 'Opkald med {{{this}}}',
     'LBL_SEND_INVITES' => 'Send invitationer',
     'LBL_REMINDER_TITLE' => 'Opkald:',
+    'LBL_CALL_RECORDING_URL' => 'URL for optagelse',
+    'LBL_CALL_RECORDING' => 'Optager',
 
     //record save
     'LBL_RECORD_SAVED_SUCCESS' => 'Du planlagde {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> til den {{formatDate date_start}}.',

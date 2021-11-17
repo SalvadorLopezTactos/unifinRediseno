@@ -164,6 +164,6 @@ $mod_strings = array (
     'LBL_BUGS_SUBPANEL_TITLE' => 'Bugs',
     'LBL_QUOTES_SUBPANEL_TITLE' => 'Offertes',
     'LBL_RLI_SUBPANEL_TITLE' => 'Opportunityregels',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
-    'LBL_PLIS_SUBPANEL_TITLE' => 'Purchased Line Items',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Aankopen',
+    'LBL_PLIS_SUBPANEL_TITLE' => 'Aangeschafte regelitems',
 );

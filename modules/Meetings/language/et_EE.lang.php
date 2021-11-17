@@ -13,6 +13,9 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_MEETINGS_LIST_DASHBOARD' => 'Koosolekute loendi töölaud',
     'LBL_MEETINGS_RECORD_DASHBOARD' => 'Koosolekute kirjete töölaud',
+    'LBL_LEAD_GUESTS' => 'Müügivihje külalised',
+    'LBL_CONTACT_GUESTS' => 'Kontakti külalised',
+    'LBL_MEETINGS_FOCUS_DRAWER_DASHBOARD' => 'Koosolekute fookuse sahtel',
 
 	'ERR_DELETE_RECORD' => 'Kohtumise kustutamiseks täpsusta kirje numbrit.',
 	'LBL_ACCEPT_THIS'=>'Kinnitada?',
@@ -51,8 +54,10 @@ $mod_strings = array (
 	'LBL_LIST_DIRECTION' => 'Juhis',
 	'LBL_LIST_DUE_DATE'=>'Tähtaeg:',
 	'LBL_LIST_FORM_TITLE' => 'Kohtumiste loend',
-	'LBL_LIST_MY_MEETINGS' => 'Minu kohtumised',
+    'LBL_LIST_MY_MEETINGS' => 'Minu kohtumised',
     'LBL_MY_SCHEDULED_MEETINGS' => 'My Scheduled Meetings',
+    'LBL_GUEST_MEETINGS' => 'Minu koosolekud külalisena',
+    'LBL_GUEST_SCHEDULED_MEETINGS' => 'Ajastatud kohtumised külalisena',
 	'LBL_LIST_RELATED_TO' => 'Seotud',
 	'LBL_LIST_STATUS'=>'Olek',
 	'LBL_LIST_SUBJECT' => 'Teema',

@@ -36,9 +36,10 @@ class EmailRecipientsService
         $wheres       = array();
 
         if (!empty($term)) {
-            $wheres["first_name"]    = $term;
-            $wheres["last_name"]     = $term;
-            $wheres["email_address"] = $term;
+            $wheres['first_name'] = $term;
+            $wheres['last_name'] = $term;
+            $wheres['full_name'] = $term;
+            $wheres['email_address'] = $term;
         }
 
         $relatedEmailQueries = $inboundEmail->email->et->getRelatedEmail($module, $wheres);
@@ -74,9 +75,10 @@ class EmailRecipientsService
         $wheres       = array();
 
         if (!empty($term)) {
-            $wheres["first_name"]    = $term;
-            $wheres["last_name"]     = $term;
-            $wheres["email_address"] = $term;
+            $wheres['first_name'] = $term;
+            $wheres['last_name'] = $term;
+            $wheres['full_name'] = $term;
+            $wheres['email_address'] = $term;
         }
 
         $relatedEmailQueries = $inboundEmail->email->et->getRelatedEmail($module, $wheres);

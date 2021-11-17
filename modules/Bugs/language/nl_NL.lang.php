@@ -14,6 +14,7 @@ $mod_strings = array (
   // Dashboard Names
   'LBL_BUGS_LIST_DASHBOARD' => 'Dashboard buglijst',
   'LBL_BUGS_RECORD_DASHBOARD' => 'Dashboard bugrecord',
+  'LBL_BUGS_FOCUS_DRAWER_DASHBOARD' => 'Focus drawer bugs',
 
   'LBL_MODULE_NAME' => 'Bugs',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Bug',

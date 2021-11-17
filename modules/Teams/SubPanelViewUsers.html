@@ -21,12 +21,12 @@
 	<!-- BEGIN: row -->
 	<tr height="20" class="{ROW_COLOR}S1">
 		<!-- BEGIN: admin_team -->
-		<td scope="row" valign="top" ><slot><a href="{URL_PREFIX}index.php?action=DetailView&module=Teams&record={TEAM.ID}" >{TEAM.NAME}</a></slot></td>
+		<td scope="row" valign="top" ><slot><a href="{URL_PREFIX}index.php?action=DetailView&module=Teams&record={TEAM.ID}" >{TEAM.ESCAPED.NAME}</a></slot></td>
     	<!-- END: admin_team -->
     	<!-- BEGIN: user_team -->
-		<td valign="top"><slot>{TEAM.NAME}</slot></td>
+		<td valign="top"><slot>{TEAM.ESCAPED.NAME}</slot></td>
     	<!-- END: user_team -->
-    	<td valign="top"><slot>{TEAM.DESCRIPTION}</slot></td>
+    	<td valign="top"><slot>{TEAM.ESCAPED.DESCRIPTION}</slot></td>
 		<td valign="top" align="left" nowrap="nowrap">
 		<!-- BEGIN: admin_edit -->
 		<a class="listViewTdToolsS1" href="{URL_PREFIX}index.php?action=EditView&module=Teams&record={TEAM.ID}{RETURN_URL}">{EDIT_INLINE_PNG}</a> <a class="listViewTdToolsS1" href="{URL_PREFIX}index.php?action=EditView&module=Teams&record={TEAM.ID}{RETURN_URL}">{APP.LNK_EDIT}</a>&nbsp; 

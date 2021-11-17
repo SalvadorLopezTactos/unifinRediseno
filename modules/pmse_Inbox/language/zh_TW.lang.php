@@ -19,6 +19,9 @@ $mod_strings = array (
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => '處理程序管理',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => '自動處理程序',
 
+    'LBL_PMSE_INBOX_FOCUS_DRAWER_DASHBOARD' => '流程焦點抽屜',
+    'LBL_PMSE_INBOX_RECORD_DASHBOARD' => '流程紀錄儀表板',
+
     'LBL_CAS_ID' => '處理程序編號',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "未知（依據 UserId：'%s'）",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "工作已",
@@ -151,5 +154,13 @@ $mod_strings = array (
 
     'LBL_PMSE_LABEL_PREVIEW' => '流程設計預覽',
     'LBL_PROJECT_RUN_ORDER' => '運行順序',
+
+    'LBL_PMSE_CURRENT_ACTIVITY' => '目前活動',
+
+    // For Sugar Mobile client
+    'LBL_DATE_MODIFIED' => '修改日期',
+    'LBL_DATE_ENTERED' => '建立日期',
+    'LBL_PA_PROCESS_CLAIM_QUESTION' => '確定要要求此流程嗎？',
+    'LBL_PA_PROCESS_CLAIMED_SUCCESS' => '流程已成功要求',
 );
 

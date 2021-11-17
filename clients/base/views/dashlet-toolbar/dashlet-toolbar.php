@@ -17,6 +17,11 @@ $viewdefs["base"]["view"]["dashlet-toolbar"] = array(
             "icon" => "fa-chevron-up",
             "action" => "toggleMinify",
             "tooltip" => "LBL_DASHLET_TOGGLE",
+            'disallowed_layouts' => [
+                [
+                    'name' => 'omnichannel-dashboard',
+                ],
+            ],
         ),
         array(
             "dropdown_buttons" => array(
@@ -39,7 +44,7 @@ $viewdefs["base"]["view"]["dashlet-toolbar"] = array(
                     "name" => "remove_button",
                     'disallowed_layouts' => [
                         [
-                            'name' => 'row-model-data',
+                            'name' => 'omnichannel-dashboard',
                         ],
                     ],
                 ),

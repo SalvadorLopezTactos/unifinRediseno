@@ -12,10 +12,8 @@
 --}}
 <tr class="flex-list-row-header">
     {{#each view.leftColumns}}
-        <th{{#if name}} data-fieldname="{{name}}"{{/if}}>
-            <span>
-                {{field ../view template="list-header"}}
-            </span>
+        <th class="sticky-column stick-left" {{#if name}} data-fieldname="{{name}}"{{/if}}>
+            {{field ../view template="list-header"}}
         </th>
     {{/each}}
     {{#each view._fields.visible}}
@@ -48,7 +46,7 @@
     {{/each}}
     {{#each view.rightColumns}}
         {{#if isColumnDropdown}}
-            <th class="nosort morecol">
+            <th class="nosort morecol sticky-column stick-right">
                 <div class="dropdown">
                     <button class="btn btn-invisible dropdown-toggle" data-toggle="dropdown" rel="tooltip" title="{{str 'LBL_COLUMNS'}}" data-placement="bottom" data-action="fields-toggle" track="click:morecol" aria-label="{{str 'LBL_COLUMNS'}}" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></button>
                     <ul class="dropdown-menu left">

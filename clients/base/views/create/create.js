@@ -29,6 +29,11 @@
      */
     hasSubpanelModels: false,
 
+    /*
+     * Pre-population from Omnichanel
+     */
+    omniPopulation: false,
+
     /**
      * A collection of alert messages to be used in this view. The alert methods
      * should be invoked by Function.prototype.call(), passing in an instance of
@@ -179,6 +184,8 @@
 
         this.model.relatedAttributes = this.model.relatedAttributes || {};
 
+        this.populateFromOmnichanel();
+
         var assignedUserField = _.find(fields, function(field) {
             return field.type === 'relate' &&
                 (field.name === 'assigned_user_id' || field.id_name === 'assigned_user_id');
@@ -272,6 +279,26 @@
         this.model.on('change', function() {
             app.events.trigger('create:model:changed', this.hasUnsavedChanges());
         }, this);
+
+        this.focusFirstInput();
+    },
+
+    /*
+     * Pre-populate the record if Omnichannel is opened
+     */
+    populateFromOmnichanel: function() {
+        if (app.omniConsole && this.omniPopulation) {
+            var ccp = app.omniConsole.getComponent('omnichannel-ccp');
+            ccp.layout._addQuickcreateModelDataToContext();
+            var context = ccp.layout._getTopLevelContext();
+            var quickcreateModelData = context.get('quickcreateModelData');
+
+            if (!_.isEmpty(quickcreateModelData)) {
+                this.model.set(quickcreateModelData);
+            }
+
+            context.unset('quickcreateModelData');
+        }
     },
 
     /**
@@ -457,8 +484,6 @@
                 } else {
                     if (e.status == 403) {
                         this.alerts.showNoAccessError.call(this);
-                    } else {
-                        this.alerts.showServerError.call(this);
                     }
                     callback(true);
                 }
@@ -596,6 +621,10 @@
         //if we have model attributes, use them to build the message, otherwise use a generic message
         if (model && model.attributes) {
             modelAttributes = model.attributes;
+
+            if (model.get('no_success_label_link')) {
+                successLabel = 'LBL_RECORD_SAVED_SUCCESS_NO_LINK';
+            }
         } else {
             modelAttributes = {};
             successLabel = 'LBL_RECORD_SAVED';

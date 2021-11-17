@@ -48,9 +48,14 @@ class EmailManController extends SugarController
         // cn: handle mail_smtpauth_req checkbox on/off (removing double reference in the form itself
         if( !isset($_POST['mail_smtpauth_req']) )
         {
-            $_POST['mail_smtpauth_req'] = 0;
-            if (empty($_POST['campaignConfig'])) {
-                $_POST['notify_allow_default_outbound'] = 0; // If smtp auth is disabled ensure outbound is disabled.
+            if ($_POST['mail_authtype'] === 'oauth2') {
+                // always required
+                $_POST['mail_smtpauth_req'] = 1;
+            } else {
+                $_POST['mail_smtpauth_req'] = 0;
+                if (empty($_POST['campaignConfig'])) {
+                    $_POST['notify_allow_default_outbound'] = 0; // If smtp auth is disabled ensure outbound is disabled.
+                }
             }
         }
 
@@ -82,7 +87,7 @@ class EmailManController extends SugarController
         if(isset($_REQUEST['xmp'])) $security['xmp'] = 'xmp';
         $security['script'] = 'script';
 
-        $configurator->config['email_xss'] = base64_encode(serialize($security));
+        $configurator->config['email_xss'] = $security;
 
         $configurator->config['disable_user_email_config'] = isset($_REQUEST['allow_user_email_accounts'])
             && !$_REQUEST['allow_user_email_accounts'];

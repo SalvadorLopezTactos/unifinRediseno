@@ -83,6 +83,13 @@ class HTTP_WebDAV_Server_vCal extends HTTP_WebDAV_Server
                 $this->base = $_SERVER['DOCUMENT_ROOT'];
             }
 
+        // check authentication before process query
+        // Not authorized user can not enumerate users
+        if (!$this->_check_auth()) {
+            $this->http_status('401 Unauthorized');
+            header('WWW-Authenticate: Basic realm="'.($this->http_auth_realm).'"');
+            return;
+        }
 
             $query_arr =  array();
              // set path

@@ -27,6 +27,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_QUOTES_LIST_DASHBOARD' => '견적 목록 대시보드',
     'LBL_QUOTES_RECORD_DASHBOARD' => '견적 기록 대시보드',
+    'LBL_QUOTES_FOCUS_DRAWER_DASHBOARD' => '견적 포커스 서랍',
 
     'LBL_CONTRACTS'=>'계약 및 수주',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'계약 및 수주',
@@ -49,7 +50,7 @@ $mod_strings = array (
     'LBL_BILLING_ADDRESS_COUNTRY' => '국가:',
     'LBL_BILLING_ADDRESS_POSTAL_CODE' => '우편번호:',
     'LBL_BILLING_ADDRESS_STATE' => '도:',
-    'LBL_BILLING_ADDRESS_STREET' => '청구지 주소:',
+    'LBL_BILLING_ADDRESS_STREET' => 'Billing Street',
     'LBL_BILLING_ADDRESS' => '청구지 주소:',
     'LBL_BILLING_CONTACT_ID' => '청구 연락처 ID',
     'LBL_BILLING_CONTACT_NAME' => '청구 연락처명',
@@ -170,7 +171,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_COUNTRY' => '국가:',
     'LBL_SHIPPING_ADDRESS_POSTAL_CODE' => '우편번호:',
     'LBL_SHIPPING_ADDRESS_STATE' => '도:',
-    'LBL_SHIPPING_ADDRESS_STREET' => '배송지 주소:',
+    'LBL_SHIPPING_ADDRESS_STREET' => 'Shipping Street',
     'LBL_SHIPPING_ADDRESS' => '배송지 주소:',
     'LBL_SHIPPING_BODY' => '결제 및 배송',
     'LBL_SHIPPING_CONTACT_ID' => '배송지 연락처 ID',
@@ -205,8 +206,8 @@ $mod_strings = array (
     'NTC_COPY_BILLING_ADDRESS' => '청구지 주소정보를 배송지 주소로 복사하기.',
     'NTC_COPY_SHIPPING_ADDRESS' => '배송지 주소정보를 청구지 주소로 복사하기.',
     'NTC_COPY_BILLING_ADDRESS2' => '배송지 주소로 복사하기',
-    'NTC_COPY_SHIPPING_ADDRESS2' => '청구지 주소로 복사하기',  
-    'NTC_REMOVE_COMMENT_CONFIRMATION' => '견적으로부터 이 코멘트를 삭제하시겠습니까?',  
+    'NTC_COPY_SHIPPING_ADDRESS2' => '청구지 주소로 복사하기',
+    'NTC_REMOVE_COMMENT_CONFIRMATION' => '견적으로부터 이 코멘트를 삭제하시겠습니까?',
     'NTC_REMOVE_PRODUCT_CONFIRMATION' => '견적으로부터 이 줄을 삭제하시겠습니까?',
     'NTC_REMOVE_GROUP_CONFIRMATION' => '견적으로부터 이 그룹을 삭제하시겠습니까?',
     'NTC_REMOVE_QUOTE_CONFIRMATION' => '견적으로부터 이 연락처를 제거하시겠습니까?',
@@ -239,6 +240,7 @@ $mod_strings = array (
     'LBL_QUANTITY' => '수량',
     'LBL_MFT_PART_NUM' => '부분 번호',
     'LBL_ITEM_NAME' => '상품',
+    'LBL_PRODUCT_TEMPLATE' => '제품',
     'LBL_DISCOUNT_PRICE' => '단가',
     'LBL_DISCOUNT_AMOUNT' => '할인',
     'LBL_LINE_ITEM_TOTAL' => '상품 합계',
@@ -291,4 +293,7 @@ $mod_strings = array (
 
     'LBL_OPPORTUNITY_ID' => '예비고객 ID',
     'LBL_CONFIG_TITLE_MODULE_SETTINGS' => '견적 설정',
+
+    'LBL_RENEWAL' => '갱신',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => '견적 상호작용',
 );

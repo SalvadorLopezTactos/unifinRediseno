@@ -25,4 +25,7 @@ $mod_strings = array (
     'LBL_FILTER_BY_MODULE' => 'Tous les tableaux de bord pour le module {{module}}',
     'LBL_FILTER_BY_MODULE_AND_VIEW' => 'Tous les tableaux de bord pour la vue {{view}} du module {{module}}',
     'LBL_COPY_OF' => 'Copie de {{{name}}}',
+    'LBL_DELETE_FOCUS_DRAWER' => 'Les tableaux de bord des tiroirs de rangement ne peuvent pas être supprimés.',
+    'LBL_CREATE_DASHBOARD_BUTTON' => 'Créer un tableau de bord',
+    'LBL_RESTORE_DEFAULT_TAB_CONFIRM' => "Are you sure you want to restore this tab to the default layout?",
 );

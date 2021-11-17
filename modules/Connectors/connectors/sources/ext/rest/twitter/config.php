@@ -28,5 +28,3 @@ $config = array (
       'oauth_consumer_secret' => '',
       ),
 );
-
-?>

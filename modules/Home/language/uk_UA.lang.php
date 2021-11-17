@@ -115,7 +115,8 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'Розділ Sugar доданий',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'Дашлети будуть перекомпоніровани, ви точно хочете змінити зовнішній вигляд колонки?',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'Ви дійсно бажаєте видалити розділ Sugar?',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'Робочий стіл не налаштований.',
+  'LBL_NO_DASHBOARD_CONFIGURED' => 'Інформаційну панель не налаштовано',
+  'LBL_NO_DASHLETS_CONFIGURED' => 'Розділи не налаштовано',
   'LBL_CREATE_DASHBOARD_LINK' => 'Створити інформаційну панель',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'Веб-сторінка',
@@ -123,7 +124,7 @@ $mod_strings = array (
   'LBL_DASHLET_WEBPAGE_URL' => 'URL',
   'LBL_DASHLET_WEBPAGE_URL_HELP' => 'Деякі сайти можуть не завантажитися з причини небезпечного вмісту або політики безпеки.',
 
-  'LBL_DASHLET_ADD' => 'Додати розділ Sugar®',
+  'LBL_DASHLET_ADD' => 'Додати розділ',
   'LBL_DASHLET_DELETE' => 'Видалити розділ Sugar',
   'LBL_DASHLET_REFRESH' => 'Оновити розділ Sugar',
   'LBL_DASHLET_EDIT' => 'Редагувати розділ Sugar',
@@ -218,7 +219,6 @@ $mod_strings = array (
   'LBL_SOURCE_JSCALENDAR' => 'JS Calenda - Календар для введення дат, автор:  Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - бібліотека для створення PDF-документів, автор: Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - Реалізація сервера WebDAV в PHP.',
-  'LBL_SOURCE_PCLZIP' => 'PclZip - бібліотека, яка пропонує стискання і отримання функцій для архівів формату Zip, автор: Vincent Blavet',
   'LBL_SOURCE_SMARTY' => 'Smarty - шаблонний двигун для PHP.',
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! User Interface Library - Властивості UI Library полегшують застосування клієнтських властивостей.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - Повнофункціональний клас пересилання e-mail для PHP',

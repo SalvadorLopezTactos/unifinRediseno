@@ -22,4 +22,8 @@ $mod_strings = array(
     'LBL_FILTER_BY_REPORT' => 'Sipas raportit',
     'LBL_RECENTLY_MODIFIED' => 'Modifikuar së fundi',
     'LBL_RECORD_SAVED_SUCCESS' => 'Ke krijuar me sukses {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a>. Hap planifikimin për t&#39;i shtuar përdoruesit përmes nënpanelit të përdoruesve.',
+
+    'LBL_THIS_REPORT_SCHEDULE' => 'Ky plan raporti',
+    //Dashboards
+    'LBL_REPORT_SCHEDULES_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të planeve të raportit',
 );

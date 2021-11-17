@@ -108,7 +108,7 @@
         data.best_case = data.discount_price;
         data.worst_case = data.discount_price;
         data.assigned_user_id = app.user.get('id');
-        data.assigned_user_name = app.user.get('name');
+        data.assigned_user_name = app.user.get('full_name');
 
         if (isEmpty) {
             this.collection.remove(existingModel);
@@ -134,7 +134,7 @@
         this._super('render');
 
         // toggle fields to edit view
-        this._toggleFields(true);
+        this._toggleEdit(true);
 
         _.defer(_.bind(function() {
             this.checkButtons();
@@ -147,7 +147,7 @@
      * @param {Boolean} isEdit If we're toggling fields TO Edit view or not
      * @private
      */
-    _toggleFields: function(isEdit) {
+    _toggleEdit: function(isEdit) {
         isEdit = isEdit || false;
 
         // toggle the fields in the list to be in edit mode
@@ -307,10 +307,9 @@
             beanId = app.utils.generateUUID();
             addAtZeroIndex = !_.isEmpty(prepopulateData);
 
-            prepopulateData.id = beanId;
             bean = app.data.createBean(this.module);
-            bean.set(prepopulateData);
             bean._module = this.module;
+            bean.set('id', beanId);
 
             // check the parent record to see if an assigned user ID/name has been set
             if (this.context.parent && this.context.parent.has('model')) {
@@ -327,14 +326,15 @@
                 }
             }
 
-            bean = this._addCustomFieldsToBean(bean, addAtZeroIndex);
-
             // must add to this.collection so the bean shows up in the subpanel list
             if (addAtZeroIndex) {
-                this.collection.unshift(bean);
+                bean = this.collection.unshift(bean);
             } else {
-                this.collection.add(bean);
+                bean = this.collection.add(bean);
             }
+
+            bean.set(prepopulateData);
+            this._addCustomFieldsToBean(bean, addAtZeroIndex);
         }
 
         this.checkButtons();

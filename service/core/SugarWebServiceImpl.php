@@ -826,34 +826,52 @@ function set_document_revision($session, $document_revision) {
  *                                          	Binary 'file' -- The binary contents of the file.
  * @exception 'SoapFault' -- The SOAP error, if any
  */
-function get_document_revision($session, $id) {
-	$GLOBALS['log']->info('Begin: SugarWebServiceImpl->get_document_revision');
-    global $sugar_config;
-
-    $error = new SoapError();
-	if (!self::$helperObject->checkSessionAndModuleAccess($session, 'invalid_session', '', '', '', $error)) {
-		$GLOBALS['log']->info('End: SugarWebServiceImpl->get_document_revision');
-		return;
-	} // if
-
-    $dr = BeanFactory::getBean('DocumentRevisions', $id);
-    if(!empty($dr->filename)){
-        $filename = "upload://{$dr->id}";
-        if (filesize($filename) > 0) {
-                $contents = file_get_contents($filename);
-        } else {
-            $contents = '';
+    public function get_document_revision($session, $id)
+    {
+        $GLOBALS['log']->info('Begin: SugarWebServiceImpl->get_document_revision');
+        $error = new SoapError();
+        if (!is_guid($id)) {
+            $error->set_error('invalid_data_format');
+            self::$helperObject->setFaultObject($error);
+            $GLOBALS['log']->info('End: SugarWebServiceImpl->get_document_revision');
+            return;
         }
-        $contents = base64_encode($contents);
-        $GLOBALS['log']->info('End: SugarWebServiceImpl->get_document_revision');
-        return array('document_revision'=>array('id' => $dr->id, 'document_name' => $dr->document_name, 'revision' => $dr->revision, 'filename' => $dr->filename, 'file' => $contents));
-    }else{
-        $error->set_error('no_records');
-        self::$helperObject->setFaultObject($error);
-		$GLOBALS['log']->info('End: SugarWebServiceImpl->get_document_revision');
-    }
+        if (!self::$helperObject->checkSessionAndModuleAccess($session, 'invalid_session', '', '', '', $error)) {
+            $GLOBALS['log']->info('End: SugarWebServiceImpl->get_document_revision');
+            return;
+        } // if
 
-}
+        $dr = BeanFactory::getBean('DocumentRevisions', $id);
+        if (!$dr->ACLAccess('view')) {
+            $error->set_error('no_access');
+            self::$helperObject->setFaultObject($error);
+            $GLOBALS['log']->info('End: SugarWebServiceImpl->get_document_revision');
+            return;
+        }
+        if (!empty($dr->filename)) {
+            $filename = "upload://{$dr->id}";
+            if (filesize($filename) > 0) {
+                $contents = file_get_contents($filename);
+            } else {
+                $contents = '';
+            }
+            $contents = base64_encode($contents);
+            $GLOBALS['log']->info('End: SugarWebServiceImpl->get_document_revision');
+            return array(
+                'document_revision' => array(
+                    'id' => $dr->id,
+                    'document_name' => $dr->document_name,
+                    'revision' => $dr->revision,
+                    'filename' => $dr->filename,
+                    'file' => $contents,
+                ),
+            );
+        } else {
+            $error->set_error('no_records');
+            self::$helperObject->setFaultObject($error);
+            $GLOBALS['log']->info('End: SugarWebServiceImpl->get_document_revision');
+        }
+    }
 
 /**
  * Given a list of modules to search and a search string, return the id, module_name, along with the fields

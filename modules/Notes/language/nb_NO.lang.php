@@ -14,7 +14,10 @@
 $mod_strings = array(
     // Dashboard Names
     'LBL_NOTES_LIST_DASHBOARD' => 'Dashbord for notatliste',
+    'LBL_NOTES_RECORD_DASHBOARD' => 'Registerdashbord for merknader',
+    'LBL_NOTES_FOCUS_DRAWER_DASHBOARD' => 'Notater fokusskuff',
 
+    'LBL_RELATED_CONTACT' => 'Relatert kontakt',
     'ERR_DELETE_RECORD' => 'Du må oppgi et registernummer for å slette denne bedriften.',
     'LBL_ACCOUNT_ID' => 'Bedrift-ID:',
     'LBL_CASE_ID' => 'Sak-ID:',
@@ -23,6 +26,8 @@ $mod_strings = array(
     'LBL_CONTACT_ID' => 'Kontakt-ID:',
     'LBL_CONTACT_NAME' => 'Kontakt:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Notater',
+    'LBL_ATTACHMENTS' => 'Vedlegg',
+    'LBL_ATTACHMENT_FLAG' => 'Er vedlegg',
     'LBL_DESCRIPTION' => 'Beskrivelse',
     'LBL_EMAIL_ADDRESS' => 'E-postadresse:',
     'LBL_EMAIL_ATTACHMENT' => 'E-postvedlegg',
@@ -52,6 +57,7 @@ $mod_strings = array(
     'LBL_NOTES_SUBPANEL_TITLE' => 'Vedlegg',
     'LBL_NOTE' => 'Notat:',
     'LBL_OPPORTUNITY_ID' => 'Mulighets-ID:',
+    'LBL_NOTE_PARENT_ID' => 'Merknad overordnet ID:',
     'LBL_PARENT_ID' => 'Opphavs-ID:',
     'LBL_PARENT_TYPE' => 'Opphavstype:',
     'LBL_EMAIL_TYPE' => 'E-posttype',

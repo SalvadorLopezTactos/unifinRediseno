@@ -11,6 +11,20 @@
  */
 
 $viewdefs['Cases']['base']['view']['activity-timeline'] = [
+    'dashlets' => [
+        [
+            'label' => 'TPL_ACTIVITY_TIMELINE_DASHLET',
+            'description' => 'LBL_ACTIVITY_TIMELINE_DASHLET_DESCRIPTION',
+            'config' => ['module' => 'Cases'],
+            'preview' => ['module' => 'Cases'],
+            'filter' => [
+                'view' => 'record',
+                'module' => [
+                    'Cases',
+                ],
+            ],
+        ],
+    ],
     'activity_modules' => [
         [
             'module' => 'Calls',
@@ -58,6 +72,21 @@ $viewdefs['Cases']['base']['view']['activity-timeline'] = [
             ],
         ],
         [
+            'module' => 'Messages',
+            'record_date' => 'date_start',
+            'fields' => [
+                'name',
+                'contact_name',
+                'description',
+                'direction',
+                'date_start',
+                'date_end',
+                'conversation',
+                'conversation_link',
+                'assigned_user_name',
+            ],
+        ],
+        [
             'module' => 'Notes',
             'record_date' => 'date_entered',
             'fields' => [
@@ -68,6 +97,104 @@ $viewdefs['Cases']['base']['view']['activity-timeline'] = [
                 'date_entered_by',
                 'date_modified_by',
                 'assigned_user_name',
+            ],
+        ],
+    ],
+    'custom_toolbar' => [
+        'buttons' => [
+            [
+                'type' => 'actiondropdown',
+                'no_default_action' => true,
+                'icon' => 'fa-plus',
+                'buttons' => [
+                    [
+                        'type' => 'dashletaction',
+                        'action' => 'composeEmail',
+                        'params' => [
+                            'link' => 'emails',
+                            'module' => 'Emails',
+                        ],
+                        'label' => 'LBL_COMPOSE_EMAIL_BUTTON_LABEL',
+                        'icon' => 'fa-plus',
+                        'acl_action' => 'create',
+                        'acl_module' => 'Emails',
+                    ],
+                    [
+                        'type' => 'dashletaction',
+                        'action' => 'createRecord',
+                        'params' => [
+                            'link' => 'calls',
+                            'module' => 'Calls',
+                        ],
+                        'label' => 'LBL_SCHEDULE_CALL',
+                        'icon' => 'fa-phone',
+                        'acl_action' => 'create',
+                        'acl_module' => 'Calls',
+                    ],
+                    [
+                        'type' => 'dashletaction',
+                        'action' => 'createRecord',
+                        'params' => [
+                            'link' => 'meetings',
+                            'module' => 'Meetings',
+                        ],
+                        'label' => 'LBL_SCHEDULE_MEETING',
+                        'icon' => 'fa-calendar',
+                        'acl_action' => 'create',
+                        'acl_module' => 'Meetings',
+                    ],
+                    [
+                        'type' => 'dashletaction',
+                        'action' => 'createRecord',
+                        'params' => [
+                            'link' => 'notes',
+                            'module' => 'Notes',
+                        ],
+                        'label' => 'LBL_CREATE_NOTE_OR_ATTACHMENT',
+                        'icon' => 'fa-plus',
+                        'acl_action' => 'create',
+                        'acl_module' => 'Notes',
+                    ],
+                    [
+                        'type' => 'dashletaction',
+                        'action' => 'createRecord',
+                        'params' => [
+                            'link' => 'messages',
+                            'module' => 'Messages',
+                        ],
+                        'label' => 'LBL_CREATE_MESSAGE',
+                        'icon' => 'fa-comment',
+                        'acl_action' => 'create',
+                        'acl_module' => 'Messages',
+                    ],
+                ],
+            ],
+            [
+                'type' => 'dashletaction',
+                'css_class' => 'dashlet-toggle btn btn-invisible minify',
+                'icon' => 'fa-chevron-up',
+                'action' => 'toggleMinify',
+                'tooltip' => 'LBL_DASHLET_MINIMIZE',
+            ],
+            [
+                'dropdown_buttons' => [
+                    [
+                        'type' => 'dashletaction',
+                        'action' => 'editClicked',
+                        'label' => 'LBL_DASHLET_CONFIG_EDIT_LABEL',
+                    ],
+                    [
+                        'type' => 'dashletaction',
+                        'action' => 'reloadData',
+                        'label' => 'LBL_DASHLET_REFRESH_LABEL',
+                    ],
+                    [
+                        'type' => 'dashletaction',
+                        'action' => 'removeClicked',
+                        'label' => 'LBL_DASHLET_REMOVE_LABEL',
+                        'name' => 'remove_button',
+                    ],
+                ],
             ],
         ],
     ],

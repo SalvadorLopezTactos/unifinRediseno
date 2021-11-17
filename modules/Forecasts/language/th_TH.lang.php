@@ -14,6 +14,7 @@ $mod_strings = array (
 
     // Dashboard Names
     'LBL_FORECASTS_DASHBOARD' => 'แดชบอร์ดการคาดการณ์',
+    'LBL_FORECASTS_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนประมาณการ',
 
     //module strings.
     'LBL_MODULE_NAME' => 'ประมาณการ',

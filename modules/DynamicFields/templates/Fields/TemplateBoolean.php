@@ -10,10 +10,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+
 class TemplateBoolean extends TemplateField{
     var $default_value = '0';
     var $default = '0';
 	var $type = 'bool';
+    public $massupdate = 1;
 
 	//BEGIN BACKWARDS COMPATIBILITY
 function get_xtpl_edit(){
@@ -99,8 +103,21 @@ function get_xtpl_edit(){
         // The default value is stored in database as string,
         // however from domain standpoint it has to be boolean
         // @see Data.Validation#requiredValidator()
-        $def['default'] = isTruthy($def['default']);
+        $def['default'] = isTruthy($def['default'] ?? false);
 
         return $def;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function populateFromPost(Request $request = null)
+    {
+        if (!$request) {
+            $request = InputValidation::getService();
+        }
+
+        parent::populateFromPost($request);
+        $this->massupdate = !empty($_REQUEST['massupdate']);
     }
 }

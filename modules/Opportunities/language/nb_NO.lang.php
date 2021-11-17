@@ -16,6 +16,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Dashbord for muligheterliste',
     'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Dashbord for muligheteroppføring',
     'LBL_OPPORTUNITIES_MULTI_LINE_DASHBOARD' => 'Mulighetsdetaljer',
+    'LBL_OPPORTUNITIES_FOCUS_DRAWER_DASHBOARD' => 'Muligheter fokusskuff',
+    'LBL_RENEWAL_OPPORTUNITY' => 'Fornyelsesmulighet',
 
     'LBL_MODULE_NAME' => 'Muligheter',
     'LBL_MODULE_NAME_SINGULAR' => 'Salgsmulighet',
@@ -77,7 +79,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Type:',
     'LBL_CAMPAIGN' => 'Kampanje:',
     'LBL_NEXT_STEP' => 'Neste skritt:',
-    'LBL_SERVICE_START_DATE' => 'Service Start Date',
+    'LBL_SERVICE_START_DATE' => 'Startdato for service',
     'LBL_LEAD_SOURCE' => 'Emne-kilder',
     'LBL_SALES_STAGE' => 'Salgssteg:',
     'LBL_SALES_STATUS' => 'Status',
@@ -144,6 +146,7 @@ $mod_strings = array(
     'LBL_COMMIT_STAGE' => 'Forpliktet stadie',
     'LBL_COMMIT_STAGE_FORECAST' => 'Prognose',
     'LBL_WORKSHEET' => 'Regneark',
+    'LBL_PURCHASED_LINE_ITEMS' => 'Kjøpte linjeelementer',
 
     'LBL_RENEWAL' => 'Fornyelse',
     'LBL_RENEWAL_OPPORTUNITIES' => 'Fornyelsesmuligheter',
@@ -151,9 +154,9 @@ $mod_strings = array(
     'LBL_PARENT_RENEWAL_OPPORTUNITY_ID' => 'Fornyelse overordnet ID',
     'LBL_MONTH_YEAR_RENEWAL' => '{{month}}, {{year}}',
 
-    'LBL_WIDGET_SALES_STAGE' => 'Sales Stage',
-    'LBL_WIDGET_DATE_CLOSED' => 'Expected Close Date',
-    'LBL_WIDGET_AMOUNT' => 'Amount',
+    'LBL_WIDGET_SALES_STAGE' => 'Salgsfase',
+    'LBL_WIDGET_DATE_CLOSED' => 'Forventet lukkedato',
+    'LBL_WIDGET_AMOUNT' => 'Beløp',
 
     'TPL_RLI_CREATE' => 'En salgsmulighet må ha en tilknyttet omsetningspost.',
     'TPL_RLI_CREATE_LINK_TEXT' => 'Opprett en omsetningspost',
@@ -162,12 +165,16 @@ $mod_strings = array(
 
     'LBL_TOTAL_RLIS' => '# av Totalt omsetningsposter',
     'LBL_CLOSED_RLIS' => '# av Lukket Omsetningsposter',
+    'LBL_SERVICE_OPEN_FLEX_DURATION_RLIS' => '# av Open Service Flex-varighet inntekt linjeelementer',
     'NOTICE_NO_DELETE_CLOSED_RLIS' => 'Du kan ikke slette Muligheter som inneholder lukkede Omsetning poster',
     'WARNING_NO_DELETE_CLOSED_SELECTED' => 'En eller flere av de valgte postene inneholder avsluttet omsetningsposter og kan ikke slettes.',
     'LBL_INCLUDED_RLIS' => '# av inkluderte omsetningsposter',
-    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Update Open',
+    'LBL_UPDATE_OPPORTUNITIES_RLIS' => 'Oppdatering åpen',
+    'LBL_SERVICE_START_DATE_INVALID' => 'Servicestartdatoen kan ikke settes forbi servicesluttdatoen for åpne inntektsvarelinjetillegg.',
 
     'LBL_QUOTE_SUBPANEL_TITLE' => 'Tilbud',
+    'LBL_FILTER_OPPORTUNITY_TEMPLATE' => 'Muligheter av en dynamisk konto',
+
 
     // Config
     'LBL_OPPS_CONFIG_VIEW_BY_LABEL' => 'Salgsmuligheter Hiraki',
@@ -200,7 +207,7 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Etter du starte denne endringen , vil Revenue linjeelement poster opprettes for hver eksisterende { { module_name } } i bakgrunnen . Når Revenue Linjeelementer er komplett og tilgjengelig, vil en melding bli sendt til e-postadressen på din brukerprofil. Vær oppmerksom på at forekomsten må konfigureres til å sende e-post via Admin > E-postinnstillinger for at varsling skal sendes.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulen {{plural_module_name}} lar deg spore individuelle salg fra start til slutt. Hver {{module_name}}-post representerer et potensielt salg og inkluderer relevante salgsdata så vel som relatert til andre viktige poster som {{quotes_module}}, {{contacts_module}}, osv. Et {{module_name}} vil typisk gå gennom flere salgsstadier til det er merket som enten "Lukket vunnet" eller "Lukket tapt". {{plural_module_name}} kan påvirkes enda mer ved å bruke Sugars {{forecasts_singular_module}}-modul for å forstå og forutsi salgstrender så vel som fokusere arbeidet med å oppnå salgskvoter.',
+    'LBL_HELP_RECORDS' => 'Modulen {{plural_module_name}} lar deg spore individuelle salg fra start til slutt. Hver {{module_name}} oppføring {{quotes_module}}, {{contacts_module}}, osv. En {{module_name}} vil typisk gå gjennom et potensielt salg og inkluderer relevante salgsdata så vel som relatert til andre viktige oppføringer som. {{plural_module_name}} kan påvirkes ytterligere ved å bruke Sugars {{forecasts_singular_module}}-modul for å forstå og forutsi salgstrender så vel som fokusere arbeidet på å oppnå salgskvoter.',
 
     // Record View Help Text
     'LBL_HELP_RECORD' => 'Modulen {{plural_module_name}} lar deg spore individuelle salg og linjepostene som tilhører disse salgene fra start til slutt. Hvert {{module_name}} register representerer et potensielt salg og inkluderer relevante salgsdata så vel som knyttet til andre viktige registre som {{quotes_module}}, {{contacts_module}}, osv.
@@ -212,7 +219,7 @@ $mod_strings = array(
 - Flere handlinger er tilgjengelige i nedtrekkshandlingsmenyen til høyre for Rediger-knappen.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Med {{plural_module_name}} modulen kan du spore individuelle salg og poster som tilhører disse salgene fra start til slutt. Hver {{module_name}} post representerer et potensielt salg og inkluderer relevante salgsdata så vel som knyttet til viktige poster som {{quotes_module}}, {{contacts_module}}, osv.
+    'LBL_HELP_CREATE' => 'Med {{plural_module_name}}-modulen kan du spore individuelle salg og poster som tilhører disse salgene fra start til slutt. Hver {{module_name}} post representerer et potensielt salg og inkluderer relevante salgsdata så vel som knyttet til viktige poster som {{quotes_module}}, {{contacts_module}}, osv.
 
 For å opprette et {{module_name}}:
 1. Oppgi verdier for felt som ønsket.
@@ -231,5 +238,10 @@ For å opprette et {{module_name}}:
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Mine Salgsmuligheterr',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Mitt teams TOP 10 Salgsmuligheter",
 
-    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Unable to change {{fieldName}} as this {{moduleSingular}} has no open line items.',
+    'LBL_PIPELINE_ERR_CLOSED_SALES_STAGE' => 'Kan ikke endre {{fieldName}} ettersom denne {{moduleSingular}} ikke har noen åpne varelinjer.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Mulighetsinteraksjoner',
+
+    // AI Predict
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_NAME' => 'Nærprediksjon for mulighet',
+    'LBL_AI_OPPORTUNITY_CLOSE_PREDICTION_DESC' => 'Se prediksjonsdetaljer for en bestemt mulighet',
 );

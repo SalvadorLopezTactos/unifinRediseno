@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Definice procesu',
   'LBL_MODULE_NAME_SINGULAR' => 'Definice procesu',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na definice procesů',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Řídicí panel definic procesů',
   'LNK_LIST' => 'Zobrazit definice procesů',
   'LNK_NEW_PMSE_PROJECT' => 'Vytvořit definici procesu',
   'LNK_IMPORT_PMSE_PROJECT' => 'Importovat definice procesu',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Změnit vlastníka záznamů',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Tým',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Přepřidělit aktivitu',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'E-mail',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'Zpracování e-mailu uživatele, když je proces přiřazen',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'Definice uživatele',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Metoda zadání',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Přiřadit uživatele',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Aktualizovat položku „Přiřazeno pro“ záznamu',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Nastavte „Přiřazeno“ podle dostupnosti',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Přidat související záznam',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Připojený modul',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'Jméno aktivity je prázdné',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'Jméno "%s" již existuje',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Požadovaná dostupnost směny',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Pokud nejsou dostupní žádní uživatelé',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'před',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Pouze nové záznamy',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Pouze aktualizované záznamy',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Pouze aktualizované záznamy (Všechny aktualizace – viz text nápovědy)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Nové záznamy nebo první aktualizace',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Nové záznamy a všechny aktualizace',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Určit, kdy event začne',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Vyberte, kdy se proces spustí.<br><br>Nové: Spuštění procesu při vytvoření nového záznamu.<br><br>První aktualizace: Proces se spouští pouze při prvním splnění kritérií pro existující záznam.<br><br>Všechny aktualizace: Proces se spouští pokaždé, když jsou splněna kritéria pro existující záznam.<br><br>Nové záznamy nebo první aktualizace: Proces se spouští pouze při prvním splnění kritérií pro záznam během vytváření záznamu nebo aktualizace záznamu.<br><br>Nové záznamy a všechny aktualizace: Proces se pokaždé spouští u všech nových i stávajících záznamů.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Vybrat SugarCRM modul, který souvisí se spuštěním eventu',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Fixní datum',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'mění se z',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'mění se na',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'zahrnuje jakékoli',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'nezahrnuje jakékoli',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'v den nebo po dni',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'v den nebo přede dnem',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'nerovná se',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Přidat',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Zavřít',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'Všechny týmy přiřazené k záznamu',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Týmy',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% souvisí s %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Uživatel, který vytvořil %MODULE%',

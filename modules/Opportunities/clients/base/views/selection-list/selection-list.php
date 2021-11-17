@@ -33,11 +33,25 @@ $viewdefs['Opportunities']['base']['view']['selection-list'] = array(
                     'enabled' => true,
                     'default' => true,
                 ),
+                [
+                    'name' => 'sales_status',
+                    'readonly' => true,
+                ],
                 array(
                     'name' => 'sales_stage',
                     'enabled' => true,
                     'default' => true,
                     'readonly' => true,
+                ),
+                array(
+                    'name' => 'date_closed',
+                    'label' => 'LBL_DATE_CLOSED',
+                    'enabled' => true,
+                    'default' => true,
+                    'readonly' => true,
+                    'related_fields' => array(
+                        'date_closed_timestamp',
+                    ),
                 ),
                 array(
                     'name' => 'probability',
@@ -76,16 +90,6 @@ $viewdefs['Opportunities']['base']['view']['selection-list'] = array(
                     'label' => 'LBL_NEXT_STEP',
                     'enabled' => true,
                     'default' => false,
-                ),
-                array(
-                    'name' => 'date_closed',
-                    'label' => 'LBL_DATE_CLOSED',
-                    'enabled' => true,
-                    'default' => false,
-                    'readonly' => true,
-                    'related_fields' => array(
-                        'date_closed_timestamp'
-                    )
                 ),
                 array(
                     'name' => 'created_by_name',

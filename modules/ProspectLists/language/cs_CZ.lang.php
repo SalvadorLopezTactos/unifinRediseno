@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Řídicí panel seznamu cílové skupiny',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'Řídicí panel záznamů seznamů adresátů',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => 'Zásuvka zaměření na seznamy cílů',
+  'LBL_RELATED_ACCOUNTS' => 'Související klienti',
+  'LBL_RELATED_CONTACTS' => 'Související kontakty',
+  'LBL_RELATED_LEADS_TARGETS' => 'Související potenciální zákazníci a cíle',
 
   'LBL_MODULE_NAME' => 'Seznam adresátů',
   'LBL_MODULE_NAME_SINGULAR' => 'Seznam adresátů',

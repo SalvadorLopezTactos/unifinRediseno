@@ -49,7 +49,6 @@ class EmbeddedFileApi extends FileApi
                 'allowDownloadCookie' => true,
                 'shortHelp' => 'Gets the contents of a single file related to a field for a module record.',
                 'longHelp' => 'include/api/help/module_record_file_field_get_help.html',
-                'noLoginRequired' => true,
             ),
         );
     }

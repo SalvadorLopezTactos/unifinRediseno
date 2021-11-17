@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'ติดต่อ',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'ผู้สนใจ',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'ผู้ใช้',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'แดชบอร์ดระเบียนศูนย์ธุรกิจ',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'ระบบลิ้นชักศูนย์ธุรกิจ',
 ];

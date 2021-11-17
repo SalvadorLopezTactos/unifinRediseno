@@ -15,6 +15,7 @@ namespace Sugarcrm\IdentityProvider\Tests\Unit\Saml2\Request;
 use OneLogin\Saml2\Settings;
 use Sugarcrm\IdentityProvider\Saml2\Request\AuthnRequest;
 use Sugarcrm\IdentityProvider\CSPRNG\GeneratorInterface;
+use Sugarcrm\IdentityProvider\Tests\IDMFixturesHelper;
 
 /**
  * Class AuthnRequestTest
@@ -165,6 +166,8 @@ class AuthnRequestTest extends \PHPUnit_Framework_TestCase
                     'NameIDFormat' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress',
                 ]
             );
+        $this->settings->method('getIdPData')
+            ->willReturn(IDMFixturesHelper::getOktaParameters()['idp']);
 
         $this->generator = $this->createMock(GeneratorInterface::class);
         $this->generator

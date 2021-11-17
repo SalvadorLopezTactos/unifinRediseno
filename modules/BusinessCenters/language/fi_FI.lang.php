@@ -46,4 +46,8 @@ $mod_strings = [
     'LBL_BUSINESS_CENTER_CONTACTS_TITLE' => 'Yhteystiedot',
     'LBL_BUSINESS_CENTER_LEADS_TITLE' => 'Liidit',
     'LBL_BUSINESS_CENTER_USERS_TITLE' => 'Käyttäjät',
+
+    'LBL_BUSINESS_CENTERS_RECORD_DASHBOARD' => 'Liiketoimintakeskustietueiden työpöytä',
+
+    'LBL_BUSINESS_CENTERS_FOCUS_DRAWER_DASHBOARD' => 'Liiketoimintakeskukset -tietolaatikko',
 ];

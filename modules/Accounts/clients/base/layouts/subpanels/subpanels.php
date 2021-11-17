@@ -163,5 +163,20 @@ $viewdefs['Accounts']['base']['layout']['subpanels'] = array (
                 'link' => 'dataprivacy',
             ),
         ),
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_PURCHASES_SUBPANEL_TITLE',
+            'context' => [
+                'link' => 'purchases',
+            ],
+        ],
+        [
+            'layout' => 'subpanel',
+            'label' => 'LBL_PLI_SUBPANEL_TITLE',
+            'override_paneltop_view' => 'panel-top-for-accounts',
+            'context' => [
+                'link' => 'purchasedlineitems',
+            ],
+        ],
     ),
 );

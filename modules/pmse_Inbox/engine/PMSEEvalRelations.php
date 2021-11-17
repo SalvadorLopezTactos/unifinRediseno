@@ -45,6 +45,8 @@ trait PMSEEvalRelations
             "changes",
             "changes_from",
             "changes_to",
+            'array_has_any',
+            'array_has_none',
         );
 
         // Set the result
@@ -60,8 +62,12 @@ trait PMSEEvalRelations
         }
 
         // Get proper values for the data we are working with
-        $value1 = $value1 === null ? $value1 : $this->typeData($value1, $type);
-        $value2 = $value2 === null ? $value2 : $this->typeData($value2, $type);
+        if ($type === 'Relate' && is_array($value1)) {
+            $value2 = is_array($value2) ? $value2 : explode(',', $value2);
+        } else {
+            $value1 = $value1 === null ? $value1 : $this->typeData($value1, $type);
+            $value2 = $value2 === null ? $value2 : $this->typeData($value2, $type);
+        }
 
         // Used for reporting back to the caller
         $this->condition .= ':(' . is_array($value1) ? encodeMultienumValue($value1) : $value1 . '):';
@@ -69,7 +75,11 @@ trait PMSEEvalRelations
         // Handle evaluations...
         switch ($operator) {
             case 'equals':
-                $result = $value1 == $value2;
+                if (is_array($value1) && is_array($value2)) {
+                    $result = array_diff($value1, $value2) === array_diff($value2, $value1);
+                } else {
+                    $result = $value1 == $value2;
+                }
                 break;
             case 'changes':
                 // Changes should only evaluate to true for update processes
@@ -81,7 +91,11 @@ trait PMSEEvalRelations
                 $result = $value1 !== null && $isUpdate === true && $value1 == $value2;
                 break;
             case 'not_equals':
-                $result = $value1 != $value2;
+                if (is_array($value1) && is_array($value2)) {
+                    $result = array_diff($value1, $value2) !== array_diff($value2, $value1);
+                } else {
+                    $result = $value1 != $value2;
+                }
                 break;
             case 'major_equals_than':
                 $result = $value1 >= $value2;
@@ -128,6 +142,37 @@ trait PMSEEvalRelations
                 break;
             case 'does_not_contain':
                 $result = strpos($value1, $value2) === false;
+                break;
+            case 'array_has_any':
+                // getting a null value doesn't make sense
+                if (is_null($value1) || is_null($value2)) {
+                    break;
+                }
+                if (!is_array($value1) && is_string($value1)) {
+                    $value1 = [$value1];
+                }
+                if (!is_array($value2) && is_string($value2)) {
+                    $value2 = [$value2];
+                }
+                foreach ($value1 as $element) {
+                    if (in_array($element, $value2)) {
+                        $result = true;
+                        break;
+                    }
+                }
+                break;
+            case 'array_has_none':
+                // getting a null value doesn't make sense
+                if (is_null($value1) || is_null($value2)) {
+                    break;
+                }
+                if (!is_array($value1) && is_string($value1)) {
+                    $value1 = [$value1];
+                }
+                if (!is_array($value2) && is_string($value2)) {
+                    $value2 = [$value2];
+                }
+                $result = empty(array_intersect($value1, $value2));
                 break;
             default:
         }

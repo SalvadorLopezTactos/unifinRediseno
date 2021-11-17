@@ -35,7 +35,7 @@ $mod_strings = array (
   'LBL_LIST_LAST_NAME' => '姓',
   'LBL_LIST_EMPLOYEE_NAME' => '従業員氏名',
   'LBL_LIST_DEPARTMENT' => '部署',
-  'LBL_LIST_REPORTS_TO_NAME' => '報告先',
+  'LBL_LIST_REPORTS_TO_NAME' => '上司',
   'LBL_LIST_EMAIL' => 'Eメール',
   'LBL_LIST_PRIMARY_PHONE' => '電話',
   'LBL_LIST_USER_NAME' => 'ユーザ名',
@@ -56,8 +56,8 @@ $mod_strings = array (
   'LBL_ADMIN' => '管理者:',
   'LBL_EMPLOYEE_INFORMATION' => '従業員情報',
   'LBL_OFFICE_PHONE' => '会社電話:',
-  'LBL_REPORTS_TO' => '報告先ID:',
-  'LBL_REPORTS_TO_NAME' => '報告先',
+  'LBL_REPORTS_TO' => '上司:',
+  'LBL_REPORTS_TO_NAME' => '上司の名前',
   'LBL_OTHER_PHONE' => 'その他:',
   'LBL_OTHER_EMAIL' => 'その他のEメール:',
   'LBL_NOTES' => '備考:',
@@ -145,7 +145,10 @@ $mod_strings = array (
   'LBL_EMAIL_ADDRESS'=>'Eメールアドレス',
   'LBL_CONTACTS_SYNC' => '取引先担当者',
     'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
-        'The employee can be created only in <a href="{0}" target="_blank">Cloud Settings</a>',
+        '従業員は、<a href="{0}" target="_blank">SugarCloudの設定</a>でのみ作成できます',
+
+    'LBL_COOKIE_CONSENT' => 'Cookieへの同意',
+    'LBL_COOKIE_CONSENT_RECEIVED_ON' => 'Cookieへの同意の受信：',
 );
 
 

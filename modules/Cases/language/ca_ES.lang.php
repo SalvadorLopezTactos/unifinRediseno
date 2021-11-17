@@ -15,6 +15,7 @@ $mod_strings = array (
     'LBL_CASES_LIST_DASHBOARD' => 'Quadre de comandament del llistat de casos',
     'LBL_CASES_RECORD_DASHBOARD' => 'Quadre de comandament del registre de casos',
     'LBL_CASES_MULTI_LINE_DASHBOARD' => 'Detalls del cas',
+    'LBL_CASES_FOCUS_DRAWER_DASHBOARD' => 'Calaix centrat als casos',
 
 	'ERR_DELETE_RECORD'					=> 'Per suprimir el compte, heu d&#39;especificar un número de registre.',
 	'LBL_ACCOUNT_ID'					=> 'ID del compte',
@@ -77,6 +78,16 @@ $mod_strings = array (
 	'LBL_SHOW_IN_PORTAL' => 'Mostrar en el portal',
 	'LBL_CREATE_KB_DOCUMENT' => 'Crear Article',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Knowledge Base',
+    'LBL_REQUEST_CLOSE' => 'Sol·licita tancament',
+    'LBL_REQUEST_CLOSE_DATE' => 'Sol·licita data de tancament',
+    'LBL_REQUEST_CLOSE_LABEL' => 'Sol·licita tancar',
+    'LBL_REQUEST_CLOSE_TOOLTIP' => 'Envia una sol·licitud per tancar aquest cas',
+    'LBL_REQUEST_CLOSE_MESSAGE' => 'Voleu sol·licitar que es tanqui aquest cas?',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES' => 'Els meus casos amb sol·licitud de tancament',
+    'LBL_MY_REQUESTED_CLOSE_CASES' => 'Els meus casos amb sol·licitud de tancament',
+    'LBL_DASHLET_MY_REQUESTED_CLOSE_CASES_NAME' => 'Els meus casos amb sol·licitud de tancament',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_NAME' => 'Llista de casos amb sol·licitud de tancament',
+    'LBL_DASHLET_REQUESTED_CLOSE_CASES_DESCRIPTION' => 'Mostra una llista de casos assignats per als quals s&#39;ha sol·licitat el tancament',
 
     'LBL_CREATED_USER' => 'Creat per usuari',
     'LBL_MODIFIED_USER' => 'Modificar per usuari',
@@ -107,7 +118,7 @@ $mod_strings = array (
     'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nom d&#39;usuari assignat',
     'LBL_EXPORT_TEAM_COUNT' => 'Conté l&#39;equip',
     'LBL_CHANGETIMERS' => 'Canvia els temporitzadors',
-    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Purchases',
+    'LBL_PURCHASES_SUBPANEL_TITLE' => 'Compres',
 
     // SNIP
 	'LBL_CONTACT_HISTORY_SUBPANEL_TITLE' => 'Els correus electrònics de contactes relacionats',
@@ -119,6 +130,7 @@ $mod_strings = array (
     'LBL_PORTAL_TOUR_RECORDS_FILTER_EXAMPLE' => 'Per exemple, podeu usar això per trobar un tema que ha estat presentada amb anterioritat.',
     'LBL_PORTAL_TOUR_RECORDS_CREATE' => 'Si vostè té un nou cas del suport que voleu enviar, pot fer clic aquí per afegir un nou cas.',
     'LBL_PORTAL_TOUR_RECORDS_RETURN' => 'En fer clic aquí, tornarà a aquest punt de vista en qualsevol moment.',
+    'TPL_ACTIVITY_TIMELINE_DASHLET' => 'Interaccions de casos',
 
     'LBL_NOTES_SUBPANEL_TITLE' => 'Notes',
 
@@ -149,5 +161,5 @@ Per crear un {{module_name}}:
 
     'LBL_SLA_DETAILS' => 'Detalls d&#39;SLA',
     'LBL_HOURS' => 'Hores',
-    'LBL_WIDGET_STATUS' => 'Status',
+    'LBL_WIDGET_STATUS' => 'Estat',
 );

@@ -115,7 +115,8 @@ $mod_strings = array (
   'LBL_ADDED_DASHLET' => 'تمت إضافة لوحة معلومات Sugar',
   'LBL_DASHBOARD_LAYOUT_CONFIRM' => 'ستتم إعادة ترتيب خانات المعلومات، هل أنت متأكد من رغبتك في تغيير تصميم العمود؟',
   'LBL_REMOVE_DASHLET_CONFIRM' => 'هل تريد بالتأكيد حذف لوحة معلومات Sugar؟',
-  'LBL_NO_DASHBOARD_CONFIGURED' => 'لم يتم تكوين لوحة معلومات.',
+  'LBL_NO_DASHBOARD_CONFIGURED' => 'لم يتم تكوين لوحة معلومات',
+  'LBL_NO_DASHLETS_CONFIGURED' => 'لم يتم تكوين لوحات معلومات',
   'LBL_CREATE_DASHBOARD_LINK' => 'إنشاء لوحة معلومات',
 
   'LBL_DASHLET_WEBPAGE_NAME' => 'صفحة الويب',
@@ -218,7 +219,6 @@ $mod_strings = array (
   'LBL_SOURCE_JSCALENDAR' => 'JS Calendar - تقويم لإدخال التواريخ تم إنشاؤها من خلال Mihai Bazon',
   'LBL_SOURCE_PHPPDF' => 'PHP PDF - مكتبة لإنشاء وثائق PDF تم إنشاؤها من خلال Wayne Munro',
   'LBL_SOURCE_HTTP_WEBDAV_SERVER' => 'HTTP_WebDAV_Server - تنفيذ لملقم WebDAV في PHP.',
-  'LBL_SOURCE_PCLZIP' => 'PclZip - مكتبة توفر وظائف الضغط والاستخراج للأرشيفات التي تكون بتنسيق Zip تم عملها من خلال Vincent Blavet',
   'LBL_SOURCE_SMARTY' => 'Smarty - محرك قوالب لـ PHP.',
   'LBL_SOURCE_YAHOO_UI_LIB' => 'Yahoo! مكتبة واجهة المستخدم - تسهل الأدوات المساعدة لمكتبة واجهة المستخدم تنفيذ سمات متنوعة على جانب العميل.',
   'LBL_SOURCE_PHPMAILER' => 'PHPMailer - فئة نقل شاملة المميزات للبريد الإلكتروني لـ PHP',

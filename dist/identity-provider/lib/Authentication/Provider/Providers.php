@@ -31,4 +31,19 @@ class Providers
      * SAML provider code
      */
     const SAML = 'saml';
+
+    const OIDC = 'oidc';
+
+    /**
+     * Constants to determinate AuthenticationProvider classes
+     */
+    public const PROVIDER_KEY_LOCAL = 'PROVIDER_KEY_LOCAL';
+
+    public const PROVIDER_KEY_LDAP = 'PROVIDER_KEY_LDAP';
+
+    public const PROVIDER_KEY_SAML = 'PROVIDER_KEY_SAML';
+
+    public const PROVIDER_KEY_OIDC = 'PROVIDER_KEY_OIDC';
+
+    public const PROVIDER_KEY_MIXED = 'PROVIDER_KEY_MIXED';
 }

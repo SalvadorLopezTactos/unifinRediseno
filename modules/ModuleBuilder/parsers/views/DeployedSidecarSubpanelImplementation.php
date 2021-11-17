@@ -96,6 +96,8 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
         $this->_history = new History($this->historyPathname);
         $this->_viewdefs = !empty($viewdefs) ? $this->getNewViewDefs($viewdefs) : array();
         $this->_fielddefs = $this->bean->field_defs;
+        // Merge original viewdefs first to pick up ootb fields and fieldsets from the view
+        $this->_mergeFielddefs($this->_fielddefs, $this->_originalViewdefs);
         $this->_mergeFielddefs($this->_fielddefs, $this->_viewdefs);
         $this->_language = '';
         // don't attempt to access the template_instance property if our subpanel represents a collection, as it won't be there - the sub-sub-panels get this value instead
@@ -216,7 +218,9 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
             return $subpanelName;
         }
 
-        $legacyDefs = $this->mdc->toLegacySubpanelLayoutDefs($viewdefs['subpanels']['meta']['components'], BeanFactory::newBean($loadedModule));
+        if (!empty($viewdefs['subpanels']['meta']['components'])) {
+            $legacyDefs = $this->mdc->toLegacySubpanelLayoutDefs($viewdefs['subpanels']['meta']['components'], BeanFactory::newBean($loadedModule));
+        }
 
         if(empty($legacyDefs['subpanel_setup'])) {
             if (isModuleBWC($loadedModule)) {
@@ -478,8 +482,8 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
         $viewdefs = array();
         include $this->originalDefsFileName;
 
-        if (isset($viewdefs[$this->loadedModule])) {
-            $this->_originalViewdefs = $viewdefs[$this->loadedModule];
+        if (isset($viewdefs[$this->_moduleName])) {
+            $this->_originalViewdefs = $viewdefs[$this->_moduleName];
         }
     }
 }

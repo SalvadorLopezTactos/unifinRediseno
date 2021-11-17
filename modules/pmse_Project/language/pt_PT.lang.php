@@ -16,6 +16,9 @@ $mod_strings = array (
   'LBL_MODULE_TITLE' => 'Definições do Processo',
   'LBL_MODULE_NAME_SINGULAR' => 'Definição do Processo',
 
+  'LBL_PMSE_PROJECT_FOCUS_DRAWER_DASHBOARD' => 'Gaveta de foco de definições de processo',
+
+  'LBL_PMSE_PROJECT_RECORD_DASHBOARD' => 'Dashboard de registo de definições de processo',
   'LNK_LIST' => 'Ver Definições do Processo',
   'LNK_NEW_PMSE_PROJECT' => 'Criar uma definição de Processo',
   'LNK_IMPORT_PMSE_PROJECT' => 'Importar Definições de Processos',
@@ -178,6 +181,8 @@ $mod_strings = array (
     'LBL_PMSE_FORM_LABEL_RECORD_OWNERSHIP' => 'Alterar Atribuído ao Utilizador',
     'LBL_PMSE_FORM_LABEL_TEAM' => 'Equipa',
     'LBL_PMSE_FORM_LABEL_REASSIGN' => 'Reatribuir Atividade',
+    'LBL_PMSE_FORM_LABEL_EMAIL_PROCESS_USER' => 'E-mail',
+    'LBL_PA_FORM_LABEL_EMAIL_PROCESS_USER' => 'Enviar e-mail ao utilizador do processo quando o processo for atribuído',
 
     'LBL_PMSE_FORM_TITLE_USER_DEFINITION' => 'Definições do Utilizador',
     'LBL_PMSE_FORM_LABEL_ASSIGNMENT_METHOD' => 'Método de atribuição',
@@ -202,7 +207,7 @@ $mod_strings = array (
 
     'LBL_PMSE_FORM_TITLE_ASSIGN_USER' => 'Atribuir Utilizador',
     'LBL_PA_FORM_LABEL_UPDATE_RECORD_OWNER' => 'Atualizar "Atribuído a" no registo',
-    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Set "Assigned To" by availability',
+    'LBL_PA_FORM_LABEL_SET_BY_AVAILABILITY' => 'Definir "Atribuído a" por disponibilidade',
 
     'LBL_PMSE_FORM_TITLE_ADD_RELATED_RECORD' => 'Adicionar Registo Relacionado',
     'LBL_PMSE_FORM_LABEL_RELATED_MODULE' => 'Módulo Relacionado',
@@ -215,10 +220,10 @@ $mod_strings = array (
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_EMPTY' => 'O nome da atividade está vazio.',
     'LBL_PMSE_MESSAGE_ACTIVITY_NAME_ALREADY_EXISTS' => 'O nome "%s" já existe na família.',
 
-    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Required shift availability',
-    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'If no users are available',
+    'LBL_PMSE_FORM_REQUIRED_SHIFT_AVAILABILITY' => 'Disponibilidade de turno obrigatória',
+    'LBL_PMSE_FORM_LABEL_IF_NO_AVAILABLE' => 'Se nenhum utilizador estiver disponível',
 
-    'LBL_PMSE_FORM_LABEL_BEFORE' => 'before',
+    'LBL_PMSE_FORM_LABEL_BEFORE' => 'antes',
 
     /**EVENTS**/
     // CONTEXT MENU
@@ -237,8 +242,10 @@ $mod_strings = array (
     'LBL_PMSE_FORM_OPTION_NEW_RECORDS_ONLY' => 'Apenas Registos Novos',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY' => 'Registos actualizados apenas',
     'LBL_PMSE_FORM_OPTION_UPDATED_RECORDS_ONLY_AU' => 'Apenas registos actualizados (todas actualizações - ver texto de ajuda)',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_FIRST_UPDATED_RECORDS' => 'Novos registos ou primeira actualização',
+    'LBL_PMSE_FORM_OPTION_NEW_AND_ALL_UPDATED_RECORDS' => 'Novos registos e todas as actualizações',
 
-    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Selecione quando o processo irá ser iniciado.<br><br>Novo: Execute o processo quando o novo registo for criado.<br><br>Primeira Atualização: O processo é executado apenas na primeira vez em que os critérios forem satisfeitos para um registo existente.<br><br>Todas as Atualizações: O processo é executado sempre que os critérios forem satisfeitos para um registo existente.',
+    'LBL_PMSE_FORM_TOOLTIP_WHEN_START_EVENT' => 'Seleccione quando o processo irá começar.<br><br>Novo: executar o processo quando um novo registo é criado.<br><br>Primeira actualização: o processo só é executado quando os primeiros critérios de tempo são cumpridos para um registo existente.<br><br>Todas as actualizações: o processo é executado apenas a primeira vez que os critérios são cumpridos para um registo, durante a criação ou actualização do registo.<br><br>Novos registos ou primeira actualização: o processo é executado apenas na primeira vez que os critérios são cumpridos para um registo, durante a criação ou actualização do registo.<br><br>Novos registos e todas as actualizações: o processo é executado sempre para todos os registos novos e existentes.',
     'LBL_PMSE_FORM_TOOLTIP_EVENT_MODULE' => 'Selecione o módulo SugarCRM a aplicar ao evento',
 
     'LBL_PMSE_FORM_LABEL_FIXED_DATE' => 'Data fixa',
@@ -352,6 +359,9 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_FROM' => 'alterações de',
     'LBL_PMSE_EXPCONTROL_OPERATOR_CHANGES_TO' => 'alterações para',
 
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_IS_ON_OF' => 'inclui qualquer',
+    'LBL_PMSE_EXPCONTROL_OPERATOR_MULTISELECT_DOES_NOT_INCLUDE_ANY' => 'não inclui nenhum',
+
     'LBL_PMSE_EXPCONTROL_OPERATOR_MAJOR_EQUAL_DATE' => 'em ou posterior a',
     'LBL_PMSE_EXPCONTROL_OPERATOR_MINOR_EQUAL_DATE' => 'em ou anterior a',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'não é igual é',
@@ -366,6 +376,7 @@ $mod_strings = array (
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Adicionar',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Fechar',
 
+    'LBL_PMSE_EMAILPICKER_ALL_ASSIGNED_TEAMS' => 'Todas as equipas atribuídas ao registo',
     'LBL_PMSE_EMAILPICKER_TEAMS' => 'Equipas',
     'LBL_PMSE_EMAILPICKER_RELATED_TO' => '%RELATED% referente a %MODULE%',
     'LBL_PMSE_EMAILPICKER_USER_CREATED' => 'Utilizador que criou o %MODULE%',

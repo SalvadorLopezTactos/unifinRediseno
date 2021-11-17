@@ -37,7 +37,7 @@
     // Number of hours to display on free/busy schedule timeline.
     timelineLength: 9,
     // Regular Expression that parses module and ID from url
-    moduleAndIdParserRegExp: new RegExp('/v\\d+/([^/]+)/([^/]+)/freebusy'),
+    moduleAndIdParserRegExp: new RegExp('/v\\d+_?\\d+/([^/]+)/([^/]+)/freebusy'),
 
     /**
      * @inheritdoc
@@ -188,6 +188,10 @@
         this.renderTimelineInfo();
 
         this.hideShowMoreButton();
+
+        if (this.options.viewName === 'edit') {
+            this.focusFirstInput();
+        }
 
         return this;
     },
@@ -1022,6 +1026,25 @@
 
         if (this.view.name === 'preview') {
             this.template = app.template.getField('participants', 'preview', this.model.module);
+        }
+    },
+
+    /**
+     * Focus the first text input in the topmost active drawer when the DOM is ready, if
+     * it's not focused already. ParticipantsField is the last item to finish
+     * rendering in a drawer, so the similar function in record.js will not work
+     */
+    focusFirstInput: function() {
+        if (app.drawer && (app.drawer.count() > 0)) {
+            $(function() {
+                var $firstInput = app.drawer._components[app.drawer.count() - 1].$el
+                    .find('input[type=text]')
+                    .first();
+
+                if (($firstInput.length > 0) && !$firstInput.is(':focus') && $firstInput.is(':visible')) {
+                    $firstInput.focus();
+                }
+            });
         }
     }
 })

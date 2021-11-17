@@ -225,14 +225,16 @@ class SubscriptionManager
     }
 
     /**
-     * get total number of users
+     * get total number of Mango users, doesn't include hint
      * @return int
      */
-    public function getTotalNumberOfUsers() : int
+    public function getTotalNumberOfMangoUsers() : int
     {
         $total = 0;
-        foreach ($this->getSystemSubscriptions() as $subscripion) {
-            $total += $subscripion['quantity'];
+        foreach ($this->getSystemSubscriptions() as $key => $subscripion) {
+            if (Subscription::isMangoKey($key)) {
+                $total += $subscripion['quantity'];
+            }
         }
         return $total;
     }
@@ -483,6 +485,7 @@ class SubscriptionManager
             Subscription::SUGAR_BASIC_KEY,
             Subscription::SUGAR_SERVE_KEY,
             Subscription::SUGAR_SELL_KEY,
+            Subscription::SUGAR_HINT_KEY,
         ];
     }
 
@@ -634,7 +637,7 @@ class SubscriptionManager
      * Get system active users by license types
      * @return array
      */
-    protected function getSystemUserCountByLicenseTypes() : array
+    public function getSystemUserCountByLicenseTypes() : array
     {
         global $db;
         $query = "SELECT license_type from users WHERE " . \User::getLicensedUsersWhere();

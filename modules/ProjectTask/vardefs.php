@@ -12,6 +12,7 @@
 
 $dictionary['ProjectTask'] = array('audited'=>true,
     'table' => 'project_task',
+    'archive' => false,
     'favorites' => false,
     'unified_search' => true,
     'full_text_search' => true,
@@ -388,6 +389,13 @@ $dictionary['ProjectTask'] = array('audited'=>true,
     		'source'=>'non-db',
 				'vname'=>'LBL_NOTES',
   		),
+        'messages' => [
+            'name' => 'messages',
+            'type' => 'link',
+            'relationship' => 'project_tasks_messages',
+            'source'=>'non-db',
+            'vname'=>'LBL_MESSAGES',
+        ],
 		'tasks' =>
   			array (
   			'name' => 'tasks',
@@ -499,6 +507,17 @@ array (
 	),
 
  'relationships' => array (
+     'project_tasks_messages' => [
+         'lhs_module'=> 'ProjectTask',
+         'lhs_table'=> 'project_task',
+         'lhs_key' => 'id',
+         'rhs_module'=> 'Messages',
+         'rhs_table'=> 'messages',
+         'rhs_key' => 'parent_id',
+         'relationship_type'=>'one-to-many',
+         'relationship_role_column'=>'parent_type',
+         'relationship_role_column_value'=>'ProjectTask',
+     ],
 	'project_tasks_notes' => array('lhs_module'=> 'ProjectTask', 'lhs_table'=> 'project_task', 'lhs_key' => 'id',
 							  'rhs_module'=> 'Notes', 'rhs_table'=> 'notes', 'rhs_key' => 'parent_id',
 							  'relationship_type'=>'one-to-many', 'relationship_role_column'=>'parent_type',

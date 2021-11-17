@@ -24,6 +24,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_LEADS_LIST_DASHBOARD' => 'Potansiyeller Listesi Panosu',
     'LBL_LEADS_RECORD_DASHBOARD' => 'Potansiyeller Kaydı Panosu',
+    'LBL_LEADS_FOCUS_DRAWER_DASHBOARD' => 'Potansiyeller Odak Bölmesi',
 
     'ERR_DELETE_RECORD' => 'Potansiyeli silmek için bir kayıt numarası belirtilmelidir.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Müşteri Tanımı',
@@ -325,4 +326,8 @@ Her zorunlu ve istenen modülü onayladıktan sonra, üstteki Kaydet ve Dönüş
 
     // Leads Pipeline view
     'LBL_PIPELINE_ERR_CONVERTED' => '{{moduleSingular}} durumu değiştirilemiyor. Bu {{moduleSingular}} önceden değiştirilmiş.',
+
+    // AI Predict
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_NAME' => 'Potansiyelleri Dönüştürme Tahmini',
+    'LBL_AI_LEADS_CONVERSION_PREDICTION_DESC' => 'Belirli bir Potansiyelin tahmin ayrıntılarını görüntüleyin',
 );

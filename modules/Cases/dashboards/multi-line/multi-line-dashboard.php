@@ -98,7 +98,7 @@ return [
                         [
                             'view' => [
                                 'type' => 'dashablerecord',
-                                'module' => 'Cases',
+                                'module' => 'Accounts',
                                 'tabs' => [
                                     [
                                         'module' => 'Accounts',
@@ -174,6 +174,18 @@ return [
                                                     'acl_action' => 'create',
                                                     'acl_module' => 'Notes',
                                                 ],
+                                                [
+                                                    'type' => 'dashletaction',
+                                                    'action' => 'createRecord',
+                                                    'params' => [
+                                                        'link' => 'messages',
+                                                        'module' => 'Messages',
+                                                    ],
+                                                    'label' => 'LBL_CREATE_MESSAGE',
+                                                    'icon' => 'fa-comment',
+                                                    'acl_action' => 'create',
+                                                    'acl_module' => 'Messages',
+                                                ],
                                             ],
                                         ],
                                         [
@@ -194,6 +206,12 @@ return [
                                                     'type' => 'dashletaction',
                                                     'action' => 'reloadData',
                                                     'label' => 'LBL_DASHLET_REFRESH_LABEL',
+                                                ],
+                                                [
+                                                    'type' => 'dashletaction',
+                                                    'action' => 'removeClicked',
+                                                    'label' => 'LBL_DASHLET_REMOVE_LABEL',
+                                                    'name' => 'remove_button',
                                                 ],
                                             ],
                                         ],

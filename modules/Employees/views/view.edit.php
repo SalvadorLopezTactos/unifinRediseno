@@ -71,7 +71,11 @@ class EmployeesViewEdit extends ViewEdit {
                 $userSrn = $srnManager->createUserSrn($tenantSrn->getTenantId(), $this->bean->id);
                 $msg = sprintf(
                     translate('LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER', 'Users'),
-                    $idpConfig->buildCloudConsoleUrl('userProfile', [Srn\Converter::toString($userSrn)])
+                    $idpConfig->buildCloudConsoleUrl(
+                        'userProfile',
+                        [Srn\Converter::toString($userSrn)],
+                        $GLOBALS['current_user']->id
+                    )
                 );
             } else {
                 $msg = translate('LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER', 'Users');

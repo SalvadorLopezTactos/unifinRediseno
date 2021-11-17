@@ -13,6 +13,11 @@
 $mod_strings = array (
   // Dashboard Names
   'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Adresatų sąrašų sąrašo ataskaitų sritis',
+  'LBL_PROSPECT_LISTS_RECORD_DASHBOARD' => 'Adresatų sąrašų įrašo ataskaitų sritis',
+  'LBL_PROSPECTS_LISTS_FOCUS_DRAWER_DASHBOARD' => '„Focus Drawer“ adresatų sąrašai',
+  'LBL_RELATED_ACCOUNTS' => 'Susijusios paskyros',
+  'LBL_RELATED_CONTACTS' => 'Susiję kontaktai',
+  'LBL_RELATED_LEADS_TARGETS' => 'Susiję potencialūs kontaktai ir adresatai',
 
   'LBL_MODULE_NAME' => 'Adresatų sąrašai',
   'LBL_MODULE_NAME_SINGULAR' => 'Adresatų sąrašas',

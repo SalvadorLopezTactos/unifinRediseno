@@ -13,6 +13,7 @@ $mod_strings = array (
     // Dashboard Names
     'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Knowledge Base List Dashboard',
     'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Knowledge Base Record Dashboard',
+    'LBL_KBCONTENTS_FOCUS_DRAWER_DASHBOARD' => 'Knowledge Base Focus Drawer',
 
     'LBL_MODULE_NAME' => 'Knowledge Base',
     'LBL_MODULE_NAME_SINGULAR' => 'Knowledge Base Article',
@@ -55,10 +56,6 @@ $mod_strings = array (
     'LBL_NOT_USEFUL' => 'Not Useful',
     'LBL_RATING' => 'Rating',
     'LBL_VIEWED_COUNT' => 'View Count',
-    'LBL_DOWNLOAD_ALL' => 'Download All',
-    'LBL_DOWNLOAD_ONE' => 'Download',
-    'LBL_ATTACHMENTS' => 'Attachments:',
-    'LBL_ADD_ATTACHMENT' => 'Browse',
     'LBL_CATEGORIES' => 'Knowledge Base Categories',
     'LBL_CATEGORY_NAME' => 'Category',
     'LBL_USEFULNESS' => 'Usefulness',

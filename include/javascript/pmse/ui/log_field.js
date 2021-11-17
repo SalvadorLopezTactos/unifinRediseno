@@ -143,13 +143,15 @@ LogField.prototype.createHTML = function () {
     detailDiv.appendChild(logPicture);
 
     newsItem = this.createHTMLElement('p');
-//    fieldLabel.className = 'adam-form-label';
 
     if (this.showUser) {
-        newsItem.innerHTML = '<strong>' + this.user + '</strong> ';
+        const userName = this.createHTMLElement('strong');
+        userName.innerText = this.user;
+        newsItem.appendChild(userName);
     }
-    newsItem.innerHTML += this.label;
-    //fieldLabel.style.verticalAlign = 'top';
+    labelSpan = this.createHTMLElement('span');
+    labelSpan.innerHTML =  ' ' + this.label;
+    newsItem.appendChild(labelSpan);
     newsItem.style.marginLeft = this.marginLeft + 'px';
     newsItem.style.display = "block";
     detailDiv.appendChild(newsItem);
