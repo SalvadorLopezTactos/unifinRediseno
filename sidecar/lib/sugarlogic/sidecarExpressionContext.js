@@ -1178,12 +1178,13 @@ SUGAR.forms.Dependency.prototype.fire = function(undo)
                 // as it's possible the context's model will change before this
                 // event triggers
                 if (this.testOnLoad && action.afterRender) {
-                    this.context.view.on('render', function() {
+					this.context.view.on('render', action.exec, action);
+                    /*this.context.view.on('render', function() {
                         var prevModel = action.context.model;
                         action.context.setModel(model);
                         action.exec();
                         action.context.setModel(prevModel);
-                    }, this);
+                    }, this);*/
                 }
             }
         }
