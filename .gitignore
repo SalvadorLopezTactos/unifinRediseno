@@ -26,3 +26,5 @@
 /custom/Extension/modules/*/Ext/Layoutdefs/orderMapping.php
 /custom/Extension/modules/*/Ext/LogicHooks/orderMapping.php
 /custom/Extension/modules/*/Ext/WirelessLayoutdefs/orderMapping.php
+/custom/Extension/modules/*/Ext/Administration/orderMapping.php
+/custom/Extension/modules/*/Ext/ScheduledTasks/orderMapping.php
