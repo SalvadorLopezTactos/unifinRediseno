@@ -1,45 +1,9 @@
 <?php
-// created: 2021-11-16 20:05:06
+// created: 2021-11-19 08:17:54
 $extensionOrderMap = array (
   'custom/Extension/modules/Opportunities/Ext/LogicHooks/asesor_operacion_hook.php' => 
   array (
     'md5' => 'a3a33f4443263876ed739b885c14a586',
-    'mtime' => 1636473105,
-    'is_override' => false,
-  ),
-  'custom/Extension/modules/Opportunities/Ext/LogicHooks/teamSetsLH.php' => 
-  array (
-    'md5' => '9883eb1ce29afb58c698484c8073e589',
-    'mtime' => 1636473105,
-    'is_override' => false,
-  ),
-  'custom/Extension/modules/Opportunities/Ext/LogicHooks/opp_anfexi_hook.php' => 
-  array (
-    'md5' => '2f2e996a592a9866b519f4a4bdb52b2b',
-    'mtime' => 1636473105,
-    'is_override' => false,
-  ),
-  'custom/Extension/modules/Opportunities/Ext/LogicHooks/opps_set_platform_audit.php' => 
-  array (
-    'md5' => 'efd1bb889af23e2bff3518c84f2e578d',
-    'mtime' => 1636473105,
-    'is_override' => false,
-  ),
-  'custom/Extension/modules/Opportunities/Ext/LogicHooks/opp_tasks.php' => 
-  array (
-    'md5' => '234d2800649a6f24ab11af8b4bd74959',
-    'mtime' => 1636473105,
-    'is_override' => false,
-  ),
-  'custom/Extension/modules/Opportunities/Ext/LogicHooks/condiciones_financieras.php' => 
-  array (
-    'md5' => '37c6cc339a3fe73a18e0021508a591fa',
-    'mtime' => 1636473105,
-    'is_override' => false,
-  ),
-  'custom/Extension/modules/Opportunities/Ext/LogicHooks/opp_hook_array.php' => 
-  array (
-    'md5' => '23911599130b2f7c0fa58e3773f42c6e',
     'mtime' => 1636473105,
     'is_override' => false,
   ),
@@ -49,9 +13,9 @@ $extensionOrderMap = array (
     'mtime' => 1636473105,
     'is_override' => false,
   ),
-  'custom/Extension/modules/Opportunities/Ext/LogicHooks/norli_logichooks.ext.php' => 
+  'custom/Extension/modules/Opportunities/Ext/LogicHooks/teamSetsLH.php' => 
   array (
-    'md5' => '9ddab8633bf43e7f02d9904ebcbb6242',
+    'md5' => '9883eb1ce29afb58c698484c8073e589',
     'mtime' => 1636473105,
     'is_override' => false,
   ),
@@ -61,9 +25,45 @@ $extensionOrderMap = array (
     'mtime' => 1636473105,
     'is_override' => false,
   ),
+  'custom/Extension/modules/Opportunities/Ext/LogicHooks/norli_logichooks.ext.php' => 
+  array (
+    'md5' => '9ddab8633bf43e7f02d9904ebcbb6242',
+    'mtime' => 1636473105,
+    'is_override' => false,
+  ),
   'custom/Extension/modules/Opportunities/Ext/LogicHooks/opp_hooks_notificaciones.php' => 
   array (
     'md5' => '8b0c8f13069d8bd8d6b919ef82d495c4',
+    'mtime' => 1636473105,
+    'is_override' => false,
+  ),
+  'custom/Extension/modules/Opportunities/Ext/LogicHooks/opp_hook_array.php' => 
+  array (
+    'md5' => '23911599130b2f7c0fa58e3773f42c6e',
+    'mtime' => 1636473105,
+    'is_override' => false,
+  ),
+  'custom/Extension/modules/Opportunities/Ext/LogicHooks/condiciones_financieras.php' => 
+  array (
+    'md5' => '37c6cc339a3fe73a18e0021508a591fa',
+    'mtime' => 1636473105,
+    'is_override' => false,
+  ),
+  'custom/Extension/modules/Opportunities/Ext/LogicHooks/opp_tasks.php' => 
+  array (
+    'md5' => '234d2800649a6f24ab11af8b4bd74959',
+    'mtime' => 1636473105,
+    'is_override' => false,
+  ),
+  'custom/Extension/modules/Opportunities/Ext/LogicHooks/opps_set_platform_audit.php' => 
+  array (
+    'md5' => 'efd1bb889af23e2bff3518c84f2e578d',
+    'mtime' => 1636473105,
+    'is_override' => false,
+  ),
+  'custom/Extension/modules/Opportunities/Ext/LogicHooks/opp_anfexi_hook.php' => 
+  array (
+    'md5' => '2f2e996a592a9866b519f4a4bdb52b2b',
     'mtime' => 1636473105,
     'is_override' => false,
   ),

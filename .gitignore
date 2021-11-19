@@ -13,4 +13,5 @@
 /.DS_Store
 /custom/modules/Connectors/metadata/connectors.php
 /custom/errores_reasignacion/*
-/custom/modules/Connectors/metadata/connectors.php
+*config.js
+/custom/Extension/modules/*/Ext/Vardefs/*orderMapping.php

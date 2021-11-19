@@ -1,5 +1,5 @@
 <?php
-// created: 2021-11-16 20:05:00
+// created: 2021-11-19 08:17:46
 $extensionOrderMap = array (
   'custom/Extension/modules/Documents/Ext/Language/cs_CZ.customminut_minutas_documents_1.php' => 
   array (
