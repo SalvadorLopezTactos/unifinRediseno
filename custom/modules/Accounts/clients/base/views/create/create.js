@@ -324,6 +324,10 @@
         if (App.user.attributes.puestousuario_c != 32 && App.user.attributes.puestousuario_c != 47) {
           this.$('div[data-name=tipo_proveedor_compras_c]').css("pointer-events", "none");
         }
+
+        //Oculta campos de Dynamics
+        $('[data-name="control_dynamics_365_c"]').hide();
+        $('[data-name="id_cpp_365_chk_c"]').hide();
     },
 
     initialize: function (options) {

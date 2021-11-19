@@ -1216,6 +1216,10 @@
         this.$("div[data-name='subsectoreconomico_c']").hide();
         this.$("div[data-name='actividadeconomica_c']").hide();
         this.$(".record-cell[data-name='blank_space']").hide();
+
+        //Oculta campos de Dynamics
+        $('[data-name="control_dynamics_365_c"]').hide();
+        $('[data-name="id_cpp_365_chk_c"]').hide();
     },
 
     editClicked: function () {
