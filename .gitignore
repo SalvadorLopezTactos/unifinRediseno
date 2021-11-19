@@ -15,8 +15,8 @@
 /custom/errores_reasignacion/*
 *config.js
 /custom/Extension/application/Ext/JSGroupings/orderMapping.php
-/custom/Extension/application/Ext/Include/orderMapping.php
 /custom/Extension/application/Ext/EntryPointRegistry/orderMapping.php
+/custom/Extension/application/Ext/Include/orderMapping.php
 /custom/Extension/modules/*/Ext/Vardefs/*orderMapping.php
 /custom/Extension/modules/*/Ext/Language/*orderMapping.php
 /custom/Extension/application/Ext/Language/*orderMapping.php
