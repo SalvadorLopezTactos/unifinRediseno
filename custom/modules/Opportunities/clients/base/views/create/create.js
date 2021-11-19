@@ -485,6 +485,8 @@
 
                 }, self),
             });
+        }else {
+            callback(null, fields, errors);
         }
     },
 
