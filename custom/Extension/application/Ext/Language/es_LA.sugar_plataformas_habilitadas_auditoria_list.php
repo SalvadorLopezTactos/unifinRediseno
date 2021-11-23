@@ -1,5 +1,5 @@
 <?php
- // created: 2021-10-26 09:52:03
+ // created: 2021-11-11 10:44:19
 
 $app_list_strings['plataformas_habilitadas_auditoria_list']=array (
   'unics' => 'Unics',
@@ -26,4 +26,5 @@ $app_list_strings['plataformas_habilitadas_auditoria_list']=array (
   'portalUniclick' => 'Portal UNICLICK',
   'quantico' => 'Quantico',
   'uni2Liberacion' => 'UNI2 LIBERACION',
+  'unionVita' => 'UNION VITA',
 );

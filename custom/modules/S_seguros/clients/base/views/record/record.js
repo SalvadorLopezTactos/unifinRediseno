@@ -89,7 +89,7 @@
     adDepartment: function() {
       var empid = this.model.get('user_id2_c');
 	  if(empid) {
-        app.api.call("read", app.api.buildURL("Employees/" + empid, null, null, {}), null, {
+        app.api.call("read", app.api.buildURL("Infouser/" + empid, null, null, {}), null, {
           success: _.bind(function (data) {
             this.model.set('departamento_c',data.no_empleado_c);
 		    if(data.puestousuario_c == 58) this.model.set('incentivo',15);
