@@ -56,13 +56,17 @@ class Task_Hooks
 			$account = BeanFactory::getBean('Accounts', $bean->parent_id);
 			$userl = BeanFactory::getBean('Users', $account->user_id_c);
 			$userf = BeanFactory::getBean('Users', $account->user_id1_c);
-			if(!empty($userl->email1) && !empty($userf->email1)) {
+			if(!empty($userl->email1) || !empty($userf->email1)) {
 				$correos=array();
 				$nombres=array();
-				array_push($correos,$userl->email1);
-				array_push($nombres,$userl->nombre_completo_c);
-				array_push($correos,$userf->email1);
-				array_push($nombres,$userf->nombre_completo_c);
+				if(!empty($userl->email1)) {
+					array_push($correos,$userl->email1);
+					array_push($nombres,$userl->nombre_completo_c);
+				}
+				if(!empty($userf->email1)) {
+					array_push($correos,$userf->email1);
+					array_push($nombres,$userf->nombre_completo_c);
+				}
 				$fechas = new DateTime($bean->date_due);
 				$fecha = $fechas->format('d/m/Y');
 				$users = BeanFactory::getBean('Users', $bean->created_by);
@@ -152,13 +156,17 @@ class Task_Hooks
 				$account = BeanFactory::getBean('Accounts', $bean->parent_id);
 				$userl = BeanFactory::getBean('Users', $account->user_id_c);
 				$userf = BeanFactory::getBean('Users', $account->user_id1_c);
-				if(!empty($userl->email1) && !empty($userf->email1)) {
+				if(!empty($userl->email1) || !empty($userf->email1)) {
 					$correos=array();
 					$nombres=array();
-					array_push($correos,$userl->email1);
-					array_push($nombres,$userl->nombre_completo_c);
-					array_push($correos,$userf->email1);
-					array_push($nombres,$userf->nombre_completo_c);
+					if(!empty($userl->email1)) {
+						array_push($correos,$userl->email1);
+						array_push($nombres,$userl->nombre_completo_c);
+					}
+					if(!empty($userf->email1)) {
+						array_push($correos,$userf->email1);
+						array_push($nombres,$userf->nombre_completo_c);
+					}
 					$cuerpoHTML=$this->bodyNotificacionUpdate($bean,$linkTarea,$campos_modificados);
 					$this->enviaNotificaion("Actualización Tarea CAC: ".$bean->name,$cuerpoHTML,$correos,$nombres);
 				}
