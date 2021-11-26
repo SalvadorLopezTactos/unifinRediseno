@@ -1,7 +1,7 @@
 /**
  * Created by salvadorlopez salvador.lopez@tactos.com.mx
  */
- ({
+({
     events: {
         'click #btn_Buscar_bl': 'cargarBacklogsGestionButton',
         'change .monto_prospecto': 'calculaMonto',
@@ -59,6 +59,8 @@
 
     _render: function () {
         this._super("_render");
+        //Formato de DataTable para ocultar paginación, busqueda y filtro - tambien deshabilita las columnas con la clase no-sort seleccionadas para el ordenamiento asc y desc
+        $('#dtAdminBacklog').DataTable({ "bPaginate": false, "bFilter": false, "bInfo": false, "aoColumnDefs":[{"bSortable":false,"aTargets":["no-sort"]}] });
     },
 
     loadData: function (options) {
@@ -312,17 +314,23 @@
     calculaMonto: function (e) {
 
         //FORMATO MONEDA DE LOS CAMPOS DE MONTO
-        var formatoMontoProspecto = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_prospecto"]').val().replaceAll(",","")).toLocaleString('es-MX');
-        var formatoMontoCredito = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_credito"]').val().replaceAll(",","")).toLocaleString('es-MX');
-        var formatoMontoRechazado = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_rechazado"]').val().replaceAll(",","")).toLocaleString('es-MX');
-        var formatoMontoSinSolicitud = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_sin_solicitud"]').val().replaceAll(",","")).toLocaleString('es-MX');        
-        var formatoMontoConSolicitud = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_con_solicitud"]').val().replaceAll(",","")).toLocaleString('es-MX');
+        var formatoMontoProspecto = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_prospecto"]').val().replaceAll(",", "")).toLocaleString('es-MX');
+        var formatoMontoCredito = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_credito"]').val().replaceAll(",", "")).toLocaleString('es-MX');
+        var formatoMontoRechazado = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_rechazado"]').val().replaceAll(",", "")).toLocaleString('es-MX');
+        var formatoMontoSinSolicitud = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_sin_solicitud"]').val().replaceAll(",", "")).toLocaleString('es-MX');
+        var formatoMontoConSolicitud = Number($(e.currentTarget).parent().parent().parent().find('[data-field="monto_con_solicitud"]').val().replaceAll(",", "")).toLocaleString('es-MX');
         //SETEA EL MONTO CON EL FORMATO DE MONEDA
         $(e.currentTarget).parent().parent().parent().find('[data-field="monto_prospecto"]').val(formatoMontoProspecto);
         $(e.currentTarget).parent().parent().parent().find('[data-field="monto_credito"]').val(formatoMontoCredito);
         $(e.currentTarget).parent().parent().parent().find('[data-field="monto_rechazado"]').val(formatoMontoRechazado);
         $(e.currentTarget).parent().parent().parent().find('[data-field="monto_sin_solicitud"]').val(formatoMontoSinSolicitud);
         $(e.currentTarget).parent().parent().parent().find('[data-field="monto_con_solicitud"]').val(formatoMontoConSolicitud);
+        //SETEA LOS VALORES DE LOS MONTOS A NIVEL SPAN
+        $(e.currentTarget).parent().parent().parent().find('[data-field="span_monto_prospecto"]').text(formatoMontoProspecto);
+        $(e.currentTarget).parent().parent().parent().find('[data-field="span_monto_credito"]').text(formatoMontoCredito);
+        $(e.currentTarget).parent().parent().parent().find('[data-field="span_monto_rechazado"]').text(formatoMontoRechazado);
+        $(e.currentTarget).parent().parent().parent().find('[data-field="span_monto_sin_solicitud"]').text(formatoMontoSinSolicitud);
+        $(e.currentTarget).parent().parent().parent().find('[data-field="span_monto_con_solicitud"]').text(formatoMontoConSolicitud);
 
         //Obtiene valor y se lo suma al monto
         //var valorActual=$(e.currentTarget).val();
@@ -331,7 +339,7 @@
 
         for (let index = 0; index < campos_con_montos.length; index++) {
             if (campos_con_montos.eq(index).val() != "") {
-                suma += parseFloat(campos_con_montos.eq(index).val().replaceAll(",",""));
+                suma += parseFloat(campos_con_montos.eq(index).val().replaceAll(",", ""));
             }
         }
         var formatoMontoTotal = suma.toLocaleString('es-MX');
@@ -340,11 +348,11 @@
         if ($(e.currentTarget).parent().parent().parent().find('[name="actualizado"]').val() == "") {
 
             var etapa = $(e.currentTarget).parent().parent().parent().find('[data-field="etapa_c"]').val();
-            var monto_prospecto = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_prospecto"]').val().replaceAll(",","");
-            var monto_credito = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_credito"]').val().replaceAll(",","");
-            var monto_rechazado = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_rechazado"]').val().replaceAll(",","");
-            var monto_sin_solicitud = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_sin_solicitud"]').val().replaceAll(",","");
-            var monto_con_solicitud = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_con_solicitud"]').val().replaceAll(",","");
+            var monto_prospecto = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_prospecto"]').val().replaceAll(",", "");
+            var monto_credito = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_credito"]').val().replaceAll(",", "");
+            var monto_rechazado = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_rechazado"]').val().replaceAll(",", "");
+            var monto_sin_solicitud = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_sin_solicitud"]').val().replaceAll(",", "");
+            var monto_con_solicitud = $(e.currentTarget).parent().parent().parent().find('[data-field="monto_con_solicitud"]').val().replaceAll(",", "");
             var comentarios = $(e.currentTarget).parent().parent().parent().find('[data-field="comentarios"]').val();
             var probabilidad = $(e.currentTarget).parent().parent().parent().find('[data-field="probabilidad"]').val();
             var concat = etapa + monto_prospecto + monto_credito + monto_rechazado + monto_sin_solicitud + monto_con_solicitud + comentarios + probabilidad;
@@ -380,7 +388,7 @@
     },
 
     calculaBLEstimado: function (e) {
-        var valorMonto = $(e.currentTarget).parent().parent().parent().find('.montoTotal').val().replaceAll(",","");
+        var valorMonto = $(e.currentTarget).parent().parent().parent().find('.montoTotal').val().replaceAll(",", "");
         var valorProbabilidad = $(e.currentTarget).parent().parent().parent().find('.probabilidad').val();
 
         if (valorProbabilidad < 0 || valorProbabilidad > 100) {
@@ -404,7 +412,7 @@
 
         //Una vez actualizado el monto, se calcula también el rango
         if ($(e.currentTarget).attr("name") == 'monto') {
-            var rango = this.calculaRango($(e.currentTarget).val().replaceAll(",",""));
+            var rango = this.calculaRango($(e.currentTarget).val().replaceAll(",", ""));
             if (rango != null) {
                 var lista_rangos = app.lang.getAppListStrings('rango_bl_list');
                 $(e.currentTarget).parent().parent().parent().find('[name="rangoBL"]').val(lista_rangos[rango]);
@@ -458,15 +466,15 @@
 
             var id_bl = $(this).attr("data-id");
             var etapa = $(this).find("select.etapa_c").val();
-            var monto_prospecto = $(this).find(".monto_prospecto").val().replaceAll(",","");
-            var monto_credito = $(this).find(".monto_credito").val().replaceAll(",","");
-            var monto_rechazado = $(this).find(".monto_rechazado").val().replaceAll(",","");
-            var monto_sin_solicitud = $(this).find(".monto_sin_solicitud").val().replaceAll(",","");
-            var monto_con_solicitud = $(this).find(".monto_con_solicitud").val().replaceAll(",","");
-            var monto = $(this).find(".montoTotal").val().replaceAll(",","");
+            var monto_prospecto = $(this).find(".monto_prospecto").val().replaceAll(",", "");
+            var monto_credito = $(this).find(".monto_credito").val().replaceAll(",", "");
+            var monto_rechazado = $(this).find(".monto_rechazado").val().replaceAll(",", "");
+            var monto_sin_solicitud = $(this).find(".monto_sin_solicitud").val().replaceAll(",", "");
+            var monto_con_solicitud = $(this).find(".monto_con_solicitud").val().replaceAll(",", "");
+            var monto = $(this).find(".montoTotal").val().replaceAll(",", "");
             var comentarios = $(this).find(".comentarios").val();
             var probabilidad = $(this).find(".probabilidad").val();
-            var bl_estimado = $(this).find(".blEstimado").val().replaceAll(",","");
+            var bl_estimado = $(this).find(".blEstimado").val().replaceAll(",", "");
             var tipo = $(this).find(".tipo").html();
             var rango = $(this).find(".rango_bl").attr('data-id');
             var concat = etapa + monto_prospecto + monto_credito + monto_rechazado + monto_sin_solicitud + monto_con_solicitud + comentarios + probabilidad;
@@ -507,6 +515,9 @@
 
         if (lista_peticiones.length > 0) {
 
+            var num_peticiones = lista_peticiones.length;
+            var num_peticion_actual = 0;
+
             for (var peticion_actual = 0; peticion_actual < lista_peticiones.length; peticion_actual++) {
 
                 app.alert.show('save-Backlog', {
@@ -518,6 +529,8 @@
                 app.api.call('create', app.api.buildURL('bulk', null, null, lista_peticiones[peticion_actual]), null, {
                     success: _.bind(function (data) {
 
+                        num_peticion_actual++;
+
                         app.alert.dismiss('save-Backlog');
 
                         app.alert.show('backlogs_actualizados_correctos', {
@@ -526,11 +539,13 @@
                             autoClose: true
                         });
 
-                        //self.cargarBacklogsGestionButton();
+                        if (num_peticiones == num_peticion_actual) {
+                            self.cargarBacklogsGestionButton();
 
-                        $('#processingGuardar').hide();
-                        $('#btn_guardar').removeAttr("disabled");
-                        $('#btn_actualizar_valores_masivo').removeAttr("disabled");
+                            $('#processingGuardar').hide();
+                            $('#btn_guardar').removeAttr("disabled");
+                            $('#btn_actualizar_valores_masivo').removeAttr("disabled");
+                        }
 
                     }, self)
                 });
