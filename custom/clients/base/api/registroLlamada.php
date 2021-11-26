@@ -24,33 +24,38 @@ class registroLlamada extends SugarApi
         $Cuentas = new SugarQuery();
         $Cuentas->select(array('id'));
         $Cuentas->from(BeanFactory::getBean('Accounts'), array('team_security' => false));
-		$Cuentas->where()->equals('id', $args['idCRM']);
+	      $Cuentas->where()->equals('id', $args['idCRM']);
         $result1 = $Cuentas->execute();
         if(empty($result1[0]['id'])) {
-			//Busca Lead
-			$Leads = new SugarQuery();
-			$Leads->select(array('id','account_id'));
-			$Leads->from(BeanFactory::getBean('Leads'), array('team_security' => false));
-			$Leads->where()->equals('id', $args['idCRM']);
-			$result2 = $Leads->execute();
-			if(empty($result2[0]['id'])) {
-				$respuesta = 'El valor del idCRM es incorrecto';
-			}
-			else {
-				$tipo = 'Leads';
-			}
-		}
-		else {
-			$tipo = 'Accounts';
-		}
+          //Busca Lead
+    			$Leads = new SugarQuery();
+    			$Leads->select(array('id','account_id','compania_c'));
+    			$Leads->from(BeanFactory::getBean('Leads'), array('team_security' => false));
+    			$Leads->where()->equals('id', $args['idCRM']);
+    			$result2 = $Leads->execute();
+    			if(empty($result2[0]['id'])) {
+    				$respuesta = 'El valor del idCRM es incorrecto';
+    			} else {
+    				$tipo = 'Leads';
+            $compania = $result2[0]['compania_c'];
+            $cuentaPadre = $result2[0]['account_id'];
+    			}
+    		} else {
+			    $tipo = 'Accounts';
+        }
 		if($args['tipo'] != 'Accounts' && $args['tipo'] != 'Leads') $respuesta = 'El valor del tipo es incorrecto';
 		if(empty($respuesta)) {
 			//Busca Llamada Planificada de hoy
 			$Llamadas = new SugarQuery();
 			$Llamadas->select(array('id', 'date_entered', 'parent_id', 'status', 'tct_union_c', 'assigned_user_id'));
 			$Llamadas->from(BeanFactory::getBean('Calls'), array('team_security' => false));
-			$Llamadas->where()->dateBetween('date_entered', array(date("Y-m-d"),date("Y-m-d")));
-			$Llamadas->where()->equals('parent_id', $args['idCRM']);
+			//$Llamadas->where()->dateBetween('date_entered', array(date("Y-m-d"),date("Y-m-d")));
+      $Llamadas->where()->dateRange('date_entered','today');
+      if($tipo == 'Accounts'){
+          $Llamadas->where()->equals('parent_id', $args['idCRM']);
+      }else{
+          $Llamadas->where()->queryOr()->equals('parent_id',$args['idCRM'])->equals('parent_id',$cuentaPadre);
+      }
 			$Llamadas->where()->equals('status', 'Planned');
 			$Llamadas->where()->equals('tct_union_c', 1);
 			$resultado = $Llamadas->execute();
@@ -58,7 +63,9 @@ class registroLlamada extends SugarApi
 				//Busca Agente Telefónico
 				require_once("custom/clients/base/api/GetAgenteCP.php");
 				$apiAgente = new GetAgenteCP();
-				$response = $apiAgente->getAgenteTelCP(null,null);
+        $params=[];
+        $params['compania'] = $compania;
+				$response = $apiAgente->getAgenteTelCP(null,$params);
 				$agente = $response['idAsesor'];
 				//Crea Llamada
 				$bean_Call = BeanFactory::newBean('Calls');
