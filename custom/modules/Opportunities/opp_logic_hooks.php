@@ -60,7 +60,7 @@ SQL;
                 $result = $db->query($query);
                 $row = $db->fetchByAssoc($result);
                 $count = $row['total'];
-                //$GLOBALS['log']->fatal("Multiliena valores " .$count . " ll ".$multilinea);
+                $GLOBALS['log']->fatal("Consulta Oportunidades: " .$query);
 
                 if ($count > 0) {
                     require_once 'include/api/SugarApiException.php';

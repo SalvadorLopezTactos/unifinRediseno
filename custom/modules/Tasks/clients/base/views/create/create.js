@@ -360,7 +360,7 @@
                 var opciones_full=app.lang.getAppListStrings('tipo_tarea_list');
                 //Cuando es Cliente Perdido, solo se muestra la Opción de Oportunidad Recuperación
                 Object.keys(opciones_full).forEach(function (key) {
-                    if (key != "CAC Oportunidad Recuperacion") {
+                    if (key != "CAC Oportunidad Recuperacion" && key != "CAC Informativa") {
                         delete opciones_full[key];
                     }
                 });
