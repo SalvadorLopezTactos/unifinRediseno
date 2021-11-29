@@ -76,7 +76,7 @@ class Task_Hooks
 				$linkTarea=$GLOBALS['sugar_config']['site_url'].'/#Tasks/'.$bean->id;
 				$linkCuenta=$GLOBALS['sugar_config']['site_url'].'/#Accounts/'.$account->id;
 				$envio_usuarios_especificos=0;
-				if($account->user_id_c == $bean->assigned_user_id) {
+				if($account->user_id_c == $bean->assigned_user_id || $account->user_id1_c == $bean->assigned_user_id) {
 					$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Se le informa que se le ha asignado una nueva tarea con la siguiente información:
 					<br><br>Asunto: <b><a id="linkTarea" href="'.$linkTarea.'">'.$bean->name.'</a></b>
 					<br><br>Cuenta: <b><a id="linkCuenta" href="'.$linkCuenta.'">'.$account->name.'</a></b>
