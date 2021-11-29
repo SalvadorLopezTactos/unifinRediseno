@@ -540,7 +540,7 @@
         if(this.flagSeleccionados==1){
             this.seleccionados=this.full_cuentas;
         }
-        if(!_.isEmpty(reAssignarA)) {
+        if(!_.isEmpty(reAssignarA) && !_.isEmpty(promoActual)) {
 
             //Comprobando que el asesor seleccionado destino, no tengo más de 20 registros asignados a el
             var id_user=reAssignarA;
@@ -634,7 +634,7 @@
 
         }else{
             var alertOptions = {
-                title: "Por favor, seleccione un asesor Destino",
+                title: "Por favor, seleccione tanto el Asesor Actual como el Asesor Destino",
                 level: "error"
             };
             app.alert.show('validation', alertOptions);

@@ -31,7 +31,7 @@ class OpportunityLogic
             global $db;
             $cliente = $bean->account_id;
             $tipo = $bean->tipo_producto_c;
-$FINACIERO=$bean->producto_financiero_c;
+			$FINACIERO=$bean->producto_financiero_c;
 
             $beanCuenta = BeanFactory::retrieveBean('Accounts', $cliente, array('disable_row_level_security' => true));
 
@@ -54,7 +54,7 @@ SQL;
             if ($respuesta == 0 || $respuesta == false) {
 
                 $query = "select count(*) as total from opportunities a, opportunities_cstm b, accounts_opportunities c
-     where a.id = b.id_c and a.id = c.opportunity_id and a.deleted = 0 and c.account_id = '$cliente'
+     where a.id = b.id_c and a.id = c.opportunity_id and a.deleted = 0 and c.account_id = '$cliente' and a.id <> '$bean->id'
      and b.tct_etapa_ddw_c = 'SI' and isnull(b.estatus_c) and b.tipo_producto_c = '$tipo' and b.producto_financiero_c='$FINACIERO'";
 
                 $result = $db->query($query);
