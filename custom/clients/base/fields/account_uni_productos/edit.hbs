@@ -561,14 +561,16 @@
                             </div>
                         </td>
                         <td width="33%">
-                            <div class="ca_nv_razon_ni ">
+                            <div class="ca_nv_razon_ni">
                                 <label class="record-label mpad" style="margin-left:0px">Razón No se encuentra interesado</label>
                                 <select class="row-fluid select2 list_ca_nv_razon_ni" data-field="list_ca_nv_razon_ni">
 									{{#each tct_razon_ni_l_ddw_c_list}}
-									<option value="{{@key}}" {{ifSelected @key
-																			../ResumenProductos.credito_auto.no_viable_razon_ni}}>{{this}}</option>
-									{{/each}}
+                                        <option value="{{@key}}" {{ifSelected @key
+                                                                                ../ResumenProductos.credito_auto.no_viable_razon_ni}}>{{this}}</option>
+                                    {{/each}}
 								</select>
+                                <br>
+                                
                             </div>
                         </td>
                     </tr>
