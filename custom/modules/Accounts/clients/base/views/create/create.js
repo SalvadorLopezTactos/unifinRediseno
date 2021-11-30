@@ -324,6 +324,10 @@
         if (App.user.attributes.puestousuario_c != 32 && App.user.attributes.puestousuario_c != 47) {
           this.$('div[data-name=tipo_proveedor_compras_c]').css("pointer-events", "none");
         }
+
+        //Oculta campos de Dynamics
+        $('[data-name="control_dynamics_365_c"]').hide();
+        $('[data-name="id_cpp_365_chk_c"]').hide();
     },
 
     initialize: function (options) {
@@ -608,8 +612,14 @@
          new_options["Cliente"]="Cliente";
          }*/
 
+        if(Object.keys(new_options).length==0){
+            new_options[""]="";
+         }
         this.model.fields['tipo_registro_cuenta_c'].options = new_options;
-        if(Object.keys(new_options).length == 0) alert("No es posible crear Cuentas");
+        if(Object.keys(new_options).length == 1 && new_options[""]==""){
+            alert("No es posible crear Cuentas");
+            this.model.set("tipo_registro_cuenta_c","");
+        }
 
         //this.model.on('change:name', this.cleanName, this);
         /*

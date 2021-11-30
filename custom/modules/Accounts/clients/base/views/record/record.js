@@ -308,7 +308,7 @@
         this.model.addValidationTask('CreditAutoUP', _.bind(this.requeridosCAUP, this));
         this.model.addValidationTask('FleetUP', _.bind(this.requeridosFleetUP, this));
         this.model.addValidationTask('UniclickUP', _.bind(this.requeridosUniclickUP, this));
-        //this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
+        this.model.addValidationTask('UniclickCanal', _.bind(this.requeridosUniclickCanal, this));
         this.model.addValidationTask('tipo_proveedor_compras', _.bind(this.tipoProveedor, this));
         //this.model.addValidationTask('clean_name', _.bind(this.cleanName, this));
 		//Funcion para que se pueda o no editar el check de Alianza SOC
@@ -1216,6 +1216,10 @@
         this.$("div[data-name='subsectoreconomico_c']").hide();
         this.$("div[data-name='actividadeconomica_c']").hide();
         this.$(".record-cell[data-name='blank_space']").hide();
+
+        //Oculta campos de Dynamics
+        $('[data-name="control_dynamics_365_c"]').hide();
+        $('[data-name="id_cpp_365_chk_c"]').hide();
     },
 
     editClicked: function () {
@@ -1994,7 +1998,7 @@
         // this.context.on('button:save_button:click', this.borraTel, this);
         //this.context.on('button:prospecto_contactado:click',this.validaContactado, this);  //se añade validación para validar campos al convertir prospecto contactado.
         this.context.on('button:convierte_lead:click', this.validalead, this);
-        //this.context.on('button:dynamics_button:click', this.requestDynamics, this);
+        this.context.on('button:dynamics_button:click', this.requestDynamics, this);
 
 
     },

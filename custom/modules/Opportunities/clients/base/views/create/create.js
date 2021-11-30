@@ -448,42 +448,46 @@
         var userprodprin = this.model.get('tipo_producto_c');
         var textmsg = "";
         var tipom = "";
+        if (this.model.get('account_id')!=undefined){
 
-        app.api.call('GET', app.api.buildURL('Accounts/' + this.model.get('account_id')), null, {
-            success: _.bind(function (cuenta) {
+            app.api.call('GET', app.api.buildURL('Accounts/' + this.model.get('account_id')), null, {
+                success: _.bind(function (cuenta) {
 
-                app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + cuenta.id), null, {
-                    success: function (data) {
-                        Productos = data;
-                        //ResumenProductos = Productos;
-                        //estatus_atencion - tipo_producto_c
-                        _.each(Productos, function (value, key) {
-                            var tipoProducto = Productos[key].tipo_producto;
-                            var statusProducto = Productos[key].status_management_c;
-                            if (tipoProducto == userprodprin && statusProducto == '3') {
-                                textmsg = 'La cuenta está marcada como <b>Cancelada</b>. Active la cuenta para continuar.';
-                                tipom = "error";
-                            }
-                        });
-                        if (textmsg != "") {
-                            App.alert.show("producto_cancelado", {
-                                level: tipom,
-                                messages: textmsg,
-                                autoClose: false
+                    app.api.call('GET', app.api.buildURL('GetProductosCuentas/' + cuenta.id), null, {
+                        success: function (data) {
+                            Productos = data;
+                            //ResumenProductos = Productos;
+                            //estatus_atencion - tipo_producto_c
+                            _.each(Productos, function (value, key) {
+                                var tipoProducto = Productos[key].tipo_producto;
+                                var statusProducto = Productos[key].status_management_c;
+                                if (tipoProducto == userprodprin && statusProducto == '3') {
+                                    textmsg = 'La cuenta está marcada como <b>Cancelada</b>. Active la cuenta para continuar.';
+                                    tipom = "error";
+                                }
                             });
-                            errors['tipo_producto_c'] = "cuenta cancelada";
-                            errors['tipo_producto_c'].required = true;
-                            /****************************************/
+                            if (textmsg != "") {
+                                App.alert.show("producto_cancelado", {
+                                    level: tipom,
+                                    messages: textmsg,
+                                    autoClose: false
+                                });
+                                errors['tipo_producto_c'] = "cuenta cancelada";
+                                errors['tipo_producto_c'].required = true;
+                                /****************************************/
+                            }
+                            callback(null, fields, errors);
+                        },
+                        error: function (e) {
+                            throw e;
                         }
-                        callback(null, fields, errors);
-                    },
-                    error: function (e) {
-                        throw e;
-                    }
-                });
+                    });
 
-            }, self),
-        });
+                }, self),
+            });
+        }else {
+            callback(null, fields, errors);
+        }
     },
 
     /*
