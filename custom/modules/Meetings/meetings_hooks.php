@@ -692,24 +692,35 @@ class Meetings_Hooks
 
     function ConvierteLead($bean, $event, $arguments)
     {
+      global $app_list_strings;
  			$parent_id = $bean->parent_id;
       $parentType = $bean->parent_type;
 
       $GLOBALS['log']->fatal('Estatus: ' .$bean->status);
-      $GLOBALS['log']->fatal(' $parentType: ' . $parentType);
-      $GLOBALS['log']->fatal(' $resultado_c: ' . $bean->resultado_c);
+      $GLOBALS['log']->fatal('$parentType: ' . $parentType);
+      $GLOBALS['log']->fatal('$resultado_c: ' . $bean->resultado_c);
 
-		  if($bean->status == "Held" && $parentType == 'Leads') {
-        $GLOBALS['log']->fatal('Entro conversión');
-        require_once("custom/clients/base/api/check_duplicateAccounts.php");
-        $filter_arguments = array("id" => $parent_id);
-        $callApi = new check_duplicateAccounts();
-        $convert = $callApi->validation_process(null,$filter_arguments);
-		    $beanLead = BeanFactory::getBean('Leads', $parent_id);
-   			$beanLead->description = $convert["mensaje"];
-  			$beanLead->save();
-		  }
+      $resultMeetConvert = $app_list_strings['convertir_result_reunion_list'];
+      $listMeetConvert = array();
+      foreach ($resultMeetConvert as $key => $value){
+        $listMeetConvert[] = $key;        
+      }
+      
+      if (in_array($bean->resultado_c, $listMeetConvert)) {
+        
+        if($bean->status == "Held" && $parentType == 'Leads') {
+          $GLOBALS['log']->fatal('Entro conversión');
+          require_once("custom/clients/base/api/check_duplicateAccounts.php");
+          $filter_arguments = array("id" => $parent_id);
+          $callApi = new check_duplicateAccounts();
+          $convert = $callApi->validation_process(null,$filter_arguments);
+          $beanLead = BeanFactory::getBean('Leads', $parent_id);
+          $beanLead->description = $convert["mensaje"];
+          $beanLead->save();
+        }
+      }
 	  }
+
     function InfoMeet($bean = null, $event = null, $args = null)
     {
 
