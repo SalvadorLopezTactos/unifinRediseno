@@ -8,7 +8,7 @@
 $dependencies['Leads']['metodo_asignacion_lm_c'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('metodo_asignacion_lm_c'),
+    'triggerFields' => array('id','metodo_asignacion_lm_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -21,11 +21,10 @@ $dependencies['Leads']['metodo_asignacion_lm_c'] = array(
     ),
 );
 
-
 $dependencies['Leads']['omite_match_c'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('omite_match_c'),
+    'triggerFields' => array('id','omite_match_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -38,4 +37,23 @@ $dependencies['Leads']['omite_match_c'] = array(
         ),
     ),
 );
+
+
+$dependencies['Leads']['homonimo_c'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('id','homonimo_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetVisibility',
+            'params' => array(
+                'target' => 'homonimo_c',
+                'label'=>'LBL_OMITE_MATCH',
+                'value' => 'true',
+            ),
+        ),
+    ),
+);
+
 
