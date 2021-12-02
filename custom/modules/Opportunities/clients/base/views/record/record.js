@@ -31,7 +31,7 @@
         //$('[data-name="opportunities_directores"]').hide();
         //$('[data-name="vobo_descripcion_txa_c"]').hide();
         //$('[data-name="doc_scoring_chk_c"]').hide();
-		
+
         //Contexto para exlcuir_check
         banderaExcluye = this;
         banderaExcluye.check = [];
@@ -104,7 +104,7 @@
         */
         this.model.on('sync', this.ocultynoedit, this);
         //this.model.on('sync', this.disable_panels_team, this);
-        this.model.on('sync', this.getcfRI, this);
+        //this.model.on('sync', this.getcfRI, this);
         this.model.on('sync', this.validaetiquetas, this);
         //Funcion para solo habilitar edicion en campo asesor RM de la solicitud
         this.model.on('sync', this.validaRM, this);
@@ -128,7 +128,7 @@
         this.model.on('sync', this.fulminantcolor, this);
 
         //Recupera datos para custom fields
-        this.getcf();
+        //this.getcf();
 
         //Se habilitan mensajes de informacion cuando la solicitud es de Credito SOS
         this.model.on('sync', this.mensajessos, this);
@@ -156,14 +156,14 @@
         //this.adminUserCartera();
 		//VALIDA EL MONTO DEL TIPO DE PRODUCTO TARJETA DE CREDITO QUE NO SUPERE EL CONTROL DEL MONTO
         this.model.addValidationTask('validaMontoCreditCard', _.bind(this.validaMontoCreditCard, this));
-        
+
 	/*************** validacion SOC ****************/
 		//this.model.on('sync', this.SOCInicio, this);
 		//this.model.on("change:alianza_soc_chk_c", _.bind(this.SOCflag, this));
 		//this.events['click a[name=alianza_soc_chk_c]'] = 'SOCflag';
 		this.model.addValidationTask('validacionSOC', _.bind(this.validacionSOC, this));
 	/***********************************************/
-		
+
     },
 
     fulminantcolor: function () {
@@ -608,7 +608,7 @@
             //TIPO DE PRODUCTO TARJETA DE CREDITO - OCULTA EL CHECK DE RATIFICACION / INCREMENTO
             if (this.model.get('tipo_producto_c') == '14') {
                 this.$('div[data-name=ratificacion_incremento_c]').hide();
-                
+
             } else {
                 this.$('div[data-name=ratificacion_incremento_c]').show();
             }
@@ -1365,7 +1365,7 @@
         var valorSwitchUni2=App.lang.getAppListStrings('switch_inicia_proceso_list')['ejecuta'];
         if(valorSwitchUni2=='1'){
             if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
-                if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && 
+                if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 &&
                 this.model.get("producto_financiero_c") != 43 && this.model.get("tipo_producto_c") != 13 && this.model.get("tipo_producto_c") != 14) {
                     if (solicitud_cf.oFinanciera.condicion.length == 0) {
                         errors[$(".addCondicionFinanciera")] = errors['condiciones_financieras'] || {};
@@ -1390,7 +1390,7 @@
         var valorSwitchUni2=App.lang.getAppListStrings('switch_inicia_proceso_list')['ejecuta'];
         if(valorSwitchUni2=='0'){
             if (this.model.get('tct_oportunidad_perdida_chk_c') == false) {
-                if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 && 
+                if (this.model.get("tipo_operacion_c") == 1 && this.model.get("tipo_producto_c") != 4 && this.model.get("tipo_producto_c") != 6 && this.model.get("tipo_producto_c") != 7 &&
                 this.model.get("producto_financiero_c") != 43 && this.model.get("tipo_producto_c") != 13 && this.model.get("tipo_producto_c") != 14) {
                     if(this.model.get('cf_quantico_c')!=""){
                         var cfQuantico=JSON.parse(this.model.get('cf_quantico_c'));
@@ -3454,11 +3454,11 @@
             callback(null, fields, errors);
         }
     },
-	
+
 	SOCInicio: function () {
-		
+
 		$('[name="flg_soc_out_c"]').hide();
-		
+
 		var id_cuenta=this.model.get('account_id');
 		if(id_cuenta!='' && id_cuenta != undefined && this.model.get('flg_soc_out_c') != true){
 			var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
@@ -3469,11 +3469,11 @@
 					}
 				}, this)
 			});
-		}    
+		}
     },
 
 	validacionSOC: function (fields, errors, callback) {
-		
+
 		var id_cuenta=this.model.get('account_id');
 		if(id_cuenta!='' && id_cuenta != undefined && $.isEmptyObject(errors)){
 			var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
@@ -3485,7 +3485,7 @@
 					}
 				}, this)
 			});
-		}       
+		}
         callback(null, fields, errors);
     },
 
@@ -3494,9 +3494,9 @@
         var controlMonto = this.model.get('control_monto_c');
         var formatoControlMonto = Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'}).format(controlMonto); //FORMATO MONEDA MXN
 
-        //VALIDA QUE NO SUPERE EL $1,000,000 (UN MILLON) EN EL CAMPO DEL MONTO DEL TIPO DE PRODUCTO TARJETA DE CREDITO - RECORD 
+        //VALIDA QUE NO SUPERE EL $1,000,000 (UN MILLON) EN EL CAMPO DEL MONTO DEL TIPO DE PRODUCTO TARJETA DE CREDITO - RECORD
         if (this.model.get('tipo_producto_c') == '14') {
-            
+
             if (parseFloat(this.model.get('monto_c')) > parseFloat(this.model.get('control_monto_c'))) {
 
                 app.alert.show('message-control-monto', {
