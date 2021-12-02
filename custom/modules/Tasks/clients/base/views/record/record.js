@@ -603,9 +603,8 @@
                     }
                 });
             this.model.fields['tipo_tarea_c'].options = opciones_default;
-
+			this.render();
             if(this.model.get('parent').tipo_registro_cuenta_c==undefined){
-
                 app.api.call('GET', app.api.buildURL('Accounts/' + this.model.get('parent_id')), null, {
                     success: _.bind(function (data) {
                         if(data.tipo_registro_cuenta_c=="3" && data.subtipo_registro_cuenta_c=="17"){
