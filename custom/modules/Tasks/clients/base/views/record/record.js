@@ -8,7 +8,7 @@
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
-
+		this.on('render',this.ocultaTipoTarea,this);
         this.on('render',this.disableparentsfields,this);
 		this.model.on('change:ayuda_asesor_cp_c', this._ValoresPredetAsesor, this);
 		this.model.on('change:parent_name', this._ValoresPredetAsesor, this);
@@ -329,6 +329,12 @@
             this.$('[data-name=ayuda_asesor_cp_c]').hide();
         }
     },
+
+    ocultaTipoTarea:function(){
+        if(app.user.attributes.puestousuario_c != 27 && app.user.attributes.puestousuario_c != 31 && app.user.attributes.puestousuario_c != 61 ){
+            this.$('[data-name=tipo_tarea_c]').hide();
+        }
+    },	
 
 	/*
 	Erick de Jesus check ayuda CP
