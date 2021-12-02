@@ -92,8 +92,8 @@
         this.model.addValidationTask('valida_requeridos', _.bind(this.valida_requeridos, this));
         this.model.addValidationTask('valida_cuentas_pld', _.bind(this.valida_pld, this));
         this.model.addValidationTask('valida_no_vehiculos', _.bind(this._Validavehiculo, this));
-        this.model.addValidationTask('valida_formato_campos_Cond_Financiera', _.bind(this.ConficionFinancieraFormat, this));
-        this.model.addValidationTask('valida_formato_campos_Cond_FinancieraRI', _.bind(this.ConficionFinancieraRIFormat, this));
+        //this.model.addValidationTask('valida_formato_campos_Cond_Financiera', _.bind(this.ConficionFinancieraFormat, this));
+        //this.model.addValidationTask('valida_formato_campos_Cond_FinancieraRI', _.bind(this.ConficionFinancieraRIFormat, this));
         this.model.addValidationTask('validaCP', _.bind(this.validaScoring, this));
         this.model.addValidationTask('checkvobo', _.bind(this.notifvobo, this));
 
