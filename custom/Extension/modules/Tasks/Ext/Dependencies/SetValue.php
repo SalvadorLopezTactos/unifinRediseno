@@ -54,3 +54,20 @@ $dependencies['Tasks']['atrasada']= array
 		),
     ),
 );
+
+$dependencies['Tasks']['solicitud']= array
+(
+    'hooks'=> array('all'),
+    'trigger'=>'true',
+    'triggerFields'=> array('potencial_negocio_c'),
+    'onload'=> true,
+    'actions'=> array(	
+		array(
+			'name'=>'SetValue',
+			'params'=> array(
+				'target'=>'tasks_opportunities_1opportunities_idb',
+				'value'=>'ifElse(equal($potencial_negocio_c,2),"",$tasks_opportunities_1opportunities_idb)',
+			),
+		),
+    ),
+);

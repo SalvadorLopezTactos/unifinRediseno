@@ -5,12 +5,14 @@
         display: block;
         width: 100%;
     }
+
     #containerHeader {
         font-size: 18px;
         margin-top: 2%;
         margin-left: 1%;
         line-height: 10px;
     }
+
     .filtros_table {
         margin-left: 1%;
         margin-top: 2%;
@@ -20,36 +22,45 @@
         margin-bottom: 10px !important;
     }
 
-    .table th {
+    /*.table th {
         text-align: left;
         background: #000042 !important;
         color: #f5f5f5;
         font-weight: bold;
         white-space: nowrap;
-    }
+    }*/
+
     .backlogsContainer {
-            margin-top: 1%;
-            overflow-y: auto;
-            height: auto;
+        margin-top: 1%;
+        overflow-y: auto;
+        height: auto;
     }
-    </style>
-    <script>
-		var $select2 = this.$('.backlogsContainer').find('select.select2');
-		$select2.select2();
 
-        var $select2 = this.$('.panel_body').find('select.select2');
-		$select2.select2({ width: '100%' });
+    .dataTable td {
+        background: whitesmoke;
+    }
+    
+</style>
 
-	</script>
+<script type="text/javascript" src="custom/include/javascript/jquery/jquery.dataTables.min.js"></script>
+
+<script>
+    var $select2 = this.$('.backlogsContainer').find('select.select2');
+    $select2.select2();
+
+    var $select2 = this.$('.panel_body').find('select.select2');
+    $select2.select2({ width: '100%' });
+</script>
+
 <div class="container">
     <div class="row-fluid">
-            <div style="color: #e2efe2;background-color:#22608c;border-color:#22608c;border-radius: 10px;margin-left:15px;margin-right:15px;height: 35px;display: table;width: 96%;">
-                <h1>
-                    <p style="vertical-align: middle;  margin: 5px;">
-						Administración de Backlog
-                    </p>
-                </h1>
-            </div>
+        <div style="color: #e2efe2;background-color:#22608c;border-color:#22608c;border-radius: 10px;margin-left:15px;margin-right:15px;height: 35px;display: table;width: 96%;">
+            <h1>
+                <p style="vertical-align: middle;  margin: 5px;">
+                    Administración de Backlog
+                </p>
+            </h1>
+        </div>
     </div>
     <div class="record row-fluid panel_body">
         <div class="span2 record-cell">
@@ -58,10 +69,10 @@
                 <span>
                     <select id="mes_filtro" class="filtros select2">
                         {{#each meses_list_html}}
-                            <option value="{{@key}}" {{ifSelected @key ../mes_filtro}}>{{this}}</option>
+                        <option value="{{@key}}" {{ifSelected @key ../mes_filtro}}>{{this}}</option>
                         {{/each}}
                     </select>
-					<p class="help-block"></p>
+                    <p class="help-block"></p>
                 </span>
             </span>
         </div>
@@ -72,10 +83,10 @@
                 <span>
                     <select id="anio_filtro" class="filtros select2">
                         {{#each anio_list_html_filter}}
-                            <option value="{{@key}}" {{ifSelected @key ../anio_filtro}}>{{this}}</option>
+                        <option value="{{@key}}" {{ifSelected @key ../anio_filtro}}>{{this}}</option>
                         {{/each}}
                     </select>
-					<p class="help-block"></p>
+                    <p class="help-block"></p>
                 </span>
             </span>
         </div>
@@ -86,10 +97,10 @@
                 <span>
                     <select id="etapa_filtro" class="filtros select2">
                         {{#each etapa_list_html}}
-                            <option value="{{@key}}" {{ifSelected @key ../etapa_filtro}}>{{this}}</option>
+                        <option value="{{@key}}" {{ifSelected @key ../etapa_filtro}}>{{this}}</option>
                         {{/each}}
                     </select>
-					<p class="help-block"></p>
+                    <p class="help-block"></p>
                 </span>
             </span>
         </div>
@@ -100,10 +111,10 @@
                 <span>
                     <select id="producto_filtro" class="filtros select2">
                         {{#each producto_list_html}}
-                            <option value="{{@key}}" {{ifSelected @key ../producto_filtro}}>{{this}}</option>
+                        <option value="{{@key}}" {{ifSelected @key ../producto_filtro}}>{{this}}</option>
                         {{/each}}
                     </select>
-					<p class="help-block"></p>
+                    <p class="help-block"></p>
                 </span>
             </span>
         </div>
@@ -140,7 +151,7 @@
                         <option value="monto_sin_solicitud">Sin Solicitud</option>
                         <option value="monto_con_solicitud">Con Solicitud</option>
                     </select>
-					<p class="help-block"></p>
+                    <p class="help-block"></p>
                 </span>
             </span>
         </div>
@@ -165,164 +176,165 @@
 
     </div>
     <!-- Termina barra de búsqueda -->
-    <div class="row-fluid" style="overflow-x: auto;">
-	</div>
-
+    <div class="row-fluid" style="overflow-x: auto;"></div>
     <div class="backlogsContainer row-fluid">
-        <table class="table table-striped tablavet">
+        <table id="dtAdminBacklog" class="table table-striped tablavet">
             <thead>
                 <tr>
-						<td >
-							<label class="record-label" style="font-weight:bold; text-align:center">Equipo</label>
-						</td>
-						<td >
-							<label class="record-label" style="font-weight:bold; text-align:center">Zona</label>
-						</td>
-						<td >
-							<label class="record-label" style="font-weight:bold; text-align:center">Asesor</label>
-						</td>
-                        <td >
-							<label class="record-label" style="font-weight:bold; text-align:center">Cliente</label>
-						</td>
-                        <td >
-							<label class="record-label" style="font-weight:bold; text-align:center">Estatus</label>
-						</td>
-                        <td >
-							<label class="record-label" style="font-weight:bold; text-align:center">Prospecto</label>
-						</td>
-                        <td >
-							<label class="record-label" style="font-weight:bold; text-align:center">Crédito</label>
-						</td>
-                        <td >
-							<label class="record-label" style="font-weight:bold; text-align:center">Rechazada</label>
-						</td>
-                        <td >
-							<label class="record-label" style="font-weight:bold; text-align:center">Sin Solicitud</label>
-						</td>
-                        <td >
-							<label class="record-label" style="font-weight:bold; text-align:center">Con Solicitud</label>
-						</td>
-                        <td >
-							<label class="record-label" style="font-weight:bold; text-align:center">Monto</label>
-						</td>
-                        <td >
-							<label class="record-label" style="font-weight:bold; text-align:center">Comentarios</label>
-						</td>
-                        <td >
-							<label class="record-label" style="font-weight:bold; text-align:center">Probabilidad</label>
-						</td>
-                        <td >
-							<label class="record-label" style="font-weight:bold; text-align:center">BL Estimado</label>
-						</td>
-                        <td >
-							<label class="record-label" style="font-weight:bold; text-align:center">Tipo</label>
-						</td>
-                        <td >
-							<label class="record-label" style="font-weight:bold; text-align:center">Tipo OP</label>
-						</td>
-                        <td width="10%">
-							<label class="record-label" style="font-weight:bold; text-align:center">Rango</label>
-						</td>
-                        <td class="hide">
-							<label class="record-label" style="font-weight:bold; text-align:center">Actualizado</label>
-						</td>
-					</tr>
+                    <th class="sorting ">
+                        <span class="record-label" style="font-weight:bold; text-align:center">Equipo</span>
+                    </th>
+                    <th class="no-sort">
+                        <span class="record-label" style="font-weight:bold; text-align:center">Zona</span>
+                    </th>
+                    <th class="no-sort">
+                        <span class="record-label" style="font-weight:bold; text-align:center">Asesor</span>
+                    </th>
+                    <th class="sorting ">
+                        <span class="record-label" style="font-weight:bold; text-align:center">Cliente</span>
+                    </th>
+                    <th class="no-sort">
+                        <span class="record-label" style="font-weight:bold; text-align:center">Estatus</span>
+                    </th>
+                    <th class="sorting ">
+                        <span class="record-label" style="font-weight:bold; text-align:center">Prospecto</span>
+                    </th>
+                    <th class="sorting ">
+                        <span class="record-label" style="font-weight:bold; text-align:center">Crédito</span>
+                    </th>
+                    <th class="sorting ">
+                        <span class="record-label" style="font-weight:bold; text-align:center">Rechazada</span>
+                    </th>
+                    <th class="sorting ">
+                        <span class="record-label" style="font-weight:bold; text-align:center">Sin Solicitud</span>
+                    </th>
+                    <th class="sorting ">
+                        <span class="record-label" style="font-weight:bold; text-align:center">Con Solicitud</span>
+                    </th>
+                    <th class="no-sort">
+                        <span class="record-label" style="font-weight:bold; text-align:center">Monto</span>
+                    </th>
+                    <th class="no-sort">
+                        <span class="record-label" style="font-weight:bold; text-align:center">Comentarios</span>
+                    </th>
+                    <th class="sorting ">
+                        <span class="record-label" style="font-weight:bold; text-align:center">Probabilidad</span>
+                    </th>
+                    <th class="no-sort">
+                        <span class="record-label" style="font-weight:bold; text-align:center">BL Estimado</span>
+                    </th>
+                    <th class="no-sort">
+                        <span class="record-label" style="font-weight:bold; text-align:center">Tipo</span>
+                    </th>
+                    <th class="no-sort">
+                        <span class="record-label" style="font-weight:bold; text-align:center">Tipo OP</span>
+                    </th>
+                    <th width="10%" class="no-sort">
+                        <span class="record-label" style="font-weight:bold; text-align:center">Rango</span>
+                    </th>
+                    <th class="hide">
+                        <label class="record-label" style="font-weight:bold; text-align:center">Actualizado</label>
+                    </th>
+                </tr>
             </thead>
             <tbody>
-            {{#each listaBacklogs}}
-					<tr data-id="{{id}}" class="registroBL">
-						<td class="">	
-							<span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{equipo}}</span>
-						</td>
-						<td class="">
-							<span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>ZONA</span>
-						</td>
-						<td class="">
-							<span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{assigned_user_name}}</span>
-						</td>
-                        <td class="">
-							<span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{nombre_cuenta}}</span>
-						</td>
-                        <td class="">
-							<select class="select2 etapa_c" style="width: 100%;" data-field="etapa_c">
-								{{#each ../lista_etapas}}
-									<option value="{{@key}}" {{ifSelected @key ../etapa_c}}>{{this}}</option>
-								{{/each}}
-							</select>
-						</td>
-                        <td class="">
-							<div align="middle">
-                                <input type="text" class="montos monto_prospecto" data-field="monto_prospecto" style="width:100px" value="{{monto_prospecto_c}}">
-                                <p class="help-block"></p>
-                            </div>
-						</td>
-                        <td class="">
-							<div align="middle">
-                                <input type="text" class="montos monto_credito" data-field="monto_credito" style="width:100px" value="{{monto_credito_c}}">
-                                <p class="help-block"></p>
-                            </div>
-						</td>
-                        <td class="">
-							<div align="middle">
-                                <input type="text" class="montos monto_rechazado" data-field="monto_rechazado" style="width:100px" value="{{monto_rechazado_c}}">
-                                <p class="help-block"></p>
-                            </div>
-						</td>
-                        <td class="">
-							<div align="middle">
-                                <input type="text" class="montos monto_sin_solicitud" data-field="monto_sin_solicitud" style="width:100px" value="{{monto_sin_solicitud_c}}">
-                                <p class="help-block"></p>
-                            </div>
-						</td>
-                        <td class="">
-							<div align="middle">
-                                <input type="text" class="montos monto_con_solicitud" data-field="monto_con_solicitud" style="width:100px" value="{{monto_con_solicitud_c}}">
-                                <p class="help-block"></p>
-                            </div>
-						</td>
-                        <td class="">
-							<div class="edit disabled"  align="middle">
-                                <input type="text" style="width:100px" name="monto" data-id="{{id}}" value="" class="inherit-width montoTotal" disabled="" >
-                            </div>
-						</td>
-                        <td class="">
-                            <textarea class="form-control comentarios" data-field="comentarios" name="comentarios" data-id="{{id}}">{{comentarios_c}}</textarea>
-						</td>
-                        <td class="">
-                            <div align="middle">
-                                <input type="text" class="probabilidad" data-field="probabilidad" style="width:50px" value="{{tct_conversion_c}}">%
-                                <p class="help-block"></p>
-                            </div>
-						</td>
-                        <td class="">
-							<div class="edit disabled"  align="middle">
-                                <input type="text" style="width:100px" name="blEstimado" data-id="{{id}}" value="" class="inherit-width blEstimado" disabled="" >
-                            </div>
-						</td>
-                        <td class="">	
-							<span class="tipo" style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{tipo_calculado}}</span>
-						</td>
-                        <td class="">	
-							<span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{tipo_op}}</span>
-						</td>
-                        <td class="">	
-                            <div class="edit disabled"  align="middle">
-                               <input type="text" name="rangoBL" data-id="" value="{{rango_bl_c}}" class="inherit-width rango_bl" disabled="" > 
-                            </div>
-						</td>
-                        <td class="hide">
-							<div class="edit disabled"  align="middle">
-                                <input type="text" style="width:80%" name="actualizado" data-id="{{id}}" value="" class="inherit-width actualizado actualizacionInicial" disabled="" >
-                            </div>
-						</td>
-					</tr>
-				{{/each}}
+                {{#each listaBacklogs}}
+                <tr data-id="{{id}}" class="registroBL">
+                    <td class="">
+                        <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>{{equipo}}</span>
+                    </td>
+                    <td class="">
+                        <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;'>ZONA</span>
+                    </td>
+                    <td class="">
+                        <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;' data-toggle="tooltip" data-placement="top" title="{{assigned_user_name}}">{{assigned_user_name}}</span>
+                    </td>
+                    <td class="">
+                        <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;' data-toggle="tooltip" data-placement="top" title="{{nombre_cuenta}}">{{nombre_cuenta}}</span>
+                    </td>
+                    <td class="">
+                        <select class="select2 etapa_c" style="width:100%;" data-field="etapa_c">
+                            {{#each ../lista_etapas}}
+                            <option value="{{@key}}" {{ifSelected @key ../etapa_c}}>{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </td>
+                    <td class="">
+                        <div align="middle">
+                            <input type="text" class="montos monto_prospecto" data-field="monto_prospecto" value="{{monto_prospecto_c}}" />
+                            <span data-field="span_monto_prospecto" style="display: none;">{{monto_prospecto_c}}</span>
+                            <p class="help-block"></p>
+                        </div>
+                    </td>
+                    <td class="">
+                        <div align="middle">
+                            <input type="text" class="montos monto_credito" data-field="monto_credito" value="{{monto_credito_c}}" />
+                            <span data-field="span_monto_credito" style="display: none;">{{monto_credito_c}}</span>
+                            <p class="help-block"></p>
+                        </div>
+                    </td>
+                    <td class="">
+                        <div align="middle">
+                            <input type="text" class="montos monto_rechazado" data-field="monto_rechazado" value="{{monto_rechazado_c}}" />
+                            <span data-field="span_monto_rechazado" style="display: none;">{{monto_rechazado_c}}</span>
+                            <p class="help-block"></p>
+                        </div>
+                    </td>
+                    <td class="">
+                        <div align="middle">
+                            <input type="text" class="montos monto_sin_solicitud" data-field="monto_sin_solicitud" value="{{monto_sin_solicitud_c}}" />
+                            <span data-field="span_monto_sin_solicitud" style="display: none;">{{monto_sin_solicitud_c}}</span>
+                            <p class="help-block"></p>
+                        </div>
+                    </td>
+                    <td class="">
+                        <div align="middle">
+                            <input type="text" class="montos monto_con_solicitud" data-field="monto_con_solicitud" value="{{monto_con_solicitud_c}}" />
+                            <span data-field="span_monto_con_solicitud" style="display: none;">{{monto_con_solicitud_c}}</span>
+                            <p class="help-block"></p>
+                        </div>
+                    </td>
+                    <td class="">
+                        <div class="edit disabled" align="middle">
+                            <input type="text" name="monto" data-id="{{id}}" value="" class="inherit-width montoTotal" disabled="" />
+                        </div>
+                    </td>
+                    <td class="">
+                        <textarea class="form-control comentarios" style="width: 120px;" data-field="comentarios" name="comentarios" data-id="{{id}}">{{comentarios_c}}</textarea>
+                    </td>
+                    <td class="">
+                        <div align="middle">
+                            <input type="text" class="probabilidad" data-field="probabilidad" style="width:115px" value="{{tct_conversion_c}}" />%
+                            <span data-field="span_probabilidad" style="display: none;">{{tct_conversion_c}}</span>
+                            <p class="help-block"></p>
+                        </div>
+                    </td>
+                    <td class="">
+                        <div class="edit disabled" align="middle">
+                            <input type="text" name="blEstimado" data-id="{{id}}" value="" class="inherit-width blEstimado" disabled="" />
+                        </div>
+                    </td>
+                    <td class="">
+                        <span class="tipo" style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;' data-toggle="tooltip" data-placement="top" title="{{tipo_calculado}}">{{tipo_calculado}}</span>
+                    </td>
+                    <td class="">
+                        <span style='font-family: Helvetica, Arial, sans-serif; font-size: 12px;' data-toggle="tooltip" data-placement="top" title="{{tipo_op}}">{{tipo_op}}</span>
+                    </td>
+                    <td class="">
+                        <div class="edit disabled" align="middle">
+                            <input type="text" name="rangoBL" data-id="" value="{{rango_bl_c}}" class="inherit-width rango_bl" disabled="" />
+                        </div>
+                    </td>
+                    <td class="hide">
+                        <div class="edit disabled" align="middle">
+                            <input type="text" style="width:80%" name="actualizado" data-id="{{id}}" value="" class="inherit-width actualizado actualizacionInicial" disabled="" />
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
             </tbody>
         </table>
-
-        <div class="row-fluid">
-            
-        </div>
+        <div class="row-fluid"></div>
     </div>
     <!--
     <div class="row-fluid">
