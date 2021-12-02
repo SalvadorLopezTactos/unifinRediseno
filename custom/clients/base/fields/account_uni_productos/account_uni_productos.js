@@ -307,8 +307,7 @@
         try {
 
             cont_uni_p.nvproductos(); //HABILITA LOS CHECK DEPENDIENDO LOS PRODUCTOS QUE TIENE EL USUARIO
-            cont_uni_p.estatuslmCambio();
-
+            
             cont_uni_p.MuestraCamposLeasing(); //FUNCION PARA LOS CAMPOS LEASING
             cont_uni_p.MuestraCamposFactoraje(); //FUNCION PARA LOS CAMPOS FACTORAJE
             cont_uni_p.MuestraCamposCA(); //FUNCION PARA LOS CAMPOS CA
@@ -322,6 +321,7 @@
             cont_uni_p.dependenciasUniclick(); //FUNCION DE DEPENDENCIA DE CAMPOS UNICLICK
 
             cont_uni_p.noeditables();  //FUNCION PARA CAMPOS NO EDITABLES
+            cont_uni_p.estatuslmCambio();
 
             //cont_uni_p.buscaRazon();
 
@@ -375,7 +375,7 @@
             }
         }
 
-        if(cont_uni_p.action != "edit" ){
+        if(cont_uni_p.action != "edit"){
             $('.ls_estatus_lm').show();
         }
         if(cont_uni_p.ResumenProductos!=undefined){
@@ -408,6 +408,8 @@
                     $('.ls_estatus_lm_edit').show();
                 }
             }
+        }else if(cont_uni_p.action == "edit" && cont_uni_p.ResumenProductos==undefined){
+            $('.ls_estatus_lm_edit').show();
         }
 
     },
@@ -523,7 +525,7 @@
             }
         }
 
-        if(cont_uni_p.action != "edit" ){
+        if(cont_uni_p.action != "edit"){
             $('.fac_estatus_lm').show();
         }
 
@@ -557,6 +559,8 @@
                     $('.fac_estatus_lm_edit').show();
                 }
             }
+        }else if(cont_uni_p.action == "edit" && cont_uni_p.ResumenProductos==undefined){
+            $('.fac_estatus_lm_edit').show();
         }
     },
     /*************************************PRODUCTO FACTORAJE*********************************************/
@@ -668,7 +672,7 @@
                 $('.ca_nv_razon').show(); //MUESTRA - CLASE Razón de Lead no viable CA
             }
         }
-        if(cont_uni_p.action != "edit" ){
+        if(cont_uni_p.action != "edit"){
             $('.ca_estatus_lm').show();
         }
         if(cont_uni_p.ResumenProductos!=undefined){
@@ -701,6 +705,8 @@
                     $('.ca_estatus_lm_edit').show();
                 }
             }
+        }else if(cont_uni_p.action == "edit" && cont_uni_p.ResumenProductos==undefined){
+            $('.ca_estatus_lm_edit').show();
         }
     },
     /*************************************PRODUCTO CREDITO AUTOMOTRIZ*********************************************/
@@ -814,7 +820,7 @@
             }
         }
 
-        if(cont_uni_p.action != "edit" ){
+        if(cont_uni_p.action != "edit"){
             $('.fe_estatus_lm').show();
         }
         if(cont_uni_p.ResumenProductos!=undefined){
@@ -847,6 +853,8 @@
                     $('.fe_estatus_lm_edit').show();
                 }
             }
+        }else if(cont_uni_p.action == "edit" && cont_uni_p.ResumenProductos==undefined){
+            $('.fe_estatus_lm_edit').show();
         }
     },
 
@@ -960,7 +968,7 @@
             }
         }
 
-        if(cont_uni_p.action != "edit" ){
+        if(cont_uni_p.action != "edit"){
             $('.uniclick_estatus_lm').show();
         }
         if(cont_uni_p.ResumenProductos!=undefined){
@@ -994,6 +1002,8 @@
                     $('.uniclick_estatus_lm_edit').show();
                 }
             }
+        }else if(cont_uni_p.action == "edit" && cont_uni_p.ResumenProductos==undefined){
+            $('.uniclick_estatus_lm_edit').show();
         }
     },
     /*************************************PRODUCTO UNICLICK*********************************************/
