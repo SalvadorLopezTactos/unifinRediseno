@@ -2401,16 +2401,17 @@
     handleCancel: function () {
         this._super("handleCancel");
         //Condiciones_financieras
-        var condiciones_financieras = app.utils.deepCopy(this.prev_oFinanciera.prev_condicion);
+        /*var condiciones_financieras = app.utils.deepCopy(this.prev_oFinanciera.prev_condicion);
         this.model.set('condiciones_financieras', condiciones_financieras);
         this.oFinanciera.condicion = condiciones_financieras;
         cont_cf.render();
+        */
 
         //Condiciones_financieras Ratificacion e Incremento
-        var condiciones_financierasRI = app.utils.deepCopy(this.prev_oFinancieraRI.prev_ratificacion);
+        //var condiciones_financierasRI = app.utils.deepCopy(this.prev_oFinancieraRI.prev_ratificacion);
         // this.model.set('condiciones_financieras_incremento_ratificacion', condiciones_financierasRI);
-        this.oFinancieraRI.ratificacion = condiciones_financierasRI;
-        contRI.render();
+        //this.oFinancieraRI.ratificacion = condiciones_financierasRI;
+        //contRI.render();
         //Oculta botones para autorizar y rechazar Solicitud (precalificacion)
         $('[name="vobo_leasing"]').hide();
         $('[name="rechazo_leasing"]').hide();
