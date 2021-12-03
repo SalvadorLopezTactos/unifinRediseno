@@ -5,6 +5,7 @@
         self = this;
         solicitud_cf = this;
         solicitud_RI = this;
+        this.multilinea_prod=0;
         this._super("initialize", [options]);
         this.events['keydown input[name=vendedor_c]'] = 'checkvendedor';
         this.events['keydown input[name=monto_c]'] = 'checkmoney';
@@ -3031,6 +3032,7 @@
                 success: _.bind(function (data) {
                     app.alert.dismiss('obtiene_BenefSuby');
                     self.multilinea_prod = data;
+                    this.multilinea_prod = data;
                     if (self.multilinea_prod == 1) {
                         /** Mostrar paneles Area beneficiada y subyacente **/
                         $('div[data-panelname="LBL_RECORDVIEW_PANEL2"]').show();
