@@ -865,9 +865,9 @@ class SugarFieldTeamset extends SugarFieldBase {
         $query->from($tsb);
         $query->join('teams', array('alias'=>'teams'));
         $query->select(
-            array('id', 
+            array('id',
                   array('teams.id', 'team_id'),
-                  array('teams.name', 'name'), 
+                  array('teams.name', 'name'),
                   array('teams.name_2', 'name_2'),
             )
         );
@@ -883,14 +883,12 @@ class SugarFieldTeamset extends SugarFieldBase {
             $team['name_2'] = !empty($row['name_2'])?$row['name_2']:'';
             $teamsets[$row['id']][] = $team;
         }
-        
+
         foreach ($teamsetToBean as $teamSetId => $beansWithTeam) {
             foreach ($beansWithTeam as $beanId) {
-                $beans[$beanId]->teamList = $teamsets[$teamSetId];
+                $beans[$beanId]->teamList = isset($teamsets[$teamSetId])? $teamsets[$teamSetId] : '';
             }
         }
 
     }
 }
-
-

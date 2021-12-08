@@ -14,7 +14,10 @@ class cstmRelateApi extends RelateApi
 		$relatedArray = parent::filterRelated($api, $args);
 		$conteo = 0;
 		//$GLOBALS['log']->fatal($args);
-		if($args['favorite'] == 'true' && $args['module'] == 'Accounts' && $args['link_name'] == 'rel_relaciones_accounts_1')
+    $favorite = isset($args['favorite']) ? $args['favorite'] : false;
+    $module = isset($args['module']) ? $args['module'] : '';
+    $link_name = isset($args['link_name']) ? $args['link_name'] : '';
+		if($favorite == 'true' && $module == 'Accounts' && $link_name == 'rel_relaciones_accounts_1')
 		{
 			$auxArray = $relatedArray['records'];
 			foreach ($auxArray as $clave => $valor) {
@@ -30,7 +33,7 @@ class cstmRelateApi extends RelateApi
 				$conteo++;
 			}
 		}
-		
+
 		return $relatedArray;
     }
 

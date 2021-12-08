@@ -12,16 +12,18 @@ class leads_validateString
     public function textToUppperCase($bean = null, $event = null, $args = null)
     {
         //$GLOBALS['log']->fatal('CONVIERTO A MAYUSCULAS');
-        if ($_REQUEST['module'] != 'Import') {
+        $moduleRequest = isset($_REQUEST['module']) ? $_REQUEST['module'] : '';
+        if ($moduleRequest != 'Import') {
             foreach ($bean as $field => $value) {
+                $fieldName = isset($bean->field_defs[$field]['name']) ? $bean->field_defs[$field]['name'] : '';
+                $fieldType = isset($bean->field_defs[$field]['type']) ? $bean->field_defs[$field]['type'] : '';
+                if ($fieldName != 'nombre_de_cargar_c' && $fieldName != 'resultado_de_carga_c') {
 
-                if ($bean->field_defs[$field]['name'] != 'nombre_de_cargar_c' && $bean->field_defs[$field]['name'] != 'resultado_de_carga_c') {
-
-                    if ($bean->field_defs[$field]['type'] == 'varchar') {
+                    if ($fieldType == 'varchar') {
                         $value = mb_strtoupper($value, "UTF-8");
                         $bean->$field = $value;
                     }
-                    if ($bean->field_defs[$field]['name'] == 'name') {
+                    if ($fieldName == 'name') {
                         $value = mb_strtoupper($value, "UTF-8");
                         $bean->$field = $value;
                     }
@@ -158,8 +160,8 @@ class leads_validateString
                 }
                 $fechaCarga = date("Ymd");
                 //$GLOBALS['log']->fatal("fecha hoy ". $fechaCarga . " valor campo ". $bean->nombre_de_cargar_c);
-
-                $bean->nombre_de_cargar_c = ($bean->nombre_de_cargar_c == "" && $_REQUEST['module'] == 'Import') ? "Carga_" . $fechaCarga : $bean->nombre_de_cargar_c;
+                $requestModule = isset($_REQUEST['module']) ? $_REQUEST['module'] : '';
+                $bean->nombre_de_cargar_c = ($bean->nombre_de_cargar_c == "" && $requestModule == 'Import') ? "Carga_" . $fechaCarga : $bean->nombre_de_cargar_c;
             }
         }
     }
