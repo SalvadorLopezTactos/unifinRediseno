@@ -212,7 +212,7 @@ class ResumenClienteAPI extends SugarApi
             "inegi_rama" => "",
             "inegi_subsector" => "",
             "inegi_sector" => "",
-            "inegi_macro" => "",            
+            "inegi_macro" => "",
             "inegi_acualiza_uni2" => ""
             // "inegi_descripcion" => "",
         );
@@ -233,9 +233,9 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['general_cliente']['tipo'] = $beanPersona->tct_tipo_subtipo_txf_c;  // tipo_general_c
             $arr_principal['general_cliente']['segmento'] = $beanPersona->segmento_c;
             $arr_principal['general_cliente']['cobranza'] = $beanPersona->cobranza_c;
-            $arr_principal['general_cliente']['sector_economico'] = $app_list_strings['sectoreconomico_list'][$beanPersona->sectoreconomico_c];
+            $arr_principal['general_cliente']['sector_economico'] = isset($app_list_strings['sectoreconomico_list'][$beanPersona->sectoreconomico_c]) ? $app_list_strings['sectoreconomico_list'][$beanPersona->sectoreconomico_c] : '';
             $arr_principal['general_cliente']['grupo_empresarial'] = $beanPersona->parent_name;
-            $arr_principal['general_cliente']['nivel_satisfaccion'] = $app_list_strings['nivel_satisfaccion_list'][$beanPersona->nivel_satisfaccion_c];
+            $arr_principal['general_cliente']['nivel_satisfaccion'] = isset($app_list_strings['nivel_satisfaccion_list'][$beanPersona->nivel_satisfaccion_c]) ? $app_list_strings['nivel_satisfaccion_list'][$beanPersona->nivel_satisfaccion_c] : '';
             $arr_principal['general_cliente']['asesorRM'] = $beanPersona->promotorrm_c;
 
             //Promotores
@@ -243,7 +243,7 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['factoring']['promotor']=$beanPersona->promotorfactoraje_c;
             $arr_principal['credito_auto']['promotor']=$beanPersona->promotorcredit_c;
             $arr_principal['fleet']['promotor']=$beanPersona->promotorfleet_c;
-			$arr_principal['credito_sos']['promotor']=$beanPersona->promotorleasing_c;
+            $arr_principal['credito_sos']['promotor']=$beanPersona->promotorleasing_c;
             $arr_principal['uniclick']['promotor']=$beanPersona->promotoruniclick_c;
             $arr_principal['unilease']['promotor']=$beanPersona->promotorleasing_c;
             $arr_principal['rm']['promotor']=$beanPersona->promotorrm_c;
@@ -278,6 +278,7 @@ class ResumenClienteAPI extends SugarApi
             //Linea aproximada fleet
             $linea_aprox_fleet=0;
             $numero_vehiculos_fleet=0;
+            $linea_aprox_unilease=0;
 
             //Fecha de vencimiento
             $vencimiento_leasing = '';//date("Y-m-d");
@@ -804,7 +805,7 @@ class ResumenClienteAPI extends SugarApi
                         $arr_principal['leasing']['estatus_atencion'] = $statusProducto;
                         $arr_principal['leasing']['cobranza'] = $cobranza;
                         $arr_principal['leasing']['estatusxproducto'] = $estatusxproducto;
-                        
+
                         $arr_principal['unilease']['tipo_cuenta'] = $tipoCuenta;
                         $arr_principal['unilease']['subtipo_cuenta'] = $subtipoCuenta;
                         $arr_principal['unilease']['estatus_atencion'] = $statusProducto;
@@ -1095,7 +1096,7 @@ class ResumenClienteAPI extends SugarApi
             $arr_principal['seguros']['ingreso'] = $ingreso;
           }
         }
-        
+
         ############################
         ## Regresa resultado
         // $GLOBALS['log']->fatal('resultado de API:');

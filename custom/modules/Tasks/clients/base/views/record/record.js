@@ -8,7 +8,7 @@
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
-
+		this.on('render',this.ocultaTipoTarea,this);
         this.on('render',this.disableparentsfields,this);
 		this.model.on('change:ayuda_asesor_cp_c', this._ValoresPredetAsesor, this);
 		this.model.on('change:parent_name', this._ValoresPredetAsesor, this);
@@ -330,6 +330,12 @@
         }
     },
 
+    ocultaTipoTarea:function(){
+        if(app.user.attributes.puestousuario_c != 27 && app.user.attributes.puestousuario_c != 31 && app.user.attributes.puestousuario_c != 61 ){
+            this.$('[data-name=tipo_tarea_c]').hide();
+        }
+    },	
+
 	/*
 	Erick de Jesus check ayuda CP
 	*/
@@ -597,9 +603,8 @@
                     }
                 });
             this.model.fields['tipo_tarea_c'].options = opciones_default;
-
+			this.render();
             if(this.model.get('parent').tipo_registro_cuenta_c==undefined){
-
                 app.api.call('GET', app.api.buildURL('Accounts/' + this.model.get('parent_id')), null, {
                     success: _.bind(function (data) {
                         if(data.tipo_registro_cuenta_c=="3" && data.subtipo_registro_cuenta_c=="17"){
