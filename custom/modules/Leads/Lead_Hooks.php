@@ -207,26 +207,27 @@ SQL;
     }
 
     public function validaCampos($bean = null, $event = null, $args = null){
-    //Valida campos requeridos en la importación
-        if($_REQUEST['module'] == 'Import') {
-      /*if($bean->regimen_fiscal_c == '') sugar_die('El campo Régimen Fiscal es requerido');
-      if($bean->nombre_de_cargar_c == '') sugar_die('El campo Nombre de la Carga es requerido');
-      if($bean->origen_c == '') sugar_die('El campo Origen es requerido');
-      if($bean->oficina_c == '') sugar_die('El campo Oficina es requerido');
-      if($bean->actividad_economica_c == '') sugar_die('El campo Actividad Económica es requerido');
-      if($bean->detalle_origen_c == '' && $bean->origen_c != '3') sugar_die('El campo Detalle Origen es requerido');
-      if($bean->prospeccion_propia_c == '' && $bean->origen_c == '3') sugar_die('El campo Prospección propia es requerido');
-          if($bean->nombre_empresa_c == '' && $bean->regimen_fiscal_c == '3') sugar_die('El campo Nombre Empresa es requerido');
-      if($bean->nombre_c == '' && $bean->regimen_fiscal_c != '3') sugar_die('El campo Nombre(s) es requerido');
-      if($bean->apellido_paterno_c == '' && $bean->regimen_fiscal_c != '3') sugar_die('El campo Apellido Paterno es requerido');
-      if($bean->apellido_materno_c == '' && $bean->regimen_fiscal_c != '3') sugar_die('El campo Apellido Materno es requerido');
-      if($bean->phone_mobile == '' && $bean->phone_home == '' && $bean->phone_work == '' && $bean->regimen_fiscal_c != '3') sugar_die('Al menos un teléfono es requerido');
-      if($bean->origen_busqueda_c == '' && $bean->detalle_origen_c == '1') sugar_die('El campo Base es requerido');
-      if($bean->phone_work == '' && $bean->regimen_fiscal_c == '3') sugar_die('El campo Teléfono de Oficina es requerido');
-      if($bean->leads_leads_1leads_ida == '' && $bean->regimen_fiscal_c == '3') sugar_die('El campo Contacto Asociado es requerido');
-      if($bean->contacto_telefono_c == '' && $bean->regimen_fiscal_c == '3') sugar_die('El campo Teléfono Contacto es requerido');
-      if($bean->oficina_c != '') $bean->assigned_user_id = '569246c7-da62-4664-ef2a-5628f649537e';*/
-      if($bean->oficina_c != '' && empty($bean->assigned_user_id ) ) $bean->assigned_user_id = '569246c7-da62-4664-ef2a-5628f649537e';
+      //Valida campos requeridos en la importación
+      $moduleRequest = isset($_REQUEST['module']) ? $_REQUEST['module'] : '';
+      if($moduleRequest == 'Import') {
+        /*if($bean->regimen_fiscal_c == '') sugar_die('El campo Régimen Fiscal es requerido');
+        if($bean->nombre_de_cargar_c == '') sugar_die('El campo Nombre de la Carga es requerido');
+        if($bean->origen_c == '') sugar_die('El campo Origen es requerido');
+        if($bean->oficina_c == '') sugar_die('El campo Oficina es requerido');
+        if($bean->actividad_economica_c == '') sugar_die('El campo Actividad Económica es requerido');
+        if($bean->detalle_origen_c == '' && $bean->origen_c != '3') sugar_die('El campo Detalle Origen es requerido');
+        if($bean->prospeccion_propia_c == '' && $bean->origen_c == '3') sugar_die('El campo Prospección propia es requerido');
+            if($bean->nombre_empresa_c == '' && $bean->regimen_fiscal_c == '3') sugar_die('El campo Nombre Empresa es requerido');
+        if($bean->nombre_c == '' && $bean->regimen_fiscal_c != '3') sugar_die('El campo Nombre(s) es requerido');
+        if($bean->apellido_paterno_c == '' && $bean->regimen_fiscal_c != '3') sugar_die('El campo Apellido Paterno es requerido');
+        if($bean->apellido_materno_c == '' && $bean->regimen_fiscal_c != '3') sugar_die('El campo Apellido Materno es requerido');
+        if($bean->phone_mobile == '' && $bean->phone_home == '' && $bean->phone_work == '' && $bean->regimen_fiscal_c != '3') sugar_die('Al menos un teléfono es requerido');
+        if($bean->origen_busqueda_c == '' && $bean->detalle_origen_c == '1') sugar_die('El campo Base es requerido');
+        if($bean->phone_work == '' && $bean->regimen_fiscal_c == '3') sugar_die('El campo Teléfono de Oficina es requerido');
+        if($bean->leads_leads_1leads_ida == '' && $bean->regimen_fiscal_c == '3') sugar_die('El campo Contacto Asociado es requerido');
+        if($bean->contacto_telefono_c == '' && $bean->regimen_fiscal_c == '3') sugar_die('El campo Teléfono Contacto es requerido');
+        if($bean->oficina_c != '') $bean->assigned_user_id = '569246c7-da62-4664-ef2a-5628f649537e';*/
+        if($bean->oficina_c != '' && empty($bean->assigned_user_id ) ) $bean->assigned_user_id = '569246c7-da62-4664-ef2a-5628f649537e';
       }
     }
 
