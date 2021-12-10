@@ -823,12 +823,10 @@
                                     if (usuarioProducto == "CA") {
                                         if (tipopersona != 'Persona Moral') {
                                             //PF - PFAE
-                                            faltaPld = (data.records[0].tct_pld_campo2_ddw == "" || data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == ""
-                                                || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo16_ddw == "") ? " <b>- Producto " + producto + "</b><br>" : "";
+                                            faltaPld = (data.records[0].tct_pld_campo2_ddw == "" || data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == "") ? " <b>- Producto " + producto + "</b><br>" : "";
                                         } else {
                                             //PM
-                                            faltaPld = (data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == ""
-                                                || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo16_ddw == "") ? " <b>- Producto " + producto + "</b><br>" : "";
+                                            faltaPld = (data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == "") ? " <b>- Producto " + producto + "</b><br>" : "";
                                         }
                                     }
                                 } else {
