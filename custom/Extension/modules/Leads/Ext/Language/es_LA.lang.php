@@ -128,3 +128,7 @@ $mod_strings['LBL_DIA_CONTACTO_C'] = 'Día preferido de contacto';
 $mod_strings['LBL_HORA_CONTACTO_C'] = 'Hora preferida de contacto';
 $mod_strings['LBL_OMITE_MATCH'] = 'Omitir match';
 $mod_strings['LBL_PRODUCTO_FINANCIERO_C'] = 'Producto financiero';
+$mod_strings['LBL_C_REGISTRO_REUS_C'] = 'Registrado REUS Casa';
+$mod_strings['LBL_M_REGISTRO_REUS_C'] = 'Registrado REUS Móvil';
+$mod_strings['LBL_O_REGISTRO_REUS_C'] = 'Registrado REUS Oficina';
+$mod_strings['LBL_PENDIENTE_REUS_C'] = 'Pendiente de validar REUS';
