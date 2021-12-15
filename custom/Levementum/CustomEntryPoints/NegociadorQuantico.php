@@ -79,7 +79,7 @@ $GLOBALS['log']->fatal(print_r($token,true));
 
         $url_login=$sugar_config['quantico_url_base'];
 
-        $urlLoginQuantico=$url_login."/Negotation_UI/Negotiator.aspx?&token=".$token."&PersonCRMId=".$idPersona;
+        $urlLoginQuantico=$url_login."/Negotiation_UI/Negotiator.aspx?&token=".$token."&PersonCRMId=".$idPersona;
         //$respuesta=ApiCallQuantico::callQuantico($urlLoginQuantico,"GET");
         //echo '<iframe src="'.$urlLoginQuantico.'" style="width:100%;height: 100%;position: absolute;"></iframe>';
         echo '<a href="'.$urlLoginQuantico.'" target="_blank" id="linkNegociadorQuantico">Negociador Quantico</a>';
