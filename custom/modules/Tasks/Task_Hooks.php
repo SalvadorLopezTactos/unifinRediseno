@@ -54,10 +54,19 @@ class Task_Hooks
 		if($bean->potencial_negocio_c) $bean->status = 'Completed';
 		if(empty($bean->fetched_row['id']) && $bean->puesto_c == 61 && $bean->parent_type == 'Accounts') {
 			$account = BeanFactory::getBean('Accounts', $bean->parent_id);
-			$user = BeanFactory::getBean('Users', $account->user_id_c);
-			if(!empty($user->email1)) {
-				$correo = $user->email1;
-				$nombre = $user->nombre_completo_c;
+			$userl = BeanFactory::getBean('Users', $account->user_id_c);
+			$userf = BeanFactory::getBean('Users', $account->user_id1_c);
+			if(!empty($userl->email1) || !empty($userf->email1)) {
+				$correos=array();
+				$nombres=array();
+				if(!empty($userl->email1)) {
+					array_push($correos,$userl->email1);
+					array_push($nombres,$userl->nombre_completo_c);
+				}
+				if(!empty($userf->email1)) {
+					array_push($correos,$userf->email1);
+					array_push($nombres,$userf->nombre_completo_c);
+				}
 				$fechas = new DateTime($bean->date_due);
 				$fecha = $fechas->format('d/m/Y');
 				$users = BeanFactory::getBean('Users', $bean->created_by);
@@ -65,10 +74,12 @@ class Task_Hooks
 				require_once 'include/SugarPHPMailer.php';
 				require_once 'modules/Administration/Administration.php';
 				$linkTarea=$GLOBALS['sugar_config']['site_url'].'/#Tasks/'.$bean->id;
+				$linkCuenta=$GLOBALS['sugar_config']['site_url'].'/#Accounts/'.$account->id;
 				$envio_usuarios_especificos=0;
-				if($account->user_id_c == $bean->assigned_user_id) {
+				if($account->user_id_c == $bean->assigned_user_id || $account->user_id1_c == $bean->assigned_user_id) {
 					$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Se le informa que se le ha asignado una nueva tarea con la siguiente información:
 					<br><br>Asunto: <b><a id="linkTarea" href="'.$linkTarea.'">'.$bean->name.'</a></b>
+					<br><br>Cuenta: <b><a id="linkCuenta" href="'.$linkCuenta.'">'.$account->name.'</a></b>
 					<br><br>Asesor creador del registro: <b>'.$creador.'</b>
 					<br><br>Descripción: <b>'.$bean->description.'</b>
 					<br><br>Es importante que atienda esta tarea ya que representa una oportunidad de negocio para UNIFIN, la fecha de vencimiento de la tarea es <b>'.$fecha.'</b>
@@ -84,6 +95,7 @@ class Task_Hooks
 				} else {
 					$mailHTML = '<p align="justify"><font face="verdana" color="#635f5f">Se le informa que se ha dado de alta una nueva tarea con la siguiente información:
 					<br><br>Asunto: <b><a id="linkTarea" href="'.$linkTarea.'">'.$bean->name.'</a></b>
+					<br><br>Cuenta: <b><a id="linkCuenta" href="'.$linkCuenta.'">'.$account->name.'</a></b>
 					<br><br>Asesor creador del registro: <b>'.$creador.'</b>
 					<br><br>Descripción: <b>'.$bean->description.'</b>
 					<br><br>Atentamente Unifin</font></p>
@@ -100,10 +112,14 @@ class Task_Hooks
 				$body = trim($mailHTML);
 				$mailer->setHtmlBody($body);
 				$mailer->clearRecipients();
-				$mailer->addRecipientsTo(new EmailIdentity($correo, $nombre));
+				for ($i=0; $i < count($correos); $i++) {
+					$mailer->addRecipientsTo(new EmailIdentity($correos[$i], $nombres[$i]));
+				}
 				if($envio_usuarios_especificos==1){
 					//Enviar copia a usuarios especificos solo si el asesor leasing de la cuenta es el mismo que el asignado de la Tarea
+					$asignado = BeanFactory::getBean('Users', $bean->assigned_user_id);
 					$lista_usuarios_copia=$app_list_strings["users_copia_tareas_list"];
+					array_push($lista_usuarios_copia,$asignado->reports_to_id);
 					foreach ($lista_usuarios_copia as $key => $value) {
 						$id_usuario=$lista_usuarios_copia[$key];
 						$userCopia = BeanFactory::getBean('Users', $id_usuario);
@@ -120,7 +136,6 @@ class Task_Hooks
 	}
 
 	public function sendNotificationUpdate($bean = null, $event = null, $args = null){
-
 		//Lanzar notificación en cada actualización del registro de Tarea creado por Centro de prospección, Asesor CAC: 61
 		$campos_modificados=array();
 		$campos_excluidos=array('modified_user_id','modified_by','date_modified','tn_name','tn_name_2','puesto_asignado_c','subetapa_c');
@@ -132,28 +147,31 @@ class Task_Hooks
 					}
 				}
 			}
-
-			//Envía notificación hacia el Asesor Leasing de la Cuenta relacionada
+			//Envía notificación hacia el Asesor Leasing y Factoraje de la Cuenta relacionada
 			if(count($campos_modificados)>0){
 				$urlSugar=$GLOBALS['sugar_config']['site_url'].'/#Tasks/';
                 $idTarea=$bean->id;
 				$linkTarea=$urlSugar.$idTarea;
-				//Obteniendo correo del asesor Leasing
+				//Obteniendo correo del asesores
 				$account = BeanFactory::getBean('Accounts', $bean->parent_id);
-				$user = BeanFactory::getBean('Users', $account->user_id_c);
-				if(!empty($user->email1)) {
-					$correo = $user->email1;
-					$nombre = $user->nombre_completo_c;
-
+				$userl = BeanFactory::getBean('Users', $account->user_id_c);
+				$userf = BeanFactory::getBean('Users', $account->user_id1_c);
+				if(!empty($userl->email1) || !empty($userf->email1)) {
+					$correos=array();
+					$nombres=array();
+					if(!empty($userl->email1)) {
+						array_push($correos,$userl->email1);
+						array_push($nombres,$userl->nombre_completo_c);
+					}
+					if(!empty($userf->email1)) {
+						array_push($correos,$userf->email1);
+						array_push($nombres,$userf->nombre_completo_c);
+					}
 					$cuerpoHTML=$this->bodyNotificacionUpdate($bean,$linkTarea,$campos_modificados);
-
-					$this->enviaNotificaion("Actualización Tarea CAC: ".$bean->name,$cuerpoHTML,$correo,$nombre);
+					$this->enviaNotificaion("Actualización Tarea CAC: ".$bean->name,$cuerpoHTML,$correos,$nombres);
 				}
-
 			}
-
 		}
-
 	}
 
 	public function bodyNotificacionUpdate($beanTarea,$linkTarea,$campos_modificados){
@@ -214,7 +232,7 @@ class Task_Hooks
 
 	}
 
-	public function enviaNotificaion($asunto,$cuerpoCorreo,$email,$nombre_asesor){
+	public function enviaNotificaion($asunto,$cuerpoCorreo,$correos,$nombres){
 		try{
             $mailer = MailerFactory::getSystemDefaultMailer();
             $mailTransmissionProtocol = $mailer->getMailTransmissionProtocol();
@@ -222,25 +240,26 @@ class Task_Hooks
             $body = trim($cuerpoCorreo);
             $mailer->setHtmlBody($body);
             $mailer->clearRecipients();
-			$mailer->addRecipientsTo(new EmailIdentity($email, $nombre_asesor));
+			for ($i=0; $i < count($correos); $i++) {
+				$mailer->addRecipientsTo(new EmailIdentity($correos[$i], $nombres[$i]));
+			}
 			$result = $mailer->send();
 		}catch (Exception $e){
-            $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo al email ".$email);
+            $GLOBALS['log']->fatal("Exception: No se ha podido enviar correo");
             $GLOBALS['log']->fatal("Exception ".$e);
         }
-
 	}
 
 	public function relateOppLeasing($bean = null, $event = null, $args = null){
-		//Relacionar solicitud Leasing de la Cuenta (No cancelada ni rechazada) cuando:
+		//Relacionar solicitud Leasing y Factoraje de la Cuenta (No cancelada ni rechazada) cuando:
 		// Tipo de tarea es: CAC Oportunidad Contratación, CAC Oportunidad Renovación,CAC Oportunidad Recuperación
-		// y Usuario Asignado es un Asesor comercial(Asesor, Subdirector, Gerente, Director Leasing)
+		// y Usuario Asignado es un Asesor comercial(Asesor, Subdirector, Gerente, Director Leasing y Factoraje)
 		$GLOBALS['log']->fatal("USUARIO ASIGNADO: ".$bean->assigned_user_id);
 		if($bean->parent_type=='Accounts' && $bean->parent_id!=""){
 			$user = BeanFactory::getBean('Users', $bean->assigned_user_id);
 			if(!empty($user)) {
 				//Obtiene puesto del usuario: Asesor=>5, Subdirector=>3,Gerente=>4,Director=>2
-				$puestos=array('2','3','4','5');
+				$puestos=array('2','3','4','5','8','9','10','11');
 				$tipos_tareas=array('CAC Oportunidad Contratacion','CAC Oportunidad Renovacion','CAC Oportunidad Recuperacion');
 				$puesto=$user->puestousuario_c;
 				$tipo_tarea=$bean->tipo_tarea_c;
@@ -249,15 +268,13 @@ class Task_Hooks
 					//Obteniendo solicitudes de leasing para relacionarla a la tarea Actual
 					$beanCuenta=BeanFactory::getBean('Accounts', $bean->parent_id, array('disable_row_level_security' => true));
 					if($beanCuenta->load_relationship('opportunities')){
-
 						$solicitudes=$beanCuenta->opportunities->getBeans();
 						if(count($solicitudes)>0){
 							$relacionada=false;
 							foreach ($solicitudes as $sol) {
 								if(!$relacionada){
 									//Solicitud Leasing: 1, Rechazado : tct_etapa_ddw_c=R,Cancelada: estatus_c=K
-									if($sol->tipo_producto_c=='1' && $sol->tct_etapa_ddw_c!='R' && $sol->estatus_c !='K'){
-
+									if($sol->tipo_producto_c==$user->tipodeproducto_c && $sol->tct_etapa_ddw_c!='R' && $sol->estatus_c !='K'){
 										$id_solicitud=$sol->id;
 										$nombre_solicitud=$sol->name;
 										$GLOBALS['log']->fatal("RELACIONANDO LA SOLICITUD ".$id_solicitud."-".$nombre_solicitud);
@@ -266,10 +283,8 @@ class Task_Hooks
 										$sol->tasks_opportunities_1_name=$bean->name;
 										$sol->tasks_opportunities_1tasks_ida=$bean->id;
 										$sol->save();
-
 										$bean->solicitud_alta_c=0;
-
-										$relacionada=true;//Se establece bandera para que solo se relacione la primera solicitud de Leasing encontrada
+										$relacionada=true;//Se establece bandera para que solo se relacione la primera solicitud de Leasing o Factoraje encontrada
 									}
 								}
 							}
@@ -277,11 +292,6 @@ class Task_Hooks
 					}
 				}
 			}
-
 		}
-
-
-
-
 	}
 }

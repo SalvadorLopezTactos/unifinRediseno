@@ -9,6 +9,7 @@
         self = this;
         this._super("initialize", [options]);
         this.on('render',this.disableparentsfields,this);
+		this.on('render',this.ocultaTipoTarea,this);
         this.model.addValidationTask('valida_cuenta_no_contactar', _.bind(this.valida_cuenta_no_contactar, this));
         this.model.addValidationTask('checkdate', _.bind(this.checkdate, this));
 		this.model.addValidationTask('valida_asignado', _.bind(this.valida_asignado, this));
@@ -77,6 +78,12 @@
             this.$('[data-name=ayuda_asesor_cp_c]').hide(); 
         }
     },
+	
+    ocultaTipoTarea:function(){
+        if(app.user.attributes.puestousuario_c != 27 && app.user.attributes.puestousuario_c != 31 && app.user.attributes.puestousuario_c != 61 ){
+            this.$('[data-name=tipo_tarea_c]').hide();
+        }
+    },	
 
     valida_cuenta_no_contactar:function (fields, errors, callback) {
 		if(!app.user.attributes.tct_no_contactar_chk_c && !app.user.attributes.bloqueo_credito_c && !app.user.attributes.bloqueo_cumple_c) {
@@ -360,7 +367,7 @@
                 var opciones_full=app.lang.getAppListStrings('tipo_tarea_list');
                 //Cuando es Cliente Perdido, solo se muestra la Opción de Oportunidad Recuperación
                 Object.keys(opciones_full).forEach(function (key) {
-                    if (key != "CAC Oportunidad Recuperacion") {
+                    if (key != "CAC Oportunidad Recuperacion" && key != "CAC Informativa") {
                         delete opciones_full[key];
                     }
                 });
