@@ -451,6 +451,12 @@
             closeOnSelect: false,
             containerCssClass: 'select2-choices-pills-close'
         });
+        //SE añade el campo 5 pregunta 4.-¿Cuál es el destino de los recursos que va a obtener de la celebración de la operación? 
+        this.$('select.campo5ddw-ce').select2({
+            width: '100%',
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
         this.$('select.campo7ddw-ce').select2({
             width: '100%',
             closeOnSelect: false,
