@@ -471,7 +471,7 @@
                 this.ProductosPLD.creditoRevolvente.campo1=this.$('.campo1int-ce').val();
                 this.ProductosPLD.creditoRevolvente.campo2=this.$('.campo2dec-ce').val().replace(/,/gi, "");
                 this.ProductosPLD.creditoRevolvente.campo3=this.$('.campo3ddw-ce').select2('val').toString();
-                this.ProductosPLD.creditoRevolvente.campo5=this.$('.campo5ddw-ce').select2('val');
+                this.ProductosPLD.creditoRevolvente.campo5=this.$('.campo5ddw-ce').select2('val').toString();
                 this.ProductosPLD.creditoRevolvente.campo6=this.$('.campo6ddw-ce').select2('val');
                 this.ProductosPLD.creditoRevolvente.campo7=this.$('.campo7ddw-ce').select2('val').toString();
                 this.ProductosPLD.creditoRevolvente.campo8=this.$('.campo8ddw-ce').select2('val');
