@@ -132,7 +132,7 @@ class NuevoPLD_Class
               $pldCR->tct_pld_campo23_dec = $productosPLD->creditoRevolvente->campo2;
               $pldCR->tct_pld_campo16_ddw = (!empty($productosPLD->creditoRevolvente->campo3))? "^" . str_replace(",","^,^",$productosPLD->creditoRevolvente->campo3) . "^" : "";
               $pldCR->account_id_c = $productosPLD->creditoRevolvente->campo3_id;
-              $pldCR->tct_pld_campo20_ddw = $productosPLD->creditoRevolvente->campo5;
+              $pldCR->tct_pld_campo29_ddw_c = (!empty($productosPLD->creditoRevolvente->campo5))? "^" . str_replace(",","^,^",$productosPLD->creditoRevolvente->campo5) . "^" : "";
               $pldCR->tct_pld_campo6_ddw = $productosPLD->creditoRevolvente->campo6;
               $pldCR->tct_pld_campo28_ddw_c = (!empty($productosPLD->creditoRevolvente->campo7))? "^" . str_replace(",","^,^",$productosPLD->creditoRevolvente->campo7) . "^" : "";
               $pldCR->tct_pld_campo2_ddw = $productosPLD->creditoRevolvente->campo8;
