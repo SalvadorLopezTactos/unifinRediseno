@@ -1,5 +1,5 @@
 <?php
-// created: 2021-11-16 20:05:05
+// created: 2021-12-16 15:45:43
 $extensionOrderMap = array (
   'custom/Extension/modules/tct_PLD/Ext/Language/es_LA.customaccounts_tct_pld_1.php' => 
   array (
@@ -9,8 +9,8 @@ $extensionOrderMap = array (
   ),
   'custom/Extension/modules/tct_PLD/Ext/Language/es_LA.lang.php' => 
   array (
-    'md5' => 'd2ae4d859f1c4a3e7521f764abe1c2c8',
-    'mtime' => 1636473105,
+    'md5' => '901325668c0dfb467304dcf3469bc9f4',
+    'mtime' => 1639669542,
     'is_override' => false,
   ),
 );

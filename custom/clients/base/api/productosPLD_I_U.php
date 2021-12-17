@@ -251,7 +251,7 @@ class productosPLD_I_U extends SugarApi
                             $productosPLD['creditoRevolvente']['campo1'] = $value->tct_pld_campo22_int;
                             $productosPLD['creditoRevolvente']['campo2'] = $value->tct_pld_campo23_dec;
                             $productosPLD['creditoRevolvente']['campo3'] = $value->tct_pld_campo16_ddw;
-                            $productosPLD['creditoRevolvente']['campo5'] = $value->tct_pld_campo20_ddw;
+                            $productosPLD['creditoRevolvente']['campo5'] = $value->tct_pld_campo29_ddw_c;
                             $productosPLD['creditoRevolvente']['campo6'] = $value->tct_pld_campo6_ddw;
                             $productosPLD['creditoRevolvente']['campo7'] = $value->tct_pld_campo28_ddw_c;
                             $productosPLD['creditoRevolvente']['campo8'] = $value->tct_pld_campo2_ddw;
@@ -429,7 +429,7 @@ class productosPLD_I_U extends SugarApi
         $pldCE->tct_pld_campo22_int = $productosPLD['creditoRevolvente']['campo1'];
         $pldCE->tct_pld_campo23_dec = $productosPLD['creditoRevolvente']['campo2'];
         $pldCE->tct_pld_campo16_ddw = (!empty($productosPLD['creditoRevolvente']['campo3']))? "^" . str_replace(",","^,^",$productosPLD['creditoRevolvente']['campo3']) . "^" : "";
-        $pldCE->tct_pld_campo20_ddw = $productosPLD['creditoRevolvente']['campo5'];
+        $pldCE->tct_pld_campo29_ddw_c = (!empty($productosPLD['creditoRevolvente']['campo5']))? "^" . str_replace(",","^,^",$productosPLD['creditoRevolvente']['campo5']) . "^" : "";
         $pldCE->tct_pld_campo6_ddw = $productosPLD['creditoRevolvente']['campo6'];
         $pldCE->tct_pld_campo28_ddw_c = (!empty($productosPLD['creditoRevolvente']['campo7']))? "^" . str_replace(",","^,^",$productosPLD['creditoRevolvente']['campo7']) . "^" : "";
         $pldCE->tct_pld_campo2_ddw = $productosPLD['creditoRevolvente']['campo8'];

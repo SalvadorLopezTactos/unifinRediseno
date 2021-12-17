@@ -1,5 +1,5 @@
 <?php
-// created: 2021-11-16 20:05:07
+// created: 2021-12-16 15:45:44
 $extensionOrderMap = array (
   'custom/Extension/modules/tct_PLD/Ext/Vardefs/accounts_tct_pld_1_tct_PLD.php' => 
   array (
@@ -41,6 +41,12 @@ $extensionOrderMap = array (
   array (
     'md5' => 'a5130059d698aceaf90355c957b9e80f',
     'mtime' => 1636573742,
+    'is_override' => false,
+  ),
+  'custom/Extension/modules/tct_PLD/Ext/Vardefs/sugarfield_tct_pld_campo29_ddw_c.php' => 
+  array (
+    'md5' => '820d0bd341b77a895d97f82cebe2a5ce',
+    'mtime' => 1639669542,
     'is_override' => false,
   ),
 );
